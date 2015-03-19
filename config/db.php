@@ -1,9 +1,10 @@
 <?php
 
 return [
-    'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=yii2basic',
-    'username' => 'root',
-    'password' => '',
-    'charset' => 'utf8',
+	'class' => '\yii\mongodb\Connection',
+	'dsn' => 'mongodb://ddbb.todevise.com:27017/todevise',
+	'options' => [
+		'username' => 'utodevise',
+		'password' => '3],+UyY}=2KpBA^V'
+	]
 ];
