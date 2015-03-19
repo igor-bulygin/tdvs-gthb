@@ -1,8 +1,7 @@
 Todevise 2.0
 ================================
 
-REQUIREMENTS
-------------
+### REQUIREMENTS
 
 The minimum requirements are the following:
 
@@ -11,8 +10,7 @@ The minimum requirements are the following:
 * PHP-MongoDB driver 1.6
 * NGINX
 
-CONFIGURATION
--------------
+### CONFIGURATION
 
 #### Database
 
@@ -66,3 +64,8 @@ This is how the `server` section in NGINX's config should look like:
 			deny all;
 		}
 	}
+
+#### Deploying
+
+This project will follow the `semver` versioning, thus you'll never deploy from
+a branch itself, but instead you'll always deploy the latest tag.

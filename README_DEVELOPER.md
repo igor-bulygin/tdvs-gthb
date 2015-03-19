@@ -1,8 +1,8 @@
 Todevise 2.0
 ================================
 
-TOOLS
--------------------
+### TOOLS
+
 
 You are free to use the tools you most like, but here is a list of the
 tools I'm using in this project:
@@ -10,14 +10,12 @@ tools I'm using in this project:
 * MongoChef
 * PHPStorm
 
-CODE
--------------------
+###CODE
 
 I'm using TABs for indent, with 4 spaces width, so please follow this style.
 Also, please follow the style of indent.
 
-BROWSERS SUPPORT
--------------------
+### BROWSERS SUPPORT
 
 Todevise won't support any older browsers than the following:
 
@@ -26,8 +24,7 @@ Todevise won't support any older browsers than the following:
 * Chrome (evergreen)
 * Firefox (evergreen)
 
-DIRECTORY STRUCTURE
--------------------
+### DIRECTORY STRUCTURE
 
 	assets/			contains assets definition
 	commands/		  contains console commands (controllers)
@@ -41,8 +38,7 @@ DIRECTORY STRUCTURE
 	views/			 contains view files for the Web application
 	web/			   contains the entry script and Web resources
 
-INSTALLATION
-------------
+### INSTALLATION
 
 This application (both server and client side code) is managed by `composer`.
 That means that you need both `composer` and `composer-asset-plugin` installed.
@@ -54,8 +50,7 @@ following command:
 php composer.phar global require "fxp/composer-asset-plugin:1.0.0"
 ~~~
 
-CONFIGURATION
--------------
+### CONFIGURATION
 
 #### Database
 
@@ -65,8 +60,7 @@ Check the `Database` section in the `README_SYSADMIN.md` file.
 
 Check the `Web Server` section in the `README_SYSADMIN.md` file.
 
-RUNNING
--------------
+### RUNNING
 
 If you're lazy, you can use PHP's built in server. Just run
 
