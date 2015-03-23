@@ -1,23 +1,21 @@
 {
-	"name": "yiisoft/yii2-app-basic",
-	"description": "Yii 2 Basic Application Template",
-	"keywords": ["yii2", "framework", "basic", "application template"],
-	"homepage": "http://www.yiiframework.com/",
+	"name": "jordioliu/todevise20",
+	"description": "Todevise 2.0",
+	"keywords": ["todevise", "store"],
+	"homepage": "http://www.todevise.com/",
 	"type": "project",
-	"license": "BSD-3-Clause",
+	"license": "Proprietary",
 	"support": {
-		"issues": "https://github.com/yiisoft/yii2/issues?state=open",
-		"forum": "http://www.yiiframework.com/forum/",
-		"wiki": "http://www.yiiframework.com/wiki/",
-		"irc": "irc://irc.freenode.net/yii",
-		"source": "https://github.com/yiisoft/yii2"
+		"issues": "https://app.asana.com/0/24428065353423/24428065353423",
+		"source": "https://github.com/jordioliu/todevise20"
 	},
 	"minimum-stability": "stable",
 	"require": {
 		"php": ">=5.5.0",
 		"yiisoft/yii2": "2.0.3",
 		"yiisoft/yii2-bootstrap": "2.0.3",
-		"yiisoft/yii2-swiftmailer": "2.0.3"
+		"yiisoft/yii2-swiftmailer": "2.0.3",
+		"yiisoft/yii2-mongodb": "2.0.3"
 	},
 	"require-dev": {
 		"yiisoft/yii2-codeception": "2.0.3",

@@ -50,6 +50,33 @@ following command:
 php composer.phar global require "fxp/composer-asset-plugin:1.0.0"
 ~~~
 
+Finally, run
+
+~~~
+php composer.phar install
+~~~
+
+### UPDATES
+
+Keep in mind that you should run
+
+~~~
+php composer.phar update
+~~~
+
+only if you already have ran
+
+~~~
+php composer.phar install
+~~~
+
+and you have made changes to the `composer.json` file.
+If this is not the case, you should run
+
+~~~
+php composer.phar install
+~~~
+
 ### CONFIGURATION
 
 #### Database

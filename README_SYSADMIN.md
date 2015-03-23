@@ -65,7 +65,17 @@ This is how the `server` section in NGINX's config should look like:
 		}
 	}
 
+Also, if behind `HTTPS`, add `fastcgi_param HTTPS on;`
+
+#### PHP
+
+Add `cgi.fix_pathinfo=0` to the `php.ini` file.
+
 #### Deploying
 
 This project will follow the `semver` versioning, thus you'll never deploy from
-a branch itself, but instead you'll always deploy the latest tag.
+a branch itself, but instead you'll always deploy the latest tag and then
+install dependencies with `composer`.
+
+That means that you must sync the latest stable tab from this repository and
+then run `php composer.phar install` on the server.
