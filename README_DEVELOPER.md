@@ -92,9 +92,10 @@ Check the `Web Server` section in the `README_SYSADMIN.md` file.
 If you're lazy, you can use PHP's built in server. Just run
 
 ```
-php -S 127.0.0.1:8080
+DEV=1 php -S 127.0.0.1:8080
 ```
 
-inside the `web/` folder and you're ready!
+inside the `web/` folder and you're ready! Note the environment variable `DEV`.
+If it's value is not `1`, you'll be running the application in production mode.
 
 If you want to use NGINX instead, have a look at the `README_SYSADMIN.md` file.
