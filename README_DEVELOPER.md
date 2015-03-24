@@ -71,7 +71,7 @@ php composer.phar install
 ~~~
 
 and you have made changes to the `composer.json` file.
-If this is not the case, you should run
+If this is not the case, you should always  run
 
 ~~~
 php composer.phar install
