@@ -33,6 +33,12 @@ $config = [
 			'class' => 'yii\mongodb\Session',
 			'sessionCollection' => 'tmp_sessions'
 		],
+		'urlManager' => [
+			'enablePrettyUrl' => true,
+			'showScriptName' => false,
+			'rules' => [
+			]
+		],
 		'user' => [
 			'identityClass' => 'app\models\User',
 			'enableAutoLogin' => true,
@@ -45,6 +51,7 @@ $config = [
 			'useFileTransport' => true,
 		],
 	],
+	'defaultRoute' => 'public',
 	'params' => $params,
 ];
 
