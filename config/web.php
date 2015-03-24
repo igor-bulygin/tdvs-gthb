@@ -8,25 +8,13 @@ $config = [
 	'bootstrap' => ['log'],
 	'components' => [
 		'request' => [
-			// !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-			'cookieValidationKey' => 'dYW0cGKtcQpZMCWfPuCuDsiBv1-gV-KT',
+			'cookieValidationKey' => 'Yq$66191i>#VPkmnDgW<L@Ol<Sw4R+0A1?*9r49%.<02`Q:7_8^0)Pe#tp87',
 		],
 		'cache' => [
 			'class' => 'yii\caching\FileCache',
 		],
-		'user' => [
-			'identityClass' => 'app\models\User',
-			'enableAutoLogin' => true,
-		],
-		'errorHandler' => [
-			'errorAction' => 'site/error',
-		],
-		'mailer' => [
-			'class' => 'yii\swiftmailer\Mailer',
-			// send all mails to a file by default. You have to set
-			// 'useFileTransport' to false and configure a transport
-			// for the mailer to send real emails.
-			'useFileTransport' => true,
+		'assetManager' => [
+			'appendTimestamp' => true,
 		],
 		'log' => [
 			'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -37,7 +25,21 @@ $config = [
 				],
 			],
 		],
+		'errorHandler' => [
+			'errorAction' => 'site/error',
+		],
 		'db' => require(__DIR__ . '/db.php'),
+		'user' => [
+			'identityClass' => 'app\models\User',
+			'enableAutoLogin' => true,
+		],
+		'mailer' => [
+			'class' => 'yii\swiftmailer\Mailer',
+			// send all mails to a file by default. You have to set
+			// 'useFileTransport' to false and configure a transport
+			// for the mailer to send real emails.
+			'useFileTransport' => true,
+		],
 	],
 	'params' => $params,
 ];
