@@ -52,6 +52,7 @@ $config = [
 		],
 	],
 	'defaultRoute' => 'public',
+	'language' => 'en',
 	'params' => $params,
 ];
 
