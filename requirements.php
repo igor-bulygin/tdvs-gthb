@@ -52,7 +52,7 @@ $requirements = array(
     // Database :
     array(
         'name' => 'PDO extension',
-        'mandatory' => true,
+        'mandatory' => false,
         'condition' => extension_loaded('pdo'),
         'by' => 'All DB-related classes',
     ),
@@ -80,7 +80,7 @@ $requirements = array(
     // Cache :
     array(
         'name' => 'Memcache extension',
-        'mandatory' => false,
+        'mandatory' => true,
         'condition' => extension_loaded('memcache') || extension_loaded('memcached'),
         'by' => '<a href="http://www.yiiframework.com/doc-2.0/yii-caching-memcache.html">MemCache</a>',
         'memo' => extension_loaded('memcached') ? 'To use memcached set <a href="http://www.yiiframework.com/doc-2.0/yii-caching-memcache.html#$useMemcached-detail">MemCache::useMemcached</a> to <code>true</code>.' : ''
@@ -101,7 +101,7 @@ $requirements = array(
     ),
     array(
         'name' => 'ImageMagick PHP extension with PNG support',
-        'mandatory' => false,
+        'mandatory' => true,
         'condition' => $imagickOK,
         'by' => '<a href="http://www.yiiframework.com/doc-2.0/yii-captcha-captcha.html">Captcha</a>',
         'memo' => $imagickMemo,
