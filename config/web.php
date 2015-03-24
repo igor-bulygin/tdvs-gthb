@@ -28,7 +28,11 @@ $config = [
 		'errorHandler' => [
 			'errorAction' => 'site/error',
 		],
-		'db' => require(__DIR__ . '/db.php'),
+		'mongodb' => require(__DIR__ . '/db.php'),
+		'session' => [
+			'class' => 'yii\mongodb\Session',
+			'sessionCollection' => 'tmp_sessions'
+		],
 		'user' => [
 			'identityClass' => 'app\models\User',
 			'enableAutoLogin' => true,
