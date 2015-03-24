@@ -8,14 +8,9 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\base\ViewContextInterface;
 
-class PublicController extends Controller implements ViewContextInterface
+class PublicController extends Controller
 {
 	public $defaultAction = "index";
-
-	public function getViewPath()
-	{
-		return "@app/views/site";
-	}
 
 	public function actionIndex()
 	{
