@@ -94,6 +94,8 @@ $config = [
 
 	'defaultRoute' => 'public',
 
+	//'language' => 'en',
+
 	'params' => require(__DIR__ . '/params.php')
 ];
 
