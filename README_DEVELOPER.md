@@ -50,6 +50,8 @@ following command:
 php composer.phar global require "fxp/composer-asset-plugin:1.0.0"
 ~~~
 
+You should check all the required PHP extensions in the `README_SYSADMIN.md` file.
+
 Finally, run
 
 ~~~
