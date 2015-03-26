@@ -14,6 +14,8 @@ class PublicController extends Controller
 
 	public function actionIndex()
 	{
-		return $this->render("index");
+		return $this->render("index", [
+			'dd' => \Yii::$app->devicedetect
+		]);
 	}
 }
