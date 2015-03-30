@@ -7,6 +7,7 @@ if(getenv("DEV") === "1"){
 
 require(__DIR__ . '/../vendor/autoload.php');
 require(__DIR__ . '/../vendor/yiisoft/yii2/Yii.php');
+require(__DIR__ . '/../helpers/Utils.php');
 
 $config = require(__DIR__ . '/../config/web.php');
 
