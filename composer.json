@@ -19,7 +19,7 @@
 
 		"kartik-v/yii2-widget-sidenav": "1.0.0",
 		"lajax/yii2-language-picker": "1.0.1",
-		"alexandernst/yii2-device-detect": "0.0.6",
+		"alexandernst/yii2-device-detect": "0.0.7",
 
 		"npm-asset/angular": "1.3.15"
 	},

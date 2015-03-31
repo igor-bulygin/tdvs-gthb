@@ -4,20 +4,20 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "78a240805e0ec8acd3b661a3efb6419f",
+    "hash": "2e7e600970e24348026550c2fb6593f4",
     "packages": [
         {
             "name": "alexandernst/yii2-device-detect",
-            "version": "0.0.6",
+            "version": "0.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/alexandernst/yii2-device-detect.git",
-                "reference": "d2d784ceee6e1180918a1ce6960cb6e7a56a6673"
+                "reference": "771631b36576a6b3609efa423a768f7a4bdf1a1a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alexandernst/yii2-device-detect/zipball/d2d784ceee6e1180918a1ce6960cb6e7a56a6673",
-                "reference": "d2d784ceee6e1180918a1ce6960cb6e7a56a6673",
+                "url": "https://api.github.com/repos/alexandernst/yii2-device-detect/zipball/771631b36576a6b3609efa423a768f7a4bdf1a1a",
+                "reference": "771631b36576a6b3609efa423a768f7a4bdf1a1a",
                 "shasum": ""
             },
             "require": {
@@ -52,7 +52,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2015-03-31 10:44:48"
+            "time": "2015-03-31 11:37:01"
         },
         {
             "name": "bower-asset/bootstrap",
