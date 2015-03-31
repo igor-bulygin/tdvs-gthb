@@ -28,11 +28,11 @@ AppAsset::register($this);
 
 <?php $this->beginBody() ?>
 
-	<div class="wrap">
+	<div class="container-fluid no-horizontal-padding max-height">
 
-		<div class="row no-gutter">
+		<div class="row no-gutter max-height">
 
-			<div class="col-lg-2">
+			<div class="col-lg-2 max-height">
 
 				<?php
 
@@ -43,6 +43,7 @@ AppAsset::register($this);
 					'indItem' => '',
 					'indMenuOpen' => '˄',
 					'indMenuClose' => '˅',
+					'containerOptions' => ['class' => 'max-height no-vertical-margin'],
 					'items' => [
 						[
 							'url' => '#',
@@ -138,13 +139,6 @@ AppAsset::register($this);
 		</div>
 
 	</div>
-
-	<footer class="footer">
-		<div class="container">
-			<p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-			<p class="pull-right"><?= Yii::powered() ?></p>
-		</div>
-	</footer>
 
 <?php $this->endBody() ?>
 </body>

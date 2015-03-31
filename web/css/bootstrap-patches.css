@@ -1,10 +1,46 @@
+/*No padding betweenn columns in a row*/
 .row.no-gutter {
-  margin-left: 0;
-  margin-right: 0;
+    margin-left: 0;
+    margin-right: 0;
 }
 
 .row.no-gutter [class*='col-']:not(:first-child),
 .row.no-gutter [class*='col-']:not(:last-child) {
-  padding-right: 0;
-  padding-left: 0;
+    padding-right: 0;
+    padding-left: 0;
 }
+/*===================================*/
+
+/*No left/right padding*/
+.no-horizontal-padding {
+    padding-left: 0;
+    padding-right: 0;
+}
+/*===================================*/
+
+/*No top/bottom padding*/
+.no-vertical-padding {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+/*===================================*/
+
+/*No left/right margin*/
+.no-horizontal-margin {
+    margin-left: 0;
+    margin-right: 0;
+}
+/*===================================*/
+
+/*No top/bottom margin*/
+.no-vertical-margin {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+/*===================================*/
+
+/*100% height*/
+.max-height {
+    height: 100%;
+}
+/*===================================*/

@@ -5,7 +5,7 @@ $config = [
 
 	'basePath' => dirname(__DIR__),
 
-	'bootstrap' => ['log', 'languagepicker'],
+	'bootstrap' => ['log', 'languagepicker', 'devicedetect'],
 
 	'components' => [
 
