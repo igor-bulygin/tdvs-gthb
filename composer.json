@@ -17,6 +17,7 @@
 		"yiisoft/yii2-swiftmailer": "2.0.3",
 		"yiisoft/yii2-mongodb": "2.0.3",
 
+		"kartik-v/yii2-widget-sidenav": "1.0.0",
 		"lajax/yii2-language-picker": "1.0.1",
 		"alexandernst/yii2-device-detect": "0.0.5",
 
