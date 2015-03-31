@@ -15,7 +15,7 @@ class AdminController extends Controller
 	public function init()
 	{
 		$dd = \Yii::$app->devicedetect;
-		if ($dd->isMobile() && !$dd->isTablet()) {
+		if ($dd->isMobile()) {
 			$this->layout = "/mobile/admin";
 		} else if($dd->isTablet()) {
 			$this->layout = "/tablet/admin";

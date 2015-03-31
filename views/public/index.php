@@ -13,7 +13,7 @@ $this->title = 'Todevise';
 			<div class="col-lg-12">
 				<?= Yii::t("app", "This is a test from {0} controller!", $this->context->id); ?>
 				<?php
-					$device = $dd->isMobile() && !$dd->isTablet() ? "mobile" :
+					$device = $dd->isMobile() ? "mobile" :
 						$dd->isTablet() ? "tablet" :
 							"desktop machine";
 				?>
