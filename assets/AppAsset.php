@@ -8,10 +8,9 @@ class AppAsset extends AssetBundle
 {
 	public function init()
 	{
-		$dd = \Yii::$app->devicedetect;
-		if ($dd->isMobile()) {
+		if (\Yii::$app->params['devicedetect']['isMobile']) {
 			$this->css[] = "css/mobile/global.css";
-		} else if($dd->isTablet()) {
+		} else if(\Yii::$app->params['devicedetect']['isTablet']) {
 			$this->css[] = "css/tablet/global.css";
 		} else {
 			$this->css[] = "css/desktop/global.css";

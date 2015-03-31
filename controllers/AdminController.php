@@ -14,10 +14,9 @@ class AdminController extends Controller
 
 	public function init()
 	{
-		$dd = \Yii::$app->devicedetect;
-		if ($dd->isMobile()) {
+		if (\Yii::$app->params['devicedetect']['isMobile']) {
 			$this->layout = "/mobile/admin";
-		} else if($dd->isTablet()) {
+		} else if(\Yii::$app->params['devicedetect']['isTablet']) {
 			$this->layout = "/tablet/admin";
 		} else {
 			$this->layout = "/desktop/admin";
@@ -26,8 +25,6 @@ class AdminController extends Controller
 
 	public function actionIndex()
 	{
-		return $this->render("index", [
-			'dd' => \Yii::$app->devicedetect
-		]);
+		return $this->render("index");
 	}
 }
