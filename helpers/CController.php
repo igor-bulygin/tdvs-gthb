@@ -10,6 +10,21 @@ class CController extends Controller
 
 	public function init()
 	{
+		/**
+		 * This little piece of code is really important. It will decide how the
+		 * page should look like, based on the device type and the accessed
+		 * controller.
+		 *
+		 * When the type of  device is detected (mobile, tablet or desktop), the
+		 * path of the layout would be changed to:
+		 *
+		 * /views/layout/<device type>/<controller name>.php
+		 *
+		 * Also, the path in which the views will be searched when a call to
+		 * 'render' is made will be channged to:
+		 *
+		 * /views/<device type>/<controller name>
+		 */
 		if (\Yii::$app->params['devicedetect']['isMobile']) {
 			$this->layout = '/mobile/' . $this->id;
 			$this->_viewPath = '@app/views/mobile/' . $this->id;
