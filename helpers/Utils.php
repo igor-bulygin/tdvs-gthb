@@ -21,7 +21,7 @@ class Utils
 	}
 
 	/**
-	 * Returns true if the current controller/action is equal to the passed URL
+	 * Returns true if the current controller/action is equal to the passed URL.
 	 */
 	public static function compareURL($url)
 	{
