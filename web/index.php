@@ -7,7 +7,11 @@ if(getenv("DEV") === "1"){
 
 require(__DIR__ . '/../vendor/autoload.php');
 require(__DIR__ . '/../vendor/yiisoft/yii2/Yii.php');
-require(__DIR__ . '/../helpers/Utils.php');
+
+/*Require all helper files*/
+foreach(glob(__DIR__ . "/../helpers/*.php") as $file) {
+	require($file);
+}
 
 $config = require(__DIR__ . '/../config/web.php');
 
