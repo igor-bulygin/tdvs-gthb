@@ -1,5 +1,7 @@
 <?php
+use yii\helpers\Url;
 use yii\helpers\Html;
+use yii\helpers\Utils;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
@@ -36,52 +38,195 @@ AppAsset::register($this);
 
 				<?php
 
-				$item = "";
 				echo SideNav::widget([
 					'type' => SideNav::TYPE_DEFAULT,
 					'heading' => 'Todevise',
 					'indItem' => '',
 					'indMenuOpen' => '˄',
 					'indMenuClose' => '˅',
-					'containerOptions' => ['class' => 'max-height no-vertical-margin'],
+					'containerOptions' => [
+						'class' => 'max-height no-vertical-margin'
+					],
 					'items' => [
 						[
-							'url' => '#',
 							'label' => 'Users',
 							'items' =>  [
-								['label' => 'Devisers', 'url'=>'#', 'active' => ($item == 'most-popular')],
-								['label' => 'Customers', 'url'=>'#', 'active' => ($item == 'most-popular')],
-								['label' => 'Collaborators', 'url'=>'#', 'active' => ($item == 'most-popular')],
-								['label' => 'Todevise team', 'url'=>'#', 'active' => ($item == 'most-popular')],
+								[
+									'label' => 'Devisers',
+									'url' => Url::toRoute(['admin/devisers']),
+									'active' => (
+										Utils::compareURL('admin/devisers') ||
+										Utils::compareURL('admin/deviser')
+									)
+								],
+								[
+									'label' => 'Customers',
+									'url' => Url::toRoute(['admin/customers']),
+									'active' => (
+										Utils::compareURL('admin/customers') ||
+										Utils::compareURL('admin/customer')
+									)
+								],
+								[
+									'label' => 'Collaborators',
+									'url' => Url::toRoute(['admin/collaborators']),
+									'active' => (
+										Utils::compareURL('admin/collaborators') ||
+										Utils::compareURL('admin/collaborator')
+									)
+								],
+								[
+									'label' => 'Todevise team',
+									'url' => Url::toRoute(['admin/todevise-team']),
+									'active' => (
+										Utils::compareURL('admin/todevise-team') ||
+										Utils::compareURL('admin/todevise-team-member')
+									)
+								],
 							]
 						],
 						[
 							'label' => 'Orders',
 							'items' => [
-								 ['label' => 'About', 'url'=>'#', 'active' => ($item == 'most-popular')],
-								 ['label' => 'Contact', 'url'=>'#', 'active' => ($item == 'most-popular')],
+								[
+									'label' => 'Sales',
+									'url' => Url::toRoute(['admin/sales']),
+									'active' => (
+										Utils::compareURL('admin/sales') ||
+										Utils::compareURL('admin/sale')
+									)
+								],
+								[
+									'label' => 'Returns',
+									'url' => Url::toRoute(['admin/returns']),
+									'active' => (
+										Utils::compareURL('admin/returns') ||
+										Utils::compareURL('admin/return')
+									)
+								],
+								[
+									'label' => 'Warranties',
+									'url' => Url::toRoute(['admin/warranties']),
+									'active' => (
+										Utils::compareURL('admin/warranties') ||
+										Utils::compareURL('admin/warranty')
+									)
+								]
 							],
 						],
 						[
 							'label' => 'Settings',
 							'items' => [
-								 ['label' => 'Tags', 'url'=>'#', 'active' => ($item == 'most-popular')],
-								 ['label' => 'Size charts', 'url'=>'#', 'active' => ($item == 'most-popular')],
-								 ['label' => 'Banners', 'url'=>'#', 'active' => ($item == 'most-popular')],
-								 ['label' => 'Shipping methods', 'url'=>'#', 'active' => ($item == 'most-popular')],
-								 ['label' => 'Currencies', 'url'=>'#', 'active' => ($item == 'most-popular')],
-								 ['label' => 'General settings', 'url'=>'#', 'active' => ($item == 'most-popular')],
+								 [
+									'label' => 'Tags',
+									'url'=> Url::toRoute(['admin/tags']),
+									'active' => (
+									Utils::compareURL('admin/tags')
+									)
+								],
+								[
+									'label' => 'Size charts',
+									'url'=> Url::toRoute(['admin/size-charts']),
+									'active' => (
+										Utils::compareURL('admin/size-charts')
+									)
+								],
+								[
+									'label' => 'Categories',
+									'url'=> Url::toRoute(['admin/categories']),
+									'active' => (
+										Utils::compareURL('admin/categories')
+									)
+								],
+								[
+									'label' => 'Banners',
+									'url'=> Url::toRoute(['admin/banners']),
+									'active' => (
+										Utils::compareURL('admin/banners')
+									)
+								],
+								[
+									'label' => 'Shipping methods',
+									'url'=> Url::toRoute(['admin/shipping-methods']),
+									'active' => (
+										Utils::compareURL('admin/shipping-methods')
+									)
+								],
+								[
+									'label' => 'Currencies',
+									'url'=> Url::toRoute(['admin/currencies']),
+									'active' => (
+										Utils::compareURL('admin/currencies')
+									)
+								],
+								[
+									'label' => 'General settings',
+									'url'=> Url::toRoute(['admin/general-settings']),
+									'active' => (
+										Utils::compareURL('admin/general-settings')
+									)
+								],
 							],
 						],
 						[
 							'label' => 'Content management',
 							'items' => [
-								 ['label' => 'Emails', 'url'=>'#', 'active' => ($item == 'most-popular')],
-								 ['label' => 'SMS', 'url'=>'#', 'active' => ($item == 'most-popular')],
-								 ['label' => 'FAQ', 'url'=>'#', 'active' => ($item == 'most-popular')],
-								 ['label' => 'Newsletter', 'url'=>'#', 'active' => ($item == 'most-popular')],
-								 ['label' => 'Homepage categories', 'url'=>'#', 'active' => ($item == 'most-popular')],
-								 ['label' => 'About us', 'url'=>'#', 'active' => ($item == 'most-popular')],
+								[
+									'label' => 'Emails',
+									'url'=> Url::toRoute(['admin/emails']),
+									'active' => (
+										Utils::compareURL('admin/emails')
+									)
+								],
+								[
+									'label' => 'SMS',
+									'url'=> Url::toRoute(['admin/sms']),
+									'active' => (
+										Utils::compareURL('admin/sms')
+									)
+								],
+								[
+									'label' => 'FAQ',
+									'url'=> Url::toRoute(['admin/faq']),
+									'active' => (
+										Utils::compareURL('admin/faq')
+									)
+								],
+								[
+									'label' => 'Newsletter',
+									'url'=> Url::toRoute(['admin/newsletter']),
+									'active' => (
+										Utils::compareURL('admin/newsletter')
+									)
+								],
+								[
+									'label' => 'Homepage categories',
+									'url'=> Url::toRoute(['admin/homepage-categories']),
+									'active' => (
+										Utils::compareURL('admin/homepage-categories')
+									)
+								],
+								[
+									'label' => 'About',
+									'url'=> Url::toRoute(['admin/about']),
+									'active' => (
+										Utils::compareURL('admin/about')
+									)
+								],
+								[
+									'label' => 'Contact',
+									'url'=> Url::toRoute(['admin/contact']),
+									'active' => (
+										Utils::compareURL('admin/contact')
+									)
+								],
+								[
+									'label' => 'Terms & conditions',
+									'url'=> Url::toRoute(['admin/toc']),
+									'active' => (
+										Utils::compareURL('admin/toc')
+									)
+								],
 							],
 						]
 					],
