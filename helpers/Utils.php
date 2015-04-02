@@ -1,5 +1,5 @@
 <?php
-namespace yii\helpers;
+namespace app\helpers;
 
 use Yii;
 use yii\helpers\Url;
@@ -9,7 +9,7 @@ class Utils
 	/**
 	 * Generate a random ID (YouTube-like) useful for slugs.
 	 */
-	public static function shortID($length)
+	public static function shortID($length = 6)
 	{
 		$l = floor($length / 2);
 		$e = $length % 2;
