@@ -8,7 +8,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\base\ViewContextInterface;
 
-use yii\helpers\CController;
+use app\helpers\CController;
 
 class AdminController extends CController
 {
@@ -21,6 +21,6 @@ class AdminController extends CController
 
 	public function actionCategories()
 	{
-		return $this->render("index");
+		return $this->render("categories");
 	}
 }

@@ -1,11 +1,10 @@
 <?php
+use app\helpers\Utils;
 use yii\helpers\Url;
 use yii\helpers\Html;
-use yii\helpers\Utils;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
-use yii\widgets\Menu;
 use app\assets\AppAsset;
 
 use kartik\sidenav\SideNav;
