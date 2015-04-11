@@ -2,9 +2,6 @@
 
 Yii::setAlias('@tests', dirname(__DIR__) . '/tests');
 
-$params = require(__DIR__ . '/params.php');
-$db = require(__DIR__ . '/db.php');
-
 return [
     'id' => 'basic-console',
     'basePath' => dirname(__DIR__),
@@ -12,6 +9,9 @@ return [
     'controllerNamespace' => 'app\commands',
     'modules' => [
         'gii' => 'yii\gii\Module',
+    ],
+    'controllerMap' => [
+        'mongodb-migrate' => 'yii\mongodb\console\controllers\MigrateController'
     ],
     'components' => [
         'cache' => [
@@ -25,7 +25,8 @@ return [
                 ],
             ],
         ],
-        'db' => $db,
+        //Database
+        'mongodb' => require(__DIR__ . '/db.php'),
     ],
-    'params' => $params,
+    'params' => require(__DIR__ . '/params.php'),
 ];
