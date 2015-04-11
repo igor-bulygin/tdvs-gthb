@@ -8,6 +8,8 @@ class Utils
 {
 	/**
 	 * Generate a random ID (YouTube-like) useful for slugs.
+	 * @param int $length Desired length of ID
+	 * @return string
 	 */
 	public static function shortID($length = 6)
 	{
@@ -22,6 +24,8 @@ class Utils
 
 	/**
 	 * Returns true if the current controller/action is equal to the passed URL.
+	 * @param $url URL to compare to. Example: 'admin/deviser', 'deviser/product', etc...
+	 * @return bool
 	 */
 	public static function compareURL($url)
 	{
