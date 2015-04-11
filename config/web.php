@@ -61,6 +61,10 @@ $config = [
 			'class' => 'alexandernst\devicedetect\DeviceDetect'
 		],
 
+		'Scrypt' => [
+			'class' => 'alexandernst\Scrypt\Scrypt'
+		],
+
 		//Available languages
 		'languagepicker' => [
 			'class' => 'lajax\languagepicker\Component',

@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2e7e600970e24348026550c2fb6593f4",
+    "hash": "732ee58f3a4f6e09eb7e69b2eba06ff5",
     "packages": [
         {
             "name": "alexandernst/yii2-device-detect",
@@ -53,6 +53,52 @@
                 "yii2"
             ],
             "time": "2015-03-31 11:37:01"
+        },
+        {
+            "name": "alexandernst/yii2-scrypt",
+            "version": "0.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/alexandernst/yii2-scrypt.git",
+                "reference": "e872c0b54df055025f7d616a6cf76f7f421834f2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/alexandernst/yii2-scrypt/zipball/e872c0b54df055025f7d616a6cf76f7f421834f2",
+                "reference": "e872c0b54df055025f7d616a6cf76f7f421834f2",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "alexandernst\\Scrypt\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GNU General Public License v3"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander Nestorov",
+                    "email": "alexandernst@gmail.com"
+                }
+            ],
+            "description": "Scrypt key derivation function for Yii2",
+            "keywords": [
+                "encryption",
+                "extension",
+                "hmac",
+                "key derivation",
+                "pbkdf2",
+                "salsa208",
+                "scrypt",
+                "yii2"
+            ],
+            "time": "2015-04-04 15:17:53"
         },
         {
             "name": "bower-asset/bootstrap",
