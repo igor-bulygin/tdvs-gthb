@@ -74,16 +74,16 @@ $config = [
 			'callback' => function() {
 				/*
 				if (!\Yii::$app->user->isGuest) {
-					$user = \Yii::$app->user->identity;
-					$user->language = \Yii::$app->language;
-					$user->save();
+					$person = \Yii::$app->user->identity;
+					$person->setLanguage(\Yii::$app->language);
+					$person->save();
 				}
 				*/
 			}
 		],
 
 		'user' => [
-			'identityClass' => 'app\models\User',
+			'identityClass' => 'app\models\Person',
 			'enableAutoLogin' => true,
 		],
 
