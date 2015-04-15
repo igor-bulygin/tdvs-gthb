@@ -1,0 +1,39 @@
+.kaka {
+	width: 32px;
+	height: 32px;
+	background-image: url("http://mucaplis.com/images/help.gif");
+	display: inline-block;
+	float: right;
+}
+
+.jstree-node {
+	min-height: 32px !important;
+	line-height: 32px !important;
+}
+
+.jstree-wholerow {
+	height: 32px !important;
+	z-index: -1;
+}
+
+.jstree-wholerow-hovered {
+	z-index: -1;
+}
+
+.jstree-icon {
+	height: 32px !important;
+	line-height: 32px;
+}
+
+.jstree-anchor {
+	width: 100%;
+	display: inline !important;
+	line-height: 32px !important;
+	height: 32px !important;
+}
+
+.jstree-questionmark {
+	float: right;
+	width: 32px;
+	height: 32px;
+}
