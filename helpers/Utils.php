@@ -24,7 +24,7 @@ class Utils
 
 	/**
 	 * Returns true if the current controller/action is equal to the passed URL.
-	 * @param $url URL to compare to. Example: 'admin/deviser', 'deviser/product', etc...
+	 * @param string URL to compare to. Example: 'admin/deviser', 'deviser/product', etc...
 	 * @return bool
 	 */
 	public static function compareURL($url)
