@@ -1,10 +1,10 @@
 <?php
 
-namespace app\assets\desktop;
+namespace app\assets\libs;
 
 use yii\web\AssetBundle;
 
-class jstreerAsset extends AssetBundle
+class jstreeAsset extends AssetBundle
 {
 	public $sourcePath = '@npm/jstree/dist';
 	public $css = [
