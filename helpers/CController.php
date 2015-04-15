@@ -11,6 +11,28 @@ class CController extends Controller
 	public function init()
 	{
 		/**
+		 * Force Trailing Slashes to Avoid Duplicate Content
+		 */
+		parent::init();
+		$requestUri = Yii::$app->request->getUrl();
+		$repairedRequestUri = $requestUri;
+
+		while (mb_strpos($repairedRequestUri, '//') !== false) {
+			$repairedRequestUri = preg_replace("////", '/', $repairedRequestUri);
+		}
+
+		if (mb_strpos($repairedRequestUri, '?') === false && mb_substr($repairedRequestUri, -1) !== '/') {
+			$repairedRequestUri = "{$repairedRequestUri}/";
+		} elseif (mb_substr($repairedRequestUri, mb_strpos($repairedRequestUri, '?') - 1, 1) !== '/') {
+			$repairedRequestUri = mb_substr($repairedRequestUri, mb_strpos($repairedRequestUri, "?"), 0);
+		}
+
+		if ($repairedRequestUri !== $requestUri) {
+			$this->redirect($repairedRequestUri, 301);
+		}
+
+
+		/**
 		 * This little piece of code is really important. It will decide how the
 		 * page should look like, based on the device type and the accessed
 		 * controller.
@@ -21,7 +43,7 @@ class CController extends Controller
 		 * /views/layout/<device type>/<controller name>.php
 		 *
 		 * Also, the path in which the views will be searched when a call to
-		 * 'render' is made will be channged to:
+		 * 'render' is made will be changed to:
 		 *
 		 * /views/<device type>/<controller name>
 		 */
