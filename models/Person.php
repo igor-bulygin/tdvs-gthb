@@ -3,18 +3,19 @@ namespace app\models;
 
 use Yii;
 use app\helpers\CActiveRecord;
+use yii\base\Model;
 use yii\base\NotSupportedException;
 use yii\web\IdentityInterface;
 
-class PersonCredentials extends CActiveRecord {
+class PersonCredentials extends Model {
 	public $email, $password, $salt, $auth_key;
 }
 
-class PersonPersonal_Info extends CActiveRecord {
+class PersonPersonal_Info extends Model {
 	public $name, $surnames, $bdate;
 }
 
-class PersonPreferences extends CActiveRecord {
+class PersonPreferences extends Model {
 	public $language, $currency;
 }
 
@@ -27,15 +28,15 @@ class Person extends CActiveRecord implements IdentityInterface {
 	//public $accessToken;
 
 	public function embedCredentialsModel() {
-		return $this->hasEmbed("credentials", "app\\models\\PersonCredentials");
+		return $this->mapEmbedded("credentials", PersonCredentials::className());
 	}
 
 	public function embedPersonal_InfoModel() {
-		return $this->hasEmbed("personal_info", "app\\models\\PersonPersonal_Info");
+		return $this->mapEmbedded("personal_info", PersonPersonal_Info::className());
 	}
 
 	public function embedPreferencesModel() {
-		return $this->hasEmbed("preferences", "app\\models\\PersonPreferences");
+		return $this->mapEmbedded("preferences", PersonPreferences::className());
 	}
 
 	public static function collectionName() {
@@ -87,12 +88,7 @@ class Person extends CActiveRecord implements IdentityInterface {
 			$this->credentialsModel->auth_key = Yii::$app->getSecurity()->generateRandomString(128);
 		}
 
-		$this->synchronizeWithEmbed();
 		return parent::beforeSave($insert);
-	}
-
-	public function afterSave() {
-		error_log("model after " . $this->credentialsModel->auth_key, 4);
 	}
 
 	public function setPassword($password) {
