@@ -13,6 +13,6 @@ class jqueryDeparamAsset extends AssetBundle
 		'jquery-deparam.js'
 	];
 	public $depends = [
-		'yii\web\JqueryAsset',
+		'yii\web\JqueryAsset'
 	];
 }
