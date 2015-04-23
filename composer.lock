@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "92a84141e558389edc8d42a48b36a530",
+    "hash": "d5d658d49ff22dbc4ca4e9c8e424b37f",
     "packages": [
         {
             "name": "alexandernst/yii2-device-detect",
@@ -99,6 +99,26 @@
                 "yii2"
             ],
             "time": "2015-04-04 15:17:53"
+        },
+        {
+            "name": "bower-asset/angular",
+            "version": "v1.3.15",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/angular/bower-angular.git",
+                "reference": "ba7abcfa409ba852146e6ba206693cf7bac3e359"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/angular/bower-angular/zipball/ba7abcfa409ba852146e6ba206693cf7bac3e359",
+                "reference": "ba7abcfa409ba852146e6ba206693cf7bac3e359",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "./angular.js",
+                "bower-asset-ignore": []
+            }
         },
         {
             "name": "bower-asset/bootstrap",
@@ -245,6 +265,98 @@
                 "jquery",
                 "mask",
                 "plugins"
+            ]
+        },
+        {
+            "name": "bower-asset/jstree",
+            "version": "3.0.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vakata/jstree.git",
+                "reference": "2f630b4b32c78dc70c0b698e2e941fb4ee65f87c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vakata/jstree/zipball/2f630b4b32c78dc70c0b698e2e941fb4ee65f87c",
+                "reference": "2f630b4b32c78dc70c0b698e2e941fb4ee65f87c",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/jquery": ">=1.9.1"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "./dist/jstree.js",
+                    "./dist/themes/default/style.css"
+                ],
+                "bower-asset-ignore": [
+                    "**/.*",
+                    "docs",
+                    "demo",
+                    "libs",
+                    "node_modules",
+                    "test",
+                    "libs",
+                    "jstree.jquery.json",
+                    "gruntfile.js",
+                    "package.json",
+                    "bower.json",
+                    "component.json",
+                    "LICENCE-MIT",
+                    "README.md"
+                ]
+            },
+            "keywords": [
+                "jstree",
+                "tree",
+                "ui"
+            ]
+        },
+        {
+            "name": "bower-asset/ng-js-tree",
+            "version": "v0.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ezraroi/ngJsTree.git",
+                "reference": "d90838727a97c236fe8a0eccc55ec7d659880402"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ezraroi/ngJsTree/zipball/d90838727a97c236fe8a0eccc55ec7d659880402",
+                "reference": "d90838727a97c236fe8a0eccc55ec7d659880402",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/angular": "~1.3",
+                "bower-asset/jstree": "~3.0.8"
+            },
+            "require-dev": {
+                "bower-asset/angular-mocks": "~1.3.0",
+                "bower-asset/jquery": "~2.1.1"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "dist/ngJsTree.js",
+                "bower-asset-ignore": [
+                    "**/.*",
+                    "node_modules",
+                    "bower_components",
+                    "test",
+                    "temp",
+                    "demo",
+                    "Gruntfile.js",
+                    "package.json",
+                    "README.md"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Angular directive for the famous JsTree",
+            "keywords": [
+                "Angular",
+                "JsTree"
             ]
         },
         {
@@ -509,16 +621,16 @@
         },
         {
             "name": "lajax/yii2-language-picker",
-            "version": "1.0.1",
+            "version": "1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lajax/yii2-language-picker.git",
-                "reference": "0cf2f4c0960c28dda2d8293c0169d98d51be405c"
+                "reference": "21d19af6601cbd5a4354cc6bf8d1ac619f89dbf7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lajax/yii2-language-picker/zipball/0cf2f4c0960c28dda2d8293c0169d98d51be405c",
-                "reference": "0cf2f4c0960c28dda2d8293c0169d98d51be405c",
+                "url": "https://api.github.com/repos/lajax/yii2-language-picker/zipball/21d19af6601cbd5a4354cc6bf8d1ac619f89dbf7",
+                "reference": "21d19af6601cbd5a4354cc6bf8d1ac619f89dbf7",
                 "shasum": ""
             },
             "require": {
@@ -537,7 +649,7 @@
             ],
             "authors": [
                 {
-                    "name": "Lajos Molnar",
+                    "name": "Lajos Molnár",
                     "email": "lajax.m@gmail.com"
                 }
             ],
@@ -551,7 +663,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2015-03-25 17:37:34"
+            "time": "2015-04-07 14:33:15"
         },
         {
             "name": "mobiledetect/mobiledetectlib",
@@ -647,6 +759,97 @@
                 "browser",
                 "client-side",
                 "framework"
+            ]
+        },
+        {
+            "name": "npm-asset/angular-animate",
+            "version": "1.3.15",
+            "dist": {
+                "type": "tar",
+                "url": "http://registry.npmjs.org/angular-animate/-/angular-animate-1.3.15.tgz",
+                "reference": null,
+                "shasum": "60c693fa2cd682578ab5a896d7d970d5ebd2707f"
+            },
+            "type": "npm-asset-library",
+            "extra": {
+                "npm-asset-bugs": {
+                    "url": "https://github.com/angular/angular.js/issues"
+                },
+                "npm-asset-main": "index.js",
+                "npm-asset-directories": [],
+                "npm-asset-repository": {
+                    "type": "git",
+                    "url": "https://github.com/angular/angular.js.git"
+                },
+                "npm-asset-scripts": {
+                    "test": "echo \"Error: no test specified\" && exit 1"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Angular Core Team",
+                    "email": "angular-core+npm@google.com"
+                }
+            ],
+            "description": "AngularJS module for animations",
+            "homepage": "http://angularjs.org",
+            "keywords": [
+                "angular",
+                "animation",
+                "browser",
+                "client-side",
+                "framework"
+            ]
+        },
+        {
+            "name": "npm-asset/angular-toastr",
+            "version": "1.2.1",
+            "dist": {
+                "type": "tar",
+                "url": "http://registry.npmjs.org/angular-toastr/-/angular-toastr-1.2.1.tgz",
+                "reference": null,
+                "shasum": "0859ffc971df39e7415b1c9ee3e0f5ce6e030c4a"
+            },
+            "require-dev": {
+                "npm-asset/del": ">=1.1.1,<2.0.0",
+                "npm-asset/gulp": ">=3.8.10,<4.0.0",
+                "npm-asset/gulp-angular-templatecache": ">=1.5.0,<2.0.0",
+                "npm-asset/gulp-concat": ">=2.4.3,<3.0.0",
+                "npm-asset/gulp-jshint": ">=1.9.0,<2.0.0",
+                "npm-asset/gulp-less": ">=3.0.2,<4.0.0",
+                "npm-asset/gulp-minify-css": ">=1.0.0,<2.0.0",
+                "npm-asset/gulp-rename": ">=1.2.0,<2.0.0",
+                "npm-asset/gulp-uglify": ">=1.0.2,<2.0.0",
+                "npm-asset/jshint-stylish": ">=1.0.0,<2.0.0"
+            },
+            "type": "npm-asset-library",
+            "extra": {
+                "npm-asset-bugs": {
+                    "url": "https://github.com/Foxandxss/angular-toastr/issues"
+                },
+                "npm-asset-main": "dist/angular-toastr.tpls.js",
+                "npm-asset-directories": [],
+                "npm-asset-repository": {
+                    "type": "git",
+                    "url": "https://github.com/Foxandxss/angular-toastr.git"
+                },
+                "npm-asset-scripts": []
+            },
+            "authors": [
+                {
+                    "name": "Jesus Rodriguez",
+                    "email": "Foxandxss@gmail.com"
+                }
+            ],
+            "description": "[![Code Climate](https://codeclimate.com/github/Foxandxss/angular-toastr.png)](https://codeclimate.com/github/Foxandxss/angular-toastr) [![Build Status](https://travis-ci.org/Foxandxss/angular-toastr.svg?branch=master)](https://travis-ci.org/Foxandxss/ang",
+            "homepage": "https://github.com/Foxandxss/angular-toastr",
+            "keywords": [
+                "angularjs",
+                "popup",
+                "toastr"
             ]
         },
         {
@@ -805,6 +1008,107 @@
             ],
             "description": "jQuery tree plugin",
             "homepage": "http://jstree.com"
+        },
+        {
+            "name": "npm-asset/jstree-actions",
+            "version": "0.0.12",
+            "dist": {
+                "type": "tar",
+                "url": "http://registry.npmjs.org/jstree-actions/-/jstree-actions-0.0.12.tgz",
+                "reference": null,
+                "shasum": "ba169a84c8fee58d7a4546a49828449fe541aa66"
+            },
+            "type": "npm-asset-library",
+            "extra": {
+                "npm-asset-bugs": {
+                    "url": "https://github.com/alexandernst/jstree-actions/issues"
+                },
+                "npm-asset-main": "jstree-actions.js",
+                "npm-asset-directories": [],
+                "npm-asset-repository": {
+                    "type": "git",
+                    "url": "git://github.com/alexandernst/jstree-actions.git"
+                },
+                "npm-asset-scripts": []
+            },
+            "license": [
+                "GNU GPL v3"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander Nestorov",
+                    "email": "alexandernst@gmail.com"
+                }
+            ],
+            "description": "jstree plugin that allows adding actions on each node",
+            "homepage": "https://github.com/alexandernst/jstree-actions#readme",
+            "keywords": [
+                "actions",
+                "jstree",
+                "plugin"
+            ]
+        },
+        {
+            "name": "npm-asset/underscore",
+            "version": "1.8.3",
+            "dist": {
+                "type": "tar",
+                "url": "http://registry.npmjs.org/underscore/-/underscore-1.8.3.tgz",
+                "reference": null,
+                "shasum": "4f3fb53b106e6097fcf9cb4109f2a5e9bdfa5022"
+            },
+            "require-dev": {
+                "npm-asset/docco": "*",
+                "npm-asset/eslint": "dev-0.6.x,|0.6.x",
+                "npm-asset/karma": "~0.12.31",
+                "npm-asset/karma-qunit": "~0.1.4",
+                "npm-asset/qunit-cli": "~0.2.0",
+                "npm-asset/uglify-js": "dev-2.4.x,|2.4.x"
+            },
+            "type": "npm-asset-library",
+            "extra": {
+                "npm-asset-bugs": {
+                    "url": "https://github.com/jashkenas/underscore/issues"
+                },
+                "npm-asset-files": [
+                    "underscore.js",
+                    "underscore-min.js",
+                    "underscore-min.map",
+                    "LICENSE"
+                ],
+                "npm-asset-main": "underscore.js",
+                "npm-asset-directories": [],
+                "npm-asset-repository": {
+                    "type": "git",
+                    "url": "git://github.com/jashkenas/underscore.git"
+                },
+                "npm-asset-scripts": {
+                    "test": "npm run test-node && npm run lint",
+                    "lint": "eslint underscore.js test/*.js",
+                    "test-node": "qunit-cli test/*.js",
+                    "test-browser": "npm i karma-phantomjs-launcher && ./node_modules/karma/bin/karma start",
+                    "build": "uglifyjs underscore.js -c \"evaluate=false\" --comments \"/    .*/\" -m --source-map underscore-min.map -o underscore-min.js",
+                    "doc": "docco underscore.js"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jeremy Ashkenas",
+                    "email": "jeremy@documentcloud.org"
+                }
+            ],
+            "description": "JavaScript's functional programming helper library.",
+            "homepage": "http://underscorejs.org",
+            "keywords": [
+                "browser",
+                "client",
+                "functional",
+                "server",
+                "util"
+            ]
         },
         {
             "name": "phpspec/php-diff",
