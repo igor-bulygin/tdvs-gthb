@@ -43,7 +43,6 @@ class Person extends CActiveRecord implements IdentityInterface {
 		return 'person';
 	}
 
-
 	public function attributes() {
 		return [
 			'_id',
