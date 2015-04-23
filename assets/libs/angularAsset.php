@@ -4,7 +4,7 @@ namespace app\assets\libs;
 
 use yii\web\AssetBundle;
 
-class AngularAsset extends AssetBundle {
+class angularAsset extends AssetBundle {
 	public $sourcePath = '@npm/angular';
 	public $css = [
 	];
@@ -12,6 +12,6 @@ class AngularAsset extends AssetBundle {
 		YII_ENV_DEV ? 'angular.js' : 'angular.min.js'
 	];
 	public $depends = [
-		'yii\web\JqueryAsset',
+		'yii\web\JqueryAsset'
 	];
 }
