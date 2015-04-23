@@ -7,7 +7,7 @@ use yii\web\AssetBundle;
 class GlobalAsset extends AssetBundle
 {
 	public $basePath = '@webroot';
-    public $baseUrl = '@web';
+	public $baseUrl = '@web';
 	public $css = [
 		'css/desktop/global.css'
 	];
