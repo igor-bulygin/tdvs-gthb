@@ -1,11 +1,28 @@
 <?php
 
+use yii\web\Response;
+use yii\filters\ContentNegotiator;
+
 $config = [
 	'id' => 'basic',
 
 	'basePath' => dirname(__DIR__),
 
-	'bootstrap' => ['log', 'languagepicker', 'devicedetect'],
+	'bootstrap' => [
+		'log',
+		'languagepicker',
+		'devicedetect',
+		[
+			'class' => ContentNegotiator::className(),
+			'formats' => [
+				'text/html' => Response::FORMAT_HTML,
+				'application/xhtml+xml' => Response::FORMAT_HTML,
+				'application/json' => Response::FORMAT_JSON,
+				'application/xml' => Response::FORMAT_XML
+			],
+			'languages' => array_keys(require(__DIR__ . '/langs.php')),
+		],
+	],
 
 	'components' => [
 
