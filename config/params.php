@@ -1,5 +1,6 @@
 <?php
 
 return [
-    'adminEmail' => 'admin@example.com',
+	'php_fmt_date' => "Y-m-d",
+	'adminEmail' => 'admin@example.com',
 ];
