@@ -9,6 +9,22 @@ The minimum requirements are the following:
 * MongoDB 3.0
 * PHP-MongoDB driver 1.6
 * NGINX
+* The following PHP extensions:
+*    dom
+*    curl
+*    gd
+*    iconv
+*    intl
+*    json
+*    libxml
+*    mbstring
+*    mcrypt
+*    mongo
+*    openssl
+*    pcre
+*    redis
+*    Reflectionn
+*    SimpleXML
 
 ### CONFIGURATION
 
@@ -25,6 +41,9 @@ required:
 
 ```
 127.0.0.1       ddbb.todevise.com
+127.0.0.1       redis.todevise.com
+127.0.0.1       redis-session.todevise.com
+127.0.0.1       redis-cache.todevise.com
 ```
 
 This is how the `server` section in NGINX's config should look like:
