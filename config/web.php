@@ -20,66 +20,30 @@ $config = [
 				'application/json' => Response::FORMAT_JSON,
 				'application/xml' => Response::FORMAT_XML
 			],
-			'languages' => array_keys(require(__DIR__ . '/langs.php')),
+			'languages' => array_keys(require(__DIR__ . '/langs.php'))
 		],
 	],
 
 	'components' => [
 
-		//Requests and cookies
-		'request' => [
-			'cookieValidationKey' => 'Yq$66191i>#VPkmnDgW<L@Ol<Sw4R+0A1?*9r49%.<02`Q:7_8^0)Pe#tp87',
+		//Assets
+		'assetManager' => [
+			'appendTimestamp' => true
 		],
 
 		//Cache
 		'cache' => [
-			'class' => 'yii\caching\FileCache',
-		],
-
-		//Assets
-		'assetManager' => [
-			'appendTimestamp' => true,
-		],
-
-		//Log
-		'log' => [
-			'traceLevel' => YII_DEBUG ? 3 : 0,
-			'targets' => [
-				[
-					'class' => 'yii\log\FileTarget',
-					'levels' => ['error', 'warning'],
-				],
-			],
-		],
-
-		//Errors
-		'errorHandler' => [
-			'errorAction' => 'site/error',
-		],
-
-		//Database
-		'mongodb' => require(__DIR__ . '/db.php'),
-
-		//Sessions
-		'session' => [
-			'class' => 'yii\mongodb\Session',
-			'sessionCollection' => 'tmp_sessions'
-		],
-
-		//URLs
-		'urlManager' => [
-			'enablePrettyUrl' => true,
-			'showScriptName' => false,
-			'rules' => [
-			]
+			'class' => 'yii\redis\Cache',
+			'redis' => require(__DIR__ . '/redis_cache.php')
 		],
 
 		'devicedetect' => [
 			'class' => 'alexandernst\devicedetect\DeviceDetect'
 		],
 
-		'Scrypt' => [
-			'class' => 'alexandernst\Scrypt\Scrypt'
+		//Errors
+		'errorHandler' => [
+			'errorAction' => 'site/error'
 		],
 
 		//Available languages
@@ -89,19 +53,24 @@ $config = [
 			'cookieName' => 'lng',
 			'expireDays' => 64,
 			'callback' => function() {
-				/*
 				if (!\Yii::$app->user->isGuest) {
+					/* @var $person \app\models\Person */
 					$person = \Yii::$app->user->identity;
 					$person->setLanguage(\Yii::$app->language);
 					$person->save();
 				}
-				*/
 			}
 		],
 
-		'user' => [
-			'identityClass' => 'app\models\Person',
-			'enableAutoLogin' => true,
+		//Log
+		'log' => [
+			'traceLevel' => YII_DEBUG ? 3 : 0,
+			'targets' => [
+				[
+					'class' => 'yii\log\FileTarget',
+					'levels' => ['error', 'warning']
+				]
+			]
 		],
 
 		'mailer' => [
@@ -109,8 +78,75 @@ $config = [
 			// send all mails to a file by default. You have to set
 			// 'useFileTransport' to false and configure a transport
 			// for the mailer to send real emails.
-			'useFileTransport' => true,
+			'useFileTransport' => true
 		],
+
+		//Database
+		'mongodb' => require(__DIR__ . '/db.php'),
+
+		//Redis
+		'redis' => require(__DIR__ . '/redis.php'),
+
+		//Requests and cookies
+		'request' => [
+			'cookieValidationKey' => 'Yq$66191i>#VPkmnDgW<L@Ol<Sw4R+0A1?*9r49%.<02`Q:7_8^0)Pe#tp87'
+		],
+
+		//Sessions
+		'session' => [
+			'class' => 'yii\redis\Session',
+			'redis' => require(__DIR__ . '/redis_session.php')
+		],
+
+		'Scrypt' => [
+			'class' => 'alexandernst\Scrypt\Scrypt'
+		],
+
+		//URLs
+		'urlManager' => [
+			'enablePrettyUrl' => true,
+			'showScriptName' => false,
+			'suffix' => '/',
+			'rules' => [
+				//Links for a product profile
+				[
+					'pattern' => 'public/<category_id:\d{6}>/<product_id:\d{6}>/<slug:.*?$>/',
+					'route' => 'public/product',
+					'defaults' => [
+						'seo_url' => ''
+					]
+				],
+				[
+					'pattern' => '<category_id:\w{6}>/<product_id:\w{6}>/<slug:.*?$>/',
+					'route' => 'public/product',
+					'defaults' => [
+						'seo_url' => ''
+					]
+				],
+
+				//Links for a category listing
+				[
+					'pattern' => 'public/<category_id:\w{6}>/<slug:.*?$>/',
+					'route' => 'public/category',
+					'defaults' => [
+						'seo_url' => ''
+					]
+				],
+				[
+					'pattern' => '<category_id:\w{6}>/<slug:.*?$>/',
+					'route' => 'public/category',
+					'defaults' => [
+						'seo_url' => ''
+					]
+				]
+			]
+		],
+
+		'user' => [
+			'identityClass' => 'app\models\Person',
+			'enableAutoLogin' => true
+		]
+
 	],
 
 	'defaultRoute' => 'public',
