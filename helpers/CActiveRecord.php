@@ -3,7 +3,6 @@ namespace app\helpers;
 
 use Yii;
 use Exception;
-use yii\db\Query;
 use yii\mongodb\ActiveRecord;
 
 class CActiveRecord extends ActiveRecord {
