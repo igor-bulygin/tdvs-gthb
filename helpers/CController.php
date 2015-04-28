@@ -8,30 +8,7 @@ class CController extends Controller
 {
 	private $_viewPath = "";
 
-	public function init()
-	{
-		/**
-		 * Force Trailing Slashes to Avoid Duplicate Content
-		 */
-		parent::init();
-		$requestUri = Yii::$app->request->getUrl();
-		$repairedRequestUri = $requestUri;
-
-		while (mb_strpos($repairedRequestUri, '//') !== false) {
-			$repairedRequestUri = preg_replace("////", '/', $repairedRequestUri);
-		}
-
-		if (mb_strpos($repairedRequestUri, '?') === false && mb_substr($repairedRequestUri, -1) !== '/') {
-			$repairedRequestUri = "{$repairedRequestUri}/";
-		} elseif (mb_substr($repairedRequestUri, mb_strpos($repairedRequestUri, '?') - 1, 1) !== '/') {
-			$repairedRequestUri = mb_substr($repairedRequestUri, mb_strpos($repairedRequestUri, "?"), 0);
-		}
-
-		if ($repairedRequestUri !== $requestUri) {
-			$this->redirect($repairedRequestUri, 301);
-		}
-
-
+	public function init() {
 		/**
 		 * This little piece of code is really important. It will decide how the
 		 * page should look like, based on the device type and the accessed
