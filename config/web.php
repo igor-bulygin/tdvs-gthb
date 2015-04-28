@@ -108,37 +108,16 @@ $config = [
 			'showScriptName' => false,
 			'suffix' => '/',
 			'rules' => [
-				//Links for a product profile
-				[
-					'pattern' => '<category_id:\w{6}>/<product_id:\w{6}>/<slug:.*?$>/',
-					'route' => 'public/product',
-					'defaults' => [
-						'seo_url' => ''
-					]
-				],
-				[
-					'pattern' => 'public/<category_id:\d{6}>/<product_id:\d{6}>/<slug:.*?$>/',
-					'route' => 'public/product',
-					'defaults' => [
-						'seo_url' => ''
-					]
-				],
+				//Links for admin
+				'admin/<action:[^/.]*?>/'  => 'admin/<action>',
 
 				//Links for a category listing
-				[
-					'pattern' => '<category_id:\w{6}>/<slug:.*?$>/',
-					'route' => 'public/category',
-					'defaults' => [
-						'seo_url' => ''
-					]
-				],
-				[
-					'pattern' => 'public/<category_id:\w{6}>/<slug:.*?$>/',
-					'route' => 'public/category',
-					'defaults' => [
-						'seo_url' => ''
-					]
-				]
+				'<category_id:\w{5}>/<slug:[^/.]*?$>/' => 'public/category',
+				'public/<category_id:\w{5}>/<slug:[^/.]*?$>/' => 'public/category',
+
+				//Links for a product profile
+				'<category_id:\w{5}>/<product_id:\w{6}>/<slug:[^/.]*?$>/' => 'public/product',
+				'public/<category_id:\w{5}>/<product_id:\d{6}>/<slug:[^/.]*?$>/' => 'public/product'
 			]
 		],
 
