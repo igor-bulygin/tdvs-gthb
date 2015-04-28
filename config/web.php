@@ -110,14 +110,14 @@ $config = [
 			'rules' => [
 				//Links for a product profile
 				[
-					'pattern' => 'public/<category_id:\d{6}>/<product_id:\d{6}>/<slug:.*?$>/',
+					'pattern' => '<category_id:\w{6}>/<product_id:\w{6}>/<slug:.*?$>/',
 					'route' => 'public/product',
 					'defaults' => [
 						'seo_url' => ''
 					]
 				],
 				[
-					'pattern' => '<category_id:\w{6}>/<product_id:\w{6}>/<slug:.*?$>/',
+					'pattern' => 'public/<category_id:\d{6}>/<product_id:\d{6}>/<slug:.*?$>/',
 					'route' => 'public/product',
 					'defaults' => [
 						'seo_url' => ''
@@ -126,14 +126,14 @@ $config = [
 
 				//Links for a category listing
 				[
-					'pattern' => 'public/<category_id:\w{6}>/<slug:.*?$>/',
+					'pattern' => '<category_id:\w{6}>/<slug:.*?$>/',
 					'route' => 'public/category',
 					'defaults' => [
 						'seo_url' => ''
 					]
 				],
 				[
-					'pattern' => '<category_id:\w{6}>/<slug:.*?$>/',
+					'pattern' => 'public/<category_id:\w{6}>/<slug:.*?$>/',
 					'route' => 'public/category',
 					'defaults' => [
 						'seo_url' => ''
