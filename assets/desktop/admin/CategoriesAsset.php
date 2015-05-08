@@ -15,8 +15,6 @@ class CategoriesAsset extends AssetBundle {
 	];
 	public $depends = [
 		'app\assets\libs\ngjstreeAsset',
-		'app\assets\libs\jstreeActionsAsset',
-		'app\assets\libs\angularToastrAsset',
-		'app\assets\libs\underscoreAsset'
+		'app\assets\libs\jstreeActionsAsset'
 	];
 }
