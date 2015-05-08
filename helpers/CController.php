@@ -14,7 +14,7 @@ class CController extends Controller
 		 * page should look like, based on the device type and the accessed
 		 * controller.
 		 *
-		 * When the type of  device is detected (mobile, tablet or desktop), the
+		 * When the type of device is detected (mobile, tablet or desktop), the
 		 * path of the layout would be changed to:
 		 *
 		 * /views/layout/<device type>/<controller name>.php
