@@ -9,9 +9,8 @@ $config = [
 	'basePath' => dirname(__DIR__),
 
 	'bootstrap' => [
+		//Be very careful, the order of those elements is important!
 		'log',
-		'languagepicker',
-		'devicedetect',
 		[
 			'class' => ContentNegotiator::className(),
 			'formats' => [
@@ -22,6 +21,8 @@ $config = [
 			],
 			'languages' => array_keys(require(__DIR__ . '/langs.php'))
 		],
+		'devicedetect',
+		'languagepicker'
 	],
 
 	'components' => [
@@ -50,7 +51,6 @@ $config = [
 		'languagepicker' => [
 			'class' => 'lajax\languagepicker\Component',
 			'languages' => require(__DIR__ . '/langs.php'),
-			'cookieName' => 'lng',
 			'expireDays' => 64,
 			'callback' => function() {
 				if (!\Yii::$app->user->isGuest) {
