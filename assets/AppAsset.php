@@ -1,13 +1,10 @@
 <?php
-
 namespace app\assets;
 
 use yii\web\AssetBundle;
 
-class AppAsset extends AssetBundle
-{
-	public function init()
-	{
+class AppAsset extends AssetBundle {
+	public function init() {
 		if (\Yii::$app->params['devicedetect']['isMobile']) {
 			$this->js[] = "js/mobile/global.js";
 			$this->css[] = "css/mobile/global.css";
