@@ -47,16 +47,25 @@ figure out how to install it, then install the `composer-asset-plugin` with the
 following command:
 
 ~~~
-php composer.phar global require "fxp/composer-asset-plugin:1.0.0"
+php composer.phar global require "fxp/composer-asset-plugin:~1.0.0"
 ~~~
 
 You should check all the required PHP extensions in the `README_SYSADMIN.md` file.
 
-Finally, run
+Finally, run this to install all required dependencies.
 
 ~~~
 php composer.phar install
 ~~~
+
+You'll want to run this one too, to create all the collections, indexes and some test data.
+
+~~~
+./yii mongodb-migrate
+~~~
+
+You may want to re-run the command if you `git pull` some new changes that require new collections. Don't worry, existing
+collections/indexes won't be changed if the command is re-run.
 
 ### UPDATES
 

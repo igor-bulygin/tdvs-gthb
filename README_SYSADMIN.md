@@ -23,7 +23,7 @@ The minimum requirements are the following:
 *    openssl
 *    pcre
 *    redis
-*    Reflectionn
+*    Reflection
 *    SimpleXML
 
 ### CONFIGURATION
