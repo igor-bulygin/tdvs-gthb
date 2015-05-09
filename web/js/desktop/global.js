@@ -1,1 +1,1 @@
- 
+console.log("Global desktop");
