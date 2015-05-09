@@ -1,0 +1,16 @@
+div.navbar-header {
+	display: none;
+}
+
+div.navbar-content {
+	display: flex !important;
+	align-items: center;
+}
+
+ul.breadcrumb {
+	display: inline-block;
+}
+
+ul.navbar-nav.nav {
+	margin-right: 0;
+}

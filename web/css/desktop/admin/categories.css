@@ -1,11 +1,3 @@
-.kaka {
-	width: 32px;
-	height: 32px;
-	background-image: url("http://mucaplis.com/images/help.gif");
-	display: inline-block;
-	float: right;
-}
-
 .jstree-node {
 	min-height: 32px !important;
 	line-height: 32px !important;
@@ -32,8 +24,26 @@
 	height: 32px !important;
 }
 
-.jstree-questionmark {
-	float: right;
+.action_add {
 	width: 32px;
 	height: 32px;
+	background-image: url("https://cdn3.iconfinder.com/data/icons/vista-general/32/add.png");
+	display: inline-block;
+	background-size: contain;
+}
+
+.action_rename {
+	width: 32px;
+	height: 32px;
+	background-image: url("https://cdn3.iconfinder.com/data/icons/vista-general/32/edit.png");
+	display: inline-block;
+	background-size: contain;
+}
+
+.action_remove {
+	width: 32px;
+	height: 32px;
+	background-image: url("https://cdn3.iconfinder.com/data/icons/vista-general/32/delete.png");
+	display: inline-block;
+	background-size: contain;
 }
