@@ -1,38 +1,35 @@
 <?php
-
 use app\assets\desktop\admin\CategoriesAsset;
 
 /* @var $this yii\web\View */
 
+$this->params['breadcrumbs'][] = [
+	'label' => 'Categories',
+	'url' => ['/admin/categories']
+];
+
 CategoriesAsset::register($this);
 
-$this->title = 'Todevise';
+$this->title = 'Todevise / Admin / Categories';
 ?>
-<div class="site-index">
+<div class="site-index" ng-app="todevise">
 
-	<div class="body-content">
+	<div class="body-content" ng-controller="categoriesCtrl">
 
 		<div class="row">
-			<div class="col-lg-12">
-				Categories
-				<br />
-				<button class="add_actions">Add actions</button>
-				<button class="remove_actions">Remove actions</button>
-
+			<div class="col-sm-12 col-md-12 col-lg-12">
+				<h2>Categories</h2>
 				<div>
 					Search:
-					<input class="search-input"></input>
+					<input ng-model="searchModel" ng-change="search()" class="" placeholder="Category name..."></input>
 				</div>
 
-				<button id="open_all">Open all</button>
-				<button id="close_all">Close all</button>
+				<button ng-click="open_all()">Open all</button>
+				<button ng-click="close_all()">Close all</button>
 
-				<div id="container"></div>
-
-
-				<button id="explain">Explain</button>
-				<br />
-				<textarea id="explain_text" rows="20" cols="50"></textarea>
+				<div js-tree="treeConfig" ng-model="treeData" should-apply="ignoreModelChanges()" tree="treeInstance"
+					tree-events="ready:readyCB;create_node:restoreState;move_node:move">
+				</div>
 			</div>
 		</div>
 
