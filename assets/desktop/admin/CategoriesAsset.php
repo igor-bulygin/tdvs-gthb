@@ -1,5 +1,4 @@
 <?php
-
 namespace app\assets\desktop\admin;
 
 use yii\web\AssetBundle;
@@ -15,6 +14,8 @@ class CategoriesAsset extends AssetBundle {
 	];
 	public $depends = [
 		'app\assets\libs\ngjstreeAsset',
-		'app\assets\libs\jstreeActionsAsset'
+		'app\assets\libs\jstreeActionsAsset',
+		'app\assets\libs\angularBootstrapAsset',
+		'app\assets\desktop\admin\GlobalAdminAsset'
 	];
 }

@@ -1,11 +1,9 @@
 <?php
-
 namespace app\assets\desktop;
 
 use yii\web\AssetBundle;
 
-class GlobalAsset extends AssetBundle
-{
+class GlobalAsset extends AssetBundle {
 	public $basePath = '@webroot';
 	public $baseUrl = '@web';
 	public $css = [
@@ -14,5 +12,6 @@ class GlobalAsset extends AssetBundle
 	public $js = [
 	];
 	public $depends = [
+		'app\assets\AppAsset'
 	];
 }
