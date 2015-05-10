@@ -92,7 +92,10 @@ todevise.controller('categoriesCtrl', function($scope, $http, $log, $timeout, $c
 	}, 100);
 
 	$scope.create = function(node_id, node, action_id, action_el) {
-		var path = "/" + $scope.treeInstance.jstree(true).get_path(node, "/", true) + "/";
+		var path = "/";
+		if (node !== undefined) {
+			path += $scope.treeInstance.jstree(true).get_path(node, "/", true) + "/";
+		}
 		var tmp_node = $category_util.newCategory(path);
 
 		$category.modify("post", tmp_node).then(function(category) {

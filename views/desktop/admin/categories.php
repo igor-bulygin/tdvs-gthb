@@ -26,6 +26,7 @@ $this->title = 'Todevise / Admin / Categories';
 
 				<button ng-click="open_all()">Open all</button>
 				<button ng-click="close_all()">Close all</button>
+				<button ng-click="create()">Create root category</button>
 
 				<div js-tree="treeConfig" ng-model="treeData" should-apply="ignoreModelChanges()" tree="treeInstance"
 					tree-events="ready:readyCB;create_node:restoreState;move_node:move">
