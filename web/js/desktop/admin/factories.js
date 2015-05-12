@@ -10,6 +10,7 @@ todevise.factory("$category_util", function($q, $category) {
 			tmp_path.pop();
 			path += tmp_path.join("/") + "/";
 		}
+
 		var tmp_node = {
 			short_id: node.id,
 			path: path,

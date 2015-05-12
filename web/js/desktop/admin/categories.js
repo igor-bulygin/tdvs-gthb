@@ -2,6 +2,7 @@ var todevise = angular.module('todevise');
 
 todevise.controller('categoriesCtrl', function($scope, $http, $log, $timeout, $category, $category_util, toastr, $modal) {
 
+	$scope.ignoreModelChanges = true;
 	$scope.treeData = [];
 
 	$scope.treeConfig = {
@@ -104,15 +105,24 @@ todevise.controller('categoriesCtrl', function($scope, $http, $log, $timeout, $c
 	};
 
 	$scope.rename = function (node_id, node, action_id, action_el) {
-		$scope.treeInstance.jstree(true).edit(node, null, function (node, status) {
+		$scope.ignoreModelChanges = false;
+		$scope.treeInstance.jstree(true).edit(node, null, function(node, status) {
 			if (!status || node.text === node.original.text) return;
 
-			var tmp_node = node.original;
-			tmp_node.text = node.text;
-			$category.modify("post", $category_util.nodeToCategory(tmp_node, $scope)).then(function () {
+			var obj = {};
+			_.each($scope.treeData, function(_obj) {
+				if(_obj.id === node_id) {
+					_obj.text = node.text;
+					obj = _obj;
+				}
+			});
+
+			$category.modify("post", $category_util.nodeToCategory(obj, $scope)).then(function() {
 				toastr.success("Category renamed");
 			}, function() {
-				toastr.success("Couldn't rename category");
+				toastr.error("Couldn't rename category");
+			}).finally(function() {
+				$scope.ignoreModelChanges = true;
 			});
 		});
 	};
@@ -124,7 +134,7 @@ todevise.controller('categoriesCtrl', function($scope, $http, $log, $timeout, $c
 			$scope.load_categories();
 			toastr.success("Category moved");
 		}, function() {
-			toastr.success("Couldn't move category!");
+			toastr.error("Couldn't move category!");
 		});
 	};
 
