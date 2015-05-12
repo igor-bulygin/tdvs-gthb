@@ -24,7 +24,7 @@ class PublicController extends CController
 	}
 
 	public function actionProduct($category_id, $product_id, $slug) {
-		echo Url::to(["/public/product", "category_id" => 12456, "product_id" => 987654, "slug" => "asfo-asdg-asd-gasd-gasdgsdgasdg-asdgasdg"]);
+		echo Url::to(["/public/product", "category_id" => 12456, "product_id" => 9876543, "slug" => "asfo-asdg-asd-gasd-gasdgsdgasdg-asdgasdg"]);
 		echo "<br />";
 		echo Url::to(["/public/category", "category_id" => 12456, "slug" => "asfo-asdg-asd-gasd-gasdgsdgasdg-asdgasdg"]);
 		echo "<br />";
