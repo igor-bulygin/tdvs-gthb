@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "bc8b34ac2518e92f417d0b5bc28b2fb3",
+    "hash": "f8bca415ad3beb24bffec8309b390ea7",
     "packages": [
         {
             "name": "alexandernst/yii2-device-detect",
@@ -156,16 +156,16 @@
         },
         {
             "name": "bower-asset/angular-toastr",
-            "version": "1.3.0",
+            "version": "1.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Foxandxss/angular-toastr.git",
-                "reference": "74d4fc86afda86ac8d146799918db855306685cc"
+                "reference": "6da40ba9d13737c6a5c1c81b2bfb965bfa6a56c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Foxandxss/angular-toastr/zipball/74d4fc86afda86ac8d146799918db855306685cc",
-                "reference": "74d4fc86afda86ac8d146799918db855306685cc",
+                "url": "https://api.github.com/repos/Foxandxss/angular-toastr/zipball/6da40ba9d13737c6a5c1c81b2bfb965bfa6a56c2",
+                "reference": "6da40ba9d13737c6a5c1c81b2bfb965bfa6a56c2",
                 "shasum": ""
             },
             "require": {
