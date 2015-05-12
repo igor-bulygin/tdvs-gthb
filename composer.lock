@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f1c4d2464b1b23aa45deab985d21e150",
+    "hash": "bc8b34ac2518e92f417d0b5bc28b2fb3",
     "packages": [
         {
             "name": "alexandernst/yii2-device-detect",
@@ -152,6 +152,50 @@
                 "angular",
                 "angular-ui",
                 "bootstrap"
+            ]
+        },
+        {
+            "name": "bower-asset/angular-toastr",
+            "version": "1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Foxandxss/angular-toastr.git",
+                "reference": "74d4fc86afda86ac8d146799918db855306685cc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Foxandxss/angular-toastr/zipball/74d4fc86afda86ac8d146799918db855306685cc",
+                "reference": "74d4fc86afda86ac8d146799918db855306685cc",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/angular": "dev-default|*"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "./dist/angular-toastr.tpls.js",
+                    "./dist/angular-toastr.css"
+                ],
+                "bower-asset-ignore": [
+                    "config",
+                    "node_modules",
+                    "playground",
+                    "src",
+                    "test",
+                    ".travis.yml",
+                    ".gitignore",
+                    ".jshintrc",
+                    "CHANGELOG.md",
+                    "Gruntfile.js",
+                    "package.json"
+                ]
+            },
+            "keywords": [
+                "angular",
+                "angularjs",
+                "toast",
+                "toastr"
             ]
         },
         {
@@ -837,54 +881,6 @@
                 "browser",
                 "client-side",
                 "framework"
-            ]
-        },
-        {
-            "name": "npm-asset/angular-toastr",
-            "version": "1.3.0",
-            "dist": {
-                "type": "tar",
-                "url": "http://registry.npmjs.org/angular-toastr/-/angular-toastr-1.3.0.tgz",
-                "reference": null,
-                "shasum": "304c480cf7b5610fa0e98cfd6dd809ac8fcdd803"
-            },
-            "require-dev": {
-                "npm-asset/del": ">=1.1.1,<2.0.0",
-                "npm-asset/gulp": ">=3.8.10,<4.0.0",
-                "npm-asset/gulp-angular-templatecache": ">=1.5.0,<2.0.0",
-                "npm-asset/gulp-concat": ">=2.4.3,<3.0.0",
-                "npm-asset/gulp-jshint": ">=1.9.0,<2.0.0",
-                "npm-asset/gulp-less": ">=3.0.2,<4.0.0",
-                "npm-asset/gulp-minify-css": ">=1.0.0,<2.0.0",
-                "npm-asset/gulp-rename": ">=1.2.0,<2.0.0",
-                "npm-asset/gulp-uglify": ">=1.0.2,<2.0.0",
-                "npm-asset/jshint-stylish": ">=1.0.0,<2.0.0"
-            },
-            "type": "npm-asset-library",
-            "extra": {
-                "npm-asset-bugs": {
-                    "url": "https://github.com/Foxandxss/angular-toastr/issues"
-                },
-                "npm-asset-main": "dist/angular-toastr.tpls.js",
-                "npm-asset-directories": [],
-                "npm-asset-repository": {
-                    "type": "git",
-                    "url": "git+https://github.com/Foxandxss/angular-toastr.git"
-                },
-                "npm-asset-scripts": []
-            },
-            "authors": [
-                {
-                    "name": "Jesus Rodriguez",
-                    "email": "Foxandxss@gmail.com"
-                }
-            ],
-            "description": "[![Code Climate](https://codeclimate.com/github/Foxandxss/angular-toastr.png)](https://codeclimate.com/github/Foxandxss/angular-toastr) [![Build Status](https://travis-ci.org/Foxandxss/angular-toastr.svg?branch=master)](https://travis-ci.org/Foxandxss/ang",
-            "homepage": "https://github.com/Foxandxss/angular-toastr#readme",
-            "keywords": [
-                "angularjs",
-                "popup",
-                "toastr"
             ]
         },
         {
