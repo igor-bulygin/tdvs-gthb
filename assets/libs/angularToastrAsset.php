@@ -5,7 +5,7 @@ namespace app\assets\libs;
 use yii\web\AssetBundle;
 
 class angularToastrAsset extends AssetBundle {
-	public $sourcePath = '@npm/angular-toastr/dist';
+	public $sourcePath = '@bower/angular-toastr/dist';
 	public $css = [
 		YII_ENV_DEV ? 'angular-toastr.css' : 'angular-toastr.min.css'
 	];
