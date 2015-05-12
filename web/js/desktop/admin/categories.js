@@ -108,10 +108,9 @@ todevise.controller('categoriesCtrl', function($scope, $http, $log, $timeout, $c
 		$scope.ignoreModelChanges = false;
 		$scope.treeInstance.jstree(true).edit(node, null, function(node, status) {
 			if (!status || node.text === node.original.text) return;
-
 			var obj = {};
 			_.each($scope.treeData, function(_obj) {
-				if(_obj.id === node_id) {
+				if(_obj.id == node_id) {
 					_obj.text = node.text;
 					obj = _obj;
 				}
