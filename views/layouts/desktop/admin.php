@@ -5,7 +5,6 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
-use app\assets\AppAsset;
 
 use kartik\sidenav\SideNav;
 use lajax\languagepicker\widgets\LanguagePicker;
@@ -13,7 +12,6 @@ use lajax\languagepicker\widgets\LanguagePicker;
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -238,20 +236,40 @@ AppAsset::register($this);
 			<div class="col-lg-10">
 				<?php
 
+					Yii::$container->set('yii\bootstrap\NavBar', [
+						'containerOptions' => [
+							'class' => '' //collapse navbar-collapse
+						]
+					]);
 					NavBar::begin([
-						'brandLabel' => 'Todevise',
-						'brandUrl' => Yii::$app->homeUrl,
 						'options' => [
-							'class' => 'navbar-inverse ',
+							'class' => 'navbar-inverse',
 						],
+						'containerOptions' => [
+							'class' => 'no-horizontal-padding navbar-content'
+						],
+						'innerContainerOptions' => [
+							'class' => 'container-fluid no-horizontal-padding'
+						]
+					]);
+
+					echo Breadcrumbs::widget([
+						'homeLink' => [
+							'label' => 'Admin home',
+							'url' => ["/admin"]
+						],
+						'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+						'options' => [
+							'class' => 'breadcrumb no-vertical-margin'
+						]
 					]);
 
 					echo LanguagePicker::widget([
 						'skin' => LanguagePicker::SKIN_DROPDOWN,
 						'size' => LanguagePicker::SIZE_LARGE,
-						'parentTemplate' => '<div class="language-picker dropdown-list {size}"><div>{activeItem}<ul>{items}</ul></div></div>',
+						//'parentTemplate' => '<div class="language-picker dropdown-list {size}"><div>{activeItem}<ul>{items}</ul></div></div>',
 						'itemTemplate' => '<li><a href="{link}" title="{name}">{name}</a></li>',
-						'activeItemTemplate' => '<a href="{link}" title="{name}">{name}</a>',
+						'activeItemTemplate' => '<a href="" title="{name}">{name}</a>',
 						'languageAsset' => 'lajax\languagepicker\bundles\LanguageLargeIconsAsset',
 						'languagePluginAsset' => 'lajax\languagepicker\bundles\LanguagePluginAsset',
 					]);
@@ -266,17 +284,20 @@ AppAsset::register($this);
 								['label' => 'Login', 'url' => ['/site/login']] :
 								['label' => 'Logout (' . Yii::$app->user->identity->personal_infoModel->name . ')',
 									'url' => ['/site/logout'],
-									'linkOptions' => ['data-method' => 'post']],
-						],
+									'linkOptions' => ['data-method' => 'post']
+								]
+						]
 					]);
+
 					NavBar::end();
 				?>
 
 				<div class="container">
-					<?= Breadcrumbs::widget([
-						'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-					]) ?>
-					<?= $content ?>
+					<div class="site-index" ng-app="todevise">
+						<div class="body-content">
+							<?= $content ?>
+						</div>
+					</div>
 				</div>
 			</div>
 
