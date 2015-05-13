@@ -3,15 +3,14 @@
 namespace app\controllers;
 
 use Yii;
-use yii\filters\AccessControl;
-use yii\web\Controller;
+use yii\helpers\Json;
+use yii\mongodb\Query;
+use app\models\Category;
 use yii\filters\VerbFilter;
-use yii\base\ViewContextInterface;
-
 use app\helpers\CController;
 
-class AdminController extends CController
-{
+
+class AdminController extends CController {
 	public $defaultAction = "index";
 
 	public function actionIndex()
@@ -19,8 +18,47 @@ class AdminController extends CController
 		return $this->render("index");
 	}
 
-	public function actionCategories()
-	{
-		return $this->render("categories");
+	public function actionCategories() {
+		$request = Yii::$app->getRequest();
+
+		if ($request->isAjax && $request->isGet) {
+			$categories = Category::find()->asArray()->all();
+			usort($categories, function($a, $b) {
+				return mb_strlen($a["path"]) > mb_strlen($b["path"]);
+			});
+
+			return $categories;
+		} else if ($request->isAjax && $request->isPost) {
+			$node = Json::decode($request->getRawBody());
+			$node = $node["category"];
+
+			if ($node["short_id"] === "new") {
+				$node["short_id"] = (new Category())->genValidID();
+			}
+
+			/* @var $category \app\models\Category */
+			$category = Category::findOne(["short_id" => $node["short_id"]]);
+
+			if ($node["path"] !== $category->path) {
+				$category->move($node["path"]);
+			}
+
+			$category->setAttributes($node, false);
+			$category->name = array_merge($category->name, $node["name"]);
+			$category->save();
+
+			return $category;
+		} else if ($request->isAjax && $request->isDelete) {
+			$node = Json::decode($request->getRawBody());
+			$node = $node["category"];
+
+			/* @var $category \app\models\Category */
+			$category = Category::findOne(["short_id" => $node["short_id"]]);
+			$category->remove();
+
+			return null;
+		}
+
+		return $this->render("categories", []);
 	}
 }
