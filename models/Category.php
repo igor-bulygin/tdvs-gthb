@@ -4,6 +4,7 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use app\helpers\CActiveRecord;
+use yii\mongodb\Query;
 
 class CategoryName extends Model {
 	private $dynamicFields;
@@ -53,25 +54,21 @@ class Category extends CActiveRecord {
 	public function getSubCategories() {
 		$current_path = $this->path . $this->short_id . "/";
 
-		//$subcategories = Category::findAll(["path" => "/^$current_path/"]);
-		//$query = new Query;
-		//$query->select(['short_id', 'path'])->from('category')->where(["REGEX", "path", "/^$current_path/"]);
-		//$subcategories = $query->all();
-
-		//$subcategories = $this->getDb()->getDatabase("todevise")->executeCommand(["path" => "/^$current_path/"]);
-
 		/* @var $db \MongoCollection */
-		$db = Yii::$app->mongodb->getCollection(["todevise", "category"]);
-		$cursor = $db->find([
-			"path" => (new \MongoRegex("/^$current_path/"))
-		]);
+		//$db = Yii::$app->mongodb->getCollection(["todevise", "category"]);
+		//$cursor = $db->find([
+		//	"path" => (new \MongoRegex("/^$current_path/"))
+		//]);
+		//$subcategories = [];
+		//while ($cursor->hasNext()) {
+		//	$subcategories[] = $cursor->getNext();
+		//}
+		//return $subcategories;
 
-		$subcategories = [];
-		while ($cursor->hasNext()) {
-			$subcategories[] = $cursor->getNext();
-		}
-
-		return $subcategories;
+		return (new Query)->
+			select([])->
+			from('category')->
+			where(["REGEX", "path", "/^$current_path/"])->all();
 	}
 
 	public function move($new_path) {
