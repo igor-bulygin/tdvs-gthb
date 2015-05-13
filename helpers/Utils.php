@@ -36,6 +36,20 @@ class Utils {
 
 		return Url::current($queryParams) === Url::toRoute($url);
 	}
+
+	/**
+	 * Return a path, result of joining all the passed arguments, suitable for the current OS.
+	 * @return mixed
+	 */
+	public static function join_paths() {
+		$paths = array();
+
+		foreach (func_get_args() as $arg) {
+			if ($arg !== '') { $paths[] = $arg; }
+		}
+
+		return preg_replace('#/+#','/',join('/', $paths));
+	}
 }
 
 class Currency {
