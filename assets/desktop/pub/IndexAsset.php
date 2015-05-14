@@ -1,5 +1,5 @@
 <?php
-namespace app\assets\desktop\admin;
+namespace app\assets\desktop\pub;
 
 use yii\web\AssetBundle;
 
@@ -7,12 +7,12 @@ class IndexAsset extends AssetBundle {
 	public $basePath = '@webroot';
 	public $baseUrl = '@web';
 	public $css = [
-		'css/desktop/admin/index.css'
+		'css/desktop/pub/index.css'
 	];
 	public $js = [
-		'js/desktop/admin/index.js'
+		'js/desktop/pub/index.js'
 	];
 	public $depends = [
-		'app\assets\desktop\admin\GlobalAsset'
+		'app\assets\desktop\pub\GlobalAsset'
 	];
 }

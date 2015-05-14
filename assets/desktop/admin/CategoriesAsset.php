@@ -16,6 +16,6 @@ class CategoriesAsset extends AssetBundle {
 		'app\assets\libs\ngjstreeAsset',
 		'app\assets\libs\jstreeActionsAsset',
 		'app\assets\libs\angularBootstrapAsset',
-		'app\assets\desktop\admin\GlobalAdminAsset'
+		'app\assets\desktop\admin\GlobalAsset'
 	];
 }

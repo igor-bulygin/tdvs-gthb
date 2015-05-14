@@ -3,7 +3,7 @@ namespace app\assets\desktop\admin;
 
 use yii\web\AssetBundle;
 
-class GlobalAdminAsset extends AssetBundle {
+class GlobalAsset extends AssetBundle {
 	public $basePath = '@webroot';
 	public $baseUrl = '@web';
 	public $css = [

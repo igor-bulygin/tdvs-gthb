@@ -1,0 +1,1 @@
+console.log("Global desktop deviser");

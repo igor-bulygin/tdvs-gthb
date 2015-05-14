@@ -20,6 +20,7 @@ class AppAsset extends AssetBundle {
 	public $basePath = '@webroot';
 	public $baseUrl = '@web';
 	public $css = [
+		'css/fonts.css',
 		'css/global.css',
 		'css/bootstrap-patches.css',
 	];
