@@ -33,12 +33,11 @@ class AdminController extends CController {
 			$node = $node["category"];
 
 			if ($node["short_id"] === "new") {
-				$node["short_id"] = (new Category())->genValidID();
+				$node["short_id"] = (new Category())->genValidID(5);
 			}
 
 			/* @var $category \app\models\Category */
 			$category = Category::findOne(["short_id" => $node["short_id"]]);
-
 			$category->setAttributes($node, false);
 			$category->name = array_merge($category->name, $node["name"]);
 			$category->save();
