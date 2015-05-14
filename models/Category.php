@@ -51,8 +51,10 @@ class Category extends CActiveRecord {
 		];
 	}
 
-	public function getSubCategories() {
-		$current_path = $this->path . $this->short_id . "/";
+	public function getSubCategories($current_path = null) {
+		if ($current_path === null) {
+			$current_path = $this->path . $this->short_id . "/";
+		}
 
 		/* @var $db \MongoCollection */
 		//$db = Yii::$app->mongodb->getCollection(["todevise", "category"]);
@@ -71,22 +73,36 @@ class Category extends CActiveRecord {
 			where(["REGEX", "path", "/^$current_path/"])->all();
 	}
 
-	public function move($new_path) {
-		$current_path = $this->path . $this->short_id . "/";
-		$new_sub_path = $new_path . $this->short_id . "/";
+	public function beforeSave($insert) {
+		if($insert) {
+			//insert
+		} else {
+			//update
+			$dirty = $this->getDirtyAttributes();
+			$dirty_values = $this->getOldAttributes();
 
-		foreach($this->getSubCategories() as $category) {
-			//TODO: Optimize with an update instead of find + save?
-			$category = Category::findOne(['short_id' => $category["short_id"]]);
-			$category->path = str_replace($current_path, $new_sub_path, $category->path, $count = 1);
-			$category->save();
+			/**
+			 * We must check if the path of the category changed, and if so, move all sub-categories to the
+			 * new (sub)path.
+			 */
+			if(array_key_exists("path", $dirty) && array_key_exists("path", $dirty_values)) {
+
+				$current_path = $dirty_values["path"] . $this->short_id . "/";
+				$new_sub_path = $this->path . $this->short_id . "/";
+
+				foreach($this->getSubCategories($current_path) as $category) {
+					//TODO: Optimize with an update instead of find + save?
+					$category = Category::findOne(['short_id' => $category["short_id"]]);
+					$category->path = str_replace($current_path, $new_sub_path, $category->path, $count = 1);
+					$category->save();
+				}
+			}
 		}
 
-		$this->path = $new_path;
-		$this->save();
+		return parent::beforeSave($insert);
 	}
 
-	public function remove() {
+	public function beforeDelete() {
 		foreach($this->getSubCategories() as $category) {
 			$category = Category::findOne(["short_id" => $category["short_id"]]);
 			//TODO: Find all products and remove this category from each one
@@ -94,6 +110,6 @@ class Category extends CActiveRecord {
 			$category->delete();
 		}
 
-		$this->delete();
+		return parent::beforeDelete();
 	}
 }
