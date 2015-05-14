@@ -1,9 +1,16 @@
 <?php
-
-use app\helpers\Utils;
+use app\assets\desktop\pub\IndexAsset;
 
 /* @var $this yii\web\View */
-$this->title = 'Todevise';
+
+$this->params['breadcrumbs'][] = [
+	'label' => 'Index',
+	'url' => ['/public/index']
+];
+
+IndexAsset::register($this);
+
+$this->title = 'Todevise / Public / Index';
 ?>
 <div class="site-index">
 
@@ -12,7 +19,6 @@ $this->title = 'Todevise';
 		<div class="row">
 			<div class="col-lg-12">
 				<?= Yii::t("app", "This is a test from {0} controller!", $this->context->id); ?>
-				<?= Utils::shortID(6); ?>
 			</div>
 		</div>
 

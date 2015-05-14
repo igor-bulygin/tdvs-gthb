@@ -1,6 +1,16 @@
 <?php
+use app\assets\desktop\deviser\IndexAsset;
+
 /* @var $this yii\web\View */
-$this->title = 'Todevise';
+
+$this->params['breadcrumbs'][] = [
+	'label' => 'Index',
+	'url' => ['/deviser/index']
+];
+
+IndexAsset::register($this);
+
+$this->title = 'Todevise / Deviser / Index';
 ?>
 <div class="site-index">
 
