@@ -39,10 +39,6 @@ class AdminController extends CController {
 			/* @var $category \app\models\Category */
 			$category = Category::findOne(["short_id" => $node["short_id"]]);
 
-			if ($node["path"] !== $category->path) {
-				$category->move($node["path"]);
-			}
-
 			$category->setAttributes($node, false);
 			$category->name = array_merge($category->name, $node["name"]);
 			$category->save();
@@ -54,7 +50,7 @@ class AdminController extends CController {
 
 			/* @var $category \app\models\Category */
 			$category = Category::findOne(["short_id" => $node["short_id"]]);
-			$category->remove();
+			$category->delete();
 
 			return null;
 		}
