@@ -236,17 +236,12 @@ use lajax\languagepicker\widgets\LanguagePicker;
 			<div class="col-lg-10">
 				<?php
 
-					Yii::$container->set('yii\bootstrap\NavBar', [
-						'containerOptions' => [
-							'class' => '' //collapse navbar-collapse
-						]
-					]);
 					NavBar::begin([
 						'options' => [
-							'class' => 'navbar-inverse',
+							'class' => 'navbar-inverse no-vertical-margin',
 						],
 						'containerOptions' => [
-							'class' => 'no-horizontal-padding navbar-content'
+							'class' => 'no-horizontal-padding navbar-content' //bug
 						],
 						'innerContainerOptions' => [
 							'class' => 'container-fluid no-horizontal-padding'
