@@ -7,11 +7,11 @@ use yii\mongodb\ActiveRecord;
 
 class CActiveRecord extends ActiveRecord {
 
-	public function genValidID() {
+	public function genValidID($length = 6) {
 		$_found = false;
 		$_id = null;
 		while ($_found === false) {
-			$_id = Utils::shortID(6);
+			$_id = Utils::shortID($length);
 			try {
 				$this->getCollection()->insert(['short_id' => $_id]);
 				$_found = true;
