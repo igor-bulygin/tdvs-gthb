@@ -10,9 +10,13 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\base\ViewContextInterface;
 
-class PublicController extends CController
-{
+class PublicController extends CController {
 	public $defaultAction = "index";
+
+	public function actionError() {
+		error_log("Erro pub", 4);
+		die();
+	}
 
 	public function actionIndex() {
 		return $this->render("index");

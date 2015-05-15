@@ -44,7 +44,7 @@ $config = [
 
 		//Errors
 		'errorHandler' => [
-			'errorAction' => 'site/error'
+			'errorAction' => 'public/error'
 		],
 
 		//Available languages
