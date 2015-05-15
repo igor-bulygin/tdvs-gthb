@@ -6,9 +6,16 @@
  */
 function addQueryParams(params) {
 	var query = window.location.search.substr(1);
-	var params = $.merge(params, $.deparam(query));
+	params = $.merge(params, $.deparam(query));
 	delete params['length'];
 	return params;
+}
+
+/**
+ * Return the current host.
+ */
+function currentHost() {
+	return window.location.origin;
 }
 
 /**
@@ -20,7 +27,7 @@ function addQueryParams(params) {
  * @returns {string}
  */
 function currentURL() {
-	return window.location.origin + window.location.pathname;
+	return currentHost() + window.location.pathname;
 }
 
 /**
