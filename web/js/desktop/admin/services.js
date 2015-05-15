@@ -1,6 +1,9 @@
 var todevise = angular.module('todevise');
 
 todevise.service("$category", function($http, $q) {
+
+	var api_point = currentHost() + "/api/categories/";
+
 	return ({
 
 		_handleSuccess: function(response) {
@@ -20,7 +23,7 @@ todevise.service("$category", function($http, $q) {
 				headers: {
 					'X-Requested-With': 'XMLHttpRequest'
 				},
-				url: currentURL()
+				url: api_point
 			});
 
 			return req.then(this._handleSuccess, this._handleError);
@@ -34,7 +37,7 @@ todevise.service("$category", function($http, $q) {
 					'X-Requested-With': 'XMLHttpRequest',
 					'X-CSRF-Token': csrf
 				},
-				url: currentURL(),
+				url: api_point,
 				data: {
 					category: node,
 					_csrf: csrf
