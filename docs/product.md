@@ -12,6 +12,11 @@ This is how a single product looks like:
 		'413e5',
 		'989io',
 		'1vbh8'
-	]
+	],
+
+	price: {
+		"en-US": 60,
+		"es-ES": 54.78
+	}
 ]
 ~~~
