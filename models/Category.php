@@ -2,40 +2,10 @@
 namespace app\models;
 
 use Yii;
-use yii\base\Model;
 use app\helpers\CActiveRecord;
 use yii\mongodb\Query;
 
-class CategoryName extends Model {
-	private $dynamicFields;
-
-	public function __construct() {
-		$this->dynamicFields = array_flip(array_keys(Yii::$app->languagepicker->languages));
-	}
-
-	public function __set($name, $value) {
-		if (array_key_exists($name, $this->dynamicFields)) {
-			$this->dynamicFields[$name] = $value;
-		} else {
-			parent::__set($name, $value);
-		}
-	}
-
-	public function __get($name) {
-		if (array_key_exists($name, $this->dynamicFields)) {
-			return $this->dynamicFields[$name];
-		} else {
-			return parent::__get($name);
-		}
-	}
-
-}
-
 class Category extends CActiveRecord {
-
-	public function embedNameModel() {
-		return $this->mapEmbedded("name", CategoryName::className());
-	}
 
 	public static function collectionName() {
 		return 'category';
