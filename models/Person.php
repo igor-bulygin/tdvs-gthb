@@ -21,9 +21,9 @@ class PersonPreferences extends Model {
 
 class Person extends CActiveRecord implements IdentityInterface {
 
-	const TYPE_ADMIN = 'admin';
-	const TYPE_CLIENT = 'client';
-	const TYPE_DEVISER = 'deviser';
+	const TYPE_ADMIN = 0;
+	const TYPE_CLIENT = 1;
+	const TYPE_DEVISER = 2;
 
 	//public $accessToken;
 
