@@ -15,8 +15,12 @@ This is how a single product looks like:
 	],
 
 	price: {
-		"en-US": 60,
-		"es-ES": 54.78
+		"USA": {
+			"USD": 60
+		},
+		"ESP": {
+			"EUR": 54.78
+		}
 	}
 ]
 ~~~
