@@ -62,13 +62,34 @@ class ApiController extends CController {
 	//$subcategories = $query->all();
 	//var_dump($subcategories);
 
+	public function actionExample() {
+		$request = Yii::$app->getRequest();
+		$res = null;
+
+		if ($request->isGet) {
+
+		} else if ($request->isPost) {
+
+		} else if ($request->isDelete) {
+
+		}
+
+		return $res;
+	}
+
 	public function actionTags() {
 		$request = Yii::$app->getRequest();
 		$res = null;
 
 		if ($request->isGet) {
 
+		} else if ($request->isPost) {
+
+		} else if ($request->isDelete) {
+
 		}
+
+		return $res;
 	}
 
 	public function actionCategories() {
