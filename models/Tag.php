@@ -8,6 +8,10 @@ class Option extends CActiveRecord {
 
 	const TYPE_NUMERIC = 0;
 	const TYPE_ALPHANUMERIC = 1;
+
+	const TYPE_MU_NONE = 0;
+	const TYPE_MU_SIZE = 1;
+	const TYPE_MU_WEIGHT = 2;
 }
 
 class Tag extends CActiveRecord {
