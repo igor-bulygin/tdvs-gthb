@@ -52,7 +52,7 @@ use lajax\languagepicker\widgets\LanguagePicker;
 			['label' => 'Contact', 'url' => ['/site/contact']],
 			Yii::$app->user->isGuest ?
 				['label' => 'Login', 'url' => ['/site/login']] :
-				['label' => 'Logout (' . Yii::$app->user->identity->personal_infoModel->name . ')',
+				['label' => 'Logout (' . Yii::$app->user->identity->personal_info["name"] . ')',
 					'url' => ['/site/logout'],
 					'linkOptions' => ['data-method' => 'post']],
 		],
