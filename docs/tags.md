@@ -47,7 +47,24 @@ This is how a single tag looks like:
 	//
 	// Now, let's say we have a "Weight" tag (TYPE_FREETEXT). Each option of that
 	// tag would look pretty much the same way as the options from the "Color"
-	// (TYPE_DROPDOWN) example, with the following exception: "value" won't exist.
+	// (TYPE_DROPDOWN) example, with the following exceptions:
+	//
+	// "value" won't exist.
+	// Another key called "metric_units" will be created. Check the constants
+	// TYPE_MU_* in Option model for all the valid values for this.
+	//
+	// Example:
+	//
+	// {
+	//     text: {
+	//         "en-US": "Wide",
+	//         "es-ES": "Ancho",
+	//     },
+	//     type: 0, // Check the constants TYPE_* in Option model for all the
+	//              // valid values for this.
+	//
+	//     metric_units: 1
+	// }
 	//
 	// Keep in mind that free text values are NOT normalized, which means that
 	// it's up to you, dear developer, to save them in the same metric units
