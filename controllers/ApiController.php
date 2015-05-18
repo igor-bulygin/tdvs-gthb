@@ -10,6 +10,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\filters\ContentNegotiator;
 
+use app\models\Tag;
 use app\models\Category;
 use app\helpers\CController;
 
@@ -77,12 +78,26 @@ class ApiController extends CController {
 		return $res;
 	}
 
-	public function actionTags() {
+	public function actionTags($filters = null) {
 		$request = Yii::$app->getRequest();
 		$res = null;
 
-		if ($request->isGet) {
+		//error_log(print_r($filters, true), 4);
 
+		if ($request->isGet) {
+			if (!is_array($filters)) {
+				//JSON value from GET or empty array
+				$filters = json_decode($filters, true) ?: array();
+
+				//Filter only allowed keys
+				$allowed_filters = array("short_id", "required", "type", "categories");
+				$filters = array_intersect_key($filters, array_flip($allowed_filters));
+
+				//Force only enabled tags
+				$filters["enabled"] = true;
+			}
+
+			$res = Tag::findAll($filters);
 		} else if ($request->isPost) {
 
 		} else if ($request->isDelete) {
