@@ -17,3 +17,17 @@ To scan the project for new/missing translation messages, run
 
 New/missing translation messages will be appended to the existing ones, so you
 don't have to worry about losing anything.
+
+#### Migrations
+
+To create a new migration file run
+
+~~~
+./yii mongodb-migrate/create migration_file_name
+~~~
+
+To revert the last applied migration run
+
+~~~
+./yii mongodb-migrate/down
+~~~
