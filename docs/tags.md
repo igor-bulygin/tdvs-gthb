@@ -12,7 +12,8 @@ This is how a single tag looks like:
 	required: true,
 	type: 0, // Check the constants TYPE_* in Tag model for all the valid values
 	         // for this
-	n_options: 1 // The number of option that can be assigned to a product
+	n_options: 1 // Exists only of type is TYPE_DROPDOWN
+	             //The number of options that can be assigned to a product
 
 	name: {
 		'en-US': 'Name of tag',
@@ -39,19 +40,21 @@ This is how a single tag looks like:
 	//         "en-US": "Green",
 	//         "es-ES": "Verde",
 	//     },
-	//     type: 0, // Check the constants TYPE_* in Option model for all the
-	//              // valid values for this.
 	//
-	//     value: '79de2' // 5 alphanum chars long ID
+	//     value: '79de2' // 5 alphanumeric chars long ID
 	// }
 	//
 	// Now, let's say we have a "Weight" tag (TYPE_FREETEXT). Each option of that
-	// tag would look pretty much the same way as the options from the "Color"
-	// (TYPE_DROPDOWN) example, with the following exceptions:
+	// tag would look the same way as the options from the "Color" (TYPE_DROPDOWN)
+	// example, with the following exceptions:
 	//
-	// "value" won't exist.
-	// Another key called "metric_units" will be created. Check the constants
+	// * "value" won't exist.
+	//
+	// * A key called "metric_units" will be created. Check the constants
 	// TYPE_MU_* in Option model for all the valid values for this.
+	//
+	// * A key called "type" will be created. Check the constants TYPE_* in
+	// Option model for all the valid values for this.
 	//
 	// Example:
 	//
