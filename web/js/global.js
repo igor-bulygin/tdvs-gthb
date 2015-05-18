@@ -1,6 +1,7 @@
 /**
- * This function will add (or replace it's value if it exists)
- * all the query parameters in the current URL and it will return an object.
+ * This function will add (or replace the value if the key exists)
+ * all the query parameters from the current URL to an object, merge it
+ * with the passed object and return the result.
  * @param params Object
  * @returns {object}
  */
@@ -43,6 +44,17 @@ function currentURL() {
 function urlToQuery(params, append) {
 	params = append === true ? addQueryParams(params) : params;
 	return currentURL() + "?" + $.param(params);
+}
+
+/**
+ * This function will take an object (can be nested too) and convert it
+ * to a suitable string for a parameter in a GET petition.
+ * @param obj
+ * @returns {string}
+ */
+function objectToQueryParam(obj) {
+	var json = JSON.stringify(obj);
+	return encodeURIComponent(json);
 }
 
 /**
