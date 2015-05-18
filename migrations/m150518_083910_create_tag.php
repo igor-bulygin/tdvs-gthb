@@ -3,7 +3,7 @@
 class m150518_083910_create_tag extends \yii\mongodb\Migration {
 	public function up() {
 		$this->createCollection('tag');
-		$this->createIndex('category', 'short_id', [
+		$this->createIndex('tag', 'short_id', [
 			'unique' => true
 		]);
 		$this->createIndex('tag', 'categories');
