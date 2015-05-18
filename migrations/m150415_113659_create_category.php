@@ -13,64 +13,64 @@ class m150415_113659_create_category extends Migration {
 		$this->insert('category', [
 			"short_id" => 10000,
 			"path" => '/',
-			"name" => ["en-US" => "Category 1 (10000)"],
-			"slug" => ["en-US" => "category-1"]
+			"name" => ["en-US" => "Fashion"],
+			"slug" => ["en-US" => "fashion"]
 		]);
 
 		$this->insert('category', [
 			"short_id" => 20000,
 			"path" => '/10000/',
-			"name" => ["en-US" => "Category 2 (20000)"],
-			"slug" => ["en-US" => "category-2"]
+			"name" => ["en-US" => "Women"],
+			"slug" => ["en-US" => "women"]
 		]);
 
 		$this->insert('category', [
 			"short_id" => 30000,
 			"path" => '/10000/20000/',
-			"name" => ["en-US" => "Category 3 (30000)"],
-			"slug" => ["en-US" => "category-3"]
+			"name" => ["en-US" => "Dresses"],
+			"slug" => ["en-US" => "Dresses"]
 		]);
 
 		$this->insert('category', [
 			"short_id" => 40000,
-			"path" => '/10000/20000/',
-			"name" => ["en-US" => "Category 4 (40000)"],
-			"slug" => ["en-US" => "category-4"]
+			"path" => '/10000/',
+			"name" => ["en-US" => "Man"],
+			"slug" => ["en-US" => "man"]
 		]);
 
 		$this->insert('category', [
 			"short_id" => 50000,
-			"path" => '/10000/',
-			"name" => ["en-US" => "Category 5 (50000)"],
-			"slug" => ["en-US" => "category-5"]
+			"path" => '/10000/40000/',
+			"name" => ["en-US" => "Jeans"],
+			"slug" => ["en-US" => "jeans"]
 		]);
 
 		$this->insert('category', [
 			"short_id" => 60000,
-			"path" => '/10000/50000/',
-			"name" => ["en-US" => "Category 6 (60000)"],
-			"slug" => ["en-US" => "category-6"]
+			"path" => '/',
+			"name" => ["en-US" => "Technology"],
+			"slug" => ["en-US" => "technology"]
 		]);
 
 		$this->insert('category', [
 			"short_id" => 70000,
-			"path" => '/',
-			"name" => ["en-US" => "Category 7 (70000)"],
-			"slug" => ["en-US" => "category-7"]
+			"path" => '/60000/',
+			"name" => ["en-US" => "Computers"],
+			"slug" => ["en-US" => "computers"]
 		]);
 
 		$this->insert('category', [
 			"short_id" => 80000,
-			"path" => '/70000/',
-			"name" => ["en-US" => "Category 8 (80000)"],
-			"slug" => ["en-US" => "category-8"]
+			"path" => '/60000/70000/',
+			"name" => ["en-US" => "RAM"],
+			"slug" => ["en-US" => "ram"]
 		]);
 
 		$this->insert('category', [
 			"short_id" => 90000,
-			"path" => '/70000/',
-			"name" => ["en-US" => "Category 9 (90000)"],
-			"slug" => ["en-US" => "category-9"]
+			"path" => '/60000/',
+			"name" => ["en-US" => "Smart phones"],
+			"slug" => ["en-US" => "smart-phones"]
 		]);
 	}
 
