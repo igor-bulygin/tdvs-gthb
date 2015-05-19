@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\helpers\Utils;
 use Yii;
 use yii\web\Response;
 use yii\helpers\Json;
@@ -112,12 +113,7 @@ class ApiController extends CController {
 		$res = null;
 
 		if ($request->isGet) {
-			$categories = Category::find()->asArray()->all();
-			usort($categories, function($a, $b) {
-				return mb_strlen($a["path"]) > mb_strlen($b["path"]);
-			});
-
-			$res = $categories;
+			$res = Category::find()->asArray()->all();
 		} else if ($request->isPost) {
 			$node = Json::decode($request->getRawBody());
 			$node = $node["category"];
