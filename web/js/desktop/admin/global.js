@@ -1,7 +1,14 @@
 console.log("Global desktop admin");
-var todevise = angular.module('todevise', ['ui.bootstrap', 'ngJsTree', 'ngAnimate', 'toastr', 'template/modal/confirm.html']);
+var global = angular.module('global', ['toastr', 'template/modal/confirm.html']);
 
-todevise.controller("confirmCtrl", function($scope, $modalInstance, data) {
+global.constant("CONSTS", (function(){
+	var lang = $('html').attr('lang') || "en-US";
+	return {
+		current_lang: lang
+	};
+})());
+
+global.controller("confirmCtrl", function($scope, $modalInstance, data) {
 	$scope.data = angular.extend({}, {
 		title: "Please confirm",
 		text: "",

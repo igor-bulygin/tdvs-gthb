@@ -1,6 +1,6 @@
-var todevise = angular.module('todevise');
+var global = angular.module('global');
 
-todevise.service("$tag", function($http, $q) {
+global.service("$tag", function($http, $q) {
 
 	var api_point = currentHost() + "/api/tags/";
 
@@ -49,7 +49,7 @@ todevise.service("$tag", function($http, $q) {
 	});
 });
 
-todevise.service("$category", function($http, $q) {
+global.service("$category", function($http, $q) {
 
 	var api_point = currentHost() + "/api/categories/";
 

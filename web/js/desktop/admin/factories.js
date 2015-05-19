@@ -1,6 +1,6 @@
-var todevise = angular.module('todevise');
+var global = angular.module('global');
 
-todevise.factory("$category_util", function($q, $category) {
+global.factory("$category_util", function($q, $category, CONSTS) {
 	var utils = {};
 
 	utils.nodeToCategory = function(node, $scope) {
@@ -16,7 +16,7 @@ todevise.factory("$category_util", function($q, $category) {
 			path: path,
 			name: {}
 		};
-		tmp_node.name[$('html').attr('lang')] = node.text;
+		tmp_node.name[CONSTS.current_lang] = node.text;
 		return tmp_node;
 	};
 
@@ -25,7 +25,7 @@ todevise.factory("$category_util", function($q, $category) {
 		return {
 			id: category.short_id,
 			parent: typeof parent_id === "object" ? parent_id[parent_id.length - 2] : parent_id,
-			text: category.name[$('html').attr('lang')] || ""
+			text: category.name[CONSTS.current_lang] || ""
 		};
 	};
 
