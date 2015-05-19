@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "73d3e2da767c21df0815cffc99838752",
+    "hash": "bbfdb2233b0a9c8c16adcdf70706325c",
     "packages": [
         {
             "name": "alexandernst/yii2-device-detect",
@@ -249,6 +249,38 @@
                 "responsive",
                 "web"
             ]
+        },
+        {
+            "name": "bower-asset/isteven-angular-multiselect",
+            "version": "v4.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/isteven/angular-multi-select.git",
+                "reference": "6355f1f2b5f36e69b0f2c38065ed725114b365f0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/isteven/angular-multi-select/zipball/6355f1f2b5f36e69b0f2c38065ed725114b365f0",
+                "reference": "6355f1f2b5f36e69b0f2c38065ed725114b365f0",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "isteven-multi-select.js",
+                    "isteven-multi-select.css"
+                ],
+                "bower-asset-ignore": [
+                    ".git",
+                    ".gitignore",
+                    "bower.json",
+                    "CHANGELOG.md",
+                    "package.json",
+                    "README.md",
+                    "screenshot.png",
+                    "/doc"
+                ]
+            }
         },
         {
             "name": "bower-asset/jquery",
