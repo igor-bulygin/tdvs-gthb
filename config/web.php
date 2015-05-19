@@ -47,6 +47,21 @@ $config = [
 			'errorAction' => 'public/error'
 		],
 
+		//i18n
+		'i18n' => [
+			'translations' => [
+				'app*' => [
+					'class' => 'yii\i18n\PhpMessageSource',
+					'fileMap' => [
+						'app' => 'app.php',
+						'app/admin' => 'app/admin.php',
+						'app/deviser' => 'app/deviser.php',
+						'app/public' => 'app/public.php'
+					]
+				]
+			]
+		],
+
 		//Available languages
 		'languagepicker' => [
 			'class' => 'lajax\languagepicker\Component',
