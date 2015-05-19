@@ -2,7 +2,6 @@
 namespace app\helpers;
 
 use Yii;
-use ReflectionClass;
 use yii\helpers\Url;
 
 class Utils {
@@ -11,8 +10,7 @@ class Utils {
 	 * @param int $length Desired length of ID
 	 * @return string
 	 */
-	public static function shortID($length = 6)
-	{
+	public static function shortID($length = 6) {
 		$l = floor($length / 2);
 		$e = $length % 2;
 		$random = bin2hex(openssl_random_pseudo_bytes($l));
@@ -27,8 +25,7 @@ class Utils {
 	 * @param string URL to compare to. Example: 'admin/deviser', 'deviser/product', etc...
 	 * @return bool
 	 */
-	public static function compareURL($url)
-	{
+	public static function compareURL($url) {
 		$queryParams = Yii::$app->request->queryParams;
 		array_walk($queryParams, function(&$v, $k){
 			$v = null;
@@ -49,6 +46,57 @@ class Utils {
 		}
 
 		return preg_replace('#/+#','/',join('/', $paths));
+	}
+
+	/**
+	 * Get the value stored at the end of a deeply nested array, following
+	 * the given path (array of keys).
+	 * Example:
+	 *
+	 * $x = [
+	 *     "a" => [
+	 *         "b" => [
+	 *             "c" => [
+	 *                 42
+	 *             ]
+	 *         ]
+	 *     ]
+	 * ];
+	 *
+	 * getValueFromPath($x, ["a", "b", "c"])
+	 * @param $array
+	 * @param $path
+	 * @return mixed
+	 */
+	public static function getValueFromPath($array, $path) {
+		$temp = &$array;
+
+		foreach($path as $key) {
+			$temp =& $temp[$key];
+		}
+
+		return $temp;
+	}
+
+	/**
+	 * Set the value at the end of a deeply nested array, following the
+	 * given path (array of keys).
+	 * Example:
+	 *
+	 * $x = [];
+	 * setValueForPath($x, ["a", "b", "c"], 42);
+	 * @param $array
+	 * @param $path
+	 * @param $value
+	 */
+	public static function setValueForPath(&$array, $path, $value) {
+		$temp = &$array;
+
+		foreach($path as $key) {
+			$temp =& $temp[$key];
+		}
+
+		$temp = $value;
 	}
 }
 
