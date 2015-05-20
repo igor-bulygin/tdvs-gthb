@@ -26,14 +26,14 @@
 		"npm-asset/underscore": "1.8.3",
 		"npm-asset/angular": "1.3.15",
 		"npm-asset/angular-animate": "1.3.15",
+		"npm-asset/angular-multi-select": "4.0.1",
 		"npm-asset/jstree": "3.1.1",
 		"npm-asset/jstree-actions": "0.0.12",
 		"npm-asset/jquery-deparam": "0.3.0",
 
 		"bower-asset/angular-toastr": "1.3.1",
 		"bower-asset/ng-js-tree": "0.0.4",
-		"bower-asset/angular-bootstrap": "0.13.0",
-		"bower-asset/isteven-angular-multiselect": "4.0.0"
+		"bower-asset/angular-bootstrap": "0.13.0"
 	},
 	"require-dev": {
 		"yiisoft/yii2-codeception": "2.0.4",

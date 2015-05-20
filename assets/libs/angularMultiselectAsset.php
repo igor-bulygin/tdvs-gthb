@@ -5,12 +5,14 @@ namespace app\assets\libs;
 use yii\web\AssetBundle;
 
 class angularMultiselectAsset extends AssetBundle {
-	public $sourcePath = '@bower/isteven-angular-multiselect';
+	public $sourcePath = '@npm/angular-multi-select';
 	public $css = [
-		'isteven-multi-select.css'
+		//TODO: min
+		'angular-multi-select.css'
 	];
 	public $js = [
-		'isteven-multi-select.js'
+		//TODO: min
+		'angular-multi-select.js'
 	];
 	public $depends = [
 		'app\assets\libs\angularAsset'
