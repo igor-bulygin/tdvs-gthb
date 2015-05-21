@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9d21bebf5c91fac287f072c9902613ce",
+    "hash": "0648adf33beaf3fa122bc2c8830fc441",
     "packages": [
         {
             "name": "alexandernst/yii2-device-detect",
@@ -885,12 +885,17 @@
         },
         {
             "name": "npm-asset/angular-multi-select",
-            "version": "4.0.1",
+            "version": "4.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/alexandernst/angular-multi-select.git",
+                "reference": "b02c3119fbb12579e42a1e50e684aee38ef471ed"
+            },
             "dist": {
-                "type": "tar",
-                "url": "http://registry.npmjs.org/angular-multi-select/-/angular-multi-select-4.0.1.tgz",
-                "reference": null,
-                "shasum": "73f0c1ba2cf2565a44a9f98c9a011d60b0827601"
+                "type": "zip",
+                "url": "https://api.github.com/repos/alexandernst/angular-multi-select/zipball/b02c3119fbb12579e42a1e50e684aee38ef471ed",
+                "reference": "b02c3119fbb12579e42a1e50e684aee38ef471ed",
+                "shasum": ""
             },
             "type": "npm-asset-library",
             "extra": {
@@ -901,22 +906,16 @@
                     "angular-multi-select.js",
                     "angular-multi-select.css"
                 ],
-                "npm-asset-directories": [],
                 "npm-asset-repository": {
                     "type": "git",
                     "url": "git@github.com:alexandernst/angular-multi-select.git"
-                },
-                "npm-asset-scripts": []
+                }
             },
             "license": [
                 "MIT"
             ],
             "authors": [
-                {
-                    "name": "Alexander Nestorov",
-                    "email": "alexandernst@gmail.com",
-                    "url": "https://github.com/alexandernst"
-                }
+                "Alexander Nestorov <alexandernst@gmail.com> (https://github.com/alexandernst)"
             ],
             "description": "A multi select dropdown directive for AngularJS",
             "homepage": "https://github.com/alexandernst/angular-multi-select",
