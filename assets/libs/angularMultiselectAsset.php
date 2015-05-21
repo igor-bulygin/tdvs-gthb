@@ -7,12 +7,10 @@ use yii\web\AssetBundle;
 class angularMultiselectAsset extends AssetBundle {
 	public $sourcePath = '@npm/angular-multi-select';
 	public $css = [
-		//TODO: min
-		'angular-multi-select.css'
+		YII_ENV_DEV ? 'angular-multi-select.css' : 'angular-multi-select.min.css'
 	];
 	public $js = [
-		//TODO: min
-		'angular-multi-select.js'
+		YII_ENV_DEV ? 'angular-multi-select.js' : 'angular-multi-select.min.js'
 	];
 	public $depends = [
 		'app\assets\libs\angularAsset'
