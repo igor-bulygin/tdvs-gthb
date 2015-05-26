@@ -27,7 +27,7 @@ use lajax\languagepicker\widgets\LanguagePicker;
 
 <?php $this->beginBody() ?>
 
-	<div class="container-fluid no-horizontal-padding max-height">
+	<div class="container-fluid no-horizontal-padding max-height" ng-app="todevise" angular-multi-select-mouse-trap angular-multi-select-key-trap>
 
 		<div class="row no-gutter max-height">
 
@@ -287,8 +287,8 @@ use lajax\languagepicker\widgets\LanguagePicker;
 					NavBar::end();
 				?>
 
-				<div class="container">
-					<div class="site-index" ng-app="todevise">
+				<div class="container no-horizontal-padding">
+					<div class="site-index">
 						<div class="body-content">
 							<?= $content ?>
 						</div>
