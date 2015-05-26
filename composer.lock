@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0648adf33beaf3fa122bc2c8830fc441",
+    "hash": "60315ed523f6c92b6b46da66ab3de377",
     "packages": [
         {
             "name": "alexandernst/yii2-device-detect",
@@ -881,6 +881,78 @@
                 "browser",
                 "client-side",
                 "framework"
+            ]
+        },
+        {
+            "name": "npm-asset/angular-filter",
+            "version": "0.5.4",
+            "dist": {
+                "type": "tar",
+                "url": "http://registry.npmjs.org/angular-filter/-/angular-filter-0.5.4.tgz",
+                "reference": null,
+                "shasum": "d868502667dfb9279b0ef7baabd6dec47d6bcd87"
+            },
+            "require": {
+                "npm-asset/angular": "*"
+            },
+            "require-dev": {
+                "npm-asset/coveralls": "~2.11.1",
+                "npm-asset/grunt": ">=0.4.1,<0.5.0",
+                "npm-asset/grunt-bower": "*",
+                "npm-asset/grunt-bower-task": "*",
+                "npm-asset/grunt-cli": ">=0.1.7",
+                "npm-asset/grunt-contrib-concat": "*",
+                "npm-asset/grunt-contrib-jshint": "*",
+                "npm-asset/grunt-contrib-uglify": "*",
+                "npm-asset/grunt-conventional-changelog": "0.0.12",
+                "npm-asset/grunt-coveralls": "~0.3.0",
+                "npm-asset/grunt-karma": "dev-default|*",
+                "npm-asset/grunt-karma-coveralls": "~2.5.1",
+                "npm-asset/grunt-zip": "*",
+                "npm-asset/karma": "~0.12.16",
+                "npm-asset/karma-chrome-launcher": "~0.1.2",
+                "npm-asset/karma-coverage": "~0.2.4",
+                "npm-asset/karma-firefox-launcher": "~0.1.3",
+                "npm-asset/karma-jasmine": "~0.1.5",
+                "npm-asset/karma-phantomjs-launcher": "~0.1.4"
+            },
+            "type": "npm-asset-library",
+            "extra": {
+                "npm-asset-bugs": {
+                    "url": "https://github.com/a8m/angular-filter/issues"
+                },
+                "npm-asset-main": "dist/angular-filter.min.js",
+                "npm-asset-directories": [],
+                "npm-asset-repository": {
+                    "type": "git",
+                    "url": "https://github.com/a8m/angular-filter.git"
+                },
+                "npm-asset-scripts": {
+                    "test": "grunt test --verbose"
+                },
+                "npm-asset-engines": {
+                    "node": ">=0.10.0"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ariel Mashraki",
+                    "email": "ariel@mashraki.co.il"
+                }
+            ],
+            "description": "Bunch of useful filters for angularJS(with no external dependencies!)",
+            "homepage": "https://github.com/a8m/angular-filter",
+            "keywords": [
+                "angular",
+                "browser",
+                "client",
+                "collection",
+                "filter",
+                "lodash",
+                "underscore"
             ]
         },
         {
