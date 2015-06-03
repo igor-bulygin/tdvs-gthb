@@ -13,6 +13,7 @@ class CategoriesAsset extends AssetBundle {
 		'js/desktop/admin/categories.js'
 	];
 	public $depends = [
+		'app\assets\api\ApiAsset',
 		'app\assets\libs\ngjstreeAsset',
 		'app\assets\libs\jstreeActionsAsset',
 		'app\assets\libs\angularBootstrapAsset',

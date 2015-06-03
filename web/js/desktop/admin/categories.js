@@ -1,4 +1,4 @@
-var todevise = angular.module('todevise', ['ui.bootstrap', 'ngJsTree', 'ngAnimate', 'global']);
+var todevise = angular.module('todevise', ['ui.bootstrap', 'ngJsTree', 'ngAnimate', 'global-admin', 'api']);
 
 todevise.controller('categoriesCtrl', function($scope, $http, $log, $timeout, $category, $category_util, toastr, $modal) {
 
