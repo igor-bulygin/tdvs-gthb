@@ -1,6 +1,6 @@
-var global = angular.module('global');
+var api = angular.module('api');
 
-global.factory("$category_util", function($q, $category, CONSTS) {
+api.factory("$category_util", function($q, $category, CONSTS) {
 	var utils = {};
 
 	utils.nodeToCategory = function(node, $scope) {
