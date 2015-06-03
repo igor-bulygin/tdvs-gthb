@@ -5,7 +5,7 @@ namespace app\assets\libs;
 use yii\web\AssetBundle;
 
 class angularMultiSelectAsset extends AssetBundle {
-	public $sourcePath = '@npm/angular-multi-select';
+	public $sourcePath = YII_ENV_DEV ?  '@npm/angular-multi-select/src' : '@npm/angular-multi-select/dist';
 	public $css = [
 		YII_ENV_DEV ? 'angular-multi-select.css' : 'angular-multi-select.min.css'
 	];
@@ -13,6 +13,6 @@ class angularMultiSelectAsset extends AssetBundle {
 		YII_ENV_DEV ? 'angular-multi-select.js' : 'angular-multi-select.min.js'
 	];
 	public $depends = [
-		'app\assets\libs\angularAsset'
+		'app\assets\libs\angularFilterAsset'
 	];
 }
