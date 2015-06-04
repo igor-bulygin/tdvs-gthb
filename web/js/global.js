@@ -53,7 +53,7 @@ function urlToQuery(params, append) {
  * @returns {string}
  */
 function objectToQueryParam(obj) {
-	var json = JSON.stringify(obj);
+	var json = JSON.stringify(obj) || JSON.stringify({});
 	return encodeURIComponent(json);
 }
 
