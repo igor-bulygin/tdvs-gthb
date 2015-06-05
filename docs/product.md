@@ -14,6 +14,10 @@ This is how a single product looks like:
 		'1vbh8'
 	],
 
+	// This is an object containing one or multiple prices per country.
+	// Each key of the object is a country code, while each key inside that
+	// country object is a code for the currency, and the value is the price
+	// of the product.
 	price: {
 		"USA": {
 			"USD": 60
@@ -21,6 +25,11 @@ This is how a single product looks like:
 		"ESP": {
 			"EUR": 54.78
 		}
+	},
+
+
+	options : {
+
 	}
 ]
 ~~~
