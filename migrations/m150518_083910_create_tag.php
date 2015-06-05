@@ -25,7 +25,7 @@ class m150518_083910_create_tag extends \yii\mongodb\Migration {
 				],
 				[
 					"text" => ["en-US" => "Green"],
-					"value" => "red",
+					"value" => "green",
 				],
 				[
 					"text" => ["en-US" => "Blue"],
