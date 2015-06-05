@@ -8,6 +8,13 @@ class m150405_184924_create_person extends Migration {
 		$this->createIndex('person', 'short_id', [
 			'unique' => true
 		]);
+
+		$this->insert('person', [
+			"short_id" => 10000,
+			"path" => '/',
+			"name" => ["en-US" => "Category 1 (10000)"],
+			"slug" => ["en-US" => "category-1"]
+		]);
 	}
 
 	public function down() {
