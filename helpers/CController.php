@@ -36,8 +36,7 @@ class CController extends Controller
 		}
 	}
 
-	public function getViewPath()
-	{
+	public function getViewPath() {
 		return Yii::getAlias($this->_viewPath);
 	}
 }
