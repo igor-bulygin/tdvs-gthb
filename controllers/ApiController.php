@@ -64,16 +64,28 @@ class ApiController extends CController {
 	//$subcategories = $query->all();
 	//var_dump($subcategories);
 
-	public function actionExample() {
+	public function actionExample($filters = null) {
 		$request = Yii::$app->getRequest();
 		$res = null;
 
 		if ($request->isGet) {
+			$filters = json_decode($filters, true) ?: [];
 
+			if (!empty($filters)) {
+				$filters = Utils::removeAllExcept($filters, []);
+				//TODO: If not admin, force some fields (enabled only, visible by public only, etc...)
+			}
+
+			$res = empty($filters) ? $res : $res;
 		} else if ($request->isPost) {
+			$something = Utils::getJsonFromRequest("something");
+			unset($something["_id"]);
 
+			//TODO
 		} else if ($request->isDelete) {
+			$something = Utils::getJsonFromRequest("something");
 
+			//TODO
 		}
 
 		return $res;
@@ -86,37 +98,61 @@ class ApiController extends CController {
 		//error_log(print_r($filters, true), 4);
 
 		if ($request->isGet) {
-			if (!is_array($filters)) {
-				//JSON value from GET or empty array
-				$filters = json_decode($filters, true) ?: array();
 
-				//Filter only allowed keys
-				$allowed_filters = array("short_id", "required", "type", "categories");
-				$filters = array_intersect_key($filters, array_flip($allowed_filters));
+			$filters = json_decode($filters, true) ?: [];
+
+			if (!empty($filters)) {
+				$filters = Utils::removeAllExcept($filters, ["short_id", "required", "type", "categories"]);
 
 				//Force only enabled tags
-				$filters["enabled"] = true;
+				//$filters["enabled"] = true;
+				//TODO: If not admin, force only enabled, etc...
 			}
 
-			$res = Tag::findAll($filters);
+			$res = empty($filters) ? Tag::find()->asArray()->all() : Tag::findAll($filters);
 		} else if ($request->isPost) {
+			$_tag = Utils::getJsonFromRequest("tag");
+			unset($_tag["_id"]);
 
+			if ($_tag["short_id"] === "new") {
+				$_tag["short_id"] = (new Tag())->genValidID(5);
+			}
+
+			/* @var $tag \app\models\Tag */
+			$tag = Tag::findOne(["short_id" => $_tag["short_id"]]);
+			$tag->setAttributes($_tag, false);
+			$tag->options = array_replace_recursive($tag->options, $_tag["options"]);
+			$tag->save();
+
+			$res = $tag;
 		} else if ($request->isDelete) {
+			$tag = Utils::getJsonFromRequest("tag");
 
+			/* @var $tag \app\models\Tag */
+			$tag = Tag::findOne(["short_id" => $tag["short_id"]]);
+			$tag->delete();
 		}
 
 		return $res;
 	}
 
-	public function actionCategories() {
+	public function actionCategories($filters = null) {
 		$request = Yii::$app->getRequest();
 		$res = null;
 
 		if ($request->isGet) {
-			$res = Category::find()->asArray()->all();
+			$filters = json_decode($filters, true) ?: [];
+
+			if (!empty($filters)) {
+				$filters = Utils::removeAllExcept($filters, ["short_id"]);
+
+				//TODO: If not admin, force only enabled, etc...
+			}
+
+			$res = empty($filters) ? Category::find()->asArray()->all() : Category::findAll($filters);
 		} else if ($request->isPost) {
-			$node = Json::decode($request->getRawBody());
-			$node = $node["category"];
+			$node = Utils::getJsonFromRequest("category");
+			unset($_node["_id"]);
 
 			if ($node["short_id"] === "new") {
 				$node["short_id"] = (new Category())->genValidID(5);
@@ -125,19 +161,16 @@ class ApiController extends CController {
 			/* @var $category \app\models\Category */
 			$category = Category::findOne(["short_id" => $node["short_id"]]);
 			$category->setAttributes($node, false);
-			$category->name = array_merge($category->name, $node["name"]);
+			$category->name = array_replace_recursive($category->name, $node["name"]);
 			$category->save();
 
 			$res = $category;
 		} else if ($request->isDelete) {
-			$node = Json::decode($request->getRawBody());
-			$node = $node["category"];
+			$node = Utils::getJsonFromRequest("category");
 
 			/* @var $category \app\models\Category */
 			$category = Category::findOne(["short_id" => $node["short_id"]]);
 			$category->delete();
-
-			$res = null;
 		}
 
 		return $res;

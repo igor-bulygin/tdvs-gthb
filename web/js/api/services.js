@@ -14,13 +14,14 @@ api.factory("$services_util", function($http, $q) {
 		return $q.reject(response.data.message);
 	};
 
-	api_helpers._get = function(url) {
+	api_helpers._get = function(url, filters) {
+		filters = filters !== undefined ? "?filters=" + objectToQueryParam(filters) : "";
 		return $http({
 			method: "get",
 			headers: {
 				'X-Requested-With': 'XMLHttpRequest'
 			},
-			url: url
+			url: url + filters
 		});
 	};
 
@@ -48,18 +49,21 @@ api.service("$tag", function($services_util) {
 	return ({
 
 		get: function(filters) {
-			var url = api_point + "?filters=" + objectToQueryParam(filters);
-			var req = $services_util._get(url);
+			var req = $services_util._get(api_point, filters);
 
 			return req.then($services_util._handleSuccess, $services_util._handleError);
 		},
 
-		modify: function(method, node) {
+		modify: function(method, tag) {
 			var req = $services_util._modify(api_point, method, {
-				tag: node
+				tag: tag
 			});
 
 			return req.then($services_util._handleSuccess, $services_util._handleError);
+		},
+
+		delete: function(tag) {
+			return this.modify("DELETE", tag);
 		}
 	});
 });
@@ -70,8 +74,8 @@ api.service("$category", function($services_util) {
 
 	return ({
 
-		get: function() {
-			var req = $services_util._get(api_point);
+		get: function(filters) {
+			var req = $services_util._get(api_point, filters);
 
 			return req.then($services_util._handleSuccess, $services_util._handleError);
 		},
@@ -82,6 +86,10 @@ api.service("$category", function($services_util) {
 			});
 
 			return req.then($services_util._handleSuccess, $services_util._handleError);
+		},
+
+		delete: function(node) {
+			return this.modify("DELETE", node);
 		}
 	});
 });
