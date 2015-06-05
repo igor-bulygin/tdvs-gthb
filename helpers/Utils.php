@@ -2,6 +2,7 @@
 namespace app\helpers;
 
 use Yii;
+use yii\helpers\Json;
 use yii\helpers\Url;
 
 class Utils {
@@ -46,6 +47,23 @@ class Utils {
 		}
 
 		return preg_replace('#/+#','/',join('/', $paths));
+	}
+
+	public static function getJsonFromRequest($key) {
+		$request = Yii::$app->getRequest();
+		$_data = Json::decode($request->getRawBody());
+		return $_data[$key];
+	}
+
+	/**
+	 * Remove all keys contained in $allowed that match the object
+	 * created by JSON-decoding $data.
+	 * @param $data Array of data
+	 * @param $allowed Array containing the keys that shouldn't be removed
+	 * @return array
+	 */
+	public static function removeAllExcept($data, $allowed) {
+		return array_intersect_key($data, array_flip($allowed));
 	}
 
 	/**
