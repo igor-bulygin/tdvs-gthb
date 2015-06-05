@@ -10,14 +10,14 @@ class m150518_083910_create_tag extends \yii\mongodb\Migration {
 		$this->createIndex('tag', 'enabled');
 
 		$this->insert('tag', [
-			"short_id" => 10000,
+			"short_id" => "10000",
 			"enabled" => true,
 			"required" => true,
 			"type" => 0,
 			"n_options" => 2,
 			"name" => ["en-US" => "Color"],
 			"description" => ["en-US" => "Color(s) of the product"],
-			"categories" => [30000, 50000],
+			"categories" => ["30000", "50000"],
 			"options" => [
 				[
 					"text" => ["en-US" => "Red"],
@@ -35,13 +35,13 @@ class m150518_083910_create_tag extends \yii\mongodb\Migration {
 		]);
 
 		$this->insert('tag', [
-			"short_id" => 20000,
+			"short_id" => "20000",
 			"enabled" => true,
 			"required" => false,
 			"type" => 1,
 			"name" => ["en-US" => "Weight"],
 			"description" => ["en-US" => "Weight of the product"],
-			"categories" => [90000],
+			"categories" => ["90000"],
 			"options" => [
 				[
 					"text" => ["en-US" => "Weight"],
@@ -52,13 +52,13 @@ class m150518_083910_create_tag extends \yii\mongodb\Migration {
 		]);
 
 		$this->insert('tag', [
-			"short_id" => 30000,
+			"short_id" => "30000",
 			"enabled" => true,
 			"required" => false,
 			"type" => 1,
 			"name" => ["en-US" => "Size"],
 			"description" => ["en-US" => "Size of the product"],
-			"categories" => [90000],
+			"categories" => ["90000"],
 			"options" => [
 				[
 					"text" => ["en-US" => "Long"],
