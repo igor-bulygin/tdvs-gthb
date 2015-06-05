@@ -49,6 +49,12 @@ class Utils {
 		return preg_replace('#/+#','/',join('/', $paths));
 	}
 
+	/**
+	 * Get the body of a request, transform it to a JSON
+	 * and return the value of $key
+	 * @param $key
+	 * @return mixed
+	 */
 	public static function getJsonFromRequest($key) {
 		$request = Yii::$app->getRequest();
 		$_data = Json::decode($request->getRawBody());
