@@ -1,13 +1,6 @@
 console.log("Global desktop admin");
 var global_admin = angular.module('global-admin', ['toastr', 'template/modal/confirm.html']);
 
-global_admin.constant("CONSTS", (function(){
-	var lang = $('html').attr('lang') || "en-US";
-	return {
-		current_lang: lang
-	};
-})());
-
 global_admin.controller("confirmCtrl", function($scope, $modalInstance, data) {
 	$scope.data = angular.extend({}, {
 		title: "Please confirm",

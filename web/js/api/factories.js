@@ -1,6 +1,6 @@
 var api = angular.module('api');
 
-api.factory("$category_util", function($q, $category, CONSTS) {
+api.factory("$category_util", function($q, $category) {
 	var utils = {};
 
 	utils.nodeToCategory = function(node, $scope) {
@@ -16,7 +16,7 @@ api.factory("$category_util", function($q, $category, CONSTS) {
 			path: path,
 			name: {}
 		};
-		tmp_node.name[CONSTS.current_lang] = node.text;
+		tmp_node.name[_lang] = node.text;
 		return tmp_node;
 	};
 
@@ -25,7 +25,7 @@ api.factory("$category_util", function($q, $category, CONSTS) {
 		return {
 			id: category.short_id,
 			parent: typeof parent_id === "object" ? parent_id[parent_id.length - 2] : parent_id,
-			text: category.name[CONSTS.current_lang] || ""
+			text: category.name[_lang] || ""
 		};
 	};
 
