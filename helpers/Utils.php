@@ -6,6 +6,15 @@ use yii\helpers\Json;
 use yii\helpers\Url;
 
 class Utils {
+
+	/**
+	 * Return all the available languages
+	 * @return mixed
+	 */
+	public static function availableLangs() {
+		return Yii::$app->languagepicker->languages;
+	}
+
 	/**
 	 * Generate a random ID (YouTube-like) useful for slugs.
 	 * @param int $length Desired length of ID
