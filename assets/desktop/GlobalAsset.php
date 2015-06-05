@@ -10,6 +10,7 @@ class GlobalAsset extends AssetBundle {
 		'css/desktop/global.css'
 	];
 	public $js = [
+		'js/desktop/global.js'
 	];
 	public $depends = [
 		'app\assets\AppAsset'
