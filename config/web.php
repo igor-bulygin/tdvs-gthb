@@ -124,11 +124,12 @@ $config = [
 			'suffix' => '/',
 			'rules' => [
 				//Links for admin
+				'admin/tag/<tag_id:\w{5}>/'  => 'admin/tag',
 				'admin/<action:[^/.]*?>/'  => 'admin/<action>',
 
 				//Links for a category listing
 				'<category_id:\w{5}>/<slug:[^/.]*?$>/' => 'public/category',
-				'public/<category_id:\w{5}>/<slug:[^/.]*?$>/' => 'public/category',
+				'public/<category_id:\w{5}>/<' => 'public/tag',
 
 				//Links for a product profile
 				'<category_id:\w{5}>/<product_id:\w{7}>/<slug:[^/.]*?$>/' => 'public/product',
