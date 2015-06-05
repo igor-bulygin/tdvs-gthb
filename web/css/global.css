@@ -7,6 +7,10 @@ body {
 	display: none !important;
 }
 
+.pointer {
+	cursor: pointer;
+}
+
 .wrap {
 	min-height: 100%;
 	height: auto;
