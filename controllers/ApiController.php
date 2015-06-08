@@ -22,6 +22,12 @@ class IsAjaxFilter extends ActionFilter {
 }
 
 class ApiController extends CController {
+	private $intern;
+
+	public function __construct($id, $module, $config = [], $intern = false) {
+		$this->intern = $intern;
+		parent::__construct($id, $module, $config = []);
+	}
 
 	public function behaviors() {
 		return [
@@ -76,7 +82,11 @@ class ApiController extends CController {
 				//TODO: If not admin, force some fields (enabled only, visible by public only, etc...)
 			}
 
-			$res = empty($filters) ? $res : $res;
+			$res = empty($filters) ? Tag::find() : Tag::find()->where($filters);
+
+			if($this->intern === false) {
+				$res = $res->asArray()->all();
+			}
 		} else if ($request->isPost) {
 			$something = Utils::getJsonFromRequest("something");
 			unset($something["_id"]);
@@ -95,8 +105,6 @@ class ApiController extends CController {
 		$request = Yii::$app->getRequest();
 		$res = null;
 
-		//error_log(print_r($filters, true), 4);
-
 		if ($request->isGet) {
 
 			$filters = json_decode($filters, true) ?: [];
@@ -109,7 +117,11 @@ class ApiController extends CController {
 				//TODO: If not admin, force only enabled, etc...
 			}
 
-			$res = empty($filters) ? Tag::find()->asArray()->all() : Tag::findAll($filters);
+			$res = empty($filters) ? Tag::find() : Tag::find()->where($filters);
+
+			if($this->intern === false) {
+				$res = $res->asArray()->all();
+			}
 		} else if ($request->isPost) {
 			$_tag = Utils::getJsonFromRequest("tag");
 			unset($_tag["_id"]);
@@ -149,7 +161,11 @@ class ApiController extends CController {
 				//TODO: If not admin, force only enabled, etc...
 			}
 
-			$res = empty($filters) ? Category::find()->asArray()->all() : Category::findAll($filters);
+			$res = empty($filters) ? Category::find() : Category::find()->where($filters);
+
+			if($this->intern === false) {
+				$res = $res->asArray()->all();
+			}
 		} else if ($request->isPost) {
 			$node = Utils::getJsonFromRequest("category");
 			unset($_node["_id"]);

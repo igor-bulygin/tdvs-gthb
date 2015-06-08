@@ -3,10 +3,11 @@ namespace app\helpers;
 
 use Yii;
 use yii\web\Controller;
+use app\controllers\ApiController;
 
-class CController extends Controller
-{
+class CController extends Controller {
 	private $_viewPath = "";
+	public $api;
 
 	public function init() {
 		/**
@@ -34,6 +35,16 @@ class CController extends Controller
 			$this->layout = '/desktop/' . $this->id;
 			$this->_viewPath = '@app/views/desktop/' . $this->id;
 		}
+
+		/**
+		 * Expose the APi to all the controller so we can reuse the API's public
+		 * methods from inside of our code.
+		 */
+		if($this->id !== ApiController::className()) {
+			$this->api = new ApiController(ApiController::className(), null, [], true);
+		}
+
+		parent::init();
 	}
 
 	public function getViewPath() {
