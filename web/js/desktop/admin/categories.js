@@ -1,4 +1,4 @@
-var todevise = angular.module('todevise', ['ui.bootstrap', 'ngJsTree', 'ngAnimate', 'global-admin', 'api']);
+var todevise = angular.module('todevise', ['ui.bootstrap', 'ngJsTree', 'ngAnimate', 'global-admin', 'global-desktop', 'api']);
 
 todevise.controller('categoriesCtrl', function($scope, $http, $log, $timeout, $category, $category_util, toastr, $modal) {
 
@@ -127,8 +127,8 @@ todevise.controller('categoriesCtrl', function($scope, $http, $log, $timeout, $c
 
 			$category.modify("post", $category_util.nodeToCategory(obj, $scope)).then(function() {
 				toastr.success("Category renamed");
-			}, function() {
-				toastr.error("Couldn't rename category");
+			}, function(err) {
+				toastr.error("Couldn't rename category", err);
 			}).finally(function() {
 				$scope.ignoreModelChanges = true;
 			});
@@ -141,8 +141,8 @@ todevise.controller('categoriesCtrl', function($scope, $http, $log, $timeout, $c
 		$category.modify("post", tmp_node).then(function(category) {
 			$scope.load_categories();
 			toastr.success("Category moved");
-		}, function() {
-			toastr.error("Couldn't move category!");
+		}, function(err) {
+			toastr.error("Couldn't move category!", err);
 		});
 	};
 
