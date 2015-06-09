@@ -156,7 +156,6 @@ todevise.controller('categoriesCtrl', function($scope, $http, $log, $timeout, $c
 			var modalInstance = $modal.open({
 				templateUrl: 'template/modal/confirm.html',
 				controller: 'confirmCtrl',
-				//size: size,
 				resolve: {
 					data: function () {
 						return {
