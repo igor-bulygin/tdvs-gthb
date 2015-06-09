@@ -7,9 +7,9 @@
  */
 function addQueryParams(params) {
 	var query = window.location.search.substr(1);
-	params = $.merge(params, $.deparam(query));
-	delete params['length'];
-	return params;
+	var new_params = {};
+	$.extend(true, new_params, $.deparam(query), params);
+	return new_params;
 }
 
 /**
@@ -60,8 +60,9 @@ function objectToQueryParam(obj) {
 /**
  * This function will get the current URL (excluding GET parameters)
  * and then it will append all the parameters from $params object
- * @param params Object
+ * @param params Object of parameters to append to the current URL.
+ * @param append Boolean, true will append all the existing parameters too.
  */
-function goToQuery(params) {
-	window.location.href = urlToQuery(params);
+function goToQuery(params, append) {
+	window.location.href = urlToQuery(params, append);
 }
