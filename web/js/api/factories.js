@@ -1,5 +1,23 @@
 var api = angular.module('api');
 
+api.factory("$tag_util", function($q, $tag) {
+	var utils = {};
+
+	utils.newTag = function(description, langs) {
+		return {
+			short_id: "new",
+			description: {
+				"en-US": description
+			},
+			name: langs,
+			options: {}
+		};
+	};
+
+	return utils;
+
+});
+
 api.factory("$category_util", function($q, $category) {
 	var utils = {};
 
