@@ -5,7 +5,6 @@ namespace app\controllers;
 use app\helpers\Utils;
 use Yii;
 use yii\web\Response;
-use yii\helpers\Json;
 use yii\base\ActionFilter;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
