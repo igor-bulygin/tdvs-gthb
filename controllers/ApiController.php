@@ -7,7 +7,6 @@ use Yii;
 use yii\web\Response;
 use yii\base\ActionFilter;
 use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
 use yii\filters\ContentNegotiator;
 
 use app\models\Tag;
