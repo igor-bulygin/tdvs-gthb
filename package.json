@@ -7,7 +7,7 @@
 		"underscore": "1.8.3",
 		"angular": "1.4.0",
 		"angular-animate": "1.4.0",
-		"angular-multi-select": "5.1.4",
+		"angular-multi-select": "5.1.5",
 		"jstree": "3.1.1",
 		"jstree-actions": "0.0.12",
 		"jquery-deparam": "0.3.0",
