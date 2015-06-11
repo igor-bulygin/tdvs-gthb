@@ -131,6 +131,17 @@ class Utils {
 
 		$temp = $value;
 	}
+
+	/**
+	 * Get a value of an array by a key, or get another value using a default key.
+	 * @param $arr
+	 * @param $key
+	 * @param $default_key
+	 * @return mixed
+	 */
+	public static function getValue($arr, $key, $default_key) {
+		return isset($arr[$key]) ? $arr[$key] : $arr[$default_key];
+	}
 }
 
 class Currency {
