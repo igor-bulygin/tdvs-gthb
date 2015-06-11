@@ -6,10 +6,39 @@
  * @returns {object}
  */
 function addQueryParams(params) {
-	var query = window.location.search.substr(1);
 	var new_params = {};
-	$.extend(true, new_params, $.deparam(query), params);
+	$.extend(true, new_params, getQueryParams(), params);
 	return new_params;
+}
+
+function removeQueryParam(param) {
+	var params = getQueryParams();
+	delete params[param];
+	return params;
+}
+
+/**
+ * This function will return an object that represents the current query
+ * parameters.
+ * @returns {*}
+ */
+function getQueryParams() {
+	var query = window.location.search.substr(1);
+	return $.deparam(query);
+}
+
+/**
+ *
+ * @param obj
+ * @returns {*}
+ */
+function getQueryObject(obj) {
+	var _query = getQueryParams();
+	if(_query.hasOwnProperty(obj)) {
+		return queryParamToObject(_query[obj]);
+	} else {
+		return null;
+	}
 }
 
 /**
@@ -55,6 +84,17 @@ function urlToQuery(params, append) {
 function objectToQueryParam(obj) {
 	var json = JSON.stringify(obj) || JSON.stringify({});
 	return encodeURIComponent(json);
+}
+
+/**
+ * This function will take a string (previously returned to objectToQueryParam)
+ * and convert it to a JSON object.
+ * @param str
+ * @returns {any}
+ */
+function queryParamToObject(str) {
+	var json = decodeURIComponent(str);
+	return JSON.parse(json) || JSON.parse({});
 }
 
 /**
