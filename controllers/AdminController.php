@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\helpers\CController;
+use yii\data\ActiveDataProvider;
 
 
 class AdminController extends CController {
@@ -21,8 +22,28 @@ class AdminController extends CController {
 		return $this->render("index");
 	}
 
-	public function actionTags() {
-		return $this->render("tags", []);
+	public function actionTags($filters = null) {
+		$filters = urldecode($filters) ?: null;
+
+		$tags = new ActiveDataProvider([
+			'query' => $this->api->actionTags($filters),
+			'pagination' => [
+				'pageSize' => 15,
+			],
+		]);
+
+		return $this->render("tags", [
+			'categories' => $this->api->actionCategories()->asArray()->all(),
+			'tags' => $tags
+		]);
+
+	}
+
+	public function actionTag($tag_id) {
+		$model = null;
+		return $this->render("tag", [
+			"model" => $model
+		]);
 	}
 
 	public function actionCategories() {
