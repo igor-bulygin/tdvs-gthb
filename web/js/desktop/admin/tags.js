@@ -130,8 +130,6 @@ todevise.controller('tagsCtrl', function($scope, $http, $log, $timeout, $tag, $t
 
 	};
 
-	$scope.init();
-
 });
 
 todevise.controller("create_newCtrl", function($scope, $modalInstance, data) {

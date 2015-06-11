@@ -21,7 +21,7 @@ TagsAsset::register($this);
 $this->title = 'Todevise / Admin / Tags';
 ?>
 
-<div class="row" ng-controller="tagsCtrl">
+<div class="row" ng-controller="tagsCtrl" ng-init="init()">
 	<div class="col-sm-12 col-md-12 col-lg-12">
 
 		<?php $this->registerJs("var _categories = " . Json::encode($categories) . ";", View::POS_HEAD) ?>
