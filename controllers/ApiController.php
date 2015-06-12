@@ -166,7 +166,7 @@ class ApiController extends CController {
 			}
 		} else if ($request->isPost) {
 			$node = Utils::getJsonFromRequest("category");
-			unset($_node["_id"]);
+			unset($node["_id"]);
 
 			if ($node["short_id"] === "new") {
 				$node["short_id"] = (new Category())->genValidID(5);
