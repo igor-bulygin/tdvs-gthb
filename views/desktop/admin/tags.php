@@ -1,11 +1,11 @@
 <?php
-use app\assets\desktop\admin\TagsAsset;
-use app\helpers\Utils;
-use yii\grid\GridView;
+use yii\web\View;
+use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\helpers\Json;
-use yii\helpers\Url;
-use yii\web\View;
+use app\helpers\Utils;
+use yii\grid\GridView;
+use app\assets\desktop\admin\TagsAsset;
 
 /* @var $this yii\web\View */
 /* @var $categories ArrayObject */
@@ -34,7 +34,7 @@ $this->title = 'Todevise / Admin / Tags';
 				<div
 					angular-multi-select
 					input-model="categories"
-					output-model="outputBrowsers"
+					output-model="selectedCategories"
 
 					group-property="sub"
 					tick-property="check"
@@ -123,9 +123,9 @@ $this->title = 'Todevise / Admin / Tags';
 		<div class='modal-body'>
 			<span><?php echo Yii::t("app/admin", "Tag name"); ?></span>
 			<div class="input-group" ng-repeat="(lang_k, lang_v) in data.langs">
-				<span class="input-group-addon" id="basic-addon{{ $index }}">{{ lang_v }}</span>
-				<input required="" type="text" class="form-control" placeholder="<?php echo Yii::t("app/admin", "Tag name..."); ?>" aria-describedby="basic-addon{{ $index }}" ng-model="langs[lang_k]" name="{{ lang_k }}">
-				<span class="input-group-addon alert-danger" ng-show="form.$submitted || form['{{lang_k}}'].$touched">
+				<span class="input-group-addon" id="basic-addon-{{ $index }}">{{ lang_v }}</span>
+				<input required="" type="text" class="form-control" placeholder="<?php echo Yii::t("app/admin", "Tag name..."); ?>" aria-describedby="basic-addon-{{ $index }}" ng-model="langs[lang_k]" name="{{ lang_k }}">
+				<span class="input-group-addon alert-danger" ng-show="form.$submitted && !form.$valid && !form['{{lang_k}}'].$valid">
 					<span ng-show="form['{{lang_k}}'].$error.required">Required!</span>
 				</span>
 			</div>
@@ -134,7 +134,7 @@ $this->title = 'Todevise / Admin / Tags';
 			<span><?php echo Yii::t("app/admin", "Description"); ?></span>
 			<div class="input-group">
 				<input required="" type="text" class="form-control" placeholder="<?php echo Yii::t("app/admin", "Description..."); ?>" aria-describedby="basic-addon-desc" ng-model="description" name="desc">
-				<span class="input-group-addon alert-danger" id="basic-addon-desc" ng-show="form.$submitted || form['desc'].$touched">
+				<span class="input-group-addon alert-danger" id="basic-addon-desc" ng-show="form.$submitted && !form.$valid && !form['desc'].$valid">
 					<span ng-show="form['desc'].$error.required">Required!</span>
 				</span>
 			</div>
