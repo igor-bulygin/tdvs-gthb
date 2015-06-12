@@ -32,11 +32,12 @@ class AdminController extends CController {
 			],
 		]);
 
-		return $this->render("tags", [
+		$data = [
 			'categories' => $this->api->actionCategories()->asArray()->all(),
 			'tags' => $tags
-		]);
+		];
 
+		return Yii::$app->request->isAjax ? $this->renderPartial("tags", $data) : $this->render("tags", $data);
 	}
 
 	public function actionTag($tag_id) {
