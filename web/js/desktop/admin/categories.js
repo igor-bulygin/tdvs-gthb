@@ -173,7 +173,7 @@ todevise.controller('categoriesCtrl', ["$scope", "$category", "$category_util", 
 					toastr.error("Couldn't remove category!", err);
 				});
 
-			}, function () {
+			}, function() {
 				//Cancel
 			});
 
