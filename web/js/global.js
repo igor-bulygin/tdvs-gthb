@@ -1,47 +1,4 @@
 /**
- * This function will add (or replace the value if the key exists)
- * all the query parameters from the current URL to an object, merge it
- * with the passed object and return the result.
- * @param params Object
- * @returns {object}
- */
-function addQueryParams(params) {
-	var new_params = {};
-	$.extend(true, new_params, getQueryParams(), params);
-	return new_params;
-}
-
-function removeQueryParam(param) {
-	var params = getQueryParams();
-	delete params[param];
-	return params;
-}
-
-/**
- * This function will return an object that represents the current query
- * parameters.
- * @returns {*}
- */
-function getQueryParams() {
-	var query = window.location.search.substr(1);
-	return $.deparam(query);
-}
-
-/**
- *
- * @param obj
- * @returns {*}
- */
-function getQueryObject(obj) {
-	var _query = getQueryParams();
-	if(_query.hasOwnProperty(obj)) {
-		return queryParamToObject(_query[obj]);
-	} else {
-		return null;
-	}
-}
-
-/**
  * Return the current host.
  */
 function currentHost() {
@@ -60,49 +17,129 @@ function currentURL() {
 	return currentHost() + window.location.pathname;
 }
 
-/**
- * This function will return a URL suitable for goToQuery().
- * It will contain the output of currentURL() appended with
- * all the parameters from $params. This function won't append
- * any existing parameters. If you want that, pass 'true' as a
- * second parameter to this function.
- * @param params Object of parameters to append to the current URL.
- * @param append Boolean, true will append all the existing parameters too.
- * @returns {string}
- */
-function urlToQuery(params, append) {
-	params = append === true ? addQueryParams(params) : params;
-	return currentURL() + "?" + $.param(params);
-}
+var aus = {
+	/**
+	 * Internal objects that hold the current state (url)
+	 */
+	_state: {},
+	_shadowURL: "",
 
-/**
- * This function will take an object (can be nested too) and convert it
- * to a suitable string for a parameter in a GET petition.
- * @param obj
- * @returns {string}
- */
-function objectToQueryParam(obj) {
-	var json = JSON.stringify(obj) || JSON.stringify({});
-	return encodeURIComponent(json);
-}
+	/**
+	 * Get the value of the parameter "key". NULL will be returned
+	 * if the parameter doesn't exist or if it can't be parsed.
+	 * If "decode" is true, the value will be JSON parsed.
+	 * @param key
+	 * @param decode
+	 * @returns {*}
+	 */
+	get: function(key, decode) {
+		if(!this._state.hasOwnProperty(key)) {
+			return null;
+		}
 
-/**
- * This function will take a string (previously returned to objectToQueryParam)
- * and convert it to a JSON object.
- * @param str
- * @returns {any}
- */
-function queryParamToObject(str) {
-	var json = decodeURIComponent(str);
-	return JSON.parse(json) || JSON.parse({});
-}
+		var _v = decodeURIComponent(this._state[key]);
 
-/**
- * This function will get the current URL (excluding GET parameters)
- * and then it will append all the parameters from $params object
- * @param params Object of parameters to append to the current URL.
- * @param append Boolean, true will append all the existing parameters too.
- */
-function goToQuery(params, append) {
-	window.location.href = urlToQuery(params, append);
-}
+		// Parse the value as this is a JSON encoded object
+		if(decode === true) {
+			try {
+				_v = JSON.parse(_v)
+			} catch(e) {
+				_v = null;
+			}
+		}
+
+		return _v;
+
+	},
+
+	_objToStr: function(value) {
+		var _v = JSON.stringify(value);
+		return encodeURIComponent(_v);
+	},
+
+	/**
+	 * Set the value of the parameter "key". If "encode" is true,
+	 * the value will be JSON stringified. If "extend" is true,
+	 * the passed value will be appended to the existing value
+	 * via $.extend(); (recursive extend is called).
+	 * @param key
+	 * @param value
+	 * @param encode
+	 * @param extend
+	 */
+	set: function(key, value, encode, extend) {
+		var _v;
+
+		if(encode === true) {
+			if(extend === true) {
+				_v = this.get(key, true) || {};
+				$.extend(true, _v, value);
+			} else {
+				_v = value;
+			}
+
+			_v = JSON.stringify(_v);
+		} else {
+			_v = value;
+		}
+
+		this._state[key] = encodeURIComponent(_v);
+
+		return this;
+	},
+
+	/**
+	 * Remove the parameter "key".
+	 * @param key
+	 */
+	remove: function(key) {
+		if(this._state.hasOwnProperty(key)) {
+			delete this._state[key];
+		}
+
+		return this;
+	},
+
+	/**
+	 * Read the current URL and fill the internal state objects with it.
+	 */
+	syncFromURL: function() {
+		this._path = window.location.pathname;
+		this._query = window.location.search.substr(1);
+		this._state = {};
+
+		var _params = this._query.split("&");
+		for(var i=0; i < _params.length; i++) {
+			var _obj = _params[i].split("=");
+			if(_obj.length === 2) {
+				this._state[_obj[0]] = _obj[1];
+			}
+		}
+
+		return this;
+	},
+
+	/**
+	 * Transform the current internal state to a URL form and apply it
+	 * via pushState (HTML5 browsers). This will return the applied URL.
+	 * @returns {string}
+	 */
+	syncToURL: function() {
+		var _url = this._path + "?";
+
+		for (var key in this._state) {
+			if(this._state.hasOwnProperty(key)) {
+				_url += key + "=" + this._state[key] + "&";
+			}
+		}
+		_url = _url.substr(0, _url.length - 1);
+
+		if(this._shadowURL !== _url) {
+			history.pushState(null, null, _url);
+			this._shadowURL = _url;
+		}
+
+		return _url;
+	}
+};
+aus.syncFromURL();

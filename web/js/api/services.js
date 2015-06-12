@@ -15,7 +15,8 @@ api.factory("$services_util", function($http, $q) {
 	};
 
 	api_helpers._get = function(url, filters) {
-		filters = filters !== undefined ? "?filters=" + objectToQueryParam(filters) : "";
+		filters = filters !== undefined ? "?filters=" + aus._objToStr(filters) : "";
+
 		return $http({
 			method: "get",
 			headers: {
