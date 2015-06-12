@@ -1,6 +1,6 @@
 var todevise = angular.module('todevise', ['ui.bootstrap', 'ngJsTree', 'ngAnimate', 'global-admin', 'global-desktop', 'api']);
 
-todevise.controller('categoriesCtrl', function($scope, $http, $log, $timeout, $category, $category_util, toastr, $modal) {
+todevise.controller('categoriesCtrl', ["$scope", "$category", "$category_util", "toastr", "$modal", function($scope, $category, $category_util, toastr, $modal) {
 
 	$scope.ignoreModelChanges = true;
 	$scope.treeData = [];
@@ -81,7 +81,7 @@ todevise.controller('categoriesCtrl', function($scope, $http, $log, $timeout, $c
 			});
 			toastr.success("Categories loaded!");
 		}, function(err) {
-			toastr.error(err);
+			toastr.error("Couldn't load categories!", err);
 		});
 	};
 
@@ -108,7 +108,7 @@ todevise.controller('categoriesCtrl', function($scope, $http, $log, $timeout, $c
 		}
 		var tmp_node = $category_util.newCategory(path);
 
-		$category.modify("post", tmp_node).then(function(category) {
+		$category.modify("POST", tmp_node).then(function(category) {
 			$scope.treeData.push( $category_util.categoryToNode(category) );
 		});
 	};
@@ -119,16 +119,16 @@ todevise.controller('categoriesCtrl', function($scope, $http, $log, $timeout, $c
 			if (!status || node.text === node.original.text) return;
 			var obj = {};
 			_.each($scope.treeData, function(_obj) {
-				if(_obj.id == node_id) {
+				if(_obj.id == node.id) {
 					_obj.text = node.text;
 					obj = _obj;
 				}
 			});
 
-			$category.modify("post", $category_util.nodeToCategory(obj, $scope)).then(function() {
-				toastr.success("Category renamed");
+			$category.modify("POST", $category_util.nodeToCategory(obj, $scope)).then(function() {
+				toastr.success("Category renamed!");
 			}, function(err) {
-				toastr.error("Couldn't rename category", err);
+				toastr.error("Couldn't rename category!", err);
 			}).finally(function() {
 				$scope.ignoreModelChanges = true;
 			});
@@ -140,15 +140,14 @@ todevise.controller('categoriesCtrl', function($scope, $http, $log, $timeout, $c
 		var tmp_node = $category_util.nodeToCategory(node.node.original, $scope);
 		$category.modify("post", tmp_node).then(function(category) {
 			$scope.load_categories();
-			toastr.success("Category moved");
+			toastr.success("Category moved!");
 		}, function(err) {
 			toastr.error("Couldn't move category!", err);
 		});
 	};
 
 	$scope.remove = function (node_id, node, action_id, action_el) {
-
-		var category = $scope.treeInstance.jstree(true).get_node(node_id);
+		var category = $scope.treeInstance.jstree(true).get_node(node.id);
 		category = $category_util.nodeToCategory(category.original, $scope);
 
 		//Check for sub-categories that depend on this one so we can remove those too
@@ -167,16 +166,15 @@ todevise.controller('categoriesCtrl', function($scope, $http, $log, $timeout, $c
 			});
 
 			modalInstance.result.then(function() {
-				//$log.info("Ok");
 				$category.modify("delete", category).then(function (category) {
 					$scope.load_categories();
-					toastr.success("Category deleted");
+					toastr.success("Category deleted!");
 				}, function (err) {
 					toastr.error("Couldn't remove category!", err);
 				});
 
 			}, function () {
-				//$log.info("Cancel");
+				//Cancel
 			});
 
 		}, function(err) {
@@ -184,4 +182,4 @@ todevise.controller('categoriesCtrl', function($scope, $http, $log, $timeout, $c
 		});
 	};
 
-});
+}]);
