@@ -1,6 +1,12 @@
 console.log("Global desktop");
 var global_desktop = angular.module('global-desktop', []);
 
+global_desktop.run(["$http", function($http) {
+	$http.defaults.headers.get = {
+		"X-Requested-With":  "XMLHttpRequest"
+	};
+}]);
+
 global_desktop.factory("$global_desktop_util", function($http, $q) {
 	var global_desktop_helpers = {};
 	var global_point = currentHost() + "/global/";
@@ -19,9 +25,6 @@ global_desktop.factory("$global_desktop_util", function($http, $q) {
 	global_desktop_helpers.setFlash = function(key, message) {
 		var req = $http({
 			method: "get",
-			headers: {
-				'X-Requested-With': 'XMLHttpRequest'
-			},
 			url: global_point + "set-flash/?key=" + key + "&message=" + encodeURIComponent(message)
 		});
 
@@ -31,9 +34,6 @@ global_desktop.factory("$global_desktop_util", function($http, $q) {
 	global_desktop_helpers.getFlashes = function() {
 		var req = $http({
 			method: "get",
-			headers: {
-				'X-Requested-With': 'XMLHttpRequest'
-			},
 			url: global_point + "get-flashes/"
 		});
 
