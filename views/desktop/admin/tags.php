@@ -27,10 +27,10 @@ $this->title = 'Todevise / Admin / Tags';
 		<?php $this->registerJs("var _categories = " . Json::encode($categories) . ";", View::POS_HEAD) ?>
 
 		<div class="row">
-			<div class="col-md4 col-lg-4">
+			<div class="col-md-4 col-lg-4">
 				<h2><?= Yii::t("app/admin", "Tag list"); ?></h2>
 			</div>
-			<div class="col-md4 col-lg-4">
+			<div class="col-md-4 col-lg-4">
 				<div
 					angular-multi-select
 					input-model="categories"
@@ -47,7 +47,7 @@ $this->title = 'Todevise / Admin / Tags';
 					helper-elements="noall nonone noreset nofilter"
 				></div>
 			</div>
-			<div class="col-md4 col-lg-4">
+			<div class="col-md-4 col-lg-4">
 				<button class="btn btn-default" ng-click="create_new()">Create new</button>
 			</div>
 		</div>
@@ -120,7 +120,7 @@ $this->title = 'Todevise / Admin / Tags';
 			<h3 class='modal-title'><?php echo Yii::t("app/admin", "Create new tag"); ?></h3>
 		</div>
 		<div class='modal-body'>
-			<span><?php echo Yii::t("app/admin", "Tag name"); ?></span>
+			<label><?php echo Yii::t("app/admin", "Tag name"); ?></label>
 			<div class="input-group" ng-repeat="(lang_k, lang_v) in data.langs">
 				<span class="input-group-addon" id="basic-addon-{{ $index }}">{{ lang_v }}</span>
 				<input required="" type="text" class="form-control" placeholder="<?php echo Yii::t("app/admin", "Tag name..."); ?>" aria-describedby="basic-addon-{{ $index }}" ng-model="langs[lang_k]" name="{{ lang_k }}">
@@ -130,9 +130,9 @@ $this->title = 'Todevise / Admin / Tags';
 			</div>
 			<br />
 
-			<span><?php echo Yii::t("app/admin", "Description"); ?></span>
+			<label><?php echo Yii::t("app/admin", "Description"); ?></label>
 			<div class="input-group">
-				<input required="" type="text" class="form-control" placeholder="<?php echo Yii::t("app/admin", "Description..."); ?>" aria-describedby="basic-addon-desc" ng-model="description" name="desc">
+				<input id="description" required="" type="text" class="form-control" placeholder="<?php echo Yii::t("app/admin", "Description..."); ?>" aria-describedby="basic-addon-desc" ng-model="description" name="desc">
 				<span class="input-group-addon alert-danger" id="basic-addon-desc" ng-show="form.$submitted && !form.$valid && !form['desc'].$valid">
 					<span ng-show="form['desc'].$error.required">Required!</span>
 				</span>
