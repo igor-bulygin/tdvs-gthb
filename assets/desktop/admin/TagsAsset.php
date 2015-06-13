@@ -16,7 +16,6 @@ class TagsAsset extends AssetBundle {
 		'app\assets\api\ApiAsset',
 		'app\assets\libs\angularMultiSelectAsset',
 		'app\assets\libs\angularBootstrapAsset',
-		'app\assets\libs\jsonpathAsset',
 		'app\assets\desktop\admin\GlobalAsset'
 	];
 }
