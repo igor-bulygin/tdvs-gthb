@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\helpers\CController;
 use yii\data\ActiveDataProvider;
+use yii\helpers\Json;
 
 
 class AdminController extends CController {
@@ -41,9 +42,9 @@ class AdminController extends CController {
 	}
 
 	public function actionTag($tag_id) {
-		$model = null;
 		return $this->render("tag", [
-			"model" => $model
+			"tag" => $this->api->actionTags(Json::encode(["short_id" => $tag_id]))->asArray()->one(),
+			"categories" => $this->api->actionCategories()->asArray()->all()
 		]);
 	}
 
