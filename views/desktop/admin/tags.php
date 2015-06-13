@@ -39,7 +39,7 @@ $this->title = 'Todevise / Admin / Tags';
 					group-property="sub"
 					tick-property="check"
 
-					item-label="{{ name[current_lang] }}"
+					item-label="{{ name[lang] }}"
 					selection-mode="single"
 					search-property="name"
 					min-search-length="3"
@@ -51,7 +51,6 @@ $this->title = 'Todevise / Admin / Tags';
 				<button class="btn btn-default" ng-click="create_new()">Create new</button>
 			</div>
 		</div>
-
 
 		<?php
 			echo GridView::widget([
