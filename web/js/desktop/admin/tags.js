@@ -14,9 +14,9 @@ todevise.config(['$provide', function($provide) {
 	}]);
 }]);
 
-todevise.controller('tagsCtrl', ["$scope", "$timeout", "$tag", "$tag_util", "toastr", "$modal", "$compile", "$http", function($scope, $timeout, $tag, $tag_util, toastr, $modal, $compile, $http) {
+todevise.controller('tagsCtrl', ["$scope", "$timeout", "$tag", "$tag_util", "$category_util", "toastr", "$modal", "$compile", "$http", function($scope, $timeout, $tag, $tag_util, $category_util, toastr, $modal, $compile, $http) {
 
-	$scope.current_lang = _lang;
+	$scope.lang = _lang;
 
 	$scope.categories = [];
 	$scope.selectedCategories = [];
@@ -124,32 +124,10 @@ todevise.controller('tagsCtrl', ["$scope", "$timeout", "$tag", "$tag_util", "toa
 		}
 
 		//Sort by path length
-		_categories.sort(function(a, b) {
-			return a.path.length > b.path.length;
-		});
+		$category_util.sort(_categories);
 
-		angular.forEach(angular.copy(_categories), function(_category) {
-			if (_category.path === "/") {
-				$scope.categories.push(_category);
-			} else {
-				var _path = _category.path.split("/");
-				_path.pop();
-				var _parent = _path.pop();
-
-				jsonpath.apply($scope.categories, "$..[?(@.short_id=='" + _parent + "')]", function(obj) {
-					if(!obj.hasOwnProperty("sub")) {
-						obj.sub = [];
-					}
-
-					if(_category.short_id == _category_id) {
-						_category.check = true;
-					}
-					obj.sub.push(_category);
-					return obj;
-				});
-
-			}
-		});
+		$scope.categories = $category_util.create_tree(_categories);
+		$category_util.check_category($scope.categories, _category_id);
 
 		$timeout(function() {
 			$scope.watch_category_filter();

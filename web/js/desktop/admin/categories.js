@@ -65,18 +65,16 @@ todevise.controller('categoriesCtrl', ["$scope", "$category", "$category_util", 
 	};
 
 	$scope.load_categories = function() {
-		$category.get().then(function(data) {
+		$category.get().then(function(_categories) {
 
 			//Sort data before feeding it to jsTree
-			data.sort(function(a, b) {
-				return a.path.length > b.path.length;
-			});
+			$category_util.sort(_categories);
 
 			//Empty the data holder (if there is anything)
 			$scope.treeData.splice(0, $scope.treeData.length);
 
 			//Fill the new values
-			angular.forEach(data, function (category, key) {
+			angular.forEach(_categories, function (category, key) {
 				$scope.treeData.push( $category_util.categoryToNode(category) );
 			});
 			toastr.success("Categories loaded!");

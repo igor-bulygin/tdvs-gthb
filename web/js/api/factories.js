@@ -15,7 +15,6 @@ api.factory("$tag_util", function($q, $tag) {
 	};
 
 	return utils;
-
 });
 
 api.factory("$category_util", function($q, $category) {
@@ -75,6 +74,45 @@ api.factory("$category_util", function($q, $category) {
 				"en-US": "New category"
 			}
 		};
+	};
+
+	utils.sort = function(categories) {
+		categories.sort(function(a, b) {
+			return a.path.length > b.path.length;
+		});
+	};
+
+	utils.create_tree = function(categories) {
+		var _categories = [];
+
+		angular.forEach(angular.copy(categories), function(_category) {
+			if (_category.path === "/") {
+				_categories.push(_category);
+			} else {
+				var _path = _category.path.split("/");
+				_path.pop();
+				var _parent = _path.pop();
+
+				jsonpath.apply(_categories, "$..[?(@.short_id=='" + _parent + "')]", function(obj) {
+					if(!obj.hasOwnProperty("sub")) {
+						obj.sub = [];
+					}
+					obj.sub.push(_category);
+					return obj;
+				});
+			}
+		});
+
+		return _categories;
+	};
+
+	utils.check_category = function(categories, category_id) {
+		jsonpath.apply(categories, "$..[?(@.short_id)]", function(obj) {
+			if(obj.short_id == category_id) {
+				obj.check = true;
+			}
+			return obj;
+		});
 	};
 
 	return utils;
