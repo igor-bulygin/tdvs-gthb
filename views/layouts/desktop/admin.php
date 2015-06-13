@@ -290,7 +290,7 @@ use lajax\languagepicker\widgets\LanguagePicker;
 						NavBar::end();
 					?>
 
-					<div class="container no-horizontal-padding">
+					<div class="container-fluid">
 						<div class="site-index">
 							<div class="body-content">
 								<?= $content ?>
