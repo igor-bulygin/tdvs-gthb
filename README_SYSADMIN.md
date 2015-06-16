@@ -10,21 +10,21 @@ The minimum requirements are the following:
 * PHP-MongoDB driver 1.6
 * NGINX
 * The following PHP extensions:
-*    dom
-*    curl
-*    gd
-*    iconv
-*    intl
-*    json
-*    libxml
-*    mbstring
-*    mcrypt
-*    mongo
-*    openssl
-*    pcre
-*    redis
-*    Reflection
-*    SimpleXML
+  * dom
+  * curl
+  * gd
+  * iconv
+  * intl
+  * json
+  * libxml
+  * mbstring
+  * mcrypt
+  * mongo
+  * openssl
+  * pcre
+  * redis
+  * Reflection
+  * SimpleXML
 
 ### CONFIGURATION
 
