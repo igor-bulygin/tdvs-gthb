@@ -33,6 +33,8 @@ $this->title = 'Todevise / Admin / Tags';
 			<div class="col-md-4 col-lg-4">
 				<div
 					angular-multi-select
+					api="api"
+					id-property="short_id"
 					input-model="categories"
 					output-model="selectedCategories"
 

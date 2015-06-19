@@ -121,14 +121,5 @@ api.factory("$category_util", function($q, $category) {
 		return _categories;
 	};
 
-	utils.check_category = function(categories, category_id) {
-		jsonpath.apply(categories, "$..[?(@.short_id)]", function(obj) {
-			if(obj.short_id == category_id) {
-				obj.check = true;
-			}
-			return obj;
-		});
-	};
-
 	return utils;
 });

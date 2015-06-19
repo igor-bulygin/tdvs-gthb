@@ -17,6 +17,7 @@ todevise.config(['$provide', function($provide) {
 todevise.controller('tagsCtrl', ["$scope", "$timeout", "$tag", "$tag_util", "$category_util", "toastr", "$modal", "$compile", "$http", function($scope, $timeout, $tag, $tag_util, $category_util, toastr, $modal, $compile, $http) {
 
 	$scope.lang = _lang;
+	$scope.api = {};
 
 	$scope.categories = [];
 	$scope.selectedCategories = [];
@@ -127,7 +128,9 @@ todevise.controller('tagsCtrl', ["$scope", "$timeout", "$tag", "$tag_util", "$ca
 		$category_util.sort(_categories);
 
 		$scope.categories = $category_util.create_tree(_categories);
-		$category_util.check_category($scope.categories, _category_id);
+		$timeout(function() {
+			$scope.api.select(_category_id);
+		}, 0);
 
 		$timeout(function() {
 			$scope.watch_category_filter();
