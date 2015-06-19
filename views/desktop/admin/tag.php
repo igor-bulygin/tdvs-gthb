@@ -19,7 +19,7 @@ TagAsset::register($this);
 $this->title = 'Todevise / Admin / Tag';
 ?>
 
-<div class="row no-horizontal-margin" ng-controller="tagCtrl" ng-init="init()">
+<div class="row no-gutter" ng-controller="tagCtrl" ng-init="init()">
 	<div class="col-sm-12 col-md-12 col-lg-12">
 
 		<?php $this->registerJs("var _categories = " . Json::encode($categories) . ";", View::POS_HEAD); ?>

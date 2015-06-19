@@ -13,7 +13,7 @@ CategoriesAsset::register($this);
 $this->title = 'Todevise / Admin / Categories';
 ?>
 
-<div class="row no-horizontal-margin" ng-controller="categoriesCtrl">
+<div class="row no-gutter" ng-controller="categoriesCtrl">
 	<div class="col-sm-12 col-md-12 col-lg-12">
 		<h2>Categories</h2>
 		<div class="input-group">
