@@ -244,7 +244,7 @@ use lajax\languagepicker\widgets\LanguagePicker;
 								'class' => 'navbar-inverse no-vertical-margin',
 							],
 							'containerOptions' => [
-								'class' => 'no-horizontal-padding navbar-content' //bug
+								'class' => ['widget' => 'no-horizontal-padding navbar-content']
 							],
 							'innerContainerOptions' => [
 								'class' => 'container-fluid no-horizontal-padding'
