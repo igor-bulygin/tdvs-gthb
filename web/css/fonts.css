@@ -9,7 +9,7 @@
 	font-weight: normal;
 	font-style: normal;
 }
- 
+
 @font-face {
 	font-family: 'UniversLTPro-UltraCn';
 	src: url('/fonts/2C8568_1_0.eot');
@@ -21,7 +21,7 @@
 	font-weight: normal;
 	font-style: normal;
 }
- 
+
 @font-face {
 	font-family: 'UniversLTStd-ThinUltraCn';
 	src: url('/fonts/2C8568_2_0.eot');
@@ -33,7 +33,7 @@
 	font-weight: normal;
 	font-style: normal;
 }
- 
+
 @font-face {
 	font-family: 'UniversLTPro-BoldCond';
 	src: url('/fonts/2C8568_3_0.eot');
@@ -45,7 +45,7 @@
 	font-weight: normal;
 	font-style: normal;
 }
- 
+
  @font-face {
 	font-family: 'playfair_displayblack';
 	src: url('/fonts/playfairdisplay-black-webfont.eot');
