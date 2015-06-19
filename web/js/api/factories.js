@@ -14,6 +14,21 @@ api.factory("$tag_util", function($q, $tag) {
 		};
 	};
 
+	utils.newDropdownOption = function() {
+		return {
+			text: {},
+			value: null
+		};
+	};
+
+	utils.newFreetextOption = function() {
+		return {
+			text: {},
+			type: null,
+			metric_units: null
+		};
+	};
+
 	return utils;
 });
 
