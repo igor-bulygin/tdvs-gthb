@@ -104,3 +104,10 @@
 	}
 }
 /*===================================*/
+
+/* float to the right a navbar element */
+.navbar-right {
+	margin-left: auto;
+}
+
+/*===================================*/
