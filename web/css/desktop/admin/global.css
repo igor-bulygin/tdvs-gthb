@@ -7,6 +7,10 @@ div.navbar-content {
 	align-items: center;
 }
 
+.navbar-right {
+	margin-left: auto;
+}
+
 ul.breadcrumb {
 	display: inline-block;
 }
