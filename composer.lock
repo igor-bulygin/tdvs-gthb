@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "362217357a4f77b5ca988099d0f18881",
+    "hash": "9845e043c6c0cc0a7c869489ec287a35",
     "packages": [
         {
             "name": "alexandernst/yii2-device-detect",
@@ -694,16 +694,16 @@
         },
         {
             "name": "yiisoft/yii2",
-            "version": "2.0.4",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "726867caee3f23aa7a6975c801e64b6021e14f86"
+                "reference": "ea11432729fb9e21ee616f8ffaf510a29bd635b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/726867caee3f23aa7a6975c801e64b6021e14f86",
-                "reference": "726867caee3f23aa7a6975c801e64b6021e14f86",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/ea11432729fb9e21ee616f8ffaf510a29bd635b6",
+                "reference": "ea11432729fb9e21ee616f8ffaf510a29bd635b6",
                 "shasum": ""
             },
             "require": {
@@ -778,25 +778,25 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2015-05-10 20:09:47"
+            "time": "2015-06-16 20:53:12"
         },
         {
             "name": "yiisoft/yii2-bootstrap",
-            "version": "2.0.4",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-bootstrap.git",
-                "reference": "1b6b1e61cf91c3cdd517d6a7e71d30bb212e4af0"
+                "reference": "0396fafd62d30dbf83e5f56cc72536ed5ce1d63e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-bootstrap/zipball/1b6b1e61cf91c3cdd517d6a7e71d30bb212e4af0",
-                "reference": "1b6b1e61cf91c3cdd517d6a7e71d30bb212e4af0",
+                "url": "https://api.github.com/repos/yiisoft/yii2-bootstrap/zipball/0396fafd62d30dbf83e5f56cc72536ed5ce1d63e",
+                "reference": "0396fafd62d30dbf83e5f56cc72536ed5ce1d63e",
                 "shasum": ""
             },
             "require": {
                 "bower-asset/bootstrap": "3.3.* | 3.2.* | 3.1.*",
-                "yiisoft/yii2": ">=2.0.4"
+                "yiisoft/yii2": ">=2.0.x-dev"
             },
             "type": "yii2-extension",
             "extra": {
@@ -828,7 +828,7 @@
                 "bootstrap",
                 "yii2"
             ],
-            "time": "2015-05-10 22:08:17"
+            "time": "2015-06-04 11:00:16"
         },
         {
             "name": "yiisoft/yii2-composer",
@@ -1299,7 +1299,10 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "yiisoft/yii2": 20,
+        "yiisoft/yii2-bootstrap": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
