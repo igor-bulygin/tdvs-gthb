@@ -5,6 +5,14 @@ use Yii;
 use app\helpers\CActiveRecord;
 
 class Country extends CActiveRecord {
+	const AFRICA = "AF";
+	const ANTARCTICA = "AN";
+	const ASIA = "AS";
+	const EUROPE = "EU";
+	const NORTH_AMERICA = "NA";
+	const AUSTRALIA = "OC";
+	const SOUTH_AMERICA = "SA";
+
 	public static function collectionName() {
 		return 'country';
 	}
