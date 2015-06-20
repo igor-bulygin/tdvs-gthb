@@ -1,6 +1,7 @@
 html,
 body {
 	height: 100%;
+	font-size:14px;
 }
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
@@ -74,66 +75,66 @@ body {
 
 /**** FONT SIZES ****/
 
-.fs10{
-	font-size:10px;
+.fs0714{
+	font-size:0.714em;
 }
 
-.fs11{
-	font-size:11px;
+.fs0786{
+	font-size:0.786em;
 }
 
-.fs12{
-	font-size:12px;
+.fs0857{
+	font-size:0.857em;
 }
 
-.fs13{
-	font-size:13px;
+.fs0929{
+	font-size:0.929em;
 }
 
-.fs14{
-	font-size:14px;
+.fs1{
+	font-size:1em;
 }
 
-.fs15{
-	font-size:15px;
+.fs1-071{
+	font-size:1.071em;
 }
 
-.fs16{
-	font-size:16px;
+.fs1-143{
+	font-size:1.143em;
 }
 
-.fs17{
-	font-size:17px;
+.fs1-214{
+	font-size:1.214em;
 }
 
-.fs18{
-	font-size:18px;
+.fs1-286{
+	font-size:1.286em;
 }
 
-.fs19{
-	font-size:19px;
+.fs1-357{
+	font-size:1.357em;
 }
 
-.fs20{
-	font-size:20px;
+.fs1-429{
+	font-size:1.429em;
 }
 
-.fs21{
-	font-size:21px;
+.fs1-500{
+	font-size:1.5em;
 }
 
-.fs22{
-	font-size:22px;
+.fs1-571{
+	font-size:1.571em;
 }
 
-.fs23{
-	font-size:23px;
+.fs1-643{
+	font-size:1.643em;
 }
 
-.fs24{
-	font-size:24px;
+.fs1-714{
+	font-size:1.714em;
 }
 
-.fs25{
-	font-size:25px;
+.fs1-786{
+	font-size:1.786em;
 }
