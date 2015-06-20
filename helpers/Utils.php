@@ -142,6 +142,92 @@ class Utils {
 	public static function getValue($arr, $key, $default_key) {
 		return isset($arr[$key]) ? $arr[$key] : $arr[$default_key];
 	}
+
+	/**
+	 * Convert a stdClass object to a multidimensional array.
+	 * @param $d
+	 * @return array
+	 */
+	public static function objectToArray($d) {
+		if (is_object($d)) {
+			// Gets the properties of the given object with get_object_vars function
+			$d = get_object_vars($d);
+		}
+
+		if (is_array($d)) {
+			/*
+			 * Return array converted to object
+			 * Using __FUNCTION__ (Magic constant)
+			 * for recursive call
+			 */
+			return array_map(__FUNCTION__, $d);
+		} else {
+			return $d;
+		}
+	}
+
+	/**
+	 * Convert a multidimensional array to a stdClass object.
+	 * @param $d
+	 * @return object
+	 */
+	public static function arrayToObject($d) {
+		if (is_array($d)) {
+			/*
+			 * Return array converted to object
+			 * Using __FUNCTION__ (Magic constant)
+			 * for recursive call
+			 */
+			return (object) array_map(__FUNCTION__, $d);
+		}
+		else {
+			// Return object
+			return $d;
+		}
+	}
+
+	/**
+	 * Convert under_score type array's keys to camelCase type array's keys
+	 * @param   array   $array          array to convert
+	 * @param   array   $arrayHolder    parent array holder for recursive array
+	 * @return  array   camelCase array
+	 */
+	public static function camelCaseKeys($array, $arrayHolder = array()) {
+		$camelCaseArray = !empty($arrayHolder) ? $arrayHolder : array();
+		foreach ($array as $key => $val) {
+			$newKey = @explode('_', $key);
+			array_walk($newKey, create_function('&$v', '$v = ucwords($v);'));
+			$newKey = @implode('', $newKey);
+			$newKey{0} = strtolower($newKey{0});
+			if (!is_array($val)) {
+				$camelCaseArray[$newKey] = $val;
+			} else {
+				$camelCaseArray[$newKey] = Utils::camelCaseKeys($val, $camelCaseArray[$newKey]);
+			}
+		}
+		return $camelCaseArray;
+	}
+
+	/**
+	 * Convert camelCase type array's keys to under_score+lowercase type array's keys
+	 * @param   array   $array          array to convert
+	 * @param   array   $arrayHolder    parent array holder for recursive array
+	 * @return  array   under_score array
+	 */
+	public static function underscoreKeys($array, $arrayHolder = array()) {
+		$underscoreArray = !empty($arrayHolder) ? $arrayHolder : array();
+		foreach ($array as $key => $val) {
+			$newKey = preg_replace('/[A-Z]/', '_$0', $key);
+			$newKey = strtolower($newKey);
+			$newKey = ltrim($newKey, '_');
+			if (!is_array($val)) {
+				$underscoreArray[$newKey] = $val;
+			} else {
+				$underscoreArray[$newKey] = Utils::underscoreKeys($val, $underscoreArray[$newKey]);
+			}
+		}
+		return $underscoreArray;
+	}
 }
 
 class Currency {
