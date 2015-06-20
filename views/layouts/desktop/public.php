@@ -47,34 +47,31 @@ use lajax\languagepicker\widgets\LanguagePicker;
 							<!-- NEMU TOP -->
 							<div class="fixed">
 								<div class="col-lg-12">
+									<nav class="navbar-inverse">
+										<ul>
+											<li>&nbsp;<br>&nbsp;</li>
+											<li><a href="home.html">FIND THE PERFECT GIFT</a></li>
+											<li><a href="about.html">DISCOVER TRENDS</a></li>
+											<li><a href="services.html">EXPLORE OUR DEVISERS</a></li>
+											<li>
+												<div class="btn-group">
+													<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+															ALL <span class="caret"></span>
+													</button>
+													<ul class="dropdown-menu">
+														<li><a href="#">PERFECT GIFT</a></li>
+														<li><a href="#">DISCOVER TRENDS</a></li>
+														<li><a href="#">EXPLORE OUR DEVISERS</a></li>
+													</ul>
+												</div>
+											</li>
+										</ul>
+									</nav>
 
-										<?php
-											NavBar::begin([
-												'brandUrl' => Yii::$app->homeUrl,
-												'options' => [
-													'class' => 'navbar-inverse',
-												],
-											]);
-
-											echo Nav::widget([
-												'options' => ['class' => 'navbar-nav'],
-												'items' => [
-													['label' => 'Home', 'url' => ['/site/index']],
-													['label' => 'About', 'url' => ['/site/about']],
-													['label' => 'Contact', 'url' => ['/site/contact']],
-													Yii::$app->user->isGuest ?
-														['label' => 'Login', 'url' => ['/site/login']] :
-														['label' => 'Logout (' . Yii::$app->user->identity->personal_info["name"] . ')',
-															'url' => ['/site/logout'],
-															'linkOptions' => ['data-method' => 'post']],
-												],
-											]);
-											NavBar::end();
-										?>
-									</div>
+								</div>
 							</div>
 						</div>
-							<!-- BODY CONTENT -->
+						<!-- BODY CONTENT -->
 						<div class="container-fluid">
 							<div class="row">
 								<div class="section">
