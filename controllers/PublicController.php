@@ -14,7 +14,7 @@ class PublicController extends CController {
 	public $defaultAction = "index";
 
 	public function actionError() {
-		error_log("Erro pub", 4);
+		error_log("Error public", 4);
 		die();
 	}
 
@@ -23,7 +23,7 @@ class PublicController extends CController {
 	}
 
 	public function actionCategory($category_id, $slug) {
-		var_dump("adalshdajsdh");
+		var_dump("public / category");
 		die();
 	}
 
