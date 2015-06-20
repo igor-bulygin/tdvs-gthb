@@ -5,6 +5,9 @@
 html,body {
 	height:100%;
 }
+.row .bodycontainer{
+	padding-top: 70px;
+}
 
 .container-fluid {
 	min-height:100%;
@@ -50,9 +53,16 @@ html,body {
 	color:#d7d7d7;
 	text-align:center;
 }
+.fixed{
+	position:fixed;
+	width: 100%;
+}
+
 
 .navbar-left{
 	background-color:#1c1919;
+	width:inherit;
+	height: 100%;
 }
 
 .navbar-left .list-group-item {
