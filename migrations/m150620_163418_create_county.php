@@ -9,6 +9,9 @@ class m150620_163418_create_county extends \yii\mongodb\Migration {
 		$this->createIndex('country', 'short_id', [
 			'unique' => true
 		]);
+		$this->createIndex('size_chart', 'country_code', [
+			'unique' => true
+		]);
 		$this->createIndex('country', 'continent');
 		$this->createIndex('country', 'currency_code');
 		$this->createIndex('country', 'country_code');
