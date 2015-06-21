@@ -29,15 +29,13 @@ html, body {
 /**** TOP MENU ****/
 
 .navbar-inverse {
-	background-color: #DCDCDC;
+	background-color: #dcdcdc;
 	border-color: #dfdfdf;
-
-
 }
+
 .navbar{
 	margin-bottom: 0;
 	border-radius: 0;
-
 }
 
 
@@ -49,7 +47,7 @@ html, body {
 }
 
 .navbar-left .logo{
-	color: #DF0D13;
+	color: #df0d13;
 	font-size: 2.3em;
 	text-align: center;
 	padding: 22px 0 12px 0;
@@ -63,7 +61,7 @@ html, body {
 }
 
 .navbar-left .list-group-item {
-	color: #FFF;
+	color: #fff;
 	position: relative;
 	display: block;
 	padding: 10px 14px;
