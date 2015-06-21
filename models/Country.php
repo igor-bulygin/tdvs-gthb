@@ -20,7 +20,6 @@ class Country extends CActiveRecord {
 	public function attributes() {
 		return [
 			'_id',
-			'short_id',
 			'country_code',
 			'country_name',
 			'currency_code',

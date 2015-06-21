@@ -6,9 +6,6 @@ use app\models\Country;
 class m150620_163418_create_county extends \yii\mongodb\Migration {
 	public function up() {
 		$this->createCollection('country');
-		$this->createIndex('country', 'short_id', [
-			'unique' => true
-		]);
 		$this->createIndex('size_chart', 'country_code', [
 			'unique' => true
 		]);
@@ -24,9 +21,9 @@ class m150620_163418_create_county extends \yii\mongodb\Migration {
 			$data = Utils::underscoreKeys($country);
 
 			/* @var $country \app\models\Country */
-			$country = Country::findOne(["short_id" => (new Country())->genValidID(5)]);
+			$country = new Country();
 			$country->setAttributes($data, false);
-			$country->update();
+			$country->save(false);
 		}
 	}
 
