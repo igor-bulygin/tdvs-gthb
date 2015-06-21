@@ -27,7 +27,7 @@ use lajax\languagepicker\widgets\LanguagePicker;
 				<div class="row no-gutter max-height">
 
 					<!-- NAVBAR LEFT -->
-					<div class="col-lg-1-5 col-md-1-5 flex">
+					<div class="col-xs-1-5 flex">
 						<div class="navbar-left funiv_ultra fs1 flex-prop-1">
 							<ul class="list-group">
 								<li class="logo fpf_bold">todevise<br/><span class="fpf_i">A new concept of store</span></li>
@@ -41,7 +41,7 @@ use lajax\languagepicker\widgets\LanguagePicker;
 					</div>
 
 					<!-- CONTENT TOP MENU / BODY / FOOTER -->
-					<div class="col-lg-10-5 col-md-10-5">
+					<div class="col-xs-10-5">
 
 						<div class="wrapper flex flex-column">
 							<div class="header">
