@@ -1,7 +1,7 @@
 html,
 body {
 	height: 100%;
-	font-size:14px;
+	font-size: 14px;
 }
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
@@ -35,6 +35,19 @@ body {
 	display: -webkit-flex;
 	display: -ms-flexbox;
 	display: flex;
+}
+
+.flex-column{
+	-webkit-flex-direction: column;
+		-ms-flex-direction: column;
+			flex-direction: column;
+}
+
+.flex-prop-1{
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+		-ms-flex: 1;
+			flex: 1;
 }
 
 /**** FONTS ****/
@@ -83,66 +96,66 @@ body {
 /**** FONT SIZES ****/
 
 .fs0-714{
-	font-size:0.714em;
+	font-size: 0.714em;
 }
 
 .fs0-786{
-	font-size:0.786em;
+	font-size: 0.786em;
 }
 
 .fs0-857{
-	font-size:0.857em;
+	font-size: 0.857em;
 }
 
 .fs0-929{
-	font-size:0.929em;
+	font-size: 0.929em;
 }
 
 .fs1{
-	font-size:1em;
+	font-size: 1em;
 }
 
 .fs1-071{
-	font-size:1.071em;
+	font-size: 1.071em;
 }
 
 .fs1-143{
-	font-size:1.143em;
+	font-size: 1.143em;
 }
 
 .fs1-214{
-	font-size:1.214em;
+	font-size: 1.214em;
 }
 
 .fs1-286{
-	font-size:1.286em;
+	font-size: 1.286em;
 }
 
 .fs1-357{
-	font-size:1.357em;
+	font-size: 1.357em;
 }
 
 .fs1-429{
-	font-size:1.429em;
+	font-size: 1.429em;
 }
 
 .fs1-500{
-	font-size:1.5em;
+	font-size: 1.5em;
 }
 
 .fs1-571{
-	font-size:1.571em;
+	font-size: 1.571em;
 }
 
 .fs1-643{
-	font-size:1.643em;
+	font-size: 1.643em;
 }
 
 .fs1-714{
-	font-size:1.714em;
+	font-size: 1.714em;
 }
 
 .fs1-786{
-	font-size:1.786em;
+	font-size: 1.786em;
 }
 /********/

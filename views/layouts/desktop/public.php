@@ -28,7 +28,7 @@ use lajax\languagepicker\widgets\LanguagePicker;
 
 					<!-- NAVBAR LEFT -->
 					<div class="col-lg-1-5 col-md-1-5 flex">
-						<div class="navbar-left funiv_ultra fs1">
+						<div class="navbar-left funiv_ultra fs1 flex-prop-1">
 							<ul class="list-group">
 								<li class="logo fpf_bold">todevise<br/><span class="fpf_i">A new concept of store</span></li>
 								<li class="list-group-item">Art</li>
@@ -43,7 +43,7 @@ use lajax\languagepicker\widgets\LanguagePicker;
 					<!-- CONTENT TOP MENU / BODY / FOOTER -->
 					<div class="col-lg-10-5 col-md-10-5">
 
-						<div class="wrapper flex">
+						<div class="wrapper flex flex-column">
 							<div class="header">
 
 								<?php
@@ -72,7 +72,7 @@ use lajax\languagepicker\widgets\LanguagePicker;
 								?>
 
 							</div>
-							<div class="content flex">
+							<div class="content flex flex-column flex-prop-1">
 								<div class="main">
 									<p>
 										Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus tincidunt sagittis felis, sit amet cursus massa lobortis nec. Nunc vel enim dui. Aenean congue vestibulum elit rutrum dictum. In dignissim est nunc, quis suscipit libero pretium ut. Integer velit nulla, aliquet vel fringilla et, dignissim eu leo. Ut mattis ullamcorper purus in vulputate. Etiam iaculis pretium ligula. Proin at neque at sapien ullamcorper accumsan ac nec est. Vivamus metus nisi, ullamcorper ac lectus at, feugiat tempus libero. Aliquam convallis libero id nunc rhoncus condimentum nec quis tortor. Morbi rhoncus iaculis viverra.
