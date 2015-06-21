@@ -28,16 +28,38 @@ html, body {
 
 /**** TOP MENU ****/
 
-.navbar-inverse {
+.container-menutop{
 	background-color: #dcdcdc;
-	border-color: #dfdfdf;
 }
 
-.navbar{
+.menutop{
+	flex-direction: row;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.item-menutop{
+	flex: 1 0 auto;
+	border-left: 1px solid #e5e5e5;
+	border-right: 1px solid #e5e5e5;
+	text-align: center;
+	letter-spacing: 0.07em;
+}
+
+.fg3{
+	flex-grow: 3;
+}
+
+.header .navbar-inverse{
+	border: none;
+}
+.header .navbar{
 	margin-bottom: 0;
-	border-radius: 0;
 }
-
+.header .container-fluid, .header .navbar-collapse{
+	padding-left: 0;
+	padding-right: 0;
+}
 
 /**** NAVBAR - LEFT ****/
 
@@ -84,7 +106,6 @@ html, body {
 	background: -ms-linear-gradient(left,  rgba(58,54,54,1) 0%,rgba(28,25,25,1) 100%,rgba(28,25,25,1) 100%); /* IE10+ */
 	background: linear-gradient(to right,  rgba(58,54,54,1) 0%,rgba(28,25,25,1) 100%,rgba(28,25,25,1) 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3a3636', endColorstr='#1c1919',GradientType=1 ); /* IE6-9 */
-
 }
 .navbar-left .list-group-item:first-child{
 	border-top-left-radius: 0;

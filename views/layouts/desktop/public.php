@@ -53,16 +53,22 @@ use lajax\languagepicker\widgets\LanguagePicker;
 										'options' => [
 											'class' => 'navbar-inverse',
 										],
+										'innerContainerOptions' => [
+											'class' => 'container-fluid container-menutop'
+										]
 									]);
 
 									echo Nav::widget([
-										'options' => ['class' => 'navbar-nav'],
+										'options' => ['class' => 'navbar-nav flex menutop funiv_ultra fs1'],
 										'items' => [
-											['label' => 'Home', 'url' => ['/site/index']],
-											['label' => 'About', 'url' => ['/site/about']],
-											['label' => 'Contact', 'url' => ['/site/contact']],
+											['label' => 'FIND THE PERFECT GIFT', 'url' => ['/site/index'], "options" => ["class" => "item-menutop"]],
+											['label' => 'DISCOVER TRENDS', 'url' => ['/site/about'], "options" => ["class" => "item-menutop"]],
+											['label' => 'DISCOVER TRENDS', 'url' => ['/site/contact'], "options" => ["class" => "item-menutop"]],
+											['label' => 'CAJA DE BÚSQUEDA', "options" => ["class" => "item-menutop fg3"]],
+											['label' => 'IMG', "options" => ["class" => "item-menutop"]],
+											['label' => 'TODEVISE', "options" => ["class" => "item-menutop fpf_bold fs0-786"]],
 											Yii::$app->user->isGuest ?
-												['label' => 'Login', 'url' => ['/site/login']] :
+												['label' => 'LOGIN', 'url' => ['/site/login'], "options" => ["class" => "item-menutop"]] :
 												['label' => 'Logout (' . Yii::$app->user->identity->personal_info["name"] . ')',
 													'url' => ['/site/logout'],
 													'linkOptions' => ['data-method' => 'post']],
