@@ -34,7 +34,7 @@ use lajax\languagepicker\widgets\LanguagePicker;
 
 			<div class="row no-gutter max-height">
 
-				<div class="col-lg-2 max-height">
+				<div class="col-xs-2 max-height">
 
 					<?php
 
@@ -236,7 +236,7 @@ use lajax\languagepicker\widgets\LanguagePicker;
 
 				</div>
 
-				<div class="col-lg-10">
+				<div class="col-xs-10">
 					<?php
 
 						NavBar::begin([
