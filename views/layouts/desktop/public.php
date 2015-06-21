@@ -61,14 +61,14 @@ use lajax\languagepicker\widgets\LanguagePicker;
 									echo Nav::widget([
 										'options' => ['class' => 'navbar-nav flex menutop funiv_ultra fs1'],
 										'items' => [
-											['label' => 'FIND THE PERFECT GIFT', 'url' => ['/site/index'], "options" => ["class" => "item-menutop"]],
-											['label' => 'DISCOVER TRENDS', 'url' => ['/site/about'], "options" => ["class" => "item-menutop"]],
-											['label' => 'DISCOVER TRENDS', 'url' => ['/site/contact'], "options" => ["class" => "item-menutop"]],
-											['label' => 'CAJA DE BÚSQUEDA', "options" => ["class" => "item-menutop fg3"]],
-											['label' => 'IMG', "options" => ["class" => "item-menutop"]],
-											['label' => 'TODEVISE', "options" => ["class" => "item-menutop fpf_bold fs0-786"]],
+											['label' => 'FIND THE PERFECT GIFT', 'url' => ['/site/index'], "options" => ["class" => "item-menutop flex-prop-1-0"]],
+											['label' => 'DISCOVER TRENDS', 'url' => ['/site/about'], "options" => ["class" => "item-menutop flex-prop-1-0"]],
+											['label' => 'DISCOVER TRENDS', 'url' => ['/site/contact'], "options" => ["class" => "item-menutop flex-prop-1-0"]],
+											['label' => 'CAJA DE BÚSQUEDA', "options" => ["class" => "item-menutop flex-prop-1-0 flex-grow-3"]],
+											['label' => 'IMG', "options" => ["class" => "item-menutop flex-prop-1-0"]],
+											['label' => 'TODEVISE', "options" => ["class" => "item-menutop flex-prop-1-0 fpf_bold fs0-786"]],
 											Yii::$app->user->isGuest ?
-												['label' => 'LOGIN', 'url' => ['/site/login'], "options" => ["class" => "item-menutop"]] :
+												['label' => 'LOGIN', 'url' => ['/site/login'], "options" => ["class" => "item-menutop flex-prop-1-0"]] :
 												['label' => 'Logout (' . Yii::$app->user->identity->personal_info["name"] . ')',
 													'url' => ['/site/logout'],
 													'linkOptions' => ['data-method' => 'post']],

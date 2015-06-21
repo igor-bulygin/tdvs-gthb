@@ -39,14 +39,13 @@ html, body {
 }
 
 .item-menutop{
-	flex: 1 0 auto;
 	border-left: 1px solid #e5e5e5;
 	border-right: 1px solid #e5e5e5;
 	text-align: center;
 	letter-spacing: 0.07em;
 }
 
-.fg3{
+.flex-grow-3{
 	flex-grow: 3;
 }
 
