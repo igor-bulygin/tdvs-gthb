@@ -27,8 +27,8 @@ use lajax\languagepicker\widgets\LanguagePicker;
 				<div class="row no-gutter max-height">
 
 					<!-- NAVBAR LEFT -->
-					<div class="col-lg-1-5 col-md-1-5">
-						<div class="navbar-left funit_ultra fs1">
+					<div class="col-lg-1-5 col-md-1-5 colflex-left">
+						<div class="navbar-left funiv_ultra fs1">
 							<ul class="list-group">
 								<li class="logo fpf_bold">todevise<br/><span class="fpf_i">A new concept of store</span></li>
 								<li class="list-group-item">Art</li>
