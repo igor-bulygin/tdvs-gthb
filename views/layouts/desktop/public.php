@@ -28,9 +28,9 @@ use lajax\languagepicker\widgets\LanguagePicker;
 
 					<!-- NAVBAR LEFT -->
 					<div class="col-lg-1-5 col-md-1-5">
-						<div class="navbar-left fixed funiv_ltpro_ultracn fs1">
+						<div class="navbar-left funit_ultra fs1">
 							<ul class="list-group">
-								<li class="logo fplayfair_displaybold">todevise<br/><span class="fplayfair_displayitalic">A new concept of store</span></li>
+								<li class="logo fpf_bold">todevise<br/><span class="fpf_i">A new concept of store</span></li>
 								<li class="list-group-item">Art</li>
 								<li class="list-group-item">Fashion</li>
 								<li class="list-group-item">Industrial Design</li>
@@ -122,7 +122,6 @@ use lajax\languagepicker\widgets\LanguagePicker;
 							</div>
 
 						</div>
-
 
 					</div>
 

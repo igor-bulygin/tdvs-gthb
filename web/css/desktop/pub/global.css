@@ -59,7 +59,7 @@ html, body {
 
 /**** NAVBAR - LEFT ****/
 
-.logo{
+.navbar-left .logo{
 	color:#DF0D13;
 	font-size:2.3em;
 	text-align:center;
@@ -67,16 +67,11 @@ html, body {
 	line-height:0.5em;
 }
 
-.logo span{
+.navbar-left .logo span{
 	font-size:0.30em;
 	color:#d7d7d7;
 	text-align:center;
 }
-.fixed{
-	position:fixed;
-	width: 100%;
-}
-
 
 .navbar-left{
 	background-color:#1c1919;

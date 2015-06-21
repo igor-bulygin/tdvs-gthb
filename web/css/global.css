@@ -31,43 +31,43 @@ body {
 }
 /**** FONTS ****/
 
-.funiv_ltpro_condensed{
+.funiv{
 	font-family: 'UniversLTPro-Condensed';
 }
 
-.funiv_ltpro_ultracn{
+.funit_ultra{
 	font-family: 'UniversLTPro-UltraCn';
 }
 
-.funiv_lts_thinultracn{
+.funiv_thin{
 	font-family: 'UniversLTStd-ThinUltraCn';
 }
 
-.funiv_ltpro_boldcond{
+.funiv_bold{
 	font-family: 'UniversLTPro-BoldCond';
 }
 
-.fplayfair_displayblack{
+.fpf_black{
 	font-family: 'playfair_displayblack';
 }
 
-.fplayfair_displayblack_italic{
+.fpf_blacki{
 	font-family: 'playfair_displayblack_italic';
 }
 
-.fplayfair_displaybold{
+.fpf_bold{
 	font-family: 'playfair_displaybold';
 }
 
-.fplayfair_displaybold_italic{
+.fpf_boldi{
 	font-family: 'playfair_displaybold_italic';
 }
 
-.fplayfair_displayitalic{
+.fpf_i{
 	font-family: 'playfair_displayitalic';
 }
 
-.fplayfair_displayregular{
+.fpf{
 	font-family: 'playfair_displayregular';
 }
 
