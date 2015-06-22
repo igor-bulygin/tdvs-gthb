@@ -217,6 +217,7 @@ $this->title = 'Todevise / Admin / Tag';
 					</div>
 					<div class="col-md-1 col-lg-1 col-height col-middle text-center">
 						<span class="glyphicon glyphicon-trash pointer" ng-click="delete_option($index)"></span>
+						<!-- TODO: Show the metric unit and the type? -->
 					</div>
 				</div>
 			</div>
