@@ -2,7 +2,8 @@
 use yii\web\View;
 use app\models\Tag;
 use yii\helpers\Json;
-use app\models\Option;
+use app\models\TagOption;
+use app\models\MetricUnit;
 use app\assets\desktop\admin\TagAsset;
 
 /* @var $this yii\web\View */
@@ -25,9 +26,9 @@ $this->title = 'Todevise / Admin / Tag';
 		<?php $this->registerJs("var _categories = " . Json::encode($categories) . ";", View::POS_HEAD); ?>
 		<?php $this->registerJs("var _tag = " . Json::encode($tag) . ";", View::POS_HEAD); ?>
 		<?php $this->registerJs("var _mus = " . Json::encode([
-				["value" => Option::TYPE_MU_NONE, "text" => "None", "checked" => true],
-				["value" => Option::TYPE_MU_SIZE, "text" => "Size"],
-				["value" => Option::TYPE_MU_WEIGHT, "text" => "Weight"]
+				["value" => MetricUnit::NONE, "text" => "None", "checked" => true],
+				["value" => MetricUnit::SIZE, "text" => "Size"],
+				["value" => MetricUnit::WEIGHT, "text" => "Weight"]
 			]) . ";", View::POS_HEAD); ?>
 
 		<div class="row">
@@ -107,11 +108,11 @@ $this->title = 'Todevise / Admin / Tag';
 						<div class="col-md-6 col-lg-6 col-height col-middle">
 							<div class="radio flex-justify-center">
 								<label>
-									<input type="radio" name="tagType" id="tagType1" value="<?php echo Tag::TYPE_DROPDOWN; ?>" ng-model="tag.type">
+									<input type="radio" name="tagType" id="tagType1" value="<?php echo Tag::DROPDOWN; ?>" ng-model="tag.type">
 									<?php echo Yii::t("app/admin", "With options"); ?>
 								</label>
 								<label>
-									<input type="radio" name="tagType" id="tagType2" value="<?php echo Tag::TYPE_FREETEXT; ?>" ng-model="tag.type">
+									<input type="radio" name="tagType" id="tagType2" value="<?php echo Tag::FREETEXT; ?>" ng-model="tag.type">
 									<?php echo Yii::t("app/admin", "Free field"); ?>
 								</label>
 							</div>
@@ -123,7 +124,7 @@ $this->title = 'Todevise / Admin / Tag';
 
 		<br />
 
-		<div class="ng-cloak" ng-show="tag.type == <?php echo Tag::TYPE_DROPDOWN; ?> && pending_dialog_type === false">
+		<div class="ng-cloak" ng-show="tag.type == <?php echo Tag::DROPDOWN; ?> && pending_dialog_type === false">
 			<div class="row">
 				<div class="row-same-height">
 					<div class="col-md-4 col-lg-4 col-height col-middle">
@@ -166,7 +167,7 @@ $this->title = 'Todevise / Admin / Tag';
 			</div>
 		</div>
 
-		<div class="ng-cloak" ng-show="tag.type == <?php echo Tag::TYPE_FREETEXT; ?> && pending_dialog_type === false">
+		<div class="ng-cloak" ng-show="tag.type == <?php echo Tag::FREETEXT; ?> && pending_dialog_type === false">
 			<div class="row">
 				<div class="row-same-height" ng-init="new_option = {}">
 					<div class="col-md-4 col-lg-4 col-height col-middle">
@@ -189,13 +190,13 @@ $this->title = 'Todevise / Admin / Tag';
 					</div>
 
 					<div class="col-md-3 col-lg-3 col-height col-middle">
-						<div class="radio flex-justify-center" ng-init="freetext_type = <?php echo Option::TYPE_NUMERIC; ?>">
+						<div class="radio flex-justify-center" ng-init="freetext_type = <?php echo TagOption::NUMERIC; ?>">
 							<label>
-								<input type="radio" name="optionsType" id="optionsType1" value="<?php echo Option::TYPE_NUMERIC; ?>" ng-model="freetext_type">
+								<input type="radio" name="optionsType" id="optionsType1" value="<?php echo TagOption::NUMERIC; ?>" ng-model="freetext_type">
 								<?php echo Yii::t("app/admin", "Numeric"); ?>
 							</label>
 							<label>
-								<input type="radio" name="optionsType" id="optionsType2" value="<?php echo Option::TYPE_ALPHANUMERIC; ?>" ng-model="freetext_type">
+								<input type="radio" name="optionsType" id="optionsType2" value="<?php echo TagOption::ALPHANUMERIC; ?>" ng-model="freetext_type">
 								<?php echo Yii::t("app/admin", "Alphanumeric"); ?>
 							</label>
 						</div>
@@ -234,7 +235,8 @@ $this->title = 'Todevise / Admin / Tag';
 			<label><?php echo Yii::t("app/admin", "Title"); ?></label>
 			<div class="input-group" ng-repeat="(lang_k, lang_v) in data.langs">
 				<span class="input-group-addon" id="basic-addon-{{ $index }}">{{ lang_v }}</span>
-				<input required="" type="text" class="form-control" placeholder="<?php echo Yii::t("app/admin", "Option name..."); ?>" aria-describedby="basic-addon-{{ $index }}" ng-model="data.option.text[lang_k]" name="{{ lang_k }}">
+				<input required="" type="text" class="form-control" placeholder="<?php echo Yii::t("app/admin", "Option name..."); ?>"
+				       aria-describedby="basic-addon-{{ $index }}" ng-model="data.option.text[lang_k]" name="{{ lang_k }}">
 				<span class="input-group-addon alert-danger" ng-show="form.$submitted && !form.$valid && !form['{{lang_k}}'].$valid">
 					<span ng-show="form['{{lang_k}}'].$error.required"><?php echo Yii::t("app/admin", "Required!"); ?></span>
 				</span>
@@ -243,7 +245,9 @@ $this->title = 'Todevise / Admin / Tag';
 
 			<label><?php echo Yii::t("app/admin", "Value"); ?></label>
 			<div class="input-group">
-				<input id="value" required="" ui-validate="'(data.options | filter:{value:$value}:true).length == 0'" ui-validate-watch="'data.option.value'" type="text" class="form-control" placeholder="<?php echo Yii::t("app/admin", "Value..."); ?>" aria-describedby="basic-addon-desc" ng-model="data.option.value" name="value">
+				<input id="value" required="" ui-validate="'(data.options | filter:{value:$value}:true).length == 0'"
+				       ui-validate-watch="'data.option.value'" type="text" class="form-control" placeholder="<?php echo Yii::t("app/admin", "Value..."); ?>"
+				       aria-describedby="basic-addon-desc" ng-model="data.option.value" name="value">
 				<span class="input-group-addon alert-danger" id="basic-addon-value" ng-show="form.$submitted && !form.$valid && !form['value'].$valid">
 					<span ng-show="form['value'].$error.required"><?php echo Yii::t("app/admin", "Required!"); ?></span>
 					<span ng-show="!form['value'].$error.required && form['value'].$error.validator"><?php echo Yii::t("app/admin", "Duplicated value!"); ?></span>

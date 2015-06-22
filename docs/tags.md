@@ -10,9 +10,9 @@ This is how a single tag looks like:
 
 	enabled: true,
 	required: true,
-	type: 0, // Check the constants TYPE_* in Tag model for all the valid values
+	type: 0, // Check the constants in Tag model for all the valid values
 	         // for this
-	n_options: 1 // Exists only of type is TYPE_DROPDOWN
+	n_options: 1 // Exists only of type is DROPDOWN
 	             //The number of options that can be assigned to a product
 
 	name: {
@@ -33,7 +33,7 @@ This is how a single tag looks like:
 
 	// This holds the options for each tag. Let me clarify what an "option" is. An
 	// option is one particular value in a tag. Let's say we have a "Color" tag
-	// (TYPE_DROPDOWN). Each option in that tag would look like this:
+	// (DROPDOWN). Each option in that tag would look like this:
 	//
 	// {
 	//     text: {
@@ -44,17 +44,17 @@ This is how a single tag looks like:
 	//     value: '79de2' // 5 alphanumeric chars long ID
 	// }
 	//
-	// Now, let's say we have a "Weight" tag (TYPE_FREETEXT). Each option of that
-	// tag would look the same way as the options from the "Color" (TYPE_DROPDOWN)
+	// Now, let's say we have a "Weight" tag (FREETEXT). Each option of that
+	// tag would look the same way as the options from the "Color" (DROPDOWN)
 	// example, with the following exceptions:
 	//
 	// * "value" won't exist.
 	//
 	// * A key called "metric_units" will be created. Check the constants
-	// TYPE_MU_* in Option model for all the valid values for this.
+	// in MetricUnit model for all the valid values for this.
 	//
-	// * A key called "type" will be created. Check the constants TYPE_* in
-	// Option model for all the valid values for this.
+	// * A key called "type" will be created. Check the constants in
+	// TagOption model for all the valid values for this.
 	//
 	// Example:
 	//
@@ -63,7 +63,7 @@ This is how a single tag looks like:
 	//         "en-US": "Wide",
 	//         "es-ES": "Ancho",
 	//     },
-	//     type: 0, // Check the constants TYPE_* in Option model for all the
+	//     type: 0, // Check the constants in TagOption model for all the
 	//              // valid values for this.
 	//
 	//     metric_units: 1
