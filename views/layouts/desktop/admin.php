@@ -27,282 +27,284 @@ use lajax\languagepicker\widgets\LanguagePicker;
 		<?php $this->registerJs("var _langs = " . Json::encode(Utils::availableLangs()) . ";", View::POS_HEAD) ?>
 	</head>
 	<body>
-
 	<?php $this->beginBody() ?>
-
 		<div class="container-fluid no-horizontal-padding max-height">
-
 			<div class="row no-gutter max-height">
 
-				<div class="col-xs-2 max-height">
+				<!-- NAVBAR LEFT -->
+				<div class="col-xs-1-5 flex">
+					<div class="ad-navbar-left funiv_ultra fs1 flex-prop-1">
+						<?php
 
-					<?php
-
-					echo SideNav::widget([
-						'type' => SideNav::TYPE_DEFAULT,
-						'heading' => 'Todevise',
-						'indItem' => '',
-						'indMenuOpen' => '˄',
-						'indMenuClose' => '˅',
-						'containerOptions' => [
-							'class' => 'max-height no-vertical-margin'
-						],
-						'items' => [
-							[
-								'label' => 'Users',
-								'items' =>  [
-									[
-										'label' => 'Devisers',
-										'url' => Url::toRoute(['admin/devisers']),
-										'active' => (
-											Utils::compareURL('admin/devisers') ||
-											Utils::compareURL('admin/deviser')
-										)
-									],
-									[
-										'label' => 'Customers',
-										'url' => Url::toRoute(['admin/customers']),
-										'active' => (
-											Utils::compareURL('admin/customers') ||
-											Utils::compareURL('admin/customer')
-										)
-									],
-									[
-										'label' => 'Collaborators',
-										'url' => Url::toRoute(['admin/collaborators']),
-										'active' => (
-											Utils::compareURL('admin/collaborators') ||
-											Utils::compareURL('admin/collaborator')
-										)
-									],
-									[
-										'label' => 'Todevise team',
-										'url' => Url::toRoute(['admin/todevise-team']),
-										'active' => (
-											Utils::compareURL('admin/todevise-team') ||
-											Utils::compareURL('admin/todevise-team-member')
-										)
-									],
-								]
-							],
-							[
-								'label' => 'Orders',
+							echo SideNav::widget([
+								'type' => SideNav::TYPE_DEFAULT,
+								'heading' => '<font class="fpf_bold">Todevise</font><br><span class="funiv_ultra fs0-414">ADMINISTRATION</span>',
+								'indItem' => '',
+								'indMenuOpen' => '˄',
+								'indMenuClose' => '˅',
+								'containerOptions' => [
+									'class' => 'max-height no-vertical-margin'
+								],
 								'items' => [
 									[
-										'label' => 'Sales',
-										'url' => Url::toRoute(['admin/sales']),
-										'active' => (
-											Utils::compareURL('admin/sales') ||
-											Utils::compareURL('admin/sale')
-										)
+										'label' => 'Users',
+										'items' =>  [
+											[
+												'label' => 'Devisers',
+												'url' => Url::toRoute(['admin/devisers']),
+												'active' => (
+													Utils::compareURL('admin/devisers') ||
+													Utils::compareURL('admin/deviser')
+												)
+											],
+											[
+												'label' => 'Customers',
+												'url' => Url::toRoute(['admin/customers']),
+												'active' => (
+													Utils::compareURL('admin/customers') ||
+													Utils::compareURL('admin/customer')
+												)
+											],
+											[
+												'label' => 'Collaborators',
+												'url' => Url::toRoute(['admin/collaborators']),
+												'active' => (
+													Utils::compareURL('admin/collaborators') ||
+													Utils::compareURL('admin/collaborator')
+												)
+											],
+											[
+												'label' => 'Todevise team',
+												'url' => Url::toRoute(['admin/todevise-team']),
+												'active' => (
+													Utils::compareURL('admin/todevise-team') ||
+													Utils::compareURL('admin/todevise-team-member')
+												)
+											],
+										]
 									],
 									[
-										'label' => 'Returns',
-										'url' => Url::toRoute(['admin/returns']),
-										'active' => (
-											Utils::compareURL('admin/returns') ||
-											Utils::compareURL('admin/return')
-										)
+										'label' => 'Orders',
+										'items' => [
+											[
+												'label' => 'Sales',
+												'url' => Url::toRoute(['admin/sales']),
+												'active' => (
+													Utils::compareURL('admin/sales') ||
+													Utils::compareURL('admin/sale')
+												)
+											],
+											[
+												'label' => 'Returns',
+												'url' => Url::toRoute(['admin/returns']),
+												'active' => (
+													Utils::compareURL('admin/returns') ||
+													Utils::compareURL('admin/return')
+												)
+											],
+											[
+												'label' => 'Warranties',
+												'url' => Url::toRoute(['admin/warranties']),
+												'active' => (
+													Utils::compareURL('admin/warranties') ||
+													Utils::compareURL('admin/warranty')
+												)
+											]
+										],
 									],
 									[
-										'label' => 'Warranties',
-										'url' => Url::toRoute(['admin/warranties']),
-										'active' => (
-											Utils::compareURL('admin/warranties') ||
-											Utils::compareURL('admin/warranty')
-										)
+										'label' => 'Settings',
+										'items' => [
+											 [
+												'label' => 'Tags',
+												'url'=> Url::toRoute(['admin/tags']),
+												'active' => (
+												Utils::compareURL('admin/tags')
+												)
+											],
+											[
+												'label' => 'Size charts',
+												'url'=> Url::toRoute(['admin/size-charts']),
+												'active' => (
+													Utils::compareURL('admin/size-charts')
+												)
+											],
+											[
+												'label' => 'Categories',
+												'url'=> Url::toRoute(['admin/categories']),
+												'active' => (
+													Utils::compareURL('admin/categories')
+												)
+											],
+											[
+												'label' => 'Banners',
+												'url'=> Url::toRoute(['admin/banners']),
+												'active' => (
+													Utils::compareURL('admin/banners')
+												)
+											],
+											[
+												'label' => 'Shipping methods',
+												'url'=> Url::toRoute(['admin/shipping-methods']),
+												'active' => (
+													Utils::compareURL('admin/shipping-methods')
+												)
+											],
+											[
+												'label' => 'Currencies',
+												'url'=> Url::toRoute(['admin/currencies']),
+												'active' => (
+													Utils::compareURL('admin/currencies')
+												)
+											],
+											[
+												'label' => 'General settings',
+												'url'=> Url::toRoute(['admin/general-settings']),
+												'active' => (
+													Utils::compareURL('admin/general-settings')
+												)
+											],
+										],
+									],
+									[
+										'label' => 'Content management',
+										'items' => [
+											[
+												'label' => 'Emails',
+												'url'=> Url::toRoute(['admin/emails']),
+												'active' => (
+													Utils::compareURL('admin/emails')
+												)
+											],
+											[
+												'label' => 'SMS',
+												'url'=> Url::toRoute(['admin/sms']),
+												'active' => (
+													Utils::compareURL('admin/sms')
+												)
+											],
+											[
+												'label' => 'FAQ',
+												'url'=> Url::toRoute(['admin/faq']),
+												'active' => (
+													Utils::compareURL('admin/faq')
+												)
+											],
+											[
+												'label' => 'Newsletter',
+												'url'=> Url::toRoute(['admin/newsletter']),
+												'active' => (
+													Utils::compareURL('admin/newsletter')
+												)
+											],
+											[
+												'label' => 'Homepage categories',
+												'url'=> Url::toRoute(['admin/homepage-categories']),
+												'active' => (
+													Utils::compareURL('admin/homepage-categories')
+												)
+											],
+											[
+												'label' => 'About',
+												'url'=> Url::toRoute(['admin/about']),
+												'active' => (
+													Utils::compareURL('admin/about')
+												)
+											],
+											[
+												'label' => 'Contact',
+												'url'=> Url::toRoute(['admin/contact']),
+												'active' => (
+													Utils::compareURL('admin/contact')
+												)
+											],
+											[
+												'label' => 'Terms & conditions',
+												'url'=> Url::toRoute(['admin/toc']),
+												'active' => (
+													Utils::compareURL('admin/toc')
+												)
+											],
+										],
 									]
 								],
-							],
-							[
-								'label' => 'Settings',
-								'items' => [
-									 [
-										'label' => 'Tags',
-										'url'=> Url::toRoute(['admin/tags']),
-										'active' => (
-										Utils::compareURL('admin/tags')
-										)
-									],
-									[
-										'label' => 'Size charts',
-										'url'=> Url::toRoute(['admin/size-charts']),
-										'active' => (
-											Utils::compareURL('admin/size-charts')
-										)
-									],
-									[
-										'label' => 'Categories',
-										'url'=> Url::toRoute(['admin/categories']),
-										'active' => (
-											Utils::compareURL('admin/categories')
-										)
-									],
-									[
-										'label' => 'Banners',
-										'url'=> Url::toRoute(['admin/banners']),
-										'active' => (
-											Utils::compareURL('admin/banners')
-										)
-									],
-									[
-										'label' => 'Shipping methods',
-										'url'=> Url::toRoute(['admin/shipping-methods']),
-										'active' => (
-											Utils::compareURL('admin/shipping-methods')
-										)
-									],
-									[
-										'label' => 'Currencies',
-										'url'=> Url::toRoute(['admin/currencies']),
-										'active' => (
-											Utils::compareURL('admin/currencies')
-										)
-									],
-									[
-										'label' => 'General settings',
-										'url'=> Url::toRoute(['admin/general-settings']),
-										'active' => (
-											Utils::compareURL('admin/general-settings')
-										)
-									],
-								],
-							],
-							[
-								'label' => 'Content management',
-								'items' => [
-									[
-										'label' => 'Emails',
-										'url'=> Url::toRoute(['admin/emails']),
-										'active' => (
-											Utils::compareURL('admin/emails')
-										)
-									],
-									[
-										'label' => 'SMS',
-										'url'=> Url::toRoute(['admin/sms']),
-										'active' => (
-											Utils::compareURL('admin/sms')
-										)
-									],
-									[
-										'label' => 'FAQ',
-										'url'=> Url::toRoute(['admin/faq']),
-										'active' => (
-											Utils::compareURL('admin/faq')
-										)
-									],
-									[
-										'label' => 'Newsletter',
-										'url'=> Url::toRoute(['admin/newsletter']),
-										'active' => (
-											Utils::compareURL('admin/newsletter')
-										)
-									],
-									[
-										'label' => 'Homepage categories',
-										'url'=> Url::toRoute(['admin/homepage-categories']),
-										'active' => (
-											Utils::compareURL('admin/homepage-categories')
-										)
-									],
-									[
-										'label' => 'About',
-										'url'=> Url::toRoute(['admin/about']),
-										'active' => (
-											Utils::compareURL('admin/about')
-										)
-									],
-									[
-										'label' => 'Contact',
-										'url'=> Url::toRoute(['admin/contact']),
-										'active' => (
-											Utils::compareURL('admin/contact')
-										)
-									],
-									[
-										'label' => 'Terms & conditions',
-										'url'=> Url::toRoute(['admin/toc']),
-										'active' => (
-											Utils::compareURL('admin/toc')
-										)
-									],
-								],
-							]
-						],
-					]);
+							]);
 
-					?>
-
-				</div>
-
-				<div class="col-xs-10">
-					<?php
-
-						NavBar::begin([
-							'options' => [
-								'class' => 'navbar-inverse no-vertical-margin',
-							],
-							'containerOptions' => [
-								'class' => ['widget' => 'no-horizontal-padding navbar-content']
-							],
-							'innerContainerOptions' => [
-								'class' => 'container-fluid no-horizontal-padding'
-							]
-						]);
-
-						echo Breadcrumbs::widget([
-							'homeLink' => [
-								'label' => 'Admin home',
-								'url' => ["/admin"]
-							],
-							'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-							'options' => [
-								'class' => 'breadcrumb no-vertical-margin'
-							]
-						]);
-
-						echo LanguagePicker::widget([
-							'skin' => LanguagePicker::SKIN_DROPDOWN,
-							'size' => LanguagePicker::SIZE_LARGE,
-							//'parentTemplate' => '<div class="language-picker dropdown-list {size}"><div>{activeItem}<ul>{items}</ul></div></div>',
-							'itemTemplate' => '<li><a href="{link}" title="{name}">{name}</a></li>',
-							'activeItemTemplate' => '<a href="" title="{name}">{name}</a>',
-							'languageAsset' => 'lajax\languagepicker\bundles\LanguageLargeIconsAsset',
-							'languagePluginAsset' => 'lajax\languagepicker\bundles\LanguagePluginAsset',
-						]);
-
-						echo Nav::widget([
-							'options' => ['class' => 'navbar-nav navbar-right'],
-							'items' => [
-								['label' => 'Home', 'url' => ['/site/index']],
-								['label' => 'About', 'url' => ['/site/about']],
-								['label' => 'Contact', 'url' => ['/site/contact']],
-								Yii::$app->user->isGuest ?
-									['label' => 'Login', 'url' => ['/site/login']] :
-									['label' => 'Logout (' . Yii::$app->user->identity->personal_info["name"] . ')',
-										'url' => ['/site/logout'],
-										'linkOptions' => ['data-method' => 'post']
-									]
-							]
-						]);
-
-						NavBar::end();
-					?>
-
-					<div class="container-fluid">
-						<div class="site-index">
-							<div class="body-content">
-								<?= $content ?>
-							</div>
-						</div>
+						?>
 					</div>
 				</div>
 
+				<!-- CONTENT TOP MENU / BODY -->
+				<div class="col-xs-10-5">
+
+					<div class="wrapper flex flex-column">
+						<div class="header">
+							<?php
+
+								NavBar::begin([
+									'options' => [
+										'class' => 'navbar-inverse',
+									],
+									'containerOptions' => [
+										'class' => ['widget' => 'no-horizontal-padding navbar-content']
+									],
+									'innerContainerOptions' => [
+										'class' => 'container-fluid no-horizontal-padding'
+									]
+								]);
+
+								echo Breadcrumbs::widget([
+									'homeLink' => [
+										'label' => 'Admin home',
+										'url' => ["/admin"]
+									],
+									'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+									'options' => [
+										'class' => 'breadcrumb no-vertical-margin'
+									]
+								]);
+
+								echo LanguagePicker::widget([
+									'skin' => LanguagePicker::SKIN_DROPDOWN,
+									'size' => LanguagePicker::SIZE_LARGE,
+									//'parentTemplate' => '<div class="language-picker dropdown-list {size}"><div>{activeItem}<ul>{items}</ul></div></div>',
+									'itemTemplate' => '<li><a href="{link}" title="{name}">{name}</a></li>',
+									'activeItemTemplate' => '<a href="" title="{name}">{name}</a>',
+									'languageAsset' => 'lajax\languagepicker\bundles\LanguageLargeIconsAsset',
+									'languagePluginAsset' => 'lajax\languagepicker\bundles\LanguagePluginAsset',
+								]);
+
+								echo Nav::widget([
+									'options' => ['class' => 'navbar-nav navbar-right'],
+									'items' => [
+										['label' => 'Home', 'url' => ['/site/index']],
+										['label' => 'About', 'url' => ['/site/about']],
+										['label' => 'Contact', 'url' => ['/site/contact']],
+										Yii::$app->user->isGuest ?
+											['label' => 'Login', 'url' => ['/site/login']] :
+											['label' => 'Logout (' . Yii::$app->user->identity->personal_info["name"] . ')',
+												'url' => ['/site/logout'],
+												'linkOptions' => ['data-method' => 'post']
+											]
+									]
+								]);
+
+								NavBar::end();
+							?>
+						</div>
+
+						<div class="content flex flex-column flex-prop-1">
+							<div class="main">
+								<?= $content ?>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+
 			</div>
-
 		</div>
-
 	<?php $this->endBody() ?>
 	</body>
 </html>
