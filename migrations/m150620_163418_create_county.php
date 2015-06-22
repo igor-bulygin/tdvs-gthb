@@ -16,7 +16,6 @@ class m150620_163418_create_county extends \yii\mongodb\Migration {
 		$s_country = file_get_contents(dirname(__FILE__) . DIRECTORY_SEPARATOR . "country.json");
 		$country_json = json_decode($s_country, true);
 
-
 		foreach($country_json as $country) {
 			$data = Utils::underscoreKeys($country);
 			$name = $data["country_name"];
