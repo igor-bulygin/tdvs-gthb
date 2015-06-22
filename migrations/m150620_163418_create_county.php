@@ -19,6 +19,9 @@ class m150620_163418_create_county extends \yii\mongodb\Migration {
 
 		foreach($country_json as $country) {
 			$data = Utils::underscoreKeys($country);
+			$name = $data["country_name"];
+			$data["country_name"] = [];
+			$data["country_name"]["en-US"] = $name;
 
 			/* @var $country \app\models\Country */
 			$country = new Country();
