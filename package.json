@@ -5,9 +5,9 @@
 	"dependencies": {
 		"jsonpath": "0.1.7",
 		"underscore": "1.8.3",
-		"angular": "1.4.0",
+		"angular": "1.4.1",
 		"angular-animate": "1.4.0",
-		"angular-multi-select": "5.3.2",
+		"angular-multi-select": "5.3.3",
 		"angular-sortable-view": "0.0.13",
 		"jstree": "3.1.1",
 		"jstree-actions": "0.1.0",
