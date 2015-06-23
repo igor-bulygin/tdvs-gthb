@@ -33,7 +33,7 @@ use lajax\languagepicker\widgets\LanguagePicker;
 
 				<!-- NAVBAR LEFT -->
 				<div class="col-xs-1-5 flex">
-					<div class="ad-navbar-left funiv_ultra fs1 flex-prop-1">
+					<div class="navbar-left funiv_ultra fs1  flex-prop-1">
 						<?php
 
 							echo SideNav::widget([
@@ -48,6 +48,9 @@ use lajax\languagepicker\widgets\LanguagePicker;
 								'items' => [
 									[
 										'label' => 'Users',
+										'options' => [
+											'class' => 'item-menu-left funiv_bold fs0-857',
+										],
 										'items' =>  [
 											[
 												'label' => 'Devisers',
@@ -85,6 +88,9 @@ use lajax\languagepicker\widgets\LanguagePicker;
 									],
 									[
 										'label' => 'Orders',
+										'options' => [
+											'class' => 'item-menu-left funiv_bold fs0-857',
+										],
 										'items' => [
 											[
 												'label' => 'Sales',
@@ -114,6 +120,9 @@ use lajax\languagepicker\widgets\LanguagePicker;
 									],
 									[
 										'label' => 'Settings',
+										'options' => [
+											'class' => 'item-menu-left funiv_bold fs0-857',
+										],
 										'items' => [
 											 [
 												'label' => 'Tags',
@@ -168,6 +177,9 @@ use lajax\languagepicker\widgets\LanguagePicker;
 									],
 									[
 										'label' => 'Content management',
+										'options' => [
+											'class' => 'item-menu-left funiv_bold fs0-857',
+										],
 										'items' => [
 											[
 												'label' => 'Emails',
