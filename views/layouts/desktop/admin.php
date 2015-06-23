@@ -53,6 +53,9 @@ use lajax\languagepicker\widgets\LanguagePicker;
 										],
 										'items' =>  [
 											[
+												'options' => [
+													'class' => 'item-submenu funiv_ultra fs1-071',
+												],
 												'label' => 'Devisers',
 												'url' => Url::toRoute(['admin/devisers']),
 												'active' => (
@@ -61,6 +64,9 @@ use lajax\languagepicker\widgets\LanguagePicker;
 												)
 											],
 											[
+												'options' => [
+													'class' => 'item-submenu funiv_ultra fs1-071',
+												],
 												'label' => 'Customers',
 												'url' => Url::toRoute(['admin/customers']),
 												'active' => (
@@ -69,6 +75,9 @@ use lajax\languagepicker\widgets\LanguagePicker;
 												)
 											],
 											[
+												'options' => [
+													'class' => 'item-submenu funiv_ultra fs1-071',
+												],
 												'label' => 'Collaborators',
 												'url' => Url::toRoute(['admin/collaborators']),
 												'active' => (
@@ -77,6 +86,9 @@ use lajax\languagepicker\widgets\LanguagePicker;
 												)
 											],
 											[
+												'options' => [
+													'class' => 'item-submenu funiv_ultra fs1-071',
+												],
 												'label' => 'Todevise team',
 												'url' => Url::toRoute(['admin/todevise-team']),
 												'active' => (
@@ -93,6 +105,9 @@ use lajax\languagepicker\widgets\LanguagePicker;
 										],
 										'items' => [
 											[
+												'options' => [
+													'class' => 'item-submenu funiv_ultra fs1-071',
+												],
 												'label' => 'Sales',
 												'url' => Url::toRoute(['admin/sales']),
 												'active' => (
@@ -101,6 +116,9 @@ use lajax\languagepicker\widgets\LanguagePicker;
 												)
 											],
 											[
+												'options' => [
+													'class' => 'item-submenu funiv_ultra fs1-071',
+												],
 												'label' => 'Returns',
 												'url' => Url::toRoute(['admin/returns']),
 												'active' => (
@@ -109,6 +127,9 @@ use lajax\languagepicker\widgets\LanguagePicker;
 												)
 											],
 											[
+												'options' => [
+													'class' => 'item-submenu funiv_ultra fs1-071',
+												],
 												'label' => 'Warranties',
 												'url' => Url::toRoute(['admin/warranties']),
 												'active' => (
@@ -125,6 +146,9 @@ use lajax\languagepicker\widgets\LanguagePicker;
 										],
 										'items' => [
 											 [
+												'options' => [
+													'class' => 'item-submenu funiv_ultra fs1-071',
+												],
 												'label' => 'Tags',
 												'url'=> Url::toRoute(['admin/tags']),
 												'active' => (
@@ -132,6 +156,9 @@ use lajax\languagepicker\widgets\LanguagePicker;
 												)
 											],
 											[
+												'options' => [
+													'class' => 'item-submenu funiv_ultra fs1-071',
+												],
 												'label' => 'Size charts',
 												'url'=> Url::toRoute(['admin/size-charts']),
 												'active' => (
@@ -139,6 +166,9 @@ use lajax\languagepicker\widgets\LanguagePicker;
 												)
 											],
 											[
+												'options' => [
+													'class' => 'item-submenu funiv_ultra fs1-071',
+												],
 												'label' => 'Categories',
 												'url'=> Url::toRoute(['admin/categories']),
 												'active' => (
@@ -146,6 +176,9 @@ use lajax\languagepicker\widgets\LanguagePicker;
 												)
 											],
 											[
+												'options' => [
+													'class' => 'item-submenu funiv_ultra fs1-071',
+												],
 												'label' => 'Banners',
 												'url'=> Url::toRoute(['admin/banners']),
 												'active' => (
@@ -153,6 +186,9 @@ use lajax\languagepicker\widgets\LanguagePicker;
 												)
 											],
 											[
+												'options' => [
+													'class' => 'item-submenu funiv_ultra fs1-071',
+												],
 												'label' => 'Shipping methods',
 												'url'=> Url::toRoute(['admin/shipping-methods']),
 												'active' => (
@@ -160,6 +196,9 @@ use lajax\languagepicker\widgets\LanguagePicker;
 												)
 											],
 											[
+												'options' => [
+													'class' => 'item-submenu funiv_ultra fs1-071',
+												],
 												'label' => 'Currencies',
 												'url'=> Url::toRoute(['admin/currencies']),
 												'active' => (
@@ -167,6 +206,9 @@ use lajax\languagepicker\widgets\LanguagePicker;
 												)
 											],
 											[
+												'options' => [
+													'class' => 'item-submenu funiv_ultra fs1-071',
+												],
 												'label' => 'General settings',
 												'url'=> Url::toRoute(['admin/general-settings']),
 												'active' => (
@@ -182,6 +224,9 @@ use lajax\languagepicker\widgets\LanguagePicker;
 										],
 										'items' => [
 											[
+												'options' => [
+													'class' => 'item-submenu funiv_ultra fs1-071',
+												],
 												'label' => 'Emails',
 												'url'=> Url::toRoute(['admin/emails']),
 												'active' => (
@@ -189,6 +234,9 @@ use lajax\languagepicker\widgets\LanguagePicker;
 												)
 											],
 											[
+												'options' => [
+													'class' => 'item-submenu funiv_ultra fs1-071',
+												],
 												'label' => 'SMS',
 												'url'=> Url::toRoute(['admin/sms']),
 												'active' => (
@@ -196,6 +244,9 @@ use lajax\languagepicker\widgets\LanguagePicker;
 												)
 											],
 											[
+												'options' => [
+													'class' => 'item-submenu funiv_ultra fs1-071',
+												],
 												'label' => 'FAQ',
 												'url'=> Url::toRoute(['admin/faq']),
 												'active' => (
@@ -203,6 +254,9 @@ use lajax\languagepicker\widgets\LanguagePicker;
 												)
 											],
 											[
+												'options' => [
+													'class' => 'item-submenu funiv_ultra fs1-071',
+												],
 												'label' => 'Newsletter',
 												'url'=> Url::toRoute(['admin/newsletter']),
 												'active' => (
@@ -210,6 +264,9 @@ use lajax\languagepicker\widgets\LanguagePicker;
 												)
 											],
 											[
+												'options' => [
+													'class' => 'item-submenu funiv_ultra fs1-071',
+												],
 												'label' => 'Homepage categories',
 												'url'=> Url::toRoute(['admin/homepage-categories']),
 												'active' => (
@@ -217,6 +274,9 @@ use lajax\languagepicker\widgets\LanguagePicker;
 												)
 											],
 											[
+												'options' => [
+													'class' => 'item-submenu funiv_ultra fs1-071',
+												],
 												'label' => 'About',
 												'url'=> Url::toRoute(['admin/about']),
 												'active' => (
@@ -224,6 +284,9 @@ use lajax\languagepicker\widgets\LanguagePicker;
 												)
 											],
 											[
+												'options' => [
+													'class' => 'item-submenu funiv_ultra fs1-071',
+												],
 												'label' => 'Contact',
 												'url'=> Url::toRoute(['admin/contact']),
 												'active' => (
@@ -231,6 +294,9 @@ use lajax\languagepicker\widgets\LanguagePicker;
 												)
 											],
 											[
+												'options' => [
+													'class' => 'item-submenu funiv_ultra fs1-071',
+												],
 												'label' => 'Terms & conditions',
 												'url'=> Url::toRoute(['admin/toc']),
 												'active' => (
