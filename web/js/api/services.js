@@ -69,6 +69,32 @@ api.service("$tag", function($services_util) {
 	});
 });
 
+api.service("$sizechart", function($services_util) {
+
+	var api_point = currentHost() + "/api/size-charts/";
+
+	return ({
+
+		get: function(filters) {
+			var req = $services_util._get(api_point, filters);
+
+			return req.then($services_util._handleSuccess, $services_util._handleError);
+		},
+
+		modify: function(method, sizechart) {
+			var req = $services_util._modify(api_point, method, {
+				sizechart: sizechart
+			});
+
+			return req.then($services_util._handleSuccess, $services_util._handleError);
+		},
+
+		delete: function(sizechart) {
+			return this.modify("DELETE", sizechart);
+		}
+	});
+});
+
 api.service("$category", function($services_util) {
 
 	var api_point = currentHost() + "/api/categories/";
