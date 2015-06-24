@@ -83,10 +83,10 @@ todevise.controller('tagsCtrl', ["$scope", "$timeout", "$tag", "$tag_util", "$ca
 				toastr.success("Tag deleted!");
 				$scope.renderPartial();
 			}, function(err) {
-				toastr.error(err);
+				toastr.error("Couldn't delete tag!", err);
 			});
 		}, function(err) {
-			toastr.error(err);
+			toastr.error("Couldn't find tag!", err);
 		});
 	};
 
