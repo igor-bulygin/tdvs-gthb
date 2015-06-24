@@ -2,9 +2,10 @@
 
 namespace app\controllers;
 
-use app\helpers\Utils;
 use Yii;
 use yii\web\Response;
+use app\helpers\Utils;
+use app\models\SizeChart;
 use yii\base\ActionFilter;
 use yii\filters\VerbFilter;
 use yii\filters\ContentNegotiator;
@@ -68,6 +69,7 @@ class ApiController extends CController {
 	//$subcategories = $query->all();
 	//var_dump($subcategories);
 
+	/*
 	public function actionExample($filters = null) {
 		$request = Yii::$app->getRequest();
 		$res = null;
@@ -98,13 +100,13 @@ class ApiController extends CController {
 
 		return $res;
 	}
+	*/
 
 	public function actionTags($filters = null) {
 		$request = Yii::$app->getRequest();
 		$res = null;
 
 		if ($request->isGet) {
-
 			$filters = json_decode($filters, true) ?: [];
 
 			if (!empty($filters)) {
@@ -141,6 +143,50 @@ class ApiController extends CController {
 			/* @var $tag \app\models\Tag */
 			$tag = Tag::findOne(["short_id" => $tag["short_id"]]);
 			$tag->delete();
+		}
+
+		return $res;
+	}
+
+	public function actionSizeCharts($fields = null, $filters = null) {
+		$request = Yii::$app->getRequest();
+		$res = null;
+
+		if ($request->isGet) {
+			$fields = json_decode($fields, true) ?: [];
+			$filters = json_decode($filters, true) ?: [];
+
+			if (!empty($filters)) {
+				$filters = Utils::removeAllExcept($filters, ["short_id"]);
+				//TODO: If not admin, force some fields (enabled only, visible by public only, etc...)
+			}
+
+			$res = empty($filters) ? SizeChart::find()->select($fields) : SizeChart::find()->select($fields)->where($filters);
+
+			if($this->intern === false) {
+				$res = $res->asArray()->all();
+			}
+		} else if ($request->isPost) {
+			$_sizechart = Utils::getJsonFromRequest("sizechart");
+			unset($_sizechart["_id"]);
+
+			if ($_sizechart["short_id"] === "new") {
+				$_sizechart["short_id"] = (new SizeChart())->genValidID(5);
+			}
+
+			/* @var $sizechart \app\models\SizeChart */
+			$sizechart = SizeChart::findOne(["short_id" => $_sizechart["short_id"]]);
+			$sizechart->setAttributes($_sizechart, false);
+			//$tag->options = array_replace_recursive($tag->options, $_tag["options"]);
+			$sizechart->save();
+
+			$res = $sizechart;
+		} else if ($request->isDelete) {
+			$sizechart = Utils::getJsonFromRequest("sizechart");
+
+			/* @var $sizechart \app\models\SizeChart */
+			$sizechart = SizeChart::findOne(["short_id" => $sizechart["short_id"]]);
+			$sizechart->delete();
 		}
 
 		return $res;

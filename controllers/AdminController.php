@@ -48,6 +48,32 @@ class AdminController extends CController {
 		]);
 	}
 
+	public function actionSizeCharts($filters = null) {
+		$filters = urldecode($filters) ?: null;
+
+		$sizecharts = new ActiveDataProvider([
+			'query' => $this->api->actionSizeCharts($filters),
+			'pagination' => [
+				'pageSize' => 15,
+			],
+		]);
+
+		$data = [
+			'categories' => $this->api->actionCategories()->asArray()->all(),
+			'sizecharts' => $sizecharts,
+			'sizechart_template' => $this->api->actionSizeCharts(Json::encode(["_id" => 0, "short_id", "name"]))->asArray()->all()
+		];
+
+		return Yii::$app->request->isAjax ? $this->renderPartial("size-charts", $data) : $this->render("size-charts", $data);
+	}
+
+	public function actionSizeChart($size_chart_id) {
+		return $this->render("size-chart", [
+			"sizechart" => $this->api->actionSizeCharts(Json::encode(["short_id" => $size_chart_id]))->asArray()->one(),
+			"categories" => $this->api->actionCategories()->asArray()->all()
+		]);
+	}
+
 	public function actionCategories() {
 		return $this->render("categories", []);
 	}
