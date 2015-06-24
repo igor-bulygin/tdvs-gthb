@@ -6,12 +6,11 @@ use app\models\Country;
 class m150620_163418_create_county extends \yii\mongodb\Migration {
 	public function up() {
 		$this->createCollection('country');
-		$this->createIndex('size_chart', 'country_code', [
+		$this->createIndex('country', 'country_code', [
 			'unique' => true
 		]);
 		$this->createIndex('country', 'continent');
 		$this->createIndex('country', 'currency_code');
-		$this->createIndex('country', 'country_code');
 
 		$s_country = file_get_contents(dirname(__FILE__) . DIRECTORY_SEPARATOR . "country.json");
 		$country_json = json_decode($s_country, true);
