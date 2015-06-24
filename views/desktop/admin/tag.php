@@ -8,7 +8,7 @@ use app\assets\desktop\admin\TagAsset;
 
 /* @var $this yii\web\View */
 /* @var $categories ArrayObject */
-/* @var $tags yii\data\ActiveDataProvider */
+/* @var $tag ArrayObject */
 
 $this->params['breadcrumbs'][] = [
 	'label' => 'Tag',
