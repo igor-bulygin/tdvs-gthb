@@ -32,6 +32,19 @@ api.factory("$tag_util", function($q, $tag) {
 	return utils;
 });
 
+api.factory("$sizechart_util", function($q, $tag) {
+	var utils = {};
+
+	utils.newSizeChart = function(langs) {
+		return {
+			short_id: "new",
+			name: langs
+		};
+	};
+
+	return utils;
+});
+
 api.factory("$category_util", function($q, $category) {
 	var utils = {};
 
