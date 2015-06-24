@@ -70,14 +70,7 @@ $this->title = 'Todevise / Admin / Size charts';
 					],
 					[
 						'value' => function($model){
-							$v = $model->metric_units;
-							if($v == MetricUnit::NONE) {
-								return Yii::t("app/admin", "None");
-							} else if($v == MetricUnit::SIZE) {
-								return Yii::t("app/admin", "Size");
-							} else if($v == MetricUnit::WEIGHT) {
-								return Yii::t("app/admin", "Weight");
-							}
+							return Yii::t("app/test", MetricUnit::TXT[$model->metric_units]);
 						},
 						'label' => Yii::t("app/admin", "Metric units")
 					],
