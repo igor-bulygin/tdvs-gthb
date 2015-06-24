@@ -371,7 +371,7 @@ use lajax\languagepicker\widgets\LanguagePicker;
 							?>
 						</div>
 
-						<div class="content flex flex-column flex-prop-1">
+						<div class="body-content flex flex-column flex-prop-1">
 							<div class="main">
 								<?= $content ?>
 							</div>
