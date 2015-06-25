@@ -83,7 +83,14 @@ $this->title = 'Todevise / Admin / Tags';
 								"ng-click" => "toggle_prop(\$event, '$model->short_id', 'enabled')"
 							];
 						},
-						'header' => Html::tag("div", Yii::t("app/admin", "Enabled"))
+						'header' => Html::tag("div", Yii::t("app/admin", "Enabled")),
+
+						'headerOptions' => [
+						'class' => 'ta-center'
+						],
+						'contentOptions' => [
+						'class' => 'ta-center'
+						],
 					],
 					[
 						'class' => 'yii\grid\CheckboxColumn',
@@ -93,7 +100,14 @@ $this->title = 'Todevise / Admin / Tags';
 								"ng-click" => "toggle_prop(\$event, '$model->short_id', 'required')"
 							];
 						},
-						'header' => Html::tag("div", Yii::t("app/admin", "Required"))
+						'header' => Html::tag("div", Yii::t("app/admin", "Required")),
+
+						'headerOptions' => [
+						'class' => 'ta-center'
+						],
+						'contentOptions' => [
+						'class' => 'ta-center'
+						],
 					],
 					[
 						'class' => 'yii\grid\ActionColumn',
@@ -101,17 +115,24 @@ $this->title = 'Todevise / Admin / Tags';
 						'buttons' => [
 							'update' => function($url, $model, $key) {
 								$url = Url::to(["/admin/tag", "tag_id" => $model->short_id]);
-								return Html::a('<span class="glyphicon glyphicon-pencil fc-fff fs1-357"></span>', $url);
+								return Html::a('<span class="glyphicon glyphicon-pencil fc-fff fs1"></span>', $url);
 							},
 
 							'delete' => function($url, $model, $key) {
 								return Html::tag("span", "", [
-									"class" => "pointer glyphicon glyphicon-trash fc-fff fs1-357",
+									"class" => "pointer glyphicon glyphicon-trash fc-fff fs1",
 									"ng-click" => "delete('$model->short_id')"
 								]);
 							}
 						],
-						'header' => Html::tag("div", Yii::t("app/admin", "Actions"))
+						'header' => Html::tag("div", Yii::t("app/admin", "Actions")),
+
+						'headerOptions' => [
+						'class' => 'ta-center'
+						],
+						'contentOptions' => [
+						'class' => 'ta-center'
+						],
 					]
 				]
 			]);
