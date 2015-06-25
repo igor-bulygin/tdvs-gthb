@@ -11,6 +11,12 @@
 }
 /*===================================*/
 
+/* No padding */
+.no-padding {
+	padding: 0;
+}
+/*===================================*/
+
 /* No left/right padding */
 .no-horizontal-padding {
 	padding-left: 0;
@@ -22,6 +28,12 @@
 .no-vertical-padding {
 	padding-top: 0;
 	padding-bottom: 0;
+}
+/*===================================*/
+
+/* No margin */
+.no-margin {
+	margin: 0;
 }
 /*===================================*/
 
