@@ -77,7 +77,6 @@ $this->title = 'Todevise / Admin / Tag';
 						helper-elements="noall nonone noreset nofilter">
 					</div>
 				</div>
-
 			</div>
 		</div>
 
@@ -220,7 +219,6 @@ $this->title = 'Todevise / Admin / Tag';
 						<!-- TODO: Show the metric unit and the type? -->
 					</div>
 				</div>
-			</div>
 			</div>
 		</div>
 
