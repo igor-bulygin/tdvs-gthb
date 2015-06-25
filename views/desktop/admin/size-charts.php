@@ -70,7 +70,7 @@ $this->title = 'Todevise / Admin / Size charts';
 					],
 					[
 						'value' => function($model){
-							return Yii::t("app/test", MetricUnit::TXT[$model->metric_units]);
+							return Yii::t("app/admin", MetricUnit::TXT[$model->metric_units]);
 						},
 						'label' => Yii::t("app/admin", "Metric units")
 					],
