@@ -12,14 +12,6 @@ html, body {
 	width: 100%;
 }
 
-.body-content {
-
-}
-
-.main {
-
-}
-
 /*** TOP MENU ***/
 .header .navbar-inverse {
 	background-color: #e8e8e8;
@@ -27,32 +19,27 @@ html, body {
 	border-radius: 0;
 }
 
-.header ul.breadcrumb {
-	margin-bottom: 0;
-	background-color: inherit;
-	padding-top: 0;
-	padding-left: 0;
-	margin-top: 0.5%;
+.header .main-navbar {
+	align-items: center;
+	padding: 7px 0;
 }
 
-.header .language-picker {
-	margin-top: 0.5%;
+.header ul.breadcrumb {
+	background-color: inherit;
 }
+
 .header ul.breadcrumb a,
 .header .language-picker a,
 .header .navopts a {
 	color: #6d6d6d;
+	padding-top: 0;
 	padding-bottom: 0;
 }
-.header .navopts{
+.header .navopts {
 	border-left: 1px solid #c7c7c7;
 	margin-left: 1%;
-	margin-top: 0.5%;
-	padding-bottom: 0;
-
 }
 .header  .navopts > li > a{
-	padding-top: 0;
 	color: #6d6d6d;
 }
 .header .navbar {

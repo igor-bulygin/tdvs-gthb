@@ -327,7 +327,7 @@ use lajax\languagepicker\widgets\LanguagePicker;
 									],
 
 									'containerOptions' => [
-										'class' => "no-horizontal-padding"
+										'class' => "no-horizontal-padding main-navbar flex"
 									],
 
 									'innerContainerOptions' => [
@@ -341,7 +341,7 @@ use lajax\languagepicker\widgets\LanguagePicker;
 										'url' => ["/admin"]
 									],
 									'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-									'options' => ['class' => 'breadcrumb funiv fs-upper fs0-857 pull-left'],
+									'options' => ['class' => 'breadcrumb funiv fs-upper fs0-857 pull-left no-vertical-margin no-padding'],
 								]);
 
 								echo Nav::widget([
