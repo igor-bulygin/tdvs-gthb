@@ -33,23 +33,26 @@ use lajax\languagepicker\widgets\LanguagePicker;
 
 				<!-- NAVBAR LEFT -->
 				<div class="col-xs-1-5 flex">
-					<div class="navbar-left funiv_ultra fs1  flex-prop-1">
+					<div class="navbar-left funiv_ultra fs1 flex-prop-1">
 						<?php
 
 							echo SideNav::widget([
 								'type' => SideNav::TYPE_DEFAULT,
 								'heading' => '<font class="fpf_bold">Todevise</font><br><span class="funiv fs0-414">ADMINISTRATION</span>',
+								'headingOptions' => [
+									'class' => "text-center"
+								],
 								'indItem' => '',
 								'indMenuOpen' => '˄',
 								'indMenuClose' => '˅',
 								'containerOptions' => [
-									'class' => 'max-height no-vertical-margin overflw'
+									'class' => 'max-height no-vertical-margin overflow'
 								],
 								'items' => [
 									[
 										'label' => 'Users',
 										'options' => [
-											'class' => 'item-menu-left funiv_bold fs0-857',
+											'class' => 'item-menu-left funiv_bold fs0-857 fs-upper',
 										],
 										'items' =>  [
 											[
@@ -101,7 +104,7 @@ use lajax\languagepicker\widgets\LanguagePicker;
 									[
 										'label' => 'Orders',
 										'options' => [
-											'class' => 'item-menu-left funiv_bold fs0-857',
+											'class' => 'item-menu-left funiv_bold fs0-857 fs-upper',
 										],
 										'items' => [
 											[
@@ -142,7 +145,7 @@ use lajax\languagepicker\widgets\LanguagePicker;
 									[
 										'label' => 'Settings',
 										'options' => [
-											'class' => 'item-menu-left funiv_bold fs0-857',
+											'class' => 'item-menu-left funiv_bold fs0-857 fs-upper',
 										],
 										'items' => [
 											 [
@@ -220,7 +223,7 @@ use lajax\languagepicker\widgets\LanguagePicker;
 									[
 										'label' => 'Content management',
 										'options' => [
-											'class' => 'item-menu-left funiv_bold fs0-857',
+											'class' => 'item-menu-left funiv_bold fs0-857 fs-upper',
 										],
 										'items' => [
 											[
@@ -320,54 +323,56 @@ use lajax\languagepicker\widgets\LanguagePicker;
 							<?php
 								NavBar::begin([
 									'options' => [
-											'class' => 'navbar-inverse',
-										],
+										'class' => 'navbar-inverse',
+									],
 
-										'innerContainerOptions' => [
-											'class' => 'container-fluid container-menutop'
-										]
-									]);
+									'containerOptions' => [
+										'class' => "no-horizontal-padding"
+									],
 
-									echo Breadcrumbs::widget([
-										'options' => ['class' => 'navbar-nav menutop'],
-										'homeLink' => [
-											'label' => 'admin home',
-											'url' => ["/admin"]
-										],
-										'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-										'options' => ['class' => 'breadcrumb funiv fs-upper fs0-857'],
-									]);
+									'innerContainerOptions' => [
+										'class' => 'container-fluid container-menutop'
+									]
+								]);
 
-									echo Nav::widget([
-										'options' => ['class' => 'navbar-nav login funiv fs-upper fs0-857'],
-										'items' => [
-											Yii::$app->user->isGuest ?
-												['label' => 'Login', 'url' => ['/site/login']] :
-												['label' => 'Logout (' . Yii::$app->user->identity->personal_info["name"] . ')',
-													'url' => ['/site/logout'],
-													'linkOptions' => ['data-method' => 'post']
-												]
-										]
-									]);
+								echo Breadcrumbs::widget([
+									'homeLink' => [
+										'label' => 'admin home',
+										'url' => ["/admin"]
+									],
+									'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+									'options' => ['class' => 'breadcrumb funiv fs-upper fs0-857 pull-left'],
+								]);
 
-									echo LanguagePicker::widget([
-										'skin' => LanguagePicker::SKIN_DROPDOWN,
-										'size' => LanguagePicker::SIZE_LARGE,
-										//'parentTemplate' => '<div class="language-picker dropdown-list {size} funiv fs-upper fs0-857"><div>{activeItem}<ul>{items}</ul></div></div>',
-										'itemTemplate' => '<li class="funiv fs-upper fs0-857"><a href="{link}" title="{name}">{name}</a></li>',
-										'activeItemTemplate' => '<a href="" title="{name}" class="funiv fs-upper fs0-857">{name}</a>',
-										'languageAsset' => 'lajax\languagepicker\bundles\LanguageLargeIconsAsset',
-										'languagePluginAsset' => 'lajax\languagepicker\bundles\LanguagePluginAsset',
-									]);
+								echo Nav::widget([
+									'options' => ['class' => 'navbar-nav pull-right navopts funiv fs-upper fs0-857'],
+									'items' => [
+										Yii::$app->user->isGuest ?
+											['label' => 'Login', 'url' => ['/site/login']] :
+											['label' => 'Logout (' . Yii::$app->user->identity->personal_info["name"] . ')',
+												'url' => ['/site/logout'],
+												'linkOptions' => ['data-method' => 'post']
+											]
+									]
+								]);
 
+								echo LanguagePicker::widget([
+									//'options' => 'pull-right',
+									'skin' => LanguagePicker::SKIN_DROPDOWN,
+									'size' => LanguagePicker::SIZE_LARGE,
+									'parentTemplate' => '<div class="language-picker dropdown-list {size} funiv fs-upper fs0-929 pull-right"><div>{activeItem}<ul>{items}</ul></div></div>',
+									'itemTemplate' => '<li class="funiv fs-upper fs0-929"><a href="{link}" title="{name}">{name}</a></li>',
+									'activeItemTemplate' => '<a href="" title="{name}" class="funiv fs-upper fs0-929">{name}</a>',
+									'languageAsset' => 'lajax\languagepicker\bundles\LanguageLargeIconsAsset',
+									'languagePluginAsset' => 'lajax\languagepicker\bundles\LanguagePluginAsset',
+								]);
 
-
-							    NavBar::end();
+							NavBar::end();
 							?>
 						</div>
 
-						<div class="body-content flex flex-column flex-prop-1">
-							<div class="main">
+						<div class="body-content flex flex-column flex-prop-1 overflow">
+							<div class="main flex-prop-1-0">
 								<?= $content ?>
 							</div>
 						</div>
