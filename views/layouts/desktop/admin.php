@@ -43,7 +43,7 @@ use lajax\languagepicker\widgets\LanguagePicker;
 								'indMenuOpen' => '˄',
 								'indMenuClose' => '˅',
 								'containerOptions' => [
-									'class' => 'max-height no-vertical-margin'
+									'class' => 'max-height no-vertical-margin overflw'
 								],
 								'items' => [
 									[
