@@ -235,18 +235,19 @@ $this->title = 'Todevise / Admin / Tag';
 			<div class="input-group" ng-repeat="(lang_k, lang_v) in data.langs">
 				<span class="input-group-addon" id="basic-addon-{{ $index }}">{{ lang_v }}</span>
 				<input required="" type="text" class="form-control" placeholder="<?php echo Yii::t("app/admin", "Option name..."); ?>"
-				       aria-describedby="basic-addon-{{ $index }}" ng-model="data.option.text[lang_k]" name="{{ lang_k }}">
+					aria-describedby="basic-addon-{{ $index }}" ng-model="data.option.text[lang_k]" name="{{ lang_k }}">
 				<span class="input-group-addon alert-danger" ng-show="form.$submitted && !form.$valid && !form['{{lang_k}}'].$valid">
 					<span ng-show="form['{{lang_k}}'].$error.required"><?php echo Yii::t("app/admin", "Required!"); ?></span>
 				</span>
 			</div>
+
 			<br />
 
 			<label><?php echo Yii::t("app/admin", "Value"); ?></label>
 			<div class="input-group">
 				<input id="value" required="" ui-validate="'(data.options | filter:{value:$value}:true).length == 0'"
-				       ui-validate-watch="'data.option.value'" type="text" class="form-control" placeholder="<?php echo Yii::t("app/admin", "Value..."); ?>"
-				       aria-describedby="basic-addon-desc" ng-model="data.option.value" name="value">
+					ui-validate-watch="'data.option.value'" type="text" class="form-control" placeholder="<?php echo Yii::t("app/admin", "Value..."); ?>"
+					aria-describedby="basic-addon-desc" ng-model="data.option.value" name="value">
 				<span class="input-group-addon alert-danger" id="basic-addon-value" ng-show="form.$submitted && !form.$valid && !form['value'].$valid">
 					<span ng-show="form['value'].$error.required"><?php echo Yii::t("app/admin", "Required!"); ?></span>
 					<span ng-show="!form['value'].$error.required && form['value'].$error.validator"><?php echo Yii::t("app/admin", "Duplicated value!"); ?></span>
