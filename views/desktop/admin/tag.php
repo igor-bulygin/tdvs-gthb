@@ -26,9 +26,9 @@ $this->title = 'Todevise / Admin / Tag';
 		<?php $this->registerJs("var _categories = " . Json::encode($categories) . ";", View::POS_HEAD); ?>
 		<?php $this->registerJs("var _tag = " . Json::encode($tag) . ";", View::POS_HEAD); ?>
 		<?php $this->registerJs("var _mus = " . Json::encode([
-				["value" => MetricUnit::NONE, "text" => "None", "checked" => true],
-				["value" => MetricUnit::SIZE, "text" => "Size"],
-				["value" => MetricUnit::WEIGHT, "text" => "Weight"]
+				["value" => MetricUnit::NONE, "text" => Yii::t("app/admin", MetricUnit::TXT[MetricUnit::NONE]), "checked" => true],
+				["value" => MetricUnit::SIZE, "text" => Yii::t("app/admin", MetricUnit::TXT[MetricUnit::SIZE])],
+				["value" => MetricUnit::WEIGHT, "text" => Yii::t("app/admin", MetricUnit::TXT[MetricUnit::WEIGHT])]
 			]) . ";", View::POS_HEAD); ?>
 
 		<div class="row">
