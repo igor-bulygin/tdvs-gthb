@@ -8,7 +8,6 @@ html, body {
 }
 
 .header{
-	background: #333;
 	text-align: center;
 	color: #fff;
 	width: 100%;
@@ -22,31 +21,54 @@ html, body {
 	flex: 1 0 auto;
 }
 
-
 /*** TOP MENU ***/
-div.navbar-header {
-	display: none;
+.header .navbar-inverse{
+	background-color: #e8e8e8;
+	border: #c7c7c7;
+	border-radius: 0;
 }
 
-div.navbar-content {
-	display: flex !important;
-	align-items: center;
+.header ul.breadcrumb {
+	margin-bottom: 0;
+	background-color: inherit;
+	padding-top: 0;
+	padding-left: 0;
+	float: left;
+	position: relative;
+	display: block;
+	margin-top: 0.5%;
 }
 
-.navbar-right {
-	margin-left: auto;
+.header .language-picker{
+	float: right;
+	position: relative;
+	margin-top: 0.4%;
 }
-
-ul.breadcrumb {
-	display: inline-block;
+.header ul.breadcrumb a,
+.header .language-picker a,
+.header .login a {
+	color: #6d6d6d;
+	padding-bottom: 0;
 }
+.header .login{
+	float: right;
+	position: relative;
+	border-left: 1px solid #c7c7c7;
+	margin-left: 1%;
+	margin-top: 0.5%;
+	padding-bottom: 0;
 
-ul.navbar-nav.nav {
-	margin-right: 0;
+}
+.header  .navbar-nav > li > a{
+	padding-top: 0;
+	color: #6d6d6d;
+}
+.header .navbar {
+	min-height: 100%;
+	max-height: 100%;
 }
 
 /**** NAVBAR - LEFT ****/
-
 .navbar-left{
 	background-color: #1c1919;
 	height: 100vh;
@@ -70,10 +92,11 @@ ul.navbar-nav.nav {
 	color: #6d6d6d;
 	position: relative;
 	display: block;
-	padding: 8px 12px;
-	margin-bottom: -2px;
+	padding: 7px 8px;
 	background-color: #d7d7d7;
 	text-transform: uppercase;
+	margin-bottom: -2px;
+
 }
 
 .navbar-left .item-menu-left a:hover,
@@ -141,6 +164,7 @@ ul.navbar-nav.nav {
 	margin-top: 1px;
 	padding-left: 10%;
 	letter-spacing: 0.1px;
+	padding-top: 8px;
 }
 .navbar-left .kv-sidenav .nav a:hover{
 	border-top: 0;
@@ -156,5 +180,8 @@ ul.navbar-nav.nav {
 	background: -ms-linear-gradient(left, rgba(109,109,109,0.7) 0%,rgba(0,0,0,0.61) 100%); /* IE10+ */
 	background: linear-gradient(to right, rgba(109,109,109,0.7) 0%,rgba(0,0,0,0.61) 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b36d6d6d', endColorstr='#9c000000',GradientType=1 ); /* IE6-9 */
+}
+.overflw{
+	overflow: auto;
 }
 /********/

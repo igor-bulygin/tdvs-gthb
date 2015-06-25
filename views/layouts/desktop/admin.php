@@ -318,56 +318,51 @@ use lajax\languagepicker\widgets\LanguagePicker;
 					<div class="wrapper flex flex-column">
 						<div class="header">
 							<?php
-
 								NavBar::begin([
 									'options' => [
-										'class' => 'navbar-inverse',
-									],
-									'containerOptions' => [
-										'class' => ['widget' => 'no-horizontal-padding navbar-content']
-									],
-									'innerContainerOptions' => [
-										'class' => 'container-fluid no-horizontal-padding'
-									]
-								]);
+											'class' => 'navbar-inverse',
+										],
 
-								echo Breadcrumbs::widget([
-									'homeLink' => [
-										'label' => 'Admin home',
-										'url' => ["/admin"]
-									],
-									'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-									'options' => [
-										'class' => 'breadcrumb no-vertical-margin'
-									]
-								]);
+										'innerContainerOptions' => [
+											'class' => 'container-fluid container-menutop'
+										]
+									]);
 
-								echo LanguagePicker::widget([
-									'skin' => LanguagePicker::SKIN_DROPDOWN,
-									'size' => LanguagePicker::SIZE_LARGE,
-									//'parentTemplate' => '<div class="language-picker dropdown-list {size}"><div>{activeItem}<ul>{items}</ul></div></div>',
-									'itemTemplate' => '<li><a href="{link}" title="{name}">{name}</a></li>',
-									'activeItemTemplate' => '<a href="" title="{name}">{name}</a>',
-									'languageAsset' => 'lajax\languagepicker\bundles\LanguageLargeIconsAsset',
-									'languagePluginAsset' => 'lajax\languagepicker\bundles\LanguagePluginAsset',
-								]);
+									echo Breadcrumbs::widget([
+										'options' => ['class' => 'navbar-nav menutop'],
+										'homeLink' => [
+											'label' => 'admin home',
+											'url' => ["/admin"]
+										],
+										'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+										'options' => ['class' => 'breadcrumb funiv fs-upper fs0-857'],
+									]);
 
-								echo Nav::widget([
-									'options' => ['class' => 'navbar-nav navbar-right'],
-									'items' => [
-										['label' => 'Home', 'url' => ['/site/index']],
-										['label' => 'About', 'url' => ['/site/about']],
-										['label' => 'Contact', 'url' => ['/site/contact']],
-										Yii::$app->user->isGuest ?
-											['label' => 'Login', 'url' => ['/site/login']] :
-											['label' => 'Logout (' . Yii::$app->user->identity->personal_info["name"] . ')',
-												'url' => ['/site/logout'],
-												'linkOptions' => ['data-method' => 'post']
-											]
-									]
-								]);
+									echo Nav::widget([
+										'options' => ['class' => 'navbar-nav login funiv fs-upper fs0-857'],
+										'items' => [
+											Yii::$app->user->isGuest ?
+												['label' => 'Login', 'url' => ['/site/login']] :
+												['label' => 'Logout (' . Yii::$app->user->identity->personal_info["name"] . ')',
+													'url' => ['/site/logout'],
+													'linkOptions' => ['data-method' => 'post']
+												]
+										]
+									]);
 
-								NavBar::end();
+									echo LanguagePicker::widget([
+										'skin' => LanguagePicker::SKIN_DROPDOWN,
+										'size' => LanguagePicker::SIZE_LARGE,
+										//'parentTemplate' => '<div class="language-picker dropdown-list {size} funiv fs-upper fs0-857"><div>{activeItem}<ul>{items}</ul></div></div>',
+										'itemTemplate' => '<li class="funiv fs-upper fs0-857"><a href="{link}" title="{name}">{name}</a></li>',
+										'activeItemTemplate' => '<a href="" title="{name}" class="funiv fs-upper fs0-857">{name}</a>',
+										'languageAsset' => 'lajax\languagepicker\bundles\LanguageLargeIconsAsset',
+										'languagePluginAsset' => 'lajax\languagepicker\bundles\LanguagePluginAsset',
+									]);
+
+
+
+							    NavBar::end();
 							?>
 						</div>
 
