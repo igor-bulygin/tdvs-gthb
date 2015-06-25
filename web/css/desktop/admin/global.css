@@ -180,7 +180,4 @@ html, body {
 	background: linear-gradient(to right, rgba(109,109,109,0.7) 0%,rgba(0,0,0,0.61) 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b36d6d6d', endColorstr='#9c000000',GradientType=1 ); /* IE6-9 */
 }
-.overflw{
-	overflow: auto;
-}
 /********/

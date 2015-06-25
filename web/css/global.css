@@ -30,6 +30,10 @@ body {
 	padding-top: 20px;
 }
 
+.overflow{
+	overflow: auto;
+}
+
 .flex{
 	display: -webkit-box;
 	display: -webkit-flex;
@@ -172,6 +176,10 @@ body {
 }
 
 /**** FONT TYPES ****/
-.fs-upper{
+.fs-upper {
 	text-transform: uppercase;
+}
+
+.fs-lower {
+	text-transform: lowercase;
 }
