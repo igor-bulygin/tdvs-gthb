@@ -21,16 +21,17 @@ TagsAsset::register($this);
 $this->title = 'Todevise / Admin / Tags';
 ?>
 
-<div class="row no-gutter" ng-controller="tagsCtrl" ng-init="init()">
-	<div class="col-sm-12 col-md-12 col-lg-12">
+<div class="row" ng-controller="tagsCtrl" ng-init="init()">
+	<div class="col-xs-12">
 
 		<?php $this->registerJs("var _categories = " . Json::encode($categories) . ";", View::POS_HEAD) ?>
 
-		<div class="row">
-			<div class="col-md-4 col-lg-4">
-				<h2><?= Yii::t("app/admin", "Tag list"); ?></h2>
+		<div class="row no-gutter">
+			<div class="col-xs-2">
+				<h2 class="funiv_bold fs-upper fc-fff fs1-071"><?= Yii::t("app/admin", "Tag list"); ?></h2>
 			</div>
-			<div class="col-md-4 col-lg-4">
+			<div class="col-xs-6 flex-inline flex-align-center">
+				<div class="fsuniv fs-upper fc-9b fs0-786">FILTER BY CATEGORY</div>
 				<div
 					angular-multi-select
 					api="api"
@@ -49,7 +50,7 @@ $this->title = 'Todevise / Admin / Tags';
 					helper-elements="noall nonone noreset nofilter"
 				></div>
 			</div>
-			<div class="col-md-4 col-lg-4">
+			<div class="col-xs-4">
 				<button class="btn btn-default" ng-click="create_new()">Create new</button>
 			</div>
 		</div>
@@ -58,13 +59,17 @@ $this->title = 'Todevise / Admin / Tags';
 			echo GridView::widget([
 				'id' => 'tags_list',
 				'dataProvider' => $tags,
+				'options' => [
+					'class' => 'fsuniv fs-upper fc-d6 fs0-714',
+				],
 				'columns' => [
 					[
 						'value' => function($model){
 							return Utils::getValue($model->name, Yii::$app->language, "en-US");
 						},
-						'label' => Yii::t("app/admin", "Name")
-					],
+						'label' => Yii::t("app/admin", "Name"),
+
+						],
 					[
 						'value' => function($model){
 							return Utils::getValue($model->description, Yii::$app->language, "en-US");
@@ -97,12 +102,12 @@ $this->title = 'Todevise / Admin / Tags';
 						'buttons' => [
 							'update' => function($url, $model, $key) {
 								$url = Url::to(["/admin/tag", "tag_id" => $model->short_id]);
-								return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url);
+								return Html::a('<span class="glyphicon glyphicon-pencil fc-fff fs1-357"></span>', $url);
 							},
 
 							'delete' => function($url, $model, $key) {
 								return Html::tag("span", "", [
-									"class" => "pointer glyphicon glyphicon-trash",
+									"class" => "pointer glyphicon glyphicon-trash fc-fff fs1-357",
 									"ng-click" => "delete('$model->short_id')"
 								]);
 							}

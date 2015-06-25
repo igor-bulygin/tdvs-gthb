@@ -40,6 +40,12 @@ body {
 	display: -ms-flexbox;
 	display: flex;
 }
+.flex-inline{
+	display: inline-flex;
+}
+.flex-align-center{
+	align-items:center;
+}
 
 .flex-column{
 	-webkit-flex-direction: column;
@@ -182,4 +188,15 @@ body {
 
 .fs-lower {
 	text-transform: lowercase;
+}
+
+/**** FONT COLORS ****/
+.fc-fff{
+	color: #fff;
+}
+.fc-d6{
+	color: #d6d6d6;
+}
+.fc-9b{
+	color: #9b9b9b;
 }
