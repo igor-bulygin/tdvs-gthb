@@ -21,7 +21,7 @@ TagsAsset::register($this);
 $this->title = 'Todevise / Admin / Tags';
 ?>
 
-<div class="row" ng-controller="tagsCtrl" ng-init="init()">
+<div class="row no-gutter" ng-controller="tagsCtrl" ng-init="init()">
 	<div class="col-xs-12">
 
 		<?php $this->registerJs("var _categories = " . Json::encode($categories) . ";", View::POS_HEAD) ?>
@@ -31,7 +31,7 @@ $this->title = 'Todevise / Admin / Tags';
 				<h2 class="funiv_bold fs-upper fc-fff fs1-071"><?= Yii::t("app/admin", "Tag list"); ?></h2>
 			</div>
 			<div class="col-xs-6 flex-inline flex-align-center">
-				<div class="fsuniv fs-upper fc-9b fs0-786">FILTER BY CATEGORY</div>
+				<div class="funiv fs-upper fc-9b fs0-786"><?php echo Yii::t("app/admin", "FILTER BY CATEGORY"); ?></div>
 				<div
 					angular-multi-select
 					api="api"
@@ -51,7 +51,7 @@ $this->title = 'Todevise / Admin / Tags';
 				></div>
 			</div>
 			<div class="col-xs-4">
-				<button class="btn btn-default" ng-click="create_new()">Create new</button>
+				<button class="btn btn-default btn-purple fc-fff funiv fs0-786 fs-upper" ng-click="create_new()">Create new</button>
 			</div>
 		</div>
 
@@ -60,16 +60,15 @@ $this->title = 'Todevise / Admin / Tags';
 				'id' => 'tags_list',
 				'dataProvider' => $tags,
 				'options' => [
-					'class' => 'fsuniv fs-upper fc-d6 fs0-714',
+					'class' => 'funiv fc-fff fs1',
 				],
 				'columns' => [
 					[
 						'value' => function($model){
 							return Utils::getValue($model->name, Yii::$app->language, "en-US");
 						},
-						'label' => Yii::t("app/admin", "Name"),
-
-						],
+						'label' => Yii::t("app/admin", "Title")
+					],
 					[
 						'value' => function($model){
 							return Utils::getValue($model->description, Yii::$app->language, "en-US");

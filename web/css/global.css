@@ -30,24 +30,26 @@ body {
 	padding-top: 20px;
 }
 
-.overflow{
+.overflow {
 	overflow: auto;
 }
 
-.flex{
+.flex {
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: -ms-flexbox;
 	display: flex;
 }
-.flex-inline{
+
+.flex-inline {
 	display: inline-flex;
 }
-.flex-align-center{
+
+.flex-align-center {
 	align-items:center;
 }
 
-.flex-column{
+.flex-column {
 	-webkit-flex-direction: column;
 		-ms-flex-direction: column;
 			flex-direction: column;
@@ -56,12 +58,13 @@ body {
 	-webkit-box-direction: normal;
 }
 
-.flex-prop-1{
+.flex-prop-1 {
 	-webkit-box-flex: 1 1 auto;
 	-webkit-flex: 1 1 auto;
 		-ms-flex: 1 1 auto;
 			flex: 1 1 auto;
 }
+
 .flex-prop-1-0 {
 	-webkit-box-flex: 1 0 auto;
 	-webkit-flex: 1 0 auto;
@@ -72,116 +75,118 @@ body {
 
 /**** FONTS ****/
 
-.funiv{
+.funiv {
 	font-family: 'UniversLTPro-Condensed';
 }
 
-.funiv_ultra{
+.funiv_ultra {
 	font-family: 'UniversLTPro-UltraCn';
 }
 
-.funiv_thin{
+.funiv_thin {
 	font-family: 'UniversLTStd-ThinUltraCn';
 }
 
-.funiv_bold{
+.funiv_bold {
 	font-family: 'UniversLTPro-BoldCond';
 }
 
-.fpf_black{
+.fpf_black {
 	font-family: 'playfair_displayblack';
 }
 
-.fpf_blacki{
+.fpf_blacki {
 	font-family: 'playfair_displayblack_italic';
 }
 
-.fpf_bold{
+.fpf_bold {
 	font-family: 'playfair_displaybold';
 }
 
-.fpf_boldi{
+.fpf_boldi {
 	font-family: 'playfair_displaybold_italic';
 }
 
-.fpf_i{
+.fpf_i {
 	font-family: 'playfair_displayitalic';
 }
 
-.fpf{
+.fpf {
 	font-family: 'playfair_displayregular';
 }
 
 /**** FONT SIZES ****/
-.fs0-414{
+
+.fs0-414 {
 	font-size: 0.414em;
 }
 
-.fs0-714{
+.fs0-714 {
 	font-size: 0.714em;
 }
 
-.fs0-786{
+.fs0-786 {
 	font-size: 0.786em;
 }
 
-.fs0-857{
+.fs0-857 {
 	font-size: 0.857em;
 }
 
-.fs0-929{
+.fs0-929 {
 	font-size: 0.929em;
 }
 
-.fs1{
+.fs1 {
 	font-size: 1em;
 }
 
-.fs1-071{
+.fs1-071 {
 	font-size: 1.071em;
 }
 
-.fs1-143{
+.fs1-143 {
 	font-size: 1.143em;
 }
 
-.fs1-214{
+.fs1-214 {
 	font-size: 1.214em;
 }
 
-.fs1-286{
+.fs1-286 {
 	font-size: 1.286em;
 }
 
-.fs1-357{
+.fs1-357 {
 	font-size: 1.357em;
 }
 
-.fs1-429{
+.fs1-429 {
 	font-size: 1.429em;
 }
 
-.fs1-500{
+.fs1-500 {
 	font-size: 1.5em;
 }
 
-.fs1-571{
+.fs1-571 {
 	font-size: 1.571em;
 }
 
-.fs1-643{
+.fs1-643 {
 	font-size: 1.643em;
 }
 
-.fs1-714{
+.fs1-714 {
 	font-size: 1.714em;
 }
 
-.fs1-786{
+.fs1-786 {
 	font-size: 1.786em;
 }
 
 /**** FONT TYPES ****/
+
 .fs-upper {
 	text-transform: uppercase;
 }
@@ -191,12 +196,27 @@ body {
 }
 
 /**** FONT COLORS ****/
-.fc-fff{
+
+.fc-fff {
 	color: #fff;
 }
-.fc-d6{
+
+.fc-d6 {
 	color: #d6d6d6;
 }
-.fc-9b{
+
+.fc-9b {
 	color: #9b9b9b;
+}
+
+/**** BUTTONS COLORS ***/
+
+.btn-purple {
+	background-color: #7619c8;
+	border: 0;
+}
+
+.btn-purple:hover {
+	background-color: #9013fe;
+	color: #fff;
 }
