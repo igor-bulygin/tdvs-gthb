@@ -191,7 +191,7 @@ class ApiController extends CController {
 		return $res;
 	}
 
-	public function actionSizeCharts($fields = null, $filters = null) {
+	public function actionSizeCharts($filters = null, $fields = null) {
 		$request = Yii::$app->getRequest();
 		$res = null;
 
