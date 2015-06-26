@@ -155,7 +155,8 @@ use lajax\languagepicker\widgets\LanguagePicker;
 												'label' => 'Tags',
 												'url'=> Url::toRoute(['admin/tags']),
 												'active' => (
-												Utils::compareURL('admin/tags')
+													Utils::compareURL('admin/tags') ||
+													Utils::compareURL('admin/tag')
 												)
 											],
 											[
@@ -165,7 +166,8 @@ use lajax\languagepicker\widgets\LanguagePicker;
 												'label' => 'Size charts',
 												'url'=> Url::toRoute(['admin/size-charts']),
 												'active' => (
-													Utils::compareURL('admin/size-charts')
+													Utils::compareURL('admin/size-charts') ||
+													Utils::compareURL('admin/size-chart')
 												)
 											],
 											[
