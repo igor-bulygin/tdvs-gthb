@@ -4,6 +4,7 @@ namespace app\models;
 use Yii;
 
 class Lang {
+	// Do NOT add any other keys/values to those arrays or bad things will happen. You have been warned.
 	const EN_US = ['en-US' => 'English'];
 	const ES_ES = ['es-ES' => 'Spanish'];
 	const CA_ES = ['ca-ES' => 'Catalan'];
