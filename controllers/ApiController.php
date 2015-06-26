@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use yii\web\Response;
 use app\helpers\Utils;
+use app\models\Country;
 use app\models\SizeChart;
 use yii\base\ActionFilter;
 use yii\filters\VerbFilter;
@@ -101,6 +102,48 @@ class ApiController extends CController {
 		return $res;
 	}
 	*/
+
+	public function actionCountries($filters = null) {
+		$request = Yii::$app->getRequest();
+		$res = null;
+
+		if ($request->isGet) {
+			$filters = json_decode($filters, true) ?: [];
+
+			if (!empty($filters)) {
+				$filters = Utils::removeAllExcept($filters, []);
+				//TODO: If not admin, force some fields (enabled only, visible by public only, etc...)
+			}
+
+			$res = empty($filters) ? Country::find() : Country::find()->where($filters);
+
+			if($this->intern === false) {
+				$res = $res->asArray()->all();
+			}
+		} else if ($request->isPost) {
+			$_country = Utils::getJsonFromRequest("country");
+			unset($_country["_id"]);
+
+			if ($_country["short_id"] === "new") {
+				$_country["short_id"] = (new Country())->genValidID(5);
+			}
+
+			/* @var $tag \app\models\Tag */
+			$country = Country::findOne(["short_id" => $_country["short_id"]]);
+			$country->setAttributes($_country, false);
+			$country->save();
+
+			$res = $country;
+		} else if ($request->isDelete) {
+			$country = Utils::getJsonFromRequest("country");
+
+			/* @var $country \app\models\Tag */
+			$country = Country::findOne(["short_id" => $country["short_id"]]);
+			$country->delete();
+		}
+
+		return $res;
+	}
 
 	public function actionTags($filters = null) {
 		$request = Yii::$app->getRequest();
