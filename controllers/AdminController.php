@@ -70,7 +70,8 @@ class AdminController extends CController {
 	public function actionSizeChart($size_chart_id) {
 		return $this->render("size-chart", [
 			"sizechart" => $this->api->actionSizeCharts(Json::encode(["short_id" => $size_chart_id]))->asArray()->one(),
-			"categories" => $this->api->actionCategories()->asArray()->all()
+			"categories" => $this->api->actionCategories()->asArray()->all(),
+			"countries" => $this->api->actionCountries()->asArray()->all()
 		]);
 	}
 
