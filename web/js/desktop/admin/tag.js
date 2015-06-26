@@ -87,7 +87,6 @@ todevise.controller('tagCtrl', ["$scope", "$timeout", "$tag", "$tag_util", "$cat
 		}, function () {
 			//Cancel
 		});
-
 	};
 
 	$scope.create_freetext_option = function() {
