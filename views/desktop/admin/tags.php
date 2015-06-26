@@ -22,7 +22,7 @@ $this->title = 'Todevise / Admin / Tags';
 ?>
 
 <div class="row no-gutter" ng-controller="tagsCtrl" ng-init="init()">
-	<div class="col-xs-12">
+	<div class="col-xs-12 no-horizontal-padding">
 
 		<?php $this->registerJs("var _categories = " . Json::encode($categories) . ";", View::POS_HEAD) ?>
 
@@ -86,10 +86,10 @@ $this->title = 'Todevise / Admin / Tags';
 						'header' => Html::tag("div", Yii::t("app/admin", "Enabled")),
 
 						'headerOptions' => [
-						'class' => 'ta-center'
+							'class' => 'ta-center'
 						],
 						'contentOptions' => [
-						'class' => 'ta-center'
+							'class' => 'ta-center'
 						],
 					],
 					[
@@ -103,10 +103,10 @@ $this->title = 'Todevise / Admin / Tags';
 						'header' => Html::tag("div", Yii::t("app/admin", "Required")),
 
 						'headerOptions' => [
-						'class' => 'ta-center'
+							'class' => 'ta-center'
 						],
 						'contentOptions' => [
-						'class' => 'ta-center'
+							'class' => 'ta-center'
 						],
 					],
 					[
@@ -128,10 +128,10 @@ $this->title = 'Todevise / Admin / Tags';
 						'header' => Html::tag("div", Yii::t("app/admin", "Actions")),
 
 						'headerOptions' => [
-						'class' => 'ta-center'
+							'class' => 'ta-center'
 						],
 						'contentOptions' => [
-						'class' => 'ta-center'
+							'class' => 'ta-center'
 						],
 					]
 				]

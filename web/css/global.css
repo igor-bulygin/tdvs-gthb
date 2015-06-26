@@ -209,20 +209,8 @@ body {
 	color: #9b9b9b;
 }
 
-/**** BUTTONS COLORS ***/
-
-.btn-purple {
-	background-color: #7619c8;
-	border: 0;
-}
-
-.btn-purple:hover {
-	background-color: #9013fe;
-	color: #fff;
-}
-
 /**** TEXT ALIGN****/
 
 .ta-center {
-	text-align: center;	
+	text-align: center;
 }
