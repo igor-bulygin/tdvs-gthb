@@ -8,9 +8,10 @@ use yii\web\IdentityInterface;
 
 class Person extends CActiveRecord implements IdentityInterface {
 
-	const TYPE_ADMIN = 0;
-	const TYPE_CLIENT = 1;
-	const TYPE_DEVISER = 2;
+	const ADMIN = 0;
+	const CLIENT = 1;
+	const DEVISER = 2;
+	const COLLABORATOR = 3;
 
 	//public $accessToken;
 

@@ -8,7 +8,7 @@ This is how a single person looks like:
 	short_id: '4q1c83', // 6 characters long custom ID (url-safe)
 
 	type: [0, 1], // Each person can have a single or multiple roles, for example, Client and Deviser.
-	// Check the constants TYPE_* in Person model for all the valid values for this.
+	// Check the constants in Person model for all the valid values for this.
 
 	personal_info: {
 		name: '', // String
