@@ -1,9 +1,12 @@
 <?php
 
+use app\models\Lang;
 use yii\mongodb\Migration;
 
 class m150415_113659_create_category extends Migration {
 	public function up() {
+		$en = array_keys(Lang::EN_US)[0];
+
 		$this->createCollection('category');
 		$this->createIndex('category', 'short_id', [
 			'unique' => true
@@ -13,64 +16,64 @@ class m150415_113659_create_category extends Migration {
 		$this->insert('category', [
 			"short_id" => "10000",
 			"path" => '/',
-			"name" => ["en-US" => "Fashion"],
-			"slug" => ["en-US" => "fashion"]
+			"name" => [$en => "Fashion"],
+			"slug" => [$en => "fashion"]
 		]);
 
 		$this->insert('category', [
 			"short_id" => "20000",
 			"path" => '/10000/',
-			"name" => ["en-US" => "Women"],
-			"slug" => ["en-US" => "women"]
+			"name" => [$en => "Women"],
+			"slug" => [$en => "women"]
 		]);
 
 		$this->insert('category', [
 			"short_id" => "30000",
 			"path" => '/10000/20000/',
-			"name" => ["en-US" => "Dresses"],
-			"slug" => ["en-US" => "Dresses"]
+			"name" => [$en => "Dresses"],
+			"slug" => [$en => "Dresses"]
 		]);
 
 		$this->insert('category', [
 			"short_id" => "40000",
 			"path" => '/10000/',
-			"name" => ["en-US" => "Man"],
-			"slug" => ["en-US" => "man"]
+			"name" => [$en => "Man"],
+			"slug" => [$en => "man"]
 		]);
 
 		$this->insert('category', [
 			"short_id" => "50000",
 			"path" => '/10000/40000/',
-			"name" => ["en-US" => "Jeans"],
-			"slug" => ["en-US" => "jeans"]
+			"name" => [$en => "Jeans"],
+			"slug" => [$en => "jeans"]
 		]);
 
 		$this->insert('category', [
 			"short_id" => "60000",
 			"path" => '/',
-			"name" => ["en-US" => "Technology"],
-			"slug" => ["en-US" => "technology"]
+			"name" => [$en => "Technology"],
+			"slug" => [$en => "technology"]
 		]);
 
 		$this->insert('category', [
 			"short_id" => "70000",
 			"path" => '/60000/',
-			"name" => ["en-US" => "Computers"],
-			"slug" => ["en-US" => "computers"]
+			"name" => [$en => "Computers"],
+			"slug" => [$en => "computers"]
 		]);
 
 		$this->insert('category', [
 			"short_id" => "80000",
 			"path" => '/60000/70000/',
-			"name" => ["en-US" => "RAM"],
-			"slug" => ["en-US" => "ram"]
+			"name" => [$en => "RAM"],
+			"slug" => [$en => "ram"]
 		]);
 
 		$this->insert('category', [
 			"short_id" => "90000",
 			"path" => '/60000/',
-			"name" => ["en-US" => "Smart phones"],
-			"slug" => ["en-US" => "smart-phones"]
+			"name" => [$en => "Smart phones"],
+			"slug" => [$en => "smart-phones"]
 		]);
 	}
 

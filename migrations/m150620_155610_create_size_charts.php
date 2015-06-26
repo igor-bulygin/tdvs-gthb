@@ -1,7 +1,11 @@
 <?php
 
+use app\models\Lang;
+
 class m150620_155610_create_size_charts extends \yii\mongodb\Migration {
 	public function up() {
+		$en = array_keys(Lang::EN_US)[0];
+
 		$this->createCollection('size_chart');
 		$this->createIndex('size_chart', 'short_id', [
 			'unique' => true
@@ -11,15 +15,15 @@ class m150620_155610_create_size_charts extends \yii\mongodb\Migration {
 
 		$this->insert('size_chart', [
 			"short_id" => "10000",
-			"name" => ["en-US" => "Pant sizes"],
+			"name" => [$en => "Pant sizes"],
 			"enabled" => true,
 			"categories" => ["30000", "50000"],
 			"metric_units" => 1,
 			"countries" => ["ES", "US"],
 			"columns" => [
-				["en-US" => "Inside leg"],
-				["en-US" => "Rise"],
-				["en-US" => "Waist"]
+				[$en => "Inside leg"],
+				[$en => "Rise"],
+				[$en => "Waist"]
 			],
 			"values" => [
 				[1, 2, 3, 4, 5],

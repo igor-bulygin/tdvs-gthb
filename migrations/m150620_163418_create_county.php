@@ -1,10 +1,13 @@
 <?php
 
+use app\models\Lang;
 use app\helpers\Utils;
 use app\models\Country;
 
 class m150620_163418_create_county extends \yii\mongodb\Migration {
 	public function up() {
+		$en = array_keys(Lang::EN_US)[0];
+
 		$this->createCollection('country');
 		$this->createIndex('country', 'country_code', [
 			'unique' => true
@@ -19,7 +22,7 @@ class m150620_163418_create_county extends \yii\mongodb\Migration {
 			$data = Utils::underscoreKeys($country);
 			$name = $data["country_name"];
 			$data["country_name"] = [];
-			$data["country_name"]["en-US"] = $name;
+			$data["country_name"][$en] = $name;
 
 			/* @var $country \app\models\Country */
 			$country = new Country();

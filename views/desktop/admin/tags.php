@@ -1,5 +1,6 @@
 <?php
 use yii\web\View;
+use app\models\Lang;
 use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\helpers\Json;
@@ -32,7 +33,7 @@ $this->title = 'Todevise / Admin / Tags';
 					<h2 class="page-title funiv_bold fs-upper fc-fff fs1-071"><?= Yii::t("app/admin", "Tag list"); ?></h2>
 				</div>
 				<div class="col-xs-6 col-height col-middle flex flex-align-center">
-					<div class="funiv fs-upper fc-9b fs0-786 flex-inline"><?php echo Yii::t("app/admin", "FILTER BY CATEGORY"); ?></div>
+					<div class="funiv fs-upper fc-9b fs0-786 flex-inline"><?php echo Yii::t("app/admin", "Filter by category"); ?></div>
 					<div
 						angular-multi-select
 						api="api"
@@ -67,13 +68,13 @@ $this->title = 'Todevise / Admin / Tags';
 				'columns' => [
 					[
 						'value' => function($model){
-							return Utils::getValue($model->name, Yii::$app->language, "en-US");
+							return Utils::getValue($model->name, Yii::$app->language, array_keys(Lang::EN_US)[0]);
 						},
 						'label' => Yii::t("app/admin", "Title")
 					],
 					[
 						'value' => function($model){
-							return Utils::getValue($model->description, Yii::$app->language, "en-US");
+							return Utils::getValue($model->description, Yii::$app->language, array_keys(Lang::EN_US)[0]);
 						},
 						'label' => Yii::t("app/admin", "Description")
 					],
@@ -154,19 +155,19 @@ $this->title = 'Todevise / Admin / Tags';
 				<span class="input-group-addon" id="basic-addon-{{ $index }}">{{ lang_v }}</span>
 				<input required="" type="text" class="form-control" placeholder="<?php echo Yii::t("app/admin", "Tag name..."); ?>" aria-describedby="basic-addon-{{ $index }}" ng-model="langs[lang_k]" name="{{ lang_k }}">
 				<span class="input-group-addon alert-danger" ng-show="form.$submitted && !form.$valid && !form['{{lang_k}}'].$valid">
-					<span ng-show="form['{{lang_k}}'].$error.required">Required!</span>
+					<span ng-show="form['{{lang_k}}'].$error.required"><?php echo Yii::t("app/admin", "Required!"); ?></span>
 				</span>
 			</div>
+
 			<br />
 
 			<label><?php echo Yii::t("app/admin", "Description"); ?></label>
 			<div class="input-group">
 				<input id="description" required="" type="text" class="form-control" placeholder="<?php echo Yii::t("app/admin", "Description..."); ?>" aria-describedby="basic-addon-desc" ng-model="description" name="desc">
 				<span class="input-group-addon alert-danger" id="basic-addon-desc" ng-show="form.$submitted && !form.$valid && !form['desc'].$valid">
-					<span ng-show="form['desc'].$error.required">Required!</span>
+					<span ng-show="form['desc'].$error.required"><?php echo Yii::t("app/admin", "Required!"); ?></span>
 				</span>
 			</div>
-
 		</div>
 		<div class='modal-footer'>
 			<button class='btn btn-success' ng-click='form.$submitted = true; form.$valid && ok()'><?php echo Yii::t("app/admin", "Confirm"); ?></button>

@@ -1,12 +1,12 @@
 <?php
 use yii\web\View;
-use app\models\Tag;
+use app\models\Lang;
 use yii\helpers\Json;
-use app\models\TagOption;
 use app\models\MetricUnit;
 use app\assets\desktop\admin\SizeChartAsset;
 
 /* @var $this yii\web\View */
+/* @var $countries ArrayObject */
 /* @var $categories ArrayObject */
 /* @var $sizechart ArrayObject */
 
@@ -188,7 +188,7 @@ $this->title = 'Todevise / Admin / Size chart';
 				selection-mode="single"
 				button-template="angular-multi-select-btn-data.htm"
 				button-label="{{ countries_lookup[country_code] }}"
-				search-property="country_name['en-US']"
+				search-property="country_name['<?php echo array_keys(Lang::EN_US)[0]; ?>']"
 				helper-elements="noall nonone noreset filter">
 			</div>
 		</div>

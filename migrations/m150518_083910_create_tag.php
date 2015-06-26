@@ -1,7 +1,11 @@
 <?php
 
+use app\models\Lang;
+
 class m150518_083910_create_tag extends \yii\mongodb\Migration {
 	public function up() {
+		$en = array_keys(Lang::EN_US)[0];
+
 		$this->createCollection('tag');
 		$this->createIndex('tag', 'short_id', [
 			'unique' => true
@@ -15,20 +19,20 @@ class m150518_083910_create_tag extends \yii\mongodb\Migration {
 			"required" => true,
 			"type" => 0,
 			"n_options" => 2,
-			"name" => ["en-US" => "Color"],
-			"description" => ["en-US" => "Color(s) of the product"],
+			"name" => [$en => "Color"],
+			"description" => [$en => "Color(s) of the product"],
 			"categories" => ["30000", "50000"],
 			"options" => [
 				[
-					"text" => ["en-US" => "Red"],
+					"text" => [$en => "Red"],
 					"value" => "red",
 				],
 				[
-					"text" => ["en-US" => "Green"],
+					"text" => [$en => "Green"],
 					"value" => "green",
 				],
 				[
-					"text" => ["en-US" => "Blue"],
+					"text" => [$en => "Blue"],
 					"value" => "blue",
 				]
 			]
@@ -39,12 +43,12 @@ class m150518_083910_create_tag extends \yii\mongodb\Migration {
 			"enabled" => true,
 			"required" => false,
 			"type" => 1,
-			"name" => ["en-US" => "Weight"],
-			"description" => ["en-US" => "Weight of the product"],
+			"name" => [$en => "Weight"],
+			"description" => [$en => "Weight of the product"],
 			"categories" => ["90000"],
 			"options" => [
 				[
-					"text" => ["en-US" => "Weight"],
+					"text" => [$en => "Weight"],
 					"type" => 0,
 					"metric_units" => 2
 				]
@@ -56,22 +60,22 @@ class m150518_083910_create_tag extends \yii\mongodb\Migration {
 			"enabled" => true,
 			"required" => false,
 			"type" => 1,
-			"name" => ["en-US" => "Size"],
-			"description" => ["en-US" => "Size of the product"],
+			"name" => [$en => "Size"],
+			"description" => [$en => "Size of the product"],
 			"categories" => ["90000"],
 			"options" => [
 				[
-					"text" => ["en-US" => "Long"],
+					"text" => [$en => "Long"],
 					"type" => 0,
 					"metric_units" => 1
 				],
 				[
-					"text" => ["en-US" => "Wide"],
+					"text" => [$en => "Wide"],
 					"type" => 0,
 					"metric_units" => 1
 				],
 				[
-					"text" => ["en-US" => "Tall"],
+					"text" => [$en => "Tall"],
 					"type" => 0,
 					"metric_units" => 1
 				],

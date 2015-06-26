@@ -1,11 +1,12 @@
 <?php
-use app\models\MetricUnit;
 use yii\web\View;
+use app\models\Lang;
 use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\helpers\Json;
 use app\helpers\Utils;
 use yii\grid\GridView;
+use app\models\MetricUnit;
 use app\assets\desktop\admin\SizeChartsAsset;
 
 /* @var $this yii\web\View */
@@ -36,7 +37,7 @@ $this->title = 'Todevise / Admin / Size charts';
 				</div>
 
 				<div class="col-xs-4 col-height col-middle flex flex-align-center">
-					<div class="funiv fs-upper fc-9b fs0-786 flex-inline"><?php echo Yii::t("app/admin", "FILTER BY CATEGORY"); ?></div>
+					<div class="funiv fs-upper fc-9b fs0-786 flex-inline"><?php echo Yii::t("app/admin", "Filter by category"); ?></div>
 					<div
 						angular-multi-select
 						api="api"
@@ -57,7 +58,7 @@ $this->title = 'Todevise / Admin / Size charts';
 				</div>
 
 				<div class="col-xs-4 col-height col-middle">
-					<button class="btn btn-default btn-purple fc-fff funiv fs0-786 fs-upper pull-right" ng-click="create_new()">Create new</button>
+					<button class="btn btn-default btn-purple fc-fff funiv fs0-786 fs-upper pull-right" ng-click="create_new()"><?php echo Yii::t("app/admin", "Create new"); ?></button>
 				</div>
 			</div>
 		</div>
@@ -72,7 +73,7 @@ $this->title = 'Todevise / Admin / Size charts';
 				'columns' => [
 					[
 						'value' => function($model){
-							return Utils::getValue($model->name, Yii::$app->language, "en-US");
+							return Utils::getValue($model->name, Yii::$app->language, array_keys(Lang::EN_US)[0]);
 						},
 						'label' => Yii::t("app/admin", "Name")
 					],
@@ -118,7 +119,7 @@ $this->title = 'Todevise / Admin / Size charts';
 				<span class="input-group-addon" id="basic-addon-{{ $index }}">{{ lang_v }}</span>
 				<input required="" type="text" class="form-control" placeholder="<?php echo Yii::t("app/admin", "Option name..."); ?>" aria-describedby="basic-addon-{{ $index }}" ng-model="langs[lang_k]" name="{{ lang_k }}">
 				<span class="input-group-addon alert-danger" ng-show="form.$submitted && !form.$valid && !form['{{lang_k}}'].$valid">
-					<span ng-show="form['{{lang_k}}'].$error.required">Required!</span>
+					<span ng-show="form['{{lang_k}}'].$error.required"><?php echo Yii::t("app/admin", "Required!"); ?></span>
 				</span>
 			</div>
 			<br />
