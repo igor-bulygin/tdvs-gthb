@@ -21,7 +21,7 @@ $this->title = 'Todevise / Admin / Tag';
 ?>
 
 <div class="row no-gutter" ng-controller="tagCtrl" ng-init="init()">
-	<div class="col-sm-12 col-md-12 col-lg-12">
+	<div class="col-xs-12">
 
 		<?php $this->registerJs("var _categories = " . Json::encode($categories) . ";", View::POS_HEAD); ?>
 		<?php $this->registerJs("var _tag = " . Json::encode($tag) . ";", View::POS_HEAD); ?>
@@ -33,10 +33,10 @@ $this->title = 'Todevise / Admin / Tag';
 
 		<div class="row">
 			<div class="row-same-height">
-				<div class="col-md-4 col-lg-4 col-height col-middle">
+				<div class="col-xs-4 col-height col-middle">
 					<h4><?= Yii::t("app/admin", "Edit tag"); ?></h4>
 				</div>
-				<div class="col-md-8 col-lg-8 col-height col-middle">
+				<div class="col-xs-8 col-height col-middle">
 					<div class="pull-right">
 						<button class="btn btn-danger" ng-click="cancel()"><?php echo Yii::t("app/admin", "Cancel changes"); ?></button>
 						<button class="btn btn-success" ng-click="save()"><?php echo Yii::t("app/admin", "Save changes"); ?></button>
@@ -48,15 +48,15 @@ $this->title = 'Todevise / Admin / Tag';
 		<br />
 
 		<div class="row">
-			<div class="col-md-4 col-lg-4">
+			<div class="col-xs-4">
 				<label><?php echo Yii::t("app/admin", "Tag name"); ?></label>
 				<input type="text" class="form-control" placeholder="" ng-model="tag.name[lang]">
 			</div>
-			<div class="col-md-4 col-lg-4">
+			<div class="col-xs-4">
 				<label><?php echo Yii::t("app/admin", "Description"); ?></label>
 				<input type="text" class="form-control" placeholder="" ng-model="tag.description[lang]">
 			</div>
-			<div class="col-md-4 col-lg-4">
+			<div class="col-xs-4">
 				<div class="pull-right">
 					<label><?php echo Yii::t("app/admin", "Categories"); ?></label>
 					<div
@@ -83,28 +83,28 @@ $this->title = 'Todevise / Admin / Tag';
 		<br />
 
 		<div class="row">
-			<div class="col-md-3 col-lg-3">
+			<div class="col-xs-3">
 				<div class="checkbox">
 					<label>
 						<input type="checkbox" ng-model="tag.enabled" ng-checked="tag.enabled"> <?php echo Yii::t("app/admin", "Enabled"); ?>
 					</label>
 				</div>
 			</div>
-			<div class="col-md-3 col-lg-3">
+			<div class="col-xs-3">
 				<div class="checkbox">
 					<label ng-init="optional = !tag.required">
 						<input type="checkbox" ng-model="optional" ng-change="tag.required = !optional"> <?php echo Yii::t("app/admin", "Optional"); ?>
 					</label>
 				</div>
 			</div>
-			<div class="col-md-6 col-lg-6">
+			<div class="col-xs-6">
 				<div class="row">
 					<div class="row-same-height">
-						<div class="col-md-6 col-lg-6 col-height col-middle">
+						<div class="col-xs-6 col-height col-middle">
 							<?php echo Yii::t("app/admin", "What kind of tag is it?"); ?>
 							<span class="glyphicon glyphicon-info-sign"></span>
 						</div>
-						<div class="col-md-6 col-lg-6 col-height col-middle">
+						<div class="col-xs-6 col-height col-middle">
 							<div class="radio flex-justify-center">
 								<label>
 									<input type="radio" name="tagType" id="tagType1" value="<?php echo Tag::DROPDOWN; ?>" ng-model="tag.type">
@@ -126,11 +126,11 @@ $this->title = 'Todevise / Admin / Tag';
 		<div class="ng-cloak" ng-show="tag.type == <?php echo Tag::DROPDOWN; ?> && pending_dialog_type === false">
 			<div class="row">
 				<div class="row-same-height">
-					<div class="col-md-4 col-lg-4 col-height col-middle">
+					<div class="col-xs-4 col-height col-middle">
 						<label><?php echo Yii::t("app/admin", "Options"); ?></label>
 					</div>
 
-					<div class="col-md-6 col-lg-6 col-height col-middle">
+					<div class="col-xs-6 col-height col-middle">
 						<?php echo Yii::t("app/admin", "Does this tag allow combos?"); ?>
 						<span class="glyphicon glyphicon-info-sign"></span>
 						<?php echo Yii::t("app/admin", "Please specify how many options can be combined"); ?>
@@ -144,7 +144,7 @@ $this->title = 'Todevise / Admin / Tag';
 						</div>
 					</div>
 
-					<div class="col-md-2 col-lg-2 col-height col-middle">
+					<div class="col-xs-2 col-height col-middle">
 						<button class="btn btn-success" ng-click="edit_dropdown_option(-1)"><?php echo Yii::t("app/admin", "Create new"); ?></button>
 					</div>
 				</div>
@@ -154,7 +154,7 @@ $this->title = 'Todevise / Admin / Tag';
 
 			<div class="row">
 				<div class="row-same-height sortable-container" sv-root sv-part="tag.options">
-					<div ng-repeat="option in tag.options" sv-element class="col-md-3 col-lg-3 col-height col-middle">
+					<div ng-repeat="option in tag.options" sv-element class="col-xs-3 col-height col-middle">
 						<span class="glyphicon glyphicon-menu-hamburger pointer" sv-handle></span>
 						<span>{{ option.text[lang] }}</span>
 						<div class="pull-right">
@@ -169,11 +169,11 @@ $this->title = 'Todevise / Admin / Tag';
 		<div class="ng-cloak" ng-show="tag.type == <?php echo Tag::FREETEXT; ?> && pending_dialog_type === false">
 			<div class="row">
 				<div class="row-same-height" ng-init="new_option = {}">
-					<div class="col-md-4 col-lg-4 col-height col-middle">
+					<div class="col-xs-4 col-height col-middle">
 						<label><?php echo Yii::t("app/admin", "Options"); ?></label>
 					</div>
 
-					<div class="col-md-3 col-lg-3 col-height col-middle">
+					<div class="col-xs-3 col-height col-middle">
 						<span><?php echo Yii::t("app/admin", "Metric unit"); ?></span>
 						<div
 							angular-multi-select
@@ -188,7 +188,7 @@ $this->title = 'Todevise / Admin / Tag';
 						</div>
 					</div>
 
-					<div class="col-md-3 col-lg-3 col-height col-middle">
+					<div class="col-xs-3 col-height col-middle">
 						<div class="radio flex-justify-center" ng-init="freetext_type = <?php echo TagOption::NUMERIC; ?>">
 							<label>
 								<input type="radio" name="optionsType" id="optionsType1" value="<?php echo TagOption::NUMERIC; ?>" ng-model="freetext_type">
@@ -201,7 +201,7 @@ $this->title = 'Todevise / Admin / Tag';
 						</div>
 					</div>
 
-					<div class="col-md-2 col-lg-2 col-height col-middle">
+					<div class="col-xs-2 col-height col-middle">
 						<button class="btn btn-success" ng-click="create_freetext_option()"><?php echo Yii::t("app/admin", "Create new"); ?></button>
 					</div>
 				</div>
@@ -211,10 +211,10 @@ $this->title = 'Todevise / Admin / Tag';
 
 			<div class="row">
 				<div class="row-same-height" ng-repeat="option in tag.options">
-					<div class="col-md-11 col-lg-11 col-height col-middle">
+					<div class="col-xs-11 col-height col-middle">
 						<input type="text" class="form-control" placeholder="<?php echo Yii::t("app/admin", "Field name (optional)"); ?>" ng-model="tag.options[$index].text[lang]">
 					</div>
-					<div class="col-md-1 col-lg-1 col-height col-middle text-center">
+					<div class="col-xs-1 col-height col-middle text-center">
 						<span class="glyphicon glyphicon-trash pointer" ng-click="delete_option($index)"></span>
 						<!-- TODO: Show the metric unit and the type? -->
 					</div>
