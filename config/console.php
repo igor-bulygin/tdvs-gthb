@@ -27,6 +27,10 @@ return [
 		],
 		//Database
 		'mongodb' => require(__DIR__ . '/db.php'),
+
+		'Scrypt' => [
+			'class' => 'alexandernst\Scrypt\Scrypt'
+		]
 	],
 	'params' => require(__DIR__ . '/params.php'),
 ];
