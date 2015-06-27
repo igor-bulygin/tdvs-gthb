@@ -89,10 +89,10 @@ $this->title = 'Todevise / Admin / Tags';
 						'header' => Html::tag("div", Yii::t("app/admin", "Enabled")),
 
 						'headerOptions' => [
-							'class' => 'ta-center'
+							'class' => 'text-center'
 						],
 						'contentOptions' => [
-							'class' => 'ta-center'
+							'class' => 'text-center'
 						],
 					],
 					[
@@ -106,10 +106,10 @@ $this->title = 'Todevise / Admin / Tags';
 						'header' => Html::tag("div", Yii::t("app/admin", "Required")),
 
 						'headerOptions' => [
-							'class' => 'ta-center'
+							'class' => 'text-center'
 						],
 						'contentOptions' => [
-							'class' => 'ta-center'
+							'class' => 'text-center'
 						],
 					],
 					[
@@ -131,10 +131,10 @@ $this->title = 'Todevise / Admin / Tags';
 						'header' => Html::tag("div", Yii::t("app/admin", "Actions")),
 
 						'headerOptions' => [
-							'class' => 'ta-center'
+							'class' => 'text-center'
 						],
 						'contentOptions' => [
-							'class' => 'ta-center'
+							'class' => 'text-center'
 						],
 					]
 				]
