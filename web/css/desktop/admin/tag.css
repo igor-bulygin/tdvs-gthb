@@ -262,7 +262,6 @@ input[type="radio"]:checked + label span {
 	float: left;
 	height: 36px;
 	margin-left: 2.5%;
-	vertical-align: middle;;
 }
 
 .arrow-left:before,
