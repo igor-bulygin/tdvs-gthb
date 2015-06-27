@@ -164,11 +164,47 @@ html, body {
 /**** BUTTONS COLORS ***/
 
 .btn-purple {
-	background-color: #7619c8;
+	background-color: #9013fe;
 	border: 0;
 }
 
 .btn-purple:hover {
-	background-color: #9013fe;
+	background-color: #7619c8;
 	color: #fff;
+}
+
+.btn-gray {
+	background-color: #575757;
+	border: 0;
+}
+
+.btn-gray:hover {
+	background-color: #7b7b7b;
+	color: #fff;
+}
+
+.btn-light-green {
+	background-color: #b8e986;
+	border: 0;
+}
+
+.btn-light-green:hover {
+	background-color: #9ef463;
+	color: #3d3d3d;
+}
+
+.btn-coral {
+	background-color: #ff6d6d;
+	border: 0;
+}
+
+.btn-coral:hover {
+	background-color: #f34d4d;
+	color: #fff;
+}
+
+/**** COLUMNS PADDING ****/
+
+.padding-1 {
+	padding: 1%;
 }

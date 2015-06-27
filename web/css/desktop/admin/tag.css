@@ -1,3 +1,11 @@
+.body-content {
+	background-color: #2e2e2e;
+}
+
+.bgcolor-3d {
+	background-color: #3D3D3D;
+}
+
 .spinner {
 	display: inline-flex;
 }
@@ -32,3 +40,206 @@
 	position: absolute;
 	left: 2px;
 }
+
+.page-title-row {
+	padding: 1% 1% 1% 1.2%;
+}
+
+.fnormal {
+	font-weight: normal;
+}
+
+.div-bordered {
+	border: 1px solid #4a4a4a;
+}
+
+
+/**** FOMRS ****/
+
+.tag .form-control {
+	background-color: #2e2e2e;
+	border: 1px solid #4a4a4a;
+	border-radius: 0;
+}
+
+.tag .ams_btn {
+	width: 100%;
+	border: 1px solid #4a4a4a;
+	border-radius: 0;
+	background-color: #2e2e2e;
+}
+
+/**** CHECKBOK ****/
+
+.toggle-checkbox {
+	display: none;
+}
+.toggle-btn {
+	display: block;
+	margin: 0 auto;
+
+	font-size: 1.4em;
+
+	transition: all 350ms ease-in;
+
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+.toggle-btn,
+.toggle-checkbox,
+.toggle-feature {
+	&,
+	&:before,
+	&:after {
+		transition: all 250ms ease-in;
+	}
+	&:before,
+	&:after {
+		content: '';
+		display: block;
+	}
+}
+
+$toggleHeight: 70px;
+$toggleWidth: 125px;
+$borderWidth: 5px;
+$toggleBtnRadius: $toggleHeight - 14px;
+
+$cloud-borderColor: #d3d3d3;
+$cloud-bgColor: #fff;
+
+.toggle-opt {
+	.toggle-btn {
+		position: relative;
+		height: $toggleHeight;
+		width: $toggleWidth;
+		border-radius: $toggleHeight;
+
+		&:before {
+			position: absolute;
+			top: 2px;
+			left: 4px;
+			width: $toggleBtnRadius;
+			height: $toggleBtnRadius;
+			border-radius: 50%;
+		}
+	}
+}
+
+$bgColor-off: #848484;
+$borderColor-off: #848484;
+
+$bgColor-on: #9013fe;
+$borderColor-on: #9013fe;
+
+$circleWidth: 36px;
+$circleBgColor: #fff;
+$circleBorderColor: #fff;
+
+
+$toggleFeaturePosition-off: ($toggleBtnRadius/2) - 14;
+$toggleFeaturePosition-on: 53px;
+
+.toggle-opt {
+	position: relative;
+
+	.toggle-btn {
+		border: $borderWidth solid $borderColor-off;
+		background-color: $bgColor-off;
+
+		//toggle button
+		&:before {
+			background-color: $circleBgColor;
+			border: $borderWidth solid $circleBorderColor;
+		}
+	}
+
+	.toggle-feature {
+		position: absolute;
+		left: 14px;
+		top: 32%;
+		width: 7px;
+		height: 7px;
+		border-radius: 50%;
+
+
+		&:before {
+			position: absolute;
+			left: 0;
+			top: 11px;
+			width: $circleWidth;
+			height: 17px;
+
+
+			border-radius: $circleWidth $circleWidth 0 0;
+		}
+		&:after {
+			position: absolute;
+			left: 9px;
+			top: 21px;
+			width: 17px;
+			height: 7px;
+			border-radius: 17px 17px 0 0;
+		}
+
+	}
+
+	//checkbox is checked
+	.toggle-checkbox:checked {
+		 & + .toggle-btn {
+			background-color: $bgColor-on;
+			border: $borderWidth solid $borderColor-on;
+
+			//toggle button
+			&:before {
+				transform: translate($toggleWidth - ($toggleBtnRadius) - ($borderWidth * 2) - 8px, 0);
+			}
+
+			& .toggle-feature {
+				transform: translate($toggleFeaturePosition-on, 0);
+
+				&:before {
+					border-radius: 0 0 $circleWidth $circleWidth;
+					top: 11px;
+				}
+				&:after {
+					top: 21px;
+					border-radius: 50%/50%;
+				}
+			}
+		}
+	}
+}
+
+.arrow-left {
+	position: relative;
+	border: solid 1px #4a4a4a;
+	float: left;
+	height: 36px;
+}
+
+.arrow-left:before,
+.arrow-left:after {
+	border-top: 18px solid transparent;
+	border-bottom: 18px solid transparent;
+	top: -1px;
+	content: " ";
+	position: absolute;
+	display: block;
+	width: 0;
+	height: 0;
+ }
+
+.arrow-left:after {
+	border-right: 16px solid #2e2e2e;
+	left: -15px;
+	z-index: 2;
+ }
+
+.arrow-left:before {
+	border-right: 16px solid #4a4a4a;
+	left: -16px;
+	z-index: 1;
+ }
