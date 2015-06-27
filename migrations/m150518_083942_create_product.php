@@ -3,7 +3,7 @@
 class m150518_083942_create_product extends \yii\mongodb\Migration {
 	public function up() {
 
-		$this->insert('tag', [
+		$this->insert('product', [
 			"short_id" => "10000000",
 			"enabled" => true,
 

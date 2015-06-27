@@ -22,7 +22,8 @@ class m150405_184924_create_person extends Migration {
 			"personal_info" => [
 				"name" => "Admin",
 				"surnames" => ["Foo", "Bar"],
-				"bday" => new MongoDate(strtotime("1990-01-06 03:42:15"))
+				"bday" => new MongoDate(strtotime("1990-01-06 03:42:15")),
+				"country" => "US"
 			],
 			"credentials" => [
 				"email" => "admin@test.com"
@@ -44,7 +45,8 @@ class m150405_184924_create_person extends Migration {
 			"personal_info" => [
 				"name" => "Client",
 				"surnames" => ["Foo", "Bar"],
-				"bday" => new MongoDate(strtotime("1990-01-06 03:42:15"))
+				"bday" => new MongoDate(strtotime("1990-01-06 03:42:15")),
+				"country" => "US"
 			],
 			"credentials" => [
 				"email" => "client@test.com"
@@ -66,8 +68,10 @@ class m150405_184924_create_person extends Migration {
 			"personal_info" => [
 				"name" => "Deviser",
 				"surnames" => ["Foo", "Bar"],
-				"bday" => new MongoDate(strtotime("1990-01-06 03:42:15"))
+				"bday" => new MongoDate(strtotime("1990-01-06 03:42:15")),
+				"country" => "US"
 			],
+			"slug" => "deviser-foo-bar",
 			"credentials" => [
 				"email" => "deviser@test.com"
 			],
@@ -88,7 +92,8 @@ class m150405_184924_create_person extends Migration {
 			"personal_info" => [
 				"name" => "Collaborator",
 				"surnames" => ["Foo", "Bar"],
-				"bday" => new MongoDate(strtotime("1990-01-06 03:42:15"))
+				"bday" => new MongoDate(strtotime("1990-01-06 03:42:15")),
+				"country" => "US"
 			],
 			"credentials" => [
 				"email" => "collaborator@test.com"
