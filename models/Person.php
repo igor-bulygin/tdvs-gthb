@@ -59,8 +59,10 @@ class Person extends CActiveRecord implements IdentityInterface {
 	}
 
 	public function beforeSave($insert) {
-		if ($this->credentials["auth_key"] === null) {
-			$this->credentials["auth_key"] = Yii::$app->getSecurity()->generateRandomString(128);
+		if (!array_key_exists("auth_key", $this->credentials) || $this->credentials["auth_key"] === null) {
+			$this->credentials = array_merge_recursive($this->credentials, [
+				"auth_key" => Yii::$app->getSecurity()->generateRandomString(128)
+			]);
 		}
 
 		return parent::beforeSave($insert);
@@ -69,11 +71,15 @@ class Person extends CActiveRecord implements IdentityInterface {
 	public function setPassword($password) {
 		$salt = bin2hex(openssl_random_pseudo_bytes(32));
 		$password = bin2hex(Yii::$app->Scrypt->calc($password, $salt, 8, 8, 16, 32));
-		$this->credentials["salt"] = $salt;
-		$this->credentials["password"] = $password;
+		$this->credentials = array_merge_recursive($this->credentials, [
+			"salt" => $salt,
+			"password" => $password
+		]);
 	}
 
 	public function setLanguage($lang) {
-		$this->preferences["lang"] = $lang;
+		$this->preferences = array_merge_recursive($this->preferennces, [
+			"lang" => $lang
+		]);
 	}
 }
