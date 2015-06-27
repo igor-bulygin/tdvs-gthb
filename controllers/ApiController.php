@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use yii\web\Response;
 use app\helpers\Utils;
+use app\models\Person;
 use app\models\Country;
 use app\models\SizeChart;
 use yii\base\ActionFilter;
@@ -128,7 +129,7 @@ class ApiController extends CController {
 				$_country["short_id"] = (new Country())->genValidID(5);
 			}
 
-			/* @var $tag \app\models\Tag */
+			/* @var $country \app\models\Country */
 			$country = Country::findOne(["short_id" => $_country["short_id"]]);
 			$country->setAttributes($_country, false);
 			$country->save();
@@ -137,9 +138,52 @@ class ApiController extends CController {
 		} else if ($request->isDelete) {
 			$country = Utils::getJsonFromRequest("country");
 
-			/* @var $country \app\models\Tag */
+			/* @var $country \app\models\Country */
 			$country = Country::findOne(["short_id" => $country["short_id"]]);
 			$country->delete();
+		}
+
+		return $res;
+	}
+
+	public function actionDevisers($filters = null) {
+		$request = Yii::$app->getRequest();
+		$res = null;
+
+		if ($request->isGet) {
+			$filters = json_decode($filters, true) ?: [];
+
+			if (!empty($filters)) {
+				$filters = Utils::removeAllExcept($filters, []);
+				//TODO: If not admin, force some fields (enabled only, visible by public only, etc...)
+			}
+			$filters["type"]['$in'] = [Person::DEVISER];
+
+			$res = empty($filters) ? Person::find() : Person::find()->where($filters);
+
+			if($this->intern === false) {
+				$res = $res->asArray()->all();
+			}
+		} else if ($request->isPost) {
+			$_deviser = Utils::getJsonFromRequest("person");
+			unset($_deviser["_id"]);
+
+			if ($_deviser["short_id"] === "new") {
+				$_deviser["short_id"] = (new Person())->genValidID(5);
+			}
+
+			/* @var $deviser \app\models\Person */
+			$deviser = Person::findOne(["short_id" => $_deviser["short_id"]]);
+			$deviser->setAttributes($_deviser, false);
+			$deviser->save();
+
+			$res = $deviser;
+		} else if ($request->isDelete) {
+			$deviser = Utils::getJsonFromRequest("person");
+
+			/* @var $deviser \app\models\Person */
+			$deviser = Person::findOne(["short_id" => $deviser["short_id"]]);
+			$deviser->delete();
 		}
 
 		return $res;
