@@ -68,10 +68,17 @@ class AdminController extends CController {
 	}
 
 	public function actionSizeChart($size_chart_id) {
+		$countries = $this->api->actionCountries()->asArray()->all();
+		$countries_lookup = [];
+		foreach($countries as $country) {
+			$countries_lookup[$country["country_code"]] = $country["country_name"][Yii::$app->language];
+		}
+
 		return $this->render("size-chart", [
 			"sizechart" => $this->api->actionSizeCharts(Json::encode(["short_id" => $size_chart_id]))->asArray()->one(),
 			"categories" => $this->api->actionCategories()->asArray()->all(),
-			"countries" => $this->api->actionCountries()->asArray()->all()
+			"countries" => $countries,
+			"countries_lookup" => $countries_lookup
 		]);
 	}
 

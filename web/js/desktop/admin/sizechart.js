@@ -7,10 +7,7 @@ todevise.controller('sizeChartCtrl', ["$scope", "$timeout", "$sizechart", "$size
 	$scope.api = {};
 	$scope.api_mus = {};
 
-	$scope.countries_lookup = [];
-	angular.forEach(_countries, function(country) {
-		$scope.countries_lookup[country.country_code] = country.country_name[_lang];
-	});
+	$scope.countries_lookup = _countries_lookup;
 
 	//Sort by path length
 	$category_util.sort(_categories);

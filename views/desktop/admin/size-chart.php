@@ -26,6 +26,7 @@ $this->title = 'Todevise / Admin / Size chart';
 		<?php $this->registerJs("var _categories = " . Json::encode($categories) . ";", View::POS_HEAD); ?>
 		<?php $this->registerJs("var _sizechart = " . Json::encode($sizechart) . ";", View::POS_HEAD); ?>
 		<?php $this->registerJs("var _countries = " . Json::encode($countries) . ";", View::POS_HEAD); ?>
+		<?php $this->registerJs("var _countries_lookup = " . Json::encode($countries_lookup) . ";", View::POS_HEAD); ?>
 		<?php $this->registerJs("var _mus = " . Json::encode([
 				["value" => MetricUnit::NONE, "text" => Yii::t("app/admin", MetricUnit::TXT[MetricUnit::NONE])],
 				["value" => MetricUnit::SIZE, "text" => Yii::t("app/admin", MetricUnit::TXT[MetricUnit::SIZE])],
@@ -209,7 +210,7 @@ $this->title = 'Todevise / Admin / Size chart';
 			<div class="input-group" ng-repeat="(lang_k, lang_v) in data.langs">
 				<span class="input-group-addon" id="basic-addon-{{ $index }}">{{ lang_v }}</span>
 				<input required="" type="text" class="form-control" placeholder="<?php echo Yii::t("app/admin", "Option name..."); ?>"
-				       aria-describedby="basic-addon-{{ $index }}" ng-model="data.column[lang_k]" name="{{ lang_k }}">
+					aria-describedby="basic-addon-{{ $index }}" ng-model="data.column[lang_k]" name="{{ lang_k }}">
 				<span class="input-group-addon alert-danger" ng-show="form.$submitted && !form.$valid && !form['{{lang_k}}'].$valid">
 					<span ng-show="form['{{lang_k}}'].$error.required"><?php echo Yii::t("app/admin", "Required!"); ?></span>
 				</span>
