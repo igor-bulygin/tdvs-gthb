@@ -33,6 +33,11 @@ class m150405_184924_create_person extends Migration {
 			]
 		]);
 
+		/* @var $person \app\models\Person */
+		$person = Person::findOne(["short_id" => "10000"]);
+		$person->setPassword("admin_test_123");
+		$person->update(false);
+
 		$this->insert('person', [
 			"short_id" => "20000",
 			"type" => [Person::CLIENT],
@@ -49,6 +54,11 @@ class m150405_184924_create_person extends Migration {
 				"currency" => Currency::_EUR
 			]
 		]);
+
+		/* @var $person \app\models\Person */
+		$person = Person::findOne(["short_id" => "20000"]);
+		$person->setPassword("client_test_123");
+		$person->update(false);
 
 		$this->insert('person', [
 			"short_id" => "30000",
@@ -67,6 +77,11 @@ class m150405_184924_create_person extends Migration {
 			]
 		]);
 
+		/* @var $person \app\models\Person */
+		$person = Person::findOne(["short_id" => "30000"]);
+		$person->setPassword("deviser_test_123");
+		$person->update(false);
+
 		$this->insert('person', [
 			"short_id" => "40000",
 			"type" => [Person::COLLABORATOR],
@@ -83,6 +98,11 @@ class m150405_184924_create_person extends Migration {
 				"currency" => Currency::_EUR
 			]
 		]);
+
+		/* @var $person \app\models\Person */
+		$person = Person::findOne(["short_id" => "40000"]);
+		$person->setPassword("collaborator_test_123");
+		$person->update(false);
 	}
 
 	public function down() {
