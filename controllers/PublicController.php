@@ -14,8 +14,8 @@ class PublicController extends CController {
 	public $defaultAction = "index";
 
 	public function actionError() {
-		error_log("Error public", 4);
-		die();
+		//error_log("Error public", 4);
+		//die();
 	}
 
 	public function actionIndex() {
