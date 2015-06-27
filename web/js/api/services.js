@@ -43,6 +43,32 @@ api.factory("$services_util", function($http, $q) {
 	return api_helpers;
 });
 
+api.service("$deviser", function($services_util) {
+
+	var api_point = currentHost() + "/api/devisers/";
+
+	return ({
+
+		get: function(filters) {
+			var req = $services_util._get(api_point, filters);
+
+			return req.then($services_util._handleSuccess, $services_util._handleError);
+		},
+
+		modify: function(method, deviser) {
+			var req = $services_util._modify(api_point, method, {
+				deviser: deviser
+			});
+
+			return req.then($services_util._handleSuccess, $services_util._handleError);
+		},
+
+		delete: function(deviser) {
+			return this.modify("DELETE", deviser);
+		}
+	});
+});
+
 api.service("$tag", function($services_util) {
 
 	var api_point = currentHost() + "/api/tags/";
