@@ -54,7 +54,7 @@
 }
 
 
-/**** FOMRS ****/
+/**** FORMS ****/
 
 .tag .form-control {
 	background-color: #2e2e2e;
@@ -213,11 +213,56 @@ $toggleFeaturePosition-on: 53px;
 	}
 }
 
+/**** RADIO BUTTON ****/
+
+/*$DarkGrey: #292321;
+$Purple: #9b2dfc;
+
+input[type="radio"] {
+	display: none;
+}
+
+input[type="radio"] + label {
+	color: $DarkGrey;
+}
+
+input[type="radio"] + label span {
+	display: inline-block;
+	width: 11px;
+	height: 11px;
+	margin: -1px 4px 0 0;
+	vertical-align: middle;
+	cursor: pointer;
+	-moz-border-radius: 50%;
+	border-radius: 50%;
+	border: 1px solid #bdbdbd;
+}
+
+input[type="radio"] + label span {
+	background-color: $DarkGrey;
+}
+
+input[type="radio"]: checked + label span{
+	background-color: $Purple;
+}
+
+input[type="radio"] + label span,
+input[type="radio"]:checked + label span {
+	-webkit-transition: background-color 0.4s linear;
+	-o-transition: background-color 0.4s linear;
+	-moz-transition: background-color 0.4s linear;
+	transition: background-color 0.4s linear;
+}*/
+
+/********/
+
 .arrow-left {
 	position: relative;
 	border: solid 1px #4a4a4a;
 	float: left;
 	height: 36px;
+	margin-left: 2.5%;
+	vertical-align: middle;;
 }
 
 .arrow-left:before,
@@ -243,3 +288,25 @@ $toggleFeaturePosition-on: 53px;
 	left: -16px;
 	z-index: 1;
  }
+
+.row-free-field {
+	border-bottom: solid 1px #262626;
+	padding: 1.2%;
+}
+
+/**** MARGIN ****/
+
+.margin-l0-r1 {
+	margin: 0 1% 0 0%;
+}
+
+.margin-l1-r1 {
+	margin: 0 1% 0 1%;
+}
+
+/**** PADDING ****/
+.padding-0-1 {
+ 	padding: 0 1% 0 5% ;
+}
+
+/********/

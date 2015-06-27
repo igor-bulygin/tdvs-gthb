@@ -58,6 +58,12 @@ body {
 	-webkit-box-direction: normal;
 }
 
+.flex-row {
+	-webkit-flex-direction: row;
+		-ms-flex-direction: row;
+			flex-direction: row;
+}
+
 .flex-prop-1 {
 	-webkit-box-flex: 1 1 auto;
 	-webkit-flex: 1 1 auto;
@@ -70,7 +76,13 @@ body {
 	-webkit-flex: 1 0 auto;
 		-ms-flex: 1 0 auto;
 			flex: 1 0 auto;
+}
 
+.flex-prop-2-1 {
+	-webkit-box-flex: 2 1 auto;
+	-webkit-flex: 2 1 auto;
+		-ms-flex: 2 1 auto;
+			flex: 2 1 auto;
 }
 
 /**** FONTS ****/

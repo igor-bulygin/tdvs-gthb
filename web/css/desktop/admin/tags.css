@@ -42,3 +42,7 @@
 	color: #d6d6d6;
 	text-transform: uppercase;
 }
+
+.glyphicon {
+	padding: 0 2% 0 2%;
+}

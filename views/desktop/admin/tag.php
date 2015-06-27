@@ -45,16 +45,16 @@ $this->title = 'Todevise / Admin / Tag';
 			</div>
 		</div>
 
-		<div class="row no-gutter  page-title-row">
-			<div class="col-xs-4 tag">
+		<div class="row no-gutter page-title-row flex flex-row">
+			<div class="col-xs-3 tag flex-prop-1 margin-l0-r1">
 				<label class="funiv fs-upper fs0-786 fc-c7 fnormal"><?php echo Yii::t("app/admin", "Tag name"); ?></label>
 				<input type="text" class="form-control fc-fff funiv fs-1" placeholder="" ng-model="tag.name[lang]">
 			</div>
-			<div class="col-xs-4 tag">
+			<div class="col-xs-6 tag flex-prop-2-1 margin-l1-r1">
 				<label class="funiv fs-upper fs0-786 fc-c7 fnormal"><?php echo Yii::t("app/admin", "Description"); ?></label>
 				<input type="text" class="form-control fc-fff funiv fs-1" placeholder="" ng-model="tag.description[lang]">
 			</div>
-			<div class="col-xs-4 tag">
+			<div class="col-xs-3 tag flex-prop-1 margin-l1-r1">
 				<label class="funiv fs-upper fs0-786 fc-c7 fnormal"><?php echo Yii::t("app/admin", "Categories"); ?></label><br>
 				<div
 					angular-multi-select
@@ -150,9 +150,9 @@ $this->title = 'Todevise / Admin / Tag';
 			<br />
 
 			<div class="row no-gutter">
-				<div class="row-same-height sortable-container" sv-root sv-part="tag.options">
+				<div class="sortable-container" sv-root sv-part="tag.options">
 
-					<div ng-repeat="option in tag.options" sv-element class="col-xs-3 col-height col-middle arrow-left">
+					<div ng-repeat="option in tag.options" sv-element class="col-xs-3 arrow-left">
 						<span class="glyphicon glyphicon-menu-hamburger pointer fc-68" sv-handle></span>
 						<span class="funiv fs-1 fc-fff">{{ option.text[lang] }}</span>
 						<div class="pull-right">
@@ -173,7 +173,7 @@ $this->title = 'Todevise / Admin / Tag';
 					</div>
 
 					<div class="col-xs-3 col-height col-middle">
-						<span><?php echo Yii::t("app/admin", "Metric unit"); ?></span>
+						<span class="funiv fc-c7 fs-upper fs0-786"><?php echo Yii::t("app/admin", "Metric unit"); ?></span>
 						<div
 							angular-multi-select
 							input-model="mus"
@@ -189,11 +189,11 @@ $this->title = 'Todevise / Admin / Tag';
 
 					<div class="col-xs-3 col-height col-middle">
 						<div class="radio flex-justify-center" ng-init="freetext_type = <?php echo TagOption::NUMERIC; ?>">
-							<label>
+							<label class="funiv fc-c7 fs-upper fs0-786">
 								<input type="radio" name="optionsType" id="optionsType1" value="<?php echo TagOption::NUMERIC; ?>" ng-model="freetext_type">
 								<?php echo Yii::t("app/admin", "Numeric"); ?>
 							</label>
-							<label>
+							<label class="funiv fc-c7 fs-upper fs0-786">
 								<input type="radio" name="optionsType" id="optionsType2" value="<?php echo TagOption::ALPHANUMERIC; ?>" ng-model="freetext_type">
 								<?php echo Yii::t("app/admin", "Alphanumeric"); ?>
 							</label>
@@ -206,15 +206,13 @@ $this->title = 'Todevise / Admin / Tag';
 				</div>
 			</div>
 
-			<br />
-
 			<div class="row no-gutter">
-				<div class="row-same-height" ng-repeat="option in tag.options">
-					<div class="col-xs-11 col-height col-middle">
-						<input type="text" class="form-control" placeholder="<?php echo Yii::t("app/admin", "Field name (optional)"); ?>" ng-model="tag.options[$index].text[lang]">
+				<div class="row-same-height row-free-field" ng-repeat="option in tag.options">
+					<div class="col-xs-11 col-height col-middle tag">
+						<input type="text" class="form-control funiv fc-e8 fs-1" placeholder="<?php echo Yii::t("app/admin", "Field name (optional)"); ?>" ng-model="tag.options[$index].text[lang]">
 					</div>
 					<div class="col-xs-1 col-height col-middle text-center">
-						<span class="glyphicon glyphicon-trash pointer" ng-click="delete_option($index)"></span>
+						<span class="glyphicon glyphicon-trash pointer fc-68" ng-click="delete_option($index)"></span>
 						<!-- TODO: Show the metric unit and the type? -->
 					</div>
 				</div>
