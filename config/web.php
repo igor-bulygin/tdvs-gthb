@@ -123,6 +123,10 @@ $config = [
 			'showScriptName' => false,
 			'suffix' => '/',
 			'rules' => [
+				//Links for deviser profile
+				//TODO make it domain careless
+				'http://<slug:\w+>.todevise.com/edit-info/' =>  'deviser/edit-info',
+
 				//Links for admin
 				'admin/tag/<tag_id:\w{5}>/'  => 'admin/tag',
 				'admin/size-chart/<size_chart_id:\w{5}>/'  => 'admin/size-chart',
