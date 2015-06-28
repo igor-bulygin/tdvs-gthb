@@ -80,21 +80,21 @@ $this->title = 'Todevise / Admin / Tag';
 		<br />
 
 		<div class="row no-gutter">
-			<div class="col-xs-3 div-bordered">
+			<div class="col-xs-3 div-bordered tag_settings">
 				<div class="checkbox">
 					<label class="funiv fs0-929 fc-c7">
 						<input type="checkbox" ng-model="tag.enabled" ng-checked="tag.enabled"> <?php echo Yii::t("app/admin", "Enabled"); ?>
 					</label>
 				</div>
 			</div>
-			<div class="col-xs-3 div-bordered">
+			<div class="col-xs-3 div-bordered tag_settings">
 				<div class="checkbox">
 					<label class="funiv fs0-929 fc-c7" ng-init="optional = !tag.required">
 						<input type="checkbox" ng-model="optional" ng-change="tag.required = !optional"> <?php echo Yii::t("app/admin", "Is this tag optional?"); ?>
 					</label>
 				</div>
 			</div>
-			<div class="col-xs-6 div-bordered">
+			<div class="col-xs-6 div-bordered tag_settings">
 				<div class="row no-gutter">
 					<div class="row-same-height">
 						<div class="col-xs-6 col-height col-middle funiv fs0-929 fc-c7">
@@ -129,7 +129,7 @@ $this->title = 'Todevise / Admin / Tag';
 
 					<div class="col-xs-6 col-height col-middle">
 						<label class="funiv fs0-929 fc-c7 fnormal"><?php echo Yii::t("app/admin", "Does this tag allow combos?"); ?></label>
-						<span class="glyphicon glyphicon-info-sign"></span>
+						<span class="glyphicon glyphicon-info-sign fc-c7"></span>
 						<label class="funiv fs0-929 fc-c7 fnormal"><?php echo Yii::t("app/admin", "Please specify how many options can be combined"); ?></label>
 
 						<div class="input-group spinner">
@@ -150,18 +150,21 @@ $this->title = 'Todevise / Admin / Tag';
 			<br />
 
 			<div class="row no-gutter">
+					<div ng-repeat="option in tag.options" sv-element class="col-xs-3 tag-checkbox-option-holder">
+						<div class="flex flex-align-stretch">
+							<div class="arrow-left"></div>
 
-				<div class="sortable-container" sv-root sv-part="tag.options">
-					<div ng-repeat="option in tag.options" sv-element class="col-xs-2-5 arrow-left col-middle">
-						<span class="glyphicon glyphicon-menu-hamburger pointer fc-68" sv-handle></span>
-						<span class="funiv fs-1 fc-fff">{{ option.text[lang] }}</span>
-						<div class="pull-right">
-							<span class="glyphicon glyphicon-pencil pointer fc-68" ng-click="edit_dropdown_option($index)"></span>
-							<span class="glyphicon glyphicon-trash pointer fc-68" ng-click="delete_option($index)"></span>
+							<div class="flex flex-align-center controls-holder flex-prop-1">
+								<span class="glyphicon glyphicon-menu-hamburger pointer fc-68  flex-prop" sv-handle></span>
+								<span class="funiv fs-1 fc-fff flex-prop">{{ option.text[lang] }}</span>
+								<div class="flex flex-justify-end flex-prop-1">
+									<span class="glyphicon glyphicon-pencil pointer fc-68" ng-click="edit_dropdown_option($index)"></span>
+									<span class="glyphicon glyphicon-trash pointer fc-68" ng-click="delete_option($index)"></span>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
-
 			</div>
 		</div>
 
