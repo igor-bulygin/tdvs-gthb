@@ -103,7 +103,7 @@ $this->title = 'Todevise / Admin / Size chart';
 			<div class="col-xs-1">
 				<label class="funiv fc-c7 fs0-929 fnormal"><?php echo Yii::t("app/admin", "Countries"); ?></label>
 			</div>
-			<div class="col-xs-10">
+			<div class="col-xs-11">
 				<div class="row no-gutter sortable-container" sv-root sv-part="sizechart.countries" sv-on-sort="move_country($indexFrom, $indexTo)">
 					<div ng-cloak class="col-xs-2 country pull-left funiv fc-fff fs1 fs-upper" sv-element ng-repeat="country in sizechart.countries track by $index">
 						<span class="glyphicon glyphicon-menu-hamburger pointer fc-68" sv-handle></span>
@@ -126,7 +126,7 @@ $this->title = 'Todevise / Admin / Size chart';
 			<div class="col-xs-1">
 				<label class="funiv fc-c7 fs0-929 fnormal"><?php echo Yii::t("app/admin", "Columns"); ?></label>
 			</div>
-			<div class="col-xs-10">
+			<div class="col-xs-11">
 				<div class="row no-gutter sortable-container" sv-root sv-part="sizechart.columns" sv-on-sort="move_column($indexFrom, $indexTo)">
 					<div ng-cloak class="col-xs-2 country pull-left funiv fc-fff fs1" sv-element ng-repeat="column in sizechart.columns track by $index">
 						<span class="glyphicon glyphicon-menu-hamburger pointer fc-68" sv-handle></span>
