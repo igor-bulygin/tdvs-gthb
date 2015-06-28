@@ -7,8 +7,9 @@ use app\assets\desktop\admin\SizeChartAsset;
 
 /* @var $this yii\web\View */
 /* @var $countries ArrayObject */
-/* @var $categories ArrayObject */
 /* @var $sizechart ArrayObject */
+/* @var $categories ArrayObject */
+/* @var $countries_lookup ArrayObject */
 
 $this->params['breadcrumbs'][] = [
 	'label' => 'Size chart',
