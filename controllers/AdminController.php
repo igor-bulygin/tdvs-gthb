@@ -23,6 +23,31 @@ class AdminController extends CController {
 		return $this->render("index");
 	}
 
+	public function actionDevisers($filters = null) {
+		$filters = urldecode($filters) ?: null;
+
+		$devisers = new ActiveDataProvider([
+			'query' => $this->api->actionDevisers($filters),
+			'pagination' => [
+				'pageSize' => 15,
+			],
+		]);
+
+		$countries = $this->api->actionCountries()->asArray()->all();
+		$countries_lookup = [];
+		foreach($countries as $country) {
+			$countries_lookup[$country["country_code"]] = $country["country_name"][Yii::$app->language];
+		}
+
+		$data = [
+			'devisers' => $devisers,
+			"countries" => $countries,
+			"countries_lookup" => $countries_lookup
+		];
+
+		return Yii::$app->request->isAjax ? $this->renderPartial("devisers", $data) : $this->render("devisers", $data);
+	}
+
 	public function actionTags($filters = null) {
 		$filters = urldecode($filters) ?: null;
 
