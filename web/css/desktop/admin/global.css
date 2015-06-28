@@ -203,8 +203,38 @@ html, body {
 	color: #fff;
 }
 
+
+/**** MARGIN ****/
+
+.margin-l0-r1 {
+	margin: 0 1% 0 0%;
+}
+
+.margin-l1-r1 {
+	margin: 0 1% 0 1%;
+}
+
 /**** COLUMNS PADDING ****/
+
+.page-title-row {
+	padding: 1% 1% 1% 1.2%;
+}
+
+.padding-0-1 {
+ 	padding: 0 1% 0 5% ;
+}
 
 .padding-1 {
 	padding: 1%;
+}
+
+/**** BACKGROUND COLOR ****/
+.bgcolor-3d {
+	background-color: #3D3D3D;
+}
+
+/**** FONT STYLES ****/
+
+.fnormal {
+	font-weight: normal;
 }

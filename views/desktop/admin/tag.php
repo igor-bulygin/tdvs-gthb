@@ -150,9 +150,9 @@ $this->title = 'Todevise / Admin / Tag';
 			<br />
 
 			<div class="row no-gutter">
-				<div class="sortable-container" sv-root sv-part="tag.options">
 
-					<div ng-repeat="option in tag.options" sv-element class="col-xs-3 arrow-left">
+				<div class="sortable-container" sv-root sv-part="tag.options">
+					<div ng-repeat="option in tag.options" sv-element class="col-xs-2-5 arrow-left col-middle">
 						<span class="glyphicon glyphicon-menu-hamburger pointer fc-68" sv-handle></span>
 						<span class="funiv fs-1 fc-fff">{{ option.text[lang] }}</span>
 						<div class="pull-right">
@@ -160,8 +160,8 @@ $this->title = 'Todevise / Admin / Tag';
 							<span class="glyphicon glyphicon-trash pointer fc-68" ng-click="delete_option($index)"></span>
 						</div>
 					</div>
-
 				</div>
+
 			</div>
 		</div>
 

@@ -24,36 +24,41 @@ $this->title = 'Todevise / Admin / Size charts';
 ?>
 
 <div class="row no-gutter" ng-controller="sizeChartsCtrl" ng-init="init()">
-	<div class="col-sm-12 col-md-12 col-lg-12">
+	<div class="col-xs-12 no-horizontal-padding">
 
 		<?php $this->registerJs("var _categories = " . Json::encode($categories) . ";", View::POS_HEAD) ?>
 		<?php $this->registerJs("var _sizecharts_template = " . Json::encode($sizechart_template) . ";", View::POS_HEAD) ?>
 
-		<div class="row">
-			<div class="col-md-4 col-lg-4">
-				<h2><?= Yii::t("app/admin", "Size charts"); ?></h2>
-			</div>
-			<div class="col-md-4 col-lg-4">
-				<div
-					angular-multi-select
-					api="api"
-					id-property="short_id"
-					input-model="categories"
-					output-model="selectedCategories"
+		<div class="row no-gutter page-title-row bgcolor-3d">
+			<div class="row-same-height">
+				<div class="col-xs-4 col-height col-middle">
+					<h2 class="page-title funiv_bold fs-upper fc-fff fs1-071"><?= Yii::t("app/admin", "Size charts"); ?></h2>
+				</div>
 
-					group-property="sub"
-					tick-property="check"
+				<div class="col-xs-4 col-height col-middle flex flex-align-center">
+					<div class="funiv fs-upper fc-9b fs0-786 flex-inline"><?php echo Yii::t("app/admin", "FILTER BY CATEGORY"); ?></div>
+					<div
+						angular-multi-select
+						api="api"
+						id-property="short_id"
+						input-model="categories"
+						output-model="selectedCategories"
 
-					item-label="{{ name[lang] }}"
-					selection-mode="single"
-					search-property="name"
-					min-search-length="3"
-					hidden-property="hidden"
-					helper-elements="noall nonone noreset nofilter"
-				></div>
-			</div>
-			<div class="col-md-4 col-lg-4">
-				<button class="btn btn-default" ng-click="create_new()">Create new</button>
+						group-property="sub"
+						tick-property="check"
+
+						item-label="{{ name[lang] }}"
+						selection-mode="single"
+						search-property="name"
+						min-search-length="3"
+						hidden-property="hidden"
+						helper-elements="noall nonone noreset nofilter"
+					></div>
+				</div>
+
+				<div class="col-xs-4 col-height col-middle">
+					<button class="btn btn-default btn-purple fc-fff funiv fs0-786 fs-upper pull-right" ng-click="create_new()">Create new</button>
+				</div>
 			</div>
 		</div>
 
@@ -61,6 +66,9 @@ $this->title = 'Todevise / Admin / Size charts';
 			echo GridView::widget([
 				'id' => 'size_charts_list',
 				'dataProvider' => $sizecharts,
+				'options' => [
+					'class' => 'funiv fc-fff fs1-071',
+				],
 				'columns' => [
 					[
 						'value' => function($model){
@@ -80,12 +88,12 @@ $this->title = 'Todevise / Admin / Size charts';
 						'buttons' => [
 							'update' => function($url, $model, $key) {
 								$url = Url::to(["/admin/size-chart", "size_chart_id" => $model->short_id]);
-								return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url);
+								return Html::a('<span class="glyphicon glyphicon-pencil fc-68 fs1"></span>', $url);
 							},
 
 							'delete' => function($url, $model, $key) {
 								return Html::tag("span", "", [
-									"class" => "pointer glyphicon glyphicon-trash",
+									"class" => "pointer glyphicon glyphicon-trash fc-68 fs1",
 									"ng-click" => "delete('$model->short_id')"
 								]);
 							}

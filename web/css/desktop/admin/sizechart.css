@@ -1,0 +1,27 @@
+.body-content {
+	background-color: #2e2e2e;
+}
+
+.background-none{
+	background: none;
+	border: none;
+}
+
+.div-bordered {
+	border: 1px solid #4a4a4a;
+}
+
+.div-line {
+	width: 100%;
+	display: block;;
+	padding-top: 1.5%;
+	border-bottom: 1px solid #4a4a4a;
+	margin-bottom: 1.5%;
+}
+
+.country {
+	border: 1px solid #4a4a4a;
+	padding: 1%;
+	margin-right: 1%;
+
+}
