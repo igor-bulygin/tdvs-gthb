@@ -35,9 +35,10 @@ api.factory("$tag_util", function() {
 api.factory("$deviser_util", function() {
 	var utils = {};
 
-	utils.newDeviser = function(name, surnames, email, country_code, slug) {
+	utils.newDeviser = function(type, name, surnames, email, country_code, slug) {
 		return {
 			short_id: "new",
+			type: type,
 			personal_info: {
 				name: name,
 				surnames: surnames,
