@@ -51,16 +51,7 @@
 
 .tag-checkbox-option-holder {
 	border: 1px solid #262626;
-	border-right: none;
 	padding: 1% 1% !important;
-}
-
-.tag-checkbox-option-holder:last-child {
-	border-right: 1px solid #262626;
-}
-
-.tag-checkbox-option-holder:nth-child(n+5) {
-	border-top: none;
 }
 
 .controls-holder {
