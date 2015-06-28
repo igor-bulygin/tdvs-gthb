@@ -124,8 +124,8 @@ $config = [
 			'suffix' => '/',
 			'rules' => [
 				//Links for deviser profile
-				//TODO make it domain careless
-				'http://<slug:\w+>.todevise.com/edit-info/' =>  'deviser/edit-info',
+				//TODO make it domain careless and re-check the regex
+				'http://<slug:[0-9a-z-A-Z\-]*?>.todevise.com/edit-info/' =>  'deviser/edit-info',
 
 				//Links for admin
 				'admin/tag/<tag_id:\w{5}>/'  => 'admin/tag',
