@@ -150,6 +150,7 @@ $this->title = 'Todevise / Admin / Tag';
 			<br />
 
 			<div class="row no-gutter">
+				<div class="sortable-container" sv-root sv-part="tag.options">
 					<div ng-repeat="option in tag.options" sv-element class="col-xs-3 tag-checkbox-option-holder">
 						<div class="flex flex-align-stretch">
 							<div class="arrow-left"></div>
