@@ -98,15 +98,8 @@
 
 /**** RADIO BUTTON ****/
 
-/*$DarkGrey: #292321;
-$Purple: #9b2dfc;
-
 input[type="radio"] {
 	display: none;
-}
-
-input[type="radio"] + label {
-	color: $DarkGrey;
 }
 
 input[type="radio"] + label span {
@@ -122,11 +115,11 @@ input[type="radio"] + label span {
 }
 
 input[type="radio"] + label span {
-	background-color: $DarkGrey;
+	background-color: #555;
 }
 
-input[type="radio"]: checked + label span{
-	background-color: $Purple;
+input[type="radio"]:checked + label span{
+	background-color: #9b2dfc;
 }
 
 input[type="radio"] + label span,
@@ -135,7 +128,7 @@ input[type="radio"]:checked + label span {
 	-o-transition: background-color 0.4s linear;
 	-moz-transition: background-color 0.4s linear;
 	transition: background-color 0.4s linear;
-}*/
+}
 
 /********/
 

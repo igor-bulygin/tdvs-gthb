@@ -105,11 +105,11 @@ $this->title = 'Todevise / Admin / Tag';
 							<div class="radio flex-justify-center">
 								<label class="funiv fs0-786 fc-c7 fs-upper">
 									<input type="radio" name="tagType" id="tagType1" value="<?php echo Tag::DROPDOWN; ?>" ng-model="tag.type">
-									<?php echo Yii::t("app/admin", "With options"); ?>
+									<label for="tagType1"><span></span><?php echo Yii::t("app/admin", "With options"); ?></label>
 								</label>
 								<label class="funiv fs0-786  fc-c7 fs-upper">
 									<input type="radio" name="tagType" id="tagType2" value="<?php echo Tag::FREETEXT; ?>" ng-model="tag.type">
-									<?php echo Yii::t("app/admin", "Free field"); ?>
+									<label for="tagType2"><span></span><?php echo Yii::t("app/admin", "Free field"); ?></label>
 								</label>
 							</div>
 						</div>
