@@ -57,7 +57,7 @@ api.service("$deviser", function($services_util) {
 
 		modify: function(method, deviser) {
 			var req = $services_util._modify(api_point, method, {
-				deviser: deviser
+				person: deviser
 			});
 
 			return req.then($services_util._handleSuccess, $services_util._handleError);
