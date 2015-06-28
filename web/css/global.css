@@ -46,7 +46,23 @@ body {
 }
 
 .flex-align-center {
-	align-items:center;
+	align-items: center;
+}
+
+.flex-align-stretch {
+	align-items: stretch;
+}
+
+.flex-justify-start {
+	justify-content: flex-start;
+}
+
+.flex-justify-center {
+	justify-content: flex-center;
+}
+
+.flex-justify-end {
+	justify-content: flex-end;
 }
 
 .flex-column {
@@ -62,6 +78,13 @@ body {
 	-webkit-flex-direction: row;
 		-ms-flex-direction: row;
 			flex-direction: row;
+}
+
+.flex-prop {
+	-webkit-box-flex: 0 1 auto;
+	-webkit-flex: 0 1 auto;
+	-ms-flex: 0 1 auto;
+	flex: 0 1 auto;
 }
 
 .flex-prop-1 {
