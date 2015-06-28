@@ -61,67 +61,69 @@ use lajax\languagepicker\widgets\LanguagePicker;
 									echo Nav::widget([
 										'options' => ['class' => 'navbar-nav flex menutop funiv_ultra fs1'],
 										'items' => [
-											['label' => 'FIND THE PERFECT GIFT', 'url' => ['/site/index'], "options" => ["class" => "item-menutop flex-prop-1-0"]],
-											['label' => 'DISCOVER TRENDS', 'url' => ['/site/about'], "options" => ["class" => "item-menutop flex-prop-1-0"]],
-											['label' => 'DISCOVER TRENDS', 'url' => ['/site/contact'], "options" => ["class" => "item-menutop flex-prop-1-0"]],
-											['label' => 'CAJA DE BÚSQUEDA', "options" => ["class" => "item-menutop flex-prop-1-0 flex-grow-3"]],
-											['label' => 'IMG', "options" => ["class" => "item-menutop flex-prop-1-0"]],
-											['label' => 'TODEVISE', "options" => ["class" => "item-menutop flex-prop-1-0 fpf_bold fs0-786"]],
+											[
+												'label' => Yii::t("app/public", 'Find the perfect gift'),
+												'url' => ['/site/index'],
+												"options" => [
+													"class" => "item-menutop fs-upper flex-prop-1-0"
+												]
+											],
+											[
+												'label' => Yii::t("app/public", 'Discover trends'),
+												'url' => ['/site/about'],
+												"options" => [
+													"class" => "item-menutop fs-upper flex-prop-1-0"
+												]
+											],
+											[
+												'label' => Yii::t("app/public", 'Discover trends'),
+												'url' => ['/site/contact'],
+												"options" => [
+													"class" => "item-menutop fs-upper flex-prop-1-0"
+												]
+											],
+											[
+												'label' => Yii::t("app/public", 'Caja de búsqueda'),
+												"options" => [
+													"class" => "item-menutop fs-upper flex-prop-1-0 flex-grow-3"
+												]
+											],
+											[
+												'label' => 'IMG',
+												"options" => [
+													"class" => "item-menutop flex-prop-1-0"
+												]
+											],
+											[
+												'label' => Yii::t("app/public", 'TODEVISE'),
+												"options" => [
+													"class" => "item-menutop fs-upper flex-prop-1-0 fpf_bold fs0-786"
+												]
+											],
 											Yii::$app->user->isGuest ?
-												['label' => 'LOGIN', 'url' => ['/site/login'], "options" => ["class" => "item-menutop flex-prop-1-0"]] :
-												['label' => 'Logout (' . Yii::$app->user->identity->personal_info["name"] . ')',
+												[
+													'label' => Yii::t("app/public", 'Login'),
+													'url' => ['/site/login'],
+													"options" => [
+														"class" => "item-menutop flex-prop-1-0"
+													]
+												] :
+												[
+													'label' => Yii::t("app/public", 'Logout ({user})', [
+															"user" => Yii::$app->user->identity->personal_info["name"]
+														]),
 													'url' => ['/site/logout'],
-													'linkOptions' => ['data-method' => 'post']],
+													'linkOptions' => ['data-method' => 'post']
+												],
 										],
 									]);
 									NavBar::end();
 								?>
 
 							</div>
-							<div class="content flex flex-column flex-prop-1">
-								<div class="main">
-									<p>
-										Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus tincidunt sagittis felis, sit amet cursus massa lobortis nec. Nunc vel enim dui. Aenean congue vestibulum elit rutrum dictum. In dignissim est nunc, quis suscipit libero pretium ut. Integer velit nulla, aliquet vel fringilla et, dignissim eu leo. Ut mattis ullamcorper purus in vulputate. Etiam iaculis pretium ligula. Proin at neque at sapien ullamcorper accumsan ac nec est. Vivamus metus nisi, ullamcorper ac lectus at, feugiat tempus libero. Aliquam convallis libero id nunc rhoncus condimentum nec quis tortor. Morbi rhoncus iaculis viverra.
-									</p>
-									<p>
-										Vestibulum varius aliquam congue. Nunc condimentum egestas ullamcorper. Maecenas aliquet finibus metus feugiat interdum. Pellentesque sed fermentum nisi, at laoreet magna. Curabitur dignissim, libero eu commodo maximus, magna sapien faucibus ligula, a condimentum nisi dui non quam. Curabitur feugiat nisl eros, et consequat ligula fermentum eget. Suspendisse varius, orci eget ullamcorper faucibus, sem purus porta sapien, id cursus risus magna eu est. Quisque nunc ligula, lacinia sit amet condimentum id, aliquam vel mi. Nullam aliquet blandit ligula, sit amet euismod elit pharetra in.
-									</p>
-									<p>
-										Fusce non erat nec justo blandit finibus et a metus. Etiam accumsan faucibus sagittis. In venenatis diam in quam aliquam, nec dictum elit blandit. Proin tincidunt, dolor porta ornare suscipit, nisi elit lacinia mauris, eu sollicitudin ipsum nisl vel quam. Nullam sit amet rhoncus nibh. Phasellus tristique facilisis aliquam. Fusce bibendum enim sed lorem feugiat imperdiet.
-									</p>
-									<p>
-										Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus tincidunt sagittis felis, sit amet cursus massa lobortis nec. Nunc vel enim dui. Aenean congue vestibulum elit rutrum dictum. In dignissim est nunc, quis suscipit libero pretium ut. Integer velit nulla, aliquet vel fringilla et, dignissim eu leo. Ut mattis ullamcorper purus in vulputate. Etiam iaculis pretium ligula. Proin at neque at sapien ullamcorper accumsan ac nec est. Vivamus metus nisi, ullamcorper ac lectus at, feugiat tempus libero. Aliquam convallis libero id nunc rhoncus condimentum nec quis tortor. Morbi rhoncus iaculis viverra.
-									</p>
-									<p>
-										Vestibulum varius aliquam congue. Nunc condimentum egestas ullamcorper. Maecenas aliquet finibus metus feugiat interdum. Pellentesque sed fermentum nisi, at laoreet magna. Curabitur dignissim, libero eu commodo maximus, magna sapien faucibus ligula, a condimentum nisi dui non quam. Curabitur feugiat nisl eros, et consequat ligula fermentum eget. Suspendisse varius, orci eget ullamcorper faucibus, sem purus porta sapien, id cursus risus magna eu est. Quisque nunc ligula, lacinia sit amet condimentum id, aliquam vel mi. Nullam aliquet blandit ligula, sit amet euismod elit pharetra in.
-									</p>
-									<p>
-										Fusce non erat nec justo blandit finibus et a metus. Etiam accumsan faucibus sagittis. In venenatis diam in quam aliquam, nec dictum elit blandit. Proin tincidunt, dolor porta ornare suscipit, nisi elit lacinia mauris, eu sollicitudin ipsum nisl vel quam. Nullam sit amet rhoncus nibh. Phasellus tristique facilisis aliquam. Fusce bibendum enim sed lorem feugiat imperdiet.
-									</p>
-									<p>
-										Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus tincidunt sagittis felis, sit amet cursus massa lobortis nec. Nunc vel enim dui. Aenean congue vestibulum elit rutrum dictum. In dignissim est nunc, quis suscipit libero pretium ut. Integer velit nulla, aliquet vel fringilla et, dignissim eu leo. Ut mattis ullamcorper purus in vulputate. Etiam iaculis pretium ligula. Proin at neque at sapien ullamcorper accumsan ac nec est. Vivamus metus nisi, ullamcorper ac lectus at, feugiat tempus libero. Aliquam convallis libero id nunc rhoncus condimentum nec quis tortor. Morbi rhoncus iaculis viverra.
-									</p>
-									<p>
-										Vestibulum varius aliquam congue. Nunc condimentum egestas ullamcorper. Maecenas aliquet finibus metus feugiat interdum. Pellentesque sed fermentum nisi, at laoreet magna. Curabitur dignissim, libero eu commodo maximus, magna sapien faucibus ligula, a condimentum nisi dui non quam. Curabitur feugiat nisl eros, et consequat ligula fermentum eget. Suspendisse varius, orci eget ullamcorper faucibus, sem purus porta sapien, id cursus risus magna eu est. Quisque nunc ligula, lacinia sit amet condimentum id, aliquam vel mi. Nullam aliquet blandit ligula, sit amet euismod elit pharetra in.
-									</p>
-									<p>
-										Fusce non erat nec justo blandit finibus et a metus. Etiam accumsan faucibus sagittis. In venenatis diam in quam aliquam, nec dictum elit blandit. Proin tincidunt, dolor porta ornare suscipit, nisi elit lacinia mauris, eu sollicitudin ipsum nisl vel quam. Nullam sit amet rhoncus nibh. Phasellus tristique facilisis aliquam. Fusce bibendum enim sed lorem feugiat imperdiet.
-									</p>
-									<p>
-										Vestibulum varius aliquam congue. Nunc condimentum egestas ullamcorper. Maecenas aliquet finibus metus feugiat interdum. Pellentesque sed fermentum nisi, at laoreet magna. Curabitur dignissim, libero eu commodo maximus, magna sapien faucibus ligula, a condimentum nisi dui non quam. Curabitur feugiat nisl eros, et consequat ligula fermentum eget. Suspendisse varius, orci eget ullamcorper faucibus, sem purus porta sapien, id cursus risus magna eu est. Quisque nunc ligula, lacinia sit amet condimentum id, aliquam vel mi. Nullam aliquet blandit ligula, sit amet euismod elit pharetra in.
-									</p>
-									<p>
-										Fusce non erat nec justo blandit finibus et a metus. Etiam accumsan faucibus sagittis. In venenatis diam in quam aliquam, nec dictum elit blandit. Proin tincidunt, dolor porta ornare suscipit, nisi elit lacinia mauris, eu sollicitudin ipsum nisl vel quam. Nullam sit amet rhoncus nibh. Phasellus tristique facilisis aliquam. Fusce bibendum enim sed lorem feugiat imperdiet.
-									</p>
-									<p>
-										Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus tincidunt sagittis felis, sit amet cursus massa lobortis nec. Nunc vel enim dui. Aenean congue vestibulum elit rutrum dictum. In dignissim est nunc, quis suscipit libero pretium ut. Integer velit nulla, aliquet vel fringilla et, dignissim eu leo. Ut mattis ullamcorper purus in vulputate. Etiam iaculis pretium ligula. Proin at neque at sapien ullamcorper accumsan ac nec est. Vivamus metus nisi, ullamcorper ac lectus at, feugiat tempus libero. Aliquam convallis libero id nunc rhoncus condimentum nec quis tortor. Morbi rhoncus iaculis viverra.
-									</p>
-									<p>
-										Vestibulum varius aliquam congue. Nunc condimentum egestas ullamcorper. Maecenas aliquet finibus metus feugiat interdum. Pellentesque sed fermentum nisi, at laoreet magna. Curabitur dignissim, libero eu commodo maximus, magna sapien faucibus ligula, a condimentum nisi dui non quam. Curabitur feugiat nisl eros, et consequat ligula fermentum eget. Suspendisse varius, orci eget ullamcorper faucibus, sem purus porta sapien, id cursus risus magna eu est. Quisque nunc ligula, lacinia sit amet condimentum id, aliquam vel mi. Nullam aliquet blandit ligula, sit amet euismod elit pharetra in.
-									</p>
-									<p>
-										Fusce non erat nec justo blandit finibus et a metus. Etiam accumsan faucibus sagittis. In venenatis diam in quam aliquam, nec dictum elit blandit. Proin tincidunt, dolor porta ornare suscipit, nisi elit lacinia mauris, eu sollicitudin ipsum nisl vel quam. Nullam sit amet rhoncus nibh. Phasellus tristique facilisis aliquam. Fusce bibendum enim sed lorem feugiat imperdiet.
-									</p>
+							<div class="body-content flex flex-column flex-prop-1 overflow">
+								<div class="main flex-prop-1-0">
+									<?= $content ?>
 								</div>
 
 								<div class="footer">footer</div>
