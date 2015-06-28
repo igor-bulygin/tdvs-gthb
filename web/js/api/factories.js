@@ -1,6 +1,6 @@
 var api = angular.module('api');
 
-api.factory("$tag_util", function($q, $tag) {
+api.factory("$tag_util", function() {
 	var utils = {};
 
 	utils.newTag = function(description, langs) {
@@ -32,7 +32,28 @@ api.factory("$tag_util", function($q, $tag) {
 	return utils;
 });
 
-api.factory("$sizechart_util", function($q, $tag) {
+api.factory("$deviser_util", function() {
+	var utils = {};
+
+	utils.newDeviser = function(name, surnames, email, country_code, slug) {
+		return {
+			short_id: "new",
+			personal_info: {
+				name: name,
+				surnames: surnames,
+				country: country_code
+			},
+			slug: slug,
+			credentials: {
+				email: email
+			}
+		};
+	};
+
+	return utils;
+});
+
+api.factory("$sizechart_util", function() {
 	var utils = {};
 
 	utils.newSizeChart = function(langs) {
