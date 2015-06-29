@@ -1,1 +1,31 @@
- 
+.container-menutop{
+	background-color: #dcdcdc;
+}
+
+.menutop{
+	flex-direction: row;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.item-menutop{
+	border-left: 1px solid #e5e5e5;
+	border-right: 1px solid #e5e5e5;
+	text-align: center;
+	letter-spacing: 0.07em;
+}
+
+.flex-grow-3{
+	flex-grow: 3;
+}
+
+.header .navbar-inverse{
+	border: none;
+}
+.header .navbar{
+	margin-bottom: 0;
+}
+.header .container-fluid, .header .navbar-collapse{
+	padding-left: 0;
+	padding-right: 0;
+} 
