@@ -14,9 +14,3 @@ html,body {
 	min-height: 100%;
 	clear:both;
 }
-
-.footer {
-	position:static;
-	bottom:0;
-	width:100%;
-}
