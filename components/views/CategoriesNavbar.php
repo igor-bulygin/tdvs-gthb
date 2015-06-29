@@ -1,6 +1,9 @@
 <?php
 use app\helpers\Utils;
 use app\models\Lang;
+use app\components\assets\categoriesNavbarAsset;
+
+categoriesNavbarAsset::register($this);
 
 /* @var $lang string */
 /* @var $categories ArrayObject */
