@@ -32,7 +32,7 @@ use lajax\languagepicker\widgets\LanguagePicker;
 							<ul class="list-group">
 								<li class="logo fpf_bold">todevise<br/><span class="fpf_i">A new concept of store</span></li>
 							</ul>
-							<?php echo CategoriesNavbar::widget(); ?>
+							<?= CategoriesNavbar::widget(); ?>
 						</div>
 					</div>
 
