@@ -287,7 +287,7 @@ class ApiController extends CController {
 			$filters = json_decode($filters, true) ?: [];
 
 			if (!empty($filters)) {
-				$filters = Utils::removeAllExcept($filters, ["short_id"]);
+				$filters = Utils::removeAllExcept($filters, ["short_id", "path"]);
 
 				//TODO: If not admin, force only enabled, etc...
 			}
