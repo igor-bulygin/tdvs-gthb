@@ -1,4 +1,5 @@
 <?php
+use app\components\PublicFooter;
 use yii\helpers\Html;
 use app\components\CategoriesNavbar;
 use app\components\PublicHeaderNavbar;
@@ -48,7 +49,9 @@ use lajax\languagepicker\widgets\LanguagePicker;
 									<?= $content ?>
 								</div>
 
-								<div class="footer">footer</div>
+								<div class="footer">
+									<?= PublicFooter::widget(); ?>
+								</div>
 							</div>
 
 						</div>
