@@ -1,10 +1,26 @@
+.body-content {
+	background-color: #1a1a1a;
+}
+
+.jstree-default-dark{
+	background-color: #1a1a1a;
+	outline: none;
+
+}
+.jstree-default-dark > .jstree-container-ul > .jstree-node {
+	padding-left: 1%;
+	margin-bottom: 1px;
+	background-color: #2e2e2e ;
+}
+
 .jstree-node {
-	min-height: 32px !important;
-	line-height: 32px !important;
+	min-height: 38px !important;
+	line-height: 38px !important;
+	padding-top: 5px;
 }
 
 .jstree-wholerow {
-	height: 32px !important;
+	height: 38px !important;
 	z-index: -1;
 }
 
@@ -12,38 +28,84 @@
 	z-index: -1;
 }
 
+.jstree-anchor i.jstree-icon {
+	display: none;
+}
+
 .jstree-icon {
-	height: 32px !important;
-	line-height: 32px;
+	background: none !important;
+	height: 38px !important;
+	font-family: 'Glyphicons Halflings';
+	font-style: normal;
+	vertical-align: middle;
+	color: #686868;
+}
+
+.jstree-icon:before {
+	content: '\e236';
+}
+
+.jstree-icon:empty {
+	vertical-align: -webkit-baseline-middle;
 }
 
 .jstree-anchor {
 	width: 100%;
 	display: inline !important;
-	line-height: 32px !important;
-	height: 32px !important;
+	line-height: 38px !important;
+	height: 38px !important;
+}
+
+.jstree-default-dark .jstree-anchor {
+	font-family: 'UniversLTPro-Condensed';
+	font-size: 1.071em;
+	color: #fff;
+	text-transform: uppercase;
 }
 
 .action_add {
 	width: 32px;
-	height: 32px;
-	background-image: url("https://cdn3.iconfinder.com/data/icons/vista-general/32/add.png");
+	height: 38px;
+	text-align: center;
+	font-family: 'Glyphicons Halflings';
 	display: inline-block;
-	background-size: contain;
+	font-style: normal;
+	font-weight: normal;
+	color: #fff;
+	cursor: pointer;
+}
+
+.action_add:before {
+	content: '\e081';
 }
 
 .action_rename {
 	width: 32px;
-	height: 32px;
-	background-image: url("https://cdn3.iconfinder.com/data/icons/vista-general/32/edit.png");
+	height: 38px;
+	text-align: center;
+	font-family: 'Glyphicons Halflings';
 	display: inline-block;
-	background-size: contain;
+	font-style: normal;
+	font-weight: normal;
+	color: #fff;
+	cursor: pointer;
+}
+.action_rename:before {
+	content: '\270f';
 }
 
 .action_remove {
 	width: 32px;
-	height: 32px;
-	background-image: url("https://cdn3.iconfinder.com/data/icons/vista-general/32/delete.png");
+	height: 38px;
+	text-align: center;
+	font-family: 'Glyphicons Halflings';
 	display: inline-block;
-	background-size: contain;
+	font-style: normal;
+	font-weight: normal;
+	color: #fff;
+	cursor: pointer;
+}
+
+.action_remove:before {
+	content: '\e020';
 }
