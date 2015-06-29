@@ -2,6 +2,7 @@
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
+use app\components\CategoriesList;
 use lajax\languagepicker\widgets\LanguagePicker;
 
 /* @var $this \yii\web\View */
@@ -31,12 +32,8 @@ use lajax\languagepicker\widgets\LanguagePicker;
 						<div class="navbar-left funiv_ultra fs1 flex-prop-1">
 							<ul class="list-group">
 								<li class="logo fpf_bold">todevise<br/><span class="fpf_i">A new concept of store</span></li>
-								<li class="list-group-item">Art</li>
-								<li class="list-group-item">Fashion</li>
-								<li class="list-group-item">Industrial Design</li>
-								<li class="list-group-item">Jewelery</li>
-								<li class="list-group-item">More</li>
 							</ul>
+							<?php echo CategoriesList::widget(); ?>
 						</div>
 					</div>
 
