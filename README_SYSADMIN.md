@@ -88,7 +88,12 @@ Also, if behind `HTTPS`, add `fastcgi_param HTTPS on;`
 
 #### PHP
 
-Add `cgi.fix_pathinfo=0` to the `php.ini` file.
+Add
+
+    cgi.fix_pathinfo=0
+    always_populate_raw_post_data=-1
+
+to the `php.ini` file.
 
 #### Deploying
 
