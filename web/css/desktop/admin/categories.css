@@ -3,9 +3,11 @@
 }
 
 .jstree-default-dark{
-	background-color: #1a1a1a;
+	background-color: #d6d6d6;
 	outline: none;
-
+	font-family: 'UniversLTPro-Condensed';
+	color: #2e2e2e;
+	text-transform: uppercase;
 }
 .jstree-default-dark > .jstree-container-ul > .jstree-node {
 	padding-left: 1%;
@@ -22,6 +24,10 @@
 .jstree-wholerow {
 	height: 38px !important;
 	z-index: -1;
+}
+
+.jstree-wholerow-ul {
+	background-color: #1a1a1a;
 }
 
 .jstree-wholerow-hovered {
@@ -54,6 +60,7 @@
 	display: inline !important;
 	line-height: 38px !important;
 	height: 38px !important;
+	font-style: normal;
 }
 
 .jstree-default-dark .jstree-anchor {
@@ -61,6 +68,11 @@
 	font-size: 1.071em;
 	color: #fff;
 	text-transform: uppercase;
+	text-shadow: none;
+}
+.jstree-default-dark input {
+	color: #2e2e2e;
+	outline: none;
 }
 
 .action_add {
