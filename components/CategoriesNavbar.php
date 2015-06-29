@@ -6,7 +6,7 @@ use Yii;
 use yii\base\Widget;
 use app\models\Category;
 
-class CategoriesList extends Widget {
+class CategoriesNavbar extends Widget {
 	/**
 	 * @inheritdoc
 	 */
@@ -19,7 +19,7 @@ class CategoriesList extends Widget {
 			->asArray()
 			->all();
 
-		return $this->render('CategoriesList', [
+		return $this->render('CategoriesNavbar', [
 			'lang' => $lang,
 			'categories' => $categories
 		]);
