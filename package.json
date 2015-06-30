@@ -9,6 +9,7 @@
 		"angular-animate": "1.4.0",
 		"angular-multi-select": "5.3.6",
 		"angular-sortable-view": "0.0.13",
+		"ng-file-upload": "5.0.9",
 		"jstree": "3.1.1",
 		"jstree-actions": "0.1.0",
 		"angular-filter": "0.5.4",
