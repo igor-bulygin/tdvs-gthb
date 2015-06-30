@@ -15,7 +15,7 @@ use lajax\languagepicker\widgets\LanguagePicker;
 
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
-<html lang="<?= Yii::$app->language ?>">
+<html lang="<?= Yii::$app->language ?>" ng-app="todevise" angular-multi-select-mouse-trap angular-multi-select-key-trap>
 	<head>
 		<meta charset="<?= Yii::$app->charset ?>">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
