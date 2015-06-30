@@ -13,6 +13,8 @@ class GlobalAsset extends AssetBundle {
 		'js/desktop/deviser/global.js'
 	];
 	public $depends = [
+		'app\assets\libs\angularToastrAsset',
+		'app\assets\libs\underscoreAsset',
 		'app\assets\desktop\GlobalAsset'
 	];
 }
