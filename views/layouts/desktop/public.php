@@ -1,6 +1,9 @@
 <?php
-use app\components\PublicFooter;
+use yii\web\View;
 use yii\helpers\Html;
+use yii\helpers\Json;
+use app\helpers\Utils;
+use app\components\PublicFooter;
 use app\components\CategoriesNavbar;
 use app\components\PublicHeaderNavbar;
 use lajax\languagepicker\widgets\LanguagePicker;
@@ -19,6 +22,8 @@ use lajax\languagepicker\widgets\LanguagePicker;
 		<?= Html::csrfMetaTags() ?>
 		<title><?= Html::encode($this->title) ?></title>
 		<?php $this->head() ?>
+		<?php $this->registerJs("var _lang = " . Json::encode(Yii::$app->language) . ";", View::POS_HEAD) ?>
+		<?php $this->registerJs("var _langs = " . Json::encode(Utils::availableLangs()) . ";", View::POS_HEAD) ?>
 	</head>
 	<body>
 
