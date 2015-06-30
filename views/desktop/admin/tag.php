@@ -102,7 +102,7 @@ $this->title = 'Todevise / Admin / Tag';
 							<span class="glyphicon glyphicon-info-sign"></span>
 						</div>
 						<div class="col-xs-6 col-height col-middle">
-							<div class="radio flex-justify-center">
+							<div class="radio flex flex-justify-around">
 								<label class="funiv fs0-786 fc-c7 fs-upper">
 									<input type="radio" name="tagType" id="tagType1" value="<?php echo Tag::DROPDOWN; ?>" ng-model="tag.type">
 									<label for="tagType1"><span></span><?php echo Yii::t("app/admin", "With options"); ?></label>
@@ -192,14 +192,14 @@ $this->title = 'Todevise / Admin / Tag';
 					</div>
 
 					<div class="col-xs-3 col-height col-middle">
-						<div class="radio flex-justify-center" ng-init="freetext_type = <?php echo TagOption::NUMERIC; ?>">
+						<div class="radio flex flex-justify-around" ng-init="freetext_type = <?php echo TagOption::NUMERIC; ?>">
 							<label class="funiv fc-c7 fs-upper fs0-786">
 								<input type="radio" name="optionsType" id="optionsType1" value="<?php echo TagOption::NUMERIC; ?>" ng-model="freetext_type">
-								<?php echo Yii::t("app/admin", "Numeric"); ?>
+								<label for="optionsType1"><span></span><?php echo Yii::t("app/admin", "Numeric"); ?></label>
 							</label>
 							<label class="funiv fc-c7 fs-upper fs0-786">
 								<input type="radio" name="optionsType" id="optionsType2" value="<?php echo TagOption::ALPHANUMERIC; ?>" ng-model="freetext_type">
-								<?php echo Yii::t("app/admin", "Alphanumeric"); ?>
+								<label for="optionsType2"><span></span><?php echo Yii::t("app/admin", "Alphanumeric"); ?></label>
 							</label>
 						</div>
 					</div>

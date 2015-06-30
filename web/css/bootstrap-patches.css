@@ -57,13 +57,6 @@
 }
 /*===================================*/
 
-/* Flex justify content using space around */
-.flex-justify-center {
-	display: flex;
-	justify-content: space-around;
-}
-/*===================================*/
-
 /* vertical alignment styles */
 .col-top {
 	vertical-align: top;
