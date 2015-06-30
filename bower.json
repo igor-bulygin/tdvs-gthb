@@ -4,6 +4,7 @@
 	"version": "2.0.0",
 	"dependencies": {
 		"ng-js-tree": "0.0.5",
+		"ngImgCrop": "0.3.2",
 		"angular-bootstrap": "0.13.0",
 		"angular-ui-utils": "0.2.3"
 	}
