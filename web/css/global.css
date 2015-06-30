@@ -40,7 +40,7 @@ body {
 }
 
 .flex-justify-center {
-	justify-content: flex-center;
+	justify-content: center;
 }
 
 .flex-justify-end {
