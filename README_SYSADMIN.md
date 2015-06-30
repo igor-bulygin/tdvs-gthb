@@ -46,6 +46,21 @@ required:
 127.0.0.1       redis-cache.todevise.com
 ```
 
+This is done to ensure future migrations/splits can be done easily.
+
+You must also point a wildcard match of `todevise.com` to `127.0.0.0.1`.
+Using `dnsmasq` this can be done easily:
+
+```
+cat /etc/dnsmasq.d/todevise.com.conf
+address=/todevise.com/127.0.0.1
+```
+
+If you're on Windows/Mac, you're on your own doing this. If you fail doing it but you need to
+make the project work, I'd advice creating new entries in your `hosts` file whenever you need
+one. For example, accessing a deviser's profile requires you to go to `deviser-slug.todevise.com/...`.
+You could create a `127.0.0.1    deviser-slug.todevise.com` entry in your `hosts`.
+
 This is how the `server` section in NGINX's config should look like:
 
 	server {
