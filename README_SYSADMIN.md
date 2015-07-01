@@ -110,6 +110,8 @@ Add
 
 to the `php.ini` file.
 
+Make sure that the folder `web/uploads` exists and that it has proper permissions for RW.
+
 #### Deploying
 
 This project will follow the `semver` versioning, thus you'll never deploy from
