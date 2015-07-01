@@ -90,12 +90,12 @@ class ApiController extends CController {
 				$res = $res->asArray()->all();
 			}
 		} else if ($request->isPost) {
-			$something = Utils::getJsonFromRequest("something");
+			$something = $this->getJsonFromRequest("something");
 			unset($something["_id"]);
 
 			//TODO
 		} else if ($request->isDelete) {
-			$something = Utils::getJsonFromRequest("something");
+			$something = $this->getJsonFromRequest("something");
 
 			//TODO
 		}
@@ -122,7 +122,7 @@ class ApiController extends CController {
 				$res = $res->asArray()->all();
 			}
 		} else if ($request->isPost) {
-			$_country = Utils::getJsonFromRequest("country");
+			$_country = $this->getJsonFromRequest("country");
 			unset($_country["_id"]);
 
 			if ($_country["short_id"] === "new") {
@@ -136,7 +136,7 @@ class ApiController extends CController {
 
 			$res = $country;
 		} else if ($request->isDelete) {
-			$country = Utils::getJsonFromRequest("country");
+			$country = $this->getJsonFromRequest("country");
 
 			/* @var $country \app\models\Country */
 			$country = Country::findOne(["short_id" => $country["short_id"]]);
@@ -165,7 +165,7 @@ class ApiController extends CController {
 				$res = $res->asArray()->all();
 			}
 		} else if ($request->isPost) {
-			$_deviser = Utils::getJsonFromRequest("person");
+			$_deviser = $this->getJsonFromRequest("person");
 			unset($_deviser["_id"]);
 
 			if ($_deviser["short_id"] === "new") {
@@ -179,7 +179,7 @@ class ApiController extends CController {
 
 			$res = $deviser;
 		} else if ($request->isDelete) {
-			$deviser = Utils::getJsonFromRequest("person");
+			$deviser = $this->getJsonFromRequest("person");
 
 			/* @var $deviser \app\models\Person */
 			$deviser = Person::findOne(["short_id" => $deviser["short_id"]]);
@@ -210,7 +210,7 @@ class ApiController extends CController {
 				$res = $res->asArray()->all();
 			}
 		} else if ($request->isPost) {
-			$_tag = Utils::getJsonFromRequest("tag");
+			$_tag = $this->getJsonFromRequest("tag");
 			unset($_tag["_id"]);
 
 			if ($_tag["short_id"] === "new") {
@@ -225,7 +225,7 @@ class ApiController extends CController {
 
 			$res = $tag;
 		} else if ($request->isDelete) {
-			$tag = Utils::getJsonFromRequest("tag");
+			$tag = $this->getJsonFromRequest("tag");
 
 			/* @var $tag \app\models\Tag */
 			$tag = Tag::findOne(["short_id" => $tag["short_id"]]);
@@ -254,7 +254,7 @@ class ApiController extends CController {
 				$res = $res->asArray()->all();
 			}
 		} else if ($request->isPost) {
-			$_sizechart = Utils::getJsonFromRequest("sizechart");
+			$_sizechart = $this->getJsonFromRequest("sizechart");
 			unset($_sizechart["_id"]);
 
 			if ($_sizechart["short_id"] === "new") {
@@ -269,7 +269,7 @@ class ApiController extends CController {
 
 			$res = $sizechart;
 		} else if ($request->isDelete) {
-			$sizechart = Utils::getJsonFromRequest("sizechart");
+			$sizechart = $this->getJsonFromRequest("sizechart");
 
 			/* @var $sizechart \app\models\SizeChart */
 			$sizechart = SizeChart::findOne(["short_id" => $sizechart["short_id"]]);
@@ -298,7 +298,7 @@ class ApiController extends CController {
 				$res = $res->asArray()->all();
 			}
 		} else if ($request->isPost) {
-			$node = Utils::getJsonFromRequest("category");
+			$node = $this->getJsonFromRequest("category");
 			unset($node["_id"]);
 
 			if ($node["short_id"] === "new") {
@@ -313,7 +313,7 @@ class ApiController extends CController {
 
 			$res = $category;
 		} else if ($request->isDelete) {
-			$node = Utils::getJsonFromRequest("category");
+			$node = $this->getJsonFromRequest("category");
 
 			/* @var $category \app\models\Category */
 			$category = Category::findOne(["short_id" => $node["short_id"]]);

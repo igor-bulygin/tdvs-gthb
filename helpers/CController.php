@@ -2,6 +2,8 @@
 namespace app\helpers;
 
 use Yii;
+use yii\helpers\Json;
+use app\helpers\Utils;
 use yii\web\Controller;
 use app\controllers\ApiController;
 
@@ -49,6 +51,18 @@ class CController extends Controller {
 
 	public function getViewPath() {
 		return Yii::getAlias($this->_viewPath);
+	}
+
+	/**
+	 * Get the body of a request, transform it to a JSON
+	 * and return the value of $key
+	 * @param $key
+	 * @return mixed
+	 */
+	public function getJsonFromRequest($key) {
+		$request = Yii::$app->getRequest();
+		$_data = Json::decode($request->getRawBody());
+		return $_data[$key];
 	}
 
 	/**

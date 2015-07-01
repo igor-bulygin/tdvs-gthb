@@ -118,18 +118,6 @@ class Utils {
 	}
 
 	/**
-	 * Get the body of a request, transform it to a JSON
-	 * and return the value of $key
-	 * @param $key
-	 * @return mixed
-	 */
-	public static function getJsonFromRequest($key) {
-		$request = Yii::$app->getRequest();
-		$_data = Json::decode($request->getRawBody());
-		return $_data[$key];
-	}
-
-	/**
 	 * Remove all keys contained in $allowed that match the object
 	 * created by JSON-decoding $data.
 	 * @param $data Array of data
