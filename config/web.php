@@ -127,6 +127,9 @@ $config = [
 				//TODO make it domain careless and re-check the regex
 				'http://<slug:[0-9a-z-A-Z\-]*?>.todevise.com/edit-info/' =>  'deviser/edit-info',
 
+				//Link for deviser profile photo upload
+				'http://<slug:[0-9a-z-A-Z\-]*?>.todevise.com/upload-profile-photo/' =>  'deviser/upload-profile-photo',
+
 				//Links for admin
 				'admin/tag/<tag_id:\w{5}>/'  => 'admin/tag',
 				'admin/size-chart/<size_chart_id:\w{5}>/'  => 'admin/size-chart',
