@@ -9,7 +9,7 @@ todevise.controller('deviserCtrl', ["$scope", "$timeout", "$deviser", "$deviser_
 	$scope.crop_profile = function() {
 
 		var modalInstance = $modal.open({
-			templateUrl: 'template/modal/global/crop.html',
+			templateUrl: 'template/modal/deviser/crop.html',
 			controller: 'cropCtrl',
 			resolve: {
 				data: function () {
