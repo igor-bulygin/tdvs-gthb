@@ -22,7 +22,8 @@ $config = [
 			'languages' => array_keys(require(__DIR__ . '/langs.php'))
 		],
 		'devicedetect',
-		'languagepicker'
+		'languagepicker',
+		'app\components\Aliases'
 	],
 
 	'components' => [
