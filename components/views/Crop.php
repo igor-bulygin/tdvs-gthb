@@ -1,7 +1,14 @@
-<script type="text/ng-template" id="template/modal/global/crop.html">
+<?php
+use app\components\assets\cropAsset;
+
+cropAsset::register($this);
+
+?>
+
+<script type="text/ng-template" id="template/modal/deviser/crop.html">
 	<form novalidate name="form">
 		<div class='modal-header'>
-			<h3 class='modal-title'><?php echo Yii::t("app/global", "Crop image"); ?></h3>
+			<h3 class='modal-title'><?php echo Yii::t("app/deviser", "Crop image"); ?></h3>
 		</div>
 		<div class='modal-body'>
 
@@ -11,8 +18,8 @@
 
 		</div>
 		<div class='modal-footer'>
-			<button class='btn btn-success' ng-click='form.$submitted = true; form.$valid && ok()'><?php echo Yii::t("app/global", "Confirm"); ?></button>
-			<button class='btn btn-primary' ng-click='cancel()' type="submit"><?php echo Yii::t("app/global", "Cancel"); ?></button>
+			<button class='btn btn-success' ng-click='form.$submitted = true; form.$valid && ok()'><?php echo Yii::t("app/deviser", "Confirm"); ?></button>
+			<button class='btn btn-primary' ng-click='cancel()' type="submit"><?php echo Yii::t("app/deviser", "Cancel"); ?></button>
 		</div>
 	</form>
 </script>
