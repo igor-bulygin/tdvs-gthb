@@ -23,9 +23,10 @@ class Person extends CActiveRecord implements IdentityInterface {
 		return [
 			'_id',
 			'short_id',
+			'slug',
 			'type',
 			'personal_info',
-			'slug',
+			'media',
 			'credentials',
 			'preferences'
 		];
@@ -66,6 +67,10 @@ class Person extends CActiveRecord implements IdentityInterface {
 			]);
 		}
 
+		if($this->media === null) {
+			$this->media = [];
+		}
+
 		return parent::beforeSave($insert);
 	}
 
@@ -79,7 +84,7 @@ class Person extends CActiveRecord implements IdentityInterface {
 	}
 
 	public function setLanguage($lang) {
-		$this->preferences = array_merge_recursive($this->preferennces, [
+		$this->preferences = array_merge_recursive($this->preferences, [
 			"lang" => $lang
 		]);
 	}

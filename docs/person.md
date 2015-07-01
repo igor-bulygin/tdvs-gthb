@@ -7,6 +7,8 @@ This is how a single person looks like:
 
 	short_id: '4q1c83', // 6 characters long custom ID (url-safe)
 
+	"slug" => "foo-bar", // This will exist if the person is a deviser
+
 	type: [0, 1], // Each person can have a single or multiple roles, for example, Client and Deviser.
 	// Check the constants in Person model for all the valid values for this.
 
@@ -15,7 +17,12 @@ This is how a single person looks like:
 		surnames: ['', '', ''...], // Array of strings
 		bday: , ISODate('1969-12-31'), // MongoDB Date
 		country: 'EN' // Country code
-	}
+	},
+
+	media: {
+		profile: "profile.png",
+		header: "header.jpg"
+	},
 
 	credentials: {
 		email: 'foo@bar.com', // User email
@@ -23,8 +30,6 @@ This is how a single person looks like:
 		salt: '8f5b39c5069b47f905c0b4616841183c87a9685a7d43f61d0cf50334a6232868', // 64 characters random
 		auth_key: '4616841183c84616841183c88f5b3947j3t616841183c8c5069b47f905c0b46164616841183c8841183c87a9685a74616841183c8d43f61d0cf50334a6232868', // 128 characters random
 	},
-
-	"slug" => "foo-bar", // This will exist if the person is a deviser
 
 	preferences: {
 		language: "en-US", // Look at the keys in config/langs.php for all possible values
