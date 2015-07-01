@@ -3,11 +3,11 @@
 namespace app\controllers;
 
 use Yii;
-use app\helpers\CController;
-use yii\filters\AccessControl;
 use yii\helpers\Url;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
+use app\helpers\CController;
+use yii\filters\AccessControl;
 use yii\base\ViewContextInterface;
 
 class PublicController extends CController {
@@ -28,6 +28,8 @@ class PublicController extends CController {
 	}
 
 	public function actionProduct($category_id, $product_id, $slug) {
+		echo Url::to(["deviser/upload-profile-photo", "slug" => "pepe"]);
+		echo "<br />";
 		echo Url::to(["/public/product", "category_id" => 12456, "product_id" => 9876543, "slug" => "asfo-asdg-asd-gasd-gasdgsdgasdg-asdgasdg"]);
 		echo "<br />";
 		echo Url::to(["/public/category", "category_id" => 12456, "slug" => "asfo-asdg-asd-gasd-gasdgsdgasdg-asdgasdg"]);
