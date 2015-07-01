@@ -38,13 +38,13 @@ api.factory("$deviser_util", function() {
 	utils.newDeviser = function(type, name, surnames, email, country_code, slug) {
 		return {
 			short_id: "new",
+			slug: slug,
 			type: type,
 			personal_info: {
 				name: name,
 				surnames: surnames,
 				country: country_code
 			},
-			slug: slug,
 			credentials: {
 				email: email
 			}
