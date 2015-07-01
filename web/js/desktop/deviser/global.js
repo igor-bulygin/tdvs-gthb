@@ -20,6 +20,32 @@ global_deviser.dataURLtoBlob = function(dataURI) {
 	return new Blob([ia], {type:mimeString});
 };
 
+global_deviser.controller("cropCtrl", function($scope, $modalInstance, $timeout, data) {
+	$scope.croppedphoto = "";
+
+	var _reader = new FileReader();
+	_reader.onloadend = function() {
+		$scope.$apply(function() {
+			$scope.photo = _reader.result;
+		});
+	};
+	_reader.readAsDataURL(data.photo);
+
+	$scope.ok = function() {
+		var _f = global_deviser.dataURLtoBlob($scope.croppedphoto);
+		_f.name = $scope.photo.name;
+
+		$modalInstance.close({
+			"croppedphoto": _f
+		});
+	};
+
+	$scope.cancel =  function() {
+		$modalInstance.dismiss();
+	};
+});
+
+
 global_deviser.directive('ngfBgSrc', ['$parse', '$timeout', function ($parse, $timeout) {
 	return {
 		restrict: 'AE',
