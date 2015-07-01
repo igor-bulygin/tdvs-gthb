@@ -21,7 +21,41 @@
 
 .country {
 	border: 1px solid #4a4a4a;
-	padding: 1%;
+	padding: 0.5% 1% !important;
 	margin-right: 1%;
+}
 
+.add-new {
+	padding: 0.6% 1%;
+}
+
+.add-new a:hover {
+	color: #9ef463;
+	text-decoration: none;
+}
+
+.size-chart-settings {
+	padding: 0 1.3% !important
+}
+
+.table-size-generated input {
+	background-color: #2e2e2e;
+	border: solid 1px #4a4a4a;
+	text-align: center;
+	max-width: 33%;
+	height: 38px;
+	margin: 5.2% auto 5.2% auto;
+}
+
+.table-size-generated th {
+	background: -moz-repeating-linear-gradient(45deg, #343434, #262626 1px, #262626 1px, #262626 4px);
+	background: -webkit-repeating-linear-gradient(45deg, #343434, #262626 1px, #262626 1px, #262626 4px);
+	background: -o-repeating-linear-gradient(45deg, #343434, #262626 1px, #262626 1px, #262626 4px);
+	background-size: 100px 100px;
+	padding: 0.7%;
+}
+
+.table-size-generated td {
+	text-align: center;
+	border-bottom: solid 1px #6d6d6d;
 }

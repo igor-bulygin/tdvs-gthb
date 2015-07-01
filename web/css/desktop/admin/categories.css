@@ -38,21 +38,21 @@
 	display: none;
 }
 
-.jstree-icon {
+/*.jstree-icon {
 	background: none !important;
 	height: 38px !important;
 	font-family: 'Glyphicons Halflings';
 	font-style: normal;
 	vertical-align: middle;
 	color: #686868;
-}
+}*/
 
-.jstree-icon:before {
+/*.jstree-icon:before {
 	content: '\e236';
-}
+}*/
 
 .jstree-icon:empty {
-	vertical-align: -webkit-baseline-middle;
+	vertical-align: middle;
 }
 
 .jstree-anchor {

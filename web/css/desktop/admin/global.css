@@ -171,6 +171,7 @@ html, body {
 .btn-purple:hover {
 	background-color: #7619c8;
 	color: #fff;
+
 }
 
 .btn-gray {
@@ -237,4 +238,33 @@ html, body {
 
 .fnormal {
 	font-weight: normal;
+}
+
+/**** POP UP  ****/
+
+.popup-tag input,
+.popup-size-chart input {
+	border: solid 1px #c1c1c1;
+	background-color: #fff;
+	border-radius: 0;
+}
+
+.popup-tag .input-group,
+.popup-size-chart .input-group {
+	margin-top: 2%;
+	display: flex;
+}
+
+.popup-tag .input-group-addon,
+.popup-size-chart .input-group-addon {
+	background-color: #fff;
+	border-radius: 0;
+	width: 20%;
+	padding: 9px 12px;
+}
+
+.popup-tag .alert-danger,
+.popup-size-chart .alert-danger {
+	border:0;
+	min-width: 17%;
 }
