@@ -1,4 +1,8 @@
 <?php
+use app\components\Crop;
+use yii\web\View;
+use yii\helpers\Url;
+use yii\helpers\Json;
 use app\assets\desktop\deviser\EditInfoAsset;
 
 /* @var $this yii\web\View */
@@ -16,6 +20,9 @@ $this->title = "$who / Todevise / Edit info";
 
 <div class="row no-gutter" ng-controller="deviserCtrl" ng-init="init()">
 	<div class="col-xs-12 no-horizontal-padding">
+
+		<?php $this->registerJs("var _deviser = " . Json::encode($deviser) . ";", View::POS_HEAD); ?>
+		<?php $this->registerJs("var _profile_photo_url = '" . Url::to(["deviser/upload-profile-photo", "slug" => $deviser['slug']]) . "';", View::POS_HEAD); ?>
 
 		<div class="row no-gutter">
 			<div class="col-xs-12 header-photo">
@@ -49,7 +56,7 @@ $this->title = "$who / Todevise / Edit info";
 		<div class="row no-gutter">
 			<div class="col-xs-3"></div>
 			<div class="col-xs-6">
-				<input type="text" placeholder="your name">
+				<input type="text" placeholder="your name" ng-model="deviser.personal_info.name">
 			</div>
 			<div class="col-xs-3"></div>
 		</div>
@@ -85,24 +92,13 @@ $this->title = "$who / Todevise / Edit info";
 			</div>
 			<div class="col-xs-3"></div>
 		</div>
+
+		<div class="row no-gutter">
+			<div class="col-xs-12">
+				<div class="btn btn-default pointer" ng-click="save">Guardar -></div>
+			</div>
+		</div>
 	</div>
 </div>
 
-<script type="text/ng-template" id="template/modal/deviser/crop_profile.html">
-	<form novalidate name="form">
-		<div class='modal-header'>
-			<h3 class='modal-title'><?php echo Yii::t("app/admin", "Create new option"); ?></h3>
-		</div>
-		<div class='modal-body'>
-
-			<div class="cropArea">
-				<img-crop image="profilephoto" result-image="cropped"></img-crop>
-			</div>
-
-		</div>
-		<div class='modal-footer'>
-			<button class='btn btn-success' ng-click='form.$submitted = true; form.$valid && ok()'><?php echo Yii::t("app/admin", "Confirm"); ?></button>
-			<button class='btn btn-primary' ng-click='cancel()' type="submit"><?php echo Yii::t("app/admin", "Cancel"); ?></button>
-		</div>
-	</form>
-</script>
+<?= Crop::widget() ?>
