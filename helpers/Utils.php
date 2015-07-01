@@ -45,6 +45,65 @@ class Utils {
 	}
 
 	/**
+	 * Create a recursive path of folders.
+	 * @param $path
+	 * @return bool
+	 */
+	public static function mkdir($path) {
+		if(file_exists($path) === true) {
+			return true;
+		}
+		umask(0000);
+		return mkdir($path, 0777, true);
+	}
+
+	/**
+	 * Create a file. Returns false if the file already exists or if it failed to create it.
+	 * @param $path
+	 * @return bool
+	 */
+	public static function touch($path, $mode = 0777) {
+		if(file_exists($path) === true) {
+			return false;
+		}
+		$fp = fopen($path, "c");
+		if($fp === false) {
+			return false;
+		} else {
+			fclose($fp);
+			chmod($path, $mode);
+			return true;
+		}
+	}
+
+	/**
+	 * Create a new file with the datetime and a 5 chars long string in the given
+	 * path and with the given extension. Returns "" if it failed for some reason
+	 * or the name of the file (without the extension) if it succeeded.
+	 * @param $path
+	 * @param $ext
+	 * @return string
+	 */
+	public static function cfile($path, $ext){
+		$date = new \DateTime();
+		$s = $date->format(Yii::$app->params["php_fmt_datatime"]);
+		$s = preg_replace("/[ :]/", "-", $s);
+
+		Utils::mkdir($path);
+
+		$r = Utils::shortID(5);
+		$fp = Utils::join_paths($path, "${s}-${r}.$ext");
+		error_log($fp, 4);
+
+		while(file_exists($fp)) {
+			$r = Utils::shortID(5);
+			$fp = Utils::join_paths($path, "${s}-${r}.$ext");
+		}
+
+		return Utils::touch($fp) === false ? "" : "${s}-${r}";
+	}
+
+	/**
 	 * Return a path, result of joining all the passed arguments, suitable for the current OS.
 	 * @return mixed
 	 */
