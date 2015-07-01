@@ -50,6 +50,34 @@ class CController extends Controller {
 	public function getViewPath() {
 		return Yii::getAlias($this->_viewPath);
 	}
+
+	/**
+	 * Save a file to the path extracted from $alias, with the name $name
+	 * or a generated string in the format YYYY-MM-DD-HH-MM-xxxxx.{ext}
+	 * @param $path
+	 * @param null $filename
+	 * @return bool|string
+	 */
+	public function savePostedFile($path, $filename = null) {
+		$f = $_FILES['file'];
+
+		Utils::mkdir($path);
+
+		$ext = strtolower(pathinfo($f["name"], PATHINFO_EXTENSION));
+		if($filename === null) {
+			$filename = Utils::cfile($path, $ext);
+		} else {
+			Utils::touch( Utils::join_paths($path, "${filename}.${ext}") );
+		}
+		$path = Utils::join_paths($path, "${filename}.${ext}");
+
+		$res = @move_uploaded_file($f["tmp_name"], $path);
+		if($res === true) {
+			return "${filename}.${ext}";
+		} else {
+			return false;
+		}
+	}
 }
 
 ?>
