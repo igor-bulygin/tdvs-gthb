@@ -32,3 +32,6 @@ phpunit.phar
 
 #web assets
 web/assets
+
+#web uploads
+web/uploads
