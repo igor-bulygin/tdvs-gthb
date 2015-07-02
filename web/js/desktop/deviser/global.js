@@ -1,7 +1,7 @@
 console.log("Global desktop deviser");
 var global_deviser = angular.module('global-deviser', ['toastr']);
 
-global_deviser.dataURLtoBlob = function(dataURI) {
+global_deviser.dataURItoBlob = function(dataURI) {
 	var byteString;
 	if (dataURI.split(',')[0].indexOf('base64') >= 0)
 		byteString = atob(dataURI.split(',')[1]);
@@ -32,7 +32,7 @@ global_deviser.controller("cropCtrl", function($scope, $modalInstance, $timeout,
 	_reader.readAsDataURL(data.photo);
 
 	$scope.ok = function() {
-		var _f = global_deviser.dataURLtoBlob($scope.croppedphoto);
+		var _f = global_deviser.dataURItoBlob($scope.croppedphoto);
 		_f.name = $scope.photo.name;
 
 		$modalInstance.close({
@@ -45,17 +45,13 @@ global_deviser.controller("cropCtrl", function($scope, $modalInstance, $timeout,
 	};
 });
 
-
 var ngFileUpload = angular.module('ngFileUpload');
 ngFileUpload.directive('ngfBgSrc', ['$parse', '$timeout', function ($parse, $timeout) {
 	return {
 		restrict: 'AE',
-		scope: {
-			ngfBgSrc: '='
-		},
 		link: function (scope, elem, attr) {
 			if (window.FileReader) {
-				scope.$watch('ngfBgSrc', function (file) {
+				scope.$watch(attr.ngfBgSrc, function (file) {
 					if (file &&
 						ngFileUpload.validate(scope, $parse, attr, file, null) &&
 						(!window.FileAPI || navigator.userAgent.indexOf('MSIE 8') === -1 || file.size < 20000) &&
@@ -81,17 +77,9 @@ ngFileUpload.directive('ngfBgSrc', ['$parse', '$timeout', function ($parse, $tim
 							}
 						});
 					} else {
-						var xhr = new XMLHttpRequest();
-						xhr.open('GET', attr.ngfDefaultSrc, true);
-						xhr.responseType = 'blob';
-
-						xhr.onload = function() {
-							if (this.status !== 200) return;
-							scope.ngfBgSrc = this.response;
-							scope.$apply();
-						};
-
-						xhr.send();
+						elem.css({
+							'background-image': 'url(' + attr.ngfDefaultSrc + ')' || ''
+						});
 					}
 				});
 			}
