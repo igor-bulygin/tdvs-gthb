@@ -2,6 +2,7 @@
 namespace app\controllers;
 
 use Yii;
+use app\models\Lang;
 use yii\helpers\Json;
 use app\helpers\Utils;
 use app\models\Person;
@@ -20,7 +21,7 @@ class DeviserController extends CController {
 		$countries = $this->api->actionCountries()->asArray()->all();
 		$countries_lookup = [];
 		foreach($countries as $country) {
-			$countries_lookup[$country["country_code"]] = $country["country_name"][Yii::$app->language];
+			$countries_lookup[$country["country_code"]] = Utils::getValue($country["country_name"], Yii::$app->language, $country["country_name"][array_keys(Lang::EN_US)[0]]);
 		}
 
 		$deviser = $this->api->actionDevisers(Json::encode(["slug" => $slug]))->asArray()->all();
