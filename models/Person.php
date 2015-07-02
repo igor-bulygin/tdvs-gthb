@@ -25,6 +25,7 @@ class Person extends CActiveRecord implements IdentityInterface {
 			'short_id',
 			'slug',
 			'type',
+			'categories',
 			'personal_info',
 			'media',
 			'credentials',
@@ -65,6 +66,10 @@ class Person extends CActiveRecord implements IdentityInterface {
 			$this->credentials = array_merge_recursive($this->credentials, [
 				"auth_key" => Yii::$app->getSecurity()->generateRandomString(128)
 			]);
+		}
+
+		if($this->categories === null) {
+			$this->categories = [];
 		}
 
 		if($this->media === null) {
