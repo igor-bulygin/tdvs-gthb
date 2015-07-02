@@ -14,6 +14,7 @@ class m150405_184924_create_person extends Migration {
 			'unique' => true
 		]);
 		$this->createIndex('person', 'type');
+		$this->createIndex('person', 'categories');
 		$this->createIndex('person', 'credentials.email');
 
 		$this->insert('person', [
@@ -89,6 +90,7 @@ class m150405_184924_create_person extends Migration {
 		$this->insert('person', [
 			"short_id" => "40000",
 			"type" => [Person::COLLABORATOR],
+			"categories" => ["30000", "50000"],
 			"personal_info" => [
 				"name" => "Collaborator",
 				"surnames" => ["Foo", "Bar"],
