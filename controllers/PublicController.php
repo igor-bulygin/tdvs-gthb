@@ -28,6 +28,8 @@ class PublicController extends CController {
 	}
 
 	public function actionProduct($category_id, $product_id, $slug) {
+		echo Yii::getAlias('@deviser_url');
+		echo "<br />";
 		echo Url::to(["deviser/upload-profile-photo", "slug" => "pepe"]);
 		echo "<br />";
 		echo Url::to(["/public/product", "category_id" => 12456, "product_id" => 9876543, "slug" => "asfo-asdg-asd-gasd-gasdgsdgasdg-asdgasdg"]);
