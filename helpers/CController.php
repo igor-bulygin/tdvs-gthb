@@ -78,6 +78,19 @@ class CController extends Controller {
 		Utils::mkdir($path);
 
 		$ext = strtolower(pathinfo($f["name"], PATHINFO_EXTENSION));
+		if($ext === null || $ext == "") {
+			//Try to find out the extension from the magic byte and/or the sent type
+			$file_info = new \finfo(FILEINFO_MIME);  // object oriented approach!
+			$mime_type = $file_info->buffer(file_get_contents($f["tmp_name"]));  // e.g. gives "image/jpeg"
+			$mime_type = explode(";", $mime_type)[0];
+			$sent_type = $f["type"];
+
+			if(strcmp($sent_type, $mime_type) === 0) {
+				$s = explode("/", $sent_type);
+				$ext = count($s) === 2 ? $s[1] : "unknown";
+			}
+		}
+
 		if($filename === null) {
 			$filename = Utils::cfile($path, $ext);
 		} else {
