@@ -45,6 +45,29 @@ class Utils {
 	}
 
 	/**
+	 * Guess file extension using magic mime.
+	 * @param $path
+	 * @return string
+	 */
+	public static function magic_guess_extension($path) {
+		$file_info = new \finfo(FILEINFO_MIME);
+		$mime_type = $file_info->buffer(file_get_contents($path));
+		$mime_type = explode(";", $mime_type);
+		return count($mime_type) === 2 ? $mime_type[0] : "";
+	}
+
+	/**
+	 * Get the base64 (inline) string of a (image) file.
+	 * @param $path
+	 * @return string
+	 */
+	public static function fileToBase64($path) {
+		$type = pathinfo($path, PATHINFO_EXTENSION);
+		$data = file_get_contents($path);
+		return 'data:image/' . $type . ';base64,' . base64_encode($data);
+	}
+
+	/**
 	 * Create a recursive path of folders.
 	 * @param $path
 	 * @return bool
