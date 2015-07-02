@@ -46,12 +46,16 @@ global_deviser.controller("cropCtrl", function($scope, $modalInstance, $timeout,
 });
 
 
-global_deviser.directive('ngfBgSrc', ['$parse', '$timeout', function ($parse, $timeout) {
+var ngFileUpload = angular.module('ngFileUpload');
+ngFileUpload.directive('ngfBgSrc', ['$parse', '$timeout', function ($parse, $timeout) {
 	return {
 		restrict: 'AE',
+		scope: {
+			ngfBgSrc: '='
+		},
 		link: function (scope, elem, attr) {
 			if (window.FileReader) {
-				scope.$watch(attr.ngfBgSrc, function (file) {
+				scope.$watch('ngfBgSrc', function (file) {
 					if (file &&
 						ngFileUpload.validate(scope, $parse, attr, file, null) &&
 						(!window.FileAPI || navigator.userAgent.indexOf('MSIE 8') === -1 || file.size < 20000) &&
@@ -77,9 +81,17 @@ global_deviser.directive('ngfBgSrc', ['$parse', '$timeout', function ($parse, $t
 							}
 						});
 					} else {
-						elem.css({
-							'background-image': attr.ngfDefaultSrc || ''
-						});
+						var xhr = new XMLHttpRequest();
+						xhr.open('GET', attr.ngfDefaultSrc, true);
+						xhr.responseType = 'blob';
+
+						xhr.onload = function() {
+							if (this.status !== 200) return;
+							scope.ngfBgSrc = this.response;
+							scope.$apply();
+						};
+
+						xhr.send();
 					}
 				});
 			}
