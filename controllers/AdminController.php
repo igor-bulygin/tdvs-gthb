@@ -36,7 +36,7 @@ class AdminController extends CController {
 		$countries = $this->api->actionCountries()->asArray()->all();
 		$countries_lookup = [];
 		foreach($countries as $country) {
-			$countries_lookup[$country["country_code"]] = $country["country_name"][Yii::$app->language];
+			$countries_lookup[$country["country_code"]] = Utils::getValue($country["country_name"], Yii::$app->language, array_keys(Lang::EN_US)[0]);
 		}
 
 		$data = [
@@ -96,7 +96,7 @@ class AdminController extends CController {
 		$countries = $this->api->actionCountries()->asArray()->all();
 		$countries_lookup = [];
 		foreach($countries as $country) {
-			$countries_lookup[$country["country_code"]] = $country["country_name"][Yii::$app->language];
+			$countries_lookup[$country["country_code"]] = Utils::getValue($country["country_name"], Yii::$app->language, array_keys(Lang::EN_US)[0]);
 		}
 
 		return $this->render("size-chart", [
