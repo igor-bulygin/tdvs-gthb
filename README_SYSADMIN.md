@@ -107,6 +107,8 @@ Add
 
     cgi.fix_pathinfo=0
     always_populate_raw_post_data=-1
+    upload_max_filesize = 100M
+    post_max_size = 100M
 
 to the `php.ini` file.
 
