@@ -3,9 +3,10 @@
 namespace app\controllers;
 
 use Yii;
+use app\models\Lang;
+use yii\helpers\Json;
 use app\helpers\CController;
 use yii\data\ActiveDataProvider;
-use yii\helpers\Json;
 
 
 class AdminController extends CController {
