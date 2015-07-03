@@ -102,10 +102,6 @@ todevise.controller('deviserCtrl', ["$scope", "$timeout", "$deviser", "$deviser_
 		});
 	};
 
-	$scope.cancel = function() {
-		$scope.deviser = angular.copy($scope._shadow);
-	};
-
 	$scope.save = function() {
 
 		$deviser.modify("POST", $scope.deviser).then(function() {
@@ -152,6 +148,4 @@ todevise.controller('deviserCtrl', ["$scope", "$timeout", "$deviser", "$deviser_
 			});
 		}
 	};
-
-	$scope._shadow = angular.copy($scope.deviser);
 }]);
