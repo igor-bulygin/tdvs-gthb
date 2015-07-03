@@ -18,7 +18,7 @@ class m150405_184924_create_person extends Migration {
 		$this->createIndex('person', 'credentials.email');
 
 		$this->insert('person', [
-			"short_id" => "10000",
+			"short_id" => "1000000",
 			"type" => [Person::ADMIN],
 			"personal_info" => [
 				"name" => "Admin",
@@ -36,12 +36,12 @@ class m150405_184924_create_person extends Migration {
 		]);
 
 		/* @var $person \app\models\Person */
-		$person = Person::findOne(["short_id" => "10000"]);
+		$person = Person::findOne(["short_id" => "1000000"]);
 		$person->setPassword("admin_test_123");
 		$person->update(false);
 
 		$this->insert('person', [
-			"short_id" => "20000",
+			"short_id" => "2000000",
 			"type" => [Person::CLIENT],
 			"personal_info" => [
 				"name" => "Client",
@@ -59,12 +59,12 @@ class m150405_184924_create_person extends Migration {
 		]);
 
 		/* @var $person \app\models\Person */
-		$person = Person::findOne(["short_id" => "20000"]);
+		$person = Person::findOne(["short_id" => "2000000"]);
 		$person->setPassword("client_test_123");
 		$person->update(false);
 
 		$this->insert('person', [
-			"short_id" => "30000",
+			"short_id" => "3000000",
 			"type" => [Person::DEVISER],
 			"personal_info" => [
 				"name" => "Deviser",
@@ -83,12 +83,12 @@ class m150405_184924_create_person extends Migration {
 		]);
 
 		/* @var $person \app\models\Person */
-		$person = Person::findOne(["short_id" => "30000"]);
+		$person = Person::findOne(["short_id" => "3000000"]);
 		$person->setPassword("deviser_test_123");
 		$person->update(false);
 
 		$this->insert('person', [
-			"short_id" => "40000",
+			"short_id" => "4000000",
 			"type" => [Person::COLLABORATOR],
 			"categories" => ["30000", "50000"],
 			"personal_info" => [
@@ -107,7 +107,7 @@ class m150405_184924_create_person extends Migration {
 		]);
 
 		/* @var $person \app\models\Person */
-		$person = Person::findOne(["short_id" => "40000"]);
+		$person = Person::findOne(["short_id" => "4000000"]);
 		$person->setPassword("collaborator_test_123");
 		$person->update(false);
 	}

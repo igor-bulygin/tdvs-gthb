@@ -5,7 +5,7 @@ This is how a single person looks like:
 ~~~javascript
 	_id: '507f1f77bcf86cd799439011', // MongoDB _id
 
-	short_id: '4q1c83', // 6 characters long custom ID (url-safe)
+	short_id: '4q1c838', // 7 characters long custom ID (url-safe)
 
 	"slug" => "foo-bar", // This will exist if the person is a deviser
 

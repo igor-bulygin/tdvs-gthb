@@ -169,7 +169,7 @@ class ApiController extends CController {
 			unset($_deviser["_id"]);
 
 			if ($_deviser["short_id"] === "new") {
-				$_deviser["short_id"] = (new Person())->genValidID(5);
+				$_deviser["short_id"] = (new Person())->genValidID(7);
 			}
 
 			/* @var $deviser \app\models\Person */
