@@ -83,6 +83,10 @@ class CController extends Controller {
 			$mime_type = Utils::magic_guess_extension($f["tmp_name"]);
 			$sent_type = $f["type"];
 
+			//Fuck you "jpeg" vs "jpg" extension madness. FUCK YOU!
+			$mime_type = $mime_type === "image/jpeg" ? "image/jpg" : $mime_type;
+			$sent_type = $sent_type === "image/jpeg" ? "image/jpg" : $sent_type;
+
 			if(strcmp($sent_type, $mime_type) === 0) {
 				$s = explode("/", $sent_type);
 				$ext = count($s) === 2 ? $s[1] : "unknown";
