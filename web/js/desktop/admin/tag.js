@@ -90,7 +90,7 @@ todevise.controller('tagCtrl', ["$scope", "$timeout", "$tag", "$tag_util", "$cat
 	};
 
 	$scope.create_freetext_option = function() {
-		$scope.new_option["metric_units"] = $scope.selected_mu[0].value;
+		$scope.new_option["metric_type"] = $scope.selected_mu[0].value;
 		$scope.new_option.type = parseInt($scope.freetext_type, 10);
 
 		$scope.tag.options.push($scope.new_option);

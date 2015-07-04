@@ -6,7 +6,7 @@ use yii\helpers\Html;
 use yii\helpers\Json;
 use app\helpers\Utils;
 use yii\grid\GridView;
-use app\models\MetricUnit;
+use app\models\MetricType;
 use app\assets\desktop\admin\SizeChartsAsset;
 
 /* @var $this yii\web\View */
@@ -78,10 +78,10 @@ $this->title = 'Todevise / Admin / Size charts';
 						'label' => Yii::t("app/admin", "Name")
 					],
 					[
-						'value' => function($model){
-							return Yii::t("app/admin", MetricUnit::TXT[$model->metric_units]);
+						'value' => function($model) {
+							return Yii::t("app/admin", MetricType::TXT[$model->metric_unit]);
 						},
-						'label' => Yii::t("app/admin", "Metric units")
+						'label' => Yii::t("app/admin", "Metric unit")
 					],
 					[
 						'class' => 'yii\grid\ActionColumn',

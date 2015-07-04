@@ -16,7 +16,7 @@ class SizeChart extends CActiveRecord {
 			'name',
 			'enabled',
 			'categories',
-			'metric_units',
+			'metric_unit',
 			'countries',
 			'columns',
 			'values'

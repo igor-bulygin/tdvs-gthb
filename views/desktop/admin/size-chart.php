@@ -2,7 +2,7 @@
 use yii\web\View;
 use app\models\Lang;
 use yii\helpers\Json;
-use app\models\MetricUnit;
+use app\models\MetricType;
 use app\assets\desktop\admin\SizeChartAsset;
 
 /* @var $this yii\web\View */
@@ -29,9 +29,9 @@ $this->title = 'Todevise / Admin / Size chart';
 		<?php $this->registerJs("var _countries = " . Json::encode($countries) . ";", View::POS_HEAD); ?>
 		<?php $this->registerJs("var _countries_lookup = " . Json::encode($countries_lookup) . ";", View::POS_HEAD); ?>
 		<?php $this->registerJs("var _mus = " . Json::encode([
-				["value" => MetricUnit::NONE, "text" => Yii::t("app/admin", MetricUnit::TXT[MetricUnit::NONE])],
-				["value" => MetricUnit::SIZE, "text" => Yii::t("app/admin", MetricUnit::TXT[MetricUnit::SIZE])],
-				["value" => MetricUnit::WEIGHT, "text" => Yii::t("app/admin", MetricUnit::TXT[MetricUnit::WEIGHT])]
+				["value" => MetricType::NONE, "text" => Yii::t("app/admin", MetricType::TXT[MetricType::NONE])],
+				["value" => MetricType::SIZE, "text" => Yii::t("app/admin", MetricType::TXT[MetricType::SIZE])],
+				["value" => MetricType::WEIGHT, "text" => Yii::t("app/admin", MetricType::TXT[MetricType::WEIGHT])]
 			]) . ";", View::POS_HEAD); ?>
 
 		<div class="row no-gutter page-title-row bgcolor-3d">

@@ -50,8 +50,8 @@ This is how a single tag looks like:
 	//
 	// * "value" won't exist.
 	//
-	// * A key called "metric_units" will be created. Check the constants
-	// in MetricUnit model for all the valid values for this.
+	// * A key called "metric_type" will be created. Check the constants
+	// in MetricType model for all the valid values for this.
 	//
 	// * A key called "type" will be created. Check the constants in
 	// TagOption model for all the valid values for this.
@@ -66,7 +66,7 @@ This is how a single tag looks like:
 	//     type: 0, // Check the constants in TagOption model for all the
 	//              // valid values for this.
 	//
-	//     metric_units: 1
+	//     metric_type: 1
 	// }
 	//
 	// Keep in mind that free text values are NOT normalized, which means that

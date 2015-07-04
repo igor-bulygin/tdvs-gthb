@@ -3,7 +3,7 @@ use yii\web\View;
 use app\models\Tag;
 use yii\helpers\Json;
 use app\models\TagOption;
-use app\models\MetricUnit;
+use app\models\MetricType;
 use app\assets\desktop\admin\TagAsset;
 
 /* @var $this yii\web\View */
@@ -26,9 +26,9 @@ $this->title = 'Todevise / Admin / Tag';
 		<?php $this->registerJs("var _categories = " . Json::encode($categories) . ";", View::POS_HEAD); ?>
 		<?php $this->registerJs("var _tag = " . Json::encode($tag) . ";", View::POS_HEAD); ?>
 		<?php $this->registerJs("var _mus = " . Json::encode([
-				["value" => MetricUnit::NONE, "text" => Yii::t("app/admin", MetricUnit::TXT[MetricUnit::NONE]), "checked" => true],
-				["value" => MetricUnit::SIZE, "text" => Yii::t("app/admin", MetricUnit::TXT[MetricUnit::SIZE])],
-				["value" => MetricUnit::WEIGHT, "text" => Yii::t("app/admin", MetricUnit::TXT[MetricUnit::WEIGHT])]
+				["value" => MetricType::NONE, "text" => Yii::t("app/admin", MetricType::TXT[MetricType::NONE]), "checked" => true],
+				["value" => MetricType::SIZE, "text" => Yii::t("app/admin", MetricType::TXT[MetricType::SIZE])],
+				["value" => MetricType::WEIGHT, "text" => Yii::t("app/admin", MetricType::TXT[MetricType::WEIGHT])]
 			]) . ";", View::POS_HEAD); ?>
 
 		<div class="row no-gutter page-title-row bgcolor-3d">

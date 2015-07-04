@@ -1,6 +1,7 @@
 <?php
 
 use app\models\Lang;
+use app\models\MetricType;
 
 class m150518_083910_create_tag extends \yii\mongodb\Migration {
 	public function up() {
@@ -50,7 +51,7 @@ class m150518_083910_create_tag extends \yii\mongodb\Migration {
 				[
 					"text" => [$en => "Weight"],
 					"type" => 0,
-					"metric_units" => 2
+					"metric_type" => MetricType::WEIGHT
 				]
 			]
 		]);
@@ -67,17 +68,17 @@ class m150518_083910_create_tag extends \yii\mongodb\Migration {
 				[
 					"text" => [$en => "Long"],
 					"type" => 0,
-					"metric_units" => 1
+					"metric_type" => MetricType::SIZE
 				],
 				[
 					"text" => [$en => "Wide"],
 					"type" => 0,
-					"metric_units" => 1
+					"metric_type" => MetricType::SIZE
 				],
 				[
 					"text" => [$en => "Tall"],
 					"type" => 0,
-					"metric_units" => 1
+					"metric_type" => MetricType::SIZE
 				],
 			]
 		]);

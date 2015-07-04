@@ -21,7 +21,7 @@ This is how a single size chart looks like:
 		'1vbh8'
 	],
 
-	metric_units: 1,
+	metric_unit: "mm",
 
 	countries: [
 		"ES",

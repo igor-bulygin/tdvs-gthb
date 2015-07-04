@@ -17,7 +17,7 @@ todevise.controller('sizeChartCtrl', ["$scope", "$timeout", "$sizechart", "$size
 		angular.forEach($scope.sizechart.categories, function(id) {
 			$scope.api.select(id);
 		});
-		$scope.api_mus.select($scope.sizechart.metric_units);
+		$scope.api_mus.select($scope.sizechart.metric_unit);
 
 		//After the directive is done rendering itself start monitoring the selected categories
 		$timeout(function() {

@@ -1,6 +1,7 @@
 <?php
 
 use app\models\Lang;
+use app\models\MetricUnit;
 
 class m150620_155610_create_size_charts extends \yii\mongodb\Migration {
 	public function up() {
@@ -18,7 +19,7 @@ class m150620_155610_create_size_charts extends \yii\mongodb\Migration {
 			"name" => [$en => "Pant sizes"],
 			"enabled" => true,
 			"categories" => ["30000", "50000"],
-			"metric_units" => 1,
+			"metric_unit" => MetricUnit::MM,
 			"countries" => ["ES", "US"],
 			"columns" => [
 				[$en => "Inside leg"],

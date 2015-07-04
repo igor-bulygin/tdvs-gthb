@@ -25,7 +25,7 @@ api.factory("$tag_util", function() {
 		return {
 			text: {},
 			type: null,
-			metric_units: null
+			metric_unit: null
 		};
 	};
 
