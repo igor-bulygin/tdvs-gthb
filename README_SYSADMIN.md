@@ -26,6 +26,9 @@ The minimum requirements are the following:
   * Reflection
   * SimpleXML
 
+If running on Windows:
+  * fileinfo
+
 ### CONFIGURATION
 
 #### Database
