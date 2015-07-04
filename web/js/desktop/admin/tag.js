@@ -65,6 +65,13 @@ todevise.controller('tagCtrl', ["$scope", "$timeout", "$tag", "$tag_util", "$cat
 		}
 	});
 
+	$scope.get_mu_type = function(v) {
+		var _type = jsonpath.query(_mus, "$..[?(@.value==" + v + ")]");
+		if(_type.length === 1) {
+			return _type[0].text;
+		}
+	};
+
 	$scope.edit_dropdown_option = function(index) {
 		var option = index === -1 ? $tag_util.newDropdownOption() : $scope.tag.options[index];
 

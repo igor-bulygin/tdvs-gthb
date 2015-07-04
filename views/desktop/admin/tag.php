@@ -26,10 +26,10 @@ $this->title = 'Todevise / Admin / Tag';
 		<?php $this->registerJs("var _categories = " . Json::encode($categories) . ";", View::POS_HEAD); ?>
 		<?php $this->registerJs("var _tag = " . Json::encode($tag) . ";", View::POS_HEAD); ?>
 		<?php $this->registerJs("var _mus = " . Json::encode([
-				["value" => MetricType::NONE, "text" => Yii::t("app/admin", MetricType::TXT[MetricType::NONE]), "checked" => true],
-				["value" => MetricType::SIZE, "text" => Yii::t("app/admin", MetricType::TXT[MetricType::SIZE])],
-				["value" => MetricType::WEIGHT, "text" => Yii::t("app/admin", MetricType::TXT[MetricType::WEIGHT])]
-			]) . ";", View::POS_HEAD); ?>
+			["value" => MetricType::NONE, "text" => Yii::t("app/admin", MetricType::TXT[MetricType::NONE]), "checked" => true],
+			["value" => MetricType::SIZE, "text" => Yii::t("app/admin", MetricType::TXT[MetricType::SIZE])],
+			["value" => MetricType::WEIGHT, "text" => Yii::t("app/admin", MetricType::TXT[MetricType::WEIGHT])]
+		]) . ";", View::POS_HEAD); ?>
 
 		<div class="row no-gutter page-title-row bgcolor-3d">
 			<div class="row-same-height">
@@ -48,11 +48,11 @@ $this->title = 'Todevise / Admin / Tag';
 		<div class="row no-gutter page-title-row flex flex-row">
 			<div class="col-xs-3 tag flex-prop-1 margin-l0-r1">
 				<label class="funiv fs-upper fs0-786 fc-c7 fnormal"><?php echo Yii::t("app/admin", "Tag name"); ?></label>
-				<input type="text" class="form-control fc-fff funiv fs-1" placeholder="" ng-model="tag.name[lang]">
+				<input type="text" class="form-control fc-fff funiv fs1" placeholder="" ng-model="tag.name[lang]">
 			</div>
 			<div class="col-xs-6 tag flex-prop-2-1 margin-l1-r1">
 				<label class="funiv fs-upper fs0-786 fc-c7 fnormal"><?php echo Yii::t("app/admin", "Description"); ?></label>
-				<input type="text" class="form-control fc-fff funiv fs-1" placeholder="" ng-model="tag.description[lang]">
+				<input type="text" class="form-control fc-fff funiv fs1" placeholder="" ng-model="tag.description[lang]">
 			</div>
 			<div class="col-xs-3 tag flex-prop-1 margin-l1-r1">
 				<label class="funiv fs-upper fs0-786 fc-c7 fnormal"><?php echo Yii::t("app/admin", "Categories"); ?></label><br>
@@ -157,7 +157,7 @@ $this->title = 'Todevise / Admin / Tag';
 
 							<div class="flex flex-align-center controls-holder flex-prop-1">
 								<span class="glyphicon glyphicon-menu-hamburger pointer fc-68  flex-prop" sv-handle></span>
-								<span class="funiv fs-1 fc-fff flex-prop">{{ option.text[lang] }}</span>
+								<span class="funiv fs1 fc-fff flex-prop">{{ option.text[lang] }}</span>
 								<div class="flex flex-justify-end flex-prop-1">
 									<span class="glyphicon glyphicon-pencil pointer fc-68" ng-click="edit_dropdown_option($index)"></span>
 									<span class="glyphicon glyphicon-trash pointer fc-68" ng-click="delete_option($index)"></span>
@@ -212,12 +212,14 @@ $this->title = 'Todevise / Admin / Tag';
 
 			<div class="row no-gutter">
 				<div class="row-same-height row-free-field" ng-repeat="option in tag.options">
-					<div class="col-xs-11 col-height col-middle tag">
-						<input type="text" class="form-control funiv fc-e8 fs-1" placeholder="<?php echo Yii::t("app/admin", "Field name (optional)"); ?>" ng-model="tag.options[$index].text[lang]">
+					<div class="col-xs-10 col-height col-middle tag">
+						<input type="text" class="form-control funiv fc-e8 fs1" placeholder="<?php echo Yii::t("app/admin", "Field name (optional)"); ?>" ng-model="tag.options[$index].text[lang]">
+					</div>
+					<div class="col-xs-1 col-height col-middle text-center funiv fc-e8">
+						<span>{{ get_mu_type(tag.options[$index].metric_type) }}</span>
 					</div>
 					<div class="col-xs-1 col-height col-middle text-center">
 						<span class="glyphicon glyphicon-trash pointer fc-68" ng-click="delete_option($index)"></span>
-						<!-- TODO: Show the metric unit and the type? -->
 					</div>
 				</div>
 			</div>
