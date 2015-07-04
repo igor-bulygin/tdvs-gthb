@@ -177,7 +177,7 @@ $this->title = 'Todevise / Admin / Tag';
 					</div>
 
 					<div class="col-xs-3 col-height col-middle">
-						<span class="funiv fc-c7 fs-upper fs0-786"><?php echo Yii::t("app/admin", "Metric unit"); ?></span>
+						<span class="funiv fc-c7 fs-upper fs0-786"><?php echo Yii::t("app/admin", "Metric type"); ?></span>
 						<div
 							angular-multi-select
 							input-model="mus"

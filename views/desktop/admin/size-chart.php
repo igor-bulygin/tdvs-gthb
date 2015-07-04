@@ -29,10 +29,15 @@ $this->title = 'Todevise / Admin / Size chart';
 		<?php $this->registerJs("var _countries = " . Json::encode($countries) . ";", View::POS_HEAD); ?>
 		<?php $this->registerJs("var _countries_lookup = " . Json::encode($countries_lookup) . ";", View::POS_HEAD); ?>
 		<?php $this->registerJs("var _mus = " . Json::encode([
-				["value" => MetricType::NONE, "text" => Yii::t("app/admin", MetricType::TXT[MetricType::NONE])],
-				["value" => MetricType::SIZE, "text" => Yii::t("app/admin", MetricType::TXT[MetricType::SIZE])],
-				["value" => MetricType::WEIGHT, "text" => Yii::t("app/admin", MetricType::TXT[MetricType::WEIGHT])]
-			]) . ";", View::POS_HEAD); ?>
+			[
+				"text" => Yii::t("app/admin", MetricType::TXT[MetricType::SIZE]),
+				"sub" => array_map(function($x) { return ["text" => $x, "value" => $x]; }, MetricType::UNITS[MetricType::SIZE])
+			],
+			[
+				"text" => Yii::t("app/admin", MetricType::TXT[MetricType::WEIGHT]),
+				"sub" => array_map(function($x) { return ["text" => $x, "value" => $x]; }, MetricType::UNITS[MetricType::WEIGHT])
+			]
+		]) . ";", View::POS_HEAD); ?>
 
 		<div class="row no-gutter page-title-row bgcolor-3d">
 			<div class="row-same-height">
@@ -88,6 +93,7 @@ $this->title = 'Todevise / Admin / Size chart';
 						id-property="value"
 						input-model="mus"
 						output-model="selected_mu"
+						group-property="sub"
 						tick-property="checked"
 						item-label="{{ text }}"
 						selection-mode="single"
