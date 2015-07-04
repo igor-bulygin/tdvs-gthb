@@ -49,7 +49,7 @@ $this->title = 'Todevise / Admin / Devisers';
 				'id' => 'devisers_list',
 				'dataProvider' => $devisers,
 				'options' => [
-					'class' => 'funiv fc-fff fs1',
+					'class' => 'funiv fc-fff fs1-071',
 				],
 				'columns' => [
 					[
