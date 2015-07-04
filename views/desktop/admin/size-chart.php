@@ -47,7 +47,7 @@ $this->title = 'Todevise / Admin / Size chart';
 				<div class="col-md-8 col-lg-8 col-height col-middle">
 					<div class="pull-right">
 						<button class="btn btn btn-gray fc-fff funiv fs-upper fs0-786" ng-click="cancel()"><?php echo Yii::t("app/admin", "Cancel changes"); ?></button>
-						<button class="background-none fc-fff funiv fs-upper fs0-786" ng-click="save()"><?php echo Yii::t("app/admin", "Create chart"); ?></button>
+						<button class="btn btn-light-green fc-18 funiv fs-upper fs0-786" ng-click="save()"><?php echo Yii::t("app/admin", "Save changes"); ?></button>
 					</div>
 				</div>
 			</div>

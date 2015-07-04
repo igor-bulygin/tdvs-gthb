@@ -30,6 +30,15 @@ todevise.controller('sizeChartCtrl', ["$scope", "$timeout", "$sizechart", "$size
 					});
 				}
 			});
+
+			$scope.$watch("selected_mu", function(_new, _old) {
+				if(_new !== _old) {
+					var _selected_mu = jsonpath.query(_new, "$..[?(!@.sub && @.value)]");
+					if(_selected_mu.length === 1) {
+						$scope.sizechart.metric_unit = _selected_mu[0].value;
+					}
+				}
+			});
 		}, 0);
 
 	}, 0);
@@ -44,8 +53,6 @@ todevise.controller('sizeChartCtrl', ["$scope", "$timeout", "$sizechart", "$size
 			$scope.table_header.push(column[$scope.lang]);
 		});
 	}, true);
-
-
 
 	$scope.new_country = function() {
 		var modalInstance = $modal.open({
