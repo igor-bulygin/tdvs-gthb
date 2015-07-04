@@ -58,7 +58,7 @@ $this->title = 'Todevise / Admin / Devisers';
 						'buttons' => [
 							'update' => function($url, $model, $key) {
 								$url = Url::to(["deviser/edit-info", "slug" => $model->slug]);
-								return Html::a('<span class="glyphicon glyphicon-user fc-fff fs1"></span>', $url);
+								return Html::a('<span class="glyphicon glyphicon-user fc-fff fs1"></span><span class="glyphicon glyphicon-log-in fc-fff fs0-857"></span>', $url);
 							},
 
 							'delete' => function($url, $model, $key) {
@@ -103,39 +103,39 @@ $this->title = 'Todevise / Admin / Devisers';
 </div>
 
 <script type="text/ng-template" id="template/modal/tag/create_new.html">
-	<form novalidate name="form">
+	<form novalidate name="form" class="popup-new-deviser">
 		<div class='modal-header'>
-			<h3 class='modal-title'><?php echo Yii::t("app/admin", "Create new deviser"); ?></h3>
+			<h3 class='modal-title funiv fs1'><?php echo Yii::t("app/admin", "Create new deviser"); ?></h3>
 		</div>
 		<div class='modal-body'>
-			<label><?php echo Yii::t("app/admin", "Name"); ?></label>
+			<label class="modal-title funiv fs1 fnormal fc-18"><?php echo Yii::t("app/admin", "Name"); ?></label>
 			<div class="input-group">
-				<input id="name" required="" type="text" class="form-control" placeholder="<?php echo Yii::t("app/admin", "Name..."); ?>" aria-describedby="basic-addon-name" ng-model="name" name="name">
-				<span class="input-group-addon alert-danger" id="basic-addon-name" ng-show="form.$submitted && !form.$valid && !form['name'].$valid">
+				<input id="name" required="" type="text" class="form-control funiv fs1" placeholder="<?php echo Yii::t("app/admin", "Name..."); ?>" aria-describedby="basic-addon-name" ng-model="name" name="name">
+				<span class="input-group-addon alert-danger funiv fs0-929" id="basic-addon-name" ng-show="form.$submitted && !form.$valid && !form['name'].$valid">
 					<span ng-show="form['name'].$error.required"><?php echo Yii::t("app/admin", "Required!"); ?></span>
 				</span>
 			</div>
 
 			<br />
 
-			<label><?php echo Yii::t("app/admin", "Surnames"); ?></label>
+			<label class="modal-title funiv fs1 fnormal fc-18"><?php echo Yii::t("app/admin", "Surnames"); ?></label>
 			<div class="row">
 				<div class="col-xs-4" ng-repeat="surname in surnames track by $index">
-					<input id="surname_{{ $index }}" required="" type="text" class="form-control" placeholder="<?php echo Yii::t("app/admin", 'Surname...'); ?>" aria-describedby="basic-addon-surname_{{ $index }}" ng-model="surname.value" name="surname_{{ $index }}">
-					<span class="input-group-addon alert-danger" id="basic-addon-surname_{{ $index }}" ng-show="form.$submitted && !form.$valid && !form['surname_{{ $index }}'].$valid">
+					<input id="surname_{{ $index }}" required="" type="text" class="form-control funiv fs1" placeholder="<?php echo Yii::t("app/admin", 'Surname...'); ?>" aria-describedby="basic-addon-surname_{{ $index }}" ng-model="surname.value" name="surname_{{ $index }}">
+					<span class="input-group-addon alert-danger funiv fs0-929" id="basic-addon-surname_{{ $index }}" ng-show="form.$submitted && !form.$valid && !form['surname_{{ $index }}'].$valid">
 						<span ng-show="form['surname_{{ $index }}'].$error.required"><?php echo Yii::t("app/admin", "Required!"); ?></span>
 					</span>
 				</div>
 			</div>
 
-			<span class="pointer" ng-click="add_surname()"><?php echo Yii::t("app/admin", "Add surname +"); ?></span>
+			<span class="pointer fc-9013fe funiv fs0-786 fs-upper" ng-click="add_surname()"><?php echo Yii::t("app/admin", "Add surname +"); ?></span>
 
 			<br />
-
-			<label><?php echo Yii::t("app/admin", "Email"); ?></label>
+			<br />
+			<label class="modal-title funiv fs1 fnormal fc-18"><?php echo Yii::t("app/admin", "Email"); ?></label>
 			<div class="input-group">
-				<input id="email" type="email" required="" type="text" class="form-control" placeholder="<?php echo Yii::t("app/admin", "Email..."); ?>" aria-describedby="basic-addon-email" ng-model="email" name="email">
-				<span class="input-group-addon alert-danger" id="basic-addon-email" ng-show="form.$submitted && !form.$valid && !form['email'].$valid">
+				<input id="email" type="email" required="" type="text" class="form-control funiv fs1" placeholder="<?php echo Yii::t("app/admin", "Email..."); ?>" aria-describedby="basic-addon-email" ng-model="email" name="email">
+				<span class="input-group-addon alert-danger funiv fs0-929" id="basic-addon-email" ng-show="form.$submitted && !form.$valid && !form['email'].$valid">
 					<span ng-show="form['email'].$error.required"><?php echo Yii::t("app/admin", "Required!"); ?></span>
 					<span ng-show="form['email'].$error.email"><?php echo Yii::t("app/admin", "Invalid!"); ?></span>
 				</span>
@@ -143,7 +143,7 @@ $this->title = 'Todevise / Admin / Devisers';
 
 			<br />
 
-			<label><?php echo Yii::t("app/admin", "Select country"); ?></label>
+			<label class="modal-title funiv fs1 fnormal fc-18"><?php echo Yii::t("app/admin", "Select country"); ?></label>
 
 			<div
 				angular-multi-select
@@ -159,24 +159,24 @@ $this->title = 'Todevise / Admin / Devisers';
 				helper-elements="noall nonone noreset filter">
 			</div>
 
-			<div class="alert alert-danger" role="alert" ng-show="form.$submitted && !form.$valid && selected_country.length === 0">
+			<div class="alert alert-danger funiv fs0-929" role="alert" ng-show="form.$submitted && !form.$valid && selected_country.length === 0">
 				<span><?php echo Yii::t("app/admin", "Required!"); ?></span>
 			</div>
 
 			<br />
 
-			<label><?php echo Yii::t("app/admin", "Slug"); ?></label>
+			<label class="modal-title funiv fs1 fnormal fc-18"><?php echo Yii::t("app/admin", "Slug"); ?></label>
 			<div class="input-group">
-				<input id="slug" required="" ng-pattern="/^[0-9a-zA-Z\-]+?$/" type="text" class="form-control" placeholder="<?php echo Yii::t("app/admin", "Slug..."); ?>" aria-describedby="basic-addon-slug" ng-model="slug" name="slug">
-				<span class="input-group-addon alert-danger" id="basic-addon-slug" ng-show="form.$submitted && !form.$valid && !form['slug'].$valid">
+				<input id="slug" required="" ng-pattern="/^[0-9a-zA-Z\-]+?$/" type="text" class="form-control funiv fs1" placeholder="<?php echo Yii::t("app/admin", "Slug..."); ?>" aria-describedby="basic-addon-slug" ng-model="slug" name="slug">
+				<span class="input-group-addon alert-danger funiv fs0-929" id="basic-addon-slug" ng-show="form.$submitted && !form.$valid && !form['slug'].$valid">
 					<span ng-show="form['slug'].$error.required"><?php echo Yii::t("app/admin", "Required!"); ?></span>
 					<span ng-show="form['slug'].$error.pattern"><?php echo Yii::t("app/admin", "Invalid!"); ?></span>
 				</span>
 			</div>
 		</div>
 		<div class='modal-footer'>
-			<button class='btn btn-success' ng-click='form.$submitted = true; form.$valid && ok()'><?php echo Yii::t("app/admin", "Confirm"); ?></button>
-			<button class='btn btn-primary' ng-click='cancel()' type="submit"><?php echo Yii::t("app/admin", "Cancel"); ?></button>
+			<button class='btn btn-light-green fc-18 funiv fs0-786 fs-upper' ng-click='form.$submitted = true; form.$valid && ok()'><?php echo Yii::t("app/admin", "Confirm"); ?></button>
+			<button class='btn btn-gray fc-fff funiv fs-upper fs0-786' ng-click='cancel()' type="submit"><?php echo Yii::t("app/admin", "Cancel"); ?></button>
 		</div>
 	</form>
 </script>

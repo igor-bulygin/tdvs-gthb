@@ -243,20 +243,23 @@ html, body {
 /**** POP UP  ****/
 
 .popup-tag input,
-.popup-size-chart input {
+.popup-size-chart input,
+.popup-new-deviser input {
 	border: solid 1px #c1c1c1;
 	background-color: #fff;
 	border-radius: 0;
 }
 
 .popup-tag .input-group,
-.popup-size-chart .input-group {
+.popup-size-chart .input-group,
+.popup-new-deviser .input-group {
 	margin-top: 2%;
 	display: flex;
 }
 
 .popup-tag .input-group-addon,
-.popup-size-chart .input-group-addon {
+.popup-size-chart .input-group-addon,
+.popup-new-deviser .input-group-addon {
 	background-color: #fff;
 	border-radius: 0;
 	width: 20%;
@@ -264,7 +267,8 @@ html, body {
 }
 
 .popup-tag .alert-danger,
-.popup-size-chart .alert-danger {
+.popup-size-chart .alert-danger,
+.popup-new-deviser .alert-danger {
 	border:0;
 	min-width: 17%;
 }
