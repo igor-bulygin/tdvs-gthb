@@ -27,7 +27,7 @@ $profile_photo_base64 = isset($deviser["media"]["profile"]) ? Utils::fileToBase6
 ?>
 
 <div class="row no-gutter" ng-controller="deviserCtrl" ng-init="init()">
-	<div class="col-xs-12 no-horizontal-padding">
+	<div class="col-xs-12 no-horizontal-padding create-profile">
 
 		<?php $this->registerJs("var _deviser = " . Json::encode($deviser) . ";", View::POS_HEAD); ?>
 		<?php $this->registerJs("var _categories = " . Json::encode($categories) . ";", View::POS_HEAD); ?>
@@ -38,7 +38,7 @@ $profile_photo_base64 = isset($deviser["media"]["profile"]) ? Utils::fileToBase6
 		<?php $this->registerJs("var _profile_photo_base64 = '$profile_photo_base64';", View::POS_END); ?>
 
 		<div class="row no-gutter">
-			<div class="col-xs-12 header-photo">
+			<div class="col-xs-12 header-photo flex flex-justify-center">
 				<div class="header-photo-holder flex-justify-center">
 					<img class="img-circle header-photo-img" ngf-bg-src="headerphoto[0]" ngf-default-src="<?= $header_photo_base64 ?>">
 
@@ -52,52 +52,58 @@ $profile_photo_base64 = isset($deviser["media"]["profile"]) ? Utils::fileToBase6
 						     ngf-drag-over-class="dragover" ngf-multiple="false" ngf-allow-dir="false"
 						     ngf-accept="'image/*'" ngf-drop-available="dropAvailable">
 							<div ng-cloak ng-hide="dropAvailable">File Drop not available</div>
-							<div ng-cloak ng-show="dropAvailable && (!headerphoto || headerphoto.length === 0)">Upload header photo</div>
+							<div ng-cloak ng-show="dropAvailable && (!headerphoto || headerphoto.length === 0)" class="funiv fs1 fc-3d">Upload header photo</div>
 						</div>
 					</div>
 				</div>
 			</div>
 
 			<div class="col-xs-12 profile-photo flex flex-justify-center">
-					<div class="profile-photo-holder flex-justify-center">
-						<img class="img-circle profile-photo-img" ngf-bg-src="profilephoto[0]" ngf-default-src="<?= $profile_photo_base64 ?>">
+				<div class="profile-photo-holder flex-justify-center">
+					<img class="img-circle profile-photo-img" ngf-bg-src="profilephoto[0]" ngf-default-src="<?= $profile_photo_base64 ?>">
 
-						<div class="flex flex-justify-center flex-align-center">
-							<div class="controls">
-								<span class="glyphicon glyphicon-refresh pointer" aria-hidden="true" ngf-select ng-model="profilephoto" ng-cloak ng-show="profilephoto[0] !== undefined"></span>
-								<span class="glyphicon glyphicon-resize-small pointer" aria-hidden="true" ng-click="crop_profile()" ng-cloak ng-show="profilephoto[0] !== undefined"></span>
-							</div>
+					<div class="flex flex-justify-center flex-align-center">
+						<div class="controls">
+							<span class="glyphicon glyphicon-refresh pointer" aria-hidden="true" ngf-select ng-model="profilephoto" ng-cloak ng-show="profilephoto[0] !== undefined"></span>
+							<span class="glyphicon glyphicon-resize-small pointer" aria-hidden="true" ng-click="crop_profile()" ng-cloak ng-show="profilephoto[0] !== undefined"></span>
+						</div>
 
-							<div class="pointer drop-box flex flex-justify-center flex-align-center" ngf-drop ngf-select ng-model="profilephoto" class="drop-box"
-								ngf-drag-over-class="dragover" ngf-multiple="false" ngf-allow-dir="false"
-								ngf-accept="'image/*'" ngf-drop-available="dropAvailable">
-								<div ng-cloak ng-hide="dropAvailable">File Drop not available</div>
-								<div ng-cloak ng-show="dropAvailable && (!profilephoto || profilephoto.length === 0)">Upload profile photo</div>
-							</div>
+						<div class="pointer drop-box flex flex-justify-center flex-align-center" ngf-drop ngf-select ng-model="profilephoto" class="drop-box"
+							ngf-drag-over-class="dragover" ngf-multiple="false" ngf-allow-dir="false"
+							ngf-accept="'image/*'" ngf-drop-available="dropAvailable">
+							<div ng-cloak ng-hide="dropAvailable">File Drop not available</div>
+							<div ng-cloak ng-show="dropAvailable && (!profilephoto || profilephoto.length === 0)" class="funiv fs1 fc-3d">Upload profile photo</div>
 						</div>
 					</div>
+				</div>
 			</div>
 		</div>
 
-		<div class="row no-gutter">
-			<div class="col-xs-3"></div>
-			<div class="col-xs-6">
-				<input type="text" placeholder="<?= Yii::t("app/deviser", "Your name"); ?>" ng-model="deviser.personal_info.name">
-			</div>
-			<div class="col-xs-3"></div>
-		</div>
+		<br />
 
 		<div class="row no-gutter">
-			<div class="col-xs-3"></div>
-			<div class="col-xs-6">
-				<input type="text" placeholder="<?= Yii::t("app/deviser", "City"); ?>">
+			<div class="col-xs-4 flex flex-justify-center"></div>
+			<div class="col-xs-4 flex flex-justify-center">
+				<input type="text" placeholder="<?= Yii::t("app/deviser", "Your name"); ?>" ng-model="deviser.personal_info.name" class="input-name funiv_thin fs2-857 fc-9b fs-upper">
 			</div>
-			<div class="col-xs-3"></div>
+			<div class="col-xs-4 flex flex-justify-center"></div>
 		</div>
 
+		<br />
+
 		<div class="row no-gutter">
-			<div class="col-xs-3"></div>
-			<div class="col-xs-6">
+			<div class="col-xs-4 flex flex-justify-center"></div>
+			<div class="col-xs-4 flex flex-justify-center">
+				<input type="text" placeholder="<?= Yii::t("app/deviser", "City"); ?>" class="input-city funiv_bold fs0-857 fs-upper fc-6d">
+			</div>
+			<div class="col-xs-4 flex flex-justify-center"></div>
+		</div>
+
+		<br />
+
+		<div class="row no-gutter">
+			<div class="col-xs-4 flex flex-justify-center"></div>
+			<div class="col-xs-4 flex flex-justify-center">
 				<div
 					angular-multi-select
 					api="api"
@@ -113,12 +119,14 @@ $profile_photo_base64 = isset($deviser["media"]["profile"]) ? Utils::fileToBase6
 					helper-elements="noall nonone noreset filter">
 				</div>
 			</div>
-			<div class="col-xs-3"></div>
+			<div class="col-xs-4 flex flex-justify-center"></div>
 		</div>
 
+		<br />
+
 		<div class="row no-gutter">
-			<div class="col-xs-3"></div>
-			<div class="col-xs-6">
+			<div class="col-xs-4 flex flex-justify-center"></div>
+			<div class="col-xs-4 flex flex-justify-center">
 				<div
 					angular-multi-select
 					api="api_cat"
@@ -137,20 +145,24 @@ $profile_photo_base64 = isset($deviser["media"]["profile"]) ? Utils::fileToBase6
 					helper-elements="noall nonone noreset nofilter">
 				</div>
 			</div>
-			<div class="col-xs-3"></div>
+			<div class="col-xs-4 flex flex-justify-center"></div>
 		</div>
 
+		<br />
+
 		<div class="row no-gutter">
-			<div class="col-xs-3"></div>
-			<div class="col-xs-6">
-				<textarea placeholder="<?= Yii::t("app/deviser", "Biography"); ?>" ng-model="deviser.personal_info.biography"></textarea>
+			<div class="col-xs-4 flex flex-justify-center"></div>
+			<div class="col-xs-4 flex flex-justify-center">
+				<textarea placeholder="<?= Yii::t("app/deviser", "Biography"); ?>" ng-model="deviser.personal_info.biography" class="textarea-bio" rows="8"></textarea>
 			</div>
-			<div class="col-xs-3"></div>
+			<div class="col-xs-4 flex flex-justify-center"></div>
 		</div>
 
+		<br />
+
 		<div class="row no-gutter">
-			<div class="col-xs-12">
-				<div class="btn btn-default pointer" ng-click="save()">Save</div>
+			<div class="col-xs-12 flex flex-justify-center">
+				<div class="btn btn-save-profile fc-fff funiv fs-upper fs0-786" ng-click="save()">Save</div>
 			</div>
 		</div>
 	</div>
