@@ -132,6 +132,12 @@ $config = [
 				'http://<slug:[0-9a-z-A-Z\-]*?>.todevise.com/upload-header-photo/' =>  'deviser/upload-header-photo',
 				'http://<slug:[0-9a-z-A-Z\-]*?>.todevise.com/upload-profile-photo/' =>  'deviser/upload-profile-photo',
 
+				//Link for deviser work
+				'http://<slug:[0-9a-z-A-Z\-]*?>.todevise.com/edit-work/<short_id:\w{8}>/' =>  'deviser/edit-work',
+
+				//Link for deviser work photo upload
+				'http://<slug:[0-9a-z-A-Z\-]*?>.todevise.com/upload-product-photo/<short_id:\w{8}>/' =>  'deviser/upload-product-photo',
+
 				//Links for admin
 				'admin/tag/<tag_id:\w{5}>/'  => 'admin/tag',
 				'admin/size-chart/<size_chart_id:\w{5}>/'  => 'admin/size-chart',
