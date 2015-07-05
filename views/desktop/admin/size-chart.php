@@ -162,13 +162,12 @@ $this->title = 'Todevise / Admin / Size chart';
 				</thead>
 				<tbody>
 					<tr ng-cloak ng-repeat="row in sizechart.values track by $index">
-						<td ng-repeat="cell in row track by $index">
-							<input value="{{ cell }}">
+						<td ng-repeat="cell in sizechart.values[$index] track by $index">
+							<input ng-model="sizechart.values[$parent.$index][$index]" placeholder="0" angular-unit-converter convert-from="{{ convertFrom }}" convert-to="{{ convertTo }}" />
 						</td>
 					</tr>
 				</tbody>
 			</table>
-
 		</div>
 
 		<br />
@@ -176,7 +175,6 @@ $this->title = 'Todevise / Admin / Size chart';
 		<div class="row no-gutter add-new">
 			<a class="pointer fs-upper funiv fc-fff fs0-786" ng-click="new_row()"><?php echo Yii::t("app/admin", "Add new +"); ?></a>
 		</div>
-
 	</div>
 </div>
 

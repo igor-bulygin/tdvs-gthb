@@ -1,4 +1,4 @@
-var todevise = angular.module('todevise', ['ui.bootstrap', 'angular-multi-select', 'global-admin', 'global-desktop', 'api', 'angular-sortable-view', 'ui.validate']);
+var todevise = angular.module('todevise', ['ui.bootstrap', 'angular-multi-select', 'angular-unit-converter', 'global-admin', 'global-desktop', 'api', 'angular-sortable-view', 'ui.validate']);
 
 todevise.controller('sizeChartCtrl', ["$scope", "$timeout", "$sizechart", "$sizechart_util", "$category_util", "toastr", "$modal", function($scope, $timeout, $sizechart, $sizechart_util, $category_util, toastr, $modal) {
 	$scope.lang = _lang;
@@ -42,6 +42,12 @@ todevise.controller('sizeChartCtrl', ["$scope", "$timeout", "$sizechart", "$size
 		}, 0);
 
 	}, 0);
+
+	$scope.$watch("sizechart.metric_unit", function(_new) {
+		var _smallest_unit = jsonpath.parent(_mus, "$..[?(@.text=='" + _new + "')]");
+		$scope.convertFrom = _smallest_unit[0].value;
+		$scope.convertTo = _new;
+	});
 
 	$scope.$watch("[sizechart.countries, sizechart.columns]", function() {
 		$scope.table_header = [];
