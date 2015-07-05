@@ -174,12 +174,12 @@ html, body {
 
 }
 
-.btn-gray {
+.btn-grey {
 	background-color: #575757;
 	border: 0;
 }
 
-.btn-gray:hover {
+.btn-grey:hover {
 	background-color: #7b7b7b;
 	color: #fff;
 }

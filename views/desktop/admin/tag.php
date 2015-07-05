@@ -38,7 +38,7 @@ $this->title = 'Todevise / Admin / Tag';
 				</div>
 				<div class="col-xs-8 col-height col-middle">
 					<div class="pull-right">
-						<button class="btn btn-gray fc-fff funiv fs-upper fs0-786" ng-click="cancel()"><?php echo Yii::t("app/admin", "Cancel changes"); ?></button>
+						<button class="btn btn-grey fc-fff funiv fs-upper fs0-786" ng-click="cancel()"><?php echo Yii::t("app/admin", "Cancel changes"); ?></button>
 						<button class="btn btn-light-green fc-18 funiv fs-upper fs0-786" ng-click="save()"><?php echo Yii::t("app/admin", "Save changes"); ?></button>
 					</div>
 				</div>
@@ -260,7 +260,7 @@ $this->title = 'Todevise / Admin / Tag';
 		</div>
 		<div class='modal-footer'>
 			<button class='btn btn-light-green fc-18 funiv fs0-786 fs-upper' ng-click='form.$submitted = true; form.$valid && ok()'><?php echo Yii::t("app/admin", "Confirm"); ?></button>
-			<button class='btn btn-gray fc-fff funiv fs-upper fs0-786' ng-click='cancel()' type="submit"><?php echo Yii::t("app/admin", "Cancel"); ?></button>
+			<button class='btn btn-grey fc-fff funiv fs-upper fs0-786' ng-click='cancel()' type="submit"><?php echo Yii::t("app/admin", "Cancel"); ?></button>
 		</div>
 	</form>
 </script>
