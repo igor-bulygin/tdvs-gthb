@@ -16,6 +16,7 @@ class SizeChartAsset extends AssetBundle {
 		'app\assets\api\ApiAsset',
 		'app\assets\libs\angularUiUtilsAsset',
 		'app\assets\libs\angularMultiSelectAsset',
+		'app\assets\libs\angularUnitConverterAsset',
 		'app\assets\libs\angularBootstrapAsset',
 		'app\assets\libs\angularSortableViewAsset',
 		'app\assets\desktop\admin\GlobalAsset'
