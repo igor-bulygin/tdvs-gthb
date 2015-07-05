@@ -69,6 +69,32 @@ api.service("$deviser", function($services_util) {
 	});
 });
 
+api.service("$product", function($services_util) {
+
+	var api_point = currentHost() + "/api/products/";
+
+	return ({
+
+		get: function(filters) {
+			var req = $services_util._get(api_point, filters);
+
+			return req.then($services_util._handleSuccess, $services_util._handleError);
+		},
+
+		modify: function(method, product) {
+			var req = $services_util._modify(api_point, method, {
+				product: product
+			});
+
+			return req.then($services_util._handleSuccess, $services_util._handleError);
+		},
+
+		delete: function(product) {
+			return this.modify("DELETE", product);
+		}
+	});
+});
+
 api.service("$tag", function($services_util) {
 
 	var api_point = currentHost() + "/api/tags/";
