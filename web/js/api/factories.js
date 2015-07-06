@@ -60,7 +60,10 @@ api.factory("$sizechart_util", function() {
 	utils.newSizeChart = function(langs) {
 		return {
 			short_id: "new",
-			name: langs
+			name: langs,
+			countries: [],
+			columns: [],
+			values: []
 		};
 	};
 
