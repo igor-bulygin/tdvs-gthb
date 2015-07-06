@@ -25,6 +25,7 @@ $this->title = 'Todevise / Admin / Tag';
 
 		<?php $this->registerJs("var _categories = " . Json::encode($categories) . ";", View::POS_HEAD); ?>
 		<?php $this->registerJs("var _tag = " . Json::encode($tag) . ";", View::POS_HEAD); ?>
+		<?php $this->registerJs("var _tagoption_txt = " . Json::encode(TagOption::TXT) . ";", View::POS_HEAD); ?>
 		<?php $this->registerJs("var _mus = " . Json::encode([
 			["value" => MetricType::NONE, "text" => Yii::t("app/admin", MetricType::TXT[MetricType::NONE]), "checked" => true],
 			["value" => MetricType::SIZE, "text" => Yii::t("app/admin", MetricType::TXT[MetricType::SIZE])],
@@ -217,6 +218,8 @@ $this->title = 'Todevise / Admin / Tag';
 					</div>
 					<div class="col-xs-1 col-height col-middle text-center funiv fc-e8">
 						<span>{{ get_mu_type(tag.options[$index].metric_type) }}</span>
+						/
+						<span>{{ get_input_type(tag.options[$index].type) }}</span>
 					</div>
 					<div class="col-xs-1 col-height col-middle text-center">
 						<span class="glyphicon glyphicon-trash pointer fc-68" ng-click="delete_option($index)"></span>

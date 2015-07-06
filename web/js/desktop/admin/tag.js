@@ -72,6 +72,10 @@ todevise.controller('tagCtrl', ["$scope", "$timeout", "$tag", "$tag_util", "$cat
 		}
 	};
 
+	$scope.get_input_type = function(v) {
+		return _tagoption_txt[v];
+	};
+
 	$scope.edit_dropdown_option = function(index) {
 		var option = index === -1 ? $tag_util.newDropdownOption() : $scope.tag.options[index];
 
