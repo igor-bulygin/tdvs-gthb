@@ -79,9 +79,11 @@ $this->title = 'Todevise / Admin / Size charts';
 					],
 					[
 						'value' => function($model) {
-							return Yii::t("app/admin", MetricType::TXT[$model->metric_unit]);
+							foreach(MetricType::UNITS as $index => $type) {
+								if(in_array($model->metric_unit, $type)) return Yii::t("app/admin", MetricType::TXT[$index]);
+							}
 						},
-						'label' => Yii::t("app/admin", "Metric unit")
+						'label' => Yii::t("app/admin", "Metric type")
 					],
 					[
 						'class' => 'yii\grid\ActionColumn',
