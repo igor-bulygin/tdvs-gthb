@@ -54,7 +54,7 @@ use lajax\languagepicker\widgets\LanguagePicker;
 									<?= $content ?>
 								</div>
 
-								<div class="footer">
+								<div class="footer flex-prop-1-0">
 									<?= PublicFooter::widget(); ?>
 								</div>
 							</div>
