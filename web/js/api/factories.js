@@ -41,6 +41,7 @@ api.factory("$deviser_util", function() {
 			slug: slug,
 			type: type,
 			categories: [],
+			collections: [],
 			personal_info: {
 				name: name,
 				surnames: surnames,
