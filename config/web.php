@@ -125,18 +125,17 @@ $config = [
 			'suffix' => '/',
 			'rules' => [
 				//Links for deviser profile
-				//TODO make it domain careless and re-check the regex
-				'http://<slug:[0-9a-z-A-Z\-]*?>.todevise.com/edit-info/' =>  'deviser/edit-info',
+				'<slug:[0-9a-z-A-Z\-]*?>/edit-info/' =>  'deviser/edit-info',
 
 				//Link for deviser header & profile photo upload
-				'http://<slug:[0-9a-z-A-Z\-]*?>.todevise.com/upload-header-photo/' =>  'deviser/upload-header-photo',
-				'http://<slug:[0-9a-z-A-Z\-]*?>.todevise.com/upload-profile-photo/' =>  'deviser/upload-profile-photo',
+				'<slug:[0-9a-z-A-Z\-]*?>/upload-header-photo/' =>  'deviser/upload-header-photo',
+				'<slug:[0-9a-z-A-Z\-]*?>/upload-profile-photo/' =>  'deviser/upload-profile-photo',
 
 				//Link for deviser work
-				'http://<slug:[0-9a-z-A-Z\-]*?>.todevise.com/edit-work/<short_id:\w{8}>/' =>  'deviser/edit-work',
+				'<slug:[0-9a-z-A-Z\-]*?>/edit-work/<short_id:\w{8}>/' =>  'deviser/edit-work',
 
 				//Link for deviser work photo upload
-				'http://<slug:[0-9a-z-A-Z\-]*?>.todevise.com/upload-product-photo/<short_id:\w{8}>/' =>  'deviser/upload-product-photo',
+				'<slug:[0-9a-z-A-Z\-]*?>/upload-product-photo/<short_id:\w{8}>/' =>  'deviser/upload-product-photo',
 
 				//Links for admin
 				'admin/tag/<tag_id:\w{5}>/'  => 'admin/tag',
