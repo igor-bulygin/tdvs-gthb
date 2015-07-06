@@ -40,11 +40,13 @@ api.factory("$deviser_util", function() {
 			short_id: "new",
 			slug: slug,
 			type: type,
+			categories: [],
 			personal_info: {
 				name: name,
 				surnames: surnames,
 				country: country_code
 			},
+			media: {},
 			credentials: {
 				email: email
 			}

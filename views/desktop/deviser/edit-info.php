@@ -127,10 +127,7 @@ $profile_photo_base64 = isset($deviser["media"]["profile"]) ? Utils::fileToBase6
 					id-property="short_id"
 					input-model="categories"
 					output-model="selectedCategories"
-
-					group-property="sub"
 					tick-property="check"
-
 					item-label="{{ name[lang] }}"
 					selection-mode="multi"
 					search-property="name[lang]"

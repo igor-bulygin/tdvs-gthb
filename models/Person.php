@@ -68,14 +68,6 @@ class Person extends CActiveRecord implements IdentityInterface {
 			]);
 		}
 
-		if($this->categories === null) {
-			$this->categories = [];
-		}
-
-		if($this->media === null) {
-			$this->media = [];
-		}
-
 		return parent::beforeSave($insert);
 	}
 

@@ -7,7 +7,9 @@ This is how a single person looks like:
 
 	short_id: '4q1c838', // 7 characters long custom ID (url-safe)
 
-	"slug" => "foo-bar", // This will exist if the person is a deviser
+	"slug": "foo-bar", // This will exist if the person is a deviser
+
+	"categories": ["30000", "50000"], //Informational only.
 
 	type: [0, 1], // Each person can have a single or multiple roles, for example, Client and Deviser.
 	// Check the constants in Person model for all the valid values for this.
