@@ -26,6 +26,7 @@ class Person extends CActiveRecord implements IdentityInterface {
 			'slug',
 			'type',
 			'categories',
+			'collections',
 			'personal_info',
 			'media',
 			'credentials',
