@@ -7,6 +7,14 @@ use app\helpers\CActiveRecord;
 class TagOption {
 	const NUMERIC = 0;
 	const ALPHANUMERIC = 1;
+	const TXT = [
+		"Numeric", "Alphanumeric"
+	];
+
+	function __construct() {
+		Yii::t("app/admin", "Numeric");
+		Yii::t("app/admin", "Alphanumeric");
+	}
 }
 
 class Tag extends CActiveRecord {
