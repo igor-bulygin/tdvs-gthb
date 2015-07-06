@@ -46,7 +46,7 @@ use lajax\languagepicker\widgets\LanguagePicker;
 					<div class="col-xs-10-5">
 
 						<div class="wrapper flex flex-column">
-							<div class="header">
+							<div class="header flex-prop-1-0">
 								<?= PublicHeaderNavbar::widget(); ?>
 							</div>
 							<div class="body-content flex flex-column flex-prop-1 overflow">
