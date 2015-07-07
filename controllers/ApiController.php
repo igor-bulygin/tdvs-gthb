@@ -6,6 +6,7 @@ use Yii;
 use yii\web\Response;
 use app\helpers\Utils;
 use app\models\Person;
+use app\models\Product;
 use app\models\Country;
 use app\models\SizeChart;
 use yii\base\ActionFilter;
@@ -184,6 +185,48 @@ class ApiController extends CController {
 			/* @var $deviser \app\models\Person */
 			$deviser = Person::findOne(["short_id" => $deviser["short_id"]]);
 			$deviser->delete();
+		}
+
+		return $res;
+	}
+
+	public function actionProducts($filters = null) {
+		$request = Yii::$app->getRequest();
+		$res = null;
+
+		if ($request->isGet) {
+			$filters = json_decode($filters, true) ?: [];
+
+			if (!empty($filters)) {
+				$filters = Utils::removeAllExcept($filters, []);
+				//TODO: If not admin, force some fields (enabled only, visible by public only, etc...)
+			}
+
+			$res = empty($filters) ? Product::find() : Product::find()->where($filters);
+
+			if($this->intern === false) {
+				$res = $res->asArray()->all();
+			}
+		} else if ($request->isPost) {
+			$_product = $this->getJsonFromRequest("person");
+			unset($_product["_id"]);
+
+			if ($_product["short_id"] === "new") {
+				$_product["short_id"] = (new Product())->genValidID(8);
+			}
+
+			/* @var $product \app\models\Product */
+			$product = Product::findOne(["short_id" => $_product["short_id"]]);
+			$product->setAttributes($_product, false);
+			$product->save();
+
+			$res = $product;
+		} else if ($request->isDelete) {
+			$product = $this->getJsonFromRequest("product");
+
+			/* @var $deviser \app\models\Person */
+			$product = Product::findOne(["short_id" => $product["short_id"]]);
+			$product->delete();
 		}
 
 		return $res;
