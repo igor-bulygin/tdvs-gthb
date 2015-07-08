@@ -10,6 +10,8 @@ api.factory("$tag_util", function() {
 				"en-US": description
 			},
 			name: langs,
+			type: 0,
+			n_options: 1,
 			options: {}
 		};
 	};
