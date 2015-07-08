@@ -115,7 +115,7 @@ todevise.controller('deviserCtrl', ["$scope", "$timeout", "$deviser", "$deviser_
 				headers : {
 					'X-CSRF-TOKEN' : yii.getCsrfToken()
 				},
-				url: '/upload-header-photo/',
+				url: _upload_header_photo_url,
 				file: $scope.headerphoto[0]
 			}).progress(function(e) {
 				//var progressPercentage = parseInt(100.0 * e.loaded / e.total);
@@ -134,7 +134,7 @@ todevise.controller('deviserCtrl', ["$scope", "$timeout", "$deviser", "$deviser_
 				headers : {
 					'X-CSRF-TOKEN' : yii.getCsrfToken()
 				},
-				url: '/upload-profile-photo/',
+				url: _upload_profile_photo_url,
 				file: $scope.profilephoto[0]
 			}).progress(function(e) {
 				//var progressPercentage = parseInt(100.0 * e.loaded / e.total);

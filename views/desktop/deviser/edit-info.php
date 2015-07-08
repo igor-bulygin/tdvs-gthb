@@ -1,6 +1,7 @@
 <?php
 use yii\web\View;
 use app\models\Lang;
+use yii\helpers\Url;
 use yii\helpers\Json;
 use app\helpers\Utils;
 use app\components\Crop;
@@ -30,6 +31,9 @@ $profile_photo_base64 = isset($deviser["media"]["profile"]) ? Utils::fileToBase6
 <?php $this->registerJs("var _categories = " . Json::encode($categories) . ";", View::POS_HEAD); ?>
 <?php $this->registerJs("var _countries = " . Json::encode($countries) . ";", View::POS_HEAD); ?>
 <?php $this->registerJs("var _countries_lookup = " . Json::encode($countries_lookup) . ";", View::POS_HEAD); ?>
+
+<?php $this->registerJs("var _upload_header_photo_url = '" . Url::to(["deviser/upload-header-photo", "slug" => $deviser["slug"]]) . "';", View::POS_END); ?>
+<?php $this->registerJs("var _upload_profile_photo_url = '" . Url::to(["deviser/upload-profile-photo", "slug" => $deviser["slug"]]) . "';", View::POS_END); ?>
 
 <?php $this->registerJs("var _header_photo_base64 = '$header_photo_base64';", View::POS_END); ?>
 <?php $this->registerJs("var _profile_photo_base64 = '$profile_photo_base64';", View::POS_END); ?>
