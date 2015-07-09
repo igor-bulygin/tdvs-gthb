@@ -63,12 +63,6 @@ class Person extends CActiveRecord implements IdentityInterface {
 	}
 
 	public function beforeSave($insert) {
-		if (!array_key_exists("auth_key", $this->credentials) || $this->credentials["auth_key"] === null) {
-			$this->credentials = array_merge_recursive($this->credentials, [
-				"auth_key" => Yii::$app->getSecurity()->generateRandomString(128)
-			]);
-		}
-
 		/*
 		 * Create empty data holders if they don't exist
 		 */
@@ -92,8 +86,18 @@ class Person extends CActiveRecord implements IdentityInterface {
 			$this["media"] = [];
 		}
 
+		if($this->credentials == null) {
+			$this["credentials"] = [];
+		}
+
 		if($this->preferences == null) {
 			$this["preferences"] = [];
+		}
+
+		if (!array_key_exists("auth_key", $this->credentials) || $this->credentials["auth_key"] === null) {
+			$this->credentials = array_merge_recursive($this->credentials, [
+				"auth_key" => Yii::$app->getSecurity()->generateRandomString(128)
+			]);
 		}
 
 		return parent::beforeSave($insert);
