@@ -77,6 +77,7 @@ ngFileUpload.directive('ngfBgSrc', ['$parse', '$timeout', function ($parse, $tim
 							}
 						});
 					} else {
+						if(attr.DefaultSrc === undefined) return;
 						elem.css({
 							'background-image': 'url(' + attr.ngfDefaultSrc + ')' || ''
 						});
