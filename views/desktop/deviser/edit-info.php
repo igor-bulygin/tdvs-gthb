@@ -62,7 +62,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 
 					<div class="profile-photo-holder">
-						<img class="img-circle profile-photo-img" ngf-bg-src="profilephoto[0]" angular-img-dl angular-img-dl-url="<?= $profile_photo_url ?>" angular-img-dl-model="headerphoto[0]">
+						<img class="img-circle profile-photo-img" ngf-bg-src="profilephoto[0]" angular-img-dl angular-img-dl-url="<?= $profile_photo_url ?>" angular-img-dl-model="profilephoto[0]">
 
 						<div class="flex flex-justify-center flex-align-center profile-photo-controls-holder">
 							<div class="controls">
