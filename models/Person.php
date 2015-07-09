@@ -69,6 +69,33 @@ class Person extends CActiveRecord implements IdentityInterface {
 			]);
 		}
 
+		/*
+		 * Create empty data holders if they don't exist
+		 */
+		if($this->categories == null) {
+			$this["categories"] = [];
+		}
+
+		if($this->collections == null) {
+			$this["collections"] = [];
+		}
+
+		if($this->type == null) {
+			$this["type"] = [];
+		}
+
+		if($this->personal_info == null) {
+			$this["personal_info"] = [];
+		}
+
+		if($this->media == null) {
+			$this["media"] = [];
+		}
+
+		if($this->preferences == null) {
+			$this["preferences"] = [];
+		}
+
 		return parent::beforeSave($insert);
 	}
 
