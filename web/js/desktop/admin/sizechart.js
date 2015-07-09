@@ -12,36 +12,6 @@ todevise.controller('sizeChartCtrl', ["$scope", "$timeout", "$sizechart", "$size
 	//Sort by path length
 	$category_util.sort(_categories);
 	$scope.categories = $category_util.create_tree(_categories);
-	//Select pre-selected categories and metric unit
-	$timeout(function() {
-		angular.forEach($scope.sizechart.categories, function(id) {
-			$scope.api.select(id);
-		});
-		$scope.api_mus.select($scope.sizechart.metric_unit);
-
-		//After the directive is done rendering itself start monitoring the selected categories
-		$timeout(function() {
-			$scope.$watch("selectedCategories", function(_new, _old) {
-				if(_new !== _old) {
-					$scope.sizechart.categories = [];
-					var _selected_categories = jsonpath.query(_new, "$..[?(!@.sub && @.short_id)]");
-					angular.forEach(_selected_categories, function(_cat) {
-						$scope.sizechart.categories.push(_cat.short_id);
-					});
-				}
-			});
-
-			$scope.$watch("selected_mu", function(_new, _old) {
-				if(_new !== _old) {
-					var _selected_mu = jsonpath.query(_new, "$..[?(!@.sub && @.value)]");
-					if(_selected_mu.length === 1) {
-						$scope.sizechart.metric_unit = _selected_mu[0].value;
-					}
-				}
-			});
-		}, 0);
-
-	}, 0);
 
 	$scope.$watch("sizechart.metric_unit", function(_new) {
 		if(_new === undefined) return;
