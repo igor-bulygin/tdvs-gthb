@@ -13,7 +13,8 @@ class CActiveRecord extends ActiveRecord {
 		while ($_found === false) {
 			$_id = Utils::shortID($length);
 			try {
-				$this->getCollection()->insert(['short_id' => $_id]);
+				$this->short_id = $_id;
+				$this->insert();
 				$_found = true;
 			} catch (Exception $e) {}
 		}
