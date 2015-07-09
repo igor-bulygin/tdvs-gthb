@@ -11,6 +11,7 @@ class angularUnitConverterAsset extends AssetBundle {
 		YII_ENV_DEV ? 'angular-unit-converter.js' : 'angular-unit-converter.min.js'
 	];
 	public $depends = [
+		'app\assets\libs\angularAsset',
 		'app\assets\libs\decimaljsAsset'
 	];
 }
