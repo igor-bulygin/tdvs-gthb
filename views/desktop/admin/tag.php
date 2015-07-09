@@ -62,7 +62,11 @@ $this->title = 'Todevise / Admin / Tag';
 					api="api"
 					id-property="short_id"
 					input-model="categories"
-					output-model="selectedCategories"
+					output-model="tag.categories"
+					output-model-type="array"
+					output-model-props='["short_id"]'
+					preselect-prop="short_id"
+					preselect-value="{{ tag.categories }}"
 
 					group-property="sub"
 					tick-property="check"
@@ -81,21 +85,28 @@ $this->title = 'Todevise / Admin / Tag';
 		<br />
 
 		<div class="row no-gutter">
-			<div class="col-xs-3 div-bordered tag_settings">
+			<div class="col-xs-2 div-bordered tag_settings">
 				<div class="checkbox">
 					<label class="funiv fs0-929 fc-c7">
 						<input type="checkbox" ng-model="tag.enabled" ng-checked="tag.enabled"> <?php echo Yii::t("app/admin", "Enabled"); ?>
 					</label>
 				</div>
 			</div>
-			<div class="col-xs-3 div-bordered tag_settings">
+			<div class="col-xs-2 div-bordered tag_settings">
 				<div class="checkbox">
 					<label class="funiv fs0-929 fc-c7" ng-init="optional = !tag.required">
 						<input type="checkbox" ng-model="optional" ng-change="tag.required = !optional"> <?php echo Yii::t("app/admin", "Is this tag optional?"); ?>
 					</label>
 				</div>
 			</div>
-			<div class="col-xs-6 div-bordered tag_settings">
+			<div class="col-xs-3 div-bordered tag_settings">
+				<div class="checkbox">
+					<label class="funiv fs0-929 fc-c7">
+						<input type="checkbox" ng-model="tag.stock_and_price" ng-checked="tag.stock_and_price"> <?php echo Yii::t("app/admin", "Use in price and stock chart"); ?>
+					</label>
+				</div>
+			</div>
+			<div class="col-xs-5 div-bordered tag_settings">
 				<div class="row no-gutter">
 					<div class="row-same-height">
 						<div class="col-xs-6 col-height col-middle funiv fs0-929 fc-c7">

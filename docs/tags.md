@@ -10,6 +10,7 @@ This is how a single tag looks like:
 
 	enabled: true,
 	required: true,
+	stock_and_price: true, // This will add the tag to the stock and price chart
 	type: 0, // Check the constants in Tag model for all the valid values
 	         // for this
 	n_options: 1 // Exists only of type is DROPDOWN

@@ -11,8 +11,7 @@ api.factory("$tag_util", function() {
 			},
 			name: langs,
 			type: 0,
-			n_options: 1,
-			options: {}
+			n_options: 1
 		};
 	};
 

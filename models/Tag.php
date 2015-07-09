@@ -31,6 +31,7 @@ class Tag extends CActiveRecord {
 			'short_id',
 			'enabled',
 			'required',
+			'stock_and_price',
 			'type',
 			'n_options',
 			'name',
@@ -38,6 +39,29 @@ class Tag extends CActiveRecord {
 			'categories',
 			'options'
 		];
+	}
+
+	public function beforeSave($insert) {
+		/*
+		 * Create empty data holders if they don't exist
+		 */
+		if($this->name == null) {
+			$this["name"] = [];
+		}
+
+		if($this->description == null) {
+			$this["description"] = [];
+		}
+
+		if($this->categories == null) {
+			$this["categories"] = [];
+		}
+
+		if($this->options == null) {
+			$this["options"] = [];
+		}
+
+		return parent::beforeSave($insert);
 	}
 
 }

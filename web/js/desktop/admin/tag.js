@@ -12,26 +12,6 @@ todevise.controller('tagCtrl', ["$scope", "$timeout", "$tag", "$tag_util", "$cat
 	//Sort by path length
 	$category_util.sort(_categories);
 	$scope.categories = $category_util.create_tree(_categories);
-	//Select pre-selected categories
-	$timeout(function() {
-		angular.forEach($scope.tag.categories, function(id) {
-			$scope.api.select(id);
-		});
-
-		//After the directive is done rendering itself start monitoring the selected categories
-		$timeout(function() {
-			$scope.$watch("selectedCategories", function(_new, _old) {
-				if(_new !== _old) {
-					$scope.tag.categories = [];
-					var _selected_categories = jsonpath.query(_new, "$..[?(!@.sub && @.short_id)]");
-					angular.forEach(_selected_categories, function(_cat) {
-						$scope.tag.categories.push(_cat.short_id);
-					});
-				}
-			});
-		}, 0);
-
-	}, 0);
 
 	$scope.$watch("tag.type", function(_new, _old) {
 		if(_new !== _old && $scope.type_watch_paused === false) {
