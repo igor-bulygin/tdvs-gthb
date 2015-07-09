@@ -1,7 +1,7 @@
-var todevise = angular.module('todevise', ['ui.bootstrap', 'angular-multi-select', 'global-deviser', 'global-desktop', 'api', "ngFileUpload", "ngImgCrop"]);
+var todevise = angular.module('todevise', ['ui.bootstrap', 'angular-multi-select', 'angular-img-dl', 'global-deviser', 'global-desktop', 'api', "ngFileUpload", "ngImgCrop"]);
 var global_deviser = angular.module('global-deviser');
 
-todevise.controller('deviserCtrl', ["$scope", "$timeout", "$deviser", "$deviser_util", "$category_util", "toastr", "$modal", "Upload", function($scope, $timeout, $deviser, $deviser_util, $category_util, toastr, $modal, Upload) {
+todevise.controller('deviserCtrl', ["$scope", "$timeout", "$deviser", "$deviser_util", "$category_util", "toastr", "$modal", "Upload", "$http", function($scope, $timeout, $deviser, $deviser_util, $category_util, toastr, $modal, Upload, $http) {
 	$scope.lang = _lang;
 	$scope.deviser = _deviser;
 	$scope.api = {};
@@ -32,16 +32,6 @@ todevise.controller('deviserCtrl', ["$scope", "$timeout", "$deviser", "$deviser_
 			}
 		});
 	}, 0);
-
-	if(_header_photo_base64 !== "") {
-		var _blob = global_deviser.dataURItoBlob(_header_photo_base64);
-		$scope.headerphoto.push(_blob);
-	}
-
-	if(_profile_photo_base64 !== "") {
-		var _blob = global_deviser.dataURItoBlob(_profile_photo_base64);
-		$scope.profilephoto.push(_blob);
-	}
 
 	$scope.$watch("headerphoto", function(n, o) {
 		//Restore old profile picture if select dialog is canceled

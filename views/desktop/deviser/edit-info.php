@@ -8,7 +8,9 @@ use app\components\Crop;
 use app\assets\desktop\deviser\EditInfoAsset;
 
 /* @var $this yii\web\View */
+/* @var $deviser ArrayObject */
 /* @var $countries ArrayObject */
+/* @var $categories ArrayObject */
 /* @var $countries_lookup ArrayObject */
 
 $this->params['breadcrumbs'][] = [
@@ -21,10 +23,9 @@ EditInfoAsset::register($this);
 $who = $deviser['personal_info']['name'] . " " . join($deviser['personal_info']['surnames'], " ");
 $this->title = "$who / Todevise / Edit info";
 
-$base_path_photos = Utils::join_paths(Yii::getAlias("@deviser"), $deviser["short_id"]);
-$header_photo_base64 = isset($deviser["media"]["header"]) ? Utils::fileToBase64(Utils::join_paths($base_path_photos, $deviser["media"]["header"])) : "";
-$profile_photo_base64 = isset($deviser["media"]["profile"]) ? Utils::fileToBase64(Utils::join_paths($base_path_photos, $deviser["media"]["profile"])) : "";
-
+$base_path_photos = Yii::getAlias("@deviser_url") . "/" . $deviser["short_id"] . "/";
+$header_photo_url = isset($deviser["media"]["header"]) ? $base_path_photos . $deviser["media"]["header"] : "";
+$profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $deviser["media"]["profile"] : "";
 ?>
 
 <?php $this->registerJs("var _deviser = " . Json::encode($deviser) . ";", View::POS_HEAD); ?>
@@ -34,16 +35,13 @@ $profile_photo_base64 = isset($deviser["media"]["profile"]) ? Utils::fileToBase6
 <?php $this->registerJs("var _upload_header_photo_url = '" . Url::to(["deviser/upload-header-photo", "slug" => $deviser["slug"]]) . "';", View::POS_HEAD); ?>
 <?php $this->registerJs("var _upload_profile_photo_url = '" . Url::to(["deviser/upload-profile-photo", "slug" => $deviser["slug"]]) . "';", View::POS_HEAD); ?>
 
-<?php $this->registerJs("var _header_photo_base64 = '$header_photo_base64';", View::POS_END); ?>
-<?php $this->registerJs("var _profile_photo_base64 = '$profile_photo_base64';", View::POS_END); ?>
-
 <div class="row no-gutter" ng-controller="deviserCtrl" ng-init="init()">
 	<div class="col-xs-12 no-horizontal-padding create-profile">
 
 		<div class="row no-gutter">
 			<div class="col-xs-12 no-horizontal-padding header-photo flex flex-column">
 				<div class="header-photo-holder flex flex-column">
-					<img class="header-photo-img" ngf-bg-src="headerphoto[0]" ngf-default-src="<?= $header_photo_base64 ?>">
+					<img class="header-photo-img" ngf-bg-src="headerphoto[0]" angular-img-dl angular-img-dl-url="<?= $header_photo_url ?>" angular-img-dl-model="headerphoto[0]">
 
 					<div class="flex flex-justify-center flex-align-center flex-prop-1">
 						<div class="controls">
@@ -64,7 +62,7 @@ $profile_photo_base64 = isset($deviser["media"]["profile"]) ? Utils::fileToBase6
 
 
 					<div class="profile-photo-holder">
-						<img class="img-circle profile-photo-img" ngf-bg-src="profilephoto[0]" ngf-default-src="<?= $profile_photo_base64 ?>">
+						<img class="img-circle profile-photo-img" ngf-bg-src="profilephoto[0]" angular-img-dl angular-img-dl-url="<?= $profile_photo_url ?>" angular-img-dl-model="headerphoto[0]">
 
 						<div class="flex flex-justify-center flex-align-center profile-photo-controls-holder">
 							<div class="controls">

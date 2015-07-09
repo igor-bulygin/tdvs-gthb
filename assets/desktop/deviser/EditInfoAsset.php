@@ -16,6 +16,7 @@ class EditInfoAsset extends AssetBundle {
 		'app\assets\api\ApiAsset',
 		'app\assets\libs\angularMultiSelectAsset',
 		'app\assets\libs\angularBootstrapAsset',
+		'app\assets\libs\angularImgDlAsset',
 		'app\assets\libs\ngFileUploadAsset',
 		'app\assets\desktop\deviser\GlobalAsset'
 	];
