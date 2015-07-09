@@ -44,23 +44,6 @@ class m150518_083910_create_tag extends \yii\mongodb\Migration {
 			"enabled" => true,
 			"required" => false,
 			"type" => 1,
-			"name" => [$en => "Weight"],
-			"description" => [$en => "Weight of the product"],
-			"categories" => ["90000"],
-			"options" => [
-				[
-					"text" => [$en => "Weight"],
-					"type" => 0,
-					"metric_type" => MetricType::WEIGHT
-				]
-			]
-		]);
-
-		$this->insert('tag', [
-			"short_id" => "30000",
-			"enabled" => true,
-			"required" => false,
-			"type" => 1,
 			"name" => [$en => "Size"],
 			"description" => [$en => "Size of the product"],
 			"categories" => ["90000"],

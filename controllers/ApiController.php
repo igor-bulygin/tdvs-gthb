@@ -263,7 +263,6 @@ class ApiController extends CController {
 			/* @var $tag \app\models\Tag */
 			$tag = Tag::findOne(["short_id" => $_tag["short_id"]]);
 			$tag->setAttributes($_tag, false);
-			$tag->options = array_replace_recursive($tag->options, $_tag["options"]);
 			$tag->save();
 
 			$res = $tag;
@@ -307,7 +306,6 @@ class ApiController extends CController {
 			/* @var $sizechart \app\models\SizeChart */
 			$sizechart = SizeChart::findOne(["short_id" => $_sizechart["short_id"]]);
 			$sizechart->setAttributes($_sizechart, false);
-			//$tag->options = array_replace_recursive($tag->options, $_tag["options"]);
 			$sizechart->save();
 
 			$res = $sizechart;
