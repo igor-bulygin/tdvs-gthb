@@ -1,6 +1,8 @@
 <?php
 
+use app\models\Tag;
 use app\models\Lang;
+use app\models\TagOption;
 use app\models\MetricType;
 
 class m150518_083910_create_tag extends \yii\mongodb\Migration {
@@ -18,7 +20,7 @@ class m150518_083910_create_tag extends \yii\mongodb\Migration {
 			"short_id" => "10000",
 			"enabled" => true,
 			"required" => true,
-			"type" => 0,
+			"type" => Tag::DROPDOWN,
 			"n_options" => 2,
 			"name" => [$en => "Color"],
 			"description" => [$en => "Color(s) of the product"],
@@ -43,24 +45,24 @@ class m150518_083910_create_tag extends \yii\mongodb\Migration {
 			"short_id" => "20000",
 			"enabled" => true,
 			"required" => false,
-			"type" => 1,
+			"type" => Tag::FREETEXT,
 			"name" => [$en => "Size"],
 			"description" => [$en => "Size of the product"],
 			"categories" => ["90000"],
 			"options" => [
 				[
 					"text" => [$en => "Long"],
-					"type" => 0,
+					"type" => TagOption::NUMERIC,
 					"metric_type" => MetricType::SIZE
 				],
 				[
 					"text" => [$en => "Wide"],
-					"type" => 0,
+					"type" => TagOption::NUMERIC,
 					"metric_type" => MetricType::SIZE
 				],
 				[
 					"text" => [$en => "Tall"],
-					"type" => 0,
+					"type" => TagOption::NUMERIC,
 					"metric_type" => MetricType::SIZE
 				],
 			]
