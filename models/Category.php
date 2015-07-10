@@ -46,6 +46,17 @@ class Category extends CActiveRecord {
 	}
 
 	public function beforeSave($insert) {
+		/*
+		 * Create empty data holders if they don't exist
+		 */
+		if($this->name == null) {
+			$this["name"] = [];
+		}
+
+		if($this->slug == null) {
+			$this["slug"] = [];
+		}
+
 		if($insert) {
 			//insert
 		} else {
