@@ -2,7 +2,6 @@ var todevise = angular.module('todevise', ['ui.bootstrap', 'ngJsTree', 'ngAnimat
 
 todevise.controller('categoriesCtrl', ["$scope", "$category", "$category_util", "toastr", "$modal", function($scope, $category, $category_util, toastr, $modal) {
 
-	$scope.ignoreModelChanges = true;
 	$scope.treeData = [];
 
 	$scope.treeConfig = {
@@ -104,32 +103,74 @@ todevise.controller('categoriesCtrl', ["$scope", "$category", "$category_util", 
 		if (node !== undefined) {
 			path += $scope.treeInstance.jstree(true).get_path(node, "/", true) + "/";
 		}
-		var tmp_node = $category_util.newCategory(path);
 
-		$category.modify("POST", tmp_node).then(function(category) {
-			$scope.treeData.push( $category_util.categoryToNode(category) );
+		var modalInstance = $modal.open({
+			templateUrl: 'template/modal/category/create_new.html',
+			controller: 'create_newCtrl',
+			resolve: {
+				data: function () {
+					return {
+						langs: _langs
+					};
+				}
+			}
+		});
+
+		modalInstance.result.then(function(data) {
+			var tmp_node = $category_util.newCategory(path, data.langs, data.slug, data.sizecharts, data.prints);
+
+			$category.modify("POST", tmp_node).then(function(category) {
+				toastr.success("Category created!");
+				$scope.treeData.push( $category_util.categoryToNode(category) );
+			}, function(err) {
+				toastr.error("Couldn't create category!", err);
+			});
+		}, function () {
+			//Cancel
 		});
 	};
 
 	$scope.rename = function (node_id, node, action_id, action_el) {
-		$scope.ignoreModelChanges = false;
-		$scope.treeInstance.jstree(true).edit(node, null, function(node, status) {
-			if (!status || node.text === node.original.text) return;
-			var obj = {};
-			_.each($scope.treeData, function(_obj) {
-				if(_obj.id == node.id) {
-					_obj.text = node.text;
-					obj = _obj;
+
+		$category.get({
+			"short_id": node.id
+		}).then(function(_category) {
+			if(_category.length !== 1) {
+				toastr.error("Unexpected category details!");
+				return;
+			} else {
+				_category = _category.pop();
+			}
+
+			var modalInstance = $modal.open({
+				templateUrl: 'template/modal/category/edit.html',
+				controller: 'editCtrl',
+				resolve: {
+					data: function () {
+						return {
+							langs: _langs,
+							category: _category
+						};
+					}
 				}
 			});
 
-			$category.modify("POST", $category_util.nodeToCategory(obj, $scope)).then(function() {
-				toastr.success("Category renamed!");
-			}, function(err) {
-				toastr.error("Couldn't rename category!", err);
-			}).finally(function() {
-				$scope.ignoreModelChanges = true;
+			modalInstance.result.then(function(data) {
+				$category.modify("POST", data.category).then(function() {
+					toastr.success("Category modified!");
+
+					var _node = $category_util.categoryToNode(data.category);
+					var _current = _.findWhere($scope.treeData, {id: data.category.short_id});
+					angular.merge(_current, _node);
+				}, function(err) {
+					toastr.error("Couldn't modify category!", err);
+				});
+
+			}, function () {
+				//Cancel
 			});
+		}, function(err) {
+			toastr.error("Couldn't get category details!", err);
 		});
 	};
 
@@ -181,3 +222,39 @@ todevise.controller('categoriesCtrl', ["$scope", "$category", "$category_util", 
 	};
 
 }]);
+
+todevise.controller("create_newCtrl", function($scope, $modalInstance, data) {
+	$scope.data = data;
+	$scope.langs = {};
+	$scope.slug = "";
+	$scope.sizecharts = false;
+	$scope.prints = false;
+
+	$scope.ok = function() {
+		$modalInstance.close({
+			"langs": $scope.langs,
+			"slug": $scope.slug,
+			"sizecharts": $scope.sizecharts,
+			"prints": $scope.prints
+		});
+	};
+
+	$scope.cancel =  function() {
+		$modalInstance.dismiss();
+	};
+});
+
+
+todevise.controller("editCtrl", function($scope, $modalInstance, data) {
+	$scope.data = data;
+
+	$scope.ok = function() {
+		$modalInstance.close({
+			"category": $scope.data.category
+		});
+	};
+
+	$scope.cancel =  function() {
+		$modalInstance.dismiss();
+	};
+});

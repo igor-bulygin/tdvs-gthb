@@ -120,13 +120,14 @@ api.factory("$category_util", function($q, $category) {
 		return deferred.promise;
 	};
 
-	utils.newCategory = function(path) {
+	utils.newCategory = function(path, name, slug, sizecharts, prints) {
 		return {
 			short_id: "new",
 			path: path,
-			name: {
-				"en-US": "New category"
-			}
+			slug: slug,
+			name: name,
+			sizecharts: sizecharts,
+			prints: prints
 		};
 	};
 
