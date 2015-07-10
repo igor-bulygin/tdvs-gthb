@@ -16,6 +16,8 @@ class m150415_113659_create_category extends Migration {
 		$this->insert('category', [
 			"short_id" => "10000",
 			"path" => '/',
+			"sizecharts" => false,
+			"prints" => false,
 			"name" => [$en => "Fashion"],
 			"slug" => [$en => "fashion"]
 		]);
@@ -23,6 +25,8 @@ class m150415_113659_create_category extends Migration {
 		$this->insert('category', [
 			"short_id" => "20000",
 			"path" => '/10000/',
+			"sizecharts" => false,
+			"prints" => false,
 			"name" => [$en => "Women"],
 			"slug" => [$en => "women"]
 		]);
@@ -30,6 +34,8 @@ class m150415_113659_create_category extends Migration {
 		$this->insert('category', [
 			"short_id" => "30000",
 			"path" => '/10000/20000/',
+			"sizecharts" => false,
+			"prints" => false,
 			"name" => [$en => "Dresses"],
 			"slug" => [$en => "Dresses"]
 		]);
@@ -37,6 +43,8 @@ class m150415_113659_create_category extends Migration {
 		$this->insert('category', [
 			"short_id" => "40000",
 			"path" => '/10000/',
+			"sizecharts" => false,
+			"prints" => false,
 			"name" => [$en => "Man"],
 			"slug" => [$en => "man"]
 		]);
@@ -44,6 +52,8 @@ class m150415_113659_create_category extends Migration {
 		$this->insert('category', [
 			"short_id" => "50000",
 			"path" => '/10000/40000/',
+			"sizecharts" => false,
+			"prints" => false,
 			"name" => [$en => "Jeans"],
 			"slug" => [$en => "jeans"]
 		]);
@@ -51,6 +61,8 @@ class m150415_113659_create_category extends Migration {
 		$this->insert('category', [
 			"short_id" => "60000",
 			"path" => '/',
+			"sizecharts" => false,
+			"prints" => false,
 			"name" => [$en => "Technology"],
 			"slug" => [$en => "technology"]
 		]);
@@ -58,6 +70,8 @@ class m150415_113659_create_category extends Migration {
 		$this->insert('category', [
 			"short_id" => "70000",
 			"path" => '/60000/',
+			"sizecharts" => false,
+			"prints" => false,
 			"name" => [$en => "Computers"],
 			"slug" => [$en => "computers"]
 		]);
@@ -65,6 +79,8 @@ class m150415_113659_create_category extends Migration {
 		$this->insert('category', [
 			"short_id" => "80000",
 			"path" => '/60000/70000/',
+			"sizecharts" => false,
+			"prints" => false,
 			"name" => [$en => "RAM"],
 			"slug" => [$en => "ram"]
 		]);
@@ -72,6 +88,8 @@ class m150415_113659_create_category extends Migration {
 		$this->insert('category', [
 			"short_id" => "90000",
 			"path" => '/60000/',
+			"sizecharts" => false,
+			"prints" => false,
 			"name" => [$en => "Smart phones"],
 			"slug" => [$en => "smart-phones"]
 		]);

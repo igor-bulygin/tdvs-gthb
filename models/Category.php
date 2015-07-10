@@ -16,6 +16,8 @@ class Category extends CActiveRecord {
 			'_id',
 			'short_id',
 			'path',
+			'sizecharts',
+			'prints',
 			'name',
 			'slug'
 		];
