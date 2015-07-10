@@ -26,7 +26,7 @@ todevise.controller('categoriesCtrl', ["$scope", "$category", "$category_util", 
 			case_insensitive: true,
 			show_only_matches : true
 		},
-		plugins: ["state", "dnd", "search", "sort", "wholerow", "actions"]
+		plugins: ["state", "dnd", "search", "sort", "wholerow", "actions", "types"]
 	};
 
 	$scope.readyCB = function () {
