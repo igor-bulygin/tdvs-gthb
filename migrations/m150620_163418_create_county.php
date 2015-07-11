@@ -29,6 +29,18 @@ class m150620_163418_create_county extends \yii\mongodb\Migration {
 			$country->setAttributes($data, false);
 			$country->save(false);
 		}
+
+		// Let's insert this special country called... Europe!
+		$country = new Country();
+		$country->setAttributes([
+			"country_code" => "EU",
+			"country_name" => [
+				$en => "Europe"
+			],
+			"currency_code" => "EUR",
+			"continent" => "EU"
+		], false);
+		$country->save(false);
 	}
 
 	public function down() {
