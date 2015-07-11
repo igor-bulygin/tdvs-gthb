@@ -15,24 +15,6 @@ todevise.controller('deviserCtrl', ["$scope", "$timeout", "$deviser", "$deviser_
 	$category_util.sort(_categories);
 	$scope.categories = $category_util.create_tree(_categories);
 
-	$timeout(function() {
-		$scope.api.select($scope.deviser.personal_info.country);
-
-		angular.forEach($scope.deviser.categories, function(id) {
-			$scope.api_cat.select(id);
-		});
-
-		$scope.$watch("selectedCategories", function(_new, _old) {
-			if(_new !== _old) {
-				$scope.deviser.categories = [];
-				var _selected_categories = jsonpath.query(_new, "$..[?(!@.sub && @.short_id)]");
-				angular.forEach(_selected_categories, function(_cat) {
-					$scope.deviser.categories.push(_cat.short_id);
-				});
-			}
-		});
-	}, 0);
-
 	$scope.$watch("headerphoto", function(n, o) {
 		//Restore old profile picture if select dialog is canceled
 		if(n === null) {
@@ -45,11 +27,6 @@ todevise.controller('deviserCtrl', ["$scope", "$timeout", "$deviser", "$deviser_
 		if(n === null) {
 			$scope.profilephoto = o;
 		}
-	});
-
-	$scope.$watch("selected_country", function(_new, _old) {
-		if(_new == _old || _new.length === 0) return;
-		$scope.deviser.personal_info.country = _new[0].country_code;
 	});
 
 	$scope.crop_header = function() {
