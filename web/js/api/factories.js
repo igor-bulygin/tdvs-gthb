@@ -96,7 +96,8 @@ api.factory("$category_util", function($q, $category) {
 		return {
 			id: category.short_id,
 			parent: typeof parent_id === "object" ? parent_id[parent_id.length - 2] : parent_id,
-			text: category.name[_lang] || ""
+			text: category.name[_lang] || "",
+			icon: "glyphicon glyphicon-menu-hamburger"
 		};
 	};
 
