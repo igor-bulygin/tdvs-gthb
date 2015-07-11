@@ -19,7 +19,7 @@ class m150415_113659_create_category extends Migration {
 			"sizecharts" => false,
 			"prints" => false,
 			"name" => [$en => "Art"],
-			"slug" => [$en => "art"]
+			"slug" => "art"
 		]);
 
 		$this->insert('category', [
@@ -28,7 +28,7 @@ class m150415_113659_create_category extends Migration {
 			"sizecharts" => false,
 			"prints" => false,
 			"name" => [$en => "Ceramic"],
-			"slug" => [$en => "ceramic"]
+			"slug" => "ceramic"
 		]);
 
 		$this->insert('category', [
@@ -37,7 +37,7 @@ class m150415_113659_create_category extends Migration {
 			"sizecharts" => false,
 			"prints" => false,
 			"name" => [$en => "Collage"],
-			"slug" => [$en => "collage"]
+			"slug" => "collage"
 		]);
 
 		$this->insert('category', [
@@ -46,7 +46,7 @@ class m150415_113659_create_category extends Migration {
 			"sizecharts" => false,
 			"prints" => true,
 			"name" => [$en => "Digital"],
-			"slug" => [$en => "Digital"]
+			"slug" => "Digital"
 		]);
 
 		$this->insert('category', [
@@ -55,7 +55,7 @@ class m150415_113659_create_category extends Migration {
 			"sizecharts" => false,
 			"prints" => true,
 			"name" => [$en => "Drawing"],
-			"slug" => [$en => "drawing"]
+			"slug" => "drawing"
 		]);
 
 		$this->insert('category', [
@@ -64,7 +64,7 @@ class m150415_113659_create_category extends Migration {
 			"sizecharts" => false,
 			"prints" => false,
 			"name" => [$en => "Installation"],
-			"slug" => [$en => "installation"]
+			"slug" => "installation"
 		]);
 
 		$this->insert('category', [
@@ -73,7 +73,7 @@ class m150415_113659_create_category extends Migration {
 			"sizecharts" => false,
 			"prints" => false,
 			"name" => [$en => "Mixed Media"],
-			"slug" => [$en => "mixed-media"]
+			"slug" => "mixed-media"
 		]);
 
 		$this->insert('category', [
@@ -82,7 +82,7 @@ class m150415_113659_create_category extends Migration {
 			"sizecharts" => false,
 			"prints" => true,
 			"name" => [$en => "Painting"],
-			"slug" => [$en => "painting"]
+			"slug" => "painting"
 		]);
 
 		$this->insert('category', [
@@ -91,7 +91,7 @@ class m150415_113659_create_category extends Migration {
 			"sizecharts" => false,
 			"prints" => true,
 			"name" => [$en => "Photography"],
-			"slug" => [$en => "photography"]
+			"slug" => "photography"
 		]);
 
 		$this->insert('category', [
@@ -100,7 +100,7 @@ class m150415_113659_create_category extends Migration {
 			"sizecharts" => false,
 			"prints" => true,
 			"name" => [$en => "Printmaking"],
-			"slug" => [$en => "printmaking"]
+			"slug" => "printmaking"
 		]);
 
 		$this->insert('category', [
@@ -109,7 +109,7 @@ class m150415_113659_create_category extends Migration {
 			"sizecharts" => false,
 			"prints" => false,
 			"name" => [$en => "Sculpture"],
-			"slug" => [$en => "sculpture"]
+			"slug" => "sculpture"
 		]);
 
 		$this->insert('category', [
@@ -118,7 +118,7 @@ class m150415_113659_create_category extends Migration {
 			"sizecharts" => false,
 			"prints" => false,
 			"name" => [$en => "Industrial Design"],
-			"slug" => [$en => "industrial-design"]
+			"slug" => "industrial-design"
 		]);
 
 		$this->insert('category', [
@@ -127,7 +127,7 @@ class m150415_113659_create_category extends Migration {
 			"sizecharts" => false,
 			"prints" => false,
 			"name" => [$en => "Automotive"],
-			"slug" => [$en => "Automotive"]
+			"slug" => "Automotive"
 		]);
 
 		$this->insert('category', [
@@ -136,7 +136,7 @@ class m150415_113659_create_category extends Migration {
 			"sizecharts" => false,
 			"prints" => false,
 			"name" => [$en => "Decoration"],
-			"slug" => [$en => "decoration"]
+			"slug" => "decoration"
 		]);
 
 		$this->insert('category', [
@@ -145,7 +145,7 @@ class m150415_113659_create_category extends Migration {
 			"sizecharts" => false,
 			"prints" => false,
 			"name" => [$en => "Carpets"],
-			"slug" => [$en => "carpets"]
+			"slug" => "carpets"
 		]);
 
 		$this->insert('category', [
@@ -154,7 +154,7 @@ class m150415_113659_create_category extends Migration {
 			"sizecharts" => false,
 			"prints" => false,
 			"name" => [$en => "Furniture"],
-			"slug" => [$en => "furniture"]
+			"slug" => "furniture"
 		]);
 
 		$this->insert('category', [
@@ -163,7 +163,7 @@ class m150415_113659_create_category extends Migration {
 			"sizecharts" => false,
 			"prints" => false,
 			"name" => [$en => "Beds"],
-			"slug" => [$en => "Beds"]
+			"slug" => "Beds"
 		]);
 
 		$this->insert('category', [
@@ -172,7 +172,7 @@ class m150415_113659_create_category extends Migration {
 			"sizecharts" => false,
 			"prints" => false,
 			"name" => [$en => "Chairs & Stools"],
-			"slug" => [$en => "chairs-stools"]
+			"slug" => "chairs-stools"
 		]);
 
 		$this->insert('category', [
@@ -181,7 +181,7 @@ class m150415_113659_create_category extends Migration {
 			"sizecharts" => false,
 			"prints" => false,
 			"name" => [$en => "Desks"],
-			"slug" => [$en => "desks"]
+			"slug" => "desks"
 		]);
 
 		$this->insert('category', [
@@ -190,7 +190,7 @@ class m150415_113659_create_category extends Migration {
 			"sizecharts" => true,
 			"prints" => false,
 			"name" => [$en => "Jewelry"],
-			"slug" => [$en => "Jewelry"]
+			"slug" => "Jewelry"
 		]);
 
 		$this->insert('category', [
@@ -199,7 +199,7 @@ class m150415_113659_create_category extends Migration {
 			"sizecharts" => true,
 			"prints" => false,
 			"name" => [$en => "Bracelets"],
-			"slug" => [$en => "Bracelets"]
+			"slug" => "Bracelets"
 		]);
 
 		$this->insert('category', [
@@ -208,7 +208,7 @@ class m150415_113659_create_category extends Migration {
 			"sizecharts" => true,
 			"prints" => false,
 			"name" => [$en => "Bangles"],
-			"slug" => [$en => "bangles"]
+			"slug" => "bangles"
 		]);
 
 		$this->insert('category', [
@@ -217,7 +217,7 @@ class m150415_113659_create_category extends Migration {
 			"sizecharts" => true,
 			"prints" => false,
 			"name" => [$en => "Beaded Bracelets"],
-			"slug" => [$en => "beaded-bracelets"]
+			"slug" => "beaded-bracelets"
 		]);
 
 		$this->insert('category', [
@@ -226,7 +226,7 @@ class m150415_113659_create_category extends Migration {
 			"sizecharts" => true,
 			"prints" => false,
 			"name" => [$en => "Cuffs"],
-			"slug" => [$en => "cuffs"]
+			"slug" => "cuffs"
 		]);
 
 		$this->insert('category', [
@@ -235,7 +235,7 @@ class m150415_113659_create_category extends Migration {
 			"sizecharts" => true,
 			"prints" => false,
 			"name" => [$en => "Friendship Bracelets"],
-			"slug" => [$en => "friendship-bracelets"]
+			"slug" => "friendship-bracelets"
 		]);
 
 		$this->insert('category', [
@@ -244,7 +244,7 @@ class m150415_113659_create_category extends Migration {
 			"sizecharts" => true,
 			"prints" => false,
 			"name" => [$en => "Other"],
-			"slug" => [$en => "other-bracelets"]
+			"slug" => "other-bracelets"
 		]);
 
 		$this->insert('category', [
@@ -253,7 +253,7 @@ class m150415_113659_create_category extends Migration {
 			"sizecharts" => false,
 			"prints" => false,
 			"name" => [$en => "Brooches"],
-			"slug" => [$en => "brooches"]
+			"slug" => "brooches"
 		]);
 
 		$this->insert('category', [
@@ -262,7 +262,7 @@ class m150415_113659_create_category extends Migration {
 			"sizecharts" => false,
 			"prints" => false,
 			"name" => [$en => "Earrings"],
-			"slug" => [$en => "earrings"]
+			"slug" => "earrings"
 		]);
 
 		$this->insert('category', [
@@ -271,7 +271,7 @@ class m150415_113659_create_category extends Migration {
 			"sizecharts" => true,
 			"prints" => false,
 			"name" => [$en => "Necklaces"],
-			"slug" => [$en => "necklaces"]
+			"slug" => "necklaces"
 		]);
 
 		$this->insert('category', [
@@ -280,7 +280,7 @@ class m150415_113659_create_category extends Migration {
 			"sizecharts" => true,
 			"prints" => false,
 			"name" => [$en => "Pendants"],
-			"slug" => [$en => "Pendants"]
+			"slug" => "Pendants"
 		]);
 
 		$this->insert('category', [
@@ -289,7 +289,7 @@ class m150415_113659_create_category extends Migration {
 			"sizecharts" => true,
 			"prints" => false,
 			"name" => [$en => "Rings"],
-			"slug" => [$en => "rings"]
+			"slug" => "rings"
 		]);
 
 		$this->insert('category', [
@@ -298,7 +298,7 @@ class m150415_113659_create_category extends Migration {
 			"sizecharts" => true,
 			"prints" => false,
 			"name" => [$en => "Watches"],
-			"slug" => [$en => "watches"]
+			"slug" => "watches"
 		]);
 
 		$this->insert('category', [
@@ -307,7 +307,7 @@ class m150415_113659_create_category extends Migration {
 			"sizecharts" => false,
 			"prints" => false,
 			"name" => [$en => "Other"],
-			"slug" => [$en => "other-jewelry"]
+			"slug" => "other-jewelry"
 		]);
 
 		$this->insert('category', [
@@ -316,7 +316,7 @@ class m150415_113659_create_category extends Migration {
 			"sizecharts" => true,
 			"prints" => false,
 			"name" => [$en => "Fashion"],
-			"slug" => [$en => "fashion"]
+			"slug" => "fashion"
 		]);
 
 		$this->insert('category', [
@@ -325,7 +325,7 @@ class m150415_113659_create_category extends Migration {
 			"sizecharts" => true,
 			"prints" => false,
 			"name" => [$en => "Womenswear"],
-			"slug" => [$en => "womenswear"]
+			"slug" => "womenswear"
 		]);
 
 		$this->insert('category', [
@@ -334,7 +334,7 @@ class m150415_113659_create_category extends Migration {
 			"sizecharts" => true,
 			"prints" => false,
 			"name" => [$en => "Jeans"],
-			"slug" => [$en => "jeans-womens"]
+			"slug" => "jeans-womens"
 		]);
 
 		$this->insert('category', [
@@ -343,7 +343,7 @@ class m150415_113659_create_category extends Migration {
 			"sizecharts" => true,
 			"prints" => false,
 			"name" => [$en => "Bootcut"],
-			"slug" => [$en => "bootcut-womens"]
+			"slug" => "bootcut-womens"
 		]);
 
 		$this->insert('category', [
@@ -352,7 +352,7 @@ class m150415_113659_create_category extends Migration {
 			"sizecharts" => true,
 			"prints" => false,
 			"name" => [$en => "Bootcut Skinny"],
-			"slug" => [$en => "bootskinny-womens"]
+			"slug" => "bootskinny-womens"
 		]);
 
 		$this->insert('category', [
@@ -361,7 +361,7 @@ class m150415_113659_create_category extends Migration {
 			"sizecharts" => true,
 			"prints" => false,
 			"name" => [$en => "Menswear"],
-			"slug" => [$en => "menswear"]
+			"slug" => "menswear"
 		]);
 
 		$this->insert('category', [
@@ -370,7 +370,7 @@ class m150415_113659_create_category extends Migration {
 			"sizecharts" => true,
 			"prints" => false,
 			"name" => [$en => "T-shirts"],
-			"slug" => [$en => "tshirts-mens"]
+			"slug" => "tshirts-mens"
 		]);
 
 		$this->insert('category', [
@@ -379,7 +379,7 @@ class m150415_113659_create_category extends Migration {
 			"sizecharts" => true,
 			"prints" => false,
 			"name" => [$en => "Crew Necks"],
-			"slug" => [$en => "crewnecks-mens"]
+			"slug" => "crewnecks-mens"
 		]);
 
 		$this->insert('category', [
@@ -388,7 +388,7 @@ class m150415_113659_create_category extends Migration {
 			"sizecharts" => true,
 			"prints" => false,
 			"name" => [$en => "Polos"],
-			"slug" => [$en => "polos-mens"]
+			"slug" => "polos-mens"
 		]);
 	}
 
