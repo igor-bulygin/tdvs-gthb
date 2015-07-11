@@ -233,6 +233,10 @@ body {
 
 /**** FONT COLORS ****/
 
+.fc-000 {
+	color: #000;
+}
+
 .fc-fff {
 	color: #fff;
 }
@@ -291,4 +295,66 @@ body {
 
 .fc-9013fe {
 	color: #9013fe;
+}
+
+/**** BG COLORS ****/
+
+.dark-red {
+	background-color: #ca2440;
+}
+
+.red {
+	background-color: #ff6262;
+}
+
+.orange {
+	background-color: #f7a128;
+}
+
+.brown {
+	background-color: #936524;
+}
+
+.yellow {
+	background-color: #f7f028;
+}
+
+.green {
+	background-color: #8ee04b;
+}
+
+.dark-green {
+	background-color: #57a617;
+}
+
+.blue {
+	background-color: #28d0f7;
+}
+
+.dark-blue {
+	background-color: #2861f7;
+}
+
+.purple {
+	background-color: #b933f4;
+}
+
+.pink {
+	background-color: #ff9ce4;
+}
+
+.white {
+	background-color: #fff;
+}
+
+.grey {
+	background-color: #c7c7c7;
+}
+
+.black {
+	background-color: #2e2e2e;
+}
+
+.animal-print {
+	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAAXNSR0IArs4c6QAAAhVJREFUKBVVUl9Ik3EUPb/v+9rcH2dDm1uz0mLkQJhmzYERbFkjZFnQH8wlklv4MMg3CyGpBxkhIQRGRr04M7PVYxStWD00H8oUTBMJEUtaW00/3dqW3L6NCrovl8s9h3s45wJ/iogYrQ56KfsgMvHQLRo1EHUaRAxF8OZ2f3H5HjwPwyOvEBq+vI+ikz2UWrpOZw8UkUoAHa7V0tpCX4jWhwx5MBHY9EWE/EdBGhnIZZFTbKqbPoUvkM9ZQu+f+EgCE8Vuh3KXuBM18DAOjmQGkMmB2c9piLEEKmw23Bi9AovdCnA83r5+4zAXM49wpFrZ/uFrEh+jwK800NpSjfJ6G5LLXzDQN4RiJXCqoxkb3xYgl6Edk8EzomkLI30h6GZXHWXit2g82EptDaW0WQ7apQWFe8po1q+jwdMQhfnFH4glCMoCwNlkxyaeobd3DM/epVCuB7oPSVJXlvA9AZilmR++09Gk56NldbXb0XDMKcnlsNNYCJaKY25xFSUqoFICcpxEFDDBuyrTrLHT57LWW7AyPw2FQgGjxYKDtgqM3n+JpzPAWhbYuw2Ir+Mq8oHRSOj53ZO0xwAa8JQSRfuJsvdo/PE5slepSS3Z3VwDyVawfIKdbrMh/GouUMBvOKw7GHZXmSBot6Lx+H4g+xPX/GMvmErp7g/MLP9LPMeeugTvSBsiOjVEyQOxq8UUoUzgv9f4DUM24n2jO8O1AAAAAElFTkSuQmCC);
 }

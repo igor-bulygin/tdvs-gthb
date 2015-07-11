@@ -115,6 +115,13 @@ todevise.controller('tagCtrl', ["$scope", "$timeout", "$tag", "$tag_util", "$cat
 
 todevise.controller("create_newCtrl", function($scope, $modalInstance, data) {
 	$scope.data = data;
+	$scope.colors = _colors;
+
+	$scope.get_class_from_value = function(value) {
+		var _obj = jsonpath.query(_colors, "$..[?(@.value=='" + value + "')]");
+		if(_obj.length !== 1) return "";
+		return _obj[0].class;
+	};
 
 	$scope.ok = function() {
 		$modalInstance.close({

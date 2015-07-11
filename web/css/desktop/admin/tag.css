@@ -159,3 +159,19 @@ input[type="radio"]:checked + label span {
 	border-bottom: solid 1px #262626;
 	padding: 1.2%;
 }
+
+.opt_value_type label {
+	padding-left: 0px;
+}
+
+.color-cell {
+	width: 10px;
+	height: 10px;
+	margin-right: 1px;
+	margin-bottom: 1px;
+	border: 1px solid white;
+}
+
+.color-cell:hover {
+	border: 1px solid black;
+}

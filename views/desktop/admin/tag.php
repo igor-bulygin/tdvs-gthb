@@ -26,6 +26,7 @@ $this->title = 'Todevise / Admin / Tag';
 		<?php $this->registerJs("var _categories = " . Json::encode($categories) . ";", View::POS_HEAD); ?>
 		<?php $this->registerJs("var _tag = " . Json::encode($tag) . ";", View::POS_HEAD); ?>
 		<?php $this->registerJs("var _tagoption_txt = " . Json::encode(TagOption::TXT) . ";", View::POS_HEAD); ?>
+		<?php $this->registerJs("var _colors = " . Json::encode(TagOption::COLORS) . ";", View::POS_HEAD); ?>
 		<?php $this->registerJs("var _mus = " . Json::encode([
 			["value" => MetricType::NONE, "text" => Yii::t("app/admin", MetricType::TXT[MetricType::NONE]), "checked" => true],
 			["value" => MetricType::SIZE, "text" => Yii::t("app/admin", MetricType::TXT[MetricType::SIZE])],
@@ -260,15 +261,40 @@ $this->title = 'Todevise / Admin / Tag';
 
 			<br />
 
-			<label class='modal-title funiv fs1 fnormal fc-18'><?php echo Yii::t("app/admin", "Value"); ?></label>
-			<div class="input-group">
-				<input id="value" required="" ui-validate="'(data.options | filter:{value:$value}:true).length == 0'"
-					ui-validate-watch="'data.option.value'" type="text" class="form-control funiv fs1" placeholder="<?php echo Yii::t("app/admin", "Value..."); ?>"
-					aria-describedby="basic-addon-desc" ng-model="data.option.value" name="value">
+			<div class="radio flex flex-column opt_value_type" ng-init="opt_value_or_color = 1">
+				<label class="funiv fs0-786 fc-000 fs-upper">
+					<input type="radio" name="optionsRadios" id="optionsRadios1" ng-model="opt_value_or_color" value="1">
+					<label for="optionsRadios1"><span></span><?php echo Yii::t("app/admin", "This option has a fixed value"); ?></label>
+				</label>
+				<label class="funiv fs0-786  fc-000 fs-upper">
+					<input type="radio" name="optionsRadios" id="optionsRadios2" ng-model="opt_value_or_color" value="2">
+					<label for="optionsRadios2"><span></span><?php echo Yii::t("app/admin", "This option is a color/animal print"); ?></label>
+				</label>
+			</div>
+
+			<div ng-if="opt_value_or_color == 1">
+				<label class='modal-title funiv fs1 fnormal fc-18'><?php echo Yii::t("app/admin", "Value"); ?></label>
+				<div class="input-group">
+					<input id="value" required="" ui-validate="'(data.options | filter:{value:$value}:true).length == 0'"
+					       ui-validate-watch="'data.option.value'" type="text" class="form-control funiv fs1" placeholder="<?php echo Yii::t("app/admin", "Value..."); ?>"
+					       aria-describedby="basic-addon-desc" ng-model="data.option.value" name="value">
 				<span class="input-group-addon alert-danger funiv fs0-929" id="basic-addon-value" ng-show="form.$submitted && !form.$valid && !form['value'].$valid">
 					<span ng-show="form['value'].$error.required"><?php echo Yii::t("app/admin", "Required!"); ?></span>
 					<span ng-show="!form['value'].$error.required && form['value'].$error.validator"><?php echo Yii::t("app/admin", "Duplicated value!"); ?></span>
 				</span>
+				</div>
+			</div>
+
+			<div ng-if="opt_value_or_color == 2">
+				<label class='modal-title funiv fs1 fnormal fc-18'><?php echo Yii::t("app/admin", "Currently selected color"); ?>  </label>
+				<div class="color-cell {{ get_class_from_value(data.option.value) }}"></div>
+
+				<label class='modal-title funiv fs1 fnormal fc-18'><?php echo Yii::t("app/admin", "Select a color"); ?></label>
+				<div class="flex">
+					<div ng-repeat="color in colors">
+						<div class="color-cell {{ color.class }}" data-toggle="tooltip" title="{{ color.text }}" ng-click="data.option.value = color.value"></div>
+					</div>
+				</div>
 			</div>
 
 		</div>
