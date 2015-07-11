@@ -37,20 +37,13 @@ todevise.controller('sizeChartCtrl', ["$scope", "$timeout", "$sizechart", "$size
 			controller: 'create_new_countryCtrl',
 			resolve: {
 				data: function () {
-					return {
-						countries_lookup: $scope.countries_lookup
-					};
+					return {};
 				}
 			}
 		});
 
 		modalInstance.result.then(function(data) {
-			var _country = data.country_code;
-			if(_country.length !== 1) return;
-
-			_country = _country.pop();
-
-			$scope.sizechart.countries.push(_country.country_code);
+			$scope.sizechart.countries.push(data.country_code);
 
 			angular.forEach($scope.sizechart.values, function(row) {
 				row.splice($scope.sizechart.countries.length - 1, 0, 0);
@@ -141,7 +134,8 @@ todevise.controller('sizeChartCtrl', ["$scope", "$timeout", "$sizechart", "$size
 todevise.controller("create_new_countryCtrl", function($scope, $modalInstance, data) {
 	$scope.lang = _lang;
 	$scope.countries = _countries;
-	$scope.countries_lookup = data.countries_lookup;
+	$scope.countries_lookup = _countries_lookup;
+	$scope.selected_country = "";
 
 	$scope.ok = function() {
 		$modalInstance.close({

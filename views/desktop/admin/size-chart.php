@@ -172,7 +172,6 @@ $this->title = 'Todevise / Admin / Size chart';
 						<td ng-repeat="cell in sizechart.values[$index] track by $index">
 							<input ng-if="$index < sizechart.countries.length" ng-model="sizechart.values[$parent.$parent.$index][$index]" placeholder="0" />
 							<input ng-if="$index >= sizechart.countries.length" ng-model="sizechart.values[$parent.$parent.$index][$index]" placeholder="0" angular-unit-converter convert-from="{{ convertFrom }}" convert-to="{{ convertTo }}" />
-							<!--<input ng-model="sizechart.values[$parent.$index][$index]" placeholder="0" angular-unit-converter convert-from="{{ convertFrom }}" convert-to="{{ convertTo }}" />-->
 						</td>
 					</tr>
 				</tbody>
@@ -198,13 +197,15 @@ $this->title = 'Todevise / Admin / Size chart';
 				angular-multi-select
 				id-property="country_code"
 				input-model="countries"
-				output-model="selected_country"
+				single-output-model="selected_country"
+				single-output-prop="country_code"
+				group-property="sub"
 				tick-property="checked"
-				item-label="{{ countries_lookup[country_code] }}"
+				item-label="{{ country_name[lang] }}"
 				selection-mode="single"
 				button-template="angular-multi-select-btn-data.htm"
-				button-label="{{ countries_lookup[country_code] }}"
-				search-property="country_name['<?php echo array_keys(Lang::EN_US)[0]; ?>']"
+				button-label="{{ country_name[lang] }}"
+				search-property="country_name['<?= array_keys(Lang::EN_US)[0]; ?>']"
 				helper-elements="noall nonone noreset filter">
 			</div>
 		</div>

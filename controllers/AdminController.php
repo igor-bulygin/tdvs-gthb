@@ -6,6 +6,7 @@ use Yii;
 use app\models\Lang;
 use yii\helpers\Json;
 use app\helpers\Utils;
+use app\models\Country;
 use app\helpers\CController;
 use yii\data\ActiveDataProvider;
 
@@ -97,14 +98,39 @@ class AdminController extends CController {
 	public function actionSizeChart($size_chart_id) {
 		$countries = $this->api->actionCountries()->asArray()->all();
 		$countries_lookup = [];
+		$continents = [];
+
 		foreach($countries as $country) {
 			$countries_lookup[$country["country_code"]] = Utils::getValue($country["country_name"], Yii::$app->language, array_keys(Lang::EN_US)[0]);
+		}
+
+		foreach(Country::CONTINENTS as $code => $continent) {
+			$continents[] = [
+				"country_code" => $code,
+				"country_name" => [
+					Yii::$app->language => Yii::t("app/admin", $continent)
+				]
+			];
+			$countries_lookup[$code] = Yii::t("app/admin", $continent);
 		}
 
 		return $this->render("size-chart", [
 			"sizechart" => $this->api->actionSizeCharts(Json::encode(["short_id" => $size_chart_id]))->asArray()->one(),
 			"categories" => $this->api->actionCategories()->asArray()->all(),
-			"countries" => $countries,
+			"countries" => [
+				[
+					"country_name" => [
+						Yii::$app->language => Yii::t("app/admin", "Continents")
+					],
+					"sub" => $continents
+				],
+				[
+					"country_name" => [
+						Yii::$app->language => Yii::t("app/admin", "Countries")
+					],
+					"sub" => $countries
+				]
+			],
 			"countries_lookup" => $countries_lookup
 		]);
 	}
