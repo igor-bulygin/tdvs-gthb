@@ -169,7 +169,7 @@ $this->title = 'Todevise / Admin / Tag';
 
 							<div class="flex flex-align-center controls-holder flex-prop-1">
 								<span class="glyphicon glyphicon-menu-hamburger pointer fc-68  flex-prop" sv-handle></span>
-								<span class="funiv fs1 fc-fff flex-prop">{{ option.text[lang] }}</span>
+								<span class="funiv fs1 fc-fff flex-prop-1">{{ option.text[lang] }}</span>
 								<div class="flex flex-justify-end flex-prop-1">
 									<span class="glyphicon glyphicon-pencil pointer fc-68" ng-click="edit_dropdown_option($index)"></span>
 									<span class="glyphicon glyphicon-trash pointer fc-68" ng-click="delete_option($index)"></span>
