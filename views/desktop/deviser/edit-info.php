@@ -65,7 +65,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 						<img class="img-circle profile-photo-img" ngf-bg-src="profilephoto[0]" angular-img-dl angular-img-dl-url="<?= $profile_photo_url ?>" angular-img-dl-model="profilephoto[0]">
 
 						<div class="flex flex-justify-center flex-align-center profile-photo-controls-holder">
-							<div class="controls">
+							<div class="controls flex">
 								<span class="glyphicon glyphicon-refresh pointer" aria-hidden="true" ngf-select ng-model="profilephoto" ng-cloak ng-show="profilephoto[0] !== undefined"></span>
 								<span class="glyphicon glyphicon-resize-small pointer" aria-hidden="true" ng-click="crop_profile()" ng-cloak ng-show="profilephoto[0] !== undefined"></span>
 							</div>
