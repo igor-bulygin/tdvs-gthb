@@ -21,3 +21,23 @@ html, body {
 .main {
 	flex: 1 0 auto;
 }
+
+.btn-grey {
+	background-color: #575757;
+	border: 0;
+}
+
+.btn-grey:hover {
+	background-color: #7b7b7b;
+	color: #fff;
+}
+
+.btn-light-green {
+	background-color: #b8e986;
+	border: 0;
+}
+
+.btn-light-green:hover {
+	background-color: #9ef463;
+	color: #3d3d3d;
+}
