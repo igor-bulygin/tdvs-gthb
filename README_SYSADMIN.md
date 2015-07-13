@@ -5,10 +5,12 @@ Todevise 2.0
 
 The minimum requirements are the following:
 
-* PHP 5.6.0 (enable intl)
+* PHP 5.6.0
 * MongoDB 3.0
 * PHP-MongoDB driver 1.6
 * NGINX
+* Node (with globally installed)
+  * bower
 * The following PHP extensions:
   * dom
   * curl
