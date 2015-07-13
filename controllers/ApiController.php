@@ -285,16 +285,6 @@ class ApiController extends CController {
 			$filters = json_decode($filters, true) ?: [];
 			$fields = json_decode($fields, true) ?: [];
 
-			error_log("fields " . print_r($fields, true), 4);
-			error_log("filters " . print_r($filters, true), 4);
-
-			error_log("intern" , 4);
-			if($this->intern === true) {
-				error_log("y", 4);
-			} else {
-				error_log("n", 4);
-			}
-
 			if (!empty($filters) && $this->intern === false) {
 				$filters = Utils::removeAllExcept($filters, ["short_id"]);
 				//TODO: If not admin, force some fields (enabled only, visible by public only, etc...)
