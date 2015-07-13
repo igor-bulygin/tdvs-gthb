@@ -112,7 +112,7 @@ class ApiController extends CController {
 		if ($request->isGet) {
 			$filters = json_decode($filters, true) ?: [];
 
-			if (!empty($filters)) {
+			if (!empty($filters) && $this->intern === false) {
 				$filters = Utils::removeAllExcept($filters, []);
 				//TODO: If not admin, force some fields (enabled only, visible by public only, etc...)
 			}
@@ -154,7 +154,7 @@ class ApiController extends CController {
 		if ($request->isGet) {
 			$filters = json_decode($filters, true) ?: [];
 
-			if (!empty($filters)) {
+			if (!empty($filters) && $this->intern === false) {
 				$filters = Utils::removeAllExcept($filters, []);
 				//TODO: If not admin, force some fields (enabled only, visible by public only, etc...)
 			}
@@ -197,7 +197,7 @@ class ApiController extends CController {
 		if ($request->isGet) {
 			$filters = json_decode($filters, true) ?: [];
 
-			if (!empty($filters)) {
+			if (!empty($filters) && $this->intern === false) {
 				$filters = Utils::removeAllExcept($filters, []);
 				//TODO: If not admin, force some fields (enabled only, visible by public only, etc...)
 			}
@@ -239,7 +239,7 @@ class ApiController extends CController {
 		if ($request->isGet) {
 			$filters = json_decode($filters, true) ?: [];
 
-			if (!empty($filters)) {
+			if (!empty($filters) && $this->intern === false) {
 				$filters = Utils::removeAllExcept($filters, ["short_id", "required", "type", "categories"]);
 
 				//Force only enabled tags
@@ -327,7 +327,7 @@ class ApiController extends CController {
 		if ($request->isGet) {
 			$filters = json_decode($filters, true) ?: [];
 
-			if (!empty($filters)) {
+			if (!empty($filters) && $this->intern === false) {
 				$filters = Utils::removeAllExcept($filters, ["short_id", "path"]);
 
 				//TODO: If not admin, force only enabled, etc...
