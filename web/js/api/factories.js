@@ -62,6 +62,7 @@ api.factory("$sizechart_util", function() {
 		return {
 			short_id: "new",
 			name: langs,
+			type: 0,
 			countries: [],
 			columns: [],
 			values: []

@@ -7,6 +7,7 @@ use app\models\Lang;
 use yii\helpers\Json;
 use app\helpers\Utils;
 use app\models\Country;
+use app\models\SizeChart;
 use app\helpers\CController;
 use yii\data\ActiveDataProvider;
 
@@ -78,9 +79,11 @@ class AdminController extends CController {
 
 	public function actionSizeCharts($filters = null) {
 		$filters = urldecode($filters) ?: null;
+		$filters === null ? [] : Json::decode($filters);
+		$filters["type"] = SizeChart::TODEVISE;
 
 		$sizecharts = new ActiveDataProvider([
-			'query' => $this->api->actionSizeCharts($filters),
+			'query' => $this->api->actionSizeCharts(Json::encode($filters)),
 			'pagination' => [
 				'pageSize' => 15,
 			],
@@ -89,7 +92,7 @@ class AdminController extends CController {
 		$data = [
 			'categories' => $this->api->actionCategories()->asArray()->all(),
 			'sizecharts' => $sizecharts,
-			'sizechart_template' => $this->api->actionSizeCharts(Json::encode(["_id" => 0, "short_id", "name"]))->asArray()->all()
+			'sizechart_template' => $this->api->actionSizeCharts("", Json::encode(["_id" => 0, "short_id", "name"]))->asArray()->all()
 		];
 
 		return Yii::$app->request->isAjax ? $this->renderPartial("size-charts", $data) : $this->render("size-charts", $data);

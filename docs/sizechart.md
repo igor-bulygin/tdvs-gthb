@@ -10,6 +10,10 @@ This is how a single size chart looks like:
 
 	enabled: true,
 
+	type: 0, // Specifies the type of size chart. 0 means an internal Todevise size chart. 1 means a deviser modified size chart.
+
+	deviser_id: 1000000, // If type != 0, this will hold the short_id of the deviser to whom this size charts belongs.
+
 	name: {
 		'en-US': 'Name of size chart',
 		'es-ES': 'Nombre de size chart'

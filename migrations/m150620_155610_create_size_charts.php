@@ -1,6 +1,7 @@
 <?php
 
 use app\models\Lang;
+use app\models\SizeChart;
 use app\models\MetricUnit;
 
 class m150620_155610_create_size_charts extends \yii\mongodb\Migration {
@@ -13,11 +14,14 @@ class m150620_155610_create_size_charts extends \yii\mongodb\Migration {
 		]);
 		$this->createIndex('size_chart', 'categories');
 		$this->createIndex('size_chart', 'enabled');
+		$this->createIndex('size_chart', 'type');
+		$this->createIndex('size_chart', 'deviser_id');
 
 		$this->insert('size_chart', [
 			"short_id" => "11000",
 			"name" => [$en => "Jeans for Women"],
 			"enabled" => true,
+			"type" => SizeChart::TODEVISE,
 			"categories" => ["4d2e3", "4e6f9"],
 			"metric_unit" => MetricUnit::MM,
 			"countries" => ["US", "GB", "EU", "IT", "JP"],
@@ -51,6 +55,7 @@ class m150620_155610_create_size_charts extends \yii\mongodb\Migration {
 			"short_id" => "12000",
 			"name" => [$en => "T-shirts for Men"],
 			"enabled" => true,
+			"type" => SizeChart::TODEVISE,
 			"categories" => ["4x9a5", "4x8b4"],
 			"metric_unit" => MetricUnit::MM,
 			"countries" => ["US", "EU", "GB", "IT", "JP", "AU", "DE", "DK"],
