@@ -288,6 +288,7 @@ class ApiController extends CController {
 			if (!empty($filters) && $this->intern === false) {
 				$filters = Utils::removeAllExcept($filters, ["short_id"]);
 				//TODO: If not admin, force some fields (enabled only, visible by public only, etc...)
+				$filters["type"] = SizeChart::TODEVISE;
 			}
 
 			$res = empty($filters) ? SizeChart::find()->select($fields) : SizeChart::find()->select($fields)->where($filters);
