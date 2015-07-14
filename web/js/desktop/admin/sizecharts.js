@@ -129,7 +129,7 @@ todevise.controller('sizeChartsCtrl', ["$scope", "$timeout", "$sizechart", "$siz
 		}
 
 		//Sort by path length
-		$category_util.sort(_categories);
+		_categories = $category_util.sort(_categories);
 
 		$scope.categories = $category_util.create_tree(_categories);
 		$timeout(function() {

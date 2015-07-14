@@ -10,7 +10,7 @@ todevise.controller('sizeChartCtrl', ["$scope", "$timeout", "$sizechart", "$size
 	$scope.countries_lookup = _countries_lookup;
 
 	//Sort by path length
-	$category_util.sort(_categories);
+	_categories = $category_util.sort(_categories);
 	$scope.categories = $category_util.create_tree(_categories);
 
 	$scope.$watch("sizechart.metric_unit", function(_new) {

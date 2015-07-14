@@ -67,7 +67,7 @@ todevise.controller('categoriesCtrl', ["$scope", "$category", "$category_util", 
 		$category.get().then(function(_categories) {
 
 			//Sort data before feeding it to jsTree
-			$category_util.sort(_categories);
+			_categories = $category_util.sort(_categories);
 
 			//Empty the data holder (if there is anything)
 			$scope.treeData.splice(0, $scope.treeData.length);

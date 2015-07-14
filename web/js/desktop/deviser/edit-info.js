@@ -12,7 +12,7 @@ todevise.controller('deviserCtrl', ["$scope", "$timeout", "$deviser", "$deviser_
 	$scope.countries_lookup = _countries_lookup;
 
 	//Sort by path length
-	$category_util.sort(_categories);
+	_categories = $category_util.sort(_categories);
 	$scope.categories = $category_util.create_tree(_categories);
 
 	$scope.$watch("headerphoto", function(n, o) {

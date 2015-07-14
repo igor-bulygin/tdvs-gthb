@@ -125,7 +125,7 @@ todevise.controller('tagsCtrl', ["$scope", "$timeout", "$tag", "$tag_util", "$ca
 		}
 
 		//Sort by path length
-		$category_util.sort(_categories);
+		_categories = $category_util.sort(_categories);
 
 		$scope.categories = $category_util.create_tree(_categories);
 		$timeout(function() {

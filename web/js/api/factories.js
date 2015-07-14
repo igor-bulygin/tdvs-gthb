@@ -134,8 +134,8 @@ api.factory("$category_util", function($q, $category) {
 	};
 
 	utils.sort = function(categories) {
-		categories.sort(function(a, b) {
-			return a.path.length > b.path.length;
+		return _.sort(categories, function(obj) {
+			return obj.path.length;
 		});
 	};
 

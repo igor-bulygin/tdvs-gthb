@@ -10,7 +10,7 @@ todevise.controller('tagCtrl', ["$scope", "$timeout", "$tag", "$tag_util", "$cat
 	$scope.type_watch_paused = false;
 
 	//Sort by path length
-	$category_util.sort(_categories);
+	_categories = $category_util.sort(_categories);
 	$scope.categories = $category_util.create_tree(_categories);
 
 	$scope.$watch("tag.type", function(_new, _old) {
