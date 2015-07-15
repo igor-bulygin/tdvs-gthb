@@ -270,6 +270,28 @@ class m150518_083910_create_tag extends \yii\mongodb\Migration {
 				]
 			]
 		]);
+
+		$this->insert('tag', [
+			"short_id" => "60000",
+			"enabled" => true,
+			"required" => true,
+			"type" => Tag::FREETEXT,
+			"name" => [$en => "Test"],
+			"description" => [$en => "Test"],
+			"categories" => ["4d2e3"],
+			"options" => [
+				[
+					"text" => [$en => "Field A"],
+					"type" => TagOption::NUMERIC,
+					"metric_type" => MetricType::SIZE
+				],
+				[
+					"text" => [$en => "Field B"],
+					"type" => TagOption::NUMERIC,
+					"metric_type" => MetricType::SIZE
+				]
+			]
+		]);
 	}
 
 	public function down() {
