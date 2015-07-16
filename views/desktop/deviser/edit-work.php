@@ -422,7 +422,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 								<br />
 
-								<div class="row no-gutter">
+								<div class="row no-gutter" ng-cloak ng-show="false">
 									<div class="row-same-height">
 										<div class="col-xs-4 col-height col-middle">
 											<label class="madetoorder-label funiv_bold fs0-857 fc-6d fw-normal">
