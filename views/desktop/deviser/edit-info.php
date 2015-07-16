@@ -149,19 +149,24 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 		<br />
 
+		<!-- LAS BIOS TIENEN QUE PODER TRADUCIRSE
 		<div class="row no-gutter">
 			<div class="col-xs-12 flex flex-justify-center">
 				<textarea placeholder="<?= Yii::t("app/deviser", "Biography"); ?>" ng-model="deviser.personal_info.biography" class="textarea-bio" rows="8"></textarea>
 			</div>
 		</div>
+		-->
 
 		<br />
 
 		<div class="row no-gutter">
 			<div class="col-xs-12 flex flex-justify-center">
-				<div class="btn btn-save-profile fc-fff funiv fs-upper fs0-786" ng-click="save()">Save</div>
+				<div class="btn btn-save-profile fc-fff funiv fs-upper fs0-786" ng-click="save()"><?= Yii::t("app/deviser", "Save") ?></div>
+				<div style="width: 50px"></div>
+				<div style="background-color: #ccc" class="btn fc-fff funiv fs-upper fs0-786" ng-click="new_product()">Create new product</div>
 			</div>
 		</div>
+
 	</div>
 </div>
 

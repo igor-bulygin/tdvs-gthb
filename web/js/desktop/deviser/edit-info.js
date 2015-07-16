@@ -1,7 +1,7 @@
 var todevise = angular.module('todevise', ['ui.bootstrap', 'angular-multi-select', 'angular-img-dl', 'global-deviser', 'global-desktop', 'api', "ngFileUpload", "ngImgCrop"]);
 var global_deviser = angular.module('global-deviser');
 
-todevise.controller('deviserCtrl', ["$scope", "$timeout", "$deviser", "$deviser_util", "$category_util", "toastr", "$modal", "Upload", "$http", function($scope, $timeout, $deviser, $deviser_util, $category_util, toastr, $modal, Upload, $http) {
+todevise.controller('deviserCtrl', ["$scope", "$timeout", "$deviser", "$deviser_util", "$category_util", "toastr", "$modal", "Upload", "$http", "$product", "$product_util", function($scope, $timeout, $deviser, $deviser_util, $category_util, toastr, $modal, Upload, $http, $product, $product_util) {
 	$scope.lang = _lang;
 	$scope.deviser = _deviser;
 	$scope.api = {};
@@ -66,6 +66,17 @@ todevise.controller('deviserCtrl', ["$scope", "$timeout", "$deviser", "$deviser_
 			$scope.profilephoto = [data.croppedphoto];
 		}, function () {
 			//Cancel
+		});
+	};
+
+	$scope.new_product = function() {
+		var _product = $product_util.newProduct($scope.deviser.short_id);
+		console.log(_product);
+		$product.modify("POST", _product).then(function(data) {
+			console.log(data);
+			window.location.href = window.location.origin + "/" + $scope.deviser.slug + "/edit-work/" + data.short_id + "/";
+		}, function(err) {
+			toastr.error("Couldn't create product!", err);
 		});
 	};
 
