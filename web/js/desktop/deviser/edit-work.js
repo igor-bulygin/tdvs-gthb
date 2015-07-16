@@ -230,9 +230,11 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 		/*
 		 * If there is no size chart selected (and/or country), don't do anything.
 		 */
-		if(!angular.isObject($scope.product.sizechart) || Object.keys($scope.product.sizechart).length === 0 ||
-			!$scope.product.sizechart.hasOwnProperty("country") || $scope.product.sizechart.country === "") {
-			return;
+		if($scope.use_sizecharts === true) {
+			if (!angular.isObject($scope.product.sizechart) || Object.keys($scope.product.sizechart).length === 0 ||
+				!$scope.product.sizechart.hasOwnProperty("country") || $scope.product.sizechart.country === "") {
+				return;
+			}
 		}
 
 		console.log("start ================", _new, _old);
