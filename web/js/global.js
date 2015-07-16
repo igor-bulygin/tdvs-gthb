@@ -1,3 +1,17 @@
+console.log("Global");
+var global = angular.module('global', []);
+
+/**
+ * Iterate over a list of properties of an object and if any of those is an empty array, convert it to an object.
+ * @param obj
+ * @param props
+ */
+global.arrayToObject = function(obj, props) {
+	angular.forEach(props, function(prop) {
+		if(obj.hasOwnProperty(prop) && angular.isArray(obj[prop]) && obj[prop].length === 0) obj[prop] = {};
+	});
+};
+
 /**
  * Return the current host.
  */
