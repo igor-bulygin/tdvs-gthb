@@ -79,7 +79,9 @@ class Person extends CActiveRecord implements IdentityInterface {
 		}
 
 		if($this->personal_info == null) {
-			$this["personal_info"] = [];
+			$this["personal_info"] = [
+				"country" => ""
+			];
 		}
 
 		if($this->media == null) {
