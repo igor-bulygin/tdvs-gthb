@@ -43,6 +43,7 @@ global_desktop.factory("$global_desktop_util", function($http, $q) {
 	return global_desktop_helpers;
 });
 
+/*
 global_desktop.run(function($rootScope, $global_desktop_util, toastr) {
 	$global_desktop_util.getFlashes(false).then(function(data) {
 		angular.forEach(JSON.parse(data), function(v, k) {
@@ -52,3 +53,4 @@ global_desktop.run(function($rootScope, $global_desktop_util, toastr) {
 		//
 	});
 });
+*/
