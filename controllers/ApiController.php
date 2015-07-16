@@ -208,7 +208,7 @@ class ApiController extends CController {
 				$res = $res->asArray()->all();
 			}
 		} else if ($request->isPost) {
-			$_product = $this->getJsonFromRequest("person");
+			$_product = $this->getJsonFromRequest("product");
 			unset($_product["_id"]);
 
 			if ($_product["short_id"] === "new") {
