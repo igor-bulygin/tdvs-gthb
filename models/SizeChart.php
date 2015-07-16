@@ -28,4 +28,39 @@ class SizeChart extends CActiveRecord {
 		];
 	}
 
+	public function beforeSave($insert) {
+		/*
+		 * Create empty data holders if they don't exist
+		 */
+		if($this->name == null) {
+			$this["name"] = [];
+		}
+
+		if($this->type == null) {
+			$this["type"] = 0;
+		}
+
+		if($this->countries == null) {
+			$this["countries"] = [];
+		}
+
+		if($this->columns == null) {
+			$this["columns"] = [];
+		}
+
+		if($this->values == null) {
+			$this["values"] = [];
+		}
+
+		if($this->categories == null) {
+			$this["categories"] = [];
+		}
+
+		if($this->metric_unit == null) {
+			$this["metric_unit"] = "";
+		}
+
+		return parent::beforeSave($insert);
+	}
+
 }

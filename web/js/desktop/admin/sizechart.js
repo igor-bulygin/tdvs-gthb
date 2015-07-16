@@ -14,7 +14,7 @@ todevise.controller('sizeChartCtrl', ["$scope", "$timeout", "$sizechart", "$size
 	$scope.categories = $category_util.create_tree(_categories);
 
 	$scope.$watch("sizechart.metric_unit", function(_new) {
-		if(_new === undefined) return;
+		if(_new === undefined || _new === "") return;
 		var _smallest_unit = jsonpath.parent(_mus, "$..[?(@.value=='" + _new + "')]");
 		$scope.convertFrom = _smallest_unit[0].value;
 		$scope.convertTo = _new;
