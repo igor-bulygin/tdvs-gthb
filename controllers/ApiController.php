@@ -286,7 +286,7 @@ class ApiController extends CController {
 			$fields = json_decode($fields, true) ?: [];
 
 			if (!empty($filters) && $this->intern === false) {
-				$filters = Utils::removeAllExcept($filters, ["short_id"]);
+				$filters = Utils::removeAllExcept($filters, ["short_id", "categories"]);
 				//TODO: If not admin, force some fields (enabled only, visible by public only, etc...)
 				$filters["type"] = SizeChart::TODEVISE;
 			}
