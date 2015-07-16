@@ -40,8 +40,95 @@ class Product extends CActiveRecord {
 		return [
 			'_id',
 			'short_id',
+			'deviser_id',
+			'enabled',
+			'categories',
+			'collections',
+			'name',
+			'description',
+			'media',
+			'options',
+			'madetoorder',
+			'sizechart',
+			'bespoke',
+			'preorder',
+			'returns',
+			'warranty',
+			'currency',
+			'weight_unit',
+			'price_stock',
 
 		];
+	}
+
+	public function beforeSave($insert) {
+		/*
+		 * Create empty data holders if they don't exist
+		 */
+		if($this->categories == null) {
+			$this["categories"] = [];
+		}
+
+		if($this->collections == null) {
+			$this["collections"] = [];
+		}
+
+		if($this->name == null) {
+			$this["name"] = [];
+		}
+
+		if($this->description == null) {
+			$this["description"] = [];
+		}
+
+		if($this->media == null) {
+			$this["media"] = [
+				"videos_links" => [],
+				"photos" => []
+			];
+		}
+
+		if($this->options == null) {
+			$this["options"] = [];
+		}
+
+		if($this->madetoorder == null) {
+			$this["madetoorder"] = [];
+		}
+
+		if($this->sizechart == null) {
+			$this["sizechart"] = [];
+		}
+
+		if($this->bespoke == null) {
+			$this["bespoke"] = [];
+		}
+
+		if($this->preorder == null) {
+			$this["preorder"] = [];
+		}
+
+		if($this->returns == null) {
+			$this["returns"] = [];
+		}
+
+		if($this->warranty == null) {
+			$this["warranty"] = [];
+		}
+
+		if($this->currency == null) {
+			$this["currency"] = "";
+		}
+
+		if($this->weight_unit == null) {
+			$this["weight_unit"] = "";
+		}
+
+		if($this->price_stock == null) {
+			$this["price_stock"] = [];
+		}
+
+		return parent::beforeSave($insert);
 	}
 
 }
