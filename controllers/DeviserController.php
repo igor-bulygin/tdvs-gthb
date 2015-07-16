@@ -6,6 +6,8 @@ use app\models\Lang;
 use yii\helpers\Json;
 use app\helpers\Utils;
 use app\models\Person;
+use app\models\Country;
+use app\models\SizeChart;
 use yii\filters\VerbFilter;
 use app\helpers\CController;
 use yii\filters\AccessControl;
@@ -24,13 +26,37 @@ class DeviserController extends CController {
 			$countries_lookup[$country["country_code"]] = Utils::getValue($country["country_name"], Yii::$app->language, array_keys(Lang::EN_US)[0]);
 		}
 
-		$deviser = $this->api->actionDevisers(Json::encode(["slug" => $slug]))->asArray()->all();
+		$deviser = $this->api->actionDevisers(Json::encode(["slug" => $slug]))->asArray()->one();
+
 		return $this->render("edit-info", [
-			"deviser" => $deviser[0],
+			"deviser" => $deviser,
 			"slug" => $slug,
 			'categories' => $this->api->actionCategories()->asArray()->all(),
 			"countries" => $countries,
 			"countries_lookup" => $countries_lookup
+		]);
+	}
+
+	public function actionEditWork($short_id) {
+		$countries = $this->api->actionCountries()->asArray()->all();
+		$countries_lookup = [];
+		foreach($countries as $country) {
+			$countries_lookup[$country["country_code"]] = Utils::getValue($country["country_name"], Yii::$app->language, array_keys(Lang::EN_US)[0]);
+		}
+		foreach(Country::CONTINENTS as $code => $continent) {
+			$countries_lookup[$code] = Yii::t("app/admin", $continent);
+		}
+
+		$product = $this->api->actionProducts(Json::encode(["short_id" => $short_id]))->asArray()->all();
+		$deviser = $this->api->actionDevisers(Json::encode(["short_id" => $product[0]["deviser_id"]]))->asArray()->one();
+		return $this->render("edit-work", [
+			"deviser" => $deviser,
+			"product" => $product[0],
+			"tags" => $this->api->actionTags()->asArray()->all(),
+			'categories' => $this->api->actionCategories()->asArray()->all(),
+			"countries" => $countries,
+			"countries_lookup" => $countries_lookup,
+			"deviser_sizecharts" => $this->api->actionSizeCharts(Json::encode(["type" => SizeChart::DEVISER, "deviser_id" => $deviser["short_id"]]))->asArray()->all()
 		]);
 	}
 
@@ -74,5 +100,9 @@ class DeviserController extends CController {
 
 			return $deviser;
 		}
+	}
+
+	public function actionUploadProductPhoto($short_id) {
+
 	}
 }
