@@ -57,9 +57,11 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 		var _tags_from_categories = [];
 		var _tmp_tags_ids = []; //We'll use this to avoid duplicate tags
 
+		/*
+		 * Check if we should generate "sizechart" table or activate the "prints" mode.
+		 */
 		var _use_sizecharts = false;
 		var _use_prints = false;
-
 		angular.forEach(_new, function(short_id) {
 			//Generate the tags that must be shown
 			var __category = jsonpath.query(_categories, "$..[?(@.short_id=='" + short_id + "')]")[0];
@@ -79,6 +81,28 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 			if(__category.prints === true) _use_prints = true
 
 		});
+		$scope.use_prints = _use_prints;
+
+		/*
+		 * Fetch all sizecharts that belong to _tmp_tags_ids
+		 * If the result is an empty array, force "_use_sizecharts" to false.
+		 */
+		if(_use_sizecharts) {
+			$sizechart.get({
+				"categories": {
+					"$in": _new
+				}
+			}).then(function(_sizecharts) {
+				console.log("Fetching sizecharts for", _new, "and the result is", _sizecharts);
+				if(_sizecharts.length === 0) {
+					_use_sizecharts = false;
+					$scope.use_sizecharts = _use_sizecharts;
+				} else {
+					$scope.sizecharts = _sizecharts;
+				}
+			});
+		}
+
 
 		$scope.sortTags(_tags_from_categories);
 		$scope.tags_from_categories = _tags_from_categories;
@@ -104,21 +128,6 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 				$scope.product.options[tag_id] = [];
 			}
 		});
-
-		$scope.use_sizecharts = _use_sizecharts;
-
-		//Fetch all sizecharts that belong to _tmp_tags_ids
-		if(_use_sizecharts) {
-			$sizechart.get({
-				"category": {
-					"in": _new
-				}
-			}).then(function(_sizecharts) {
-				$scope.sizecharts = _sizecharts;
-			});
-		}
-
-		$scope.use_prints = _use_prints;
 
 		console.log("Tags", $scope.tags_from_categories);
 	});
