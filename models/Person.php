@@ -83,7 +83,10 @@ class Person extends CActiveRecord implements IdentityInterface {
 		}
 
 		if($this->media == null) {
-			$this["media"] = [];
+			$this["media"] = [
+				"videos_links" => [],
+				"photos" => []
+			];
 		}
 
 		if($this->credentials == null) {
