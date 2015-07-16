@@ -55,6 +55,19 @@ api.factory("$deviser_util", function() {
 	return utils;
 });
 
+api.factory("$product_util", function() {
+	var utils = {};
+
+	utils.newProduct = function(deviser_id) {
+		return {
+			short_id: "new",
+			deviser_id: deviser_id
+		};
+	};
+
+	return utils;
+});
+
 api.factory("$sizechart_util", function() {
 	var utils = {};
 
