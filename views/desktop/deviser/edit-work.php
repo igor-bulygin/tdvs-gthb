@@ -124,8 +124,8 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 						<div class="flex flex-prop-1-0 drop-box-holder">
 							<div ngf-drop ngf-select ngf-keep="true" ngf-keep-distinct="true" ng-model="product.media.photos" class="flex-prop-1-0 drop-box" ngf-drag-over-class="dragover" ngf-multiple="true" ngf-allow-dir="true" ngf-accept="'image/*'">
 
-								<div ng-cloak ng-repeat="photo in product.media.photos" class="col-xs-3 photo-holder" ng-click="$event.stopPropagation();" style="z-index: 100000;">
-									<div class="photo-white-area">
+								<div ng-cloak ng-repeat="photo in product.media.photos" class="col-xs-3 photo-holder">
+									<div class="photo-white-area" ng-click="$event.stopPropagation();">
 										<div ngf-bg-src="photo" class="photo"></div>
 									</div>
 								</div>
