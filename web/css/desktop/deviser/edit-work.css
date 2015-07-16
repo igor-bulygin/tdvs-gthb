@@ -129,6 +129,7 @@
 	-webkit-border-radius: 1em;
 	-moz-border-radius: 1em;
 	border-radius: 1em;
+	min-height: 200px;
 }
 
 .background-holder {

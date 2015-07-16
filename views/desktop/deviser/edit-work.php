@@ -74,7 +74,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 				<div class="row no-gutter">
 					<div class="col-xs-12 flex flex-justify-end">
 						<div class="btn btn-grey fc-fff funiv fs-upper fs0-786 save" ng-click="save()">
-							<span class="glyphicon glyphicon-download-alt tick" aria-hidden="true"><?= Yii::t("app/deviser", "Save progress") ?></span>
+							<span class="glyphicon glyphicon-download-alt tick" aria-hidden="true" ng-click="save()"><?= Yii::t("app/deviser", "Save progress") ?></span>
 						</div>
 						<div class="btn btn-light-green fc-18 funiv fs-upper fs0-786 publish" ng-click="publish()">
 							<span class="glyphicon glyphicon-ok tick" aria-hidden="true"><?= Yii::t("app/deviser", "Publish") ?></span>
@@ -119,7 +119,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 						</div>
 
-						<!--<pre>{{ dump }}</pre>-->
+						<!--<pre>{{ dump_options }}</pre>-->
 
 						<div class="flex flex-prop-1-0 drop-box-holder">
 							<div ngf-drop ngf-select ngf-keep="true" ngf-keep-distinct="true" ng-model="product.media.photos" class="flex-prop-1-0 drop-box" ngf-drag-over-class="dragover" ngf-multiple="true" ngf-allow-dir="true" ngf-accept="'image/*'">
@@ -133,7 +133,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 							</div>
 						</div>
 
-						<div class="row no-gutter video_link_holder" ng-repeat="video in product.media.videos_links track by $index">
+						<div ng-cloak class="row no-gutter video_link_holder" ng-repeat="video in product.media.videos_links track by $index">
 							<div class="row-same-height">
 								<div class="col-xs-11-5 col-height col-middle">
 									<div class="input-group video_link">
@@ -745,7 +745,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 					<div class="col-xs-12">
 
-						<table class="fc-6d funiv fs1-071 fnormal sizechart-table">
+						<table class="fc-6d funiv fs1-071 fnormal sizechart-table" ng-show="true">
 							<thead>
 							<tr>
 								<th class="fpf fs0-857 fnormal text-center sizechart-cell" ng-cloak ng-if="use_sizecharts === true"><?= Yii::t("app/deviser", "Size") ?></th>
@@ -782,13 +782,6 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 											<span ng-show="!$last">x</span>
 										</span>
 									</span>
-
-									<!--
-									<span ng-if="$index == 0">{{ product.sizechart.values[$parent.$parent.$index][$index] }}</span>
-									<span ng-if="$index == 0" class="glyphicon glyphicon-remove pointer" aria-hidden="true"></span>
-									<input ng-if="$index > 0" ng-model="product.sizechart.values[$parent.$parent.$index][$index]" placeholder="0" angular-unit-converter convert-from="mm" convert-to="{{ product.sizechart.metric_unit }}" />
-									<span ng-if="$index > 0">{{ product.sizechart.metric_unit }}</span>
-									-->
 								</td>
 								<td class="text-center pricestock-cell">
 									<input class="text-center" type="number" ng-model="product.price_stock[$index].weight" />

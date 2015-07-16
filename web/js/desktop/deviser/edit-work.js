@@ -1,4 +1,4 @@
-var todevise = angular.module('todevise', ['ui.bootstrap', 'angular-multi-select', 'angular-unit-converter', 'angular-img-dl', 'global-deviser', 'global-desktop', 'api', "ngFileUpload", "ngImgCrop", 'ui.bootstrap.datetimepicker']);
+var todevise = angular.module('todevise', ['ui.bootstrap', 'angular-multi-select', 'angular-unit-converter', 'angular-img-dl', 'global-deviser', 'global-desktop', 'global', 'api', "ngFileUpload", "ngImgCrop", 'ui.bootstrap.datetimepicker']);
 var global_deviser = angular.module('global-deviser');
 
 todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$product", "$category_util", "toastr", "$modal", "Upload", function($scope, $timeout, $sizechart, $product, $category_util, toastr, $modal, Upload) {
@@ -21,14 +21,24 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 	$scope.tmp_selected_lang_name = "";
 	$scope.tmp_selected_lang_desc = "";
 
+	/*
+	 * PHP's arrays have the same notation for arrays and objects and (to|from)JSON
+	 * get's confused. That's why we must help it here.
+	 */
+	global.arrayToObject($scope.product, ["name", "description", "media", "options", "madetoorder", "sizechart", "bespoke", "preorder", "returns", "warranty"]);
+
 	//Required for the name and description dropdowns
 	$scope.langs = [];
 	angular.forEach(_langs, function(v, k) {
 		$scope.langs.push({ "key": k, "value": v });
 	});
 
-	$scope.$watch("product.options", function(_new) {
-		$scope.dump = angular.toJson(_new, 4);
+	$scope.dump = function(obj) {
+		return angular.toJson(obj, 4);
+	};
+
+	$scope.$watch("product.options", function(_new, _old) {
+		$scope.dump_options = angular.toJson(_new, 4);
 	}, true);
 
 	$scope.$watch("product.sizechart", function(_new) {
@@ -72,6 +82,29 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 
 		$scope.sortTags(_tags_from_categories);
 		$scope.tags_from_categories = _tags_from_categories;
+
+		/*
+		 * Check what tags (a) we currently have in product.options, what tags (b) we should
+		 * have, based on the selected categories, and:
+		 * - remove the tags that are in a, but not in b
+		 * - create the tags that are in b, but not in product.options
+		 */
+		var a = Object.keys($scope.product.options);
+		var b = [];
+		angular.forEach(_tags_from_categories, function(tag) {
+			b.push(tag.short_id);
+		});
+
+		var difference = _.difference(a, b);
+		angular.forEach(difference, function(tag_id) {
+			delete $scope.product.options[tag_id];
+		});
+		angular.forEach(b, function(tag_id) {
+			if(!$scope.product.options.hasOwnProperty(tag_id)) {
+				$scope.product.options[tag_id] = [];
+			}
+		});
+
 		$scope.use_sizecharts = _use_sizecharts;
 
 		//Fetch all sizecharts that belong to _tmp_tags_ids
@@ -82,7 +115,6 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 				}
 			}).then(function(_sizecharts) {
 				$scope.sizecharts = _sizecharts;
-				console.log(_sizecharts);
 			});
 		}
 
@@ -112,7 +144,9 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 		});
 
 		$timeout(function() {
-			$scope.api_deviser_sizechart.select_none();
+			try {
+				$scope.api_deviser_sizechart.select_none();
+			} catch(e){}
 		}, 0);
 
 		$scope.product.sizechart.metric_unit = _sizechart.metric_unit;
@@ -186,44 +220,96 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 
 	//Price & Stock table generator
 	$scope.$watch("[product.options, product.sizechart]", function(_new, _old) {
-		//If there are no tags selected, don't do anything.
+		/*
+		 * If there are no tags selected, don't do anything.
+		 */
 		if(!angular.isObject($scope.product.options) || Object.keys($scope.product.options).length === 0) {
 			return;
 		}
 
-		var _options_keys = Object.keys($scope.product.options);
-		$scope.sortTags(_options_keys);
-		var _options = angular.copy($scope.product.options);
+		/*
+		 * If there is no size chart selected (and/or country), don't do anything.
+		 */
+		if(!angular.isObject($scope.product.sizechart) || Object.keys($scope.product.sizechart).length === 0 ||
+			!$scope.product.sizechart.hasOwnProperty("country") || $scope.product.sizechart.country === "") {
+			return;
+		}
 
-		if($scope.use_sizecharts === true) {
-			if(!angular.isObject($scope.product.sizechart) || Object.keys($scope.product.sizechart).length === 0) {
-				return;
+		console.log("start ================", _new, _old);
+
+		/*
+		 * Get all the tags that are currently selected
+		 * ...and then store the IDs of the tags that should be used to generate the "Price & Stock" table.
+		 */
+		var tags = $scope.getTags(Object.keys($scope.product.options));
+		var _tag_ids = [];
+		var _tag_values = {};
+		angular.forEach(tags, function(tag) {
+			if(tag.stock_and_price === true) {
+				_tag_ids.push(tag.short_id);
+				_tag_values[tag.short_id] = $scope.product.options[tag.short_id];
 			}
+		});
 
-			_options_keys.unshift("size");
-			_options["size"] = [];
+		/*
+		 * The user must add at least 1 combination of each required tag and
+		 * all the combinations of all tags should contains values, meaning
+		 * there can't be a combination without values.
+		 */
+		var _quit = false;
+		angular.forEach($scope.product.options, function(values, tag_id) {
+			if(_tag_ids.indexOf(tag_id) === -1) return;
+			if(values.length === 0) _quit = true;
+			angular.forEach(values, function(value) {
+				if(angular.isArray(value) && value.length === 0) _quit = true;
+				if(angular.isObject(value) && Object.keys(value).length === 0) _quit = true;
+			});
+		});
+		if(_quit === true) console.log("quiting!");
+		if(_quit === false) console.log("not quitting");
+		if(_quit === true) return;
+
+		/*
+		 * Sort the tag ids.
+		 * Is this needed?
+		 */
+		//$scope.sortTags(_tag_ids);
+
+		/*
+		 * If the special column "Size" is used (mainly, in 'Fashion'), add "size" to
+		 * the header of the table and the first value of each row in product.sizechart, which
+		 * contains the value of the size for the selected country.
+		 */
+		if($scope.use_sizecharts === true) {
+			_tag_ids.unshift("size");
+			_tag_values["size"] = [];
 
 			angular.forEach($scope.product.sizechart.values, function(row) {
-				_options["size"].push(row[0]);
+				_tag_values["size"].push(row[0]);
 			});
 		}
 
+		console.log("using tags", _tag_ids, _tag_values);
+
 		/*
 		 * We want to generate all the possible combinations in a certain order.
-		 * That is why we do the sortTags() call earlier.
+		 * If the're in 'use_sizecharts' mode, the special tag_id 'size' will be at
+		 * position 0 in the _tag_ids array. If not, it doesn't matter.
 		 */
 		var data = [];
-		angular.forEach(_options_keys, function(tag_id) {
-			data.push(_options[tag_id]);
+		angular.forEach(_tag_ids, function(tag_id) {
+			data.push(_tag_values[tag_id]);
 		});
 
 		//This contains an array will all the possible combinations of tag values (and the size, if applies).
+		console.log("INPUT DATA", data);
 		var _ps_data = $scope.allPossibleCases(data);
+		console.log("PS DATA", _ps_data);
 
 		var _obj;
 		var _price_stock = [];
 		angular.forEach(_ps_data, function(row) {
-			_header = angular.copy(_options_keys);
+			_header = angular.copy(_tag_ids);
 			_obj = {
 				"options": {}
 			};
@@ -236,6 +322,10 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 			angular.forEach(_header, function(tag_id) {
 				_obj.options[tag_id] = row.shift();
 			});
+
+			if(_obj.size === "6") {
+				console.log("Buscando precios para", angular.copy(_obj));
+			}
 
 			var match = null;
 			if($scope.use_sizecharts === true) {
@@ -255,10 +345,14 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 		});
 
 		if($scope.use_sizecharts === true) {
-			_options_keys.shift();
+			_tag_ids.shift();
 		}
-		$scope._ps_header = _options_keys;
+		$scope._ps_header = _tag_ids;
 		$scope.product.price_stock = _price_stock;
+
+		console.log(_price_stock);
+		console.log("end ================");
+
 	}, true);
 
 
@@ -345,6 +439,15 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 		return _match;
 	};
 
+	$scope.getTags = function(tag_ids) {
+		var tags = [];
+		angular.forEach(tag_ids, function(tag_id) {
+			var tag = $scope.getTag(tag_id);
+			if(Object.keys(tag).length > 0) tags.push(tag);
+		});
+		return tags;
+	};
+
 	$scope.getTag = function(tag_id) {
 		var __tag = jsonpath.query(_tags, "$..[?(@.short_id=='" + tag_id + "')]");
 		__tag = __tag.length === 1 ? __tag[0] : {};
@@ -416,20 +519,16 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 	};
 
 	//Create a combination tag (if it doesn't exist already) and add a new, empty, combination.
-	$scope.create_product_option = function(option_id) {
-		if(!$scope.product.options.hasOwnProperty(option_id)) {
-			$scope.product.options[option_id] = [];
+	$scope.create_product_option = function(tag_id) {
+		if(!$scope.product.options.hasOwnProperty(tag_id)) {
+			$scope.product.options[tag_id] = [];
 		}
-		$scope.product.options[option_id].push([]);
+		$scope.product.options[tag_id].push([]);
 	};
 
 	//Remove a tag combination or the entire tag if no combinations are left.
 	$scope.remove_product_option = function(option_id, index) {
 		$scope.product.options[option_id].splice(index, 1);
-
-		if($scope.product.options[option_id].length === 0) {
-			delete $scope.product.options[option_id];
-		}
 	};
 
 	/*
@@ -456,6 +555,7 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 	 * Check if both arrays contain the same values. Order doesn't matter.
 	 */
 	$scope.array_compare = function(a, b) {
+		if(!angular.isArray(a) || !angular.isArray(b)) return false;
 		if (a.length != b.length) return false;
 		for (var i = 0; i < b.length; i++) {
 			if (a.indexOf(b[i]) === -1) return false;
@@ -505,8 +605,6 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 	};
 
 	$scope.save = function() {
-
-		//TODO: Asegurarse de guardar solo los nuevos tags en las opciones del producto, borrando las que se han deseleccionado.
 
 		$product.modify("POST", $scope.product).then(function() {
 			toastr.success("Product saved successfully!");
