@@ -769,14 +769,14 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 								<td ng-cloak ng-if="use_sizecharts === true" class="text-center pricestock-cell">{{ product.price_stock[$index].size }}</td>
 								<td ng-repeat="(tag_id, values) in product.price_stock[$index].options track by $index" ng-init="tag = getTag(tag_id)" class="text-center pricestock-cell">
 									<span ng-if="tag.type == <?= Tag::DROPDOWN ?>">
-										<span ng-repeat="value in values">
+										<span ng-repeat="value in values track by $index">
 											{{ getTagOption($parent.tag, value).text[lang] }}
 											<span ng-show="!$last">,</span>
 										</span>
 									</span>
 
 									<span ng-if="tag.type == <?= Tag::FREETEXT ?>">
-										<span ng-repeat="value in values">
+										<span ng-repeat="value in values track by $index">
 											{{ value.value }}
 											{{ value.metric_unit }}
 											<span ng-show="!$last">x</span>
