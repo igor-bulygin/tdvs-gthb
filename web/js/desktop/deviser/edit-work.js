@@ -547,7 +547,7 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 			var option = [];
 			angular.forEach(tag.options, function(_option) {
 				option.push({
-					metric_unit: "",
+					metric_unit: $scope.mus[_option.metric_type].sub[0].value,
 					value: 0
 				})
 			});
