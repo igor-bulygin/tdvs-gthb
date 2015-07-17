@@ -534,7 +534,28 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 		if(!$scope.product.options.hasOwnProperty(tag_id)) {
 			$scope.product.options[tag_id] = [];
 		}
-		$scope.product.options[tag_id].push([]);
+		var tag = $scope.getTag(tag_id);
+
+		/*
+		 * If the tag is a dropdown, we insert a simple empty array.
+		 * Else, if the tag is a freetext, we insert an array of as many
+		 * objects as the tag has.
+		 */
+		if(tag.type === 0) {
+			$scope.product.options[tag_id].push([]);
+		} else if(tag.type === 1) {
+			var option = [];
+			angular.forEach(tag.options, function(_option) {
+				option.push({
+					metric_unit: "",
+					value: 0
+				})
+			});
+			$scope.product.options[tag_id].push(option);
+		} else {
+			// Future types of tags?
+		}
+
 	};
 
 	//Remove a tag combination or the entire tag if no combinations are left.
