@@ -28,7 +28,7 @@
 	padding: 0.7% 1%;
 	border-radius: 2em;
 	letter-spacing: 1px;
-	max-height: 6vh;
+	max-height: 3em;
 	margin-top: 5%;
 }
 
@@ -125,7 +125,8 @@
 	height: 100%;
 }
 
-.create-profile input,
+.create-profile .input-name,
+.create-profile .input-city,
 .create-profile textarea {
 	outline: none;
 	background-color: #fff;
