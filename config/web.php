@@ -30,7 +30,13 @@ $config = [
 
 		//Assets
 		'assetManager' => [
-			'appendTimestamp' => true
+			'appendTimestamp' => true,
+			'bundles' => [
+				'yii\bootstrap\BootstrapAsset' => [
+					'sourcePath' => '',
+					'css' => []
+				],
+			],
 		],
 
 		//Cache
