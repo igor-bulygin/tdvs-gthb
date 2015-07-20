@@ -14,7 +14,6 @@ class EditWorkAsset extends AssetBundle {
 	];
 	public $depends = [
 		'app\assets\api\ApiAsset',
-		'app\assets\libs\bootstrapAsset',
 		'app\assets\libs\angularMultiSelectAsset',
 		'app\assets\libs\angularUnitConverterAsset',
 		'app\assets\libs\angularImgDlAsset',
