@@ -96,10 +96,10 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 				console.log("Fetching sizecharts for", _new, "and the result is", _sizecharts);
 				if(_sizecharts.length === 0) {
 					_use_sizecharts = false;
-					$scope.use_sizecharts = _use_sizecharts;
 				} else {
 					$scope.sizecharts = _sizecharts;
 				}
+				$scope.use_sizecharts = _use_sizecharts;
 			});
 		}
 
