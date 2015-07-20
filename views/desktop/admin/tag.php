@@ -74,10 +74,10 @@ $this->title = 'Todevise / Admin / Tag';
 
 					item-label="{{ name[lang] }}"
 					selection-mode="multi"
-					search-property="name[lang]"
+					search-property="name['{{ lang }}']"
 					min-search-length="3"
 					hidden-property="hidden"
-					helper-elements="noall nonone noreset nofilter">
+					helper-elements="noall nonone noreset filter">
 				</div>
 
 			</div>

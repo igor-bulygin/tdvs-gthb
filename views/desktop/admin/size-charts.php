@@ -50,10 +50,10 @@ $this->title = 'Todevise / Admin / Size charts';
 
 						item-label="{{ name[lang] }}"
 						selection-mode="single"
-						search-property="name"
+						search-property="name['{{ lang }}']"
 						min-search-length="3"
 						hidden-property="hidden"
-						helper-elements="noall nonone noreset nofilter"
+						helper-elements="noall nonone noreset filter"
 					></div>
 				</div>
 
@@ -136,7 +136,7 @@ $this->title = 'Todevise / Admin / Size charts';
 					tick-property="check"
 					item-label="{{ name[data.lang] }}"
 					selection-mode="single"
-					search-property="name[data.lang]"
+					search-property="name['{{ data.lang }}']"
 					min-search-length="3"
 					helper-elements="noall nonone noreset filter"
 					button-template="angular-multi-select-btn-data.htm"
