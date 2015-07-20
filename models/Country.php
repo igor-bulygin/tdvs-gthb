@@ -12,6 +12,7 @@ class Country extends CActiveRecord {
 	const NORTH_AMERICA = "NA";
 	const AUSTRALIA = "OC";
 	const SOUTH_AMERICA = "SA";
+	const WORLD_WIDE = "WW";
 
 	const CONTINENTS = [
 		Country::AFRICA => "Africa",
@@ -20,7 +21,8 @@ class Country extends CActiveRecord {
 		Country::EUROPE => "Europe",
 		Country::NORTH_AMERICA => "North America",
 		Country::SOUTH_AMERICA => "South America",
-		Country::AUSTRALIA => "Australia"
+		Country::AUSTRALIA => "Australia",
+		Country::WORLD_WIDE => "World Wide"
 	];
 
 	function __construct() {
@@ -31,6 +33,7 @@ class Country extends CActiveRecord {
 		Yii::t("app/admin", "North America");
 		Yii::t("app/admin", "South America");
 		Yii::t("app/admin", "Australia");
+		Yii::t("app/admin", "World wide");
 	}
 
 	public static function collectionName() {
