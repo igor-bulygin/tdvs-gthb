@@ -229,6 +229,7 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 
 	//Price & Stock table generator
 	$scope.$watch("[product.options, product.sizechart]", function(_new, _old) {
+		$scope.show_pricestock = false;
 		/*
 		 * If there are no tags selected, don't do anything.
 		 */
@@ -253,11 +254,11 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 		 * ...and then store the IDs of the tags that should be used to generate the "Price & Stock" table.
 		 */
 		var tags = $scope.getTags(Object.keys($scope.product.options));
-		var _tag_ids = [];
+		$scope.required_tags_ids = [];
 		var _tag_values = {};
 		angular.forEach(tags, function(tag) {
 			if(tag.stock_and_price === true) {
-				_tag_ids.push(tag.short_id);
+				$scope.required_tags_ids.push(tag.short_id);
 				_tag_values[tag.short_id] = $scope.product.options[tag.short_id];
 			}
 		});
@@ -269,7 +270,7 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 		 */
 		var _quit = false;
 		angular.forEach($scope.product.options, function(values, tag_id) {
-			if(_tag_ids.indexOf(tag_id) === -1) return;
+			if($scope.required_tags_ids.indexOf(tag_id) === -1) return;
 			if(values.length === 0) _quit = true;
 			angular.forEach(values, function(value) {
 				if(angular.isArray(value) && value.length === 0) _quit = true;
@@ -292,7 +293,7 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 		 * contains the value of the size for the selected country.
 		 */
 		if($scope.use_sizecharts === true) {
-			_tag_ids.unshift("size");
+			$scope.required_tags_ids.unshift("size");
 			_tag_values["size"] = [];
 
 			angular.forEach($scope.product.sizechart.values, function(row) {
@@ -300,7 +301,7 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 			});
 		}
 
-		console.log("using tags", _tag_ids, _tag_values);
+		console.log("using tags", $scope.required_tags_ids, _tag_values);
 
 		/*
 		 * We want to generate all the possible combinations in a certain order.
@@ -308,7 +309,7 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 		 * position 0 in the _tag_ids array. If not, it doesn't matter.
 		 */
 		var data = [];
-		angular.forEach(_tag_ids, function(tag_id) {
+		angular.forEach($scope.required_tags_ids, function(tag_id) {
 			data.push(_tag_values[tag_id]);
 		});
 
@@ -320,7 +321,7 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 		var _obj;
 		var _price_stock = [];
 		angular.forEach(_ps_data, function(row) {
-			_header = angular.copy(_tag_ids);
+			_header = angular.copy($scope.required_tags_ids);
 			_obj = {
 				"options": {}
 			};
@@ -356,10 +357,12 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 		});
 
 		if($scope.use_sizecharts === true) {
-			_tag_ids.shift();
+			$scope.required_tags_ids.shift();
 		}
-		$scope._ps_header = _tag_ids;
+		$scope._ps_header = $scope.required_tags_ids;
 		$scope.product.price_stock = _price_stock;
+
+		$scope.show_pricestock = true;
 
 		console.log(_price_stock);
 		console.log("end ================");

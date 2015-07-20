@@ -21,6 +21,7 @@ use app\assets\desktop\deviser\EditWorkAsset;
 /* @var $countries ArrayObject */
 /* @var $categories ArrayObject */
 /* @var $countries_lookup ArrayObject */
+/* @var $deviser_sizecharts ArrayObject */
 
 $this->params['breadcrumbs'][] = [
 	'label' => 'Index',
@@ -205,12 +206,15 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 						<div ng-cloak ng-form="formOptions" class="col-xs-12" ng-repeat="tag in tags_from_categories">
 
 							<div ng-cloak ng-if="tag.type === 0">
-								<span class="fs0-857 funiv_bold fc-6d tag-title-dropdown">{{ tag.name[lang] }}</span>
+								<span class="fs0-857 funiv_bold fc-6d tag-title-dropdown">
+									<span class="fs0-714 fc-f7284b glyphicon glyphicon-asterisk" ng-if="required_tags_ids.indexOf(tag.short_id) !== -1"></span>
+									{{ ::tag.name[lang] }} - {{ ::tag.description[lang] }}
+								</span>
 
 								<div class="combination-row" ng-repeat="values in product.options[tag.short_id] track by $index">
 									<div class="row no-gutter flex flex-align-center">
 										<div class="col-xs-0-5 fs0-857 funiv_bold fc-6d">
-											{{ $index + 1 }}:
+											{{ ::$index + 1 }}:
 										</div>
 
 										<div class="col-xs-11">
@@ -251,7 +255,10 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 							<div ng-cloak ng-if="tag.type === 1">
 
-								<span class="fs0-857 funiv_bold fc-6d tag-title-freetext">{{ tag.name[lang] }}</span>
+								<span class="fs0-857 funiv_bold fc-6d tag-title-dropdown">
+									<span class="fs0-714 fc-f7284b glyphicon glyphicon-asterisk" ng-if="required_tags_ids.indexOf(tag.short_id) !== -1"></span>
+									{{ ::tag.name[lang] }} - {{ ::tag.description[lang] }}
+								</span>
 
 
 								<div class="combination-row" ng-repeat="values in product.options[tag.short_id] track by $index">
@@ -327,6 +334,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 								</div>
 
+								<br />
 								<span class="fc-7aaa4a fs0-857 funiv_bold pointer new-combination" ng-click="create_product_option(tag.short_id)">
 									<?= Yii::t("app/deviser", "Create new combination +") ?>
 								</span>
@@ -404,8 +412,8 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 												<?= Yii::t("app/deviser", "This work is made-to-order") ?>
 											</label>
 										</div>
-										<div class="col-xs-1 col-height col-middle">
-											<div ng-hide="product.madetoorder.type == <?= MadeToOrder::NONE ?>" class="input-group spinner">
+										<div class="col-xs-1 col-height col-middle" ng-hide="!product.madetoorder.type || product.madetoorder.type === <?= MadeToOrder::NONE ?>">
+											<div class="input-group spinner">
 												<input type="text" class="form-control" ng-model="product.madetoorder.value">
 												<div class="input-group-btn-vertical">
 													<button class="btn btn-default btn-xs" type="button" ng-click="product.madetoorder.value = product.madetoorder.value + 1"><span class="glyphicon glyphicon-triangle-top"></span></button>
@@ -414,7 +422,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 											</div>
 										</div>
 										<div class="col-xs-1 col-height col-middle"></div>
-										<div class="col-xs-6 col-height col-middle">
+										<div class="col-xs-6 col-height col-middle" ng-hide="!product.madetoorder.type || product.madetoorder.type === <?= MadeToOrder::NONE ?>">
 											<span class="funiv_bold fs0-857 fc-6d fw-normal"><?= Yii::t("app/deviser", "days to manufacturing") ?></span>
 										</div>
 									</div>
@@ -446,13 +454,13 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 								<span class="funiv_bold fs-1 fc-3d"><?= Yii::t("app/deviser", "Pre-order") ?></span>
 							</div>
 
-							<div class="col-xs-12" ng-init="product.preorder.type = 0">
+							<div class="col-xs-12" ng-init="product.preorder.type = <?= Preorder::NO ?>">
 
 								<div class="row no-gutter">
 									<div class="row-same-height">
 										<div class="col-xs-4 col-height col-top">
 											<label class="preorder-label funiv_bold fs0-857 fc-6d fw-normal">
-												<input type="checkbox" ng-model="product.preorder.type" ng-false-value="<?= Preorder::NO ?>" ng-true-value="<?= Preorder::NO ?>">
+												<input type="checkbox" ng-model="product.preorder.type" ng-false-value="<?= Preorder::NO ?>" ng-true-value="<?= Preorder::YES ?>">
 												<?= Yii::t("app/deviser", "This is in pre-order") ?>
 											</label>
 										</div>
@@ -745,11 +753,13 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 					<div class="col-xs-12">
 
-						<table class="fc-6d funiv fs1-071 fnormal sizechart-table" ng-show="true">
+						<div class="fc-333 funiv fs1-071 fnormal" ng-hide="show_pricestock"><?= Yii::t("app/deviser", "The price & stock table will be available when all required tags have at least 1 combination.") ?></div>
+
+						<table class="fc-6d funiv fs1-071 fnormal pricestock-table" ng-show="show_pricestock">
 							<thead>
 							<tr>
-								<th class="fpf fs0-857 fnormal text-center sizechart-cell" ng-cloak ng-if="use_sizecharts === true"><?= Yii::t("app/deviser", "Size") ?></th>
-								<th class="fpf fs0-857 fnormal text-center sizechart-cell" ng-cloak ng-repeat="tag_id in $parent._ps_header track by $index" ng-init="tag = getTag(tag_id)">
+								<th class="fpf fs0-857 fnormal text-center pricestock-cell" ng-cloak ng-if="use_sizecharts === true"><?= Yii::t("app/deviser", "Size") ?></th>
+								<th class="fpf fs0-857 fnormal text-center pricestock-cell" ng-cloak ng-repeat="tag_id in $parent._ps_header track by $index" ng-init="tag = getTag(tag_id)">
 									{{ tag.name[lang] }}
 									<span ng-if="tag.type == <?= Tag::DROPDOWN ?>"></span>
 									<span ng-if="tag.type == <?= Tag::FREETEXT ?>">(
@@ -758,9 +768,9 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 										</span>
 									)</span>
 								</th>
-								<th class="fpf fs0-857 fnormal text-center sizechart-cell"><?= Yii::t("app/deviser", "Weight") ?></th>
-								<th class="fpf fs0-857 fnormal text-center sizechart-cell"><?= Yii::t("app/deviser", "Stock") ?></th>
-								<th class="fpf fs0-857 fnormal text-center sizechart-cell"><?= Yii::t("app/deviser", "Price") ?></th>
+								<th class="fpf fs0-857 fnormal text-center pricestock-cell"><?= Yii::t("app/deviser", "Weight") ?></th>
+								<th class="fpf fs0-857 fnormal text-center pricestock-cell"><?= Yii::t("app/deviser", "Stock") ?></th>
+								<th class="fpf fs0-857 fnormal text-center pricestock-cell"><?= Yii::t("app/deviser", "Price") ?></th>
 							</tr>
 							</thead>
 							<tbody>
@@ -805,7 +815,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 				<div ng-if="use_prints == true" class="sep_dark"></div>
 				<div ng-if="use_prints == true" class="row no-gutter">
 					<div class="col-xs-12">
-						<?= Yii::t("app/deviser", "Prints") ?>
+						<span class="funiv_bold fs-1 fc-3d"><?= Yii::t("app/deviser", "Prints") ?></span>
 					</div>
 
 					<div class="col-xs-12">
