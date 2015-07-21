@@ -54,7 +54,7 @@ class DeviserController extends CController {
 		return $this->render("edit-work", [
 			"deviser" => $deviser,
 			"product" => $product[0],
-			"tags" => $this->api->actionTags("", Json::encode(["_id" => 0, "short_id", "enabled", "n_options", "required", "type", "name.$lang", "description.$lang", "categories", "options"]))->asArray()->all(),
+			"tags" => $this->api->actionTags("", Json::encode(["_id" => 0, "short_id", "enabled", "n_options", "required", "stock_and_price", "type", "name.$lang", "description.$lang", "categories", "options"]))->asArray()->all(),
 			'categories' => $this->api->actionCategories("", Json::encode(["_id" => 0, "short_id", "path", "name.$lang"]))->asArray()->all(),
 			"countries" => $countries,
 			"countries_lookup" => $countries_lookup,
