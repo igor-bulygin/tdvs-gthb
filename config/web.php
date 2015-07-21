@@ -136,6 +136,8 @@ $config = [
 				//Link for deviser header & profile photo upload
 				'<slug:[0-9a-z-A-Z\-]*?>/upload-header-photo/' =>  'deviser/upload-header-photo',
 				'<slug:[0-9a-z-A-Z\-]*?>/upload-profile-photo/' =>  'deviser/upload-profile-photo',
+				'<slug:[0-9a-z-A-Z\-]*?>/<short_id:[0-9a-z-A-Z\-]*?>/upload-product-photo/' =>  'deviser/upload-product-photo',
+				'<slug:[0-9a-z-A-Z\-]*?>/<short_id:[0-9a-z-A-Z\-]*?>/delete-product-photo/' =>  'deviser/delete-product-photo',
 
 				//Link for deviser work
 				'<slug:[0-9a-z-A-Z\-]*?>/edit-work/<short_id:\w{8}>/' =>  'deviser/edit-work',
