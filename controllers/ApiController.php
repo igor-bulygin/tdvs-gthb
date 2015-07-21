@@ -105,19 +105,20 @@ class ApiController extends CController {
 	}
 	*/
 
-	public function actionCountries($filters = null) {
+	public function actionCountries($filters = null, $fields = null) {
 		$request = Yii::$app->getRequest();
 		$res = null;
 
 		if ($request->isGet) {
 			$filters = json_decode($filters, true) ?: [];
+			$fields = json_decode($fields, true) ?: [];
 
 			if (!empty($filters) && $this->intern === false) {
 				$filters = Utils::removeAllExcept($filters, []);
 				//TODO: If not admin, force some fields (enabled only, visible by public only, etc...)
 			}
 
-			$res = empty($filters) ? Country::find() : Country::find()->where($filters);
+			$res = empty($filters) ? Country::find()->select($fields) : Country::find()->select($fields)->where($filters);
 
 			if($this->intern === false) {
 				$res = $res->asArray()->all();
@@ -232,12 +233,13 @@ class ApiController extends CController {
 		return $res;
 	}
 
-	public function actionTags($filters = null) {
+	public function actionTags($filters = null, $fields = null) {
 		$request = Yii::$app->getRequest();
 		$res = null;
 
 		if ($request->isGet) {
 			$filters = json_decode($filters, true) ?: [];
+			$fields = json_decode($fields, true) ?: [];
 
 			if (!empty($filters) && $this->intern === false) {
 				$filters = Utils::removeAllExcept($filters, ["short_id", "required", "type", "categories"]);
@@ -247,7 +249,7 @@ class ApiController extends CController {
 				//TODO: If not admin, force only enabled, etc...
 			}
 
-			$res = empty($filters) ? Tag::find() : Tag::find()->where($filters);
+			$res = empty($filters) ? Tag::find()->select($fields) : Tag::find()->select($fields)->where($filters);
 
 			if($this->intern === false) {
 				$res = $res->asArray()->all();
@@ -321,12 +323,14 @@ class ApiController extends CController {
 		return $res;
 	}
 
-	public function actionCategories($filters = null) {
+	public function actionCategories($filters = null, $fields = null) {
 		$request = Yii::$app->getRequest();
 		$res = null;
 
 		if ($request->isGet) {
 			$filters = json_decode($filters, true) ?: [];
+			$fields = json_decode($fields, true) ?: [];
+			error_log(print_r($fields, true), 4);
 
 			if (!empty($filters) && $this->intern === false) {
 				$filters = Utils::removeAllExcept($filters, ["short_id", "path"]);
@@ -334,7 +338,7 @@ class ApiController extends CController {
 				//TODO: If not admin, force only enabled, etc...
 			}
 
-			$res = empty($filters) ? Category::find() : Category::find()->where($filters);
+			$res = empty($filters) ? Category::find()->select($fields) : Category::find()->select($fields)->where($filters);
 
 			if($this->intern === false) {
 				$res = $res->asArray()->all();
