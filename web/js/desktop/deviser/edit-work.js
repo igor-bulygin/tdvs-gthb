@@ -1,7 +1,7 @@
 var todevise = angular.module('todevise', ['ui.bootstrap', 'angular-multi-select', 'angular-unit-converter', 'angular-img-dl', 'global-deviser', 'global-desktop', 'global', 'api', "ngFileUpload", "ngImgCrop", 'ui.bootstrap.datetimepicker']);
 var global_deviser = angular.module('global-deviser');
 
-todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$product", "$category_util", "toastr", "$modal", "Upload", function($scope, $timeout, $sizechart, $product, $category_util, toastr, $modal, Upload) {
+todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$product", "$category_util", "toastr", "$modal", "Upload", "$http", function($scope, $timeout, $sizechart, $product, $category_util, toastr, $modal, Upload, $http) {
 	$scope.lang = _lang;
 	$scope.deviser = _deviser;
 	$scope.product = _product;
@@ -20,6 +20,8 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 	$scope.tmp_selected_sizechart_country = "";
 	$scope.tmp_selected_lang_name = "";
 	$scope.tmp_selected_lang_desc = "";
+
+	$scope._base_product_photo_url = _base_product_photo_url;
 
 	/*
 	 * PHP's arrays have the same notation for arrays and objects and (to|from)JSON
@@ -263,6 +265,8 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 			}
 		});
 
+		console.log("Required tags", $scope.required_tags_ids);
+
 		/*
 		 * The user must add at least 1 combination of each required tag and
 		 * all the combinations of all tags should contains values, meaning
@@ -334,10 +338,6 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 			angular.forEach(_header, function(tag_id) {
 				_obj.options[tag_id] = row.shift();
 			});
-
-			if(_obj.size === "6") {
-				console.log("Buscando precios para", angular.copy(_obj));
-			}
 
 			var match = null;
 			if($scope.use_sizecharts === true) {
@@ -639,34 +639,89 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 		return _found;
 	};
 
+	$scope.delete_photo = function(index, event) {
+		event.stopPropagation();
+		var _photo = $scope.product.media.photos[index];
+
+		/**
+		 * Remove the photo from the server (if it is uploaded)
+		 * and from the photos array
+		 */
+		if(_photo.not_uploaded === undefined) {
+			//Remove from the server $http...
+			$http({
+				method: "POST",
+				headers: {
+					'X-Requested-With': 'XMLHttpRequest',
+					'X-CSRF-Token': yii.getCsrfToken()
+				},
+				url: _delete_product_photo_url,
+				data: {
+					"photo_name": _photo.name
+				}
+			}).success(function(data, status, headers, config) {
+				toastr.success("Photo removed successfully!");
+			}).error(function(data, status, headers, config) {
+				toastr.error("Couldn't remove photo!", data);
+			});
+		}
+
+		$scope.product.media.photos.splice(index, 1);
+	};
+
+	$scope.$watch("shadow_photos", function(_new) {
+		if(!angular.isArray(_new)) return;
+
+		var photo;
+		while( (photo = _new.shift()) !== undefined) {
+			$scope.product.media.photos.push({
+				name: "",
+				tags: [],
+				blob: photo,
+				not_uploaded: true
+			});
+		}
+
+	});
+
 	$scope.save = function() {
+
+		angular.forEach($scope.product.media.photos, function(photo) {
+			if(photo.not_uploaded !== true) return;
+
+			delete photo.not_uploaded;
+
+			Upload.upload({
+				headers : {
+					'X-CSRF-TOKEN' : yii.getCsrfToken()
+				},
+				url: _upload_product_photo_url,
+				file: photo.blob,
+				fields: {
+					'data': {
+						'name': photo.name,
+						'tags': photo.tags
+					}
+				}
+			}).progress(function(e) {
+				//var progressPercentage = parseInt(100.0 * e.loaded / e.total);
+				//console.log('progress: ' + progressPercentage + '% ' + e.config.file.name);
+			}).success(function(data, status, header, config) {
+				//console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
+
+				toastr.success("Uploaded successfully headerphoto photo", config.file.name);
+			}).error(function(err) {
+				photo.not_uploaded = true;
+				toastr.error("Error while uploading headerphoto photo", err)
+			});
+
+		});
 
 		$product.modify("POST", $scope.product).then(function() {
 			toastr.success("Product saved successfully!");
 		}, function(err) {
 			toastr.error("Failed saving product!", err);
 		});
-
-		/*
-		 if($scope.headerphoto && $scope.headerphoto.length === 1) {
-		 Upload.upload({
-		 headers : {
-		 'X-CSRF-TOKEN' : yii.getCsrfToken()
-		 },
-		 url: '/upload-header-photo/',
-		 file: $scope.headerphoto[0]
-		 }).progress(function(e) {
-		 //var progressPercentage = parseInt(100.0 * e.loaded / e.total);
-		 //console.log('progress: ' + progressPercentage + '% ' + e.config.file.name);
-		 }).success(function(data, status, header, config) {
-		 //console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
-		 $scope.deviser = data;
-		 toastr.success("Uploaded successfully headerphoto photo", config.file.name);
-		 }).error(function(err) {
-		 toastr.error("Error while uploading headerphoto photo", err)
-		 });
-		 }
-		 */
 
 	};
 

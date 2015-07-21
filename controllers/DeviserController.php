@@ -7,6 +7,7 @@ use yii\helpers\Json;
 use app\helpers\Utils;
 use app\models\Person;
 use app\models\Country;
+use app\models\Product;
 use app\models\SizeChart;
 use yii\filters\VerbFilter;
 use app\helpers\CController;
@@ -38,7 +39,8 @@ class DeviserController extends CController {
 	}
 
 	public function actionEditWork($short_id) {
-		$countries = $this->api->actionCountries()->asArray()->all();
+		$lang = Yii::$app->language;
+		$countries = $this->api->actionCountries("", Json::encode(["_id" => 0, "country_name.$lang", "country_code", "continent"]))->asArray()->all();
 		$countries_lookup = [];
 		foreach($countries as $country) {
 			$countries_lookup[$country["country_code"]] = Utils::getValue($country["country_name"], Yii::$app->language, array_keys(Lang::EN_US)[0]);
@@ -52,8 +54,8 @@ class DeviserController extends CController {
 		return $this->render("edit-work", [
 			"deviser" => $deviser,
 			"product" => $product[0],
-			"tags" => $this->api->actionTags()->asArray()->all(),
-			'categories' => $this->api->actionCategories()->asArray()->all(),
+			"tags" => $this->api->actionTags("", Json::encode(["_id" => 0, "short_id", "enabled", "n_options", "required", "type", "name.$lang", "description.$lang", "categories", "options"]))->asArray()->all(),
+			'categories' => $this->api->actionCategories("", Json::encode(["_id" => 0, "short_id", "path", "name.$lang"]))->asArray()->all(),
 			"countries" => $countries,
 			"countries_lookup" => $countries_lookup,
 			"deviser_sizecharts" => $this->api->actionSizeCharts(Json::encode(["type" => SizeChart::DEVISER, "deviser_id" => $deviser["short_id"]]))->asArray()->all()
@@ -102,7 +104,48 @@ class DeviserController extends CController {
 		}
 	}
 
-	public function actionUploadProductPhoto($short_id) {
+	public function actionUploadProductPhoto($slug, $short_id) {
+		/* @var $product \app\models\Product */
+		$product = Product::findOne(["short_id" => $short_id]);
 
+		$data = Yii::$app->request->getBodyParam("data", null);
+		if($data === null) return;
+
+		$data = Json::decode($data);
+		$product_path = Utils::join_paths(Yii::getAlias("@product"), $short_id);
+
+		//If we passed a name, make sure to override the existing file
+		$data["name"] = $data["name"] === "" ? null : $data["name"];
+		$res = $this->savePostedFile($product_path, $data["name"]);
+
+		if($res !== false) {
+			$media = $product->media;
+			$media["photos"][] = [
+				"name" => $res,
+				"tags" => $data["tags"]
+			];
+			$product->media = $media;
+			$product->save();
+
+			return $product;
+		}
+	}
+
+	public function actionDeleteProductPhoto($slug, $short_id) {
+		/* @var $product \app\models\Product */
+		$product = Product::findOne(["short_id" => $short_id]);
+		$product_path = Utils::join_paths(Yii::getAlias("@product"), $product->short_id);
+		$photo_name = $this->getJsonFromRequest("photo_name");
+
+		@unlink(Utils::join_paths($product_path, $photo_name));
+
+		$media = $product->media;
+		$media["photos"] = array_filter($media["photos"], function($photo) use ($photo_name) {
+			return $photo["name"] !== $photo_name;
+		});
+		$product->media = $media;
+		$product->save();
+
+		return $product;
 	}
 }

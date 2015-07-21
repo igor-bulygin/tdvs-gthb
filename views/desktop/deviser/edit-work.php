@@ -1,6 +1,7 @@
 <?php
-use app\models\Tag;
 use yii\web\View;
+use app\models\Tag;
+use yii\helpers\Url;
 use app\models\Lang;
 use yii\helpers\Json;
 use app\helpers\Utils;
@@ -40,14 +41,14 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 <div class="row no-gutter" ng-controller="productCtrl" ng-init="init()">
 	<div class="col-xs-12 no-horizontal-padding">
 
-		<?php $this->registerJs("var _tags = " . Json::encode($tags) . ";", View::POS_HEAD); ?>
-		<?php $this->registerJs("var _deviser = " . Json::encode($deviser) . ";", View::POS_HEAD); ?>
-		<?php $this->registerJs("var _product = " . Json::encode($product) . ";", View::POS_HEAD); ?>
-		<?php $this->registerJs("var _categories = " . Json::encode($categories) . ";", View::POS_HEAD); ?>
-		<?php $this->registerJs("var _currencies = " . Json::encode(Currency::CURRENCIES) . ";", View::POS_HEAD); ?>
-		<?php $this->registerJs("var _countries = " . Json::encode($countries) . ";", View::POS_HEAD); ?>
-		<?php $this->registerJs("var _countries_lookup = " . Json::encode($countries_lookup) . ";", View::POS_HEAD); ?>
-		<?php $this->registerJs("var _deviser_sizecharts = " . Json::encode($deviser_sizecharts) . ";", View::POS_HEAD); ?>
+		<?php $this->registerJs("var _tags = " . Json::encode($tags) . ";", View::POS_END); ?>
+		<?php $this->registerJs("var _deviser = " . Json::encode($deviser) . ";", View::POS_END); ?>
+		<?php $this->registerJs("var _product = " . Json::encode($product) . ";", View::POS_END); ?>
+		<?php $this->registerJs("var _categories = " . Json::encode($categories) . ";", View::POS_END); ?>
+		<?php $this->registerJs("var _currencies = " . Json::encode(Currency::CURRENCIES) . ";", View::POS_END); ?>
+		<?php $this->registerJs("var _countries = " . Json::encode($countries) . ";", View::POS_END); ?>
+		<?php $this->registerJs("var _countries_lookup = " . Json::encode($countries_lookup) . ";", View::POS_END); ?>
+		<?php $this->registerJs("var _deviser_sizecharts = " . Json::encode($deviser_sizecharts) . ";", View::POS_END); ?>
 		<?php $this->registerJs("var _mus = " . Json::encode([
 			[
 				"text" => Yii::t("app/admin", MetricType::TXT[MetricType::NONE]),
@@ -61,7 +62,16 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 				"text" => Yii::t("app/admin", MetricType::TXT[MetricType::WEIGHT]),
 				"sub" => array_map(function($x) { return ["text" => $x, "value" => $x]; }, MetricType::UNITS[MetricType::WEIGHT])
 			]
-		]) . ";", View::POS_HEAD); ?>
+		]) . ";", View::POS_END); ?>
+		<?php $this->registerJs("var _base_product_photo_url = '" . Yii::getAlias("@product_url") . "/" . $product["short_id"] . "/" . "';", View::POS_END); ?>
+		<?php $this->registerJs("var _upload_product_photo_url = '" . Url::to(["deviser/upload-product-photo", "slug" => $deviser["slug"], "short_id" => $product["short_id"]]) . "';", View::POS_END); ?>
+		<?php $this->registerJs("var _delete_product_photo_url = '" . Url::to(["deviser/delete-product-photo", "slug" => $deviser["slug"], "short_id" => $product["short_id"]]) . "';", View::POS_END); ?>
+
+		<!--
+
+		Header (deviser profile picture, save & publish buttons)
+
+		-->
 
 		<div class="row no-gutter flex flex-align-center internal-header">
 			<div class="col-xs-4">
@@ -75,7 +85,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 				<div class="row no-gutter">
 					<div class="col-xs-12 flex flex-justify-end">
 						<div class="btn btn-grey fc-fff funiv fs-upper fs0-786 save" ng-click="save()">
-							<span class="glyphicon glyphicon-download-alt tick" aria-hidden="true" ng-click="save()"><?= Yii::t("app/deviser", "Save progress") ?></span>
+							<span class="glyphicon glyphicon-download-alt tick" aria-hidden="true"><?= Yii::t("app/deviser", "Save progress") ?></span>
 						</div>
 						<div class="btn btn-light-green fc-18 funiv fs-upper fs0-786 publish" ng-click="publish()">
 							<span class="glyphicon glyphicon-ok tick" aria-hidden="true"><?= Yii::t("app/deviser", "Publish") ?></span>
@@ -84,6 +94,15 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 				</div>
 			</div>
 		</div>
+
+		<!--
+
+		Main content (row)
+
+		* Left column (product name, photos, videos)
+		* Right column (categories, collections, tags)
+
+		-->
 
 		<div class="row no-gutter">
 
@@ -123,11 +142,15 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 						<!--<pre>{{ dump_options }}</pre>-->
 
 						<div class="flex flex-prop-1-0 drop-box-holder">
-							<div ngf-drop ngf-select ngf-keep="true" ngf-keep-distinct="true" ng-model="product.media.photos" class="flex-prop-1-0 drop-box" ngf-drag-over-class="dragover" ngf-multiple="true" ngf-allow-dir="true" ngf-accept="'image/*'">
+							<div ngf-drop ngf-select ngf-keep="true" ngf-keep-distinct="true" ng-model="shadow_photos" class="flex-prop-1-0 drop-box" ngf-drag-over-class="dragover" ngf-multiple="true" ngf-allow-dir="true" ngf-accept="'image/*'">
 
-								<div ng-cloak ng-repeat="photo in product.media.photos" class="col-xs-3 photo-holder">
+								<div ng-cloak ng-repeat="photo in product.media.photos track by $index" class="col-xs-3 photo-holder">
 									<div class="photo-white-area" ng-click="$event.stopPropagation();">
-										<div ngf-bg-src="photo" class="photo"></div>
+										<span class="glyphicon glyphicon-remove fs0-786 btn_delete_photo pointer" ng-click="delete_photo($index, $event)"></span>
+
+										<div ng-if="photo.name !== ''" ngf-bg-src="photo.blob" angular-img-dl angular-img-dl-url="{{ _base_product_photo_url + photo.name }}" angular-img-dl-model="photo.blob" class="photo"></div>
+										<div ng-if="photo.name === ''" ngf-bg-src="photo.blob" angular-img-dl angular-img-dl-url="" angular-img-dl-model="photo.blob" class="photo"></div>
+
 									</div>
 								</div>
 
@@ -353,6 +376,12 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 		</div>
 
 		<br />
+
+		<!--
+
+		Tabs
+
+		-->
 
 		<div class="row no-gutter">
 			<div ng-cloak ng-show="tab == 1" class="col-xs-12 description-content">
