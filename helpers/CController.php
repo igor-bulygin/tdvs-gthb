@@ -62,7 +62,7 @@ class CController extends Controller {
 	public function getJsonFromRequest($key) {
 		$request = Yii::$app->getRequest();
 		$_data = Json::decode($request->getRawBody());
-		return $_data[$key];
+		return array_key_exists($key, $_data) ? $_data[$key] : null;
 	}
 
 	/**
