@@ -58,9 +58,10 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 	$scope.$watch("product.categories", function(_new, _old) {
 		/*
 		 * Once the categories of a product have changed, we must iterate over
-		 * each category and find all the tags it is assigned to.
+		 * each category and find all the tags it is assigned to, and if those tags
+		 * are required.
 		 */
-		var _tags_from_categories = [];
+		var _tags_in_categories = [];
 		var _tmp_tags_ids = []; //We'll use this to avoid duplicate tags
 
 		/*
@@ -68,6 +69,7 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 		 */
 		var _use_sizecharts = false;
 		var _use_prints = false;
+		$scope.required_tags_ids = [];
 		angular.forEach(_new, function(short_id) {
 			//Generate the tags that must be shown
 			var __category = $scope.getCategory(short_id);
@@ -76,7 +78,11 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 			angular.forEach(__tags, function(_tag) {
 				if(_tmp_tags_ids.indexOf(_tag.short_id) !== -1) return;
 
-				_tags_from_categories.push(_tag);
+				if(_tag.required === true) {
+					$scope.required_tags_ids.push(_tag.short_id);
+				}
+
+				_tags_in_categories.push(_tag);
 				_tmp_tags_ids.push(_tag.short_id);
 			});
 
@@ -109,9 +115,8 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 			});
 		}
 
-
-		$scope.sortTags(_tags_from_categories);
-		$scope.tags_from_categories = _tags_from_categories;
+		$scope.sortTags(_tags_in_categories);
+		$scope.tags_from_categories = _tags_in_categories;
 
 		/*
 		 * Check what tags (a) we currently have in product.options, what tags (b) we should
@@ -121,7 +126,7 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 		 */
 		var a = Object.keys($scope.product.options);
 		var b = [];
-		angular.forEach(_tags_from_categories, function(tag) {
+		angular.forEach(_tags_in_categories, function(tag) {
 			b.push(tag.short_id);
 		});
 
@@ -260,22 +265,21 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 		 * ...and then store the IDs of the tags that should be used to generate the "Price & Stock" table.
 		 */
 		var tags = $scope.getTags(Object.keys($scope.product.options));
-		$scope.required_tags_ids = [];
 		var _tag_values = {};
+		var _tags_for_ps_table = [];
 		angular.forEach(tags, function(tag) {
 			if(tag.stock_and_price === true) {
-				$scope.required_tags_ids.push(tag.short_id);
-				_tag_values[tag.short_id] = $scope.product.options[tag.short_id];
+				_tags_for_ps_table.push(tag.short_id);
+				_tag_values[tag.short_id] = angular.copy($scope.product.options[tag.short_id]);
 			}
 		});
-
-		console.log("Required tags", $scope.required_tags_ids);
 
 		/*
 		 * The user must add at least 1 combination of each required tag and
 		 * all the combinations of all tags should contains values, meaning
 		 * there can't be a combination without values.
 		 */
+		//TODO: Maybe this shouldn't be here?
 		var _quit = false;
 		angular.forEach($scope.product.options, function(values, tag_id) {
 			if($scope.required_tags_ids.indexOf(tag_id) === -1) return;
@@ -285,8 +289,6 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 				if(angular.isObject(value) && Object.keys(value).length === 0) _quit = true;
 			});
 		});
-		if(_quit === true) console.log("quiting!");
-		if(_quit === false) console.log("not quitting");
 		if(_quit === true) return;
 
 		/*
@@ -301,7 +303,7 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 		 * contains the value of the size for the selected country.
 		 */
 		if($scope.use_sizecharts === true) {
-			$scope.required_tags_ids.unshift("size");
+			_tags_for_ps_table.unshift("size");
 			_tag_values["size"] = [];
 
 			angular.forEach($scope.product.sizechart.values, function(row) {
@@ -309,27 +311,23 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 			});
 		}
 
-		console.log("using tags", $scope.required_tags_ids, _tag_values);
-
 		/*
 		 * We want to generate all the possible combinations in a certain order.
 		 * If the're in 'use_sizecharts' mode, the special tag_id 'size' will be at
 		 * position 0 in the _tag_ids array. If not, it doesn't matter.
 		 */
 		var data = [];
-		angular.forEach($scope.required_tags_ids, function(tag_id) {
-			data.push(_tag_values[tag_id]);
+		angular.forEach(_tag_values, function(values, tag_id) {
+			data.push(values);
 		});
 
 		//This contains an array will all the possible combinations of tag values (and the size, if applies).
-		console.log("INPUT DATA", data);
 		var _ps_data = $scope.allPossibleCases(data);
-		console.log("PS DATA", _ps_data);
 
 		var _obj;
 		var _price_stock = [];
 		angular.forEach(_ps_data, function(row) {
-			_header = angular.copy($scope.required_tags_ids);
+			_header = angular.copy(_tags_for_ps_table);
 			_obj = {
 				"options": {}
 			};
@@ -361,18 +359,14 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 		});
 
 		if($scope.use_sizecharts === true) {
-			$scope.required_tags_ids.shift();
+			_tags_for_ps_table.shift();
 		}
-		$scope._ps_header = $scope.required_tags_ids;
+		$scope._ps_header = _tags_for_ps_table;
 		$scope.product.price_stock = _price_stock;
-
 		$scope.show_pricestock = true;
 
-		console.log(_price_stock);
 		console.log("end ================");
-
 	}, true);
-
 
 	$scope.insertSizeInTable = function() {
 		/* The parseInt || <var> magic is required because a size value can be a number
