@@ -154,23 +154,30 @@ api.factory("$category_util", function($q, $category) {
 
 	utils.create_tree = function(categories) {
 		var _categories = [];
+		var store = {};
 
 		angular.forEach(angular.copy(categories), function(_category) {
 			if (_category.path === "/") {
 				_categories.push(_category);
 			} else {
-				var _path = _category.path.split("/");
-				_path.pop();
-				var _parent = _path.pop();
-
-				jsonpath.apply(_categories, "$..[?(@.short_id=='" + _parent + "')]", function(obj) {
-					if(!obj.hasOwnProperty("sub")) {
-						obj.sub = [];
+				var target;
+				if (typeof store[_category.path] !== 'undefined') {
+					target = store[_category.path];
+					if (typeof store[_category.path].sub === 'undefined') {
+						target.sub = [];
 					}
-					obj.sub.push(_category);
-					return obj;
-				});
+				} else {
+					target = {sub: []};
+					store[_category.path] = target;
+				}
+				target.sub.push(_category);
 			}
+
+			var key = _category.path + _category.short_id + '/';
+			if (typeof store[key] !== 'undefined') {
+				_category.sub = store[key].sub;
+			}
+			store[key] = _category;
 		});
 
 		return _categories;
