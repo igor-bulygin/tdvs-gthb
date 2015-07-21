@@ -1,7 +1,7 @@
 var todevise = angular.module('todevise', ['ui.bootstrap', 'angular-multi-select', 'angular-unit-converter', 'angular-img-dl', 'global-deviser', 'global-desktop', 'global', 'api', "ngFileUpload", "ngImgCrop", 'ui.bootstrap.datetimepicker']);
 var global_deviser = angular.module('global-deviser');
 
-todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$product", "$category_util", "toastr", "$modal", "Upload", "$http", function($scope, $timeout, $sizechart, $product, $category_util, toastr, $modal, Upload, $http) {
+todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$product", "$category_util", "toastr", "$modal", "Upload", "$http", "$cacheFactory", function($scope, $timeout, $sizechart, $product, $category_util, toastr, $modal, Upload, $http, $cacheFactory) {
 	$scope.lang = _lang;
 	$scope.deviser = _deviser;
 	$scope.product = _product;
@@ -20,6 +20,10 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 	$scope.tmp_selected_sizechart_country = "";
 	$scope.tmp_selected_lang_name = "";
 	$scope.tmp_selected_lang_desc = "";
+
+	$scope.c_tags = $cacheFactory("tags");
+	$scope.c_categories = $cacheFactory("categories");
+	$scope.c_tagsInCategory = $cacheFactory("tagsInCategory");
 
 	$scope._base_product_photo_url = _base_product_photo_url;
 
@@ -66,7 +70,7 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 		var _use_prints = false;
 		angular.forEach(_new, function(short_id) {
 			//Generate the tags that must be shown
-			var __category = jsonpath.query(_categories, "$..[?(@.short_id=='" + short_id + "')]")[0];
+			var __category = $scope.getCategory(short_id);
 			var __tags = $scope.getTagsInCategory(short_id);
 
 			angular.forEach(__tags, function(_tag) {
@@ -462,16 +466,38 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 		return tags;
 	};
 
+	$scope.getCategory = function(short_id) {
+		var res = $scope.c_categories.get(short_id);
+		if(res !== undefined) return res;
+
+		var __category = jsonpath.query(_categories, "$..[?(@.short_id=='" + short_id + "')]");
+		__category = __category.length === 1 ? __category[0] : {};
+
+		$scope.c_categories.put(short_id, __category);
+		return __category;
+	};
+
 	$scope.getTag = function(tag_id) {
+		var res = $scope.c_tags.get(tag_id);
+		if(res !== undefined) return res;
+
 		var __tag = jsonpath.query(_tags, "$..[?(@.short_id=='" + tag_id + "')]");
 		__tag = __tag.length === 1 ? __tag[0] : {};
+
+		$scope.c_tags.put(tag_id, __tag);
 		return __tag;
 	};
 
 	//Get all tags that belong to a category
 	$scope.getTagsInCategory = function(category_id) {
+		var res = $scope.c_tagsInCategory.get(category_id);
+		if(res !== undefined) return res;
+
 		var __tags = jsonpath.query(_tags, "$..[?(@.categories.indexOf('" + category_id + "')!==-1)]");
-		return __tags.length > 0 ? __tags : [];
+		__tags = __tags.length > 0 ? __tags : [];
+
+		$scope.c_tagsInCategory.put(category_id, __tags);
+		return __tags;
 	};
 
 	//Sort tags
