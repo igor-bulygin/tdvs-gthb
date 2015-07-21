@@ -384,6 +384,13 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 		-->
 
 		<div class="row no-gutter">
+
+			<!--
+
+			Description tab
+
+			-->
+
 			<div ng-cloak ng-show="tab == 1" class="col-xs-12 description-content">
 
 				<div class="row no-gutter">
@@ -422,8 +429,21 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 			</div>
 
+			<!--
+
+			Price & Stock tab
+
+			-->
+
 			<div ng-cloak ng-show="tab == 2" class="col-xs-12 price-stock-content">
 				<div class="sep_dark"></div>
+
+				<!--
+
+				Made to order, Pre-order and Bespoke
+
+				-->
+
 				<div class="row no-gutter">
 					<div class="col-xs-6">
 
@@ -549,6 +569,13 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 				</div>
 
 				<br /><br />
+
+
+				<!--
+
+				Sizechart
+
+				-->
 
 				<div ng-if="use_sizecharts === true" class="sep_dark"></div>
 				<div ng-if="use_sizecharts === true" class="row no-gutter">
@@ -716,6 +743,12 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 				<br /><br />
 
+				<!--
+
+				Price & Stock
+
+				-->
+
 				<div ng-if="use_prints == false" class="sep_dark"></div>
 				<div ng-if="use_prints == false" class="row no-gutter">
 					<div class="col-xs-12">
@@ -837,9 +870,13 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 						</table>
 
 					</div>
-
-
 				</div>
+
+				<!--
+
+				Prints
+
+				-->
 
 				<div ng-if="use_prints == true" class="sep_dark"></div>
 				<div ng-if="use_prints == true" class="row no-gutter">
@@ -853,6 +890,12 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 				</div>
 
 			</div>
+
+			<!--
+
+			Returns & Warranty tab
+
+			-->
 
 			<div ng-cloak ng-show="tab == 3" class="col-xs-12 returns-warranty-content">
 
