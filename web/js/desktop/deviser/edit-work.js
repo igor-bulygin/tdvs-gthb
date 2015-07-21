@@ -706,7 +706,15 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 
 	$scope.save = function() {
 
-		angular.forEach($scope.product.media.photos, function(photo) {
+		var do_save = _.after($scope.product.media.photos.length, function() {
+			$product.modify("POST", $scope.product).then(function(data) {
+				toastr.success("Product saved successfully!");
+			}, function(err) {
+				toastr.error("Failed saving product!", err);
+			});
+		});
+
+		angular.forEach($scope.product.media.photos, function(photo, index, photos) {
 			if(photo.not_uploaded !== true) return;
 
 			delete photo.not_uploaded;
@@ -728,19 +736,14 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 				//console.log('progress: ' + progressPercentage + '% ' + e.config.file.name);
 			}).success(function(data, status, header, config) {
 				//console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
-
-				toastr.success("Uploaded successfully headerphoto photo", config.file.name);
+				photos[index] = angular.copy(data.media.photos.pop());
+				toastr.success("Uploaded successfully product photo", config.file.name);
 			}).error(function(err) {
-				photo.not_uploaded = true;
-				toastr.error("Error while uploading headerphoto photo", err)
+				photos[index].not_uploaded = true;
+				toastr.error("Error while uploading product photo", err)
+			}).finally(function() {
+				do_save();
 			});
-
-		});
-
-		$product.modify("POST", $scope.product).then(function() {
-			toastr.success("Product saved successfully!");
-		}, function(err) {
-			toastr.error("Failed saving product!", err);
 		});
 
 	};
