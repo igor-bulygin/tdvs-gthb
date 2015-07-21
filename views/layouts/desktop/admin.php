@@ -321,7 +321,7 @@ use lajax\languagepicker\widgets\LanguagePicker;
 				<div class="col-xs-10-5">
 
 					<div class="wrapper flex flex-column">
-						<div class="header">
+						<div class="header flex-prop-1-0">
 							<?php
 								NavBar::begin([
 									'options' => [
