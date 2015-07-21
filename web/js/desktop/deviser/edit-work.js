@@ -706,16 +706,30 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 
 	$scope.save = function() {
 
-		var do_save = _.after($scope.product.media.photos.length, function() {
-			$product.modify("POST", $scope.product).then(function(data) {
+		console.log($scope.product);
+
+		var do_save = _.after($scope.product.media.photos.length, _.once(function() {
+			/**
+			 * Make a copy of the actual product and delete the "blob" property, which we
+			 * use only locally to hold the data of the image.
+			 */
+			var _shadow_product = angular.copy($scope.product);
+			angular.forEach(_shadow_product.media.photos, function(product) {
+				delete product.blob;
+			});
+
+			$product.modify("POST", _shadow_product).then(function(data) {
 				toastr.success("Product saved successfully!");
 			}, function(err) {
 				toastr.error("Failed saving product!", err);
 			});
-		});
+		}));
 
 		angular.forEach($scope.product.media.photos, function(photo, index, photos) {
-			if(photo.not_uploaded !== true) return;
+			if(photo.not_uploaded !== true) {
+				do_save();
+				return;
+			}
 
 			delete photo.not_uploaded;
 
@@ -745,6 +759,11 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 				do_save();
 			});
 		});
+
+		/**
+		 * Call do_save(), in case something got wrong and it didn't got called
+		 */
+		do_save();
 
 	};
 
