@@ -10,7 +10,6 @@ todevise.controller('tagCtrl', ["$scope", "$timeout", "$tag", "$tag_util", "$cat
 	$scope.type_watch_paused = false;
 
 	//Sort by path length
-	_categories = $category_util.sort(_categories);
 	$scope.categories = $category_util.create_tree(_categories);
 
 	$scope.$watch("tag.type", function(_new, _old) {
@@ -57,7 +56,13 @@ todevise.controller('tagCtrl', ["$scope", "$timeout", "$tag", "$tag_util", "$cat
 	};
 
 	$scope.edit_dropdown_option = function(index) {
-		var option = index === -1 ? $tag_util.newDropdownOption() : $scope.tag.options[index];
+		var _mod_option_index;
+		if(index === -1) {
+			$scope.tag.options.push( $tag_util.newDropdownOption() );
+			_mod_option_index = $scope.tag.options.length - 1;
+		} else {
+			_mod_option_index = index;
+		}
 
 		var modalInstance = $modal.open({
 			templateUrl: 'template/modal/tag/create_new.html',
@@ -66,7 +71,7 @@ todevise.controller('tagCtrl', ["$scope", "$timeout", "$tag", "$tag_util", "$cat
 				data: function () {
 					return {
 						langs: _langs,
-						option: option,
+						index: _mod_option_index,
 						options: $scope.tag.options
 					};
 				}
@@ -74,9 +79,12 @@ todevise.controller('tagCtrl', ["$scope", "$timeout", "$tag", "$tag_util", "$cat
 		});
 
 		modalInstance.result.then(function(data) {
-			$scope.tag.options.push(data.option);
+			$scope.tag.options = data.options;
 		}, function () {
-			//Cancel
+			// Remove the new, empty option we created (don't do anything if we were editing an option)
+			if(index === -1) {
+				$scope.tag.options.pop();
+			}
 		});
 	};
 
@@ -123,9 +131,17 @@ todevise.controller("create_newCtrl", function($scope, $modalInstance, data) {
 		return _obj[0].class;
 	};
 
+	$scope.is_duplicated = function(value) {
+		var i = 0;
+		angular.forEach(data.options, function(option) {
+			if(option.value === value) i++;
+		});
+		return i === 1;
+	};
+
 	$scope.ok = function() {
 		$modalInstance.close({
-			"option": $scope.data.option
+			"options": $scope.data.options
 		});
 	};
 

@@ -253,7 +253,7 @@ $this->title = 'Todevise / Admin / Tag';
 			<div class="input-group" ng-repeat="(lang_k, lang_v) in data.langs">
 				<span class="input-group-addon funiv_bold fs1 fs-upper" id="basic-addon-{{ $index }}">{{ lang_v }}</span>
 				<input required="" type="text" class="form-control funiv fs1" placeholder="<?php echo Yii::t("app/admin", "Option name..."); ?>"
-					aria-describedby="basic-addon-{{ $index }}" ng-model="data.option.text[lang_k]" name="{{ lang_k }}">
+					aria-describedby="basic-addon-{{ $index }}" ng-model="data.options[data.index].text[lang_k]" name="{{ lang_k }}">
 				<span class="input-group-addon alert-danger funiv fs0-929" ng-show="form.$submitted && !form.$valid && !form['{{lang_k}}'].$valid">
 					<span ng-show="form['{{lang_k}}'].$error.required"><?php echo Yii::t("app/admin", "Required!"); ?></span>
 				</span>
@@ -275,12 +275,13 @@ $this->title = 'Todevise / Admin / Tag';
 			<div ng-if="opt_value_or_color == 1">
 				<label class='modal-title funiv fs1 fnormal fc-18'><?php echo Yii::t("app/admin", "Value"); ?></label>
 				<div class="input-group">
-					<input id="value" required="" ui-validate="'(data.options | filter:{value:$value}:true).length == 0'"
-					       ui-validate-watch="'data.option.value'" type="text" class="form-control funiv fs1" placeholder="<?php echo Yii::t("app/admin", "Value..."); ?>"
-					       aria-describedby="basic-addon-desc" ng-model="data.option.value" name="value">
+					<input id="value" required="" ui-validate="'is_duplicated($value)'"
+					       ui-validate-watch="'data.options[data.index].value'" ng-pattern="/^[0-9a-z\-]*$/" type="text" class="form-control funiv fs1" placeholder="<?php echo Yii::t("app/admin", "Value..."); ?>"
+					       aria-describedby="basic-addon-desc" ng-model="data.options[data.index].value" name="value">
 				<span class="input-group-addon alert-danger funiv fs0-929" id="basic-addon-value" ng-show="form.$submitted && !form.$valid && !form['value'].$valid">
-					<span ng-show="form['value'].$error.required"><?php echo Yii::t("app/admin", "Required!"); ?></span>
-					<span ng-show="!form['value'].$error.required && form['value'].$error.validator"><?php echo Yii::t("app/admin", "Duplicated value!"); ?></span>
+					<span ng-show="form['value'].$error.required"><?php echo Yii::t("app/admin", "Required!"); ?><br /></span>
+					<span ng-show="!form['value'].$error.required && form['value'].$error.validator"><?php echo Yii::t("app/admin", "Duplicated value!"); ?><br /></span>
+					<span ng-show="!form['value'].$error.required && form['value'].$invalid"><?php echo Yii::t("app/admin", "Invalid value!"); ?></span>
 				</span>
 				</div>
 			</div>
