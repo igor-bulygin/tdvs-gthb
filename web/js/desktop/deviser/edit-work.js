@@ -775,9 +775,11 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 		});
 
 		/**
-		 * Call do_save(), in case something got wrong and it didn't got called
+		 * Call do_save(), in case no photos were selected by the user.
 		 */
-		do_save();
+		if($scope.product.media.photos.length === 0) {
+			do_save();
+		}
 
 	};
 
