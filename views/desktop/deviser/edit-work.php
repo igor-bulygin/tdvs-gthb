@@ -139,7 +139,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 						</div>
 
-						<!--<pre>{{ dump_options }}</pre>-->
+						<pre>{{ dump_options }}</pre>
 
 						<div class="flex flex-prop-1-0 drop-box-holder">
 							<div ngf-drop ngf-select ngf-keep="true" ngf-keep-distinct="true" ng-model="shadow_photos" class="flex-prop-1-0 drop-box" ngf-drag-over-class="dragover" ngf-multiple="true" ngf-allow-dir="true" ngf-accept="'image/*'">
@@ -461,17 +461,21 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 												<?= Yii::t("app/deviser", "This work is made-to-order") ?>
 											</label>
 										</div>
-										<div class="col-xs-1 col-height col-middle" ng-hide="!product.madetoorder.type || product.madetoorder.type === <?= MadeToOrder::NONE ?>">
-											<div class="input-group spinner">
+										<div class="col-xs-2 col-height col-middle" ng-hide="!product.madetoorder.type || product.madetoorder.type === <?= MadeToOrder::NONE ?>">
+											<div class="input-group spinner" ng-init="product.madetoorder.value = product.madetoorder.value || 0">
 												<input type="text" class="form-control" ng-model="product.madetoorder.value">
 												<div class="input-group-btn-vertical">
-													<button class="btn btn-default btn-xs" type="button" ng-click="product.madetoorder.value = product.madetoorder.value + 1"><span class="glyphicon glyphicon-triangle-top"></span></button>
-													<button class="btn btn-default btn-xs" type="button" ng-click="product.madetoorder.value = product.madetoorder.value - 1"><span class="glyphicon glyphicon-triangle-bottom"></span></button>
+													<button class="btn btn-default btn-xs" type="button" ng-click="product.madetoorder.value = product.madetoorder.value + 1">
+														<span class="glyphicon glyphicon-triangle-top fs0-857"></span>
+													</button>
+													<button class="btn btn-default btn-xs" type="button" ng-click="product.madetoorder.value = product.madetoorder.value - 1">
+														<span class="glyphicon glyphicon-triangle-bottom fs0-857"></span>
+													</button>
 												</div>
 											</div>
 										</div>
 										<div class="col-xs-1 col-height col-middle"></div>
-										<div class="col-xs-6 col-height col-middle" ng-hide="!product.madetoorder.type || product.madetoorder.type === <?= MadeToOrder::NONE ?>">
+										<div class="col-xs-5 col-height col-middle" ng-hide="!product.madetoorder.type || product.madetoorder.type === <?= MadeToOrder::NONE ?>">
 											<span class="funiv_bold fs0-857 fc-6d fw-normal"><?= Yii::t("app/deviser", "days to manufacturing") ?></span>
 										</div>
 									</div>
@@ -731,7 +735,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 					</div>
 
-					<!--<pre>{{ dump_sizechart }}</pre>-->
+					<pre>{{ dump_sizechart }}</pre>
 
 					<div ng-cloak class="col-xs-12" ng-show="use_sizecharts === true && product.sizechart.values.length > 0">
 						<div class="funiv_bold fs0-929 fc-f7284b fw-normal pointer save-sizechart" ng-click="save_sizechart()">

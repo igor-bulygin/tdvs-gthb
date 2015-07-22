@@ -257,7 +257,7 @@
 .input-group-btn-vertical {
 	position: relative;
 	white-space: nowrap;
-	width: 1%;
+	width: 100%;
 	vertical-align: middle;
 	display: table-cell;
 }
@@ -265,7 +265,7 @@
 .input-group-btn-vertical > .btn {
 	display: block;
 	float: none;
-	width: 100%;
+	width: 1%;
 	max-width: 100%;
 	padding: 8px;
 	margin-left: -1px;
@@ -284,7 +284,8 @@
 
 .input-group-btn-vertical span{
 	position: absolute;
-	left: 2px;
+	left: 3px;
+	top: 2px;
 }
 
 .warranty-label {
