@@ -596,13 +596,43 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 										<div class="col-xs-6 col-height col-middle">
 											<span><?= Yii::t("app/deviser", "Choose size chart") ?></span>
 										</div>
-										<div class="col-xs-6 col-height col-middle">
+
+										<!--
+										 We need a ng-if for pristine because that is how we decide if we must
+										 preselect the dropdown.
+										 If pristine === true, it means that the values in the sizechart are an exact
+										 copy of the values from the original sizechart, which means we should preselect
+										 the dropdown. Else, it means that the deviser modified some values, so we
+										 shouldn't preselect anything.
+										 -->
+										<div ng-if="$parent.product.sizechart.pristine === true" class="col-xs-6 col-height col-middle">
 											<div
 												angular-multi-select
-												api="$parent.api_sizechart"
+												api="$parent.$parent.api_sizechart"
 												id-property="short_id"
-												input-model="$parent.sizecharts"
-												output-model="$parent.selected_sizechart"
+												input-model="$parent.$parent.sizecharts"
+												output-model="$parent.$parent.tmp_selected_sizechart"
+
+												tick-property="check"
+
+												preselect-prop="short_id"
+												preselect-value='["{{ product.sizechart.short_id }}"]'
+
+												button-template="angular-multi-select-btn-data.htm"
+												button-label="{{ name[lang] }}"
+
+												item-label="{{ name[lang] }}"
+												selection-mode="single"
+												helper-elements="noall nonone noreset nofilter">
+											</div>
+										</div>
+										<div ng-if="$parent.product.sizechart.pristine !== true" class="col-xs-6 col-height col-middle">
+											<div
+												angular-multi-select
+												api="$parent.$parent.api_sizechart"
+												id-property="short_id"
+												input-model="$parent.$parent.sizecharts"
+												output-model="$parent.$parent.tmp_selected_sizechart"
 
 												tick-property="check"
 
@@ -618,19 +648,44 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 								</div>
 							</div>
 
-							<div class="col-xs-6">
+							<div ng-cloak class="col-xs-6" ng-show="$parent.sizechart_countries.length > 0">
 								<div class="row no-gutter">
 									<div class="row-same-height">
 										<div class="col-xs-6 col-height col-middle">
 											<span><?= Yii::t("app/deviser", "Which size system do you use?") ?></span>
 										</div>
-										<div class="col-xs-6 col-height col-middle">
+										<!--
+										Same here, please read comments for the "sizechart" dropdown.
+										-->
+										<div ng-if="$parent.product.sizechart.pristine === true" class="col-xs-6 col-height col-middle">
 											<div
 												angular-multi-select
-												api="$parent.api_sizechart_country"
+												api="$parent.$parent.api_sizechart_country"
 												id-property="value"
-												input-model="$parent.sizechart_countries"
-												single-output-model="$parent.tmp_selected_sizechart_country"
+												input-model="$parent.$parent.sizechart_countries"
+												single-output-model="$parent.$parent.tmp_selected_sizechart_country"
+												single-output-prop="value"
+
+												tick-property="check"
+
+												preselect-prop="value"
+												preselect-value='["{{ product.sizechart.country }}"]'
+
+												button-template="angular-multi-select-btn-data.htm"
+												button-label="{{ text }}"
+
+												item-label="{{ text }}"
+												selection-mode="single"
+												helper-elements="noall nonone noreset nofilter">
+											</div>
+										</div>
+										<div ng-if="$parent.product.sizechart.pristine !== true" class="col-xs-6 col-height col-middle">
+											<div
+												angular-multi-select
+												api="$parent.$parent.api_sizechart_country"
+												id-property="value"
+												input-model="$parent.$parent.sizechart_countries"
+												single-output-model="$parent.$parent.tmp_selected_sizechart_country"
 												single-output-prop="value"
 
 												tick-property="check"

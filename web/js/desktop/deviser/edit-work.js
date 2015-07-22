@@ -39,26 +39,27 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 		$scope.langs.push({ "key": k, "value": v });
 	});
 
+	//Required for the categories dropdown
+	$scope.categories = $category_util.create_tree(_categories);
+
+	//Testers
 	$scope.dump = function(obj) {
 		return angular.toJson(obj, 4);
 	};
-
 	$scope.$watch("product.options", function(_new, _old) {
 		$scope.dump_options = angular.toJson(_new, 4);
 	}, true);
-
 	$scope.$watch("product.sizechart", function(_new) {
 		$scope.dump_sizechart = angular.toJson(_new, 4);
 	}, true);
+	//End testers
 
-	$scope.categories = $category_util.create_tree(_categories);
-
+	/**
+	  * Once the categories of a product have changed, we must iterate over
+	  * each category and find all the tags it is assigned to, and if those tags
+	  * are required.
+	  */
 	$scope.$watch("product.categories", function(_new, _old) {
-		/*
-		 * Once the categories of a product have changed, we must iterate over
-		 * each category and find all the tags it is assigned to, and if those tags
-		 * are required.
-		 */
 		var _tags_in_categories = [];
 		var _tmp_tags_ids = []; //We'll use this to avoid duplicate tags
 
@@ -140,18 +141,58 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 		console.log("Tags", $scope.tags_from_categories);
 	});
 
-	//React to changes in the dropdown containing normal size charts
-	$scope.$watch("selected_sizechart", function(_new, _old) {
-		if(_new === undefined || _new.length !== 1){
-			if(_old !== undefined) {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	/**
+	 * React to changes in the dropdown containing normal size charts
+	 */
+	$scope.$watch("tmp_selected_sizechart", function(_new, _old) {
+		/**
+		 * If both _new and _old are undefined, or _new is an empty array and _old is undefined
+		 * it means that angular is still loading, so don't do anything.
+		 */
+		if(_new === undefined && _old === undefined) return;
+		if(angular.isArray(_new) && _new.length === 0 && _old === undefined) return;
+
+		/**
+		 * If we deselect a sizechart, make sure to:
+		 * * clean the countries dropdown
+		 * * empty the sizechart values if and only if the values are pristine.
+		 */
+		if(_new.length !== 1){
+			$scope.sizechart_countries = [];
+
+			/**
+			 * If the values are pristine, we're free to clean them, but if they're not clean, it
+			 * means that this $watch was triggered by a modification of the values table, and not
+			 * by a deselection of the sizecharts dropdown.
+			 */
+			if($scope.product.sizechart.pristine === true) {
+				console.log("CLEARING VALUES 1");
 				$scope.product.sizechart.values = [];
 			}
-			$scope.sizechart_countries = [];
 			return;
 		}
 
 		var _sizechart = _new[0];
 
+		/**
+		 * Fill the countries dropdown with the countries of the selected sizechart.
+		 */
 		var _countries = [];
 		angular.forEach(_sizechart.countries, function(v) {
 			_countries.push({
@@ -159,6 +200,14 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 				text: _countries_lookup[v]
 			});
 		});
+		$scope.sizechart_countries = _countries;
+
+		/**
+		 * If this is a pristine sizechart, we'll have 0 available sizes because
+		 * all the sizes are already in the table. And if this is not a pristine sizechart,
+		 * then we must not should the dropdown with available sizes.
+		 */
+		$scope.available_sizes = [];
 
 		$timeout(function() {
 			try {
@@ -166,46 +215,76 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 			} catch(e){}
 		}, 0);
 
+		/**
+		 * If we already have the data of this sizechart, don't do anything else
+		 */
+		if($scope.product.sizechart.pristine === true && $scope.product.sizechart.short_id === _sizechart.short_id) return;
+
+		/**
+		 * We either don't have any data or the data that we have doesn't match the data from the selected sizechart,
+		 * so we must fill the new data.
+		 */
+		console.log("CLEARING VALUES 2");
 		$scope.product.sizechart.metric_unit = _sizechart.metric_unit;
 		$scope.product.sizechart.columns = angular.copy(_sizechart.columns);
 		$scope.product.sizechart.values = [];
-
-		$scope.sizechart_countries = _countries;
-		$scope.available_sizes = [];
+		$scope.product.sizechart.short_id = _sizechart.short_id;
+		$scope.product.sizechart.pristine = true;
 	});
+
+	/**
+	 * Keep an eye on the values of the sizechart. If it changes,
+	 */
+	$scope.$watch("product.sizechart.values", function(_new, _old) {
+		if($scope.tmp_selected_sizechart === undefined) return;
+		if($scope.product.sizechart.values.length === 0) return;
+
+		var _tmp_values = $scope._getSizechartValuesForCountry();
+
+		$scope.product.sizechart.pristine = angular.equals(_new, _tmp_values);
+	}, true);
 
 	//Whenever the countries dropdown is filled, try to preselect the country of the product's sizechart
 	$scope.$watch("sizechart_countries", function(_new, _old) {
-		if(_new === _old || _new === undefined || _new.length === 0) {
+		/**
+		 * If both _new and _old are undefined, quit, Angular is still loading
+		 */
+		if(_new === undefined && _old === undefined) return;
+
+		/**
+		 * Something deleted all the countries in the dropdown. Stop listening to changes in the
+		 * tmp_selected_sizechart_country model and quit.
+		 */
+		if(angular.isArray(_new) && _new.length === 0 && angular.isArray(_old) && _old.length > 0) {
+			$scope.country_watched = $scope.country_watched !== undefined ? $scope.country_watched() : undefined;
 			return;
 		}
-
-		$scope.country_watched = $scope.country_watched !== undefined ? $scope.country_watched() : undefined;
 
 		//Watch the selected country and fill in the sizechart values table
 		$scope.country_watched = $scope.$watch("tmp_selected_sizechart_country", function(_new, _old) {
 			if(_new === _old) return;
 
-			$scope.product.sizechart.country = _new;
 
-			if(_new === "") {
+			if(_new !== "" && $scope.product.sizechart.pristine === true) {
+				$scope.product.sizechart.country = _new;
+			}
+
+			/**
+			 * Empty the values of the sizachart only if the sizechart values are pristine.
+			 */
+			if(_new === "" && $scope.product.sizechart.pristine === true) {
+				console.log("CLEARING VALUES 3");
 				$scope.product.sizechart.values = [];
 				return;
 			}
 
-			var _tmp_values = [];
-			angular.forEach($scope.selected_sizechart[0].values, function(_row) {
-				var _tmp_value = _row.slice($scope.selected_sizechart[0].countries.length);
-				var _country_index = $scope.selected_sizechart[0].countries.indexOf($scope.product.sizechart.country);
-				var _size = _row.slice(_country_index, _country_index + 1)[0];
-
-				//Don't push rows without a size
-				if(_size === "") return;
-				_tmp_value.unshift(_size);
-				_tmp_values.push(_tmp_value);
-			});
-
-			$scope.product.sizechart.values = _tmp_values;
+			/**
+			 * If there is a selected country, override the sizechart values with those of the country.
+			 */
+			if(_new !== "") {
+				console.log("OVERRIDING VALUES 4");
+				$scope.product.sizechart.values = $scope._getSizechartValuesForCountry();
+			}
 		});
 
 		//Try to select the current (if any) country in the dropdown
@@ -215,7 +294,40 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 
 	});
 
-	//If the deviser selects
+	/**
+	 * Get an array of values that contains:
+	 * * All non-empty sizes of the currently selected country
+	 * * All the values of the common sizechart columns (columns that don't belong to individual countries)
+	 * @private
+	 */
+	$scope._getSizechartValuesForCountry = function() {
+		/**
+		 * If tmp_selected_sizechart is an empty array it means that there are no available
+		 * sizecharts, so we should just return an empty array.
+		 */
+		if(angular.isArray($scope.tmp_selected_sizechart) && $scope.tmp_selected_sizechart.length === 0) {
+			return [];
+		}
+
+		var _tmp_values = [];
+
+		angular.forEach($scope.tmp_selected_sizechart[0].values, function(_row) {
+			var _tmp_value = _row.slice($scope.tmp_selected_sizechart[0].countries.length);
+			var _country_index = $scope.tmp_selected_sizechart[0].countries.indexOf($scope.product.sizechart.country);
+			var _size = _row.slice(_country_index, _country_index + 1)[0];
+
+			//Don't push rows without a size
+			if(_size === "") return;
+			_tmp_value.unshift(_size);
+			_tmp_values.push(_tmp_value);
+		});
+
+		return angular.copy(_tmp_values);
+	};
+
+	/**
+	 * React to changes in the dropdown containing custom sizecharts
+	 */
 	$scope.$watch("selected_deviser_sizechart", function(_new) {
 		if(_new === undefined || _new.length !== 1) return;
 		var _sizechart = _new[0];
@@ -300,12 +412,6 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 			});
 		});
 		if(_quit === true) return;
-
-		/*
-		 * Sort the tag ids.
-		 * Is this needed?
-		 */
-		//$scope.sortTags(_tag_ids);
 
 		/*
 		 * If the special column "Size" is used (mainly, in 'Fashion'), add "size" to
@@ -537,7 +643,12 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 		return result;
 	};
 
-	//Deeply compare objects
+	/**
+	 * Deeply compare objects. Returns true of both object are identical or false if they differ.
+	 * @param x
+	 * @param y
+	 * @returns {boolean}
+	 */
 	$scope.deepCompare = function(x, y){
 		if (x === null || x === undefined || y === null || y === undefined) { return x === y; }
 		// after this just checking type of one would be enough
