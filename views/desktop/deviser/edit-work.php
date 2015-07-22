@@ -503,7 +503,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 								<span class="funiv_bold fs-1 fc-3d"><?= Yii::t("app/deviser", "Pre-order") ?></span>
 							</div>
 
-							<div class="col-xs-12" ng-init="product.preorder.type = <?= Preorder::NO ?>">
+							<div class="col-xs-12" ng-init="product.preorder.type = product.preorder.type || <?= Preorder::NO ?>">
 
 								<div class="row no-gutter">
 									<div class="row-same-height">
