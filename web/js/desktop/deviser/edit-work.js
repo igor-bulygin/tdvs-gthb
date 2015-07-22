@@ -51,8 +51,6 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 		$scope.dump_sizechart = angular.toJson(_new, 4);
 	}, true);
 
-	//Sort by path length
-	_categories = $category_util.sort(_categories);
 	$scope.categories = $category_util.create_tree(_categories);
 
 	$scope.$watch("product.categories", function(_new, _old) {
@@ -179,7 +177,6 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 	//Whenever the countries dropdown is filled, try to preselect the country of the product's sizechart
 	$scope.$watch("sizechart_countries", function(_new, _old) {
 		if(_new === _old || _new === undefined || _new.length === 0) {
-			$scope.product.sizechart = {};
 			return;
 		}
 
@@ -189,19 +186,11 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 		$scope.country_watched = $scope.$watch("tmp_selected_sizechart_country", function(_new, _old) {
 			if(_new === _old) return;
 
-			/**
-			 * If we just deselected the sizechart dropdown, don't set the country/values as the entire
-			 * product.sizechart object should be empty.
-			 */
-			if(Object.keys($scope.product.sizechart).length === 0) {
-				return;
-			} else {
-				$scope.product.sizechart.country = _new;
+			$scope.product.sizechart.country = _new;
 
-				if(_new === "") {
-					$scope.product.sizechart.values = [];
-					return;
-				}
+			if(_new === "") {
+				$scope.product.sizechart.values = [];
+				return;
 			}
 
 			var _tmp_values = [];
