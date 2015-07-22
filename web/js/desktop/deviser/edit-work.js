@@ -242,8 +242,15 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 	});
 
 	//Price & Stock table generator
-	$scope.$watch("[product.options, product.sizechart]", function(_new, _old) {
+	$scope.$watch("[product.options, product.sizechart, use_sizecharts]", function(_new, _old) {
 		$scope.show_pricestock = false;
+		/**
+		 * If we're not sure if use_sizecharts is true or false, quit (we're waiting for $http callback)
+		 */
+		if($scope.use_sizecharts === undefined) {
+			return;
+		}
+
 		/*
 		 * If there are no tags selected, don't do anything.
 		 */
@@ -316,12 +323,12 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 
 		/*
 		 * We want to generate all the possible combinations in a certain order.
-		 * If the're in 'use_sizecharts' mode, the special tag_id 'size' will be at
+		 * If we're in 'use_sizecharts' mode, the special tag_id 'size' will be at
 		 * position 0 in the _tag_ids array. If not, it doesn't matter.
 		 */
 		var data = [];
-		angular.forEach(_tag_values, function(values, tag_id) {
-			data.push(values);
+		angular.forEach(_tags_for_ps_table, function(tag_id) {
+			data.push(_tag_values[tag_id]);
 		});
 
 		//This contains an array will all the possible combinations of tag values (and the size, if applies).
