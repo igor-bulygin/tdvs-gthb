@@ -706,9 +706,9 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 					</div>
 
-					<div class="col-xs-12 sizechart-table-holder" ng-show="product.sizechart.values.length > 0 && product.sizechart.country != ''">
+					<div ng-cloak class="col-xs-12 sizechart-table-holder" ng-show="use_sizecharts === true">
 
-						<div class="row-same-height no-gutter">
+						<div ng-cloak class="row-same-height no-gutter" ng-show="use_sizecharts === true && (product.sizechart.values.length > 0 || product.sizechart.country.length > 0)">
 							<table class="fc-6d funiv fs1-071 fnormal sizechart-table">
 								<thead>
 									<tr>
@@ -733,7 +733,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 					<!--<pre>{{ dump_sizechart }}</pre>-->
 
-					<div class="col-xs-12" ng-show="product.sizechart.values.length > 0 && product.sizechart.country != ''">
+					<div ng-cloak class="col-xs-12" ng-show="use_sizecharts === true && product.sizechart.values.length > 0">
 						<div class="funiv_bold fs0-929 fc-f7284b fw-normal pointer save-sizechart" ng-click="save_sizechart()">
 							<span class="glyphicon glyphicon-paperclip"></span>
 							<span class="" aria-hidden="true"><?= Yii::t("app/deviser", "Save chart to use with other products") ?></span>

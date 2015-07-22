@@ -105,7 +105,6 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 					"$in": _new
 				}
 			}).then(function(_sizecharts) {
-				console.log("Fetching sizecharts for", _new, "and the result is", _sizecharts);
 				if(_sizecharts.length === 0) {
 					_use_sizecharts = false;
 				} else {
@@ -180,6 +179,7 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 	//Whenever the countries dropdown is filled, try to preselect the country of the product's sizechart
 	$scope.$watch("sizechart_countries", function(_new, _old) {
 		if(_new === _old || _new === undefined || _new.length === 0) {
+			$scope.product.sizechart = {};
 			return;
 		}
 
@@ -188,7 +188,21 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 		//Watch the selected country and fill in the sizechart values table
 		$scope.country_watched = $scope.$watch("tmp_selected_sizechart_country", function(_new, _old) {
 			if(_new === _old) return;
-			$scope.product.sizechart.country = _new;
+
+			/**
+			 * If we just deselected the sizechart dropdown, don't set the country/values as the entire
+			 * product.sizechart object should be empty.
+			 */
+			if(Object.keys($scope.product.sizechart).length === 0) {
+				return;
+			} else {
+				$scope.product.sizechart.country = _new;
+
+				if(_new === "") {
+					$scope.product.sizechart.values = [];
+					return;
+				}
+			}
 
 			var _tmp_values = [];
 			angular.forEach($scope.selected_sizechart[0].values, function(_row) {
