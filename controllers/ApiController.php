@@ -330,7 +330,6 @@ class ApiController extends CController {
 		if ($request->isGet) {
 			$filters = json_decode($filters, true) ?: [];
 			$fields = json_decode($fields, true) ?: [];
-			error_log(print_r($fields, true), 4);
 
 			if (!empty($filters) && $this->intern === false) {
 				$filters = Utils::removeAllExcept($filters, ["short_id", "path"]);
