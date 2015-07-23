@@ -581,7 +581,7 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 		if($scope.tmp_selected_size === undefined || $scope.tmp_selected_size === "") return;
 
 		var _values = [];
-		var size = $scope.tmp_selected_size;
+		var size = parseInt($scope.tmp_selected_size) || $scope.tmp_selected_size;
 
 		/**
 		 * Iterate over each row of the values array until the first element of each row (which is the size)
@@ -597,7 +597,7 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 			if(_inserted === false && _size > size) {
 				_inserted = true;
 				var _new_row = Array.apply(null, Array(_row.length)).map(Number.prototype.valueOf,0);
-				_new_row[0] = size;
+				_new_row[0] = $scope.tmp_selected_size;
 				_values.push(_new_row);
 			}
 			_values.push(_row);
@@ -609,7 +609,7 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 		 */
 		if(_inserted === false) {
 			var _new_row = Array.apply(null, Array($scope.product.sizechart.values[0].length)).map(Number.prototype.valueOf,0);
-			_new_row[0] = size;
+			_new_row[0] = $scope.tmp_selected_size;
 			_values.push(_new_row);
 		}
 
