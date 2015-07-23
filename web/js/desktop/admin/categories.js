@@ -22,9 +22,10 @@ todevise.controller('categoriesCtrl', ["$scope", "$category", "$category_util", 
 			touch: "selected"
 		},
 		search: {
-			fuzzy: true,
+			fuzzy: false,
 			case_insensitive: true,
-			show_only_matches : true
+			show_only_matches: true,
+			search_only_leaves: false
 		},
 		plugins: ["state", "dnd", "search", "sort", "wholerow", "actions", "types"]
 	};
