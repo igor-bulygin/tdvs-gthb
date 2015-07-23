@@ -615,7 +615,8 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 				return;
 			}
 
-			var _new_row = Array.apply(null, Array(_sizecharts[0].values[0].length)).map(Number.prototype.valueOf,0);
+			var _len = _sizecharts[0].values[0].length - _sizecharts[0].countries.length + 1;
+			var _new_row = Array.apply(null, Array(_len)).map(Number.prototype.valueOf,0);
 			_new_row[0] = $scope.tmp_selected_size;
 			_values.push(_new_row);
 		}
