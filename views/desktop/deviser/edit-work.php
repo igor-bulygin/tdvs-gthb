@@ -880,11 +880,11 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 							<thead>
 							<tr>
 								<th class="fpf fs0-857 fnormal text-center pricestock-cell" ng-cloak ng-if="use_sizecharts === true"><?= Yii::t("app/deviser", "Size") ?></th>
-								<th class="fpf fs0-857 fnormal text-center pricestock-cell" ng-cloak ng-repeat="tag_id in $parent._ps_header track by $index" ng-init="tag = getTag(tag_id)">
+								<th class="fpf fs0-857 fnormal text-center pricestock-cell" ng-cloak ng-repeat="tag_id in $parent._ps_header" ng-init="tag = getTag(tag_id)">
 									{{ tag.name[lang] }}
 									<span ng-if="tag.type == <?= Tag::DROPDOWN ?>"></span>
 									<span ng-if="tag.type == <?= Tag::FREETEXT ?>">(
-										<span ng-repeat="option in tag.options track by $index">
+										<span ng-repeat="option in tag.options">
 											{{ option.text[lang] }}<span ng-show="!$last">,</span>
 										</span>
 									)</span>
@@ -896,18 +896,18 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 							</thead>
 							<tbody>
 
-							<tr ng-cloak ng-repeat="row in product.price_stock track by $index" class="pricestock-row" ng-class="{true: 'even', false: 'odd'}[$even]">
+							<tr ng-cloak ng-repeat="row in product.price_stock" class="pricestock-row" ng-class="{true: 'even', false: 'odd'}[$even]">
 								<td ng-cloak ng-if="use_sizecharts === true" class="text-center pricestock-cell">{{ product.price_stock[$index].size }}</td>
-								<td ng-repeat="(tag_id, values) in product.price_stock[$index].options track by $index" ng-init="tag = getTag(tag_id)" class="text-center pricestock-cell">
+								<td ng-repeat="(tag_id, values) in product.price_stock[$index].options" ng-init="tag = getTag(tag_id)" class="text-center pricestock-cell">
 									<span ng-if="tag.type == <?= Tag::DROPDOWN ?>">
-										<span ng-repeat="value in values track by $index">
+										<span ng-repeat="value in values">
 											{{ getTagOption($parent.tag, value).text[lang] }}
 											<span ng-show="!$last">,</span>
 										</span>
 									</span>
 
 									<span ng-if="tag.type == <?= Tag::FREETEXT ?>">
-										<span ng-repeat="value in values track by $index">
+										<span ng-repeat="value in values">
 											{{ value.value }}
 											{{ value.metric_unit }}
 											<span ng-show="!$last">x</span>

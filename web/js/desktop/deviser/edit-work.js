@@ -46,12 +46,6 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 	$scope.dump = function(obj) {
 		return angular.toJson(obj, 4);
 	};
-	$scope.$watch("product.options", function(_new, _old) {
-		$scope.dump_options = angular.toJson(_new, 4);
-	}, true);
-	$scope.$watch("product.sizechart", function(_new) {
-		$scope.dump_sizechart = angular.toJson(_new, 4);
-	}, true);
 	//End testers
 
 	/**
@@ -224,6 +218,12 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 		$scope.product.sizechart.short_id = _sizechart.short_id;
 		$scope.product.sizechart.pristine = true;
 	});
+
+
+
+
+
+
 
 
 
@@ -524,7 +524,7 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 		var _obj;
 		var _price_stock = [];
 		angular.forEach(_ps_data, function(row) {
-			_header = angular.copy(_tags_for_ps_table);
+			var _header = angular.copy(_tags_for_ps_table);
 			_obj = {
 				"options": {}
 			};
