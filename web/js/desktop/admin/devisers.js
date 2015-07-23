@@ -29,7 +29,7 @@ todevise.controller('devisersCtrl', ["$scope", "$timeout", "$deviser", "$deviser
 	};
 
 	$scope.delete = function(deviser_id) {
-		$deviser.get({ short_id: deviser_id }).then(function(deviser) {
+		$deviser.delete({ short_id: deviser_id }).then(function(deviser) {
 			if (deviser.length !== 1) return;
 			deviser = deviser.shift();
 
