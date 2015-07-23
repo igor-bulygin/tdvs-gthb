@@ -156,7 +156,7 @@ class ApiController extends CController {
 			$filters = json_decode($filters, true) ?: [];
 
 			if (!empty($filters) && $this->intern === false) {
-				$filters = Utils::removeAllExcept($filters, []);
+				$filters = Utils::removeAllExcept($filters, ['short_id']);
 				//TODO: If not admin, force some fields (enabled only, visible by public only, etc...)
 			}
 			$filters["type"]['$in'] = [Person::DEVISER];
