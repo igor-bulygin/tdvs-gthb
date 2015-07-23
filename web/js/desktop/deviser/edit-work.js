@@ -589,7 +589,12 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 		 */
 		var _inserted = false;
 		angular.forEach($scope.product.sizechart.values, function(_row) {
-			if(_inserted === false && _row[0] > size) {
+			/**
+			 * The parseInt magic is required because a size can be a number of a number followed by some text.
+			 * In the second case, "12 (XL)" would turn out to be "smaller" than "2 (XXS", which is not true
+			 */
+			var _size = parseInt(_row[0]) || _row[0];
+			if(_inserted === false && _size > size) {
 				_inserted = true;
 				var _new_row = Array.apply(null, Array(_row.length)).map(Number.prototype.valueOf,0);
 				_new_row[0] = size;
