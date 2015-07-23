@@ -202,13 +202,6 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 		});
 		$scope.sizechart_countries = _countries;
 
-		/**
-		 * If this is a pristine sizechart, we'll have 0 available sizes because
-		 * all the sizes are already in the table. And if this is not a pristine sizechart,
-		 * then we must not should the dropdown with available sizes.
-		 */
-		$scope.available_sizes = [];
-
 		$timeout(function() {
 			try {
 				$scope.api_deviser_sizechart.select_none();
@@ -232,17 +225,70 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 		$scope.product.sizechart.pristine = true;
 	});
 
+
+
+
+
 	/**
 	 * Keep an eye on the values of the sizechart. If it changes,
+	 * mark the sizechart as pristine or not, accordingly.
+	 * Also, make sure to fill the available_sizes dropdown (if any sizes are available).
 	 */
-	$scope.$watch("product.sizechart.values", function(_new, _old) {
-		if($scope.tmp_selected_sizechart === undefined) return;
-		if($scope.product.sizechart.values.length === 0) return;
+	$scope.$watch("[product.sizechart.values, sizecharts]", function(_new, _old) {
+		if($scope.product.sizechart.values && $scope.product.sizechart.values.length === 0) return;
 
 		var _tmp_values = $scope._getSizechartValuesForCountry();
+		if(_tmp_values === undefined) {
+			return;
+		}
 
-		$scope.product.sizechart.pristine = angular.equals(_new, _tmp_values);
+		$scope.product.sizechart.pristine = angular.equals($scope.product.sizechart.values, _tmp_values);
+
+		/**
+		 * Fill (or empty) the dropdown that allows to add sizes
+		 */
+		$scope.available_sizes = [];
+		if($scope.product.sizechart.pristine === true) {
+			/**
+			 * If we have a pristine sizechart,the available_sizes dropdown will be empty
+			 * (because all sizes are already in the sizechart), so don't do anything as we already
+			 * emptied available_sizes
+			 */
+		} else if(!angular.equals([], _tmp_values)) {
+			/**
+			 * It seems that _tmp_values contains something, which means we can compare what we currently
+			 * have in product.sizechart.values and _tmp_values, find the difference and fill the dropdown
+			 * with that difference.
+			 */
+			var _sizes_in_original_sizechart = [];
+			var _sizes_in_sizechart_table = [];
+
+			angular.forEach(_tmp_values, function(row) {
+				_sizes_in_original_sizechart.push(row[0]);
+			});
+
+			angular.forEach($scope.product.sizechart.values, function(row) {
+				_sizes_in_sizechart_table.push(row[0]);
+			});
+
+			var _diff = _.difference(_sizes_in_original_sizechart, _sizes_in_sizechart_table);
+
+			angular.forEach(_diff, function(size) {
+				$scope.available_sizes.push({
+					text: size,
+					value: size
+				});
+			})
+		}
 	}, true);
+
+
+
+
+
+
+
+
 
 	//Whenever the countries dropdown is filled, try to preselect the country of the product's sizechart
 	$scope.$watch("sizechart_countries", function(_new, _old) {
@@ -264,7 +310,6 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 		$scope.country_watched = $scope.$watch("tmp_selected_sizechart_country", function(_new, _old) {
 			if(_new === _old) return;
 
-
 			if(_new !== "" && $scope.product.sizechart.pristine === true) {
 				$scope.product.sizechart.country = _new;
 			}
@@ -283,7 +328,10 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 			 */
 			if(_new !== "") {
 				console.log("OVERRIDING VALUES 4");
-				$scope.product.sizechart.values = $scope._getSizechartValuesForCountry();
+				var _tmp_values = $scope._getSizechartValuesForCountry();
+				if(_tmp_values !== undefined) {
+					$scope.product.sizechart.values = _tmp_values;
+				}
 			}
 		});
 
@@ -294,6 +342,15 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 
 	});
 
+
+
+
+
+
+
+
+
+
 	/**
 	 * Get an array of values that contains:
 	 * * All non-empty sizes of the currently selected country
@@ -302,18 +359,25 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 	 */
 	$scope._getSizechartValuesForCountry = function() {
 		/**
-		 * If tmp_selected_sizechart is an empty array it means that there are no available
-		 * sizecharts, so we should just return an empty array.
+		 * If there isn't a short_id in the product.sizechart table, it means that this is a completely new product
+		 * and the available_sizecharts dropdown shouldn't be populated.
+		 * Also, if $scope.sizecharts is undefined or not an array, it means that we're still waiting for a $http callback.
 		 */
-		if(angular.isArray($scope.tmp_selected_sizechart) && $scope.tmp_selected_sizechart.length === 0) {
+		var _short_id = $scope.product.sizechart.short_id;
+		if(_short_id === undefined || _short_id === "" || $scope.sizecharts === undefined || !angular.isArray($scope.sizecharts)) {
+			return undefined;
+		}
+
+		var _sizecharts = jsonpath.query($scope.sizecharts, "$..[?(@.short_id=='" + _short_id + "')]");
+		if(_sizecharts.length === 0) {
 			return [];
 		}
 
 		var _tmp_values = [];
 
-		angular.forEach($scope.tmp_selected_sizechart[0].values, function(_row) {
-			var _tmp_value = _row.slice($scope.tmp_selected_sizechart[0].countries.length);
-			var _country_index = $scope.tmp_selected_sizechart[0].countries.indexOf($scope.product.sizechart.country);
+		angular.forEach(_sizecharts[0].values, function(_row) {
+			var _tmp_value = _row.slice(_sizecharts[0].countries.length);
+			var _country_index = _sizecharts[0].countries.indexOf($scope.product.sizechart.country);
 			var _size = _row.slice(_country_index, _country_index + 1)[0];
 
 			//Don't push rows without a size
@@ -322,8 +386,18 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 			_tmp_values.push(_tmp_value);
 		});
 
-		return angular.copy(_tmp_values);
+		return _tmp_values;
 	};
+
+
+
+
+
+
+
+
+
+
 
 	/**
 	 * React to changes in the dropdown containing custom sizecharts
@@ -345,13 +419,20 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 				delete _sizechart["_check_time"];
 				delete _sizechart[""];
 
-				$scope.product.sizechart = angular.copy(_sizechart);
-				$scope.available_sizes = [];
-
+				$scope.product.sizechart = _sizechart;
 			}, 0);
 		}, 0);
 
 	});
+
+
+
+
+
+
+
+
+
 
 	//Price & Stock table generator
 	$scope.$watch("[product.options, product.sizechart, use_sizecharts]", function(_new, _old) {
@@ -484,20 +565,31 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 		console.log("end ================");
 	}, true);
 
+
+
+
+
+
+
+	/**
+	 * This is used to insert a new size into the sizechart.values array.
+	 */
 	$scope.insertSizeInTable = function() {
-		/* The parseInt || <var> magic is required because a size value can be a number
-		 * or a string. If a number, then be just parseInt it either way. If a string,
-		 * then we compare the string and insert in alphabetical order.
+		/**
+		 * If there is no selected size, don't do anything.
 		 */
 		if($scope.tmp_selected_size === undefined || $scope.tmp_selected_size === "") return;
 
 		var _values = [];
+		var size = $scope.tmp_selected_size;
 
-		var size = parseInt($scope.tmp_selected_size) || $scope.tmp_selected_size;
+		/**
+		 * Iterate over each row of the values array until the first element of each row (which is the size)
+		 * is smaller than the size we're trying to insert. That way we'll insert it in the right place.
+		 */
 		var _inserted = false;
 		angular.forEach($scope.product.sizechart.values, function(_row) {
-			var _size = parseInt(_row[0]) || _row[0];
-			if(_inserted === false && _size > size) {
+			if(_inserted === false && _row[0] > size) {
 				_inserted = true;
 				var _new_row = Array.apply(null, Array(_row.length)).map(Number.prototype.valueOf,0);
 				_new_row[0] = size;
@@ -506,52 +598,26 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 			_values.push(_row);
 		});
 
+		/**
+		 * If we didn't inserted the size it means that the size is bigger than all other sizes and it should
+		 * be inserted at the end.
+		 */
 		if(_inserted === false) {
 			var _new_row = Array.apply(null, Array($scope.product.sizechart.values[0].length)).map(Number.prototype.valueOf,0);
 			_new_row[0] = size;
 			_values.push(_new_row);
 		}
 
-		var _available_sizes = [];
-		angular.forEach($scope.available_sizes, function(_size) {
-			if(_size.value !== $scope.tmp_selected_size) _available_sizes.push(_size);
-		});
-		$scope.available_sizes = _available_sizes;
-
+		/**
+		 * Set the new values.
+		 */
 		$scope.product.sizechart.values = _values;
-
-		$timeout(function() {
-			$scope.api_available_sizes.select_none();
-		}, 0);
 	};
 
+	/**
+	 * This is used to delete a size from the sizechart.values array.
+	 */
 	$scope.deleteSizeFromTable = function(row_index) {
-		var _row = $scope.product.sizechart.values[row_index];
-		var _available_sizes = [];
-
-		//The first value of the row is the size
-		var size = parseInt(_row[0]) || _row[0];
-		var _inserted = false;
-		angular.forEach($scope.available_sizes, function(_size) {
-			_val = parseInt(_size.value) || _size.value;
-			if(_inserted === false && _val > size) {
-				_inserted = true;
-				_available_sizes.push({
-					text: _row[0],
-					value: _row[0]
-				});
-			}
-			_available_sizes.push(_size);
-		});
-
-		if(_inserted === false) {
-			_available_sizes.push({
-				text: _row[0],
-				value: _row[0]
-			});
-		}
-
-		$scope.available_sizes = angular.copy(_available_sizes);
 		$scope.product.sizechart.values.splice(row_index, 1);
 	};
 

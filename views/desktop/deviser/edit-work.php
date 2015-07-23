@@ -732,7 +732,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 						</div>
 
-						<div class="row no-gutter" ng-if="product.sizechart.country != '' && $parent.available_sizes.length > 0">
+						<div class="row no-gutter" ng-if="$parent.available_sizes.length > 0">
 							<div class="row-same-height">
 								<div class="col-xs-1 col-height col-middle">
 									<span><?= Yii::t("app/deviser", "Add size to the chart") ?></span>
