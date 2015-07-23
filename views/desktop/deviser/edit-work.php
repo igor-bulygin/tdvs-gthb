@@ -139,7 +139,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 						</div>
 
-						<!--<pre>{{ dump_options }}</pre>-->
+						<!--<pre>{{ dump(product.options) }}</pre>-->
 
 						<div class="flex flex-prop-1-0 drop-box-holder">
 							<div ngf-drop ngf-select ngf-keep="true" ngf-keep-distinct="true" ng-model="shadow_photos" class="flex-prop-1-0 drop-box" ngf-drag-over-class="dragover" ngf-multiple="true" ngf-allow-dir="true" ngf-accept="'image/*'">
@@ -790,7 +790,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 					</div>
 
-					<!--<pre>{{ dump_sizechart }}</pre>-->
+					<!--<pre>{{ dump(product.sizechart) }}</pre>-->
 
 					<div ng-cloak class="col-xs-12" ng-show="use_sizecharts === true && product.sizechart.values.length > 0">
 						<div class="funiv_bold fs0-929 fc-f7284b fw-normal pointer save-sizechart" ng-click="save_sizechart()">
@@ -930,6 +930,8 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 					</div>
 				</div>
+
+				<!--<pre>{{ dump(product.price_stock) }}</pre>-->
 
 				<!--
 

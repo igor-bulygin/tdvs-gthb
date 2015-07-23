@@ -608,7 +608,14 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 		 * be inserted at the end.
 		 */
 		if(_inserted === false) {
-			var _new_row = Array.apply(null, Array($scope.product.sizechart.values[0].length)).map(Number.prototype.valueOf,0);
+			var _short_id = $scope.product.sizechart.short_id;
+			var _sizecharts = jsonpath.query($scope.sizecharts, "$..[?(@.short_id=='" + _short_id + "')]");
+			if(_sizecharts.length === 0) {
+				//Something really bad happened. Quit before we break something.
+				return;
+			}
+
+			var _new_row = Array.apply(null, Array(_sizecharts[0].values[0].length)).map(Number.prototype.valueOf,0);
 			_new_row[0] = $scope.tmp_selected_size;
 			_values.push(_new_row);
 		}
