@@ -973,7 +973,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 				<div class="row no-gutter">
 
-					<div class="col-xs-12">
+					<div class="col-xs-12" ng-init="product.returns.type = product.returns.type || <?= Returns::NONE ?>">
 
 						<div class="row no-gutter">
 							<div class="row-same-height">
@@ -1017,7 +1017,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 				<div class="row no-gutter">
 
-					<div class="col-xs-12">
+					<div class="col-xs-12" ng-init="product.warranty.type = product.warranty.type || <?= Warranty::NONE ?>">
 
 						<div class="row no-gutter">
 							<div class="row-same-height">
