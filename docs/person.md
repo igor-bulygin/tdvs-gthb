@@ -11,7 +11,22 @@ This is how a single person looks like:
 
 	categories: ["30000", "50000"], //Informational only.
 
-	collections: ["10000", "20000"], //Exists only if deviser
+	collections: [
+		{
+			short_id: "10000",
+			name: {
+				"en-US": "Summer",
+				"es-ES": "Verano"
+			}
+		},
+		{
+			short_id: "20000",
+			name: {
+				"en-US": "Winter",
+				"es-ES": "Invierno"
+			}
+		}
+	], //Exists only if deviser
 
 	type: [0, 1], // Each person can have a single or multiple roles, for example, Client and Deviser.
 	// Check the constants in Person model for all the valid values for this.
