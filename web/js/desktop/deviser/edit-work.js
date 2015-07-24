@@ -588,10 +588,22 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 	}, true);
 
 
+	/**
+	 * This is used to apply a given value to all the rows of the "Price & Stock" table.
+	 * We just iterate over the rows of the price_stock array, check if the key exists
+	 * and then apply the value to the passed key.
+	 *
+	 * NOTE: This is used for 'weight', 'stock' and 'price' fields.
+	 */
+	$scope.apply_to_all = function(field, value) {
+		if(value === undefined) return;
 
-
-
-
+		angular.forEach($scope.product.price_stock, function(row) {
+			if(angular.isObject(row) && row.hasOwnProperty(field)) {
+				row[field] = value;
+			}
+		});
+	};
 
 	/**
 	 * This is used to insert a new size into the sizechart.values array.

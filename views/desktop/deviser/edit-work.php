@@ -927,12 +927,21 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 								</td>
 								<td class="text-center pricestock-cell">
 									<input class="text-center" type="number" ng-model="product.price_stock[$index].weight" />
+									<span ng-cloak class="funiv fc-6d fs0-643 pointer" ng-click="apply_to_all('weight', product.price_stock[$index].weight)" ng-if="$first">
+										<?= Yii::t("app/deviser", "Apply to all") ?>
+									</span>
 								</td>
 								<td class="text-center pricestock-cell">
 									<input class="text-center" type="number" ng-model="product.price_stock[$index].stock" />
+									<span ng-cloak class="funiv fc-6d fs0-643 pointer" ng-click="apply_to_all('stock', product.price_stock[$index].stock)" ng-if="$first">
+										<?= Yii::t("app/deviser", "Apply to all") ?>
+									</span>
 								</td>
 								<td class="text-center pricestock-cell">
 									<input class="text-center" type="number" ng-model="product.price_stock[$index].price" />
+									<span ng-cloak class="funiv fc-6d fs0-643 pointer" ng-click="apply_to_all('price', product.price_stock[$index].price)" ng-if="$first">
+										<?= Yii::t("app/deviser", "Apply to all") ?>
+									</span>
 								</td>
 							</tr>
 
