@@ -142,15 +142,26 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 						<!--<pre>{{ dump(product.options) }}</pre>-->
 
 						<div class="flex flex-prop-1-0 drop-box-holder">
-							<div ngf-drop ngf-select ngf-keep="true" ngf-keep-distinct="true" ng-model="shadow_photos" class="flex-prop-1-0 drop-box" ngf-drag-over-class="dragover" ngf-multiple="true" ngf-allow-dir="true" ngf-accept="'image/*'">
+							<div ngf-drop ngf-select ngf-keep="true" ngf-keep-distinct="true" ng-model="shadow_photos" class="flex flex-wrap-wrap drop-box" ngf-drag-over-class="dragover" ngf-multiple="true" ngf-allow-dir="true" ngf-accept="'image/*'">
 
-								<div ng-cloak ng-repeat="photo in product.media.photos track by $index" class="col-xs-3 photo-holder">
+								<div ng-cloak ng-repeat="photo in product.media.photos track by $index" class="photo-holder">
 									<div class="photo-white-area" ng-click="$event.stopPropagation();">
 										<span class="glyphicon glyphicon-remove fs0-786 btn_delete_photo pointer" ng-click="delete_photo($index, $event)"></span>
 
 										<div ng-if="photo.name !== ''" ngf-bg-src="photo.blob" angular-img-dl angular-img-dl-url="{{ _base_product_photo_url + photo.name }}" angular-img-dl-model="photo.blob" class="photo"></div>
 										<div ng-if="photo.name === ''" ngf-bg-src="photo.blob" angular-img-dl angular-img-dl-url="" angular-img-dl-model="photo.blob" class="photo"></div>
-
+									</div>
+									<div class="photo-controls flex flex-align-center flex-justify-center">
+										<div class="set-as-main text-center pointer pull-left" ng-click="set_main_photo()">
+											<span class="fc-fff glyphicon glyphicon-star-empty"></span>
+											<br />
+											<span class="funiv fs0-786 fc-3d"><?= Yii::t("app/devser", "Set as product's main photo") ?></span>
+										</div>
+										<div class="connect-with-tags text-center pointer">
+											<span class="fc-fff glyphicon glyphicon-link"></span>
+											<br />
+											<span class="funiv fs0-786 fc-3d"><?= Yii::t("app/devser", "Set as product's main photo") ?></span>
+										</div>
 									</div>
 								</div>
 

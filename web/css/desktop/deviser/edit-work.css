@@ -130,6 +130,7 @@
 	-moz-border-radius: 1em;
 	border-radius: 1em;
 	min-height: 200px;
+	width: 100%;
 }
 
 .background-holder {
@@ -152,6 +153,7 @@
 }
 
 .photo-holder {
+	width: 25%;
 	padding: 15px !important;
 }
 
@@ -179,10 +181,26 @@
 }
 
 .photo {
-	height: 25vh;
+	height: 15em;
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center;
+}
+
+.photo-controls {
+	padding: 1em 0 1em 0;
+
+}
+
+.photo-controls > .set-as-main,
+.photo-controls > .connect-with-tags {
+	padding-left: 1em;
+	padding-right: 1em;
+}
+
+.photo-controls > .set-as-main:hover > span,
+.photo-controls > .connect-with-tags:hover > span {
+	color: #9013fe;
 }
 
 .video_link_holder {
