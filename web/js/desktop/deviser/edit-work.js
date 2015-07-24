@@ -100,11 +100,22 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 			}).then(function(_sizecharts) {
 				if(_sizecharts.length === 0) {
 					_use_sizecharts = false;
+					$scope.sizechart = [];
 				} else {
 					$scope.sizecharts = _sizecharts;
 				}
 				$scope.use_sizecharts = _use_sizecharts;
 			});
+		} else {
+			/**
+			 * Check if we had something in the sizechart variable. If that is the case, it means that we
+			 * previously had selected a category that had sizecharts, but now we have a category that doesn't
+			 * have any sizecharts, so we should empty the sizechart variable.
+			 */
+			if($scope.sizecharts !== undefined && !angular.equals([], $scope.sizecharts)) {
+				$scope.sizecharts = [];
+			}
+			$scope.use_sizecharts = _use_sizecharts;
 		}
 
 		$scope.sortTags(_tags_in_categories);
@@ -240,6 +251,12 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 		var _tmp_values = $scope._getSizechartValuesForCountry();
 		if(_tmp_values === undefined) {
 			return;
+		} else if(_tmp_values === null || angular.equals([], _new[1])) {
+			/**
+			 * If we are here it means that the selected categories changed in such a way that the sizechart that
+			 * we had selected isn't possible to keep anymore and should be removed.
+			 */
+			$scope.product.sizechart = {};
 		}
 
 		$scope.product.sizechart.pristine = angular.equals($scope.product.sizechart.values, _tmp_values);
@@ -368,9 +385,14 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 			return undefined;
 		}
 
+		/**
+		 * If none of the sizecharts that we downloaded matches the short_id in our product.sizechart it means that categories
+		 * changed, but the product.sizechart wasn't removed. We'll return "null" here so the caller knows to remove
+		 * the product.sizechart data.
+		 */
 		var _sizecharts = jsonpath.query($scope.sizecharts, "$..[?(@.short_id=='" + _short_id + "')]");
 		if(_sizecharts.length === 0) {
-			return [];
+			return null;
 		}
 
 		var _tmp_values = [];
