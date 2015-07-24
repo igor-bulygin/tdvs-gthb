@@ -517,12 +517,12 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 												<?= Yii::t("app/deviser", "This is in pre-order") ?>
 											</label>
 										</div>
-										<div class="col-xs-4 col-height col-top" ng-show="product.preorder.type == <?= Preorder::YES ?>">
+										<div class="col-xs-4 col-height col-top" ng-show="product.preorder.type == <?= Preorder::YES ?> && 1 === 2">
 											<span class="funiv_bold fs0-857 fc-6d fw-normal"><?= Yii::t("app/deviser", "When will the pre-order period end?") ?></span>
 											<br />
 											<span class="fpf fs0-714 fc-6d fw-normal"><?= Yii::t("app/deviser", "When the pre-order is over, you will be reminded to update the stock of the product.") ?></span>
 										</div>
-										<div class="col-xs-4 col-height col-top" ng-show="product.preorder.type == <?= Preorder::YES ?>">
+										<div class="col-xs-4 col-height col-top" ng-show="product.preorder.type == <?= Preorder::YES ?> && 1 === 2">
 											<div class="dropdown">
 												<div class="dropdown-periodend_date" id="periodend_date" role="button" data-toggle="dropdown">
 													<div class="input-append">
@@ -540,7 +540,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 									</div>
 								</div>
 
-								<div class="row no-gutter" ng-show="product.preorder.type == <?= Preorder::YES ?>">
+								<div class="row no-gutter" ng-show="product.preorder.type == <?= Preorder::YES ?> && 1 === 2">
 									<div class="row-same-height">
 										<div class="col-xs-4 col-height col-middle">
 
