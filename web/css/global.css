@@ -55,6 +55,18 @@ body {
 	justify-content: space-between;
 }
 
+.flex-wrap-wrap {
+	flex-wrap: wrap;
+}
+
+.flex-wrap-nowrap {
+	flex-wrap: nowrap;
+}
+
+.flex-wrap-reverse {
+	flex-wrap: wrap-reverse;
+}
+
 .flex-column {
 	-webkit-flex-direction: column;
 		-ms-flex-direction: column;
