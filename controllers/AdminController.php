@@ -3,7 +3,6 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Lang;
 use yii\helpers\Json;
 use app\helpers\Utils;
 use app\models\Country;
@@ -40,7 +39,7 @@ class AdminController extends CController {
 		$countries = $this->api->actionCountries()->asArray()->all();
 		$countries_lookup = [];
 		foreach($countries as $country) {
-			$countries_lookup[$country["country_code"]] = Utils::getValue($country["country_name"], Yii::$app->language, array_keys(Lang::EN_US)[0]);
+			$countries_lookup[$country["country_code"]] = Utils::getValue($country["country_name"], $this->lang, $this->lang_en);
 		}
 
 		$data = [
@@ -104,14 +103,14 @@ class AdminController extends CController {
 		$continents = [];
 
 		foreach($countries as $country) {
-			$countries_lookup[$country["country_code"]] = Utils::getValue($country["country_name"], Yii::$app->language, array_keys(Lang::EN_US)[0]);
+			$countries_lookup[$country["country_code"]] = Utils::getValue($country["country_name"], $this->lang, $this->lang_en);
 		}
 
 		foreach(Country::CONTINENTS as $code => $continent) {
 			$continents[] = [
 				"country_code" => $code,
 				"country_name" => [
-					Yii::$app->language => Yii::t("app/admin", $continent)
+					$this->lang => Yii::t("app/admin", $continent)
 				]
 			];
 			$countries_lookup[$code] = Yii::t("app/admin", $continent);
@@ -123,13 +122,13 @@ class AdminController extends CController {
 			"countries" => [
 				[
 					"country_name" => [
-						Yii::$app->language => Yii::t("app/admin", "Continents")
+						$this->lang => Yii::t("app/admin", "Continents")
 					],
 					"sub" => $continents
 				],
 				[
 					"country_name" => [
-						Yii::$app->language => Yii::t("app/admin", "Countries")
+						$this->lang => Yii::t("app/admin", "Countries")
 					],
 					"sub" => $countries
 				]

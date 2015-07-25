@@ -13,6 +13,17 @@ global.arrayToObject = function(obj, props) {
 };
 
 /**
+ * Get a value of an object by a key, or get another value using a default key.
+ * @param obj
+ * @param key
+ * @param default_key
+ * @returns {*}
+ */
+global.getValue = function(obj, key, default_key) {
+	return obj.hasOwnProperty(key) ? obj[key] : obj[default_key];
+};
+
+/**
  * Return the current host.
  */
 function currentHost() {

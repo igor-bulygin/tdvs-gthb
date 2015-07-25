@@ -1,11 +1,12 @@
 <?php
-use app\helpers\Utils;
-use yii\helpers\Json;
+use yii\web\View;
+use app\models\Lang;
 use yii\helpers\Url;
+use yii\helpers\Json;
 use yii\helpers\Html;
+use app\helpers\Utils;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
-use yii\web\View;
 use yii\widgets\Breadcrumbs;
 
 use kartik\sidenav\SideNav;
@@ -24,6 +25,7 @@ use lajax\languagepicker\widgets\LanguagePicker;
 		<title><?= Html::encode($this->title) ?></title>
 		<?php $this->head() ?>
 		<?php $this->registerJs("var _lang = " . Json::encode(Yii::$app->language) . ";", View::POS_HEAD) ?>
+		<?php $this->registerJs("var _lang_en = " . Json::encode(array_keys(Lang::EN_US)[0]) . ";", View::POS_HEAD) ?>
 		<?php $this->registerJs("var _langs = " . Json::encode(Utils::availableLangs()) . ";", View::POS_HEAD) ?>
 	</head>
 	<body>
