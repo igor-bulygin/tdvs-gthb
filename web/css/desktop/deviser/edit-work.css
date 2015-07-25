@@ -195,8 +195,7 @@
 
 .photo-controls > .set-as-main,
 .photo-controls > .connect-with-tags,
-.photo-info > .not-uploaded,
-.photo-info > .uploading {
+.photo-info > .not-uploaded {
 	padding-left: 1em;
 	padding-right: 1em;
 }
@@ -204,6 +203,14 @@
 .photo-controls > .set-as-main:hover > span,
 .photo-controls > .connect-with-tags:hover > span {
 	color: #9013fe;
+}
+
+.photo-info > .uploading {
+	width: 100%;
+}
+
+.photo-info > .uploading .progress {
+	background-color: transparent;
 }
 
 .photo-info > .uploading .progress-bar {
