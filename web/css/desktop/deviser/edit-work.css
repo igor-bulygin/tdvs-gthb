@@ -187,13 +187,16 @@
 	background-position: center;
 }
 
-.photo-controls {
+.photo-controls,
+.photo-info{
 	padding: 1em 0 1em 0;
 
 }
 
 .photo-controls > .set-as-main,
-.photo-controls > .connect-with-tags {
+.photo-controls > .connect-with-tags,
+.photo-info > .not-uploaded,
+.photo-info > .uploading {
 	padding-left: 1em;
 	padding-right: 1em;
 }
@@ -201,6 +204,10 @@
 .photo-controls > .set-as-main:hover > span,
 .photo-controls > .connect-with-tags:hover > span {
 	color: #9013fe;
+}
+
+.photo-info > .uploading .progress-bar {
+	min-width: 7em;
 }
 
 .video_link_holder {

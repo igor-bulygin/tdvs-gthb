@@ -151,18 +151,37 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 										<div ng-if="photo.name !== ''" ngf-bg-src="photo.blob" angular-img-dl angular-img-dl-url="{{ _base_product_photo_url + photo.name }}" angular-img-dl-model="photo.blob" class="photo"></div>
 										<div ng-if="photo.name === ''" ngf-bg-src="photo.blob" angular-img-dl angular-img-dl-url="" angular-img-dl-model="photo.blob" class="photo"></div>
 									</div>
-									<div class="photo-controls flex flex-align-center flex-justify-center">
-										<div class="set-as-main text-center pointer pull-left" ng-click="set_main_photo()">
+
+									<div ng-clock class="photo-controls flex flex-align-center flex-justify-center" ng-show="photo.name !== ''"  ng-click="$event.stopPropagation();">
+										<div class="set-as-main text-center pointer pull-left" ng-click="set_main_photo($index)">
 											<span class="fc-fff glyphicon glyphicon-star-empty"></span>
 											<br />
-											<span class="funiv fs0-786 fc-3d"><?= Yii::t("app/devser", "Set as product's main photo") ?></span>
+											<span class="funiv fs0-786 fc-3d"><?= Yii::t("app/deviser", "Set as product's main photo") ?></span>
 										</div>
 										<div class="connect-with-tags text-center pointer">
 											<span class="fc-fff glyphicon glyphicon-link"></span>
 											<br />
-											<span class="funiv fs0-786 fc-3d"><?= Yii::t("app/devser", "Set as product's main photo") ?></span>
+											<span class="funiv fs0-786 fc-3d"><?= Yii::t("app/deviser", "Set as product's main photo") ?></span>
 										</div>
 									</div>
+
+									<div ng-cloak class="photo-info flex flex-align-center flex-justify-center" ng-show="photo.not_uploaded === true || photo.progress"  ng-click="$event.stopPropagation();">
+										<div ng-cloak class="not-uploaded text-center" ng-show="photo.not_uploaded === true && photo.progress === undefined">
+											<span class="fc-fff glyphicon glyphicon-exclamation-sign"></span>
+											<br />
+											<span class="funiv fs0-786 fc-3d"><?= Yii::t("app/deviser", "This photo hasn't been uploaded yet") ?></span>
+										</div>
+										<div ng-cloak class="uploading text-center" ng-show="photo.progress">
+											<span class="fc-fff glyphicon glyphicon-upload"></span>
+											<div class="progress">
+												<div class="progress-bar progress-bar-info progress-bar-striped active funiv fs0-786 fc-3d" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+													<?= Yii::t("app/deviser", "Uploading...") ?> {{ photo.progress }}%
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<!--<pre>{{ dump(photo) }}</pre>-->
 								</div>
 
 							</div>

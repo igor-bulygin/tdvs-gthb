@@ -819,6 +819,18 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 		$scope.product.options[option_id].splice(index, 1);
 	};
 
+	/**
+	 *
+	 */
+	$scope.set_main_photo = function(index) {
+		var _key = "main_product_photo";
+		angular.forEach($scope.product.media.photos, function(photo) {
+			delete photo[_key];
+		});
+
+		$scope.product.media.photos[index][_key] = true;
+	};
+
 	/*
 	 * Functions required for comparing and extracting tag values in a product
 	 */
@@ -979,8 +991,9 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 					}
 				}
 			}).progress(function(e) {
-				//var progressPercentage = parseInt(100.0 * e.loaded / e.total);
+				var progressPercentage = parseInt(100.0 * e.loaded / e.total);
 				//console.log('progress: ' + progressPercentage + '% ' + e.config.file.name);
+				photo.progress = progressPercentage;
 			}).success(function(data, status, header, config) {
 				//console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
 				photos[index] = angular.copy(data.media.photos.pop());
@@ -989,6 +1002,7 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 				photos[index].not_uploaded = true;
 				toastr.error("Error while uploading product photo", err)
 			}).finally(function() {
+				delete photos[index]["progress"];
 				do_save();
 			});
 		});
