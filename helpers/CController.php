@@ -2,6 +2,7 @@
 namespace app\helpers;
 
 use Yii;
+use app\models\Lang;
 use yii\helpers\Json;
 use app\helpers\Utils;
 use yii\web\Controller;
@@ -10,6 +11,8 @@ use app\controllers\ApiController;
 class CController extends Controller {
 	private $_viewPath = "";
 	public $api;
+	public $lang;
+	public $lang_en;
 
 	public function init() {
 		/**
@@ -39,12 +42,15 @@ class CController extends Controller {
 		}
 
 		/**
-		 * Expose the APi to all the controller so we can reuse the API's public
-		 * methods from inside of our code.
+		 * Expose the API to all the controllers so we can reuse the API's public
+		 * methods from inside our code.
 		 */
 		if($this->id !== ApiController::className()) {
 			$this->api = new ApiController(ApiController::className(), null, [], true);
 		}
+
+		$this->lang = Yii::$app->language;
+		$this->lang_en = array_keys(Lang::EN_US)[0];
 
 		parent::init();
 	}

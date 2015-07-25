@@ -24,7 +24,7 @@ class DeviserController extends CController {
 		$countries = $this->api->actionCountries()->asArray()->all();
 		$countries_lookup = [];
 		foreach($countries as $country) {
-			$countries_lookup[$country["country_code"]] = Utils::getValue($country["country_name"], Yii::$app->language, array_keys(Lang::EN_US)[0]);
+			$countries_lookup[$country["country_code"]] = Utils::getValue($country["country_name"], $this->lang, $this->lang_en);
 		}
 
 		$deviser = $this->api->actionDevisers(Json::encode(["slug" => $slug]))->asArray()->one();
@@ -39,11 +39,10 @@ class DeviserController extends CController {
 	}
 
 	public function actionEditWork($short_id) {
-		$lang = Yii::$app->language;
-		$countries = $this->api->actionCountries("", Json::encode(["_id" => 0, "country_name.$lang", "country_code", "continent"]))->asArray()->all();
+		$countries = $this->api->actionCountries("", Json::encode(["_id" => 0, "country_name.$this->lang", "country_name.$this->lang_en", "country_code", "continent"]))->asArray()->all();
 		$countries_lookup = [];
 		foreach($countries as $country) {
-			$countries_lookup[$country["country_code"]] = Utils::getValue($country["country_name"], Yii::$app->language, array_keys(Lang::EN_US)[0]);
+			$countries_lookup[$country["country_code"]] = Utils::getValue($country["country_name"], $this->lang, $this->lang_en);
 		}
 		foreach(Country::CONTINENTS as $code => $continent) {
 			$countries_lookup[$code] = Yii::t("app/admin", $continent);
@@ -54,8 +53,8 @@ class DeviserController extends CController {
 		return $this->render("edit-work", [
 			"deviser" => $deviser,
 			"product" => $product[0],
-			"tags" => $this->api->actionTags("", Json::encode(["_id" => 0, "short_id", "enabled", "n_options", "required", "stock_and_price", "type", "name.$lang", "description.$lang", "categories", "options"]))->asArray()->all(),
-			'categories' => $this->api->actionCategories("", Json::encode(["_id" => 0, "short_id", "path", "name.$lang". "name." . array_keys(Lang::EN_US)[0], "sizecharts", "prints"]))->asArray()->all(),
+			"tags" => $this->api->actionTags("", Json::encode(["_id" => 0, "short_id", "enabled", "n_options", "required", "stock_and_price", "type", "name.$this->lang", "name.$this->lang_en", "description.$this->lang", "description.$this->lang_en", "categories", "options"]))->asArray()->all(),
+			'categories' => $this->api->actionCategories("", Json::encode(["_id" => 0, "short_id", "path", "name.$this->lang". "name.$this->lang_en", "sizecharts", "prints"]))->asArray()->all(),
 			"countries" => $countries,
 			"countries_lookup" => $countries_lookup,
 			"deviser_sizecharts" => $this->api->actionSizeCharts(Json::encode(["type" => SizeChart::DEVISER, "deviser_id" => $deviser["short_id"]]))->asArray()->all()
