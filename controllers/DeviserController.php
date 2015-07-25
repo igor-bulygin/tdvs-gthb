@@ -55,7 +55,7 @@ class DeviserController extends CController {
 			"deviser" => $deviser,
 			"product" => $product[0],
 			"tags" => $this->api->actionTags("", Json::encode(["_id" => 0, "short_id", "enabled", "n_options", "required", "stock_and_price", "type", "name.$lang", "description.$lang", "categories", "options"]))->asArray()->all(),
-			'categories' => $this->api->actionCategories("", Json::encode(["_id" => 0, "short_id", "path", "name.$lang", "sizecharts", "prints"]))->asArray()->all(),
+			'categories' => $this->api->actionCategories("", Json::encode(["_id" => 0, "short_id", "path", "name.$lang". "name." . array_keys(Lang::EN_US)[0], "sizecharts", "prints"]))->asArray()->all(),
 			"countries" => $countries,
 			"countries_lookup" => $countries_lookup,
 			"deviser_sizecharts" => $this->api->actionSizeCharts(Json::encode(["type" => SizeChart::DEVISER, "deviser_id" => $deviser["short_id"]]))->asArray()->all()
