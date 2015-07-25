@@ -140,9 +140,9 @@ class DeviserController extends CController {
 		@unlink(Utils::join_paths($product_path, $photo_name));
 
 		$media = $product->media;
-		$media["photos"] = array_filter($media["photos"], function($photo) use ($photo_name) {
+		$media["photos"] = array_values(array_filter($media["photos"], function($photo) use ($photo_name) {
 			return $photo["name"] !== $photo_name;
-		});
+		}));
 		$product->media = $media;
 		$product->save();
 
