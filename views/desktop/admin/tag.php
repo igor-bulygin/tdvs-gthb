@@ -288,12 +288,12 @@ $this->title = 'Todevise / Admin / Tag';
 
 			<div ng-if="opt_value_or_color == 2">
 				<label class='modal-title funiv fs1 fnormal fc-18'><?php echo Yii::t("app/admin", "Currently selected color"); ?>  </label>
-				<div class="color-cell {{ get_class_from_value(data.option.value) }}"></div>
+				<div class="color-cell {{ get_class_from_value(data.options[data.index].value) }}"></div>
 
 				<label class='modal-title funiv fs1 fnormal fc-18'><?php echo Yii::t("app/admin", "Select a color"); ?></label>
 				<div class="flex">
 					<div ng-repeat="color in colors">
-						<div class="color-cell {{ color.class }}" data-toggle="tooltip" title="{{ color.text }}" ng-click="data.option.value = color.value"></div>
+						<div class="color-cell {{ color.class }}" data-toggle="tooltip" title="{{ color.text }}" ng-click="data.options[data.index].value = color.value"></div>
 					</div>
 				</div>
 			</div>
