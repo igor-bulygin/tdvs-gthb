@@ -820,7 +820,15 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 	};
 
 	/**
-	 *
+	 * Check if the photo at the given index is set at the product's main photo.
+	 */
+	$scope.is_main_photo = function(index) {
+		var _key = "main_product_photo";
+		return $scope.product.media.photos[index][_key];
+	};
+
+	/**
+	 * Set a photo as the product's main photo.
 	 */
 	$scope.set_main_photo = function(index) {
 		var _key = "main_product_photo";

@@ -153,7 +153,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 									</div>
 
 									<div ng-clock class="photo-controls flex flex-align-center flex-justify-center" ng-show="photo.name !== ''"  ng-click="$event.stopPropagation();">
-										<div class="set-as-main text-center pointer pull-left" ng-click="set_main_photo($index)">
+										<div class="set-as-main text-center pointer pull-left" ng-class="{active: is_main_photo($index) === true}" ng-click="set_main_photo($index)">
 											<span class="fc-fff glyphicon glyphicon-star-empty"></span>
 											<br />
 											<span class="funiv fs0-786 fc-3d"><?= Yii::t("app/deviser", "Set as product's main photo") ?></span>

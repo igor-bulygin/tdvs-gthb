@@ -200,6 +200,10 @@
 	padding-right: 1em;
 }
 
+.photo-controls > .set-as-main.active > span {
+	color: #f34d4d;
+}
+
 .photo-controls > .set-as-main:hover > span,
 .photo-controls > .connect-with-tags:hover > span {
 	color: #9013fe;
