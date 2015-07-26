@@ -37,7 +37,7 @@ $this->title = 'Todevise / Admin / Size charts';
 				</div>
 
 				<div class="col-xs-4 col-height col-middle flex flex-align-center">
-					<div class="funiv fs-upper fc-9b fs0-786 flex-inline"><?php echo Yii::t("app/admin", "Filter by category"); ?></div>
+					<div class="funiv fs-upper fc-9b fs0-786 flex-inline"><?= Yii::t("app/admin", "Filter by category"); ?></div>
 					<div
 						angular-multi-select
 						api="api"
@@ -58,7 +58,7 @@ $this->title = 'Todevise / Admin / Size charts';
 				</div>
 
 				<div class="col-xs-4 col-height col-middle">
-					<button class="btn btn-default btn-purple fc-fff funiv fs0-786 fs-upper pull-right" ng-click="create_new()"><?php echo Yii::t("app/admin", "Create new"); ?></button>
+					<button class="btn btn-default btn-purple fc-fff funiv fs0-786 fs-upper pull-right" ng-click="create_new()"><?= Yii::t("app/admin", "Create new"); ?></button>
 				</div>
 			</div>
 		</div>
@@ -113,20 +113,20 @@ $this->title = 'Todevise / Admin / Size charts';
 <script type="text/ng-template" id="template/modal/sizechart/create_new.html">
 	<form novalidate name="form" class="popup-size-chart">
 		<div class='modal-header'>
-			<h3 class='modal-title funiv fs1'><?php echo Yii::t("app/admin", "Create new size chart"); ?></h3>
+			<h3 class='modal-title funiv fs1'><?= Yii::t("app/admin", "Create new size chart"); ?></h3>
 		</div>
 		<div class='modal-body'>
-			<label class="modal-title funiv fs1 fnormal fc-18"><?php echo Yii::t("app/admin", "Size table name"); ?></label>
+			<label class="modal-title funiv fs1 fnormal fc-18"><?= Yii::t("app/admin", "Size table name"); ?></label>
 			<div class="input-group" ng-repeat="(lang_k, lang_v) in data.langs">
 				<span class="input-group-addon funiv_bold fs1 fs-upper" id="basic-addon-{{ $index }}">{{ lang_v }}</span>
-				<input required="" type="text" class="form-control funiv fs1" placeholder="<?php echo Yii::t("app/admin", "Option name..."); ?>" aria-describedby="basic-addon-{{ $index }}" ng-model="langs[lang_k]" name="{{ lang_k }}">
+				<input required="" type="text" class="form-control funiv fs1" placeholder="<?= Yii::t("app/admin", "Option name..."); ?>" aria-describedby="basic-addon-{{ $index }}" ng-model="langs[lang_k]" name="{{ lang_k }}">
 				<span class="input-group-addon alert-danger funiv fs0-929" ng-show="form.$submitted && !form.$valid && !form['{{lang_k}}'].$valid">
-					<span ng-show="form['{{lang_k}}'].$error.required"><?php echo Yii::t("app/admin", "Required!"); ?></span>
+					<span ng-show="form['{{lang_k}}'].$error.required"><?= Yii::t("app/admin", "Required!"); ?></span>
 				</span>
 			</div>
 			<br />
 
-			<label class="modal-title funiv fs1 fnormal fc-18"><?php echo Yii::t("app/admin", "Based on existing size chart"); ?></label>
+			<label class="modal-title funiv fs1 fnormal fc-18"><?= Yii::t("app/admin", "Based on existing size chart"); ?></label>
 			<div class="input-group">
 				<div
 					angular-multi-select
@@ -146,8 +146,8 @@ $this->title = 'Todevise / Admin / Size charts';
 
 		</div>
 		<div class='modal-footer'>
-			<button class='btn btn-light-green fc-18 funiv fs0-786 fs-upper' ng-click='form.$submitted = true; form.$valid && ok()'><?php echo Yii::t("app/admin", "Confirm"); ?></button>
-			<button class='btn btn-grey fc-fff funiv fs-upper fs0-786' ng-click='cancel()' type="submit"><?php echo Yii::t("app/admin", "Cancel"); ?></button>
+			<button class='btn btn-light-green fc-18 funiv fs0-786 fs-upper' ng-click='form.$submitted = true; form.$valid && ok()'><?= Yii::t("app/admin", "Confirm"); ?></button>
+			<button class='btn btn-grey fc-fff funiv fs-upper fs0-786' ng-click='cancel()' type="submit"><?= Yii::t("app/admin", "Cancel"); ?></button>
 		</div>
 	</form>
 </script>

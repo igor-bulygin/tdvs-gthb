@@ -46,8 +46,8 @@ $this->title = 'Todevise / Admin / Size chart';
 				</div>
 				<div class="col-md-8 col-lg-8 col-height col-middle">
 					<div class="pull-right">
-						<button class="btn btn btn-grey fc-fff funiv fs-upper fs0-786" ng-click="cancel()"><?php echo Yii::t("app/admin", "Cancel changes"); ?></button>
-						<button class="btn btn-light-green fc-18 funiv fs-upper fs0-786" ng-click="save()"><?php echo Yii::t("app/admin", "Save changes"); ?></button>
+						<button class="btn btn btn-grey fc-fff funiv fs-upper fs0-786" ng-click="cancel()"><?= Yii::t("app/admin", "Cancel changes"); ?></button>
+						<button class="btn btn-light-green fc-18 funiv fs-upper fs0-786" ng-click="save()"><?= Yii::t("app/admin", "Save changes"); ?></button>
 					</div>
 				</div>
 			</div>
@@ -58,13 +58,13 @@ $this->title = 'Todevise / Admin / Size chart';
 				<div class="checkbox padding-1">
 					<label class="funiv fc-c7 fs0-929">
 						<input type="checkbox" ng-model="sizechart.enabled">
-						<?php echo Yii::t("app/admin", "Enabled"); ?>
+						<?= Yii::t("app/admin", "Enabled"); ?>
 					</label>
 				</div>
 			</div>
 			<div class="col-xs-4 div-bordered size-chart-settings">
 				<div class="padding-1">
-					<label class="funiv fc-c7 fs0-929 fnormal"><?php echo Yii::t("app/admin", "Categories"); ?></label>
+					<label class="funiv fc-c7 fs0-929 fnormal"><?= Yii::t("app/admin", "Categories"); ?></label>
 					<div
 						angular-multi-select
 						api="api"
@@ -90,7 +90,7 @@ $this->title = 'Todevise / Admin / Size chart';
 			</div>
 			<div class="col-xs-4 div-bordered size-chart-settings">
 				<div class="padding-1">
-					<label class="funiv fc-c7 fs0-929 fnormal"><?php echo Yii::t("app/admin", "Metric unit"); ?></label>
+					<label class="funiv fc-c7 fs0-929 fnormal"><?= Yii::t("app/admin", "Metric unit"); ?></label>
 					<div
 						angular-multi-select
 						api="api_mus"
@@ -116,7 +116,7 @@ $this->title = 'Todevise / Admin / Size chart';
 
 		<div class="row-same-height no-gutter">
 			<div class="col-xs-1 size-chart-settings col-height col-middle">
-				<label class="funiv fc-c7 fs0-929 fnormal"><?php echo Yii::t("app/admin", "Countries"); ?></label>
+				<label class="funiv fc-c7 fs0-929 fnormal"><?= Yii::t("app/admin", "Countries"); ?></label>
 			</div>
 			<div class="col-xs-11 col-height col-middle">
 				<div class="row no-gutter sortable-container" sv-root sv-part="sizechart.countries" sv-on-sort="move_country($indexFrom, $indexTo)">
@@ -129,7 +129,7 @@ $this->title = 'Todevise / Admin / Size chart';
 					</div>
 
 					<div class="col-xs-1 add-new">
-						<a class="pointer fs-upper funiv fc-fff fs0-786" ng-click="new_country()"><?php echo Yii::t("app/admin", "Add new +"); ?></a>
+						<a class="pointer fs-upper funiv fc-fff fs0-786" ng-click="new_country()"><?= Yii::t("app/admin", "Add new +"); ?></a>
 					</div>
 				</div>
 			</div>
@@ -139,7 +139,7 @@ $this->title = 'Todevise / Admin / Size chart';
 
 		<div class="row-same-height no-gutter">
 			<div class="col-xs-1 size-chart-settings col-height col-middle">
-				<label class="funiv fc-c7 fs0-929 fnormal"><?php echo Yii::t("app/admin", "Columns"); ?></label>
+				<label class="funiv fc-c7 fs0-929 fnormal"><?= Yii::t("app/admin", "Columns"); ?></label>
 			</div>
 			<div class="col-xs-11 col-height col-middle">
 				<div class="row no-gutter sortable-container" sv-root sv-part="sizechart.columns" sv-on-sort="move_column($indexFrom, $indexTo)">
@@ -152,7 +152,7 @@ $this->title = 'Todevise / Admin / Size chart';
 					</div>
 
 					<div class="col-xs-1 add-new">
-						<a class="pointer fs-upper funiv fc-fff fs0-786" ng-click="new_column('Test')"><?php echo Yii::t("app/admin", "Add new +"); ?></a>
+						<a class="pointer fs-upper funiv fc-fff fs0-786" ng-click="new_column('Test')"><?= Yii::t("app/admin", "Add new +"); ?></a>
 					</div>
 				</div>
 			</div>
@@ -181,7 +181,7 @@ $this->title = 'Todevise / Admin / Size chart';
 		<br />
 
 		<div class="row no-gutter add-new">
-			<a class="pointer fs-upper funiv fc-fff fs0-786" ng-click="new_row()"><?php echo Yii::t("app/admin", "Add new row +"); ?></a>
+			<a class="pointer fs-upper funiv fc-fff fs0-786" ng-click="new_row()"><?= Yii::t("app/admin", "Add new row +"); ?></a>
 		</div>
 	</div>
 </div>
@@ -189,10 +189,10 @@ $this->title = 'Todevise / Admin / Size chart';
 <script type="text/ng-template" id="template/modal/sizechart/create_new_country.html">
 	<form novalidate name="form" class="popup-country">
 		<div class='modal-header'>
-			<h3 class='modal-title funiv fs1'><?php echo Yii::t("app/admin", "Create new option"); ?></h3>
+			<h3 class='modal-title funiv fs1'><?= Yii::t("app/admin", "Create new option"); ?></h3>
 		</div>
 		<div class='modal-body'>
-			<label class="modal-title funiv fs1 fnormal fc-18"><?php echo Yii::t("app/admin", "Select country"); ?></label>
+			<label class="modal-title funiv fs1 fnormal fc-18"><?= Yii::t("app/admin", "Select country"); ?></label>
 			<div
 				angular-multi-select
 				id-property="country_code"
@@ -210,8 +210,8 @@ $this->title = 'Todevise / Admin / Size chart';
 			</div>
 		</div>
 		<div class='modal-footer'>
-			<button class='btn btn-light-green fc-18 funiv fs0-786 fs-upper' ng-click='form.$submitted = true; form.$valid && ok()'><?php echo Yii::t("app/admin", "Confirm"); ?></button>
-			<button class='btn btn-grey fc-fff funiv fs-upper fs0-786' ng-click='cancel()' type="submit"><?php echo Yii::t("app/admin", "Cancel"); ?></button>
+			<button class='btn btn-light-green fc-18 funiv fs0-786 fs-upper' ng-click='form.$submitted = true; form.$valid && ok()'><?= Yii::t("app/admin", "Confirm"); ?></button>
+			<button class='btn btn-grey fc-fff funiv fs-upper fs0-786' ng-click='cancel()' type="submit"><?= Yii::t("app/admin", "Cancel"); ?></button>
 		</div>
 	</form>
 </script>
@@ -219,22 +219,22 @@ $this->title = 'Todevise / Admin / Size chart';
 <script type="text/ng-template" id="template/modal/sizechart/create_new_column.html">
 	<form novalidate name="form" class="popup-size-chart">
 		<div class='modal-header'>
-			<h3 class='modal-title funiv fs1'><?php echo Yii::t("app/admin", "Name of column"); ?></h3>
+			<h3 class='modal-title funiv fs1'><?= Yii::t("app/admin", "Name of column"); ?></h3>
 		</div>
 		<div class='modal-body'>
-			<label class="funiv fs1 fnormal fc-18"><?php echo Yii::t("app/admin", "Title"); ?></label>
+			<label class="funiv fs1 fnormal fc-18"><?= Yii::t("app/admin", "Title"); ?></label>
 			<div class="input-group" ng-repeat="(lang_k, lang_v) in data.langs">
 				<span class="input-group-addon funiv_bold fs1 fs-upper" id="basic-addon-{{ $index }}">{{ lang_v }}</span>
-				<input required="" type="text" class="form-control funiv fs1" placeholder="<?php echo Yii::t("app/admin", "Option name..."); ?>"
+				<input required="" type="text" class="form-control funiv fs1" placeholder="<?= Yii::t("app/admin", "Option name..."); ?>"
 					aria-describedby="basic-addon-{{ $index }}" ng-model="data.column[lang_k]" name="{{ lang_k }}">
 				<span class="input-group-addon alert-danger funiv fs0-929" ng-show="form.$submitted && !form.$valid && !form['{{lang_k}}'].$valid">
-					<span ng-show="form['{{lang_k}}'].$error.required"><?php echo Yii::t("app/admin", "Required!"); ?></span>
+					<span ng-show="form['{{lang_k}}'].$error.required"><?= Yii::t("app/admin", "Required!"); ?></span>
 				</span>
 			</div>
 		</div>
 		<div class='modal-footer'>
-			<button class='btn btn-light-green fc-18 funiv fs0-786 fs-upper' ng-click='form.$submitted = true; form.$valid && ok()'><?php echo Yii::t("app/admin", "Create column"); ?></button>
-			<button class='btn btn-grey fc-fff funiv fs-upper fs0-786' ng-click='cancel()' type="submit"><?php echo Yii::t("app/admin", "Cancel"); ?></button>
+			<button class='btn btn-light-green fc-18 funiv fs0-786 fs-upper' ng-click='form.$submitted = true; form.$valid && ok()'><?= Yii::t("app/admin", "Create column"); ?></button>
+			<button class='btn btn-grey fc-fff funiv fs-upper fs0-786' ng-click='cancel()' type="submit"><?= Yii::t("app/admin", "Cancel"); ?></button>
 		</div>
 	</form>
 </script>
