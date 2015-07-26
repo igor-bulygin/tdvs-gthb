@@ -698,12 +698,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "02189d0bb5b4e984a7ce92b58f0ffebf4cbeb3f7"
+                "reference": "be95de36bb802790a6a588451e620d27b7bdd231"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/02189d0bb5b4e984a7ce92b58f0ffebf4cbeb3f7",
-                "reference": "02189d0bb5b4e984a7ce92b58f0ffebf4cbeb3f7",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/be95de36bb802790a6a588451e620d27b7bdd231",
+                "reference": "be95de36bb802790a6a588451e620d27b7bdd231",
                 "shasum": ""
             },
             "require": {
@@ -778,7 +778,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2015-07-19 15:42:41"
+            "time": "2015-07-26 00:21:41"
         },
         {
             "name": "yiisoft/yii2-bootstrap",
@@ -786,12 +786,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-bootstrap.git",
-                "reference": "56d47544eb98ebdb542422abc598ef8097b3e9c5"
+                "reference": "6787348a3622720ed4b6a61998ff71988454fc53"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-bootstrap/zipball/56d47544eb98ebdb542422abc598ef8097b3e9c5",
-                "reference": "56d47544eb98ebdb542422abc598ef8097b3e9c5",
+                "url": "https://api.github.com/repos/yiisoft/yii2-bootstrap/zipball/6787348a3622720ed4b6a61998ff71988454fc53",
+                "reference": "6787348a3622720ed4b6a61998ff71988454fc53",
                 "shasum": ""
             },
             "require": {
@@ -828,7 +828,7 @@
                 "bootstrap",
                 "yii2"
             ],
-            "time": "2015-06-23 17:21:52"
+            "time": "2015-07-22 08:59:37"
         },
         {
             "name": "yiisoft/yii2-composer",
