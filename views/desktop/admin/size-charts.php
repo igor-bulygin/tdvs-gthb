@@ -48,7 +48,7 @@ $this->title = 'Todevise / Admin / Size charts';
 						group-property="sub"
 						tick-property="check"
 
-						item-label="{{ name[lang] }}"
+						item-label="<[ name['{{ lang }}'] ]>"
 						selection-mode="single"
 						search-property="name['{{ lang }}']"
 						min-search-length="3"
@@ -134,13 +134,13 @@ $this->title = 'Todevise / Admin / Size charts';
 					input-model="data.sizecharts"
 					output-model="selectedSizeChartTemplate"
 					tick-property="check"
-					item-label="{{ name[data.lang] }}"
+					item-label="<[ name['{{ data.lang }}'] ]>"
 					selection-mode="single"
 					search-property="name['{{ data.lang }}']"
 					min-search-length="3"
 					helper-elements="noall nonone noreset filter"
 					button-template="angular-multi-select-btn-data.htm"
-					button-label="{{ name[data.lang] }}"
+					button-label="<[ name['{{ data.lang }}'] ]>"
 					></div>
 			</div>
 

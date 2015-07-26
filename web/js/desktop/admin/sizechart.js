@@ -134,7 +134,6 @@ todevise.controller('sizeChartCtrl', ["$scope", "$timeout", "$sizechart", "$size
 todevise.controller("create_new_countryCtrl", function($scope, $modalInstance, data) {
 	$scope.lang = _lang;
 	$scope.countries = _countries;
-	$scope.countries_lookup = _countries_lookup;
 	$scope.selected_country = "";
 
 	$scope.ok = function() {

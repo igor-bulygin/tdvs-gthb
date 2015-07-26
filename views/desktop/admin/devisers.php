@@ -10,7 +10,6 @@ use app\assets\desktop\admin\DevisersAsset;
 
 /* @var $this yii\web\View */
 /* @var $countries ArrayObject */
-/* @var $countries_lookup ArrayObject */
 /* @var $devisers yii\data\ActiveDataProvider */
 
 $this->params['breadcrumbs'][] = [
@@ -28,7 +27,6 @@ $this->title = 'Todevise / Admin / Devisers';
 
 		<?php $this->registerJs("var _DEVISER = " . Json::encode(Person::DEVISER) . ";", View::POS_HEAD); ?>
 		<?php $this->registerJs("var _countries = " . Json::encode($countries) . ";", View::POS_HEAD); ?>
-		<?php $this->registerJs("var _countries_lookup = " . Json::encode($countries_lookup) . ";", View::POS_HEAD); ?>
 
 		<div class="row no-gutter page-title-row">
 			<div class="row-same-height">
@@ -151,11 +149,11 @@ $this->title = 'Todevise / Admin / Devisers';
 				input-model="data.countries"
 				output-model="selected_country"
 				tick-property="checked"
-				item-label="{{ data.countries_lookup[country_code] }}"
+				item-label="<[ country_name['{{ data.lang }}'] ]>"
 				selection-mode="single"
 				button-template="angular-multi-select-btn-data.htm"
-				button-label="{{ data.countries_lookup[country_code] }}"
-				search-property="country_name['<?php echo array_keys(Lang::EN_US)[0]; ?>']"
+				button-label="<[ country['{{ data.lang }}'] ]>"
+				search-property="country_name['{{ data.lang }}']"
 				helper-elements="noall nonone noreset filter">
 			</div>
 

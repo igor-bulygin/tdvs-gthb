@@ -18,7 +18,6 @@ todevise.controller('devisersCtrl', ["$scope", "$timeout", "$deviser", "$deviser
 
 	$scope.lang = _lang;
 	$scope.countries = _countries;
-	$scope.countries_lookup = _countries_lookup;
 
 	$scope.renderPartial = function() {
 		$http.get(aus.syncToURL()).success(function(data, status) {
@@ -51,8 +50,8 @@ todevise.controller('devisersCtrl', ["$scope", "$timeout", "$deviser", "$deviser
 			resolve: {
 				data: function () {
 					return {
-						countries: $scope.countries,
-						countries_lookup: $scope.countries_lookup
+						lang: $scope.lang,
+						countries: $scope.countries
 					};
 				}
 			}

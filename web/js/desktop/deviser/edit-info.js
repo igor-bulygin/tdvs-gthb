@@ -9,7 +9,6 @@ todevise.controller('deviserCtrl', ["$scope", "$timeout", "$deviser", "$deviser_
 	$scope.headerphoto = [];
 	$scope.profilephoto = [];
 	$scope.countries = _countries;
-	$scope.countries_lookup = _countries_lookup;
 
 	//Sort by path length
 	_categories = $category_util.sort(_categories);
@@ -71,9 +70,7 @@ todevise.controller('deviserCtrl', ["$scope", "$timeout", "$deviser", "$deviser_
 
 	$scope.new_product = function() {
 		var _product = $product_util.newProduct($scope.deviser.short_id);
-		console.log(_product);
 		$product.modify("POST", _product).then(function(data) {
-			console.log(data);
 			window.location.href = window.location.origin + "/" + $scope.deviser.slug + "/edit-work/" + data.short_id + "/";
 		}, function(err) {
 			toastr.error("Couldn't create product!", err);

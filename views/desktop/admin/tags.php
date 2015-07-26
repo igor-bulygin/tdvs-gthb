@@ -44,7 +44,7 @@ $this->title = 'Todevise / Admin / Tags';
 						group-property="sub"
 						tick-property="check"
 
-						item-label="{{ name[lang] }}"
+						item-label="<[ name['{{ lang }}'] ]>"
 						selection-mode="single"
 						search-property="name"
 						min-search-length="3"

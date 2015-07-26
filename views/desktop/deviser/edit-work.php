@@ -130,9 +130,9 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 								tick-property="check"
 
 								button-template="angular-multi-select-btn-data.htm"
-								button-label="{{ value }}"
+								button-label="<[ value ]>"
 
-								item-label="{{ value }}"
+								item-label="<[ value ]>"
 								selection-mode="single"
 								helper-elements="noall nonone noreset nofilter">
 							</div>
@@ -239,7 +239,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 								group-property="sub"
 								tick-property="check"
 
-								item-label="{{ name[lang] }}"
+								item-label="<[ name['{{lang}}'] ]>"
 								selection-mode="multi"
 								search-property="name['{{lang}}']"
 								min-search-length="3"
@@ -283,8 +283,8 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 												tick-property="check"
 												button-template="angular-multi-select-btn-data.htm"
-												button-label="{{ text[lang] }}"
-												item-label="{{ text[lang] }}"
+												button-label="<[ text['{{lang}}'] ]>"
+												item-label="<[ text['{{lang}}'] ]>"
 												selection-mode="{{ tag.n_options }}"
 												helper-elements="noall nonone noreset nofilter">
 											</div>
@@ -365,8 +365,8 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 															single-output-prop="value"
 															single-output-model="product.options[tag.short_id][$parent.$parent.$index][$index].metric_unit"
 															button-template="angular-multi-select-btn-data.htm"
-															button-label="{{ text }}"
-															item-label="{{ text }}"
+															button-label="<[ text ]>"
+															item-label="<[ text ]>"
 															selection-mode="single"
 															helper-elements="noall nonone noreset nofilter">
 														</div>
@@ -446,9 +446,9 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 							tick-property="check"
 
 							button-template="angular-multi-select-btn-data.htm"
-							button-label="{{ value }}"
+							button-label="<[ value ]>"
 
-							item-label="{{ value }}"
+							item-label="<[ value ]>"
 							selection-mode="single"
 							helper-elements="noall nonone noreset nofilter">
 						</div>
@@ -649,9 +649,9 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 												preselect-value='["{{ product.sizechart.short_id }}"]'
 
 												button-template="angular-multi-select-btn-data.htm"
-												button-label="{{ name[lang] }}"
+												button-label="<[ name['{{lang}}'] ]>"
 
-												item-label="{{ name[lang] }}"
+												item-label="<[ name['{{lang}}'] ]>"
 												selection-mode="single"
 												helper-elements="noall nonone noreset nofilter">
 											</div>
@@ -667,9 +667,9 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 												tick-property="check"
 
 												button-template="angular-multi-select-btn-data.htm"
-												button-label="{{ name[lang] }}"
+												button-label="<[ name['{{lang}}'] ]>"
 
-												item-label="{{ name[lang] }}"
+												item-label="<[ name['{{lang}}'] ]>"
 												selection-mode="single"
 												helper-elements="noall nonone noreset nofilter">
 											</div>
@@ -702,9 +702,9 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 												preselect-value='["{{ product.sizechart.country }}"]'
 
 												button-template="angular-multi-select-btn-data.htm"
-												button-label="{{ text }}"
+												button-label="<[ text ]>"
 
-												item-label="{{ text }}"
+												item-label="<[ text ]>"
 												selection-mode="single"
 												helper-elements="noall nonone noreset nofilter">
 											</div>
@@ -721,9 +721,9 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 												tick-property="check"
 
 												button-template="angular-multi-select-btn-data.htm"
-												button-label="{{ text }}"
+												button-label="<[ text ]>"
 
-												item-label="{{ text }}"
+												item-label="<[ text ]>"
 												selection-mode="single"
 												helper-elements="noall nonone noreset nofilter">
 											</div>
@@ -749,9 +749,9 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 												tick-property="check"
 
 												button-template="angular-multi-select-btn-data.htm"
-												button-label="{{ name[lang] }}"
+												button-label="<[ name['{{lang}}'] ]>"
 
-												item-label="{{ name[lang] }}"
+												item-label="<[ name['{{lang}}'] ]>"
 												selection-mode="single"
 												helper-elements="noall nonone noreset nofilter">
 											</div>
@@ -779,9 +779,9 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 										tick-property="check"
 
 										button-template="angular-multi-select-btn-data.htm"
-										button-label="{{ text }}"
+										button-label="<[ text ]>"
 
-										item-label="{{ text }}"
+										item-label="<[ text ]>"
 										selection-mode="single"
 										helper-elements="noall nonone noreset nofilter">
 									</div>
@@ -864,9 +864,9 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 										tick-property="check"
 
 										button-template="angular-multi-select-btn-data.htm"
-										button-label="{{ text }}"
+										button-label="<[ text ]>"
 
-										item-label="{{ text }}"
+										item-label="<[ text ]>"
 										selection-mode="single"
 										helper-elements="noall nonone noreset nofilter">
 									</div>
@@ -885,9 +885,9 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 										tick-property="check"
 
 										button-template="angular-multi-select-btn-data.htm"
-										button-label="{{ symbol }} ({{ value }})"
+										button-label="<[ symbol ]> (<[ value ]>)"
 
-										item-label="{{ symbol }} ({{ value }})"
+										item-label="<[ symbol ]> (<[ value ]>)"
 										selection-mode="single"
 										helper-elements="noall nonone noreset nofilter">
 									</div>

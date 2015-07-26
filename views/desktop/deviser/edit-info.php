@@ -11,7 +11,6 @@ use app\assets\desktop\deviser\EditInfoAsset;
 /* @var $deviser ArrayObject */
 /* @var $countries ArrayObject */
 /* @var $categories ArrayObject */
-/* @var $countries_lookup ArrayObject */
 
 $this->params['breadcrumbs'][] = [
 	'label' => 'Index',
@@ -31,7 +30,6 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 <?php $this->registerJs("var _deviser = " . Json::encode($deviser) . ";", View::POS_HEAD); ?>
 <?php $this->registerJs("var _categories = " . Json::encode($categories) . ";", View::POS_HEAD); ?>
 <?php $this->registerJs("var _countries = " . Json::encode($countries) . ";", View::POS_HEAD); ?>
-<?php $this->registerJs("var _countries_lookup = " . Json::encode($countries_lookup) . ";", View::POS_HEAD); ?>
 <?php $this->registerJs("var _upload_header_photo_url = '" . Url::to(["deviser/upload-header-photo", "slug" => $deviser["slug"]]) . "';", View::POS_HEAD); ?>
 <?php $this->registerJs("var _upload_profile_photo_url = '" . Url::to(["deviser/upload-profile-photo", "slug" => $deviser["slug"]]) . "';", View::POS_HEAD); ?>
 
@@ -112,11 +110,11 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 					preselect-value='["{{ deviser.personal_info.country }}"]'
 					delay-start="700"
 					tick-property="checked"
-					item-label="{{ countries_lookup[country_code] }}"
+					item-label="<[ country_name['{{ lang }}'] ]>"
 					selection-mode="single"
 					button-template="angular-multi-select-btn-data.htm"
-					button-label="{{ countries_lookup[country_code] }}"
-					search-property="country_name['<?php echo array_keys(Lang::EN_US)[0]; ?>']"
+					button-label="<[ country_name['{{ lang }}'] ]>"
+					search-property="country_name['{{ lang }}']"
 					helper-elements="noall nonone noreset filter">
 				</div>
 			</div>
@@ -137,7 +135,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 					preselect-prop="short_id"
 					preselect-value="{{ deviser.categories }}"
 					tick-property="check"
-					item-label="{{ name[lang] }}"
+					item-label="<[ name['{{ lang }}'] ]>"
 					selection-mode="multi"
 					search-property="name['{{ lang }}']"
 					min-search-length="3"

@@ -72,7 +72,7 @@ $this->title = 'Todevise / Admin / Tag';
 					group-property="sub"
 					tick-property="check"
 
-					item-label="{{ name[lang] }}"
+					item-label="<[ name['{{ lang }}'] ]>"
 					selection-mode="multi"
 					search-property="name['{{ lang }}']"
 					min-search-length="3"
@@ -182,7 +182,7 @@ $this->title = 'Todevise / Admin / Tag';
 			</div>
 		</div>
 
-		<div class="ng-cloak" ng-show="tag.type == <?php echo Tag::FREETEXT; ?> && pending_dialog_type === false">
+		<div class="ng-cloak" ng-show="tag.type == <?= Tag::FREETEXT; ?> && pending_dialog_type === false">
 			<div class="row no-gutter bgcolor-3d page-title-row">
 				<div class="row-same-height" ng-init="new_option = {}">
 					<div class="col-xs-4 col-height col-middle">
@@ -196,29 +196,29 @@ $this->title = 'Todevise / Admin / Tag';
 							input-model="mus"
 							output-model="selected_mu"
 							tick-property="checked"
-							item-label="{{ text }}"
+							item-label="<[ text ]>"
 							selection-mode="single"
 							button-template="angular-multi-select-btn-data.htm"
-							button-label="{{ text }}"
+							button-label="<[ text ]>"
 							helper-elements="noall nonone noreset nofilter">
 						</div>
 					</div>
 
 					<div class="col-xs-3 col-height col-middle">
-						<div class="radio flex flex-justify-around" ng-init="freetext_type = <?php echo TagOption::NUMERIC; ?>">
+						<div class="radio flex flex-justify-around" ng-init="freetext_type = <?= TagOption::NUMERIC; ?>">
 							<label class="funiv fc-c7 fs-upper fs0-786">
-								<input type="radio" name="optionsType" id="optionsType1" value="<?php echo TagOption::NUMERIC; ?>" ng-model="freetext_type">
+								<input type="radio" name="optionsType" id="optionsType1" value="<?= TagOption::NUMERIC; ?>" ng-model="freetext_type">
 								<label for="optionsType1"><span></span><?php echo Yii::t("app/admin", "Numeric"); ?></label>
 							</label>
 							<label class="funiv fc-c7 fs-upper fs0-786">
-								<input type="radio" name="optionsType" id="optionsType2" value="<?php echo TagOption::ALPHANUMERIC; ?>" ng-model="freetext_type">
+								<input type="radio" name="optionsType" id="optionsType2" value="<?= TagOption::ALPHANUMERIC; ?>" ng-model="freetext_type">
 								<label for="optionsType2"><span></span><?php echo Yii::t("app/admin", "Alphanumeric"); ?></label>
 							</label>
 						</div>
 					</div>
 
 					<div class="col-xs-2 col-height col-middle">
-						<button class="btn btn-purple fc-fff funiv fs0-786 fs-upper" ng-click="create_freetext_option()"><?php echo Yii::t("app/admin", "Create new"); ?></button>
+						<button class="btn btn-purple fc-fff funiv fs0-786 fs-upper" ng-click="create_freetext_option()"><?= Yii::t("app/admin", "Create new"); ?></button>
 					</div>
 				</div>
 			</div>

@@ -22,19 +22,13 @@ class DeviserController extends CController {
 
 	public function actionEditInfo($slug) {
 		$countries = $this->api->actionCountries()->asArray()->all();
-		$countries_lookup = [];
-		foreach($countries as $country) {
-			$countries_lookup[$country["country_code"]] = Utils::getValue($country["country_name"], $this->lang, $this->lang_en);
-		}
-
 		$deviser = $this->api->actionDevisers(Json::encode(["slug" => $slug]))->asArray()->one();
 
 		return $this->render("edit-info", [
 			"deviser" => $deviser,
 			"slug" => $slug,
 			'categories' => $this->api->actionCategories()->asArray()->all(),
-			"countries" => $countries,
-			"countries_lookup" => $countries_lookup
+			"countries" => $countries
 		]);
 	}
 

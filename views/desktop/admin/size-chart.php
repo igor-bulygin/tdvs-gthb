@@ -79,7 +79,7 @@ $this->title = 'Todevise / Admin / Size chart';
 						group-property="sub"
 						tick-property="check"
 
-						item-label="{{ name[lang] }}"
+						item-label="<[ name['{{ lang }}'] ]>"
 						selection-mode="multi"
 						search-property="name['{{ lang }}']"
 						min-search-length="3"
@@ -102,10 +102,10 @@ $this->title = 'Todevise / Admin / Size chart';
 						preselect-value="{{ sizechart.metric_unit }}"
 						group-property="sub"
 						tick-property="checked"
-						item-label="{{ text }}"
+						item-label="<[ text ]>"
 						selection-mode="single"
 						button-template="angular-multi-select-btn-data.htm"
-						button-label="{{ text }}"
+						button-label="<[ text ]>"
 						helper-elements="noall nonone noreset nofilter">
 					</div>
 				</div>
@@ -201,11 +201,11 @@ $this->title = 'Todevise / Admin / Size chart';
 				single-output-prop="country_code"
 				group-property="sub"
 				tick-property="checked"
-				item-label="{{ country_name[lang] }}"
+				item-label="<[ country_name['{{ lang }}'] ]>"
 				selection-mode="single"
 				button-template="angular-multi-select-btn-data.htm"
-				button-label="{{ country_name[lang] }}"
-				search-property="country_name['<?= array_keys(Lang::EN_US)[0]; ?>']"
+				button-label="<[ country_name['{{ lang }}'] ]>"
+				search-property="country_name['{{ lang }}']"
 				helper-elements="noall nonone noreset filter">
 			</div>
 		</div>
