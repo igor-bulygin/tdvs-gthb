@@ -14,6 +14,7 @@ class TagAsset extends AssetBundle {
 	];
 	public $depends = [
 		'app\assets\api\ApiAsset',
+		'app\assets\libs\jsonpathAsset',
 		'app\assets\libs\angularUiUtilsAsset',
 		'app\assets\libs\angularMultiSelectAsset',
 		'app\assets\libs\angularBootstrapAsset',
