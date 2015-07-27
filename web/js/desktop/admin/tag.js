@@ -1,10 +1,15 @@
 var todevise = angular.module('todevise', ['ui.bootstrap', 'angular-multi-select', 'global-admin', 'global-desktop', 'api', 'angular-sortable-view', 'ui.validate']);
 
-todevise.controller('tagCtrl', ["$scope", "$timeout", "$tag", "$tag_util", "$category_util", "toastr", "$modal", function($scope, $timeout, $tag, $tag_util, $category_util, toastr, $modal) {
+todevise.controller('tagCtrl', ["$scope", "$timeout", "$tag", "$tag_util", "$category_util", "toastr", "$modal", "$cacheFactory", function($scope, $timeout, $tag, $tag_util, $category_util, toastr, $modal, $cacheFactory) {
 	$scope.lang = _lang;
 	$scope.tag = _tag;
 	$scope.mus = _mus;
 	$scope.api = {};
+
+	$scope.c_mus = $cacheFactory("mus");
+	angular.forEach(_mus, function(mus) {
+		$scope.c_mus.put(mus.value, mus);
+	});
 
 	$scope.pending_dialog_type = false;
 	$scope.type_watch_paused = false;
@@ -45,9 +50,9 @@ todevise.controller('tagCtrl', ["$scope", "$timeout", "$tag", "$tag_util", "$cat
 	});
 
 	$scope.get_mu_type = function(v) {
-		var _type = jsonpath.query(_mus, "$..[?(@.value==" + v + ")]");
-		if(_type.length === 1) {
-			return _type[0].text;
+		var _type = $scope.c_mus.get(v);
+		if(_type !== undefined) {
+			return _type.text;
 		}
 	};
 
@@ -125,10 +130,17 @@ todevise.controller("create_newCtrl", function($scope, $modalInstance, data) {
 	$scope.data = data;
 	$scope.colors = _colors;
 
-	$scope.get_class_from_value = function(value) {
-		var _obj = jsonpath.query(_colors, "$..[?(@.value=='" + value + "')]");
-		if(_obj.length !== 1) return "";
-		return _obj[0].class;
+	$scope.colors_lookup = {};
+	angular.forEach(_colors, function(color) {
+		$scope.colors_lookup[color.value] = color;
+	});
+
+	$scope.get_color_from_value = function(value) {
+		if($scope.colors_lookup.hasOwnProperty(value)) {
+			return $scope.colors_lookup[value];
+		} else {
+			return {};
+		}
 	};
 
 	$scope.is_duplicated = function(value) {

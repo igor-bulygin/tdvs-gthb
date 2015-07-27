@@ -288,7 +288,10 @@ $this->title = 'Todevise / Admin / Tag';
 
 			<div ng-if="opt_value_or_color == 2">
 				<label class='modal-title funiv fs1 fnormal fc-18'><?= Yii::t("app/admin", "Currently selected color"); ?>  </label>
-				<div class="color-cell {{ get_class_from_value(data.options[data.index].value) }}"></div>
+				<div class="flex flex-align-center">
+					<div class="color-cell {{ get_color_from_value(data.options[data.index].value).class }} pull-left"></div>
+					<span class="funiv fs1 fnormal fc-18">{{ get_color_from_value(data.options[data.index].value).text }}</span>
+				</div>
 
 				<label class='modal-title funiv fs1 fnormal fc-18'><?= Yii::t("app/admin", "Select a color"); ?></label>
 				<div class="flex">
