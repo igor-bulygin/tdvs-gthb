@@ -23,6 +23,7 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 
 	$scope.c_tags = $cacheFactory("tags");
 	$scope.c_categories = $cacheFactory("categories");
+	$scope.c_sizecharts = $cacheFactory("sizecharts");
 	$scope.c_tagsInCategory = $cacheFactory("tagsInCategory");
 
 	$scope._base_product_photo_url = _base_product_photo_url;
@@ -103,6 +104,11 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 					$scope.sizechart = [];
 				} else {
 					$scope.sizecharts = _sizecharts;
+
+					$scope.c_sizecharts.removeAll();
+					angular.forEach($scope.sizecharts, function(sizechart) {
+						$scope.c_sizecharts.put(sizechart.short_id, sizechart);
+					});
 				}
 				$scope.use_sizecharts = _use_sizecharts;
 			});
@@ -390,16 +396,16 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 		 * changed, but the product.sizechart wasn't removed. We'll return "null" here so the caller knows to remove
 		 * the product.sizechart data.
 		 */
-		var _sizecharts = jsonpath.query($scope.sizecharts, "$..[?(@.short_id=='" + _short_id + "')]");
-		if(_sizecharts.length === 0) {
+		var _sizechart = $scope.c_sizecharts.get(_short_id);
+		if(_sizechart === undefined) {
 			return null;
 		}
 
 		var _tmp_values = [];
 
-		angular.forEach(_sizecharts[0].values, function(_row) {
-			var _tmp_value = _row.slice(_sizecharts[0].countries.length);
-			var _country_index = _sizecharts[0].countries.indexOf($scope.product.sizechart.country);
+		angular.forEach(_sizechart.values, function(_row) {
+			var _tmp_value = _row.slice(_sizechart.countries.length);
+			var _country_index = _sizechart.countries.indexOf($scope.product.sizechart.country);
 			var _size = _row.slice(_country_index, _country_index + 1)[0];
 
 			//Don't push rows without a size
@@ -642,13 +648,13 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 		 */
 		if(_inserted === false) {
 			var _short_id = $scope.product.sizechart.short_id;
-			var _sizecharts = jsonpath.query($scope.sizecharts, "$..[?(@.short_id=='" + _short_id + "')]");
-			if(_sizecharts.length === 0) {
+			var _sizechart = $scope.c_sizecharts.get(_short_id);
+			if(_sizechart === undefined) {
 				//Something really bad happened. Quit before we break something.
 				return;
 			}
 
-			var _len = _sizecharts[0].values[0].length - _sizecharts[0].countries.length + 1;
+			var _len = _sizechart.values[0].length - _sizechart.countries.length + 1;
 			var _new_row = Array.apply(null, Array(_len)).map(Number.prototype.valueOf,0);
 			_new_row[0] = $scope.tmp_selected_size;
 			_values.push(_new_row);
@@ -692,22 +698,22 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 		var res = $scope.c_categories.get(short_id);
 		if(res !== undefined) return res;
 
-		var __category = jsonpath.query(_categories, "$..[?(@.short_id=='" + short_id + "')]");
-		__category = __category.length === 1 ? __category[0] : {};
+		angular.forEach(_categories, function(category) {
+			$scope.c_categories.put(category.short_id, category);
+		});
 
-		$scope.c_categories.put(short_id, __category);
-		return __category;
+		return $scope.c_categories.get(short_id);
 	};
 
 	$scope.getTag = function(tag_id) {
 		var res = $scope.c_tags.get(tag_id);
 		if(res !== undefined) return res;
 
-		var __tag = jsonpath.query(_tags, "$..[?(@.short_id=='" + tag_id + "')]");
-		__tag = __tag.length === 1 ? __tag[0] : {};
+		angular.forEach(_tags, function(tag) {
+			$scope.c_tags.put(tag.short_id, tag);
+		});
 
-		$scope.c_tags.put(tag_id, __tag);
-		return __tag;
+		return $scope.c_tags.get(tag_id);
 	};
 
 	//Get all tags that belong to a category
@@ -715,11 +721,25 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 		var res = $scope.c_tagsInCategory.get(category_id);
 		if(res !== undefined) return res;
 
-		var __tags = jsonpath.query(_tags, "$..[?(@.categories.indexOf('" + category_id + "')!==-1)]");
-		__tags = __tags.length > 0 ? __tags : [];
+		var _tmp = {};
+		angular.forEach(_tags, function(tag) {
+			angular.forEach(tag.categories, function(_category_id) {
+				if(!_tmp.hasOwnProperty(_category_id)) _tmp[_category_id] = [];
 
-		$scope.c_tagsInCategory.put(category_id, __tags);
-		return __tags;
+				_tmp[_category_id].push(tag);
+			});
+		});
+
+		angular.forEach(_tmp, function(tags, _category_id) {
+			$scope.c_tagsInCategory.put(_category_id, tags);
+		});
+
+		if(!_tmp.hasOwnProperty(category_id)) {
+			_tmp[category_id] = [];
+			$scope.c_tagsInCategory.put(category_id, []);
+		}
+
+		return _tmp[category_id];
 	};
 
 	//Sort tags
