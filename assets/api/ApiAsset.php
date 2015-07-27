@@ -15,7 +15,6 @@ class ApiAsset extends AssetBundle {
 	];
 	public $depends = [
 		'app\assets\AppAsset',
-		'app\assets\libs\angularAsset',
-		'app\assets\libs\jsonpathAsset'
+		'app\assets\libs\angularAsset'
 	];
 }
