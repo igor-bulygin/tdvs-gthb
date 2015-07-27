@@ -6,7 +6,7 @@ use app\models\Lang;
 
 //Those are all the available languages.
 return array_merge(
-	Lang::EN_US,
-	Lang::ES_ES,
-	Lang::CA_ES
+	Lang::EN_US//,
+	//Lang::ES_ES,
+	//Lang::CA_ES
 );
