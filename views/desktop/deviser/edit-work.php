@@ -256,12 +256,13 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 						<span class="sep"></span>
 
-						<div ng-cloak ng-form="formOptions" class="col-xs-12" ng-repeat="tag in tags_from_categories">
+						<div ng-cloak ng-form="formOptions" class="col-xs-12" ng-repeat="tag in tags_from_categories" ng-class="{disabled_tag: tag.enabled === false}">
 
 							<div ng-cloak ng-if="tag.type === 0">
 								<span class="fs0-857 funiv_bold fc-6d tag-title-dropdown">
 									<span class="fs0-714 fc-f7284b glyphicon glyphicon-asterisk" ng-if="required_tags_ids.indexOf(tag.short_id) !== -1"></span>
 									{{ ::tag.name[lang] }} - {{ ::tag.description[lang] }}
+									<span ng-cloak class="fc-f7284b" ng-show="tag.enabled === false"> - <?= Yii::t("app/deviser", "Disabled") ?></span>
 								</span>
 
 								<div class="combination-row" ng-repeat="values in product.options[tag.short_id] track by $index">
@@ -288,6 +289,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 												selection-mode="{{ tag.n_options }}"
 												helper-elements="noall nonone noreset nofilter">
 											</div>
+											<div ng-cloak ng-show="tag.enabled === false" class="disabled_tag_area"></div>
 										</div>
 
 										<div class="col-xs-0-5 text-center">
@@ -299,8 +301,8 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 								</div>
 
-								<br />
-								<span class="fc-7aaa4a fs0-857 funiv_bold pointer new-combination" ng-click="create_product_option(tag.short_id)">
+								<br ng-cloak ng-show="tag.enabled === true" />
+								<span ng-cloak ng-show="tag.enabled === true" class="fc-7aaa4a fs0-857 funiv_bold pointer new-combination" ng-click="create_product_option(tag.short_id)">
 									<?= Yii::t("app/deviser", "Create new combination +") ?>
 								</span>
 
@@ -311,6 +313,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 								<span class="fs0-857 funiv_bold fc-6d tag-title-dropdown">
 									<span class="fs0-714 fc-f7284b glyphicon glyphicon-asterisk" ng-if="required_tags_ids.indexOf(tag.short_id) !== -1"></span>
 									{{ ::tag.name[lang] }} - {{ ::tag.description[lang] }}
+									<span ng-cloak class="fc-f7284b" ng-show="tag.enabled === false"> - <?= Yii::t("app/deviser", "Disabled") ?></span>
 								</span>
 
 
@@ -331,7 +334,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 													</div>
 
 													<!-- If the option doesn't have any metric unit, we want to take 100% of the width -->
-													<div ng-class="option.metric_type > 0 ? 'col-xs-5' : 'col-xs-9'" >
+													<div ng-class="option.metric_type > 0 ? 'col-xs-5' : 'col-xs-9'">
 
 														<!-- Numeric type -->
 														<div ng-cloak ng-if="option.type === 0">
@@ -370,6 +373,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 															selection-mode="single"
 															helper-elements="noall nonone noreset nofilter">
 														</div>
+														<div ng-cloak ng-show="tag.enabled === false" class="disabled_tag_area"></div>
 													</div>
 
 												</div>
@@ -387,8 +391,8 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 								</div>
 
-								<br />
-								<span class="fc-7aaa4a fs0-857 funiv_bold pointer new-combination" ng-click="create_product_option(tag.short_id)">
+								<br ng-cloak ng-show="tag.enabled === true" />
+								<span ng-cloak ng-show="tag.enabled === true" class="fc-7aaa4a fs0-857 funiv_bold pointer new-combination" ng-click="create_product_option(tag.short_id)">
 									<?= Yii::t("app/deviser", "Create new combination +") ?>
 								</span>
 
