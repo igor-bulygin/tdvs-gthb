@@ -29,6 +29,54 @@
 	margin-right: 10px;
 }
 
+.languages-name {
+	margin: 0px 20px 10px 20px;
+
+	background: linear-gradient(to bottom, transparent 1.95em, #ffffff 1.95em);
+	background-size: 100% 2em;
+	background-origin: border-box;
+	background-position: 0px 0px;
+}
+
+.languages-name .language-name {
+	box-sizing: border-box; /* to make padding part of element's height & width */
+	float: left;
+	height: 2em; /* a fixed height */
+	padding: 2px 7px 2px 7px;
+	border-bottom: 1px solid transparent; /* needed to avoid jumping */
+}
+
+.languages-name .language-name.active,
+.languages-name .language-name:hover {
+	color: #2e2e2e;
+	border-bottom: 1px solid #f7284b;
+}
+
+/* ------- */
+
+.languages-desc {
+	margin: 0px 0px 10px 0px;
+
+	background: linear-gradient(to bottom, transparent 1.95em, #e9e9e9 1.95em);
+	background-size: 100% 2em;
+	background-origin: border-box;
+	background-position: 0px 0px;
+}
+
+.languages-desc .language-desc {
+	box-sizing: border-box; /* to make padding part of element's height & width */
+	float: left;
+	height: 2em; /* a fixed height */
+	padding: 2px 7px 2px 7px;
+	border-bottom: 1px solid transparent; /* needed to avoid jumping */
+}
+
+.languages-desc .language-desc.active,
+.languages-desc .language-desc:hover {
+	color: #2e2e2e;
+	border-bottom: 1px solid #f7284b;
+}
+
 .product_name {
 	width: 100%;
 	border-radius: 0.5em;
@@ -291,6 +339,7 @@
 .description-content,
 .price-stock-content,
 .returns-warranty-content {
+	background-color: #fff;
 	padding: 20px 40px 20px 40px !important;
 }
 
@@ -379,7 +428,8 @@
 
 .sizechart-cell {
 	padding: 15px 5px 15px 5px;
-	border: 1px solid #e9e9e9;
+	border-top: 1px solid #e9e9e9;
+	border-bottom: 1px solid #e9e9e9;
 }
 
 .sizechart-cell input {
@@ -405,7 +455,8 @@
 
 .pricestock-cell {
 	padding: 15px 5px 15px 5px;
-	border: 1px solid #e9e9e9;
+	border-top: 1px solid #e9e9e9;
+	border-bottom: 1px solid #e9e9e9;
 }
 
 .pricestock-cell input {

@@ -114,17 +114,20 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 					<div class="flex-inline flex-column flex-align-stretch main-left">
 
-						<div class="product-name-holder">
-							<input type="text" placeholder="<?= Yii::t("app/deviser", "Product name"); ?>" ng-model="product.name[tmp_selected_lang_name]" class="funiv_thin fs2-857 fc-9b fs-upper product_name">
+						<!--<pre>{{ dump(product.slug) }}</pre>-->
 
-							<div
+						<div class="languages-name fs0-857 fs-upper">
+							<div class="language-name pointer funiv_bold fc-9b" ng-cloak ng-repeat="language in languages"
+							     ng-class="{active: $parent.selected_lang === language.key}"
+							     ng-click="$parent.selected_lang = language.key" ng-init="$parent.selected_lang = $parent.lang">
+								{{ ::language.value }}
+							</div>
+
+							<div class="language-name"
 								angular-multi-select
 								input-model="langs"
-								single-output-model="tmp_selected_lang_name"
-								single-output-prop="key"
-
-								preselect-prop="key"
-								preselect-value='["{{ lang }}"]'
+								output-model="languages"
+								tick-property="checked"
 
 								group-property="sub"
 								tick-property="check"
@@ -133,10 +136,14 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 								button-label="<[ value ]>"
 
 								item-label="<[ value ]>"
-								selection-mode="single"
+								selection-mode="multi"
 								helper-elements="noall nonone noreset nofilter">
 							</div>
+						</div>
 
+						<div class="product-name-holder">
+							<input type="text" placeholder="<?= Yii::t("app/deviser", "Product name"); ?>" ng-model="product.name[selected_lang]"
+							       ng-change="product.slug[selected_lang] = (product.name[selected_lang] | slugify: {lang: selected_lang.split('-')[0]})" class="funiv_thin fs2-857 fc-9b fs-upper product_name">
 						</div>
 
 						<!--<pre>{{ dump(product.options) }}</pre>-->
@@ -409,8 +416,6 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 		</div>
 
-		<br />
-
 		<!--
 
 		Tabs
@@ -430,33 +435,38 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 				<div class="row no-gutter">
 
 					<div class="col-xs-12">
-						<div class="product-desc-holder">
-							<textarea type="text" placeholder="<?= Yii::t("app/deviser", "Product description"); ?>" ng-model="product.description[tmp_selected_lang_desc]" class="funiv fs1-071 fc-3d product_desc"></textarea>
+						<div class="languages-desc fs0-857 fs-upper flex">
+							<div class="language-desc pointer funiv_bold fc-9b" ng-cloak ng-repeat="language in languages"
+							     ng-class="{active: $parent.selected_lang === language.key}"
+							     ng-click="$parent.selected_lang = language.key" ng-init="$parent.selected_lang = $parent.lang">
+								{{ ::language.value }}
+							</div>
+
+							<div class="language-desc"
+								angular-multi-select
+								input-model="langs"
+								output-model="languages"
+								tick-property="checked"
+
+								group-property="sub"
+								tick-property="check"
+
+								button-template="angular-multi-select-btn-data.htm"
+								button-label="<[ value ]>"
+
+								item-label="<[ value ]>"
+								selection-mode="multi"
+								helper-elements="noall nonone noreset nofilter">
+							</div>
 						</div>
 					</div>
 
+					<br /><br />
+
 					<div class="col-xs-12">
-
-						<div
-							angular-multi-select
-							input-model="langs"
-							single-output-model="tmp_selected_lang_desc"
-							single-output-prop="key"
-
-							preselect-prop="key"
-							preselect-value='["{{ lang }}"]'
-
-							group-property="sub"
-							tick-property="check"
-
-							button-template="angular-multi-select-btn-data.htm"
-							button-label="<[ value ]>"
-
-							item-label="<[ value ]>"
-							selection-mode="single"
-							helper-elements="noall nonone noreset nofilter">
+						<div class="product-desc-holder">
+							<textarea type="text" placeholder="<?= Yii::t("app/deviser", "Product description"); ?>" ng-model="product.description[selected_lang]" class="funiv fs1-071 fc-3d product_desc"></textarea>
 						</div>
-
 					</div>
 
 				</div>

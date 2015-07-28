@@ -45,6 +45,7 @@ class Product extends CActiveRecord {
 			'categories',
 			'collections',
 			'name',
+			'slug',
 			'description',
 			'media',
 			'options',
@@ -75,6 +76,10 @@ class Product extends CActiveRecord {
 
 		if($this->name == null) {
 			$this["name"] = [];
+		}
+
+		if($this->slug == null) {
+			$this["slug"] = [];
 		}
 
 		if($this->description == null) {

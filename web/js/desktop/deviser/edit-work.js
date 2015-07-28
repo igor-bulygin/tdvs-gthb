@@ -1,4 +1,4 @@
-var todevise = angular.module('todevise', ['ui.bootstrap', 'angular-multi-select', 'angular-unit-converter', 'angular-img-dl', 'global-deviser', 'global-desktop', 'global', 'api', "ngFileUpload", "ngImgCrop", 'ui.bootstrap.datetimepicker']);
+var todevise = angular.module('todevise', ['ui.bootstrap', 'angular-multi-select', 'angular-unit-converter', 'angular-img-dl', 'global-deviser', 'global-desktop', 'global', 'api', "ngFileUpload", "ngImgCrop", 'ui.bootstrap.datetimepicker', 'angular-slugifier']);
 var global_deviser = angular.module('global-deviser');
 
 todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$product", "$category_util", "toastr", "$modal", "Upload", "$http", "$cacheFactory", function($scope, $timeout, $sizechart, $product, $category_util, toastr, $modal, Upload, $http, $cacheFactory) {
@@ -18,8 +18,6 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 
 	$scope.tmp_selected_size = "";
 	$scope.tmp_selected_sizechart_country = "";
-	$scope.tmp_selected_lang_name = "";
-	$scope.tmp_selected_lang_desc = "";
 
 	$scope.c_tags = $cacheFactory("tags");
 	$scope.c_categories = $cacheFactory("categories");
@@ -32,12 +30,13 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 	 * PHP's arrays have the same notation for arrays and objects and (to|from)JSON
 	 * get's confused. That's why we must help it here.
 	 */
-	global.arrayToObject($scope.product, ["name", "description", "media", "options", "madetoorder", "sizechart", "bespoke", "preorder", "returns", "warranty"]);
+	global.arrayToObject($scope.product, ["name", "slug", "description", "media", "options", "madetoorder", "sizechart", "bespoke", "preorder", "returns", "warranty"]);
 
 	//Required for the name and description dropdowns
 	$scope.langs = [];
 	angular.forEach(_langs, function(v, k) {
-		$scope.langs.push({ "key": k, "value": v });
+		var sw = $scope.product.name.hasOwnProperty(k);
+		$scope.langs.push({ "key": k, "value": v, "checked": sw});
 	});
 
 	//Required for the categories dropdown
