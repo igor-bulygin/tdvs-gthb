@@ -39,7 +39,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 		<div class="row no-gutter">
 			<div class="col-xs-12 no-horizontal-padding header-photo flex flex-column">
 				<div class="header-photo-holder flex flex-column">
-					<img class="header-photo-img" ngf-bg-src="headerphoto[0]" angular-img-dl angular-img-dl-url="<?= $header_photo_url ?>" angular-img-dl-model="headerphoto[0]">
+					<img class="header-photo-img" ngf-background="headerphoto[0]" angular-img-dl angular-img-dl-url="<?= $header_photo_url ?>" angular-img-dl-model="headerphoto[0]">
 
 					<div class="flex flex-justify-center flex-align-center flex-prop-1">
 						<div class="controls">
@@ -60,7 +60,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 
 					<div class="profile-photo-holder">
-						<img class="img-circle profile-photo-img" ngf-bg-src="profilephoto[0]" angular-img-dl angular-img-dl-url="<?= $profile_photo_url ?>" angular-img-dl-model="profilephoto[0]">
+						<img class="img-circle profile-photo-img" ngf-background="profilephoto[0]" angular-img-dl angular-img-dl-url="<?= $profile_photo_url ?>" angular-img-dl-model="profilephoto[0]">
 
 						<div class="flex flex-justify-center flex-align-center profile-photo-controls-holder">
 							<div class="controls flex">

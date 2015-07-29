@@ -75,7 +75,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 		<div class="row no-gutter flex flex-align-center internal-header">
 			<div class="col-xs-4">
-				<img class="deviser_photo" ngf-bg-src="profilephoto" angular-img-dl angular-img-dl-url="<?= $profile_photo_url ?>" angular-img-dl-model="profilephoto" />
+				<img class="deviser_photo" ngf-background="profilephoto" angular-img-dl angular-img-dl-url="<?= $profile_photo_url ?>" angular-img-dl-model="profilephoto" />
 				<span><?= $deviser["personal_info"]["name"] ?> <?= implode(" ", $deviser["personal_info"]["surnames"]) ?></span>
 			</div>
 			<div class="col-xs-4 flex flex-justify-center">
@@ -155,8 +155,8 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 									<div class="photo-white-area" ng-click="$event.stopPropagation();">
 										<span class="glyphicon glyphicon-remove fs0-786 btn_delete_photo pointer" ng-click="delete_photo($index, $event)"></span>
 
-										<div ng-if="photo.name !== ''" ngf-bg-src="photo.blob" angular-img-dl angular-img-dl-url="{{ _base_product_photo_url + photo.name }}" angular-img-dl-model="photo.blob" class="photo"></div>
-										<div ng-if="photo.name === ''" ngf-bg-src="photo.blob" angular-img-dl angular-img-dl-url="" angular-img-dl-model="photo.blob" class="photo"></div>
+										<div ng-if="photo.name !== ''" ngf-background="photo.blob" angular-img-dl angular-img-dl-url="{{ _base_product_photo_url + photo.name }}" angular-img-dl-model="photo.blob" class="photo"></div>
+										<div ng-if="photo.name === ''" ngf-background="photo.blob" angular-img-dl angular-img-dl-url="" angular-img-dl-model="photo.blob" class="photo"></div>
 									</div>
 
 									<div ng-clock class="photo-controls flex flex-align-center flex-justify-center" ng-show="photo.name !== ''"  ng-click="$event.stopPropagation();">
