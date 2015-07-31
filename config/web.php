@@ -130,6 +130,10 @@ $config = [
 			'showScriptName' => false,
 			'suffix' => '/',
 			'rules' => [
+				//Temp list
+				'<slug:[0-9a-z-A-Z\-]*?>/list/' =>  'deviser/list',
+
+
 				//Links for deviser profile
 				'<slug:[0-9a-z-A-Z\-]*?>/edit-info/' =>  'deviser/edit-info',
 
