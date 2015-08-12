@@ -572,6 +572,7 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 				match = $scope.find_option($scope.product.price_stock, _obj.options);
 			}
 
+			console.log("MATCH", angular.copy(match));
 			if(match !== null) {
 				if($scope.use_sizecharts === true && match.size === _obj.size) {
 					console.log("Pushing", angular.copy(match));
