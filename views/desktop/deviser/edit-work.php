@@ -268,7 +268,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 							<div ng-cloak ng-if="tag.type === 0">
 								<span class="fs0-857 funiv_bold fc-6d tag-title-dropdown">
 									<span class="fs0-714 fc-f7284b glyphicon glyphicon-asterisk" ng-if="required_tags_ids.indexOf(tag.short_id) !== -1"></span>
-									{{ ::tag.name[lang] }} - {{ ::tag.description[lang] }} ({{ tag.short_id }})
+									{{ ::tag.name[lang] }} - {{ ::tag.description[lang] }}
 									<span ng-cloak class="fc-f7284b" ng-show="tag.enabled === false"> - <?= Yii::t("app/deviser", "Disabled") ?></span>
 								</span>
 
@@ -319,7 +319,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 								<span class="fs0-857 funiv_bold fc-6d tag-title-dropdown">
 									<span class="fs0-714 fc-f7284b glyphicon glyphicon-asterisk" ng-if="required_tags_ids.indexOf(tag.short_id) !== -1"></span>
-									{{ ::tag.name[lang] }} - {{ ::tag.description[lang] }} ({{ tag.short_id }})
+									{{ ::tag.name[lang] }} - {{ ::tag.description[lang] }}
 									<span ng-cloak class="fc-f7284b" ng-show="tag.enabled === false"> - <?= Yii::t("app/deviser", "Disabled") ?></span>
 								</span>
 
