@@ -574,6 +574,7 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 
 			if(match !== null) {
 				if($scope.use_sizecharts === true && match.size === _obj.size) {
+					console.log("Pushing", angular.copy(match));
 					_obj = angular.copy(match);
 				}
 			}
@@ -892,9 +893,6 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 	};
 
 	$scope.find_option = function(arr, prop, size) {
-
-		console.log("Searching in", angular.copy(arr), "object with", angular.copy(prop));
-
 		if(!angular.isObject(prop)) return;
 		var _keys = Object.keys(prop);
 		size = size || null;
@@ -931,8 +929,6 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 				_found = angular.copy(tag);
 			}
 		});
-
-		console.log("Returning", angular.copy(_found));
 
 		return _found;
 	};
