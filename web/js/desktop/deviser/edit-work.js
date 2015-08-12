@@ -572,10 +572,10 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 				match = $scope.find_option($scope.product.price_stock, _obj.options);
 			}
 
-			console.log("MATCH", angular.copy(match));
 			if(match !== null) {
 				if($scope.use_sizecharts === true && match.size === _obj.size) {
-					console.log("Pushing", angular.copy(match));
+					_obj = angular.copy(match);
+				} else if($scope.use_sizecharts === false) {
 					_obj = angular.copy(match);
 				}
 			}
@@ -588,7 +588,6 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 			_tags_for_ps_table.shift();
 		}
 		$scope._ps_header = _tags_for_ps_table;
-		console.log("changing price and stock", angular.copy(_price_stock));
 		$scope.product.price_stock = _price_stock;
 		$scope.show_pricestock = true;
 
