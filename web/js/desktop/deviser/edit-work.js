@@ -586,6 +586,7 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 			_tags_for_ps_table.shift();
 		}
 		$scope._ps_header = _tags_for_ps_table;
+		console.log("changing price and stock", angular.copy(_price_stock));
 		$scope.product.price_stock = _price_stock;
 		$scope.show_pricestock = true;
 
