@@ -576,7 +576,7 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 				if($scope.use_sizecharts === true && match.size === _obj.size) {
 					_obj = angular.copy(match);
 				} else if($scope.use_sizecharts === false) {
-					//_obj = angular.copy(match);
+					_obj = angular.copy(match);
 				}
 			}
 			_price_stock.push(_obj);
