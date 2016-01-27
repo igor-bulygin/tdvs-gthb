@@ -19,6 +19,7 @@
 		"jstree": "3.1.1",
 		"jstree-actions": "0.1.0",
 		"angular-filter": "0.5.4",
-		"angular-toastr": "1.4.1"
+		"angular-toastr": "1.4.1",
+		"ng-js-tree": "0.0.7"
 	}
 }

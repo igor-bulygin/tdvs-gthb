@@ -6,7 +6,7 @@ use yii\web\AssetBundle;
 
 class ngjstreeAsset extends AssetBundle
 {
-	public $sourcePath = '@bower/ng-js-tree/dist';
+	public $sourcePath = '@npm/ng-js-tree/dist';
 	public $css = [
 	];
 	public $js = [
