@@ -1,7 +1,7 @@
-var todevise = angular.module('todevise', ['ui.bootstrap', 'angular-multi-select', 'angular-unit-converter', 'angular-img-dl', 'global-deviser', 'global-desktop', 'global', 'api', "ngFileUpload", "ngImgCrop", 'ui.bootstrap.datetimepicker', 'angular-slugifier']);
+var todevise = angular.module('todevise', ['ngAnimate', 'ui.bootstrap', 'angular-multi-select', 'angular-unit-converter', 'angular-img-dl', 'global-deviser', 'global-desktop', 'global', 'api', "ngFileUpload", "ngImgCrop", 'ui.bootstrap.datetimepicker', 'angular-slugifier']);
 var global_deviser = angular.module('global-deviser');
 
-todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$product", "$category_util", "toastr", "$modal", "Upload", "$http", "$cacheFactory", function($scope, $timeout, $sizechart, $product, $category_util, toastr, $modal, Upload, $http, $cacheFactory) {
+todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$product", "$category_util", "toastr", "$uibModal", "Upload", "$http", "$cacheFactory", function($scope, $timeout, $sizechart, $product, $category_util, toastr, $uibModal, Upload, $http, $cacheFactory) {
 	$scope.lang = _lang;
 	$scope.deviser = _deviser;
 	$scope.product = _product;

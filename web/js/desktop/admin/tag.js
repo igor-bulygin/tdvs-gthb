@@ -1,6 +1,6 @@
-var todevise = angular.module('todevise', ['ui.bootstrap', 'angular-multi-select', 'global-admin', 'global-desktop', 'api', 'angular-sortable-view', 'ui.validate']);
+var todevise = angular.module('todevise', ['ngAnimate', 'ui.bootstrap', 'angular-multi-select', 'global-admin', 'global-desktop', 'api', 'angular-sortable-view', 'ui.validate']);
 
-todevise.controller('tagCtrl', ["$scope", "$timeout", "$tag", "$tag_util", "$category_util", "toastr", "$modal", "$cacheFactory", function($scope, $timeout, $tag, $tag_util, $category_util, toastr, $modal, $cacheFactory) {
+todevise.controller('tagCtrl', ["$scope", "$timeout", "$tag", "$tag_util", "$category_util", "toastr", "$uibModal", "$cacheFactory", function($scope, $timeout, $tag, $tag_util, $category_util, toastr, $uibModal, $cacheFactory) {
 	$scope.lang = _lang;
 	$scope.tag = _tag;
 	$scope.mus = _mus;
@@ -22,7 +22,7 @@ todevise.controller('tagCtrl', ["$scope", "$timeout", "$tag", "$tag_util", "$cat
 
 			$scope.pending_dialog_type = true;
 
-			var modalInstance = $modal.open({
+			var modalInstance = $uibModal.open({
 				templateUrl: 'template/modal/confirm.html',
 				controller: 'confirmCtrl',
 				resolve: {
@@ -69,7 +69,7 @@ todevise.controller('tagCtrl', ["$scope", "$timeout", "$tag", "$tag_util", "$cat
 			_mod_option_index = index;
 		}
 
-		var modalInstance = $modal.open({
+		var modalInstance = $uibModal.open({
 			templateUrl: 'template/modal/tag/create_new.html',
 			controller: 'create_newCtrl',
 			resolve: {
@@ -126,7 +126,7 @@ todevise.controller('tagCtrl', ["$scope", "$timeout", "$tag", "$tag_util", "$cat
 	$scope._shadow = angular.copy($scope.tag);
 }]);
 
-todevise.controller("create_newCtrl", function($scope, $modalInstance, data) {
+todevise.controller("create_newCtrl", function($scope, $uibModalInstance, data) {
 	$scope.data = data;
 	$scope.colors = _colors;
 
@@ -152,12 +152,12 @@ todevise.controller("create_newCtrl", function($scope, $modalInstance, data) {
 	};
 
 	$scope.ok = function() {
-		$modalInstance.close({
+		$uibModalInstance.close({
 			"options": $scope.data.options
 		});
 	};
 
 	$scope.cancel =  function() {
-		$modalInstance.dismiss();
+		$uibModalInstance.dismiss();
 	};
 });

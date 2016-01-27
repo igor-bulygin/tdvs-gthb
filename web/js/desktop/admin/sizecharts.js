@@ -1,4 +1,4 @@
-var todevise = angular.module('todevise', ['ui.bootstrap', 'angular-multi-select', 'global-admin', 'global-desktop', 'api']);
+var todevise = angular.module('todevise', ['ngAnimate', 'ui.bootstrap', 'angular-multi-select', 'global-admin', 'global-desktop', 'api']);
 
 todevise.run(["$http", function($http) {
 	$http.defaults.headers.get = {
@@ -14,7 +14,7 @@ todevise.config(['$provide', function($provide) {
 	}]);
 }]);
 
-todevise.controller('sizeChartsCtrl', ["$scope", "$timeout", "$sizechart", "$sizechart_util", "$category_util", "toastr", "$modal", "$compile", "$http", function($scope, $timeout, $sizechart, $sizechart_util, $category_util, toastr, $modal, $compile, $http) {
+todevise.controller('sizeChartsCtrl', ["$scope", "$timeout", "$sizechart", "$sizechart_util", "$category_util", "toastr", "$uibModal", "$compile", "$http", function($scope, $timeout, $sizechart, $sizechart_util, $category_util, toastr, $uibModal, $compile, $http) {
 
 	$scope.lang = _lang;
 	$scope.api = {};
@@ -73,7 +73,7 @@ todevise.controller('sizeChartsCtrl', ["$scope", "$timeout", "$sizechart", "$siz
 	};
 
 	$scope.create_new = function() {
-		var modalInstance = $modal.open({
+		var modalInstance = $uibModal.open({
 			templateUrl: 'template/modal/sizechart/create_new.html',
 			controller: 'create_newCtrl',
 			resolve: {
@@ -143,20 +143,20 @@ todevise.controller('sizeChartsCtrl', ["$scope", "$timeout", "$sizechart", "$siz
 
 }]);
 
-todevise.controller("create_newCtrl", function($scope, $modalInstance, data) {
+todevise.controller("create_newCtrl", function($scope, $uibModalInstance, data) {
 	$scope.data = data;
 
 	$scope.langs = {};
 	$scope.sizechart = null;
 
 	$scope.ok = function() {
-		$modalInstance.close({
+		$uibModalInstance.close({
 			"langs": $scope.langs,
 			"selectedSizeChartTemplate": $scope.selectedSizeChartTemplate
 		});
 	};
 
 	$scope.cancel =  function() {
-		$modalInstance.dismiss();
+		$uibModalInstance.dismiss();
 	};
 });

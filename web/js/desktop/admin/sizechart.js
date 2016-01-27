@@ -1,6 +1,6 @@
-var todevise = angular.module('todevise', ['ui.bootstrap', 'angular-multi-select', 'angular-unit-converter', 'global-admin', 'global-desktop', 'api', 'angular-sortable-view', 'ui.validate']);
+var todevise = angular.module('todevise', ['ngAnimate', 'ui.bootstrap', 'angular-multi-select', 'angular-unit-converter', 'global-admin', 'global-desktop', 'api', 'angular-sortable-view', 'ui.validate']);
 
-todevise.controller('sizeChartCtrl', ["$scope", "$timeout", "$sizechart", "$sizechart_util", "$category_util", "toastr", "$modal", function($scope, $timeout, $sizechart, $sizechart_util, $category_util, toastr, $modal) {
+todevise.controller('sizeChartCtrl', ["$scope", "$timeout", "$sizechart", "$sizechart_util", "$category_util", "toastr", "$uibModal", function($scope, $timeout, $sizechart, $sizechart_util, $category_util, toastr, $uibModal) {
 	$scope.lang = _lang;
 	$scope.sizechart = _sizechart;
 	$scope.mus = _mus;
@@ -32,7 +32,7 @@ todevise.controller('sizeChartCtrl', ["$scope", "$timeout", "$sizechart", "$size
 	}, true);
 
 	$scope.new_country = function() {
-		var modalInstance = $modal.open({
+		var modalInstance = $uibModal.open({
 			templateUrl: 'template/modal/sizechart/create_new_country.html',
 			controller: 'create_new_countryCtrl',
 			resolve: {
@@ -67,7 +67,7 @@ todevise.controller('sizeChartCtrl', ["$scope", "$timeout", "$sizechart", "$size
 	};
 
 	$scope.new_column = function() {
-		var modalInstance = $modal.open({
+		var modalInstance = $uibModal.open({
 			templateUrl: 'template/modal/sizechart/create_new_column.html',
 			controller: 'create_new_columnCtrl',
 			resolve: {
@@ -131,32 +131,32 @@ todevise.controller('sizeChartCtrl', ["$scope", "$timeout", "$sizechart", "$size
 	$scope._shadow = angular.copy($scope.sizechart);
 }]);
 
-todevise.controller("create_new_countryCtrl", function($scope, $modalInstance, data) {
+todevise.controller("create_new_countryCtrl", function($scope, $uibModalInstance, data) {
 	$scope.lang = _lang;
 	$scope.countries = _countries;
 	$scope.selected_country = "";
 
 	$scope.ok = function() {
-		$modalInstance.close({
+		$uibModalInstance.close({
 			"country_code": $scope.selected_country
 		});
 	};
 
 	$scope.cancel =  function() {
-		$modalInstance.dismiss();
+		$uibModalInstance.dismiss();
 	};
 });
 
-todevise.controller("create_new_columnCtrl", function($scope, $modalInstance, data) {
+todevise.controller("create_new_columnCtrl", function($scope, $uibModalInstance, data) {
 	$scope.data = data;
 
 	$scope.ok = function() {
-		$modalInstance.close({
+		$uibModalInstance.close({
 			"column": $scope.data.column
 		});
 	};
 
 	$scope.cancel =  function() {
-		$modalInstance.dismiss();
+		$uibModalInstance.dismiss();
 	};
 });

@@ -1,6 +1,6 @@
-var todevise = angular.module('todevise', ['ui.bootstrap', 'ngJsTree', 'global-admin', 'global-desktop', 'api']);
+var todevise = angular.module('todevise', ['ngAnimate', 'ui.bootstrap', 'ngJsTree', 'global-admin', 'global-desktop', 'api']);
 
-todevise.controller('categoriesCtrl', ["$scope", "$category", "$category_util", "toastr", "$modal", function($scope, $category, $category_util, toastr, $modal) {
+todevise.controller('categoriesCtrl', ["$scope", "$category", "$category_util", "toastr", "$uibModal", function($scope, $category, $category_util, toastr, $uibModal) {
 
 	$scope.treeData = [];
 
@@ -105,7 +105,7 @@ todevise.controller('categoriesCtrl', ["$scope", "$category", "$category_util", 
 			path += $scope.treeInstance.jstree(true).get_path(node, "/", true) + "/";
 		}
 
-		var modalInstance = $modal.open({
+		var modalInstance = $uibModal.open({
 			templateUrl: 'template/modal/category/create_new.html',
 			controller: 'create_newCtrl',
 			resolve: {
@@ -143,7 +143,7 @@ todevise.controller('categoriesCtrl', ["$scope", "$category", "$category_util", 
 				_category = _category.pop();
 			}
 
-			var modalInstance = $modal.open({
+			var modalInstance = $uibModal.open({
 				templateUrl: 'template/modal/category/edit.html',
 				controller: 'editCtrl',
 				resolve: {
@@ -192,7 +192,7 @@ todevise.controller('categoriesCtrl', ["$scope", "$category", "$category_util", 
 
 		//Check for sub-categories that depend on this one so we can remove those too
 		$category_util.subCategories(category).then(function(subcategories) {
-			var modalInstance = $modal.open({
+			var modalInstance = $uibModal.open({
 				templateUrl: 'template/modal/confirm.html',
 				controller: 'confirmCtrl',
 				resolve: {
@@ -224,7 +224,7 @@ todevise.controller('categoriesCtrl', ["$scope", "$category", "$category_util", 
 
 }]);
 
-todevise.controller("create_newCtrl", function($scope, $modalInstance, data) {
+todevise.controller("create_newCtrl", function($scope, $uibModalInstance, data) {
 	$scope.data = data;
 	$scope.langs = {};
 	$scope.slug = "";
@@ -232,7 +232,7 @@ todevise.controller("create_newCtrl", function($scope, $modalInstance, data) {
 	$scope.prints = false;
 
 	$scope.ok = function() {
-		$modalInstance.close({
+		$uibModalInstance.close({
 			"langs": $scope.langs,
 			"slug": $scope.slug,
 			"sizecharts": $scope.sizecharts,
@@ -241,21 +241,21 @@ todevise.controller("create_newCtrl", function($scope, $modalInstance, data) {
 	};
 
 	$scope.cancel =  function() {
-		$modalInstance.dismiss();
+		$uibModalInstance.dismiss();
 	};
 });
 
 
-todevise.controller("editCtrl", function($scope, $modalInstance, data) {
+todevise.controller("editCtrl", function($scope, $uibModalInstance, data) {
 	$scope.data = data;
 
 	$scope.ok = function() {
-		$modalInstance.close({
+		$uibModalInstance.close({
 			"category": $scope.data.category
 		});
 	};
 
 	$scope.cancel =  function() {
-		$modalInstance.dismiss();
+		$uibModalInstance.dismiss();
 	};
 });

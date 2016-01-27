@@ -1,7 +1,7 @@
 console.log("Global desktop admin");
 var global_admin = angular.module('global-admin', ['toastr', 'template/modal/confirm.html']);
 
-global_admin.controller("confirmCtrl", ["$scope", "$modalInstance", "data", function($scope, $modalInstance, data) {
+global_admin.controller("confirmCtrl", ["$scope", "$uibModalInstance", "data", function($scope, $uibModalInstance, data) {
 	$scope.data = angular.extend({}, {
 		title: "Please confirm",
 		text: "",
@@ -10,11 +10,11 @@ global_admin.controller("confirmCtrl", ["$scope", "$modalInstance", "data", func
 	}, data);
 
 	$scope.ok = function() {
-		$modalInstance.close();
+		$uibModalInstance.close();
 	};
 
 	$scope.cancel =  function() {
-		$modalInstance.dismiss();
+		$uibModalInstance.dismiss();
 	};
 }]);
 

@@ -1,4 +1,4 @@
-var todevise = angular.module('todevise', ['ui.bootstrap', 'angular-multi-select', 'global-admin', 'global-desktop', 'api']);
+var todevise = angular.module('todevise', ['ngAnimate', 'ui.bootstrap', 'angular-multi-select', 'global-admin', 'global-desktop', 'api']);
 
 todevise.run(["$http", function($http) {
 	$http.defaults.headers.get = {
@@ -14,7 +14,7 @@ todevise.config(['$provide', function($provide) {
 	}]);
 }]);
 
-todevise.controller('devisersCtrl', ["$scope", "$timeout", "$deviser", "$deviser_util", "toastr", "$modal", "$compile", "$http", function($scope, $timeout, $deviser, $deviser_util, toastr, $modal, $compile, $http) {
+todevise.controller('devisersCtrl', ["$scope", "$timeout", "$deviser", "$deviser_util", "toastr", "$uibModal", "$compile", "$http", function($scope, $timeout, $deviser, $deviser_util, toastr, $uibModal, $compile, $http) {
 
 	$scope.lang = _lang;
 	$scope.countries = _countries;
@@ -44,7 +44,7 @@ todevise.controller('devisersCtrl', ["$scope", "$timeout", "$deviser", "$deviser
 	};
 
 	$scope.create_new = function() {
-		var modalInstance = $modal.open({
+		var modalInstance = $uibModal.open({
 			templateUrl: 'template/modal/tag/create_new.html',
 			controller: 'create_newCtrl',
 			resolve: {
@@ -73,7 +73,7 @@ todevise.controller('devisersCtrl', ["$scope", "$timeout", "$deviser", "$deviser
 
 }]);
 
-todevise.controller("create_newCtrl", function($scope, $modalInstance, data) {
+todevise.controller("create_newCtrl", function($scope, $uibModalInstance, data) {
 	$scope.data = data;
 	$scope.surnames = [];
 
@@ -89,7 +89,7 @@ todevise.controller("create_newCtrl", function($scope, $modalInstance, data) {
 		});
 		var _country = $scope.selected_country.pop();
 
-		$modalInstance.close({
+		$uibModalInstance.close({
 			"type": [_DEVISER],
 			"name": $scope.name,
 			"surnames": _surnames,
@@ -100,6 +100,6 @@ todevise.controller("create_newCtrl", function($scope, $modalInstance, data) {
 	};
 
 	$scope.cancel =  function() {
-		$modalInstance.dismiss();
+		$uibModalInstance.dismiss();
 	};
 });
