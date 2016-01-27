@@ -19,7 +19,7 @@
 		"yiisoft/yii2-mongodb": "2.0.4",
 		"yiisoft/yii2-redis": "2.0.4",
 
-		"kartik-v/yii2-widget-sidenav": "1.0.0",
+		"kartik-v/yii2-widgets": "3.4.0",
 		"lajax/yii2-language-picker": "1.1.5",
 		"alexandernst/yii2-device-detect": "0.0.7",
 		"alexandernst/yii2-scrypt": "0.0.4"
