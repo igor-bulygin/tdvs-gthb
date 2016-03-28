@@ -5,7 +5,7 @@ namespace app\assets\libs;
 use yii\web\AssetBundle;
 
 class angularBootstrapDatetimePickerAsset extends AssetBundle {
-	public $sourcePath = '@bower/angular-bootstrap-datetimepicker';
+	public $sourcePath = '@npm/angular-bootstrap-datetimepicker';
 	public $css = [
 		YII_ENV_DEV ? 'src/css/datetimepicker.css' : 'src/css/datetimepicker.css'
 	];

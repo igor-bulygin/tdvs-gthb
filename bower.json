@@ -3,8 +3,6 @@
 	"description": "Todevise 2.0",
 	"version": "2.0.0",
 	"dependencies": {
-		"ngImgCrop": "0.3.2",
-		"angular-ui-utils": "0.2.3",
-		"angular-bootstrap-datetimepicker": "0.3.13"
+		"ngImgCrop": "0.3.2"
 	}
 }

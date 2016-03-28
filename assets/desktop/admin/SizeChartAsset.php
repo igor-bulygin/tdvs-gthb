@@ -15,7 +15,7 @@ class SizeChartAsset extends AssetBundle {
 	public $depends = [
 		'app\assets\api\ApiAsset',
 		'app\assets\libs\jsonpathAsset',
-		'app\assets\libs\angularUiUtilsAsset',
+		'app\assets\libs\angularUiValidateAsset',
 		'app\assets\libs\angularMultiSelectAsset',
 		'app\assets\libs\angularUnitConverterAsset',
 		'app\assets\libs\angularBootstrapAsset',
