@@ -46,6 +46,10 @@ a:hover {
 	align-items: stretch;
 }
 
+.flex-align-baseline {
+	align-items: baseline;
+}
+
 .flex-justify-start {
 	justify-content: flex-start;
 }
