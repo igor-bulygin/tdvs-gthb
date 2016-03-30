@@ -1,0 +1,108 @@
+.footer .content {
+	position: relative;
+	cursor: default;
+}
+
+.footer .content .bg_img {
+	position: absolute;
+
+	width: 100%;
+	height: 100%;
+
+	background-image: url('/imgs/ny.jpg');
+	background-size: cover;
+	background-position: center;
+
+	filter: grayscale(90%);
+	-webkit-filter: grayscale(90%);
+	-moz-filter: grayscale(90%);
+}
+
+.footer .content .main_holder {
+	height: 100%;
+	position: relative;
+	background-color: rgba(17, 17, 17, 0.5);
+}
+
+.footer .content .main {
+	padding: 40px 0;
+}
+
+.footer .content .list {
+	list-style: none;
+}
+
+.footer .content .list > li {
+	padding-bottom: 7px;
+}
+.footer .content .list > li:last-child {
+	padding-bottom: 0;
+}
+
+.footer .content .links a:hover {
+	color: #fff;
+}
+
+.footer .content .dot {
+	margin: 0 7px;
+}
+
+.footer .content .dot_deviser,
+.footer .content .dot_blogger {
+	padding-bottom: 0px !important;
+	line-height: 10px;
+}
+
+.footer .content .blogger {
+	margin-top: 30px;
+	display: block;
+}
+
+.footer .content .become_deviser .link_btn {
+	padding: 9px 19px 6px 19px;
+}
+
+.footer .content .become_blogger .link_btn {
+	border: 1px solid #fff;
+	padding: 9px 16px 6px 16px;
+}
+
+.footer .content .newsletter_holder {
+	position: relative;
+	margin-top: 5px;
+}
+
+.footer .content .newsletter_holder > input {
+	display: flex;
+	flex-grow: 1;
+	outline: none;
+	border: none;
+	padding: 5px 35px 5px 10px;
+	border-radius: 13px;
+}
+
+.footer .content .newsletter_holder > input::-webkit-input-placeholder {
+	color: #4e4e4e;
+	font-size: 1em;
+	font-family: 'UniversLTPro-Condensed';
+}
+.footer .content .newsletter_holder > input::-moz-placeholder {
+	color: #4e4e4e;
+	font-size: 1em;
+	font-family: 'UniversLTPro-Condensed';
+}
+
+.footer .content .newsletter_holder > .glyphicon {
+	position: absolute;
+	right: 4px;
+	top: 3px;
+	font-size: 2em;
+}
+
+.footer .content .link_btn {
+	border-radius: 8px;
+}
+
+.footer .content .copyright {
+	padding-bottom: 20px;
+}
