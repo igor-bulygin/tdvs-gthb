@@ -13,4 +13,8 @@ class PublicHeaderNavbar extends Widget {
 	public function run() {
 		return $this->render('PublicHeaderNavbar');
 	}
+
+	public function getViewPath() {
+		return Utils::join_paths('@app', 'components', 'views', 'PublicHeader', Yii::getAlias('@device'));
+	}
 }
