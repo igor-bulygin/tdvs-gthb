@@ -1,8 +1,8 @@
 <?php
 use yii\helpers\Html;
-use app\components\assets\publicHeaderNavbarAsset;
+use app\components\assets\publicHeaderAsset;
 
-publicHeaderNavbarAsset::register($this);
+publicHeaderAsset::register($this);
 
 ?>
 
