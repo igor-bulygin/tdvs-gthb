@@ -1,1 +1,161 @@
- 
+.main .banner_holder {
+
+}
+
+.main .banner_holder .banner {
+	background-image: url('/imgs/susan.jpg');
+	background-size: cover;
+	height: calc(100vh - 100px);
+
+	filter: grayscale(90%);
+	-webkit-filter: grayscale(90%);
+	-moz-filter: grayscale(90%);
+}
+
+.main .banner_holder .devisers_holder {
+	height: 40%;
+	min-height: 200px;
+	max-height: 270px;
+	bottom: 0;
+	width: 100%;
+	background-image: linear-gradient(to bottom, rgba(220, 220, 220, 0.0), #dcdcdc);
+}
+
+.main .banner_holder .devisers_holder .background {
+	opacity: 0.5;
+	height: 100%;
+}
+
+.main .banner_holder .devisers_holder .devisers {
+	height: 100%;
+	width: 100%;
+	bottom: 0;
+	padding: 15px 20px;
+}
+
+.main .banner_holder .devisers_holder .devisers .links span {
+	margin-left: 10px;
+}
+.main .banner_holder .devisers_holder .devisers .links span:first-child,
+.main .banner_holder .devisers_holder .devisers .links span:last-child {
+	margin-left: 0;
+}
+
+.main .banner_holder .devisers_holder .devisers .links span:hover,
+.main .banner_holder .devisers_holder .devisers .links span.active {
+	color: #f7284b;
+	border-bottom: 2px solid #f7284b;
+}
+
+.main .devisers_carousel_wrapper {
+	overflow: hidden;
+	height: calc(100% - 19px); /*19px is the height of the text-buttons that are above this container */
+	padding: 15px 0 0 0;
+}
+
+.main .banner_holder .devisers_holder .devisers .devisers_carousel {
+	list-style-type: none;
+	z-index: 1;
+	height: 100%;
+	white-space: nowrap;
+	padding: 0;
+	letter-spacing: -1em;
+}
+
+.main .banner_holder .devisers_holder .devisers .deviser_holder,
+.main .banner_holder .devisers_holder .devisers .deviser {
+	display: inline-block;
+	height: 100%;
+	float: none;
+	letter-spacing: normal;
+}
+
+.main .banner_holder .devisers_holder .devisers .deviser_holder {
+	margin-right: 15px;
+	max-width: 160px;
+}
+
+.main .banner_holder .devisers_holder .devisers .deviser_bg {
+	height: 100%;
+	width: 100%;
+	opacity: 0.5;
+	transition: opacity 100ms, ease-in-out;
+}
+
+.main .banner_holder .devisers_holder .devisers .deviser_holder:hover .deviser_bg {
+	opacity: 1;
+}
+
+.main .banner_holder .devisers_holder .devisers .deviser {
+	top: 0;
+	left: 0;
+	width: 100%;
+	overflow: hidden;
+}
+
+.main .banner_holder .devisers_holder .devisers .deviser .dp {
+	top: 0%;
+	height: 70%;
+	transition: top 100ms ease-in-out;
+}
+
+.main .banner_holder .devisers_holder .devisers .deviser_holder:hover .dp,
+.main .banner_holder .devisers_holder .devisers .deviser_holder:hover .text,
+.main .banner_holder .devisers_holder .devisers .deviser_holder:hover .works {
+	top: -70%;
+}
+
+.main .banner_holder .devisers_holder .devisers .deviser .dp > img {
+	margin: auto;
+	width: auto;
+	height: auto;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	max-height: 100%;
+	max-width: 100%;
+	padding: 5% 10%;
+}
+
+.main .banner_holder .devisers_holder .devisers .deviser .text {
+	top: 0%;
+	height: 30%;
+	padding-top: 5px;
+	transition: top 100ms ease-in-out;
+}
+
+.main .banner_holder .devisers_holder .devisers .deviser_holder .name {
+	transition: color 100ms ease-in-out;
+}
+
+.main .banner_holder .devisers_holder .devisers .deviser_holder:hover .name {
+	color: #f7284b;
+}
+
+.main .banner_holder .devisers_holder .devisers .deviser .text .name,
+.main .banner_holder .devisers_holder .devisers .deviser .text .category {
+	height: 50%;
+	width: 100%;
+}
+
+.main .banner_holder .devisers_holder .devisers .deviser .works {
+	top: 0%;
+	height: 70%;
+	transition: top 100ms ease-in-out;
+}
+
+.main .banner_holder .devisers_holder .devisers .deviser .works .works_holder {
+	height: 50%;
+}
+
+.main .banner_holder .devisers_holder .devisers .deviser .works .works_holder .works_row {
+	height: 100%;
+}
+
+.main .banner_holder .devisers_holder .devisers .deviser .works .work {
+	height: 100%;
+	width: 100%;
+	object-fit: cover;
+}

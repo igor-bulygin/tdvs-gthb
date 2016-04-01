@@ -6,7 +6,7 @@ use yii\helpers\Json;
 use app\helpers\Utils;
 use app\components\PublicFooter;
 use app\components\CategoriesNavbar;
-use app\components\PublicHeaderNavbar;
+use app\components\PublicHeader;
 use lajax\languagepicker\widgets\LanguagePicker;
 
 /* @var $this \yii\web\View */
@@ -50,7 +50,7 @@ use lajax\languagepicker\widgets\LanguagePicker;
 						<div class="wrapper flex flex-column">
 							<div class="body-content flex flex-column flex-prop-1 overflow">
 								<div class="header flex-prop-0-0">
-									<?= PublicHeaderNavbar::widget(); ?>
+									<?= PublicHeader::widget(); ?>
 								</div>
 
 								<div class="main flex-prop-1-0">
