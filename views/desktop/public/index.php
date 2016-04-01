@@ -36,7 +36,7 @@ $this->title = 'Todevise / Public / Index';
 					</div>
 					<div class="row no-gutter flex devisers_carousel_wrapper">
 						<ul class="devisers_carousel no-vertical-margin flex-prop-1">
-							<?php for ($i = 0; $i < 20; $i++) { ?>
+							<?php for ($i = 0; $i < 15; $i++) { ?>
 							<li class="col-xs-3 col-md-2 col-lg-1 relative deviser_holder text-center">
 								<div class="absolute deviser_bg white"></div>
 								<div class="absolute deviser">
@@ -45,7 +45,7 @@ $this->title = 'Todevise / Public / Index';
 									</div>
 
 									<div class="text flex flex-column relative">
-										<span class="name funiv_bold fs1-143 fc-4a">Foo bar</span>
+										<span class="name funiv_bold fs1-143 fc-4a">Foo bar <?= $i ?></span>
 										<span class="category fpf fs0-857 fc-9b">Foo bar</span>
 									</div>
 
