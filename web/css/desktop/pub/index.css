@@ -79,7 +79,7 @@
 	height: 100%;
 	width: 100%;
 	opacity: 0.5;
-	transition: opacity 100ms, ease-in-out;
+	transition: opacity 0.5s, ease-in-out;
 }
 
 .main .banner_holder .devisers_holder .devisers .deviser_holder:hover .deviser_bg {
@@ -96,7 +96,7 @@
 .main .banner_holder .devisers_holder .devisers .deviser .dp {
 	top: 0%;
 	height: 70%;
-	transition: top 100ms ease-in-out;
+	transition: top 0.5s ease-in-out;
 }
 
 .main .banner_holder .devisers_holder .devisers .deviser_holder:hover .dp,
@@ -123,11 +123,11 @@
 	top: 0%;
 	height: 30%;
 	padding-top: 5px;
-	transition: top 100ms ease-in-out;
+	transition: top 0.5s ease-in-out;
 }
 
 .main .banner_holder .devisers_holder .devisers .deviser_holder .name {
-	transition: color 100ms ease-in-out;
+	transition: color 0.5s ease-in-out;
 }
 
 .main .banner_holder .devisers_holder .devisers .deviser_holder:hover .name {
@@ -143,7 +143,7 @@
 .main .banner_holder .devisers_holder .devisers .deviser .works {
 	top: 0%;
 	height: 70%;
-	transition: top 100ms ease-in-out;
+	transition: top 0.5s ease-in-out;
 }
 
 .main .banner_holder .devisers_holder .devisers .deviser .works .works_holder {
