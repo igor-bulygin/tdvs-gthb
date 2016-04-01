@@ -20,6 +20,14 @@ a:hover {
 	overflow: auto;
 }
 
+.relative {
+	position: relative !important;
+}
+
+.absolute {
+	position: absolute !important;
+}
+
 .center-justify {
 	margin-left: auto;
 	margin-right: auto;
