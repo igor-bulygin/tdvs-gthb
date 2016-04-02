@@ -5,7 +5,7 @@ use yii\helpers\Html;
 use yii\helpers\Json;
 use app\helpers\Utils;
 use app\components\PublicFooter;
-use app\components\CategoriesNavbar;
+use app\components\LeftMenu;
 use app\components\PublicHeader;
 use lajax\languagepicker\widgets\LanguagePicker;
 
@@ -40,7 +40,7 @@ use lajax\languagepicker\widgets\LanguagePicker;
 							<ul class="list-group">
 								<li class="logo fpf_bold">todevise<br/><span class="fpf_i">A new concept of store</span></li>
 							</ul>
-							<?= CategoriesNavbar::widget(); ?>
+							<?= LeftMenu::widget(); ?>
 						</div>
 					</div>
 

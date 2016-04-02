@@ -4,9 +4,10 @@ namespace app\components;
 
 use Yii;
 use yii\base\Widget;
+use app\helpers\Utils;
 use app\models\Category;
 
-class CategoriesNavbar extends Widget {
+class LeftMenu extends Widget {
 	/**
 	 * @inheritdoc
 	 */
@@ -19,9 +20,13 @@ class CategoriesNavbar extends Widget {
 			->asArray()
 			->all();
 
-		return $this->render('CategoriesNavbar', [
+		return $this->render('LeftMenu', [
 			'lang' => $lang,
 			'categories' => $categories
 		]);
+	}
+
+	public function getViewPath() {
+		return Utils::join_paths('@app', 'components', 'views', 'LeftMenu', Yii::getAlias('@device'));
 	}
 }

@@ -1,9 +1,9 @@
 <?php
 use app\helpers\Utils;
 use app\models\Lang;
-use app\components\assets\categoriesNavbarAsset;
+use app\components\assets\leftMenuAsset;
 
-categoriesNavbarAsset::register($this);
+LeftMenuAsset::register($this);
 
 /* @var $lang string */
 /* @var $categories ArrayObject */
