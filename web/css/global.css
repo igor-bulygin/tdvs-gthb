@@ -260,6 +260,10 @@ a:hover {
 	font-size: 2.857em;
 }
 
+.fs4-714 {
+	font-size: 4.714em;
+}
+
 /**** FONT TYPES ****/
 
 .fs-upper {
@@ -326,6 +330,10 @@ a:hover {
 
 .fc-18 {
 	color: #181818;
+}
+
+.fc-1c1919 {
+	color: #1c1919;
 }
 
 .fc-c7 {
