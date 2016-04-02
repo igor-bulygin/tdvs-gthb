@@ -1,15 +1,62 @@
-.main .banner_holder {
-
+.main .carousel,
+.main .carousel .carousel-inner,
+.main .carousel .carousel-inner .item {
+	height: calc(100vh - 100px);
 }
 
-.main .banner_holder .banner {
-	background-image: url('/imgs/susan.jpg');
-	background-size: cover;
-	height: calc(100vh - 100px);
-
+.main .carousel .carousel-inner .item {
 	filter: grayscale(90%);
 	-webkit-filter: grayscale(90%);
 	-moz-filter: grayscale(90%);
+	object-fit: cover;
+	width: 100%;
+	object-position: -50% 0;
+}
+
+.main .carousel .carousel-inner .item .carousel-caption {
+	top: 30%;
+	right: 10%;
+	left: 80%;
+	bottom: 45%;
+	text-shadow: none;
+	padding: 0;
+	cursor: default;
+}
+
+.main .carousel .carousel-inner .item .carousel-caption .name {
+	line-height: 100%;
+	display: inline-flex;
+	margin: 0 auto;
+	margin-bottom: -0.2em;
+}
+
+.main .carousel .carousel-inner .item .carousel-caption .category {
+	margin: 10px 0;
+}
+
+.main .carousel .carousel-inner .item .carousel-caption .works {
+	border-radius: 7px;
+	padding: 10px 27px;
+}
+
+.main .carousel .carousel-control {
+	background-image: none;
+	width: 5%;
+}
+
+.main .carousel .glyphicon-menu-left,
+.main .carousel .glyphicon-menu-right {
+	position: absolute;
+	top: 35%;
+	font-size: 30px;
+}
+
+.main .carousel .glyphicon-menu-left {
+	left: 10px;
+}
+
+.main .carousel .glyphicon-menu-right {
+	right: 10px;
 }
 
 .main .banner_holder .devisers_holder {

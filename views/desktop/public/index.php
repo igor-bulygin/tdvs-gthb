@@ -17,9 +17,31 @@ $this->title = 'Todevise / Public / Index';
 	<div class="col-xs-12 no-padding">
 		<!--<?= Yii::t("app", "This is a test from {0} controller!", $this->context->id); ?>-->
 		<div class="relative banner_holder">
-			<div class="banner">
 
+			<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-keyboard="false">
+
+				<div class="carousel-inner" role="listbox">
+					<?php for ($i = 0; $i < 15; $i++) { ?>
+						<div class="item <?= $i == 0 ? 'active' : ''  ?>">
+							<img src="/imgs/susan.jpg" alt="" />
+							<div class="carousel-caption flex flex-column">
+								<span class="name funiv_thin fs4-714 fc-1c1919 ls0-01 fs-upper">Foo bar <?= $i ?></span>
+								<span class="category fpf fc-9b fs0-857">Foo bar <?= $i ?></span>
+								<a class="pointer works black funiv_bold fs-upper fc-fff fs1-143"><?= Yii::t('app/public', 'View works') ?></a>
+							</div>
+						</div>
+					<?php } ?>
+				</div>
+
+				<!-- Controls -->
+				<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+					<span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+				</a>
+				<a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+					<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+				</a>
 			</div>
+
 			<div class="absolute devisers_holder">
 				<div class="white background"></div>
 				<div class="container flex flex-column devisers absolute">
