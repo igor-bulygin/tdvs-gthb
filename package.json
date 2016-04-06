@@ -23,6 +23,7 @@
 		"angular-filter": "0.5.4",
 		"angular-toastr": "1.4.1",
 		"angular-ui-bootstrap": "1.1.1",
-		"ng-js-tree": "0.0.7"
+		"ng-js-tree": "0.0.7",
+		"justifiedGallery": "3.6.2"
 	}
 }
