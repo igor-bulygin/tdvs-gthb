@@ -36,7 +36,7 @@ use lajax\languagepicker\widgets\LanguagePicker;
 
 					<!-- NAVBAR LEFT -->
 					<div class="col-xs-1-5 flex">
-						<div class="navbar-left funiv_ultra fs1 flex-prop-1">
+						<div class="flex flex-column navbar-left funiv_ultra fs1 flex-prop-1">
 							<ul class="list-group">
 								<li class="logo fpf_bold">todevise<br/><span class="fpf_i">A new concept of store</span></li>
 							</ul>
