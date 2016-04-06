@@ -24,3 +24,31 @@ $(function() {
 		items.css({ left: x + "px" });
 	});
 });
+
+/*
+ * This enables the tab navigation and the flickr-layout of the products
+ */
+$(function() {
+	function flickrify(tab_id) {
+		$("#" + tab_id + " .products_holder").justifiedGallery({
+			fixedHeight: true,
+			rowHeight: 210,
+			caption: false,
+			margins: 10,
+			border: 0,
+			waitThumbnailsLoad: false
+		});
+	}
+
+	$('[role="tabpanel"]').on("pjax:success", function (e) {
+		var id = $(e.target).attr("id");
+		flickrify(id);
+	});
+
+	$('[data-toggle="tab"]').on("show.bs.tab", function (e) {
+		var id = $(e.target).attr("href").substr(1);
+		flickrify(id);
+	})
+
+	$('[data-toggle="tab"]:first').tab('show');
+});

@@ -13,6 +13,7 @@ class IndexAsset extends AssetBundle {
 		'js/desktop/pub/index.js'
 	];
 	public $depends = [
-		'app\assets\desktop\pub\GlobalAsset'
+		'app\assets\desktop\pub\GlobalAsset',
+		'app\assets\libs\justifiedGalleryAsset'
 	];
 }
