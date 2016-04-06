@@ -1,8 +1,9 @@
 <?php
 use yii\web\View;
+use yii\helpers\Url;
 use yii\widgets\Pjax;
-use app\assets\desktop\pub\IndexAsset;
 use yii\widgets\ListView;
+use app\assets\desktop\pub\IndexAsset;
 
 /* @var $this yii\web\View */
 
@@ -61,35 +62,30 @@ $this->title = 'Todevise / Home';
 					</div>
 					<div class="row no-gutter flex devisers_carousel_wrapper">
 						<ul class="devisers_carousel no-vertical-margin flex-prop-1">
-							<?php for ($i = 0; $i < 15; $i++) { ?>
+							<?php foreach ($devisers as $i => $deviser) { ?>
 							<li class="col-xs-3 col-md-2 col-lg-1 relative deviser_holder text-center">
 								<div class="absolute deviser_bg white"></div>
 								<div class="absolute deviser">
 									<div class="dp relative">
-										<img src="https://pbs.twimg.com/profile_images/646281863355604992/oA4qAMpY.jpg" alt="" class="img-circle" />
+										<img src="<?= $deviser['img'] ?>" alt="" class="img-circle" />
 									</div>
 
-									<div class="text flex flex-column relative">
-										<span class="name funiv_bold fs1-143 fc-4a">Foo bar <?= $i ?></span>
-										<span class="category fpf fs0-857 fc-9b">Foo bar</span>
+									<div class="text relative">
+										<a class="flex flex-column" href="<?= Url::to(["deviser/list", "slug" => $deviser['slug']]) ?>">
+											<span class="name funiv_bold fs1-143 fc-4a"><?= $deviser['name'] ?></span>
+											<span class="category fpf fs0-857 fc-9b"><?= $deviser['category'] ?></span>
+										</a>
 									</div>
 
 									<div class="works relative">
 										<div class="row no-gutter works_holder">
-											<div class="col-xs-6 works_row">
-												<img class="work" src="https://pbs.twimg.com/profile_images/378800000802851388/b23fb1b059cc588f115a824c2975ec6f.png" alt="" />
-											</div>
-											<div class="col-xs-6 works_row">
-												<img class="work" src="https://pbs.twimg.com/profile_images/378800000078376536/d3d98226c211f7bd0568453daf540bb4.jpeg" alt="" />
-											</div>
-										</div>
-										<div class="row no-gutter works_holder">
-											<div class="col-xs-6 works_row">
-												<img class="work" src="http://www.miathletic.com/media/galeria/6/8/4/6/5/t_athletic_club_de_bilbao_moda_y_famoseo-7545648.jpeg" alt="" />
-											</div>
-											<div class="col-xs-6 works_row">
-												<img class="work" src="https://pbs.twimg.com/profile_images/378800000039765887/a02c83cbaa2abdf472148be5b40d7b3c.jpeg" alt="" />
-											</div>
+											<?php foreach ($deviser['works'] as $j => $work) { ?>
+												<div class="col-xs-6 works_row">
+													<a href="<?= Url::to(["public/product", "slug" => $work['slug'], "category_id" => "12345", "product_id" => "1234567"]) ?>">
+														<img class="work" src="<?= $work['img'] ?>" alt="" />
+													</a>
+												</div>
+											<?php } ?>
 										</div>
 									</div>
 								</div>

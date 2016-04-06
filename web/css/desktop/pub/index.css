@@ -178,7 +178,6 @@
 .main .banner_holder .devisers_holder .devisers .deviser .text {
 	top: 0%;
 	height: 30%;
-	padding-top: 5px;
 	transition: top 0.5s ease-in-out;
 }
 
