@@ -31,6 +31,27 @@ class PublicController extends CController {
 			];
 		}
 
+		$devisers = [];
+		for ($i = 0; $i < 20; $i++) {
+			$works = [];
+
+			for ($j = 0; $j < 4; $j++) {
+				$works[] = [
+					'short_id' => $j,
+					'img' => 'https://unsplash.it/100/100/?random&t=' . $j,
+					'slug' => 'foo-bar'
+				];
+			}
+
+			$devisers[] = [
+				'name' => 'Foo bar ' . $i,
+				'category' => 'Foo bar',
+				'slug' => 'foo-bar',
+				'img' => 'https://unsplash.it/200/200/?random&t=' . $i,
+				'works' => $works
+			];
+		}
+
 		$categories = [
 			[
 				'short_id' => '123456',
@@ -59,13 +80,16 @@ class PublicController extends CController {
 		];
 
 		$tmp = [];
-		for ($i=0; $i < 300; $i++) {
+		for ($i = 0; $i < 300; $i++) {
 			$tmp[] = [
+				'product_id' => '1234567',
 				'img' => 'https://unsplash.it/600/400/?random&t=' . $i,
 				'width' => 600,
 				'height' => 400,
 				'name' => 'Foo bar ' . $i,
-				'price' => $i
+				'price' => $i,
+				'category_id' => '12345',
+				'slug' => 'foo-bar'
 			];
 		}
 		$data = new ArrayDataProvider([
@@ -75,6 +99,7 @@ class PublicController extends CController {
 		return $this->render("index", [
 			'data' => $data,
 			'banners' => $banners,
+			'devisers' => $devisers,
 			'categories' => $categories
 		]);
 	}
