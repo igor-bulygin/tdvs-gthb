@@ -118,7 +118,8 @@ $this->title = 'Todevise / Home';
 				<div role="tabpanel" class="tab-pane fade <?= $i == 0 ? 'in ' : '' ?>" id="<?= $category['short_id'] ?>">
 					<?php Pjax::begin([
 						'id' => $category['short_id'],
-						'enablePushState' => false
+						'enablePushState' => false,
+						'linkSelector' => '.pagination a'
 					]); ?>
 
 					<?= ListView::widget([
