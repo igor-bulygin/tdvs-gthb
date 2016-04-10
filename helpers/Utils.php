@@ -203,6 +203,27 @@ class Utils {
 	}
 
 	/**
+	 * Append the value to an array at the end of a deeply nested array, following the
+	 * given path (array of keys).
+	 * Example:
+	 *
+	 * $x = [];
+	 * appendValueForPath($x, ["a", "b", "c"], 42);
+	 * @param $array
+	 * @param $path
+	 * @param $value
+	 */
+	public static function appendValueToPath(&$array, $path, $value) {
+		$temp = &$array;
+
+		foreach($path as $key) {
+			$temp =& $temp[$key];
+		}
+
+		$temp[] = $value;
+	}
+
+	/**
 	 * Get a value of an array by a key, or get another value using a default key.
 	 * @param $arr
 	 * @param $key
