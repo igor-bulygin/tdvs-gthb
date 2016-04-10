@@ -23,7 +23,7 @@ class PublicController extends CController {
 		$banners = [];
 		for ($i = 0; $i < 15; $i++) {
 			$banners[] = [
-				'img' => '/imgs/susan.jpg',
+				'img' => 'https://unsplash.it/1200/600/?random&t=' . $i,
 				'caption' => [
 					'name' => 'Foo bar ' . $i,
 					'category' => 'Foo bar ' . $i
@@ -55,49 +55,52 @@ class PublicController extends CController {
 		$categories = [
 			[
 				'short_id' => '123456',
-				'name' => "All categories"
+				'name' => "All categories",
+				'products' => []
 			],
 			[
 				'short_id' => '321654',
-				'name' => "Art"
+				'name' => "Art",
+				'products' => []
 			],
 			[
 				'short_id' => '123654',
-				'name' => "Fashion"
+				'name' => "Fashion",
+				'products' => []
 			],
 			[
 				'short_id' => '654123',
-				'name' => "Industrial design"
+				'name' => "Industrial design",
+				'products' => []
 			],
 			[
 				'short_id' => '231546',
-				'name' => "Jewelry"
-			],
-			[
-				'short_id' => '132645',
-				'name' => "More"
+				'name' => "Jewelry",
+				'products' => []
 			]
 		];
 
-		$tmp = [];
-		for ($i = 0; $i < 300; $i++) {
-			$tmp[] = [
-				'product_id' => '1234567',
-				'img' => 'https://unsplash.it/600/400/?random&t=' . $i,
-				'width' => 600,
-				'height' => 400,
-				'name' => 'Foo bar ' . $i,
-				'price' => $i,
-				'category_id' => '12345',
-				'slug' => 'foo-bar'
-			];
+		foreach ($categories as $i => &$category) {
+			$tmp = [];
+			for ($j = 0; $j < 300; $j++) {
+				$tmp[] = [
+					'product_id' => '1234567',
+					'img' => 'https://unsplash.it/300/200/?random&t=' . $i . $j,
+					'width' => 600,
+					'height' => 400,
+					'name' => 'Foo bar ' . $j,
+					'price' => $j,
+					'category_id' => $category['short_id'],
+					'slug' => 'foo-bar'
+				];
+			}
+
+			$category['products'] = new ArrayDataProvider([
+				'allModels' => $tmp
+			]);
 		}
-		$data = new ArrayDataProvider([
-			'allModels' => $tmp
-		]);
 
 		return $this->render("index", [
-			'data' => $data,
 			'banners' => $banners,
 			'devisers' => $devisers,
 			'categories' => $categories
@@ -110,14 +113,10 @@ class PublicController extends CController {
 	}
 
 	public function actionProduct($category_id, $product_id, $slug) {
-		echo "<br />";
-		echo Url::to(["deviser/upload-profile-photo", "slug" => "pepe"]);
-		echo "<br />";
-		echo Url::to(["/public/product", "category_id" => 12456, "product_id" => 9876543, "slug" => "asfo-asdg-asd-gasd-gasdgsdgasdg-asdgasdg"]);
-		echo "<br />";
-		echo Url::to(["/public/category", "category_id" => 12456, "slug" => "asfo-asdg-asd-gasd-gasdgsdgasdg-asdgasdg"]);
-		echo "<br />";
-		echo "$category_id | $product_id | $slug";
-		die();
+		return $this->render("product", [
+			'category_id' => $category_id,
+			'product_id' => $product_id,
+			'slug' => $slug
+		]);
 	}
 }

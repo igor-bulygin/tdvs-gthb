@@ -40,7 +40,9 @@ use lajax\languagepicker\widgets\LanguagePicker;
 							<ul class="list-group">
 								<li class="logo fpf_bold">todevise<br/><span class="fpf_i">A new concept of store</span></li>
 							</ul>
-							<?= LeftMenu::widget(); ?>
+							<div class="flex-prop-1 relative dark-black" id="cssmenu">
+								<?= LeftMenu::widget(); ?>
+							</div>
 						</div>
 					</div>
 
