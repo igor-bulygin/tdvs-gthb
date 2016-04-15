@@ -1,5 +1,4 @@
 <?php
-use app\models\Lang;
 use yii\helpers\Html;
 use app\helpers\Utils;
 use app\components\assets\leftMenuAsset;
@@ -13,7 +12,7 @@ LeftMenuAsset::register($this);
 
 <?php
 
-	function generate_ul ($categories, $short_id, $lang) {
+	function generate_ul ($categories, $short_id) {
 		if (!array_key_exists($short_id, $categories)) {
 			return '';
 		} else {
@@ -26,11 +25,11 @@ LeftMenuAsset::register($this);
 		foreach ($children as $category) {
 			$html .= '<li class="funiv_ultra fc-fff">';
 			$html .= Html::a(
-				Utils::getValue($category["name"], $lang, array_keys(Lang::EN_US)[0]),
+				Utils::l($category['name']),
 				['public/category', "category_id" => $category['short_id'], "slug" => $category['slug']],
 				['class' => 'fc-fff no-padding']
 			);
-			$html .= generate_ul($categories, $category['short_id'], $lang);
+			$html .= generate_ul($categories, $category['short_id']);
 			$html .= '</li>';
 		}
 
@@ -46,11 +45,11 @@ LeftMenuAsset::register($this);
 				//TODO: Add 'active' class to 'li' element if URL path is pointing to the current category.
 				echo '<li class="funiv_ultra fs1-357 fc-fff">';
 				echo Html::a(
-					Utils::getValue($category["name"], $lang, array_keys(Lang::EN_US)[0]),
+					Utils::l($category['name']),
 					['public/category', "category_id" => $category['short_id'], "slug" => $category['slug']],
 					['class' => 'fc-fff']
 				);
-				echo generate_ul($categories, $category['short_id'], $lang);
+				echo generate_ul($categories, $category['short_id']);
 				echo '</li>';
 			}
 		}
