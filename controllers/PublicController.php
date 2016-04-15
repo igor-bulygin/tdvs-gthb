@@ -4,7 +4,11 @@ namespace app\controllers;
 
 use Yii;
 use yii\helpers\Url;
+use app\models\Person;
 use yii\web\Controller;
+use app\models\Product;
+use app\models\Category;
+use yii\base\DynamicModel;
 use yii\filters\VerbFilter;
 use app\helpers\CController;
 use yii\filters\AccessControl;
@@ -20,6 +24,8 @@ class PublicController extends CController {
 	}
 
 	public function actionIndex() {
+		$lang = Yii::$app->language;
+
 		$banners = [];
 		for ($i = 0; $i < 15; $i++) {
 			$banners[] = [
@@ -52,37 +58,47 @@ class PublicController extends CController {
 			];
 		}
 
-		$categories = [
-			[
-				'short_id' => '123456',
-				'name' => "All categories",
-				'products' => []
+		////////////////////
+
+		$categories = Category::find()
+			->where(["path" => "/"])
+			->orderBy(['name.' . $lang => SORT_ASC])
+			->asArray()
+			->all();
+
+		array_unshift($categories, [
+			'short_id' => '123456',
+			'name' => [
+				'en-US' => 'All categories'
 			],
-			[
-				'short_id' => '321654',
-				'name' => "Art",
-				'products' => []
-			],
-			[
-				'short_id' => '123654',
-				'name' => "Fashion",
-				'products' => []
-			],
-			[
-				'short_id' => '654123',
-				'name' => "Industrial design",
-				'products' => []
-			],
-			[
-				'short_id' => '231546',
-				'name' => "Jewelry",
-				'products' => []
-			]
-		];
+			'products' => []
+		]);
+
+		foreach ($categories as &$category) {
+			$model = new DynamicModel([
+				'selected' => null
+			]);
+			$model->addRule('selected', 'string');
+
+			$req = Yii::$app->request;
+			if ($req->isPjax && substr($req->headers->get('X-PJAX-Container', ''), 1) === $category['short_id']) {
+				$model->load($req->post());
+			}
+			$category['filter_model'] = $model;
+			error_log($category['filter_model']->selected, 4);
+		}
 
 		foreach ($categories as $i => &$category) {
 			$tmp = [];
 			for ($j = 0; $j < 300; $j++) {
+
+				$f = $category['filter_model']->selected;
+				if($f === 'odd' && $j % 2 === 0) {
+					continue;
+				} else if ($f === 'even' && $j % 2 !== 0) {
+					continue;
+				}
+
 				$tmp[] = [
 					'product_id' => '1234567',
 					'img' => 'https://unsplash.it/300/200/?random&t=' . $i . $j,
@@ -113,7 +129,20 @@ class PublicController extends CController {
 	}
 
 	public function actionProduct($category_id, $product_id, $slug) {
+
+		$product = Product::findOne([
+			"short_id" => "4f690535" // $product_id
+		]);
+
+		//404 if $product == null
+
+		$deviser = Person::findOne([
+			"short_id" => $product->deviser_id
+		]);
+
 		return $this->render("product", [
+			'product' => $product,
+			'deviser' => $deviser,
 			'category_id' => $category_id,
 			'product_id' => $product_id,
 			'slug' => $slug
