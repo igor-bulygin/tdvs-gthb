@@ -2,6 +2,7 @@
 namespace app\helpers;
 
 use Yii;
+use app\models\Lang;
 use yii\helpers\Url;
 use yii\helpers\Json;
 
@@ -232,6 +233,15 @@ class Utils {
 	 */
 	public static function getValue($arr, $key, $default_key) {
 		return isset($arr[$key]) ? $arr[$key] : $arr[$default_key];
+	}
+
+	/**
+	 * The equivalent of 'getValue', but for language-related values.
+	 * It will try to get the value in the currently active language and
+	 * will fallback to English.
+	 */
+	public static function l($arr) {
+		return Utils::getValue($arr, Yii::$app->language, array_keys(Lang::EN_US)[0]);
 	}
 
 	/**
