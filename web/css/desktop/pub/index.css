@@ -226,6 +226,11 @@
 	margin-right: 1px;
 }
 
+.main .banner_holder .devisers_holder .devisers .tabs li:last-child {
+	border-right: none;
+	margin-right: 0;
+}
+
 .main .banner_holder .devisers_holder .devisers .tabs li.active,
 .main .banner_holder .devisers_holder .devisers .tabs li:hover {
 	background-color: #fff;
@@ -265,6 +270,23 @@
 
 .main .products .product:hover .data {
 	bottom: 0%;
+}
+
+.main .tab-pane .form-group .filters [data-role="filter"] {
+	display: none;
+}
+
+.main .tab-pane .form-group .filter-span {
+	display: block;
+	padding: 6px 0;
+	margin: 0 10px;
+	border-bottom: 1px solid transparent;
+}
+
+.main .tab-pane .form-group .filter-span.active,
+.main .tab-pane .form-group .filter-span:hover {
+	color: #f7284b;
+	border-bottom: 1px solid #f7284b;
 }
 
 .main .pagination {
