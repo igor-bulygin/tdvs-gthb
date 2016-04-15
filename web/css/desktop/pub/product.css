@@ -1,0 +1,141 @@
+.lwhite {
+	border-bottom: 2px solid white;
+}
+
+.product {
+	height: calc(100vh - 100px);
+	margin-bottom: -1px; /* fix weird 1px gap at the bottom */
+	overflow: hidden;
+}
+
+.product .bg {
+	top: -25px;
+	bottom: -25px;
+	left: -25px;
+	right: -25px;
+	-webkit-filter: blur(15px);
+	-moz-filter: blur(15px);
+	-o-filter: blur(15px);
+	-ms-filter: blur(15px);
+	filter: blur(15px);
+}
+
+.product .deviser_wrapper {
+	padding: 32px 0 0 25px !important;
+}
+
+
+.product .deviser_wrapper .info,
+.product .gallery_wrapper .info,
+.product .deviser_wrapper .info_bg,
+.product .gallery_wrapper .info_bg {
+	right: 0;
+	width: 30%;
+	height: 100%;
+}
+
+.product .deviser_wrapper .info_bg,
+.product .gallery_wrapper .info_bg {
+	opacity: 0.8;
+	background-color: #f4f4f4;
+}
+
+.product .deviser_wrapper .info .avatar_wrapper,
+.product .deviser_wrapper .info .stock_price_wrapper {
+	padding: 15px;
+}
+
+.product .deviser_wrapper .info .avatar {
+	width: 100%;
+	background-size: cover;
+}
+
+.product .gallery_wrapper {
+	padding: 0 0 0 25px !important;
+}
+
+.product .carosel {
+
+}
+
+.product .carosel-inner {
+	white-space: nowrap;
+	overflow: hidden;
+	font-size: 0;
+	vertical-align: baseline;
+}
+
+.product .carosel-item {
+	max-width: 33.3333%;
+	padding-right: 10px;
+	position: relative;
+}
+
+.product .carosel-control {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	display: inline-block;
+	z-index: 1;
+	cursor: pointer;
+}
+.product .carosel-control-left {
+	left: 15px;
+	width: 15px;
+	height: 15px;
+	background-color: transparent;
+	border-right: 2px solid white;
+	border-bottom: 2px solid white;
+	transform: rotate(135deg);
+}
+
+.product .carosel-control-right {
+	right: calc(30% + 15px);
+	width: 15px;
+	height: 15px;
+	background-color: transparent;
+	border-right: 2px solid white;
+	border-bottom: 2px solid white;
+	transform: rotate(-45deg);
+}
+
+.product .carosel-control:active,
+.product .carosel-control:hover {
+	text-decoration: none;
+	color: rgba(255, 255, 255, 0.9);
+}
+
+.product .tabs-wrapper {
+
+}
+
+.product .tabs {
+	width: 100%;
+	list-style: none;
+}
+
+.product .tabs li {
+	flex-basis: 100%;
+	background-color: rgba(255, 255, 255, 0.3);
+	border-right: 1px solid #ddd;
+	margin-right: 1px;
+}
+
+.product .tabs li:last-child {
+	border: none;
+	margin-right: 0;
+}
+
+.product .tabs li.active,
+.product .tabs li:hover {
+	background-color: #fff;
+}
+
+.product .tabs li a {
+	padding: 10px 25px;
+	display: block;
+}
+
+.product .tabs li:hover a {
+	color: #4a4a4a;
+}
