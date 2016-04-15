@@ -6,6 +6,7 @@
 
 .header .navbar-inverse{
 	border: none;
+	min-height: inherit;
 }
 
 .header .navbar{
