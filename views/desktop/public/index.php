@@ -1,9 +1,14 @@
 <?php
 use yii\web\View;
 use yii\helpers\Url;
+use app\models\Lang;
+use yii\helpers\Html;
 use yii\widgets\Pjax;
+use app\helpers\Utils;
 use yii\widgets\ListView;
+use yii\widgets\ActiveForm;
 use app\assets\desktop\pub\IndexAsset;
+
 
 /* @var $this yii\web\View */
 
@@ -97,8 +102,8 @@ $this->title = 'Todevise / Home';
 						<div class="col-xs-12 no-horizontal-padding">
 							<ul class="flex funiv_bold fs0-857 fs-upper tabs no-horizontal-padding no-vertical-margin">
 								<?php foreach ($categories as $i => $category) { ?>
-									<li class="pointer text-center <?= $i == 0 ? '' : '' ?>">
-										<a class="fc-5b" data-toggle="tab" href="#<?= $category['short_id'] ?>"><?= $category['name'] ?></a>
+									<li class="pointer text-center">
+										<a class="fc-5b" data-toggle="tab" href="#<?= $category['short_id'] ?>"><?= Utils::l($category["name"]) ?></a>
 									</li>
 								<?php } ?>
 							</ul>
@@ -116,14 +121,45 @@ $this->title = 'Todevise / Home';
 		<div class="tab-content products">
 			<?php foreach ($categories as $i => $category) { ?>
 				<div role="tabpanel" class="tab-pane fade <?= $i == 0 ? 'in ' : '' ?>" id="<?= $category['short_id'] ?>">
-					<?php Pjax::begin([
+					<?php
+
+					Pjax::begin([
 						'id' => $category['short_id'],
 						'enablePushState' => false,
 						'linkSelector' => '.pagination a'
-					]); ?>
+					]);
 
-					<?= ListView::widget([
-						'dataProvider' => $data,
+					$form = ActiveForm::begin([
+						'id' => 'category_filter_' . $category['short_id'],
+						'options' => [
+							'data-pjax' => true
+						]
+					]);
+
+					echo $form->field($category['filter_model'], 'selected')->radioList([
+						'odd' => Yii::t('app/public', 'Odd products'),
+						'even' => Yii::t('app/public', 'Even products')
+					], [
+						'unselect' => null,
+						'item' => function ($index, $label, $name, $checked, $value) use ($form) {
+							$active_class = $checked ? 'active' : '';
+							return Html::radio($name, $checked, [
+								'data-role' => 'filter',
+								'label' => Html::tag('span', $label, [
+									'class' => "pointer filter-span fpf fc-5b fs-upper fs0-857 $active_class"
+								]),
+								'labelOptions' => [
+									'class' => 'no-margin'
+								],
+								'value' => $value,
+								'onclick' => '$("#' . $form->id . '").yiiActiveForm("submitForm");'
+							]);
+						},
+						'class' => 'filters text-center white'
+					])->label(false);
+
+					echo ListView::widget([
+						'dataProvider' => $category['products'],
 						'itemView' => '_index_product',
 						'itemOptions' => [
 							'tag' => false
@@ -132,9 +168,13 @@ $this->title = 'Todevise / Home';
 							'class' => 'products_wrapper'
 						],
 						'layout' => '<div class="products_holder">{items}</div>{pager}',
-					]); ?>
+					]);
 
-					<?php Pjax::end(); ?>
+					ActiveForm::end();
+
+					Pjax::end();
+
+					?>
 				</div>
 			<?php } ?>
 		</div>
