@@ -13,7 +13,7 @@ This is how a single tag looks like:
 	stock_and_price: true, // This will add the tag to the stock and price chart
 	type: 0, // Check the constants in Tag model for all the valid values
 	         // for this
-	n_options: 1 // Exists only of type is DROPDOWN
+	n_options: 1 // Exists only when type is DROPDOWN
 	             //The number of options that can be assigned to a product
 
 	name: {
