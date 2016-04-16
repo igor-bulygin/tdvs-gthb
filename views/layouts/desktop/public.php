@@ -43,6 +43,16 @@ use lajax\languagepicker\widgets\LanguagePicker;
 							<div class="flex-prop-1 relative dark-black" id="cssmenu">
 								<?= LeftMenu::widget(); ?>
 							</div>
+							<div class="lang">
+								<span class="funiv fs0-857 fc-9a fs-upper"><?= Yii::t('app/public', 'Language') ?></span>
+								<?= \lajax\languagepicker\widgets\LanguagePicker::widget([
+									'itemTemplate' => '<li><a href="{link}" class="funiv fs0-857 fc-9a fs-upper">{name}</a></li>',
+									'activeItemTemplate' => '<a href="{link}" class="funiv fs0-857 fc-fff fs-upper">{name}</a>',
+									'parentTemplate' => '<div class="language-picker dropdown-list {size}"><div>{activeItem}<ul>{items}</ul></div></div>',
+									'languageAsset' => 'lajax\languagepicker\bundles\LanguageLargeIconsAsset',      // StyleSheets
+									'languagePluginAsset' => 'lajax\languagepicker\bundles\LanguagePluginAsset',    // JavaScripts
+								]); ?>
+							</div>
 						</div>
 					</div>
 
