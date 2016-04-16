@@ -49,9 +49,7 @@ $this->title = 'Todevise / Product';
 						<span class="price funiv_ultra fs1-571 fc-f7284b">4700€</span>
 					</div>
 
-					<div class="col-xs-12 lwhite">
-
-					</div>
+					<div class="col-xs-12 lwhite"></div>
 				</div>
 			</div>
 		</div>
@@ -77,8 +75,47 @@ $this->title = 'Todevise / Product';
 				</div>
 			</div>
 
-			<div class="info_bg absolute">
+			<div class="info_bg absolute"></div>
+			<div class="info absolute">
+				<div class="row no-gutter max-height flex flex-column flex-justify-around">
+					<div class="attributes">
 
+					</div>
+
+					<div class="buttons flex flex-justify-center flex-prop-1-0 flex-prop funiv_ultra fs-upper fc-3d fs1 lwhite">
+						<span class="savebox pointer">
+							<span class="hexagon"></span>
+							<span class=""><?= Yii::t('app/public', 'Save in a box') ?></span>
+						</span>
+						<span class="addcart pointer">
+							<span class="glyphicon glyphicon-shopping-cart"></span>
+							<span class=""><?= Yii::t('app/public', 'Add to cart') ?></span>
+						</span>
+					</div>
+
+					<div class="flex flex-column flex-prop-2-1 description_wrapper lwhite">
+						<div class="description_title funiv_bold fs0-857 fc-6d fs-upper"><?= Yii::t('app/public', 'Description') ?></div>
+						<span class="description fpf fs0-929 fc-64"><?= Utils::l($product['description']) ?></span>
+					</div>
+
+					<div class="flex flex-column flex-prop-1-0 characteristics_wrapper lwhite">
+						<div class="characteristics_title funiv_bold fs0-857 fc-6d fs-upper"><?= Yii::t('app/public', 'Characteristics') ?></div>
+					</div>
+
+					<div class="flex flex-column flex-prop-1-0 policies_wrapper lwhite">
+						<div class="policies_title funiv_bold fs0-857 fc-6d fs-upper"><?= Yii::t('app/public', 'Work policies') ?></div>
+					</div>
+
+					<div class="flex flex-justify-end flex-prop-1-0 social_wrapper">
+						<span class="social_title funuv fc-64 fs1"><?= Yii::t('app/public', 'Share on') ?></span>
+						<div class="ssk-round ssk-grayscale ssk-group ssk-xs">
+							<a href="" class="ssk ssk-facebook"></a>
+							<a href="" class="ssk ssk-twitter"></a>
+							<a href="" class="ssk ssk-google-plus"></a>
+							<a href="" class="ssk ssk-pinterest"></a>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 
@@ -102,6 +139,12 @@ $this->title = 'Todevise / Product';
 				<a class="fc-5b" data-toggle="tab" href="#comments"><?= Yii::t('app/public', 'Comments') ?></a>
 			</li>
 		</ul>
+	</div>
+</div>
+
+<div class="row no-gutter" style="height: 400px;">
+	<div class="col-xs-12 no-padding">
+
 	</div>
 </div>
 

@@ -36,7 +36,7 @@
 
 .product .deviser_wrapper .info_bg,
 .product .gallery_wrapper .info_bg {
-	opacity: 0.8;
+	opacity: 0.9;
 	background-color: #f4f4f4;
 }
 
@@ -103,6 +103,57 @@
 .product .carosel-control:hover {
 	text-decoration: none;
 	color: rgba(255, 255, 255, 0.9);
+}
+
+.product .gallery_wrapper .info {
+
+}
+
+.product .gallery_wrapper .info .buttons {
+	padding: 10px;
+}
+
+.product .gallery_wrapper .info .savebox {
+	border: 1px solid #d7d7d7;
+	padding: 9px 25px 5px 25px;
+	border-radius: 9px;
+	margin-right: 10px;
+}
+
+.product .gallery_wrapper .info .hexagon {
+	width: 12px;
+	height: 12px;
+	border: 1px solid #ccc;
+	display: inline-block;
+}
+
+.product .gallery_wrapper .info .addcart {
+	background-color: #b8e986;
+	padding: 9px 25px 5px 25px;
+	border-radius: 9px;
+}
+
+.product .gallery_wrapper .info .description_wrapper,
+.product .gallery_wrapper .info .characteristics_wrapper,
+.product .gallery_wrapper .info .policies_wrapper {
+	padding: 15px;
+	overflow: auto;
+}
+
+.product .gallery_wrapper .info .description_title {
+
+}
+
+.product .gallery_wrapper .info .description {
+	white-space: pre-wrap;
+}
+
+.product .gallery_wrapper .info .social_wrapper {
+	padding: 7px 10px;
+}
+
+.product .gallery_wrapper .info .social_title {
+	margin-right: 10px;
 }
 
 .product .tabs-wrapper {

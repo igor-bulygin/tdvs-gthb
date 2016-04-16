@@ -48,3 +48,11 @@ $(function () {
 		av.height(av.width());
 	}
 });
+
+/*
+ * Make social share icons work
+ */
+
+$(function () {
+	SocialShareKit.init();
+});
