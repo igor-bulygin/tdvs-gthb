@@ -231,8 +231,14 @@ class Utils {
 	 * @param $default_key
 	 * @return mixed
 	 */
-	public static function getValue($arr, $key, $default_key) {
-		return isset($arr[$key]) ? $arr[$key] : $arr[$default_key];
+	public static function getValue($arr, $key, $default_key, $default = "") {
+		if (isset($arr[$key])) {
+			return $arr[$key];
+		} else if (isset($arr[$default_key])) {
+			return $arr[$default_key];
+		} else {
+			return  $default;
+		}
 	}
 
 	/**
