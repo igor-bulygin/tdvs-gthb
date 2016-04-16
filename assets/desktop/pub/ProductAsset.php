@@ -13,6 +13,7 @@ class ProductAsset extends AssetBundle {
 		'js/desktop/pub/product.js'
 	];
 	public $depends = [
-		'app\assets\desktop\pub\GlobalAsset'
+		'app\assets\desktop\pub\GlobalAsset',
+		'app\assets\libs\socialShareKitAsset'
 	];
 }
