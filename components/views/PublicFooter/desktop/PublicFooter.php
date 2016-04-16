@@ -86,7 +86,7 @@ publicFooterAsset::register($this);
 			</div>
 			<div class="col-xs-3 fs-upper">
 				<div class="center-justify">
-					<span class="deviser fs0-857 funiv_bold fc-fff"><?= Yii::t('app/public', 'Do you want to become a deviser?') ?></span>
+					<span class="fs0-857 funiv_bold fc-fff"><?= Yii::t('app/public', 'Do you want to become a deviser?') ?></span>
 					<ul class="fc-c7 list links no-horizontal-padding no-margin list fc-c7 funiv fs0-786 ls0-02">
 						<li class="fs1-786 dot_deviser no-margin">·</li>
 						<li class="become_deviser flex flex-justify-between flex-align-baseline">
