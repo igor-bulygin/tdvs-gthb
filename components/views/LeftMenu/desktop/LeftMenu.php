@@ -42,7 +42,6 @@ LeftMenuAsset::register($this);
 	<?php
 		foreach($categories as $category) {
 			if (array_key_exists('path', $category) && $category['path'] === '/') {
-				//TODO: Add 'active' class to 'li' element if URL path is pointing to the current category.
 				echo '<li class="funiv_ultra fs1-357 fc-fff">';
 				echo Html::a(
 					Utils::l($category['name']),
