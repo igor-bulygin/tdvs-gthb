@@ -40,7 +40,7 @@ todevise.controller('deviserCtrl', ["$scope", "$timeout", "$deviser", "$deviser_
 		}
 
 		//Show the crop dialog after an image is selected
-		if (n && n.name !== undefined && o !== null) {
+		if (n && n.name !== undefined) {
 			$scope.crop_profile();
 		}
 	});
