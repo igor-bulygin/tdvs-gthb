@@ -1,10 +1,23 @@
 var todevise = angular.module('todevise', ['ngAnimate', 'ui.bootstrap', 'angular-multi-select', 'global-admin', 'global-desktop', 'api', 'angular-sortable-view', 'ui.validate']);
 
+todevise.filter('arrpatch', [
+	function () {
+		return function (arr, word) {
+			arr = JSON.parse(JSON.stringify(arr));
+			for (var i = 0; i < arr.length; i++) {
+				arr.splice(i, 0, word);
+				i++;
+			}
+			return arr.join(", ");
+		}
+	}
+]);
+
 todevise.controller('tagCtrl', ["$scope", "$timeout", "$tag", "$tag_util", "$category_util", "toastr", "$uibModal", "$cacheFactory", function($scope, $timeout, $tag, $tag_util, $category_util, toastr, $uibModal, $cacheFactory) {
 	$scope.lang = _lang;
 	$scope.tag = _tag;
 	$scope.mus = _mus;
-	$scope.api = {};
+	$scope.selected_mu = "";
 
 	$scope.c_mus = $cacheFactory("mus");
 	angular.forEach(_mus, function(mus) {
@@ -94,7 +107,7 @@ todevise.controller('tagCtrl', ["$scope", "$timeout", "$tag", "$tag_util", "$cat
 	};
 
 	$scope.create_freetext_option = function() {
-		$scope.new_option["metric_type"] = $scope.selected_mu[0].value;
+		$scope.new_option["metric_type"] = $scope.selected_mu;
 		$scope.new_option.type = parseInt($scope.freetext_type, 10);
 
 		$scope.tag.options.push($scope.new_option);

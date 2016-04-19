@@ -60,26 +60,23 @@ $this->title = 'Todevise / Admin / Tag';
 				<label class="funiv fs-upper fs0-786 fc-c7 fnormal"><?= Yii::t("app/admin", "Categories"); ?></label><br>
 				<div
 					angular-multi-select
-					api="api"
-					id-property="short_id"
 					input-model="categories"
 					output-model="tag.categories"
-					output-model-type="array"
-					output-model-props='["short_id"]'
-					preselect-prop="short_id"
-					preselect-value="{{ tag.categories }}"
+					output-keys="short_id"
+					output-type="values"
 
-					group-property="sub"
-					tick-property="check"
+					id-property="short_id"
+					checked-property="check"
+					children-property="sub"
 
-					item-label="<[ name['{{ lang }}'] ]>"
-					selection-mode="multi"
-					search-property="name['{{ lang }}']"
-					min-search-length="3"
-					hidden-property="hidden"
-					helper-elements="noall nonone noreset filter">
-				</div>
+					dropdown-label="<[ '<(name[&quot;{{ lang }}&quot;])>' | outputModelIterator : this : ', ']>"
+					node-label="<[ name['{{ lang }}'] ]>"
+					leaf-label="<[ name['{{ lang }}'] ]>"
 
+					preselect="{{ tag.categories | arrpatch : 'short_id' }}"
+
+					hide-helpers="check_all, check_none, reset"
+				></div>
 			</div>
 		</div>
 
@@ -195,13 +192,18 @@ $this->title = 'Todevise / Admin / Tag';
 							angular-multi-select
 							input-model="mus"
 							output-model="selected_mu"
-							tick-property="checked"
-							item-label="<[ text ]>"
-							selection-mode="single"
-							button-template="angular-multi-select-btn-data.htm"
-							button-label="<[ text ]>"
-							helper-elements="noall nonone noreset nofilter">
-						</div>
+							output-keys="value"
+							output-type="value"
+
+							checked-property="checked"
+
+							max-checked-leafs="1"
+							dropdown-label="<[ '<(text)>' | outputModelIterator : this : ', ']>"
+							node-label="<[ text ]>"
+							leaf-label="<[ text ]>"
+
+							hide-helpers="check_all, check_none, reset"
+						></div>
 					</div>
 
 					<div class="col-xs-3 col-height col-middle">
