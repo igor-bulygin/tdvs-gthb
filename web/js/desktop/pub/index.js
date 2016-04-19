@@ -31,6 +31,10 @@ $(function() {
 
 		padding = body_content.width() / 4;
 		diff -= padding;
+
+		/*Center slider*/
+		var left = (slider_width - container_width) / 2;
+		items.css({ left: -left + "px" });
 	}
 });
 
