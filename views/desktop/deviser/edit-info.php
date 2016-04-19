@@ -38,19 +38,19 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 		<div class="row no-gutter">
 			<div class="col-xs-12 no-horizontal-padding header-photo flex flex-column">
 				<div class="header-photo-holder flex flex-column">
-					<img class="header-photo-img" ngf-background="headerphoto[0]" angular-img-dl angular-img-dl-url="<?= $header_photo_url ?>" angular-img-dl-model="headerphoto[0]">
+					<img class="header-photo-img" ngf-background="headerphoto" angular-img-dl angular-img-dl-url="<?= $header_photo_url ?>" angular-img-dl-model="headerphoto">
 
 					<div class="flex flex-justify-center flex-align-center flex-prop-1">
 						<div class="controls">
-							<span class="glyphicon glyphicon-refresh pointer" aria-hidden="true" ngf-select ng-model="headerphoto" ng-cloak ng-show="headerphoto[0] !== undefined"></span>
-							<span class="glyphicon glyphicon-resize-small pointer" aria-hidden="true" ng-click="crop_header()" ng-cloak ng-show="headerphoto[0] !== undefined"></span>
+							<span class="glyphicon glyphicon-refresh pointer" aria-hidden="true" ngf-select ng-model="headerphoto" ng-cloak ng-show="headerphoto"></span>
+							<span class="glyphicon glyphicon-resize-small pointer" aria-hidden="true" ng-click="crop_header()" ng-cloak ng-show="headerphoto"></span>
 						</div>
 
 						<div class="pointer drop-box flex flex-justify-center" ngf-drop ngf-select ng-model="headerphoto" class="drop-box"
 							ngf-drag-over-class="dragover" ngf-multiple="false" ngf-allow-dir="false"
 							ngf-accept="'image/*'" ngf-drop-available="dropAvailable">
 							<div ng-cloak ng-hide="dropAvailable">File Drop not available</div>
-							<div ng-cloak ng-show="dropAvailable && (!headerphoto || headerphoto.length === 0)" class="funiv_ultra fs1 fc-3d fs-upper header-photo-txt">
+							<div ng-cloak ng-show="dropAvailable && !headerphoto" class="funiv_ultra fs1 fc-3d fs-upper header-photo-txt">
 								<span class="glyphicon glyphicons-up-arrow"></span>
 								<?= Yii::t("app/deviser", "Upload header photo") ?>
 							</div>
@@ -59,19 +59,19 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 
 					<div class="profile-photo-holder">
-						<img class="img-circle profile-photo-img" ngf-background="profilephoto[0]" angular-img-dl angular-img-dl-url="<?= $profile_photo_url ?>" angular-img-dl-model="profilephoto[0]">
+						<img class="img-circle profile-photo-img" ngf-background="profilephoto" angular-img-dl angular-img-dl-url="<?= $profile_photo_url ?>" angular-img-dl-model="profilephoto">
 
 						<div class="flex flex-justify-center flex-align-center profile-photo-controls-holder">
 							<div class="controls flex">
-								<span class="glyphicon glyphicon-refresh pointer" aria-hidden="true" ngf-select ng-model="profilephoto" ng-cloak ng-show="profilephoto[0] !== undefined"></span>
-								<span class="glyphicon glyphicon-resize-small pointer" aria-hidden="true" ng-click="crop_profile()" ng-cloak ng-show="profilephoto[0] !== undefined"></span>
+								<span class="glyphicon glyphicon-refresh pointer" aria-hidden="true" ngf-select ng-model="profilephoto" ng-cloak ng-show="profilephoto"></span>
+								<span class="glyphicon glyphicon-resize-small pointer" aria-hidden="true" ng-click="crop_profile()" ng-cloak ng-show="profilephoto"></span>
 							</div>
 
 							<div class="pointer drop-box flex flex-justify-center flex-align-center" ngf-drop ngf-select ng-model="profilephoto" class="drop-box"
 							     ngf-drag-over-class="dragover" ngf-multiple="false" ngf-allow-dir="false"
 							     ngf-accept="'image/*'" ngf-drop-available="dropAvailable">
 								<div ng-cloak ng-hide="dropAvailable">File Drop not available</div>
-								<div ng-cloak ng-show="dropAvailable && (!profilephoto || profilephoto.length === 0)" class="funiv_ultra fs1 fc-3d fs-upper profile-photo-area">
+								<div ng-cloak ng-show="dropAvailable && !profilephoto" class="funiv_ultra fs1 fc-3d fs-upper profile-photo-area">
 									<span class="glyphicon glyphicons-up-arrow"></span><br />
 									<?= Yii::t("app/deviser", "Upload profile photo") ?>
 								</div>

@@ -17,8 +17,8 @@ todevise.filter('arrpatch', [
 todevise.controller('deviserCtrl', ["$scope", "$timeout", "$deviser", "$deviser_util", "$category_util", "toastr", "$uibModal", "Upload", "$http", "$product", "$product_util", function($scope, $timeout, $deviser, $deviser_util, $category_util, toastr, $uibModal, Upload, $http, $product, $product_util) {
 	$scope.lang = _lang;
 	$scope.deviser = _deviser;
-	$scope.headerphoto = [];
-	$scope.profilephoto = [];
+	$scope.headerphoto = null;
+	$scope.profilephoto = null;
 
 	//Sort by path length
 	_categories = $category_util.sort(_categories);
@@ -45,14 +45,14 @@ todevise.controller('deviserCtrl', ["$scope", "$timeout", "$deviser", "$deviser_
 			resolve: {
 				data: function () {
 					return {
-						'photo': $scope.headerphoto[0]
+						'photo': $scope.headerphoto
 					}
 				}
 			}
 		});
 
 		modalInstance.result.then(function(data) {
-			$scope.headerphoto = [data.croppedphoto];
+			$scope.headerphoto = data.croppedphoto;
 		}, function () {
 			//Cancel
 		});
@@ -65,14 +65,14 @@ todevise.controller('deviserCtrl', ["$scope", "$timeout", "$deviser", "$deviser_
 			resolve: {
 				data: function () {
 					return {
-						'photo': $scope.profilephoto[0]
+						'photo': $scope.profilephoto
 					}
 				}
 			}
 		});
 
 		modalInstance.result.then(function(data) {
-			$scope.profilephoto = [data.croppedphoto];
+			$scope.profilephoto = data.croppedphoto;
 		}, function () {
 			//Cancel
 		});
@@ -95,13 +95,13 @@ todevise.controller('deviserCtrl', ["$scope", "$timeout", "$deviser", "$deviser_
 			toastr.error("Failed saving deviser!", err);
 		});
 
-		if($scope.headerphoto && $scope.headerphoto.length === 1) {
+		if($scope.headerphoto) {
 			Upload.upload({
 				headers : {
 					'X-CSRF-TOKEN' : yii.getCsrfToken()
 				},
 				url: _upload_header_photo_url,
-				file: $scope.headerphoto[0]
+				file: $scope.headerphoto
 			}).progress(function(e) {
 				//var progressPercentage = parseInt(100.0 * e.loaded / e.total);
 				//console.log('progress: ' + progressPercentage + '% ' + e.config.file.name);
@@ -114,13 +114,13 @@ todevise.controller('deviserCtrl', ["$scope", "$timeout", "$deviser", "$deviser_
 			});
 		}
 
-		if($scope.profilephoto && $scope.profilephoto.length === 1) {
+		if($scope.profilephoto) {
 			Upload.upload({
 				headers : {
 					'X-CSRF-TOKEN' : yii.getCsrfToken()
 				},
 				url: _upload_profile_photo_url,
-				file: $scope.profilephoto[0]
+				file: $scope.profilephoto
 			}).progress(function(e) {
 				//var progressPercentage = parseInt(100.0 * e.loaded / e.total);
 				//console.log('progress: ' + progressPercentage + '% ' + e.config.file.name);
