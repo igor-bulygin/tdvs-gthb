@@ -25,6 +25,7 @@ todevise.controller('deviserCtrl', ["$scope", "$timeout", "$deviser", "$deviser_
 	$scope.categories = $category_util.create_tree(_categories);
 
 	$scope.$watch("headerphoto", function(n, o) {
+		if (n === null && o === null) return;
 		//Restore old profile picture if select dialog is canceled
 		if(n === null) {
 			$scope.headerphoto = o;
@@ -32,9 +33,15 @@ todevise.controller('deviserCtrl', ["$scope", "$timeout", "$deviser", "$deviser_
 	});
 
 	$scope.$watch("profilephoto", function(n, o) {
+		if (n === null && o === null) return;
 		//Restore old profile picture if select dialog is canceled
 		if(n === null) {
 			$scope.profilephoto = o;
+		}
+
+		//Show the crop dialog after an image is selected
+		if (n && o !== null) {
+			$scope.crop_profile();
 		}
 	});
 
