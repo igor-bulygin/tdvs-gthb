@@ -40,20 +40,20 @@ $this->title = 'Todevise / Admin / Size charts';
 					<div class="funiv fs-upper fc-9b fs0-786 flex-inline"><?= Yii::t("app/admin", "Filter by category"); ?></div>
 					<div
 						angular-multi-select
-						api="api"
-						id-property="short_id"
 						input-model="categories"
 						output-model="selectedCategories"
 
-						group-property="sub"
-						tick-property="check"
+						name="categories"
+						id-property="short_id"
+						checked-property="check"
+						children-property="sub"
 
-						item-label="<[ name['{{ lang }}'] ]>"
-						selection-mode="single"
-						search-property="name['{{ lang }}']"
-						min-search-length="3"
-						hidden-property="hidden"
-						helper-elements="noall nonone noreset filter"
+						dropdown-label="<[ '<(name[&quot;{{ lang }}&quot;])>' | outputModelIterator : this : ', ']>"
+						node-label="<[ name['{{ lang }}'] ]>"
+						leaf-label="<[ name['{{ lang }}'] ]>"
+
+						max-checked-leafs="1"
+						hide-helpers="check_all, check_none, reset"
 					></div>
 				</div>
 
@@ -130,18 +130,20 @@ $this->title = 'Todevise / Admin / Size charts';
 			<div class="input-group">
 				<div
 					angular-multi-select
-					id-property="short_id"
 					input-model="data.sizecharts"
 					output-model="selectedSizeChartTemplate"
-					tick-property="check"
-					item-label="<[ name['{{ data.lang }}'] ]>"
-					selection-mode="single"
-					search-property="name['{{ data.lang }}']"
-					min-search-length="3"
-					helper-elements="noall nonone noreset filter"
-					button-template="angular-multi-select-btn-data.htm"
-					button-label="<[ name['{{ data.lang }}'] ]>"
-					></div>
+
+					id-property="short_id"
+					checked-property="check"
+					children-property="sub"
+
+					dropdown-label="<[ '<(name[&quot;{{ data.lang }}&quot;])>' | outputModelIterator : this : ', ']>"
+					node-label="<[ name['{{ data.lang }}'] ]>"
+					leaf-label="<[ name['{{ data.lang }}'] ]>"
+
+					max-checked-leafs="1"
+					hide-helpers="check_all, check_none, reset"
+				></div>
 			</div>
 
 		</div>
