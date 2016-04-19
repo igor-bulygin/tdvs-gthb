@@ -29,7 +29,6 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 <?php $this->registerJs("var _deviser = " . Json::encode($deviser) . ";", View::POS_HEAD); ?>
 <?php $this->registerJs("var _categories = " . Json::encode($categories) . ";", View::POS_HEAD); ?>
-<?php $this->registerJs("var _countries = " . Json::encode($countries) . ";", View::POS_HEAD); ?>
 <?php $this->registerJs("var _upload_header_photo_url = '" . Url::to(["deviser/upload-header-photo", "slug" => $deviser["slug"]]) . "';", View::POS_HEAD); ?>
 <?php $this->registerJs("var _upload_profile_photo_url = '" . Url::to(["deviser/upload-profile-photo", "slug" => $deviser["slug"]]) . "';", View::POS_HEAD); ?>
 
@@ -101,22 +100,22 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 			<div class="col-xs-12 flex flex-justify-center">
 				<div
 					angular-multi-select
-					api="api"
 					id-property="country_code"
-					input-model="countries"
-					single-output-model="deviser.personal_info.country"
-					single-output-prop="country_code"
-					preselect-prop="country_code"
-					preselect-value='["{{ deviser.personal_info.country }}"]'
-					delay-start="700"
-					tick-property="checked"
-					item-label="<[ country_name['{{ lang }}'] ]>"
-					selection-mode="single"
-					button-template="angular-multi-select-btn-data.htm"
-					button-label="<[ country_name['{{ lang }}'] ]>"
-					search-property="country_name['{{ lang }}']"
-					helper-elements="noall nonone noreset filter">
-				</div>
+					input-model='<?= Json::encode($countries) ?>'
+					output-model="deviser.personal_info.country"
+					output-keys="country_code"
+					output-type="value"
+
+					checked-property="checked"
+
+					dropdown-label="<[ '<( country_name[&quot;{{ lang }}&quot;] )>' | outputModelIterator : this : ', ' ]>"
+					leaf-label="<[ country_name['{{ lang }}'] ]>"
+
+					max-checked-leafs="1"
+
+					preselect="country_code, {{ deviser.personal_info.country }}"
+					hide-helpers="check_all, check_none, reset"
+				></div>
 			</div>
 		</div>
 
@@ -126,22 +125,20 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 			<div class="col-xs-12 flex flex-justify-center">
 				<div
 					angular-multi-select
-					api="api_cat"
 					id-property="short_id"
 					input-model="categories"
 					output-model="deviser.categories"
-					output-model-props='["short_id"]'
-					output-model-type="array"
-					preselect-prop="short_id"
-					preselect-value="{{ deviser.categories }}"
-					tick-property="check"
-					item-label="<[ name['{{ lang }}'] ]>"
-					selection-mode="multi"
-					search-property="name['{{ lang }}']"
-					min-search-length="3"
-					hidden-property="hidden"
-					helper-elements="noall nonone noreset nofilter">
-				</div>
+					output-keys='short_id'
+					output-type="values"
+
+					checked-property="check"
+
+					dropdown-label="<[ '<( name[&quot;{{ lang }}&quot;] )>' | outputModelIterator : this : ', ' ]>"
+					leaf-label="<[ name['{{ lang }}'] ]>"
+
+					preselect="{{ deviser.categories | arrpatch : 'short_id' }}"
+					hide-helpers="check_all, check_none, reset"
+				></div>
 			</div>
 		</div>
 
