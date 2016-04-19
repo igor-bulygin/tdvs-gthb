@@ -40,7 +40,7 @@ todevise.controller('deviserCtrl', ["$scope", "$timeout", "$deviser", "$deviser_
 		}
 
 		//Show the crop dialog after an image is selected
-		if (n && o !== null) {
+		if (n && n.name !== undefined && o !== null) {
 			$scope.crop_profile();
 		}
 	});
@@ -108,14 +108,14 @@ todevise.controller('deviserCtrl', ["$scope", "$timeout", "$deviser", "$deviser_
 					'X-CSRF-TOKEN' : yii.getCsrfToken()
 				},
 				url: _upload_header_photo_url,
-				file: $scope.headerphoto
+				data: {'file': $scope.headerphoto}
 			}).progress(function(e) {
 				//var progressPercentage = parseInt(100.0 * e.loaded / e.total);
 				//console.log('progress: ' + progressPercentage + '% ' + e.config.file.name);
 			}).success(function(data, status, header, config) {
 				//console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
 				$scope.deviser = data;
-				toastr.success("Uploaded successfully headerphoto photo", config.file.name);
+				toastr.success("Uploaded successfully headerphoto photo", config.data.file.name);
 			}).error(function(err) {
 				toastr.error("Error while uploading headerphoto photo", err)
 			});
@@ -127,14 +127,14 @@ todevise.controller('deviserCtrl', ["$scope", "$timeout", "$deviser", "$deviser_
 					'X-CSRF-TOKEN' : yii.getCsrfToken()
 				},
 				url: _upload_profile_photo_url,
-				file: $scope.profilephoto
+				data: {'file': $scope.profilephoto}
 			}).progress(function(e) {
 				//var progressPercentage = parseInt(100.0 * e.loaded / e.total);
 				//console.log('progress: ' + progressPercentage + '% ' + e.config.file.name);
 			}).success(function(data, status, header, config) {
 				//console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
 				$scope.deviser = data;
-				toastr.success("Uploaded successfully profile photo", config.file.name);
+				toastr.success("Uploaded successfully profile photo", config.data.file.name);
 			}).error(function(err) {
 				toastr.error("Error while uploading profile photo", err)
 			});
