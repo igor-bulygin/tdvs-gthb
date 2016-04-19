@@ -78,7 +78,8 @@ class AdminController extends CController {
 
 	public function actionSizeCharts($filters = null) {
 		$filters = urldecode($filters) ?: null;
-		$filters === null ? [] : Json::decode($filters);
+		$filters = $filters === null ? [] : Json::decode($filters);
+
 		$filters["type"] = SizeChart::TODEVISE;
 
 		$sizecharts = new ActiveDataProvider([
