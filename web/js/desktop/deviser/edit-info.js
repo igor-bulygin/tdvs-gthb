@@ -30,6 +30,11 @@ todevise.controller('deviserCtrl', ["$scope", "$timeout", "$deviser", "$deviser_
 		if(n === null) {
 			$scope.headerphoto = o;
 		}
+
+		//Show the crop dialog after an image is selected
+		if (n && n.name !== undefined) {
+			$scope.crop_header();
+		}
 	});
 
 	$scope.$watch("profilephoto", function(n, o) {
