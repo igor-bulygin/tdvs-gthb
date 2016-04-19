@@ -36,20 +36,20 @@ $this->title = 'Todevise / Admin / Tags';
 					<div class="funiv fs-upper fc-9b fs0-786 flex-inline"><?= Yii::t("app/admin", "Filter by category"); ?></div>
 					<div
 						angular-multi-select
-						api="api"
-						id-property="short_id"
 						input-model="categories"
 						output-model="selectedCategories"
 
-						group-property="sub"
-						tick-property="check"
+						name="categories"
+						id-property="short_id"
+						checked-property="check"
+						children-property="sub"
 
-						item-label="<[ name['{{ lang }}'] ]>"
-						selection-mode="single"
-						search-property="name"
-						min-search-length="3"
-						hidden-property="hidden"
-						helper-elements="noall nonone noreset nofilter"
+						dropdown-label="<[ '<(name[&quot;{{ lang }}&quot;])>' | outputModelIterator : this : ', ']>"
+						node-label="<[ name['{{ lang }}'] ]>"
+						leaf-label="<[ name['{{ lang }}'] ]>"
+
+						max-checked-leafs="1"
+						hide-helpers="check_all, check_none, reset"
 					></div>
 				</div>
 				<div class="col-xs-4 col-height col-middle">

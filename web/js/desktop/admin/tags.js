@@ -14,47 +14,38 @@ todevise.config(['$provide', function($provide) {
 	}]);
 }]);
 
-todevise.controller('tagsCtrl', ["$scope", "$timeout", "$tag", "$tag_util", "$category_util", "toastr", "$uibModal", "$compile", "$http", function($scope, $timeout, $tag, $tag_util, $category_util, toastr, $uibModal, $compile, $http) {
+todevise.controller('tagsCtrl', ["$rootScope", "$scope", "$timeout", "$tag", "$tag_util", "$category_util", "toastr", "$uibModal", "$compile", "$http", function($rootScope, $scope, $timeout, $tag, $tag_util, $category_util, toastr, $uibModal, $compile, $http) {
 
 	$scope.lang = _lang;
-	$scope.api = {};
-
+	$scope.listener;
 	$scope.categories = [];
 	$scope.selectedCategories = [];
 
 	$scope.renderPartial = function() {
-		$scope.stop_watch_category_filter();
+		$scope.listener();
 
 		$http.get(aus.syncToURL()).success(function(data, status) {
 			angular.element('.body-content').html( $compile(data)($scope) );
-			$scope.watch_category_filter();
 		}).error(function(data, status) {
 			toastr.error("Failed to refresh content!");
 		});
 	};
 
-	$scope.watch_category_filter = function() {
-		$scope.stop_watch_category_filter = $scope.$watch('selectedCategories', function(_new, _old) {
-			if(_new && !angular.equals(_new, _old)) {
-				$scope.filter_change(_new);
+	$scope.listener = $scope.$on('ams_toggle_check_node', function (event, args) {
+		if (args.name !== "categories") return;
+
+		$timeout(function () {
+			if($scope.selectedCategories.length === 0) {
+				aus.remove("filters");
+			} else {
+				aus.set("filters", {
+					"categories": {"$in": [$scope.selectedCategories[0].short_id]}
+				}, true);
 			}
-		});
-	};
 
-	$scope.filter_change = function(_filters) {
-		if(_filters.length === 0) {
-			aus.remove("filters");
-		} else {
-			var _node = jsonpath.query(_filters, "$..[?(!@.sub && @.short_id)]");
-			_node = _node.pop();
-
-			aus.set("filters", {
-				"categories": {"$in": [_node.short_id]}
-			}, true);
-		}
-
-		$scope.renderPartial();
-	};
+			$scope.renderPartial();
+		}, 0);
+	});
 
 	$scope.toggle_prop = function($event, tag_id, prop) {
 		var _checkbox = $event.target;
@@ -128,13 +119,15 @@ todevise.controller('tagsCtrl', ["$scope", "$timeout", "$tag", "$tag_util", "$ca
 		_categories = $category_util.sort(_categories);
 
 		$scope.categories = $category_util.create_tree(_categories);
-		$timeout(function() {
-			$scope.api.select(_category_id);
-		}, 0);
 
-		$timeout(function() {
-			$scope.watch_category_filter();
-		}, 0);
+		if (_category_id !== null) {
+			$timeout(function () {
+				$rootScope.$broadcast('ams_do_toggle_check_node', {
+					name: 'categories',
+					item: {short_id: _category_id}
+				});
+			}, 0);
+		}
 	};
 
 }]);
