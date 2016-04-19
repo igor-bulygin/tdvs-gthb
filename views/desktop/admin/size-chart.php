@@ -26,7 +26,6 @@ $this->title = 'Todevise / Admin / Size chart';
 
 		<?php $this->registerJs("var _categories = " . Json::encode($categories) . ";", View::POS_HEAD); ?>
 		<?php $this->registerJs("var _sizechart = " . Json::encode($sizechart) . ";", View::POS_HEAD); ?>
-		<?php $this->registerJs("var _countries = " . Json::encode($countries) . ";", View::POS_HEAD); ?>
 		<?php $this->registerJs("var _countries_lookup = " . Json::encode($countries_lookup) . ";", View::POS_HEAD); ?>
 		<?php $this->registerJs("var _mus = " . Json::encode([
 			[
@@ -67,25 +66,21 @@ $this->title = 'Todevise / Admin / Size chart';
 					<label class="funiv fc-c7 fs0-929 fnormal"><?= Yii::t("app/admin", "Categories"); ?></label>
 					<div
 						angular-multi-select
-						api="api"
-						id-property="short_id"
 						input-model="categories"
 						output-model="sizechart.categories"
-						output-model-type="array"
-						output-model-props='["short_id"]'
-						preselect-prop="short_id"
-						preselect-value="{{ sizechart.categories }}"
 
-						group-property="sub"
-						tick-property="check"
+						id-property="short_id"
+						checked-property="check"
+						children-property="sub"
 
-						item-label="<[ name['{{ lang }}'] ]>"
-						selection-mode="multi"
-						search-property="name['{{ lang }}']"
-						min-search-length="3"
-						hidden-property="hidden"
-						helper-elements="noall nonone noreset filter">
-					</div>
+						dropdown-label="<[ '<(name[&quot;{{ lang }}&quot;])>' | outputModelIterator : this : ', ']>"
+						node-label="<[ name['{{ lang }}'] ]>"
+						leaf-label="<[ name['{{ lang }}'] ]>"
+
+						preselect="{{ sizechart.categories | arrpatch : 'short_id' }}"
+
+						hide-helpers="check_all, check_none, reset"
+					></div>
 				</div>
 			</div>
 			<div class="col-xs-4 div-bordered size-chart-settings">
@@ -93,21 +88,23 @@ $this->title = 'Todevise / Admin / Size chart';
 					<label class="funiv fc-c7 fs0-929 fnormal"><?= Yii::t("app/admin", "Metric unit"); ?></label>
 					<div
 						angular-multi-select
-						api="api_mus"
-						id-property="value"
 						input-model="mus"
-						single-output-model="sizechart.metric_unit"
-						single-output-prop="value"
-						preselect-prop="value"
-						preselect-value="{{ sizechart.metric_unit }}"
-						group-property="sub"
-						tick-property="checked"
-						item-label="<[ text ]>"
-						selection-mode="single"
-						button-template="angular-multi-select-btn-data.htm"
-						button-label="<[ text ]>"
-						helper-elements="noall nonone noreset nofilter">
-					</div>
+						output-model="sizechart.metric_unit"
+						output-keys="value"
+						output-type="value"
+
+						checked-property="checked"
+						children-property="sub"
+
+						max-checked-leafs="1"
+						dropdown-label="<[ '<(text)>' | outputModelIterator : this : ', ']>"
+						node-label="<[ text ]>"
+						leaf-label="<[ text ]>"
+
+						preselect="value, {{ sizechart.metric_unit }}"
+
+						hide-helpers="check_all, check_none, reset"
+					></div>
 				</div>
 			</div>
 		</div>
@@ -195,19 +192,20 @@ $this->title = 'Todevise / Admin / Size chart';
 			<label class="modal-title funiv fs1 fnormal fc-18"><?= Yii::t("app/admin", "Select country"); ?></label>
 			<div
 				angular-multi-select
-				id-property="country_code"
-				input-model="countries"
-				single-output-model="selected_country"
-				single-output-prop="country_code"
-				group-property="sub"
-				tick-property="checked"
-				item-label="<[ country_name['{{ lang }}'] ]>"
-				selection-mode="single"
-				button-template="angular-multi-select-btn-data.htm"
-				button-label="<[ country_name['{{ lang }}'] ]>"
-				search-property="country_name['{{ lang }}']"
-				helper-elements="noall nonone noreset filter">
-			</div>
+				input-model='<?= Json::encode($countries) ?>'
+				output-model="[]"
+				name="country"
+
+				checked-property="checked"
+				children-property="sub"
+
+				max-checked-leafs="1"
+				dropdown-label="<[ '<(country_name[&quot;{{ lang }}&quot;])>' | outputModelIterator : this : ', ']>"
+				node-label="<[ country_name['{{ lang }}'] ]>"
+				leaf-label="<[ country_name['{{ lang }}'] ]>"
+
+				hide-helpers="check_all, check_none, reset"
+			></div>
 		</div>
 		<div class='modal-footer'>
 			<button class='btn btn-light-green fc-18 funiv fs0-786 fs-upper' ng-click='form.$submitted = true; form.$valid && ok()'><?= Yii::t("app/admin", "Confirm"); ?></button>

@@ -1,11 +1,22 @@
 var todevise = angular.module('todevise', ['ngAnimate', 'ui.bootstrap', 'angular-multi-select', 'angular-unit-converter', 'global-admin', 'global-desktop', 'api', 'angular-sortable-view', 'ui.validate']);
 
+todevise.filter('arrpatch', [
+	function () {
+		return function (arr, word) {
+			arr = JSON.parse(JSON.stringify(arr));
+			for (var i = 0; i < arr.length; i++) {
+				arr.splice(i, 0, word);
+				i++;
+			}
+			return arr.join(", ");
+		}
+	}
+]);
+
 todevise.controller('sizeChartCtrl', ["$scope", "$timeout", "$sizechart", "$sizechart_util", "$category_util", "toastr", "$uibModal", function($scope, $timeout, $sizechart, $sizechart_util, $category_util, toastr, $uibModal) {
 	$scope.lang = _lang;
 	$scope.sizechart = _sizechart;
 	$scope.mus = _mus;
-	$scope.api = {};
-	$scope.api_mus = {};
 
 	$scope.countries_lookup = _countries_lookup;
 
@@ -133,8 +144,11 @@ todevise.controller('sizeChartCtrl', ["$scope", "$timeout", "$sizechart", "$size
 
 todevise.controller("create_new_countryCtrl", function($scope, $uibModalInstance, data) {
 	$scope.lang = _lang;
-	$scope.countries = _countries;
-	$scope.selected_country = "";
+
+	$scope.$on('ams_toggle_check_node', function(event, args) {
+		if (args.name !== "country") return;
+		$scope.selected_country = args.item.country_code;
+	});
 
 	$scope.ok = function() {
 		$uibModalInstance.close({
