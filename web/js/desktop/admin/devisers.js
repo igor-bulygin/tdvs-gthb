@@ -76,6 +76,7 @@ todevise.controller('devisersCtrl', ["$scope", "$timeout", "$deviser", "$deviser
 todevise.controller("create_newCtrl", function($scope, $uibModalInstance, data) {
 	$scope.data = data;
 	$scope.surnames = [];
+	$scope.selected_country = {};
 
 	$scope.add_surname = function() {
 		$scope.surnames.push({

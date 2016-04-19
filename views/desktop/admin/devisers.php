@@ -145,17 +145,17 @@ $this->title = 'Todevise / Admin / Devisers';
 
 			<div
 				angular-multi-select
-				id-property="country_code"
 				input-model="data.countries"
 				output-model="selected_country"
-				tick-property="checked"
-				item-label="<[ country_name['{{ data.lang }}'] ]>"
-				selection-mode="single"
-				button-template="angular-multi-select-btn-data.htm"
-				button-label="<[ country['{{ data.lang }}'] ]>"
-				search-property="country_name['{{ data.lang }}']"
-				helper-elements="noall nonone noreset filter">
-			</div>
+
+				checked-property="checked"
+
+				dropdown-label="<[ '<(country_name[&quot;{{ data.lang }}&quot;])>' | outputModelIterator : this : ', ']>"
+				leaf-label="<[ country_name['{{ data.lang }}'] ]>"
+
+				max-checked-leafs="1"
+				hide-helpers="check_all, check_none, reset"
+			></div>
 
 			<div class="alert alert-danger funiv fs0-929" role="alert" ng-show="form.$submitted && !form.$valid && selected_country.length === 0">
 				<span><?= Yii::t("app/admin", "Required!"); ?></span>
