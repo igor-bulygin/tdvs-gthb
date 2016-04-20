@@ -127,7 +127,7 @@ $this->title = 'Todevise / Product';
 
 	<div class="col-xs-12 no-horizontal-padding tabs-wrapper flex flex-prop-0-0">
 		<ul class="flex funiv_bold fs0-857 fs-upper tabs no-horizontal-padding no-vertical-margin">
-			<li class="pointer text-center">
+			<li class="pointer text-center active">
 				<a class="fc-5b" data-toggle="tab" href="#deviser_works"><?= Yii::t('app/public', 'Works by {name} {surnames}', [
 					'name' => $deviser->personal_info['name'],
 					'surnames' => implode(" ", $deviser->personal_info['surnames'])
@@ -146,23 +146,17 @@ $this->title = 'Todevise / Product';
 	</div>
 </div>
 
-<div class="row no-gutter" style="height: 400px;">
-	<div class="col-xs-12 no-padding">
-
-	</div>
-</div>
-
 <div class="row no-gutter">
 	<div class="col-xs-12 no-padding">
 		<div class="tab-content products">
 
-			<div role="tabpanel" class="tab-pane fade in" id="deviser_works">
+			<div role="tabpanel" class="tab-pane fade in active" id="deviser_works">
+				deviser works
 				<?php
 /*
 				Pjax::begin([
 					'id' => $category['short_id'],
-					'enablePushState' => false,
-					'linkSelector' => '.pagination a'
+					'enablePushState' => false
 				]);
 
 				$form = ActiveForm::begin([
@@ -211,6 +205,18 @@ $this->title = 'Todevise / Product';
 				Pjax::end();
 */
 				?>
+			</div>
+
+			<div role="tabpanel" class="tab-pane fade in" id="related_works">
+				related works
+			</div>
+
+			<div role="tabpanel" class="tab-pane fade" id="boxes">
+				boxes
+			</div>
+
+			<div role="tabpanel" class="tab-pane fade" id="comments">
+				comments
 			</div>
 
 		</div>
