@@ -71,9 +71,11 @@ $this->title = 'Todevise / Home';
 							<li class="col-xs-3 col-md-2 col-lg-1 relative deviser_holder text-center">
 								<div class="absolute deviser_bg white"></div>
 								<div class="absolute deviser">
-									<div class="dp relative">
-										<img src="<?= $deviser['img'] ?>" alt="" class="img-circle" />
-									</div>
+									<a class="dp_wrapper relative" href="<?= Url::to(["public/product", "slug" => "slug", "category_id" => "12345", "product_id" => "12345678"]) ?>">
+										<div class="dp relative">
+											<img src="<?= $deviser['img'] ?>" alt="" class="img-circle" />
+										</div>
+									</a>
 
 									<div class="text relative">
 										<a class="flex flex-column" href="<?= Url::to(["deviser/list", "slug" => $deviser['slug']]) ?>">
@@ -86,7 +88,7 @@ $this->title = 'Todevise / Home';
 										<div class="row no-gutter works_holder">
 											<?php foreach ($deviser['works'] as $j => $work) { ?>
 												<div class="col-xs-6 works_row">
-													<a href="<?= Url::to(["public/product", "slug" => $work['slug'], "category_id" => "12345", "product_id" => "1234567"]) ?>">
+													<a href="<?= Url::to(["public/product", "slug" => $work['slug'], "category_id" => "12345", "product_id" => "12345678"]) ?>">
 														<img class="work" src="<?= $work['img'] ?>" alt="" />
 													</a>
 												</div>
