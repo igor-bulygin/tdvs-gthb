@@ -501,7 +501,7 @@ todevise.controller('productCtrl', ["$rootScope", "$scope", "$timeout", "$sizech
 		angular.forEach(tags, function(tag) {
 			if(tag.stock_and_price === true) {
 				_tags_for_ps_table.push(tag.short_id);
-				_tag_values[tag.short_id] = angular.copy($scope.product.options[tag.short_id]);
+				_tag_values[tag.short_id] = JSON.parse(JSON.stringify($scope.product.options[tag.short_id]));
 			}
 		});
 
@@ -552,7 +552,7 @@ todevise.controller('productCtrl', ["$rootScope", "$scope", "$timeout", "$sizech
 		var _obj;
 		var _price_stock = [];
 		angular.forEach(_ps_data, function(row) {
-			var _header = angular.copy(_tags_for_ps_table);
+			var _header = JSON.parse(JSON.stringify(_tags_for_ps_table));
 			_obj = {
 				"options": {}
 			};
@@ -575,9 +575,9 @@ todevise.controller('productCtrl', ["$rootScope", "$scope", "$timeout", "$sizech
 
 			if(match !== null) {
 				if($scope.use_sizecharts === true && match.size === _obj.size) {
-					_obj = angular.copy(match);
+					_obj = JSON.parse(JSON.stringify(match));
 				} else if($scope.use_sizecharts === false) {
-					_obj = angular.copy(match);
+					_obj = JSON.parse(JSON.stringify(match));
 				}
 			}
 			_price_stock.push(_obj);
@@ -927,7 +927,7 @@ todevise.controller('productCtrl', ["$rootScope", "$scope", "$timeout", "$sizech
 			});
 
 			if(_sw === true) {
-				_found = angular.copy(tag);
+				_found = JSON.parse(JSON.stringify(tag));
 			}
 		});
 
