@@ -270,6 +270,10 @@ a:hover {
 
 /**** FONT TYPES ****/
 
+.fs-initial {
+	text-transform: initial;
+}
+
 .fs-upper {
 	text-transform: uppercase;
 }
