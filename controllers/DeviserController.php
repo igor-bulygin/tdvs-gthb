@@ -9,6 +9,7 @@ use app\models\Person;
 use app\models\Country;
 use app\models\Product;
 use app\models\SizeChart;
+use app\models\MetricType;
 use yii\filters\VerbFilter;
 use app\helpers\CController;
 use yii\filters\AccessControl;
@@ -70,7 +71,21 @@ class DeviserController extends CController {
 			'categories' => $this->api->actionCategories("", Json::encode(["_id" => 0, "short_id", "path", "name.$this->lang", "name.$this->lang_en", "sizecharts", "prints"]))->asArray()->all(),
 			"countries" => $countries,
 			"countries_lookup" => $countries_lookup,
-			"deviser_sizecharts" => $this->api->actionSizeCharts(Json::encode(["type" => SizeChart::DEVISER, "deviser_id" => $deviser["short_id"]]))->asArray()->all()
+			"deviser_sizecharts" => $this->api->actionSizeCharts(Json::encode(["type" => SizeChart::DEVISER, "deviser_id" => $deviser["short_id"]]))->asArray()->all(),
+			"mus" => [
+				[
+					"text" => Yii::t("app/admin", MetricType::TXT[MetricType::NONE]),
+					"sub" => []
+				],
+				[
+					"text" => Yii::t("app/admin", MetricType::TXT[MetricType::SIZE]),
+					"sub" => array_map(function($x) { return ["text" => $x, "value" => $x]; }, MetricType::UNITS[MetricType::SIZE])
+				],
+				[
+					"text" => Yii::t("app/admin", MetricType::TXT[MetricType::WEIGHT]),
+					"sub" => array_map(function($x) { return ["text" => $x, "value" => $x]; }, MetricType::UNITS[MetricType::WEIGHT])
+				]
+			]
 		]);
 	}
 

@@ -7,6 +7,7 @@ use yii\helpers\Json;
 use app\helpers\Utils;
 use app\models\Country;
 use app\models\SizeChart;
+use app\models\MetricType;
 use app\helpers\CController;
 use yii\data\ActiveDataProvider;
 
@@ -72,7 +73,12 @@ class AdminController extends CController {
 	public function actionTag($tag_id) {
 		return $this->render("tag", [
 			"tag" => $this->api->actionTags(Json::encode(["short_id" => $tag_id]))->asArray()->one(),
-			"categories" => $this->api->actionCategories()->asArray()->all()
+			"categories" => $this->api->actionCategories()->asArray()->all(),
+			"mus" => [
+				["value" => MetricType::NONE, "text" => Yii::t("app/admin", MetricType::TXT[MetricType::NONE]), "checked" => true],
+				["value" => MetricType::SIZE, "text" => Yii::t("app/admin", MetricType::TXT[MetricType::SIZE])],
+				["value" => MetricType::WEIGHT, "text" => Yii::t("app/admin", MetricType::TXT[MetricType::WEIGHT])]
+			]
 		]);
 	}
 
@@ -104,7 +110,7 @@ class AdminController extends CController {
 		$continents = [];
 
 		foreach($countries as $country) {
-			$countries_lookup[$country["country_code"]] = Utils::getValue($country["country_name"], $this->lang, $this->lang_en);
+			$countries_lookup[$country["country_code"]] = Utils::l($country["country_name"]);
 		}
 
 		foreach(Country::CONTINENTS as $code => $continent) {
@@ -134,7 +140,17 @@ class AdminController extends CController {
 					"sub" => $countries
 				]
 			],
-			"countries_lookup" => $countries_lookup
+			"countries_lookup" => $countries_lookup,
+			"mus" => [
+				[
+					"text" => Yii::t("app/admin", MetricType::TXT[MetricType::SIZE]),
+					"sub" => array_map(function($x) { return ["text" => $x, "value" => $x, "smallest" => MetricType::UNITS[MetricType::SIZE][0]]; }, MetricType::UNITS[MetricType::SIZE])
+				],
+				[
+					"text" => Yii::t("app/admin", MetricType::TXT[MetricType::WEIGHT]),
+					"sub" => array_map(function($x) { return ["text" => $x, "value" => $x, "smallest" => MetricType::UNITS[MetricType::WEIGHT][0]]; }, MetricType::UNITS[MetricType::WEIGHT])
+				]
+			]
 		]);
 	}
 

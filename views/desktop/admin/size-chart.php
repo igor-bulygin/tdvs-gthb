@@ -2,7 +2,6 @@
 use yii\web\View;
 use app\models\Lang;
 use yii\helpers\Json;
-use app\models\MetricType;
 use app\assets\desktop\admin\SizeChartAsset;
 
 /* @var $this yii\web\View */
@@ -27,16 +26,6 @@ $this->title = 'Todevise / Admin / Size chart';
 		<?php $this->registerJs("var _categories = " . Json::encode($categories) . ";", View::POS_HEAD); ?>
 		<?php $this->registerJs("var _sizechart = " . Json::encode($sizechart) . ";", View::POS_HEAD); ?>
 		<?php $this->registerJs("var _countries_lookup = " . Json::encode($countries_lookup) . ";", View::POS_HEAD); ?>
-		<?php $this->registerJs("var _mus = " . Json::encode([
-			[
-				"text" => Yii::t("app/admin", MetricType::TXT[MetricType::SIZE]),
-				"sub" => array_map(function($x) { return ["text" => $x, "value" => $x]; }, MetricType::UNITS[MetricType::SIZE])
-			],
-			[
-				"text" => Yii::t("app/admin", MetricType::TXT[MetricType::WEIGHT]),
-				"sub" => array_map(function($x) { return ["text" => $x, "value" => $x]; }, MetricType::UNITS[MetricType::WEIGHT])
-			]
-		]) . ";", View::POS_HEAD); ?>
 
 		<div class="row no-gutter page-title-row bgcolor-3d">
 			<div class="row-same-height">
@@ -73,7 +62,7 @@ $this->title = 'Todevise / Admin / Size chart';
 						checked-property="check"
 						children-property="sub"
 
-						dropdown-label="<[ '<(name[&quot;{{ lang }}&quot;])>' | outputModelIterator : this : ', ']>"
+						dropdown-label="<[ '<(name[&quot;{{ lang }}&quot;])>' | outputModelIterator : this : ', ' : '<?= Yii::t('app/public', 'Select category') ?>']>"
 						node-label="<[ name['{{ lang }}'] ]>"
 						leaf-label="<[ name['{{ lang }}'] ]>"
 
@@ -88,16 +77,15 @@ $this->title = 'Todevise / Admin / Size chart';
 					<label class="funiv fc-c7 fs0-929 fnormal"><?= Yii::t("app/admin", "Metric unit"); ?></label>
 					<div
 						angular-multi-select
-						input-model="mus"
-						output-model="sizechart.metric_unit"
-						output-keys="value"
-						output-type="value"
+						input-model='<?= Json::encode($mus) ?>'
+						output-model="[]"
 
+						name="metric_unit"
 						checked-property="checked"
 						children-property="sub"
 
 						max-checked-leafs="1"
-						dropdown-label="<[ '<(text)>' | outputModelIterator : this : ', ']>"
+						dropdown-label="<[ '<(text)>' | outputModelIterator : this : ', ' : '<?= Yii::t('app/public', 'Select metric unit') ?>']>"
 						node-label="<[ text ]>"
 						leaf-label="<[ text ]>"
 
@@ -200,7 +188,7 @@ $this->title = 'Todevise / Admin / Size chart';
 				children-property="sub"
 
 				max-checked-leafs="1"
-				dropdown-label="<[ '<(country_name[&quot;{{ lang }}&quot;])>' | outputModelIterator : this : ', ']>"
+				dropdown-label="<[ '<(country_name[&quot;{{ lang }}&quot;])>' | outputModelIterator : this : ', ' : '<?= Yii::t('app/public', 'Select country') ?>']>"
 				node-label="<[ country_name['{{ lang }}'] ]>"
 				leaf-label="<[ country_name['{{ lang }}'] ]>"
 

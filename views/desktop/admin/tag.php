@@ -27,11 +27,7 @@ $this->title = 'Todevise / Admin / Tag';
 		<?php $this->registerJs("var _tag = " . Json::encode($tag) . ";", View::POS_HEAD); ?>
 		<?php $this->registerJs("var _tagoption_txt = " . Json::encode(TagOption::TXT) . ";", View::POS_HEAD); ?>
 		<?php $this->registerJs("var _colors = " . Json::encode(TagOption::COLORS) . ";", View::POS_HEAD); ?>
-		<?php $this->registerJs("var _mus = " . Json::encode([
-			["value" => MetricType::NONE, "text" => Yii::t("app/admin", MetricType::TXT[MetricType::NONE]), "checked" => true],
-			["value" => MetricType::SIZE, "text" => Yii::t("app/admin", MetricType::TXT[MetricType::SIZE])],
-			["value" => MetricType::WEIGHT, "text" => Yii::t("app/admin", MetricType::TXT[MetricType::WEIGHT])]
-		]) . ";", View::POS_HEAD); ?>
+		<?php $this->registerJs("var _mus = " . Json::encode($mus) . ";", View::POS_HEAD); ?>
 
 		<div class="row no-gutter page-title-row bgcolor-3d">
 			<div class="row-same-height">

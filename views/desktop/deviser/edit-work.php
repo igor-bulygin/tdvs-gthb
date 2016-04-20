@@ -49,20 +49,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 		<?php $this->registerJs("var _countries = " . Json::encode($countries) . ";", View::POS_END); ?>
 		<?php $this->registerJs("var _countries_lookup = " . Json::encode($countries_lookup) . ";", View::POS_END); ?>
 		<?php $this->registerJs("var _deviser_sizecharts = " . Json::encode($deviser_sizecharts) . ";", View::POS_END); ?>
-		<?php $this->registerJs("var _mus = " . Json::encode([
-			[
-				"text" => Yii::t("app/admin", MetricType::TXT[MetricType::NONE]),
-				"sub" => []
-			],
-			[
-				"text" => Yii::t("app/admin", MetricType::TXT[MetricType::SIZE]),
-				"sub" => array_map(function($x) { return ["text" => $x, "value" => $x]; }, MetricType::UNITS[MetricType::SIZE])
-			],
-			[
-				"text" => Yii::t("app/admin", MetricType::TXT[MetricType::WEIGHT]),
-				"sub" => array_map(function($x) { return ["text" => $x, "value" => $x]; }, MetricType::UNITS[MetricType::WEIGHT])
-			]
-		]) . ";", View::POS_END); ?>
+		<?php $this->registerJs("var _mus = " . Json::encode($mus) . ";", View::POS_END); ?>
 		<?php $this->registerJs("var _base_product_photo_url = '" . Yii::getAlias("@product_url") . "/" . $product["short_id"] . "/" . "';", View::POS_END); ?>
 		<?php $this->registerJs("var _upload_product_photo_url = '" . Url::to(["deviser/upload-product-photo", "slug" => $deviser["slug"], "short_id" => $product["short_id"]]) . "';", View::POS_END); ?>
 		<?php $this->registerJs("var _delete_product_photo_url = '" . Url::to(["deviser/delete-product-photo", "slug" => $deviser["slug"], "short_id" => $product["short_id"]]) . "';", View::POS_END); ?>

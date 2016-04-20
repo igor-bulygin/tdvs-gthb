@@ -5,6 +5,9 @@ use Yii;
 use app\models\MetricUnit;
 
 class MetricType {
+	/*
+	 * Be very careful when changing things here. The order is important!
+	 */
 	const NONE = 0;
 	const SIZE = 1;
 	const WEIGHT = 2;

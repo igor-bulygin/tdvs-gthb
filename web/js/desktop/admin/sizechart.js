@@ -3,7 +3,6 @@ var todevise = angular.module('todevise', ['ngAnimate', 'ui.bootstrap', 'angular
 todevise.controller('sizeChartCtrl', ["$scope", "$timeout", "$sizechart", "$sizechart_util", "$category_util", "toastr", "$uibModal", function($scope, $timeout, $sizechart, $sizechart_util, $category_util, toastr, $uibModal) {
 	$scope.lang = _lang;
 	$scope.sizechart = _sizechart;
-	$scope.mus = _mus;
 
 	$scope.countries_lookup = _countries_lookup;
 
@@ -11,11 +10,11 @@ todevise.controller('sizeChartCtrl', ["$scope", "$timeout", "$sizechart", "$size
 	_categories = $category_util.sort(_categories);
 	$scope.categories = $category_util.create_tree(_categories);
 
-	$scope.$watch("sizechart.metric_unit", function(_new) {
-		if(_new === undefined || _new === "") return;
-		var _smallest_unit = jsonpath.parent(_mus, "$..[?(@.value=='" + _new + "')]");
-		$scope.convertFrom = _smallest_unit[0].value;
-		$scope.convertTo = _new;
+	$scope.$on('ams_toggle_check_node', function (event, args) {
+		if (args.name !== "metric_unit") return;
+
+		$scope.convertFrom = args.item.smallest;
+		$scope.convertTo = args.item.value;
 	});
 
 	$scope.$watch("[sizechart.countries, sizechart.columns]", function() {
@@ -126,7 +125,7 @@ todevise.controller('sizeChartCtrl', ["$scope", "$timeout", "$sizechart", "$size
 		});
 	};
 
-	$scope._shadow = angular.copy($scope.sizechart);
+	$scope._shadow = JSON.parse(JSON.stringify($scope.sizechart));
 }]);
 
 todevise.controller("create_new_countryCtrl", function($scope, $uibModalInstance, data) {
