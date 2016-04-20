@@ -78,12 +78,6 @@ todevise.controller("create_newCtrl", function($scope, $uibModalInstance, data) 
 	$scope.surnames = [];
 	$scope.selected_country = {};
 
-	$scope.add_surname = function() {
-		$scope.surnames.push({
-			value: ""
-		});
-	};
-
 	$scope.ok = function() {
 		var _surnames = $scope.surnames.map(function(v){
 			return v.value;
