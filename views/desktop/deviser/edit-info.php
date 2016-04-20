@@ -108,7 +108,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 					checked-property="checked"
 
-					dropdown-label="<[ '<( country_name[&quot;{{ lang }}&quot;] )>' | outputModelIterator : this : ', ' ]>"
+					dropdown-label="<[ '<( country_name[&quot;{{ lang }}&quot;] )>' | outputModelIterator : this : ', ' : '<?= Yii::t('app/public', 'Select country') ?>' ]>"
 					leaf-label="<[ country_name['{{ lang }}'] ]>"
 
 					max-checked-leafs="1"
@@ -133,7 +133,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 					checked-property="check"
 
-					dropdown-label="<[ '<( name[&quot;{{ lang }}&quot;] )>' | outputModelIterator : this : ', ' ]>"
+					dropdown-label="<[ '<( name[&quot;{{ lang }}&quot;] )>' | outputModelIterator : this : ', ' : '<?= Yii::t('app/public', 'Select category') ?>' ]>"
 					leaf-label="<[ name['{{ lang }}'] ]>"
 
 					preselect="{{ deviser.categories | arrpatch : 'short_id' }}"
