@@ -114,15 +114,15 @@ todevise.controller('deviserCtrl', ["$scope", "$timeout", "$deviser", "$deviser_
 				},
 				url: _upload_header_photo_url,
 				data: {'file': $scope.headerphoto}
-			}).progress(function(e) {
+			}).then(function(resp) {
+				//console.log('file ' + resp.config.file.name + 'uploaded. Response: ' + resp.data);
+				$scope.deviser = resp.data;
+				toastr.success("Uploaded successfully headerphoto photo", resp.config.data.file.name);
+			}, function(err) {
+				toastr.error("Error while uploading headerphoto photo", err)
+			}, function(e) {
 				//var progressPercentage = parseInt(100.0 * e.loaded / e.total);
 				//console.log('progress: ' + progressPercentage + '% ' + e.config.file.name);
-			}).success(function(data, status, header, config) {
-				//console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
-				$scope.deviser = data;
-				toastr.success("Uploaded successfully headerphoto photo", config.data.file.name);
-			}).error(function(err) {
-				toastr.error("Error while uploading headerphoto photo", err)
 			});
 		}
 
