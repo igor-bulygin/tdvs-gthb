@@ -127,8 +127,7 @@ $this->title = 'Todevise / Home';
 
 					Pjax::begin([
 						'id' => $category['short_id'],
-						'enablePushState' => false,
-						'linkSelector' => '.pagination a'
+						'enablePushState' => false
 					]);
 
 					$form = ActiveForm::begin([

@@ -22,21 +22,21 @@
 
 .item-menutop {
 	height: 100%;
-	letter-spacing: 0.07em;
 }
 
 .item-menutop.border {
-	border-right: 1px solid white;
+	border-right: 1px solid rgba(255,255,255,0.5);
 }
 
 .item-menutop .hdr_btn {
 	height: 100%;
 	background-color: rgba(217, 217, 217, 0.7);
+	padding-top: 2px;
 }
 
 .item-menutop .hdr_btn:hover {
 	color: #4a4a4a;
-	background-color: rgba(217, 217, 217, 0.9);
+	background-color: rgba(239, 239, 239, 0.9);
 }
 
 .search_box {
@@ -50,14 +50,10 @@
 }
 
 .search_box > input::-webkit-input-placeholder {
-	color: #4e4e4e;
-	font-size: 1.071em;
-	font-family: 'UniversLTPro-Condensed';
+	color: #bfbfbf;
 }
 .search_box > input::-moz-placeholder {
-	color: #4e4e4e;
-	font-size: 1.071em;
-	font-family: 'UniversLTPro-Condensed';
+	color: #bfbfbf;
 }
 
 .search_box > select {
@@ -67,11 +63,15 @@
 }
 
 .menutop .helper_btns {
-	padding: 0 7px;
+	padding: 0 7px 4px 7px;
+}
+
+.menutop .helper_btns.glyphicon-shopping-cart {
+	padding: 0 15px 4px 15px;
 }
 
 .my_account {
-	padding: 0 10px;
+	padding: 0 15px;
 	height: 100%;
 }
 
@@ -81,5 +81,6 @@
 }
 
 .my_account > .access {
-
+	padding-top: 2px;
+	letter-spacing: 0.3px;
 }

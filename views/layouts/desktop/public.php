@@ -38,7 +38,10 @@ use lajax\languagepicker\widgets\LanguagePicker;
 					<div class="col-xs-1-5 flex">
 						<div class="flex flex-column navbar-left funiv_ultra fs1 flex-prop-1">
 							<ul class="list-group">
-								<li class="logo fpf_bold">todevise<br/><span class="fpf_i">A new concept of store</span></li>
+								<li class="logo fpf_bold flex flex-column">
+									<img src="/imgs/logo.png" />
+									<span class="fpf_i">A new concept of store</span>
+								</li>
 							</ul>
 							<div class="flex-prop-1 relative dark-black" id="cssmenu">
 								<?= LeftMenu::widget(); ?>

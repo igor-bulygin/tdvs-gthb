@@ -27,7 +27,7 @@ publicHeaderAsset::register($this);
 				</li>
 				<li class="item-menutop fs-upper flex-prop-1-0">
 					<div class="search_box flex flex-justify-start white">
-						<input type="text" class="funiv_bold fs1-143 fc-4e flex-prop-1-0" name="name" value="" placeholder="<?= Yii::t("app/public", "Search...") ?>">
+						<input type="text" class="funiv fs1-286 fc-4e flex-prop-1-0" name="name" value="" placeholder="<?= Yii::t("app/public", "Search") ?>">
 						<!--
 						<select class="white" name="">
 							<option>Foo</option>
@@ -35,18 +35,18 @@ publicHeaderAsset::register($this);
 							<option>Foo Bar</option>
 						</select>
 						-->
-						<span class="helper_btns pointer flex flex-align-center fs1-071 glyphicon glyphicon-search"></span>
+						<span class="helper_btns pointer flex flex-align-center fs1-357 glyphicon glyphicon-search"></span>
 					</div>
 				</li>
 				<li class="item-menutop">
 					<div class="hdr_btn funiv_bold flex flex-align-center flex-justify-center">
-						<span class="helper_btns pointer flex flex-align-center fs1-071 glyphicon glyphicon-shopping-cart"></span>
+						<span class="helper_btns pointer flex flex-align-center fs1-357 glyphicon glyphicon-shopping-cart"></span>
 					</div>
 				</li>
 				<li class="item-menutop fs-upper funiv_bold fc-fff pointer">
 					<div class="my_account black flex flex-justify-center flex-align-center">
-						<span class="glyphicon glyphicon-user"></span>
-						<span class="access"><?= Yii::t("app/public", "My todevise") ?></span>
+						<span class="glyphicon glyphicon-user fs1-214"></span>
+						<span class="access "><?= Yii::t("app/public", "My todevise") ?></span>
 					</div>
 				</li>
 			</ul>

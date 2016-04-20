@@ -5,13 +5,13 @@
 }
 
 .main .carousel .carousel-inner .item {
-	filter: grayscale(90%);
-	-webkit-filter: grayscale(90%);
-	-moz-filter: grayscale(90%);
 	width: 100%;
 }
 
 .main .carousel .carousel-inner .item img {
+	filter: grayscale(90%);
+	-webkit-filter: grayscale(90%);
+	-moz-filter: grayscale(90%);
 	object-position: 0% 0%;
 	object-fit: cover;
 	height: 100%;
@@ -41,8 +41,13 @@
 
 .main .carousel .carousel-inner .item .carousel-caption .works {
 	border-radius: 7px;
-	padding: 10px 27px;
+	padding: 12px 27px 8px 27px;
 	align-self: center;
+}
+
+.main .carousel .carousel-inner .item .carousel-caption .works:hover {
+	color: white;
+	background-color: #c91c39;
 }
 
 .main .carousel .carousel-control {
@@ -67,7 +72,7 @@
 
 .main .banner_holder .devisers_holder {
 	height: 40%;
-	min-height: 200px;
+	min-height: 250px;
 	max-height: 270px;
 	bottom: -1px; /* fix weird 1px bottom margin */
 	width: 100%;
@@ -100,6 +105,9 @@
 .main .banner_holder .devisers_holder .devisers .links span:hover,
 .main .banner_holder .devisers_holder .devisers .links span.active {
 	color: #f7284b;
+}
+
+.main .banner_holder .devisers_holder .devisers .links span.active {
 	border-bottom: 2px solid #f7284b;
 }
 

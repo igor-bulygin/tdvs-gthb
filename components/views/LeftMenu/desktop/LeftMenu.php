@@ -23,7 +23,7 @@ LeftMenuAsset::register($this);
 		$html .= '<div class="bg absolute dark-black"></div>';
 
 		foreach ($children as $category) {
-			$html .= '<li class="funiv_ultra fc-fff">';
+			$html .= '<li class="funiv fc-fff fs-initial" style="font-size: 16px;">';
 			$html .= Html::a(
 				Utils::l($category['name']),
 				['public/category', "category_id" => $category['short_id'], "slug" => $category['slug']],
@@ -42,7 +42,7 @@ LeftMenuAsset::register($this);
 	<?php
 		foreach($categories as $category) {
 			if (array_key_exists('path', $category) && $category['path'] === '/') {
-				echo '<li class="funiv_ultra fs1-357 fc-fff">';
+				echo '<li class="funiv_ultra fs1-143 fc-fff fs-upper">';
 				echo Html::a(
 					Utils::l($category['name']),
 					['public/category', "category_id" => $category['short_id'], "slug" => $category['slug']],
