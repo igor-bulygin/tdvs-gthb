@@ -159,8 +159,8 @@ $config = [
 				'public/<category_id:\w{5}>/<' => 'public/tag',
 
 				//Links for a product profile
-				'<category_id:\w{5}>/<product_id:\w{7}>/<slug:[^/.]*?$>/' => 'public/product',
-				'public/<category_id:\w{5}>/<product_id:\d{7}>/<slug:[^/.]*?$>/' => 'public/product'
+				'<category_id:\w{5}>/<product_id:\w{8}>/<slug:[^/.]*?$>/' => 'public/product',
+				'public/<category_id:\w{5}>/<product_id:\d{8}>/<slug:[^/.]*?$>/' => 'public/product'
 			]
 		],
 
