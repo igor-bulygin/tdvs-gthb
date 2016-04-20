@@ -12,6 +12,7 @@ todevise.controller('productCtrl', ["$rootScope", "$scope", "$timeout", "$sizech
 	$scope.deviser_sizecharts = _deviser_sizecharts;
 
 	$scope.tmp_selected_size = "";
+	$scope.tmp_selected_sizechart = "";
 	$scope.tmp_selected_sizechart_country = "";
 
 	$scope.c_tags = $cacheFactory("tags");
