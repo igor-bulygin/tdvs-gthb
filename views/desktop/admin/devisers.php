@@ -126,7 +126,9 @@ $this->title = 'Todevise / Admin / Devisers';
 				</div>
 			</div>
 
-			<span class="pointer fc-9013fe funiv fs0-786 fs-upper" ng-click="add_surname()"><?= Yii::t("app/admin", "Add surname +"); ?></span>
+			<span class="pointer fc-9013fe funiv fs0-786 fs-upper" ng-click="surnames.push({value: ''})"><?= Yii::t("app/admin", "Add surname +"); ?></span>
+			<br>
+			<span class="pointer fc-f7284b funiv fs0-786 fs-upper" ng-show="surnames.length > 0" ng-click="surnames.pop()"><?= Yii::t("app/admin", "Remove surname -"); ?></span>
 
 			<br />
 			<br />
