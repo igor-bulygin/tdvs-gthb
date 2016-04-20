@@ -133,15 +133,15 @@ todevise.controller('deviserCtrl', ["$scope", "$timeout", "$deviser", "$deviser_
 				},
 				url: _upload_profile_photo_url,
 				data: {'file': $scope.profilephoto}
-			}).progress(function(e) {
+			}).then(function(resp) {
+				//console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
+				$scope.deviser = resp.data;
+				toastr.success("Uploaded successfully profile photo", resp.config.data.file.name);
+			}, function(err) {
+				toastr.error("Error while uploading profile photo", err)
+			}, function(e) {
 				//var progressPercentage = parseInt(100.0 * e.loaded / e.total);
 				//console.log('progress: ' + progressPercentage + '% ' + e.config.file.name);
-			}).success(function(data, status, header, config) {
-				//console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
-				$scope.deviser = data;
-				toastr.success("Uploaded successfully profile photo", config.data.file.name);
-			}).error(function(err) {
-				toastr.error("Error while uploading profile photo", err)
 			});
 		}
 	};
