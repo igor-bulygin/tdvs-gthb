@@ -8,11 +8,17 @@ html, body {
 	height: 100vh;
 }
 
+.header {
+	position: inherit !important;
+	/*
+	 * Public layout and Deviser layout share the same header. The only difference is that
+	 * the public layout's content is shown beneath (z axis) the header, while the deviser layout's
+	 * content is placed below (x axis) the header.
+	 */
+}
+
 .header, .footer{
 	background: #333;
-	text-align: center;
-	color: #fff;
-	width: 100%;
 }
 
 .body-content {
