@@ -150,7 +150,7 @@ $this->title = 'Todevise / Admin / Devisers';
 
 				checked-property="checked"
 
-				dropdown-label="<[ '<(country_name[&quot;{{ data.lang }}&quot;])>' | outputModelIterator : this : ', ']>"
+				dropdown-label="<[ '<(country_name[&quot;{{ data.lang }}&quot;])>' | outputModelIterator : this : ', ' : '<?= Yii::t('app/public', 'Select country') ?>']>"
 				leaf-label="<[ country_name['{{ data.lang }}'] ]>"
 
 				max-checked-leafs="1"
