@@ -1,18 +1,5 @@
 var todevise = angular.module('todevise', ['ngAnimate', 'ui.bootstrap', 'angular-multi-select', 'global-admin', 'global-desktop', 'api', 'angular-sortable-view', 'ui.validate']);
 
-todevise.filter('arrpatch', [
-	function () {
-		return function (arr, word) {
-			arr = JSON.parse(JSON.stringify(arr));
-			for (var i = 0; i < arr.length; i++) {
-				arr.splice(i, 0, word);
-				i++;
-			}
-			return arr.join(", ");
-		}
-	}
-]);
-
 todevise.controller('tagCtrl', ["$scope", "$timeout", "$tag", "$tag_util", "$category_util", "toastr", "$uibModal", "$cacheFactory", function($scope, $timeout, $tag, $tag_util, $category_util, toastr, $uibModal, $cacheFactory) {
 	$scope.lang = _lang;
 	$scope.tag = _tag;

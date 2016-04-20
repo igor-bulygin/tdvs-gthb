@@ -7,6 +7,27 @@ global_desktop.run(["$http", function($http) {
 	};
 }]);
 
+/*
+ * Takes an array of values and a word and returns a string
+ * with that word prepended before each of the values.
+ *
+ * Example:
+ * Input  -> ([1, 2, 3], 'foo')
+ * Output -> "foo, 1, foo, 2, foo, 3"
+ */
+global_desktop.filter('arrpatch', [
+	function () {
+		return function (arr, word) {
+			arr = JSON.parse(JSON.stringify(arr));
+			for (var i = 0; i < arr.length; i++) {
+				arr.splice(i, 0, word);
+				i++;
+			}
+			return arr.join(", ");
+		}
+	}
+]);
+
 global_desktop.factory("$global_desktop_util", function($http, $q) {
 	var global_desktop_helpers = {};
 	var global_point = currentHost() + "/global/";

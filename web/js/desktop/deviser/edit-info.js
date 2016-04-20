@@ -1,19 +1,6 @@
 var todevise = angular.module('todevise', ['ngAnimate', 'ui.bootstrap', 'angular-multi-select', 'angular-img-dl', 'global-deviser', 'global-desktop', 'api', "ngFileUpload", "ngImgCrop"]);
 var global_deviser = angular.module('global-deviser');
 
-todevise.filter('arrpatch', [
-	function () {
-		return function (arr, word) {
-			arr = JSON.parse(JSON.stringify(arr));
-			for (var i = 0; i < arr.length; i++) {
-				arr.splice(i, 0, word);
-				i++;
-			}
-			return arr.join(", ");
-		}
-	}
-]);
-
 todevise.controller('deviserCtrl', ["$scope", "$timeout", "$deviser", "$deviser_util", "$category_util", "toastr", "$uibModal", "Upload", "$http", "$product", "$product_util", function($scope, $timeout, $deviser, $deviser_util, $category_util, toastr, $uibModal, Upload, $http, $product, $product_util) {
 	$scope.lang = _lang;
 	$scope.deviser = _deviser;
