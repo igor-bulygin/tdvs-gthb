@@ -106,13 +106,13 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 		<div class="row no-gutter">
 
-			<div class="row-same-height">
+			<div class="flex">
 
-				<div class="col-xs-9 col-height col-top main-left-holder">
+				<div class="col-xs-9 flex main-left-holder">
 
 					<div class="background-holder"></div>
 
-					<div class="flex-inline flex-column flex-align-stretch main-left">
+					<div class="flex-inline flex-column flex-align-stretch main-left relative">
 
 						<!--<pre>{{ dump(product.slug) }}</pre>-->
 
@@ -127,18 +127,14 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 								angular-multi-select
 								input-model="langs"
 								output-model="languages"
-								tick-property="checked"
 
-								group-property="sub"
-								tick-property="check"
+								checked-property="checked"
 
-								button-template="angular-multi-select-btn-data.htm"
-								button-label="<[ value ]>"
+								dropdown-label="<[ '<( value )>' | outputModelIterator : this : ', ']>"
+								leaf-label="<[ value ]>"
 
-								item-label="<[ value ]>"
-								selection-mode="multi"
-								helper-elements="noall nonone noreset nofilter">
-							</div>
+								hide-helpers="check_all, check_none, reset"
+							></div>
 						</div>
 
 						<div class="product-name-holder">
@@ -168,7 +164,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 										<div class="connect-with-tags text-center pointer">
 											<span class="fc-fff glyphicon glyphicon-link"></span>
 											<br />
-											<span class="funiv fs0-786 fc-3d"><?= Yii::t("app/deviser", "Set as product's main photo") ?></span>
+											<span class="funiv fs0-786 fc-3d"><?= Yii::t("app/deviser", "Connect photo with tags") ?></span>
 										</div>
 									</div>
 
@@ -226,33 +222,30 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 					</div>
 
 				</div>
-				<div class="col-xs-3 col-height col-top main-right-holder">
+				<div class="col-xs-3 flex main-right-holder">
 					<div class="row no-gutter main-right">
 
 						<div class="col-xs-12 dropdown-main">
 							<div
 								angular-multi-select
-								api="api_cat"
-								id-property="short_id"
 								input-model="categories"
 								output-model="product.categories"
 
-								output-model-props='["short_id"]'
-								output-model-type="array"
+								id-property="short_id"
+								children-property="sub"
+								checked-property="check"
 
-								preselect-prop="short_id"
-								preselect-value="{{ product.categories }}"
+								output-type="values"
+								output-keys="short_id"
 
-								group-property="sub"
-								tick-property="check"
+								dropdown-label="<[ '<(name[&quot;{{ lang }}&quot;])>' | outputModelIterator : this : ', ']>"
+								node-label="<[ name['{{ lang }}'] ]>"
+								leaf-label="<[ name['{{ lang }}'] ]>"
 
-								item-label="<[ name['{{lang}}'] ]>"
-								selection-mode="multi"
-								search-property="name['{{lang}}']"
-								min-search-length="3"
-								hidden-property="hidden"
-								helper-elements="noall nonone noreset filter">
-							</div>
+								preselect="{{ product.categories | arrpatch : 'short_id' }}"
+
+								hide-helpers="check_all, check_none, reset"
+							></div>
 						</div>
 
 						<!--
@@ -268,7 +261,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 							<div ng-cloak ng-if="tag.type === 0">
 								<span class="fs0-857 funiv_bold fc-6d tag-title-dropdown">
 									<span class="fs0-714 fc-f7284b glyphicon glyphicon-asterisk" ng-if="required_tags_ids.indexOf(tag.short_id) !== -1"></span>
-									{{ ::tag.name[lang] }} - {{ ::tag.description[lang] }}
+									{{ ::tag.name[lang] }}
 									<span ng-cloak class="fc-f7284b" ng-show="tag.enabled === false"> - <?= Yii::t("app/deviser", "Disabled") ?></span>
 								</span>
 
@@ -283,19 +276,20 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 												angular-multi-select
 												input-model="tag.options"
 												output-model="product.options[tag.short_id][$index]"
-												output-model-props='["value"]'
-												output-model-type="array"
+												output-keys="value"
+												output-type="values"
 
-												preselect-prop="value"
-												preselect-value="{{ product.options[tag.short_id][$index] }}"
+												checked-property="check"
 
-												tick-property="check"
-												button-template="angular-multi-select-btn-data.htm"
-												button-label="<[ text['{{lang}}'] ]>"
-												item-label="<[ text['{{lang}}'] ]>"
-												selection-mode="{{ tag.n_options }}"
-												helper-elements="noall nonone noreset nofilter">
-											</div>
+												dropdown-label="<[ '<(text[&quot;{{ lang }}&quot;])>' | outputModelIterator : this : ', ']>"
+												node-label="<[ text['{{ lang }}'] ]>"
+												leaf-label="<[ text['{{ lang }}'] ]>"
+
+												preselect="{{ product.options[tag.short_id][$index] | arrpatch : 'value' }}"
+												max-checked-leafs="{{ tag.n_options }}"
+
+												hide-helpers="check_all, check_none, reset"
+											></div>
 											<div ng-cloak ng-show="tag.enabled === false" class="disabled_tag_area"></div>
 										</div>
 
@@ -319,7 +313,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 								<span class="fs0-857 funiv_bold fc-6d tag-title-dropdown">
 									<span class="fs0-714 fc-f7284b glyphicon glyphicon-asterisk" ng-if="required_tags_ids.indexOf(tag.short_id) !== -1"></span>
-									{{ ::tag.name[lang] }} - {{ ::tag.description[lang] }}
+									{{ ::tag.name[lang] }}
 									<span ng-cloak class="fc-f7284b" ng-show="tag.enabled === false"> - <?= Yii::t("app/deviser", "Disabled") ?></span>
 								</span>
 
@@ -368,18 +362,20 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 														<div
 															angular-multi-select
 															input-model="mus[option.metric_type].sub"
-															output-model="[]"
-															tick-property="check"
-															preselect-prop="value"
-															preselect-value="{{ product.options[tag.short_id][$parent.$parent.$index][$index].metric_unit }}"
-															single-output-prop="value"
-															single-output-model="product.options[tag.short_id][$parent.$parent.$index][$index].metric_unit"
-															button-template="angular-multi-select-btn-data.htm"
-															button-label="<[ text ]>"
-															item-label="<[ text ]>"
-															selection-mode="single"
-															helper-elements="noall nonone noreset nofilter">
-														</div>
+															output-model="product.options[tag.short_id][$parent.$parent.$index][$index].metric_unit"
+															output-keys="value"
+															output-type="value"
+
+															checked-property="check"
+															preselect="value, {{ product.options[tag.short_id][$parent.$parent.$index][$index].metric_unit }}"
+
+															dropdown-label="<[ '<( text )>' | outputModelIterator : this : ', ']>"
+															node-label="<[ text ]>"
+															leaf-label="<[ text ]>"
+
+															max-checked-leafs="1"
+															hide-helpers="check_all, check_none, reset"
+														></div>
 														<div ng-cloak ng-show="tag.enabled === false" class="disabled_tag_area"></div>
 													</div>
 
@@ -441,23 +437,18 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 							     ng-click="$parent.selected_lang = language.key" ng-init="$parent.selected_lang = $parent.lang">
 								{{ ::language.value }}
 							</div>
-
 							<div class="language-desc"
 								angular-multi-select
 								input-model="langs"
 								output-model="languages"
-								tick-property="checked"
 
-								group-property="sub"
-								tick-property="check"
+								checked-property="checked"
 
-								button-template="angular-multi-select-btn-data.htm"
-								button-label="<[ value ]>"
+								dropdown-label="<[ '<( value )>' | outputModelIterator : this : ', ']>"
+								leaf-label="<[ value ]>"
 
-								item-label="<[ value ]>"
-								selection-mode="multi"
-								helper-elements="noall nonone noreset nofilter">
-							</div>
+								hide-helpers="check_all, check_none, reset"
+							></div>
 						</div>
 					</div>
 
@@ -652,41 +643,40 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 										<div ng-if="$parent.product.sizechart.pristine === true" class="col-xs-6 col-height col-middle">
 											<div
 												angular-multi-select
-												api="$parent.$parent.api_sizechart"
-												id-property="short_id"
 												input-model="$parent.$parent.sizecharts"
 												output-model="$parent.$parent.tmp_selected_sizechart"
 
-												tick-property="check"
+												id-property="short_id"
+												checked-property="check"
+												name="ams_sizechart"
 
-												preselect-prop="short_id"
-												preselect-value='["{{ product.sizechart.short_id }}"]'
+												max-checked-leafs="1"
+												dropdown-label="<[ '<(name[&quot;{{ lang }}&quot;])>' | outputModelIterator : this : ', ']>"
+												node-label="<[ name['{{ lang }}'] ]>"
+												leaf-label="<[ name['{{ lang }}'] ]>"
 
-												button-template="angular-multi-select-btn-data.htm"
-												button-label="<[ name['{{lang}}'] ]>"
+												preselect="short_id, {{ product.sizechart.short_id }}"
 
-												item-label="<[ name['{{lang}}'] ]>"
-												selection-mode="single"
-												helper-elements="noall nonone noreset nofilter">
-											</div>
+												hide-helpers="check_all, check_none, reset"
+											></div>
 										</div>
 										<div ng-if="$parent.product.sizechart.pristine !== true" class="col-xs-6 col-height col-middle">
 											<div
 												angular-multi-select
-												api="$parent.$parent.api_sizechart"
-												id-property="short_id"
 												input-model="$parent.$parent.sizecharts"
 												output-model="$parent.$parent.tmp_selected_sizechart"
 
-												tick-property="check"
+												id-property="short_id"
+												checked-property="check"
+												name="ams_sizechart"
 
-												button-template="angular-multi-select-btn-data.htm"
-												button-label="<[ name['{{lang}}'] ]>"
+												max-checked-leafs="1"
+												dropdown-label="<[ '<(name[&quot;{{ lang }}&quot;])>' | outputModelIterator : this : ', ']>"
+												node-label="<[ name['{{ lang }}'] ]>"
+												leaf-label="<[ name['{{ lang }}'] ]>"
 
-												item-label="<[ name['{{lang}}'] ]>"
-												selection-mode="single"
-												helper-elements="noall nonone noreset nofilter">
-											</div>
+												hide-helpers="check_all, check_none, reset"
+											></div>
 										</div>
 									</div>
 								</div>
@@ -704,43 +694,44 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 										<div ng-if="$parent.product.sizechart.pristine === true" class="col-xs-6 col-height col-middle">
 											<div
 												angular-multi-select
-												api="$parent.$parent.api_sizechart_country"
-												id-property="value"
 												input-model="$parent.$parent.sizechart_countries"
-												single-output-model="$parent.$parent.tmp_selected_sizechart_country"
-												single-output-prop="value"
+												output-model="$parent.$parent.tmp_selected_sizechart_country"
+												output-keys="value"
+												output-type="value"
 
-												tick-property="check"
+												id-property="value"
+												checked-property="check"
+												name="ams_sizechart_country"
 
-												preselect-prop="value"
-												preselect-value='["{{ product.sizechart.country }}"]'
+												max-checked-leafs="1"
+												dropdown-label="<[ '<(text)>' | outputModelIterator : this : ', ']>"
+												node-label="<[ text ]>"
+												leaf-label="<[ text ]>"
 
-												button-template="angular-multi-select-btn-data.htm"
-												button-label="<[ text ]>"
+												preselect="value, {{ product.sizechart.country }}"
 
-												item-label="<[ text ]>"
-												selection-mode="single"
-												helper-elements="noall nonone noreset nofilter">
-											</div>
+												hide-helpers="check_all, check_none, reset"
+											></div>
 										</div>
 										<div ng-if="$parent.product.sizechart.pristine !== true" class="col-xs-6 col-height col-middle">
 											<div
 												angular-multi-select
-												api="$parent.$parent.api_sizechart_country"
-												id-property="value"
 												input-model="$parent.$parent.sizechart_countries"
-												single-output-model="$parent.$parent.tmp_selected_sizechart_country"
-												single-output-prop="value"
+												output-model="$parent.$parent.tmp_selected_sizechart_country"
+												output-keys="value"
+												output-type="value"
 
-												tick-property="check"
+												id-property="value"
+												checked-property="check"
+												name="ams_sizechart_country"
 
-												button-template="angular-multi-select-btn-data.htm"
-												button-label="<[ text ]>"
+												max-checked-leafs="1"
+												dropdown-label="<[ '<(text)>' | outputModelIterator : this : ', ']>"
+												node-label="<[ text ]>"
+												leaf-label="<[ text ]>"
 
-												item-label="<[ text ]>"
-												selection-mode="single"
-												helper-elements="noall nonone noreset nofilter">
-											</div>
+												hide-helpers="check_all, check_none, reset"
+											></div>
 										</div>
 									</div>
 								</div>
@@ -755,20 +746,22 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 										<div class="col-xs-6 col-height col-middle">
 											<div
 												angular-multi-select
-												api="$parent.$parent.api_deviser_sizechart"
-												id-property="value"
 												input-model="$parent.$parent.deviser_sizecharts"
 												output-model="$parent.$parent.selected_deviser_sizechart"
 
-												tick-property="check"
+												id-property="value"
+												checked-property="check"
+												name="deviser_sizechart"
 
-												button-template="angular-multi-select-btn-data.htm"
-												button-label="<[ name['{{lang}}'] ]>"
+												max-checked-leafs="1"
+												dropdown-label="<[ '<(name[&quot;{{ lang }}&quot;])>' | outputModelIterator : this : ', ']>"
+												node-label="<[ name['{{ lang }}'] ]>"
+												leaf-label="<[ name['{{ lang }}'] ]>"
 
-												item-label="<[ name['{{lang}}'] ]>"
-												selection-mode="single"
-												helper-elements="noall nonone noreset nofilter">
-											</div>
+												preselect="value, {{ product.sizechart.country }}"
+
+												hide-helpers="check_all, check_none, reset"
+											></div>
 										</div>
 									</div>
 								</div>
@@ -784,21 +777,21 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 								<div class="col-xs-1 col-height col-middle">
 									<div
 										angular-multi-select
-										api="$parent.$parent.api_available_sizes"
-										id-property="value"
 										input-model="$parent.$parent.available_sizes"
-										single-output-model="$parent.$parent.tmp_selected_size"
-										single-output-prop="value"
+										output-model="$parent.$parent.tmp_selected_size"
+										output-keys="value"
+										output-type="value"
 
-										tick-property="check"
+										id-property="value"
+										checked-property="check"
 
-										button-template="angular-multi-select-btn-data.htm"
-										button-label="<[ text ]>"
+										max-checked-leafs="1"
+										dropdown-label="<[ '<(text)>' | outputModelIterator : this : ', ']>"
+										node-label="<[ text ]>"
+										leaf-label="<[ text ]>"
 
-										item-label="<[ text ]>"
-										selection-mode="single"
-										helper-elements="noall nonone noreset nofilter">
-									</div>
+										hide-helpers="check_all, check_none, reset"
+									></div>
 								</div>
 								<div class="col-xs-1 col-height col-middle">
 									<span class="glyphicon glyphicon-plus pointer fs0-929 fc-f7284b" ng-click="insertSizeInTable()"></span>
@@ -869,42 +862,41 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 									<div
 										angular-multi-select
 										input-model="mus[<?= MetricType::WEIGHT ?>].sub"
-										single-output-model="product.weight_unit"
-										single-output-prop="value"
+										output-model="product.weight_unit"
+										output-keys="value"
+										output-type="value"
 
-										preselect-prop="value"
-										preselect-value='["{{ product.weight_unit }}"]'
+										checked-property="check"
 
-										tick-property="check"
+										max-checked-leafs="1"
+										dropdown-label="<[ '<(text)>' | outputModelIterator : this : ', ']>"
+										node-label="<[ text ]>"
+										leaf-label="<[ text ]>"
 
-										button-template="angular-multi-select-btn-data.htm"
-										button-label="<[ text ]>"
+										preselect="value, {{ product.weight_unit }}"
 
-										item-label="<[ text ]>"
-										selection-mode="single"
-										helper-elements="noall nonone noreset nofilter">
-									</div>
+										hide-helpers="check_all, check_none, reset"
+									></div>
 								</div>
 								<div class="col-xs-4 col-height col-middle">
 									<span><?= Yii::t("app/deviser", "Currency") ?></span>
 									<div
 										angular-multi-select
 										input-model="currencies"
-										single-output-model="product.currency"
-										single-output-prop="value"
+										output-model="product.currency"
+										output-keys="value"
+										output-type="value"
 
-										preselect-prop="value"
-										preselect-value='["{{ product.currency }}"]'
+										checked-property="check"
 
-										tick-property="check"
+										max-checked-leafs="1"
+										dropdown-label="<[ '<(symbol)> (<( value )>)' | outputModelIterator : this : ', ']>"
+										leaf-label="<[ symbol ]> (<[ value ]>)"
 
-										button-template="angular-multi-select-btn-data.htm"
-										button-label="<[ symbol ]> (<[ value ]>)"
+										preselect="value, {{ product.currency }}"
 
-										item-label="<[ symbol ]> (<[ value ]>)"
-										selection-mode="single"
-										helper-elements="noall nonone noreset nofilter">
-									</div>
+										hide-helpers="check_all, check_none, reset"
+									></div>
 								</div>
 								<div class="col-xs-4 col-height col-middle">
 

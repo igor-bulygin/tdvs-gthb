@@ -1,7 +1,20 @@
 var todevise = angular.module('todevise', ['ngAnimate', 'ui.bootstrap', 'angular-multi-select', 'angular-unit-converter', 'angular-img-dl', 'global-deviser', 'global-desktop', 'global', 'api', "ngFileUpload", "ngImgCrop", 'ui.bootstrap.datetimepicker', 'angular-slugifier']);
 var global_deviser = angular.module('global-deviser');
 
-todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$product", "$category_util", "toastr", "$uibModal", "Upload", "$http", "$cacheFactory", function($scope, $timeout, $sizechart, $product, $category_util, toastr, $uibModal, Upload, $http, $cacheFactory) {
+todevise.filter('arrpatch', [
+	function () {
+		return function (arr, word) {
+			arr = JSON.parse(JSON.stringify(arr));
+			for (var i = 0; i < arr.length; i++) {
+				arr.splice(i, 0, word);
+				i++;
+			}
+			return arr.join(", ");
+		}
+	}
+]);
+
+todevise.controller('productCtrl', ["$rootScope", "$scope", "$timeout", "$sizechart", "$product", "$category_util", "toastr", "$uibModal", "Upload", "$http", "$cacheFactory", function($rootScope, $scope, $timeout, $sizechart, $product, $category_util, toastr, $uibModal, Upload, $http, $cacheFactory) {
 	$scope.lang = _lang;
 	$scope.deviser = _deviser;
 	$scope.product = _product;
@@ -10,11 +23,6 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 	$scope.countries_lookup = _countries_lookup;
 	$scope.currencies = _currencies;
 	$scope.deviser_sizecharts = _deviser_sizecharts;
-
-	$scope.api_sizechart = {};
-	$scope.api_available_sizes = {};
-	$scope.api_deviser_sizechart = {};
-	$scope.api_sizechart_country = {};
 
 	$scope.tmp_selected_size = "";
 	$scope.tmp_selected_sizechart_country = "";
@@ -34,6 +42,7 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 
 	//Required for the name and description dropdowns
 	$scope.langs = [];
+	$scope.languages = "";
 	angular.forEach(_langs, function(v, k) {
 		var sw = $scope.product.name.hasOwnProperty(k);
 		$scope.langs.push({ "key": k, "value": v, "checked": sw});
@@ -213,9 +222,9 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 		$scope.sizechart_countries = _countries;
 
 		$timeout(function() {
-			try {
-				$scope.api_deviser_sizechart.select_none();
-			} catch(e){}
+			$rootScope.$broadcast('ams_do_uncheck_all', {
+				name: 'deviser_sizechart'
+			});
 		}, 0);
 
 		/**
@@ -359,7 +368,12 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 
 		//Try to select the current (if any) country in the dropdown
 		$timeout(function() {
-			$scope.api_sizechart_country.select($scope.product.sizechart.country);
+			//$scope.api_sizechart_country.select($scope.product.sizechart.country);
+			// TODO: Make sure this works after AMS upgrade!!!
+			$rootScope.$broadcast('ams_do_toggle_check_node', {
+				name: 'ams_sizechart_country',
+				item: {value: $scope.product.sizechart.country}
+			})
 		}, 0);
 
 	});
@@ -434,8 +448,8 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 		var _sizechart = _new[0];
 
 		$timeout(function() {
-			$scope.api_sizechart_country.select_none();
-			$scope.api_sizechart.select_none();
+			$rootScope.$broadcast('ams_do_uncheck_all', {name: 'ams_sizechart_country'});
+			$rootScope.$broadcast('ams_do_uncheck_all', {name: 'ams_sizechart'});
 
 			$timeout(function() {
 				delete _sizechart["_id"];
@@ -950,13 +964,13 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 					'X-CSRF-Token': yii.getCsrfToken()
 				},
 				url: _delete_product_photo_url,
-				data: {
+				data: JSON.stringify({
 					"photo_name": _photo.name
-				}
-			}).success(function(data, status, headers, config) {
+				})
+			}).then(function(resp) {
 				toastr.success("Photo removed successfully!");
-			}).error(function(data, status, headers, config) {
-				toastr.error("Couldn't remove photo!", data);
+			}, function(err) {
+				toastr.error("Couldn't remove photo!", err);
 			});
 		}
 
@@ -1012,24 +1026,22 @@ todevise.controller('productCtrl', ["$scope", "$timeout", "$sizechart", "$produc
 					'X-CSRF-TOKEN' : yii.getCsrfToken()
 				},
 				url: _upload_product_photo_url,
-				file: photo.blob,
-				fields: {
-					'data': {
+				data: {
+					'file': photo.blob,
+					'data': JSON.stringify({
 						'name': photo.name,
 						'tags': photo.tags
-					}
+					})
 				}
-			}).progress(function(e) {
-				var progressPercentage = parseInt(100.0 * e.loaded / e.total);
-				//console.log('progress: ' + progressPercentage + '% ' + e.config.file.name);
-				photo.progress = progressPercentage;
-			}).success(function(data, status, header, config) {
-				//console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
-				photos[index] = angular.copy(data.media.photos.pop());
-				toastr.success("Uploaded successfully product photo", config.file.name);
-			}).error(function(err) {
+			}).then(function(resp) {
+				photos[index] = angular.copy(resp.data.media.photos.pop());
+				toastr.success("Uploaded successfully product photo", resp.config.data.file.name);
+			}, function(err) {
 				photos[index].not_uploaded = true;
 				toastr.error("Error while uploading product photo", err)
+			}, function(e) {
+				var progressPercentage = parseInt(100.0 * e.loaded / e.total);
+				photo.progress = progressPercentage;
 			}).finally(function() {
 				delete photos[index]["progress"];
 				do_save();

@@ -131,10 +131,12 @@ class PublicController extends CController {
 	public function actionProduct($category_id, $product_id, $slug) {
 
 		$product = Product::findOne([
-			"short_id" => "4f690535" // $product_id
+			"short_id" => $product_id
 		]);
 
 		//404 if $product == null
+
+		//$this->view->params["product_path"] = $product['categories'];
 
 		$deviser = Person::findOne([
 			"short_id" => $product->deviser_id
