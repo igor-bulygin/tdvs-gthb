@@ -21,7 +21,14 @@ $this->title = 'Todevise / Product';
 
 <div class="row no-gutter product relative flex flex-column">
 
-	<div class="bg absolute" style="background-image: url('https://unsplash.it/1920/1080');">
+	<?php foreach ($product['media']['photos'] as $photo) {
+		if (isset($photo['main_product_photo']) && $photo['main_product_photo'] === true) {
+	?>
+			<div class="bg absolute" style="background-image: url('<?= Yii::getAlias('@product_url') ?>/<?= $product['short_id'] ?>/<?= $photo['name'] ?>');">
+	<?php
+		}
+	} ?>
+
 
 	</div>
 
@@ -36,7 +43,7 @@ $this->title = 'Todevise / Product';
 			<div class="info absolute">
 				<div class="row no-gutter max-height lwhite">
 					<div class="col-xs-2 max-height avatar_wrapper flex flex-align-center">
-						<div class="avatar img-circle max-height" style="background-image: url('https://unsplash.it/240/120');"></div>
+						<div class="avatar img-circle max-height" style="background-image: url('<?= Yii::getAlias('@deviser_url') ?>/<?= $deviser['short_id'] ?>/<?= $deviser['media']['profile'] ?>');"></div>
 					</div>
 
 					<div class="col-xs-8 max-height flex flex-column flex-justify-center">
@@ -64,12 +71,9 @@ $this->title = 'Todevise / Product';
 				<div class="carosel flex flex-prop-1">
 					<div class="carosel-control carosel-control-left"></div>
 					<div class="carosel-inner flex-prop-1">
-						<img class="carosel-item" src="http://www.discovertheforest.org/images/hero/home/6.jpg" />
-						<img class="carosel-item" src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Height_'n'_Width.jpg" />
-						<img class="carosel-item" src="http://www.orderofinterbeing.org/wp-content/uploads/2014/04/light-forest.jpg" />
-						<img class="carosel-item" src="https://unsplash.it/1200/800?random=4" />
-						<img class="carosel-item" src="https://unsplash.it/1200/800?random=5" />
-						<img class="carosel-item" src="https://unsplash.it/1200/800?random=6" />
+						<?php foreach ($product['media']['photos'] as $photo) { ?>
+							<img class="carosel-item" src="<?= Yii::getAlias('@product_url') ?>/<?= $product['short_id'] ?>/<?= $photo['name'] ?>" />
+						<?php } ?>
 					</div>
 					<div class="carosel-control carosel-control-right"></div>
 				</div>
