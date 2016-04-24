@@ -18,6 +18,7 @@ global_desktop.run(["$http", function($http) {
 global_desktop.filter('arrpatch', [
 	function () {
 		return function (arr, word) {
+			if (!Array.isArray(arr)) return "";
 			arr = JSON.parse(JSON.stringify(arr));
 			for (var i = 0; i < arr.length; i++) {
 				arr.splice(i, 0, word);
