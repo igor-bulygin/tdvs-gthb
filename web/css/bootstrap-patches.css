@@ -55,6 +55,12 @@
 .max-height {
 	height: 100%;
 }
+
+/* 100% width */
+.max-width {
+	width: 100%;
+}
+
 /*===================================*/
 
 /* vertical alignment styles */
