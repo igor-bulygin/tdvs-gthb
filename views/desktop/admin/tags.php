@@ -44,7 +44,7 @@ $this->title = 'Todevise / Admin / Tags';
 						checked-property="check"
 						children-property="sub"
 
-						dropdown-label="<[ '<(name[&quot;{{ lang }}&quot;])>' | outputModelIterator : this : ', ']>"
+						dropdown-label="<[ '<(name[&quot;{{ lang }}&quot;])>' | outputModelIterator : this : ', ' : '<?= Yii::t('app/admin', 'Select category') ?>']>"
 						node-label="<[ name['{{ lang }}'] ]>"
 						leaf-label="<[ name['{{ lang }}'] ]>"
 
