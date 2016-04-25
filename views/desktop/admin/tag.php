@@ -88,8 +88,8 @@ $this->title = 'Todevise / Admin / Tag';
 			</div>
 			<div class="col-xs-2 div-bordered tag_settings">
 				<div class="checkbox">
-					<label class="funiv fs0-929 fc-c7" ng-init="optional = !tag.required">
-						<input type="checkbox" ng-model="optional" ng-change="tag.required = !optional"> <?= Yii::t("app/admin", "Is this tag optional?"); ?>
+					<label class="funiv fs0-929 fc-c7">
+						<input type="checkbox" ng-model="tag.required" ng-change="tag.required"> <?= Yii::t("app/admin", "This tag is required"); ?>
 					</label>
 				</div>
 			</div>

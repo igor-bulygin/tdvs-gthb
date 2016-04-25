@@ -17,6 +17,18 @@ todevise.controller('tagCtrl', ["$scope", "$timeout", "$tag", "$tag_util", "$cat
 	//Sort by path length
 	$scope.categories = $category_util.create_tree(_categories);
 
+	$scope.$watch("tag.stock_and_price", function(_new, _old) {
+		if (_new === true) {
+			$scope.tag.required = true;
+		}
+	});
+
+	$scope.$watch("tag.required", function(_new, _old) {
+		if (_new === false && $scope.tag.stock_and_price === true) {
+			$scope.tag.required = true;
+		}
+	});
+
 	$scope.$watch("tag.type", function(_new, _old) {
 		if(_new !== _old && $scope.type_watch_paused === false) {
 
