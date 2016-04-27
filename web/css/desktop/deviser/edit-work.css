@@ -5,6 +5,8 @@
 .internal-header {
 	background-color: #3b3637;
 	color: #ffffff;
+	z-index: 1;
+	position: relative;
 }
 
 .deviser_photo {
@@ -89,11 +91,16 @@
 	padding-top: 20px !important;
 }
 
-.main-left {
+.main-right-holder {
+	background-color: #f4f4f4;
+}
 
+.main-left {
+	width: 100%;
 }
 
 .main-right {
+	width: 100%;
 	margin-top: 5% !important;
 }
 
@@ -203,10 +210,10 @@
 
 .background-holder {
 	position: absolute;
-	width: 100%;
-	height: 100%;
-	left: 0;
-	top: 0;
+	left: -15px;
+	top: -15px;
+	right: -15px;
+	bottom: -15px;
 	background-repeat: no-repeat;
 	background-size: cover;
 

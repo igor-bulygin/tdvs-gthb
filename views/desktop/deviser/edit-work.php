@@ -48,9 +48,10 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 		<?php $this->registerJs("var _currencies = " . Json::encode(Currency::CURRENCIES) . ";", View::POS_END); ?>
 		<?php $this->registerJs("var _countries = " . Json::encode($countries) . ";", View::POS_END); ?>
 		<?php $this->registerJs("var _countries_lookup = " . Json::encode($countries_lookup) . ";", View::POS_END); ?>
+		<?php $this->registerJs("var _sizecharts = " . Json::encode($sizecharts) . ";", View::POS_END); ?>
 		<?php $this->registerJs("var _deviser_sizecharts = " . Json::encode($deviser_sizecharts) . ";", View::POS_END); ?>
 		<?php $this->registerJs("var _mus = " . Json::encode($mus) . ";", View::POS_END); ?>
-		<?php $this->registerJs("var _base_product_photo_url = '" . Yii::getAlias("@product_url") . "/" . $product["short_id"] . "/" . "';", View::POS_END); ?>
+
 		<?php $this->registerJs("var _upload_product_photo_url = '" . Url::to(["deviser/upload-product-photo", "slug" => $deviser["slug"], "short_id" => $product["short_id"]]) . "';", View::POS_END); ?>
 		<?php $this->registerJs("var _delete_product_photo_url = '" . Url::to(["deviser/delete-product-photo", "slug" => $deviser["slug"], "short_id" => $product["short_id"]]) . "';", View::POS_END); ?>
 
@@ -101,32 +102,31 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 					<div class="flex-inline flex-column flex-align-stretch main-left relative">
 
-						<!--<pre>{{ dump(product.slug) }}</pre>-->
-
 						<div class="languages-name fs0-857 fs-upper">
-							<div class="language-name pointer funiv_bold fc-9b" ng-cloak ng-repeat="language in languages"
-							     ng-class="{active: $parent.selected_lang === language.key}"
-							     ng-click="$parent.selected_lang = language.key" ng-init="$parent.selected_lang = $parent.lang">
+							<div class="language-name pointer funiv_bold fc-9b" ng-cloak ng-repeat="language in languages_name"
+							     ng-class="{active: $parent.selected_lang_name === language.key}"
+							     ng-click="$parent.selected_lang_name = language.key" ng-init="$parent.selected_lang_name = $parent.lang">
 								{{ ::language.value }}
 							</div>
 
 							<div class="language-name"
 								angular-multi-select
 								input-model="langs"
-								output-model="languages"
+								output-model="languages_name"
 
 								checked-property="checked"
 
-								dropdown-label="<[ '<( value )>' | outputModelIterator : this : ', ']>"
+								dropdown-label="<[ '<( value )>' | outputModelIterator : this : ', ' : '<?= Yii::t('app/deviser', 'Select language(s)') ?>']>"
 								leaf-label="<[ value ]>"
 
+								preselect="key, {{ lang }}"
 								hide-helpers="check_all, check_none, reset"
 							></div>
 						</div>
 
 						<div class="product-name-holder">
-							<input type="text" placeholder="<?= Yii::t("app/deviser", "Product name"); ?>" ng-model="product.name[selected_lang]"
-							       ng-change="product.slug[selected_lang] = (product.name[selected_lang] | slugify: {lang: selected_lang.split('-')[0]})" class="funiv_thin fs2-857 fc-9b fs-upper product_name">
+							<input type="text" placeholder="<?= Yii::t("app/deviser", "Product name"); ?>" ng-model="product.name[selected_lang_name]"
+							       ng-change="product.slug[selected_lang_name] = (product.name[selected_lang_name] | slugify: {lang: selected_lang_name.split('-')[0]})" class="funiv_thin fs2-857 fc-9b fs-upper product_name">
 						</div>
 
 						<!--<pre>{{ dump(product.options) }}</pre>-->
@@ -138,7 +138,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 									<div class="photo-white-area" ng-click="$event.stopPropagation();">
 										<span class="glyphicon glyphicon-remove fs0-786 btn_delete_photo pointer" ng-click="delete_photo($index, $event)"></span>
 
-										<div ng-if="photo.name !== ''" ngf-background="photo.blob" angular-img-dl angular-img-dl-url="{{ _base_product_photo_url + photo.name }}" angular-img-dl-model="photo.blob" class="photo"></div>
+										<div ng-if="photo.name !== ''" ngf-background="photo.blob" angular-img-dl angular-img-dl-url="<?= Yii::getAlias('@product_url') ?>/{{ product.short_id }}/{{ photo.name }}" angular-img-dl-model="photo.blob" class="photo"></div>
 										<div ng-if="photo.name === ''" ngf-background="photo.blob" angular-img-dl angular-img-dl-url="" angular-img-dl-model="photo.blob" class="photo"></div>
 									</div>
 
@@ -200,7 +200,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 							<div class="col-xs-11"></div>
 						</div>
 
-						<div class="row no-gutter tabs" ng-init="tab = 2">
+						<div class="row no-gutter tabs" ng-init="tab = 1">
 							<div class="col-xs-4 text-center tab fc-6d funiv_bold fs0-786 fw-bold fs-upper pointer" ng-click="tab = 1" ng-class="{'active' : tab === 1}">description</div>
 							<div class="col-xs-4 text-center tab fc-6d funiv_bold fs0-786 fw-bold fs-upper pointer" ng-click="tab = 2" ng-class="{'active' : tab === 2}">price & stock</div>
 							<div class="col-xs-4 text-center tab fc-6d funiv_bold fs0-786 fw-bold fs-upper pointer" ng-click="tab = 3" ng-class="{'active' : tab === 3}">returns & warranty</div>
@@ -217,15 +217,15 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 								angular-multi-select
 								input-model="categories"
 								output-model="product.categories"
+								output-keys="short_id"
+								output-type="values"
 
 								id-property="short_id"
 								children-property="sub"
 								checked-property="check"
 
-								output-type="values"
-								output-keys="short_id"
-
-								dropdown-label="<[ '<(name[&quot;{{ lang }}&quot;])>' | outputModelIterator : this : ', ']>"
+								name="categories"
+								dropdown-label="<[ '<(name[&quot;{{ lang }}&quot;])>' | outputModelIterator : this : ', ' : '<?= Yii::t('app/deviser', 'Select category/ies') ?>']>"
 								node-label="<[ name['{{ lang }}'] ]>"
 								leaf-label="<[ name['{{ lang }}'] ]>"
 
@@ -245,14 +245,15 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 						<div ng-cloak ng-form="formOptions" class="col-xs-12" ng-repeat="tag in tags_from_categories" ng-class="{disabled_tag: tag.enabled === false}">
 
+							<!-- Dropdown tag -->
 							<div ng-cloak ng-if="tag.type === 0">
 								<span class="fs0-857 funiv_bold fc-6d tag-title-dropdown">
-									<span class="fs0-714 fc-f7284b glyphicon glyphicon-asterisk" ng-if="required_tags_ids.indexOf(tag.short_id) !== -1"></span>
+									<span class="fs0-714 fc-f7284b glyphicon glyphicon-asterisk" ng-if="tag.required === true"></span>
 									{{ ::tag.name[lang] }}
 									<span ng-cloak class="fc-f7284b" ng-show="tag.enabled === false"> - <?= Yii::t("app/deviser", "Disabled") ?></span>
 								</span>
 
-								<div class="combination-row" ng-repeat="values in product.options[tag.short_id] track by $index">
+								<div class="combination-row" ng-repeat="values in product.options[tag.short_id]">
 									<div class="row no-gutter flex flex-align-center">
 										<div class="col-xs-0-5 fs0-857 funiv_bold fc-6d">
 											{{ ::$index + 1 }}:
@@ -267,12 +268,13 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 												output-type="values"
 
 												checked-property="check"
+												name="ams_tag_value_{{ tag.short_id }}_{{ $index }}"
 
-												dropdown-label="<[ '<(text[&quot;{{ lang }}&quot;])>' | outputModelIterator : this : ', ']>"
+												dropdown-label="<[ '<(text[&quot;{{ lang }}&quot;])>' | outputModelIterator : this : ', ' : '<?= Yii::t('app/deviser', 'Select option(s)') ?>']>"
 												node-label="<[ text['{{ lang }}'] ]>"
 												leaf-label="<[ text['{{ lang }}'] ]>"
 
-												preselect="{{ product.options[tag.short_id][$index] | arrpatch : 'value' }}"
+												preselect="{{ values | arrpatch : 'value' }}"
 												max-checked-leafs="{{ tag.n_options }}"
 
 												hide-helpers="check_all, check_none, reset"
@@ -291,15 +293,16 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 								<br ng-cloak ng-show="tag.enabled === true" />
 								<span ng-cloak ng-show="tag.enabled === true" class="fc-7aaa4a fs0-857 funiv_bold pointer new-combination" ng-click="create_product_option(tag.short_id)">
-									<?= Yii::t("app/deviser", "Create new combination +") ?>
+									<?= Yii::t("app/deviser", "Add another tag option +") ?>
 								</span>
 
 							</div>
 
+							<!-- Freetext tag -->
 							<div ng-cloak ng-if="tag.type === 1">
 
 								<span class="fs0-857 funiv_bold fc-6d tag-title-dropdown">
-									<span class="fs0-714 fc-f7284b glyphicon glyphicon-asterisk" ng-if="required_tags_ids.indexOf(tag.short_id) !== -1"></span>
+									<span class="fs0-714 fc-f7284b glyphicon glyphicon-asterisk" ng-if="tag.required === true"></span>
 									{{ ::tag.name[lang] }}
 									<span ng-cloak class="fc-f7284b" ng-show="tag.enabled === false"> - <?= Yii::t("app/deviser", "Disabled") ?></span>
 								</span>
@@ -326,9 +329,9 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 														<!-- Numeric type -->
 														<div ng-cloak ng-if="option.type === 0">
-															<input angular-unit-converter convert-from="{{ mus[option.metric_type].sub[0].value }}" convert-to="{{ product.options[tag.short_id][$parent.$parent.$index][$index].metric_unit }}"
-															       ng-model="product.options[tag.short_id][$parent.$parent.$index][$index].value" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/"
-															       class="form-control" placeholder="{{ option.text[lang] }}" name="tag{{ tag.short_id }}index{{ $parent.$parent.$index }}option{{ $index }}">
+															<!-- angular-unit-converter convert-from="{{ mus[option.metric_type].sub[0].value }}" convert-to="{{ product.options[tag.short_id][$parent.$parent.$index][$index].metric_unit }}" -->
+															<input ng-model="product.options[tag.short_id][$parent.$parent.$index][$index].value" ng-pattern="/^\-?\d+(\.\d+)?$/"
+																class="form-control" placeholder="{{ option.text[lang] }}" name="tag{{ tag.short_id }}index{{ $parent.$parent.$index }}option{{ $index }}" ng-change="build_price_stock_table()">
 															<div role="alert">
 																<span class="error" ng-show="!formOptions['tag{{ tag.short_id }}index{{ $parent.$parent.$index }}option{{ $index }}'].$valid"><?= Yii::t("app/deviser", "Numbers only") ?></span>
 															</div>
@@ -336,8 +339,8 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 														<!-- Alphanumeric type -->
 														<div ng-cloak ng-if="option.type === 1">
-															<input ng-model="product.options[tag.short_id][$parent.$parent.$index][$index].value" class="form-control"
-															       placeholder="{{ option.text[lang] }}" name="tag{{ tag.short_id }}index{{ $parent.$parent.$index }}option{{ $index }}">
+															<input ng-model="product.options[tag.short_id][$parent.$parent.$index][$index].value"
+																class="form-control" placeholder="{{ option.text[lang] }}" name="tag{{ tag.short_id }}index{{ $parent.$parent.$index }}option{{ $index }}" ng-change="build_price_stock_table()">
 															<div role="alert">
 																<span class="error" ng-show="!formOptions['tag{{ tag.short_id }}index{{ $parent.$parent.$index }}option{{ $index }}'].$valid"><?= Yii::t("app/deviser", "Invalid input") ?></span>
 															</div>
@@ -354,12 +357,13 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 															output-type="value"
 
 															checked-property="check"
-															preselect="value, {{ product.options[tag.short_id][$parent.$parent.$index][$index].metric_unit }}"
+															name="ams_tag_value_{{ tag.short_id }}_{{ $parent.$parent.$index }}_{{ $index }}"
 
-															dropdown-label="<[ '<( text )>' | outputModelIterator : this : ', ']>"
+															dropdown-label="<[ '<( text )>' | outputModelIterator : this : ', ' : '<?= Yii::t('app/deviser', 'Select option(s)') ?>']>"
 															node-label="<[ text ]>"
 															leaf-label="<[ text ]>"
 
+															preselect="value, {{ product.options[tag.short_id][$parent.$parent.$index][$index].metric_unit }}"
 															max-checked-leafs="1"
 															hide-helpers="check_all, check_none, reset"
 														></div>
@@ -419,21 +423,22 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 					<div class="col-xs-12">
 						<div class="languages-desc fs0-857 fs-upper flex">
-							<div class="language-desc pointer funiv_bold fc-9b" ng-cloak ng-repeat="language in languages"
-							     ng-class="{active: $parent.selected_lang === language.key}"
-							     ng-click="$parent.selected_lang = language.key" ng-init="$parent.selected_lang = $parent.lang">
+							<div class="language-desc pointer funiv_bold fc-9b" ng-cloak ng-repeat="language in languages_description"
+								ng-class="{active: $parent.selected_lang_description === language.key}"
+								ng-click="$parent.selected_lang_description = language.key" ng-init="$parent.selected_lang_description = $parent.lang">
 								{{ ::language.value }}
 							</div>
 							<div class="language-desc"
 								angular-multi-select
 								input-model="langs"
-								output-model="languages"
+								output-model="languages_description"
 
 								checked-property="checked"
 
-								dropdown-label="<[ '<( value )>' | outputModelIterator : this : ', ']>"
+								dropdown-label="<[ '<( value )>' | outputModelIterator : this : ', ' : '<?= Yii::t('app/deviser', 'Select language(s)') ?>']>"
 								leaf-label="<[ value ]>"
 
+								preselect="key, {{ lang }}"
 								hide-helpers="check_all, check_none, reset"
 							></div>
 						</div>
@@ -443,7 +448,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 					<div class="col-xs-12">
 						<div class="product-desc-holder">
-							<textarea type="text" placeholder="<?= Yii::t("app/deviser", "Product description"); ?>" ng-model="product.description[selected_lang]" class="funiv fs1-071 fc-3d product_desc"></textarea>
+							<textarea type="text" placeholder="<?= Yii::t("app/deviser", "Product description"); ?>" ng-model="product.description[selected_lang_description]" class="funiv fs1-071 fc-3d product_desc"></textarea>
 						</div>
 					</div>
 
@@ -619,48 +624,24 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 											<span><?= Yii::t("app/deviser", "Choose size chart") ?></span>
 										</div>
 
-										<!--
-										 We need a ng-if for pristine because that is how we decide if we must
-										 preselect the dropdown.
-										 If pristine === true, it means that the values in the sizechart are an exact
-										 copy of the values from the original sizechart, which means we should preselect
-										 the dropdown. Else, it means that the deviser modified some values, so we
-										 shouldn't preselect anything.
-										 -->
-										<div ng-if="$parent.product.sizechart.pristine === true" class="col-xs-6 col-height col-middle">
+										<div class="col-xs-6 col-height col-middle">
 											<div
 												angular-multi-select
-												input-model="$parent.$parent.sizecharts"
-												output-model="$parent.$parent.tmp_selected_sizechart"
+												input-model="$parent.sizecharts"
+												output-model="$parent.product.sizechart.short_id"
+												output-keys="short_id"
+												output-type="value"
 
 												id-property="short_id"
 												checked-property="check"
 												name="ams_sizechart"
 
 												max-checked-leafs="1"
-												dropdown-label="<[ '<(name[&quot;{{ lang }}&quot;])>' | outputModelIterator : this : ', ']>"
+												dropdown-label="<[ '<(name[&quot;{{ lang }}&quot;])>' | outputModelIterator : this : ', ' : '<?= Yii::t('app/deviser', 'Select sizechart') ?>']>"
 												node-label="<[ name['{{ lang }}'] ]>"
 												leaf-label="<[ name['{{ lang }}'] ]>"
 
 												preselect="short_id, {{ product.sizechart.short_id }}"
-
-												hide-helpers="check_all, check_none, reset"
-											></div>
-										</div>
-										<div ng-if="$parent.product.sizechart.pristine !== true" class="col-xs-6 col-height col-middle">
-											<div
-												angular-multi-select
-												input-model="$parent.$parent.sizecharts"
-												output-model="$parent.$parent.tmp_selected_sizechart"
-
-												id-property="short_id"
-												checked-property="check"
-												name="ams_sizechart"
-
-												max-checked-leafs="1"
-												dropdown-label="<[ '<(name[&quot;{{ lang }}&quot;])>' | outputModelIterator : this : ', ']>"
-												node-label="<[ name['{{ lang }}'] ]>"
-												leaf-label="<[ name['{{ lang }}'] ]>"
 
 												hide-helpers="check_all, check_none, reset"
 											></div>
@@ -678,11 +659,11 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 										<!--
 										Same here, please read comments for the "sizechart" dropdown.
 										-->
-										<div ng-if="$parent.product.sizechart.pristine === true" class="col-xs-6 col-height col-middle">
+										<div class="col-xs-6 col-height col-middle">
 											<div
 												angular-multi-select
-												input-model="$parent.$parent.sizechart_countries"
-												output-model="$parent.$parent.tmp_selected_sizechart_country"
+												input-model="$parent.sizechart_countries"
+												output-model="$parent.product.sizechart.country"
 												output-keys="value"
 												output-type="value"
 
@@ -691,31 +672,11 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 												name="ams_sizechart_country"
 
 												max-checked-leafs="1"
-												dropdown-label="<[ '<(text)>' | outputModelIterator : this : ', ']>"
+												dropdown-label="<[ '<(text)>' | outputModelIterator : this : ', ' : '<?= Yii::t('app/deviser', 'Select country') ?>']>"
 												node-label="<[ text ]>"
 												leaf-label="<[ text ]>"
 
 												preselect="value, {{ product.sizechart.country }}"
-
-												hide-helpers="check_all, check_none, reset"
-											></div>
-										</div>
-										<div ng-if="$parent.product.sizechart.pristine !== true" class="col-xs-6 col-height col-middle">
-											<div
-												angular-multi-select
-												input-model="$parent.$parent.sizechart_countries"
-												output-model="$parent.$parent.tmp_selected_sizechart_country"
-												output-keys="value"
-												output-type="value"
-
-												id-property="value"
-												checked-property="check"
-												name="ams_sizechart_country"
-
-												max-checked-leafs="1"
-												dropdown-label="<[ '<(text)>' | outputModelIterator : this : ', ']>"
-												node-label="<[ text ]>"
-												leaf-label="<[ text ]>"
 
 												hide-helpers="check_all, check_none, reset"
 											></div>
@@ -765,17 +726,17 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 									<div
 										angular-multi-select
 										input-model="$parent.$parent.available_sizes"
-										output-model="$parent.$parent.tmp_selected_size"
+										output-model="$parent.$parent.tmp_selected_sizechart_size"
 										output-keys="value"
 										output-type="value"
 
-										id-property="value"
 										checked-property="check"
 
+										name="ams_available_sizes"
 										max-checked-leafs="1"
-										dropdown-label="<[ '<(text)>' | outputModelIterator : this : ', ']>"
-										node-label="<[ text ]>"
-										leaf-label="<[ text ]>"
+										dropdown-label="<[ '<(value)>' | outputModelIterator : this : ', ' : '<?= Yii::t('app/deviser', 'Available sizes') ?>']>"
+										node-label="<[ value ]>"
+										leaf-label="<[ value ]>"
 
 										hide-helpers="check_all, check_none, reset"
 									></div>
@@ -792,7 +753,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 					<div ng-cloak class="col-xs-12 sizechart-table-holder" ng-show="use_sizecharts === true">
 
 						<div ng-cloak class="row-same-height no-gutter" ng-show="use_sizecharts === true && (product.sizechart.values.length > 0 || product.sizechart.country.length > 0)">
-							<table class="fc-6d funiv fs1-071 fnormal sizechart-table">
+							<table class="fc-6d funiv fs1-071 fnormal sizechart-table max-width">
 								<thead>
 									<tr>
 										<th class="fpf fs0-857 fnormal text-center sizechart-cell" ng-cloak>{{ countries_lookup[product.sizechart.country] }}</th>
@@ -804,7 +765,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 										<td ng-repeat="cell in product.sizechart.values[$index] track by $index" class="text-center sizechart-cell">
 											<span ng-if="$index == 0">{{ product.sizechart.values[$parent.$parent.$index][$index] }}</span>
 											<span ng-if="$index == 0" class="glyphicon glyphicon-remove pointer" aria-hidden="true" ng-click="deleteSizeFromTable($parent.$parent.$index)"></span>
-											<input ng-if="$index > 0" ng-model="product.sizechart.values[$parent.$parent.$index][$index]" placeholder="0" angular-unit-converter convert-from="mm" convert-to="{{ product.sizechart.metric_unit }}" />
+											<input ng-if="$index > 0" ng-model="product.sizechart.values[$parent.$parent.$index][$index]" placeholder="0" />
 											<span ng-if="$index > 0">{{ product.sizechart.metric_unit }}</span>
 										</td>
 									</tr>
@@ -813,8 +774,6 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 						</div>
 
 					</div>
-
-					<!--<pre>{{ dump(product.sizechart) }}</pre>-->
 
 					<div ng-cloak class="col-xs-12" ng-show="use_sizecharts === true && product.sizechart.values.length > 0">
 						<div class="funiv_bold fs0-929 fc-f7284b fw-normal pointer save-sizechart" ng-click="save_sizechart()">
@@ -856,7 +815,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 										checked-property="check"
 
 										max-checked-leafs="1"
-										dropdown-label="<[ '<(text)>' | outputModelIterator : this : ', ']>"
+										dropdown-label="<[ '<(text)>' | outputModelIterator : this : ', ' : '<?= Yii::t('app/deviser', 'Select weight unit') ?>']>"
 										node-label="<[ text ]>"
 										leaf-label="<[ text ]>"
 
@@ -877,7 +836,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 										checked-property="check"
 
 										max-checked-leafs="1"
-										dropdown-label="<[ '<(symbol)> (<( value )>)' | outputModelIterator : this : ', ']>"
+										dropdown-label="<[ '<(symbol)> (<( value )>)' | outputModelIterator : this : ', ' : '<?= Yii::t('app/deviser', 'Select currency') ?>']>"
 										leaf-label="<[ symbol ]> (<[ value ]>)"
 
 										preselect="value, {{ product.currency }}"
@@ -897,14 +856,13 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 					<div class="col-xs-12">
 
-						<div class="fc-333 funiv fs1-071 fnormal" ng-hide="show_pricestock"><?= Yii::t("app/deviser", "The price & stock table will be available when all required tags have at least 1 combination.") ?></div>
+						<div class="fc-333 funiv fs1-071 fnormal" ng-show="product.price_stock.length === 0"><?= Yii::t("app/deviser", "The price & stock table will be available when all required tags have at least 1 combination.") ?></div>
 
-						<table class="fc-6d funiv fs1-071 fnormal pricestock-table" ng-show="show_pricestock">
+						<table class="fc-6d funiv fs1-071 fnormal pricestock-table max-width" ng-show="product.price_stock.length > 0">
 							<thead>
 							<tr>
-								<th class="fpf fs0-857 fnormal text-center pricestock-cell" ng-cloak ng-if="use_sizecharts === true"><?= Yii::t("app/deviser", "Size") ?></th>
-								<th class="fpf fs0-857 fnormal text-center pricestock-cell" ng-cloak ng-repeat="tag_id in $parent._ps_header" ng-init="tag = getTag(tag_id)">
-									{{ tag.name[lang] }}
+								<th class="fpf fs0-857 fnormal text-center pricestock-cell" ng-cloak ng-repeat="tag_id in $parent.tags_order_for_price_stock_table track by $index" ng-init="tag = getTag(tag_id)">
+									{{ tag.name[lang] || '<?= Yii::t("app/deviser", "Size") ?>' }}
 									<span ng-if="tag.type == <?= Tag::DROPDOWN ?>"></span>
 									<span ng-if="tag.type == <?= Tag::FREETEXT ?>">(
 										<span ng-repeat="option in tag.options">
@@ -912,48 +870,78 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 										</span>
 									)</span>
 								</th>
-								<th class="fpf fs0-857 fnormal text-center pricestock-cell"><?= Yii::t("app/deviser", "Weight") ?></th>
-								<th class="fpf fs0-857 fnormal text-center pricestock-cell"><?= Yii::t("app/deviser", "Stock") ?></th>
-								<th class="fpf fs0-857 fnormal text-center pricestock-cell"><?= Yii::t("app/deviser", "Price") ?></th>
+								<th class="fpf fs0-857 fnormal text-right pricestock-cell"><?= Yii::t("app/deviser", "Weight") ?></th>
+								<th class="fpf fs0-857 fnormal text-center pricestock-buttons-cell"></th>
+
+								<th class="fpf fs0-857 fnormal text-right pricestock-cell"><?= Yii::t("app/deviser", "Stock") ?></th>
+								<th class="fpf fs0-857 fnormal text-center pricestock-buttons-cell"></th>
+
+								<th class="fpf fs0-857 fnormal text-right pricestock-cell"><?= Yii::t("app/deviser", "Price") ?></th>
+								<th class="fpf fs0-857 fnormal text-center pricestock-buttons-cell"></th>
 							</tr>
 							</thead>
 							<tbody>
 
-							<tr ng-cloak ng-repeat="row in product.price_stock" class="pricestock-row" ng-class="{true: 'even', false: 'odd'}[$even]">
-								<td ng-cloak ng-if="use_sizecharts === true" class="text-center pricestock-cell">{{ product.price_stock[$index].size }}</td>
-								<td ng-repeat="(tag_id, values) in product.price_stock[$index].options" ng-init="tag = getTag(tag_id)" class="text-center pricestock-cell">
+							<tr ng-cloak ng-repeat="row in product.price_stock track by $index" class="pricestock-row" ng-class="{true: 'even', false: 'odd'}[$even]">
+								<td ng-repeat="tag_id in tags_order_for_price_stock_table" ng-init="tag = getTag(tag_id)" class="text-center pricestock-cell">
+									<span ng-if="tag === undefined">{{ row.options['size'] }}</span>
+
 									<span ng-if="tag.type == <?= Tag::DROPDOWN ?>">
-										<span ng-repeat="value in values">
+										<span ng-repeat="value in row.options[tag_id]">
 											{{ getTagOption($parent.tag, value).text[lang] }}
 											<span ng-show="!$last">,</span>
 										</span>
 									</span>
 
 									<span ng-if="tag.type == <?= Tag::FREETEXT ?>">
-										<span ng-repeat="value in values">
+										<span ng-repeat="value in row.options[tag_id]">
 											{{ value.value }}
 											{{ value.metric_unit }}
 											<span ng-show="!$last">x</span>
 										</span>
 									</span>
 								</td>
-								<td class="text-center pricestock-cell">
+
+								<td class="text-right pricestock-cell">
 									<input class="text-center" type="number" ng-model="product.price_stock[$index].weight" />
-									<span ng-cloak class="funiv fc-6d fs0-643 pointer" ng-click="apply_to_all('weight', product.price_stock[$index].weight)" ng-if="$first">
-										<?= Yii::t("app/deviser", "Apply to all") ?>
-									</span>
 								</td>
-								<td class="text-center pricestock-cell">
+								<td>
+									<div class=" flex flex-column">
+										<span ng-cloak class="funiv fc-6d fs0-643 pointer" ng-click="apply_to_all('weight', product.price_stock[$index].weight)" ng-if="$first">
+											<?= Yii::t("app/deviser", "Apply to all") ?>
+										</span>
+										<span ng-cloak class="funiv fc-6d fs0-643 pointer" ng-click="apply_to_same_size(product.price_stock[$index].options.size, 'weight', product.price_stock[$index].weight)" ng-if="use_sizecharts === true && ($first || product.price_stock[$index].options.size !== product.price_stock[$index - 1].options.size)">
+											<?= Yii::t("app/deviser", "Apply to same size") ?>
+										</span>
+									</div>
+								</td>
+
+								<td class="text-right pricestock-cell">
 									<input class="text-center" type="number" ng-model="product.price_stock[$index].stock" />
-									<span ng-cloak class="funiv fc-6d fs0-643 pointer" ng-click="apply_to_all('stock', product.price_stock[$index].stock)" ng-if="$first">
-										<?= Yii::t("app/deviser", "Apply to all") ?>
-									</span>
 								</td>
-								<td class="text-center pricestock-cell">
+								<td>
+									<div class=" flex flex-column">
+										<span ng-cloak class="funiv fc-6d fs0-643 pointer" ng-click="apply_to_all('stock', product.price_stock[$index].stock)" ng-if="$first">
+											<?= Yii::t("app/deviser", "Apply to all") ?>
+										</span>
+										<span ng-cloak class="funiv fc-6d fs0-643 pointer" ng-click="apply_to_same_size(product.price_stock[$index].options.size, 'stock', product.price_stock[$index].stock)" ng-if="use_sizecharts === true && ($first || product.price_stock[$index].options.size !== product.price_stock[$index - 1].options.size)">
+											<?= Yii::t("app/deviser", "Apply to same size") ?>
+										</span>
+									</div>
+								</td>
+
+								<td class="text-right pricestock-cell">
 									<input class="text-center" type="number" ng-model="product.price_stock[$index].price" />
-									<span ng-cloak class="funiv fc-6d fs0-643 pointer" ng-click="apply_to_all('price', product.price_stock[$index].price)" ng-if="$first">
-										<?= Yii::t("app/deviser", "Apply to all") ?>
-									</span>
+								</td>
+								<td>
+									<div class=" flex flex-column">
+										<span ng-cloak class="funiv fc-6d fs0-643 pointer" ng-click="apply_to_all('price', product.price_stock[$index].price)" ng-if="$first">
+											<?= Yii::t("app/deviser", "Apply to all") ?>
+										</span>
+										<span ng-cloak class="funiv fc-6d fs0-643 pointer" ng-click="apply_to_same_size(product.price_stock[$index].options.size, 'price', product.price_stock[$index].price)" ng-if="use_sizecharts === true && ($first || product.price_stock[$index].options.size !== product.price_stock[$index - 1].options.size)">
+											<?= Yii::t("app/deviser", "Apply to same size") ?>
+										</span>
+									</div>
 								</td>
 							</tr>
 
@@ -1002,13 +990,13 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 									<div class="radio">
 										<label class="funiv_bold fs0-857 fc-6d fw-normal">
 											<input type="radio" name="returns" id="returns1" value="<?= Returns::DAYS; ?>" ng-model="product.returns.type">
-											<?= Yii::t("app/deviser", "Money-back guarantee") ?>
+											<?= Yii::t("app/deviser", "Money-back guarantee (days)") ?>
 										</label>
 									</div>
 								</div>
 								<div class="col-xs-10 col-height col-middle">
 									<div ng-hide="product.returns.type == <?= Returns::NONE; ?>" class="input-group spinner">
-										<input type="text" class="form-control" ng-model="product.returns.value">
+										<input type="text" class="form-control" ng-model="product.returns.value" placeholder="0">
 										<div class="input-group-btn-vertical">
 											<button class="btn btn-default btn-xs" type="button" ng-click="product.returns.value = product.returns.value + 1"><span class="glyphicon glyphicon-triangle-top"></span></button>
 											<button class="btn btn-default btn-xs" type="button" ng-click="product.returns.value = product.returns.value - 1"><span class="glyphicon glyphicon-triangle-bottom"></span></button>
@@ -1044,13 +1032,13 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 							<div class="row-same-height">
 								<div class="col-xs-2 col-height col-middle">
 									<label class="warranty-label funiv_bold fs0-857 fc-6d fw-normal">
-										<input type="checkbox" ng-model="product.warranty.type" ng-false-value="<?= Warranty::NONE ?>" ng-true-value="<?= Warranty::DAYS ?>">
-										<?= Yii::t("app/deviser", "Warranty") ?>
+										<input type="checkbox" ng-model="product.warranty.type" ng-false-value="<?= Warranty::NONE ?>" ng-true-value="<?= Warranty::MONTHS ?>">
+										<?= Yii::t("app/deviser", "Warranty (months)") ?>
 									</label>
 								</div>
 								<div class="col-xs-10 col-height col-middle">
 									<div ng-hide="product.warranty.type == <?= Warranty::NONE; ?>" class="input-group spinner">
-										<input type="text" class="form-control" ng-model="product.warranty.value">
+										<input type="text" class="form-control" ng-model="product.warranty.value" placeholder="0">
 										<div class="input-group-btn-vertical">
 											<button class="btn btn-default btn-xs" type="button" ng-click="product.warranty.value = product.warranty.value + 1"><span class="glyphicon glyphicon-triangle-top"></span></button>
 											<button class="btn btn-default btn-xs" type="button" ng-click="product.warranty.value = product.warranty.value - 1"><span class="glyphicon glyphicon-triangle-bottom"></span></button>
