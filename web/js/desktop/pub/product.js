@@ -50,9 +50,72 @@ $(function () {
 });
 
 /*
+ * Control the collapse widget on the right sidebar
+ */
+
+$(function () {
+	$('#accordion').on('show.bs.collapse', function (e) {
+		$(e.target).parent().removeClass("closed");
+		$(e.target).parent().addClass("open");
+	});
+
+	$('#accordion').on('hidden.bs.collapse', function (e) {
+		$(e.target).parent().removeClass("open");
+		$(e.target).parent().addClass("closed");
+	});
+
+	$('#accordion .panel-heading a').on('click',function(e){
+		if($(this).parents('.panel').children('.panel-collapse').hasClass('in')){
+			e.stopPropagation();
+		}
+		e.preventDefault();
+	});
+});
+
+/*
  * Make social share icons work
  */
 
 $(function () {
 	SocialShareKit.init();
 });
+
+todevise.controller('productCtrl', ['$scope', '$cacheFactory', function ($scope, $cacheFactory) {
+
+	$scope.lang = _lang;
+	$scope.product = _product;
+	$scope.deviser = _deviser;
+	$scope.tags = _tags;
+
+	$scope.c_tags = $cacheFactory("tags");
+
+	/*
+	 ██████  ███████ ████████     ████████  █████   ██████
+	██       ██         ██           ██    ██   ██ ██
+	██   ███ █████      ██           ██    ███████ ██   ███
+	██    ██ ██         ██           ██    ██   ██ ██    ██
+	 ██████  ███████    ██           ██    ██   ██  ██████
+	*/
+	$scope.getTag = function(tag_id) {
+		var res = $scope.c_tags.get(tag_id);
+		if(res !== undefined) return res;
+
+		angular.forEach(_tags, function(tag) {
+			$scope.c_tags.put(tag.short_id, tag);
+		});
+
+		return $scope.c_tags.get(tag_id);
+	};
+
+	$scope.getTagOption = function(tag, value) {
+		var _match = null;
+		angular.forEach(tag.options, function(option) {
+			if(option.value === value) _match = option;
+		});
+		return _match;
+	};
+
+	$scope.init = function () {
+		console.log("init");
+	};
+}]);
