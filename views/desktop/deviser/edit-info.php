@@ -90,7 +90,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 		<div class="row no-gutter">
 			<div class="col-xs-12 flex flex-justify-center">
-				<input type="text" placeholder="<?= Yii::t("app/deviser", "City"); ?>" class="input-city funiv_bold fs0-857 fs-upper fc-6d">
+				<input type="text" placeholder="<?= Yii::t("app/deviser", "City"); ?>" class="input-city funiv_bold fs0-857 fs-upper fc-6d" ng-model="deviser.personal_info.city">
 			</div>
 		</div>
 
