@@ -35,6 +35,7 @@ This is how a single person looks like:
 		name: '', // String
 		surnames: ['', '', ''...], // Array of strings
 		bday: , ISODate('1969-12-31'), // MongoDB Date
+		city: '', // Free text
 		country: 'EN', // Country code
 		biography: '' // This exists if the person is a deviser
 	},
