@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use Yii;
+use app\models\Tag;
 use yii\helpers\Url;
 use app\models\Person;
 use yii\web\Controller;
@@ -142,9 +143,19 @@ class PublicController extends CController {
 			"short_id" => $product->deviser_id
 		]);
 
+		$tags = Tag::find()
+		->where([
+			"short_id" => [
+				'$in' => array_map(function ($v) { return '' . $v; }, array_keys($product['options']))
+			]
+		])
+		->asArray()
+		->all();
+
 		return $this->render("product", [
 			'product' => $product,
 			'deviser' => $deviser,
+			'tags' => $tags,
 			'category_id' => $category_id,
 			'product_id' => $product_id,
 			'slug' => $slug
