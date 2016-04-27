@@ -1,9 +1,13 @@
 <?php
 use yii\web\View;
+use app\models\Tag;
 use yii\helpers\Url;
 use app\models\Lang;
 use yii\widgets\Pjax;
+use yii\helpers\Json;
 use app\helpers\Utils;
+use app\models\Returns;
+use app\models\Warranty;
 use yii\widgets\ListView;
 use app\assets\desktop\pub\ProductAsset;
 
@@ -19,7 +23,11 @@ ProductAsset::register($this);
 $this->title = 'Todevise / Product';
 ?>
 
-<div class="row no-gutter product relative flex flex-column">
+<div class="row no-gutter product relative flex flex-column" ng-controller="productCtrl" ng-init="init()">
+
+	<?php $this->registerJs("var _tags = " . Json::encode($tags) . ";", View::POS_END); ?>
+	<?php $this->registerJs("var _deviser = " . Json::encode($deviser) . ";", View::POS_END); ?>
+	<?php $this->registerJs("var _product = " . Json::encode($product) . ";", View::POS_END); ?>
 
 	<?php foreach ($product['media']['photos'] as $photo) {
 		if (isset($photo['main_product_photo']) && $photo['main_product_photo'] === true) {
@@ -97,18 +105,90 @@ $this->title = 'Todevise / Product';
 						</span>
 					</div>
 
-					<div class="flex flex-column flex-prop-2-1 description_wrapper lwhite">
-						<div class="description_title funiv_bold fs0-857 fc-6d fs-upper"><?= Yii::t('app/public', 'Description') ?></div>
-						<span class="description fpf fs0-929 fc-64"><?= Utils::l($product['description']) ?></span>
-					</div>
+					<div class="panel-group flex flex-column flex-prop-2-1 no-margin" id="accordion" role="tablist" aria-multiselectable="true">
 
-					<div class="flex flex-column flex-prop-1-0 characteristics_wrapper lwhite">
-						<div class="characteristics_title funiv_bold fs0-857 fc-6d fs-upper"><?= Yii::t('app/public', 'Characteristics') ?></div>
-					</div>
+						<div class="panel panel-default panel-description open flex flex-column">
+							<div class="panel-heading flex flex-prop-0-0" role="tab" id="headingOne">
+								<div class="panel-title description_title funiv_bold fs0-857 fc-6d fs-upper">
+									<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+										<?= Yii::t('app/public', 'Description') ?>
+									</a>
+								</div>
+							</div>
+							<div id="collapseOne" class="panel-collapse collapse in description_wrapper overflow" role="tabpanel" aria-labelledby="headingOne">
+								<span class="panel-body description no-padding block fpf fs0-929 fc-64"><?= Utils::l($product['description']) ?></span>
+							</div>
+						</div>
 
-					<div class="flex flex-column flex-prop-1-0 policies_wrapper lwhite">
-						<div class="policies_title funiv_bold fs0-857 fc-6d fs-upper"><?= Yii::t('app/public', 'Work policies') ?></div>
-					</div>
+						<div class="panel panel-default panel-characteristics closed flex flex-column">
+							<div class="panel-heading flex flex-prop-0-0" role="tab" id="headingTwo">
+								<div class="panel-title characteristics_title funiv_bold fs0-857 fc-6d fs-upper">
+									<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+										<?= Yii::t('app/public', 'Characteristics') ?>
+									</a>
+								</div>
+							</div>
+							<div id="collapseTwo" class="panel-collapse collapse characteristics_wrapper overflow" role="tabpanel" aria-labelledby="headingTwo">
+								<div class="panel-body block no-padding fpf fs0-929 fc-64">
+									<div class="" ng-cloak ng-repeat="tag in tags">
+										{{ tag.name[lang] }} ({{ tag.short_id }}):
+
+										<span ng-if="tag.type == <?= Tag::FREETEXT ?>">
+											<span ng-repeat="values in product.options[tag.short_id]">
+												<span ng-repeat="value in values">
+													{{ value.value }}{{ value.metric_unit }}
+												</span><span ng-show="!$last">, </span>
+											</span>
+										</span>
+
+										<span ng-if="tag.type == <?= Tag::DROPDOWN ?>">
+											<span ng-repeat="values in product.options[tag.short_id]">
+												<span ng-repeat="value in values">
+													{{ getTagOption($parent.tag, value).text[lang] }}<span ng-show="!$last">, </span>
+												</span>
+											</span>
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="panel panel-default panel-work-policies closed flex flex-column">
+							<div class="panel-heading flex flex-prop-0-0" role="tab" id="headingThree">
+								<div class="panel-title policies_title funiv_bold fs0-857 fc-6d fs-upper">
+									<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+										<?= Yii::t('app/public', 'Work policies') ?>
+									</a>
+								</div>
+							</div>
+							<div id="collapseThree" class="panel-collapse collapse policies_wrapper overflow" role="tabpanel" aria-labelledby="headingThree">
+								<div class="panel-body block no-padding fpf fs0-929 fc-64 flex flex-column">
+									<span>
+										<?php
+										if ($product["returns"]["type"] == Returns::DAYS) {
+											echo Yii::t('app/public', '{days,plural,=0{No returns} =1{Money-back guarantee of # day} other{Money-back guarantee of # days}}.', ['days' => $product["returns"]["value"]]);
+										}
+										?>
+									</span>
+									<span>
+										<?php
+										if ($product["warranty"]["type"] == Warranty::MONTHS) {
+											echo Yii::t('app/public', '{months,plural,=0{# No warranty} =1{# month warranty} other{# months warranty}}.', ['months' => $product["warranty"]["value"]]);
+										}
+										?>
+									</span>
+								</div>
+							</div>
+						</div>
+				</div>
+
+
+
+
+
+
+
+
 
 					<div class="flex flex-justify-end flex-prop-1-0 social_wrapper">
 						<span class="social_title funuv fc-64 fs1"><?= Yii::t('app/public', 'Share on') ?></span>
