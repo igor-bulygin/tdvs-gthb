@@ -16,6 +16,10 @@ a:hover {
 	cursor: pointer;
 }
 
+.block {
+	display: block;
+}
+
 .overflow {
 	overflow: auto;
 }
@@ -124,6 +128,13 @@ a:hover {
 	-webkit-flex: 0 0 auto;
 	-ms-flex: 0 0 auto;
 	flex: 0 0 auto;
+}
+
+.flex-prop-0-1 {
+	-webkit-box-flex: 0 1 auto;
+	-webkit-flex: 0 1 auto;
+		-ms-flex: 0 1 auto;
+			flex: 0 1 auto;
 }
 
 .flex-prop-1-0 {
