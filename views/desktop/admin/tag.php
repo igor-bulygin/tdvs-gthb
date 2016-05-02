@@ -259,23 +259,23 @@ $this->title = 'Todevise / Admin / Tag';
 
 			<br />
 
-			<div class="radio flex flex-column opt_value_type" ng-init="opt_value_or_color = 1">
+			<div class="radio flex flex-column opt_value_type" ng-init="data.options[data.index].is_color = data.options[data.index].is_color || 0">
 				<label class="funiv fs0-786 fc-000 fs-upper">
-					<input type="radio" name="optionsRadios" id="optionsRadios1" ng-model="opt_value_or_color" value="1">
+					<input type="radio" name="optionsRadios" id="optionsRadios1" ng-model="data.options[data.index].is_color" value="0">
 					<label for="optionsRadios1"><span></span><?= Yii::t("app/admin", "This option has a fixed value"); ?></label>
 				</label>
 				<label class="funiv fs0-786  fc-000 fs-upper">
-					<input type="radio" name="optionsRadios" id="optionsRadios2" ng-model="opt_value_or_color" value="2">
+					<input type="radio" name="optionsRadios" id="optionsRadios2" ng-model="data.options[data.index].is_color" value="1">
 					<label for="optionsRadios2"><span></span><?= Yii::t("app/admin", "This option is a color/animal print"); ?></label>
 				</label>
 			</div>
 
-			<div ng-if="opt_value_or_color == 1">
+			<div ng-if="data.options[data.index].is_color == 0">
 				<label class='modal-title funiv fs1 fnormal fc-18'><?= Yii::t("app/admin", "Value"); ?></label>
 				<div class="input-group">
 					<input id="value" required="" ui-validate="'is_duplicated($value)'"
-					       ui-validate-watch="'data.options[data.index].value'" ng-pattern="/^[0-9a-z\-]*$/" type="text" class="form-control funiv fs1" placeholder="<?= Yii::t("app/admin", "Value..."); ?>"
-					       aria-describedby="basic-addon-desc" ng-model="data.options[data.index].value" name="value">
+						ui-validate-watch="'data.options[data.index].value'" ng-pattern="/^[0-9a-z\-]*$/" type="text" class="form-control funiv fs1" placeholder="<?= Yii::t("app/admin", "Value..."); ?>"
+						aria-describedby="basic-addon-desc" ng-model="data.options[data.index].value" name="value">
 				<span class="input-group-addon alert-danger funiv fs0-929" id="basic-addon-value" ng-show="form.$submitted && !form.$valid && !form['value'].$valid">
 					<span ng-show="form['value'].$error.required"><?= Yii::t("app/admin", "Required!"); ?><br /></span>
 					<span ng-show="!form['value'].$error.required && form['value'].$error.validator"><?= Yii::t("app/admin", "Duplicated value!"); ?><br /></span>
@@ -284,7 +284,7 @@ $this->title = 'Todevise / Admin / Tag';
 				</div>
 			</div>
 
-			<div ng-if="opt_value_or_color == 2">
+			<div ng-if="data.options[data.index].is_color == 1">
 				<label class='modal-title funiv fs1 fnormal fc-18'><?= Yii::t("app/admin", "Currently selected color"); ?>  </label>
 				<div class="flex flex-align-center">
 					<div class="color-cell {{ get_color_from_value(data.options[data.index].value).class }} pull-left"></div>

@@ -43,6 +43,7 @@ This is how a single tag looks like:
 	//     },
 	//
 	//     value: '79de2' // 5 alphanumeric chars long ID
+	//     is_color: 0    // 0 == not a color, 1 == color
 	// }
 	//
 	// Now, let's say we have a "Weight" tag (FREETEXT). Each option of that

@@ -26,6 +26,8 @@ class TagOption {
 	const GREY = 12;
 	const BLACK = 13;
 	const ANIMALPRINT = 14;
+	const GOLD = 15;
+	const CREAM = 16;
 
 	const COLORS = [
 		TagOption::DARKRED => ["class" => "dark-red", "text" => "Dark red", "value" => "dark-red"],
@@ -42,7 +44,9 @@ class TagOption {
 		TagOption::WHITE => ["class" => "white", "text" => "White", "value" => "white"],
 		TagOption::GREY => ["class" => "grey", "text" => "Grey", "value" => "grey"],
 		TagOption::BLACK => ["class" => "black", "text" => "Black", "value" => "black"],
-		TagOption::ANIMALPRINT => ["class" => "animal-print", "text" => "Animal print", "value" => "animal-print"]
+		TagOption::ANIMALPRINT => ["class" => "animal-print", "text" => "Animal print", "value" => "animal-print"],
+		TagOption::GOLD => ["class" => "gold", "text" => "Gold", "value" => "gold"],
+		TagOption::CREAM => ["class" => "cream", "text" => "Cream", "value" => "cream"]
 	];
 
 	function __construct() {
@@ -63,6 +67,8 @@ class TagOption {
 		Yii::t("app/admin", "White");
 		Yii::t("app/admin", "Black");
 		Yii::t("app/admin", "Animal print");
+		Yii::t("app/admin", "Gold");
+		Yii::t("app/admin", "Cream");
 	}
 }
 
