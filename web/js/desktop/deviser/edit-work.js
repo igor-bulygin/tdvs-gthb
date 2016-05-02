@@ -21,6 +21,7 @@ todevise.controller('productCtrl', ["$rootScope", "$scope", "$timeout", "$sizech
 	$scope.c_tags = $cacheFactory("tags");
 	$scope.c_categories = $cacheFactory("categories");
 	$scope.c_sizecharts = $cacheFactory("sizecharts");
+	$scope.c_tags_options = $cacheFactory("tags_options");
 	$scope.c_tagsInCategory = $cacheFactory("tagsInCategory");
 	$scope.c_sizechartsInCategory = $cacheFactory("sizechartsInCategory");
 
@@ -163,13 +164,16 @@ todevise.controller('productCtrl', ["$rootScope", "$scope", "$timeout", "$sizech
 	 ██████  ███████    ██           ██    ██   ██  ██████       ██████  ██         ██    ██  ██████  ██   ████
 	*/
 	$scope.getTagOption = function(tag, value) {
-		var _match = null;
+		var res = $scope.c_tags_options.get(tag.short_id + "" + value);
+		if(res !== undefined) return res;
 
 		angular.forEach(tag.options, function(option) {
-			if(option.value === value) _match = option;
+			if(option.value === value) {
+				$scope.c_tags_options.put(tag.short_id + "" + value, option);
+			}
 		});
 
-		return _match;
+		return $scope.c_tags_options.get(tag.short_id + "" + value);
 	};
 
 	/*
@@ -605,6 +609,7 @@ todevise.controller('productCtrl', ["$rootScope", "$scope", "$timeout", "$sizech
 	$scope.build_price_stock_table = function () {
 		/*Data access failsafe*/
 		$scope.original_product.options = $scope.original_product.options || {};
+		$scope.product.sizechart.values = $scope.product.sizechart.values || [];
 		$scope.original_product.sizechart.values = $scope.original_product.sizechart.values || [];
 		/**/
 

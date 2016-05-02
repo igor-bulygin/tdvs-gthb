@@ -931,7 +931,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 								</td>
 
 								<td class="text-right pricestock-cell">
-									<input class="text-center" type="number" ng-model="product.price_stock[$index].price" />
+									<input class="text-center" type="number" step="0.01" ng-model="product.price_stock[$index].price" />
 								</td>
 								<td>
 									<div class=" flex flex-column">
