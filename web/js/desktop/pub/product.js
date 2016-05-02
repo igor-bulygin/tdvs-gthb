@@ -28,7 +28,9 @@ $(function () {
 	});
 
 	function calc_carousel_max_height () {
-		$('.carosel-item').css('max-height', $('.carosel-inner').height() + "px");
+		//var carosel = $('.carosel-inner');
+		//var item = $('.carosel-item');
+		//item.css('max-height', carosel.height() + "px");
 	}
 
 });
@@ -87,7 +89,23 @@ todevise.controller('productCtrl', ['$scope', '$cacheFactory', function ($scope,
 	$scope.deviser = _deviser;
 	$scope.tags = _tags;
 
+	$scope.colors = _colors;
+
+	$scope.colors_lookup = {};
+	angular.forEach(_colors, function(color) {
+		$scope.colors_lookup[color.value] = color;
+	});
+
 	$scope.c_tags = $cacheFactory("tags");
+	$scope.c_tags_options = $cacheFactory("tags_options");
+
+	$scope.selected_options = {};
+	$scope.selected_options_index = {};
+	$scope.selected_options_match = {};
+
+	$scope.dump = function(obj) {
+		return angular.toJson(obj, 4);
+	};
 
 	/*
 	 ██████  ███████ ████████     ████████  █████   ██████
@@ -108,14 +126,48 @@ todevise.controller('productCtrl', ['$scope', '$cacheFactory', function ($scope,
 	};
 
 	$scope.getTagOption = function(tag, value) {
-		var _match = null;
+		var res = $scope.c_tags_options.get(tag.short_id + "" + value);
+		if(res !== undefined) return res;
+
 		angular.forEach(tag.options, function(option) {
-			if(option.value === value) _match = option;
+			if(option.value === value) {
+				$scope.c_tags_options.put(tag.short_id + "" + value, option);
+			}
 		});
-		return _match;
+
+		return $scope.c_tags_options.get(tag.short_id + "" + value);
 	};
 
-	$scope.init = function () {
-		console.log("init");
+	$scope.get_color_from_value = function(value) {
+		if($scope.colors_lookup.hasOwnProperty(value)) {
+			return $scope.colors_lookup[value];
+		} else {
+			return {};
+		}
 	};
+
+	$scope.find_price = function () {
+		for (var i = 0; i < $scope.product.price_stock.length; i++) {
+			var option = $scope.product.price_stock[i];
+			if (angular.equals(option.options, $scope.selected_options)) {
+				$scope.selected_options_match = {
+					weight: option.weight,
+					stock: option.stock,
+					price: option.price
+				}
+			}
+		}
+	}
+
+	$scope.init = function () {
+		/* Preselect the first available option of the product */
+		$scope.selected_options = JSON.parse(JSON.stringify($scope.product.price_stock[0].options));
+		angular.forEach($scope.selected_options, function (tag, tag_id) {
+			$scope.selected_options_index[tag_id] = 0;
+		});
+	};
+
+	$scope.$watch('selected_options', function (_new, _old) {
+		$scope.find_price();
+	}, true);
 }]);

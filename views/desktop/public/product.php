@@ -8,6 +8,7 @@ use yii\helpers\Json;
 use app\helpers\Utils;
 use app\models\Returns;
 use app\models\Warranty;
+use app\models\TagOption;
 use yii\widgets\ListView;
 use app\assets\desktop\pub\ProductAsset;
 
@@ -28,6 +29,7 @@ $this->title = 'Todevise / Product';
 	<?php $this->registerJs("var _tags = " . Json::encode($tags) . ";", View::POS_END); ?>
 	<?php $this->registerJs("var _deviser = " . Json::encode($deviser) . ";", View::POS_END); ?>
 	<?php $this->registerJs("var _product = " . Json::encode($product) . ";", View::POS_END); ?>
+	<?php $this->registerJs("var _colors = " . Json::encode(TagOption::COLORS) . ";", View::POS_HEAD); ?>
 
 	<?php foreach ($product['media']['photos'] as $photo) {
 		if (isset($photo['main_product_photo']) && $photo['main_product_photo'] === true) {
@@ -60,8 +62,8 @@ $this->title = 'Todevise / Product';
 					</div>
 
 					<div class="col-xs-2 max-height stock_price_wrapper flex flex-column flex-justify-center text-right">
-						<span class="stock funiv fs0-786 fc-7aaa4a">6 stock</span>
-						<span class="price funiv_ultra fs1-571 fc-f7284b">4700€</span>
+						<span ng-cloak class="stock funiv fs0-786 fc-7aaa4a">{{ selected_options_match.stock }} <?= Yii::t('app/public', 'stock') ?></span>
+						<span ng-cloak class="price funiv_ultra fs1-571 fc-7ab83a">{{ product.currency }} {{ selected_options_match.price }}</span>
 					</div>
 
 					<div class="col-xs-12 lwhite"></div>
@@ -78,7 +80,7 @@ $this->title = 'Todevise / Product';
 			<div class="col-xs-12 gallery flex flex-prop-1">
 				<div class="carosel flex flex-prop-1">
 					<div class="carosel-control carosel-control-left"></div>
-					<div class="carosel-inner flex-prop-1">
+					<div class="carosel-inner flex flex-prop-1">
 						<?php foreach ($product['media']['photos'] as $photo) { ?>
 							<img class="carosel-item" src="<?= Yii::getAlias('@product_url') ?>/<?= $product['short_id'] ?>/<?= $photo['name'] ?>" />
 						<?php } ?>
@@ -90,7 +92,66 @@ $this->title = 'Todevise / Product';
 			<div class="info_bg absolute"></div>
 			<div class="info absolute">
 				<div class="row no-gutter max-height flex flex-column flex-justify-around">
-					<div class="attributes">
+					<div class="attributes flex flex-column flex-prop-1-0 lwhite">
+
+						<div class="" ng-cloak ng-if="product.sizechart.short_id != undefined">
+							<div class="row no-gutter option-row">
+								<div class="col-xs-1-5">
+									<span class="cdefault funiv_bold fc-6d fs0-857 fs-upper"><?= Yii::t('app/public', 'Size') ?></span>
+								</div>
+								<div class="col-xs-10-5">
+									<span class="option pointer funiv fs0-857 fc-4a bc-4a"
+										ng-class="{'selected': selected_options_index['size'] == $index }" ng-cloak
+										ng-repeat="row in product.sizechart.values"
+										ng-click="selected_options['size'] = row[0] ; selected_options_index['size'] = $index">
+										{{ row[0] }}
+									</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="" ng-cloak ng-repeat="(tag_id, values) in product.options">
+
+							<div class="" ng-cloak ng-init="tag = getTag(tag_id)" >
+
+								<div ng-cloak ng-if="tag.stock_and_price == true">
+
+									<div class="row no-gutter option-row">
+										<div class="col-xs-1-5">
+											<span class="cdefault funiv_bold fc-6d fs0-857 fs-upper">{{ tag.name[lang] }}</span>
+										</div>
+										<div class="col-xs-10-5">
+											<span class="flex" ng-if="tag.type == <?= Tag::FREETEXT ?>">
+												<span class="option pointer funiv fs0-857 fc-4a bc-4a"
+													ng-repeat="values in product.options[tag.short_id]"
+													ng-click="selected_options[tag.short_id] = values ; selected_options_index[tag.short_id] = $index"
+													ng-class="{'selected': selected_options_index[tag.short_id] == $index }">
+													<span ng-repeat="value in values">
+														{{ value.value }}{{ value.metric_unit }}
+													</span>
+												</span>
+											</span>
+
+											<span class="flex" ng-if="tag.type == <?= Tag::DROPDOWN ?>">
+												<span class="option flex-inline pointer funiv fs0-857 fc-4a bc-4a"
+													ng-repeat="values in product.options[tag.short_id]"
+													ng-click="selected_options[tag.short_id] = values ; selected_options_index[tag.short_id] = $index"
+													ng-class="{'selected': selected_options_index[tag.short_id] == $index }">
+													<span ng-repeat="value in values">
+														<div ng-init="option = getTagOption($parent.tag, value)">
+															<span ng-if="option.is_color != 1">{{ option.text[lang] }}</span>
+															<div ng-if="option.is_color == 1" class="color-cell {{ get_color_from_value(option.value).class }} pull-left" title="{{ option.text[lang] }}"></div>
+														</div>
+													</span>
+												</span>
+											</span>
+										</div>
+									</div>
+								</div>
+
+							</div>
+
+						</div>
 
 					</div>
 
@@ -105,7 +166,7 @@ $this->title = 'Todevise / Product';
 						</span>
 					</div>
 
-					<div class="panel-group flex flex-column flex-prop-2-1 no-margin" id="accordion" role="tablist" aria-multiselectable="true">
+					<div class="panel-group flex flex-column no-margin" id="accordion" role="tablist" aria-multiselectable="true">
 
 						<div class="panel panel-default panel-description open flex flex-column">
 							<div class="panel-heading flex flex-prop-0-0" role="tab" id="headingOne">
@@ -130,8 +191,8 @@ $this->title = 'Todevise / Product';
 							</div>
 							<div id="collapseTwo" class="panel-collapse collapse characteristics_wrapper overflow" role="tabpanel" aria-labelledby="headingTwo">
 								<div class="panel-body block no-padding fpf fs0-929 fc-64">
-									<div class="" ng-cloak ng-repeat="tag in tags">
-										{{ tag.name[lang] }} ({{ tag.short_id }}):
+									<div class="" ng-cloak ng-repeat="tag in tags | filter : {stock_and_price: '!true'}">
+										{{ tag.name[lang] }}:
 
 										<span ng-if="tag.type == <?= Tag::FREETEXT ?>">
 											<span ng-repeat="values in product.options[tag.short_id]">

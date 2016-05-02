@@ -13,6 +13,8 @@
 	bottom: -25px;
 	left: -25px;
 	right: -25px;
+	background-position-x: 50%;
+	background-position-y: 50%;
 	-webkit-filter: blur(15px);
 	-moz-filter: blur(15px);
 	-o-filter: blur(15px);
@@ -68,7 +70,8 @@
 .product .carosel-item {
 	max-width: 33.3333%;
 	padding-right: 10px;
-	position: relative;
+	align-self: center;
+	position: relative; /* needed for the animation */
 }
 
 .product .carosel-control {
@@ -109,6 +112,34 @@
 
 }
 
+.product .gallery_wrapper .info .attributes {
+	padding: 15px;
+}
+
+.product .gallery_wrapper .info .attributes .option-row {
+	padding: 5px 0;
+}
+
+.product .gallery_wrapper .info .attributes .option {
+	background-color: #d7d7d7;
+	margin-right: 8px;
+	padding: 2px 4px;
+	border: 1px solid transparent;
+}
+
+.product .gallery_wrapper .info .attributes .option.selected,
+.product .gallery_wrapper .info .attributes .option:hover {
+	border: 1px solid #888;
+}
+
+.color-cell {
+	width: 14px;
+	height: 14px;
+	margin-right: 1px;
+	margin-bottom: 1px;
+	border: 1px solid white;
+}
+
 .product .gallery_wrapper .info .buttons {
 	padding: 10px;
 	max-height: 58px;
@@ -132,6 +163,10 @@
 	background-color: #b8e986;
 	padding: 9px 25px 5px 25px;
 	border-radius: 9px;
+}
+
+.product .gallery_wrapper .info #accordion {
+	flex: 1000 1 auto;
 }
 
 .product .gallery_wrapper .info .panel.panel-default {
