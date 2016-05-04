@@ -160,7 +160,7 @@ todevise.controller("create_newCtrl", function($scope, $uibModalInstance, data) 
 		angular.forEach(data.options, function(option) {
 			if(option.value === value) i++;
 		});
-		return i === 1;
+		return i === 0 || i === 1;
 	};
 
 	$scope.ok = function() {
