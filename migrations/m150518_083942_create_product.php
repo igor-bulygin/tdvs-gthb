@@ -20,7 +20,11 @@ class m150518_083942_create_product extends \yii\mongodb\Migration {
 		]);
 		$this->createIndex('product', 'deviser_id');
 		$this->createIndex('product', 'categories');
+		$this->createIndex('product', 'collections');
 		$this->createIndex('product', 'enabled');
+		$this->createIndex('product', 'options');
+		$this->createIndex('product', 'media.photos');
+
 
 		$this->insert('product', [
 			"short_id" => "10000000",
