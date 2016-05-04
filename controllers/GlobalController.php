@@ -21,6 +21,16 @@ class GlobalController extends CController {
 		];
 	}
 
+	public function actionForgotPassword () {
+		echo "Oops...";
+		return;
+	}
+
+	public function actionLogout () {
+		Yii::$app->user->logout();
+		return $this->goBack();
+	}
+
 	public function actionSetFlash($key, $message) {
 		Yii::$app->session->setFlash($key, $message);
 		return true;
