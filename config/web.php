@@ -166,7 +166,8 @@ $config = [
 
 		'user' => [
 			'identityClass' => 'app\models\Person',
-			'enableAutoLogin' => true
+			'enableAutoLogin' => true,
+			'enableSession' => true
 		]
 
 	],
