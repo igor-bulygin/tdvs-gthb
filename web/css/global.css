@@ -363,6 +363,10 @@ a:hover {
 	color: #3d3d3d;
 }
 
+.fc-46 {
+	color: #464646;
+}
+
 .fc-48 {
 	color: #484848;
 }
@@ -393,6 +397,10 @@ a:hover {
 
 .fc-68 {
 	color: #686868;
+}
+
+.fc-69 {
+	color: #696969;
 }
 
 .fc-7aaa4a {
@@ -457,12 +465,24 @@ a:hover {
 
 /**** BG COLORS ****/
 
+.bc-1c1919 {
+	background-color: #1c1919;
+}
+
 .bc-4a {
 	background-color: #4a4a4a;
 }
 
+.bc-c91c39 {
+	background-color: #c91c39;
+}
+
 .bc-d7 {
 	background-color: #d7d7d7;
+}
+
+.bc-e9 {
+	background-color: #e9e9e9;
 }
 
 /* Tag 'Color' backgrounds */
@@ -485,6 +505,10 @@ a:hover {
 
 .yellow {
 	background-color: #f7f028;
+}
+
+.lightgreen {
+	background-color: #90ee90;
 }
 
 .green {
@@ -541,4 +565,8 @@ a:hover {
 
 .cream {
 	background-color: #ffe6bd;
+}
+
+.silver {
+	background-color: #c0c0c0;
 }
