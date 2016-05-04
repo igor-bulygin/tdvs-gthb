@@ -659,16 +659,18 @@ todevise.controller('productCtrl', ["$rootScope", "$scope", "$timeout", "$sizech
 		}
 
 
-		var selected_sizes = $scope.product.sizechart.values.map(function (v) { return v[0]; });
-		var original_selected_sizes = $scope.original_product.sizechart.values.map(function (v) { return v[0]; });
-		if (
-			same === true &&
-			$scope.product.sizechart.short_id === $scope.original_product.sizechart.short_id &&
-			$scope.product.sizechart.country === $scope.original_product.sizechart.country &&
-			angular.equals(selected_sizes, original_selected_sizes)
-		) {
-			$scope.product.price_stock = JSON.parse(JSON.stringify($scope.original_product.price_stock));
-			return;
+		if ($scope.use_sizecharts) {
+			var selected_sizes = $scope.product.sizechart.values.map(function (v) { return v[0]; });
+			var original_selected_sizes = $scope.original_product.sizechart.values.map(function (v) { return v[0]; });
+			if (
+				same === true &&
+				$scope.product.sizechart.short_id === $scope.original_product.sizechart.short_id &&
+				$scope.product.sizechart.country === $scope.original_product.sizechart.country &&
+				angular.equals(selected_sizes, original_selected_sizes)
+			) {
+				$scope.product.price_stock = JSON.parse(JSON.stringify($scope.original_product.price_stock));
+				return;
+			}
 		}
 
 		var price_stock_table_combinations  = $scope.tags_order_for_price_stock_table.map(function (tag_id) {
