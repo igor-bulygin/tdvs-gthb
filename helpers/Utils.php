@@ -82,6 +82,17 @@ class Utils {
 	}
 
 	/**
+	 * Delete a folder recursively.
+	 */
+	public static function rmdir($path) {
+		$files = array_diff(scandir($path), array('.','..'));
+		foreach ($files as $file) {
+			(is_dir("$path/$file")) ? rmdir("$path/$file") : unlink("$path/$file");
+		}
+		return rmdir($path);
+	}
+
+	/**
 	 * Create a file. Returns false if the file already exists or if it failed to create it.
 	 * @param $path
 	 * @return bool
