@@ -52,9 +52,14 @@ $this->title = 'Todevise / Admin / Devisers';
 				'columns' => [
 					[
 						'class' => 'yii\grid\ActionColumn',
-						'template' => "{update} {delete}",
+						'template' => "{products} {create} {delete}",
 						'buttons' => [
-							'update' => function($url, $model, $key) {
+							'products' => function($url, $model, $key) {
+								$url = Url::to(["admin/products", "slug" => $model->slug]);
+								return Html::a('<span class="glyphicon glyphicon-th fc-fff fs1"></span>', $url);
+							},
+
+							'create' => function($url, $model, $key) {
 								$url = Url::to(["deviser/edit-info", "slug" => $model->slug]);
 								return Html::a('<span class="glyphicon glyphicon-user fc-fff fs1"></span><span class="glyphicon glyphicon-log-in fc-fff fs0-857"></span>', $url);
 							},

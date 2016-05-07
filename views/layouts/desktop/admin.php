@@ -354,7 +354,7 @@ use lajax\languagepicker\widgets\LanguagePicker;
 										Yii::$app->user->isGuest ?
 											['label' => 'Login', 'url' => ['/site/login']] :
 											['label' => 'Logout (' . Yii::$app->user->identity->personal_info["name"] . ')',
-												'url' => ['/site/logout'],
+												'url' => ['/global/logout'],
 												'linkOptions' => ['data-method' => 'post']
 											]
 									]

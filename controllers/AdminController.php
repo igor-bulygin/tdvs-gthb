@@ -182,4 +182,24 @@ class AdminController extends CController {
 	public function actionCategories() {
 		return $this->render("categories", []);
 	}
+
+	public function actionProducts ($slug) {
+		$deviser = $this->api->actionDevisers(Json::encode(["slug" => $slug]))->asArray()->one();
+
+		error_log(print_r($deviser, true), 4);
+
+		$products = new ActiveDataProvider([
+			'query' => $this->api->actionProducts(Json::encode(['deviser_id' => $deviser['short_id']])),
+			'pagination' => [
+				'pageSize' => 15,
+			],
+		]);
+
+		$data = [
+			'deviser' => $deviser,
+			'products' => $products
+		];
+
+		return Yii::$app->request->isAjax ? $this->renderPartial("products", $data) : $this->render("products", $data);
+	}
 }
