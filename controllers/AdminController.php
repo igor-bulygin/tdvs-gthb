@@ -8,12 +8,37 @@ use app\helpers\Utils;
 use app\models\Country;
 use app\models\SizeChart;
 use app\models\MetricType;
+use yii\filters\VerbFilter;
+use app\helpers\CAccessRule;
 use app\helpers\CController;
+use yii\filters\AccessControl;
 use yii\data\ActiveDataProvider;
-
 
 class AdminController extends CController {
 	public $defaultAction = "index";
+
+	public function behaviors () {
+		return [
+			'access' => [
+				'class' => AccessControl::className(),
+				'ruleConfig' => [
+					'class' => CAccessRule::className(),
+				],
+				'rules' => [
+					[
+						'allow' => true,
+						'roles' => ['admin'],
+					],
+				],
+			],
+			'verbs' => [
+				'class' => VerbFilter::className(),
+				'actions' => [
+					'logout' => ['post'],
+				],
+			],
+		];
+	}
 
 	public function actionIndex() {
 		/*
