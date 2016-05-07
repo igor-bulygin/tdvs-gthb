@@ -149,7 +149,7 @@ todevise.controller("create_newCtrl", function($scope, $uibModalInstance, data) 
 		});
 	};
 
-	$scope.cancel =  function() {
+	$scope.cancel = function() {
 		$uibModalInstance.dismiss();
 	};
 });

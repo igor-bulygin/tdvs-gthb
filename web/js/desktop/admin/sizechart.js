@@ -156,7 +156,7 @@ todevise.controller("create_new_columnCtrl", function($scope, $uibModalInstance,
 		});
 	};
 
-	$scope.cancel =  function() {
+	$scope.cancel = function() {
 		$uibModalInstance.dismiss();
 	};
 });
