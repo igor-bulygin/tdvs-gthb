@@ -1,0 +1,18 @@
+.my_account_component .form-group {
+	margin-bottom: 0;
+}
+
+.my_account_component .form-group input {
+	border: 1px solid #e9e9e9;
+	box-shadow: none;
+}
+
+.my_account_component .remember_me_label {
+	position: absolute;
+	right: 18px;
+	top: 4px;
+}
+
+.my_account_component .forgot_password_label {
+	padding-bottom: 5px;
+}

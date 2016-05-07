@@ -19,7 +19,6 @@
 	list-style: none;
 }
 
-
 .item-menutop {
 	height: 100%;
 }
@@ -75,6 +74,11 @@
 	height: 100%;
 }
 
+.my_account:hover {
+	background-color: white;
+	color: #c91c39;
+}
+
 .my_account > .glyphicon {
 	top: 0px;
 	margin-right: 7px;
@@ -83,4 +87,35 @@
 .my_account > .access {
 	padding-top: 2px;
 	letter-spacing: 0.3px;
+}
+
+.my_account_box {
+	display: none;
+	top: 100%;
+	right: 0;
+	background-color: white;
+	min-width: 290px;
+	padding: 15px;
+	white-space: nowrap;
+}
+
+.my_account:hover .my_account_box {
+	display: block;
+}
+
+.my_account .my_account_box .btn {
+	padding: 9px 0 5px 0;
+}
+
+.my_account .my_account_box .profile_wrapper {
+	border-bottom: solid 1px #f0f0f0;
+}
+
+.my_account .my_account_box .forgot_password_label:hover,
+.my_account .my_account_box .view_profile_label:hover,
+.my_account .my_account_box .orders_label:hover,
+.my_account .my_account_box .settings_label:hover,
+.my_account .my_account_box .logout_label:hover {
+	color: #c91c39;
+	text-decoration: underline;
 }

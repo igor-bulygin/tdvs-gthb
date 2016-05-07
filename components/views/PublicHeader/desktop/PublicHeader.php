@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Html;
+use app\components\PublicMyAccount;
 use app\components\assets\publicHeaderAsset;
 
 publicHeaderAsset::register($this);
@@ -44,9 +45,16 @@ publicHeaderAsset::register($this);
 					</div>
 				</li>
 				<li class="item-menutop fs-upper funiv_bold fc-fff pointer">
-					<div class="my_account black flex flex-justify-center flex-align-center">
+					<div class="my_account black flex flex-justify-center flex-align-center relative">
 						<span class="glyphicon glyphicon-user fs1-214"></span>
-						<span class="access "><?= Yii::t("app/public", "My todevise") ?></span>
+						<div class="access"><?= Yii::t("app/public", "My todevise") ?>
+
+						</div>
+
+						<div class="my_account_box absolute cdefault fs-initial">
+							<?= PublicMyAccount::widget() ?>
+						</div>
+
 					</div>
 				</li>
 			</ul>
