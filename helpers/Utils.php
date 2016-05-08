@@ -346,4 +346,19 @@ class Utils {
 		}
 		return $underscoreArray;
 	}
+
+	/**
+	 * Takes a url-encoded JSON string and converts it to a PHP object (JSON representation).
+	 * If the input string is null or something goes wrong, an empty object (array) will be returned.
+	 */
+	public static function stringToFilter ($string) {
+		if ($string === null) return [];
+
+		$string = urldecode($string) ?: null;
+		if ($string === null) {
+			return [];
+		} else {
+			return Json::decode($string);
+		}
+	}
 }
