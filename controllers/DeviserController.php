@@ -21,25 +21,6 @@ class DeviserController extends CController {
 		return $this->render("index");
 	}
 
-	public function actionList($slug) {
-		$products = $this->api->actionProducts()->asArray()->all();
-
-		error_log(count($products), 4);
-
-		foreach($products as $product) {
-			//echo print_r($product, true);
-			try {
-				$name = $product["name"]["en-US"];
-			} catch (\Exception $e) {
-				$name = "";
-			}
-
-			$short_id = $product["short_id"];
-			echo "<a href='http://dev2.todevise.com/foo-bar/edit-work/$short_id/'>$name ($short_id)</a>";
-			echo "<br /><br />";
-		}
-	}
-
 	public function actionEditInfo($slug) {
 		$countries = $this->api->actionCountries()->asArray()->all();
 		$deviser = $this->api->actionDevisers(Json::encode(["slug" => $slug]))->asArray()->one();
