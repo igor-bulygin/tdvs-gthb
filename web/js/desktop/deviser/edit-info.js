@@ -1,15 +1,10 @@
 var todevise = angular.module('todevise', ['ngAnimate', 'ui.bootstrap', 'angular-multi-select', 'angular-img-dl', 'global-deviser', 'global-desktop', 'api', "ngFileUpload", "ngImgCrop"]);
 var global_deviser = angular.module('global-deviser');
 
-todevise.controller('deviserCtrl', ["$scope", "$timeout", "$deviser", "$deviser_util", "$category_util", "toastr", "$uibModal", "Upload", "$http", "$product", "$product_util", function($scope, $timeout, $deviser, $deviser_util, $category_util, toastr, $uibModal, Upload, $http, $product, $product_util) {
-	$scope.lang = _lang;
+todevise.controller('deviserCtrl', ["$scope", "$timeout", "$deviser", "$deviser_util", "toastr", "$uibModal", "Upload", "$http", "$product", "$product_util", function($scope, $timeout, $deviser, $deviser_util, toastr, $uibModal, Upload, $http, $product, $product_util) {
 	$scope.deviser = _deviser;
 	$scope.headerphoto = null;
 	$scope.profilephoto = null;
-
-	//Sort by path length
-	_categories = $category_util.sort(_categories);
-	$scope.categories = $category_util.create_tree(_categories);
 
 	$scope.$watch("headerphoto", function(n, o) {
 		if (n === null && o === null) return;

@@ -24,13 +24,27 @@ class DeviserController extends CController {
 	}
 
 	public function actionEditInfo($slug) {
-		$countries = Country::find()->asArray()->all();
-		$deviser = Person::find()->where(["slug" => $slug, "type" => ['$in' => [Person::DEVISER]]])->asArray()->one();
+		$countries = Country::find()
+			->asArray()
+			->all();
+		Utils::l_collection($countries, "country_name");
+
+		$deviser = Person::find()
+			->where(["slug" => $slug, "type" => ['$in' => [Person::DEVISER]]])
+			->asArray()
+			->one();
+
+		$categories = Category::find()
+			->where(["path" => "/"])
+			->orderBy(["name.$this->lang"=> -1])
+			->asArray()
+			->all();
+		Utils::l_collection($categories, "name");
 
 		return $this->render("edit-info", [
 			"deviser" => $deviser,
 			"slug" => $slug,
-			'categories' => Category::find()->asArray()->all(),
+			'categories' => $categories,
 			"countries" => $countries
 		]);
 	}

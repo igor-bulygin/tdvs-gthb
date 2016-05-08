@@ -1,6 +1,5 @@
 <?php
 use yii\web\View;
-use app\models\Lang;
 use yii\helpers\Url;
 use yii\helpers\Json;
 use app\helpers\Utils;
@@ -28,7 +27,6 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 ?>
 
 <?php $this->registerJs("var _deviser = " . Json::encode($deviser) . ";", View::POS_HEAD); ?>
-<?php $this->registerJs("var _categories = " . Json::encode($categories) . ";", View::POS_HEAD); ?>
 <?php $this->registerJs("var _upload_header_photo_url = '" . Url::to(["deviser/upload-header-photo", "slug" => $deviser["slug"]]) . "';", View::POS_HEAD); ?>
 <?php $this->registerJs("var _upload_profile_photo_url = '" . Url::to(["deviser/upload-profile-photo", "slug" => $deviser["slug"]]) . "';", View::POS_HEAD); ?>
 
@@ -108,13 +106,14 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 					checked-property="checked"
 
-					dropdown-label="<[ '<( country_name[&quot;{{ lang }}&quot;] )>' | outputModelIterator : this : ', ' : '<?= Yii::t('app/public', 'Select country') ?>' ]>"
-					leaf-label="<[ country_name['{{ lang }}'] ]>"
+					dropdown-label="<[ '<( country_name )>' | outputModelIterator : this : ', ' : '<?= Yii::t('app/public', 'Select country') ?>' ]>"
+					leaf-label="<[ country_name ]>"
 
 					max-checked-leafs="1"
 
 					preselect="country_code, {{ deviser.personal_info.country }}"
 					hide-helpers="check_all, check_none, reset"
+					search-field="country_name"
 				></div>
 			</div>
 		</div>
@@ -126,18 +125,19 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 				<div
 					angular-multi-select
 					id-property="short_id"
-					input-model="categories"
+					input-model='<?= Json::encode($categories) ?>'
 					output-model="deviser.categories"
 					output-keys='short_id'
 					output-type="values"
 
 					checked-property="check"
 
-					dropdown-label="<[ '<( name[&quot;{{ lang }}&quot;] )>' | outputModelIterator : this : ', ' : '<?= Yii::t('app/public', 'Select category') ?>' ]>"
-					leaf-label="<[ name['{{ lang }}'] ]>"
+					dropdown-label="<[ '<( name )>' | outputModelIterator : this : ', ' : '<?= Yii::t('app/public', 'Select category') ?>' ]>"
+					leaf-label="<[ name ]>"
 
 					preselect="{{ deviser.categories | arrpatch : 'short_id' }}"
 					hide-helpers="check_all, check_none, reset"
+					search-field="name"
 				></div>
 			</div>
 		</div>
