@@ -3,9 +3,13 @@
 namespace app\controllers;
 
 use Yii;
+use app\models\Tag;
 use yii\helpers\Json;
 use app\helpers\Utils;
+use app\models\Person;
 use app\models\Country;
+use app\models\Product;
+use app\models\Category;
 use app\models\SizeChart;
 use app\models\MetricType;
 use yii\filters\VerbFilter;
@@ -53,16 +57,17 @@ class AdminController extends CController {
 	}
 
 	public function actionDevisers($filters = null) {
-		$filters = urldecode($filters) ?: null;
+		$filters = Utils::stringToFilter($filters);
+		$filters["type"]['$in'] = [Person::DEVISER];
 
 		$devisers = new ActiveDataProvider([
-			'query' => $this->api->actionDevisers($filters),
+			'query' => Person::find()->where($filters),
 			'pagination' => [
 				'pageSize' => 15,
 			],
 		]);
 
-		$countries = $this->api->actionCountries()->asArray()->all();
+		$countries = Country::find()->asArray()->all();
 		$countries_lookup = [];
 		foreach($countries as $country) {
 			$countries_lookup[$country["country_code"]] = Utils::getValue($country["country_name"], $this->lang, $this->lang_en);
@@ -78,17 +83,17 @@ class AdminController extends CController {
 	}
 
 	public function actionTags($filters = null) {
-		$filters = urldecode($filters) ?: null;
+		$filters = Utils::stringToFilter($filters);
 
 		$tags = new ActiveDataProvider([
-			'query' => $this->api->actionTags($filters),
+			'query' => Tag::find()->where($filters),
 			'pagination' => [
 				'pageSize' => 15,
 			],
 		]);
 
 		$data = [
-			'categories' => $this->api->actionCategories()->asArray()->all(),
+			'categories' => Category::find()->asArray()->all(),
 			'tags' => $tags
 		];
 
@@ -97,8 +102,8 @@ class AdminController extends CController {
 
 	public function actionTag($tag_id) {
 		return $this->render("tag", [
-			"tag" => $this->api->actionTags(Json::encode(["short_id" => $tag_id]))->asArray()->one(),
-			"categories" => $this->api->actionCategories()->asArray()->all(),
+			"tag" => Tag::find()->where(["short_id" => $tag_id])->asArray()->one(),
+			"categories" => Category::find()->asArray()->all(),
 			"mus" => [
 				["value" => MetricType::NONE, "text" => Yii::t("app/admin", MetricType::TXT[MetricType::NONE]), "checked" => true],
 				["value" => MetricType::SIZE, "text" => Yii::t("app/admin", MetricType::TXT[MetricType::SIZE])],
@@ -108,29 +113,27 @@ class AdminController extends CController {
 	}
 
 	public function actionSizeCharts($filters = null) {
-		$filters = urldecode($filters) ?: null;
-		$filters = $filters === null ? [] : Json::decode($filters);
-
+		$filters = Utils::stringToFilter($filters);
 		$filters["type"] = SizeChart::TODEVISE;
 
 		$sizecharts = new ActiveDataProvider([
-			'query' => $this->api->actionSizeCharts(Json::encode($filters)),
+			'query' => SizeChart::find()->where($filters),
 			'pagination' => [
 				'pageSize' => 15,
 			],
 		]);
 
 		$data = [
-			'categories' => $this->api->actionCategories()->asArray()->all(),
+			'categories' => Category::find()->asArray()->all(),
 			'sizecharts' => $sizecharts,
-			'sizechart_template' => $this->api->actionSizeCharts("", Json::encode(["_id" => 0, "short_id", "name"]))->asArray()->all()
+			'sizechart_template' => SizeChart::find()->select(["_id" => 0, "short_id", "name"])->asArray()->all()
 		];
 
 		return Yii::$app->request->isAjax ? $this->renderPartial("size-charts", $data) : $this->render("size-charts", $data);
 	}
 
 	public function actionSizeChart($size_chart_id) {
-		$countries = $this->api->actionCountries()->asArray()->all();
+		$countries = Country::find()->asArray()->all();
 		$countries_lookup = [];
 		$continents = [];
 
@@ -149,8 +152,8 @@ class AdminController extends CController {
 		}
 
 		return $this->render("size-chart", [
-			"sizechart" => $this->api->actionSizeCharts(Json::encode(["short_id" => $size_chart_id]))->asArray()->one(),
-			"categories" => $this->api->actionCategories()->asArray()->all(),
+			"sizechart" => SizeChart::find()->where(["short_id" => $size_chart_id])->asArray()->one(),
+			"categories" => Category::find()->asArray()->all(),
 			"countries" => [
 				[
 					"country_name" => [
@@ -184,12 +187,10 @@ class AdminController extends CController {
 	}
 
 	public function actionProducts ($slug) {
-		$deviser = $this->api->actionDevisers(Json::encode(["slug" => $slug]))->asArray()->one();
-
-		error_log(print_r($deviser, true), 4);
+		$deviser = Person::find()->where(["slug" => $slug, "type" => ['$in' => [Person::DEVISER]]])->asArray()->one();
 
 		$products = new ActiveDataProvider([
-			'query' => $this->api->actionProducts(Json::encode(['deviser_id' => $deviser['short_id']])),
+			'query' => Product::find()->where(['deviser_id' => $deviser['short_id']]),
 			'pagination' => [
 				'pageSize' => 15,
 			],

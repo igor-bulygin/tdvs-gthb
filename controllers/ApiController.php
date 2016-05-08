@@ -24,13 +24,6 @@ class IsAjaxFilter extends ActionFilter {
 }
 
 class ApiController extends CController {
-	private $intern;
-
-	public function __construct($id, $module, $config = [], $intern = false) {
-		$this->intern = $intern;
-		parent::__construct($id, $module, $config = []);
-	}
-
 	public function behaviors() {
 		return [
 			'format' => [
@@ -87,9 +80,7 @@ class ApiController extends CController {
 
 			$res = empty($filters) ? Tag::find() : Tag::find()->where($filters);
 
-			if($this->intern === false) {
-				$res = $res->asArray()->all();
-			}
+			$res = $res->asArray()->all();
 		} else if ($request->isPost) {
 			$something = $this->getJsonFromRequest("something");
 			unset($something["_id"]);
@@ -113,16 +104,14 @@ class ApiController extends CController {
 			$filters = json_decode($filters, true) ?: [];
 			$fields = json_decode($fields, true) ?: [];
 
-			if (!empty($filters) && $this->intern === false) {
+			if (!empty($filters)) {
 				$filters = Utils::removeAllExcept($filters, []);
 				//TODO: If not admin, force some fields (enabled only, visible by public only, etc...)
 			}
 
 			$res = empty($filters) ? Country::find()->select($fields) : Country::find()->select($fields)->where($filters);
 
-			if($this->intern === false) {
-				$res = $res->asArray()->all();
-			}
+			$res = $res->asArray()->all();
 		} else if ($request->isPost) {
 			$_country = $this->getJsonFromRequest("country");
 			unset($_country["_id"]);
@@ -155,7 +144,7 @@ class ApiController extends CController {
 		if ($request->isGet) {
 			$filters = json_decode($filters, true) ?: [];
 
-			if (!empty($filters) && $this->intern === false) {
+			if (!empty($filters)) {
 				$filters = Utils::removeAllExcept($filters, ['short_id']);
 				//TODO: If not admin, force some fields (enabled only, visible by public only, etc...)
 			}
@@ -163,9 +152,7 @@ class ApiController extends CController {
 
 			$res = empty($filters) ? Person::find() : Person::find()->where($filters);
 
-			if($this->intern === false) {
-				$res = $res->asArray()->all();
-			}
+			$res = $res->asArray()->all();
 		} else if ($request->isPost) {
 			$_deviser = $this->getJsonFromRequest("person");
 			unset($_deviser["_id"]);
@@ -198,16 +185,14 @@ class ApiController extends CController {
 		if ($request->isGet) {
 			$filters = json_decode($filters, true) ?: [];
 
-			if (!empty($filters) && $this->intern === false) {
+			if (!empty($filters)) {
 				$filters = Utils::removeAllExcept($filters, ["short_id"]);
 				//TODO: If not admin, force some fields (enabled only, visible by public only, etc...)
 			}
 
 			$res = empty($filters) ? Product::find() : Product::find()->where($filters);
 
-			if($this->intern === false) {
-				$res = $res->asArray()->all();
-			}
+			$res = $res->asArray()->all();
 		} else if ($request->isPost) {
 			$_product = $this->getJsonFromRequest("product");
 			unset($_product["_id"]);
@@ -244,7 +229,7 @@ class ApiController extends CController {
 			$filters = json_decode($filters, true) ?: [];
 			$fields = json_decode($fields, true) ?: [];
 
-			if (!empty($filters) && $this->intern === false) {
+			if (!empty($filters)) {
 				$filters = Utils::removeAllExcept($filters, ["short_id", "required", "type", "categories"]);
 
 				//Force only enabled tags
@@ -254,9 +239,7 @@ class ApiController extends CController {
 
 			$res = empty($filters) ? Tag::find()->select($fields) : Tag::find()->select($fields)->where($filters);
 
-			if($this->intern === false) {
-				$res = $res->asArray()->all();
-			}
+			$res = $res->asArray()->all();
 		} else if ($request->isPost) {
 			$_tag = $this->getJsonFromRequest("tag");
 			unset($_tag["_id"]);
@@ -290,7 +273,7 @@ class ApiController extends CController {
 			$filters = json_decode($filters, true) ?: [];
 			$fields = json_decode($fields, true) ?: [];
 
-			if (!empty($filters) && $this->intern === false) {
+			if (!empty($filters)) {
 				$filters = Utils::removeAllExcept($filters, ["short_id", "categories"]);
 				//TODO: If not admin, force some fields (enabled only, visible by public only, etc...)
 				$filters["type"] = SizeChart::TODEVISE;
@@ -298,9 +281,7 @@ class ApiController extends CController {
 
 			$res = empty($filters) ? SizeChart::find()->select($fields) : SizeChart::find()->select($fields)->where($filters);
 
-			if($this->intern === false) {
-				$res = $res->asArray()->all();
-			}
+			$res = $res->asArray()->all();
 		} else if ($request->isPost) {
 			$_sizechart = $this->getJsonFromRequest("sizechart");
 			unset($_sizechart["_id"]);
@@ -334,7 +315,7 @@ class ApiController extends CController {
 			$filters = json_decode($filters, true) ?: [];
 			$fields = json_decode($fields, true) ?: [];
 
-			if (!empty($filters) && $this->intern === false) {
+			if (!empty($filters)) {
 				$filters = Utils::removeAllExcept($filters, ["short_id", "path"]);
 
 				//TODO: If not admin, force only enabled, etc...
@@ -342,9 +323,7 @@ class ApiController extends CController {
 
 			$res = empty($filters) ? Category::find()->select($fields) : Category::find()->select($fields)->where($filters);
 
-			if($this->intern === false) {
-				$res = $res->asArray()->all();
-			}
+			$res = $res->asArray()->all();
 		} else if ($request->isPost) {
 			$node = $this->getJsonFromRequest("category");
 			unset($node["_id"]);

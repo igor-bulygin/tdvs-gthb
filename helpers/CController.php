@@ -6,11 +6,9 @@ use app\models\Lang;
 use yii\helpers\Json;
 use app\helpers\Utils;
 use yii\web\Controller;
-use app\controllers\ApiController;
 
 class CController extends Controller {
 	private $_viewPath = "";
-	public $api;
 	public $lang;
 	public $lang_en;
 
@@ -39,14 +37,6 @@ class CController extends Controller {
 		} else {
 			$this->layout = '/desktop/' . $this->id;
 			$this->_viewPath = '@app/views/desktop/' . $this->id;
-		}
-
-		/**
-		 * Expose the API to all the controllers so we can reuse the API's public
-		 * methods from inside our code.
-		 */
-		if($this->id !== ApiController::className()) {
-			$this->api = new ApiController(ApiController::className(), null, [], true);
 		}
 
 		$this->lang = Yii::$app->language;

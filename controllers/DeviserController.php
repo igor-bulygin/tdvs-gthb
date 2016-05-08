@@ -2,12 +2,14 @@
 namespace app\controllers;
 
 use Yii;
+use app\models\Tag;
 use app\models\Lang;
 use yii\helpers\Json;
 use app\helpers\Utils;
 use app\models\Person;
 use app\models\Country;
 use app\models\Product;
+use app\models\Category;
 use app\models\SizeChart;
 use app\models\MetricType;
 use yii\filters\VerbFilter;
@@ -22,19 +24,19 @@ class DeviserController extends CController {
 	}
 
 	public function actionEditInfo($slug) {
-		$countries = $this->api->actionCountries()->asArray()->all();
-		$deviser = $this->api->actionDevisers(Json::encode(["slug" => $slug]))->asArray()->one();
+		$countries = Country::find()->asArray()->all();
+		$deviser = Person::find()->where(["slug" => $slug, "type" => ['$in' => [Person::DEVISER]]])->asArray()->one();
 
 		return $this->render("edit-info", [
 			"deviser" => $deviser,
 			"slug" => $slug,
-			'categories' => $this->api->actionCategories()->asArray()->all(),
+			'categories' => Category::find()->asArray()->all(),
 			"countries" => $countries
 		]);
 	}
 
 	public function actionEditWork($short_id) {
-		$countries = $this->api->actionCountries("", Json::encode(["_id" => 0, "country_name.$this->lang", "country_name.$this->lang_en", "country_code", "continent"]))->asArray()->all();
+		$countries = Country::find()->select(["_id" => 0, "country_name.$this->lang", "country_name.$this->lang_en", "country_code", "continent"])->asArray()->all();
 		$countries_lookup = [];
 		foreach($countries as $country) {
 			$countries_lookup[$country["country_code"]] = Utils::getValue($country["country_name"], $this->lang, $this->lang_en);
@@ -43,17 +45,17 @@ class DeviserController extends CController {
 			$countries_lookup[$code] = Yii::t("app/admin", $continent);
 		}
 
-		$product = $this->api->actionProducts(Json::encode(["short_id" => $short_id]))->asArray()->all();
-		$deviser = $this->api->actionDevisers(Json::encode(["short_id" => $product[0]["deviser_id"]]))->asArray()->one();
+		$product = Product::find()->where(["short_id" => $short_id])->asArray()->all();
+		$deviser = Person::find()->where(["short_id" => $product[0]["deviser_id"]])->asArray()->one();
 		return $this->render("edit-work", [
 			"deviser" => $deviser,
 			"product" => $product[0],
-			"tags" => $this->api->actionTags("", Json::encode(["_id" => 0, "short_id", "enabled", "n_options", "required", "stock_and_price", "type", "name.$this->lang", "name.$this->lang_en", "description.$this->lang", "description.$this->lang_en", "categories", "options"]))->asArray()->all(),
-			'categories' => $this->api->actionCategories("", Json::encode(["_id" => 0, "short_id", "path", "name.$this->lang", "name.$this->lang_en", "sizecharts", "prints"]))->asArray()->all(),
+			"tags" => Tag::find()->select(["_id" => 0, "short_id", "enabled", "n_options", "required", "stock_and_price", "type", "name.$this->lang", "name.$this->lang_en", "description.$this->lang", "description.$this->lang_en", "categories", "options"])->asArray()->all(),
+			'categories' => Category::find()->select(["_id" => 0, "short_id", "path", "name.$this->lang", "name.$this->lang_en", "sizecharts", "prints"])->asArray()->all(),
 			"countries" => $countries,
 			"countries_lookup" => $countries_lookup,
-			"sizecharts" => $this->api->actionSizeCharts(Json::encode(["type" => SizeChart::TODEVISE]))->asArray()->all(),
-			"deviser_sizecharts" => $this->api->actionSizeCharts(Json::encode(["type" => SizeChart::DEVISER, "deviser_id" => $deviser["short_id"]]))->asArray()->all(),
+			"sizecharts" => SizeChart::find()->select(["type" => SizeChart::TODEVISE])->asArray()->all(),
+			"deviser_sizecharts" => SizeChart::find()->select(["type" => SizeChart::DEVISER, "deviser_id" => $deviser["short_id"]])->asArray()->all(),
 			"mus" => [
 				[
 					"text" => Yii::t("app/admin", MetricType::TXT[MetricType::NONE]),
