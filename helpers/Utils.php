@@ -262,6 +262,17 @@ class Utils {
 	}
 
 	/**
+	 * The equivalent of 'l', but for arrays of data.
+	 * Takes an array of objects and sets '$key' to the
+	 * value returned by 'l'.
+	 */
+	public static function l_collection(&$arr, $key) {
+		foreach ($arr as $index => &$value) {
+			$value[$key] = Utils::l($value[$key]);
+		}
+	}
+
+	/**
 	 * Convert a stdClass object to a multidimensional array.
 	 * @param $d
 	 * @return array
