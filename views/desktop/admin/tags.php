@@ -68,13 +68,13 @@ $this->title = 'Todevise / Admin / Tags';
 				'columns' => [
 					[
 						'value' => function($model){
-							return Utils::getValue($model->name, Yii::$app->language, array_keys(Lang::EN_US)[0]);
+							return Utils::l($model->name);
 						},
 						'label' => Yii::t("app/admin", "Title")
 					],
 					[
 						'value' => function($model){
-							return Utils::getValue($model->description, Yii::$app->language, array_keys(Lang::EN_US)[0]);
+							return Utils::l($model->description);
 						},
 						'label' => Yii::t("app/admin", "Description")
 					],

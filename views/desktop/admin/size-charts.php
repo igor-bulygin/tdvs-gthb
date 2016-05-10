@@ -73,7 +73,7 @@ $this->title = 'Todevise / Admin / Size charts';
 				'columns' => [
 					[
 						'value' => function($model){
-							return Utils::getValue($model->name, Yii::$app->language, array_keys(Lang::EN_US)[0]);
+							return Utils::l($model->name);
 						},
 						'label' => Yii::t("app/admin", "Name")
 					],
