@@ -68,9 +68,11 @@ class AdminController extends CController {
 		]);
 
 		$countries = Country::find()->asArray()->all();
+		Utils::l_collection($countries, "country_name");
+
 		$countries_lookup = [];
 		foreach($countries as $country) {
-			$countries_lookup[$country["country_code"]] = Utils::l($country["country_name"]);
+			$countries_lookup[$country["country_code"]] = $country["country_name"];
 		}
 
 		$data = [

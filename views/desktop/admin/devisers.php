@@ -26,7 +26,6 @@ $this->title = 'Todevise / Admin / Devisers';
 	<div class="col-xs-12 no-horizontal-padding">
 
 		<?php $this->registerJs("var _DEVISER = " . Json::encode(Person::DEVISER) . ";", View::POS_HEAD); ?>
-		<?php $this->registerJs("var _countries = " . Json::encode($countries) . ";", View::POS_HEAD); ?>
 
 		<div class="row no-gutter page-title-row">
 			<div class="row-same-height">
@@ -157,16 +156,17 @@ $this->title = 'Todevise / Admin / Devisers';
 
 			<div
 				angular-multi-select
-				input-model="data.countries"
+				input-model='<?= Json::encode($countries) ?>'
 				output-model="selected_country"
 
 				checked-property="checked"
 
-				dropdown-label="<[ '<(country_name[&quot;{{ data.lang }}&quot;])>' | outputModelIterator : this : ', ' : '<?= Yii::t('app/public', 'Select country') ?>']>"
-				leaf-label="<[ country_name['{{ data.lang }}'] ]>"
+				dropdown-label="<[ '<(country_name)>' | outputModelIterator : this : ', ' : '<?= Yii::t('app/public', 'Select country') ?>']>"
+				leaf-label="<[ country_name ]>"
 
 				max-checked-leafs="1"
 				hide-helpers="check_all, check_none, reset"
+				search-field="country_name"
 			></div>
 
 			<div class="alert alert-danger funiv fs0-929" role="alert" ng-show="form.$submitted && !form.$valid && selected_country.length === 0">
