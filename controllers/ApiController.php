@@ -137,6 +137,50 @@ class ApiController extends CController {
 		return $res;
 	}
 
+	public function actionAdmins($filters = null) {
+		$request = Yii::$app->getRequest();
+		$res = null;
+
+		if ($request->isGet) {
+			$filters = json_decode($filters, true) ?: [];
+
+			if (!empty($filters)) {
+				$filters = Utils::removeAllExcept($filters, ['short_id']);
+				//TODO: If not admin, force some fields (enabled only, visible by public only, etc...)
+			}
+			$filters["type"]['$in'] = [Person::ADMIN];
+
+			$res = empty($filters) ? Person::find() : Person::find()->where($filters);
+
+			$res = $res->asArray()->all();
+		} else if ($request->isPost) {
+			$_admin = $this->getJsonFromRequest("person");
+			unset($_admin["_id"]);
+
+			if ($_admin["short_id"] === "new") {
+				$_admin["short_id"] = (new Person())->genValidID(7);
+			}
+
+			/* @var $admin \app\models\Person */
+			$admin = Person::findOne(["short_id" => $_admin["short_id"]]);
+			$password = $_admin["credentials"]["password"];
+			unset($_admin["credentials"]["password"]);
+			$admin->setAttributes($_admin, false);
+			$admin->setPassword($password);
+			$admin->save();
+
+			$res = $admin;
+		} else if ($request->isDelete) {
+			$admin = $this->getJsonFromRequest("person");
+
+			/* @var $admin \app\models\Person */
+			$admin = Person::findOne(["short_id" => $admin["short_id"]]);
+			$admin->delete();
+		}
+
+		return $res;
+	}
+
 	public function actionDevisers($filters = null) {
 		$request = Yii::$app->getRequest();
 		$res = null;

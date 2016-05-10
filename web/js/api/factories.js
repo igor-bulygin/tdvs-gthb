@@ -33,6 +33,27 @@ api.factory("$tag_util", function() {
 	return utils;
 });
 
+api.factory("$admin_util", function() {
+	var utils = {};
+
+	utils.newAdmin = function(type, name, surnames, email, password) {
+		return {
+			short_id: "new",
+			type: type,
+			personal_info: {
+				name: name,
+				surnames: surnames
+			},
+			credentials: {
+				email: email,
+				password: password
+			}
+		};
+	};
+
+	return utils;
+});
+
 api.factory("$deviser_util", function() {
 	var utils = {};
 

@@ -1,5 +1,12 @@
 var api = angular.module('api');
 
+/*
+███████ ███████ ██████  ██    ██ ██  ██████ ███████ ███████     ██    ██ ████████ ██ ██
+██      ██      ██   ██ ██    ██ ██ ██      ██      ██          ██    ██    ██    ██ ██
+███████ █████   ██████  ██    ██ ██ ██      █████   ███████     ██    ██    ██    ██ ██
+     ██ ██      ██   ██  ██  ██  ██ ██      ██           ██     ██    ██    ██    ██ ██
+███████ ███████ ██   ██   ████   ██  ██████ ███████ ███████      ██████     ██    ██ ███████
+*/
 api.factory("$services_util", function($http, $q) {
 	var api_helpers = {};
 
@@ -43,6 +50,46 @@ api.factory("$services_util", function($http, $q) {
 	return api_helpers;
 });
 
+/*
+ █████  ██████  ███    ███ ██ ███    ██
+██   ██ ██   ██ ████  ████ ██ ████   ██
+███████ ██   ██ ██ ████ ██ ██ ██ ██  ██
+██   ██ ██   ██ ██  ██  ██ ██ ██  ██ ██
+██   ██ ██████  ██      ██ ██ ██   ████
+*/
+api.service("$admin", function($services_util) {
+
+	var api_point = currentHost() + "/api/admins/";
+
+	return ({
+
+		get: function(filters) {
+			var req = $services_util._get(api_point, filters);
+
+			return req.then($services_util._handleSuccess, $services_util._handleError);
+		},
+
+		modify: function(method, admin) {
+			var req = $services_util._modify(api_point, method, {
+				person: admin
+			});
+
+			return req.then($services_util._handleSuccess, $services_util._handleError);
+		},
+
+		delete: function(admin) {
+			return this.modify("DELETE", admin);
+		}
+	});
+});
+
+/*
+██████  ███████ ██    ██ ██ ███████ ███████ ██████
+██   ██ ██      ██    ██ ██ ██      ██      ██   ██
+██   ██ █████   ██    ██ ██ ███████ █████   ██████
+██   ██ ██       ██  ██  ██      ██ ██      ██   ██
+██████  ███████   ████   ██ ███████ ███████ ██   ██
+*/
 api.service("$deviser", function($services_util) {
 
 	var api_point = currentHost() + "/api/devisers/";
@@ -69,6 +116,13 @@ api.service("$deviser", function($services_util) {
 	});
 });
 
+/*
+██████  ██████   ██████  ██████  ██    ██  ██████ ████████
+██   ██ ██   ██ ██    ██ ██   ██ ██    ██ ██         ██
+██████  ██████  ██    ██ ██   ██ ██    ██ ██         ██
+██      ██   ██ ██    ██ ██   ██ ██    ██ ██         ██
+██      ██   ██  ██████  ██████   ██████   ██████    ██
+*/
 api.service("$product", function($services_util) {
 
 	var api_point = currentHost() + "/api/products/";
@@ -95,6 +149,13 @@ api.service("$product", function($services_util) {
 	});
 });
 
+/*
+████████  █████   ██████
+   ██    ██   ██ ██
+   ██    ███████ ██   ███
+   ██    ██   ██ ██    ██
+   ██    ██   ██  ██████
+*/
 api.service("$tag", function($services_util) {
 
 	var api_point = currentHost() + "/api/tags/";
@@ -121,6 +182,13 @@ api.service("$tag", function($services_util) {
 	});
 });
 
+/*
+███████ ██ ███████ ███████      ██████ ██   ██  █████  ██████  ████████
+██      ██    ███  ██          ██      ██   ██ ██   ██ ██   ██    ██
+███████ ██   ███   █████       ██      ███████ ███████ ██████     ██
+     ██ ██  ███    ██          ██      ██   ██ ██   ██ ██   ██    ██
+███████ ██ ███████ ███████      ██████ ██   ██ ██   ██ ██   ██    ██
+*/
 api.service("$sizechart", function($services_util) {
 
 	var api_point = currentHost() + "/api/size-charts/";
@@ -147,6 +215,13 @@ api.service("$sizechart", function($services_util) {
 	});
 });
 
+/*
+ ██████  █████  ████████ ███████  ██████   ██████  ██████  ██    ██
+██      ██   ██    ██    ██      ██       ██    ██ ██   ██  ██  ██
+██      ███████    ██    █████   ██   ███ ██    ██ ██████    ████
+██      ██   ██    ██    ██      ██    ██ ██    ██ ██   ██    ██
+ ██████ ██   ██    ██    ███████  ██████   ██████  ██   ██    ██
+*/
 api.service("$category", function($services_util) {
 
 	var api_point = currentHost() + "/api/categories/";

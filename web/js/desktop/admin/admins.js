@@ -1,6 +1,6 @@
-var todevise = angular.module('todevise', ['ngAnimate', 'ui.bootstrap', 'angular-multi-select', 'global-admin', 'global-desktop', 'api']);
+var todevise = angular.module('todevise', ['ngAnimate', 'ui.bootstrap', 'global-admin', 'global-desktop', 'api']);
 
-todevise.controller('devisersCtrl', ["$scope", "$timeout", "$deviser", "$deviser_util", "toastr", "$uibModal", "$compile", "$http", function($scope, $timeout, $deviser, $deviser_util, toastr, $uibModal, $compile, $http) {
+todevise.controller('adminsCtrl', ["$scope", "$timeout", "$admin", "$admin_util", "toastr", "$uibModal", "$compile", "$http", function($scope, $timeout, $admin, $admin_util, toastr, $uibModal, $compile, $http) {
 
 	$scope.renderPartial = function() {
 		$http.get(aus.syncToURL()).success(function(data, status) {
@@ -10,7 +10,7 @@ todevise.controller('devisersCtrl', ["$scope", "$timeout", "$deviser", "$deviser
 		});
 	};
 
-	$scope.delete = function(deviser_id) {
+	$scope.delete = function(admin_id) {
 		var modalInstance = $uibModal.open({
 			templateUrl: 'template/modal/confirm.html',
 			controller: 'confirmCtrl',
@@ -18,22 +18,22 @@ todevise.controller('devisersCtrl', ["$scope", "$timeout", "$deviser", "$deviser
 				data: function () {
 					return {
 						title: "Are you sure?",
-						text: "You are about to delete a deviser!"
+						text: "You are about to delete an admin!"
 					};
 				}
 			}
 		});
 
 		modalInstance.result.then(function() {
-			$deviser.get({ short_id: deviser_id }).then(function(deviser) {
-				if (deviser.length !== 1) return;
-				deviser = deviser.shift();
+			$admin.get({ short_id: admin_id }).then(function(admin) {
+				if (admin.length !== 1) return;
+				admin = admin.shift();
 
-				$deviser.delete(deviser).then(function(data) {
-					toastr.success("Deviser deleted!");
+				$admin.delete(admin).then(function(data) {
+					toastr.success("Admin deleted!");
 					$scope.renderPartial();
 				}, function(err) {
-					toastr.error("Couldn't delete deviser!", err);
+					toastr.error("Couldn't delete tag!", err);
 				});
 			}, function(err) {
 				toastr.error("Couldn't find deviser!", err);
@@ -55,12 +55,12 @@ todevise.controller('devisersCtrl', ["$scope", "$timeout", "$deviser", "$deviser
 		});
 
 		modalInstance.result.then(function(data) {
-			var deviser = $deviser_util.newDeviser(data.type, data.name, data.surnames, data.email, data.country, data.slug);
-			$deviser.modify("POST", deviser).then(function(deviser) {
-				toastr.success("Deviser created!");
+			var admin = $admin_util.newAdmin(data.type, data.name, data.surnames, data.email, data.password);
+			$admin.modify("POST", admin).then(function(deviser) {
+				toastr.success("Admin created!");
 				$scope.renderPartial();
 			}, function(err) {
-				toastr.error("Couldn't create tag!", err);
+				toastr.error("Couldn't create admin!", err);
 			});
 		}, function () {
 			//Cancel
@@ -73,21 +73,18 @@ todevise.controller('devisersCtrl', ["$scope", "$timeout", "$deviser", "$deviser
 todevise.controller("create_newCtrl", function($scope, $uibModalInstance, data) {
 	$scope.data = data;
 	$scope.surnames = [];
-	$scope.selected_country = {};
 
 	$scope.ok = function() {
 		var _surnames = $scope.surnames.map(function(v){
 			return v.value;
 		});
-		var _country = $scope.selected_country.pop();
 
 		$uibModalInstance.close({
-			"type": [_DEVISER],
+			"type": [_ADMIN],
 			"name": $scope.name,
 			"surnames": _surnames,
 			"email": $scope.email,
-			"country": _country.country_code,
-			"slug": $scope.slug
+			"password": $scope.password
 		});
 	};
 

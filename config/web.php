@@ -152,6 +152,7 @@ $config = [
 				//Links for admin
 				'admin/tag/<tag_id:\w{5}>/'  => 'admin/tag',
 				'admin/size-chart/<size_chart_id:\w{5}>/'  => 'admin/size-chart',
+				'admin/admin/<short_id:\w{7}>/'  => 'admin/admin',
 				'admin/<action:[^/.]*?>/'  => 'admin/<action>',
 
 				//Links for a category listing

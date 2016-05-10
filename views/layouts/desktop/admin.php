@@ -95,10 +95,10 @@ use lajax\languagepicker\widgets\LanguagePicker;
 													'class' => 'item-submenu funiv fs0-929',
 												],
 												'label' => 'Todevise team',
-												'url' => Url::toRoute(['admin/todevise-team']),
+												'url' => Url::toRoute(['admin/admins']),
 												'active' => (
-													Utils::compareURL('admin/todevise-team') ||
-													Utils::compareURL('admin/todevise-team-member')
+													Utils::compareURL('admin/admins') ||
+													Utils::compareURL('admin/admins-member')
 												)
 											],
 										]
