@@ -49,6 +49,11 @@ $this->title = 'Todevise / Admin / Devisers';
 				'options' => [
 					'class' => 'funiv fc-fff fs1-071',
 				],
+				'pager' => [
+					'options' => [
+						'class' => 'pagination flex flex-justify-center'
+					]
+				],
 				'columns' => [
 					[
 						'class' => 'yii\grid\ActionColumn',
@@ -78,7 +83,7 @@ $this->title = 'Todevise / Admin / Devisers';
 						],
 						'contentOptions' => [
 							'class' => 'text-center'
-						],
+						]
 					],
 					[
 						'value' => function($model){

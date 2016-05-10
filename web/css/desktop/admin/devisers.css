@@ -42,3 +42,22 @@
 	color: #d6d6d6;
 	text-transform: uppercase;
 }
+
+#devisers_list .pagination .prev a,
+#devisers_list .pagination .prev span,
+#devisers_list .pagination .next a,
+#devisers_list .pagination .next span {
+	color: white;
+	border: 1px solid transparent;
+	background-color: transparent;
+}
+
+#devisers_list .pagination li:not(.prev):not(.next) a {
+	color: white;
+	border: 1px solid transparent;
+	background-color: transparent;
+}
+
+#devisers_list .pagination li.active a {
+	color: #9013fe !important;
+}
