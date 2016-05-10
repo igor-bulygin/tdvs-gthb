@@ -164,7 +164,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 										<div ng-cloak class="uploading text-center" ng-show="photo.progress">
 											<span class="fc-fff glyphicon glyphicon-upload"></span>
 											<div class="progress">
-												<div class="progress-bar progress-bar-info progress-bar-striped active funiv fs0-786 fc-3d" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+												<div class="progress-bar progress-bar-info progress-bar-striped active funiv fs0-786 fc-3d" role="progressbar" aria-valuenow="{{ photo.progress }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ photo.progress }}%;">
 													<?= Yii::t("app/deviser", "Uploading...") ?> {{ photo.progress }}%
 												</div>
 											</div>
@@ -225,12 +225,12 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 								checked-property="check"
 
 								name="categories"
-								dropdown-label="<[ '<(name[&quot;{{ lang }}&quot;])>' | outputModelIterator : this : ', ' : '<?= Yii::t('app/deviser', 'Select category/ies') ?>']>"
-								node-label="<[ name['{{ lang }}'] ]>"
-								leaf-label="<[ name['{{ lang }}'] ]>"
+								dropdown-label="<[ '<(name)>' | outputModelIterator : this : ', ' : '<?= Yii::t('app/deviser', 'Select category/ies') ?>']>"
+								node-label="<[ name ]>"
+								leaf-label="<[ name ]>"
 
 								preselect="{{ product.categories | arrpatch : 'short_id' }}"
-
+								search-field="name"
 								hide-helpers="check_all, check_none, reset"
 							></div>
 						</div>
@@ -249,7 +249,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 							<div ng-cloak ng-if="tag.type === 0">
 								<span class="fs0-857 funiv_bold fc-6d tag-title-dropdown">
 									<span class="fs0-714 fc-f7284b glyphicon glyphicon-asterisk" ng-if="tag.required === true"></span>
-									{{ ::tag.name[lang] }}
+									{{ ::tag.name }}
 									<span ng-cloak class="fc-f7284b" ng-show="tag.enabled === false"> - <?= Yii::t("app/deviser", "Disabled") ?></span>
 								</span>
 
@@ -270,9 +270,9 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 												checked-property="check"
 												name="ams_tag_value_{{ tag.short_id }}_{{ $index }}"
 
-												dropdown-label="<[ '<(text[&quot;{{ lang }}&quot;])>' | outputModelIterator : this : ', ' : '<?= Yii::t('app/deviser', 'Select option(s)') ?>']>"
-												node-label="<[ text['{{ lang }}'] ]>"
-												leaf-label="<[ text['{{ lang }}'] ]>"
+												dropdown-label="<[ '<(text)>' | outputModelIterator : this : ', ' : '<?= Yii::t('app/deviser', 'Select option(s)') ?>']>"
+												node-label="<[ text ]>"
+												leaf-label="<[ text ]>"
 
 												preselect="{{ values | arrpatch : 'value' }}"
 												max-checked-leafs="{{ tag.n_options }}"
@@ -303,7 +303,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 								<span class="fs0-857 funiv_bold fc-6d tag-title-dropdown">
 									<span class="fs0-714 fc-f7284b glyphicon glyphicon-asterisk" ng-if="tag.required === true"></span>
-									{{ ::tag.name[lang] }}
+									{{ ::tag.name }}
 									<span ng-cloak class="fc-f7284b" ng-show="tag.enabled === false"> - <?= Yii::t("app/deviser", "Disabled") ?></span>
 								</span>
 
@@ -321,7 +321,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 												<!-- For each option in the tag... -->
 												<div ng-repeat="option in tag.options track by $index" class="flex freetext-row">
 													<div class="col-xs-3 fs0-857 funiv_bold fc-6d flex flex-align-center flex-justify-center">
-														{{ option.text[lang] }}
+														{{ option.text }}
 													</div>
 
 													<!-- If the option doesn't have any metric unit, we want to take 100% of the width -->
@@ -331,7 +331,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 														<div ng-cloak ng-if="option.type === 0">
 															<!-- angular-unit-converter convert-from="{{ mus[option.metric_type].sub[0].value }}" convert-to="{{ product.options[tag.short_id][$parent.$parent.$index][$index].metric_unit }}" -->
 															<input ng-model="product.options[tag.short_id][$parent.$parent.$index][$index].value" ng-pattern="/^\-?\d+(\.\d+)?$/"
-																class="form-control" placeholder="{{ option.text[lang] }}" name="tag{{ tag.short_id }}index{{ $parent.$parent.$index }}option{{ $index }}" ng-change="build_price_stock_table()">
+																class="form-control" placeholder="{{ option.text }}" name="tag{{ tag.short_id }}index{{ $parent.$parent.$index }}option{{ $index }}" ng-change="build_price_stock_table()">
 															<div role="alert">
 																<span class="error" ng-show="!formOptions['tag{{ tag.short_id }}index{{ $parent.$parent.$index }}option{{ $index }}'].$valid"><?= Yii::t("app/deviser", "Numbers only") ?></span>
 															</div>
@@ -340,7 +340,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 														<!-- Alphanumeric type -->
 														<div ng-cloak ng-if="option.type === 1">
 															<input ng-model="product.options[tag.short_id][$parent.$parent.$index][$index].value"
-																class="form-control" placeholder="{{ option.text[lang] }}" name="tag{{ tag.short_id }}index{{ $parent.$parent.$index }}option{{ $index }}" ng-change="build_price_stock_table()">
+																class="form-control" placeholder="{{ option.text }}" name="tag{{ tag.short_id }}index{{ $parent.$parent.$index }}option{{ $index }}" ng-change="build_price_stock_table()">
 															<div role="alert">
 																<span class="error" ng-show="!formOptions['tag{{ tag.short_id }}index{{ $parent.$parent.$index }}option{{ $index }}'].$valid"><?= Yii::t("app/deviser", "Invalid input") ?></span>
 															</div>
@@ -637,9 +637,9 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 												name="ams_sizechart"
 
 												max-checked-leafs="1"
-												dropdown-label="<[ '<(name[&quot;{{ lang }}&quot;])>' | outputModelIterator : this : ', ' : '<?= Yii::t('app/deviser', 'Select sizechart') ?>']>"
-												node-label="<[ name['{{ lang }}'] ]>"
-												leaf-label="<[ name['{{ lang }}'] ]>"
+												dropdown-label="<[ '<(name)>' | outputModelIterator : this : ', ' : '<?= Yii::t('app/deviser', 'Select sizechart') ?>']>"
+												node-label="<[ name ]>"
+												leaf-label="<[ name ]>"
 
 												preselect="short_id, {{ product.sizechart.short_id }}"
 
@@ -702,9 +702,9 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 												name="deviser_sizechart"
 
 												max-checked-leafs="1"
-												dropdown-label="<[ '<(name[&quot;{{ lang }}&quot;])>' | outputModelIterator : this : ', ']>"
-												node-label="<[ name['{{ lang }}'] ]>"
-												leaf-label="<[ name['{{ lang }}'] ]>"
+												dropdown-label="<[ '<(name)>' | outputModelIterator : this : ', ']>"
+												node-label="<[ name ]>"
+												leaf-label="<[ name ]>"
 
 												preselect="value, {{ product.sizechart.country }}"
 
@@ -862,11 +862,11 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 							<thead>
 							<tr>
 								<th class="fpf fs0-857 fnormal text-center pricestock-cell" ng-cloak ng-repeat="tag_id in $parent.tags_order_for_price_stock_table track by $index" ng-init="tag = getTag(tag_id)">
-									{{ tag.name[lang] || '<?= Yii::t("app/deviser", "Size") ?>' }}
+									{{ tag.name || '<?= Yii::t("app/deviser", "Size") ?>' }}
 									<span ng-if="tag.type == <?= Tag::DROPDOWN ?>"></span>
 									<span ng-if="tag.type == <?= Tag::FREETEXT ?>">(
 										<span ng-repeat="option in tag.options">
-											{{ option.text[lang] }}<span ng-show="!$last">,</span>
+											{{ option.text }}<span ng-show="!$last">,</span>
 										</span>
 									)</span>
 								</th>
@@ -888,7 +888,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 									<span ng-if="tag.type == <?= Tag::DROPDOWN ?>">
 										<span ng-repeat="value in row.options[tag_id]">
-											{{ getTagOption($parent.tag, value).text[lang] }}
+											{{ getTagOption($parent.tag, value).text }}
 											<span ng-show="!$last">,</span>
 										</span>
 									</span>

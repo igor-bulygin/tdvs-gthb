@@ -50,40 +50,86 @@ class DeviserController extends CController {
 	}
 
 	public function actionEditWork($short_id) {
-		$countries = Country::find()->select(["_id" => 0, "country_name.$this->lang", "country_name.$this->lang_en", "country_code", "continent"])->asArray()->all();
+		$countries = Country::find()
+			->select(["_id" => 0, "country_name.$this->lang", "country_name.$this->lang_en", "country_code", "continent"])
+			->asArray()
+			->all();
+
 		$countries_lookup = [];
 		foreach($countries as $country) {
-			$countries_lookup[$country["country_code"]] = Utils::getValue($country["country_name"], $this->lang, $this->lang_en);
+			$countries_lookup[$country["country_code"]] = Utils::l($country["country_name"]);
 		}
 		foreach(Country::CONTINENTS as $code => $continent) {
 			$countries_lookup[$code] = Yii::t("app/admin", $continent);
 		}
 
-		$product = Product::find()->where(["short_id" => $short_id])->asArray()->all();
-		$deviser = Person::find()->where(["short_id" => $product[0]["deviser_id"]])->asArray()->one();
+		$product = Product::find()
+			->where(["short_id" => $short_id])
+			->asArray()
+			->all();
+
+		$deviser = Person::find()
+			->where(["short_id" => $product[0]["deviser_id"]])
+			->asArray()
+			->one();
+
+		$tags = Tag::find()
+			->select(["_id" => 0, "short_id", "enabled", "n_options", "required", "stock_and_price", "type", "name.$this->lang", "name.$this->lang_en", "description.$this->lang", "description.$this->lang_en", "categories", "options"])
+			->asArray()
+			->all();
+		Utils::l_collection($tags, "name");
+		Utils::l_collection($tags, "description");
+		foreach ($tags as $key => &$value) {
+			Utils::l_collection($value['options'], "text");
+		}
+
+		$categories = Category::find()
+			->select(["_id" => 0, "short_id", "path", "name.$this->lang", "name.$this->lang_en", "sizecharts", "prints"])
+			->asArray()
+			->all();
+		Utils::l_collection($categories, "name");
+
+		$sizechart = SizeChart::find()
+			->select(["type" => SizeChart::TODEVISE])
+			->asArray()
+			->all();
+		Utils::l_collection($sizechart, "name");
+
+		$deviser_sizecharts = SizeChart::find()
+			->where(["type" => SizeChart::DEVISER, "deviser_id" => $deviser["short_id"]])
+			->asArray()
+			->all();
+		Utils::l_collection($deviser_sizecharts, "name");
+
+		$mus = [
+			[
+				"text" => Yii::t("app/admin", MetricType::TXT[MetricType::NONE]),
+				"sub" => []
+			],
+			[
+				"text" => Yii::t("app/admin", MetricType::TXT[MetricType::SIZE]),
+				"sub" => array_map(function($x) {
+					return ["text" => $x, "value" => $x];
+				}, MetricType::UNITS[MetricType::SIZE])
+			],
+			[
+				"text" => Yii::t("app/admin", MetricType::TXT[MetricType::WEIGHT]),
+				"sub" => array_map(function($x) {
+					return ["text" => $x, "value" => $x];
+				}, MetricType::UNITS[MetricType::WEIGHT])
+			]
+		];
+
 		return $this->render("edit-work", [
 			"deviser" => $deviser,
 			"product" => $product[0],
-			"tags" => Tag::find()->select(["_id" => 0, "short_id", "enabled", "n_options", "required", "stock_and_price", "type", "name.$this->lang", "name.$this->lang_en", "description.$this->lang", "description.$this->lang_en", "categories", "options"])->asArray()->all(),
-			'categories' => Category::find()->select(["_id" => 0, "short_id", "path", "name.$this->lang", "name.$this->lang_en", "sizecharts", "prints"])->asArray()->all(),
+			"tags" => $tags,
+			'categories' => $categories,
 			"countries" => $countries,
 			"countries_lookup" => $countries_lookup,
-			"sizecharts" => SizeChart::find()->select(["type" => SizeChart::TODEVISE])->asArray()->all(),
-			"deviser_sizecharts" => SizeChart::find()->select(["type" => SizeChart::DEVISER, "deviser_id" => $deviser["short_id"]])->asArray()->all(),
-			"mus" => [
-				[
-					"text" => Yii::t("app/admin", MetricType::TXT[MetricType::NONE]),
-					"sub" => []
-				],
-				[
-					"text" => Yii::t("app/admin", MetricType::TXT[MetricType::SIZE]),
-					"sub" => array_map(function($x) { return ["text" => $x, "value" => $x]; }, MetricType::UNITS[MetricType::SIZE])
-				],
-				[
-					"text" => Yii::t("app/admin", MetricType::TXT[MetricType::WEIGHT]),
-					"sub" => array_map(function($x) { return ["text" => $x, "value" => $x]; }, MetricType::UNITS[MetricType::WEIGHT])
-				]
-			]
+			"sizecharts" => $sizechart,
+			"deviser_sizecharts" => $deviser_sizecharts,
+			"mus" => $mus
 		]);
 	}
 

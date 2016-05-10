@@ -843,8 +843,6 @@ todevise.controller('productCtrl', ["$rootScope", "$scope", "$timeout", "$sizech
 	*/
 	$scope.save = function() {
 
-		console.log($scope.product);
-
 		var do_save = _.after($scope.product.media.photos.length, _.once(function() {
 			/**
 			 * Make a copy of the actual product and delete the "blob" property, which we
