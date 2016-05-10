@@ -2,6 +2,7 @@
 namespace app\models;
 
 use Yii;
+use app\helpers\Utils;
 use app\helpers\CActiveRecord;
 use yii\web\IdentityInterface;
 use yii\base\NotSupportedException;
@@ -136,6 +137,12 @@ class Product extends CActiveRecord {
 		}
 
 		return parent::beforeSave($insert);
+	}
+
+	public function deletePhotos() {
+		$product_path = Utils::join_paths(Yii::getAlias("@product"), $this->short_id);
+
+		Utils::rmdir($product_path);
 	}
 
 }

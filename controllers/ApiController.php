@@ -212,9 +212,8 @@ class ApiController extends CController {
 
 			/* @var $deviser \app\models\Person */
 			$product = Product::findOne(["short_id" => $product["short_id"]]);
-			$product_path = Utils::join_paths(Yii::getAlias("@product"), $product->short_id);
 
-			Utils::rmdir($product_path);
+			$product->deletePhotos();
 			$product->delete();
 		}
 
