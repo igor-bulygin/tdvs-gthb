@@ -1,19 +1,5 @@
 var todevise = angular.module('todevise', ['ngAnimate', 'ui.bootstrap', 'angular-multi-select', 'global-admin', 'global-desktop', 'api']);
 
-todevise.run(["$http", function($http) {
-	$http.defaults.headers.get = {
-		"X-Requested-With":  "XMLHttpRequest"
-	};
-}]);
-
-todevise.config(['$provide', function($provide) {
-	$provide.decorator('$browser', ['$delegate', function ($delegate) {
-		$delegate.onUrlChange = function() {};
-		$delegate.url = function() { return ""; };
-		return $delegate;
-	}]);
-}]);
-
 todevise.controller('sizeChartsCtrl', ["$rootScope", "$scope", "$timeout", "$sizechart", "$sizechart_util", "$category_util", "toastr", "$uibModal", "$compile", "$http", function($rootScope, $scope, $timeout, $sizechart, $sizechart_util, $category_util, toastr, $uibModal, $compile, $http) {
 
 	$scope.lang = _lang;
@@ -48,18 +34,35 @@ todevise.controller('sizeChartsCtrl', ["$rootScope", "$scope", "$timeout", "$siz
 	});
 
 	$scope.delete = function(size_chart_id) {
-		$sizechart.get({ short_id: size_chart_id }).then(function(sizechart) {
-			if (sizechart.length !== 1) return;
-			sizechart = sizechart.shift();
+		var modalInstance = $uibModal.open({
+			templateUrl: 'template/modal/confirm.html',
+			controller: 'confirmCtrl',
+			resolve: {
+				data: function () {
+					return {
+						title: "Are you sure?",
+						text: "You are about to delete a size chart!"
+					};
+				}
+			}
+		});
 
-			$sizechart.delete(sizechart).then(function(data) {
-				toastr.success("Size chart deleted!");
-				$scope.renderPartial();
+		modalInstance.result.then(function() {
+			$sizechart.get({ short_id: size_chart_id }).then(function(sizechart) {
+				if (sizechart.length !== 1) return;
+				sizechart = sizechart.shift();
+
+				$sizechart.delete(sizechart).then(function(data) {
+					toastr.success("Size chart deleted!");
+					$scope.renderPartial();
+				}, function(err) {
+					toastr.error("Couldn't remove size chart!", err);
+				});
 			}, function(err) {
-				toastr.error("Couldn't remove size chart!", err);
+				toastr.error("Couldn't find size chart!", err);
 			});
-		}, function(err) {
-			toastr.error("Couldn't find size chart!", err);
+		}, function() {
+			//Cancel
 		});
 	};
 

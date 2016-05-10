@@ -35,7 +35,6 @@ todevise.controller('productsCtrl', ["$scope", "$product", "$product_util", "$ui
 		});
 
 		modalInstance.result.then(function() {
-			console.log("Will query for product with id", product_id);
 			$product.get({ short_id: product_id }).then(function(product) {
 				if (product.length !== 1) return;
 				product = product.shift();

@@ -1,19 +1,5 @@
 var todevise = angular.module('todevise', ['ngAnimate', 'ui.bootstrap', 'angular-multi-select', 'global-admin', 'global-desktop', 'api']);
 
-todevise.run(["$http", function($http) {
-	$http.defaults.headers.get = {
-		"X-Requested-With":  "XMLHttpRequest"
-	};
-}]);
-
-todevise.config(['$provide', function($provide) {
-	$provide.decorator('$browser', ['$delegate', function ($delegate) {
-		$delegate.onUrlChange = function() {};
-		$delegate.url = function() { return ""; };
-		return $delegate;
-	}]);
-}]);
-
 todevise.controller('tagsCtrl', ["$rootScope", "$scope", "$timeout", "$tag", "$tag_util", "$category_util", "toastr", "$uibModal", "$compile", "$http", function($rootScope, $scope, $timeout, $tag, $tag_util, $category_util, toastr, $uibModal, $compile, $http) {
 
 	$scope.lang = _lang;
@@ -66,18 +52,35 @@ todevise.controller('tagsCtrl', ["$rootScope", "$scope", "$timeout", "$tag", "$t
 	};
 
 	$scope.delete = function(tag_id) {
-		$tag.get({ short_id: tag_id }).then(function(tag) {
-			if (tag.length !== 1) return;
-			tag = tag.shift();
+		var modalInstance = $uibModal.open({
+			templateUrl: 'template/modal/confirm.html',
+			controller: 'confirmCtrl',
+			resolve: {
+				data: function () {
+					return {
+						title: "Are you sure?",
+						text: "You are about to delete a tag!"
+					};
+				}
+			}
+		});
 
-			$tag.delete(tag).then(function(data) {
-				toastr.success("Tag deleted!");
-				$scope.renderPartial();
+		modalInstance.result.then(function() {
+			$tag.get({ short_id: tag_id }).then(function(tag) {
+				if (tag.length !== 1) return;
+				tag = tag.shift();
+
+				$tag.delete(tag).then(function(data) {
+					toastr.success("Tag deleted!");
+					$scope.renderPartial();
+				}, function(err) {
+					toastr.error("Couldn't delete tag!", err);
+				});
 			}, function(err) {
-				toastr.error("Couldn't delete tag!", err);
+				toastr.error("Couldn't find tag!", err);
 			});
-		}, function(err) {
-			toastr.error("Couldn't find tag!", err);
+		}, function() {
+			//Cancel
 		});
 	};
 

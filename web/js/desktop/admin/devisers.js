@@ -1,23 +1,6 @@
 var todevise = angular.module('todevise', ['ngAnimate', 'ui.bootstrap', 'angular-multi-select', 'global-admin', 'global-desktop', 'api']);
 
-todevise.run(["$http", function($http) {
-	$http.defaults.headers.get = {
-		"X-Requested-With":  "XMLHttpRequest"
-	};
-}]);
-
-todevise.config(['$provide', function($provide) {
-	$provide.decorator('$browser', ['$delegate', function ($delegate) {
-		$delegate.onUrlChange = function() {};
-		$delegate.url = function() { return ""; };
-		return $delegate;
-	}]);
-}]);
-
 todevise.controller('devisersCtrl', ["$scope", "$timeout", "$deviser", "$deviser_util", "toastr", "$uibModal", "$compile", "$http", function($scope, $timeout, $deviser, $deviser_util, toastr, $uibModal, $compile, $http) {
-
-	$scope.lang = _lang;
-	$scope.countries = _countries;
 
 	$scope.renderPartial = function() {
 		$http.get(aus.syncToURL()).success(function(data, status) {
@@ -28,18 +11,36 @@ todevise.controller('devisersCtrl', ["$scope", "$timeout", "$deviser", "$deviser
 	};
 
 	$scope.delete = function(deviser_id) {
-		$deviser.get({ short_id: deviser_id }).then(function(deviser) {
-			if (deviser.length !== 1) return;
-			deviser = deviser.shift();
+		var modalInstance = $uibModal.open({
+			templateUrl: 'template/modal/confirm.html',
+			controller: 'confirmCtrl',
+			resolve: {
+				data: function () {
+					return {
+						title: "Are you sure?",
+						text: "You are about to delete a deviser!"
+					};
+				}
+			}
+		});
 
-			$deviser.delete(deviser).then(function(data) {
-				toastr.success("Deviser deleted!");
-				$scope.renderPartial();
+		modalInstance.result.then(function() {
+			$deviser.get({ short_id: deviser_id }).then(function(deviser) {
+				return;
+				if (deviser.length !== 1) return;
+				deviser = deviser.shift();
+
+				$deviser.delete(deviser).then(function(data) {
+					toastr.success("Deviser deleted!");
+					$scope.renderPartial();
+				}, function(err) {
+					toastr.error("Couldn't delete tag!", err);
+				});
 			}, function(err) {
-				toastr.error("Couldn't delete tag!", err);
+				toastr.error("Couldn't find deviser!", err);
 			});
-		}, function(err) {
-			toastr.error("Couldn't find deviser!", err);
+		}, function() {
+			//Cancel
 		});
 	};
 
@@ -49,10 +50,7 @@ todevise.controller('devisersCtrl', ["$scope", "$timeout", "$deviser", "$deviser
 			controller: 'create_newCtrl',
 			resolve: {
 				data: function () {
-					return {
-						lang: $scope.lang,
-						countries: $scope.countries
-					};
+					return {};
 				}
 			}
 		});
