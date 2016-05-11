@@ -52,6 +52,25 @@ $(function () {
 });
 
 /*
+ * Adjust the min height of the right bar and the main content
+ */
+
+$(function () {
+	var h = 0;
+
+	$('.info').children().each(function () {
+		h += $(this).outerHeight();
+	});
+
+	$('.gallery_wrapper').css('min-height', h + "px");
+
+	var th1 = $('.deviser_wrapper').outerHeight();
+	var th2 = $('.gallery_wrapper').outerHeight();
+	var th3 = $('.tabs-wrapper').outerHeight();
+	$('.product').css('min-height', th1 + th2 + th3 + "px");
+});
+
+/*
  * Control the collapse widget on the right sidebar
  */
 

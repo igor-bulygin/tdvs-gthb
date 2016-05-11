@@ -1,5 +1,5 @@
 .lwhite {
-	border-bottom: 2px solid white;
+	border-bottom: 1px solid white;
 }
 
 .product {
@@ -38,7 +38,7 @@
 
 .product .deviser_wrapper .info_bg,
 .product .gallery_wrapper .info_bg {
-	opacity: 0.9;
+	opacity: 0.95;
 	background-color: #f4f4f4;
 }
 
@@ -57,7 +57,7 @@
 }
 
 .product .carosel {
-
+	width: 100%;
 }
 
 .product .carosel-inner {
@@ -68,10 +68,17 @@
 }
 
 .product .carosel-item {
-	max-width: 33.3333%;
+	flex: 0 0 33.3333%;
 	padding-right: 10px;
 	align-self: center;
 	position: relative; /* needed for the animation */
+	max-height: 100%;
+}
+
+.product .carosel-item img {
+	width: 100%;
+	height: auto;
+	display: block;
 }
 
 .product .carosel-control {
@@ -119,17 +126,24 @@
 .product .gallery_wrapper .info .attributes .option-row {
 	padding: 5px 0;
 }
+.product .gallery_wrapper .info .attributes .option-row > div:last-child {
+	padding-left: 5px;
+}
+
 
 .product .gallery_wrapper .info .attributes .option {
 	background-color: #d7d7d7;
 	margin-right: 8px;
+	margin-bottom: 8px;
 	padding: 2px 4px;
 	border: 1px solid transparent;
 }
 
 .product .gallery_wrapper .info .attributes .option.selected,
 .product .gallery_wrapper .info .attributes .option:hover {
-	border: 1px solid #888;
+	border: 1px solid black;
+	background-color: white;
+	color: #1c1919;
 }
 
 .color-cell {
@@ -147,26 +161,20 @@
 
 .product .gallery_wrapper .info .savebox {
 	border: 1px solid #d7d7d7;
-	padding: 9px 25px 5px 25px;
+	padding: 8px 25px 7px 25px;
 	border-radius: 9px;
 	margin-right: 10px;
 }
 
-.product .gallery_wrapper .info .hexagon {
-	width: 12px;
-	height: 12px;
-	border: 1px solid #ccc;
-	display: inline-block;
-}
-
 .product .gallery_wrapper .info .addcart {
 	background-color: #b8e986;
-	padding: 9px 25px 5px 25px;
+	padding: 9px 25px 7px 25px;
 	border-radius: 9px;
 }
 
 .product .gallery_wrapper .info #accordion {
-	flex: 1000 1 auto;
+	flex: 1000 1 auto; /* 1000 is needed because that way we force max-height in the panels wrapper, avoiding weird height fluctuations of the rest of the elements in the right bar */
+	overflow: hidden;
 }
 
 .product .gallery_wrapper .info .panel.panel-default {
@@ -174,21 +182,23 @@
 	box-shadow: none;
 	background-color: transparent;
 	margin-top: 0px;
-	border-bottom: 2px solid white;
+	border-bottom: 1px solid white;
 }
 
 /**/
 
 .product .gallery_wrapper .info .panel.panel-description.open {
-	flex: 0 1 auto;
+	flex: 1000 1 auto;
+	overflow: hidden;
 }
 
 .product .gallery_wrapper .info .panel.panel-description.closed {
-
+	flex: 1 0 auto;
 }
 
 .product .gallery_wrapper .info .panel.panel-characteristics.open {
-
+	flex: 1000 1 auto;
+	overflow: hidden;
 }
 
 .product .gallery_wrapper .info .panel.panel-characteristics.closed {
@@ -197,6 +207,7 @@
 
 .product .gallery_wrapper .info .panel.panel-work-policies.open {
 	flex: 1000 0 auto;
+	overflow: hidden;
 }
 
 .product .gallery_wrapper .info .panel.panel-work-policies.closed {
@@ -213,6 +224,7 @@
 .product .gallery_wrapper .info .panel .panel-heading {
 	border: none;
 	background-color: transparent;
+	padding: 11px 16px 7px 15px;
 }
 
 .product .gallery_wrapper .info .description_wrapper,
@@ -228,6 +240,17 @@
 
 .product .gallery_wrapper .info .description {
 	white-space: pre-wrap;
+	border: none;
+	line-height: 1.571em;
+}
+
+.product .gallery_wrapper .info .characteristic {
+	line-height: 1.571em;
+}
+
+.product .gallery_wrapper .info .characteristic,
+.product .gallery_wrapper .info .policies {
+	line-height: 1.571em;
 }
 
 .product .gallery_wrapper .info .description::before {
@@ -240,6 +263,30 @@
 
 .product .gallery_wrapper .info .social_title {
 	margin-right: 10px;
+}
+
+.product .gallery_wrapper .info .ssk-grayscale>.ssk-facebook:not(:hover),
+.product .gallery_wrapper .info .ssk-grayscale>.ssk-twitter:not(:hover),
+.product .gallery_wrapper .info .ssk-grayscale>.ssk-google-plus:not(:hover),
+.product .gallery_wrapper .info .ssk-grayscale>.ssk-pinterest:not(:hover) {
+	background-color: #bfbfbf;
+}
+
+.product .panel .panel-title > a {
+	text-decoration: none;
+}
+
+.product .panel .panel-body {
+	border: none !important;
+}
+
+.product .panel .panel-title .glyphicon {
+	position: absolute;
+	right: 0;
+}
+
+.product .panel.closed .panel-title .glyphicon::before {
+	content: "\e259";
 }
 
 .product .tabs-wrapper {

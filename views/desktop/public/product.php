@@ -56,14 +56,14 @@ $this->title = 'Todevise / Product';
 						<div class="avatar img-circle max-height" style="background-image: url('<?= Yii::getAlias('@deviser_url') ?>/<?= $deviser['short_id'] ?>/<?= $deviser['media']['profile'] ?>');"></div>
 					</div>
 
-					<div class="col-xs-8 max-height flex flex-column flex-justify-center">
-						<span class="category funiv fs0-786 fc-9b fs-upper">art</span>
-						<span class="name funiv_ultra fs-upper fs1-286 fc-48"><?= $deviser->personal_info['name'] . " " . implode(" ", $deviser->personal_info['surnames']) ?></span>
+					<div class="col-xs-7 max-height flex flex-column flex-justify-center">
+						<span class="category funiv fs0-857 fc-9b fs-upper">Fashion</span>
+						<span class="name funiv_bold fs1-286 fc-48"><?= $deviser->personal_info['name'] . " " . implode(" ", $deviser->personal_info['surnames']) ?></span>
 					</div>
 
-					<div class="col-xs-2 max-height stock_price_wrapper flex flex-column flex-justify-center text-right">
-						<span ng-cloak class="stock funiv fs0-786 fc-7aaa4a">{{ selected_options_match.stock }} <?= Yii::t('app/public', 'stock') ?></span>
-						<span ng-cloak class="price funiv_ultra fs1-571 fc-7ab83a">{{ product.currency }} {{ selected_options_match.price }}</span>
+					<div class="col-xs-3 max-height stock_price_wrapper flex flex-column flex-justify-center text-right">
+						<span ng-cloak class="stock funiv fs0-857 fc-7aaa4a">{{ selected_options_match.stock }} <?= Yii::t('app/public', 'stock') ?></span>
+						<span ng-cloak class="price funiv_bold fs1-571 fc-7ab83a">{{ product.currency }} {{ selected_options_match.price }}</span>
 					</div>
 
 					<div class="col-xs-12 lwhite"></div>
@@ -75,14 +75,16 @@ $this->title = 'Todevise / Product';
 
 	<div class="col-xs-12 gallery_wrapper flex flex-prop-1">
 
-		<div class="row no-gutter relative flex flex-prop-1">
+		<div class="row no-gutter relative flex flex-prop-1 max-width">
 
 			<div class="col-xs-12 gallery flex flex-prop-1">
 				<div class="carosel flex flex-prop-1">
 					<div class="carosel-control carosel-control-left"></div>
 					<div class="carosel-inner flex flex-prop-1">
 						<?php foreach ($product['media']['photos'] as $photo) { ?>
-							<img class="carosel-item" src="<?= Yii::getAlias('@product_url') ?>/<?= $product['short_id'] ?>/<?= $photo['name'] ?>" />
+							<div class="carosel-item">
+								<img src="<?= Yii::getAlias('@product_url') ?>/<?= $product['short_id'] ?>/<?= $photo['name'] ?>" />
+							</div>
 						<?php } ?>
 					</div>
 					<div class="carosel-control carosel-control-right"></div>
@@ -96,11 +98,11 @@ $this->title = 'Todevise / Product';
 
 						<div class="" ng-cloak ng-if="product.sizechart.short_id != undefined">
 							<div class="row no-gutter option-row">
-								<div class="col-xs-1-5">
-									<span class="cdefault funiv_bold fc-6d fs0-857 fs-upper"><?= Yii::t('app/public', 'Size') ?></span>
+								<div class="col-lg-2 col-xs-3">
+									<span class="cdefault funiv_bold fc-6d fs0-929 fs-upper"><?= Yii::t('app/public', 'Size') ?></span>
 								</div>
-								<div class="col-xs-10-5">
-									<span class="option pointer funiv fs0-857 fc-4a bc-4a"
+								<div class="col-lg-10 col-xs-9">
+									<span class="option pointer flex-inline funiv fs0-857 fc-4a bc-4a"
 										ng-class="{'selected': selected_options_index['size'] == $index }" ng-cloak
 										ng-repeat="row in product.sizechart.values"
 										ng-click="selected_options['size'] = row[0] ; selected_options_index['size'] = $index">
@@ -117,10 +119,10 @@ $this->title = 'Todevise / Product';
 								<div ng-cloak ng-if="tag.stock_and_price == true">
 
 									<div class="row no-gutter option-row">
-										<div class="col-xs-1-5">
-											<span class="cdefault funiv_bold fc-6d fs0-857 fs-upper">{{ tag.name[lang] }}</span>
+										<div class="col-lg-2 col-xs-3">
+											<span class="cdefault funiv_bold fc-6d fs0-929 fs-upper">{{ tag.name[lang] }}</span>
 										</div>
-										<div class="col-xs-10-5">
+										<div class="col-lg-10 col-xs-9">
 											<span class="flex" ng-if="tag.type == <?= Tag::FREETEXT ?>">
 												<span class="option pointer funiv fs0-857 fc-4a bc-4a"
 													ng-repeat="values in product.options[tag.short_id]"
@@ -157,12 +159,12 @@ $this->title = 'Todevise / Product';
 
 					<div class="buttons flex flex-justify-center flex-prop-1-0 flex-prop funiv_ultra fs-upper fc-3d fs1 lwhite">
 						<span class="savebox pointer">
-							<span class="hexagon"></span>
-							<span class=""><?= Yii::t('app/public', 'Save in a box') ?></span>
+							<span class="glyphicon glyphicon-arrow-down"></span>
+							<span class="funiv_bold fs1 fs-upper"><?= Yii::t('app/public', 'Save in a box') ?></span>
 						</span>
 						<span class="addcart pointer">
 							<span class="glyphicon glyphicon-shopping-cart"></span>
-							<span class=""><?= Yii::t('app/public', 'Add to cart') ?></span>
+							<span class="funiv_bold fs1 fs-upper"><?= Yii::t('app/public', 'Add to cart') ?></span>
 						</span>
 					</div>
 
@@ -170,28 +172,30 @@ $this->title = 'Todevise / Product';
 
 						<div class="panel panel-default panel-description open flex flex-column">
 							<div class="panel-heading flex flex-prop-0-0" role="tab" id="headingOne">
-								<div class="panel-title description_title funiv_bold fs0-857 fc-6d fs-upper">
+								<div class="panel-title description_title funiv_bold fs0-929 fc-6d fs-upper relative max-width">
 									<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
 										<?= Yii::t('app/public', 'Description') ?>
 									</a>
+									<span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>
 								</div>
 							</div>
 							<div id="collapseOne" class="panel-collapse collapse in description_wrapper overflow" role="tabpanel" aria-labelledby="headingOne">
-								<span class="panel-body description no-padding block fpf fs0-929 fc-64"><?= Utils::l($product['description']) ?></span>
+								<span class="panel-body description no-padding block fpf fs1 fc-1c1919"><?= Utils::l($product['description']) ?></span>
 							</div>
 						</div>
 
 						<div class="panel panel-default panel-characteristics closed flex flex-column">
 							<div class="panel-heading flex flex-prop-0-0" role="tab" id="headingTwo">
-								<div class="panel-title characteristics_title funiv_bold fs0-857 fc-6d fs-upper">
+								<div class="panel-title characteristics_title funiv_bold fs0-929 fc-6d fs-upper relative max-width">
 									<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
 										<?= Yii::t('app/public', 'Characteristics') ?>
 									</a>
+									<span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>
 								</div>
 							</div>
 							<div id="collapseTwo" class="panel-collapse collapse characteristics_wrapper overflow" role="tabpanel" aria-labelledby="headingTwo">
-								<div class="panel-body block no-padding fpf fs0-929 fc-64">
-									<div class="" ng-cloak ng-repeat="tag in tags | filter : {stock_and_price: '!true'}">
+								<div class="panel-body block no-padding fpf fs1 fc-1c1919">
+									<div class="characteristic" ng-cloak ng-repeat="tag in tags | filter : {stock_and_price: '!true'}">
 										{{ tag.name[lang] }}:
 
 										<span ng-if="tag.type == <?= Tag::FREETEXT ?>">
@@ -216,14 +220,15 @@ $this->title = 'Todevise / Product';
 
 						<div class="panel panel-default panel-work-policies closed flex flex-column">
 							<div class="panel-heading flex flex-prop-0-0" role="tab" id="headingThree">
-								<div class="panel-title policies_title funiv_bold fs0-857 fc-6d fs-upper">
+								<div class="panel-title policies_title funiv_bold fs0-929 fc-6d fs-upper relative max-width">
 									<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
 										<?= Yii::t('app/public', 'Work policies') ?>
 									</a>
+									<span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>
 								</div>
 							</div>
 							<div id="collapseThree" class="panel-collapse collapse policies_wrapper overflow" role="tabpanel" aria-labelledby="headingThree">
-								<div class="panel-body block no-padding fpf fs0-929 fc-64 flex flex-column">
+								<div class="panel-body block policies no-padding fpf fs1 fc-1c1919 flex flex-column">
 									<span>
 										<?php
 										if ($product["returns"]["type"] == Returns::DAYS) {
@@ -241,18 +246,10 @@ $this->title = 'Todevise / Product';
 								</div>
 							</div>
 						</div>
-				</div>
-
-
-
-
-
-
-
-
+					</div>
 
 					<div class="flex flex-justify-end flex-prop-1-0 social_wrapper">
-						<span class="social_title funuv fc-64 fs1"><?= Yii::t('app/public', 'Share on') ?></span>
+						<span class="social_title funiv fc-64 fs1"><?= Yii::t('app/public', 'Share on') ?></span>
 						<div class="ssk-round ssk-grayscale ssk-group ssk-xs">
 							<a href="" class="ssk ssk-facebook"></a>
 							<a href="" class="ssk ssk-twitter"></a>
