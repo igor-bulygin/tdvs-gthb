@@ -140,6 +140,7 @@
 }
 
 .main .banner_holder .devisers_holder .devisers .deviser_bg {
+	left: 0;
 	height: 100%;
 	width: 100%;
 	opacity: 0.5;
@@ -199,6 +200,8 @@
 }
 
 .main .banner_holder .devisers_holder .devisers .deviser_holder .name {
+	text-overflow: ellipsis;
+	overflow: hidden;
 	transition: color 0.5s ease-in-out 1s;
 }
 
@@ -209,7 +212,8 @@
 .main .banner_holder .devisers_holder .devisers .deviser .text .name,
 .main .banner_holder .devisers_holder .devisers .deviser .text .category {
 	height: 50%;
-	width: 100%;
+	width: 90%;
+	margin: 0 auto;
 }
 
 .main .banner_holder .devisers_holder .devisers .deviser .works {
