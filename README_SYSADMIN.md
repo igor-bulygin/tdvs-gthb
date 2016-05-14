@@ -9,8 +9,7 @@ The minimum requirements are the following:
 * MongoDB 3.0
 * PHP-MongoDB driver 1.6
 * NGINX
-* Node (with globally installed)
-  * bower
+* Node
 * The following PHP extensions:
   * dom
   * curl
@@ -31,6 +30,8 @@ The minimum requirements are the following:
 If running on Windows:
   * fileinfo
 
+* rsync
+
 ### CONFIGURATION
 
 #### Database
@@ -45,26 +46,13 @@ A modification in the `/etc/hosts` (or equivalent, if you're on Windows) is
 required:
 
 ```
-127.0.0.1       ddbb.todevise.com
-127.0.0.1       redis.todevise.com
-127.0.0.1       redis-session.todevise.com
-127.0.0.1       redis-cache.todevise.com
+127.0.0.1	   ddbb.todevise.com
+127.0.0.1	   redis.todevise.com
+127.0.0.1	   redis-session.todevise.com
+127.0.0.1	   redis-cache.todevise.com
 ```
 
 This is done to ensure future migrations/splits can be done easily.
-
-You must also point a wildcard match of `todevise.com` to `127.0.0.0.1`.
-Using `dnsmasq` this can be done easily:
-
-```
-cat /etc/dnsmasq.d/todevise.com.conf
-address=/todevise.com/127.0.0.1
-```
-
-If you're on Windows/Mac, you're on your own doing this. If you fail doing it but you need to
-make the project work, I'd advice creating new entries in your `hosts` file whenever you need
-one. For example, accessing a deviser's profile requires you to go to `deviser-slug.todevise.com/...`.
-You could create a `127.0.0.1    deviser-slug.todevise.com` entry in your `hosts`.
 
 This is how the `server` section in NGINX's config should look like:
 
@@ -110,10 +98,10 @@ Also, if behind `HTTPS`, add `fastcgi_param HTTPS on;`
 
 Add
 
-    cgi.fix_pathinfo=0
-    always_populate_raw_post_data=-1
-    upload_max_filesize = 100M
-    post_max_size = 100M
+	cgi.fix_pathinfo=0
+	always_populate_raw_post_data=-1
+	upload_max_filesize = 100M
+	post_max_size = 100M
 
 to the `php.ini` file.
 

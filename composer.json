@@ -39,10 +39,8 @@
 		],
 		"post-install-cmd": [
 			"npm install",
-			"bower install",
 			"rsync -aX node_modules/ vendor/npm/",
-			"rsync -aX bower_components/ vendor/bower/",
-			"rm -rf node_modules bower_components"
+			"rm -rf node_modules "
 		],
 		"post-update-cmd": [
 			"composer run-script post-install-cmd"

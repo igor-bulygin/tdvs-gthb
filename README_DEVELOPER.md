@@ -8,7 +8,7 @@ You are free to use the tools you most like, but here is a list of the
 tools I'm using in this project:
 
 * MongoChef
-* PHPStorm
+* Atom
 
 ###CODE
 
@@ -19,7 +19,7 @@ Also, please follow the style of indent.
 
 Todevise won't support any older browsers than the following:
 
-* Safari 7+
+* Safari 8+
 * IE 11+ (Spartan?)
 * Chrome (evergreen)
 * Firefox (evergreen)
@@ -47,7 +47,7 @@ figure out how to install it, then install the `composer-asset-plugin` with the
 following command:
 
 ~~~
-php composer.phar global require "fxp/composer-asset-plugin:~1.0.0"
+php composer.phar global require "fxp/composer-asset-plugin:~1.1.1"
 ~~~
 
 You should check all the required PHP extensions in the `README_SYSADMIN.md` file.

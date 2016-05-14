@@ -1,8 +1,0 @@
-{
-	"name": "jordioliu/todevise20",
-	"description": "Todevise 2.0",
-	"version": "2.0.0",
-	"dependencies": {
-		"ngImgCrop": "0.3.2"
-	}
-}

@@ -24,6 +24,7 @@
 		"angular-ui-bootstrap": "1.1.1",
 		"ng-js-tree": "0.0.7",
 		"justifiedGallery": "3.6.2",
-		"social-share-kit": "1.0.8"
+		"social-share-kit": "1.0.8",
+		"ng-img-crop-full-extended": "0.5.4"
 	}
 }
