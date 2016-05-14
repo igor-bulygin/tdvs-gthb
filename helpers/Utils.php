@@ -85,10 +85,14 @@ class Utils {
 	 * Delete a folder recursively.
 	 */
 	public static function rmdir($path) {
-		$files = array_diff(scandir($path), array('.','..'));
-		foreach ($files as $file) {
-			(is_dir("$path/$file")) ? rmdir("$path/$file") : unlink("$path/$file");
-		}
+		try {
+			$dir = @scandir($path);
+			if ($dir === false) return;
+			$files = array_diff($dir, array('.','..'));
+			foreach ($files as $file) {
+				(is_dir("$path/$file")) ? rmdir("$path/$file") : @unlink("$path/$file");
+			}
+		} catch (Exception $e) {}
 		return rmdir($path);
 	}
 
