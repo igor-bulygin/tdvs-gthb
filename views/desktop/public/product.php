@@ -34,13 +34,10 @@ $this->title = 'Todevise / Product';
 	<?php foreach ($product['media']['photos'] as $photo) {
 		if (isset($photo['main_product_photo']) && $photo['main_product_photo'] === true) {
 	?>
-			<div class="bg absolute" style="background-image: url('<?= Yii::getAlias('@product_url') ?>/<?= $product['short_id'] ?>/<?= $photo['name'] ?>');">
+			<div class="bg absolute" style="background-image: url('<?= Yii::getAlias('@product_url') ?>/<?= $product['short_id'] ?>/<?= $photo['name'] ?>');"></div>
 	<?php
 		}
 	} ?>
-
-
-	</div>
 
 	<div class="col-xs-12 deviser_wrapper flex-prop-0-0">
 
@@ -53,12 +50,12 @@ $this->title = 'Todevise / Product';
 			<div class="info absolute">
 				<div class="row no-gutter max-height lwhite">
 					<div class="col-xs-2 max-height avatar_wrapper flex flex-align-center">
-						<div class="avatar img-circle max-height" style="background-image: url('<?= Yii::getAlias('@deviser_url') ?>/<?= $deviser['short_id'] ?>/<?= $deviser['media']['profile'] ?>');"></div>
+						<div class="avatar img-circle max-height" style="background-image: url('<?= $deviser['img'] ?>');"></div>
 					</div>
 
 					<div class="col-xs-7 max-height flex flex-column flex-justify-center">
 						<span class="category funiv fs0-857 fc-9b fs-upper">Fashion</span>
-						<span class="name funiv_bold fs1-286 fc-48"><?= $deviser->personal_info['name'] . " " . implode(" ", $deviser->personal_info['surnames']) ?></span>
+						<span class="name funiv_bold fs1-286 fc-48"><?= $deviser['personal_info']['name'] . " " . implode(" ", $deviser['personal_info']['surnames']) ?></span>
 					</div>
 
 					<div class="col-xs-3 max-height stock_price_wrapper flex flex-column flex-justify-center text-right">
@@ -267,8 +264,8 @@ $this->title = 'Todevise / Product';
 		<ul class="flex funiv_bold fs0-857 fs-upper tabs no-horizontal-padding no-vertical-margin">
 			<li class="pointer text-center active">
 				<a class="fc-5b" data-toggle="tab" href="#deviser_works"><?= Yii::t('app/public', 'Works by {name} {surnames}', [
-					'name' => $deviser->personal_info['name'],
-					'surnames' => implode(" ", $deviser->personal_info['surnames'])
+					'name' => $deviser['personal_info']['name'],
+					'surnames' => implode(" ", $deviser['personal_info']['surnames'])
 				]) ?></a>
 			</li>
 			<li class="pointer text-center">
