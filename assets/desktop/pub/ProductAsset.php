@@ -14,6 +14,7 @@ class ProductAsset extends AssetBundle {
 	];
 	public $depends = [
 		'app\assets\desktop\pub\GlobalAsset',
-		'app\assets\libs\socialShareKitAsset'
+		'app\assets\libs\socialShareKitAsset',
+		'app\assets\libs\justifiedGalleryAsset'
 	];
 }

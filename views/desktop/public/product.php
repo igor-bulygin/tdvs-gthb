@@ -43,7 +43,7 @@ $this->title = 'Todevise / Product';
 
 		<div class="row no-gutter relative">
 			<div class="col-xs-12 name funiv_thin fs3-857 fc-4f fs-upper">
-				<?= Utils::l($product->name) ?>
+				<?= $product['name'] ?>
 			</div>
 
 			<div class="info_bg absolute"></div>
@@ -177,7 +177,7 @@ $this->title = 'Todevise / Product';
 								</div>
 							</div>
 							<div id="collapseOne" class="panel-collapse collapse in description_wrapper overflow" role="tabpanel" aria-labelledby="headingOne">
-								<span class="panel-body description no-padding block fpf fs1 fc-1c1919"><?= Utils::l($product['description']) ?></span>
+								<span class="panel-body description no-padding block fpf fs1 fc-1c1919"><?= $product['description'] ?></span>
 							</div>
 						</div>
 
@@ -269,9 +269,6 @@ $this->title = 'Todevise / Product';
 				]) ?></a>
 			</li>
 			<li class="pointer text-center">
-				<a class="fc-5b" data-toggle="tab" href="#related_works"><?= Yii::t('app/public', 'Related works') ?></a>
-			</li>
-			<li class="pointer text-center">
 				<a class="fc-5b" data-toggle="tab" href="#boxes"><?= Yii::t('app/public', 'Boxes') ?></a>
 			</li>
 			<li class="pointer text-center">
@@ -286,64 +283,27 @@ $this->title = 'Todevise / Product';
 		<div class="tab-content products">
 
 			<div role="tabpanel" class="tab-pane fade in active" id="deviser_works">
-				deviser works
 				<?php
-/*
-				Pjax::begin([
-					'id' => $category['short_id'],
-					'enablePushState' => false
-				]);
 
-				$form = ActiveForm::begin([
-					'id' => 'category_filter_' . $category['short_id'],
-					'options' => [
-						'data-pjax' => true
-					]
-				]);
+					Pjax::begin([
+						'enablePushState' => false
+					]);
 
-				echo $form->field($category['filter_model'], 'selected')->radioList([
-					'odd' => Yii::t('app/public', 'Odd products'),
-					'even' => Yii::t('app/public', 'Even products')
-				], [
-					'unselect' => null,
-					'item' => function ($index, $label, $name, $checked, $value) use ($form) {
-						$active_class = $checked ? 'active' : '';
-						return Html::radio($name, $checked, [
-							'data-role' => 'filter',
-							'label' => Html::tag('span', $label, [
-								'class' => "pointer filter-span fpf fc-5b fs-upper fs0-857 $active_class"
-							]),
-							'labelOptions' => [
-								'class' => 'no-margin'
-							],
-							'value' => $value,
-							'onclick' => '$("#' . $form->id . '").yiiActiveForm("submitForm");'
-						]);
-					},
-					'class' => 'filters text-center white'
-				])->label(false);
+					echo ListView::widget([
+						'dataProvider' => $other_works,
+						'itemView' => '_product_product',
+						'itemOptions' => [
+							'tag' => false
+						],
+						'options' => [
+							'class' => 'products_wrapper'
+						],
+						'layout' => '<div class="products_holder">{items}</div>{pager}',
+					]);
 
-				echo ListView::widget([
-					'dataProvider' => $category['products'],
-					'itemView' => '_index_product',
-					'itemOptions' => [
-						'tag' => false
-					],
-					'options' => [
-						'class' => 'products_wrapper'
-					],
-					'layout' => '<div class="products_holder">{items}</div>{pager}',
-				]);
+					Pjax::end();
 
-				ActiveForm::end();
-
-				Pjax::end();
-*/
 				?>
-			</div>
-
-			<div role="tabpanel" class="tab-pane fade in" id="related_works">
-				related works
 			</div>
 
 			<div role="tabpanel" class="tab-pane fade" id="boxes">

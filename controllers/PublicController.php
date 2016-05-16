@@ -245,12 +245,72 @@ class PublicController extends CController {
 			"short_id" => $product_id
 		]);
 
+		$product['name'] = Utils::l($product['name']);
+		$product['description'] = Utils::l($product['description']);
+
+		$categories_map = [];
+		foreach (Category::find()->asArray()->all() as $key => $category) {
+			$categories_map[$category['short_id']] = $category;
+			$categories_map[$category['short_id']]['name'] = Utils::l($category['name']);
+		}
+
+		$tmp = Yii::$app->mongodb->getCollection('product')
+			->aggregate(
+				[
+					'$project' => [
+						"short_id" => 1, "slug" => 1, "categories" => 1, "name" => 1, "media" => 1
+					]
+				],
+				[
+					'$match' => [
+						'deviser_id' => $product['deviser_id']
+					]
+				],
+				[
+					'$sample' => [
+						'size' => 400
+					]
+				]
+			);
+		$tmp = Product::find()->where(['deviser_id' => $product['deviser_id']])->asArray()->all();
+
+		Utils::l_collection($tmp, "name");
+		Utils::l_collection($tmp, "slug");
+
+		foreach ($tmp as $key => &$_product) {
+			$_product['category'] = @$categories_map[$product['categories'][0]]['name'];
+
+			if (isset($_product["media"]) && isset($_product["media"]["photos"])) {
+				foreach ($_product["media"]["photos"] as $key => $photo) {
+					if (isset($photo["main_product_photo"]) && $photo["main_product_photo"]) {
+						$_product["img"] = Yii::getAlias("@product_url") . "/" . $_product["short_id"] . "/" . $photo["name"];
+					}
+				}
+			}
+			if (!isset($_product["img"])) {
+				if (count($_product["media"]["photos"]) == 0) {
+					$_product["img"] = 'https://unsplash.it/200/200/?random&t=' . $_product['short_id'];
+				} else {
+					$_product["img"] = Yii::getAlias("@product_url") . "/" . $_product["short_id"] . "/" . $_product["media"]["photos"][0]["name"];
+				}
+			}
+		}
+
+
+
+		$other_works = new ArrayDataProvider([
+			'allModels' => $tmp,
+			'pagination' => [
+				'pagesize' => 40,
+			],
+		]);
+
 		//404 if $product == null
 
 		//$this->view->params["product_path"] = $product['categories'];
 
 		$deviser = Person::find([
-			"short_id" => $product->deviser_id
+			"short_id" => $product['deviser_id']
 		])->asArray()->one();
 
 		if (isset($deviser->media['profile'])) {
@@ -272,6 +332,7 @@ class PublicController extends CController {
 
 		return $this->render("product", [
 			'product' => $product,
+			'other_works' => $other_works,
 			'deviser' => $deviser,
 			'tags' => $tags,
 			'category_id' => $category_id,
