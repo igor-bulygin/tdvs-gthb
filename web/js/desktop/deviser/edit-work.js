@@ -671,6 +671,9 @@ todevise.controller('productCtrl', ["$rootScope", "$scope", "$timeout", "$sizech
 				$scope.product.price_stock = JSON.parse(JSON.stringify($scope.original_product.price_stock));
 				return;
 			}
+		} else if (same === true) {
+			$scope.product.price_stock = JSON.parse(JSON.stringify($scope.original_product.price_stock));
+			return;
 		}
 
 		var price_stock_table_combinations  = $scope.tags_order_for_price_stock_table.map(function (tag_id) {
@@ -968,16 +971,20 @@ todevise.controller('productCtrl', ["$rootScope", "$scope", "$timeout", "$sizech
 
 			case "ams_sizechart":
 				//If there is no selected sizechart or if there was but got unselected
-				if ($scope.product.sizechart.short_id === undefined) {
+				if ($scope.product.sizechart.short_id === undefined && $scope.use_sizecharts === true) {
 					$scope.empty_sizecharts_countries_dropdown();
 					$scope.empty_sizechart_table();
-					$scope.empty_price_stock_table();
 					$scope.empty_sizecharts_sizes_dropdown();
+
+					$scope.empty_price_stock_table();
 				} else {
-					$scope.build_sizecharts_countries_dropdown();
-					$scope.build_sizechart_table();
+					if ($scope.use_sizecharts === true) {
+						$scope.build_sizecharts_countries_dropdown();
+						$scope.build_sizechart_table();
+						$scope.build_sizecharts_sizes_dropdown();
+					}
+
 					$scope.build_price_stock_table();
-					$scope.build_sizecharts_sizes_dropdown();
 				}
 				break;
 
