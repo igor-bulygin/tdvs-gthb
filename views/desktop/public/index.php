@@ -54,6 +54,8 @@ $this->title = 'Todevise / Home';
 			<div class="absolute devisers_holder">
 				<div class="white background"></div>
 				<div class="container flex flex-column devisers absolute no-horizontal-padding">
+					<!-- TODO: enable when needed -->
+					<!--
 					<div class="row no-gutter">
 						<div class="col-xs-12 no-horizontal-padding">
 							<div class="flex fpf fc-5b fs0-857 fs-upper links">
@@ -65,6 +67,7 @@ $this->title = 'Todevise / Home';
 							</div>
 						</div>
 					</div>
+					-->
 					<div class="row no-gutter flex devisers_carousel_wrapper">
 						<ul class="devisers_carousel no-vertical-margin flex-prop-1">
 							<?php foreach ($devisers as $i => $deviser) { ?>
@@ -88,7 +91,7 @@ $this->title = 'Todevise / Home';
 										<div class="row no-gutter works_holder">
 											<?php foreach ($deviser['works'] as $j => $work) { ?>
 												<div class="col-xs-6 works_row">
-													<a href="<?= Url::to(["public/product", "slug" => $work['slug'], "category_id" => array_pop($work['categories']), "product_id" => $work['short_id']]) ?>">
+													<a href="<?= Url::to(["public/product", "slug" => $work['slug'], "category_id" => @$work['categories'][0], "product_id" => $work['short_id']]) ?>">
 														<img class="work" src="<?= $work['img'] ?>" alt="" />
 													</a>
 												</div>
@@ -105,7 +108,7 @@ $this->title = 'Todevise / Home';
 							<ul class="flex funiv_bold fs0-857 fs-upper tabs no-horizontal-padding no-vertical-margin">
 								<?php foreach ($categories as $i => $category) { ?>
 									<li class="pointer text-center">
-										<a class="fc-5b" data-toggle="tab" href="#<?= $category['short_id'] ?>"><?= Utils::l($category["name"]) ?></a>
+										<a class="fc-5b" data-toggle="tab" href="#<?= $category['short_id'] ?>"><?= $category["name"] ?></a>
 									</li>
 								<?php } ?>
 							</ul>
@@ -137,7 +140,8 @@ $this->title = 'Todevise / Home';
 						]
 					]);
 
-					echo $form->field($category['filter_model'], 'selected')->radioList([
+					//TODO: Enable when filters are required...
+					/*echo*/ $form->field($category['filter_model'], 'selected')->radioList([
 						'odd' => Yii::t('app/public', 'Odd products'),
 						'even' => Yii::t('app/public', 'Even products')
 					], [

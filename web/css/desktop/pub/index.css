@@ -230,6 +230,12 @@
 	height: 100%;
 }
 
+.main .banner_holder .devisers_holder .devisers .deviser .works .works_row > a {
+	height: 100%;
+	width: 100%;
+	display: block;
+}
+
 .main .banner_holder .devisers_holder .devisers .deviser .works .work {
 	height: 100%;
 	width: 100%;
@@ -260,6 +266,8 @@
 .main .banner_holder .devisers_holder .devisers .tabs li a {
 	padding: 10px 25px;
 	display: block;
+	text-decoration: none;
+	color: #5b5b5b;
 }
 
 .main .banner_holder .devisers_holder .devisers .tabs li:hover a {
@@ -291,6 +299,23 @@
 
 .main .products .product:hover .data {
 	bottom: 0%;
+	padding: 8px 10px;
+}
+
+.main .products .product .data .marquee {
+	text-overflow: ellipsis;
+	display: block;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.main .products .product .data .marquee:hover {
+	animation: marquee 15s linear infinite;
+}
+
+@keyframes marquee {
+	0%   { text-indent: 0% }
+	100% { text-indent: -150% }
 }
 
 .main .tab-pane .form-group .filters [data-role="filter"] {
