@@ -972,10 +972,12 @@ todevise.controller('productCtrl', ["$rootScope", "$scope", "$timeout", "$sizech
 					$scope.empty_sizecharts_countries_dropdown();
 					$scope.empty_sizechart_table();
 					$scope.empty_price_stock_table();
+					$scope.empty_sizecharts_sizes_dropdown();
 				} else {
 					$scope.build_sizecharts_countries_dropdown();
 					$scope.build_sizechart_table();
 					$scope.build_price_stock_table();
+					$scope.build_sizecharts_sizes_dropdown();
 				}
 				break;
 
