@@ -1,0 +1,51 @@
+version: '2'
+
+networks:
+    new:
+
+services:
+    php:
+        build: ./docker_php
+        environment:
+            DEV: "1"
+        command: bash -c "cd /src && composer update -v && ./yii mongodb-migrate --interactive=0 && php -S 0.0.0.0:8080 -t /src/web/"
+        ports:
+            - "8080:8080"
+        volumes:
+            - .:/src
+        networks:
+            - new
+        depends_on:
+            - redis
+            - mongo
+        links:
+            - redis
+            - mongo
+    redis:
+        image: redis
+        networks:
+            new:
+                aliases:
+                    - redis.todevise.com
+                    - redis-session.todevise.com
+                    - redis-cache.todevise.com
+        expose:
+            - "6379"
+    mongodata:
+        image: mongo:3.2
+        volumes:
+            - /data/db
+            - /data/configdb
+        command: --break-mongo
+    mongo:
+        build: ./docker_mongo
+        volumes_from:
+            - mongodata
+        networks:
+            new:
+                aliases:
+                    - ddbb.todevise.com
+        expose:
+            - "27017"
+        ports:
+            - "27017:27017"
