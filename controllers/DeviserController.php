@@ -25,16 +25,19 @@ class DeviserController extends CController {
 
 	public function actionEditInfo($slug) {
 		$countries = Country::find()
+			->select(["_id" => 0])
 			->asArray()
 			->all();
 		Utils::l_collection($countries, "country_name");
 
 		$deviser = Person::find()
+			->select(["_id" => 0])
 			->where(["slug" => $slug, "type" => ['$in' => [Person::DEVISER]]])
 			->asArray()
 			->one();
 
 		$categories = Category::find()
+			->select(["_id" => 0])
 			->where(["path" => "/"])
 			->orderBy(["name.$this->lang"=> -1])
 			->asArray()
@@ -64,11 +67,13 @@ class DeviserController extends CController {
 		}
 
 		$product = Product::find()
+			->select(["_id" => 0])
 			->where(["short_id" => $short_id])
 			->asArray()
 			->all();
 
 		$deviser = Person::find()
+			->select(["_id" => 0])
 			->where(["short_id" => $product[0]["deviser_id"]])
 			->asArray()
 			->one();
@@ -90,12 +95,14 @@ class DeviserController extends CController {
 		Utils::l_collection($categories, "name");
 
 		$sizechart = SizeChart::find()
-			->select(["type" => SizeChart::TODEVISE])
+			->select(["_id" => 0])
+			->where(["type" => SizeChart::TODEVISE])
 			->asArray()
 			->all();
 		Utils::l_collection($sizechart, "name");
 
 		$deviser_sizecharts = SizeChart::find()
+			->select(["_id" => 0])
 			->where(["type" => SizeChart::DEVISER, "deviser_id" => $deviser["short_id"]])
 			->asArray()
 			->all();

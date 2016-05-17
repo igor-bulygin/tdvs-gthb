@@ -61,13 +61,13 @@ class AdminController extends CController {
 		$filters["type"]['$in'] = [Person::DEVISER];
 
 		$devisers = new ActiveDataProvider([
-			'query' => Person::find()->where($filters),
+			'query' => Person::find()->select(["_id" => 0])->where($filters),
 			'pagination' => [
 				'pageSize' => 15,
 			],
 		]);
 
-		$countries = Country::find()->asArray()->all();
+		$countries = Country::find()->select(["_id" => 0])->asArray()->all();
 		Utils::l_collection($countries, "country_name");
 
 		$countries_lookup = [];
@@ -89,7 +89,7 @@ class AdminController extends CController {
 		$filters["type"]['$in'] = [Person::ADMIN];
 
 		$admins = new ActiveDataProvider([
-			'query' => Person::find()->where($filters),
+			'query' => Person::find()->select(["_id" => 0])->where($filters),
 			'pagination' => [
 				'pageSize' => 15,
 			],
@@ -106,14 +106,14 @@ class AdminController extends CController {
 		$filters = Utils::stringToFilter($filters);
 
 		$tags = new ActiveDataProvider([
-			'query' => Tag::find()->where($filters),
+			'query' => Tag::find()->select(["_id" => 0])->where($filters),
 			'pagination' => [
 				'pageSize' => 15,
 			],
 		]);
 
 		$data = [
-			'categories' => Category::find()->asArray()->all(),
+			'categories' => Category::find()->select(["_id" => 0])->asArray()->all(),
 			'tags' => $tags
 		];
 
@@ -122,8 +122,8 @@ class AdminController extends CController {
 
 	public function actionTag($tag_id) {
 		return $this->render("tag", [
-			"tag" => Tag::find()->where(["short_id" => $tag_id])->asArray()->one(),
-			"categories" => Category::find()->asArray()->all(),
+			"tag" => Tag::find()->select(["_id" => 0])->where(["short_id" => $tag_id])->asArray()->one(),
+			"categories" => Category::find()->select(["_id" => 0])->asArray()->all(),
 			"mus" => [
 				["value" => MetricType::NONE, "text" => Yii::t("app/admin", MetricType::TXT[MetricType::NONE]), "checked" => true],
 				["value" => MetricType::SIZE, "text" => Yii::t("app/admin", MetricType::TXT[MetricType::SIZE])],
@@ -137,14 +137,14 @@ class AdminController extends CController {
 		$filters["type"] = SizeChart::TODEVISE;
 
 		$sizecharts = new ActiveDataProvider([
-			'query' => SizeChart::find()->where($filters),
+			'query' => SizeChart::find()->select(["_id" => 0])->where($filters),
 			'pagination' => [
 				'pageSize' => 15,
 			],
 		]);
 
 		$data = [
-			'categories' => Category::find()->asArray()->all(),
+			'categories' => Category::find()->select(["_id" => 0])->asArray()->all(),
 			'sizecharts' => $sizecharts,
 			'sizechart_template' => SizeChart::find()->select(["_id" => 0, "short_id", "name"])->asArray()->all()
 		];
@@ -153,7 +153,7 @@ class AdminController extends CController {
 	}
 
 	public function actionSizeChart($size_chart_id) {
-		$countries = Country::find()->asArray()->all();
+		$countries = Country::find()->select(["_id" => 0])->asArray()->all();
 		$countries_lookup = [];
 		$continents = [];
 
@@ -215,10 +215,10 @@ class AdminController extends CController {
 	}
 
 	public function actionProducts ($slug) {
-		$deviser = Person::find()->where(["slug" => $slug, "type" => ['$in' => [Person::DEVISER]]])->asArray()->one();
+		$deviser = Person::find()->select(["_id" => 0])->where(["slug" => $slug, "type" => ['$in' => [Person::DEVISER]]])->asArray()->one();
 
 		$products = new ActiveDataProvider([
-			'query' => Product::find()->where(['deviser_id' => $deviser['short_id']]),
+			'query' => Product::find()->select(["_id" => 0])->where(['deviser_id' => $deviser['short_id']]),
 			'pagination' => [
 				'pageSize' => 15,
 			],

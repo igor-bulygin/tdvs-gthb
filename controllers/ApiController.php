@@ -83,7 +83,6 @@ class ApiController extends CController {
 			$res = $res->asArray()->all();
 		} else if ($request->isPost) {
 			$something = $this->getJsonFromRequest("something");
-			unset($something["_id"]);
 
 			//TODO
 		} else if ($request->isDelete) {
@@ -114,7 +113,6 @@ class ApiController extends CController {
 			$res = $res->asArray()->all();
 		} else if ($request->isPost) {
 			$_country = $this->getJsonFromRequest("country");
-			unset($_country["_id"]);
 
 			if ($_country["short_id"] === "new") {
 				$_country["short_id"] = (new Country())->genValidID(5);
@@ -155,7 +153,6 @@ class ApiController extends CController {
 			$res = $res->asArray()->all();
 		} else if ($request->isPost) {
 			$_admin = $this->getJsonFromRequest("person");
-			unset($_admin["_id"]);
 
 			if ($_admin["short_id"] === "new") {
 				$_admin["short_id"] = (new Person())->genValidID(7);
@@ -199,7 +196,6 @@ class ApiController extends CController {
 			$res = $res->asArray()->all();
 		} else if ($request->isPost) {
 			$_deviser = $this->getJsonFromRequest("person");
-			unset($_deviser["_id"]);
 
 			if ($_deviser["short_id"] === "new") {
 				$_deviser["short_id"] = (new Person())->genValidID(7);
@@ -239,7 +235,6 @@ class ApiController extends CController {
 			$res = $res->asArray()->all();
 		} else if ($request->isPost) {
 			$_product = $this->getJsonFromRequest("product");
-			unset($_product["_id"]);
 
 			if ($_product["short_id"] === "new") {
 				$_product["short_id"] = (new Product())->genValidID(8);
@@ -285,7 +280,6 @@ class ApiController extends CController {
 			$res = $res->asArray()->all();
 		} else if ($request->isPost) {
 			$_tag = $this->getJsonFromRequest("tag");
-			unset($_tag["_id"]);
 
 			if ($_tag["short_id"] === "new") {
 				$_tag["short_id"] = (new Tag())->genValidID(5);
@@ -327,7 +321,6 @@ class ApiController extends CController {
 			$res = $res->asArray()->all();
 		} else if ($request->isPost) {
 			$_sizechart = $this->getJsonFromRequest("sizechart");
-			unset($_sizechart["_id"]);
 
 			if ($_sizechart["short_id"] === "new") {
 				$_sizechart["short_id"] = (new SizeChart())->genValidID(5);
@@ -369,7 +362,6 @@ class ApiController extends CController {
 			$res = $res->asArray()->all();
 		} else if ($request->isPost) {
 			$node = $this->getJsonFromRequest("category");
-			unset($node["_id"]);
 
 			if ($node["short_id"] === "new") {
 				$node["short_id"] = (new Category())->genValidID(5);
