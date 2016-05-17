@@ -171,34 +171,42 @@ class AdminController extends CController {
 			$countries_lookup[$code] = Yii::t("app/admin", $continent);
 		}
 
-		return $this->render("size-chart", [
-			"sizechart" => SizeChart::find()->where(["short_id" => $size_chart_id])->asArray()->one(),
-			"categories" => Category::find()->asArray()->all(),
-			"countries" => [
-				[
-					"country_name" => [
-						$this->lang => Yii::t("app/admin", "Continents")
-					],
-					"sub" => $continents
+		$sizechart = SizeChart::find()->select(["_id" => 0])->where(["short_id" => $size_chart_id])->asArray()->one();
+		$categories = Category::find()->select(["_id" => 0])->asArray()->all();
+		Utils::l_collection($categories, "name");
+
+		$countries = [
+			[
+				"country_name" => [
+					$this->lang => Yii::t("app/admin", "Continents")
 				],
-				[
-					"country_name" => [
-						$this->lang => Yii::t("app/admin", "Countries")
-					],
-					"sub" => $countries
-				]
+				"sub" => $continents
 			],
-			"countries_lookup" => $countries_lookup,
-			"mus" => [
-				[
-					"text" => Yii::t("app/admin", MetricType::TXT[MetricType::SIZE]),
-					"sub" => array_map(function($x) { return ["text" => $x, "value" => $x, "smallest" => MetricType::UNITS[MetricType::SIZE][0]]; }, MetricType::UNITS[MetricType::SIZE])
+			[
+				"country_name" => [
+					$this->lang => Yii::t("app/admin", "Countries")
 				],
-				[
-					"text" => Yii::t("app/admin", MetricType::TXT[MetricType::WEIGHT]),
-					"sub" => array_map(function($x) { return ["text" => $x, "value" => $x, "smallest" => MetricType::UNITS[MetricType::WEIGHT][0]]; }, MetricType::UNITS[MetricType::WEIGHT])
-				]
+				"sub" => $countries
 			]
+		];
+
+		$mus = [
+			[
+				"text" => Yii::t("app/admin", MetricType::TXT[MetricType::SIZE]),
+				"sub" => array_map(function($x) { return ["text" => $x, "value" => $x, "smallest" => MetricType::UNITS[MetricType::SIZE][0]]; }, MetricType::UNITS[MetricType::SIZE])
+			],
+			[
+				"text" => Yii::t("app/admin", MetricType::TXT[MetricType::WEIGHT]),
+				"sub" => array_map(function($x) { return ["text" => $x, "value" => $x, "smallest" => MetricType::UNITS[MetricType::WEIGHT][0]]; }, MetricType::UNITS[MetricType::WEIGHT])
+			]
+		];
+
+		return $this->render("size-chart", [
+			"sizechart" => $sizechart,
+			"categories" => $categories,
+			"countries" => $countries,
+			"countries_lookup" => $countries_lookup,
+			"mus" => $mus
 		]);
 	}
 

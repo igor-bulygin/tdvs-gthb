@@ -57,17 +57,19 @@ $this->title = 'Todevise / Admin / Size chart';
 						angular-multi-select
 						input-model="categories"
 						output-model="sizechart.categories"
+						output-keys="short_id"
+						output-type="values"
 
 						id-property="short_id"
 						checked-property="check"
 						children-property="sub"
 
-						dropdown-label="<[ '<(name[&quot;{{ lang }}&quot;])>' | outputModelIterator : this : ', ' : '<?= Yii::t('app/public', 'Select category') ?>']>"
-						node-label="<[ name['{{ lang }}'] ]>"
-						leaf-label="<[ name['{{ lang }}'] ]>"
+						dropdown-label="<[ '<(name)>' | outputModelIterator : this : ', ' : '<?= Yii::t('app/public', 'Select category') ?>']>"
+						node-label="<[ name ]>"
+						leaf-label="<[ name ]>"
 
 						preselect="{{ sizechart.categories | arrpatch : 'short_id' }}"
-
+						search-field="name"
 						hide-helpers="check_all, check_none, reset"
 					></div>
 				</div>
