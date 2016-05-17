@@ -19,7 +19,7 @@ Also, please follow the style of indent.
 
 Todevise won't support any older browsers than the following:
 
-* Safari 8+
+* Safari 9+
 * IE 11+ (Spartan?)
 * Chrome (evergreen)
 * Firefox (evergreen)

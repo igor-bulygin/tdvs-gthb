@@ -6,7 +6,7 @@ Todevise 2.0
 The minimum requirements are the following:
 
 * PHP 5.6.0
-* MongoDB 3.0
+* MongoDB 3.2
 * PHP-MongoDB driver 1.6
 * NGINX
 * Node
