@@ -99,7 +99,6 @@ $(function () {
 
 $(function() {
 	function flickrify() {
-		console.log("Flickering!");
 		$("#deviser_works .products_holder").justifiedGallery({
 			fixedHeight: true,
 			rowHeight: 210,
