@@ -74,14 +74,14 @@ $this->title = 'Todevise / Home';
 							<li class="col-xs-3 col-md-2 col-lg-1 relative deviser_holder text-center">
 								<div class="absolute deviser_bg white"></div>
 								<div class="absolute deviser">
-									<a class="dp_wrapper relative" href="<?= Url::to(["public/product", "slug" => "slug", "category_id" => "12345", "product_id" => "12345678"]) ?>">
+									<a class="dp_wrapper relative" href="<?= Url::to(["public/deviser", "slug" => $deviser["slug"], "deviser_id" => $deviser["short_id"]]) ?>">
 										<div class="dp relative">
 											<img src="<?= $deviser['img'] ?>" alt="" class="img-circle" />
 										</div>
 									</a>
 
 									<div class="text relative">
-										<a class="flex flex-column" href="<?= Url::to(["deviser/list", "slug" => $deviser['slug']]) ?>">
+										<a class="flex flex-column" href="<?= Url::to(["public/deviser", "slug" => $deviser['slug'], "deviser_id" => $deviser["short_id"]]) ?>">
 											<span class="name funiv_bold fs1-143 fc-4a"><?= $deviser['name'] ?></span>
 											<span class="category fpf fs0-857 fc-9b"><?= $deviser['category'] ?></span>
 										</a>

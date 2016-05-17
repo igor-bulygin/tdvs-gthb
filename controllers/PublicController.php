@@ -340,4 +340,8 @@ class PublicController extends CController {
 			'slug' => $slug
 		]);
 	}
+
+	public function actionDeviser($deviser_id, $slug) {
+
+	}
 }

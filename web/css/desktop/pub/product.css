@@ -94,8 +94,8 @@
 	width: 15px;
 	height: 15px;
 	background-color: transparent;
-	border-right: 2px solid white;
-	border-bottom: 2px solid white;
+	border-right: 2px solid #ccc;
+	border-bottom: 2px solid #ccc;
 	transform: rotate(135deg);
 }
 
@@ -104,8 +104,8 @@
 	width: 15px;
 	height: 15px;
 	background-color: transparent;
-	border-right: 2px solid white;
-	border-bottom: 2px solid white;
+	border-right: 2px solid #ccc;
+	border-bottom: 2px solid #ccc;
 	transform: rotate(-45deg);
 }
 
