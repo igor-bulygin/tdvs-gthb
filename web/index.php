@@ -1,6 +1,5 @@
 <?php
-
-if(getenv("DEV") === "1"){
+if(getenv("DEV") == "1"){
 	define('YII_DEBUG', true);
 	define('YII_ENV', 'dev');
 }
