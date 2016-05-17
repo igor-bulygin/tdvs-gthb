@@ -192,7 +192,8 @@ if (YII_ENV_DEV) {
 			'views' => [
 				'class' => 'yii\mongodb\debug\MongoDbPanel'
 			]
-		]
+		],
+		'allowedIPs' => ['*']
 	];
 
 	$config['bootstrap'][] = 'gii';
