@@ -24,7 +24,6 @@ $this->title = 'Todevise / Home';
 
 <div class="row no-gutter">
 	<div class="col-xs-12 no-padding">
-		<!--<?= Yii::t("app", "This is a test from {0} controller!", $this->context->id); ?>-->
 		<div class="relative banner_holder">
 
 			<div id="banner" class="carousel slide" data-ride="carousel" data-keyboard="false">

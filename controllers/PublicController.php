@@ -12,9 +12,11 @@ use app\models\Product;
 use app\models\Category;
 use yii\base\DynamicModel;
 use yii\filters\VerbFilter;
+use app\helpers\ModelUtils;
 use app\helpers\CController;
 use yii\filters\AccessControl;
 use yii\data\ArrayDataProvider;
+use yii\data\ActiveDataProvider;
 use yii\base\ViewContextInterface;
 
 class PublicController extends CController {
@@ -94,33 +96,14 @@ class PublicController extends CController {
 				);
 
 			foreach ($works as $key => &$work) {
-				if (isset($work["media"]) && isset($work["media"]["photos"])) {
-					foreach ($work["media"]["photos"] as $key => $photo) {
-						if (isset($photo["main_product_photo"]) && $photo["main_product_photo"]) {
-							$work["img"] = Yii::getAlias("@product_url") . "/" . $work["short_id"] . "/" . $photo["name"];
-						}
-					}
-				}
-				if (!isset($work["img"])) {
-					if (count($work["media"]["photos"]) == 0) {
-						$work["img"] = 'https://unsplash.it/200/200/?random&t=' . $work['short_id'];
-					} else {
-						$work["img"] = Yii::getAlias("@product_url") . "/" . $work["short_id"] . "/" . $work["media"]["photos"][0]["name"];
-					}
-				}
-
+				$work['img'] = ModelUtils::getProductMainPhoto($work);
 				$work["slug"] = @Utils::l($work["slug"]) ?: " ";
 			}
 
 			$deviser['works'] = $works;
-			$deviser['name'] = $deviser['personal_info']['name'] . ' ' . implode(" ", $deviser['personal_info']['surnames']);
-			$deviser['category'] = @$categories_map[$deviser['categories'][0]]['name'];
-
-			if (isset($deviser['media']) && isset($deviser['media']['profile'])) {
-				$deviser['img'] = Yii::getAlias("@deviser_url") . "/" . $deviser["short_id"] . "/" . $deviser['media']['profile'];
-			} else {
-				$deviser['img'] = 'https://unsplash.it/200/200/?random&t=' . $deviser['short_id'];
-			}
+			$deviser['name'] = ModelUtils::getDeviserFullName($deviser);
+			$deviser['category'] = ModelUtils::getDeviserCategoriesNames($deviser)[0];
+			$deviser['img'] = ModelUtils::getDeviserAvatar($deviser);
 		}
 
 		////////////////////
@@ -201,22 +184,8 @@ class PublicController extends CController {
 			foreach ($tmp as $key => &$product) {
 				$product["name"] = @Utils::l($product["name"]) ?: " ";
 				$product["slug"] = @Utils::l($product["slug"]) ?: " ";
-				$product['category'] = @$categories_map[$product['categories'][0]]['name'];
-
-				if (isset($product["media"]) && isset($product["media"]["photos"])) {
-					foreach ($product["media"]["photos"] as $key => $photo) {
-						if (isset($photo["main_product_photo"]) && $photo["main_product_photo"]) {
-							$product["img"] = Yii::getAlias("@product_url") . "/" . $product["short_id"] . "/" . $photo["name"];
-						}
-					}
-				}
-				if (!isset($product["img"])) {
-					if (count($product["media"]["photos"]) == 0) {
-						$product["img"] = 'https://unsplash.it/200/200/?random&t=' . $product['short_id'];
-					} else {
-						$product["img"] = Yii::getAlias("@product_url") . "/" . $product["short_id"] . "/" . $product["media"]["photos"][0]["name"];
-					}
-				}
+				$product['category'] = ModelUtils::getProductCategoriesNames($product)[0];
+				$product['img'] = ModelUtils::getProductMainPhoto($product);
 			}
 
 			$category['products'] = new ArrayDataProvider([
@@ -248,12 +217,6 @@ class PublicController extends CController {
 		$product['name'] = Utils::l($product['name']);
 		$product['description'] = Utils::l($product['description']);
 
-		$categories_map = [];
-		foreach (Category::find()->asArray()->all() as $key => $category) {
-			$categories_map[$category['short_id']] = $category;
-			$categories_map[$category['short_id']]['name'] = Utils::l($category['name']);
-		}
-
 		$tmp = Yii::$app->mongodb->getCollection('product')
 			->aggregate(
 				[
@@ -278,25 +241,9 @@ class PublicController extends CController {
 		Utils::l_collection($tmp, "slug");
 
 		foreach ($tmp as $key => &$_product) {
-			$_product['category'] = @$categories_map[$product['categories'][0]]['name'];
-
-			if (isset($_product["media"]) && isset($_product["media"]["photos"])) {
-				foreach ($_product["media"]["photos"] as $key => $photo) {
-					if (isset($photo["main_product_photo"]) && $photo["main_product_photo"]) {
-						$_product["img"] = Yii::getAlias("@product_url") . "/" . $_product["short_id"] . "/" . $photo["name"];
-					}
-				}
-			}
-			if (!isset($_product["img"])) {
-				if (count($_product["media"]["photos"]) == 0) {
-					$_product["img"] = 'https://unsplash.it/200/200/?random&t=' . $_product['short_id'];
-				} else {
-					$_product["img"] = Yii::getAlias("@product_url") . "/" . $_product["short_id"] . "/" . $_product["media"]["photos"][0]["name"];
-				}
-			}
+			$_product['category'] = ModelUtils::getProductCategoriesNames($_product)[0];
+			$_product['img'] = ModelUtils::getProductMainPhoto($_product);
 		}
-
-
 
 		$other_works = new ArrayDataProvider([
 			'allModels' => $tmp,
@@ -309,26 +256,26 @@ class PublicController extends CController {
 
 		//$this->view->params["product_path"] = $product['categories'];
 
-		$deviser = Person::find([
-			"short_id" => $product['deviser_id']
-		])->asArray()->one();
+		$deviser = Person::find()
+			->where([
+				"short_id" => $product['deviser_id'],
+				"type" => Person::DEVISER
+			])
+			->asArray()
+			->one();
 
-		if (isset($deviser->media['profile'])) {
-			$deviser['img'] = Yii::getAlias('@deviser_url') . "/" . $deviser['short_id'] . "/" . $deviser['media']['profile'];
-		} else {
-			$deviser['img'] = 'https://unsplash.it/300/200/?random&t=' . $deviser['short_id'];
-		}
+		$deviser['img'] = ModelUtils::getDeviserAvatar($deviser);
 
 		$tags = Tag::find()
-		->where([
-			"short_id" => [
-				'$in' => array_map(function ($v) {
-					return '' . $v;
-				}, array_keys($product['options']))
-			]
-		])
-		->asArray()
-		->all();
+			->where([
+				"short_id" => [
+					'$in' => array_map(function ($v) {
+						return '' . $v;
+					}, array_keys($product['options']))
+				]
+			])
+			->asArray()
+			->all();
 
 		return $this->render("product", [
 			'product' => $product,
@@ -342,6 +289,39 @@ class PublicController extends CController {
 	}
 
 	public function actionDeviser($deviser_id, $slug) {
+		$deviser = Person::find()
+			->where([
+				"short_id" => $deviser_id,
+				"type" => Person::DEVISER
+			])
+			->asArray()
+			->one();
 
+		$deviser['name'] = ModelUtils::getDeviserFullName($deviser);
+		$deviser['category'] = ModelUtils::getDeviserCategoriesNames($deviser)[0];
+		$deviser['img'] = ModelUtils::getDeviserAvatar($deviser);
+		$deviser['img_header'] = ModelUtils::getDeviserHeader($deviser);
+
+		$tmp = Product::find()->select(["_id" => 0])->where(["deviser_id" => $deviser_id])->asArray()->all();
+
+		Utils::l_collection($tmp, "name");
+		Utils::l_collection($tmp, "slug");
+
+		foreach ($tmp as $key => &$_product) {
+			$_product['category'] = ModelUtils::getProductCategoriesNames($_product)[0];
+			$_product['img'] = ModelUtils::getProductMainPhoto($_product);
+		}
+
+		$works = new ArrayDataProvider([
+			'allModels' => $tmp,
+			'pagination' => [
+				'pagesize' => 40,
+			],
+		]);
+
+		return $this->render("deviser", [
+			'deviser' => $deviser,
+			'works' => $works
+		]);
 	}
 }
