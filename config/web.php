@@ -42,7 +42,8 @@ $config = [
 		//Cache
 		'cache' => [
 			'class' => 'yii\redis\Cache',
-			'redis' => require(__DIR__ . '/redis_cache.php')
+			'redis' => require(__DIR__ . '/redis_cache.php'),
+			'keyPrefix' => 'todevise_'
 		],
 
 		'devicedetect' => [
