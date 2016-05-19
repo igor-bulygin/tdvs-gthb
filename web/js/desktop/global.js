@@ -19,12 +19,22 @@ global_desktop.filter('arrpatch', [
 	function () {
 		return function (arr, word) {
 			if (!Array.isArray(arr)) return "";
+			res = '';
 			arr = JSON.parse(JSON.stringify(arr));
 			for (var i = 0; i < arr.length; i++) {
-				arr.splice(i, 0, word);
-				i++;
+				res += word + ", ";
+
+				if (typeof(arr[i]) === 'string' && arr[i].match(/^([0-9\.]*)$/gi) !== null) {
+					res += "'" + arr[i] + "'";
+				} else {
+					res += arr[i]
+				}
+
+				if (i < arr.length - 1) {
+					res += ", ";
+				}
 			}
-			return arr.join(", ");
+			return res;
 		}
 	}
 ]);
