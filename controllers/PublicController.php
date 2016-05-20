@@ -41,21 +41,6 @@ class PublicController extends CController {
 			];
 		}
 
-		$categories_map = [];
-		$categories_in_top_lvl = [];
-		foreach (Category::find()->asArray()->all() as $key => $category) {
-			$categories_map[$category['short_id']] = $category;
-			$categories_map[$category['short_id']]['name'] = Utils::l($category['name']);
-
-			if ($category['path'] == "/") {
-				$categories_in_top_lvl[$category['short_id']] = [];
-			}
-			$path = explode("/", $category['path']);
-			if (count($path) >= 3) {
-				$categories_in_top_lvl[$path[1]][] = $category['short_id'];
-			}
-		}
-
 		//TODO: Fix, this should be random
 		$devisers = Yii::$app->mongodb->getCollection('person')
 			->aggregate(
@@ -106,8 +91,6 @@ class PublicController extends CController {
 			$deviser['img'] = ModelUtils::getDeviserAvatar($deviser);
 		}
 
-		////////////////////
-
 		$categories = Category::find()
 			->where(["path" => "/"])
 			->orderBy(['name.' . $lang => SORT_ASC])
@@ -153,10 +136,12 @@ class PublicController extends CController {
 				}
 			*/
 
-			if (isset($categories_map[$category['short_id']])) {
+			if (ModelUtils::getCategory($category['short_id']) !== null) {
 				$match = [
 					'categories' => [
-						'$in' => $categories_in_top_lvl[$category['short_id']]
+						'$in' => array_map(function ($category) {
+							return $category['short_id'];
+						}, ModelUtils::getSubCategories($category['short_id']) )
 					]
 				];
 			} else {

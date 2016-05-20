@@ -21,6 +21,53 @@ class ModelUtils {
 		return $cat;
 	}
 
+	public static function getSubCategories($category_id) {
+		$cache = Yii::$app->cache;
+
+		$sub_cats = $cache->get("sub_categories_" . $category_id);
+		$categories = [];
+		$categories_ids = []; //tmp helper
+		if ($sub_cats === false) {
+			foreach (Category::find()->asArray()->all() as $key => $category) {
+
+				if (!isset($categories[$category['short_id']])) {
+					$categories[$category['short_id']] = [];
+					$categories_ids[$category['short_id']] = [];
+				}
+
+				if ($category['path'] == "/") {
+					continue;
+				}
+
+				$path = explode("/", $category['path']);
+				if (count($path) >= 3) {
+					array_shift($path);
+					array_pop($path);
+
+					foreach ($path as $key => $category_id_from_path) {
+						if (!isset($categories[$category_id_from_path])) {
+							$categories[$category_id_from_path] = [];
+							$categories_ids[$category_id_from_path] = [];
+						}
+
+						if (!in_array($category['short_id'], $categories_ids[$category_id_from_path])) {
+							$categories[$category_id_from_path][] = $category;
+							$categories_ids[$category_id_from_path][] = $category['short_id'];
+						}
+					}
+				}
+			}
+
+			foreach ($categories as $key => $category) {
+				$cache->set("sub_categories_" . $key, $categories[$key]);
+			}
+
+			$sub_cats = $categories[$category_id];
+		}
+
+		return $sub_cats;
+	}
+
 	public static function getDeviserFullName($deviser) {
 		if (!isset($deviser['personal_info'])) return "";
 
