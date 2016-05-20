@@ -722,7 +722,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 								<div class="col-xs-1 col-height col-middle">
 									<span><?= Yii::t("app/deviser", "Add size to the chart") ?></span>
 								</div>
-								<div class="col-xs-1 col-height col-middle">
+								<div class="col-xs-2 col-height col-middle">
 									<div
 										angular-multi-select
 										input-model="$parent.$parent.available_sizes"
@@ -744,7 +744,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 								<div class="col-xs-1 col-height col-middle">
 									<span class="glyphicon glyphicon-plus pointer fs0-929 fc-f7284b" ng-click="insertSizeInTable()"></span>
 								</div>
-								<div class="col-xs-9"></div>
+								<div class="col-xs-8"></div>
 							</div>
 						</div>
 
