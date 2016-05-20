@@ -15,6 +15,7 @@
 	right: -25px;
 	background-position-x: 50%;
 	background-position-y: 50%;
+	background-repeat: no-repeat;
 	-webkit-filter: blur(15px);
 	-moz-filter: blur(15px);
 	-o-filter: blur(15px);
