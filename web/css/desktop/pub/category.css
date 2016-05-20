@@ -1,0 +1,94 @@
+.main .summary {
+	padding-bottom: 15px;
+	border-bottom: 1px solid#d7d7d7;
+	margin-bottom: 20px;
+}
+
+.main .products_wrapper {
+	padding: 60px 20px 20px 20px;
+}
+
+.main .products {
+	background-color: #EDEDED;
+}
+
+.main .products .product a {
+	width: 100%;
+	height: 100%;
+	display: block;
+}
+
+.main .products .product img {
+	height: 100%;
+	width: 100%;
+	object-fit: cover;
+}
+
+.main .products .product .data {
+	bottom: -30%;
+	left: 0;
+	width: 100%;
+	opacity: 0.9;
+	padding: 8px 0 8px 10px;
+	transition: bottom 0.5s ease;
+}
+
+.main .products .product:hover .data {
+	bottom: 0%;
+	padding: 8px 10px;
+}
+
+.main .products .product .data .marquee {
+	text-overflow: ellipsis;
+	display: block;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.main .products .product .data .marquee:hover {
+	animation: marquee 15s linear infinite;
+}
+
+@keyframes marquee {
+	0%   { text-indent: 0% }
+	100% { text-indent: -150% }
+}
+
+.main .pagination {
+	width: 100%;
+	text-align: center;
+	margin: 0;
+}
+
+.main .pagination li {
+	display: inline-block;
+}
+
+.main .pagination li.disabled {
+	visibility: hidden;
+}
+
+.main .pagination li a {
+	color: #9b9b9b;
+	font-size: 1.357em;
+	font-family: 'UniversLTPro-Condensed';
+	border: none;
+
+	border-radius: 20px;
+	line-height: 1.30em;
+	padding: 6px 15px;
+}
+
+.main .pagination li:hover a {
+	color: #f7284b;
+	background-color: white;
+}
+
+.main .pagination li a {
+	background-color: initial;
+}
+
+.main .pagination li.active a {
+	background-color: innitial;
+	border: 1px solid #9b9b9b;
+}

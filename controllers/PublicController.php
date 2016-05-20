@@ -189,8 +189,42 @@ class PublicController extends CController {
 	}
 
 	public function actionCategory($category_id, $slug) {
-		var_dump("public / category");
-		die();
+
+		$tmp = Yii::$app->mongodb->getCollection('product')
+			->aggregate(
+				[
+					'$project' => [
+						"short_id" => 1, "slug" => 1, "categories" => 1, "name" => 1, "media" => 1
+					]
+				],
+				[
+					'$match' => [
+						'categories' => [
+							'$in' => array_map(function ($category) {
+								return $category['short_id'];
+							}, ModelUtils::getSubCategories($category_id) )
+						]
+					]
+				]
+			);
+
+		foreach ($tmp as $key => &$product) {
+			$product["name"] = @Utils::l($product["name"]) ?: " ";
+			$product["slug"] = @Utils::l($product["slug"]) ?: " ";
+			$product['category'] = ModelUtils::getProductCategoriesNames($product)[0];
+			$product['img'] = ModelUtils::getProductMainPhoto($product);
+		}
+
+		$products = new ArrayDataProvider([
+			'allModels' => $tmp,
+			'pagination' => [
+				'pagesize' => 40,
+			],
+		]);
+
+		return $this->render("category", [
+			'products' => $products
+		]);
 	}
 
 	public function actionProduct($category_id, $product_id, $slug) {
