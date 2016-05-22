@@ -26,9 +26,9 @@ $this->title = 'Todevise / Home';
 	<div class="col-xs-12 no-padding">
 		<div class="relative banner_holder">
 
-			<div id="banner" class="carousel slide" data-ride="carousel" data-keyboard="false">
+			<figure id="banner" class="carousel slide relative" data-ride="carousel" data-keyboard="false">
 
-				<div class="carousel-inner" role="listbox">
+				<div class="carousel-inner absolute" role="listbox">
 					<?php foreach ($banners as $i => $banner) { ?>
 						<div class="flex item <?= $i == 0 ? 'active' : ''  ?>">
 							<img src="<?= $banner['img'] ?>" alt="" />
@@ -48,7 +48,7 @@ $this->title = 'Todevise / Home';
 				<a class="right carousel-control" href="#banner" role="button" data-slide="next">
 					<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
 				</a>
-			</div>
+			</figure>
 
 			<div class="absolute devisers_holder">
 				<div class="white background"></div>
