@@ -229,12 +229,16 @@ class PublicController extends CController {
 
 	public function actionProduct($category_id, $product_id, $slug) {
 
-		$product = Product::findOne([
-			"short_id" => $product_id
-		]);
+		$product = Product::find()
+			->where([
+				"short_id" => $product_id
+			])
+			->asArray()
+			->one();
 
 		$product['name'] = Utils::l($product['name']);
 		$product['description'] = Utils::l($product['description']);
+		$product['category'] = ModelUtils::getProductCategoriesNames($product)[0];
 
 		$tmp = Yii::$app->mongodb->getCollection('product')
 			->aggregate(
@@ -284,6 +288,7 @@ class PublicController extends CController {
 			->one();
 
 		$deviser['img'] = ModelUtils::getDeviserAvatar($deviser);
+		$deviser['fullname'] = ModelUtils::getDeviserFullName($deviser);
 
 		$tags = Tag::find()
 			->where([

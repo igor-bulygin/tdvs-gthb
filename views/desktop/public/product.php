@@ -54,8 +54,8 @@ $this->title = 'Todevise / Product';
 					</div>
 
 					<div class="col-xs-7 max-height flex flex-column flex-justify-center">
-						<span class="category funiv fs0-857 fc-9b fs-upper">Fashion</span>
-						<span class="name funiv_bold fs1-286 fc-48"><?= $deviser['personal_info']['name'] . " " . implode(" ", $deviser['personal_info']['surnames']) ?></span>
+						<span class="category funiv fs0-857 fc-9b fs-upper"><?= $product['category'] ?></span>
+						<span class="name funiv_bold fs1-286 fc-48"><?= $deviser['fullname'] ?></span>
 					</div>
 
 					<div class="col-xs-3 max-height stock_price_wrapper flex flex-column flex-justify-center text-right">
