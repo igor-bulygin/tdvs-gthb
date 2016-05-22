@@ -2,6 +2,7 @@
 namespace app\helpers;
 
 use Yii;
+use app\models\Currency as Cur;
 
 class Currency {
 	const _EUR = "EUR"; //Euros
@@ -120,5 +121,13 @@ class Currency {
 			"amount" => $amount,
 			"currency" => $to_currency
 		];
+	}
+
+	public static function getSymbol($text) {
+		foreach (Cur::CURRENCIES as $key => $value) {
+			if ($value['text'] === $text) {
+				return $value['symbol'];
+			}
+		}
 	}
 }

@@ -10,6 +10,7 @@ use app\models\Returns;
 use app\models\Warranty;
 use app\models\TagOption;
 use yii\widgets\ListView;
+use app\helpers\Currency;
 use app\assets\desktop\pub\ProductAsset;
 
 /* @var $this yii\web\View */
@@ -60,7 +61,7 @@ $this->title = 'Todevise / Product';
 
 					<div class="col-xs-3 max-height stock_price_wrapper flex flex-column flex-justify-center text-right">
 						<span ng-cloak class="stock funiv fs0-857 fc-7aaa4a">{{ selected_options_match.stock }} <?= Yii::t('app/public', 'stock') ?></span>
-						<span ng-cloak class="price funiv_bold fs1-571 fc-7ab83a">{{ product.currency }} {{ selected_options_match.price }}</span>
+						<span ng-cloak class="price funiv_bold fs1-571 fc-7ab83a">{{ selected_options_match.price }} <?= Currency::getSymbol($product['currency']) ?></span>
 					</div>
 
 					<div class="col-xs-12 lwhite"></div>
