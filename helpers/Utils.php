@@ -272,7 +272,7 @@ class Utils {
 	 */
 	public static function l_collection(&$arr, $key) {
 		foreach ($arr as $index => &$value) {
-			$value[$key] = Utils::l($value[$key]);
+			$value[$key] = @Utils::l($value[$key]);
 		}
 	}
 
