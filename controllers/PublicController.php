@@ -348,4 +348,25 @@ class PublicController extends CController {
 			'works' => $works
 		]);
 	}
+
+	public function actionCart(){
+
+		//Manage ajax query an return feedback
+		if (Yii::$app->request->isAjax) {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+
+        $res = array(
+            'body'    => date('Y-m-d H:i:s'),
+            'success' => true,
+        );
+
+        return $res;
+    }
+
+		//Show cart view
+		return $this->render("cart", [
+			'test' => 'this is a test text'
+		]);
+	}
+
 }

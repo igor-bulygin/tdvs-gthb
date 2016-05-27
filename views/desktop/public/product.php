@@ -155,14 +155,14 @@ $this->title = 'Todevise / Product';
 
 					</div>
 
-					<div class="buttons flex flex-justify-center flex-prop-1-0 flex-prop funiv_ultra fs-upper fc-3d fs1 lwhite">
+					<div class="buttons flex flex-justify-center flex-prop-1-0 flex-prop funiv_ultra fs-upper fc-3d fs1 lwhite" ng-init="product_id=<?= $product['short_id'] ?>">
 						<span class="savebox pointer">
 							<span class="glyphicon glyphicon-arrow-down"></span>
 							<span class="funiv_bold fs1 fs-upper"><?= Yii::t('app/public', 'Save in a box') ?></span>
 						</span>
 						<span class="addcart pointer">
 							<span class="glyphicon glyphicon-shopping-cart"></span>
-							<span class="funiv_bold fs1 fs-upper"><?= Yii::t('app/public', 'Add to cart') ?></span>
+							<span class="funiv_bold fs1 fs-upper" ng-click="addToCart(<?= $product['short_id'] ?>)"><?= Yii::t('app/public', 'Add to cart') ?></span>
 						</span>
 					</div>
 

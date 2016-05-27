@@ -153,6 +153,11 @@ todevise.controller('productCtrl', ['$scope', '$cacheFactory', function ($scope,
 	$scope.selected_options_index = {};
 	$scope.selected_options_match = {};
 
+	$scope.addToCart = function (){
+		console.log($scope.product_id);
+		console.log($scope.selected_options);
+	}
+
 	$scope.dump = function(obj) {
 		return angular.toJson(obj, 4);
 	};

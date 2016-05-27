@@ -134,6 +134,10 @@ $config = [
 				//API actions
 				'api/<action:[^/.]*?>/'  => 'api/<action>',
 
+				//Links for a cart listing
+				'cart/' => 'public/cart',
+				'public/cart/' => 'public/cart',
+
 				//Links for deviser profile
 				'<slug:[0-9a-z-A-Z\-]*?>/products/' =>  'admin/products',
 				'<slug:[0-9a-z-A-Z\-]*?>/edit-info/' =>  'deviser/edit-info',
