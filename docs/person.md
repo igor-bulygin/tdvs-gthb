@@ -7,9 +7,9 @@ This is how a single person looks like:
 
 	short_id: '4q1c838', // 7 characters long custom ID (url-safe)
 
-	slug: "foo-bar", // This will exist if the person is a deviser
+	slug: "foo-bar", // This will exist if the person is a deviser. Note that this field isn't an object-like value containing translations for multiple languages. This is by design; devisers aren't supposed to have slugs in more than one language.
 
-	categories: ["30000", "50000"], //Informational only.
+	categories: ["30000", "50000"], //Informational only (for the time being, but it might be used at some point). Note that this field doesn't make any sense for non-devise type users.
 
 	collections: [
 		{
@@ -26,23 +26,26 @@ This is how a single person looks like:
 				"es-ES": "Invierno"
 			}
 		}
-	], //Exists only if deviser
+	], //Exists only if deviser (not implemented yet)
 
 	type: [0, 1], // Each person can have a single or multiple roles, for example, Client and Deviser.
-	// Check the constants in Person model for all the valid values for this.
+	// Check the constants in Person model for all the valid values for this. Note that even if the person has only one type, the value would still be an array.
 
 	personal_info: {
 		name: '', // String
 		surnames: ['', '', ''...], // Array of strings
 		bday: , ISODate('1969-12-31'), // MongoDB Date
 		city: '', // Free text
-		country: 'EN', // Country code
-		biography: '' // This exists if the person is a deviser
+		country: 'EN' // Country code
 	},
 
 	media: {
-		profile: "profile.png",
-		header: "header.jpg"
+		video_links: [
+			"http://foo.bar",
+			"https://bar.foo"
+		],
+		profile: "profile.png", // This is the person's avatar (the circular image)
+		header: "header.jpg" // This is (at least per current specs) available only for devisers. This is the image that appears as a background in the deviser's profile page.
 	},
 
 	credentials: {
