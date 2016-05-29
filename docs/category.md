@@ -11,8 +11,8 @@ This is how a single category looks like:
 	path: '/298fa/c3b1b/677d1/b310f/4q1c8/', // path of IDs of categories to this category or '/' if root category
 	// This should always end with a '/'
 
-	sizecharts: false, // should this category use size charts
-	prints: false, // should this category use prints
+	sizecharts: false, // should this category use size charts? If "yes", the size chart table will appear in the product edit view
+	prints: false, // should this category use prints? If "yes", the prints options will appear in the product edit view
 
 	name: {
 		'en-US': 'Name of category',
