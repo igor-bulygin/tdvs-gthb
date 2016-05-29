@@ -43,12 +43,18 @@ This is how a single size chart looks like:
 		}
 	],
 
-	// This holds the values that were assigned to the dynamically generated table
-	// by mixing the countries and the columns.
+	// This holds the values that were assigned to the dynamically generated table by mixing the countries and the columns.
+	// Note that there are as many values as the sum of all the assigned countries + all the columns.
+	// This specific example's table would look like this:
+	//
+	// Spain    USA    Inside leg    Waist
+	//
+	// 2        S      1             2
+	// 4        M      4             7
+	//
 	values: [
-		[],
-		[]
-		...
+		['2', 'S', 1, 2],
+		['4', 'M', 4, 7]
 	]
 
 ]
