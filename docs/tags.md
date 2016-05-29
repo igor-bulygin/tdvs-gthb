@@ -71,13 +71,6 @@ This is how a single tag looks like:
 	//     metric_type: 1
 	// }
 	//
-	// Keep in mind that free text values are NOT normalized, which means that
-	// it's up to you, dear developer, to save them in the same metric units
-	// and/or type of data you'll then be able to query. As right now I'm leading
-	// this project, I'll use the following normalization rules:
-	//
-	// Weight: all values will be saved in milligrams
-	// Size: all values will be saved in millimeters
 	}
 	options: [
 		{},
