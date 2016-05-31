@@ -154,8 +154,8 @@ todevise.controller('productCtrl', ['$scope', '$cacheFactory', function ($scope,
 	$scope.selected_options_match = {};
 
 	$scope.addToCart = function (){
-		console.log($scope.product_id);
-		console.log($scope.selected_options);
+		console.log($scope.product.short_id);
+		console.log($scope.product);
 	}
 
 	$scope.dump = function(obj) {

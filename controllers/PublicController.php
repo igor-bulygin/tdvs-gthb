@@ -18,6 +18,7 @@ use yii\filters\AccessControl;
 use yii\data\ArrayDataProvider;
 use yii\data\ActiveDataProvider;
 use yii\base\ViewContextInterface;
+use app\models\Faq;
 
 class PublicController extends CController {
 	public $defaultAction = "index";
@@ -350,22 +351,37 @@ class PublicController extends CController {
 	}
 
 	public function actionCart(){
-
 		//Manage ajax query an return feedback
 		if (Yii::$app->request->isAjax) {
-        Yii::$app->response->format = Response::FORMAT_JSON;
+			Yii::$app->response->format = Response::FORMAT_JSON;
 
-        $res = array(
-            'body'    => date('Y-m-d H:i:s'),
-            'success' => true,
-        );
+			$res = array(
+				'body'    => date('Y-m-d H:i:s'),
+				'success' => true,
+			);
 
-        return $res;
-    }
+			return $res;
+		}
 
 		//Show cart view
 		return $this->render("cart", [
 			'test' => 'this is a test text'
+		]);
+	}
+
+	public function actionFaq(){
+		$lang = Yii::$app->language;
+
+		$answersAndQuestions = Faq::find()
+			->where([
+				"lang" => $lang
+			])
+			->asArray()->all();
+
+
+		return $this->render("faq", [
+			'test' => 'this is a test text for faq',
+			'answersAndQuestions' => $answersAndQuestions
 		]);
 	}
 
