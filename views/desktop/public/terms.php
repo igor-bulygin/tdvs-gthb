@@ -7,55 +7,46 @@ use yii\widgets\Pjax;
 use app\helpers\Utils;
 use yii\widgets\ListView;
 use app\assets\desktop\pub\StatictextAsset;
-use app\assets\desktop\pub\FaqAsset;
+//use app\assets\desktop\pub\TermsAsset;
 
 
 /* @var $this yii\web\View */
 
 $this->params['breadcrumbs'][] = [
-	'label' => 'FAQ',
-	'url' => ['/public/faq']
+	'label' => 'Terms',
+	'url' => ['/public/terms']
 ];
 
-FaqAsset::register($this);
 StatictextAsset::register($this);
 
-
-$this->title = 'Todevise / FAQ';
+$this->title = 'Todevise / Terms';
 
 // TODO: Maybe get questions and answers from db
 ?>
 
 <div class="row no-gutter">
-	<div class="col-xs-12 no-padding flex flex-column">
+	<div class="col-xs-12 no-padding terms">
 
 		<div class="search-header-content fc-fff">
 			<div class="cols-xs12 fs3-857 fs-upper flex flex-align-center search-header">
-				<div class="center-justify"><h1><?= Yii::t('app/public', 'Help & Faq') ?></h1></div>
+				<div class="center-justify"><h1><?= Yii::t('app/public', 'Terms & Conditions') ?></h1></div>
 			</div>
 		</div>
 
-		<div class="col-xs-12 flex">
+		<div class="col-xs-12 flex flex-prop-1">
 			<div class="column-left col-xs-2 funiv_bold fs-upper bc-e9">
-				<div class="column-header fs1-357 fc-fff bc-d8 flex flex-align-center"><span><?= Yii::t('app/public', 'FAQ') ?></span></div>
 				<div>
 					<ul class="fs0-857 funiv_bold">
-						<li>quest 1</li>
-						<li>quest 2</li>
+						<li>topic 1</li>
+						<li>topic 2</li>
 					</ul>
 				</div>
 			</div>
-
-			<div class="fpf fs0-857">
-				<?php foreach ($answersAndQuestions as $answerQuestion){ ?>
-	      	<div class="question"><span><?= $answerQuestion['question'] ?></span></div>
-	      	<div class="answer"><span><?= $answerQuestion['answer'] ?></span></div>
-				<?php } ?>
-	    </div>
-
 		</div>
 
+    <div class="fpf">
 
+    </div>
 
 		<?php
 

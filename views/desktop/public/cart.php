@@ -22,7 +22,7 @@ $this->title = 'Todevise / Cart';
 ?>
 
 <div class="row no-gutter">
-	<div class="col-xs-12 no-padding products">
+	<div class="col-xs-12 no-padding cart">
 
 		<?php
 

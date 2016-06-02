@@ -138,6 +138,9 @@ $config = [
 				'cart/' => 'public/cart',
 				'public/cart/' => 'public/cart',
 
+				//links for terms
+				'terms/' => 'public/terms',
+
 				//Links for faq
 				'faq/' => 'public/faq',
 

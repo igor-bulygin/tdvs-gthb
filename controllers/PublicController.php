@@ -390,7 +390,16 @@ class PublicController extends CController {
 
 
 		return $this->render("about", [
-			'test' => 'this is a test text for faq'
+			'test' => 'this is a test text for about'
+		]);
+	}
+
+	public function actionTerms(){
+		$lang = Yii::$app->language;
+
+
+		return $this->render("terms", [
+			'test' => 'this is a test text for terms'
 		]);
 	}
 
