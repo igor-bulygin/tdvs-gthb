@@ -385,4 +385,13 @@ class PublicController extends CController {
 		]);
 	}
 
+	public function actionAbout(){
+		$lang = Yii::$app->language;
+
+
+		return $this->render("about", [
+			'test' => 'this is a test text for faq'
+		]);
+	}
+
 }
