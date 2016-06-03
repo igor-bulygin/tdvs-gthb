@@ -22,8 +22,8 @@ StatictextAsset::register($this);
 
 
 $this->title = 'Todevise / FAQ';
+$lang = Yii::$app->language;
 
-// TODO: Maybe get questions and answers from db
 ?>
 
 <div class="row no-gutter">
@@ -49,16 +49,20 @@ $this->title = 'Todevise / FAQ';
 				<div class="column-header fs1-357 fc-fff bc-d8 flex flex-align-center"><span><?= Yii::t('app/public', 'FAQ') ?></span></div>
 				<div>
 					<ul class="fs0-857 funiv_bold">
-						<li>quest 1</li>
-						<li>quest 2</li>
+						<?php foreach ($answersAndQuestions as $answerQuestion){ ?>
+						<li id="question-<?= $answerQuestion['short_id'] ?>"><?= $answerQuestion['question'][$lang] ?></li>
+						<?php } ?>
 					</ul>
 				</div>
 			</div>
 
-			<div class="fpf fs0-857">
+			<div class="fpf central-text-content">
 				<?php foreach ($answersAndQuestions as $answerQuestion){ ?>
-	      	<div class="question"><span><?= $answerQuestion['question'] ?></span></div>
-	      	<div class="answer"><span><?= $answerQuestion['answer'] ?></span></div>
+	      	<div class="question-content fs0-857 funiv_bold fs-upper">
+						<span class="glyphicon glyphicon-minus-sign fc-c7"></span>
+						<span class="underline question"><?= $answerQuestion['question'][$lang] ?></span>
+					</div>
+	      	<div class="answer"><span><?= $answerQuestion['answer'][$lang] ?></span></div>
 				<?php } ?>
 	    </div>
 

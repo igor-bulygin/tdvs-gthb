@@ -57,3 +57,25 @@
 .column-left ul li {
   margin: 20px;
 }
+
+.central-text-content{
+  margin-top: 71px;
+  margin-left: 27px;
+}
+
+/*** FAQ ONLY ***/
+.answer{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 33px;
+}
+
+.question{
+  margin-left: 17px;
+}
+
+
+/*** TERMS ONLY ****/
+.terms .column-left ul{
+  margin-top: 75px;
+}

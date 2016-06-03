@@ -20,12 +20,12 @@ $this->params['breadcrumbs'][] = [
 StatictextAsset::register($this);
 
 $this->title = 'Todevise / Terms';
+$lang = Yii::$app->language;
 
-// TODO: Maybe get questions and answers from db
 ?>
 
 <div class="row no-gutter">
-	<div class="col-xs-12 no-padding terms">
+	<div class="col-xs-12 no-padding flex flex-column terms">
 
 		<div class="search-header-content fc-fff">
 			<div class="cols-xs12 fs-upper flex flex-align-center flex-column flex-justify-center search-header">
@@ -42,20 +42,27 @@ $this->title = 'Todevise / Terms';
 			</div>
 		</div>
 
-		<div class="col-xs-12 flex flex-prop-1">
+		<div class="col-xs-12 flex">
 			<div class="column-left col-xs-2 funiv_bold fs-upper bc-e9">
 				<div>
 					<ul class="fs0-857 funiv_bold">
-						<li>topic 1</li>
-						<li>topic 2</li>
+						<?php foreach ($statictext as $oneStatictext){ ?>
+						<li id="title-<?= $oneStatictext['short_id'] ?>"><?= $oneStatictext['title'][$lang] ?></li>
+						<?php } ?>
 					</ul>
 				</div>
 			</div>
+
+			<div class="fpf central-text-content">
+				<?php foreach ($statictext as $oneStatictext){ ?>
+	      	<div class="question-content fs0-857 funiv_bold fs-upper">
+						<span class="underline question title-<?= $oneStatictext['short_id'] ?>"><?= $oneStatictext['title'][$lang] ?></span>
+					</div>
+	      	<div class="answer text-<?= $oneStatictext['short_id'] ?>"><span><?= $oneStatictext['text'][$lang] ?></span></div>
+				<?php } ?>
+	    </div>
+
 		</div>
-
-    <div class="fpf">
-
-    </div>
 
 		<?php
 

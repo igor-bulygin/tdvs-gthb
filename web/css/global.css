@@ -315,6 +315,12 @@ a:hover {
 	font-weight: bold;
 }
 
+/**** FONT DECORATION ****/
+
+.fs-underline{
+	text-decoration: underline;
+}
+
 /**** FONT SPACING ****/
 
 .ls0-01 {
@@ -582,3 +588,9 @@ a:hover {
 .silver {
 	background-color: #c0c0c0;
 }
+
+/**** EXTRA ****/
+
+.underline{
+  border-bottom: 3px solid #9f9f9f;
+}	
