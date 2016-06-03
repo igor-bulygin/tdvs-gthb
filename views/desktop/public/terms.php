@@ -6,9 +6,8 @@ use yii\helpers\Html;
 use yii\widgets\Pjax;
 use app\helpers\Utils;
 use yii\widgets\ListView;
+use app\assets\desktop\pub\TermsAsset;
 use app\assets\desktop\pub\StatictextAsset;
-//use app\assets\desktop\pub\TermsAsset;
-
 
 /* @var $this yii\web\View */
 
@@ -17,6 +16,7 @@ $this->params['breadcrumbs'][] = [
 	'url' => ['/public/terms']
 ];
 
+TermsAsset::register($this);
 StatictextAsset::register($this);
 
 $this->title = 'Todevise / Terms';
@@ -47,7 +47,7 @@ $lang = Yii::$app->language;
 				<div>
 					<ul class="fs0-857 funiv_bold">
 						<?php foreach ($statictext as $oneStatictext){ ?>
-						<li id="title-<?= $oneStatictext['short_id'] ?>"><?= $oneStatictext['title'][$lang] ?></li>
+						<li id="text-<?= $oneStatictext['short_id'] ?>" class="menu-entry"><?= $oneStatictext['title'][$lang] ?></li>
 						<?php } ?>
 					</ul>
 				</div>
@@ -55,10 +55,10 @@ $lang = Yii::$app->language;
 
 			<div class="fpf central-text-content">
 				<?php foreach ($statictext as $oneStatictext){ ?>
-	      	<div class="question-content fs0-857 funiv_bold fs-upper">
-						<span class="underline question title-<?= $oneStatictext['short_id'] ?>"><?= $oneStatictext['title'][$lang] ?></span>
+	      	<div class="title-content fs0-857 funiv_bold fs-upper">
+						<span class="underline term-title title-<?= $oneStatictext['short_id'] ?>"><?= $oneStatictext['title'][$lang] ?></span>
 					</div>
-	      	<div class="answer text-<?= $oneStatictext['short_id'] ?>"><span><?= $oneStatictext['text'][$lang] ?></span></div>
+	      	<div class="text-content text-<?= $oneStatictext['short_id'] ?>"><span><?= $oneStatictext['text'][$lang] ?></span></div>
 				<?php } ?>
 	    </div>
 

@@ -144,6 +144,9 @@ $config = [
 				//Links for faq
 				'faq/' => 'public/faq',
 
+				//Links for contact
+				'contact/' => 'public/contact',
+
 				//Links for deviser profile
 				'<slug:[0-9a-z-A-Z\-]*?>/products/' =>  'admin/products',
 				'<slug:[0-9a-z-A-Z\-]*?>/edit-info/' =>  'deviser/edit-info',

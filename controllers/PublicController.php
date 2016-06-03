@@ -388,8 +388,6 @@ class PublicController extends CController {
 	}
 
 	public function actionAbout(){
-		$lang = Yii::$app->language;
-
 
 		return $this->render("about", [
 			'test' => 'this is a test text for about'
@@ -397,7 +395,6 @@ class PublicController extends CController {
 	}
 
 	public function actionTerms(){
-		$lang = Yii::$app->language;
 
 		$statictext = StaticText::find()
 		->where([
@@ -409,6 +406,12 @@ class PublicController extends CController {
 		return $this->render("terms", [
 			'test' => 'this is a test text for terms',
 			'statictext' => $statictext
+		]);
+	}
+
+	public function actionContact(){
+		return $this->render("contact", [
+			'test' => 'this is a test text for contact'
 		]);
 	}
 

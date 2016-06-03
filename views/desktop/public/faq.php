@@ -59,7 +59,7 @@ $lang = Yii::$app->language;
 			<div class="fpf central-text-content">
 				<?php foreach ($answersAndQuestions as $answerQuestion){ ?>
 	      	<div class="question-content fs0-857 funiv_bold fs-upper">
-						<span class="glyphicon glyphicon-minus-sign fc-c7"></span>
+						<span class="glyphicon glyphicon-plus-sign fc-c7"></span>
 						<span class="underline question"><?= $answerQuestion['question'][$lang] ?></span>
 					</div>
 	      	<div class="answer answer-<?= $answerQuestion['short_id'] ?>"><span><?= $answerQuestion['answer'][$lang] ?></span></div>
