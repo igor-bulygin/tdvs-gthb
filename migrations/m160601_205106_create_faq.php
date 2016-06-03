@@ -16,18 +16,23 @@ class m160601_205106_create_faq extends Migration
 
     $this->insert('faq',[
       'short_id' => '1000',
-      'question' => 'what is todevise',
-      'answer' => 'Todevise is a new concept of online store where you can browse',
-      'lang' => $en
+      'question' => [
+        $en => 'what is todevise',
+      ],
+      'answer' => [
+        $en => 'Todevise is a new concept of online store where you can browse'
+      ]
     ]);
 
     $this->insert('faq',[
       'short_id' => '2000',
-      'question' => 'what a deviser?',
-      'answer' => 'a deviser is a someone ... test text',
-      'lang' => $en
+      'question' => [
+        $en => 'what a deviser?',
+      ],
+      'answer' => [
+        $en => 'a deviser is a someone ... test text'
+      ]
     ]);
-
 
   }
 

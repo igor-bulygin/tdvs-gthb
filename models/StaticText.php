@@ -7,17 +7,20 @@ use app\helpers\CActiveRecord;
 use yii\web\IdentityInterface;
 use yii\base\NotSupportedException;
 
-class Faq extends CActiveRecord {
+//TODO create migration
+
+class StaticText extends CActiveRecord {
 	public static function collectionName() {
-		return 'faq';
+		return 'statictext';
 	}
 
 	public function attributes() {
 		return [
 			'_id',
 			'short_id',
-			'question',
-			'answer',
+			'title',
+			'text',
+			'static_section'
 		];
 	}
 }

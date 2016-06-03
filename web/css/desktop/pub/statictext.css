@@ -9,6 +9,41 @@
   background-color: #3a3939;
 }
 
+.search-header-content input{
+  display: flex;
+  flex-grow: 1;
+  outline: none;
+  border: none;
+  padding: 5px 35px 5px 10px;
+  border-radius: 21px;
+}
+
+.search-header-content .search_holder{
+  position: relative;
+}
+
+.search-header-content .search_holder, .search-header-content .search_holder input{
+  width: 398px;
+}
+
+.search-header-content .glyphicon-content, .search-header-content .search_holder input{
+  height: 38px;
+}
+.search-header-content .glyphicon-content{
+  position: absolute;
+  width: 35px;
+  right: 0px;
+  top: 0px;
+  border-top-right-radius:21px;
+  border-bottom-right-radius:21px;
+  font-size: 1.4em;
+}
+
+.search-header-content .glyphicon-content .glyphicon{
+  left:10px;
+  top:10px;
+}
+
 .column-header{
   height: 51px;
   padding-left: 20px;

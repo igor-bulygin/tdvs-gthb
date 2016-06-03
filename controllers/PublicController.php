@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Tag;
+use app\models\StaticText;
 use yii\helpers\Url;
 use app\models\Person;
 use app\helpers\Utils;
@@ -372,12 +373,13 @@ class PublicController extends CController {
 	public function actionFaq(){
 		$lang = Yii::$app->language;
 
+		// $answersAndQuestions = Faq::find()
+		// 	->where([
+		// 		"lang" => $lang
+		// 	])
+		// 	->asArray()->all();
 		$answersAndQuestions = Faq::find()
-			->where([
-				"lang" => $lang
-			])
 			->asArray()->all();
-
 
 		return $this->render("faq", [
 			'test' => 'this is a test text for faq',
@@ -397,9 +399,16 @@ class PublicController extends CController {
 	public function actionTerms(){
 		$lang = Yii::$app->language;
 
+		$statictext = StaticText::find()
+		->where([
+			"static_section" => 'terms'
+		])
+		->asArray()->all();
+
 
 		return $this->render("terms", [
-			'test' => 'this is a test text for terms'
+			'test' => 'this is a test text for terms',
+			'statictext' => $statictext
 		]);
 	}
 
