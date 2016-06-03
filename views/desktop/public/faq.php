@@ -50,7 +50,7 @@ $lang = Yii::$app->language;
 				<div>
 					<ul class="fs0-857 funiv_bold">
 						<?php foreach ($answersAndQuestions as $answerQuestion){ ?>
-						<li id="question-<?= $answerQuestion['short_id'] ?>"><?= $answerQuestion['question'][$lang] ?></li>
+						<li id="answer-<?= $answerQuestion['short_id'] ?>" class="menu-entry"><?= $answerQuestion['question'][$lang] ?></li>
 						<?php } ?>
 					</ul>
 				</div>
@@ -62,7 +62,7 @@ $lang = Yii::$app->language;
 						<span class="glyphicon glyphicon-minus-sign fc-c7"></span>
 						<span class="underline question"><?= $answerQuestion['question'][$lang] ?></span>
 					</div>
-	      	<div class="answer"><span><?= $answerQuestion['answer'][$lang] ?></span></div>
+	      	<div class="answer answer-<?= $answerQuestion['short_id'] ?>"><span><?= $answerQuestion['answer'][$lang] ?></span></div>
 				<?php } ?>
 	    </div>
 
