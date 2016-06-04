@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Html;
+use yii\helpers\Url;
 use app\components\assets\publicFooterAsset;
 
 publicFooterAsset::register($this);
@@ -71,7 +72,7 @@ publicFooterAsset::register($this);
 							]); ?>
 						</li>
 						<li>
-							<?= Html::a(Yii::t("app/public", 'FAQs'), "/faq/", [
+							<?= Html::a(Yii::t("app/public", 'FAQs'), Url::to(['public/faq']), [
 								'class' => "fc-c7"
 							]); ?>
 						</li>

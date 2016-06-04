@@ -1,86 +1,86 @@
 .column-left{
-  width:247px;
+	width:247px;
 }
 
 .search-header{
-  height: 260px;
+	height: 260px;
 }
 .search-header-content{
-  background-color: #3a3939;
+	background-color: #3a3939;
 }
 
 .search-header-content input{
-  display: flex;
-  flex-grow: 1;
-  outline: none;
-  border: none;
-  padding: 5px 35px 5px 10px;
-  border-radius: 21px;
+	display: flex;
+	flex-grow: 1;
+	outline: none;
+	border: none;
+	padding: 5px 35px 5px 10px;
+	border-radius: 21px;
 }
 
 .search-header-content .search_holder{
-  position: relative;
+	position: relative;
 }
 
 .search-header-content .search_holder, .search-header-content .search_holder input{
-  width: 398px;
+	width: 398px;
 }
 
 .search-header-content .glyphicon-content, .search-header-content .search_holder input{
-  height: 38px;
+	height: 38px;
 }
 .search-header-content .glyphicon-content{
-  position: absolute;
-  width: 35px;
-  right: 0px;
-  top: 0px;
-  border-top-right-radius:21px;
-  border-bottom-right-radius:21px;
-  font-size: 1.4em;
+	position: absolute;
+	width: 35px;
+	right: 0px;
+	top: 0px;
+	border-top-right-radius:21px;
+	border-bottom-right-radius:21px;
+	font-size: 1.4em;
 }
 
 .search-header-content .glyphicon-content .glyphicon{
-  left:10px;
-  top:10px;
+	left:10px;
+	top:10px;
 }
 
 .column-header{
-  height: 51px;
-  padding-left: 20px;
+	height: 51px;
+	padding-left: 20px;
 }
 
 .column-left ul {
-  list-style-type: none;
-  padding: 0px;
+	list-style-type: none;
+	padding: 0px;
 }
 
 .column-left ul li {
-  margin: 20px;
-  cursor: pointer;
+	margin: 20px;
+	cursor: pointer;
 }
 
 .central-text-content{
-  margin-top: 71px;
-  margin-left: 27px;
+	margin-top: 71px;
+	margin-left: 27px;
 }
 
 /*** FAQ ONLY ***/
 .answer, .text-content{
-  margin-top: 20px;
-  margin-bottom: 20px;
-  margin-left: 33px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	margin-left: 33px;
 }
 
 .question-content{
-  cursor: pointer;
+	cursor: pointer;
 }
 
 .question, .term-title{
-  margin-left: 17px;
+	margin-left: 17px;
 }
 
 
 /*** TERMS ONLY ****/
 .terms .column-left ul{
-  margin-top: 75px;
+	margin-top: 75px;
 }

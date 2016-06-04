@@ -1,8 +1,8 @@
 .contact{
-  height: 100vh;
+	height: 100vh;
 }
 
 .contact-left, .contact-right, .contact-down-left,
 .contact-down-center, .contact-down-right{
-  width: 100%;
+	width: 100%;
 }

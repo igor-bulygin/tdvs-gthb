@@ -9,10 +9,8 @@ class StatictextAsset extends AssetBundle {
 	public $css = [
 		'css/desktop/pub/statictext.css'
 	];
-	
+
 	public $depends = [
 		'app\assets\desktop\pub\GlobalAsset',
-		'app\assets\libs\socialShareKitAsset',
-		'app\assets\libs\justifiedGalleryAsset'
 	];
 }
