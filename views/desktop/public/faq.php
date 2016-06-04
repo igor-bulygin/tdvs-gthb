@@ -3,6 +3,7 @@ use yii\web\View;
 use yii\helpers\Url;
 use app\models\Lang;
 use yii\helpers\Html;
+use yii\helpers\Json;
 use yii\widgets\Pjax;
 use app\helpers\Utils;
 use yii\widgets\ListView;
@@ -26,7 +27,10 @@ $lang = Yii::$app->language;
 
 ?>
 
-<div class="row no-gutter">
+<div class="row no-gutter" ng-controller="faqCtrl" ng-init="init()">
+
+	<?php $this->registerJs("var _answersAndQuestions = " . Json::encode($answersAndQuestions) . ";", View::POS_END); ?>
+
 	<div class="col-xs-12 no-padding flex flex-column">
 
 		<div class="search-header-content fc-fff">
@@ -50,20 +54,21 @@ $lang = Yii::$app->language;
 				<div>
 					<ul class="fs0-857 funiv_bold">
 						<?php foreach ($answersAndQuestions as $answerQuestion){ ?>
-						<li id="answer-<?= $answerQuestion['short_id'] ?>" class="menu-entry"><?= $answerQuestion['question'][$lang] ?></li>
+						<li id="answer-<?= $answerQuestion['short_id'] ?>" class="menu-entry"><?= $answerQuestion['question'] ?></li>
 						<?php } ?>
 					</ul>
 				</div>
 			</div>
 
 			<div class="fpf central-text-content">
-				<?php foreach ($answersAndQuestions as $answerQuestion){ ?>
-					<div class="question-content fs0-857 funiv_bold fs-upper">
+				<div ng-repeat="(questid, oneAnswQuest) in answersAndQuestions">
+					<div class="question-content fs0-857 funiv_bold fs-upper" ng-click="showAnswer = ! showAnswer">
 						<span class="glyphicon glyphicon-plus-sign fc-c7"></span>
-						<span class="underline question"><?= $answerQuestion['question'][$lang] ?></span>
+						<span class="underline question">{{oneAnswQuest.question}}</span>
 					</div>
-					<div class="answer answer-<?= $answerQuestion['short_id'] ?>"><span><?= $answerQuestion['answer'][$lang] ?></span></div>
-				<?php } ?>
+					<div class="answer" ng-show="showAnswer"><span>{{oneAnswQuest.answer}}</span></div>
+				</div>
+
 			</div>
 		</div>
 

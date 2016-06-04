@@ -381,6 +381,9 @@ class PublicController extends CController {
 		$answersAndQuestions = Faq::find()
 			->asArray()->all();
 
+		Utils::l_collection($answersAndQuestions, "question");
+		Utils::l_collection($answersAndQuestions, "answer");
+
 		return $this->render("faq", [
 			'test' => 'this is a test text for faq',
 			'answersAndQuestions' => $answersAndQuestions
