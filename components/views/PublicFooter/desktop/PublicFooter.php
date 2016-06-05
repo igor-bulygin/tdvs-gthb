@@ -67,7 +67,7 @@ publicFooterAsset::register($this);
 							]); ?>
 						</li>
 						<li>
-							<?= Html::a(Yii::t("app/public", 'Contact us'), "", [
+							<?= Html::a(Yii::t("app/public", 'Contact us'), Url::to(['public/contact']), [
 								'class' => "fc-c7"
 							]); ?>
 						</li>

@@ -17,9 +17,6 @@ todevise.controller('faqCtrl', ['$scope', '$cacheFactory', function ($scope, $ca
 
 }]);
 
-
-
-
 // $(function() {
 // 	function reset() {
 // 		$(".answer").hide();

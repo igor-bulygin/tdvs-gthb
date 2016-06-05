@@ -7,8 +7,8 @@ class TermsAsset extends AssetBundle {
 	public $basePath = '@webroot';
 	public $baseUrl = '@web';
 	public $css = [
-		'css/desktop/pub/terms.css',
-		'css/desktop/pub/statictext.css'
+		'css/desktop/pub/statictext.css',
+		'css/desktop/pub/terms.css'
 	];
 	public $js = [
 		'js/desktop/pub/terms.js'

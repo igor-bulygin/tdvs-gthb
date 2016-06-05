@@ -7,6 +7,7 @@ class ContactAsset extends AssetBundle {
 	public $basePath = '@webroot';
 	public $baseUrl = '@web';
 	public $css = [
+		'css/desktop/pub/statictext.css',
 		'css/desktop/pub/contact.css'
 	];
 	public $js = [
@@ -14,7 +15,5 @@ class ContactAsset extends AssetBundle {
 	];
 	public $depends = [
 		'app\assets\desktop\pub\GlobalAsset',
-		'app\assets\libs\socialShareKitAsset',
-		'app\assets\libs\justifiedGalleryAsset'
 	];
 }

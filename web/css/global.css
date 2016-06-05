@@ -259,6 +259,10 @@ a:hover {
 	font-size: 1.571em;
 }
 
+.fs1-587 {
+	font-size: 1.587em;
+}
+
 .fs1-643 {
 	font-size: 1.643em;
 }
@@ -277,6 +281,10 @@ a:hover {
 
 .fs3-857 {
 	font-size: 3.857em;
+}
+
+.fs3-000 {
+	font-size: 3em;
 }
 
 .fs4 {
@@ -565,6 +573,14 @@ a:hover {
 	background-color: #bfbfbf;
 }
 
+.grey-soft {
+	background-color: #e4e4e4;
+}
+
+.grey-hard {
+	background-color: #3d3d3d;
+}
+
 .black {
 	background-color: #2e2e2e;
 }
@@ -593,4 +609,4 @@ a:hover {
 
 .underline{
   border-bottom: 3px solid #9f9f9f;
-}	
+}
