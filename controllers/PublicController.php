@@ -378,15 +378,18 @@ class PublicController extends CController {
 		// 		"lang" => $lang
 		// 	])
 		// 	->asArray()->all();
-		$answersAndQuestions = Faq::find()
+		$groupOfFaqs = Faq::find()
 			->asArray()->all();
 
-		Utils::l_collection($answersAndQuestions, "question");
-		Utils::l_collection($answersAndQuestions, "answer");
+		foreach ($groupOfFaqs as $key => &$oneFaq){
+			Utils::l_collection($oneFaq['faqs'], "question");
+			Utils::l_collection($oneFaq['faqs'], "answer");
+			$oneFaq['title'] = Utils::l($oneFaq['title']);
+		}
 
 		return $this->render("faq", [
 			'test' => 'this is a test text for faq',
-			'answersAndQuestions' => $answersAndQuestions
+			'groupOfFaqs' => $groupOfFaqs
 		]);
 	}
 

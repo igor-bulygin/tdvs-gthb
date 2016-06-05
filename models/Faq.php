@@ -16,8 +16,8 @@ class Faq extends CActiveRecord {
 		return [
 			'_id',
 			'short_id',
-			'question',
-			'answer',
+			'title',
+			'faqs',
 		];
 	}
 }

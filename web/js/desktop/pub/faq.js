@@ -8,10 +8,13 @@ var todevise = angular.module('todevise', []);
  //TODO: $cacheFactory needed?
 todevise.controller('faqCtrl', ['$scope', '$cacheFactory', function ($scope, $cacheFactory) {
 
-	$scope.answersAndQuestions = _answersAndQuestions;
+	$scope.groupOfFaqs = _groupOfFaqs;
+	$scope.activeFacId = 0;
 
-	console.log(_answersAndQuestions);
-	console.log($scope.anwersAndQuestions);
+	$scope.showFaqs = function (activeFacId){
+		$scope.activeFacId = activeFacId;
+	}
+
 }]);
 
 
