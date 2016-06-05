@@ -9,10 +9,10 @@ var todevise = angular.module('todevise', []);
 todevise.controller('faqCtrl', ['$scope', '$cacheFactory', function ($scope, $cacheFactory) {
 
 	$scope.groupOfFaqs = _groupOfFaqs;
-	$scope.activeFacId = 0;
+	$scope.activeFaqId = $scope.groupOfFaqs[0].short_id; //activate first group as default
 
-	$scope.showFaqs = function (activeFacId){
-		$scope.activeFacId = activeFacId;
+	$scope.showFaqs = function (activeFaqId){
+		$scope.activeFaqId = activeFaqId;
 	}
 
 }]);

@@ -7,7 +7,6 @@ use yii\helpers\Json;
 use yii\widgets\Pjax;
 use app\helpers\Utils;
 use yii\widgets\ListView;
-use app\assets\desktop\pub\StatictextAsset;
 use app\assets\desktop\pub\FaqAsset;
 
 
@@ -19,7 +18,6 @@ $this->params['breadcrumbs'][] = [
 ];
 
 FaqAsset::register($this);
-StatictextAsset::register($this);
 
 
 $this->title = 'Todevise / FAQ';
@@ -60,7 +58,7 @@ $lang = Yii::$app->language;
 
 			<div class="fpf central-text-content">
 				<div ng-repeat="answersAndQuestions in groupOfFaqs">
-					<div ng-if="activeFacId == answersAndQuestions.short_id">
+					<div ng-if="activeFaqId == answersAndQuestions.short_id">
 						<div ng-repeat="(questid, oneAnswQuest) in answersAndQuestions.faqs">
 							<div class="question-content fs0-857 funiv_bold fs-upper" ng-click="showAnswer = ! showAnswer">
 								<span class="glyphicon glyphicon-plus-sign fc-c7"></span>

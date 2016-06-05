@@ -7,7 +7,6 @@ use yii\widgets\Pjax;
 use app\helpers\Utils;
 use yii\widgets\ListView;
 use app\assets\desktop\pub\TermsAsset;
-use app\assets\desktop\pub\StatictextAsset;
 
 /* @var $this yii\web\View */
 
@@ -17,7 +16,6 @@ $this->params['breadcrumbs'][] = [
 ];
 
 TermsAsset::register($this);
-StatictextAsset::register($this);
 
 $this->title = 'Todevise / Terms';
 $lang = Yii::$app->language;

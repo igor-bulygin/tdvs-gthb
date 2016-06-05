@@ -1,0 +1,14 @@
+/*** FAQ ONLY ***/
+.answer{
+	margin-top: 20px;
+	margin-bottom: 20px;
+	margin-left: 33px;
+}
+
+.question-content{
+	cursor: pointer;
+}
+
+.question{
+	margin-left: 17px;
+}
