@@ -16,7 +16,7 @@
 	padding: 40px;
 }
 
-.dropdown button, .contactForm input{
+.dropdown button, .form-group input, .form-group select{
 	width: 299px;
 	height: 38px;
 	margin-bottom: 14px;
@@ -28,6 +28,10 @@
 	border-radius: 21px;
 	background-color: #fff;
 	background-color: rgba(255, 255, 255, 0.95);
+}
+
+.form-group textarea{
+	border-radius: 20px;
 }
 
 .question, .answer{
@@ -56,6 +60,17 @@
 	background-color: #e6e6e6;
 }
 
+.send_button{
+	width: 50px;
+	height: 50px;
+	border-radius: 25px;
+
+}
+
+.send_button:hover{
+	background-color: #f7284b;
+	color: #fff;
+}
 
 /**** CSS FOR DROPDOWN ONLY ****/
 .dropbtn {

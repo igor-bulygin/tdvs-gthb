@@ -11,6 +11,7 @@ use app\helpers\Utils;
 use yii\web\Controller;
 use app\models\Product;
 use app\models\Category;
+use app\models\ContactForm;
 use yii\base\DynamicModel;
 use yii\filters\VerbFilter;
 use app\helpers\ModelUtils;
@@ -20,6 +21,7 @@ use yii\data\ArrayDataProvider;
 use yii\data\ActiveDataProvider;
 use yii\base\ViewContextInterface;
 use app\models\Faq;
+use yii\web\Response;
 
 class PublicController extends CController {
 	public $defaultAction = "index";
@@ -408,7 +410,6 @@ class PublicController extends CController {
 		])
 		->asArray()->all();
 
-
 		return $this->render("terms", [
 			'test' => 'this is a test text for terms',
 			'statictext' => $statictext
@@ -416,9 +417,25 @@ class PublicController extends CController {
 	}
 
 	public function actionContact(){
-		return $this->render("contact", [
-			'test' => 'this is a test text for contact'
-		]);
+		$dropdown_members = ['a' => 'one question', 'b' => 'a second question', 'c' => 'more questions'];
+		$model = new ContactForm();
+
+		if ($model->load(Yii::$app->request->post())) {
+			return $this->render("contact", [
+				'test' => $model->hasErrors(),
+				'model' => $model,
+				'dropdown_members' => $dropdown_members,
+			]);
+			//return $res;
+			//return $this->redirect(['view', 'id' => $model->code]);
+		} else {
+			return $this->render("contact", [
+				'test' => 'normal',
+				'model' => $model,
+				'dropdown_members' => $dropdown_members
+			]);
+
+	}
 	}
 
 }

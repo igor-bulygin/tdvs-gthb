@@ -7,6 +7,9 @@ use yii\widgets\Pjax;
 use app\helpers\Utils;
 use yii\widgets\ListView;
 use app\assets\desktop\pub\ContactAsset;
+use yii\widgets\ActiveForm;
+use kartik\widgets\DepDrop;
+
 
 /* @var $this yii\web\View */
 
@@ -60,19 +63,23 @@ $lang = Yii::$app->language;
 			</div>
 			<div class="contact-right flex flex-align-center flex-column flex-justify-center">
 				<div class="fs3-857 funiv_thin fs-upper fc-6d"><?= Yii::t('app/public', 'Contact via Message') ?></div>
+				<div class="funiv_bold fs0-857">
+					<?php $form = ActiveForm::begin(); ?>
+					<?php
+						echo $form->field($model, 'name')->input('name', ['placeholder' => "NAME"])->label(false);
+						echo $form->field($model, 'email')->input('email', ['placeholder' => "EMAIL"])->label(false);
+						echo $form->field($model, 'about')->dropDownList($dropdown_members, ['prompt'=>'What is your question about?'])->label(false);
+						echo $form->field($model, 'subject')->input('subject', ['placeholder' => "SUBJECT"])->label(false);
+						echo $form->field($model, 'body')->textArea(['rows' => '6', 'placeholder' => "MESSAGE"])->label(false);
+						echo Html::submitButton(
+							'<i class="glyphicon glyphicon-send"></i>',
+							['class'=>'fc-fff btn send_button']
+						);
+					?>
 
-				<form name="contactForm" class="contactForm funiv_bold fs-upper">
-					<div><input ng-model="formData.name" type="text" placeholder="NAME"/></div>
-					<div><input ng-model="formData.email" type="text" placeholder="EMAIL"/></div>
-					<div class="dropdown">
-						<button class="dropbtn fs-upper fc-9" ng-init="showedDropdown=false"  ng-click="showedDropdown = ! showedDropdown">{{formData.selectedText}}</button>
-						<div class="dropdown-content" ng-if="showedDropdown">
-							<div ng-repeat="(key, option) in formData.dropDownOptions">
-								<a href="#" ng-click="selectOption(key)">{{option}}</a>
-							</div>
-						</div>
-					</div>
-				</form>
+					<?php ActiveForm::end(); ?>
+				</div>
+
 			</div>
 		</div>
 		<div class="contact-down flex flex-row">
