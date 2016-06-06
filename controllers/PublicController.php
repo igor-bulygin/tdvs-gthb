@@ -420,11 +420,21 @@ class PublicController extends CController {
 		$dropdown_members = ['a' => 'one question', 'b' => 'a second question', 'c' => 'more questions'];
 		$model = new ContactForm();
 
+		$groupOfFaqs = Faq::find()
+			->asArray()->all();
+
+		$faq = $groupOfFaqs[0]; //select first group
+
+		Utils::l_collection($faq['faqs'], "question");
+		Utils::l_collection($faq['faqs'], "answer");
+		$faq['title'] = Utils::l($faq['title']);
+
 		if ($model->load(Yii::$app->request->post())) {
 			return $this->render("contact", [
 				'test' => $model->hasErrors(),
 				'model' => $model,
 				'dropdown_members' => $dropdown_members,
+				'faqs' => $faq['faqs']
 			]);
 			//return $res;
 			//return $this->redirect(['view', 'id' => $model->code]);
@@ -432,7 +442,8 @@ class PublicController extends CController {
 			return $this->render("contact", [
 				'test' => 'normal',
 				'model' => $model,
-				'dropdown_members' => $dropdown_members
+				'dropdown_members' => $dropdown_members,
+				'faqs' => $faq['faqs']
 			]);
 
 	}

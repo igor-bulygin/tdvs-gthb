@@ -4,6 +4,7 @@ use yii\helpers\Url;
 use app\models\Lang;
 use yii\helpers\Html;
 use yii\widgets\Pjax;
+use yii\helpers\Json;
 use app\helpers\Utils;
 use yii\widgets\ListView;
 use app\assets\desktop\pub\ContactAsset;
@@ -26,6 +27,8 @@ $lang = Yii::$app->language;
 ?>
 
 <div class="row no-gutter" ng-controller="contactCtrl" ng-init="init()">
+	<?php $this->registerJs("var _faqs = " . Json::encode($faqs) . ";", View::POS_END); ?>
+
 	<div class="col-xs-12 no-padding flex flex-column contact">
 		<div class="contact-up flex flex-row">
 			<div class="contact-left flex-column">
@@ -46,15 +49,13 @@ $lang = Yii::$app->language;
 
 				</div>
 				<div class="contact-left-bottom">
-					<div class="flex flex-align-center flex-column flex-justify-center">
-						<span class="question fc-9b fs0-857 funiv_bold fs-upper">common cuestion</span>
-						<span class="answer fpf fs1">test1</span>
-						<span class="question fc-9b fs0-857 funiv_bold fs-upper">common cuestion</span>
-						<span class="answer fpf fs1">test2</span>
-						<span class="question fc-9b fs0-857 funiv_bold fs-upper">common cuestion</span>
-						<span class="answer fpf fs1">test3</span>
-						<span class="question fc-9b fs0-857 funiv_bold fs-upper">common cuestion</span>
-						<span class="answer fpf fs1">test4</span>
+					<div class="flex flex-align-center flex-column flex-justify-center faqs">
+						<div ng-repeat="faq in faqs">
+							<div class="question-content fs0-857 funiv_bold fs-upper" ng-click="showAnswer = ! showAnswer">
+								<span class="question fc-9b fs0-857 funiv_bold fs-upper">{{faq.question}}</span>
+							</div>
+							<div class="answer fpf fs1" ng-show="showAnswer"><span>{{faq.answer}}</span></div>
+						</div>
 						<?= Html::a(Yii::t("app/public", 'See our full FAQ'), Url::to(['public/faq']), [
 							'class' => "link_btn funiv_bold fs1 fc-6b fs-upper"
 						]); ?>
@@ -71,15 +72,18 @@ $lang = Yii::$app->language;
 						echo $form->field($model, 'about')->dropDownList($dropdown_members, ['prompt'=>'What is your question about?'])->label(false);
 						echo $form->field($model, 'subject')->input('subject', ['placeholder' => "SUBJECT"])->label(false);
 						echo $form->field($model, 'body')->textArea(['rows' => '6', 'placeholder' => "MESSAGE"])->label(false);
+					?>
+					<div class="send_button_content">
+					<?php
 						echo Html::submitButton(
 							'<i class="glyphicon glyphicon-send"></i>',
 							['class'=>'fc-fff btn send_button']
 						);
 					?>
+					</div>
 
 					<?php ActiveForm::end(); ?>
 				</div>
-
 			</div>
 		</div>
 		<div class="contact-down flex flex-row">

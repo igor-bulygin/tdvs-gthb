@@ -34,12 +34,20 @@
 	border-radius: 20px;
 }
 
-.question, .answer{
+.question{
+	cursor: pointer;
+}
+
+.question-content, .answer{
 	margin-bottom: 20px;
 }
 
 .answer{
 	color: #2e2e2e;
+}
+
+.send_button_content{
+	text-align: center;
 }
 
 .contact .link_btn, .contact .link_btn_white{
@@ -70,6 +78,10 @@
 .send_button:hover{
 	background-color: #f7284b;
 	color: #fff;
+}
+
+.faqs{
+	text-align: center;
 }
 
 /**** CSS FOR DROPDOWN ONLY ****/

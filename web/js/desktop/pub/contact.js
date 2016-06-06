@@ -8,19 +8,11 @@ var todevise = angular.module('todevise', []);
 
 todevise.controller('contactCtrl', ['$scope', '$cacheFactory', function ($scope, $cacheFactory) {
 
-	//temporal contact options
-	$scope.formData = {};
-	$scope.formData.dropDownSelected = -1;
-	$scope.formData.selectedText = "What is your question about;";
-	$scope.formData.dropDownOptions = {
-		"0" : "Question about something",
-		"1" : "Question about another thinkg"
-	};
+	console.log(_faqs);
+	$scope.faqs = _faqs;
 
-	$scope.selectOption = function (key){
-		$scope.formData.dropDownSelected = key;
-		$scope.showedDropdown = false;
-		$scope.formData.selectedText = $scope.formData.dropDownOptions[ $scope.formData.dropDownSelected ];
+	$scope.debugit = function (key){
+			console.log(key);
 	}
 
 }]);
