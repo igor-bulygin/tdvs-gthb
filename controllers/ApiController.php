@@ -77,6 +77,7 @@ class ApiController extends CController {
 				$filters = Utils::removeAllExcept($filters, []);
 				//TODO: If not admin, force some fields (enabled only, visible by public only, etc...)
 			}
+			$fields = array_merge(["_id" => 0], $fields);
 
 			$res = empty($filters) ? Tag::find() : Tag::find()->where($filters);
 
@@ -107,6 +108,7 @@ class ApiController extends CController {
 				$filters = Utils::removeAllExcept($filters, []);
 				//TODO: If not admin, force some fields (enabled only, visible by public only, etc...)
 			}
+			$fields = array_merge(["_id" => 0], $fields);
 
 			$res = empty($filters) ? Country::find()->select($fields) : Country::find()->select($fields)->where($filters);
 
@@ -274,6 +276,7 @@ class ApiController extends CController {
 				//$filters["enabled"] = true;
 				//TODO: If not admin, force only enabled, etc...
 			}
+			$fields = array_merge(["_id" => 0], $fields);
 
 			$res = empty($filters) ? Tag::find()->select($fields) : Tag::find()->select($fields)->where($filters);
 
@@ -315,6 +318,7 @@ class ApiController extends CController {
 				//TODO: If not admin, force some fields (enabled only, visible by public only, etc...)
 				$filters["type"] = SizeChart::TODEVISE;
 			}
+			$fields = array_merge(["_id" => 0], $fields);
 
 			$res = empty($filters) ? SizeChart::find()->select($fields) : SizeChart::find()->select($fields)->where($filters);
 
@@ -356,7 +360,7 @@ class ApiController extends CController {
 
 				//TODO: If not admin, force only enabled, etc...
 			}
-			array_unshift($fields, ["_id" => 0]);
+			$fields = array_merge(["_id" => 0], $fields);
 
 			$res = empty($filters) ? Category::find()->select($fields) : Category::find()->select($fields)->where($filters);
 
