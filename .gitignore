@@ -35,3 +35,6 @@ web/assets
 
 #web uploads
 web/uploads
+
+#tags
+.tags
