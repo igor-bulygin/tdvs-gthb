@@ -356,6 +356,7 @@ class ApiController extends CController {
 
 				//TODO: If not admin, force only enabled, etc...
 			}
+			array_unshift($fields, ["_id" => 0]);
 
 			$res = empty($filters) ? Category::find()->select($fields) : Category::find()->select($fields)->where($filters);
 
