@@ -141,6 +141,9 @@ $config = [
 				//links for terms
 				'terms/' => 'public/terms',
 
+				//links for become a deviser
+				'become/' => 'public/become',
+
 				//Links for faq
 				'faq/' => 'public/faq',
 

@@ -446,7 +446,11 @@ class PublicController extends CController {
 				'faqs' => $faq['faqs']
 			]);
 
+		}
 	}
+
+	public function actionBecome(){
+		return $this->render("become",['test' => 'test text']);
 	}
 
 }
