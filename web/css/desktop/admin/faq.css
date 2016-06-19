@@ -1,0 +1,174 @@
+.body-content {
+	background-color: #1a1a1a;
+}
+
+.jstree-default-dark{
+	background-color: #d6d6d6;
+	outline: none;
+	font-family: 'UniversLTPro-Condensed';
+	color: #2e2e2e;
+	text-transform: uppercase;
+}
+.jstree-default-dark > .jstree-container-ul > .jstree-node {
+	padding-left: 1%;
+	/*margin-bottom: 1px;*/
+	background-color: #2e2e2e ;
+}
+
+.jstree-default-dark > .jstree-container-ul [role="treeitem"] {
+	border-top: 1px solid black;
+}
+
+.jstree-default-dark > .jstree-container-ul .jstree-leaf:last-child {
+	/*border-bottom: 1px solid black;*/
+}
+
+.jstree-default-dark > .jstree-container-ul > [role="treeitem"] {
+	border-top: none;
+}
+
+i.jstree-icon.glyphicon-menu-hamburger {
+	display: inline-block;
+	margin-right: 10px;
+	margin-bottom: 5px;
+}
+
+.jstree-node {
+	min-height: 38px !important;
+	line-height: 38px !important;
+	padding-top: 5px;
+}
+
+.jstree-wholerow {
+	height: 38px !important;
+	z-index: -1;
+}
+
+.jstree-wholerow-ul {
+	background-color: #1a1a1a;
+}
+
+.jstree-wholerow-hovered {
+	z-index: -1;
+}
+
+/*.jstree-icon {
+	background: none !important;
+	height: 38px !important;
+	font-family: 'Glyphicons Halflings';
+	font-style: normal;
+	vertical-align: middle;
+	color: #686868;
+}*/
+
+/*.jstree-icon:before {
+	content: '\e236';
+}*/
+
+.jstree-icon:empty {
+	vertical-align: middle;
+}
+
+.jstree-anchor {
+	width: 100%;
+	display: inline !important;
+	line-height: 38px !important;
+	height: 38px !important;
+	font-style: normal;
+}
+
+.jstree-default-dark .jstree-anchor {
+	font-family: 'UniversLTPro-Condensed';
+	font-size: 1.071em;
+	color: #fff;
+	text-transform: uppercase;
+	text-shadow: none;
+}
+.jstree-default-dark input {
+	color: #2e2e2e;
+	outline: none;
+}
+
+.action_add {
+	width: 32px;
+	height: 38px;
+	text-align: center;
+	font-family: 'Glyphicons Halflings';
+	display: inline-block;
+	font-style: normal;
+	font-weight: normal;
+	color: #fff;
+	cursor: pointer;
+}
+
+.action_add:before {
+	content: '\e081';
+}
+
+.action_rename {
+	width: 32px;
+	height: 38px;
+	text-align: center;
+	font-family: 'Glyphicons Halflings';
+	display: inline-block;
+	font-style: normal;
+	font-weight: normal;
+	color: #fff;
+	cursor: pointer;
+}
+.action_rename:before {
+	content: '\270f';
+}
+
+.action_remove {
+	width: 32px;
+	height: 38px;
+	text-align: center;
+	font-family: 'Glyphicons Halflings';
+	display: inline-block;
+	font-style: normal;
+	font-weight: normal;
+	color: #fff;
+	cursor: pointer;
+}
+
+.action_remove:before {
+	content: '\e020';
+}
+
+.main .panel-heading{
+	width: 100%;
+	height: 50px;
+	background-image: linear-gradient(to top, rgba(255, 255, 255, 0.5), rgba(0, 0, 0, 0.5)), linear-gradient(#3d3d3d, #3d3d3d);
+	font-family: 'UniversLTPro-Condensed';
+	font-size: 1.071em;
+	color: #fff;
+	text-transform: uppercase;
+	border-color: none;
+}
+
+.main .panel-heading a{
+	color: #ffffff;
+}
+
+.main .panel-default{
+	border-color: #000000;
+}
+
+.main .panel-body{
+	background-color: #515151;
+}
+
+.main .form-control {
+	background-color: #2e2e2e;
+	border: 1px solid #4a4a4a;
+	border-radius: 0;
+}
+
+.main input, .main textarea{
+	width: 100%;
+}
+
+.width-100{
+	width: 100%;
+}

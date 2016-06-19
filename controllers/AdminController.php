@@ -214,6 +214,14 @@ class AdminController extends CController {
 		return $this->render("categories", []);
 	}
 
+	public function actionFaqs(){
+		return $this->render("faqs", []);
+	}
+
+	public function actionFaq($faq_id = null, $faq_subid = null){
+		return $this->render("faq", ['faq_id' => $faq_id, 'faq_subid' => $faq_subid]);
+	}
+
 	public function actionProducts ($slug) {
 		$deviser = Person::find()->select(["_id" => 0])->where(["slug" => $slug, "type" => ['$in' => [Person::DEVISER]]])->asArray()->one();
 

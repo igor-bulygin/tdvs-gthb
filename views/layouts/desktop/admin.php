@@ -255,9 +255,9 @@ use lajax\languagepicker\widgets\LanguagePicker;
 													'class' => 'item-submenu funiv fs0-929',
 												],
 												'label' => 'FAQ',
-												'url'=> Url::toRoute(['admin/faq']),
+												'url'=> Url::toRoute(['admin/faqs']),
 												'active' => (
-													Utils::compareURL('admin/faq')
+													Utils::compareURL('admin/faqs')
 												)
 											],
 											[

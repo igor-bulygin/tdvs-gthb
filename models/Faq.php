@@ -20,4 +20,29 @@ class Faq extends CActiveRecord {
 			'faqs',
 		];
 	}
+
+	public function getFaqs($current_path = null) {
+		return $this->faqs;
+		//
+		// if ($current_path === null) {
+		// 	$current_path = $this->path . $this->short_id . "/";
+		// }
+		//
+		// return (new Query)->
+		// 	select([])->
+		// 	from('faqs')->
+		// 	where(["REGEX", "path", "/^$current_path/"])->all();
+	}
+
+	public function beforeSave($insert) {
+
+		if($this->faqs == null) {
+			$this["faqs"] = [];
+		}
+
+		return parent::beforeSave($insert);
+	}
+
+
+
 }

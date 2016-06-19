@@ -14,7 +14,7 @@ class m160601_205106_create_faq extends Migration
 		]);
 
 		$this->insert('faq',[
-			'short_id' => '1000',
+			'short_id' => '10000',
 			'title' => [
 				$en => 'What is todevise'
 			],
@@ -39,7 +39,7 @@ class m160601_205106_create_faq extends Migration
 		]);
 
 		$this->insert('faq',[
-			'short_id' => '2000',
+			'short_id' => '20000',
 			'title' => [
 				$en => 'Getting started as a member'
 			],

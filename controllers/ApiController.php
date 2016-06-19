@@ -15,6 +15,7 @@ use yii\filters\ContentNegotiator;
 
 use app\models\Tag;
 use app\models\Category;
+use app\models\Faq;
 use app\helpers\CController;
 
 class IsAjaxFilter extends ActionFilter {
@@ -384,6 +385,95 @@ class ApiController extends CController {
 
 			/* @var $category \app\models\Category */
 			$category = Category::findOne(["short_id" => $node["short_id"]]);
+			$category->delete();
+		}
+
+		return $res;
+	}
+
+
+	public function actionFaq($filters = null, $fields = null){
+		$request = Yii::$app->getRequest();
+		$res = null;
+
+		if ($request->isGet) {
+			$filters = json_decode($filters, true) ?: [];
+			$fields = json_decode($fields, true) ?: [];
+
+			if (!empty($filters)) {
+				$filters = Utils::removeAllExcept($filters, ["short_id", "path"]);
+
+				//TODO: If not admin, force only enabled, etc...
+			}
+			$fields = array_merge(["_id" => 0], $fields);
+
+
+			$res = empty($filters) ? Faq::find()->select($fields) : Faq::find()->select($fields)->where($filters);
+
+			$res = $res->asArray()->all();
+		} else if ($request->isPost) {
+			$node = $this->getJsonFromRequest("category");
+
+			if ($node["short_id"] === "new") {
+				$node["short_id"] = (new Faq())->genValidID(5);
+			}
+
+			/* @var $category \app\models\Category */
+			$category = Faq::findOne(["short_id" => $node["short_id"]]);
+			$category->setAttributes($node, false);
+			//$category->title = array_replace_recursive($category->title, $node["title"]);
+			$category->save();
+
+			$res = $category;
+		} else if ($request->isDelete) {
+			$node = $this->getJsonFromRequest("category");
+
+			/* @var $category \app\models\Category */
+			$category = Faq::findOne(["short_id" => $node["short_id"]]);
+			$category->delete();
+		}
+
+		return $res;
+
+	}
+
+	public function actionFaqs($filters = null, $fields = null) {
+		$request = Yii::$app->getRequest();
+		$res = null;
+
+		if ($request->isGet) {
+			$filters = json_decode($filters, true) ?: [];
+			$fields = json_decode($fields, true) ?: [];
+
+			if (!empty($filters)) {
+				$filters = Utils::removeAllExcept($filters, ["short_id", "path"]);
+
+				//TODO: If not admin, force only enabled, etc...
+			}
+			$fields = array_merge(["_id" => 0], $fields);
+
+			$res = empty($filters) ? Faq::find()->select($fields) : Faq::find()->select($fields)->where($filters);
+
+			$res = $res->asArray()->all();
+		} else if ($request->isPost) {
+			$node = $this->getJsonFromRequest("category");
+
+			if ($node["short_id"] === "new") {
+				$node["short_id"] = (new Faq())->genValidID(5);
+			}
+
+			/* @var $category \app\models\Category */
+			$category = Faq::findOne(["short_id" => $node["short_id"]]);
+			$category->setAttributes($node, false);
+			$category->title = array_replace_recursive($category->title, $node["title"]);
+			$category->save();
+
+			$res = $category;
+		} else if ($request->isDelete) {
+			$node = $this->getJsonFromRequest("category");
+
+			/* @var $category \app\models\Category */
+			$category = Faq::findOne(["short_id" => $node["short_id"]]);
 			$category->delete();
 		}
 

@@ -247,3 +247,63 @@ api.service("$category", function($services_util) {
 		}
 	});
 });
+
+/*
+███████  █████   ██████  ███████
+██      ██   ██ ██    ██ ██
+█████   ███████ ██    ██ ███████
+██      ██   ██ ██ ▄▄ ██      ██
+██      ██   ██  ██████  ███████
+                    ▀▀
+*/
+api.service("$faqs", function($services_util) {
+
+	var api_point = currentHost() + "/api/faqs/";
+
+	return ({
+
+		get: function(filters) {
+			var req = $services_util._get(api_point, filters);
+
+			return req.then($services_util._handleSuccess, $services_util._handleError);
+		},
+
+		modify: function(method, node) {
+			var req = $services_util._modify(api_point, method, {
+				category: node
+			});
+
+			return req.then($services_util._handleSuccess, $services_util._handleError);
+		},
+
+		delete: function(node) {
+			return this.modify("DELETE", node);
+		}
+	});
+});
+
+api.service("$faq", function($services_util) {
+
+	var api_point = currentHost() + "/api/faq/";
+
+	return ({
+
+		get: function(filters) {
+			var req = $services_util._get(api_point, filters);
+
+			return req.then($services_util._handleSuccess, $services_util._handleError);
+		},
+
+		modify: function(method, node) {
+			var req = $services_util._modify(api_point, method, {
+				category: node
+			});
+
+			return req.then($services_util._handleSuccess, $services_util._handleError);
+		},
+
+		delete: function(node) {
+			return this.modify("DELETE", node);
+		}
+	});
+});
