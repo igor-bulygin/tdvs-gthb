@@ -271,7 +271,7 @@ todevise.controller('faqsCtrl', ["$scope", "$faqs", "$category_util", "$location
 		category = $category_util.nodeToCategory(category.original, $scope);
 
 		//Check for sub-categories that depend on this one so we can remove those too
-		$category_util.subCategories(category).then(function(subcategories) {
+		// $category_util.subCategories(category).then(function(subcategories) {
 			var modalInstance = $uibModal.open({
 				templateUrl: 'template/modal/confirm.html',
 				controller: 'confirmCtrl',
@@ -279,7 +279,7 @@ todevise.controller('faqsCtrl', ["$scope", "$faqs", "$category_util", "$location
 					data: function () {
 						return {
 							title: "Are you sure?",
-							text: _.size(subcategories) + " additional categories will be removed"
+							text: "Faqs group will be removed"
 						};
 					}
 				}
@@ -297,9 +297,9 @@ todevise.controller('faqsCtrl', ["$scope", "$faqs", "$category_util", "$location
 				//Cancel
 			});
 
-		}, function(err) {
-			toastr.error("Couldn't check dependencies!", err);
-		});
+		// }, function(err) {
+		// 	toastr.error("Couldn't check dependencies!", err);
+		// });
 	};
 
 }]);
