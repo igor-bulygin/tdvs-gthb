@@ -417,7 +417,7 @@ class PublicController extends CController {
 	}
 
 	public function actionContact(){
-		$dropdown_members = ['a' => 'one question', 'b' => 'a second question', 'c' => 'more questions'];
+		$dropdown_members = ['a' => 'ORDERS'];
 		$model = new ContactForm();
 
 		$groupOfFaqs = Faq::find()

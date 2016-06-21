@@ -104,7 +104,7 @@ publicFooterAsset::register($this);
 					<ul class="fc-c7 list links no-horizontal-padding no-margin list fc-c7 funiv fs0-786 ls0-02">
 						<li class="fs1-786 dot_blogger no-margin">·</li>
 						<li class="become_blogger flex flex-justify-between flex-align-baseline">
-							<?= Html::a(Yii::t("app/public", 'Contact us'), "", [
+							<?= Html::a(Yii::t("app/public", 'Contact us'), Url::to(['public/contact']), [
 								'class' => "fc-c7"
 							]); ?>
 							<?= Html::a(Yii::t("app/public", 'Become a blogger'), "", [

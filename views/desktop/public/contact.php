@@ -69,8 +69,11 @@ $lang = Yii::$app->language;
 					<?php
 						echo $form->field($model, 'name')->input('name', ['placeholder' => "NAME"])->label(false);
 						echo $form->field($model, 'email')->input('email', ['placeholder' => "EMAIL"])->label(false);
-						echo $form->field($model, 'about')->dropDownList($dropdown_members, ['prompt'=>'What is your question about?'])->label(false);
+						echo $form->field($model, 'about')->dropDownList($dropdown_members, ['prompt'=>'What is your question about?', 'ng-model' => 'selected', 'ng-change' => 'changed()'])->label(false);
+
+						echo $form->field($model, 'ordernum')->input('subject', ['placeholder' => "ORDER Nº", 'ng-show' =>'orderShow'])->label(false);
 						echo $form->field($model, 'subject')->input('subject', ['placeholder' => "SUBJECT"])->label(false);
+
 						echo $form->field($model, 'body')->textArea(['rows' => '6', 'placeholder' => "MESSAGE"])->label(false);
 					?>
 					<div class="send_button_content">

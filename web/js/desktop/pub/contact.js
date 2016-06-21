@@ -15,4 +15,11 @@ todevise.controller('contactCtrl', ['$scope', '$cacheFactory', function ($scope,
 			console.log(key);
 	}
 
+	$scope.changed = function (){
+			console.log($scope.selected);
+			if ($scope.selected  == 'a'){
+				$scope.orderShow = true;
+			}
+	}
+
 }]);

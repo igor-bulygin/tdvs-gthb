@@ -15,6 +15,7 @@ class ContactForm extends Model
     public $subject;
     public $body;
     public $about;
+	public $ordernum;
     public $verifyCode;
 
     /**
