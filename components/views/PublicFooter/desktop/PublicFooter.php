@@ -78,7 +78,7 @@ publicFooterAsset::register($this);
 						</li>
 						<li class="fs1-786">·</li>
 						<li>
-							<?= Html::a(Yii::t("app/public", 'About us'), "", [
+							<?= Html::a(Yii::t("app/public", 'About Us'), Url::to(['public/terms']), [
 								'class' => "fc-c7"
 							]); ?>
 						</li>
@@ -128,6 +128,9 @@ publicFooterAsset::register($this);
 
 		<div class="row no-gutter">
 			<div class="col-xs-12 fs-upper funiv fs0-786 ls0-05 links">
+				<?= Html::a(Yii::t("app/public", 'Terms & Conditions'), Url::to(['public/terms']), [
+					'class' => "fc-c7"
+				]); ?>
 				<?= Html::a(Yii::t("app/public", 'Terms & Conditions'), "site/about", [
 					'class' => "fc-c7"
 				]); ?>
