@@ -10,6 +10,7 @@ use app\models\Person;
 use app\helpers\Utils;
 use yii\web\Controller;
 use app\models\Product;
+use app\models\Become;
 use app\models\Category;
 use app\models\ContactForm;
 use yii\base\DynamicModel;
@@ -450,7 +451,10 @@ class PublicController extends CController {
 	}
 
 	public function actionBecome(){
-		return $this->render("become",['test' => 'test text']);
+
+		$model = new Become;
+
+		return $this->render("become",['model' => $model]);
 	}
 
 }

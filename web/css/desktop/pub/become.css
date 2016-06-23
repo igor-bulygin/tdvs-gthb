@@ -1,0 +1,183 @@
+.contact-left, .contact-right, .contact-down-left,
+.contact-down-center, .contact-down-right{
+	width: 100%;
+}
+
+.contact-down-left, .contact-down-center, .contact-down-right{
+	min-height: 261px;
+	padding: 40px;
+}
+
+.contact-left-top{
+	min-height: 153px;
+}
+
+.contact-left-bottom{
+	padding: 40px;
+}
+
+.dropdown button, .form-group input, .form-group select{
+	width: 100%;
+	height: 38px;
+	margin-bottom: 14px;
+	display: flex;
+	flex-grow: 1;
+	outline: none;
+
+	padding: 5px 35px 5px 10px;
+	border-radius: 20px;
+	background-color: rgba(255, 255, 255, 0.05);
+	border: solid 1px #6d6d6d;
+	color: #ffffff;
+}
+
+
+}
+
+.form-group textarea{
+	border-radius: 20px;
+}
+
+.question{
+	cursor: pointer;
+}
+
+.question-content, .answer{
+	margin-bottom: 20px;
+}
+
+.answer{
+	color: #2e2e2e;
+}
+
+.send_button_content{
+	text-align: center;
+}
+
+.contact .link_btn, .contact .link_btn_white{
+	border: 1px solid #bfbfbf;
+	padding: 9px 16px 6px 16px;
+	border-radius: 8px;
+}
+
+.contact .link_btn{
+	color: #6b6b6b;
+}
+
+.contact .link_btn_white{
+	color: #fff;
+}
+
+.contact .link_btn:hover{
+	background-color: #e6e6e6;
+}
+
+.send_button{
+	width: 50px;
+	height: 50px;
+	border-radius: 25px;
+
+}
+
+.send_button:hover{
+	background-color: #f7284b;
+	color: #fff;
+}
+
+.faqs{
+	text-align: center;
+}
+
+/**** CSS FOR DROPDOWN ONLY ****/
+.dropbtn {
+	border: none;
+	cursor: pointer;
+}
+
+.dropdown {
+	position: relative;
+	display: inline-block;
+}
+
+.dropdown-content {
+	position: absolute;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	background-color: rgba(255, 255, 255, 0.95);
+}
+
+.dropdown-content a {
+	color: #9b9b9b;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropbtn {
+	background-color: #f1f1f1;
+}
+
+/**** END CSS FOR DROPDOWN ****/
+
+
+
+.become{
+	background-image: url('/imgs/become_a_deviser_background.png');
+	background-repeat: no-repeat;
+}
+
+.justview{
+	width: 1105px;
+}
+
+.row-one{
+	height: 591px;
+}
+
+.row-one-right{
+	margin-left: 391px;
+	margin-top: 165px;
+}
+
+.row-three{
+	height: 392px;
+}
+
+.row-two{
+	height: 512px;
+}
+
+.row-four {
+	height: 200px;
+}
+
+.grown-text{
+	max-width: 268px;
+}
+
+.grown-text .par {
+	margin-bottom: 10px;
+}
+
+.grown-text .par:last-child{
+	width: 200px;
+}
+
+.row-four .text{
+	width: 553px;
+}
+
+.formcontent{
+	margin-top: 38px;
+	width: 569px;
+}
+
+.allspace{
+	width: 100%;
+}
+
+.whyinvitation{
+	width: 280px;
+}
