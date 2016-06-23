@@ -91,10 +91,10 @@ publicFooterAsset::register($this);
 					<ul class="fc-c7 list links no-horizontal-padding no-margin list fc-c7 funiv fs0-786 ls0-02">
 						<li class="fs1-786 dot_deviser no-margin">·</li>
 						<li class="become_deviser flex flex-justify-between flex-align-baseline">
-							<?= Html::a(Yii::t("app/public", 'Go for it!'), "", [
+							<?= Html::a(Yii::t("app/public", 'Go for it!'), Url::to(['public/become']), [
 								'class' => "fc-c7"
 							]); ?>
-							<?= Html::a(Yii::t("app/public", 'Become a deviser'), "", [
+							<?= Html::a(Yii::t("app/public", 'Become a deviser'), Url::to(['public/become']), [
 								'class' => "link_btn red funiv_bold fs1 fc-fff"
 							]); ?>
 						</li>
