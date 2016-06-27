@@ -1,6 +1,7 @@
 <?php
-
-use yii\db\Migration;
+use app\models\Lang;
+use app\models\Faq;
+use yii\mongodb\Migration;
 
 class m160627_172827_terms extends Migration
 {
