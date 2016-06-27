@@ -305,9 +305,9 @@ use lajax\languagepicker\widgets\LanguagePicker;
 													'class' => 'item-submenu funiv fs0-929',
 												],
 												'label' => 'Terms & conditions',
-												'url'=> Url::toRoute(['admin/toc']),
+												'url'=> Url::toRoute(['admin/terms']),
 												'active' => (
-													Utils::compareURL('admin/toc')
+													Utils::compareURL('admin/terms')
 												)
 											],
 										],
