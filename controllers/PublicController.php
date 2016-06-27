@@ -23,6 +23,7 @@ use yii\data\ActiveDataProvider;
 use yii\base\ViewContextInterface;
 use app\models\Faq;
 use yii\web\Response;
+use app\models\Term;
 
 class PublicController extends CController {
 	public $defaultAction = "index";
@@ -403,17 +404,22 @@ class PublicController extends CController {
 		]);
 	}
 
-	public function actionTerms(){
 
-		$statictext = StaticText::find()
-		->where([
-			"static_section" => 'terms'
-		])
-		->asArray()->all();
+	public function actionTerms(){
+		$lang = Yii::$app->language;
+
+		$groupOfTerms = Term::find()
+			->asArray()->all();
+
+		foreach ($groupOfTerms as $key => &$oneTerm){
+			Utils::l_collection($oneTerm['terms'], "question");
+			Utils::l_collection($oneTerm['terms'], "answer");
+			$oneTerm['title'] = Utils::l($oneTerm['title']);
+		}
 
 		return $this->render("terms", [
-			'test' => 'this is a test text for terms',
-			'statictext' => $statictext
+			'test' => 'this is a test text for term',
+			'groupOfTerms' => $groupOfTerms
 		]);
 	}
 

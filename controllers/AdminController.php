@@ -218,8 +218,16 @@ class AdminController extends CController {
 		return $this->render("faqs", []);
 	}
 
+	public function actionTerms(){
+		return $this->render("terms", []);
+	}
+
 	public function actionFaq($faq_id = null, $faq_subid = null){
 		return $this->render("faq", ['faq_id' => $faq_id, 'faq_subid' => $faq_subid]);
+	}
+
+	public function actionTerm($term_id = null, $term_subid = null){
+		return $this->render("term", ['term_id' => $term_id, 'term_subid' => $term_subid]);
 	}
 
 	public function actionProducts ($slug) {

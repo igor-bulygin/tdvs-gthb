@@ -3,37 +3,42 @@ use yii\web\View;
 use yii\helpers\Url;
 use app\models\Lang;
 use yii\helpers\Html;
+use yii\helpers\Json;
 use yii\widgets\Pjax;
 use app\helpers\Utils;
 use yii\widgets\ListView;
 use app\assets\desktop\pub\TermsAsset;
 
+
 /* @var $this yii\web\View */
 
 $this->params['breadcrumbs'][] = [
-	'label' => 'Terms',
+	'label' => 'TERMS',
 	'url' => ['/public/terms']
 ];
 
 TermsAsset::register($this);
 
-$this->title = 'Todevise / Terms';
+
+$this->title = 'Todevise / TERMS';
 $lang = Yii::$app->language;
 
 ?>
 
-<div class="row no-gutter">
-	<div class="col-xs-12 no-padding flex flex-column terms">
+<div class="row no-gutter" ng-controller="termCtrl" ng-init="init()">
+
+	<?php $this->registerJs("var _groupOfTerms = " . Json::encode($groupOfTerms) . ";", View::POS_END); ?>
+
+	<div class="col-xs-12 no-padding flex flex-column">
 
 		<div class="search-header-content fc-fff">
 			<div class="cols-xs12 fs-upper flex flex-align-center flex-column flex-justify-center search-header">
-				<div class="fs3-857"><h1><?= Yii::t('app/public', 'Terms & Conditions') ?></h1></div>
+				<div class="fs3-857 funiv_thin"><?= Yii::t('app/public', 'TERMS') ?></div>
 
 				<div class="search_holder fs0-857">
 					<input type="text" class="funiv_bold fs1-143 fc-4e" name="search" placeholder="WHAT IS YOUR QUESTION ABOUT?">
 					<span class="pointer glyphicon-content bc-c7 fc-fff">
-						<span class="glyphicon glyphicon-search">
-
+						<span class="glyphicon glyphicon-search"></span>
 					</span>
 				</div>
 
@@ -42,24 +47,28 @@ $lang = Yii::$app->language;
 
 		<div class="col-xs-12 flex">
 			<div class="column-left col-xs-2 funiv_bold fs-upper bc-e9">
+				<div class="column-header fs1-357 fc-fff bc-d8 flex flex-align-center"><span><?= Yii::t('app/public', 'TERM') ?></span></div>
 				<div>
-					<ul class="fs0-857 funiv_bold">
-						<?php foreach ($statictext as $oneStatictext){ ?>
-						<li id="text-<?= $oneStatictext['short_id'] ?>" class="menu-entry"><?= $oneStatictext['title'][$lang] ?></li>
-						<?php } ?>
+					<ul class="fs0-857 funiv_bold" ng-repeat="answersAndQuestions in groupOfTerms">
+						<li id="" class="menu-entry" ng-click="showTerms(answersAndQuestions.short_id)">{{answersAndQuestions.title}}a</li>
 					</ul>
 				</div>
 			</div>
 
 			<div class="fpf central-text-content">
-				<?php foreach ($statictext as $oneStatictext){ ?>
-	      	<div class="title-content fs0-857 funiv_bold fs-upper">
-						<span class="underline term-title title-<?= $oneStatictext['short_id'] ?>"><?= $oneStatictext['title'][$lang] ?></span>
+				<div ng-repeat="answersAndQuestions in groupOfTerms">
+					<div ng-if="activeTermId == answersAndQuestions.short_id">
+						<div ng-repeat="(questid, oneAnswQuest) in answersAndQuestions.terms">
+							<div class="question-content fs0-857 funiv_bold fs-upper" ng-click="showAnswer = ! showAnswer">
+								<span class="glyphicon glyphicon-plus-sign fc-c7"></span>
+								<span class="underline question">{{oneAnswQuest.question}}</span>
+							</div>
+							<div class="answer" ng-show="showAnswer"><span>{{oneAnswQuest.answer}}</span></div>
+						</div>
 					</div>
-	      	<div class="text-content text-<?= $oneStatictext['short_id'] ?>"><span><?= $oneStatictext['text'][$lang] ?></span></div>
-				<?php } ?>
-	    </div>
+				</div>
 
+			</div>
 		</div>
 
 		<?php

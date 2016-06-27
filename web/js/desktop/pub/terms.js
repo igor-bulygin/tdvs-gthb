@@ -4,23 +4,15 @@ var todevise = angular.module('todevise', []);
  * This manage show/hide text on terms section
  */
 
-$(function() {
-	function reset() {
-		$(".text-content").hide();
-		$(".text-content").first().show();
+
+ //TODO: $cacheFactory needed?
+todevise.controller('termCtrl', ['$scope', '$cacheFactory', function ($scope, $cacheFactory) {
+
+	$scope.groupOfTerms = _groupOfTerms;
+	$scope.activeTermId = $scope.groupOfTerms[0].short_id; //activate first group as default
+
+	$scope.showTerms = function (activeTermId){
+		$scope.activeTermId = activeTermId;
 	}
 
-	$(".title-content").click(function(event){
-		$(".text-content").hide();
-		$(this).next(".text-content").show();
-	});
-
-	$(".menu-entry").click(function(event){
-		$(".text-content").hide();
-		var text_id=$(this).attr("id");
-		$("."+text_id).show();
-	});
-
-	reset();
-
-});
+}]);
