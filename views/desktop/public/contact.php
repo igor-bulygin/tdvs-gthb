@@ -65,7 +65,11 @@ $lang = Yii::$app->language;
 			<div class="contact-right flex flex-align-center flex-column flex-justify-center">
 				<div class="fs3-857 funiv_thin fs-upper fc-6d"><?= Yii::t('app/public', 'Contact via Message') ?></div>
 				<div class="funiv_bold fs0-857">
-					<?php $form = ActiveForm::begin(); ?>
+					<?php $form = ActiveForm::begin([
+						'validateOnChange' => false,
+						'validateOnBlur' => false,
+						'validateOnType' => false
+					]); ?>
 					<?php
 						echo $form->field($model, 'name')->input('name', ['placeholder' => "NAME"])->label(false);
 						echo $form->field($model, 'email')->input('email', ['placeholder' => "EMAIL"])->label(false);

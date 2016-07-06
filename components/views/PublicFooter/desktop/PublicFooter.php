@@ -18,22 +18,22 @@ publicFooterAsset::register($this);
 					<ul class="fc-c7 list links no-horizontal-padding no-margin list fc-c7 funiv fs0-786 ls0-02">
 						<li class="fs1-786">·</li>
 						<li>
-							<?= Html::a(Yii::t("app/public", 'Art'), "", [
+							<?= Html::a(Yii::t("app/public", 'Art'), Url::to(['public/category', 'category_id' => '1a23b', 'slug' => 'art']), [
 								'class' => "fc-c7"
 							]); ?>
 						</li>
 						<li>
-							<?= Html::a(Yii::t("app/public", 'Fashion'), "", [
+							<?= Html::a(Yii::t("app/public", 'Fashion'), Url::to(['public/category', 'category_id' => '4a2b4', 'slug' => 'fashion']), [
 								'class' => "fc-c7"
 							]); ?>
 						</li>
 						<li>
-							<?= Html::a(Yii::t("app/public", 'Industrial design'), "", [
+							<?= Html::a(Yii::t("app/public", 'Industrial design'), Url::to(['public/category', 'category_id' => '2p45q', 'slug' => 'industrial-design']), [
 								'class' => "fc-c7"
 							]); ?>
 						</li>
 						<li>
-							<?= Html::a(Yii::t("app/public", 'Jewelry'), "", [
+							<?= Html::a(Yii::t("app/public", 'Jewelry'), Url::to(['public/category', 'category_id' => '3f78g', 'slug' => 'Jewelry']), [
 								'class' => "fc-c7"
 							]); ?>
 						</li>
@@ -56,11 +56,6 @@ publicFooterAsset::register($this);
 					<span class="fs0-857 funiv_bold fc-fff"><?= Yii::t('app/public', 'Help & Contact') ?></span>
 					<ul class="fc-c7 list links no-horizontal-padding no-margin list fc-c7 funiv fs0-786 ls0-02">
 						<li class="fs1-786">·</li>
-						<li>
-							<?= Html::a(Yii::t("app/public", 'Art'), "", [
-								'class' => "fc-c7"
-							]); ?>
-						</li>
 						<li>
 							<?= Html::a(Yii::t("app/public", 'Returns & Warranties'), "", [
 								'class' => "fc-c7"

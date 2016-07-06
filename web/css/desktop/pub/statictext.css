@@ -12,6 +12,13 @@
 }
 .search-header-content{
 	background-color: #3a3939;
+	background-image: url('/imgs/rectangle_search.png');
+	background-repeat: no-repeat;
+	background-size: 100%;
+}
+
+.contact .search-header-content{
+	background-size: 120%;
 }
 
 .search-header-content input{

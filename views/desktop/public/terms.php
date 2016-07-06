@@ -59,8 +59,8 @@ $lang = Yii::$app->language;
 				<div ng-repeat="answersAndQuestions in groupOfTerms">
 					<div ng-if="activeTermId == answersAndQuestions.short_id">
 						<div ng-repeat="(questid, oneAnswQuest) in answersAndQuestions.terms">
-							<div class="question-content fs0-857 funiv_bold fs-upper" ng-click="showAnswer = ! showAnswer">
-								<span class="glyphicon glyphicon-plus-sign fc-c7"></span>
+							<div class="question-content fs0-857 funiv_bold fs-upper" ng-init="sign='plus'" ng-click="showAnswer = ! showAnswer; sign = showAnswer ? 'minus' : 'plus'">
+								<span class="glyphicon glyphicon-{{sign}}-sign fc-c7"></span>
 								<span class="underline question">{{oneAnswQuest.question}}</span>
 							</div>
 							<div class="answer" ng-show="showAnswer"><span>{{oneAnswQuest.answer}}</span></div>

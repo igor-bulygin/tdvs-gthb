@@ -3,6 +3,17 @@
 	width: 100%;
 }
 
+.contact-right{
+	background-image: url('/imgs/contact_bg1.png');
+	background-repeat: no-repeat;
+	background-origin: content-box;
+	width: 553px;
+}
+
+.contact-left{
+	width: 50%;
+}
+
 .contact-down-left, .contact-down-center, .contact-down-right{
 	min-height: 261px;
 	padding: 40px;
@@ -14,6 +25,7 @@
 
 .contact-left-bottom{
 	padding: 40px;
+	min-height: 500px;
 }
 
 .dropdown button, .form-group input, .form-group select{

@@ -32,10 +32,15 @@ $lang = Yii::$app->language;
 		<div class="row-one flex flex-row flex-align-center flex-justify-center">
 			<div class="row-one-left"></div>
 			<div class="row-one-right flex flex-align-center flex-justify-end">
-				<div>
-				<?= Html::a(Yii::t("app/public", 'Request invitation'), "", [
-					'class' => "btn white funiv_bold fs1 fc-f7284b fs-upper"
-				]); ?>
+				<div class="flex flex-column">
+					<div><img src="/imgs/logo_white.png" alt="Todevise" /></div>
+					<div class="fs4-714 funiv_thin fs-upper fc-fff flex-justify-center">Express</div>
+					<div class="fs4-714 funiv_thin fs-upper fc-fff flex-justify-center">Yourself</div>
+
+
+					<?= Html::a(Yii::t("app/public", 'Request invitation'), "#invitationform", [
+						'class' => "btn white funiv_bold fs1 fc-f7284b fs-upper"
+					]); ?>
 				</div>
 			</div>
 		</div>
@@ -70,7 +75,7 @@ $lang = Yii::$app->language;
 				<span class="fs3-643 funiv_thin fs-upper fc-fff">Request invitation</span>
 <span class="funiv fs0-857 whyinvitation fc-fff center">We constantly strive for excellence, and for this reason an invitation is needed to register as a deviser</span>
 
-
+<A name="invitationform">
 <div class="formcontent">
 			<?php $form = ActiveForm::begin(); ?>
 			<?php
