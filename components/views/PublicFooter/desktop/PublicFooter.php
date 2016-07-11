@@ -44,7 +44,7 @@ publicFooterAsset::register($this);
 						</li>
 						<li class="fs1-786">·</li>
 						<li>
-							<?= Html::a(Yii::t("app/public", 'Discover out devisers'), "", [
+							<?= Html::a(Yii::t("app/public", 'Discover our devisers'), "", [
 								'class' => "fc-c7"
 							]); ?>
 						</li>
@@ -86,9 +86,7 @@ publicFooterAsset::register($this);
 					<ul class="fc-c7 list links no-horizontal-padding no-margin list fc-c7 funiv fs0-786 ls0-02">
 						<li class="fs1-786 dot_deviser no-margin">·</li>
 						<li class="become_deviser flex flex-justify-between flex-align-baseline">
-							<?= Html::a(Yii::t("app/public", 'Go for it!'), Url::to(['public/become']), [
-								'class' => "fc-c7"
-							]); ?>
+							<?= Yii::t("app/public", 'Go for it!')?>
 							<?= Html::a(Yii::t("app/public", 'Become a deviser'), Url::to(['public/become']), [
 								'class' => "link_btn red funiv_bold fs1 fc-fff"
 							]); ?>
@@ -99,9 +97,8 @@ publicFooterAsset::register($this);
 					<ul class="fc-c7 list links no-horizontal-padding no-margin list fc-c7 funiv fs0-786 ls0-02">
 						<li class="fs1-786 dot_blogger no-margin">·</li>
 						<li class="become_blogger flex flex-justify-between flex-align-baseline">
-							<?= Html::a(Yii::t("app/public", 'Contact us'), Url::to(['public/contact']), [
-								'class' => "fc-c7"
-							]); ?>
+								<?=Yii::t("app/public", 'Contact us')?>
+
 							<?= Html::a(Yii::t("app/public", 'Become a blogger'), "", [
 								'class' => "link_btn funiv_bold fs1 fc-fff"
 							]); ?>

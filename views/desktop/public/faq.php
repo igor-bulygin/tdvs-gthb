@@ -50,7 +50,7 @@ $lang = Yii::$app->language;
 				<div class="column-header fs1-357 fc-fff bc-d8 flex flex-align-center"><span><?= Yii::t('app/public', 'FAQ') ?></span></div>
 				<div>
 					<ul class="fs0-857 funiv_bold" ng-repeat="answersAndQuestions in groupOfFaqs">
-						<li id="" class="menu-entry" ng-click="showFaqs(answersAndQuestions.short_id)">{{answersAndQuestions.title}}a</li>
+						<li id="" class="menu-entry" ng-click="showFaqs(answersAndQuestions.short_id)">{{answersAndQuestions.title}}</li>
 					</ul>
 				</div>
 			</div>

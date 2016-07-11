@@ -83,7 +83,7 @@ $lang = Yii::$app->language;
 					<div class="send_button_content">
 					<?php
 						echo Html::submitButton(
-							'<i class="glyphicon glyphicon-send"></i>',
+							'<img src="/imgs/shape.png" />',
 							['class'=>'fc-fff btn send_button']
 						);
 					?>
@@ -114,7 +114,7 @@ $lang = Yii::$app->language;
 				<div class="fpf_bold fs0-857 fc-1c1919">
 					<?= Yii::t('app/public', 'Click the button below to go to our profile') ?>
 				</div>
-				<?= Html::a(Yii::t("app/public", 'Contact via Facebook'), Url::to(['']), [
+				<?= Html::a(Yii::t("app/public", 'Contact via Facebook'), Url::to('https://www.facebook.com/todevise'), [
 					'class' => "link_btn_white funiv_bold fs1-143 red fc-fff"
 				]); ?>
 			</div>

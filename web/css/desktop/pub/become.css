@@ -76,6 +76,7 @@
 	width: 50px;
 	height: 50px;
 	border-radius: 25px;
+	padding-left: 17px;
 
 }
 
@@ -126,30 +127,51 @@
 .become{
 	background-image: url('/imgs/become_a_deviser_background.png');
 	background-repeat: no-repeat;
+	background-size: cover;
+	width: 100%;
+	padding-bottom: 59%;
+
 }
 
 .justview{
-	width: 1105px;
+	/*width: 1105px;*/
+	width: 100%;
 }
 
 .row-one{
-	height: 591px;
+	padding-top: 20%;
+
 }
 
 .row-one-right{
-	margin-left: 391px;
+	text-align: center;
+
 }
 
 .row-three{
-	height: 392px;
+	padding-top: 20%;
 }
 
 .row-two{
-	height: 512px;
+	padding-top: 20%;
 }
 
 .row-four {
-	height: 200px;
+	position: absolute;
+	bottom: 7%;
+}
+
+.row-four-left{
+	width: 40%;
+}
+
+.row-four-right{
+	width: 60%;
+}
+
+.row-five{
+	width: 100%;
+	margin-top: 80px;
 }
 
 .grown-text{
@@ -171,6 +193,7 @@
 .formcontent{
 	margin-top: 38px;
 	width: 569px;
+	padding-bottom: 50px;
 }
 
 .allspace{
