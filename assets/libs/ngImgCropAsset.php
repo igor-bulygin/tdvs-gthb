@@ -5,7 +5,7 @@ namespace app\assets\libs;
 use yii\web\AssetBundle;
 
 class ngImgCropAsset extends AssetBundle {
-	public $sourcePath = '@bower/ngImgCrop/compile';
+	public $sourcePath = '@npm/ng-img-crop-full-extended/compile';
 	public $css = [
 		YII_ENV_DEV ? 'unminified/ng-img-crop.css' : 'minified/ng-img-crop.css'
 	];

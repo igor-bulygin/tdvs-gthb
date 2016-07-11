@@ -33,10 +33,10 @@ RUN buildDeps=" \
     && cd /usr/src/php \
     && make clean
 
-RUN pecl install redis
+RUN pecl install redis-2.2.8
 RUN docker-php-ext-enable redis
-    
-RUN pecl install mongo
+
+RUN pecl install mongo-1.6.14
 RUN docker-php-ext-enable mongo
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer

@@ -520,7 +520,7 @@ todevise.controller('productCtrl', ["$rootScope", "$scope", "$timeout", "$sizech
 		var _available_sizes = [];
 
 		var _sizes_for_country = $scope.getSizechartSizesForCountry();
-		var _sizes_in_product = ($scope.product.sizechart.values || []).map(function (value) {
+		var _sizes_in_product = (Array.isArray($scope.product.sizechart.values) ? $scope.product.sizechart.values : []).map(function (value) {
 			return value[0];
 		});
 
@@ -608,9 +608,9 @@ todevise.controller('productCtrl', ["$rootScope", "$scope", "$timeout", "$sizech
 	*/
 	$scope.build_price_stock_table = function () {
 		/*Data access failsafe*/
-		$scope.original_product.options = $scope.original_product.options || {};
-		$scope.product.sizechart.values = $scope.product.sizechart.values || [];
-		$scope.original_product.sizechart.values = $scope.original_product.sizechart.values || [];
+		$scope.original_product.options = Object($scope.original_product.options) === $scope.original_product.options ? $scope.original_product.options : {};
+		$scope.product.sizechart.values = Array.isArray($scope.product.sizechart.values) ? $scope.product.sizechart.values : [];
+		$scope.original_product.sizechart.values = Array.isArray($scope.original_product.sizechart.values) ? $scope.product.sizechart.values : [];
 		/**/
 
 		if ($scope.use_sizecharts === true &&
