@@ -23,8 +23,8 @@
 	display: flex;
 	flex-grow: 1;
 	outline: none;
-
-	padding: 5px 35px 5px 10px;
+	text-transform: uppercase;
+	padding: 5px 35px 5px 17px;
 	border-radius: 20px;
 	background-color: rgba(255, 255, 255, 0.05);
 	border: solid 1px #6d6d6d;
@@ -145,6 +145,7 @@
 
 .row-one-right{
 	text-align: center;
+	margin-right: 28%;
 
 }
 
@@ -158,7 +159,9 @@
 
 .row-four {
 	position: absolute;
-	bottom: 7%;
+	bottom: 6%;
+	text-align: center;
+	width: 100%;
 }
 
 .row-four-left{
@@ -166,7 +169,8 @@
 }
 
 .row-four-right{
-	width: 60%;
+	width: 100%;
+	text-align: center;
 }
 
 .row-five{
@@ -188,6 +192,8 @@
 
 .row-four .text{
 	width: 553px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .formcontent{
@@ -201,5 +207,62 @@
 }
 
 .whyinvitation{
-	width: 280px;
+	text-align: center;
+	width: 254px;
+}
+
+.form-become{
+	width: 100%;
+}
+
+.form-grouped, .form-groupedright{
+	width: 47%;
+}
+
+.form-title{
+	border-top: 1px solid #2e2e2e;
+	margin-bottom: 10px;
+}
+
+.form-title span{
+	position: relative;
+	top: -7px;
+	padding-right: 9px;
+}
+
+.form-personal{
+	margin-bottom: 34px;
+}
+
+.form-optional-content {
+	position: relative;
+	height: 0px;
+}
+
+.form-optional{
+	position: relative;
+	top: 12px;
+	right: 10px;
+	text-align: right;
+	color: #7aaa4a;
+}
+
+.form-become .field-become-brand input,
+.form-become .field-become-phone input{
+	padding-right: 54px;
+}
+
+.form-add-new{
+	margin-top: -10px;
+	margin-left: 20px;
+	margin-bottom: 8px;
+	cursor: pointer;
+}
+
+.formcontent input::-webkit-input-placeholder {
+	color: #fff;
+}
+
+.formcontent  input::-moz-placeholder {
+	color: #fff;
 }

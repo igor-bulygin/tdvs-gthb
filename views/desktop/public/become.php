@@ -29,8 +29,7 @@ $lang = Yii::$app->language;
 <div class="row no-gutter grey-hard">
 <div class="justview flex flex-column">
 	<div class="col-xs-12 flex flex-column become">
-		<div class="row-one flex flex-row flex-align-center flex-justify-around">
-			<div class="row-one-left"></div>
+		<div class="row-one flex flex-row flex-justify-end">
 			<div class="row-one-right flex flex-align-center flex-justify-center">
 				<div class="flex flex-column">
 					<div><img src="/imgs/logo_white.png" alt="Todevise" /></div>
@@ -60,9 +59,8 @@ $lang = Yii::$app->language;
 				</div>
 			</div>
 		</div>
-		<div class="row-four flex flex-justify-between">
-			<div class="row-four-left"></div>
-			<div class="row-four-right"><div class=" text fpf fs1-286 fc-fff"><span>Having your outlet store on Todevise opens your business to a world of opportunities. Reach new customers, upload products with ease, manage and track you sales efficiently.</span></div></div>
+		<div class="row-four flex flex-justify-center flex-align-center">
+			<div class="row-four-right"><div class="text fpf fs1-286 fc-fff"><span>Having your outlet store on Todevise opens your business to a world of opportunities. Reach new customers, upload products with ease, manage and track you sales efficiently.</span></div></div>
 		</div>
 
 	</div>
@@ -77,21 +75,41 @@ $lang = Yii::$app->language;
 		//echo $form->field($model, 'name')->input('name', ['placeholder' => "NAME"])->label(false);
 
 		?>
-		<div class="flex flex-row">
-			<div class="allspace funiv fs0-857">
-				<?= $form->field($model, 'name',['inputOptions' => ['placeholder' => Yii::t('app/public','name') . "*"]])->label(false); ?>
-				<?= $form->field($model, 'email',['inputOptions' => ['placeholder' => Yii::t('app/public','email') . "*"]])->label(false); ?>
+		<div class="form-title fs0-714 fc-fff fs-upper funiv_bold">
+			<span class="grey-hard"><?=Yii::t('app/public', 'Personal Info')?></span>
+		</div>
+		<div class="flex flex-row form-become form-personal flex-justify-between">
+			<div class="allspace form-grouped funiv_bold fs0-857">
+				<?= $form->field($model, 'name',['inputOptions' => ['placeholder' => Yii::t('app/public','name')]])->label(false); ?>
+				<?= $form->field($model, 'email',['inputOptions' => ['placeholder' => Yii::t('app/public','email')]])->label(false); ?>
 			</div>
-			<div class="allspace funiv fs0-857">
-				<?= $form->field($model, 'brand',['inputOptions' => ['placeholder' => Yii::t('app/public','Brand name') . "*"]])->label(false); ?>
-				<?= $form->field($model, 'phone',['inputOptions' => ['placeholder' => Yii::t('app/public','Phone number') . "*"]])->label(false); ?>
+			<div class="allspace form-groupedright funiv_bold fs0-857">
+				<div class="form-optional-content funiv fs0-786 fs-upper">
+					<div class="form-optional"><?=Yii::t('app/public', 'Optional')?></div>
+				</div>
+				<?= $form->field($model, 'brand',['inputOptions' => ['placeholder' => Yii::t('app/public','Brand name')]])->label(false); ?>
+				<div class="form-optional-content funiv fs0-786 fs-upper">
+					<div class="form-optional"><?=Yii::t('app/public', 'Optional')?></div>
+				</div>
+				<?= $form->field($model, 'phone',['inputOptions' => ['placeholder' => Yii::t('app/public','Phone number')]])->label(false); ?>
 			</div>
 		</div>
-		<div class="funiv fs0-857">
-			<?= $form->field($model, 'create',['inputOptions' => ['placeholder' => Yii::t('app/public','What do you create?') . "*"]])->label(false); ?>
-			<?= $form->field($model, 'portfolio',['inputOptions' => ['placeholder' => Yii::t('app/public','Link to portfolio') . "*"]])->label(false); ?>
-			<?= $form->field($model, 'video',['inputOptions' => ['placeholder' => Yii::t('app/public','Link to video') . "*"]])->label(false); ?>
-			<?= $form->field($model, 'observations',['inputOptions' => ['placeholder' => Yii::t('app/public','observations') . "*"]])->label(false); ?>
+		<div class="form-title fs0-714 fc-fff fs-upper funiv_bold">
+			<span class="grey-hard"><?=Yii::t('app/public', 'Your Work')?></span>
+		</div>
+		<div class="funiv_bold fs0-857">
+			<?= $form->field($model, 'create',['inputOptions' => ['placeholder' => Yii::t('app/public','What do you create?')]])->label(false); ?>
+			<?= $form->field($model, 'portfolio',['inputOptions' => ['placeholder' => Yii::t('app/public','Link to portfolio')]])->label(false); ?>
+			<div class="form-add-new funiv_bold fs1-071"><span class="fc-f7284b"><?=Yii::t('app/public', 'Add new +')?></span></div>
+			<div class="form-optional-content funiv fs0-786 fs-upper">
+				<div class="form-optional"><?=Yii::t('app/public', 'Optional')?></div>
+			</div>
+			<?= $form->field($model, 'video',['inputOptions' => ['placeholder' => Yii::t('app/public','Link to video')]])->label(false); ?>
+			<div class="form-add-new funiv_bold fs1-071"><span class="fc-f7284b"><?=Yii::t('app/public', 'Add new +')?></span></div>
+			<div class="form-optional-content funiv fs0-786 fs-upper">
+				<div class="form-optional"><?=Yii::t('app/public', 'Optional')?></div>
+			</div>
+			<?= $form->field($model, 'observations',['inputOptions' => ['placeholder' => Yii::t('app/public','observations')]])->label(false); ?>
 		</div>
 		<div class="send_button_content">
 
