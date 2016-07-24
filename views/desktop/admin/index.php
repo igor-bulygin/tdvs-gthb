@@ -10,7 +10,8 @@ $this->params['breadcrumbs'][] = [
 
 IndexAsset::register($this);
 
-$this->title = 'Todevise / Admin / Tags';
+$this->title = 'Todevise / Admin / Index';
+
 ?>
 
 <div class="row">
