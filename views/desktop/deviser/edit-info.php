@@ -47,7 +47,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 						<div class="pointer drop-box flex flex-justify-center" ngf-drop ngf-select ng-model="headerphoto" class="drop-box"
 							ngf-drag-over-class="dragover" ngf-multiple="false" ngf-allow-dir="false"
 							ngf-accept="'image/*'" ngf-drop-available="dropAvailable">
-							<div ng-cloak ng-hide="dropAvailable">File Drop not available</div>
+							<div ng-cloak ng-hide="dropAvailable"><?= Yii::t("app/deviser", "File drop not available"); ?></div>
 							<div ng-cloak ng-show="dropAvailable && !headerphoto" class="funiv_ultra fs1 fc-3d fs-upper header-photo-txt">
 								<span class="glyphicon glyphicons-up-arrow"></span>
 								<?= Yii::t("app/deviser", "Upload header photo") ?>
@@ -68,7 +68,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 							<div class="pointer drop-box flex flex-justify-center flex-align-center" ngf-drop ngf-select ng-model="profilephoto" class="drop-box"
 							     ngf-drag-over-class="dragover" ngf-multiple="false" ngf-allow-dir="false"
 							     ngf-accept="'image/*'" ngf-drop-available="dropAvailable">
-								<div ng-cloak ng-hide="dropAvailable">File Drop not available</div>
+								<div ng-cloak ng-hide="dropAvailable"><?= Yii::t("app/deviser", "File drop not available"); ?></div>
 								<div ng-cloak ng-show="dropAvailable && !profilephoto" class="funiv_ultra fs1 fc-3d fs-upper profile-photo-area">
 									<span class="glyphicon glyphicons-up-arrow"></span><br />
 									<?= Yii::t("app/deviser", "Upload profile photo") ?>

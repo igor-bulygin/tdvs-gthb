@@ -7,6 +7,7 @@ todevise.controller('deviserCtrl', ["$scope", "$timeout", "$deviser", "$deviser_
 	$scope.profilephoto = null;
 
 	$scope.$watch("headerphoto", function(n, o) {
+		if ($scope.pause_watch_headerphoto === true) return;
 		if (n === null && o === null) return;
 		//Restore old profile picture if select dialog is canceled
 		if(n === null) {
@@ -20,6 +21,7 @@ todevise.controller('deviserCtrl', ["$scope", "$timeout", "$deviser", "$deviser_
 	});
 
 	$scope.$watch("profilephoto", function(n, o) {
+		if ($scope.pause_watch_profilephoto === true) return;
 		if (n === null && o === null) return;
 		//Restore old profile picture if select dialog is canceled
 		if(n === null) {
@@ -34,8 +36,9 @@ todevise.controller('deviserCtrl', ["$scope", "$timeout", "$deviser", "$deviser_
 
 	$scope.crop_header = function() {
 		var modalInstance = $uibModal.open({
-			templateUrl: 'template/modal/deviser/crop.html',
+			templateUrl: 'template/modal/deviser/crop_rectangle.html',
 			controller: 'cropCtrl',
+			backdrop: 'static',
 			resolve: {
 				data: function () {
 					return {
@@ -46,7 +49,13 @@ todevise.controller('deviserCtrl', ["$scope", "$timeout", "$deviser", "$deviser_
 		});
 
 		modalInstance.result.then(function(data) {
+			$scope.pause_watch_headerphoto = true;
 			$scope.headerphoto = data.croppedphoto;
+
+			//start watching again in the next digest
+			$timeout(function() {
+				$scope.pause_watch_headerphoto = false;
+			});
 		}, function () {
 			//Cancel
 		});
@@ -56,6 +65,7 @@ todevise.controller('deviserCtrl', ["$scope", "$timeout", "$deviser", "$deviser_
 		var modalInstance = $uibModal.open({
 			templateUrl: 'template/modal/deviser/crop_circle.html',
 			controller: 'cropCtrl',
+			backdrop: 'static',
 			resolve: {
 				data: function () {
 					return {
@@ -66,7 +76,13 @@ todevise.controller('deviserCtrl', ["$scope", "$timeout", "$deviser", "$deviser_
 		});
 
 		modalInstance.result.then(function(data) {
+			$scope.pause_watch_profilephoto = true;
 			$scope.profilephoto = data.croppedphoto;
+
+			//start watching again in the next digest
+			$timeout(function() {
+				$scope.pause_watch_profilephoto = false;
+			});
 		}, function () {
 			//Cancel
 		});

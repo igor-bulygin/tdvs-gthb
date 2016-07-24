@@ -22,14 +22,7 @@ global_deviser.dataURItoBlob = function(dataURI) {
 
 global_deviser.controller("cropCtrl", function($scope, $uibModalInstance, $timeout, data) {
 	$scope.croppedphoto = "";
-
-	var _reader = new FileReader();
-	_reader.onloadend = function() {
-		$scope.$apply(function() {
-			$scope.photo = _reader.result;
-		});
-	};
-	_reader.readAsDataURL(data.photo);
+	$scope.photo = data.photo;
 
 	$scope.ok = function() {
 		var _f = global_deviser.dataURItoBlob($scope.croppedphoto);
