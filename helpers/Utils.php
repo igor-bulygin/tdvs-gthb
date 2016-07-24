@@ -5,6 +5,7 @@ use Yii;
 use app\models\Lang;
 use yii\helpers\Url;
 use yii\helpers\Json;
+use Thumbor\Url\Builder;
 
 class Utils {
 
@@ -375,5 +376,11 @@ class Utils {
 		} else {
 			return Json::decode($string);
 		}
+	}
+
+	public static function thumborize ($img_path) {
+		$server = getenv("THUMBOR_SERVER");
+		$secret = getenv("THUMBOR_SECURITY_KEY");
+		return Builder::construct($server, $secret, $img_path);
 	}
 }

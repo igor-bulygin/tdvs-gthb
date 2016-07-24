@@ -8,6 +8,8 @@ services:
         build: ./docker_php
         environment:
             DEV: "1"
+            THUMBOR_SECURITY_KEY: "ccpXNPgnXHaONlWlzXTEGg458K9HfE"
+            THUMBOR_SERVER: "thumbor.todevise.com:8000"
         command: bash -c "cd /src && composer update -v && ./yii mongodb-migrate --interactive=0 && php -S 0.0.0.0:8080 -t /src/web/"
         ports:
             - "8080:8080"
@@ -49,3 +51,22 @@ services:
             - "27017"
         ports:
             - "27017:27017"
+    thumbor:
+        image: apsl/thumbor:6.1.2
+        volumes:
+            - ./web:/images
+            - ./thumbor_cache:/images_cache
+            - ./thumbor_resized:/images_resized
+        networks:
+            new:
+                aliases:
+                    - thumbor.todevise.com
+        environment:
+            MAX_AGE: "604800"
+            ALLOW_UNSAFE_URL: "True"
+            SECURITY_KEY: "ccpXNPgnXHaONlWlzXTEGg458K9HfE"
+            LOADER: "thumbor.loaders.file_loader"
+            FILE_LOADER_ROOT_PATH: "/images"
+            FILE_STORAGE_ROOT_PATH: "/images_cache"
+            RESULT_STORAGE_FILE_STORAGE_ROOT_PATH: "/images_resized"
+            RESULT_STORAGE_STORES_UNSAFE: "True"
