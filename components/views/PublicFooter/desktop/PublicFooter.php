@@ -114,6 +114,18 @@ publicFooterAsset::register($this);
 						<input type="text" class="funiv_bold fs1-143 fc-4e" name="email" placeholder="<?= Yii::t('app/public', 'E-mail') ?>">
 						<span class="pointer glyphicon glyphicon-circle-arrow-right fc-f7284b"></span>
 					</div>
+
+					<div class="connectd_holder">
+					<span class="fs0-857 funiv_bold fc-fff"><?= Yii::t('app/public', 'Stay connected') ?></span>
+					<div class="social-icons flex flex-row flex-justify-end">
+						<div class="icon-content"><i class="icon-2x icon-facebook"></i></div>
+						<div class="icon-content"><i class="icon-2x icon-twitter"></i></div>
+						<div class="icon-content"><i class="icon-2x icon-googleplus"></i></div>
+						<div class="icon-content"><i class="icon-2x icon-pinterest"></i></div>
+					</div>
+				</div>
+
+
 				</div>
 			</div>
 		</div>
@@ -121,9 +133,6 @@ publicFooterAsset::register($this);
 		<div class="row no-gutter">
 			<div class="col-xs-12 fs-upper funiv fs0-786 ls0-05 links">
 				<?= Html::a(Yii::t("app/public", 'Terms & Conditions'), Url::to(['public/terms']), [
-					'class' => "fc-c7"
-				]); ?>
-				<?= Html::a(Yii::t("app/public", 'Terms & Conditions'), "site/about", [
 					'class' => "fc-c7"
 				]); ?>
 				<span class="dot fc-c7 fs1-500">·</span>

@@ -7,7 +7,8 @@ class GlobalAsset extends AssetBundle {
 	public $basePath = '@webroot';
 	public $baseUrl = '@web';
 	public $css = [
-		'css/desktop/pub/global.css'
+		'css/desktop/pub/socialicious.css',
+		'css/desktop/pub/global.css',
 	];
 	public $js = [
 		'js/desktop/pub/global.js'
