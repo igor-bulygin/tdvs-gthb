@@ -27,13 +27,16 @@ background-color: #fff;
 	margin-left: 8px;
 }
 
+.icon-content a:link{
+	display: block;
+}
+
 .connectd_holder{
 	margin-top: 30px;
 	text-align: right;
 }
 
  i.icon-facebook, i.icon-twitter, i.icon-googleplus, i.icon-pinterest{
-	margin-top: 5px;
 	color: #000;
 	background-color: #fff;
 	font-size: 13px;
@@ -43,4 +46,8 @@ background-color: #fff;
 
  i.icon-facebook:hover, i.icon-twitter:hover, i.icon-googleplus:hover, i.icon-pinterest:hover{
 
+}
+
+.feedback-box{
+	text-align: right;
 }

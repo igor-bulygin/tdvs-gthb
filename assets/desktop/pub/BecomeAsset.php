@@ -12,7 +12,7 @@ class BecomeAsset extends AssetBundle {
 		'css/desktop/pub/become.css'
 	];
 	public $js = [
-		'js/desktop/pub/contact.js'
+		'js/desktop/pub/become.js'
 	];
 	public $depends = [
 		'app\assets\desktop\pub\GlobalAsset',

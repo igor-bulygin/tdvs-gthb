@@ -107,8 +107,8 @@ publicFooterAsset::register($this);
 				</div>
 			</div>
 			<div class="col-xs-3 fs-upper">
-				<div class="center-justify">
-					<span class="fs0-857 funiv_bold fc-fff"><?= Yii::t('app/public', 'Subscribe to our newsletter') ?></span>
+				<div class="center-justify feedback-box">
+					<span class="fs0-857 funiv_bold fc-fff "><?= Yii::t('app/public', 'Subscribe to our newsletter') ?></span>
 
 					<div class="newsletter_holder">
 						<input type="text" class="funiv_bold fs1-143 fc-4e" name="email" placeholder="<?= Yii::t('app/public', 'E-mail') ?>">
@@ -118,10 +118,10 @@ publicFooterAsset::register($this);
 					<div class="connectd_holder">
 					<span class="fs0-857 funiv_bold fc-fff"><?= Yii::t('app/public', 'Stay connected') ?></span>
 					<div class="social-icons flex flex-row flex-justify-end">
-						<div class="icon-content"><i class="icon-2x icon-facebook"></i></div>
-						<div class="icon-content"><i class="icon-2x icon-twitter"></i></div>
-						<div class="icon-content"><i class="icon-2x icon-googleplus"></i></div>
-						<div class="icon-content"><i class="icon-2x icon-pinterest"></i></div>
+						<div class="icon-content"><a href="https://www.facebook.com/todevise"><i class="icon-2x icon-facebook"></i></a></div>
+						<div class="icon-content"><a href=""><i class="icon-2x icon-twitter"></i></a></div>
+						<div class="icon-content"><a href=""><i class="icon-2x icon-googleplus"></i></a></div>
+						<div class="icon-content"><a href=""><i class="icon-2x icon-pinterest"></i></a></div>
 					</div>
 				</div>
 
