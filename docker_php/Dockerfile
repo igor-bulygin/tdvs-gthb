@@ -29,9 +29,7 @@ RUN buildDeps=" \
     && docker-php-ext-install -j$(nproc) mbstring \
     && docker-php-ext-install -j$(nproc) mcrypt \
     && docker-php-ext-install -j$(nproc) xml \
-    && docker-php-ext-install -j$(nproc) zip \
-    && cd /usr/src/php \
-    && make clean
+    && docker-php-ext-install -j$(nproc) zip
 
 RUN pecl install redis-2.2.8
 RUN docker-php-ext-enable redis
@@ -42,6 +40,8 @@ RUN docker-php-ext-enable mongo
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer
 
 RUN apt-get purge -y --auto-remove $buildDeps
+
+RUN find / -name "php.ini-production" -type f
 
 # Setup timezone to Europe/Madrid
 RUN cat /usr/src/php/php.ini-production | sed 's/^;\(date.timezone.*\)/\1 \"Europe\/Madrid\"/' > /usr/local/etc/php/php.ini
