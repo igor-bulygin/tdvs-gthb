@@ -12,10 +12,6 @@
 	background-image: url('/imgs/ny.jpg');
 	background-size: cover;
 	background-position: center;
-
-	filter: grayscale(90%);
-	-webkit-filter: grayscale(90%);
-	-moz-filter: grayscale(90%);
 }
 
 .footer .content .main_holder {
