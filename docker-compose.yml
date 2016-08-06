@@ -4,22 +4,27 @@ networks:
     new:
 
 services:
-    php:
-        build: ./docker_php
+    nginx:
+        build: ./docker_nginx
         environment:
             DEV: "1"
+            DOMAIN: "todevise.com"
+            GIT_EMAIL: "alexandernst@gmail.com"
+            WEBROOT: "/var/www/html/web"
             THUMBOR_SECURITY_KEY: "ccpXNPgnXHaONlWlzXTEGg458K9HfE"
             THUMBOR_SERVER: "thumbor.todevise.com:8000"
-        command: bash -c "cd /src && composer update -v && ./yii mongodb-migrate --interactive=0 && php -S 0.0.0.0:8080 -t /src/web/"
+        command: bash -c "cd /var/www/html && composer update -v --prefer-dist && ./yii mongodb-migrate --interactive=0 && /start.sh"
         ports:
+            - "8443:8443"
             - "8080:8080"
         volumes:
-            - .:/src
+            - .:/var/www/html/
         networks:
             - new
         depends_on:
             - redis
             - mongo
+            - thumbor
         links:
             - redis
             - mongo
@@ -61,6 +66,8 @@ services:
             new:
                 aliases:
                     - thumbor.todevise.com
+        ports:
+            - "8000:8000"
         environment:
             MAX_AGE: "604800"
             ALLOW_UNSAFE_URL: "True"
