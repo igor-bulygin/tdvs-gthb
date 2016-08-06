@@ -77,7 +77,8 @@ $this->title = 'Todevise / Deviser';
 			<?php
 
 				Pjax::begin([
-					'enablePushState' => false
+					'enablePushState' => false,
+					'timeout' => 5000
 				]);
 
 				echo ListView::widget([

@@ -75,7 +75,7 @@ $this->title = 'Todevise / Home';
 								<div class="absolute deviser">
 									<a class="dp_wrapper relative" href="<?= Url::to(["public/deviser", "slug" => $deviser["slug"], "deviser_id" => $deviser["short_id"]]) ?>">
 										<div class="dp relative">
-											<img src="<?= $deviser['img'] ?>" alt="" class="img-circle" />
+											<img src="<?= Utils::url_scheme() ?><?= Utils::thumborize(@$deviser['img'])->resize(0, 110) ?>" alt="" class="img-circle" />
 										</div>
 									</a>
 
@@ -91,7 +91,7 @@ $this->title = 'Todevise / Home';
 											<?php foreach ($deviser['works'] as $j => $work) { ?>
 												<div class="col-xs-6 works_row">
 													<a href="<?= Url::to(["public/product", "slug" => $work['slug'], "category_id" => @$work['categories'][0], "product_id" => $work['short_id']]) ?>">
-														<img class="work" src="<?= $work['img'] ?>" alt="" />
+														<img class="work" src="<?= Utils::url_scheme() ?><?= Utils::thumborize(@$work['img'])->resize(0, 60) ?>" alt="" />
 													</a>
 												</div>
 											<?php } ?>
@@ -129,7 +129,8 @@ $this->title = 'Todevise / Home';
 
 					Pjax::begin([
 						'id' => $category['short_id'],
-						'enablePushState' => false
+						'enablePushState' => false,
+						'timeout' => 5000
 					]);
 
 					$form = ActiveForm::begin([
