@@ -38,3 +38,7 @@ web/uploads
 
 #tags
 .tags
+
+#thumbor cache
+thumbor_cache
+thumbor_resized
