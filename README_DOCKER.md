@@ -16,10 +16,13 @@ the project.
 
 This command will download all required Docker images, build the required
 dependencies, insert demo data in the database and start a server. The server
-will be available at `localhost:8080` on your machine (host).
+will be available at `YOUR.DOCKER.MACHINE.IP:8080` on your machine (host).
 
 You're supposed to run `docker-compose up` every time you want to start the server.
 The Docker images will be build only once.
+
+There is one more thing that you must do. Add an entry in your `hosts` file and
+make `thumbor.todevise.com` to point to your docker IP.
 
 ### NOTES
 
