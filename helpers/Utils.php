@@ -383,4 +383,12 @@ class Utils {
 		$secret = getenv("THUMBOR_SECURITY_KEY");
 		return Builder::construct($server, $secret, $img_path);
 	}
+
+	public static function url_scheme() {
+		if(isset($_SERVER['HTTPS']) && !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off'){
+			return "https://";
+		} else {
+			return "http://";
+		}
+	}
 }
