@@ -463,41 +463,35 @@ class PublicController extends CController {
 
 		if ($model->load(Yii::$app->request->post())) {
 
-			$post = Yii::$app->request->post()['Become'];
-			$bodymail = "<div><p><strong>Name:</strong>".$post['name']."</p></div>";
-			$bodymail .= "<div><p><strong>Brand Name:</strong>".$post['brand']."</p></div>";
-			$bodymail .= "<div><p><strong>Email:</strong>".$post['email']."</p></div>";
-			$bodymail .= "<div><p><strong>Phone:</strong>".$post['phone']."</p></div>";
-			$bodymail .= "<div><p><strong>What do you create?:</strong>".$post['create']."</p></div>";
-			$bodymail .= "<div><p><strong>Portfolio:</strong></p></div>";
-			foreach($post['portfolio'] as $portf){
-				$bodymail .= "<div><p><strong>-</strong>".$portf."</p></div>";
-			}
-			$bodymail .= "<div><p><strong>Video:</strong></p></div>";
-			foreach($post['video'] as $vid){
-				$bodymail .= "<div><p><strong>-</strong>".$vid."</p></div>";
-			}
-			$bodymail .= "<div><p><strong>Observations:</strong>".$post['observations']."</p></div>";
+				$post = Yii::$app->request->post()['Become'];
 
-			Yii::$app->mailer->compose()
+				Yii::$app->mailer->compose('request',[
+					'post' => $post
+				])
 				->setFrom('no-reply@todevise.com')
 				->setTo('info@todevise.com')
 				->setSubject('Deviser request')
-				->setHtmlBody($body)
 				->send();
 
-			Yii::$app->mailer->compose()
-				->setFrom('no-reply@todevise.com')
+				Yii::$app->mailer->compose('request',[
+					'post' => $post
+				])				->setFrom('no-reply@todevise.com')
 				->setTo('agrigoriu@todevise.com')
 				->setSubject('Deviser request')
-				->setHtmlBody($body)
 				->send();
 
-			Yii::$app->mailer->compose()
-				->setFrom('no-reply@todevise.com')
+				Yii::$app->mailer->compose('request',[
+					'post' => $post
+				])				->setFrom('no-reply@todevise.com')
 				->setTo('jordioliu@todevise.com')
 				->setSubject('Deviser request')
-				->setHtmlBody($body)
+				->send();
+
+				Yii::$app->mailer->compose('request',[
+					'post' => $post
+				])				->setFrom('no-reply@todevise.com')
+				->setTo('nache.nache@gmail.com')
+				->setSubject('Deviser request')
 				->send();
 
 			 //return $res;
