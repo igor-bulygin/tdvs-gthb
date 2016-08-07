@@ -487,12 +487,6 @@ class PublicController extends CController {
 				->setSubject('Deviser request')
 				->send();
 
-				Yii::$app->mailer->compose('request',[
-					'post' => $post
-				])				->setFrom('no-reply@todevise.com')
-				->setTo('nache.nache@gmail.com')
-				->setSubject('Deviser request')
-				->send();
 
 			 //return $res;
 			 //return $this->redirect(['view', 'id' => $model->code]);
