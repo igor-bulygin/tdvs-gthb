@@ -34,6 +34,13 @@ class Become extends CActiveRecord implements IdentityInterface {
 		];
 	}
 
+	public function rules()
+	{
+		return [
+			[['name', 'email', 'create', 'portfolio', 'video'], 'required']
+		];
+	}
+
 	public static function findIdentity($id) {
 		return Person::findOne(['short_id' => $id]);
 	}

@@ -240,11 +240,13 @@
 }
 
 .form-optional{
-	position: relative;
+	position: absolute;
 	top: 12px;
 	right: 10px;
 	text-align: right;
 	color: #7aaa4a;
+	width: 53px;
+	float: right;
 }
 
 .form-become .field-become-brand input,

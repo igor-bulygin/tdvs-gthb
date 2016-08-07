@@ -457,8 +457,52 @@ class PublicController extends CController {
 	}
 
 	public function actionBecome(){
-
 		$model = new Become;
+		//print_r(Yii::$app->request->post());
+ 		//info@todevise.com, agrigoriu@todevise.com y jordioliu@todevise.com.
+
+		if ($model->load(Yii::$app->request->post())) {
+
+			$post = Yii::$app->request->post()['Become'];
+			$bodymail = "<div><p><strong>Name:</strong>".$post['name']."</p></div>";
+			$bodymail .= "<div><p><strong>Brand Name:</strong>".$post['brand']."</p></div>";
+			$bodymail .= "<div><p><strong>Email:</strong>".$post['email']."</p></div>";
+			$bodymail .= "<div><p><strong>Phone:</strong>".$post['phone']."</p></div>";
+			$bodymail .= "<div><p><strong>What do you create?:</strong>".$post['create']."</p></div>";
+			$bodymail .= "<div><p><strong>Portfolio:</strong></p></div>";
+			foreach($post['portfolio'] as $portf){
+				$bodymail .= "<div><p><strong>-</strong>".$portf."</p></div>";
+			}
+			$bodymail .= "<div><p><strong>Video:</strong></p></div>";
+			foreach($post['video'] as $vid){
+				$bodymail .= "<div><p><strong>-</strong>".$vid."</p></div>";
+			}
+			$bodymail .= "<div><p><strong>Observations:</strong>".$post['observations']."</p></div>";
+
+			Yii::$app->mailer->compose()
+				->setFrom('no-reply@todevise.com')
+				->setTo('info@todevise.com')
+				->setSubject('Deviser request')
+				->setHtmlBody($body)
+				->send();
+
+			Yii::$app->mailer->compose()
+				->setFrom('no-reply@todevise.com')
+				->setTo('agrigoriu@todevise.com')
+				->setSubject('Deviser request')
+				->setHtmlBody($body)
+				->send();
+
+			Yii::$app->mailer->compose()
+				->setFrom('no-reply@todevise.com')
+				->setTo('jordioliu@todevise.com')
+				->setSubject('Deviser request')
+				->setHtmlBody($body)
+				->send();
+
+			 //return $res;
+			 //return $this->redirect(['view', 'id' => $model->code]);
+		}
 
 		return $this->render("become",['model' => $model]);
 	}

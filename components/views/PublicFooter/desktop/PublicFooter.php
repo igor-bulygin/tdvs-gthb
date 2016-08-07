@@ -119,9 +119,9 @@ publicFooterAsset::register($this);
 					<span class="fs0-857 funiv_bold fc-fff"><?= Yii::t('app/public', 'Stay connected') ?></span>
 					<div class="social-icons flex flex-row flex-justify-end">
 						<div class="icon-content"><a href="https://www.facebook.com/todevise"><i class="icon-2x icon-facebook"></i></a></div>
-						<div class="icon-content"><a href=""><i class="icon-2x icon-twitter"></i></a></div>
-						<div class="icon-content"><a href=""><i class="icon-2x icon-googleplus"></i></a></div>
-						<div class="icon-content"><a href=""><i class="icon-2x icon-pinterest"></i></a></div>
+						<div class="icon-content"><a href="https://twitter.com/todevise"><i class="icon-2x icon-twitter"></i></a></div>
+						<div class="icon-content"><a href="https://plus.google.com/+Todevise"><i class="icon-2x icon-googleplus"></i></a></div>
+						<div class="icon-content"><a href="https://es.pinterest.com/todevise/"><i class="icon-2x icon-pinterest"></i></a></div>
 					</div>
 				</div>
 

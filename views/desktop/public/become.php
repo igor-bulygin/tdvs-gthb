@@ -70,7 +70,11 @@ $lang = Yii::$app->language;
 	<span class="funiv fs0-857 whyinvitation fc-fff center">We constantly strive for excellence, and for this reason an invitation is needed to register as a deviser</span>
 
 	<div class="formcontent" ng-controller="becomeCtrl">
-		<?php $form = ActiveForm::begin(); ?>
+		<?php $form = ActiveForm::begin([
+			'validateOnChange' => false,
+			'validateOnBlur' => false,
+			'validateOnType' => false
+		]); ?>
 		<?php
 		//echo $form->field($model, 'name')->input('name', ['placeholder' => "NAME"])->label(false);
 
@@ -100,14 +104,14 @@ $lang = Yii::$app->language;
 		<div class="funiv_bold fs0-857">
 			<?= $form->field($model, 'create',['inputOptions' => ['placeholder' => Yii::t('app/public','What do you create?')]])->label(false); ?>
 			<div ng-repeat="link in portfolio_links">
-				<?= $form->field($model, 'portfolio',['inputOptions' => ['placeholder' => Yii::t('app/public','Link to portfolio')]])->label(false); ?>
+				<?= $form->field($model, 'portfolio[]',['inputOptions' => ['placeholder' => Yii::t('app/public','Link to portfolio')]])->label(false); ?>
 			</div>
 			<div class="form-add-new funiv_bold fs1-071"><span class="fc-f7284b" ng-click="newPortFolioLink()"><?=Yii::t('app/public', 'Add new +')?></span></div>
 			<div class="form-optional-content funiv fs0-786 fs-upper">
 				<div class="form-optional"><?=Yii::t('app/public', 'Optional')?></div>
 			</div>
 			<div ng-repeat="link in video_links">
-				<?= $form->field($model, 'video',['inputOptions' => ['placeholder' => Yii::t('app/public','Link to video')]])->label(false); ?>
+				<?= $form->field($model, 'video[]',['inputOptions' => ['placeholder' => Yii::t('app/public','Link to video')]])->label(false); ?>
 			</div>
 			<div class="form-add-new funiv_bold fs1-071"><span class="fc-f7284b" ng-click="newVideoLink()"><?=Yii::t('app/public', 'Add new +')?></span></div>
 			<div class="form-optional-content funiv fs0-786 fs-upper">
