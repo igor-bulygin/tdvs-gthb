@@ -1,25 +1,33 @@
-var todevise = angular.module('todevise', []);
-
 /*
- * This manage show/hide text on faq section
+ * This manages the contact form
  */
 
+(function () {
+    "use strict";
 
+    function contactCtrl() {
+        var vm = this;
 
-todevise.controller('contactCtrl', ['$scope', '$cacheFactory', function ($scope, $cacheFactory) {
+        function init() {
+            vm.faqs = _faqs;
+        }
 
-	console.log(_faqs);
-	$scope.faqs = _faqs;
+        init();
 
-	$scope.debugit = function (key){
-			console.log(key);
-	}
+        vm.debugit = function (key) {
+            console.log(key);
+        }
 
-	$scope.changed = function (){
-			console.log($scope.selected);
-			if ($scope.selected  == 'a'){
-				$scope.orderShow = true;
-			}
-	}
+        vm.changed = function () {
+            console.log(vm.selected);
+            if (vm.selected == 'a') {
+                vm.orderShow = true;
+            }
+        }
 
-}]);
+    }
+
+    angular.module('todevise', [])
+        .controller('contactCtrl', contactCtrl);
+
+}());
