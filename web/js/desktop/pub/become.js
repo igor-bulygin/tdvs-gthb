@@ -1,23 +1,41 @@
-var todevise = angular.module('todevise', []);
-
 /*
- * This manage show/hide text on faq section
+ * This manages the become todeviser form
  */
 
+(function () {
+    "use strict";
 
+    function becomeCtrl($cacheFactory) {
+        var vm = this;
 
-todevise.controller('becomeCtrl', ['$scope', '$cacheFactory', function ($scope, $cacheFactory) {
+        function newItem() {
+            return {
+                link: ''
+            };
+        }
 
-	$scope.portfolio_links = [{link:''}];
-	$scope.video_links =  [{link:''}];
+        function init() {
+            vm.portfolio_links = [{
+                link: ''
+            }];
 
-	$scope.newVideoLink = function(){
-		var newItem = {link:''};
-		$scope.video_links.push(newItem);
-	}
+            vm.video_links = [{
+                link: ''
+            }]
+        }
 
-	$scope.newPortFolioLink = function(){
-		var newItem = {link:''};
-		$scope.portfolio_links.push(newItem);
-	}
-}]);
+        init();
+
+        vm.newVideoLink = function () {
+            vm.video_links.push(newItem());
+        }
+
+        vm.newPortFolioLink = function () {
+            vm.portfolio_links.push(newItem());
+        }
+    }
+
+    angular.module('todevise', [])
+        .controller('becomeCtrl', becomeCtrl);
+
+}());
