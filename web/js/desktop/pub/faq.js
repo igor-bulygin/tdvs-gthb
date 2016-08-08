@@ -1,21 +1,31 @@
-var todevise = angular.module('todevise', []);
-
 /*
  * This manage show/hide text on faq section
  */
 
+(function () {
+    "use strict";
 
- //TODO: $cacheFactory needed?
-todevise.controller('faqCtrl', ['$scope', '$cacheFactory', function ($scope, $cacheFactory) {
+    //TODO: $cacheFactory needed?
+    function faqCtrl($cacheFactory) {
+        var vm = this;
 
-	$scope.groupOfFaqs = _groupOfFaqs;
-	$scope.activeFaqId = $scope.groupOfFaqs[0].short_id; //activate first group as default
+        function init() {
+            vm.groupOfFaqs = _groupOfFaqs;
+            vm.activeFaqId = vm.groupOfFaqs[0].short_id;
+        }
 
-	$scope.showFaqs = function (activeFaqId){
-		$scope.activeFaqId = activeFaqId;
-	}
+        init();
 
-}]);
+        vm.showFaqs = function (activeFaqId) {
+            vm.activeFaqId = activeFaqId;
+        }
+
+    }
+
+    angular.module('todevise', [])
+        .controller('faqCtrl', faqCtrl);
+
+}());
 
 // $(function() {
 // 	function reset() {
