@@ -11,6 +11,7 @@ COPY php-mongo-apk/php5-mongo-1.6.14-r0.apk /tmp/php5-mongo-1.6.14-r0.apk
 COPY php-redis-apk/php5-redis-2.2.8-r0.apk /tmp/php5-redis-2.2.8-r0.apk
 
 RUN apk add --no-cache bash \
+    rsync \
     nodejs \
     openssh-client \
     wget \
