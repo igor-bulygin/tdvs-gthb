@@ -3,31 +3,31 @@
  */
 
 (function () {
-    "use strict";
+	"use strict";
 
-    function contactCtrl() {
-        var vm = this;
+	function contactCtrl() {
+		var vm = this;
 
-        function init() {
-            vm.faqs = _faqs;
-        }
+		function init() {
+			vm.faqs = _faqs;
+		}
 
-        init();
+		init();
 
-        vm.debugit = function (key) {
-            console.log(key);
-        }
+		vm.debugit = function (key) {
+			console.log(key);
+		}
 
-        vm.changed = function () {
-            console.log(vm.selected);
-            if (vm.selected == 'a') {
-                vm.orderShow = true;
-            }
-        }
+		vm.changed = function () {
+			console.log(vm.selected);
+			if (vm.selected == 'a') {
+				vm.orderShow = true;
+			}
+		}
 
-    }
+	}
 
-    angular.module('todevise', [])
-        .controller('contactCtrl', contactCtrl);
+	angular.module('todevise', [])
+		.controller('contactCtrl', contactCtrl);
 
 }());
