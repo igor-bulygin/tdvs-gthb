@@ -3,25 +3,25 @@
  */
 
 (function () {
-    "use strict";
+	"use strict";
 
-    //TODO: $cacheFactory needed?
-    function termsCtrl($cacheFactory) {
-        var vm = this;
+	//TODO: $cacheFactory needed?
+	function termsCtrl($cacheFactory) {
+		var vm = this;
 
-        function init() {
-            vm.groupOfTerms = _groupOfTerms;
-            vm.activeTermId = vm.groupOfTerms[0].short_id; //activate first group as default
-        }
+		function init() {
+			vm.groupOfTerms = _groupOfTerms;
+			vm.activeTermId = vm.groupOfTerms[0].short_id; //activate first group as default
+		}
 
-        init();
+		init();
 
-        vm.showTerms = function (activeTermId) {
-            vm.activeTermId = activeTermId;
-        }
+		vm.showTerms = function (activeTermId) {
+			vm.activeTermId = activeTermId;
+		}
 
-    }
+	}
 
-    angular.module('todevise', [])
-        .controller('termsCtrl', termsCtrl)
+	angular.module('todevise', [])
+		.controller('termsCtrl', termsCtrl)
 }());
