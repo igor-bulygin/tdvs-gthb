@@ -3,27 +3,27 @@
  */
 
 (function () {
-    "use strict";
+	"use strict";
 
-    //TODO: $cacheFactory needed?
-    function faqCtrl($cacheFactory) {
-        var vm = this;
+	//TODO: $cacheFactory needed?
+	function faqCtrl($cacheFactory) {
+		var vm = this;
 
-        function init() {
-            vm.groupOfFaqs = _groupOfFaqs;
-            vm.activeFaqId = vm.groupOfFaqs[0].short_id;
-        }
+		function init() {
+			vm.groupOfFaqs = _groupOfFaqs;
+			vm.activeFaqId = vm.groupOfFaqs[0].short_id;
+		}
 
-        init();
+		init();
 
-        vm.showFaqs = function (activeFaqId) {
-            vm.activeFaqId = activeFaqId;
-        }
+		vm.showFaqs = function (activeFaqId) {
+			vm.activeFaqId = activeFaqId;
+		}
 
-    }
+	}
 
-    angular.module('todevise', [])
-        .controller('faqCtrl', faqCtrl);
+	angular.module('todevise', [])
+		.controller('faqCtrl', faqCtrl);
 
 }());
 
