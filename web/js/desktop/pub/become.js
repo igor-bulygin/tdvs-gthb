@@ -17,11 +17,11 @@
 		function init() {
 			vm.portfolio_links = [{
 				link: ''
-            }];
+			}];
 
 			vm.video_links = [{
 				link: ''
-            }]
+			}]
 		}
 
 		init();

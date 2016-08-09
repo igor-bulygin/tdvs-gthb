@@ -68,10 +68,10 @@ $lang = Yii::$app->language;
 						</div>
 						<div class="funiv_bold fs0-857">
 							<?php $form = ActiveForm::begin([
-                                'validateOnChange' => false,
-                                'validateOnBlur' => false,
-                                'validateOnType' => false
-                            ]); ?>
+								'validateOnChange' => false,
+								'validateOnBlur' => false,
+								'validateOnType' => false
+							]); ?>
 								<?php
 						echo $form->field($model, 'name')->input('name', ['placeholder' => "NAME"])->label(false);
 						echo $form->field($model, 'email')->input('email', ['placeholder' => "EMAIL"])->label(false);
@@ -153,7 +153,7 @@ $lang = Yii::$app->language;
 			// 	],
 			// 	'layout' => '<div class="funiv fs1-143 fc-6d">{summary}</div><div class="products_holder">{items}</div>{pager}',
 			// ]);
-      //echo $test;
+			//echo $test;
 
 			//Pjax::end();
 

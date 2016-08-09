@@ -11,7 +11,6 @@ use app\assets\desktop\pub\BecomeAsset;
 use yii\widgets\ActiveForm;
 use kartik\widgets\DepDrop;
 
-
 /* @var $this yii\web\View */
 
 $this->params['breadcrumbs'][] = [
@@ -35,8 +34,6 @@ $lang = Yii::$app->language;
 							<div><img src="/imgs/logo_white.png" alt="Todevise" /></div>
 							<div class="fs4-714 funiv_thin fs-upper fc-fff flex-justify-center">Express</div>
 							<div class="fs4-714 funiv_thin fs-upper fc-fff flex-justify-center">Yourself</div>
-
-
 							<?= Html::a(Yii::t("app/public", 'Request invitation'), "#invitationform", [
 						'class' => "btn white funiv_bold fs1 fc-f7284b fs-upper"
 					]); ?>
@@ -64,22 +61,19 @@ $lang = Yii::$app->language;
 						<div class="text fpf fs1-286 fc-fff"><span>Having your outlet store on Todevise opens your business to a world of opportunities. Reach new customers, upload products with ease, manage and track you sales efficiently.</span></div>
 					</div>
 				</div>
-
 			</div>
 			<div class="row-five flex flex-column flex-justify-center flex-align-center">
-
 				<span class="fs3-643 funiv_thin fs-upper fc-fff">Request invitation</span>
 				<span class="funiv fs0-857 whyinvitation fc-fff center">We constantly strive for excellence, and for this reason an invitation is needed to register as a deviser</span>
-
 				<div class="formcontent" ng-controller="becomeCtrl as becomeCtrl">
 					<?php $form = ActiveForm::begin([
-			             'validateOnChange' => false,
-			             'validateOnBlur' => false,
-			             'validateOnType' => false
-                    ]); ?>
+						'validateOnChange' => false,
+						'validateOnBlur' => false,
+						'validateOnType' => false
+					]); ?>
 						<?php
-                        //echo $form->field($model, 'name')->input('name', ['placeholder' => "NAME"])->label(false);
-                        ?>
+							//echo $form->field($model, 'name')->input('name', ['placeholder' => "NAME"])->label(false);
+						?>
 							<div class="form-title fs0-714 fc-fff fs-upper funiv_bold">
 								<span class="grey-hard"><?=Yii::t('app/public', 'Personal Info')?></span>
 							</div>
@@ -130,11 +124,11 @@ $lang = Yii::$app->language;
 							</div>
 							<div class="send_button_content">
 								<?php
-                                    echo Html::submitButton(
-                                    '<img src="/imgs/shape.png" />',
-                                    ['class'=>'fc-fff btn send_button']
-                                    );
-                                ?>
+								echo Html::submitButton(
+									'<img src="/imgs/shape.png" />',
+									['class'=>'fc-fff btn send_button']
+								);
+								?>
 							</div>
 							<?php ActiveForm::end(); ?>
 				</div>
