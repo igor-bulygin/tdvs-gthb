@@ -1,11 +1,13 @@
 (function () {
 	"use strict";
 
-	function faqsCtrl($faqs, $category_util, $location, toastr, $uibModal) {
+	function faqsCtrl($faqs, $category_util, $location, toastr, $uibModal, treeService) {
 		var vm = this;
 
 		vm.treeData = [];
 		vm.langs = _langs;
+
+		vm.treeConfig = treeService.treeDefaultConfig("todevise_faqs_jstree", vm);
 
 		vm.load_faqs = function () {
 			$faqs.get().then(function (_faqs) {
@@ -55,32 +57,6 @@
 				//callback error
 				toastr.error("Couldn't load categories!", err);
 			});
-		};
-
-		vm.treeConfig = {
-			core: {
-				check_callback: true,
-				themes: {
-					name: "default-dark"
-				}
-			},
-			state: {
-				key: "todevise_categories_jstree",
-				filter: function (state) {
-					vm.tree_state = {};
-					angular.copy(state, vm.tree_state);
-				}
-			},
-			dnd: {
-				touch: "selected"
-			},
-			search: {
-				fuzzy: false,
-				case_insensitive: true,
-				show_only_matches: true,
-				search_only_leaves: false
-			},
-			plugins: ["state", "dnd", "search", "sort", "wholerow", "actions", "types"]
 		};
 
 		vm.readyCB = function () {
@@ -335,7 +311,7 @@
 	}
 
 
-	angular.module('todevise', ['ngAnimate', 'ui.bootstrap', 'ngJsTree', 'global-admin', 'global-desktop', 'api'])
+	angular.module('todevise', ['ngAnimate', 'ui.bootstrap', 'ngJsTree', 'global-admin', 'global-desktop', 'api', 'util'])
 		.controller('faqsCtrl', faqsCtrl)
 		.controller('create_newCtrl', create_newCtrl)
 		.controller('editCtrl', editCtrl);

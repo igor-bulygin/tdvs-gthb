@@ -10,7 +10,9 @@ class FaqsAsset extends AssetBundle {
 		'css/desktop/admin/faqs.css'
 	];
 	public $js = [
-		'js/desktop/admin/faqs.js'
+		'js/desktop/admin/faqs.js',
+		'js/util/util.js',
+		'js/util/treeService.js'
 	];
 	public $depends = [
 		'app\assets\api\ApiAsset',
