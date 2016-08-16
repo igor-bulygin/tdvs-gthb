@@ -14,7 +14,7 @@ todevise.controller('productsCtrl', ["$scope", "$product", "$product_util", "$ui
 	$scope.new_product = function() {
 		var _product = $product_util.newProduct($scope.deviser.short_id);
 		$product.modify("POST", _product).then(function(data) {
-			window.location.href = window.location.origin + "/" + $scope.deviser.slug + "/edit-work/" + data.short_id + "/";
+			window.location.href = window.location.origin + "/" + $scope.deviser.slug + "/edit-work/" + data.short_id;
 		}, function(err) {
 			toastr.error("Couldn't create product!", err);
 		});

@@ -26,6 +26,14 @@ $config = [
 		'app\components\Aliases'
 	],
 
+
+    // TODO: Rename "api3" to "api", when all the Angular admin services are migrated
+    'modules' => [
+        'api3' => [
+            'class' => 'app\modules\api\Module',
+        ],
+    ],
+
 	'components' => [
 
 		//Assets
@@ -112,7 +120,10 @@ $config = [
 
 		//Requests and cookies
 		'request' => [
-			'cookieValidationKey' => 'Yq$66191i>#VPkmnDgW<L@Ol<Sw4R+0A1?*9r49%.<02`Q:7_8^0)Pe#tp87'
+			'cookieValidationKey' => 'Yq$66191i>#VPkmnDgW<L@Ol<Sw4R+0A1?*9r49%.<02`Q:7_8^0)Pe#tp87',
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ]
 		],
 
 		//Sessions
@@ -129,10 +140,17 @@ $config = [
 		'urlManager' => [
 			'enablePrettyUrl' => true,
 			'showScriptName' => false,
-			'suffix' => '/',
+//            'enableStrictParsing' => true,
+			'suffix' => '',
 			'rules' => [
-				//API actions
-				'api/<action:[^/.]*?>/'  => 'api/<action>',
+                // Test routing
+                [
+                    'route' => 'public/test',
+                    'pattern' => 'test/<id:[^/.]*?>',
+                    'suffix' => ''
+                ],
+
+                // Public routing
 
 				//Links for a cart listing
 				'cart/' => 'public/cart',
@@ -186,7 +204,20 @@ $config = [
 
 				//Links for a product profile
 				'<deviser_id:\w{7}>/<slug:[0-9a-z-A-Z\-]*?>/' => 'public/deviser',
-				'public/<deviser_id:\w{7}>/<slug:[0-9a-z-A-Z\-]*?>/' => 'public/deviser'
+				'public/<deviser_id:\w{7}>/<slug:[0-9a-z-A-Z\-]*?>/' => 'public/deviser',
+
+                // API routing
+                /* 'api/<action:[^/.]*?>/'  => 'api/<action>', */
+                [
+                    'route' => 'api/<action>',
+                    'pattern' => 'api/<action:[^/.]*?>/',
+                    'suffix' => '/'
+                ],
+
+                // API routing
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'api3/priv/v1/term'],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'api3/priv/v1/faq'],
+
 			]
 		],
 

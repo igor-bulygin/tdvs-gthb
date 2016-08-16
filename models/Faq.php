@@ -12,6 +12,22 @@ class Faq extends CActiveRecord {
 		return 'faq';
 	}
 
+    /**
+     * Get an array with Faq entities, serialized for public queries
+     *
+     * @return array
+     */
+	public static function getSerializedPublic() {
+        $faqs = Faq::find()->select(['short_id', 'title', 'faqs'])->asArray()->all();
+        // publish in the language selected by current user
+        foreach ($faqs as $key => &$oneFaq){
+            Utils::l_collection($oneFaq['faqs'], "question");
+            Utils::l_collection($oneFaq['faqs'], "answer");
+            $oneFaq['title'] = Utils::l($oneFaq['title']);
+        }
+        return $faqs;
+	}
+
 	public function attributes() {
 		return [
 			'_id',

@@ -42,3 +42,6 @@ web/uploads
 #thumbor cache
 thumbor_cache
 thumbor_resized
+
+#private scripts to test rest api
+test_rest
