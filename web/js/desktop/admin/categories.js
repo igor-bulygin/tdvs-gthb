@@ -1,261 +1,254 @@
-var todevise = angular.module('todevise', ['ngAnimate', 'ui.bootstrap', 'ngJsTree', 'global-admin', 'global-desktop', 'api']);
+(function () {
+	"use strict";
 
-todevise.controller('categoriesCtrl', ["$scope", "$category", "$category_util", "toastr", "$uibModal", function($scope, $category, $category_util, toastr, $uibModal) {
+	function categoriesCtrl($category, $category_util, toastr, $uibModal, treeService) {
+		var vm = this;
+		
+		vm.treeData = [];
 
-	$scope.treeData = [];
+		vm.treeConfig = treeService.treeDefaultConfig("todevise_faqs_jstree", vm);
 
-	$scope.treeConfig = {
-		core : {
-			check_callback: true,
-			themes: {
-				name: "default-dark"
-			}
-		},
-		state : {
-			key : "todevise_categories_jstree",
-			filter: function(state) {
-				$scope.tree_state = {};
-				angular.copy(state, $scope.tree_state);
-			}
-		},
-		dnd: {
-			touch: "selected"
-		},
-		search: {
-			fuzzy: false,
-			case_insensitive: true,
-			show_only_matches: true,
-			search_only_leaves: false
-		},
-		plugins: ["state", "dnd", "search", "sort", "wholerow", "actions", "types"]
-	};
+		vm.load_categories = function () {
+			$category.get().then(function (_categories) {
 
-	$scope.readyCB = function () {
-		$scope.treeInstance.jstree(true).add_action("all", {
-			"id": "action_add",
-			"class": "action_add pull-right",
-			"text": "",
-			"after": true,
-			"selector": "a",
-			"event": "click",
-			"callback": $scope.create
-		});
+				//Sort data before feeding it to jsTree
+				_categories = $category_util.sort(_categories);
 
-		$scope.treeInstance.jstree(true).add_action("all", {
-			"id": "action_rename",
-			"class": "action_rename pull-right",
-			"text": "",
-			"after": true,
-			"selector": "a",
-			"event": "click",
-			"callback": $scope.rename
-		});
+				//Empty the data holder (if there is anything)
+				vm.treeData.splice(0, vm.treeData.length);
 
-		$scope.treeInstance.jstree(true).add_action("all", {
-			"id": "action_remove",
-			"class": "action_remove pull-right",
-			"text": "",
-			"after": true,
-			"selector": "a",
-			"event": "click",
-			"callback": $scope.remove
-		});
+				//Fill the new values
+				angular.forEach(_categories, function (category, key) {
+					vm.treeData.push($category_util.categoryToNode(category));
+				});
 
-		$scope.load_categories();
-	};
-
-	$scope.load_categories = function() {
-		$category.get().then(function(_categories) {
-
-			//Sort data before feeding it to jsTree
-			_categories = $category_util.sort(_categories);
-
-			//Empty the data holder (if there is anything)
-			$scope.treeData.splice(0, $scope.treeData.length);
-
-			//Fill the new values
-			angular.forEach(_categories, function (category, key) {
-				$scope.treeData.push( $category_util.categoryToNode(category) );
+				toastr.success("Categories loaded!");
+			}, function (err) {
+				toastr.error("Couldn't load categories!", err);
 			});
-			toastr.success("Categories loaded!");
-		}, function(err) {
-			toastr.error("Couldn't load categories!", err);
-		});
-	};
+		};
 
-	$scope.search = function() {
-		$scope.treeInstance.jstree(true).search($scope.searchModel);
-	};
+		vm.readyCB = function () {
+			vm.treeInstance.jstree(true).add_action("all", {
+				id: "action_add",
+				class: "action_add pull-right",
+				text: "",
+				after: true,
+				selector: "a",
+				event: "click",
+				callback: vm.create
+			});
 
-	$scope.open_all = function() {
-		$scope.treeInstance.jstree(true).open_all();
-	};
 
-	$scope.close_all = function() {
-		$scope.treeInstance.jstree(true).close_all();
-	};
+			vm.treeInstance.jstree(true).add_action("all", {
+				id: "action_rename",
+				class: "action_rename pull-right",
+				text: "",
+				after: true,
+				selector: "a",
+				event: "click",
+				callback: vm.rename
+			});
 
-	$scope.restoreState = _.debounce(function() {
-		$scope.treeInstance.jstree(true).set_state(angular.copy($scope.tree_state));
-	}, 100);
+			vm.treeInstance.jstree(true).add_action("all", {
+				id: "action_remove",
+				class: "action_remove pull-right",
+				text: "",
+				after: true,
+				selector: "a",
+				event: "click",
+				callback: vm.remove
+			});
 
-	$scope.create = function(node_id, node, action_id, action_el) {
-		var path = "/";
-		if (node !== undefined) {
-			path += $scope.treeInstance.jstree(true).get_path(node, "/", true) + "/";
+			vm.load_categories();
+
 		}
 
-		var modalInstance = $uibModal.open({
-			templateUrl: 'template/modal/category/create_new.html',
-			controller: 'create_newCtrl',
-			resolve: {
-				data: function () {
-					return {
-						langs: _langs
-					};
-				}
-			}
-		});
+		vm.search = function () {
+			vm.treeInstance.jstree(true).search(vm.searchModel);
+		}
 
-		modalInstance.result.then(function(data) {
-			var tmp_node = $category_util.newCategory(path, data.langs, data.slug, data.sizecharts, data.prints);
+		vm.open_all = function () {
+			vm.treeInstance.jstree(true).open_all();
+		}
 
-			$category.modify("POST", tmp_node).then(function(category) {
-				toastr.success("Category created!");
-				$scope.treeData.push( $category_util.categoryToNode(category) );
-			}, function(err) {
-				toastr.error("Couldn't create category!", err);
-			});
-		}, function () {
-			//Cancel
-		});
-	};
+		vm.close_all = function () {
+			vm.treeInstance.jstree(true).close_all();
+		}
 
-	$scope.rename = function (node_id, node, action_id, action_el) {
+		vm.restoreState = _.debounce(function () {
+			vm.treeInstance.jstree(true).set_state(angular.copy(vm.tree_state));
+		}, 100);
 
-		$category.get({
-			"short_id": node.id
-		}).then(function(_category) {
-			if(_category.length !== 1) {
-				toastr.error("Unexpected category details!");
-				return;
-			} else {
-				_category = _category.pop();
+		vm.create = function (node_id, node, action_id, action_el) {
+			var path = "/";
+			if (node !== undefined) {
+				path += vm.treeInstance.jstree(true).get_path(node, "/", true) + "/";
 			}
 
 			var modalInstance = $uibModal.open({
-				templateUrl: 'template/modal/category/edit.html',
-				controller: 'editCtrl',
+				templateUrl: 'template/modal/category/create_new.html',
+				controller: create_newCtrl,
+				controllerAs: "create_newCtrl",
 				resolve: {
 					data: function () {
 						return {
-							langs: _langs,
-							category: _category
+							langs: _langs
 						};
 					}
 				}
 			});
 
-			modalInstance.result.then(function(data) {
-				$category.modify("POST", data.category).then(function() {
-					toastr.success("Category modified!");
+			modalInstance.result.then(function (data) {
+				var tmp_node = $category_util.newCategory(path, data.langs, data.slug, data.sizecharts, data.prints);
 
-					var _node = $category_util.categoryToNode(data.category);
-					var _current = _.findWhere($scope.treeData, {id: data.category.short_id});
-					angular.merge(_current, _node);
-				}, function(err) {
-					toastr.error("Couldn't modify category!", err);
+				$category.modify("POST", tmp_node).then(function (category) {
+					toastr.success("Category created!");
+					vm.treeData.push($category_util.categoryToNode(category));
+				}, function (err) {
+					toastr.error("Couldn't create category!", err);
 				});
-
 			}, function () {
 				//Cancel
 			});
-		}, function(err) {
-			toastr.error("Couldn't get category details!", err);
-		});
-	};
+		};
 
-	$scope.move = function (e, node) {
-		node.node.original.parent = node.node.parent;
-		var tmp_node = $category_util.nodeToCategory(node.node.original, $scope);
-		$category.modify("post", tmp_node).then(function(category) {
-			$scope.load_categories();
-			toastr.success("Category moved!");
-		}, function(err) {
-			toastr.error("Couldn't move category!", err);
-		});
-	};
-
-	$scope.remove = function (node_id, node, action_id, action_el) {
-		var category = $scope.treeInstance.jstree(true).get_node(node.id);
-		category = $category_util.nodeToCategory(category.original, $scope);
-
-		//Check for sub-categories that depend on this one so we can remove those too
-		$category_util.subCategories(category).then(function(subcategories) {
-			var modalInstance = $uibModal.open({
-				templateUrl: 'template/modal/confirm.html',
-				controller: 'confirmCtrl',
-				resolve: {
-					data: function () {
-						return {
-							title: "Are you sure?",
-							text: _.size(subcategories) + " additional categories will be removed"
-						};
-					}
+		vm.rename = function (node_id, node, action_id, action_el) {
+			$category.get({
+				short_id: node.id
+			}).then(function (_category) {
+				if (_category.length !== 1) {
+					toastr.error("Unexpected category details!");
+					return;
+				} else {
+					_category = _category.pop();
 				}
-			});
 
-			modalInstance.result.then(function() {
-				$category.modify("delete", category).then(function (category) {
-					$scope.load_categories();
-					toastr.success("Category deleted!");
-				}, function (err) {
-					toastr.error("Couldn't remove category!", err);
+				var modalInstance = $uibModal.open({
+					templateUrl: 'template/modal/category/edit.html',
+					controller: editCtrl,
+					controllerAs: 'editCtrl',
+					resolve: {
+						data: function () {
+							return {
+								langs: _langs,
+								category: _category
+							};
+						}
+					}
 				});
 
-			}, function() {
-				//Cancel
+				modalInstance.result.then(function (data) {
+					$category.modify("POST", data.category).then(function () {
+						toastr.success("Category modified!");
+
+						var _node = $category_util.categoryToNode(data.category);
+						var _current = _.findWhere(vm.treeData, {
+							id: data.category.short_id
+						});
+						angular.merge(_current, _node);
+					}, function (err) {
+						toastr.error("Couldn't modify category!", err);
+					});
+				}, function () {
+					//Cancel
+				});
+			}, function (err) {
+				toastr.error("Couldn't get category details!", err);
 			});
+		};
 
-		}, function(err) {
-			toastr.error("Couldn't check dependencies!", err);
-		});
-	};
+		vm.move = function (e, node) {
+			node.node.original.parent = node.node.parent;
+			var tmp_node = $category_util.nodeToCategory(node.node.original, vm);
+			$category.modify("post", tmp_node).then(function (category) {
+				vm.load_categories();
+				toastr.success("Category moved!");
+			}, function (err) {
+				toastr.error("Couldn't move category!", err);
+			});
+		};
 
-}]);
+		vm.remove = function (node_id, node, action_id, action_el) {
+			var category = vm.treeInstance.jstree(true).get_node(node.id);
+			category = $category_util.nodeToCategory(category.original, vm);
 
-todevise.controller("create_newCtrl", function($scope, $uibModalInstance, data) {
-	$scope.data = data;
-	$scope.langs = {};
-	$scope.slug = "";
-	$scope.sizecharts = false;
-	$scope.prints = false;
+			//Check for sub-categories that depend on this one so we can remove those too
+			$category_util.subCategories(category).then(function (subcategories) {
+				var modalInstance = $uibModal.open({
+					templateUrl: 'template/modal/confirm.html',
+					controller: 'confirmCtrl',
+					resolve: {
+						data: function () {
+							return {
+								title: "Are you sure?",
+								text: _.size(subcategories) + " additional categories will be removed"
+							};
+						}
+					}
+				});
 
-	$scope.ok = function() {
-		$uibModalInstance.close({
-			"langs": $scope.langs,
-			"slug": $scope.slug,
-			"sizecharts": $scope.sizecharts,
-			"prints": $scope.prints
-		});
-	};
+				modalInstance.result.then(function () {
+					$category.modify("delete", category).then(function (category) {
+						vm.load_categories();
+						toastr.success("Category deleted!");
+					}, function (err) {
+						toastr.error("Couldn't remove category!", err);
+					});
 
-	$scope.cancel =  function() {
-		$uibModalInstance.dismiss();
-	};
-});
+				}, function () {
+					//Cancel
+				});
 
+			}, function (err) {
+				toastr.error("Couldn't check dependencies!", err);
+			});
+		};
 
-todevise.controller("editCtrl", function($scope, $uibModalInstance, data) {
-	$scope.data = data;
+	}
 
-	$scope.ok = function() {
-		$uibModalInstance.close({
-			"category": $scope.data.category
-		});
-	};
+	function create_newCtrl($uibModalInstance, data) {
+		var vm = this;
+		
+		vm.data = data;
+		vm.langs = {};
+		vm.slug = "";
+		vm.sizecharts = false;
+		vm.prints = false;
 
-	$scope.cancel =  function() {
-		$uibModalInstance.dismiss();
-	};
-});
+		vm.ok = function () {
+			$uibModalInstance.close({
+				langs: vm.langs,
+				slug: vm.slug,
+				sizecharts: vm.sizecharts,
+				prints: vm.prints
+			});
+		};
+
+		vm.cancel = function () {
+			$uibModalInstance.dismiss();
+		};
+	}
+
+	function editCtrl($uibModalInstance, data) {
+		var vm = this;
+		
+		vm.data = data;
+
+		vm.ok = function () {
+			$uibModalInstance.close({
+				category: vm.data.category
+			});
+		};
+
+		vm.cancel = function () {
+			$uibModalInstance.dismiss();
+		}
+	}
+
+	angular.module('todevise', ['ngAnimate', 'ui.bootstrap', 'ngJsTree', 'global-admin', 'global-desktop', 'api', 'util'])
+		.controller('categoriesCtrl', categoriesCtrl)
+		.controller('create_newCtrl', create_newCtrl)
+		.controller('editCtrl', editCtrl);
+
+}());
