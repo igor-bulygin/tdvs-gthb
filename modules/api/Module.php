@@ -12,6 +12,10 @@ class Module extends \yii\base\Module
                 // you should consider using a shorter namespace here!
                 'class' => 'app\modules\api\priv\Module',
             ],
+            'admin' => [
+                // you should consider using a shorter namespace here!
+                'class' => 'app\modules\api\admin\Module',
+            ],
         ];
     }
 }

@@ -34,6 +34,22 @@ class Term extends CActiveRecord {
 		// 	where(["REGEX", "path", "/^$current_path/"])->all();
 	}
 
+    /**
+     * Get an array with Faq entities, serialized for public queries
+     *
+     * @return array
+     */
+    public static function getSerializedPublic() {
+        $terms = Term::find()->select(['short_id', 'title', 'terms'])->asArray()->all();
+        // publish in the language selected by current user
+        foreach ($terms as $key => &$oneTerm){
+            Utils::l_collection($oneTerm['terms'], "question");
+            Utils::l_collection($oneTerm['terms'], "answer");
+            $oneTerm['title'] = Utils::l($oneTerm['title']);
+        }
+        return $terms;
+    }
+
 	public function beforeSave($insert) {
 
 		if($this->terms == null) {
