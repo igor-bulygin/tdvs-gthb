@@ -457,9 +457,10 @@ class PublicController extends CController {
 	}
 
 	public function actionBecome(){
-		$model = new Become;
+		$model = new Become();
 		//print_r(Yii::$app->request->post());
  		//info@todevise.com, agrigoriu@todevise.com y jordioliu@todevise.com.
+        $showCheckEmail = false;
 
 		if ($model->load(Yii::$app->request->post())) {
 
@@ -473,26 +474,28 @@ class PublicController extends CController {
 				->setSubject('Deviser request')
 				->send();
 
-				Yii::$app->mailer->compose('request',[
-					'post' => $post
-				])				->setFrom('no-reply@todevise.com')
-				->setTo('agrigoriu@todevise.com')
-				->setSubject('Deviser request')
-				->send();
+            $showCheckEmail = true;
 
-				Yii::$app->mailer->compose('request',[
-					'post' => $post
-				])				->setFrom('no-reply@todevise.com')
-				->setTo('jordioliu@todevise.com')
-				->setSubject('Deviser request')
-				->send();
+//				Yii::$app->mailer->compose('request',[
+//					'post' => $post
+//				])				->setFrom('no-reply@todevise.com')
+//				->setTo('agrigoriu@todevise.com')
+//				->setSubject('Deviser request')
+//				->send();
+//
+//				Yii::$app->mailer->compose('request',[
+//					'post' => $post
+//				])				->setFrom('no-reply@todevise.com')
+//				->setTo('jordioliu@todevise.com')
+//				->setSubject('Deviser request')
+//				->send();
 
 
 			 //return $res;
 			 //return $this->redirect(['view', 'id' => $model->code]);
 		}
 
-		return $this->render("become",['model' => $model]);
+		return $this->render("become", ['model' => $model, "showCheckEmail" => $showCheckEmail]);
 	}
 
 }
