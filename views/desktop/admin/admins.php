@@ -65,7 +65,7 @@ $this->title = 'Todevise / Admin / Admins';
 							'delete' => function($url, $model, $key) {
 								return Html::tag("span", "", [
 									"class" => "pointer glyphicon glyphicon-trash fc-fff fs1",
-									"ng-click" => "delete('$model->short_id')"
+									"ng-click" => "adminsCtrl.delete('$model->short_id')"
 								]);
 							}
 						],

@@ -1,12 +1,12 @@
 (function () {
 	"use strict";
 
-	function adminsCtrl($timeout, $admin, $admin_util, toastr, $uibModal, $compile, $http) {
+	function adminsCtrl($scope, $timeout, $admin, $admin_util, toastr, $uibModal, $compile, $http) {
 		var vm = this;
 
 		vm.renderPartial = function () {
 			$http.get(aus.syncToURL()).success(function (data, status) {
-				angular.element('.body-content').html($compile(data)(vm));
+				angular.element('.body-content').html($compile(data)($scope));
 			}).error(function (data, status) {
 				toastr.error("Failed to refresh content!");
 			});
