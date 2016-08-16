@@ -215,7 +215,10 @@ $config = [
                 ],
 
                 // API routing
-                ['class' => 'yii\rest\UrlRule', 'controller' => 'api3/priv/v1/faq'],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/faq'],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/term'],
+
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'api3/priv/v1/user'],
 
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'api3/admin/v1/faq'],
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'api3/admin/v1/term'],

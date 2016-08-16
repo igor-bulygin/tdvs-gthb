@@ -11,11 +11,11 @@ use yii\filters\ContentNegotiator;
 
 use app\models\Faq;
 
-class FaqController extends Controller {
+class UserController extends Controller {
 
     public function actionIndex()
     {
-        return Faq::getSerializedPublic();
+        return;
     }
 
 }

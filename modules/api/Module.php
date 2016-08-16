@@ -8,12 +8,13 @@ class Module extends \yii\base\Module
         parent::init();
 
         $this->modules = [
+            'pub' => [
+                'class' => 'app\modules\api\pub\Module',
+            ],
             'priv' => [
-                // you should consider using a shorter namespace here!
                 'class' => 'app\modules\api\priv\Module',
             ],
             'admin' => [
-                // you should consider using a shorter namespace here!
                 'class' => 'app\modules\api\admin\Module',
             ],
         ];
