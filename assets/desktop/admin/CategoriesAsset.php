@@ -10,7 +10,9 @@ class CategoriesAsset extends AssetBundle {
 		'css/desktop/admin/categories.css'
 	];
 	public $js = [
-		'js/desktop/admin/categories.js'
+		'js/desktop/admin/categories.js',
+		'js/util/util.js',
+		'js/util/treeService.js'
 	];
 	public $depends = [
 		'app\assets\api\ApiAsset',
