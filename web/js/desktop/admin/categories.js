@@ -3,7 +3,7 @@
 
 	function categoriesCtrl($category, $category_util, toastr, $uibModal, treeService) {
 		var vm = this;
-		
+
 		vm.treeData = [];
 
 		vm.treeConfig = treeService.treeDefaultConfig("todevise_faqs_jstree", vm);
@@ -209,7 +209,7 @@
 
 	function create_newCtrl($uibModalInstance, data) {
 		var vm = this;
-		
+
 		vm.data = data;
 		vm.langs = {};
 		vm.slug = "";
@@ -232,7 +232,7 @@
 
 	function editCtrl($uibModalInstance, data) {
 		var vm = this;
-		
+
 		vm.data = data;
 
 		vm.ok = function () {
