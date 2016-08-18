@@ -9,6 +9,7 @@ use yii\web\IdentityInterface;
 /**
  * @property mixed _id
  * @property string slug
+ * @property string text_short_description
  * @property mixed type
  * @property array categories
  * @property array collections
@@ -149,6 +150,27 @@ class Person extends CActiveRecord implements IdentityInterface {
 
             // the email attribute should be a valid email address
 //            ['email', 'email'],
+        ];
+    }
+
+    public function fields()
+    {
+        return [
+            // field name is "email", the corresponding attribute name is "email_address"
+            'id' => 'short_id',
+            'slug',
+            'text_short_description',
+            'categories',
+            'collections',
+            'personal_info',
+            'media',
+            'credentials',
+            'preferences',
+
+            // field name is "name", its value is defined by a PHP callback
+//            'name' => function () {
+//                return $this->first_name . ' ' . $this->last_name;
+//            },
         ];
     }
 }
