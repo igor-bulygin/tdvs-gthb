@@ -1,162 +1,188 @@
-var todevise = angular.module('todevise', ['ngAnimate', 'ui.bootstrap', 'angular-multi-select', 'angular-unit-converter', 'global-admin', 'global-desktop', 'api', 'angular-sortable-view', 'ui.validate']);
+(function () {
 
-todevise.controller('sizeChartCtrl', ["$scope", "$timeout", "$sizechart", "$sizechart_util", "$category_util", "toastr", "$uibModal", function($scope, $timeout, $sizechart, $sizechart_util, $category_util, toastr, $uibModal) {
-	$scope.lang = _lang;
-	$scope.sizechart = _sizechart;
+	function controller($scope, $timeout, $sizechart, $sizechart_util, $category_util, toastr, $uibModal) {
+		var vm = this;
 
-	$scope.countries_lookup = _countries_lookup;
+		vm.lang = _lang;
+		vm.sizechart = _sizechart;
 
-	//Sort by path length
-	_categories = $category_util.sort(_categories);
-	$scope.categories = $category_util.create_tree(_categories);
+		vm.countries_lookup = _countries_lookup;
+		vm.new_country = new_country;
+		vm.move_country = move_country;
+		vm.delete_country = delete_country;
+		vm.new_column = new_column;
+		vm.delete_column = delete_column;
+		vm.move_column = move_column;
+		vm.new_row = new_row;
+		vm.cancel = cancel;
+		vm.save = save;
 
-	$scope.$on('ams_toggle_check_node', function (event, args) {
-		if (args.name !== "metric_unit") return;
+		//Sort by path length
+		_categories = $category_util.sort(_categories);
+		vm.categories = $category_util.create_tree(_categories);
+		vm._shadow = JSON.parse(JSON.stringify(vm.sizechart));
 
-		$scope.convertFrom = args.item.smallest;
-		$scope.convertTo = args.item.value;
-	});
+		$scope.$on('ams_toggle_ckeck_node', function (event, args) {
+			if (args.name !== "metric_unit") return;
 
-	$scope.$watch("[sizechart.countries, sizechart.columns]", function() {
-		$scope.table_header = [];
-		angular.forEach($scope.sizechart.countries, function(country) {
-			$scope.table_header.push($scope.countries_lookup[country]);
+			vm.convertFrom = args.item.smallest;
+			vm.convertTo = args.item.value;
 		});
 
-		angular.forEach($scope.sizechart.columns, function(column) {
-			$scope.table_header.push(column[$scope.lang]);
-		});
-	}, true);
-
-	$scope.new_country = function() {
-		var modalInstance = $uibModal.open({
-			templateUrl: 'template/modal/sizechart/create_new_country.html',
-			controller: 'create_new_countryCtrl',
-			resolve: {
-				data: function () {
-					return {};
-				}
-			}
-		});
-
-		modalInstance.result.then(function(data) {
-			$scope.sizechart.countries.push(data.country_code);
-
-			angular.forEach($scope.sizechart.values, function(row) {
-				row.splice($scope.sizechart.countries.length - 1, 0, 0);
+		$scope.$watch("[sizeChartCtrl.sizechart.countries, sizeChartCtrl.sizechart.columns]", function () {
+			vm.table_header = [];
+			angular.forEach(vm.sizechart.countries, function (country) {
+				vm.table_header.push(vm.countries_lookup[country]);
 			});
-		}, function () {
-			//Cancel
-		});
-	};
 
-	$scope.move_country = function(from, to) {
-		angular.forEach($scope.sizechart.values, function(row) {
-			row.splice(to, 0, row.splice(from, 1)[0]);
-		});
-	};
-
-	$scope.delete_country = function(index) {
-		$scope.sizechart.countries.splice(index, 1);
-		angular.forEach($scope.sizechart.values, function(row) {
-			row.splice(index, 1);
-		});
-	};
-
-	$scope.new_column = function() {
-		var modalInstance = $uibModal.open({
-			templateUrl: 'template/modal/sizechart/create_new_column.html',
-			controller: 'create_new_columnCtrl',
-			resolve: {
-				data: function () {
-					return {
-						langs: _langs
-					};
-				}
-			}
-		});
-
-		modalInstance.result.then(function(data) {
-			$scope.sizechart.columns.push(data.column);
-
-			angular.forEach($scope.sizechart.values, function(row) {
-				row.push(0);
+			angular.forEach(vm.sizechart.columns, function (column) {
+				vm.table_header.push(column[vm.lang]);
 			});
-		}, function () {
-			//Cancel
+		}, true);
+
+		function new_country() {
+			var modalInstance = $uibModal.open({
+				templateUrl: 'template/modal/sizechart/create_new_country.html',
+				controller: create_new_countryCtrl,
+				controllerAs: 'create_new_countryCtrl',
+				resolve: {
+					data: function () {
+						return {};
+					}
+				}
+			});
+
+			modalInstance.result.then(function (data) {
+				vm.sizechart.countries.push(data.country_code);
+				angular.forEach(vm.sizechart.values, function (row) {
+					row.splice(vm.sizechart.countries.length - 1, 0, 0);
+				});
+			}, function () {
+				//Cancel
+			});
+		}
+
+		function move_country(from, to) {
+			angular.forEach(vm.sizechart.values, function (row) {
+				row.splice(to, 0, row.splice(from, 1)[0]);
+			});
+		}
+
+		function delete_country(index) {
+			vm.sizechart.countries.splice(index, 1);
+			angular.forEach(vm.sizechart.values, function (row) {
+				row.splice(index, 1);
+			});
+		}
+
+		function new_column() {
+			var modalInstance = $uibModal.open({
+				templateUrl: 'template/modal/sizechart/create_new_column.html',
+				controller: create_new_columnCtrl,
+				controllerAs: 'create_new_columnCtrl',
+				resolve: {
+					data: function () {
+						return {
+							langs: _langs
+						};
+					}
+				}
+			});
+
+			modalInstance.result.then(function (data) {
+				vm.sizechart.columns.push(data.column);
+
+				angular.forEach(vm.sizechart.values, function (row) {
+					row.push(0);
+				});
+			}, function () {
+				//Cancel
+			});
+		}
+
+		function delete_column(index) {
+			vm.sizechart.columns.splice(index, 1);
+			angular.forEach(vm.sizechart.values, function (row) {
+				row.splice(index, 1);
+			});
+		}
+
+		function move_column(from, to) {
+			vm.sizechart.columns.splice(index, 1);
+			angular.forEach(vm.sizechart.values, function (row) {
+				row.splice(index, 1);
+			});
+		}
+
+		function new_row() {
+			var _len = vm.table_header.length;
+			var _data = Array.apply(null, Array(_len)).map(Number.prototype.valueOf, 0);
+			vm.sizechart.values.push(_data);
+		}
+
+		function cancel() {
+			vm.sizechart = angular.copy(vm._shadow);
+
+			$timeout(function () {
+				vm.type_watch_paused = false;
+			}, 0);
+		}
+
+		function save() {
+			$sizechart.modify("POST", vm.sizechart).then(function () {
+				toastr.success("Size chart saved successfully!");
+			}, function (err) {
+				toastr.error("Failed saving size chart!", err);
+			});
+		}
+
+	}
+
+	function create_new_countryCtrl($scope, $uibModalInstance, data) {
+		var vm = this;
+		vm.lang = _lang;
+		vm.ok = ok;
+		vm.cancel = cancel;
+		console.log(data);
+
+		$scope.$on('ams_toggle_check_node', function (event, args) {
+			if (args.name !== "country") return;
+			vm.selected_country = args.item.country_code;
 		});
-	};
 
-	$scope.delete_column = function(index) {
-		$scope.sizechart.columns.splice(index, 1);
-		angular.forEach($scope.sizechart.values, function(row) {
-			row.splice(index, 1);
-		});
-	};
+		function ok() {
+			$uibModalInstance.close({
+				country_code: vm.selected_country
+			});
+		};
 
-	$scope.move_column = function(from, to) {
-		var _mod = $scope.sizechart.countries.length;
-		from += _mod;
-		to += _mod;
-		angular.forEach($scope.sizechart.values, function(row) {
-			row.splice(to, 0, row.splice(from, 1)[0]);
-		});
-	};
+		function cancel() {
+			$uibModalInstance.dismiss();
+		};
 
-	$scope.new_row = function() {
-		var _len = $scope.table_header.length;
-		var _data = Array.apply(null, Array(_len)).map(Number.prototype.valueOf, 0);
-		$scope.sizechart.values.push(_data);
-	};
+	}
 
-	$scope.cancel = function() {
-		$scope.sizechart = angular.copy($scope._shadow);
+	function create_new_columnCtrl($uibModalInstance, data) {
+		var vm = this;
+		vm.data = data;
+		vm.ok = ok;
+		vm.cancel = cancel;
 
-		$timeout(function() {
-			$scope.type_watch_paused = false;
-		}, 0);
-	};
+		function ok() {
+			$uibModalInstance.close({
+				column: vm.data.column
+			});
+		};
 
-	$scope.save = function() {
-		$sizechart.modify("POST", $scope.sizechart).then(function() {
-			toastr.success("Size chart saved successfully!");
-		}, function(err) {
-			toastr.error("Failed saving size chart!", err);
-		});
-	};
+		function cancel() {
+			$uibModalInstance.dismiss();
+		};
 
-	$scope._shadow = JSON.parse(JSON.stringify($scope.sizechart));
-}]);
+	}
 
-todevise.controller("create_new_countryCtrl", function($scope, $uibModalInstance, data) {
-	$scope.lang = _lang;
+	angular.module('todevise', ['ngAnimate', 'ui.bootstrap', 'angular-multi-select', 'angular-unit-converter', 'global-admin', 'global-desktop', 'api', 'angular-sortable-view', 'ui.validate'])
+		.controller('sizeChartCtrl', controller)
+		.controller('create_new_countryCtrl', create_new_countryCtrl)
+		.controller('create_new_columnCtrl', create_new_columnCtrl);
 
-	$scope.$on('ams_toggle_check_node', function(event, args) {
-		if (args.name !== "country") return;
-		$scope.selected_country = args.item.country_code;
-	});
-
-	$scope.ok = function() {
-		$uibModalInstance.close({
-			"country_code": $scope.selected_country
-		});
-	};
-
-	$scope.cancel =  function() {
-		$uibModalInstance.dismiss();
-	};
-});
-
-todevise.controller("create_new_columnCtrl", function($scope, $uibModalInstance, data) {
-	$scope.data = data;
-
-	$scope.ok = function() {
-		$uibModalInstance.close({
-			"column": $scope.data.column
-		});
-	};
-
-	$scope.cancel = function() {
-		$uibModalInstance.dismiss();
-	};
-});
+}());
