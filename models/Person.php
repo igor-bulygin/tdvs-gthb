@@ -147,9 +147,20 @@ class Person extends CActiveRecord implements IdentityInterface {
             // the name, email, subject and body attributes are required
             [['slug'], 'required'],
             [['text_short_description'], 'required', 'on' => [self::SCENARIO_DEVISER_PROFILE_UPDATE]],
-
-            // the email attribute should be a valid email address
-//            ['email', 'email'],
+            [['preferences'], 'required'],
+            [
+                'preferences',
+                'app\validators\EmbedDocValidator',
+                'scenario' => self::SCENARIO_DEVISER_PROFILE_UPDATE,
+                'model'=>'\app\models\PersonPreferences'
+            ],
+            [['personal_info'], 'required'],
+            [
+                'personal_info',
+                'app\validators\EmbedDocValidator',
+//                'scenario' => self::SCENARIO_DEVISER_PROFILE_UPDATE,
+                'model'=>'\app\models\PersonPersonalInfo'
+            ],
         ];
     }
 

@@ -35,7 +35,8 @@ class DeviserController extends Controller {
         /** @var Person $deviser */
         $deviser = Yii::$app->user->getIdentity();
 
-//        $data = Yii::$app->request->post();
+        $data = Yii::$app->request->post();
+//        print_r($data);
 
         $deviser->setScenario(Person::SCENARIO_DEVISER_PROFILE_UPDATE);
         if ($deviser->load(Yii::$app->request->post()) && $deviser->save()) {
