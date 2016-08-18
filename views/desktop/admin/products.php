@@ -17,26 +17,28 @@ ProductsAsset::register($this);
 $this->title = 'Todevise / Admin / Products';
 ?>
 
-<?php $this->registerJs("var _deviser = " . Json::encode($deviser) . ";", View::POS_HEAD); ?>
+	<?php $this->registerJs("var _deviser = " . Json::encode($deviser) . ";", View::POS_HEAD); ?>
 
-<div class="row no-gutter" ng-controller="productsCtrl">
-	<div class="col-xs-12 no-horizontal-padding">
+		<div class="row no-gutter" ng-controller="productsCtrl as productsCtrl">
+			<div class="col-xs-12 no-horizontal-padding">
 
-		<div class="row no-gutter page-title-row">
-			<div class="row-same-height">
-				<div class="col-xs-2 col-height col-middle">
-					<h2 class="page-title funiv_bold fs-upper fc-fff fs1-071"><?= Yii::t("app/admin", "Products"); ?></h2>
+				<div class="row no-gutter page-title-row">
+					<div class="row-same-height">
+						<div class="col-xs-2 col-height col-middle">
+							<h2 class="page-title funiv_bold fs-upper fc-fff fs1-071"><?= Yii::t("app/admin", "Products"); ?></h2>
+						</div>
+						<div class="col-xs-6 col-height col-middle flex flex-align-center">
+
+						</div>
+						<div class="col-xs-4 col-height col-middle">
+							<button class="btn btn-default btn-purple fc-fff funiv fs0-786 fs-upper pull-right" ng-click="productsCtrl.new_product()">
+								<?= Yii::t("app/admin", "Create new"); ?>
+							</button>
+						</div>
+					</div>
 				</div>
-				<div class="col-xs-6 col-height col-middle flex flex-align-center">
 
-				</div>
-				<div class="col-xs-4 col-height col-middle">
-					<button class="btn btn-default btn-purple fc-fff funiv fs0-786 fs-upper pull-right" ng-click="new_product()"><?= Yii::t("app/admin", "Create new"); ?></button>
-				</div>
-			</div>
-		</div>
-
-		<?php
+				<?php
 			echo GridView::widget([
 				'id' => 'products_list',
 				'dataProvider' => $products,
@@ -56,7 +58,7 @@ $this->title = 'Todevise / Admin / Products';
 							'delete' => function($url, $model, $key) {
 								return Html::tag("span", "", [
 									"class" => "pointer glyphicon glyphicon-trash fc-fff fs1",
-									"ng-click" => "delete('$model->short_id')"
+									"ng-click" => "productsCtrl.delete_product('$model->short_id')"
 								]);
 							}
 						],
@@ -79,5 +81,5 @@ $this->title = 'Todevise / Admin / Products';
 			]);
 		?>
 
-	</div>
-</div>
+			</div>
+		</div>
