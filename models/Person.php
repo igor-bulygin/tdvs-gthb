@@ -6,12 +6,27 @@ use app\helpers\CActiveRecord;
 use yii\base\NotSupportedException;
 use yii\web\IdentityInterface;
 
+/**
+ * @property mixed _id
+ * @property string slug
+ * @property mixed type
+ * @property array categories
+ * @property array collections
+ * @property array personal_info
+ * @property array media
+ * @property array credentials
+ * @property array preferences
+ */
 class Person extends CActiveRecord implements IdentityInterface {
 
 	const ADMIN = 0;
 	const CLIENT = 1;
 	const DEVISER = 2;
 	const COLLABORATOR = 3;
+
+    const SCENARIO_DEVISER_PROFILE_UPDATE = 'deviser-profile-update';
+    const SCENARIO_USER_PROFILE_UPDATE = 'user-profile-update';
+    const SCENARIO_TREND_SETTER_PROFILE_UPDATE = 'trend-setter-profile-update';
 
 	//public $accessToken;
 
@@ -23,6 +38,7 @@ class Person extends CActiveRecord implements IdentityInterface {
 		return [
 			'_id',
 			'short_id',
+			'text_short_description',
 			'slug',
 			'type',
 			'categories',
@@ -123,4 +139,16 @@ class Person extends CActiveRecord implements IdentityInterface {
 			"lang" => $lang
 		]);
 	}
+
+    public function rules()
+    {
+        return [
+            // the name, email, subject and body attributes are required
+            [['slug'], 'required'],
+            [['text_short_description'], 'required', 'on' => [self::SCENARIO_DEVISER_PROFILE_UPDATE]],
+
+            // the email attribute should be a valid email address
+//            ['email', 'email'],
+        ];
+    }
 }

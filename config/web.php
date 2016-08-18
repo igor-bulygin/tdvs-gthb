@@ -218,7 +218,12 @@ $config = [
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/faq'],
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/term'],
 
-                ['class' => 'yii\rest\UrlRule', 'controller' => 'api3/priv/v1/user'],
+//                ['class' => 'yii\rest\UrlRule', 'controller' => 'api3/priv/v1/user'],
+                'GET api3/priv/v1/profile/deviser' => 'api3/priv/v1/deviser/view',
+                'PATCH api3/priv/v1/profile/deviser' => 'api3/priv/v1/deviser/update',
+
+                'GET api3/priv/v1/profile/user' => 'api3/priv/v1/user/view',
+                'PATCH api3/priv/v1/profile/user' => 'api3/priv/v1/user/update',
 
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'api3/admin/v1/faq'],
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'api3/admin/v1/term'],

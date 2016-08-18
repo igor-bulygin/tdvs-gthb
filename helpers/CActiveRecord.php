@@ -5,6 +5,9 @@ use Yii;
 use Exception;
 use yii\mongodb\ActiveRecord;
 
+/**
+ * @property string short_id
+ */
 class CActiveRecord extends ActiveRecord {
 
 	public function genValidID($length = 6) {
