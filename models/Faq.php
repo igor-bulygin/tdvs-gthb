@@ -8,6 +8,8 @@ use yii\web\IdentityInterface;
 use yii\base\NotSupportedException;
 
 class Faq extends CActiveRecord {
+
+
 	public static function collectionName() {
 		return 'faq';
 	}
@@ -17,8 +19,7 @@ class Faq extends CActiveRecord {
      *
      * @return array
      */
-	public static function getSerializedPublic() {
-//        $faqs = Faq::find()->select(['short_id' , 'title', 'faqs'])->all();
+	public static function getSerialized() {
         $faqs = Faq::find()->select(['short_id' , 'title', 'faqs'])->asArray()->all();
         // publish in the language selected by current user
         foreach ($faqs as $key => &$oneFaq){
@@ -26,8 +27,28 @@ class Faq extends CActiveRecord {
             Utils::l_collection($oneFaq['faqs'], "answer");
             $oneFaq['title'] = Utils::l($oneFaq['title']);
         }
+
+        $faqs = Faq::find()->select(['short_id' , 'title', 'faqs'])->all();
         return $faqs;
 	}
+
+	public static function setSerializeView($view)
+    {
+        switch ($view) {
+            case CActiveRecord::SERIALIZE_VIEW_PUBLIC:
+                static::$serializeFields = [
+                    // field name is "email", the corresponding attribute name is "email_address"
+                    'id' => 'short_id',
+                    'title',
+                    'faqs',
+                ];
+                break;
+            default:
+                // unrecognized
+                static::$serializeFields = [];
+                break;
+        }
+    }
 
 	public function attributes() {
 		return [
@@ -62,12 +83,7 @@ class Faq extends CActiveRecord {
 
     public function fields()
     {
-        return [
-            // field name is "email", the corresponding attribute name is "email_address"
-            'id' => 'short_id',
-            'title',
-            'faqs',
-        ];
+        return static::$serializeFields;
     }
 
 }

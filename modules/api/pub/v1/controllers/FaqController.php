@@ -2,6 +2,7 @@
 
 namespace app\modules\api\pub\v1\controllers;
 
+use app\helpers\CActiveRecord;
 use Yii;
 use yii\rest\Controller;
 use yii\web\ForbiddenHttpException;
@@ -15,7 +16,10 @@ class FaqController extends Controller {
 
     public function actionIndex()
     {
-        return Faq::getSerializedPublic();
+        // set the view to serialize objects
+        Faq::setSerializeView(CActiveRecord::SERIALIZE_VIEW_PUBLIC);
+
+        return Faq::getSerialized();
     }
 
 }

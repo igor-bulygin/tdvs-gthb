@@ -10,7 +10,11 @@ use yii\mongodb\ActiveRecord;
  */
 class CActiveRecord extends ActiveRecord {
 
-	public function genValidID($length = 6) {
+    const SERIALIZE_VIEW_PUBLIC = 'serialize_view_public';
+
+    static protected $serializeFields = [];
+
+    public function genValidID($length = 6) {
 		$_found = false;
 		$_id = null;
 		while ($_found === false) {
