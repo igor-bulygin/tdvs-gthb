@@ -1,153 +1,184 @@
-var todevise = angular.module('todevise', ['ngAnimate', 'ui.bootstrap', 'angular-multi-select', 'global-admin', 'global-desktop', 'api']);
+(function () {
+	"use strict";
 
-todevise.controller('tagsCtrl', ["$rootScope", "$scope", "$timeout", "$tag", "$tag_util", "$category_util", "toastr", "$uibModal", "$compile", "$http", function($rootScope, $scope, $timeout, $tag, $tag_util, $category_util, toastr, $uibModal, $compile, $http) {
+	function controller($rootScope, $scope, $timeout, $tag, $tag_util, $category_util, toastr, $uibModal, $compile, $http) {
+		var vm = this;
 
-	$scope.lang = _lang;
-	$scope.listener;
-	$scope.categories = [];
-	$scope.selectedCategories = [];
+		vm.lang = _lang;
+		vm.listener;
+		vm.categories = [];
+		vm.selectedCategories = [];
 
-	$scope.renderPartial = function() {
-		$scope.listener();
+		vm.renderPartial = renderPartial;
+		vm.toggle_prop = toggle_prop;
+		vm.delete = delete_tag;
+		vm.create_new = create_new;
 
-		$http.get(aus.syncToURL()).success(function(data, status) {
-			angular.element('.body-content').html( $compile(data)($scope) );
-		}).error(function(data, status) {
-			toastr.error("Failed to refresh content!");
-		});
-	};
+		function renderPartial() {
+			vm.listener();
 
-	$scope.listener = $scope.$on('ams_toggle_check_node', function (event, args) {
-		if (args.name !== "categories") return;
-
-		$timeout(function () {
-			if($scope.selectedCategories.length === 0) {
-				aus.remove("filters");
-			} else {
-				aus.set("filters", {
-					"categories": {"$in": [$scope.selectedCategories[0].short_id]}
-				}, true);
-			}
-
-			$scope.renderPartial();
-		}, 0);
-	});
-
-	$scope.toggle_prop = function($event, tag_id, prop) {
-		var _checkbox = $event.target;
-		$tag.get({ short_id: tag_id }).then(function(tag) {
-			if(tag.length !== 1) return;
-			tag = tag.shift();
-
-			tag[prop] = _checkbox.checked;
-			$tag.modify("POST", tag).then(function(tag) {
-				toastr.success("Tag modified!");
-			}, function(err) {
-				_checkbox.checked = !_checkbox.checked;
-				toastr.error(err);
+			$http.get(aus.syncToURL()).success(function (data, status) {
+				angular.element('.body-content').html($compile(data)($scope));
+			}).error(function (data, status) {
+				toastr.error("Failed to refresh content!");
 			});
-		}, function(err) {
-			toastr.error(err);
-		});
-	};
+		}
 
-	$scope.delete = function(tag_id) {
-		var modalInstance = $uibModal.open({
-			templateUrl: 'template/modal/confirm.html',
-			controller: 'confirmCtrl',
-			resolve: {
-				data: function () {
-					return {
-						title: "Are you sure?",
-						text: "You are about to delete a tag!"
-					};
+		vm.listener = $scope.$on('ams_toggle_check_node', function (event, args) {
+			if (args.name !== "categories") return;
+
+			$timeout(function () {
+				if (vm.selectedCategories.length === 0) {
+					aus.remove("filters");
+				} else {
+					aus.set("filters", {
+						categories: {
+							"$in": [vm.selectedCategories[0].short_id]
+						}
+					}, true);
 				}
-			}
+
+				vm.renderPartial();
+			}, 0);
 		});
 
-		modalInstance.result.then(function() {
-			$tag.get({ short_id: tag_id }).then(function(tag) {
+		function toggle_prop($event, tag_id, prop) {
+			var _checkbox = $event.target;
+			$tag.get({
+				short_id: tag_id
+			}).then(function (tag) {
 				if (tag.length !== 1) return;
 				tag = tag.shift();
 
-				$tag.delete(tag).then(function(data) {
-					toastr.success("Tag deleted!");
-					$scope.renderPartial();
-				}, function(err) {
-					toastr.error("Couldn't delete tag!", err);
+				tag[prop] = _checkbox.checked;
+				$tag.modify("POST", tag).then(function (tag) {
+					toastr.success("Tag modified!");
+				}, function (err) {
+					_checkbox.checked = !_checkbox.checked;
+					toastr.error(err);
 				});
-			}, function(err) {
-				toastr.error("Couldn't find tag!", err);
+			}, function (err) {
+				toastr.error(err);
 			});
-		}, function() {
-			//Cancel
-		});
-	};
+		}
 
-	$scope.create_new = function() {
-		var modalInstance = $uibModal.open({
-			templateUrl: 'template/modal/tag/create_new.html',
-			controller: 'create_newCtrl',
-			resolve: {
-				data: function () {
-					return {
-						langs: _langs
-					};
+		function delete_tag(tag_id) {
+			var modalInstance = $uibModal.open({
+				templateUrl: 'template/modal/confirm.html',
+				controller: confirmCtrl,
+				controllerAs: 'confirmCtrl',
+				resolve: {
+					data: function () {
+						return {
+							title: "Are you sure?",
+							text: "You are about to delete a tag!"
+						};
+					}
 				}
-			}
-		});
-
-		modalInstance.result.then(function(data) {
-			var tag = $tag_util.newTag(data.description, data.langs);
-			$tag.modify("POST", tag).then(function(tag) {
-				toastr.success("Tag created!");
-				$scope.renderPartial();
-			}, function(err) {
-				toastr.error("Couldn't create tag!", err);
 			});
-		}, function () {
-			//Cancel
-		});
-	};
 
-	$scope.init = function() {
-		//Get filters, if any
-		var _filters = aus.get("filters", true);
-		var _category_id = null;
-		if(_filters !== null) {
-			_category_id = _filters.categories["$in"].pop();
-		}
+			modalInstance.result.then(function () {
+				$tag.get({
+					short_id: tag_id
+				}).then(function (tag) {
+					if (tag.length !== 1) return;
+					tag = tag.shift();
 
-		//Sort by path length
-		_categories = $category_util.sort(_categories);
-
-		$scope.categories = $category_util.create_tree(_categories);
-
-		if (_category_id !== null) {
-			$timeout(function () {
-				$rootScope.$broadcast('ams_do_toggle_check_node', {
-					name: 'categories',
-					item: {short_id: _category_id}
+					$tag.delete(tag).then(function (data) {
+						toastr.success("Tag deleted!");
+						vm.renderPartial();
+					}, function (err) {
+						toastr.error("Couldn't delete tag!", err);
+					});
+				}, function (err) {
+					toastr.error("Couldn't find tag!", err);
 				});
-			}, 0);
+			}, function () {
+				//Cancel
+			});
 		}
-	};
 
-}]);
+		function create_new() {
+			var modalInstance = $uibModal.open({
+				templateUrl: 'template/modal/tag/create_new.html',
+				controller: create_newCtrl,
+				controllerAs: 'create_newCtrl',
+				resolve: {
+					data: function () {
+						return {
+							langs: _langs
+						};
+					}
+				}
+			});
 
-todevise.controller("create_newCtrl", function($scope, $uibModalInstance, data) {
-	$scope.data = data;
-	$scope.langs = {};
-	$scope.description = "";
+			modalInstance.result.then(function (data) {
+				var tag = $tag_util.newTag(data.description, data.langs);
+				$tag.modify("POST", tag).then(function (tag) {
+					toastr.success("Tag created!");
+					vm.renderPartial();
+				}, function (err) {
+					toastr.error("Couldn't create tag!", err);
+				});
+			}, function () {
+				//Cancel
+			});
+		}
 
-	$scope.ok = function() {
-		$uibModalInstance.close({
-			"langs": $scope.langs,
-			"description": $scope.description
-		});
-	};
+		function init() {
+			//Get filters, if any
+			var _filters = aus.get("filters", true);
+			var _category_id = null;
+			if (_filters !== null) {
+				_category_id = _filters.categories["$in"].pop();
+			}
 
-	$scope.cancel =  function() {
-		$uibModalInstance.dismiss();
-	};
-});
+			//Sort by path length
+			_categories = $category_util.sort(_categories);
+
+			vm.categories = $category_util.create_tree(_categories);
+
+			if (_category_id !== null) {
+				$timeout(function () {
+					$rootScope.$broadcast('ams_do_toggle_check_node', {
+						name: 'categories',
+						item: {
+							short_id: _category_id
+						}
+					});
+				}, 0);
+			}
+		}
+
+		init();
+
+	}
+
+	function create_newCtrl($uibModalInstance, data) {
+		var vm = this;
+		
+		vm.data = data;
+		vm.langs = {};
+		vm.description = "";
+
+		vm.ok = ok;
+		vm.cancel = cancel;
+
+		function ok() {
+			$uibModalInstance.close({
+				langs: vm.langs,
+				description: vm.description
+			});
+		};
+
+		function cancel() {
+			$uibModalInstance.dismiss();
+		};
+	}
+
+	angular
+		.module('todevise', ['ngAnimate', 'ui.bootstrap', 'angular-multi-select', 'global-admin', 'global-desktop', 'api'])
+		.controller('tagsCtrl', controller)
+		.controller('create_newCtrl', create_newCtrl);
+
+}());

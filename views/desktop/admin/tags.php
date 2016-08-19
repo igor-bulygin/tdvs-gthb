@@ -22,7 +22,7 @@ TagsAsset::register($this);
 $this->title = 'Todevise / Admin / Tags';
 ?>
 
-<div class="row no-gutter" ng-controller="tagsCtrl" ng-init="init()">
+<div class="row no-gutter" ng-controller="tagsCtrl as tagsCtrl">
 	<div class="col-xs-12 no-horizontal-padding">
 
 		<?php $this->registerJs("var _categories = " . Json::encode($categories) . ";", View::POS_HEAD) ?>
@@ -36,24 +36,24 @@ $this->title = 'Todevise / Admin / Tags';
 					<div class="funiv fs-upper fc-9b fs0-786 flex-inline"><?= Yii::t("app/admin", "Filter by category"); ?></div>
 					<div
 						angular-multi-select
-						input-model="categories"
-						output-model="selectedCategories"
+						input-model="tagsCtrl.categories"
+						output-model="tagsCtrl.selectedCategories"
 
 						name="categories"
 						id-property="short_id"
 						checked-property="check"
 						children-property="sub"
 
-						dropdown-label="<[ '<(name[&quot;{{ lang }}&quot;])>' | outputModelIterator : this : ', ' : '<?= Yii::t('app/admin', 'Select category') ?>']>"
-						node-label="<[ name['{{ lang }}'] ]>"
-						leaf-label="<[ name['{{ lang }}'] ]>"
+						dropdown-label="<[ '<(name[&quot;{{ tagsCtrl.lang }}&quot;])>' | outputModelIterator : this : ', ' : '<?= Yii::t('app/admin', 'Select category') ?>']>"
+						node-label="<[ name['{{ tagsCtrl.lang }}'] ]>"
+						leaf-label="<[ name['{{ tagsCtrl.lang }}'] ]>"
 
 						max-checked-leafs="1"
 						hide-helpers="check_all, check_none, reset"
 					></div>
 				</div>
 				<div class="col-xs-4 col-height col-middle">
-					<button class="btn btn-default btn-purple fc-fff funiv fs0-786 fs-upper pull-right" ng-click="create_new()"><?= Yii::t("app/admin", "Create new"); ?></button>
+					<button class="btn btn-default btn-purple fc-fff funiv fs0-786 fs-upper pull-right" ng-click="tagsCtrl.create_new()"><?= Yii::t("app/admin", "Create new"); ?></button>
 				</div>
 			</div>
 		</div>
@@ -83,7 +83,7 @@ $this->title = 'Todevise / Admin / Tags';
 						'checkboxOptions' => function($model){
 							return [
 								"checked" => $model->enabled,
-								"ng-click" => "toggle_prop(\$event, '$model->short_id', 'enabled')"
+								"ng-click" => "tagsCtrl.toggle_prop(\$event, '$model->short_id', 'enabled')"
 							];
 						},
 						'header' => Html::tag("div", Yii::t("app/admin", "Enabled")),
@@ -100,7 +100,7 @@ $this->title = 'Todevise / Admin / Tags';
 						'checkboxOptions' => function($model){
 							return [
 								"checked" => $model->required,
-								"ng-click" => "toggle_prop(\$event, '$model->short_id', 'required')"
+								"ng-click" => "tagsCtrl.toggle_prop(\$event, '$model->short_id', 'required')"
 							];
 						},
 						'header' => Html::tag("div", Yii::t("app/admin", "Required")),
@@ -124,7 +124,7 @@ $this->title = 'Todevise / Admin / Tags';
 							'delete' => function($url, $model, $key) {
 								return Html::tag("span", "", [
 									"class" => "pointer glyphicon glyphicon-trash fc-fff fs1",
-									"ng-click" => "delete('$model->short_id')"
+									"ng-click" => "tagsCtrl.delete('$model->short_id')"
 								]);
 							}
 						],
@@ -144,18 +144,18 @@ $this->title = 'Todevise / Admin / Tags';
 	</div>
 </div>
 
-<script type="text/ng-template" id="template/modal/tag/create_new.html">
-	<form novalidate name="form" class="popup-tag">
+<script type="text/ng-template" id="template/modal/tag/create_new.html"> 
+	<form novalidate name="create_newCtrl.form" class="popup-tag">
 		<div class='modal-header'>
 			<h3 class='modal-title funiv fs1'><?= Yii::t("app/admin", "Create new tag"); ?></h3>
 		</div>
 		<div class='modal-body'>
 			<label class="modal-title funiv fs1 fnormal fc-18"><?= Yii::t("app/admin", "Tag name"); ?></label>
-			<div class="input-group" ng-repeat="(lang_k, lang_v) in data.langs">
+			<div class="input-group" ng-repeat="(lang_k, lang_v) in create_newCtrl.data.langs">
 				<span class="input-group-addon funiv_bold fs1 fs-upper" id="basic-addon-{{ $index }}">{{ lang_v }}</span>
-				<input required="" type="text" class="form-control funiv fs1" placeholder="<?= Yii::t("app/admin", "Tag name..."); ?>" aria-describedby="basic-addon-{{ $index }}" ng-model="langs[lang_k]" name="{{ lang_k }}">
-				<span class="input-group-addon alert-danger funiv fs0-929" ng-show="form.$submitted && !form.$valid && !form['{{lang_k}}'].$valid">
-					<span ng-show="form['{{lang_k}}'].$error.required"><?= Yii::t("app/admin", "Required!"); ?></span>
+				<input required="" type="text" class="form-control funiv fs1" placeholder="<?= Yii::t("app/admin", "Tag name..."); ?>" aria-describedby="basic-addon-{{ $index }}" ng-model="create_newCtrl.langs[lang_k]" name="{{ lang_k }}">
+				<span class="input-group-addon alert-danger funiv fs0-929" ng-show="create_newCtrl.form.$submitted && !create_newCtrl.form.$valid && !create_newCtrl.form['{{lang_k}}'].$valid">
+					<span ng-show="create_newCtrl.form['{{lang_k}}'].$error.required"><?= Yii::t("app/admin", "Required!"); ?></span>
 				</span>
 			</div>
 
@@ -163,15 +163,15 @@ $this->title = 'Todevise / Admin / Tags';
 
 			<label class="modal-title funiv fs1 fnormal fc-18"><?= Yii::t("app/admin", "Description"); ?></label>
 			<div class="input-group">
-				<input id="description" required="" type="text" class="form-control funiv fs1" placeholder="<?= Yii::t("app/admin", "Description..."); ?>" aria-describedby="basic-addon-desc" ng-model="description" name="desc">
-				<span class="input-group-addon alert-danger funiv fs0-929" id="basic-addon-desc" ng-show="form.$submitted && !form.$valid && !form['desc'].$valid">
-					<span ng-show="form['desc'].$error.required"><?= Yii::t("app/admin", "Required!"); ?></span>
+				<input id="description" required="" type="text" class="form-control funiv fs1" placeholder="<?= Yii::t("app/admin", "Description..."); ?>" aria-describedby="basic-addon-desc" ng-model="create_newCtrl.description" name="desc">
+				<span class="input-group-addon alert-danger funiv fs0-929" id="basic-addon-desc" ng-show="create_newCtrl.form.$submitted && !create_newCtrl.form.$valid && !create_newCtrl.form['desc'].$valid">
+					<span ng-show="create_newCtrl.form['desc'].$error.required"><?= Yii::t("app/admin", "Required!"); ?></span>
 				</span>
 			</div>
 		</div>
 		<div class='modal-footer'>
-			<button class='btn btn-light-green fc-18 funiv fs0-786 fs-upper' ng-click='form.$submitted = true; form.$valid && ok()'><?= Yii::t("app/admin", "Confirm"); ?></button>
-			<button class='btn btn-grey fc-fff funiv fs-upper fs0-786' ng-click='cancel()' type="submit"><?= Yii::t("app/admin", "Cancel"); ?></button>
+			<button class='btn btn-light-green fc-18 funiv fs0-786 fs-upper' ng-click='create_newCtrl.form.$submitted = true; create_newCtrl.form.$valid && create_newCtrl.ok()'><?= Yii::t("app/admin", "Confirm"); ?></button>
+			<button class='btn btn-grey fc-fff funiv fs-upper fs0-786' ng-click='create_newCtrl.cancel()' type="submit"><?= Yii::t("app/admin", "Cancel"); ?></button>
 		</div>
 	</form>
 </script>
