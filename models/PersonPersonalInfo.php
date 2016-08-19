@@ -30,7 +30,7 @@ class PersonPersonalInfo extends Model
     public function rules()
     {
         return [
-            [['name', 'country', 'city'], 'required', 'on' => Person::SCENARIO_DEVISER_PROFILE_UPDATE],
+            [['name', 'surnames', 'country', 'city'], 'required', 'on' => Person::SCENARIO_DEVISER_PROFILE_UPDATE],
         ];
     }
 

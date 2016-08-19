@@ -158,7 +158,7 @@ class Person extends CActiveRecord implements IdentityInterface {
             [
                 'personal_info',
                 'app\validators\EmbedDocValidator',
-//                'scenario' => self::SCENARIO_DEVISER_PROFILE_UPDATE,
+                'scenario' => self::SCENARIO_DEVISER_PROFILE_UPDATE,
                 'model'=>'\app\models\PersonPersonalInfo'
             ],
         ];
@@ -172,7 +172,7 @@ class Person extends CActiveRecord implements IdentityInterface {
             'slug',
             'text_short_description',
             'categories',
-            'collections',
+//            'collections',
             'personal_info',
             'media',
             'credentials',
