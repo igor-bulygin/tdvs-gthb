@@ -1,175 +1,199 @@
-var todevise = angular.module('todevise', ['ngAnimate', 'ui.bootstrap', 'angular-multi-select', 'global-admin', 'global-desktop', 'api', 'angular-sortable-view', 'ui.validate']);
+(function () {
+	"use strict";
 
-todevise.controller('tagCtrl', ["$scope", "$timeout", "$tag", "$tag_util", "$category_util", "toastr", "$uibModal", "$cacheFactory", function($scope, $timeout, $tag, $tag_util, $category_util, toastr, $uibModal, $cacheFactory) {
-	$scope.lang = _lang;
-	$scope.tag = _tag;
-	$scope.mus = _mus;
-	$scope.selected_mu = "";
+	function controller($scope, $timeout, $tag, $tag_util, $category_util, toastr, $uibModal, $cacheFactory) {
+		var vm = this;
+		vm.lang = _lang;
+		vm.tag = _tag;
+		vm.mus = _mus;
+		vm.selected_mu = "";
 
-	$scope.c_mus = $cacheFactory("mus");
-	angular.forEach(_mus, function(mus) {
-		$scope.c_mus.put(mus.value, mus);
-	});
+		vm.c_mus = $cacheFactory("mus");
+		angular.forEach(_mus, function (mus) {
+			vm.c_mus.put(mus.value, mus);
+		});
 
-	$scope.pending_dialog_type = false;
-	$scope.type_watch_paused = false;
+		vm.pending_dialog_type = false;
+		vm.type_watch_paused = false;
 
-	//Sort by path length
-	$scope.categories = $category_util.create_tree(_categories);
+		//Sort by path length
+		vm.categories = $category_util.create_tree(_categories);
 
-	$scope.$watch("tag.stock_and_price", function(_new, _old) {
-		if (_new === true) {
-			$scope.tag.required = true;
+		vm.get_mu_type = get_mu_type;
+		vm.get_input_type = get_input_type;
+		vm.edit_dropdown_option = edit_dropdown_option;
+		vm.create_freetext_option = create_freetext_option;
+		vm.delete_option = delete_option;
+		vm.cancel = cancel;
+		vm.save = save;
+
+		$scope.$watch("tagCtrl.tag.stock_and_price", function (_new, _old) {
+			if (_new === true) {
+				vm.tag.required = true;
+			}
+		});
+
+		$scope.$watch("tagCtrl.tag.required", function (_new, _old) {
+			if (_new === false && vm.tag.stock_and_price === true) {
+				vm.tag.required = true;
+			}
+		});
+
+		$scope.$watch("tagCtrl.tag.type", function (_new, _old) {
+			if (_new !== _old && vm.type_watch_paused === false) {
+
+				vm.pending_dialog_type = true;
+
+				var modalInstance = $uibModal.open({
+					templateUrl: 'template/modal/confirm.html',
+					controller: confirmCtrl,
+					controllerAs: 'confirmCtrl',
+					resolve: {
+						data: function () {
+							return {
+								title: "Are you sure?",
+								text: "All current options (if any) will be removed"
+							};
+						}
+					}
+				});
+
+				modalInstance.result.then(function () {
+					vm.tag.options = [];
+				}, function () {
+					vm.type_watch_paused = true;
+					vm.tag.type = _old;
+					$timeout(function () {
+						vm.type_watch_paused = false;
+					}, 0);
+				}).finally(function () {
+					vm.pending_dialog_type = false;
+				});
+			}
+		})
+
+		function get_mu_type(v) {
+			var _type = vm.c_mus.get(v);
+			if (_type !== undefined)
+				return _type.text;
 		}
-	});
 
-	$scope.$watch("tag.required", function(_new, _old) {
-		if (_new === false && $scope.tag.stock_and_price === true) {
-			$scope.tag.required = true;
+		function get_input_type(v) {
+			return _tagoption_txt[v];
 		}
-	});
 
-	$scope.$watch("tag.type", function(_new, _old) {
-		if(_new !== _old && $scope.type_watch_paused === false) {
-
-			$scope.pending_dialog_type = true;
+		function edit_dropdown_option(index) {
+			var _mod_option_index;
+			if (index === -1) {
+				vm.tag.options.push($tag_util.newDropdownOption());
+				_mod_option_index = vm.tag.options.length - 1;
+			} else {
+				_mod_option_index = index;
+			}
 
 			var modalInstance = $uibModal.open({
-				templateUrl: 'template/modal/confirm.html',
-				controller: 'confirmCtrl',
+				templateUrl: 'template/modal/tag/create_new.html',
+				controller: create_newCtrl,
+				controllerAs: 'create_newCtrl',
 				resolve: {
 					data: function () {
 						return {
-							title: "Are you sure?",
-							text: "All current options (if any) will be removed"
+							langs: _langs,
+							index: _mod_option_index,
+							options: vm.tag.options
 						};
 					}
 				}
 			});
 
-			modalInstance.result.then(function() {
-				$scope.tag.options = [];
-			}, function() {
-				$scope.type_watch_paused = true;
-				$scope.tag.type = _old;
-				$timeout(function() {
-					$scope.type_watch_paused = false;
-				}, 0);
-			}).finally(function() {
-				$scope.pending_dialog_type = false;
+			modalInstance.result.then(function (data) {
+				vm.tag.options = data.options;
+			}, function () {
+				// Remove the new, empty option we created (don't do anything if we were editing an option)
+				if (index === -1) {
+					vm.tag.options.pop();
+				}
 			});
 		}
-	});
 
-	$scope.get_mu_type = function(v) {
-		var _type = $scope.c_mus.get(v);
-		if(_type !== undefined) {
-			return _type.text;
-		}
-	};
+		function create_freetext_option() {
+			vm.new_option["metric_type"] = vm.selected_mu;
+			vm.new_option.type = parseInt(vm.freetext_type, 10);
 
-	$scope.get_input_type = function(v) {
-		return _tagoption_txt[v];
-	};
+			vm.tag.options.push(vm.new_option);
 
-	$scope.edit_dropdown_option = function(index) {
-		var _mod_option_index;
-		if(index === -1) {
-			$scope.tag.options.push( $tag_util.newDropdownOption() );
-			_mod_option_index = $scope.tag.options.length - 1;
-		} else {
-			_mod_option_index = index;
+			vm.new_option = {};
 		}
 
-		var modalInstance = $uibModal.open({
-			templateUrl: 'template/modal/tag/create_new.html',
-			controller: 'create_newCtrl',
-			resolve: {
-				data: function () {
-					return {
-						langs: _langs,
-						index: _mod_option_index,
-						options: $scope.tag.options
-					};
-				}
+		function delete_option(index) {
+			vm.tag.options.splice(index, 1);
+		}
+
+		function cancel() {
+			vm.type_watch_paused = true;
+			vm.tag = angular.copy(vm._shadow);
+
+			$timeout(function () {
+				vm.type_watch_paused = false;
+			}, 0);
+		}
+
+		function save() {
+			$tag.modify("POST", vm.tag).then(function () {
+				toastr.success("Tag saved successfully!");
+			}, function (err) {
+				toastr.error("Failed saving tag!", err);
+			});
+		};
+
+		vm._shadow = angular.copy(vm.tag);
+	}
+
+	function create_newCtrl($uibModalInstance, data) {
+		var vm = this;
+
+		vm.data = data;
+		vm.colors = _colors;
+		vm.colors_lookup = {};
+		vm.get_color_from_value = get_color_from_value;
+		vm.is_duplicated = is_duplicated;
+		vm.ok = ok;
+		vm.cancel = cancel;
+
+		angular.forEach(_colors, function (color) {
+			vm.colors_lookup[color.value] = color;
+		});
+
+		function get_color_from_value(value) {
+			if (vm.colors_lookup.hasOwnProperty(value)) {
+				return vm.colors_lookup[value];
+			} else {
+				return {};
 			}
-		});
+		};
 
-		modalInstance.result.then(function(data) {
-			$scope.tag.options = data.options;
-		}, function () {
-			// Remove the new, empty option we created (don't do anything if we were editing an option)
-			if(index === -1) {
-				$scope.tag.options.pop();
-			}
-		});
-	};
-
-	$scope.create_freetext_option = function() {
-		$scope.new_option["metric_type"] = $scope.selected_mu;
-		$scope.new_option.type = parseInt($scope.freetext_type, 10);
-
-		$scope.tag.options.push($scope.new_option);
-
-		$scope.new_option = {};
-	};
-
-	$scope.delete_option = function(index) {
-		$scope.tag.options.splice(index, 1);
-	};
-
-	$scope.cancel = function() {
-		$scope.type_watch_paused = true;
-		$scope.tag = angular.copy($scope._shadow);
-
-		$timeout(function() {
-			$scope.type_watch_paused = false;
-		}, 0);
-	};
-
-	$scope.save = function() {
-		$tag.modify("POST", $scope.tag).then(function() {
-			toastr.success("Tag saved successfully!");
-		}, function(err) {
-			toastr.error("Failed saving tag!", err);
-		});
-	};
-
-	$scope._shadow = angular.copy($scope.tag);
-}]);
-
-todevise.controller("create_newCtrl", function($scope, $uibModalInstance, data) {
-	$scope.data = data;
-	$scope.colors = _colors;
-
-	$scope.colors_lookup = {};
-	angular.forEach(_colors, function(color) {
-		$scope.colors_lookup[color.value] = color;
-	});
-
-	$scope.get_color_from_value = function(value) {
-		if($scope.colors_lookup.hasOwnProperty(value)) {
-			return $scope.colors_lookup[value];
-		} else {
-			return {};
+		function is_duplicated(value) {
+			var i = 0;
+			angular.forEach(data.options, function (option) {
+				if (option.value === value) i++;
+			});
+			return i === 0 || i === 1;
 		}
-	};
 
-	$scope.is_duplicated = function(value) {
-		var i = 0;
-		angular.forEach(data.options, function(option) {
-			if(option.value === value) i++;
-		});
-		return i === 0 || i === 1;
-	};
+		function ok() {
+			$uibModalInstance.close({
+				options: vm.data.options
+			});
+		}
 
-	$scope.ok = function() {
-		$uibModalInstance.close({
-			"options": $scope.data.options
-		});
-	};
+		function cancel() {
+			$uibModalInstance.dismiss();
+		}
+	}
 
-	$scope.cancel =  function() {
-		$uibModalInstance.dismiss();
-	};
-});
+	angular
+		.module('todevise', ['ngAnimate', 'ui.bootstrap', 'angular-multi-select', 'global-admin', 'global-desktop', 'api', 'angular-sortable-view', 'ui.validate'])
+		.controller('tagCtrl', controller)
+		.controller('create_newCtrl', create_newCtrl);
+
+}());
