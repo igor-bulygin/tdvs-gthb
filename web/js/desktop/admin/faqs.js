@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function faqsCtrl($faqs, $category_util, $location, toastr, $uibModal, treeService) {
+	function controller($faqs, $category_util, $location, toastr, $uibModal, treeService) {
 		var vm = this;
 
 		vm.treeData = [];
@@ -242,8 +242,7 @@
 			//$category_util.subCategories(category).then(function(subcategories) {})
 			var modalInstance = $uibModal.open({
 				templateUrl: 'template/modal/confirm.html',
-				controller: confirmCtrl,
-				controllerAs: 'confirmCtrl',
+				controller: 'confirmCtrl',
 				resolve: {
 					data: function () {
 						return {
@@ -310,9 +309,18 @@
 		};
 	}
 
+	function directive() {
+		return {
+			templateUrl: '',
+			controller: controller,
+			controllerAs: 'faqsCtrl',
+			bindToController: true
+		}
+	}
+
 
 	angular.module('todevise', ['ngAnimate', 'ui.bootstrap', 'ngJsTree', 'global-admin', 'global-desktop', 'api', 'util'])
-		.controller('faqsCtrl', faqsCtrl)
+		.controller('faqsCtrl', controller)
 		.controller('create_newCtrl', create_newCtrl)
 		.controller('editCtrl', editCtrl);
 

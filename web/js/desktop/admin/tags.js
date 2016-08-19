@@ -65,8 +65,7 @@
 		function delete_tag(tag_id) {
 			var modalInstance = $uibModal.open({
 				templateUrl: 'template/modal/confirm.html',
-				controller: confirmCtrl,
-				controllerAs: 'confirmCtrl',
+				controller: 'confirmCtrl',
 				resolve: {
 					data: function () {
 						return {
