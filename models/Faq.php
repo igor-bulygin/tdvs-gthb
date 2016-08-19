@@ -20,18 +20,30 @@ class Faq extends CActiveRecord {
      * @return array
      */
 	public static function getSerialized() {
-        $faqs = Faq::find()->select(['short_id' , 'title', 'faqs'])->asArray()->all();
-        // publish in the language selected by current user
-        foreach ($faqs as $key => &$oneFaq){
-            Utils::l_collection($oneFaq['faqs'], "question");
-            Utils::l_collection($oneFaq['faqs'], "answer");
-            $oneFaq['title'] = Utils::l($oneFaq['title']);
-        }
+//        $faqs = Faq::find()->select(['short_id' , 'title', 'faqs'])->asArray()->all();
+//        // publish in the language selected by current user
+//        foreach ($faqs as $key => &$oneFaq){
+//            Utils::l_collection($oneFaq['faqs'], "question");
+//            Utils::l_collection($oneFaq['faqs'], "answer");
+//            $oneFaq['title'] = Utils::l($oneFaq['title']);
+//        }
 
-        $faqs = Faq::find()->select(['short_id' , 'title', 'faqs'])->all();
+        // retrieve only fields that want to be serialized
+        $faqs = Faq::find()->select(array_values(static::$serializeFields))->all();
+        // if automatic translation is enabled
+        if (static::$translateFields) {
+            Utils::translate($faqs);
+        }
         return $faqs;
 	}
 
+
+    /**
+     * Prepare the ActiveRecord properties to serialize the objects properly, to retrieve an serialize
+     * only the attributes needed for a query context
+     *
+     * @param $view
+     */
 	public static function setSerializeView($view)
     {
         switch ($view) {
@@ -42,9 +54,10 @@ class Faq extends CActiveRecord {
                     'title',
                     'faqs',
                 ];
+                static::$translateFields = true;
                 break;
             default:
-                // unrecognized
+                // now available for this Model
                 static::$serializeFields = [];
                 break;
         }

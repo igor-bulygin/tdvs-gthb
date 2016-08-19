@@ -3,6 +3,7 @@ namespace app\helpers;
 
 use Yii;
 use app\models\Lang;
+use yii\base\Model;
 use yii\helpers\Url;
 use yii\helpers\Json;
 use Thumbor\Url\Builder;
@@ -276,6 +277,40 @@ class Utils {
 			$value[$key] = @Utils::l($value[$key]);
 		}
 	}
+
+	/**
+	 * The equivalent of 'l', but for arrays of data.
+	 * Takes an array of objects and sets '$key' to the
+	 * value returned by 'l'.
+	 */
+	public static function translate($mix) {
+//	    print_r();
+        /** @var Model $model */
+        foreach ($mix as $model) {
+            foreach ($model->attributes as $attribute => $value) {
+                if (static::isTranslatableAttribute($value)) {
+
+                }
+//                print_r($attribute);
+//                print_r($value);
+            }
+//			$value[$key] = @Utils::l($value[$key]);
+		}
+        return $mix;
+	}
+
+    /**
+     * Check if the attribute is translatable, it means, has a substructure with several languages
+     *
+     * @param mixed $value
+     * @return bool
+     */
+	private static function isTranslatableAttribute($value)
+    {
+        return false;
+    }
+
+
 
 	/**
 	 * Convert a stdClass object to a multidimensional array.
