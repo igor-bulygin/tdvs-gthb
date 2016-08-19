@@ -1,6 +1,7 @@
 <?php
 namespace app\models;
 
+use app\helpers\Utils;
 use Yii;
 use app\helpers\CActiveRecord;
 
@@ -39,6 +40,21 @@ class Country extends CActiveRecord {
 	public static function collectionName() {
 		return 'country';
 	}
+
+
+    /**
+     * Get an array with Faq entities, serialized for public queries
+     *
+     * @return array
+     */
+    public static function getSerializedPublic() {
+        $countries = Country::find()->select(['country_code', 'country_name', 'currency_code', 'continent'])->asArray()->all();
+        // publish in the language selected by current user
+        Utils::l_collection($countries, 'country_name');
+
+        return $countries;
+    }
+
 
 	public function attributes() {
 		return [

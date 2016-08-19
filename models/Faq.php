@@ -18,7 +18,8 @@ class Faq extends CActiveRecord {
      * @return array
      */
 	public static function getSerializedPublic() {
-        $faqs = Faq::find()->select(['short_id', 'title', 'faqs'])->asArray()->all();
+//        $faqs = Faq::find()->select(['short_id' , 'title', 'faqs'])->all();
+        $faqs = Faq::find()->select(['short_id' , 'title', 'faqs'])->asArray()->all();
         // publish in the language selected by current user
         foreach ($faqs as $key => &$oneFaq){
             Utils::l_collection($oneFaq['faqs'], "question");
@@ -59,6 +60,14 @@ class Faq extends CActiveRecord {
 		return parent::beforeSave($insert);
 	}
 
-
+    public function fields()
+    {
+        return [
+            // field name is "email", the corresponding attribute name is "email_address"
+            'id' => 'short_id',
+            'title',
+            'faqs',
+        ];
+    }
 
 }

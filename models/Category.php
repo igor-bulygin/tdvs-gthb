@@ -1,10 +1,19 @@
 <?php
 namespace app\models;
 
+use app\helpers\Utils;
 use Yii;
 use app\helpers\CActiveRecord;
 use yii\mongodb\Query;
 
+/**
+ * @property mixed _id
+ * @property string path
+ * @property bool sizecharts
+ * @property bool prints
+ * @property mixed|string name
+ * @property string slug
+ */
 class Category extends CActiveRecord {
 
 	public static function collectionName() {
@@ -22,6 +31,19 @@ class Category extends CActiveRecord {
 			'slug'
 		];
 	}
+
+    /**
+     * Get an array with Faq entities, serialized for public queries
+     *
+     * @return array
+     */
+    public static function getSerializedPublic() {
+        $categories = Category::find()->select(['short_id', 'path', 'sizecharts', 'prints', 'name', 'slug'])->asArray()->all();
+        // publish in the language selected by current user
+        Utils::l_collection($categories, 'name');
+
+        return $categories;
+    }
 
 	public function getSubCategories($current_path = null) {
 		if ($current_path === null) {
@@ -95,4 +117,5 @@ class Category extends CActiveRecord {
 
 		return parent::beforeDelete();
 	}
+
 }
