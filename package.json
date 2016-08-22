@@ -25,6 +25,7 @@
 		"ng-js-tree": "0.0.7",
 		"justifiedGallery": "3.6.2",
 		"social-share-kit": "1.0.8",
-		"ng-img-crop-full-extended": "0.5.4"
+		"ng-img-crop-full-extended": "0.5.4",
+        "angular-resource": "1.5.2"
 	}
 }
