@@ -1,370 +1,336 @@
-var api = angular.module('api');
+(function () {
+	"use strict";
 
-/*
-███████ ███████ ██████  ██    ██ ██  ██████ ███████ ███████     ██    ██ ████████ ██ ██
-██      ██      ██   ██ ██    ██ ██ ██      ██      ██          ██    ██    ██    ██ ██
-███████ █████   ██████  ██    ██ ██ ██      █████   ███████     ██    ██    ██    ██ ██
-     ██ ██      ██   ██  ██  ██  ██ ██      ██           ██     ██    ██    ██    ██ ██
-███████ ███████ ██   ██   ████   ██  ██████ ███████ ███████      ██████     ██    ██ ███████
-*/
-api.factory("$services_util", function($http, $q) {
-	var api_helpers = {};
+	function $services_util($http, $q) {
+		var api_helpers = {};
 
-	api_helpers._handleSuccess = function(response) {
-		return response.data;
-	};
+		api_helpers._handleSuccess = _handleSuccess;
+		api_helpers._handleError = _handleError;
+		api_helpers._get = _get;
+		api_helpers._modify = _modify;
 
-	api_helpers._handleError = function(response) {
-		if (!angular.isObject(response.data) || !response.data.message) {
-			return $q.reject("An unknown error occurred.");
+		function _handleSuccess(response) {
+			return response.data;
 		}
-		return $q.reject(response.data.message);
-	};
 
-	api_helpers._get = function(url, filters) {
-		filters = filters !== undefined ? "?filters=" + aus._objToStr(filters) : "";
+		function _handleError(response) {
+			if (!angular.isObject(response.data) || !response.data.message) {
+				return $q.reject("An unknown error ocurred.")
+			}
+			return $q.reject(response.data.message);
+		}
 
-		return $http({
-			method: "get",
-			headers: {
-				'X-Requested-With': 'XMLHttpRequest'
-			},
-			url: url + filters
-		});
-	};
+		function _get(url, filters) {
+			filters = filters !== undefined ? "?filters=" + aus._objToStr(filters) : "";
 
-	api_helpers._modify = function(url, method, data) {
-		var csrf = yii.getCsrfToken();
-		data["_csrf"] = csrf;
-		return $http({
-			method: method,
-			headers: {
-				'X-Requested-With': 'XMLHttpRequest',
-				'X-CSRF-Token': csrf
-			},
-			url: url,
-			data: data
-		});
-	};
+			return $http({
+				method: "get",
+				headers: {
+					'X-Requested-With': 'XMLHttpRequest'
+				},
+				url: url + filters
+			});
+		};
 
-	return api_helpers;
-});
+		function _modify(url, method, data) {
+			var csrf = yii.getCsrfToken();
+			data["_csrf"] = csrf;
+			return $http({
+				method: method,
+				headers: {
+					'X-Requested-With': 'XMLHttpRequest',
+					'X-CSRF-Token': csrf
+				},
+				url: url,
+				data: data
+			});
+		};
 
-/*
- █████  ██████  ███    ███ ██ ███    ██
-██   ██ ██   ██ ████  ████ ██ ████   ██
-███████ ██   ██ ██ ████ ██ ██ ██ ██  ██
-██   ██ ██   ██ ██  ██  ██ ██ ██  ██ ██
-██   ██ ██████  ██      ██ ██ ██   ████
-*/
-api.service("$admin", function($services_util) {
+		return api_helpers;
+	}
 
-	var api_point = currentHost() + "/api/admins/";
+	function $admin($services_util) {
+		var api_point = currentHost() + "/api/admins/";
 
-	return ({
+		var adminObject = {};
 
-		get: function(filters) {
+		adminObject.get = _get;
+		adminObject.modify = _modify;
+		adminObject.delete = _delete;
+
+		function _get(filters) {
 			var req = $services_util._get(api_point, filters);
 
 			return req.then($services_util._handleSuccess, $services_util._handleError);
-		},
+		}
 
-		modify: function(method, admin) {
+		function _modify(method, admin) {
+			console.log(admin);
 			var req = $services_util._modify(api_point, method, {
 				person: admin
 			});
 
 			return req.then($services_util._handleSuccess, $services_util._handleError);
-		},
+		}
 
-		delete: function(admin) {
+		function _delete(admin) {
 			return this.modify("DELETE", admin);
 		}
-	});
-});
 
-/*
-██████  ███████ ██    ██ ██ ███████ ███████ ██████
-██   ██ ██      ██    ██ ██ ██      ██      ██   ██
-██   ██ █████   ██    ██ ██ ███████ █████   ██████
-██   ██ ██       ██  ██  ██      ██ ██      ██   ██
-██████  ███████   ████   ██ ███████ ███████ ██   ██
-*/
-api.service("$deviser", function($services_util) {
+		return adminObject;
+	}
 
-	var api_point = currentHost() + "/api/devisers/";
+	function $deviser($services_util) {
+		var api_point = currentHost() + "/api/devisers/";
 
-	return ({
+		var deviserObject = {};
 
-		get: function(filters) {
+		deviserObject.get = _get;
+		deviserObject.modify = _modify;
+		deviserObject.delete = _delete;
+
+		function _get(filters) {
 			var req = $services_util._get(api_point, filters);
 
 			return req.then($services_util._handleSuccess, $services_util._handleError);
-		},
+		}
 
-		modify: function(method, deviser) {
+		function _modify(method, deviser) {
 			var req = $services_util._modify(api_point, method, {
 				person: deviser
 			});
 
 			return req.then($services_util._handleSuccess, $services_util._handleError);
-		},
+		}
 
-		delete: function(deviser) {
+		function _delete(deviser) {
 			return this.modify("DELETE", deviser);
 		}
-	});
-});
 
-/*
-██████  ██████   ██████  ██████  ██    ██  ██████ ████████
-██   ██ ██   ██ ██    ██ ██   ██ ██    ██ ██         ██
-██████  ██████  ██    ██ ██   ██ ██    ██ ██         ██
-██      ██   ██ ██    ██ ██   ██ ██    ██ ██         ██
-██      ██   ██  ██████  ██████   ██████   ██████    ██
-*/
-api.service("$product", function($services_util) {
+		return deviserObject;
+	}
 
-	var api_point = currentHost() + "/api/products/";
+	function $product($services_util) {
+		var api_point = currentHost() + "/api/products/";
 
-	return ({
+		var productObject = {};
 
-		get: function(filters) {
+		productObject.get = _get;
+		productObject.modify = _modify;
+		productObject = _delete;
+
+		function _get(filters) {
 			var req = $services_util._get(api_point, filters);
 
 			return req.then($services_util._handleSuccess, $services_util._handleError);
-		},
+		}
 
-		modify: function(method, product) {
+		function _modify(method, product) {
 			var req = $services_util._modify(api_point, method, {
 				product: product
 			});
 
 			return req.then($services_util._handleSuccess, $services_util._handleError);
-		},
+		}
 
-		delete: function(product) {
+		function _delete(product) {
 			return this.modify("DELETE", product);
 		}
-	});
-});
 
-/*
-████████  █████   ██████
-   ██    ██   ██ ██
-   ██    ███████ ██   ███
-   ██    ██   ██ ██    ██
-   ██    ██   ██  ██████
-*/
-api.service("$tag", function($services_util) {
+		return productObject;
 
-	var api_point = currentHost() + "/api/tags/";
+	}
 
-	return ({
+	function $tag($services_util) {
+		var api_point = currentHost() + "/api/tags/";
 
-		get: function(filters) {
+		var tagObject = {};
+
+		tagObject.get = _get;
+		tagObject.modify = _modify;
+		tagObject.delete = _delete;
+
+		function _get(filters) {
 			var req = $services_util._get(api_point, filters);
 
 			return req.then($services_util._handleSuccess, $services_util._handleError);
-		},
+		}
 
-		modify: function(method, tag) {
+		function _modify(method, tag) {
 			var req = $services_util._modify(api_point, method, {
 				tag: tag
 			});
 
 			return req.then($services_util._handleSuccess, $services_util._handleError);
-		},
+		}
 
-		delete: function(tag) {
+		function _delete(tag) {
 			return this.modify("DELETE", tag);
 		}
-	});
-});
 
-/*
-███████ ██ ███████ ███████      ██████ ██   ██  █████  ██████  ████████
-██      ██    ███  ██          ██      ██   ██ ██   ██ ██   ██    ██
-███████ ██   ███   █████       ██      ███████ ███████ ██████     ██
-     ██ ██  ███    ██          ██      ██   ██ ██   ██ ██   ██    ██
-███████ ██ ███████ ███████      ██████ ██   ██ ██   ██ ██   ██    ██
-*/
-api.service("$sizechart", function($services_util) {
+		return tagObject;
 
-	var api_point = currentHost() + "/api/size-charts/";
+	}
 
-	return ({
+	function $sizechart($services_util) {
+		var api_point = currentHost() + "/api/size-charts/";
 
-		get: function(filters) {
+		var sizechartsObject = {};
+
+		sizechartsObject.get = _get;
+		sizechartsObject.modify = _modify;
+		sizechartsObject.delete = _delete;
+
+		function _get(filters) {
 			var req = $services_util._get(api_point, filters);
 
 			return req.then($services_util._handleSuccess, $services_util._handleError);
-		},
+		}
 
-		modify: function(method, sizechart) {
+		function _modify(method, sizechart) {
 			var req = $services_util._modify(api_point, method, {
 				sizechart: sizechart
 			});
 
 			return req.then($services_util._handleSuccess, $services_util._handleError);
-		},
+		}
 
-		delete: function(sizechart) {
+		function _delete(sizechart) {
 			return this.modify("DELETE", sizechart);
 		}
-	});
-});
 
-/*
- ██████  █████  ████████ ███████  ██████   ██████  ██████  ██    ██
-██      ██   ██    ██    ██      ██       ██    ██ ██   ██  ██  ██
-██      ███████    ██    █████   ██   ███ ██    ██ ██████    ████
-██      ██   ██    ██    ██      ██    ██ ██    ██ ██   ██    ██
- ██████ ██   ██    ██    ███████  ██████   ██████  ██   ██    ██
-*/
-api.service("$category", function($services_util) {
+		return sizechartsObject;
+	}
 
-	var api_point = currentHost() + "/api/categories/";
+	function $category($services_util) {
+		var api_point = currentHost() + "/api/categories/";
 
-	return ({
+		var categoryObject = {};
 
-		get: function(filters) {
+		categoryObject.get = _get;
+		categoryObject.modify = _modify;
+		categoryObject.delete = _delete;
+
+		function _get(filters) {
 			var req = $services_util._get(api_point, filters);
 
 			return req.then($services_util._handleSuccess, $services_util._handleError);
-		},
+		}
 
-		modify: function(method, node) {
+		function _modify(method, node) {
 			var req = $services_util._modify(api_point, method, {
 				category: node
 			});
 
 			return req.then($services_util._handleSuccess, $services_util._handleError);
-		},
+		}
 
-		delete: function(node) {
+		function _delete(node) {
 			return this.modify("DELETE", node);
 		}
-	});
-});
 
-/*
-███████  █████   ██████  ███████
-██      ██   ██ ██    ██ ██
-█████   ███████ ██    ██ ███████
-██      ██   ██ ██ ▄▄ ██      ██
-██      ██   ██  ██████  ███████
-                    ▀▀
-*/
-api.service("$faqs", function($services_util) {
+		return categoryObject;
+	}
 
-	var api_point = currentHost() + "/api/faqs/";
+	function $faqs($services_util) {
+		var api_point = currentHost() + "/api/faqs/";
 
-	return ({
+		var faqsObject = {};
 
-		get: function(filters) {
+		faqsObject.get = _get;
+		faqsObject.modify = _modify;
+		faqsObject.delete = _delete;
+
+		function _get(filters) {
 			var req = $services_util._get(api_point, filters);
 
 			return req.then($services_util._handleSuccess, $services_util._handleError);
-		},
+		}
 
-		modify: function(method, node) {
+		function _modify(method, node) {
 			var req = $services_util._modify(api_point, method, {
 				category: node
 			});
 
 			return req.then($services_util._handleSuccess, $services_util._handleError);
-		},
+		}
 
-		delete: function(node) {
+		function _delete(node) {
 			return this.modify("DELETE", node);
 		}
-	});
-});
 
-api.service("$faq", function($services_util) {
+		return faqsObject;
+	}
 
-	var api_point = currentHost() + "/api/faq/";
+	function $terms($services_util) {
+		var api_point = currentHost() + "/api/terms/";
 
-	return ({
+		var termsObject = {};
 
-		get: function(filters) {
+		termsObject.get = _get;
+		termsObject.modify = _modify;
+		termsObject.delete = _delete;
+
+		function _get(filters) {
 			var req = $services_util._get(api_point, filters);
 
 			return req.then($services_util._handleSuccess, $services_util._handleError);
-		},
+		}
 
-		modify: function(method, node) {
+		function _modify(method, node) {
 			var req = $services_util._modify(api_point, method, {
 				category: node
 			});
 
 			return req.then($services_util._handleSuccess, $services_util._handleError);
-		},
+		}
 
-		delete: function(node) {
+		function _delete(node) {
 			return this.modify("DELETE", node);
 		}
-	});
-});
 
+		return termsObject;
+	}
 
+	function $term($services_util) {
+		var api_point = currentHost() + "/api/term/";
 
-/*
-████████ ███████ ██████  ███    ███ ███████
-   ██    ██      ██   ██ ████  ████ ██
-   ██    █████   ██████  ██ ████ ██ ███████
-   ██    ██      ██   ██ ██  ██  ██      ██
-   ██    ███████ ██   ██ ██      ██ ███████
-*/
-api.service("$terms", function($services_util) {
+		var termObject = {};
 
-	var api_point = currentHost() + "/api/terms/";
+		termObject.get = _get;
+		termObject.modify = _modify;
+		termObject.delete = _delete;
 
-	return ({
-
-		get: function(filters) {
+		function _get(filters) {
 			var req = $services_util._get(api_point, filters);
 
 			return req.then($services_util._handleSuccess, $services_util._handleError);
-		},
+		}
 
-		modify: function(method, node) {
+		function _modify(method, node) {
 			var req = $services_util._modify(api_point, method, {
 				category: node
 			});
 
 			return req.then($services_util._handleSuccess, $services_util._handleError);
-		},
+		}
 
-		delete: function(node) {
+		function _delete(node) {
 			return this.modify("DELETE", node);
 		}
-	});
-});
 
-api.service("$term", function($services_util) {
+		return termObject;
+	}
 
-	var api_point = currentHost() + "/api/term/";
-
-	return ({
-
-		get: function(filters) {
-			var req = $services_util._get(api_point, filters);
-
-			return req.then($services_util._handleSuccess, $services_util._handleError);
-		},
-
-		modify: function(method, node) {
-			var req = $services_util._modify(api_point, method, {
-				category: node
-			});
-
-			return req.then($services_util._handleSuccess, $services_util._handleError);
-		},
-
-		delete: function(node) {
-			return this.modify("DELETE", node);
-		}
-	});
-});
+	angular.module('api')
+		.factory("$services_util", $services_util)
+		.service("$admin", $admin)
+		.service("$deviser", $deviser)
+		.service("$product", $product)
+		.service("$tag", $tag)
+		.service("$sizechart", $sizechart)
+		.service("$category", $category)
+		.service("$faqs", $faqs)
+		.service("$terms", $terms)
+		.service("$term", $term);
+}());
