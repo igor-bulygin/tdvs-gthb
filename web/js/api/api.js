@@ -1,1 +1,5 @@
-var api = angular.module('api', []);
+(function () {
+	"use strict";
+
+	angular.module('api', []);
+}());
