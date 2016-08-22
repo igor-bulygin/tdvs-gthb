@@ -21,7 +21,7 @@ class Faq extends CActiveRecord {
 	}
 
     /**
-     * Get an array with Faq entities, serialized for public queries
+     * Get a collection of entities serialized, according to serialization configuration
      *
      * @return array
      */
@@ -103,9 +103,5 @@ class Faq extends CActiveRecord {
 		return parent::beforeSave($insert);
 	}
 
-    public function fields()
-    {
-        return static::$serializeFields;
-    }
 
 }

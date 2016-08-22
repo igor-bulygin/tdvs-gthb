@@ -49,4 +49,9 @@ class CActiveRecord extends ActiveRecord {
 		return $_id;
 	}
 
+    public function fields()
+    {
+        return static::$serializeFields;
+    }
+
 }

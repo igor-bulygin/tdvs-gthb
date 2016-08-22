@@ -2,6 +2,7 @@
 
 namespace app\modules\api\pub\v1\controllers;
 
+use app\helpers\CActiveRecord;
 use Yii;
 use yii\rest\Controller;
 use yii\web\ForbiddenHttpException;
@@ -25,6 +26,9 @@ class TermController extends Controller {
 
     public function actionIndex()
     {
-        return Term::getSerializedPublic();
+        // set the scenario to serialize objects
+        Term::setSerializeScenario(CActiveRecord::SERIALIZE_SCENARIO_PUBLIC);
+
+        return Term::getSerialized();
     }
 }
