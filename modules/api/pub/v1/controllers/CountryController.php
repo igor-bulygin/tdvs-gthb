@@ -2,6 +2,7 @@
 
 namespace app\modules\api\pub\v1\controllers;
 
+use app\helpers\CActiveRecord;
 use app\models\Category;
 use app\models\Country;
 use Yii;
@@ -17,7 +18,10 @@ class CountryController extends Controller {
 
     public function actionIndex()
     {
-        return Country::getSerializedPublic();
+        // set the scenario to serialize objects
+        Country::setSerializeScenario(CActiveRecord::SERIALIZE_SCENARIO_PUBLIC);
+
+        return Country::getSerialized();
     }
 
 }

@@ -27,6 +27,8 @@ class Country extends CActiveRecord {
 	];
 
 	function __construct() {
+	    parent::__construct();
+
 		Yii::t("app/admin", "Africa");
 		Yii::t("app/admin", "Antarctica");
 		Yii::t("app/admin", "Asia");
@@ -42,27 +44,73 @@ class Country extends CActiveRecord {
 	}
 
 
+    public function attributes() {
+        return [
+            '_id',
+            'country_code',
+            'country_name',
+            'currency_code',
+            'continent'
+        ];
+    }
+
     /**
-     * Get an array with Faq entities, serialized for public queries
+     * The attributes that should be translated
+     *
+     * @var array
+     */
+    public $translatedAttributes = ['country_name'];
+
+
+    /**
+     * Prepare the ActiveRecord properties to serialize the objects properly, to retrieve an serialize
+     * only the attributes needed for a query context
+     *
+     * @param $view
+     */
+    public static function setSerializeScenario($view)
+    {
+        switch ($view) {
+            case CActiveRecord::SERIALIZE_SCENARIO_PUBLIC:
+                static::$serializeFields = [
+                    'id' => 'country_code',
+                    'country_name',
+                    'currency_code',
+                    'continent',
+                ];
+                static::$translateFields = true;
+                break;
+            case CActiveRecord::SERIALIZE_SCENARIO_ADMIN:
+                static::$serializeFields = [
+                    'id' => 'country_code',
+                    'country_name',
+                    'currency_code',
+                    'continent',
+                ];
+                static::$translateFields = false;
+                break;
+            default:
+                // now available for this Model
+                static::$serializeFields = [];
+                break;
+        }
+    }
+
+    /**
+     * Get a collection of entities serialized, according to serialization configuration
      *
      * @return array
      */
-    public static function getSerializedPublic() {
-        $countries = Country::find()->select(['country_code', 'country_name', 'currency_code', 'continent'])->asArray()->all();
-        // publish in the language selected by current user
-        Utils::l_collection($countries, 'country_name');
+    public static function getSerialized() {
 
-        return $countries;
+        // retrieve only fields that want to be serialized
+        $faqs = Country::find()->select(array_values(static::$serializeFields))->all();
+
+        // if automatic translation is enabled
+        if (static::$translateFields) {
+            Utils::translate($faqs);
+        }
+        return $faqs;
     }
 
-
-	public function attributes() {
-		return [
-			'_id',
-			'country_code',
-			'country_name',
-			'currency_code',
-			'continent'
-		];
-	}
 }

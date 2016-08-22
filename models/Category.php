@@ -33,19 +33,69 @@ class Category extends CActiveRecord {
 	}
 
     /**
-     * Get an array with Faq entities, serialized for public queries
+     * The attributes that should be translated
+     *
+     * @var array
+     */
+    public $translatedAttributes = ['name'];
+
+
+    /**
+     * Prepare the ActiveRecord properties to serialize the objects properly, to retrieve an serialize
+     * only the attributes needed for a query context
+     *
+     * @param $view
+     */
+    public static function setSerializeScenario($view)
+    {
+        switch ($view) {
+            case CActiveRecord::SERIALIZE_SCENARIO_PUBLIC:
+                static::$serializeFields = [
+                    'id' => 'short_id',
+                    'path',
+                    'sizecharts',
+                    'prints',
+                    'name',
+                    'slug',
+                ];
+                static::$translateFields = true;
+                break;
+            case CActiveRecord::SERIALIZE_SCENARIO_ADMIN:
+                static::$serializeFields = [
+                    'id' => 'short_id',
+                    'path',
+                    'sizecharts',
+                    'prints',
+                    'name',
+                    'slug',
+                ];
+                static::$translateFields = false;
+                break;
+            default:
+                // now available for this Model
+                static::$serializeFields = [];
+                break;
+        }
+    }
+
+    /**
+     * Get a collection of entities serialized, according to serialization configuration
      *
      * @return array
      */
-    public static function getSerializedPublic() {
-        $categories = Category::find()->select(['short_id', 'path', 'sizecharts', 'prints', 'name', 'slug'])->asArray()->all();
-        // publish in the language selected by current user
-        Utils::l_collection($categories, 'name');
+    public static function getSerialized() {
 
+        // retrieve only fields that want to be serialized
+        $categories = Category::find()->select(array_values(static::$serializeFields))->all();
+
+        // if automatic translation is enabled
+        if (static::$translateFields) {
+            Utils::translate($categories);
+        }
         return $categories;
     }
 
-	public function getSubCategories($current_path = null) {
+    public function getSubCategories($current_path = null) {
 		if ($current_path === null) {
 			$current_path = $this->path . $this->short_id . "/";
 		}

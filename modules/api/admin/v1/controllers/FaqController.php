@@ -2,6 +2,7 @@
 
 namespace app\modules\api\admin\v1\controllers;
 
+use app\helpers\CActiveRecord;
 use Yii;
 use yii\rest\Controller;
 use yii\web\ForbiddenHttpException;
@@ -17,7 +18,10 @@ class FaqController extends Controller {
 
     public function actionIndex()
     {
-        return Faq::find()->asArray()->all();
+        // set the scenario to serialize objects
+        Faq::setSerializeScenario(CActiveRecord::SERIALIZE_SCENARIO_ADMIN);
+
+        return Faq::getSerialized();
     }
 
     public function actionView($id)

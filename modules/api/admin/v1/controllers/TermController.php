@@ -2,6 +2,7 @@
 
 namespace app\modules\api\admin\v1\controllers;
 
+use app\helpers\CActiveRecord;
 use Yii;
 use yii\rest\Controller;
 use yii\web\ForbiddenHttpException;
@@ -27,7 +28,11 @@ class TermController extends Controller {
 
     public function actionIndex()
     {
-        return Term::find()->asArray()->all();
+        // set the scenario to serialize objects
+        Term::setSerializeScenario(CActiveRecord::SERIALIZE_SCENARIO_ADMIN);
+
+        return Term::getSerialized();
+
     }
 
     public function actionView($id)
