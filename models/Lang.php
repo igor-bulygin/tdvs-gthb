@@ -14,4 +14,13 @@ class Lang {
 		Yii::t("app/admin", "Spanish");
 		Yii::t("app/admin", "Catalan");
 	}
+
+	static public function getAvailableLanguages()
+    {
+        return array_merge(
+            self::EN_US,
+            self::ES_ES,
+            self::CA_ES
+        );
+    }
 }

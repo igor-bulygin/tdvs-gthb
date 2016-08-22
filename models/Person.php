@@ -4,12 +4,14 @@ namespace app\models;
 use Yii;
 use app\helpers\CActiveRecord;
 use yii\base\NotSupportedException;
+use yii\mongodb\Collection;
 use yii\web\IdentityInterface;
 
 /**
  * @property mixed _id
  * @property string slug
  * @property string text_short_description
+ * @property string text_biography
  * @property mixed type
  * @property array categories
  * @property array collections
@@ -40,6 +42,7 @@ class Person extends CActiveRecord implements IdentityInterface {
 			'_id',
 			'short_id',
 			'text_short_description',
+			'text_biography',
 			'slug',
 			'type',
 			'categories',
@@ -50,6 +53,14 @@ class Person extends CActiveRecord implements IdentityInterface {
 			'preferences'
 		];
 	}
+
+    /**
+     * The attributes that should be translated
+     *
+     * @var array
+     */
+    public $translatedAttributes = ['text_biography'];
+
 
 	public static function findIdentity($id) {
 		return Person::findOne(['short_id' => $id]);
@@ -145,8 +156,14 @@ class Person extends CActiveRecord implements IdentityInterface {
     {
         return [
             // the name, email, subject and body attributes are required
-            [['slug'], 'required'],
+            [['slug', 'categories'], 'required'],
             [['text_short_description'], 'required', 'on' => [self::SCENARIO_DEVISER_PROFILE_UPDATE]],
+//            [['text_biography'], 'safe', 'on' => [self::SCENARIO_DEVISER_PROFILE_UPDATE]],
+            [
+                'text_biography',
+                'app\validators\EmbedTranslatableFieldValidator',
+                'scenario' => self::SCENARIO_DEVISER_PROFILE_UPDATE,
+            ],
             [['preferences'], 'required'],
             [
                 'preferences',
@@ -164,24 +181,52 @@ class Person extends CActiveRecord implements IdentityInterface {
         ];
     }
 
-    public function fields()
+    /**
+     * Prepare the ActiveRecord properties to serialize the objects properly, to retrieve an serialize
+     * only the attributes needed for a query context
+     *
+     * @param $view
+     */
+    public static function setSerializeScenario($view)
     {
-        return [
-            // field name is "email", the corresponding attribute name is "email_address"
-            'id' => 'short_id',
-            'slug',
-            'text_short_description',
-            'categories',
-//            'collections',
-            'personal_info',
-            'media',
-            'credentials',
-            'preferences',
+        switch ($view) {
+            case CActiveRecord::SERIALIZE_SCENARIO_PUBLIC:
+                static::$serializeFields = [
+                    'id' => 'short_id',
+                    'slug',
+                    'text_short_description',
+                    'text_biography',
+                    'categories',
+                    'personal_info',
+                    'media',
+                ];
+                break;
+            case CActiveRecord::SERIALIZE_SCENARIO_OWNER:
+                static::$serializeFields = [
+                    'id' => 'short_id',
+                    'slug',
+                    'text_short_description',
+                    'text_biography',
+                    'categories',
+                    'collections',
+                    'personal_info',
+                    'media',
+                    'credentials',
+                    'preferences',
+                ];
 
-            // field name is "name", its value is defined by a PHP callback
+                // field name is "name", its value is defined by a PHP callback
 //            'name' => function () {
 //                return $this->first_name . ' ' . $this->last_name;
 //            },
-        ];
+                break;
+            default:
+                // now available for this Model
+                static::$serializeFields = [];
+                break;
+        }
     }
+
 }
+
+

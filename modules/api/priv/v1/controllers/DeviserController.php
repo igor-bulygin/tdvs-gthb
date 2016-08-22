@@ -2,6 +2,7 @@
 
 namespace app\modules\api\priv\v1\controllers;
 
+use app\helpers\CActiveRecord;
 use app\models\Person;
 use Yii;
 use yii\rest\Controller;
@@ -24,6 +25,7 @@ class DeviserController extends Controller {
 
     public function actionView()
     {
+        Person::setSerializeScenario(CActiveRecord::SERIALIZE_SCENARIO_OWNER);
         /** @var Person $deviser */
         $deviser = Yii::$app->user->getIdentity();
 
@@ -44,8 +46,10 @@ class DeviserController extends Controller {
 
             // TODO: return the deviser data, only for test. remove when finish.
 //            Yii::$app->response->setStatusCode(204); // Success, without body
+            Person::setSerializeScenario(CActiveRecord::SERIALIZE_SCENARIO_OWNER);
             return ["deviser" => $deviser];
         } else {
+            Yii::$app->response->setStatusCode(400); // Bad Request
             return ["errors" => $deviser->errors];
         }
     }

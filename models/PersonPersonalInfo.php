@@ -7,22 +7,27 @@ class PersonPersonalInfo extends Model
 {
 
     /**
-     * @var string $name
+     * @var string
      */
     public $name;
 
     /**
-     * @var array $surnames
+     * @var array
      */
     public $surnames;
 
     /**
-     * @var string $country
+     * @var string
+     */
+    public $brand_name;
+
+    /**
+     * @var string
      */
     public $country;
 
     /**
-     * @var string $city
+     * @var string
      */
     public $city;
 
@@ -30,7 +35,7 @@ class PersonPersonalInfo extends Model
     public function rules()
     {
         return [
-            [['name', 'surnames', 'country', 'city'], 'required', 'on' => Person::SCENARIO_DEVISER_PROFILE_UPDATE],
+            [['name', 'surnames', 'brand_name', 'country', 'city'], 'required', 'on' => Person::SCENARIO_DEVISER_PROFILE_UPDATE],
         ];
     }
 
