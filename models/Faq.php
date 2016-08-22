@@ -9,6 +9,12 @@ use yii\base\NotSupportedException;
 
 class Faq extends CActiveRecord {
 
+    /**
+     * The attributes that should be translated
+     *
+     * @var array
+     */
+    public $translatedAttributes = ['title', 'faqs.question', 'faqs.answer'];
 
 	public static function collectionName() {
 		return 'faq';
@@ -20,16 +26,10 @@ class Faq extends CActiveRecord {
      * @return array
      */
 	public static function getSerialized() {
-//        $faqs = Faq::find()->select(['short_id' , 'title', 'faqs'])->asArray()->all();
-//        // publish in the language selected by current user
-//        foreach ($faqs as $key => &$oneFaq){
-//            Utils::l_collection($oneFaq['faqs'], "question");
-//            Utils::l_collection($oneFaq['faqs'], "answer");
-//            $oneFaq['title'] = Utils::l($oneFaq['title']);
-//        }
 
         // retrieve only fields that want to be serialized
         $faqs = Faq::find()->select(array_values(static::$serializeFields))->all();
+
         // if automatic translation is enabled
         if (static::$translateFields) {
             Utils::translate($faqs);
@@ -44,10 +44,10 @@ class Faq extends CActiveRecord {
      *
      * @param $view
      */
-	public static function setSerializeView($view)
+	public static function setSerializeScenario($view)
     {
         switch ($view) {
-            case CActiveRecord::SERIALIZE_VIEW_PUBLIC:
+            case CActiveRecord::SERIALIZE_SCENARIO_PUBLIC:
                 static::$serializeFields = [
                     // field name is "email", the corresponding attribute name is "email_address"
                     'id' => 'short_id',
@@ -55,6 +55,15 @@ class Faq extends CActiveRecord {
                     'faqs',
                 ];
                 static::$translateFields = true;
+                break;
+            case CActiveRecord::SERIALIZE_SCENARIO_ADMIN:
+                static::$serializeFields = [
+                    // field name is "email", the corresponding attribute name is "email_address"
+                    'id' => 'short_id',
+                    'title',
+                    'faqs',
+                ];
+                static::$translateFields = false;
                 break;
             default:
                 // now available for this Model

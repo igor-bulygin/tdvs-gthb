@@ -16,8 +16,8 @@ class FaqController extends Controller {
 
     public function actionIndex()
     {
-        // set the view to serialize objects
-        Faq::setSerializeView(CActiveRecord::SERIALIZE_VIEW_PUBLIC);
+        // set the scenario to serialize objects
+        Faq::setSerializeScenario(CActiveRecord::SERIALIZE_SCENARIO_PUBLIC);
 
         return Faq::getSerialized();
     }

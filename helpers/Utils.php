@@ -1,6 +1,10 @@
 <?php
 namespace app\helpers;
 
+use Exception;
+use Iterator;
+use IteratorAggregate;
+use Traversable;
 use Yii;
 use app\models\Lang;
 use yii\base\Model;
@@ -278,39 +282,107 @@ class Utils {
 		}
 	}
 
-	/**
-	 * The equivalent of 'l', but for arrays of data.
-	 * Takes an array of objects and sets '$key' to the
-	 * value returned by 'l'.
-	 */
+    /**
+     * Translate "translatable" attributes of a single Model, or a Model collection
+     *
+     * @param mixed $mix
+     * @return mixed
+     */
 	public static function translate($mix) {
-//	    print_r();
-        /** @var Model $model */
-        foreach ($mix as $model) {
-            foreach ($model->attributes as $attribute => $value) {
-                if (static::isTranslatableAttribute($value)) {
-
+        if (is_array($mix) || $mix instanceof Traversable) {
+            /** @mix CActiveRecord $model */
+            foreach ($mix as $model) {
+                if ($model instanceof CActiveRecord) {
+                    Utils::translateModel($model);
                 }
-//                print_r($attribute);
-//                print_r($value);
             }
-//			$value[$key] = @Utils::l($value[$key]);
-		}
+        } elseif ($mix instanceof CActiveRecord) {
+            Utils::translateModel($mix);
+        }
+
         return $mix;
 	}
 
     /**
-     * Check if the attribute is translatable, it means, has a substructure with several languages
+     * Translate "translatable" attributes of a single Model
      *
-     * @param mixed $value
-     * @return bool
+     * @param CActiveRecord $model
+     * @return CActiveRecord
      */
-	private static function isTranslatableAttribute($value)
-    {
-        return false;
+	public static function translateModel(CActiveRecord $model) {
+        foreach ($model->translatedAttributes as $translatedAttribute) {
+            Utils::translateModelAttribute($model, $translatedAttribute);
+        }
+
+        return $model;
+	}
+
+
+    /**
+     * Translate a single attribute of a Model.
+     *
+     * "translated attribute" can be a sub element of an array. To specify sub elements, use "." separator,
+     * for example: "faqs.questions"
+     *
+     * @param CActiveRecord $model
+     * @param string $translatedAttribute
+     * @return mixed
+     */
+    public static function translateModelAttribute(CActiveRecord $model, $translatedAttribute) {
+        $particles = explode('.', $translatedAttribute);
+        $rootParticle = $particles[0];
+        $otherParticles = array_slice($particles, 1, count($particles));
+        $translatedValue = null;
+
+        if (count($particles) == 1) {
+            // want to translate this "particle" / "attribute"
+            $translatedValue = Utils::getValue($model->getAttribute($rootParticle), Yii::$app->language, array_keys(Lang::EN_US)[0]);
+        } elseif (count($particles) > 1) {
+            // want to translate a sub attribute. now, are stored in arrays, not custom models
+            $translatedValue = Utils::translateArrayAttribute($model->getAttribute($rootParticle),  implode('.', $otherParticles));
+        }
+
+        $model->setAttribute($rootParticle, $translatedValue);
     }
 
+    /**
+     * Translate a single attribute of a Model
+     *
+     * @param array $arr
+     * @param string $translatedAttribute
+     * @return mixed
+     */
+    public static function translateArrayAttribute(array &$arr, $translatedAttribute) {
+        $particles = explode('.', $translatedAttribute);
+        $rootParticle = $particles[0];
+        $otherParticles = array_slice($particles, 1, count($particles));
 
+        if (count($particles) == 1) {
+            // want to translate this "particle" / "attribute"
+            if (array_key_exists($rootParticle, $arr)) {
+                $arr[$rootParticle] = Utils::getValue($arr[$rootParticle], Yii::$app->language, array_keys(Lang::EN_US)[0]);
+            }
+            // can be a set of items
+            foreach ($arr as $key => &$attr) {
+                if ((is_array($attr)) && (array_key_exists($rootParticle, $attr))) {
+                    $attr[$rootParticle] = Utils::getValue($attr[$rootParticle], Yii::$app->language, array_keys(Lang::EN_US)[0]);
+                }
+            }
+        } elseif (count($particles) > 1) {
+            // want to translate a sub attribute
+            if (array_key_exists($rootParticle, $arr)) {
+                Utils::translateArrayAttribute($arr[$rootParticle],  implode('.', $otherParticles));
+            }
+            // can be a set of items
+            foreach ($arr as &$attr) {
+                if (array_key_exists($rootParticle, $attr)) {
+                    Utils::translateArrayAttribute($attr[$rootParticle],  implode('.', $otherParticles));
+                }
+            }
+        }
+
+        return $arr;
+    }
 
 	/**
 	 * Convert a stdClass object to a multidimensional array.
