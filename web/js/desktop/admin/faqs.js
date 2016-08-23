@@ -1,65 +1,74 @@
 (function () {
 	"use strict";
 
-	function controller($faqs, $category_util, $location, toastr, $uibModal, treeService) {
+	function controller($faqs, $category_util, $location, toastr, $uibModal, treeService, faqDataService) {
 		var vm = this;
 
 		vm.treeData = [];
 		vm.langs = _langs;
-
 		vm.treeConfig = treeService.treeDefaultConfig("todevise_faqs_jstree", vm);
+		vm.getFaqs = getFaqs;
+		vm.parseFaqs = parseFaqs;
+		vm.readyCB = readyCB;
+		vm.search = search;
+		vm.open_all = open_all;
+		vm.close_all = close_all;
+		vm.create = create;
+		vm.edit_faq = edit_faq;
+		vm.create_sub = create_sub;
+		vm.edit_sub = edit_sub;
+		vm.rename = rename;
+		vm.move = move;
+		vm.remove = remove;
 
-		vm.load_faqs = function () {
-			$faqs.get().then(function (_faqs) {
-				//Empty the tada holder (if there is anything)
-				vm.treeData.splice(0, vm.treeData.length);
-				console.log(_faqs);
-
-				//Fill the new values
-				angular.forEach(_faqs, function (faqs_group, key) {
-					//console.log(faqs_group.title[_lang]);
-					var short_id = faqs_group.short_id;
-					vm.treeInstance.jstree(true).add_action(short_id, {
-						id: "action_add",
-						class: "action_add pull-right",
-						text: "",
-						after: true,
-						selector: "a",
-						event: "click",
-						callback: vm.edit_faq
-					});
-
-					//a group
-					vm.treeData.push({
-						id: short_id,
-						parent: "#",
-						text: faqs_group.title[_lang] || "",
-						icon: "none"
-					});
-
-					if (faqs_group.faqs.length > 0) {
-						//faqs inside group
-						angular.forEach(faqs_group.faqs, function (faqs, key) {
-							console.log(faqs.question[_lang]);
-							vm.treeData.push({
-								id: short_id + "_" + key,
-								short_id: key,
-								parent: short_id,
-								text: faqs.question[_lang] || "",
-								icon: "none"
-							});
-						});
-					}
-				});
-				console.log(vm.treeData);
-				toastr.success("Categories loaded!");
+		function getFaqs() {
+			faqDataService.adminFaq.query().$promise.then(function (dataFaq) {
+				parseFaqs(dataFaq);
 			}, function (err) {
-				//callback error
-				toastr.error("Couldn't load categories!", err);
+				toastr.error("Couldn't load faqs!", err);
 			});
-		};
+		}
 
-		vm.readyCB = function () {
+		function parseFaqs(_faqs) {
+			vm.treeData.splice(0, vm.treeData.length);
+
+			angular.forEach(_faqs, function (faqs_group, key) {
+				var short_id = faqs_group.id;
+				vm.treeInstance.jstree(true).add_action(short_id, {
+					id: "action_add",
+					class: "action_add pull-right",
+					text: "",
+					after: true,
+					selector: "a",
+					event: "click",
+					callback: edit_faq
+				});
+
+				//a group
+				vm.treeData.push({
+					id: short_id,
+					parent: "#",
+					text: faqs_group.title[_lang] || "",
+					icon: "none"
+				});
+
+				if (faqs_group.faqs.length > 0) {
+					//faqs inside group
+					angular.forEach(faqs_group.faqs, function (faqs, key) {
+						vm.treeData.push({
+							id: short_id + "_" + key,
+							short_id: key,
+							parent: short_id,
+							text: faqs.question[_lang] || "",
+							icon: "none"
+						});
+					});
+				}
+			});
+			toastr.success("Faqs loaded!");
+		}
+
+		function readyCB() {
 			vm.treeInstance.jstree(true).add_action('all', {
 				id: "action_rename",
 				class: "action_rename pull-right",
@@ -67,7 +76,7 @@
 				after: true,
 				selector: "a",
 				event: "click",
-				callback: vm.rename
+				callback: rename
 			});
 
 			vm.treeInstance.jstree(true).add_action("all", {
@@ -77,21 +86,21 @@
 				after: true,
 				selector: "a",
 				event: "click",
-				callback: vm.remove
+				callback: remove
 			});
 
-			vm.load_faqs();
+			getFaqs();
 		}
 
-		vm.search = function () {
+		function search() {
 			vm.treeInstance.jstree(true).search(vm.searchModel);
 		};
 
-		vm.open_all = function () {
+		function open_all() {
 			vm.treeInstance.jstree(true).open_all();
 		}
 
-		vm.close_all = function () {
+		function close_all() {
 			vm.treeInstance.jstree(true).close_all();
 		}
 
@@ -99,7 +108,7 @@
 			vm.treeInstance.jstree(true).set_state(angular.copy(vm.tree_state));
 		}, 100);
 
-		vm.create = function (node_id, node, action_id, action_el) {
+		function create(node_id, node, action_id, action_el) {
 			var path = "/";
 			if (node !== undefined) {
 				path += vm.treeInstance.jstree(true).get_path(node, "/", true) + "/";
@@ -126,8 +135,8 @@
 
 				$faqs.modify("POST", tmp_node).then(function (faqs_group) {
 					toastr.success("Category created!");
-					console.log("debug id:");
-					console.log(faqs_group);
+					//console.log("debug id:");
+					//console.log(faqs_group);
 					vm.treeData.push({
 						id: faqs_group.short_id,
 						parent: '#',
@@ -142,13 +151,13 @@
 			});
 		};
 
-		vm.edit_faq = function (node_id, node, action_id, action_el) {
+		function edit_faq(node_id, node, action_id, action_el) {
 			//vm.viewtoggle = !vm.viewtoggle;
 			//TODO: Get this url from Yii url generator
 			document.location.href = "/admin/faq" + node.id + "/";
 		};
 
-		vm.create_sub = function (node_id, node, action_id, action_el) {
+		function create_sub(node_id, node, action_id, action_el) {
 			var path = "/";
 			if (node !== undefined) {
 				path += vm.treeInstance.jstree(true).get_path(node, "/", true) + "/";
@@ -156,8 +165,8 @@
 
 			$faqs.modify("POST", tmp_node).then(function (faqs_group) {
 				toastr.success("Category created!");
-				console.log("debug id:");
-				console.log(faqs_group);
+				//console.log("debug id:");
+				//console.log(faqs_group);
 				vm.treeData.push({
 					id: faqs_group.short_id,
 					parent: '#',
@@ -169,12 +178,12 @@
 			});
 		};
 
-		vm.edit_sub = function (node_id, node, action_id, action_el) {
+		function edit_sub(node_id, node, action_id, action_el) {
 			var res = node.id.split("_");
 			document.location.href = "/admin/faq/" + res[0] + "/" + res[1] + "/";
 		}
 
-		vm.rename = function (node_id, node, action_id, action_el) {
+		function rename(node_id, node, action_id, action_el) {
 			if (node.parent != '#') {
 				return vm.edit_sub(node_id, node, action_id, action_el);
 			}
@@ -223,7 +232,7 @@
 			});
 		}
 
-		vm.move = function (e, node) {
+		function move(e, node) {
 			node.node.original.parent = node.node.parent;
 			var tmp_node = $category_util.nodeToCategory(node.node.original, vm);
 			$faqs.modify("POST", tmp_node).then(function (category) {
@@ -234,7 +243,7 @@
 			});
 		};
 
-		vm.remove = function (node_id, node, action_id, action_el) {
+		function remove(node_id, node, action_id, action_el) {
 			var category = vm.treeInstance.jstree(true).get_node(node.id);
 			category = $category_util.nodeToCategory(category.original, vm);
 
@@ -308,16 +317,6 @@
 			$uibModalInstance.dismiss();
 		};
 	}
-
-	function directive() {
-		return {
-			templateUrl: '',
-			controller: controller,
-			controllerAs: 'faqsCtrl',
-			bindToController: true
-		}
-	}
-
 
 	angular.module('todevise', ['ngAnimate', 'ui.bootstrap', 'ngJsTree', 'global-admin', 'global-desktop', 'api', 'util'])
 		.controller('faqsCtrl', controller)

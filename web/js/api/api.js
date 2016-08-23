@@ -1,5 +1,5 @@
 (function () {
 	"use strict";
 
-	angular.module('api', []);
+	angular.module('api', ['ngResource']);
 }());
