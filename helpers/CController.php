@@ -30,10 +30,12 @@ class CController extends Controller {
 		 */
 		if (\Yii::$app->params['devicedetect']['isMobile']) {
 			$this->layout = '/mobile/' . $this->id;
-			$this->_viewPath = '@app/views/mobile/' . $this->id;
+//			$this->_viewPath = '@app/views/mobile/' . $this->id;
+			$this->_viewPath = '@app/views/desktop/' . $this->id;
 		} else if(\Yii::$app->params['devicedetect']['isTablet']) {
 			$this->layout = '/tablet/' . $this->id;
-			$this->_viewPath = '@app/views/tablet/' . $this->id;
+//			$this->_viewPath = '@app/views/tablet/' . $this->id;
+			$this->_viewPath = '@app/views/desktop/' . $this->id;
 		} else {
 			$this->layout = '/desktop/' . $this->id;
 			$this->_viewPath = '@app/views/desktop/' . $this->id;
