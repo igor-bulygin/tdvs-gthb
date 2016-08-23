@@ -15,315 +15,371 @@ Index2Asset::register($this);
 $this->title = 'Todevise / Home';
 
 ?>
+
+<!-- BANNER-->
+<div class="bs-example" data-example-id="simple-carousel">
+	<div class="carousel slide" id="carousel-example-generic" data-ride="carousel">
+		<ol class="carousel-indicators">
+			<li data-target="#carousel-example-generic" data-slide-to="0" class=""></li>
+			<li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
+			<li data-target="#carousel-example-generic" data-slide-to="2" class="active"></li>
+			<li data-target="#carousel-example-generic" data-slide-to="3" class=""></li>
+			<li data-target="#carousel-example-generic" data-slide-to="4" class=""></li>
+		</ol>
+		<div class="carousel-inner" role="listbox">
+			<div class="item">
+				<img src="/imgs/banner-4.jpg" alt="" title="">
+			</div>
+			<div class="item">
+				<img src="/imgs/banner-5.jpg" alt="" title="">
+			</div>
+			<div class="item active">
+				<img src="/imgs/banner-1.jpg" alt="" title="">
+			</div>
+			<div class="item">
+				<img src="/imgs/banner-2.jpg" alt="" title="">
+			</div>
+			<div class="item">
+				<img src="/imgs/banner-3.jpg" alt="" title="">
+			</div>
+		</div>
+	</div>
+</div>
+<!-- /BANNER -->
+<!-- SUB-BANNER -->
+<section class="sub-banner">
+	<div class="container container-sub-baner">
+		<div class="row">
+			<div class="col-sm-4 col-xs-6 title-wrapper righty">
+				<h2 class="title-1"><span class="serif">The</span>store</h2>
+				<p class="tagline-1">Find products that will make you part of the future</p>
+			</div>
+			<div class="col-sm-4 col-xs-6 title-wrapper">
+				<h2>Social<br/><span class="serif">experience</span></h2>
+				<p class="tagline-2">Show the world what you like &amp; build a community</p>
+			</div>
+			<div class="col-sm-4 title-wrapper">
+				<h2>Affiliate<br/><span class="serif">for all</span></h2>
+				<p class="tagline-3">Love a product. People buy it. You earn money.</p>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- /SUB-BANNER -->
+
 <!-- GRID -->
 <section class="grid-wrapper">
-    <div class="container">
-        <div class="section-title">
-            Highlighted Works
-        </div>
-        <div>
-            <?php foreach ($works12 as $i => $work) { ?>
-            <div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
-                <a href="#">
-                    <div class="grid">
-                        <figure class="effect-zoe">
-                            <img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize(@$work['img'])->resize(362, 450) ?>">
-                            <figcaption>
-                                <p class="instauser">
-                                    <?= $work["name"] ?>
-                                </p>
-                                <p class="price">€ <?= Utils::minPrice($work) ?></p>
-                            </figcaption>
-                        </figure>
-                    </div>
-                </a>
-            </div>
-            <?php } ?>
-            <?php foreach ($works3 as $i => $work) { ?>
-            <div class="col-md-4 col-sm-4 pad-grid pad-grid-h">
-                <a href="#">
-                    <div class="grid">
-                        <figure class="effect-zoe">
-                            <img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize(@$work['img'])->resize(375, 220) ?>">
-                            <figcaption>
-                                <p class="instauser">
-                                    <?= $work["name"] ?>
-                                </p>
-                                <p class="price">€ <?= Utils::minPrice($work) ?></p>
-                            </figcaption>
-                        </figure>
-                    </div>
-                </a>
-            </div>
-            <?php } ?>
-        </div>
-    </div>
+	<div class="container">
+		<div class="section-title">
+			Highlighted Works
+		</div>
+		<div>
+			<?php foreach ($works12 as $i => $work) { ?>
+				<div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
+					<a href="#">
+						<div class="grid">
+							<figure class="effect-zoe">
+								<img class="grid-image"
+								     src="<?= Utils::url_scheme() ?><?= Utils::thumborize(@$work['img'])->resize(362, 450) ?>">
+								<figcaption>
+									<p class="instauser">
+										<?= $work["name"] ?>
+									</p>
+									<p class="price">€ <?= Utils::minPrice($work) ?></p>
+								</figcaption>
+							</figure>
+						</div>
+					</a>
+				</div>
+			<?php } ?>
+			<?php foreach ($works3 as $i => $work) { ?>
+				<div class="col-md-4 col-sm-4 pad-grid pad-grid-h">
+					<a href="#">
+						<div class="grid">
+							<figure class="effect-zoe">
+								<img class="grid-image"
+								     src="<?= Utils::url_scheme() ?><?= Utils::thumborize(@$work['img'])->resize(375, 220) ?>">
+								<figcaption>
+									<p class="instauser">
+										<?= $work["name"] ?>
+									</p>
+									<p class="price">€ <?= Utils::minPrice($work) ?></p>
+								</figcaption>
+							</figure>
+						</div>
+					</a>
+				</div>
+			<?php } ?>
+		</div>
+	</div>
 </section>
 <!-- /GRID -->
 
 <!-- SHOWCASE -->
 <section class="showcase-wrapper">
-    <div class="container">
-        <h3>Artists, designers, creators who<br>
-            shape outstanding works</h3>
-        <div class="section-title">
-            Devisers
-        </div>
-        <div>
-            <?php foreach ($devisers as $i => $deviser) { ?>
-            <div class="col-md-3 col-sm-3 col-xs-6 pad-showcase">
-                <a href="#">
-                    <figure class="showcase">
-                        <button class="btn btn-default btn-follow"><i class="ion-star"></i><span>Follow</span>
-                        </button>
-                        <img class="showcase-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize(@$deviser['background'])->resize(350, 344) ?>">
-                        <figcaption>
-                            <img class="showcase-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize(@$deviser['img'])->resize(0, 110) ?>">
-                            <span class="name"><?= $deviser['name'] ?>r</span>
-                            <span class="location">Boston, Massachusetts</span>
-                        </figcaption>
-                    </figure>
-                </a>
-            </div>
-            <?php } ?>
-        </div>
-    </div>
+	<div class="container">
+		<h3>Artists, designers, creators who<br>
+			shape outstanding works</h3>
+		<div class="section-title">
+			Devisers
+		</div>
+		<div>
+			<?php foreach ($devisers as $i => $deviser) { ?>
+				<div class="col-md-3 col-sm-3 col-xs-6 pad-showcase">
+					<a href="#">
+						<figure class="showcase">
+							<button class="btn btn-default btn-follow"><i class="ion-star"></i><span>Follow</span>
+							</button>
+							<img class="showcase-image"
+							     src="<?= Utils::url_scheme() ?><?= Utils::thumborize(@$deviser['background'])->resize(350, 344) ?>">
+							<figcaption>
+								<img class="showcase-image"
+								     src="<?= Utils::url_scheme() ?><?= Utils::thumborize(@$deviser['img'])->resize(0, 110) ?>">
+								<span class="name"><?= $deviser['name'] ?>r</span>
+								<span class="location">Boston, Massachusetts</span>
+							</figcaption>
+						</figure>
+					</a>
+				</div>
+			<?php } ?>
+		</div>
+	</div>
 </section>
 <!-- /SHOWCASE -->
 
 <!-- GRID -->
 <section class="grid-wrapper">
-    <div class="container">
-        <div class="section-title">
-            Highlighted Works
-        </div>
-        <div>
-            <div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
-                <a href="#">
-                    <div class="grid">
-                        <figure class="effect-zoe">
-                            <img class="grid-image" src="/imgs/photo-grid-1.jpg">
-                            <figcaption>
-                                <p class="instauser">
-                                    Black dress
-                                </p>
-                                <p class="price">€ 3.230</p>
-                            </figcaption>
-                        </figure>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
-                <a href="#">
-                    <div class="grid">
-                        <figure class="effect-zoe">
-                            <img class="grid-image" src="/imgs/photo-grid-2.jpg">
-                            <figcaption>
-                                <p class="instauser">
-                                    Amazing bag
-                                </p>
-                                <p class="price">€ 230</p>
-                            </figcaption>
-                        </figure>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
-                <a href="#">
-                    <div class="grid">
-                        <figure class="effect-zoe">
-                            <img class="grid-image" src="/imgs/photo-grid-3.jpg">
-                            <figcaption>
-                                <p class="instauser">
-                                    White &amp; grey dress
-                                </p>
-                                <p class="price">€ 1.444</p>
-                            </figcaption>
-                        </figure>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
-                <a href="#">
-                    <div class="grid">
-                        <figure class="effect-zoe">
-                            <img class="grid-image" src="/imgs/photo-grid-4.jpg">
-                            <figcaption>
-                                <p class="instauser">
-                                    Water scarf
-                                </p>
-                                <p class="price">€ 3.230</p>
-                            </figcaption>
-                        </figure>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
-                <a href="#">
-                    <div class="grid">
-                        <figure class="effect-zoe">
-                            <img class="grid-image" src="/imgs/photo-grid-5.jpg">
-                            <figcaption>
-                                <p class="instauser">
-                                    Dashing jewlery
-                                </p>
-                                <p class="price">€ 230</p>
-                            </figcaption>
-                        </figure>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
-                <a href="#">
-                    <div class="grid">
-                        <figure class="effect-zoe">
-                            <img class="grid-image" src="/imgs/photo-grid-6.jpg">
-                            <figcaption>
-                                <p class="instauser">
-                                    Dashing jewlery
-                                </p>
-                                <p class="price">€ 1.444</p>
-                            </figcaption>
-                        </figure>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
-                <a href="#">
-                    <div class="grid">
-                        <figure class="effect-zoe">
-                            <img class="grid-image" src="/imgs/photo-grid-7.jpg">
-                            <figcaption>
-                                <p class="instauser">
-                                    Color trausers
-                                </p>
-                                <p class="price">€ 230</p>
-                            </figcaption>
-                        </figure>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
-                <a href="#">
-                    <div class="grid">
-                        <figure class="effect-zoe">
-                            <img class="grid-image" src="/imgs/photo-grid-8.jpg">
-                            <figcaption>
-                                <p class="instauser">
-                                    Grey jacket
-                                </p>
-                                <p class="price">€ 3.230</p>
-                            </figcaption>
-                        </figure>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
-                <a href="#">
-                    <div class="grid">
-                        <figure class="effect-zoe">
-                            <img class="grid-image" src="/imgs/photo-grid-9.jpg">
-                            <figcaption>
-                                <p class="instauser">
-                                    Foggy forest
-                                </p>
-                                <p class="price">€ 230</p>
-                            </figcaption>
-                        </figure>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
-                <a href="#">
-                    <div class="grid">
-                        <figure class="effect-zoe">
-                            <img class="grid-image" src="/imgs/photo-grid-10.jpg">
-                            <figcaption>
-                                <p class="instauser">
-                                    Red stripes dress
-                                </p>
-                                <p class="price">€ 230</p>
-                            </figcaption>
-                        </figure>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
-                <a href="#">
-                    <div class="grid">
-                        <figure class="effect-zoe">
-                            <img class="grid-image" src="/imgs/photo-grid-11.jpg">
-                            <figcaption>
-                                <p class="instauser">
-                                    Golden rings
-                                </p>
-                                <p class="price">€ 3.230</p>
-                            </figcaption>
-                        </figure>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
-                <a href="#">
-                    <div class="grid">
-                        <figure class="effect-zoe">
-                            <img class="grid-image" src="/imgs/photo-grid-12.jpg">
-                            <figcaption>
-                                <p class="instauser">
-                                    Sculpture lorem ipsum
-                                </p>
-                                <p class="price">€ 230</p>
-                            </figcaption>
-                        </figure>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-4 col-sm-4 pad-grid pad-grid-h">
-                <a href="#">
-                    <div class="grid">
-                        <figure class="effect-zoe">
-                            <img class="grid-image" src="/imgs/photo-grid-h-1.jpg">
-                            <figcaption>
-                                <p class="instauser">
-                                    Sculpture conecteur
-                                </p>
-                                <p class="price">€ 30.230</p>
-                            </figcaption>
-                        </figure>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-4 col-sm-4 pad-grid pad-grid-h">
-                <a href="#">
-                    <div class="grid">
-                        <figure class="effect-zoe">
-                            <img class="grid-image" src="/imgs/photo-grid-h-2.jpg">
-                            <figcaption>
-                                <p class="instauser">
-                                    Red bikini
-                                </p>
-                                <p class="price">€ 12.002</p>
-                            </figcaption>
-                        </figure>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-4 col-sm-4 pad-grid pad-grid-h">
-                <a href="#">
-                    <div class="grid">
-                        <figure class="effect-zoe">
-                            <img class="grid-image" src="/imgs/photo-grid-h-3.jpg">
-                            <figcaption>
-                                <p class="instauser">
-                                    Golden rings
-                                </p>
-                                <p class="price">€ 8.925</p>
-                            </figcaption>
-                        </figure>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
+	<div class="container">
+		<div class="section-title">
+			Highlighted Works
+		</div>
+		<div>
+			<div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
+				<a href="#">
+					<div class="grid">
+						<figure class="effect-zoe">
+							<img class="grid-image" src="/imgs/photo-grid-1.jpg">
+							<figcaption>
+								<p class="instauser">
+									Black dress
+								</p>
+								<p class="price">€ 3.230</p>
+							</figcaption>
+						</figure>
+					</div>
+				</a>
+			</div>
+			<div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
+				<a href="#">
+					<div class="grid">
+						<figure class="effect-zoe">
+							<img class="grid-image" src="/imgs/photo-grid-2.jpg">
+							<figcaption>
+								<p class="instauser">
+									Amazing bag
+								</p>
+								<p class="price">€ 230</p>
+							</figcaption>
+						</figure>
+					</div>
+				</a>
+			</div>
+			<div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
+				<a href="#">
+					<div class="grid">
+						<figure class="effect-zoe">
+							<img class="grid-image" src="/imgs/photo-grid-3.jpg">
+							<figcaption>
+								<p class="instauser">
+									White &amp; grey dress
+								</p>
+								<p class="price">€ 1.444</p>
+							</figcaption>
+						</figure>
+					</div>
+				</a>
+			</div>
+			<div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
+				<a href="#">
+					<div class="grid">
+						<figure class="effect-zoe">
+							<img class="grid-image" src="/imgs/photo-grid-4.jpg">
+							<figcaption>
+								<p class="instauser">
+									Water scarf
+								</p>
+								<p class="price">€ 3.230</p>
+							</figcaption>
+						</figure>
+					</div>
+				</a>
+			</div>
+			<div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
+				<a href="#">
+					<div class="grid">
+						<figure class="effect-zoe">
+							<img class="grid-image" src="/imgs/photo-grid-5.jpg">
+							<figcaption>
+								<p class="instauser">
+									Dashing jewlery
+								</p>
+								<p class="price">€ 230</p>
+							</figcaption>
+						</figure>
+					</div>
+				</a>
+			</div>
+			<div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
+				<a href="#">
+					<div class="grid">
+						<figure class="effect-zoe">
+							<img class="grid-image" src="/imgs/photo-grid-6.jpg">
+							<figcaption>
+								<p class="instauser">
+									Dashing jewlery
+								</p>
+								<p class="price">€ 1.444</p>
+							</figcaption>
+						</figure>
+					</div>
+				</a>
+			</div>
+			<div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
+				<a href="#">
+					<div class="grid">
+						<figure class="effect-zoe">
+							<img class="grid-image" src="/imgs/photo-grid-7.jpg">
+							<figcaption>
+								<p class="instauser">
+									Color trausers
+								</p>
+								<p class="price">€ 230</p>
+							</figcaption>
+						</figure>
+					</div>
+				</a>
+			</div>
+			<div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
+				<a href="#">
+					<div class="grid">
+						<figure class="effect-zoe">
+							<img class="grid-image" src="/imgs/photo-grid-8.jpg">
+							<figcaption>
+								<p class="instauser">
+									Grey jacket
+								</p>
+								<p class="price">€ 3.230</p>
+							</figcaption>
+						</figure>
+					</div>
+				</a>
+			</div>
+			<div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
+				<a href="#">
+					<div class="grid">
+						<figure class="effect-zoe">
+							<img class="grid-image" src="/imgs/photo-grid-9.jpg">
+							<figcaption>
+								<p class="instauser">
+									Foggy forest
+								</p>
+								<p class="price">€ 230</p>
+							</figcaption>
+						</figure>
+					</div>
+				</a>
+			</div>
+			<div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
+				<a href="#">
+					<div class="grid">
+						<figure class="effect-zoe">
+							<img class="grid-image" src="/imgs/photo-grid-10.jpg">
+							<figcaption>
+								<p class="instauser">
+									Red stripes dress
+								</p>
+								<p class="price">€ 230</p>
+							</figcaption>
+						</figure>
+					</div>
+				</a>
+			</div>
+			<div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
+				<a href="#">
+					<div class="grid">
+						<figure class="effect-zoe">
+							<img class="grid-image" src="/imgs/photo-grid-11.jpg">
+							<figcaption>
+								<p class="instauser">
+									Golden rings
+								</p>
+								<p class="price">€ 3.230</p>
+							</figcaption>
+						</figure>
+					</div>
+				</a>
+			</div>
+			<div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
+				<a href="#">
+					<div class="grid">
+						<figure class="effect-zoe">
+							<img class="grid-image" src="/imgs/photo-grid-12.jpg">
+							<figcaption>
+								<p class="instauser">
+									Sculpture lorem ipsum
+								</p>
+								<p class="price">€ 230</p>
+							</figcaption>
+						</figure>
+					</div>
+				</a>
+			</div>
+			<div class="col-md-4 col-sm-4 pad-grid pad-grid-h">
+				<a href="#">
+					<div class="grid">
+						<figure class="effect-zoe">
+							<img class="grid-image" src="/imgs/photo-grid-h-1.jpg">
+							<figcaption>
+								<p class="instauser">
+									Sculpture conecteur
+								</p>
+								<p class="price">€ 30.230</p>
+							</figcaption>
+						</figure>
+					</div>
+				</a>
+			</div>
+			<div class="col-md-4 col-sm-4 pad-grid pad-grid-h">
+				<a href="#">
+					<div class="grid">
+						<figure class="effect-zoe">
+							<img class="grid-image" src="/imgs/photo-grid-h-2.jpg">
+							<figcaption>
+								<p class="instauser">
+									Red bikini
+								</p>
+								<p class="price">€ 12.002</p>
+							</figcaption>
+						</figure>
+					</div>
+				</a>
+			</div>
+			<div class="col-md-4 col-sm-4 pad-grid pad-grid-h">
+				<a href="#">
+					<div class="grid">
+						<figure class="effect-zoe">
+							<img class="grid-image" src="/imgs/photo-grid-h-3.jpg">
+							<figcaption>
+								<p class="instauser">
+									Golden rings
+								</p>
+								<p class="price">€ 8.925</p>
+							</figcaption>
+						</figure>
+					</div>
+				</a>
+			</div>
+		</div>
+	</div>
 </section>
 <!-- /GRID -->
