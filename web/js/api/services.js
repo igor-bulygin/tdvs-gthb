@@ -117,7 +117,7 @@
 
 		productObject.get = _get;
 		productObject.modify = _modify;
-		productObject = _delete;
+		productObject.delete = _delete;
 
 		function _get(filters) {
 			var req = $services_util._get(api_point, filters);
