@@ -424,7 +424,9 @@ class Utils
 
 		// some products hasn't price and stock in database !!
 		if (array_key_exists('price_stock', $product)) {
-			return $product["price_stock"][0]["price"];
+			if (count($product["price_stock"]) > 0) {
+				return $product["price_stock"][0]["price"];
+			}
 		}
 		return null;
 	}
