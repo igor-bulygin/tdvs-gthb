@@ -30,25 +30,25 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 <?php $this->registerJs("var _upload_header_photo_url = '" . Url::to(["deviser/upload-header-photo", "slug" => $deviser["slug"]]) . "';", View::POS_HEAD); ?>
 <?php $this->registerJs("var _upload_profile_photo_url = '" . Url::to(["deviser/upload-profile-photo", "slug" => $deviser["slug"]]) . "';", View::POS_HEAD); ?>
 
-<div class="row no-gutter" ng-controller="deviserCtrl" ng-init="init()">
+<div class="row no-gutter" ng-controller="deviserCtrl as deviserCtrl">
 	<div class="col-xs-12 no-horizontal-padding create-profile">
 
 		<div class="row no-gutter">
 			<div class="col-xs-12 no-horizontal-padding header-photo flex flex-column">
 				<div class="header-photo-holder flex flex-column">
-					<img class="header-photo-img" ngf-background="headerphoto" angular-img-dl angular-img-dl-url="<?= $header_photo_url ?>" angular-img-dl-model="headerphoto">
+					<img class="header-photo-img" ngf-background="deviserCtrl.headerphoto" angular-img-dl angular-img-dl-url="<?= $header_photo_url ?>" angular-img-dl-model="deviserCtrl.headerphoto">
 
 					<div class="flex flex-justify-center flex-align-center flex-prop-1">
 						<div class="controls">
-							<span class="glyphicon glyphicon-refresh pointer" aria-hidden="true" ngf-select ng-model="headerphoto" ng-cloak ng-show="headerphoto"></span>
-							<span class="glyphicon glyphicon-resize-small pointer" aria-hidden="true" ng-click="crop_header()" ng-cloak ng-show="headerphoto"></span>
+							<span class="glyphicon glyphicon-refresh pointer" aria-hidden="true" ngf-select ng-model="deviserCtrl.headerphoto" ng-cloak ng-show="deviserCtrl.headerphoto"></span>
+							<span class="glyphicon glyphicon-resize-small pointer" aria-hidden="true" ng-click="deviserCtrl.crop_header()" ng-cloak ng-show="deviserCtrl.headerphoto"></span>
 						</div>
 
-						<div class="pointer drop-box flex flex-justify-center" ngf-drop ngf-select ng-model="headerphoto" class="drop-box"
+						<div class="pointer drop-box flex flex-justify-center" ngf-drop ngf-select ng-model="deviserCtrl.headerphoto" class="drop-box"
 							ngf-drag-over-class="dragover" ngf-multiple="false" ngf-allow-dir="false"
-							ngf-accept="'image/*'" ngf-drop-available="dropAvailable">
-							<div ng-cloak ng-hide="dropAvailable"><?= Yii::t("app/deviser", "File drop not available"); ?></div>
-							<div ng-cloak ng-show="dropAvailable && !headerphoto" class="funiv_ultra fs1 fc-3d fs-upper header-photo-txt">
+							ngf-accept="'image/*'" ngf-drop-available="deviserCtrl.dropAvailable">
+							<div ng-cloak ng-hide="deviserCtrl.dropAvailable"><?= Yii::t("app/deviser", "File drop not available"); ?></div>
+							<div ng-cloak ng-show="deviserCtrl.dropAvailable && !deviserCtrl.headerphoto" class="funiv_ultra fs1 fc-3d fs-upper header-photo-txt">
 								<span class="glyphicon glyphicons-up-arrow"></span>
 								<?= Yii::t("app/deviser", "Upload header photo") ?>
 							</div>
@@ -57,19 +57,19 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 
 					<div class="profile-photo-holder">
-						<img class="img-circle profile-photo-img" ngf-background="profilephoto" angular-img-dl angular-img-dl-url="<?= $profile_photo_url ?>" angular-img-dl-model="profilephoto">
+						<img class="img-circle profile-photo-img" ngf-background="deviserCtrl.profilephoto" angular-img-dl angular-img-dl-url="<?= $profile_photo_url ?>" angular-img-dl-model="deviserCtrl.profilephoto">
 
 						<div class="flex flex-justify-center flex-align-center profile-photo-controls-holder">
 							<div class="controls flex">
-								<span class="glyphicon glyphicon-refresh pointer" aria-hidden="true" ngf-select ng-model="profilephoto" ng-cloak ng-show="profilephoto"></span>
-								<span class="glyphicon glyphicon-resize-small pointer" aria-hidden="true" ng-click="crop_profile()" ng-cloak ng-show="profilephoto"></span>
+								<span class="glyphicon glyphicon-refresh pointer" aria-hidden="true" ngf-select ng-model="deviserCtrl.profilephoto" ng-cloak ng-show="deviserCtrl.profilephoto"></span>
+								<span class="glyphicon glyphicon-resize-small pointer" aria-hidden="true" ng-click="deviserCtrl.crop_profile()" ng-cloak ng-show="deviserCtrl.profilephoto"></span>
 							</div>
 
-							<div class="pointer drop-box flex flex-justify-center flex-align-center" ngf-drop ngf-select ng-model="profilephoto" class="drop-box"
+							<div class="pointer drop-box flex flex-justify-center flex-align-center" ngf-drop ngf-select ng-model="deviserCtrl.profilephoto" class="drop-box"
 							     ngf-drag-over-class="dragover" ngf-multiple="false" ngf-allow-dir="false"
-							     ngf-accept="'image/*'" ngf-drop-available="dropAvailable">
-								<div ng-cloak ng-hide="dropAvailable"><?= Yii::t("app/deviser", "File drop not available"); ?></div>
-								<div ng-cloak ng-show="dropAvailable && !profilephoto" class="funiv_ultra fs1 fc-3d fs-upper profile-photo-area">
+							     ngf-accept="'image/*'" ngf-drop-available="deviserCtrl.dropAvailable">
+								<div ng-cloak ng-hide="deviserCtrl.dropAvailable"><?= Yii::t("app/deviser", "File drop not available"); ?></div>
+								<div ng-cloak ng-show="deviserCtrl.dropAvailable && !deviserCtrl.profilephoto" class="funiv_ultra fs1 fc-3d fs-upper profile-photo-area">
 									<span class="glyphicon glyphicons-up-arrow"></span><br />
 									<?= Yii::t("app/deviser", "Upload profile photo") ?>
 								</div>
@@ -79,7 +79,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 				</div>
 
 				<div class="col-xs-12 flex flex-justify-center deviser">
-					<input type="text" placeholder="<?= Yii::t("app/deviser", "Your name"); ?>" ng-model="deviser.personal_info.name" class="input-name funiv_thin fs2-857 fc-9b fs-upper">
+					<input type="text" placeholder="<?= Yii::t("app/deviser", "Your name"); ?>" ng-model="deviserCtrl.deviser.personal_info.name" class="input-name funiv_thin fs2-857 fc-9b fs-upper">
 				</div>
 			</div>
 		</div>
@@ -88,7 +88,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 		<div class="row no-gutter">
 			<div class="col-xs-12 flex flex-justify-center">
-				<input type="text" placeholder="<?= Yii::t("app/deviser", "City"); ?>" class="input-city funiv_bold fs0-857 fs-upper fc-6d" ng-model="deviser.personal_info.city">
+				<input type="text" placeholder="<?= Yii::t("app/deviser", "City"); ?>" class="input-city funiv_bold fs0-857 fs-upper fc-6d" ng-model="deviserCtrl.deviser.personal_info.city">
 			</div>
 		</div>
 
@@ -100,7 +100,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 					angular-multi-select
 					id-property="country_code"
 					input-model='<?= Json::encode($countries) ?>'
-					output-model="deviser.personal_info.country"
+					output-model="deviserCtrl.deviser.personal_info.country"
 					output-keys="country_code"
 					output-type="value"
 
@@ -126,7 +126,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 					angular-multi-select
 					id-property="short_id"
 					input-model='<?= Json::encode($categories) ?>'
-					output-model="deviser.categories"
+					output-model="deviserCtrl.deviser.categories"
 					output-keys='short_id'
 					output-type="values"
 
@@ -156,9 +156,9 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 		<div class="row no-gutter">
 			<div class="col-xs-12 flex flex-justify-center">
-				<div class="btn btn-save-profile fc-fff funiv fs-upper fs0-786" ng-click="save()"><?= Yii::t("app/deviser", "Save") ?></div>
+				<div class="btn btn-save-profile fc-fff funiv fs-upper fs0-786" ng-click="deviserCtrl.save()"><?= Yii::t("app/deviser", "Save") ?></div>
 				<div style="width: 50px"></div>
-				<div style="background-color: #ccc" class="btn fc-fff funiv fs-upper fs0-786" ng-click="new_product()">Create new product</div>
+				<div style="background-color: #ccc" class="btn fc-fff funiv fs-upper fs0-786" ng-click="deviserCtrl.new_product()">Create new product</div>
 			</div>
 		</div>
 

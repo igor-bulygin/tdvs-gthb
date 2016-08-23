@@ -1,146 +1,164 @@
-var todevise = angular.module('todevise', ['ngAnimate', 'ui.bootstrap', 'angular-multi-select', 'angular-img-dl', 'global-deviser', 'global-desktop', 'api', "ngFileUpload", "ngImgCrop"]);
-var global_deviser = angular.module('global-deviser');
+(function () {
 
-todevise.controller('deviserCtrl', ["$scope", "$timeout", "$deviser", "$deviser_util", "toastr", "$uibModal", "Upload", "$http", "$product", "$product_util", function($scope, $timeout, $deviser, $deviser_util, toastr, $uibModal, Upload, $http, $product, $product_util) {
-	$scope.deviser = _deviser;
-	$scope.headerphoto = null;
-	$scope.profilephoto = null;
+	'use strict';
 
-	$scope.$watch("headerphoto", function(n, o) {
-		if ($scope.pause_watch_headerphoto === true) return;
-		if (n === null && o === null) return;
-		//Restore old profile picture if select dialog is canceled
-		if(n === null) {
-			$scope.headerphoto = o;
-		}
+	function controller($scope, $timeout, $deviser, $deviser_util, toastr, $uibModal, Upload, $http, $product, $product_util) {
+		var vm = this;
 
-		//Show the crop dialog after an image is selected
-		if (n && n.name !== undefined) {
-			$scope.crop_header();
-		}
-	});
+		vm.deviser = _deviser;
+		vm.headerphoto = null;
+		vm.profilephoto = null;
 
-	$scope.$watch("profilephoto", function(n, o) {
-		if ($scope.pause_watch_profilephoto === true) return;
-		if (n === null && o === null) return;
-		//Restore old profile picture if select dialog is canceled
-		if(n === null) {
-			$scope.profilephoto = o;
-		}
+		vm.crop_header = crop_header;
+		vm.crop_profile = crop_profile;
+		vm.new_product = new_product;
+		vm.save = save;
 
-		//Show the crop dialog after an image is selected
-		if (n && n.name !== undefined) {
-			$scope.crop_profile();
-		}
-	});
+		$scope.$watch("deviserCtrl.headerphoto", function (n, o) {
+			if (vm.pause_watch_headerphoto === true) return;
+			if (n === null && o === null) return;
+			//Restore old profile picture if select dialog is canceled
+			if (n === null) {
+				vm.headerphoto = o;
+			}
 
-	$scope.crop_header = function() {
-		var modalInstance = $uibModal.open({
-			templateUrl: 'template/modal/deviser/crop_rectangle.html',
-			controller: 'cropCtrl',
-			backdrop: 'static',
-			resolve: {
-				data: function () {
-					return {
-						'photo': $scope.headerphoto
-					}
-				}
+			//Show the crop dialog after an image is selected
+			if (n && n.name !== undefined) {
+				vm.crop_header();
 			}
 		});
 
-		modalInstance.result.then(function(data) {
-			$scope.pause_watch_headerphoto = true;
-			$scope.headerphoto = data.croppedphoto;
+		$scope.$watch("profilephoto", function (n, o) {
+			if (vm.pause_watch_profilephoto === true) return;
+			if (n === null && o === null) return;
 
-			//start watching again in the next digest
-			$timeout(function() {
-				$scope.pause_watch_headerphoto = false;
-			});
-		}, function () {
-			//Cancel
-		});
-	};
+			//Restore old profile picture if select dialog is canceled
+			if (n === null) {
+				vm.profilephoto = o;
+			}
 
-	$scope.crop_profile = function() {
-		var modalInstance = $uibModal.open({
-			templateUrl: 'template/modal/deviser/crop_circle.html',
-			controller: 'cropCtrl',
-			backdrop: 'static',
-			resolve: {
-				data: function () {
-					return {
-						'photo': $scope.profilephoto
-					}
-				}
+			//Show the crop dialog after an image is selected
+			if (n && n.name !== undefined) {
+				vm.crop_profile();
 			}
 		});
 
-		modalInstance.result.then(function(data) {
-			$scope.pause_watch_profilephoto = true;
-			$scope.profilephoto = data.croppedphoto;
-
-			//start watching again in the next digest
-			$timeout(function() {
-				$scope.pause_watch_profilephoto = false;
+		function crop_header() {
+			var modalInstance = $uibModal.open({
+				templateUrl: 'template/modal/deviser/crop_rectangle.html',
+				controller: 'cropCtrl',
+				backdrop: 'static',
+				resolve: {
+					data: function () {
+						return {
+							'photo': vm.headerphoto
+						}
+					}
+				}
 			});
-		}, function () {
-			//Cancel
-		});
-	};
 
-	$scope.new_product = function() {
-		var _product = $product_util.newProduct($scope.deviser.short_id);
-		$product.modify("POST", _product).then(function(data) {
-			window.location.href = window.location.origin + "/" + $scope.deviser.slug + "/edit-work/" + data.short_id + "/";
-		}, function(err) {
-			toastr.error("Couldn't create product!", err);
-		});
-	};
+			modalInstance.result.then(function (data) {
+				vm.pause_watch_headerphoto = true;
+				vm.headerphoto = data.croppedphoto;
 
-	$scope.save = function() {
-
-		$deviser.modify("POST", $scope.deviser).then(function() {
-			toastr.success("Deviser saved successfully!");
-		}, function(err) {
-			toastr.error("Failed saving deviser!", err);
-		});
-
-		if($scope.headerphoto) {
-			Upload.upload({
-				headers : {
-					'X-CSRF-TOKEN' : yii.getCsrfToken()
-				},
-				url: _upload_header_photo_url,
-				data: {'file': $scope.headerphoto}
-			}).then(function(resp) {
-				//console.log('file ' + resp.config.file.name + 'uploaded. Response: ' + resp.data);
-				$scope.deviser = resp.data;
-				toastr.success("Uploaded successfully headerphoto photo", resp.config.data.file.name);
-			}, function(err) {
-				toastr.error("Error while uploading headerphoto photo", err)
-			}, function(e) {
-				//var progressPercentage = parseInt(100.0 * e.loaded / e.total);
-				//console.log('progress: ' + progressPercentage + '% ' + e.config.file.name);
+				//start watching again in the next digest
+				$timeout(function () {
+					vm.pause_watch_headerphoto = false;
+				});
+			}, function () {
+				//Cancel
 			});
-		}
+		};
 
-		if($scope.profilephoto) {
-			Upload.upload({
-				headers : {
-					'X-CSRF-TOKEN' : yii.getCsrfToken()
-				},
-				url: _upload_profile_photo_url,
-				data: {'file': $scope.profilephoto}
-			}).then(function(resp) {
-				//console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
-				$scope.deviser = resp.data;
-				toastr.success("Uploaded successfully profile photo", resp.config.data.file.name);
-			}, function(err) {
-				toastr.error("Error while uploading profile photo", err)
-			}, function(e) {
-				//var progressPercentage = parseInt(100.0 * e.loaded / e.total);
-				//console.log('progress: ' + progressPercentage + '% ' + e.config.file.name);
+		function crop_profile() {
+			var modalInstance = $uibModal.open({
+				templateUrl: 'template/modal/deviser/crop_circle.html',
+				controller: 'cropCtrl',
+				backdrop: 'static',
+				resolve: {
+					data: function () {
+						return {
+							'photo': vm.profilephoto
+						}
+					}
+				}
+			});
+
+			modalInstance.result.then(function (data) {
+				vm.pause_watch_profilephoto = true;
+				vm.profilephoto = data.croppedphoto;
+
+				//start watching again in the next digest
+				$timeout(function () {
+					vm.pause_watch_profilephoto = false;
+				});
+			}, function () {
+				//Cancel
+			});
+		};
+
+		function new_product() {
+			var _product = $product_util.newProduct(vm.deviser.short_id);
+			$product.modify("POST", _product).then(function (data) {
+				window.location.href = window.location.origin + "/" + vm.deviser.slug + "/edit-work/" + data.short_id + "/";
+			}, function (err) {
+				toastr.error("Couldn't create product!", err);
 			});
 		}
-	};
-}]);
+
+		function save() {
+			$deviser.modify("POST", vm.deviser).then(function () {
+				toastr.success("Deviser saved successfully!");
+			}, function (err) {
+				toastr.error("Failed saving deviser!", err);
+			});
+
+			if (vm.headerphoto) {
+				Upload.upload({
+					headers: {
+						'X-CSRF-TOKEN': yii.getCsrfToken()
+					},
+					url: _upload_header_photo_url,
+					data: {
+						'file': vm.headerphoto
+					}
+				}).then(function (resp) {
+					//console.log('file ' + resp.config.file.name + 'uploaded. Response: ' + resp.data);
+					vm.deviser = resp.data;
+					toastr.success("Uploaded successfully headerphoto photo", resp.config.data.file.name);
+				}, function (err) {
+					toastr.error("Error while uploading headerphoto photo", err)
+				}, function (e) {
+					//var progressPercentage = parseInt(100.0 * e.loaded / e.total);
+					//console.log('progress: ' + progressPercentage + '% ' + e.config.file.name);
+				});
+			}
+
+			if ($scope.profilephoto) {
+				Upload.upload({
+					headers: {
+						'X-CSRF-TOKEN': yii.getCsrfToken()
+					},
+					url: _upload_profile_photo_url,
+					data: {
+						'file': vm.profilephoto
+					}
+				}).then(function (resp) {
+					//console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
+					vm.deviser = resp.data;
+					toastr.success("Uploaded successfully profile photo", resp.config.data.file.name);
+				}, function (err) {
+					toastr.error("Error while uploading profile photo", err)
+				}, function (e) {
+					//var progressPercentage = parseInt(100.0 * e.loaded / e.total);
+					//console.log('progress: ' + progressPercentage + '% ' + e.config.file.name);
+				});
+			}
+		}
+
+	}
+
+	angular.module('todevise', ['ngAnimate', 'ui.bootstrap', 'angular-multi-select', 'angular-img-dl', 'global-deviser', 'global-desktop', 'api', 'ngFileUpload', 'ngImgCrop'])
+		.controller('deviserCtrl', controller)
+
+}());
