@@ -25,15 +25,18 @@ use app\models\Faq;
 use yii\web\Response;
 use app\models\Term;
 
-class PublicController extends CController {
+class PublicController extends CController
+{
 	public $defaultAction = "index";
 
-	public function actionError() {
+	public function actionError()
+	{
 		//error_log("Error public", 4);
 		//die();
 	}
 
-	public function actionIndex() {
+	public function actionIndex()
+	{
 		$lang = Yii::$app->language;
 
 		$banners = [];
@@ -147,7 +150,7 @@ class PublicController extends CController {
 					'categories' => [
 						'$in' => array_map(function ($category) {
 							return $category['short_id'];
-						}, ModelUtils::getSubCategories($category['short_id']) )
+						}, ModelUtils::getSubCategories($category['short_id']))
 					]
 				];
 			} else {
@@ -194,74 +197,77 @@ class PublicController extends CController {
 		]);
 	}
 
-    public function actionIndexB() {
+	public function actionIndexB()
+	{
 
-        $works = [];
-        $banners = [];
-        //TODO: Fix, this should be random
-        $devisers = Yii::$app->mongodb->getCollection('person')
-            ->aggregate(
-                [
-                    '$match' => [
-                        "type" => [
-                            '$in' => [
-                                Person::DEVISER
-                            ]
-                        ]
-                    ]
-                ],
-                [
-                    '$sample' => [
-                        'size' => 4
-                    ]
-                ]
-            );
+		$works = [];
+		$banners = [];
+		//TODO: Fix, this should be random
+		$devisers = Yii::$app->mongodb->getCollection('person')
+			->aggregate(
+				[
+					'$match' => [
+						"type" => [
+							'$in' => [
+								Person::DEVISER
+							]
+						]
+					]
+				],
+				[
+					'$sample' => [
+						'size' => 4
+					]
+				]
+			);
 
-        foreach ($devisers as $key => &$deviser) {
-            $deviserWorks = Yii::$app->mongodb->getCollection('product')
-                ->aggregate(
-                    [
-                        '$project' => [
-                            "short_id" => 1, "media" => 1, "slug" => 1, "deviser_id" => 1, "categories" => 1
-                        ]
-                    ],
-                    [
-                        '$match' => [
-                            "deviser_id" => $deviser["short_id"]
-                        ]
-                    ],
-                    [
-                        '$sample' => [
-                            'size' => 4
-                        ]
-                    ]
-                );
+		foreach ($devisers as $key => &$deviser) {
+			$deviserWorks = Yii::$app->mongodb->getCollection('product')
+				->aggregate(
+					[
+						'$project' => [
+							"short_id" => 1, "media" => 1, "slug" => 1, "name" => 1, "price_stock" => 1, "deviser_id" => 1, "categories" => 1
+						]
+					],
+					[
+						'$match' => [
+							"deviser_id" => $deviser["short_id"]
+						]
+					],
+					[
+						'$sample' => [
+							'size' => 4
+						]
+					]
+				);
 
-            foreach ($deviserWorks as $key => &$work) {
-                $work['img'] = ModelUtils::getProductMainPhoto($work);
-                $work["slug"] = @Utils::l($work["slug"]) ?: " ";
-            }
-            $works = array_merge($works, $deviserWorks);
+			foreach ($deviserWorks as $key => &$work) {
+				$work['img'] = ModelUtils::getProductMainPhoto($work);
+				$work["slug"] = @Utils::l($work["slug"]) ?: " ";
+				$work["name"] = @Utils::l($work["name"]) ?: " ";
+			}
+			$works = array_merge($works, $deviserWorks);
 
-            $deviser['works'] = $deviserWorks;
-            $deviser['name'] = ModelUtils::getDeviserFullName($deviser);
-            $deviser['category'] = ModelUtils::getDeviserCategoriesNames($deviser)[0];
-            $deviser['img'] = ModelUtils::getDeviserAvatar($deviser);
-            $deviser['background'] = ModelUtils::getDeviserHeader($deviser);
-        }
-        $categories = [];
-        $this->layout = '/desktop/public-2.php';
-        return $this->render("index-2", [
-            'banners' => $banners,
-            'devisers' => $devisers,
-            'works12' => array_slice($works, 0, 12),
-            'works3' => array_slice($works, 12, 3),
-            'categories' => $categories
-        ]);
-    }
+			$deviser['works'] = $deviserWorks;
+			$deviser['name'] = ModelUtils::getDeviserFullName($deviser);
+			$deviser['category'] = ModelUtils::getDeviserCategoriesNames($deviser)[0];
+			$deviser['img'] = ModelUtils::getDeviserAvatar($deviser);
+			$deviser['background'] = ModelUtils::getDeviserHeader($deviser);
+		}
+		$categories = [];
+		$this->layout = '/desktop/public-2.php';
+		return $this->render("index-2", [
+			'banners' => $banners,
+			'devisers' => $devisers,
+			'works12' => array_slice($works, 0, 12),
+			'works3' => array_slice($works, 12, 3),
+			'categories' => $categories
+		]);
+	}
 
 
-    public function actionCategory($category_id, $slug) {
+	public function actionCategory($category_id, $slug)
+	{
 
 		$tmp = Yii::$app->mongodb->getCollection('product')
 			->aggregate(
@@ -275,7 +281,7 @@ class PublicController extends CController {
 						'categories' => [
 							'$in' => array_map(function ($category) {
 								return $category['short_id'];
-							}, ModelUtils::getSubCategories($category_id) )
+							}, ModelUtils::getSubCategories($category_id))
 						]
 					]
 				]
@@ -300,7 +306,8 @@ class PublicController extends CController {
 		]);
 	}
 
-	public function actionProduct($category_id, $product_id, $slug) {
+	public function actionProduct($category_id, $product_id, $slug)
+	{
 
 		$product = Product::find()
 			->where([
@@ -385,7 +392,8 @@ class PublicController extends CController {
 		]);
 	}
 
-	public function actionDeviser($deviser_id, $slug) {
+	public function actionDeviser($deviser_id, $slug)
+	{
 		$deviser = Person::find()
 			->where([
 				"short_id" => $deviser_id,
@@ -422,13 +430,14 @@ class PublicController extends CController {
 		]);
 	}
 
-	public function actionCart(){
+	public function actionCart()
+	{
 		//Manage ajax query an return feedback
 		if (Yii::$app->request->isAjax) {
 			Yii::$app->response->format = Response::FORMAT_JSON;
 
 			$res = array(
-				'body'    => date('Y-m-d H:i:s'),
+				'body' => date('Y-m-d H:i:s'),
 				'success' => true,
 			);
 
@@ -441,7 +450,8 @@ class PublicController extends CController {
 		]);
 	}
 
-	public function actionFaq(){
+	public function actionFaq()
+	{
 		$lang = Yii::$app->language;
 
 		// $answersAndQuestions = Faq::find()
@@ -452,7 +462,7 @@ class PublicController extends CController {
 		$groupOfFaqs = Faq::find()
 			->asArray()->all();
 
-		foreach ($groupOfFaqs as $key => &$oneFaq){
+		foreach ($groupOfFaqs as $key => &$oneFaq) {
 			Utils::l_collection($oneFaq['faqs'], "question");
 			Utils::l_collection($oneFaq['faqs'], "answer");
 			$oneFaq['title'] = Utils::l($oneFaq['title']);
@@ -464,7 +474,8 @@ class PublicController extends CController {
 		]);
 	}
 
-	public function actionAbout(){
+	public function actionAbout()
+	{
 
 		return $this->render("about", [
 			'test' => 'this is a test text for about'
@@ -472,13 +483,14 @@ class PublicController extends CController {
 	}
 
 
-	public function actionTerms(){
+	public function actionTerms()
+	{
 		$lang = Yii::$app->language;
 
 		$groupOfTerms = Term::find()
 			->asArray()->all();
 
-		foreach ($groupOfTerms as $key => &$oneTerm){
+		foreach ($groupOfTerms as $key => &$oneTerm) {
 			Utils::l_collection($oneTerm['terms'], "question");
 			Utils::l_collection($oneTerm['terms'], "answer");
 			$oneTerm['title'] = Utils::l($oneTerm['title']);
@@ -490,7 +502,8 @@ class PublicController extends CController {
 		]);
 	}
 
-	public function actionContact(){
+	public function actionContact()
+	{
 		$dropdown_members = ['a' => 'ORDERS'];
 		$model = new ContactForm();
 
@@ -523,25 +536,26 @@ class PublicController extends CController {
 		}
 	}
 
-	public function actionBecome(){
+	public function actionBecome()
+	{
 		$model = new Become();
 		//print_r(Yii::$app->request->post());
- 		//info@todevise.com, agrigoriu@todevise.com y jordioliu@todevise.com.
-        $showCheckEmail = false;
+		//info@todevise.com, agrigoriu@todevise.com y jordioliu@todevise.com.
+		$showCheckEmail = false;
 
 		if ($model->load(Yii::$app->request->post())) {
 
-				$post = Yii::$app->request->post()['Become'];
+			$post = Yii::$app->request->post()['Become'];
 
-				Yii::$app->mailer->compose('request',[
-					'post' => $post
-				])
+			Yii::$app->mailer->compose('request', [
+				'post' => $post
+			])
 				->setFrom('no-reply@todevise.com')
 				->setTo('info@todevise.com')
 				->setSubject('Deviser request')
 				->send();
 
-            $showCheckEmail = true;
+			$showCheckEmail = true;
 
 //				Yii::$app->mailer->compose('request',[
 //					'post' => $post
@@ -558,8 +572,8 @@ class PublicController extends CController {
 //				->send();
 
 
-			 //return $res;
-			 //return $this->redirect(['view', 'id' => $model->code]);
+			//return $res;
+			//return $this->redirect(['view', 'id' => $model->code]);
 		}
 
 		return $this->render("become", ['model' => $model, "showCheckEmail" => $showCheckEmail]);

@@ -30,9 +30,9 @@ $this->title = 'Todevise / Home';
                             <img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize(@$work['img'])->resize(362, 450) ?>">
                             <figcaption>
                                 <p class="instauser">
-                                    Black dress
+                                    <?= $work["name"] ?>
                                 </p>
-                                <p class="price">€ 3.230</p>
+                                <p class="price">€ <?= Utils::minPrice($work) ?></p>
                             </figcaption>
                         </figure>
                     </div>
@@ -47,9 +47,9 @@ $this->title = 'Todevise / Home';
                             <img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize(@$work['img'])->resize(375, 220) ?>">
                             <figcaption>
                                 <p class="instauser">
-                                    Sculpture conecteur
+                                    <?= $work["name"] ?>
                                 </p>
-                                <p class="price">€ 30.230</p>
+                                <p class="price">€ <?= Utils::minPrice($work) ?></p>
                             </figcaption>
                         </figure>
                     </div>
