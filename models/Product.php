@@ -118,4 +118,31 @@ class Product extends CActiveRecord {
 		Utils::rmdir($product_path);
 	}
 
+	public function fields()
+	{
+		return [
+			'_id',
+			'short_id',
+			'deviser_id',
+			'enabled',
+			'categories',
+			'collections',
+			'name',
+			'slug',
+			'description',
+			'media',
+			'options',
+			'madetoorder',
+			'sizechart',
+			'bespoke',
+			'preorder',
+			'returns',
+			'warranty',
+			'currency',
+			'weight_unit',
+			'price_stock',
+		];
+	}
+
+
 }
