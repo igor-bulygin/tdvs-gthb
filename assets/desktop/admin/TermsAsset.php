@@ -10,7 +10,10 @@ class TermsAsset extends AssetBundle {
 		'css/desktop/admin/terms.css'
 	];
 	public $js = [
-		'js/desktop/admin/terms.js'
+		'js/desktop/admin/terms.js',
+		'js/util/util.js',
+		'js/util/treeService.js',
+		'js/api/termDataService.js'
 	];
 	public $depends = [
 		'app\assets\api\ApiAsset',

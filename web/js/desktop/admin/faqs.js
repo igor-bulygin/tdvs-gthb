@@ -236,7 +236,7 @@
 			node.node.original.parent = node.node.parent;
 			var tmp_node = $category_util.nodeToCategory(node.node.original, vm);
 			$faqs.modify("POST", tmp_node).then(function (category) {
-				vm.load_faqs();
+				getFaqs();
 				toastr.success("Category moved!");
 			}, function (err) {
 				toastr.error("Couldn't move category!", err);
@@ -264,7 +264,7 @@
 
 			modalInstance.result.then(function () {
 				$faqs.modify("delete", category).then(function (category) {
-					vm.load_faqs();
+					getFaqs();
 					toastr.success("Category deleted!");
 				}, function (err) {
 					toastr.error("Couldn't remove category!", err);
