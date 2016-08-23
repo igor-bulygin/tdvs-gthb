@@ -254,6 +254,33 @@ class PublicController extends CController
 			$deviser['img'] = ModelUtils::getDeviserAvatar($deviser);
 			$deviser['background'] = ModelUtils::getDeviserHeader($deviser);
 		}
+
+		// TODO search only products needed, and use infinite scroll (this is only for demo)
+		$moreWork = Yii::$app->mongodb->getCollection('product')
+			->aggregate(
+				[
+//					'$match' => [
+//						"type" => [
+//							'$in' => [
+//								Person::DEVISER
+//							]
+//						]
+//					]
+				],
+				[
+					'$sample' => [
+						'size' => 4
+					]
+				]
+			);
+		$moreWork = array_slice($moreWork, 0, 45);
+		foreach ($moreWork as $key => &$work) {
+			$work['img'] = ModelUtils::getProductMainPhoto($work);
+			$work["slug"] = @Utils::l($work["slug"]) ?: " ";
+			$work["name"] = @Utils::l($work["name"]) ?: " ";
+		}
+
+
 		$categories = [];
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("index-2", [
@@ -261,6 +288,20 @@ class PublicController extends CController
 			'devisers' => $devisers,
 			'works12' => array_slice($works, 0, 12),
 			'works3' => array_slice($works, 12, 3),
+			'moreWork' => [
+				[
+					"twelve" => array_slice($moreWork, 0, 12),
+					"three" => array_slice($moreWork, 12, 3),
+				],
+				[
+					"twelve" => array_slice($moreWork, 15, 12),
+					"three" => array_slice($moreWork, 27, 3),
+				],
+				[
+					"twelve" => array_slice($moreWork, 30, 12),
+					"three" => array_slice($moreWork, 42, 3),
+				],
+			],
 			'categories' => $categories
 		]);
 	}

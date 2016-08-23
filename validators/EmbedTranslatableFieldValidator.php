@@ -22,7 +22,7 @@ class EmbedTranslatableFieldValidator extends Validator
         $attr = $object->{$attribute};
 
         if (!is_array($attr)) {
-            $this->addError($object, $attribute, 'should be an array');
+            $this->addError($object, $attribute, ' must be an array');
         }
 
         if (count($attr) == 0) {

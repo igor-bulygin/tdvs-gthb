@@ -154,231 +154,43 @@ $this->title = 'Todevise / Home';
 			Highlighted Works
 		</div>
 		<div>
+			<?php foreach ($moreWork as $worksGroup) { ?>
+			<?php foreach ($worksGroup["twelve"] as $i => $work) { ?>
 			<div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
 				<a href="#">
 					<div class="grid">
 						<figure class="effect-zoe">
-							<img class="grid-image" src="/imgs/photo-grid-1.jpg">
+							<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize(@$work['img'])->resize(362, 450) ?>">
 							<figcaption>
 								<p class="instauser">
-									Black dress
+<!--									--><?//= $work["name"] ?>
 								</p>
-								<p class="price">€ 3.230</p>
+								<p class="price">€ <?= Utils::minPrice($work) ?></p>
 							</figcaption>
 						</figure>
 					</div>
 				</a>
 			</div>
-			<div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
-				<a href="#">
-					<div class="grid">
-						<figure class="effect-zoe">
-							<img class="grid-image" src="/imgs/photo-grid-2.jpg">
-							<figcaption>
-								<p class="instauser">
-									Amazing bag
-								</p>
-								<p class="price">€ 230</p>
-							</figcaption>
-						</figure>
-					</div>
-				</a>
-			</div>
-			<div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
-				<a href="#">
-					<div class="grid">
-						<figure class="effect-zoe">
-							<img class="grid-image" src="/imgs/photo-grid-3.jpg">
-							<figcaption>
-								<p class="instauser">
-									White &amp; grey dress
-								</p>
-								<p class="price">€ 1.444</p>
-							</figcaption>
-						</figure>
-					</div>
-				</a>
-			</div>
-			<div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
-				<a href="#">
-					<div class="grid">
-						<figure class="effect-zoe">
-							<img class="grid-image" src="/imgs/photo-grid-4.jpg">
-							<figcaption>
-								<p class="instauser">
-									Water scarf
-								</p>
-								<p class="price">€ 3.230</p>
-							</figcaption>
-						</figure>
-					</div>
-				</a>
-			</div>
-			<div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
-				<a href="#">
-					<div class="grid">
-						<figure class="effect-zoe">
-							<img class="grid-image" src="/imgs/photo-grid-5.jpg">
-							<figcaption>
-								<p class="instauser">
-									Dashing jewlery
-								</p>
-								<p class="price">€ 230</p>
-							</figcaption>
-						</figure>
-					</div>
-				</a>
-			</div>
-			<div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
-				<a href="#">
-					<div class="grid">
-						<figure class="effect-zoe">
-							<img class="grid-image" src="/imgs/photo-grid-6.jpg">
-							<figcaption>
-								<p class="instauser">
-									Dashing jewlery
-								</p>
-								<p class="price">€ 1.444</p>
-							</figcaption>
-						</figure>
-					</div>
-				</a>
-			</div>
-			<div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
-				<a href="#">
-					<div class="grid">
-						<figure class="effect-zoe">
-							<img class="grid-image" src="/imgs/photo-grid-7.jpg">
-							<figcaption>
-								<p class="instauser">
-									Color trausers
-								</p>
-								<p class="price">€ 230</p>
-							</figcaption>
-						</figure>
-					</div>
-				</a>
-			</div>
-			<div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
-				<a href="#">
-					<div class="grid">
-						<figure class="effect-zoe">
-							<img class="grid-image" src="/imgs/photo-grid-8.jpg">
-							<figcaption>
-								<p class="instauser">
-									Grey jacket
-								</p>
-								<p class="price">€ 3.230</p>
-							</figcaption>
-						</figure>
-					</div>
-				</a>
-			</div>
-			<div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
-				<a href="#">
-					<div class="grid">
-						<figure class="effect-zoe">
-							<img class="grid-image" src="/imgs/photo-grid-9.jpg">
-							<figcaption>
-								<p class="instauser">
-									Foggy forest
-								</p>
-								<p class="price">€ 230</p>
-							</figcaption>
-						</figure>
-					</div>
-				</a>
-			</div>
-			<div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
-				<a href="#">
-					<div class="grid">
-						<figure class="effect-zoe">
-							<img class="grid-image" src="/imgs/photo-grid-10.jpg">
-							<figcaption>
-								<p class="instauser">
-									Red stripes dress
-								</p>
-								<p class="price">€ 230</p>
-							</figcaption>
-						</figure>
-					</div>
-				</a>
-			</div>
-			<div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
-				<a href="#">
-					<div class="grid">
-						<figure class="effect-zoe">
-							<img class="grid-image" src="/imgs/photo-grid-11.jpg">
-							<figcaption>
-								<p class="instauser">
-									Golden rings
-								</p>
-								<p class="price">€ 3.230</p>
-							</figcaption>
-						</figure>
-					</div>
-				</a>
-			</div>
-			<div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
-				<a href="#">
-					<div class="grid">
-						<figure class="effect-zoe">
-							<img class="grid-image" src="/imgs/photo-grid-12.jpg">
-							<figcaption>
-								<p class="instauser">
-									Sculpture lorem ipsum
-								</p>
-								<p class="price">€ 230</p>
-							</figcaption>
-						</figure>
-					</div>
-				</a>
-			</div>
+			<?php } ?>
+
+			<?php foreach ($worksGroup["three"] as $i => $work) { ?>
 			<div class="col-md-4 col-sm-4 pad-grid pad-grid-h">
 				<a href="#">
 					<div class="grid">
 						<figure class="effect-zoe">
-							<img class="grid-image" src="/imgs/photo-grid-h-1.jpg">
+							<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize(@$work['img'])->resize(375, 220) ?>">
 							<figcaption>
 								<p class="instauser">
-									Sculpture conecteur
+<!--									--><?//= $work["name"] ?>
 								</p>
-								<p class="price">€ 30.230</p>
+								<p class="price">€ <?= Utils::minPrice($work) ?></p>
 							</figcaption>
 						</figure>
 					</div>
 				</a>
 			</div>
-			<div class="col-md-4 col-sm-4 pad-grid pad-grid-h">
-				<a href="#">
-					<div class="grid">
-						<figure class="effect-zoe">
-							<img class="grid-image" src="/imgs/photo-grid-h-2.jpg">
-							<figcaption>
-								<p class="instauser">
-									Red bikini
-								</p>
-								<p class="price">€ 12.002</p>
-							</figcaption>
-						</figure>
-					</div>
-				</a>
-			</div>
-			<div class="col-md-4 col-sm-4 pad-grid pad-grid-h">
-				<a href="#">
-					<div class="grid">
-						<figure class="effect-zoe">
-							<img class="grid-image" src="/imgs/photo-grid-h-3.jpg">
-							<figcaption>
-								<p class="instauser">
-									Golden rings
-								</p>
-								<p class="price">€ 8.925</p>
-							</figcaption>
-						</figure>
-					</div>
-				</a>
-			</div>
+			<?php } ?>
+			<?php } ?>
 		</div>
 	</div>
 </section>
