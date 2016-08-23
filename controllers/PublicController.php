@@ -194,7 +194,74 @@ class PublicController extends CController {
 		]);
 	}
 
-	public function actionCategory($category_id, $slug) {
+    public function actionIndexB() {
+
+        $works = [];
+        $banners = [];
+        //TODO: Fix, this should be random
+        $devisers = Yii::$app->mongodb->getCollection('person')
+            ->aggregate(
+                [
+                    '$match' => [
+                        "type" => [
+                            '$in' => [
+                                Person::DEVISER
+                            ]
+                        ]
+                    ]
+                ],
+                [
+                    '$sample' => [
+                        'size' => 4
+                    ]
+                ]
+            );
+
+        foreach ($devisers as $key => &$deviser) {
+            $deviserWorks = Yii::$app->mongodb->getCollection('product')
+                ->aggregate(
+                    [
+                        '$project' => [
+                            "short_id" => 1, "media" => 1, "slug" => 1, "deviser_id" => 1, "categories" => 1
+                        ]
+                    ],
+                    [
+                        '$match' => [
+                            "deviser_id" => $deviser["short_id"]
+                        ]
+                    ],
+                    [
+                        '$sample' => [
+                            'size' => 4
+                        ]
+                    ]
+                );
+
+            foreach ($deviserWorks as $key => &$work) {
+                $work['img'] = ModelUtils::getProductMainPhoto($work);
+                $work["slug"] = @Utils::l($work["slug"]) ?: " ";
+            }
+            $works = array_merge($works, $deviserWorks);
+
+            $deviser['works'] = $deviserWorks;
+            $deviser['name'] = ModelUtils::getDeviserFullName($deviser);
+            $deviser['category'] = ModelUtils::getDeviserCategoriesNames($deviser)[0];
+            $deviser['img'] = ModelUtils::getDeviserAvatar($deviser);
+            $deviser['background'] = ModelUtils::getDeviserHeader($deviser);
+        }
+        $categories = [];
+        $this->layout = '/desktop/public-2.php';
+        return $this->render("index-2", [
+            'banners' => $banners,
+            'devisers' => $devisers,
+            'works12' => array_slice($works, 0, 12),
+            'works3' => array_slice($works, 12, 3),
+            'categories' => $categories
+        ]);
+    }
+
+
+    public function actionCategory($category_id, $slug) {
 
 		$tmp = Yii::$app->mongodb->getCollection('product')
 			->aggregate(

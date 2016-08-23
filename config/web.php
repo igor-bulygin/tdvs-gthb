@@ -151,6 +151,7 @@ $config = [
                 ],
 
                 // Public routing
+                '/index-new' => 'public/index-b',
 
 				//Links for a cart listing
 				'cart/' => 'public/cart',
@@ -213,6 +214,7 @@ $config = [
                     'pattern' => 'api/<action:[^/.]*?>/',
                     'suffix' => '/'
                 ],
+
 
                 // API routing
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/faq'],
