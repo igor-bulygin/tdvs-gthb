@@ -8,7 +8,6 @@ use yii\mongodb\Collection;
 use yii\web\IdentityInterface;
 
 /**
- * @property mixed _id
  * @property string slug
  * @property string text_short_description
  * @property string text_biography
@@ -227,6 +226,98 @@ class Person extends CActiveRecord implements IdentityInterface {
         }
     }
 
+    /**
+     * Get brand name from Person
+     *
+     * @return string
+     */
+	public function getBrandName()
+	{
+		if (!isset($this->personal_info)) return "";
+
+		return $this->personal_info['name'] . ' ' . implode(" ", $this->personal_info['surnames']);
+	}
+
+	/**
+	 * Get the path to header background image
+	 *
+	 * @return string
+	 */
+	public function getHeaderBackgroundImage($urlify = true)
+	{
+		$image = "";
+		$fallback = "deviser_header_placeholder.jpg";
+
+		if (isset($this->media) && isset($this->media['header'])) {
+			$image = $this->media['header'];
+
+			if (!file_exists(Yii::getAlias("@web") . "/" . $this->short_id . "/" . $image )) {
+				$image = $fallback;
+			}
+		} else {
+			$image = $fallback;
+		}
+
+		if ($urlify === true) {
+			if ($image === $fallback) {
+				$image = Yii::getAlias("@web") . "/imgs/" . $image;
+			} else {
+				$image = Yii::getAlias("@deviser_url") . "/" . $this->short_id . "/" . $image;
+			}
+		}
+
+		return $image;
+	}
+
+	/**
+	 * Get the path to avatar image
+	 *
+	 * @return string
+	 */
+	public function getAvatarImage($urlify = true)
+	{
+		$image = "";
+		$fallback = "deviser_placeholder.png";
+
+		if (isset($this->media) && isset($this->media['profile'])) {
+			$image = $this->media['profile'];
+
+			if (!file_exists(Yii::getAlias("@web") . "/" . $this->short_id . "/" . $image )) {
+				$image = $fallback;
+			}
+		} else {
+			$image = $fallback;
+		}
+
+		if ($urlify === true) {
+			if ($image === $fallback) {
+				$image = Yii::getAlias("@web") . "/imgs/" . $image;
+			} else {
+				$image = Yii::getAlias("@deviser_url") . "/" . $this->short_id . "/" . $image;
+			}
+		}
+
+		return $image;
+	}
+
+	/**
+	 * Get the location from Person.
+	 * First get city, otherwise get country
+	 *
+	 * @return mixed|null
+	 */
+	public function getCityLabel()
+	{
+		if (isset($this->personal_info)) {
+			if (isset($this->personal_info['city'])) {
+				return $this->personal_info['city'];
+			} elseif (isset($this->personal_info['country'])) {
+				return $this->personal_info['country'];
+			}
+		}
+
+		return null;
+	}
 }
 
 

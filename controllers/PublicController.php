@@ -2,12 +2,15 @@
 
 namespace app\controllers;
 
+use app\helpers\CActiveRecord;
 use Yii;
 use app\models\Tag;
 use app\models\StaticText;
 use yii\helpers\Url;
 use app\models\Person;
 use app\helpers\Utils;
+use yii\mongodb\ActiveQuery;
+use yii\mongodb\Query;
 use yii\web\Controller;
 use app\models\Product;
 use app\models\Become;
@@ -199,87 +202,21 @@ class PublicController extends CController
 
 	public function actionIndexB()
 	{
-
-		$works = [];
 		$banners = [];
-		//TODO: Fix, this should be random
-		$devisers = Yii::$app->mongodb->getCollection('person')
-			->aggregate(
-				[
-					'$match' => [
-						"type" => [
-							'$in' => [
-								Person::DEVISER
-							]
-						]
-					]
-				],
-				[
-					'$sample' => [
-						'size' => 4
-					]
-				]
-			);
 
-		foreach ($devisers as $key => &$deviser) {
-			$deviserWorks = Yii::$app->mongodb->getCollection('product')
-				->aggregate(
-					[
-						'$project' => [
-							"short_id" => 1, "media" => 1, "slug" => 1, "name" => 1, "price_stock" => 1, "deviser_id" => 1, "categories" => 1
-						]
-					],
-					[
-						'$match' => [
-							"deviser_id" => $deviser["short_id"]
-						]
-					],
-					[
-						'$sample' => [
-							'size' => 4
-						]
-					]
-				);
+		// Devisers
+		$query = new ActiveQuery(Person::className());
+		// filter devisers related
+		// TODO improve random devisers
+		$query->limit(4)->offset(rand(1, 8));
+		$devisers = $query->all();
 
-			foreach ($deviserWorks as $key => &$work) {
-				$work['img'] = ModelUtils::getProductMainPhoto($work);
-				$work["slug"] = @Utils::l($work["slug"]) ?: " ";
-				$work["name"] = @Utils::l($work["name"]) ?: " ";
-			}
-			$works = array_merge($works, $deviserWorks);
-
-			$deviser['works'] = $deviserWorks;
-			$deviser['name'] = ModelUtils::getDeviserFullName($deviser);
-			$deviser['category'] = ModelUtils::getDeviserCategoriesNames($deviser)[0];
-			$deviser['img'] = ModelUtils::getDeviserAvatar($deviser);
-			$deviser['background'] = ModelUtils::getDeviserHeader($deviser);
-		}
-
-		// TODO search only products needed, and use infinite scroll (this is only for demo)
-		$moreWork = Yii::$app->mongodb->getCollection('product')
-			->aggregate(
-				[
-//					'$match' => [
-//						"type" => [
-//							'$in' => [
-//								Person::DEVISER
-//							]
-//						]
-//					]
-				],
-				[
-					'$sample' => [
-						'size' => 4
-					]
-				]
-			);
-		$moreWork = array_slice($moreWork, 0, 45);
-		foreach ($moreWork as $key => &$work) {
-			$work['img'] = ModelUtils::getProductMainPhoto($work);
-			$work["slug"] = @Utils::l($work["slug"]) ?: " ";
-			$work["name"] = @Utils::l($work["name"]) ?: " ";
-		}
-
+		// Works
+		$query = new ActiveQuery(Product::className());
+		// TODO improve random works
+		$query->limit(60)->offset(rand(1, 12));
+//		$query->limit(150);
+		$works = $query->all();
 
 		$categories = [];
 		$this->layout = '/desktop/public-2.php';
@@ -290,22 +227,76 @@ class PublicController extends CController
 			'works3' => array_slice($works, 12, 3),
 			'moreWork' => [
 				[
-					"twelve" => array_slice($moreWork, 0, 12),
-					"three" => array_slice($moreWork, 12, 3),
+					"twelve" => array_slice($works, 15, 12),
+					"three" => array_slice($works, 27, 3),
 				],
 				[
-					"twelve" => array_slice($moreWork, 15, 12),
-					"three" => array_slice($moreWork, 27, 3),
+					"twelve" => array_slice($works, 30, 12),
+					"three" => array_slice($works, 47, 3),
 				],
 				[
-					"twelve" => array_slice($moreWork, 30, 12),
-					"three" => array_slice($moreWork, 42, 3),
+					"twelve" => array_slice($works, 45, 12),
+					"three" => array_slice($works, 57, 3),
 				],
 			],
-			'categories' => $categories
+			'categories' => $categories,
 		]);
 	}
 
+	public function actionCategoryB($slug, $category_id)
+	{
+		$banners = [];
+
+		$category_id = '1a23b'; // "Art"
+//		$category_id = '2r67s'; // "Decoration"
+//		$category_id = '4a2b4'; // "Fashion"
+
+		// get the category object
+		$category = Category::findOne(["short_id" => $category_id]);
+//		print_r(count($category->getShortIds()));
+
+		// Devisers
+		$query = new ActiveQuery(Person::className());
+		// filter devisers related
+		$query->where(['categories' => $category->getShortIds()]);
+		// TODO improve random devisers
+		$query->limit(4)->offset(rand(1, 8));
+		$devisers = $query->all();
+
+		// Works
+		$query = new ActiveQuery(Product::className());
+		$query->where(['categories' => $category->getShortIds()]);
+		// TODO improve random works
+		$query->limit(60)->offset(rand(1, 12));
+//		$query->limit(150);
+		$works = $query->all();
+
+		$categories = [];
+
+		$this->layout = '/desktop/public-2.php';
+		return $this->render("index-2", [
+			'banners' => $banners,
+			'devisers' => $devisers,
+			'works12' => array_slice($works, 0, 12),
+			'works3' => array_slice($works, 12, 3),
+			'moreWork' => [
+				[
+					"twelve" => array_slice($works, 15, 12),
+					"three" => array_slice($works, 27, 3),
+				],
+				[
+					"twelve" => array_slice($works, 30, 12),
+					"three" => array_slice($works, 47, 3),
+				],
+				[
+					"twelve" => array_slice($works, 45, 12),
+					"three" => array_slice($works, 57, 3),
+				],
+			],
+			'categories' => $categories,
+		]);
+
+	}
 
 	public function actionCategory($category_id, $slug)
 	{

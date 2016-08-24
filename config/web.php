@@ -152,6 +152,7 @@ $config = [
 
                 // Public routing
                 '/index-new' => 'public/index-b',
+				'/category/<slug:[^/.]*?>/<category_id:[^/.]*?>' => 'public/category-b',
 
 				//Links for a cart listing
 				'cart/' => 'public/cart',

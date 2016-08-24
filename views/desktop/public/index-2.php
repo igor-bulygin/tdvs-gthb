@@ -1,4 +1,6 @@
 <?php
+use app\models\Person;
+use app\models\Product;
 use yii\web\View;
 use yii\helpers\Url;
 use app\models\Lang;
@@ -13,6 +15,9 @@ use app\assets\desktop\pub\Index2Asset;
 Index2Asset::register($this);
 
 $this->title = 'Todevise / Home';
+
+/** @var Person $deviser */
+/** @var Product $work */
 
 ?>
 
@@ -80,10 +85,10 @@ $this->title = 'Todevise / Home';
 						<div class="grid">
 							<figure class="effect-zoe">
 								<img class="grid-image"
-								     src="<?= Utils::url_scheme() ?><?= Utils::thumborize(@$work['img'])->resize(362, 450) ?>">
+								     src="<?= Utils::url_scheme() ?><?= Utils::thumborize($work->getMainImage())->resize(362, 450) ?>">
 								<figcaption>
 									<p class="instauser">
-										<?= $work["name"] ?>
+										<?= Utils::l($work->name) ?>
 									</p>
 									<p class="price">€ <?= Utils::minPrice($work) ?></p>
 								</figcaption>
@@ -98,10 +103,10 @@ $this->title = 'Todevise / Home';
 						<div class="grid">
 							<figure class="effect-zoe">
 								<img class="grid-image"
-								     src="<?= Utils::url_scheme() ?><?= Utils::thumborize(@$work['img'])->resize(375, 220) ?>">
+								     src="<?= Utils::url_scheme() ?><?= Utils::thumborize($work->getMainImage())->resize(375, 220) ?>">
 								<figcaption>
 									<p class="instauser">
-										<?= $work["name"] ?>
+										<?= Utils::l($work->name) ?>
 									</p>
 									<p class="price">€ <?= Utils::minPrice($work) ?></p>
 								</figcaption>
@@ -131,12 +136,12 @@ $this->title = 'Todevise / Home';
 							<button class="btn btn-default btn-follow"><i class="ion-star"></i><span>Follow</span>
 							</button>
 							<img class="showcase-image"
-							     src="<?= Utils::url_scheme() ?><?= Utils::thumborize(@$deviser['background'])->resize(350, 344) ?>">
+							     src="<?= Utils::url_scheme() ?><?= Utils::thumborize($deviser->getHeaderBackgroundImage())->resize(350, 344) ?>">
 							<figcaption>
 								<img class="showcase-image"
-								     src="<?= Utils::url_scheme() ?><?= Utils::thumborize(@$deviser['img'])->resize(0, 110) ?>">
-								<span class="name"><?= $deviser['name'] ?>r</span>
-								<span class="location">Boston, Massachusetts</span>
+								     src="<?= Utils::url_scheme() ?><?= Utils::thumborize($deviser->getAvatarImage())->resize(0, 110) ?>">
+								<span class="name"><?= $deviser->getBrandName() ?></span>
+								<span class="location"><?= $deviser->getCityLabel() ?></span>
 							</figcaption>
 						</figure>
 					</a>
@@ -160,10 +165,10 @@ $this->title = 'Todevise / Home';
 				<a href="#">
 					<div class="grid">
 						<figure class="effect-zoe">
-							<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize(@$work['img'])->resize(362, 450) ?>">
+							<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($work->getMainImage())->resize(362, 450) ?>">
 							<figcaption>
 								<p class="instauser">
-<!--									--><?//= $work["name"] ?>
+									<?= Utils::l($work->name) ?>
 								</p>
 								<p class="price">€ <?= Utils::minPrice($work) ?></p>
 							</figcaption>
@@ -178,10 +183,10 @@ $this->title = 'Todevise / Home';
 				<a href="#">
 					<div class="grid">
 						<figure class="effect-zoe">
-							<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize(@$work['img'])->resize(375, 220) ?>">
+							<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($work->getMainImage())->resize(375, 220) ?>">
 							<figcaption>
 								<p class="instauser">
-<!--									--><?//= $work["name"] ?>
+									<?= Utils::l($work->name) ?>
 								</p>
 								<p class="price">€ <?= Utils::minPrice($work) ?></p>
 							</figcaption>

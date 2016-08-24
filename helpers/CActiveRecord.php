@@ -6,6 +6,7 @@ use Exception;
 use yii\mongodb\ActiveRecord;
 
 /**
+ * @property mixed _id
  * @property string short_id
  */
 class CActiveRecord extends ActiveRecord {

@@ -7,7 +7,6 @@ use app\helpers\CActiveRecord;
 use yii\mongodb\Query;
 
 /**
- * @property mixed _id
  * @property string path
  * @property bool sizecharts
  * @property bool prints
@@ -116,6 +115,26 @@ class Category extends CActiveRecord {
 			from('category')->
 			where(["REGEX", "path", "/^$current_path/"])->all();
 	}
+
+	/**
+	 * Get short_id from current category, and optionally, child categories.
+	 *
+	 * @param null $current_path
+	 * @param bool $includeChild
+	 * @return array
+	 */
+	public function getShortIds($current_path = null, $includeChild = true) {
+
+		$ids = [$this->short_id];
+		if ($includeChild) {
+			$subs = $this->getSubCategories($current_path);
+			foreach ($subs as $sub) {
+				$ids[] = $sub["short_id"];
+			}
+		}
+		return $ids;
+	}
+
 
 	public function beforeSave($insert) {
 		/*
