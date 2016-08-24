@@ -218,9 +218,6 @@ class PublicController extends CController
 //		$query->limit(150);
 		$works = $query->all();
 
-		$headerCategories = Category::getHeaderCategories();
-		$footerCategories = Category::getFooterCategories();
-//		print_r(count($footerCategories));
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("index-2", [
 			'banners' => $banners,
@@ -241,8 +238,6 @@ class PublicController extends CController
 					"three" => array_slice($works, 57, 3),
 				],
 			],
-			'headerCategories' => $headerCategories,
-			'footerCategories' => $footerCategories,
 		]);
 	}
 
@@ -428,6 +423,18 @@ class PublicController extends CController
 		]);
 	}
 
+	public function actionProductB($slug, $product_id)
+	{
+		// get the category object
+		$product = Product::findOne(["short_id" => $product_id]);
+
+		$this->layout = '/desktop/public-2.php';
+		return $this->render("product-2", [
+			'product' => $product,
+		]);
+
+	}
+
 	public function actionDeviser($deviser_id, $slug)
 	{
 		$deviser = Person::find()
@@ -465,6 +472,20 @@ class PublicController extends CController
 			'works' => $works
 		]);
 	}
+
+	public function actionDeviserB($slug, $deviser_id)
+	{
+		// get the category object
+		$deviser = Person::findOne(["short_id" => $deviser_id]);
+
+		$this->layout = '/desktop/public-2.php';
+		return $this->render("deviser-2", [
+			'deviser' => $deviser,
+		]);
+
+	}
+
+
 
 	public function actionCart()
 	{

@@ -70,7 +70,7 @@ $this->title = 'Todevise / Home';
 		<div>
 			<?php foreach ($works12 as $i => $work) { ?>
 				<div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
-					<a href="#">
+					<a href="<?= Url::to(["public/product-b", "slug" => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
 						<div class="grid">
 							<figure class="effect-zoe">
 								<img class="grid-image"
@@ -88,7 +88,7 @@ $this->title = 'Todevise / Home';
 			<?php } ?>
 			<?php foreach ($works3 as $i => $work) { ?>
 				<div class="col-md-4 col-sm-4 pad-grid pad-grid-h">
-					<a href="#">
+					<a href="<?= Url::to(["public/product-b", "slug" => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
 						<div class="grid">
 							<figure class="effect-zoe">
 								<img class="grid-image"
@@ -120,7 +120,7 @@ $this->title = 'Todevise / Home';
 		<div>
 			<?php foreach ($devisers as $i => $deviser) { ?>
 				<div class="col-md-3 col-sm-3 col-xs-6 pad-showcase">
-					<a href="#">
+					<a href="<?= Url::to(["public/deviser-b", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id])?>">
 						<figure class="showcase">
 							<button class="btn btn-default btn-follow"><i class="ion-star"></i><span>Follow</span>
 							</button>
@@ -151,7 +151,7 @@ $this->title = 'Todevise / Home';
 			<?php foreach ($moreWork as $worksGroup) { ?>
 			<?php foreach ($worksGroup["twelve"] as $i => $work) { ?>
 			<div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
-				<a href="#">
+				<a href="<?= Url::to(["public/product-b", "slug" => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
 					<div class="grid">
 						<figure class="effect-zoe">
 							<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($work->getMainImage())->resize(362, 450) ?>">
@@ -169,7 +169,7 @@ $this->title = 'Todevise / Home';
 
 			<?php foreach ($worksGroup["three"] as $i => $work) { ?>
 			<div class="col-md-4 col-sm-4 pad-grid pad-grid-h">
-				<a href="#">
+				<a href="<?= Url::to(["public/product-b", "slug" => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
 					<div class="grid">
 						<figure class="effect-zoe">
 							<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($work->getMainImage())->resize(375, 220) ?>">

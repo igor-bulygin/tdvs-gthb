@@ -155,6 +155,8 @@ $config = [
                 '/index-new' => 'public/index',
                 '/index-old' => 'public/index-old',
 				'/category/<slug:[^/.]*?>/<category_id:[^/.]*?>' => 'public/category-b',
+				'/work/<slug:[^/.]*?>/<product_id:[^/.]*?>' => 'public/product-b',
+				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>' => 'public/deviser-b',
 
 				//Links for a cart listing
 				'cart/' => 'public/cart',
