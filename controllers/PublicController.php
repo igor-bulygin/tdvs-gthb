@@ -220,7 +220,7 @@ class PublicController extends CController
 
 		$headerCategories = Category::getHeaderCategories();
 		$footerCategories = Category::getFooterCategories();
-		print_r(count($footerCategories));
+//		print_r(count($footerCategories));
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("index-2", [
 			'banners' => $banners,
