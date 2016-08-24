@@ -473,20 +473,6 @@ class PublicController extends CController
 		]);
 	}
 
-	public function actionDeviserB($slug, $deviser_id)
-	{
-		// get the category object
-		$deviser = Person::findOne(["short_id" => $deviser_id]);
-
-		$this->layout = '/desktop/public-2.php';
-		return $this->render("deviser-2", [
-			'deviser' => $deviser,
-		]);
-
-	}
-
-
-
 	public function actionCart()
 	{
 		//Manage ajax query an return feedback

@@ -239,6 +239,18 @@ class Person extends CActiveRecord implements IdentityInterface {
 		return $this->personal_info['name'] . ' ' . implode(" ", $this->personal_info['surnames']);
 	}
 
+    /**
+     * Get first name from Person
+     *
+     * @return string
+     */
+	public function getName()
+	{
+		if (!isset($this->personal_info)) return "";
+
+		return $this->personal_info['name'];
+	}
+
 	/**
 	 * Get the path to header background image
 	 *

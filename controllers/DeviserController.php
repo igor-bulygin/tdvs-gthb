@@ -226,4 +226,27 @@ class DeviserController extends CController {
 
 		return $product;
 	}
+
+	public function actionStore($slug, $deviser_id)
+	{
+		// get the category object
+		$deviser = Person::findOne(["short_id" => $deviser_id]);
+
+		$this->layout = '/desktop/public-2.php';
+		return $this->render("store", [
+			'deviser' => $deviser,
+		]);
+	}
+
+	public function actionAbout($slug, $deviser_id)
+	{
+		// get the category object
+		$deviser = Person::findOne(["short_id" => $deviser_id]);
+
+		$this->layout = '/desktop/public-2.php';
+		return $this->render("about", [
+			'deviser' => $deviser,
+		]);
+	}
+
 }

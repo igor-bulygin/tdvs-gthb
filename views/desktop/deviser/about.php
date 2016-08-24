@@ -20,4 +20,4 @@ $this->title = 'Todevise / Home';
 
 ?>
 
-<h1><?= $deviser->getBrandName() ?></h1>
+<h1>About <?= $deviser->getBrandName() ?></h1>

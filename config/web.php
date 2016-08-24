@@ -27,12 +27,12 @@ $config = [
 	],
 
 
-    // TODO: Rename "api3" to "api", when all the Angular admin services are migrated
-    'modules' => [
-        'api3' => [
-            'class' => 'app\modules\api\Module',
-        ],
-    ],
+	// TODO: Rename "api3" to "api", when all the Angular admin services are migrated
+	'modules' => [
+		'api3' => [
+			'class' => 'app\modules\api\Module',
+		],
+	],
 
 	'components' => [
 
@@ -83,7 +83,7 @@ $config = [
 			'class' => 'lajax\languagepicker\Component',
 			'languages' => require(__DIR__ . '/langs.php'),
 			'expireDays' => 64,
-			'callback' => function() {
+			'callback' => function () {
 				if (!\Yii::$app->user->isGuest) {
 					/* @var $person \app\models\Person */
 					$person = \Yii::$app->user->identity;
@@ -121,9 +121,9 @@ $config = [
 		//Requests and cookies
 		'request' => [
 			'cookieValidationKey' => 'Yq$66191i>#VPkmnDgW<L@Ol<Sw4R+0A1?*9r49%.<02`Q:7_8^0)Pe#tp87',
-            'parsers' => [
-                'application/json' => 'yii\web\JsonParser',
-            ]
+			'parsers' => [
+				'application/json' => 'yii\web\JsonParser',
+			]
 		],
 
 		//Sessions
@@ -143,20 +143,21 @@ $config = [
 //            'enableStrictParsing' => true,
 			'suffix' => '',
 			'rules' => [
-                // Test routing
-                [
-                    'route' => 'public/test',
-                    'pattern' => 'test/<id:[^/.]*?>',
-                    'suffix' => ''
-                ],
+				// Test routing
+				[
+					'route' => 'public/test',
+					'pattern' => 'test/<id:[^/.]*?>',
+					'suffix' => ''
+				],
 
-                // Public routing
-                '/' => 'public/index',
-                '/index-new' => 'public/index',
-                '/index-old' => 'public/index-old',
+				// Public routing
+				'/' => 'public/index',
+				'/index-new' => 'public/index',
+				'/index-old' => 'public/index-old',
 				'/category/<slug:[^/.]*?>/<category_id:[^/.]*?>' => 'public/category-b',
 				'/work/<slug:[^/.]*?>/<product_id:[^/.]*?>' => 'public/product-b',
-				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>' => 'public/deviser-b',
+				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/store' => 'deviser/store',
+				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/about' => 'deviser/about',
 
 				//Links for a cart listing
 				'cart/' => 'public/cart',
@@ -175,30 +176,30 @@ $config = [
 				'contact/' => 'public/contact',
 
 				//Links for deviser profile
-				'<slug:[0-9a-z-A-Z\-]*?>/products/' =>  'admin/products',
-				'<slug:[0-9a-z-A-Z\-]*?>/edit-info/' =>  'deviser/edit-info',
+				'<slug:[0-9a-z-A-Z\-]*?>/products/' => 'admin/products',
+				'<slug:[0-9a-z-A-Z\-]*?>/edit-info/' => 'deviser/edit-info',
 
 				//Link for deviser header & profile photo upload
-				'<slug:[0-9a-z-A-Z\-]*?>/upload-header-photo/' =>  'deviser/upload-header-photo',
-				'<slug:[0-9a-z-A-Z\-]*?>/upload-profile-photo/' =>  'deviser/upload-profile-photo',
-				'<slug:[0-9a-z-A-Z\-]*?>/<short_id:[0-9a-z-A-Z\-]*?>/upload-product-photo/' =>  'deviser/upload-product-photo',
-				'<slug:[0-9a-z-A-Z\-]*?>/<short_id:[0-9a-z-A-Z\-]*?>/delete-product-photo/' =>  'deviser/delete-product-photo',
+				'<slug:[0-9a-z-A-Z\-]*?>/upload-header-photo/' => 'deviser/upload-header-photo',
+				'<slug:[0-9a-z-A-Z\-]*?>/upload-profile-photo/' => 'deviser/upload-profile-photo',
+				'<slug:[0-9a-z-A-Z\-]*?>/<short_id:[0-9a-z-A-Z\-]*?>/upload-product-photo/' => 'deviser/upload-product-photo',
+				'<slug:[0-9a-z-A-Z\-]*?>/<short_id:[0-9a-z-A-Z\-]*?>/delete-product-photo/' => 'deviser/delete-product-photo',
 
 				//Link for deviser work
-				'<slug:[0-9a-z-A-Z\-]*?>/edit-work/<short_id:\w{8}>/' =>  'deviser/edit-work',
+				'<slug:[0-9a-z-A-Z\-]*?>/edit-work/<short_id:\w{8}>/' => 'deviser/edit-work',
 
 				//Link for deviser work photo upload
-				'<slug:[0-9a-z-A-Z\-]*?>/upload-product-photo/<short_id:\w{8}>/' =>  'deviser/upload-product-photo',
+				'<slug:[0-9a-z-A-Z\-]*?>/upload-product-photo/<short_id:\w{8}>/' => 'deviser/upload-product-photo',
 
 				//Links for admin
-				'admin/faq/<faq_id:\w{5}>/'  => 'admin/faq',
-				'admin/faq/<faq_id:\w{5}>/<faq_subid:\w{1}>'  => 'admin/faq',
-				'admin/term/<term_id:\w{5}>/'  => 'admin/term',
-				'admin/term/<term_id:\w{5}>/<term_subid:\w{1}>'  => 'admin/term',
-				'admin/tag/<tag_id:\w{5}>/'  => 'admin/tag',
-				'admin/size-chart/<size_chart_id:\w{5}>/'  => 'admin/size-chart',
-				'admin/admin/<short_id:\w{7}>/'  => 'admin/admin',
-				'admin/<action:[^/.]*?>/'  => 'admin/<action>',
+				'admin/faq/<faq_id:\w{5}>/' => 'admin/faq',
+				'admin/faq/<faq_id:\w{5}>/<faq_subid:\w{1}>' => 'admin/faq',
+				'admin/term/<term_id:\w{5}>/' => 'admin/term',
+				'admin/term/<term_id:\w{5}>/<term_subid:\w{1}>' => 'admin/term',
+				'admin/tag/<tag_id:\w{5}>/' => 'admin/tag',
+				'admin/size-chart/<size_chart_id:\w{5}>/' => 'admin/size-chart',
+				'admin/admin/<short_id:\w{7}>/' => 'admin/admin',
+				'admin/<action:[^/.]*?>/' => 'admin/<action>',
 
 				//Links for a category listing
 				'<category_id:\w{5}>/<slug:[^/.]*?$>/' => 'public/category',
@@ -212,30 +213,30 @@ $config = [
 				'<deviser_id:\w{7}>/<slug:[0-9a-z-A-Z\-]*?>/' => 'public/deviser',
 				'public/<deviser_id:\w{7}>/<slug:[0-9a-z-A-Z\-]*?>/' => 'public/deviser',
 
-                // API routing
-                /* 'api/<action:[^/.]*?>/'  => 'api/<action>', */
-                [
-                    'route' => 'api/<action>',
-                    'pattern' => 'api/<action:[^/.]*?>/',
-                    'suffix' => '/'
-                ],
+				// API routing
+				/* 'api/<action:[^/.]*?>/'  => 'api/<action>', */
+				[
+					'route' => 'api/<action>',
+					'pattern' => 'api/<action:[^/.]*?>/',
+					'suffix' => '/'
+				],
 
 
-                // API routing
-                ['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/faq'],
-                ['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/term'],
-                ['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/category'],
-                ['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/country'],
+				// API routing
+				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/faq'],
+				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/term'],
+				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/category'],
+				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/country'],
 
 //                ['class' => 'yii\rest\UrlRule', 'controller' => 'api3/priv/v1/user'],
-                'GET api3/priv/v1/profile/deviser' => 'api3/priv/v1/deviser/view',
-                'PATCH api3/priv/v1/profile/deviser' => 'api3/priv/v1/deviser/update',
+				'GET api3/priv/v1/profile/deviser' => 'api3/priv/v1/deviser/view',
+				'PATCH api3/priv/v1/profile/deviser' => 'api3/priv/v1/deviser/update',
 
-                'GET api3/priv/v1/profile/user' => 'api3/priv/v1/user/view',
-                'PATCH api3/priv/v1/profile/user' => 'api3/priv/v1/user/update',
+				'GET api3/priv/v1/profile/user' => 'api3/priv/v1/user/view',
+				'PATCH api3/priv/v1/profile/user' => 'api3/priv/v1/user/update',
 
-                ['class' => 'yii\rest\UrlRule', 'controller' => 'api3/admin/v1/faq'],
-                ['class' => 'yii\rest\UrlRule', 'controller' => 'api3/admin/v1/term'],
+				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/admin/v1/faq'],
+				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/admin/v1/term'],
 
 			]
 		],

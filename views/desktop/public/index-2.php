@@ -120,7 +120,7 @@ $this->title = 'Todevise / Home';
 		<div>
 			<?php foreach ($devisers as $i => $deviser) { ?>
 				<div class="col-md-3 col-sm-3 col-xs-6 pad-showcase">
-					<a href="<?= Url::to(["public/deviser-b", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id])?>">
+					<a href="<?= Url::to(["deviser/store", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id])?>">
 						<figure class="showcase">
 							<button class="btn btn-default btn-follow"><i class="ion-star"></i><span>Follow</span>
 							</button>
