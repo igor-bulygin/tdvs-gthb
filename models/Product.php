@@ -232,7 +232,7 @@ class Product extends CActiveRecord {
 				$image = $this->media["photos"][0]["name"];
 
 				if (!empty($image) && !file_exists(Yii::getAlias("@web") . "/" . $this->short_id . "/" . $image )) {
-					$imge = $fallback;
+					$image = $fallback;
 				}
 			}
 		}
@@ -248,8 +248,23 @@ class Product extends CActiveRecord {
 		return $image;
 	}
 
-	public function getNameTranslated()
+
+	/**
+	 * Helper to determine the minimum price in stock & price data.
+	 * In the future, this must be in Product class.
+	 *
+	 * @return float|null
+	 */
+	public function getMinimumPrice()
 	{
-		return 'lala';
+		// TODO find minimun price, not first one
+		// some products hasn't price and stock in database !!
+		if (isset($this->price_stock)) {
+			if (count($this->price_stock) > 0) {
+				return $this->price_stock[0]["price"];
+			}
+		}
+		return null;
 	}
+
 }

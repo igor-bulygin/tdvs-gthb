@@ -5,6 +5,12 @@ use app\helpers\Utils;
 use Yii;
 use app\helpers\CActiveRecord;
 
+/**
+ * @property string country_code
+ * @property string country_name
+ * @property string currency_code
+ * @property string continent
+ */
 class Country extends CActiveRecord {
 	const AFRICA = "AF";
 	const ANTARCTICA = "AN";

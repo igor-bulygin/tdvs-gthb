@@ -208,17 +208,19 @@ class PublicController extends CController
 		$query = new ActiveQuery(Person::className());
 		// filter devisers related
 		// TODO improve random devisers
-		$query->limit(4)->offset(rand(1, 8));
+		$query->limit(4)->offset(rand(1, 100));
 		$devisers = $query->all();
 
 		// Works
 		$query = new ActiveQuery(Product::className());
 		// TODO improve random works
-		$query->limit(60)->offset(rand(1, 12));
+		$query->limit(60)->offset(rand(1, 100));
 //		$query->limit(150);
 		$works = $query->all();
 
-		$categories = [];
+		$headerCategories = Category::getHeaderCategories();
+		$footerCategories = Category::getFooterCategories();
+		print_r(count($footerCategories));
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("index-2", [
 			'banners' => $banners,
@@ -239,7 +241,8 @@ class PublicController extends CController
 					"three" => array_slice($works, 57, 3),
 				],
 			],
-			'categories' => $categories,
+			'headerCategories' => $headerCategories,
+			'footerCategories' => $footerCategories,
 		]);
 	}
 
@@ -247,9 +250,11 @@ class PublicController extends CController
 	{
 		$banners = [];
 
-		$category_id = '1a23b'; // "Art"
-//		$category_id = '2r67s'; // "Decoration"
+//		$category_id = '1a23b'; // "Art"
 //		$category_id = '4a2b4'; // "Fashion"
+//		$category_id = '2r67s'; // "Decoration"
+//		$category_id = '2p45q'; // "Industrial Design"
+//		$category_id = '3f78g'; // "Jewelry"
 
 		// get the category object
 		$category = Category::findOne(["short_id" => $category_id]);
@@ -268,7 +273,6 @@ class PublicController extends CController
 		$query->where(['categories' => $category->getShortIds()]);
 		// TODO improve random works
 		$query->limit(60)->offset(rand(1, 12));
-//		$query->limit(150);
 		$works = $query->all();
 
 		$categories = [];

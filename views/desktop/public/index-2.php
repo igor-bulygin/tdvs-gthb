@@ -90,7 +90,7 @@ $this->title = 'Todevise / Home';
 									<p class="instauser">
 										<?= Utils::l($work->name) ?>
 									</p>
-									<p class="price">€ <?= Utils::minPrice($work) ?></p>
+									<p class="price">€ <?= $work->getMinimumPrice() ?></p>
 								</figcaption>
 							</figure>
 						</div>
@@ -108,7 +108,7 @@ $this->title = 'Todevise / Home';
 									<p class="instauser">
 										<?= Utils::l($work->name) ?>
 									</p>
-									<p class="price">€ <?= Utils::minPrice($work) ?></p>
+									<p class="price">€ <?= $work->getMinimumPrice() ?></p>
 								</figcaption>
 							</figure>
 						</div>
@@ -170,7 +170,7 @@ $this->title = 'Todevise / Home';
 								<p class="instauser">
 									<?= Utils::l($work->name) ?>
 								</p>
-								<p class="price">€ <?= Utils::minPrice($work) ?></p>
+								<p class="price">€ <?= $work->getMinimumPrice() ?></p>
 							</figcaption>
 						</figure>
 					</div>
@@ -188,7 +188,7 @@ $this->title = 'Todevise / Home';
 								<p class="instauser">
 									<?= Utils::l($work->name) ?>
 								</p>
-								<p class="price">€ <?= Utils::minPrice($work) ?></p>
+								<p class="price">€ <?= $work->getMinimumPrice() ?></p>
 							</figcaption>
 						</figure>
 					</div>

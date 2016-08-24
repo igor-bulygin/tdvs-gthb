@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 ?>
 
@@ -31,17 +32,18 @@ use yii\helpers\Html;
 						<i class="fa fa-bars" aria-hidden="true"></i>
 						<span>Shop by departament</span>
 					</a>
-					<div class="dropdown-menu dropdown-shop">
+
+				<div class="dropdown-menu dropdown-shop">
 						<ul class="shop-menu-wrapper">
-							<li><a class="ion-chevron-right" href="#">Art</a></li>
+							<li><a class="ion-chevron-right" href="<?= Url::to(["public/category-b", "slug" => 'art', 'category_id' => '1a23b'])?>">Art</a></li>
 							<li role="separator" class="divider"></li>
-							<li><a class="ion-chevron-right" href="#">Fashion</a></li>
+							<li><a class="ion-chevron-right" href="<?= Url::to(["public/category-b", "slug" => 'fashion', 'category_id' => '4a2b4'])?>">Fashion</a></li>
 							<li role="separator" class="divider"></li>
-							<li><a class="ion-chevron-right" href="#">Decoration</a></li>
+							<li><a class="ion-chevron-right" href="/">Decoration</a></li>
 							<li role="separator" class="divider"></li>
-							<li><a class="ion-chevron-right" href="#">Gadgets</a></li>
+							<li><a class="ion-chevron-right" href="/">Gadgets</a></li>
 							<li role="separator" class="divider"></li>
-							<li><a class="ion-chevron-right" href="#">Jewlery</a></li>
+							<li><a class="ion-chevron-right" href="<?= Url::to(["public/category-b", "slug" => 'jewelry', 'category_id' => '3f78g'])?>">Jewlery</a></li>
 						</ul>
 						<ul class="shop-secondary-menu-wrapper">
 							<li>Womanswear</li>

@@ -12,16 +12,16 @@ use yii\helpers\Url;
 				<div class="title">Categories</div>
 				<ul class="footer-items">
 					<li>
-						<a href="#">Art</a>
+						<a href="<?= Url::to(["public/category-b", "slug" => 'art', 'category_id' => '1a23b'])?>">Art</a>
 					</li>
 					<li>
-						<a href="#">Fashion</a>
+						<a href="<?= Url::to(["public/category-b", "slug" => 'fashion', 'category_id' => '4a2b4'])?>">Fashion</a>
 					</li>
 					<li>
-						<a href="#">Industrial design</a>
+						<a href="<?= Url::to(["public/category-b", "slug" => 'industrial-design', 'category_id' => '2p45q'])?>">Industrial design</a>
 					</li>
 					<li>
-						<a href="#">Technology</a>
+						<a href="<?= Url::to(["public/category-b", "slug" => 'jewelry', 'category_id' => '3f78g'])?>">Jewelry</a>
 					</li>
 					<li>
 						<a href="#">Other</a>

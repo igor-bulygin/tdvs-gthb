@@ -1,6 +1,7 @@
 <?php
 namespace app\models;
 
+use app\helpers\Utils;
 use Yii;
 use app\helpers\CActiveRecord;
 use yii\base\NotSupportedException;
@@ -252,7 +253,7 @@ class Person extends CActiveRecord implements IdentityInterface {
 			$image = $this->media['header'];
 
 			if (!file_exists(Yii::getAlias("@web") . "/" . $this->short_id . "/" . $image )) {
-				$image = $fallback;
+				$imge = $fallback;
 			}
 		} else {
 			$image = $fallback;
@@ -283,7 +284,7 @@ class Person extends CActiveRecord implements IdentityInterface {
 			$image = $this->media['profile'];
 
 			if (!file_exists(Yii::getAlias("@web") . "/" . $this->short_id . "/" . $image )) {
-				$image = $fallback;
+				$imge = $fallback;
 			}
 		} else {
 			$image = $fallback;
@@ -312,7 +313,9 @@ class Person extends CActiveRecord implements IdentityInterface {
 			if (isset($this->personal_info['city'])) {
 				return $this->personal_info['city'];
 			} elseif (isset($this->personal_info['country'])) {
-				return $this->personal_info['country'];
+				/** @var Country $country */
+				$country = Country::findOne(['country_code' => $this->personal_info['country']]);
+				return Utils::l($country->country_name);
 			}
 		}
 

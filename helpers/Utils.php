@@ -412,26 +412,6 @@ class Utils
 
 
 	/**
-	 * Helper to determine the minimum price in stock & price data.
-	 * In the future, this must be in Product class.
-	 *
-	 * @param $product
-	 * @return float|null
-	 */
-	public static function minPrice($product)
-	{
-		// TODO move this logic to Product class. And don't use first price_stock occurrence. find cheapest.
-
-		// some products hasn't price and stock in database !!
-		if (array_key_exists('price_stock', $product)) {
-			if (count($product["price_stock"]) > 0) {
-				return $product["price_stock"][0]["price"];
-			}
-		}
-		return null;
-	}
-
-	/**
 	 * Convert a stdClass object to a multidimensional array.
 	 * @param $d
 	 * @return array

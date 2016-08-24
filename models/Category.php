@@ -19,6 +19,7 @@ class Category extends CActiveRecord {
 		return 'category';
 	}
 
+
 	public function attributes() {
 		return [
 			'_id',
@@ -94,7 +95,27 @@ class Category extends CActiveRecord {
         return $categories;
     }
 
-    public function getSubCategories($current_path = null) {
+	/**
+	 * Get list of categories to use in header menu
+	 *
+	 * @return array
+	 */
+	public static function getHeaderCategories()
+	{
+		return [];
+	}
+
+	/**
+	 * Get list of categories to use in footer menu
+	 *
+	 * @return array
+	 */
+	public static function getFooterCategories()
+	{
+		return Category::find()->where(["short_id" => ['1a23b', '2r67s', '4a2b4']])->all();
+	}
+
+	public function getSubCategories($current_path = null) {
 		if ($current_path === null) {
 			$current_path = $this->path . $this->short_id . "/";
 		}
