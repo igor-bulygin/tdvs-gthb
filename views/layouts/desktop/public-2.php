@@ -39,11 +39,11 @@ use app\helpers\Utils;
 <body>
 <?php $this->beginBody() ?>
 
-<?= PublicHeader2::widget(); ?>
+<?= PublicHeader2::widget() ?>
 
 <?= $content ?>
 
-<?= PublicFooter2::widget(); ?>
+<?= PublicFooter2::widget() ?>
 
 <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>

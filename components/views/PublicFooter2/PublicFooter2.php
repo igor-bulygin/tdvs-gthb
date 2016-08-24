@@ -1,6 +1,11 @@
 <?php
+
+use app\helpers\Utils;
+use app\models\Category;
 use yii\helpers\Html;
 use yii\helpers\Url;
+
+/** @var Category $category */
 
 ?>
 
@@ -11,18 +16,11 @@ use yii\helpers\Url;
 			<div class="col-sm-3">
 				<div class="title">Categories</div>
 				<ul class="footer-items">
-					<li>
-						<a href="<?= Url::to(["public/category-b", "slug" => 'art', 'category_id' => '1a23b'])?>">Art</a>
-					</li>
-					<li>
-						<a href="<?= Url::to(["public/category-b", "slug" => 'fashion', 'category_id' => '4a2b4'])?>">Fashion</a>
-					</li>
-					<li>
-						<a href="<?= Url::to(["public/category-b", "slug" => 'industrial-design', 'category_id' => '2p45q'])?>">Industrial design</a>
-					</li>
-					<li>
-						<a href="<?= Url::to(["public/category-b", "slug" => 'jewelry', 'category_id' => '3f78g'])?>">Jewelry</a>
-					</li>
+					<?php foreach(Category::getFooterCategories() as $category) { ?>
+						<li>
+							<a href="<?= Url::to(["public/category-b", "slug" => $category->slug, 'category_id' => $category->short_id])?>"><?=Utils::l($category->name)?></a>
+						</li>
+					<?php } ?>
 					<li>
 						<a href="#">Other</a>
 					</li>
@@ -104,3 +102,4 @@ use yii\helpers\Url;
 		</div>
 	</div>
 </footer>
+<!-- END FOOTER -->

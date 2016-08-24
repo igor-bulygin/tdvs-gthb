@@ -102,7 +102,8 @@ class Category extends CActiveRecord {
 	 */
 	public static function getHeaderCategories()
 	{
-		return [];
+		// TODO Forced for the demo. This must be selected in "admin" panel.
+		return Category::find()->where(["short_id" => ['1a23b', '4a2b4', '3f78g']])->all();
 	}
 
 	/**
@@ -112,6 +113,7 @@ class Category extends CActiveRecord {
 	 */
 	public static function getFooterCategories()
 	{
+		// TODO Forced for the demo. This must be selected in "admin" panel.
 		return Category::find()->where(["short_id" => ['1a23b', '2r67s', '4a2b4']])->all();
 	}
 

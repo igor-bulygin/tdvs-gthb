@@ -1,6 +1,10 @@
 <?php
+use app\helpers\Utils;
+use app\models\Category;
 use yii\helpers\Html;
 use yii\helpers\Url;
+
+/** @var Category $category */
 
 ?>
 
@@ -35,15 +39,13 @@ use yii\helpers\Url;
 
 				<div class="dropdown-menu dropdown-shop">
 						<ul class="shop-menu-wrapper">
-							<li><a class="ion-chevron-right" href="<?= Url::to(["public/category-b", "slug" => 'art', 'category_id' => '1a23b'])?>">Art</a></li>
-							<li role="separator" class="divider"></li>
-							<li><a class="ion-chevron-right" href="<?= Url::to(["public/category-b", "slug" => 'fashion', 'category_id' => '4a2b4'])?>">Fashion</a></li>
-							<li role="separator" class="divider"></li>
+							<?php foreach(Category::getHeaderCategories() as $category) { ?>
+								<li><a class="ion-chevron-right" href="<?= Url::to(["public/category-b", "slug" => $category->slug, 'category_id' => $category->short_id])?>"><?= Utils::l($category->name)?></a></li>
+								<li role="separator" class="divider"></li>
+							<?php } ?>
 							<li><a class="ion-chevron-right" href="/">Decoration</a></li>
 							<li role="separator" class="divider"></li>
 							<li><a class="ion-chevron-right" href="/">Gadgets</a></li>
-							<li role="separator" class="divider"></li>
-							<li><a class="ion-chevron-right" href="<?= Url::to(["public/category-b", "slug" => 'jewelry', 'category_id' => '3f78g'])?>">Jewlery</a></li>
 						</ul>
 						<ul class="shop-secondary-menu-wrapper">
 							<li>Womanswear</li>
