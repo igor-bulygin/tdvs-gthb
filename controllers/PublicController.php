@@ -38,7 +38,7 @@ class PublicController extends CController
 		//die();
 	}
 
-	public function actionIndex()
+	public function actionIndexOld()
 	{
 		$lang = Yii::$app->language;
 
@@ -200,7 +200,7 @@ class PublicController extends CController
 		]);
 	}
 
-	public function actionIndexB()
+	public function actionIndex()
 	{
 		$banners = [];
 
