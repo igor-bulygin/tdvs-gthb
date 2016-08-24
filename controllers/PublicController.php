@@ -202,7 +202,7 @@ class PublicController extends CController
 
 	public function actionIndex()
 	{
-		$banners = [];
+		$banners = Utils::getBannerImages();
 
 		// Devisers
 		$query = new ActiveQuery(Person::className());
@@ -248,7 +248,7 @@ class PublicController extends CController
 
 	public function actionCategoryB($slug, $category_id)
 	{
-		$banners = [];
+		$banners = Utils::getBannerImages($category_id);
 
 //		$category_id = '1a23b'; // "Art"
 //		$category_id = '4a2b4'; // "Fashion"

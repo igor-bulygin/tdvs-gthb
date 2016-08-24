@@ -25,32 +25,21 @@ $this->title = 'Todevise / Home';
 <div class="bs-example" data-example-id="simple-carousel">
 	<div class="carousel slide" id="carousel-example-generic" data-ride="carousel">
 		<ol class="carousel-indicators">
-			<li data-target="#carousel-example-generic" data-slide-to="0" class=""></li>
-			<li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
-			<li data-target="#carousel-example-generic" data-slide-to="2" class="active"></li>
-			<li data-target="#carousel-example-generic" data-slide-to="3" class=""></li>
-			<li data-target="#carousel-example-generic" data-slide-to="4" class=""></li>
+			<?php foreach ($banners as $i => $banner) { ?>
+				<li data-target="#carousel-example-generic" data-slide-to="<?= $i ?>" class="<?= ($banner["active"]) ? 'active' : '' ?>"></li>
+			<?php } ?>
 		</ol>
 		<div class="carousel-inner" role="listbox">
-			<div class="item">
-				<img src="/imgs/banner-4.jpg" alt="" title="">
-			</div>
-			<div class="item">
-				<img src="/imgs/banner-5.jpg" alt="" title="">
-			</div>
-			<div class="item active">
-				<img src="/imgs/banner-1.jpg" alt="" title="">
-			</div>
-			<div class="item">
-				<img src="/imgs/banner-2.jpg" alt="" title="">
-			</div>
-			<div class="item">
-				<img src="/imgs/banner-3.jpg" alt="" title="">
-			</div>
+			<?php foreach ($banners as $i => $banner) { ?>
+				<div class="item <?= ($banner["active"]) ? 'active' : '' ?>">
+					<img src="<?= $banner["img"] ?>" alt="<?= $banner["alt"] ?>" title="">
+				</div>
+			<?php } ?>
 		</div>
 	</div>
 </div>
 <!-- /BANNER -->
+
 <!-- SUB-BANNER -->
 <section class="sub-banner">
 	<div class="container container-sub-baner">

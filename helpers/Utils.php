@@ -531,4 +531,46 @@ class Utils
 			return "http://";
 		}
 	}
+
+	/**
+	 * Get images to use in header slider, for a specific category
+	 *
+	 * @param null $category_id
+	 * @return array
+	 */
+	public static function getBannerImages($category_id = null)
+	{
+		// TODO This is an temp method to use in the demo !!. Will be removed when Banners model are implemented
+		switch ($category_id) {
+			case '1a23b': // "Art"
+				return [
+					['img' => '/imgs/banner-4.jpg', 'alt' => 'Header image', "active" => false],
+					['img' => '/imgs/banner-5.jpg', 'alt' => 'Header image', "active" => true],
+				];
+				break;
+			case '4a2b4': // "Fashion"
+				return [
+					['img' => '/imgs/banner-3.jpg', 'alt' => 'Header image', "active" => true],
+					['img' => '/imgs/banner-4.jpg', 'alt' => 'Header image', "active" => false],
+					['img' => '/imgs/banner-5.jpg', 'alt' => 'Header image', "active" => false],
+				];
+				break;
+			case '3f78g': // "Jewelry"
+				return [
+					['img' => '/imgs/banner-1.jpg', 'alt' => 'Header image', "active" => false],
+					['img' => '/imgs/banner-2.jpg', 'alt' => 'Header image', "active" => true],
+					['img' => '/imgs/banner-3.jpg', 'alt' => 'Header image', "active" => false],
+				];
+				break;
+			default:
+				return [
+					['img' => '/imgs/banner-4.jpg', 'alt' => 'Header image', "active" => false],
+					['img' => '/imgs/banner-5.jpg', 'alt' => 'Header image', "active" => false],
+					['img' => '/imgs/banner-1.jpg', 'alt' => 'Header image', "active" => true],
+					['img' => '/imgs/banner-2.jpg', 'alt' => 'Header image', "active" => false],
+					['img' => '/imgs/banner-3.jpg', 'alt' => 'Header image', "active" => false],
+				];
+		}
+	}
+
 }
