@@ -13,7 +13,6 @@ Example about how to call to Web Service to update Deviser profile
 
 ```
 {
-  "Person": {
     "categories": [
       "f0cco"
     ],
@@ -35,6 +34,5 @@ Example about how to call to Web Service to update Deviser profile
       "currency": "EUR"
     },
     "slug": "slug4"
-  }
-}
+    }
 ```

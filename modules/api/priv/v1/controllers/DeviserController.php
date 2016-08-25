@@ -41,7 +41,7 @@ class DeviserController extends Controller {
 //        print_r($data);
 
         $deviser->setScenario(Person::SCENARIO_DEVISER_PROFILE_UPDATE);
-        if ($deviser->load(Yii::$app->request->post()) && $deviser->save()) {
+        if ($deviser->load(Yii::$app->request->post(), '') && $deviser->save()) {
             // handle success
 
             // TODO: return the deviser data, only for test. remove when finish.
