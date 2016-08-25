@@ -333,6 +333,19 @@ class Person extends CActiveRecord implements IdentityInterface {
 
 		return null;
 	}
+
+	/**
+	 * Get the location from Person.
+	 * First get city, otherwise get country
+	 *
+	 * @return mixed|null
+	 */
+	public function getShortDescription()
+	{
+		return empty($this->text_short_description) ? 'I\'m so happy to be here, always ready.' : $this->text_short_description;
+
+	}
+
 }
 
 

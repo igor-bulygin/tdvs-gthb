@@ -17,6 +17,7 @@ Index2Asset::register($this);
 $this->title = 'Todevise / Home';
 
 /** @var Person $deviser */
+/** @var Product $product */
 
 ?>
 
@@ -38,7 +39,7 @@ $this->title = 'Todevise / Home';
 							<?= $deviser->getCityLabel() ?>
 						</div>
 						<div class="description">
-							I'm so happy to be here, always ready. Máximo dos líneas.
+							<?= $deviser->getShortDescription() ?>
 						</div>
 					</div>
 				</div>
@@ -153,427 +154,443 @@ $this->title = 'Todevise / Home';
 							</ul>
 						</nav>
 						<div class="mesonry-row">
-							<div class="menu-category list-group">
-								<a href="#">
-									<div class="grid">
-										<figure class="effect-zoe">
-											<img class="grid-image" src="/imgs/photo-grid-v-1.jpg">
-											<figcaption>
-												<p class="instauser">
-													Black dress
-												</p>
-												<p class="price">€ 3.230</p>
-											</figcaption>
-										</figure>
-									</div>
-								</a>
-							</div>
-							<div class="menu-category list-group">
-								<a href="#">
-									<div class="grid">
-										<figure class="effect-zoe">
-											<img class="grid-image" src="/imgs/photo-grid-v-2.jpg">
-											<figcaption>
-												<p class="instauser">
-													Black dress
-												</p>
-												<p class="price">€ 3.230</p>
-											</figcaption>
-										</figure>
-									</div>
-								</a>
-							</div>
-							<div class="menu-category list-group">
-								<a href="#">
-									<div class="grid">
-										<figure class="effect-zoe">
-											<img class="grid-image" src="/imgs/photo-grid-v-3.jpg">
-											<figcaption>
-												<p class="instauser">
-													Black dress
-												</p>
-												<p class="price">€ 3.230</p>
-											</figcaption>
-										</figure>
-									</div>
-								</a>
-							</div>
-							<div class="menu-category list-group">
-								<a href="#">
-									<div class="grid">
-										<figure class="effect-zoe">
-											<img class="grid-image" src="/imgs/photo-grid-v-4.jpg">
-											<figcaption>
-												<p class="instauser">
-													Black dress
-												</p>
-												<p class="price">€ 3.230</p>
-											</figcaption>
-										</figure>
-									</div>
-								</a>
-							</div>
-							<div class="menu-category list-group">
-								<a href="#">
-									<div class="grid">
-										<figure class="effect-zoe">
-											<img class="grid-image" src="/imgs/photo-grid-v-5.jpg">
-											<figcaption>
-												<p class="instauser">
-													Black dress
-												</p>
-												<p class="price">€ 3.230</p>
-											</figcaption>
-										</figure>
-									</div>
-								</a>
-							</div>
-							<div class="menu-category list-group">
-								<a href="#">
-									<div class="grid">
-										<figure class="effect-zoe">
-											<img class="grid-image" src="/imgs/photo-grid-v-6.jpg">
-											<figcaption>
-												<p class="instauser">
-													Black dress
-												</p>
-												<p class="price">€ 3.230</p>
-											</figcaption>
-										</figure>
-									</div>
-								</a>
-							</div>
-							<div class="menu-category list-group">
-								<a href="#">
-									<div class="grid">
-										<figure class="effect-zoe">
-											<img class="grid-image" src="/imgs/photo-grid-v-7.jpg">
-											<figcaption>
-												<p class="instauser">
-													Black dress
-												</p>
-												<p class="price">€ 3.230</p>
-											</figcaption>
-										</figure>
-									</div>
-								</a>
-							</div>
-							<div class="menu-category list-group">
-								<a href="#">
-									<div class="grid">
-										<figure class="effect-zoe">
-											<img class="grid-image" src="/imgs/photo-grid-v-1.jpg">
-											<figcaption>
-												<p class="instauser">
-													Black dress
-												</p>
-												<p class="price">€ 3.230</p>
-											</figcaption>
-										</figure>
-									</div>
-								</a>
-							</div>
-							<div class="menu-category list-group">
-								<a href="#">
-									<div class="grid">
-										<figure class="effect-zoe">
-											<img class="grid-image" src="/imgs/photo-grid-v-2.jpg">
-											<figcaption>
-												<p class="instauser">
-													Black dress
-												</p>
-												<p class="price">€ 3.230</p>
-											</figcaption>
-										</figure>
-									</div>
-								</a>
-							</div>
-							<div class="menu-category list-group">
-								<a href="#">
-									<div class="grid">
-										<figure class="effect-zoe">
-											<img class="grid-image" src="/imgs/photo-grid-v-3.jpg">
-											<figcaption>
-												<p class="instauser">
-													Black dress
-												</p>
-												<p class="price">€ 3.230</p>
-											</figcaption>
-										</figure>
-									</div>
-								</a>
-							</div>
-							<div class="menu-category list-group">
-								<a href="#">
-									<div class="grid">
-										<figure class="effect-zoe">
-											<img class="grid-image" src="/imgs/photo-grid-v-4.jpg">
-											<figcaption>
-												<p class="instauser">
-													Black dress
-												</p>
-												<p class="price">€ 3.230</p>
-											</figcaption>
-										</figure>
-									</div>
-								</a>
-							</div>
-							<div class="menu-category list-group">
-								<a href="#">
-									<div class="grid">
-										<figure class="effect-zoe">
-											<img class="grid-image" src="/imgs/photo-grid-v-5.jpg">
-											<figcaption>
-												<p class="instauser">
-													Black dress
-												</p>
-												<p class="price">€ 3.230</p>
-											</figcaption>
-										</figure>
-									</div>
-								</a>
-							</div>
-							<div class="menu-category list-group">
-								<a href="#">
-									<div class="grid">
-										<figure class="effect-zoe">
-											<img class="grid-image" src="/imgs/photo-grid-v-6.jpg">
-											<figcaption>
-												<p class="instauser">
-													Black dress
-												</p>
-												<p class="price">€ 3.230</p>
-											</figcaption>
-										</figure>
-									</div>
-								</a>
-							</div>
-							<div class="menu-category list-group">
-								<a href="#">
-									<div class="grid">
-										<figure class="effect-zoe">
-											<img class="grid-image" src="/imgs/photo-grid-v-7.jpg">
-											<figcaption>
-												<p class="instauser">
-													Black dress
-												</p>
-												<p class="price">€ 3.230</p>
-											</figcaption>
-										</figure>
-									</div>
-								</a>
-							</div>
-							<div class="menu-category list-group">
-								<a href="#">
-									<div class="grid">
-										<figure class="effect-zoe">
-											<img class="grid-image" src="/imgs/photo-grid-v-1.jpg">
-											<figcaption>
-												<p class="instauser">
-													Black dress
-												</p>
-												<p class="price">€ 3.230</p>
-											</figcaption>
-										</figure>
-									</div>
-								</a>
-							</div>
-							<div class="menu-category list-group">
-								<a href="#">
-									<div class="grid">
-										<figure class="effect-zoe">
-											<img class="grid-image" src="/imgs/photo-grid-v-2.jpg">
-											<figcaption>
-												<p class="instauser">
-													Black dress
-												</p>
-												<p class="price">€ 3.230</p>
-											</figcaption>
-										</figure>
-									</div>
-								</a>
-							</div>
-							<div class="menu-category list-group">
-								<a href="#">
-									<div class="grid">
-										<figure class="effect-zoe">
-											<img class="grid-image" src="/imgs/photo-grid-v-3.jpg">
-											<figcaption>
-												<p class="instauser">
-													Black dress
-												</p>
-												<p class="price">€ 3.230</p>
-											</figcaption>
-										</figure>
-									</div>
-								</a>
-							</div>
-							<div class="menu-category list-group">
-								<a href="#">
-									<div class="grid">
-										<figure class="effect-zoe">
-											<img class="grid-image" src="/imgs/photo-grid-v-4.jpg">
-											<figcaption>
-												<p class="instauser">
-													Black dress
-												</p>
-												<p class="price">€ 3.230</p>
-											</figcaption>
-										</figure>
-									</div>
-								</a>
-							</div>
-							<div class="menu-category list-group">
-								<a href="#">
-									<div class="grid">
-										<figure class="effect-zoe">
-											<img class="grid-image" src="/imgs/photo-grid-v-5.jpg">
-											<figcaption>
-												<p class="instauser">
-													Black dress
-												</p>
-												<p class="price">€ 3.230</p>
-											</figcaption>
-										</figure>
-									</div>
-								</a>
-							</div>
-							<div class="menu-category list-group">
-								<a href="#">
-									<div class="grid">
-										<figure class="effect-zoe">
-											<img class="grid-image" src="/imgs/photo-grid-v-6.jpg">
-											<figcaption>
-												<p class="instauser">
-													Black dress
-												</p>
-												<p class="price">€ 3.230</p>
-											</figcaption>
-										</figure>
-									</div>
-								</a>
-							</div>
-							<div class="menu-category list-group">
-								<a href="#">
-									<div class="grid">
-										<figure class="effect-zoe">
-											<img class="grid-image" src="/imgs/photo-grid-v-7.jpg">
-											<figcaption>
-												<p class="instauser">
-													Black dress
-												</p>
-												<p class="price">€ 3.230</p>
-											</figcaption>
-										</figure>
-									</div>
-								</a>
-							</div>
-							<div class="menu-category list-group">
-								<a href="#">
-									<div class="grid">
-										<figure class="effect-zoe">
-											<img class="grid-image" src="/imgs/photo-grid-v-1.jpg">
-											<figcaption>
-												<p class="instauser">
-													Black dress
-												</p>
-												<p class="price">€ 3.230</p>
-											</figcaption>
-										</figure>
-									</div>
-								</a>
-							</div>
-							<div class="menu-category list-group">
-								<a href="#">
-									<div class="grid">
-										<figure class="effect-zoe">
-											<img class="grid-image" src="/imgs/photo-grid-v-2.jpg">
-											<figcaption>
-												<p class="instauser">
-													Black dress
-												</p>
-												<p class="price">€ 3.230</p>
-											</figcaption>
-										</figure>
-									</div>
-								</a>
-							</div>
-							<div class="menu-category list-group">
-								<a href="#">
-									<div class="grid">
-										<figure class="effect-zoe">
-											<img class="grid-image" src="/imgs/photo-grid-v-3.jpg">
-											<figcaption>
-												<p class="instauser">
-													Black dress
-												</p>
-												<p class="price">€ 3.230</p>
-											</figcaption>
-										</figure>
-									</div>
-								</a>
-							</div>
-							<div class="menu-category list-group">
-								<a href="#">
-									<div class="grid">
-										<figure class="effect-zoe">
-											<img class="grid-image" src="/imgs/photo-grid-v-4.jpg">
-											<figcaption>
-												<p class="instauser">
-													Black dress
-												</p>
-												<p class="price">€ 3.230</p>
-											</figcaption>
-										</figure>
-									</div>
-								</a>
-							</div>
-							<div class="menu-category list-group">
-								<a href="#">
-									<div class="grid">
-										<figure class="effect-zoe">
-											<img class="grid-image" src="/imgs/photo-grid-v-5.jpg">
-											<figcaption>
-												<p class="instauser">
-													Black dress
-												</p>
-												<p class="price">€ 3.230</p>
-											</figcaption>
-										</figure>
-									</div>
-								</a>
-							</div>
-							<div class="menu-category list-group">
-								<a href="#">
-									<div class="grid">
-										<figure class="effect-zoe">
-											<img class="grid-image" src="/imgs/photo-grid-v-6.jpg">
-											<figcaption>
-												<p class="instauser">
-													Black dress
-												</p>
-												<p class="price">€ 3.230</p>
-											</figcaption>
-										</figure>
-									</div>
-								</a>
-							</div>
-							<div class="menu-category list-group">
-								<a href="#">
-									<div class="grid">
-										<figure class="effect-zoe">
-											<img class="grid-image" src="/imgs/photo-grid-v-7.jpg">
-											<figcaption>
-												<p class="instauser">
-													Black dress
-												</p>
-												<p class="price">€ 3.230</p>
-											</figcaption>
-										</figure>
-									</div>
-								</a>
-							</div>
-
+							<?php foreach ($products as $i => $product) { ?>
+								<div class="menu-category list-group">
+									<a href="<?= Url::to(["public/product-b", "slug" => Utils::l($product->slug), 'product_id' => $product->short_id])?>">
+										<div class="grid">
+											<figure class="effect-zoe">
+												<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getMainImage()) ?>">
+												<figcaption>
+													<p class="instauser">
+														<?= Utils::l($product->name) ?>
+													</p>
+													<p class="price">€ <?= $product->getMinimumPrice() ?></p>
+												</figcaption>
+											</figure>
+										</div>
+									</a>
+								</div>
+							<?php } ?>
+<!--							<div class="menu-category list-group">-->
+<!--								<a href="#">-->
+<!--									<div class="grid">-->
+<!--										<figure class="effect-zoe">-->
+<!--											<img class="grid-image" src="/imgs/photo-grid-v-1.jpg">-->
+<!--											<figcaption>-->
+<!--												<p class="instauser">-->
+<!--													Black dress-->
+<!--												</p>-->
+<!--												<p class="price">€ 3.230</p>-->
+<!--											</figcaption>-->
+<!--										</figure>-->
+<!--									</div>-->
+<!--								</a>-->
+<!--							</div>-->
+<!--							<div class="menu-category list-group">-->
+<!--								<a href="#">-->
+<!--									<div class="grid">-->
+<!--										<figure class="effect-zoe">-->
+<!--											<img class="grid-image" src="/imgs/photo-grid-v-2.jpg">-->
+<!--											<figcaption>-->
+<!--												<p class="instauser">-->
+<!--													Black dress-->
+<!--												</p>-->
+<!--												<p class="price">€ 3.230</p>-->
+<!--											</figcaption>-->
+<!--										</figure>-->
+<!--									</div>-->
+<!--								</a>-->
+<!--							</div>-->
+<!--							<div class="menu-category list-group">-->
+<!--								<a href="#">-->
+<!--									<div class="grid">-->
+<!--										<figure class="effect-zoe">-->
+<!--											<img class="grid-image" src="/imgs/photo-grid-v-3.jpg">-->
+<!--											<figcaption>-->
+<!--												<p class="instauser">-->
+<!--													Black dress-->
+<!--												</p>-->
+<!--												<p class="price">€ 3.230</p>-->
+<!--											</figcaption>-->
+<!--										</figure>-->
+<!--									</div>-->
+<!--								</a>-->
+<!--							</div>-->
+<!--							<div class="menu-category list-group">-->
+<!--								<a href="#">-->
+<!--									<div class="grid">-->
+<!--										<figure class="effect-zoe">-->
+<!--											<img class="grid-image" src="/imgs/photo-grid-v-4.jpg">-->
+<!--											<figcaption>-->
+<!--												<p class="instauser">-->
+<!--													Black dress-->
+<!--												</p>-->
+<!--												<p class="price">€ 3.230</p>-->
+<!--											</figcaption>-->
+<!--										</figure>-->
+<!--									</div>-->
+<!--								</a>-->
+<!--							</div>-->
+<!--							<div class="menu-category list-group">-->
+<!--								<a href="#">-->
+<!--									<div class="grid">-->
+<!--										<figure class="effect-zoe">-->
+<!--											<img class="grid-image" src="/imgs/photo-grid-v-5.jpg">-->
+<!--											<figcaption>-->
+<!--												<p class="instauser">-->
+<!--													Black dress-->
+<!--												</p>-->
+<!--												<p class="price">€ 3.230</p>-->
+<!--											</figcaption>-->
+<!--										</figure>-->
+<!--									</div>-->
+<!--								</a>-->
+<!--							</div>-->
+<!--							<div class="menu-category list-group">-->
+<!--								<a href="#">-->
+<!--									<div class="grid">-->
+<!--										<figure class="effect-zoe">-->
+<!--											<img class="grid-image" src="/imgs/photo-grid-v-6.jpg">-->
+<!--											<figcaption>-->
+<!--												<p class="instauser">-->
+<!--													Black dress-->
+<!--												</p>-->
+<!--												<p class="price">€ 3.230</p>-->
+<!--											</figcaption>-->
+<!--										</figure>-->
+<!--									</div>-->
+<!--								</a>-->
+<!--							</div>-->
+<!--							<div class="menu-category list-group">-->
+<!--								<a href="#">-->
+<!--									<div class="grid">-->
+<!--										<figure class="effect-zoe">-->
+<!--											<img class="grid-image" src="/imgs/photo-grid-v-7.jpg">-->
+<!--											<figcaption>-->
+<!--												<p class="instauser">-->
+<!--													Black dress-->
+<!--												</p>-->
+<!--												<p class="price">€ 3.230</p>-->
+<!--											</figcaption>-->
+<!--										</figure>-->
+<!--									</div>-->
+<!--								</a>-->
+<!--							</div>-->
+<!--							<div class="menu-category list-group">-->
+<!--								<a href="#">-->
+<!--									<div class="grid">-->
+<!--										<figure class="effect-zoe">-->
+<!--											<img class="grid-image" src="/imgs/photo-grid-v-1.jpg">-->
+<!--											<figcaption>-->
+<!--												<p class="instauser">-->
+<!--													Black dress-->
+<!--												</p>-->
+<!--												<p class="price">€ 3.230</p>-->
+<!--											</figcaption>-->
+<!--										</figure>-->
+<!--									</div>-->
+<!--								</a>-->
+<!--							</div>-->
+<!--							<div class="menu-category list-group">-->
+<!--								<a href="#">-->
+<!--									<div class="grid">-->
+<!--										<figure class="effect-zoe">-->
+<!--											<img class="grid-image" src="/imgs/photo-grid-v-2.jpg">-->
+<!--											<figcaption>-->
+<!--												<p class="instauser">-->
+<!--													Black dress-->
+<!--												</p>-->
+<!--												<p class="price">€ 3.230</p>-->
+<!--											</figcaption>-->
+<!--										</figure>-->
+<!--									</div>-->
+<!--								</a>-->
+<!--							</div>-->
+<!--							<div class="menu-category list-group">-->
+<!--								<a href="#">-->
+<!--									<div class="grid">-->
+<!--										<figure class="effect-zoe">-->
+<!--											<img class="grid-image" src="/imgs/photo-grid-v-3.jpg">-->
+<!--											<figcaption>-->
+<!--												<p class="instauser">-->
+<!--													Black dress-->
+<!--												</p>-->
+<!--												<p class="price">€ 3.230</p>-->
+<!--											</figcaption>-->
+<!--										</figure>-->
+<!--									</div>-->
+<!--								</a>-->
+<!--							</div>-->
+<!--							<div class="menu-category list-group">-->
+<!--								<a href="#">-->
+<!--									<div class="grid">-->
+<!--										<figure class="effect-zoe">-->
+<!--											<img class="grid-image" src="/imgs/photo-grid-v-4.jpg">-->
+<!--											<figcaption>-->
+<!--												<p class="instauser">-->
+<!--													Black dress-->
+<!--												</p>-->
+<!--												<p class="price">€ 3.230</p>-->
+<!--											</figcaption>-->
+<!--										</figure>-->
+<!--									</div>-->
+<!--								</a>-->
+<!--							</div>-->
+<!--							<div class="menu-category list-group">-->
+<!--								<a href="#">-->
+<!--									<div class="grid">-->
+<!--										<figure class="effect-zoe">-->
+<!--											<img class="grid-image" src="/imgs/photo-grid-v-5.jpg">-->
+<!--											<figcaption>-->
+<!--												<p class="instauser">-->
+<!--													Black dress-->
+<!--												</p>-->
+<!--												<p class="price">€ 3.230</p>-->
+<!--											</figcaption>-->
+<!--										</figure>-->
+<!--									</div>-->
+<!--								</a>-->
+<!--							</div>-->
+<!--							<div class="menu-category list-group">-->
+<!--								<a href="#">-->
+<!--									<div class="grid">-->
+<!--										<figure class="effect-zoe">-->
+<!--											<img class="grid-image" src="/imgs/photo-grid-v-6.jpg">-->
+<!--											<figcaption>-->
+<!--												<p class="instauser">-->
+<!--													Black dress-->
+<!--												</p>-->
+<!--												<p class="price">€ 3.230</p>-->
+<!--											</figcaption>-->
+<!--										</figure>-->
+<!--									</div>-->
+<!--								</a>-->
+<!--							</div>-->
+<!--							<div class="menu-category list-group">-->
+<!--								<a href="#">-->
+<!--									<div class="grid">-->
+<!--										<figure class="effect-zoe">-->
+<!--											<img class="grid-image" src="/imgs/photo-grid-v-7.jpg">-->
+<!--											<figcaption>-->
+<!--												<p class="instauser">-->
+<!--													Black dress-->
+<!--												</p>-->
+<!--												<p class="price">€ 3.230</p>-->
+<!--											</figcaption>-->
+<!--										</figure>-->
+<!--									</div>-->
+<!--								</a>-->
+<!--							</div>-->
+<!--							<div class="menu-category list-group">-->
+<!--								<a href="#">-->
+<!--									<div class="grid">-->
+<!--										<figure class="effect-zoe">-->
+<!--											<img class="grid-image" src="/imgs/photo-grid-v-1.jpg">-->
+<!--											<figcaption>-->
+<!--												<p class="instauser">-->
+<!--													Black dress-->
+<!--												</p>-->
+<!--												<p class="price">€ 3.230</p>-->
+<!--											</figcaption>-->
+<!--										</figure>-->
+<!--									</div>-->
+<!--								</a>-->
+<!--							</div>-->
+<!--							<div class="menu-category list-group">-->
+<!--								<a href="#">-->
+<!--									<div class="grid">-->
+<!--										<figure class="effect-zoe">-->
+<!--											<img class="grid-image" src="/imgs/photo-grid-v-2.jpg">-->
+<!--											<figcaption>-->
+<!--												<p class="instauser">-->
+<!--													Black dress-->
+<!--												</p>-->
+<!--												<p class="price">€ 3.230</p>-->
+<!--											</figcaption>-->
+<!--										</figure>-->
+<!--									</div>-->
+<!--								</a>-->
+<!--							</div>-->
+<!--							<div class="menu-category list-group">-->
+<!--								<a href="#">-->
+<!--									<div class="grid">-->
+<!--										<figure class="effect-zoe">-->
+<!--											<img class="grid-image" src="/imgs/photo-grid-v-3.jpg">-->
+<!--											<figcaption>-->
+<!--												<p class="instauser">-->
+<!--													Black dress-->
+<!--												</p>-->
+<!--												<p class="price">€ 3.230</p>-->
+<!--											</figcaption>-->
+<!--										</figure>-->
+<!--									</div>-->
+<!--								</a>-->
+<!--							</div>-->
+<!--							<div class="menu-category list-group">-->
+<!--								<a href="#">-->
+<!--									<div class="grid">-->
+<!--										<figure class="effect-zoe">-->
+<!--											<img class="grid-image" src="/imgs/photo-grid-v-4.jpg">-->
+<!--											<figcaption>-->
+<!--												<p class="instauser">-->
+<!--													Black dress-->
+<!--												</p>-->
+<!--												<p class="price">€ 3.230</p>-->
+<!--											</figcaption>-->
+<!--										</figure>-->
+<!--									</div>-->
+<!--								</a>-->
+<!--							</div>-->
+<!--							<div class="menu-category list-group">-->
+<!--								<a href="#">-->
+<!--									<div class="grid">-->
+<!--										<figure class="effect-zoe">-->
+<!--											<img class="grid-image" src="/imgs/photo-grid-v-5.jpg">-->
+<!--											<figcaption>-->
+<!--												<p class="instauser">-->
+<!--													Black dress-->
+<!--												</p>-->
+<!--												<p class="price">€ 3.230</p>-->
+<!--											</figcaption>-->
+<!--										</figure>-->
+<!--									</div>-->
+<!--								</a>-->
+<!--							</div>-->
+<!--							<div class="menu-category list-group">-->
+<!--								<a href="#">-->
+<!--									<div class="grid">-->
+<!--										<figure class="effect-zoe">-->
+<!--											<img class="grid-image" src="/imgs/photo-grid-v-6.jpg">-->
+<!--											<figcaption>-->
+<!--												<p class="instauser">-->
+<!--													Black dress-->
+<!--												</p>-->
+<!--												<p class="price">€ 3.230</p>-->
+<!--											</figcaption>-->
+<!--										</figure>-->
+<!--									</div>-->
+<!--								</a>-->
+<!--							</div>-->
+<!--							<div class="menu-category list-group">-->
+<!--								<a href="#">-->
+<!--									<div class="grid">-->
+<!--										<figure class="effect-zoe">-->
+<!--											<img class="grid-image" src="/imgs/photo-grid-v-7.jpg">-->
+<!--											<figcaption>-->
+<!--												<p class="instauser">-->
+<!--													Black dress-->
+<!--												</p>-->
+<!--												<p class="price">€ 3.230</p>-->
+<!--											</figcaption>-->
+<!--										</figure>-->
+<!--									</div>-->
+<!--								</a>-->
+<!--							</div>-->
+<!--							<div class="menu-category list-group">-->
+<!--								<a href="#">-->
+<!--									<div class="grid">-->
+<!--										<figure class="effect-zoe">-->
+<!--											<img class="grid-image" src="/imgs/photo-grid-v-1.jpg">-->
+<!--											<figcaption>-->
+<!--												<p class="instauser">-->
+<!--													Black dress-->
+<!--												</p>-->
+<!--												<p class="price">€ 3.230</p>-->
+<!--											</figcaption>-->
+<!--										</figure>-->
+<!--									</div>-->
+<!--								</a>-->
+<!--							</div>-->
+<!--							<div class="menu-category list-group">-->
+<!--								<a href="#">-->
+<!--									<div class="grid">-->
+<!--										<figure class="effect-zoe">-->
+<!--											<img class="grid-image" src="/imgs/photo-grid-v-2.jpg">-->
+<!--											<figcaption>-->
+<!--												<p class="instauser">-->
+<!--													Black dress-->
+<!--												</p>-->
+<!--												<p class="price">€ 3.230</p>-->
+<!--											</figcaption>-->
+<!--										</figure>-->
+<!--									</div>-->
+<!--								</a>-->
+<!--							</div>-->
+<!--							<div class="menu-category list-group">-->
+<!--								<a href="#">-->
+<!--									<div class="grid">-->
+<!--										<figure class="effect-zoe">-->
+<!--											<img class="grid-image" src="/imgs/photo-grid-v-3.jpg">-->
+<!--											<figcaption>-->
+<!--												<p class="instauser">-->
+<!--													Black dress-->
+<!--												</p>-->
+<!--												<p class="price">€ 3.230</p>-->
+<!--											</figcaption>-->
+<!--										</figure>-->
+<!--									</div>-->
+<!--								</a>-->
+<!--							</div>-->
+<!--							<div class="menu-category list-group">-->
+<!--								<a href="#">-->
+<!--									<div class="grid">-->
+<!--										<figure class="effect-zoe">-->
+<!--											<img class="grid-image" src="/imgs/photo-grid-v-4.jpg">-->
+<!--											<figcaption>-->
+<!--												<p class="instauser">-->
+<!--													Black dress-->
+<!--												</p>-->
+<!--												<p class="price">€ 3.230</p>-->
+<!--											</figcaption>-->
+<!--										</figure>-->
+<!--									</div>-->
+<!--								</a>-->
+<!--							</div>-->
+<!--							<div class="menu-category list-group">-->
+<!--								<a href="#">-->
+<!--									<div class="grid">-->
+<!--										<figure class="effect-zoe">-->
+<!--											<img class="grid-image" src="/imgs/photo-grid-v-5.jpg">-->
+<!--											<figcaption>-->
+<!--												<p class="instauser">-->
+<!--													Black dress-->
+<!--												</p>-->
+<!--												<p class="price">€ 3.230</p>-->
+<!--											</figcaption>-->
+<!--										</figure>-->
+<!--									</div>-->
+<!--								</a>-->
+<!--							</div>-->
+<!--							<div class="menu-category list-group">-->
+<!--								<a href="#">-->
+<!--									<div class="grid">-->
+<!--										<figure class="effect-zoe">-->
+<!--											<img class="grid-image" src="/imgs/photo-grid-v-6.jpg">-->
+<!--											<figcaption>-->
+<!--												<p class="instauser">-->
+<!--													Black dress-->
+<!--												</p>-->
+<!--												<p class="price">€ 3.230</p>-->
+<!--											</figcaption>-->
+<!--										</figure>-->
+<!--									</div>-->
+<!--								</a>-->
+<!--							</div>-->
+<!--							<div class="menu-category list-group">-->
+<!--								<a href="#">-->
+<!--									<div class="grid">-->
+<!--										<figure class="effect-zoe">-->
+<!--											<img class="grid-image" src="/imgs/photo-grid-v-7.jpg">-->
+<!--											<figcaption>-->
+<!--												<p class="instauser">-->
+<!--													Black dress-->
+<!--												</p>-->
+<!--												<p class="price">€ 3.230</p>-->
+<!--											</figcaption>-->
+<!--										</figure>-->
+<!--									</div>-->
+<!--								</a>-->
+<!--							</div>-->
 						</div>
 					</div>
 				</div>

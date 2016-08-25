@@ -231,10 +231,12 @@ class DeviserController extends CController {
 	{
 		// get the category object
 		$deviser = Person::findOne(["short_id" => $deviser_id]);
+		$products = Product::find()->where(["deviser_id" => $deviser_id])->all();
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("store", [
 			'deviser' => $deviser,
+			'products' => $products,
 		]);
 	}
 
