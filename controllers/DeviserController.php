@@ -14,6 +14,7 @@ use app\models\SizeChart;
 use app\models\MetricType;
 use yii\filters\VerbFilter;
 use app\helpers\CController;
+use app\helpers\CActiveRecord;
 use yii\filters\AccessControl;
 
 class DeviserController extends CController {
@@ -157,6 +158,7 @@ class DeviserController extends CController {
 			]);
 			$deviser->save();
 
+			Person::setSerializeScenario(CActiveRecord::SERIALIZE_SCENARIO_ADMIN);
 			return $deviser;
 		}
 	}
@@ -178,6 +180,7 @@ class DeviserController extends CController {
 			]);
 			$deviser->save();
 
+			Person::setSerializeScenario(CActiveRecord::SERIALIZE_SCENARIO_ADMIN);
 			return $deviser;
 		}
 	}
@@ -205,6 +208,7 @@ class DeviserController extends CController {
 			$product->media = $media;
 			$product->save();
 
+			Product::setSerializeScenario(CActiveRecord::SERIALIZE_SCENARIO_ADMIN);
 			return $product;
 		}
 	}
@@ -224,6 +228,7 @@ class DeviserController extends CController {
 		$product->media = $media;
 		$product->save();
 
+		Product::setSerializeScenario(CActiveRecord::SERIALIZE_SCENARIO_ADMIN);
 		return $product;
 	}
 

@@ -70,7 +70,7 @@ $this->title = 'Todevise / Home';
 					</ul>
 					<ul>
 						<li>
-							<a href="<?= Url::to(["deviser/about", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id])?>">About <?= $deviser->getName() ?></a>
+							<a href="<?= Url::to(["deviser/about", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id])?>">About</a>
 						</li>
 						<li>
 							<a href="#">Press</a>
