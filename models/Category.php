@@ -15,6 +15,11 @@ use yii\mongodb\Query;
  */
 class Category extends CActiveRecord {
 
+	/** @var Product */
+	private $deviserProduct;
+
+	/** @var array */
+	private $deviserSubcategories;
 	public static function collectionName() {
 		return 'category';
 	}
@@ -158,6 +163,39 @@ class Category extends CActiveRecord {
 		return $ids;
 	}
 
+	/**
+	 * @return Product
+	 */
+	public function getDeviserProduct()
+	{
+		return $this->deviserProduct;
+	}
+
+	/**
+	 * @param Product $deviserProduct
+	 */
+	public function setDeviserProduct($deviserProduct)
+	{
+		$this->deviserProduct = $deviserProduct;
+	}
+
+
+	/**
+	 * @return array
+	 */
+	public function getDeviserSubcategories()
+	{
+		return $this->deviserSubcategories;
+	}
+
+	/**
+	 * @param array $deviserSubcategories
+	 */
+	public function setDeviserSubcategories($deviserSubcategories)
+	{
+		$this->deviserSubcategories = $deviserSubcategories;
+	}
+
 
 	public function beforeSave($insert) {
 		/*
@@ -209,5 +247,7 @@ class Category extends CActiveRecord {
 
 		return parent::beforeDelete();
 	}
+
+
 
 }

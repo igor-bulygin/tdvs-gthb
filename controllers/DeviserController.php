@@ -234,14 +234,22 @@ class DeviserController extends CController {
 
 	public function actionStore($slug, $deviser_id)
 	{
-		// get the category object
+		// find the deviser
 		$deviser = Person::findOne(["short_id" => $deviser_id]);
-		$products = Product::find()->where(["deviser_id" => $deviser_id])->all();
+		// categories of all products
+		$categories = $deviser->getCategoriesOfProducts();
+		/** @var Category $selectedCategory */
+		$selectedCategory = $this->getCategoryById($categories, Yii::$app->request->get('category'));
+		$selectedCategory = isset($selectedCategory) ? $selectedCategory : $categories[0];
+		// their products, for selected category
+		$products = Product::find()->where(["deviser_id" => $deviser_id, "categories" => $selectedCategory->getShortIds()])->all();
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("store", [
 			'deviser' => $deviser,
 			'products' => $products,
+			'categories' => $categories,
+			'selectedCategory' => $selectedCategory,
 		]);
 	}
 
@@ -254,6 +262,25 @@ class DeviserController extends CController {
 		return $this->render("about", [
 			'deviser' => $deviser,
 		]);
+	}
+
+	/**
+	 * Find a category from list by their short_id
+	 *
+	 * @param array $categories
+	 * @param $category_id
+	 * @return Category
+	 */
+	private function getCategoryById(array $categories, $category_id)
+	{
+		/** @var Category $category */
+		foreach ($categories as $category) {
+			if ($category->short_id == $category_id) {
+				return $category;
+			}
+		}
+
+		return null;
 	}
 
 }

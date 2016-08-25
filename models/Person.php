@@ -362,6 +362,51 @@ class Person extends CActiveRecord implements IdentityInterface {
 
 	}
 
+	/**
+	 * Return the second level categories related with products of the deviser.
+	 *
+	 * @return array
+	 */
+	public function getCategoriesOfProducts()
+	{
+		$level2Categories = [];
+
+		// TODO could be optimized with an aggregation ??
+		$products = Product::find()->select(['short_id', 'categories', 'media'])->where(['deviser_id' => $this->short_id])->all();
+		$detailCategoriesIds = [];
+		/** @var Product $product */
+		foreach ($products as $product) {
+			$detailCategoriesIds = array_unique(array_merge($detailCategoriesIds, $product->categories));
+		}
+
+		// now, get the models for those categories
+		$detailCategories = Category::find()->select(['short_id', 'name', 'slug', 'path'])->where(['short_id' => $detailCategoriesIds])->all();
+		$level2Ids = [];
+		/** @var Category $category */
+		foreach ($detailCategories as $category) {
+			// remove first slash, and find id of second level category
+			$ancestors = explode('/', ltrim($category->path, '/'));
+			$level2Id = (count($ancestors) > 1) ? $ancestors[1] : $ancestors[0];
+			$level3Id = (count($ancestors) > 2) ? $ancestors[2] : null;
+			if (array_key_exists($level2Id, $level2Ids)) {
+				$level2Ids[$level2Id][] = array_merge($level2Ids[$level2Id], [$level3Id]);
+			} else {
+				$level2Ids[$level2Id][] = $level3Id;
+			}
+		}
+
+		/** @var Category $category */
+		foreach ($level2Ids as $id => $subIds) {
+			$category = Category::findOne(['short_id' => $id]);
+			// assign one product of the deviser, related with this category
+			$category->setDeviserProduct(Product::findOne(["deviser_id" => $this->short_id, "categories" => $category->getShortIds()]));
+			$category->setDeviserSubcategories(Category::find()->where(['short_id' => $subIds])->all());
+			$level2Categories[] = $category;
+		}
+
+		return $level2Categories;
+	}
+
 }
 
 
