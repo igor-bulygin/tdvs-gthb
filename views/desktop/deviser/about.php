@@ -90,14 +90,14 @@ $this->title = 'Todevise / Home';
 							<div class="title">Abo<br>ut</div>
 							<div class="name-location-wrapper">
 								<div class="name">
-									Anna Kovyneva
+									<?= $deviser->getBrandName() ?>
 								</div>
 								<div class="location">
-									London, UK
+									<?= $deviser->getLocationLabel() ?>
 								</div>
 							</div>
 							<div class="subtitle">
-								Fashion Designer, Art Designer, Jewelry Designer, Technology Designer
+								<?= $deviser->getCategoriesLabel() ?>
 							</div>
 							<div class="resume-header">See resume</div>
 							<p>I am a UX Designer and Art Director from Austria living in Berlin.</p>

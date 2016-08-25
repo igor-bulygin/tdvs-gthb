@@ -30,7 +30,7 @@ Example about how to call to Web Service to update Deviser profile
       "country": "AN"
     },
     "preferences": {
-      "lang": "en-EU",
+      "lang": "en-US",
       "currency": "EUR"
     },
     "slug": "slug4"

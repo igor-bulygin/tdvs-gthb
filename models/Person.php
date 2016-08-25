@@ -356,6 +356,53 @@ class Person extends CActiveRecord implements IdentityInterface {
 	 *
 	 * @return mixed|null
 	 */
+	public function getLocationLabel()
+	{
+		$location = [];
+		if (isset($this->personal_info)) {
+			if (isset($this->personal_info['city'])) {
+				$location[] = $this->personal_info['city'];
+			}
+			/** @var Country $country */
+			if (isset($this->personal_info['country'])) {
+				$country = Country::findOne(['country_code' => $this->personal_info['country']]);
+				if ($country) {
+					$location[] = Utils::l($country->country_name);
+				}
+			}
+		}
+
+		return implode(", ", $location);
+	}
+
+	/**
+	 * Get the location from Person.
+	 * First get city, otherwise get country
+	 *
+	 * @return mixed|null
+	 */
+	public function getCategoriesLabel()
+	{
+		$categories = [];
+		if (isset($this->categories)) {
+			foreach ($this->categories as $category_id) {
+				/** @var Category $category */
+				$category = Category::findOne(['short_id' => $category_id]);
+				if ($category) {
+					$categories[] = Utils::l($category->name);
+				}
+			}
+		}
+
+		return implode(", ", $categories);
+	}
+
+	/**
+	 * Get the location from Person.
+	 * First get city, otherwise get country
+	 *
+	 * @return mixed|null
+	 */
 	public function getShortDescription()
 	{
 		return empty($this->text_short_description) ? 'I\'m so happy to be here, always ready.' : $this->text_short_description;
