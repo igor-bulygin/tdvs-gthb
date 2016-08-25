@@ -164,14 +164,14 @@ class Person extends CActiveRecord implements IdentityInterface {
                 'app\validators\EmbedTranslatableFieldValidator',
                 'scenario' => self::SCENARIO_DEVISER_PROFILE_UPDATE,
             ],
-            [['preferences'], 'required'],
+            [['preferences'], 'required', 'on' => self::SCENARIO_DEVISER_PROFILE_UPDATE],
             [
                 'preferences',
                 'app\validators\EmbedDocValidator',
                 'scenario' => self::SCENARIO_DEVISER_PROFILE_UPDATE,
                 'model'=>'\app\models\PersonPreferences'
             ],
-            [['personal_info'], 'required'],
+            [['personal_info'], 'required', 'on' => self::SCENARIO_DEVISER_PROFILE_UPDATE],
             [
                 'personal_info',
                 'app\validators\EmbedDocValidator',
@@ -204,6 +204,22 @@ class Person extends CActiveRecord implements IdentityInterface {
             case CActiveRecord::SERIALIZE_SCENARIO_OWNER:
                 static::$serializeFields = [
                     'id' => 'short_id',
+	                'short_id', // TODO Remove when all calls are migrated to new API
+                    'slug',
+                    'text_short_description',
+                    'text_biography',
+                    'categories',
+                    'collections',
+                    'personal_info',
+                    'media',
+                    'credentials',
+                    'preferences',
+                ];
+                break;
+            case CActiveRecord::SERIALIZE_SCENARIO_ADMIN:
+                static::$serializeFields = [
+                    'id' => 'short_id',
+                    'short_id', // TODO Remove when all calls are migrated to new API
                     'slug',
                     'text_short_description',
                     'text_biography',

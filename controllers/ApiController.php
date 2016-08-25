@@ -126,7 +126,7 @@ class ApiController extends CController {
 			/* @var $country \app\models\Country */
 			$country = Country::findOne(["short_id" => $_country["short_id"]]);
 			$country->setAttributes($_country, false);
-			$country->save();
+			$country->save(false);
 
 			$res = $country;
 		} else if ($request->isDelete) {
@@ -169,7 +169,7 @@ class ApiController extends CController {
 			unset($_admin["credentials"]["password"]);
 			$admin->setAttributes($_admin, false);
 			$admin->setPassword($password);
-			$admin->save();
+			$admin->save(false);
 
 			$res = $admin;
 		} else if ($request->isDelete) {
@@ -209,7 +209,7 @@ class ApiController extends CController {
 			/* @var $deviser \app\models\Person */
 			$deviser = Person::findOne(["short_id" => $_deviser["short_id"]]);
 			$deviser->setAttributes($_deviser, false);
-			$deviser->save();
+			$deviser->save(false);
 
 			$res = $deviser;
 		} else if ($request->isDelete) {
@@ -249,7 +249,7 @@ class ApiController extends CController {
 			/* @var $product \app\models\Product */
 			$product = Product::findOne(["short_id" => $_product["short_id"]]);
 			$product->setAttributes($_product, false);
-			$product->save();
+			$product->save(false);
 
 			$res = $product;
 		} else if ($request->isDelete) {
@@ -296,7 +296,7 @@ class ApiController extends CController {
 			/* @var $tag \app\models\Tag */
 			$tag = Tag::findOne(["short_id" => $_tag["short_id"]]);
 			$tag->setAttributes($_tag, false);
-			$tag->save();
+			$tag->save(false);
 
 			$res = $tag;
 		} else if ($request->isDelete) {
@@ -338,7 +338,7 @@ class ApiController extends CController {
 			/* @var $sizechart \app\models\SizeChart */
 			$sizechart = SizeChart::findOne(["short_id" => $_sizechart["short_id"]]);
 			$sizechart->setAttributes($_sizechart, false);
-			$sizechart->save();
+			$sizechart->save(false);
 
 			$res = $sizechart;
 		} else if ($request->isDelete) {
@@ -381,7 +381,7 @@ class ApiController extends CController {
 			$category = Category::findOne(["short_id" => $node["short_id"]]);
 			$category->setAttributes($node, false);
 			$category->name = array_replace_recursive($category->name, $node["name"]);
-			$category->save();
+			$category->save(false);
 
 			$res = $category;
 		} else if ($request->isDelete) {
@@ -427,7 +427,7 @@ class ApiController extends CController {
 			$category = Faq::findOne(["short_id" => $node["short_id"]]);
 			$category->setAttributes($node, false);
 			//$category->title = array_replace_recursive($category->title, $node["title"]);
-			$category->save();
+			$category->save(false);
 
 			$res = $category;
 		} else if ($request->isDelete) {
@@ -472,7 +472,7 @@ class ApiController extends CController {
 			$category = Faq::findOne(["short_id" => $node["short_id"]]);
 			$category->setAttributes($node, false);
 			$category->title = array_replace_recursive($category->title, $node["title"]);
-			$category->save();
+			$category->save(false);
 
 			$res = $category;
 		} else if ($request->isDelete) {
@@ -519,7 +519,7 @@ class ApiController extends CController {
 			$category = Term::findOne(["short_id" => $node["short_id"]]);
 			$category->setAttributes($node, false);
 			//$category->title = array_replace_recursive($category->title, $node["title"]);
-			$category->save();
+			$category->save(false);
 
 			$res = $category;
 		} else if ($request->isDelete) {
@@ -564,7 +564,7 @@ class ApiController extends CController {
 			$category = Term::findOne(["short_id" => $node["short_id"]]);
 			$category->setAttributes($node, false);
 			$category->title = array_replace_recursive($category->title, $node["title"]);
-			$category->save();
+			$category->save(false);
 
 			$res = $category;
 		} else if ($request->isDelete) {
