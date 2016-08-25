@@ -22,20 +22,19 @@ Example about how to call to Web Service to update Deviser profile
     },
     "text_short_description": "my new short description",
     "personal_info": {
-      "name": "test deviser",
-      "brand_name": "my brand name",
-      "country": "AN",
-      "city": "faketown",
+      "name": "My name",
       "surnames": [
-        "surname 1",
-        "surname 2"
-      ]
-    }
-  },
-  "preferences": {
-    "lang": "en-US",
-    "currency": "EUR"
-  },
-  "slug": "slug-example"
+        "surname 1"
+      ],
+      "brand_name": "my brand name",
+      "city": "faketown",
+      "country": "AN"
+    },
+    "preferences": {
+      "lang": "en-EU",
+      "currency": "EUR"
+    },
+    "slug": "slug4"
+  }
 }
 ```
