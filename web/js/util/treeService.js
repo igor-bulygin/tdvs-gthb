@@ -34,9 +34,9 @@
 				plugins: ["state", "dnd", "search", "sort", "wholerow", "actions", "types"]
 			}
 		};
-		
+
 	}
 
-	angular.module('util.treeService', [])
+	angular.module('util')
 		.service('treeService', treeService);
 }());
