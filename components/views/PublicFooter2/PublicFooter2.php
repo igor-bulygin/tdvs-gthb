@@ -7,16 +7,19 @@ use yii\helpers\Url;
 
 /** @var Category $category */
 
+// use params to share data between views :(
+$footerMode = array_key_exists('footer_mode', $this->params) ? $this->params['footer_mode'] : 'expanded';
+
 ?>
 
 <!-- FOOTER -->
-<footer>
+<footer class="<?= ($footerMode=='expanded') ? 'untoggled' : '' ?>">
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-3">
 				<div class="title">Categories</div>
 				<ul class="footer-items">
-					<?php foreach(Category::getFooterCategories() as $category) { ?>
+					<?php foreach($categories as $category) { ?>
 						<li>
 							<a href="<?= Url::to(["public/category-b", "slug" => $category->slug, 'category_id' => $category->short_id])?>"><?=Utils::l($category->name)?></a>
 						</li>

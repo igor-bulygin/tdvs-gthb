@@ -8,18 +8,11 @@ use yii\base\Widget;
 use app\helpers\Utils;
 
 class PublicFooter2 extends Widget {
-	/**
-	 * @inheritdoc
-	 */
-
-	public $categories;
-
-	public function init() {
-		$this->categories = Category::getFooterCategories();
-	}
 
 	public function run() {
-		return $this->render('PublicFooter2');
+		return $this->render('PublicFooter2', [
+			'categories' => Category::getFooterCategories(),
+		]);
 	}
 
 	public function getViewPath() {

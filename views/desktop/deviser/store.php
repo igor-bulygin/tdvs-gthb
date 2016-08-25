@@ -50,7 +50,7 @@ $this->title = 'Todevise / Home';
 		</div>
 	</div>
 </div>
-<div class="store">
+<div class="store" style="padding-bottom: 40px">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-2">
@@ -60,7 +60,7 @@ $this->title = 'Todevise / Home';
 							<a class="active" href="#">Store</a>
 							<ul class="submenu-store">
 								<?php foreach ($categories as $i => $category) { ?>
-								<li class="<?= (($i==0) ? 'mt10' : (($i==count($categories)) ? 'mt20' : '')) ?>">
+								<li class="<?= (($i==0) ? 'mt10' : (($i==(count($categories)-1)) ? 'mt20' : '')) ?>">
 									<a href="<?= Url::to(["deviser/store", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id, 'category' => $category->short_id])?>"><?= Utils::l($category->name) ?></a>
 								</li>
 								<?php } ?>

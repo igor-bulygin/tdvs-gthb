@@ -39,7 +39,7 @@ use yii\helpers\Url;
 
 				<div class="dropdown-menu dropdown-shop">
 						<ul class="shop-menu-wrapper">
-							<?php foreach(Category::getHeaderCategories() as $category) { ?>
+							<?php foreach($categories as $category) { ?>
 								<li><a class="ion-chevron-right" href="<?= Url::to(["public/category-b", "slug" => $category->slug, 'category_id' => $category->short_id])?>"><?= Utils::l($category->name)?></a></li>
 								<li role="separator" class="divider"></li>
 							<?php } ?>

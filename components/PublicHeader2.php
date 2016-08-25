@@ -2,6 +2,7 @@
 
 namespace app\components;
 
+use app\models\Category;
 use Yii;
 use yii\base\Widget;
 use app\helpers\Utils;
@@ -12,7 +13,9 @@ class PublicHeader2 extends Widget {
 	 */
 
 	public function run() {
-		return $this->render('PublicHeader2');
+		return $this->render('PublicHeader2', [
+			'categories' => Category::getHeaderCategories(),
+		]);
 	}
 
 	public function getViewPath() {

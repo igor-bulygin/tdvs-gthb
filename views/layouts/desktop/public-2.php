@@ -10,6 +10,7 @@ use app\helpers\Utils;
 /* @var $this \yii\web\View */
 /* @var $content string */
 
+
 ?>
 
 <?php $this->beginPage() ?>
