@@ -240,7 +240,9 @@ class DeviserController extends CController {
 		$categories = $deviser->getCategoriesOfProducts();
 		/** @var Category $selectedCategory */
 		$selectedCategory = $this->getCategoryById($categories, Yii::$app->request->get('category'));
-		$selectedCategory = isset($selectedCategory) ? $selectedCategory : $categories[0];
+		if (!isset($selectedCategory)) {
+			$selectedCategory = (count($categories) > 0) ? $categories[0] : new Category();
+		}
 		// their products, for selected category
 		$products = Product::find()->where(["deviser_id" => $deviser_id, "categories" => $selectedCategory->getShortIds()])->all();
 

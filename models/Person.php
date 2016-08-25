@@ -385,7 +385,7 @@ class Person extends CActiveRecord implements IdentityInterface {
 		/** @var Category $category */
 		foreach ($detailCategories as $category) {
 			// remove first slash, and find id of second level category
-			$ancestors = explode('/', ltrim($category->path, '/'));
+			$ancestors = explode('/', rtrim(ltrim($category->path, '/'), '/'));
 			$level2Id = (count($ancestors) > 1) ? $ancestors[1] : $ancestors[0];
 			$level3Id = (count($ancestors) > 2) ? $ancestors[2] : null;
 			if (array_key_exists($level2Id, $level2Ids)) {
