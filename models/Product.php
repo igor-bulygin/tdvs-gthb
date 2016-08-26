@@ -316,16 +316,30 @@ class Product extends CActiveRecord {
 	public function getTags()
 	{
 		$tags = [];
-		foreach ($this->options as $option_id => $detail) {
+		foreach ($this->options as $tag_id => $detail) {
 			/** @var Tag $tag */
-			$tag = Tag::findOne(['short_id' => $option_id]);
-//			$tag->setAttribute('options', [
-//				["text" => "lala", "value" => "menda"]
-//			]);
-			$tags[] = $tag;
+			$tag = Tag::findOne(['short_id' => $tag_id]);
+			if ($tag) {
+				$tag->setAttribute('options', $this->getProductOptionsForTag($tag_id));
+				$tags[] = $tag;
+			}
 		}
 //		print_r($tags);
 		return $tags;
+	}
+	
+	private function getProductOptionsForTag($tag_id)
+	{
+		$values = [];
+		foreach ($this->options as $id => $option) {
+			if ($id == $tag_id) {
+				if (count($option)>0) {
+					$value = $option[0][0];
+					$values[] = ["text" => ["en-US" => $value], "value" => $value];
+				}
+			}
+		}
+		return $values;
 	}
 
 	/**

@@ -127,7 +127,7 @@ $cssCarrouselFix = sprintf("
 								<div class="form-group">
 									<label class="col-sm-3 control-label product-label"><span class="atr"><?= Utils::l($tag->name) ?></span></label>
 									<div class="col-sm-9">
-										<select class="form-control selectpicker product-select" title="Choose size">
+										<select class="form-control selectpicker product-select" title="Choose">
 											<option></option>
 											<?php foreach ($tag["options"] as $option) { ?>
 											<option><?= Utils::l($option["text"]) ?></option>

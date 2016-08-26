@@ -146,7 +146,7 @@ class DeviserController extends CController {
 		$deviser = Person::findOne(["slug" => $slug]);
 		$deviser_path = Utils::join_paths(Yii::getAlias("@deviser"), $deviser->short_id);
 
-		$res = $this->savePostedFile($deviser_path, "header");
+		$res = $this->savePostedFile($deviser_path, ("header." . uniqid()));
 		if($res !== false) {
 			//Delete the old header picture if it didn't get overridden by the new one
 			if(isset($deviser["media"]["header"]) && strcmp($deviser["media"]["header"], $res) !== 0) {
@@ -168,7 +168,7 @@ class DeviserController extends CController {
 		$deviser = Person::findOne(["slug" => $slug]);
 		$deviser_path = Utils::join_paths(Yii::getAlias("@deviser"), $deviser->short_id);
 
-		$res = $this->savePostedFile($deviser_path, "profile");
+		$res = $this->savePostedFile($deviser_path, ("profile." . uniqid()));
 		if($res !== false) {
 			//Delete the old profile picture if it didn't get overridden by the new one
 			if(isset($deviser["media"]["profile"]) && strcmp($deviser["media"]["profile"], $res) !== 0) {
