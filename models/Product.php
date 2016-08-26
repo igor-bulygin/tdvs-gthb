@@ -267,4 +267,42 @@ class Product extends CActiveRecord {
 		return null;
 	}
 
+	/**
+	 * Get the URLs of images to use in a gallery
+	 *
+	 * @return array
+	 */
+	public function getUrlGalleryImages()
+	{
+		$images = [];
+		if (array_key_exists("photos", $this->media)) {
+			foreach ($this->media["photos"] as $imageData) {
+				$images[] = Yii::getAlias('@product_url') .'/'.  $this->short_id .'/'. $imageData['name'];
+			}
+		}
+
+		// TODO Hack to force only 5 images to show in the gallery. Remove this when the gallery was finished
+		while (count($images) < 5) {
+			$images = array_merge($images, $images);
+		}
+
+		return array_slice($images, 0, 5) ;
+	}
+
+	/**
+	 * @param null $level
+	 * @return Category
+	 */
+	public function getCategory($level = null)
+	{
+		$category = Category::findOne(['short_id' => $this->categories[0]]);
+		if ($level) {
+			// remove first slash, and find id of second level category
+			$ancestors = explode('/', rtrim(ltrim($category->path, '/'), '/'));
+			$category = Category::findOne(['short_id' => $ancestors[($level)]]);
+		}
+
+		return $category;
+	}
+
 }

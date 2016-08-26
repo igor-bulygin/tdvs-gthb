@@ -14,9 +14,9 @@ use app\assets\desktop\pub\Index2Asset;
 
 Index2Asset::register($this);
 
-$this->title = 'Todevise / Home';
-
 /** @var Person $deviser */
+
+$this->title = 'About ' . $deviser->getBrandName() . ' - Todevise';
 
 ?>
 

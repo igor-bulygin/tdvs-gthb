@@ -15,12 +15,12 @@ use app\assets\desktop\pub\Index2Asset;
 
 Index2Asset::register($this);
 
-$this->title = 'Todevise / Home';
-
 /** @var Person $deviser */
 /** @var Product $product */
 /** @var Category $category */
 /** @var Category $selectedCategory */
+
+$this->title = $deviser->getBrandName() . ' - Todevise';
 
 ?>
 
@@ -120,7 +120,7 @@ $this->title = 'Todevise / Home';
 						<div class="mesonry-row">
 							<?php foreach ($products as $i => $product) { ?>
 								<div class="menu-category list-group">
-									<a href="<?= Url::to(["public/product-b", "slug" => Utils::l($product->slug), 'product_id' => $product->short_id])?>">
+									<a href="<?= Url::to(["product/detail", "slug" => Utils::l($product->slug), 'product_id' => $product->short_id])?>">
 										<div class="grid">
 											<figure class="effect-zoe">
 												<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getMainImage())->resize(400, 0) ?>">

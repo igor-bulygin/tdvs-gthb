@@ -423,18 +423,6 @@ class PublicController extends CController
 		]);
 	}
 
-	public function actionProductB($slug, $product_id)
-	{
-		// get the category object
-		$product = Product::findOne(["short_id" => $product_id]);
-
-		$this->layout = '/desktop/public-2.php';
-		return $this->render("product-2", [
-			'product' => $product,
-		]);
-
-	}
-
 	public function actionDeviser($deviser_id, $slug)
 	{
 		$deviser = Person::find()
