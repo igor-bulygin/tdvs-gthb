@@ -332,7 +332,7 @@ a:focus {
   border: 1px solid #bfbfbf;
   color: #6b6b6b;
   text-transform: uppercase;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: bold;
   padding: 8px 15px; }
   .btn-grey:hover {
@@ -386,6 +386,37 @@ a:focus {
   z-index: 12; }
   .btn-follow i {
     padding-right: 5px; }
+
+.btn-white {
+  background-color: #ffffff;
+  color: #F7284B;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.3px;
+  padding: 15px 20px;
+  width: 250px;
+  text-align: center;
+  border: none;
+  height: 40px;
+  display: block;
+  margin: 0 auto;
+  font-family: "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: 30px auto; }
+  .btn-white:hover {
+    background-color: #f0f0f0;
+    color: #F7284B;
+    -moz-transition-property: background-color;
+    -o-transition-property: background-color;
+    -webkit-transition-property: background-color;
+    transition-property: background-color;
+    -moz-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -moz-transition-timing-function: ease-out;
+    -o-transition-timing-function: ease-out;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out; }
 
 .navbar {
   background-color: #1C1919;
@@ -1096,6 +1127,28 @@ figure.effect-zoe:hover p.icon-links a:first-child {
         color: #4a4a4a;
         font-size: 12px; }
 
+.prev-next-wrapper {
+  float: right;
+  margin: 20px 15px 0 0; }
+  .prev-next-wrapper a.prev {
+    margin: 0 20px 0 0; }
+    .prev-next-wrapper a.prev i {
+      margin: 0 5px 0 0; }
+  .prev-next-wrapper a.next i {
+    margin: 0 0 0 5px; }
+  .prev-next-wrapper a:hover {
+    color: #F7284B;
+    text-decoration: none; }
+  .prev-next-wrapper a:focus {
+    color: #9a9a9a;
+    text-decoration: none; }
+  .prev-next-wrapper a:active {
+    color: #9a9a9a;
+    text-decoration: none; }
+  .prev-next-wrapper a:visited {
+    color: #9a9a9a;
+    text-decoration: none; }
+
 .pad-showcase {
   padding: 10px; }
 
@@ -1394,10 +1447,37 @@ figure.effect-zoe:hover p.icon-links a:first-child {
       opacity: 1;
       filter: alpha(opacity=100); }
 
+.become-deviser-wrapper {
+  height: 100vh; }
+  .become-deviser-wrapper .become-deviser-cover {
+    background-image: url("/imgs/become_a_deviser_background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    padding-bottom: 59%; }
+  .become-deviser-wrapper .call-to-action-wrapper {
+    position: relative; }
+
+.call-to-action {
+  position: absolute;
+  top: 85px;
+  left: 100px; }
+  .call-to-action .logo {
+    width: 93px;
+    margin: 0 auto; }
+  .call-to-action .tagline {
+    color: #ffffff;
+    font-family: "Univers Thin Ultra Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+    font-size: 90px;
+    letter-spacing: 4px;
+    height: 90px;
+    text-align: center; }
+
 .product {
   background-color: #e9e9e9; }
 
-.produt-photo-bg {
+.product-photo-bg {
   background-image: url(/imgs/product-grid-6.jpg);
   background-position-x: 50%;
   background-position-y: 50%;
@@ -1413,7 +1493,9 @@ figure.effect-zoe:hover p.icon-links a:first-child {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%; }
+  height: 100%;
+  opacity: 0.4;
+  filter: alpha(opacity=40); }
 
 .slider-header {
   padding: 0 15px; }
@@ -1489,7 +1571,7 @@ figure.effect-zoe:hover p.icon-links a:first-child {
     text-align: right; }
   .product-data-wrapper .product-data .social-items {
     padding: 0;
-    margin: 15px 0 0 0;
+    margin: 30px 0 40px 0;
     float: right; }
     .product-data-wrapper .product-data .social-items li {
       list-style: none;
@@ -1567,7 +1649,7 @@ figure.effect-zoe:hover p.icon-links a:first-child {
 .atr {
   color: #6d6d6d;
   text-transform: uppercase;
-  font-family: "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  font-size: 13px; }
 
 .product-label {
   text-align: left !important;
@@ -1664,10 +1746,12 @@ figure.effect-zoe:hover p.icon-links a:first-child {
   padding-left: 0; }
 
 .tax {
-  font-family: "Univers Condensed Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin: 3px 0 0 0;
   display: inline-block;
-  color: #4c4c4c; }
+  color: #4c4c4c;
+  white-space: nowrap;
+  margin-left: -10px; }
 
 .product-select {
   height: 24px; }

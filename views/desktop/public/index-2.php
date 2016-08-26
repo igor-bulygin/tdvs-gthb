@@ -73,7 +73,7 @@ $this->params['footer_mode'] = 'collapsed';
 		<div>
 			<?php foreach ($works12 as $i => $work) { ?>
 				<div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
-					<a href="<?= Url::to(["public/product-b", "slug" => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
+					<a href="<?= Url::to(["product/detail", "slug" => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
 						<div class="grid">
 							<figure class="effect-zoe">
 								<img class="grid-image"
@@ -91,7 +91,7 @@ $this->params['footer_mode'] = 'collapsed';
 			<?php } ?>
 			<?php foreach ($works3 as $i => $work) { ?>
 				<div class="col-md-4 col-sm-4 pad-grid pad-grid-h">
-					<a href="<?= Url::to(["public/product-b", "slug" => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
+					<a href="<?= Url::to(["product/detail", "slug" => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
 						<div class="grid">
 							<figure class="effect-zoe">
 								<img class="grid-image"
@@ -123,10 +123,12 @@ $this->params['footer_mode'] = 'collapsed';
 			<!-- Controls -->
 			<div class="prev-next-wrapper">
 				<a class="prev" href="#carousel-devisers" role="button" data-slide="prev">
+					<i class="ion-ios-arrow-left"></i>
 					<span>Previous</span>
 				</a>
 				<a class="next" href="#carousel-devisers" role="button" data-slide="next">
 					<span>Next</span>
+					<i class="ion-ios-arrow-right"></i>
 				</a>
 			</div>
 				<div class="carousel slide" id="carousel-devisers" data-ride="carousel">
@@ -167,7 +169,7 @@ $this->params['footer_mode'] = 'collapsed';
 			<?php foreach ($moreWork as $worksGroup) { ?>
 			<?php foreach ($worksGroup["twelve"] as $i => $work) { ?>
 			<div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
-				<a href="<?= Url::to(["public/product-b", "slug" => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
+				<a href="<?= Url::to(["product/detail", "slug" => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
 					<div class="grid">
 						<figure class="effect-zoe">
 							<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($work->getMainImage())->resize(362, 450) ?>">
@@ -185,7 +187,7 @@ $this->params['footer_mode'] = 'collapsed';
 
 			<?php foreach ($worksGroup["three"] as $i => $work) { ?>
 			<div class="col-md-4 col-sm-4 pad-grid pad-grid-h">
-				<a href="<?= Url::to(["public/product-b", "slug" => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
+				<a href="<?= Url::to(["product/detail", "slug" => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
 					<div class="grid">
 						<figure class="effect-zoe">
 							<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($work->getMainImage())->resize(375, 220) ?>">

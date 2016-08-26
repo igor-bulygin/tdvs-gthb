@@ -207,15 +207,16 @@ class PublicController extends CController
 		// Devisers
 		$query = new ActiveQuery(Person::className());
 		// filter devisers related
-		// TODO improve random devisers
-		$query->limit(20)->offset(rand(1, 100));
+		// TODO remove forced devisers for the demo
+//		$query->limit(20)->offset(rand(1, 100));
+		$query->where($this->getDevisersFilterForDemo());
 		$devisers = $query->all();
 
 		// Works
 		$query = new ActiveQuery(Product::className());
 		// TODO improve random works
-		$query->limit(60)->offset(rand(1, 100));
-//		$query->limit(150);
+//		$query->limit(60)->offset(rand(1, 100));
+		$query->where($this->getProductsFilterForDemo());
 		$works = $query->all();
 
 		$this->layout = '/desktop/public-2.php';
@@ -237,7 +238,7 @@ class PublicController extends CController
 				],
 				[
 					"twelve" => array_slice($works, 30, 12),
-					"three" => array_slice($works, 47, 3),
+					"three" => array_slice($works, 42, 3),
 				],
 				[
 					"twelve" => array_slice($works, 45, 12),
@@ -614,6 +615,102 @@ class PublicController extends CController
 		}
 
 		return $this->render("become", ['model' => $model, "showCheckEmail" => $showCheckEmail]);
+	}
+
+	private function getDevisersFilterForDemo()
+	{
+		return [
+			"slug" => [
+				"ryan-andvaleriewiens",
+				"skatetek-skateboards",
+				"sk8-shades",
+				"me-mover",
+				"pocket-london",
+				"ritot-michaelmedvid",
+				"andrea-narchik",
+				"charbonize-charbonize",
+				"vaskolg-vaskolg",
+				"cecilia-lundqvist",
+				"taeseok-kang",
+				"nina-monizdamaia",
+				"lara-quint",
+				"kim-kwang",
+				"monique-vansteen",
+				"phuong-my",
+				"neemic-neemic",
+				"niza-huang",
+				"josep-moncada",
+				"chris-herbert",
+			]
+		];
+	}
+
+	private function getProductsFilterForDemo()
+	{
+		return [
+			"short_id" => [
+				"1930f733",
+				"568d60a7",
+				"3cd57ca8",
+				"76c5f330",
+				"8a6dc1b2",
+				"629bd454",
+				"6a238916",
+				"08b8fcb2",
+				"1b704ae3",
+				"280bb083",
+				"5433f112",
+				"4b53da6e",
+				"833db559",
+				"9a974261",
+				"56cab3b7",
+				"5da7e84e",
+				"97324ed3",
+				"8de89f30",
+				"cde8a2ae",
+				"2dd99092",
+				"36323a98",
+				"df2d9f4a",
+				"02a80a47",
+				"9c1ea809",
+				"69e3827e",
+				"601efeb5",
+				"737d1a3a",
+				"b50de546",
+				"0a8aaa96",
+				"b6dde285",
+				"fcaa3c12",
+				"b843a5d3",
+				"a4404eda",
+				"925d5bbd",
+				"df58c170",
+				"c063fb0f",
+				"2820f40a",
+				"31e1c80c",
+				"853890bd",
+				"ddb5df89",
+				"b01fb976",
+				"17795b12",
+				"d1ed11c7",
+				"d9ac3c09",
+				"74386045",
+				"214caaf0",
+				"69d34604",
+				"d8325fb7",
+				"596ba29e",
+				"a39ae909",
+				"3867d0d0",
+				"2d3dce66",
+				"f52e8c21",
+				"ec4232e4",
+				"fe5ce5e5",
+				"906e8023",
+				"79628d14",
+				"a9fbccf9",
+				"cee1b8a8",
+				"d0bf9730",
+			]
+		];
 	}
 
 }

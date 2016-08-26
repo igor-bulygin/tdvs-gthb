@@ -21,7 +21,7 @@ Product2Asset::register($this);
 $this->title = Utils::l($product->name) . ' - Todevise';
 $productImages = $product->getUrlGalleryImages();
 
-$this->registerCss(".produt-photo-bg { background-image: url(" . Utils::url_scheme() . Utils::thumborize($product->getMainImage())->resize(800, 0) . "); }");
+$this->registerCss(".product-photo-bg { background-image: url(" . Utils::url_scheme() . Utils::thumborize($product->getMainImage())->resize(800, 0) . "); }");
 
 // TODO fix the carrousel to avoid css hack here
 $cssCarrouselFix = sprintf("
@@ -38,7 +38,7 @@ $cssCarrouselFix = sprintf("
 	<div class="container">
 		<div class="row">
 			<div class="col-md-9 pad-product">
-				<div class="produt-photo-bg">
+				<div class="product-photo-bg">
 				</div>
 				<div class="product-photos-wrapper">
 					<div class="slider-header">
