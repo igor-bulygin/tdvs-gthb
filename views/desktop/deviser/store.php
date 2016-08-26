@@ -32,7 +32,7 @@ $this->title = 'Todevise / Home';
 			<div class="container">
 				<div class="deviser-profile">
 					<div class="avatar">
-						<img class="cover" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($deviser->getAvatarImage())->resize(250, 250) ?>">
+						<img class="cover" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($deviser->getAvatarImage())->resize(340, 340) ?>">
 					</div>
 					<div class="deviser-data">
 						<div class="name">
@@ -50,7 +50,7 @@ $this->title = 'Todevise / Home';
 		</div>
 	</div>
 </div>
-<div class="store" style="padding-bottom: 40px">
+<div class="store">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-2">
@@ -123,7 +123,7 @@ $this->title = 'Todevise / Home';
 									<a href="<?= Url::to(["public/product-b", "slug" => Utils::l($product->slug), 'product_id' => $product->short_id])?>">
 										<div class="grid">
 											<figure class="effect-zoe">
-												<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getMainImage()) ?>">
+												<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getMainImage())->resize(400, 0) ?>">
 												<figcaption>
 													<p class="instauser">
 														<?= Utils::l($product->name) ?>
