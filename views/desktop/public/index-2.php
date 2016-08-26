@@ -73,7 +73,7 @@ $this->params['footer_mode'] = 'collapsed';
 		<div>
 			<?php foreach ($works12 as $i => $work) { ?>
 				<div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
-					<a href="<?= Url::to(["product/detail", "slug" => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
+					<a href="<?= Url::to(["public/product-b", "slug" => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
 						<div class="grid">
 							<figure class="effect-zoe">
 								<img class="grid-image"
@@ -91,7 +91,7 @@ $this->params['footer_mode'] = 'collapsed';
 			<?php } ?>
 			<?php foreach ($works3 as $i => $work) { ?>
 				<div class="col-md-4 col-sm-4 pad-grid pad-grid-h">
-					<a href="<?= Url::to(["product/detail", "slug" => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
+					<a href="<?= Url::to(["public/product-b", "slug" => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
 						<div class="grid">
 							<figure class="effect-zoe">
 								<img class="grid-image"
@@ -112,37 +112,50 @@ $this->params['footer_mode'] = 'collapsed';
 </section>
 <!-- /GRID -->
 
-<!-- SHOWCASE -->
-<section class="showcase-wrapper">
-	<div class="container">
-		<h3>Artists, designers, creators who<br>
+	<!-- SHOWCASE -->
+	<section class="showcase-wrapper">
+		<div class="container">
+			<h3>Artists, designers, creators who<br>
 			shape outstanding works</h3>
-		<div class="section-title">
-			Devisers
-		</div>
-		<div>
-			<?php foreach ($devisers as $i => $deviser) { ?>
-				<div class="col-md-3 col-sm-3 col-xs-6 pad-showcase">
-					<a href="<?= Url::to(["deviser/store", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id])?>">
-						<figure class="showcase">
-							<button class="btn btn-default btn-follow"><i class="ion-star"></i><span>Follow</span>
-							</button>
-							<img class="showcase-image"
-							     src="<?= Utils::url_scheme() ?><?= Utils::thumborize($deviser->getHeaderBackgroundImage())->resize(350, 344) ?>">
-							<figcaption>
-								<img class="showcase-image"
-								     src="<?= Utils::url_scheme() ?><?= Utils::thumborize($deviser->getAvatarImage())->resize(0, 110) ?>">
-								<span class="name"><?= $deviser->getBrandName() ?></span>
-								<span class="location"><?= $deviser->getCityLabel() ?></span>
-							</figcaption>
-						</figure>
-					</a>
+			<div class="section-title">
+				Devisers
+			</div>
+			<!-- Controls -->
+			<div class="prev-next-wrapper">
+				<a class="prev" href="#carousel-devisers" role="button" data-slide="prev">
+					<span>Previous</span>
+				</a>
+				<a class="next" href="#carousel-devisers" role="button" data-slide="next">
+					<span>Next</span>
+				</a>
+			</div>
+				<div class="carousel slide" id="carousel-devisers" data-ride="carousel">
+					<div class="carousel-inner" role="listbox">
+						<?php foreach ($devisers as $i => $group) { ?>
+					<div class="item <?= ($i==0) ? 'active' : '' ?>">
+						<?php foreach ($group as $i => $deviser) { ?>
+						<div class="col-md-3 col-sm-3 col-xs-6 pad-showcase">
+								<a href="<?= Url::to(["deviser/store", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id])?>">
+								<figure class="showcase">
+								<button class="btn btn-default btn-follow"><i class="ion-star"></i><span>Follow</span>
+								</button>
+								<img src="<?= Utils::url_scheme() ?><?= Utils::thumborize($deviser->getHeaderBackgroundImage())->resize(350, 344) ?>" class="showcase-image">
+								<figcaption>
+									<img class="showcase-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($deviser->getAvatarImage())->resize(0, 110) ?>">
+									<span class="name"><?= $deviser->getBrandName() ?></span>
+									<span class="location"><?= $deviser->getCityLabel() ?></span>
+								</figcaption>
+								</figure>
+								</a>
+							</div>
+						<?php } ?>
+					</div>
+					<?php } ?>
+					</div>
 				</div>
-			<?php } ?>
 		</div>
-	</div>
-</section>
-<!-- /SHOWCASE -->
+	</section>
+	<!-- /SHOWCASE -->
 
 <!-- GRID -->
 <section class="grid-wrapper">
@@ -154,7 +167,7 @@ $this->params['footer_mode'] = 'collapsed';
 			<?php foreach ($moreWork as $worksGroup) { ?>
 			<?php foreach ($worksGroup["twelve"] as $i => $work) { ?>
 			<div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
-				<a href="<?= Url::to(["product/detail", "slug" => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
+				<a href="<?= Url::to(["public/product-b", "slug" => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
 					<div class="grid">
 						<figure class="effect-zoe">
 							<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($work->getMainImage())->resize(362, 450) ?>">
@@ -172,7 +185,7 @@ $this->params['footer_mode'] = 'collapsed';
 
 			<?php foreach ($worksGroup["three"] as $i => $work) { ?>
 			<div class="col-md-4 col-sm-4 pad-grid pad-grid-h">
-				<a href="<?= Url::to(["product/detail", "slug" => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
+				<a href="<?= Url::to(["public/product-b", "slug" => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
 					<div class="grid">
 						<figure class="effect-zoe">
 							<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($work->getMainImage())->resize(375, 220) ?>">
