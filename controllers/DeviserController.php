@@ -156,7 +156,7 @@ class DeviserController extends CController {
 			$deviser->media = array_replace_recursive($deviser->media, [
 				"header" => $res
 			]);
-			$deviser->save();
+			$deviser->save(false);
 
 			Person::setSerializeScenario(CActiveRecord::SERIALIZE_SCENARIO_ADMIN);
 			return $deviser;
@@ -178,7 +178,7 @@ class DeviserController extends CController {
 			$deviser->media = array_replace_recursive($deviser->media, [
 				"profile" => $res
 			]);
-			$deviser->save();
+			$deviser->save(false);
 
 			Person::setSerializeScenario(CActiveRecord::SERIALIZE_SCENARIO_ADMIN);
 			return $deviser;

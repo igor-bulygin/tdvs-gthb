@@ -78,6 +78,18 @@ class TagOption {
 	}
 }
 
+/**
+ * @property string slug
+ * @property bool enabled
+ * @property bool required
+ * @property bool stock_and_price
+ * @property int type
+ * @property int n_options
+ * @property array name
+ * @property array description
+ * @property array categories
+ * @property array options
+ */
 class Tag extends CActiveRecord {
 	const DROPDOWN = 0;
 	const FREETEXT = 1;

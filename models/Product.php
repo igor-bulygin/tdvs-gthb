@@ -1,6 +1,7 @@
 <?php
 namespace app\models;
 
+use app\models\Warranty;
 use Yii;
 use app\helpers\Utils;
 use app\helpers\CActiveRecord;
@@ -305,6 +306,42 @@ class Product extends CActiveRecord {
 
 		// return the ancestor specified in level param, otherwise, return product category
 		return (isset($levelCategory)) ? $levelCategory : $category;
+	}
+
+	/**
+	 * Get the tag options related with this product
+	 *
+	 * @return array
+	 */
+	public function getTags()
+	{
+		$tags = [];
+		foreach ($this->options as $option_id => $detail) {
+			/** @var Tag $tag */
+			$tag = Tag::findOne(['short_id' => $option_id]);
+//			$tag->setAttribute('options', [
+//				["text" => "lala", "value" => "menda"]
+//			]);
+			$tags[] = $tag;
+		}
+//		print_r($tags);
+		return $tags;
+	}
+
+	/**
+	 * Get label to show warranty conditions
+	 *
+	 * @return string
+	 */
+	public function getWarrantyLabel()
+	{
+		$warrantyType = $this->warranty["type"];
+		$label = '';
+		if ($warrantyType != Warranty::NONE) {
+			$label .= $this->warranty["value"] . ' ';
+		}
+		$label .= Warranty::getDescription($this->warranty["type"]);
+		return $label;
 	}
 
 }

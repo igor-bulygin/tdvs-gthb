@@ -98,7 +98,12 @@ $this->title = 'Todevise / Admin / Devisers';
 					],
 					[
 						'value' => function($model) use ($countries_lookup){
-							return $countries_lookup[$model->personal_info["country"]];
+							if (array_key_exists("country", $model->personal_info)) {
+								if (array_key_exists($model->personal_info["country"], $countries_lookup)) {
+									return $countries_lookup[$model->personal_info["country"]];
+								}
+							}
+							return null;
 						},
 						'header' => Html::tag("div", Yii::t("app/admin", "Country")),
 					]

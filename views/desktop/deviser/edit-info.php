@@ -111,7 +111,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 					max-checked-leafs="1"
 
-					preselect="country_code, {{ deviser.personal_info.country }}"
+					preselect="country_code, {{ deviserCtrl.deviser.personal_info.country }}"
 					hide-helpers="check_all, check_none, reset"
 					search-field="country_name"
 				></div>
@@ -135,7 +135,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 					dropdown-label="<[ '<( name )>' | outputModelIterator : this : ', ' : '<?= Yii::t('app/public', 'Select category') ?>' ]>"
 					leaf-label="<[ name ]>"
 
-					preselect="{{ deviser.categories | arrpatch : 'short_id' }}"
+					preselect="{{ deviserCtrl.deviser.categories | arrpatch : 'short_id' }}"
 					hide-helpers="check_all, check_none, reset"
 					search-field="name"
 				></div>

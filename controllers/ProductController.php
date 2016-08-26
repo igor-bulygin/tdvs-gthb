@@ -23,19 +23,25 @@ class ProductController extends CController {
 
 	public function actionDetail($slug, $product_id)
 	{
-		// get the category object
+		// get the product
 		$product = Product::findOne(["short_id" => $product_id]);
 
-		// get the category object
+		$tags = $product->getTags();
+
+		// get the deviser
 		$deviser = Person::findOne(["short_id" => $product->deviser_id]);
+
+		// get other products of the deviser
+		$deviserProducts = Product::find()->where(["deviser_id" => $deviser->short_id])->all();
+
+//		print_r($product->options);
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("detail", [
 			'product' => $product,
 			'deviser' => $deviser,
+			'deviserProducts' => $deviserProducts,
 		]);
-
 	}
-
 
 }
