@@ -134,7 +134,7 @@
 				});
 			}
 
-			if ($scope.profilephoto) {
+			if (vm.profilephoto) {
 				Upload.upload({
 					headers: {
 						'X-CSRF-TOKEN': yii.getCsrfToken()
