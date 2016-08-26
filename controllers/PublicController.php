@@ -267,7 +267,7 @@ class PublicController extends CController
 		// filter devisers related
 		$query->where(['categories' => $category->getShortIds()]);
 		// TODO improve random devisers
-		$query->limit(4)->offset(rand(1, 8));
+		$query->limit(20)->offset(rand(1, 8));
 		$devisers = $query->all();
 
 		// Works
@@ -282,7 +282,11 @@ class PublicController extends CController
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("index-2", [
 			'banners' => $banners,
-			'devisers' => $devisers,
+			'devisers' => [
+				array_slice($devisers, 0, 4),
+				array_slice($devisers, 4, 4),
+				array_slice($devisers, 8, 4),
+			],
 			'works12' => array_slice($works, 0, 12),
 			'works3' => array_slice($works, 12, 3),
 			'moreWork' => [

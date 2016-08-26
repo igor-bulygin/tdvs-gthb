@@ -300,10 +300,11 @@ class Product extends CActiveRecord {
 			// remove first slash, and find id of second level category
 			$ancestors = explode('/', rtrim(ltrim($category->path, '/'), '/'));
 			$category_id = (count($ancestors) > $level) ? $ancestors[$level] : $ancestors[count($ancestors)-1];
-			$category = Category::findOne(['short_id' => $category_id]);
+			$levelCategory = Category::findOne(['short_id' => $category_id]);
 		}
 
-		return $category;
+		// return the ancestor specified in level param, otherwise, return product category
+		return (isset($levelCategory)) ? $levelCategory : $category;
 	}
 
 }
