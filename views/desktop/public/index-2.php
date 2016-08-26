@@ -24,171 +24,190 @@ $this->params['footer_mode'] = 'collapsed';
 
 ?>
 
-<!-- BANNER-->
-<div class="bs-example" data-example-id="simple-carousel">
-	<div class="carousel slide" id="carousel-example-generic" data-ride="carousel">
-		<ol class="carousel-indicators">
-			<?php foreach ($banners as $i => $banner) { ?>
-				<li data-target="#carousel-example-generic" data-slide-to="<?= $i ?>" class="<?= ($banner["active"]) ? 'active' : '' ?>"></li>
-			<?php } ?>
-		</ol>
-		<div class="carousel-inner" role="listbox">
-			<?php foreach ($banners as $i => $banner) { ?>
-				<div class="item <?= ($banner["active"]) ? 'active' : '' ?>">
-					<img src="<?= $banner["img"] ?>" alt="<?= $banner["alt"] ?>" title="">
-				</div>
-			<?php } ?>
-		</div>
-	</div>
-</div>
-<!-- /BANNER -->
-
-<!-- SUB-BANNER -->
-<section class="sub-banner">
-	<div class="container container-sub-baner">
-		<div class="row">
-			<div class="col-sm-4 col-xs-6 title-wrapper righty">
-				<h2 class="title-1"><span class="serif">The</span>store</h2>
-				<p class="tagline-1">Find products that will make you part of the future</p>
-			</div>
-			<div class="col-sm-4 col-xs-6 title-wrapper">
-				<h2>Social<br/><span class="serif">experience</span></h2>
-				<p class="tagline-2">Show the world what you like &amp; build a community</p>
-			</div>
-			<div class="col-sm-4 title-wrapper">
-				<h2>Affiliate<br/><span class="serif">for all</span></h2>
-				<p class="tagline-3">Love a product. People buy it. You earn money.</p>
+	<!-- BANNER-->
+	<div class="bs-example" data-example-id="simple-carousel">
+		<div class="carousel slide" id="carousel-example-generic" data-ride="carousel">
+			<ol class="carousel-indicators">
+				<?php foreach ($banners as $i => $banner) { ?>
+					<li data-target="#carousel-example-generic" data-slide-to="<?= $i ?>" class="<?= ($banner["active"]) ? 'active' : '' ?>"></li>
+					<?php } ?>
+			</ol>
+			<div class="carousel-inner" role="listbox">
+				<?php foreach ($banners as $i => $banner) { ?>
+					<div class="item <?= ($banner["active"]) ? 'active' : '' ?>">
+						<img src="<?= $banner["img"] ?>" alt="<?= $banner["alt"] ?>" title="">
+					</div>
+					<?php } ?>
 			</div>
 		</div>
 	</div>
-</section>
-<!-- /SUB-BANNER -->
+	<!-- /BANNER -->
 
-<!-- GRID -->
-<section class="grid-wrapper">
-	<div class="container">
-		<div class="section-title">
-			Highlighted Works
-		</div>
-		<div>
-			<?php foreach ($works12 as $i => $work) { ?>
-				<div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
-					<a href="<?= Url::to(["public/product-b", "slug" => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
-						<div class="grid">
-							<figure class="effect-zoe">
-								<img class="grid-image"
-								     src="<?= Utils::url_scheme() ?><?= Utils::thumborize($work->getMainImage())->resize(362, 450) ?>">
-								<figcaption>
-									<p class="instauser">
-										<?= Utils::l($work->name) ?>
-									</p>
-									<p class="price">€ <?= $work->getMinimumPrice() ?></p>
-								</figcaption>
-							</figure>
-						</div>
-					</a>
+	<!-- SUB-BANNER -->
+	<section class="sub-banner">
+		<div class="container container-sub-baner">
+			<div class="row">
+				<div class="col-sm-4 col-xs-6 title-wrapper righty">
+					<h2 class="title-1"><span class="serif">The</span>store</h2>
+					<p class="tagline-1">Find products that will make you part of the future</p>
 				</div>
-			<?php } ?>
-			<?php foreach ($works3 as $i => $work) { ?>
-				<div class="col-md-4 col-sm-4 pad-grid pad-grid-h">
-					<a href="<?= Url::to(["public/product-b", "slug" => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
-						<div class="grid">
-							<figure class="effect-zoe">
-								<img class="grid-image"
-								     src="<?= Utils::url_scheme() ?><?= Utils::thumborize($work->getMainImage())->resize(375, 220) ?>">
-								<figcaption>
-									<p class="instauser">
-										<?= Utils::l($work->name) ?>
-									</p>
-									<p class="price">€ <?= $work->getMinimumPrice() ?></p>
-								</figcaption>
-							</figure>
-						</div>
-					</a>
+				<div class="col-sm-4 col-xs-6 title-wrapper">
+					<h2>Social<br/><span class="serif">experience</span></h2>
+					<p class="tagline-2">Show the world what you like &amp; build a community</p>
 				</div>
-			<?php } ?>
+				<div class="col-sm-4 title-wrapper">
+					<h2>Affiliate<br/><span class="serif">for all</span></h2>
+					<p class="tagline-3">Love a product. People buy it. You earn money.</p>
+				</div>
+			</div>
 		</div>
-	</div>
-</section>
-<!-- /GRID -->
+	</section>
+	<!-- /SUB-BANNER -->
 
-<!-- SHOWCASE -->
-<section class="showcase-wrapper">
-	<div class="container">
-		<h3>Artists, designers, creators who<br>
+	<!-- GRID -->
+	<section class="grid-wrapper">
+		<div class="container">
+			<div class="section-title">
+				Highlighted Works
+			</div>
+			<div>
+				<?php foreach ($works12 as $i => $work) { ?>
+					<div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
+						<a href="<?= Url::to([" public/product-b ", "slug " => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
+							<div class="grid">
+								<figure class="effect-zoe">
+									<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($work->getMainImage())->resize(362, 450) ?>">
+									<figcaption>
+										<p class="instauser">
+											<?= Utils::l($work->name) ?>
+										</p>
+										<p class="price">€
+											<?= $work->getMinimumPrice() ?>
+										</p>
+									</figcaption>
+								</figure>
+							</div>
+						</a>
+					</div>
+					<?php } ?>
+						<?php foreach ($works3 as $i => $work) { ?>
+							<div class="col-md-4 col-sm-4 pad-grid pad-grid-h">
+								<a href="<?= Url::to([" public/product-b ", "slug " => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
+									<div class="grid">
+										<figure class="effect-zoe">
+											<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($work->getMainImage())->resize(375, 220) ?>">
+											<figcaption>
+												<p class="instauser">
+													<?= Utils::l($work->name) ?>
+												</p>
+												<p class="price">€
+													<?= $work->getMinimumPrice() ?>
+												</p>
+											</figcaption>
+										</figure>
+									</div>
+								</a>
+							</div>
+							<?php } ?>
+			</div>
+		</div>
+	</section>
+	<!-- /GRID -->
+
+	<!-- SHOWCASE -->
+	<section class="showcase-wrapper">
+		<div class="container">
+			<h3>Artists, designers, creators who<br>
 			shape outstanding works</h3>
-		<div class="section-title">
-			Devisers
-		</div>
-		<div>
-			<?php foreach ($devisers as $i => $deviser) { ?>
-				<div class="col-md-3 col-sm-3 col-xs-6 pad-showcase">
-					<a href="<?= Url::to(["deviser/store", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id])?>">
-						<figure class="showcase">
-							<button class="btn btn-default btn-follow"><i class="ion-star"></i><span>Follow</span>
-							</button>
-							<img class="showcase-image"
-							     src="<?= Utils::url_scheme() ?><?= Utils::thumborize($deviser->getHeaderBackgroundImage())->resize(350, 344) ?>">
-							<figcaption>
-								<img class="showcase-image"
-								     src="<?= Utils::url_scheme() ?><?= Utils::thumborize($deviser->getAvatarImage())->resize(0, 110) ?>">
-								<span class="name"><?= $deviser->getBrandName() ?></span>
-								<span class="location"><?= $deviser->getCityLabel() ?></span>
-							</figcaption>
-						</figure>
-					</a>
+			<div class="section-title">
+				Devisers
+			</div>
+			<!-- Controls -->
+			<div class="prev-next-wrapper">
+				<a class="prev" href="#carousel-devisers" role="button" data-slide="prev">
+					<span>Previous</span>
+				</a>
+				<a class="next" href="#carousel-devisers" role="button" data-slide="next">
+					<span>Next</span>
+				</a>
+			</div>
+				<div class="carousel slide" id="carousel-devisers" data-ride="carousel">
+					<div class="carousel-inner" role="listbox">
+						<?php foreach ($devisers as $i => $group) { ?>
+					<div class="item <?= ($i==0) ? 'active' : '' ?>">
+						<?php foreach ($group as $i => $deviser) { ?>
+						<div class="col-md-3 col-sm-3 col-xs-6 pad-showcase">
+								<a href="<?= Url::to(["deviser/store", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id])?>">
+								<figure class="showcase">
+								<button class="btn btn-default btn-follow"><i class="ion-star"></i><span>Follow</span>
+								</button>
+								<img src="<?= Utils::url_scheme() ?><?= Utils::thumborize($deviser->getHeaderBackgroundImage())->resize(350, 344) ?>" class="showcase-image">
+								<figcaption>
+									<img class="showcase-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($deviser->getAvatarImage())->resize(0, 110) ?>">
+									<span class="name"><?= $deviser->getBrandName() ?></span>
+									<span class="location"><?= $deviser->getCityLabel() ?></span>
+								</figcaption>
+								</figure>
+								</a>
+							</div>
+						<?php } ?>
+					</div>
+					<?php } ?>
+					</div>
 				</div>
-			<?php } ?>
 		</div>
-	</div>
-</section>
-<!-- /SHOWCASE -->
+	</section>
+	<!-- /SHOWCASE -->
 
-<!-- GRID -->
-<section class="grid-wrapper">
-	<div class="container">
-		<div class="section-title">
-			Highlighted Works
-		</div>
-		<div>
-			<?php foreach ($moreWork as $worksGroup) { ?>
-			<?php foreach ($worksGroup["twelve"] as $i => $work) { ?>
-			<div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
-				<a href="<?= Url::to(["public/product-b", "slug" => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
-					<div class="grid">
-						<figure class="effect-zoe">
-							<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($work->getMainImage())->resize(362, 450) ?>">
-							<figcaption>
-								<p class="instauser">
-									<?= Utils::l($work->name) ?>
-								</p>
-								<p class="price">€ <?= $work->getMinimumPrice() ?></p>
-							</figcaption>
-						</figure>
-					</div>
-				</a>
+	<!-- GRID -->
+	<section class="grid-wrapper">
+		<div class="container">
+			<div class="section-title">
+				Highlighted Works
 			</div>
-			<?php } ?>
+			<div>
+				<?php foreach ($moreWork as $worksGroup) { ?>
+					<?php foreach ($worksGroup["twelve"] as $i => $work) { ?>
+						<div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
+							<a href="<?= Url::to(["public/product-b", "slug" => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
+								<div class="grid">
+									<figure class="effect-zoe">
+										<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($work->getMainImage())->resize(362, 450) ?>">
+										<figcaption>
+											<p class="instauser">
+												<?= Utils::l($work->name) ?>
+											</p>
+											<p class="price">€
+												<?= $work->getMinimumPrice() ?>
+											</p>
+										</figcaption>
+									</figure>
+								</div>
+							</a>
+						</div>
+						<?php } ?>
 
-			<?php foreach ($worksGroup["three"] as $i => $work) { ?>
-			<div class="col-md-4 col-sm-4 pad-grid pad-grid-h">
-				<a href="<?= Url::to(["public/product-b", "slug" => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
-					<div class="grid">
-						<figure class="effect-zoe">
-							<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($work->getMainImage())->resize(375, 220) ?>">
-							<figcaption>
-								<p class="instauser">
-									<?= Utils::l($work->name) ?>
-								</p>
-								<p class="price">€ <?= $work->getMinimumPrice() ?></p>
-							</figcaption>
-						</figure>
-					</div>
-				</a>
+							<?php foreach ($worksGroup["three"] as $i => $work) { ?>
+								<div class="col-md-4 col-sm-4 pad-grid pad-grid-h">
+									<a href="<?= Url::to([" public/product-b ", "slug " => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
+										<div class="grid">
+											<figure class="effect-zoe">
+												<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($work->getMainImage())->resize(375, 220) ?>">
+												<figcaption>
+													<p class="instauser">
+														<?= Utils::l($work->name) ?>
+													</p>
+													<p class="price">€
+														<?= $work->getMinimumPrice() ?>
+													</p>
+												</figcaption>
+											</figure>
+										</div>
+									</a>
+								</div>
+								<?php } ?>
+									<?php } ?>
 			</div>
-			<?php } ?>
-			<?php } ?>
 		</div>
-	</div>
-</section>
-<!-- /GRID -->
+	</section>
+	<!-- /GRID -->
