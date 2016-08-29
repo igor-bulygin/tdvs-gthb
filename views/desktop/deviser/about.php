@@ -72,7 +72,7 @@ $this->title = 'About ' . $deviser->getBrandName() . ' - Todevise';
 							<a class="active" href="#">About</a>
 						</li>
 						<li>
-							<a href="#">Press</a>
+							<a href="<?= Url::to(["deviser/press", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id])?>">Press</a>
 						</li>
 						<li>
 							<a href="#">Videos</a>

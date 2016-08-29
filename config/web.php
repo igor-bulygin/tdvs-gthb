@@ -158,6 +158,8 @@ $config = [
 				'/work/<slug:[^/.]*?>/<product_id:[^/.]*?>' => 'product/detail',
 				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/store' => 'deviser/store',
 				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/about' => 'deviser/about',
+				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/press' => 'deviser/press',
+				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/press/edit' => 'deviser/press-edit',
 
 				//Links for a cart listing
 				'cart/' => 'public/cart',

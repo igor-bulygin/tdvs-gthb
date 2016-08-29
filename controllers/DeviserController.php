@@ -266,6 +266,28 @@ class DeviserController extends CController {
 		]);
 	}
 
+	public function actionPress($slug, $deviser_id)
+	{
+		// get the category object
+		$deviser = Person::findOne(["short_id" => $deviser_id]);
+
+		$this->layout = '/desktop/public-2.php';
+		return $this->render("press", [
+			'deviser' => $deviser,
+		]);
+	}
+
+	public function actionPressEdit($slug, $deviser_id)
+	{
+		// get the category object
+		$deviser = Person::findOne(["short_id" => $deviser_id]);
+
+		$this->layout = '/desktop/public-2.php';
+		return $this->render("press-edit", [
+			'deviser' => $deviser,
+		]);
+	}
+
 	/**
 	 * Find a category from list by their short_id
 	 *
