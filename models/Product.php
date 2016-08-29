@@ -351,7 +351,7 @@ class Product extends CActiveRecord {
 	{
 		$warrantyType = $this->warranty["type"];
 		$label = '';
-		if ($warrantyType != Warranty::NONE) {
+		if (($warrantyType != Warranty::NONE) && (array_key_exists("value", $this->warranty))) {
 			$label .= $this->warranty["value"] . ' ';
 		}
 		$label .= Warranty::getDescription($this->warranty["type"]);
