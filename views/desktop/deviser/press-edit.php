@@ -11,8 +11,9 @@ use yii\widgets\ListView;
 use yii\widgets\ActiveForm;
 use app\assets\desktop\pub\IndexAsset;
 use app\assets\desktop\pub\Index2Asset;
+use app\assets\desktop\deviser\EditPressAsset;
 
-Index2Asset::register($this);
+EditPressAsset::register($this);
 
 /** @var Person $deviser */
 
@@ -20,4 +21,8 @@ $this->title = 'About ' . $deviser->getBrandName() . ' - Todevise';
 
 ?>
 
-<div>Carcasa para editar las notas de prensa de <?= $deviser->getBrandName() ?></div>
+	<div ng-controller="editPressCtrl as editPressCtrl">
+		<p>Carcasa para editar las notas de prensa de
+			<?= $deviser->getBrandName() ?>
+		</p>
+	</div>
