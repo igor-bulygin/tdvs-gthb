@@ -23,9 +23,9 @@
 			}
 
 			//Show the crop dialog after an image is selected
-			if (n && n.name !== undefined) {
-				vm.crop_header();
-			}
+			// if (n && n.name !== undefined) {
+			// 	vm.crop_header();
+			// }
 		});
 
 		$scope.$watch("profilephoto", function (n, o) {
@@ -38,9 +38,9 @@
 			}
 
 			//Show the crop dialog after an image is selected
-			if (n && n.name !== undefined) {
-				vm.crop_profile();
-			}
+			// if (n && n.name !== undefined) {
+			// 	vm.crop_profile();
+			// }
 		});
 
 		function crop_header() {
@@ -87,6 +87,7 @@
 			modalInstance.result.then(function (data) {
 				vm.pause_watch_profilephoto = true;
 				vm.profilephoto = data.croppedphoto;
+				console.log(data.croppedphoto);
 
 				//start watching again in the next digest
 				$timeout(function () {
