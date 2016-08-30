@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	console.log("Global desktop deviser");
+	// console.log("Global desktop deviser");
 
 	function cropCtrl($scope, $uibModalInstance, $timeout, data) {
 		$scope.croppedphoto = "";

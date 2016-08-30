@@ -69,6 +69,20 @@ class Utils
 		return count($mime_type) === 2 ? $mime_type[0] : "";
 	}
 
+	public static function getFileExtensionFromMimeType($mimeType){
+
+    $extensions = [
+	    'image/png' => 'png',
+	    'image/jpeg' => 'jpeg',
+	    'image/jpg' => 'jpeg',
+    ];
+
+    // Add as many other Mime Types / File Extensions as you like
+
+    return $extensions[$mimeType];
+
+}
+
 	/**
 	 * Get the base64 (inline) string of a (image) file.
 	 * @param $path

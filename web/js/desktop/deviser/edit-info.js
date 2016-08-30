@@ -87,7 +87,6 @@
 			modalInstance.result.then(function (data) {
 				vm.pause_watch_profilephoto = true;
 				vm.profilephoto = data.croppedphoto;
-				console.log(data.croppedphoto);
 
 				//start watching again in the next digest
 				$timeout(function () {

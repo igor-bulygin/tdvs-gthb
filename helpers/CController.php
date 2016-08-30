@@ -75,21 +75,23 @@ class CController extends Controller {
 
 		Utils::mkdir($path);
 
-		$ext = strtolower(pathinfo($f["name"], PATHINFO_EXTENSION));
-		if($ext === null || $ext == "") {
-			//Try to find out the extension from the magic byte and/or the sent type
-			$mime_type = Utils::magic_guess_extension($f["tmp_name"]);
-			$sent_type = $f["type"];
+//		$ext = strtolower(pathinfo($f["name"], PATHINFO_EXTENSION));
+//		if($ext === null || $ext == "") {
+//			//Try to find out the extension from the magic byte and/or the sent type
+//			$mime_type = Utils::magic_guess_extension($f["tmp_name"]);
+//			$sent_type = $f["type"];
+//
+//			//Fuck you "jpeg" vs "jpg" extension madness. FUCK YOU!
+//			$mime_type = $mime_type === "image/jpeg" ? "image/jpg" : $mime_type;
+//			$sent_type = $sent_type === "image/jpeg" ? "image/jpg" : $sent_type;
+//
+//			if(strcmp($sent_type, $mime_type) === 0) {
+//				$s = explode("/", $sent_type);
+//				$ext = count($s) === 2 ? $s[1] : "unknown";
+//			}
+//		}
 
-			//Fuck you "jpeg" vs "jpg" extension madness. FUCK YOU!
-			$mime_type = $mime_type === "image/jpeg" ? "image/jpg" : $mime_type;
-			$sent_type = $sent_type === "image/jpeg" ? "image/jpg" : $sent_type;
-
-			if(strcmp($sent_type, $mime_type) === 0) {
-				$s = explode("/", $sent_type);
-				$ext = count($s) === 2 ? $s[1] : "unknown";
-			}
-		}
+		$ext = Utils::getFileExtensionFromMimeType($f["type"]);
 
 		if($filename === null) {
 			$filename = Utils::cfile($path, $ext);
