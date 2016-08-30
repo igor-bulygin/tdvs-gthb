@@ -50,7 +50,8 @@ class Person extends CActiveRecord implements IdentityInterface {
 			'personal_info',
 			'media',
 			'credentials',
-			'preferences'
+			'preferences',
+			'press',
 		];
 	}
 
