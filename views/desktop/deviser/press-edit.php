@@ -1,16 +1,9 @@
 <?php
 use app\models\Person;
-use app\models\Product;
 use yii\web\View;
-use yii\helpers\Url;
 use app\models\Lang;
-use yii\helpers\Html;
-use yii\widgets\Pjax;
-use app\helpers\Utils;
-use yii\widgets\ListView;
-use yii\widgets\ActiveForm;
-use app\assets\desktop\pub\IndexAsset;
 use app\assets\desktop\pub\Index2Asset;
+use yii\helpers\Json;
 use app\assets\desktop\deviser\EditPressAsset;
 
 EditPressAsset::register($this);
@@ -21,8 +14,12 @@ $this->title = 'About ' . $deviser->getBrandName() . ' - Todevise';
 
 ?>
 
+	<h2><?= $deviser->getBrandName() ?></h2>
 	<div ng-controller="editPressCtrl as editPressCtrl">
-		<p>Carcasa para editar las notas de prensa de
-			<?= $deviser->getBrandName() ?>
-		</p>
+		<?php $this->registerJs("var _deviser = " . Json::encode($deviser) . ";", View::POS_HEAD); ?>
+			<div>You don't have any press images!</div>
+			<form name="editPressCtrl.form">
+				<input type="file" ng-model="editPressCtrl.image" ngf-select name="file">
+				<button ng-click="editPressCtrl.upload(editPressCtrl.form)">Guardar</button>
+			</form>
 	</div>

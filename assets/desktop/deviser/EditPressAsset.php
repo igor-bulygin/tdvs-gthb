@@ -15,6 +15,7 @@ class EditPressAsset extends AssetBundle {
 		'js/api/deviserDataService.js'
 	];
 	public $depends = [
+		'app\assets\libs\ngFileUploadAsset',
 		'app\assets\api\ApiAsset',
 		'app\assets\libs\angularBootstrapAsset',
 		'app\assets\desktop\pub\PublicCommonAsset',

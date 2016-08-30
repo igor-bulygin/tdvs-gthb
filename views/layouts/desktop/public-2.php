@@ -13,42 +13,45 @@ use app\helpers\Utils;
 
 ?>
 
-<?php $this->beginPage() ?>
-<!doctype html>
-<html lang="<?= Yii::$app->language ?>">
-<head>
-	<?= Html::csrfMetaTags() ?>
-	<title><?= Html::encode($this->title) ?></title>
-	<!-- METAS -->
-	<meta charset="<?= Yii::$app->charset ?>">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<?php $this->beginPage() ?>
+		<!doctype html>
+		<html lang="<?= Yii::$app->language ?>">
 
-	<?php $this->head() ?>
-	<!-- CSS -->
-	<!--    <link href="/css/desktop/public-2/bootstrap.min.css" rel="stylesheet" type="text/css" media="all"/>-->
-	<!--    <link href="/css/desktop/public-2/application.css" rel="stylesheet" type="text/css" media="all"/>-->
-	<!-- FONTS -->
-	<link href='https://fonts.googleapis.com/css?family=Playfair+Display:400,700italic,400italic,700,900,900italic'
-	      rel='stylesheet' type='text/css'>
-	<!-- ICONS -->
-	<!-- IONIC ICONS -->
-	<link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-	<!-- FONTAWESOME ICONS -->
-	<script src="https://use.fontawesome.com/9a31e47575.js"></script>
-</head>
+		<head>
+			<?= Html::csrfMetaTags() ?>
+				<title>
+					<?= Html::encode($this->title) ?>
+				</title>
+				<!-- METAS -->
+				<meta charset="<?= Yii::$app->charset ?>">
+				<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<body>
-<?php $this->beginBody() ?>
+				<?php $this->head() ?>
+					<!-- CSS -->
+					<!--    <link href="/css/desktop/public-2/bootstrap.min.css" rel="stylesheet" type="text/css" media="all"/>-->
+					<!--    <link href="/css/desktop/public-2/application.css" rel="stylesheet" type="text/css" media="all"/>-->
+					<!-- FONTS -->
+					<link href='https://fonts.googleapis.com/css?family=Playfair+Display:400,700italic,400italic,700,900,900italic' rel='stylesheet' type='text/css'>
+					<!-- ICONS -->
+					<!-- IONIC ICONS -->
+					<link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+					<!-- FONTAWESOME ICONS -->
+					<script src="https://use.fontawesome.com/9a31e47575.js"></script>
+		</head>
 
-<?= PublicHeader2::widget() ?>
+		<body ng-app="todevise">
+			<?php $this->beginBody() ?>
 
-<?= $content ?>
+				<?= PublicHeader2::widget() ?>
 
-<?= PublicFooter2::widget() ?>
+					<?= $content ?>
 
-<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-<script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<?php $this->endBody() ?>
-</body>
-</html>
-<?php $this->endPage() ?>
+						<?= PublicFooter2::widget() ?>
+
+							<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+							<script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+							<?php $this->endBody() ?>
+		</body>
+
+		</html>
+		<?php $this->endPage() ?>
