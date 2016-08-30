@@ -134,7 +134,7 @@ use yii\helpers\Url;
 							<a href="#">Forgot your password?</a>
 						</li>
 						<li>
-							<button type="button" class="btn btn-default black-btn">Login</button>
+							<button type="button" class="btn btn-default btn-black">Login</button>
 						</li>
 					</ul>
 				</li>
