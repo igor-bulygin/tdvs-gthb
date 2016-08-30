@@ -69,19 +69,53 @@ class Utils
 		return count($mime_type) === 2 ? $mime_type[0] : "";
 	}
 
-	public static function getFileExtensionFromMimeType($mimeType){
+	/**
+	 * get the appropriate file extension for a mime type
+	 *
+	 * @param string $mimeType
+	 * @return string
+	 */
+	public static function getFileExtensionFromMimeType($mimeType)
+	{
+		$extensions = [
+			'image/png' => 'png',
+			'image/jpeg' => 'jpg',
+			'image/jpg' => 'jpg',
+		];
 
-    $extensions = [
-	    'image/png' => 'png',
-	    'image/jpeg' => 'jpg',
-	    'image/jpg' => 'jpg',
-    ];
+		// Add as many other Mime Types / File Extensions as you like
+		return array_key_exists($mimeType, $extensions) ? $extensions[$mimeType] : 'tmp';
+	}
 
-    // Add as many other Mime Types / File Extensions as you like
+	/**
+	 * Save a file to the path extracted from $alias, with the name $name
+	 * or a generated string in the format YYYY-MM-DD-HH-MM-xxxxx.{ext}
+	 * @param $path
+	 * @param null $filename
+	 * @return bool|string
+	 */
+	public static function savePostedFile($path, $filename = null)
+	{
+		$f = $_FILES['file'];
 
-    return $extensions[$mimeType];
+		Utils::mkdir($path);
 
-}
+		$ext = Utils::getFileExtensionFromMimeType($f["type"]);
+
+		if($filename === null) {
+			$filename = Utils::cfile($path, $ext);
+		} else {
+			Utils::touch( Utils::join_paths($path, "${filename}.${ext}") );
+		}
+		$path = Utils::join_paths($path, "${filename}.${ext}");
+
+		$res = @move_uploaded_file($f["tmp_name"], $path);
+		if($res === true) {
+			return "${filename}.${ext}";
+		} else {
+			return false;
+		}
+	}
 
 	/**
 	 * Get the base64 (inline) string of a (image) file.

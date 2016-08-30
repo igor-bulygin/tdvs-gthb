@@ -53,5 +53,19 @@ class DeviserController extends Controller {
             return ["errors" => $deviser->errors];
         }
     }
+
+    public function actionUploadsPost()
+    {
+	    /** @var Person $deviser */
+	    $deviser = Yii::$app->user->getIdentity();
+
+	    return ["name" => "header.57c5730f39aa4.png"];
+
+//	    $deviser_path = Utils::join_paths(Yii::getAlias("@deviser"), $deviser->short_id);
+//
+//	    $filename = Utils::savePostedFile($deviser_path, (uniqid()));
+//
+//	    return ["name" => $filename];
+    }
 }
 

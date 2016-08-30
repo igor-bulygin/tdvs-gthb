@@ -233,6 +233,7 @@ $config = [
 //                ['class' => 'yii\rest\UrlRule', 'controller' => 'api3/priv/v1/user'],
 				'GET api3/priv/v1/profile/deviser' => 'api3/priv/v1/deviser/view',
 				'PATCH api3/priv/v1/profile/deviser' => 'api3/priv/v1/deviser/update',
+				'POST api3/priv/v1/profile/deviser/uploads' => 'api3/priv/v1/deviser/uploads-post',
 
 				'GET api3/priv/v1/profile/user' => 'api3/priv/v1/user/view',
 				'PATCH api3/priv/v1/profile/user' => 'api3/priv/v1/user/update',

@@ -178,6 +178,13 @@ class Person extends CActiveRecord implements IdentityInterface {
                 'scenario' => self::SCENARIO_DEVISER_PROFILE_UPDATE,
                 'model'=>'\app\models\PersonPersonalInfo'
             ],
+	        [['media'], 'required', 'on' => self::SCENARIO_DEVISER_PROFILE_UPDATE],
+	        [
+		        'media',
+		        'app\validators\DeviserMediaFilesValidator',
+		        'scenario' => self::SCENARIO_DEVISER_PROFILE_UPDATE,
+		        'model'=>'\app\models\PersonMedia'
+	        ],
         ];
     }
 
