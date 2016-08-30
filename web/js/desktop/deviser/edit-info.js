@@ -23,12 +23,12 @@
 			}
 
 			//Show the crop dialog after an image is selected
-			// if (n && n.name !== undefined) {
-			// 	vm.crop_header();
-			// }
+			if (n && n.name !== undefined) {
+				vm.crop_header();
+			}
 		});
 
-		$scope.$watch("profilephoto", function (n, o) {
+		$scope.$watch("deviserCtrl.profilephoto", function (n, o) {
 			if (vm.pause_watch_profilephoto === true) return;
 			if (n === null && o === null) return;
 
@@ -38,9 +38,9 @@
 			}
 
 			//Show the crop dialog after an image is selected
-			// if (n && n.name !== undefined) {
-			// 	vm.crop_profile();
-			// }
+			if (n && n.name !== undefined) {
+				vm.crop_profile();
+			}
 		});
 
 		function crop_header() {

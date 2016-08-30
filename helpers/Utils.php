@@ -73,8 +73,8 @@ class Utils
 
     $extensions = [
 	    'image/png' => 'png',
-	    'image/jpeg' => 'jpeg',
-	    'image/jpg' => 'jpeg',
+	    'image/jpeg' => 'jpg',
+	    'image/jpg' => 'jpg',
     ];
 
     // Add as many other Mime Types / File Extensions as you like
