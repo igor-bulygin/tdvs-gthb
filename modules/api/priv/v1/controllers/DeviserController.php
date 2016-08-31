@@ -17,45 +17,47 @@ use app\models\Faq;
 use yii\web\UploadedFile;
 use yii\web\User;
 
-class DeviserController extends Controller {
+class DeviserController extends Controller
+{
 
-    public function init() {
-        parent::init();
+	public function init()
+	{
+		parent::init();
 
-        // TODO: retrieve current identity from one of the available authentication methods in Yii
-        Yii::$app->user->login(Person::findOne(["short_id" => "13cc33k"]));
-    }
+		// TODO: retrieve current identity from one of the available authentication methods in Yii
+		Yii::$app->user->login(Person::findOne(["short_id" => "13cc33k"]));
+	}
 
-    public function actionView()
-    {
-        Person::setSerializeScenario(CActiveRecord::SERIALIZE_SCENARIO_OWNER);
-        /** @var Person $deviser */
-        $deviser = Yii::$app->user->getIdentity();
+	public function actionView()
+	{
+		Person::setSerializeScenario(CActiveRecord::SERIALIZE_SCENARIO_OWNER);
+		/** @var Person $deviser */
+		$deviser = Yii::$app->user->getIdentity();
 
-        return $deviser;
-    }
+		return $deviser;
+	}
 
-    public function actionUpdate()
-    {
-        /** @var Person $deviser */
-        $deviser = Yii::$app->user->getIdentity();
+	public function actionUpdate()
+	{
+		/** @var Person $deviser */
+		$deviser = Yii::$app->user->getIdentity();
 
 //        $data = Yii::$app->request->post();
 //        print_r($data);
 
-        $deviser->setScenario($this->getScenarioFromRequest());
-        if ($deviser->load(Yii::$app->request->post(), '') && $deviser->save()) {
-            // handle success
+		$deviser->setScenario($this->getScenarioFromRequest());
+		if ($deviser->load(Yii::$app->request->post(), '') && $deviser->save()) {
+			// handle success
 
-            // TODO: return the deviser data, only for test. remove when finish.
+			// TODO: return the deviser data, only for test. remove when finish.
 //            Yii::$app->response->setStatusCode(204); // Success, without body
-            Person::setSerializeScenario(CActiveRecord::SERIALIZE_SCENARIO_OWNER);
-            return $deviser;
-        } else {
-            Yii::$app->response->setStatusCode(400); // Bad Request
-            return ["errors" => $deviser->errors];
-        }
-    }
+			Person::setSerializeScenario(CActiveRecord::SERIALIZE_SCENARIO_OWNER);
+			return $deviser;
+		} else {
+			Yii::$app->response->setStatusCode(400); // Bad Request
+			return ["errors" => $deviser->errors];
+		}
+	}
 
 	/**
 	 * Get validation scenario from request param
@@ -63,22 +65,23 @@ class DeviserController extends Controller {
 	 * @throws BadRequestHttpException
 	 * @return string
 	 */
-    private function getScenarioFromRequest()
-    {
-    	// get scenario to use in validations, from request
-    	$scenario = Yii::$app->request->post('scenario', Person::SCENARIO_DEVISER_PROFILE_UPDATE);
+	private function getScenarioFromRequest()
+	{
+		// get scenario to use in validations, from request
+		$scenario = Yii::$app->request->post('scenario', Person::SCENARIO_DEVISER_PROFILE_UPDATE);
 
-	    // check that is a valid scenario for this controller
-	    if (!in_array($scenario, [
-	    	Person::SCENARIO_DEVISER_PROFILE_UPDATE,
-	    	Person::SCENARIO_DEVISER_PRESS_UPDATE,
-	    	Person::SCENARIO_DEVISER_VIDEOS_UPDATE,
-	    	Person::SCENARIO_DEVISER_FAQ_UPDATE,
-	    ])) {
-	    	throw new BadRequestHttpException('Invalid scenario');
-	    }
+		// check that is a valid scenario for this controller
+		if (!in_array($scenario, [
+			Person::SCENARIO_DEVISER_PROFILE_UPDATE,
+			Person::SCENARIO_DEVISER_PRESS_UPDATE,
+			Person::SCENARIO_DEVISER_VIDEOS_UPDATE,
+			Person::SCENARIO_DEVISER_FAQ_UPDATE,
+		])
+		) {
+			throw new BadRequestHttpException('Invalid scenario');
+		}
 
-    	return $scenario;
-    }
+		return $scenario;
+	}
 }
 
