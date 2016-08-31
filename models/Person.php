@@ -19,6 +19,7 @@ use yii\web\IdentityInterface;
  * @property array media
  * @property array press
  * @property array videos
+ * @property array faq
  * @property array credentials
  * @property array preferences
  */
@@ -63,6 +64,7 @@ class Person extends CActiveRecord implements IdentityInterface
 			'preferences',
 			'press',
 			'videos',
+			'faq',
 		];
 	}
 
@@ -71,7 +73,7 @@ class Person extends CActiveRecord implements IdentityInterface
 	 *
 	 * @var array
 	 */
-	public $translatedAttributes = ['text_biography'];
+	public $translatedAttributes = ['text_biography', 'faq.question', 'faq.answer'];
 
 
 	public static function findIdentity($id)
@@ -176,6 +178,8 @@ class Person extends CActiveRecord implements IdentityInterface
 
 	public function rules()
 	{
+		// TODO use core validators: "in", "each" (http://www.yiiframework.com/doc-2.0/guide-tutorial-core-validators.html)
+
 		return [
 			// the name, email, subject and body attributes are required
 			[['slug', 'categories'], 'required'],
@@ -183,7 +187,7 @@ class Person extends CActiveRecord implements IdentityInterface
 			[['text_biography'], 'required', 'on' => [self::SCENARIO_DEVISER_PROFILE_UPDATE]],
 			[
 				'text_biography',
-				'app\validators\EmbedTranslatableFieldValidator',
+				'app\validators\TranslatableValidator',
 				'on' => self::SCENARIO_DEVISER_PROFILE_UPDATE,
 			],
 			[['preferences'], 'required', 'on' => self::SCENARIO_DEVISER_PROFILE_UPDATE],
@@ -219,6 +223,12 @@ class Person extends CActiveRecord implements IdentityInterface
 				'app\validators\PersonVideosValidator',
 				'on' => self::SCENARIO_DEVISER_VIDEOS_UPDATE,
 			],
+			[['faq'], 'required', 'on' => self::SCENARIO_DEVISER_FAQ_UPDATE],
+			[
+				'faq',
+				'app\validators\PersonFaqValidator',
+				'on' => self::SCENARIO_DEVISER_FAQ_UPDATE,
+			],
 		];
 	}
 
@@ -242,6 +252,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'media',
 					'press',
 					'videos',
+					'faq',
 					'url_images' => 'urlImagesLocation',
 				];
 				break;
@@ -258,6 +269,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'media',
 					'press',
 					'videos',
+					'faq',
 //                    'credentials',
 					'preferences',
 					'url_images' => 'urlImagesLocation',
@@ -276,6 +288,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'media',
 					'press',
 					'videos',
+					'faq',
 //                    'credentials',
 					'preferences',
 					'url_images' => 'urlImagesLocation',
