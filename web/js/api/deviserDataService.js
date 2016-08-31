@@ -8,7 +8,7 @@
 			}
 		});
 
-		this.Uploads = config.baseUrl + "priv/" + config.version + 'profile/deviser/uploads';
+		this.Uploads = config.baseUrl + "priv/" + config.version + 'uploads';
 	}
 
 	angular.module('api')

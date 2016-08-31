@@ -1,13 +1,31 @@
 (function () {
 	"use strict";
 
-	function controller(deviserDataService, Upload) {
+	function controller($scope, deviserDataService, Upload, toastr) {
 		var vm = this;
 		vm.upload = upload;
+		vm.update = update;
+
+		function parsePress(press, url) {
+			var images = [];
+			for (var i = 0; i < press.length; i++) {
+				images[i] = {
+					pos: i,
+					url: currentHost() + url + press[i],
+					filename: press[i]
+				};
+			}
+			return images;
+		}
 
 		function getDeviser() {
 			deviserDataService.Profile.get().$promise.then(function (dataDeviser) {
 				vm.deviser = dataDeviser;
+				if (!vm.deviser.press)
+					vm.deviser.press = [];
+				vm.images = parsePress(vm.deviser.press, vm.deviser.url_images);
+			}, function (err) {
+				toastr.error(err);
 			});
 		}
 
@@ -15,29 +33,57 @@
 			getDeviser();
 		}
 
-		function upload(form) {
-			if (form.$valid) {
-				var data = {
-					type: "press"
-				};
-				data['file'] = vm.image;
-				Upload.upload({
-					url: deviserDataService.Uploads,
-					data: data
-				}).then(function (dataUpload) {
-					console.log(dataUpload);
-				}, function (err) {
-					console.log(err);
-				})
+		$scope.$watch('editPressCtrl.image', function (newValue, oldValue) {
+			if (newValue)
+				upload(newValue);
+		});
+
+		function update(index) {
+			if (index) {
+				vm.images.splice(index, 1);
 			}
+			var patch = new deviserDataService.Profile;
+			patch.scenario = "deviser-press-update";
+			patch.press = [];
+			vm.images.forEach(function (element) {
+				patch.press.push(element.filename);
+			});
+			patch.$update().then(function (dataPress) {
+				//console.log("dataPress", dataPress);
+			}, function (err) {
+				toastr.error(err);
+			})
 		}
+
+		function upload(image) {
+			var data = {
+				type: "deviser-press",
+				deviser_id: vm.deviser.id,
+				file: image
+			};
+			Upload.upload({
+				url: deviserDataService.Uploads,
+				data: data
+			}).then(function (dataUpload) {
+				toastr.success("Photo uploaded!");
+				vm.deviser.press.push(dataUpload.data.filename);
+				vm.images = parsePress(vm.deviser.press, vm.deviser.url_images);
+				update();
+			}, function (err) {
+				toastr.error(err);
+			}, function (evt) {
+				var progress = parseInt(100.0 * evt.loaded / evt.total);
+				console.log('progress: ' + progress + '% ' + evt.config.data.file.name);
+			});
+		}
+
 
 		init();
 
 
 	}
 
-	angular.module('todevise', ['api', 'ngFileUpload'])
+	angular.module('todevise', ['api', 'ngFileUpload', 'dndLists', 'global-deviser'])
 		.controller('editPressCtrl', controller);
 
 }());
