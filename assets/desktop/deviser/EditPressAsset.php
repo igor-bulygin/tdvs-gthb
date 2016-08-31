@@ -16,6 +16,7 @@ class EditPressAsset extends AssetBundle {
 	];
 	public $depends = [
 		'app\assets\libs\ngFileUploadAsset',
+		'app\assets\libs\angularDragAndDropAsset',
 		'app\assets\api\ApiAsset',
 		'app\assets\libs\angularBootstrapAsset',
 		'app\assets\desktop\pub\PublicCommonAsset',
