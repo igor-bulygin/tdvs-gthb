@@ -232,6 +232,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'personal_info',
 					'media',
 					'press',
+					'url_images' => 'urlImagesLocation',
 				];
 				break;
 			case CActiveRecord::SERIALIZE_SCENARIO_OWNER:
@@ -248,6 +249,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'press',
 //                    'credentials',
 					'preferences',
+					'url_images' => 'urlImagesLocation',
 				];
 				break;
 			case CActiveRecord::SERIALIZE_SCENARIO_ADMIN:
@@ -264,6 +266,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'press',
 //                    'credentials',
 					'preferences',
+					'url_images' => 'urlImagesLocation',
 				];
 
 				// field name is "name", its value is defined by a PHP callback
@@ -276,6 +279,16 @@ class Person extends CActiveRecord implements IdentityInterface
 				static::$serializeFields = [];
 				break;
 		}
+	}
+
+	/**
+	 * Get the url to get the images of a Deviser
+	 *
+	 * @return string
+	 */
+	public function getUrlImagesLocation()
+	{
+		return Yii::getAlias("@deviser_url") . "/" . $this->short_id;
 	}
 
 	/**
