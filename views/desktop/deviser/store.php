@@ -85,8 +85,8 @@ $this->title = $deviser->getBrandName() . ' - Todevise';
 			</div>
 			<div class="col-md-10">
 				<div class="content-store">
+					<?php if (count($categories) > 1) { ?>
 					<div class="cathegory-wrapper">
-						<?php if (count($categories) > 1) { ?>
 						<?php foreach ($categories as $i => $category) { ?>
 						<div class="col-md-3 col-sm-3 col-xs-3 pad-cathegory">
 							<a href="<?= Url::to(["deviser/store", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id, 'category' => $category->short_id])?>">
@@ -101,9 +101,8 @@ $this->title = $deviser->getBrandName() . ' - Todevise';
 							</a>
 						</div>
 						<?php } ?>
-						<?php } ?>
-
 					</div>
+					<?php } ?>
 					<div class="store-grid">
 						<div class="title-wrapper">
 							<span class="title"><?= Utils::l($selectedCategory->name) ?></span>
