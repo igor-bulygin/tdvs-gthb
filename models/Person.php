@@ -17,6 +17,8 @@ use yii\web\IdentityInterface;
  * @property array collections
  * @property array personal_info
  * @property array media
+ * @property array press
+ * @property array videos
  * @property array credentials
  * @property array preferences
  */
@@ -60,6 +62,7 @@ class Person extends CActiveRecord implements IdentityInterface
 			'credentials',
 			'preferences',
 			'press',
+			'videos',
 		];
 	}
 
@@ -210,6 +213,12 @@ class Person extends CActiveRecord implements IdentityInterface
 				'app\validators\PersonPressFilesValidator',
 				'on' => self::SCENARIO_DEVISER_PRESS_UPDATE,
 			],
+			[['videos'], 'required', 'on' => self::SCENARIO_DEVISER_VIDEOS_UPDATE],
+			[
+				'videos',
+				'app\validators\PersonVideosValidator',
+				'on' => self::SCENARIO_DEVISER_VIDEOS_UPDATE,
+			],
 		];
 	}
 
@@ -232,6 +241,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'personal_info',
 					'media',
 					'press',
+					'videos',
 					'url_images' => 'urlImagesLocation',
 				];
 				break;
@@ -247,6 +257,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'personal_info',
 					'media',
 					'press',
+					'videos',
 //                    'credentials',
 					'preferences',
 					'url_images' => 'urlImagesLocation',
@@ -264,6 +275,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'personal_info',
 					'media',
 					'press',
+					'videos',
 //                    'credentials',
 					'preferences',
 					'url_images' => 'urlImagesLocation',
@@ -288,7 +300,7 @@ class Person extends CActiveRecord implements IdentityInterface
 	 */
 	public function getUrlImagesLocation()
 	{
-		return Yii::getAlias("@deviser_url") . "/" . $this->short_id;
+		return Yii::getAlias("@deviser_url") . "/" . $this->short_id . "/";
 	}
 
 	/**

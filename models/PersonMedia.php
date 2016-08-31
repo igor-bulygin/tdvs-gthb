@@ -21,12 +21,6 @@ class PersonMedia extends Model
      */
     public $photos;
 
-    /**
-     * @var array
-     */
-    public $videos_links;
-
-
     public function rules()
     {
         return [
