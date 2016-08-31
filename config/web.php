@@ -230,10 +230,12 @@ $config = [
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/category'],
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/country'],
 
+
 //                ['class' => 'yii\rest\UrlRule', 'controller' => 'api3/priv/v1/user'],
 				'GET api3/priv/v1/profile/deviser' => 'api3/priv/v1/deviser/view',
 				'PATCH api3/priv/v1/profile/deviser' => 'api3/priv/v1/deviser/update',
-				'POST api3/priv/v1/profile/deviser/uploads' => 'api3/priv/v1/deviser/uploads-post',
+//				'POST api3/priv/v1/profile/deviser/uploads' => 'api3/priv/v1/deviser/uploads-post',
+				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/priv/v1/upload'],
 
 				'GET api3/priv/v1/profile/user' => 'api3/priv/v1/user/view',
 				'PATCH api3/priv/v1/profile/user' => 'api3/priv/v1/user/update',

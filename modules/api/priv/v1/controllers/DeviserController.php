@@ -4,6 +4,7 @@ namespace app\modules\api\priv\v1\controllers;
 
 use app\helpers\CActiveRecord;
 use app\models\Person;
+use app\modules\api\priv\v1\forms\UploadForm;
 use Yii;
 use yii\rest\Controller;
 use yii\web\ForbiddenHttpException;
@@ -12,6 +13,7 @@ use app\helpers\Utils;
 use yii\filters\ContentNegotiator;
 
 use app\models\Faq;
+use yii\web\UploadedFile;
 use yii\web\User;
 
 class DeviserController extends Controller {
@@ -52,20 +54,6 @@ class DeviserController extends Controller {
             Yii::$app->response->setStatusCode(400); // Bad Request
             return ["errors" => $deviser->errors];
         }
-    }
-
-    public function actionUploadsPost()
-    {
-	    /** @var Person $deviser */
-	    $deviser = Yii::$app->user->getIdentity();
-
-	    return ["name" => "header.57c5730f39aa4.png"];
-
-//	    $deviser_path = Utils::join_paths(Yii::getAlias("@deviser"), $deviser->short_id);
-//
-//	    $filename = Utils::savePostedFile($deviser_path, (uniqid()));
-//
-//	    return ["name" => $filename];
     }
 }
 

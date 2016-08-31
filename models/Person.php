@@ -28,6 +28,7 @@ class Person extends CActiveRecord implements IdentityInterface {
 	const COLLABORATOR = 3;
 
     const SCENARIO_DEVISER_PROFILE_UPDATE = 'deviser-profile-update';
+    const SCENARIO_DEVISER_PRESS_UPDATE = 'deviser-press-update';
     const SCENARIO_USER_PROFILE_UPDATE = 'user-profile-update';
     const SCENARIO_TREND_SETTER_PROFILE_UPDATE = 'trend-setter-profile-update';
 
@@ -182,9 +183,15 @@ class Person extends CActiveRecord implements IdentityInterface {
 	        [['media'], 'required', 'on' => self::SCENARIO_DEVISER_PROFILE_UPDATE],
 	        [
 		        'media',
-		        'app\validators\DeviserMediaFilesValidator',
+		        'app\validators\PersonMediaFilesValidator',
 		        'scenario' => self::SCENARIO_DEVISER_PROFILE_UPDATE,
 		        'model'=>'\app\models\PersonMedia'
+	        ],
+	        [['press'], 'required', 'on' => self::SCENARIO_DEVISER_PRESS_UPDATE],
+	        [
+		        'press',
+		        'app\validators\PersonPressFilesValidator',
+		        'scenario' => self::SCENARIO_DEVISER_PRESS_UPDATE,
 	        ],
         ];
     }

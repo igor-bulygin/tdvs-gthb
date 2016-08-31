@@ -7,7 +7,7 @@ use Yii;
 use yii\base\Model;
 use yii\validators\Validator;
 
-class DeviserMediaFilesValidator extends Validator
+class PersonMediaFilesValidator extends Validator
 {
     public $scenario;
     public $model;
@@ -58,10 +58,10 @@ class DeviserMediaFilesValidator extends Validator
 	    }
 
 	    if (array_key_exists('photos', $attr)) {
-	    	foreach ($attr["photos"] as $photo) {
-			    $filePath = $deviserFilesPath . '/' . $photo;
+	    	foreach ($attr["photos"] as $imageName) {
+			    $filePath = $deviserFilesPath . '/' . $imageName;
 			    if (!file_exists($filePath)) {
-				    $this->addError($object, $attribute, sprintf('File %s not found', $photo));
+				    $this->addError($object, $attribute, sprintf('File %s not found', $imageName));
 			    }
 		    }
 	    }
