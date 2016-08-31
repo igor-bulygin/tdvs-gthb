@@ -7,6 +7,7 @@ use app\models\Person;
 use app\modules\api\priv\v1\forms\UploadForm;
 use Yii;
 use yii\rest\Controller;
+use yii\web\BadRequestHttpException;
 use yii\web\ForbiddenHttpException;
 use yii\web\Response;
 use app\helpers\Utils;
@@ -42,18 +43,42 @@ class DeviserController extends Controller {
 //        $data = Yii::$app->request->post();
 //        print_r($data);
 
-        $deviser->setScenario(Person::SCENARIO_DEVISER_PROFILE_UPDATE);
+        $deviser->setScenario($this->getScenarioFromRequest());
         if ($deviser->load(Yii::$app->request->post(), '') && $deviser->save()) {
             // handle success
 
             // TODO: return the deviser data, only for test. remove when finish.
 //            Yii::$app->response->setStatusCode(204); // Success, without body
             Person::setSerializeScenario(CActiveRecord::SERIALIZE_SCENARIO_OWNER);
-            return ["deviser" => $deviser];
+            return $deviser;
         } else {
             Yii::$app->response->setStatusCode(400); // Bad Request
             return ["errors" => $deviser->errors];
         }
+    }
+
+	/**
+	 * Get validation scenario from request param
+	 *
+	 * @throws BadRequestHttpException
+	 * @return string
+	 */
+    private function getScenarioFromRequest()
+    {
+    	// get scenario to use in validations, from request
+    	$scenario = Yii::$app->request->post('scenario', Person::SCENARIO_DEVISER_PROFILE_UPDATE);
+
+	    // check that is a valid scenario for this controller
+	    if (!in_array($scenario, [
+	    	Person::SCENARIO_DEVISER_PROFILE_UPDATE,
+	    	Person::SCENARIO_DEVISER_PRESS_UPDATE,
+	    	Person::SCENARIO_DEVISER_VIDEOS_UPDATE,
+	    	Person::SCENARIO_DEVISER_FAQ_UPDATE,
+	    ])) {
+	    	throw new BadRequestHttpException('Invalid scenario');
+	    }
+
+    	return $scenario;
     }
 }
 
