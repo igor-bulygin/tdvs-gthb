@@ -39,7 +39,7 @@
 		});
 
 		function update(index) {
-			if (index) {
+			if (index >= 0) {
 				vm.images.splice(index, 1);
 			}
 			var patch = new deviserDataService.Profile;
