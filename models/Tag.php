@@ -193,6 +193,7 @@ class Tag extends CActiveRecord {
 			case self::SERIALIZE_SCENARIO_PRODUCT_OPTION:
 				static::$serializeFields = [
 					'id' => 'short_id',
+					'widget_type' => 'widgetType',
 					'required',
 					'name',
 					'description',
@@ -219,9 +220,11 @@ class Tag extends CActiveRecord {
 		$values = [];
 
 		foreach ($this->options as $key => $option) {
-			if ($key < 5) {
+//			print_r($this->product->options["731ct"]);
+//			if ($key < 5) {
+			// TODO Be careful with "two colors" widget
+			if ($this->product->options[$this->short_id][0][0] == $option["value"]) {
 				$values[] = [
-					"type" => "select",
 					"value" => $option["value"],
 					"text" => Utils::l($option["text"]),
 					"hint" => null,
@@ -236,12 +239,22 @@ class Tag extends CActiveRecord {
 	}
 
 	/**
-	 * Filter the list of values to show, to values available for a Product
+	 * Get the widget that must be used to select the value
+	 *
+	 * @return string
+	 */
+	public function getWidgetType()
+	{
+		return "select";
+	}
+
+	/**
+	 * Set the product to use to filter the list of values to show
 	 *
 	 * @param Product $product
 	 * @return Tag
 	 */
-	public function filterValuesForProduct(Product $product)
+	public function setFilterProduct(Product $product)
 	{
 		$this->product = $product;
 		return $this;

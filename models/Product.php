@@ -203,7 +203,7 @@ class Product extends CActiveRecord {
 					'currency',
 //					'weight_unit',
 					'references',
-					'options' => 'customOptions',
+					'options' => 'productOptions',
 					'url_images' => 'urlImagesLocation',
 				];
 				static::$retrieveExtraFields = [
@@ -400,13 +400,13 @@ class Product extends CActiveRecord {
 	 *
 	 * @return array
 	 */
-	public function getCustomOptions()
+	public function getProductOptions()
 	{
 		$options = [];
 		foreach ($this->options as $tag_id => $option) {
 			/** @var Tag $tag */
 			$tag = Tag::findOne(["short_id" => $tag_id]);
-			$tag->filterValuesForProduct($this);
+			$tag->setFilterProduct($this);
 			$options[] = $tag;
 		}
 		Tag::setSerializeScenario(Tag::SERIALIZE_SCENARIO_PRODUCT_OPTION);
@@ -414,6 +414,11 @@ class Product extends CActiveRecord {
 		return $options;
 	}
 
+	/**
+	 * @deprecated
+	 * @param $tag_id
+	 * @return array
+	 */
 	private function getProductOptionsForTag($tag_id)
 	{
 		$values = [];
