@@ -11,8 +11,6 @@ class TermsAsset extends AssetBundle {
 	];
 	public $js = [
 		'js/desktop/admin/terms.js',
-		'js/util/util.js',
-		'js/util/treeService.js',
 		'js/api/termDataService.js'
 	];
 	public $depends = [
@@ -20,6 +18,7 @@ class TermsAsset extends AssetBundle {
 		'app\assets\libs\ngjstreeAsset',
 		'app\assets\libs\jstreeActionsAsset',
 		'app\assets\libs\angularBootstrapAsset',
+		'app\assets\libs\utilAsset',
 		'app\assets\desktop\admin\GlobalAsset'
 	];
 }

@@ -11,15 +11,15 @@ class EditPressAsset extends AssetBundle {
 	];
 	public $js = [
 		'js/desktop/deviser/edit-press.js',
-		'js/util/util.js',
 		'js/api/deviserDataService.js'
 	];
 	public $depends = [
-		'app\assets\libs\ngFileUploadAsset',
-		'app\assets\libs\angularDragAndDropAsset',
+		'app\assets\desktop\deviser\GlobalAsset',
+		'app\assets\desktop\pub\PublicCommonAsset',
 		'app\assets\api\ApiAsset',
 		'app\assets\libs\angularBootstrapAsset',
-		'app\assets\desktop\pub\PublicCommonAsset',
-		'app\assets\desktop\deviser\GlobalAsset'
+		'app\assets\libs\ngFileUploadAsset',
+		'app\assets\libs\angularDragAndDropAsset',
+		'app\assets\libs\utilAsset'
 	];
 }
