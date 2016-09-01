@@ -6,17 +6,16 @@ use yii\web\AssetBundle;
 class EditPressAsset extends AssetBundle {
 	public $basePath = '@webroot';
 	public $baseUrl = '@web';
-	public $css = [
-		'css/desktop/deviser/index.css',
-	];
+	public $css = [];
 	public $js = [
 		'js/desktop/deviser/edit-press.js',
 		'js/api/deviserDataService.js'
 	];
 	public $depends = [
-		'app\assets\desktop\deviser\GlobalAsset',
 		'app\assets\desktop\pub\PublicCommonAsset',
 		'app\assets\api\ApiAsset',
+		'app\assets\libs\angularAsset',
+		'app\assets\libs\angularToastrAsset',
 		'app\assets\libs\angularBootstrapAsset',
 		'app\assets\libs\ngFileUploadAsset',
 		'app\assets\libs\angularDragAndDropAsset',

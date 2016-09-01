@@ -19,8 +19,9 @@ $this->params['deviser_menu_active_option'] = 'press';
 ?>
 
 <?= DeviserHeader::widget() ?>
+<?php $this->registerJs("var _deviser = " . Json::encode($deviser) . ";", View::POS_HEAD); ?>
 
-<div class="store">
+<div class="store" ng-controller="editPressCtrl as editPressCtrl">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-2">
@@ -28,8 +29,7 @@ $this->params['deviser_menu_active_option'] = 'press';
 			</div>
 			<div class="col-md-10 about-bg">
 				<h2><?= $deviser->getBrandName() ?></h2>
-				<div ng-controller="editPressCtrl as editPressCtrl" style="background: grey">
-					<?php $this->registerJs("var _deviser = " . Json::encode($deviser) . ";", View::POS_HEAD); ?>
+				<div style="background: grey">
 					<div ng-if="editPressCtrl.images === 0">You don't have any press images!</div>
 					<form name="editPressCtrl.form">
 						<div ng-if="editPressCtrl.isDropAvailable">

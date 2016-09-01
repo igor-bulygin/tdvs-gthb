@@ -82,7 +82,7 @@
 
 	}
 
-	angular.module('todevise', ['api', 'ngFileUpload', 'dndLists', 'global-deviser'])
+	angular.module('todevise', ['api', 'ngFileUpload', 'dndLists', 'toastr'])
 		.controller('editPressCtrl', controller);
 
 }());
