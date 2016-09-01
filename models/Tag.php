@@ -1,6 +1,8 @@
 <?php
 namespace app\models;
 
+use app\helpers\Utils;
+use Exception;
 use Yii;
 use app\helpers\CActiveRecord;
 
@@ -94,6 +96,11 @@ class Tag extends CActiveRecord {
 	const DROPDOWN = 0;
 	const FREETEXT = 1;
 
+	const SERIALIZE_SCENARIO_PRODUCT_OPTION = 'serialize_scenario_product_option';
+
+	/** @var  Product */
+	private $product;
+
 	public static function collectionName() {
 		return 'tag';
 	}
@@ -113,6 +120,14 @@ class Tag extends CActiveRecord {
 			'options'
 		];
 	}
+
+	/**
+	 * The attributes that should be translated
+	 *
+	 * @var array
+	 */
+	public $translatedAttributes = ['name', 'description'];
+
 
 	public function beforeSave($insert) {
 		/*
@@ -135,6 +150,101 @@ class Tag extends CActiveRecord {
 		}
 
 		return parent::beforeSave($insert);
+	}
+
+	/**
+	 * Get a collection of entities serialized, according to serialization configuration
+	 *
+	 * @param string $id
+	 * @return Tag|null
+	 * @throws Exception
+	 */
+	public static function findOneSerialized($id)
+	{
+		/** @var Tag $tag */
+		$tag = null;
+
+		// get only the fields that gonna be used
+		$products = Product::find()->select(self::getSelectFields())->where(["short_id" => $id])->all();
+
+		if (count($products) == 1) {
+			$tag = $products[0];
+		} elseif (count($products) > 1) {
+			throw new Exception(sprintf('More than one tag with the same id', $id));
+		}
+
+		// if automatic translation is enabled
+		if (static::$translateFields) {
+			Utils::translate($tag);
+		}
+		return $tag;
+	}
+
+
+	/**
+	 * Prepare the ActiveRecord properties to serialize the objects properly, to retrieve an serialize
+	 * only the attributes needed for a query context
+	 *
+	 * @param $view
+	 */
+	public static function setSerializeScenario($view)
+	{
+		switch ($view) {
+			case self::SERIALIZE_SCENARIO_PRODUCT_OPTION:
+				static::$serializeFields = [
+					'id' => 'short_id',
+					'required',
+					'name',
+					'description',
+					'values' => 'productValues',
+				];
+				static::$retrieveExtraFields = [
+					'options',
+				];
+				static::$translateFields = true;
+				break;
+			default:
+				// now available for this Model
+				static::$serializeFields = [];
+				break;
+		}
+	}
+
+	/**
+	 * Get the values available for a Product
+	 * @return array
+	 */
+	public function getProductValues()
+	{
+		$values = [];
+
+		foreach ($this->options as $key => $option) {
+			if ($key < 5) {
+				$values[] = [
+					"type" => "select",
+					"value" => $option["value"],
+					"text" => Utils::l($option["text"]),
+					"hint" => null,
+					"image" => null,
+					"default" => null,
+					"colors" => [],
+				];
+			}
+		}
+
+		return $values;
+	}
+
+	/**
+	 * Filter the list of values to show, to values available for a Product
+	 *
+	 * @param Product $product
+	 * @return Tag
+	 */
+	public function filterValuesForProduct(Product $product)
+	{
+		$this->product = $product;
+		return $this;
 	}
 
 }

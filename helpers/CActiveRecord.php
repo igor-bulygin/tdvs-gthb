@@ -20,6 +20,13 @@ class CActiveRecord extends ActiveRecord {
      *
      * @var array
      */
+    static protected $retrieveExtraFields = [];
+
+    /**
+     * The attributes that should be serialized
+     *
+     * @var array
+     */
     static protected $serializeFields = [];
 
     /**
@@ -54,6 +61,12 @@ class CActiveRecord extends ActiveRecord {
     public function fields()
     {
         return static::$serializeFields;
+    }
+
+    static public function getSelectFields()
+    {
+    	// fields that want to be serialized, and extra fields for internal use
+    	return array_merge(array_values(static::$serializeFields), static::$retrieveExtraFields);
     }
 
 }

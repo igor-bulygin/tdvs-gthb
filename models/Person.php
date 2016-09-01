@@ -241,7 +241,7 @@ class Person extends CActiveRecord implements IdentityInterface
 	public static function setSerializeScenario($view)
 	{
 		switch ($view) {
-			case CActiveRecord::SERIALIZE_SCENARIO_PUBLIC:
+			case self::SERIALIZE_SCENARIO_PUBLIC:
 				static::$serializeFields = [
 					'id' => 'short_id',
 					'slug',
@@ -256,7 +256,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'url_images' => 'urlImagesLocation',
 				];
 				break;
-			case CActiveRecord::SERIALIZE_SCENARIO_OWNER:
+			case self::SERIALIZE_SCENARIO_OWNER:
 				static::$serializeFields = [
 					'id' => 'short_id',
 					'short_id', // TODO Remove when all calls are migrated to new API
@@ -275,7 +275,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'url_images' => 'urlImagesLocation',
 				];
 				break;
-			case CActiveRecord::SERIALIZE_SCENARIO_ADMIN:
+			case self::SERIALIZE_SCENARIO_ADMIN:
 				static::$serializeFields = [
 					'id' => 'short_id',
 					'short_id', // TODO Remove when all calls are migrated to new API

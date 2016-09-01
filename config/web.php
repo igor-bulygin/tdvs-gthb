@@ -229,22 +229,24 @@ $config = [
 				],
 
 
-				// API routing
+				// API routing (public)
+				'GET api3/pub/v1/products/<id:[^/.]*?>' => 'api3/pub/v1/product/view', // override "view" action to accept alphanumeric ids
+				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/product'],
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/faq'],
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/term'],
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/category'],
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/country'],
 
-
-//                ['class' => 'yii\rest\UrlRule', 'controller' => 'api3/priv/v1/user'],
+				// API routing (private)
 				'GET api3/priv/v1/profile/deviser' => 'api3/priv/v1/deviser/view',
 				'PATCH api3/priv/v1/profile/deviser' => 'api3/priv/v1/deviser/update',
-//				'POST api3/priv/v1/profile/deviser/uploads' => 'api3/priv/v1/deviser/uploads-post',
-				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/priv/v1/upload'],
 
 				'GET api3/priv/v1/profile/user' => 'api3/priv/v1/user/view',
 				'PATCH api3/priv/v1/profile/user' => 'api3/priv/v1/user/update',
 
+				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/priv/v1/upload'],
+
+				// API routing (admin)
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/admin/v1/faq'],
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/admin/v1/term'],
 

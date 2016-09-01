@@ -158,7 +158,7 @@ class DeviserController extends CController {
 			]);
 			$deviser->save(false);
 
-			Person::setSerializeScenario(CActiveRecord::SERIALIZE_SCENARIO_ADMIN);
+			Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_ADMIN);
 			return $deviser;
 		}
 	}
@@ -180,7 +180,7 @@ class DeviserController extends CController {
 			]);
 			$deviser->save(false);
 
-			Person::setSerializeScenario(CActiveRecord::SERIALIZE_SCENARIO_ADMIN);
+			Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_ADMIN);
 			return $deviser;
 		}
 	}
@@ -208,7 +208,7 @@ class DeviserController extends CController {
 			$product->media = $media;
 			$product->save();
 
-			Product::setSerializeScenario(CActiveRecord::SERIALIZE_SCENARIO_ADMIN);
+			Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_ADMIN);
 			return $product;
 		}
 	}
@@ -228,7 +228,7 @@ class DeviserController extends CController {
 		$product->media = $media;
 		$product->save();
 
-		Product::setSerializeScenario(CActiveRecord::SERIALIZE_SCENARIO_ADMIN);
+		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_ADMIN);
 		return $product;
 	}
 

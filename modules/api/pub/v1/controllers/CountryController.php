@@ -19,7 +19,7 @@ class CountryController extends Controller {
     public function actionIndex()
     {
         // set the scenario to serialize objects
-        Country::setSerializeScenario(CActiveRecord::SERIALIZE_SCENARIO_PUBLIC);
+        Country::setSerializeScenario(Country::SERIALIZE_SCENARIO_PUBLIC);
 
         return Country::getSerialized();
     }

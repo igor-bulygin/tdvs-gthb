@@ -17,7 +17,7 @@ class CategoryController extends Controller {
     public function actionIndex()
     {
         // set the scenario to serialize objects
-        Category::setSerializeScenario(CActiveRecord::SERIALIZE_SCENARIO_PUBLIC);
+        Category::setSerializeScenario(Category::SERIALIZE_SCENARIO_PUBLIC);
 
         return Category::getSerialized();
     }

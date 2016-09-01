@@ -28,7 +28,7 @@ class Faq extends CActiveRecord {
 	public static function getSerialized() {
 
         // retrieve only fields that want to be serialized
-        $faqs = Faq::find()->select(array_values(static::$serializeFields))->all();
+        $faqs = Faq::find()->select(self::getSelectFields())->all();
 
         // if automatic translation is enabled
         if (static::$translateFields) {
@@ -47,7 +47,7 @@ class Faq extends CActiveRecord {
 	public static function setSerializeScenario($view)
     {
         switch ($view) {
-            case CActiveRecord::SERIALIZE_SCENARIO_PUBLIC:
+            case self::SERIALIZE_SCENARIO_PUBLIC:
                 static::$serializeFields = [
                     // field name is "email", the corresponding attribute name is "email_address"
                     'id' => 'short_id',
@@ -56,7 +56,7 @@ class Faq extends CActiveRecord {
                 ];
                 static::$translateFields = true;
                 break;
-            case CActiveRecord::SERIALIZE_SCENARIO_ADMIN:
+            case self::SERIALIZE_SCENARIO_ADMIN:
                 static::$serializeFields = [
                     // field name is "email", the corresponding attribute name is "email_address"
                     'id' => 'short_id',

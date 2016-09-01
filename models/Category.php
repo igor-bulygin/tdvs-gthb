@@ -54,7 +54,7 @@ class Category extends CActiveRecord {
     public static function setSerializeScenario($view)
     {
         switch ($view) {
-            case CActiveRecord::SERIALIZE_SCENARIO_PUBLIC:
+            case self::SERIALIZE_SCENARIO_PUBLIC:
                 static::$serializeFields = [
                     'id' => 'short_id',
                     'path',
@@ -65,7 +65,7 @@ class Category extends CActiveRecord {
                 ];
                 static::$translateFields = true;
                 break;
-            case CActiveRecord::SERIALIZE_SCENARIO_ADMIN:
+            case self::SERIALIZE_SCENARIO_ADMIN:
                 static::$serializeFields = [
                     'id' => 'short_id',
                     'path',
@@ -91,7 +91,7 @@ class Category extends CActiveRecord {
     public static function getSerialized() {
 
         // retrieve only fields that want to be serialized
-        $categories = Category::find()->select(array_values(static::$serializeFields))->all();
+        $categories = Category::find()->select(self::getSelectFields())->all();
 
         // if automatic translation is enabled
         if (static::$translateFields) {

@@ -360,15 +360,14 @@ class Utils
 	 */
 	public static function translate($mix)
 	{
-		if (is_array($mix) || $mix instanceof Traversable) {
-			/** @mix CActiveRecord $model */
+		if ($mix instanceof CActiveRecord) {
+			Utils::translateModel($mix);
+		} elseif (is_array($mix) || $mix instanceof Traversable) {
 			foreach ($mix as $model) {
 				if ($model instanceof CActiveRecord) {
 					Utils::translateModel($model);
 				}
 			}
-		} elseif ($mix instanceof CActiveRecord) {
-			Utils::translateModel($mix);
 		}
 
 		return $mix;

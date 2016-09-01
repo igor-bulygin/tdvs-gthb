@@ -2,6 +2,7 @@
 namespace app\models;
 
 use app\models\Warranty;
+use Exception;
 use Yii;
 use app\helpers\Utils;
 use app\helpers\CActiveRecord;
@@ -55,9 +56,15 @@ class Product extends CActiveRecord {
 			'currency',
 			'weight_unit',
 			'price_stock',
-
 		];
 	}
+
+	/**
+	 * The attributes that should be translated
+	 *
+	 * @var array
+	 */
+	public $translatedAttributes = ['name', 'description', 'slug'];
 
 	public function beforeSave($insert) {
 		/*
@@ -133,6 +140,34 @@ class Product extends CActiveRecord {
 		return parent::beforeSave($insert);
 	}
 
+	/**
+	 * Get a collection of entities serialized, according to serialization configuration
+	 *
+	 * @param string $id
+	 * @return Product|null
+	 * @throws Exception
+	 */
+	public static function findOneSerialized($id)
+	{
+		/** @var Product $product */
+		$product = null;
+
+		// get only the fields that gonna be used
+		$products = Product::find()->select(self::getSelectFields())->where(["short_id" => $id])->all();
+
+		if (count($products) == 1) {
+			$product = $products[0];
+		} elseif (count($products) > 1) {
+			throw new Exception(sprintf('More than one product with the same id', $id));
+		}
+
+		// if automatic translation is enabled
+		if (static::$translateFields) {
+			Utils::translate($product);
+		}
+		return $product;
+	}
+
 	public function deletePhotos() {
 		$product_path = Utils::join_paths(Yii::getAlias("@product"), $this->short_id);
 
@@ -148,33 +183,37 @@ class Product extends CActiveRecord {
 	public static function setSerializeScenario($view)
 	{
 		switch ($view) {
-			case CActiveRecord::SERIALIZE_SCENARIO_PUBLIC:
+			case self::SERIALIZE_SCENARIO_PUBLIC:
 				static::$serializeFields = [
 					'id' => 'short_id',
-					'_id',
-					'short_id',
 					'deviser_id',
 					'enabled',
-					'categories',
-					'collections',
+//					'categories',
+//					'collections',
 					'name',
 					'slug',
 					'description',
 					'media',
-					'options',
 					'madetoorder',
-					'sizechart',
+//					'sizechart',
 					'bespoke',
 					'preorder',
 					'returns',
 					'warranty',
 					'currency',
-					'weight_unit',
+//					'weight_unit',
+					'references',
+					'options' => 'customOptions',
+					'url_images' => 'urlImagesLocation',
+				];
+				static::$retrieveExtraFields = [
+					'options',
 					'price_stock',
 				];
+
 				static::$translateFields = true;
 				break;
-			case CActiveRecord::SERIALIZE_SCENARIO_ADMIN:
+			case self::SERIALIZE_SCENARIO_ADMIN:
 				static::$serializeFields = [
 					'id' => 'short_id',
 					'_id',
@@ -197,6 +236,7 @@ class Product extends CActiveRecord {
 					'currency',
 					'weight_unit',
 					'price_stock',
+					'url_images' => 'urlImagesLocation',
 				];
 				static::$translateFields = false;
 				break;
@@ -324,10 +364,56 @@ class Product extends CActiveRecord {
 				$tags[] = $tag;
 			}
 		}
-//		print_r($tags);
 		return $tags;
 	}
+
+	/**
+	 * Build an structure with all references to be handled by client side.
+	 * By reference, we understand a combination of a product, and each options combinations where
+	 * the product has stock, for example, "t-shirt = X + color = blue + size = xxl"
+	 *
+	 * @return array
+	 */
+	public function getReferences()
+	{
+		$references = [];
+		foreach ($this->price_stock as $stock) {
+			$options = [];
+			foreach ($stock["options"] as $key => $values) {
+				// remove the array
+				$options[$key] = $values[0];
+			}
+			$references[] = [
+				"reference_id" => "temp_random_id_" . uniqid(), // TODO retrieve from database
+				"options" => $options,
+				"stock" => $stock["stock"],
+				"price" => $stock["price"],
+			];
+		}
+		return $references;
+	}
 	
+	/**
+	 * Build an structure with all references to be handled by client side.
+	 * By reference, we understand a combination of a product, and each options combinations where
+	 * the product has stock, for example, "t-shirt = X + color = blue + size = xxl"
+	 *
+	 * @return array
+	 */
+	public function getCustomOptions()
+	{
+		$options = [];
+		foreach ($this->options as $tag_id => $option) {
+			/** @var Tag $tag */
+			$tag = Tag::findOne(["short_id" => $tag_id]);
+			$tag->filterValuesForProduct($this);
+			$options[] = $tag;
+		}
+		Tag::setSerializeScenario(Tag::SERIALIZE_SCENARIO_PRODUCT_OPTION);
+		Utils::translate($options);
+		return $options;
+	}
+
 	private function getProductOptionsForTag($tag_id)
 	{
 		$values = [];
@@ -356,6 +442,16 @@ class Product extends CActiveRecord {
 		}
 		$label .= Warranty::getDescription($this->warranty["type"]);
 		return $label;
+	}
+
+	/**
+	 * Get the url to get the images of a Deviser
+	 *
+	 * @return string
+	 */
+	public function getUrlImagesLocation()
+	{
+		return Yii::getAlias("@product_url") . "/" . $this->short_id . "/";
 	}
 
 }

@@ -220,7 +220,7 @@ class ApiController extends CController {
 			$deviser->delete();
 		}
 
-		Person::setSerializeScenario(CActiveRecord::SERIALIZE_SCENARIO_ADMIN);
+		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_ADMIN);
 		return $res;
 	}
 
@@ -262,7 +262,7 @@ class ApiController extends CController {
 			$product->delete();
 		}
 
-		Product::setSerializeScenario(CActiveRecord::SERIALIZE_SCENARIO_ADMIN);
+		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_ADMIN);
 		return $res;
 	}
 
@@ -392,7 +392,7 @@ class ApiController extends CController {
 			$category->delete();
 		}
 
-		Category::setSerializeScenario(CActiveRecord::SERIALIZE_SCENARIO_ADMIN);
+		Category::setSerializeScenario(Category::SERIALIZE_SCENARIO_ADMIN);
 		return $res;
 	}
 
@@ -438,7 +438,7 @@ class ApiController extends CController {
 			$category->delete();
 		}
 
-		Faq::setSerializeScenario(CActiveRecord::SERIALIZE_SCENARIO_ADMIN);
+		Faq::setSerializeScenario(Faq::SERIALIZE_SCENARIO_ADMIN);
 		return $res;
 
 	}
@@ -483,7 +483,7 @@ class ApiController extends CController {
 			$category->delete();
 		}
 
-		Faq::setSerializeScenario(CActiveRecord::SERIALIZE_SCENARIO_ADMIN);
+		Faq::setSerializeScenario(Faq::SERIALIZE_SCENARIO_ADMIN);
 		return $res;
 	}
 
@@ -530,7 +530,7 @@ class ApiController extends CController {
 			$category->delete();
 		}
 
-		Term::setSerializeScenario(CActiveRecord::SERIALIZE_SCENARIO_ADMIN);
+		Term::setSerializeScenario(Term::SERIALIZE_SCENARIO_ADMIN);
 		return $res;
 
 	}
@@ -575,7 +575,7 @@ class ApiController extends CController {
 			$category->delete();
 		}
 
-		Term::setSerializeScenario(CActiveRecord::SERIALIZE_SCENARIO_ADMIN);
+		Term::setSerializeScenario(Term::SERIALIZE_SCENARIO_ADMIN);
 		return $res;
 	}
 

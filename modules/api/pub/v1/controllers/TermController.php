@@ -27,7 +27,7 @@ class TermController extends Controller {
     public function actionIndex()
     {
         // set the scenario to serialize objects
-        Term::setSerializeScenario(CActiveRecord::SERIALIZE_SCENARIO_PUBLIC);
+        Term::setSerializeScenario(Term::SERIALIZE_SCENARIO_PUBLIC);
 
         return Term::getSerialized();
     }
