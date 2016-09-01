@@ -39,7 +39,7 @@
 		});
 
 		function update(index) {
-			if (index) {
+			if (index >= 0) {
 				vm.images.splice(index, 1);
 			}
 			var patch = new deviserDataService.Profile;
@@ -47,7 +47,7 @@
 			patch.press = [];
 			patch.id = vm.deviser.id;
 			vm.images.forEach(function (element) {
-				patch.press.push(element.filename);
+				patch.press.unshift(element.filename);
 			});
 			patch.$update().then(function (dataPress) {
 				//console.log("dataPress", dataPress);
@@ -67,7 +67,7 @@
 				data: data
 			}).then(function (dataUpload) {
 				toastr.success("Photo uploaded!");
-				vm.deviser.press.push(dataUpload.data.filename);
+				vm.deviser.press.unshift(dataUpload.data.filename);
 				vm.images = parsePress(vm.deviser.press, vm.deviser.url_images);
 				update();
 			}, function (err) {
@@ -82,7 +82,7 @@
 
 	}
 
-	angular.module('todevise', ['api', 'ngFileUpload', 'dndLists', 'global-deviser'])
+	angular.module('todevise', ['api', 'ngFileUpload', 'dndLists', 'toastr'])
 		.controller('editPressCtrl', controller);
 
 }());
