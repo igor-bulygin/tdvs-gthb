@@ -10,9 +10,7 @@ class FaqsAsset extends AssetBundle {
 		'css/desktop/admin/faqs.css'
 	];
 	public $js = [
-		'js/desktop/admin/faqs.js',
-		'js/util/util.js',
-		'js/util/treeService.js',
+		'js/desktop/admin/faqs.js',		
 		'js/api/faqDataService.js'
 	];
 	public $depends = [
@@ -20,6 +18,7 @@ class FaqsAsset extends AssetBundle {
 		'app\assets\libs\ngjstreeAsset',
 		'app\assets\libs\jstreeActionsAsset',
 		'app\assets\libs\angularBootstrapAsset',
+		'app\assets\libs\utilAsset',
 		'app\assets\desktop\admin\GlobalAsset'
 	];
 }
