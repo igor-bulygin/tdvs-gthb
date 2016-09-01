@@ -1,4 +1,6 @@
 <?php
+use app\components\DeviserHeader;
+use app\components\DeviserMenu;
 use app\models\Person;
 use app\models\Product;
 use yii\web\View;
@@ -17,71 +19,18 @@ Index2Asset::register($this);
 /** @var Person $deviser */
 
 $this->title = 'About ' . $deviser->getBrandName() . ' - Todevise';
+$this->params['deviser_menu_active_option'] = 'about';
+$this->params['deviser'] = $deviser;
 
 ?>
 
-<div class="banner-deviser">
-	<div class="container pad-about">
-		<img class="cover" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($deviser->getHeaderBackgroundImage())->resize(1280, 450) ?>">
-		<div class="banner-deviser-content">
-			<div class="grey-overlay"></div>
-			<div class="container">
-				<div class="deviser-profile">
-					<div class="avatar">
-						<img class="cover" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($deviser->getAvatarImage())->resize(250, 250) ?>">
-					</div>
-					<div class="deviser-data">
-						<div class="name">
-							<?= $deviser->getBrandName() ?>
-						</div>
-						<div class="location">
-							<?= $deviser->getCityLabel() ?>
-						</div>
-						<div class="description">
-							<?= $deviser->getShortDescription() ?>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+<?= DeviserHeader::widget() ?>
+
 <div class="store">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-2">
-				<nav class="menu-store" data-spy="affix" data-offset-top="435">
-					<ul class="mt-0">
-						<li>
-							<a href="<?= Url::to(["deviser/store", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id])?>">Store</a>
-							<!--<ul class="submenu-store">
-								<li class="mt10">
-									<a href="#">Ceramics</a>
-								</li>
-								<li>
-									<a href="#">Sofas</a>
-								</li>
-								<li class="mb20">
-									<a href="#">Paintings</a>
-								</li>
-							</ul>-->
-						</li>
-					</ul>
-					<ul>
-						<li>
-							<a class="active" href="#">About</a>
-						</li>
-						<li>
-							<a href="<?= Url::to(["deviser/press", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id])?>">Press</a>
-						</li>
-						<li>
-							<a href="#">Videos</a>
-						</li>
-						<li>
-							<a href="#">FAQ</a>
-						</li>
-					</ul>
-				</nav>
+				<?= DeviserMenu::widget() ?>
 			</div>
 			<div class="col-md-10 about-bg">
 				<div class="col-md-6 pad-about">

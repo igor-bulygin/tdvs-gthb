@@ -159,7 +159,12 @@ $config = [
 				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/store' => 'deviser/store',
 				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/about' => 'deviser/about',
 				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/press' => 'deviser/press',
+				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/video' => 'deviser/videos',
+				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/faq' => 'deviser/faq',
+
 				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/press/edit' => 'deviser/press-edit',
+				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/video/edit' => 'deviser/videos-edit',
+				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/faq/edit' => 'deviser/faq-edit',
 
 				//Links for a cart listing
 				'cart/' => 'public/cart',

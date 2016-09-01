@@ -1,4 +1,6 @@
 <?php
+use app\components\DeviserHeader;
+use app\components\DeviserMenu;
 use app\models\Category;
 use app\models\Person;
 use app\models\Product;
@@ -22,66 +24,20 @@ Index2Asset::register($this);
 
 $this->title = $deviser->getBrandName() . ' - Todevise';
 
+// use params to share data between views :(
+$this->params['deviser_menu_categories'] = $categories;
+$this->params['deviser_menu_active_option'] = 'store';
+$this->params['deviser'] = $deviser;
+
 ?>
 
-<div class="banner-deviser">
-	<div class="container pad-about">
-		<img class="cover" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($deviser->getHeaderBackgroundImage())->resize(1280, 450) ?>">
-		<div class="banner-deviser-content">
-			<div class="grey-overlay"></div>
-			<div class="container">
-				<div class="deviser-profile">
-					<div class="avatar">
-						<img class="cover" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($deviser->getAvatarImage())->resize(340, 340) ?>">
-					</div>
-					<div class="deviser-data">
-						<div class="name">
-							<?= $deviser->getBrandName() ?>
-						</div>
-						<div class="location">
-							<?= $deviser->getCityLabel() ?>
-						</div>
-						<div class="description">
-							<?= $deviser->getShortDescription() ?>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+<?= DeviserHeader::widget() ?>
+
 <div class="store">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-2">
-				<nav class="menu-store" data-spy="affix" data-offset-top="450">
-					<ul class="mt-0">
-						<li>
-							<a class="active" href="#">Store</a>
-							<ul class="submenu-store">
-								<?php foreach ($categories as $i => $category) { ?>
-								<li class="<?= (($i==0) ? 'mt10' : (($i==(count($categories)-1)) ? 'mt20' : '')) ?>">
-									<a href="<?= Url::to(["deviser/store", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id, 'category' => $category->short_id])?>"><?= Utils::l($category->name) ?></a>
-								</li>
-								<?php } ?>
-							</ul>
-						</li>
-					</ul>
-					<ul>
-						<li>
-							<a href="<?= Url::to(["deviser/about", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id])?>">About</a>
-						</li>
-						<li>
-							<a href="<?= Url::to(["deviser/press", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id])?>">Press</a>
-						</li>
-						<li>
-							<a href="#">Videos</a>
-						</li>
-						<li>
-							<a href="#">FAQ</a>
-						</li>
-					</ul>
-				</nav>
+				<?= DeviserMenu::widget() ?>
 			</div>
 			<div class="col-md-10">
 				<div class="content-store">

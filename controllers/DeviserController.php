@@ -272,7 +272,7 @@ class DeviserController extends CController {
 		$deviser = Person::findOne(["short_id" => $deviser_id]);
 
 		$this->layout = '/desktop/public-2.php';
-		return $this->render("press", [
+		return $this->render("press-view", [
 			'deviser' => $deviser,
 		]);
 	}
@@ -284,6 +284,50 @@ class DeviserController extends CController {
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("press-edit", [
+			'deviser' => $deviser,
+		]);
+	}
+
+	public function actionVideos($slug, $deviser_id)
+	{
+		// get the category object
+		$deviser = Person::findOne(["short_id" => $deviser_id]);
+
+		$this->layout = '/desktop/public-2.php';
+		return $this->render("videos-view", [
+			'deviser' => $deviser,
+		]);
+	}
+
+	public function actionVideosEdit($slug, $deviser_id)
+	{
+		// get the category object
+		$deviser = Person::findOne(["short_id" => $deviser_id]);
+
+		$this->layout = '/desktop/public-2.php';
+		return $this->render("videos-edit", [
+			'deviser' => $deviser,
+		]);
+	}
+
+	public function actionFaq($slug, $deviser_id)
+	{
+		// get the category object
+		$deviser = Person::findOne(["short_id" => $deviser_id]);
+
+		$this->layout = '/desktop/public-2.php';
+		return $this->render("faq-view", [
+			'deviser' => $deviser,
+		]);
+	}
+
+	public function actionFaqEdit($slug, $deviser_id)
+	{
+		// get the category object
+		$deviser = Person::findOne(["short_id" => $deviser_id]);
+
+		$this->layout = '/desktop/public-2.php';
+		return $this->render("faq-edit", [
 			'deviser' => $deviser,
 		]);
 	}
