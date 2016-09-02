@@ -1,9 +1,15 @@
 (function () {
 	"use strict";
 
-	function UtilService() {
+	function UtilService($location) {
 		this.isObject = isObject;
 		this.diff = diff;
+		this.returnDeviserIdFromUrl= returnDeviserIdFromUrl;
+		
+		function returnDeviserIdFromUrl() {
+			var url = $location.absUrl();
+			return url.split('/')[5];
+		}
 
 		function isObject(object) {
 			return (object !== null && typeof object === "object");

@@ -11,9 +11,6 @@ class PublicCommonAsset extends AssetBundle {
     ];
     public $js = [];
 	public $depends = [
-		'app\assets\libs\angularAsset',
-		'app\assets\libs\angularToastrAsset',
-		'app\assets\libs\angularBootstrapAsset',
 		'app\assets\libs\bootstrapAsset'
 	];
 }

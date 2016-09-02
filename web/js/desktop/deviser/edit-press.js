@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller($scope, deviserDataService, Upload, toastr) {
+	function controller($scope, deviserDataService, Upload, toastr, UtilService) {
 		var vm = this;
 		vm.upload = upload;
 		vm.update = update;
@@ -19,7 +19,9 @@
 		}
 
 		function getDeviser() {
-			deviserDataService.Profile.get().$promise.then(function (dataDeviser) {
+			deviserDataService.Profile.get({
+				deviser_id: UtilService.returnDeviserIdFromUrl()
+			}).$promise.then(function (dataDeviser) {
 				vm.deviser = dataDeviser;
 				if (!vm.deviser.press)
 					vm.deviser.press = [];
@@ -82,7 +84,7 @@
 
 	}
 
-	angular.module('todevise', ['api', 'ngFileUpload', 'dndLists', 'toastr'])
+	angular.module('todevise', ['api', 'ngFileUpload', 'dndLists', 'toastr', 'util'])
 		.controller('editPressCtrl', controller);
 
 }());
