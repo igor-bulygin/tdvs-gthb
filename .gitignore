@@ -45,3 +45,6 @@ thumbor_resized
 
 #private scripts to test rest api
 test_rest
+
+#sass cache
+.sass-cache/
