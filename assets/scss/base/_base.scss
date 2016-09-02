@@ -1,0 +1,51 @@
+// ==========================================================================
+// Base Styles
+// ==========================================================================
+* {
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+body{
+    font-family: $font-family--primary;
+    background-color: $black;
+}
+h2{
+    font-family: $font-family--title;
+    text-transform: uppercase;
+    font-size: 110px;
+    line-height: 70px;
+    display: inline-block;
+    padding: 0;
+    margin: 0 0 10px;
+}
+h3{
+    font-family: $font-family--title;
+    text-align: center;
+    text-transform: uppercase;
+    color: $light_grey;
+    font-size: 62px;
+    letter-spacing: 4px;
+}
+.section-title{
+    color: $white;
+    font: 18px $font-family--bold;
+    border-bottom: 4px solid $red;
+    padding: 20px 0 5px;
+    margin: 0 0 20px 3px;
+    display: inline-block;
+}
+ul{
+    padding:0;
+    li{
+        list-style: none!important;
+    }
+}
+a, a:hover, a:focus{text-decoration: none;}
+
+//Include Fonts
+@include font-face('Univers Condensed', UniversLT-Condensed);
+@include font-face('Univers Condensed Light', UniversLT-Condensed-Light);
+@include font-face('Univers Ultra Condensed', UniversLT-Ultra-Condensed);
+@include font-face('Univers Light Ultra Condensed', UniversLT-Light-Ultracondensed);
+@include font-face('Univers Thin Ultra Condensed', UniversLT-Thin-Ultracondensed);
+@include font-face('Univers Bold Condensed', UniversLT-Bold-Condensed);

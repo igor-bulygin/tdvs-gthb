@@ -1,0 +1,45 @@
+// ==========================================================================
+// Deviser Press
+// ==========================================================================
+.photo-loader{
+    width: 309px;
+    height: 400px;
+    text-align: center;
+    margin: 0 2px 2px;
+    padding: 20px;
+    border: 1px solid #000;
+    background: #bfbfbf;
+    cursor: pointer;
+    &:hover{
+        .plus-add{
+            background-color: $dark_green;
+            @include transition-property(background-color);
+            @include transition-duration(0.3s);
+            @include transition-timing-function(ease-out);
+        }
+    }
+    .plus-add{
+        background-color: $green;
+        border: 1px solid $black;
+        margin: 90px auto 10px;
+        font-size: 43px;
+        text-align: center;
+        width: 75px;
+        height: 75px;
+        @include border-radius(90px,90px,90px,90px);
+    }
+    span{
+        font-family: $font-family--serif;
+    }
+}
+.draggable-img{
+    &:hover{
+        opacity: 0.8;
+        cursor: pointer;
+    }
+}
+.draggable-list{
+    &.list-group{
+        color: $background_grey;
+    }
+}

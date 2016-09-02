@@ -1,0 +1,25 @@
+// ==========================================================================
+// Menus
+// ==========================================================================
+//HORIZONTAL MENU
+.products-menu{
+    ul{
+        margin:20px 0 40px;
+        text-align: center;
+        li{
+            display: inline-block;
+            padding: 0 10px;
+            a{
+                color: $almost_black;
+                text-transform: uppercase;
+                font: 14px $font-family--serif;
+                letter-spacing: 0.3px;
+                padding-bottom: 5px;
+                &:hover, &.active{
+                    color: $red;
+                    border-bottom: 1px solid $red;
+                }
+            }
+        }
+    }
+}

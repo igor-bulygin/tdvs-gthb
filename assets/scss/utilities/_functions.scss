@@ -1,0 +1,15 @@
+// ==========================================================================
+// Functions
+// ==========================================================================
+
+// Import if Embed Fonts URL is defined
+
+@if variable-exists(font-url){
+    @import url($font-url);
+}
+
+// Functions to convert em to px
+
+@function em($target, $context: $base__font-size){
+    @return ($target / $context) * 1em; 
+}

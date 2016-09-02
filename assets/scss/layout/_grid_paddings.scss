@@ -1,0 +1,18 @@
+// ==========================================================================
+// Grid Paddings
+// ==========================================================================
+//HOME PRODUCTS
+.pad-grid{
+    padding:3px;
+}
+.pad-grid-h{
+    @media (max-width: 768px){
+        display: block;
+        width: 100%;
+        float: left;
+    }
+}
+//DEVISER STORE
+.pad-cathegory{
+    padding: 10px;
+}

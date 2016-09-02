@@ -1,0 +1,69 @@
+// ==========================================================================
+// Deviser About
+// ==========================================================================
+.about-wrapper{
+    width: 100%;
+    padding: 60px;
+    .about-container{
+        max-width: 300px;
+        margin: 0 auto;
+        .title{
+            font: 100px $font-family--bold;
+            text-transform: uppercase;
+            color: $background_red;
+            letter-spacing: 25px;
+            line-height: 100px;
+            display: inline-block;
+        }
+        .name-location-wrapper{
+            display: inline-block;
+        }
+        .name{
+            @extend %ultra-condensed-white-title;
+            font-size: 54px;
+            margin: 30px 0 0 0;
+        }
+        .location{
+            @extend %white-text;
+            text-align: right;
+            margin: -15px 0 0 0;
+        }
+        .subtitle{
+            @extend %white-text;
+            font-style: italic;
+            margin: 40px 0 50px;
+        }
+        .resume-header{
+            @extend %white-text;
+            border-top: 1px solid $white;
+            border-bottom: 1px solid $white;
+            padding: 20px 0;
+            margin: 0 0 60px;
+        }
+        p{
+            @extend %white-text;          
+            padding: 10px 20px 10px 0;
+        }
+    }
+}
+.pad-about{
+    padding: 0;
+}
+.about-bg{
+    background-color: $dark_red;
+    padding: 0;
+}
+.about-grid{
+    background-color: $black;
+    .item{
+        img{
+            height: 100%;
+            width: 100%;
+            @include opacity(0.8);
+            cursor: pointer;
+            &:hover{
+                @include opacity(1);
+            }
+        }
+    }
+}

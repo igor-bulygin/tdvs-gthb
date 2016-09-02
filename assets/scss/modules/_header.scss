@@ -1,0 +1,257 @@
+// ==========================================================================
+// Header
+// ==========================================================================
+.navbar{
+    background-color: $black;
+    @include border-radius(0px,0px,0px,0px);
+    border: none;
+    margin:0;
+    height: 70px;
+    padding: 10px 0;
+    z-index:99999999;
+    @media (max-width: 768px){
+                height: auto;
+            }
+    .navbar-brand{
+        padding: 10px 15px;
+    }
+    .menu-title{
+        color: $white!important;
+        text-transform: uppercase;
+        span{
+            vertical-align: middle;
+            margin: 0 0 0 10px;
+        }
+        i{
+            color: $red;
+            font-size: 18px;
+            vertical-align: middle;
+            @media (max-width: 768px){
+                margin-left:10px;
+            }
+        }
+    }
+    .searcher-header{
+        @media (max-width: 768px){
+                    padding: 0 20px;
+                }
+        input{
+                min-width: 500px;
+                color: $white;
+                background-color: $almost_black;
+                @include border-radius(0px,0px,0px,0px);
+                @extend %input-border-none;
+                &:focus{
+                    border-right: 0;
+                }
+                    @media (max-width: 1200px){
+                    min-width: 0;
+                }
+                @media (min-width: 992px) and (max-width: 1200px) { 
+                        min-width:380px;
+                    }
+            }
+        .btn-send{
+            color: $white;
+            background-color: $almost_black;
+            font-size: 23px;
+            padding: 0 10px;
+            border-left: 0;
+            @include border-radius(0px,0px,0px,0px);
+            border-color:$almost_black;
+            &:hover, &:active{
+                color: $red;
+                background-color: $almost_black;
+                @include transition-property(color);
+                @include transition-duration(0.3s);
+                @include transition-timing-function(ease-out);
+                border-color:$almost_black;
+            }
+            &:focus{
+                background-color: $almost_black;
+                border-color:$almost_black;
+            }
+        }
+    }
+    .cart-item{
+        i{
+            color:$white;
+            font-size: 20px;
+        }
+    }
+}
+.main-menu{
+    cursor: pointer;
+    float: left;
+}
+.login-wrapper{
+    width: 290px;
+    padding: 20px;
+    top: 59px;
+    input{
+        background-color: $background_grey;
+        margin-bottom: 10px;
+        @extend %input-border-none;
+    }
+    @media (max-width: 768px){
+        position: absolute!important;
+        background-color: $white!important;
+        right: 0!important;
+        left: auto;
+        width: 250px!important;
+    }
+    li{
+        @media (max-width: 768px){
+            display: block!important;
+        }
+    }
+}
+.log{
+    text-transform: uppercase;
+    color: $dark_grey;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    span{
+        padding-top: 14px;
+        padding-bottom: 15px;
+        display:block; 
+    }
+    a{
+        @extend %link-red; 
+        padding: 15px 5px!important;      
+    }
+}
+.navbar-searcher{
+    padding:0;
+    @media (max-width: 768px){
+                display: none;
+            }
+    &.mobile{
+        display: none;
+        @extend %input-border-none;
+        @media (max-width: 768px){
+                display: block;
+            }
+    }
+}
+.dropdown-shop{
+    top: 59px;
+    min-width:634px;
+    @media (max-width: 768px){
+        top: 10px;
+        min-width:100%;
+    }
+    .shop-menu-wrapper{
+        padding-left:10px;
+        padding-right:10px;
+        width: 210px;
+        border-right: 1px solid $background_grey;
+        float: left;
+        @media (max-width: 768px){
+            border-right: none;
+            width:100%;
+            padding-left:0;
+            padding-right:0;
+        }
+        li{ 
+            list-style:none;
+            @media (max-width: 768px){
+                padding: 0 20px 0 24px;
+            }
+            a{ 
+                color: $black;
+                text-decoration:none;
+                text-transform: uppercase;
+                display: block;
+                padding: 5px 0;
+                @media (max-width: 768px){
+                    color: $white;
+                }
+                &:hover{
+                    background-color: transparent;
+                    color:$red;
+                }
+                &.ion-chevron-right:before {
+                    float: right;
+                    margin: 3px 0 0 0;
+                }
+            }
+            &.minibanner{
+                a{
+                    display: block;
+                    margin: 0;
+                    padding: 0;
+                    img{
+                        max-width: 170px;
+                        margin: 5px 10px 10px 0;
+                    }
+                }
+            }
+        }
+    }
+    .shop-secondary-menu-wrapper{
+        float:left;
+        padding: 5px 20px;
+        @media (max-width: 768px){
+            display: none;
+        }
+        li{
+            list-style:none;
+            text-transform: uppercase;
+            font-weight: bold;
+            padding: 5px 0;
+            a{
+                font-family: $font-family--secondary;
+                color: $dark_grey;
+                text-decoration:none;
+                text-transform: uppercase;
+                display: block;
+                padding: 5px 0;
+                &:hover{
+                    background-color: transparent;
+                    color:$red;
+                }   
+            }
+            &.minibanner{
+                a{
+                    display: block;
+                    margin: 0;
+                    padding: 0;
+                    img{
+                        max-width: 170px;
+                        margin: 10px 0 10px 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+.forgot-remember{
+    padding: 0 0 20px;
+    a{
+        display: inline!important;
+        text-transform: lowercase;
+        color: $dark_grey!important;
+        font-size:12px;
+        &:hover{
+            background-color: transparent!important;
+        }
+    }
+}
+.cart-login-wrapper{
+    @media (max-width: 768px){
+        position: absolute;
+        top: 2px;
+        width: 202px;
+        right: 30px;
+    }
+    li{
+        @media (max-width: 768px){
+            display: inline-block;
+        }
+    }
+}
+
+

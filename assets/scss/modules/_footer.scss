@@ -1,0 +1,183 @@
+// ==========================================================================
+// Footer
+// ==========================================================================
+footer{
+    @include size(100%,300px);
+    max-height: 400px;
+    background: url('../img/footer-bg.png') center $black;
+    @include bg-size(cover);
+    color:$white;
+    padding:20px;
+    position: fixed;
+    bottom: -240px;
+    transition: bottom 0.4s ease-in-out;
+    cursor:pointer;
+    z-index: 999;
+    &:hover{
+        bottom:0;
+    }
+    &.untoggled{
+        bottom: auto;
+        max-height: none;
+        position: relative;
+        transition: none;
+        cursor:auto;
+        &:hover{
+            bottom:auto;
+        }
+    }
+    @media (max-width: 768px){
+        bottom: auto;
+        max-height: none;
+        position: relative;
+        transition: none;
+        cursor:auto;
+        &:hover{
+            bottom:auto;
+        }
+    }
+    .title{
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-size: 13px;
+        margin:0 0 30px;
+        @media (max-width: 768px){
+                text-align:center;
+                margin: 0;
+            }
+    }
+    .footer-items{
+        padding:0;
+        margin:0;
+        @media (max-width: 768px){
+                text-align:center;             
+                margin: 5px 0 10px 0;
+            }
+        li{
+            list-style:none;
+            margin: 0 0 10px;
+            @media (max-width: 768px){
+                display: inline-block;
+                margin: 0 5px 10px;
+            }
+            a{
+                color: $light_grey;
+                font-family: $font-family--secondary;
+                cursor: pointer;
+                &:hover{
+                    text-decoration: none;
+                    color: $white;
+                    @include transition-property(color);
+                    @include transition-duration(0.3s);
+                    @include transition-timing-function(ease-out);
+                }
+            }
+        }
+    }
+    .footer-text{
+        font-family: $font-family--secondary;
+        margin:0 0 10px;
+        color: $dark_grey;
+        @media (max-width: 768px){
+                text-align:center;
+            }
+        &.social{
+            margin-top:20px;
+            @media (max-width: 768px){
+                text-align:center;
+            }
+        }
+    }
+    .copyright{
+        font-family: $font-family--secondary;
+        text-align: center;
+        ul{
+            padding: 0;
+            margin: 0;
+            li{
+                padding: 0 4px;
+                display: inline-block;
+                list-style: none;
+                a{    
+                    color: $white;
+                    text-decoration: none;
+                }
+            }
+        }
+        div{
+            margin: 10px 0;
+        }
+    }
+    .social-items{
+        padding:0;
+        margin:0;
+        @media (max-width: 768px){
+                margin: 0 auto;
+                width: 145px;
+            }
+        li{
+            list-style: none;
+            float: left;
+            margin: 0 8px 0 0;
+            @media (max-width: 768px){
+                margin: 0 4px;
+            }
+            a{
+                color: $black;
+                background-color: $white;
+                width: 28px;
+                height: 28px;
+                display: block;
+                padding: 2px 0 0 9px;
+                @include border-radius(28px,28px,28px,28px);
+                font-size: 18px;
+                &.twitter{
+                    padding: 2px 0 0 7px;
+                }
+                &.google-plus{
+                    font-size: 16px;
+                    padding: 2px 0 0 5px;
+                }
+                &:hover{
+                    background-color: $red;
+                    color: $white;
+                    @include transition-property(background-color);
+                    @include transition-duration(0.3s);
+                    @include transition-timing-function(ease-out);
+                }
+            }
+        }
+    }
+    .input-newsletter{
+        input{
+            border-color: $light_grey;
+            color: $dark_grey;
+            background-color: $black;
+            &:focus{
+                border-right: 0;
+            }
+            @media (max-width: 768px){
+                padding:0 10px;
+            }
+        }
+        .btn-send{
+            color: $white;
+            background-color: $black;
+            font-size: 23px;
+            padding: 0 10px;
+            border-left: 0;
+            &:hover, &:active{
+                color: $red;
+                border-color: $light_grey;
+                background-color: $black;
+                @include transition-property(color);
+                @include transition-duration(0.3s);
+                @include transition-timing-function(ease-out);
+            }
+            &:focus{
+                border-color: $light_grey;
+                background-color: $black;
+            }
+        }
+    }
+}

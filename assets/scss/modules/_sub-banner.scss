@@ -1,0 +1,90 @@
+// ==========================================================================
+// Sub-Banner
+// ==========================================================================
+.sub-banner{
+    background-color: $white;
+    padding: 9px 0 20px;
+    margin: 9px 0 0 0;
+    @media (max-width: 768px){
+        padding-top:40px;
+    }
+    .container-sub-baner{
+        @media (min-width:769px) and (max-width: 991px){
+            width:100%;
+        }
+        .title-wrapper{
+            padding:20px;
+            position:relative;
+            &.righty{
+                @media (min-width:769px) and (max-width: 985px){
+                    float: right;
+                }
+            }
+            @media (max-width: 768px){
+                    padding: 0;
+            }
+            h2{
+                @media (min-width:769px) and (max-width: 991px){
+                    font-size: 60px;
+                    line-height: 50px;
+                }
+                @media (max-width: 768px){
+                    font-size: 52px;
+                    line-height: normal;
+                    margin: 0;
+                    text-align: center;
+                    width: 100%;
+                }
+                &.title-1{
+                    margin: 45px 0 0 0;
+                    @media (max-width: 768px){
+                            margin:0;
+                    }
+                }
+                .serif{
+                    font: italic 700 50px $font-family--serif;
+                    text-transform: none;
+                    display:block;
+                    @media (min-width:769px) and (max-width: 991px){
+                        font-size: 40px;
+                    }
+                    @media (max-width: 768px){
+                        font-size: 32px;
+                    }
+                    .capital{
+                        text-transform: capitalize;
+                    }
+                }
+            }
+            p{
+                @extend %sub-banner-text;
+                &.tagline-1{
+                    padding: 30px 57px 0;
+                    top: 10px;
+                    left: 90px;
+                    @media (min-width:769px) and (max-width: 991px){
+                        padding: 30px 30px 0;
+                    }
+                }
+                &.tagline-2{
+                    top: 10px;
+                    left: 31px;
+                    padding: 147px 23px 0;
+                    text-align: center;
+                    @media (min-width:769px) and (max-width: 991px){
+                        padding: 111px 20px 0;
+                    }
+                }
+                &.tagline-3{
+                    padding: 96px 49px 0;
+                    top: 10px;
+                    left: 131px;
+                    @media (min-width:769px) and (max-width: 991px){
+                        left: 70px;
+                        padding: 76px 0 0 74px;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,18 @@
+// ==========================================================================
+// Banner
+// ==========================================================================
+.carousel-indicators{
+    li{
+        margin: 1px 5px;
+        border: none;
+        background-color: $white;
+    }
+    .active{
+        background-color: $red;
+        border:1px solid $red;
+    }
+}
+.carousel-inner>.item>a>img, .carousel-inner>.item>img {
+    width: 100%;
+}
+

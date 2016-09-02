@@ -1,0 +1,19 @@
+// ==========================================================================
+// Extends
+// ==========================================================================
+%btn{
+    text-transform: uppercase;
+    font-family: $font-family--bold;
+    font-size: 14px;
+    letter-spacing: 0.3px;
+    height: 36px;
+    padding: 10px 20px;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+    &:hover{
+        @include transition-property(background-color);
+        @include transition-duration(0.3s);
+        @include transition-timing-function(ease-out);
+    }
+}

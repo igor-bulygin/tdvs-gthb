@@ -1,0 +1,151 @@
+// ==========================================================================
+// Mixins
+// ==========================================================================
+
+@mixin font-face($family, $file){
+    @font-face {
+    font-family: $family;
+    src: url('#{$path-font}/#{$file}.eot');
+    src: url('#{$path-font}/#{$file}.eot?#iefix') format('embedded-opentype'),
+         url('#{$path-font}/#{$file}.woff') format('woff'),
+         url('#{$path-font}/#{$file}.ttf') format('truetype');
+    }
+}
+  
+@mixin bg-colors($map) {
+	@each $theme, $color in $map {
+		&--#{$theme} {
+			background-color: $color;    
+		}
+	}
+} 
+@mixin img-replace($img, $w, $h, $disp: block) {
+   background-image: url('#{$path-img}/#{$img}');
+   background-repeat: no-repeat;
+   background-size: $w $h;
+   width: $w;
+   height: $h;
+   display: $disp;
+}
+// AVATAR
+@mixin size($w, $h) {
+   width: $w;
+   height: $h;
+}
+//Columns
+@mixin column-width($width) {
+    -moz-column-width: $width;
+    -webkit-column-width: $width;
+}
+@mixin column-gap($gap) {
+    -moz-column-gap: $gap;
+    -webkit-column-gap: $gap;
+}
+//Cover
+@mixin bg-size($cover){
+    -ms-background-size: $cover;
+    -o-background-size: $cover;
+    -moz-background-size: $cover;
+    -webkit-background-size: $cover;
+    background-size: $cover;
+}
+// Opacity
+@mixin opacity($opacity) {
+  opacity: $opacity;
+  $opacity-ie: $opacity * 100;
+  filter: alpha(opacity=$opacity-ie); //IE8
+}
+// Blur
+@mixin blur ($radius) {
+    filter: blur($radius+px);
+	-webkit-filter: blur($radius+px); /* Chrome, Safari */
+    -moz-filter: blur($radius+px); /* Firefox */
+	-ms-filter: blur($radius+px); /* IE12 */
+    -o-filter: blur($radius+px); /* Opera */
+    filter: progid:DXImageTransform.Microsoft.Blur(pixelradius=$radius);   
+	filter: url("data:image/svg+xml;utf8,<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\">    <filter id=\"blur\"><feGaussianBlur stdDeviation=\"#{$radius}\" /></filter></svg>#blur");/*Firefox, Safari, Chrome*/
+	filter: progid:DXImageTransform.Microsoft.Blur(Strength=$radius); /* IE9 */
+}
+// Prefix
+@mixin rotate($degrees){
+    -ms-transform: rotate($degrees); /* IE 9 */
+    -webkit-transform: rotate($degrees); /* Chrome, Safari, Opera */
+    transform: rotate($degrees);
+}
+@mixin backface-visibility($value){
+    -webkit-backface-visibility: $value;
+    backface-visibility: $value;
+}
+@mixin box-shadow($h-shadow,$v-shadow,$blur,$color) {
+    box-shadow: $h-shadow $v-shadow $blur $color;
+    -webkit-box-shadow: $h-shadow $v-shadow $blur $color;
+    -moz-box-shadow: $h-shadow $v-shadow $blur $color;
+    -ms-box-shadow: $h-shadow $v-shadow $blur $color;
+}
+@mixin border-radius($top-left,$top-right,$bottom-right,$bottom-left) {
+    border-radius: $top-left $top-right $bottom-right $bottom-left;
+    -webkit-border-radius: $top-left $top-right $bottom-right $bottom-left;
+    -moz-border-radius: $top-left $top-right $bottom-right $bottom-left;
+}
+@mixin transform($value) {
+    transform: $value;
+    -webkit-transform: $value;
+    -moz-transform: $value;
+    -ms-transform: $value;
+}
+@mixin transition($transition) {
+    -moz-transition:    $transition;
+    -o-transition:      $transition;
+    -webkit-transition: $transition;
+    transition:         $transition;
+}
+@mixin transition-property($property...) {
+    -moz-transition-property:    $property;
+    -o-transition-property:      $property;
+    -webkit-transition-property: $property;
+    transition-property:         $property;
+}
+@mixin transition-duration($duration...) {
+    -moz-transition-duration:    $duration;
+    -o-transition-duration:      $duration;
+    -webkit-transition-duration: $duration;
+    transition-duration:         $duration;
+}
+@mixin transition-timing-function($timing) {
+    -moz-transition-timing-function:    $timing;
+    -o-transition-timing-function:      $timing;
+    -webkit-transition-timing-function: $timing;
+    transition-timing-function:         $timing;
+}
+@mixin transition-delay($delay...) {
+    -moz-transition-delay:    $delay;
+    -o-transition-delay:      $delay;
+    -webkit-transition-delay: $delay;
+    transition-delay:         $delay;
+}
+@mixin animation($name,$duration,$iteration-count) {
+    animation:$name $duration $iteration-count;
+    -webkit-animation: $name $duration $iteration-count;
+    -moz-animation: $name $duration $iteration-count;
+}
+@mixin animation-delay($time) {
+    animation-delay:$time;
+    -webkit-animation-delay:$time;
+    -moz-animation-delay:$time;
+}
+@mixin animation-fill-mode($mode) {
+    animation-fill-mode:$mode;
+    -webkit-animation-fill-mode:$mode;
+    -moz-animation-fill-mode:$mode;
+}
+@mixin keyframes($name){
+    @keyframes #{$name}{
+        @content;
+    }
+    @-webkit-keyframes #{$name}{
+        @content;
+    }
+    @-moz-keyframes #{$name}{
+        @content;
+    }
+}

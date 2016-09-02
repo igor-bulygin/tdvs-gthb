@@ -1,0 +1,74 @@
+// ==========================================================================
+// Mesonry
+// ==========================================================================
+//Product Mesonry
+.col-xs-15,
+.col-sm-15,
+.col-md-15,
+.col-lg-15 {
+    position: relative;
+    min-height: 1px;
+}
+.col-xs-15 {
+    width: 20%;
+    float: left;
+}
+.mesonry-row {
+    @include column-width(13.4em);
+    @include column-gap(0.1em);
+    padding-bottom: 40px;
+}
+.menu-category {
+    display: inline-block;
+    margin: 0;   
+    padding: 0.1rem 0.2rem;
+    width:  100%; 
+}
+//Press Mesonry
+.mesonry-row {
+    &.press-3{
+        @include column-width(18.4em);
+        @include column-gap(0.1em);
+        padding-bottom: 40px;
+        padding-top: 40px;
+        .menu-category {
+            display: inline-block;
+            margin: 0;   
+            padding: 0.1rem 0.2rem;
+            width:  100%; 
+            img{
+                width:  100%; 
+            }
+        }
+    }
+    &.press-2{
+        @include column-width(23.4em);
+        @include column-gap(0.1em);
+        padding-bottom: 40px;
+        padding-top: 40px;
+        .menu-category {
+            display: inline-block;
+            margin: 0;   
+            padding: 0.1rem 0.2rem;
+            width:  100%; 
+            img{
+                width:  100%; 
+            }
+        }
+    }
+    &.press-1{
+        @include column-width(34.4em);
+        @include column-gap(0.1em);
+        padding-bottom: 40px;
+        padding-top: 40px;
+        .menu-category {
+            display: inline-block;
+            margin: 0;   
+            padding: 0.1rem 0.2rem;
+            width:  100%; 
+            img{
+                width:  100%; 
+            }
+        }
+    }
+}

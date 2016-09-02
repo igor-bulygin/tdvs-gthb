@@ -1,0 +1,70 @@
+// ==========================================================================
+// Buttons
+// ==========================================================================
+.btn-red{
+    background-color:$red;
+    color: $white;
+    @extend %btn;   
+    &:hover{
+        background-color:$dark_red;
+        color: $white;
+    }
+    @media (max-width: 768px){
+        margin: 5px auto 20px;
+        display: block;
+    }
+}
+.btn-green{
+    @extend %btn; 
+    background-color:$green;
+    color: $black;
+    &:hover{
+        background-color:$dark_green;
+    }
+}
+.btn-grey{
+    @extend %btn;
+    background-color:$white;
+    border: 1px solid $light_grey;
+    color: $darker_grey;
+    &:hover{
+        background-color:$light_grey;
+    }
+}
+.btn-black{
+    @extend %btn;
+    background-color:$black;
+    color: $white;
+    width:100%;
+    &:hover{
+        background-color:$dark_grey;
+        color: $white;
+    }
+}
+.btn-follow{
+    @extend %btn;
+    background-color:$background_grey;
+    color: $black;
+    padding: 5px 20px;
+    letter-spacing: 0.5px;
+    z-index: 12;
+    i{
+        padding-right: 5px;
+    }
+}
+.btn-white{
+    @extend %btn;
+    background-color:$white;
+    color: $red;
+    padding: 15px 20px;
+    width:250px;
+    height: 40px;
+    display: block;
+    margin: 0 auto;
+    font-family: $font-family--bold;
+    margin: 30px auto;
+    &:hover{
+        background-color:$background_grey;
+        color: $red;
+    }
+}
