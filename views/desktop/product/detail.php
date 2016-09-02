@@ -122,120 +122,115 @@ $cssCarrouselFix = sprintf("
 							<div class="price-stock">
 								<div class="stock">6 in stock</div>
 								<div class="product-price">€
-									<?= $product->getMinimumPrice() ?>
+									<span ng-bind="detailProductCtrl.minimum_price"></span>
 								</div>
 							</div>
 						</div>
 						<div class="product-data grey">
-							<?php foreach ($product->getTags() as $tag) { ?>
-								<div class="row-size">
-									<form class="form-horizontal">
-										<div class="form-group">
-											<label class="col-sm-3 control-label product-label"><span class="atr"><?= Utils::l($tag->name) ?></span></label>
-											<div class="col-sm-9">
-												<select class="form-control selectpicker product-select" title="Choose">
-													<option></option>
-													<?php foreach ($tag["options"] as $option) { ?>
-														<option>
-															<?= Utils::l($option["text"]) ?>
-														</option>
-														<?php } ?>
+							<div class="row-size" ng-repeat="option in detailProductCtrl.product.options">
+								<form class="form-horizontal">
+									<div class="form-group">
+										<label class="col-sm-3 control-label product-label"><span class="atr" ng-bind="option.name"></span></label>
+										<div class="col-sm-9">
+											<div ng-if="option.widget_type === 'select'">
+												<select class="form-control selectpicker product-select" ng-attr-title="Choose {{option.name}}" ng-attr-name="option.name" ng-model="detailProductCtrl.options[option.name]" ng-options="option.value as option.text for option in option.values">
+													<option value="" style="display:none"></option>
 												</select>
 											</div>
 										</div>
-									</form>
-								</div>
-								<?php } ?>
-									<!--						<div class="row-size">-->
-									<!--							<form class="form-horizontal">-->
-									<!--								<div class="form-group">-->
-									<!--									<label class="col-sm-3 control-label product-label"><span class="atr">Size</span> <i class="ion-information-circled info"></i></label>-->
-									<!--									<div class="col-sm-9">-->
-									<!--										<select class="form-control selectpicker product-select" title="Choose size">-->
-									<!--											<option></option>-->
-									<!--											<option>XS (+ € 1.95)</option>-->
-									<!--											<option>S (+ € 10.95)</option>-->
-									<!--											<option>M (+ € 10.95)</option>-->
-									<!--											<option>L (+ € 10.95)</option>-->
-									<!--											<option>XL (+ € 10.95)</option>-->
-									<!--											<option>XXL (+ € 10.95)</option>-->
-									<!--										</select>-->
-									<!--									</div>-->
-									<!--								</div>-->
-									<!--							</form>-->
-									<!--						</div>-->
-									<!--						<div class="row-size">-->
-									<!--							<form class="form-horizontal">-->
-									<!--								<div class="form-group">-->
-									<!--									<label class="col-sm-3 control-label product-label"><span class="atr">Color</span></label>-->
-									<!--									<div class="col-sm-9">-->
-									<!--										<select class="form-control selectpicker product-select" title="Choose color">-->
-									<!--											<option></option>-->
-									<!--											<option>Blue </option>-->
-									<!--											<option>Yellow</option>-->
-									<!--											<option>Red</option>-->
-									<!--											<option>Orange</option>-->
-									<!--											<option>Green</option>-->
-									<!--										</select>-->
-									<!--									</div>-->
-									<!--								</div>-->
-									<!--							</form>-->
-									<!--						</div>-->
-									<!--						<div class="row-size">-->
-									<!--							<form class="form-horizontal">-->
-									<!--								<div class="form-group">-->
-									<!--									<label class="col-sm-3 control-label product-label"><span class="atr">Material</span></label>-->
-									<!--									<div class="col-sm-9">-->
-									<!--										<select class="form-control selectpicker product-select" title="Choose material">-->
-									<!--											<option></option>-->
-									<!--											<option>Wool (+ € 10.95)</option>-->
-									<!--											<option>Fabric (+ € 5.95)</option>-->
-									<!--										</select>-->
-									<!--									</div>-->
-									<!--								</div>-->
-									<!--							</form>-->
-									<!--						</div>-->
-									<!--						<div class="row-size">-->
-									<!--							<form class="form-horizontal">-->
-									<!--								<div class="form-group">-->
-									<!--									<label class="col-sm-3 control-label product-label"><span class="atr">Band</span></label>-->
-									<!--									<div class="col-sm-9">-->
-									<!--										<select class="form-control selectpicker product-select" title="Choose band">-->
-									<!--											<option></option>-->
-									<!--											<option>Leather (+ € 20.95)</option>-->
-									<!--											<option>Silicone (+ € 5.95)</option>-->
-									<!--										</select>-->
-									<!--									</div>-->
-									<!--								</div>-->
-									<!--							</form>-->
-									<!--						</div>-->
-									<!--						<div class="row-size">-->
-									<!--							<form class="form-horizontal">-->
-									<!--								<div class="form-group">-->
-									<!--									<label class="col-sm-3 control-label product-label"><span class="atr">Diameter</span></label>-->
-									<!--									<div class="col-sm-9">-->
-									<!--										<select class="form-control selectpicker product-select" title="Choose diameter">-->
-									<!--											<option></option>-->
-									<!--											<option>20 cm (+ € 11.95)</option>-->
-									<!--											<option>30 cm (+ € 5.95)</option>-->
-									<!--										</select>-->
-									<!--									</div>-->
-									<!--								</div>-->
-									<!--							</form>-->
-									<!--						</div>-->
-									<!--						<div class="row-size">-->
-									<!--							<form class="form-horizontal">-->
-									<!--								<div class="form-group">-->
-									<!--									<label class="col-sm-3 control-label product-label"><span class="atr">Material</span></label>-->
-									<!--									<div class="col-sm-9">-->
-									<!--										<div class="atribute-selected">-->
-									<!--											Wool-->
-									<!--										</div>-->
-									<!--									</div>-->
-									<!--								</div>-->
-									<!--							</form>-->
-									<!--						</div>-->
+									</div>
+								</form>
+							</div>
 						</div>
+<!--						<div class="row-size">-->
+<!--							<form class="form-horizontal">-->
+<!--								<div class="form-group">-->
+<!--									<label class="col-sm-3 control-label product-label"><span class="atr">Size</span> <i class="ion-information-circled info"></i></label>-->
+<!--									<div class="col-sm-9">-->
+<!--										<select class="form-control selectpicker product-select" title="Choose size">-->
+<!--											<option></option>-->
+<!--											<option>XS (+ € 1.95)</option>-->
+<!--											<option>S (+ € 10.95)</option>-->
+<!--											<option>M (+ € 10.95)</option>-->
+<!--											<option>L (+ € 10.95)</option>-->
+<!--											<option>XL (+ € 10.95)</option>-->
+<!--											<option>XXL (+ € 10.95)</option>-->
+<!--										</select>-->
+<!--									</div>-->
+<!--								</div>-->
+<!--							</form>-->
+<!--						</div>-->
+<!--						<div class="row-size">-->
+<!--							<form class="form-horizontal">-->
+<!--								<div class="form-group">-->
+<!--									<label class="col-sm-3 control-label product-label"><span class="atr">Color</span></label>-->
+<!--									<div class="col-sm-9">-->
+<!--										<select class="form-control selectpicker product-select" title="Choose color">-->
+<!--											<option></option>-->
+<!--											<option>Blue </option>-->
+<!--											<option>Yellow</option>-->
+<!--											<option>Red</option>-->
+<!--											<option>Orange</option>-->
+<!--											<option>Green</option>-->
+<!--										</select>-->
+<!--									</div>-->
+<!--								</div>-->
+<!--							</form>-->
+<!--						</div>-->
+<!--						<div class="row-size">-->
+<!--							<form class="form-horizontal">-->
+<!--								<div class="form-group">-->
+<!--									<label class="col-sm-3 control-label product-label"><span class="atr">Material</span></label>-->
+<!--									<div class="col-sm-9">-->
+<!--										<select class="form-control selectpicker product-select" title="Choose material">-->
+<!--											<option></option>-->
+<!--											<option>Wool (+ € 10.95)</option>-->
+<!--											<option>Fabric (+ € 5.95)</option>-->
+<!--										</select>-->
+<!--									</div>-->
+<!--								</div>-->
+<!--							</form>-->
+<!--						</div>-->
+<!--						<div class="row-size">-->
+<!--							<form class="form-horizontal">-->
+<!--								<div class="form-group">-->
+<!--									<label class="col-sm-3 control-label product-label"><span class="atr">Band</span></label>-->
+<!--									<div class="col-sm-9">-->
+<!--										<select class="form-control selectpicker product-select" title="Choose band">-->
+<!--											<option></option>-->
+<!--											<option>Leather (+ € 20.95)</option>-->
+<!--											<option>Silicone (+ € 5.95)</option>-->
+<!--										</select>-->
+<!--									</div>-->
+<!--								</div>-->
+<!--							</form>-->
+<!--						</div>-->
+<!--						<div class="row-size">-->
+<!--							<form class="form-horizontal">-->
+<!--								<div class="form-group">-->
+<!--									<label class="col-sm-3 control-label product-label"><span class="atr">Diameter</span></label>-->
+<!--									<div class="col-sm-9">-->
+<!--										<select class="form-control selectpicker product-select" title="Choose diameter">-->
+<!--											<option></option>-->
+<!--											<option>20 cm (+ € 11.95)</option>-->
+<!--											<option>30 cm (+ € 5.95)</option>-->
+<!--										</select>-->
+<!--									</div>-->
+<!--								</div>-->
+<!--							</form>-->
+<!--						</div>-->
+<!--						<div class="row-size">-->
+<!--							<form class="form-horizontal">-->
+<!--								<div class="form-group">-->
+<!--									<label class="col-sm-3 control-label product-label"><span class="atr">Material</span></label>-->
+<!--									<div class="col-sm-9">-->
+<!--										<div class="atribute-selected">-->
+<!--											Wool-->
+<!--										</div>-->
+<!--									</div>-->
+<!--								</div>-->
+<!--							</form>-->
+<!--						</div>-->
 						<div class="product-data grey">
 							<div class="row-size">
 								<span class="atr quantity-name">Quantity</span>
