@@ -22,8 +22,9 @@ class UploadController extends Controller {
     public function init() {
         parent::init();
 
-        // TODO: retrieve current identity from one of the available authentication methods in Yii
-        Yii::$app->user->login(Person::findOne(["short_id" => "13cc33k"]));
+	    // TODO: retrieve current identity from one of the available authentication methods in Yii
+	    $deviser_id = Yii::$app->request->isGet ? Yii::$app->request->get("deviser_id") : Yii::$app->request->post("deviser_id");
+	    Yii::$app->user->login(Person::findOne(["short_id" => $deviser_id]));
     }
 
 	/**
