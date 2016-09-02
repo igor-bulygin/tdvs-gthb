@@ -197,6 +197,7 @@ class Tag extends CActiveRecord {
 					'required',
 					'name',
 					'description',
+					'change_reference'  => 'changeReference',
 					'values' => 'productValues',
 				];
 				static::$retrieveExtraFields = [
@@ -246,6 +247,16 @@ class Tag extends CActiveRecord {
 	public function getWidgetType()
 	{
 		return "select";
+	}
+
+	/**
+	 * Indicate if this tag / option change the product reference, therefore, could change price and stock
+	 *
+	 * @return string
+	 */
+	public function getChangeReference()
+	{
+		return (isset($this->stock_and_price)) ? $this->stock_and_price : false;
 	}
 
 	/**
