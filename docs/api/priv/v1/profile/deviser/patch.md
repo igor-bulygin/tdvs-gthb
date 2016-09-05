@@ -2,12 +2,12 @@
 
 Example about how to call to Web Service to update Deviser profile
 
-* URL: /api/priv/v1/profile/deviser
-* Method: PATCH
+* URL: `/api/priv/v1/profile/deviser`
+* Method: `PATCH`
 * Response codes: 
-  204: Success, without body
-  400: Bad request
-  403: Not allowed
+ * `204`: Success, without body
+ * `400`: Bad request
+ * `403`: Not allowed
   
 * Request body: 
 
