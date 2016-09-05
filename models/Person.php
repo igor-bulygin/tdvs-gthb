@@ -266,10 +266,15 @@ class Person extends CActiveRecord implements IdentityInterface
 					'personal_info',
 					'media',
 					'press',
-					'videos',
+					'videos' => 'videosPreview',
 					'faq',
 					'url_images' => 'urlImagesLocation',
 				];
+
+				static::$retrieveExtraFields = [
+					'videos'
+				];
+
 				break;
 			case self::SERIALIZE_SCENARIO_OWNER:
 				static::$serializeFields = [
@@ -283,12 +288,17 @@ class Person extends CActiveRecord implements IdentityInterface
 					'personal_info',
 					'media',
 					'press',
-					'videos',
+					'videos' => 'videosPreview',
 					'faq',
 //                    'credentials',
 					'preferences',
 					'url_images' => 'urlImagesLocation',
 				];
+
+				static::$retrieveExtraFields = [
+					'videos'
+				];
+
 				break;
 			case self::SERIALIZE_SCENARIO_ADMIN:
 				static::$serializeFields = [
@@ -440,6 +450,29 @@ class Person extends CActiveRecord implements IdentityInterface
 		// force max widht
 		$url = Utils::url_scheme() . Utils::thumborize($image)->resize(128, 0);
 		return $url;
+	}
+
+	/**
+	 * Get press data with additional info for preview context
+	 *
+	 * @return array
+	 */
+	public function getVideosPreview()
+	{
+		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_PREVIEW);
+		$videos = [];
+		foreach ($this->videos as $item) {
+			$products = [];
+			foreach ($item["products"] as $product_id) {
+				$products[] = Product::findOneSerialized($product_id);
+			}
+			$videos[] = [
+				"url" => $item["url"],
+				"products" => $products,
+			];
+		}
+
+		return $videos;
 	}
 
 	/**

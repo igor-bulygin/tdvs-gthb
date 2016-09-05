@@ -255,6 +255,18 @@ class Product extends CActiveRecord {
 	public static function setSerializeScenario($view)
 	{
 		switch ($view) {
+			case self::SERIALIZE_SCENARIO_PREVIEW:
+				static::$serializeFields = [
+					'id' => 'short_id',
+					'name',
+					'slug',
+					'deviser' => "deviserPreview",
+					'url_image_preview' => "imagePreview128",
+				];
+				static::$retrieveExtraFields = [
+					'deviser_id',
+				];
+				break;
 			case self::SERIALIZE_SCENARIO_PUBLIC:
 				static::$serializeFields = [
 					'id' => 'short_id',
@@ -360,6 +372,19 @@ class Product extends CActiveRecord {
 		}
 
 		return $image;
+	}
+
+	/**
+	 * Get a resized version of main image, to 128px width
+	 *
+	 * @return string
+	 */
+	public function getImagePreview128()
+	{
+		$image = $this->getMainImage();
+		// force max widht
+		$url = Utils::url_scheme() . Utils::thumborize($image)->resize(128, 0);
+		return $url;
 	}
 
 
