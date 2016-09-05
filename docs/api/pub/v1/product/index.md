@@ -10,16 +10,18 @@ Products
   400: Bad request
   
 * Request parameters:
-`name`: Search word/s in name attribute (LIKE)
-`q`: Search word/s in name and description (LIKE)
-`id`: Filter a specific product for id
-`deviser`: Filter in products of a specific deviser only
-`categories`: Filter products related with any category of the list
-`page`: Set the result page that want to be retrieved (default: 1)
-`limit`: Limit the results returned for page (default: 20)
+ * `name`: Search word/s in name attribute (LIKE)
+ * `q`: Search word/s in name and description (LIKE)
+ * `id`: Filter a specific product for id
+ * `deviser`: Filter in products of a specific deviser only
+ * `categories`: Filter products related with any category of the list
+ * `page`: Set the result page that want to be retrieved (default: 1)
+ * `limit`: Limit the results returned for page (default: 20)
 
 * Response body:
-```{
+
+```
+{
   "items": [
     {
       "id": "a04c31dc",
@@ -35,4 +37,5 @@ Products
     "current_page": 1,    
     "per_page": 20,    
   ]
+}
 ```
