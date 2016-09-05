@@ -40,6 +40,13 @@ class Person extends CActiveRecord implements IdentityInterface
 
 	const SCENARIO_TREND_SETTER_PROFILE_UPDATE = 'trend-setter-profile-update';
 
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	static protected $serializeFields = [];
+
 	//public $accessToken;
 
 	public static function collectionName()
@@ -241,6 +248,14 @@ class Person extends CActiveRecord implements IdentityInterface
 	public static function setSerializeScenario($view)
 	{
 		switch ($view) {
+			case self::SERIALIZE_SCENARIO_PREVIEW:
+				static::$serializeFields = [
+					'id' => 'short_id',
+					'slug',
+					'name' => "brandName",
+					'url_avatar' => "avatarImage128",
+				];
+				break;
 			case self::SERIALIZE_SCENARIO_PUBLIC:
 				static::$serializeFields = [
 					'id' => 'short_id',
@@ -374,9 +389,13 @@ class Person extends CActiveRecord implements IdentityInterface
 	/**
 	 * Get the path to avatar image
 	 *
+	 * @param bool $urlify
+	 * @param int $minHeight
+	 * @param int $minWidth
+	 *
 	 * @return string
 	 */
-	public function getAvatarImage($urlify = true)
+	public function getAvatarImage($urlify = true, $minHeight = null, $minWidth = null)
 	{
 		$image = "";
 		$fallback = "deviser_placeholder.png";
@@ -399,7 +418,28 @@ class Person extends CActiveRecord implements IdentityInterface
 			}
 		}
 
+		if ((!empty($minHeight)) || (!empty($minWidth))) {
+			// force resize
+			$image = Utils::url_scheme() . Utils::thumborize($image)->resize(
+					($minWidth) ? $minWidth : 0,
+					($minHeight) ? $minHeight : 0
+			);
+		}
+
 		return $image;
+	}
+
+	/**
+	 * Get a resized version of avatar image, to 128px width
+	 *
+	 * @return string
+	 */
+	public function getAvatarImage128()
+	{
+		$image = $this->getAvatarImage();
+		// force max widht
+		$url = Utils::url_scheme() . Utils::thumborize($image)->resize(128, 0);
+		return $url;
 	}
 
 	/**

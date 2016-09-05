@@ -6,7 +6,8 @@ use Exception;
 use Yii;
 use app\helpers\CActiveRecord;
 
-class TagOption {
+class TagOption
+{
 	const NUMERIC = 0;
 	const ALPHANUMERIC = 1;
 	const TXT = [
@@ -55,7 +56,8 @@ class TagOption {
 		TagOption::LIGHTGREEN => ["class" => "lightgreen", "text" => "Light green", "value" => "lightgreen"]
 	];
 
-	function __construct() {
+	function __construct()
+	{
 		Yii::t("app/admin", "Numeric");
 		Yii::t("app/admin", "Alphanumeric");
 
@@ -92,20 +94,30 @@ class TagOption {
  * @property array categories
  * @property array options
  */
-class Tag extends CActiveRecord {
+class Tag extends CActiveRecord
+{
 	const DROPDOWN = 0;
 	const FREETEXT = 1;
 
 	const SERIALIZE_SCENARIO_PRODUCT_OPTION = 'serialize_scenario_product_option';
 
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	static protected $serializeFields = [];
+
 	/** @var  Product */
 	private $product;
 
-	public static function collectionName() {
+	public static function collectionName()
+	{
 		return 'tag';
 	}
 
-	public function attributes() {
+	public function attributes()
+	{
 		return [
 			'_id',
 			'short_id',
@@ -129,57 +141,29 @@ class Tag extends CActiveRecord {
 	public $translatedAttributes = ['name', 'description'];
 
 
-	public function beforeSave($insert) {
+	public function beforeSave($insert)
+	{
 		/*
 		 * Create empty data holders if they don't exist
 		 */
-		if($this->name == null) {
+		if ($this->name == null) {
 			$this["name"] = [];
 		}
 
-		if($this->description == null) {
+		if ($this->description == null) {
 			$this["description"] = [];
 		}
 
-		if($this->categories == null) {
+		if ($this->categories == null) {
 			$this["categories"] = [];
 		}
 
-		if($this->options == null) {
+		if ($this->options == null) {
 			$this["options"] = [];
 		}
 
 		return parent::beforeSave($insert);
 	}
-
-	/**
-	 * Get a collection of entities serialized, according to serialization configuration
-	 *
-	 * @param string $id
-	 * @return Tag|null
-	 * @throws Exception
-	 */
-	public static function findOneSerialized($id)
-	{
-		/** @var Tag $tag */
-		$tag = null;
-
-		// get only the fields that gonna be used
-		$products = Product::find()->select(self::getSelectFields())->where(["short_id" => $id])->all();
-
-		if (count($products) == 1) {
-			$tag = $products[0];
-		} elseif (count($products) > 1) {
-			throw new Exception(sprintf('More than one tag with the same id', $id));
-		}
-
-		// if automatic translation is enabled
-		if (static::$translateFields) {
-			Utils::translate($tag);
-		}
-		return $tag;
-	}
-
 
 	/**
 	 * Prepare the ActiveRecord properties to serialize the objects properly, to retrieve an serialize
@@ -197,7 +181,7 @@ class Tag extends CActiveRecord {
 					'required',
 					'name',
 					'description',
-					'change_reference'  => 'changeReference',
+					'change_reference' => 'changeReference',
 					'values' => 'productValues',
 				];
 				static::$retrieveExtraFields = [
@@ -224,15 +208,17 @@ class Tag extends CActiveRecord {
 //			print_r($this->product->options["731ct"]);
 //			if ($key < 5) {
 			// TODO Be careful with "two colors" widget
-			if ($this->product->options[$this->short_id][0][0] == $option["value"]) {
-				$values[] = [
-					"value" => $option["value"],
-					"text" => Utils::l($option["text"]),
-					"hint" => null,
-					"image" => null,
-					"default" => null,
-					"colors" => [],
-				];
+			if (!empty($this->product->options[$this->short_id][0])) {
+				if ($this->product->options[$this->short_id][0][0] == $option["value"]) {
+					$values[] = [
+						"value" => $option["value"],
+						"text" => Utils::l($option["text"]),
+						"hint" => null,
+						"image" => null,
+						"default" => null,
+						"colors" => [],
+					];
+				}
 			}
 		}
 

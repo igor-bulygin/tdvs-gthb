@@ -49,13 +49,13 @@
 			patch.press = [];
 			patch.deviser_id = vm.deviser.id;
 			vm.images.forEach(function (element) {
-				patch.press.unshift(element.filename);
+				patch.press.push(element.filename);
 			});
 			patch.$update().then(function (dataPress) {
 				//console.log("dataPress", dataPress);
 			}, function (err) {
 				toastr.error(err);
-			})
+			});
 		}
 
 		function upload(image) {
