@@ -15,8 +15,8 @@ class Product2Asset extends AssetBundle {
     ];
 	public $depends = [
 		'app\assets\desktop\pub\PublicCommonAsset',
-		'app\assets\libs\AngularAsset',
-		'app\assets\libs\AngularToastrAsset',
+		'app\assets\libs\angularAsset',
+		'app\assets\libs\angularToastrAsset',
 		'app\assets\api\ApiAsset',
 	];
 }
