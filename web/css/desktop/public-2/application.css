@@ -257,7 +257,7 @@ h3 {
 ul {
   padding: 0; }
   ul li {
-    list-style: none; }
+    list-style: none !important; }
 
 a, a:hover, a:focus {
   text-decoration: none; }
@@ -1106,7 +1106,8 @@ a, a:hover, a:focus {
   padding: 20px;
   border: 1px solid #000;
   background: #bfbfbf;
-  cursor: pointer; }
+  cursor: pointer;
+  display: inline-block; }
   .photo-loader:hover .plus-add {
     background-color: #7AB83A;
     -moz-transition-property: background-color;

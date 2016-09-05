@@ -4,7 +4,7 @@
 footer{
     @include size(100%,300px);
     max-height: 400px;
-    background: url('../img/footer-bg.png') center $black;
+    background: url('/imgs/footer-bg.png') center $black;
     @include bg-size(cover);
     color:$white;
     padding:20px;

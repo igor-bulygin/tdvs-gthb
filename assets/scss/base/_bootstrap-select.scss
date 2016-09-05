@@ -1,0 +1,54 @@
+// ==========================================================================
+// Botstrap Select
+// ==========================================================================
+/* BOOTSTRAP SELECT TUNNING */
+.bootstrap-select>.dropdown-toggle.bs-placeholder, .bootstrap-select>.dropdown-toggle.bs-placeholder:active, .bootstrap-select>.dropdown-toggle.bs-placeholder:focus, .bootstrap-select>.dropdown-toggle.bs-placeholder:hover {
+    color: $almost_black;
+    background-color:$light_grey;
+    padding: 2px 12px;
+    max-width: 200px;
+}
+.bootstrap-select{
+    .btn{
+        @include border-radius(0px,0px,0px,0px);
+        padding: 2px 12px;
+        max-width: 200px;
+    }
+    .dropdown-menu{
+        @include border-radius(0px,0px,0px,0px);
+        padding:0;
+        margin: -1px 0 0;
+        background-color: $white;
+    }
+    .dropdown-toggle:focus {
+        outline: 0!important;
+        outline-offset: 0!important;
+    }
+    .btn-default.active, .btn-default:active, {
+        color: #333;
+        background-color: transparent!important;
+        border-color: #ccc!important;
+    }
+    .btn-default.focus, .btn-default:focus {
+        color: #333;
+        background-color: transparent!important;
+        border-color: #ccc!important;
+    }
+}
+.bootstrap-select.btn-group .dropdown-menu {
+    width: 200px!important;
+    min-width: auto!important;
+}
+.dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover {
+    color: #4a4a4a;
+    text-decoration: none;
+    background-color: #d7d7d7;
+}
+.open>.dropdown-toggle.btn-default {
+    color: #333;
+    background-color: transparent!important;
+    border-color: #adadad;
+}
+.bootstrap-select.btn-group .dropdown-menu.inner {
+    margin: -26px 0 0 0;
+}

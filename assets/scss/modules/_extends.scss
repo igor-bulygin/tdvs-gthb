@@ -76,3 +76,19 @@
     float: left;
     width:100%;
 }
+%mini-btn{
+    text-align: center;
+    width: 25px;
+    height: 25px;
+    @include border-radius(4px,4px,4px,4px);
+}
+%radio-custom{
+    min-width: 23px;
+    min-height: 23px;
+    line-height: 22px;
+    text-align: center;
+    font-size: 12px;
+    float: left;
+    cursor: pointer;
+    padding: 0 2px;
+}
