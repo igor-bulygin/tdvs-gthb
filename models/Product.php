@@ -6,6 +6,10 @@ use Exception;
 use Yii;
 use app\helpers\Utils;
 use app\helpers\CActiveRecord;
+use yii\mongodb\ActiveQuery;
+use yii\mongodb\Collection;
+use yii\mongodb\Connection;
+use yii\mongodb\rbac\MongoDbManager;
 use yii\web\IdentityInterface;
 use yii\base\NotSupportedException;
 
@@ -30,6 +34,17 @@ use yii\base\NotSupportedException;
  * @property int enabled
  */
 class Product extends CActiveRecord {
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	static protected $serializeFields = [];
+
+	/** @var  int */
+	static public $countItemsFounded = 0;
+
+
 	public static function collectionName() {
 		return 'product';
 	}
@@ -141,7 +156,7 @@ class Product extends CActiveRecord {
 	}
 
 	/**
-	 * Get a collection of entities serialized, according to serialization configuration
+	 * Get one entity serialized
 	 *
 	 * @param string $id
 	 * @return Product|null
@@ -150,22 +165,79 @@ class Product extends CActiveRecord {
 	public static function findOneSerialized($id)
 	{
 		/** @var Product $product */
-		$product = null;
-
-		// get only the fields that gonna be used
-		$products = Product::find()->select(self::getSelectFields())->where(["short_id" => $id])->all();
-
-		if (count($products) == 1) {
-			$product = $products[0];
-		} elseif (count($products) > 1) {
-			throw new Exception(sprintf('More than one product with the same id', $id));
-		}
+		$product = Product::find()->select(self::getSelectFields())->where(["short_id" => $id])->one();
 
 		// if automatic translation is enabled
 		if (static::$translateFields) {
 			Utils::translate($product);
 		}
 		return $product;
+	}
+
+	/**
+	 * Get a collection of entities serialized, according to serialization configuration
+	 *
+	 * @param array $criteria
+	 * @return array
+	 * @throws Exception
+	 */
+	public static function findSerialized($criteria = [])
+	{
+
+		// Products query
+		$query = new ActiveQuery(Product::className());
+
+		// Retrieve only fields that gonna be used
+		$query->select(self::getSelectFields());
+
+		// if product id is specified
+		if ((array_key_exists("id", $criteria)) && (!empty($criteria["id"]))) {
+			$query->andWhere(["short_id" => $criteria["id"]]);
+		}
+
+		// if deviser id is specified
+		if ((array_key_exists("deviser_id", $criteria)) && (!empty($criteria["deviser_id"]))) {
+			$query->andWhere(["deviser_id" => $criteria["deviser_id"]]);
+		}
+
+		// if categories are specified
+		if ((array_key_exists("categories", $criteria)) && (!empty($criteria["categories"]))) {
+			$query->andWhere(["categories" => $criteria["categories"]]);
+		}
+
+		// if name is specified
+		if ((array_key_exists("name", $criteria)) && (!empty($criteria["name"]))) {
+//			// search the word in all available languages
+			$query->andFilterWhere(Utils::getFilterForTranslatableField("name", $criteria["name"]));
+		}
+
+		// if name is specified
+		if ((array_key_exists("text", $criteria)) && (!empty($criteria["text"]))) {
+			// TODO, find not only in description, in name, and other text attributes to be specified too
+//			// search the word in all available languages
+			$query->andFilterWhere(Utils::getFilterForTranslatableField("description", $criteria["text"]));
+		}
+
+		// Count how many items are with those conditions, before limit them for pagination
+		static::$countItemsFounded = $query->count();
+
+		// limit
+		if ((array_key_exists("limit", $criteria)) && (!empty($criteria["limit"]))) {
+			$query->limit($criteria["limit"]);
+		}
+
+		// offset for pagination
+		if ((array_key_exists("offset", $criteria)) && (!empty($criteria["offset"]))) {
+			$query->offset($criteria["offset"]);
+		}
+
+		$products = $query->all();
+
+		// if automatic translation is enabled
+		if (static::$translateFields) {
+			Utils::translate($products);
+		}
+		return $products;
 	}
 
 	public function deletePhotos() {
@@ -188,7 +260,7 @@ class Product extends CActiveRecord {
 					'id' => 'short_id',
 					'deviser_id',
 					'enabled',
-//					'categories',
+					'categories',
 //					'collections',
 					'name',
 					'slug',
@@ -298,7 +370,7 @@ class Product extends CActiveRecord {
 	 */
 	public function getMinimumPrice()
 	{
-		// TODO find minimun price, not first one
+		// TODO find minimum price, not first one
 		// some products hasn't price and stock in database !!
 		if (isset($this->price_stock)) {
 			if (count($this->price_stock) > 0) {
@@ -380,8 +452,10 @@ class Product extends CActiveRecord {
 		foreach ($this->price_stock as $stock) {
 			$options = [];
 			foreach ($stock["options"] as $key => $values) {
-				// remove the array
-				$options[$key] = $values[0];
+				if (isset($values[0])) {
+					// remove the array
+					$options[$key] = $values[0];
+				}
 			}
 			$references[] = [
 				"reference_id" => "temp_random_id_" . uniqid(), // TODO retrieve from database
@@ -406,8 +480,10 @@ class Product extends CActiveRecord {
 		foreach ($this->options as $tag_id => $option) {
 			/** @var Tag $tag */
 			$tag = Tag::findOne(["short_id" => $tag_id]);
-			$tag->setFilterProduct($this);
-			$options[] = $tag;
+			if ($tag) {
+				$tag->setFilterProduct($this);
+				$options[] = clone $tag;
+			}
 		}
 		Tag::setSerializeScenario(Tag::SERIALIZE_SCENARIO_PRODUCT_OPTION);
 		Utils::translate($options);

@@ -397,7 +397,6 @@ class Utils
 	 *
 	 * @param CActiveRecord $model
 	 * @param string $translatedAttribute
-	 * @return mixed
 	 */
 	public static function translateModelAttribute(CActiveRecord $model, $translatedAttribute)
 	{
@@ -455,6 +454,32 @@ class Utils
 		}
 
 		return $arr;
+	}
+
+
+	/**
+	 * Compose an array to use as condition in where(), in ActiveQuery, like:
+	 *
+	 * $query->andFilterWhere(
+	 *      ['or',
+     *          ['LIKE', 'name.en-US', "my filter"],
+	 *          ['LIKE', 'name.es-ES', "my filter"],
+	 *      ]
+	 * );
+	 *
+	 * @param string $fieldName
+	 * @param $value
+	 * @param string $operator
+	 * @return array
+	 */
+	public static function getFilterForTranslatableField($fieldName, $value, $operator = 'LIKE')
+	{
+		$nameFilter = ['or'];
+		foreach (Lang::getAvailableLanguages() as $key => $name) {
+			$field = ($fieldName . "." . $key);
+			$nameFilter[] = [$operator, $field, $value];
+		}
+		return $nameFilter;
 	}
 
 

@@ -58,11 +58,22 @@ class CActiveRecord extends ActiveRecord {
 		return $_id;
 	}
 
+	/**
+	 * Get list of fields that want to be serialized
+	 *
+	 * @return array
+	 */
     public function fields()
     {
         return static::$serializeFields;
     }
 
+	/**
+	 * Get list of fields that want to be retrieved from database. There will be only fields that will be used
+	 * in serialization (directly, or thru getters).
+	 *
+	 * @return array
+	 */
     static public function getSelectFields()
     {
     	// fields that want to be serialized, and extra fields for internal use
