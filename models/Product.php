@@ -395,12 +395,7 @@ class Product extends CActiveRecord {
 			}
 		}
 
-		// TODO Hack to force only 5 images to show in the gallery. Remove this when the gallery was finished
-		while (count($images) < 5) {
-			$images = array_merge($images, $images);
-		}
-
-		return array_slice($images, 0, 5) ;
+		return $images;
 	}
 
 	/**
