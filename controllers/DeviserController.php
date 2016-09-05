@@ -274,6 +274,7 @@ class DeviserController extends CController {
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("press-view", [
 			'deviser' => $deviser,
+			'press' => $deviser->press,
 		]);
 	}
 

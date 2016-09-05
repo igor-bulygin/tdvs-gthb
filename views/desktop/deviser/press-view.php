@@ -1,23 +1,18 @@
 <?php
-use app\assets\desktop\pub\PublicCommonAsset;
 use app\components\DeviserHeader;
 use app\components\DeviserMenu;
-use app\models\Person;
-use app\models\Product;
-use yii\web\View;
-use yii\helpers\Url;
-use app\models\Lang;
-use yii\helpers\Html;
-use yii\widgets\Pjax;
 use app\helpers\Utils;
-use yii\widgets\ListView;
-use yii\widgets\ActiveForm;
-use app\assets\desktop\pub\IndexAsset;
+use app\models\Person;
+use yii\web\View;
+use app\models\Lang;
 use app\assets\desktop\pub\Index2Asset;
+use yii\helpers\Json;
+use app\assets\desktop\deviser\EditPressAsset;
 
-PublicCommonAsset::register($this);
+EditPressAsset::register($this);
 
 /** @var Person $deviser */
+/** @var array $press */
 
 $this->title = 'About ' . $deviser->getBrandName() . ' - Todevise';
 $this->params['deviser'] = $deviser;
@@ -33,10 +28,19 @@ $this->params['deviser_menu_active_option'] = 'press';
 			<div class="col-md-2">
 				<?= DeviserMenu::widget() ?>
 			</div>
-			<div class="col-md-10 about-bg">
-				<div>Notas de prensa de <?= $deviser->getBrandName() ?></div>
+			<div class="col-md-10">
+				<?php if (count($press) == 0) { ?>
+				<div>You don't have any press images!</div>
+				<?php } else { ?>
+				<div class="mesonry-row press-3">
+					<?php foreach ($press as $item) { ?>
+					<div class="menu-category list-group draggable-list">
+						<img class="grid-image draggable-img" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($deviser->getUrlImagesLocation() . $item)->resize(355, 0) ?>">
+					</div>
+					<?php } ?>
+				</div>
+				<?php } ?>
 			</div>
 		</div>
 	</div>
 </div>
-

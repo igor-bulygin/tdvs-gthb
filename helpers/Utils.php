@@ -590,6 +590,7 @@ class Utils
 
 	public static function thumborize($img_path)
 	{
+		// TODO obtain this from .env file
 		$server = getenv("THUMBOR_SERVER");
 		$secret = getenv("THUMBOR_SECURITY_KEY");
 		return Builder::construct($server, $secret, $img_path);
