@@ -5,11 +5,12 @@
     width: 309px;
     height: 400px;
     text-align: center;
-    margin: 0 2px 2px;
+    margin: 0 2px 7px;
     padding: 20px;
     border: 1px solid #000;
     background: #bfbfbf;
     cursor: pointer;
+    display: inline-block;
     &:hover{
         .plus-add{
             background-color: $dark_green;

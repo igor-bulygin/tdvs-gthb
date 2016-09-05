@@ -991,7 +991,7 @@ a, a:hover, a:focus {
   .mesonry-row.press-3 .menu-category {
     display: inline-block;
     margin: 0;
-    padding: 0.1rem 0.2rem;
+    padding: 0 0.2rem 0.5rem;
     width: 100%; }
     .mesonry-row.press-3 .menu-category img {
       width: 100%; }
@@ -1005,7 +1005,7 @@ a, a:hover, a:focus {
   .mesonry-row.press-2 .menu-category {
     display: inline-block;
     margin: 0;
-    padding: 0.1rem 0.2rem;
+    padding: 0.2rem 0.2rem;
     width: 100%; }
     .mesonry-row.press-2 .menu-category img {
       width: 100%; }
@@ -1019,7 +1019,7 @@ a, a:hover, a:focus {
   .mesonry-row.press-1 .menu-category {
     display: inline-block;
     margin: 0;
-    padding: 0.1rem 0.2rem;
+    padding: 0.2rem 0.2rem;
     width: 100%; }
     .mesonry-row.press-1 .menu-category img {
       width: 100%; }
@@ -1184,11 +1184,12 @@ a, a:hover, a:focus {
   width: 309px;
   height: 400px;
   text-align: center;
-  margin: 0 2px 2px;
+  margin: 0 2px 7px;
   padding: 20px;
   border: 1px solid #000;
   background: #bfbfbf;
-  cursor: pointer; }
+  cursor: pointer;
+  display: inline-block; }
   .photo-loader:hover .plus-add {
     background-color: #7AB83A;
     -moz-transition-property: background-color;
