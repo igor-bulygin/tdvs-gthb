@@ -258,7 +258,7 @@ class Product extends CActiveRecord {
 			case self::SERIALIZE_SCENARIO_PUBLIC:
 				static::$serializeFields = [
 					'id' => 'short_id',
-					'deviser_id',
+					'deviser' => "deviserPreview",
 					'enabled',
 					'categories',
 //					'collections',
@@ -279,6 +279,7 @@ class Product extends CActiveRecord {
 					'url_images' => 'urlImagesLocation',
 				];
 				static::$retrieveExtraFields = [
+					'deviser_id',
 					'options',
 					'price_stock',
 				];
@@ -488,6 +489,18 @@ class Product extends CActiveRecord {
 		Tag::setSerializeScenario(Tag::SERIALIZE_SCENARIO_PRODUCT_OPTION);
 		Utils::translate($options);
 		return $options;
+	}
+
+	/**
+	 * Get a preview version of a Deviser
+	 *
+	 * @return Person
+	 */
+	public function getDeviserPreview()
+	{
+		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_PREVIEW);
+		$deviser = Person::findOne(["short_id" => $this->deviser_id]);
+		return $deviser;
 	}
 
 	/**
