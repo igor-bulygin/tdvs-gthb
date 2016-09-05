@@ -13,6 +13,8 @@ Example about how to call to Web Service to update Deviser profile
 
 ```
 {
+    "scenario": "deviser-..." // available ["deviser-profile-update", "deviser-press-update", "deviser-videos-update", "deviser-faq-update"]
+    "slug": "my-name"
     "categories": [
       "f0cco"
     ],
@@ -33,6 +35,17 @@ Example about how to call to Web Service to update Deviser profile
       "lang": "en-US",
       "currency": "EUR"
     },
-    "slug": "slug4"
-    }
+    "media": {
+      "header": "filename.jpg",
+      "profile": "filename.jpg"
+    },
+    "videos": [{
+      "url": "http://youtube.com/asdf",
+      "products": ["id_1", "id_2"]          // products related
+    }],
+    "faq": [{
+      "question": {"en-US" : "my question"},
+      "answer": {"en-US" : "my answer"},
+    }]
+}
 ```

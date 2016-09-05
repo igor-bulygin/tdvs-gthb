@@ -42,7 +42,7 @@ class Product extends CActiveRecord {
 	static protected $serializeFields = [];
 
 	/** @var  int */
-	static public $countItemsFounded = 0;
+	static public $countItemsFound = 0;
 
 
 	public static function collectionName() {
@@ -219,7 +219,7 @@ class Product extends CActiveRecord {
 		}
 
 		// Count how many items are with those conditions, before limit them for pagination
-		static::$countItemsFounded = $query->count();
+		static::$countItemsFound = $query->count();
 
 		// limit
 		if ((array_key_exists("limit", $criteria)) && (!empty($criteria["limit"]))) {

@@ -3,6 +3,7 @@ namespace app\validators;
 
 use app\helpers\Utils;
 use app\models\Person;
+use app\models\Product;
 use Yii;
 use yii\base\Model;
 use yii\helpers\Html;
@@ -26,17 +27,26 @@ class PersonVideosValidator extends Validator
 		$urlValidator = new UrlValidator();
 		$videoProviderValidator = new VideoProviderValidator();
 
-		foreach ($object->{$attribute} as $urlVideo) {
+		foreach ($object->{$attribute} as $videoData) {
 			// all items must be valid urls
-			if ($urlValidator->validate($urlVideo, $error)) {
+			$url = $videoData["url"];
+			if ($urlValidator->validate($url, $error)) {
 				// and server by specific streaming providers
-				if (!$videoProviderValidator->validate($urlVideo, $error)) {
-					$this->addError($object, $attribute, sprintf($error . ' (%s)', $urlVideo));
+				if (!$videoProviderValidator->validate($url, $error)) {
+					$this->addError($object, $attribute, sprintf($error . ' (%s)', $url));
 				}
 			} else {
-				$this->addError($object, $attribute, sprintf($error . ' (%s)', $urlVideo));
+				$this->addError($object, $attribute, sprintf($error . ' (%s)', $url));
 			}
 
+			// if products are specified, must exist
+			if ((array_key_exists("products", $videoData)) && (!empty($videoData["products"])) && is_array($videoData["products"])) {
+				foreach ($videoData["products"] as $id) {
+					if (!Product::findOne((["short_id" => $id]))) {
+						$this->addError($object, $attribute, sprintf("Product %s not found", $id));
+					}
+				}
+			}
 		}
 	}
 

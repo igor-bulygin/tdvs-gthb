@@ -45,9 +45,6 @@ class ProductController extends Controller {
 	    $page = ($page < 1) ? 1 : $page;
 	    $offset = ($limit * ($page - 1));
 
-//	    	"text" => "GLOSSED LEATHER LACE-UP BOOTS",
-//	    	"text" => "LEATHER",
-
 	    $products = Product::findSerialized([
 		    "name" => Yii::$app->request->get("name"), // search only in name attribute
 		    "text" => Yii::$app->request->get("q"), // search in name, description, and more
@@ -61,7 +58,7 @@ class ProductController extends Controller {
 	    return [
 	    	"items" => $products,
 		    "meta" => [
-			    "total_count" => Product::$countItemsFounded,
+			    "total_count" => Product::$countItemsFound,
 			    "current_page" => $page,
 			    "per_page" => $limit,
 		    ]
