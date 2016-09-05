@@ -6,8 +6,8 @@ Products
 * URL: /api/pub/v1/products
 * Method: GET
 * Response codes: 
-  200: Success
-  400: Bad request
+ * `200`: Success
+ * `400`: Bad request
   
 * Request parameters:
  * `name`: Search word/s in name attribute (LIKE)
