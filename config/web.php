@@ -231,6 +231,7 @@ $config = [
 
 				// API routing (public)
 				'GET api3/pub/v1/products/<id:[^/.]*?>' => 'api3/pub/v1/product/view', // override "view" action to accept alphanumeric ids
+				'POST api3/pub/v1/devisers/requests' => 'api3/pub/v1/deviser/requests-post',
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/product'],
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/faq'],
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/term'],
