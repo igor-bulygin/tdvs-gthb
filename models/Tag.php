@@ -56,6 +56,28 @@ class TagOption
 		TagOption::LIGHTGREEN => ["class" => "lightgreen", "text" => "Light green", "value" => "lightgreen"]
 	];
 
+	const HEXADECIMAL_COLORS = [
+		TagOption::DARKRED => "#ca2440",
+		TagOption::RED => "#ff6262",
+		TagOption::ORANGE => "#f7a128",
+		TagOption::BROWN => "#936524",
+		TagOption::YELLOW => "#f7f028",
+		TagOption::GREEN => "#8ee04b",
+		TagOption::DARKGREEN => "#57a617",
+		TagOption::BLUE => "#28d0f7",
+		TagOption::DARKBLUE => "#2861f7",
+		TagOption::PURPLE => "#b933f4",
+		TagOption::PINK => "#ff9ce4",
+		TagOption::WHITE => "#fff",
+		TagOption::GREY => "#bfbfbf",
+		TagOption::BLACK => "#2e2e2e",
+		TagOption::ANIMALPRINT => "",
+		TagOption::GOLD => "#ffd55d",
+		TagOption::CREAM => "#ffe6bd",
+		TagOption::SILVER => "#c0c0c0",
+		TagOption::LIGHTGREEN => "#90ee90",
+	];
+
 	function __construct()
 	{
 		Yii::t("app/admin", "Numeric");
@@ -216,7 +238,7 @@ class Tag extends CActiveRecord
 						"hint" => null,
 						"image" => null,
 						"default" => null,
-						"colors" => [],
+						"colors" => $this->getOptionColor($option),
 					];
 				}
 			}
@@ -232,7 +254,23 @@ class Tag extends CActiveRecord
 	 */
 	public function getWidgetType()
 	{
+		// TODO refactor the Tag attributes, to known easily what kind of widget must to be used to select
+		if ((is_array($this->options)) && (count($this->options)>0) && ($this->options[0])) {
+			$firstValue = $this->options[0];
+			if ((array_key_exists("is_color",  $firstValue)) && ($firstValue["is_color"])) {
+				return "color";
+			}
+		}
 		return "select";
+	}
+
+	/**
+	 * @param $option
+	 * @return array
+	 */
+	public function getOptionColor($option)
+	{
+		return [TagOption::HEXADECIMAL_COLORS[rand(0, count(TagOption::HEXADECIMAL_COLORS)-1)]];
 	}
 
 	/**
