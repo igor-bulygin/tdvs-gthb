@@ -39,19 +39,25 @@ $this->params['deviser_menu_active_option'] = 'videos';
 								</div>
 							</form>
 							<div ng-if="editVideosCtrl.deviser.videos.length === 0" class="text-center" ng-cloak>
-								<p>You have no videos :(</p>
+								<p class="no-video-text">You have no videos</p>
 							</div>
 							<div ng-repeat="video in editVideosCtrl.deviser.videos" ng-cloak dnd-list="editVideosCtrl.deviser.videos">
-								<div class="row" dnd-draggable="video" dnd-effect-allowed="move" dnd-moved="editVideosCtrl.updateDeviserVideos($index)">
+								<div class="row video-row" dnd-draggable="video" dnd-effect-allowed="move" dnd-moved="editVideosCtrl.updateDeviserVideos($index)">
 									<div class="col-md-6">
 										<ng-youtube-embed url="video.url" autoplay="false" color="white" disablekb="true" width="100%"></ng-youtube-embed>
 									</div>
-									<div class="col-md-6">
-										<h4>Which works appear in this video? <span class="pull-right"><span class="glyphicon glyphicon-move" style="cursor:move;"></span><span class="text-danger glyphicon glyphicon-remove" ng-click="editVideosCtrl.deleteVideo($index)" style="cursor:pointer;"></span></span></h4>
+									<div class="col-md-6 dragg-video-wrapper">
+										 <span class="title">Which works appear in this video?</span>
+										 <div class="open-drag-icons">
+								            <span class="ion-arrow-move move"></span>                                                                 <span class="ion-android-close x-close" ng-click="editVideosCtrl.deleteVideo($index)"></span>
+										 </div>
 										<form name="editVideosCtrl.searchForm" novalidate>
-											<div class="form-group">
-												<input type="text" placeholder="Type the work name" ng-model="editVideosCtrl.searchTerm[$index]" name="searchTerm" ng-change="editVideosCtrl.findProducts(editVideosCtrl.searchTerm[$index], $index)" ng-minlength="4" ng-model-options="{debounce:{'default': 500}}" class="form-control">
-											</div>
+											<div class="input-group edit-video-wrapper">
+                                                <span class="input-group-addon" id="basic-addon1">
+                                                  <span class="ion-search"></span>
+                                                </span>
+                                                <input type="text" placeholder="Type the work name" ng-model="editVideosCtrl.searchTerm[$index]" name="searchTerm" ng-change="editVideosCtrl.findProducts(editVideosCtrl.searchTerm[$index], $index)" ng-minlength="4" ng-model-options="{debounce:{'default': 500}}" class="form-control edit-video-input">
+                                            </div>
 											<div ng-cloak style="height:200px; overflow-y:scroll; background:white;" ng-if="editVideosCtrl.searchTerm[$index].length > 0 && editVideosCtrl.works[$index] && editVideosCtrl.works[$index].length > 0">
 												<div ng-repeat="work in editVideosCtrl.works[$parent.$index]" style="cursor:pointer;" ng-click="editVideosCtrl.selectProduct($parent.$index, work)">
 													<div class="row">
@@ -66,8 +72,8 @@ $this->params['deviser_menu_active_option'] = 'videos';
 												</div>
 											</div>
 										</form>
-										<div>
-											<h4>Tagged works</h4>
+										<div class="tagged-works">
+											<span class="title">Tagged works</span>
 											<div ng-if="video.products.length === 0">
 												<p>No tagged works.</p>
 												<p>Tag works to tell other members what the video is about.</p>
