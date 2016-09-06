@@ -34,38 +34,19 @@ $this->params['deviser_menu_active_option'] = 'videos';
 				<?= DeviserMenu::widget() ?>
 			</div>
 			<div class="col-md-10">
+				<?php if (count($videos) == 0) { ?>
+					<div>You don't have any video!</div>
+				<?php } else { ?>
 			    <div class="video-container">
-                    <div class="col-sm-12">
+				    <?php foreach ($videos as $video) { ?>
+                    <div class="col-sm-<?= (count($videos)<=3) ? '12' : '6' ?>">
                         <div class="video-wrapper">
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/_hh_cOcC6bQ?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen>                                 </iframe>
+                            <iframe width="560" height="315" src="<?= Utils::getUrlEmbeddedYoutubePlayer($video["url"]) ?>" frameborder="0" allowfullscreen></iframe>
                         </div>
                     </div>
-                    <div class="col-sm-12">
-                        <div class="video-wrapper">
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/_hh_cOcC6bQ?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen>                                 </iframe>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="video-wrapper">
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/_hh_cOcC6bQ?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen>                                 </iframe>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="video-wrapper">
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/_hh_cOcC6bQ?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen>                                 </iframe>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="video-wrapper">
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/_hh_cOcC6bQ?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen>                                 </iframe>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="video-wrapper">
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/_hh_cOcC6bQ?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen>                                 </iframe>
-                        </div>
-                    </div>
+				    <?php }  ?>
                 </div>
+				<?php } ?>
 			</div>
 		</div>
 	</div>

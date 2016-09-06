@@ -647,4 +647,42 @@ class Utils
 		}
 	}
 
+	/**
+	 * Parse a Youtube URL video, and return the embedded url version, to use in a <iframe>
+	 * (No external library found, to parse the url, without have to register and use API KEY)
+	 *
+	 * @param $urlYoutubeVideo
+	 * @return string
+	 */
+	public static function getUrlEmbeddedYoutubePlayer($urlYoutubeVideo)
+	{
+		$videoId = Utils::getYoutubeVideoIdByUrl($urlYoutubeVideo);
+		return sprintf('https://www.youtube.com/embed/%s', $videoId);
+	}
+
+	/**
+	 * Extract the video id from a URL. It expect the video id as a query parameter named "v", like:
+	 * "https://www.youtube.com/watch?v=7iagRgdL3kU"
+	 *
+	 * (No external library found, to parse the url, without have to register and use API KEY)
+	 *
+	 * @param $urlYoutubeVideo
+	 * @return string|null
+	 */
+	public static function getYoutubeVideoIdByUrl($urlYoutubeVideo)
+	{
+//		$urlYoutubeVideo = 'https://www.youtube.com/watch?v=7iagRgdL3kU';
+
+		$strParams = explode('?', $urlYoutubeVideo)[1];
+		$params = explode('&', $strParams);
+		foreach ($params as $param) {
+			$key = explode('=', $param)[0];
+			$value = explode('=', $param)[1];
+			if ($key == 'v') {
+				return $value;
+			}
+		}
+		return null;
+	}
+
 }

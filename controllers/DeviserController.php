@@ -297,6 +297,7 @@ class DeviserController extends CController {
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("videos-view", [
 			'deviser' => $deviser,
+			'videos' => $deviser->videos,
 		]);
 	}
 
