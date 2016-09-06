@@ -83,6 +83,21 @@ class Person extends CActiveRecord implements IdentityInterface
 	public $translatedAttributes = ['text_biography', 'faq.question', 'faq.answer'];
 
 
+	/**
+	 * Initialize model attributes
+	 */
+	public function init()
+	{
+		parent::init();
+
+		// initialize attributes
+		$this->categories = [];
+		$this->collections = [];
+		$this->press = [];
+		$this->videos = [];
+		$this->faq = [];
+	}
+
 	public static function findIdentity($id)
 	{
 		return Person::findOne(['short_id' => $id]);
@@ -433,7 +448,7 @@ class Person extends CActiveRecord implements IdentityInterface
 			$image = Utils::url_scheme() . Utils::thumborize($image)->resize(
 					($minWidth) ? $minWidth : 0,
 					($minHeight) ? $minHeight : 0
-			);
+				);
 		}
 
 		return $image;
