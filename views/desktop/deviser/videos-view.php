@@ -35,12 +35,35 @@ $this->params['deviser_menu_active_option'] = 'videos';
 			</div>
 			<div class="col-md-10">
 			    <div class="video-container">
-                    <div class="input-group input-group-lg input-video">
-                        <span class="input-group-addon" id="sizing-addon1">Video</span>
-                            <input type="text" class="form-control input-add-video" placeholder="http://">
-                            <span class="input-group-btn">
-                            <button class="btn btn-default btn-add-video" type="button">+</button>
-                        </span>
+                    <div class="col-sm-12">
+                        <div class="video-wrapper">
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/_hh_cOcC6bQ?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen>                                 </iframe>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="video-wrapper">
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/_hh_cOcC6bQ?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen>                                 </iframe>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="video-wrapper">
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/_hh_cOcC6bQ?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen>                                 </iframe>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="video-wrapper">
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/_hh_cOcC6bQ?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen>                                 </iframe>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="video-wrapper">
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/_hh_cOcC6bQ?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen>                                 </iframe>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="video-wrapper">
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/_hh_cOcC6bQ?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen>                                 </iframe>
+                        </div>
                     </div>
                 </div>
 			</div>

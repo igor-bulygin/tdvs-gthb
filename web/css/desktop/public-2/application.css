@@ -1328,6 +1328,19 @@ a, a:hover, a:focus {
       border-radius: 30px 30px 30px 30px !important;
       -webkit-border-radius: 30px 30px 30px 30px !important;
       -moz-border-radius: 30px 30px 30px 30px !important; }
+  .video-container .video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    /* 16:9 */
+    padding-top: 25px;
+    height: 0;
+    margin-bottom: 6.5%; }
+  .video-container .video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; }
 
 .become-deviser-wrapper {
   height: 100vh; }
