@@ -33,8 +33,16 @@ $this->params['deviser_menu_active_option'] = 'videos';
 			<div class="col-md-2">
 				<?= DeviserMenu::widget() ?>
 			</div>
-			<div class="col-md-10 about-bg">
-				<div>Vídeos de <?= $deviser->getBrandName() ?></div>
+			<div class="col-md-10">
+			    <div class="video-container">
+                    <div class="input-group input-group-lg input-video">
+                        <span class="input-group-addon" id="sizing-addon1">Video</span>
+                            <input type="text" class="form-control input-add-video" placeholder="http://">
+                            <span class="input-group-btn">
+                            <button class="btn btn-default btn-add-video" type="button">+</button>
+                        </span>
+                    </div>
+                </div>
 			</div>
 		</div>
 	</div>
