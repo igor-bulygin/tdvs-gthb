@@ -7,7 +7,10 @@
 		vm.findProducts = findProducts;
 		vm.selectProduct = selectProduct;
 		vm.updateDeviserVideos = updateDeviserVideos;
+		vm.deleteVideo = deleteVideo;
+		vm.deleteTag = deleteTag;
 		vm.works = [];
+		vm.YoutubeRegex = /http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-\_]*)(&(amp;)?[\w\?=]*)?/;
 
 		init();
 
@@ -27,8 +30,10 @@
 
 		function updateDeviserVideos(index) {
 			//if it comes from rearrange
-			if (index) {
+			if (index >= 0) {
 				vm.deviser.videos.splice(index, 1);
+				vm.works = [];
+				vm.searchTerm = [];
 			}
 			var patch = new deviserDataService.Profile;
 			patch.deviser_id = vm.deviser.id;
@@ -48,6 +53,7 @@
 				//nothing
 			}, function (err) {
 				toastr.error(err);
+				getDeviser();
 			});
 		}
 
@@ -80,6 +86,16 @@
 			if (!vm.deviser.videos[index].products)
 				vm.deviser.videos[index].products = [];
 			vm.deviser.videos[index].products.push(work);
+			updateDeviserVideos();
+		}
+
+		function deleteVideo(index) {
+			vm.deviser.videos.splice(index, 1);
+			updateDeviserVideos();
+		}
+
+		function deleteTag(video_index, tag_index) {
+			vm.deviser.videos[video_index].products.splice(tag_index, 1);
 			updateDeviserVideos();
 		}
 	}
