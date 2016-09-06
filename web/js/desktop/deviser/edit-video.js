@@ -7,6 +7,7 @@
 		vm.findProducts = findProducts;
 		vm.selectProduct = selectProduct;
 		vm.updateDeviserVideos = updateDeviserVideos;
+		vm.works = [];
 
 		init();
 
@@ -50,12 +51,12 @@
 			});
 		}
 
-		function findProducts(key) {
+		function findProducts(key, index) {
 			productDataService.Product.get({
 				name: key
 			}).$promise.then(function (dataProducts) {
-				vm.works = dataProducts.items;
-				vm.works.forEach(function (element) {
+				vm.works[index] = dataProducts.items;
+				vm.works[index].forEach(function (element) {
 					element.url_image_preview = element.url_images + element.media.photos[0].name;
 				})
 
