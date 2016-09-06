@@ -27,16 +27,17 @@ $this->params['deviser_menu_active_option'] = 'videos';
 					<div class="col-md-2">
 						<?= DeviserMenu::widget() ?>
 					</div>
-					<div class="col-md-10 about-bg" ng-controller="editVideosCtrl as editVideosCtrl">
-						<div class="text-center" style="padding-bottom:20px;">
-							<form name="editVideosCtrl.form" novalidate class="form-inline">
-								<div class="form-group">
-									<span>Video</span>
-									<input type="text" placeholder="https://" ng-model="editVideosCtrl.url" name="url" ng-required="true" class="form-control">
-									<button class="btn btn-default" ng-click="editVideosCtrl.addVideo()" ng-disabled="editVideosCtrl.form.$invalid">+</button>
-								</div>
-							</form>
-						</div>
+					<div class="col-md-10" ng-controller="editVideosCtrl as editVideosCtrl">
+						<div class="video-container">
+                            <form name="editVideosCtrl.form" novalidate>
+                                <div class="input-group input-group-lg input-video">
+                                    <span class="input-group-addon" id="sizing-addon1">Video</span>
+                                    <input type="text" class="form-control input-add-video" placeholder="http://" ng-model="editVideosCtrl.url" name="url" ng-required="true" >
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default btn-add-video" type="button" ng-click="editVideosCtrl.addVideo()" ng-disabled="editVideosCtrl.form.$invalid">+</button>
+                                    </span>
+                                </div>
+                            </form>
 						<div ng-if="editVideosCtrl.deviser.videos.length === 0" class="text-center" ng-cloak>
 							<p>You have no videos :(</p>
 						</div>
@@ -85,6 +86,7 @@ $this->params['deviser_menu_active_option'] = 'videos';
 							</div>
 						</div>
 					</div>
+                    </div>
 				</div>
 			</div>
 		</div>
