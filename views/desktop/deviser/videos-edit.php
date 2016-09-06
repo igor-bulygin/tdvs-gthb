@@ -78,18 +78,23 @@ $this->params['deviser_menu_active_option'] = 'videos';
 												<p>No tagged works.</p>
 												<p>Tag works to tell other members what the video is about.</p>
 											</div>
-											<div ng-repeat="product in video.products" ng-if="video.products.length > 0">
-												<div class="row">
-													<div class="col-md-2">
-														<img ng-src="{{product.url_image_preview}}" style="width: 100%; max-height: 50px;">
-													</div>
-													<div class="col-md-8">
-														<p><span ng-bind="product.name"></span> by <span ng-bind="product.deviser.name"></span></p>
-													</div>
-													<div class="col-md-2">
-														<span class="text-danger glyphicon glyphicon-remove" style="cursor:pointer;" ng-click="editVideosCtrl.deleteTag($parent.$parent.$index, $index)"></span>
-													</div>
-												</div>
+											<div class="produts-tags-wrapper">
+                                                <div ng-repeat="product in video.products" ng-if="video.products.length > 0">
+                                                    <div class="row tag-row">
+                                                        <div class="col-md-2">
+                                                            <img ng-src="{{product.url_image_preview}}" style="width: 100%; max-height: 50px;">
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <div ng-bind="product.name"></div>
+                                                            <div>
+                                                            <span>by </span><span ng-bind="product.deviser.name"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <span class="ion-android-close" style="cursor:pointer;" ng-click="editVideosCtrl.deleteTag($parent.$parent.$index, $index)"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
 											</div>
 										</div>
 									</div>

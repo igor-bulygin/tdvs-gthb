@@ -102,6 +102,10 @@
 .tagged-works{
     background-color: $background_grey;
     border: 1px solid $white;
+    .produts-tags-wrapper{
+        max-height: 160px;
+        overflow: scroll;
+    }
     .title{
         font: 16px $font-family--bold;
         text-transform: uppercase;
@@ -109,6 +113,10 @@
         border-bottom: 1px solid $white;
         text-align: left;
         padding: 20px 20px 10px;
+        margin: 0;
+    }
+    .tag-row{
+        padding: 20px;
     }
 }
 
