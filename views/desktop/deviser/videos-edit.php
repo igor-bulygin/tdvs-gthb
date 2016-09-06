@@ -49,10 +49,10 @@ $this->params['deviser_menu_active_option'] = 'videos';
 									<h4>Which works appear in this video?</h4>
 									<form name="editVideosCtrl.searchForm" novalidate>
 										<div class="form-group">
-											<input type="text" placeholder="Type the work name" ng-model="editVideosCtrl.searchTerm" name="searchTerm" ng-change="editVideosCtrl.findProducts(editVideosCtrl.searchTerm)" ng-model-options="{debounce:{'default': 500}}" class="form-control">
+											<input type="text" placeholder="Type the work name" ng-model="editVideosCtrl.searchTerm[$index]" name="searchTerm" ng-change="editVideosCtrl.findProducts(editVideosCtrl.searchTerm[$index], $index)" ng-minlength="4" ng-model-options="{debounce:{'default': 500}}" class="form-control">
 										</div>
-										<div ng-cloak style="height:200px; overflow-y: scroll; background:white;" ng-if="editVideosCtrl.works && editVideosCtrl.works.length > 0">
-											<div ng-repeat="work in editVideosCtrl.works" style="cursor:pointer;" ng-click="editVideosCtrl.selectProduct($parent.$index, work)">
+										<div ng-cloak style="height:200px; overflow-y:scroll; background:white;" ng-if="editVideosCtrl.searchTerm[$index].length > 0 && editVideosCtrl.works[$index] && editVideosCtrl.works[$index].length > 0">
+											<div ng-repeat="work in editVideosCtrl.works[$parent.$index]" style="cursor:pointer;" ng-click="editVideosCtrl.selectProduct($parent.$index, work)">
 												<div class="row">
 													<div class="col-md-2">
 														<img ng-src="{{work.image}}" style="width: 100%; max-height: 50px;">
