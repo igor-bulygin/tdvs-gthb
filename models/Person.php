@@ -22,6 +22,7 @@ use yii\web\IdentityInterface;
  * @property array faq
  * @property array credentials
  * @property array preferences
+ * @property array curriculum
  */
 class Person extends CActiveRecord implements IdentityInterface
 {
@@ -66,6 +67,7 @@ class Person extends CActiveRecord implements IdentityInterface
 			'categories',
 			'collections',
 			'personal_info',
+			'curriculum',
 			'media',
 			'credentials',
 			'preferences',
@@ -111,6 +113,11 @@ class Person extends CActiveRecord implements IdentityInterface
 	public static function findByEmail($username)
 	{
 		return Person::findOne(['credentials.email' => $username]);
+	}
+
+	public function getUploadedFilesPath()
+	{
+		return Utils::join_paths(Yii::getAlias("@deviser"), $this->short_id);
 	}
 
 	public function getId()
@@ -225,6 +232,12 @@ class Person extends CActiveRecord implements IdentityInterface
 				'app\validators\EmbedDocValidator',
 				'on' => self::SCENARIO_DEVISER_PROFILE_UPDATE,
 				'model' => '\app\models\PersonPersonalInfo'
+			],
+			[['curriculum'], 'safe', 'on' => self::SCENARIO_DEVISER_PROFILE_UPDATE],
+			[
+				'curriculum',
+				'app\validators\PersonCurriculumValidator',
+				'on' => self::SCENARIO_DEVISER_PROFILE_UPDATE,
 			],
 			[['media'], 'required', 'on' => self::SCENARIO_DEVISER_PROFILE_UPDATE],
 			[
@@ -354,6 +367,27 @@ class Person extends CActiveRecord implements IdentityInterface
 	public function getUrlImagesLocation()
 	{
 		return Yii::getAlias("@deviser_url") . "/" . $this->short_id . "/";
+	}
+
+	/**
+	 * Get the url to get the images of a Deviser
+	 *
+	 * @return string
+	 */
+	public function getUrlResumeFile()
+	{
+		return Yii::getAlias("@deviser_url") . "/" . $this->short_id . "/" . $this->curriculum;
+	}
+
+	/**
+	 * Indicate if Deviser has a resume file attached
+	 *
+	 * @return bool
+	 */
+	public function hasResumeFile()
+	{
+		$filePath = $this->getUploadedFilesPath() . '/' . $this->curriculum;
+		return (($this->curriculum) && (file_exists($filePath)));
 	}
 
 	/**

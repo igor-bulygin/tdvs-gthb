@@ -48,7 +48,9 @@ $this->params['deviser'] = $deviser;
 							<div class="subtitle">
 								<?= $deviser->getCategoriesLabel() ?>
 							</div>
-							<div class="resume-header">See resume</div>
+							<?php if ($deviser->hasResumeFile()) { ?>
+							<div class="resume-header"><a href="<?= $deviser->getUrlResumeFile() ?>">See resume</a></div>
+							<?php } ?>
 							<p>I am a UX Designer and Art Director from Austria living in Berlin.</p>
 							<p>Artworks and illustrations were my gateway to the creative industry which led to the foundation of my own studio and to first steps in the digital world.</p>
 							<p>Out of this love for aesthetic design my passion for functionality and structure evolved. Jumping right into Photoshop didn’t feel accurate anymore and skipping the steps of building a framework based on functionality and usability became inevitable.</p>

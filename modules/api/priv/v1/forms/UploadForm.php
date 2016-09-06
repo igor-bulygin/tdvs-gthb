@@ -13,6 +13,11 @@ class UploadForm extends Model {
 	const UPLOAD_TYPE_DEVISER_MEDIA_PROFILE = 'deviser-media-profile';
 	const UPLOAD_TYPE_DEVISER_MEDIA_PHOTOS = 'deviser-media-photos';
 	const UPLOAD_TYPE_DEVISER_PRESS_IMAGES = 'deviser-press';
+	const UPLOAD_TYPE_DEVISER_CURRICULUM = 'deviser-curriculum';
+
+	const SCENARIO_UPLOAD_DEVISER_IMAGE = 'scenario-upload-deviser-image';
+	const SCENARIO_UPLOAD_DEVISER_CURRICULUM = 'scenario-upload-deviser-curriculum';
+
 
 	/**
 	 * @var string
@@ -54,7 +59,8 @@ class UploadForm extends Model {
 		return [
 			[['type'], 'validateType'],
 			[['deviser_id', 'product_id'], 'safe'],
-			[['file'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg, jpeg'],
+			[['file'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg, jpeg', 'on' => self::SCENARIO_UPLOAD_DEVISER_IMAGE],
+			[['file'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg, jpeg, pdf', 'on' => self::SCENARIO_UPLOAD_DEVISER_CURRICULUM],
 		];
 	}
 
@@ -91,6 +97,7 @@ class UploadForm extends Model {
 			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PROFILE:
 			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PHOTOS:
 			case UploadForm::UPLOAD_TYPE_DEVISER_PRESS_IMAGES:
+			case UploadForm::UPLOAD_TYPE_DEVISER_CURRICULUM:
 				$path = Utils::join_paths(Yii::getAlias("@deviser"), $this->deviser_id);
 				break;
 			default:
@@ -112,6 +119,7 @@ class UploadForm extends Model {
 			UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PROFILE => 'deviser.profile.',
 			UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PHOTOS => 'deviser.photo.',
 			UploadForm::UPLOAD_TYPE_DEVISER_PRESS_IMAGES => 'deviser.press.',
+			UploadForm::UPLOAD_TYPE_DEVISER_CURRICULUM => 'deviser.cv.',
 		];
 
 		return $prefixes[$this->type];
@@ -130,6 +138,7 @@ class UploadForm extends Model {
 			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PROFILE:
 			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PHOTOS:
 			case UploadForm::UPLOAD_TYPE_DEVISER_PRESS_IMAGES:
+			case UploadForm::UPLOAD_TYPE_DEVISER_CURRICULUM:
 				if (empty($this->deviser_id)) {
 					$this->addError($attribute, 'Deviser id must be specified');
 				}
@@ -155,6 +164,7 @@ class UploadForm extends Model {
 			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PROFILE:
 			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PHOTOS:
 			case UploadForm::UPLOAD_TYPE_DEVISER_PRESS_IMAGES:
+			case UploadForm::UPLOAD_TYPE_DEVISER_CURRICULUM:
 				$url = (Yii::getAlias("@deviser_url") . "/" . $this->deviser_id . "/" . $this->filename);
 				break;
 			default:
@@ -162,6 +172,31 @@ class UploadForm extends Model {
 				break;
 		}
 		return $url;
+	}
+
+	/**
+	 * Set the scenario rules, according to upload "type"
+	 *
+	 * @return UploadForm
+	 */
+	public function setScenarioByUploadType()
+	{
+		switch ($this->type) {
+			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_HEADER:
+			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PROFILE:
+			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PHOTOS:
+			case UploadForm::UPLOAD_TYPE_DEVISER_PRESS_IMAGES:
+				$this->setScenario(UploadForm::SCENARIO_UPLOAD_DEVISER_IMAGE);
+				break;
+			case UploadForm::UPLOAD_TYPE_DEVISER_CURRICULUM:
+				$this->setScenario(UploadForm::SCENARIO_UPLOAD_DEVISER_CURRICULUM);
+				break;
+			default:
+				$url = null;
+				break;
+		}
+
+		return $this;
 	}
 
 	/**

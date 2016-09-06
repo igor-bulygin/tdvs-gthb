@@ -81,6 +81,7 @@ class Utils
 			'image/png' => 'png',
 			'image/jpeg' => 'jpg',
 			'image/jpg' => 'jpg',
+			'application/pdf' => 'pdf',
 		];
 
 		// Add as many other Mime Types / File Extensions as you like

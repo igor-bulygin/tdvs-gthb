@@ -40,6 +40,7 @@ class UploadController extends Controller {
 
 	    $uploadForm = new UploadForm();
 	    $uploadForm->load(Yii::$app->request->post(), '');
+	    $uploadForm->setScenarioByUploadType();
 //	    $uploadForm->type = UploadForm::UPLOAD_TYPE_DEVISER_PRESS_IMAGES;
 	    // force to relate images to logged user
 	    $uploadForm->deviser_id = $deviser->short_id;

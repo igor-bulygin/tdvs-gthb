@@ -39,6 +39,7 @@ Example about how to call to Web Service to update Deviser profile
       "header": "filename.jpg",
       "profile": "filename.jpg"
     },
+    "curriculum": "deviser.cv.123456.pdf",
     "videos": [{
       "url": "http://youtube.com/asdf",
       "products": ["id_1", "id_2"]          // products related

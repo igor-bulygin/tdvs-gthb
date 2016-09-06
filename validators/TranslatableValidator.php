@@ -53,19 +53,19 @@ class TranslatableValidator extends Validator
 		$values = $object->{$attribute};
 
 		if (!is_array($values)) {
-			$this->addError($object, $attribute, ' must be an array');
-		}
-
-		if (count($values) == 0) {
-			$this->addError($object, $attribute, ' can not be empty');
-		}
-
-		foreach ($values as $key => $item) {
-			if (!array_key_exists($key, Lang::getAvailableLanguages())) {
-				$this->addError($object, $attribute, sprintf('Language %s not available', $key));
+			$this->addError($object, $attribute, 'Must be a a multi language field');
+		} else {
+			if (count($values) == 0) {
+				$this->addError($object, $attribute, 'Can not be empty');
 			}
-			if (empty($item)) {
-				$this->addError($object, $attribute, sprintf('Language %s can not be empty', $key));
+
+			foreach ($values as $key => $item) {
+				if (!array_key_exists($key, Lang::getAvailableLanguages())) {
+					$this->addError($object, $attribute, sprintf('Language %s not available', $key));
+				}
+				if (empty($item)) {
+					$this->addError($object, $attribute, sprintf('Language %s can not be empty', $key));
+				}
 			}
 		}
 	}
