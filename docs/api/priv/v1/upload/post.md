@@ -1,4 +1,4 @@
-### Deviser - Patch
+### Upload - Post
 
 Example about how to call to Web Service to upload a media file
 
@@ -10,7 +10,7 @@ Example about how to call to Web Service to upload a media file
  * `403`: Not allowed
   
 * Request body: 
- * `type`: one of available upload use (deviser-media-header, deviser-media-profile, deviser-media-photos, deviser-press, deviser-curriculum)
+ * `type`: one of available upload use (`deviser-media-header`, `deviser-media-profile`, `deviser-media-photos`, `deviser-press`, `deviser-curriculum`)
  * `deviser_id`: id of the deviser related with the media file (only for use types related with devisers) 
  * `product_id`: id of the product related with the media file (only for use types related with products)
  * `file`: media file to be uploaded
