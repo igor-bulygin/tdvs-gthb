@@ -17,9 +17,8 @@ Product2Asset::register($this);
 
 /** @var Person $deviser */
 /** @var Product $product */
-/** @var Tag $tag */
 
-$this->title = Utils::l($product->name) . ' - Todevise';
+$this->title = $product->name . ' - Todevise';
 $productImages = $product->getUrlGalleryImages();
 
 ?>
@@ -71,7 +70,7 @@ $productImages = $product->getUrlGalleryImages();
 			<div class="col-md-4 pad-product">
 				<div class="product-data-wrapper">
 					<div class="product-data">
-						<span class="title"><?= Utils::l($product->name) ?></span>
+						<span class="title"><?= $product->name ?></span>
 						<span class="score">
                                     <i class="ion-ios-star"></i>
                                     <i class="ion-ios-star"></i>
@@ -355,15 +354,7 @@ $productImages = $product->getUrlGalleryImages();
 				<div class="work-profile-description-wrapper">
 					<div class="col-sm-8 pad-product">
 						<div class="title">Work Description</div>
-						<p class="description">When you sit down to work, external critics aren’t the enemy. It’s you
-							who you must to fight against to do great fucking work. You must overcome yourself. Fuck.
-							Dedicate yourself to lifelong fucking learning. When you design, you have to draw on your
-							own fucking life experiences. If it’s not something you would want to read/look at/use then
-							why fucking bother? To go partway is easy, but mastering anything requires hard fucking
-							work. If you’re not being fucking honest with yourself how could you ever hope to
-							communicate something meaningful to someone else? Don’t get hung up on things that don’t
-							fucking work. What’s important is the fucking drive to see a project through no matter what.
-							You need to sit down and sketch more fucking ideas because stalking.</p>
+						<p class="description"><?= $product->description ?></p>
 					</div>
 					<div class="col-sm-4 pad-product">
 						<div class="created-text">Created by</div>
@@ -581,13 +572,13 @@ $productImages = $product->getUrlGalleryImages();
 				<div class="mesonry-row">
 					<?php foreach ($deviserProducts as $i => $product) { ?>
 					<div class="menu-category list-group">
-						<a href="<?= Url::to(["product/detail", "slug" => Utils::l($product->slug), 'product_id' => $product->short_id])?>">
+						<a href="<?= Url::to(["product/detail", "slug" => $product->slug, 'product_id' => $product->short_id])?>">
 							<div class="grid">
 								<figure class="effect-zoe">
 									<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getMainImage())->resize(400, 0) ?>">
 									<figcaption>
 										<p class="instauser">
-											<?= Utils::l($product->name) ?>
+											<?= $product->name ?>
 										</p>
 										<p class="price">€ <?= $product->getMinimumPrice()?></p>
 									</figcaption>

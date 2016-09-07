@@ -7,7 +7,7 @@ use yii\mongodb\Migration;
 
 class m150405_184924_create_person extends Migration {
 	public function up() {
-		$en = array_keys(Lang::EN_US)[0];
+		$en = array_keys(Lang::EN_US_DESC)[0];
 
 		$this->createCollection('person');
 		$this->createIndex('person', 'short_id', [

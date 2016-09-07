@@ -338,7 +338,7 @@ class Utils
 	 */
 	public static function l($arr)
 	{
-		return Utils::getValue($arr, Yii::$app->language, array_keys(Lang::EN_US)[0]);
+		return Utils::getValue($arr, Yii::$app->language, array_keys(Lang::EN_US_DESC)[0]);
 	}
 
 	/**
@@ -408,7 +408,7 @@ class Utils
 
 		if (count($particles) == 1) {
 			// want to translate this "particle" / "attribute"
-			$translatedValue = Utils::getValue($model->getAttribute($rootParticle), Yii::$app->language, array_keys(Lang::EN_US)[0]);
+			$translatedValue = Utils::getValue($model->getAttribute($rootParticle), Yii::$app->language, array_keys(Lang::EN_US_DESC)[0]);
 		} elseif (count($particles) > 1) {
 			// want to translate a sub attribute. now, are stored in arrays, not custom models
 			$translatedValue = Utils::translateArrayAttribute($model->getAttribute($rootParticle), implode('.', $otherParticles));
@@ -433,12 +433,12 @@ class Utils
 		if (count($particles) == 1) {
 			// want to translate this "particle" / "attribute"
 			if (array_key_exists($rootParticle, $arr)) {
-				$arr[$rootParticle] = Utils::getValue($arr[$rootParticle], Yii::$app->language, array_keys(Lang::EN_US)[0]);
+				$arr[$rootParticle] = Utils::getValue($arr[$rootParticle], Yii::$app->language, array_keys(Lang::EN_US_DESC)[0]);
 			}
 			// can be a set of items
 			foreach ($arr as $key => &$attr) {
 				if ((is_array($attr)) && (array_key_exists($rootParticle, $attr))) {
-					$attr[$rootParticle] = Utils::getValue($attr[$rootParticle], Yii::$app->language, array_keys(Lang::EN_US)[0]);
+					$attr[$rootParticle] = Utils::getValue($attr[$rootParticle], Yii::$app->language, array_keys(Lang::EN_US_DESC)[0]);
 				}
 			}
 		} elseif (count($particles) > 1) {

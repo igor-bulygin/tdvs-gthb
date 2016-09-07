@@ -9,42 +9,44 @@ use yii\mongodb\ActiveRecord;
  * @property mixed _id
  * @property string short_id
  */
-class CActiveRecord extends ActiveRecord {
+class CActiveRecord extends ActiveRecord
+{
 
-    const SERIALIZE_SCENARIO_PREVIEW = 'serialize_scenario_preview';
-    const SERIALIZE_SCENARIO_PUBLIC = 'serialize_scenario_public';
-    const SERIALIZE_SCENARIO_OWNER = 'serialize_scenario_owner';
-    const SERIALIZE_SCENARIO_ADMIN = 'serialize_scenario_admin';
+	const SERIALIZE_SCENARIO_PREVIEW = 'serialize_scenario_preview';
+	const SERIALIZE_SCENARIO_PUBLIC = 'serialize_scenario_public';
+	const SERIALIZE_SCENARIO_OWNER = 'serialize_scenario_owner';
+	const SERIALIZE_SCENARIO_ADMIN = 'serialize_scenario_admin';
 
-    /**
-     * The attributes that should be serialized
-     *
-     * @var array
-     */
-    static protected $retrieveExtraFields = [];
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	static protected $serializeFields = [];
 
-    /**
-     * The attributes that should be serialized
-     *
-     * @var array
-     */
-    static protected $serializeFields = [];
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	static protected $retrieveExtraFields = [];
 
-    /**
-     * Determine if serialization have to translate "translatable" attributes automatically
-     *
-     * @var bool
-     */
-    static protected $translateFields = true;
+	/**
+	 * Determine if serialization have to translate "translatable" attributes automatically
+	 *
+	 * @var bool
+	 */
+	static protected $translateFields = true;
 
-    /**
-     * The attributes that should be translatable
-     *
-     * @var array
-     */
-    public $translatedAttributes = [];
+	/**
+	 * The attributes that should be translatable
+	 *
+	 * @var array
+	 */
+	public $translatedAttributes = [];
 
-    public function genValidID($length = 6) {
+	public function genValidID($length = 6)
+	{
 		$_found = false;
 		$_id = null;
 		while ($_found === false) {
@@ -53,7 +55,8 @@ class CActiveRecord extends ActiveRecord {
 				$this->short_id = $_id;
 				$this->insert();
 				$_found = true;
-			} catch (Exception $e) {}
+			} catch (Exception $e) {
+			}
 		}
 
 		return $_id;
@@ -64,10 +67,10 @@ class CActiveRecord extends ActiveRecord {
 	 *
 	 * @return array
 	 */
-    public function fields()
-    {
-        return static::$serializeFields;
-    }
+	public function fields()
+	{
+		return static::$serializeFields;
+	}
 
 	/**
 	 * Get list of fields that want to be retrieved from database. There will be only fields that will be used
@@ -75,10 +78,10 @@ class CActiveRecord extends ActiveRecord {
 	 *
 	 * @return array
 	 */
-    static public function getSelectFields()
-    {
-    	// fields that want to be serialized, and extra fields for internal use
-    	return array_merge(array_values(static::$serializeFields), static::$retrieveExtraFields);
-    }
+	static public function getSelectFields()
+	{
+		// fields that want to be serialized, and extra fields for internal use
+		return array_merge(array_values(static::$serializeFields), static::$retrieveExtraFields);
+	}
 
 }

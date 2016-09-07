@@ -25,7 +25,7 @@ use lajax\languagepicker\widgets\LanguagePicker;
 		<title><?= Html::encode($this->title) ?></title>
 		<?php $this->head() ?>
 		<?php $this->registerJs("var _lang = " . Json::encode(Yii::$app->language) . ";", View::POS_HEAD) ?>
-		<?php $this->registerJs("var _lang_en = " . Json::encode(array_keys(Lang::EN_US)[0]) . ";", View::POS_HEAD) ?>
+		<?php $this->registerJs("var _lang_en = " . Json::encode(array_keys(Lang::EN_US_DESC)[0]) . ";", View::POS_HEAD) ?>
 		<?php $this->registerJs("var _langs = " . Json::encode(Utils::availableLangs()) . ";", View::POS_HEAD) ?>
 	</head>
 	<body>

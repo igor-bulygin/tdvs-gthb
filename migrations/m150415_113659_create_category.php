@@ -5,7 +5,7 @@ use yii\mongodb\Migration;
 
 class m150415_113659_create_category extends Migration {
 	public function up() {
-		$en = array_keys(Lang::EN_US)[0];
+		$en = array_keys(Lang::EN_US_DESC)[0];
 
 		$this->createCollection('category');
 		$this->createIndex('category', 'short_id', [

@@ -6,7 +6,7 @@ use app\models\Country;
 
 class m150620_163418_create_county extends \yii\mongodb\Migration {
 	public function up() {
-		$en = array_keys(Lang::EN_US)[0];
+		$en = array_keys(Lang::EN_US_DESC)[0];
 
 		$this->createCollection('country');
 		$this->createIndex('country', 'country_code', [

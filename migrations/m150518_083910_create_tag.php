@@ -7,7 +7,7 @@ use app\models\MetricType;
 
 class m150518_083910_create_tag extends \yii\mongodb\Migration {
 	public function up() {
-		$en = array_keys(Lang::EN_US)[0];
+		$en = array_keys(Lang::EN_US_DESC)[0];
 
 		$this->createCollection('tag');
 		$this->createIndex('tag', 'short_id', [
