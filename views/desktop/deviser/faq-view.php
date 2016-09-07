@@ -35,6 +35,7 @@ $this->params['deviser_menu_active_option'] = 'faq';
 			</div>
 			<div class="col-md-10">
 			    <div class="faq-wrapper">
+                    <a class="edit-faq-btn" href="#">+ ADD / EDIT QUESTIONS</a>
                     <div id="accordion" role="tablist" aria-multiselectable="true">
                       <div class="panel faq-panel">
                         <div class="panel-heading panel-heading-faq" role="tab" id="heading-faq-1">

@@ -476,9 +476,9 @@ a, a:hover, a:focus {
   -webkit-border-radius: 90px 90px 90px 90px !important;
   -moz-border-radius: 90px 90px 90px 90px !important; }
 
-.log a {
+.log a, .edit-faq-btn {
   color: #F7284B !important; }
-  .log a:hover {
+  .log a:hover, .edit-faq-btn:hover {
     color: #C91C39 !important;
     text-decoration: none;
     -moz-transition-property: color;
@@ -1210,8 +1210,13 @@ a, a:hover, a:focus {
       padding: 5px 15px 10px; }
       .faq-wrapper .faq-panel .faq-answer p {
         color: #484848;
-        font: 14px "Playfair Display", Georgia, serif;
+        font: 16px "Playfair Display", Georgia, serif;
         margin: 0 23px 20px; }
+
+.edit-faq-btn {
+  font: 16px "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: 0 0 15px 15px;
+  display: block; }
 
 .banner-deviser {
   position: relative;
