@@ -69,7 +69,7 @@ $this->title = 'Todevise / Admin / Devisers';
 							},
 
 							'update' => function($url, $model, $key) {
-								$url = Url::to(["deviser/edit-info", "slug" => $model->slug]);
+								$url = Url::to(["deviser/edit-info", "slug" => $model->slug, 'deviser_id' => $model->short_id]);
 								return Html::a('<span class="glyphicon glyphicon-edit fc-fff fs1"></span>', $url);
 							},
 
