@@ -1671,8 +1671,8 @@ a, a:hover, a:focus {
       .product .product-data-wrapper .product-data .row-size .size-box {
         float: left;
         margin: 0 5px 0 0;
-        width: 23px;
-        height: 23px; }
+        height: 23px;
+        min-width: 23px; }
         .product .product-data-wrapper .product-data .row-size .size-box:hover {
           background-color: #ffffff; }
         .product .product-data-wrapper .product-data .row-size .size-box input[type="radio"] {

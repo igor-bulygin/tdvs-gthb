@@ -81,7 +81,8 @@
                 .size-box{
                     float: left;
                     margin: 0 5px 0 0;
-                    @include size(23px,23px);
+                    height: 23px;
+                    min-width: 23px;
                     &:hover{
                         background-color: $white;
                     }
