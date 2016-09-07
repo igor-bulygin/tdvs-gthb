@@ -1,0 +1,8 @@
+<label class="col-sm-3 control-label product-label"><span class="atr">Color</span></label>
+<div class="col-sm-9">
+	<div class="color-box" data-toggle="tooltip" data-placement="top" ng-repeat="color in colorSelectorCtrl.option.values" title="+ €">
+		<input type="radio" name="colors" ng-attr-id="{{'radio-' + $index}}" ng-model="colorSelectorCtrl.optionsSelected[colorSelectorCtrl.option.id]" ng-change="colorSelectorCtrl.getReferences({options: colorSelectorCtrl.optionsSelected})" ng-value="color.value">
+		<label ng-attr-for="{{'radio-' + $index}}">
+			<span class="radio" ng-style="color.color_style"></span> </label>
+	</div>
+</div>

@@ -11,7 +11,10 @@ class Product2Asset extends AssetBundle {
 	];
     public $js = [
 	    'js/desktop/public-2/bootstrap-select.min.js',
-		'js/desktop/product/detail.js'
+		'js/desktop/product/detail.js',
+		'js/desktop/product/select-selector/select-selector.js',
+		'js/desktop/product/color-selector/color-selector.js',
+		'js/desktop/product/size-selector/size-selector.js'
     ];
 	public $depends = [
 		'app\assets\desktop\pub\PublicCommonAsset',

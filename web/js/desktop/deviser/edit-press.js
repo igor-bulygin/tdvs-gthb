@@ -5,6 +5,7 @@
 		var vm = this;
 		vm.upload = upload;
 		vm.update = update;
+		vm.deleteImage = delete_image;
 
 		function parsePress(press, url) {
 			var images = [];
@@ -78,6 +79,11 @@
 				var progress = parseInt(100.0 * evt.loaded / evt.total);
 				console.log('progress: ' + progress + '% ' + evt.config.data.file.name);
 			});
+		}
+
+		function delete_image(index) {
+			vm.images.splice(index, 1);
+			update();
 		}
 
 		init();
