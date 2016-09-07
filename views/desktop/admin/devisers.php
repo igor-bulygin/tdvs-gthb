@@ -56,16 +56,21 @@ $this->title = 'Todevise / Admin / Devisers';
 				'columns' => [
 					[
 						'class' => 'yii\grid\ActionColumn',
-						'template' => "{products} {update} {delete}",
+						'template' => "{products} {view} {update} {delete}",
 						'buttons' => [
 							'products' => function($url, $model, $key) {
 								$url = Url::to(["admin/products", "slug" => $model->slug]);
 								return Html::a('<span class="glyphicon glyphicon-th fc-fff fs1"></span>', $url);
 							},
 
+							'view' => function($url, $model, $key) {
+								$url = Url::to(["deviser/about", "slug" => $model->slug, 'deviser_id' => $model->short_id]);
+								return Html::a('<span class="glyphicon glyphicon-user fc-fff fs1"></span>', $url);
+							},
+
 							'update' => function($url, $model, $key) {
 								$url = Url::to(["deviser/edit-info", "slug" => $model->slug]);
-								return Html::a('<span class="glyphicon glyphicon-user fc-fff fs1"></span><span class="glyphicon glyphicon-log-in fc-fff fs0-857"></span>', $url);
+								return Html::a('<span class="glyphicon glyphicon-edit fc-fff fs1"></span>', $url);
 							},
 
 							'delete' => function($url, $model, $key) {
