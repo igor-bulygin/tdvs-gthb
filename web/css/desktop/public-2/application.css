@@ -1138,7 +1138,7 @@ a, a:hover, a:focus {
 
 .draggable-img:hover {
   opacity: 0.8;
-  cursor: pointer; }
+  cursor: move; }
 
 .draggable-list.list-group {
   color: #e9e9e9; }
