@@ -276,13 +276,13 @@ class Person extends CActiveRecord implements IdentityInterface
 				'on' => self::SCENARIO_DEVISER_PROFILE_UPDATE,
 				'model' => '\app\models\PersonMedia'
 			],
-			[['press'], 'required', 'on' => self::SCENARIO_DEVISER_PRESS_UPDATE],
+			[['press'], 'safe', 'on' => self::SCENARIO_DEVISER_PRESS_UPDATE],
 			[
 				'press',
 				'app\validators\PersonPressFilesValidator',
 				'on' => self::SCENARIO_DEVISER_PRESS_UPDATE,
 			],
-			[['videos'], 'required', 'on' => self::SCENARIO_DEVISER_VIDEOS_UPDATE],
+			[['videos'], 'safe', 'on' => self::SCENARIO_DEVISER_VIDEOS_UPDATE],
 			[
 				'videos',
 				'app\validators\PersonVideosValidator',
