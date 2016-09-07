@@ -2,13 +2,12 @@
 // Deviser Press
 // ==========================================================================
 .photo-loader{
-    width: 309px;
-    height: 400px;
+    @include size(309px,400px);
     text-align: center;
     margin: 0 2px 7px;
     padding: 20px;
-    border: 1px solid #000;
-    background: #bfbfbf;
+    border: 1px solid $black;
+    background-color: $light_grey;
     cursor: pointer;
     display: inline-block;
     &:hover{
@@ -25,49 +24,48 @@
         margin: 90px auto 10px;
         font-size: 43px;
         text-align: center;
-        width: 75px;
-        height: 75px;
+        @include size(75px,75px);
         @include border-radius(90px,90px,90px,90px);
     }
     span{
         font-family: $font-family--serif;
     }
 }
-.draggable-img{
-    &:hover{
-        opacity: 0.8;
-        cursor: move;
-    }
-}
 .draggable-list{
     &.list-group{
         color: $background_grey;
+    }
+    .image-press-wrapper{
+        position: relative;
+        span{
+            position: absolute;
+            z-index: 1;
+            top: 10px;
+            right: 10px;
+            background-color: $dark_grey;
+            font-size: 18px;
+            color: $white;
+            @include size(30px,30px);
+            display: block;
+            float: left;
+            text-align: center;
+            padding-top: 3px;
+            margin-left: 6px;
+            @include border-radius(7px,7px,7px,7px);
+            &.x-close{
+                cursor:pointer;
+            }
+        }
+        .draggable-img{
+            &:hover{
+                @include opacity(0.8);
+                cursor: move;
+            }
+        }
     }
 }
 .no-press{
     font: 16px $font-family--serif;
     text-align: center;
     margin-top: 80px;
-}
-.image-press-wrapper{
-    position: relative;
-    span{
-        position: absolute;
-        z-index: 1;
-        top: 10px;
-        right: 10px;
-        background-color: $dark_grey;
-        font-size: 18px;
-        color: $white;
-        @include size(30px,30px);
-        display: block;
-        float: left;
-        text-align: center;
-        padding-top: 3px;
-        margin-left: 6px;
-        @include border-radius(7px,7px,7px,7px);
-        &.x-close{
-            cursor:pointer;
-        }
-    }
 }

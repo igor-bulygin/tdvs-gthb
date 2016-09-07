@@ -286,6 +286,10 @@ a, a:hover, a:focus {
   font-family: "Univers Bold Condensed";
   src: url("/fonts/UniversLT-Bold-Condensed.eot");
   src: url("/fonts/UniversLT-Bold-Condensed.eot?#iefix") format("embedded-opentype"), url("/fonts/UniversLT-Bold-Condensed.woff") format("woff"), url("/fonts/UniversLT-Bold-Condensed.ttf") format("truetype"); }
+@font-face {
+  font-family: "Glyphicons Halflings Regular";
+  src: url("/fonts/glyphicons-halflings-regular.eot");
+  src: url("/fonts/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("/fonts/glyphicons-halflings-regular.woff") format("woff"), url("/fonts/glyphicons-halflings-regular.ttf") format("truetype"); }
 .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:focus, .navbar-default .navbar-nav > .open > a:hover {
   background-color: #1C1919; }
 
@@ -1104,8 +1108,8 @@ a, a:hover, a:focus {
   text-align: center;
   margin: 0 2px 7px;
   padding: 20px;
-  border: 1px solid #000;
-  background: #bfbfbf;
+  border: 1px solid #1C1919;
+  background-color: #bfbfbf;
   cursor: pointer;
   display: inline-block; }
   .photo-loader:hover .plus-add {
@@ -1136,21 +1140,11 @@ a, a:hover, a:focus {
   .photo-loader span {
     font-family: "Playfair Display", Georgia, serif; }
 
-.draggable-img:hover {
-  opacity: 0.8;
-  cursor: move; }
-
 .draggable-list.list-group {
   color: #e9e9e9; }
-
-.no-press {
-  font: 16px "Playfair Display", Georgia, serif;
-  text-align: center;
-  margin-top: 80px; }
-
-.image-press-wrapper {
+.draggable-list .image-press-wrapper {
   position: relative; }
-  .image-press-wrapper span {
+  .draggable-list .image-press-wrapper span {
     position: absolute;
     z-index: 1;
     top: 10px;
@@ -1168,8 +1162,56 @@ a, a:hover, a:focus {
     border-radius: 7px 7px 7px 7px !important;
     -webkit-border-radius: 7px 7px 7px 7px !important;
     -moz-border-radius: 7px 7px 7px 7px !important; }
-    .image-press-wrapper span.x-close {
+    .draggable-list .image-press-wrapper span.x-close {
       cursor: pointer; }
+  .draggable-list .image-press-wrapper .draggable-img:hover {
+    opacity: 0.8;
+    filter: alpha(opacity=80);
+    cursor: move; }
+
+.no-press {
+  font: 16px "Playfair Display", Georgia, serif;
+  text-align: center;
+  margin-top: 80px; }
+
+.faq-wrapper {
+  margin: 40px 0; }
+  .faq-wrapper .faq-panel {
+    margin-bottom: 0;
+    background-color: transparent;
+    box-shadow: 0 0 0 transparent;
+    -webkit-box-shadow: 0 0 0 transparent;
+    -moz-box-shadow: 0 0 0 transparent;
+    -ms-box-shadow: 0 0 0 transparent; }
+    .faq-wrapper .faq-panel .panel-heading-faq {
+      padding: 0px 15px 15px;
+      border-bottom: none;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0; }
+      .faq-wrapper .faq-panel .panel-heading-faq .faq-title {
+        color: #484848;
+        text-transform: uppercase;
+        font: 16px "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        border-bottom: 1px solid #484848;
+        padding: 0 10px 5px 0; }
+        .faq-wrapper .faq-panel .panel-heading-faq .faq-title:before {
+          font: 14px "Glyphicons Halflings Regular";
+          content: "\e082";
+          color: #484848;
+          vertical-align: top;
+          padding: 0 5px 7px 0;
+          border-bottom: 1px solid #e9e9e9; }
+        .faq-wrapper .faq-panel .panel-heading-faq .faq-title.collapsed:before {
+          content: "\e081";
+          color: #bfbfbf; }
+        .faq-wrapper .faq-panel .panel-heading-faq .faq-title.collapsed {
+          border-bottom: 0; }
+    .faq-wrapper .faq-panel .faq-answer {
+      padding: 5px 15px 10px; }
+      .faq-wrapper .faq-panel .faq-answer p {
+        color: #484848;
+        font: 14px "Playfair Display", Georgia, serif;
+        margin: 0 23px 20px; }
 
 .banner-deviser {
   position: relative;
