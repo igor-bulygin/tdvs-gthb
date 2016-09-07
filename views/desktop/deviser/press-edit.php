@@ -44,7 +44,10 @@ $this->params['deviser_menu_active_option'] = 'press';
                             </div>
                         </form>
                        <div class="menu-category list-group draggable-list" ng-if="editPressCtrl.images.length > 0" dnd-list="editPressCtrl.images" ng-repeat="item in editPressCtrl.images">
-                            <img class="grid-image draggable-img" ng-src="{{item.url}}" dnd-draggable="item" dnd-effect-allowed="move" dnd-moved="editPressCtrl.update($index)">
+                           <div class="image-press-wrapper">
+                                <span class="ion-android-close x-close" ng-click="editPressCtrl.deleteImage($index)"></span>
+                                <img class="grid-image draggable-img" ng-src="{{item.url}}" dnd-draggable="item" dnd-effect-allowed="move" dnd-moved="editPressCtrl.update($index)">
+                            </div>
                         </div>
                 </div>
 			</div>

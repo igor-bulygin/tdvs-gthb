@@ -44,3 +44,30 @@
         color: $background_grey;
     }
 }
+.no-press{
+    font: 16px $font-family--serif;
+    text-align: center;
+    margin-top: 80px;
+}
+.image-press-wrapper{
+    position: relative;
+    span{
+        position: absolute;
+        z-index: 1;
+        top: 10px;
+        right: 10px;
+        background-color: $dark_grey;
+        font-size: 18px;
+        color: $white;
+        @include size(30px,30px);
+        display: block;
+        float: left;
+        text-align: center;
+        padding-top: 3px;
+        margin-left: 6px;
+        @include border-radius(7px,7px,7px,7px);
+        &.x-close{
+            cursor:pointer;
+        }
+    }
+}
