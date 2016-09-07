@@ -275,6 +275,29 @@ class Tag extends CActiveRecord
 					}
 				}
 			}
+			if ($this->getWidgetType() == "color") {
+				// TODO force add two color for test client side (remove when test ends)
+				$values[] = [
+					"value" => "temp_rand_id_" . uniqid(),
+					"text" => "Blue",
+					"hint" => null,
+					"image" => null,
+					"default" => null,
+					"colors" => [TagOption::HEXADECIMAL_COLORS[TagOption::BLUE]],
+				];
+
+				$values[] = [
+					"value" => "temp_rand_id_" . uniqid(),
+					"text" => "Blue and White",
+					"hint" => null,
+					"image" => null,
+					"default" => null,
+					"colors" => [
+						TagOption::HEXADECIMAL_COLORS[TagOption::BLUE],
+						TagOption::HEXADECIMAL_COLORS[TagOption::WHITE],
+					],
+				];
+			}
 		}
 
 
@@ -310,7 +333,9 @@ class Tag extends CActiveRecord
 	public function getOptionColor($option)
 	{
 		if ($this->getWidgetType()=='color') {
-			return [TagOption::HEXADECIMAL_COLORS[rand(0, count(TagOption::HEXADECIMAL_COLORS)-1)]];
+			return [
+				TagOption::HEXADECIMAL_COLORS[rand(0, count(TagOption::HEXADECIMAL_COLORS)-1)],
+			];
 		} else {
 			return [];
 		}
