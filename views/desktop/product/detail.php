@@ -313,7 +313,7 @@ $productImages = $product->getUrlGalleryImages();
 							<div class="created-text">Created by</div>
 							<div class="avatar-wrapper">
 								<div class="avatar">
-									<a href="<?= Url::to([" deviser/store ", "slug " => $deviser->slug, 'deviser_id' => $deviser->short_id]) ?>">
+									<a href="<?= Url::to(["deviser/store", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id]) ?>">
 									<img class="cover" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($deviser->getAvatarImage())->resize(128, 128) ?>" data-pin-nopin="true">
 									<span><?= $deviser->getBrandName() ?></span>
 								</a>
@@ -520,7 +520,7 @@ $productImages = $product->getUrlGalleryImages();
 					<div class="mesonry-row">
 						<?php foreach ($deviserProducts as $i => $product) { ?>
 							<div class="menu-category list-group">
-								<a href="<?= Url::to([" product/detail ", "slug " => $product->slug, 'product_id' => $product->short_id])?>">
+								<a href="<?= Url::to(["product/detail", "slug" => $product->slug, 'product_id' => $product->short_id])?>">
 									<div class="grid">
 										<figure class="effect-zoe">
 											<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getMainImage())->resize(400, 0) ?>">
@@ -536,7 +536,7 @@ $productImages = $product->getUrlGalleryImages();
 									</div>
 								</a>
 							</div>
-							<?php } ?>
+						<?php } ?>
 					</div>
 				</div>
 			</div>

@@ -543,7 +543,7 @@ class Product extends CActiveRecord {
 			}
 		}
 		// add size as a common tag
-		if ($this->sizechart) {
+		if ((isset($this->sizechart)) && ($this->sizechart["values"]) && (count($this->sizechart["values"]>0))){
 			$tag = new Tag();
 			$tag->forceIsSizeTag = true; // TODO Temp attribute, until products options are refactored
 			$tag->sizeCart = $this->sizechart; // TODO Temp attribute, until products options are refactored
