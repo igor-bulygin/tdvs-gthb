@@ -3,6 +3,12 @@
 // ==========================================================================
 .faq-wrapper{
     margin: 40px 0;
+    .section-title{
+        color: $dark_grey;
+        border: 0;
+        padding: 0;
+        margin: 5px 0 25px 15px;
+    }
     .faq-panel{
         margin-bottom: 0;
         background-color: transparent;
@@ -50,6 +56,99 @@
     margin: 0 0 15px 15px;
     display: block;
     @extend %link-red;
+    cursor: pointer;
 }
-
+.faq-edit-empty{
+    p{
+        font: 16px $font-family--serif;
+        text-align: center;
+        margin: 20px 0;
+    }
+}
+.edit-faq-wrapper{
+    @extend %block;
+    margin: 15px 0;
+}
+.edit-faq-panel{
+    @extend %block;
+    background-color: $pale_white;
+    padding: 5px;
+    @include border-radius(6px,6px,6px,6px);
+}
+.delete-link{
+    font-family: $font-family--bold;
+    color: $dark_grey;
+    margin: 0 0 5px 15px;
+    &:hover{
+        color: $light_grey;   
+    }
+}
+.faq-language-menu{
+    ul{
+        border-bottom: 1px solid #fff;
+        li{
+            &:hover{
+                @include box-shadow(0,0,0,transparent);
+            }
+            &.active{
+                a{
+                    color: $black!important;
+                    border-top: 1px solid transparent!important;
+                    border-left: 1px solid transparent!important;
+                    border-right: 1px solid transparent!important;
+                    background-color: transparent!important;
+                    border-bottom: 1px solid $red!important;
+                }
+            }
+            a{
+                font-family: $font-family--bold;
+                text-transform: uppercase;
+                color: $dark_grey;
+                &:hover{
+                    color: $black;
+                    border-top: 1px solid transparent!important;
+                    border-left: 1px solid transparent!important;
+                    border-right: 1px solid transparent!important;
+                    background-color: transparent!important;
+                    border-bottom: 1px solid $red;
+                }
+            }
+        }
+    }
+}
+.add-lang{
+    float: left;
+    font-family: $font-family--bold;
+    display: block;
+    margin: 11px 0 0 10px;
+    @extend %link-red;
+}
+.questions{
+    @extend %block;
+    padding: 10px;
+}
+.faq-row{
+    @extend %block;
+    margin: 10px 0;
+}
+.faq-edit-question{
+    font-family: $font-family--secondary;
+    font-size: 16px;
+    display: block;
+    margin: 12px 0 0 0;
+}
+.faq-edit-answer{
+    font-family: $font-family--secondary;
+    font-size: 16px;
+    background-color: $white;
+    border: 1px solid $light_grey;
+    padding: 10px;
+    display: block;
+    @include border-radius(6px,6px,6px,6px);
+}
+.btn-done{
+    width: 180px;
+    margin: 0 auto;
+    display: block;
+}
 

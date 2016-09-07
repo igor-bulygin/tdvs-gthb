@@ -6,8 +6,10 @@
 		vm.quantity = 1;
 		vm.optionsSelected = {};
 		vm.getReferencesFromOptions = getReferencesFromOptions;
+		vm.selectComparator = selectComparator;
 		var url = $location.absUrl().split("/");
 		var product_id = url[url.length - 1];
+		var select_order = ['size', 'color', 'select']
 
 		function getProduct() {
 			productDataService.Product.get({
@@ -60,7 +62,9 @@
 
 		init();
 
-
+		function selectComparator(option) {
+			return select_order.indexOf(option.widget_type)
+		}
 	}
 
 	angular.module('todevise', ['api', 'toastr'])

@@ -137,10 +137,10 @@ $productImages = $product->getUrlGalleryImages();
 									</div>
 								</form>
 							</div>
--->
+							-->
 							<div class="row-size">
 								<form class="form-horizontal" name="detailProductCtrl.selectorForm">
-									<div class="form-group" ng-repeat="option in detailProductCtrl.product.options">
+									<div class="form-group" ng-repeat="option in detailProductCtrl.product.options | orderBy:[detailProductCtrl.selectComparator]">
 										<tdv-size-selector option="option" options-selected="detailProductCtrl.optionsSelected" get-references="detailProductCtrl.getReferencesFromOptions(options)" ng-if="option.widget_type==='size'"></tdv-size-selector>
 										<tdv-color-selector option="option" options-selected="detailProductCtrl.optionsSelected" get-references="detailProductCtrl.getReferencesFromOptions(options)" ng-if="option.widget_type==='color'"></tdv-color-selector>
 										<tdv-select-selector option="option" options-selected="detailProductCtrl.optionsSelected" get-references="detailProductCtrl.getReferencesFromOptions(options)" ng-if="option.widget_type==='select'"></tdv-select-selector>
