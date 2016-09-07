@@ -248,6 +248,7 @@ $config = [
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/priv/v1/upload'],
 
 				// API routing (admin)
+				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/admin/v1/invitation'],
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/admin/v1/faq'],
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/admin/v1/term'],
 

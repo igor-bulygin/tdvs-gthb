@@ -23,7 +23,8 @@
 		"lajax/yii2-language-picker": "1.2.0",
 		"alexandernst/yii2-device-detect": "0.0.10",
 		"alexandernst/yii2-scrypt": "0.0.4",
-		"99designs/phumbor": "*"
+		"99designs/phumbor": "*",
+		"ramsey/uuid": "^3.4"
 	},
 	"require-dev": {
 		"yiisoft/yii2-codeception": "2.0.5",
