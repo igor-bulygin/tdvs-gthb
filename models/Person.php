@@ -2,6 +2,7 @@
 namespace app\models;
 
 use app\helpers\Utils;
+use Exception;
 use Yii;
 use app\helpers\CActiveRecord;
 use yii\base\NotSupportedException;
@@ -48,6 +49,14 @@ class Person extends CActiveRecord implements IdentityInterface
 	 */
 	static protected $serializeFields = [];
 
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	static protected $retrieveExtraFields = [];
+
+
 	//public $accessToken;
 
 	public static function collectionName()
@@ -84,7 +93,6 @@ class Person extends CActiveRecord implements IdentityInterface
 	 */
 	public $translatedAttributes = ['text_biography', 'faq.question', 'faq.answer'];
 
-
 	/**
 	 * Initialize model attributes
 	 */
@@ -98,6 +106,28 @@ class Person extends CActiveRecord implements IdentityInterface
 		$this->press = [];
 		$this->videos = [];
 		$this->faq = [];
+
+		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_PUBLIC);
+	}
+
+
+	/**
+	 * Get one entity serialized
+	 *
+	 * @param string $id
+	 * @return Person|null
+	 * @throws Exception
+	 */
+	public static function findOneSerialized($id)
+	{
+		/** @var Person $person */
+		$person = Person::find()->select(self::getSelectFields())->where(["short_id" => $id])->one();
+
+		// if automatic translation is enabled
+		if (static::$translateFields) {
+			Utils::translate($person);
+		}
+		return $person;
 	}
 
 	public static function findIdentity($id)
@@ -246,13 +276,13 @@ class Person extends CActiveRecord implements IdentityInterface
 				'on' => self::SCENARIO_DEVISER_PROFILE_UPDATE,
 				'model' => '\app\models\PersonMedia'
 			],
-			[['press'], 'required', 'on' => self::SCENARIO_DEVISER_PRESS_UPDATE],
+			[['press'], 'safe', 'on' => self::SCENARIO_DEVISER_PRESS_UPDATE],
 			[
 				'press',
 				'app\validators\PersonPressFilesValidator',
 				'on' => self::SCENARIO_DEVISER_PRESS_UPDATE,
 			],
-			[['videos'], 'required', 'on' => self::SCENARIO_DEVISER_VIDEOS_UPDATE],
+			[['videos'], 'safe', 'on' => self::SCENARIO_DEVISER_VIDEOS_UPDATE],
 			[
 				'videos',
 				'app\validators\PersonVideosValidator',

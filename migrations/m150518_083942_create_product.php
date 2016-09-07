@@ -12,7 +12,7 @@ use app\helpers\Currency as Currency_helper;
 
 class m150518_083942_create_product extends \yii\mongodb\Migration {
 	public function up() {
-		$en = array_keys(Lang::EN_US)[0];
+		$en = array_keys(Lang::EN_US_DESC)[0];
 
 		$this->createCollection('product');
 		$this->createIndex('product', 'short_id', [

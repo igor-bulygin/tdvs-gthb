@@ -34,6 +34,7 @@ use yii\base\NotSupportedException;
  * @property int enabled
  */
 class Product extends CActiveRecord {
+
 	/**
 	 * The attributes that should be serialized
 	 *
@@ -41,9 +42,15 @@ class Product extends CActiveRecord {
 	 */
 	static protected $serializeFields = [];
 
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	static protected $retrieveExtraFields = [];
+
 	/** @var  int */
 	static public $countItemsFound = 0;
-
 
 	public static function collectionName() {
 		return 'product';
@@ -80,6 +87,35 @@ class Product extends CActiveRecord {
 	 * @var array
 	 */
 	public $translatedAttributes = ['name', 'description', 'slug'];
+
+	/**
+	 * Initialize model attributes
+	 */
+	public function init()
+	{
+		parent::init();
+
+		// initialize attributes
+		$this->categories = [];
+		$this->collections = [];
+		$this->name = [];
+		$this->slug = [];
+		$this->description = [];
+		$this->media = [];
+		$this->options = [];
+		$this->madetoorder = [];
+		$this->sizechart = [];
+		$this->bespoke = [];
+		$this->preorder = [];
+		$this->returns = [];
+		$this->warranty = [];
+		$this->currency = [];
+		$this->weight_unit = [];
+		$this->price_stock = [];
+
+		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_PUBLIC);
+	}
+
 
 	public function beforeSave($insert) {
 		/*
@@ -279,7 +315,6 @@ class Product extends CActiveRecord {
 					'description',
 					'media',
 					'madetoorder',
-//					'sizechart',
 					'bespoke',
 					'preorder',
 					'returns',
@@ -293,6 +328,7 @@ class Product extends CActiveRecord {
 				static::$retrieveExtraFields = [
 					'deviser_id',
 					'options',
+					'sizechart',
 					'price_stock',
 				];
 
@@ -505,6 +541,18 @@ class Product extends CActiveRecord {
 				$tag->setFilterProduct($this);
 				$options[] = clone $tag;
 			}
+		}
+		// add size as a common tag
+		if ($this->sizechart) {
+			$tag = new Tag();
+			$tag->forceIsSizeTag = true; // TODO Temp attribute, until products options are refactored
+			$tag->sizeCart = $this->sizechart; // TODO Temp attribute, until products options are refactored
+			$tag->short_id = "size";
+			$tag->required = true;
+			$tag->name = [Lang::EN_US => "Size", Lang::ES_ES => "Talla", Lang::CA_ES => "Talla"];
+			$tag->description = [Lang::EN_US => "Size", Lang::ES_ES => "Talla", Lang::CA_ES => "Talla"];
+			$options[] = $tag;
+
 		}
 		Tag::setSerializeScenario(Tag::SERIALIZE_SCENARIO_PRODUCT_OPTION);
 		Utils::translate($options);

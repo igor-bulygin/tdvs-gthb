@@ -42,7 +42,7 @@ class CController extends Controller {
 		}
 
 		$this->lang = Yii::$app->language;
-		$this->lang_en = array_keys(Lang::EN_US)[0];
+		$this->lang_en = array_keys(Lang::EN_US_DESC)[0];
 
 		parent::init();
 	}

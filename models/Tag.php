@@ -133,6 +133,12 @@ class Tag extends CActiveRecord
 	/** @var  Product */
 	private $product;
 
+	/** @var  bool */
+	public $forceIsSizeTag = false;
+
+	/** @var array */
+	public $sizeCart = [];
+
 	public static function collectionName()
 	{
 		return 'tag';
@@ -162,6 +168,21 @@ class Tag extends CActiveRecord
 	 */
 	public $translatedAttributes = ['name', 'description'];
 
+	/**
+	 * Initialize model attributes
+	 */
+	public function init()
+	{
+		parent::init();
+
+		// initialize attributes
+		$this->name = [];
+		$this->description = [];
+		$this->categories = [];
+		$this->options = [];
+
+		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_PUBLIC);
+	}
 
 	public function beforeSave($insert)
 	{
@@ -226,23 +247,59 @@ class Tag extends CActiveRecord
 	{
 		$values = [];
 
-		foreach ($this->options as $key => $option) {
-//			print_r($this->product->options["731ct"]);
-//			if ($key < 5) {
-			// TODO Be careful with "two colors" widget
-			if (!empty($this->product->options[$this->short_id][0])) {
-				if ($this->product->options[$this->short_id][0][0] == $option["value"]) {
+		if ($this->forceIsSizeTag) {
+			foreach ($this->sizeCart["values"] as $key => $option) {
+				if (count($option) > 0) {
 					$values[] = [
-						"value" => $option["value"],
-						"text" => Utils::l($option["text"]),
+						"value" => ($key+1),
+						"text" => $option[0],
 						"hint" => null,
 						"image" => null,
 						"default" => null,
-						"colors" => $this->getOptionColor($option),
+						"colors" => [],
 					];
 				}
 			}
+		} else {
+			foreach ($this->options as $key => $option) {
+				if (!empty($this->product->options[$this->short_id][0])) {
+					if ($this->product->options[$this->short_id][0][0] == $option["value"]) {
+						$values[] = [
+							"value" => $option["value"],
+							"text" => Utils::l($option["text"]),
+							"hint" => null,
+							"image" => null,
+							"default" => null,
+							"colors" => $this->getOptionColor($option),
+						];
+					}
+				}
+			}
+			if ($this->getWidgetType() == "color") {
+				// TODO force add two color for test client side (remove when test ends)
+				$values[] = [
+					"value" => "temp_rand_id_" . uniqid(),
+					"text" => "Blue",
+					"hint" => null,
+					"image" => null,
+					"default" => null,
+					"colors" => [TagOption::HEXADECIMAL_COLORS[TagOption::BLUE]],
+				];
+
+				$values[] = [
+					"value" => "temp_rand_id_" . uniqid(),
+					"text" => "Blue and White",
+					"hint" => null,
+					"image" => null,
+					"default" => null,
+					"colors" => [
+						TagOption::HEXADECIMAL_COLORS[TagOption::BLUE],
+						TagOption::HEXADECIMAL_COLORS[TagOption::WHITE],
+					],
+				];
+			}
 		}
+
 
 		return $values;
 	}
@@ -254,6 +311,11 @@ class Tag extends CActiveRecord
 	 */
 	public function getWidgetType()
 	{
+		// TODO refactor size like other product tag / option
+		if ($this->forceIsSizeTag) {
+			return "size";
+		}
+
 		// TODO refactor the Tag attributes, to known easily what kind of widget must to be used to select
 		if ((is_array($this->options)) && (count($this->options)>0) && ($this->options[0])) {
 			$firstValue = $this->options[0];
@@ -270,7 +332,13 @@ class Tag extends CActiveRecord
 	 */
 	public function getOptionColor($option)
 	{
-		return [TagOption::HEXADECIMAL_COLORS[rand(0, count(TagOption::HEXADECIMAL_COLORS)-1)]];
+		if ($this->getWidgetType()=='color') {
+			return [
+				TagOption::HEXADECIMAL_COLORS[rand(0, count(TagOption::HEXADECIMAL_COLORS)-1)],
+			];
+		} else {
+			return [];
+		}
 	}
 
 	/**
@@ -280,6 +348,9 @@ class Tag extends CActiveRecord
 	 */
 	public function getChangeReference()
 	{
+		if ($this->forceIsSizeTag) {
+			return true;
+		}
 		return (isset($this->stock_and_price)) ? $this->stock_and_price : false;
 	}
 

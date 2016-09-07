@@ -7,7 +7,7 @@ use yii\mongodb\Migration;
 class m160601_205106_create_faq extends Migration
 {
 	public function up() {
-		$en = array_keys(Lang::EN_US)[0];
+		$en = array_keys(Lang::EN_US_DESC)[0];
 		$this->createCollection('faq');
 		$this->createIndex('faq', 'short_id', [
 			'unique' => true

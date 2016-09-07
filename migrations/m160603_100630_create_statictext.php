@@ -18,7 +18,7 @@ use app\models\StaticText;
 class m160603_100630_create_statictext extends Migration
 {
 	public function up(){
-		$en = array_keys(Lang::EN_US)[0];
+		$en = array_keys(Lang::EN_US_DESC)[0];
 		$this->createCollection('statictext');
 		$this->createIndex('statictext', 'short_id', [
 			'unique' => true
