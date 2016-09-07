@@ -1441,6 +1441,18 @@ a, a:hover, a:focus {
   .tagged-works .tag-row {
     padding: 20px; }
 
+.no-tags-title {
+  font: 16px "Univers Condensed Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #484848;
+  text-align: center;
+  margin: 20px 0; }
+
+.no-tags-text {
+  font: 16px "Univers Condensed Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #9a9a9a;
+  text-align: center;
+  margin: 20px 80px; }
+
 .become-deviser-wrapper {
   height: 100vh; }
   .become-deviser-wrapper .become-deviser-cover {
