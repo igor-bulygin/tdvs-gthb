@@ -33,7 +33,7 @@ $this->params['deviser_menu_active_option'] = 'faq';
 			<div class="col-md-2">
 				<?= DeviserMenu::widget() ?>
 			</div>
-			<div class="col-md-10 about-bg">
+			<div class="col-md-10">
 				<div>FAQ de <?= $deviser->getBrandName() ?></div>
 			</div>
 		</div>

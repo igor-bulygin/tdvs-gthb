@@ -119,4 +119,16 @@
         padding: 20px;
     }
 }
+.no-tags-title{
+    font: 16px $font-family--secondary;
+    color: $almost_black;
+    text-align: center;
+    margin: 20px 0;
+}
+.no-tags-text{
+    font: 16px $font-family--secondary;
+    color: $dark_grey;
+    text-align: center;
+    margin: 20px 80px;
+}
 

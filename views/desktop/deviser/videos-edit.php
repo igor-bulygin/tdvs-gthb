@@ -75,8 +75,8 @@ $this->params['deviser_menu_active_option'] = 'videos';
 										<div class="tagged-works">
 											<span class="title">Tagged works</span>
 											<div ng-if="video.products.length === 0">
-												<p>No tagged works.</p>
-												<p>Tag works to tell other members what the video is about.</p>
+												<p class="no-tags-title">No tagged works.</p>
+												<p class="no-tags-text">Tag works to tell other members what the video is about.</p>
 											</div>
 											<div class="produts-tags-wrapper">
                                                 <div ng-repeat="product in video.products" ng-if="video.products.length > 0">
