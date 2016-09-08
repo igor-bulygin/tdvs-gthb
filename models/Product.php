@@ -566,9 +566,9 @@ class Product extends CActiveRecord {
 	 */
 	public function getDeviserPreview()
 	{
-		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_PREVIEW);
-		$deviser = Person::findOne(["short_id" => $this->deviser_id]);
-		return $deviser;
+		/** @var Person $deviser */
+		$deviser = Person::findOneSerialized($this->deviser_id);
+		return $deviser->getPreviewSerialized();
 	}
 
 	/**
