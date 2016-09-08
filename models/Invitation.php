@@ -11,38 +11,22 @@ use yii\base\NotSupportedException;
 use yii\mongodb\ActiveQuery;
 use yii\mongodb\Collection;
 
+/**
+ * @property string uuid
+ * @property string email
+ * @property string message
+ * @property DateTime date_sent
+ * @property DateTime date_first_use
+ * @property DateTime date_last_use
+ * @property string code_use_state
+ * @property string code_invitation_type
+ * @property string person_id
+ */
 class Invitation extends CActiveRecord
 {
 
-//	const SCENARIO_TREND_SETTER_PROFILE_UPDATE = 'trend-setter-profile-update';
-
-	/** @var string */
-	public $uuid;
-
-	/** @var string */
-	public $email;
-
-	/** @var string */
-	public $message;
-
-	/** @var DateTime */
-	public $date_sent;
-
-	/** @var DateTime */
-	public $date_first_use;
-
-	/** @var DateTime */
-	public $date_last_use;
-
-	/** @var DateTime */
-	public $code_use_state;
-
-	/** @var int */
-	public $code_invitation_type;
-
-	/** @var int */
-	public $person_id;
-
+	const INVITATION_TYPE_DEVISER = 'invitation-deviser';
+	const INVITATION_TYPE_TREND_SETTER = 'invitation-trend-setter';
 
 	/**
 	 * The attributes that should be serialized
@@ -64,6 +48,33 @@ class Invitation extends CActiveRecord
 	public static function collectionName()
 	{
 		return 'invitation';
+	}
+
+	public function attributes()
+	{
+		return [
+			'_id',
+			'uuid',
+			'email',
+			'message',
+			'date_sent',
+			'date_first_use',
+			'date_last_use',
+			'code_use_state',
+			'code_invitation_type',
+			'person_id',
+		];
+	}
+	/**
+	 * Initialize model attributes
+	 */
+	public function init()
+	{
+		parent::init();
+
+		$this->uuid = Uuid::uuid4()->toString();
+
+		Invitation::setSerializeScenario(Invitation::SERIALIZE_SCENARIO_PUBLIC);
 	}
 
 	/**
@@ -96,40 +107,13 @@ class Invitation extends CActiveRecord
 			$query->offset($criteria["offset"]);
 		}
 
-		$products = $query->all();
+		$items = $query->all();
 
 		// if automatic translation is enabled
 		if (static::$translateFields) {
-			Utils::translate($products);
+			Utils::translate($items);
 		}
-		return $products;
-	}
-	public function attributes()
-	{
-		return [
-			'_id',
-			'uuid',
-			'email',
-			'message',
-			'date_sent',
-			'date_first_use',
-			'date_last_use',
-			'code_use_state',
-			'code_invitation_type',
-			'person_id',
-		];
-	}
-
-	/**
-	 * Initialize model attributes
-	 */
-	public function init()
-	{
-		parent::init();
-
-		$this->uuid = Uuid::uuid4()->toString();
-
-		Invitation::setSerializeScenario(Invitation::SERIALIZE_SCENARIO_PUBLIC);
+		return $items;
 	}
 
 
@@ -148,13 +132,33 @@ class Invitation extends CActiveRecord
 		return $invitation;
 	}
 
-
 	public function rules()
 	{
 		return [
-			[['email', 'message'], 'required'],
+			[['email', 'message', 'code_invitation_type'], 'required'],
+			[['email'], 'email'],
+			[['code_invitation_type'], 'validateInvitationType'],
 		];
 	}
+
+	/**
+	 * Custom validator for type param
+	 *
+	 * @param $attribute
+	 * @param $params
+	 */
+	public function validateInvitationType($attribute, $params)
+	{
+		switch ($this->$attribute) {
+			case Invitation::INVITATION_TYPE_DEVISER:
+			case Invitation::INVITATION_TYPE_TREND_SETTER:
+				break;
+			default:
+				$this->addError($attribute, 'Invalid type');
+				break;
+		}
+	}
+
 
 	/**
 	 * Prepare the ActiveRecord properties to serialize the objects properly, to retrieve an serialize

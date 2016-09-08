@@ -22,9 +22,27 @@ class Lang {
 	static public function getAvailableLanguages()
     {
         return array_merge(
+            self::EN_US,
+            self::ES_ES,
+            self::CA_ES
+        );
+    }
+
+	static public function getAvailableLanguagesDescriptions()
+    {
+        return array_merge(
             self::EN_US_DESC,
             self::ES_ES_DESC,
             self::CA_ES_DESC
         );
+    }
+
+	static public function findSerialized()
+    {
+        return [
+        	["code" => self::EN_US, "name" => self::EN_US_DESC[self::EN_US]],
+        	["code" => self::ES_ES, "name" => self::ES_ES_DESC[self::ES_ES]],
+        	["code" => self::CA_ES, "name" => self::CA_ES_DESC[self::CA_ES]],
+        ];
     }
 }

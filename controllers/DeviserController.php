@@ -315,11 +315,12 @@ class DeviserController extends CController {
 	public function actionFaq($slug, $deviser_id)
 	{
 		// get the category object
-		$deviser = Person::findOne(["short_id" => $deviser_id]);
+		$deviser = Person::findOneSerialized($deviser_id);
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("faq-view", [
 			'deviser' => $deviser,
+			'faq' => $deviser->faq,
 		]);
 	}
 

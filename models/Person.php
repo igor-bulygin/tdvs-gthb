@@ -326,7 +326,9 @@ class Person extends CActiveRecord implements IdentityInterface
 					'press',
 					'videos' => 'videosPreview',
 					'faq',
+					'name' => "brandName",
 					'url_images' => 'urlImagesLocation',
+					'url_avatar' => "avatarImage128",
 				];
 
 				static::$retrieveExtraFields = [
@@ -676,5 +678,20 @@ class Person extends CActiveRecord implements IdentityInterface
 		}
 
 		return $level2Categories;
+	}
+
+	/**
+	 * Get only preview attributes from Person
+	 *
+	 * @return array
+	 */
+	public function getPreviewSerialized()
+	{
+		return [
+			"id" => $this->short_id,
+			"slug" => $this->slug,
+			"name" => $this->getBrandName(),
+			"url_avatar" => $this->getAvatarImage128()
+		];
 	}
 }
