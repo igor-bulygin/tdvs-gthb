@@ -308,6 +308,18 @@ class PublicController extends CController
 
 	}
 
+	public function actionBecomeDeviser()
+	{
+		$this->layout = '/desktop/public-2.php';
+		return $this->render("become-deviser");
+	}
+
+	public function actionCreateDeviserAccount($uuid = null)
+	{
+		$this->layout = '/desktop/public-2.php';
+		return $this->render("create-deviser-account");
+	}
+
 	public function actionCategory($category_id, $slug)
 	{
 

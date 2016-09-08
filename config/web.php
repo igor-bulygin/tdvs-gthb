@@ -166,6 +166,11 @@ $config = [
 				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/video/edit' => 'deviser/videos-edit',
 				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/faq/edit' => 'deviser/faq-edit',
 
+				// Request become a Deviser
+				'/become-a-deviser' => 'public/become-deviser',
+				'/create-deviser-account' => 'public/create-deviser-account',
+				'/create-deviser-account/<uuid:[^/.]*?>' => 'public/create-deviser-account',
+
 				//Links for a cart listing
 				'cart/' => 'public/cart',
 				'public/cart/' => 'public/cart',
