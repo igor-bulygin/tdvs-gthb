@@ -1670,7 +1670,7 @@ a, a:hover, a:focus {
         display: inline-block; }
       .product .product-data-wrapper .product-data .row-size .size-box {
         float: left;
-        margin: 0 5px 0 0;
+        margin: 0 5px 6px 0;
         height: 23px;
         min-width: 23px; }
         .product .product-data-wrapper .product-data .row-size .size-box:hover {
