@@ -23,4 +23,28 @@ $this->title = 'Become a Deviser - Todevise';
 
 ?>
 
-<div>Become a Deviser !!</div>
+<div class="become-deviser-wrapper">
+    <div class="container">
+        <div class="become-deviser-cover">
+            <div class="row">
+                <div class="col-sm-6"></div>
+                <div class="col-sm-6">
+                    <div class="call-to-action-wrapper">
+                        <div class="call-to-action">
+                            <div class="logo">
+                                <img src="img/logo_white.png">
+                            </div>
+                            <div class="tagline">
+                                Express
+                            </div>
+                            <div class="tagline">
+                                Yourself
+                            </div>
+                            <button class="btn btn-white">Request invitation</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
