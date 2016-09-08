@@ -3,8 +3,11 @@
 namespace app\modules\api\admin\v1\controllers;
 
 use app\helpers\CActiveRecord;
+use app\models\Country;
 use app\models\Invitation;
-use app\modules\api\admin\v1\forms\InvitationForm;
+use app\models\StaticText;
+use app\models\StaticText2;
+use DateTime;
 use Yii;
 use yii\rest\Controller;
 use yii\web\ForbiddenHttpException;
@@ -15,8 +18,6 @@ use yii\filters\ContentNegotiator;
 use app\models\Faq;
 
 class InvitationController extends Controller {
-
-//    public $modelClass = 'app\models\Term';
 
     public function actionIndex()
     {
@@ -48,7 +49,13 @@ class InvitationController extends Controller {
     {
 	    $invitation = new Invitation();
 	    if ($invitation->load(Yii::$app->request->post(), '') && $invitation->validate()) {
-	    	// send the invitation
+		    // save the invitation
+		    $invitation->save();
+
+		    // send the email to invited person
+
+		    $invitation->date_sent = new DateTime();
+		    $invitation->save();
 
 		    Yii::$app->response->setStatusCode(201); // Created
 		    return ["action" => "created"];
@@ -56,7 +63,6 @@ class InvitationController extends Controller {
 		    Yii::$app->response->setStatusCode(400); // Bad Request
 		    return ["errors" => $invitation->errors];
 	    }
-
     }
 
     public function actionUpdate($id)

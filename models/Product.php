@@ -562,7 +562,7 @@ class Product extends CActiveRecord {
 	/**
 	 * Get a preview version of a Deviser
 	 *
-	 * @return Person
+	 * @return array
 	 */
 	public function getDeviserPreview()
 	{

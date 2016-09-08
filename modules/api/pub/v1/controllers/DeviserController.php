@@ -25,7 +25,7 @@ class DeviserController extends Controller
 	 *
 	 * @return array|void
 	 */
-	public function actionRequestsPost()
+	public function actionInvitationRequestsPost()
 	{
 		$form = new BecomeDeviserForm();
 		if ($form->load(Yii::$app->request->post(), '') && $form->validate()) {
