@@ -32,7 +32,7 @@ $this->title = 'Become a Deviser - Todevise';
                     <div class="call-to-action-wrapper">
                         <div class="call-to-action">
                             <div class="logo">
-                                <img src="img/logo_white.png">
+                                <img src="imgs/logo_white.png">
                             </div>
                             <div class="tagline">
                                 Express
