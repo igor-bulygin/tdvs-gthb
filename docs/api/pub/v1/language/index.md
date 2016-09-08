@@ -3,7 +3,7 @@
 Example about how to call to Web Service to get a public list of 
 Languages
 
-* URL: `/api3/pub/v1/languages`
+* URL: `/api/pub/v1/languages`
 * Method: `GET`
 * Response codes: 
  * `200`: Success
