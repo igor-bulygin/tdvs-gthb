@@ -29,7 +29,7 @@ class TranslatableValidator extends Validator
 		}
 
 		foreach ($values as $key => $item) {
-			if (!array_key_exists($key, Lang::getAvailableLanguages())) {
+			if (!array_key_exists($key, Lang::getAvailableLanguagesDescriptions())) {
 				$error = sprintf('Language "%s" not available', $key);
 				return false;
 			}
@@ -60,7 +60,7 @@ class TranslatableValidator extends Validator
 			}
 
 			foreach ($values as $key => $item) {
-				if (!array_key_exists($key, Lang::getAvailableLanguages())) {
+				if (!array_key_exists($key, Lang::getAvailableLanguagesDescriptions())) {
 					$this->addError($object, $attribute, sprintf('Language %s not available', $key));
 				}
 				if (empty($item)) {

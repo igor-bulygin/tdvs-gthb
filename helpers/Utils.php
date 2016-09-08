@@ -476,7 +476,7 @@ class Utils
 	public static function getFilterForTranslatableField($fieldName, $value, $operator = 'LIKE')
 	{
 		$nameFilter = ['or'];
-		foreach (Lang::getAvailableLanguages() as $key => $name) {
+		foreach (Lang::getAvailableLanguagesDescriptions() as $key => $name) {
 			$field = ($fieldName . "." . $key);
 			$nameFilter[] = [$operator, $field, $value];
 		}

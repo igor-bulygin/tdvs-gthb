@@ -256,6 +256,7 @@ $config = [
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/admin/v1/invitation'],
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/admin/v1/faq'],
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/admin/v1/term'],
+				'GET api3/pub/v1/languages' => 'api3/pub/v1/language/index',
 
 			]
 		],
