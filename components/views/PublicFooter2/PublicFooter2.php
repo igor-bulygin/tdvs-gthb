@@ -45,7 +45,7 @@ $footerMode = array_key_exists('footer_mode', $this->params) ? $this->params['fo
 			</div>
 			<div class="col-sm-3">
 				<div class="title">Join Todevise</div>
-				<button type="button" class="btn btn-red">Become a deviser</button>
+				<a href="<?= Url::to(["public/become-deviser"]) ?>" class="btn btn-red">Become a deviser</a>
 			</div>
 			<div class="col-sm-3">
 				<div class="title">Stay connected</div>
