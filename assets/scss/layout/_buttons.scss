@@ -56,13 +56,6 @@
     @extend %btn;
     background-color:$white;
     color: $red;
-    padding: 15px 20px;
-    width:250px;
-    height: 40px;
-    display: block;
-    margin: 0 auto;
-    font-family: $font-family--bold;
-    margin: 30px auto;
     &:hover{
         background-color:$background_grey;
         color: $red;
