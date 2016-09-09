@@ -84,6 +84,63 @@ $this->title = 'Become a Deviser - Todevise';
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-sm-6"></div>
+                <div class="col-sm-6">
+                    <div class="third-block-text">
+                        <div class="title">Grow your brand</div>
+                        <p>Reach international customers who understand your philosophy and appreciate your work. Get marketing guidance and SEO/SEM optimization by our team of experts. Potential onsite and social media promotion of your work.</p> 
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="quotation">Having your outlet store on Todevise opens your business to a world of opportunities. Reach new customers, upload products with ease, manage and track your sales efficiently.</div>
+                </div>
+            </div>
+            <div class="request-invitation-wrapper">
+                <div class="title">Request invitation</div>
+                <div class="tagline">We constantly strive for excellence, and for this reason an invitation is needed to register a deviser.</div>
+                <div class="request-invitation-container">
+                    <form>
+                        <div class="title"><span>Personal info</span></div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control grey-input" placeholder="NAME">
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control grey-input" placeholder="BRAND NAME">
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control grey-input" placeholder="NAME">
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control grey-input" placeholder="BRAND NAME">
+                            </div>
+                        </div>
+                        <div class="title"><span>Your work</span></div>
+                        <div class="row">
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control grey-input" placeholder="WHAT DO YOU create?">
+                        </div>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control grey-input" placeholder="WHAT DO YOU create?">
+                        </div>
+                        <a href="#" class="add-new">Add new +</a>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control grey-input" placeholder="Link to video">
+                        </div>
+                        <a href="#" class="add-new">Add new +</a>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control grey-input" placeholder="Observations">
+                        </div>
+                        </div>
+                        <button class="btn-red send-btn">
+                            <i class="ion-android-navigate"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div> 

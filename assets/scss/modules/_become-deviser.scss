@@ -4,14 +4,12 @@
 .become-deviser-wrapper{
     .become-deviser-cover{
         background: url('/imgs/become_a_deviser_background.png') no-repeat;
-        background-size: cover;
         width: 100%;
-        padding-bottom: 59%;
     }
     .call-to-action-wrapper{
         position: relative;
         @extend %block;
-        height: 520px;
+        height: 525px;
     }
 }
 .call-to-action{
@@ -90,4 +88,107 @@
     font-weight: 100;
     text-align: center;
     font-size: 41px;
+}
+.third-block-text{
+    color: $white;
+    width:300px;
+    margin: 10px auto 120px;
+    .title{
+        font-family: $font-family--name;
+        font-size: 70px;
+        text-transform: uppercase;
+    }
+    p{
+        font-family: $font-family--secondary;
+    }
+}
+.quotation{
+    font-family: $font-family--serif;
+    font-style: italic;
+    font-size: 18px;
+    color: $white;
+    width: 450px;
+    margin: 0 auto 80px;
+    text-align: center;
+}
+.request-invitation-wrapper{
+    background-color: $almost_black;
+    padding: 40px;
+    margin: 0;
+    @extend %block;
+    .title{
+        color: $white;
+        font-family: $font-family--name;
+        font-size: 46px;
+        text-transform: uppercase;
+        text-align: center;
+    }
+    .tagline{
+        font-family: $font-family--secondary;
+        color: $white;
+        width: 280px;
+        margin: 0 auto;
+        text-align: center;
+    }
+    .request-invitation-container{
+        max-width: 600px;
+        margin: 10px auto 40px;
+        .title{
+            font-family: $font-family--bold;
+            font-size: 12px;
+            color: $light_grey;
+            text-transform: uppercase;
+            text-align: left;
+            position: relative;
+            z-index: 1;
+            margin-top: 30px;
+            margin-bottom: 10px;
+            &:before {
+                border-top: 1px solid $black;
+                content:"";
+                margin: 0 auto;
+                position: absolute;
+                top: 40%; left: 0; right: 0; bottom: 0;
+                width: 100%;
+                z-index: -1;
+            }
+            span { 
+                background-color: $almost_black; 
+                padding: 0 15px 0 0; 
+            }
+        }
+        .add-new{
+            @extend %link-red;
+            margin: -5px 0 5px 20px;
+            display: block;
+        }
+    }
+}
+.grey-input{
+    margin: 10px 0;
+    color: $white;
+    background-color: $dark_grey;
+    border: 1px solid $darker_grey;
+    @include border-radius(25px,25px,25px,25px);
+    &::-webkit-input-placeholder {color:$white;text-transform: uppercase;}
+    &:-moz-placeholder           {color:$white;text-transform: uppercase;}
+    &::-moz-placeholder          {color:$white;text-transform: uppercase;}
+    &:-ms-input-placeholder      {color:$white;text-transform: uppercase;}
+}
+.no-pad{
+    padding: 0;
+}
+.send-btn{
+    width: 50px;
+    height: 50px;
+    margin: 40px auto;
+    display: block;
+    padding: 5px 0 0 0;
+    @include transform(rotate(90deg));
+    @include border-radius(90px,90px,90px,90px);
+    cursor: pointer;
+    i{
+        color: $white;
+        font-size: 28px;
+    }
 }
