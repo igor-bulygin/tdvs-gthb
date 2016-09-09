@@ -288,7 +288,7 @@ class Person extends CActiveRecord implements IdentityInterface
 				'app\validators\PersonVideosValidator',
 				'on' => self::SCENARIO_DEVISER_VIDEOS_UPDATE,
 			],
-			[['faq'], 'required', 'on' => self::SCENARIO_DEVISER_FAQ_UPDATE],
+			[['faq'], 'safe', 'on' => self::SCENARIO_DEVISER_FAQ_UPDATE],
 			[
 				'faq',
 				'app\validators\PersonFaqValidator',
@@ -431,7 +431,7 @@ class Person extends CActiveRecord implements IdentityInterface
 	{
 		if (!isset($this->personal_info)) return "";
 
-		return $this->personal_info['name'] . ' ' . implode(" ", $this->personal_info['surnames']);
+		return $this->personal_info['name'];
 	}
 
 	/**
