@@ -43,18 +43,18 @@ $this->params['deviser_menu_active_option'] = 'faq';
 					<?php } else { ?>
 
 					<div id="accordion" role="tablist" aria-multiselectable="true">
-						<?php foreach ($faq as $item) { ?>
+						<?php foreach ($faq as $key => $item) { ?>
 						<div class="panel faq-panel">
-							<div class="panel-heading panel-heading-faq" role="tab" id="heading-faq-1">
+							<div class="panel-heading panel-heading-faq" role="tab" id="heading-faq-<?= $key ?>">
 								<h4 class="panel-title">
-									<a class="faq-title" role="button" data-toggle="collapse" data-parent="#accordion"
-									   href="#collapse-faq-1" aria-expanded="true" aria-controls="collapse-faq-1">
+									<a class="faq-title <?= ($key!=0) ? 'collapsed' : '' ?>" role="button" data-toggle="collapse" data-parent="#accordion"
+									   href="#collapse-faq-<?= $key ?>" aria-expanded="<?= ($key==0) ? 'true' : 'false' ?>" aria-controls="collapse-faq-<?= $key ?>">
 										<?= $item["question"] ?>
 									</a>
 								</h4>
 							</div>
-							<div id="collapse-faq-1" class="panel-collapse collapse in" role="tabpanel"
-							     aria-labelledby="heading-faq-1">
+							<div id="collapse-faq-<?= $key ?>" class="panel-collapse collapse <?= ($key==0) ? 'in' : '' ?>" role="tabpanel"
+							     aria-labelledby="heading-faq-<?= $key ?>">
 								<div class="panel-body faq-answer">
 									<?= $item["answer"] ?>
 								</div>
