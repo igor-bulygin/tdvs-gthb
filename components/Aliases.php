@@ -9,6 +9,7 @@ class Aliases extends Component {
 		Yii::setAlias('uploads', '@webroot/uploads');
 		Yii::setAlias('deviser', '@uploads/deviser');
 		Yii::setAlias('product', '@uploads/product');
+		Yii::setAlias('create', 'public/create-deviser-account');
 
 		Yii::setAlias('uploads_url', '/uploads');
 		Yii::setAlias('deviser_url', '@uploads_url/deviser');

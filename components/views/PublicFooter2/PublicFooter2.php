@@ -25,7 +25,7 @@ $footerMode = array_key_exists('footer_mode', $this->params) ? $this->params['fo
 						</li>
 					<?php } ?>
 					<li>
-						<a href="#">Other</a>
+						<a href="<?= Url::to(["public/create-deviser-account", "uuid" => "asdf"]) ?>">Other</a>
 					</li>
 				</ul>
 			</div>

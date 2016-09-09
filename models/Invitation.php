@@ -9,6 +9,7 @@ use Ramsey\Uuid\Uuid;
 use Yii;
 use app\helpers\CActiveRecord;
 use yii\base\NotSupportedException;
+use yii\helpers\Url;
 use yii\mongodb\ActiveQuery;
 use yii\mongodb\Collection;
 
@@ -198,7 +199,7 @@ class Invitation extends CActiveRecord
 		$email->code_email_content_type = PostmanEmail::EMAIL_CONTENT_TYPE_DEVISER_INVITATION;
 		$email->from_email = 'info@todevise.com'; // TODO get this from .env file
 		$email->to_email = $this->email;
-		$email->subject = 'Test subject';
+		$email->subject = $this->getEmailSubject();
 
 		// add task only one send task (to allow retries)
 		$task = new PostmanEmailTask();
@@ -210,11 +211,13 @@ class Invitation extends CActiveRecord
 		$action->code_email_action_type = PostmanEmailAction::EMAIL_ACTION_TYPE_DEVISER_INVITATION_ACCEPT;
 		$email->addAction($action);
 
-		$view = Yii::$app->view;
-//		$view->layout = '/desktop/public-2.php';
-//		$email->body_html = $view->render('empty-canvas', ["content" => "lala"]);
-		$email->body_html = "something ...";
-
+		$email->body_html = Yii::$app->view->render(
+			$this->getEmailView(),
+			[
+				"message" => $this->message,
+				"actionAccept" => $action,
+			]
+		);
 		$email->save();
 
 		// relate the invitation with the email
@@ -222,6 +225,26 @@ class Invitation extends CActiveRecord
 		$this->save(true, ["postman_email_id"]);
 
 		return $email;
+	}
+
+	/**
+	 * Get the subject for the email, according to invitation type
+	 *
+	 * @return string
+	 */
+	private function getEmailSubject()
+	{
+		return 'Invitation to todevise.com';
+	}
+
+	/**
+	 * Get the view to use for the email, according to invitation type
+	 *
+	 * @return string
+	 */
+	private function getEmailView()
+	{
+		return '@app/mail/deviser/invitation-become';
 	}
 
 }
