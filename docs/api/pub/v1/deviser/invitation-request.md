@@ -15,6 +15,6 @@ to become a Deviser
  * `brand_name`: brand name (optional)
  * `phone_number`: phone number (optional)
  * `creations_description`: text with their description (required)
- * `url_portfolio`: [] array of url links to their portfolio (required)
- * `url_video`: [] array of url links to a video (optional)
+ * `urls_portfolio`: [] array of url links to their portfolio (required)
+ * `urls_video`: [] array of url links to a video (optional)
  * `observations`: observations (optional)
