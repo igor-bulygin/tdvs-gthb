@@ -13,7 +13,8 @@ class ApiAsset extends AssetBundle {
 		'js/api/factories.js',
 		'js/api/services.js',
 		'js/api/deviserDataService.js',
-		'js/api/productDataService.js'
+		'js/api/productDataService.js',
+		'js/api/languageDataService.js'
 	];
 	public $depends = [
 		'app\assets\AppAsset',

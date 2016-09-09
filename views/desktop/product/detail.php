@@ -97,105 +97,12 @@ $productImages = $product->getUrlGalleryImages();
 							</div>
 						</div>
 						<div class="product-data">
-							<!--
-							<div class="row-size">
-								<form class="form-horizontal">
-									<div class="form-group">
-										<label class="col-sm-3 control-label product-label"><span class="atr">Size</span> <i class="ion-information-circled info"></i></label>
-										<div class="col-sm-9">
-											<div class="size-box" data-toggle="tooltip" data-placement="top" title="+ €5,50">
-												<input type="radio" name="size" id="size-1">
-												<label for="size-1">
-													<span class="radio">XS</span> </label>
-											</div>
-											<div class="size-box" data-toggle="tooltip" data-placement="top" title="+ €6,50">
-												<input type="radio" name="size" id="size-2">
-												<label for="size-2">
-													<span class="radio">S</span> </label>
-											</div>
-											<div class="size-box" data-toggle="tooltip" data-placement="top" title="+ €8,50">
-												<input type="radio" name="size" id="size-3">
-												<label for="size-3">
-													<span class="radio">M</span> </label>
-											</div>
-											<div class="size-box" data-toggle="tooltip" data-placement="top" title="+ €4,50">
-												<input type="radio" name="size" id="size-4">
-												<label for="size-4">
-													<span class="radio">L</span> </label>
-											</div>
-											<div class="size-box" data-toggle="tooltip" data-placement="top" title="+ €3,50">
-												<input type="radio" name="size" id="size-5">
-												<label for="size-5">
-													<span class="radio">XL</span> </label>
-											</div>
-											<div class="size-box" data-toggle="tooltip" data-placement="top" title="+ €2,50">
-												<input type="radio" name="size" id="size-6">
-												<label for="size-6">
-													<span class="radio">XXL</span> </label>
-											</div>
-										</div>
-									</div>
-								</form>
-							</div>
-							-->
 							<div class="row-size">
 								<form class="form-horizontal" name="detailProductCtrl.selectorForm">
 									<div class="form-group" ng-repeat="option in detailProductCtrl.product.options | orderBy:[detailProductCtrl.selectComparator]">
 										<tdv-size-selector option="option" options-selected="detailProductCtrl.optionsSelected" get-references="detailProductCtrl.getReferencesFromOptions(options)" ng-if="option.widget_type==='size'"></tdv-size-selector>
 										<tdv-color-selector option="option" options-selected="detailProductCtrl.optionsSelected" get-references="detailProductCtrl.getReferencesFromOptions(options)" ng-if="option.widget_type==='color'"></tdv-color-selector>
 										<tdv-select-selector option="option" options-selected="detailProductCtrl.optionsSelected" get-references="detailProductCtrl.getReferencesFromOptions(options)" ng-if="option.widget_type==='select'"></tdv-select-selector>
-										<!--
-										<label class="col-sm-3 control-label product-label"><span class="atr">Material</span></label>
-										<div class="col-sm-9">
-											<select class="form-control selectpicker product-select" title="Choose material">
-												<option></option>
-												<option>Wool (+ € 10.95)</option>
-												<option>Fabric (+ € 5.95)</option>
-											</select>
-										</div>
-										-->
-									</div>
-								</form>
-							</div>
-							<!--
-							<div class="row-size">
-								<form class="form-horizontal">
-									<div class="form-group">
-										<label class="col-sm-3 control-label product-label"><span class="atr">Band</span></label>
-										<div class="col-sm-9">
-											<select class="form-control selectpicker product-select" title="Choose band">
-												<option></option>
-												<option>Leather (+ € 20.95)</option>
-												<option>Silicone (+ € 5.95)</option>
-											</select>
-										</div>
-									</div>
-								</form>
-							</div>
-							<div class="row-size">
-								<form class="form-horizontal">
-									<div class="form-group">
-										<label class="col-sm-3 control-label product-label"><span class="atr">Diameter</span></label>
-										<div class="col-sm-9">
-											<select class="form-control selectpicker product-select" title="Choose diameter">
-												<option></option>
-												<option>20 cm (+ € 11.95)</option>
-												<option>30 cm (+ € 5.95)</option>
-											</select>
-										</div>
-									</div>
-								</form>
-							</div>
--->
-							<div class="row-size">
-								<form class="form-horizontal">
-									<div class="form-group">
-										<label class="col-sm-3 control-label product-label"><span class="atr">Material</span></label>
-										<div class="col-sm-9">
-											<div class="atribute-selected">
-												Wool
-											</div>
-										</div>
 									</div>
 								</form>
 							</div>

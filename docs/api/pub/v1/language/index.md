@@ -13,11 +13,20 @@ Languages
 
 ```
 {
-  "items": {
-    "en-US": "English",
-    "es-ES": "Spanish",
-    "ca-ES": "Catalan"
-  },
+  "items": [
+    {
+      "code": "en-US",
+      "name": "English"
+    },
+    {
+      "code": "es-ES",
+      "name": "Spanish"
+    },
+    {
+      "code": "ca-ES",
+      "name": "Catalan"
+    }
+  ],
   "meta": {
     "total_count": 3,
     "current_page": 1,
