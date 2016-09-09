@@ -5,43 +5,67 @@
 		var vm = this;
 		vm.addQuestion = addQuestion;
 		vm.deleteQuestion = deleteQuestion;
-		vm.addLanguageToQuestion = addLanguageToQuestion;
+		vm.update = update;
+		vm.parseQuestion = parseQuestion;
+		vm.isLanguageOk = isLanguageOk;
 		
 		function getDeviser(){
 			deviserDataService.Profile.get({
 				deviser_id: UtilService.returnDeviserIdFromUrl()
 			}).$promise.then(function (dataDeviser) {
 				vm.deviser = dataDeviser;
-				if(!vm.deviser.faq)
-					vm.deviser.faq = [];
-				else {
-					vm.deviser.faq
-				}
+				//we need languages before parse questions
+				languageDataService.Languages.get().$promise.then(function (dataLanguages) {
+					vm.languages = dataLanguages.items;
+					if(!vm.deviser.faq)
+						vm.deviser.faq = [];
+					else {
+						vm.deviser.faq.forEach(function(element) {
+							parseQuestion(element);
+						})
+					}
+				}, function (err) {
+					toastr.error(err);
+				});	
+				
 			}, function(err) {
-				toastr.error(err);
-			})
-		}
-		
-		function getLanguages() {
-			languageDataService.Languages.get().$promise.then(function (dataLanguages) {
-				vm.languages = dataLanguages.items;
-			}, function (err) {
 				toastr.error(err);
 			})
 		}
 		
 		function init(){
 			getDeviser();
-			getLanguages();
 		}
 		
 		init();
 		
+		function update(index){
+			if(index >= 0) {
+				vm.deviser.faq.splice(index,1)
+			}
+			var patch = new deviserDataService.Profile;
+			patch.scenario = "deviser-faq-update";
+			patch.faq = [];
+			vm.deviser.faq.forEach(function(element, index) {
+				parseQuestion(element);
+				patch.faq.push({
+					question: element.question,
+					answer: element.answer
+				})
+			});
+			patch.deviser_id = vm.deviser.id;
+			patch.$update().then(function(dataFaq) {
+				toastr.success("Updated!");
+			}, function(err) {
+				toastr.error(err);
+			})
+		}
+		
 		function addQuestion() {
 			vm.deviser.faq.unshift({
-				languages: [{name:"English",code:"en-US"}],
 				question:{'en-US': ""},
-				answer: {'en-US': ""}
+				answer: {'en-US': ""},
+				completedLanguages: []
 			});
 		}
 		
@@ -49,15 +73,24 @@
 			vm.deviser.faq.splice(index, 1);
 		}
 		
-		function addLanguageToQuestion(language, index) {
-			vm.deviser.faq[index].languages.push(language);
-			vm.deviser.faq[index].question[language.code] = "";
-			vm.deviser.faq[index].answer[language.code] = "";
+		function parseQuestion(question) {
+			question.completedLanguages = [];
+			vm.languages.forEach(function(element) {
+				if(question.question[element.code] && question.question[element.code] !== ""
+				  && question.answer[element.code] && question.answer[element.code] !== "") {
+					question.completedLanguages.push(element.code)
+				}
+			})
 		}
+		
+		function isLanguageOk(code, question) {
+			return question.completedLanguages.indexOf(code) > -1 ? true : false;
+		}
+
 		
 	}
 	
-	angular.module('todevise', ['api', 'toastr','util', 'ui.bootstrap'])
+	angular.module('todevise', ['api', 'toastr', 'util', 'ui.bootstrap', 'dndLists'])
 		.controller('editFaqCtrl', controller);
 	
 }());

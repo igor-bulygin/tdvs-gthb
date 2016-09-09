@@ -36,14 +36,14 @@ $this->params['deviser_menu_active_option'] = 'faq';
 					<div class="col-md-10" ng-controller="editFaqCtrl as editFaqCtrl">
 						<div class="faq-wrapper">
 							<div class="section-title">FAQ</div>
-							<div class="edit-faq-wrapper" ng-cloak ng-repeat="question in editFaqCtrl.deviser.faq" ng-if="editFaqCtrl.deviser.faq.length > 0">
+							<div class="edit-faq-wrapper" ng-cloak ng-repeat="question in editFaqCtrl.deviser.faq" ng-if="editFaqCtrl.deviser.faq.length > 0" dnd-list="editFaqCtrl.deviser.faq">
 								<div class="delete-options-wrapper">
 									<a class="delete-link pull-right" href="#" ng-click="editFaqCtrl.deleteQuestion($index)">Delete question</a>
-									<div class="edit-faq-panel">
+									<div class="edit-faq-panel" style="cursor:move;" dnd-draggable="question" dnd-effect-allowed="move" dnd-moved="editFaqCtrl.update($index)">
 										<div class="faq-language-menu">
-											<select ng-model="question.languageSelected" ng-init="question.languageSelected='en-US'">
+											<select ng-model="question.languageSelected" ng-init="question.languageSelected='en-US'" ng-change="editFaqCtrl.parseQuestion(question)">
 												<option value="" style="display:none;"></option>
-												<option ng-repeat="language in editFaqCtrl.languages" value="{{language.code}}">{{question.languageSelected === language.code ? language.name + '&and;' : language.name}}</option>
+												<option ng-repeat="language in editFaqCtrl.languages" value="{{language.code}}" class="ng-class:{'bg-success': editFaqCtrl.isLanguageOk(language.code, question), 'bg-danger': !editFaqCtrl.isLanguageOk(language.code, question)}">{{question.languageSelected === language.code ? language.name + '&and;' : language.name}}</option>
 											</select>
 											<div class="faq-row">
 												<div class="col-sm-1">
@@ -66,7 +66,7 @@ $this->params['deviser_menu_active_option'] = 'faq';
 								</div>
 							</div>
 							<a class="edit-faq-btn" href="#" ng-click="editFaqCtrl.addQuestion()">+ ADD QUESTION</a>
-							<button class="btn btn-green btn-done">Done</button>
+							<button class="btn btn-green btn-done" ng-click="editFaqCtrl.update()">Done</button>
 							<div class="faq-edit-empty" ng-if="editFaqCtrl.deviser.faq.length === 0" ng-cloak>
 								<p>You haven’t written any FAQs.
 									<br/> Start now by clicking the <b>ADD QUESTION</b> button.</p>
