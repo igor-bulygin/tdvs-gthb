@@ -59,7 +59,7 @@ class BecomeDeviserForm extends Model {
 	public function rules()
 	{
 		return [
-			[['email', 'representative_name', 'creations_description'], 'required'],
+			[['email', 'representative_name', 'creations_description', 'urls_portfolio'], 'required'],
 			[['email'], 'email'],
 			[['urls_portfolio', 'urls_video'], 'each', 'rule' => ['url']],
 			[['brand_name', 'phone_number', 'observations'], 'safe'],
