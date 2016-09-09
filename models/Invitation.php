@@ -182,4 +182,14 @@ class Invitation extends CActiveRecord
 				break;
 		}
 	}
+
+	/**
+	 * Send the email related with te Invitation
+	 *
+	 * @return Invitation
+	 */
+	public function sendEmail()
+	{
+		return $this;
+	}
 }

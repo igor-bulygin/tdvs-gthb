@@ -3,11 +3,9 @@
 namespace app\modules\api\admin\v1\controllers;
 
 use app\helpers\CActiveRecord;
-use app\models\Country;
 use app\models\Invitation;
-use app\models\StaticText;
-use app\models\StaticText2;
 use DateTime;
+use MongoDate;
 use Yii;
 use yii\rest\Controller;
 use yii\web\ForbiddenHttpException;
@@ -40,11 +38,6 @@ class InvitationController extends Controller {
         ]);
     }
 
-    public function actionView($id)
-    {
-        return ["action" => "view", "id" => $id];
-    }
-
     public function actionCreate()
     {
 	    $invitation = new Invitation();
@@ -53,8 +46,9 @@ class InvitationController extends Controller {
 		    $invitation->save();
 
 		    // send the email to invited person
+		    $invitation->sendEmail();
 
-		    $invitation->date_sent = new DateTime();
+		    $invitation->date_sent = new MongoDate();
 		    $invitation->save();
 
 		    Yii::$app->response->setStatusCode(201); // Created
@@ -63,18 +57,6 @@ class InvitationController extends Controller {
 		    Yii::$app->response->setStatusCode(400); // Bad Request
 		    return ["errors" => $invitation->errors];
 	    }
-    }
-
-    public function actionUpdate($id)
-    {
-        Yii::$app->response->setStatusCode(204); // Success, without body
-//        return ["action" => "update", "id" => $id];
-    }
-
-    public function actionDelete($id)
-    {
-        Yii::$app->response->setStatusCode(204); // Success, without body
-//        return ["action" => "delete", "id" => $id];
     }
 
     /**

@@ -41,6 +41,8 @@
     -moz-column-gap: $gap;
     -webkit-column-gap: $gap;
 }
+//Placeholder
+
 //Cover
 @mixin bg-size($cover){
     -ms-background-size: $cover;
