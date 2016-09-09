@@ -4,6 +4,7 @@ namespace app\models;
 use app\helpers\Utils;
 use DateTime;
 use Exception;
+use MongoDate;
 use Ramsey\Uuid\Uuid;
 use Yii;
 use app\helpers\CActiveRecord;
@@ -15,12 +16,13 @@ use yii\mongodb\Collection;
  * @property string uuid
  * @property string email
  * @property string message
- * @property DateTime date_sent
- * @property DateTime date_first_use
- * @property DateTime date_last_use
+ * @property MongoDate date_sent
+ * @property MongoDate date_first_use
+ * @property MongoDate date_last_use
  * @property string code_use_state
  * @property string code_invitation_type
  * @property string person_id
+ * @property string postman_email_id
  */
 class Invitation extends CActiveRecord
 {
@@ -63,8 +65,10 @@ class Invitation extends CActiveRecord
 			'code_use_state',
 			'code_invitation_type',
 			'person_id',
+			'postman_email_id',
 		];
 	}
+
 	/**
 	 * Initialize model attributes
 	 */
@@ -184,12 +188,40 @@ class Invitation extends CActiveRecord
 	}
 
 	/**
-	 * Send the email related with te Invitation
+	 * Compose the email to be sent to user with the invitation
 	 *
-	 * @return Invitation
+	 * @return PostmanEmail
 	 */
-	public function sendEmail()
+	public function composeEmail()
 	{
-		return $this;
+		$email = new PostmanEmail();
+		$email->code_email_content_type = PostmanEmail::EMAIL_CONTENT_TYPE_DEVISER_INVITATION;
+		$email->from_email = 'info@todevise.com'; // TODO get this from .env file
+		$email->to_email = $this->email;
+		$email->subject = 'Test subject';
+
+		// add task only one send task (to allow retries)
+		$task = new PostmanEmailTask();
+		$task->date_send_scheduled = new MongoDate();
+		$email->addTask($task);
+
+		// register the attached action: invitation link
+		$action = new PostmanEmailAction();
+		$action->code_email_action_type = PostmanEmailAction::EMAIL_ACTION_TYPE_DEVISER_INVITATION_ACCEPT;
+		$email->addAction($action);
+
+		$view = Yii::$app->view;
+//		$view->layout = '/desktop/public-2.php';
+//		$email->body_html = $view->render('empty-canvas', ["content" => "lala"]);
+		$email->body_html = "something ...";
+
+		$email->save();
+
+		// relate the invitation with the email
+		$this->postman_email_id = $email->_id;
+		$this->save(true, ["postman_email_id"]);
+
+		return $email;
 	}
+
 }
