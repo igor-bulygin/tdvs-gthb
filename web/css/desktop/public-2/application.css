@@ -1734,9 +1734,12 @@ a, a:hover, a:focus {
   color: #ffffff;
   background-color: #9a9a9a;
   border: 1px solid #6b6b6b;
+  letter-spacing: 0.4px;
   border-radius: 25px 25px 25px 25px !important;
   -webkit-border-radius: 25px 25px 25px 25px !important;
   -moz-border-radius: 25px 25px 25px 25px !important; }
+  .grey-input.password {
+    letter-spacing: 5px; }
   .grey-input::-webkit-input-placeholder {
     color: #ffffff;
     text-transform: uppercase; }
@@ -1770,6 +1773,26 @@ a, a:hover, a:focus {
   .send-btn i {
     color: #ffffff;
     font-size: 28px; }
+
+.create-deviser-account-wrapper {
+  padding: 80px 200px; }
+  .create-deviser-account-wrapper .logo {
+    width: 110px;
+    margin: 0 auto; }
+  .create-deviser-account-wrapper .create-deviser-account-container {
+    background-color: #484848;
+    padding: 20px 40px;
+    max-width: 330px;
+    margin: 60px auto 0; }
+    .create-deviser-account-wrapper .create-deviser-account-container label {
+      font-family: "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 12px;
+      color: #bfbfbf;
+      text-transform: uppercase;
+      margin: 15px 0 0 0; }
+      .create-deviser-account-wrapper .create-deviser-account-container label i {
+        padding: 0 5px;
+        cursor: pointer; }
 
 .product {
   background-color: #ffffff; }
