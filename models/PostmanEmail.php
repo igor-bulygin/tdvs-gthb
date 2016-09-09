@@ -133,6 +133,11 @@ class PostmanEmail extends CActiveRecord
 			$query->offset($criteria["offset"]);
 		}
 
+		if ((array_key_exists("order_by", $criteria)) && (!empty($criteria["order_by"]))) {
+			$query->orderBy($criteria["order_by"]);
+		}
+
+
 		$items = $query->all();
 
 		// if automatic translation is enabled
@@ -183,6 +188,10 @@ class PostmanEmail extends CActiveRecord
 					'to_name',
 					'to_email',
 					'subject',
+				];
+				static::$retrieveExtraFields = [
+					'tasks',
+					'actions',
 				];
 				break;
 			default:

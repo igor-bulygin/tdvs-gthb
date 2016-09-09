@@ -171,6 +171,7 @@ $config = [
 				'/create-deviser-account' => 'public/create-deviser-account',
 				'/create-deviser-account/<uuid:[^/.]*?>' => 'public/create-deviser-account',
 
+
 				//Links for a cart listing
 				'cart/' => 'public/cart',
 				'public/cart/' => 'public/cart',
@@ -186,6 +187,11 @@ $config = [
 
 				//Links for contact
 				'contact/' => 'public/contact',
+
+				// Postman (temp urls)
+				'/postman/emails' => 'postman/index',
+				'/postman/emails/<uuid:[^/.]*?>' => 'postman/email-view',
+
 
 				//Links for deviser profile
 				'<slug:[0-9a-z-A-Z\-]*?>/products/' => 'admin/products',
@@ -212,6 +218,7 @@ $config = [
 				'admin/size-chart/<size_chart_id:\w{5}>/' => 'admin/size-chart',
 				'admin/admin/<short_id:\w{7}>/' => 'admin/admin',
 				'admin/<action:[^/.]*?>/' => 'admin/<action>',
+
 
 				//Links for a category listing
 				'<category_id:\w{5}>/<slug:[^/.]*?$>/' => 'public/category',
