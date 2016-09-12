@@ -169,8 +169,6 @@ $config = [
 				// Request become a Deviser
 				'/become-a-deviser' => 'public/become-deviser',
 				'/create-deviser-account' => 'public/create-deviser-account',
-				'/create-deviser-account/<uuid:[^/.]*?>' => 'public/create-deviser-account',
-
 
 				//Links for a cart listing
 				'cart/' => 'public/cart',
@@ -186,11 +184,13 @@ $config = [
 				'faq/' => 'public/faq',
 
 				//Links for contact
-				'contact/' => 'public/contact',
+				'about-us' => 'public/about-us',
 
 				// Postman (temp urls)
 				'/postman/emails' => 'postman/index',
 				'/postman/emails/<uuid:[^/.]*?>' => 'postman/email-view',
+				'/postman/mockups/deviser-request-invitation' => 'postman/mockup-deviser-request-invitation-view',
+				'/postman/mockups/deviser-invitation' => 'postman/mockup-deviser-invitation-view',
 
 
 				//Links for deviser profile

@@ -91,7 +91,7 @@ class Person extends CActiveRecord implements IdentityInterface
 	 *
 	 * @var array
 	 */
-	public $translatedAttributes = ['text_biography', 'faq.question', 'faq.answer'];
+	public $translatedAttributes = ['text_short_description', 'text_biography', 'faq.question', 'faq.answer'];
 
 	/**
 	 * Initialize model attributes
@@ -106,6 +106,12 @@ class Person extends CActiveRecord implements IdentityInterface
 		$this->press = [];
 		$this->videos = [];
 		$this->faq = [];
+		$this->preferences = [
+			"language" => "en-US"
+		];
+//		$this->text_biography = [
+//			Lang::EN_US => ""
+//		];
 
 		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_PUBLIC);
 	}
@@ -243,13 +249,18 @@ class Person extends CActiveRecord implements IdentityInterface
 			// the name, email, subject and body attributes are required
 			[['slug', 'categories'], 'required'],
 			[['text_short_description'], 'required', 'on' => [self::SCENARIO_DEVISER_PROFILE_UPDATE]],
-			[['text_biography'], 'required', 'on' => [self::SCENARIO_DEVISER_PROFILE_UPDATE]],
+			[
+				'text_short_description',
+				'app\validators\TranslatableValidator',
+				'on' => self::SCENARIO_DEVISER_PROFILE_UPDATE,
+			],
+			[['text_biography'], 'safe', 'on' => [self::SCENARIO_DEVISER_PROFILE_UPDATE]],
 			[
 				'text_biography',
 				'app\validators\TranslatableValidator',
 				'on' => self::SCENARIO_DEVISER_PROFILE_UPDATE,
 			],
-			[['preferences'], 'required', 'on' => self::SCENARIO_DEVISER_PROFILE_UPDATE],
+			[['preferences'], 'safe', 'on' => self::SCENARIO_DEVISER_PROFILE_UPDATE],
 			[
 				'preferences',
 				'app\validators\EmbedDocValidator',
@@ -629,7 +640,8 @@ class Person extends CActiveRecord implements IdentityInterface
 	 */
 	public function getShortDescription()
 	{
-		return empty($this->text_short_description) ? 'I\'m so happy to be here, always ready.' : $this->text_short_description;
+		$desc = Utils::l($this->text_short_description);
+		return empty($desc) ? 'I\'m so happy to be here, always ready.' : $desc;
 
 	}
 

@@ -39,7 +39,7 @@ $footerMode = array_key_exists('footer_mode', $this->params) ? $this->params['fo
 						<a href="#">Returns &amp; Warranties</a>
 					</li>
 					<li>
-						<a href="#">About us</a>
+						<a href="<?= Url::to(["public/about-us"]) ?>">About us</a>
 					</li>
 				</ul>
 			</div>

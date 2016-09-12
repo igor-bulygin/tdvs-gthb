@@ -37,6 +37,7 @@ use yii\mongodb\Collection;
 class PostmanEmail extends CActiveRecord
 {
 
+	const EMAIL_CONTENT_TYPE_DEVISER_REQUEST_INVITATION = 'deviser-request-invitation';
 	const EMAIL_CONTENT_TYPE_DEVISER_INVITATION = 'deviser-invitation';
 
 	/**
@@ -94,6 +95,7 @@ class PostmanEmail extends CActiveRecord
 	{
 		parent::init();
 
+		$this->from_email = 'info@todevise.com'; // TODO get this from .env file
 		$this->uuid = Uuid::uuid4()->toString();
 		$this->code_charset = 'utf-8';
 
