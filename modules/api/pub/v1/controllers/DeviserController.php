@@ -22,6 +22,19 @@ class DeviserController extends Controller
 {
 
 	/**
+	 * Create a new Deviser account
+	 *
+	 * @return array|void
+	 */
+	public function actionCreate()
+	{
+		$invitation_id = Yii::$app->request->post("invitation");
+
+
+		return ["deviser" => "create " . $invitation_id];
+	}
+
+		/**
 	 * Process the request of new Devisers to join the platform
 	 *
 	 * @return array|void
