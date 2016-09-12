@@ -41,10 +41,15 @@ $this->params['deviser_menu_active_option'] = 'faq';
 									<a class="delete-link pull-right" href="#" ng-click="editFaqCtrl.deleteQuestion($index)">Delete question</a>
 									<div class="edit-faq-panel" style="cursor:move;" dnd-draggable="question" dnd-effect-allowed="move" dnd-moved="editFaqCtrl.update($index)">
 										<div class="faq-language-menu">
-											<select ng-model="question.languageSelected" ng-init="question.languageSelected='en-US'" ng-change="editFaqCtrl.parseQuestion(question)">
+											<!--<select ng-model="question.languageSelected" ng-init="question.languageSelected='en-US'" ng-change="editFaqCtrl.parseQuestion(question)">
 												<option value="" style="display:none;"></option>
 												<option ng-repeat="language in editFaqCtrl.languages" value="{{language.code}}" class="ng-class:{'bg-success': editFaqCtrl.isLanguageOk(language.code, question), 'bg-danger': !editFaqCtrl.isLanguageOk(language.code, question)}">{{question.languageSelected === language.code ? language.name + '&and;' : language.name}}</option>
-											</select>
+											</select>-->
+											<select ng-model="question.languageSelected" class="selectpicker">
+                                              <option value="Mustard">Mustard</option>
+                                              <option value="Ketchup">Ketchup</option>
+                                              <option value="Relish">Relish</option>
+                                            </select>
 											<div class="faq-row">
 												<div class="col-sm-1">
 													<span class="faq-edit-question">Question</span>
