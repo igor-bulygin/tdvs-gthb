@@ -28,6 +28,7 @@
 		"ng-img-crop-full-extended": "0.5.4",
 		"angular-resource": "1.5.2",
 		"angular-drag-and-drop-lists": "1.4.0",
-		"ng-youtube-embed": "0.4.3"
+		"ng-youtube-embed": "0.4.3",
+		"angular-messages": "1.5.8"
 	}
 }

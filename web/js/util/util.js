@@ -4,8 +4,9 @@
 	function UtilService($location) {
 		this.isObject = isObject;
 		this.diff = diff;
-		this.returnDeviserIdFromUrl= returnDeviserIdFromUrl;
-		
+		this.returnDeviserIdFromUrl = returnDeviserIdFromUrl;
+		this.has_error = has_error;
+
 		function returnDeviserIdFromUrl() {
 			var url = $location.absUrl();
 			return url.split('/')[5];
@@ -38,9 +39,15 @@
 				return newObject;
 			}
 		}
+
+		function has_error(form, field) {
+			if (field) {
+				return (form.$submitted || field.$touched) && field.$invalid;
+			}
+		}
 	}
 
-	angular.module('util', [])
+	angular.module('util', ['util.formMessages'])
 		.service('UtilService', UtilService);
 
 }());
