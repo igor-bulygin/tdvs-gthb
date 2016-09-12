@@ -101,38 +101,46 @@ $this->title = 'Become a Deviser - Todevise';
 				<div class="request-invitation-wrapper" ng-controller="becomeDeviserCtrl as becomeDeviserCtrl">
 					<div class="title">Request invitation</div>
 					<div class="tagline">We constantly strive for excellence, and for this reason an invitation is needed to register a deviser.</div>
-					<div class="request-invitation-container">
+					<div class="request-invitation-container black-form">
 						<form name="becomeDeviserCtrl.form" novalidate>
 							<div class="title"><span>Personal info</span></div>
 							<div class="row">
 								<div class="col-sm-6">
-									<input name="name" type="text" class="form-control grey-input" placeholder="NAME" required ng-model="becomeDeviserCtrl.invitation.representative_name">
+								    <label>Name</label>
+									<input name="name" type="text" class="form-control grey-input" required ng-model="becomeDeviserCtrl.invitation.representative_name">
 								</div>
 								<div class="col-sm-6">
-									<input name="brand_name" type="text" class="form-control grey-input" placeholder="BRAND NAME" ng-model="becomeDeviserCtrl.invitation.brand_name">
+								    <label>Brand name</label>
+									<input name="brand_name" type="text" class="form-control grey-input" ng-model="becomeDeviserCtrl.invitation.brand_name">
 								</div>
 								<div class="col-sm-6">
-									<input name="email" type="email" class="form-control grey-input" placeholder="email" required ng-model="becomeDeviserCtrl.invitation.email">
+								    <label>Email</label>
+									<input name="email" type="email" class="form-control grey-input" required ng-model="becomeDeviserCtrl.invitation.email">
 								</div>
 								<div class="col-sm-6">
-									<input name="phone_number" type="text" class="form-control grey-input" placeholder="PHONE NUMBER" ng-model="becomeDeviserCtrl.invitation.phone_number">
+								    <label>Phone number</label>
+									<input name="phone_number" type="text" class="form-control grey-input" ng-model="becomeDeviserCtrl.invitation.phone_number">
 								</div>
 							</div>
 							<div class="title"><span>Your work</span></div>
 							<div class="row">
 								<div class="col-sm-12">
-									<input name="creations_description" type="text" class="form-control grey-input" placeholder="WHAT DO YOU CREATE?" required ng-model="becomeDeviserCtrl.invitation.creations_description">
+								    <label>What do you create?</label>
+									<input name="creations_description" type="text" class="form-control grey-input" required ng-model="becomeDeviserCtrl.invitation.creations_description">
 								</div>
 								<div class="col-sm-12" ng-repeat="url in becomeDeviserCtrl.invitation.urls_portfolio track by $index">
-									<input name="{{'portfolio_' + $index}}" type="url" class="form-control grey-input" placeholder="LINK TO PORTFOLIO" required ng-model="becomeDeviserCtrl.invitation.urls_portfolio[$index]">
+								    <label>Link to portfolio</label>
+									<input name="{{'portfolio_' + $index}}" type="url" class="form-control grey-input" required ng-model="becomeDeviserCtrl.invitation.urls_portfolio[$index]">
 								</div>
 								<a href="" class="add-new" ng-click="becomeDeviserCtrl.addUrlPortfolio()">Add new +</a>
 								<div class="col-sm-12" ng-repeat="url in becomeDeviserCtrl.invitation.urls_video track by $index">
-									<input name="{{'video_' + $index}}" type="url" class="form-control grey-input" placeholder="Link to video" ng-model="becomeDeviserCtrl.invitation.urls_video[$index]">
+								    <label>Link to video</label>
+									<input name="{{'video_' + $index}}" type="url" class="form-control grey-input" ng-model="becomeDeviserCtrl.invitation.urls_video[$index]">
 								</div>
 								<a href="" class="add-new" ng-click="becomeDeviserCtrl.addUrlVideo()">Add new +</a>
 								<div class="col-sm-12">
-									<input name="observations" type="text" class="form-control grey-input" placeholder="Observations" ng-model="becomeDeviserCtrl.invitation.observations">
+								    <label>Observations</label>
+									<input name="observations" type="text" class="form-control grey-input" ng-model="becomeDeviserCtrl.invitation.observations">
 								</div>
 							</div>
 							<button class="btn-red send-btn" ng-click="becomeDeviserCtrl.submitForm(becomeDeviserCtrl.form)">
