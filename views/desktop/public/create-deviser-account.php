@@ -27,7 +27,7 @@ $this->title = 'Create a Deviser account - Todevise';
     <div class="logo">
         <img src="/imgs/logo.png" data-pin-nopin="true">
     </div>
-    <div class="create-deviser-account-container">
+    <div class="create-deviser-account-container black-form">
         <form>
             <div>
                 <div class="row">

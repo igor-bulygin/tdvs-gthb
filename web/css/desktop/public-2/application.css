@@ -1704,7 +1704,7 @@ a, a:hover, a:focus {
     .request-invitation-wrapper .request-invitation-container .title {
       font-family: "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-size: 12px;
-      color: #bfbfbf;
+      color: #ffffff;
       text-transform: uppercase;
       text-align: left;
       position: relative;
@@ -1726,32 +1726,9 @@ a, a:hover, a:focus {
         background-color: #484848;
         padding: 0 15px 0 0; }
     .request-invitation-wrapper .request-invitation-container .add-new {
-      margin: -5px 0 5px 20px;
-      display: block; }
-
-.grey-input {
-  margin: 10px 0;
-  color: #ffffff;
-  background-color: #9a9a9a;
-  border: 1px solid #6b6b6b;
-  letter-spacing: 0.4px;
-  border-radius: 25px 25px 25px 25px !important;
-  -webkit-border-radius: 25px 25px 25px 25px !important;
-  -moz-border-radius: 25px 25px 25px 25px !important; }
-  .grey-input.password {
-    letter-spacing: 5px; }
-  .grey-input::-webkit-input-placeholder {
-    color: #ffffff;
-    text-transform: uppercase; }
-  .grey-input:-moz-placeholder {
-    color: #ffffff;
-    text-transform: uppercase; }
-  .grey-input::-moz-placeholder {
-    color: #ffffff;
-    text-transform: uppercase; }
-  .grey-input:-ms-input-placeholder {
-    color: #ffffff;
-    text-transform: uppercase; }
+      margin: -5px 0 10px 15px;
+      display: block;
+      float: left; }
 
 .no-pad {
   padding: 0; }
@@ -1793,6 +1770,39 @@ a, a:hover, a:focus {
       .create-deviser-account-wrapper .create-deviser-account-container label i {
         padding: 0 5px;
         cursor: pointer; }
+
+.black-form label {
+  font-family: "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  color: #bfbfbf;
+  text-transform: uppercase;
+  margin: 10px 0 0 0; }
+  .black-form label i {
+    padding: 0 5px;
+    cursor: pointer; }
+.black-form .grey-input {
+  margin: 5px 0 10px;
+  color: #ffffff;
+  background-color: #9a9a9a;
+  border: 1px solid #6b6b6b;
+  letter-spacing: 0.4px;
+  border-radius: 25px 25px 25px 25px !important;
+  -webkit-border-radius: 25px 25px 25px 25px !important;
+  -moz-border-radius: 25px 25px 25px 25px !important; }
+  .black-form .grey-input.password {
+    letter-spacing: 5px; }
+  .black-form .grey-input::-webkit-input-placeholder {
+    color: #ffffff;
+    text-transform: uppercase; }
+  .black-form .grey-input:-moz-placeholder {
+    color: #ffffff;
+    text-transform: uppercase; }
+  .black-form .grey-input::-moz-placeholder {
+    color: #ffffff;
+    text-transform: uppercase; }
+  .black-form .grey-input:-ms-input-placeholder {
+    color: #ffffff;
+    text-transform: uppercase; }
 
 .product {
   background-color: #ffffff; }
