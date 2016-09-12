@@ -41,6 +41,7 @@
                 background-color: $almost_black;
                 @include border-radius(0px,0px,0px,0px);
                 @extend %input-border-none;
+                @include border-radius(25px,0px,0px,25px);
                 &:focus{
                     border-right: 0;
                 }
@@ -57,7 +58,7 @@
             font-size: 23px;
             padding: 0 10px;
             border-left: 0;
-            @include border-radius(0px,0px,0px,0px);
+            @include border-radius(0px,25px,25px,0px);
             border-color:$almost_black;
             &:hover, &:active{
                 color: $red;
@@ -85,13 +86,12 @@
     float: left;
 }
 .login-wrapper{
+    padding: 10px 40px 20px;
     width: 290px;
-    padding: 20px;
     top: 59px;
     input{
         background-color: $background_grey;
-        margin-bottom: 10px;
-        @extend %input-border-none;
+        @include border-radius(25px,25px,25px,25px);
     }
     @media (max-width: 768px){
         position: absolute!important;

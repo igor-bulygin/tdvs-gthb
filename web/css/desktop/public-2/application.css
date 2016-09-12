@@ -466,6 +466,39 @@ a, a:hover, a:focus {
 .pad-product {
   padding: 0; }
 
+.black-form label {
+  font-family: "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  color: #bfbfbf;
+  text-transform: uppercase;
+  margin: 10px 0 0 0; }
+  .black-form label i {
+    padding: 0 5px;
+    cursor: pointer; }
+.black-form .grey-input {
+  margin: 5px 0 10px;
+  color: #ffffff;
+  background-color: #9a9a9a;
+  border: 1px solid #6b6b6b;
+  letter-spacing: 0.4px;
+  border-radius: 25px 25px 25px 25px !important;
+  -webkit-border-radius: 25px 25px 25px 25px !important;
+  -moz-border-radius: 25px 25px 25px 25px !important; }
+  .black-form .grey-input.password {
+    letter-spacing: 5px; }
+  .black-form .grey-input::-webkit-input-placeholder {
+    color: #ffffff;
+    text-transform: uppercase; }
+  .black-form .grey-input:-moz-placeholder {
+    color: #ffffff;
+    text-transform: uppercase; }
+  .black-form .grey-input::-moz-placeholder {
+    color: #ffffff;
+    text-transform: uppercase; }
+  .black-form .grey-input:-ms-input-placeholder {
+    color: #ffffff;
+    text-transform: uppercase; }
+
 .showcase figcaption img, .banner-deviser-content .deviser-profile .avatar img, .product-description .product-description-content .work-description-wrapper .comment-wrapper .avatar img, .product-description .product-description-content .work-description-wrapper .comment-user .avatar img {
   border: 1px solid #9a9a9a;
   border-radius: 90px 90px 90px 90px !important;
@@ -490,7 +523,7 @@ a, a:hover, a:focus {
     -webkit-transition-timing-function: ease-out;
     transition-timing-function: ease-out; }
 
-.navbar .searcher-header input, .login-wrapper input, .navbar-searcher.mobile {
+.navbar .searcher-header input, .navbar-searcher.mobile {
   border: none;
   box-shadow: none;
   box-shadow: 0px 0px 0px transparent;
@@ -614,7 +647,10 @@ a, a:hover, a:focus {
     background-color: #484848;
     border-radius: 0px 0px 0px 0px !important;
     -webkit-border-radius: 0px 0px 0px 0px !important;
-    -moz-border-radius: 0px 0px 0px 0px !important; }
+    -moz-border-radius: 0px 0px 0px 0px !important;
+    border-radius: 25px 0px 0px 25px !important;
+    -webkit-border-radius: 25px 0px 0px 25px !important;
+    -moz-border-radius: 25px 0px 0px 25px !important; }
     .navbar .searcher-header input:focus {
       border-right: 0; }
     @media (max-width: 1200px) {
@@ -629,9 +665,9 @@ a, a:hover, a:focus {
     font-size: 23px;
     padding: 0 10px;
     border-left: 0;
-    border-radius: 0px 0px 0px 0px !important;
-    -webkit-border-radius: 0px 0px 0px 0px !important;
-    -moz-border-radius: 0px 0px 0px 0px !important;
+    border-radius: 0px 25px 25px 0px !important;
+    -webkit-border-radius: 0px 25px 25px 0px !important;
+    -moz-border-radius: 0px 25px 25px 0px !important;
     border-color: #484848; }
     .navbar .searcher-header .btn-send:hover, .navbar .searcher-header .btn-send:active {
       color: #F7284B;
@@ -661,12 +697,14 @@ a, a:hover, a:focus {
   float: left; }
 
 .login-wrapper {
+  padding: 10px 40px 20px;
   width: 290px;
-  padding: 20px;
   top: 59px; }
   .login-wrapper input {
     background-color: #e9e9e9;
-    margin-bottom: 10px; }
+    border-radius: 25px 25px 25px 25px !important;
+    -webkit-border-radius: 25px 25px 25px 25px !important;
+    -moz-border-radius: 25px 25px 25px 25px !important; }
   @media (max-width: 768px) {
     .login-wrapper {
       position: absolute !important;
@@ -1761,48 +1799,6 @@ a, a:hover, a:focus {
     padding: 20px 40px;
     max-width: 330px;
     margin: 60px auto 0; }
-    .create-deviser-account-wrapper .create-deviser-account-container label {
-      font-family: "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
-      font-size: 12px;
-      color: #bfbfbf;
-      text-transform: uppercase;
-      margin: 15px 0 0 0; }
-      .create-deviser-account-wrapper .create-deviser-account-container label i {
-        padding: 0 5px;
-        cursor: pointer; }
-
-.black-form label {
-  font-family: "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 12px;
-  color: #bfbfbf;
-  text-transform: uppercase;
-  margin: 10px 0 0 0; }
-  .black-form label i {
-    padding: 0 5px;
-    cursor: pointer; }
-.black-form .grey-input {
-  margin: 5px 0 10px;
-  color: #ffffff;
-  background-color: #9a9a9a;
-  border: 1px solid #6b6b6b;
-  letter-spacing: 0.4px;
-  border-radius: 25px 25px 25px 25px !important;
-  -webkit-border-radius: 25px 25px 25px 25px !important;
-  -moz-border-radius: 25px 25px 25px 25px !important; }
-  .black-form .grey-input.password {
-    letter-spacing: 5px; }
-  .black-form .grey-input::-webkit-input-placeholder {
-    color: #ffffff;
-    text-transform: uppercase; }
-  .black-form .grey-input:-moz-placeholder {
-    color: #ffffff;
-    text-transform: uppercase; }
-  .black-form .grey-input::-moz-placeholder {
-    color: #ffffff;
-    text-transform: uppercase; }
-  .black-form .grey-input:-ms-input-placeholder {
-    color: #ffffff;
-    text-transform: uppercase; }
 
 .product {
   background-color: #ffffff; }
@@ -2382,7 +2378,10 @@ footer {
   footer .input-newsletter input {
     border-color: #bfbfbf;
     color: #9a9a9a;
-    background-color: #1C1919; }
+    background-color: #1C1919;
+    border-radius: 25px 0 0 25px !important;
+    -webkit-border-radius: 25px 0 0 25px !important;
+    -moz-border-radius: 25px 0 0 25px !important; }
     footer .input-newsletter input:focus {
       border-right: 0; }
     @media (max-width: 768px) {
@@ -2393,7 +2392,10 @@ footer {
     background-color: #1C1919;
     font-size: 23px;
     padding: 0 10px;
-    border-left: 0; }
+    border-left: 0;
+    border-radius: 0 25px 25px 0 !important;
+    -webkit-border-radius: 0 25px 25px 0 !important;
+    -moz-border-radius: 0 25px 25px 0 !important; }
     footer .input-newsletter .btn-send:hover, footer .input-newsletter .btn-send:active {
       color: #F7284B;
       border-color: #bfbfbf;

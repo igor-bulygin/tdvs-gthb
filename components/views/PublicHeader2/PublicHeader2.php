@@ -123,20 +123,24 @@ use yii\helpers\Url;
 				<li class="dropdown log">
 					<a href="#" class="dropdown-toggle log" data-toggle="dropdown" role="button" aria-haspopup="true"
 					   aria-expanded="false">Log in</a>
-					<ul class="dropdown-menu login-wrapper">
-						<li>
-							<input type="text" class="form-control" placeholder="Name">
-						</li>
-						<li>
-							<input type="email" class="form-control" placeholder="Email">
-						</li>
-						<li class="forgot-remember">
-							<a href="#">Forgot your password?</a>
-						</li>
-						<li>
-							<button type="button" class="btn btn-default btn-black">Login</button>
-						</li>
-					</ul>
+	
+                        <div class="dropdown-menu login-wrapper black-form">
+                            <div class="row">
+                                <label>Name</label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="row">
+                                <label>Email</label>
+                                <input type="email" class="form-control">
+                            </div>
+                            <div class="forgot-remember">
+                                <a href="#">Forgot your password?</a>
+                            </div>
+                            <div class="row">
+                                <button type="button" class="btn btn-default btn-black">Login</button>
+                            </div>
+                        </div>
+				
 				</li>
 			</ul>
 		</div><!-- /.navbar-collapse -->
