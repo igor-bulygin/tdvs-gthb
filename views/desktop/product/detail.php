@@ -76,7 +76,7 @@ $productImages = $product->getUrlGalleryImages();
 								<i class="ion-ios-star"></i>
 								<i class="ion-ios-star"></i>
 								<i class="ion-ios-star"></i>
-								<i class="ion-ios-star-outline"></i>
+								<i class="ion-ios-star"></i>
 							</span>
 							<span class="number-score">(20)</span>
 						</div>
@@ -267,7 +267,7 @@ $productImages = $product->getUrlGalleryImages();
                                     <i class="ion-ios-star"></i>
                                     <i class="ion-ios-star"></i>
                                     <i class="ion-ios-star"></i>
-                                    <i class="ion-ios-star-outline"></i>
+                                    <i class="ion-ios-star"></i>
                                 </span>
 							<span class="number-score">(20)</span>
 							<div class="by-stars"><span>5 stars</span> <span class="number-score">(15)</span></div>
@@ -284,11 +284,11 @@ $productImages = $product->getUrlGalleryImages();
 								<div class="rate-product">
 									<span>Rate this product</span>
 									<span class="score">
-                                            <i class="ion-ios-star-outline"></i>
-                                            <i class="ion-ios-star-outline"></i>
-                                            <i class="ion-ios-star-outline"></i>
-                                            <i class="ion-ios-star-outline"></i>
-                                            <i class="ion-ios-star-outline"></i>
+                                            <i class="ion-ios-star"></i>
+                                            <i class="ion-ios-star"></i>
+                                            <i class="ion-ios-star"></i>
+                                            <i class="ion-ios-star"></i>
+                                            <i class="ion-ios-star"></i>
                                         </span>
 								</div>
 							</div>
@@ -315,8 +315,8 @@ $productImages = $product->getUrlGalleryImages();
                                             <i class="ion-ios-star"></i>
                                             <i class="ion-ios-star"></i>
                                             <i class="ion-ios-star"></i>
-                                            <i class="ion-ios-star-outline"></i>
-                                            <i class="ion-ios-star-outline"></i>
+                                            <i class="ion-ios-star"></i>
+                                            <i class="ion-ios-star"></i>
                                         </span>
 									<span class="useful">300  member found this comment useful</span>
 								</div>
@@ -344,8 +344,8 @@ $productImages = $product->getUrlGalleryImages();
                                             <i class="ion-ios-star"></i>
                                             <i class="ion-ios-star"></i>
                                             <i class="ion-ios-star"></i>
-                                            <i class="ion-ios-star-outline"></i>
-                                            <i class="ion-ios-star-outline"></i>
+                                            <i class="ion-ios-star"></i>
+                                            <i class="ion-ios-star"></i>
                                         </span>
 									<span class="useful">300  member found this comment useful</span>
 								</div>
@@ -391,8 +391,8 @@ $productImages = $product->getUrlGalleryImages();
                                             <i class="ion-ios-star"></i>
                                             <i class="ion-ios-star"></i>
                                             <i class="ion-ios-star"></i>
-                                            <i class="ion-ios-star-outline"></i>
-                                            <i class="ion-ios-star-outline"></i>
+                                            <i class="ion-ios-star"></i>
+                                            <i class="ion-ios-star"></i>
                                         </span>
 									<span class="useful">300  member found this comment useful</span>
 								</div>
