@@ -3,6 +3,7 @@ namespace app\models;
 
 use app\helpers\Utils;
 use Exception;
+use MongoDate;
 use Yii;
 use app\helpers\CActiveRecord;
 use yii\base\NotSupportedException;
@@ -26,6 +27,7 @@ use yii\web\IdentityInterface;
  * @property array $credentials
  * @property array $preferences
  * @property array $curriculum
+ * @property MongoDate $created_at
  */
 class Person extends CActiveRecord implements IdentityInterface
 {
@@ -93,6 +95,7 @@ class Person extends CActiveRecord implements IdentityInterface
 			'press',
 			'videos',
 			'faq',
+			'created_at',
 		];
 	}
 
@@ -109,6 +112,9 @@ class Person extends CActiveRecord implements IdentityInterface
 	public function init()
 	{
 		parent::init();
+
+		$this->short_id = $this->genValidID(7);
+
 
 		// initialize attributes
 		$this->categories = [];
@@ -245,6 +251,13 @@ class Person extends CActiveRecord implements IdentityInterface
 			$this->credentials = array_merge_recursive($this->credentials, [
 				"auth_key" => Yii::$app->getSecurity()->generateRandomString(128)
 			]);
+		}
+
+		// TODO use SluggableBehavior when name is not in a sub document
+		$this->slug = "my-slug-" . uniqid();
+
+		if (empty($this->created_at)) {
+			$this->created_at = new MongoDate();
 		}
 
 		return parent::beforeSave($insert);

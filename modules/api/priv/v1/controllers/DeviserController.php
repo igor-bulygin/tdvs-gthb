@@ -24,7 +24,7 @@ class DeviserController extends AppPrivateController
 	{
 		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
 		/** @var Person $deviser */
-		$deviser = Yii::$app->user->getIdentity();
+		$deviser = $this->getPerson();
 
 		return $deviser;
 	}
