@@ -21,13 +21,13 @@
 		function submitForm(form) {
 			form.$setSubmitted();
 			if (form.$valid) {
-				console.log(form);
 				vm.invitation.$save().then(function (dataSaved) {
-					console.log(dataSaved);
 					vm.success = true;
+					init();
+					vm.form.$setPristine();
+					vm.form.$setUntouched();
 				}, function (err) {
 					toastr.error("Error saving form!");
-					console.log(err);
 				})
 			} else {
 				toastr.error("Invalid form!");

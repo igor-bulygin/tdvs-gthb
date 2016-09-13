@@ -151,9 +151,14 @@ $this->title = 'Become a Deviser - Todevise';
 									<form-errors field="becomeDeviserCtrl.form.observations" condition="becomeDeviserCtrl.has_error(becomeDeviserCtrl.form, becomeDeviserCtrl.form.observations)"></form-errors>
 								</div>
 							</div>
-							<button class="btn-red send-btn" ng-click="becomeDeviserCtrl.submitForm(becomeDeviserCtrl.form)">
+							<button class="btn-red send-btn" ng-click="becomeDeviserCtrl.submitForm(becomeDeviserCtrl.form)" ng-if="!becomeDeviserCtrl.success">
 								<i class="ion-android-navigate"></i>
 							</button>
+							<div ng-if="becomeDeviserCtrl.success">
+								<span class="glyphicon glyphicon-ok"></span>
+								<p>Your message has been sent successfully.
+									<br>We will contact you shortly.</p>
+							</div>
 						</form>
 					</div>
 				</div>
