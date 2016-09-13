@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(UtilService, deviserDataService, toastr, $location) {
+	function controller(UtilService, deviserDataService, toastr, $location, $window) {
 		var vm = this;
 		vm.submitForm = submitForm;
 		vm.has_error = UtilService.has_error;
@@ -20,7 +20,7 @@
 			if (form.$valid) {
 				form.$setSubmitted();
 				vm.deviser.$save().then(function (dataSaved) {
-					//ok
+					$window.location.href= '/deviser/' + dataSaved.slug + '/' + dataSaved.id + '/about/edit';
 				}, function (err) {
 					toastr.error("Error saving form!");
 				})
@@ -30,7 +30,6 @@
 		}
 
 	}
-
 
 	angular
 		.module('todevise', ['api', 'util', 'toastr'])
