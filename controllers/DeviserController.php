@@ -261,7 +261,7 @@ class DeviserController extends CController {
 		$deviser = Person::findOneSerialized($deviser_id);
 
 		$this->layout = '/desktop/public-2.php';
-		return $this->render("about", [
+		return $this->render("about-view", [
 			'deviser' => $deviser,
 		]);
 	}
