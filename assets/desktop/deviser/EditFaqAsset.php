@@ -17,6 +17,7 @@ class EditFaqAsset extends AssetBundle {
 		'app\assets\libs\angularBootstrapAsset',
 		'app\assets\api\ApiAsset',
 		'app\assets\libs\angularDragAndDropAsset',
-		'app\assets\libs\utilAsset'
+		'app\assets\libs\utilAsset',
+		'app\assets\libs\nyaBootstrapSelectAsset'
 	];
 }

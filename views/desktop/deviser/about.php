@@ -33,10 +33,10 @@ $this->params['deviser'] = $deviser;
 				<?= DeviserMenu::widget() ?>
 			</div>
 			<div class="col-md-10 about-bg">
-				<div class="col-md-6 pad-about">
+				<div class="col-md-5 pad-about">
 					<div class="about-wrapper">
 						<div class="about-container">
-							<div class="title">Abo<br>ut</div>
+							<!--<div class="title">Abo<br>ut</div>-->
 							<div class="name-location-wrapper">
 								<div class="name">
 									<?= $deviser->getBrandName() ?>
@@ -57,7 +57,7 @@ $this->params['deviser'] = $deviser;
 						</div>
 					</div>
 				</div>
-				<div class="col-md-6 pad-about about-grid">
+				<div class="col-md-7 pad-about about-grid">
 					<div class="col-xs-12 pad-about item">
 						<img class="grid-image" src="/imgs/photo-grid-about-1.jpg">
 					</div>

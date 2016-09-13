@@ -39,7 +39,10 @@ $this->params['deviser_menu_active_option'] = 'faq';
 				<div class="faq-wrapper">
 					<a class="edit-faq-btn" href="<?= Url::to(["deviser/faq-edit", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id])?>">+ ADD / EDIT QUESTIONS</a>
 					<?php if (count($faq) == 0) { ?>
-						<div>You don't have any question!</div>
+				    <div class="empty-wrapper">
+                        <img class="sad-face" src="/imgs/sad-face.svg">
+                        <p class="no-video-text">You don't have any press images!</p>
+                    </div>
 					<?php } else { ?>
 
 					<div id="accordion" role="tablist" aria-multiselectable="true">

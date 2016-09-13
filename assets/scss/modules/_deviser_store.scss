@@ -3,44 +3,6 @@
 // ==========================================================================
 .store{
     background-color: $background-grey;
-    .menu-store{
-        padding: 40px 0;
-        ul{
-            margin: 20px 0;
-            li{
-                a{
-                    color: $darker_grey;
-                    text-transform: uppercase;
-                    font: bold 16px $font-family--primary;
-                    padding: 3px 0 3px 15px;
-                    display: block;
-                    &:hover,&.active{
-                        color: $black;
-                        background-color: $light_grey;
-                    }
-                    &.active{
-                        color: $red;
-                    }
-                }
-                ul.submenu-store{
-                    margin: 10px 30px 0 15px;
-                    padding: 0 0 20px 0;
-                    border-bottom: 1px solid $dark_grey;
-                    li{
-                        padding: 2px 0;
-                        a{
-                            text-transform: capitalize;
-                            font: normal 14px $font-family--secondary;
-                            &:hover{
-                                color: $red;
-                                background-color: transparent;
-                            }
-                        }
-                    }
-                }
-            }       
-        }
-    }
     .content-store{
         padding: 40px 0;
         .cathegory-wrapper{

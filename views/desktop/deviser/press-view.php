@@ -30,7 +30,10 @@ $this->params['deviser_menu_active_option'] = 'press';
 			</div>
 			<div class="col-md-10">
 				<?php if (count($press) == 0) { ?>
-				<div class="no-press">You don't have any press images!</div>
+				<div class="empty-wrapper">
+                    <img class="sad-face" src="/imgs/sad-face.svg">
+                    <p class="no-video-text">You don't have any press images!</p>
+                </div>
 				<?php } else { ?>
 				<div class="mesonry-row press-3">
 					<?php foreach ($press as $item) { ?>
