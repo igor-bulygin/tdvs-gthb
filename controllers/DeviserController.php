@@ -234,8 +234,8 @@ class DeviserController extends CController {
 
 	public function actionStore($slug, $deviser_id)
 	{
-		// find the deviser
-		$deviser = Person::findOne(["short_id" => $deviser_id]);
+		// get the category object
+		$deviser = Person::findOneSerialized($deviser_id);
 		// categories of all products
 		$categories = $deviser->getCategoriesOfProducts();
 		/** @var Category $selectedCategory */
@@ -258,7 +258,7 @@ class DeviserController extends CController {
 	public function actionAbout($slug, $deviser_id)
 	{
 		// get the category object
-		$deviser = Person::findOne(["short_id" => $deviser_id]);
+		$deviser = Person::findOneSerialized($deviser_id);
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("about", [
@@ -266,10 +266,21 @@ class DeviserController extends CController {
 		]);
 	}
 
+	public function actionAboutEdit($slug, $deviser_id)
+	{
+		// get the category object
+		$deviser = Person::findOneSerialized($deviser_id);
+
+		$this->layout = '/desktop/public-2.php';
+		return $this->render("about-edit", [
+			'deviser' => $deviser,
+		]);
+	}
+
 	public function actionPress($slug, $deviser_id)
 	{
 		// get the category object
-		$deviser = Person::findOne(["short_id" => $deviser_id]);
+		$deviser = Person::findOneSerialized($deviser_id);
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("press-view", [
@@ -281,7 +292,7 @@ class DeviserController extends CController {
 	public function actionPressEdit($slug, $deviser_id)
 	{
 		// get the category object
-		$deviser = Person::findOne(["short_id" => $deviser_id]);
+		$deviser = Person::findOneSerialized($deviser_id);
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("press-edit", [
@@ -292,7 +303,7 @@ class DeviserController extends CController {
 	public function actionVideos($slug, $deviser_id)
 	{
 		// get the category object
-		$deviser = Person::findOne(["short_id" => $deviser_id]);
+		$deviser = Person::findOneSerialized($deviser_id);
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("videos-view", [
@@ -304,7 +315,7 @@ class DeviserController extends CController {
 	public function actionVideosEdit($slug, $deviser_id)
 	{
 		// get the category object
-		$deviser = Person::findOne(["short_id" => $deviser_id]);
+		$deviser = Person::findOneSerialized($deviser_id);
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("videos-edit", [
@@ -327,7 +338,7 @@ class DeviserController extends CController {
 	public function actionFaqEdit($slug, $deviser_id)
 	{
 		// get the category object
-		$deviser = Person::findOne(["short_id" => $deviser_id]);
+		$deviser = Person::findOneSerialized($deviser_id);
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("faq-edit", [

@@ -64,6 +64,9 @@ class DeviserController extends AppPrivateController
 
 		// check that is a valid scenario for this controller
 		if (!in_array($scenario, [
+			Person::SCENARIO_DEVISER_CREATE_DRAFT,
+			Person::SCENARIO_DEVISER_UPDATE_DRAFT,
+			Person::SCENARIO_DEVISER_PUBLISH_PROFILE,
 			Person::SCENARIO_DEVISER_PROFILE_UPDATE,
 			Person::SCENARIO_DEVISER_PRESS_UPDATE,
 			Person::SCENARIO_DEVISER_VIDEOS_UPDATE,
