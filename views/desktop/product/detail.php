@@ -125,7 +125,7 @@ $productImages = $product->getUrlGalleryImages();
 													</select>
 												</div>
 												<div class="col-sm-3">
-													<span class="tax">is €4.5</span>
+													is <span class="tax">€4.5</span>
 												</div>
 											</div>
 										</form>

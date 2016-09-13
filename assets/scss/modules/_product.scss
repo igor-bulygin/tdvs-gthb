@@ -19,7 +19,7 @@
                 font: 40px $font-family--name;
                 text-transform: uppercase;
                 letter-spacing: 1.5px;
-                display: inline-block;
+                display: block;
                 line-height: 39px;
             }
             .score{
@@ -83,6 +83,7 @@
                     margin: 0 5px 6px 0;
                     height: 23px;
                     min-width: 23px;
+                    font-weight: 200;
                     &:hover{
                         background-color: $white;
                     }
@@ -98,7 +99,7 @@
                         }
                     }
                     input[type="radio"] + label span {
-                         background-color: $light-grey;
+                         background-color: #cecece;
                     }
                     input[type="radio"]:checked + label span{
                          background-color: $white;

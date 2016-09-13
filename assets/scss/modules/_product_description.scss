@@ -7,10 +7,10 @@
         border-bottom: 0;
         border-top: 1px solid $light_grey;
         li{
-            background-color: $light_grey;
-            border-left: solid 1px $light_grey;
-            border-right: solid 1px $light_grey;
-            border-bottom: solid 1px $light_grey;
+            background-color: #cecece;
+            border-left: solid 1px #cecece;
+            border-right: solid 1px #cecece;
+            border-bottom: solid 1px #cecece;
             margin-right: 3px;
             &.active{
                 background-color: $dark_grey;

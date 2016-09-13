@@ -314,6 +314,9 @@ a, a:hover, a:focus {
   -webkit-box-shadow: 0 0 0 transparent;
   box-shadow: 0 0 0 transparent; }
 
+.btn-default:hover {
+  background-color: #cecece; }
+
 /* BOOTSTRAP SELECT TUNNING */
 .bootstrap-select > .dropdown-toggle.bs-placeholder, .bootstrap-select > .dropdown-toggle.bs-placeholder:active, .bootstrap-select > .dropdown-toggle.bs-placeholder:focus, .bootstrap-select > .dropdown-toggle.bs-placeholder:hover {
   color: #484848;
@@ -353,7 +356,7 @@ a, a:hover, a:focus {
 .dropdown-menu > li > a:focus, .dropdown-menu > li > a:hover {
   color: #4a4a4a;
   text-decoration: none;
-  background-color: #d7d7d7; }
+  background-color: #cecece; }
 
 .open > .dropdown-toggle.btn-default {
   color: #333;
@@ -1850,7 +1853,7 @@ a, a:hover, a:focus {
         font: 40px "Univers Thin Ultra Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
         text-transform: uppercase;
         letter-spacing: 1.5px;
-        display: inline-block;
+        display: block;
         line-height: 39px; }
       .product .product-data-wrapper .product-data .score i {
         color: #F7284B; }
@@ -1894,7 +1897,8 @@ a, a:hover, a:focus {
         float: left;
         margin: 0 5px 6px 0;
         height: 23px;
-        min-width: 23px; }
+        min-width: 23px;
+        font-weight: 200; }
         .product .product-data-wrapper .product-data .row-size .size-box:hover {
           background-color: #ffffff; }
         .product .product-data-wrapper .product-data .row-size .size-box input[type="radio"] {
@@ -1905,7 +1909,7 @@ a, a:hover, a:focus {
           .product .product-data-wrapper .product-data .row-size .size-box input[type="radio"] + label span:hover {
             background-color: #ffffff; }
         .product .product-data-wrapper .product-data .row-size .size-box input[type="radio"] + label span {
-          background-color: #bfbfbf; }
+          background-color: #cecece; }
         .product .product-data-wrapper .product-data .row-size .size-box input[type="radio"]:checked + label span {
           background-color: #ffffff; }
       .product .product-data-wrapper .product-data .row-size .color-box {
@@ -2001,10 +2005,10 @@ a, a:hover, a:focus {
     border-bottom: 0;
     border-top: 1px solid #bfbfbf; }
     .product-description .product-tabs li {
-      background-color: #bfbfbf;
-      border-left: solid 1px #bfbfbf;
-      border-right: solid 1px #bfbfbf;
-      border-bottom: solid 1px #bfbfbf;
+      background-color: #cecece;
+      border-left: solid 1px #cecece;
+      border-right: solid 1px #cecece;
+      border-bottom: solid 1px #cecece;
       margin-right: 3px; }
       .product-description .product-tabs li.active {
         background-color: #9a9a9a;
