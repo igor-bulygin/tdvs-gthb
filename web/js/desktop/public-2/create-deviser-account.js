@@ -1,13 +1,15 @@
 (function () {
 	"use strict";
 
-	function controller(UtilService, deviserDataService, toastr) {
+	function controller(UtilService, deviserDataService, toastr, $location) {
 		var vm = this;
 		vm.submitForm = submitForm;
 		vm.has_error = UtilService.has_error;
 
 		function init() {
 			vm.deviser = new deviserDataService.Devisers;
+			//get invitation from url
+			vm.deviser.invitation_id = $location.absUrl().split('=')[1];
 		}
 
 		init();
