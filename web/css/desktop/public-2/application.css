@@ -847,6 +847,9 @@ a, a:hover, a:focus {
 .carousel-inner > .item > a > img, .carousel-inner > .item > img {
   width: 100%; }
 
+.home-carousel {
+  max-height: 380px; }
+
 .sub-banner {
   background-color: #ffffff;
   padding: 9px 0 20px;
@@ -1340,6 +1343,11 @@ a, a:hover, a:focus {
 .btn-done {
   width: 180px;
   margin: 0 auto;
+  display: block; }
+
+.sad-face {
+  width: 50px;
+  margin: 20px auto;
   display: block; }
 
 .banner-deviser {

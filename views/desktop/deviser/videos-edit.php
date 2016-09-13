@@ -39,6 +39,7 @@ $this->params['deviser_menu_active_option'] = 'videos';
 								</div>
 							</form>
 							<div ng-if="editVideosCtrl.deviser.videos.length === 0" class="text-center" ng-cloak>
+							    <img class="sad-face" src="/imgs/sad-face.svg">
 								<p class="no-video-text">You have no videos</p>
 							</div>
 							<div ng-repeat="video in editVideosCtrl.deviser.videos" ng-cloak dnd-list="editVideosCtrl.deviser.videos">

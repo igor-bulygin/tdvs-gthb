@@ -28,7 +28,10 @@ $this->params['deviser_menu_active_option'] = 'press';
 				<?= DeviserMenu::widget() ?>
 			</div>
 			<div class="col-md-10">
-			    <div ng-if="editPressCtrl.images === 0">You don't have any press images!</div>
+			    <div ng-if="editPressCtrl.images === 0" class="faq-edit-empty">
+                      <img class="sad-face" src="/imgs/sad-face.svg">
+                       <p>You don't have any press images!</p>
+                </div>
                         
 				<div class="mesonry-row press-3">
                        <form name="editPressCtrl.form">
