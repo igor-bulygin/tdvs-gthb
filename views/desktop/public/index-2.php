@@ -32,7 +32,7 @@ $this->params['footer_mode'] = 'collapsed';
 				<li data-target="#carousel-example-generic" data-slide-to="<?= $i ?>" class="<?= ($banner["active"]) ? 'active' : '' ?>"></li>
 			<?php } ?>
 		</ol>
-		<div class="carousel-inner" role="listbox">
+		<div class="carousel-inner home-carousel" role="listbox">
 			<?php foreach ($banners as $i => $banner) { ?>
 				<div class="item <?= ($banner["active"]) ? 'active' : '' ?>">
 					<img src="<?= $banner["img"] ?>" alt="<?= $banner["alt"] ?>" title="">
