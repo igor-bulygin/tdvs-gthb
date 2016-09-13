@@ -1062,8 +1062,8 @@ a, a:hover, a:focus {
     .showcase figcaption img {
       opacity: 1;
       filter: alpha(opacity=100);
-      width: 70px;
-      height: 70px;
+      width: 50px;
+      height: 50px;
       border: 1px solid #1C1919;
       margin-bottom: 5px; }
       @media (max-width: 768px) {
@@ -1077,7 +1077,7 @@ a, a:hover, a:focus {
       display: block;
       white-space: nowrap; }
       .showcase figcaption span.name {
-        font: 18px "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+        font: 16px "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif; }
       .showcase figcaption span.location {
         font: 12px "Playfair Display", Georgia, serif;
         color: #484848; }
