@@ -270,18 +270,16 @@ class PublicController extends CController
 		$query = new ActiveQuery(Product::className());
 		$query->where(['categories' => $category->getShortIds()]);
 		// TODO improve random works
-		$query->limit(300)->offset(rand(1, 12));
+		$query->limit(180)->offset(rand(1, 12));
 		$works = $query->all();
 
 		// divide then in blocks to be rendered in bottom section
 		$moreWork = [];
 		for ($i = 1; $i <= 19; $i++) {
-			$start = $i + 15;
-			$moreWork[] = [
-				[
-					"twelve" => array_slice($works, $start, 12),
-					"three" => array_slice($works, ($start + 12), 3),
-				]
+			$start = $i * 15;
+			$moreWork[] =  [
+				"twelve" => array_slice($works, $start, 12),
+				"three" => array_slice($works, ($start + 12), 3),
 			];
 		}
 
@@ -289,9 +287,10 @@ class PublicController extends CController
 		return $this->render("index-2", [
 			'banners' => $banners,
 			'devisers' => [
-				array_slice($devisers, 0, 4),
-				array_slice($devisers, 4, 4),
-				array_slice($devisers, 8, 4),
+				array_slice($devisers, 0, 5),
+				array_slice($devisers, 5, 5),
+				array_slice($devisers, 10, 5),
+				array_slice($devisers, 15, 5),
 			],
 			'works12' => array_slice($works, 0, 12),
 			'works3' => array_slice($works, 12, 3),
