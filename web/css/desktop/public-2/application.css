@@ -1039,7 +1039,8 @@ a, a:hover, a:focus {
   overflow: hidden;
   width: 100%;
   text-align: center;
-  cursor: pointer; }
+  cursor: pointer;
+  margin: 1em 0; }
   .showcase:hover .btn-follow {
     visibility: visible;
     opacity: 1;
