@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Invitation;
 use Yii;
 use app\models\Tag;
 use yii\helpers\Json;
@@ -100,6 +101,24 @@ class AdminController extends CController {
 		];
 
 		return Yii::$app->request->isAjax ? $this->renderPartial("admins", $data) : $this->render("admins", $data);
+	}
+
+	public function actionInvitations($filters = null) {
+//		$filters = Utils::stringToFilter($filters);
+//		$filters["type"]['$in'] = [Person::ADMIN];
+
+		$invitations = new ActiveDataProvider([
+			'query' => Invitation::find()->orderBy(["created_at" => SORT_DESC]),
+			'pagination' => [
+				'pageSize' => 15,
+			],
+		]);
+
+		$data = [
+			'invitations' => $invitations
+		];
+
+		return Yii::$app->request->isAjax ? $this->renderPartial("invitations", $data) : $this->render("invitations", $data);
 	}
 
 	public function actionTags($filters = null) {

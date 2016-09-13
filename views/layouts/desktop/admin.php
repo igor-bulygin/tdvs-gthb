@@ -101,6 +101,17 @@ use lajax\languagepicker\widgets\LanguagePicker;
 													Utils::compareURL('admin/admins-member')
 												)
 											],
+											[
+												'options' => [
+													'class' => 'item-submenu funiv fs0-929',
+												],
+												'label' => 'Invitations',
+												'url' => Url::toRoute(['admin/invitations']),
+												'active' => (
+													Utils::compareURL('admin/invitations') ||
+													Utils::compareURL('admin/invitation')
+												)
+											],
 										]
 									],
 									[
