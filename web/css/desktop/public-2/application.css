@@ -454,6 +454,41 @@ a, a:hover, a:focus {
         color: #F7284B;
         border-bottom: 1px solid #F7284B; }
 
+.menu-store {
+  padding: 40px 0; }
+  .menu-store ul {
+    margin: 20px 0; }
+    .menu-store ul li {
+      margin: 5px 0; }
+      .menu-store ul li a {
+        color: #6b6b6b;
+        text-transform: uppercase;
+        font: bold 16px "Univers Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        padding: 3px 0 3px 15px;
+        display: block;
+        border: 1px solid transparent; }
+        .menu-store ul li a.active {
+          color: #1C1919;
+          background-color: #bfbfbf;
+          border: 1px solid transparent; }
+        .menu-store ul li a:hover {
+          border: 1px solid #bfbfbf; }
+        .menu-store ul li a.active {
+          color: #F7284B; }
+      .menu-store ul li ul.submenu-store {
+        margin: 10px 30px 0 15px;
+        padding: 0 0 20px 0;
+        border-bottom: 1px solid #9a9a9a; }
+        .menu-store ul li ul.submenu-store li {
+          padding: 2px 0; }
+          .menu-store ul li ul.submenu-store li a {
+            text-transform: capitalize;
+            font: normal 14px "Univers Condensed Light", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+            .menu-store ul li ul.submenu-store li a:hover {
+              color: #F7284B;
+              background-color: transparent;
+              border: 1px solid transparent; }
+
 .col-xs-15,
 .col-sm-15,
 .col-md-15,
@@ -1416,40 +1451,6 @@ a, a:hover, a:focus {
 
 .store {
   background-color: #e9e9e9; }
-  .store .menu-store {
-    padding: 40px 0; }
-    .store .menu-store ul {
-      margin: 20px 0; }
-      .store .menu-store ul li {
-        margin: 5px 0; }
-        .store .menu-store ul li a {
-          color: #6b6b6b;
-          text-transform: uppercase;
-          font: bold 16px "Univers Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
-          padding: 3px 0 3px 15px;
-          display: block;
-          border: 1px solid transparent; }
-          .store .menu-store ul li a.active {
-            color: #1C1919;
-            background-color: #bfbfbf;
-            border: 1px solid transparent; }
-          .store .menu-store ul li a:hover {
-            border: 1px solid #bfbfbf; }
-          .store .menu-store ul li a.active {
-            color: #F7284B; }
-        .store .menu-store ul li ul.submenu-store {
-          margin: 10px 30px 0 15px;
-          padding: 0 0 20px 0;
-          border-bottom: 1px solid #9a9a9a; }
-          .store .menu-store ul li ul.submenu-store li {
-            padding: 2px 0; }
-            .store .menu-store ul li ul.submenu-store li a {
-              text-transform: capitalize;
-              font: normal 14px "Univers Condensed Light", "Helvetica Neue", Helvetica, Arial, sans-serif; }
-              .store .menu-store ul li ul.submenu-store li a:hover {
-                color: #F7284B;
-                background-color: transparent;
-                border: 1px solid transparent; }
   .store .content-store {
     padding: 40px 0; }
     .store .content-store .cathegory-wrapper {
