@@ -169,8 +169,6 @@ $config = [
 				// Request become a Deviser
 				'/become-a-deviser' => 'public/become-deviser',
 				'/create-deviser-account' => 'public/create-deviser-account',
-				'/create-deviser-account/<uuid:[^/.]*?>' => 'public/create-deviser-account',
-
 
 				//Links for a cart listing
 				'cart/' => 'public/cart',
@@ -186,11 +184,13 @@ $config = [
 				'faq/' => 'public/faq',
 
 				//Links for contact
-				'contact/' => 'public/contact',
+				'about-us' => 'public/about-us',
 
 				// Postman (temp urls)
 				'/postman/emails' => 'postman/index',
 				'/postman/emails/<uuid:[^/.]*?>' => 'postman/email-view',
+				'/postman/mockups/deviser-request-invitation' => 'postman/mockup-deviser-request-invitation-view',
+				'/postman/mockups/deviser-invitation' => 'postman/mockup-deviser-invitation-view',
 
 
 				//Links for deviser profile
@@ -244,6 +244,7 @@ $config = [
 				// API routing (public)
 				'GET api3/pub/v1/products/<id:[^/.]*?>' => 'api3/pub/v1/product/view', // override "view" action to accept alphanumeric ids
 				'POST api3/pub/v1/devisers/invitation-requests' => 'api3/pub/v1/deviser/invitation-requests-post',
+				'POST api3/pub/v1/devisers' => 'api3/pub/v1/deviser/create',
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/product'],
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/faq'],
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/term'],

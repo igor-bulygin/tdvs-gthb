@@ -1,7 +1,7 @@
+
 <?php
 use app\modules\api\pub\v1\forms\BecomeDeviserForm;
 use yii\helpers\Html;
-
 /** @var $this \yii\web\View view component instance */
 /** @var BecomeDeviserForm $form */
 ?>
@@ -16,7 +16,7 @@ use yii\helpers\Html;
 <div><p>Portfolio:</p>
 	<ul>
 		<?php foreach($form->urls_portfolio as $url){ ?>
-		<li><?=$url?></li>
+			<li><?=$url?></li>
 		<?php } ?>
 	</ul>
 </div>

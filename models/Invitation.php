@@ -197,7 +197,6 @@ class Invitation extends CActiveRecord
 	{
 		$email = new PostmanEmail();
 		$email->code_email_content_type = PostmanEmail::EMAIL_CONTENT_TYPE_DEVISER_INVITATION;
-		$email->from_email = 'info@todevise.com'; // TODO get this from .env file
 		$email->to_email = $this->email;
 		$email->subject = $this->getEmailSubject();
 
@@ -244,7 +243,7 @@ class Invitation extends CActiveRecord
 	 */
 	private function getEmailView()
 	{
-		return '@app/mail/deviser/invitation-become';
+		return '@app/mail/deviser/invitation';
 	}
 
 }

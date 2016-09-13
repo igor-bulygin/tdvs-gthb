@@ -2,6 +2,7 @@
 namespace app\controllers;
 
 use app\models\PostmanEmail;
+use app\models\PostmanEmailAction;
 use Yii;
 use app\models\Tag;
 use app\models\Lang;
@@ -33,6 +34,21 @@ class PostmanController extends CController {
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("email-list", [
 			'emails' => $emails,
+		]);
+	}
+
+	public function actionMockupDeviserRequestInvitationView()
+	{
+		$this->layout = '/desktop/empty-layout.php';
+		return $this->render("@app/mail/deviser/request-invitation");
+	}
+
+	public function actionMockupDeviserInvitationView()
+	{
+		$actionAccept = new PostmanEmailAction();
+		$this->layout = '/desktop/empty-layout.php';
+		return $this->render("@app/mail/deviser/invitation", [
+			"actionAccept" => $actionAccept,
 		]);
 	}
 

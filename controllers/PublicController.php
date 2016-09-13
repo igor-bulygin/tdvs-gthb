@@ -528,12 +528,10 @@ class PublicController extends CController
 		]);
 	}
 
-	public function actionAbout()
+	public function actionAboutUs()
 	{
-
-		return $this->render("about", [
-			'test' => 'this is a test text for about'
-		]);
+		$this->layout = '/desktop/public-2.php';
+		return $this->render("about-us");
 	}
 
 

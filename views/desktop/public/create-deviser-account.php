@@ -37,25 +37,27 @@ $this->title = 'Create a Deviser account - Todevise';
 					</div>
 					<div class="row">
 						<label>Brand name</label>
-						<input type="text" class="form-control grey-input" name="brand_name" ng-model="createDeviserCtrl.deviser.brand_name">
+						<input type="text" class="form-control grey-input" name="brand_name" ng-model="createDeviserCtrl.deviser.brand_name" required>
+						<form-errors field="createDeviserCtrl.form.brand_name" condition="createDeviserCtrl.has_error(createDeviserCtrl.form, createDeviserCtrl.form.brand_name)"></form-errors>
 					</div>
 					<div class="row">
 						<label>Representative name <i class="ion-information-circled info"></i></label>
 						<input type="text" class="form-control grey-input" name="representative_name" ng-model="createDeviserCtrl.deviser.representative_name">
+						<form-errors field="createDeviserCtrl.form.representative_name" condition="createDeviserCtrl.has_error(createDeviserCtrl.form, createDeviserCtrl.form.representative_name)"></form-errors>
 					</div>
 					<div class="row">
 						<label>Set your password</label>
-						<input type="password" id="email" class="form-control grey-input password" name="password" ng-model="createDeviserCtrl.deviser.password">
+						<input type="password" id="email" class="form-control grey-input password" name="password" ng-model="createDeviserCtrl.deviser.password" required>
+						<form-errors field="createDeviserCtrl.form.password" condition="createDeviserCtrl.has_error(createDeviserCtrl.form, createDeviserCtrl.form.password)"></form-errors>
 					</div>
 					<div class="row">
 						<label>Repeat password</label>
-						<input type="password" id="email" class="form-control grey-input password" name="confirm_password" ng-model="createDeviserCtrl.password_confirm">
+						<input type="password" id="email" class="form-control grey-input password" name="password_confirm" ng-model="createDeviserCtrl.password_confirm" required>
 					</div>
 				</div>
 				<button class="btn-red send-btn" ng-click="createDeviserCtrl.submit(createDeviserCtrl.form)">
 					<i class="ion-android-navigate"></i>
 				</button>
-				<div><pre>{{createDeviserCtrl.form.email | json}}</pre></div>
 			</form>
 		</div>
 	</div>
