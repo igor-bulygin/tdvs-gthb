@@ -136,7 +136,7 @@ $this->params['footer_mode'] = 'collapsed';
 						<?php foreach ($devisers as $i => $group) { ?>
 					<div class="item <?= ($i==0) ? 'active' : '' ?>">
 						<?php foreach ($group as $i => $deviser) { ?>
-						<div class="col-md-3 col-sm-3 col-xs-6 pad-showcase">
+						<div class="col-md-15 col-sm-15 col-xs-6 pad-showcase">
 								<a href="<?= Url::to(["deviser/store", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id])?>">
 								<figure class="showcase">
 								<button class="btn btn-default btn-follow"><i class="ion-star"></i><span>Follow</span>
