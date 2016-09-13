@@ -6,6 +6,7 @@ use Exception;
 use Yii;
 use app\helpers\CActiveRecord;
 use yii\base\NotSupportedException;
+use yii\behaviors\SluggableBehavior;
 use yii\mongodb\Collection;
 use yii\web\IdentityInterface;
 
@@ -118,6 +119,16 @@ class Person extends CActiveRecord implements IdentityInterface
 		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_PUBLIC);
 	}
 
+//	public function behaviors()
+//	{
+//		return [
+//			[
+//				'class' => SluggableBehavior::className(),
+//				'attribute' => 'brand_name',
+//				// 'slugAttribute' => 'slug',
+//			],
+//		];
+//	}
 
 	/**
 	 * Get one entity serialized
@@ -249,7 +260,8 @@ class Person extends CActiveRecord implements IdentityInterface
 
 		return [
 			// the name, email, subject and body attributes are required
-			[['personal_info', 'credentials'], 'required', 'on' => [self::SCENARIO_DEVISER_CREATE_DRAFT]],
+//			[['personal_info', 'credentials'], 'required', 'on' => [self::SCENARIO_DEVISER_CREATE_DRAFT]],
+			[['personal_info', 'credentials'], 'safe', 'on' => [self::SCENARIO_DEVISER_CREATE_DRAFT]],
 			[['slug', 'categories'], 'required', 'on' => [self::SCENARIO_DEVISER_PROFILE_UPDATE]],
 			[['text_short_description'], 'required', 'on' => [self::SCENARIO_DEVISER_PROFILE_UPDATE]],
 			[

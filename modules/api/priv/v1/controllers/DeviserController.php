@@ -17,20 +17,8 @@ use app\models\Faq;
 use yii\web\UploadedFile;
 use yii\web\User;
 
-class DeviserController extends Controller
+class DeviserController extends AppPrivateController
 {
-
-	public function init()
-	{
-		parent::init();
-
-		// TODO: retrieve current identity from one of the available authentication methods in Yii
-		$deviser_id = Yii::$app->request->isGet ? Yii::$app->request->get("deviser_id") : Yii::$app->request->post("deviser_id");
-		if (empty($deviser_id)) {
-			throw new BadRequestHttpException('Deviser not specified');
-		}
-		Yii::$app->user->login(Person::findOne(["short_id" => $deviser_id]));
-	}
 
 	public function actionView()
 	{
@@ -44,7 +32,7 @@ class DeviserController extends Controller
 	public function actionUpdate()
 	{
 		/** @var Person $deviser */
-		$deviser = Yii::$app->user->getIdentity();
+		$deviser = $this->getPerson();
 
 //        $data = Yii::$app->request->post();
 //        print_r($data);

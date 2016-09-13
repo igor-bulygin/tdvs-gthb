@@ -12,28 +12,21 @@ use yii\filters\ContentNegotiator;
 
 use app\models\Faq;
 
-class UserController extends Controller {
+class UserController extends AppPrivateController
+{
 
-    public function init() {
-        parent::init();
+	public function actionView()
+	{
+		/** @var Person $user */
+		$user = $this->getPerson();
 
-	    // TODO: retrieve current identity from one of the available authentication methods in Yii
-	    $deviser_id = Yii::$app->request->isGet ? Yii::$app->request->get("deviser_id") : Yii::$app->request->post("deviser_id");
-	    Yii::$app->user->login(Person::findOne(["short_id" => $deviser_id]));
-    }
+		return $user;
+	}
 
-    public function actionView()
-    {
-        /** @var Person $user */
-        $user = \Yii::$app->user->getIdentity();
-
-        return $user;
-    }
-
-    public function actionUpdate()
-    {
-        return ["action" => "update (user)"];
-    }
+	public function actionUpdate()
+	{
+		return ["action" => "update (user)"];
+	}
 
 }
 
