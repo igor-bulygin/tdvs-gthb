@@ -3,7 +3,7 @@
 // ==========================================================================
 .about-wrapper{
     width: 100%;
-    padding: 60px;
+    padding: 40px 60px;
     .about-container{
         max-width: 300px;
         margin: 0 auto;
@@ -21,7 +21,6 @@
         .name{
             @extend %ultra-condensed-white-title;
             font-size: 54px;
-            margin: 30px 0 0 0;
         }
         .location{
             @extend %white-text;
@@ -50,7 +49,7 @@
     padding: 0;
 }
 .about-bg{
-    background-color: $dark_red;
+    background-color: $black;
     padding: 0;
 }
 .about-grid{

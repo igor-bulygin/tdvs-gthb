@@ -971,7 +971,7 @@ a, a:hover, a:focus {
     opacity: 1;
     filter: alpha(opacity=100); }
   .grid figure img {
-    width: 100%;
+    width: 101%;
     position: relative;
     opacity: 0.95;
     filter: alpha(opacity=95); }
@@ -1487,7 +1487,7 @@ a, a:hover, a:focus {
 
 .about-wrapper {
   width: 100%;
-  padding: 60px; }
+  padding: 40px 60px; }
   .about-wrapper .about-container {
     max-width: 300px;
     margin: 0 auto; }
@@ -1501,8 +1501,7 @@ a, a:hover, a:focus {
     .about-wrapper .about-container .name-location-wrapper {
       display: inline-block; }
     .about-wrapper .about-container .name {
-      font-size: 54px;
-      margin: 30px 0 0 0; }
+      font-size: 54px; }
     .about-wrapper .about-container .location {
       text-align: right;
       margin: -15px 0 0 0; }
@@ -1521,7 +1520,7 @@ a, a:hover, a:focus {
   padding: 0; }
 
 .about-bg {
-  background-color: #C91C39;
+  background-color: #1C1919;
   padding: 0; }
 
 .about-grid {
