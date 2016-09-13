@@ -233,11 +233,10 @@ class PublicController extends CController
 		return $this->render("index-2", [
 			'banners' => $banners,
 			'devisers' => [
-				array_slice($devisers, 0, 4),
-				array_slice($devisers, 4, 4),
-				array_slice($devisers, 8, 4),
-				array_slice($devisers, 12, 4),
-				array_slice($devisers, 16, 4)
+				array_slice($devisers, 0, 5),
+				array_slice($devisers, 5, 5),
+				array_slice($devisers, 10, 5),
+				array_slice($devisers, 15, 5),
 			],
 			'works12' => array_slice($works, 0, 12),
 			'works3' => array_slice($works, 12, 3),
