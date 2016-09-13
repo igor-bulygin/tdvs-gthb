@@ -28,10 +28,21 @@ class DeviserController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$invitation_id = Yii::$app->request->post("invitation");
 
+		$deviser = new Person();
 
-		return ["deviser" => "create " . $invitation_id];
+		$deviser->load(Yii::$app->request->post(), '');
+		$deviser->setScenario(Person::SCENARIO_DEVISER_CREATE_DRAFT);
+		if ($deviser->load(Yii::$app->request->post(), '') && $deviser->validate()) {
+			$invitation_id = Yii::$app->request->post("invitation");
+			// file is uploaded successfully
+			// return information needed to client side
+//			Yii::$app->response->setStatusCode(201); // Success (without body)
+			return $deviser;
+		} else {
+			Yii::$app->response->setStatusCode(400); // Bad Request
+			return ["errors" => $deviser->errors];
+		}
 	}
 
 		/**

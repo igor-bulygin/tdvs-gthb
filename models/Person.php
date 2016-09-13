@@ -35,6 +35,8 @@ class Person extends CActiveRecord implements IdentityInterface
 
 	const SCENARIO_USER_PROFILE_UPDATE = 'user-profile-update';
 
+	const SCENARIO_DEVISER_CREATE_DRAFT = 'deviser-create-draft';
+	const SCENARIO_DEVISER_UPDATE_DRAFT = 'deviser-update-draft';
 	const SCENARIO_DEVISER_PROFILE_UPDATE = 'deviser-profile-update';
 	const SCENARIO_DEVISER_PRESS_UPDATE = 'deviser-press-update';
 	const SCENARIO_DEVISER_VIDEOS_UPDATE = 'deviser-videos-update';
@@ -247,7 +249,8 @@ class Person extends CActiveRecord implements IdentityInterface
 
 		return [
 			// the name, email, subject and body attributes are required
-			[['slug', 'categories'], 'required'],
+			[['personal_info', 'credentials'], 'required', 'on' => [self::SCENARIO_DEVISER_CREATE_DRAFT]],
+			[['slug', 'categories'], 'required', 'on' => [self::SCENARIO_DEVISER_PROFILE_UPDATE]],
 			[['text_short_description'], 'required', 'on' => [self::SCENARIO_DEVISER_PROFILE_UPDATE]],
 			[
 				'text_short_description',

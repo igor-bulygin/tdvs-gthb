@@ -216,8 +216,18 @@ class PublicController extends CController
 		$query = new ActiveQuery(Product::className());
 		// TODO improve random works
 //		$query->limit(60)->offset(rand(1, 100));
-		$query->where($this->getProductsFilterForDemo());
+		$query->where($this->getProductsFilterForDemo(300));
 		$works = $query->all();
+
+		// divide then in blocks to be rendered in bottom section
+		$moreWork = [];
+		for ($i = 1; $i <= 19; $i++) {
+			$start = $i * 15;
+			$moreWork[] =  [
+				"twelve" => array_slice($works, $start, 12),
+				"three" => array_slice($works, ($start + 12), 3),
+			];
+		}
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("index-2", [
@@ -231,20 +241,7 @@ class PublicController extends CController
 			],
 			'works12' => array_slice($works, 0, 12),
 			'works3' => array_slice($works, 12, 3),
-			'moreWork' => [
-				[
-					"twelve" => array_slice($works, 15, 12),
-					"three" => array_slice($works, 27, 3),
-				],
-				[
-					"twelve" => array_slice($works, 30, 12),
-					"three" => array_slice($works, 42, 3),
-				],
-				[
-					"twelve" => array_slice($works, 45, 12),
-					"three" => array_slice($works, 57, 3),
-				],
-			],
+			'moreWork' => $moreWork,
 		]);
 	}
 
@@ -274,10 +271,20 @@ class PublicController extends CController
 		$query = new ActiveQuery(Product::className());
 		$query->where(['categories' => $category->getShortIds()]);
 		// TODO improve random works
-		$query->limit(60)->offset(rand(1, 12));
+		$query->limit(300)->offset(rand(1, 12));
 		$works = $query->all();
 
-		$categories = [];
+		// divide then in blocks to be rendered in bottom section
+		$moreWork = [];
+		for ($i = 1; $i <= 19; $i++) {
+			$start = $i + 15;
+			$moreWork[] = [
+				[
+					"twelve" => array_slice($works, $start, 12),
+					"three" => array_slice($works, ($start + 12), 3),
+				]
+			];
+		}
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("index-2", [
@@ -289,21 +296,7 @@ class PublicController extends CController
 			],
 			'works12' => array_slice($works, 0, 12),
 			'works3' => array_slice($works, 12, 3),
-			'moreWork' => [
-				[
-					"twelve" => array_slice($works, 15, 12),
-					"three" => array_slice($works, 27, 3),
-				],
-				[
-					"twelve" => array_slice($works, 30, 12),
-					"three" => array_slice($works, 47, 3),
-				],
-				[
-					"twelve" => array_slice($works, 45, 12),
-					"three" => array_slice($works, 57, 3),
-				],
-			],
-			'categories' => $categories,
+			'moreWork' => $moreWork,
 		]);
 
 	}
@@ -659,72 +652,87 @@ class PublicController extends CController
 		];
 	}
 
-	private function getProductsFilterForDemo()
+	private function getProductsFilterForDemo($limit = 60)
 	{
-		return [
-			"short_id" => [
-				"1930f733",
-				"568d60a7",
-				"3cd57ca8",
-				"76c5f330",
-				"8a6dc1b2",
-				"629bd454",
-				"6a238916",
-				"08b8fcb2",
-				"1b704ae3",
-				"280bb083",
-				"5433f112",
-				"4b53da6e",
-				"833db559",
-				"9a974261",
-				"56cab3b7",
-				"5da7e84e",
-				"97324ed3",
-				"8de89f30",
-				"cde8a2ae",
-				"2dd99092",
-				"36323a98",
-				"df2d9f4a",
-				"02a80a47",
-				"9c1ea809",
-				"69e3827e",
-				"601efeb5",
-				"737d1a3a",
-				"b50de546",
-				"0a8aaa96",
-				"b6dde285",
-				"fcaa3c12",
-				"b843a5d3",
-				"a4404eda",
-				"925d5bbd",
-				"df58c170",
-				"c063fb0f",
-				"2820f40a",
-				"31e1c80c",
-				"853890bd",
-				"ddb5df89",
-				"b01fb976",
-				"17795b12",
-				"d1ed11c7",
-				"d9ac3c09",
-				"74386045",
-				"214caaf0",
-				"69d34604",
-				"d8325fb7",
-				"596ba29e",
-				"a39ae909",
-				"3867d0d0",
-				"2d3dce66",
-				"f52e8c21",
-				"ec4232e4",
-				"fe5ce5e5",
-				"906e8023",
-				"79628d14",
-				"a9fbccf9",
-				"cee1b8a8",
-				"d0bf9730",
-			]
+		// selected products ids
+		$selectedIds = [
+			"1930f733",
+			"568d60a7",
+			"3cd57ca8",
+			"76c5f330",
+			"8a6dc1b2",
+			"629bd454",
+			"6a238916",
+			"08b8fcb2",
+			"1b704ae3",
+			"280bb083",
+			"5433f112",
+			"4b53da6e",
+			"833db559",
+			"9a974261",
+			"56cab3b7",
+			"5da7e84e",
+			"97324ed3",
+			"8de89f30",
+			"cde8a2ae",
+			"2dd99092",
+			"36323a98",
+			"df2d9f4a",
+			"02a80a47",
+			"9c1ea809",
+			"69e3827e",
+			"601efeb5",
+			"737d1a3a",
+			"b50de546",
+			"0a8aaa96",
+			"b6dde285",
+			"fcaa3c12",
+			"b843a5d3",
+			"a4404eda",
+			"925d5bbd",
+			"df58c170",
+			"c063fb0f",
+			"2820f40a",
+			"31e1c80c",
+			"853890bd",
+			"ddb5df89",
+			"b01fb976",
+			"17795b12",
+			"d1ed11c7",
+			"d9ac3c09",
+			"74386045",
+			"214caaf0",
+			"69d34604",
+			"d8325fb7",
+			"596ba29e",
+			"a39ae909",
+			"3867d0d0",
+			"2d3dce66",
+			"f52e8c21",
+			"ec4232e4",
+			"fe5ce5e5",
+			"906e8023",
+			"79628d14",
+			"a9fbccf9",
+			"cee1b8a8",
+			"d0bf9730",
 		];
+
+		// other random products ids to complete the grid
+		$query = new ActiveQuery(Product::className());
+		$query->select(["short_id"]);
+		$query->where(["not in", "short_id", $selectedIds]);
+		$query->limit($limit - count($selectedIds));
+		$query->offset(rand(1, 100));
+		$products = $query->all();
+		$otherIds = [];
+		foreach ($products as $product) {
+			/** @var Product $product */
+			$otherIds[] = $product->short_id;
+		}
+
+		return ["short_id" => array_merge($selectedIds, $otherIds)];
+
 	}
 
 }
