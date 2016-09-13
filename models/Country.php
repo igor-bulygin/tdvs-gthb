@@ -4,6 +4,7 @@ namespace app\models;
 use app\helpers\Utils;
 use Yii;
 use app\helpers\CActiveRecord;
+use yii\mongodb\ActiveQuery;
 
 /**
  * @property string country_code
@@ -11,7 +12,8 @@ use app\helpers\CActiveRecord;
  * @property string currency_code
  * @property string continent
  */
-class Country extends CActiveRecord {
+class Country extends CActiveRecord
+{
 	const AFRICA = "AF";
 	const ANTARCTICA = "AN";
 	const ASIA = "AS";
@@ -32,8 +34,9 @@ class Country extends CActiveRecord {
 		Country::WORLD_WIDE => "World Wide"
 	];
 
-	function __construct() {
-	    parent::__construct();
+	function __construct()
+	{
+		parent::__construct();
 
 		Yii::t("app/admin", "Africa");
 		Yii::t("app/admin", "Antarctica");
@@ -45,78 +48,106 @@ class Country extends CActiveRecord {
 		Yii::t("app/admin", "World wide");
 	}
 
-	public static function collectionName() {
+	public static function collectionName()
+	{
 		return 'country';
 	}
 
 
-    public function attributes() {
-        return [
-            '_id',
-            'country_code',
-            'country_name',
-            'currency_code',
-            'continent'
-        ];
-    }
+	public function attributes()
+	{
+		return [
+			'_id',
+			'country_code',
+			'country_name',
+			'currency_code',
+			'continent'
+		];
+	}
 
-    /**
-     * The attributes that should be translated
-     *
-     * @var array
-     */
-    public $translatedAttributes = ['country_name'];
+	/**
+	 * The attributes that should be translated
+	 *
+	 * @var array
+	 */
+	public $translatedAttributes = ['country_name'];
 
 
-    /**
-     * Prepare the ActiveRecord properties to serialize the objects properly, to retrieve an serialize
-     * only the attributes needed for a query context
-     *
-     * @param $view
-     */
-    public static function setSerializeScenario($view)
-    {
-        switch ($view) {
-            case self::SERIALIZE_SCENARIO_PUBLIC:
-                static::$serializeFields = [
-                    'id' => 'country_code',
-                    'country_name',
-                    'currency_code',
-                    'continent',
-                ];
-                static::$translateFields = true;
-                break;
-            case self::SERIALIZE_SCENARIO_ADMIN:
-                static::$serializeFields = [
-                    'id' => 'country_code',
-                    'country_name',
-                    'currency_code',
-                    'continent',
-                ];
-                static::$translateFields = false;
-                break;
-            default:
-                // now available for this Model
-                static::$serializeFields = [];
-                break;
-        }
-    }
+	/**
+	 * Prepare the ActiveRecord properties to serialize the objects properly, to retrieve an serialize
+	 * only the attributes needed for a query context
+	 *
+	 * @param $view
+	 */
+	public static function setSerializeScenario($view)
+	{
+		switch ($view) {
+			case self::SERIALIZE_SCENARIO_PUBLIC:
+				static::$serializeFields = [
+					'id' => 'country_code',
+					'country_name',
+					'currency_code',
+					'continent',
+				];
+				static::$translateFields = true;
+				break;
+			case self::SERIALIZE_SCENARIO_ADMIN:
+				static::$serializeFields = [
+					'id' => 'country_code',
+					'country_name',
+					'currency_code',
+					'continent',
+				];
+				static::$translateFields = false;
+				break;
+			default:
+				// now available for this Model
+				static::$serializeFields = [];
+				break;
+		}
+	}
 
-    /**
-     * Get a collection of entities serialized, according to serialization configuration
-     *
-     * @return array
-     */
-    public static function getSerialized() {
+	/**
+	 * Get a collection of entities serialized, according to serialization configuration
+	 *
+	 * @param array $criteria
+	 * @return array
+	 */
+	public static function findSerialized($criteria = [])
+	{
 
-        // retrieve only fields that want to be serialized
-        $faqs = Country::find()->select(self::getSelectFields())->all();
+		$query = new ActiveQuery(Country::className());
 
-        // if automatic translation is enabled
-        if (static::$translateFields) {
-            Utils::translate($faqs);
-        }
-        return $faqs;
-    }
+		// Retrieve only fields that gonna be used
+		$query->select(self::getSelectFields());
+
+		// if name is specified
+		if ((array_key_exists("name", $criteria)) && (!empty($criteria["name"]))) {
+//			// search the word in all available languages
+			$query->andFilterWhere(Utils::getFilterForTranslatableField("country_name", $criteria["name"]));
+		}
+
+		// Count how many items are with those conditions, before limit them for pagination
+		static::$countItemsFound = $query->count();
+
+		// limit
+		if ((array_key_exists("limit", $criteria)) && (!empty($criteria["limit"]))) {
+			$query->limit($criteria["limit"]);
+		}
+
+		// offset for pagination
+		if ((array_key_exists("offset", $criteria)) && (!empty($criteria["offset"]))) {
+			$query->offset($criteria["offset"]);
+		}
+
+		$items = $query->all();
+
+		// if automatic translation is enabled
+		if (static::$translateFields) {
+			Utils::translate($items);
+		}
+
+		return $items;
+	}
 
 }

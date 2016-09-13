@@ -4,6 +4,7 @@ namespace app\models;
 use app\helpers\Utils;
 use Yii;
 use app\helpers\CActiveRecord;
+use yii\mongodb\ActiveQuery;
 use yii\mongodb\Query;
 
 /**
@@ -43,6 +44,15 @@ class Category extends CActiveRecord {
      * @var array
      */
     public $translatedAttributes = ['name'];
+
+	/**
+	 * Initialize model attributes
+	 */
+//	public function init()
+//	{
+//		parent::init();
+//
+//	}
 
 
     /**
@@ -86,18 +96,50 @@ class Category extends CActiveRecord {
     /**
      * Get a collection of entities serialized, according to serialization configuration
      *
+     * @param array $criteria
      * @return array
      */
-    public static function getSerialized() {
+    public static function findSerialized($criteria = [])
+    {
 
-        // retrieve only fields that want to be serialized
-        $categories = Category::find()->select(self::getSelectFields())->all();
+	    $query = new ActiveQuery(Category::className());
+
+	    // Retrieve only fields that gonna be used
+	    $query->select(self::getSelectFields());
+
+	    // only root nodes, or all
+	    if (array_key_exists("scope", $criteria)) {
+			switch ($criteria["scope"]) {
+				case "all":
+					break;
+				case "roots":
+				default:
+					$query->andWhere(["path" => "/"]);
+					break;
+			}
+	    }
+
+	    // Count how many items are with those conditions, before limit them for pagination
+	    static::$countItemsFound = $query->count();
+
+	    // limit
+	    if ((array_key_exists("limit", $criteria)) && (!empty($criteria["limit"]))) {
+		    $query->limit($criteria["limit"]);
+	    }
+
+	    // offset for pagination
+	    if ((array_key_exists("offset", $criteria)) && (!empty($criteria["offset"]))) {
+		    $query->offset($criteria["offset"]);
+	    }
+
+	    $items = $query->all();
+
 
         // if automatic translation is enabled
         if (static::$translateFields) {
-            Utils::translate($categories);
+            Utils::translate($items);
         }
-        return $categories;
+        return $items;
     }
 
 	/**

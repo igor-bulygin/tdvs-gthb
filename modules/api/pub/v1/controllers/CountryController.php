@@ -21,7 +21,27 @@ class CountryController extends Controller {
         // set the scenario to serialize objects
         Country::setSerializeScenario(Country::SERIALIZE_SCENARIO_PUBLIC);
 
-        return Country::getSerialized();
+	    // set pagination values
+	    $limit = Yii::$app->request->get('limit', 9999);
+	    $limit = ($limit < 1) ? 1 : $limit;
+	    $page = Yii::$app->request->get('page', 1);
+	    $page = ($page < 1) ? 1 : $page;
+	    $offset = ($limit * ($page - 1));
+
+	    $countries = Country::findSerialized([
+		    "name" => Yii::$app->request->get("name"), // search only in name attribute
+		    "limit" => $limit,
+		    "offset" => $offset,
+	    ]);
+
+	    return [
+		    "items" => $countries,
+		    "meta" => [
+			    "total_count" => count($countries),
+			    "current_page" => $page,
+			    "per_page" => $limit,
+		    ]
+	    ];
     }
 
 }

@@ -31,6 +31,9 @@ class CActiveRecord extends ActiveRecord
 	 */
 	static protected $retrieveExtraFields = [];
 
+	/** @var  int */
+	static public $countItemsFound = 0;
+
 	/**
 	 * Determine if serialization have to translate "translatable" attributes automatically
 	 *

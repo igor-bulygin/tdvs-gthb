@@ -49,9 +49,6 @@ class Product extends CActiveRecord {
 	 */
 	static protected $retrieveExtraFields = [];
 
-	/** @var  int */
-	static public $countItemsFound = 0;
-
 	public static function collectionName() {
 		return 'product';
 	}
