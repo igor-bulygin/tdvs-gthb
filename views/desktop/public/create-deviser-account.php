@@ -58,7 +58,7 @@ $this->title = 'Create a Deviser account - Todevise';
 						</div>
 					</div>
 				</div>
-				<button class="btn-red send-btn" ng-click="createDeviserCtrl.submit(createDeviserCtrl.form)">
+				<button class="btn-red send-btn" ng-click="createDeviserCtrl.submitForm(createDeviserCtrl.form)">
 					<i class="ion-android-navigate"></i>
 				</button>
 			</form>

@@ -20,6 +20,7 @@ class LanguageController extends Controller {
     public function actionIndex()
     {
     	$languages = Lang::findSerialized();
+
 	    return [
 		    "items" => $languages,
 		    "meta" => [

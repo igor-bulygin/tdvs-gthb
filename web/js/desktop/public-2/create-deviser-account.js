@@ -1,21 +1,29 @@
 (function () {
 	"use strict";
 
-	function controller(UtilService) {
+	function controller(UtilService, deviserDataService, toastr, $location) {
 		var vm = this;
-		vm.submit = submit;
+		vm.submitForm = submitForm;
 		vm.has_error = UtilService.has_error;
 
 		function init() {
-
+			vm.deviser = new deviserDataService.Devisers;
+			//get invitation from url
+			vm.deviser.invitation_id = $location.absUrl().split('=')[1];
 		}
 
 		init();
 
-		function submit(form) {
-			form.$setSubmitted();
+		function submitForm(form) {
+			if (form.password_confirm.$error.same)
+				form.$setValidity('password_confirm', false);
 			if (form.$valid) {
-
+				form.$setSubmitted();
+				vm.deviser.$save().then(function (dataSaved) {
+					//ok
+				}, function (err) {
+					toastr.error("Error saving form!");
+				})
 			} else {
 				toastr.error("Invalid form!")
 			}
@@ -25,7 +33,7 @@
 
 
 	angular
-		.module('todevise', ['api', 'util'])
+		.module('todevise', ['api', 'util', 'toastr'])
 		.controller('createDeviserCtrl', controller);
 
 }());

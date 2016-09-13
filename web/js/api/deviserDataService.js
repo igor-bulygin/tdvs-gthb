@@ -4,6 +4,7 @@
 	function deviserDataService($resource, config) {
 		//pub
 		this.InvitationRequest = $resource(config.baseUrl + 'pub/' + config.version + 'devisers/invitation-requests');
+		this.Devisers = $resource(config.baseUrl + 'pub/' + config.version + 'devisers');
 
 		this.Profile = $resource(config.baseUrl + 'priv/' + config.version + 'profile/deviser', {}, {
 			'update': {
