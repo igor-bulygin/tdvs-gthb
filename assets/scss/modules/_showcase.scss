@@ -59,7 +59,7 @@
         padding: 8px;
         img{
             @include opacity(1);
-            @include size(70px,70px);
+            @include size(50px,50px);
             @extend %avatar-border;
             border: 1px solid $black;
             margin-bottom:5px;
@@ -73,7 +73,7 @@
             display:block;
             white-space: nowrap;
             &.name{
-                font: 18px $font-family--bold;
+                font: 16px $font-family--bold;
             }
             &.location{
                 font: 12px $font-family--serif;
