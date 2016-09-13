@@ -1,11 +1,12 @@
 (function () {
 	"use strict";
 
-	function controller(deviserDataService, toastr) {
+	function controller(deviserDataService, toastr, UtilService) {
 		var vm = this;
 		vm.submitForm = submitForm;
 		vm.addUrlPortfolio = addUrlPortfolio;
 		vm.addUrlVideo = addUrlVideo;
+		vm.has_error = UtilService.has_error;
 
 		function init() {
 			vm.invitation = new deviserDataService.InvitationRequest;
@@ -46,7 +47,7 @@
 	}
 
 
-	angular.module('todevise', ['api', 'toastr'])
+	angular.module('todevise', ['api', 'toastr', 'util'])
 		.controller('becomeDeviserCtrl', controller);
 
 }());
