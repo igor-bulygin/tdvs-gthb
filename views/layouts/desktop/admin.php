@@ -322,6 +322,24 @@ use lajax\languagepicker\widgets\LanguagePicker;
 												)
 											],
 										],
+									],
+									[
+										'label' => 'Postman',
+										'options' => [
+											'class' => 'item-menu-left funiv_bold fs0-857 fs-upper',
+										],
+										'items' => [
+											[
+												'options' => [
+													'class' => 'item-submenu funiv fs0-929',
+												],
+												'label' => 'Emails',
+												'url'=> Url::toRoute(['admin/postman-emails']),
+												'active' => (
+													Utils::compareURL('admin/postman-emails')
+												)
+											],
+										],
 									]
 								],
 							]);

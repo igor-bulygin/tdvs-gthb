@@ -22,20 +22,20 @@ use yii\web\NotFoundHttpException;
 
 class PostmanController extends CController {
 
-	public function actionIndex()
-	{
-		$emails = PostmanEmail::findSerialized(
-			[
-				"limit" => 50,
-				"order_by" => ['created_at' => SORT_DESC],
-			]
-		);
-
-		$this->layout = '/desktop/public-2.php';
-		return $this->render("email-list", [
-			'emails' => $emails,
-		]);
-	}
+//	public function actionIndex()
+//	{
+//		$emails = PostmanEmail::findSerialized(
+//			[
+//				"limit" => 50,
+//				"order_by" => ç,
+//			]
+//		);
+//
+//		$this->layout = '/desktop/public-2.php';
+//		return $this->render("email-list", [
+//			'emails' => $emails,
+//		]);
+//	}
 
 	public function actionMockupDeviserRequestInvitationView()
 	{
