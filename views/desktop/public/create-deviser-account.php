@@ -42,7 +42,7 @@ $this->title = 'Create a Deviser account - Todevise';
 					</div>
 					<div class="row">
 						<label>Representative name <i class="ion-information-circled info"></i></label>
-						<input type="text" class="form-control grey-input" name="representative_name" ng-model="createDeviserCtrl.deviser.representative_name">
+						<input type="text" class="form-control grey-input" name="representative_name" ng-model="createDeviserCtrl.deviser.representative_name" required>
 						<form-errors field="createDeviserCtrl.form.representative_name" condition="createDeviserCtrl.has_error(createDeviserCtrl.form, createDeviserCtrl.form.representative_name)"></form-errors>
 					</div>
 					<div class="row">
@@ -53,6 +53,9 @@ $this->title = 'Create a Deviser account - Todevise';
 					<div class="row">
 						<label>Repeat password</label>
 						<input type="password" id="email" class="form-control grey-input password" name="password_confirm" ng-model="createDeviserCtrl.password_confirm" required>
+						<div ng-show="createDeviserCtrl.has_error(createDeviserCtrl.form, createDeviserCtrl.form.password_confirm) && createDeviserCtrl.form.password_confirm.$error.same" tdv-comparator value1="{{createDeviserCtrl.deviser.password}}" value2="{{createDeviserCtrl.password_confirm}}" result="createDeviserCtrl.form.password_confirm.$error.same">
+							<form-messages field="createDeviserCtrl.form.password_confirm"></form-messages>
+						</div>
 					</div>
 				</div>
 				<button class="btn-red send-btn" ng-click="createDeviserCtrl.submit(createDeviserCtrl.form)">
