@@ -35,7 +35,10 @@ $this->params['deviser_menu_active_option'] = 'videos';
 			</div>
 			<div class="col-md-10">
 				<?php if (count($videos) == 0) { ?>
-					<div>You don't have any video!</div>
+					<div class="empty-wrapper">
+					    <img class="sad-face" src="/imgs/sad-face.svg">
+				        <p class="no-video-text">You have no videos</p>
+					</div>
 				<?php } else { ?>
 			    <div class="video-container">
 				    <?php foreach ($videos as $video) { ?>

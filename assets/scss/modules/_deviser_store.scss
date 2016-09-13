@@ -8,15 +8,21 @@
         ul{
             margin: 20px 0;
             li{
+                margin: 5px 0;
                 a{
                     color: $darker_grey;
                     text-transform: uppercase;
                     font: bold 16px $font-family--primary;
                     padding: 3px 0 3px 15px;
                     display: block;
-                    &:hover,&.active{
+                    border: 1px solid transparent;
+                    &.active{
                         color: $black;
                         background-color: $light_grey;
+                        border: 1px solid transparent;
+                    }
+                    &:hover{
+                        border: 1px solid #bfbfbf;
                     }
                     &.active{
                         color: $red;
@@ -34,6 +40,7 @@
                             &:hover{
                                 color: $red;
                                 background-color: transparent;
+                                border: 1px solid transparent;
                             }
                         }
                     }

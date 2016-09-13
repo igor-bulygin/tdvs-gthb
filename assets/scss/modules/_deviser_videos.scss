@@ -41,9 +41,6 @@
         width: 100%;
         height: 100%;
     }
-    .no-video-text{
-        font: 16px $font-family--serif;
-    }
     .video-row{
         background-color: $light_grey;
         margin-bottom: 30px;
@@ -130,5 +127,12 @@
     color: $dark_grey;
     text-align: center;
     margin: 20px 80px;
+}
+.no-video-text{
+        font: 16px $font-family--serif;
+    }
+.empty-wrapper{
+    padding: 40px;
+    text-align: center;
 }
 
