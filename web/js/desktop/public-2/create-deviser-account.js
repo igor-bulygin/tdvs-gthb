@@ -5,12 +5,19 @@
 		var vm = this;
 		vm.submitForm = submitForm;
 		vm.has_error = UtilService.has_error;
+		//get invitation from url
+		var invitation_id = $location.absUrl().split('=')[1].split('&')[0];
 
 		function init() {
-			//get invitation from url
-			vm.deviser = {
-				invitation_id: $location.absUrl().split('=')[1]
-			}
+			deviserDataService.Invitation.get({
+				idInvitation: invitation_id
+			}).$promise.then(function(dataInvitation) {
+				vm.deviser = {
+					invitation_id: invitation_id,
+					email: dataInvitation.email
+				}
+			});
+			
 		}
 
 		init();
