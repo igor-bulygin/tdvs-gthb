@@ -18,6 +18,21 @@
     @include column-gap(0.1em);
     padding-bottom: 40px;
 }
+.mesonry-row-6 {
+    @include column-width(10.4em);
+    @include column-gap(0.1em);
+    padding-bottom: 40px;
+}
+.mesonry-row-7 {
+    @include column-width(14.4em);
+    @include column-gap(0.1em);
+    padding-bottom: 40px;
+}
+.mesonry-row-8 {
+    @include column-width(14.4em);
+    @include column-gap(0.1em);
+    padding-bottom: 40px;
+}
 .menu-category {
     display: inline-block;
     margin: 0;   

@@ -1157,6 +1157,27 @@ a, a:hover, a:focus {
   -webkit-column-gap: 0.1em;
   padding-bottom: 40px; }
 
+.mesonry-row-6 {
+  -moz-column-width: 10.4em;
+  -webkit-column-width: 10.4em;
+  -moz-column-gap: 0.1em;
+  -webkit-column-gap: 0.1em;
+  padding-bottom: 40px; }
+
+.mesonry-row-7 {
+  -moz-column-width: 14.4em;
+  -webkit-column-width: 14.4em;
+  -moz-column-gap: 0.1em;
+  -webkit-column-gap: 0.1em;
+  padding-bottom: 40px; }
+
+.mesonry-row-8 {
+  -moz-column-width: 14.4em;
+  -webkit-column-width: 14.4em;
+  -moz-column-gap: 0.1em;
+  -webkit-column-gap: 0.1em;
+  padding-bottom: 40px; }
+
 .menu-category {
   display: inline-block;
   margin: 0;
