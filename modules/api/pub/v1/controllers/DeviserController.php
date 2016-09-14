@@ -32,12 +32,24 @@ class DeviserController extends Controller
 		$deviser = new Person();
 
 		$deviser->load(Yii::$app->request->post(), '');
+		// TODO remove sub document "personal_info" and "credentials"
+		$deviser->personal_info = [
+			"name" => Yii::$app->request->post("name"),
+			"brand_name" => Yii::$app->request->post("brand_name"),
+		];
+
+		$deviser->credentials = ["email" => Yii::$app->request->post("email")];
+		$deviser->setPassword(Yii::$app->request->post("password"));
+		$deviser->type = [Person::DEVISER];
+
 		$deviser->setScenario(Person::SCENARIO_DEVISER_CREATE_DRAFT);
 		if ($deviser->load(Yii::$app->request->post(), '') && $deviser->validate()) {
 			$invitation_id = Yii::$app->request->post("invitation");
 			// file is uploaded successfully
 			// return information needed to client side
-//			Yii::$app->response->setStatusCode(201); // Success (without body)
+			$deviser->save();
+
+			Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_PUBLIC);
 			return $deviser;
 		} else {
 			Yii::$app->response->setStatusCode(400); // Bad Request

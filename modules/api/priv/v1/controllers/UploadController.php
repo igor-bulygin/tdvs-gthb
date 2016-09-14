@@ -18,18 +18,8 @@ use app\models\Faq;
 use yii\web\UploadedFile;
 use yii\web\User;
 
-class UploadController extends Controller {
-
-    public function init() {
-        parent::init();
-
-	    // TODO: retrieve current identity from one of the available authentication methods in Yii
-	    $deviser_id = Yii::$app->request->isGet ? Yii::$app->request->get("deviser_id") : Yii::$app->request->post("deviser_id");
-	    if (empty($deviser_id)) {
-		    throw new BadRequestHttpException('Deviser not specified');
-	    }
-	    Yii::$app->user->login(Person::findOne(["short_id" => $deviser_id]));
-    }
+class UploadController extends AppPrivateController
+{
 
 	/**
 	 * Process new users upload files
@@ -37,26 +27,26 @@ class UploadController extends Controller {
 	 *
 	 * @return array|Model
 	 */
-    public function actionCreate()
-    {
-	    /** @var Person $deviser */
-	    $deviser = Yii::$app->user->getIdentity();
+	public function actionCreate()
+	{
+		/** @var Person $deviser */
+		$deviser = $this->getPerson();
 
-	    $uploadForm = new UploadForm();
-	    $uploadForm->load(Yii::$app->request->post(), '');
-	    $uploadForm->setScenarioByUploadType();
+		$uploadForm = new UploadForm();
+		$uploadForm->load(Yii::$app->request->post(), '');
+		$uploadForm->setScenarioByUploadType();
 //	    $uploadForm->type = UploadForm::UPLOAD_TYPE_DEVISER_PRESS_IMAGES;
-	    // force to relate images to logged user
-	    $uploadForm->deviser_id = $deviser->short_id;
-	    $uploadForm->file = UploadedFile::getInstanceByName("file");
-	    if ($uploadForm->upload()) {
-		    // file is uploaded successfully
-		    // return information needed to client side
-		    return $uploadForm;
-	    } else {
-		    Yii::$app->response->setStatusCode(400); // Bad Request
-		    return ["errors" => $uploadForm->errors];
-	    }
-    }
+		// force to relate images to logged user
+		$uploadForm->deviser_id = $deviser->short_id;
+		$uploadForm->file = UploadedFile::getInstanceByName("file");
+		if ($uploadForm->upload()) {
+			// file is uploaded successfully
+			// return information needed to client side
+			return $uploadForm;
+		} else {
+			Yii::$app->response->setStatusCode(400); // Bad Request
+			return ["errors" => $uploadForm->errors];
+		}
+	}
 }
 

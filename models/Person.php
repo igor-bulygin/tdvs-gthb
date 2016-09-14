@@ -3,27 +3,31 @@ namespace app\models;
 
 use app\helpers\Utils;
 use Exception;
+use MongoDate;
 use Yii;
 use app\helpers\CActiveRecord;
 use yii\base\NotSupportedException;
+use yii\behaviors\SluggableBehavior;
 use yii\mongodb\Collection;
 use yii\web\IdentityInterface;
 
 /**
- * @property string slug
- * @property string text_short_description
- * @property string text_biography
- * @property mixed type
- * @property array categories
- * @property array collections
- * @property array personal_info
- * @property array media
- * @property array press
- * @property array videos
- * @property array faq
- * @property array credentials
- * @property array preferences
- * @property array curriculum
+ * @property string $slug
+ * @property string $text_short_description
+ * @property string $text_biography
+ * @property string $code_account_state
+ * @property mixed $type
+ * @property array $categories
+ * @property array $collections
+ * @property array $personal_info
+ * @property array $media
+ * @property array $press
+ * @property array $videos
+ * @property array $faq
+ * @property array $credentials
+ * @property array $preferences
+ * @property array $curriculum
+ * @property MongoDate $created_at
  */
 class Person extends CActiveRecord implements IdentityInterface
 {
@@ -33,10 +37,15 @@ class Person extends CActiveRecord implements IdentityInterface
 	const DEVISER = 2;
 	const COLLABORATOR = 3;
 
+	const ACCOUNT_STATE_DRAFT = 'draft';
+	const ACCOUNT_STATE_ACTIVE = 'active';
+	const ACCOUNT_STATE_BLOCKED = 'blocked';
+
 	const SCENARIO_USER_PROFILE_UPDATE = 'user-profile-update';
 
 	const SCENARIO_DEVISER_CREATE_DRAFT = 'deviser-create-draft';
 	const SCENARIO_DEVISER_UPDATE_DRAFT = 'deviser-update-draft';
+	const SCENARIO_DEVISER_PUBLISH_PROFILE = 'deviser-publish-profile';
 	const SCENARIO_DEVISER_PROFILE_UPDATE = 'deviser-profile-update';
 	const SCENARIO_DEVISER_PRESS_UPDATE = 'deviser-press-update';
 	const SCENARIO_DEVISER_VIDEOS_UPDATE = 'deviser-videos-update';
@@ -75,6 +84,7 @@ class Person extends CActiveRecord implements IdentityInterface
 			'text_biography',
 			'slug',
 			'type',
+			'code_account_state',
 			'categories',
 			'collections',
 			'personal_info',
@@ -85,6 +95,7 @@ class Person extends CActiveRecord implements IdentityInterface
 			'press',
 			'videos',
 			'faq',
+			'created_at',
 		];
 	}
 
@@ -102,6 +113,9 @@ class Person extends CActiveRecord implements IdentityInterface
 	{
 		parent::init();
 
+		$this->short_id = $this->genValidID(7);
+
+
 		// initialize attributes
 		$this->categories = [];
 		$this->collections = [];
@@ -111,13 +125,29 @@ class Person extends CActiveRecord implements IdentityInterface
 		$this->preferences = [
 			"language" => "en-US"
 		];
-//		$this->text_biography = [
-//			Lang::EN_US => ""
-//		];
+		$this->code_account_state = self::ACCOUNT_STATE_DRAFT;
+		$this->text_short_description = [
+			Lang::EN_US => "I'm so happy to be here, always ready.",
+		];
+		$this->text_biography = [
+			Lang::EN_US => "<p>I am a UX Designer and Art Director from Austria living in Berlin.</p>
+							<p>Artworks and illustrations were my gateway to the creative industry which led to the foundation of my own studio and to first steps in the digital world.</p>
+							<p>Out of this love for aesthetic design my passion for functionality and structure evolved. Jumping right into Photoshop didn’t feel accurate anymore and skipping the steps of building a framework based on functionality and usability became inevitable.</p>"
+		];
 
 		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_PUBLIC);
 	}
 
+//	public function behaviors()
+//	{
+//		return [
+//			[
+//				'class' => SluggableBehavior::className(),
+//				'attribute' => 'brand_name',
+//				// 'slugAttribute' => 'slug',
+//			],
+//		];
+//	}
 
 	/**
 	 * Get one entity serialized
@@ -223,6 +253,13 @@ class Person extends CActiveRecord implements IdentityInterface
 			]);
 		}
 
+		// TODO use SluggableBehavior when name is not in a sub document
+		$this->slug = "my-slug-" . uniqid();
+
+		if (empty($this->created_at)) {
+			$this->created_at = new MongoDate();
+		}
+
 		return parent::beforeSave($insert);
 	}
 
@@ -249,60 +286,74 @@ class Person extends CActiveRecord implements IdentityInterface
 
 		return [
 			// the name, email, subject and body attributes are required
-			[['personal_info', 'credentials'], 'required', 'on' => [self::SCENARIO_DEVISER_CREATE_DRAFT]],
-			[['slug', 'categories'], 'required', 'on' => [self::SCENARIO_DEVISER_PROFILE_UPDATE]],
-			[['text_short_description'], 'required', 'on' => [self::SCENARIO_DEVISER_PROFILE_UPDATE]],
+			[
+				[
+					'personal_info',
+					'credentials',
+				],
+				'required',
+				'on' => [self::SCENARIO_DEVISER_CREATE_DRAFT]
+			],
+			[
+				[
+					'personal_info',
+					'credentials',
+					'text_short_description',
+					'text_biography',
+					'preferences',
+					'curriculum',
+					'media',
+					'press',
+					'videos',
+					'faq',
+				],
+				'safe',
+				'on' => [self::SCENARIO_DEVISER_UPDATE_DRAFT]
+			],
 			[
 				'text_short_description',
 				'app\validators\TranslatableValidator',
-				'on' => self::SCENARIO_DEVISER_PROFILE_UPDATE,
+				'on' => [self::SCENARIO_DEVISER_CREATE_DRAFT, self::SCENARIO_DEVISER_UPDATE_DRAFT],
 			],
-			[['text_biography'], 'safe', 'on' => [self::SCENARIO_DEVISER_PROFILE_UPDATE]],
 			[
 				'text_biography',
 				'app\validators\TranslatableValidator',
-				'on' => self::SCENARIO_DEVISER_PROFILE_UPDATE,
+				'on' => [self::SCENARIO_DEVISER_CREATE_DRAFT, self::SCENARIO_DEVISER_UPDATE_DRAFT],
 			],
-			[['preferences'], 'safe', 'on' => self::SCENARIO_DEVISER_PROFILE_UPDATE],
 			[
 				'preferences',
 				'app\validators\EmbedDocValidator',
-				'on' => self::SCENARIO_DEVISER_PROFILE_UPDATE,
+				'on' => [self::SCENARIO_DEVISER_CREATE_DRAFT, self::SCENARIO_DEVISER_UPDATE_DRAFT],
 				'model' => '\app\models\PersonPreferences'
 			],
-			[['personal_info'], 'required', 'on' => self::SCENARIO_DEVISER_PROFILE_UPDATE],
 			[
 				'personal_info',
 				'app\validators\EmbedDocValidator',
-				'on' => self::SCENARIO_DEVISER_PROFILE_UPDATE,
+				'on' => [self::SCENARIO_DEVISER_CREATE_DRAFT, self::SCENARIO_DEVISER_UPDATE_DRAFT],
 				'model' => '\app\models\PersonPersonalInfo'
 			],
-			[['curriculum'], 'safe', 'on' => self::SCENARIO_DEVISER_PROFILE_UPDATE],
 			[
 				'curriculum',
 				'app\validators\PersonCurriculumValidator',
 				'on' => self::SCENARIO_DEVISER_PROFILE_UPDATE,
 			],
-			[['media'], 'required', 'on' => self::SCENARIO_DEVISER_PROFILE_UPDATE],
 			[
 				'media',
 				'app\validators\PersonMediaFilesValidator',
 				'on' => self::SCENARIO_DEVISER_PROFILE_UPDATE,
 				'model' => '\app\models\PersonMedia'
 			],
-			[['press'], 'safe', 'on' => self::SCENARIO_DEVISER_PRESS_UPDATE],
 			[
 				'press',
 				'app\validators\PersonPressFilesValidator',
 				'on' => self::SCENARIO_DEVISER_PRESS_UPDATE,
 			],
-			[['videos'], 'safe', 'on' => self::SCENARIO_DEVISER_VIDEOS_UPDATE],
 			[
 				'videos',
 				'app\validators\PersonVideosValidator',
 				'on' => self::SCENARIO_DEVISER_VIDEOS_UPDATE,
 			],
-			[['faq'], 'safe', 'on' => self::SCENARIO_DEVISER_FAQ_UPDATE],
+			[[], 'safe', 'on' => self::SCENARIO_DEVISER_FAQ_UPDATE],
 			[
 				'faq',
 				'app\validators\PersonFaqValidator',
@@ -634,18 +685,6 @@ class Person extends CActiveRecord implements IdentityInterface
 		}
 
 		return implode(", ", $categories);
-	}
-
-	/**
-	 * Get short description
-	 *
-	 * @return string
-	 */
-	public function getShortDescription()
-	{
-		$desc = Utils::l($this->text_short_description);
-		return empty($desc) ? 'I\'m so happy to be here, always ready.' : $desc;
-
 	}
 
 	/**

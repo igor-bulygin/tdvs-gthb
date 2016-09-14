@@ -41,10 +41,11 @@ $this->params['deviser_menu_active_option'] = 'faq';
 									<a class="delete-link pull-right" href="#" ng-click="editFaqCtrl.deleteQuestion($index)">Delete question</a>
 									<div class="edit-faq-panel" style="cursor:move;" dnd-draggable="question" dnd-effect-allowed="move" dnd-moved="editFaqCtrl.update($index)">
 										<div class="faq-language-menu">
-											<select ng-model="question.languageSelected" ng-init="question.languageSelected='en-US'" ng-change="editFaqCtrl.parseQuestion(question)">
-												<option value="" style="display:none;"></option>
-												<option ng-repeat="language in editFaqCtrl.languages" value="{{language.code}}" class="ng-class:{'bg-success': editFaqCtrl.isLanguageOk(language.code, question), 'bg-danger': !editFaqCtrl.isLanguageOk(language.code, question)}">{{question.languageSelected === language.code ? language.name + '&and;' : language.name}}</option>
-											</select>
+											<ol class="nya-bs-select form-control" ng-model="question.languageSelected" ng-change="editFaqCtrl.parseQuestion(question)" ng-init="question.languageSelected='en-US'">
+												<li ng-repeat="language in editFaqCtrl.languages" class="nya-bs-option" value="{{language.code}}">
+													<a href=""><span ng-bind="language.name"></span><span class="glyphicon glyphicon-ok" ng-if="editFaqCtrl.isLanguageOk(language.code,question)"></span></a>
+												</li>
+											</ol>
 											<div class="faq-row">
 												<div class="col-sm-1">
 													<span class="faq-edit-question">Question</span>
@@ -68,7 +69,7 @@ $this->params['deviser_menu_active_option'] = 'faq';
 							<a class="edit-faq-btn" href="#" ng-click="editFaqCtrl.addQuestion()">+ ADD QUESTION</a>
 							<button class="btn btn-green btn-done" ng-click="editFaqCtrl.update()">Done</button>
 							<div class="faq-edit-empty" ng-if="editFaqCtrl.deviser.faq.length === 0" ng-cloak>
-				                <img class="sad-face" src="/imgs/sad-face.svg">
+								<img class="sad-face" src="/imgs/sad-face.svg">
 								<p>You haven’t written any FAQs.
 									<br/> Start now by clicking the <b>ADD QUESTION</b> button.</p>
 							</div>

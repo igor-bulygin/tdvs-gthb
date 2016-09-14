@@ -101,6 +101,17 @@ use lajax\languagepicker\widgets\LanguagePicker;
 													Utils::compareURL('admin/admins-member')
 												)
 											],
+											[
+												'options' => [
+													'class' => 'item-submenu funiv fs0-929',
+												],
+												'label' => 'Invitations',
+												'url' => Url::toRoute(['admin/invitations']),
+												'active' => (
+													Utils::compareURL('admin/invitations') ||
+													Utils::compareURL('admin/invitation')
+												)
+											],
 										]
 									],
 									[
@@ -308,6 +319,24 @@ use lajax\languagepicker\widgets\LanguagePicker;
 												'url'=> Url::toRoute(['admin/terms']),
 												'active' => (
 													Utils::compareURL('admin/terms')
+												)
+											],
+										],
+									],
+									[
+										'label' => 'Postman',
+										'options' => [
+											'class' => 'item-menu-left funiv_bold fs0-857 fs-upper',
+										],
+										'items' => [
+											[
+												'options' => [
+													'class' => 'item-submenu funiv fs0-929',
+												],
+												'label' => 'Emails',
+												'url'=> Url::toRoute(['admin/postman-emails']),
+												'active' => (
+													Utils::compareURL('admin/postman-emails')
 												)
 											],
 										],

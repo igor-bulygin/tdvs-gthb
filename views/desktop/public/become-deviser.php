@@ -106,46 +106,59 @@ $this->title = 'Become a Deviser - Todevise';
 							<div class="title"><span>Personal info</span></div>
 							<div class="row">
 								<div class="col-sm-6">
-								    <label>Name</label>
+									<label>Name</label>
 									<input name="name" type="text" class="form-control grey-input" required ng-model="becomeDeviserCtrl.invitation.representative_name">
+									<form-errors field="becomeDeviserCtrl.form.name" condition="becomeDeviserCtrl.has_error(becomeDeviserCtrl.form, becomeDeviserCtrl.form.name)"></form-errors>
 								</div>
 								<div class="col-sm-6">
-								    <label>Brand name</label>
+									<label>Brand name</label>
 									<input name="brand_name" type="text" class="form-control grey-input" ng-model="becomeDeviserCtrl.invitation.brand_name">
+									<form-errors field="becomeDeviserCtrl.form.brand_name" condition="becomeDeviserCtrl.has_error(becomeDeviserCtrl.form, becomeDeviserCtrl.form.brand_name)"></form-errors>
 								</div>
 								<div class="col-sm-6">
-								    <label>Email</label>
+									<label>Email</label>
 									<input name="email" type="email" class="form-control grey-input" required ng-model="becomeDeviserCtrl.invitation.email">
+									<form-errors field="becomeDeviserCtrl.form.email" condition="becomeDeviserCtrl.has_error(becomeDeviserCtrl.form, becomeDeviserCtrl.form.email)"></form-errors>
 								</div>
 								<div class="col-sm-6">
-								    <label>Phone number</label>
+									<label>Phone number</label>
 									<input name="phone_number" type="text" class="form-control grey-input" ng-model="becomeDeviserCtrl.invitation.phone_number">
+									<form-errors field="becomeDeviserCtrl.form.phone_number" condition="becomeDeviserCtrl.has_error(becomeDeviserCtrl.form, becomeDeviserCtrl.form.phone_number)"></form-errors>
 								</div>
 							</div>
 							<div class="title"><span>Your work</span></div>
 							<div class="row">
 								<div class="col-sm-12">
-								    <label>What do you create?</label>
+									<label>What do you create?</label>
 									<input name="creations_description" type="text" class="form-control grey-input" required ng-model="becomeDeviserCtrl.invitation.creations_description">
+									<form-errors field="becomeDeviserCtrl.form.creations_description" condition="becomeDeviserCtrl.has_error(becomeDeviserCtrl.form, becomeDeviserCtrl.form.creations_description)"></form-errors>
 								</div>
 								<div class="col-sm-12" ng-repeat="url in becomeDeviserCtrl.invitation.urls_portfolio track by $index">
-								    <label>Link to portfolio</label>
+									<label>Link to portfolio</label>
 									<input name="{{'portfolio_' + $index}}" type="url" class="form-control grey-input" required ng-model="becomeDeviserCtrl.invitation.urls_portfolio[$index]">
+									<form-errors field="becomeDeviserCtrl.form.portfolio_0" condition="becomeDeviserCtrl.has_error(becomeDeviserCtrl.form, becomeDeviserCtrl.form.portfolio_0)"></form-errors>
 								</div>
 								<a href="" class="add-new" ng-click="becomeDeviserCtrl.addUrlPortfolio()">Add new +</a>
 								<div class="col-sm-12" ng-repeat="url in becomeDeviserCtrl.invitation.urls_video track by $index">
-								    <label>Link to video</label>
+									<label>Link to video</label>
 									<input name="{{'video_' + $index}}" type="url" class="form-control grey-input" ng-model="becomeDeviserCtrl.invitation.urls_video[$index]">
+									<form-errors field="becomeDeviserCtrl.form.video_0" condition="becomeDeviserCtrl.has_error(becomeDeviserCtrl.form, becomeDeviserCtrl.form.video_0)"></form-errors>
 								</div>
 								<a href="" class="add-new" ng-click="becomeDeviserCtrl.addUrlVideo()">Add new +</a>
 								<div class="col-sm-12">
-								    <label>Observations</label>
+									<label>Observations</label>
 									<input name="observations" type="text" class="form-control grey-input" ng-model="becomeDeviserCtrl.invitation.observations">
+									<form-errors field="becomeDeviserCtrl.form.observations" condition="becomeDeviserCtrl.has_error(becomeDeviserCtrl.form, becomeDeviserCtrl.form.observations)"></form-errors>
 								</div>
 							</div>
-							<button class="btn-red send-btn" ng-click="becomeDeviserCtrl.submitForm(becomeDeviserCtrl.form)">
+							<button class="btn-red send-btn" ng-click="becomeDeviserCtrl.submitForm(becomeDeviserCtrl.form)" ng-if="!becomeDeviserCtrl.success">
 								<i class="ion-android-navigate"></i>
 							</button>
+							<div ng-if="becomeDeviserCtrl.success">
+								<span class="glyphicon glyphicon-ok"></span>
+								<p>Your message has been sent successfully.
+									<br>We will contact you shortly.</p>
+							</div>
 						</form>
 					</div>
 				</div>

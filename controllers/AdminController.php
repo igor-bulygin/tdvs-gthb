@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\models\Invitation;
+use app\models\PostmanEmail;
 use Yii;
 use app\models\Tag;
 use yii\helpers\Json;
@@ -100,6 +102,40 @@ class AdminController extends CController {
 		];
 
 		return Yii::$app->request->isAjax ? $this->renderPartial("admins", $data) : $this->render("admins", $data);
+	}
+
+	public function actionInvitations($filters = null) {
+//		$filters = Utils::stringToFilter($filters);
+//		$filters["type"]['$in'] = [Person::ADMIN];
+
+		$invitations = new ActiveDataProvider([
+			'query' => Invitation::find()->orderBy(["created_at" => SORT_DESC]),
+			'pagination' => [
+				'pageSize' => 15,
+			],
+		]);
+
+		$data = [
+			'invitations' => $invitations
+		];
+
+		return Yii::$app->request->isAjax ? $this->renderPartial("invitations", $data) : $this->render("invitations", $data);
+	}
+
+	public function actionPostmanEmails($filters = null) {
+
+		$emails = new ActiveDataProvider([
+			'query' => PostmanEmail::find()->orderBy(["created_at" => SORT_DESC]),
+			'pagination' => [
+				'pageSize' => 50,
+			],
+		]);
+
+		$data = [
+			'emails' => $emails
+		];
+
+		return Yii::$app->request->isAjax ? $this->renderPartial("postman-emails", $data) : $this->render("postman-emails", $data);
 	}
 
 	public function actionTags($filters = null) {

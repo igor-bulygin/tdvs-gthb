@@ -10,6 +10,7 @@ Example about how to call to Web Service to create a new Deviser account
   
 * Request parameters:
  * `invitation_id`: uuid of invitation (required)
+ * `invitation_id`: uuid of invitation (required)
  * `email`: email of deviser (required)
  * `representative_name`: representative name (required)
  * `brand_name`: brand name (required)

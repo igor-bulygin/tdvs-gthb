@@ -28,7 +28,7 @@ $deviser = $this->params['deviser'];
 							<?= $deviser->getCityLabel() ?>
 						</div>
 						<div class="description">
-							<?= $deviser->getShortDescription() ?>
+							<?= $deviser->text_short_description ?>
 						</div>
 					</div>
 				</div>
