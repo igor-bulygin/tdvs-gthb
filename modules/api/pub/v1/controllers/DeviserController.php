@@ -6,7 +6,9 @@ use app\helpers\CActiveRecord;
 use app\models\Invitation;
 use app\models\Person;
 use app\models\PostmanEmail;
+use app\models\PostmanEmailTask;
 use app\modules\api\pub\v1\forms\BecomeDeviserForm;
+use MongoDate;
 use Yii;
 use yii\rest\Controller;
 use yii\web\BadRequestHttpException;
@@ -33,11 +35,12 @@ class DeviserController extends Controller
 
 		$deviser = new Person();
 
-		$invitation_id = Yii::$app->request->post("invitation");
+		$invitation_id = Yii::$app->request->post("invitation_id");
 		/** @var Invitation $invitation */
 		$invitation = Invitation::findOneSerialized($invitation_id);
+
 		if (!$invitation) {
-			throw new BadRequestHttpException(Yii::t("app/api", "Invalid invitation"));
+			throw new BadRequestHttpException(Yii::t("app/api", "Invitation not found"));
 		}
 
 		if (!$invitation->canUse()) {
@@ -89,6 +92,11 @@ class DeviserController extends Controller
 			$email->to_email = $form->email;
 			$email->subject = 'Deviser invitation request';
 
+			// add task only one send task (to allow retries)
+			$task = new PostmanEmailTask();
+			$task->date_send_scheduled = new MongoDate();
+			$email->addTask($task);
+
 			$email->body_html = Yii::$app->view->render(
 				'request-invitation',
 				[
@@ -98,7 +106,9 @@ class DeviserController extends Controller
 			);
 			$email->save();
 
-			$email->send();
+			if ($email->send($task->id)) {
+				$email->save();
+			}
 
 			Yii::$app->response->setStatusCode(201); // Success (without body)
 //			return ["action" => "done"];

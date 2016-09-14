@@ -126,7 +126,6 @@ class Invitation extends CActiveRecord
 		return $items;
 	}
 
-
 	/**
 	 * Get one entity serialized
 	 *
@@ -140,6 +139,25 @@ class Invitation extends CActiveRecord
 		$invitation = Invitation::find()->select(self::getSelectFields())->where(["uuid" => $uuid])->one();
 
 		return $invitation;
+	}
+
+
+	/**
+	 * Get one entity serialized, searching by an "email action id" related with the invitation
+	 *
+	 * @param string $actionId
+	 * @return Invitation|null
+	 * @throws Exception
+	 */
+	public static function findByEmailAction($actionId)
+	{
+		/** @var PostmanEmail $email */
+		$email = PostmanEmail::findByEmailAction($actionId);
+		if ($email) {
+			return $email->getInvitation();
+		}
+
+		return null;
 	}
 
 	public function rules()
@@ -300,6 +318,12 @@ class Invitation extends CActiveRecord
 
 		$this->date_use = $datetime;
 		$this->code_use_state = Invitation::USE_STATE_USED;
+
+		// stop to sent future task
+		$email = $this->getPostmanEmail();
+		if ($email) {
+			$email->stopTasks()->save();
+		}
 
 		return $this;
 	}

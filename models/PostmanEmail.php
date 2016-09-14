@@ -151,16 +151,32 @@ class PostmanEmail extends CActiveRecord
 	 * Get one entity serialized
 	 *
 	 * @param string $token
-	 * @return Invitation|null
+	 * @return PostmanEmail|null
 	 * @throws Exception
 	 */
 	public static function findOneSerialized($token)
 	{
-		/** @var Invitation $invitation */
-		$invitation = PostmanEmail::find()->select(self::getSelectFields())->where(["uuid" => $token])->one();
+		/** @var PostmanEmail $email */
+		$email = PostmanEmail::find()->select(self::getSelectFields())->where(["uuid" => $token])->one();
 
-		return $invitation;
+		return $email;
 	}
+
+	/**
+	 * Get one entity serialized, searching by an "action id" related with the email
+	 *
+	 * @param string $actionId
+	 * @return PostmanEmail|null
+	 * @throws Exception
+	 */
+	public static function findByEmailAction($actionId)
+	{
+		/** @var PostmanEmail $email */
+		$email = PostmanEmail::find()->select(self::getSelectFields())->where(["actions.uuid" => $actionId])->one();
+
+		return $email;
+	}
+
 
 	public function rules()
 	{
@@ -244,18 +260,111 @@ class PostmanEmail extends CActiveRecord
 	}
 
 	/**
-	 * Send the email
+	 * Send the email.
+	 * If $taskId is specified, update the task state.
+	 * If $stopTasksAfterSent is true, and the email is sent OK, stop other pending tasks
 	 *
+	 * @param null $taskId
+	 * @param bool $stopTasksAfterSent
 	 * @return bool
 	 */
-	public function send()
+	public function send($taskId = null, $stopTasksAfterSent = true)
 	{
-		return Yii::$app->mailer->compose()
+		$sent = Yii::$app->mailer->compose()
 			->setFrom([$this->from_email => $this->from_name])
 			->setTo([$this->to_email => $this->to_name])
 			->setSubject($this->subject)
 			->setHtmlBody($this->body_html)
 			->setTextBody($this->body_plain_text)
 			->send();
+
+		if (($taskId) && ($sent)) {
+			$this->setTaskAsSent($taskId);
+			if ($stopTasksAfterSent) {
+				$this->stopTasks();
+			}
+		}
+
+		return $sent;
+	}
+
+	/**
+	 * Set task pending to be processed, as not necessary
+	 *
+	 * @return PostmanEmail
+	 */
+	public function stopTasks()
+	{
+		$tasks = $this->tasks;
+		foreach ($tasks as &$task) {
+			if ($task["code_process_state"] == PostmanEmailTask::PROCESS_STATE_PENDING) {
+				$task["code_process_state"] = PostmanEmailTask::PROCESS_STATE_UNNECESSARY;
+			}
+		}
+		$this->tasks = $tasks;
+
+		return $this;
+	}
+
+	/**
+	 * Set a specific task as sent
+	 *
+	 * @param $id
+	 * @param MongoDate $datetime
+	 * @return PostmanEmail
+	 */
+	public function setTaskAsSent($id, MongoDate $datetime = null)
+	{
+		// initialize
+		$datetime = ($datetime) ? $datetime : new MongoDate();
+
+		$tasks = $this->tasks;
+		foreach ($tasks as &$task) {
+			if ($task["id"] == $id) {
+				$task["code_process_state"] = PostmanEmailTask::PROCESS_STATE_SENT;
+				$task["date_sent_actual"] = $datetime;
+			}
+		}
+		$this->tasks = $tasks;
+
+		return $this;
+	}
+
+
+	/**
+	 * Get the ID of the pending task before of query date time
+	 *
+	 * @param MongoDate $datetime
+	 * @return int|null
+	 */
+	public function findCurrentPendingTaskId(MongoDate $datetime = null)
+	{
+		$id = null;
+		$latest = new MongoDate(0);
+		foreach ($this->tasks as $task) {
+			if (
+				($task["code_process_state"] == PostmanEmailTask::PROCESS_STATE_PENDING) &&
+				($task["date_send_scheduled"] >= $datetime)
+			) {
+				// it could be possible to find more than one task, so, we get the latest
+				if ($task["date_send_scheduled"] > $latest) {
+					$latest = $task["date_send_scheduled"];
+					$id = $task["id"];
+				}
+			}
+		}
+		return $id;
+	}
+
+	/**
+	 * Get the invitation related with this email
+	 *
+	 * @return Invitation
+	 */
+	public function getInvitation()
+	{
+		/** @var Invitation $invitation */
+		$invitation = Invitation::findOne(["postman_email_id" => $this->_id]);
+		return $invitation;
 	}
 }
