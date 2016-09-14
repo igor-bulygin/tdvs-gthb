@@ -32,7 +32,7 @@ $this->title = 'Create a Deviser account - Todevise';
 				<div>
 					<div class="row">
 						<label for="email">Email address</label>
-						<input type="email" id="email" class="form-control grey-input" name="email" ng-model="createDeviserCtrl.deviser.email" required>
+						<input type="email" id="email" class="form-control grey-input" name="email" ng-model="createDeviserCtrl.deviser.email" required disabled="true">
 						<form-errors field="createDeviserCtrl.form.email" condition="createDeviserCtrl.has_error(createDeviserCtrl.form, createDeviserCtrl.form.email)"></form-errors>
 					</div>
 					<div class="row">
