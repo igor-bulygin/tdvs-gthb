@@ -218,6 +218,7 @@ class Invitation extends CActiveRecord
 			$this->getEmailView(),
 			[
 				"message" => $this->message,
+				"invitation" => $this,
 				"actionAccept" => $action,
 			]
 		);
