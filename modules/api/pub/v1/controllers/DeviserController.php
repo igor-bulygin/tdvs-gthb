@@ -3,6 +3,7 @@
 namespace app\modules\api\pub\v1\controllers;
 
 use app\helpers\CActiveRecord;
+use app\models\Invitation;
 use app\models\Person;
 use app\models\PostmanEmail;
 use app\modules\api\pub\v1\forms\BecomeDeviserForm;
@@ -24,12 +25,24 @@ class DeviserController extends Controller
 	/**
 	 * Create a new Deviser account
 	 *
-	 * @return array|void
+	 * @return Person|array|void
+	 * @throws BadRequestHttpException
 	 */
 	public function actionCreate()
 	{
 
 		$deviser = new Person();
+
+		$invitation_id = Yii::$app->request->post("invitation");
+		/** @var Invitation $invitation */
+		$invitation = Invitation::findOneSerialized($invitation_id);
+		if (!$invitation) {
+			throw new BadRequestHttpException(Yii::t("app/api", "Invalid invitation"));
+		}
+
+		if (!$invitation->canUse()) {
+			throw new BadRequestHttpException(Yii::t("app/api", "Invalid invitation"));
+		}
 
 		$deviser->load(Yii::$app->request->post(), '');
 		// TODO remove sub document "personal_info" and "credentials"
@@ -44,11 +57,15 @@ class DeviserController extends Controller
 
 		$deviser->setScenario(Person::SCENARIO_DEVISER_CREATE_DRAFT);
 		if ($deviser->load(Yii::$app->request->post(), '') && $deviser->validate()) {
-			$invitation_id = Yii::$app->request->post("invitation");
-			// file is uploaded successfully
-			// return information needed to client side
 			$deviser->save();
 
+			// relate invitation and new deviser
+			$invitation->person_id = $deviser->_id;
+
+			// indicate that invitation has been used
+			$invitation->setAsUsed()->save();
+
+			// return information needed to client side
 			Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_PUBLIC);
 			return $deviser;
 		} else {

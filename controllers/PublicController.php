@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\helpers\CActiveRecord;
+use app\models\Invitation;
 use Yii;
 use app\models\Tag;
 use app\models\StaticText;
@@ -11,6 +12,7 @@ use app\models\Person;
 use app\helpers\Utils;
 use yii\mongodb\ActiveQuery;
 use yii\mongodb\Query;
+use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use app\models\Product;
 use app\models\Become;
@@ -305,10 +307,17 @@ class PublicController extends CController
 		return $this->render("become-deviser");
 	}
 
-	public function actionCreateDeviserAccount($uuid = null)
+	public function actionCreateDeviserAccount()
 	{
+		$uuid = Yii::$app->request->get("uuid");
+		/** @var Invitation $invitation */
+		$invitation = Invitation::findOneSerialized($uuid);
+		if (!$invitation) {
+			throw new BadRequestHttpException(Yii::t("app/public", 'Invalid invitation'));
+		}
+
 		$this->layout = '/desktop/public-2.php';
-		return $this->render("create-deviser-account");
+		return $this->render("create-deviser-account", ["invitation" => $invitation]);
 	}
 
 	public function actionCategory($category_id, $slug)

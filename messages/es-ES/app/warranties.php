@@ -17,6 +17,8 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'This is a test from {0} controller!' => '',
-    'Accessed from a {0}!' => '@@@@',
+    'Days' => '',
+    'Months' => '',
+    'None' => '',
+    'Weeks' => '',
 ];

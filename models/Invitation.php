@@ -18,8 +18,8 @@ use yii\mongodb\Collection;
  * @property string email
  * @property string message
  * @property MongoDate date_sent
- * @property MongoDate date_first_use
- * @property MongoDate date_last_use
+ * @property MongoDate date_use
+ * @property MongoDate date_ends_availability
  * @property string code_use_state
  * @property string code_invitation_type
  * @property string person_id
@@ -31,6 +31,10 @@ class Invitation extends CActiveRecord
 
 	const INVITATION_TYPE_DEVISER = 'invitation-deviser';
 	const INVITATION_TYPE_TREND_SETTER = 'invitation-trend-setter';
+
+	const USE_STATE_UNUSED = 'unused';
+	const USE_STATE_USED = 'used';
+	const USE_STATE_CANCELED = 'canceled';
 
 	/**
 	 * The attributes that should be serialized
@@ -59,8 +63,8 @@ class Invitation extends CActiveRecord
 			'email',
 			'message',
 			'date_sent',
-			'date_first_use',
-			'date_last_use',
+			'date_use',
+			'date_ends_availability',
 			'code_use_state',
 			'code_invitation_type',
 			'person_id',
@@ -77,6 +81,7 @@ class Invitation extends CActiveRecord
 		parent::init();
 
 		$this->uuid = Uuid::uuid4()->toString();
+		$this->code_use_state = Invitation::USE_STATE_UNUSED;
 		$this->created_at = new MongoDate();
 
 		Invitation::setSerializeScenario(Invitation::SERIALIZE_SCENARIO_PUBLIC);
@@ -125,14 +130,14 @@ class Invitation extends CActiveRecord
 	/**
 	 * Get one entity serialized
 	 *
-	 * @param string $token
+	 * @param string $uuid
 	 * @return Invitation|null
 	 * @throws Exception
 	 */
-	public static function findOneSerialized($token)
+	public static function findOneSerialized($uuid)
 	{
 		/** @var Invitation $invitation */
-		$invitation = Invitation::find()->select(self::getSelectFields())->where(["uuid" => $token])->one();
+		$invitation = Invitation::find()->select(self::getSelectFields())->where(["uuid" => $uuid])->one();
 
 		return $invitation;
 	}
@@ -178,7 +183,6 @@ class Invitation extends CActiveRecord
 				static::$serializeFields = [
 					'uuid',
 					'email',
-					'date_sent',
 				];
 				break;
 			default:
@@ -256,6 +260,47 @@ class Invitation extends CActiveRecord
 	private function getEmailView()
 	{
 		return '@app/mail/deviser/invitation';
+	}
+
+	/**
+	 * Indicate if an invitation can be used, or not (because it is already used, out of date, etc ...)
+	 *
+	 * @param MongoDate $datetime
+	 * @return bool
+	 */
+	public function canUse(MongoDate $datetime = null)
+	{
+		// initialize
+		$datetime = ($datetime) ? $datetime : new MongoDate();
+
+		// must be unused
+		if ($this->code_use_state != Invitation::USE_STATE_UNUSED) {
+			return false;
+		}
+
+		// must be used before ends availability
+		if ((!empty($this->date_ends_availability)) && ($this->date_ends_availability < $datetime)) {
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
+	 * Set the properties to indicate that the invitation has been used
+	 *
+	 * @param MongoDate $datetime
+	 * @return Invitation
+	 */
+	public function setAsUsed(MongoDate $datetime = null)
+	{
+		// initialize
+		$datetime = ($datetime) ? $datetime : new MongoDate();
+
+		$this->date_use = $datetime;
+		$this->code_use_state = Invitation::USE_STATE_USED;
+
+		return $this;
 	}
 
 }
