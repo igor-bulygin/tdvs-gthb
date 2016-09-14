@@ -9,9 +9,10 @@
 		vm.has_error = UtilService.has_error;
 
 		function init() {
-			vm.invitation = new deviserDataService.InvitationRequest;
-			vm.invitation.urls_portfolio = [];
-			vm.invitation.urls_video = [];
+			vm.invitation = {
+				urls_portfolio: [],
+				urls_video: []
+			}
 			addUrlPortfolio();
 			addUrlVideo();
 		}
@@ -21,7 +22,11 @@
 		function submitForm(form) {
 			form.$setSubmitted();
 			if (form.$valid) {
-				vm.invitation.$save().then(function (dataSaved) {
+				vm.new_invitation = new deviserDataService.InvitationRequest;
+				for(var key in vm.invitation) {
+					vm.new_invitation[key] = vm.invitation[key];
+				}
+				vm.new_invitation.$save().then(function (dataSaved) {
 					vm.success = true;
 					init();
 					vm.form.$setPristine();
