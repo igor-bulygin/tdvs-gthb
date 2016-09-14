@@ -114,6 +114,7 @@
     }
     .tag-row{
         padding: 20px;
+        @extend %block;
     }
 }
 .no-tags-title{
@@ -134,5 +135,11 @@
 .empty-wrapper{
     padding: 40px;
     text-align: center;
+}
+.tag-select-row{
+    padding: 20px;
+    @extend %block;
+    background-color: $white;
+    border-bottom: 1px solid $dark_grey;
 }
 

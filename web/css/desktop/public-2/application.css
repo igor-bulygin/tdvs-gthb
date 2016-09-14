@@ -651,7 +651,7 @@ a, a:hover, a:focus {
       top: 0 !important;
       left: 0 !important; } }
 
-.edit-faq-wrapper, .edit-faq-panel, .questions, .faq-row, .store .content-store .cathegory-wrapper, .store .content-store .store-grid, .become-deviser-wrapper .call-to-action-wrapper, .request-invitation-wrapper, .product .product-data-wrapper, .product .product-data-wrapper .product-data, .work-profile-description-wrapper {
+.edit-faq-wrapper, .edit-faq-panel, .questions, .faq-row, .store .content-store .cathegory-wrapper, .store .content-store .store-grid, .tagged-works .tag-row, .tag-select-row, .become-deviser-wrapper .call-to-action-wrapper, .request-invitation-wrapper, .product .product-data-wrapper, .product .product-data-wrapper .product-data, .work-profile-description-wrapper {
   float: left;
   width: 100%; }
 
@@ -1694,6 +1694,11 @@ a, a:hover, a:focus {
 .empty-wrapper {
   padding: 40px;
   text-align: center; }
+
+.tag-select-row {
+  padding: 20px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #9a9a9a; }
 
 .become-deviser-wrapper .become-deviser-cover {
   background: url("/imgs/become_a_deviser_background.png") no-repeat;

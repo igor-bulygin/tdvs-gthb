@@ -61,7 +61,7 @@ $this->params['deviser_menu_active_option'] = 'videos';
                                             </div>
 											<div ng-cloak style="height:200px; overflow-y:scroll; background:white;" ng-if="editVideosCtrl.searchTerm[$index].length > 0 && editVideosCtrl.works[$index] && editVideosCtrl.works[$index].length > 0">
 												<div ng-repeat="work in editVideosCtrl.works[$parent.$index]" style="cursor:pointer;" ng-click="editVideosCtrl.selectProduct($parent.$index, work)">
-													<div class="row">
+													<div class="tag-select-row row">
 														<div class="col-md-2">
 															<img ng-src="{{work.url_image_preview}}" style="width: 100%; max-height: 50px;">
 														</div>
@@ -81,7 +81,7 @@ $this->params['deviser_menu_active_option'] = 'videos';
 											</div>
 											<div class="produts-tags-wrapper">
                                                 <div ng-repeat="product in video.products" ng-if="video.products.length > 0">
-                                                    <div class="row tag-row">
+                                                    <div class="tag-row">
                                                         <div class="col-md-2">
                                                             <img ng-src="{{product.url_image_preview}}" style="width: 100%; max-height: 50px;">
                                                         </div>
