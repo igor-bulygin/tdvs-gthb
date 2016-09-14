@@ -104,27 +104,31 @@ $this->title = 'Become a Deviser - Todevise';
 					<div class="request-invitation-container black-form">
 						<form name="becomeDeviserCtrl.form" novalidate>
 							<div class="title"><span>Personal info</span></div>
-							<div class="row">
-								<div class="col-sm-6">
-									<label>Name</label>
-									<input name="name" type="text" class="form-control grey-input" required ng-model="becomeDeviserCtrl.invitation.representative_name">
-									<form-errors field="becomeDeviserCtrl.form.name" condition="becomeDeviserCtrl.has_error(becomeDeviserCtrl.form, becomeDeviserCtrl.form.name)"></form-errors>
-								</div>
-								<div class="col-sm-6">
-									<label>Brand name</label>
-									<input name="brand_name" type="text" class="form-control grey-input" ng-model="becomeDeviserCtrl.invitation.brand_name">
-									<form-errors field="becomeDeviserCtrl.form.brand_name" condition="becomeDeviserCtrl.has_error(becomeDeviserCtrl.form, becomeDeviserCtrl.form.brand_name)"></form-errors>
-								</div>
-								<div class="col-sm-6">
-									<label>Email</label>
-									<input name="email" type="email" class="form-control grey-input" required ng-model="becomeDeviserCtrl.invitation.email">
-									<form-errors field="becomeDeviserCtrl.form.email" condition="becomeDeviserCtrl.has_error(becomeDeviserCtrl.form, becomeDeviserCtrl.form.email)"></form-errors>
-								</div>
-								<div class="col-sm-6">
-									<label>Phone number</label>
-									<input name="phone_number" type="text" class="form-control grey-input" ng-model="becomeDeviserCtrl.invitation.phone_number">
-									<form-errors field="becomeDeviserCtrl.form.phone_number" condition="becomeDeviserCtrl.has_error(becomeDeviserCtrl.form, becomeDeviserCtrl.form.phone_number)"></form-errors>
-								</div>
+							<div>
+							    <div class="row">
+                                    <div class="col-sm-6">
+                                        <label>Name</label>
+                                        <input name="name" type="text" class="form-control grey-input" required ng-model="becomeDeviserCtrl.invitation.representative_name">
+                                        <form-errors field="becomeDeviserCtrl.form.name" condition="becomeDeviserCtrl.has_error(becomeDeviserCtrl.form, becomeDeviserCtrl.form.name)"></form-errors>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>Brand name</label>
+                                        <input name="brand_name" type="text" class="form-control grey-input" ng-model="becomeDeviserCtrl.invitation.brand_name">
+                                        <form-errors field="becomeDeviserCtrl.form.brand_name" condition="becomeDeviserCtrl.has_error(becomeDeviserCtrl.form, becomeDeviserCtrl.form.brand_name)"></form-errors>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <label>Email</label>
+                                        <input name="email" type="email" class="form-control grey-input" required ng-model="becomeDeviserCtrl.invitation.email">
+                                        <form-errors field="becomeDeviserCtrl.form.email" condition="becomeDeviserCtrl.has_error(becomeDeviserCtrl.form, becomeDeviserCtrl.form.email)"></form-errors>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>Phone number</label>
+                                        <input name="phone_number" type="text" class="form-control grey-input" ng-model="becomeDeviserCtrl.invitation.phone_number">
+                                        <form-errors field="becomeDeviserCtrl.form.phone_number" condition="becomeDeviserCtrl.has_error(becomeDeviserCtrl.form, becomeDeviserCtrl.form.phone_number)"></form-errors>
+                                    </div>
+                                </div>
 							</div>
 							<div class="title"><span>Your work</span></div>
 							<div class="row">

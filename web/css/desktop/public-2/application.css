@@ -1865,6 +1865,12 @@ a, a:hover, a:focus {
     color: #ffffff;
     font-size: 28px; }
 
+.error-input {
+  border-color: #924cfc !important; }
+
+.error-text {
+  color: #924cfc !important; }
+
 .create-deviser-account-wrapper {
   padding: 80px 200px; }
   .create-deviser-account-wrapper .logo {
