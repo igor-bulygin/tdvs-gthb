@@ -7,9 +7,10 @@
 		vm.has_error = UtilService.has_error;
 
 		function init() {
-			vm.deviser = new deviserDataService.Devisers;
 			//get invitation from url
-			vm.deviser.invitation_id = $location.absUrl().split('=')[1];
+			vm.deviser = {
+				invitation_id: $location.absUrl().split('=')[1]
+			}
 		}
 
 		init();
@@ -19,7 +20,11 @@
 				form.$setValidity('password_confirm', false);
 			if (form.$valid) {
 				form.$setSubmitted();
-				vm.deviser.$save().then(function (dataSaved) {
+				vm.new_deviser = new deviserDataService.Devisers;
+				for(var key in vm.deviser) {
+					vm.new_deviser[key] = vm.deviser[key];
+				}
+				vm.new_deviser.$save().then(function (dataSaved) {
 					$window.location.href= '/deviser/' + dataSaved.slug + '/' + dataSaved.id + '/about/edit';
 				}, function (err) {
 					toastr.error("Error saving form!");
