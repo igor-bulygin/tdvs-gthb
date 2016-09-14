@@ -11,10 +11,10 @@ use yii\widgets\Pjax;
 use app\helpers\Utils;
 use yii\widgets\ListView;
 use yii\widgets\ActiveForm;
-use app\assets\desktop\pub\IndexAsset;
 use app\assets\desktop\pub\Index2Asset;
+use app\assets\desktop\deviser\EditAboutAsset;
 
-Index2Asset::register($this);
+EditAboutAsset::register($this);
 
 /** @var Person $deviser */
 
@@ -32,14 +32,13 @@ $this->params['deviser'] = $deviser;
 			<div class="col-md-2">
 				<?= DeviserMenu::widget() ?>
 			</div>
-			<div class="col-md-10 about-bg">
+			<div class="col-md-10 about-bg" ng-controller="editAboutCtrl as editAboutCtrl">
 				<div class="col-md-5 pad-about">
 					<div class="about-wrapper">
 						<div class="about-container">
 							<!--<div class="title">Abo<br>ut</div>-->
 							<div class="name-location-wrapper">
-								<div class="name">
-									<?= $deviser->getBrandName() ?>
+								<div class="name" ng-bind="editAboutCtrl.deviser.name">
 								</div>
 								<div class="location">
 									<?= $deviser->getLocationLabel() ?>
