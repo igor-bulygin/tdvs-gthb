@@ -127,7 +127,7 @@
                         }
                     }
                     input[type="radio"] + label span {
-                         border: 2px solid transparent;
+                         border: 1px solid $light_grey;
                     }
                     input[type="radio"]:checked + label span{
                          border: 2px solid $black;

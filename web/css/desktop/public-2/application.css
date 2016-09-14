@@ -1959,7 +1959,7 @@ a, a:hover, a:focus {
         .product .product-data-wrapper .product-data .row-size .color-box input[type="radio"] + label span:hover {
           opacity: 0.8; }
         .product .product-data-wrapper .product-data .row-size .color-box input[type="radio"] + label span {
-          border: 2px solid transparent; }
+          border: 1px solid #bfbfbf; }
         .product .product-data-wrapper .product-data .row-size .color-box input[type="radio"]:checked + label span {
           border: 2px solid #1C1919; }
       .product .product-data-wrapper .product-data .row-size .btn-add-to-cart {
