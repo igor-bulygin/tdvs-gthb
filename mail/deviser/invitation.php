@@ -1,11 +1,14 @@
 <?php
 use app\helpers\Utils;
+use app\models\Invitation;
+use app\models\PostmanEmailAction;
 use app\modules\api\pub\v1\forms\BecomeDeviserForm;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
 /** @var $this \yii\web\View view component instance */
 /** @var PostmanEmailAction $actionAccept */
+/** @var Invitation $invitation */
 ?>
 
 <!doctype html>
@@ -656,7 +659,7 @@ use yii\helpers\Url;
 											<tr>
 												<td align="center" valign="middle" class="mcnButtonContent"
 												    style="font-family: 'Helvetica Neue', Helvetica, Arial, Verdana, sans-serif;font-size: 16px;padding: 15px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
-													<a class="mcnButton " title="JOIN TODEVISE" href="<?= Url::to(["/public/create-deviser-account", "uuid" => $actionAccept->uuid], true) ?>"
+													<a class="mcnButton " title="JOIN TODEVISE" href="<?= Url::to(["/public/create-deviser-account", "uuid" => $invitation->uuid, "action" => $actionAccept->uuid], true) ?>"
 													   target="_blank"
 													   style="font-weight: normal;letter-spacing: normal;line-height: 100%;text-align: center;text-decoration: none;color: #FFFFFF;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;display: block;">
 														JOIN TODEVISE</a>

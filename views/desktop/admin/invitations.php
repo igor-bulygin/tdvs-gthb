@@ -94,6 +94,12 @@ $this->title = 'Todevise / Admin / Invitations';
 					],
 					[
 						'value' => function($model){
+							return $model->uuid;
+						},
+						'label' => Yii::t("app/admin", "id")
+					],
+					[
+						'value' => function($model){
 							return $model->email;
 						},
 						'label' => Yii::t("app/admin", "Email")

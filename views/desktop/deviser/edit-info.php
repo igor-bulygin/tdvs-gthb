@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = [
 
 EditInfoAsset::register($this);
 
-$who = $deviser['personal_info']['name'] . " " . join($deviser['personal_info']['surnames'], " ");
+$who = $deviser['personal_info']['name'];
 $this->title = "$who / Todevise / Edit info";
 
 $base_path_photos = Yii::getAlias("@deviser_url") . "/" . $deviser["short_id"] . "/";

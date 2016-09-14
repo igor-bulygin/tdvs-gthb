@@ -91,7 +91,8 @@ $this->title = 'Todevise / Admin / Devisers';
 					],
 					[
 						'value' => function($model){
-							return $model->personal_info["name"] . " " . join($model->personal_info["surnames"], " ");
+//							return $model->personal_info["name"] . " " . join($model->personal_info["surnames"], " ");
+							return $model->getBrandName();
 						},
 						'label' => Yii::t("app/admin", "Name")
 					],

@@ -254,7 +254,9 @@ class Person extends CActiveRecord implements IdentityInterface
 		}
 
 		// TODO use SluggableBehavior when name is not in a sub document
-		$this->slug = "my-slug-" . uniqid();
+		if (empty($this->slug)) {
+			$this->slug = "my-slug-" . uniqid();
+		}
 
 		if (empty($this->created_at)) {
 			$this->created_at = new MongoDate();
