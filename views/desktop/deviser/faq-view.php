@@ -25,6 +25,9 @@ $this->params['deviser_menu_active_option'] = 'faq';
 
 /** array $faq */
 
+// <a class="edit-faq-btn" href="<?= Url::to(["deviser/faq-edit", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id])?>">+ ADD / EDIT QUESTIONS</a>
+
+
 ?>
 
 <?= DeviserHeader::widget() ?>
@@ -37,11 +40,10 @@ $this->params['deviser_menu_active_option'] = 'faq';
 			</div>
 			<div class="col-md-10">
 				<div class="faq-wrapper">
-					<a class="edit-faq-btn" href="<?= Url::to(["deviser/faq-edit", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id])?>">+ ADD / EDIT QUESTIONS</a>
 					<?php if (count($faq) == 0) { ?>
 				    <div class="empty-wrapper">
                         <img class="sad-face" src="/imgs/sad-face.svg">
-                        <p class="no-video-text">You don't have any press images!</p>
+                        <p class="no-video-text">You don't have any question!</p>
                     </div>
 					<?php } else { ?>
 

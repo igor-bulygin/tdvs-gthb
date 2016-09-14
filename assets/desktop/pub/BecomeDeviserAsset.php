@@ -14,5 +14,6 @@ class BecomeDeviserAsset extends AssetBundle {
 		'app\assets\libs\angularAsset',
 		'app\assets\libs\angularToastrAsset',
 		'app\assets\api\ApiAsset',
+		'app\assets\libs\utilAsset'
 	];
 }

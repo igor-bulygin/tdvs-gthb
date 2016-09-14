@@ -24,6 +24,7 @@ use yii\mongodb\Collection;
  * @property string code_invitation_type
  * @property string person_id
  * @property string postman_email_id
+ * @property MongoDate created_at
  */
 class Invitation extends CActiveRecord
 {
@@ -64,6 +65,7 @@ class Invitation extends CActiveRecord
 			'code_invitation_type',
 			'person_id',
 			'postman_email_id',
+			'created_at',
 		];
 	}
 
@@ -75,6 +77,7 @@ class Invitation extends CActiveRecord
 		parent::init();
 
 		$this->uuid = Uuid::uuid4()->toString();
+		$this->created_at = new MongoDate();
 
 		Invitation::setSerializeScenario(Invitation::SERIALIZE_SCENARIO_PUBLIC);
 	}
@@ -221,6 +224,18 @@ class Invitation extends CActiveRecord
 		$this->save(true, ["postman_email_id"]);
 
 		return $email;
+	}
+
+	/**
+	 * Get the email related with the invitation
+	 *
+	 * @return PostmanEmail
+	 */
+	public function getPostmanEmail()
+	{
+		/** @var PostmanEmail $postmanEmail */
+		$postmanEmail = $this->hasOne(PostmanEmail::className(), ['_id' => 'postman_email_id'])->one();
+		return $postmanEmail;
 	}
 
 	/**

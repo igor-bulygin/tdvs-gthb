@@ -162,6 +162,7 @@ $config = [
 				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/video' => 'deviser/videos',
 				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/faq' => 'deviser/faq',
 
+				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/about/edit' => 'deviser/about-edit',
 				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/press/edit' => 'deviser/press-edit',
 				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/video/edit' => 'deviser/videos-edit',
 				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/faq/edit' => 'deviser/faq-edit',
@@ -187,7 +188,7 @@ $config = [
 				'about-us' => 'public/about-us',
 
 				// Postman (temp urls)
-				'/postman/emails' => 'postman/index',
+//				'/postman/emails' => 'postman/index',
 				'/postman/emails/<uuid:[^/.]*?>' => 'postman/email-view',
 				'/postman/mockups/deviser-request-invitation' => 'postman/mockup-deviser-request-invitation-view',
 				'/postman/mockups/deviser-invitation' => 'postman/mockup-deviser-invitation-view',

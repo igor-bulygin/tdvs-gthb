@@ -1,16 +1,18 @@
 (function () {
 	"use strict";
 
-	function controller(deviserDataService, toastr) {
+	function controller(deviserDataService, toastr, UtilService) {
 		var vm = this;
 		vm.submitForm = submitForm;
 		vm.addUrlPortfolio = addUrlPortfolio;
 		vm.addUrlVideo = addUrlVideo;
+		vm.has_error = UtilService.has_error;
 
 		function init() {
-			vm.invitation = new deviserDataService.InvitationRequest;
-			vm.invitation.urls_portfolio = [];
-			vm.invitation.urls_video = [];
+			vm.invitation = {
+				urls_portfolio: [],
+				urls_video: []
+			}
 			addUrlPortfolio();
 			addUrlVideo();
 		}
@@ -20,13 +22,17 @@
 		function submitForm(form) {
 			form.$setSubmitted();
 			if (form.$valid) {
-				console.log(form);
-				vm.invitation.$save().then(function (dataSaved) {
-					console.log(dataSaved);
+				vm.new_invitation = new deviserDataService.InvitationRequest;
+				for(var key in vm.invitation) {
+					vm.new_invitation[key] = vm.invitation[key];
+				}
+				vm.new_invitation.$save().then(function (dataSaved) {
 					vm.success = true;
+					init();
+					vm.form.$setPristine();
+					vm.form.$setUntouched();
 				}, function (err) {
 					toastr.error("Error saving form!");
-					console.log(err);
 				})
 			} else {
 				toastr.error("Invalid form!");
@@ -46,7 +52,7 @@
 	}
 
 
-	angular.module('todevise', ['api', 'toastr'])
+	angular.module('todevise', ['api', 'toastr', 'util'])
 		.controller('becomeDeviserCtrl', controller);
 
 }());
