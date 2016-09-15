@@ -43,7 +43,10 @@ $this->params['deviser_menu_active_option'] = 'faq';
 										<div class="faq-language-menu">
 											<ol class="nya-bs-select form-control" ng-model="question.languageSelected" ng-change="editFaqCtrl.parseQuestion(question)" ng-init="question.languageSelected='en-US'">
 												<li ng-repeat="language in editFaqCtrl.languages" class="nya-bs-option ng-class:{'lang-selected':editFaqCtrl.isLanguageOk(language.code,question)}" value="{{language.code}}">
-													<a href=""><span ng-bind="language.name"></span><span class="glyphicon glyphicon-ok" ng-if="editFaqCtrl.isLanguageOk(language.code,question)"></span></a>
+													<a href="">
+                                                        <span ng-bind="language.name"></span>
+													    <span class="glyphicon glyphicon-ok ok-white-icon pull-right" ng-if="editFaqCtrl.isLanguageOk(language.code,question)"></span>
+												    </a>
 												</li>
 											</ol>
 											<div class="faq-row">

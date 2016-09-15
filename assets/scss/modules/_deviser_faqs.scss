@@ -103,21 +103,21 @@
         }
     }
     .dropdown-menu{
-        background-color:$light_grey!important;
+        background-color:$background_grey!important;
     }
     ul{
         border-bottom: 1px solid #fff;
-        background-color: $light_grey!important;
+        background-color: $background_grey!important;
         li{
             &:hover{
                 @include box-shadow(0,0,0,transparent);
             }
             a{
                 &:hover{
-                    background-color:$white!important;
+                    background-color:$white;
                 }
                 &:focus{
-                    background-color:$light_grey!important;
+                    background-color:$light_grey;
                 }
             }
         }
@@ -164,8 +164,21 @@
     display: block;
 }
 .nya-bs-select.btn-group .dropdown-menu {
-    min-width: auto!important;
+    min-width: 152px!important;
+    margin-top: 10px;
 }
 .lang-selected{
-    background-color: $green;
+    background-color: $green!important;
+    a{
+        background-color: $green!important;
+    }
+    a:hover{
+        background-color: $green!important;   
+    }
+    a:focus{
+        background-color: $green!important;   
+    }
+}
+.ok-white-icon{
+    color: $white;
 }
