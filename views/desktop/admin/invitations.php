@@ -33,7 +33,7 @@ $this->title = 'Todevise / Admin / Invitations';
 		<div class="row no-gutter page-title-row">
 			<div class="row-same-height">
 				<div class="col-xs-2 col-height col-middle">
-					<h2 class="page-title funiv_bold fs-upper fc-fff fs1-071"><?= Yii::t("app/admin", "Admins"); ?></h2>
+					<h2 class="page-title funiv_bold fs-upper fc-fff fs1-071"><?= Yii::t("app/admin", "Invitations"); ?></h2>
 				</div>
 				<div class="col-xs-6 col-height col-middle flex flex-align-center">
 
@@ -46,7 +46,7 @@ $this->title = 'Todevise / Admin / Invitations';
 
 		<?php
 			echo GridView::widget([
-				'id' => 'admins_list',
+				'id' => 'invitations_list',
 				'dataProvider' => $invitations,
 				'options' => [
 					'class' => 'funiv fc-fff fs1-071',
