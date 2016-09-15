@@ -48,7 +48,10 @@ class InvitationController extends Controller
 
 			// send the email to invited person
 			$email = $invitation->composeEmail();
-			if ($email->send()) {
+			$taskId = $email->findCurrentPendingTaskId();
+			if ($email->send($taskId)) {
+				$email->save();
+
 				$invitation->date_sent = new MongoDate();
 				$invitation->save();
 			}
