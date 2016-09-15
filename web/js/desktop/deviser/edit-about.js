@@ -43,6 +43,6 @@
 	
 	
 	angular
-		.module('todevise', ['api', 'util', 'toastr', 'nya.bootstrap.select'])
+		.module('todevise', ['api', 'util', 'toastr', 'nya.bootstrap.select', 'textAngular'])
 		.controller('editAboutCtrl', controller);
 }());
