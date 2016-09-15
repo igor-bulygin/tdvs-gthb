@@ -1911,6 +1911,16 @@ a, a:hover, a:focus {
     max-width: 330px;
     margin: 60px auto 0; }
 
+.invitation-messages {
+  text-align: center;
+  color: #ffffff;
+  width: 600px;
+  margin: 40px auto; }
+  .invitation-messages p {
+    font-size: 17px;
+    font-family: "Univers Condensed Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin: 20px 0 40px; }
+
 .product {
   background-color: #ffffff; }
   .product .product-data-wrapper {
