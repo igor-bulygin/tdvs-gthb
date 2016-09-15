@@ -12,6 +12,7 @@ class CreateDeviserAsset extends AssetBundle {
 	public $depends = [
 		'app\assets\desktop\pub\PublicCommonAsset',
 		'app\assets\libs\angularAsset',
+		'app\assets\libs\angularBootstrapAsset',
 		'app\assets\libs\angularToastrAsset',
 		'app\assets\api\ApiAsset',
 		'app\assets\libs\utilAsset'

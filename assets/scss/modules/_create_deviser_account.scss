@@ -25,3 +25,17 @@
         margin: 20px 0 40px;
     }
 }
+.remember-me{
+    label{
+        text-transform: none;
+        font-family: $font-family--secondary;
+        font-size: 14px;
+    }
+}
+.remember-me label::before{
+    background-color: $dark_grey;
+    border:1px solid $darker_grey;
+}
+.remember-me label::after{
+    color: $background_grey;
+}

@@ -3,6 +3,7 @@
 	
 	function controller(deviserDataService, UtilService, languageDataService, toastr, productDataService) {
 		var vm = this;
+		vm.biography_language = "en-US";
 		
 		function getDeviser() {
 			deviserDataService.Profile.get({
@@ -17,7 +18,7 @@
 		function getLanguages() {
 			languageDataService.Languages.get()
 				.$promise.then(function(dataLanguages) {
-					vm.languages = dataLanguages;
+					vm.languages = dataLanguages.items;
 			}, function(err) {
 				toastr.error(err);
 			})
@@ -42,6 +43,6 @@
 	
 	
 	angular
-		.module('todevise', ['api', 'util', 'toastr'])
+		.module('todevise', ['api', 'util', 'toastr', 'nya.bootstrap.select'])
 		.controller('editAboutCtrl', controller);
 }());

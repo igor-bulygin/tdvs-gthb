@@ -54,11 +54,10 @@ $this->title = 'Create a Deviser account - Todevise';
 						             condition="createDeviserCtrl.has_error(createDeviserCtrl.form, createDeviserCtrl.form.brand_name)"></form-errors>
 					</div>
 					<div class="row">
-						<label>Representative name <i class="ion-information-circled info"></i></label>
+						<label>Representative name <i tooltip-placement="top" uib-tooltip="This name will not be made public. We will only use it to communicate with you." class="ion-information-circled info"></i></label>
 						<input type="text" class="form-control grey-input" name="representative_name"
 						       ng-model="createDeviserCtrl.deviser.representative_name" required>
-						<form-errors field="createDeviserCtrl.form.representative_name"
-						             condition="createDeviserCtrl.has_error(createDeviserCtrl.form, createDeviserCtrl.form.representative_name)"></form-errors>
+						<form-errors field="createDeviserCtrl.form.representative_name" condition="createDeviserCtrl.has_error(createDeviserCtrl.form, createDeviserCtrl.form.representative_name)"></form-errors>
 					</div>
 					<div class="row">
 						<label>Set your password</label>
@@ -79,6 +78,14 @@ $this->title = 'Create a Deviser account - Todevise';
 							<form-messages field="createDeviserCtrl.form.password_confirm"></form-messages>
 						</div>
 					</div>
+					<div class="row">
+                        <div class="checkbox checkbox-circle remember-me">
+                            <input id="checkbox7" class="styled" type="checkbox">
+                            <label for="checkbox7">
+                                Remember me
+                            </label>
+                        </div>
+                    </div>
 				</div>
 				<button class="btn-red send-btn" ng-click="createDeviserCtrl.submitForm(createDeviserCtrl.form)">
 					<i class="ion-android-navigate"></i>
