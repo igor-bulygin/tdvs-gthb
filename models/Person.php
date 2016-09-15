@@ -2,6 +2,7 @@
 namespace app\models;
 
 use app\helpers\Utils;
+use EasySlugger\Slugger;
 use Exception;
 use MongoDate;
 use Yii;
@@ -12,22 +13,23 @@ use yii\mongodb\Collection;
 use yii\web\IdentityInterface;
 
 /**
- * @property string $slug
- * @property string $text_short_description
- * @property string $text_biography
- * @property string $code_account_state
- * @property mixed $type
- * @property array $categories
- * @property array $collections
- * @property array $personal_info
- * @property array $media
- * @property array $press
- * @property array $videos
- * @property array $faq
- * @property array $credentials
- * @property array $preferences
- * @property array $curriculum
- * @property MongoDate $created_at
+ * @property string slug
+ * @property string text_short_description
+ * @property string text_biography
+ * @property string code_account_state
+ * @property mixed type
+ * @property array categories
+ * @property array collections
+ * @property array personal_info
+ * @property array media
+ * @property array press
+ * @property array videos
+ * @property array faq
+ * @property array credentials
+ * @property array preferences
+ * @property array curriculum
+ * @property MongoDate created_at
+ * @property MongoDate updated_at
  */
 class Person extends CActiveRecord implements IdentityInterface
 {
@@ -96,6 +98,7 @@ class Person extends CActiveRecord implements IdentityInterface
 			'videos',
 			'faq',
 			'created_at',
+			'updated_at',
 		];
 	}
 
@@ -113,8 +116,7 @@ class Person extends CActiveRecord implements IdentityInterface
 	{
 		parent::init();
 
-		$this->short_id = $this->genValidID(7);
-
+		$this->short_id = Utils::shortID(7);
 
 		// initialize attributes
 		$this->categories = [];
@@ -137,17 +139,6 @@ class Person extends CActiveRecord implements IdentityInterface
 
 		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_PUBLIC);
 	}
-
-//	public function behaviors()
-//	{
-//		return [
-//			[
-//				'class' => SluggableBehavior::className(),
-//				'attribute' => 'brand_name',
-//				// 'slugAttribute' => 'slug',
-//			],
-//		];
-//	}
 
 	/**
 	 * Get one entity serialized
@@ -255,12 +246,13 @@ class Person extends CActiveRecord implements IdentityInterface
 
 		// TODO use SluggableBehavior when name is not in a sub document
 		if (empty($this->slug)) {
-			$this->slug = "my-slug-" . uniqid();
+			$this->slug = Slugger::slugify($this->getBrandName());
 		}
 
 		if (empty($this->created_at)) {
 			$this->created_at = new MongoDate();
 		}
+		$this->updated_at = new MongoDate();
 
 		return parent::beforeSave($insert);
 	}
@@ -308,6 +300,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'press',
 					'videos',
 					'faq',
+					'slug',
 				],
 				'safe',
 				'on' => [self::SCENARIO_DEVISER_UPDATE_DRAFT]

@@ -638,7 +638,7 @@ class PublicController extends CController
 		return [
 			"slug" => [
 				"phuong-my",
-				"5-jotas",
+				"cinco-jotas",
 				"kim-kwang",
 				"chris-herbert",
 				"vaskolg-vaskolg",
