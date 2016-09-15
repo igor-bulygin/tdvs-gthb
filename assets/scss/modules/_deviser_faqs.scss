@@ -84,33 +84,40 @@
     }
 }
 .faq-language-menu{
+    ol{
+        background-color:$pale_white!important;
+        border-bottom: 1px solid #fff!important;
+        @include border-radius(0px,0px,0px,0px);
+        button{
+            font-family: $font-family--bold;
+            color: $black!important;
+            border-top: 1px solid transparent!important;
+            border-left: 1px solid transparent!important;
+            border-right: 1px solid transparent!important;
+            background-color: transparent!important;
+            border-bottom: 1px solid $red!important;
+            background-color:$pale_white!important;
+            width:94px!important;
+            @include border-radius(0px,0px,0px,0px);
+            text-transform: uppercase;
+        }
+    }
+    .dropdown-menu{
+        background-color:$light_grey!important;
+    }
     ul{
         border-bottom: 1px solid #fff;
+        background-color: $light_grey!important;
         li{
             &:hover{
                 @include box-shadow(0,0,0,transparent);
             }
-            &.active{
-                a{
-                    color: $black!important;
-                    border-top: 1px solid transparent!important;
-                    border-left: 1px solid transparent!important;
-                    border-right: 1px solid transparent!important;
-                    background-color: transparent!important;
-                    border-bottom: 1px solid $red!important;
-                }
-            }
             a{
-                font-family: $font-family--bold;
-                text-transform: uppercase;
-                color: $dark_grey;
                 &:hover{
-                    color: $black;
-                    border-top: 1px solid transparent!important;
-                    border-left: 1px solid transparent!important;
-                    border-right: 1px solid transparent!important;
-                    background-color: transparent!important;
-                    border-bottom: 1px solid $red;
+                    background-color:$white!important;
+                }
+                &:focus{
+                    background-color:$light_grey!important;
                 }
             }
         }
@@ -156,4 +163,9 @@
     margin: 20px auto;
     display: block;
 }
-
+.nya-bs-select.btn-group .dropdown-menu {
+    min-width: auto!important;
+}
+.lang-selected{
+    background-color: $green;
+}

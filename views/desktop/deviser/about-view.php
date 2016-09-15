@@ -51,7 +51,9 @@ $this->params['deviser'] = $deviser;
 							<?php if ($deviser->hasResumeFile()) { ?>
 							<div class="resume-header"><a href="<?= $deviser->getUrlResumeFile() ?>">See resume</a></div>
 							<?php } ?>
-							<p><?= $deviser->text_biography ?></p>
+							<div class="deviser-biography">
+							    <p><?= $deviser->text_biography ?></p>
+							</div>
 						</div>
 					</div>
 				</div>
