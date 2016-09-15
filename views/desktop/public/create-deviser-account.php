@@ -25,8 +25,27 @@ $this->title = 'Create a Deviser account - Todevise';
 
 	<div class="create-deviser-account-wrapper">
 		<div class="logo">
-			<img src="/imgs/logo.png" data-pin-nopin="true">
+		    <a href="#">
+			    <img src="/imgs/logo.png" data-pin-nopin="true">
+			</a>
 		</div>
+		<!-- MENSAJES -->
+            <!-- MENSAJE 1 -->
+            <div class="invitation-messages">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi </p>
+                <a href="#" class="btn btn-red">Pincha aquí</a>
+            </div>
+            <!-- MENSAJE 2 -->
+            <div class="invitation-messages">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi </p>
+                <a href="#" class="btn btn-red">Pincha aquí</a>
+            </div>
+            <!-- MENSAJE 3 -->
+            <div class="invitation-messages">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi </p>
+                <a href="#" class="btn btn-red">Pincha aquí</a>
+            </div>
+		<!-- /MENSAJES -->
 		<div class="create-deviser-account-container black-form" ng-controller="createDeviserCtrl as createDeviserCtrl">
 			<form name="createDeviserCtrl.form" novalidate>
 				<div>

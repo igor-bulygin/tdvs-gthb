@@ -14,3 +14,14 @@
         margin: 60px auto 0;
     }
 }
+.invitation-messages{
+    text-align: center;
+    color: $white;
+    width: 600px;
+    margin: 40px auto;
+    p{
+        font-size: 17px;
+        font-family: $font-family--secondary;
+        margin: 20px 0 40px;
+    }
+}
