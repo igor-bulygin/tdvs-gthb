@@ -314,9 +314,9 @@ class PublicController extends CController
 		/** @var Invitation $invitation */
 //		$invitation = Invitation::findOneSerialized($invitationId);
 		$invitation = Invitation::findByEmailAction($actionId);
-		if (!$invitation) {
-			throw new BadRequestHttpException(Yii::t("app/public", 'Invalid invitation'));
-		}
+//		if (!$invitation) {
+//			throw new BadRequestHttpException(Yii::t("app/public", 'Invalid invitation'));
+//		}
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("create-deviser-account", ["invitation" => $invitation]);

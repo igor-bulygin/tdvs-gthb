@@ -306,6 +306,16 @@ class Invitation extends CActiveRecord
 	}
 
 	/**
+	 * Indicate if an invitation was used
+	 *
+	 * @return bool
+	 */
+	public function isUsed()
+	{
+		return ($this->code_use_state == self::USE_STATE_USED);
+	}
+
+	/**
 	 * Set the properties to indicate that the invitation has been used
 	 *
 	 * @param MongoDate $datetime
