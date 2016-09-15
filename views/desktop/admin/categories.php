@@ -60,7 +60,7 @@ $this->title = 'Todevise / Admin / Categories';
 				</label>
 				<div class="input-group" ng-repeat="(lang_k, lang_v) in create_newCtrl.data.langs">
 					<span class="input-group-addon funiv_bold fs1 fs-upper" id="basic-addon-{{ $index }}">{{ lang_v }}</span>
-					<input required="" type="text" class="form-control funiv fs1" placeholder="<?= Yii::t("app/admin", "Category name... "); ?>" aria-describedby="basic-addon-{{ $index }}" ng-model="langs[lang_k]" name="{{ lang_k }}">
+					<input required="" type="text" class="form-control funiv fs1" placeholder="<?= Yii::t("app/admin", "Category name... "); ?>" aria-describedby="basic-addon-{{ $index }}" ng-model="create_newCtrl.langs[lang_k]" name="{{ lang_k }}">
 					<span class="input-group-addon alert-danger funiv fs0-929" ng-show="create_newCtrl.form.$submitted && !create_newCtrl.form.$valid && !create_newCtrl.form['{{lang_k}}'].$valid">
 					<span ng-show="create_newCtrl.form['{{lang_k}}'].$error.required"><?= Yii::t("app/admin", "Required!"); ?></span>
 					</span>
