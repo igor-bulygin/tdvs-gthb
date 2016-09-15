@@ -671,17 +671,28 @@ class Utils
 	 */
 	public static function getYoutubeVideoIdByUrl($urlYoutubeVideo)
 	{
-//		$urlYoutubeVideo = 'https://www.youtube.com/watch?v=7iagRgdL3kU';
-
-		$strParams = explode('?', $urlYoutubeVideo)[1];
-		$params = explode('&', $strParams);
-		foreach ($params as $param) {
-			$key = explode('=', $param)[0];
-			$value = explode('=', $param)[1];
-			if ($key == 'v') {
-				return $value;
-			}
+//		$urlYoutubeVideo = 'https://www.youtube.com/watch?v=XA6K2gQf95Y';
+//		$urlYoutubeVideo = 'https://youtu.be/0Ep8XHtsq8A';
+		$domain = ltrim(ltrim($urlYoutubeVideo, 'http://'), 'https://');
+		$parts = explode('/', $domain);
+		$domain = $parts[0];
+		switch ($domain) {
+			case "www.youtube.com":
+				$strParams = explode('?', $urlYoutubeVideo)[1];
+				$params = explode('&', $strParams);
+				foreach ($params as $param) {
+					$key = explode('=', $param)[0];
+					$value = explode('=', $param)[1];
+					if ($key == 'v') {
+						return $value;
+					}
+				}
+				break;
+			case "youtu.be":
+				return $parts[1];
+				break;
 		}
+
 		return null;
 	}
 

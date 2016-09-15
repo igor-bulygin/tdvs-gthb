@@ -52,17 +52,17 @@ class ProductController extends AppPrivateController
 //        $data = Yii::$app->request->post();
 //        print_r($data);
 
-		$deviser->setScenario($this->getScenarioFromRequest());
-		if ($deviser->load(Yii::$app->request->post(), '') && $deviser->save()) {
+		$product->setScenario(Product::SCENARIO_PRODUCT_UPDATE_DRAFT);
+		if ($product->load(Yii::$app->request->post(), '') && $product->save()) {
 			// handle success
 
 			// TODO: return the deviser data, only for test. remove when finish.
 //            Yii::$app->response->setStatusCode(204); // Success, without body
-			Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
-			return $deviser;
+			Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_OWNER);
+			return $product;
 		} else {
 			Yii::$app->response->setStatusCode(400); // Bad Request
-			return ["errors" => $deviser->errors];
+			return ["errors" => $product->errors];
 		}
 	}
 
