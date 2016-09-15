@@ -45,12 +45,25 @@ $this->params['deviser'] = $deviser;
 								</div>
 							</div>
 							<div class="subtitle">
-								<?= $deviser->getCategoriesLabel() ?>
+								<ol class="nya-bs-select" ng-model="editAboutCtrl.deviser.categories" multiple ng-cloak>
+									<li ng-repeat="category in editAboutCtrl.categories" class="nya-bs-option" value="{{category.id}}">
+										<a href=""><span ng-bind="category.name"></span> <span class="glyphicon glyphicon-ok check-mark" ng-if="editAboutCtrl.deviser.categories.indexOf(category.id) > -1"></span></a>
+									</li>
+								</ol>
 							</div>
 							<?php if ($deviser->hasResumeFile()) { ?>
 							<div class="resume-header"><a href="<?= $deviser->getUrlResumeFile() ?>">See resume</a></div>
 							<?php } ?>
-							<p><?= $deviser->text_biography ?></p>
+							<ol class="nya-bs-select" ng-model="editAboutCtrl.biography_language" ng-cloak>
+								<li class="nya-bs-option" value=""></li>
+								<li ng-repeat="language in editAboutCtrl.languages" class="nya-bs-option" value="{{language.code}}">
+									<a href=""><span ng-bind="language.name"></span></a>
+								</li>
+							</ol>
+							<div style="border-color:white;">
+								<p ng-model="editAboutCtrl.deviser.text_biography[editAboutCtrl.biography_language]" contenteditable ng-cloak ng-bind="editAboutCtrl.deviser.text_biography[editAboutCtrl.biography_language]"></p>
+								<span class="glyphicon glyphicon-pencil" style="color:white;"></span>
+							</div>
 						</div>
 					</div>
 				</div>
