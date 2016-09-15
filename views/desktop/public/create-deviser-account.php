@@ -54,7 +54,7 @@ $this->title = 'Create a Deviser account - Todevise';
 						             condition="createDeviserCtrl.has_error(createDeviserCtrl.form, createDeviserCtrl.form.brand_name)"></form-errors>
 					</div>
 					<div class="row">
-						<label>Representative name <i tooltip-placement="top" uib-tooltip="Lorem ipsum dolor sit amet" class="ion-information-circled info"></i></label>
+						<label>Representative name <i tooltip-placement="top" uib-tooltip="This name will not be made public. We will only use it to communicate with you." class="ion-information-circled info"></i></label>
 						<input type="text" class="form-control grey-input" name="representative_name"
 						       ng-model="createDeviserCtrl.deviser.representative_name" required>
 						<form-errors field="createDeviserCtrl.form.representative_name" condition="createDeviserCtrl.has_error(createDeviserCtrl.form, createDeviserCtrl.form.representative_name)"></form-errors>
