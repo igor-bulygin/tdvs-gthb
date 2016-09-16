@@ -11,8 +11,7 @@ class utilAsset extends AssetBundle {
 		'js/util/treeService.js',
 		'js/util/comparator.js',
 		'js/util/form-messages/form-messages.js',
-		'js/util/form-errors/form-errors.js',
-		'js/util/contenteditable.js'
+		'js/util/form-errors/form-errors.js'
 	];
 	
 	public $depends = [

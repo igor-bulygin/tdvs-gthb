@@ -2,10 +2,13 @@
 namespace app\models;
 
 use app\models\Warranty;
+use EasySlugger\Slugger;
 use Exception;
+use MongoDate;
 use Yii;
 use app\helpers\Utils;
 use app\helpers\CActiveRecord;
+use yii\behaviors\SluggableBehavior;
 use yii\mongodb\ActiveQuery;
 use yii\mongodb\Collection;
 use yii\mongodb\Connection;
@@ -31,9 +34,14 @@ use yii\base\NotSupportedException;
  * @property array currency
  * @property array weight_unit
  * @property array price_stock
+ * @property MongoDate created_at
+ * @property MongoDate updated_at
  * @property int enabled
  */
 class Product extends CActiveRecord {
+
+	const SCENARIO_PRODUCT_OLD_API = 'scenario-product-old-api';
+	const SCENARIO_PRODUCT_UPDATE_DRAFT = 'scenario-product-update-draft';
 
 	/**
 	 * The attributes that should be serialized
@@ -75,6 +83,8 @@ class Product extends CActiveRecord {
 			'currency',
 			'weight_unit',
 			'price_stock',
+			'created_at',
+			'updated_at',
 		];
 	}
 
@@ -184,6 +194,17 @@ class Product extends CActiveRecord {
 		if($this->price_stock == null) {
 			$this["price_stock"] = [];
 		}
+
+		if (empty($this->created_at)) {
+			$this->created_at = new MongoDate();
+		}
+		$this->updated_at = new MongoDate();
+
+//		if (empty($this->slug)) {
+//			$this->slug = [
+//				Lang::EN_US => Slugger::slugify($this->name[Lang::EN_US])
+//			];
+//		}
 
 		return parent::beforeSave($insert);
 	}
@@ -611,6 +632,36 @@ class Product extends CActiveRecord {
 	public function getUrlImagesLocation()
 	{
 		return Yii::getAlias("@product_url") . "/" . $this->short_id . "/";
+	}
+
+	public function rules()
+	{
+		return [
+			// the name, email, subject and body attributes are required
+			[
+				[
+					'deviser_id',
+					'categories',
+					'collections',
+					'name',
+					'slug',
+					'description',
+					'media',
+					'options',
+					'madetoorder',
+					'sizechart',
+					'bespoke',
+					'preorder',
+					'returns',
+					'warranty',
+					'currency',
+					'weight_unit',
+					'price_stock',
+				],
+				'safe',
+				'on' => [self::SCENARIO_PRODUCT_OLD_API, self::SCENARIO_PRODUCT_UPDATE_DRAFT]
+			],
+		];
 	}
 
 }

@@ -17,6 +17,7 @@ class EditAboutAsset extends AssetBundle {
 		'app\assets\libs\angularBootstrapAsset',
 		'app\assets\api\ApiAsset',
 		'app\assets\libs\utilAsset',
-		'app\assets\libs\nyaBootstrapSelectAsset'
+		'app\assets\libs\nyaBootstrapSelectAsset',
+		'app\assets\libs\textAngularAsset'
 	];
 }

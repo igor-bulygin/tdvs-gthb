@@ -638,7 +638,7 @@ class PublicController extends CController
 		return [
 			"slug" => [
 				"phuong-my",
-				"5-jotas",
+				"cinco-jotas",
 				"kim-kwang",
 				"chris-herbert",
 				"vaskolg-vaskolg",
@@ -731,6 +731,8 @@ class PublicController extends CController
 		$query = new ActiveQuery(Product::className());
 		$query->select(["short_id"]);
 		$query->where(["not in", "short_id", $selectedIds]);
+		// filter products not saved properly, without name, and other attributes
+		$query->andWhere(["<>", "name", []]);
 		$query->limit($limit - count($selectedIds));
 		$query->offset(rand(1, 100));
 		$products = $query->all();

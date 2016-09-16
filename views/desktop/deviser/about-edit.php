@@ -60,10 +60,8 @@ $this->params['deviser'] = $deviser;
 									<a href=""><span ng-bind="language.name"></span></a>
 								</li>
 							</ol>
-							<div style="border-color:white;">
-								<p ng-model="editAboutCtrl.deviser.text_biography[editAboutCtrl.biography_language]" contenteditable ng-cloak ng-bind="editAboutCtrl.deviser.text_biography[editAboutCtrl.biography_language]"></p>
-								<span class="glyphicon glyphicon-pencil" style="color:white;"></span>
-							</div>
+							<div text-angular ta-text-editor-class="header" ng-model="editAboutCtrl.deviser.text_biography[editAboutCtrl.biography_language]" ng-cloak ta-toolbar="[]"></div>
+							<span class="glyphicon glyphicon-pencil" style="color:white;"></span>
 						</div>
 					</div>
 				</div>
