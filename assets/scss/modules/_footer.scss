@@ -2,14 +2,14 @@
 // Footer
 // ==========================================================================
 footer{
-    @include size(100%,300px);
+    @include size(100%,260px);
     max-height: 400px;
     background: url('/imgs/footer-bg.png') center $black;
     @include bg-size(cover);
     color:$white;
-    padding:20px;
+    padding:15px 20px 20px;
     position: fixed;
-    bottom: -240px;
+    bottom: -215px;
     transition: bottom 0.4s ease-in-out;
     cursor:pointer;
     z-index: 999;
@@ -40,7 +40,7 @@ footer{
         text-transform: uppercase;
         letter-spacing: 0.5px;
         font-size: 13px;
-        margin:0 0 30px;
+        margin:0 0 15px;
         @media (max-width: 768px){
                 text-align:center;
                 margin: 0;

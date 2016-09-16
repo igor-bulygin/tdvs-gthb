@@ -50,19 +50,15 @@
     max-width: 250px;
     display: inline; 
     border:1px solid $dark_grey;
-    @include size(220px,220px);
+    @include size(165px,165px);
     position: absolute;
     @include border-radius(140px,140px,140px,140px);
-    font-size: 16px;
-    @media (min-width:769px) and (max-width: 991px){
-        @include size(180px,180px);
-        font-size:14px;
-    }
+    font-size: 14px;
     @media (max-width: 768px){
         line-height: normal;
         max-width: 100%;
         display: block;
-        @include size(175px,175px);
+        @include size(165px,165px);
         font-size:14px;
         position: relative;
         text-align: center;

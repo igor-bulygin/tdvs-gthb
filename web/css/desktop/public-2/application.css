@@ -232,8 +232,8 @@ body {
 h2 {
   font-family: "Univers Ultra Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-transform: uppercase;
-  font-size: 110px;
-  line-height: 70px;
+  font-size: 70px;
+  line-height: 45px;
   display: inline-block;
   padding: 0;
   margin: 0 0 10px; }
@@ -890,15 +890,9 @@ input[type="radio"] .styled:checked + label::after {
   -moz-box-shadow: 0px 0px 0px transparent;
   -ms-box-shadow: 0px 0px 0px transparent; }
 
-.banner-deviser-content .deviser-profile .deviser-data .description, .about-wrapper .about-container .location, .about-wrapper .about-container .subtitle, .about-wrapper .about-container .resume-header, .about-wrapper .about-container .deviser-biography p {
+.banner-deviser-content .deviser-profile .deviser-data .location, .banner-deviser-content .deviser-profile .deviser-data .description, .about-wrapper .about-container .location, .about-wrapper .about-container .subtitle, .about-wrapper .about-container .resume-header, .about-wrapper .about-container .deviser-biography p {
   font-family: "Playfair Display", Georgia, serif;
   color: #ffffff;
-  font-size: 16px;
-  letter-spacing: 0.7px; }
-
-.banner-deviser-content .deviser-profile .deviser-data .location {
-  font-family: "Playfair Display", Georgia, serif;
-  color: #9a9a9a;
   font-size: 16px;
   letter-spacing: 0.7px; }
 
@@ -920,25 +914,20 @@ input[type="radio"] .styled:checked + label::after {
   max-width: 250px;
   display: inline;
   border: 1px solid #9a9a9a;
-  width: 220px;
-  height: 220px;
+  width: 165px;
+  height: 165px;
   position: absolute;
   border-radius: 140px 140px 140px 140px !important;
   -webkit-border-radius: 140px 140px 140px 140px !important;
   -moz-border-radius: 140px 140px 140px 140px !important;
-  font-size: 16px; }
-  @media (min-width: 769px) and (max-width: 991px) {
-    .sub-banner .container-sub-baner .title-wrapper p {
-      width: 180px;
-      height: 180px;
-      font-size: 14px; } }
+  font-size: 14px; }
   @media (max-width: 768px) {
     .sub-banner .container-sub-baner .title-wrapper p {
       line-height: normal;
       max-width: 100%;
       display: block;
-      width: 175px;
-      height: 175px;
+      width: 165px;
+      height: 165px;
       font-size: 14px;
       position: relative;
       text-align: center;
@@ -1211,27 +1200,22 @@ input[type="radio"] .styled:checked + label::after {
 
 .sub-banner {
   background-color: #ffffff;
-  padding: 9px 0 20px;
-  margin: 9px 0 0 0; }
+  height: 185px; }
   @media (max-width: 768px) {
     .sub-banner {
-      padding-top: 40px; } }
-  @media (min-width: 769px) and (max-width: 991px) {
-    .sub-banner .container-sub-baner {
-      width: 100%; } }
+      padding-top: 40px;
+      height: auto; } }
   .sub-banner .container-sub-baner .title-wrapper {
-    padding: 20px;
+    padding: 15px 20px 20px;
+    height: 180px;
     position: relative; }
     @media (min-width: 769px) and (max-width: 985px) {
       .sub-banner .container-sub-baner .title-wrapper.righty {
         float: right; } }
     @media (max-width: 768px) {
       .sub-banner .container-sub-baner .title-wrapper {
-        padding: 0; } }
-    @media (min-width: 769px) and (max-width: 991px) {
-      .sub-banner .container-sub-baner .title-wrapper h2 {
-        font-size: 60px;
-        line-height: 50px; } }
+        padding: 0;
+        height: auto; } }
     @media (max-width: 768px) {
       .sub-banner .container-sub-baner .title-wrapper h2 {
         font-size: 52px;
@@ -1240,45 +1224,35 @@ input[type="radio"] .styled:checked + label::after {
         text-align: center;
         width: 100%; } }
     .sub-banner .container-sub-baner .title-wrapper h2.title-1 {
-      margin: 45px 0 0 0; }
+      margin: 57px 0 0 59px; }
       @media (max-width: 768px) {
         .sub-banner .container-sub-baner .title-wrapper h2.title-1 {
           margin: 0; } }
+    .sub-banner .container-sub-baner .title-wrapper h2.title-2 {
+      margin-left: -10px; }
+      .sub-banner .container-sub-baner .title-wrapper h2.title-2 .serif {
+        margin-left: 40px; }
     .sub-banner .container-sub-baner .title-wrapper h2 .serif {
-      font: italic 700 50px "Playfair Display", Georgia, serif;
+      font: italic 700 35px "Playfair Display", Georgia, serif;
       text-transform: none;
       display: block; }
-      @media (min-width: 769px) and (max-width: 991px) {
-        .sub-banner .container-sub-baner .title-wrapper h2 .serif {
-          font-size: 40px; } }
       @media (max-width: 768px) {
         .sub-banner .container-sub-baner .title-wrapper h2 .serif {
           font-size: 32px; } }
       .sub-banner .container-sub-baner .title-wrapper h2 .serif .capital {
         text-transform: capitalize; }
     .sub-banner .container-sub-baner .title-wrapper p.tagline-1 {
-      padding: 30px 57px 0;
+      padding: 25px 18px 0 54px;
       top: 10px;
       left: 90px; }
-      @media (min-width: 769px) and (max-width: 991px) {
-        .sub-banner .container-sub-baner .title-wrapper p.tagline-1 {
-          padding: 30px 30px 0; } }
     .sub-banner .container-sub-baner .title-wrapper p.tagline-2 {
       top: 10px;
       left: 31px;
-      padding: 147px 23px 0;
-      text-align: center; }
-      @media (min-width: 769px) and (max-width: 991px) {
-        .sub-banner .container-sub-baner .title-wrapper p.tagline-2 {
-          padding: 111px 20px 0; } }
+      padding: 104px 0px 0 40px; }
     .sub-banner .container-sub-baner .title-wrapper p.tagline-3 {
-      padding: 96px 49px 0;
+      padding: 66px 26px 0;
       top: 10px;
-      left: 131px; }
-      @media (min-width: 769px) and (max-width: 991px) {
-        .sub-banner .container-sub-baner .title-wrapper p.tagline-3 {
-          left: 70px;
-          padding: 76px 0 0 74px; } }
+      left: 98px; }
 
 .grid-wrapper {
   padding: 10px 0 50px; }
@@ -2658,7 +2632,7 @@ input[type="radio"] .styled:checked + label::after {
 
 footer {
   width: 100%;
-  height: 300px;
+  height: 260px;
   max-height: 400px;
   background: url("/imgs/footer-bg.png") center #1C1919;
   -ms-background-size: cover;
@@ -2667,9 +2641,9 @@ footer {
   -webkit-background-size: cover;
   background-size: cover;
   color: #ffffff;
-  padding: 20px;
+  padding: 15px 20px 20px;
   position: fixed;
-  bottom: -240px;
+  bottom: -215px;
   transition: bottom 0.4s ease-in-out;
   cursor: pointer;
   z-index: 999; }
@@ -2696,7 +2670,7 @@ footer {
     text-transform: uppercase;
     letter-spacing: 0.5px;
     font-size: 13px;
-    margin: 0 0 30px; }
+    margin: 0 0 15px; }
     @media (max-width: 768px) {
       footer .title {
         text-align: center;
