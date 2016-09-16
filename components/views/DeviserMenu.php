@@ -26,7 +26,7 @@ $deviser = $this->params['deviser'];
 			<?php } ?>
 		</li>
 	</ul>
-	<ul>
+	<ul class="menu-deviser-bottom">
 		<li>
 			<a class="<?= ($activeOption=='about') ? 'active' : '' ?>" href="<?= Url::to(["deviser/about", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id])?>">About</a>
 		</li>
