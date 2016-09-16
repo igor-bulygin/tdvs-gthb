@@ -220,6 +220,7 @@ class PublicController extends CController
 //		$query->limit(60)->offset(rand(1, 100));
 		$query->where($this->getProductsFilterForDemo(300));
 		$works = $query->all();
+		shuffle($works);
 
 		// divide then in blocks to be rendered in bottom section
 		$moreWork = [];
@@ -274,6 +275,7 @@ class PublicController extends CController
 		// TODO improve random works
 		$query->limit(180)->offset(rand(1, 12));
 		$works = $query->all();
+		shuffle($works);
 
 		// divide then in blocks to be rendered in bottom section
 		$moreWork = [];
