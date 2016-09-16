@@ -1607,7 +1607,7 @@ input[type="radio"] .styled:checked + label::after {
         .faq-wrapper .faq-panel .panel-heading-faq .faq-title.collapsed {
           border-bottom: 0; }
     .faq-wrapper .faq-panel .faq-answer {
-      padding: 5px 15px 10px; }
+      padding: 5px 15px 30px; }
       .faq-wrapper .faq-panel .faq-answer p {
         color: #484848;
         font: 16px "Playfair Display", Georgia, serif;
