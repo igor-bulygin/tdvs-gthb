@@ -41,9 +41,14 @@
             margin: 0 0 60px;
             font-size: 16px;
         }
-        p{
-            @extend %white-text;          
-            padding: 10px 20px 10px 0;
+        .deviser-biography{
+            height: 1049px;
+            overflow: scroll;
+            p{
+                @extend %white-text;          
+                padding: 10px 20px 10px 0;
+                font-size:14px;
+            }
         }
     }
 }
@@ -67,8 +72,4 @@
             }
         }
     }
-}
-.deviser-biography{
-    height: 1490px;
-    overflow: scroll;
 }
