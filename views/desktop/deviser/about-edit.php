@@ -1,4 +1,5 @@
 <?php
+use app\components\DeviserAdminHeader;
 use app\components\DeviserHeader;
 use app\components\DeviserMenu;
 use app\models\Person;
@@ -24,7 +25,7 @@ $this->params['deviser'] = $deviser;
 
 ?>
 
-	<?= DeviserHeader::widget() ?>
+	<?= DeviserAdminHeader::widget() ?>
 
 		<div class="store">
 			<div class="container">

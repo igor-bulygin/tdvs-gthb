@@ -291,6 +291,7 @@ class Person extends CActiveRecord implements IdentityInterface
 			[
 				[
 					'personal_info',
+					'categories',
 					'credentials',
 					'text_short_description',
 					'text_biography',
