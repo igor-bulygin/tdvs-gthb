@@ -1863,7 +1863,8 @@ input[type="radio"] .styled:checked + label::after {
       border-top: 1px solid #ffffff;
       border-bottom: 1px solid #ffffff;
       padding: 20px 0;
-      margin: 0 0 60px; }
+      margin: 0 0 60px;
+      font-size: 16px; }
     .about-wrapper .about-container p {
       padding: 10px 20px 10px 0; }
 
