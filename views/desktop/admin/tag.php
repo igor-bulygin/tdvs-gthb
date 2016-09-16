@@ -251,7 +251,7 @@ $this->title = 'Todevise / Admin / Tag';
 			<div class="input-group" ng-repeat="(lang_k, lang_v) in create_newCtrl.data.langs">
 				<span class="input-group-addon funiv_bold fs1 fs-upper" id="basic-addon-{{ $index }}">{{ lang_v }}</span>
 				<input required="" type="text" class="form-control funiv fs1" placeholder="<?= Yii::t("app/admin", "Option name..."); ?>"
-					aria-describedby="basic-addon-{{ $index }}" ng-model="create_newCtrl.data.options[data.index].text[lang_k]" name="{{ lang_k }}">
+					aria-describedby="basic-addon-{{ $index }}" ng-model="create_newCtrl.data.options[create_newCtrl.data.index].text[lang_k]" name="{{ lang_k }}">
 				<span class="input-group-addon alert-danger funiv fs0-929" ng-show="create_newCtrl.form.$submitted && !create_newCtrl.form.$valid && !create_newCtrl.form['{{lang_k}}'].$valid">
 					<span ng-show="create_newCtrl.form['{{lang_k}}'].$error.required"><?= Yii::t("app/admin", "Required!"); ?></span>
 				</span>

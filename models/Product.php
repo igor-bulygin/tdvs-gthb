@@ -410,10 +410,6 @@ class Product extends CActiveRecord {
 				$image = $fallback;
 			} else {
 				$image = $this->media["photos"][0]["name"];
-
-				if (!empty($image) && !file_exists(Yii::getAlias("@web") . "/" . $this->short_id . "/" . $image )) {
-					$image = $fallback;
-				}
 			}
 		}
 

@@ -36,8 +36,9 @@ Example about how to call to Web Service to update Deviser profile
       "currency": "EUR"
     },
     "media": {
-      "header": "filename.jpg",
-      "profile": "filename.jpg"
+      "header": "filename1.jpg",
+      "profile": "filename2.jpg",
+      "photos": ["filename3.jpg", "filename4.jpg"]
     },
     "curriculum": "deviser.cv.123456.pdf",
     "videos": [{

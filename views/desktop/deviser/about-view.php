@@ -58,6 +58,12 @@ $this->params['deviser'] = $deviser;
 					</div>
 				</div>
 				<div class="col-md-7 pad-about about-grid">
+					<?php foreach ($deviser->getAboutUrlImages() as $urlImage) { ?>
+						<div class="col-xs-12 pad-about item">
+							<img class="grid-image" src="<?= $urlImage ?>">
+						</div>
+					<?php } ?>
+
 					<div class="col-xs-12 pad-about item">
 						<img class="grid-image" src="/imgs/photo-grid-about-1.jpg">
 					</div>
