@@ -1207,7 +1207,7 @@ input[type="radio"] .styled:checked + label::after {
   width: 100%; }
 
 .home-carousel {
-  max-height: 340px; }
+  max-height: 400px; }
 
 .sub-banner {
   background-color: #ffffff;
