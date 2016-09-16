@@ -890,15 +890,9 @@ input[type="radio"] .styled:checked + label::after {
   -moz-box-shadow: 0px 0px 0px transparent;
   -ms-box-shadow: 0px 0px 0px transparent; }
 
-.banner-deviser-content .deviser-profile .deviser-data .description, .about-wrapper .about-container .location, .about-wrapper .about-container .subtitle, .about-wrapper .about-container .resume-header, .about-wrapper .about-container .deviser-biography p {
+.banner-deviser-content .deviser-profile .deviser-data .location, .banner-deviser-content .deviser-profile .deviser-data .description, .about-wrapper .about-container .location, .about-wrapper .about-container .subtitle, .about-wrapper .about-container .resume-header, .about-wrapper .about-container .deviser-biography p {
   font-family: "Playfair Display", Georgia, serif;
   color: #ffffff;
-  font-size: 16px;
-  letter-spacing: 0.7px; }
-
-.banner-deviser-content .deviser-profile .deviser-data .location {
-  font-family: "Playfair Display", Georgia, serif;
-  color: #9a9a9a;
   font-size: 16px;
   letter-spacing: 0.7px; }
 
