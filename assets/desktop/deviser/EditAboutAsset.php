@@ -18,6 +18,8 @@ class EditAboutAsset extends AssetBundle {
 		'app\assets\api\ApiAsset',
 		'app\assets\libs\utilAsset',
 		'app\assets\libs\nyaBootstrapSelectAsset',
-		'app\assets\libs\textAngularAsset'
+		'app\assets\libs\textAngularAsset',
+		'app\assets\libs\ngFileUploadAsset',
+		'app\assets\libs\angularDragAndDropAsset',
 	];
 }
