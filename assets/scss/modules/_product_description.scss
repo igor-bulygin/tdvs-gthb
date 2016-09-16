@@ -7,18 +7,17 @@
         border-bottom: 0;
         border-top: 1px solid $light_grey;
         li{
-            background-color: #cecece;
-            border-left: solid 1px #cecece;
-            border-right: solid 1px #cecece;
-            border-bottom: solid 1px #cecece;
+            background-color: transparent;
+            border-left: solid 1px $light_grey;
+            border-right: solid 1px $light_grey;
+            border-bottom: solid 1px $light_grey;
             margin-right: 3px;
             &.active{
                 background-color: $dark_grey;
-                border-left: solid 1px $light_grey;
-                border-right: solid 1px $light_grey;
-                border-bottom: solid 1px $light_grey;
                 a{
+                    background-color: #DAD8D8;
                     border: 0;
+                    color: $black;
                 }
                 &:hover{
                     background-color: $background_grey;
