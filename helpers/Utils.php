@@ -618,22 +618,22 @@ class Utils
 		switch ($category_id) {
 			case '1a23b': // "Art"
 				return [
-					['img' => '/imgs/banner-4.jpg', 'alt' => 'Header image', "active" => false],
-					['img' => '/imgs/banner-5.jpg', 'alt' => 'Header image', "active" => true],
+					['img' => '/imgs/banner_art.jpg', 'alt' => 'Header image', "active" => true],
 				];
 				break;
 			case '4a2b4': // "Fashion"
 				return [
-					['img' => '/imgs/banner-3.jpg', 'alt' => 'Header image', "active" => true],
-					['img' => '/imgs/banner-4.jpg', 'alt' => 'Header image', "active" => false],
-					['img' => '/imgs/banner-5.jpg', 'alt' => 'Header image', "active" => false],
+					['img' => '/imgs/banner_fashion.jpg', 'alt' => 'Header image', "active" => true],
 				];
 				break;
 			case '3f78g': // "Jewelry"
 				return [
-					['img' => '/imgs/banner-1.jpg', 'alt' => 'Header image', "active" => false],
-					['img' => '/imgs/banner-2.jpg', 'alt' => 'Header image', "active" => true],
-					['img' => '/imgs/banner-3.jpg', 'alt' => 'Header image', "active" => false],
+					['img' => '/imgs/banner_jewelry.jpg', 'alt' => 'Header image', "active" => true],
+				];
+				break;
+			case '2r67s': // "Decoration"
+				return [
+					['img' => '/imgs/banner_decoration.jpg', 'alt' => 'Header image', "active" => true],
 				];
 				break;
 			default:

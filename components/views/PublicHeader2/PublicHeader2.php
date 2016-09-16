@@ -43,8 +43,6 @@ use yii\helpers\Url;
 								<li><a class="ion-chevron-right" href="<?= Url::to(["public/category-b", "slug" => $category->slug, 'category_id' => $category->short_id])?>"><?= Utils::l($category->name)?></a></li>
 								<li role="separator" class="divider"></li>
 							<?php } ?>
-							<li><a class="ion-chevron-right" href="/">Decoration</a></li>
-							<li role="separator" class="divider"></li>
 							<li><a class="ion-chevron-right" href="/">Gadgets</a></li>
 						</ul>
 						<ul class="shop-secondary-menu-wrapper">
