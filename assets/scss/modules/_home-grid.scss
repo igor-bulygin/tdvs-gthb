@@ -53,6 +53,7 @@
                     @include backface-visibility(hidden);
                 }
                 &.price{
+                    font-size: 14px!important;
                     font-weight: bold;
                     color: $dark_grey;
                 }
