@@ -1857,7 +1857,8 @@ input[type="radio"] .styled:checked + label::after {
       margin: -15px 0 0 0; }
     .about-wrapper .about-container .subtitle {
       font-style: italic;
-      margin: 40px 0 50px; }
+      margin: 40px 0 50px;
+      font-size: 16px; }
     .about-wrapper .about-container .resume-header {
       border-top: 1px solid #ffffff;
       border-bottom: 1px solid #ffffff;
