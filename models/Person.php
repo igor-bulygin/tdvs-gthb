@@ -742,4 +742,32 @@ class Person extends CActiveRecord implements IdentityInterface
 			"url_avatar" => $this->getAvatarImage128()
 		];
 	}
+
+	/**
+	 * Get the urls of images to use in "about" deviser page
+	 *
+	 * @return array
+	 */
+	public function getAboutUrlImages()
+	{
+		// initialize
+		$urls = [
+			"/imgs/photo-grid-about-1.jpg",
+			"/imgs/photo-grid-about-2.jpg",
+			"/imgs/photo-grid-about-3.jpg",
+			"/imgs/photo-grid-about-4.jpg",
+			"/imgs/photo-grid-about-5.jpg",
+			"/imgs/photo-grid-about-6.jpg",
+		];
+
+		if (array_key_exists("photos", $this->media)) {
+			// if photos are stored, then return them
+			$urls = [];
+			foreach ($this->media["photos"] as $filename) {
+				$urls[] = $this->getUrlImagesLocation() . $filename;
+			}
+		}
+
+		return $urls;
+	}
 }

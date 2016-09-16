@@ -25,7 +25,7 @@ $this->params['deviser_menu_active_option'] = 'faq';
 
 /** array $faq */
 
-// <a class="edit-faq-btn" href="<?= Url::to(["deviser/faq-edit", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id])?>">+ ADD / EDIT QUESTIONS</a>
+// <a class="edit-faq-btn" href="<***?= Url::to(["deviser/faq-edit", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id])?****>">+ ADD / EDIT QUESTIONS</a>
 
 
 ?>
