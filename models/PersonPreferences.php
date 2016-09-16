@@ -20,7 +20,7 @@ class PersonPreferences extends Model
     public function rules()
     {
         return [
-            [['lang', 'currency'], 'required', 'on' => Person::SCENARIO_DEVISER_PROFILE_UPDATE],
+            [['lang', 'currency'], 'required', 'on' => Person::SCENARIO_DEVISER_UPDATE_PROFILE],
         ];
     }
 

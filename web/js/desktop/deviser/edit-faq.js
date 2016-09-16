@@ -44,7 +44,7 @@
 				vm.deviser.faq.splice(index, 1)
 			}
 			var patch = new deviserDataService.Profile;
-			patch.scenario = "deviser-faq-update";
+			patch.scenario = "deviser-update-profile";
 			patch.faq = [];
 			vm.deviser.faq.forEach(function (element, index) {
 				parseQuestion(element);

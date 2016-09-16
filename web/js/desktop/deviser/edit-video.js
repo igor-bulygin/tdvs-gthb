@@ -37,7 +37,7 @@
 			}
 			var patch = new deviserDataService.Profile;
 			patch.deviser_id = vm.deviser.id;
-			patch.scenario = "deviser-videos-update";
+			patch.scenario = "deviser-update-profile";
 			patch.videos = [];
 			//set videos and product_id's
 			vm.deviser.videos.forEach(function (element, vid_index) {

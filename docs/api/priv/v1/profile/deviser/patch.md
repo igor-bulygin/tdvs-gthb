@@ -13,7 +13,7 @@ Example about how to call to Web Service to update Deviser profile
 
 ```
 {
-    "scenario": "deviser-..." // available ["deviser-profile-update", "deviser-press-update", "deviser-videos-update", "deviser-faq-update"]
+    "scenario": "deviser-..." // available ["deviser-update-profile", "deviser-publish-profile"]
     "slug": "my-name"
     "categories": [
       "f0cco"

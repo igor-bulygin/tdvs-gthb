@@ -80,14 +80,14 @@ class ProductController extends AppPrivateController
 	private function getScenarioFromRequest()
 	{
 		// get scenario to use in validations, from request
-		$scenario = Yii::$app->request->post('scenario', Person::SCENARIO_DEVISER_PROFILE_UPDATE);
+		$scenario = Yii::$app->request->post('scenario', Person::SCENARIO_DEVISER_UPDATE_PROFILE);
 
 		// check that is a valid scenario for this controller
 		if (!in_array($scenario, [
 			Person::SCENARIO_DEVISER_CREATE_DRAFT,
 			Person::SCENARIO_DEVISER_UPDATE_DRAFT,
 			Person::SCENARIO_DEVISER_PUBLISH_PROFILE,
-			Person::SCENARIO_DEVISER_PROFILE_UPDATE,
+			Person::SCENARIO_DEVISER_UPDATE_PROFILE,
 			Person::SCENARIO_DEVISER_PRESS_UPDATE,
 			Person::SCENARIO_DEVISER_VIDEOS_UPDATE,
 			Person::SCENARIO_DEVISER_FAQ_UPDATE,
