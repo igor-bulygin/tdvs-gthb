@@ -662,9 +662,9 @@ class Utils
 
 	/**
 	 * Extract the video id from a URL. It expect the video id as a query parameter named "v", like:
-	 * "https://www.youtube.com/watch?v=7iagRgdL3kU"
+	 * "https://www.youtube.com/watch?v=7iagRgdL3kU" or "'https://youtu.be/01p8XH3sq85"
 	 *
-	 * (No external library found, to parse the url, without have to register and use API KEY)
+	 * (No external library found, to parse the url, without have to register and use their API KEY)
 	 *
 	 * @param $urlYoutubeVideo
 	 * @return string|null
@@ -672,7 +672,7 @@ class Utils
 	public static function getYoutubeVideoIdByUrl($urlYoutubeVideo)
 	{
 //		$urlYoutubeVideo = 'https://www.youtube.com/watch?v=XA6K2gQf95Y';
-//		$urlYoutubeVideo = 'https://youtu.be/0Ep8XHtsq8A';
+//		$urlYoutubeVideo = 'https://youtu.be/01p8XH3sq85';
 		$domain = ltrim(ltrim($urlYoutubeVideo, 'http://'), 'https://');
 		$parts = explode('/', $domain);
 		$domain = $parts[0];

@@ -24,7 +24,7 @@ class PersonMedia extends Model
     public function rules()
     {
         return [
-            [['header', 'profile'], 'required', 'on' => Person::SCENARIO_DEVISER_PROFILE_UPDATE],
+            [['header', 'profile'], 'required', 'on' => Person::SCENARIO_DEVISER_UPDATE_PROFILE],
         ];
     }
 

@@ -46,7 +46,7 @@
 				vm.images.splice(index, 1);
 			}
 			var patch = new deviserDataService.Profile;
-			patch.scenario = "deviser-press-update";
+			patch.scenario = "deviser-update-profile";
 			patch.press = [];
 			patch.deviser_id = vm.deviser.id;
 			vm.images.forEach(function (element) {
