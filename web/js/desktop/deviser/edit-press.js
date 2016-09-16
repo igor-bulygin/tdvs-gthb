@@ -7,18 +7,6 @@
 		vm.update = update;
 		vm.deleteImage = delete_image;
 
-		function parsePress(press, url) {
-			var images = [];
-			for (var i = 0; i < press.length; i++) {
-				images[i] = {
-					pos: i,
-					url: currentHost() + url + press[i],
-					filename: press[i]
-				};
-			}
-			return images;
-		}
-
 		function getDeviser() {
 			deviserDataService.Profile.get({
 				deviser_id: UtilService.returnDeviserIdFromUrl()
@@ -26,7 +14,7 @@
 				vm.deviser = dataDeviser;
 				if (!vm.deviser.press)
 					vm.deviser.press = [];
-				vm.images = parsePress(vm.deviser.press, vm.deviser.url_images);
+				vm.images = UtilService.parseImagesUrl(vm.deviser.press, vm.deviser.url_images);
 			}, function (err) {
 				toastr.error(err);
 			});
@@ -71,7 +59,7 @@
 			}).then(function (dataUpload) {
 				toastr.success("Photo uploaded!");
 				vm.deviser.press.unshift(dataUpload.data.filename);
-				vm.images = parsePress(vm.deviser.press, vm.deviser.url_images);
+				vm.images = UtilService.parseImagesUrl(vm.deviser.press, vm.deviser.url_images);
 				update();
 			}, function (err) {
 				toastr.error(err);

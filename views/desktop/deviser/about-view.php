@@ -22,6 +22,49 @@ $this->title = 'About ' . $deviser->getBrandName() . ' - Todevise';
 $this->params['deviser_menu_active_option'] = 'about';
 $this->params['deviser'] = $deviser;
 
+/** @var array $aboutImages */
+$aboutImages = [];
+foreach ($deviser->getAboutUrlImages() as $key => $urlImage) {
+	// very specific instructions from todevise owner,
+	// about how to show images, depending on how many images has to show
+	switch ($key + 1) {
+		case 1:
+		case 7:
+			$imageData = [
+				"src" => $urlImage,
+				"class" => "col-xs-12",
+			];
+			break;
+		case 2:
+			$imageData = [
+				"src" => $urlImage,
+				"class" => (count($deviser->getAboutUrlImages()) == 2) ? "col-xs-12" : "col-xs-6",
+			];
+			break;
+		case 4:
+			$imageData = [
+				"src" => $urlImage,
+				"class" => (in_array(count($deviser->getAboutUrlImages()), [4, 6, 7])) ? "col-xs-12" : "col-xs-6",
+			];
+			break;
+		case 3:
+		case 5:
+		case 6:
+			$imageData = [
+				"src" => $urlImage,
+				"class" => "col-xs-6",
+			];
+			break;
+		default:
+			$imageData = [
+				"src" => $urlImage,
+				"class" => "col-xs-6",
+			];
+			break;
+	}
+	$aboutImages[] = $imageData;
+}
+
 ?>
 
 <?= DeviserHeader::widget() ?>
@@ -58,30 +101,18 @@ $this->params['deviser'] = $deviser;
 					</div>
 				</div>
 				<div class="col-md-7 pad-about about-grid">
-					<?php foreach ($deviser->getAboutUrlImages() as $urlImage) { ?>
-						<div class="col-xs-12 pad-about item">
-							<img class="grid-image" src="<?= $urlImage ?>">
+					<?php foreach ($aboutImages as $urlImage) { ?>
+						<div class="<?= $urlImage["class"] ?> pad-about item">
+							<img class="grid-image" src="<?= $urlImage["src"] ?>">
 						</div>
 					<?php } ?>
-
-					<div class="col-xs-12 pad-about item">
-						<img class="grid-image" src="/imgs/photo-grid-about-1.jpg">
-					</div>
-					<div class="col-xs-6 pad-about item">
-						<img class="grid-image" src="/imgs/photo-grid-about-2.jpg">
-					</div>
-					<div class="col-xs-6 pad-about item">
-						<img class="grid-image" src="/imgs/photo-grid-about-3.jpg">
-					</div>
-					<div class="col-xs-12 pad-about item">
-						<img class="grid-image" src="/imgs/photo-grid-about-4.jpg">
-					</div>
-					<div class="col-xs-6 pad-about item">
-						<img class="grid-image" src="/imgs/photo-grid-about-5.jpg">
-					</div>
-					<div class="col-xs-6 pad-about item">
-						<img class="grid-image" src="/imgs/photo-grid-about-6.jpg">
-					</div>
+<!---->
+<!--					<div class="col-xs-12 pad-about item">-->
+<!--						<img class="grid-image" src="/imgs/photo-grid-about-1.jpg">-->
+<!--					</div>-->
+<!--					<div class="col-xs-6 pad-about item">-->
+<!--						<img class="grid-image" src="/imgs/photo-grid-about-2.jpg">-->
+<!--					</div>-->
 				</div>
 			</div>
 		</div>

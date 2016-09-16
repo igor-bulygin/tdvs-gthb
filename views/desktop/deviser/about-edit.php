@@ -1,4 +1,5 @@
 <?php
+use app\components\DeviserAdminHeader;
 use app\components\DeviserHeader;
 use app\components\DeviserMenu;
 use app\models\Person;
@@ -24,7 +25,7 @@ $this->params['deviser'] = $deviser;
 
 ?>
 
-	<?= DeviserHeader::widget() ?>
+	<?= DeviserAdminHeader::widget() ?>
 
 		<div class="store">
 			<div class="container">
@@ -68,23 +69,21 @@ $this->params['deviser'] = $deviser;
 							</div>
 						</div>
 						<div class="col-md-7 pad-about about-grid">
-							<div class="col-xs-12 pad-about item">
-								<img class="grid-image" src="/imgs/photo-grid-about-1.jpg">
+							<div ng-if="editAboutCtrl.isDropAvailable">
+								<div class="photo-loader" ng-model="editAboutCtrl.image" ngf-drop ngf-select ngf-accept="'image/*'" ngf-drop-available="editAboutCtrl.isDropAvailable">
+									<div class="plus-add">+</div>
+									<span>Add photo</span>
+								</div>
 							</div>
-							<div class="col-xs-6 pad-about item">
-								<img class="grid-image" src="/imgs/photo-grid-about-2.jpg">
+							<div ngf-no-file-drop>
+								<input type="file" name="file" ng-model="editAboutCtrl.image" ngf-select ngf-accept="'image/*'" ngf-drop-available="editAboutCtrl.isDropAvailable">
+								<button ng-click="editAboutCtrl.upload(editAboutCtrl.image)">Add</button>
 							</div>
-							<div class="col-xs-6 pad-about item">
-								<img class="grid-image" src="/imgs/photo-grid-about-3.jpg">
-							</div>
-							<div class="col-xs-12 pad-about item">
-								<img class="grid-image" src="/imgs/photo-grid-about-4.jpg">
-							</div>
-							<div class="col-xs-6 pad-about item">
-								<img class="grid-image" src="/imgs/photo-grid-about-5.jpg">
-							</div>
-							<div class="col-xs-6 pad-about item">
-								<img class="grid-image" src="/imgs/photo-grid-about-6.jpg">
+							<div class="col-xs-6 pad-about item draggable-list" dnd-list="editAboutCtrl.images" ng-repeat="image in editAboutCtrl.images" ng-if="editAboutCtrl.images.length > 0" ng-cloak>
+								<div class="image-press-wrapper">
+									<span class="ion-android-close x-close" ng-click="editAboutCtrl.deleteImage($index)"></span>
+									<img ng-src="{{image.url}}" class="grid-image" class="draggable-img" dnd-draggable="image" dnd-effect-allowd="move" dnd-moved="editAboutCtrl.update($index)">
+								</div>
 							</div>
 						</div>
 					</div>

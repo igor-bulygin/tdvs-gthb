@@ -6,6 +6,7 @@
 		this.diff = diff;
 		this.returnDeviserIdFromUrl = returnDeviserIdFromUrl;
 		this.has_error = has_error;
+		this.parseImagesUrl = parseImagesUrl;
 
 		function returnDeviserIdFromUrl() {
 			var url = $location.absUrl();
@@ -45,6 +46,19 @@
 				return (form.$submitted || field.$touched) && field.$invalid;
 			}
 		}
+
+		function parseImagesUrl(images, url) {
+			var parsed_images = [];
+			for (var i = 0; i < images.length; i++) {
+				parsed_images[i] = {
+					pos: i,
+					url: currentHost() + url + images[i],
+					filename: images[i]
+				};
+			}
+			return parsed_images;
+		}
+
 	}
 
 	angular.module('util', ['util.formMessages'])

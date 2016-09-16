@@ -52,6 +52,7 @@ $productImages = $product->getUrlGalleryImages();
 												</div>
 												<?php } ?>
 										</div>
+										<?php if (count($productImages)>1) { ?>
 										<!-- Controls -->
 										<a class='left carousel-control' href='#carousel-custom' data-slide='prev'>
 											<span class='ion-ios-arrow-left arrow'>
@@ -61,6 +62,7 @@ $productImages = $product->getUrlGalleryImages();
 											<span class='ion-ios-arrow-right arrow'>
                                                     </span>
 										</a>
+										<?php } ?>
 									</div>
 								</div>
 							</div>

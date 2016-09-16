@@ -291,6 +291,7 @@ class Person extends CActiveRecord implements IdentityInterface
 			[
 				[
 					'personal_info',
+					'categories',
 					'credentials',
 					'text_short_description',
 					'text_biography',
@@ -758,9 +759,10 @@ class Person extends CActiveRecord implements IdentityInterface
 			"/imgs/photo-grid-about-4.jpg",
 			"/imgs/photo-grid-about-5.jpg",
 			"/imgs/photo-grid-about-6.jpg",
+			"/imgs/photo-grid-about-7.jpg",
 		];
 
-		if (array_key_exists("photos", $this->media)) {
+		if ((array_key_exists("photos", $this->media)) && (count($this->media["photos"])>0)) {
 			// if photos are stored, then return them
 			$urls = [];
 			foreach ($this->media["photos"] as $filename) {
