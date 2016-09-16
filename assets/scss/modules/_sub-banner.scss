@@ -3,17 +3,15 @@
 // ==========================================================================
 .sub-banner{
     background-color: $white;
-    padding: 9px 0 20px;
-    margin: 9px 0 0 0;
+    height: 185px;
     @media (max-width: 768px){
         padding-top:40px;
+        height: auto;
     }
     .container-sub-baner{
-        @media (min-width:769px) and (max-width: 991px){
-            width:100%;
-        }
         .title-wrapper{
-            padding:20px;
+            padding:15px 20px 20px;
+            height: 180px;
             position:relative;
             &.righty{
                 @media (min-width:769px) and (max-width: 985px){
@@ -22,12 +20,9 @@
             }
             @media (max-width: 768px){
                     padding: 0;
+                    height: auto;
             }
             h2{
-                @media (min-width:769px) and (max-width: 991px){
-                    font-size: 60px;
-                    line-height: 50px;
-                }
                 @media (max-width: 768px){
                     font-size: 52px;
                     line-height: normal;
@@ -36,18 +31,21 @@
                     width: 100%;
                 }
                 &.title-1{
-                    margin: 45px 0 0 0;
+                    margin: 57px 0 0 59px;
                     @media (max-width: 768px){
                             margin:0;
                     }
                 }
+                &.title-2{
+                    margin-left: -10px;
+                    .serif{
+                        margin-left:40px;
+                    }
+                }
                 .serif{
-                    font: italic 700 50px $font-family--serif;
+                    font: italic 700 35px $font-family--serif;
                     text-transform: none;
                     display:block;
-                    @media (min-width:769px) and (max-width: 991px){
-                        font-size: 40px;
-                    }
                     @media (max-width: 768px){
                         font-size: 32px;
                     }
@@ -59,30 +57,19 @@
             p{
                 @extend %sub-banner-text;
                 &.tagline-1{
-                    padding: 30px 57px 0;
+                    padding: 25px 18px 0 54px;
                     top: 10px;
                     left: 90px;
-                    @media (min-width:769px) and (max-width: 991px){
-                        padding: 30px 30px 0;
-                    }
                 }
                 &.tagline-2{
                     top: 10px;
                     left: 31px;
-                    padding: 147px 23px 0;
-                    text-align: center;
-                    @media (min-width:769px) and (max-width: 991px){
-                        padding: 111px 20px 0;
-                    }
+                    padding: 104px 0px 0 40px;
                 }
                 &.tagline-3{
-                    padding: 96px 49px 0;
+                    padding: 66px 26px 0;
                     top: 10px;
-                    left: 131px;
-                    @media (min-width:769px) and (max-width: 991px){
-                        left: 70px;
-                        padding: 76px 0 0 74px;
-                    }
+                    left: 98px;
                 }
             }
         }

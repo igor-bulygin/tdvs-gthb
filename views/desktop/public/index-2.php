@@ -52,7 +52,7 @@ $this->params['footer_mode'] = 'collapsed';
 				<p class="tagline-1">Find products that will make you part of the future</p>
 			</div>
 			<div class="col-sm-4 col-xs-6 title-wrapper">
-				<h2>Social<br/><span class="serif">experience</span></h2>
+				<h2 class="title-2">Social<br/><span class="serif">experience</span></h2>
 				<p class="tagline-2">Show the world what you like &amp; build a community</p>
 			</div>
 			<div class="col-sm-4 title-wrapper">
