@@ -34,7 +34,7 @@
             @extend %absolut-bottom;
             @include size(100%,inherit);
             @include backface-visibility(hidden);
-            padding: 10px 15px 5px;
+            padding: 5px;
             background: $white;
             @include opacity(0.85);
             color: $almost_black;
@@ -45,7 +45,7 @@
             }
             p{
                 margin: 0;
-                font-size: 16px !important;
+                font-size: 13px !important;
                 text-align: center;
                 &.instauser{
                     @include opacity(0);

@@ -1285,7 +1285,7 @@ input[type="radio"] .styled:checked + label::after {
     height: inherit;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    padding: 10px 15px 5px;
+    padding: 5px;
     background: #ffffff;
     opacity: 0.85;
     filter: alpha(opacity=85);
@@ -1302,7 +1302,7 @@ input[type="radio"] .styled:checked + label::after {
       pointer-events: none; }
     .grid figure figcaption p {
       margin: 0;
-      font-size: 16px !important;
+      font-size: 13px !important;
       text-align: center; }
       .grid figure figcaption p.instauser {
         opacity: 0;
