@@ -8,7 +8,10 @@ use yii\helpers\Url;
 /** @var Category $category */
 
 // use params to share data between views :(
-$footerMode = array_key_exists('footer_mode', $this->params) ? $this->params['footer_mode'] : 'expanded';
+//$footerMode = array_key_exists('footer_mode', $this->params) ? $this->params['footer_mode'] : 'expanded';
+
+// Footer always collapsed (https://app.asana.com/0/155933916527513/182418486473821) (2016-09-16)
+$footerMode = 'collapsed';
 
 ?>
 

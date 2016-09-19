@@ -16,9 +16,6 @@ Index2Asset::register($this);
 
 $this->title = 'Todevise / Home';
 
-// use params to share data between views :(
-$this->params['footer_mode'] = 'collapsed';
-
 /** @var Person $deviser */
 /** @var Product $work */
 
