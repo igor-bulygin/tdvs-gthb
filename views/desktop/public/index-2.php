@@ -47,7 +47,7 @@ $this->params['footer_mode'] = 'collapsed';
 <section class="sub-banner">
 	<div class="container container-sub-baner">
 		<div class="row">
-			<div class="col-sm-4 col-xs-6 title-wrapper righty">
+			<div class="col-sm-4 col-xs-6 title-wrapper title-1 righty">
 				<h2 class="title-1"><span class="serif">The</span>store</h2>
 				<p class="tagline-1">Find products that will make you part of the future</p>
 			</div>
@@ -55,7 +55,7 @@ $this->params['footer_mode'] = 'collapsed';
 				<h2 class="title-2">Social<br/><span class="serif">experience</span></h2>
 				<p class="tagline-2">Show the world what you like &amp; build a community</p>
 			</div>
-			<div class="col-sm-4 title-wrapper">
+			<div class="col-sm-4 title-wrapper title-3">
 				<h2>Affiliate<br/><span class="serif">for all</span></h2>
 				<p class="tagline-3">Love a product. People buy it. You earn money.</p>
 			</div>

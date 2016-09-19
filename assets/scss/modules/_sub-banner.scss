@@ -13,6 +13,17 @@
             padding:15px 20px 20px;
             height: 180px;
             position:relative;
+            &.title-3{
+                padding:15px 34px 20px;
+                @media (min-width:986px) and (max-width:1199px){
+                   padding:15px 6px 20px;
+                }
+            }
+            &.title-1{
+                @media (min-width:986px) and (max-width:1199px){
+                   padding:15px 0 20px;
+                }
+            }
             &.righty{
                 @media (min-width:769px) and (max-width: 985px){
                     float: right;
@@ -25,22 +36,25 @@
             h2{
                 @media (max-width: 768px){
                     font-size: 52px;
-                    line-height: normal;
+                    line-height: 32px;
                     margin: 0;
                     text-align: center;
                     width: 100%;
                 }
                 &.title-1{
-                    margin: 57px 0 0 59px;
+                    margin: 61px 0 0 80px;
+                    @media (min-width:769px) and (max-width:986px){
+                            margin: 61px 0 0 12px;
+                    }
                     @media (max-width: 768px){
                             margin:0;
                     }
                 }
                 &.title-2{
-                    margin-left: -10px;
-                    .serif{
-                        margin-left:40px;
-                    }
+                    margin: 0 auto;
+                    width: 165px;
+                    display: block;
+                    text-align: center;
                 }
                 .serif{
                     font: italic 700 35px $font-family--serif;
@@ -56,20 +70,22 @@
             }
             p{
                 @extend %sub-banner-text;
+                top: 10px;
                 &.tagline-1{
                     padding: 25px 18px 0 54px;
-                    top: 10px;
-                    left: 90px;
+                    @media (min-width:986px) and (max-width:1199px){
+                        padding: 25px 11px 0 61px;
+                    }
                 }
                 &.tagline-2{
-                    top: 10px;
-                    left: 31px;
-                    padding: 104px 0px 0 40px;
+                    text-align: center;
+                    padding: 98px 15px 0 15px;
                 }
                 &.tagline-3{
                     padding: 66px 26px 0;
-                    top: 10px;
-                    left: 98px;
+                    @media (min-width:768px) and (max-width:986px){
+                        padding: 91px 29px 0;
+                    }
                 }
             }
         }
