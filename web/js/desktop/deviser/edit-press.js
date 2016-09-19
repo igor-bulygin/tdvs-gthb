@@ -47,25 +47,29 @@
 			});
 		}
 
-		function upload(image) {
-			var data = {
-				type: "deviser-press",
-				deviser_id: vm.deviser.id,
-				file: image
-			};
-			Upload.upload({
-				url: deviserDataService.Uploads,
-				data: data
-			}).then(function (dataUpload) {
-				toastr.success("Photo uploaded!");
-				vm.deviser.press.unshift(dataUpload.data.filename);
-				vm.images = UtilService.parseImagesUrl(vm.deviser.press, vm.deviser.url_images);
-				update();
-			}, function (err) {
-				toastr.error(err);
-			}, function (evt) {
-				var progress = parseInt(100.0 * evt.loaded / evt.total);
-				console.log('progress: ' + progress + '% ' + evt.config.data.file.name);
+		function upload(images, errImages) {
+			vm.files = images;
+			vm.errFiles = errImages;
+			angular.forEach(vm.files, function (file) {
+				var data = {
+					type: "deviser-press",
+					deviser_id: vm.deviser.id,
+					file: file
+				};
+				Upload.upload({
+					url: deviserDataService.Uploads,
+					data: data
+				}).then(function (dataUpload) {
+					toastr.success("Photo uploaded!");
+					vm.deviser.press.unshift(dataUpload.data.filename);
+					vm.images = UtilService.parseImagesUrl(vm.deviser.press, vm.deviser.url_images);
+					update();
+				}, function (err) {
+					toastr.error(err);
+				}, function (evt) {
+					var progress = parseInt(100.0 * evt.loaded / evt.total);
+					console.log('progress: ' + progress + '% ' + evt.config.data.file.name);
+				});
 			});
 		}
 

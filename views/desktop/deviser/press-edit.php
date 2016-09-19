@@ -36,14 +36,13 @@ $this->params['deviser_menu_active_option'] = 'press';
 							<div class="mesonry-row press-3">
 								<form name="editPressCtrl.form" ng-cloak>
 									<div ng-if="editPressCtrl.isDropAvailable">
-										<div class="photo-loader" class="menu-category list-group" ng-model="editPressCtrl.image" ngf-drop ngf-select ngf-accept="'image/*'" ngf-drop-available="editPressCtrl.isDropAvailable">
+										<div class="photo-loader" class="menu-category list-group" ng-model="editPressCtrl.image" ngf-drop ngf-select ngf-change="editPressCtrl.upload($files, $invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="editPressCtrl.isDropAvailable" multiple>
 											<div class="plus-add">+</div>
 											<span>Add press image</span>
 										</div>
 									</div>
 									<div ngf-no-file-drop>
-										<input type="file" name="file" ng-model="editPressCtrl.image" ngf-select ngf-accept="'image/*'" ngf-drop-available="editPressCtrl.isDropAvailable">
-										<button ng-click="editPressCtrl.upload(editPressCtrl.image)">Guardar</button>
+										<input type="file" name="file" ng-model="editPressCtrl.image" ngf-select="editPressCtrl.upload($files, $invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="editPressCtrl.isDropAvailable" multiple>
 									</div>
 								</form>
 								<div class="menu-category list-group draggable-list" ng-if="editPressCtrl.images.length > 0" dnd-list="editPressCtrl.images" ng-repeat="item in editPressCtrl.images">
