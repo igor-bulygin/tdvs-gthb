@@ -1639,7 +1639,9 @@ input[type="radio"] .styled:checked + label::after {
   font: 16px "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin: 0 0 15px 15px;
   display: block;
-  cursor: pointer; }
+  cursor: pointer;
+  float: left;
+  width: 100%; }
 
 .faq-edit-empty p {
   font: 16px "Playfair Display", Georgia, serif;
