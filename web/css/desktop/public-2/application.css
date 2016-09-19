@@ -1599,7 +1599,7 @@ input[type="radio"] .styled:checked + label::after {
         padding: 0 10px 5px 0; }
         .faq-wrapper .faq-panel .panel-heading-faq .faq-title:before {
           font: 14px "Glyphicons Halflings Regular";
-          content: "\e082";
+          content: "\e083";
           color: #484848;
           vertical-align: top;
           padding: 0 5px 7px 0;
