@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(deviserDataService, UtilService, languageDataService, toastr, productDataService, Upload, $scope) {
+	function controller(deviserDataService, UtilService, languageDataService, toastr, productDataService, Upload, $timeout) {
 		var vm = this;
 		vm.update = update;
 		vm.uploadPhoto = uploadPhoto;
@@ -63,7 +63,7 @@
 				patch.media.photos.push(element.filename);
 			});
 			patch.$update().then(function (dataUpdate) {
-				toastr.success('Updated!');
+				//ok!
 			}, function (err) {
 				toastr.error(err);
 			});
@@ -86,6 +86,9 @@
 					vm.deviser.media.photos.unshift(dataUpload.data.filename);
 					vm.images = UtilService.parseImagesUrl(vm.deviser.media.photos, vm.deviser.url_images);
 					update();
+					$timeout(function () {
+						delete file.progress;
+					}, 1000);
 				}, function (err) {
 					toastr.error(err);
 				}, function (evt) {
@@ -106,6 +109,6 @@
 
 
 	angular
-		.module('todevise', ['api', 'util', 'toastr', 'nya.bootstrap.select', 'textAngular', 'ngFileUpload', 'dndLists'])
+		.module('todevise', ['api', 'util', 'toastr', 'nya.bootstrap.select', 'textAngular', 'ngFileUpload', 'dndLists', 'ui.bootstrap'])
 		.controller('editAboutCtrl', controller);
 }());

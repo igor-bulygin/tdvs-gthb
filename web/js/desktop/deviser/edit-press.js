@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller($scope, deviserDataService, Upload, toastr, UtilService, $timeout) {
+	function controller(deviserDataService, Upload, toastr, UtilService, $timeout) {
 		var vm = this;
 		vm.upload = upload;
 		vm.update = update;
