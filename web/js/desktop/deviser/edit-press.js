@@ -24,11 +24,6 @@
 			getDeviser();
 		}
 
-		$scope.$watch('editPressCtrl.image', function (newValue, oldValue) {
-			if (newValue)
-				upload(newValue);
-		});
-
 		function update(index) {
 			if (index >= 0) {
 				vm.images.splice(index, 1);
@@ -67,8 +62,8 @@
 				}, function (err) {
 					toastr.error(err);
 				}, function (evt) {
-					var progress = parseInt(100.0 * evt.loaded / evt.total);
-					console.log('progress: ' + progress + '% ' + evt.config.data.file.name);
+					file.progress = parseInt(100.0 * evt.loaded / evt.total);
+					console.log('progress: ' + file.progress + '% ' + evt.config.data.file.name);
 				});
 			});
 		}

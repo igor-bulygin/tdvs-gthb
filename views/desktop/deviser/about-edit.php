@@ -70,14 +70,13 @@ $this->params['deviser'] = $deviser;
 						</div>
 						<div class="col-md-7 pad-about about-grid">
 							<div ng-if="editAboutCtrl.isDropAvailable">
-								<div class="photo-loader" ng-model="editAboutCtrl.image" ngf-drop ngf-select ngf-accept="'image/*'" ngf-drop-available="editAboutCtrl.isDropAvailable">
+								<div class="photo-loader" ng-model="editAboutCtrl.image" ngf-drop ngf-select ngf-change="editAboutCtrl.uploadPhoto($files,$invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="editAboutCtrl.isDropAvailable" multiple>
 									<div class="plus-add">+</div>
 									<span>Add photo</span>
 								</div>
 							</div>
 							<div ngf-no-file-drop>
-								<input type="file" name="file" ng-model="editAboutCtrl.image" ngf-select ngf-accept="'image/*'" ngf-drop-available="editAboutCtrl.isDropAvailable">
-								<button ng-click="editAboutCtrl.upload(editAboutCtrl.image)">Add</button>
+								<input type="file" name="file" ng-model="editAboutCtrl.image" ngf-select="editAboutCtrl.uploadPhoto($files, $invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="editAboutCtrl.isDropAvailable" multiple>
 							</div>
 							<div class="col-xs-6 pad-about item draggable-list" dnd-list="editAboutCtrl.images" ng-repeat="image in editAboutCtrl.images" ng-if="editAboutCtrl.images.length > 0" ng-cloak>
 								<div class="image-press-wrapper">
