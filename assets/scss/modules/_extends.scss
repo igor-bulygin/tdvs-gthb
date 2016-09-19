@@ -52,6 +52,10 @@
     border:1px solid $dark_grey;
     @include size(165px,165px);
     position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
     @include border-radius(140px,140px,140px,140px);
     font-size: 14px;
     @media (max-width: 768px){
