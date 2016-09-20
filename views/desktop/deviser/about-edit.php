@@ -87,8 +87,8 @@ $this->params['deviser'] = $deviser;
 							<div ngf-no-file-drop>
 								<input type="file" name="file" ngf-select="editAboutCtrl.uploadPhoto($files, $invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="editAboutCtrl.isDropAvailable" ngf-multiple="true">
 							</div>
-							<div class="col-xs-4 item pad-about draggable-list" dnd-list="editAboutCtrl.images" ng-if="editAboutCtrl.images.length > 0" ng-cloak>
-								<div class="image-press-wrapper image-about-edit" ng-repeat="image in editAboutCtrl.images" dnd-draggable="image" dnd-effect-allowed="move" dnd-moved="editAboutCtrl.update($index)">
+							<div class="item draggable-list about-edit-list" dnd-list="editAboutCtrl.images" ng-if="editAboutCtrl.images.length > 0" ng-cloak>
+								<div class="col-xs-4 pad-about image-press-wrapper image-about-edit" ng-repeat="image in editAboutCtrl.images" dnd-draggable="image" dnd-effect-allowed="move" dnd-moved="editAboutCtrl.update($index)">
 									<span class="ion-android-close x-close" ng-click="editAboutCtrl.deleteImage($index)"></span>
 									<img ng-src="{{image.url}}" class="grid-image draggable-img">
 								</div>
