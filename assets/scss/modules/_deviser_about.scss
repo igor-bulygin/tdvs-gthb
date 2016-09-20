@@ -60,7 +60,8 @@
     padding: 0;
 }
 .about-grid{
-    background-color: $black;
+    background-color: $white;
+    min-height: 671px;
     .item{
         img{
             height: 100%;
@@ -72,4 +73,12 @@
             }
         }
     }
+}
+.loader-about{
+    width: 100%;
+    border: 4px dashed $dark_grey;
+}
+.image-about-edit{
+    max-height: 180px;
+    overflow: hidden;
 }
