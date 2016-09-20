@@ -42,7 +42,7 @@ $this->params['deviser_menu_active_option'] = 'videos';
 								<img class="sad-face" src="/imgs/sad-face.svg">
 								<p class="no-video-text">You have no videos</p>
 							</div>
-							<div ng-cloak dnd-list="editVideosCtrl.deviser.videos">
+							<div class="video-edit-list" ng-cloak dnd-list="editVideosCtrl.deviser.videos">
 								<div class="row video-row" dnd-draggable="video" dnd-effect-allowed="move" dnd-moved="editVideosCtrl.updateDeviserVideos($index)" ng-repeat="video in editVideosCtrl.deviser.videos">
 									<div class="col-md-6">
 										<ng-youtube-embed url="video.url" autoplay="false" color="white" disablekb="true" width="100%"></ng-youtube-embed>
