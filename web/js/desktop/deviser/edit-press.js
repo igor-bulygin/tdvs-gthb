@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller($scope, deviserDataService, Upload, toastr, UtilService) {
+	function controller(deviserDataService, Upload, toastr, UtilService, $timeout) {
 		var vm = this;
 		vm.upload = upload;
 		vm.update = update;
@@ -59,6 +59,9 @@
 					vm.deviser.press.unshift(dataUpload.data.filename);
 					vm.images = UtilService.parseImagesUrl(vm.deviser.press, vm.deviser.url_images);
 					update();
+					$timeout(function () {
+						delete file.progress;
+					}, 1000);
 				}, function (err) {
 					toastr.error(err);
 				}, function (evt) {
@@ -77,7 +80,7 @@
 
 	}
 
-	angular.module('todevise', ['api', 'ngFileUpload', 'dndLists', 'toastr', 'util'])
+	angular.module('todevise', ['api', 'ngFileUpload', 'dndLists', 'toastr', 'util', 'ui.bootstrap'])
 		.controller('editPressCtrl', controller);
 
 }());
