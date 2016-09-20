@@ -22,7 +22,7 @@ Index2Asset::register($this);
 /** @var Category $category */
 /** @var Category $selectedCategory */
 
-$this->title = $deviser->getBrandName() . ' - Todevise';
+$this->title = $deviser->personalInfo->getBrandName() . ' - Todevise';
 
 // use params to share data between views :(
 $this->params['deviser_menu_categories'] = $categories;

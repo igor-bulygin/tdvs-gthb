@@ -1,42 +1,111 @@
 <?php
 namespace app\models;
 
+use app\helpers\CActiveRecord;
+use app\helpers\Utils;
 use yii\base\Model;
 
+/**
+ * @property string name
+ * @property array surnames
+ * @property string brand_name
+ * @property string country
+ * @property string city
+ */
 class PersonPersonalInfo extends Model
 {
 
-    /**
-     * @var string
-     */
-    public $name;
+	/**
+	 * @var string
+	 */
+	public $name;
 
-    /**
-     * @var array
-     */
-    public $surnames;
+	/**
+	 * @var array
+	 */
+//	public $surnames;
 
-    /**
-     * @var string
-     */
-    public $brand_name;
+	/**
+	 * @var string
+	 */
+	public $brand_name;
 
-    /**
-     * @var string
-     */
-    public $country;
+	/**
+	 * @var string
+	 */
+	public $country;
 
-    /**
-     * @var string
-     */
-    public $city;
+	/**
+	 * @var string
+	 */
+	public $city;
+
+	public function init()
+	{
+		parent::init();
+
+		$this->setScenario(Person::SERIALIZE_SCENARIO_LOAD_SUB_DOCUMENT);
+	}
 
 
-    public function rules()
-    {
-        return [
-            [['name', 'surnames', 'brand_name', 'country', 'city'], 'required', 'on' => Person::SCENARIO_DEVISER_UPDATE_PROFILE],
-        ];
-    }
+	/**
+	 * Get the city from Person.
+	 * First get city, otherwise get country
+	 *
+	 * @return string|null
+	 */
+	public function getCityLabel()
+	{
+		if (isset($this->city)) {
+			return $this->city;
+		} elseif (isset($this->country)) {
+			/** @var Country $country */
+			$country = Country::findOne(['country_code' => $this->country]);
+			return Utils::l($country->country_name);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Get brand name from Person
+	 *
+	 * @return string
+	 */
+	public function getBrandName()
+	{
+		return (isset($this->brand_name)) ? $this->brand_name : $this->name;
+	}
+
+	/**
+	 * Get the location from Person (city and country).
+	 *
+	 * @return string
+	 */
+	public function getLocationLabel()
+	{
+		$location = [];
+
+		if (!empty($this->city)) {
+			$location[] = $this->city;
+		}
+		/** @var Country $country */
+		if (!empty($this->country)) {
+			$country = Country::findOne(['country_code' => $this->country]);
+			if ($country) {
+				$location[] = Utils::l($country->country_name);
+			}
+		}
+
+		return implode(", ", $location);
+	}
+
+	public function rules()
+	{
+		return [
+			[['name', 'brand_name', 'country', 'city'], 'required', 'on' => Person::SCENARIO_DEVISER_UPDATE_PROFILE],
+			[['name', 'brand_name', 'country', 'city'], 'safe', 'on' => [Person::SERIALIZE_SCENARIO_LOAD_SUB_DOCUMENT, Person::SCENARIO_DEVISER_UPDATE_DRAFT]],
+		];
+	}
 
 }

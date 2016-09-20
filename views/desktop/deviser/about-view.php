@@ -18,7 +18,7 @@ Index2Asset::register($this);
 
 /** @var Person $deviser */
 
-$this->title = 'About ' . $deviser->getBrandName() . ' - Todevise';
+$this->title = 'About ' . $deviser->personalInfo->getBrandName() . ' - Todevise';
 $this->params['deviser_menu_active_option'] = 'about';
 $this->params['deviser'] = $deviser;
 
@@ -82,10 +82,10 @@ foreach ($deviser->getAboutUrlImages() as $key => $urlImage) {
 							<!--<div class="title">Abo<br>ut</div>-->
 							<div class="name-location-wrapper">
 								<div class="name">
-									<?= $deviser->getBrandName() ?>
+									<?= $deviser->personalInfo->getBrandName() ?>
 								</div>
 								<div class="location">
-									<?= $deviser->getLocationLabel() ?>
+									<?= $deviser->personalInfo->getLocationLabel() ?>
 								</div>
 							</div>
 							<div class="subtitle">
@@ -106,13 +106,6 @@ foreach ($deviser->getAboutUrlImages() as $key => $urlImage) {
 							<img class="grid-image" src="<?= $urlImage["src"] ?>">
 						</div>
 					<?php } ?>
-<!---->
-<!--					<div class="col-xs-12 pad-about item">-->
-<!--						<img class="grid-image" src="/imgs/photo-grid-about-1.jpg">-->
-<!--					</div>-->
-<!--					<div class="col-xs-6 pad-about item">-->
-<!--						<img class="grid-image" src="/imgs/photo-grid-about-2.jpg">-->
-<!--					</div>-->
 				</div>
 			</div>
 		</div>

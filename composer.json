@@ -25,6 +25,9 @@
 		"alexandernst/yii2-scrypt": "0.0.4",
 		"99designs/phumbor": "*",
 		"ramsey/uuid": "^3.4",
+		"yii2tech/ar-position": "^1.0",
+		"yii2tech/ar-softdelete": "^1.0",
+		"yii2tech/embedded": "^1.0",
 		"javiereguiluz/easyslugger": "^1.0"
 	},
 	"require-dev": {

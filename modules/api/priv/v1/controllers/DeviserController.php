@@ -34,12 +34,8 @@ class DeviserController extends AppPrivateController
 		/** @var Person $deviser */
 		$deviser = $this->getPerson();
 
-//        $data = Yii::$app->request->post();
-//        print_r($data);
-
 		$deviser->setScenario($this->getDetermineScenario($deviser));
-		if ($deviser->load(Yii::$app->request->post(), '') && $deviser->save()) {
-			// handle success
+		if (($deviser->load(Yii::$app->request->post(), '')) && $deviser->save()) {
 
 			// TODO: return the deviser data, only for test. remove when finish.
 //            Yii::$app->response->setStatusCode(204); // Success, without body

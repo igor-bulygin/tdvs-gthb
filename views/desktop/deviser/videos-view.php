@@ -19,7 +19,7 @@ PublicCommonAsset::register($this);
 
 /** @var Person $deviser */
 
-$this->title = 'About ' . $deviser->getBrandName() . ' - Todevise';
+$this->title = 'About ' . $deviser->personalInfo->getBrandName() . ' - Todevise';
 $this->params['deviser'] = $deviser;
 $this->params['deviser_menu_active_option'] = 'videos';
 

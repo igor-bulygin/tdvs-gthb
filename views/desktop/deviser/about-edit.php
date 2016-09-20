@@ -19,7 +19,7 @@ EditAboutAsset::register($this);
 
 /** @var Person $deviser */
 
-$this->title = 'About ' . $deviser->getBrandName() . ' - Todevise';
+$this->title = 'About ' . $deviser->personalInfo->getBrandName() . ' - Todevise';
 $this->params['deviser_menu_active_option'] = 'about';
 $this->params['deviser'] = $deviser;
 
@@ -42,7 +42,7 @@ $this->params['deviser'] = $deviser;
 										<div class="name" ng-bind="editAboutCtrl.deviser.name">
 										</div>
 										<div class="location">
-											<?= $deviser->getLocationLabel() ?>
+											<?= $deviser->personalInfo->getLocationLabel() ?>
 										</div>
 									</div>
 									<div class="subtitle">

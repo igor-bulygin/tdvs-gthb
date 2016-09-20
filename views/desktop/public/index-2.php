@@ -141,8 +141,8 @@ $this->title = 'Todevise / Home';
 								<img src="<?= Utils::url_scheme() ?><?= Utils::thumborize($deviser->getHeaderBackgroundImage())->resize(350, 344) ?>" class="showcase-image">
 								<figcaption>
 									<img class="showcase-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($deviser->getAvatarImage())->resize(0, 110) ?>">
-									<span class="name"><?= $deviser->getBrandName() ?></span>
-									<span class="location"><?= $deviser->getCityLabel() ?></span>
+									<span class="name"><?= $deviser->personalInfo->getBrandName() ?></span>
+									<span class="location"><?= $deviser->personalInfo->getCityLabel() ?></span>
 								</figcaption>
 								</figure>
 								</a>

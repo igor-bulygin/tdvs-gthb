@@ -3,7 +3,7 @@ namespace app\helpers;
 
 use Yii;
 use Exception;
-use yii\mongodb\ActiveRecord;
+use yii2tech\embedded\mongodb\ActiveRecord;
 
 /**
  * @property mixed _id
@@ -16,6 +16,7 @@ class CActiveRecord extends ActiveRecord
 	const SERIALIZE_SCENARIO_PUBLIC = 'serialize_scenario_public';
 	const SERIALIZE_SCENARIO_OWNER = 'serialize_scenario_owner';
 	const SERIALIZE_SCENARIO_ADMIN = 'serialize_scenario_admin';
+	const SERIALIZE_SCENARIO_LOAD_SUB_DOCUMENT = 'serialize_scenario_load_sub_document';
 
 	/**
 	 * The attributes that should be serialized

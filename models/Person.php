@@ -11,6 +11,9 @@ use yii\base\NotSupportedException;
 use yii\behaviors\SluggableBehavior;
 use yii\mongodb\Collection;
 use yii\web\IdentityInterface;
+use yii2tech\embedded\ContainerInterface;
+use yii2tech\embedded\ContainerTrait;
+use yii2tech\embedded\Mapping;
 
 /**
  * @property string slug
@@ -20,8 +23,8 @@ use yii\web\IdentityInterface;
  * @property mixed type
  * @property array categories
  * @property array collections
- * @property array personal_info
- * @property array media
+ * @property PersonPersonalInfo personalInfo
+ * @property PersonMedia mediaFiles
  * @property array press
  * @property array videos
  * @property array faq
@@ -90,6 +93,7 @@ class Person extends CActiveRecord implements IdentityInterface
 			'categories',
 			'collections',
 			'personal_info',
+			'personalInfo',
 			'curriculum',
 			'media',
 			'credentials',
@@ -118,6 +122,9 @@ class Person extends CActiveRecord implements IdentityInterface
 
 		$this->short_id = Utils::shortID(7);
 
+		$this->personalInfo = new PersonPersonalInfo();
+		$this->mediaFiles = new PersonMedia();
+
 		// initialize attributes
 		$this->categories = [];
 		$this->collections = [];
@@ -125,7 +132,7 @@ class Person extends CActiveRecord implements IdentityInterface
 		$this->videos = [];
 		$this->faq = [];
 		$this->preferences = [
-			"language" => "en-US"
+			"language" => Lang::EN_US
 		];
 		$this->code_account_state = self::ACCOUNT_STATE_DRAFT;
 		$this->text_short_description = [
@@ -140,6 +147,16 @@ class Person extends CActiveRecord implements IdentityInterface
 		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_PUBLIC);
 	}
 
+	public function embedPersonalInfo()
+	{
+		return $this->mapEmbedded('personal_info', PersonPersonalInfo::className());
+	}
+
+	public function embedMediaFiles()
+	{
+		return $this->mapEmbedded('media', PersonMedia::className());
+	}
+
 	/**
 	 * Get one entity serialized
 	 *
@@ -152,11 +169,37 @@ class Person extends CActiveRecord implements IdentityInterface
 		/** @var Person $person */
 		$person = Person::find()->select(self::getSelectFields())->where(["short_id" => $id])->one();
 
+		$person->personalInfo->load($person, 'personal_info');
+		$person->mediaFiles->load($person, 'media');
+
 		// if automatic translation is enabled
 		if (static::$translateFields) {
 			Utils::translate($person);
 		}
 		return $person;
+	}
+
+	/**
+	 * Spread load to sub documents
+	 *
+	 * @param mixed $condition
+	 * @return Person|null|void|static
+	 */
+	public static function findOne($condition)
+	{
+		/** @var Person $person */
+		$person = parent::findOne($condition);
+
+		$person->personalInfo->load($person, 'personal_info');
+		$person->mediaFiles->load($person, 'media');
+
+		return $person;
+	}
+
+	public function loadSubdocuments()
+	{
+		$this->personalInfo->load($this, 'personal_info');
+		$this->mediaFiles->load($this, 'media');
 	}
 
 	public static function findIdentity($id)
@@ -216,19 +259,19 @@ class Person extends CActiveRecord implements IdentityInterface
 			$this["type"] = [];
 		}
 
-		if ($this->personal_info == null) {
-			$this["personal_info"] = [
-				"country" => "",
-				"city" => ""
-			];
-		}
+//		if ($this->personal_info == null) {
+//			$this["personal_info"] = [
+//				"country" => "",
+//				"city" => ""
+//			];
+//		}
 
-		if ($this->media == null) {
-			$this["media"] = [
-				"videos_links" => [],
-				"photos" => []
-			];
-		}
+//		if ($this->media == null) {
+//			$this["media"] = [
+//				"videos_links" => [],
+//				"photos" => []
+//			];
+//		}
 
 		if ($this->credentials == null) {
 			$this["credentials"] = [];
@@ -246,7 +289,7 @@ class Person extends CActiveRecord implements IdentityInterface
 
 		// TODO use SluggableBehavior when name is not in a sub document
 		if (empty($this->slug)) {
-			$this->slug = Slugger::slugify($this->getBrandName());
+			$this->slug = Slugger::slugify($this->personalInfo->getBrandName());
 		}
 
 		if (empty($this->created_at)) {
@@ -309,35 +352,45 @@ class Person extends CActiveRecord implements IdentityInterface
 			[
 				'text_short_description',
 				'app\validators\TranslatableValidator',
-				'on' => [self::SCENARIO_DEVISER_CREATE_DRAFT, self::SCENARIO_DEVISER_UPDATE_DRAFT],
+				'on' => [self::SCENARIO_DEVISER_CREATE_DRAFT],
 			],
 			[
 				'text_biography',
 				'app\validators\TranslatableValidator',
-				'on' => [self::SCENARIO_DEVISER_CREATE_DRAFT, self::SCENARIO_DEVISER_UPDATE_DRAFT],
+				'on' => [self::SCENARIO_DEVISER_CREATE_DRAFT],
 			],
 			[
 				'preferences',
 				'app\validators\EmbedDocValidator',
-				'on' => [self::SCENARIO_DEVISER_CREATE_DRAFT, self::SCENARIO_DEVISER_UPDATE_DRAFT],
+				'on' => [self::SCENARIO_DEVISER_CREATE_DRAFT],
 				'model' => '\app\models\PersonPreferences'
 			],
+//			[
+//				'personal_info',
+//				'app\validators\EmbedDocValidator',
+//				'on' => [self::SCENARIO_DEVISER_CREATE_DRAFT, self::SCENARIO_DEVISER_UPDATE_DRAFT],
+//				'model' => '\app\models\PersonPersonalInfo'
+//			],
 			[
-				'personal_info',
-				'app\validators\EmbedDocValidator',
-				'on' => [self::SCENARIO_DEVISER_CREATE_DRAFT, self::SCENARIO_DEVISER_UPDATE_DRAFT],
-				'model' => '\app\models\PersonPersonalInfo'
+				'personalInfo',
+				'yii2tech\embedded\Validator',
+				'on' => [self::SCENARIO_DEVISER_UPDATE_DRAFT],
+			],
+//			[
+//				'media',
+//				'app\validators\PersonMediaFilesValidator',
+//				'on' => self::SCENARIO_DEVISER_UPDATE_PROFILE,
+//				'model' => '\app\models\PersonMedia'
+//			],
+			[
+				'mediaFiles',
+				'yii2tech\embedded\Validator',
+				'on' => [self::SCENARIO_DEVISER_UPDATE_DRAFT],
 			],
 			[
 				'curriculum',
 				'app\validators\PersonCurriculumValidator',
 				'on' => self::SCENARIO_DEVISER_UPDATE_PROFILE,
-			],
-			[
-				'media',
-				'app\validators\PersonMediaFilesValidator',
-				'on' => self::SCENARIO_DEVISER_UPDATE_PROFILE,
-				'model' => '\app\models\PersonMedia'
 			],
 			[
 				'press',
@@ -482,17 +535,6 @@ class Person extends CActiveRecord implements IdentityInterface
 		return (($this->curriculum) && (file_exists($filePath)));
 	}
 
-	/**
-	 * Get brand name from Person
-	 *
-	 * @return string
-	 */
-	public function getBrandName()
-	{
-		if (!isset($this->personal_info)) return "";
-
-		return $this->personal_info['name'];
-	}
 
 	/**
 	 * Get first name from Person
@@ -617,27 +659,6 @@ class Person extends CActiveRecord implements IdentityInterface
 	}
 
 	/**
-	 * Get the city from Person.
-	 * First get city, otherwise get country
-	 *
-	 * @return string|null
-	 */
-	public function getCityLabel()
-	{
-		if (isset($this->personal_info)) {
-			if (isset($this->personal_info['city'])) {
-				return $this->personal_info['city'];
-			} elseif (isset($this->personal_info['country'])) {
-				/** @var Country $country */
-				$country = Country::findOne(['country_code' => $this->personal_info['country']]);
-				return Utils::l($country->country_name);
-			}
-		}
-
-		return null;
-	}
-
-	/**
 	 * Get the location from Person (city and country).
 	 *
 	 * @return string
@@ -739,9 +760,19 @@ class Person extends CActiveRecord implements IdentityInterface
 		return [
 			"id" => $this->short_id,
 			"slug" => $this->slug,
-			"name" => $this->getBrandName(),
+			"name" => $this->personalInfo->getBrandName(),
 			"url_avatar" => $this->getAvatarImage128()
 		];
+	}
+
+	/**
+	 * Shortcut to get the brand name
+	 *
+	 * @return string
+	 */
+	public function getBrandName()
+	{
+		return $this->personalInfo->getBrandName();
 	}
 
 	/**
@@ -762,14 +793,45 @@ class Person extends CActiveRecord implements IdentityInterface
 			"/imgs/photo-grid-about-7.jpg",
 		];
 
-		if ((array_key_exists("photos", $this->media)) && (count($this->media["photos"])>0)) {
-			// if photos are stored, then return them
-			$urls = [];
-			foreach ($this->media["photos"] as $filename) {
-				$urls[] = $this->getUrlImagesLocation() . $filename;
-			}
+		// if photos are stored, then return them
+		$urls = [];
+		foreach ($this->mediaFiles->photos as $filename) {
+			$urls[] = $this->getUrlImagesLocation() . $filename;
 		}
 
 		return $urls;
 	}
+
+	/**
+	 * Spread scenario to sub documents
+	 *
+	 * @param string $value
+	 */
+	public function setScenario($value)
+	{
+		parent::setScenario($value);
+		$this->personalInfo->setScenario($value);
+		$this->mediaFiles->setScenario($value);
+	}
+
+	/**
+	 * Spread data for sub documents
+	 * @param array $data
+	 * @param null $formName
+	 * @return bool
+	 */
+	public function load($data, $formName = null)
+	{
+		$personLoaded = parent::load($data, $formName);
+
+		if (array_key_exists('personal_info', $data)) {
+			$this->personalInfo->load($data, 'personal_info');
+		}
+		if (array_key_exists('media', $data)) {
+			$this->mediaFiles->load($data, 'media');
+		}
+
+		return ($personLoaded);
+	}
+
 }

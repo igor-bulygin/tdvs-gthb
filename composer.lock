@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d392dc2da9ca81040da8891b91394d7c",
-    "content-hash": "4ab3522bd4f324634f3274dec48dc0c4",
+    "hash": "634ae3fa89c67011b034f01409fc64be",
+    "content-hash": "5c21b64ab194e859b500c3eee6e0d571",
     "packages": [
         {
             "name": "99designs/phumbor",
@@ -1949,6 +1949,155 @@
                 "mailer"
             ],
             "time": "2016-07-08 11:51:25"
+        },
+        {
+            "name": "yii2tech/ar-position",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yii2tech/ar-position.git",
+                "reference": "69ee11e4eba7480bc110813d468e438060eca95b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yii2tech/ar-position/zipball/69ee11e4eba7480bc110813d468e438060eca95b",
+                "reference": "69ee11e4eba7480bc110813d468e438060eca95b",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "yii2tech\\ar\\position\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Paul Klimov",
+                    "email": "klimov.paul@gmail.com"
+                }
+            ],
+            "description": "Provides support for ActiveRecord custom sort in Yii2",
+            "keywords": [
+                "active",
+                "order",
+                "position",
+                "record",
+                "sort",
+                "yii2"
+            ],
+            "time": "2015-12-26 12:05:01"
+        },
+        {
+            "name": "yii2tech/ar-softdelete",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yii2tech/ar-softdelete.git",
+                "reference": "d9726a8ecff2059ef6dd02997dcd59bcdae41077"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yii2tech/ar-softdelete/zipball/d9726a8ecff2059ef6dd02997dcd59bcdae41077",
+                "reference": "d9726a8ecff2059ef6dd02997dcd59bcdae41077",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "yii2tech\\ar\\softdelete\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Paul Klimov",
+                    "email": "klimov.paul@gmail.com"
+                }
+            ],
+            "description": "Provides support for ActiveRecord soft delete in Yii2",
+            "keywords": [
+                "active",
+                "delete",
+                "record",
+                "smart",
+                "soft",
+                "yii2"
+            ],
+            "time": "2015-12-26 12:09:06"
+        },
+        {
+            "name": "yii2tech/embedded",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yii2tech/embedded.git",
+                "reference": "186a7dccc409daca7728fff7d2e3e778885750c4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yii2tech/embedded/zipball/186a7dccc409daca7728fff7d2e3e778885750c4",
+                "reference": "186a7dccc409daca7728fff7d2e3e778885750c4",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "yii2tech\\embedded\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Paul Klimov",
+                    "email": "klimov.paul@gmail.com"
+                }
+            ],
+            "description": "Provides support for embedded (nested) models in Yii2",
+            "keywords": [
+                "elastic",
+                "elasticsearch",
+                "embed",
+                "embedded",
+                "mongo",
+                "mongodb",
+                "nested",
+                "yii2"
+            ],
+            "time": "2015-12-26 11:35:51"
         },
         {
             "name": "yiisoft/yii2",

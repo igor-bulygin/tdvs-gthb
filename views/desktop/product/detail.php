@@ -205,7 +205,7 @@ $productImages = $product->getUrlGalleryImages();
 					reviews</a>
 				</li>
 				<li role="presentation">
-					<a href="#works" aria-controls="works" role="tab" data-toggle="tab">More works by <?= $deviser->getBrandName() ?></a>
+					<a href="#works" aria-controls="works" role="tab" data-toggle="tab">More works by <?= $deviser->personalInfo->getBrandName() ?></a>
 				</li>
 			</ul>
 			<!-- Tab panes -->
@@ -224,7 +224,7 @@ $productImages = $product->getUrlGalleryImages();
 								<div class="avatar">
 									<a href="<?= Url::to(["deviser/store", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id]) ?>">
 									<img class="cover" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($deviser->getAvatarImage())->resize(128, 128) ?>" data-pin-nopin="true">
-									<span><?= $deviser->getBrandName() ?></span>
+									<span><?= $deviser->personalInfo->getBrandName() ?></span>
 								</a>
 								</div>
 							</div>

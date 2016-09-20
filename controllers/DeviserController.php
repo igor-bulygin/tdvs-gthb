@@ -153,9 +153,7 @@ class DeviserController extends CController {
 				@unlink(Utils::join_paths($deviser_path, $deviser["media"]["header"]));
 			}
 
-			$deviser->media = array_replace_recursive($deviser->media, [
-				"header" => $res
-			]);
+			$deviser->mediaFiles->header = $res;
 			$deviser->save(false);
 
 			Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_ADMIN);
@@ -175,9 +173,8 @@ class DeviserController extends CController {
 				@unlink(Utils::join_paths($deviser_path, $deviser["media"]["profile"]));
 			}
 
-			$deviser->media = array_replace_recursive($deviser->media, [
-				"profile" => $res
-			]);
+			$deviser->mediaFiles->profile = $res;
+
 			$deviser->save(false);
 
 			Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_ADMIN);

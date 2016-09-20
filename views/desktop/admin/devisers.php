@@ -91,8 +91,9 @@ $this->title = 'Todevise / Admin / Devisers';
 					],
 					[
 						'value' => function($model){
-//							return $model->personal_info["name"] . " " . join($model->personal_info["surnames"], " ");
-							return $model->getBrandName();
+							/** @var Person $model */
+							$model->loadSubdocuments();
+							return $model->personalInfo->getBrandName();
 						},
 						'label' => Yii::t("app/admin", "Name")
 					],
@@ -104,10 +105,10 @@ $this->title = 'Todevise / Admin / Devisers';
 					],
 					[
 						'value' => function($model) use ($countries_lookup){
-							if (array_key_exists("country", $model->personal_info)) {
-								if (array_key_exists($model->personal_info["country"], $countries_lookup)) {
-									return $countries_lookup[$model->personal_info["country"]];
-								}
+							/** @var Person $model */
+							$model->loadSubdocuments();
+							if (array_key_exists($model->personalInfo->country, $countries_lookup)) {
+								return $countries_lookup[$model->personalInfo->country];
 							}
 							return null;
 						},
