@@ -61,7 +61,7 @@ $this->params['deviser'] = $deviser;
 												</li>
 											</ol>
 											<div class="editable-tex-about" text-angular ta-text-editor-class="header" ng-model="editAboutCtrl.deviser.text_biography[editAboutCtrl.biography_language]" ng-cloak ta-toolbar="[]">
-											    
+
 											</div>
 											<span class="glyphicon glyphicon-pencil" style="color:white;"></span>
 											<div class="text-center">
@@ -74,7 +74,7 @@ $this->params['deviser'] = $deviser;
 							<div ng-if="editAboutCtrl.isDropAvailable">
 								<div class="photo-loader loader-about" ngf-drop ngf-select ngf-change="editAboutCtrl.uploadPhoto($files,$invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="editAboutCtrl.isDropAvailable" ngf-multiple="true">
 									<div class="plus-add">+</div>
-									<span>Dragg and drop<br/>or add photo</span>
+									<span>Drag and drop<br/>or add photo</span>
 								</div>
 							</div>
 							<div ng-if="editAboutCtrl.files.length > 0" ng-repeat="item in editAboutCtrl.files" style="max-height:200px; max-width:300px;">
@@ -87,10 +87,10 @@ $this->params['deviser'] = $deviser;
 							<div ngf-no-file-drop>
 								<input type="file" name="file" ngf-select="editAboutCtrl.uploadPhoto($files, $invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="editAboutCtrl.isDropAvailable" ngf-multiple="true">
 							</div>
-							<div class="col-xs-4 pad-about item draggable-list" dnd-list="editAboutCtrl.images" ng-repeat="image in editAboutCtrl.images" ng-if="editAboutCtrl.images.length > 0" ng-cloak>
-								<div class="image-press-wrapper image-about-edit">
+							<div class="col-xs-4 item pad-about draggable-list" dnd-list="editAboutCtrl.images" ng-if="editAboutCtrl.images.length > 0" ng-cloak>
+								<div class="image-press-wrapper image-about-edit" ng-repeat="image in editAboutCtrl.images" dnd-draggable="image" dnd-effect-allowed="move" dnd-moved="editAboutCtrl.update($index)">
 									<span class="ion-android-close x-close" ng-click="editAboutCtrl.deleteImage($index)"></span>
-									<img ng-src="{{image.url}}" class="grid-image" class="draggable-img" dnd-draggable="image" dnd-effect-allowd="move" dnd-moved="editAboutCtrl.update($index)">
+									<img ng-src="{{image.url}}" class="grid-image draggable-img">
 								</div>
 							</div>
 						</div>
