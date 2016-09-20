@@ -2,7 +2,8 @@
 // Deviser Videos
 // ==========================================================================
 .video-container{
-    margin: 40px 0 0 0;
+    margin: 40px 0;
+    @extend %block;
     .input-video{
         width: 80%;
         margin: 0 auto 40px;
@@ -46,6 +47,8 @@
         margin-bottom: 30px;
         padding: 25px 10px 20px;
         cursor: move;
+        float: left;
+        width: 100%;
     }
 }
 .dragg-video-wrapper{
@@ -142,5 +145,18 @@
     @extend %block;
     background-color: $white;
     border-bottom: 1px solid $dark_grey;
+}
+.video-edit-list{
+    li{
+        background-color: $background_grey;
+        list-style: none;
+        border: 4px dashed $dark_grey;
+        min-width: 915px;
+        height: 400px;
+        float: left;
+        display: block;
+        margin: 0 0 20px;
+        padding: 0;
+    }
 }
 
