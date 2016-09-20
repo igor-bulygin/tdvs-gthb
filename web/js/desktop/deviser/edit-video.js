@@ -100,7 +100,7 @@
 		}
 	}
 
-	angular.module('todevise', ['api', 'toastr', 'dndLists', 'util', 'ngYoutubeEmbed'])
+	angular.module('todevise')
 		.controller('editVideosCtrl', controller);
 
 }());
