@@ -1878,7 +1878,7 @@ input[type="radio"] .styled:checked + label::after {
   padding: 0; }
 
 .about-grid {
-  background-color: #ffffff;
+  background-color: #404040;
   min-height: 671px; }
   .about-grid .item img {
     height: 100%;
@@ -1892,11 +1892,16 @@ input[type="radio"] .styled:checked + label::after {
 
 .loader-about {
   width: 100%;
-  border: 4px dashed #9a9a9a; }
+  height: 350px;
+  border: 4px dashed #9a9a9a;
+  margin: 0; }
 
 .image-about-edit {
   max-height: 180px;
   overflow: hidden; }
+
+.editable-tex-about {
+  color: #ffffff; }
 
 .video-container {
   margin: 40px 0 0 0; }
