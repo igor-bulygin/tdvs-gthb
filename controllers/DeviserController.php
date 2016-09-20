@@ -17,14 +17,17 @@ use app\helpers\CController;
 use app\helpers\CActiveRecord;
 use yii\filters\AccessControl;
 
-class DeviserController extends CController {
+class DeviserController extends CController
+{
 	public $defaultAction = "index";
 
-	public function actionIndex() {
+	public function actionIndex()
+	{
 		return $this->render("index");
 	}
 
-	public function actionEditInfo($slug) {
+	public function actionEditInfo($slug)
+	{
 		$countries = Country::find()
 			->select(["_id" => 0])
 			->asArray()
@@ -40,7 +43,7 @@ class DeviserController extends CController {
 		$categories = Category::find()
 			->select(["_id" => 0])
 			->where(["path" => "/"])
-			->orderBy(["name.$this->lang"=> -1])
+			->orderBy(["name.$this->lang" => -1])
 			->asArray()
 			->all();
 		Utils::l_collection($categories, "name");
@@ -53,17 +56,18 @@ class DeviserController extends CController {
 		]);
 	}
 
-	public function actionEditWork($short_id) {
+	public function actionEditWork($short_id)
+	{
 		$countries = Country::find()
 			->select(["_id" => 0, "country_name.$this->lang", "country_name.$this->lang_en", "country_code", "continent"])
 			->asArray()
 			->all();
 
 		$countries_lookup = [];
-		foreach($countries as $country) {
+		foreach ($countries as $country) {
 			$countries_lookup[$country["country_code"]] = Utils::l($country["country_name"]);
 		}
-		foreach(Country::CONTINENTS as $code => $continent) {
+		foreach (Country::CONTINENTS as $code => $continent) {
 			$countries_lookup[$code] = Yii::t("app/admin", $continent);
 		}
 
@@ -116,13 +120,13 @@ class DeviserController extends CController {
 			],
 			[
 				"text" => Yii::t("app/admin", MetricType::TXT[MetricType::SIZE]),
-				"sub" => array_map(function($x) {
+				"sub" => array_map(function ($x) {
 					return ["text" => $x, "value" => $x];
 				}, MetricType::UNITS[MetricType::SIZE])
 			],
 			[
 				"text" => Yii::t("app/admin", MetricType::TXT[MetricType::WEIGHT]),
-				"sub" => array_map(function($x) {
+				"sub" => array_map(function ($x) {
 					return ["text" => $x, "value" => $x];
 				}, MetricType::UNITS[MetricType::WEIGHT])
 			]
@@ -141,15 +145,16 @@ class DeviserController extends CController {
 		]);
 	}
 
-	public function actionUploadHeaderPhoto($slug) {
+	public function actionUploadHeaderPhoto($slug)
+	{
 		/* @var $deviser \app\models\Person */
 		$deviser = Person::findOne(["slug" => $slug]);
 		$deviser_path = Utils::join_paths(Yii::getAlias("@deviser"), $deviser->short_id);
 
 		$res = $this->savePostedFile($deviser_path, ("header." . uniqid()));
-		if($res !== false) {
+		if ($res !== false) {
 			//Delete the old header picture if it didn't get overridden by the new one
-			if(isset($deviser["media"]["header"]) && strcmp($deviser["media"]["header"], $res) !== 0) {
+			if (isset($deviser["media"]["header"]) && strcmp($deviser["media"]["header"], $res) !== 0) {
 				@unlink(Utils::join_paths($deviser_path, $deviser["media"]["header"]));
 			}
 
@@ -161,15 +166,16 @@ class DeviserController extends CController {
 		}
 	}
 
-	public function actionUploadProfilePhoto($slug) {
+	public function actionUploadProfilePhoto($slug)
+	{
 		/* @var $deviser \app\models\Person */
 		$deviser = Person::findOne(["slug" => $slug]);
 		$deviser_path = Utils::join_paths(Yii::getAlias("@deviser"), $deviser->short_id);
 
 		$res = $this->savePostedFile($deviser_path, ("profile." . uniqid()));
-		if($res !== false) {
+		if ($res !== false) {
 			//Delete the old profile picture if it didn't get overridden by the new one
-			if(isset($deviser["media"]["profile"]) && strcmp($deviser["media"]["profile"], $res) !== 0) {
+			if (isset($deviser["media"]["profile"]) && strcmp($deviser["media"]["profile"], $res) !== 0) {
 				@unlink(Utils::join_paths($deviser_path, $deviser["media"]["profile"]));
 			}
 
@@ -182,12 +188,13 @@ class DeviserController extends CController {
 		}
 	}
 
-	public function actionUploadProductPhoto($slug, $short_id) {
+	public function actionUploadProductPhoto($slug, $short_id)
+	{
 		/* @var $product \app\models\Product */
 		$product = Product::findOne(["short_id" => $short_id]);
 
 		$data = Yii::$app->request->getBodyParam("data", null);
-		if($data === null) return;
+		if ($data === null) return;
 
 		$data = Json::decode($data);
 		$product_path = Utils::join_paths(Yii::getAlias("@product"), $short_id);
@@ -196,7 +203,7 @@ class DeviserController extends CController {
 		$data["name"] = $data["name"] === "" ? null : $data["name"];
 		$res = $this->savePostedFile($product_path, $data["name"]);
 
-		if($res !== false) {
+		if ($res !== false) {
 			$media = $product->media;
 			$media["photos"][] = [
 				"name" => $res,
@@ -210,7 +217,8 @@ class DeviserController extends CController {
 		}
 	}
 
-	public function actionDeleteProductPhoto($slug, $short_id) {
+	public function actionDeleteProductPhoto($slug, $short_id)
+	{
 		/* @var $product \app\models\Product */
 		$product = Product::findOne(["short_id" => $short_id]);
 		$product_path = Utils::join_paths(Yii::getAlias("@product"), $product->short_id);
@@ -219,7 +227,7 @@ class DeviserController extends CController {
 		@unlink(Utils::join_paths($product_path, $photo_name));
 
 		$media = $product->media;
-		$media["photos"] = array_values(array_filter($media["photos"], function($photo) use ($photo_name) {
+		$media["photos"] = array_values(array_filter($media["photos"], function ($photo) use ($photo_name) {
 			return $photo["name"] !== $photo_name;
 		}));
 		$product->media = $media;
@@ -241,7 +249,10 @@ class DeviserController extends CController {
 			$selectedCategory = (count($categories) > 0) ? $categories[0] : new Category();
 		}
 		// their products, for selected category
-		$products = Product::find()->where(["deviser_id" => $deviser_id, "categories" => $selectedCategory->getShortIds()])->all();
+		$products = Product::find()
+			->where(["deviser_id" => $deviser_id, "categories" => $selectedCategory->getShortIds()])
+			->orderBy('position')
+			->all();
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("store", [

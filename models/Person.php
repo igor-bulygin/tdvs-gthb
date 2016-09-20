@@ -816,13 +816,14 @@ class Person extends CActiveRecord implements IdentityInterface
 
 	/**
 	 * Spread data for sub documents
+	 *
 	 * @param array $data
 	 * @param null $formName
 	 * @return bool
 	 */
 	public function load($data, $formName = null)
 	{
-		$personLoaded = parent::load($data, $formName);
+		$loaded = parent::load($data, $formName);
 
 		if (array_key_exists('personal_info', $data)) {
 			$this->personalInfo->load($data, 'personal_info');
@@ -831,7 +832,7 @@ class Person extends CActiveRecord implements IdentityInterface
 			$this->mediaFiles->load($data, 'media');
 		}
 
-		return ($personLoaded);
+		return ($loaded);
 	}
 
 }
