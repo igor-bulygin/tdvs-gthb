@@ -103,12 +103,10 @@
 			update();
 		}
 
-
-
 	}
 
 
 	angular
-		.module('todevise', ['api', 'util', 'toastr', 'nya.bootstrap.select', 'textAngular', 'ngFileUpload', 'dndLists', 'ui.bootstrap'])
+		.module('todevise')
 		.controller('editAboutCtrl', controller);
 }());
