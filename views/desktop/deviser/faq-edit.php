@@ -34,7 +34,7 @@ $this->params['deviser_menu_active_option'] = 'faq';
 						<?= DeviserMenu::widget() ?>
 					</div>
 					<div class="col-md-10" ng-controller="editFaqCtrl as editFaqCtrl">
-						<div class="faq-wrapper">
+						<div class="faq-wrapper faq-edit-list">
 							<div class="section-title">FAQ</div>
 							<div class="edit-faq-wrapper" ng-cloak ng-if="editFaqCtrl.deviser.faq.length > 0" dnd-list="editFaqCtrl.deviser.faq">
 								<div class="delete-options-wrapper" ng-repeat="question in editFaqCtrl.deviser.faq" style="cursor:move;" dnd-draggable="question" dnd-effect-allowed="move" dnd-moved="editFaqCtrl.update($index)">
