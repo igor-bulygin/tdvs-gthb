@@ -89,7 +89,7 @@
 
 	}
 
-	angular.module('todevise', ['api', 'toastr', 'util', 'ui.bootstrap', 'dndLists', 'nya.bootstrap.select'])
+	angular.module('todevise')
 		.controller('editFaqCtrl', controller);
 
 }());

@@ -80,7 +80,7 @@
 
 	}
 
-	angular.module('todevise', ['api', 'ngFileUpload', 'dndLists', 'toastr', 'util', 'ui.bootstrap'])
+	angular.module('todevise')
 		.controller('editPressCtrl', controller);
 
 }());
