@@ -49,8 +49,8 @@
 			vm.deviser.faq.forEach(function (element, index) {
 				parseQuestion(element);
 				patch.faq.push({
-					question: element.question,
-					answer: element.answer
+					question: angular.copy(element.question),
+					answer: angular.copy(element.answer)
 				})
 			});
 			patch.deviser_id = vm.deviser.id;

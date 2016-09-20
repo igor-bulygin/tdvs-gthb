@@ -36,10 +36,10 @@ $this->params['deviser_menu_active_option'] = 'faq';
 					<div class="col-md-10" ng-controller="editFaqCtrl as editFaqCtrl">
 						<div class="faq-wrapper">
 							<div class="section-title">FAQ</div>
-							<div class="edit-faq-wrapper" ng-cloak ng-repeat="question in editFaqCtrl.deviser.faq" ng-if="editFaqCtrl.deviser.faq.length > 0" dnd-list="editFaqCtrl.deviser.faq">
-								<div class="delete-options-wrapper">
+							<div class="edit-faq-wrapper" ng-cloak ng-if="editFaqCtrl.deviser.faq.length > 0" dnd-list="editFaqCtrl.deviser.faq">
+								<div class="delete-options-wrapper" ng-repeat="question in editFaqCtrl.deviser.faq" style="cursor:move;" dnd-draggable="question" dnd-effect-allowed="move" dnd-moved="editFaqCtrl.update($index)">
 									<a class="delete-link pull-right" href="#" ng-click="editFaqCtrl.deleteQuestion($index)">Delete question</a>
-									<div class="edit-faq-panel" style="cursor:move;" dnd-draggable="question" dnd-effect-allowed="move" dnd-moved="editFaqCtrl.update($index)">
+									<div class="edit-faq-panel">
 										<div class="faq-language-menu">
 											<ol class="nya-bs-select form-control" ng-model="question.languageSelected" ng-change="editFaqCtrl.parseQuestion(question)" ng-init="question.languageSelected='en-US'">
 												<li nya-bs-option="language in editFaqCtrl.languages" class="ng-class:{'lang-selected': editFaqCtrl.isLanguageOk(language.code, question)}" data-value="language.code" deep-watch="true">

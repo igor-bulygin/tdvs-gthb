@@ -60,7 +60,9 @@ $this->params['deviser'] = $deviser;
 													<a href=""><span ng-bind="language.name"></span></a>
 												</li>
 											</ol>
-											<div text-angular ta-text-editor-class="header" ng-model="editAboutCtrl.deviser.text_biography[editAboutCtrl.biography_language]" ng-cloak ta-toolbar="[]"></div>
+											<div class="editable-tex-about" text-angular ta-text-editor-class="header" ng-model="editAboutCtrl.deviser.text_biography[editAboutCtrl.biography_language]" ng-cloak ta-toolbar="[]">
+
+											</div>
 											<span class="glyphicon glyphicon-pencil" style="color:white;"></span>
 											<div class="text-center">
 												<button class="btn btn-default" ng-click="editAboutCtrl.update()">Update</button>
@@ -70,18 +72,25 @@ $this->params['deviser'] = $deviser;
 						</div>
 						<div class="col-md-7 pad-about about-grid">
 							<div ng-if="editAboutCtrl.isDropAvailable">
-								<div class="photo-loader" ng-model="editAboutCtrl.image" ngf-drop ngf-select ngf-change="editAboutCtrl.uploadPhoto($files,$invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="editAboutCtrl.isDropAvailable" multiple>
+								<div class="photo-loader loader-about" ngf-drop ngf-select ngf-change="editAboutCtrl.uploadPhoto($files,$invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="editAboutCtrl.isDropAvailable" ngf-multiple="true">
 									<div class="plus-add">+</div>
-									<span>Add photo</span>
+									<span>Drag and drop<br/>or add photo</span>
+								</div>
+							</div>
+							<div ng-if="editAboutCtrl.files.length > 0" ng-repeat="item in editAboutCtrl.files" style="max-height:200px; max-width:300px;">
+								<div ng-if="item.progress <=100">
+									<img ngf-thumbnail="item" style="max-height:200px; opacity:0.5;">
+									<p>Uploading file: <span ng-bind="item.name"></span></p>
+									<uib-progressbar value="item.progress" class="progress-striped active">{{item.progress}}</uib-progressbar>
 								</div>
 							</div>
 							<div ngf-no-file-drop>
-								<input type="file" name="file" ng-model="editAboutCtrl.image" ngf-select="editAboutCtrl.uploadPhoto($files, $invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="editAboutCtrl.isDropAvailable" multiple>
+								<input type="file" name="file" ngf-select="editAboutCtrl.uploadPhoto($files, $invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="editAboutCtrl.isDropAvailable" ngf-multiple="true">
 							</div>
-							<div class="col-xs-6 pad-about item draggable-list" dnd-list="editAboutCtrl.images" ng-repeat="image in editAboutCtrl.images" ng-if="editAboutCtrl.images.length > 0" ng-cloak>
-								<div class="image-press-wrapper">
+							<div class="col-xs-4 item pad-about draggable-list" dnd-list="editAboutCtrl.images" ng-if="editAboutCtrl.images.length > 0" ng-cloak>
+								<div class="image-press-wrapper image-about-edit" ng-repeat="image in editAboutCtrl.images" dnd-draggable="image" dnd-effect-allowed="move" dnd-moved="editAboutCtrl.update($index)">
 									<span class="ion-android-close x-close" ng-click="editAboutCtrl.deleteImage($index)"></span>
-									<img ng-src="{{image.url}}" class="grid-image" class="draggable-img" dnd-draggable="image" dnd-effect-allowd="move" dnd-moved="editAboutCtrl.update($index)">
+									<img ng-src="{{image.url}}" class="grid-image draggable-img">
 								</div>
 							</div>
 						</div>

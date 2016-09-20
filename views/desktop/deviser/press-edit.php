@@ -28,27 +28,33 @@ $this->params['deviser_menu_active_option'] = 'press';
 							<?= DeviserMenu::widget() ?>
 						</div>
 						<div class="col-md-10">
+							<div ng-if="editPressCtrl.files.length > 0" ng-repeat="item in editPressCtrl.files" style="max-height:200px; max-width:400px;">
+								<div ng-if="item.progress <= 100">
+									<img ngf-thumbnail="item" style="max-height:200px; opacity:0.5;">
+									<p>Uploading file: {{item.name}}</p>
+									<uib-progressbar max="100" value="item.progress" class="progress-striped active">{{item.progress}}</uib-progressbar>
+								</div>
+							</div>
 							<div ng-if="editPressCtrl.images === 0" class="faq-edit-empty" ng-cloak>
 								<img class="sad-face" src="/imgs/sad-face.svg">
 								<p>You don't have any press images!</p>
 							</div>
-
 							<div class="mesonry-row press-3">
 								<form name="editPressCtrl.form" ng-cloak>
 									<div ng-if="editPressCtrl.isDropAvailable">
-										<div class="photo-loader" class="menu-category list-group" ng-model="editPressCtrl.image" ngf-drop ngf-select ngf-change="editPressCtrl.upload($files, $invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="editPressCtrl.isDropAvailable" multiple>
+										<div class="photo-loader" class="menu-category list-group" ngf-drop ngf-select ngf-change="editPressCtrl.upload($files, $invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="editPressCtrl.isDropAvailable" ngf-multiple="true">
 											<div class="plus-add">+</div>
 											<span>Add press image</span>
 										</div>
 									</div>
 									<div ngf-no-file-drop>
-										<input type="file" name="file" ng-model="editPressCtrl.image" ngf-select="editPressCtrl.upload($files, $invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="editPressCtrl.isDropAvailable" multiple>
+										<input type="file" name="file" ngf-select="editPressCtrl.upload($files, $invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="editPressCtrl.isDropAvailable" ngf-multiple="true">
 									</div>
 								</form>
-								<div class="menu-category list-group draggable-list" ng-if="editPressCtrl.images.length > 0" dnd-list="editPressCtrl.images" ng-repeat="item in editPressCtrl.images">
-									<div class="image-press-wrapper">
+								<div class="menu-category list-group draggable-list" ng-if="editPressCtrl.images.length > 0" dnd-list="editPressCtrl.images">
+									<div class="image-press-wrapper" ng-repeat="item in editPressCtrl.images" dnd-draggable="item" dnd-effect-allowed="move" dnd-moved="editPressCtrl.update($index)">
 										<span class="ion-android-close x-close" ng-click="editPressCtrl.deleteImage($index)"></span>
-										<img class="grid-image draggable-img" ng-src="{{item.url}}" dnd-draggable="item" dnd-effect-allowed="move" dnd-moved="editPressCtrl.update($index)">
+										<img class="grid-image draggable-img" ng-src="{{item.url}}">
 									</div>
 								</div>
 							</div>
