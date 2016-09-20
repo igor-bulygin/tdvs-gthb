@@ -1956,7 +1956,8 @@ input[type="radio"] .styled:checked + label::after {
   .video-container .video-row {
     background-color: #bfbfbf;
     margin-bottom: 30px;
-    padding: 25px 10px 20px; }
+    padding: 25px 10px 20px;
+    cursor: move; }
 
 .dragg-video-wrapper {
   position: relative; }
