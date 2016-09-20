@@ -51,10 +51,10 @@ $this->params['deviser_menu_active_option'] = 'press';
 										<input type="file" name="file" ngf-select="editPressCtrl.upload($files, $invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="editPressCtrl.isDropAvailable" ngf-multiple="true">
 									</div>
 								</form>
-								<div class="menu-category list-group draggable-list" ng-if="editPressCtrl.images.length > 0" dnd-list="editPressCtrl.images" ng-repeat="item in editPressCtrl.images">
-									<div class="image-press-wrapper">
+								<div class="menu-category list-group draggable-list" ng-if="editPressCtrl.images.length > 0" dnd-list="editPressCtrl.images">
+									<div class="image-press-wrapper" ng-repeat="item in editPressCtrl.images" dnd-draggable="item" dnd-effect-allowed="move" dnd-moved="editPressCtrl.update($index)">
 										<span class="ion-android-close x-close" ng-click="editPressCtrl.deleteImage($index)"></span>
-										<img class="grid-image draggable-img" ng-src="{{item.url}}" dnd-draggable="item" dnd-effect-allowed="move" dnd-moved="editPressCtrl.update($index)">
+										<img class="grid-image draggable-img" ng-src="{{item.url}}">
 									</div>
 								</div>
 							</div>
