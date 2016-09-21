@@ -36,7 +36,7 @@
 				patch.press.push(element.filename);
 			});
 			patch.$update().then(function (dataPress) {
-				//console.log("dataPress", dataPress);
+				getDeviser();
 			}, function (err) {
 				toastr.error(err);
 			});
