@@ -1,6 +1,12 @@
 (function () {
 	"use strict";
 
+	function config(nyaBsConfigProvider) {
+		nyaBsConfigProvider.setLocalizedText('en-us', {
+			defaultNoneSelection: 'Choose your field of work'
+		});
+	}
+
 	function controller(deviserDataService, UtilService, languageDataService, toastr, productDataService, Upload, $timeout) {
 		var vm = this;
 		vm.update = update;
@@ -106,5 +112,6 @@
 
 	angular
 		.module('todevise')
+		.config(config)
 		.controller('editAboutCtrl', controller);
 }());
