@@ -154,9 +154,9 @@ class DeviserController extends CController
 		$res = $this->savePostedFile($deviser_path, ("header." . uniqid()));
 		if ($res !== false) {
 			//Delete the old header picture if it didn't get overridden by the new one
-			if (isset($deviser["media"]["header"]) && strcmp($deviser["media"]["header"], $res) !== 0) {
-				@unlink(Utils::join_paths($deviser_path, $deviser["media"]["header"]));
-			}
+//			if (isset($deviser["media"]["header"]) && strcmp($deviser["media"]["header"], $res) !== 0) {
+//				@unlink(Utils::join_paths($deviser_path, $deviser["media"]["header"]));
+//			}
 
 			$deviser->mediaFiles->header = $res;
 			$deviser->save(false);
@@ -175,9 +175,9 @@ class DeviserController extends CController
 		$res = $this->savePostedFile($deviser_path, ("profile." . uniqid()));
 		if ($res !== false) {
 			//Delete the old profile picture if it didn't get overridden by the new one
-			if (isset($deviser["media"]["profile"]) && strcmp($deviser["media"]["profile"], $res) !== 0) {
-				@unlink(Utils::join_paths($deviser_path, $deviser["media"]["profile"]));
-			}
+//			if (isset($deviser["media"]["profile"]) && strcmp($deviser["media"]["profile"], $res) !== 0) {
+//				@unlink(Utils::join_paths($deviser_path, $deviser["media"]["profile"]));
+//			}
 
 			$deviser->mediaFiles->profile = $res;
 
