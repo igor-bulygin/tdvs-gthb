@@ -4,7 +4,9 @@ Example about how to call to Web Service to request an invitation
 to become a Deviser
 
 **URL**: `/api/pub/v1/devisers/invitation-requests`
+
 **Method**: `POST`
+
 **Response codes**: 
 * `201`: Success (without body)
 * `400`: Bad request

@@ -3,7 +3,9 @@
 Example about how to call to Web Service to get specific Invitation
 
 **URL**: `/api/pub/v1/invitations/<:uuid>`
+
 **Method**: `GET`
+
 **Response codes**: 
 * `200`: Success
 * `400`: Bad request

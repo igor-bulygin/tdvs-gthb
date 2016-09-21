@@ -4,7 +4,9 @@ Example about how to call to Web Service to get a public list of
 Products
 
 **URL**: `/api/pub/v1/products`
+
 **Method**: `GET`
+
 **Response codes**: 
 * `200`: Success
 * `400`: Bad request

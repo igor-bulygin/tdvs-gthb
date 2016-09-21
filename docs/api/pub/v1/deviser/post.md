@@ -3,7 +3,9 @@
 Example about how to call to Web Service to create a new Deviser account
 
 **URL**: `/api/pub/v1/devisers`
+
 **Method**: `POST`
+
 **Response codes**: 
 * `201`: Success (without body)
 * `400`: Bad request
