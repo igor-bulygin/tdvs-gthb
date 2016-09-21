@@ -7,7 +7,6 @@
 		vm.uploadPhoto = uploadPhoto;
 		vm.deleteImage = delete_image;
 		vm.biography_language = "en-US";
-		vm.description_language = "en-US";
 
 		function getDeviser() {
 			deviserDataService.Profile.get({
@@ -19,7 +18,6 @@
 				toastr.error(err);
 			});
 		}
-
 
 		function getCategories() {
 			productDataService.Categories.get()
