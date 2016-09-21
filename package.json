@@ -31,7 +31,7 @@
 		"ng-youtube-embed": "0.4.3",
 		"angular-messages": "1.5.8",
 		"nya-bootstrap-select": "2.0.11",
-		"textangular": "1.5.9"
-
+		"textangular": "1.5.9",
+		"angular-masonry": "0.16.0"
 	}
 }
