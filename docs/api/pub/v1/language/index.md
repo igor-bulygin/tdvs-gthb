@@ -3,13 +3,13 @@
 Example about how to call to Web Service to get a public list of 
 Languages
 
-* URL: `/api/pub/v1/languages`
-* Method: `GET`
-* Response codes: 
- * `200`: Success
- * `400`: Bad request
+**URL**: `/api/pub/v1/languages`
+**Method**: `GET`
+**Response codes**: 
+* `200`: Success
+* `400`: Bad request
   
-* Response body:
+**Response body**:
 
 ```
 {

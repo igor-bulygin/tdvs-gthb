@@ -2,20 +2,22 @@
 
 Example about how to call to Web Service to upload a media file
 
-* URL: `/api/priv/v1/uploads`
-* Method: `POST`
-* Response codes: 
- * `200`: Success
- * `400`: Bad request
- * `403`: Not allowed
+**URL**: `/api/priv/v1/uploads`
+
+**Method**: `POST`
+
+**Response codes**: 
+* `200`: Success
+* `400`: Bad request
+* `403`: Not allowed
   
-* Request body: 
- * `type`: one of available upload use (`deviser-media-header`, `deviser-media-profile`, `deviser-media-photos`, `deviser-press`, `deviser-curriculum`)
- * `deviser_id`: id of the deviser related with the media file (only for use types related with devisers) 
- * `product_id`: id of the product related with the media file (only for use types related with products)
- * `file`: media file to be uploaded
+**Request body**: 
+* `type`: one of available upload use (`deviser-media-header`, `deviser-media-profile`, `deviser-media-photos`, `deviser-press`, `deviser-curriculum`)
+* `deviser_id`: id of the deviser related with the media file (only for use types related with devisers) 
+* `product_id`: id of the product related with the media file (only for use types related with products)
+* `file`: media file to be uploaded
  
-* Response body:
+**Response body**:
 ```
 {
   "filename": "deviser.press.57ce89417e569.pdf",

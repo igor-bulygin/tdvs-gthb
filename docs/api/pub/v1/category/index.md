@@ -3,18 +3,20 @@
 Example about how to call to Web Service to get a public list of 
 Categories
 
-* URL: `/api/pub/v1/categories`
-* Method: `GET`
-* Response codes: 
- * `200`: Success
- * `400`: Bad request
+**URL**: `/api/pub/v1/categories`
+
+**Method**: `GET`
+
+**Response codes**: 
+* `200`: Success
+* `400`: Bad request
   
-* Request parameters:
- * `scope`: filter root categories, or all. Available values: "roots", "all" (default: "roots")
- * `page`: Set the result page that want to be retrieved (default: 1)
- * `limit`: Limit the results returned for page (default: 100)
+**Request parameters**:
+* `scope`: filter root categories, or all. Available values: "roots", "all" (default: "roots")
+* `page`: Set the result page that want to be retrieved (default: 1)
+* `limit`: Limit the results returned for page (default: 100)
     
-* Response body:
+**Response body**:
 
 ```
 {
