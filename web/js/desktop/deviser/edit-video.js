@@ -58,17 +58,25 @@
 		}
 
 		function findProducts(key, index) {
-			productDataService.Product.get({
-				name: key
-			}).$promise.then(function (dataProducts) {
-				vm.works[index] = dataProducts.items;
-				vm.works[index].forEach(function (element) {
-					element.url_image_preview = element.url_images + element.media.photos[0].name;
-				})
+			vm.noProducts = false;
+			vm.product_min_length = false;
+			if (key.length < 4)
+				vm.product_min_length = true;
+			else {
+				productDataService.Product.get({
+					name: key
+				}).$promise.then(function (dataProducts) {
+					if (dataProducts.items.length === 0)
+						vm.noProducts = true;
+					vm.works[index] = dataProducts.items;
+					vm.works[index].forEach(function (element) {
+						element.url_image_preview = element.url_images + element.media.photos[0].name;
+					})
 
-			}, function (err) {
-				toastr.error(err);
-			});
+				}, function (err) {
+					toastr.error(err);
+				});
+			}
 		}
 
 		function addVideo() {

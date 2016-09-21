@@ -3,7 +3,9 @@
 </div>
 <div class="modal-body">
 	<div style="background: #E4E4E4; overflow:hidden; width:500px; height:350px;">
-	<img-crop image="modalCropCtrl.resolve.photo" area-type="rectangle" aspect-ratio="2.8" result-image="modalCropCtrl.resolve.photoCropped" init-max-area="true" result-image-size="{w: 1280, h: 450}"></img-crop>
+		<img-crop image="modalCropCtrl.resolve.photo" area-type="rectangle" aspect-ratio="2.8" result-image="modalCropCtrl.photoCropped" init-max-area="true" result-image-size="{w: 1280, h: 450}"></img-crop>
 	</div>
-	<div class="text-center"><button class="btn btn-default" ng-click="modalCropCtrl.ok()">Apply</button></div>
+	<div class="text-center">
+		<button class="btn btn-default" ng-click="modalCropCtrl.ok()">Apply</button>
+	</div>
 </div>
