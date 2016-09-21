@@ -1296,10 +1296,7 @@ input[type="radio"] .styled:checked + label::after {
     opacity: 1;
     filter: alpha(opacity=100); }
   .grid figure img {
-    width: 101%;
-    position: relative;
-    opacity: 0.95;
-    filter: alpha(opacity=95); }
+    width: 100%; }
   .grid figure figcaption {
     width: 100%;
     height: inherit;
@@ -1841,7 +1838,8 @@ input[type="radio"] .styled:checked + label::after {
           padding: 8px;
           text-align: center; }
     .store .content-store .store-grid {
-      border-top: 1px solid #9a9a9a; }
+      border-top: 1px solid #9a9a9a;
+      margin-bottom: 80px; }
       .store .content-store .store-grid .title-wrapper {
         text-align: center;
         margin-top: -13px; }

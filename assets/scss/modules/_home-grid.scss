@@ -26,9 +26,7 @@
             }
         }
         img{
-            width:101%;
-            position: relative;
-            @include opacity(0.95);
+            width:100%;
         }
         figcaption{
             @extend %absolut-bottom;

@@ -75,7 +75,7 @@ $this->params['deviser'] = $deviser;
 								<?php } ?>
 							</ul>
 						</nav>
-						<div class="mesonry-row<?= (in_array(count($products), [6, 7, 8]) ? '-' . count($products) : '' ) ?>">
+						<div id="macy-container">
 							<?php foreach ($products as $i => $product) { ?>
 								<div class="menu-category list-group">
 									<a href="<?= Url::to(["product/detail", "slug" => Utils::l($product->slug), 'product_id' => $product->short_id])?>">

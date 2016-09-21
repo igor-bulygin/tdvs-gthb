@@ -35,6 +35,7 @@
         }
         .store-grid{
             border-top: 1px solid $dark_grey;
+            margin-bottom: 80px;
             @extend %block;
             .title-wrapper{
                 text-align: center;
