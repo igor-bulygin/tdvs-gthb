@@ -1,5 +1,6 @@
 <?php
 use app\assets\desktop\pub\Product2Asset;
+use app\assets\desktop\pub\ProductDetailAsset;
 use app\assets\desktop\pub\PublicCommonAsset;
 use app\models\Category;
 use app\models\Person;
@@ -13,7 +14,7 @@ use app\helpers\Utils;
 use yii\widgets\ListView;
 use yii\widgets\ActiveForm;
 
-Product2Asset::register($this);
+ProductDetailAsset::register($this);
 
 /** @var Person $deviser */
 /** @var Product $product */
