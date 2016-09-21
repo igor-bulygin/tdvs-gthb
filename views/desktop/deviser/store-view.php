@@ -1,4 +1,5 @@
 <?php
+use app\assets\desktop\pub\DeviserStoreViewAsset;
 use app\components\DeviserHeader;
 use app\components\DeviserMenu;
 use app\models\Category;
@@ -15,7 +16,7 @@ use yii\widgets\ActiveForm;
 use app\assets\desktop\pub\IndexAsset;
 use app\assets\desktop\pub\Index2Asset;
 
-Index2Asset::register($this);
+DeviserStoreViewAsset::register($this);
 
 /** @var Person $deviser */
 /** @var Product $product */
