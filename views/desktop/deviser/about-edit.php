@@ -46,21 +46,23 @@ $this->params['deviser'] = $deviser;
 										</div>
 									</div>
 									<div class="subtitle">
-										<ol class="nya-bs-select" ng-model="editAboutCtrl.deviser.categories" multiple ng-cloak ng-if="editAboutCtrl.categories">
+										<ol class="nya-bs-select about-edit-select" ng-model="editAboutCtrl.deviser.categories" multiple ng-cloak ng-if="editAboutCtrl.categories">
 											<li nya-bs-option="category in editAboutCtrl.categories" data-value="category.id" deep-watch="true">
 												<a href="">{{category.name}} <span class="glyphicon glyphicon-ok check-mark"></span></a>
 											</li>
 										</ol>
+										<span class="glyphicon glyphicon-pencil pencil-edit"></span>
 									</div>
 									<?php if ($deviser->hasResumeFile()) { ?>
 										<div class="resume-header"><a href="<?= $deviser->getUrlResumeFile() ?>">See resume</a></div>
 										<?php } ?>
-											<ol class="nya-bs-select" ng-model="editAboutCtrl.biography_language" ng-cloak>
+											<ol class="nya-bs-select about-edit-select lang" ng-model="editAboutCtrl.biography_language" ng-cloak>
 												<li nya-bs-option="language in editAboutCtrl.languages" data-value="language.code" deep-watch="true">
-													<a href=""><span ng-bind="language.name"></span></a>
+													<a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
 												</li>
 											</ol>
-											<div class="editable-tex-about" text-angular ta-text-editor-class="header" ng-model="editAboutCtrl.deviser.text_biography[editAboutCtrl.biography_language]" ng-cloak ta-toolbar="[]">
+											<span class="glyphicon glyphicon-pencil pencil-edit"></span>
+											<div class="editable-text-about" text-angular ta-text-editor-class="header" ng-model="editAboutCtrl.deviser.text_biography[editAboutCtrl.biography_language]" ng-cloak ta-toolbar="[]">
 
 											</div>
 											<span class="glyphicon glyphicon-pencil" style="color:white;"></span>
@@ -88,7 +90,7 @@ $this->params['deviser'] = $deviser;
 								<input type="file" name="file" ngf-select="editAboutCtrl.uploadPhoto($files, $invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="editAboutCtrl.isDropAvailable" ngf-multiple="true">
 							</div>
 							<div class="item draggable-list about-edit-list" dnd-list="editAboutCtrl.images" ng-if="editAboutCtrl.images.length > 0" ng-cloak>
-								<div class="col-xs-4 pad-about image-press-wrapper image-about-edit" ng-repeat="image in editAboutCtrl.images" dnd-draggable="image" dnd-effect-allowed="move" dnd-moved="editAboutCtrl.update($index)">
+								<div class="col-sm-4 pad-about image-about-edit" ng-repeat="image in editAboutCtrl.images" dnd-draggable="image" dnd-effect-allowed="move" dnd-moved="editAboutCtrl.update($index)">
 									<span class="ion-android-close x-close" ng-click="editAboutCtrl.deleteImage($index)"></span>
 									<img ng-src="{{image.url}}" class="grid-image draggable-img">
 								</div>

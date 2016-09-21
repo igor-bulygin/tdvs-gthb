@@ -185,7 +185,7 @@
     color: $white;
 }
 .faq-edit-list{
-    li{
+    li.dndPlaceholder{
         background-color: $background_grey;
         list-style: none;
         border: 4px dashed $dark_grey;
