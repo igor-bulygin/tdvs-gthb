@@ -75,7 +75,7 @@ class DeviserController extends AppPrivateController
 
 		// if it is updating a draft profile, change scenario to "draft"
 		if (($scenario == Person::SCENARIO_DEVISER_UPDATE_PROFILE) &&
-			($deviser->code_account_state == Person::ACCOUNT_STATE_DRAFT)) {
+			($deviser->account_state == Person::ACCOUNT_STATE_DRAFT)) {
 			$scenario = Person::SCENARIO_DEVISER_UPDATE_DRAFT;
 		}
 

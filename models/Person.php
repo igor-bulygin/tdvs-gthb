@@ -16,23 +16,23 @@ use yii2tech\embedded\ContainerTrait;
 use yii2tech\embedded\Mapping;
 
 /**
- * @property string slug
- * @property string text_short_description
- * @property string text_biography
- * @property string code_account_state
- * @property mixed type
- * @property array categories
- * @property array collections
- * @property PersonPersonalInfo personalInfo
- * @property PersonMedia mediaFiles
- * @property array press
- * @property array videos
- * @property array faq
- * @property array credentials
- * @property array preferences
- * @property array curriculum
- * @property MongoDate created_at
- * @property MongoDate updated_at
+ * @property string $slug
+ * @property string $text_short_description
+ * @property string $text_biography
+ * @property string $account_state
+ * @property mixed $type
+ * @property array $categories
+ * @property array $collections
+ * @property PersonPersonalInfo $personalInfo
+ * @property PersonMedia $mediaFiles
+ * @property array $press
+ * @property array $videos
+ * @property array $faq
+ * @property array $credentials
+ * @property array $preferences
+ * @property array $curriculum
+ * @property MongoDate $created_at
+ * @property MongoDate $updated_at
  */
 class Person extends CActiveRecord implements IdentityInterface
 {
@@ -89,7 +89,7 @@ class Person extends CActiveRecord implements IdentityInterface
 			'text_biography',
 			'slug',
 			'type',
-			'code_account_state',
+			'account_state',
 			'categories',
 			'collections',
 			'personal_info',
@@ -134,7 +134,7 @@ class Person extends CActiveRecord implements IdentityInterface
 		$this->preferences = [
 			"language" => Lang::EN_US
 		];
-		$this->code_account_state = self::ACCOUNT_STATE_DRAFT;
+		$this->account_state = self::ACCOUNT_STATE_DRAFT;
 		$this->text_short_description = [
 			Lang::EN_US => "I'm so happy to be here, always ready.",
 		];
