@@ -244,3 +244,8 @@
         }
     }
 }
+.other-products-wrapper{
+    @extend %block;
+    background-color: $white!important;
+    height: initial!important;
+}
