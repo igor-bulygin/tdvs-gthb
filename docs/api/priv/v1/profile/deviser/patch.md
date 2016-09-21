@@ -2,14 +2,14 @@
 
 Example about how to call to Web Service to update Deviser profile
 
-*URL: `/api/priv/v1/profile/deviser`*
-*Method: `PATCH`*
-*Response codes*: 
+**URL**: `/api/priv/v1/profile/deviser`
+**Method**: `PATCH`
+**Response codes**: 
 * `204`: Success, without body
 * `400`: Bad request
 * `403`: Not allowed
   
-*Request body*: 
+**Request body**: 
 * `scenario`: available values ["deviser-update-profile"]
 * `categories`: [] array with category ids (["f0cco", "1234"]) 
 * `text_biography`: multi-language field with biographies in different languages ({"en-US": "my biography", "es-ES": "mi biografía"}) 
