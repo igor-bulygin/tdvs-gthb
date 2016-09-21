@@ -41,16 +41,12 @@ class ProductController extends AppPrivateController
 
 	public function actionUpdate($id)
 	{
+		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_OWNER);
+		/** @var Product $product */
 		$product = Product::findOneSerialized($id);
 		if (!$product) {
 			throw new BadRequestHttpException('Product not found');
 		}
-
-		/** @var Person $deviser */
-		$deviser = $this->getPerson();
-
-//        $data = Yii::$app->request->post();
-//        print_r($data);
 
 		$product->setScenario(Product::SCENARIO_PRODUCT_UPDATE_DRAFT);
 		if ($product->load(Yii::$app->request->post(), '') && $product->save()) {
@@ -58,7 +54,6 @@ class ProductController extends AppPrivateController
 
 			// TODO: return the deviser data, only for test. remove when finish.
 //            Yii::$app->response->setStatusCode(204); // Success, without body
-			Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_OWNER);
 			return $product;
 		} else {
 			Yii::$app->response->setStatusCode(400); // Bad Request
@@ -88,9 +83,6 @@ class ProductController extends AppPrivateController
 			Person::SCENARIO_DEVISER_UPDATE_DRAFT,
 			Person::SCENARIO_DEVISER_PUBLISH_PROFILE,
 			Person::SCENARIO_DEVISER_UPDATE_PROFILE,
-			Person::SCENARIO_DEVISER_PRESS_UPDATE,
-			Person::SCENARIO_DEVISER_VIDEOS_UPDATE,
-			Person::SCENARIO_DEVISER_FAQ_UPDATE,
 		])
 		) {
 			throw new BadRequestHttpException('Invalid scenario');
