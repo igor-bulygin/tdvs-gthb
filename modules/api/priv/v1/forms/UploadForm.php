@@ -59,8 +59,8 @@ class UploadForm extends Model {
 		return [
 			[['type'], 'validateType'],
 			[['deviser_id', 'product_id'], 'safe'],
-			[['file'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg, jpeg', 'on' => self::SCENARIO_UPLOAD_DEVISER_IMAGE],
-			[['file'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg, jpeg, pdf', 'on' => self::SCENARIO_UPLOAD_DEVISER_CURRICULUM],
+			[['file'], 'file', 'skipOnEmpty' => false, 'extensions' => ['png', 'jpg', 'jpeg'], 'on' => self::SCENARIO_UPLOAD_DEVISER_IMAGE],
+			[['file'], 'file', 'skipOnEmpty' => false, 'extensions' => ['png', 'jpg', 'jpeg', 'pdf'], 'on' => self::SCENARIO_UPLOAD_DEVISER_CURRICULUM],
 		];
 	}
 
