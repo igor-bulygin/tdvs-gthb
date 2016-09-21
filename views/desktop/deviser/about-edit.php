@@ -62,9 +62,7 @@ $this->params['deviser'] = $deviser;
 												</li>
 											</ol>
 											<span class="glyphicon glyphicon-pencil pencil-edit"></span>
-											<div class="editable-text-about" text-angular ta-text-editor-class="header" ng-model="editAboutCtrl.deviser.text_biography[editAboutCtrl.biography_language]" ng-cloak ta-toolbar="[]">
-
-											</div>
+											<div class="editable-text-about" text-angular ta-text-editor-class="header" ng-model="editAboutCtrl.deviser.text_biography[editAboutCtrl.biography_language]" ng-cloak ta-toolbar="[]" placeholder="Write your brand statment / mission / biography."></div>
 											<span class="glyphicon glyphicon-pencil" style="color:white;"></span>
 											<div class="text-center">
 												<button class="btn btn-default" ng-click="editAboutCtrl.update()">Update</button>
