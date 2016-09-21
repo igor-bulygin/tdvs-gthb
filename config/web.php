@@ -162,6 +162,7 @@ $config = [
 				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/video' => 'deviser/videos',
 				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/faq' => 'deviser/faq',
 
+				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/store/edit' => 'deviser/store-edit',
 				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/about/edit' => 'deviser/about-edit',
 				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/press/edit' => 'deviser/press-edit',
 				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/video/edit' => 'deviser/videos-edit',

@@ -255,7 +255,33 @@ class DeviserController extends CController
 			->all();
 
 		$this->layout = '/desktop/public-2.php';
-		return $this->render("store", [
+		return $this->render("store-view", [
+			'deviser' => $deviser,
+			'products' => $products,
+			'categories' => $categories,
+			'selectedCategory' => $selectedCategory,
+		]);
+	}
+
+	public function actionStoreEdit($slug, $deviser_id)
+	{
+		// get the category object
+		$deviser = Person::findOneSerialized($deviser_id);
+		// categories of all products
+		$categories = $deviser->getCategoriesOfProducts();
+		/** @var Category $selectedCategory */
+		$selectedCategory = $this->getCategoryById($categories, Yii::$app->request->get('category'));
+		if (!isset($selectedCategory)) {
+			$selectedCategory = (count($categories) > 0) ? $categories[0] : new Category();
+		}
+		// their products, for selected category
+		$products = Product::find()
+			->where(["deviser_id" => $deviser_id, "categories" => $selectedCategory->getShortIds()])
+			->orderBy('position')
+			->all();
+
+		$this->layout = '/desktop/public-2.php';
+		return $this->render("store-edit", [
 			'deviser' => $deviser,
 			'products' => $products,
 			'categories' => $categories,
