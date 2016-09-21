@@ -58,7 +58,7 @@
 }
 .about-grid{
     background-color: #404040;
-    min-height: 671px;
+    min-height: 900px;
     .item{
         img{
             height: 100%;
@@ -80,17 +80,102 @@
 .image-about-edit{
     max-height: 180px;
     overflow: hidden;
+    span{
+        position: absolute;
+        z-index: 1;
+        top: 10px;
+        right: 10px;
+        background-color: $dark_grey;
+        font-size: 18px;
+        color: $white;
+        @include size(30px,30px);
+        display: block;
+        float: left;
+        text-align: center;
+        padding-top: 3px;
+        margin-left: 6px;
+        @include border-radius(7px,7px,7px,7px);
+        &.x-close{
+            cursor:pointer;
+        }
+    }
 }
-.editable-tex-about{
+.editable-text-about{
     color: $white;
+    .ta-scroll-window > .ta-bind {
+        padding: 0;
+    }
 }
 .about-edit-list{
     li{
         background-color: $background_grey;
         list-style: none;
         border: 4px dashed $dark_grey;
-        width: 180px;
+        width: 33%;
         height: 180px;
         float: left;
     }
+}
+.about-edit-select{
+    &.lang{
+        margin-bottom: 20px;
+    }
+    button{
+        background-color: $black!important;
+        color: $white!important;
+        border: 1px solid transparent;
+        border-bottom: 1px solid $white;
+        padding-left: 0;
+        @include border-radius(0,0,0,0);
+        &:hover{
+            border: 1px solid $white!important;
+            background-color: $black;
+            color: $white;
+        }
+        &:active{
+            background-color: $black;
+            color: $white;
+            border: 1px solid transparent;
+        }
+        &:focus{
+            background-color: $black;
+            color: $white;
+            border: 1px solid transparent;
+        }
+    }
+    .caret{
+        display: none;
+    }
+    .dropdown-menu{
+        width: 100%;
+        ul{
+            li{
+                &.selected{
+                    background-color: $green;
+                }
+                &:focus{
+                    background-color: transparent;
+                }
+                a{
+                    font-family: $font-family--secondary;
+                    font-style: normal;
+                    &:hover{
+                        background-color: $green;
+                    }
+                }
+                span.check-mark{
+                    color: $white;
+                }
+            }
+        }
+    }
+    .dropdown-menu > li > a:focus, .dropdown-menu > li > a:hover {
+        color: $black;
+        text-decoration: none;
+        background-color: transparent;
+    }
+}
+.pencil-edit{
+    color: $white;
+    font-size:14px;
 }

@@ -12,7 +12,7 @@ footer{
     bottom: -215px;
     transition: bottom 0.4s ease-in-out;
     cursor:pointer;
-    z-index: 999;
+    z-index: 9999;
     &:hover{
         bottom:0;
     }
@@ -182,4 +182,8 @@ footer{
             }
         }
     }
+}
+.nya-bs-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+    min-width: 220px!important;
+    width: auto!important;
 }
