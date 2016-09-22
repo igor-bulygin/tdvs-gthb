@@ -82,7 +82,6 @@
 					deviser_id: vm.deviser.id,
 					file: file
 				}
-				console.log(data);
 				Upload.upload({
 					url: deviserDataService.Uploads,
 					data: data

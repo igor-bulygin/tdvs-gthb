@@ -54,12 +54,11 @@
 			})
 		}
 
-		function upload(image, type, name) {
+		function upload(image, type) {
 			var data = {
 				deviser_id: vm.deviser.id,
-				file: Upload.dataUrltoBlob(image, name)
+				file: Upload.dataUrltoBlob(image, "temp.png")
 			}
-			console.log(data);
 			switch (type) {
 			case "header":
 				data.type = 'deviser-media-header';
@@ -73,24 +72,34 @@
 			}).then(function (dataUpload) {
 				toastr.success("Photo uploaded!");
 				vm.deviser.media[type] = dataUpload.data.filename;
-				update(media, vm.deviser.media);
-			})
+				update('media', vm.deviser.media);
+			});
 		}
 
-		function openCropModal(photo) {
+		function openCropModal(photo, type) {
 			var modalInstance = $uibModal.open({
 				component: 'modalCrop',
 				resolve: {
 					photo: function () {
 						return photo;
+					},
+					type: function () {
+						return type;
 					}
 				}
 			})
 
 			modalInstance.result.then(function (imageCropped) {
-				vm.header = imageCropped;
-				upload(imageCropped, 'header', vm.new_header.name);
-
+				switch (type) {
+				case "header":
+					vm.header = imageCropped;
+					upload(imageCropped, type);
+					break;
+				case "profile":
+					vm.profile = imageCropped;
+					upload(imageCropped, type);
+					break;
+				}
 			}, function () {
 				console.log("dismissed");
 			});
@@ -98,7 +107,13 @@
 
 		$scope.$watch('editHeaderCtrl.new_header', function (newValue, oldValue) {
 			if (newValue) {
-				openCropModal(vm.new_header);
+				openCropModal(vm.new_header, 'header');
+			}
+		})
+
+		$scope.$watch('editHeaderCtrl.new_profile', function (newValue, oldValue) {
+			if (newValue) {
+				openCropModal(vm.new_profile, 'profile');
 			}
 		})
 

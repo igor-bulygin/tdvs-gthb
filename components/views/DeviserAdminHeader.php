@@ -15,14 +15,16 @@ $deviser = $this->params['deviser'];
 	<div class="banner-deviser" ng-controller="editHeaderCtrl as editHeaderCtrl">
 		<div class="container pad-about">
 			<span class="button glyphicon glyphicon-camera" style="font-size:50px;" ngf-select ng-model="editHeaderCtrl.new_header" name="header" ngf-pattern="'image/*'" ngf-accept="'image/*'"></span>
-			<span class="button glyphicon glyphicon-scissors" style="font-size:50px;" ng-click="editHeaderCtrl.openCropModal(editHeaderCtrl.header)"></span>
+			<span class="button glyphicon glyphicon-scissors" style="font-size:50px;" ng-click="editHeaderCtrl.openCropModal(editHeaderCtrl.header, 'header')"></span>
 			<img class="cover" ngf-thumbnail="editHeaderCtrl.header" style="width: 1280px; height: 450px;">
 			<div class="banner-deviser-content">
 				<div class="grey-overlay"></div>
 				<div class="container">
 					<div class="deviser-profile">
 						<div class="avatar">
-							<img class="cover" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($deviser->getAvatarImage())->resize(340, 340) ?>">
+							<img class="cover" ngf-thumbnail="editHeaderCtrl.profile" style="width: 340px; height:340px;">
+							<span class="button glyphicon glyphicon-camera" style="font-size:25px;" ngf-select ng-model="editHeaderCtrl.new_profile" name="profile" ngf-pattern="'image/*'" ngf-accept="'image/*'"></span>
+							<span class="button glyphicon glyphicon-scissors" style="font-size:25px;" ng-click="editHeaderCtrl.openCropModal(editHeaderCtrl.profile, 'profile')"></span>
 						</div>
 						<div class="deviser-data">
 							<div class="name" text-angular ta-text-editor-class="header" ng-model="editHeaderCtrl.brand_name" ng-cloak ta-toolbar="[]" style="max-height:50px;" ng-blur="editHeaderCtrl.update('brand_name', editHeaderCtrl.brand_name)"></div>
