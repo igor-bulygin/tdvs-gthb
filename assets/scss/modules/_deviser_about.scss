@@ -118,6 +118,9 @@
     }
 }
 .about-edit-select{
+    &.header-lang{
+        margin-left:12px!important;
+    }
     &.lang{
         margin-bottom: 20px;
     }
@@ -214,4 +217,9 @@
     padding-top: 7px;
     right: 10px;
     height: 40px;
+}
+.absolute-pencil{
+    position: absolute;
+    top: 188px;
+    left: 529px;
 }

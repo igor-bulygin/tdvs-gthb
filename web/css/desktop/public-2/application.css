@@ -1959,6 +1959,8 @@ input[type="radio"] .styled:checked + label::after {
   height: 180px;
   float: left; }
 
+.about-edit-select.header-lang {
+  margin-left: 12px !important; }
 .about-edit-select.lang {
   margin-bottom: 20px; }
 .about-edit-select button {
@@ -2040,6 +2042,11 @@ input[type="radio"] .styled:checked + label::after {
   padding-top: 7px;
   right: 10px;
   height: 40px; }
+
+.absolute-pencil {
+  position: absolute;
+  top: 188px;
+  left: 529px; }
 
 .video-container {
   margin: 40px 0; }

@@ -29,14 +29,16 @@ $deviser = $this->params['deviser'];
 						<div class="deviser-data">
 							<div class="name" text-angular ta-text-editor-class="header" ng-model="editHeaderCtrl.brand_name" ng-cloak ta-toolbar="[]" style="max-height:50px;" ng-blur="editHeaderCtrl.update('brand_name', editHeaderCtrl.brand_name)"></div>
 							<div class="location" ng-model="editHeaderCtrl.deviser.personal_info.city" text-angular ta-text-editor-class="header" ng-cloak ta-toolbar="[]" style="max-height:50px;" ng-blur="editHeaderCtrl.update('city', editHeaderCtrl.deviser.personal_info.city)"></div>
-							<ol class="nya-bs-select about-edit-select" ng-model="editHeaderCtrl.description_language" ng-cloak>
+							<ol class="nya-bs-select about-edit-select header-lang" ng-model="editHeaderCtrl.description_language" ng-cloak>
 								<li nya-bs-option="language in editHeaderCtrl.languages" data-value="language.code" deep-watch="true">
 									<a href=""><span ng-bind="language.name"></span></a>
 								</li>
 							</ol>
 							<span class="glyphicon glyphicon-pencil pencil-edit"></span>
-							<div class="description" text-angular ta-text-editor-class="header" ng-model="editHeaderCtrl.deviser.text_short_description[editHeaderCtrl.description_language]" ng-cloak ta-toolbar="[]" style="max-height:50px;" ng-blur="editHeaderCtrl.update('text_short_description', editHeaderCtrl.deviser.text_short_description)"></div>
-							<span class="glyphicon glyphicon-pencil pencil-edit"></span>
+							<div style="width:100%;float:left;position:elative;">
+                                <div class="description" text-angular ta-text-editor-class="header" ng-model="editHeaderCtrl.deviser.text_short_description[editHeaderCtrl.description_language]" ng-cloak ta-toolbar="[]" style="max-height:50px;" ng-blur="editHeaderCtrl.update('text_short_description', editHeaderCtrl.deviser.text_short_description)"></div>
+                                <span class="glyphicon glyphicon-pencil pencil-edit absolute-pencil"></span>
+							</div>
 						</div>
 					</div>
 				</div>
