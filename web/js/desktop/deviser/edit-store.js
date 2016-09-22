@@ -34,7 +34,7 @@
 					pos = i;
 			}
 			if (pos > -1) {
-				patch.position = pos;
+				patch.position = (pos + 1);
 				patch.$update({
 					idProduct: product.id
 				}).then(function (dataProduct) {

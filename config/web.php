@@ -156,6 +156,7 @@ $config = [
 				'/index-old' => 'public/index-old',
 				'/category/<slug:[^/.]*?>/<category_id:[^/.]*?>' => 'public/category-b',
 				'/work/<slug:[^/.]*?>/<product_id:[^/.]*?>' => 'product/detail',
+				'/works/fix-position' => 'product/fix-position',
 				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/store' => 'deviser/store',
 				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/about' => 'deviser/about',
 				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/press' => 'deviser/press',

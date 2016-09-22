@@ -128,7 +128,7 @@ class Product extends CActiveRecord {
 		$this->weight_unit = "";
 		$this->price_stock = [];
 		$this->references = [];
-		$this->position = 1;
+		$this->position = 0;
 
 		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_PUBLIC);
 	}
@@ -242,6 +242,8 @@ class Product extends CActiveRecord {
 			$query->offset($criteria["offset"]);
 		}
 
+		$query->orderBy("deviser_id, position");
+
 		$products = $query->all();
 
 		// if automatic translation is enabled
@@ -297,6 +299,7 @@ class Product extends CActiveRecord {
 					'currency',
 //					'weight_unit',
 					'references',
+					'position',
 					'options' => 'productOptions',
 					'url_images' => 'urlImagesLocation',
 				];
