@@ -16,13 +16,13 @@ $deviser = $this->params['deviser'];
 		<div class="container pad-about">
 			<span class="button ion-camera edit-cover-photo-icon" ngf-select ng-model="editHeaderCtrl.new_header" name="header" ngf-pattern="'image/*'" ngf-accept="'image/*'"></span>
 			<!--<span class="button ion-crop" style="font-size:50px;" ng-click="editHeaderCtrl.openCropModal(editHeaderCtrl.header, 'header')"></span>-->
-			<img class="cover" ngf-thumbnail="editHeaderCtrl.header">
+			<img class="cover" ngf-thumbnail="editHeaderCtrl.header || '/imgs/default-cover.jpg'">
 			<div class="banner-deviser-content">
 				<div class="grey-overlay"></div>
 				<div class="container">
 					<div class="deviser-profile">
 						<div class="avatar">
-							<img class="cover" ngf-thumbnail="editHeaderCtrl.profile">
+							<img class="cover" ngf-thumbnail="editHeaderCtrl.profile || '/imgs/default-avatar.jpg' ">
 							<span class="button ion-camera edit-avatar-photo-icon" ngf-select ng-model="editHeaderCtrl.new_profile" name="profile" ngf-pattern="'image/*'" ngf-accept="'image/*'"></span>
 							<span class="button ion-crop crop-avatar-photo-icon" ng-click="editHeaderCtrl.openCropModal(editHeaderCtrl.profile, 'profile')"></span>
 						</div>
