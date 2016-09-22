@@ -51,12 +51,12 @@ $this->title = 'Create a Deviser account - Todevise';
 							</div>
 							<div class="row">
 								<label>Representative name <i tooltip-placement="top" uib-tooltip="This name will not be made public. We will only use it to communicate with you." class="ion-information-circled info"></i></label>
-								<input type="text" class="form-control grey-input ng-class:{'error-input': createDeviserCtrl.has_error(createDeviserCtrl.form, createDeviserCtrl.form.representative_name)}" name="representative_name" ng-model="createDeviserCtrl.deviser.representative_name" placeholder="FIRST NAME" required>
-								<form-errors field="createDeviserCtrl.form.representative_name" condition="createDeviserCtrl.has_error(createDeviserCtrl.form, createDeviserCtrl.form.representative_name)"></form-errors>
+								<input type="text" class="form-control grey-input ng-class:{'error-input': createDeviserCtrl.has_error(createDeviserCtrl.form, createDeviserCtrl.form.first_name)}" name="first_name" ng-model="createDeviserCtrl.deviser.first_name" placeholder="FIRST NAME" required>
+								<form-errors field="createDeviserCtrl.form.first_name" condition="createDeviserCtrl.has_error(createDeviserCtrl.form, createDeviserCtrl.form.first_name)"></form-errors>
 							</div>
 							<div class="row">
-								<input type="text" class="form-control grey-input ng-class:{'error-input': createDeviserCtrl.has_error(createDeviserCtrl.form, createDeviserCtrl.form.representative_name)}" name="representative_name" ng-model="createDeviserCtrl.deviser.representative_name" placeholder="SECOND NAME" required>
-								<form-errors field="createDeviserCtrl.form.representative_name" condition="createDeviserCtrl.has_error(createDeviserCtrl.form, createDeviserCtrl.form.representative_name)"></form-errors>
+								<input type="text" class="form-control grey-input ng-class:{'error-input': createDeviserCtrl.has_error(createDeviserCtrl.form, createDeviserCtrl.form.last_name)}" name="last_name" ng-model="createDeviserCtrl.deviser.last_name" placeholder="SECOND NAME" required>
+								<form-errors field="createDeviserCtrl.form.last_name" condition="createDeviserCtrl.has_error(createDeviserCtrl.form, createDeviserCtrl.form.last_name)"></form-errors>
 							</div>
 							<div class="row">
 								<label>Set your password</label>
