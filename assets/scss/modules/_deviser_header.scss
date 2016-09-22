@@ -21,6 +21,7 @@
         position: relative;
         .avatar{
             float: left;
+            position: relative;
             img{
                 @include size(155px,155px);
                 @extend %avatar-border;

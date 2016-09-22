@@ -861,9 +861,9 @@ input[type="radio"] .styled:checked + label::after {
 
 .showcase figcaption img, .banner-deviser-content .deviser-profile .avatar img, .product-description .product-description-content .work-description-wrapper .comment-wrapper .avatar img, .product-description .product-description-content .work-description-wrapper .comment-user .avatar img {
   border: 1px solid #9a9a9a;
-  border-radius: 90px 90px 90px 90px !important;
-  -webkit-border-radius: 90px 90px 90px 90px !important;
-  -moz-border-radius: 90px 90px 90px 90px !important; }
+  border-radius: 180px 180px 180px 180px !important;
+  -webkit-border-radius: 180px 180px 180px 180px !important;
+  -moz-border-radius: 180px 180px 180px 180px !important; }
 
 .log a, .edit-faq-btn, .add-lang, .request-invitation-wrapper .request-invitation-container .add-new {
   color: #F7284B !important; }
@@ -941,7 +941,7 @@ input[type="radio"] .styled:checked + label::after {
       top: 0 !important;
       left: 0 !important; } }
 
-.draggable-list .image-press-wrapper, .edit-faq-wrapper, .edit-faq-panel, .questions, .faq-row, .store .content-store .cathegory-wrapper, .store .content-store .store-grid, .video-container, .tagged-works .tag-row, .tag-select-row, .become-deviser-wrapper .call-to-action-wrapper, .request-invitation-wrapper, .product .product-data-wrapper, .product .product-data-wrapper .product-data, .work-profile-description-wrapper, .other-products-wrapper {
+.draggable-list .image-press-wrapper, .edit-faq-wrapper, .edit-faq-panel, .questions, .faq-row, .store .content-store .cathegory-wrapper, .store .content-store .store-grid, .about-wrapper .about-container .name, .video-container, .tagged-works .tag-row, .tag-select-row, .become-deviser-wrapper .call-to-action-wrapper, .request-invitation-wrapper, .product .product-data-wrapper, .product .product-data-wrapper .product-data, .work-profile-description-wrapper, .other-products-wrapper {
   float: left;
   width: 100%; }
 
@@ -1799,7 +1799,8 @@ input[type="radio"] .styled:checked + label::after {
   .banner-deviser-content .deviser-profile {
     position: relative; }
     .banner-deviser-content .deviser-profile .avatar {
-      float: left; }
+      float: left;
+      position: relative; }
       .banner-deviser-content .deviser-profile .avatar img {
         width: 155px;
         height: 155px;
@@ -1961,7 +1962,7 @@ input[type="radio"] .styled:checked + label::after {
 .about-edit-select.lang {
   margin-bottom: 20px; }
 .about-edit-select button {
-  background-color: #1C1919 !important;
+  background-color: transparent !important;
   color: #ffffff !important;
   border: 1px solid transparent;
   border-bottom: 1px solid #ffffff;
@@ -1971,14 +1972,14 @@ input[type="radio"] .styled:checked + label::after {
   -moz-border-radius: 0 0 0 0 !important; }
   .about-edit-select button:hover {
     border: 1px solid #ffffff !important;
-    background-color: #1C1919;
+    background-color: transparent;
     color: #ffffff; }
   .about-edit-select button:active {
-    background-color: #1C1919;
+    background-color: transparent;
     color: #ffffff;
     border: 1px solid transparent; }
   .about-edit-select button:focus {
-    background-color: #1C1919;
+    background-color: transparent;
     color: #ffffff;
     border: 1px solid transparent; }
 .about-edit-select .caret {
@@ -2004,6 +2005,41 @@ input[type="radio"] .styled:checked + label::after {
 .pencil-edit {
   color: #ffffff;
   font-size: 14px; }
+
+.edit-cover-photo-icon {
+  color: #ffffff;
+  font-size: 60px;
+  width: 100px;
+  position: absolute;
+  text-align: center;
+  cursor: pointer;
+  top: 50px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto; }
+
+.edit-avatar-photo-icon {
+  color: #ffffff;
+  font-size: 40px;
+  position: absolute;
+  top: 0;
+  left: 15px;
+  cursor: pointer; }
+
+.crop-avatar-photo-icon {
+  color: #ffffff;
+  font-size: 19px;
+  position: absolute;
+  text-align: center;
+  cursor: pointer;
+  top: 12px;
+  width: 40px;
+  border-radius: 24px;
+  background-color: #F7284B;
+  padding-top: 7px;
+  right: 10px;
+  height: 40px; }
 
 .video-container {
   margin: 40px 0; }

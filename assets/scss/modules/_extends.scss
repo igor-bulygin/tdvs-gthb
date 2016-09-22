@@ -3,7 +3,7 @@
 // ==========================================================================
 %avatar-border{
     border:1px solid $dark_grey;
-    @include border-radius(90px,90px,90px,90px);
+    @include border-radius(180px,180px,180px,180px);
 }
 %link-red{
     color:$red!important;

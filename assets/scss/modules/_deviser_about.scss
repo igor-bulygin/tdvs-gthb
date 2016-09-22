@@ -20,6 +20,7 @@
         }
         .name{
             @extend %ultra-condensed-white-title;
+            @extend %block;
             font-size: 54px;
         }
         .location{
@@ -121,7 +122,7 @@
         margin-bottom: 20px;
     }
     button{
-        background-color: $black!important;
+        background-color: transparent!important;
         color: $white!important;
         border: 1px solid transparent;
         border-bottom: 1px solid $white;
@@ -129,16 +130,16 @@
         @include border-radius(0,0,0,0);
         &:hover{
             border: 1px solid $white!important;
-            background-color: $black;
+            background-color: transparent;
             color: $white;
         }
         &:active{
-            background-color: $black;
+            background-color:transparent;
             color: $white;
             border: 1px solid transparent;
         }
         &:focus{
-            background-color: $black;
+            background-color: transparent;
             color: $white;
             border: 1px solid transparent;
         }
@@ -178,4 +179,39 @@
 .pencil-edit{
     color: $white;
     font-size:14px;
+}
+.edit-cover-photo-icon{
+    color: $white;
+    font-size: 60px;
+    width: 100px;
+    position: absolute;
+    text-align: center;
+    cursor: pointer;
+    top: 50px;
+    left: 0; 
+    right: 0; 
+    margin-left: auto; 
+    margin-right: auto;
+}
+.edit-avatar-photo-icon{
+    color: $white;
+    font-size: 40px;
+    position: absolute;
+    top: 0;
+    left: 15px;
+    cursor: pointer;
+}
+.crop-avatar-photo-icon{
+    color:$white;
+    font-size: 19px;
+    position: absolute;
+    text-align: center;
+    cursor: pointer;
+    top: 12px;
+    width: 40px;
+    border-radius: 24px;
+    background-color: $red;
+    padding-top: 7px;
+    right: 10px;
+    height: 40px;
 }
