@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = [
 
 EditWorkAsset::register($this);
 
-$who = $deviser['personal_info']['name'] . " " . join($deviser['personal_info']['surnames'], " ");
+$who = $deviser['personal_info']['name'];
 $this->title = "$who / Todevise / Edit info";
 
 $base_path_photos = Yii::getAlias("@deviser_url") . "/" . $deviser["short_id"] . "/";
@@ -64,7 +64,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 		<div class="row no-gutter flex flex-align-center internal-header">
 			<div class="col-xs-4">
 				<img class="deviser_photo" ngf-background="profilephoto" angular-img-dl angular-img-dl-url="<?= $profile_photo_url ?>" angular-img-dl-model="profilephoto" />
-				<span><?= $deviser["personal_info"]["name"] ?> <?= implode(" ", $deviser["personal_info"]["surnames"]) ?></span>
+				<span><?= $deviser["personal_info"]["name"] ?></span>
 			</div>
 			<div class="col-xs-4 flex flex-justify-center">
 				<span><?= Yii::t("app/deviser", "Editing work") ?></span>

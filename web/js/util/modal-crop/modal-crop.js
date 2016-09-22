@@ -5,12 +5,14 @@
 		var vm = this;
 		vm.ok = ok;
 		vm.dismiss = dismiss;
-		
+
 		function ok() {
-			vm.close({$value:vm.resolve.photoCropped})
+			vm.close({
+				$value: vm.photoCropped
+			});
 		}
-		
-		function dismiss(){
+
+		function dismiss() {
 			vm.close();
 		}
 	}
