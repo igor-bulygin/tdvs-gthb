@@ -34,11 +34,16 @@ class DeviserController extends CController
 			->all();
 		Utils::l_collection($countries, "country_name");
 
-		$deviser = Person::find()
-			->select(["_id" => 0])
-			->where(["slug" => $slug, "type" => ['$in' => [Person::DEVISER]]])
-			->asArray()
-			->one();
+//		$deviser = Person::find()
+//			->select(["_id" => 0])
+//			->where(["slug" => $slug, "type" => ['$in' => [Person::DEVISER]]])
+//			->asArray()
+//			->one();
+
+
+		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
+		$deviser = Person::findOneSerialized(Yii::$app->request->get('deviser_id'))->toArray();
+		$deviser["short_id"] = $deviser["id"];
 
 		$categories = Category::find()
 			->select(["_id" => 0])
