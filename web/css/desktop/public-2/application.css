@@ -2157,7 +2157,8 @@ input[type="radio"] .styled:checked + label::after {
 
 .become-deviser-wrapper .become-deviser-cover {
   background: url("/imgs/become_a_deviser_background.png") no-repeat;
-  width: 100%; }
+  width: 100%;
+  background-size: 100% 100%; }
 .become-deviser-wrapper .call-to-action-wrapper {
   position: relative;
   height: 525px; }

@@ -24,8 +24,9 @@ $this->title = 'Become a Deviser - Todevise';
 ?>
 
 	<div class="become-deviser-wrapper">
-		<div class="container">
-			<div class="become-deviser-cover">
+		<div>
+			<div class="container">
+			    <div class="become-deviser-cover">
 				<div class="row">
 					<div class="col-sm-6"></div>
 					<div class="col-sm-6 col-xs-12">
@@ -98,7 +99,9 @@ $this->title = 'Become a Deviser - Todevise';
 						<div class="quotation">Having your outlet store on Todevise opens your business to a world of opportunities. Reach new customers, upload products with ease, manage and track your sales efficiently.</div>
 					</div>
 				</div>
-				<div class="request-invitation-wrapper" ng-controller="becomeDeviserCtrl as becomeDeviserCtrl">
+				</div>
+			</div>
+			<div class="request-invitation-wrapper" ng-controller="becomeDeviserCtrl as becomeDeviserCtrl">
 					<div class="title">Request invitation</div>
 					<div class="tagline">We constantly strive for excellence, and for this reason an invitation is needed to register a deviser.</div>
 					<div class="request-invitation-container black-form">
@@ -166,6 +169,5 @@ $this->title = 'Become a Deviser - Todevise';
 						</form>
 					</div>
 				</div>
-			</div>
 		</div>
 	</div>
