@@ -23,11 +23,12 @@ use yii2tech\embedded\Mapping;
  * @property mixed $type
  * @property array $categories
  * @property array $collections
+ * @property PersonPreferences $preferencesInfo
  * @property PersonPersonalInfo $personalInfo
  * @property PersonMedia $mediaFiles
  * @property array $press
- * @property array $videos
- * @property array $faq
+ * @property Mapping $videosInfo
+ * @property Mapping $faqInfo
  * @property array $credentials
  * @property array $preferences
  * @property array $curriculum
@@ -93,7 +94,7 @@ class Person extends CActiveRecord implements IdentityInterface
 			'categories',
 			'collections',
 			'personal_info',
-			'personalInfo',
+//			'personalInfo',
 			'curriculum',
 			'media',
 			'credentials',
@@ -122,6 +123,7 @@ class Person extends CActiveRecord implements IdentityInterface
 
 		$this->short_id = Utils::shortID(7);
 
+		$this->preferencesInfo = new PersonPreferences();
 		$this->personalInfo = new PersonPersonalInfo();
 		$this->mediaFiles = new PersonMedia();
 
@@ -131,9 +133,6 @@ class Person extends CActiveRecord implements IdentityInterface
 		$this->press = [];
 		$this->videos = [];
 		$this->faq = [];
-		$this->preferences = [
-			"language" => Lang::EN_US
-		];
 		$this->account_state = self::ACCOUNT_STATE_DRAFT;
 		$this->text_short_description = [
 			Lang::EN_US => "I'm so happy to be here, always ready.",
@@ -147,6 +146,11 @@ class Person extends CActiveRecord implements IdentityInterface
 		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_PUBLIC);
 	}
 
+	public function embedPreferencesInfo()
+	{
+		return $this->mapEmbedded('preferences', PersonPreferences::className());
+	}
+
 	public function embedPersonalInfo()
 	{
 		return $this->mapEmbedded('personal_info', PersonPersonalInfo::className());
@@ -155,6 +159,16 @@ class Person extends CActiveRecord implements IdentityInterface
 	public function embedMediaFiles()
 	{
 		return $this->mapEmbedded('media', PersonMedia::className());
+	}
+
+	public function embedVideosInfo()
+	{
+		return $this->mapEmbeddedList('videos', PersonVideo::className());
+	}
+
+	public function embedFaqInfo()
+	{
+		return $this->mapEmbeddedList('faq', FaqQuestion::className());
 	}
 
 	/**
@@ -169,37 +183,11 @@ class Person extends CActiveRecord implements IdentityInterface
 		/** @var Person $person */
 		$person = Person::find()->select(self::getSelectFields())->where(["short_id" => $id])->one();
 
-		$person->personalInfo->load($person, 'personal_info');
-		$person->mediaFiles->load($person, 'media');
-
 		// if automatic translation is enabled
 		if (static::$translateFields) {
 			Utils::translate($person);
 		}
 		return $person;
-	}
-
-	/**
-	 * Spread load to sub documents
-	 *
-	 * @param mixed $condition
-	 * @return Person|null|void|static
-	 */
-	public static function findOne($condition)
-	{
-		/** @var Person $person */
-		$person = parent::findOne($condition);
-
-		$person->personalInfo->load($person, 'personal_info');
-		$person->mediaFiles->load($person, 'media');
-
-		return $person;
-	}
-
-	public function loadSubdocuments()
-	{
-		$this->personalInfo->load($this, 'personal_info');
-		$this->mediaFiles->load($this, 'media');
 	}
 
 	public static function findIdentity($id)
@@ -242,6 +230,15 @@ class Person extends CActiveRecord implements IdentityInterface
 		return $this->credentials["password"] === bin2hex(Yii::$app->Scrypt->calc($password, $this->credentials["salt"], 8, 8, 16, 32));
 	}
 
+	public function afterFind()
+	{
+		parent::afterFind();
+
+		$this->preferencesInfo->load($this, 'preferences');
+		$this->personalInfo->load($this, 'personal_info');
+		$this->mediaFiles->load($this, 'media');
+	}
+
 	public function beforeSave($insert)
 	{
 		/*
@@ -277,9 +274,9 @@ class Person extends CActiveRecord implements IdentityInterface
 			$this["credentials"] = [];
 		}
 
-		if ($this->preferences == null) {
-			$this["preferences"] = [];
-		}
+//		if ($this->preferences == null) {
+//			$this["preferences"] = [];
+//		}
 
 		if (!array_key_exists("auth_key", $this->credentials) || $this->credentials["auth_key"] === null) {
 			$this->credentials = array_merge_recursive($this->credentials, [
@@ -287,7 +284,6 @@ class Person extends CActiveRecord implements IdentityInterface
 			]);
 		}
 
-		// TODO use SluggableBehavior when name is not in a sub document
 		if (empty($this->slug)) {
 			$this->slug = Slugger::slugify($this->personalInfo->getBrandName());
 		}
@@ -312,9 +308,7 @@ class Person extends CActiveRecord implements IdentityInterface
 
 	public function setLanguage($lang)
 	{
-		$this->preferences = array_merge_recursive($this->preferences, [
-			"lang" => $lang
-		]);
+		$this->preferencesInfo->lang = $lang;
 	}
 
 	public function rules()
@@ -360,28 +354,15 @@ class Person extends CActiveRecord implements IdentityInterface
 				'on' => [self::SCENARIO_DEVISER_CREATE_DRAFT],
 			],
 			[
-				'preferences',
-				'app\validators\EmbedDocValidator',
+				'preferencesInfo',
+				'yii2tech\embedded\Validator',
 				'on' => [self::SCENARIO_DEVISER_CREATE_DRAFT],
-				'model' => '\app\models\PersonPreferences'
 			],
-//			[
-//				'personal_info',
-//				'app\validators\EmbedDocValidator',
-//				'on' => [self::SCENARIO_DEVISER_CREATE_DRAFT, self::SCENARIO_DEVISER_UPDATE_DRAFT],
-//				'model' => '\app\models\PersonPersonalInfo'
-//			],
 			[
 				'personalInfo',
 				'yii2tech\embedded\Validator',
 				'on' => [self::SCENARIO_DEVISER_UPDATE_DRAFT],
 			],
-//			[
-//				'media',
-//				'app\validators\PersonMediaFilesValidator',
-//				'on' => self::SCENARIO_DEVISER_UPDATE_PROFILE,
-//				'model' => '\app\models\PersonMedia'
-//			],
 			[
 				'mediaFiles',
 				'yii2tech\embedded\Validator',
@@ -392,21 +373,10 @@ class Person extends CActiveRecord implements IdentityInterface
 				'app\validators\PersonCurriculumValidator',
 				'on' => self::SCENARIO_DEVISER_UPDATE_PROFILE,
 			],
-			[
-				'press',
-				'app\validators\PersonPressFilesValidator',
-				'on' => self::SCENARIO_DEVISER_UPDATE_PROFILE,
-			],
-			[
-				'videos',
-				'app\validators\PersonVideosValidator',
-				'on' => self::SCENARIO_DEVISER_UPDATE_PROFILE,
-			],
-			[
-				'faq',
-				'app\validators\PersonFaqValidator',
-				'on' => self::SCENARIO_DEVISER_UPDATE_PROFILE,
-			],
+			[   'press', 'app\validators\PersonPressFilesValidator'],
+			[   'videosInfo', 'yii2tech\embedded\Validator'],
+//			[   'faqInfo', 'yii2tech\embedded\Validator'], // why don't work like videoInfo validator do?
+			[   'faq', 'app\validators\PersonFaqValidator'],
 		];
 	}
 
@@ -630,7 +600,7 @@ class Person extends CActiveRecord implements IdentityInterface
 	public function getAvatarImage128()
 	{
 		$image = $this->getAvatarImage();
-		// force max widht
+		// force max width
 		$url = Utils::url_scheme() . Utils::thumborize($image)->resize(128, 0);
 		return $url;
 	}
@@ -642,15 +612,17 @@ class Person extends CActiveRecord implements IdentityInterface
 	 */
 	public function getVideosPreview()
 	{
-		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_PREVIEW);
 		$videos = [];
-		foreach ($this->videos as $item) {
+		foreach ($this->videosInfo as $item) {
+			/** @var PersonVideo $item*/
 			$products = [];
-			foreach ($item["products"] as $product_id) {
-				$products[] = Product::findOneSerialized($product_id);
+			foreach ($item->products as $product_id) {
+				/** @var Product $product */
+				$product = Product::findOneSerialized($product_id);
+				$products[] = $product->getPreviewSerialized();
 			}
 			$videos[] = [
-				"url" => $item["url"],
+				"url" => $item->url,
 				"products" => $products,
 			];
 		}
@@ -663,24 +635,24 @@ class Person extends CActiveRecord implements IdentityInterface
 	 *
 	 * @return string
 	 */
-	public function getLocationLabel()
-	{
-		$location = [];
-		if (isset($this->personal_info)) {
-			if (isset($this->personal_info['city'])) {
-				$location[] = $this->personal_info['city'];
-			}
-			/** @var Country $country */
-			if (isset($this->personal_info['country'])) {
-				$country = Country::findOne(['country_code' => $this->personal_info['country']]);
-				if ($country) {
-					$location[] = Utils::l($country->country_name);
-				}
-			}
-		}
-
-		return implode(", ", $location);
-	}
+//	public function getLocationLabel()
+//	{
+//		$location = [];
+//		if (isset($this->personal_info)) {
+//			if (isset($this->personal_info['city'])) {
+//				$location[] = $this->personal_info['city'];
+//			}
+//			/** @var Country $country */
+//			if (isset($this->personal_info['country'])) {
+//				$country = Country::findOne(['country_code' => $this->personal_info['country']]);
+//				if ($country) {
+//					$location[] = Utils::l($country->country_name);
+//				}
+//			}
+//		}
+//
+//		return implode(", ", $location);
+//	}
 
 	/**
 	 * Get the category names to show in a label
@@ -812,6 +784,7 @@ class Person extends CActiveRecord implements IdentityInterface
 		parent::setScenario($value);
 		$this->personalInfo->setScenario($value);
 		$this->mediaFiles->setScenario($value);
+		$this->preferencesInfo->setScenario($value);
 	}
 
 	/**
@@ -830,6 +803,9 @@ class Person extends CActiveRecord implements IdentityInterface
 		}
 		if (array_key_exists('media', $data)) {
 			$this->mediaFiles->load($data, 'media');
+		}
+		if (array_key_exists('preferences', $data)) {
+			$this->preferencesInfo->load($data, 'preferences');
 		}
 
 		return ($loaded);

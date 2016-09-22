@@ -30,13 +30,15 @@ class PersonFaqValidator extends Validator
 			$this->addError($object, $attribute, ' must be an array');
 		}
 
-		$translatableValidator = new TranslatableValidator();
-		foreach ($faqs as $faq) {
-			if (!$translatableValidator->validate($faq["question"], $error)) {
-				$this->addError($object, $attribute, $error);
-			}
-			if (!$translatableValidator->validate($faq["answer"], $error)) {
-				$this->addError($object, $attribute, $error);
+		if (count($faqs) > 0) {
+			$translatableValidator = new TranslatableValidator();
+			foreach ($faqs as $faq) {
+				if (!$translatableValidator->validate($faq["question"], $error)) {
+					$this->addError($object, $attribute, $error);
+				}
+				if (!$translatableValidator->validate($faq["answer"], $error)) {
+					$this->addError($object, $attribute, $error);
+				}
 			}
 		}
 	}

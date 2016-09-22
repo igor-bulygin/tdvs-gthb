@@ -6,11 +6,11 @@ use app\helpers\Utils;
 use yii\base\Model;
 
 /**
- * @property string name
- * @property array surnames
- * @property string brand_name
- * @property string country
- * @property string city
+ * @property string $name
+ * @property string $last_name
+ * @property string $brand_name
+ * @property string $country
+ * @property string $city
  */
 class PersonPersonalInfo extends Model
 {
@@ -19,6 +19,11 @@ class PersonPersonalInfo extends Model
 	 * @var string
 	 */
 	public $name;
+
+	/**
+	 * @var string
+	 */
+	public $last_name;
 
 	/**
 	 * @var array

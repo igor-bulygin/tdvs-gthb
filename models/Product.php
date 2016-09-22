@@ -643,4 +643,15 @@ class Product extends CActiveRecord {
 		return ($loaded);
 	}
 
+	public function getPreviewSerialized()
+	{
+		return [
+			"id" => $this->short_id,
+			"slug" => $this->slug,
+			"name" => $this->name,
+			"media" => $this->media,
+			"url_images" => $this->getUrlImagesLocation(),
+		];
+	}
+
 }

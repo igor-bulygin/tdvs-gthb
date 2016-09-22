@@ -3,6 +3,7 @@ use app\assets\desktop\pub\PublicCommonAsset;
 use app\components\DeviserHeader;
 use app\components\DeviserMenu;
 use app\models\Person;
+use app\models\PersonVideo;
 use app\models\Product;
 use yii\web\View;
 use yii\helpers\Url;
@@ -22,6 +23,8 @@ PublicCommonAsset::register($this);
 $this->title = 'About ' . $deviser->personalInfo->getBrandName() . ' - Todevise';
 $this->params['deviser'] = $deviser;
 $this->params['deviser_menu_active_option'] = 'videos';
+
+/** @var $video PersonVideo */
 
 ?>
 
@@ -44,7 +47,7 @@ $this->params['deviser_menu_active_option'] = 'videos';
 				    <?php foreach ($videos as $video) { ?>
                     <div class="col-sm-<?= (count($videos)<=3) ? '12' : '6' ?>">
                         <div class="video-wrapper">
-                            <iframe width="560" height="315" src="<?= Utils::getUrlEmbeddedYoutubePlayer($video["url"]) ?>" frameborder="0" allowfullscreen></iframe>
+                            <iframe width="560" height="315" src="<?= $video->getUrlEmbeddedYoutubePlayer() ?>" frameborder="0" allowfullscreen></iframe>
                         </div>
                     </div>
 				    <?php }  ?>

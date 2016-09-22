@@ -92,7 +92,6 @@ $this->title = 'Todevise / Admin / Devisers';
 					[
 						'value' => function($model){
 							/** @var Person $model */
-							$model->loadSubdocuments();
 							return $model->personalInfo->getBrandName();
 						},
 						'label' => Yii::t("app/admin", "Name")
@@ -106,7 +105,6 @@ $this->title = 'Todevise / Admin / Devisers';
 					[
 						'value' => function($model) use ($countries_lookup){
 							/** @var Person $model */
-							$model->loadSubdocuments();
 							if (array_key_exists($model->personalInfo->country, $countries_lookup)) {
 								return $countries_lookup[$model->personalInfo->country];
 							}

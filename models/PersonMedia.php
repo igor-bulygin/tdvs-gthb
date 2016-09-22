@@ -4,9 +4,9 @@ namespace app\models;
 use yii\base\Model;
 
 /**
- * @property string header
- * @property string profile
- * @property array photos
+ * @property string $header
+ * @property string $profile
+ * @property array $photos
  */
 class PersonMedia extends Model
 {
