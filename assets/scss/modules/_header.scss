@@ -15,6 +15,15 @@
     .navbar-brand{
         padding: 10px 15px;
     }
+    .dropdown{
+        height: 60px;
+    }
+    .dropdown:hover .dropdown-shop {
+        display: block;
+    }
+    .dropdown-shop:hover{
+        display: block;
+    }
     .menu-title{
         color: $white!important;
         text-transform: uppercase;

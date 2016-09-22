@@ -978,6 +978,12 @@ input[type="radio"] .styled:checked + label::after {
       height: auto; } }
   .navbar .navbar-brand {
     padding: 10px 15px; }
+  .navbar .dropdown {
+    height: 60px; }
+  .navbar .dropdown:hover .dropdown-shop {
+    display: block; }
+  .navbar .dropdown-shop:hover {
+    display: block; }
   .navbar .menu-title {
     color: #ffffff !important;
     text-transform: uppercase; }
