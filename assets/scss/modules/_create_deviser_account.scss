@@ -12,6 +12,25 @@
         padding: 20px 40px;
         max-width: 330px;
         margin: 60px auto 0;
+        ::-webkit-input-placeholder {
+            color: $light_grey;
+            font-size: 12px;
+        }
+
+        :-moz-placeholder { /* Firefox 18- */
+            color: $light_grey; 
+            font-size: 12px;
+        }
+
+        ::-moz-placeholder {  /* Firefox 19+ */
+            color: $light_grey;  
+            font-size: 12px;
+        }
+
+        :-ms-input-placeholder {  
+            color: $light_grey;  
+            font-size: 12px;
+        }
     }
 }
 .invitation-messages{

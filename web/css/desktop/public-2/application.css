@@ -2341,6 +2341,20 @@ input[type="radio"] .styled:checked + label::after {
     padding: 20px 40px;
     max-width: 330px;
     margin: 60px auto 0; }
+    .create-deviser-account-wrapper .create-deviser-account-container ::-webkit-input-placeholder {
+      color: #bfbfbf;
+      font-size: 12px; }
+    .create-deviser-account-wrapper .create-deviser-account-container :-moz-placeholder {
+      /* Firefox 18- */
+      color: #bfbfbf;
+      font-size: 12px; }
+    .create-deviser-account-wrapper .create-deviser-account-container ::-moz-placeholder {
+      /* Firefox 19+ */
+      color: #bfbfbf;
+      font-size: 12px; }
+    .create-deviser-account-wrapper .create-deviser-account-container :-ms-input-placeholder {
+      color: #bfbfbf;
+      font-size: 12px; }
 
 .invitation-messages {
   text-align: center;
