@@ -2713,7 +2713,8 @@ input[type="radio"] .styled:checked + label::after {
 
 .other-products-wrapper {
   background-color: #ffffff !important;
-  height: initial !important; }
+  height: initial !important;
+  margin-bottom: 80px; }
 
 #carousel-custom {
   margin: 20px auto; }

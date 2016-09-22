@@ -427,26 +427,28 @@ $productImages = $product->getUrlGalleryImages();
 							<!--						</li>-->
 						</ul>
 					</nav>
-					<div class="mesonry-row">
-						<?php foreach ($deviserProducts as $i => $product) { ?>
-							<div class="menu-category list-group">
-								<a href="<?= Url::to(["product/detail", "slug" => $product->slug, 'product_id' => $product->short_id])?>">
-									<div class="grid">
-										<figure class="effect-zoe">
-											<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getMainImage())->resize(400, 0) ?>">
-											<figcaption>
-												<p class="instauser">
-													<?= $product->name ?>
-												</p>
-												<p class="price">€
-													<?= $product->getMinimumPrice()?>
-												</p>
-											</figcaption>
-										</figure>
-									</div>
-								</a>
-							</div>
-						<?php } ?>
+					<div class="other-products-wrapper">
+                        <div id="macy-container">
+                            <?php foreach ($deviserProducts as $i => $product) { ?>
+                                <div class="menu-category list-group">
+                                    <a href="<?= Url::to(["product/detail", "slug" => $product->slug, 'product_id' => $product->short_id])?>">
+                                        <div class="grid">
+                                            <figure class="effect-zoe">
+                                                <img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getMainImage())->resize(400, 0) ?>">
+                                                <figcaption>
+                                                    <p class="instauser">
+                                                        <?= $product->name ?>
+                                                    </p>
+                                                    <p class="price">€
+                                                        <?= $product->getMinimumPrice()?>
+                                                    </p>
+                                                </figcaption>
+                                            </figure>
+                                        </div>
+                                    </a>
+                                </div>
+                            <?php } ?>
+                        </div>
 					</div>
 				</div>
 			</div>
