@@ -40,7 +40,7 @@ class PersonMedia extends Model
 	{
 		return [
 			[['header', 'profile'], 'required', 'on' => Person::SCENARIO_DEVISER_UPDATE_PROFILE],
-			[['header', 'profile', 'photos'], 'safe', 'on' => [Person::SERIALIZE_SCENARIO_LOAD_SUB_DOCUMENT, Person::SCENARIO_DEVISER_UPDATE_DRAFT]],
+			[['header', 'profile', 'photos'], 'safe', 'on' => [Person::SERIALIZE_SCENARIO_LOAD_SUB_DOCUMENT, Person::SCENARIO_DEVISER_UPDATE_DRAFT, Person::SCENARIO_DEVISER_CREATE_DRAFT]],
 		];
 	}
 

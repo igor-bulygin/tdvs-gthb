@@ -319,7 +319,7 @@ class Person extends CActiveRecord implements IdentityInterface
 			// the name, email, subject and body attributes are required
 			[
 				[
-					'personal_info',
+					'personalInfo',
 					'credentials',
 				],
 				'required',
