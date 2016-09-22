@@ -14,7 +14,8 @@
 			}).$promise.then(function(dataInvitation) {
 				vm.deviser = {
 					invitation_id: invitation_id,
-					email: dataInvitation.email
+					email: dataInvitation.email,
+					first_name: dataInvitation.first_name
 				}
 			});
 			

@@ -134,12 +134,12 @@ $this->title = 'Todevise / Admin / Invitations';
 
 			<br />
 
-			<label class="modal-title funiv fs1 fnormal fc-18"><?= Yii::t("app/admin", "Message"); ?></label>
+			<label class="modal-title funiv fs1 fnormal fc-18"><?= Yii::t("app/admin", "First name"); ?></label>
 			<div class="input-group">
-				<input id="message" required="" type="text" class="form-control funiv fs1" placeholder="<?= Yii::t("app/admin", "Message"); ?>" ng-model="create_newCtrl.message" name="message">
-				<span class="input-group-addon alert-danger funiv fs0-929" id="basic-addon-password" ng-show="create_newCtrl.form.$submitted && !create_newCtrl.form.$valid && !create_newCtrl.form['message'].$valid">
-					<span ng-show="create_newCtrl.form['message'].$error.required"><?= Yii::t("app/admin", "Required!"); ?></span>
-					<span ng-show="create_newCtrl.form['message'].$error.pattern"><?= Yii::t("app/admin", "Invalid!"); ?></span>
+				<input id="first_name" required="" type="text" class="form-control funiv fs1" placeholder="<?= Yii::t("app/admin", "First name"); ?>" ng-model="create_newCtrl.first_name" name="first_name">
+				<span class="input-group-addon alert-danger funiv fs0-929" id="basic-addon-password" ng-show="create_newCtrl.form.$submitted && !create_newCtrl.form.$valid && !create_newCtrl.form['first_name'].$valid">
+					<span ng-show="create_newCtrl.form['first_name'].$error.required"><?= Yii::t("app/admin", "Required!"); ?></span>
+					<span ng-show="create_newCtrl.form['first_name'].$error.pattern"><?= Yii::t("app/admin", "Invalid!"); ?></span>
 				</span>
 			</div>
 		</div>
