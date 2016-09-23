@@ -11,6 +11,8 @@
     text-align: left;
     white-space: nowrap;
     width: 100%;
+    max-height:690px;
+    overflow: hidden;
 }
 #carousel-custom .carousel-indicators li {
     background-color: transparent;
@@ -62,6 +64,17 @@
         border: solid 1px $darker_grey!important;
     }
 }
+.product-photos-wrapper{
+    .carousel-inner{
+    .item{
+        img{
+            max-height: 690px;
+            width: auto;
+        }
+    }
+}
+}
+
 
 
 
