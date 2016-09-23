@@ -698,7 +698,9 @@ class Person extends CActiveRecord implements IdentityInterface
 			$level2Id = (count($ancestors) > 1) ? $ancestors[1] : $ancestors[0];
 			$level3Id = (count($ancestors) > 2) ? $ancestors[2] : null;
 			if (array_key_exists($level2Id, $level2Ids)) {
-				$level2Ids[$level2Id][] = array_merge($level2Ids[$level2Id], [$level3Id]);
+				if ($level3Id) {
+					$level2Ids[$level2Id] = array_merge($level2Ids[$level2Id], [$level3Id]);
+				}
 			} else {
 				$level2Ids[$level2Id][] = $level3Id;
 			}
