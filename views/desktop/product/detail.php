@@ -28,7 +28,7 @@ $productImages = $product->getUrlGalleryImages();
 	<div class="product">
 		<div>
 			<div>
-				<div class="col-md-8 pad-product" >
+				<div class="col-md-8 pad-product" style="background-color:#ccc;">
 					<div class="product-photos-wrapper">
 						<!-- CAROUSEL-->
 						<div id='carousel-custom' class='carousel slide' data-ride='carousel'>
