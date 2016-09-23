@@ -253,9 +253,15 @@ class DeviserController extends CController
 		if (!isset($selectedCategory)) {
 			$selectedCategory = (count($categories) > 0) ? $categories[0] : new Category();
 		}
+		/** @var Category $selectedSubcategory */
+		$selectedSubcategory = $this->getSubcategoryById($selectedCategory->getDeviserSubcategories(), Yii::$app->request->get('subcategory'));
+		if (!isset($selectedSubcategory)) {
+			$selectedSubcategory = (count($selectedCategory->getDeviserSubcategories()) > 0) ? $selectedCategory->getDeviserSubcategories()[0] : new Category();
+		}
+
 		// their products, for selected category
 		$products = Product::find()
-			->where(["deviser_id" => $deviser_id, "categories" => $selectedCategory->getShortIds()])
+			->where(["deviser_id" => $deviser_id, "categories" => $selectedSubcategory->getShortIds()])
 			->orderBy('position')
 			->all();
 
@@ -265,6 +271,7 @@ class DeviserController extends CController
 			'products' => $products,
 			'categories' => $categories,
 			'selectedCategory' => $selectedCategory,
+			'selectedSubcategory' => $selectedSubcategory,
 		]);
 	}
 
@@ -398,6 +405,25 @@ class DeviserController extends CController
 		foreach ($categories as $category) {
 			if ($category->short_id == $category_id) {
 				return $category;
+			}
+		}
+
+		return null;
+	}
+
+	/**
+	 * Find a subcategory from list by their short_id
+	 *
+	 * @param array $subcategories
+	 * @param $category_id
+	 * @return Category
+	 */
+	private function getSubcategoryById(array $subcategories, $category_id)
+	{
+		/** @var Category $subcategory */
+		foreach ($subcategories as $subcategory) {
+			if ($subcategory->short_id == $category_id) {
+				return $subcategory;
 			}
 		}
 

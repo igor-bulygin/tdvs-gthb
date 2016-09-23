@@ -36,7 +36,10 @@ class DeviserController extends AppPrivateController
 		$deviser = $this->getPerson();
 
 		try {
-			$deviser->setScenario($this->getDetermineScenario($deviser));
+			$newAccountState = Yii::$app->request->post('account_state');
+			$this->setNewDeviserAccountState($deviser, $newAccountState); // check for allowed new account state only
+
+			$deviser->setScenario($this->getDetermineScenario($deviser)); // safe and required attributes are related with scenario
 			if (($deviser->load(Yii::$app->request->post(), '')) && $deviser->save()) {
 
 				// TODO: return the deviser data, only for test. remove when finish.
@@ -70,7 +73,7 @@ class DeviserController extends AppPrivateController
 //			Person::SCENARIO_DEVISER_CREATE_DRAFT,
 //			Person::SCENARIO_DEVISER_UPDATE_DRAFT,
 			Person::SCENARIO_DEVISER_UPDATE_PROFILE,
-			Person::SCENARIO_DEVISER_PUBLISH_PROFILE,
+//			Person::SCENARIO_DEVISER_PUBLISH_PROFILE,
 //			Person::SCENARIO_DEVISER_PRESS_UPDATE,
 //			Person::SCENARIO_DEVISER_VIDEOS_UPDATE,
 //			Person::SCENARIO_DEVISER_FAQ_UPDATE,
@@ -79,14 +82,35 @@ class DeviserController extends AppPrivateController
 			throw new BadRequestHttpException('Invalid scenario');
 		}
 
-		// if it is updating a draft profile, change scenario to "draft"
-		if (($scenario == Person::SCENARIO_DEVISER_UPDATE_PROFILE) &&
-			($deviser->account_state == Person::ACCOUNT_STATE_DRAFT)
-		) {
+		// can't change from "active" to "draft"
+		if ($deviser->account_state == Person::ACCOUNT_STATE_ACTIVE) {
+			// it is updating a active profile (or a profile that want to be active)
+			$scenario = Person::SCENARIO_DEVISER_UPDATE_PROFILE;
+		} else {
+			// it is updating a draft profile
 			$scenario = Person::SCENARIO_DEVISER_UPDATE_DRAFT;
 		}
 
 		return $scenario;
+	}
+
+	/**
+	 * Logic for assign new deviser account state.
+	 * Only allow change state to "active", otherwise, raise an exception
+	 *
+	 * @param Person $deviser
+	 * @param $accountState
+	 * @throws BadRequestHttpException
+	 */
+	private function setNewDeviserAccountState(Person $deviser, $accountState)
+	{
+		if (!empty($accountState)) {
+			if ($accountState != Person::ACCOUNT_STATE_ACTIVE) {
+				throw new BadRequestHttpException('Invalid account state');
+			} else {
+				$deviser->account_state = Person::ACCOUNT_STATE_ACTIVE;
+			}
+		}
 	}
 }
 

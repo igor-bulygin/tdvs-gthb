@@ -67,9 +67,9 @@ $this->params['deviser'] = $deviser;
 						<nav class="products-menu">
 							<ul>
 								<?php if (count($selectedCategory->getDeviserSubcategories()) > 1) { ?>
-								<?php foreach ($selectedCategory->getDeviserSubcategories() as $i => $category) { ?>
+								<?php foreach ($selectedCategory->getDeviserSubcategories() as $i => $subcategory) { ?>
 									<li>
-										<a href="#" class="<?= ($i==0) ? 'active' : '' ?>"><?= Utils::l($category["name"]) ?></a>
+										<a href="<?= Url::to(["deviser/store", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id, 'category' => $selectedCategory->short_id, 'subcategory' => $subcategory->short_id])?>" class="<?= ($selectedSubcategory->short_id==$subcategory->short_id) ? 'active' : '' ?>"><?= Utils::l($subcategory["name"]) ?></a>
 									</li>
 								<?php } ?>
 								<?php } ?>

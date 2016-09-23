@@ -131,17 +131,11 @@ class Person extends CActiveRecord implements IdentityInterface
 		$this->categories = [];
 		$this->collections = [];
 		$this->press = [];
+		$this->type = [];
+		$this->credentials = [];
+
 		$this->videos = [];
 		$this->faq = [];
-		$this->account_state = self::ACCOUNT_STATE_DRAFT;
-		$this->text_short_description = [
-			Lang::EN_US => "I'm so happy to be here, always ready.",
-		];
-		$this->text_biography = [
-			Lang::EN_US => "<p>I am a UX Designer and Art Director from Austria living in Berlin.</p>
-							<p>Artworks and illustrations were my gateway to the creative industry which led to the foundation of my own studio and to first steps in the digital world.</p>
-							<p>Out of this love for aesthetic design my passion for functionality and structure evolved. Jumping right into Photoshop didn’t feel accurate anymore and skipping the steps of building a framework based on functionality and usability became inevitable.</p>"
-		];
 
 		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_PUBLIC);
 	}
@@ -230,6 +224,11 @@ class Person extends CActiveRecord implements IdentityInterface
 		return $this->credentials["password"] === bin2hex(Yii::$app->Scrypt->calc($password, $this->credentials["salt"], 8, 8, 16, 32));
 	}
 
+	/**
+	 * Load sub documents after find the object
+	 *
+	 * @return void
+	 */
 	public function afterFind()
 	{
 		parent::afterFind();
@@ -237,46 +236,30 @@ class Person extends CActiveRecord implements IdentityInterface
 		$this->preferencesInfo->load($this, 'preferences');
 		$this->personalInfo->load($this, 'personal_info');
 		$this->mediaFiles->load($this, 'media');
+		$this->mediaFiles->setPerson($this);
 	}
 
+	/**
+	 * Revise some attributes before save in database
+	 *
+	 * @param bool $insert
+	 * @return bool
+	 */
 	public function beforeSave($insert)
 	{
-		/*
-		 * Create empty data holders if they don't exist
-		 */
-		if ($this->categories == null) {
-			$this["categories"] = [];
+		if (empty($this->text_short_description)) {
+			$this->text_short_description = [
+				Lang::EN_US => "I'm so happy to be here, always ready.",
+			];
 		}
 
-		if ($this->collections == null) {
-			$this["collections"] = [];
+		if (empty($this->text_biography)) {
+			$this->text_biography = [
+				Lang::EN_US => "<p>I am a UX Designer and Art Director from Austria living in Berlin.</p>
+							<p>Artworks and illustrations were my gateway to the creative industry which led to the foundation of my own studio and to first steps in the digital world.</p>
+							<p>Out of this love for aesthetic design my passion for functionality and structure evolved. Jumping right into Photoshop didn’t feel accurate anymore and skipping the steps of building a framework based on functionality and usability became inevitable.</p>"
+			];
 		}
-
-		if ($this->type == null) {
-			$this["type"] = [];
-		}
-
-//		if ($this->personal_info == null) {
-//			$this["personal_info"] = [
-//				"country" => "",
-//				"city" => ""
-//			];
-//		}
-
-//		if ($this->media == null) {
-//			$this["media"] = [
-//				"videos_links" => [],
-//				"photos" => []
-//			];
-//		}
-
-		if ($this->credentials == null) {
-			$this["credentials"] = [];
-		}
-
-//		if ($this->preferences == null) {
-//			$this["preferences"] = [];
-//		}
 
 		if (!array_key_exists("auth_key", $this->credentials) || $this->credentials["auth_key"] === null) {
 			$this->credentials = array_merge_recursive($this->credentials, [
@@ -286,6 +269,10 @@ class Person extends CActiveRecord implements IdentityInterface
 
 		if (empty($this->slug)) {
 			$this->slug = Slugger::slugify($this->personalInfo->getBrandName());
+		}
+
+		if (empty($this->account_state)) {
+			$this->account_state = Person::ACCOUNT_STATE_DRAFT;
 		}
 
 		if (empty($this->created_at)) {
@@ -344,6 +331,17 @@ class Person extends CActiveRecord implements IdentityInterface
 				'on' => [self::SCENARIO_DEVISER_UPDATE_DRAFT]
 			],
 			[
+				'account_state',
+				'required',
+				'on' => [self::SCENARIO_DEVISER_UPDATE_PROFILE],
+			],
+			[
+				'account_state',
+				'in',
+				'range' => [self::ACCOUNT_STATE_ACTIVE],
+				'on' => [self::SCENARIO_DEVISER_UPDATE_PROFILE],
+			],
+			[
 				'text_short_description',
 				'app\validators\TranslatableValidator',
 				'on' => [self::SCENARIO_DEVISER_CREATE_DRAFT],
@@ -361,12 +359,12 @@ class Person extends CActiveRecord implements IdentityInterface
 			[
 				'personalInfo',
 				'yii2tech\embedded\Validator',
-				'on' => [self::SCENARIO_DEVISER_UPDATE_DRAFT],
+				'on' => [self::SCENARIO_DEVISER_UPDATE_DRAFT, self::SCENARIO_DEVISER_UPDATE_PROFILE],
 			],
 			[
 				'mediaFiles',
 				'yii2tech\embedded\Validator',
-				'on' => [self::SCENARIO_DEVISER_UPDATE_DRAFT],
+				'on' => [self::SCENARIO_DEVISER_UPDATE_DRAFT, self::SCENARIO_DEVISER_UPDATE_PROFILE],
 			],
 			[
 				'curriculum',
@@ -433,7 +431,6 @@ class Person extends CActiveRecord implements IdentityInterface
 					'press',
 					'videos' => 'videosPreview',
 					'faq',
-//                    'credentials',
 					'preferences',
 					'url_images' => 'urlImagesLocation',
 				];
@@ -457,7 +454,6 @@ class Person extends CActiveRecord implements IdentityInterface
 					'press',
 					'videos',
 					'faq',
-//                    'credentials',
 					'preferences',
 					'url_images' => 'urlImagesLocation',
 				];
@@ -715,8 +711,35 @@ class Person extends CActiveRecord implements IdentityInterface
 				// assign one product of the deviser, related with this category
 				$category->setDeviserProduct(Product::findOne(["deviser_id" => $this->short_id, "categories" => $category->getShortIds()]));
 				$category->setDeviserSubcategories(Category::find()->where(['short_id' => $subIds])->all());
+				// force more than one subcategory to test
+//				$category->setDeviserSubcategories(
+//					array_merge($category->getDeviserSubcategories(),
+//						[Category::find()->where(['short_id' => "e532z"])->one()]
+//					)
+//				);
+				// if there are more than one subcategory, add "all" subcategory
+				if (count($category->getDeviserSubcategories()) > 1) {
+					$subcategoryAll = new Category();
+					$subcategoryAll->name = [
+						Lang::EN_US => "All",
+						Lang::ES_ES => "Todos",
+					];
+					$category->setDeviserSubcategories(array_merge([$subcategoryAll], $category->getDeviserSubcategories()));
+				}
+
 				$level2Categories[] = $category;
 			}
+		}
+
+		// if there are more than one category, add "all products category"
+		if (count($level2Categories) > 1) {
+			$category = new Category();
+			$category->name = [
+				Lang::EN_US => "All Products",
+				Lang::ES_ES => "Todos los productos",
+			];
+			$category->setDeviserProduct(Product::findOne(["deviser_id" => $this->short_id]));
+			$level2Categories = array_merge([$category], $level2Categories);
 		}
 
 		return $level2Categories;
@@ -819,6 +842,18 @@ class Person extends CActiveRecord implements IdentityInterface
 	public function isDraft()
 	{
 		return ($this->account_state == Person::ACCOUNT_STATE_DRAFT);
+	}
+
+	/**
+	 * Check if Deviser media file is exists
+	 *
+	 * @param string $filename
+	 * @return bool
+	 */
+	public function existMediaFile($filename)
+	{
+		$filePath = $this->getUploadedFilesPath() . '/' . $filename;
+		return file_exists($filePath);
 	}
 
 }
