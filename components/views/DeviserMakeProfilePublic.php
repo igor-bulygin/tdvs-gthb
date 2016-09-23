@@ -9,7 +9,7 @@ use yii\helpers\Url;
 $deviser = $this->params['deviser'];
 
 ?>
-<div>
-	<h1 style="color: whitesmoke;">Este perfil es un borrador.</h1>
-	<button>Make profile public</button>
+<div class="top-bar-red">
+	<span>Your profile is not yet public</span>
+	<button class="btn btn-red">Make profile public</button>
 </div>

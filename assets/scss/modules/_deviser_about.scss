@@ -223,3 +223,25 @@
     top: 188px;
     left: 529px;
 }
+.top-bar-red{
+    background-color: $red;
+    position: absolute;
+    top: 70px;
+    width: 100%;
+    z-index: 999;
+    span{
+        color: $white;
+        text-align: center;
+        width: 100%;
+        display: block;
+        padding: 20px;
+    }
+    button{
+        float: right;
+        border:1px solid $white;
+        font-size: 12px;
+        position: absolute;
+        right: 20px;
+        top: 10px;
+    }
+}

@@ -2048,6 +2048,26 @@ input[type="radio"] .styled:checked + label::after {
   top: 188px;
   left: 529px; }
 
+.top-bar-red {
+  background-color: #F7284B;
+  position: absolute;
+  top: 70px;
+  width: 100%;
+  z-index: 999; }
+  .top-bar-red span {
+    color: #ffffff;
+    text-align: center;
+    width: 100%;
+    display: block;
+    padding: 20px; }
+  .top-bar-red button {
+    float: right;
+    border: 1px solid #ffffff;
+    font-size: 12px;
+    position: absolute;
+    right: 20px;
+    top: 10px; }
+
 .video-container {
   margin: 40px 0; }
   .video-container .input-video {
