@@ -711,8 +711,35 @@ class Person extends CActiveRecord implements IdentityInterface
 				// assign one product of the deviser, related with this category
 				$category->setDeviserProduct(Product::findOne(["deviser_id" => $this->short_id, "categories" => $category->getShortIds()]));
 				$category->setDeviserSubcategories(Category::find()->where(['short_id' => $subIds])->all());
+				// force more than one subcategory to test
+//				$category->setDeviserSubcategories(
+//					array_merge($category->getDeviserSubcategories(),
+//						[Category::find()->where(['short_id' => "e532z"])->one()]
+//					)
+//				);
+				// if there are more than one subcategory, add "all" subcategory
+				if (count($category->getDeviserSubcategories()) > 1) {
+					$subcategoryAll = new Category();
+					$subcategoryAll->name = [
+						Lang::EN_US => "All",
+						Lang::ES_ES => "Todos",
+					];
+					$category->setDeviserSubcategories(array_merge([$subcategoryAll], $category->getDeviserSubcategories()));
+				}
+
 				$level2Categories[] = $category;
 			}
+		}
+
+		// if there are more than one category, add "all products category"
+		if (count($level2Categories) > 1) {
+			$category = new Category();
+			$category->name = [
+				Lang::EN_US => "All Products",
+				Lang::ES_ES => "Todos los productos",
+			];
+			$category->setDeviserProduct(Product::findOne(["deviser_id" => $this->short_id]));
+			$level2Categories = array_merge([$category], $level2Categories);
 		}
 
 		return $level2Categories;

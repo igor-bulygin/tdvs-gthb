@@ -67,7 +67,7 @@ class ProductController extends CController {
 			}
 		}
 		Yii::$app->response->setStatusCode(200); // Success, without body
-		var_dump("done (" . $cant . ")");
+//		var_dump("done (" . $cant . ")");
 	}
 
 }
