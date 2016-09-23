@@ -3,6 +3,7 @@
 // ==========================================================================
 .product-description{
     background-color: $white;
+    @extend %block;
     .product-tabs{
         border-bottom: 0;
         border-top: 1px solid $light_grey;

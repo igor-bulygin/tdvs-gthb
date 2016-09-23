@@ -26,24 +26,15 @@ $productImages = $product->getUrlGalleryImages();
 
 	<!-- PRODUCT CARD -->
 	<div class="product">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-8 pad-product">
+		<div>
+			<div>
+				<div class="col-md-8 pad-product" >
 					<div class="product-photos-wrapper">
 						<!-- CAROUSEL-->
 						<div id='carousel-custom' class='carousel slide' data-ride='carousel'>
 							<!-- Indicators -->
 							<div class="row">
-								<div class="col-sm-1 pad-car">
-									<ol class='carousel-indicators thumbs mCustomScrollbar'>
-										<?php foreach ($productImages as $key => $imageUrl) { ?>
-											<li data-target='#carousel-custom' data-slide-to='<?= $key ?>' class='active'>
-												<img src='<?= Utils::url_scheme() ?><?= Utils::thumborize($imageUrl)->resize(410, 0) ?>' alt='' />
-											</li>
-											<?php } ?>
-									</ol>
-								</div>
-								<div class="col-sm-11">
+								<div class="col-sm-12">
 									<div class='carousel-outer'>
 										<!-- Wrapper for slides -->
 										<div class='carousel-inner'>
@@ -65,6 +56,15 @@ $productImages = $product->getUrlGalleryImages();
 										</a>
 										<?php } ?>
 									</div>
+								</div>
+								<div class="col-sm-12">
+									<ol class='carousel-indicators thumbs mCustomScrollbar'>
+										<?php foreach ($productImages as $key => $imageUrl) { ?>
+											<li class="col-sm-1" data-target='#carousel-custom' data-slide-to='<?= $key ?>' class='active'>
+												<img src='<?= Utils::url_scheme() ?><?= Utils::thumborize($imageUrl)->resize(410, 0) ?>' alt='' />
+											</li>
+											<?php } ?>
+									</ol>
 								</div>
 							</div>
 						</div>
