@@ -811,4 +811,14 @@ class Person extends CActiveRecord implements IdentityInterface
 		return ($loaded);
 	}
 
+	/**
+	 * Indicate if current Person is in "draft" state
+	 *
+	 * @return bool
+	 */
+	public function isDraft()
+	{
+		return ($this->account_state == Person::ACCOUNT_STATE_DRAFT);
+	}
+
 }
