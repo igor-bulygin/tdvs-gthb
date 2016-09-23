@@ -41,4 +41,33 @@ class ProductController extends CController {
 		]);
 	}
 
+	public function actionFixPosition()
+	{
+		// set pagination values
+		$deviser_id = Yii::$app->request->get('deviser_id');
+
+		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_PUBLIC);
+		$query = Person::find();
+		if (!empty($deviser_id)) {
+			$query->where(["short_id" => $deviser_id]);
+		}
+		$devisers = $query->all();
+
+		$cant = 0;
+		/** @var Person $deviser */
+		foreach ($devisers as $deviser) {
+			$products = Product::find()->where(["deviser_id" => $deviser->short_id])->all();
+			$i = 0;
+			/** @var Product $product */
+			foreach ($products as $product) {
+				$i++;
+				$product->position = $i;
+				$product->save();
+				$cant++;
+			}
+		}
+		Yii::$app->response->setStatusCode(200); // Success, without body
+		var_dump("done (" . $cant . ")");
+	}
+
 }

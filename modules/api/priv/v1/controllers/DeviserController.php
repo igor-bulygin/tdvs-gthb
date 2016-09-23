@@ -5,6 +5,7 @@ namespace app\modules\api\priv\v1\controllers;
 use app\helpers\CActiveRecord;
 use app\models\Person;
 use app\modules\api\priv\v1\forms\UploadForm;
+use Exception;
 use Yii;
 use yii\rest\Controller;
 use yii\web\BadRequestHttpException;
@@ -34,17 +35,22 @@ class DeviserController extends AppPrivateController
 		/** @var Person $deviser */
 		$deviser = $this->getPerson();
 
-		$deviser->setScenario($this->getDetermineScenario($deviser));
-		if (($deviser->load(Yii::$app->request->post(), '')) && $deviser->save()) {
+		try {
+			$deviser->setScenario($this->getDetermineScenario($deviser));
+			if (($deviser->load(Yii::$app->request->post(), '')) && $deviser->save()) {
 
-			// TODO: return the deviser data, only for test. remove when finish.
-//            Yii::$app->response->setStatusCode(204); // Success, without body
-			Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
-			return $deviser;
-		} else {
-			Yii::$app->response->setStatusCode(400); // Bad Request
-			return ["errors" => $deviser->errors];
+				// TODO: return the deviser data, only for test. remove when finish.
+//                  Yii::$app->response->setStatusCode(204); // Success, without body
+				Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
+				return $deviser;
+			} else {
+				Yii::$app->response->setStatusCode(400); // Bad Request
+				return ["errors" => $deviser->errors];
+			}
+		} catch (Exception $e) {
+			throw new BadRequestHttpException($e->getMessage());
 		}
+
 	}
 
 	/**
@@ -75,7 +81,8 @@ class DeviserController extends AppPrivateController
 
 		// if it is updating a draft profile, change scenario to "draft"
 		if (($scenario == Person::SCENARIO_DEVISER_UPDATE_PROFILE) &&
-			($deviser->account_state == Person::ACCOUNT_STATE_DRAFT)) {
+			($deviser->account_state == Person::ACCOUNT_STATE_DRAFT)
+		) {
 			$scenario = Person::SCENARIO_DEVISER_UPDATE_DRAFT;
 		}
 

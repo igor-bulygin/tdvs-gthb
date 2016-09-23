@@ -14,17 +14,19 @@ use yii\mongodb\ActiveQuery;
 use yii\mongodb\Collection;
 
 /**
- * @property string uuid
- * @property string email
- * @property string message
- * @property MongoDate date_sent
- * @property MongoDate date_use
- * @property MongoDate date_ends_availability
- * @property string code_use_state
- * @property string code_invitation_type
- * @property string person_id
- * @property string postman_email_id
- * @property MongoDate created_at
+ * @property string $uuid
+ * @property string $email
+ * @property string $first_name
+ * @property string $message
+ * @property MongoDate $date_sent
+ * @property MongoDate $date_use
+ * @property MongoDate $date_ends_availability
+ * @property string $code_use_state
+ * @property string $code_invitation_type
+ * @property string $person_id
+ * @property string $postman_email_id
+ * @property MongoDate $created_at
+ * @property MongoDate $updated_at
  */
 class Invitation extends CActiveRecord
 {
@@ -61,6 +63,7 @@ class Invitation extends CActiveRecord
 			'_id',
 			'uuid',
 			'email',
+			'first_name',
 			'message',
 			'date_sent',
 			'date_use',
@@ -70,6 +73,7 @@ class Invitation extends CActiveRecord
 			'person_id',
 			'postman_email_id',
 			'created_at',
+			'updated_at',
 		];
 	}
 
@@ -82,7 +86,6 @@ class Invitation extends CActiveRecord
 
 		$this->uuid = Uuid::uuid4()->toString();
 		$this->code_use_state = Invitation::USE_STATE_UNUSED;
-		$this->created_at = new MongoDate();
 
 		Invitation::setSerializeScenario(Invitation::SERIALIZE_SCENARIO_PUBLIC);
 	}
@@ -163,7 +166,8 @@ class Invitation extends CActiveRecord
 	public function rules()
 	{
 		return [
-			[['email', 'message', 'code_invitation_type'], 'required'],
+			[['email', 'first_name', 'code_invitation_type'], 'required'],
+			[['message'], 'safe'],
 			[['email'], 'email'],
 			[['code_invitation_type'], 'validateInvitationType'],
 		];
@@ -201,6 +205,7 @@ class Invitation extends CActiveRecord
 				static::$serializeFields = [
 					'uuid',
 					'email',
+					'first_name',
 				];
 				break;
 			default:
@@ -208,6 +213,22 @@ class Invitation extends CActiveRecord
 				static::$serializeFields = [];
 				break;
 		}
+	}
+
+	/**
+	 * Revise some attributes before save in database
+	 *
+	 * @param bool $insert
+	 * @return bool
+	 */
+	public function beforeSave($insert)
+	{
+		if (empty($this->created_at)) {
+			$this->created_at = new MongoDate();
+		}
+		$this->updated_at = new MongoDate();
+
+		return parent::beforeSave($insert);
 	}
 
 	/**

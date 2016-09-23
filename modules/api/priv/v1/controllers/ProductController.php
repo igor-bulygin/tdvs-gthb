@@ -6,6 +6,7 @@ use app\helpers\CActiveRecord;
 use app\models\Person;
 use app\models\Product;
 use app\modules\api\priv\v1\forms\UploadForm;
+use Exception;
 use Yii;
 use yii\rest\Controller;
 use yii\web\BadRequestHttpException;
@@ -48,16 +49,20 @@ class ProductController extends AppPrivateController
 			throw new BadRequestHttpException('Product not found');
 		}
 
-		$product->setScenario(Product::SCENARIO_PRODUCT_UPDATE_DRAFT);
-		if ($product->load(Yii::$app->request->post(), '') && $product->save()) {
-			// handle success
+		try {
+			$product->setScenario(Product::SCENARIO_PRODUCT_UPDATE_DRAFT);
+			if ($product->load(Yii::$app->request->post(), '') && $product->save()) {
+				// handle success
 
-			// TODO: return the deviser data, only for test. remove when finish.
-//            Yii::$app->response->setStatusCode(204); // Success, without body
-			return $product;
-		} else {
-			Yii::$app->response->setStatusCode(400); // Bad Request
-			return ["errors" => $product->errors];
+				// TODO: return the deviser data, only for test. remove when finish.
+	//            Yii::$app->response->setStatusCode(204); // Success, without body
+				return $product;
+			} else {
+				Yii::$app->response->setStatusCode(400); // Bad Request
+				return ["errors" => $product->errors];
+			}
+		} catch (Exception $e) {
+			throw new BadRequestHttpException($e->getMessage());
 		}
 	}
 
