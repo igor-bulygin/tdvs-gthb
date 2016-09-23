@@ -19,8 +19,10 @@
 					vm.brand_name = angular.copy(vm.deviser.personal_info.brand_name);
 				}
 				//set images
-				vm.header = currentHost() + vm.deviser.url_images + vm.deviser.media.header;
-				vm.profile = currentHost() + vm.deviser.url_images + vm.deviser.media.profile;
+				if (vm.deviser.media.header)
+					vm.header = currentHost() + vm.deviser.url_images + vm.deviser.media.header;
+				if (vm.deviser.media.profile)
+					vm.profile = currentHost() + vm.deviser.url_images + vm.deviser.media.profile;
 			}, function (err) {
 				toastr.error(err);
 			});
@@ -51,7 +53,7 @@
 				getDeviser();
 			}, function (err) {
 				toastr.error(err);
-			})
+			});
 		}
 
 		function upload(image, type) {
