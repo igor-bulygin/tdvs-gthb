@@ -67,10 +67,11 @@
 }
 .thumbs{
     .active{
-        border: solid 1px $darker_grey!important;
+        border: solid 1px transparent!important;
     }
 }
 .product-photos-wrapper{
+    border-right: 1px solid #bfbfbf;
     .carousel-inner{
     .item{
         height: 690px;

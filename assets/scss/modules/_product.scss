@@ -3,12 +3,11 @@
 // ==========================================================================
 .product{
     background-color: $white;
+    @extend %block;
     .product-data-wrapper{
         @extend %block;
         padding: 0 15px;
         margin: 15px 0;
-        border-left: 1px solid $light_grey;
-        min-height: 812px;
         .product-data{
             @extend %block;
             padding: 10px 0;

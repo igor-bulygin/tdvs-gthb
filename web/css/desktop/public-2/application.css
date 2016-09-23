@@ -941,7 +941,7 @@ input[type="radio"] .styled:checked + label::after {
       top: 0 !important;
       left: 0 !important; } }
 
-.draggable-list .image-press-wrapper, .edit-faq-wrapper, .edit-faq-panel, .questions, .faq-row, .store .content-store .cathegory-wrapper, .store .content-store .store-grid, .about-wrapper .about-container .name, .video-container, .tagged-works .tag-row, .tag-select-row, .become-deviser-wrapper .call-to-action-wrapper, .request-invitation-wrapper, .product .product-data-wrapper, .product .product-data-wrapper .product-data, .work-profile-description-wrapper, .other-products-wrapper {
+.draggable-list .image-press-wrapper, .edit-faq-wrapper, .edit-faq-panel, .questions, .faq-row, .store .content-store .cathegory-wrapper, .store .content-store .store-grid, .about-wrapper .about-container .name, .video-container, .tagged-works .tag-row, .tag-select-row, .become-deviser-wrapper .call-to-action-wrapper, .request-invitation-wrapper, .product, .product .product-data-wrapper, .product .product-data-wrapper .product-data, .product-description, .work-profile-description-wrapper, .other-products-wrapper {
   float: left;
   width: 100%; }
 
@@ -2445,9 +2445,7 @@ input[type="radio"] .styled:checked + label::after {
   background-color: #ffffff; }
   .product .product-data-wrapper {
     padding: 0 15px;
-    margin: 15px 0;
-    border-left: 1px solid #bfbfbf;
-    min-height: 812px; }
+    margin: 15px 0; }
     .product .product-data-wrapper .product-data {
       padding: 10px 0;
       border-bottom: 1px solid #bfbfbf; }
@@ -2878,19 +2876,21 @@ input[type="radio"] .styled:checked + label::after {
   margin: 300px auto 0; }
 
 .thumbs .active {
-  border: solid 1px #6b6b6b !important; }
+  border: solid 1px transparent !important; }
 
-.product-photos-wrapper .carousel-inner .item {
-  height: 690px; }
-  .product-photos-wrapper .carousel-inner .item img {
-    width: auto;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    max-height: 690px; }
+.product-photos-wrapper {
+  border-right: 1px solid #bfbfbf; }
+  .product-photos-wrapper .carousel-inner .item {
+    height: 690px; }
+    .product-photos-wrapper .carousel-inner .item img {
+      width: auto;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      max-height: 690px; }
 
 footer {
   width: 100%;
