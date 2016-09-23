@@ -76,6 +76,10 @@ class UploadForm extends Model {
 			$this->pathUpload = $this->getPathUpload();
 			$this->filename = $this->getPrefix() . uniqid() . '.' . Utils::getFileExtensionFromMimeType($this->file->type);
 
+			if (!file_exists($this->pathUpload)) {
+				Utils::mkdir($this->pathUpload);
+			}
+
 			$this->file->saveAs($this->pathUpload . '/' . $this->filename);
 			$this->url = $this->getUrlUpload();
 			return true;
