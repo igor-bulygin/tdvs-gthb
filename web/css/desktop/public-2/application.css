@@ -2447,7 +2447,7 @@ input[type="radio"] .styled:checked + label::after {
     padding: 0 15px;
     margin: 15px 0;
     border-left: 1px solid #bfbfbf;
-    min-height: 720px; }
+    min-height: 812px; }
     .product .product-data-wrapper .product-data {
       padding: 10px 0;
       border-bottom: 1px solid #bfbfbf; }
@@ -2809,14 +2809,16 @@ input[type="radio"] .styled:checked + label::after {
   margin: 20px auto; }
 
 #carousel-custom .carousel-indicators {
-  margin: 0;
+  /* margin: 0; */
   overflow: auto;
   position: static;
   text-align: left;
   white-space: nowrap;
   width: 100%;
   max-height: 690px;
-  overflow: hidden; }
+  overflow: hidden;
+  margin: 20px auto 0;
+  text-align: center; }
 
 #carousel-custom .carousel-indicators li {
   background-color: transparent;
@@ -2826,13 +2828,17 @@ input[type="radio"] .styled:checked + label::after {
   display: block;
   height: auto;
   margin: 0 0 10px;
-  width: auto; }
+  width: auto;
+  height: 75px;
+  margin: 0 5px 10px;
+  width: 75px;
+  overflow: hidden; }
 
 #carousel-custom .carousel-indicators li img {
   display: block;
   opacity: 0.5;
   filter: alpha(opacity=50);
-  width: 100%; }
+  height: 80px; }
 
 #carousel-custom .carousel-indicators li.active img {
   opacity: 1;
@@ -2874,9 +2880,17 @@ input[type="radio"] .styled:checked + label::after {
 .thumbs .active {
   border: solid 1px #6b6b6b !important; }
 
-.product-photos-wrapper .carousel-inner .item img {
-  max-height: 690px;
-  width: auto; }
+.product-photos-wrapper .carousel-inner .item {
+  height: 690px; }
+  .product-photos-wrapper .carousel-inner .item img {
+    width: auto;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    max-height: 690px; }
 
 footer {
   width: 100%;
