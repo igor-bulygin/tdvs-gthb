@@ -11,14 +11,14 @@
 		function init() {
 			deviserDataService.Invitation.get({
 				idInvitation: invitation_id
-			}).$promise.then(function(dataInvitation) {
+			}).$promise.then(function (dataInvitation) {
 				vm.deviser = {
 					invitation_id: invitation_id,
 					email: dataInvitation.email,
 					first_name: dataInvitation.first_name
 				}
 			});
-			
+
 		}
 
 		init();
@@ -26,14 +26,17 @@
 		function submitForm(form) {
 			if (form.password_confirm.$error.same)
 				form.$setValidity('password_confirm', false);
+			else {
+				form.$setValidity('password_confirm', true);
+			}
 			if (form.$valid) {
 				form.$setSubmitted();
 				vm.new_deviser = new deviserDataService.Devisers;
-				for(var key in vm.deviser) {
+				for (var key in vm.deviser) {
 					vm.new_deviser[key] = vm.deviser[key];
 				}
 				vm.new_deviser.$save().then(function (dataSaved) {
-					$window.location.href= '/deviser/' + dataSaved.slug + '/' + dataSaved.id + '/about/edit';
+					$window.location.href = '/deviser/' + dataSaved.slug + '/' + dataSaved.id + '/about/edit';
 				}, function (err) {
 					toastr.error("Error saving form!");
 				})
