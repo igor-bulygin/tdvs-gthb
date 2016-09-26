@@ -122,7 +122,7 @@ class PersonPersonalInfo extends Model
 	public function rules()
 	{
 		return [
-			[['name', 'last_name', 'brand_name', 'country', 'city'], 'required', 'on' => Person::SCENARIO_DEVISER_UPDATE_PROFILE],
+			[['name', 'brand_name', 'country', 'city'], 'required', 'on' => Person::SCENARIO_DEVISER_UPDATE_PROFILE],
 			[['last_name'], 'safe', 'on' => Person::SCENARIO_DEVISER_UPDATE_PROFILE],
 			[['name', 'last_name', 'brand_name', 'country', 'city'], 'safe', 'on' => [Person::SERIALIZE_SCENARIO_LOAD_SUB_DOCUMENT, Person::SCENARIO_DEVISER_UPDATE_DRAFT, Person::SCENARIO_DEVISER_CREATE_DRAFT]],
 		];
