@@ -3,7 +3,8 @@
 // ==========================================================================
 .black-form{
     label{
-        font-family: $font-family--bold;
+        font-family: $font-family--primary;
+        font-weight: bold;
         font-size: 12px;
         color: $light_grey;
         text-transform: uppercase;

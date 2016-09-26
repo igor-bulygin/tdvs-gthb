@@ -531,7 +531,8 @@ a, a:hover, a:focus {
   padding: 0; }
 
 .black-form label {
-  font-family: "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Univers Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: bold;
   font-size: 12px;
   color: #bfbfbf;
   text-transform: uppercase;
