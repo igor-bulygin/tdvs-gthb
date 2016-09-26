@@ -9,8 +9,10 @@ use yii\web\UploadedFile;
 
 class UploadForm extends Model {
 
-	const UPLOAD_TYPE_DEVISER_MEDIA_HEADER = 'deviser-media-header';
-	const UPLOAD_TYPE_DEVISER_MEDIA_PROFILE = 'deviser-media-profile';
+	const UPLOAD_TYPE_DEVISER_MEDIA_HEADER_ORIGINAL = 'deviser-media-header-original';
+	const UPLOAD_TYPE_DEVISER_MEDIA_HEADER_CROPPED = 'deviser-media-header-cropped';
+	const UPLOAD_TYPE_DEVISER_MEDIA_PROFILE_ORIGINAL = 'deviser-media-profile-original';
+	const UPLOAD_TYPE_DEVISER_MEDIA_PROFILE_CROPPED = 'deviser-media-profile-cropped';
 	const UPLOAD_TYPE_DEVISER_MEDIA_PHOTOS = 'deviser-media-photos';
 	const UPLOAD_TYPE_DEVISER_PRESS_IMAGES = 'deviser-press';
 	const UPLOAD_TYPE_DEVISER_CURRICULUM = 'deviser-curriculum';
@@ -97,8 +99,10 @@ class UploadForm extends Model {
 	{
 
 		switch ($this->type) {
-			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_HEADER:
-			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PROFILE:
+			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_HEADER_ORIGINAL:
+			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_HEADER_CROPPED:
+			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PROFILE_ORIGINAL:
+			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PROFILE_CROPPED:
 			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PHOTOS:
 			case UploadForm::UPLOAD_TYPE_DEVISER_PRESS_IMAGES:
 			case UploadForm::UPLOAD_TYPE_DEVISER_CURRICULUM:
@@ -119,8 +123,10 @@ class UploadForm extends Model {
 	private function getPrefix()
 	{
 		$prefixes = [
-			UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_HEADER => 'deviser.header.',
-			UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PROFILE => 'deviser.profile.',
+			UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_HEADER_ORIGINAL => 'deviser.header.original.',
+			UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_HEADER_CROPPED => 'deviser.header.cropped.',
+			UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PROFILE_ORIGINAL => 'deviser.profile.original.',
+			UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PROFILE_CROPPED => 'deviser.profile.cropped',
 			UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PHOTOS => 'deviser.photo.',
 			UploadForm::UPLOAD_TYPE_DEVISER_PRESS_IMAGES => 'deviser.press.',
 			UploadForm::UPLOAD_TYPE_DEVISER_CURRICULUM => 'deviser.cv.',
@@ -138,8 +144,10 @@ class UploadForm extends Model {
 	public function validateType($attribute, $params)
 	{
 		switch ($this->$attribute) {
-			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_HEADER:
-			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PROFILE:
+			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_HEADER_ORIGINAL:
+			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_HEADER_CROPPED:
+			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PROFILE_ORIGINAL:
+			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PROFILE_CROPPED:
 			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PHOTOS:
 			case UploadForm::UPLOAD_TYPE_DEVISER_PRESS_IMAGES:
 			case UploadForm::UPLOAD_TYPE_DEVISER_CURRICULUM:
@@ -164,8 +172,10 @@ class UploadForm extends Model {
 	private function getUrlUpload()
 	{
 		switch ($this->type) {
-			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_HEADER:
-			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PROFILE:
+			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_HEADER_ORIGINAL:
+			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_HEADER_CROPPED:
+			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PROFILE_ORIGINAL:
+			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PROFILE_CROPPED:
 			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PHOTOS:
 			case UploadForm::UPLOAD_TYPE_DEVISER_PRESS_IMAGES:
 			case UploadForm::UPLOAD_TYPE_DEVISER_CURRICULUM:
@@ -186,8 +196,10 @@ class UploadForm extends Model {
 	public function setScenarioByUploadType()
 	{
 		switch ($this->type) {
-			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_HEADER:
-			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PROFILE:
+			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_HEADER_ORIGINAL:
+			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_HEADER_CROPPED:
+			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PROFILE_ORIGINAL:
+			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PROFILE_CROPPED:
 			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PHOTOS:
 			case UploadForm::UPLOAD_TYPE_DEVISER_PRESS_IMAGES:
 				$this->setScenario(UploadForm::SCENARIO_UPLOAD_DEVISER_IMAGE);
