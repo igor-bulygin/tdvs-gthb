@@ -52,6 +52,11 @@ class PersonPersonalInfo extends Model
 		$this->setScenario(Person::SERIALIZE_SCENARIO_LOAD_SUB_DOCUMENT);
 	}
 
+	public function getParentAttribute()
+	{
+		return "personal_info";
+	}
+
 
 	/**
 	 * Get the city from Person.

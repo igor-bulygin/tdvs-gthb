@@ -364,12 +364,12 @@ class Person extends CActiveRecord implements IdentityInterface
 			],
 			[
 				'personalInfo',
-				'yii2tech\embedded\Validator',
+				'app\validators\EmbedDocValidator',
 				'on' => [self::SCENARIO_DEVISER_UPDATE_DRAFT, self::SCENARIO_DEVISER_UPDATE_PROFILE],
 			],
 			[
 				'mediaFiles',
-				'yii2tech\embedded\Validator',
+				'app\validators\EmbedDocValidator',
 				'on' => [self::SCENARIO_DEVISER_UPDATE_DRAFT, self::SCENARIO_DEVISER_UPDATE_PROFILE],
 			],
 			[

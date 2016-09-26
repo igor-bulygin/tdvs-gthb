@@ -55,6 +55,11 @@ class PersonMedia extends Model
 		$this->person = $person;
 	}
 
+	public function getParentAttribute()
+	{
+		return "media";
+	}
+
 	public function init()
 	{
 		parent::init();
