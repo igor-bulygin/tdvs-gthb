@@ -261,7 +261,7 @@ class DeviserController extends CController
 
 		// their products, for selected category
 		$products = Product::find()
-			->where(["deviser_id" => $deviser_id, "categories" => $selectedSubcategory->getShortIds()])
+			->where(["deviser_id" => $deviser_id, "categories" => (empty($selectedSubcategory->short_id)) ? $selectedCategory->getShortIds() : $selectedSubcategory->getShortIds()])
 			->orderBy('position')
 			->all();
 

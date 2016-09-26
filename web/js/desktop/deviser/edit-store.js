@@ -7,7 +7,8 @@
 
 		function getProducts() {
 			productDataService.Product.get({
-				deviser: UtilService.returnDeviserIdFromUrl()
+				deviser: UtilService.returnDeviserIdFromUrl(),
+				limit: 9999
 			}).$promise.then(function (dataProducts) {
 				vm.products = dataProducts.items;
 				vm.products.forEach(function (element) {
