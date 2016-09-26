@@ -77,7 +77,7 @@ $this->params['deviser'] = $deviser;
 										<div ng-if="editAboutCtrl.isDropAvailable">
 											<div class="photo-loader loader-about" ngf-drop ngf-select ngf-change="editAboutCtrl.uploadPhoto($files,$invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="editAboutCtrl.isDropAvailable" ngf-multiple="true">
 												<div class="plus-add">+</div>
-												<span>Drag and drop<br/>or add photo</span>
+												<span>Drag and drop<br/>or press this button to add photos</span>
 											</div>
 										</div>
 										<div ng-if="editAboutCtrl.files.length > 0" ng-repeat="item in editAboutCtrl.files" style="max-height:200px; max-width:300px;">
