@@ -525,27 +525,21 @@ class Person extends CActiveRecord implements IdentityInterface
 	 *
 	 * @return string
 	 */
-	public function getHeaderBackgroundImage($urlify = true)
+	public function getHeaderBackgroundImage($urlify = true, $minHeight = null, $minWidth = null)
 	{
-		$image = "";
-		$fallback = "deviser_header_placeholder.jpg";
-
-		if (isset($this->media) && isset($this->media['header'])) {
-			$image = $this->media['header'];
-
-			if (!file_exists(Yii::getAlias("@web") . "/" . $this->short_id . "/" . $image)) {
-				$imge = $fallback;
-			}
-		} else {
-			$image = $fallback;
+		$image = "/imgs/default-cover.jpg";
+		if (Person::existMediaFile($this->mediaFiles->header_cropped)) {
+			$image = Person::getUrlImagesLocation() . $this->mediaFiles->header_cropped;
+		} elseif (Person::existMediaFile($this->mediaFiles->header)) {
+			$image = Person::getUrlImagesLocation() . $this->mediaFiles->header;
 		}
 
-		if ($urlify === true) {
-			if ($image === $fallback) {
-				$image = Yii::getAlias("@web") . "/imgs/" . $image;
-			} else {
-				$image = Yii::getAlias("@deviser_url") . "/" . $this->short_id . "/" . $image;
-			}
+		if ((!empty($minHeight)) || (!empty($minWidth))) {
+			// force resize
+			$image = Utils::url_scheme() . Utils::thumborize($image)->resize(
+					($minWidth) ? $minWidth : 0,
+					($minHeight) ? $minHeight : 0
+				);
 		}
 
 		return $image;
@@ -562,25 +556,11 @@ class Person extends CActiveRecord implements IdentityInterface
 	 */
 	public function getAvatarImage($urlify = true, $minHeight = null, $minWidth = null)
 	{
-		$image = "";
-		$fallback = "deviser_placeholder.png";
-
-		if (isset($this->media) && isset($this->media['profile'])) {
-			$image = $this->media['profile'];
-
-			if (!file_exists(Yii::getAlias("@web") . "/" . $this->short_id . "/" . $image)) {
-				$imge = $fallback;
-			}
-		} else {
-			$image = $fallback;
-		}
-
-		if ($urlify === true) {
-			if ($image === $fallback) {
-				$image = Yii::getAlias("@web") . "/imgs/" . $image;
-			} else {
-				$image = Yii::getAlias("@deviser_url") . "/" . $this->short_id . "/" . $image;
-			}
+		$image = "/imgs/default-avatar.jpg";
+		if (Person::existMediaFile($this->mediaFiles->profile_cropped)) {
+			$image = Person::getUrlImagesLocation() . $this->mediaFiles->profile_cropped;
+		} elseif (Person::existMediaFile($this->mediaFiles->profile)) {
+			$image = Person::getUrlImagesLocation() . $this->mediaFiles->profile;
 		}
 
 		if ((!empty($minHeight)) || (!empty($minWidth))) {
@@ -860,6 +840,8 @@ class Person extends CActiveRecord implements IdentityInterface
 	 */
 	public function existMediaFile($filename)
 	{
+		if (empty($filename)) { return false; }
+
 		$filePath = $this->getUploadedFilesPath() . '/' . $filename;
 		return file_exists($filePath);
 	}
