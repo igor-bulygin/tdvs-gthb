@@ -55,7 +55,7 @@ $this->title = 'Create a Deviser account - Todevise';
 								<form-errors field="createDeviserCtrl.form.first_name" condition="createDeviserCtrl.has_error(createDeviserCtrl.form, createDeviserCtrl.form.first_name)"></form-errors>
 							</div>
 							<div class="row">
-								<input type="text" class="form-control grey-input ng-class:{'error-input': createDeviserCtrl.has_error(createDeviserCtrl.form, createDeviserCtrl.form.last_name)}" name="last_name" ng-model="createDeviserCtrl.deviser.last_name" placeholder="SECOND NAME" required>
+								<input type="text" class="form-control grey-input ng-class:{'error-input': createDeviserCtrl.has_error(createDeviserCtrl.form, createDeviserCtrl.form.last_name)}" name="last_name" ng-model="createDeviserCtrl.deviser.last_name" placeholder="LAST NAME" required>
 								<form-errors field="createDeviserCtrl.form.last_name" condition="createDeviserCtrl.has_error(createDeviserCtrl.form, createDeviserCtrl.form.last_name)"></form-errors>
 							</div>
 							<div class="row">
