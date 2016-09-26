@@ -9,13 +9,13 @@
 
 		function init() {
 			switch (vm.resolve.type) {
-			case "header":
+			case "header_cropped":
 				vm.area_type = 'rectangle';
 				vm.width = 1280;
 				vm.height = 450;
 				vm.aspect_ratio = 2.8;
 				break;
-			case "profile":
+			case "profile_cropped":
 				vm.area_type = 'circle';
 				vm.width = 340;
 				vm.height = 340;
