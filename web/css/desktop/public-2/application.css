@@ -2011,15 +2011,21 @@ input[type="radio"] .styled:checked + label::after {
 .edit-cover-photo-icon {
   color: #ffffff;
   font-size: 60px;
-  width: 100px;
+  width: 88px;
+  height: 88px;
   position: absolute;
   text-align: center;
   cursor: pointer;
-  top: 50px;
+  top: 70px;
   left: 0;
   right: 0;
   margin-left: auto;
-  margin-right: auto; }
+  margin-right: auto;
+  background-color: #1C1919;
+  border-radius: 51px;
+  display: block;
+  z-index: 999;
+  padding-top: 1px; }
 
 .edit-avatar-photo-icon {
   color: #ffffff;
