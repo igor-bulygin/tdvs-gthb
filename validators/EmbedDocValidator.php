@@ -77,6 +77,7 @@ class EmbedDocValidator extends Validator
             throw new InvalidConfigException('Owner model must implement "yii2tech\embedded\ContainerInterface" interface.');
         }
 
+
         $mapping = $model->getEmbeddedMapping($attribute);
         $embedded = $model->getEmbedded($attribute);
 
@@ -89,9 +90,9 @@ class EmbedDocValidator extends Validator
                         throw new InvalidConfigException('Embedded object "' . get_class($embeddedModel) . '" must be an instance or descendant of "' . Model::className() . '".');
                     }
                     if (!$embeddedModel->validate()) {
-	                    foreach ($embedded->errors as $messages) {
+	                    foreach ($embeddedModel->errors as $messages) {
 		                    foreach ($messages as $message) {
-			                    $this->addError($model, $model->$attribute->getParentAttribute(), $message);
+			                    $this->addError($model, $embeddedModel->getParentAttribute(), $message);
 		                    }
 	                    }
                     }

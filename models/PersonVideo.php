@@ -21,6 +21,18 @@ class PersonVideo extends Model
 	 */
 	public $products = [];
 
+	public function getParentAttribute()
+	{
+		return "videos";
+	}
+
+	public function init()
+	{
+		parent::init();
+
+		$this->setScenario(Person::SERIALIZE_SCENARIO_LOAD_SUB_DOCUMENT);
+	}
+
 	/**
 	 * Parse a Youtube URL video, and return the embedded url version, to use in a <iframe>
 	 * (No external library found, to parse the url, without have to register and use API KEY)

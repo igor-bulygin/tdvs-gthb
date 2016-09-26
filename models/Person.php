@@ -378,7 +378,8 @@ class Person extends CActiveRecord implements IdentityInterface
 				'on' => self::SCENARIO_DEVISER_UPDATE_PROFILE,
 			],
 			[   'press', 'app\validators\PersonPressFilesValidator'],
-			[   'videosInfo', 'yii2tech\embedded\Validator'],
+			[   'videos', 'safe', 'on' => self::SCENARIO_DEVISER_UPDATE_PROFILE],
+			[   'videosInfo', 'app\validators\EmbedDocValidator'],
 //			[   'faqInfo', 'yii2tech\embedded\Validator'], // why don't work like videoInfo validator do?
 			[   'faq', 'app\validators\PersonFaqValidator'],
 		];
