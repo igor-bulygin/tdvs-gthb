@@ -88,4 +88,27 @@ class CActiveRecord extends ActiveRecord
 		return array_merge(array_values(static::$serializeFields), static::$retrieveExtraFields);
 	}
 
+	/**
+	 * Parse html tags, and remove not allowed tags.
+	 * Now, only <p> are allowed
+	 *
+	 * @param string|array|null $mix
+	 * @return string|array|null
+	 */
+	static public function stripNotAllowedHtmlTags($mix)
+	{
+		$newValue = null;
+
+		if (is_string($mix)) {
+			$newValue = strip_tags($mix, '<p>');
+		} elseif (is_array($mix)) {
+			foreach ($mix as &$item) {
+				$item = strip_tags($item, '<p>');
+			}
+			$newValue = $mix;
+		}
+
+		return $newValue;
+	}
+
 }

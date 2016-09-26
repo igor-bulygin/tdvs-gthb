@@ -19,7 +19,17 @@ class PersonMedia extends Model
 	/**
 	 * @var string
 	 */
+	public $header_cropped;
+
+	/**
+	 * @var string
+	 */
 	public $profile;
+
+	/**
+	 * @var string
+	 */
+	public $profile_cropped;
 
 	/**
 	 * @var array
@@ -45,6 +55,11 @@ class PersonMedia extends Model
 		$this->person = $person;
 	}
 
+	public function getParentAttribute()
+	{
+		return "media";
+	}
+
 	public function init()
 	{
 		parent::init();
@@ -58,11 +73,11 @@ class PersonMedia extends Model
 	public function rules()
 	{
 		return [
-			[['header', 'profile', 'photos'], 'required', 'on' => Person::SCENARIO_DEVISER_UPDATE_PROFILE],
-			[['header', 'profile'], 'validateDeviserMediaFileExist', 'on' => Person::SCENARIO_DEVISER_UPDATE_PROFILE],
+			[['header', 'header_cropped', 'profile', 'profile_cropped', 'photos'], 'required', 'on' => Person::SCENARIO_DEVISER_UPDATE_PROFILE],
+			[['header', 'header_cropped', 'profile', 'profile_cropped'], 'validateDeviserMediaFileExist', 'on' => Person::SCENARIO_DEVISER_UPDATE_PROFILE],
 			[['photos'], 'validateDeviserPhotosExists', 'on' => Person::SCENARIO_DEVISER_UPDATE_PROFILE],
 			[['photos'], 'validateAmountPhotos', 'on' => Person::SCENARIO_DEVISER_UPDATE_PROFILE],
-			[['header', 'profile', 'photos'], 'safe', 'on' => [Person::SERIALIZE_SCENARIO_LOAD_SUB_DOCUMENT, Person::SCENARIO_DEVISER_UPDATE_DRAFT, Person::SCENARIO_DEVISER_CREATE_DRAFT]],
+			[['header', 'header_cropped', 'profile', 'profile_cropped', 'photos'], 'safe', 'on' => [Person::SERIALIZE_SCENARIO_LOAD_SUB_DOCUMENT, Person::SCENARIO_DEVISER_UPDATE_DRAFT, Person::SCENARIO_DEVISER_CREATE_DRAFT]],
 		];
 	}
 

@@ -253,6 +253,9 @@ class Person extends CActiveRecord implements IdentityInterface
 			];
 		}
 
+		// remove not allowed html tags
+		$this->text_short_description = Person::stripNotAllowedHtmlTags($this->text_short_description);
+
 		if (empty($this->text_biography)) {
 			$this->text_biography = [
 				Lang::EN_US => "<p>I am a UX Designer and Art Director from Austria living in Berlin.</p>
@@ -260,6 +263,9 @@ class Person extends CActiveRecord implements IdentityInterface
 							<p>Out of this love for aesthetic design my passion for functionality and structure evolved. Jumping right into Photoshop didn’t feel accurate anymore and skipping the steps of building a framework based on functionality and usability became inevitable.</p>"
 			];
 		}
+
+		// remove not allowed html tags
+		$this->text_biography = Person::stripNotAllowedHtmlTags($this->text_biography);
 
 		if (!array_key_exists("auth_key", $this->credentials) || $this->credentials["auth_key"] === null) {
 			$this->credentials = array_merge_recursive($this->credentials, [
@@ -358,12 +364,12 @@ class Person extends CActiveRecord implements IdentityInterface
 			],
 			[
 				'personalInfo',
-				'yii2tech\embedded\Validator',
+				'app\validators\EmbedDocValidator',
 				'on' => [self::SCENARIO_DEVISER_UPDATE_DRAFT, self::SCENARIO_DEVISER_UPDATE_PROFILE],
 			],
 			[
 				'mediaFiles',
-				'yii2tech\embedded\Validator',
+				'app\validators\EmbedDocValidator',
 				'on' => [self::SCENARIO_DEVISER_UPDATE_DRAFT, self::SCENARIO_DEVISER_UPDATE_PROFILE],
 			],
 			[
@@ -372,9 +378,10 @@ class Person extends CActiveRecord implements IdentityInterface
 				'on' => self::SCENARIO_DEVISER_UPDATE_PROFILE,
 			],
 			[   'press', 'app\validators\PersonPressFilesValidator'],
-			[   'videosInfo', 'yii2tech\embedded\Validator'],
-//			[   'faqInfo', 'yii2tech\embedded\Validator'], // why don't work like videoInfo validator do?
-			[   'faq', 'app\validators\PersonFaqValidator'],
+			[   'videos', 'safe'], // to load data posted from WebServices
+			[   'videosInfo', 'app\validators\EmbedDocValidator'], // to apply rules
+			[   'faq', 'safe'], // to load data posted from WebServices
+			[   'faqInfo', 'app\validators\EmbedDocValidator'], // to apply rules
 		];
 	}
 
@@ -519,27 +526,21 @@ class Person extends CActiveRecord implements IdentityInterface
 	 *
 	 * @return string
 	 */
-	public function getHeaderBackgroundImage($urlify = true)
+	public function getHeaderBackgroundImage($urlify = true, $minHeight = null, $minWidth = null)
 	{
-		$image = "";
-		$fallback = "deviser_header_placeholder.jpg";
-
-		if (isset($this->media) && isset($this->media['header'])) {
-			$image = $this->media['header'];
-
-			if (!file_exists(Yii::getAlias("@web") . "/" . $this->short_id . "/" . $image)) {
-				$imge = $fallback;
-			}
-		} else {
-			$image = $fallback;
+		$image = "/imgs/default-cover.jpg";
+		if (Person::existMediaFile($this->mediaFiles->header_cropped)) {
+			$image = Person::getUrlImagesLocation() . $this->mediaFiles->header_cropped;
+		} elseif (Person::existMediaFile($this->mediaFiles->header)) {
+			$image = Person::getUrlImagesLocation() . $this->mediaFiles->header;
 		}
 
-		if ($urlify === true) {
-			if ($image === $fallback) {
-				$image = Yii::getAlias("@web") . "/imgs/" . $image;
-			} else {
-				$image = Yii::getAlias("@deviser_url") . "/" . $this->short_id . "/" . $image;
-			}
+		if ((!empty($minHeight)) || (!empty($minWidth))) {
+			// force resize
+			$image = Utils::url_scheme() . Utils::thumborize($image)->resize(
+					($minWidth) ? $minWidth : 0,
+					($minHeight) ? $minHeight : 0
+				);
 		}
 
 		return $image;
@@ -556,25 +557,11 @@ class Person extends CActiveRecord implements IdentityInterface
 	 */
 	public function getAvatarImage($urlify = true, $minHeight = null, $minWidth = null)
 	{
-		$image = "";
-		$fallback = "deviser_placeholder.png";
-
-		if (isset($this->media) && isset($this->media['profile'])) {
-			$image = $this->media['profile'];
-
-			if (!file_exists(Yii::getAlias("@web") . "/" . $this->short_id . "/" . $image)) {
-				$imge = $fallback;
-			}
-		} else {
-			$image = $fallback;
-		}
-
-		if ($urlify === true) {
-			if ($image === $fallback) {
-				$image = Yii::getAlias("@web") . "/imgs/" . $image;
-			} else {
-				$image = Yii::getAlias("@deviser_url") . "/" . $this->short_id . "/" . $image;
-			}
+		$image = "/imgs/default-avatar.jpg";
+		if (Person::existMediaFile($this->mediaFiles->profile_cropped)) {
+			$image = Person::getUrlImagesLocation() . $this->mediaFiles->profile_cropped;
+		} elseif (Person::existMediaFile($this->mediaFiles->profile)) {
+			$image = Person::getUrlImagesLocation() . $this->mediaFiles->profile;
 		}
 
 		if ((!empty($minHeight)) || (!empty($minWidth))) {
@@ -854,6 +841,8 @@ class Person extends CActiveRecord implements IdentityInterface
 	 */
 	public function existMediaFile($filename)
 	{
+		if (empty($filename)) { return false; }
+
 		$filePath = $this->getUploadedFilesPath() . '/' . $filename;
 		return file_exists($filePath);
 	}

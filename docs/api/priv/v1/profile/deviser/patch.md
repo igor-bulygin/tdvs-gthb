@@ -27,12 +27,14 @@ Example about how to call to Web Service to update Deviser profile
  * `lang`: code of default language ("en-US")
  * `currency`: code of default currency ("EUR")
 * `media`: 
- * `header`: filename of image to use in header cover ("filename1.jpg")
- * `profile`: filename of image to use in profile avatar ("filename2.jpg")
+ * `header`: filename of image to use in header cover, original version ("filename1.jpg")
+ * `header_cropped`: filename of image to use in header cover, cropped version ("filename1.jpg")
+ * `profile`: filename of image to use in profile avatar, original version ("filename2.jpg")
+ * `profile_cropped`: filename of image to use in profile avatar, cropped version ("filename2.jpg")
  * `photos`: [] array of file names to use in "about" gallery (["filename3.jpg", "filename4.jpg"])
 * `curriculum`: filename of a document to download with the CV ("deviser.cv.123456.pdf")
 * `videos`: [] array of documents with info about videos related with the Deviser. Each element has:
- * `url`: URL of video streaming ("http://youtube.com/asdf")
+ * `url`: URL of video streaming ("http://youtube.com/?v=asdf")
  * `products`: [] array with products ids that appears in video (["product_id_1", "product_id_2"])
 * `faq`: [] array of documents with info about frequently asked questions. Each element has:
  * `question`: multi-language field with the question ({"en-US": "my quesiton", "es-ES": "mi pregunta"})
