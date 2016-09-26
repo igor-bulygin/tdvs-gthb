@@ -253,6 +253,9 @@ class Person extends CActiveRecord implements IdentityInterface
 			];
 		}
 
+		// remove not allowed html tags
+		$this->text_short_description = Person::stripNotAllowedHtmlTags($this->text_short_description);
+
 		if (empty($this->text_biography)) {
 			$this->text_biography = [
 				Lang::EN_US => "<p>I am a UX Designer and Art Director from Austria living in Berlin.</p>
@@ -260,6 +263,9 @@ class Person extends CActiveRecord implements IdentityInterface
 							<p>Out of this love for aesthetic design my passion for functionality and structure evolved. Jumping right into Photoshop didn’t feel accurate anymore and skipping the steps of building a framework based on functionality and usability became inevitable.</p>"
 			];
 		}
+
+		// remove not allowed html tags
+		$this->text_biography = Person::stripNotAllowedHtmlTags($this->text_biography);
 
 		if (!array_key_exists("auth_key", $this->credentials) || $this->credentials["auth_key"] === null) {
 			$this->credentials = array_merge_recursive($this->credentials, [
