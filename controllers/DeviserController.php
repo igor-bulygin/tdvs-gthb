@@ -260,10 +260,10 @@ class DeviserController extends CController
 		}
 
 		// their products, for selected category
-		$products = Product::find()
-			->where(["deviser_id" => $deviser_id, "categories" => (empty($selectedSubcategory->short_id)) ? $selectedCategory->getShortIds() : $selectedSubcategory->getShortIds()])
-			->orderBy('position')
-			->all();
+		$products = Product::findSerialized([
+			"deviser_id" => $deviser_id,
+			"categories" => (empty($selectedSubcategory->short_id)) ? $selectedCategory->getShortIds() : $selectedSubcategory->getShortIds()
+		]);
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("store-view", [
