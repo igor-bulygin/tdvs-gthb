@@ -119,6 +119,7 @@
     .tag-row{
         padding: 20px;
         @extend %block;
+        border-bottom: 1px solid $dark_grey;
     }
 }
 .no-tags-title{
@@ -157,6 +158,38 @@
         display: block;
         margin: 0 0 20px;
         padding: 0;
+    }
+}
+.red-close{
+    color: $white;     
+    background-color: $red;
+    @include border-radius(90px,90px,90px,90px);
+    font-size: 12px;
+    width: 24px;
+    height: 24px;
+    padding: 6px 0 0 0;
+    text-align: center;
+    float: right;
+    &:hover{
+        background-color:$dark_red;
+        @include transition-property(color);
+        @include transition-duration(0.3s);
+        @include transition-timing-function(ease-out);
+    }
+}
+.tagged-works{
+    height: 196px;
+    ::-webkit-scrollbar {
+        -webkit-appearance: none;
+        width: 7px;
+    }
+    ::-webkit-scrollbar-thumb {
+        border-radius: 4px;
+        background-color: rgba(0,0,0,.5);
+        box-shadow: 0 0 1px rgba(255,255,255,.5);
+    }
+    ::-webkit-scrollbar-corner       {
+        background-color: transparent;
     }
 }
 

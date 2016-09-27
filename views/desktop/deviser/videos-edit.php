@@ -94,7 +94,7 @@ $this->params['deviser_menu_active_option'] = 'videos';
 															</div>
 														</div>
 														<div class="col-md-2">
-															<span class="ion-android-close" style="cursor:pointer;" ng-click="editVideosCtrl.deleteTag($parent.$parent.$index, $index)"></span>
+															<span class="glyphicon glyphicon-remove red-close" style="cursor:pointer;" ng-click="editVideosCtrl.deleteTag($parent.$parent.$index, $index)"></span>
 														</div>
 													</div>
 												</div>
