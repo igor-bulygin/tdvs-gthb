@@ -169,6 +169,9 @@ $config = [
 				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/video/edit' => 'deviser/videos-edit',
 				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/faq/edit' => 'deviser/faq-edit',
 
+				//Links for contact
+				'login' => 'site/login',
+
 				// Request become a Deviser
 				'/become-a-deviser' => 'public/become-deviser',
 				'/create-deviser-account' => 'public/create-deviser-account',

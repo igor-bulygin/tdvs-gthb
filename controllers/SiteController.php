@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Login;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -69,6 +70,12 @@ class SiteController extends Controller
 //			]);
 //		}
 //	}
+
+	public function actionLogin()
+	{
+		$this->layout = '/desktop/empty-layout.php';
+		return $this->render("login-2");
+	}
 
 	public function actionLogout()
 	{
