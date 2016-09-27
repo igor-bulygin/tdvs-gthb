@@ -15,7 +15,7 @@ $deviser = $this->params['deviser'];
 	<div class="banner-deviser" ng-controller="editHeaderCtrl as editHeaderCtrl">
 		<div class="container pad-about">
 			<span tooltip-placement="top" uib-tooltip="ADD PHOTO" class="button ion-camera edit-cover-photo-icon" ngf-select ng-model="editHeaderCtrl.new_header" name="header" ngf-pattern="'image/*'" ngf-accept="'image/*'"></span>
-			<!--<span class="button ion-crop" style="font-size:50px;" ng-click="editHeaderCtrl.openCropModal(editHeaderCtrl.header_original, 'header')" ng-if="editHeaderCtrl.header"></span>-->
+			<span tooltip-placement="top" uib-tooltip="ADD CROP" class="button ion-crop edit-cover-crop-icon" ng-click="editHeaderCtrl.openCropModal(editHeaderCtrl.header_original, 'header')" ng-if="editHeaderCtrl.header"></span>
 			<img class="cover" ngf-thumbnail="editHeaderCtrl.header || '/imgs/default-cover.jpg'">
 			<div class="banner-deviser-content">
 				<div class="grey-overlay"></div>
