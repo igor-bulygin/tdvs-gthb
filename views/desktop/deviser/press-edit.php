@@ -1,5 +1,6 @@
 <?php
 use app\components\DeviserHeader;
+use app\components\DeviserAdminHeader;
 use app\components\DeviserMakeProfilePublic;
 use app\components\DeviserMenu;
 use app\models\Person;
@@ -20,7 +21,7 @@ $this->params['deviser_links_target'] = 'edit_view';
 
 ?>
 
-	<?= DeviserHeader::widget() ?>
+	<?= DeviserAdminHeader::widget() ?>
 	<?php if ($deviser->isDraft()) { ?>
 		<?= DeviserMakeProfilePublic::widget() ?>
 	<?php } ?>

@@ -1,5 +1,6 @@
 <?php
 use app\components\DeviserHeader;
+use app\components\DeviserAdminHeader;
 use app\components\DeviserMakeProfilePublic;
 use app\components\DeviserMenu;
 use app\models\Category;
@@ -33,10 +34,10 @@ $this->params['deviser'] = $deviser;
 
 ?>
 
-	<?= DeviserHeader::widget() ?>
 	<?php if ($deviser->isDraft()) { ?>
 		<?= DeviserMakeProfilePublic::widget() ?>
 	<?php } ?>
+	<?= DeviserAdminHeader::widget() ?>
 
 		<div class="store">
 			<div class="container">
