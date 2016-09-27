@@ -1,5 +1,6 @@
 <?php
 use app\components\DeviserHeader;
+use app\components\DeviserMakeProfilePublic;
 use app\components\DeviserMenu;
 use app\models\Person;
 use yii\web\View;
@@ -20,6 +21,9 @@ $this->params['deviser_links_target'] = 'edit_view';
 ?>
 
 	<?= DeviserHeader::widget() ?>
+	<?php if ($deviser->isDraft()) { ?>
+		<?= DeviserMakeProfilePublic::widget() ?>
+	<?php } ?>
 		<?php $this->registerJs("var _deviser = " . Json::encode($deviser) . ";", View::POS_HEAD); ?>
 
 			<div class="store" ng-controller="editPressCtrl as editPressCtrl">

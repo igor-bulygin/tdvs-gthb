@@ -1,6 +1,7 @@
 <?php
 use app\assets\desktop\pub\PublicCommonAsset;
 use app\components\DeviserHeader;
+use app\components\DeviserMakeProfilePublic;
 use app\components\DeviserMenu;
 use app\models\Person;
 use app\models\Product;
@@ -27,6 +28,9 @@ $this->params['deviser_links_target'] = 'edit_view';
 ?>
 
 	<?= DeviserHeader::widget() ?>
+	<?php if ($deviser->isDraft()) { ?>
+		<?= DeviserMakeProfilePublic::widget() ?>
+	<?php } ?>
 
 		<div class="store">
 			<div class="container">
