@@ -27,6 +27,7 @@ $this->title = $deviser->personalInfo->getBrandName() . ' - Todevise';
 // use params to share data between views :(
 $this->params['deviser_menu_categories'] = $categories;
 $this->params['deviser_menu_active_option'] = 'store';
+$this->params['deviser_links_target'] = 'edit_view';
 $this->params['deviser'] = $deviser;
 
 ?>

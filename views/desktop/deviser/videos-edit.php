@@ -16,6 +16,7 @@ EditVideosAsset::register($this);
 $this->title = 'About ' . $deviser->personalInfo->getBrandName() . ' - Todevise';
 $this->params['deviser'] = $deviser;
 $this->params['deviser_menu_active_option'] = 'videos';
+$this->params['deviser_links_target'] = 'edit_view';
 
 ?>
 

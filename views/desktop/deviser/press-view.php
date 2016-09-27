@@ -17,6 +17,7 @@ EditPressAsset::register($this);
 $this->title = 'About ' . $deviser->personalInfo->getBrandName() . ' - Todevise';
 $this->params['deviser'] = $deviser;
 $this->params['deviser_menu_active_option'] = 'press';
+$this->params['deviser_links_target'] = 'public_view';
 
 ?>
 
