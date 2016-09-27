@@ -61,7 +61,7 @@ $this->params['deviser_menu_active_option'] = 'videos';
 											</div>
 											<span ng-if="editVideosCtrl.noProducts">No products found.</span>
 											<span ng-if="editVideosCtrl.product_min_length">4 characters required.</span>
-											<div ng-cloak style="height:200px; overflow-y:scroll; background:white;" ng-if="editVideosCtrl.searchTerm[$index].length > 0 && editVideosCtrl.works[$index] && editVideosCtrl.works[$index].length > 0">
+											<div ng-cloak class="add-tag-video-wrapper" ng-if="editVideosCtrl.searchTerm[$index].length > 0 && editVideosCtrl.works[$index] && editVideosCtrl.works[$index].length > 0">
 												<div ng-repeat="work in editVideosCtrl.works[$parent.$index]" style="cursor:pointer;" ng-click="editVideosCtrl.selectProduct($parent.$index, work)">
 													<div class="tag-select-row row">
 														<div class="col-md-2">
@@ -70,7 +70,9 @@ $this->params['deviser_menu_active_option'] = 'videos';
 														<div class="col-md-8">
 															<p><span ng-bind="work.name"></span> by <span ng-bind="work.deviser.name"></span></p>
 														</div>
-
+                                                        <div class="col-md-2">
+															<span class="glyphicon glyphicon-plus green-add" style="cursor:pointer;"></span>
+														</div>
 													</div>
 												</div>
 											</div>

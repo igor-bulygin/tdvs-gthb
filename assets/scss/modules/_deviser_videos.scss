@@ -85,7 +85,6 @@
     }
 }
 .edit-video-wrapper{
-    margin-bottom: 20px;
     .input-group-addon{
         @include border-radius(30px,0,0,30px);
         background-color: $white;
@@ -101,6 +100,7 @@
     }
 }
 .tagged-works{
+    margin-top: 20px;
     background-color: $background_grey;
     border: 1px solid $white;
     .produts-tags-wrapper{
@@ -177,8 +177,43 @@
         @include transition-timing-function(ease-out);
     }
 }
+.green-add{
+    color: $white;     
+    background-color: $green;
+    @include border-radius(90px,90px,90px,90px);
+    font-size: 12px;
+    width: 24px;
+    height: 24px;
+    padding: 6px 0 0 0;
+    text-align: center;
+    float: right;
+    &:hover{
+        background-color:$dark_green;
+        @include transition-property(color);
+        @include transition-duration(0.3s);
+        @include transition-timing-function(ease-out);
+    }
+}
 .tagged-works{
     height: 196px;
+    ::-webkit-scrollbar {
+        -webkit-appearance: none;
+        width: 7px;
+    }
+    ::-webkit-scrollbar-thumb {
+        border-radius: 4px;
+        background-color: rgba(0,0,0,.5);
+        box-shadow: 0 0 1px rgba(255,255,255,.5);
+    }
+    ::-webkit-scrollbar-corner       {
+        background-color: transparent;
+    }
+}
+.add-tag-video-wrapper{
+    height:215px;
+    overflow-y:scroll;
+    background:white; width:400px;
+    margin:0 auto;
     ::-webkit-scrollbar {
         -webkit-appearance: none;
         width: 7px;
