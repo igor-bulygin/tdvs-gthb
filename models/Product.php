@@ -206,14 +206,21 @@ class Product extends CActiveRecord {
 			$query->andWhere(["short_id" => $criteria["id"]]);
 		}
 
-		// if deviser id is specified
+			// if deviser id is specified
 		if ((array_key_exists("deviser_id", $criteria)) && (!empty($criteria["deviser_id"]))) {
 			$query->andWhere(["deviser_id" => $criteria["deviser_id"]]);
 		}
 
 		// if categories are specified
 		if ((array_key_exists("categories", $criteria)) && (!empty($criteria["categories"]))) {
-			$query->andWhere(["categories" => $criteria["categories"]]);
+			$ids = [];
+			foreach ($criteria["categories"] as $categoryId) {
+				$category = Category::findOne(["short_id" => $categoryId]);
+				if ($category) {
+					$ids = array_merge($ids, $category->getShortIds());
+				}
+			}
+			$query->andWhere(["categories" => $ids]);
 		}
 
 		// if name is specified

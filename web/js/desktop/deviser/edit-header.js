@@ -6,6 +6,7 @@
 		vm.description_language = "en-US";
 		vm.openCropModal = openCropModal;
 		vm.update = update;
+		vm.limit_text_biography = 140;
 
 		function getDeviser() {
 			deviserDataService.Profile.get({
@@ -14,10 +15,7 @@
 				vm.deviser = dataDeviser;
 				//set name
 				if (!vm.deviser.personal_info.brand_name)
-					vm.brand_name = angular.copy(vm.deviser.personal_info.name);
-				else {
-					vm.brand_name = angular.copy(vm.deviser.personal_info.brand_name);
-				}
+					vm.deviser.personal_info.brand_name = angular.copy(vm.deviser.personal_info.name);
 				//set images
 				if (vm.deviser.media.header_cropped)
 					vm.header = currentHost() + vm.deviser.url_images + vm.deviser.media.header_cropped;
@@ -138,6 +136,11 @@
 				openCropModal(vm.new_profile, 'profile_cropped');
 			}
 		})
+
+		$scope.$watch('editHeaderCtrl.deviser.text_short_description[editHeaderCtrl.description_language]', function (newValue, oldValue) {
+			if (newValue && newValue.length > vm.limit_text_biography)
+				vm.deviser.text_short_description[vm.description_language] = oldValue;
+		});
 
 	}
 

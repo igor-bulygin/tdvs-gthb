@@ -260,10 +260,10 @@ class DeviserController extends CController
 		}
 
 		// their products, for selected category
-		$products = Product::find()
-			->where(["deviser_id" => $deviser_id, "categories" => (empty($selectedSubcategory->short_id)) ? $selectedCategory->getShortIds() : $selectedSubcategory->getShortIds()])
-			->orderBy('position')
-			->all();
+		$products = Product::findSerialized([
+			"deviser_id" => $deviser_id,
+			"categories" => (empty($selectedSubcategory->short_id)) ? $selectedCategory->getShortIds() : $selectedSubcategory->getShortIds()
+		]);
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("store-view", [
@@ -286,18 +286,18 @@ class DeviserController extends CController
 		if (!isset($selectedCategory)) {
 			$selectedCategory = (count($categories) > 0) ? $categories[0] : new Category();
 		}
-		// their products, for selected category
-		$products = Product::find()
-			->where(["deviser_id" => $deviser_id, "categories" => $selectedCategory->getShortIds()])
-			->orderBy('position')
-			->all();
+		/** @var Category $selectedSubcategory */
+		$selectedSubcategory = $this->getSubcategoryById($selectedCategory->getDeviserSubcategories(), Yii::$app->request->get('subcategory'));
+		if (!isset($selectedSubcategory)) {
+			$selectedSubcategory = (count($selectedCategory->getDeviserSubcategories()) > 0) ? $selectedCategory->getDeviserSubcategories()[0] : new Category();
+		}
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("store-edit", [
 			'deviser' => $deviser,
-			'products' => $products,
 			'categories' => $categories,
 			'selectedCategory' => $selectedCategory,
+			'selectedSubcategory' => $selectedSubcategory,
 		]);
 	}
 

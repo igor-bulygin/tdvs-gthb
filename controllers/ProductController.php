@@ -16,6 +16,7 @@ use yii\filters\VerbFilter;
 use app\helpers\CController;
 use app\helpers\CActiveRecord;
 use yii\filters\AccessControl;
+use yii\mongodb\Collection;
 
 class ProductController extends CController {
 	public $defaultAction = "detail";
@@ -43,6 +44,8 @@ class ProductController extends CController {
 
 	public function actionFixPosition()
 	{
+//		ini_set('memory_limit', '2048M');
+
 		// set pagination values
 		$deviser_id = Yii::$app->request->get('deviser_id');
 
@@ -61,13 +64,22 @@ class ProductController extends CController {
 			/** @var Product $product */
 			foreach ($products as $product) {
 				$i++;
-				$product->position = $i;
-				$product->save();
+				// Update directly in low level, to avoid no desired behaviors of ActiveRecord
+				/** @var Collection $collection */
+				$collection = Yii::$app->mongodb->getCollection('product');
+				$collection->update(
+						[
+							'short_id' => $product->short_id
+						],
+						[
+							'position' => $i
+						]
+					);
 				$cant++;
 			}
 		}
 		Yii::$app->response->setStatusCode(200); // Success, without body
-//		var_dump("done (" . $cant . ")");
+		var_dump("done (" . $cant . ")");
 	}
 
 }

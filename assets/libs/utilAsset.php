@@ -12,7 +12,8 @@ class utilAsset extends AssetBundle {
 		'js/util/comparator.js',
 		'js/util/form-messages/form-messages.js',
 		'js/util/form-errors/form-errors.js',
-		'js/util/modal-crop/modal-crop.js'
+		'js/util/modal-crop/modal-crop.js',
+		'js/util/contenteditable.js'
 	];
 	
 	public $depends = [
