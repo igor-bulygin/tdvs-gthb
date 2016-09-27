@@ -1,5 +1,7 @@
 <?php
 use app\components\DeviserHeader;
+use app\components\DeviserAdminHeader;
+use app\components\DeviserMakeProfilePublic;
 use app\components\DeviserMenu;
 use app\models\Category;
 use app\models\Person;
@@ -27,11 +29,15 @@ $this->title = $deviser->personalInfo->getBrandName() . ' - Todevise';
 // use params to share data between views :(
 $this->params['deviser_menu_categories'] = $categories;
 $this->params['deviser_menu_active_option'] = 'store';
+$this->params['deviser_links_target'] = 'edit_view';
 $this->params['deviser'] = $deviser;
 
 ?>
 
-	<?= DeviserHeader::widget() ?>
+	<?php if ($deviser->isDraft()) { ?>
+		<?= DeviserMakeProfilePublic::widget() ?>
+	<?php } ?>
+	<?= DeviserAdminHeader::widget() ?>
 
 		<div class="store">
 			<div class="container">

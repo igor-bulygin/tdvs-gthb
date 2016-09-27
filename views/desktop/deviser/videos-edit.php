@@ -1,5 +1,7 @@
 <?php
 use app\components\DeviserHeader;
+use app\components\DeviserAdminHeader;
+use app\components\DeviserMakeProfilePublic;
 use app\components\DeviserMenu;
 use app\helpers\Utils;
 use app\models\Person;
@@ -16,10 +18,14 @@ EditVideosAsset::register($this);
 $this->title = 'About ' . $deviser->personalInfo->getBrandName() . ' - Todevise';
 $this->params['deviser'] = $deviser;
 $this->params['deviser_menu_active_option'] = 'videos';
+$this->params['deviser_links_target'] = 'edit_view';
 
 ?>
 
-	<?= DeviserHeader::widget() ?>
+	<?php if ($deviser->isDraft()) { ?>
+		<?= DeviserMakeProfilePublic::widget() ?>
+	<?php } ?>
+	<?= DeviserAdminHeader::widget() ?>
 
 		<div class="store">
 			<div class="container">

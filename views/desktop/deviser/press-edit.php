@@ -1,5 +1,7 @@
 <?php
 use app\components\DeviserHeader;
+use app\components\DeviserAdminHeader;
+use app\components\DeviserMakeProfilePublic;
 use app\components\DeviserMenu;
 use app\models\Person;
 use yii\web\View;
@@ -15,10 +17,14 @@ EditPressAsset::register($this);
 $this->title = 'About ' . $deviser->personalInfo->getBrandName() . ' - Todevise';
 $this->params['deviser'] = $deviser;
 $this->params['deviser_menu_active_option'] = 'press';
+$this->params['deviser_links_target'] = 'edit_view';
 
 ?>
 
-	<?= DeviserHeader::widget() ?>
+	<?= DeviserAdminHeader::widget() ?>
+	<?php if ($deviser->isDraft()) { ?>
+		<?= DeviserMakeProfilePublic::widget() ?>
+	<?php } ?>
 		<?php $this->registerJs("var _deviser = " . Json::encode($deviser) . ";", View::POS_HEAD); ?>
 
 			<div class="store" ng-controller="editPressCtrl as editPressCtrl">

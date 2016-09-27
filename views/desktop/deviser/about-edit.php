@@ -22,6 +22,7 @@ EditAboutAsset::register($this);
 
 $this->title = 'About ' . $deviser->personalInfo->getBrandName() . ' - Todevise';
 $this->params['deviser_menu_active_option'] = 'about';
+$this->params['deviser_links_target'] = 'edit_view';
 $this->params['deviser'] = $deviser;
 
 ?>
