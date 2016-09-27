@@ -2032,9 +2032,9 @@ input[type="radio"] .styled:checked + label::after {
   color: #ffffff;
   font-size: 40px;
   position: absolute;
-  top: 0;
-  left: 15px;
-  cursor: pointer; }
+  cursor: pointer;
+  top: 3px;
+  left: 35px; }
 
 .crop-avatar-photo-icon {
   color: #ffffff;
@@ -2047,7 +2047,7 @@ input[type="radio"] .styled:checked + label::after {
   border-radius: 24px;
   background-color: #F7284B;
   padding-top: 7px;
-  right: 10px;
+  right: 33px;
   height: 40px; }
 
 .absolute-pencil {
@@ -2297,15 +2297,6 @@ input[type="radio"] .styled:checked + label::after {
   background: white;
   width: 400px;
   margin: 0 auto; }
-  .add-tag-video-wrapper ::-webkit-scrollbar {
-    -webkit-appearance: none;
-    width: 7px; }
-  .add-tag-video-wrapper ::-webkit-scrollbar-thumb {
-    border-radius: 4px;
-    background-color: rgba(0, 0, 0, 0.5);
-    box-shadow: 0 0 1px rgba(255, 255, 255, 0.5); }
-  .add-tag-video-wrapper ::-webkit-scrollbar-corner {
-    background-color: transparent; }
 
 .become-deviser-wrapper .become-deviser-cover {
   background: url("/imgs/become_a_deviser_background.png") no-repeat;
