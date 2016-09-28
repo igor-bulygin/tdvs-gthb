@@ -253,9 +253,6 @@ class Person extends CActiveRecord implements IdentityInterface
 			];
 		}
 
-		// remove not allowed html tags
-		$this->text_short_description = Person::stripNotAllowedHtmlTags($this->text_short_description);
-
 		if (empty($this->text_biography)) {
 			$this->text_biography = [
 				Lang::EN_US => "<p>I am a UX Designer and Art Director from Austria living in Berlin.</p>
@@ -265,8 +262,10 @@ class Person extends CActiveRecord implements IdentityInterface
 		}
 
 		// remove not allowed html tags
+		$this->text_short_description = Person::stripNotAllowedHtmlTags($this->text_short_description);
 		$this->text_biography = Person::stripNotAllowedHtmlTags($this->text_biography);
-
+		$this->personalInfo->name = Person::stripNotAllowedHtmlTags($this->personalInfo->name, '');
+		$this->personalInfo->last_name = Person::stripNotAllowedHtmlTags($this->personalInfo->last_name, '');
 		$this->personalInfo->brand_name = Person::stripNotAllowedHtmlTags($this->personalInfo->brand_name, '');
 
 		if (!array_key_exists("auth_key", $this->credentials) || $this->credentials["auth_key"] === null) {
