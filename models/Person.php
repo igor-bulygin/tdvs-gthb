@@ -267,6 +267,8 @@ class Person extends CActiveRecord implements IdentityInterface
 		// remove not allowed html tags
 		$this->text_biography = Person::stripNotAllowedHtmlTags($this->text_biography);
 
+		$this->personalInfo->brand_name = Person::stripNotAllowedHtmlTags($this->personalInfo->brand_name, '');
+
 		if (!array_key_exists("auth_key", $this->credentials) || $this->credentials["auth_key"] === null) {
 			$this->credentials = array_merge_recursive($this->credentials, [
 				"auth_key" => Yii::$app->getSecurity()->generateRandomString(128)
@@ -410,10 +412,11 @@ class Person extends CActiveRecord implements IdentityInterface
 					'text_biography',
 					'categories',
 					'personal_info',
-					'media',
+					'media'  => 'mediaInfoAttributes',
 					'press',
 					'videos' => 'videosPreview',
 					'faq',
+					'curriculum',
 					'name' => "brandName",
 					'url_images' => 'urlImagesLocation',
 					'url_avatar' => "avatarImage128",
@@ -434,10 +437,11 @@ class Person extends CActiveRecord implements IdentityInterface
 					'categories',
 					'collections',
 					'personal_info',
-					'media',
+					'media'  => 'mediaInfoAttributes',
 					'press',
 					'videos' => 'videosPreview',
 					'faq',
+					'curriculum',
 					'preferences',
 					'url_images' => 'urlImagesLocation',
 				];
@@ -457,10 +461,11 @@ class Person extends CActiveRecord implements IdentityInterface
 					'categories',
 					'collections',
 					'personal_info',
-					'media',
+					'media'  => 'mediaInfoAttributes',
 					'press',
 					'videos',
 					'faq',
+					'curriculum',
 					'preferences',
 					'url_images' => 'urlImagesLocation',
 				];
@@ -611,6 +616,18 @@ class Person extends CActiveRecord implements IdentityInterface
 		}
 
 		return $videos;
+	}
+
+	/**
+	 * Get media files attributes from their own Model, not from array.
+	 *
+	 * @return array
+	 */
+	public function getMediaInfoAttributes()
+	{
+		$media = $this->mediaFiles->getAttributes();
+
+		return $media;
 	}
 
 	/**

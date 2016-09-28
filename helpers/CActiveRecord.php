@@ -93,17 +93,18 @@ class CActiveRecord extends ActiveRecord
 	 * Now, only <p> are allowed
 	 *
 	 * @param string|array|null $mix
-	 * @return string|array|null
+	 * @param string $tags
+	 * @return array|null|string
 	 */
-	static public function stripNotAllowedHtmlTags($mix)
+	static public function stripNotAllowedHtmlTags($mix, $tags = "<p>")
 	{
 		$newValue = null;
 
 		if (is_string($mix)) {
-			$newValue = strip_tags($mix, '<p>');
+			$newValue = strip_tags($mix, $tags);
 		} elseif (is_array($mix)) {
 			foreach ($mix as &$item) {
-				$item = strip_tags($item, '<p>');
+				$item = strip_tags($item, $tags);
 			}
 			$newValue = $mix;
 		}
