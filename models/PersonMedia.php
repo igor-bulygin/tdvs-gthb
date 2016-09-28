@@ -71,6 +71,13 @@ class PersonMedia extends Model
 		$this->setScenario(Person::SERIALIZE_SCENARIO_LOAD_SUB_DOCUMENT);
 	}
 
+	/**
+	 * Assign some default attributes for historical objects
+	 *
+	 * @param array $data
+	 * @param null $formName
+	 * @return bool
+	 */
 	public function load($data, $formName = null)
 	{
 		$loaded = parent::load($data, $formName);
