@@ -11,6 +11,8 @@
 			patch.scenario = "deviser-update-profile";
 			patch.account_state = "active";
 			patch.$update().then(function (updateData) {
+				toastr.error("ok");
+				toastr.error("ok");
 				console.log(updateData);
 			}, function (err) {
 				for (var key in err.data.errors) {
