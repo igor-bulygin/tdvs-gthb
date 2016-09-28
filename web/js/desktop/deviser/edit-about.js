@@ -72,7 +72,9 @@
 			patch.$update().then(function (dataUpdate) {
 				getDeviser();
 			}, function (err) {
-				toastr.error(err);
+				for (var key in err.data.errors) {
+					toastr.error(err.data.errors[key]);
+				}
 			});
 		}
 
@@ -141,8 +143,12 @@
 		}
 
 		function delete_image(index) {
-			vm.images.splice(index, 1);
-			update();
+			if (vm.images.length > 3) {
+				vm.images.splice(index, 1);
+				update();
+			} else {
+				toastr.error("Must have between 3 and 7 photos.");
+			}
 		}
 
 	}
