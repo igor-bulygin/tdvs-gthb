@@ -860,6 +860,19 @@ input[type="checkbox"] .styled:checked + label::after,
 input[type="radio"] .styled:checked + label::after {
   color: #fff; }
 
+.modal-content {
+  width: 532px;
+  margin: 0 auto; }
+  .modal-content .modal-header {
+    border-bottom: 0; }
+    .modal-content .modal-header h3 {
+      font-size: 14px;
+      color: #1C1919;
+      float: left;
+      text-transform: uppercase;
+      font-family: "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      letter-spacing: 0.2px; }
+
 .showcase figcaption img, .banner-deviser-content .deviser-profile .avatar img, .product-description .product-description-content .work-description-wrapper .comment-wrapper .avatar img, .product-description .product-description-content .work-description-wrapper .comment-user .avatar img {
   border: 1px solid #9a9a9a;
   border-radius: 180px 180px 180px 180px !important;
@@ -973,7 +986,7 @@ input[type="radio"] .styled:checked + label::after {
   margin: 0;
   height: 70px;
   padding: 10px 0;
-  z-index: 99999999; }
+  z-index: 1000; }
   @media (max-width: 768px) {
     .navbar {
       height: auto; } }

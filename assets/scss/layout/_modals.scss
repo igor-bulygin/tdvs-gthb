@@ -1,0 +1,19 @@
+// ==========================================================================
+// Modals
+// ==========================================================================
+.modal-content{
+    width: 532px;
+    margin: 0 auto;
+    .modal-header{
+         border-bottom: 0;
+        h3{
+            font-size: 14px;
+            color: $black;
+            float: left;
+            text-transform: uppercase;
+            font-family: $font-family--bold;
+            letter-spacing: 0.2px;
+        }
+    }
+}
+
