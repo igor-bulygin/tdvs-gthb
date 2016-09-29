@@ -6,7 +6,7 @@ input[type=file]:focus, input[type=checkbox]:focus, input[type=radio]:focus,
 input[type=file]:hover, input[type=checkbox]:hover, input[type=radio]:hover,
 input[type=file]:visited, input[type=checkbox]:visited, input[type=radio]:visited,
 input[type=file]:active, input[type=checkbox]:active, input[type=radio]:active,
-.checkbox label::before, .checkbox label::after, button:focus{
+.checkbox label::before, .checkbox label::after, button:focus, :focus{
     outline:none!important;
     -webkit-box-shadow: none!important;
     box-shadow: none!important;
