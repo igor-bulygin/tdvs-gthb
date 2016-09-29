@@ -2106,6 +2106,12 @@ input[type="radio"] .styled:checked + label::after {
     right: 20px;
     top: 10px; }
 
+.see-resume-wrapper a {
+  color: #ffffff; }
+.see-resume-wrapper span {
+  cursor: pointer;
+  padding: 0 0 0 10px; }
+
 .video-container {
   margin: 40px 0; }
   .video-container .input-video {

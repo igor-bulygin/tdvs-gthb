@@ -61,8 +61,10 @@ $this->params['deviser'] = $deviser;
 													<div ng-if="!editAboutCtrl.deviser.curriculum" ng-cloak>
 														<button class="btn btn-default btn-green" ngf-select="editAboutCtrl.uploadCV($file)" ngf-accept="'application/pdf'">Add Resume</button>
 													</div>
-													<div ng-if="editAboutCtrl.deviser.curriculum" ng-cloak>
-														<p><a ng-href="{{editAboutCtrl.curriculum}}">See resume</a> <span class="glyphicon glyphicon-refresh" ngf-select="editAboutCtrl.uploadCV($file)" ngf-accept="'application/pdf'"></span><span class="glyphicon glyphicon-remove" ng-click="editAboutCtrl.deleteCV()"></span></p>
+													<div class="see-resume-wrapper" ng-if="editAboutCtrl.deviser.curriculum" ng-cloak>
+														<a ng-href="{{editAboutCtrl.curriculum}}">See resume</a> 
+														<span class="ion-loop" ngf-select="editAboutCtrl.uploadCV($file)" ngf-accept="'application/pdf'"></span>
+														<span class="ion-close-circled" ng-click="editAboutCtrl.deleteCV()"></span>
 													</div>
 												</div>
 												<ol class="nya-bs-select about-edit-select lang" ng-model="editAboutCtrl.biography_language" ng-cloak>
