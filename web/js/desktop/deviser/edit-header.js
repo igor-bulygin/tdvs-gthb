@@ -6,7 +6,11 @@
 		vm.description_language = "en-US";
 		vm.openCropModal = openCropModal;
 		vm.update = update;
+		vm.searchPlace = searchPlace;
 		vm.limit_text_biography = 140;
+		vm.gApiOptions = {
+			types: ['(cities)']
+		}
 
 		function getDeviser() {
 			deviserDataService.Profile.get({
@@ -16,6 +20,8 @@
 				//set name
 				if (!vm.deviser.personal_info.brand_name)
 					vm.deviser.personal_info.brand_name = angular.copy(vm.deviser.personal_info.name);
+				//set city
+				vm.city = vm.deviser.personal_info.city + ', ' + vm.deviser.personal_info.country;
 				//set images
 				if (vm.deviser.media.header_cropped)
 					vm.header = currentHost() + vm.deviser.url_images + vm.deviser.media.header_cropped;
@@ -45,6 +51,14 @@
 		}
 
 		init();
+
+		function searchPlace() {
+			if(vm.city.address_components && vm.city.address_components.length > 0){
+				vm.deviser.personal_info.city = vm.city.name;
+				vm.deviser.personal_info.country = vm.city.address_components[vm.city.address_components.length - 1]['short_name'];
+				update('personal_info', vm.deviser.personal_info);
+			}
+		}
 
 		function update(field, value) {
 			var patch = new deviserDataService.Profile;
