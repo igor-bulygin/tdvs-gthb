@@ -2024,6 +2024,11 @@ input[type="radio"] .styled:checked + label::after {
   display: block;
   z-index: 999;
   padding-top: 1px; }
+  .edit-cover-photo-icon.centered {
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto; }
 
 .edit-cover-crop-icon {
   color: #ffffff;
@@ -2036,10 +2041,9 @@ input[type="radio"] .styled:checked + label::after {
   cursor: pointer;
   top: 70px;
   right: 500px;
-  background-color: #1C1919;
   border-radius: 51px;
   display: block;
-  z-index: 99999;
+  z-index: 999;
   padding-top: 10px; }
 
 .edit-avatar-photo-icon {

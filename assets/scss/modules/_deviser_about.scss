@@ -198,6 +198,12 @@
     display: block;
     z-index: 999;
     padding-top: 1px;
+    &.centered{
+        left: 0; 
+        right: 0; 
+        margin-left: auto; 
+        margin-right: auto; 
+    }
 }
 .edit-cover-crop-icon{
     color: $white;
@@ -210,10 +216,9 @@
     cursor: pointer;
     top: 70px;
     right: 500px;
-    background-color: $black;
     border-radius: 51px;
     display: block;
-    z-index: 99999;
+    z-index: 999;
     padding-top: 10px;
 }
 .edit-avatar-photo-icon{
