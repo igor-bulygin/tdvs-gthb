@@ -33,7 +33,8 @@
 			patch.press = [];
 			patch.deviser_id = vm.deviser.id;
 			vm.images.forEach(function (element) {
-				patch.press.push(element.filename);
+				if(patch.press.indexOf(element.filename)<0)
+					patch.press.push(element.filename);
 			});
 			patch.$update().then(function (dataPress) {
 				getDeviser();
