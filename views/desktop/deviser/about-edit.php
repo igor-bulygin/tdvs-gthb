@@ -50,33 +50,38 @@ $this->params['deviser'] = $deviser;
 													</div>
 												</div>
 												<div class="subtitle">
-													<ol class="nya-bs-select about-edit-select" ng-model="editAboutCtrl.deviser.categories" multiple ng-cloak ng-if="editAboutCtrl.categories">
+													<ol class="nya-bs-select about-edit-select" ng-model="editAboutCtrl.deviser.categories" multiple ng-cloak ng-if="editAboutCtrl.categories" ng-model-options="{debounce: 1000}" ng-change="editAboutCtrl.update()" ng-blur="editAboutCtrl.update()">
 														<li nya-bs-option="category in editAboutCtrl.categories" data-value="category.id" deep-watch="true">
 															<a href="">{{category.name}} <span class="glyphicon glyphicon-ok check-mark"></span></a>
 														</li>
 													</ol>
 													<span class="glyphicon glyphicon-pencil pencil-edit"></span>
 												</div>
-												<?php if ($deviser->hasResumeFile()) { ?>
-													<div class="resume-header"><a href="<?= $deviser->getUrlResumeFile() ?>">See resume</a></div>
-													<?php } ?>
-														<ol class="nya-bs-select about-edit-select lang" ng-model="editAboutCtrl.biography_language" ng-cloak>
-															<li nya-bs-option="language in editAboutCtrl.languages" data-value="language.code" deep-watch="true">
-																<a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
-															</li>
-														</ol>
-														<span class="glyphicon glyphicon-pencil pencil-edit"></span>
-														<div class="editable-text-about" text-angular ta-text-editor-class="header" ng-model="editAboutCtrl.deviser.text_biography[editAboutCtrl.biography_language]" ng-cloak ta-toolbar="[]" placeholder="Write your brand statment / mission / biography."></div>
-														<span class="glyphicon glyphicon-pencil" style="color:white;position: absolute;top: 313px;right: 45px;"></span>
-														<div class="text-center">
-															<button class="btn btn-default btn-green" ng-click="editAboutCtrl.update()">Update</button>
-														</div>
+												<div class="resume-header">
+													<div ng-if="!editAboutCtrl.deviser.curriculum" ng-cloak>
+														<button class="btn btn-default btn-green" ngf-select="editAboutCtrl.uploadCV($file)" ngf-accept="'application/pdf'">Add Resume</button>
+													</div>
+													<div ng-if="editAboutCtrl.deviser.curriculum" ng-cloak>
+														<p><a ng-href="{{editAboutCtrl.curriculum}}">See resume</a> <span class="glyphicon glyphicon-refresh" ngf-select="editAboutCtrl.uploadCV($file)" ngf-accept="'application/pdf'"></span><span class="glyphicon glyphicon-remove" ng-click="editAboutCtrl.deleteCV()"></span></p>
+													</div>
+												</div>
+												<ol class="nya-bs-select about-edit-select lang" ng-model="editAboutCtrl.biography_language" ng-cloak>
+													<li nya-bs-option="language in editAboutCtrl.languages" data-value="language.code" deep-watch="true">
+														<a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
+													</li>
+												</ol>
+												<span class="glyphicon glyphicon-pencil pencil-edit"></span>
+												<div class="editable-text-about" text-angular ta-text-editor-class="header" ng-model="editAboutCtrl.deviser.text_biography[editAboutCtrl.biography_language]" ng-cloak ta-toolbar="[]" placeholder="Write your brand statment / mission / biography." ng-model-options="{debounce: 1000}" ng-change="editAboutCtrl.update()" ng-blur="editAboutCtrl.update()"></div>
+												<span class="glyphicon glyphicon-pencil" style="color:white;position: absolute;top: 313px;right: 45px;"></span>
+												<div class="text-center">
+													<button class="btn btn-default btn-green" ng-click="editAboutCtrl.update()">Update</button>
+												</div>
 											</div>
 										</div>
 									</div>
 									<div class="col-md-7 pad-about about-grid">
 										<div ng-if="editAboutCtrl.isDropAvailable">
-											<div class="photo-loader loader-about" ngf-drop ngf-select ngf-change="editAboutCtrl.uploadPhoto($files,$invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="editAboutCtrl.isDropAvailable" ngf-multiple="true">
+											<div class="photo-loader loader-about" ngf-drag-over-class="drag-over" ngf-drop ngf-select ngf-change="editAboutCtrl.uploadPhoto($files,$invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="editAboutCtrl.isDropAvailable" ngf-multiple="true">
 												<div class="plus-add">+</div>
 												<span>Drag and drop<br/>or press this button to add photos</span>
 											</div>

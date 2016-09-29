@@ -5,7 +5,9 @@ use yii\base\Model;
 
 /**
  * @property string $header
+ * @property string $header_cropped
  * @property string $profile
+ * @property string $profile_cropped
  * @property array $photos
  */
 class PersonMedia extends Model
@@ -67,6 +69,28 @@ class PersonMedia extends Model
 		$this->photos = [];
 
 		$this->setScenario(Person::SERIALIZE_SCENARIO_LOAD_SUB_DOCUMENT);
+	}
+
+	/**
+	 * Assign some default attributes for historical objects
+	 *
+	 * @param array $data
+	 * @param null $formName
+	 * @return bool
+	 */
+	public function load($data, $formName = null)
+	{
+		$loaded = parent::load($data, $formName);
+
+		if (empty($this->header_cropped)) {
+			$this->header_cropped = $this->header;
+		}
+
+		if (empty($this->profile_cropped)) {
+			$this->profile_cropped = $this->profile;
+		}
+
+		return $loaded;
 	}
 
 

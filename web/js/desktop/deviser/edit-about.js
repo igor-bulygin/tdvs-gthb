@@ -11,6 +11,8 @@
 		var vm = this;
 		vm.update = update;
 		vm.uploadPhoto = uploadPhoto;
+		vm.uploadCV = uploadCV;
+		vm.deleteCV = deleteCV;
 		vm.deleteImage = delete_image;
 		vm.biography_language = "en-US";
 
@@ -20,6 +22,7 @@
 			}).$promise.then(function (dataDeviser) {
 				vm.deviser = dataDeviser;
 				vm.images = UtilService.parseImagesUrl(vm.deviser.media.photos, vm.deviser.url_images);
+				vm.curriculum = currentHost() + vm.deviser.url_images + vm.deviser.curriculum;
 			}, function (err) {
 				toastr.error(err);
 			});
@@ -67,7 +70,44 @@
 				patch.media.photos.push(element.filename);
 			});
 			patch.$update().then(function (dataUpdate) {
-				//ok!
+				getDeviser();
+			}, function (err) {
+				for (var key in err.data.errors) {
+					toastr.error(err.data.errors[key]);
+				}
+			});
+		}
+
+		function uploadCV(file) {
+			var data = {
+				type: 'deviser-curriculum',
+				deviser_id: vm.deviser.id,
+				file: file
+			}
+			Upload.upload({
+				url: deviserDataService.Uploads,
+				data: data
+			}).then(function (dataCV) {
+				var patch = new deviserDataService.Profile;
+				patch.scenario = "deviser-update-profile";
+				patch.deviser_id = vm.deviser.id;
+				patch.curriculum = dataCV.data.filename;
+				patch.$update().then(function (dataUpdate) {
+					toastr.success("CV updated.");
+					getDeviser();
+				}, function (err) {
+					toastr.error(err);
+				});
+			})
+		}
+
+		function deleteCV() {
+			var patch = new deviserDataService.Profile;
+			patch.scenario = 'deviser-update-profile';
+			patch.deviser_id = vm.deviser.id;
+			patch.curriculum = "";
+			patch.$update().then(function (dataUpdate) {
+				getDeviser();
 			}, function (err) {
 				toastr.error(err);
 			});
@@ -103,8 +143,12 @@
 		}
 
 		function delete_image(index) {
-			vm.images.splice(index, 1);
-			update();
+			if (vm.images.length > 3) {
+				vm.images.splice(index, 1);
+				update();
+			} else {
+				toastr.error("Must have between 3 and 7 photos.");
+			}
 		}
 
 	}

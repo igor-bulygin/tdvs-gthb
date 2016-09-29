@@ -36,7 +36,7 @@ $deviser = $this->params['deviser'];
 							</ol>
 							<span class="glyphicon glyphicon-pencil pencil-edit"></span>
 							<div style="width:100%;float:left;position:relative;">
-								<input type="text" class="description" ng-model="editHeaderCtrl.deviser.text_short_description[editHeaderCtrl.description_language]" ng-model-options="{debounce: 3000}" ng-change="editHeaderCtrl.update('text_short_description', editHeaderCtrl.deviser.text_short_description)" ng-blur="editHeaderCtrl.update('text_short_description', editHeaderCtrl.deviser.text_short_description)" placeholder="Please write a short description here.">
+								<input type="text" class="" ng-model="editHeaderCtrl.deviser.text_short_description[editHeaderCtrl.description_language]" ng-model-options="{debounce: 3000}" ng-change="editHeaderCtrl.update('text_short_description', editHeaderCtrl.deviser.text_short_description)" ng-blur="editHeaderCtrl.update('text_short_description', editHeaderCtrl.deviser.text_short_description)" placeholder="Please write a short description here.">
 								<span ng-cloak>{{editHeaderCtrl.deviser.text_short_description[editHeaderCtrl.description_language].length}}/{{editHeaderCtrl.limit_text_biography}}</span>
 								<span class="glyphicon glyphicon-pencil pencil-edit absolute-pencil"></span>
 							</div>

@@ -1,14 +1,27 @@
 (function () {
 	"use strict";
 
-	function controller(productDataService, UtilService, toastr) {
+	function controller(productDataService, UtilService, toastr, $location) {
 		var vm = this;
 		vm.update = update;
+
+		function parseCategories() {
+			var url = $location.absUrl();
+			var queries = url.split("?")[1];
+			var categories = queries.split('=');
+			if (categories.length > 2) {
+				vm.category = categories[1].split('&')[0];
+				vm.subcategory = categories[2];
+			} else {
+				vm.category = categories[1];
+			}
+		}
 
 		function getProducts() {
 			productDataService.Product.get({
 				deviser: UtilService.returnDeviserIdFromUrl(),
-				limit: 9999
+				limit: 9999,
+				categories: vm.subcategory || vm.category
 			}).$promise.then(function (dataProducts) {
 				vm.products = dataProducts.items;
 				vm.products.forEach(function (element) {
@@ -21,6 +34,7 @@
 		}
 
 		function init() {
+			parseCategories();
 			getProducts();
 		}
 
