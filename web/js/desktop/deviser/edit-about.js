@@ -10,6 +10,7 @@
 	function controller(deviserDataService, UtilService, languageDataService, toastr, productDataService, Upload, $timeout) {
 		var vm = this;
 		vm.update = update;
+		vm.move = move;
 		vm.uploadPhoto = uploadPhoto;
 		vm.uploadCV = uploadCV;
 		vm.deleteCV = deleteCV;
@@ -54,28 +55,38 @@
 
 		init();
 
-		function update(index) {
-			if (index >= 0) {
-				vm.images.splice(index, 1);
-			}
-			var patch = new deviserDataService.Profile;
-			patch.scenario = "deviser-update-profile";
-			patch.deviser_id = vm.deviser.id;
-			patch.categories = vm.deviser.categories;
-			patch.text_biography = vm.deviser.text_biography;
-			patch.text_short_description = vm.deviser.text_short_description;
-			patch.media = vm.deviser.media;
-			patch.media.photos = [];
+		function parsePhotos() {
+			var media = vm.deviser.media;
+			media.photos = [];
 			vm.images.forEach(function (element) {
-				patch.media.photos.push(element.filename);
+				if(media.photos.indexOf(element.filename) < 0)
+					media.photos.push(element.filename);
 			});
-			patch.$update().then(function (dataUpdate) {
+			return media;
+		}
+
+		function move(index) {
+			if(index > -1) {
+				vm.images.splice(index,1);
+				var media = parsePhotos();
+				update('media', media);
+			} else {
+				toastr.error("Could not move.");
+			}
+		}
+
+		function update(key, value) {
+			var patch = new deviserDataService.Profile;
+			patch.scenario = 'deviser-update-profile';
+			patch.deviser_id = vm.deviser.id;
+			patch[key] = value;
+			patch.$update().then(function(dataUpdate) {
 				getDeviser();
 			}, function (err) {
-				for (var key in err.data.errors) {
+				for(var key in err.data.errors) {
 					toastr.error(err.data.errors[key]);
 				}
-			});
+			})
 		}
 
 		function uploadCV(file) {
@@ -88,29 +99,14 @@
 				url: deviserDataService.Uploads,
 				data: data
 			}).then(function (dataCV) {
-				var patch = new deviserDataService.Profile;
-				patch.scenario = "deviser-update-profile";
-				patch.deviser_id = vm.deviser.id;
-				patch.curriculum = dataCV.data.filename;
-				patch.$update().then(function (dataUpdate) {
-					toastr.success("CV updated.");
-					getDeviser();
-				}, function (err) {
-					toastr.error(err);
-				});
+				update('curriculum', dataCV.data.filename);				
+			}, function (err) {
+				toastr.error(err);
 			})
 		}
 
 		function deleteCV() {
-			var patch = new deviserDataService.Profile;
-			patch.scenario = 'deviser-update-profile';
-			patch.deviser_id = vm.deviser.id;
-			patch.curriculum = "";
-			patch.$update().then(function (dataUpdate) {
-				getDeviser();
-			}, function (err) {
-				toastr.error(err);
-			});
+			update('curriculum', '');			
 		}
 
 		function uploadPhoto(images, errImages) {
@@ -129,7 +125,7 @@
 					toastr.success("Photo uploaded!");
 					vm.deviser.media.photos.unshift(dataUpload.data.filename);
 					vm.images = UtilService.parseImagesUrl(vm.deviser.media.photos, vm.deviser.url_images);
-					update();
+					update('media', vm.deviser.media);
 					$timeout(function () {
 						delete file.progress;
 					}, 1000);
@@ -145,14 +141,13 @@
 		function delete_image(index) {
 			if (vm.images.length > 3) {
 				vm.images.splice(index, 1);
-				update();
+				var media = parsePhotos();				
+				update('media', media);
 			} else {
 				toastr.error("Must have between 3 and 7 photos.");
 			}
 		}
-
 	}
-
 
 	angular
 		.module('todevise')

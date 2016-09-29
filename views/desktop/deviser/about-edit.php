@@ -50,7 +50,7 @@ $this->params['deviser'] = $deviser;
 													</div>
 												</div>
 												<div class="subtitle">
-													<ol class="nya-bs-select about-edit-select" ng-model="editAboutCtrl.deviser.categories" multiple ng-cloak ng-if="editAboutCtrl.categories" ng-model-options="{debounce: 1000}" ng-change="editAboutCtrl.update()" ng-blur="editAboutCtrl.update()">
+													<ol class="nya-bs-select about-edit-select" ng-model="editAboutCtrl.deviser.categories" multiple ng-cloak ng-if="editAboutCtrl.categories" ng-model-options="{debounce: 1000}" ng-change="editAboutCtrl.update('categories', editAboutCtrl.deviser.categories)" ng-blur="editAboutCtrl.update('categories', editAboutCtrl.deviser.categories)">
 														<li nya-bs-option="category in editAboutCtrl.categories" data-value="category.id" deep-watch="true">
 															<a href="">{{category.name}} <span class="glyphicon glyphicon-ok check-mark"></span></a>
 														</li>
@@ -73,11 +73,8 @@ $this->params['deviser'] = $deviser;
 													</li>
 												</ol>
 												<span class="glyphicon glyphicon-pencil pencil-edit"></span>
-												<div class="editable-text-about" text-angular ta-text-editor-class="header" ng-model="editAboutCtrl.deviser.text_biography[editAboutCtrl.biography_language]" ng-cloak ta-toolbar="[]" placeholder="Write your brand statment / mission / biography." ng-model-options="{debounce: 1000}" ng-change="editAboutCtrl.update()" ng-blur="editAboutCtrl.update()"></div>
+												<div class="editable-text-about" text-angular ta-text-editor-class="header" ng-model="editAboutCtrl.deviser.text_biography[editAboutCtrl.biography_language]" ng-cloak ta-toolbar="[]" placeholder="Write your brand statment / mission / biography." ng-model-options="{debounce: 1000}" ng-change="editAboutCtrl.update('text_biography', editAboutCtrl.deviser.text_biography)" ng-blur="editAboutCtrl.update('text_biography', editAboutCtrl.deviser.text_biography)"></div>
 												<span class="glyphicon glyphicon-pencil" style="color:white;position: absolute;top: 438px;right: 45px;"></span>
-												<div class="text-center">
-													<button class="btn btn-default btn-green" ng-click="editAboutCtrl.update()">Update</button>
-												</div>
 											</div>
 										</div>
 									</div>
@@ -99,7 +96,7 @@ $this->params['deviser'] = $deviser;
 											<input type="file" name="file" ngf-select="editAboutCtrl.uploadPhoto($files, $invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="editAboutCtrl.isDropAvailable" ngf-multiple="true">
 										</div>
 										<div class="item draggable-list about-edit-list" dnd-list="editAboutCtrl.images" ng-if="editAboutCtrl.images.length > 0" ng-cloak>
-											<div class="col-sm-4 pad-about image-about-edit" ng-repeat="image in editAboutCtrl.images" dnd-draggable="image" dnd-effect-allowed="move" dnd-moved="editAboutCtrl.update($index)">
+											<div class="col-sm-4 pad-about image-about-edit" ng-repeat="image in editAboutCtrl.images" dnd-draggable="image" dnd-effect-allowed="move" dnd-moved="editAboutCtrl.move($index)">
 												<span class="ion-android-close x-close" ng-click="editAboutCtrl.deleteImage($index)"></span>
 												<img ng-src="{{image.url}}" class="grid-image draggable-img">
 											</div>
