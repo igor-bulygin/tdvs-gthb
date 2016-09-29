@@ -282,6 +282,8 @@
 
 .ta-scroll-window > .ta-bind {
     padding: 0!important;
+    height: 21px!important;
+    min-height: auto!important;
 }
 .short-description-input{
     color: $white;
