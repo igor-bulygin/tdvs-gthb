@@ -118,15 +118,17 @@
 			})
 
 			modalInstance.result.then(function (imageCropped) {
-				switch (type) {
-				case "header_cropped":
-					vm.header = imageCropped;
-					upload(imageCropped, type);
-					break;
-				case "profile_cropped":
-					vm.profile = imageCropped;
-					upload(imageCropped, type);
-					break;
+				if(imageCropped) {
+					switch (type) {
+					case "header_cropped":
+						vm.header = imageCropped;
+						upload(imageCropped, type);
+						break;
+					case "profile_cropped":
+						vm.profile = imageCropped;
+						upload(imageCropped, type);
+						break;
+					}
 				}
 			}, function () {
 				console.log("dismissed");
