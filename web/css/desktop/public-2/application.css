@@ -873,6 +873,17 @@ input[type="radio"] .styled:checked + label::after {
       font-family: "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
       letter-spacing: 0.2px; }
 
+.modal-header .close span {
+  color: #1C1919;
+  text-shadow: none; }
+
+.crop-modal {
+  background: #E4E4E4;
+  overflow: hidden;
+  width: 500px;
+  height: 350px;
+  margin-bottom: 20px; }
+
 .showcase figcaption img, .banner-deviser-content .deviser-profile .avatar img, .product-description .product-description-content .work-description-wrapper .comment-wrapper .avatar img, .product-description .product-description-content .work-description-wrapper .comment-user .avatar img {
   border: 1px solid #9a9a9a;
   border-radius: 180px 180px 180px 180px !important;

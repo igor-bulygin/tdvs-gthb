@@ -16,4 +16,15 @@
         }
     }
 }
+.modal-header .close span{
+    color: $black;
+    text-shadow: none;
+}
+.crop-modal{
+    background: #E4E4E4;
+    overflow:hidden;
+    width:500px;
+    height:350px;
+    margin-bottom:20px;
+}
 
