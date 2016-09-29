@@ -1932,9 +1932,11 @@ input[type="radio"] .styled:checked + label::after {
 
 .loader-about {
   width: 100%;
-  height: 350px;
-  border: 4px dashed #9a9a9a;
+  height: 250px;
+  border: 1px solid #1C1919;
   margin: 0; }
+  .loader-about .plus-add {
+    margin: 50px auto 10px; }
 
 .image-about-edit {
   max-height: 180px;
@@ -1973,8 +1975,6 @@ input[type="radio"] .styled:checked + label::after {
   height: 180px;
   float: left; }
 
-.about-edit-select.header-lang {
-  margin-left: 12px !important; }
 .about-edit-select.lang {
   margin-bottom: 20px; }
 .about-edit-select button {
@@ -2111,6 +2111,19 @@ input[type="radio"] .styled:checked + label::after {
 .see-resume-wrapper span {
   cursor: pointer;
   padding: 0 0 0 10px; }
+
+.ta-scroll-window > .ta-bind {
+  padding: 0 !important; }
+
+.short-description-input {
+  color: #ffffff;
+  background-color: transparent;
+  border: none;
+  min-width: 400px;
+  margin-top: 20px; }
+
+.text-limitation {
+  color: #ffffff; }
 
 .video-container {
   margin: 40px 0; }

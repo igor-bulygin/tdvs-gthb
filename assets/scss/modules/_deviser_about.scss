@@ -74,9 +74,12 @@
 }
 .loader-about{
     width: 100%;
-    height: 350px;
-    border: 4px dashed $dark_grey;
+    height: 250px;
+    border: 1px solid $black;
     margin: 0;
+    .plus-add{
+            margin: 50px auto 10px;
+    }
 }
 .image-about-edit{
     max-height: 180px;
@@ -118,9 +121,6 @@
     }
 }
 .about-edit-select{
-    &.header-lang{
-        margin-left:12px!important;
-    }
     &.lang{
         margin-bottom: 20px;
     }
@@ -278,4 +278,18 @@
         cursor: pointer;
         padding: 0 0 0 10px;
     }
+}
+
+.ta-scroll-window > .ta-bind {
+    padding: 0!important;
+}
+.short-description-input{
+    color: $white;
+    background-color: transparent;
+    border: none;
+    min-width:400px;
+    margin-top: 20px;
+}
+.text-limitation{
+    color: $white;
 }
