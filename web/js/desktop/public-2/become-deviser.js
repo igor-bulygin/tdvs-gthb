@@ -34,8 +34,6 @@
 				}, function (err) {
 					toastr.error("Error saving form!");
 				})
-			} else {
-				toastr.error("Invalid form!");
 			}
 		}
 

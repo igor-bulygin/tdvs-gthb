@@ -21,7 +21,8 @@
 				if (!vm.deviser.personal_info.brand_name)
 					vm.deviser.personal_info.brand_name = angular.copy(vm.deviser.personal_info.name);
 				//set city
-				vm.city = vm.deviser.personal_info.city + ', ' + vm.deviser.personal_info.country;
+				if(vm.deviser.personal_info.city && vm.deviser.personal_info.country)
+					vm.city = vm.deviser.personal_info.city + ', ' + vm.deviser.personal_info.country;
 				//set images
 				if (vm.deviser.media.header_cropped)
 					vm.header = currentHost() + vm.deviser.url_images + vm.deviser.media.header_cropped;
