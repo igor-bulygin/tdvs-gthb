@@ -201,17 +201,17 @@ $productImages = $product->getUrlGalleryImages();
 		<div class="container">
 			<!-- Nav tabs -->
 			<ul class="nav nav-tabs product-tabs" role="tablist">
-				<li role="presentation">
+				<li role="presentation" class="active">
 					<a href="#description" aria-controls="description" role="tab" data-toggle="tab">Description &amp; User
 					reviews</a>
 				</li>
-				<li role="presentation" class="active">
+				<li role="presentation">
 					<a href="#works" aria-controls="works" role="tab" data-toggle="tab">More works by <?= $deviser->personalInfo->getBrandName() ?></a>
 				</li>
 			</ul>
 			<!-- Tab panes -->
 			<div class="tab-content product-description-content">
-				<div role="tabpanel" class="tab-pane work-description-wrapper" id="description">
+				<div role="tabpanel" class="tab-pane work-description-wrapper active" id="description">
 					<div class="work-profile-description-wrapper">
 						<div class="col-sm-8 pad-product">
 							<div class="title">Work Description</div>
@@ -413,7 +413,7 @@ $productImages = $product->getUrlGalleryImages();
 						</div>
 					</div>
 				</div>
-				<div role="tabpanel" class="tab-pane active" id="works">
+				<div role="tabpanel" class="tab-pane" id="works">
 					<nav class="products-menu">
 						<ul>
 							<!--						<li>-->

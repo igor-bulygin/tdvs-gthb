@@ -14,6 +14,7 @@ class ProductDetailAsset extends AssetBundle {
 		'js/desktop/product/select-selector/select-selector.js',
 		'js/desktop/product/color-selector/color-selector.js',
 		'js/desktop/product/size-selector/size-selector.js',
+		'js/desktop/product/tab-height-resizer.js'
     ];
 	public $depends = [
 		'app\assets\desktop\pub\PublicCommonAsset',
