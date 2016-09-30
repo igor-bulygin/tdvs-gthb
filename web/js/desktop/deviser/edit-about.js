@@ -76,6 +76,11 @@
 		}
 
 		function update(key, value) {
+			if(key === 'text_biography') {
+				for(var language in value) {
+					value[language]=value[language].replace(/<[^\/>][^>]*><\/[^>]+>/gim, "");
+				}
+			}
 			var patch = new deviserDataService.Profile;
 			patch.scenario = 'deviser-update-profile';
 			patch.deviser_id = vm.deviser.id;
@@ -99,14 +104,14 @@
 				url: deviserDataService.Uploads,
 				data: data
 			}).then(function (dataCV) {
-				update('curriculum', dataCV.data.filename);				
+				update('curriculum', dataCV.data.filename);
 			}, function (err) {
 				toastr.error(err);
 			})
 		}
 
 		function deleteCV() {
-			update('curriculum', '');			
+			update('curriculum', '');
 		}
 
 		function uploadPhoto(images, errImages) {
@@ -141,7 +146,7 @@
 		function delete_image(index) {
 			if (vm.images.length > 3) {
 				vm.images.splice(index, 1);
-				var media = parsePhotos();				
+				var media = parsePhotos();
 				update('media', media);
 			} else {
 				toastr.error("Must have between 3 and 7 photos.");
