@@ -2098,7 +2098,7 @@ input[type="radio"] .styled:checked + label::after {
   left: 529px; }
 
 .top-bar-red {
-  background-color: #F7284B;
+  background-color: #924cfc;
   position: absolute;
   top: 70px;
   width: 100%;
@@ -2115,7 +2115,10 @@ input[type="radio"] .styled:checked + label::after {
     font-size: 12px;
     position: absolute;
     right: 20px;
-    top: 10px; }
+    top: 10px;
+    background-color: transparent; }
+    .top-bar-red button:hover {
+      background-color: #753cca; }
 
 .see-resume-wrapper a {
   color: #ffffff; }
@@ -2130,13 +2133,43 @@ input[type="radio"] .styled:checked + label::after {
 
 .short-description-input {
   color: #ffffff;
+  border: 1px solid #ffffff;
   background-color: transparent;
-  border: none;
+  height: 100px;
   min-width: 400px;
-  margin-top: 20px; }
+  margin-top: 20px;
+  padding: 40px 10px 10px 10px;
+  font-size: 16px;
+  letter-spacing: 0.7px;
+  font-family: "Playfair Display", Georgia, serif; }
 
 .text-limitation {
   color: #ffffff; }
+
+.location-edit {
+  color: #ffffff;
+  background-color: transparent;
+  border: none;
+  padding-left: 0;
+  font-size: 20px;
+  font-family: "Playfair Display", Georgia, serif; }
+
+.editable-name {
+  font-family: "Univers Thin Ultra Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 4.9px;
+  line-height: 72px;
+  display: inline-block;
+  font-size: 80px; }
+  .editable-name p {
+    padding: 0;
+    margin: 0; }
+
+.header-lang {
+  position: absolute;
+  top: 113px;
+  left: 195px; }
 
 .video-container {
   margin: 40px 0; }
