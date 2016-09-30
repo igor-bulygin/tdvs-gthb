@@ -2171,6 +2171,19 @@ input[type="radio"] .styled:checked + label::after {
   top: 113px;
   left: 195px; }
 
+.short-description-input-wrapper ::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  color: #ffffff; }
+.short-description-input-wrapper ::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #ffffff; }
+.short-description-input-wrapper :-ms-input-placeholder {
+  /* IE 10+ */
+  color: #ffffff; }
+.short-description-input-wrapper :-moz-placeholder {
+  /* Firefox 18- */
+  color: #ffffff; }
+
 .video-container {
   margin: 40px 0; }
   .video-container .input-video {

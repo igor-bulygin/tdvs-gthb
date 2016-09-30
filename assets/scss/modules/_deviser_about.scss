@@ -330,3 +330,17 @@
     top: 113px;
     left: 195px;
 }
+.short-description-input-wrapper{
+    ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+      color: $white;
+    }
+    ::-moz-placeholder { /* Firefox 19+ */
+      color: $white;
+    }
+    :-ms-input-placeholder { /* IE 10+ */
+      color: $white;
+    }
+    :-moz-placeholder { /* Firefox 18- */
+      color: $white;
+    }
+}
