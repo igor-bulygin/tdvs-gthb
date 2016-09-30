@@ -121,6 +121,7 @@
     }
 }
 .about-edit-select{
+    z-index: 9;
     &.lang{
         margin-bottom: 20px;
     }
@@ -132,23 +133,28 @@
         padding-left: 0;
         @include border-radius(0,0,0,0);
         &:hover{
-            border: 1px solid $white!important;
+            border: 1px solid transparent!important;
+            border-bottom: 1px solid $red!important;
             background-color: transparent;
             color: $white;
         }
         &:active{
+            border: 1px solid transparent!important;
+            border-bottom: 1px solid $white!important;
             background-color:transparent;
             color: $white;
             border: 1px solid transparent;
         }
         &:focus{
+            border: 1px solid transparent!important;
+            border-bottom: 1px solid $white!important;
             background-color: transparent;
             color: $white;
             border: 1px solid transparent;
         }
     }
     .caret{
-        display: none;
+        color: $white;
     }
     .dropdown-menu{
         width: 100%;
@@ -293,8 +299,8 @@
     color: $white;
     border: 1px solid $white;
     background-color: transparent;
-    height: 100px;
-    min-width: 400px;
+    height: 115px;
+    width: 450px;
     margin-top: 20px;
     padding: 40px 10px 10px 10px;
     font-size: 16px;
@@ -303,6 +309,10 @@
 }
 .text-limitation{
     color: $white;
+    position: absolute;
+    top: 110px;
+    right: 35px;
+    font-family: $font-family--serif;
 }
 .location-edit{
     color: #ffffff;
@@ -331,6 +341,7 @@
     left: 195px;
 }
 .short-description-input-wrapper{
+    position:relative;
     ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
       color: $white;
     }
@@ -342,5 +353,11 @@
     }
     :-moz-placeholder { /* Firefox 18- */
       color: $white;
+    }
+}
+.deviser-data{
+    .open > .dropdown-toggle.btn-default {
+        border-color: transparent !important;
+        border-bottom: 1px solid $white!important;
     }
 }

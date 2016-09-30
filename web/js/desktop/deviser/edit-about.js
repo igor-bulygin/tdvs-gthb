@@ -3,7 +3,7 @@
 
 	function config(nyaBsConfigProvider) {
 		nyaBsConfigProvider.setLocalizedText('en-us', {
-			defaultNoneSelection: 'Choose your field of work'
+			defaultNoneSelection: 'Choose an option'
 		});
 	}
 

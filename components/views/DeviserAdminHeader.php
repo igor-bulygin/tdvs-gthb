@@ -40,7 +40,10 @@ $deviser = $this->params['deviser'];
                                 <textarea rows="4" cols="50" class="short-description-input" ng-model="editHeaderCtrl.deviser.text_short_description[editHeaderCtrl.description_language]" ng-model-options="{debounce: 3000}" ng-change="editHeaderCtrl.update('text_short_description', editHeaderCtrl.deviser.text_short_description)" ng-blur="editHeaderCtrl.update('text_short_description', editHeaderCtrl.deviser.text_short_description)" placeholder="Please write a short description here.">
 
                                 </textarea>
-                                <span class="text-limitation" ng-cloak><span ng-bind="editHeaderCtrl.deviser.text_short_description[editHeaderCtrl.description_language].length"></span>/<span ng-bind="editHeaderCtrl.limit_text_biography"></span></span>
+                                <span class="text-limitation" ng-cloak>
+                                    <span ng-bind="editHeaderCtrl.limit_text_biography-editHeaderCtrl.deviser.text_short_description[editHeaderCtrl.description_language].length"></span>        
+                                    <!--<span ng-bind="editHeaderCtrl.deviser.text_short_description[editHeaderCtrl.description_language].length"></span>/<span ng-bind="editHeaderCtrl.limit_text_biography"></span>-->
+                                </span>
                                 <span class="glyphicon glyphicon-pencil pencil-edit"></span>
                             </div>					
 						</div>
