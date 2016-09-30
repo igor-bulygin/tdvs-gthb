@@ -67,14 +67,15 @@ $this->params['deviser'] = $deviser;
 														<span class="ion-close-circled" ng-click="editAboutCtrl.deleteCV()"></span>
 													</div>
 												</div>
-												<ol class="nya-bs-select about-edit-select lang" ng-model="editAboutCtrl.biography_language" ng-cloak>
-													<li nya-bs-option="language in editAboutCtrl.languages" data-value="language.code" deep-watch="true">
-														<a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
-													</li>
-												</ol>
-												<span class="glyphicon glyphicon-pencil pencil-edit"></span>
-												<div class="editable-text-about" text-angular ta-text-editor-class="header" ng-model="editAboutCtrl.deviser.text_biography[editAboutCtrl.biography_language]" ng-cloak ta-toolbar="[]" placeholder="Write your brand statment / mission / biography." ng-model-options="{debounce: 1000}" ng-change="editAboutCtrl.update('text_biography', editAboutCtrl.deviser.text_biography)" ng-blur="editAboutCtrl.update('text_biography', editAboutCtrl.deviser.text_biography)"></div>
-												<span class="glyphicon glyphicon-pencil" style="color:white;position: absolute;top: 438px;right: 45px;"></span>
+												<div class="editable-text-about-wrapper">
+                                                    <ol class="nya-bs-select about-edit-select lang" ng-model="editAboutCtrl.biography_language" ng-cloak>
+                                                        <li nya-bs-option="language in editAboutCtrl.languages" data-value="language.code" deep-watch="true">
+                                                            <a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
+                                                        </li>
+                                                    </ol>
+                                                    <div class="editable-text-about" text-angular ta-text-editor-class="header" ng-model="editAboutCtrl.deviser.text_biography[editAboutCtrl.biography_language]" ng-cloak ta-toolbar="[]" placeholder="Write your brand statment / mission / biography." ng-model-options="{debounce: 1000}" ng-change="editAboutCtrl.update('text_biography', editAboutCtrl.deviser.text_biography)" ng-blur="editAboutCtrl.update('text_biography', editAboutCtrl.deviser.text_biography)"></div>
+                                                    <span class="glyphicon glyphicon-pencil" style="color:white;position: absolute;top: 3px;right: -25px;"></span>
+                                                </div>
 											</div>
 										</div>
 									</div>

@@ -106,6 +106,8 @@
 }
 .editable-text-about{
     color: $white;
+    border: 1px solid $white;
+    padding: 60px 10px 10px 10px;
     .ta-scroll-window > .ta-bind {
         padding: 0;
     }
@@ -292,7 +294,6 @@
 
 .ta-scroll-window > .ta-bind {
     padding: 0!important;
-    height: 21px!important;
     min-height: auto!important;
 }
 .short-description-input{
@@ -327,7 +328,7 @@
     color: #ffffff;
     text-transform: uppercase;
     letter-spacing: 4.9px;
-    line-height: 72px;
+    line-height: 50px;
     display: inline-block;
     font-size: 80px;
     p{
@@ -337,7 +338,7 @@
 }
 .header-lang{
     position: absolute;
-    top: 113px;
+    top: 105px;
     left: 195px;
 }
 .short-description-input-wrapper{
@@ -360,4 +361,12 @@
         border-color: transparent !important;
         border-bottom: 1px solid $white!important;
     }
+}
+.editable-text-about-wrapper{
+    position:relative;
+}
+.about-edit-select.lang  {
+    position: absolute;
+    top: 5px;
+    left: 10px;
 }
