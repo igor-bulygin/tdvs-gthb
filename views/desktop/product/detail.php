@@ -341,7 +341,7 @@ $productImages = $product->getUrlGalleryImages();
 								<?= $product->description ?>
 							</p>
 						</div>
-						<div class="col-sm-4 pad-product">
+						<div class="col-sm-4">
 							<div class="shipping-policies-wrapper">
                                 <div class="title">Shipping &amp; Policies</div>
                                 <div class="policies-row">
