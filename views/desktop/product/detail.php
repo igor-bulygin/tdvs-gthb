@@ -82,7 +82,15 @@ $productImages = $product->getUrlGalleryImages();
 								<i class="ion-ios-star"></i>
 							</span>
 							<span class="number-score">(20)</span>
-						</div>
+                            <div class="avatar-wrapper-side">
+                                <div class="avatar">
+                                    <a href="<?= Url::to(["deviser/store", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id]) ?>">
+                                        <img class="cover" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($deviser->getAvatarImage())->resize(128, 128) ?>" data-pin-nopin="true">
+                                        <span><?= $deviser->personalInfo->getBrandName() ?></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
 						<div class="product-data">
 							<div class="price-stock pull-left">
 								<div class="stock">6 in stock</div>
@@ -100,7 +108,97 @@ $productImages = $product->getUrlGalleryImages();
 							</div>
 						</div>
 						<div class="product-data">
-							<div class="row-size">
+                            <ul class="nav nav-tabs product-detail-tabs" role="tablist">
+                                <li role="presentation" class="active no-b-r">
+                                    <a href="#original" aria-controls="description" role="tab" data-toggle="tab">Original</a>
+                                </li>
+                                <li role="presentation">
+                                    <a href="#prints" aria-controls="works" role="tab" data-toggle="tab">Prints</a>
+                                </li>
+                            </ul>
+						    <div class="row-size">
+                                <form class="form-horizontal">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label product-label"><span class="atr">Size</span></label>
+                                        <div class="col-sm-9">
+                                            <select class="form-control selectpicker product-select" title="Select an option">
+                                              <option></option>
+                                              <option>
+                                                  XS (+ € 1.95)
+                                              </option>
+                                              <option>
+                                                  S (+ € 1.95)
+                                              </option>
+                                              <option>
+                                                  M (+ € 0.95)
+                                              </option>
+                                              <option>
+                                                  L (+ € 0.95)
+                                              </option>
+                                              <option>
+                                                  XL (+ € 1.95)
+                                              </option>
+                                              <option>
+                                                  XXL (+ € 1.95)
+                                              </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="row-size">
+                                <form class="form-horizontal">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label product-label"><span class="atr">Color</span></label>
+                                        <div class="col-sm-9">
+                                            <select class="form-control selectpicker product-select" title="Select an option">
+                                              <option></option>
+                                              <option>
+                                                  Yellow (+ € 1.95)
+                                              </option>
+                                              <option>
+                                                  Blue (+ € 0.95)
+                                              </option>
+                                              <option>
+                                                  Pink (+ € 1.95)
+                                              </option>
+                                              <option>
+                                                  Orange (+ € 0.95)
+                                              </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="row-size">
+                                <form class="form-horizontal">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label product-label"><span class="atr">Color</span></label>
+                                        <div class="col-sm-9">
+                                            <div class="atribute-selected">Silk</div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label product-label"><span class="atr">Occasion</span></label>
+                                        <div class="col-sm-9">
+                                            <div class="atribute-selected">Casual</div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label product-label"><span class="atr">Season</span></label>
+                                        <div class="col-sm-9">
+                                            <div class="atribute-selected">All year</div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label product-label"><span class="atr">Technique</span></label>
+                                        <div class="col-sm-9">
+                                            <div class="atribute-selected">Other</div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+							<!--<div class="row-size">
 								<form class="form-horizontal" name="detailProductCtrl.selectorForm">
 									<div class="form-group" ng-repeat="option in detailProductCtrl.product.options | orderBy:[detailProductCtrl.selectComparator]">
 										<tdv-size-selector option="option" options-selected="detailProductCtrl.optionsSelected" get-references="detailProductCtrl.getReferencesFromOptions(options)" ng-if="option.widget_type==='size'"></tdv-size-selector>
@@ -108,12 +206,12 @@ $productImages = $product->getUrlGalleryImages();
 										<tdv-select-selector option="option" options-selected="detailProductCtrl.optionsSelected" get-references="detailProductCtrl.getReferencesFromOptions(options)" ng-if="option.widget_type==='select'"></tdv-select-selector>
 									</div>
 								</form>
-							</div>
+							</div>-->
 							<div class="row-size">
 								<button type="button" class="btn btn-green btn-add-to-cart"><i class="ion-ios-cart cart-icon-btn"></i> <span>Add to cart</span></button>
 							</div>
 						</div>
-						<div class="product-data">
+						<!--<div class="product-data">
 							<div class="row-size">
 								<div class="shipping-policies-wrapper">
 									<div class="title">Shipping &amp; Policies</div>
@@ -138,13 +236,13 @@ $productImages = $product->getUrlGalleryImages();
 									</div>
 									<div class="returns-row">
 										Warranty:
-										<?= $product->getWarrantyLabel() ?>
+										
 									</div>
 								</div>
 							</div>
-						</div>
+						</div>-->
 						<div class="product-data no-border">
-							<div class="row-size">
+							<!--<div class="row-size">
 
 								<button type="button" class="btn btn-grey btn-hart pull-left">
 									<i class="ion-ios-heart"></i>
@@ -161,7 +259,7 @@ $productImages = $product->getUrlGalleryImages();
 							<div class="row-size">
 								<span class="btn-tagline loved pull-left">Loved 342 times</span>
 								<span class="btn-tagline saved pull-right">Saved in 1500 boxes</span>
-							</div>
+							</div>-->
 							<div>
 								<ul class="social-items">
 									<li>
@@ -201,12 +299,15 @@ $productImages = $product->getUrlGalleryImages();
 		<div class="container">
 			<!-- Nav tabs -->
 			<ul class="nav nav-tabs product-tabs" role="tablist">
-				<li role="presentation" class="active">
+				<li role="presentation" class="active no-b-r">
 					<a href="#description" aria-controls="description" role="tab" data-toggle="tab">Description &amp; User
 					reviews</a>
 				</li>
+				<li role="presentation" class="no-b-r">
+					<a href="#videos" aria-controls="works" role="tab" data-toggle="tab">Videos</a>
+				</li>
 				<li role="presentation">
-					<a href="#works" aria-controls="works" role="tab" data-toggle="tab">More works by <?= $deviser->personalInfo->getBrandName() ?></a>
+					<a href="#works" aria-controls="works" role="tab" data-toggle="tab">More by <?= $deviser->personalInfo->getBrandName() ?></a>
 				</li>
 			</ul>
 			<!-- Tab panes -->
@@ -220,15 +321,32 @@ $productImages = $product->getUrlGalleryImages();
 							</p>
 						</div>
 						<div class="col-sm-4 pad-product">
-							<div class="created-text">Created by</div>
-							<div class="avatar-wrapper">
-								<div class="avatar">
-									<a href="<?= Url::to(["deviser/store", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id]) ?>">
-									<img class="cover" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($deviser->getAvatarImage())->resize(128, 128) ?>" data-pin-nopin="true">
-									<span><?= $deviser->personalInfo->getBrandName() ?></span>
-								</a>
-								</div>
-							</div>
+							<div class="shipping-policies-wrapper">
+                                <div class="title">Shipping &amp; Policies</div>
+                                <div class="policies-row">
+                                    <form class="form-horizontal">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label shipping-label"><span>Shipping price to</span></label>
+                                            <div class="col-sm-5 shipping-sel">
+                                                <select class="form-control selectpicker shipping-select product-select" title="Choose country">
+                                                    <option>USA</option>
+                                                    <option>SPAIN</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                is <span class="tax">€4.5</span>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="returns-row">
+                                    Returns: 14 days
+                                </div>
+                                <div class="returns-row">
+                                    Warranty:
+                                    <?= $product->getWarrantyLabel() ?>
+                                </div>
+                            </div>
 						</div>
 					</div>
 					<div class="title">WORK FAQs</div>
@@ -413,6 +531,11 @@ $productImages = $product->getUrlGalleryImages();
 						</div>
 					</div>
 				</div>
+				<div role="tabpanel" class="tab-pane work-description-wrapper" id="videos">
+                    <div class="other-products-wrapper">
+                        
+                    </div>
+                </div>
 				<div role="tabpanel" class="tab-pane" id="works">
 					<nav class="products-menu">
 						<ul>

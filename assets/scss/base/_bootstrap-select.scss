@@ -3,14 +3,68 @@
 // ==========================================================================
 /* BOOTSTRAP SELECT TUNNING */
 .bootstrap-select>.dropdown-toggle.bs-placeholder, .bootstrap-select>.dropdown-toggle.bs-placeholder:active, .bootstrap-select>.dropdown-toggle.bs-placeholder:focus, .bootstrap-select>.dropdown-toggle.bs-placeholder:hover {
-    color: $almost_black;
-    background-color:$light_grey;
+    color: $black;
+    background-color:$background_grey;
     padding: 2px 12px;
     max-width: 200px;
 }
+.product-data{
+    .bootstrap-select .dropdown-toggle:focus {
+        border-color:$violet!important;
+    }
+    .bootstrap-select .dropdown-toggle:hover{
+        border-color:$violet!important;
+    }
+    .bootstrap-select .dropdown-toggle:visited{
+        border-color:$violet!important;
+    }
+    .bootstrap-select .dropdown-toggle:active{
+        border-color:$violet!important;
+    }
+    .bootstrap-select>.dropdown-toggle.bs-placeholder:hover{
+        border-color:$violet!important;
+    }
+    .bootstrap-select .dropdown-menu {
+        background-color: $background_grey;
+        @include border-radius(4px,4px,4px,4px);
+    }
+    .dropdown-menu > li > a:hover {
+        color: $black;
+        text-decoration: none;
+        background-color: $white;
+    }
+    .dropdown-menu > li > a:focus{
+        background-color: $light_grey;
+    }
+    .dropdown-menu {
+        top: 30px;
+        left: -10px;
+    }
+    .bootstrap-select.btn-group .dropdown-menu {
+        width: 220px !important;
+        min-width: auto !important;
+    }
+}
+.bootstrap-select>.dropdown-toggle.bs-placeholder:focus{
+    outline:none!important;
+    -webkit-box-shadow: none!important;
+    box-shadow: none!important;
+    border-color:$violet!important;
+    background-color:$background_grey;
+}
+.bootstrap-select>.dropdown-toggle.bs-placeholder{
+    outline:none!important;
+    -webkit-box-shadow: none!important;
+    box-shadow: none!important;
+}
+.bootstrap-select .dropdown-toggle:focus {
+    outline:none!important;
+    -webkit-box-shadow: none!important;
+    box-shadow: none!important;
+    outline: 0px auto -webkit-focus-ring-color!important;
+}
 .bootstrap-select{
     .btn{
-        @include border-radius(0px,0px,0px,0px);
         padding: 2px 12px;
         max-width: 200px;
     }
