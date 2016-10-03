@@ -7,13 +7,16 @@
 		vm.optionsSelected = {};
 		vm.getReferencesFromOptions = getReferencesFromOptions;
 		vm.selectComparator = selectComparator;
-		var url = $location.absUrl().split("/");
-		var product_id = url[url.length - 1];
 		var select_order = ['size', 'color', 'select']
+
+		function getProductId() {			
+			var url = $location.absUrl().split("#")[0].split("/");
+			vm.product_id = url[url.length - 1];
+		}
 
 		function getProduct() {
 			productDataService.Product.get({
-				idProduct: product_id
+				idProduct: vm.product_id
 			}).$promise.then(function (dataProduct) {
 				vm.product = dataProduct;
 				vm.minimum_price = getMinimumPrice(vm.product.references);
@@ -25,6 +28,7 @@
 		}
 
 		function init() {
+			getProductId();
 			getProduct();
 		}
 
