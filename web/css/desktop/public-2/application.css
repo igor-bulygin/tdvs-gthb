@@ -3250,7 +3250,7 @@ input[type="radio"] .styled:checked + label::after {
       top: 0;
       bottom: 0;
       margin: auto;
-      max-height: 690px; }
+      max-height: 500px; }
 
 footer {
   width: 100%;
