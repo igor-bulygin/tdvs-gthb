@@ -120,7 +120,7 @@ $productImages = $product->getUrlGalleryImages();
                                 <form class="form-horizontal">
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label product-label"><span class="atr">Size</span></label>
-                                        <div class="col-sm-9">
+                                        <div class="col-sm-6">
                                             <select class="form-control selectpicker product-select" title="Select an option">
                                               <option></option>
                                               <option>
@@ -143,6 +143,9 @@ $productImages = $product->getUrlGalleryImages();
                                               </option>
                                             </select>
                                         </div>
+                                        <div class="col-sm-3 no-pad">
+                                            <a class="view-chart-size" href="#">View size chart</a>
+                                        </div>
                                     </div>
                                 </form>
                             </div>
@@ -150,7 +153,7 @@ $productImages = $product->getUrlGalleryImages();
                                 <form class="form-horizontal">
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label product-label"><span class="atr">Color</span></label>
-                                        <div class="col-sm-9">
+                                        <div class="col-sm-6">
                                             <select class="form-control selectpicker product-select" title="Select an option">
                                               <option></option>
                                               <option>
@@ -166,6 +169,9 @@ $productImages = $product->getUrlGalleryImages();
                                                   Orange (+ € 0.95)
                                               </option>
                                             </select>
+                                        </div>
+                                        <div class="col-sm-3 no-pad">
+                                          
                                         </div>
                                     </div>
                                 </form>
@@ -349,6 +355,40 @@ $productImages = $product->getUrlGalleryImages();
                             </div>
 						</div>
 					</div>
+					<div class="tb-wrapper">
+                        <div class="row">
+                            <div class="col-md-3 work-profile-description-tb">
+                                <img src="/imgs/pullera.jpg">
+                                <span class="tb-title">Lorem ipsum sit amet</span>  
+                                <span class="tb-description">Swim like a crazy person with this amazing watch Swim like a crazy person with this amazing watch</span>  
+                            </div>
+                            <div class="col-md-3 work-profile-description-tb">
+                                <img src="/imgs/pullera.jpg">
+                                <span class="tb-title">Lorem ipsum sit amet</span>  
+                                <span class="tb-description">Swim like a crazy person with this amazing watch Swim like a crazy person with this amazing watch</span>  
+                            </div>
+                            <div class="col-md-3 work-profile-description-tb">
+                                <img src="/imgs/pullera.jpg">
+                                <span class="tb-title">Lorem ipsum sit amet</span>  
+                                <span class="tb-description">Swim like a crazy person with this amazing watch Swim like a crazy person with this amazing watch</span>  
+                            </div>
+                            <div class="col-md-3 work-profile-description-tb">
+                                <img src="/imgs/pullera.jpg">
+                                <span class="tb-title">Lorem ipsum sit amet</span>  
+                                <span class="tb-description">Swim like a crazy person with this amazing watch Swim like a crazy person with this amazing watch</span>  
+                            </div>
+                            <div class="col-md-3 work-profile-description-tb">
+                                <img src="/imgs/pullera.jpg">
+                                <span class="tb-title">Lorem ipsum sit amet</span>  
+                                <span class="tb-description">Swim like a crazy person with this amazing watch Swim like a crazy person with this amazing watch</span>  
+                            </div>
+                            <div class="col-md-3 work-profile-description-tb">
+                                <img src="/imgs/pullera.jpg">
+                                <span class="tb-title">Lorem ipsum sit amet</span>  
+                                <span class="tb-description">Swim like a crazy person with this amazing watch Swim like a crazy person with this amazing watch</span>  
+                            </div>
+                        </div>
+                    </div>
 					<div class="title">WORK FAQs</div>
 					<div class="q-a-wrapper">
 						<p class="question">
@@ -533,7 +573,9 @@ $productImages = $product->getUrlGalleryImages();
 				</div>
 				<div role="tabpanel" class="tab-pane work-description-wrapper" id="videos">
                     <div class="other-products-wrapper">
-                        
+                        <div style="height:500px;">
+                            Videos Videos
+                        </div>
                     </div>
                 </div>
 				<div role="tabpanel" class="tab-pane" id="works">

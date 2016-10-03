@@ -217,14 +217,11 @@
 }
 .work-profile-description-wrapper{
     @extend %block;
-    margin-bottom:40px;
-    border-bottom: solid 1px $dark_grey;
     .description{
         font-family: $font-family--serif;
         font-size: 15px;
         line-height: 1.53;
         color: $almost_black;
-        padding-bottom: 40px;
         margin-bottom:40px;
     }
     .created-text{
@@ -331,4 +328,32 @@
         color: $black!important;
         background-color: #DAD8D8!important;
     }
+}
+.work-profile-description-tb{
+    margin:10px 0 30px;
+    img{
+        width:100%;
+    }
+    .tb-title{
+        display: block;
+        font-size: 15px;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-align: center;
+        margin: 10px 0 5px;
+    }
+    .tb-description{
+        font-family: $font-family--secondary;
+        text-align: center;
+        max-width: 175px;
+        display: block;
+        margin: 0 auto;
+    }
+}
+.tb-wrapper{
+    float: left;
+    width:100%;
+    border-bottom: solid 1px $dark_grey;
+    margin: 40px 0;
+    padding-bottom:40px;
 }

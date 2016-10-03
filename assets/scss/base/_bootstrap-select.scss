@@ -6,7 +6,7 @@
     color: $black;
     background-color:$background_grey;
     padding: 2px 12px;
-    max-width: 200px;
+    max-width: 175px;
 }
 .product-data{
     .bootstrap-select .dropdown-toggle:focus {
@@ -41,7 +41,7 @@
         left: -10px;
     }
     .bootstrap-select.btn-group .dropdown-menu {
-        width: 220px !important;
+        width: 200px !important;
         min-width: auto !important;
     }
 }
@@ -66,7 +66,7 @@
 .bootstrap-select{
     .btn{
         padding: 2px 12px;
-        max-width: 200px;
+        max-width: 175px;
     }
     .dropdown-menu{
         @include border-radius(0px,0px,0px,0px);
@@ -90,7 +90,7 @@
     }
 }
 .bootstrap-select.btn-group .dropdown-menu {
-    width: 200px!important;
+    width: 175px!important;
     min-width: auto!important;
 }
 .dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover {
