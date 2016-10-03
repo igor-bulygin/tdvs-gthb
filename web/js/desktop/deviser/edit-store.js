@@ -21,15 +21,15 @@
 
 		function getProducts() {
 			var data = {
-				deviser: UtilService.returnDeviserIdFromUrl(),
-				limit: 9999
+				"deviser": UtilService.returnDeviserIdFromUrl(),
+				"limit": 9999
 			}
 			if(vm.subcategory || vm.category) {
-				data.categories = []
+				data["categories[]"] = [];
 				if(vm.subcategory)
-					data.categories.push(vm.subcategory);
+					data["categories[]"].push(vm.subcategory);
 				if(vm.category)
-					data.categories.push(vm.category);
+					data["categories[]"].push(vm.category);
 			}
 			productDataService.Product.get(data).$promise.then(function (dataProducts) {
 				vm.products = dataProducts.items;
