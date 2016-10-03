@@ -25,6 +25,21 @@ $productImages = $product->getUrlGalleryImages();
 ?>
 
 	<!-- PRODUCT CARD -->
+	<!-- Modal -->
+    <div class="modal fade" id="chartModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Chart sizes</h4>
+          </div>
+          <div class="modal-body">
+            [PLACE CHART SIZE HERE]
+          </div>
+        </div>
+      </div>
+    </div>
+	
 	<div class="product">
 		<div>
 			<div class="container">
@@ -144,7 +159,7 @@ $productImages = $product->getUrlGalleryImages();
                                             </select>
                                         </div>
                                         <div class="col-sm-3 no-pad">
-                                            <a class="view-chart-size" href="#">View size chart</a>
+                                            <a class="view-chart-size" href="#" data-toggle="modal" data-target="#chartModal">View size chart</a>
                                         </div>
                                     </div>
                                 </form>

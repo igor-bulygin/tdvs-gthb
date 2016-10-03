@@ -2852,11 +2852,10 @@ input[type="radio"] .styled:checked + label::after {
     -webkit-border-radius: 90px 90px 90px 90px;
     -moz-border-radius: 90px 90px 90px 90px; }
   .avatar-wrapper-side .avatar span {
-    margin: 5px;
     color: #484848;
-    font-size: 24px;
+    font-size: 21px;
     font-weight: bold;
-    margin: 0 5px;
+    margin: 8px;
     float: left;
     display: block; }
 
@@ -3234,7 +3233,7 @@ input[type="radio"] .styled:checked + label::after {
   text-shadow: none;
   font-size: 34px;
   text-align: center;
-  margin: 300px auto 0; }
+  margin: 242px auto 0; }
 
 .thumbs .active {
   border: solid 1px transparent !important; }
@@ -3242,7 +3241,7 @@ input[type="radio"] .styled:checked + label::after {
 .product-photos-wrapper {
   border-right: 1px solid #bfbfbf; }
   .product-photos-wrapper .carousel-inner .item {
-    height: 690px; }
+    height: 500px; }
     .product-photos-wrapper .carousel-inner .item img {
       width: auto;
       position: absolute;
