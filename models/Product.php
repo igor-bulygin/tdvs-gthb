@@ -222,7 +222,11 @@ class Product extends CActiveRecord {
 					}
 				}
 			} else {
-				$ids = [$criteria["categories"]];
+				$ids = [];
+				$category = Category::findOne(["short_id" => $criteria["categories"]]);
+				if ($category) {
+					$ids = array_merge($ids, $category->getShortIds());
+				}
 			}
 			$query->andWhere(["categories" => $ids]);
 		}
