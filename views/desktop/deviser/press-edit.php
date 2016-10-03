@@ -59,7 +59,7 @@ $this->params['deviser_links_target'] = 'edit_view';
 								</form>
 								<div class="menu-category list-group draggable-list" ng-if="editPressCtrl.images.length > 0" dnd-list="editPressCtrl.images">
 									<div class="col-sm-3" ng-repeat="item in editPressCtrl.images" dnd-draggable="item" dnd-effect-allowed="move" dnd-moved="editPressCtrl.update($index)">
-										<span class="ion-android-close x-close" ng-click="editPressCtrl.deleteImage($index)"></span>
+										<span class="ion-android-close x-close" style="background-color: black" ng-click="editPressCtrl.deleteImage($index)"></span>
 										<img style="width:100%; height:250px; overflow:hidden;" class="grid-image draggable-img" ng-src="{{item.url}}">
 									</div>
 								</div>
