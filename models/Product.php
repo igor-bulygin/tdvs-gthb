@@ -213,9 +213,17 @@ class Product extends CActiveRecord {
 
 		// if categories are specified
 		if ((array_key_exists("categories", $criteria)) && (!empty($criteria["categories"]))) {
-			$ids = [];
-			foreach ($criteria["categories"] as $categoryId) {
-				$category = Category::findOne(["short_id" => $categoryId]);
+			if (is_array($criteria["categories"])) {
+				$ids = [];
+				foreach ($criteria["categories"] as $categoryId) {
+					$category = Category::findOne(["short_id" => $categoryId]);
+					if ($category) {
+						$ids = array_merge($ids, $category->getShortIds());
+					}
+				}
+			} else {
+				$ids = [];
+				$category = Category::findOne(["short_id" => $criteria["categories"]]);
 				if ($category) {
 					$ids = array_merge($ids, $category->getShortIds());
 				}

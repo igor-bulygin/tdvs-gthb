@@ -7,22 +7,31 @@
 
 		function parseCategories() {
 			var url = $location.absUrl();
-			var queries = url.split("?")[1];
-			var categories = queries.split('=');
-			if (categories.length > 2) {
-				vm.category = categories[1].split('&')[0];
-				vm.subcategory = categories[2];
-			} else {
-				vm.category = categories[1];
+			if(url.split("?").length > 1) {
+				var queries = url.split("?")[1];
+				var categories = queries.split('=');
+				if (categories.length > 2) {
+					vm.category = categories[1].split('&')[0];
+					vm.subcategory = categories[2];
+				} else {
+					vm.category = categories[1];
+				}
 			}
 		}
 
 		function getProducts() {
-			productDataService.Product.get({
-				deviser: UtilService.returnDeviserIdFromUrl(),
-				limit: 9999,
-				categories: vm.subcategory || vm.category
-			}).$promise.then(function (dataProducts) {
+			var data = {
+				"deviser": UtilService.returnDeviserIdFromUrl(),
+				"limit": 9999
+			}
+			if(vm.subcategory || vm.category) {
+				data["categories[]"] = [];
+				if(vm.subcategory)
+					data["categories[]"].push(vm.subcategory);
+				if(vm.category)
+					data["categories[]"].push(vm.category);
+			}
+			productDataService.Product.get(data).$promise.then(function (dataProducts) {
 				vm.products = dataProducts.items;
 				vm.products.forEach(function (element) {
 					for (var i = 0; i < element.media.photos.length; i++) {

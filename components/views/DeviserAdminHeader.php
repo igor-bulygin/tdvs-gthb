@@ -29,7 +29,7 @@ $deviser = $this->params['deviser'];
 						<div class="deviser-data">
                             <div text-angular ta-text-editor-class="editable-name" ng-model="editHeaderCtrl.deviser.personal_info.brand_name" ng-model-options="{debounce: 3000}" ng-change="editHeaderCtrl.update('personal_info', editHeaderCtrl.deviser.personal_info)" ng-blur="editHeaderCtrl.update('personal_info', editHeaderCtrl.deviser.personal_info)" placeholder="editHeaderCtrl.deviser.name" ta-toolbar="[]" ng-cloak ta-default-wrap="">
                             </div>
-                            <input type="text" class="form-control location-edit" g-places-autocomplete ng-model="editHeaderCtrl.city" options="editHeaderCtrl.gApiOptions" ng-change="editHeaderCtrl.searchPlace()">
+                            <input type="text" class="form-control location-edit" g-places-autocomplete ng-model="editHeaderCtrl.city" options="editHeaderCtrl.gApiOptions" ng-change="editHeaderCtrl.searchPlace()" placeholder="Your city">
                             <ol class="nya-bs-select about-edit-select header-lang" ng-model="editHeaderCtrl.description_language" ng-cloak>
                                 <li nya-bs-option="language in editHeaderCtrl.languages" data-value="language.code" deep-watch="true">
                                     <a href=""><span ng-bind="language.name"></span></a>
