@@ -4,6 +4,7 @@ use app\assets\desktop\pub\ProductDetailAsset;
 use app\assets\desktop\pub\PublicCommonAsset;
 use app\models\Category;
 use app\models\Person;
+use app\models\PersonVideo;
 use app\models\Product;
 use yii\web\View;
 use yii\helpers\Url;
@@ -18,9 +19,11 @@ ProductDetailAsset::register($this);
 
 /** @var Person $deviser */
 /** @var Product $product */
+/** @var PersonVideo $video */
 
 $this->title = $product->name . ' - Todevise';
 $productImages = $product->getUrlGalleryImages();
+$videos = $product->getVideos();
 
 ?>
 
@@ -589,7 +592,15 @@ $productImages = $product->getUrlGalleryImages();
 				<div role="tabpanel" class="tab-pane work-description-wrapper" id="videos">
                     <div class="other-products-wrapper">
                         <div style="height:500px;">
-                            Videos Videos
+	                        <div class="video-container">
+		                        <?php foreach ($videos as $video) { ?>
+			                        <div class="col-sm-6">
+				                        <div class="video-wrapper">
+					                        <iframe width="560" height="315" src="<?= $video->getUrlEmbeddedYoutubePlayer() ?>" frameborder="0" allowfullscreen></iframe>
+				                        </div>
+			                        </div>
+		                        <?php }  ?>
+	                        </div>
                         </div>
                     </div>
                 </div>

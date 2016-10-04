@@ -41,7 +41,6 @@ class DeviserController extends AppPrivateController
 
 			$deviser->setScenario($this->getDetermineScenario($deviser)); // safe and required attributes are related with scenario
 			if (($deviser->load(Yii::$app->request->post(), '')) && $deviser->save()) {
-
 				// TODO: return the deviser data, only for test. remove when finish.
 //                  Yii::$app->response->setStatusCode(204); // Success, without body
 				Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);

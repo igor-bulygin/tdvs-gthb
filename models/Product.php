@@ -412,6 +412,20 @@ class Product extends CActiveRecord {
 		return $url;
 	}
 
+	public function getVideos()
+	{
+		$videos = [];
+		$persons = Person::find()->where(["videos.products" => $this->short_id])->all();
+		/** @var Person $person */
+		foreach ($persons as $person) {
+			/** @var PersonVideo $video */
+			foreach ($person->videosInfo as $video) {
+				$videos[] = $video;
+			}
+		}
+		return $videos;
+	}
+
 
 	/**
 	 * Helper to determine the minimum price in stock & price data.
