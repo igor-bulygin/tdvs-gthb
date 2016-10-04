@@ -348,7 +348,7 @@ $productImages = $product->getUrlGalleryImages();
                                     <form class="form-horizontal">
                                         <div class="form-group">
                                             <label class="col-sm-4 control-label shipping-label"><span>Shipping price to</span></label>
-                                            <div class="col-sm-5 shipping-sel">
+                                            <div class="col-sm-5 pad-product">
                                                 <select class="form-control selectpicker shipping-select product-select" title="Choose country">
                                                     <option>USA</option>
                                                     <option>SPAIN</option>
