@@ -679,6 +679,11 @@ class Product extends CActiveRecord {
 		return ($loaded);
 	}
 
+	/**
+	 * Get few attributes to use in preview sections
+	 *
+	 * @return array
+	 */
 	public function getPreviewSerialized()
 	{
 		return [
@@ -686,6 +691,8 @@ class Product extends CActiveRecord {
 			"slug" => $this->slug,
 			"name" => $this->name,
 			"media" => $this->media,
+			"deviser" => $this->getDeviserPreview(),
+			'url_image_preview' => $this->getImagePreview128(),
 			"url_images" => $this->getUrlImagesLocation(),
 		];
 	}
