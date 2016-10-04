@@ -5,39 +5,15 @@
     background-color: $white;
     @extend %block;
     .product-tabs{
-        border-bottom: 0;
-        border-top: 1px solid $light_grey;
-        width: 100%;
         li{
             width: 33.33%;
-            background-color: transparent;
-            border-left: solid 1px $light_grey;
-            border-right: solid 1px $light_grey;
-            border-bottom: solid 1px $light_grey;
-            &.no-b-r{
-            border-right: none;
-                &:hover{
-                    border-right: none;
-                }
-            }
+            border:solid 1px $light_grey;
             &.active{
-                background-color: $dark_grey;
                 a{
                     background-color: #DAD8D8;
-                    border: 0;
-                    color: $black;
                 }
-                &:hover{
-                    background-color: $background_grey;
-                }
-            }
-            &:hover{
-                border-left: solid 1px $light_grey;
-                border-right: solid 1px $light_grey;
-                border-bottom: solid 1px $light_grey;
             }
             a{
-                width: 100%;
                 text-transform: uppercase;
                 font-weight: bold;
                 text-align: center; 
@@ -222,37 +198,18 @@
         font-size: 15px;
         line-height: 1.53;
         color: $almost_black;
-        margin-bottom:40px;
-    }
-    .created-text{
-        text-align: center;
-        text-transform: uppercase;
-        margin: 5px 0 10px;
     }
 }
 .other-products-wrapper{
     @extend %block;
-    background-color: $white!important;
-    height: initial!important;
     margin-bottom: 80px;
 }
 .shipping-policies-wrapper{
-    .title{
-        font: bold 14px $font-family--primary;
-        letter-spacing: 0;
-        color: $darker_grey;
-        margin: 0 0 15px;
-    }
+    font-family: $font-family--secondary;
     .policies-row{
-        margin: 0 0 10px 0;
         .shipping-label{
             padding-top: 3px;
             text-align: left;
-            font-family: $font-family--secondary;
-        }
-        .shipping-sel{
-            padding-right: 0;
-            padding-left: 0;
         }
         .tax{
             font-family: $font-family--bold;
@@ -261,32 +218,22 @@
         }
     }
     .returns-row{
-        font-family: $font-family--secondary;
         font-weight: bold;
         color: $almost_black;
     }
 }
 .product-detail-tabs{
-    border-bottom: 0;
     margin-bottom: 20px;
-    width: 100%;
     li{
-        background-color: transparent;
         border: solid 1px $light_grey;
         width: 50%;
-        &.no-b-r{
-            border-right: none;
-            &:hover{
-                border-right: none;
-            }
-        }
         &.active{
             background-color: $dark_grey;
             a{
                 width: 100%;
-                background-color: #DAD8D8;
                 border: 0;
-                color: $black;
+                color: $black!important;
+                background-color: #DAD8D8!important;
             }
             &:hover{
                 background-color: $background_grey;
@@ -296,13 +243,11 @@
             border: solid 1px $light_grey;
         }
         a{
-            width: 100%!important;
             text-transform: uppercase;
             font-weight: bold;
             text-align: center; 
             font-size: 12px;
             padding: 8px;
-            width: 110px;
             border: 0;
             color: $black;
             margin-right: 0;
@@ -313,47 +258,30 @@
         }
     }
 }
- .nav-tabs > li.active > a:focus {
-    border: none!important;
-}
-.nav-tabs > li.active > a:hover {
-    border: none!important;
-}
-.product-detail-tabs{
-    li.active > a:hover{
-        color: $black!important;
-        background-color: #DAD8D8!important;
-    }
-    li.active > a{
-        color: $black!important;
-        background-color: #DAD8D8!important;
-    }
-}
-.work-profile-description-tb{
-    margin:10px 0 30px;
-    img{
-        width:100%;
-    }
-    .tb-title{
-        display: block;
-        font-size: 15px;
-        font-weight: bold;
-        text-transform: uppercase;
-        text-align: center;
-        margin: 10px 0 5px;
-    }
-    .tb-description{
-        font-family: $font-family--secondary;
-        text-align: center;
-        max-width: 175px;
-        display: block;
-        margin: 0 auto;
-    }
-}
 .tb-wrapper{
-    float: left;
-    width:100%;
+    @extend %block;
     border-bottom: solid 1px $dark_grey;
     margin: 40px 0;
     padding-bottom:40px;
+    .work-profile-description-tb{
+    margin:10px 0 30px;
+        img{
+            width:100%;
+        }
+        .tb-title{
+            display: block;
+            font-size: 15px;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-align: center;
+            margin: 10px 0 5px;
+        }
+        .tb-description{
+            font-family: $font-family--secondary;
+            text-align: center;
+            max-width: 175px;
+            display: block;
+            margin: 0 auto;
+        }
+    }
 }
