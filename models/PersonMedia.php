@@ -167,7 +167,7 @@ class PersonMedia extends Model
 					break;
 				case 'photos':
 					$this->getPerson()->addError("required", "about");
-					$this->getPerson()->addError("required", "about-photos");
+					$this->getPerson()->addError("required", "photos");
 					break;
 			}
 		};
