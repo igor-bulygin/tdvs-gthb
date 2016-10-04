@@ -45,4 +45,14 @@ class Lang {
         	["code" => self::CA_ES, "name" => self::CA_ES_DESC[self::CA_ES]],
         ];
     }
+
+    static public function getLanguageName($code)
+    {
+    	$langs = Lang::getAvailableLanguagesDescriptions();
+	    if (array_key_exists($code, $langs)) {
+		    return $langs[$code];
+	    }
+	    return null;
+    }
+
 }

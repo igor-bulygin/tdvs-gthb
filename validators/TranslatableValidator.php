@@ -61,10 +61,10 @@ class TranslatableValidator extends Validator
 
 			foreach ($values as $key => $item) {
 				if (!array_key_exists($key, Lang::getAvailableLanguagesDescriptions())) {
-					$this->addError($object, $attribute, sprintf('Language %s not available', $key));
+					$this->addError($object, $attribute, sprintf('Language %s not available for %s', strtolower(Lang::getLanguageName($key)), $attribute));
 				}
 				if (empty($item)) {
-					$this->addError($object, $attribute, sprintf('Language %s can not be empty', $key));
+					$this->addError($object, $attribute, sprintf('Language %s can not be empty for %s', strtolower(Lang::getLanguageName($key)), $attribute));
 				}
 			}
 		}
