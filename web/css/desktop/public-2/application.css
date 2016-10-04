@@ -267,6 +267,10 @@ ul {
   .no-b-r:hover {
     border-right: none !important; }
 
+/* Dont display dropable zone on dragg and drop */
+.dndDraggingSource {
+  display: none; }
+
 a, a:hover, a:focus {
   text-decoration: none; }
 
