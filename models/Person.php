@@ -863,4 +863,22 @@ class Person extends CActiveRecord implements IdentityInterface
 		return file_exists($filePath);
 	}
 
+	/**
+	 * Filter videos that are related with a Product ID
+	 *
+	 * @param $productId
+	 * @return array
+	 */
+	public function findVideosByProductId($productId)
+	{
+		$videos = [];
+		/** @var PersonVideo $video */
+		foreach ($this->videosInfo as $video) {
+			if (in_array($productId, $video->products)) {
+				$videos[] = $video;
+			}
+		}
+		return $videos;
+	}
+
 }

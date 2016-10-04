@@ -412,6 +412,11 @@ class Product extends CActiveRecord {
 		return $url;
 	}
 
+	/**
+	 * Get videos related with this Product
+	 *
+	 * @return array
+	 */
 	public function getVideos()
 	{
 		$videos = [];
@@ -419,13 +424,12 @@ class Product extends CActiveRecord {
 		/** @var Person $person */
 		foreach ($persons as $person) {
 			/** @var PersonVideo $video */
-			foreach ($person->videosInfo as $video) {
+			foreach ($person->findVideosByProductId($this->short_id) as $video) {
 				$videos[] = $video;
 			}
 		}
 		return $videos;
 	}
-
 
 	/**
 	 * Helper to determine the minimum price in stock & price data.
