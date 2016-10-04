@@ -47,7 +47,7 @@ class DeviserController extends AppPrivateController
 				return $deviser;
 			} else {
 				Yii::$app->response->setStatusCode(400); // Bad Request
-				return ["errors" => $deviser->errors];
+				return ["errors" => array_merge($deviser->errors, $deviser->getRequiredTags())];
 			}
 		} catch (Exception $e) {
 			throw new BadRequestHttpException($e->getMessage());

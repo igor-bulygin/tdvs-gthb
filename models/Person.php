@@ -881,4 +881,16 @@ class Person extends CActiveRecord implements IdentityInterface
 		return $videos;
 	}
 
+	/**
+	 * Return an array with the tags ids of required fields or sections in client side
+	 *
+	 * @return array
+	 */
+	public function getRequiredTags()
+	{
+		return [
+			"required" => ['header', 'text_biography', 'about']
+		];
+	}
+
 }
