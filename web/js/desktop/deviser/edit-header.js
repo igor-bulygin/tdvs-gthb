@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(deviserDataService, languageDataService, UtilService, Upload, $uibModal, toastr, $scope) {
+	function controller(deviserDataService, languageDataService, UtilService, Upload, $uibModal, toastr, $scope, $rootScope) {
 		var vm = this;
 		vm.description_language = "en-US";
 		vm.openCropModal = openCropModal;
@@ -67,7 +67,7 @@
 			patch[field] = angular.copy(value);
 			patch.deviser_id = vm.deviser.id;
 			patch.$update().then(function (updateData) {
-				getDeviser();
+				$rootScope.$broadcast('update-profile');
 			}, function (err) {
 				toastr.error(err);
 			});
@@ -157,6 +157,10 @@
 		$scope.$watch('editHeaderCtrl.deviser.text_short_description[editHeaderCtrl.description_language]', function (newValue, oldValue) {
 			if (newValue && newValue.length > vm.limit_text_biography)
 				vm.deviser.text_short_description[vm.description_language] = oldValue;
+		});
+
+		$scope.$on('update-profile', function () {
+			getDeviser();
 		});
 
 	}

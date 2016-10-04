@@ -7,7 +7,7 @@
 		});
 	}
 
-	function controller(deviserDataService, UtilService, languageDataService, toastr, productDataService, Upload, $timeout) {
+	function controller(deviserDataService, UtilService, languageDataService, toastr, productDataService, Upload, $timeout, $rootScope, $scope) {
 		var vm = this;
 		vm.update = update;
 		vm.move = move;
@@ -86,7 +86,7 @@
 			patch.deviser_id = vm.deviser.id;
 			patch[key] = value;
 			patch.$update().then(function(dataUpdate) {
-				getDeviser();
+				$rootScope.$broadcast('update-profile');
 			}, function (err) {
 				for(var key in err.data.errors) {
 					toastr.error(err.data.errors[key]);
@@ -152,6 +152,10 @@
 				toastr.error("Must have between 3 and 7 photos.");
 			}
 		}
+
+		$scope.$on('update-profile', function() {
+			getDeviser();
+		});
 	}
 
 	angular
