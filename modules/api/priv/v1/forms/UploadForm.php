@@ -126,7 +126,7 @@ class UploadForm extends Model {
 			UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_HEADER_ORIGINAL => 'deviser.header.original.',
 			UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_HEADER_CROPPED => 'deviser.header.cropped.',
 			UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PROFILE_ORIGINAL => 'deviser.profile.original.',
-			UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PROFILE_CROPPED => 'deviser.profile.cropped',
+			UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PROFILE_CROPPED => 'deviser.profile.cropped.',
 			UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PHOTOS => 'deviser.photo.',
 			UploadForm::UPLOAD_TYPE_DEVISER_PRESS_IMAGES => 'deviser.press.',
 			UploadForm::UPLOAD_TYPE_DEVISER_CURRICULUM => 'deviser.cv.',

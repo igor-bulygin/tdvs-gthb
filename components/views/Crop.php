@@ -32,7 +32,7 @@ cropAsset::register($this);
 		<div class='modal-body'>
 
 			<div class="cropArea">
-				<img-crop area-type="circle" result-image-size="{w:400, h:400}" image="photo" result-image="croppedphoto"></img-crop>
+				<img-crop area-type="circle" result-image-size="{w:400, h:400}" image="photo" result-image="croppedphoto" chargement=""></img-crop>
 			</div>
 
 		</div>
@@ -51,7 +51,7 @@ cropAsset::register($this);
 		<div class='modal-body'>
 
 			<div class="cropArea">
-				<img-crop area-type="rectangle" result-image-size="{w:1280, h:425}" aspect-ratio="3" image="photo" result-image="croppedphoto"></img-crop>
+				<img-crop area-type="rectangle" result-image-size="{w:1280, h:425}" aspect-ratio="3" image="photo" result-image="croppedphoto" chargement=""></img-crop>
 			</div>
 
 		</div>
