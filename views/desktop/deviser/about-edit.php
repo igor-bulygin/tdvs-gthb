@@ -50,7 +50,7 @@ $this->params['deviser'] = $deviser;
 													</div>
 												</div>
 												<div class="subtitle">
-													<ol class="nya-bs-select about-edit-select" ng-model="editAboutCtrl.deviser.categories" multiple ng-cloak ng-if="editAboutCtrl.categories" ng-model-options="{debounce: 1000}" ng-change="editAboutCtrl.update('categories', editAboutCtrl.deviser.categories)" ng-blur="editAboutCtrl.update('categories', editAboutCtrl.deviser.categories)">
+													<ol class="nya-bs-select about-edit-select" ng-model="editAboutCtrl.deviser.categories" multiple ng-cloak ng-if="editAboutCtrl.categories" ng-change="editAboutCtrl.update('categories', editAboutCtrl.deviser.categories)">
 														<li nya-bs-option="category in editAboutCtrl.categories" data-value="category.id" deep-watch="true">
 															<a href="">{{category.name}} <span class="glyphicon glyphicon-ok check-mark"></span></a>
 														</li>

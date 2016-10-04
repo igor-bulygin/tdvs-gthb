@@ -155,7 +155,7 @@
 
 		$scope.$on('update-profile', function() {
 			getDeviser();
-		});
+		});		
 	}
 
 	angular
