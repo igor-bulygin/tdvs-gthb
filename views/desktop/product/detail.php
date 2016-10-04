@@ -317,8 +317,7 @@ $productImages = $product->getUrlGalleryImages();
 	<!-- /PRODUCT CARD -->
 	<!-- PRODUCT DESCRIPTION -->
 	<div class="product-description">
-		<div class="container">
-			<!-- Nav tabs -->
+	    <!-- Nav tabs -->
 			<ul class="nav nav-tabs product-tabs" role="tablist">
 				<li role="presentation" class="active no-b-r">
 					<a href="#description" aria-controls="description" role="tab" data-toggle="tab">Description &amp; User
@@ -331,6 +330,7 @@ $productImages = $product->getUrlGalleryImages();
 					<a href="#works" aria-controls="works" role="tab" data-toggle="tab">More by <?= $deviser->personalInfo->getBrandName() ?></a>
 				</li>
 			</ul>
+		<div class="container">
 			<!-- Tab panes -->
 			<div class="tab-content product-description-content">
 				<div role="tabpanel" class="tab-pane work-description-wrapper active" id="description">

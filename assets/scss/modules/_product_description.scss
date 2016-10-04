@@ -351,8 +351,7 @@
     }
 }
 .tb-wrapper{
-    float: left;
-    width:100%;
+    @extend %block;
     border-bottom: solid 1px $dark_grey;
     margin: 40px 0;
     padding-bottom:40px;
