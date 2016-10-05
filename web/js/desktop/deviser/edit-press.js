@@ -6,6 +6,9 @@
 		vm.upload = upload;
 		vm.update = update;
 		vm.deleteImage = delete_image;
+		vm.dragOver = dragOver;
+		vm.dragStart = dragStart;
+		vm.drop = drop;
 
 		function getDeviser() {
 			deviserDataService.Profile.get({
@@ -75,6 +78,36 @@
 		function delete_image(index) {
 			vm.images.splice(index, 1);
 			update();
+		}
+
+		function dragStart(event, index) {
+			vm.original_images = angular.copy(vm.images);
+			vm.original_index = index;
+			vm.image_being_moved = vm.images[index];
+		}
+
+		function dragOver(event, index) {
+			if(vm.previous_index && index !== vm.previous_index) {
+				//get original images
+				vm.images = angular.copy(vm.original_images);
+				//insert image in index
+				vm.images.splice(index, 0, vm.image_being_moved);
+				//set previous_index
+				vm.previous_index = index;
+			} else {
+				//set previous index
+				vm.previous_index = index;
+				//insert image in index
+			}
+			return true;
+		}
+
+		function drop() {
+			//reset iteration
+			delete vm.image_being_moved;
+			delete vm.previous_index;
+			//delete original index
+			vm.images.splice(vm.original_index, 1);
 		}
 
 		init();
