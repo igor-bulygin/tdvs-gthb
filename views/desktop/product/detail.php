@@ -126,14 +126,14 @@ $videos = $product->getVideos();
 							</div>
 						</div>
 						<div class="product-data">
-                            <ul class="nav nav-tabs product-detail-tabs" role="tablist">
-                                <li role="presentation" class="active no-b-r">
-                                    <a href="#original" aria-controls="description" role="tab" data-toggle="tab">Original</a>
-                                </li>
-                                <li role="presentation">
-                                    <a href="#prints" aria-controls="works" role="tab" data-toggle="tab">Prints</a>
-                                </li>
-                            </ul>
+<!--                            <ul class="nav nav-tabs product-detail-tabs" role="tablist">-->
+<!--                                <li role="presentation" class="active no-b-r">-->
+<!--                                    <a href="#original" aria-controls="description" role="tab" data-toggle="tab">Original</a>-->
+<!--                                </li>-->
+<!--                                <li role="presentation">-->
+<!--                                    <a href="#prints" aria-controls="works" role="tab" data-toggle="tab">Prints</a>-->
+<!--                                </li>-->
+<!--                            </ul>-->
 						    <div class="row-size">
                                 <form class="form-horizontal">
                                     <div class="form-group">
@@ -373,40 +373,40 @@ $videos = $product->getVideos();
                             </div>
 						</div>
 					</div>
-					<div class="tb-wrapper">
-                        <div class="row">
-                            <div class="col-md-3 work-profile-description-tb">
-                                <img src="/imgs/pullera.jpg">
-                                <span class="tb-title">Lorem ipsum sit amet</span>  
-                                <span class="tb-description">Swim like a crazy person with this amazing watch Swim like a crazy person with this amazing watch</span>  
-                            </div>
-                            <div class="col-md-3 work-profile-description-tb">
-                                <img src="/imgs/pullera.jpg">
-                                <span class="tb-title">Lorem ipsum sit amet</span>  
-                                <span class="tb-description">Swim like a crazy person with this amazing watch Swim like a crazy person with this amazing watch</span>  
-                            </div>
-                            <div class="col-md-3 work-profile-description-tb">
-                                <img src="/imgs/pullera.jpg">
-                                <span class="tb-title">Lorem ipsum sit amet</span>  
-                                <span class="tb-description">Swim like a crazy person with this amazing watch Swim like a crazy person with this amazing watch</span>  
-                            </div>
-                            <div class="col-md-3 work-profile-description-tb">
-                                <img src="/imgs/pullera.jpg">
-                                <span class="tb-title">Lorem ipsum sit amet</span>  
-                                <span class="tb-description">Swim like a crazy person with this amazing watch Swim like a crazy person with this amazing watch</span>  
-                            </div>
-                            <div class="col-md-3 work-profile-description-tb">
-                                <img src="/imgs/pullera.jpg">
-                                <span class="tb-title">Lorem ipsum sit amet</span>  
-                                <span class="tb-description">Swim like a crazy person with this amazing watch Swim like a crazy person with this amazing watch</span>  
-                            </div>
-                            <div class="col-md-3 work-profile-description-tb">
-                                <img src="/imgs/pullera.jpg">
-                                <span class="tb-title">Lorem ipsum sit amet</span>  
-                                <span class="tb-description">Swim like a crazy person with this amazing watch Swim like a crazy person with this amazing watch</span>  
-                            </div>
-                        </div>
-                    </div>
+<!--					<div class="tb-wrapper">-->
+<!--                        <div class="row">-->
+<!--                            <div class="col-md-3 work-profile-description-tb">-->
+<!--                                <img src="/imgs/pullera.jpg">-->
+<!--                                <span class="tb-title">Lorem ipsum sit amet</span>  -->
+<!--                                <span class="tb-description">Swim like a crazy person with this amazing watch Swim like a crazy person with this amazing watch</span>  -->
+<!--                            </div>-->
+<!--                            <div class="col-md-3 work-profile-description-tb">-->
+<!--                                <img src="/imgs/pullera.jpg">-->
+<!--                                <span class="tb-title">Lorem ipsum sit amet</span>  -->
+<!--                                <span class="tb-description">Swim like a crazy person with this amazing watch Swim like a crazy person with this amazing watch</span>  -->
+<!--                            </div>-->
+<!--                            <div class="col-md-3 work-profile-description-tb">-->
+<!--                                <img src="/imgs/pullera.jpg">-->
+<!--                                <span class="tb-title">Lorem ipsum sit amet</span>  -->
+<!--                                <span class="tb-description">Swim like a crazy person with this amazing watch Swim like a crazy person with this amazing watch</span>  -->
+<!--                            </div>-->
+<!--                            <div class="col-md-3 work-profile-description-tb">-->
+<!--                                <img src="/imgs/pullera.jpg">-->
+<!--                                <span class="tb-title">Lorem ipsum sit amet</span>  -->
+<!--                                <span class="tb-description">Swim like a crazy person with this amazing watch Swim like a crazy person with this amazing watch</span>  -->
+<!--                            </div>-->
+<!--                            <div class="col-md-3 work-profile-description-tb">-->
+<!--                                <img src="/imgs/pullera.jpg">-->
+<!--                                <span class="tb-title">Lorem ipsum sit amet</span>  -->
+<!--                                <span class="tb-description">Swim like a crazy person with this amazing watch Swim like a crazy person with this amazing watch</span>  -->
+<!--                            </div>-->
+<!--                            <div class="col-md-3 work-profile-description-tb">-->
+<!--                                <img src="/imgs/pullera.jpg">-->
+<!--                                <span class="tb-title">Lorem ipsum sit amet</span>  -->
+<!--                                <span class="tb-description">Swim like a crazy person with this amazing watch Swim like a crazy person with this amazing watch</span>  -->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
 					<div class="title">WORK FAQs</div>
 					<div class="q-a-wrapper">
 						<p class="question">
