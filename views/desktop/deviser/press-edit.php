@@ -45,7 +45,7 @@ $this->params['deviser_links_target'] = 'edit_view';
 								<img class="sad-face" src="/imgs/sad-face.svg">
 								<p>You don't have any press images!</p>
 							</div>
-							<div class="press-edit-list row press-3">
+							<div class="row press-3">
 								<form name="editPressCtrl.form" ng-cloak>
 									<div class="col-sm-3" ng-if="editPressCtrl.isDropAvailable">
 										<div class="photo-loader" class="menu-category list-group" ngf-drop ngf-select ngf-change="editPressCtrl.upload($files, $invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="editPressCtrl.isDropAvailable" ngf-multiple="true">
@@ -57,8 +57,8 @@ $this->params['deviser_links_target'] = 'edit_view';
 										<input type="file" name="file" ngf-select="editPressCtrl.upload($files, $invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="editPressCtrl.isDropAvailable" ngf-multiple="true">
 									</div>
 								</form>
-								<div class="menu-category list-group draggable-list" ng-if="editPressCtrl.images.length > 0" dnd-list="editPressCtrl.images">
-									<div class="col-sm-3" ng-repeat="item in editPressCtrl.images" dnd-draggable="item" dnd-effect-allowed="move" dnd-moved="editPressCtrl.update($index)">
+								<div class="menu-category list-group draggable-list" ng-if="editPressCtrl.images.length > 0" dnd-list="editPressCtrl.images" dnd-dragover="editPressCtrl.dragOver(event, index)" dnd-drop="editPressCtrl.drop()">
+									<div class="col-sm-3" ng-repeat="item in editPressCtrl.images track by $index" dnd-type="'pressType'" dnd-draggable="item" dnd-effect-allowed="move" dnd-moved="editPressCtrl.update($index)" dnd-dragstart="editPressCtrl.dragStart(event, $index)">
 										<span class="ion-android-close x-close" style="background-color: black" ng-click="editPressCtrl.deleteImage($index)"></span>
 										<img style="width:100%; height:250px; overflow:hidden;" class="grid-image draggable-img" ng-src="{{item.url}}">
 									</div>
