@@ -81,13 +81,14 @@
 		}
 
 		function dragStart(event, index) {
-			vm.original_images = angular.copy(vm.images);
 			vm.original_index = index;
+			vm.original_images = angular.copy(vm.images);
 			vm.image_being_moved = vm.images[index];
 		}
 
 		function dragOver(event, index) {
-			if(vm.previous_index && index !== vm.previous_index) {
+			console.log("original: %s previo: %s posicion: %s, %s", vm.original_index, vm.previous_index, index, vm.images[vm.original_index].filename);
+			if(vm.previous_index) {
 				//get original images
 				vm.images = angular.copy(vm.original_images);
 				//insert image in index
@@ -102,12 +103,20 @@
 			return true;
 		}
 
-		function drop() {
+		function drop(index) {
+			var index_to_delete=0;
+			if(index < vm.original_index)
+				index_to_delete = vm.original_index + 1;
+			else {
+				index_to_delete = vm.original_index;
+			}
+			//update
+			update(index_to_delete);
 			//reset iteration
 			delete vm.image_being_moved;
 			delete vm.previous_index;
-			//delete original index
-			vm.images.splice(vm.original_index, 1);
+
+
 		}
 
 		init();
