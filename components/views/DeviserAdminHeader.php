@@ -15,31 +15,33 @@ $deviser = $this->params['deviser'];
 	<div class="banner-deviser" ng-controller="editHeaderCtrl as editHeaderCtrl">
 		<div class="container pad-about">
 			<span tooltip-placement="top" uib-tooltip="ADD COVER PHOTO" class="button ion-camera edit-cover-photo-icon" ngf-select ng-model="editHeaderCtrl.new_header" name="header" ngf-pattern="'image/*'" ngf-accept="'image/*'"></span>
-			<span tooltip-placement="top" uib-tooltip="CROP PHOTO" class="button ion-crop edit-cover-crop-icon" ng-click="editHeaderCtrl.openCropModal(editHeaderCtrl.header_original, 'header_cropped')" ng-if="editHeaderCtrl.header"></span>
+			<!--<span tooltip-placement="top" uib-tooltip="CROP PHOTO" class="button ion-crop edit-cover-crop-icon" ng-click="editHeaderCtrl.openCropModal(editHeaderCtrl.header_original, 'header_cropped')" ng-if="editHeaderCtrl.header"></span>-->
 			<img class="cover" ngf-thumbnail="editHeaderCtrl.header || '/imgs/default-cover.jpg'">
 			<div class="banner-deviser-content">
 				<div class="grey-overlay"></div>
 				<div class="container deviser-header-edit-wrapper">
 					<div class="deviser-profile">
-						<div class="avatar">
-							<img class="cover" ngf-thumbnail="editHeaderCtrl.profile || '/imgs/default-avatar.jpg' ">
-							<span tooltip-placement="top" uib-tooltip="ADD PHOTO" class="button ion-camera edit-avatar-photo-icon" ngf-select ng-model="editHeaderCtrl.new_profile" name="profile" ngf-pattern="'image/*'" ngf-accept="'image/*'"></span>
-							<span tooltip-placement="top" uib-tooltip="CROP PHOTO" class="button ion-crop crop-avatar-photo-icon" ng-if="editHeaderCtrl.profile_original" ng-click="editHeaderCtrl.openCropModal(editHeaderCtrl.profile_original, 'profile_cropped')"></span>
-						</div>
+					    <div class="avatar-buttons-wrapper">
+                            <div class="avatar">
+                                <img class="cover" ngf-thumbnail="editHeaderCtrl.profile || '/imgs/default-avatar.jpg' ">
+                                <span tooltip-placement="top" uib-tooltip="ADD PHOTO" class="button ion-camera edit-avatar-photo-icon" ngf-select ng-model="editHeaderCtrl.new_profile" name="profile" ngf-pattern="'image/*'" ngf-accept="'image/*'"></span>
+                                <!--<span tooltip-placement="top" uib-tooltip="CROP PHOTO" class="button ion-crop crop-avatar-photo-icon" ng-if="editHeaderCtrl.profile_original" ng-click="editHeaderCtrl.openCropModal(editHeaderCtrl.profile_original, 'profile_cropped')"></span>-->
+                            </div>
 
-						<!-- buttons -->
-						<div>
-							<div ng-if="!editHeaderCtrl.isProfilePublic">
-								<button class="btn btn-default btn-green" ng-click="editHeaderCtrl.updateAll()">Save progress</button>
-							</div>
-							<div ng-if="!editHeaderCtrl.isProfilePublic">
-								<button class="btn btn-default btn-green">Save changes</button>
-								<button class="btn btn-default">Cancel</button>
-							</div>
+                            <!-- buttons -->
+                            <div>
+                                <div ng-if="!editHeaderCtrl.isProfilePublic">
+                                    <button class="btn btn-default btn-green" ng-click="editHeaderCtrl.updateAll()">Save progress</button>
+                                </div>
+                                <div ng-if="!editHeaderCtrl.isProfilePublic">
+                                    <button class="btn btn-default btn-green">Save changes</button>
+                                    <button class="btn btn-default">Cancel</button>
+                                </div>
+                            </div>
 						</div>
 					</div>
 					<div class="deviser-data-edit">
-							<form name="editHeaderCtrl.form">
+							<form class="grey-form" name="editHeaderCtrl.form">
 								<!-- Brand name -->
 								<div>
 									<label for="brand_name">Brand name</label>
@@ -52,7 +54,7 @@ $deviser = $this->params['deviser'];
 								</div>
 								<!-- Short biography -->
 								<label for="text_short_description">Short description of your brand</label>
-								<span>Translate your description by selecting different languages below</span>
+								<span class="small-grey">Translate your description by selecting different languages below</span>
 									<!-- language selector -->
 									<ol class="nya-bs-select about-edit-select header-lang" ng-model="editHeaderCtrl.description_language" ng-cloak>
 										<li nya-bs-option="language in editHeaderCtrl.languages" data-value="language.code" deep-watch="true">

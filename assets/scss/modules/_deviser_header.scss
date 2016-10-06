@@ -49,17 +49,27 @@
     }
 }
 .deviser-data-edit{
-    width: 300px;
+    width: 350px;
     position: absolute;
-    top: -8px;
-    left: 200px;
+    top: 97px;
+    left: 160px;
     background-color: $background_grey;
     float: left;
     margin: 0 30px;
-    padding: 20px;
+    padding: 0 20px 20px;
     @include border-radius(6px,6px,6px,6px);
 }
 .deviser-header-edit-wrapper{
     position: relative;
     padding-top:200px;
+}
+.small-grey{
+    font-size: 11px;
+    color: $dark_grey;
+    display: block;
+    margin: 0 0 10px 0;
+}
+.avatar-buttons-wrapper{
+    float: left;
+    max-width: 156px;
 }

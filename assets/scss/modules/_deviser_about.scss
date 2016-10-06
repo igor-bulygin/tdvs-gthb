@@ -129,9 +129,9 @@
     }
     button{
         background-color: transparent!important;
-        color: $white!important;
+        color: $black!important;
         border: 1px solid transparent;
-        border-bottom: 1px solid $white;
+        border-bottom: 1px solid $red;
         padding-left: 0;
         @include border-radius(0,0,0,0);
         &:hover{
@@ -142,21 +142,21 @@
         }
         &:active{
             border: 1px solid transparent!important;
-            border-bottom: 1px solid $white!important;
+            border-bottom: 1px solid $red!important;
             background-color:transparent;
             color: $white;
             border: 1px solid transparent;
         }
         &:focus{
             border: 1px solid transparent!important;
-            border-bottom: 1px solid $white!important;
+            border-bottom: 1px solid $red!important;
             background-color: transparent;
             color: $white;
             border: 1px solid transparent;
         }
     }
     .caret{
-        color: $white;
+        color: $black;
     }
     .dropdown-menu{
         width: 100%;
@@ -193,19 +193,22 @@
 }
 .edit-cover-photo-icon{
     color: $white;
-    font-size: 60px;
-    width: 88px;
-    height: 88px;
+    font-size: 40px;
+    width: 60px;
+    height: 60px;
     position: absolute;
     text-align: center;
     cursor: pointer;
-    top: 70px;
-    left: 500px;
     background-color: $black;
-    border-radius: 51px;
+    @include border-radius(90px,90px,90px,90px);
     display: block;
     z-index: 999;
     padding-top: 1px;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
     &.centered{
         left: 0; 
         right: 0; 
@@ -338,13 +341,14 @@
 }
 .header-lang{
     position: absolute;
-    top: 105px;
-    left: 195px;
+    top: 199px;
+    left: 33px;
 }
 .short-description-input-wrapper{
     position:relative;
     textarea{
-        max-height:110px;
+        padding-top: 40px;
+        max-height: 110px;
     }
     ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
       color: $white;
@@ -372,4 +376,12 @@
     position: absolute;
     top: 5px;
     left: 10px;
+}
+.grey-form{
+    label{
+        text-transform: uppercase;
+        color: $black;
+        font-family: $font-family--bold;
+        margin: 15px 0 0 0;
+    }
 }
