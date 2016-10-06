@@ -3,8 +3,11 @@
 
 	function controller(deviserDataService, languageDataService, UtilService, Upload, $uibModal, toastr, $scope, $rootScope) {
 		var vm = this;
+		vm.has_error = UtilService.has_error;
+		vm.isProfilePublic = false;
 		vm.description_language = "en-US";
 		vm.openCropModal = openCropModal;
+		vm.updateAll = updateAll;
 		vm.update = update;
 		vm.searchPlace = searchPlace;
 		vm.limit_text_biography = 140;
@@ -57,8 +60,14 @@
 			if(vm.city.address_components && vm.city.address_components.length > 0){
 				vm.deviser.personal_info.city = vm.city.name;
 				vm.deviser.personal_info.country = vm.city.address_components[vm.city.address_components.length - 1]['short_name'];
-				update('personal_info', vm.deviser.personal_info);
 			}
+		}
+
+		function updateAll() {
+			searchPlace();
+			update('media', vm.deviser.media);
+			update('text_short_description', vm.deviser.text_short_description);
+			update('personal_info', vm.deviser.personal_info);
 		}
 
 		function update(field, value) {
@@ -67,7 +76,7 @@
 			patch[field] = angular.copy(value);
 			patch.deviser_id = vm.deviser.id;
 			patch.$update().then(function (updateData) {
-				$rootScope.$broadcast('update-profile');
+				//$rootScope.$broadcast('update-profile');
 			}, function (err) {
 				toastr.error(err);
 			});
