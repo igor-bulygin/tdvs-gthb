@@ -343,6 +343,9 @@
 }
 .short-description-input-wrapper{
     position:relative;
+    textarea{
+        max-height:110px;
+    }
     ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
       color: $white;
     }

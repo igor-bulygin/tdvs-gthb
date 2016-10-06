@@ -1897,6 +1897,23 @@ input[type="radio"] .styled:checked + label::after {
         max-width: 350px;
         margin-top: 30px; }
 
+.deviser-data-edit {
+  width: 300px;
+  position: absolute;
+  top: -8px;
+  left: 200px;
+  background-color: #e9e9e9;
+  float: left;
+  margin: 0 30px;
+  padding: 20px;
+  border-radius: 6px 6px 6px 6px !important;
+  -webkit-border-radius: 6px 6px 6px 6px !important;
+  -moz-border-radius: 6px 6px 6px 6px !important; }
+
+.deviser-header-edit-wrapper {
+  position: relative;
+  padding-top: 200px; }
+
 .store {
   background-color: #e9e9e9; }
   .store .content-store {
@@ -2240,6 +2257,8 @@ input[type="radio"] .styled:checked + label::after {
 
 .short-description-input-wrapper {
   position: relative; }
+  .short-description-input-wrapper textarea {
+    max-height: 110px; }
   .short-description-input-wrapper ::-webkit-input-placeholder {
     /* Chrome/Opera/Safari */
     color: #ffffff; }
