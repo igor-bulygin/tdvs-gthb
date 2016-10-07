@@ -435,6 +435,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'videos' => 'videosPreview',
 					'faq',
 					'curriculum',
+					'account_state',
 					'name' => "brandName",
 					'url_images' => 'urlImagesLocation',
 					'url_avatar' => "avatarImage128",
@@ -460,6 +461,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'videos' => 'videosPreview',
 					'faq',
 					'curriculum',
+					'account_state',
 					'preferences',
 					'url_images' => 'urlImagesLocation',
 				];
@@ -484,6 +486,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'videos',
 					'faq',
 					'curriculum',
+					'account_state',
 					'preferences',
 					'url_images' => 'urlImagesLocation',
 				];
