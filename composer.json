@@ -28,7 +28,8 @@
 		"yii2tech/ar-position": "^1.0",
 		"yii2tech/ar-softdelete": "^1.0",
 		"yii2tech/embedded": "^1.0",
-		"javiereguiluz/easyslugger": "^1.0"
+		"javiereguiluz/easyslugger": "^1.0",
+		"educoder/pest": "1.0.0"
 	},
 	"require-dev": {
 		"yiisoft/yii2-codeception": "2.0.5",

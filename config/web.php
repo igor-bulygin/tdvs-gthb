@@ -256,6 +256,7 @@ $config = [
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/term'],
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/category'],
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/country'],
+				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/location'],
 				'GET api3/pub/v1/invitations/<uuid:[^/.]*?>' => 'api3/pub/v1/invitation/view', // override "view" action to accept alphanumeric ids
 
 				// API routing (private)
