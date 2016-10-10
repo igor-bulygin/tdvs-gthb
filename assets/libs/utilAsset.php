@@ -7,7 +7,7 @@ class utilAsset extends AssetBundle {
 	public $basePath = '@webroot';
 	public $baseUrl = '@web';
 	public $css = [
-		'js/util/gplaces/gplaces.css'
+		//'js/util/gplaces/gplaces.css'
 	];
 	public $js = [
 		'js/util/util.js',
@@ -17,8 +17,8 @@ class utilAsset extends AssetBundle {
 		'js/util/form-errors/form-errors.js',
 		'js/util/modal-crop/modal-crop.js',
 		'js/util/contenteditable.js',
-		'js/util/gplaces/gplaces.js',
-		'https://maps.googleapis.com/maps/api/js?libraries=places'
+		// 'js/util/gplaces/gplaces.js',
+		// 'https://maps.googleapis.com/maps/api/js?libraries=places'
 	];
 	
 	public $depends = [

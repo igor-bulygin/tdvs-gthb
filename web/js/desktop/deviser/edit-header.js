@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(deviserDataService, languageDataService, UtilService, Upload, $uibModal, toastr, $scope, $rootScope) {
+	function controller(deviserDataService, languageDataService, UtilService, Upload, $uibModal, toastr, $scope, $rootScope, locationDataService) {
 		var vm = this;
 		vm.has_error = UtilService.has_error;
 		vm.isProfilePublic = false;
@@ -9,11 +9,9 @@
 		vm.openCropModal = openCropModal;
 		vm.updateAll = updateAll;
 		vm.update = update;
+		vm.selectCity = selectCity;
 		vm.searchPlace = searchPlace;
 		vm.limit_text_biography = 140;
-		vm.gApiOptions = {
-			types: ['(cities)']
-		}
 
 		function getDeviser() {
 			deviserDataService.Profile.get({
@@ -56,15 +54,22 @@
 
 		init();
 
-		function searchPlace() {
-			if(vm.city.address_components && vm.city.address_components.length > 0){
-				vm.deviser.personal_info.city = vm.city.name;
-				vm.deviser.personal_info.country = vm.city.address_components[vm.city.address_components.length - 1]['short_name'];
-			}
+		function searchPlace(place) {
+			locationDataService.Location.get({
+				q: place
+			}).$promise.then(function(dataLocation) {
+				vm.cities=dataLocation.items;
+			});
+		}
+
+		function selectCity(city) {
+			vm.deviser.personal_info.city = city.city;
+			vm.deviser.personal_info.country = city.country_code;
+			vm.city = vm.deviser.personal_info.city + ', ' + vm.deviser.personal_info.country;
+			delete vm.cities;
 		}
 
 		function updateAll() {
-			searchPlace();
 			update('media', vm.deviser.media);
 			update('text_short_description', vm.deviser.text_short_description);
 			update('personal_info', vm.deviser.personal_info);

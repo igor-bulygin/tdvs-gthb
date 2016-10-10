@@ -50,7 +50,12 @@ $deviser = $this->params['deviser'];
 								<!-- City -->
 								<div>
 									<label for="city">City</label>
-									<input type="text" class="form-control ng-class:{'error-input': editHeaderCtrl.has_error(editHeaderCtrl.form, editHeaderCtrl.form.city)}" g-places-autocomplete ng-model="editHeaderCtrl.city" options="editHeaderCtrl.gApiOptions" placeholder="Your city" name="city" required>
+									<input type="text" class="form-control ng-class:{'error-input': editHeaderCtrl.has_error(editHeaderCtrl.form, editHeaderCtrl.form.city)}" ng-model="editHeaderCtrl.city" ng-change="editHeaderCtrl.searchPlace(editHeaderCtrl.city)" placeholder="Your city" name="city" required>
+								</div>
+								<div>
+									<ol>
+										<li ng-repeat="city in editHeaderCtrl.cities"><span ng-click="editHeaderCtrl.selectCity(city)" style="cursor:pointer;">{{city.city}} - {{city.country_name}}</span></li>
+									</ol>
 								</div>
 								<!-- Short biography -->
 								<label for="text_short_description">Short description of your brand</label>
