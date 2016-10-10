@@ -33,7 +33,7 @@ $deviser = $this->params['deviser'];
                                 <div ng-if="!editHeaderCtrl.isProfilePublic">
                                     <button class="btn btn-default btn-green" ng-click="editHeaderCtrl.updateAll()">Save progress</button>
                                 </div>
-                                <div ng-if="!editHeaderCtrl.isProfilePublic">
+                                <div ng-if="editHeaderCtrl.isProfilePublic">
                                     <button class="btn btn-default btn-green">Save changes</button>
                                     <button class="btn btn-default">Cancel</button>
                                 </div>

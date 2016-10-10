@@ -7,6 +7,7 @@
 		vm.isProfilePublic = false;
 		vm.description_language = "en-US";
 		vm.openCropModal = openCropModal;
+		vm.openConfirmationModal = openConfirmationModal;
 		vm.updateAll = updateAll;
 		vm.update = update;
 		vm.selectCity = selectCity;
@@ -22,6 +23,8 @@
 				//set name
 				if (!vm.deviser.personal_info.brand_name)
 					vm.deviser.personal_info.brand_name = angular.copy(vm.deviser.personal_info.name);
+				//set status
+				vm.isProfilePublic = (vm.deviser.account_state === 'draft' ? false : true);
 				//set city
 				if(vm.deviser.personal_info.city && vm.deviser.personal_info.country)
 					vm.city = vm.deviser.personal_info.city + ', ' + vm.deviser.personal_info.country;
@@ -78,9 +81,7 @@
 		}
 
 		function updateAll() {
-			update('media', vm.deviser.media);
-			update('text_short_description', vm.deviser.text_short_description);
-			update('personal_info', vm.deviser.personal_info);
+			
 		}
 
 		function update(field, value) {
@@ -125,6 +126,12 @@
 				vm.deviser.media[type] = dataUpload.data.filename;
 				update('media', vm.deviser.media);
 			});
+		}
+
+		function openConfirmationModal() {
+			var modalInstance = $uibModal.open({
+				component: 'modalConfirmLeave'
+			})
 		}
 
 		function openCropModal(photo, type) {

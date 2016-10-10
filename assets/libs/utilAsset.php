@@ -16,6 +16,7 @@ class utilAsset extends AssetBundle {
 		'js/util/form-messages/form-messages.js',
 		'js/util/form-errors/form-errors.js',
 		'js/util/modal-crop/modal-crop.js',
+		'js/util/modal-confirm-leave/modal-confirm-leave.js',
 		'js/util/contenteditable.js',
 		// 'js/util/gplaces/gplaces.js',
 		// 'https://maps.googleapis.com/maps/api/js?libraries=places'
