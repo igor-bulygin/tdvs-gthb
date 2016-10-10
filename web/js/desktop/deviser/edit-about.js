@@ -22,6 +22,7 @@
 				deviser_id: UtilService.returnDeviserIdFromUrl()
 			}).$promise.then(function (dataDeviser) {
 				vm.deviser = dataDeviser;
+				vm.deviser_original = angular.copy(dataDeviser);
 				vm.images = UtilService.parseImagesUrl(vm.deviser.media.photos, vm.deviser.url_images);
 				vm.curriculum = currentHost() + vm.deviser.url_images + vm.deviser.curriculum;
 			}, function (err) {
@@ -153,9 +154,17 @@
 			}
 		}
 
-		$scope.$on('update-profile', function() {
-			getDeviser();
-		});		
+		//watches
+		$scope.$watch('editAboutCtrl.deviser', function (newValue, oldValue) {
+			if(newValue) {
+				if(!angular.equals(newValue, vm.deviser_original)) {
+					$rootScope.$broadcast('deviser-changed', {value: true});
+				} else {
+					$rootScope.$broadcast('deviser-changed', {value: false});
+				}
+			}
+		}, true);
+
 	}
 
 	angular

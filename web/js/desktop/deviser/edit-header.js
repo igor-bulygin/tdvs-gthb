@@ -20,6 +20,7 @@
 				deviser_id: UtilService.returnDeviserIdFromUrl()
 			}).$promise.then(function (dataDeviser) {
 				vm.deviser = dataDeviser;
+				vm.deviser_original = angular.copy(dataDeviser);
 				//set name
 				if (!vm.deviser.personal_info.brand_name)
 					vm.deviser.personal_info.brand_name = angular.copy(vm.deviser.personal_info.name);
@@ -128,6 +129,11 @@
 			});
 		}
 
+		function setDeviserChanged(value){
+			vm.deviser_changed = value;
+		}
+
+		//modals
 		function openConfirmationModal() {
 			var modalInstance = $uibModal.open({
 				component: 'modalConfirmLeave'
@@ -165,6 +171,7 @@
 			});
 		}
 
+		//watches
 		$scope.$watch('editHeaderCtrl.new_header', function (newValue, oldValue) {
 			if (newValue) {
 				//upload original
@@ -188,8 +195,20 @@
 				vm.deviser.text_short_description[vm.description_language] = oldValue;
 		});
 
-		$scope.$on('update-profile', function () {
-			getDeviser();
+		//checks for new changes in deviser (sets deviser_changed to true or false)
+		$scope.$watch('editHeaderCtrl.deviser', function (newValue, oldValue) {
+			if(newValue) {
+				if(!angular.equals(newValue, vm.deviser_original)) {
+					setDeviserChanged(true);
+				} else {
+					setDeviserChanged(false);
+				}
+			}
+		}, true);
+
+		//events
+		$scope.$on('deviser-changed', function(event, args) {
+			setDeviserChanged(args.value);
 		});
 
 	}
