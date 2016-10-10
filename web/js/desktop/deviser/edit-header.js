@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(deviserDataService, languageDataService, UtilService, Upload, $uibModal, toastr, $scope, $rootScope, locationDataService) {
+	function controller(deviserDataService, languageDataService, UtilService, Upload, $uibModal, toastr, $scope, $rootScope, locationDataService, $location) {
 		var vm = this;
 		vm.has_error = UtilService.has_error;
 		vm.isProfilePublic = false;
@@ -134,10 +134,24 @@
 		}
 
 		//modals
-		function openConfirmationModal() {
+		function openConfirmationModal(link) {
 			var modalInstance = $uibModal.open({
-				component: 'modalConfirmLeave'
-			})
+				component: 'modalConfirmLeave',
+				resolve: {
+					link: function() {
+						return link;
+					}
+				}
+			});
+
+			modalInstance.result.then(function(link) {
+				if(link) {
+					//save changes then go away
+					console.log("I have to go!");
+				}
+			}, function () {
+				console.log("dismissed");
+			});
 		}
 
 		function openCropModal(photo, type) {
@@ -209,6 +223,13 @@
 		//events
 		$scope.$on('deviser-changed', function(event, args) {
 			setDeviserChanged(args.value);
+		});
+
+		$scope.$on('$locationChangeStart', function(ev, newUrl, oldUrl) {
+			ev.preventDefault();
+			if(vm.deviser_changed) {
+				openConfirmationModal();
+			}
 		});
 
 	}
