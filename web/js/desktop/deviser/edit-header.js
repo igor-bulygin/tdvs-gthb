@@ -12,6 +12,7 @@
 		vm.selectCity = selectCity;
 		vm.searchPlace = searchPlace;
 		vm.limit_text_biography = 140;
+		vm.showCities = false;
 
 		function getDeviser() {
 			deviserDataService.Profile.get({
@@ -58,7 +59,14 @@
 			locationDataService.Location.get({
 				q: place
 			}).$promise.then(function(dataLocation) {
-				vm.cities=dataLocation.items;
+				if(dataLocation.items.length > 0){
+					vm.showCities = true;
+					vm.cities=dataLocation.items;
+					}
+				else if(dataLocation.items.length === 0) {
+					vm.showCities = false;
+					vm.noCities = true;
+				}
 			});
 		}
 
@@ -66,7 +74,7 @@
 			vm.deviser.personal_info.city = city.city;
 			vm.deviser.personal_info.country = city.country_code;
 			vm.city = vm.deviser.personal_info.city + ', ' + vm.deviser.personal_info.country;
-			delete vm.cities;
+			vm.showCities = false;
 		}
 
 		function updateAll() {
