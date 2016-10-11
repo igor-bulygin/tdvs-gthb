@@ -18,7 +18,7 @@ $deviser = $this->params['deviser'];
 			<!--<span tooltip-placement="top" uib-tooltip="CROP PHOTO" class="button ion-crop edit-cover-crop-icon" ng-click="editHeaderCtrl.openCropModal(editHeaderCtrl.header_original, 'header_cropped')" ng-if="editHeaderCtrl.header"></span>-->
 			<span ng-if="editHeaderCtrl.headerRequired && !editHeaderCtrl.new_header">REQUIRED</span>
 			<img class="cover" ngf-thumbnail="editHeaderCtrl.header || '/imgs/default-cover.jpg'">
-			<div class="banner-deviser-content">
+			<div class="banner-deviser-content banner-deviser-edit-header-content">
 				<div class="grey-overlay"></div>
 				<div class="container deviser-header-edit-wrapper">
 					<div class="deviser-profile">
@@ -32,7 +32,7 @@ $deviser = $this->params['deviser'];
                             </div>
 
                             <!-- buttons -->
-                            <div>
+                            <div class="header-edit-btns">
                                 <div ng-if="!editHeaderCtrl.isProfilePublic">
                                 	<button class="btn btn-default btn-grey" ng-if="!editHeaderCtrl.deviser_changed">Save progress</button>
                                     <button class="btn btn-default btn-green" ng-click="editHeaderCtrl.updateAll()" ng-if="editHeaderCtrl.deviser_changed">Save progress</button>
