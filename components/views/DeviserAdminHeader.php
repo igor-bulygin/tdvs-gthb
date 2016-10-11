@@ -31,7 +31,7 @@ $deviser = $this->params['deviser'];
                             <!-- buttons -->
                             <div>
                                 <div ng-if="!editHeaderCtrl.isProfilePublic">
-                                	<button class="btn btn-default" ng-if="!editHeaderCtrl.deviser_changed">Save progress</button>
+                                	<button class="btn btn-default btn-green" ng-if="!editHeaderCtrl.deviser_changed">Save progress</button>
                                     <button class="btn btn-default btn-green" ng-click="editHeaderCtrl.updateAll()" ng-if="editHeaderCtrl.deviser_changed">Save progress</button>
                                 </div>
                                 <div ng-if="editHeaderCtrl.isProfilePublic">
@@ -54,7 +54,7 @@ $deviser = $this->params['deviser'];
 									<input type="text" class="form-control ng-class:{'error-input': editHeaderCtrl.has_error(editHeaderCtrl.form, editHeaderCtrl.form.city)}" ng-model="editHeaderCtrl.city" ng-change="editHeaderCtrl.searchPlace(editHeaderCtrl.city)" placeholder="Your city" name="city" required>
 								</div>
 								<div ng-if="editHeaderCtrl.showCities">
-									<ol>
+									<ol class="city-selection">
 										<li ng-repeat="city in editHeaderCtrl.cities"><span ng-click="editHeaderCtrl.selectCity(city)" style="cursor:pointer;">{{city.city}} - {{city.country_name}}</span></li>
 									</ol>
 								</div>

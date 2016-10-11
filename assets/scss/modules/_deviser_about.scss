@@ -234,11 +234,16 @@
 }
 .edit-avatar-photo-icon{
     color: $white;
-    font-size: 40px;
+    font-size: 32px;
     position: absolute;
     cursor: pointer;
     top: 3px;
-    left: 35px;
+    left: 49px;
+    background-color: $black;
+    height: 50px;
+    width: 50px;
+    padding: 2px 0 0 12px;
+    @include border-radius(90px,90px,90px,90px);
 }
 .crop-avatar-photo-icon{
     color:$white;
