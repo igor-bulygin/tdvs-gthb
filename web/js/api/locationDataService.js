@@ -1,8 +1,8 @@
 (function () {
 	"use strict";
 
-	function locationDataService($resource, config) {
-		this.Location = $resource(config.baseUrl + 'pub/' + config.version + 'locations');
+	function locationDataService($resource, apiConfig) {
+		this.Location = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'locations');
 	}
 
 	angular.module('api')

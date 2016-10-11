@@ -1,9 +1,9 @@
 (function () {
 	"use strict";
 
-	function faqDataService($resource, config) {
-		this.faq = $resource(config.baseUrl + 'pub/' + config.version + 'faqs/')
-		this.adminFaq = $resource(config.baseUrl + 'admin/' + config.version + 'faqs/');
+	function faqDataService($resource, apiConfig) {
+		this.faq = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'faqs/')
+		this.adminFaq = $resource(apiConfig.baseUrl + 'admin/' + apiConfig.version + 'faqs/');
 	}
 
 	angular.module('api')

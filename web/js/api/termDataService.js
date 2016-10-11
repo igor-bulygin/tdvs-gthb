@@ -1,8 +1,8 @@
 (function () {
 	"use strict";
 
-	function termDataService($resource) {
-		this.adminTerm = $resource(config.baseUrl + 'admin' + config.version + 'term/');
+	function termDataService($resource, apiConfig) {
+		this.adminTerm = $resource(apiConfig.baseUrl + 'admin' + apiConfig.version + 'term/');
 	}
 
 	angular.module('api')

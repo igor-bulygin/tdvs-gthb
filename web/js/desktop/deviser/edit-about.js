@@ -1,13 +1,9 @@
 (function () {
 	"use strict";
 
-	function config(nyaBsConfigProvider) {
-		nyaBsConfigProvider.setLocalizedText('en-us', {
-			defaultNoneSelection: 'Choose an option'
-		});
-	}
 
-	function controller(deviserDataService, UtilService, languageDataService, toastr, productDataService, Upload, $timeout, $rootScope, $scope) {
+
+	function controller(deviserDataService, UtilService, languageDataService, toastr, productDataService, Upload, $timeout, $rootScope, $scope, deviserEvents) {
 		var vm = this;
 		vm.update = update;
 		vm.move = move;
@@ -69,8 +65,7 @@
 		function move(index) {
 			if(index > -1) {
 				vm.images.splice(index,1);
-				var media = parsePhotos();
-				update('media', media);
+				vm.deviser.media = parsePhotos();
 			} else {
 				toastr.error("Could not move.");
 			}
@@ -105,14 +100,14 @@
 				url: deviserDataService.Uploads,
 				data: data
 			}).then(function (dataCV) {
-				update('curriculum', dataCV.data.filename);
+				vm.deviser.curriculum = dataCV.data.filename;
 			}, function (err) {
 				toastr.error(err);
 			})
 		}
 
 		function deleteCV() {
-			update('curriculum', '');
+			vm.deviser.curriculum = '';
 		}
 
 		function uploadPhoto(images, errImages) {
@@ -131,7 +126,6 @@
 					toastr.success("Photo uploaded!");
 					vm.deviser.media.photos.unshift(dataUpload.data.filename);
 					vm.images = UtilService.parseImagesUrl(vm.deviser.media.photos, vm.deviser.url_images);
-					update('media', vm.deviser.media);
 					$timeout(function () {
 						delete file.progress;
 					}, 1000);
@@ -147,10 +141,9 @@
 		function delete_image(index) {
 			if (vm.images.length > 3) {
 				vm.images.splice(index, 1);
-				var media = parsePhotos();
-				update('media', media);
+				vm.deviser.media = parsePhotos();
 			} else {
-				toastr.error("Must have between 3 and 7 photos.");
+				toastr.error("Must have between 3 and 5 photos.");
 			}
 		}
 
@@ -158,17 +151,26 @@
 		$scope.$watch('editAboutCtrl.deviser', function (newValue, oldValue) {
 			if(newValue) {
 				if(!angular.equals(newValue, vm.deviser_original)) {
-					$rootScope.$broadcast('deviser-changed', {value: true});
+					$rootScope.$broadcast(deviserEvents.deviser_changed, {value: true, deviser: newValue});
 				} else {
-					$rootScope.$broadcast('deviser-changed', {value: false});
+					$rootScope.$broadcast(deviserEvents.deviser_changed, {value: false});
 				}
 			}
 		}, true);
+
+		//events
+		$scope.$on(deviserEvents.deviser_updated, function(event, args) {
+			getDeviser();
+		});
+
+		$scope.$on(deviserEvents.deviser_changed, function(event, args) {
+			if(args.deviser)
+				vm.deviser = angular.copy(args.deviser);
+		});
 
 	}
 
 	angular
 		.module('todevise')
-		.config(config)
 		.controller('editAboutCtrl', controller);
 }());

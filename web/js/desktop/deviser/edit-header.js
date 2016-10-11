@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(deviserDataService, languageDataService, UtilService, Upload, $uibModal, toastr, $scope, $rootScope, locationDataService, $location) {
+	function controller(deviserDataService, languageDataService, UtilService, Upload, $uibModal, toastr, $scope, $rootScope, locationDataService, $location, deviserEvents) {
 		var vm = this;
 		vm.has_error = UtilService.has_error;
 		vm.isProfilePublic = false;
@@ -79,12 +79,32 @@
 			vm.deviser.personal_info.country = city.country_code;
 			vm.city = vm.deviser.personal_info.city + ', ' + vm.deviser.personal_info.country;
 			vm.showCities = false;
+			vm.noCities = false;
 		}
 
 		function updateAll() {
-			
+			var patch = new deviserDataService.Profile;
+			patch.scenario = "deviser-update-profile";
+			patch.deviser_id = vm.deviser.id;
+			for(var key in vm.deviser) {
+				//delete unwanted tags on text_biography
+				if(key === 'text_biography') {
+					for(var language in vm.deviser[key]) {
+						vm.deviser[key][language]=vm.deviser[key][language].replace(/<[^\/>][^>]*><\/[^>]+>/gim, "");
+					}
+				}
+				if(key!=='account_state')
+					patch[key] = angular.copy(vm.deviser[key]);
+			}
+			patch.$update().then(function(updateData) {
+				$rootScope.$broadcast('deviser-updated');
+				vm.deviser_changed = false;
+			}, function(err) {
+				toastr.error(err);
+			});
 		}
 
+		//deprecated?
 		function update(field, value) {
 			var patch = new deviserDataService.Profile;
 			patch.scenario = "deviser-update-profile";
@@ -125,7 +145,6 @@
 			}).then(function (dataUpload) {
 				toastr.success("Photo uploaded!");
 				vm.deviser.media[type] = dataUpload.data.filename;
-				update('media', vm.deviser.media);
 			});
 		}
 
@@ -204,6 +223,7 @@
 			}
 		})
 
+		//checks char limit on text_short_description
 		$scope.$watch('editHeaderCtrl.deviser.text_short_description[editHeaderCtrl.description_language]', function (newValue, oldValue) {
 			if (newValue && newValue.length > vm.limit_text_biography)
 				vm.deviser.text_short_description[vm.description_language] = oldValue;
@@ -214,6 +234,7 @@
 			if(newValue) {
 				if(!angular.equals(newValue, vm.deviser_original)) {
 					setDeviserChanged(true);
+					$rootScope.$broadcast(deviserEvents.deviser_changed, {value: true, deviser: newValue});
 				} else {
 					setDeviserChanged(false);
 				}
@@ -221,8 +242,14 @@
 		}, true);
 
 		//events
-		$scope.$on('deviser-changed', function(event, args) {
+		$scope.$on(deviserEvents.deviser_changed, function(event, args) {
 			setDeviserChanged(args.value);
+			if(args.deviser)
+				vm.deviser = angular.copy(args.deviser);
+		});
+
+		$scope.$on(deviserEvents.deviser_updated, function (event, args) {
+			getDeviser();
 		});
 
 		$scope.$on('$locationChangeStart', function(ev, newUrl, oldUrl) {

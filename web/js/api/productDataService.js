@@ -1,13 +1,13 @@
 (function () {
 	"use strict";
 
-	function productDataService($resource, config) {
+	function productDataService($resource, apiConfig) {
 		//pub
-		this.Product = $resource(config.baseUrl + 'pub/' + config.version + 'products/:idProduct');
-		this.Categories = $resource(config.baseUrl + 'pub/' + config.version + 'categories');
+		this.Product = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'products/:idProduct');
+		this.Categories = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'categories');
 
 		//priv
-		this.ProductPriv = $resource(config.baseUrl + 'priv/' + config.version + 'products/:idProduct', {}, {
+		this.ProductPriv = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'products/:idProduct', {}, {
 			'update': {
 				method: 'PATCH'
 			}

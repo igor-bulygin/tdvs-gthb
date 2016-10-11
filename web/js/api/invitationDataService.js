@@ -1,9 +1,9 @@
 (function () {
 	"use strict";
 
-	function invitationDataService($resource, config) {
+	function invitationDataService($resource, apiConfig) {
 		//pub
-		this.Invitation = $resource(config.baseUrl + 'admin/' + config.version + 'invitations');
+		this.Invitation = $resource(apiConfig.baseUrl + 'admin/' + apiConfig.version + 'invitations');
 	}
 
 	angular.module('api')

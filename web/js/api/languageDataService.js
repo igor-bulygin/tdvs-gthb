@@ -1,8 +1,8 @@
 (function () {
 	"use strict";
 	
-	function languageDataService($resource, config) {
-		this.Languages = $resource(config.baseUrl + 'pub/' + config.version + 'languages');
+	function languageDataService($resource, apiConfig) {
+		this.Languages = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'languages');
 	}
 	
 	angular.module('api')

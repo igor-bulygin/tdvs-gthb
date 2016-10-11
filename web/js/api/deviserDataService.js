@@ -1,18 +1,21 @@
 (function () {
 	"use strict";
 
-	function deviserDataService($resource, config) {
+	function deviserDataService($resource, apiConfig) {
 		//pub
-		this.InvitationRequest = $resource(config.baseUrl + 'pub/' + config.version + 'devisers/invitation-requests');
-		this.Invitation = $resource(config.baseUrl + 'pub/' + config.version + 'invitations/:idInvitation');
-		this.Devisers = $resource(config.baseUrl + 'pub/' + config.version + 'devisers');
+		this.InvitationRequest = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'devisers/invitation-requests');
+		this.Invitation = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'invitations/:idInvitation');
+		this.Devisers = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'devisers');
 
-		this.Profile = $resource(config.baseUrl + 'priv/' + config.version + 'profile/deviser', {}, {
+		this.Profile = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'profile/deviser', {}, {
 			'update': {
 				method: 'PATCH'
+			},
+			'put': {
+				method: 'PUT'
 			}
 		});
-		this.Uploads = config.baseUrl + "priv/" + config.version + 'uploads';
+		this.Uploads = apiConfig.baseUrl + "priv/" + apiConfig.version + 'uploads';
 	}
 
 	angular.module('api')

@@ -2,7 +2,7 @@
 	"use strict";
 
 	angular.module('api', ['ngResource'])
-		.constant('config', {
+		.constant('apiConfig', {
 			baseUrl: currentHost() + '/api3/',
 			version: 'v1/'
 		});
