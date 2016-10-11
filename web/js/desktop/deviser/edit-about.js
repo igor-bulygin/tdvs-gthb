@@ -168,6 +168,10 @@
 				vm.deviser = angular.copy(args.deviser);
 		});
 
+		$scope.$on(deviserEvents.make_profile_public_errors, function(event, args) {
+			console.log("set required about", args);
+		})
+
 	}
 
 	angular

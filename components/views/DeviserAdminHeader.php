@@ -16,6 +16,7 @@ $deviser = $this->params['deviser'];
 		<div class="container pad-about">
 			<span tooltip-placement="top" uib-tooltip="ADD COVER PHOTO" class="button ion-camera edit-cover-photo-icon" ngf-select ng-model="editHeaderCtrl.new_header" name="header" ngf-pattern="'image/*'" ngf-accept="'image/*'"></span>
 			<!--<span tooltip-placement="top" uib-tooltip="CROP PHOTO" class="button ion-crop edit-cover-crop-icon" ng-click="editHeaderCtrl.openCropModal(editHeaderCtrl.header_original, 'header_cropped')" ng-if="editHeaderCtrl.header"></span>-->
+			<span ng-if="editHeaderCtrl.headerRequired && !editHeaderCtrl.new_header">REQUIRED</span>
 			<img class="cover" ngf-thumbnail="editHeaderCtrl.header || '/imgs/default-cover.jpg'">
 			<div class="banner-deviser-content">
 				<div class="grey-overlay"></div>
@@ -26,17 +27,19 @@ $deviser = $this->params['deviser'];
                                 <img class="cover" ngf-thumbnail="editHeaderCtrl.profile || '/imgs/default-avatar.jpg' ">
                                 <span tooltip-placement="top" uib-tooltip="ADD PHOTO" class="button ion-camera edit-avatar-photo-icon" ngf-select ng-model="editHeaderCtrl.new_profile" name="profile" ngf-pattern="'image/*'" ngf-accept="'image/*'"></span>
                                 <!--<span tooltip-placement="top" uib-tooltip="CROP PHOTO" class="button ion-crop crop-avatar-photo-icon" ng-if="editHeaderCtrl.profile_original" ng-click="editHeaderCtrl.openCropModal(editHeaderCtrl.profile_original, 'profile_cropped')"></span>-->
+                                <div ng-if="editHeaderCtrl.profileRequired && !editHeaderCtrl.new_profile"><p>REQUIRED</p></div>
+                                <div ng-if=""></div>
                             </div>
 
                             <!-- buttons -->
                             <div>
                                 <div ng-if="!editHeaderCtrl.isProfilePublic">
-                                	<button class="btn btn-default" ng-if="!editHeaderCtrl.deviser_changed">Save progress</button>
+                                	<button class="btn btn-default btn-grey" ng-if="!editHeaderCtrl.deviser_changed">Save progress</button>
                                     <button class="btn btn-default btn-green" ng-click="editHeaderCtrl.updateAll()" ng-if="editHeaderCtrl.deviser_changed">Save progress</button>
                                 </div>
                                 <div ng-if="editHeaderCtrl.isProfilePublic">
-                                    <button class="btn btn-default btn-green">Save changes</button>
-                                    <button class="btn btn-default">Cancel</button>
+                                    <button class="btn btn-default btn-grey" ng-click="editHeaderCtrl.restoreDeviser()" ng-disabled="!editHeaderCtrl.deviser_changed">Cancel</button>
+                                    <button class="btn btn-default btn-green" ng-click="editHeaderCtrl.updateAll()">Save changes</button>
                                 </div>
                             </div>
 						</div>
@@ -57,9 +60,6 @@ $deviser = $this->params['deviser'];
 									<ul class="city-selection">
 										<li ng-repeat="city in editHeaderCtrl.cities"><span ng-click="editHeaderCtrl.selectCity(city)" style="cursor:pointer;">{{city.city}} - {{city.country_name}}</span></li>
 									</ul>
-								</div>
-								<div ng-if="!editHeaderCtrl.showCities && editHeaderCtrl.noCities">
-									<p>No cities found.</p>
 								</div>
 								<!-- Short biography -->
 								<label for="text_short_description">Short description of your brand</label>

@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(deviserDataService, UtilService, toastr) {
+	function controller(deviserDataService, UtilService, toastr, $window, $rootScope, deviserEvents) {
 		var vm = this;
 		vm.active = active;
 
@@ -11,10 +11,9 @@
 			patch.scenario = "deviser-update-profile";
 			patch.account_state = "active";
 			patch.$update().then(function (updateData) {
-				toastr.error("ok");
-				toastr.error("ok");
-				console.log(updateData);
+				$window.location.href = '/deviser/' + updateData.slug + '/' + updateData.id + '/about/edit';
 			}, function (err) {
+				$rootScope.$broadcast(deviserEvents.make_profile_public_errors, {required_fields: err.data.errors.required});
 				for (var key in err.data.errors) {
 					toastr.error(err.data.errors[key]);
 				}

@@ -9,9 +9,9 @@
 		vm.openCropModal = openCropModal;
 		vm.openConfirmationModal = openConfirmationModal;
 		vm.updateAll = updateAll;
-		vm.update = update;
 		vm.selectCity = selectCity;
 		vm.searchPlace = searchPlace;
+		vm.restoreDeviser = restoreDeviser;
 		vm.limit_text_biography = 140;
 		vm.showCities = false;
 
@@ -21,26 +21,33 @@
 			}).$promise.then(function (dataDeviser) {
 				vm.deviser = dataDeviser;
 				vm.deviser_original = angular.copy(dataDeviser);
-				//set name
-				if (!vm.deviser.personal_info.brand_name)
-					vm.deviser.personal_info.brand_name = angular.copy(vm.deviser.personal_info.name);
-				//set status
-				vm.isProfilePublic = (vm.deviser.account_state === 'draft' ? false : true);
-				//set city
-				if(vm.deviser.personal_info.city && vm.deviser.personal_info.country)
-					vm.city = vm.deviser.personal_info.city + ', ' + vm.deviser.personal_info.country;
-				//set images
-				if (vm.deviser.media.header_cropped)
-					vm.header = currentHost() + vm.deviser.url_images + vm.deviser.media.header_cropped;
-				if (vm.deviser.media.profile_cropped)
-					vm.profile = currentHost() + vm.deviser.url_images + vm.deviser.media.profile_cropped;
-				if (vm.deviser.media.header)
-					vm.header_original = currentHost() + vm.deviser.url_images + vm.deviser.media.header;
-				if (vm.deviser.media.profile)
-					vm.profile_original = currentHost() + vm.deviser.url_images + vm.deviser.media.profile;
+				parseDeviserInfo(vm.deviser);
 			}, function (err) {
 				toastr.error(err);
 			});
+		}
+
+		function parseDeviserInfo(deviser){
+			function setHostImage(image){
+				return currentHost() + deviser.url_images + image;
+			}
+			//set name
+			if(deviser.personal_info.brand_name)
+				deviser.personal_info.brand_name = angular.copy(deviser.personal_info.name);
+			//set status
+			vm.isProfilePublic = (deviser.account_state === 'draft' ? false: true);
+			//set city
+			if(deviser.personal_info.city && deviser.personal_info.country)
+				vm.city = deviser.personal_info.city + ', ' + deviser.personal_info.country;
+			//set images
+			if(deviser.media.header_cropped)
+				vm.header = setHostImage(deviser.media.header_cropped);
+			if(deviser.media.profile_cropped)
+				vm.profile = setHostImage(deviser.media.profile_cropped);
+			if(deviser.media.header)
+				vm.header_original = setHostImage(deviser.media.header);
+			if(deviser.media.profile)
+				vm.profile_original = setHostImage(deviser.media.profile);
 		}
 
 		function getLanguages() {
@@ -69,7 +76,6 @@
 					}
 				else if(dataLocation.items.length === 0) {
 					vm.showCities = false;
-					vm.noCities = true;
 				}
 			});
 		}
@@ -79,7 +85,6 @@
 			vm.deviser.personal_info.country = city.country_code;
 			vm.city = vm.deviser.personal_info.city + ', ' + vm.deviser.personal_info.country;
 			vm.showCities = false;
-			vm.noCities = false;
 		}
 
 		function updateAll() {
@@ -100,19 +105,6 @@
 				$rootScope.$broadcast('deviser-updated');
 				vm.deviser_changed = false;
 			}, function(err) {
-				toastr.error(err);
-			});
-		}
-
-		//deprecated?
-		function update(field, value) {
-			var patch = new deviserDataService.Profile;
-			patch.scenario = "deviser-update-profile";
-			patch[field] = angular.copy(value);
-			patch.deviser_id = vm.deviser.id;
-			patch.$update().then(function (updateData) {
-				//$rootScope.$broadcast('update-profile');
-			}, function (err) {
 				toastr.error(err);
 			});
 		}
@@ -148,8 +140,13 @@
 			});
 		}
 
-		function setDeviserChanged(value){
+		function setDeviserChanged(value) {
 			vm.deviser_changed = value;
+		}
+
+		function restoreDeviser(){
+			parseDeviserInfo(vm.deviser_original);
+			vm.deviser = angular.copy(vm.deviser_original);
 		}
 
 		//modals
@@ -166,6 +163,7 @@
 			modalInstance.result.then(function(link) {
 				if(link) {
 					//save changes then go away
+					updateAll();
 					console.log("I have to go!");
 				}
 			}, function () {
@@ -251,6 +249,21 @@
 		$scope.$on(deviserEvents.deviser_updated, function (event, args) {
 			getDeviser();
 		});
+
+		$scope.$on(deviserEvents.make_profile_public_errors, function(event, args) {
+			console.log("set required header", args);
+			//set form as submitted
+			vm.form.$setSubmitted();
+			//check for both header and profile requireds
+			for(var i=0; i<args.required_fields.length; i++) {
+				if(args.required_fields[i]==='profile')
+					//set profile required
+					vm.profileRequired = true;
+				if(args.required_fields[i]==='header')
+					//set header required
+					vm.headerRequired = true;
+			}
+		})
 
 		$scope.$on('$locationChangeStart', function(ev, newUrl, oldUrl) {
 			ev.preventDefault();
