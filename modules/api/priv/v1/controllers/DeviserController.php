@@ -37,7 +37,7 @@ class DeviserController extends AppPrivateController
 
 		try {
 			$newAccountState = Yii::$app->request->post('account_state');
-			$this->setNewDeviserAccountState($deviser, $newAccountState); // check for allowed new account state only
+			$this->checkDeviserAccountState($deviser, $newAccountState); // check for allowed new account state only
 
 			$deviser->setScenario($this->getDetermineScenario($deviser)); // safe and required attributes are related with scenario
 			if (($deviser->load(Yii::$app->request->post(), '')) && $deviser->save()) {
@@ -101,14 +101,24 @@ class DeviserController extends AppPrivateController
 	 * @param $accountState
 	 * @throws BadRequestHttpException
 	 */
-	private function setNewDeviserAccountState(Person $deviser, $accountState)
+	private function checkDeviserAccountState(Person $deviser, $accountState)
 	{
 		if (!empty($accountState)) {
-			if ($accountState != Person::ACCOUNT_STATE_ACTIVE) {
-				throw new BadRequestHttpException('Invalid account state');
-			} else {
-				$deviser->account_state = Person::ACCOUNT_STATE_ACTIVE;
+			// allowed new account state depends on current account state
+			switch ($deviser->account_state) {
+				case Person::ACCOUNT_STATE_DRAFT:
+					if (!in_array($accountState, [Person::ACCOUNT_STATE_DRAFT, Person::ACCOUNT_STATE_ACTIVE])) {
+						throw new BadRequestHttpException('Invalid account state');
+					}
+					break;
+				case Person::ACCOUNT_STATE_ACTIVE:
+					if ($accountState != Person::ACCOUNT_STATE_ACTIVE) {
+						throw new BadRequestHttpException('Invalid account state');
+					}
+					break;
 			}
+
+			$deviser->account_state = $accountState;
 		}
 	}
 }

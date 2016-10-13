@@ -346,7 +346,7 @@ class Person extends CActiveRecord implements IdentityInterface
 			[
 				'account_state',
 				'in',
-				'range' => [self::ACCOUNT_STATE_ACTIVE],
+				'range' => [self::ACCOUNT_STATE_DRAFT, self::ACCOUNT_STATE_ACTIVE],
 				'on' => [self::SCENARIO_DEVISER_UPDATE_PROFILE],
 			],
 			[
