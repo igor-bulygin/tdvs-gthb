@@ -91,6 +91,8 @@
 			if(vm.previous_index) {
 				//get original images
 				vm.images = angular.copy(vm.original_images);
+				if(index < vm.original_index)
+					vm.images[vm.original_index] = vm.images[vm.original_index-1];
 				//insert image in index
 				vm.images.splice(index, 0, vm.image_being_moved);
 				//set previous_index
