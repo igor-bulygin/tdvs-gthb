@@ -26,7 +26,7 @@ class LocationController extends Controller {
 	    $pest = new PestJSON('https://maps.googleapis.com/maps/api/place/autocomplete');
 
 	    // TODO Move API Key to .env file
-	    $result = $pest->get(sprintf('/json?input=%s&types=(cities)&key=AIzaSyCJH-hVpG5hT_wooQ1baYtRuR4NlrG8dyw', $text));
+	    $result = $pest->get(sprintf('/json?input=%s&types=(cities)&key=AIzaSyCJH-hVpG5hT_wooQ1baYtRuR4NlrG8dyw', urlencode($text)));
 	    switch ($view) {
 		    case "debug":
 			    $predictions = $result;
