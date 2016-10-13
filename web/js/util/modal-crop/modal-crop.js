@@ -21,6 +21,10 @@
 				vm.height = 340;
 				vm.aspect_ratio = 1;
 				break;
+			default: 
+				vm.area_type = 'rectangle';
+				vm.aspect_ratio = 1;
+				break;
 			}
 		}
 

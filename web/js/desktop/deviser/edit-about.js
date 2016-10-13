@@ -3,11 +3,12 @@
 
 
 
-	function controller(deviserDataService, UtilService, languageDataService, toastr, productDataService, Upload, $timeout, $rootScope, $scope, deviserEvents) {
+	function controller(deviserDataService, UtilService, languageDataService, toastr, productDataService, Upload, $timeout, $rootScope, $scope, deviserEvents, $uibModal) {
 		var vm = this;
 		vm.update = update;
 		vm.move = move;
 		vm.uploadPhoto = uploadPhoto;
+		vm.openCropModal = openCropModal;
 		vm.uploadCV = uploadCV;
 		vm.deleteCV = deleteCV;
 		vm.deleteImage = delete_image;
@@ -110,7 +111,27 @@
 			vm.deviser.curriculum = '';
 		}
 
-		function uploadPhoto(images, errImages) {
+		function openCropModal(photo, index) {
+			var modalInstance = $uibModal.open({
+				component: 'modalCrop',
+				resolve: {
+					photo: function() {
+						return photo;
+					}
+				}
+			});
+
+			modalInstance.result.then(function (imageCropped) {
+				if(imageCropped) {
+					uploadPhoto([Upload.dataUrltoBlob(imageCropped, "temp.png")], null, index);
+				}
+			}, function (err) {
+				console.log(err);
+			});
+
+		}
+
+		function uploadPhoto(images, errImages, index) {
 			vm.files = images;
 			vm.errFiles = errImages;
 			angular.forEach(vm.files, function (file) {
@@ -124,8 +145,12 @@
 					data: data
 				}).then(function (dataUpload) {
 					toastr.success("Photo uploaded!");
-					vm.deviser.media.photos.unshift(dataUpload.data.filename);
-					vm.images = UtilService.parseImagesUrl(vm.deviser.media.photos, vm.deviser.url_images);
+					if(index>-1) {
+						vm.deviser.media.photos[index] = dataUpload.data.filename;
+					} else {
+						vm.deviser.media.photos.unshift(dataUpload.data.filename);
+					}
+						vm.images = UtilService.parseImagesUrl(vm.deviser.media.photos, vm.deviser.url_images);
 					$timeout(function () {
 						delete file.progress;
 					}, 1000);
@@ -146,6 +171,8 @@
 				toastr.error("Must have between 3 and 5 photos.");
 			}
 		}
+
+
 
 		//watches
 		$scope.$watch('editAboutCtrl.deviser', function (newValue, oldValue) {

@@ -112,6 +112,7 @@ $this->params['deviser'] = $deviser;
 										</div>
 										<div class="item draggable-list about-edit-list" dnd-list="editAboutCtrl.images" ng-if="editAboutCtrl.images.length > 0" ng-cloak>
 											<div class="col-sm-4 pad-about image-about-edit" ng-repeat="image in editAboutCtrl.images" dnd-draggable="image" dnd-effect-allowed="move" dnd-moved="editAboutCtrl.move($index)">
+												<span class="button ion-crop crop-avatar-photo-icon" ng-click="editAboutCtrl.openCropModal(image.url, $index)"></span>
 												<span class="ion-android-close x-close" ng-click="editAboutCtrl.deleteImage($index)"></span>
 												<img ng-src="{{image.url}}" class="grid-image draggable-img">
 											</div>
