@@ -44,14 +44,14 @@ $this->params['deviser'] = $deviser;
 												<div class="title">Abo<br>ut</div>
 												<form name="editAboutCtrl.form">
 													<label for="fields">Choose your field(s) of work</label>
-													<ol class="nya-bs-select" ng-model="editAboutCtrl.deviser.categories" multiple ng-cloak ng-if="editAboutCtrl.categories">
+													<ol class="nya-bs-select ng-class:{'setClassCategoriesRequired': editAboutCtrl.setCategoriesRequired}" ng-model="editAboutCtrl.deviser.categories" multiple ng-cloak ng-if="editAboutCtrl.categories">
 														<li nya-bs-option="category in editAboutCtrl.categories" data-value="category.id" deep-watch="true">
 															<a href=""><span ng-bind="category.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
 														</li>
 													</ol>
 													<label for="text_biography">Brand Statement / Biography</label>
 													<span>Translate your text by selecting different languages below.</span>
-													<ol class="nya-bs-select" ng-model="editAboutCtrl.biography_language" ng-cloak>
+													<ol class="nya-bs-select ng-class:{'setClassBiographyRequired': editAboutCtrl.setClassBiographyRequired}" ng-model="editAboutCtrl.biography_language" ng-cloak>
 														<li nya-bs-option="language in editAboutCtrl.languages" data-value="language.code" deep-watch="true">
 															<a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
 														</li>
@@ -94,10 +94,10 @@ $this->params['deviser'] = $deviser;
 									</div>
 									<div class="col-md-7 pad-about about-grid">
 										<div ng-if="editAboutCtrl.isDropAvailable">
-											<div class="photo-loader loader-about" ngf-drag-over-class="drag-over" ngf-drop ngf-select ngf-change="editAboutCtrl.uploadPhoto($files,$invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="editAboutCtrl.isDropAvailable" ngf-multiple="true">
+											<div class="photo-loader loader-about ng-class:{'setClassPhotoRequired': editAboutCtrl.setPhotosRequired}" ngf-drag-over-class="drag-over" ngf-drop ngf-select ngf-change="editAboutCtrl.uploadPhoto($files,$invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="editAboutCtrl.isDropAvailable" ngf-multiple="true">
 												<span>Enrich your about section with photos</span>
 												<div class="plus-add">+</div>
-												<span>Please upload a minimum of 3 and a maximum of 5 photos.</span>
+												<span class="ng-class:{'setClassPhotoRequired': editAboutCtrl.setPhotosRequired}">Please upload a minimum of 3 and a maximum of 5 photos.</span>
 											</div>
 										</div>
 										<div ng-if="editAboutCtrl.files.length > 0" ng-repeat="item in editAboutCtrl.files" style="max-height:200px; max-width:300px;">

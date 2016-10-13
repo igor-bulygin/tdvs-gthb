@@ -169,8 +169,21 @@
 		});
 
 		$scope.$on(deviserEvents.make_profile_public_errors, function(event, args) {
-			console.log("set required about", args);
-		})
+			//set form submitted
+			vm.form.$setSubmitted();
+			//set fields
+			for(var i=0; i<args.required_fields.length; i++) {
+				if(args.required_fields[i]==='photos') {
+					vm.setPhotosRequired = true;
+				}
+				if(args.required_fields[i]==='biography') {
+					vm.setBiographyRequired = true;
+				}
+				if(args.required_fields[i]==='categories') {
+					vm.setCategoriesRequired = true;
+				}
+			}
+		});
 
 	}
 
