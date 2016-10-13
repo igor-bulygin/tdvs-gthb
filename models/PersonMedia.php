@@ -159,11 +159,15 @@ class PersonMedia extends Model
 			switch ($attribute) {
 				case 'header':
 				case 'header_cropped':
-					$this->getPerson()->addError("required", "header");
+					if (!in_array("header", $this->getPerson()->getErrors("required"))) {
+						$this->getPerson()->addError("required", "header");
+					}
 					break;
 				case 'profile':
 				case 'profile_cropped':
-					$this->getPerson()->addError("required", "profile");
+					if (!in_array("profile", $this->getPerson()->getErrors("required"))) {
+						$this->getPerson()->addError("required", "profile");
+					}
 					break;
 				case 'photos':
 					$this->getPerson()->addError("required", "about");
