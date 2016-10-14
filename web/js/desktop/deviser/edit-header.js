@@ -20,6 +20,7 @@
 				deviser_id: UtilService.returnDeviserIdFromUrl()
 			}).$promise.then(function (dataDeviser) {
 				vm.deviser = dataDeviser;
+				vm.aboutLink = '/deviser/' + dataDeviser.slug + '/' + dataDeviser.id + '/about';
 				vm.deviser_original = angular.copy(dataDeviser);
 				parseDeviserInfo(vm.deviser);
 			}, function (err) {
