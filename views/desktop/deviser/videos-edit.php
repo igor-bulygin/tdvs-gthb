@@ -35,15 +35,23 @@ $this->params['deviser_links_target'] = 'edit_view';
 					</div>
 					<div class="col-md-10" ng-controller="editVideosCtrl as editVideosCtrl">
 						<div class="video-container">
-							<form name="editVideosCtrl.form" novalidate>
-								<div class="input-group input-group-lg input-video">
-									<span class="input-group-addon" id="sizing-addon1">Video</span>
-									<input type="text" class="form-control input-add-video" placeholder="http://" ng-model="editVideosCtrl.url" name="url" ng-required="true" ng-pattern="editVideosCtrl.YoutubeRegex">
-									<span class="input-group-btn">
-										<button class="btn btn-default btn-add-video" type="button" ng-click="editVideosCtrl.addVideo()" ng-disabled="editVideosCtrl.form.$invalid">+</button>
-								</span>
-								</div>
-							</form>
+						    <div class="add-videos-wrapper">
+                               <div class="plus-add-wrapper" ng-click="editVideosCtrl.addVideo()" ng-disabled="editVideosCtrl.form.$invalid">
+                                    <div class="plus-add">
+                                        <span>+</span>
+                                    </div>
+                                    <div class="text">ADD VIDEOS</div>
+                                </div>
+                                <form name="editVideosCtrl.form" novalidate>
+                                    <div class="input-group input-group-lg input-video">
+                                        <span class="input-group-addon" id="sizing-addon1">Video url</span>
+                                        <input type="text" class="form-control input-add-video" placeholder="http://" ng-model="editVideosCtrl.url" name="url" ng-required="true" ng-pattern="editVideosCtrl.YoutubeRegex">
+                                        <!--<span class="input-group-btn">
+                                            <button class="btn btn-default btn-add-video" type="button" ng-click="editVideosCtrl.addVideo()" ng-disabled="editVideosCtrl.form.$invalid">+</button>
+                                    </span>-->
+                                    </div>
+                                </form>
+							</div>
 							<div ng-if="editVideosCtrl.deviser.videos.length === 0" class="text-center" ng-cloak>
 								<img class="sad-face" src="/imgs/sad-face.svg">
 								<p class="no-video-text">You have no videos</p>
