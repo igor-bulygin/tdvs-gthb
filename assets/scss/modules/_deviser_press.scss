@@ -21,11 +21,15 @@
     .plus-add{
         background-color: $green;
         border: 1px solid $black;
-        margin: 90px auto 10px;
+        margin: 0 auto;
         font-size: 43px;
         text-align: center;
-        @include size(75px,75px);
+        @include size(50px,50px);
         @include border-radius(90px,90px,90px,90px);
+        span{
+            display: block;
+            margin: -9px 0 0 0;
+        }
     }
     span{
         font-family: $font-family--serif;

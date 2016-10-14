@@ -97,9 +97,14 @@ $this->params['deviser'] = $deviser;
 									<div class="col-md-7 pad-about about-grid">
 										<div ng-if="editAboutCtrl.isDropAvailable">
 											<div class="photo-loader loader-about ng-class:{'setClassPhotoRequired': editAboutCtrl.setPhotosRequired}" ngf-drag-over-class="drag-over" ngf-drop ngf-select ngf-change="editAboutCtrl.uploadPhoto($files,$invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="editAboutCtrl.isDropAvailable" ngf-multiple="true">
-												<span>Enrich your about section with photos</span>
-												<div class="plus-add">+</div>
-												<span class="ng-class:{'setClassPhotoRequired': editAboutCtrl.setPhotosRequired}">Please upload a minimum of 3 and a maximum of 5 photos.</span>
+												<span class="photo-loader-title">Enrich your about section with photos</span>
+												<div class="plus-add-wrapper">
+												    <div class="plus-add">
+												        <span>+</span>
+												    </div>
+												    <div class="text">ADD PHOTOS</div>
+												</div>
+												<span class="photo-loader-warning ng-class:{'setClassPhotoRequired': editAboutCtrl.setPhotosRequired}">Please upload a minimum of 3 and a maximum of 5 photos.</span>
 											</div>
 										</div>
 										<div ng-if="editAboutCtrl.files.length > 0" ng-repeat="item in editAboutCtrl.files" style="max-height:200px; max-width:300px;">
