@@ -73,12 +73,18 @@
     }
 }
 .loader-about{
-    width: 100%;
+    width: 527px;
     height: 250px;
-    border: 1px solid $black;
-    margin: 0;
+    background-color: $background_grey;
+    margin: 20px;
+    @include border-radius(20px,20px,20px,20px);
     .plus-add{
-            margin: 50px auto 10px;
+            margin: 0 auto;
+    }
+    .photo-loader{
+        span{
+        
+        }
     }
 }
 .image-about-edit{
@@ -430,7 +436,7 @@
 .textarea-edit-about{
     .ta-text{
         padding: 45px 10px 10px 10px!important;
-        @include border-radius(20px,20px,20px,20px)
+        @include border-radius(20px,20px,20px,20px);
     }
 }
 .ta-root.focussed > .ta-scroll-window.form-control {
@@ -460,4 +466,22 @@
 .btn-upload-file{
     border: 1px solid $dark_grey;
     margin-left: 10px;
+}
+.photo-loader-title{
+    font-family: $font-family--bold!important;
+    text-transform: uppercase;
+}
+.photo-loader-warning{
+    font-family: $font-family--secondary!important;
+}
+.plus-add-wrapper{
+    background-color: $white;
+    padding: 20px;
+    width: 130px;
+    margin: 22px auto;
+    @include border-radius(20px,20px,20px,20px);
+    .text{
+        margin: 15px 0 0 0;
+        font-family: $font-family--bold!important;
+    }
 }
