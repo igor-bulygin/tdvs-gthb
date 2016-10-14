@@ -485,7 +485,6 @@
     margin-left: 10px;
 }
 .btn-upload-file{
-    border: 1px solid $dark_grey;
     margin-left: 10px;
 }
 .photo-loader-title{
@@ -504,5 +503,19 @@
     .text{
         margin: 15px 0 0 0;
         font-family: $font-family--bold!important;
+    }
+}
+.cv{
+    float: right;
+    overflow: hidden;
+    font-family: $font-family--serif;
+    .cv-file{
+        width: 135px;
+        overflow: hidden;
+    }
+    .remove-cv{
+        cursor: pointer;
+        font-size: 21px;
+        margin: -5px 0 0 9px;
     }
 }

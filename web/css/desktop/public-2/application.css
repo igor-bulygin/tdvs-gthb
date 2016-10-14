@@ -2529,7 +2529,6 @@ input[type="radio"] .styled:checked + label::after {
   margin-left: 10px; }
 
 .btn-upload-file {
-  border: 1px solid #9a9a9a;
   margin-left: 10px; }
 
 .photo-loader-title {
@@ -2550,6 +2549,18 @@ input[type="radio"] .styled:checked + label::after {
   .plus-add-wrapper .text {
     margin: 15px 0 0 0;
     font-family: "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif !important; }
+
+.cv {
+  float: right;
+  overflow: hidden;
+  font-family: "Playfair Display", Georgia, serif; }
+  .cv .cv-file {
+    width: 135px;
+    overflow: hidden; }
+  .cv .remove-cv {
+    cursor: pointer;
+    font-size: 21px;
+    margin: -5px 0 0 9px; }
 
 .video-container {
   margin: 40px 0; }
