@@ -47,10 +47,16 @@ $this->params['deviser_links_target'] = 'edit_view';
 							</div>
 							<div class="row press-3">
 								<form name="editPressCtrl.form" ng-cloak>
-									<div class="col-sm-3" ng-if="editPressCtrl.isDropAvailable">
-										<div class="photo-loader" class="menu-category list-group" ngf-drop ngf-select ngf-change="editPressCtrl.upload($files, $invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="editPressCtrl.isDropAvailable" ngf-multiple="true">
-											<div class="plus-add">+</div>
-											<span>Add press image</span>
+									<div class="col-sm-6" ng-if="editPressCtrl.isDropAvailable">
+										<div class="photo-loader-press" class="menu-category list-group" ngf-drop ngf-select ngf-change="editPressCtrl.upload($files, $invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="editPressCtrl.isDropAvailable" ngf-multiple="true">
+										    <span class="photo-loader-title">SHOW WHAT THE PRESS HAS TO SAY ABOUT YOU</span>
+											<div class="plus-add-wrapper">
+                                                <div class="plus-add">
+                                                    <span>+</span>
+                                                </div>
+                                                <div class="text">ADD PHOTOS</div>
+                                            </div>
+											<span class="photo-loader-warning">In public mode, the photos will be shown in their full size.</span>
 										</div>
 									</div>
 									<div ngf-no-file-drop>
@@ -58,7 +64,7 @@ $this->params['deviser_links_target'] = 'edit_view';
 									</div>
 								</form>
 								<div class="menu-category list-group draggable-list" ng-if="editPressCtrl.images.length > 0" dnd-list="editPressCtrl.images" dnd-dragover="editPressCtrl.dragOver(event, index)" dnd-drop="editPressCtrl.drop(index)">
-									<div class="col-sm-3" ng-repeat="item in editPressCtrl.images track by $index" dnd-type="'pressType'" dnd-draggable="item" dnd-effect-allowed="move" dnd-moved="editPressCtrl.update($index)" dnd-dragstart="editPressCtrl.dragStart(event, $index)">
+									<div class="col-sm-3 image-press-edit" ng-repeat="item in editPressCtrl.images track by $index" dnd-type="'pressType'" dnd-draggable="item" dnd-effect-allowed="move" dnd-moved="editPressCtrl.update($index)" dnd-dragstart="editPressCtrl.dragStart(event, $index)">
 										<span class="ion-android-close x-close" style="background-color: black" ng-click="editPressCtrl.deleteImage($index)"></span>
 										<img style="width:100%; height:250px; overflow:hidden;" class="grid-image draggable-img" ng-src="{{item.url}}">
 									</div>
