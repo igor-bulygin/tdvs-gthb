@@ -1696,10 +1696,12 @@ input[type="radio"] .styled:checked + label::after {
   text-align: center;
   margin: 0 2px 7px;
   padding: 20px;
+  height: 250px;
   border: 1px solid #1C1919;
   cursor: pointer;
   display: inline-block;
-  background-color: #e9e9e9; }
+  background-color: #e9e9e9;
+  margin: 10px 2px 0; }
   .photo-loader-press:hover .plus-add {
     background-color: #7AB83A;
     -moz-transition-property: background-color;
@@ -1733,30 +1735,46 @@ input[type="radio"] .styled:checked + label::after {
   margin-top: 35px;
   margin-bottom: 70px; }
 
-.image-press-edit span {
-  position: absolute;
-  z-index: 1;
-  top: 10px;
-  right: 20px;
-  background-color: #9a9a9a !important;
-  cursor: pointer;
-  font-size: 18px;
-  color: #ffffff;
-  width: 30px;
-  height: 30px;
-  display: block;
-  float: left;
-  text-align: center;
-  padding-top: 3px;
-  margin-left: 6px;
-  border-radius: 7px 7px 7px 7px !important;
-  -webkit-border-radius: 7px 7px 7px 7px !important;
-  -moz-border-radius: 7px 7px 7px 7px !important; }
-.image-press-edit img {
+.image-press-edit {
+  background-color: #bfbfbf;
   border-radius: 20px 20px 20px 20px !important;
   -webkit-border-radius: 20px 20px 20px 20px !important;
   -moz-border-radius: 20px 20px 20px 20px !important;
-  cursor: move; }
+  cursor: move;
+  height: 250px;
+  position: relative;
+  margin-top: 10px; }
+  .image-press-edit span {
+    position: absolute;
+    z-index: 1;
+    top: 10px;
+    right: 20px;
+    background-color: #9a9a9a !important;
+    cursor: pointer;
+    font-size: 18px;
+    color: #ffffff;
+    width: 30px;
+    height: 30px;
+    display: block;
+    float: left;
+    text-align: center;
+    padding-top: 3px;
+    margin-left: 6px;
+    border-radius: 7px 7px 7px 7px !important;
+    -webkit-border-radius: 7px 7px 7px 7px !important;
+    -moz-border-radius: 7px 7px 7px 7px !important; }
+  .image-press-edit img {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    max-height: 250px; }
+
+.h250 {
+  height: 250px; }
 
 .faq-wrapper {
   margin: 40px 0; }
