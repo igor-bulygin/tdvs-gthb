@@ -42,26 +42,28 @@ $this->params['deviser'] = $deviser;
 										<div class="about-wrapper">
 											<div class="about-container">
 												<div class="title">Abo<br>ut</div>
-												<form name="editAboutCtrl.form">
-													<label for="fields">Choose your field(s) of work</label>
-													<ol class="nya-bs-select ng-class:{'setClassCategoriesRequired': editAboutCtrl.setCategoriesRequired}" ng-model="editAboutCtrl.deviser.categories" multiple ng-cloak ng-if="editAboutCtrl.categories">
-														<li nya-bs-option="category in editAboutCtrl.categories" data-value="category.id" deep-watch="true">
-															<a href=""><span ng-bind="category.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
-														</li>
-													</ol>
-													<label for="text_biography">Brand Statement / Biography</label>
-													<span>Translate your text by selecting different languages below.</span>
-													<ol class="nya-bs-select ng-class:{'setClassBiographyRequired': editAboutCtrl.setClassBiographyRequired}" ng-model="editAboutCtrl.biography_language" ng-cloak>
-														<li nya-bs-option="language in editAboutCtrl.languages" data-value="language.code" deep-watch="true">
-															<a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
-														</li>
-													</ol>
-													<div text-angular ng-model="editAboutCtrl.deviser.text_biography[editAboutCtrl.biography_language]" ng-cloak ta-toolbar="[]" placeholder="Write your brand statement / mission / biography."></div>
-													<label for="resume">Resume or brand presentation</label>
-													<span>OPTIONAL</span><span>Even more things to tell your customers? Upload it here.</span>
-													<button class="btn btn-default btn-green" ngf-select="editAboutCtrl.uploadCV($file)" ngf-accept="'application/pdf'">UPLOAD FILE</button>
-												</form>
-
+                                                <div class="deviser-data-about-edit">
+                                                    <form class="grey-form" name="editAboutCtrl.form">
+                                                        <label for="fields">Choose your field(s) of work</label>
+                                                        <ol class="work-field nya-bs-select ng-class:{'setClassCategoriesRequired': editAboutCtrl.setCategoriesRequired}" ng-model="editAboutCtrl.deviser.categories" multiple ng-cloak ng-if="editAboutCtrl.categories">
+                                                            <li nya-bs-option="category in editAboutCtrl.categories" data-value="category.id" deep-watch="true">
+                                                                <a href=""><span ng-bind="category.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
+                                                            </li>
+                                                        </ol>
+                                                        <label for="text_biography">Brand Statement / Biography</label>
+                                                        <span class="small-grey">Translate your text by selecting different languages below.</span>
+                                                        <ol class="about-edit-select text-profile-lang nya-bs-select ng-class:{'setClassBiographyRequired': editAboutCtrl.setClassBiographyRequired}" ng-model="editAboutCtrl.biography_language" ng-cloak>
+                                                            <li nya-bs-option="language in editAboutCtrl.languages" data-value="language.code" deep-watch="true">
+                                                                <a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
+                                                            </li>
+                                                        </ol>
+                                                        <div class="textarea-edit-about" text-angular ng-model="editAboutCtrl.deviser.text_biography[editAboutCtrl.biography_language]" ng-cloak ta-toolbar="[]" placeholder="Write your brand statement / mission / biography."></div>
+                                                        <label class="pull-left" for="resume">Resume or brand presentation</label>
+                                                        <span class="optional-text pull-left">OPTIONAL</span>
+                                                        <span class="small-grey">Even more things to tell your customers? Upload it here.</span>
+                                                        <button class="btn btn-default btn-green btn-upload-file" ngf-select="editAboutCtrl.uploadCV($file)" ngf-accept="'application/pdf'">UPLOAD FILE</button>
+                                                    </form>
+                                                </div>
 												<!-- <div class="subtitle">
 													<ol class="nya-bs-select about-edit-select" ng-model="editAboutCtrl.deviser.categories" multiple ng-cloak ng-if="editAboutCtrl.categories" ng-change="editAboutCtrl.update('categories', editAboutCtrl.deviser.categories)">
 														<li nya-bs-option="category in editAboutCtrl.categories" data-value="category.id" deep-watch="true">

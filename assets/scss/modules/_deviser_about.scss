@@ -8,11 +8,11 @@
         max-width: 300px;
         margin: 0 auto;
         .title{
-            font: 100px $font-family--bold;
+            font-size: 115px;
             text-transform: uppercase;
-            color: $background_red;
-            letter-spacing: 25px;
-            line-height: 100px;
+            color: #2a2929;
+            letter-spacing: -7px;
+            line-height: 89px;
             display: inline-block;
         }
         .name-location-wrapper{
@@ -126,6 +126,11 @@
     z-index: 9;
     &.lang{
         margin-bottom: 20px;
+    }
+    span{
+        text-transform: uppercase;
+        font-size: 12px;
+        font-weight: bold;
     }
     button{
         background-color: transparent!important;
@@ -389,4 +394,70 @@
         font-family: $font-family--bold;
         margin: 15px 0 0 0;
     }
+    ol.work-field{
+        .dropdown-menu {
+            min-width: 214px !important;
+            margin-top: 0px;
+            left: 14px;
+        }
+        button{
+            margin: 4px 0 0 0;
+            min-width: 245px;
+            @include border-radius(90px,90px,90px,90px);
+            .caret{
+                color:$dark_grey;
+            }
+        }
+    }
+}
+.deviser-data-about-edit{
+    background-color: $background_grey;
+    padding:10px 20px 20px;
+    width: 328px;
+    position: absolute;
+    top: 260px;
+    left: 40px;
+    @include border-radius(6px,6px,6px,6px);
+    label {
+        margin-left: 10px !important;
+    }
+    .small-grey{
+        margin-left: 10px;
+            width: 100%;
+    float: left;
+    }
+}
+.textarea-edit-about{
+    .ta-text{
+        padding: 45px 10px 10px 10px!important;
+        @include border-radius(20px,20px,20px,20px)
+    }
+}
+.ta-root.focussed > .ta-scroll-window.form-control {
+    box-shadow: none!important;
+    border-color: none!important;
+    outline: 0px;
+}
+.ta-root.focussed > .ta-scroll-window.form-control {
+    border-color: $light_grey!important;
+}
+.text-profile-lang{
+    position: absolute;
+    top: 143px;
+    left: 33px;
+}
+.open > .dropdown-toggle.btn-default {
+    background-color: transparent !important;
+    border-color: transparent !important;
+    border-bottom: 1px solid $red!important;
+}
+.optional-text{
+    color: $dark_green;
+    font-size: 10px;
+    margin-top: 15px;
+    margin-left: 10px;
+}
+.btn-upload-file{
+    border: 1px solid $dark_grey;
+    margin-left: 10px;
 }

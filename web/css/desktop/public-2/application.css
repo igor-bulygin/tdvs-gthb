@@ -2018,11 +2018,11 @@ input[type="radio"] .styled:checked + label::after {
     max-width: 300px;
     margin: 0 auto; }
     .about-wrapper .about-container .title {
-      font: 100px "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 115px;
       text-transform: uppercase;
-      color: #d82a4d;
-      letter-spacing: 25px;
-      line-height: 100px;
+      color: #2a2929;
+      letter-spacing: -7px;
+      line-height: 89px;
       display: inline-block; }
     .about-wrapper .about-container .name-location-wrapper {
       display: inline-block; }
@@ -2116,6 +2116,10 @@ input[type="radio"] .styled:checked + label::after {
   z-index: 9; }
   .about-edit-select.lang {
     margin-bottom: 20px; }
+  .about-edit-select span {
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: bold; }
   .about-edit-select button {
     background-color: transparent !important;
     color: #1C1919 !important;
@@ -2354,6 +2358,69 @@ input[type="radio"] .styled:checked + label::after {
   color: #1C1919;
   font-family: "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin: 15px 0 0 0; }
+.grey-form ol.work-field .dropdown-menu {
+  min-width: 214px !important;
+  margin-top: 0px;
+  left: 14px; }
+.grey-form ol.work-field button {
+  margin: 4px 0 0 0;
+  min-width: 245px;
+  border-radius: 90px 90px 90px 90px !important;
+  -webkit-border-radius: 90px 90px 90px 90px !important;
+  -moz-border-radius: 90px 90px 90px 90px !important; }
+  .grey-form ol.work-field button .caret {
+    color: #9a9a9a; }
+
+.deviser-data-about-edit {
+  background-color: #e9e9e9;
+  padding: 10px 20px 20px;
+  width: 328px;
+  position: absolute;
+  top: 260px;
+  left: 40px;
+  border-radius: 6px 6px 6px 6px !important;
+  -webkit-border-radius: 6px 6px 6px 6px !important;
+  -moz-border-radius: 6px 6px 6px 6px !important; }
+  .deviser-data-about-edit label {
+    margin-left: 10px !important; }
+  .deviser-data-about-edit .small-grey {
+    margin-left: 10px;
+    width: 100%;
+    float: left; }
+
+.textarea-edit-about .ta-text {
+  padding: 45px 10px 10px 10px !important;
+  border-radius: 20px 20px 20px 20px !important;
+  -webkit-border-radius: 20px 20px 20px 20px !important;
+  -moz-border-radius: 20px 20px 20px 20px !important; }
+
+.ta-root.focussed > .ta-scroll-window.form-control {
+  box-shadow: none !important;
+  border-color: none !important;
+  outline: 0px; }
+
+.ta-root.focussed > .ta-scroll-window.form-control {
+  border-color: #bfbfbf !important; }
+
+.text-profile-lang {
+  position: absolute;
+  top: 143px;
+  left: 33px; }
+
+.open > .dropdown-toggle.btn-default {
+  background-color: transparent !important;
+  border-color: transparent !important;
+  border-bottom: 1px solid #F7284B !important; }
+
+.optional-text {
+  color: #7AB83A;
+  font-size: 10px;
+  margin-top: 15px;
+  margin-left: 10px; }
+
+.btn-upload-file {
+  border: 1px solid #9a9a9a;
+  margin-left: 10px; }
 
 .video-container {
   margin: 40px 0; }
