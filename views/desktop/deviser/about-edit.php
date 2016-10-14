@@ -72,7 +72,7 @@ $this->params['deviser'] = $deviser;
 									</div>
 									<div class="col-md-7 pad-about about-grid">
 										<div ng-if="editAboutCtrl.isDropAvailable">
-											<div class="photo-loader loader-about ng-class:{'setClassPhotoRequired': editAboutCtrl.setPhotosRequired}" ngf-drag-over-class="drag-over" ngf-drop ngf-select ngf-change="editAboutCtrl.uploadPhoto($files,$invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="editAboutCtrl.isDropAvailable" ngf-multiple="true">
+											<div class="photo-loader loader-about ng-class:{'setClassPhotoRequired': editAboutCtrl.setPhotosRequired}" ngf-drag-over-class="drag-over" ngf-drop ngf-select ngf-change="editAboutCtrl.uploadPhoto($files,$invalidFiles, null, true)" ngf-accept="'image/*'" ngf-drop-available="editAboutCtrl.isDropAvailable">
 												<span class="photo-loader-title">Enrich your about section with photos</span>
 												<div class="plus-add-wrapper">
 												    <div class="plus-add">

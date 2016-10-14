@@ -96,7 +96,7 @@
 
 			modalInstance.result.then(function (imageCropped) {
 				if(imageCropped) {
-					uploadPhoto([Upload.dataUrltoBlob(imageCropped, "temp.png")], null, index);
+					uploadPhoto([Upload.dataUrltoBlob(imageCropped, "temp.png")], null, index, false);
 				}
 			}, function (err) {
 				console.log(err);
@@ -104,7 +104,7 @@
 
 		}
 
-		function uploadPhoto(images, errImages, index) {
+		function uploadPhoto(images, errImages, index, cropOption) {
 			vm.files = images;
 			vm.errFiles = errImages;
 			angular.forEach(vm.files, function (file) {
@@ -118,12 +118,16 @@
 					data: data
 				}).then(function (dataUpload) {
 					toastr.success("Photo uploaded!");
-					if(index>-1) {
+					//if uplading crop, replace it
+					if(index!==null && index>-1) {
 						vm.deviser.media.photos[index] = dataUpload.data.filename;
 					} else {
+						//if not, add it and crop it
 						vm.deviser.media.photos.unshift(dataUpload.data.filename);
+						var imageToCrop = currentHost() + vm.deviser.url_images + dataUpload.data.filename;
+						openCropModal(imageToCrop, 0);
 					}
-						vm.images = UtilService.parseImagesUrl(vm.deviser.media.photos, vm.deviser.url_images);
+					vm.images = UtilService.parseImagesUrl(vm.deviser.media.photos, vm.deviser.url_images);
 					$timeout(function () {
 						delete file.progress;
 					}, 1000);
