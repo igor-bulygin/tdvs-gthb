@@ -104,6 +104,7 @@
 			patch.$update().then(function(updateData) {
 				$rootScope.$broadcast('deviser-updated');
 				vm.deviser_changed = false;
+				setModal(false);
 			}, function(err) {
 				toastr.error(err);
 			});
@@ -140,6 +141,16 @@
 			});
 		}
 
+		function setLeavingModal(value) {
+				$window.onbeforeunload = function (e) {
+				if(value) {
+					return "If you leave without saving, you will lose the latest changes you made.";
+				} else {
+					return null;
+				}
+			}
+		}
+
 		function setDeviserChanged(value) {
 			vm.deviser_changed = value;
 		}
@@ -147,6 +158,7 @@
 		function restoreDeviser(){
 			parseDeviserInfo(vm.deviser_original);
 			vm.deviser = angular.copy(vm.deviser_original);
+			setLeavingModal(false);
 		}
 
 		//modals
@@ -232,17 +244,11 @@
 			if(newValue) {
 				if(!angular.equals(newValue, vm.deviser_original)) {
 					setDeviserChanged(true);
-					//set window leaving modal
-					$window.onbeforeunload = function (e) {
-						return "If you leave without saving, you will lose the latest changes you made.";
-					}
+					setLeavingModal(true);
 					$rootScope.$broadcast(deviserEvents.deviser_changed, {value: true, deviser: newValue});
 				} else {
 					setDeviserChanged(false);
-					//unset window leaving modal
-					$window.onbeforeunload = function(e) {
-						return null;
-					}
+					setLeavingModal(false);
 				}
 			}
 		}, true);
