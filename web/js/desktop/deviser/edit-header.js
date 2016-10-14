@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(deviserDataService, languageDataService, UtilService, Upload, $uibModal, toastr, $scope, $rootScope, locationDataService, $location, deviserEvents) {
+	function controller(deviserDataService, languageDataService, UtilService, Upload, $uibModal, toastr, $scope, $rootScope, locationDataService, $location, deviserEvents, $window) {
 		var vm = this;
 		vm.has_error = UtilService.has_error;
 		vm.isProfilePublic = false;
@@ -32,7 +32,7 @@
 				return currentHost() + deviser.url_images + image;
 			}
 			//set name
-			if(deviser.personal_info.brand_name)
+			if(!deviser.personal_info.brand_name)
 				deviser.personal_info.brand_name = angular.copy(deviser.personal_info.name);
 			//set status
 			vm.isProfilePublic = (deviser.account_state === 'draft' ? false: true);
@@ -232,13 +232,21 @@
 			if(newValue) {
 				if(!angular.equals(newValue, vm.deviser_original)) {
 					setDeviserChanged(true);
+					//set window leaving modal
+					$window.onbeforeunload = function (e) {
+						return "If you leave without saving, you will lose the latest changes you made.";
+					}
 					$rootScope.$broadcast(deviserEvents.deviser_changed, {value: true, deviser: newValue});
 				} else {
 					setDeviserChanged(false);
+					//unset window leaving modal
+					$window.onbeforeunload = function(e) {
+						return null;
+					}
 				}
 			}
 		}, true);
-
+		
 		//events
 		$scope.$on(deviserEvents.deviser_changed, function(event, args) {
 			setDeviserChanged(args.value);
@@ -262,13 +270,6 @@
 				if(args.required_fields[i]==='header')
 					//set header required
 					vm.headerRequired = true;
-			}
-		})
-
-		$scope.$on('$locationChangeStart', function(ev, newUrl, oldUrl) {
-			ev.preventDefault();
-			if(vm.deviser_changed) {
-				openConfirmationModal();
 			}
 		});
 

@@ -87,7 +87,6 @@
 		}
 
 		function dragOver(event, index) {
-			console.log("original: %s previo: %s posicion: %s, %s", vm.original_index, vm.previous_index, index, vm.images[vm.original_index].filename);
 			if(vm.previous_index) {
 				//get original images
 				vm.images = angular.copy(vm.original_images);

@@ -8,7 +8,7 @@ class EditHeaderAsset extends AssetBundle {
 	public $baseUrl = '@web';
 	public $css = [];
 	public $js = [
-		'js/desktop/deviser/edit-header.js',
+		'js/desktop/deviser/edit-header.js'
 	];
 	public $depends = [
 		'app\assets\desktop\deviser\IndexAsset',
