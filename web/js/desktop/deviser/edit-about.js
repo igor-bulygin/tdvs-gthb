@@ -5,13 +5,14 @@
 
 	function controller(deviserDataService, UtilService, languageDataService, toastr, productDataService, Upload, $timeout, $rootScope, $scope, deviserEvents, $uibModal) {
 		var vm = this;
-		vm.update = update;
-		vm.move = move;
 		vm.uploadPhoto = uploadPhoto;
 		vm.openCropModal = openCropModal;
 		vm.uploadCV = uploadCV;
 		vm.deleteCV = deleteCV;
 		vm.deleteImage = delete_image;
+		vm.dragOver = dragOver;
+		vm.dragStart = dragStart;
+		vm.drop = drop;
 		vm.biography_language = "en-US";
 
 		function getDeviser() {
@@ -61,34 +62,6 @@
 					media.photos.push(element.filename);
 			});
 			return media;
-		}
-
-		function move(index) {
-			if(index > -1) {
-				vm.images.splice(index,1);
-				vm.deviser.media = parsePhotos();
-			} else {
-				toastr.error("Could not move.");
-			}
-		}
-
-		function update(key, value) {
-			if(key === 'text_biography') {
-				for(var language in value) {
-					value[language]=value[language].replace(/<[^\/>][^>]*><\/[^>]+>/gim, "");
-				}
-			}
-			var patch = new deviserDataService.Profile;
-			patch.scenario = 'deviser-update-profile';
-			patch.deviser_id = vm.deviser.id;
-			patch[key] = value;
-			patch.$update().then(function(dataUpdate) {
-				$rootScope.$broadcast('update-profile');
-			}, function (err) {
-				for(var key in err.data.errors) {
-					toastr.error(err.data.errors[key]);
-				}
-			})
 		}
 
 		function uploadCV(file) {
@@ -172,7 +145,41 @@
 			}
 		}
 
+		function dragStart(event, index) {
+			vm.original_index = index;
+			vm.original_images = angular.copy(vm.images);
+			vm.image_being_moved = vm.images[index];
+		}
 
+		function dragOver(event, index) {
+			if(vm.previous_index) {
+				//get original images
+				vm.images = angular.copy(vm.original_images);
+				if(index < vm.original_index) {
+					vm.images[vm.original_index] = vm.images[vm.original_index-1];
+				}
+				//insert image in index position
+				vm.images.splice(index, 0, vm.image_being_moved);
+				//set previous index
+				vm.previous_index = index;
+			} else {
+				//set previous index
+				vm.previous_index = index;
+			}
+			return true;
+		}
+
+		function drop(index) {
+			var index_to_delete = 0;
+			if(index < vm.original_index)
+				index_to_delete = vm.original_index + 1;
+			else {
+				index_to_delete = vm.original_index;
+			}
+			//update
+			vm.images.splice(index_to_delete, 1);
+			vm.deviser.media = parsePhotos();
+		}
 
 		//watches
 		$scope.$watch('editAboutCtrl.deviser', function (newValue, oldValue) {

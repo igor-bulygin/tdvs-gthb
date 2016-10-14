@@ -104,7 +104,7 @@
 			patch.$update().then(function(updateData) {
 				$rootScope.$broadcast('deviser-updated');
 				vm.deviser_changed = false;
-				setModal(false);
+				setLeavingModal(false);
 			}, function(err) {
 				toastr.error(err);
 			});

@@ -42,7 +42,7 @@ $this->params['deviser'] = $deviser;
 										<div class="about-wrapper">
 											<div class="about-container">
 												<div class="title">Abo<br>ut</div>
-                                                <div class="deviser-data-about-edit">
+												<div class="deviser-data-about-edit">
                                                     <form class="grey-form" name="editAboutCtrl.form">
                                                         <label for="fields">Choose your field(s) of work</label>
                                                         <ol class="work-field nya-bs-select ng-class:{'setClassCategoriesRequired': editAboutCtrl.setCategoriesRequired}" ng-model="editAboutCtrl.deviser.categories" multiple ng-cloak ng-if="editAboutCtrl.categories">
@@ -64,33 +64,6 @@ $this->params['deviser'] = $deviser;
                                                         <button class="btn btn-default btn-green btn-upload-file" ngf-select="editAboutCtrl.uploadCV($file)" ngf-accept="'application/pdf'">UPLOAD FILE</button>
                                                     </form>
                                                 </div>
-												<!-- <div class="subtitle">
-													<ol class="nya-bs-select about-edit-select" ng-model="editAboutCtrl.deviser.categories" multiple ng-cloak ng-if="editAboutCtrl.categories" ng-change="editAboutCtrl.update('categories', editAboutCtrl.deviser.categories)">
-														<li nya-bs-option="category in editAboutCtrl.categories" data-value="category.id" deep-watch="true">
-															<a href="">{{category.name}} <span class="glyphicon glyphicon-ok check-mark"></span></a>
-														</li>
-													</ol>
-													<span class="glyphicon glyphicon-pencil pencil-edit"></span>
-												</div> -->
-												<!-- <div class="resume-header">
-													<div ng-if="!editAboutCtrl.deviser.curriculum" ng-cloak>
-														<button class="btn btn-default btn-green" ngf-select="editAboutCtrl.uploadCV($file)" ngf-accept="'application/pdf'">Add Resume</button>
-													</div>
-													<div class="see-resume-wrapper" ng-if="editAboutCtrl.deviser.curriculum" ng-cloak>
-														<a ng-href="{{editAboutCtrl.curriculum}}">See resume</a> 
-														<span class="ion-loop" ngf-select="editAboutCtrl.uploadCV($file)" ngf-accept="'application/pdf'"></span>
-														<span class="ion-close-circled" ng-click="editAboutCtrl.deleteCV()"></span>
-													</div>
-												</div> -->
-												<!-- <div class="editable-text-about-wrapper">
-													<ol class="nya-bs-select about-edit-select lang" ng-model="editAboutCtrl.biography_language" ng-cloak>
-														<li nya-bs-option="language in editAboutCtrl.languages" data-value="language.code" deep-watch="true">
-															<a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
-														</li>
-													</ol>
-													<div class="editable-text-about" text-angular ta-text-editor-class="header" ng-model="editAboutCtrl.deviser.text_biography[editAboutCtrl.biography_language]" ng-cloak ta-toolbar="[]" placeholder="Write your brand statment / mission / biography." ng-model-options="{debounce: 1000}" ng-change="editAboutCtrl.update('text_biography', editAboutCtrl.deviser.text_biography)" ng-blur="editAboutCtrl.update('text_biography', editAboutCtrl.deviser.text_biography)"></div>
-													<span class="glyphicon glyphicon-pencil" style="color:white;position: absolute;top: 3px;right: -25px;"></span>
-												</div> -->
 											</div>
 										</div>
 									</div>
@@ -117,8 +90,8 @@ $this->params['deviser'] = $deviser;
 										<div ngf-no-file-drop>
 											<input type="file" name="file" ngf-select="editAboutCtrl.uploadPhoto($files, $invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="editAboutCtrl.isDropAvailable" ngf-multiple="true">
 										</div>
-										<div class="item draggable-list about-edit-list" dnd-list="editAboutCtrl.images" ng-if="editAboutCtrl.images.length > 0" ng-cloak>
-											<div class="col-sm-6 pad-about image-about-edit" ng-repeat="image in editAboutCtrl.images" dnd-draggable="image" dnd-effect-allowed="move" dnd-moved="editAboutCtrl.move($index)">
+										<div class="item draggable-list about-edit-list" dnd-list="editAboutCtrl.images" ng-if="editAboutCtrl.images.length > 0" dnd-dragover="editAboutCtrl.dragOver(event,index)" dnd-drop="editAboutCtrl.drop(index)" ng-cloak>
+											<div class="col-sm-6 pad-about image-about-edit" ng-repeat="image in editAboutCtrl.images track by $index" dnd-draggable="image" dnd-effect-allowed="move" dnd-moved="editAboutCtrl.move($index)" dnd-dragstart="editAboutCtrl.dragStart(event, $index)">
 												<span class="button ion-crop crop-avatar-photo-icon" ng-click="editAboutCtrl.openCropModal(image.url, $index)"></span>
 												<span class="ion-android-close x-close" ng-click="editAboutCtrl.deleteImage($index)"></span>
 												<img ng-src="{{image.url}}" class="grid-image draggable-img">

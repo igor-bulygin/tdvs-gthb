@@ -99,7 +99,6 @@
 			} else {
 				//set previous index
 				vm.previous_index = index;
-				//insert image in index
 			}
 			return true;
 		}
