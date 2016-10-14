@@ -11,7 +11,7 @@
 			patch.scenario = "deviser-update-profile";
 			patch.account_state = "active";
 			patch.$update().then(function (updateData) {
-				$window.location.href = '/deviser/' + updateData.slug + '/' + updateData.id + '/about/edit';
+				$window.location.href = '/deviser/' + updateData.slug + '/' + updateData.id + '/store/edit';
 			}, function (err) {
 				vm.errorsRequired = true;
 				$rootScope.$broadcast(deviserEvents.make_profile_public_errors, {required_fields: err.data.errors.required});
