@@ -2166,7 +2166,7 @@ input[type="radio"] .styled:checked + label::after {
     margin: 0 auto; }
 
 .image-about-edit {
-  max-height: 180px;
+  max-height: 284px;
   overflow: hidden; }
   .image-about-edit span {
     position: absolute;
