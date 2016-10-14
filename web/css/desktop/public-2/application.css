@@ -2354,7 +2354,7 @@ input[type="radio"] .styled:checked + label::after {
     top: 10px;
     background-color: transparent; }
     .top-bar-red button:hover {
-      background-color: #753cca; }
+      background-color: #C91C39; }
 
 .top-bar-violet {
   background-color: #924cfc;
