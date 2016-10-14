@@ -2402,9 +2402,10 @@ input[type="radio"] .styled:checked + label::after {
   font-family: "Playfair Display", Georgia, serif; }
 
 .text-limitation {
-  color: #ffffff;
+  color: #bfbfbf;
+  z-index: 999;
   position: absolute;
-  top: 110px;
+  top: 202px;
   right: 35px;
   font-family: "Playfair Display", Georgia, serif; }
 
