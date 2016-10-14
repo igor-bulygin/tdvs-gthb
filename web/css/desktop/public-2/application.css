@@ -2248,7 +2248,7 @@ input[type="radio"] .styled:checked + label::after {
   left: 529px; }
 
 .top-bar-red {
-  background-color: #924cfc;
+  background-color: #F7284B;
   position: absolute;
   top: 70px;
   width: 100%;
@@ -2268,6 +2268,29 @@ input[type="radio"] .styled:checked + label::after {
     top: 10px;
     background-color: transparent; }
     .top-bar-red button:hover {
+      background-color: #753cca; }
+
+.top-bar-violet {
+  background-color: #924cfc;
+  position: absolute;
+  top: 70px;
+  width: 100%;
+  z-index: 999; }
+  .top-bar-violet span {
+    color: #ffffff;
+    text-align: center;
+    width: 100%;
+    display: block;
+    padding: 19px; }
+  .top-bar-violet button {
+    float: right;
+    border: 1px solid #ffffff;
+    font-size: 12px;
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    background-color: transparent; }
+    .top-bar-violet button:hover {
       background-color: #753cca; }
 
 .see-resume-wrapper a {
