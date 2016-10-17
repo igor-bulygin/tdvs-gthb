@@ -13,6 +13,7 @@
 		vm.dragOver = dragOver;
 		vm.dragStart = dragStart;
 		vm.drop = drop;
+		vm.checkPhotos = checkPhotos;
 		vm.biography_language = "en-US";
 
 		function getDeviser() {
@@ -141,12 +142,9 @@
 		}
 
 		function delete_image(index) {
-			if (vm.images.length > 3) {
 				vm.images.splice(index, 1);
 				vm.deviser.media = parsePhotos();
-			} else {
-				toastr.error("Must have between 3 and 5 photos.");
-			}
+				checkPhotos();
 		}
 
 		function dragStart(event, index) {
@@ -185,10 +183,19 @@
 			vm.deviser.media = parsePhotos();
 		}
 
+		function checkPhotos(){
+			if(vm.images.length >= 5) {
+				vm.showMaxPhotosLimit = true;
+			}
+			else {
+				vm.showMaxPhotosLimit = false;
+			}
+		}
+
 		//watches
 		$scope.$watch('editAboutCtrl.deviser', function (newValue, oldValue) {
 			if(newValue) {
-				if(!angular.equals(newValue, vm.deviser_original)) {
+				if(!angular.equals(newValue, vm.deviser_original) && (vm.images.length >=3 && vm.images.length <=5) ) {
 					$rootScope.$broadcast(deviserEvents.deviser_changed, {value: true, deviser: newValue});
 				} else {
 					$rootScope.$broadcast(deviserEvents.deviser_changed, {value: false});

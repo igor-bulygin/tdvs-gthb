@@ -74,7 +74,7 @@ $this->params['deviser'] = $deviser;
 									</div>
 									<div class="col-md-7 pad-about about-grid">
 										<div ng-if="editAboutCtrl.isDropAvailable">
-											<div class="photo-loader loader-about ng-class:{'setClassPhotoRequired': editAboutCtrl.setPhotosRequired}" ngf-drag-over-class="drag-over" ngf-drop ngf-select ngf-change="editAboutCtrl.uploadPhoto($files,$invalidFiles, null, true)" ngf-accept="'image/*'" ngf-drop-available="editAboutCtrl.isDropAvailable">
+											<div class="photo-loader loader-about ng-class:{'setClassPhotoRequired': editAboutCtrl.setPhotosRequired}" ngf-drag-over-class="drag-over" ngf-drop ngf-select ngf-change="editAboutCtrl.uploadPhoto($files,$invalidFiles, null, true)" ngf-accept="'image/*'" ngf-drop-available="editAboutCtrl.isDropAvailable" ng-if="editAboutCtrl.images.length < 5">
 												<span class="photo-loader-title">Enrich your about section with photos</span>
 												<div class="plus-add-wrapper">
 												    <div class="plus-add">
@@ -82,7 +82,18 @@ $this->params['deviser'] = $deviser;
 												    </div>
 												    <div class="text">ADD PHOTOS</div>
 												</div>
-												<span class="photo-loader-warning ng-class:{'setClassPhotoRequired': editAboutCtrl.setPhotosRequired}">Please upload a minimum of 3 and a maximum of 5 photos.</span>
+												<span class="photo-loader-warning ng-class:{'setClassPhotoRequired': editAboutCtrl.setPhotosRequired}" ng-if="editAboutCtrl.images.length < 3 && editAboutCtrl.deviser.account_state==='draft'">Please upload a minimum of 3 and a maximum of 5 photos.</span>
+												<span class="photo-loader-warning" ng-if="editAboutCtrl.image.length < 3 && editAboutCtrl.deviser.account_state==='public'">You need to have at least 3 photos to be able to SAVE CHANGES to your profile.</span>
+											</div>
+											<div class="photo-loader loader-about" ng-if="editAboutCtrl.images.length >= 5" ng-click="editAboutCtrl.checkPhotos()">
+												<span class="photo-loader-title">Enrich your about section with photos</span>
+												<div class="plus-add-wrapper">
+													<div class="plus-add">
+														<span>+</span>
+													</div>
+													<div class="text">ADD PHOTOS</div>
+												</div>
+												<span class="photo-loader-warning" ng-if="editAboutCtrl.showMaxPhotosLimit">You can upload a maximum of 5 photos. Please delete 1 or more photos if you want to upload new ones.</span>
 											</div>
 										</div>
 										<div ng-if="editAboutCtrl.files.length > 0" ng-repeat="item in editAboutCtrl.files" style="max-height:200px; max-width:300px;">
