@@ -471,6 +471,14 @@
 }
 .ta-root.focussed > .ta-scroll-window.form-control {
     border-color: $light_grey!important;
+    height: 300px;
+    overflow: scroll;
+}
+.textarea-edit-about  {
+    .ta-editor.ta-html, .ta-scroll-window.form-control {
+        min-height: 300px;
+        height: 300px;
+    }
 }
 .text-profile-lang{
     position: absolute;
