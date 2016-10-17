@@ -1764,14 +1764,15 @@ input[type="radio"] .styled:checked + label::after {
     -webkit-border-radius: 7px 7px 7px 7px !important;
     -moz-border-radius: 7px 7px 7px 7px !important; }
   .image-press-edit img {
-    width: 100%;
+    max-height: 248px;
+    width: auto;
+    max-width: 214px;
     position: absolute;
     left: 0;
     right: 0;
     top: 0;
     bottom: 0;
-    margin: auto;
-    max-height: 250px; }
+    margin: auto; }
 
 .h250 {
   height: 250px; }
