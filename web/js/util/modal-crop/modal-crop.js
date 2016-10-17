@@ -11,19 +11,24 @@
 			switch (vm.resolve.type) {
 			case "header_cropped":
 				vm.area_type = 'rectangle';
-				vm.width = 1280;
-				vm.height = 450;
+				vm.size = {
+					w: 1280,
+					h: 450
+				};
 				vm.aspect_ratio = 2.8;
 				break;
 			case "profile_cropped":
 				vm.area_type = 'circle';
-				vm.width = 340;
-				vm.height = 340;
+				vm.size = {
+					w: 340,
+					h: 340
+				};
 				vm.aspect_ratio = 1;
 				break;
 			default: 
 				vm.area_type = 'rectangle';
 				vm.aspect_ratio = 1;
+				vm.size = 'max';
 				break;
 			}
 		}
