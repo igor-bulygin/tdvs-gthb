@@ -32,11 +32,11 @@ $deviser = $this->params['deviser'];
 
                             <!-- buttons -->
                             <div class="header-edit-btns">
-                                <div ng-if="editHeaderCtrl.isProfilePublic">
+                                <div ng-if="!editHeaderCtrl.isProfilePublic">
                                 	<button class="btn btn-default btn-grey btn-header" ng-if="!editHeaderCtrl.deviser_changed">Save progress</button>
                                     <button class="btn btn-default btn-green btn-header" ng-click="editHeaderCtrl.updateAll()" ng-if="editHeaderCtrl.deviser_changed">Save progress</button>
                                 </div>
-                                <div ng-if="!editHeaderCtrl.isProfilePublic">
+                                <div ng-if="editHeaderCtrl.isProfilePublic">
                                     <a ng-href="{{editHeaderCtrl.aboutLink}}" title="Cancel changes">
                                     	<button class="btn btn-default btn-red btn-header">Cancel</button>
                                     </a>
