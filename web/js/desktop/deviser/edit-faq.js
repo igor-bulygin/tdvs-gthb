@@ -1,11 +1,10 @@
 (function () {
 	"use strict";
 
-	function controller(deviserDataService, toastr, UtilService, languageDataService, $scope) {
+	function controller(deviserDataService, toastr, UtilService, languageDataService, $scope, deviserEvents, $rootScope) {
 		var vm = this;
 		vm.addQuestion = addQuestion;
 		vm.deleteQuestion = deleteQuestion;
-		vm.update = update;
 		vm.parseQuestion = parseQuestion;
 		vm.isLanguageOk = isLanguageOk;
 
@@ -14,6 +13,7 @@
 				deviser_id: UtilService.returnDeviserIdFromUrl()
 			}).$promise.then(function (dataDeviser) {
 				vm.deviser = dataDeviser;
+				vm.deviser_original = angular.copy(dataDeviser);
 				//we need languages before parse questions
 				languageDataService.Languages.get().$promise.then(function (dataLanguages) {
 					vm.languages = dataLanguages.items;
@@ -39,28 +39,6 @@
 
 		init();
 
-		function update(index) {
-			if (index >= 0) {
-				vm.deviser.faq.splice(index, 1)
-			}
-			var patch = new deviserDataService.Profile;
-			patch.scenario = "deviser-update-profile";
-			patch.faq = [];
-			vm.deviser.faq.forEach(function (element, index) {
-				parseQuestion(element);
-				patch.faq.push({
-					question: angular.copy(element.question),
-					answer: angular.copy(element.answer)
-				})
-			});
-			patch.deviser_id = vm.deviser.id;
-			patch.$update().then(function (dataFaq) {
-				toastr.success("Updated!");
-			}, function (err) {
-				toastr.error(err);
-			})
-		}
-
 		function addQuestion() {
 			vm.deviser.faq.unshift({
 				question: {},
@@ -85,6 +63,23 @@
 		function isLanguageOk(code, question) {
 			return question.completedLanguages.indexOf(code) > -1 ? true : false;
 		}
+
+		//watchs
+		$scope.$watch('editFaqCtrl.deviser', function(newValue, oldValue){
+			if(newValue) {
+				var deviserCompare = angular.copy(newValue);
+				deviserCompare.faq.forEach(function (element) {
+					delete element.completedLanguages;
+					delete element.languageSelected;
+				});
+				if(!angular.equals(deviserCompare, vm.deviser_original)) {
+					$rootScope.$broadcast(deviserEvents.deviser_changed, {value: true, deviser: newValue});
+				} else {
+					$rootScope.$broadcast(deviserEvents.deviser_changed, {value: false});
+				}
+			}
+
+		}, true);
 
 
 	}
