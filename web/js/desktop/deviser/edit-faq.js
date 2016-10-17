@@ -7,6 +7,7 @@
 		vm.deleteQuestion = deleteQuestion;
 		vm.parseQuestion = parseQuestion;
 		vm.isLanguageOk = isLanguageOk;
+		vm.done = done;
 
 		function getDeviser() {
 			deviserDataService.Profile.get({
@@ -64,22 +65,50 @@
 			return question.completedLanguages.indexOf(code) > -1 ? true : false;
 		}
 
-		//watchs
-		$scope.$watch('editFaqCtrl.deviser', function(newValue, oldValue){
-			if(newValue) {
-				var deviserCompare = angular.copy(newValue);
-				deviserCompare.faq.forEach(function (element) {
-					delete element.completedLanguages;
-					delete element.languageSelected;
-				});
-				if(!angular.equals(deviserCompare, vm.deviser_original)) {
-					$rootScope.$broadcast(deviserEvents.deviser_changed, {value: true, deviser: deviserCompare});
-				} else {
-					$rootScope.$broadcast(deviserEvents.deviser_changed, {value: false});
-				}
-			}
+		function done() {
+			update(true);
+		}
 
-		}, true);
+		function update(done) {
+			var patch = new deviserDataService.Profile;
+			patch.scenario = 'deviser-update-profile';
+			patch.faq = [];
+			vm.deviser.faq.forEach(function (element) {
+				parseQuestion(element);
+				for(var key in element.answer) {
+					element.answer[key] = element.answer[key].replace(/<[^\/>][^>]*><\/[^>]+>/gim, "");
+				}
+				patch.faq.push({
+					question: angular.copy(element.question),
+					answer: angular.copy(element.answer)
+				});
+			});
+			patch.deviser_id = vm.deviser.id;
+			patch.$update().then(function(dataFaq) {
+				if(done) {
+					//go away
+				}
+			}, function (err) {
+				toastr.error(err);
+			});
+		}
+
+		//watchs
+		// $scope.$watch('editFaqCtrl.deviser', function(newValue, oldValue){
+		// 	if(newValue) {
+		// 		var deviserCompare = angular.copy(newValue);
+		// 		deviserCompare.faq.forEach(function (element) {
+		// 			delete element.completedLanguages;
+		// 			delete element.languageSelected;
+		// 		});
+		// 		if(!angular.equals(deviserCompare, vm.deviser_original)) {
+		// 			$rootScope.$broadcast(deviserEvents.deviser_changed, {value: true, deviser: deviserCompare});
+		// 		} else {
+		// 			$rootScope.$broadcast(deviserEvents.deviser_changed, {value: false});
+		// 		}
+		// 	}
+
+		// }, true);
 
 
 	}

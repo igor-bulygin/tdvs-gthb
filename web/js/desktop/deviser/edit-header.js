@@ -103,13 +103,6 @@
 						vm.deviser[key][language]= parseTags(vm.deviser[key][language]);
 					}
 				}
-				if(key === 'faq') {
-					vm.deviser[key].forEach(function(element) {
-						for(var language in element.answer) {
-							element.answer[language] = parseTags(element.answer[language]);
-						}
-					});
-				}
 				if(key!=='account_state')
 					patch[key] = angular.copy(vm.deviser[key]);
 			}

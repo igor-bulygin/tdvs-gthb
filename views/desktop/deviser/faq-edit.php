@@ -41,7 +41,9 @@ $this->params['deviser_links_target'] = 'edit_view';
 								</div>
 								<div class="col-md-10" ng-controller="editFaqCtrl as editFaqCtrl">
 									<div class="faq-wrapper faq-edit-list">
-										<div class="section-title">FAQ</div>
+										<!-- <div class="section-title">FAQ</div> -->
+										<div><a href="#" ng-click="editFaqCtrl.done()">I'm done editing</a></div>
+										<div ng-if="editFaqCtrl.deviser.faq.length > 0" ng-click="editFaqCtrl.addQuestion()">+ add question</div>
 										<div class="edit-faq-wrapper" ng-cloak ng-if="editFaqCtrl.deviser.faq.length > 0" dnd-list="editFaqCtrl.deviser.faq">
 											<div class="delete-options-wrapper" ng-repeat="question in editFaqCtrl.deviser.faq" style="cursor:move;" dnd-draggable="question" dnd-effect-allowed="move" dnd-moved="editFaqCtrl.update($index)">
 												<a class="delete-link pull-right" href="#" ng-click="editFaqCtrl.deleteQuestion($index)">Delete question</a>
@@ -60,7 +62,7 @@ $this->params['deviser_links_target'] = 'edit_view';
 																<span class="faq-edit-question">Question</span>
 															</div>
 															<div class="col-sm-11">
-																<input type="text" class="faq-edit-answer" placeholder="Question" style="width:100%;" ng-model="question.question[question.languageSelected]">
+																<input type="text" class="faq-edit-answer" placeholder="Question" ng-model="question.question[question.languageSelected]">
 															</div>
 														</div>
 														<div class="faq-row">
