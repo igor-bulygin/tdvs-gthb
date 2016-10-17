@@ -225,31 +225,34 @@
 .edit-cover-crop-icon{
     color: $white;
     background-color: $red;
-    font-size: 45px;
-    width: 88px;
-    height: 88px;
+    font-size: 33px;
+    width: 60px;
+    height: 60px;
     position: absolute;
     text-align: center;
     cursor: pointer;
-    top: 70px;
-    right: 500px;
+    top: 176px;
+    left: 676px;
     border-radius: 51px;
     display: block;
     z-index: 999;
-    padding-top: 10px;
+    padding-top: 6px;
 }
 .edit-avatar-photo-icon{
     color: $white;
-    font-size: 32px;
+    font-size: 24px;
     position: absolute;
     cursor: pointer;
-    top: 3px;
-    left: 49px;
+    top: 11px;
+    left: 58px;
     background-color: $black;
-    height: 50px;
-    width: 50px;
-    padding: 2px 0 0 12px;
+    height: 40px;
+    width: 40px;
+    padding: 2px 0 0 11px;
     @include border-radius(90px,90px,90px,90px);
+    &.two{
+        left:32px;
+    }
 }
 .crop-avatar-photo-icon{
     color:$white;
