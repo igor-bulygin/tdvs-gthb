@@ -123,7 +123,7 @@
 }
 .image-press-edit{
     background-color: $light_grey;
-    @include border-radius(20px,20px,20px,20px);
+    @include border-radius(14px,14px,14px,14px);
     cursor:move;
     height: 250px;
     position: relative;
@@ -147,7 +147,7 @@
         @include border-radius(7px,7px,7px,7px)
     }
     img{
-        max-height: 248px;
+        max-height: 250px;
         width: auto;
         max-width: 214px;
         position: absolute;

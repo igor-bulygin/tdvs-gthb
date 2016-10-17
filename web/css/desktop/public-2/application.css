@@ -1737,9 +1737,9 @@ input[type="radio"] .styled:checked + label::after {
 
 .image-press-edit {
   background-color: #bfbfbf;
-  border-radius: 20px 20px 20px 20px !important;
-  -webkit-border-radius: 20px 20px 20px 20px !important;
-  -moz-border-radius: 20px 20px 20px 20px !important;
+  border-radius: 14px 14px 14px 14px !important;
+  -webkit-border-radius: 14px 14px 14px 14px !important;
+  -moz-border-radius: 14px 14px 14px 14px !important;
   cursor: move;
   height: 250px;
   position: relative;
@@ -1764,7 +1764,7 @@ input[type="radio"] .styled:checked + label::after {
     -webkit-border-radius: 7px 7px 7px 7px !important;
     -moz-border-radius: 7px 7px 7px 7px !important; }
   .image-press-edit img {
-    max-height: 248px;
+    max-height: 250px;
     width: auto;
     max-width: 214px;
     position: absolute;
