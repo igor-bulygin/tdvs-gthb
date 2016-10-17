@@ -119,3 +119,17 @@
     top: 240px;
     left: 0;
 }
+.btn-header{
+    width: 140px;
+}
+.btn.disabled, .btn[disabled], fieldset[disabled] .btn {
+    cursor: not-allowed;
+    filter: alpha(opacity=1);
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    opacity: 1;
+    background-color: $background_grey;
+    &:hover{
+        background-color: $background_grey;
+    }
+}
