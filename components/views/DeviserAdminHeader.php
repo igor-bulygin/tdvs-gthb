@@ -16,7 +16,7 @@ $deviser = $this->params['deviser'];
 		<div class="container pad-about edit-header-container">
 			<span tooltip-placement="top" uib-tooltip="ADD COVER PHOTO" class="button ion-camera edit-cover-photo-icon" ngf-select ng-model="editHeaderCtrl.new_header" name="header" ngf-pattern="'image/*'" ngf-accept="'image/*'"></span>
 			<span tooltip-placement="top" uib-tooltip="CROP PHOTO" class="button ion-crop edit-cover-crop-icon" ng-click="editHeaderCtrl.openCropModal(editHeaderCtrl.header_original, 'header_cropped')" ng-if="editHeaderCtrl.header"></span>
-			<span class="req-1" ng-if="editHeaderCtrl.headerRequired && !editHeaderCtrl.new_header">REQUIRED</span>
+			<span class="req-1" ng-if="editHeaderCtrl.headerRequired && !editHeaderCtrl.new_header" ng-cloak>REQUIRED</span>
 			<img class="cover" ngf-thumbnail="editHeaderCtrl.header || '/imgs/default-cover.jpg'">
 			<div class="banner-deviser-content banner-deviser-edit-header-content">
 				<div class="grey-overlay"></div>
@@ -27,7 +27,7 @@ $deviser = $this->params['deviser'];
 								<img class="cover" ngf-thumbnail="editHeaderCtrl.profile || '/imgs/default-avatar.jpg' ">
 								<span tooltip-placement="top" uib-tooltip="ADD PHOTO" class="button ion-camera edit-avatar-photo-icon ng-class:{'two': editHeaderCtrl.profile_original}" ngf-select ng-model="editHeaderCtrl.new_profile" name="profile" ngf-pattern="'image/*'" ngf-accept="'image/*'"></span>
 								<span tooltip-placement="top" uib-tooltip="CROP PHOTO" class="button ion-crop crop-avatar-photo-icon" ng-if="editHeaderCtrl.profile_original" ng-click="editHeaderCtrl.openCropModal(editHeaderCtrl.profile_original, 'profile_cropped')"></span>
-								<div ng-if="editHeaderCtrl.profileRequired && !editHeaderCtrl.new_profile"><p>REQUIRED</p></div>
+								<div ng-if="editHeaderCtrl.profileRequired && !editHeaderCtrl.new_profile" ng-cloak><p>REQUIRED</p></div>
 							</div>
 
                             <!-- buttons -->
