@@ -75,11 +75,11 @@ $this->params['deviser_links_target'] = 'edit_view';
 												</div>
 											</div>
 										</div>
-										<a class="edit-faq-btn" href="#" ng-click="editFaqCtrl.addQuestion()">+ ADD QUESTION</a>
 										<div class="faq-edit-empty" ng-if="editFaqCtrl.deviser.faq.length === 0" ng-cloak>
 											<img class="sad-face" src="/imgs/sad-face.svg">
 											<p>You haven’t written any FAQs.
 												<br/> Start now by clicking the <b>ADD QUESTION</b> button.</p>
+												<a class="btn btn-green edit-faq-btn" href="#" ng-click="editFaqCtrl.addQuestion()">ADD QUESTION</a>
 										</div>
 									</div>
 								</div>

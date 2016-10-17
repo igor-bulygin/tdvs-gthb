@@ -945,9 +945,9 @@ input[type="radio"] .styled:checked + label::after {
   -webkit-border-radius: 180px 180px 180px 180px !important;
   -moz-border-radius: 180px 180px 180px 180px !important; }
 
-.log a, .edit-faq-btn, .add-lang, .request-invitation-wrapper .request-invitation-container .add-new {
+.log a, .add-lang, .request-invitation-wrapper .request-invitation-container .add-new {
   color: #F7284B !important; }
-  .log a:hover, .edit-faq-btn:hover, .add-lang:hover, .request-invitation-wrapper .request-invitation-container .add-new:hover {
+  .log a:hover, .add-lang:hover, .request-invitation-wrapper .request-invitation-container .add-new:hover {
     color: #C91C39 !important;
     text-decoration: none;
     -moz-transition-property: color;
@@ -1778,7 +1778,7 @@ input[type="radio"] .styled:checked + label::after {
   height: 250px; }
 
 .faq-wrapper {
-  margin: 40px 0; }
+  margin: 40px 0 120px; }
   .faq-wrapper .section-title {
     color: #9a9a9a;
     border: 0;
@@ -1822,12 +1822,9 @@ input[type="radio"] .styled:checked + label::after {
         margin: 0 23px 20px; }
 
 .edit-faq-btn {
-  font: 16px "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  margin: 0 0 15px 15px;
-  display: block;
-  cursor: pointer;
-  float: left;
-  width: 100%; }
+  margin: 0 auto;
+  max-width: 140px;
+  display: block; }
 
 .faq-edit-empty p {
   font: 16px "Playfair Display", Georgia, serif;
@@ -1842,7 +1839,8 @@ input[type="radio"] .styled:checked + label::after {
   padding: 5px;
   border-radius: 6px 6px 6px 6px !important;
   -webkit-border-radius: 6px 6px 6px 6px !important;
-  -moz-border-radius: 6px 6px 6px 6px !important; }
+  -moz-border-radius: 6px 6px 6px 6px !important;
+  margin: 0 0 50px; }
 
 .delete-link {
   font-family: "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -1914,6 +1912,8 @@ input[type="radio"] .styled:checked + label::after {
   border-radius: 6px 6px 6px 6px !important;
   -webkit-border-radius: 6px 6px 6px 6px !important;
   -moz-border-radius: 6px 6px 6px 6px !important; }
+  .faq-edit-answer .form-control {
+    border: 0; }
 
 .btn-done {
   width: 180px;

@@ -2,7 +2,7 @@
 // Deviser FAQs
 // ==========================================================================
 .faq-wrapper{
-    margin: 40px 0;
+    margin: 40px 0 120px;
     .section-title{
         color: $dark_grey;
         border: 0;
@@ -52,13 +52,9 @@
     }
 }
 .edit-faq-btn{
-    font: 16px $font-family--bold;
-    margin: 0 0 15px 15px;
+    margin: 0 auto;
+    max-width: 140px;
     display: block;
-    @extend %link-red;
-    cursor: pointer;
-    float: left;
-    width: 100%;
 }
 .faq-edit-empty{
     p{
@@ -76,6 +72,7 @@
     background-color: $pale_white;
     padding: 5px;
     @include border-radius(6px,6px,6px,6px);
+    margin: 0 0 50px;
 }
 .delete-link{
     font-family: $font-family--bold;
@@ -154,6 +151,9 @@
     padding: 10px;
     display: block;
     @include border-radius(6px,6px,6px,6px);
+    .form-control{
+        border: 0;
+    }
 }
 .btn-done{
     width: 180px;
