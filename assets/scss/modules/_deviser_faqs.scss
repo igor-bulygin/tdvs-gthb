@@ -140,6 +140,7 @@
 .faq-edit-question{
     font-family: $font-family--secondary;
     font-size: 16px;
+    
     display: block;
     margin: 12px 0 0 0;
 }
@@ -149,7 +150,7 @@
     background-color: $white;
     border: 1px solid $light_grey;
     padding: 10px;
-    display: block;
+    width:100%;
     @include border-radius(6px,6px,6px,6px);
     .form-control{
         border: 0;
@@ -195,5 +196,14 @@
         display: block;
         margin: 0 0 20px;
         padding: 0;
+    }
+}
+.faq-row{
+    .ta-editor.ta-html, .ta-scroll-window.form-control {
+        cursor: text;
+        min-height: auto!important;
+    }
+    .ta-root.focussed > .ta-scroll-window.form-control {
+        height: auto!important;
     }
 }

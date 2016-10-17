@@ -1908,7 +1908,7 @@ input[type="radio"] .styled:checked + label::after {
   background-color: #ffffff;
   border: 1px solid #bfbfbf;
   padding: 10px;
-  display: block;
+  width: 100%;
   border-radius: 6px 6px 6px 6px !important;
   -webkit-border-radius: 6px 6px 6px 6px !important;
   -moz-border-radius: 6px 6px 6px 6px !important; }
@@ -1951,6 +1951,12 @@ input[type="radio"] .styled:checked + label::after {
   display: block;
   margin: 0 0 20px;
   padding: 0; }
+
+.faq-row .ta-editor.ta-html, .faq-row .ta-scroll-window.form-control {
+  cursor: text;
+  min-height: auto !important; }
+.faq-row .ta-root.focussed > .ta-scroll-window.form-control {
+  height: auto !important; }
 
 .banner-deviser {
   position: relative;
