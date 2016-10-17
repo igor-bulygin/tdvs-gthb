@@ -73,7 +73,7 @@
 					delete element.languageSelected;
 				});
 				if(!angular.equals(deviserCompare, vm.deviser_original)) {
-					$rootScope.$broadcast(deviserEvents.deviser_changed, {value: true, deviser: newValue});
+					$rootScope.$broadcast(deviserEvents.deviser_changed, {value: true, deviser: deviserCompare});
 				} else {
 					$rootScope.$broadcast(deviserEvents.deviser_changed, {value: false});
 				}

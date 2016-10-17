@@ -88,6 +88,10 @@
 			vm.showCities = false;
 		}
 
+		function parseTags(value) {
+			return value.replace(/<[^\/>][^>]*><\/[^>]+>/gim, "");
+		}
+
 		function updateAll() {
 			var patch = new deviserDataService.Profile;
 			patch.scenario = "deviser-update-profile";
@@ -96,8 +100,15 @@
 				//delete unwanted tags on text_biography
 				if(key === 'text_biography') {
 					for(var language in vm.deviser[key]) {
-						vm.deviser[key][language]=vm.deviser[key][language].replace(/<[^\/>][^>]*><\/[^>]+>/gim, "");
+						vm.deviser[key][language]= parseTags(vm.deviser[key][language]);
 					}
+				}
+				if(key === 'faq') {
+					vm.deviser[key].forEach(function(element) {
+						for(var language in element.answer) {
+							element.answer[language] = parseTags(element.answer[language]);
+						}
+					});
 				}
 				if(key!=='account_state')
 					patch[key] = angular.copy(vm.deviser[key]);

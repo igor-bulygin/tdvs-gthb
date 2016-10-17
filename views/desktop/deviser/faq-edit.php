@@ -68,7 +68,7 @@ $this->params['deviser_links_target'] = 'edit_view';
 																<span class="faq-edit-question">Answer</span>
 															</div>
 															<div class="col-sm-11">
-																<textarea type="text" class="faq-edit-answer" placeholder="Answer" style="width:100%;" ng-model="question.answer[question.languageSelected]"></textarea>
+																<div class="faq-edit-answer" text-angular ng-model="question.answer[question.languageSelected]" ta-toolbar="[]" placeholder="Answer"></div>
 															</div>
 														</div>
 													</div>
