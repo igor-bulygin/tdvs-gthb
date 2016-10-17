@@ -2068,6 +2068,9 @@ input[type="radio"] .styled:checked + label::after {
   .btn.disabled:hover, .btn[disabled]:hover, fieldset[disabled] .btn:hover {
     background-color: #e9e9e9; }
 
+.edit-header-container {
+  position: relative; }
+
 .store {
   background-color: #e9e9e9; }
   .store .content-store {
@@ -2306,7 +2309,7 @@ input[type="radio"] .styled:checked + label::after {
   text-align: center;
   cursor: pointer;
   top: 176px;
-  left: 676px;
+  left: 625px;
   border-radius: 51px;
   display: block;
   z-index: 999;
