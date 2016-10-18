@@ -103,6 +103,7 @@
     margin-top: 20px;
     background-color: $background_grey;
     border: 1px solid $white;
+    cursor: auto;
     .produts-tags-wrapper{
         @extend %block;
         padding: 20px 10px;
