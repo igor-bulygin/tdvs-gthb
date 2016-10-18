@@ -1833,6 +1833,34 @@ input[type="radio"] .styled:checked + label::after {
 
 .edit-faq-wrapper {
   margin: 15px 0; }
+  .edit-faq-wrapper .plus-add {
+    background-color: #B8E986;
+    border: 1px solid #1C1919;
+    margin: 0 auto;
+    font-size: 43px;
+    text-align: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 90px 90px 90px 90px !important;
+    -webkit-border-radius: 90px 90px 90px 90px !important;
+    -moz-border-radius: 90px 90px 90px 90px !important; }
+    .edit-faq-wrapper .plus-add span {
+      display: block;
+      margin: -9px 0 0 0; }
+    .edit-faq-wrapper .plus-add:hover {
+      background-color: #7AB83A;
+      -moz-transition-property: background-color;
+      -o-transition-property: background-color;
+      -webkit-transition-property: background-color;
+      transition-property: background-color;
+      -moz-transition-duration: 0.3s;
+      -o-transition-duration: 0.3s;
+      -webkit-transition-duration: 0.3s;
+      transition-duration: 0.3s;
+      -moz-transition-timing-function: ease-out;
+      -o-transition-timing-function: ease-out;
+      -webkit-transition-timing-function: ease-out;
+      transition-timing-function: ease-out; }
 
 .edit-faq-panel {
   background-color: #f3f3f3;
@@ -1957,6 +1985,14 @@ input[type="radio"] .styled:checked + label::after {
   min-height: auto !important; }
 .faq-row .ta-root.focussed > .ta-scroll-window.form-control {
   height: auto !important; }
+
+.red-link-btn {
+  color: #F7284B;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-family: "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  .red-link-btn:hover {
+    color: #C91C39; }
 
 .banner-deviser {
   position: relative;
@@ -2575,6 +2611,7 @@ input[type="radio"] .styled:checked + label::after {
   padding: 20px;
   width: 130px;
   margin: 22px auto;
+  cursor: pointer;
   border-radius: 20px 20px 20px 20px !important;
   -webkit-border-radius: 20px 20px 20px 20px !important;
   -moz-border-radius: 20px 20px 20px 20px !important; }

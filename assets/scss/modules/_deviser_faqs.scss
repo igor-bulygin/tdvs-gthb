@@ -66,6 +66,25 @@
 .edit-faq-wrapper{
     @extend %block;
     margin: 15px 0;
+    .plus-add{
+        background-color: $green;
+        border: 1px solid $black;
+        margin: 0 auto;
+        font-size: 43px;
+        text-align: center;
+        @include size(50px,50px);
+        @include border-radius(90px,90px,90px,90px);
+        span{
+            display: block;
+            margin: -9px 0 0 0;
+        }
+        &:hover{
+            background-color: $dark_green;
+            @include transition-property(background-color);
+            @include transition-duration(0.3s);
+            @include transition-timing-function(ease-out);
+        }
+    }
 }
 .edit-faq-panel{
     @extend %block;
@@ -205,5 +224,14 @@
     }
     .ta-root.focussed > .ta-scroll-window.form-control {
         height: auto!important;
+    }
+}
+.red-link-btn{
+    color: $red;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-family:$font-family--bold;
+    &:hover{
+        color: $dark_red;
     }
 }

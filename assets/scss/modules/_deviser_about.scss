@@ -511,6 +511,7 @@
     padding: 20px;
     width: 130px;
     margin: 22px auto;
+    cursor: pointer;
     @include border-radius(20px,20px,20px,20px);
     .text{
         margin: 15px 0 0 0;
