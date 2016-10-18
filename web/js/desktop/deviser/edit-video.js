@@ -9,6 +9,8 @@
 		vm.updateDeviserVideos = updateDeviserVideos;
 		vm.deleteVideo = deleteVideo;
 		vm.deleteTag = deleteTag;
+		vm.showAddVideo = showAddVideo;
+		vm.done = done;
 		vm.works = [];
 		vm.YoutubeRegex = /http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-\_]*)(&(amp;)?[\w\?=]*)?/;
 
@@ -86,7 +88,6 @@
 					products: []
 				});
 				delete vm.url;
-				updateDeviserVideos();
 			}
 		}
 
@@ -94,16 +95,21 @@
 			if (!vm.deviser.videos[index].products)
 				vm.deviser.videos[index].products = [];
 			vm.deviser.videos[index].products.push(work);
-			updateDeviserVideos();
 		}
 
 		function deleteVideo(index) {
 			vm.deviser.videos.splice(index, 1);
-			updateDeviserVideos();
 		}
 
 		function deleteTag(video_index, tag_index) {
 			vm.deviser.videos[video_index].products.splice(tag_index, 1);
+		}
+
+		function showAddVideo() {
+			vm.addVideosClicked = true;
+		}
+
+		function done() {
 			updateDeviserVideos();
 		}
 	}

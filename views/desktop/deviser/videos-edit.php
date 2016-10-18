@@ -35,7 +35,8 @@ $this->params['deviser_links_target'] = 'edit_view';
 					</div>
 					<div class="col-md-10" ng-controller="editVideosCtrl as editVideosCtrl">
 						<div class="video-container">
-						    <div class="add-videos-wrapper">
+						<div><a href="#" class="red-link-btn" ng-click="editVideosCtrl.done()">I'm done editing videos</a></div>
+						    <div class="add-videos-wrapper" ng-if="editVideosCtrl.addVideosClicked || editVideosCtrl.deviser.videos.length > 0" ng-cloak>
                                <div class="plus-add-wrapper" ng-click="editVideosCtrl.addVideo()" ng-disabled="editVideosCtrl.form.$invalid">
                                     <div class="plus-add">
                                         <span>+</span>
@@ -55,6 +56,7 @@ $this->params['deviser_links_target'] = 'edit_view';
 							<div ng-if="editVideosCtrl.deviser.videos.length === 0" class="text-center" ng-cloak>
 								<img class="sad-face" src="/imgs/sad-face.svg">
 								<p class="no-video-text">You have no videos</p>
+								<button class="btn btn-default btn-green" ng-click="editVideosCtrl.showAddVideo()" ng-if="!editVideosCtrl.addVideosClicked">Add Videos</button>
 							</div>
 							<div class="video-edit-list" ng-cloak dnd-list="editVideosCtrl.deviser.videos">
 								<div class="row video-row" dnd-draggable="video" dnd-effect-allowed="move" dnd-moved="editVideosCtrl.updateDeviserVideos($index)" ng-repeat="video in editVideosCtrl.deviser.videos">
