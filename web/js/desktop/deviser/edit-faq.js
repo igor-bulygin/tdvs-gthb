@@ -7,6 +7,10 @@
 		vm.deleteQuestion = deleteQuestion;
 		vm.parseQuestion = parseQuestion;
 		vm.isLanguageOk = isLanguageOk;
+		vm.dragOver = dragOver;
+		vm.dragStart = dragStart;
+		vm.moved = moved;
+		vm.canceled = canceled;
 		vm.done = done;
 
 		function getDeviser() {
@@ -93,23 +97,41 @@
 			});
 		}
 
-		//watchs
-		// $scope.$watch('editFaqCtrl.deviser', function(newValue, oldValue){
-		// 	if(newValue) {
-		// 		var deviserCompare = angular.copy(newValue);
-		// 		deviserCompare.faq.forEach(function (element) {
-		// 			delete element.completedLanguages;
-		// 			delete element.languageSelected;
-		// 		});
-		// 		if(!angular.equals(deviserCompare, vm.deviser_original)) {
-		// 			$rootScope.$broadcast(deviserEvents.deviser_changed, {value: true, deviser: deviserCompare});
-		// 		} else {
-		// 			$rootScope.$broadcast(deviserEvents.deviser_changed, {value: false});
-		// 		}
-		// 	}
+		function dragStart(event, index) {
+			vm.original_index = index;
+			vm.original_faq = angular.copy(vm.deviser.faq);
+			vm.faq_being_moved = angular.copy(vm.deviser.faq[index]);
+		}
 
-		// }, true);
+		function dragOver(event, index) {
+			console.log(vm.original_index);
+			vm.deviser.faq = angular.copy(vm.original_faq);
+			vm.previous_index = index;
+			if(vm.previous_index > vm.original_index) {
+				vm.deviser.faq.splice(vm.previous_index, 0, vm.faq_being_moved);
+			} else {
+				vm.deviser.faq[vm.original_index] = vm.original_faq[vm.original_index - 1];
+				vm.deviser.faq.splice(vm.previous_index, 0, vm.faq_being_moved);
+			}
+			return true;
+		}
 
+		function moved(index) {
+			vm.deviser.faq = angular.copy(vm.original_faq);
+			if(vm.previous_index > vm.original_index) {
+				vm.deviser.faq.splice(vm.previous_index, 0, vm.faq_being_moved);
+				vm.deviser.faq.splice(vm.original_index, 1);
+			} else {
+				vm.deviser.faq.splice(vm.original_index, 1);
+				vm.deviser.faq.splice(vm.previous_index, 0, vm.faq_being_moved);
+			}
+			delete vm.faq_being_moved;
+			delete vm.previous_index;
+		}
+
+		function canceled(event, index) {
+			vm.deviser.faq = angular.copy(vm.original_faq);
+		}
 
 	}
 
