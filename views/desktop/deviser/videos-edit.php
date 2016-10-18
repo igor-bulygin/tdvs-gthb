@@ -98,9 +98,17 @@ $this->params['deviser_links_target'] = 'edit_view';
 												<p class="no-tags-text">Tag works to tell other members what the video is about.</p>
 											</div>
 											<div class="produts-tags-wrapper">
-												<div ng-repeat="product in video.products" ng-if="video.products.length > 0">
-													<div class="tag-row">
-														<div class="col-md-2">
+												<div class="col-md-6" ng-repeat="product in video.products" ng-if="video.products.length > 0">
+											        <div class="video-tag-wrapper">
+                                                           <span class="ion-close-round red-cross" style="cursor:pointer;" ng-click="editVideosCtrl.deleteTag($parent.$parent.$index, $index)"></span>
+                                                           <div ng-bind="product.name"></div>			
+                                                           <span>by </span><span ng-bind="product.deviser.name"></span>
+                                                    </div>
+
+                 
+													    
+													    
+														<!--<div class="col-md-2">
 															<img ng-src="{{product.url_image_preview}}" style="width: 100%; max-height: 50px;">
 														</div>
 														<div class="col-md-8">
@@ -111,7 +119,7 @@ $this->params['deviser_links_target'] = 'edit_view';
 														</div>
 														<div class="col-md-2">
 															<span class="glyphicon glyphicon-remove red-close" style="cursor:pointer;" ng-click="editVideosCtrl.deleteTag($parent.$parent.$index, $index)"></span>
-														</div>
+														</div>-->
 													</div>
 												</div>
 											</div>
