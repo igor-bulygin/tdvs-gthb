@@ -20,6 +20,7 @@ $deviser = $this->params['deviser'];
 					<div class="avatar">
 						<img class="cover" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($deviser->getAvatarImage())->resize(340, 340) ?>">
 					</div>
+					<div><a href="<?= Url::to(["deviser/about-edit", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id])?>">Edit profile</a></div>
 					<div class="deviser-data">
 						<div class="name">
 							<?= $deviser->personalInfo->getBrandName() ?>
