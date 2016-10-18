@@ -8,7 +8,9 @@
 		vm.deleteImage = delete_image;
 		vm.dragOver = dragOver;
 		vm.dragStart = dragStart;
-		vm.drop = drop;
+		vm.moved = moved;
+		vm.canceled = canceled;
+		vm.done = done;
 
 		function getDeviser() {
 			deviserDataService.Profile.get({
@@ -27,10 +29,7 @@
 			getDeviser();
 		}
 
-		function update(index) {
-			if (index >= 0) {
-				vm.images.splice(index, 1);
-			}
+		function update() {
 			var patch = new deviserDataService.Profile;
 			patch.scenario = "deviser-update-profile";
 			patch.press = [];
@@ -62,7 +61,6 @@
 					toastr.success("Photo uploaded!");
 					vm.deviser.press.unshift(dataUpload.data.filename);
 					vm.images = UtilService.parseImagesUrl(vm.deviser.press, vm.deviser.url_images);
-					update();
 					$timeout(function () {
 						delete file.progress;
 					}, 1000);
@@ -77,7 +75,6 @@
 
 		function delete_image(index) {
 			vm.images.splice(index, 1);
-			update();
 		}
 
 		function dragStart(event, index) {
@@ -87,36 +84,41 @@
 		}
 
 		function dragOver(event, index) {
-			if(vm.previous_index) {
-				//get original images
-				vm.images = angular.copy(vm.original_images);
-				if(index < vm.original_index)
-					vm.images[vm.original_index] = vm.images[vm.original_index-1];
-				//insert image in index
-				vm.images.splice(index, 0, vm.image_being_moved);
-				//set previous_index
-				vm.previous_index = index;
+			//copy original images
+			vm.images = angular.copy(vm.original_images);
+			//get index where it will drop
+			vm.previous_index = index;
+			//if position is after original index, insert
+			if(vm.previous_index > vm.original_index) {
+				vm.images.splice(vm.previous_index, 0, vm.image_being_moved)
 			} else {
-				//set previous index
-				vm.previous_index = index;
+			//if not, change image in original index to the image before it and then add image being moved
+			vm.images[vm.original_index] = vm.original_images[vm.original_index-1];
+			vm.images.splice(vm.previous_index, 0, vm.image_being_moved);
 			}
 			return true;
 		}
 
-		function drop(index) {
-			var index_to_delete=0;
-			if(index < vm.original_index)
-				index_to_delete = vm.original_index + 1;
-			else {
-				index_to_delete = vm.original_index;
+		function moved(index) {
+			vm.images = angular.copy(vm.original_images);
+			if(vm.previous_index > vm.original_index) {
+				vm.images.splice(vm.previous_index, 0, vm.image_being_moved)
+				vm.images.splice(vm.original_index, 1)
+			} else {
+				vm.images.splice(vm.original_index, 1);
+				vm.images.splice(vm.previous_index, 0, vm.image_being_moved);
 			}
-			//update
-			update(index_to_delete);
 			//reset iteration
 			delete vm.image_being_moved;
 			delete vm.previous_index;
+		}
 
+		function canceled(event, index) {
+			vm.images = angular.copy(vm.original_images);
+		}
 
+		function done() {
+			update();
 		}
 
 		init();
