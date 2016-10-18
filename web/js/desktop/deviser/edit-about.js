@@ -12,7 +12,8 @@
 		vm.deleteImage = delete_image;
 		vm.dragOver = dragOver;
 		vm.dragStart = dragStart;
-		vm.drop = drop;
+		vm.moved = moved;
+		vm.canceled = canceled;
 		vm.checkPhotos = checkPhotos;
 		vm.biography_language = "en-US";
 
@@ -154,33 +155,38 @@
 		}
 
 		function dragOver(event, index) {
-			if(vm.previous_index) {
-				//get original images
-				vm.images = angular.copy(vm.original_images);
-				if(index < vm.original_index) {
-					vm.images[vm.original_index] = vm.images[vm.original_index-1];
-				}
-				//insert image in index position
-				vm.images.splice(index, 0, vm.image_being_moved);
-				//set previous index
-				vm.previous_index = index;
+			//copy original images
+			vm.images = angular.copy(vm.original_images);
+			//get index where it will drop
+			vm.previous_index = index;
+			//if position is after original index, insert
+			if(vm.previous_index > vm.original_index) {
+				vm.images.splice(vm.previous_index, 0, vm.image_being_moved)
 			} else {
-				//set previous index
-				vm.previous_index = index;
+			//if not, change image in original index to the image before it and then add image being moved
+			vm.images[vm.original_index] = vm.original_images[vm.original_index-1];
+			vm.images.splice(vm.previous_index, 0, vm.image_being_moved);
 			}
 			return true;
 		}
 
-		function drop(index) {
-			var index_to_delete = 0;
-			if(index < vm.original_index)
-				index_to_delete = vm.original_index + 1;
-			else {
-				index_to_delete = vm.original_index;
+		function moved(index) {
+			vm.images = angular.copy(vm.original_images);
+			if(vm.previous_index > vm.original_index) {
+				vm.images.splice(vm.previous_index, 0, vm.image_being_moved)
+				vm.images.splice(vm.original_index, 1)
+			} else {
+				vm.images.splice(vm.original_index, 1);
+				vm.images.splice(vm.previous_index, 0, vm.image_being_moved);
 			}
-			//update
-			vm.images.splice(index_to_delete, 1);
+			//reset iteration
+			delete vm.image_being_moved;
+			delete vm.previous_index;
 			vm.deviser.media = parsePhotos();
+		}
+
+		function canceled(event, index){
+			vm.images = angular.copy(vm.original_images);
 		}
 
 		function checkPhotos(){
