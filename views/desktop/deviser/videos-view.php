@@ -45,6 +45,7 @@ $this->params['deviser_links_target'] = 'public_view';
 					</div>
 				<?php } else { ?>
 			    <div class="video-container">
+				    <div class="red-link-btn"><a href="<?= Url::to(["deviser/videos-edit", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id])?>">Add video</a></div>
 				    <?php foreach ($videos as $video) { ?>
                     <div class="col-sm-<?= (count($videos)<=3) ? '12' : '6' ?>">
                         <div class="video-wrapper">

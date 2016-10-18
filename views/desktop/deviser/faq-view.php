@@ -47,7 +47,7 @@ $this->params['deviser_links_target'] = 'public_view';
                         <p class="no-video-text">You don't have any question!</p>
                     </div>
 					<?php } else { ?>
-
+						<div class="red-link-btn"><a href="<?= Url::to(["deviser/faq-edit", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id])?>">Add question</a></div>
 					<div id="accordion" role="tablist" aria-multiselectable="true">
 						<?php foreach ($faq as $key => $item) { ?>
 						<div class="panel faq-panel">

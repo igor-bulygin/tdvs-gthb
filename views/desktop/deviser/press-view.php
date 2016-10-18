@@ -3,6 +3,7 @@ use app\components\DeviserHeader;
 use app\components\DeviserMenu;
 use app\helpers\Utils;
 use app\models\Person;
+use yii\helpers\Url;
 use yii\web\View;
 use app\models\Lang;
 use app\assets\desktop\pub\Index2Asset;
@@ -36,6 +37,7 @@ $this->params['deviser_links_target'] = 'public_view';
                     <p class="no-video-text">You don't have any press images!</p>
                 </div>
 				<?php } else { ?>
+				<div class="red-link-btn"><a href="<?= Url::to(["deviser/press-edit", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id])?>">Add press image</a></div>
 				<div class="mesonry-row press-3">
 					<?php foreach ($press as $item) { ?>
 					<div class="menu-category list-group draggable-list">
