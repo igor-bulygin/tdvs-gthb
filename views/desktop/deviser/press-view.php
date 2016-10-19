@@ -37,7 +37,7 @@ $this->params['deviser_links_target'] = 'public_view';
                     <p class="no-video-text">You don't have any press images!</p>
                 </div>
 				<?php } else { ?>
-				<div class="red-link-btn"><a href="<?= Url::to(["deviser/press-edit", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id])?>">Add / remove photos</a></div>
+				<div><a href="<?= Url::to(["deviser/press-edit", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id])?>" class="red-link-btn">Add / remove photos</a></div>
 				<div class="mesonry-row press-3">
 					<?php foreach ($press as $item) { ?>
 					<div class="menu-category list-group draggable-list">
