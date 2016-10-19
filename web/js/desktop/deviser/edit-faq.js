@@ -48,7 +48,8 @@
 			vm.deviser.faq.unshift({
 				question: {},
 				answer: {},
-				completedLanguages: []
+				completedLanguages: [],
+				languageSelected: 'en-US'
 			});
 		}
 
