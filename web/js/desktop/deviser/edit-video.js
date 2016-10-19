@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(deviserDataService, productDataService, toastr, UtilService) {
+	function controller(deviserDataService, productDataService, toastr, UtilService, $window) {
 		var vm = this;
 		vm.addVideo = addVideo;
 		vm.findProducts = findProducts;
@@ -52,7 +52,7 @@
 				})
 			})
 			patch.$update().then(function (dataVideos) {
-				//nothing
+				$window.location.href = '/deviser/' + dataVideos.slug + '/' + dataVideos.id + '/video';
 			}, function (err) {
 				toastr.error(err);
 				getDeviser();

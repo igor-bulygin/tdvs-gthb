@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(deviserDataService, Upload, toastr, UtilService, $timeout) {
+	function controller(deviserDataService, Upload, toastr, UtilService, $timeout, $window) {
 		var vm = this;
 		vm.upload = upload;
 		vm.update = update;
@@ -39,7 +39,7 @@
 					patch.press.push(element.filename);
 			});
 			patch.$update().then(function (dataPress) {
-				getDeviser();
+				$window.location.href = '/deviser/' + dataPress.slug + '/' + dataPress.id + '/press';
 			}, function (err) {
 				toastr.error(err);
 			});

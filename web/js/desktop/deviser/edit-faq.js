@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(deviserDataService, toastr, UtilService, languageDataService, $scope, deviserEvents, $rootScope) {
+	function controller(deviserDataService, toastr, UtilService, languageDataService, $window) {
 		var vm = this;
 		vm.addQuestion = addQuestion;
 		vm.deleteQuestion = deleteQuestion;
@@ -70,10 +70,10 @@
 		}
 
 		function done() {
-			update(true);
+			update();
 		}
 
-		function update(done) {
+		function update() {
 			var patch = new deviserDataService.Profile;
 			patch.scenario = 'deviser-update-profile';
 			patch.faq = [];
@@ -89,9 +89,7 @@
 			});
 			patch.deviser_id = vm.deviser.id;
 			patch.$update().then(function(dataFaq) {
-				if(done) {
-					//go away
-				}
+				$window.location.href = '/deviser/' + dataFaq.slug + '/' + dataFaq.id + '/faq';
 			}, function (err) {
 				toastr.error(err);
 			});
