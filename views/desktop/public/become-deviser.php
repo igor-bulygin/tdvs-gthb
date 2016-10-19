@@ -140,16 +140,21 @@ $this->title = 'Become a Deviser - Todevise';
 									<input name="creations_description" type="text" class="form-control grey-input ng-class:{'error-input': becomeDeviserCtrl.has_error(becomeDeviserCtrl.form, becomeDeviserCtrl.form.creations_description)}" required ng-model="becomeDeviserCtrl.invitation.creations_description">
 									<form-errors field="becomeDeviserCtrl.form.creations_description" condition="becomeDeviserCtrl.has_error(becomeDeviserCtrl.form, becomeDeviserCtrl.form.creations_description)"></form-errors>
 								</div>
-								<div class="col-sm-12" ng-repeat="url in becomeDeviserCtrl.invitation.urls_portfolio track by $index">
+								<div class="col-sm-12">
 									<label>Link to portfolio</label>
+									<div ng-repeat="url in becomeDeviserCtrl.invitation.urls_portfolio track by $index">
 									<input name="{{'portfolio_' + $index}}" type="text" class="form-control grey-input ng-class:{'error-input': becomeDeviserCtrl.has_error(becomeDeviserCtrl.form, becomeDeviserCtrl.form['portfolio_'+$index])}" required ng-model="becomeDeviserCtrl.invitation.urls_portfolio[$index]" ng-pattern="becomeDeviserCtrl.urlRegEx">
 									<form-errors field="becomeDeviserCtrl.form['portfolio_'+$index]" condition="becomeDeviserCtrl.has_error(becomeDeviserCtrl.form, becomeDeviserCtrl.form['portfolio_'+$index])"></form-errors>
+									<!-- <div><pre>{{becomeDeviserCtrl.form.portfolio_0 | json}}</pre></div> -->
+									</div>
 								</div>
 								<a href="" class="add-new" ng-click="becomeDeviserCtrl.addUrlPortfolio()">Add new +</a>
-								<div class="col-sm-12" ng-repeat="url in becomeDeviserCtrl.invitation.urls_video track by $index">
+								<div class="col-sm-12">
+									<div ng-repeat="url in becomeDeviserCtrl.invitation.urls_video track by $index">
 									<label>Link to video</label>
 									<input name="{{'video_' + $index}}" type="text" class="form-control grey-input ng-class:{'error-input': becomeDeviserCtrl.has_error(becomeDeviserCtrl.form, becomeDeviserCtrl.form['video_'+$index])}" ng-model="becomeDeviserCtrl.invitation.urls_video[$index]" ng-pattern="becomeDeviserCtrl.urlRegEx">
 									<form-errors field="becomeDeviserCtrl.form['video_'+$index]" condition="becomeDeviserCtrl.has_error(becomeDeviserCtrl.form, becomeDeviserCtrl.form['video_'+$index])"></form-errors>
+									</div>
 								</div>
 								<a href="" class="add-new" ng-click="becomeDeviserCtrl.addUrlVideo()">Add new +</a>
 								<div class="col-sm-12">

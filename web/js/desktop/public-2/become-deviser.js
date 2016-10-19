@@ -39,13 +39,25 @@
 		}
 
 		function addUrlPortfolio() {
-			if (vm.invitation.urls_portfolio[vm.invitation.urls_portfolio.length - 1] !== null)
-				vm.invitation.urls_portfolio.push(null);
+			if (vm.invitation.urls_portfolio[vm.invitation.urls_portfolio.length - 1] !== null) {
+				if(vm.invitation.urls_portfolio.length > 0) {
+				 	if(!vm.form['portfolio_'+(vm.invitation.urls_portfolio.length - 1)].$invalid)
+						vm.invitation.urls_portfolio.push(null);
+				} else {
+					vm.invitation.urls_portfolio.push(null);
+				}
+			}
 		}
 
 		function addUrlVideo() {
-			if (vm.invitation.urls_video[vm.invitation.urls_video.length - 1] !== null)
-				vm.invitation.urls_video.push(null);
+			if (vm.invitation.urls_video[vm.invitation.urls_video.length - 1] !== null) {
+				if(vm.invitation.urls_video.length > 0) {
+					if(!vm.form['video_'+(vm.invitation.urls_video.length - 1)].$invalid)
+						vm.invitation.urls_video.push(null);
+				} else {
+						vm.invitation.urls_video.push(null);
+				}
+			}
 		}
 
 	}
