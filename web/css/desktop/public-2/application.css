@@ -2536,7 +2536,7 @@ input[type="radio"] .styled:checked + label::after {
   left: 14px; }
 .grey-form ol.work-field button {
   margin: 4px 0 0 0;
-  min-width: 245px;
+  min-width: 291px;
   border-radius: 90px 90px 90px 90px !important;
   -webkit-border-radius: 90px 90px 90px 90px !important;
   -moz-border-radius: 90px 90px 90px 90px !important; }
