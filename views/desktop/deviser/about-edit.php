@@ -62,7 +62,7 @@ $this->params['deviser'] = $deviser;
                                                         <span class="optional-text pull-left">OPTIONAL</span>
                                                         <span class="small-grey">Even more things to tell your customers? Upload it here.</span>
                                                         <div class="edit-about-row">
-                                                            <button class="btn btn-default btn-green btn-upload-file" ngf-select="editAboutCtrl.uploadCV($file)" ngf-accept="'application/pdf'">UPLOAD FILE</button>
+                                                            <button class="btn btn-default btn-green btn-upload-file" ngf-select="editAboutCtrl.uploadCV($file)" ngf-accept="'application/pdf,image/*'">UPLOAD FILE</button>
                                                             <span class="cv" ng-if="editAboutCtrl.deviser.curriculum" ng-cloak>
                                                             <span class="pull-left cv-file" ng-bind="editAboutCtrl.deviser.curriculum"></span> 
                                                             <span class="remove-cv ion-ios-close-empty pull-left" ng-click="editAboutCtrl.deleteCV()"></span></span>
