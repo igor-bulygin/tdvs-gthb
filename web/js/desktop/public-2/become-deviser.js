@@ -6,6 +6,7 @@
 		vm.submitForm = submitForm;
 		vm.addUrlPortfolio = addUrlPortfolio;
 		vm.addUrlVideo = addUrlVideo;
+		vm.urlRegEx = UtilService.urlRegEx;
 		vm.has_error = UtilService.has_error;
 
 		function init() {

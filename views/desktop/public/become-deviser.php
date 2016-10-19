@@ -142,13 +142,13 @@ $this->title = 'Become a Deviser - Todevise';
 								</div>
 								<div class="col-sm-12" ng-repeat="url in becomeDeviserCtrl.invitation.urls_portfolio track by $index">
 									<label>Link to portfolio</label>
-									<input name="{{'portfolio_' + $index}}" type="url" class="form-control grey-input ng-class:{'error-input': becomeDeviserCtrl.has_error(becomeDeviserCtrl.form, becomeDeviserCtrl.form['portfolio_'+$index])}" required ng-model="becomeDeviserCtrl.invitation.urls_portfolio[$index]">
+									<input name="{{'portfolio_' + $index}}" type="text" class="form-control grey-input ng-class:{'error-input': becomeDeviserCtrl.has_error(becomeDeviserCtrl.form, becomeDeviserCtrl.form['portfolio_'+$index])}" required ng-model="becomeDeviserCtrl.invitation.urls_portfolio[$index]" ng-pattern="becomeDeviserCtrl.urlRegEx">
 									<form-errors field="becomeDeviserCtrl.form['portfolio_'+$index]" condition="becomeDeviserCtrl.has_error(becomeDeviserCtrl.form, becomeDeviserCtrl.form['portfolio_'+$index])"></form-errors>
 								</div>
 								<a href="" class="add-new" ng-click="becomeDeviserCtrl.addUrlPortfolio()">Add new +</a>
 								<div class="col-sm-12" ng-repeat="url in becomeDeviserCtrl.invitation.urls_video track by $index">
 									<label>Link to video</label>
-									<input name="{{'video_' + $index}}" type="url" class="form-control grey-input ng-class:{'error-input': becomeDeviserCtrl.has_error(becomeDeviserCtrl.form, becomeDeviserCtrl.form['video_'+$index])}" ng-model="becomeDeviserCtrl.invitation.urls_video[$index]">
+									<input name="{{'video_' + $index}}" type="text" class="form-control grey-input ng-class:{'error-input': becomeDeviserCtrl.has_error(becomeDeviserCtrl.form, becomeDeviserCtrl.form['video_'+$index])}" ng-model="becomeDeviserCtrl.invitation.urls_video[$index]" ng-pattern="becomeDeviserCtrl.urlRegEx">
 									<form-errors field="becomeDeviserCtrl.form['video_'+$index]" condition="becomeDeviserCtrl.has_error(becomeDeviserCtrl.form, becomeDeviserCtrl.form['video_'+$index])"></form-errors>
 								</div>
 								<a href="" class="add-new" ng-click="becomeDeviserCtrl.addUrlVideo()">Add new +</a>
