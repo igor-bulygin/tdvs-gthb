@@ -34,7 +34,7 @@ $this->params['deviser_links_target'] = 'edit_view';
 							<?= DeviserMenu::widget() ?>
 						</div>
 						<div class="col-md-10">
-							<div><a href="#" ng-click="editPressCtrl.done()" class="red-link-btn">I'm done editing</a></div>
+							<div><a href="#" ng-click="editPressCtrl.done()" class="red-link-btn" ng-if="editPressCtrl.images.length>0">I'm done editing press</a></div>
 							<div ng-if="editPressCtrl.files.length > 0" ng-repeat="item in editPressCtrl.files" style="max-height:200px; max-width:400px;">
 								<div ng-if="item.progress <= 100">
 									<img ngf-thumbnail="item" style="max-height:200px; opacity:0.5;">

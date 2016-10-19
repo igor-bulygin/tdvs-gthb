@@ -75,6 +75,7 @@
 
 		function delete_image(index) {
 			vm.images.splice(index, 1);
+			vm.deviser.press.splice(index, 1);
 		}
 
 		function dragStart(event, index) {
