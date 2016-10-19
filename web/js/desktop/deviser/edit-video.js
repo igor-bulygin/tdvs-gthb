@@ -12,7 +12,8 @@
 		vm.showAddVideo = showAddVideo;
 		vm.done = done;
 		vm.works = [];
-		vm.YoutubeRegex = /http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-\_]*)(&(amp;)?[\w\?=]*)?/;
+		//from https://gist.github.com/brunodles/927fd8feaaccdbb9d02b
+		vm.YoutubeRegex = /(?:https?:\/\/)?(?:www\.)?youtu\.?be(?:\.com)?\/?.*(?:watch|embed)?(?:.*v=|v\/|\/)([\w\-_]+)\&?/i;
 
 		init();
 

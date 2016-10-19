@@ -42,7 +42,7 @@ $this->params['deviser_links_target'] = 'edit_view';
 								<div class="col-md-10" ng-controller="editFaqCtrl as editFaqCtrl">
 									<div class="faq-wrapper faq-edit-list">
 										<!-- <div class="section-title">FAQ</div> -->
-										<div>
+										<div ng-if="editFaqCtrl.deviser.faq.length>0">
 											<a class="red-link-btn" href="#" ng-click="editFaqCtrl.done()">I'm done editing</a></div>
 										<div class="edit-faq-wrapper" ng-cloak ng-if="editFaqCtrl.deviser.faq.length > 0">
 											<div class="plus-add-wrapper" ng-if="editFaqCtrl.deviser.faq.length > 0" ng-click="editFaqCtrl.addQuestion()">
