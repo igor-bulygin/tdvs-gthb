@@ -185,5 +185,5 @@ footer{
 }
 .nya-bs-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
     min-width: 220px!important;
-    width: auto!important;
+    width: auto;
 }
