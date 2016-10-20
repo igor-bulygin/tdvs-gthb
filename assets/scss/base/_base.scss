@@ -5,6 +5,9 @@
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
+html{
+    background-color: $background_grey;
+}
 body{
     font-family: $font-family--primary;
     background-color: $black;
