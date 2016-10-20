@@ -78,11 +78,11 @@
 			vm.deviser.press.splice(index, 1);
 		}
 
-		function dragStart(event, index) {
+		function dragStart(index) {
 			dragndropService.dragStart(index, vm.images);
 		}
 
-		function dragOver(event, index) {
+		function dragOver(index) {
 			vm.images = dragndropService.dragOver(index, vm.images);
 			return true;
 		}
@@ -91,7 +91,7 @@
 			vm.images = dragndropService.moved(index)
 		}
 
-		function canceled(event, index) {
+		function canceled() {
 			vm.images = dragndropService.canceled();
 		}
 

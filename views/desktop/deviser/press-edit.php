@@ -65,8 +65,8 @@ $this->params['deviser_links_target'] = 'edit_view';
 										<input type="file" name="file" ngf-select="editPressCtrl.upload($files, $invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="editPressCtrl.isDropAvailable" ngf-multiple="true">
 									</div>
 								</form>
-								<div class="list-group draggable-list" ng-if="editPressCtrl.images.length > 0" dnd-list="editPressCtrl.images" dnd-dragover="editPressCtrl.dragOver(event, index)">
-									<div class="col-sm-3" ng-repeat="item in editPressCtrl.images track by $index" dnd-type="'pressType'" dnd-draggable="item" dnd-effect-allowed="move" dnd-dragstart="editPressCtrl.dragStart(event, $index)" dnd-canceled="editPressCtrl.canceled(event, $index)" dnd-moved="editPressCtrl.moved($index)">
+								<div class="list-group draggable-list" ng-if="editPressCtrl.images.length > 0" dnd-list="editPressCtrl.images" dnd-dragover="editPressCtrl.dragOver(index)">
+									<div class="col-sm-3" ng-repeat="item in editPressCtrl.images track by $index" dnd-type="'pressType'" dnd-draggable="item" dnd-effect-allowed="move" dnd-dragstart="editPressCtrl.dragStart($index)" dnd-canceled="editPressCtrl.canceled()" dnd-moved="editPressCtrl.moved($index)">
                                         <div class="image-press-edit">
                                             <span class="ion-android-close x-close" style="background-color: black" ng-click="editPressCtrl.deleteImage($index)"></span>
                                             <img class="grid-image draggable-img" ng-src="{{item.url}}">

@@ -106,8 +106,8 @@ $this->params['deviser'] = $deviser;
 										<div ngf-no-file-drop>
 											<input type="file" name="file" ngf-select="editAboutCtrl.uploadPhoto($files, $invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="editAboutCtrl.isDropAvailable" ngf-multiple="true">
 										</div>
-										<div class="item draggable-list about-edit-list" dnd-list="editAboutCtrl.images" ng-if="editAboutCtrl.images.length > 0" dnd-dragover="editAboutCtrl.dragOver(event,index)" ng-cloak>
-											<div class="col-sm-6 pad-about image-about-edit" ng-repeat="image in editAboutCtrl.images track by $index" dnd-draggable="image" dnd-effect-allowed="move" dnd-dragstart="editAboutCtrl.dragStart(event, $index)" dnd-canceled="editAboutCtrl.canceled(event, $index)" dnd-moved="editAboutCtrl.moved($index)">
+										<div class="item draggable-list about-edit-list" dnd-list="editAboutCtrl.images" ng-if="editAboutCtrl.images.length > 0" dnd-dragover="editAboutCtrl.dragOver(index)" ng-cloak>
+											<div class="col-sm-6 pad-about image-about-edit" ng-repeat="image in editAboutCtrl.images track by $index" dnd-draggable="image" dnd-effect-allowed="move" dnd-dragstart="editAboutCtrl.dragStart($index)" dnd-canceled="editAboutCtrl.canceled()" dnd-moved="editAboutCtrl.moved($index)">
 												<span class="button ion-crop crop-avatar-photo-icon" ng-click="editAboutCtrl.openCropModal(image.url, $index)"></span>
 												<span class="ion-android-close x-close" ng-click="editAboutCtrl.deleteImage($index)"></span>
 												<img ng-src="{{image.url}}" class="grid-image draggable-img">

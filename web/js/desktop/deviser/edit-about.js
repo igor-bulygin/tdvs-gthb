@@ -148,11 +148,11 @@
 				checkPhotos();
 		}
 
-		function dragStart(event, index) {
+		function dragStart(index) {
 			dragndropService.dragStart(index, vm.images);
 		}
 
-		function dragOver(event, index) {
+		function dragOver(index) {
 			vm.images = dragndropService.dragOver(index, vm.images);
 			return true;
 		}
@@ -162,7 +162,7 @@
 			vm.deviser.media = parsePhotos();
 		}
 
-		function canceled(event, index){
+		function canceled(){
 			vm.images = dragndropService.canceled();
 		}
 
