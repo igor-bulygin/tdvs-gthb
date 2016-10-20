@@ -52,6 +52,12 @@ ul{
         border-right: none!important;
     }
 }
+.disabled-link{
+       color: $light_grey;
+       pointer-events: none;
+       cursor: default;
+       border: none;
+}
 /* Dont display dropable zone on dragg and drop */
 .dndDraggingSource {
     display: none;
