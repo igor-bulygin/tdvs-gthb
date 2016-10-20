@@ -42,6 +42,9 @@ class ProductController extends CController {
 		]);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public function actionFixPosition()
 	{
 //		ini_set('memory_limit', '2048M');

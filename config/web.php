@@ -156,7 +156,6 @@ $config = [
 				'/index-old' => 'public/index-old',
 				'/category/<slug:[^/.]*?>/<category_id:[^/.]*?>' => 'public/category-b',
 				'/work/<slug:[^/.]*?>/<product_id:[^/.]*?>' => 'product/detail',
-				'/works/fix-position' => 'product/fix-position',
 				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/store' => 'deviser/store',
 				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/about' => 'deviser/about',
 				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/press' => 'deviser/press',
@@ -195,6 +194,8 @@ $config = [
 				// Postman (temp urls)
 //				'/postman/emails' => 'postman/index',
 				'/postman/emails/<uuid:[^/.]*?>' => 'postman/email-view',
+
+				// Routes to show mockups to product owner
 				'/postman/mockups/deviser-request-invitation' => 'postman/mockup-deviser-request-invitation-view',
 				'/postman/mockups/deviser-invitation' => 'postman/mockup-deviser-invitation-view',
 
