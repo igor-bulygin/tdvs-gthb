@@ -1,4 +1,5 @@
 <?php
+use app\assets\desktop\pub\PublicCommonAsset;
 use app\components\DeviserHeader;
 use app\components\DeviserMenu;
 use app\models\Person;
@@ -14,7 +15,7 @@ use yii\widgets\ActiveForm;
 use app\assets\desktop\pub\IndexAsset;
 use app\assets\desktop\pub\Index2Asset;
 
-Index2Asset::register($this);
+PublicCommonAsset::register($this);
 
 /** @var Person $deviser */
 
