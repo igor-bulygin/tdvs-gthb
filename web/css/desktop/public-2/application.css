@@ -3099,6 +3099,14 @@ input[type="radio"] .styled:checked + label::after {
 .error-text {
   color: #924cfc !important; }
 
+.optional-input {
+  color: #418400;
+  text-transform: uppercase;
+  font-size: 10px;
+  position: absolute;
+  top: 44px;
+  right: 22px; }
+
 .create-deviser-account-wrapper {
   padding: 80px 200px; }
   .create-deviser-account-wrapper .logo {

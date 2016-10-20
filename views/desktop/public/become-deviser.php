@@ -117,6 +117,7 @@ $this->title = 'Become a Deviser - Todevise';
 									<div class="col-sm-6">
 										<label>Brand name</label>
 										<input name="brand_name" type="text" class="form-control grey-input ng-class:{'error-input': becomeDeviserCtrl.has_error(becomeDeviserCtrl.form, becomeDeviserCtrl.form.brand_name)}" ng-model="becomeDeviserCtrl.invitation.brand_name">
+										<span class="optional-input">Optional</span>
 										<form-errors field="becomeDeviserCtrl.form.brand_name" condition="becomeDeviserCtrl.has_error(becomeDeviserCtrl.form, becomeDeviserCtrl.form.brand_name)"></form-errors>
 									</div>
 								</div>
@@ -129,6 +130,7 @@ $this->title = 'Become a Deviser - Todevise';
 									<div class="col-sm-6">
 										<label>Phone number</label>
 										<input name="phone_number" type="text" class="form-control grey-input ng-class:{'error-input': becomeDeviserCtrl.has_error(becomeDeviserCtrl.form, becomeDeviserCtrl.form.phone_number)}" ng-model="becomeDeviserCtrl.invitation.phone_number">
+										<span class="optional-input">Optional</span>
 										<form-errors field="becomeDeviserCtrl.form.phone_number" condition="becomeDeviserCtrl.has_error(becomeDeviserCtrl.form, becomeDeviserCtrl.form.phone_number)"></form-errors>
 									</div>
 								</div>
@@ -153,6 +155,7 @@ $this->title = 'Become a Deviser - Todevise';
 									<div ng-repeat="url in becomeDeviserCtrl.invitation.urls_video track by $index">
 									<label>Link to video</label>
 									<input name="{{'video_' + $index}}" type="text" class="form-control grey-input ng-class:{'error-input': becomeDeviserCtrl.has_error(becomeDeviserCtrl.form, becomeDeviserCtrl.form['video_'+$index])}" ng-model="becomeDeviserCtrl.invitation.urls_video[$index]" ng-pattern="becomeDeviserCtrl.urlRegEx">
+									<span class="optional-input">Optional</span>
 									<form-errors field="becomeDeviserCtrl.form['video_'+$index]" condition="becomeDeviserCtrl.has_error(becomeDeviserCtrl.form, becomeDeviserCtrl.form['video_'+$index])"></form-errors>
 									</div>
 								</div>
@@ -160,6 +163,7 @@ $this->title = 'Become a Deviser - Todevise';
 								<div class="col-sm-12">
 									<label>Observations</label>
 									<input name="observations" type="text" class="form-control grey-input ng-class:{'error-input': becomeDeviserCtrl.has_error(becomeDeviserCtrl.form, becomeDeviserCtrl.form.observations)}" ng-model="becomeDeviserCtrl.invitation.observations">
+									<span class="optional-input">Optional</span>
 									<form-errors field="becomeDeviserCtrl.form.observations" condition="becomeDeviserCtrl.has_error(becomeDeviserCtrl.form, becomeDeviserCtrl.form.observations)"></form-errors>
 								</div>
 							</div>
