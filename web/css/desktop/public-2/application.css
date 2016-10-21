@@ -2092,6 +2092,7 @@ input[type="radio"] .styled:checked + label::after {
   padding: 10px 30px;
   z-index: 99;
   border: 1px solid #e9e9e9;
+  z-index: 999999;
   border-top: 0; }
   .city-selection li {
     padding: 5px 0; }
@@ -3151,6 +3152,11 @@ input[type="radio"] .styled:checked + label::after {
   .ok-sent-mesg-wrapper p {
     font-family: "Playfair Display", Georgia, serif; }
 
+.powered-google {
+  width: 100px;
+  margin: 0 auto;
+  display: block; }
+
 .create-deviser-account-wrapper {
   padding: 80px 200px; }
   .create-deviser-account-wrapper .logo {
@@ -3703,7 +3709,7 @@ footer {
   bottom: -215px;
   transition: bottom 0.4s ease-in-out;
   cursor: pointer;
-  z-index: 9999; }
+  z-index: 999999; }
   footer:hover {
     bottom: 0; }
   footer.untoggled {

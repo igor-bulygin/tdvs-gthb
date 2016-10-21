@@ -60,6 +60,9 @@ $deviser = $this->params['deviser'];
 								<div ng-if="editHeaderCtrl.showCities">
 									<ul class="city-selection">
 										<li ng-repeat="city in editHeaderCtrl.cities"><span ng-click="editHeaderCtrl.selectCity(city)" style="cursor:pointer;">{{city.city}} - {{city.country_name}}</span></li>
+										<li>
+											<img class="powered-google" src="/imgs/powered_by_google_on_white_hdpi.png">
+										</li>
 									</ul>
 								</div>
 								<!-- Short biography -->
