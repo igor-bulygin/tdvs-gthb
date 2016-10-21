@@ -45,19 +45,19 @@ $this->params['deviser'] = $deviser;
 												<div class="deviser-data-about-edit">
                                                     <form class="grey-form" name="editAboutCtrl.form">
                                                         <label for="fields">Choose your field(s) of work</label>
-                                                        <ol class="work-field nya-bs-select ng-class:{'setClassCategoriesRequired': editAboutCtrl.setCategoriesRequired}" ng-model="editAboutCtrl.deviser.categories" selected-text-format="count>4" multiple ng-cloak ng-if="editAboutCtrl.categories">
+                                                        <ol class="work-field nya-bs-select ng-class:{'error-input': editAboutCtrl.setCategoriesRequired}" ng-model="editAboutCtrl.deviser.categories" selected-text-format="count>4" multiple ng-cloak ng-if="editAboutCtrl.categories">
                                                             <li nya-bs-option="category in editAboutCtrl.categories" data-value="category.id" deep-watch="true">
                                                                 <a href=""><span ng-bind="category.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
                                                             </li>
                                                         </ol>
                                                         <label for="text_biography">Brand Statement / Biography</label>
                                                         <span class="small-grey">Translate your text by selecting different languages below.</span>
-                                                        <ol class="about-edit-select text-profile-lang nya-bs-select ng-class:{'setClassBiographyRequired': editAboutCtrl.setClassBiographyRequired}" ng-model="editAboutCtrl.biography_language" ng-cloak>
+                                                        <ol class="about-edit-select text-profile-lang nya-bs-select" ng-model="editAboutCtrl.biography_language" ng-cloak>
                                                             <li nya-bs-option="language in editAboutCtrl.languages" data-value="language.code" deep-watch="true">
                                                                 <a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
                                                             </li>
                                                         </ol>
-                                                        <div class="textarea-edit-about" text-angular ng-model="editAboutCtrl.deviser.text_biography[editAboutCtrl.biography_language]" ng-cloak ta-toolbar="[]" placeholder="Write your brand statement / mission / biography."></div>
+                                                        <div class="textarea-edit-about ng-class:{'error-input': editAboutCtrl.setClassBiographyRequired}" text-angular ng-model="editAboutCtrl.deviser.text_biography[editAboutCtrl.biography_language]" ng-cloak ta-toolbar="[]" placeholder="Write your brand statement / mission / biography."></div>
                                                         <label class="pull-left" for="resume">Resume or brand presentation</label>
                                                         <span class="optional-text pull-left">OPTIONAL</span>
                                                         <span class="small-grey">Even more things to tell your customers? Upload it here.</span>
@@ -74,7 +74,7 @@ $this->params['deviser'] = $deviser;
 									</div>
 									<div class="col-md-7 pad-about about-grid">
 										<div ng-if="editAboutCtrl.isDropAvailable">
-											<div class="photo-loader loader-about ng-class:{'setClassPhotoRequired': editAboutCtrl.setPhotosRequired}" ngf-drag-over-class="drag-over" ngf-drop ngf-select ngf-change="editAboutCtrl.uploadPhoto($files,$invalidFiles, null, true)" ngf-accept="'image/*'" ngf-drop-available="editAboutCtrl.isDropAvailable" ng-if="editAboutCtrl.images.length < 5">
+											<div class="photo-loader loader-about ng-class:{'error-text': editAboutCtrl.setPhotosRequired}" ngf-drag-over-class="drag-over" ngf-drop ngf-select ngf-change="editAboutCtrl.uploadPhoto($files,$invalidFiles, null, true)" ngf-accept="'image/*'" ngf-drop-available="editAboutCtrl.isDropAvailable" ng-if="editAboutCtrl.images.length < 5">
 												<span class="photo-loader-title">Enrich your about section with photos</span>
 												<div class="plus-add-wrapper">
 												    <div class="plus-add">
@@ -82,7 +82,7 @@ $this->params['deviser'] = $deviser;
 												    </div>
 												    <div class="text">ADD PHOTOS</div>
 												</div>
-												<span class="photo-loader-warning ng-class:{'setClassPhotoRequired': editAboutCtrl.setPhotosRequired}" ng-if="editAboutCtrl.images.length < 3 && editAboutCtrl.deviser.account_state==='draft'">Please upload a minimum of 3 and a maximum of 5 photos.</span>
+												<span class="photo-loader-warning ng-class:{'error-text': editAboutCtrl.setPhotosRequired}" ng-if="editAboutCtrl.images.length < 3 && editAboutCtrl.deviser.account_state==='draft'">Please upload a minimum of 3 and a maximum of 5 photos.</span>
 												<span class="photo-loader-warning" ng-if="editAboutCtrl.images.length < 3 && editAboutCtrl.deviser.account_state==='active'">You need to have at least 3 photos to be able to SAVE CHANGES to your profile.</span>
 											</div>
 											<div class="photo-loader loader-about" ng-if="editAboutCtrl.images.length >= 5" ng-click="editAboutCtrl.checkPhotos()">
