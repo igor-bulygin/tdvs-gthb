@@ -83,7 +83,7 @@ $this->params['deviser'] = $deviser;
 												    <div class="text">ADD PHOTOS</div>
 												</div>
 												<span class="photo-loader-warning ng-class:{'setClassPhotoRequired': editAboutCtrl.setPhotosRequired}" ng-if="editAboutCtrl.images.length < 3 && editAboutCtrl.deviser.account_state==='draft'">Please upload a minimum of 3 and a maximum of 5 photos.</span>
-												<span class="photo-loader-warning" ng-if="editAboutCtrl.image.length < 3 && editAboutCtrl.deviser.account_state==='public'">You need to have at least 3 photos to be able to SAVE CHANGES to your profile.</span>
+												<span class="photo-loader-warning" ng-if="editAboutCtrl.images.length < 3 && editAboutCtrl.deviser.account_state==='active'">You need to have at least 3 photos to be able to SAVE CHANGES to your profile.</span>
 											</div>
 											<div class="photo-loader loader-about" ng-if="editAboutCtrl.images.length >= 5" ng-click="editAboutCtrl.checkPhotos()">
 												<span class="photo-loader-title">Enrich your about section with photos</span>
@@ -106,8 +106,8 @@ $this->params['deviser'] = $deviser;
 										<div ngf-no-file-drop>
 											<input type="file" name="file" ngf-select="editAboutCtrl.uploadPhoto($files, $invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="editAboutCtrl.isDropAvailable" ngf-multiple="true">
 										</div>
-										<div class="item draggable-list about-edit-list" dnd-list="editAboutCtrl.images" ng-if="editAboutCtrl.images.length > 0" dnd-dragover="editAboutCtrl.dragOver(event,index)" ng-cloak>
-											<div class="col-sm-6 pad-about image-about-edit" ng-repeat="image in editAboutCtrl.images track by $index" dnd-draggable="image" dnd-effect-allowed="move" dnd-dragstart="editAboutCtrl.dragStart(event, $index)" dnd-canceled="editAboutCtrl.canceled(event, $index)" dnd-moved="editAboutCtrl.moved($index)">
+										<div class="item draggable-list about-edit-list" dnd-list="editAboutCtrl.images" ng-if="editAboutCtrl.images.length > 0" dnd-dragover="editAboutCtrl.dragOver(index)" ng-cloak>
+											<div class="col-sm-6 pad-about image-about-edit" ng-repeat="image in editAboutCtrl.images track by $index" dnd-draggable="image" dnd-effect-allowed="move" dnd-dragstart="editAboutCtrl.dragStart($index)" dnd-canceled="editAboutCtrl.canceled()" dnd-moved="editAboutCtrl.moved($index)">
 												<span class="button ion-crop crop-avatar-photo-icon" ng-click="editAboutCtrl.openCropModal(image.url, $index)"></span>
 												<span class="ion-android-close x-close" ng-click="editAboutCtrl.deleteImage($index)"></span>
 												<img ng-src="{{image.url}}" class="grid-image draggable-img">

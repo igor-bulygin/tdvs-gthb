@@ -51,8 +51,8 @@ $this->params['deviser_links_target'] = 'edit_view';
 												</div>
 												<div class="text">ADD QUESTION</div>
 											</div>
-											<div dnd-list="editFaqCtrl.deviser.faq" dnd-dragover="editFaqCtrl.dragOver(event, index)">
-												<div class="delete-options-wrapper" ng-repeat="question in editFaqCtrl.deviser.faq track by $index" style="cursor:move;" dnd-draggable="question" dnd-effect-allowed="move" dnd-dragstart="editFaqCtrl.dragStart(event, $index)" dnd-canceled="editFaqCtrl.canceled(event, $index)" dnd-moved="editFaqCtrl.moved($index)">
+											<div dnd-list="editFaqCtrl.deviser.faq" dnd-dragover="editFaqCtrl.dragOver(index)">
+												<div class="delete-options-wrapper" ng-repeat="question in editFaqCtrl.deviser.faq track by $index" style="cursor:move;" dnd-draggable="question" dnd-effect-allowed="move" dnd-dragstart="editFaqCtrl.dragStart($index)" dnd-canceled="editFaqCtrl.canceled()" dnd-moved="editFaqCtrl.moved($index)">
 													<a class="delete-link pull-right" href="#" ng-click="editFaqCtrl.deleteQuestion($index)">Delete question</a>
 													<div class="edit-faq-panel">
 														<div class="faq-language-menu">

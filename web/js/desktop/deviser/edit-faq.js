@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(deviserDataService, toastr, UtilService, languageDataService, $window) {
+	function controller(deviserDataService, toastr, UtilService, languageDataService, $window, dragndropService) {
 		var vm = this;
 		vm.addQuestion = addQuestion;
 		vm.deleteQuestion = deleteQuestion;
@@ -96,40 +96,21 @@
 			});
 		}
 
-		function dragStart(event, index) {
-			vm.original_index = index;
-			vm.original_faq = angular.copy(vm.deviser.faq);
-			vm.faq_being_moved = angular.copy(vm.deviser.faq[index]);
+		function dragStart(index) {
+			dragndropService.dragStart(index, vm.deviser.faq);
 		}
 
-		function dragOver(event, index) {
-			console.log(vm.original_index);
-			vm.deviser.faq = angular.copy(vm.original_faq);
-			vm.previous_index = index;
-			if(vm.previous_index > vm.original_index) {
-				vm.deviser.faq.splice(vm.previous_index, 0, vm.faq_being_moved);
-			} else {
-				vm.deviser.faq[vm.original_index] = vm.original_faq[vm.original_index - 1];
-				vm.deviser.faq.splice(vm.previous_index, 0, vm.faq_being_moved);
-			}
+		function dragOver(index) {
+			vm.deviser.faq = dragndropService.dragOver(index, vm.deviser.faq);
 			return true;
 		}
 
 		function moved(index) {
-			vm.deviser.faq = angular.copy(vm.original_faq);
-			if(vm.previous_index > vm.original_index) {
-				vm.deviser.faq.splice(vm.previous_index, 0, vm.faq_being_moved);
-				vm.deviser.faq.splice(vm.original_index, 1);
-			} else {
-				vm.deviser.faq.splice(vm.original_index, 1);
-				vm.deviser.faq.splice(vm.previous_index, 0, vm.faq_being_moved);
-			}
-			delete vm.faq_being_moved;
-			delete vm.previous_index;
+			vm.deviser.faq = dragndropService.moved(index);
 		}
 
-		function canceled(event, index) {
-			vm.deviser.faq = angular.copy(vm.original_faq);
+		function canceled() {
+			vm.deviser.faq = dragndropService.canceled();
 		}
 
 	}

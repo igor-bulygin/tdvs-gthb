@@ -18,8 +18,7 @@ class utilAsset extends AssetBundle {
 		'js/util/modal-crop/modal-crop.js',
 		'js/util/modal-confirm-leave/modal-confirm-leave.js',
 		'js/util/contenteditable.js',
-		// 'js/util/gplaces/gplaces.js',
-		// 'https://maps.googleapis.com/maps/api/js?libraries=places'
+		'js/util/dragndropService.js'
 	];
 	
 	public $depends = [

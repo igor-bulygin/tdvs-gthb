@@ -3,7 +3,7 @@
 
 
 
-	function controller(deviserDataService, UtilService, languageDataService, toastr, productDataService, Upload, $timeout, $rootScope, $scope, deviserEvents, $uibModal) {
+	function controller(deviserDataService, UtilService, languageDataService, toastr, productDataService, Upload, $timeout, $rootScope, $scope, deviserEvents, $uibModal, dragndropService) {
 		var vm = this;
 		vm.uploadPhoto = uploadPhoto;
 		vm.openCropModal = openCropModal;
@@ -148,45 +148,22 @@
 				checkPhotos();
 		}
 
-		function dragStart(event, index) {
-			vm.original_index = index;
-			vm.original_images = angular.copy(vm.images);
-			vm.image_being_moved = vm.images[index];
+		function dragStart(index) {
+			dragndropService.dragStart(index, vm.images);
 		}
 
-		function dragOver(event, index) {
-			//copy original images
-			vm.images = angular.copy(vm.original_images);
-			//get index where it will drop
-			vm.previous_index = index;
-			//if position is after original index, insert
-			if(vm.previous_index > vm.original_index) {
-				vm.images.splice(vm.previous_index, 0, vm.image_being_moved)
-			} else {
-			//if not, change image in original index to the image before it and then add image being moved
-			vm.images[vm.original_index] = vm.original_images[vm.original_index-1];
-			vm.images.splice(vm.previous_index, 0, vm.image_being_moved);
-			}
+		function dragOver(index) {
+			vm.images = dragndropService.dragOver(index, vm.images);
 			return true;
 		}
 
 		function moved(index) {
-			vm.images = angular.copy(vm.original_images);
-			if(vm.previous_index > vm.original_index) {
-				vm.images.splice(vm.previous_index, 0, vm.image_being_moved)
-				vm.images.splice(vm.original_index, 1)
-			} else {
-				vm.images.splice(vm.original_index, 1);
-				vm.images.splice(vm.previous_index, 0, vm.image_being_moved);
-			}
-			//reset iteration
-			delete vm.image_being_moved;
-			delete vm.previous_index;
+			vm.images = dragndropService.moved(vm.images);
 			vm.deviser.media = parsePhotos();
 		}
 
-		function canceled(event, index){
-			vm.images = angular.copy(vm.original_images);
+		function canceled(){
+			vm.images = dragndropService.canceled();
 		}
 
 		function checkPhotos(){

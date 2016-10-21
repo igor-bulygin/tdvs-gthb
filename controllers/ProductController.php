@@ -17,6 +17,7 @@ use app\helpers\CController;
 use app\helpers\CActiveRecord;
 use yii\filters\AccessControl;
 use yii\mongodb\Collection;
+use yii\web\BadRequestHttpException;
 
 class ProductController extends CController {
 	public $defaultAction = "detail";
@@ -42,6 +43,42 @@ class ProductController extends CController {
 		]);
 	}
 
+	public function actionCreate($slug, $deviser_id)
+	{
+		/** @var Person $deviser */
+		$deviser = Person::findOneSerialized($deviser_id);
+
+		if (!$deviser) {
+			throw new BadRequestHttpException("Not found");
+		}
+
+		$this->layout = '/desktop/public-2.php';
+		return $this->render("product-create", [
+			'deviser' => $deviser,
+		]);
+	}
+
+	public function actionEdit($slug, $deviser_id, $product_id)
+	{
+		/** @var Person $deviser */
+		$deviser = Person::findOneSerialized($deviser_id);
+
+		$product = Product::findOneSerialized($product_id);
+
+		if (!$product) {
+			throw new BadRequestHttpException("Not found");
+		}
+
+		$this->layout = '/desktop/public-2.php';
+		return $this->render("product-edit", [
+			'deviser' => $deviser,
+			'product' => $product,
+		]);
+	}
+
+	/**
+	 * @deprecated
+	 */
 	public function actionFixPosition()
 	{
 //		ini_set('memory_limit', '2048M');
