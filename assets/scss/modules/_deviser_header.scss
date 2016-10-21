@@ -14,7 +14,7 @@
     padding: 30px 0;
     .grey-overlay{
         @extend %absolut-bottom;
-        @include size(100%,130px);
+        @include size(100%,230px);
         background-color: $almost_black;
         @include opacity(0.45)
     }
