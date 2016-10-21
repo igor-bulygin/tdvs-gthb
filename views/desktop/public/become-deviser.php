@@ -170,8 +170,8 @@ $this->title = 'Become a Deviser - Todevise';
 							<button class="btn-red send-btn" ng-click="becomeDeviserCtrl.submitForm(becomeDeviserCtrl.form)" ng-if="!becomeDeviserCtrl.success">
 								<i class="ion-android-navigate"></i>
 							</button>
-							<div ng-if="becomeDeviserCtrl.success">
-								<span class="glyphicon glyphicon-ok"></span>
+							<div class="ok-sent-mesg-wrapper" ng-if="becomeDeviserCtrl.success">
+								<span class="glyphicon glyphicon-ok ok-icon-rounded"></span>
 								<p>Your message has been sent successfully.
 									<br>We will contact you shortly.</p>
 							</div>

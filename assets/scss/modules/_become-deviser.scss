@@ -203,3 +203,21 @@
     top: 44px;
     right: 22px;
 }
+.ok-sent-mesg-wrapper{
+    max-width: 300px;
+    margin: 0 auto;
+    text-align: center;
+    color: $white;
+    .ok-icon-rounded{
+        background-color: $dark_green;
+        @include border-radius(90px,90px,90px,90px);
+        height: 50px;
+        width: 50px;
+        font-size: 18px;
+        padding-top: 15px;
+        margin-bottom: 15px;
+    }
+    p{
+        font-family:$font-family--serif;
+    }
+}

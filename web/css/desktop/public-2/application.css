@@ -3133,6 +3133,24 @@ input[type="radio"] .styled:checked + label::after {
   top: 44px;
   right: 22px; }
 
+.ok-sent-mesg-wrapper {
+  max-width: 300px;
+  margin: 0 auto;
+  text-align: center;
+  color: #ffffff; }
+  .ok-sent-mesg-wrapper .ok-icon-rounded {
+    background-color: #7AB83A;
+    border-radius: 90px 90px 90px 90px !important;
+    -webkit-border-radius: 90px 90px 90px 90px !important;
+    -moz-border-radius: 90px 90px 90px 90px !important;
+    height: 50px;
+    width: 50px;
+    font-size: 18px;
+    padding-top: 15px;
+    margin-bottom: 15px; }
+  .ok-sent-mesg-wrapper p {
+    font-family: "Playfair Display", Georgia, serif; }
+
 .create-deviser-account-wrapper {
   padding: 80px 200px; }
   .create-deviser-account-wrapper .logo {
