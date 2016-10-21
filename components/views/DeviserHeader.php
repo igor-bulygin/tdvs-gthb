@@ -17,20 +17,24 @@ $deviser = $this->params['deviser'];
 			<div class="grey-overlay"></div>
 			<div class="container">
 				<div class="deviser-profile">
-					<div class="avatar">
-						<img class="cover" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($deviser->getAvatarImage())->resize(340, 340) ?>">
-					</div>
-					<div><a href="<?= Url::to(["deviser/about-edit", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id])?>">Edit profile</a></div>
-					<div class="deviser-data">
-						<div class="name">
-							<?= $deviser->personalInfo->getBrandName() ?>
-						</div>
-						<div class="location">
-							<?= $deviser->personalInfo->getCityLabel() ?>
-						</div>
-						<div class="description">
-							<?= $deviser->text_short_description ?>
-						</div>
+				    <div class="avatar-btn-profile">
+                        <div class="avatar">
+                            <img class="cover" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($deviser->getAvatarImage())->resize(340, 340) ?>">
+                        </div>
+                        <div class="edit-profile-btn">
+                            <a class="btn btn-default btn-transparent btn-header" href="<?= Url::to(["deviser/about-edit", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id])?>">Edit profile</a>
+                        </div>
+                        <div class="deviser-data">
+                            <div class="name">
+                                <?= $deviser->personalInfo->getBrandName() ?>
+                            </div>
+                            <div class="location">
+                                <?= $deviser->personalInfo->getCityLabel() ?>
+                            </div>
+                            <div class="description">
+                                <?= $deviser->text_short_description ?>
+                            </div>
+                        </div>
 					</div>
 				</div>
 			</div>

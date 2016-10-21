@@ -430,7 +430,7 @@ a, a:hover, a:focus {
 .bootstrap-select.btn-group .dropdown-menu.inner {
   margin: -26px 0 0 0; }
 
-.btn-red, .btn-green, .btn-grey, .btn-black, .btn-follow, .btn-white {
+.btn-red, .btn-green, .btn-grey, .btn-black, .btn-follow, .btn-white, .btn-transparent {
   text-transform: uppercase;
   font-family: "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
@@ -440,7 +440,7 @@ a, a:hover, a:focus {
   border: none;
   text-align: center;
   cursor: pointer; }
-  .btn-red:hover, .btn-green:hover, .btn-grey:hover, .btn-black:hover, .btn-follow:hover, .btn-white:hover {
+  .btn-red:hover, .btn-green:hover, .btn-grey:hover, .btn-black:hover, .btn-follow:hover, .btn-white:hover, .btn-transparent:hover {
     -moz-transition-property: background-color;
     -o-transition-property: background-color;
     -webkit-transition-property: background-color;
@@ -2007,7 +2007,8 @@ input[type="radio"] .styled:checked + label::after {
 
 .banner-deviser {
   position: relative;
-  background-color: #e9e9e9; }
+  background-color: #e9e9e9;
+  height: 393px; }
   .banner-deviser .cover {
     width: 100%; }
 
@@ -2124,6 +2125,20 @@ input[type="radio"] .styled:checked + label::after {
 
 .edit-header-container {
   position: relative; }
+
+.edit-profile-btn {
+  position: absolute;
+  top: 180px;
+  left: 14px; }
+
+.btn-transparent {
+  background-color: transparent;
+  border: 1px solid #ffffff;
+  color: #ffffff; }
+  .btn-transparent:hover {
+    background-color: #bfbfbf;
+    color: #ffffff;
+    border: 1px solid #ffffff; }
 
 .store {
   background-color: #e9e9e9; }

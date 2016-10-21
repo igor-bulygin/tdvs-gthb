@@ -4,6 +4,7 @@
 .banner-deviser{
     position: relative;
     background-color: $background_grey;
+    height: 393px;
     .cover{
         width:100%;
     }
@@ -135,4 +136,20 @@
 }
 .edit-header-container{
                 position: relative;
+}
+.edit-profile-btn{
+    position: absolute;
+    top: 180px;
+    left: 14px;
+}
+.btn-transparent{
+    @extend %btn;
+    background-color:transparent;
+    border: 1px solid $white;
+    color: $white;
+    &:hover{
+        background-color:$light_grey;
+        color: $white;
+        border: 1px solid $white;
+    }
 }
