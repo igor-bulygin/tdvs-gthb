@@ -276,6 +276,9 @@ ul {
   cursor: default;
   border: none; }
 
+.error-text {
+  color: #924cfc !important; }
+
 /* Dont display dropable zone on dragg and drop */
 .dndDraggingSource {
   display: none; }
@@ -2109,6 +2112,15 @@ input[type="radio"] .styled:checked + label::after {
   width: 100%;
   top: 240px;
   left: 0; }
+
+.req-2 {
+  position: absolute;
+  top: 60px;
+  left: 48px;
+  color: #924cfc;
+  z-index: 99999;
+  text-align: center;
+  width: 100%; }
 
 .btn-header {
   width: 140px; }

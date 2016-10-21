@@ -120,6 +120,15 @@
     top: 240px;
     left: 0;
 }
+.req-2{
+    position: absolute;
+    top: 60px;
+    left: 48px;
+    color: $violet;
+    z-index: 99999;
+    text-align: center;
+    width: 100%;
+}
 .btn-header{
     width: 140px;
 }

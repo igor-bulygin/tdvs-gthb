@@ -58,6 +58,9 @@ ul{
        cursor: default;
        border: none;
 }
+.error-text {
+    color: $violet !important;
+}
 /* Dont display dropable zone on dragg and drop */
 .dndDraggingSource {
     display: none;
