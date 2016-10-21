@@ -1741,7 +1741,6 @@ input[type="radio"] .styled:checked + label::after {
       margin: -9px 0 0 0; }
 
 .press-3 {
-  margin-top: 35px;
   margin-bottom: 70px; }
 
 .image-press-edit {
