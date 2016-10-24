@@ -14,8 +14,9 @@ use yii\widgets\Pjax;
 use app\helpers\Utils;
 use yii\widgets\ListView;
 use yii\widgets\ActiveForm;
+use app\assets\desktop\product\createProductAsset;
 
-PublicCommonAsset::register($this);
+createProductAsset::register($this);
 
 /** @var Person $deviser */
 /** @var Product $product */
@@ -25,4 +26,4 @@ $this->title = $deviser->getBrandName() . ' - Todevise';
 
 ?>
 
-<div>Product create</div>
+<product-basic-info></product-basic-info>

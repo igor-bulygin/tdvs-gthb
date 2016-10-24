@@ -33,22 +33,22 @@ $this->params['deviser_links_target'] = 'public_view';
 			<div class="col-md-10">
 				<?php if (count($press) == 0) { ?>
 				<div class="empty-wrapper">
-                    <img class="sad-face" src="/imgs/sad-face.svg">
-                    <p class="no-video-text">You don't have any press images!</p>
-                </div>
+					<img class="sad-face" src="/imgs/sad-face.svg">
+					<p class="no-video-text">You don't have any press images!</p>
+				</div>
 				<?php } else { ?>
 				<div class="empty-wrapper">
-                    <div>
-                        <a href="<?= Url::to(["deviser/press-edit", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id])?>" class="red-link-btn">Add / remove photos</a>
-                    </div>
-                    <div class="mesonry-row press-3">
-                        <?php foreach ($press as $item) { ?>
-                        <div class="menu-category list-group draggable-list">
-                            <img class="grid-image draggable-img" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($deviser->getUrlImagesLocation() . $item)->resize(355, 0) ?>">
-                        </div>
-                        <?php } ?>
-                    </div>
-                </div>  
+					<div>
+						<a href="<?= Url::to(["deviser/press-edit", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id])?>" class="red-link-btn">Add / remove photos</a>
+					</div>
+					<div class="mesonry-row press-3">
+						<?php foreach ($press as $item) { ?>
+							<div class="menu-category list-group draggable-list">
+								<img class="grid-image draggable-img" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($deviser->getUrlImagesLocation() . $item)->resize(355, 0) ?>">
+							</div>
+						<?php } ?>
+					</div>
+				</div>
 				<?php } ?>
 			</div>
 		</div>
