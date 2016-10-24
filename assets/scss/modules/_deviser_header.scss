@@ -50,13 +50,11 @@
     }
 }
 .deviser-data-edit{
+	position: absolute;
     width: 350px;
-    position: absolute;
     bottom: 0px;
-    left: 160px;
+    left: 190px;
     background-color: $background_grey;
-    float: left;
-    margin: 0 30px;
     padding: 0 20px 20px;
     @include border-radius(6px,6px,6px,6px);
     input{
@@ -75,7 +73,6 @@
 }
 .deviser-header-edit-wrapper{
     position: relative;
-    padding-top:200px;
 }
 .small-grey{
     font-size: 11px;
@@ -106,7 +103,7 @@
 }
 .header-edit-btns{
     button{
-        margin: 8px 0 0px 10px !important;
+        margin: 8px 0 0px 10px;
     }
 }
 .banner-deviser-edit-header-content{
@@ -149,7 +146,7 @@
 }
 .edit-profile-btn{
     position: absolute;
-    top: 180px;
+    top: 115px;
     left: 14px;
 }
 .btn-transparent{
@@ -162,4 +159,9 @@
         color: $white;
         border: 1px solid $white;
     }
+}
+.powered-google{
+	width:100px;
+	margin: 0 auto;
+    display: block;
 }
