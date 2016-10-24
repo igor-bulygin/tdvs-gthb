@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(productDataService, toastr, $scope) {
+	function controller(productDataService, toastr, Upload, $scope) {
 		var vm = this;
 		vm.title_language = 'en-US';
 		vm.categories_helper = [];
@@ -47,6 +47,28 @@
 			return sub_categories;
 		}
 
+		function uploadPhoto(images, errImages) {
+			vm.files = images;
+			vm.errFiles = errImages;
+			//upload photos
+			angular.forEach(vm.files, function(file) {
+				var data = {
+					type: "",
+					//work_id: work_id?
+					file: file
+				}
+				//Upload.upload({
+					//url: 
+					//data: data
+				//}).then(function(dataUpload) {
+				// 	toastr.success("Photo uploaded!");
+				// 	vm.product.media.photos.push({
+				// 		name: dataUpload.data.filename
+				// 	});
+				// })
+			})
+		}
+
 		//watches
 		$scope.$watch('productBasicInfoCtrl.categories', function(newValue, oldValue) {
 			if(!oldValue && newValue) {
@@ -54,6 +76,7 @@
 				addCategory();
 			}
 		});
+
 	}
 
 	var component = {

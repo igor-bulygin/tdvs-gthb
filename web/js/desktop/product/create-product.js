@@ -3,7 +3,10 @@
 	function controller(productDataService, languageDataService, toastr) {
 		var vm = this;
 		vm.product = {
-			categories: []
+			categories: [],
+			media: {
+				photos: []
+			}
 		};
 
 		function init() {
