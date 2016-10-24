@@ -1,48 +1,19 @@
 (function () {
 	"use strict";
 
-	function controller(productDataService, languageDataService) {
+	function controller(productDataService, toastr, $scope) {
 		var vm = this;
 		vm.title_language = 'en-US';
 		vm.categories_helper = [];
-		vm.product = {
-			categories: []
-		};
+		
 		vm.addCategory = addCategory;
 		vm.categorySelected = categorySelected;
-
+		
 		function init(){
-			getLanguages();
-			getCategories();
+			//init values or functions
 		}
 
 		init();
-
-		function getCategories() {
-			productDataService.Categories.get({scope: 'all'})
-				.$promise.then(function (dataCategories) {
-					vm.allCategories = dataCategories.items;
-					vm.rootCategories = filterCategory(vm.allCategories, '');
-					addCategory();
-				}, function (err) {
-					toastr.error(err);
-				});
-				productDataService.Categories.get()
-				.$promise.then(function (dataCategories) {
-					console.log(dataCategories.items);
-				}, function (err) {
-					toastr.error(err);
-				});
-		}
-
-		function getLanguages() {
-			languageDataService.Languages.get()
-				.$promise.then(function (dataLanguages) {
-					vm.languages = dataLanguages.items;
-				}, function (err) {
-					toastr.error(err);
-				});
-		}
 
 		function addCategory() {
 			vm.categories_helper.push({
@@ -53,9 +24,8 @@
 
 		function categorySelected(category, index_helper, index) {
 			vm.categories_helper[index_helper].categories_selected[index] = category;
-			console.log(filterCategory(vm.allCategories, category));
-			if(filterCategory(vm.allCategories,category).length > 0) {
-				vm.categories_helper[index_helper].categories[index+1] = filterCategory(vm.allCategories, category);
+			if(filterCategory(vm.categories,category).length > 0) {
+				vm.categories_helper[index_helper].categories[index+1] = filterCategory(vm.categories, category);
 				vm.categories_helper[index_helper].categories_selected[index+1] = null;
 			} else {
 				vm.product.categories[index_helper] = category;
@@ -76,12 +46,25 @@
 			}
 			return sub_categories;
 		}
+
+		//watches
+		$scope.$watch('productBasicInfoCtrl.categories', function(newValue, oldValue) {
+			if(!oldValue && newValue) {
+				vm.rootCategories = filterCategory(newValue, '');
+				addCategory();
+			}
+		});
 	}
 
 	var component = {
 		templateUrl: currentHost() + '/js/desktop/product/basic-info/basic-info.html',
 		controller: controller,
-		controllerAs: 'productBasicInfoCtrl'
+		controllerAs: 'productBasicInfoCtrl',
+		bindings: {
+			product: '<',
+			categories: '=',
+			languages: '='
+		}
 	}
 
 	angular
