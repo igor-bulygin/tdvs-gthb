@@ -2211,8 +2211,7 @@ input[type="radio"] .styled:checked + label::after {
       text-transform: uppercase;
       color: #2a2929;
       letter-spacing: -7px;
-      line-height: 89px;
-      display: inline-block; }
+      line-height: 89px; }
     .about-wrapper .about-container .name-location-wrapper {
       display: inline-block; }
     .about-wrapper .about-container .name {
@@ -2288,13 +2287,6 @@ input[type="radio"] .styled:checked + label::after {
       border-radius: 20px 20px 20px 20px !important;
       -webkit-border-radius: 20px 20px 20px 20px !important;
       -moz-border-radius: 20px 20px 20px 20px !important; }
-
-.editable-text-about {
-  color: #ffffff;
-  border: 1px solid #ffffff;
-  padding: 60px 10px 10px 10px; }
-  .editable-text-about .ta-scroll-window > .ta-bind {
-    padding: 0; }
 
 .about-edit-list li {
   list-style: none; }

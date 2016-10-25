@@ -13,7 +13,6 @@
             color: #2a2929;
             letter-spacing: -7px;
             line-height: 89px;
-            display: inline-block;
         }
         .name-location-wrapper{
             display: inline-block;
@@ -100,14 +99,6 @@
 			right: 48px;
 			@include border-radius(20px,20px,20px,20px);
         }
-    }
-}
-.editable-text-about{
-    color: $white;
-    border: 1px solid $white;
-    padding: 60px 10px 10px 10px;
-    .ta-scroll-window > .ta-bind {
-        padding: 0;
     }
 }
 .about-edit-list{
