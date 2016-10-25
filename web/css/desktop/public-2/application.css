@@ -2349,49 +2349,38 @@ input[type="radio"] .styled:checked + label::after {
   color: #ffffff;
   font-size: 14px; }
 
-.edit-cover-photo-icon {
+.edit-cover-icon {
   color: #ffffff;
-  font-size: 40px;
   width: 60px;
   height: 60px;
   position: absolute;
-  text-align: center;
-  cursor: pointer;
-  background-color: #1C1919;
+  display: block;
   border-radius: 90px 90px 90px 90px !important;
   -webkit-border-radius: 90px 90px 90px 90px !important;
   -moz-border-radius: 90px 90px 90px 90px !important;
-  display: block;
+  cursor: pointer;
   z-index: 999;
-  padding-top: 1px;
-  left: 0;
-  right: 0;
+  text-align: center;
   top: 0;
   bottom: 0;
   margin: auto; }
-  .edit-cover-photo-icon.centered {
+  .edit-cover-icon.photo {
+    font-size: 40px;
+    text-align: center;
+    background-color: #1C1919;
+    padding-top: 1px;
+    left: 0;
+    right: 0; }
+  .edit-cover-icon.crop {
+    background-color: #F7284B;
+    font-size: 33px;
+    left: 625px;
+    padding-top: 6px; }
+  .edit-cover-icon.centered {
     left: 0;
     right: 0;
     margin-left: auto;
     margin-right: auto; }
-
-.edit-cover-crop-icon {
-  color: #ffffff;
-  background-color: #F7284B;
-  font-size: 33px;
-  width: 60px;
-  height: 60px;
-  position: absolute;
-  text-align: center;
-  cursor: pointer;
-  top: 0;
-  bottom: 0;
-  margin: auto;
-  left: 625px;
-  border-radius: 51px;
-  display: block;
-  z-index: 999;
-  padding-top: 6px; }
 
 .edit-avatar-photo-icon {
   color: #ffffff;
@@ -2640,7 +2629,8 @@ input[type="radio"] .styled:checked + label::after {
   color: #7AB83A;
   font-size: 10px;
   margin-top: 15px;
-  margin-left: 10px; }
+  margin-left: 10px;
+  text-transform: uppercase; }
 
 .btn-upload-file {
   margin-left: 10px; }

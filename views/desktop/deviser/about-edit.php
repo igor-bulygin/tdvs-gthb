@@ -54,7 +54,9 @@ $this->params['deviser'] = $deviser;
 														<span class="small-grey">Translate your text by selecting different languages below.</span>
 														<ol class="about-edit-select text-profile-lang nya-bs-select" ng-model="editAboutCtrl.biography_language" ng-cloak>
 															<li nya-bs-option="language in editAboutCtrl.languages" data-value="language.code" deep-watch="true">
-																<a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
+																<a href="">
+																	<span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span>
+																</a>
 															</li>
 														</ol>
 														<div class="textarea-edit-about ng-class:{'error-input': editAboutCtrl.setClassBiographyRequired}" text-angular ng-model="editAboutCtrl.deviser.text_biography[editAboutCtrl.biography_language]" ng-cloak ta-toolbar="[]" placeholder="Write your brand statement / mission / biography."></div>

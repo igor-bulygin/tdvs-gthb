@@ -180,48 +180,38 @@
     color: $white;
     font-size:14px;
 }
-.edit-cover-photo-icon{
-    color: $white;
-    font-size: 40px;
-    width: 60px;
-    height: 60px;
-    position: absolute;
-    text-align: center;
-    cursor: pointer;
-    background-color: $black;
-    @include border-radius(90px,90px,90px,90px);
-    display: block;
-    z-index: 999;
-    padding-top: 1px;
-    left: 0;
-    right: 0;
+.edit-cover-icon{
+	color: $white;
+	@include size(60px,60px);
+	position: absolute;
+	display: block;
+	@include border-radius(90px,90px,90px,90px);
+	cursor: pointer;
+	z-index: 999;
+	text-align: center;
     top: 0;
     bottom: 0;
     margin: auto;
-    &.centered{
+	&.photo{
+		font-size: 40px;
+		text-align: center;
+		background-color: $black;
+		padding-top: 1px;
+		left: 0;
+		right: 0;
+	}
+	&.crop{
+		background-color: $red;
+		font-size: 33px;
+		left: 625px;
+		padding-top: 6px;
+	}
+	&.centered{
         left: 0; 
         right: 0; 
         margin-left: auto; 
         margin-right: auto; 
     }
-}
-.edit-cover-crop-icon{
-    color: $white;
-    background-color: $red;
-    font-size: 33px;
-    width: 60px;
-    height: 60px;
-    position: absolute;
-    text-align: center;
-    cursor: pointer;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    left: 625px;
-    border-radius: 51px;
-    display: block;
-    z-index: 999;
-    padding-top: 6px;
 }
 .edit-avatar-photo-icon{
     color: $white;
@@ -492,6 +482,7 @@
     font-size: 10px;
     margin-top: 15px;
     margin-left: 10px;
+	text-transform: uppercase;
 }
 .btn-upload-file{
     margin-left: 10px;
