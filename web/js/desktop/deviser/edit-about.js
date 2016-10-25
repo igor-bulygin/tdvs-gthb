@@ -16,6 +16,7 @@
 		vm.canceled = canceled;
 		vm.checkPhotos = checkPhotos;
 		vm.biography_language = "en-US";
+		vm.images = [];
 
 		function getDeviser() {
 			deviserDataService.Profile.get({
@@ -26,7 +27,7 @@
 				vm.images = UtilService.parseImagesUrl(vm.deviser.media.photos, vm.deviser.url_images);
 				vm.curriculum = currentHost() + vm.deviser.url_images + vm.deviser.curriculum;
 			}, function (err) {
-				toastr.error(err);
+				//errors
 			});
 		}
 
@@ -35,7 +36,7 @@
 				.$promise.then(function (dataCategories) {
 					vm.categories = dataCategories.items;
 				}, function (err) {
-					toastr.error(err);
+					//errors
 				});
 		}
 
@@ -44,7 +45,7 @@
 				.$promise.then(function (dataLanguages) {
 					vm.languages = dataLanguages.items;
 				}, function (err) {
-					toastr.error(err);
+					//errors
 				});
 		}
 
@@ -78,7 +79,7 @@
 			}).then(function (dataCV) {
 				vm.deviser.curriculum = dataCV.data.filename;
 			}, function (err) {
-				toastr.error(err);
+				//errors
 			})
 		}
 
@@ -101,7 +102,7 @@
 					uploadPhoto([Upload.dataUrltoBlob(imageCropped, "temp.png")], null, index, false);
 				}
 			}, function (err) {
-				console.log(err);
+				//errors
 			});
 
 		}
@@ -119,7 +120,6 @@
 					url: deviserDataService.Uploads,
 					data: data
 				}).then(function (dataUpload) {
-					toastr.success("Photo uploaded!");
 					//if uplading crop, replace it
 					if(index!==null && index>-1) {
 						vm.deviser.media.photos[index] = dataUpload.data.filename;
@@ -134,7 +134,7 @@
 						delete file.progress;
 					}, 1000);
 				}, function (err) {
-					toastr.error(err);
+					//errors
 				}, function (evt) {
 					//progress
 					file.progress = parseInt(100.0 * evt.loaded / evt.total);
@@ -178,7 +178,7 @@
 		//watches
 		$scope.$watch('editAboutCtrl.deviser', function (newValue, oldValue) {
 			if(newValue) {
-				if(!angular.equals(newValue, vm.deviser_original) && (vm.images.length >=3 && vm.images.length <=5) ) {
+				if(!angular.equals(newValue, vm.deviser_original)) {
 					$rootScope.$broadcast(deviserEvents.deviser_changed, {value: true, deviser: newValue});
 				} else {
 					$rootScope.$broadcast(deviserEvents.deviser_changed, {value: false});

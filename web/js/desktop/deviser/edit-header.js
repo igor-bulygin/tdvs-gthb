@@ -24,7 +24,7 @@
 				vm.deviser_original = angular.copy(dataDeviser);
 				parseDeviserInfo(vm.deviser);
 			}, function (err) {
-				toastr.error(err);
+				//errors
 			});
 		}
 
@@ -56,7 +56,7 @@
 				.$promise.then(function (dataLanguages) {
 					vm.languages = dataLanguages.items;
 				}, function (err) {
-					toastr.error(err);
+					//errors
 				});
 		}
 
@@ -111,7 +111,7 @@
 				vm.deviser_changed = false;
 				setLeavingModal(false);
 			}, function(err) {
-				toastr.error(err);
+				//errors
 			});
 		}
 
@@ -141,7 +141,6 @@
 				url: deviserDataService.Uploads,
 				data: data
 			}).then(function (dataUpload) {
-				toastr.success("Photo uploaded!");
 				vm.deviser.media[type] = dataUpload.data.filename;
 			});
 		}
@@ -181,7 +180,6 @@
 				if(link) {
 					//save changes then go away
 					updateAll();
-					console.log("I have to go!");
 				}
 			}, function () {
 				console.log("dismissed");
@@ -248,12 +246,11 @@
 		$scope.$watch('editHeaderCtrl.deviser', function (newValue, oldValue) {
 			if(newValue) {
 				if(!angular.equals(newValue, vm.deviser_original)) {
-					setDeviserChanged(true);
 					setLeavingModal(true);
 					$rootScope.$broadcast(deviserEvents.deviser_changed, {value: true, deviser: newValue});
 				} else {
-					setDeviserChanged(false);
 					setLeavingModal(false);
+					$rootScope.$broadcast(deviserEvents.deviser_changed, {value: false});
 				}
 			}
 		}, true);
@@ -270,7 +267,6 @@
 		});
 
 		$scope.$on(deviserEvents.make_profile_public_errors, function(event, args) {
-			console.log("set required header", args);
 			//set form as submitted
 			vm.form.$setSubmitted();
 			//check for both header and profile requireds
