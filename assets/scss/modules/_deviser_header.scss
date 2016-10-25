@@ -107,7 +107,7 @@
     }
 }
 .banner-deviser-edit-header-content{
-    padding: 30px 0 20px!important;
+    padding: 30px 0 20px;
 }
 .req-1{
     position: absolute;
@@ -142,23 +142,12 @@
     }
 }
 .edit-header-container{
-                position: relative;
+	position: relative;
 }
 .edit-profile-btn{
     position: absolute;
     top: 115px;
     left: 14px;
-}
-.btn-transparent{
-    @extend %btn;
-    background-color:transparent;
-    border: 1px solid $white;
-    color: $white;
-    &:hover{
-        background-color:$light_grey;
-        color: $white;
-        border: 1px solid $white;
-    }
 }
 .powered-google{
 	width:100px;

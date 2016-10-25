@@ -505,6 +505,15 @@ a, a:hover, a:focus {
     background-color: #e9e9e9;
     color: #F7284B; }
 
+.btn-transparent {
+  background-color: transparent;
+  border: 1px solid #ffffff;
+  color: #ffffff; }
+  .btn-transparent:hover {
+    background-color: #bfbfbf;
+    color: #ffffff;
+    border: 1px solid #ffffff; }
+
 .products-menu ul {
   margin: 20px 0 40px;
   text-align: center; }
@@ -2100,7 +2109,7 @@ input[type="radio"] .styled:checked + label::after {
   margin: 8px 0 0px 10px; }
 
 .banner-deviser-edit-header-content {
-  padding: 30px 0 20px !important; }
+  padding: 30px 0 20px; }
 
 .req-1 {
   position: absolute;
@@ -2140,15 +2149,6 @@ input[type="radio"] .styled:checked + label::after {
   position: absolute;
   top: 115px;
   left: 14px; }
-
-.btn-transparent {
-  background-color: transparent;
-  border: 1px solid #ffffff;
-  color: #ffffff; }
-  .btn-transparent:hover {
-    background-color: #bfbfbf;
-    color: #ffffff;
-    border: 1px solid #ffffff; }
 
 .powered-google {
   width: 100px;
@@ -2262,8 +2262,6 @@ input[type="radio"] .styled:checked + label::after {
   border-radius: 20px 20px 20px 20px !important;
   -webkit-border-radius: 20px 20px 20px 20px !important;
   -moz-border-radius: 20px 20px 20px 20px !important; }
-  .loader-about .plus-add {
-    margin: 0 auto; }
 
 .image-about-edit {
   max-height: 284px;
@@ -2272,22 +2270,24 @@ input[type="radio"] .styled:checked + label::after {
     position: absolute;
     z-index: 1;
     top: 10px;
-    right: 10px;
-    background-color: #9a9a9a;
     font-size: 18px;
     color: #ffffff;
     width: 30px;
     height: 30px;
-    display: block;
-    float: left;
     text-align: center;
     padding-top: 3px;
-    margin-left: 6px;
-    border-radius: 7px 7px 7px 7px !important;
-    -webkit-border-radius: 7px 7px 7px 7px !important;
-    -moz-border-radius: 7px 7px 7px 7px !important; }
+    cursor: pointer; }
     .image-about-edit span.x-close {
-      cursor: pointer; }
+      background-color: #9a9a9a;
+      right: 10px;
+      border-radius: 7px 7px 7px 7px !important;
+      -webkit-border-radius: 7px 7px 7px 7px !important;
+      -moz-border-radius: 7px 7px 7px 7px !important; }
+    .image-about-edit span.crop-avatar-photo-icon {
+      right: 48px;
+      border-radius: 20px 20px 20px 20px !important;
+      -webkit-border-radius: 20px 20px 20px 20px !important;
+      -moz-border-radius: 20px 20px 20px 20px !important; }
 
 .editable-text-about {
   color: #ffffff;
@@ -2392,7 +2392,9 @@ input[type="radio"] .styled:checked + label::after {
   position: absolute;
   text-align: center;
   cursor: pointer;
-  top: 176px;
+  top: 0;
+  bottom: 0;
+  margin: auto;
   left: 625px;
   border-radius: 51px;
   display: block;

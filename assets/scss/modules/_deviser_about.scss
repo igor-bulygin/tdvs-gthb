@@ -73,19 +73,10 @@
     }
 }
 .loader-about{
-    width: 527px;
-    height: 250px;
+	@include size(527px,250px);
     background-color: $background_grey;
     margin: 20px;
     @include border-radius(20px,20px,20px,20px);
-    .plus-add{
-            margin: 0 auto;
-    }
-    .photo-loader{
-        span{
-        
-        }
-    }
 }
 .image-about-edit{
     max-height: 284px;
@@ -94,19 +85,20 @@
         position: absolute;
         z-index: 1;
         top: 10px;
-        right: 10px;
-        background-color: $dark_grey;
         font-size: 18px;
         color: $white;
         @include size(30px,30px);
-        display: block;
-        float: left;
         text-align: center;
         padding-top: 3px;
-        margin-left: 6px;
-        @include border-radius(7px,7px,7px,7px);
+		cursor:pointer;
         &.x-close{
-            cursor:pointer;
+			background-color: $dark_grey;
+			right: 10px;
+			@include border-radius(7px,7px,7px,7px);
+        }
+		&.crop-avatar-photo-icon{
+			right: 48px;
+			@include border-radius(20px,20px,20px,20px);
         }
     }
 }
@@ -231,7 +223,9 @@
     position: absolute;
     text-align: center;
     cursor: pointer;
-    top: 176px;
+    top: 0;
+    bottom: 0;
+    margin: auto;
     left: 625px;
     border-radius: 51px;
     display: block;

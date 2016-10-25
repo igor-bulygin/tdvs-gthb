@@ -61,3 +61,14 @@
         color: $red;
     }
 }
+.btn-transparent{
+    @extend %btn;
+    background-color:transparent;
+    border: 1px solid $white;
+    color: $white;
+    &:hover{
+        background-color:$light_grey;
+        color: $white;
+        border: 1px solid $white;
+    }
+}
