@@ -9,7 +9,9 @@
 						<a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
 					</li>
 				</ol>
-				<input type="text" name="title" ng-model="productBasicInfoCtrl.product.title[productBasicInfoCtrl.title_language]">
+				<input class="form-control ng-class:{'error-input': productBasicInfoCtrl.titleRequired}" type="text" name="title" ng-model="productBasicInfoCtrl.product.title[productBasicInfoCtrl.title_language]">
+				<div class="error-text" ng-if="productBasicInfoCtrl.titleRequired">Title in english is mandatory.</div>
+				<div><button ng-click="productBasicInfoCtrl.titleRequired=!productBasicInfoCtrl.titleRequired">Toggle error</button></div>
 			</div>
 			<div class="col-md-2">
 				<p>Translate your work title by simply selecting different languages from the drop-down menu. Translate in as many languages as possible to reach a broader audience</p>

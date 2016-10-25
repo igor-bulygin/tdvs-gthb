@@ -35,7 +35,14 @@
 		</div>
 		<div class="row">
 			<div class="col-md-1"><label for="tags">Tags</label><span class="optional-text">Optional</span></div>
-			<div class="col-md-9"><tags-input ng-model="productMoreDetailsCtrl.product.tags"></tags-input></div>
+			<div class="col-md-9">
+				<ol class="about-edit-select nya-bs-select" ng-model="productMoreDetailsCtrl.tags_language">
+					<li nya-bs-option="language in productMoreDetailsCtrl.languages" data-value="language.code" deep-watch="true">
+						<a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
+					</li>
+				</ol>
+				<tags-input ng-model="productMoreDetailsCtrl.product.tags[productMoreDetailsCtrl.tags_language]"></tags-input>
+			</div>
 		</div>
 	</div>
 </div>

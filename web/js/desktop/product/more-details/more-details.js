@@ -4,6 +4,7 @@
 	function controller(){
 		var vm = this;
 		vm.description_language = 'en-US';
+		vm.tags_language = 'en-US';
 	}
 
 	var component = {
