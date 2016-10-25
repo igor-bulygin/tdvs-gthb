@@ -61,7 +61,7 @@ $this->params['deviser'] = $deviser;
 														</ol>
 														<div class="textarea-edit-about ng-class:{'error-input': editAboutCtrl.setClassBiographyRequired}" text-angular ng-model="editAboutCtrl.deviser.text_biography[editAboutCtrl.biography_language]" ng-cloak ta-toolbar="[]" placeholder="Write your brand statement / mission / biography."></div>
 														<label class="pull-left" for="resume">Resume or brand presentation</label>
-														<span class="optional-text pull-left">OPTIONAL</span>
+														<span class="optional-text pull-left">Optional</span>
 														<span class="small-grey">Even more things to tell your customers? Upload it here.</span>
 														<div class="edit-about-row">
 															<button class="btn btn-default btn-green btn-upload-file" ngf-select="editAboutCtrl.uploadCV($file)" ngf-accept="'application/pdf,image/*'">UPLOAD FILE</button>

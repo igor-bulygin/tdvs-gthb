@@ -1,1 +1,41 @@
 <p class="text-center" style="font-size: 24px; font-weight: 600px; text-transform: uppercase;">2/ More details about your work</p>
+<div class="row">
+	<div class="col-md-8 col-md-offset-2">
+		<div class="row">
+			<div class="col-md-1"><label for="description">Description</label></div>
+			<div class="col-md-9">
+				<ol class="about-edit-select nya-bs-select" ng-model="productMoreDetailsCtrl.description_language">
+					<li nya-bs-option="language in productMoreDetailsCtrl.languages" data-value="language.code" deep-watch="true">
+						<a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
+					</li>
+				</ol>
+				<div text-angular ng-model="productMoreDetailsCtrl.product.description[productMoreDetailsCtrl.description_language]" ng-cloak ta-toolbar="[]"></div>
+			</div>
+			<div class="col-md-2"><p>Give your customers a detailed overview of your work. And as always, translating this information will open your products to new markets.</p></div>
+		</div>
+		<div class="row">
+			<div class="col-md-1"><label for="description_photos">Description photos</label><span class="optional-text">Optional</span></div>
+			<div class="col-md-9">
+				<div class="col-md-2">
+					<div ng-if="productMoreDetailsCtrl.isDropAvailable">
+						<div ngf-drop-available="productMoreDetailsCtrl.isDropAvailable" ngf-drag-over-class="drag-over" ngf-drop ngf-select ngf-change="productMoreDetailsCtrl.uploadPhoto($files, $invalidFiles)" ngf-accept="'image/*'">
+							<div class="plus-add-wrapper">
+								<div class="plus-add">
+									<span>+</span>
+								</div>
+								<div class="text">ADD PHOTOS</div>
+							</div>
+						</div>
+					</div>
+					<div ngf-no-file-drop>
+						<input type="file" name="file" ngf-select="productMoreDetailsCtrl.uploadPhoto($files, $invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="productMoreDetailsCtrl.isDropAvailable" ngf-multiple="true">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-1"><label for="tags">Tags</label><span class="optional-text">Optional</span></div>
+			<div class="col-md-9"></div>
+		</div>
+	</div>
+</div>

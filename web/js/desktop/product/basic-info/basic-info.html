@@ -4,7 +4,7 @@
 		<div class="row">
 			<div class="col-md-1"><label for="title">Title</label></div>
 			<div class="col-md-9">
-				<ol class="about-edit-select text-profile nya-bs-select" ng-model="productBasicInfoCtrl.title_language">
+				<ol class="about-edit-select nya-bs-select" ng-model="productBasicInfoCtrl.title_language">
 					<li nya-bs-option="language in productBasicInfoCtrl.languages" data-value="language.code" deep-watch="true">
 						<a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
 					</li>
@@ -32,7 +32,7 @@
 			<div class="col-md-9">
 				<div class="col-md-2">
 					<div ng-if="productBasicInfoCtrl.isDropAvailable">
-						<div ngf-drop-available="productBasicInfoCtrl.isDropAvailable" ngf-drag-over-class="drag-over" ngf-drop ngf-select ngf-change="productBasicInfoCtrl.uploadPhoto($files, $invalidFiles)">
+						<div ngf-drop-available="productBasicInfoCtrl.isDropAvailable" ngf-drag-over-class="drag-over" ngf-drop ngf-select ngf-change="productBasicInfoCtrl.uploadPhoto($files, $invalidFiles)" ngf-accept="'image/*'" ngf-multiple="true">
 							<div class="plus-add-wrapper">
 								<div class="plus-add">
 									<span>+</span>

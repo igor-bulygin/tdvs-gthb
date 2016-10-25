@@ -3,6 +3,7 @@
 
 	function controller(){
 		var vm = this;
+		vm.description_language = 'en-US';
 	}
 
 	var component = {
@@ -10,7 +11,8 @@
 		controller: controller,
 		controllerAs: 'productMoreDetailsCtrl',
 		bindings: {
-			product: '<'
+			product: '<',
+			languages: '='
 		}
 	}
 
