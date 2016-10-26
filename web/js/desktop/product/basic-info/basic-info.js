@@ -1,11 +1,11 @@
 (function () {
 	"use strict";
 
-	function controller(productDataService, toastr, Upload, $scope) {
+	function controller(productDataService, toastr, Upload, $scope, UtilService) {
 		var vm = this;
-		vm.title_language = 'en-US';
+		vm.has_error = UtilService.has_error;
+		vm.name_language = 'en-US';
 		vm.categories_helper = [];
-		
 		vm.addCategory = addCategory;
 		vm.categorySelected = categorySelected;
 		
@@ -76,6 +76,10 @@
 				addCategory();
 			}
 		});
+
+		//events
+		//set name required if it is empty in english
+		
 
 	}
 
