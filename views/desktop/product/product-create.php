@@ -25,9 +25,11 @@ createProductAsset::register($this);
 $this->title = $deviser->getBrandName() . ' - Todevise';
 
 ?>
-<div ng-controller="createProductCtrl as createProductCtrl" style="background-color: white; height: 2000px;">
-	<product-basic-info product="createProductCtrl.product" categories="createProductCtrl.allCategories" languages="createProductCtrl.languages"></product-basic-info>
-	<product-more-details product="createProductCtrl.product" languages="createProductCtrl.languages"></product-more-details>
-	<product-variations product="createProductCtrl.product"></product-variations>
-	<product-price-stock product="createProductCtrl.product"></product-price-stock>
+<div ng-controller="createProductCtrl as createProductCtrl" class="create-work-wrapper">
+	<div class="container">
+		<product-basic-info product="createProductCtrl.product" categories="createProductCtrl.allCategories" languages="createProductCtrl.languages"></product-basic-info>
+		<product-more-details product="createProductCtrl.product" languages="createProductCtrl.languages"></product-more-details>
+		<product-variations product="createProductCtrl.product"></product-variations>
+		<product-price-stock product="createProductCtrl.product"></product-price-stock>
+	</div>
 </div>

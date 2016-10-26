@@ -1,56 +1,59 @@
-<p class="text-center" style="font-size: 24px; font-weight: 600px; text-transform: uppercase;">1/ Basic work information</p>
-<div class="row">
-	<div class="col-md-8 col-md-offset-2">
-		<div class="row">
-			<div class="col-md-1"><label for="title">Title</label></div>
-			<div class="col-md-9">
-				<ol class="about-edit-select nya-bs-select" ng-model="productBasicInfoCtrl.title_language">
-					<li nya-bs-option="language in productBasicInfoCtrl.languages" data-value="language.code" deep-watch="true">
-						<a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
-					</li>
-				</ol>
-				<input class="form-control ng-class:{'error-input': productBasicInfoCtrl.titleRequired}" type="text" name="title" ng-model="productBasicInfoCtrl.product.title[productBasicInfoCtrl.title_language]">
-				<div class="error-text" ng-if="productBasicInfoCtrl.titleRequired">Title in english is mandatory.</div>
-				<div><button ng-click="productBasicInfoCtrl.titleRequired=!productBasicInfoCtrl.titleRequired">Toggle error</button></div>
-			</div>
-			<div class="col-md-2">
-				<p>Translate your work title by simply selecting different languages from the drop-down menu. Translate in as many languages as possible to reach a broader audience</p>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-1"><label for="categories">Categories</label></div>
-			<div class="col-md-9">
-				<div ng-repeat="item in productBasicInfoCtrl.categories_helper track by $index">
-					<span ng-repeat="category in productBasicInfoCtrl.categories_helper[$index].categories_selected">
-						<select name="categories" ng-options="category.id as category.name for category in productBasicInfoCtrl.categories_helper[$parent.$index].categories[$index]" ng-model="productBasicInfoCtrl.categories_helper[$parent.$index].categories_selected[$index]" ng-change="productBasicInfoCtrl.categorySelected(productBasicInfoCtrl.categories_helper[$parent.$index].categories_selected[$index], $parent.$index, $index)"></select>
-					</span>
+<div class="card">
+	<span class="title">1/ Basic work information</span>
+
+			<div class="row">
+				<div class="col-md-1"><label for="title">Title</label></div>
+				<div class="col-md-8">
+					<ol class="about-edit-select title-lang-btn nya-bs-select" ng-model="productBasicInfoCtrl.title_language">
+						<li nya-bs-option="language in productBasicInfoCtrl.languages" data-value="language.code" deep-watch="true">
+							<a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
+						</li>
+					</ol>
+					<input class="title-input form-control ng-class:{'error-input': productBasicInfoCtrl.titleRequired}" type="text" name="title" ng-model="productBasicInfoCtrl.product.title[productBasicInfoCtrl.title_language]">
+					<div class="error-text" ng-if="productBasicInfoCtrl.titleRequired">Title in english is mandatory.</div>
+					<div><button ng-click="productBasicInfoCtrl.titleRequired=!productBasicInfoCtrl.titleRequired">Toggle error</button></div>
 				</div>
-				<p ng-click="productBasicInfoCtrl.addCategory(productBasicInfoCtrl.categories_helper[$parent.$index].categories_selected[$index])">+ Add category</p>
+				<div class="col-md-3">
+					<p class="info">Translate your work title by simply selecting different languages from the drop-down menu. Translate in as many languages as possible to reach a broader audience</p>
+				</div>
 			</div>
-			<div class="col-md-2"><p>Your work can go into 1 or more categories.</p></div>
-		</div>
-		<div class="row">
-			<div class="col-md-1"><label for="Photos">Photos</label></div>
-			<div class="col-md-9">
-				<div class="col-md-2">
-					<div ng-if="productBasicInfoCtrl.isDropAvailable">
-						<div ngf-drop-available="productBasicInfoCtrl.isDropAvailable" ngf-drag-over-class="drag-over" ngf-drop ngf-select ngf-change="productBasicInfoCtrl.uploadPhoto($files, $invalidFiles)" ngf-accept="'image/*'" ngf-multiple="true">
-							<div class="plus-add-wrapper">
-								<div class="plus-add">
-									<span>+</span>
+			<div class="row">
+				<div class="col-md-1"><label for="categories">Categories</label></div>
+				<div class="col-md-8">
+					<div ng-repeat="item in productBasicInfoCtrl.categories_helper track by $index">
+						<span ng-repeat="category in productBasicInfoCtrl.categories_helper[$index].categories_selected">
+							<select name="categories" ng-options="category.id as category.name for category in productBasicInfoCtrl.categories_helper[$parent.$index].categories[$index]" ng-model="productBasicInfoCtrl.categories_helper[$parent.$index].categories_selected[$index]" ng-change="productBasicInfoCtrl.categorySelected(productBasicInfoCtrl.categories_helper[$parent.$index].categories_selected[$index], $parent.$index, $index)"></select>
+						</span>
+					</div>
+					<p ng-click="productBasicInfoCtrl.addCategory(productBasicInfoCtrl.categories_helper[$parent.$index].categories_selected[$index])">+ Add category</p>
+				</div>
+				<div class="col-md-3">
+					<p class="info">Your work can go into 1 or more categories.</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-1">
+					<label for="Photos">Photos</label></div>
+				<div class="col-md-8">
+					<div class="col-md-2">
+						<div ng-if="productBasicInfoCtrl.isDropAvailable">
+							<div ngf-drop-available="productBasicInfoCtrl.isDropAvailable" ngf-drag-over-class="drag-over" ngf-drop ngf-select ngf-change="productBasicInfoCtrl.uploadPhoto($files, $invalidFiles)" ngf-accept="'image/*'" ngf-multiple="true">
+								<div class="plus-add-wrapper">
+									<div class="plus-add">
+										<span>+</span>
+									</div>
+									<div class="text">ADD PHOTOS</div>
 								</div>
-								<div class="text">ADD PHOTOS</div>
 							</div>
 						</div>
-					</div>
-					<div ngf-no-file-drop>
-						<input type="file" name="file" ngf-select="productBasicInfoCtrl.uploadPhoto($files, $invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="productBasicInfoCtrl.isDropAvailable" ngf-multiple="true">
+						<div ngf-no-file-drop>
+							<input type="file" name="file" ngf-select="productBasicInfoCtrl.uploadPhoto($files, $invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="productBasicInfoCtrl.isDropAvailable" ngf-multiple="true">
+						</div>
 					</div>
 				</div>
+				<div class="col-md-3">
+					<p class="info">Mark one of the photos as "main photo" by clicking the star icon. The main photo of the work will be displayed on Todevise's homepage.</p>
+				</div>
 			</div>
-			<div class="col-md-2">
-				<p>Mark one of the photos as "main photo" by clicking the star icon. The main photo of the work will be displayed on Todevise's homepage.</p>
-			</div>
-		</div>
-	</div>
+
 </div>

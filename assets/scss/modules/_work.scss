@@ -1,0 +1,44 @@
+// ==========================================================================
+// Work
+// ==========================================================================
+.create-work-wrapper{
+	background-color: $background_grey;
+	padding: 40px 0 120px;
+	.card{
+		background-color: $white;
+		padding: 35px 35px 10px;
+    	margin: 0 0 40px;
+		.title{
+			font-size: 24px;
+			text-align: center;
+			text-transform: uppercase;
+			font-family: $font-family--bold;
+			display: block;
+    		margin: 0 0 30px;
+		}
+		.row{
+			margin: 25px 0;
+			label{
+				font-family: $font-family--bold;
+				text-transform: uppercase;
+			}
+			.info{
+				color: $darker_grey;
+				font-family: $font-family--secondary;
+			}
+			.title-lang-btn{
+				button{
+					position: absolute;
+					left: 20px;
+					top: -8px;
+				}
+			}
+			.title-input{
+				margin-top:-20px;
+				padding: 30px 20px 0;
+				height: 80px;
+				@include border-radius(25px,25px,25px,25px);
+			}
+		}
+	}
+}
