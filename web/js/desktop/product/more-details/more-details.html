@@ -1,9 +1,11 @@
-<p class="text-center" style="font-size: 24px; font-weight: 600px; text-transform: uppercase;">2/ More details about your work</p>
-<div class="row">
-	<div class="col-md-8 col-md-offset-2">
+<div class="card">
+	<span class="title">2/ More details about your work</span>
+	<form name="productMoreDetailsCtrl.form" novalidate>
 		<div class="row">
-			<div class="col-md-1"><label for="description">Description</label></div>
-			<div class="col-md-9">
+			<div class="col-md-1">
+				<label for="description">Description</label>
+			</div>
+			<div class="col-md-8">
 				<ol class="about-edit-select nya-bs-select" ng-model="productMoreDetailsCtrl.description_language">
 					<li nya-bs-option="language in productMoreDetailsCtrl.languages" data-value="language.code" deep-watch="true">
 						<a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
@@ -11,11 +13,16 @@
 				</ol>
 				<div text-angular ng-model="productMoreDetailsCtrl.product.description[productMoreDetailsCtrl.description_language]" ng-cloak ta-toolbar="[]"></div>
 			</div>
-			<div class="col-md-2"><p>Give your customers a detailed overview of your work. And as always, translating this information will open your products to new markets.</p></div>
+			<div class="col-md-3">
+				<p class="info">Give your customers a detailed overview of your work. And as always, translating this information will open your products to new markets.</p>
+			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-1"><label for="description_photos">Description photos</label><span class="optional-text">Optional</span></div>
-			<div class="col-md-9">
+			<div class="col-md-1">
+				<label for="description_photos">Description photos</label>
+				<span class="optional-text">Optional</span>
+			</div>
+			<div class="col-md-8">
 				<div class="col-md-2">
 					<div ng-if="productMoreDetailsCtrl.isDropAvailable">
 						<div ngf-drop-available="productMoreDetailsCtrl.isDropAvailable" ngf-drag-over-class="drag-over" ngf-drop ngf-select ngf-change="productMoreDetailsCtrl.uploadPhoto($files, $invalidFiles)" ngf-accept="'image/*'">
@@ -32,10 +39,17 @@
 					</div>
 				</div>
 			</div>
+			<div class="col-md-3">
+				<p class="info">Enrich your work description with photos that showcase its main features. You can upload maximum 4 photos.</p>
+				<p class="info"><a href="">See example</a></p>
+			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-1"><label for="tags">Tags</label><span class="optional-text">Optional</span></div>
-			<div class="col-md-9">
+			<div class="col-md-1">
+				<label for="tags">Tags</label>
+				<span class="optional-text">Optional</span>
+			</div>
+			<div class="col-md-8">
 				<ol class="about-edit-select nya-bs-select" ng-model="productMoreDetailsCtrl.tags_language">
 					<li nya-bs-option="language in productMoreDetailsCtrl.languages" data-value="language.code" deep-watch="true">
 						<a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
@@ -43,6 +57,67 @@
 				</ol>
 				<tags-input ng-model="productMoreDetailsCtrl.product.tags[productMoreDetailsCtrl.tags_language]"></tags-input>
 			</div>
+			<div class="col-md-3">
+				<p class="info">Use as many tags as possible, both broad and specific, to increase the chances to be found when our customers use our search engine. Tags can be translated as well.</p>
+			</div>
 		</div>
-	</div>
+		<div class="row">
+			<div class="col-md-1">
+				<label for="faqs">WORK FAQs</label>
+				<span class="optional-text">Optional</span>
+			</div>
+			<div class="col-md-8">
+				<div class="form-group">
+					<p>Do you want to write FAQ question specific for this product?</p>
+					<div class="radio">
+						<label>
+							<input type="radio" name="faq_selected" ng-model="productMoreDetailsCtrl.faq_selected" ng-value="true" ng-change="productMoreDetailsCtrl.showFaq()"> Yes
+						</label>
+					</div>
+					<div class="radio">
+						<label>
+							<input type="radio" name="faq_selected" ng-model="productMoreDetailsCtrl.faq_selected" ng-value="false"> No
+						</label>
+					</div>
+				</div>
+				<div ng-if="productMoreDetailsCtrl.faq_selected">
+					<div class="col-md-12" ng-repeat="question in productMoreDetailsCtrl.product.faq track by $index" class="delete-options-wrapper">
+						<a href="" class="delete-link pull-right" ng-click="productMoreDetailsCtrl.deleteQuestion($index)">Delete question</a>
+						<div class="edit-faq-panel">
+							<div class="faq-language-menu">
+								<ol class="nya-bs-select form-control" ng-model="question.languageSelected" ng-change="productMoreDetailsCtrl.parseQuestion(question)">
+									<li nya-bs-option="language in productMoreDetailsCtrl.languages" class="ng-class:{'lang-selected': productMoreDetailsCtrl.isLanguageOk(language.code, question)}" data-value="language.code" deep-watch="true">
+										<a href="">
+											<span ng-bind="language.name"></span>
+											<span class="glyphicon glyphicon-ok ok-white-icon pull-right" ng-if="productMoreDetailsCtrl.isLanguageOk(language.code, question)"></span>
+										</a>
+									</li>
+								</ol>
+								<div class="faq-row">
+									<div class="col-sm-1">
+										<span class="faq-edit-question">Question</span>
+									</div>
+									<div class="col-sm-11">
+										<input type="text" class="faq-edit-answer" placeholder="Question" ng-model="question.question[question.languageSelected]">
+									</div>
+								</div>
+								<div class="faq-row">
+									<div class="col-sm-1">
+										<span class="faq-edit-question">Answer</span>
+									</div>
+									<div class="col-sm-11">
+										<div class="faq-edit-answer" text-angular ng-model="question.answer[question.languageSelected]" ta-toolbar="[]" placeholder="Answer"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<a href="" ng-click="productMoreDetailsCtrl.addFaq()">+ Add another question</a>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<p class="info">If you have specific questions or policies for this work, write them here.</p>
+			</div>
+		</div>
+	</form>
 </div>

@@ -70,6 +70,12 @@
 		}
 
 		//watches
+		$scope.$watch('productBasicInfoCtrl.product', function(newValue, oldValue) {
+			if(!oldValue && newValue) {
+				//watch product
+			}
+		})
+
 		$scope.$watch('productBasicInfoCtrl.categories', function(newValue, oldValue) {
 			if(!oldValue && newValue) {
 				vm.rootCategories = filterCategory(newValue, '');
@@ -79,7 +85,6 @@
 
 		//events
 		//set name required if it is empty in english
-		
 
 	}
 

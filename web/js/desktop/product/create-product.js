@@ -6,7 +6,8 @@
 			categories: [],
 			media: {
 				photos: []
-			}
+			},
+			faq: []
 		};
 
 		function init() {

@@ -2,7 +2,7 @@
 	<span class="title">1/ Basic work information</span>
 	<form name="productBasicInfoCtrl.form" novalidate>
 	<div class="row">
-		<div class="col-md-1"><label for="title">Title</label></div>
+		<div class="col-md-1"><label for="name">Title</label></div>
 		<div class="col-md-8">
 			<ol class="about-edit-select title-lang-btn nya-bs-select" ng-model="productBasicInfoCtrl.name_language">
 				<li nya-bs-option="language in productBasicInfoCtrl.languages" data-value="language.code" deep-watch="true">
@@ -60,4 +60,3 @@
 	</div>
 	</form>
 </div>
-<div><pre>{{productBasicInfoCtrl.form | json}}</pre></div>
