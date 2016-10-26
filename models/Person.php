@@ -31,7 +31,7 @@ use yii2tech\embedded\Mapping;
  * @property Mapping $faqInfo
  * @property array $credentials
  * @property array $preferences
- * @property array $curriculum
+ * @property string $curriculum
  * @property MongoDate $created_at
  * @property MongoDate $updated_at
  */

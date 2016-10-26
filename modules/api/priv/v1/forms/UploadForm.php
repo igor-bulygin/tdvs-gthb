@@ -76,7 +76,12 @@ class UploadForm extends Model {
 
 		if ($this->validate()) {
 			$this->pathUpload = $this->getPathUpload();
-			$this->filename = $this->getPrefix() . uniqid() . '.' . Utils::getFileExtensionFromMimeType($this->file->type);
+
+			if ($this->type == UploadForm::UPLOAD_TYPE_DEVISER_CURRICULUM) {
+				$this->filename = $this->file->name;
+			} else {
+				$this->filename = $this->getPrefix() . uniqid() . '.' . Utils::getFileExtensionFromMimeType($this->file->type);
+			}
 
 			if (!file_exists($this->pathUpload)) {
 				Utils::mkdir($this->pathUpload);
