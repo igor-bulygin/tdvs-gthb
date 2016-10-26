@@ -5,6 +5,7 @@ namespace app\modules\api\priv\v1\controllers;
 use app\helpers\CActiveRecord;
 use app\models\Person;
 use app\models\Product;
+use app\models\Product2;
 use app\modules\api\priv\v1\forms\UploadForm;
 use Exception;
 use Yii;
@@ -37,7 +38,20 @@ class ProductController extends AppPrivateController
 
 	public function actionCreate()
 	{
-		return ["action" => "create"];
+		Product2::setSerializeScenario(Product2::SERIALIZE_SCENARIO_PUBLIC);
+		$product = new Product2();
+		$product->setScenario(Product::SCENARIO_PRODUCT_UPDATE_DRAFT);
+
+		if ($product->load(Yii::$app->request->post(), '') && $product->validate()) {
+			// save the invitation
+			$product->save();
+
+			Yii::$app->response->setStatusCode(201); // Created
+			return $product;
+		} else {
+			Yii::$app->response->setStatusCode(400); // Bad Request
+			return ["errors" => $product->errors];
+		}
 	}
 
 	public function actionUpdate($id)
