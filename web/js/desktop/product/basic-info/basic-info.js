@@ -8,6 +8,7 @@
 		vm.categories_helper = [];
 		vm.addCategory = addCategory;
 		vm.categorySelected = categorySelected;
+		vm.deleteCategory = deleteCategory;
 		
 		function init(){
 			//init values or functions
@@ -45,6 +46,13 @@
 					sub_categories.push(categories[i]);
 			}
 			return sub_categories;
+		}
+
+		function deleteCategory(index) {
+			if(index > 0) {
+				vm.product.categories.splice(index, 1);
+				vm.categories_helper.splice(index, 1);
+			}
 		}
 
 		function uploadPhoto(images, errImages) {
