@@ -11,7 +11,8 @@
 						<a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
 					</li>
 				</ol>
-				<div text-angular ng-model="productMoreDetailsCtrl.product.description[productMoreDetailsCtrl.description_language]" ng-cloak ta-toolbar="[]"></div>
+				<div class="ng-class:{'error-input': productMoreDetailsCtrl.descriptionRequired}" text-angular ng-model="productMoreDetailsCtrl.product.description[productMoreDetailsCtrl.description_language]" ng-cloak ta-toolbar="[]"></div>
+				<div class="error-text" ng-if="productMoreDetailsCtrl.descriptionRequired">Description in english is mandatory.</div>
 			</div>
 			<div class="col-md-3">
 				<p class="info">Give your customers a detailed overview of your work. And as always, translating this information will open your products to new markets.</p>

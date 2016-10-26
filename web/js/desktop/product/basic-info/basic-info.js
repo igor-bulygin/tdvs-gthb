@@ -74,7 +74,7 @@
 			if(!oldValue && newValue) {
 				//watch product
 			}
-		})
+		});
 
 		$scope.$watch('productBasicInfoCtrl.categories', function(newValue, oldValue) {
 			if(!oldValue && newValue) {
@@ -84,7 +84,7 @@
 		});
 
 		//events
-		//set name required if it is empty in english
+		//TO DO: set name required if it is empty in english (vm.nameRequired=true)
 
 	}
 

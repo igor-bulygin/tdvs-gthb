@@ -53,6 +53,11 @@
 			return question.completedLanguages.indexOf(code) > -1 ? true : false;
 		}
 
+		//watches
+
+		//events
+		//TO DO: set description required if it is empty in english (vm.descriptionRequired = true)
+		//TO DO: set faq required if it is not empty and english is not filled
 
 	}
 
