@@ -25,10 +25,19 @@
 
 		function categorySelected(category, index_helper, index) {
 			vm.categories_helper[index_helper].categories_selected[index] = category;
+			//if we change an option with "child" selects
+			if(index < vm.categories_helper[index_helper].categories_selected.length-1) {
+				while(vm.categories_helper[index_helper].categories_selected.length-1 > index) {
+					vm.categories_helper[index_helper].categories_selected.splice(vm.categories_helper[index_helper].categories_selected.length-1, 1);
+					vm.categories_helper[index_helper].categories.splice(vm.categories_helper[index_helper].categories.length-1, 1);
+					}
+			}
+			//if there are child categories
 			if(filterCategory(vm.categories,category).length > 0) {
 				vm.categories_helper[index_helper].categories[index+1] = filterCategory(vm.categories, category);
 				vm.categories_helper[index_helper].categories_selected[index+1] = null;
 			} else {
+				//if not
 				vm.product.categories[index_helper] = category;
 			}
 		}

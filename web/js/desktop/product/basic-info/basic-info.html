@@ -19,7 +19,7 @@
 	<div class="row">
 		<div class="col-md-1"><label for="categories">Categories</label></div>
 		<div class="col-md-8">
-			<div ng-repeat="item in productBasicInfoCtrl.categories_helper track by $index">
+			<!-- <div ng-repeat="item in productBasicInfoCtrl.categories_helper track by $index">
 				<div class="row">
 					<span ng-repeat="category in productBasicInfoCtrl.categories_helper[$index].categories_selected">
 						<span class="col-md-3">
@@ -27,6 +27,21 @@
 						</span>
 					</span>
 					<span ng-if="$index > 0" ng-click="productBasicInfoCtrl.deleteCategory($index)">Delete category</span>
+				</div>
+			</div> -->
+			<div ng-repeat="item in productBasicInfoCtrl.categories_helper track by $index">
+				<div class="row">
+					<span ng-repeat="category in productBasicInfoCtrl.categories_helper[$index].categories_selected">
+						<span class="col-md-3">
+							<ol class="nya-bs-select" ng-model="productBasicInfoCtrl.categories_helper[$parent.$index].categories_selected[$index]" ng-change="productBasicInfoCtrl.categorySelected(productBasicInfoCtrl.categories_helper[$parent.$index].categories_selected[$index], $parent.$index, $index)">
+								<li nya-bs-option="subcategory in productBasicInfoCtrl.categories_helper[$parent.$index].categories[$index]" data-value="subcategory.id" deep-watch="true">
+									<a href="">
+										<span ng-bind="subcategory.name"></span>
+									</a>
+								</li>
+							</ol>
+						</span>
+					</span>
 				</div>
 			</div>
 			<p ng-click="productBasicInfoCtrl.addCategory(productBasicInfoCtrl.categories_helper[$parent.$index].categories_selected[$index])">+ Add category</p>
