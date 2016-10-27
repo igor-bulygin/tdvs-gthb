@@ -15,6 +15,7 @@ use yii\mongodb\rbac\MongoDbManager;
 use yii\web\IdentityInterface;
 use yii\base\NotSupportedException;
 use yii2tech\ar\position\PositionBehavior;
+use yii2tech\embedded\Mapping;
 
 /**
  * @property string deviser_id
@@ -24,6 +25,7 @@ use yii2tech\ar\position\PositionBehavior;
  * @property array slug
  * @property array description
  * @property array media
+ * @property Mapping $photosInfo
  * @property array options
  * @property array madetoorder
  * @property array sizechart
@@ -35,6 +37,7 @@ use yii2tech\ar\position\PositionBehavior;
  * @property string weight_unit
  * @property array price_stock
  * @property array references
+ * @property string $product_state
  * @property int position
  * @property MongoDate created_at
  * @property MongoDate updated_at
@@ -76,6 +79,7 @@ class Product2 extends CActiveRecord {
 			'slug',
 			'description',
 			'media',
+			'photos',
 			'options',
 			'madetoorder',
 			'sizechart',
@@ -130,7 +134,14 @@ class Product2 extends CActiveRecord {
 		$this->references = [];
 		$this->position = 0;
 
+		$this->photos = [];
+
 		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_PUBLIC);
+	}
+
+	public function embedPhotosInfo()
+	{
+		return $this->mapEmbeddedList('photos', ProductPhoto::className());
 	}
 
 
@@ -661,6 +672,18 @@ class Product2 extends CActiveRecord {
 				'app\validators\TranslatableValidator',
 				'on' => [self::SCENARIO_PRODUCT_UPDATE_DRAFT],
 			],
+			[
+				'description',
+				'app\validators\TranslatableValidator',
+				'on' => [self::SCENARIO_PRODUCT_UPDATE_DRAFT],
+			],
+			[
+				'categories',
+				'app\validators\CategoriesValidator',
+				'on' => [self::SCENARIO_PRODUCT_UPDATE_DRAFT],
+			],
+			[   'photos', 'safe'], // to load data posted from WebServices
+			[   'photosInfo', 'app\validators\EmbedDocValidator'], // to apply rules
 
 //			[
 //				['references'],
