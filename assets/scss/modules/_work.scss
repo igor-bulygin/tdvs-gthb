@@ -17,7 +17,7 @@
     		margin: 0 0 30px;
 		}
 		.row{
-			margin: 25px 0;
+			margin-bottom: 20px;
 			label{
 				font-family: $font-family--bold;
 				text-transform: uppercase;
@@ -41,4 +41,35 @@
 			}
 		}
 	}
+}
+.categories-select{
+	height: 30px;
+	width: 100%;
+}
+.basic-info-add-photos{
+	.plus-add-wrapper{
+		border: 1px solid $black;
+		margin: 0;
+	}
+    &:hover{
+        .plus-add{
+            background-color: $dark_green;
+            @include transition-property(background-color);
+            @include transition-duration(0.3s);
+            @include transition-timing-function(ease-out);
+        }
+    }
+    .plus-add{
+        background-color: $green;
+        border: 1px solid $black;
+        margin: 0 auto;
+        font-size: 43px;
+        text-align: center;
+        @include size(50px,50px);
+        @include border-radius(90px,90px,90px,90px);
+        span{
+            display: block;
+            margin: -9px 0 0 0;
+        }
+    }
 }
