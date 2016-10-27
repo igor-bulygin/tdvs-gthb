@@ -19,29 +19,18 @@
 	<div class="row">
 		<div class="col-md-1"><label for="categories">Categories</label></div>
 		<div class="col-md-8">
-			<!-- <div ng-repeat="item in productBasicInfoCtrl.categories_helper track by $index">
-				<div class="row">
-					<span ng-repeat="category in productBasicInfoCtrl.categories_helper[$index].categories_selected">
-						<span class="col-md-3">
-							<select class="categories-select" name="{{'categories_' + $parent.$index + '_' + $index}}" class="form-control ng-class:{'error-input': productBasicInfoCtrl.has_error(productBasicInfoCtrl.form, productBasicInfoCtrl.form['categories_'+$parent.$index+'_'+$index])}" ng-options="category.id as category.name for category in productBasicInfoCtrl.categories_helper[$parent.$index].categories[$index]" ng-model="productBasicInfoCtrl.categories_helper[$parent.$index].categories_selected[$index]" ng-change="productBasicInfoCtrl.categorySelected(productBasicInfoCtrl.categories_helper[$parent.$index].categories_selected[$index], $parent.$index, $index)" required></select>
-						</span>
-					</span>
-					<span ng-if="$index > 0" ng-click="productBasicInfoCtrl.deleteCategory($index)">Delete category</span>
-				</div>
-			</div> -->
 			<div ng-repeat="item in productBasicInfoCtrl.categories_helper track by $index">
 				<div class="row">
 					<span ng-repeat="category in productBasicInfoCtrl.categories_helper[$index].categories_selected">
-						<span class="col-md-3">
-							<ol class="nya-bs-select" ng-model="productBasicInfoCtrl.categories_helper[$parent.$index].categories_selected[$index]" ng-change="productBasicInfoCtrl.categorySelected(productBasicInfoCtrl.categories_helper[$parent.$index].categories_selected[$index], $parent.$index, $index)">
-								<li nya-bs-option="subcategory in productBasicInfoCtrl.categories_helper[$parent.$index].categories[$index]" data-value="subcategory.id" deep-watch="true">
-									<a href="">
-										<span ng-bind="subcategory.name"></span>
-									</a>
-								</li>
-							</ol>
-						</span>
+						<ol class="col-sm-2 col-md-2 nya-bs-select" ng-model="productBasicInfoCtrl.categories_helper[$parent.$index].categories_selected[$index]" ng-change="productBasicInfoCtrl.categorySelected(productBasicInfoCtrl.categories_helper[$parent.$index].categories_selected[$index], $parent.$index, $index)">
+							<li nya-bs-option="subcategory in productBasicInfoCtrl.categories_helper[$parent.$index].categories[$index]" data-value="subcategory.id" deep-watch="true">
+								<a href="">
+									<span ng-bind="subcategory.name"></span>
+								</a>
+							</li>
+						</ol>
 					</span>
+					<span class="glyphicon glyphicon-remove pull-right" ng-if="$index > 0" ng-click="productBasicInfoCtrl.deleteCategory($index)"></span>
 				</div>
 			</div>
 			<p ng-click="productBasicInfoCtrl.addCategory(productBasicInfoCtrl.categories_helper[$parent.$index].categories_selected[$index])">+ Add category</p>
@@ -56,7 +45,7 @@
 		<div class="col-md-8">
 			<div class="col-md-2">
 				<div ng-if="productBasicInfoCtrl.isDropAvailable">
-					<div class="basic-info-add-photos" ngf-drop-available="productBasicInfoCtrl.isDropAvailable" ngf-drag-over-class="drag-over" ngf-drop ngf-select ngf-change="productBasicInfoCtrl.uploadPhoto($files, $invalidFiles)" ngf-accept="'image/*'" ngf-multiple="true">
+					<div class="basic-info-add-photos" ngf-drop-available="productBasicInfoCtrl.isDropAvailable" ngf-drag-over-class="drag-over" ngf-drop ngf-select ngf-change="productBasicInfoCtrl.openCropModal($file)" ngf-accept="'image/*'">
 						<div class="plus-add-wrapper">
 							<div class="plus-add">
 								<span>+</span>

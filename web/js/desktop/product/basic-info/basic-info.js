@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(productDataService, toastr, Upload, $scope, UtilService) {
+	function controller(productDataService, toastr, Upload, $scope, UtilService, $uibModal) {
 		var vm = this;
 		vm.has_error = UtilService.has_error;
 		vm.name_language = 'en-US';
@@ -9,6 +9,7 @@
 		vm.addCategory = addCategory;
 		vm.categorySelected = categorySelected;
 		vm.deleteCategory = deleteCategory;
+		vm.openCropModal = openCropModal;
 		
 		function init(){
 			//init values or functions
@@ -83,6 +84,30 @@
 				// 		name: dataUpload.data.filename
 				// 	});
 				// })
+			})
+		}
+
+		function openCropModal(photo, index) {
+			var modalInstance = $uibModal.open({
+				component: 'modalCrop',
+				resolve: {
+					photo: function() {
+						return photo;
+					},
+					type: function () {
+						return 'work_photo';
+					}
+				}
+			});
+
+			modalInstance.result.then(function(imageCropped) {
+				if(imageCropped) {
+					console.log("cropped!");
+					//upload image
+					//set image filename in vm.product.media.photos
+				}
+			}, function(err) {
+				//errors
 			})
 		}
 

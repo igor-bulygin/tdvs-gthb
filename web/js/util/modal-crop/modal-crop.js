@@ -25,6 +25,10 @@
 				};
 				vm.aspect_ratio = 1;
 				break;
+			case "work_photo":
+				vm.area_type = 'rectangle';
+				vm.aspect_ratio = 0.8;
+				break;
 			default: 
 				vm.area_type = 'rectangle';
 				vm.aspect_ratio = 1;
