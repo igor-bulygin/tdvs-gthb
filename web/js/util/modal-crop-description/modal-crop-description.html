@@ -1,0 +1,25 @@
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="modalCropDescriptionCtrl.dismiss()">
+		<span class="ion-ios-close" aria-hidden="true"></span>
+	</button>
+	<h3 class="modal-title">Photo & description</h3>
+</div>
+<div class="modal-body">
+	<div class="col-sm-6">
+		<div class="crop-modal">
+			<img-crop image="modalCropDescriptionCtrl.resolve.photo" area-type="rectangle" aspect-ratio="1" chargement="'Loading'" result-image="modalCropDescriptionCtrl.photoCropped" result-image-size="'max'"></img-crop>
+		</div>
+	</div>
+	<div class="col-sm-6">
+		<div class="row">
+			<label for="title">Title</label>
+		</div>
+		<div class="row">
+			<label for="description">Description</label>
+		</div>
+	</div>
+	<div class="text-center">
+		<button class="btn-btn-default btn-grey" ng-click="modalCropDescriptionCtrl.dismiss()">Cancel</button>
+		<button class="btn btn-default btn-green" ng-click="modalCropDescriptionCtrl.ok()">Save</button>
+	</div>
+</div>
