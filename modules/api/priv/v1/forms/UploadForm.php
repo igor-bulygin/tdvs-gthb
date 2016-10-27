@@ -2,6 +2,7 @@
 namespace app\modules\api\priv\v1\forms;
 
 use app\models\Person;
+use app\models\Product2;
 use Yii;
 use app\helpers\Utils;
 use yii\base\Model;
@@ -17,8 +18,12 @@ class UploadForm extends Model {
 	const UPLOAD_TYPE_DEVISER_PRESS_IMAGES = 'deviser-press';
 	const UPLOAD_TYPE_DEVISER_CURRICULUM = 'deviser-curriculum';
 
+	const UPLOAD_TYPE_KNOWN_PRODUCT_PHOTO = 'known-product-photo';
+	const UPLOAD_TYPE_UNKNOWN_PRODUCT_PHOTO = 'unknown-product-photo';
+
 	const SCENARIO_UPLOAD_DEVISER_IMAGE = 'scenario-upload-deviser-image';
 	const SCENARIO_UPLOAD_DEVISER_CURRICULUM = 'scenario-upload-deviser-curriculum';
+	const SCENARIO_UPLOAD_PRODUCT_IMAGE = 'scenario-upload-product-image';
 
 
 	/**
@@ -61,7 +66,7 @@ class UploadForm extends Model {
 		return [
 			[['type'], 'validateType'],
 			[['deviser_id', 'product_id'], 'safe'],
-			[['file'], 'file', 'skipOnEmpty' => false, 'extensions' => ['png', 'jpg', 'jpeg'], 'on' => self::SCENARIO_UPLOAD_DEVISER_IMAGE],
+			[['file'], 'file', 'skipOnEmpty' => false, 'extensions' => ['png', 'jpg', 'jpeg'], 'on' => [self::SCENARIO_UPLOAD_DEVISER_IMAGE, self::SCENARIO_UPLOAD_PRODUCT_IMAGE]],
 			[['file'], 'file', 'skipOnEmpty' => false, 'extensions' => ['png', 'jpg', 'jpeg', 'pdf'], 'on' => self::SCENARIO_UPLOAD_DEVISER_CURRICULUM],
 		];
 	}
@@ -113,6 +118,12 @@ class UploadForm extends Model {
 			case UploadForm::UPLOAD_TYPE_DEVISER_CURRICULUM:
 				$path = Utils::join_paths(Yii::getAlias("@deviser"), $this->deviser_id);
 				break;
+			case UploadForm::UPLOAD_TYPE_KNOWN_PRODUCT_PHOTO:
+				$path = Utils::join_paths(Yii::getAlias("@product"), $this->product_id);
+				break;
+			case UploadForm::UPLOAD_TYPE_UNKNOWN_PRODUCT_PHOTO:
+				$path = Utils::join_paths(Yii::getAlias("@product"), "temp");
+				break;
 			default:
 				$path = Yii::getAlias("@uploads");
 				break;
@@ -135,6 +146,9 @@ class UploadForm extends Model {
 			UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PHOTOS => 'deviser.photo.',
 			UploadForm::UPLOAD_TYPE_DEVISER_PRESS_IMAGES => 'deviser.press.',
 			UploadForm::UPLOAD_TYPE_DEVISER_CURRICULUM => 'deviser.cv.',
+			UploadForm::UPLOAD_TYPE_KNOWN_PRODUCT_PHOTO => 'product.photo.',
+			UploadForm::UPLOAD_TYPE_UNKNOWN_PRODUCT_PHOTO => 'product.photo.',
+
 		];
 
 		return $prefixes[$this->type];
@@ -163,6 +177,16 @@ class UploadForm extends Model {
 					$this->addError($attribute, 'Deviser not found');
 				}
 				break;
+			case UploadForm::UPLOAD_TYPE_KNOWN_PRODUCT_PHOTO:
+				if (empty($this->product_id)) {
+					$this->addError($attribute, 'Product id must be specified');
+				}
+				if (empty($this->getProduct())) {
+					$this->addError($attribute, 'Product not found');
+				}
+				break;
+			case UploadForm::UPLOAD_TYPE_UNKNOWN_PRODUCT_PHOTO:
+				break;
 			default:
 				$this->addError($attribute, 'Invalid type');
 				break;
@@ -185,6 +209,12 @@ class UploadForm extends Model {
 			case UploadForm::UPLOAD_TYPE_DEVISER_PRESS_IMAGES:
 			case UploadForm::UPLOAD_TYPE_DEVISER_CURRICULUM:
 				$url = (Yii::getAlias("@deviser_url") . "/" . $this->deviser_id . "/" . $this->filename);
+				break;
+			case UploadForm::UPLOAD_TYPE_KNOWN_PRODUCT_PHOTO:
+				$url = (Yii::getAlias("@product_url") . "/" . $this->product_id . "/" . $this->filename);
+				break;
+			case UploadForm::UPLOAD_TYPE_UNKNOWN_PRODUCT_PHOTO:
+				$url = (Yii::getAlias("@product_url") . "/temp/" . $this->filename);
 				break;
 			default:
 				$url = null;
@@ -212,6 +242,10 @@ class UploadForm extends Model {
 			case UploadForm::UPLOAD_TYPE_DEVISER_CURRICULUM:
 				$this->setScenario(UploadForm::SCENARIO_UPLOAD_DEVISER_CURRICULUM);
 				break;
+			case UploadForm::UPLOAD_TYPE_KNOWN_PRODUCT_PHOTO:
+			case UploadForm::UPLOAD_TYPE_UNKNOWN_PRODUCT_PHOTO:
+				$this->setScenario(UploadForm::SCENARIO_UPLOAD_PRODUCT_IMAGE);
+				break;
 			default:
 				$url = null;
 				break;
@@ -228,6 +262,16 @@ class UploadForm extends Model {
 	public function getDeviser()
 	{
 		return Person::findOne(['short_id' => $this->deviser_id]);
+	}
+
+	/**
+	 * Get the Product related with the upload
+	 *
+	 * @return Product2
+	 */
+	public function getProduct()
+	{
+		return Product2::findOne(['short_id' => $this->product_id]);
 	}
 
 	/**
