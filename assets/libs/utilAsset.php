@@ -17,6 +17,7 @@ class utilAsset extends AssetBundle {
 		'js/util/form-errors/form-errors.js',
 		'js/util/modal-crop/modal-crop.js',
 		'js/util/modal-confirm-leave/modal-confirm-leave.js',
+		'js/util/modal-crop-description/modal-crop-description.js',
 		'js/util/contenteditable.js',
 		'js/util/dragndropService.js'
 	];

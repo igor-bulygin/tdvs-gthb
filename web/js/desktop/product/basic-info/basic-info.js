@@ -135,9 +135,9 @@
 		controller: controller,
 		controllerAs: 'productBasicInfoCtrl',
 		bindings: {
-			product: '<',
-			categories: '=',
-			languages: '='
+			product: '=',
+			categories: '<',
+			languages: '<'
 		}
 	}
 

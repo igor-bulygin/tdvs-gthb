@@ -26,7 +26,7 @@ $this->title = 'Become a Deviser - Todevise';
 	<div class="become-deviser-wrapper">
 		<div>
 			<div class="container-fluid become-deviser-container">
-			    <div class="become-deviser-cover">
+				<div class="become-deviser-cover">
 				<div class="row">
 					<div class="col-sm-6"></div>
 					<div class="col-sm-6 col-xs-12">

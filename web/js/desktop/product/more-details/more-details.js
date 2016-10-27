@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(){
+	function controller(Upload, $uibModal){
 		var vm = this;
 		vm.description_language = 'en-US';
 		vm.tags_language = 'en-US';
@@ -15,6 +15,7 @@
 		vm.isLanguageOk = isLanguageOk;
 		vm.addTag = addTag;
 		vm.removeTag = removeTag;
+		vm.openCropModal = openCropModal;
 
 		function init(){
 			//init functions
@@ -62,7 +63,6 @@
 				if(vm.product.tags[vm.tags_language].indexOf(tag.text) === -1)
 					vm.product.tags[vm.tags_language].push(tag.text)
 			}
-			console.log(vm.product.tags);
 		}
 
 		function removeTag(tag) {
@@ -71,6 +71,27 @@
 				vm.product.tags[vm.tags_language].splice(pos, 1);
 			if(vm.product.tags[vm.tags_language].length === 0)
 				delete vm.product.tags[vm.tags_language];
+		}
+
+		function openCropModal(photo) {
+			var modalInstance = $uibModal.open({
+				component: 'modalCropDescription',
+				resolve: {
+					photo: function() {
+						return photo
+					}
+				}
+			});
+
+			modalInstance.result.then(function (imageCropped, title, description) {
+				if(imageCropped || title || description) {
+					//save
+					console.log("saved");
+				}
+			}, function (err) {
+				//errors
+				console.log("dismissed!");
+			});
 		}
 
 		//watches
@@ -86,8 +107,8 @@
 		controller: controller,
 		controllerAs: 'productMoreDetailsCtrl',
 		bindings: {
-			product: '<',
-			languages: '='
+			product: '=',
+			languages: '<'
 		}
 	}
 
