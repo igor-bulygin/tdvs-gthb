@@ -13,6 +13,8 @@
 		vm.deleteQuestion = deleteQuestion;
 		vm.parseQuestion = parseQuestion;
 		vm.isLanguageOk = isLanguageOk;
+		vm.addTag = addTag;
+		vm.removeTag = removeTag;
 
 		function init(){
 			//init functions
@@ -51,6 +53,24 @@
 
 		function isLanguageOk(code, question) {
 			return question.completedLanguages.indexOf(code) > -1 ? true : false;
+		}
+
+		function addTag(tag) {
+			if(!vm.product.tags[vm.tags_language])
+				vm.product.tags[vm.tags_language]=[tag.text];
+			else {
+				if(vm.product.tags[vm.tags_language].indexOf(tag.text) === -1)
+					vm.product.tags[vm.tags_language].push(tag.text)
+			}
+			console.log(vm.product.tags);
+		}
+
+		function removeTag(tag) {
+			var pos = vm.product.tags[vm.tags_language].indexOf(tag.text);
+			if(pos > -1)
+				vm.product.tags[vm.tags_language].splice(pos, 1);
+			if(vm.product.tags[vm.tags_language].length === 0)
+				delete vm.product.tags[vm.tags_language];
 		}
 
 		//watches

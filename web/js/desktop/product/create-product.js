@@ -7,7 +7,8 @@
 			media: {
 				photos: []
 			},
-			faq: []
+			faq: [],
+			tags: []
 		};
 
 		function init() {

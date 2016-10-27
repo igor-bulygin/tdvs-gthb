@@ -26,7 +26,7 @@
 			<div class="col-md-8">
 				<div class="col-md-2">
 					<div ng-if="productMoreDetailsCtrl.isDropAvailable">
-						<div ngf-drop-available="productMoreDetailsCtrl.isDropAvailable" ngf-drag-over-class="drag-over" ngf-drop ngf-select ngf-change="productMoreDetailsCtrl.uploadPhoto($files, $invalidFiles)" ngf-accept="'image/*'">
+						<div class="basic-info-add-photos" ngf-drop-available="productMoreDetailsCtrl.isDropAvailable" ngf-drag-over-class="drag-over" ngf-drop ngf-select ngf-change="productMoreDetailsCtrl.uploadPhoto($files, $invalidFiles)" ngf-accept="'image/*'">
 							<div class="plus-add-wrapper">
 								<div class="plus-add">
 									<span>+</span>
@@ -56,7 +56,7 @@
 						<a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
 					</li>
 				</ol>
-				<tags-input ng-model="productMoreDetailsCtrl.product.tags[productMoreDetailsCtrl.tags_language]"></tags-input>
+				<tags-input ng-model="productMoreDetailsCtrl.tags[productMoreDetailsCtrl.tags_language]" on-tag-added="productMoreDetailsCtrl.addTag($tag)" on-tag-removed="productMoreDetailsCtrl.removeTag($tag)"></tags-input>
 			</div>
 			<div class="col-md-3">
 				<p class="info">Use as many tags as possible, both broad and specific, to increase the chances to be found when our customers use our search engine. Tags can be translated as well.</p>
