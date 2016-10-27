@@ -181,7 +181,7 @@ class Tag extends CActiveRecord
 		$this->categories = [];
 		$this->options = [];
 
-		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_PUBLIC);
+//		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_PUBLIC);
 	}
 
 	public function beforeSave($insert)

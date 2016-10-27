@@ -401,7 +401,7 @@ class Person extends CActiveRecord implements IdentityInterface
 	{
 		switch ($view) {
 			case self::SERIALIZE_SCENARIO_PREVIEW:
-				static::$serializeFields = [
+				self::$serializeFields = [
 					'id' => 'short_id',
 					'slug',
 					'name' => "brandName",
@@ -409,7 +409,7 @@ class Person extends CActiveRecord implements IdentityInterface
 				];
 				break;
 			case self::SERIALIZE_SCENARIO_PUBLIC:
-				static::$serializeFields = [
+				self::$serializeFields = [
 					'id' => 'short_id',
 					'slug',
 					'text_short_description',

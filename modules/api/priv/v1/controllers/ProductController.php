@@ -25,7 +25,7 @@ class ProductController extends AppPrivateController
 
 	public function actionView($id)
 	{
-		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_OWNER);
+		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_ADMIN);
 		$product = Product::findOneSerialized($id);
 
 		return $product;
@@ -56,7 +56,7 @@ class ProductController extends AppPrivateController
 
 	public function actionUpdate($id)
 	{
-		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_OWNER);
+		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_ADMIN);
 		/** @var Product $product */
 		$product = Product::findOneSerialized($id);
 		if (!$product) {

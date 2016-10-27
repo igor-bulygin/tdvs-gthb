@@ -130,7 +130,7 @@ class Product extends CActiveRecord {
 		$this->references = [];
 		$this->position = 0;
 
-		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_PUBLIC);
+//		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_PUBLIC);
 	}
 
 

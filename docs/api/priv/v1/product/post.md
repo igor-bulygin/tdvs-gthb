@@ -12,5 +12,13 @@ Example about how to call to Web Service to create a new Product
 * `403`: Not allowed
   
 **Request body**: 
-* `name`: multilanguage field
-* `description`: multilanguage field
+* `name`: Name or title of the product (Multilanguage field)
+* `description`: Detailed descripton of the product (Multilanguage field)
+* `categories`: [] array with category ids (["f0cco", "1234"]) 
+* `media`: 
+ * `photos`: [] array with custom data
+  * `name`: filename
+  * `main_product_photo`: (Boolean)
+  * `title`: title for the image (Multilanguage field)
+  * `description`: description of the image (Multilanguage field)
+
