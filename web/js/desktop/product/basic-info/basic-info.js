@@ -6,10 +6,12 @@
 		vm.has_error = UtilService.has_error;
 		vm.name_language = 'en-US';
 		vm.categories_helper = [];
+		vm.images = [];
 		vm.addCategory = addCategory;
 		vm.categorySelected = categorySelected;
 		vm.deleteCategory = deleteCategory;
 		vm.openCropModal = openCropModal;
+		vm.uploadPhoto = uploadPhoto;
 		
 		function init(){
 			//init values or functions
@@ -68,22 +70,32 @@
 		function uploadPhoto(images, errImages) {
 			vm.files = images;
 			vm.errFiles = errImages;
+			var type;
+			if(vm.product.id)
+				type = 'known-product-photo';
+			else {
+				type = 'unknown-product-photo';
+			}
 			//upload photos
 			angular.forEach(vm.files, function(file) {
 				var data = {
-					type: "",
-					//work_id: work_id?
+					type: type,
+					deviser_id: UtilService.returnDeviserIdFromUrl(),
 					file: file
 				}
-				//Upload.upload({
-					//url: 
-					//data: data
-				//}).then(function(dataUpload) {
-				// 	toastr.success("Photo uploaded!");
-				// 	vm.product.media.photos.push({
-				// 		name: dataUpload.data.filename
-				// 	});
-				// })
+				Upload.upload({
+					url: productDataService.Uploads,
+					data: data
+				}).then(function(dataUpload) {
+					console.log("dataUpload: ", dataUpload);
+					vm.images.unshift({
+						url: currentHost() + '/' + dataUpload.data.url
+					})
+					vm.product.media.photos.push({
+						name: dataUpload.data.filename
+					});
+					console.log(vm.product.media.photos);
+				})
 			})
 		}
 

@@ -43,9 +43,9 @@
 		<div class="col-md-1">
 			<label for="Photos">Photos</label></div>
 		<div class="col-md-8">
-			<div class="col-md-2">
-				<div ng-if="productBasicInfoCtrl.isDropAvailable">
-					<div class="basic-info-add-photos" ngf-drop-available="productBasicInfoCtrl.isDropAvailable" ngf-drag-over-class="drag-over" ngf-drop ngf-select ngf-change="productBasicInfoCtrl.openCropModal($file)" ngf-accept="'image/*'">
+			<div class="row">
+				<div class="col-md-2" ng-if="productBasicInfoCtrl.isDropAvailable">
+					<div class="basic-info-add-photos" ngf-drop-available="productBasicInfoCtrl.isDropAvailable" ngf-drag-over-class="drag-over" ngf-drop ngf-select ngf-change="productBasicInfoCtrl.uploadPhoto($files, $invalidFiles)" ngf-accept="'image/*'" ngf-multiple="true">
 						<div class="plus-add-wrapper">
 							<div class="plus-add">
 								<span>+</span>
@@ -54,8 +54,11 @@
 						</div>
 					</div>
 				</div>
-				<div ngf-no-file-drop>
+				<div class="col-md-2" ngf-no-file-drop>
 					<input type="file" name="file" ngf-select="productBasicInfoCtrl.uploadPhoto($files, $invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="productBasicInfoCtrl.isDropAvailable" ngf-multiple="true">
+				</div>
+				<div class="col-md-3 image-press-edit" ng-repeat="image in productBasicInfoCtrl.images">
+					<img class="grid-image" ng-src="{{image.url}}">
 				</div>
 			</div>
 		</div>

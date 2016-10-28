@@ -12,6 +12,7 @@
 				method: 'PATCH'
 			}
 		});
+		this.Uploads = apiConfig.baseUrl + "priv/" + apiConfig.version + 'uploads';
 	}
 
 	angular.module('api')
