@@ -1,6 +1,16 @@
 // ==========================================================================
 // Work
 // ==========================================================================
+.new-product-header{
+	background-color: $almost_black;
+	height:50px;
+	margin: -40px 0 40px 0;
+	padding-top: 6px;
+	.title{
+		color: $white;
+		text-transform: uppercase;
+	}
+}
 .create-work-wrapper{
 	background-color: $background_grey;
 	padding: 40px 0 120px;

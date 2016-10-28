@@ -937,7 +937,7 @@ input[type="radio"] .styled:checked + label::after {
   color: #fff; }
 
 .modal-content {
-  width: 532px;
+  min-width: 532px;
   margin: 0 auto; }
   .modal-content .modal-header {
     border-bottom: 0; }
@@ -3673,6 +3673,15 @@ input[type="radio"] .styled:checked + label::after {
       bottom: 0;
       margin: auto;
       max-height: 500px; }
+
+.new-product-header {
+  background-color: #484848;
+  height: 50px;
+  margin: -40px 0 40px 0;
+  padding-top: 6px; }
+  .new-product-header .title {
+    color: #ffffff;
+    text-transform: uppercase; }
 
 .create-work-wrapper {
   background-color: #e9e9e9;
