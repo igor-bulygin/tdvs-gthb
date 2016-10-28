@@ -3682,6 +3682,17 @@ input[type="radio"] .styled:checked + label::after {
   .new-product-header .title {
     color: #ffffff;
     text-transform: uppercase; }
+  .new-product-header .btns-group {
+    margin: -39px 10px 0 0;
+    float: right; }
+    .new-product-header .btns-group button {
+      display: inline;
+      margin-left: 15px; }
+  .new-product-header .back-link {
+    position: absolute;
+    color: white;
+    left: 35px;
+    top: 83px; }
 
 .create-work-wrapper {
   background-color: #e9e9e9;
@@ -3716,6 +3727,13 @@ input[type="radio"] .styled:checked + label::after {
         border-radius: 25px 25px 25px 25px !important;
         -webkit-border-radius: 25px 25px 25px 25px !important;
         -moz-border-radius: 25px 25px 25px 25px !important; }
+
+.items-row {
+  margin-left: 0; }
+  .items-row button {
+    border-radius: 20px 20px 20px 20px !important;
+    -webkit-border-radius: 20px 20px 20px 20px !important;
+    -moz-border-radius: 20px 20px 20px 20px !important; }
 
 .categories-select {
   height: 30px;
@@ -3752,6 +3770,9 @@ input[type="radio"] .styled:checked + label::after {
   .basic-info-add-photos .plus-add span {
     display: block;
     margin: -9px 0 0 0; }
+
+.crop-modal-large .crop-modal {
+  width: 100% !important; }
 
 footer {
   width: 100%;

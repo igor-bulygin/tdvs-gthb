@@ -20,7 +20,7 @@
 		<div class="col-md-1"><label for="categories">Categories</label></div>
 		<div class="col-md-8">
 			<div ng-repeat="item in productBasicInfoCtrl.categories_helper track by $index">
-				<div class="row">
+				<div class="row items-row">
 					<span ng-repeat="category in productBasicInfoCtrl.categories_helper[$index].categories_selected">
 						<ol class="col-sm-2 col-md-2 nya-bs-select" ng-model="productBasicInfoCtrl.categories_helper[$parent.$index].categories_selected[$index]" ng-change="productBasicInfoCtrl.categorySelected(productBasicInfoCtrl.categories_helper[$parent.$index].categories_selected[$index], $parent.$index, $index)">
 							<li nya-bs-option="subcategory in productBasicInfoCtrl.categories_helper[$parent.$index].categories[$index]" data-value="subcategory.id" deep-watch="true">

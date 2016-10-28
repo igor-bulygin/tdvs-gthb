@@ -10,6 +10,20 @@
 		color: $white;
 		text-transform: uppercase;
 	}
+	.btns-group{
+		margin: -39px 10px 0 0;
+		float: right;
+		button{
+			display: inline;
+			margin-left: 15px;
+		}
+	}
+	.back-link{
+		position: absolute;
+		color: white;
+		left: 35px;
+		top: 83px;
+	}
 }
 .create-work-wrapper{
 	background-color: $background_grey;
@@ -52,6 +66,12 @@
 		}
 	}
 }
+.items-row{
+	margin-left:0;
+	button{
+		@include border-radius(20px,20px,20px,20px);
+	}
+}
 .categories-select{
 	height: 30px;
 	width: 100%;
@@ -82,4 +102,9 @@
             margin: -9px 0 0 0;
         }
     }
+}
+.crop-modal-large{
+	.crop-modal{
+		width: 100%!important;
+	}
 }

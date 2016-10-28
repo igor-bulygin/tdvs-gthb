@@ -27,12 +27,12 @@ $this->title = $deviser->getBrandName() . ' - Todevise';
 ?>
 <div ng-controller="createProductCtrl as createProductCtrl" class="create-work-wrapper">
 	<div id="newProductHeader" class="new-product-header">
-		<div class="col-sm-2">
-			<a href=""> go back to your profile</a>
+		<div class="pull-left">
+			<a class="back-link" href=""> &lt go back to your profile</a>
 		</div>
-		<div class="col-sm-8 text-center"><h4 class="title">New work</h4></div>
-		<div class="col-md-2">
-			<button class="btn btn-default">Save progress</button>
+		<div class="text-center"><h4 class="title">New work</h4></div>
+		<div class="btns-group">
+			<button class="btn btn-transparent">Save progress</button>
 			<button class="btn btn-default btn-green">Publish work</button>
 		</div>
 	</div>
