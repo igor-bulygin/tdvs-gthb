@@ -5,10 +5,13 @@
 		var vm = this;
 		vm.ok = ok;
 		vm.dismiss = dismiss;
+		vm.title_language = 'en-US';
+		vm.description_language = 'en-US';
+		vm.imageData = {};
 
 		function ok() {
 			vm.close({
-				$value: vm.photoCropped
+				$value: vm.imageData
 			});
 		}
 

@@ -87,14 +87,12 @@
 					url: productDataService.Uploads,
 					data: data
 				}).then(function(dataUpload) {
-					console.log("dataUpload: ", dataUpload);
 					vm.images.unshift({
 						url: currentHost() + '/' + dataUpload.data.url
 					})
 					vm.product.media.photos.push({
 						name: dataUpload.data.filename
 					});
-					console.log(vm.product.media.photos);
 				})
 			})
 		}

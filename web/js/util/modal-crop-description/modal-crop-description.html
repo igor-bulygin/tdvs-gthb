@@ -4,22 +4,48 @@
 	</button>
 	<h3 class="modal-title">Photo & description</h3>
 </div>
-<div class="modal-body">
-	<div class="col-sm-6">
-		<div class="crop-modal">
-			<img-crop image="modalCropDescriptionCtrl.resolve.photo" area-type="rectangle" aspect-ratio="1" chargement="'Loading'" result-image="modalCropDescriptionCtrl.photoCropped" result-image-size="'max'"></img-crop>
+<div class="modal-body crop-modal-large" style="height: 552px;">
+	<div class="row">
+		<div class="col-sm-6">
+			<div class="crop-modal">
+				<img-crop image="modalCropDescriptionCtrl.resolve.photo" area-type="rectangle" aspect-ratio="1" chargement="'Loading'" result-image="modalCropDescriptionCtrl.imageData['photoCropped']" result-image-size="'max'"></img-crop>
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<div class="row">
+				<div class="col-sm-3">
+					<label for="title">Title</label>
+					<span class="optional-text">Optional</span>
+				</div>
+				<div class="col-sm-9">
+					<ol class="nya-bs-select" ng-model="modalCropDescriptionCtrl.title_language">
+						<li nya-bs-option="language in modalCropDescriptionCtrl.resolve.languages" data-value="language.code" deep-watch="true">
+							<a href=""><span ng-bind="language.name"></span></a>
+						</li>
+					</ol>
+					<input type="text" class="form-control" ng-model="modalCropDescriptionCtrl.imageData['title']">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3">
+					<label for="description">Description</label>
+					<span class="optional-text">Optional</span>
+				</div>
+				<div class="col-sm-9">
+					<ol class="nya-bs-select" ng-model="modalCropDescriptionCtrl.description_language">
+						<li nya-bs-option="language in modalCropDescriptionCtrl.resolve.languages" data-value="language.code" deep-watch="true">
+							<a href=""><span ng-bind="language.name"></span></a>
+						</li>
+					</ol>
+					<textarea id="" cols="30" rows="10" ng-model="modalCropDescriptionCtrl.imageData['description']"></textarea>
+				</div>
+			</div>
 		</div>
 	</div>
-	<div class="col-sm-6">
-		<div class="row">
-			<label for="title">Title</label>
+	<div class="row">
+		<div class="text-center">
+			<button class="btn-btn-default btn-grey" ng-click="modalCropDescriptionCtrl.dismiss()">Cancel</button>
+			<button class="btn btn-default btn-green" ng-click="modalCropDescriptionCtrl.ok()">Save</button>
 		</div>
-		<div class="row">
-			<label for="description">Description</label>
-		</div>
-	</div>
-	<div class="text-center">
-		<button class="btn-btn-default btn-grey" ng-click="modalCropDescriptionCtrl.dismiss()">Cancel</button>
-		<button class="btn btn-default btn-green" ng-click="modalCropDescriptionCtrl.ok()">Save</button>
 	</div>
 </div>

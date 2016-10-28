@@ -1,6 +1,6 @@
 (function () {
 
-	function controller(productDataService, languageDataService, toastr) {
+	function controller(deviserDataService, productDataService, languageDataService, toastr, UtilService) {
 		var vm = this;
 		vm.product = {
 			categories: [],
@@ -14,6 +14,7 @@
 		function init() {
 			getLanguages();
 			getCategories();
+			getDeviser();
 		}
 
 		init();
@@ -34,6 +35,14 @@
 				}, function (err) {
 					toastr.error(err);
 				});
+		}
+
+		function getDeviser() {
+			deviserDataService.Profile.get({
+				deviser_id: UtilService.returnDeviserIdFromUrl()
+			}).$promise.then(function (dataDeviser) {
+				vm.deviser = dataDeviser;
+			});
 		}
 
 	}

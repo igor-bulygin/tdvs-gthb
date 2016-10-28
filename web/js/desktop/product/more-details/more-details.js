@@ -78,13 +78,17 @@
 				component: 'modalCropDescription',
 				resolve: {
 					photo: function() {
-						return photo
+						return photo;
+					},
+					languages: function() {
+						return vm.languages;
 					}
-				}
+				},
+				size: 'lg'
 			});
 
-			modalInstance.result.then(function (imageCropped, title, description) {
-				if(imageCropped || title || description) {
+			modalInstance.result.then(function (imageData) {
+				if(imageData.imageCropped || imageData.title || imageData.description) {
 					//save
 					console.log("saved");
 				}
