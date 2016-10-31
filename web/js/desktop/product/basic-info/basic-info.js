@@ -12,6 +12,7 @@
 		vm.deleteCategory = deleteCategory;
 		vm.openCropModal = openCropModal;
 		vm.uploadPhoto = uploadPhoto;
+		vm.deleteImage = deleteImage;
 		
 		function init(){
 			//init values or functions
@@ -133,11 +134,28 @@
 						vm.images[index].url = currentHost() + '/' + dataUpload.data.url;
 						//set image filename in vm.product.media.photos[index].filename
 						vm.product.media.photos[index].filename = dataUpload.data.filename;
+						unSetMainPhoto();
+						vm.product.media.photos[index]['main_product_photo'] = true;
+						console.log(vm.product);
 					})
 				}
 			}, function(err) {
 				//errors
 			})
+		}
+
+		function deleteImage(index) {
+			if(index > -1) {
+				vm.images.splice(index, 1);
+				vm.product.media.photos.splice(index, 1);
+			}
+		}
+
+		function unSetMainPhoto() {
+			for(var i = 0; i < vm.product.media.photos.length; i++) {
+				if(vm.product.media.photos[i].main_product_photo)
+					delete vm.product.media.photos[i].main_product_photo;
+			}
 		}
 
 		//watches
