@@ -59,6 +59,9 @@
 				</div>
 				<div class="col-md-3 image-press-edit" ng-repeat="image in productBasicInfoCtrl.images">
 					<img class="grid-image" ng-src="{{image.url}}">
+					<div ng-click="productBasicInfoCtrl.openCropModal(image.url, $index)">Main photo</div>
+					<span ng-click="productBasicInfoCtrl.deleteImage($index)">Delete</span>
+					<p ng-if="productBasicInfoCtrl.product.media.photos[$index].main_product_photo">Marked as main photo</p>
 				</div>
 			</div>
 		</div>
