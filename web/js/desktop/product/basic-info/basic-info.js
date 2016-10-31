@@ -87,10 +87,11 @@
 					url: productDataService.Uploads,
 					data: data
 				}).then(function(dataUpload) {
+					//parse images
 					vm.images.unshift({
 						url: currentHost() + '/' + dataUpload.data.url
 					})
-					vm.product.media.photos.push({
+					vm.product.media.photos.unshift({
 						name: dataUpload.data.filename
 					});
 				})
@@ -112,9 +113,27 @@
 
 			modalInstance.result.then(function(imageCropped) {
 				if(imageCropped) {
-					console.log("cropped!");
 					//upload image
-					//set image filename in vm.product.media.photos
+					var type;
+					if(vm.product.id)
+						type = 'known-product-photo';
+					else {
+						type = 'unknown-product-photo';
+					}
+					var data = {
+						type: type,
+						deviser_id: UtilService.returnDeviserIdFromUrl(),
+						file: Upload.dataUrltoBlob(imageCropped, "temp.png")
+					};
+					Upload.upload({
+						url: productDataService.Uploads,
+						data: data
+					}).then(function(dataUpload) {
+						//set image filename in vm.images[index].url
+						vm.images[index].url = currentHost() + '/' + dataUpload.data.url;
+						//set image filename in vm.product.media.photos[index].filename
+						vm.product.media.photos[index].filename = dataUpload.data.filename;
+					})
 				}
 			}, function(err) {
 				//errors

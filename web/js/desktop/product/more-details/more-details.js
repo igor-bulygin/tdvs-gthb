@@ -88,9 +88,13 @@
 			});
 
 			modalInstance.result.then(function (imageData) {
-				if(imageData.imageCropped || imageData.title || imageData.description) {
-					//save
-					console.log("saved");
+				if(imageData && (imageData.imageCropped || imageData.title || imageData.description)) {
+						//upload cropped photo
+						//save
+						vm.product.media.description_photos.unshift({
+							title: imageData.title,
+							description: imageData.description
+						});
 				}
 			}, function (err) {
 				//errors

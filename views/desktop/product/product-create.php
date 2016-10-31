@@ -32,7 +32,7 @@ $this->title = $deviser->getBrandName() . ' - Todevise';
 		</div>
 		<div class="text-center"><h4 class="title">New work</h4></div>
 		<div class="btns-group">
-			<button class="btn btn-transparent">Save progress</button>
+			<button class="btn btn-transparent" ng-click="createProductCtrl.save()">Save progress</button>
 			<button class="btn btn-default btn-green">Publish work</button>
 		</div>
 	</div>

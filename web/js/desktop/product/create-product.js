@@ -2,19 +2,20 @@
 
 	function controller(deviserDataService, productDataService, languageDataService, toastr, UtilService) {
 		var vm = this;
-		vm.product = {
-			categories: [],
-			media: {
-				photos: []
-			},
-			faq: [],
-			tags: []
-		};
+		vm.save = save;
 
 		function init() {
 			getLanguages();
 			getCategories();
 			getDeviser();
+			vm.product = new productDataService.ProductPriv();
+			vm.product.categories = [];
+			vm.product.media = {
+				photos: [],
+				description_photos: []
+			}
+			vm.product.faq = [];
+			vm.product.tags = [];
 		}
 
 		init();
@@ -42,7 +43,16 @@
 				deviser_id: UtilService.returnDeviserIdFromUrl()
 			}).$promise.then(function (dataDeviser) {
 				vm.deviser = dataDeviser;
+				vm.product.deviser_id = dataDeviser.id;
 			});
+		}
+
+		function save() {
+			console.log(vm.product);
+			vm.product.$save()
+				.then(function (dataSaved) {
+					console.log(dataSaved);
+				});
 		}
 
 	}

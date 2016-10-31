@@ -59,6 +59,7 @@
 				</div>
 				<div class="col-md-3 image-press-edit" ng-repeat="image in productBasicInfoCtrl.images">
 					<img class="grid-image" ng-src="{{image.url}}">
+					<span ng-click="productBasicInfoCtrl.openCropModal(image.url, $index)">Edit</span>
 				</div>
 			</div>
 		</div>
