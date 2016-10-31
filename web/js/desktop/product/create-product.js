@@ -42,6 +42,7 @@
 				deviser_id: UtilService.returnDeviserIdFromUrl()
 			}).$promise.then(function (dataDeviser) {
 				vm.deviser = dataDeviser;
+				vm.profile = currentHost()+vm.deviser.url_images+vm.deviser.media.profile_cropped;
 			});
 		}
 

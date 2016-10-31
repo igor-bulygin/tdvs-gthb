@@ -30,6 +30,9 @@ $this->title = $deviser->getBrandName() . ' - Todevise';
 		<div class="pull-left">
 			<a class="back-link" href=""> &lt go back to your profile</a>
 		</div>
+		<div class="avatar">
+			<img ng-src="{{createProductCtrl.profile}}">
+		</div>
 		<div class="text-center"><h4 class="title">New work</h4></div>
 		<div class="btns-group">
 			<button class="btn btn-transparent">Save progress</button>
