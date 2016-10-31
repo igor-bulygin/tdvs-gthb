@@ -4,7 +4,7 @@
 	function controller() {
 		var vm = this;
 		vm.ok = ok;
-		vm.dismiss = dismiss;
+		vm.closeModal = closeModal;
 		vm.title_language = 'en-US';
 		vm.description_language = 'en-US';
 		vm.imageData = {};
@@ -15,8 +15,8 @@
 			});
 		}
 
-		function dismiss() {
-			vm.close();
+		function closeModal() {
+			vm.dismiss();
 		}
 
 	}
@@ -28,7 +28,8 @@
 		bindings: {
 			resolve: '<',
 			close: '&',
-			dismiss: '&'
+			dismiss: '&',
+			modalInstance: '<'
 		}
 	}
 

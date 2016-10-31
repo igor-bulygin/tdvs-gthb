@@ -1,11 +1,12 @@
 (function () {
 	"use strict";
 
-	function controller(Upload, $uibModal){
+	function controller(Upload, $uibModal, productDataService, UtilService){
 		var vm = this;
 		vm.description_language = 'en-US';
 		vm.tags_language = 'en-US';
 		vm.faq_selected = false;
+		vm.images = [];
 		vm.parseQuestion = parseQuestion;
 		vm.isLanguageOk = isLanguageOk;
 		vm.addFaq = addFaq;
@@ -16,6 +17,7 @@
 		vm.addTag = addTag;
 		vm.removeTag = removeTag;
 		vm.openCropModal = openCropModal;
+		vm.deleteImage = deleteImage;
 
 		function init(){
 			//init functions
@@ -74,34 +76,66 @@
 		}
 
 		function openCropModal(photo) {
-			var modalInstance = $uibModal.open({
-				component: 'modalCropDescription',
-				resolve: {
-					photo: function() {
-						return photo;
-					},
-					languages: function() {
-						return vm.languages;
-					}
-				},
-				size: 'lg'
-			});
+			if(vm.images.length < 4) {
+				if(photo) {
+					var modalInstance = $uibModal.open({
+						component: 'modalCropDescription',
+						resolve: {
+							photo: function() {
+								return photo;
+							},
+							languages: function() {
+								return vm.languages;
+							}
+						},
+						size: 'lg'
+					});
 
-			modalInstance.result.then(function (imageData) {
-				if(imageData && (imageData.imageCropped || imageData.title || imageData.description)) {
-						//upload cropped photo
-						//save
-						vm.product.media.description_photos.unshift({
-							title: imageData.title,
-							description: imageData.description
-						});
+					modalInstance.result.then(function (imageData) {
+						if(angular.isObject(imageData) && (imageData.photoCropped || imageData.title || imageData.description)) {
+								//upload cropped photo
+								var type;
+								if(vm.product.id) {
+									type = "known-product-photo";
+								} else {
+									type = "unknown-product-photo";
+								}
+								var data = {
+									type: type,
+									deviser_id: UtilService.returnDeviserIdFromUrl(),
+									file: Upload.dataUrltoBlob(imageData.photoCropped, "temp.png")
+								};
+								Upload.upload({
+									url: productDataService.Uploads,
+									data: data
+								}).then(function (dataUpload) {
+									//save photo
+									vm.images.unshift({
+										url: currentHost() + '/' + dataUpload.data.url
+									})
+									vm.product.media.description_photos.unshift({
+										name: dataUpload.data.filename,
+										title: imageData.title,
+										description: imageData.description
+									});
+								})
+						}
+					}, function (err) {
+						//errors
+						console.log("dismissed!");
+					});
 				}
-			}, function (err) {
-				//errors
-				console.log("dismissed!");
-			});
+			} else {
+				//max description photos reached
+			}
 		}
 
+		function deleteImage(index) {
+			if(index > -1) {
+				vm.images.splice(index, 1);
+				vm.product.media.description_photos.splice(index, 1);
+			}
+		}
 		//watches
 
 		//events

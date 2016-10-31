@@ -136,7 +136,6 @@
 						vm.product.media.photos[index].filename = dataUpload.data.filename;
 						unSetMainPhoto();
 						vm.product.media.photos[index]['main_product_photo'] = true;
-						console.log(vm.product);
 					})
 				}
 			}, function(err) {
