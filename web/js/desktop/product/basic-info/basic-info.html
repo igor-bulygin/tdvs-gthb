@@ -59,9 +59,9 @@
 				</div>
 				<div class="col-md-2 image-basic-info-edit" ng-repeat="image in productBasicInfoCtrl.images">
 					<img class="grid-image" ng-src="{{image.url}}">
-					<div class="crop ion-crop" ng-click="productBasicInfoCtrl.openCropModal(image.url, $index)"></div>
+					<div class="crop ion-android-star-outline" ng-click="productBasicInfoCtrl.openCropModal(image.url, $index)"></div>
 					<span class="delete ion-android-close" ng-click="productBasicInfoCtrl.deleteImage($index)"></span>
-					<p ng-if="productBasicInfoCtrl.product.media.photos[$index].main_product_photo">Marked as main photo</p>
+					<p class="main-marked" ng-if="productBasicInfoCtrl.product.media.photos[$index].main_product_photo">Marked as main photo</p>
 				</div>
 			</div>
 		</div>
