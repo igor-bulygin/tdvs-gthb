@@ -24,9 +24,9 @@
 				<span class="optional-text">Optional</span>
 			</div>
 			<div class="col-md-8">
-				<div class="col-md-2">
+				<div class="col-md-2 pad-about mr-15">
 					<div ng-if="productMoreDetailsCtrl.isDropAvailable">
-						<div class="basic-info-add-photos" ngf-drop-available="productMoreDetailsCtrl.isDropAvailable" ngf-drag-over-class="drag-over" ngf-drop ngf-select="productMoreDetailsCtrl.openCropModal($file)" ngf-accept="'image/*'">
+						<div class="description-add-photos" ngf-drop-available="productMoreDetailsCtrl.isDropAvailable" ngf-drag-over-class="drag-over" ngf-drop ngf-select="productMoreDetailsCtrl.openCropModal($file)" ngf-accept="'image/*'">
 							<div class="plus-add-wrapper">
 								<div class="plus-add">
 									<span>+</span>
@@ -36,12 +36,12 @@
 						</div>
 					</div>
 					<div ngf-no-file-drop>
-						<input type="file" name="file" ngf-select="productMoreDetailsCtrl.openCropModal($file)"" ngf-accept="'image/*'" ngf-drop-available="productMoreDetailsCtrl.isDropAvailable" ngf-multiple="true">
+						<input type="file" name="file" ngf-select="productMoreDetailsCtrl.openCropModal($file)" ngf-accept="'image/*'" ngf-drop-available="productMoreDetailsCtrl.isDropAvailable" ngf-multiple="true">
 					</div>
 				</div>
-				<div class="col-md-3 image-press-edit" ng-repeat="image in productMoreDetailsCtrl.images">
+				<div class="col-md-2 image-description-edit" ng-repeat="image in productMoreDetailsCtrl.images">
 					<img class="grid-image" ng-src="{{image.url}}" alt="">
-					<div ng-click="productMoreDetailsCtrl.deleteImage($index)">Delete</div>
+					<span class="delete ion-android-close" ng-click="productMoreDetailsCtrl.deleteImage($index)"></span>
 				</div>
 			</div>
 			<div class="col-md-3">
@@ -55,12 +55,12 @@
 				<span class="optional-text">Optional</span>
 			</div>
 			<div class="col-md-8">
-				<ol class="about-edit-select nya-bs-select" ng-model="productMoreDetailsCtrl.tags_language">
+				<ol class="about-edit-select title-lang-btn nya-bs-select" ng-model="productMoreDetailsCtrl.tags_language">
 					<li nya-bs-option="language in productMoreDetailsCtrl.languages" data-value="language.code" deep-watch="true">
 						<a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
 					</li>
 				</ol>
-				<tags-input ng-model="productMoreDetailsCtrl.tags[productMoreDetailsCtrl.tags_language]" on-tag-added="productMoreDetailsCtrl.addTag($tag)" on-tag-removed="productMoreDetailsCtrl.removeTag($tag)"></tags-input>
+				<tags-input class="tags-wrapper" ng-model="productMoreDetailsCtrl.tags[productMoreDetailsCtrl.tags_language]" on-tag-added="productMoreDetailsCtrl.addTag($tag)" on-tag-removed="productMoreDetailsCtrl.removeTag($tag)"></tags-input>
 			</div>
 			<div class="col-md-3">
 				<p class="info">Use as many tags as possible, both broad and specific, to increase the chances to be found when our customers use our search engine. Tags can be translated as well.</p>
