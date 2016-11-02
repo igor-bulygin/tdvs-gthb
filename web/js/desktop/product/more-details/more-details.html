@@ -75,16 +75,31 @@
 				<div class="form-group">
 					<p>Do you want to write FAQ question specific for this product?</p>
 					<div class="radio">
+						  <input type="radio" name="faq_selected" id="faq_selected" value="faq_selected" ng-model="productMoreDetailsCtrl.faq_selected" ng-value="true" ng-change="productMoreDetailsCtrl.showFaq()">
+						  <label for="faq_selected">
+							  YES
+						  </label>
+					  </div>
+					  <div class="radio">
+						  <input type="radio" name="faq_unselected" id="faq_unselected" value="faq_unselected" ng-model="productMoreDetailsCtrl.faq_selected" ng-value="false" checked>
+						  <label for="faq_unselected">
+							  NO
+						  </label>
+					  </div>
+					<!--<div class="radio">
 						<label>
-							<input type="radio" name="faq_selected" ng-model="productMoreDetailsCtrl.faq_selected" ng-value="true" ng-change="productMoreDetailsCtrl.showFaq()"> Yes
+							 <input type="radio" name="faq_selected" ng-model="productMoreDetailsCtrl.faq_selected" ng-value="true" ng-change="productMoreDetailsCtrl.showFaq()">
+							 Yes
 						</label>
 					</div>
 					<div class="radio">
 						<label>
-							<input type="radio" name="faq_selected" ng-model="productMoreDetailsCtrl.faq_selected" ng-value="false"> No
+							 <input type="radio" name="faq_selected" ng-model="productMoreDetailsCtrl.faq_selected" ng-value="false">
+							 No
 						</label>
-					</div>
+					</div>-->
 				</div>
+				<div><pre>{{productMoreDetailsCtrl.faq_selected}}</pre></div>
 				<div ng-if="productMoreDetailsCtrl.faq_selected">
 					<div class="col-md-12" ng-repeat="question in productMoreDetailsCtrl.product.faq track by $index" class="delete-options-wrapper">
 						<a href="" class="delete-link pull-right" ng-click="productMoreDetailsCtrl.deleteQuestion($index)">Delete question</a>

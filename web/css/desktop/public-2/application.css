@@ -221,6 +221,9 @@ a:focus {
   -webkit-box-shadow: none !important;
   box-shadow: none !important; }
 
+.radio input[type="radio"]:focus + label::before {
+  outline: none !important; }
+
 * {
   -moz-box-sizing: border-box;
   box-sizing: border-box; }
