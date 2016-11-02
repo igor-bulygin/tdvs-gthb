@@ -6,12 +6,12 @@
 				<label for="description">Description</label>
 			</div>
 			<div class="col-md-8">
-				<ol class="about-edit-select nya-bs-select" ng-model="productMoreDetailsCtrl.description_language">
+				<ol class="about-edit-select title-lang-btn nya-bs-select" ng-model="productMoreDetailsCtrl.description_language">
 					<li nya-bs-option="language in productMoreDetailsCtrl.languages" data-value="language.code" deep-watch="true">
 						<a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
 					</li>
 				</ol>
-				<div class="ng-class:{'error-input': productMoreDetailsCtrl.descriptionRequired}" text-angular ng-model="productMoreDetailsCtrl.product.description[productMoreDetailsCtrl.description_language]" ng-cloak ta-toolbar="[]"></div>
+				<div class="description-input ng-class:{'error-input': productMoreDetailsCtrl.descriptionRequired}" text-angular ng-model="productMoreDetailsCtrl.product.description[productMoreDetailsCtrl.description_language]" ng-cloak ta-toolbar="[]"></div>
 				<div class="error-text" ng-if="productMoreDetailsCtrl.descriptionRequired">Description in english is mandatory.</div>
 			</div>
 			<div class="col-md-3">

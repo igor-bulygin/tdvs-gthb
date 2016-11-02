@@ -3741,6 +3741,15 @@ input[type="radio"] .styled:checked + label::after {
         border-radius: 25px 25px 25px 25px !important;
         -webkit-border-radius: 25px 25px 25px 25px !important;
         -moz-border-radius: 25px 25px 25px 25px !important; }
+      .create-work-wrapper .card .row .description-input .ta-editor.ta-html, .create-work-wrapper .card .row .description-input .ta-scroll-window.form-control {
+        margin-top: -20px;
+        padding: 50px 20px 0;
+        min-height: 175px;
+        border-radius: 25px 25px 25px 25px !important;
+        -webkit-border-radius: 25px 25px 25px 25px !important;
+        -moz-border-radius: 25px 25px 25px 25px !important; }
+      .create-work-wrapper .card .row .description-input .ta-scroll-window.form-control {
+        height: auto !important; }
 
 .items-row {
   margin-left: 0; }
