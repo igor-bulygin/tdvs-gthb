@@ -147,23 +147,49 @@
 	}
 }
 .image-basic-info-edit{
-	background-color: #bfbfbf;
-    border-radius: 14px 14px 14px 14px !important;
-    -webkit-border-radius: 14px 14px 14px 14px !important;
-    -moz-border-radius: 14px 14px 14px 14px !important;
-    cursor: move;
-    height: 127px;
-    position: relative;
-    /* margin-top: 10px; */
+		background-color: $light_grey;
+		@include border-radius(14px,14px,14px,14px);
+		cursor: move;
+		height: 127px;
+		position: relative;
+		margin: 0 15px 15px 0;
 	img{
-		    max-height: 123px;
-    width: auto;
-    max-width: 123px;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    margin: auto;
+		max-height: 122px;
+		width: auto;
+		max-width: 122px;
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		margin: auto;
+	}
+	.crop{
+		background-color: $dark_grey;
+		color: $white;
+		cursor: pointer;
+		position: absolute;
+		right: 35px;
+    	top: 5px;
+		width: 25px;
+		height: 25px;
+		font-size: 16px;
+		text-align: center;
+		padding: 1px 0 0 0;
+		@include border-radius(7px,7px,7px,7px);
+	}
+	.delete{
+		background-color: $dark_grey;
+		color: $white;
+		cursor: pointer;
+		position: absolute;
+		right: 5px;
+    	top: 5px;
+		width: 25px;
+		height: 25px;
+		font-size: 16px;
+		text-align: center;
+		padding: 1px 0 0 0;
+		@include border-radius(7px,7px,7px,7px);
 	}
 }

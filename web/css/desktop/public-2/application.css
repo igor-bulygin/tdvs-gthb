@@ -279,6 +279,9 @@ ul {
 .error-text {
   color: #924cfc !important; }
 
+.mr-15 {
+  margin-right: 15px; }
+
 /* Dont display dropable zone on dragg and drop */
 .dndDraggingSource {
   display: none; }
@@ -3836,17 +3839,47 @@ input[type="radio"] .styled:checked + label::after {
   cursor: move;
   height: 127px;
   position: relative;
-  /* margin-top: 10px; */ }
+  margin: 0 15px 15px 0; }
   .image-basic-info-edit img {
-    max-height: 123px;
+    max-height: 122px;
     width: auto;
-    max-width: 123px;
+    max-width: 122px;
     position: absolute;
     left: 0;
     right: 0;
     top: 0;
     bottom: 0;
     margin: auto; }
+  .image-basic-info-edit .crop {
+    background-color: #9a9a9a;
+    color: #ffffff;
+    cursor: pointer;
+    position: absolute;
+    right: 35px;
+    top: 5px;
+    width: 25px;
+    height: 25px;
+    font-size: 16px;
+    text-align: center;
+    padding: 1px 0 0 0;
+    border-radius: 7px 7px 7px 7px !important;
+    -webkit-border-radius: 7px 7px 7px 7px !important;
+    -moz-border-radius: 7px 7px 7px 7px !important; }
+  .image-basic-info-edit .delete {
+    background-color: #9a9a9a;
+    color: #ffffff;
+    cursor: pointer;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    width: 25px;
+    height: 25px;
+    font-size: 16px;
+    text-align: center;
+    padding: 1px 0 0 0;
+    border-radius: 7px 7px 7px 7px !important;
+    -webkit-border-radius: 7px 7px 7px 7px !important;
+    -moz-border-radius: 7px 7px 7px 7px !important; }
 
 footer {
   width: 100%;
