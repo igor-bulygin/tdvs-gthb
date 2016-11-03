@@ -86,22 +86,9 @@
 							  NO
 						  </label>
 					  </div>
-					<!--<div class="radio">
-						<label>
-							 <input type="radio" name="faq_selected" ng-model="productMoreDetailsCtrl.faq_selected" ng-value="true" ng-change="productMoreDetailsCtrl.showFaq()">
-							 Yes
-						</label>
-					</div>
-					<div class="radio">
-						<label>
-							 <input type="radio" name="faq_selected" ng-model="productMoreDetailsCtrl.faq_selected" ng-value="false">
-							 No
-						</label>
-					</div>-->
 				</div>
-				<div><pre>{{productMoreDetailsCtrl.faq_selected}}</pre></div>
 				<div ng-if="productMoreDetailsCtrl.faq_selected">
-					<div class="col-md-12" ng-repeat="question in productMoreDetailsCtrl.product.faq track by $index" class="delete-options-wrapper">
+					<div class="col-md-12 pad-about" ng-repeat="question in productMoreDetailsCtrl.product.faq track by $index" class="delete-options-wrapper">
 						<a href="" class="delete-link pull-right" ng-click="productMoreDetailsCtrl.deleteQuestion($index)">Delete question</a>
 						<div class="edit-faq-panel">
 							<div class="faq-language-menu">

@@ -4046,11 +4046,17 @@ tags-input .tags .tag-item {
   float: left;
   height: 26px;
   line-height: 25px;
-  border: 1px solid #7AB83A;
+  border: 1px solid #7AB83A !important;
   border-radius: 25px 25px 25px 25px !important;
   -webkit-border-radius: 25px 25px 25px 25px !important;
   -moz-border-radius: 25px 25px 25px 25px !important;
-  background: #7AB83A; }
+  background: #7AB83A !important;
+  color: #1C1919 !important; }
+
+tags-input .tags .tag-item .remove-button {
+  color: #1C1919 !important; }
+  tags-input .tags .tag-item .remove-button:hover {
+    color: #1C1919 !important; }
 
 footer {
   width: 100%;

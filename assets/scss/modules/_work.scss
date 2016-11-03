@@ -346,7 +346,14 @@ tags-input .tags .tag-item {
     float: left;
     height: 26px;
     line-height: 25px;
-    border: 1px solid $dark_green;
+    border: 1px solid $dark_green!important;
     @include border-radius(25px,25px,25px,25px);
-    background: $dark_green;
+    background: $dark_green!important;
+	color: $black!important;
+}
+tags-input .tags .tag-item .remove-button {
+    color: $black!important;
+	&:hover{
+		color: $black!important;
+	}
 }
