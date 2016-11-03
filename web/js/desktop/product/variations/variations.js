@@ -3,6 +3,10 @@
 
 	function controller() {
 		var vm = this;
+		
+
+		//watchs
+		
 	}
 
 	var component = {

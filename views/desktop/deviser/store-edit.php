@@ -55,9 +55,9 @@ $this->params['deviser'] = $deviser;
 												<figure class="cathegory">
 													<img class="<?= ($selectedCategory->short_id==$category->short_id) ? 'active' : '' ?>" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($category->getDeviserProduct()->getMainImage())->resize(240, 175) ?>">
 													<figcaption>
-                                        <span class="name">
-                                            <?= Utils::l($category->name) ?>
-                                        </span>
+														<span class="name">
+															<?= Utils::l($category->name) ?>
+														</span>
 													</figcaption>
 												</figure>
 											</a>
@@ -67,6 +67,30 @@ $this->params['deviser'] = $deviser;
 							<?php } ?>
 							<div class="store-grid">
 								<div class="title-wrapper">
+									<div class="title-wrapper">
+										<span class="title">Unpublished works</span>
+									</div>
+									<nav class="products-menu">
+										<ul>
+											<li><a ng-href=""></a></li><!-- include ng-repeat -->
+										</ul>
+									</nav>
+									<p>Only you are able to see your unpublished works.</p>
+									<div class="mesonry-row" dnd-list="editStoreCtrl.products">
+										<div class="menu-category list-group" ng-repeat="product in editStoreCtrl.products" ng-if="product.main_photo" dnd-draggable="product" dnd-effect-allowed="move" dnd-moved="editStoreCtrl.update($index, product)">
+											<a href="">
+												<div class="grid">
+													<figure class="effect-zoe">
+														<img class="grid-image" ng-src="{{product.main_photo}}">
+														<figcaption>
+															<p class="instauser">{{product.name}}</p>
+															<p class="price">€ 0</p>
+														</figcaption>
+													</figure>
+												</div>
+											</a>
+										</div>
+									</div>
 									<div class="title-wrapper">
 										<span class="title"><?= Utils::l($selectedCategory->name) ?></span>
 									</div>

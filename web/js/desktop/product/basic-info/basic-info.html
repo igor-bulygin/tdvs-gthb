@@ -33,7 +33,7 @@
 					<span class="glyphicon glyphicon-remove close-row" ng-if="$index > 0" ng-click="productBasicInfoCtrl.deleteCategory($index)"></span>
 				</div>
 			</div>
-			<p class="add-cathegory" ng-click="productBasicInfoCtrl.addCategory(productBasicInfoCtrl.categories_helper[$parent.$index].categories_selected[$index])">+ Add another category</p>
+			<span class="add-cathegory" ng-click="productBasicInfoCtrl.addCategory(productBasicInfoCtrl.categories_helper[$parent.$index].categories_selected[$index])">+ Add another category</span>
 		</div>
 		<div class="col-md-3">
 			<p class="info">Your work can go into 1 or more categories.</p>

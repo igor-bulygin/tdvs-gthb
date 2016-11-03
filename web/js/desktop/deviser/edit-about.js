@@ -1,8 +1,6 @@
 (function () {
 	"use strict";
 
-
-
 	function controller(deviserDataService, UtilService, languageDataService, toastr, productDataService, Upload, $timeout, $rootScope, $scope, deviserEvents, $uibModal, dragndropService) {
 		var vm = this;
 		vm.uploadPhoto = uploadPhoto;
