@@ -282,6 +282,9 @@ ul {
 .error-text {
   color: #924cfc !important; }
 
+.mt-20 {
+  margin-top: 20px; }
+
 .mr-15 {
   margin-right: 15px; }
 
@@ -4008,6 +4011,46 @@ tags-input .tags {
 
 tags-input .tags.focused {
   outline: none; }
+
+.crop-modal-large .btn {
+  min-width: 100px;
+  margin: 10px; }
+.crop-modal-large label {
+  font-family: "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-transform: uppercase; }
+.crop-modal-large .crop-input {
+  margin-top: -50px;
+  padding: 30px 20px 0;
+  height: 80px;
+  border-radius: 25px 25px 25px 25px !important;
+  -webkit-border-radius: 25px 25px 25px 25px !important;
+  -moz-border-radius: 25px 25px 25px 25px !important; }
+.crop-modal-large .about-edit-select {
+  left: 15px; }
+.crop-modal-large textarea {
+  margin-top: -50px;
+  padding: 50px 20px 0;
+  height: 150px;
+  border-radius: 25px 25px 25px 25px !important;
+  -webkit-border-radius: 25px 25px 25px 25px !important;
+  -moz-border-radius: 25px 25px 25px 25px !important; }
+
+.block-0 {
+  margin: 0 !important;
+  display: block !important; }
+
+tags-input .tags .tag-item {
+  margin: 2px;
+  padding: 0 5px;
+  display: inline-block;
+  float: left;
+  height: 26px;
+  line-height: 25px;
+  border: 1px solid #7AB83A;
+  border-radius: 25px 25px 25px 25px !important;
+  -webkit-border-radius: 25px 25px 25px 25px !important;
+  -moz-border-radius: 25px 25px 25px 25px !important;
+  background: #7AB83A; }
 
 footer {
   width: 100%;

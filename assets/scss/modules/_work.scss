@@ -310,3 +310,43 @@ tags-input .tags{
 tags-input .tags.focused {
     outline: none;
 }
+.crop-modal-large{
+	.btn{
+		min-width:100px;
+		margin:10px;
+	}
+	label{
+		font-family: $font-family--bold;
+		text-transform: uppercase;
+	}
+	.crop-input{
+		margin-top: -50px;
+		padding: 30px 20px 0;
+		height: 80px;
+		@include border-radius(25px,25px,25px,25px);
+	}
+	.about-edit-select{
+		left: 15px;
+	}
+	textarea{
+		margin-top: -50px;
+		padding: 50px 20px 0;
+		height: 150px;
+		@include border-radius(25px,25px,25px,25px);
+	}
+}
+.block-0{
+	margin: 0!important;
+	display: block!important;
+}
+tags-input .tags .tag-item {
+    margin: 2px;
+    padding: 0 5px;
+    display: inline-block;
+    float: left;
+    height: 26px;
+    line-height: 25px;
+    border: 1px solid $dark_green;
+    @include border-radius(25px,25px,25px,25px);
+    background: $dark_green;
+}
