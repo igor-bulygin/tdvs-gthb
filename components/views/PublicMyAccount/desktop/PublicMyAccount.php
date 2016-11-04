@@ -74,7 +74,7 @@ publicMyAccountAsset::register($this);
 			<div class="profile_wrapper flex flex-justify-between">
 				<div class="profile">
 					<img src="" alt="" />
-					<span class="funiv_bold fc-1c1919 fs0-813"><?= $deviser["personal_info"]["name"] . " " . implode(" ", $deviser["personal_info"]["surnames"]) ?></span>
+					<span class="funiv_bold fc-1c1919 fs0-813"><?= $deviser["personal_info"]["name"] . " " . (isset($deviser["personal_info"]["surnames"]) && $deviser["personal_info"]["surnames"] != null?implode(" ", $deviser["personal_info"]["surnames"]):""); ?></span>
 				</div>
 				<?= Html::a(Yii::t("app/public", "View profile"), ["deviser/view-profile"], [
 					'class' => 'fs-univ fc-6d fs0-857 view_profile_label'
