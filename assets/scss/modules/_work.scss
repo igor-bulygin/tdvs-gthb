@@ -341,14 +341,14 @@ tags-input .tags.focused {
 }
 tags-input .tags .tag-item {
     margin: 2px;
-    padding: 0 5px;
+    padding: 0 10px!important;
     display: inline-block;
     float: left;
     height: 26px;
     line-height: 25px;
-    border: 1px solid $dark_green!important;
+    border: 1px solid $green!important;
     @include border-radius(25px,25px,25px,25px);
-    background: $dark_green!important;
+    background: $green!important;
 	color: $black!important;
 }
 tags-input .tags .tag-item .remove-button {
@@ -356,4 +356,16 @@ tags-input .tags .tag-item .remove-button {
 	&:hover{
 		color: $black!important;
 	}
+}
+.radio-inline{
+	display: inline!important;
+}
+.black-link{
+	@extend %link-black;
+}
+tags-input .tags .input {
+    font-family: $font-family--primary!important;
+}
+tags-input .tags .tag-item {
+	font-family: $font-family--primary!important;
 }

@@ -291,6 +291,9 @@ ul {
 .ml-15 {
   margin-left: 15px; }
 
+.ml-30 {
+  margin-left: 30px; }
+
 /* Dont display dropable zone on dragg and drop */
 .dndDraggingSource {
   display: none; }
@@ -982,6 +985,24 @@ input[type="radio"] .styled:checked + label::after {
   color: #F7284B !important; }
   .log a:hover, .add-lang:hover, .request-invitation-wrapper .request-invitation-container .add-new:hover {
     color: #C91C39 !important;
+    text-decoration: none;
+    -moz-transition-property: color;
+    -o-transition-property: color;
+    -webkit-transition-property: color;
+    transition-property: color;
+    -moz-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -moz-transition-timing-function: ease-out;
+    -o-transition-timing-function: ease-out;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out; }
+
+.black-link {
+  color: #1C1919 !important; }
+  .black-link:hover {
+    color: #9a9a9a !important;
     text-decoration: none;
     -moz-transition-property: color;
     -o-transition-property: color;
@@ -4041,22 +4062,31 @@ tags-input .tags.focused {
 
 tags-input .tags .tag-item {
   margin: 2px;
-  padding: 0 5px;
+  padding: 0 10px !important;
   display: inline-block;
   float: left;
   height: 26px;
   line-height: 25px;
-  border: 1px solid #7AB83A !important;
+  border: 1px solid #B8E986 !important;
   border-radius: 25px 25px 25px 25px !important;
   -webkit-border-radius: 25px 25px 25px 25px !important;
   -moz-border-radius: 25px 25px 25px 25px !important;
-  background: #7AB83A !important;
+  background: #B8E986 !important;
   color: #1C1919 !important; }
 
 tags-input .tags .tag-item .remove-button {
   color: #1C1919 !important; }
   tags-input .tags .tag-item .remove-button:hover {
     color: #1C1919 !important; }
+
+.radio-inline {
+  display: inline !important; }
+
+tags-input .tags .input {
+  font-family: "Univers Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif !important; }
+
+tags-input .tags .tag-item {
+  font-family: "Univers Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif !important; }
 
 footer {
   width: 100%;
