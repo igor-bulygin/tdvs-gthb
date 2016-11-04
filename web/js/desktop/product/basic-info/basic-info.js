@@ -71,12 +71,12 @@
 		function uploadPhoto(images, errImages) {
 			vm.files = images;
 			vm.errFiles = errImages;
-			var type;
-			if(vm.product.id)
-				type = 'known-product-photo';
-			else {
-				type = 'unknown-product-photo';
-			}
+			var type = 'unknown-product-photo';
+			// if(vm.product.id)
+			// 	type = 'known-product-photo';
+			// else {
+			// 	type = 'unknown-product-photo';
+			// }
 			//upload photos
 			angular.forEach(vm.files, function(file) {
 				var data = {
@@ -115,12 +115,12 @@
 			modalInstance.result.then(function(imageCropped) {
 				if(imageCropped) {
 					//upload image
-					var type;
-					if(vm.product.id)
-						type = 'known-product-photo';
-					else {
-						type = 'unknown-product-photo';
-					}
+					var type = 'unknown-product-photo';
+					// if(vm.product.id)
+					// 	type = 'known-product-photo';
+					// else {
+					// 	type = 'unknown-product-photo';
+					// }
 					var data = {
 						type: type,
 						deviser_id: UtilService.returnDeviserIdFromUrl(),

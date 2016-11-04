@@ -1,21 +1,16 @@
 (function () {
 
-	function controller(deviserDataService, productDataService, languageDataService, toastr, UtilService) {
+	function controller(deviserDataService, productDataService, languageDataService, toastr, UtilService, localStorageService) {
 		var vm = this;
 		vm.save = save;
+		vm.product = {};
 
 		function init() {
 			getLanguages();
 			getCategories();
 			getDeviser();
-			vm.product = new productDataService.ProductPriv();
-			vm.product.categories = [];
-			vm.product.media = {
-				photos: [],
-				description_photos: []
-			}
-			vm.product.faq = [];
-			vm.product.tags = [];
+			getStorage();
+			
 		}
 
 		init();
@@ -48,12 +43,31 @@
 			});
 		}
 
+		function getStorage() {
+			vm.products = localStorageService.get('draftProducts');
+			if(vm.products === undefined || vm.products === null) {
+				vm.products = [];
+				localStorageService.set('draftProducts', vm.products);
+			}
+			// vm.product = new productDataService.ProductPriv();
+			vm.product.categories = [];
+			vm.product.id = vm.products.length+1;
+			vm.product.media = {
+				photos: [],
+				description_photos: []
+			}
+			vm.product.faq = [];
+			vm.product.tags = [];
+		}
+
 		function save() {
-			console.log(vm.product);
-			vm.product.$save()
-				.then(function (dataSaved) {
-					console.log(dataSaved);
-				});
+			vm.products.push(vm.product);
+			localStorageService.set('draftProducts', vm.products);
+			toastr.success('Saved!');
+			// vm.product.$save()
+			// 	.then(function (dataSaved) {
+			// 		console.log(dataSaved);
+			// 	});
 		}
 
 	}

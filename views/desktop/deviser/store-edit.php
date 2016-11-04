@@ -76,14 +76,14 @@ $this->params['deviser'] = $deviser;
 										</ul>
 									</nav>
 									<p>Only you are able to see your unpublished works.</p>
-									<div class="mesonry-row" dnd-list="editStoreCtrl.products">
-										<div class="menu-category list-group" ng-repeat="product in editStoreCtrl.products" ng-if="product.main_photo" dnd-draggable="product" dnd-effect-allowed="move" dnd-moved="editStoreCtrl.update($index, product)">
+									<div class="mesonry-row">
+										<div class="menu-category list-group" ng-repeat="product in editStoreCtrl.unpublishedProducts">
 											<a href="">
 												<div class="grid">
 													<figure class="effect-zoe">
 														<img class="grid-image" ng-src="{{product.main_photo}}">
 														<figcaption>
-															<p class="instauser">{{product.name}}</p>
+															<p class="instauser">{{product.name[editStoreCtrl.language]}}</p>
 															<p class="price">€ 0</p>
 														</figcaption>
 													</figure>

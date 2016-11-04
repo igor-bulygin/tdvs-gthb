@@ -22,6 +22,7 @@ class IndexAsset extends AssetBundle {
 		'app\assets\libs\angularDragAndDropAsset',
 		'app\assets\libs\ngYoutubeEmbedAsset',
 		'app\assets\libs\ngImgCropAsset',
-		'app\assets\libs\macyAsset'
+		'app\assets\libs\angularMasonryAsset',
+		'app\assets\libs\angularLocalStorageAsset'
 	];
 }

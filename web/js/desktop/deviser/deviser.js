@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function config(nyaBsConfigProvider, $provide) {
+	function config(nyaBsConfigProvider, $provide, localStorageServiceProvider) {
 		nyaBsConfigProvider.setLocalizedText('en-us', {
 			defaultNoneSelection: 'Choose an option'
 		});
@@ -12,9 +12,12 @@
 			deviser_updated: 'deviser-updated',
 			make_profile_public_errors: 'make-profile-public-errors'
 		});
+
+		localStorageServiceProvider
+			.setPrefix('todevise-');
 	}
 
 	angular
-		.module('todevise', ['api', 'util', 'toastr', 'nya.bootstrap.select', 'textAngular', 'ngFileUpload', 'dndLists', 'ui.bootstrap', 'ngYoutubeEmbed', 'ngImgCrop'])
+		.module('todevise', ['api', 'util', 'toastr', 'nya.bootstrap.select', 'textAngular', 'ngFileUpload', 'dndLists', 'ui.bootstrap', 'ngYoutubeEmbed', 'ngImgCrop', 'LocalStorageModule'])
 		.config(config)
 }());

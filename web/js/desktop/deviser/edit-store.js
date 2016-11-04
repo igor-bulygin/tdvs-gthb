@@ -1,9 +1,11 @@
 (function () {
 	"use strict";
 
-	function controller(productDataService, UtilService, toastr, $location) {
+	function controller(productDataService, UtilService, toastr, $location, localStorageService) {
 		var vm = this;
 		vm.update = update;
+		vm.deviser_id = UtilService.returnDeviserIdFromUrl();
+		vm.language = 'en-US';
 
 		function parseCategories() {
 			var url = $location.absUrl();
@@ -33,18 +35,31 @@
 			}
 			productDataService.Product.get(data).$promise.then(function (dataProducts) {
 				vm.products = dataProducts.items;
-				vm.products.forEach(function (element) {
-					for (var i = 0; i < element.media.photos.length; i++) {
-						if (element.media.photos[i].main_product_photo)
-							element.main_photo = currentHost() + element.url_images + element.media.photos[i].name;
-					}
-				})
+				parseMainPhoto(vm.products);
 			});
+		}
+
+		function getUnpublishedProducts() {
+			vm.allUnpublishedProducts = localStorageService.get('draftProducts');
+			if(vm.allUnpublishedProducts !== undefined && vm.allUnpublishedProducts !== null) {
+				vm.unpublishedProducts = [];
+				for(var i = 0; i < vm.allUnpublishedProducts.length; i++) {
+					if(vm.allUnpublishedProducts[i].deviser_id === vm.deviser_id) {
+						vm.allUnpublishedProducts[i].url_images = '/uploads/product/temp/';
+						vm.unpublishedProducts.push(vm.allUnpublishedProducts[i]);
+					}
+				}
+				if(vm.unpublishedProducts.length > 0) {
+					parseMainPhoto(vm.unpublishedProducts);
+				}
+				
+			}
 		}
 
 		function init() {
 			parseCategories();
 			getProducts();
+			getUnpublishedProducts();
 		}
 
 		function update(index, product) {
@@ -69,6 +84,15 @@
 			} else {
 				toastr.error("Cannot be updated!");
 			}
+		}
+
+		function parseMainPhoto(products) {
+			products.forEach(function (element) {
+					for (var i = 0; i < element.media.photos.length; i++) {
+						if (element.media.photos[i].main_product_photo)
+							element.main_photo = currentHost() + element.url_images + element.media.photos[i].name;
+					}
+				});
 		}
 
 		init();
