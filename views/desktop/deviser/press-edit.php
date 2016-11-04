@@ -21,7 +21,7 @@ $this->params['deviser_links_target'] = 'edit_view';
 
 ?>
 
-	<?= DeviserAdminHeader::widget() ?>
+	<?= DeviserHeader::widget() ?>
 	<?php if ($deviser->isDraft()) { ?>
 		<?= DeviserMakeProfilePublic::widget() ?>
 	<?php } ?>

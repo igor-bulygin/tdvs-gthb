@@ -28,10 +28,10 @@ $this->params['deviser_links_target'] = 'edit_view';
 
 ?>
 
+	<?= DeviserHeader::widget() ?>
 	<?php if ($deviser->isDraft()) { ?>
 		<?= DeviserMakeProfilePublic::widget() ?>
-			<?php } ?>
-	<?= DeviserAdminHeader::widget() ?>
+	<?php } ?>
 
 					<div class="store">
 						<div class="container">
