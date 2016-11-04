@@ -37,6 +37,9 @@ $deviser = $this->params['deviser'];
                         </div>
 					</div>
 				</div>
+	
+					<a class="btn btn-default btn-green btn-add-work" href="">Add Work</a>
+
 			</div>
 		</div>
 	</div>

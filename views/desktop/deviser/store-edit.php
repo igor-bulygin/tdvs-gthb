@@ -37,7 +37,7 @@ $this->params['deviser'] = $deviser;
 	<?php if ($deviser->isDraft()) { ?>
 		<?= DeviserMakeProfilePublic::widget() ?>
 	<?php } ?>
-	<?= DeviserAdminHeader::widget() ?>
+	<?= DeviserHeader::widget() ?>
 
 		<div class="store">
 			<div class="container">
