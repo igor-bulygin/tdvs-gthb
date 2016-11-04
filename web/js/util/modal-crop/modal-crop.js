@@ -28,6 +28,7 @@
 			case "work_photo":
 				vm.area_type = 'rectangle';
 				vm.aspect_ratio = 0.8;
+				vm.size = 'max';
 				break;
 			default: 
 				vm.area_type = 'rectangle';
