@@ -38,7 +38,7 @@ $deviser = $this->params['deviser'];
 					</div>
 				</div>
 	
-					<a class="btn btn-default btn-green btn-add-work" href="">Add Work</a>
+					<a class="btn btn-default btn-green btn-add-work" href="<?= Url::to(["product/create", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id])?>">Add Work</a>
 
 			</div>
 		</div>
