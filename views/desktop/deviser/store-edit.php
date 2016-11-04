@@ -77,7 +77,7 @@ $this->params['deviser'] = $deviser;
 									</nav>
 									<p>Only you are able to see your unpublished works.</p>
 									<div class="mesonry-row">
-										<div class="menu-category list-group" ng-repeat="product in editStoreCtrl.unpublishedProducts">
+										<div class="menu-category list-group pull-left" ng-repeat="product in editStoreCtrl.unpublishedProducts">
 											<a href="">
 												<div class="grid">
 													<figure class="effect-zoe">

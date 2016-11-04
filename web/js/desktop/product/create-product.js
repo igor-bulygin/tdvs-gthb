@@ -4,6 +4,8 @@
 		var vm = this;
 		vm.save = save;
 		vm.product = {};
+		vm.deviser_id = UtilService.returnDeviserIdFromUrl();
+
 
 		function init() {
 			getLanguages();
@@ -38,6 +40,7 @@
 				deviser_id: UtilService.returnDeviserIdFromUrl()
 			}).$promise.then(function (dataDeviser) {
 				vm.deviser = dataDeviser;
+				vm.link_profile = '/deviser/' + dataDeviser.slug + '/' + dataDeviser.id + '/store/edit';
 				vm.profile = currentHost()+vm.deviser.url_images+vm.deviser.media.profile_cropped;
 				vm.product.deviser_id = dataDeviser.id;
 			});

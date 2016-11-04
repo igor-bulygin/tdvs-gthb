@@ -133,7 +133,7 @@
 						//set image filename in vm.images[index].url
 						vm.images[index].url = currentHost() + '/' + dataUpload.data.url;
 						//set image filename in vm.product.media.photos[index].filename
-						vm.product.media.photos[index].filename = dataUpload.data.filename;
+						vm.product.media.photos[index].name = dataUpload.data.filename;
 						unSetMainPhoto();
 						vm.product.media.photos[index]['main_product_photo'] = true;
 					})

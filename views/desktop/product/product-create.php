@@ -28,7 +28,7 @@ $this->title = $deviser->getBrandName() . ' - Todevise';
 <div ng-controller="createProductCtrl as createProductCtrl" class="create-work-wrapper">
 	<div id="newProductHeader" class="new-product-header">
 		<div class="pull-left">
-			<a class="back-link" href=""> &lt go back to your profile</a>
+			<a class="back-link" ng-href="{{createProductCtrl.link_profile}}"> &lt go back to your profile</a>
 		</div>
 		<div class="avatar">
 			<img ng-src="{{createProductCtrl.profile}}">
@@ -36,7 +36,7 @@ $this->title = $deviser->getBrandName() . ' - Todevise';
 		<div class="text-center"><h4 class="title">New work</h4></div>
 		<div class="btns-group">
 			<button class="btn btn-transparent" ng-click="createProductCtrl.save()">Save progress</button>
-			<button class="btn btn-default btn-green">Publish work</button>
+			<button class="btn btn-default btn-green" disabled>Publish work</button>
 		</div>
 	</div>
 	<div class="container">
