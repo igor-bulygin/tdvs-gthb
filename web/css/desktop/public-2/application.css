@@ -621,6 +621,9 @@ a, a:hover, a:focus {
 .pad-about {
   padding: 0; }
 
+.m-0 {
+  margin: 0 !important; }
+
 .black-form label {
   font-family: "Univers Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: bold;
@@ -4087,6 +4090,13 @@ tags-input .tags .input {
 
 tags-input .tags .tag-item {
   font-family: "Univers Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif !important; }
+
+.message-tagline {
+  text-align: left;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 5px 0 10px;
+  color: #6b6b6b; }
 
 footer {
   width: 100%;

@@ -369,3 +369,10 @@ tags-input .tags .input {
 tags-input .tags .tag-item {
 	font-family: $font-family--primary!important;
 }
+.message-tagline{
+	text-align: left;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 5px 0 10px;
+	color: $darker_grey;
+}

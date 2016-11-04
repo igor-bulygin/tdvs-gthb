@@ -70,28 +70,25 @@ $this->params['deviser'] = $deviser;
 									<div class="title-wrapper">
 										<span class="title">Unpublished works</span>
 									</div>
-									<nav class="products-menu">
-										<ul>
-											<li><a ng-href=""></a></li><!-- include ng-repeat -->
-										</ul>
-									</nav>
-									<p>Only you are able to see your unpublished works.</p>
-									<div class="mesonry-row">
-										<div class="menu-category list-group pull-left" ng-repeat="product in editStoreCtrl.unpublishedProducts">
-											<a href="">
-												<div class="grid">
-													<figure class="effect-zoe">
-														<img class="grid-image" ng-src="{{product.main_photo}}">
-														<figcaption>
-															<p class="instauser">{{product.name[editStoreCtrl.language]}}</p>
-															<p class="price">€ 0</p>
-														</figcaption>
-													</figure>
-												</div>
-											</a>
+									<p class="message-tagline">Only you are able to see your unpublished works.</p>
+									<div class="row m-0">
+										<div class="col-md-3 pad-grid" ng-repeat="product in editStoreCtrl.unpublishedProducts">
+
+												<a href="">
+													<div class="grid">
+														<figure class="effect-zoe">
+															<img class="grid-image" ng-src="{{product.main_photo}}">
+															<figcaption>
+																<p class="instauser">{{product.name[editStoreCtrl.language]}}</p>
+																<p class="price">€ 0</p>
+															</figcaption>
+														</figure>
+													</div>
+												</a>
+				
 										</div>
 									</div>
-									<div class="title-wrapper">
+									<div class="mt-20">
 										<span class="title"><?= Utils::l($selectedCategory->name) ?></span>
 									</div>
 									<nav class="products-menu">
