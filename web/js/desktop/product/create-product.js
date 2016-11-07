@@ -61,6 +61,9 @@
 			}
 			vm.product.faq = [];
 			vm.product.tags = [];
+			vm.product.madetoorder = {
+				type: 0
+			}
 		}
 
 		function save() {

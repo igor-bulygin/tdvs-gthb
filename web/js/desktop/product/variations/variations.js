@@ -3,7 +3,21 @@
 
 	function controller() {
 		var vm = this;
-		
+		vm.setMadeToOrder = setMadeToOrder;
+		vm.preorder_selected = false;
+		vm.made_to_order_selected = false;
+		vm.bespoke_selected = false;
+		vm.bespoke_language = 'en-US';
+
+		function init(){
+
+		}
+
+		init();
+
+		function setMadeToOrder(value) {
+			vm.product['madetoorder']['type'] = value ? 1 : 0;
+		}
 
 		//watchs
 		
@@ -14,7 +28,8 @@
 		controller: controller,
 		controllerAs: 'productVariationsCtrl',
 		bindings: {
-			product: '<'
+			product: '<',
+			languages: '='
 		}
 	}
 
