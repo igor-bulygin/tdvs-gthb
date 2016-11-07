@@ -256,7 +256,7 @@ class ApiController extends CController {
 		} else if ($request->isDelete) {
 			$product = $this->getJsonFromRequest("product");
 
-			/* @var $deviser \app\models\Person */
+			/* @var $product \app\models\Product */
 			$product = Product::findOne(["short_id" => $product["short_id"]]);
 
 			$product->deletePhotos();
