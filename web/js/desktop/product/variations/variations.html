@@ -1,12 +1,79 @@
 <div class="card">
 	<span class="title">3/ Variations &amp; Manufacturing</span>
-
+	<form name="productVariationsCtrl.form" novalidate>
 	<div class="row">
-		<div class="col-md-1">
+		<div class="col-md-2">
+			<span class="title">Work Options</span>
 			<label for="color">Color</label>
 		</div>
-		<div class="col-md-3">
+		<div class="col-md-4">
 			
 		</div>
+		<div class="col-md-6">
+			<span class="title">Manufacturing information</span>
+			<div class="form-group">
+				<div class="row">
+					<span>Is this product in pre-order?</span>
+					<div class="radio radio-inline ml-30">
+						<input type="radio" name="preorder_selected" id="preorder_selected" ng-model="productVariationsCtrl.preorder_selected" ng-value="true">
+						<label for="preorder_selected">
+							YES
+						</label>
+					</div>
+					<div class="radio radio-inline">
+						<input type="radio" name="preorder_unselected" id="preorder_unselected" ng-model="productVariationsCtrl.preorder_selected" ng-value="false" checked>
+						<label for="preorder_unselected">
+							NO
+						</label>
+					</div>
+				</div>
+				<div class="row">
+					<span>Is this a made-to-order product?</span>
+					<div class="radio radio-inline ml-30">
+						<input type="radio" name="made_to_order_selected" id="made_to_order_selected" ng-model="productVariationsCtrl.made_to_order_selected" ng-value="true" ng-change="productVariationsCtrl.setMadeToOrder(productVariationsCtrl.made_to_order_selected)">
+						<label for="made_to_order_selected">
+							YES
+						</label>
+					</div>
+					<div class="radio radio-inline">
+						<input type="radio" name="made_to_order_unselected" id="made_to_order_unselected" ng-model="productVariationsCtrl.made_to_order_selected" ng-value="false" checked ng-change="productVariationsCtrl.setMadeToOrder(productVariationsCtrl.made_to_order_selected)">
+						<label for="made_to_order_unselected">
+							NO
+						</label>
+					</div>
+					<div ng-if="productVariationsCtrl.made_to_order_selected" ng-cloak>
+						<div class="col-md-2">
+							<input type="number" name="madetoorder" class="form-control col-md-1" ng-model="productVariationsCtrl.product['madetoorder'].value" ng-min="0" ng-required="true">
+						</div>
+						<label for="madetoorder">days needed to manufacture this work</label>
+					</div>
+				</div>
+				<div class="row">
+					<span>Is this a bespoke product?</span>
+					<div class="radio radio-inline ml-30">
+						<input type="radio" name="bespoke_selected" id="bespoke_selected" value="bespoke_selected" ng-model="productVariationsCtrl.bespoke_selected" ng-value="true">
+						<label for="bespoke_selected">
+							YES
+						</label>
+					</div>
+					<div class="radio radio-inline">
+						<input type="radio" name="bespoke_unselected" id="bespoke_unselected" value="bespoke_unselected" ng-model="productVariationsCtrl.bespoke_selected" ng-value="false" checked>
+						<label for="bespoke_unselected">
+							NO
+						</label>
+					</div>
+					<div ng-if="productVariationsCtrl.bespoke_selected" ng-cloak>
+						<p>What information do you need from the customer before manufacturing this work?</p>
+						<ol class="nya-bs-select" ng-model="productVariationsCtrl.bespoke_language">
+							<li nya-bs-option="language in productVariationsCtrl.languages" data-value="language.code" deep-watch="true">
+								<a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
+							</li>
+						</ol>
+						<textarea name="bespoke_text" id="bespoke_text" cols="30" rows="10" class="form-control" ng-model="productVariationsCtrl.product.bespoke[productVariationsCtrl.bespoke_language]" ng-required="true"></textarea>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
+	</form>
 </div>
