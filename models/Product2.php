@@ -19,13 +19,14 @@ use yii2tech\embedded\Mapping;
 
 /**
  * @property string deviser_id
- * @property array categories
- * @property array collections
  * @property array name
  * @property array slug
  * @property array description
- * @property array media
+ * @property array categories
  * @property Mapping $photosInfo
+ *
+ * @property array collections
+ * @property array media
  * @property array options
  * @property array madetoorder
  * @property array sizechart
@@ -47,6 +48,7 @@ use yii2tech\embedded\Mapping;
 class Product2 extends CActiveRecord {
 
 	const SCENARIO_PRODUCT_OLD_API = 'scenario-product-old-api';
+	const SCENARIO_PRODUCT_CREATE_DRAFT = 'scenario-product-create-draft';
 	const SCENARIO_PRODUCT_UPDATE_DRAFT = 'scenario-product-update-draft';
 
 	/**
@@ -72,25 +74,25 @@ class Product2 extends CActiveRecord {
 			'_id',
 			'short_id',
 			'deviser_id',
-			'enabled',
-			'categories',
-			'collections',
 			'name',
 			'slug',
 			'description',
-			'media',
+			'categories',
 			'photos',
-			'options',
-			'madetoorder',
-			'sizechart',
-			'references',
-			'bespoke',
-			'preorder',
-			'returns',
-			'warranty',
-			'currency',
-			'weight_unit',
-			'price_stock',
+//			'enabled',
+//			'collections',
+//			'media',
+//			'options',
+//			'madetoorder',
+//			'sizechart',
+//			'references',
+//			'bespoke',
+//			'preorder',
+//			'returns',
+//			'warranty',
+//			'currency',
+//			'weight_unit',
+//			'price_stock',
 			'position',
 			'created_at',
 			'updated_at',
@@ -111,32 +113,33 @@ class Product2 extends CActiveRecord {
 	{
 		parent::init();
 
+		$this->short_id = Utils::shortID(7);
+
 		// initialize attributes
-		$this->categories = [];
-		$this->collections = [];
 		$this->name = [];
 		$this->slug = [];
 		$this->description = [];
-		$this->media = [
-			"videos_links" => [],
-			"photos" => []
-		];
-		$this->options = [];
-		$this->madetoorder = [];
-		$this->sizechart = [];
-		$this->bespoke = [];
-		$this->preorder = [];
-		$this->returns = [];
-		$this->warranty = [];
-		$this->currency = "";
-		$this->weight_unit = "";
-		$this->price_stock = [];
-		$this->references = [];
+		$this->categories = [];
+		$this->photos = [];
+		//$this->collections = [];
+//		$this->media = [
+//			"videos_links" => [],
+//			"photos" => []
+//		];
+//		$this->options = [];
+//		$this->madetoorder = [];
+//		$this->sizechart = [];
+//		$this->bespoke = [];
+//		$this->preorder = [];
+//		$this->returns = [];
+//		$this->warranty = [];
+//		$this->currency = "";
+//		$this->weight_unit = "";
+//		$this->price_stock = [];
+//		$this->references = [];
 		$this->position = 0;
 
-		$this->photos = [];
-
-		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_PUBLIC);
+		static::setSerializeScenario(static::SERIALIZE_SCENARIO_PUBLIC);
 	}
 
 	public function embedPhotosInfo()
@@ -187,13 +190,13 @@ class Product2 extends CActiveRecord {
 	 * Get one entity serialized
 	 *
 	 * @param string $id
-	 * @return Product|null
+	 * @return Product2|null
 	 * @throws Exception
 	 */
 	public static function findOneSerialized($id)
 	{
 		/** @var Product $product */
-		$product = Product::find()->select(self::getSelectFields())->where(["short_id" => $id])->one();
+		$product = static::find()->select(self::getSelectFields())->where(["short_id" => $id])->one();
 
 		// if automatic translation is enabled
 		if (static::$translateFields) {
@@ -213,7 +216,7 @@ class Product2 extends CActiveRecord {
 	{
 
 		// Products query
-		$query = new ActiveQuery(Product::className());
+		$query = new ActiveQuery(static::className());
 
 		// Retrieve only fields that gonna be used
 		$query->select(self::getSelectFields());
@@ -316,30 +319,29 @@ class Product2 extends CActiveRecord {
 				static::$serializeFields = [
 					'id' => 'short_id',
 					'deviser' => "deviserPreview",
-					'enabled',
-					'categories',
-//					'collections',
 					'name',
 					'slug',
 					'description',
-					'media',
-					'madetoorder',
-					'bespoke',
-					'preorder',
-					'returns',
-					'warranty',
-					'currency',
+					'categories',
+//					'enabled',
+//					'collections',
+//					'media',
+//					'madetoorder',
+//					'bespoke',
+//					'preorder',
+//					'returns',
+//					'warranty',
+//					'currency',
 //					'weight_unit',
-					'references',
+//					'references',
+//					'options' => 'productOptions',
+//					'url_images' => 'urlImagesLocation',
 					'position',
-					'options' => 'productOptions',
-					'url_images' => 'urlImagesLocation',
 				];
 				static::$retrieveExtraFields = [
 					'deviser_id',
-					'options',
-					'sizechart',
-					'price_stock',
+//					'sizechart',
+//					'price_stock',
 				];
 
 				static::$translateFields = true;
@@ -643,44 +645,52 @@ class Product2 extends CActiveRecord {
 	public function rules()
 	{
 		return [
-			// the name, email, subject and body attributes are required
 			[
 				[
 					'deviser_id',
-					'categories',
-					'collections',
+				],
+				'required',
+				'on' => [self::SCENARIO_PRODUCT_CREATE_DRAFT]
+			],
+			[
+				[
+					'deviser_id',
 					'name',
 					'slug',
 					'description',
-					'media',
-					'options',
-					'madetoorder',
-					'sizechart',
-					'bespoke',
-					'preorder',
-					'returns',
-					'warranty',
-					'currency',
-					'weight_unit',
-					'price_stock',
+					'categories',
+                    'photos',
+//					'collections',
+//					'media',
+//					'options',
+//					'madetoorder',
+//					'sizechart',
+//					'bespoke',
+//					'preorder',
+//					'returns',
+//					'warranty',
+//					'currency',
+//					'weight_unit',
+//					'price_stock',
+					'position',
 				],
 				'safe',
-				'on' => [self::SCENARIO_PRODUCT_OLD_API, self::SCENARIO_PRODUCT_UPDATE_DRAFT]
+				'on' => [self::SCENARIO_PRODUCT_OLD_API, self::SCENARIO_PRODUCT_CREATE_DRAFT, self::SCENARIO_PRODUCT_UPDATE_DRAFT]
 			],
 			[
 				'name',
 				'app\validators\TranslatableValidator',
-				'on' => [self::SCENARIO_PRODUCT_UPDATE_DRAFT],
+				'on' => [self::SCENARIO_PRODUCT_CREATE_DRAFT, self::SCENARIO_PRODUCT_UPDATE_DRAFT],
 			],
 			[
 				'description',
 				'app\validators\TranslatableValidator',
-				'on' => [self::SCENARIO_PRODUCT_UPDATE_DRAFT],
+				'on' => [self::SCENARIO_PRODUCT_CREATE_DRAFT, self::SCENARIO_PRODUCT_UPDATE_DRAFT],
 			],
 			[
 				'categories',
 				'app\validators\CategoriesValidator',
-				'on' => [self::SCENARIO_PRODUCT_UPDATE_DRAFT],
+				'on' => [self::SCENARIO_PRODUCT_CREATE_DRAFT, self::SCENARIO_PRODUCT_UPDATE_DRAFT],
 			],
 			[   'photos', 'safe'], // to load data posted from WebServices
 			[   'photosInfo', 'app\validators\EmbedDocValidator'], // to apply rules
@@ -689,7 +699,7 @@ class Product2 extends CActiveRecord {
 //				['references'],
 //				'app\validators\EmbedDocValidator',
 //				'required',
-//				'on' => [self::SCENARIO_PRODUCT_OLD_API, self::SCENARIO_PRODUCT_UPDATE_DRAFT],
+//				'on' => [self::SCENARIO_PRODUCT_OLD_API, self::SCENARIO_PRODUCT_CREATE_DRAFT, self::SCENARIO_PRODUCT_UPDATE_DRAFT],
 //				'model' => '\app\models\ProductReference'
 //			],
 		];
@@ -706,10 +716,11 @@ class Product2 extends CActiveRecord {
 	{
 		$loaded = parent::load($data, $formName);
 
-		// use position behavior method to move it
-		if (array_key_exists("position", $data)) {
-			$this->moveToPosition($data["position"]);
-		}
+		// use position behavior method to move it (only if it has primary key)
+		// commented until be needed...
+//		if (array_key_exists("position", $data) && $data['id']) {
+//			$this->moveToPosition($data["position"]);
+//		}
 
 		return ($loaded);
 	}

@@ -12,6 +12,7 @@ Example about how to call to Web Service to create a new Product
 * `403`: Not allowed
   
 **Request body**: 
+* `deviser_id`: Deviser (product's owner) identifier. (Required)
 * `name`: Name or title of the product (Multilanguage field)
 * `description`: Detailed descripton of the product (Multilanguage field)
 * `categories`: [] array with category ids (["f0cco", "1234"]) 

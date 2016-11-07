@@ -25,8 +25,8 @@ class ProductController extends AppPrivateController
 
 	public function actionView($id)
 	{
-		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_ADMIN);
-		$product = Product::findOneSerialized($id);
+		Product2::setSerializeScenario(Product2::SERIALIZE_SCENARIO_ADMIN);
+		$product = Product2::findOneSerialized($id);
 
 		return $product;
 	}
@@ -40,7 +40,7 @@ class ProductController extends AppPrivateController
 	{
 		Product2::setSerializeScenario(Product2::SERIALIZE_SCENARIO_PUBLIC);
 		$product = new Product2();
-		$product->setScenario(Product::SCENARIO_PRODUCT_UPDATE_DRAFT);
+		$product->setScenario(Product2::SCENARIO_PRODUCT_CREATE_DRAFT);
 
 		if ($product->load(Yii::$app->request->post(), '') && $product->validate()) {
 			// save the invitation
@@ -56,15 +56,15 @@ class ProductController extends AppPrivateController
 
 	public function actionUpdate($id)
 	{
-		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_ADMIN);
+		Product2::setSerializeScenario(Product2::SERIALIZE_SCENARIO_ADMIN);
 		/** @var Product $product */
-		$product = Product::findOneSerialized($id);
+		$product = Product2::findOneSerialized($id);
 		if (!$product) {
 			throw new BadRequestHttpException('Product not found');
 		}
 
 		try {
-			$product->setScenario(Product::SCENARIO_PRODUCT_UPDATE_DRAFT);
+			$product->setScenario(Product2::SCENARIO_PRODUCT_UPDATE_DRAFT);
 			if ($product->load(Yii::$app->request->post(), '') && $product->save()) {
 				// handle success
 
