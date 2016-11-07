@@ -94,6 +94,7 @@
 					modalInstance.result.then(function (imageData) {
 						if(angular.isObject(imageData) && (imageData.photoCropped || imageData.title || imageData.description)) {
 								//upload cropped photo
+								var type;
 								if(vm.product.id) {
 									type = "known-product-photo";
 								} else {

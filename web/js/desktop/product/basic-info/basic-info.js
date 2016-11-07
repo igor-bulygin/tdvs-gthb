@@ -71,6 +71,7 @@
 		function uploadPhoto(images, errImages) {
 			vm.files = images;
 			vm.errFiles = errImages;
+			var type;
 			if(vm.product.id)
 				type = 'known-product-photo';
 			else {
@@ -114,6 +115,7 @@
 			modalInstance.result.then(function(imageCropped) {
 				if(imageCropped) {
 					//upload image
+					var type;
 					if(vm.product.id)
 						type = 'known-product-photo';
 					else {
