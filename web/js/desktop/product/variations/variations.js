@@ -20,6 +20,9 @@
 		}
 
 		//watchs
+
+		//events
+		////TO DO: set bespoke text required if it is empty in english
 		
 	}
 

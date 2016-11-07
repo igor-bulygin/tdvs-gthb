@@ -94,12 +94,11 @@
 					modalInstance.result.then(function (imageData) {
 						if(angular.isObject(imageData) && (imageData.photoCropped || imageData.title || imageData.description)) {
 								//upload cropped photo
-								var type = "unknown-product-photo";
-								// if(vm.product.id) {
-								// 	type = "known-product-photo";
-								// } else {
-								// 	type = "unknown-product-photo";
-								// }
+								if(vm.product.id) {
+									type = "known-product-photo";
+								} else {
+									type = "unknown-product-photo";
+								}
 								var data = {
 									type: type,
 									deviser_id: UtilService.returnDeviserIdFromUrl(),

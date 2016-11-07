@@ -1,6 +1,6 @@
 (function () {
 
-	function controller(deviserDataService, productDataService, languageDataService, toastr, UtilService, localStorageService) {
+	function controller(deviserDataService, productDataService, languageDataService, toastr, UtilService, localStorageService, tagDataService) {
 		var vm = this;
 		vm.save = save;
 		vm.product = {};
@@ -11,7 +11,19 @@
 			getLanguages();
 			getCategories();
 			getDeviser();
-			getStorage();
+			getTags();
+			vm.product = new productDataService.ProductPriv();
+			vm.product.categories = [];
+			vm.product.media = {
+				photos: [],
+				description_photos: []
+			}
+			vm.product.faq = [];
+			vm.product.tags = [];
+			vm.product.madetoorder = {
+				type: 0
+			}
+			//getStorage();
 			
 		}
 
@@ -43,16 +55,27 @@
 				vm.link_profile = '/deviser/' + dataDeviser.slug + '/' + dataDeviser.id + '/store/edit';
 				vm.profile = currentHost()+vm.deviser.url_images+vm.deviser.media.profile_cropped;
 				vm.product.deviser_id = dataDeviser.id;
+			}, function(err) {
+				//err
 			});
 		}
 
+		function getTags() {
+			tagDataService.Tags.get()
+				.$promise.then(function (dataTags) {
+					vm.tags = dataTags.items;
+				}, function(err) {
+					//err
+				})
+		}
+
 		function getStorage() {
-			vm.products = localStorageService.get('draftProducts');
-			if(vm.products === undefined || vm.products === null) {
-				vm.products = [];
-				localStorageService.set('draftProducts', vm.products);
-			}
-			// vm.product = new productDataService.ProductPriv();
+			// vm.products = localStorageService.get('draftProducts');
+			// if(vm.products === undefined || vm.products === null) {
+			// 	vm.products = [];
+			// 	localStorageService.set('draftProducts', vm.products);
+			// }
+			vm.product = new productDataService.ProductPriv();
 			vm.product.categories = [];
 			vm.product.id = vm.products.length+1;
 			vm.product.media = {
@@ -67,13 +90,13 @@
 		}
 
 		function save() {
-			vm.products.push(vm.product);
-			localStorageService.set('draftProducts', vm.products);
-			toastr.success('Saved!');
-			// vm.product.$save()
-			// 	.then(function (dataSaved) {
-			// 		console.log(dataSaved);
-			// 	});
+			//vm.products.push(vm.product);
+			//localStorageService.set('draftProducts', vm.products);
+			vm.product.$save()
+				.then(function (dataSaved) {
+					toastr.success('Saved!');
+					console.log(dataSaved);
+				});
 		}
 
 	}
