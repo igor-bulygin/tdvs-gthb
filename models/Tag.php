@@ -122,6 +122,7 @@ class Tag extends CActiveRecord
 	const FREETEXT = 1;
 
 	const SERIALIZE_SCENARIO_PRODUCT_OPTION = 'serialize_scenario_product_option';
+	const SERIALIZE_SCENARIO_PUBLIC = 'serialize_scenario_public';
 
 	/**
 	 * The attributes that should be serialized
@@ -232,11 +233,77 @@ class Tag extends CActiveRecord
 				];
 				static::$translateFields = true;
 				break;
+
+			case self::SERIALIZE_SCENARIO_PUBLIC:
+				static::$serializeFields = [
+					'id' => 'short_id',
+					'enabled',
+					'required',
+					'type',
+					'n_options',
+					'name',
+					'description',
+					'categories',
+				];
+				static::$retrieveExtraFields = [
+					'options',
+				];
+				break;
+
 			default:
 				// now available for this Model
 				static::$serializeFields = [];
 				break;
 		}
+	}
+
+	/**
+	 * Get a collection of entities serialized, according to serialization configuration
+	 *
+	 * @param array $criteria
+	 * @return array
+	 */
+	public static function findSerialized($criteria = [])
+	{
+
+		$query = new ActiveQuery(Category::className());
+
+		// Retrieve only fields that gonna be used
+		$query->select(self::getSelectFields());
+
+		// only root nodes, or all
+		if (array_key_exists("scope", $criteria)) {
+			switch ($criteria["scope"]) {
+				case "all":
+					break;
+				case "roots":
+				default:
+					$query->andWhere(["path" => "/"]);
+					break;
+			}
+		}
+
+		// Count how many items are with those conditions, before limit them for pagination
+		static::$countItemsFound = $query->count();
+
+		// limit
+		if ((array_key_exists("limit", $criteria)) && (!empty($criteria["limit"]))) {
+			$query->limit($criteria["limit"]);
+		}
+
+		// offset for pagination
+		if ((array_key_exists("offset", $criteria)) && (!empty($criteria["offset"]))) {
+			$query->offset($criteria["offset"]);
+		}
+
+		$items = $query->all();
+
+
+		// if automatic translation is enabled
+		if (static::$translateFields) {
+			Utils::translate($items);
+		}
+		return $items;
 	}
 
 	/**
