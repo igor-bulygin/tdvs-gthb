@@ -5,6 +5,7 @@ use app\helpers\Utils;
 use Exception;
 use Yii;
 use app\helpers\CActiveRecord;
+use yii\mongodb\ActiveQuery;
 
 class TagOption
 {
@@ -266,7 +267,7 @@ class Tag extends CActiveRecord
 	public static function findSerialized($criteria = [])
 	{
 
-		$query = new ActiveQuery(Category::className());
+		$query = new ActiveQuery(Tag::className());
 
 		// Retrieve only fields that gonna be used
 		$query->select(self::getSelectFields());
