@@ -79,6 +79,7 @@ class Product2 extends CActiveRecord {
 			'description',
 			'categories',
 			'photos',
+            'faq',
 //			'enabled',
 //			'collections',
 //			'media',
@@ -121,6 +122,8 @@ class Product2 extends CActiveRecord {
 		$this->description = [];
 		$this->categories = [];
 		$this->photos = [];
+        $this->faq = [];
+
 		//$this->collections = [];
 //		$this->media = [
 //			"videos_links" => [],
@@ -146,6 +149,11 @@ class Product2 extends CActiveRecord {
 	{
 		return $this->mapEmbeddedList('photos', ProductPhoto::className());
 	}
+
+    public function embedFaqInfo()
+    {
+        return $this->mapEmbeddedList('faq', FaqQuestion::className());
+    }
 
 
 	public function beforeSave($insert) {
@@ -318,11 +326,14 @@ class Product2 extends CActiveRecord {
 			case self::SERIALIZE_SCENARIO_PUBLIC:
 				static::$serializeFields = [
 					'id' => 'short_id',
+					'deviser_id',
 					'deviser' => "deviserPreview",
 					'name',
 					'slug',
 					'description',
 					'categories',
+                    'photos',
+                    'faq',
 //					'enabled',
 //					'collections',
 //					'media',
@@ -660,6 +671,7 @@ class Product2 extends CActiveRecord {
 					'description',
 					'categories',
                     'photos',
+                    'faq',
 //					'collections',
 //					'media',
 //					'options',
@@ -694,6 +706,8 @@ class Product2 extends CActiveRecord {
 			],
 			[   'photos', 'safe'], // to load data posted from WebServices
 			[   'photosInfo', 'app\validators\EmbedDocValidator'], // to apply rules
+            [   'faq', 'safe'], // to load data posted from WebServices
+            [   'faqInfo', 'app\validators\EmbedDocValidator'], // to apply rules
 
 //			[
 //				['references'],

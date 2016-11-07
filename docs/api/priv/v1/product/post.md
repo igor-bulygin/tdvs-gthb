@@ -21,4 +21,7 @@ Example about how to call to Web Service to create a new Product
  * `main_product_photo`: (Boolean)
  * `title`: title for the image (Multilanguage field)
  * `description`: description of the image (Multilanguage field)
+* `faq`: [] array of documents with info about frequently asked questions. Each element has:
+ * `question`: multi-language field with the question ({"en-US": "my quesiton", "es-ES": "mi pregunta"})
+ * `answer`: multi-language field with the answer ({"en-US": "my answer", "es-ES": "mi respuesta"})
 
