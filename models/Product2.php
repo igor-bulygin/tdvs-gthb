@@ -690,6 +690,11 @@ class Product2 extends CActiveRecord {
 				'on' => [self::SCENARIO_PRODUCT_OLD_API, self::SCENARIO_PRODUCT_CREATE_DRAFT, self::SCENARIO_PRODUCT_UPDATE_DRAFT]
 			],
 			[
+				['name', 'photos', 'categories'],
+				'required',
+				'on' => [self::SCENARIO_PRODUCT_CREATE_DRAFT, self::SCENARIO_PRODUCT_UPDATE_DRAFT],
+			],
+			[
 				'name',
 				'app\validators\TranslatableValidator',
 				'on' => [self::SCENARIO_PRODUCT_CREATE_DRAFT, self::SCENARIO_PRODUCT_UPDATE_DRAFT],
@@ -708,6 +713,7 @@ class Product2 extends CActiveRecord {
 			[   'photosInfo', 'app\validators\EmbedDocValidator'], // to apply rules
             [   'faq', 'safe'], // to load data posted from WebServices
             [   'faqInfo', 'app\validators\EmbedDocValidator'], // to apply rules
+
 
 //			[
 //				['references'],
