@@ -5,6 +5,7 @@
 		this.isObject = isObject;
 		this.diff = diff;
 		this.returnDeviserIdFromUrl = returnDeviserIdFromUrl;
+		this.returnProductIdFromUrl = returnProductIdFromUrl;
 		this.has_error = has_error;
 		this.parseImagesUrl = parseImagesUrl;
 		//regex from: https://gist.github.com/dperini/729294
@@ -14,6 +15,11 @@
 		function returnDeviserIdFromUrl() {
 			var url = $location.absUrl();
 			return url.split('/')[5];
+		}
+
+		function returnProductIdFromUrl() {
+			var url = $location.absUrl();
+			return url.split('/')[7];
 		}
 
 		function isObject(object) {
