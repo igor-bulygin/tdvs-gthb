@@ -1,18 +1,21 @@
 (function () {
 	"use strict";
 
-	function controller() {
+	function controller($scope, productEvents) {
 		var vm = this;
-		vm.setMadeToOrder = setMadeToOrder;
-		vm.setPreorder = setPreorder;
-		vm.setPreorderEnd = setPreorderEnd;
-		vm.setPreorderShip = setPreorderShip;
-		vm.preorder_selected = false;
-		vm.made_to_order_selected = false;
-		vm.bespoke_selected = false;
-		vm.bespoke_language = 'en-US';
 
 		function init(){
+			//functions
+			vm.setMadeToOrder = setMadeToOrder;
+			vm.setPreorder = setPreorder;
+			vm.setPreorderEnd = setPreorderEnd;
+			vm.setPreorderShip = setPreorderShip;
+			//vars
+			vm.tags_for_work = [];
+			vm.preorder_selected = false;
+			vm.made_to_order_selected = false;
+			vm.bespoke_selected = false;
+			vm.bespoke_language = 'en-US';
 
 		}
 
@@ -36,10 +39,25 @@
 			vm.product.preorder['ship'] = newDate;
 		}
 
+		function getTagsByCategory(idCategory) {
+			//we look in each tag
+			vm.tags.forEach(function(element) {
+				//if category is set in tag
+				if(element.categories.indexOf(idCategory) > -1) {
+					vm.tags_for_work.push(element);
+				}
+			})
+		}
+
 		//watchs
+		//watch product
 
 		//events
 		////TO DO: set bespoke text required if it is empty in english
+
+		$scope.$on(productEvents.setTagsFromCategory, function(event, args) {
+			getTagsByCategory(args.idCategory)
+		});
 		
 	}
 
@@ -49,7 +67,8 @@
 		controllerAs: 'productVariationsCtrl',
 		bindings: {
 			product: '<',
-			languages: '='
+			languages: '=',
+			tags: '='
 		}
 	}
 

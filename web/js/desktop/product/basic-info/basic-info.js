@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(productDataService, toastr, Upload, $scope, UtilService, $uibModal) {
+	function controller(productDataService, toastr, Upload, $scope, UtilService, $uibModal, $rootScope, productEvents) {
 		var vm = this;
 		vm.has_error = UtilService.has_error;
 		vm.name_language = 'en-US';
@@ -43,6 +43,8 @@
 			} else {
 				//if not
 				vm.product.categories[index_helper] = category;
+				//send event to get tags by category
+				$rootScope.$broadcast(productEvents.setTagsFromCategory, {idCategory: category});
 			}
 		}
 
