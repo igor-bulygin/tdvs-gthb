@@ -245,9 +245,7 @@ class Tag extends CActiveRecord
 					'name',
 					'description',
 					'categories',
-				];
-				static::$retrieveExtraFields = [
-					'options',
+					'options'
 				];
 				break;
 
