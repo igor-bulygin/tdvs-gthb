@@ -11,6 +11,8 @@
 			vm.setPreorderEnd = setPreorderEnd;
 			vm.setPreorderShip = setPreorderShip;
 			//vars
+			vm.tag_order = ['Color', 'Material', 'Size', 'Style'];
+			vm.tagComparator = tagComparator;
 			vm.tags_for_work = [];
 			vm.preorder_selected = false;
 			vm.made_to_order_selected = false;
@@ -46,7 +48,7 @@
 				if(element.categories.indexOf(idCategory) > -1) {
 					vm.tags_for_work.push(element);
 				}
-			})
+			});
 		}
 
 		//watchs
@@ -56,8 +58,16 @@
 		////TO DO: set bespoke text required if it is empty in english
 
 		$scope.$on(productEvents.setTagsFromCategory, function(event, args) {
-			getTagsByCategory(args.idCategory)
+			getTagsByCategory(args.idCategory);
+			//get sizecharts value
+			//get prints value
 		});
+
+		//orders
+		function tagComparator(option) {
+			if(vm.tag_order.indexOf(option.name) > -1)
+				return vm.tag_order.indexOf(option.name)
+		}
 		
 	}
 

@@ -2,12 +2,24 @@
 	<span class="title">3/ Variations &amp; Manufacturing</span>
 	<form name="productVariationsCtrl.form" novalidate>
 	<div class="row">
-		<div class="col-md-2">
+		<div class="col-md-6">
+			<div class="row">
 			<span class="title">Work Options</span>
-			<label for="color">Color</label>
-		</div>
-		<div class="col-md-4">
-			
+			</div>
+			<div ng-repeat="tag in productVariationsCtrl.tags_for_work | orderBy:[productVariationsCtrl.tagComparator]">
+				<div class="row">
+					<div class="col-md-4">
+						<label data-ng-for="{{tag.name}}" ng-bind="tag.name"></label>
+					</div>
+					<div class="col-md-8">
+						<ol class="about-edit-select nya-bs-select" ng-model="productVariationsCtrl.product.options[tag.id]" multiple>
+							<li nya-bs-option="option in tag.options" data-value="option.value" deep-watch="true">
+								<a><span ng-bind="option.text['en-US']"><span class="glyphicon glyphicon-ok check-mark"></span></span></a>
+							</li>
+						</ol>
+					</div>
+				</div>
+			</div>
 		</div>
 		<div class="col-md-6">
 			<span class="title">Manufacturing information</span>
