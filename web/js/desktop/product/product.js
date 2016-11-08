@@ -7,10 +7,8 @@
 		});
 
 		//events
-		$provide.value("deviserEvents", {
-			deviser_changed: 'deviser-changed',
-			deviser_updated: 'deviser-updated',
-			make_profile_public_errors: 'make-profile-public-errors'
+		$provide.value("productEvents", {
+			setTagsFromCategory: 'set-tags-from-category'
 		});
 
 		localStorageServiceProvider
@@ -18,6 +16,6 @@
 	}
 
 	angular
-		.module('todevise', ['api', 'util', 'toastr', 'nya.bootstrap.select', 'textAngular', 'ngFileUpload', 'dndLists', 'ui.bootstrap', 'ngImgCrop', 'ngTagsInput', 'LocalStorageModule'])
+		.module('todevise', ['api', 'util', 'toastr', 'nya.bootstrap.select', 'textAngular', 'ngFileUpload', 'dndLists', 'ui.bootstrap', 'ngImgCrop', 'ngTagsInput', 'ui.bootstrap.datetimepicker', 'LocalStorageModule'])
 		.config(config)
 }());

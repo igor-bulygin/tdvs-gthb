@@ -10,8 +10,8 @@ class IndexAsset extends AssetBundle {
 		'js/desktop/product/product.js'
 	];
 	public $depends = [
-		'app\assets\desktop\pub\PublicCommonAsset',
 		'app\assets\libs\angularAsset',
+		'app\assets\desktop\pub\PublicCommonAsset',
 		'app\assets\libs\angularToastrAsset',
 		'app\assets\libs\angularBootstrapAsset',
 		'app\assets\api\ApiAsset',
@@ -22,6 +22,7 @@ class IndexAsset extends AssetBundle {
 		'app\assets\libs\angularDragAndDropAsset',
 		'app\assets\libs\ngImgCropAsset',
 		'app\assets\libs\ngTagsInputAsset',
-		'app\assets\libs\angularLocalStorageAsset'
+		'app\assets\libs\angularLocalStorageAsset',
+		'app\assets\libs\angularBootstrapDatetimePickerAsset'
 	];
 }
