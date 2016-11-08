@@ -3,26 +3,29 @@
 	function controller(deviserDataService, productDataService, languageDataService, toastr, UtilService, localStorageService, tagDataService) {
 		var vm = this;
 		vm.save = save;
-		vm.product = {};
 		vm.deviser_id = UtilService.returnDeviserIdFromUrl();
 
-
 		function init() {
+			vm.product = new productDataService.ProductPriv();
+			vm.product = {
+				categories: [],
+				media: {
+					photos: [],
+					description_photos: []
+				},
+				faq: [],
+				tags: [],
+				madetoorder: {
+					type: 0
+				},
+				preorder: {
+					type: 0
+				}
+			}
 			getLanguages();
 			getCategories();
 			getDeviser();
 			getTags();
-			vm.product = new productDataService.ProductPriv();
-			vm.product.categories = [];
-			vm.product.media = {
-				photos: [],
-				description_photos: []
-			}
-			vm.product.faq = [];
-			vm.product.tags = [];
-			vm.product.madetoorder = {
-				type: 0
-			}
 			//getStorage();
 			
 		}

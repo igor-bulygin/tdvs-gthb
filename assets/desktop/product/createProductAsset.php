@@ -14,6 +14,6 @@ class createProductAsset extends AssetBundle {
 		'js/desktop/product/price-stock/price-stock.js'
 	];
 	public $depends = [
-		'app\assets\desktop\product\IndexAsset',
+		'app\assets\desktop\product\IndexAsset'
 	];
 }
