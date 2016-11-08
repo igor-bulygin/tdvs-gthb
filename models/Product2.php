@@ -47,9 +47,14 @@ use yii2tech\embedded\Mapping;
  */
 class Product2 extends CActiveRecord {
 
+    const ACCOUNT_STATE_DRAFT = 'draft';
+    const ACCOUNT_STATE_ACTIVE = 'active';
+
 	const SCENARIO_PRODUCT_OLD_API = 'scenario-product-old-api';
 	const SCENARIO_PRODUCT_CREATE_DRAFT = 'scenario-product-create-draft';
 	const SCENARIO_PRODUCT_UPDATE_DRAFT = 'scenario-product-update-draft';
+    const SCENARIO_PRODUCT_PUBLISH = 'scenario-product-publish';
+    const SCENARIO_PRODUCT_UPDATE = 'scenario-product-update';
 
 	/**
 	 * The attributes that should be serialized
@@ -80,6 +85,7 @@ class Product2 extends CActiveRecord {
 			'categories',
 			'photos',
             'faq',
+            'product_state',
 //			'enabled',
 //			'collections',
 //			'media',
@@ -163,6 +169,10 @@ class Product2 extends CActiveRecord {
 			$slugs[$lang] = Slugger::slugify($text);
 		}
 		$this->setAttribute("slug", $slugs);
+
+        if (empty($this->product_state)) {
+            $this->product_state = Product2::ACCOUNT_STATE_DRAFT;
+        }
 
 		if (empty($this->created_at)) {
 			$this->created_at = new MongoDate();
@@ -334,6 +344,7 @@ class Product2 extends CActiveRecord {
 					'categories',
                     'photos',
                     'faq',
+                    'product_state',
 //					'enabled',
 //					'collections',
 //					'media',
@@ -381,6 +392,7 @@ class Product2 extends CActiveRecord {
 					'weight_unit',
 					'price_stock',
 					'url_images' => 'urlImagesLocation',
+                    'product_state',
 				];
 				static::$translateFields = false;
 				break;
@@ -692,8 +704,17 @@ class Product2 extends CActiveRecord {
 			[
 				['name', 'photos', 'categories'],
 				'required',
-				'on' => [self::SCENARIO_PRODUCT_CREATE_DRAFT, self::SCENARIO_PRODUCT_UPDATE_DRAFT],
+				'on' => [self::SCENARIO_PRODUCT_PUBLISH, self::SCENARIO_PRODUCT_UPDATE],
 			],
+            [
+                'product_state',
+                'safe',
+            ],
+            [
+                'product_state',
+                'in',
+                'range' => [self::ACCOUNT_STATE_DRAFT, self::ACCOUNT_STATE_ACTIVE],
+            ],
 			[
 				'name',
 				'app\validators\TranslatableValidator',
@@ -762,5 +783,23 @@ class Product2 extends CActiveRecord {
 			"url_images" => $this->getUrlImagesLocation(),
 		];
 	}
+
+    /**
+     * Add additional error to make easy show labels in client side
+     */
+    public function afterValidate()
+    {
+        parent::afterValidate();
+        foreach ($this->errors as $attribute => $error) {
+            switch ($attribute) {
+                default:
+                    //TODO: Fix this! Find other way to determine if was a "required" field
+                    if (strpos($error[0], 'cannot be blank') !== false || strpos($error[0], 'no puede estar vacío') !== false) {
+                        $this->addError("required", $attribute);
+                    }
+                    break;
+            }
+        };
+    }
 
 }

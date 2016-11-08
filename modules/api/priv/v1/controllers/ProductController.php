@@ -57,14 +57,14 @@ class ProductController extends AppPrivateController
 	public function actionUpdate($id)
 	{
 		Product2::setSerializeScenario(Product2::SERIALIZE_SCENARIO_ADMIN);
-		/** @var Product $product */
+		/** @var Product2 $product */
 		$product = Product2::findOneSerialized($id);
 		if (!$product) {
 			throw new BadRequestHttpException('Product not found');
 		}
 
 		try {
-			$product->setScenario(Product2::SCENARIO_PRODUCT_UPDATE_DRAFT);
+			$product->setScenario($this->getDetermineScenario($product));
 			if ($product->load(Yii::$app->request->post(), '') && $product->save()) {
 				// handle success
 
@@ -79,6 +79,41 @@ class ProductController extends AppPrivateController
 			throw new BadRequestHttpException($e->getMessage());
 		}
 	}
+
+    /**
+     * Get validation scenario from request param
+     *
+     * @param Product2 $product
+     * @return string
+     * @throws BadRequestHttpException
+     */
+    private function getDetermineScenario(Product2 $product)
+    {
+        // get scenario to use in validations, from request
+        $scenario = Yii::$app->request->post('scenario', Person::SCENARIO_DEVISER_UPDATE_PROFILE);
+
+        // check that is a valid scenario for this controller
+        if (!in_array($scenario, [
+            Product2::SCENARIO_PRODUCT_CREATE_DRAFT,
+            Product2::SCENARIO_PRODUCT_UPDATE_DRAFT,
+            Product2::SCENARIO_PRODUCT_PUBLISH,
+            Product2::SCENARIO_PRODUCT_UPDATE,
+        ])
+        ) {
+            throw new BadRequestHttpException('Invalid scenario');
+        }
+
+        // can't change from "active" to "draft"
+        if ($product->account_state == Product2::ACCOUNT_STATE_ACTIVE) {
+            // it is updating a active profile (or a profile that want to be active)
+            $scenario = Product2::SCENARIO_PRODUCT_UPDATE;
+        } else {
+            // it is updating a draft profile
+            $scenario = Product2::SCENARIO_PRODUCT_UPDATE_DRAFT;
+        }
+
+        return $scenario;
+    }
 
 	public function actionDelete($id)
 	{
