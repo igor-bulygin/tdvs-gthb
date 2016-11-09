@@ -47,8 +47,8 @@ use yii2tech\embedded\Mapping;
  */
 class Product2 extends CActiveRecord {
 
-    const ACCOUNT_STATE_DRAFT = 'draft';
-    const ACCOUNT_STATE_ACTIVE = 'active';
+    const PRODUCT_STATE_DRAFT = 'product_state_draft';
+    const PRODUCT_STATE_ACTIVE = 'product_state_active';
 
 	const SCENARIO_PRODUCT_OLD_API = 'scenario-product-old-api';
 	const SCENARIO_PRODUCT_CREATE_DRAFT = 'scenario-product-create-draft';
@@ -171,7 +171,7 @@ class Product2 extends CActiveRecord {
 		$this->setAttribute("slug", $slugs);
 
         if (empty($this->product_state)) {
-            $this->product_state = Product2::ACCOUNT_STATE_DRAFT;
+            $this->product_state = Product2::PRODUCT_STATE_DRAFT;
         }
 
 		if (empty($this->created_at)) {
@@ -334,6 +334,8 @@ class Product2 extends CActiveRecord {
 				];
 				break;
 			case self::SERIALIZE_SCENARIO_PUBLIC:
+			case self::SCENARIO_PRODUCT_CREATE_DRAFT:
+			case self::SCENARIO_PRODUCT_UPDATE_DRAFT:
 				static::$serializeFields = [
 					'id' => 'short_id',
 					'deviser_id',
