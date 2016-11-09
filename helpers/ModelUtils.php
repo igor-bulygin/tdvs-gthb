@@ -83,7 +83,7 @@ class ModelUtils {
 			$image = $deviser['media']['header'];
 
 			if (!file_exists(Yii::getAlias("@web") . "/" . $deviser["short_id"] . "/" . $image )) {
-				$imge = $fallback;
+				$image = $fallback;
 			}
 		} else {
 			$image = $fallback;
@@ -108,7 +108,7 @@ class ModelUtils {
 			$image = $deviser['media']['profile'];
 
 			if (!file_exists(Yii::getAlias("@web") . "/" . $deviser["short_id"] . "/" . $image )) {
-				$imge = $fallback;
+				$image = $fallback;
 			}
 		} else {
 			$image = $fallback;
@@ -167,7 +167,7 @@ class ModelUtils {
 				$image = $product["media"]["photos"][0]["name"];
 
 				if (!empty($image) && !file_exists(Yii::getAlias("@web") . "/" . $product["short_id"] . "/" . $image )) {
-					$imge = $fallback;
+					$image = $fallback;
 				}
 			}
 		}
