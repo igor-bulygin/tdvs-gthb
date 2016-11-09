@@ -34,7 +34,7 @@
 		init();
 
 		function getCategories() {
-			productDataService.Categories.get({scope: 'all'})
+			productDataService.Categories.get({scope: 'all', limit: 999})
 				.$promise.then(function(dataCategories) {
 					vm.allCategories = dataCategories.items;
 				}, function(err) {
@@ -96,11 +96,16 @@
 		function save() {
 			//vm.products.push(vm.product);
 			//localStorageService.set('draftProducts', vm.products);
-			vm.product.$save()
-				.then(function (dataSaved) {
-					toastr.success('Saved!');
-					console.log(dataSaved);
-				});
+			if(vm.product.id) {
+				//put
+			}
+			else {
+				vm.product.$save()
+					.then(function (dataSaved) {
+						toastr.success('Saved!');
+						console.log(dataSaved);
+					});
+			}
 		}
 
 	}

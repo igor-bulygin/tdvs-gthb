@@ -41,13 +41,19 @@
 			vm.product.preorder['ship'] = newDate;
 		}
 
-		function getTagsByCategory(idCategory) {
-			//we look in each tag
-			vm.tags.forEach(function(element) {
-				//if category is set in tag
-				if(element.categories.indexOf(idCategory) > -1) {
-					vm.tags_for_work.push(element);
-				}
+		function getTagsByCategory(categories) {
+			//categories come in array form
+			vm.tags_setted = []; //helper
+			vm.tags_for_work = [];
+			categories.forEach(function(idCategory) {
+				//we look in each tag
+				vm.tags.forEach(function(element) {
+					//if category is set in tag and is not set in tags_setted
+					if(element.categories.indexOf(idCategory) > -1 && vm.tags_setted.indexOf(element.id) === -1) {
+						vm.tags_setted.push(element.id);
+						vm.tags_for_work.push(element);
+					}
+				});
 			});
 		}
 
@@ -58,7 +64,7 @@
 		////TO DO: set bespoke text required if it is empty in english
 
 		$scope.$on(productEvents.setTagsFromCategory, function(event, args) {
-			getTagsByCategory(args.idCategory);
+			getTagsByCategory(args.categories);
 			//get sizecharts value
 			//get prints value
 		});
