@@ -274,6 +274,7 @@ $config = [
 				'GET api3/priv/v1/products' => 'api3/priv/v1/product/index',
 				'POST api3/priv/v1/products' => 'api3/priv/v1/product/create',
 				'PATCH api3/priv/v1/products/<id:[^/.]*?>' => 'api3/priv/v1/product/update',
+				'PUT api3/priv/v1/products/<id:[^/.]*?>' => 'api3/priv/v1/product/update',
 				'DELETE api3/priv/v1/products/<id:[^/.]*?>' => 'api3/priv/v1/product/delete',
 
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/priv/v1/upload'],
