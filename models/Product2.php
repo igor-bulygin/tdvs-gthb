@@ -23,8 +23,9 @@ use yii2tech\embedded\Mapping;
  * @property array slug
  * @property array description
  * @property array categories
- * @property Mapping $photosInfo
- *
+ * @property ProductMedia $mediaFiles
+ * @property FaqQuestion[] $faqInfo
+*
  * @property array collections
  * @property array media
  * @property array options
@@ -51,10 +52,8 @@ class Product2 extends CActiveRecord {
     const PRODUCT_STATE_ACTIVE = 'product_state_active';
 
 	const SCENARIO_PRODUCT_OLD_API = 'scenario-product-old-api';
-	const SCENARIO_PRODUCT_CREATE_DRAFT = 'scenario-product-create-draft';
-	const SCENARIO_PRODUCT_UPDATE_DRAFT = 'scenario-product-update-draft';
-    const SCENARIO_PRODUCT_PUBLISH = 'scenario-product-publish';
-    const SCENARIO_PRODUCT_UPDATE = 'scenario-product-update';
+	const SCENARIO_PRODUCT_DRAFT = 'scenario-product-draft';
+    const SCENARIO_PRODUCT_PUBLIC = 'scenario-product-public';
 
 	/**
 	 * The attributes that should be serialized
@@ -83,12 +82,11 @@ class Product2 extends CActiveRecord {
 			'slug',
 			'description',
 			'categories',
-			'photos',
+			'media',
             'faq',
             'product_state',
 //			'enabled',
 //			'collections',
-//			'media',
 //			'options',
 //			'madetoorder',
 //			'sizechart',
@@ -127,14 +125,12 @@ class Product2 extends CActiveRecord {
 		$this->slug = [];
 		$this->description = [];
 		$this->categories = [];
-		$this->photos = [];
         $this->faq = [];
 
-		//$this->collections = [];
-//		$this->media = [
-//			"videos_links" => [],
-//			"photos" => []
-//		];
+        $this->mediaFiles = new ProductMedia();
+        $this->mediaFiles->setProduct($this);
+
+        //$this->collections = [];
 //		$this->options = [];
 //		$this->madetoorder = [];
 //		$this->sizechart = [];
@@ -147,22 +143,43 @@ class Product2 extends CActiveRecord {
 //		$this->price_stock = [];
 //		$this->references = [];
 		$this->position = 0;
-
-		static::setSerializeScenario(static::SERIALIZE_SCENARIO_PUBLIC);
 	}
 
-	public function embedPhotosInfo()
-	{
-		return $this->mapEmbeddedList('photos', ProductPhoto::className());
-	}
+    public function setScenario($value)
+    {
+        parent::setScenario($value);
+        $this->mediaFiles->setScenario($value);
+    }
+
+    public function embedMediaFiles()
+    {
+        return $this->mapEmbedded('media', ProductMedia::className());
+    }
 
     public function embedFaqInfo()
     {
         return $this->mapEmbeddedList('faq', FaqQuestion::className());
     }
 
+    /**
+     * Load sub documents after find the object
+     *
+     * @return void
+     */
+    public function afterFind()
+    {
+        parent::afterFind();
+
+        $this->mediaFiles->load($this, 'media');
+        $this->mediaFiles->setProduct($this);
+    }
+
 
 	public function beforeSave($insert) {
+
+        if ($insert) {
+            //TODO: Move photos to definitive location
+        }
 
 		$slugs = [];
 		foreach ($this->name as $lang => $text) {
@@ -204,113 +221,85 @@ class Product2 extends CActiveRecord {
 		);
 	}
 
-	/**
-	 * Get one entity serialized
-	 *
-	 * @param string $id
-	 * @return Product2|null
-	 * @throws Exception
-	 */
-	public static function findOneSerialized($id)
-	{
-		/** @var Product $product */
-		$product = static::find()->select(self::getSelectFields())->where(["short_id" => $id])->one();
+    public function rules()
+    {
+        return [
+            [
+                [
+                    'deviser_id',
+                ],
+                'required',
+                'on' => [self::SCENARIO_PRODUCT_DRAFT]
+            ],
+            [
+                [
+                    'deviser_id',
+                    'name',
+                    'categories',
+                ],
+                'required',
+                'on' => [self::SCENARIO_PRODUCT_PUBLIC],
+            ],
+            [
+                [
+                    'deviser_id',
+                    'name',
+                    'slug',
+                    'description',
+                    'categories',
+                    'media',
+                    'faq',
+//					'collections',
+//					'options',
+//					'madetoorder',
+//					'sizechart',
+//					'bespoke',
+//					'preorder',
+//					'returns',
+//					'warranty',
+//					'currency',
+//					'weight_unit',
+//					'price_stock',
+                    'position',
+                    'product_state',
+                ],
+                'safe',
+                'on' => [self::SCENARIO_PRODUCT_OLD_API, self::SCENARIO_PRODUCT_DRAFT, self::SCENARIO_PRODUCT_PUBLIC]
+            ],
+            [
+                'product_state',
+                'in',
+                'range' => [self::PRODUCT_STATE_DRAFT, self::PRODUCT_STATE_ACTIVE],
+            ],
+            [
+                'name',
+                'app\validators\TranslatableValidator',
+                'on' => [self::SCENARIO_PRODUCT_DRAFT, self::SCENARIO_PRODUCT_PUBLIC],
+            ],
+            [
+                'description',
+                'app\validators\TranslatableValidator',
+                'on' => [self::SCENARIO_PRODUCT_DRAFT, self::SCENARIO_PRODUCT_PUBLIC],
+            ],
+            [
+                'categories',
+                'app\validators\CategoriesValidator',
+                'on' => [self::SCENARIO_PRODUCT_DRAFT, self::SCENARIO_PRODUCT_PUBLIC],
+            ],
+            [   'mediaFiles', 'app\validators\EmbedDocValidator'], // to apply rules
+            [   'faq', 'safe'], // to load data posted from WebServices
+            [   'faqInfo', 'app\validators\EmbedDocValidator'], // to apply rules
 
-		// if automatic translation is enabled
-		if (static::$translateFields) {
-			Utils::translate($product);
-		}
-		return $product;
-	}
 
-	/**
-	 * Get a collection of entities serialized, according to serialization configuration
-	 *
-	 * @param array $criteria
-	 * @return array
-	 * @throws Exception
-	 */
-	public static function findSerialized($criteria = [])
-	{
-
-		// Products query
-		$query = new ActiveQuery(static::className());
-
-		// Retrieve only fields that gonna be used
-		$query->select(self::getSelectFields());
-
-		// if product id is specified
-		if ((array_key_exists("id", $criteria)) && (!empty($criteria["id"]))) {
-			$query->andWhere(["short_id" => $criteria["id"]]);
-		}
-
-			// if deviser id is specified
-		if ((array_key_exists("deviser_id", $criteria)) && (!empty($criteria["deviser_id"]))) {
-			$query->andWhere(["deviser_id" => $criteria["deviser_id"]]);
-		}
-
-		// if categories are specified
-		if ((array_key_exists("categories", $criteria)) && (!empty($criteria["categories"]))) {
-			if (is_array($criteria["categories"])) {
-				$ids = [];
-				foreach ($criteria["categories"] as $categoryId) {
-					$category = Category::findOne(["short_id" => $categoryId]);
-					if ($category) {
-						$ids = array_merge($ids, $category->getShortIds());
-					}
-				}
-			} else {
-				$ids = [];
-				$category = Category::findOne(["short_id" => $criteria["categories"]]);
-				if ($category) {
-					$ids = array_merge($ids, $category->getShortIds());
-				}
-			}
-			$query->andWhere(["categories" => $ids]);
-		}
-
-		// if name is specified
-		if ((array_key_exists("name", $criteria)) && (!empty($criteria["name"]))) {
-//			// search the word in all available languages
-			$query->andFilterWhere(Utils::getFilterForTranslatableField("name", $criteria["name"]));
-		}
-
-		// if name is specified
-		if ((array_key_exists("text", $criteria)) && (!empty($criteria["text"]))) {
-			// TODO, find not only in description, in name, and other text attributes to be specified too
-//			// search the word in all available languages
-			$query->andFilterWhere(Utils::getFilterForTranslatableField("description", $criteria["text"]));
-		}
-
-		// Count how many items are with those conditions, before limit them for pagination
-		static::$countItemsFound = $query->count();
-
-		// limit
-		if ((array_key_exists("limit", $criteria)) && (!empty($criteria["limit"]))) {
-			$query->limit($criteria["limit"]);
-		}
-
-		// offset for pagination
-		if ((array_key_exists("offset", $criteria)) && (!empty($criteria["offset"]))) {
-			$query->offset($criteria["offset"]);
-		}
-
-		$query->orderBy("deviser_id, position");
-
-		$products = $query->all();
-
-		// if automatic translation is enabled
-		if (static::$translateFields) {
-			Utils::translate($products);
-		}
-		return $products;
-	}
-
-	public function deletePhotos() {
-		$product_path = Utils::join_paths(Yii::getAlias("@product"), $this->short_id);
-
-		Utils::rmdir($product_path);
-	}
+//			[
+//				['references'],
+//				'app\validators\EmbedDocValidator',
+//				'required',
+//				'on' => [self::SCENARIO_PRODUCT_OLD_API, self::SCENARIO_PRODUCT_DRAFT, self::SCENARIO_PRODUCT_PUBLIC],
+//				'model' => '\app\models\ProductReference'
+//			],
+        ];
+    }
 
 	/**
 	 * Prepare the ActiveRecord properties to serialize the objects properly, to retrieve an serialize
@@ -333,23 +322,21 @@ class Product2 extends CActiveRecord {
 					'deviser_id',
 				];
 				break;
-			case self::SERIALIZE_SCENARIO_PUBLIC:
-			case self::SCENARIO_PRODUCT_CREATE_DRAFT:
-			case self::SCENARIO_PRODUCT_UPDATE_DRAFT:
-				static::$serializeFields = [
-					'id' => 'short_id',
-					'deviser_id',
-					'deviser' => "deviserPreview",
-					'name',
-					'slug',
-					'description',
-					'categories',
-                    'photos',
+            case self::SERIALIZE_SCENARIO_PUBLIC:
+//			case self::SCENARIO_PRODUCT_CREATE_DRAFT:
+//			case self::SCENARIO_PRODUCT_UPDATE_DRAFT:
+                static::$serializeFields = [
+                    'id' => 'short_id',
+                    'deviser' => "deviserPreview",
+                    'name',
+                    'slug',
+                    'description',
+                    'categories',
+                    'media' => 'mediaInfoAttributes',
                     'faq',
                     'product_state',
 //					'enabled',
 //					'collections',
-//					'media',
 //					'madetoorder',
 //					'bespoke',
 //					'preorder',
@@ -360,16 +347,49 @@ class Product2 extends CActiveRecord {
 //					'references',
 //					'options' => 'productOptions',
 //					'url_images' => 'urlImagesLocation',
-					'position',
-				];
-				static::$retrieveExtraFields = [
-					'deviser_id',
+                    'position',
+                ];
+                static::$retrieveExtraFields = [
+                    'deviser_id',
 //					'sizechart',
 //					'price_stock',
-				];
+                ];
 
-				static::$translateFields = true;
-				break;
+                static::$translateFields = true;
+                break;
+            case self::SERIALIZE_SCENARIO_OWNER:
+                static::$serializeFields = [
+                    'id' => 'short_id',
+                    'deviser' => "deviserPreview",
+                    'name',
+                    'slug',
+                    'description',
+                    'categories',
+                    'media' => 'mediaInfoAttributes',
+                    'faq',
+                    'product_state',
+//					'enabled',
+//					'collections',
+//					'madetoorder',
+//					'bespoke',
+//					'preorder',
+//					'returns',
+//					'warranty',
+//					'currency',
+//					'weight_unit',
+//					'references',
+//					'options' => 'productOptions',
+//					'url_images' => 'urlImagesLocation',
+                    'position',
+                ];
+                static::$retrieveExtraFields = [
+                    'deviser_id',
+//					'sizechart',
+//					'price_stock',
+                ];
+
+                static::$translateFields = false;
+                break;
 			case self::SERIALIZE_SCENARIO_ADMIN:
 				static::$serializeFields = [
 					'id' => 'short_id',
@@ -404,6 +424,114 @@ class Product2 extends CActiveRecord {
 				break;
 		}
 	}
+
+    /**
+     * Get one entity serialized
+     *
+     * @param string $id
+     * @return Product2|null
+     * @throws Exception
+     */
+    public static function findOneSerialized($id)
+    {
+        /** @var Product $product */
+        $product = static::find()->select(self::getSelectFields())->where(["short_id" => $id])->one();
+
+        // if automatic translation is enabled
+        if (static::$translateFields) {
+            Utils::translate($product);
+        }
+        return $product;
+    }
+
+    /**
+     * Get a collection of entities serialized, according to serialization configuration
+     *
+     * @param array $criteria
+     * @return array
+     * @throws Exception
+     */
+    public static function findSerialized($criteria = [])
+    {
+
+        // Products query
+        $query = new ActiveQuery(static::className());
+
+        // Retrieve only fields that gonna be used
+        $query->select(self::getSelectFields());
+
+        // if product id is specified
+        if ((array_key_exists("id", $criteria)) && (!empty($criteria["id"]))) {
+            $query->andWhere(["short_id" => $criteria["id"]]);
+        }
+
+        // if deviser id is specified
+        if ((array_key_exists("deviser_id", $criteria)) && (!empty($criteria["deviser_id"]))) {
+            $query->andWhere(["deviser_id" => $criteria["deviser_id"]]);
+        }
+
+        // if categories are specified
+        if ((array_key_exists("categories", $criteria)) && (!empty($criteria["categories"]))) {
+            if (is_array($criteria["categories"])) {
+                $ids = [];
+                foreach ($criteria["categories"] as $categoryId) {
+                    $category = Category::findOne(["short_id" => $categoryId]);
+                    if ($category) {
+                        $ids = array_merge($ids, $category->getShortIds());
+                    }
+                }
+            } else {
+                $ids = [];
+                $category = Category::findOne(["short_id" => $criteria["categories"]]);
+                if ($category) {
+                    $ids = array_merge($ids, $category->getShortIds());
+                }
+            }
+            $query->andWhere(["categories" => $ids]);
+        }
+
+        // if name is specified
+        if ((array_key_exists("name", $criteria)) && (!empty($criteria["name"]))) {
+//			// search the word in all available languages
+            $query->andFilterWhere(Utils::getFilterForTranslatableField("name", $criteria["name"]));
+        }
+
+        // if name is specified
+        if ((array_key_exists("text", $criteria)) && (!empty($criteria["text"]))) {
+            // TODO, find not only in description, in name, and other text attributes to be specified too
+//			// search the word in all available languages
+            $query->andFilterWhere(Utils::getFilterForTranslatableField("description", $criteria["text"]));
+        }
+
+        // Count how many items are with those conditions, before limit them for pagination
+        static::$countItemsFound = $query->count();
+
+        // limit
+        if ((array_key_exists("limit", $criteria)) && (!empty($criteria["limit"]))) {
+            $query->limit($criteria["limit"]);
+        }
+
+        // offset for pagination
+        if ((array_key_exists("offset", $criteria)) && (!empty($criteria["offset"]))) {
+            $query->offset($criteria["offset"]);
+        }
+
+        $query->orderBy("deviser_id, position");
+
+        $products = $query->all();
+
+        // if automatic translation is enabled
+        if (static::$translateFields) {
+            Utils::translate($products);
+        }
+        return $products;
+    }
+
+    public function deletePhotos() {
+        $product_path = Utils::join_paths(Yii::getAlias("@product"), $this->short_id);
+
+        Utils::rmdir($product_path);
+    }
 
 	/**
 	 * Get the path to main product image
@@ -667,86 +795,17 @@ class Product2 extends CActiveRecord {
 		return Yii::getAlias("@product_url") . "/" . $this->short_id . "/";
 	}
 
-	public function rules()
-	{
-		return [
-			[
-				[
-					'deviser_id',
-				],
-				'required',
-				'on' => [self::SCENARIO_PRODUCT_CREATE_DRAFT]
-			],
-			[
-				[
-					'deviser_id',
-					'name',
-					'slug',
-					'description',
-					'categories',
-                    'photos',
-                    'faq',
-//					'collections',
-//					'media',
-//					'options',
-//					'madetoorder',
-//					'sizechart',
-//					'bespoke',
-//					'preorder',
-//					'returns',
-//					'warranty',
-//					'currency',
-//					'weight_unit',
-//					'price_stock',
-					'position',
-				],
-				'safe',
-				'on' => [self::SCENARIO_PRODUCT_OLD_API, self::SCENARIO_PRODUCT_CREATE_DRAFT, self::SCENARIO_PRODUCT_UPDATE_DRAFT]
-			],
-			[
-				['name', 'photos', 'categories'],
-				'required',
-				'on' => [self::SCENARIO_PRODUCT_PUBLISH, self::SCENARIO_PRODUCT_UPDATE],
-			],
-            [
-                'product_state',
-                'safe',
-            ],
-            [
-                'product_state',
-                'in',
-                'range' => [self::ACCOUNT_STATE_DRAFT, self::ACCOUNT_STATE_ACTIVE],
-            ],
-			[
-				'name',
-				'app\validators\TranslatableValidator',
-				'on' => [self::SCENARIO_PRODUCT_CREATE_DRAFT, self::SCENARIO_PRODUCT_UPDATE_DRAFT],
-			],
-			[
-				'description',
-				'app\validators\TranslatableValidator',
-				'on' => [self::SCENARIO_PRODUCT_CREATE_DRAFT, self::SCENARIO_PRODUCT_UPDATE_DRAFT],
-			],
-			[
-				'categories',
-				'app\validators\CategoriesValidator',
-				'on' => [self::SCENARIO_PRODUCT_CREATE_DRAFT, self::SCENARIO_PRODUCT_UPDATE_DRAFT],
-			],
-			[   'photos', 'safe'], // to load data posted from WebServices
-			[   'photosInfo', 'app\validators\EmbedDocValidator'], // to apply rules
-            [   'faq', 'safe'], // to load data posted from WebServices
-            [   'faqInfo', 'app\validators\EmbedDocValidator'], // to apply rules
+    /**
+     * Get media files attributes from their own Model, not from array.
+     *
+     * @return array
+     */
+    public function getMediaInfoAttributes()
+    {
+        $media = $this->mediaFiles->getAttributes();
 
-
-//			[
-//				['references'],
-//				'app\validators\EmbedDocValidator',
-//				'required',
-//				'on' => [self::SCENARIO_PRODUCT_OLD_API, self::SCENARIO_PRODUCT_CREATE_DRAFT, self::SCENARIO_PRODUCT_UPDATE_DRAFT],
-//				'model' => '\app\models\ProductReference'
-//			],
-		];
-	}
+        return $media;
+    }
 
 	/**
 	 * Spread data for sub documents
@@ -758,6 +817,10 @@ class Product2 extends CActiveRecord {
 	public function load($data, $formName = null)
 	{
 		$loaded = parent::load($data, $formName);
+
+        if (array_key_exists('media', $data)) {
+            $this->mediaFiles->load($data, 'media');
+        }
 
 		// use position behavior method to move it (only if it has primary key)
 		// commented until be needed...
@@ -802,6 +865,25 @@ class Product2 extends CActiveRecord {
                     break;
             }
         };
+    }
+
+    public function getUploadedFilesPath()
+    {
+        return Utils::join_paths(Yii::getAlias("@product"), $this->short_id);
+    }
+
+    /**
+     * Check if Deviser media file is exists
+     *
+     * @param string $filename
+     * @return bool
+     */
+    public function existMediaFile($filename)
+    {
+        if (empty($filename)) { return false; }
+
+        $filePath = $this->getUploadedFilesPath() . '/' . $filename;
+        return file_exists($filePath);
     }
 
 }
