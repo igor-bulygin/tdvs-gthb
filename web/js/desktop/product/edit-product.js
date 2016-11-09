@@ -8,6 +8,8 @@
 				
 		vm.deviser_id = UtilService.returnDeviserIdFromUrl();
 		vm.product_id = UtilService.returnProductIdFromUrl();
+		vm.loadCategory = [];
+				
 		
 		function init(){
 			getLanguages();
@@ -29,7 +31,7 @@
 		}
 
 		function getCategories() {
-			productDataService.Categories.get()
+			productDataService.Categories.get({scope: 'all'})
 				.$promise.then(function (dataCategories) {
 					vm.allCategories = dataCategories.items;
 				}, function(err) {
@@ -50,13 +52,31 @@
 		}
 
 		function getProduct() {
-			productDataService.Product.get({
-				product_id: UtilService.returnProductIdFromUrl()
+			productDataService.ProductPriv.get({
+				idProduct: UtilService.returnProductIdFromUrl()
 			}).$promise.then(function(dataProduct) {
-				//vm.product = dataProduct;
-
-				//vm.product_original = angular.copy(dataProduct);
+				vm.product = dataProduct;
+				vm.product_original = angular.copy(dataProduct);
 				
+				angular.forEach(dataProduct.categories, function(value, key){
+						
+					angular.forEach(vm.allCategories, function(values,keys){
+
+						if(value == values.id){
+							var catHelp =[]
+							catHelp = values.path.split("/");
+							catHelp.shift();
+							catHelp.pop();
+							vm.loadCategory[key]=catHelp;
+							console.log(catHelp);
+							
+						}
+					});
+					
+				});
+				//console.log(vm.loadCategory);
+
+
 			}, function (err) {
 				toastr.error(err);
 			});
@@ -64,27 +84,7 @@
 		
 		
 	//}
-	//watches
-	$scope.$watch('editProductCtrl.product', function (newValue, oldValue) {
-		if(newValue) {
-			if(!angular.equals(newValue, vm.product_original)) {
-				$rootScope.$broadcast(productEvents.product_changed, {value: true, product: newValue});
-			} else {
-				$rootScope.$broadcast(productEvents.product_changed, {value: false});
-			}
-		}
-	}, true);
-
-	//events
-	$scope.$on(productEvents.product_updated, function(event, args) {
-		getProduct();
-	});
-
-	$scope.$on(productEvents.product_changed, function(event, args) {
-		if(args.product)
-			vm.product = angular.copy(args.product);
-	});
-
+		
 }
 
 	angular
