@@ -11,7 +11,7 @@
 					<div class="col-md-4">
 						<label data-ng-for="{{tag.name}}" ng-bind="tag.name"></label>
 					</div>
-					<div class="col-md-8 ng-class:{col-md-offset-4: {{$index>0}} }"  ng-repeat="item in productVariationsCtrl.product.options[tag.id] track by $index">
+					<div class="col-md-8 ng-class:{'col-md-offset-4': $index > 0}" ng-repeat="item in productVariationsCtrl.product.options[tag.id] track by $index">
 						<span>{{$index+1}}:&nbsp;</span>
 						<ol class="nya-bs-select" ng-model="productVariationsCtrl.product.options[tag.id][$index]" multiple>
 							<li nya-bs-option="option in tag.options" data-value="option.value" deep-watch="true" class="ng-class:{'disabled': productVariationsCtrl.product.options[tag.id][$index].length >= tag.n_options}">
