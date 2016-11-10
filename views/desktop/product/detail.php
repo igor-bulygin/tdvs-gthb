@@ -111,7 +111,7 @@ $videos = $product->getVideos();
                         </div>
 						<div class="product-data">
 							<div class="price-stock pull-left">
-								<div class="stock"><span ng-bind=""></span>6 in stock</div>
+								<div class="stock"><span ng-bind="detailProductCtrl.stock"></span> in stock</div>
 								<div class="product-price">€ <span ng-bind="detailProductCtrl.price"></span></div>
 							</div>
 							<div class="quantity-wrapper pull-right">
