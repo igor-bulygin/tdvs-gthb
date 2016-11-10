@@ -95,17 +95,18 @@
 			//localStorageService.set('draftProducts', vm.products);
 			vm.product.product_state = angular.copy(state);
 			if(vm.product.id) {
-				vm.product.$update()
-					.then(function(dataSaved) {
-						toastr.success('Saved!');
-						console.log(dataSaved);
-					})
+				vm.product.$update({
+					idProduct: vm.product.id
+				}).then(function(dataSaved) {
+					vm.product = dataSaved;
+					toastr.success('Saved!');
+				});
 			}
 			else {
 				vm.product.$save()
 					.then(function (dataSaved) {
+						vm.product = dataSaved;
 						toastr.success('Saved!');
-						console.log(dataSaved);
 					});
 			}
 		}
