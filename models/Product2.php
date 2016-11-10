@@ -16,6 +16,7 @@ use yii\web\IdentityInterface;
 use yii\base\NotSupportedException;
 use yii2tech\ar\position\PositionBehavior;
 use yii2tech\embedded\Mapping;
+use yii\helpers\FileHelper;
 
 /**
  * @property string deviser_id
@@ -178,17 +179,23 @@ class Product2 extends CActiveRecord {
 	public function beforeSave($insert) {
 
         if ($insert) {
-            //TODO: Move photos to definitive location
-			/*foreach ($this->media->photos as $onephoto) {
 
-				//die(Utils::join_paths(Yii::getAlias("@product"), $this->short_id));
+			foreach ($this->media['photos'] as $onephoto) {
+				$find_photo = $onephoto['name'];
+				$source_tmp = Utils::join_paths(Yii::getAlias("@product"), "temp",$find_photo);
+				$path_destination = $this->getUploadedFilesPath();
+				$destination = Utils::join_paths($path_destination, $find_photo);
 
-				if(!file_exists(Utils::join_paths(Yii::getAlias("@product"), $this->short_id))) {
-					if (!copy(Utils::join_paths(Yii::getAlias("@product"), "temp")."/".$onephoto->name, Utils::join_paths(Yii::getAlias("@product"), $this->short_id)."/".$onephoto->name)) {
-						echo "Error al copiar fichero de la carpeta: ".Utils::join_paths(Yii::getAlias("@product"), "temp")."/".$onephoto->name." a la carpeta: ".Utils::join_paths(Yii::getAlias("@product"), $this->short_id)."/".$onephoto->name."\n";
+				if(!file_exists($destination)) {
+
+					if(file_exists($source_tmp)) {
+
+						if(!file_exists($path_destination)) FileHelper::createDirectory($path_destination);
+						rename($source_tmp, $destination );
+
 					}
 				}
-			}*/
+			}
         }
 
 		$slugs = [];
