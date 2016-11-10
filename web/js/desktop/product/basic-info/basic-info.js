@@ -74,19 +74,22 @@
 		function uploadPhoto(images, errImages) {
 			vm.files = images;
 			vm.errFiles = errImages;
+			var data = {
+				deviser_id: UtilService.returnDeviserIdFromUrl()
+			};
 			var type;
-			if(vm.product.id)
-				type = 'known-product-photo';
+			if(vm.product.id){
+					type = 'known-product-photo';
+					data['product_id'] = vm.product.id;
+				}
 			else {
 				type = 'unknown-product-photo';
 			}
+			data['type'] = type;
+
 			//upload photos
 			angular.forEach(vm.files, function(file) {
-				var data = {
-					type: type,
-					deviser_id: UtilService.returnDeviserIdFromUrl(),
-					file: file
-				}
+				data['file'] = file;
 				Upload.upload({
 					url: productDataService.Uploads,
 					data: data
@@ -118,17 +121,19 @@
 			modalInstance.result.then(function(imageCropped) {
 				if(imageCropped) {
 					//upload image
+					var data = {
+						deviser_id: UtilService.returnDeviserIdFromUrl(),
+						file: Upload.dataUrltoBlob(imageCropped, "temp.png")
+					}
 					var type;
-					if(vm.product.id)
-						type = 'known-product-photo';
+					if(vm.product.id) {
+							type = 'known-product-photo';
+							data['product_id'] = vm.product.id;
+						}
 					else {
 						type = 'unknown-product-photo';
 					}
-					var data = {
-						type: type,
-						deviser_id: UtilService.returnDeviserIdFromUrl(),
-						file: Upload.dataUrltoBlob(imageCropped, "temp.png")
-					};
+					data['type'] = type;
 					Upload.upload({
 						url: productDataService.Uploads,
 						data: data

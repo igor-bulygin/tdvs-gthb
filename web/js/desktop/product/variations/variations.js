@@ -10,6 +10,7 @@
 			vm.setPreorder = setPreorder;
 			vm.setPreorderEnd = setPreorderEnd;
 			vm.setPreorderShip = setPreorderShip;
+			vm.limitTagOption = limitTagOption;
 			//vars
 			vm.tag_order = ['Color', 'Material', 'Size', 'Style'];
 			vm.tagComparator = tagComparator;
@@ -55,6 +56,16 @@
 					}
 				});
 			});
+			vm.tags_setted.forEach(function(element) {
+				if(!vm.product.options[element]) {
+					vm.product.options[element] = [[]];
+				}
+			})
+		}
+
+		function limitTagOption(limit, array) {
+			if(array.length > limit)
+				array.splice(1, array.length-1);
 		}
 
 		//watchs
