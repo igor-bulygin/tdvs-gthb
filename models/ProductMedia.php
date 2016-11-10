@@ -1,21 +1,48 @@
 <?php
 namespace app\models;
 
+use app\helpers\CActiveRecord;
 use yii\base\Model;
 
 /**
+ * @property ProductPhoto[] $photosInfo
  * @property array $photos
  */
-class ProductMedia extends Model
+class ProductMedia extends CActiveRecord
 {
-
 	/**
-	 * @var array
+	 * @var array $photos
 	 */
 	public $photos;
 
+	/**
+	 * @var array $video_links
+	 */
+	public $video_links;
+
 	/** @var  Product2 */
 	protected $product;
+
+	public function attributes()
+	{
+		return [
+			'photos',
+			'video_links',
+		];
+	}
+
+	/**
+	 * Initialize model attributes
+	 */
+	public function init()
+	{
+		$this->photosInfo = [];
+	}
+
+	public function embedPhotosInfo()
+	{
+		return $this->mapEmbeddedList('photos', ProductPhoto::className());
+	}
 
 	/**
 	 * @return Product2
@@ -38,13 +65,6 @@ class ProductMedia extends Model
 		return "media";
 	}
 
-	public function init()
-	{
-		parent::init();
-
-		$this->photos = [];
-	}
-
 	/**
 	 * Assign some default attributes for historical objects
 	 *
@@ -55,6 +75,10 @@ class ProductMedia extends Model
 	public function load($data, $formName = null)
 	{
 		$loaded = parent::load($data, $formName);
+
+//		if (array_key_exists('photos', $data)) {
+//            $this->photosInfo->load($data, 'photos');
+//        }
 
 		return $loaded;
 	}

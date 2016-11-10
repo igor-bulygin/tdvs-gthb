@@ -46,7 +46,7 @@ use yii2tech\embedded\Mapping;
  * @property int enabled
  * @method   PositionBehavior moveToPosition($position)
  */
-class Product2 extends CActiveRecord {
+class Product2 extends Product {
 
     const PRODUCT_STATE_DRAFT = 'product_state_draft';
     const PRODUCT_STATE_ACTIVE = 'product_state_active';
@@ -78,25 +78,25 @@ class Product2 extends CActiveRecord {
 			'_id',
 			'short_id',
 			'deviser_id',
+			'enabled',
+			'categories',
+			'faq',
+			'product_state',
+			'collections',
 			'name',
 			'slug',
 			'description',
-			'categories',
 			'media',
-            'faq',
-            'product_state',
-//			'enabled',
-//			'collections',
-//			'options',
-//			'madetoorder',
-//			'sizechart',
-//			'references',
-//			'bespoke',
-//			'preorder',
-//			'returns',
-//			'warranty',
-//			'currency',
-//			'weight_unit',
+			'options',
+			'madetoorder',
+			'sizechart',
+			'references',
+			'bespoke',
+			'preorder',
+			'returns',
+			'warranty',
+			'currency',
+			'weight_unit',
 			'price_stock',
 			'position',
 			'created_at',
@@ -121,28 +121,27 @@ class Product2 extends CActiveRecord {
 		$this->short_id = Utils::shortID(7);
 
 		// initialize attributes
+		$this->categories = [];
+		$this->faq = [];
+		$this->collections = [];
 		$this->name = [];
 		$this->slug = [];
 		$this->description = [];
-		$this->categories = [];
-        $this->faq = [];
-
-        $this->mediaFiles = new ProductMedia();
-        $this->mediaFiles->setProduct($this);
-
-        //$this->collections = [];
-//		$this->options = [];
-//		$this->madetoorder = [];
-//		$this->sizechart = [];
-//		$this->bespoke = [];
-//		$this->preorder = [];
-//		$this->returns = [];
-//		$this->warranty = [];
-//		$this->currency = "";
-//		$this->weight_unit = "";
+		$this->options = [];
+		$this->madetoorder = [];
+		$this->sizechart = [];
+		$this->bespoke = [];
+		$this->preorder = [];
+		$this->returns = [];
+		$this->warranty = [];
+		$this->currency = "";
+		$this->weight_unit = "";
 		$this->price_stock = [];
-//		$this->references = [];
+		$this->references = [];
 		$this->position = 0;
+
+		$this->mediaFiles = new ProductMedia();
+		$this->mediaFiles->setProduct($this);
 	}
 
     public function setScenario($value)
@@ -259,16 +258,16 @@ class Product2 extends CActiveRecord {
                     'categories',
                     'media',
                     'faq',
-//					'collections',
-//					'options',
-//					'madetoorder',
-//					'sizechart',
-//					'bespoke',
-//					'preorder',
-//					'returns',
-//					'warranty',
-//					'currency',
-//					'weight_unit',
+					'collections',
+					'options',
+					'madetoorder',
+					'sizechart',
+					'bespoke',
+					'preorder',
+					'returns',
+					'warranty',
+					'currency',
+					'weight_unit',
 					'price_stock',
                     'position',
                     'product_state',
@@ -340,26 +339,28 @@ class Product2 extends CActiveRecord {
                     'slug',
                     'description',
                     'categories',
-                    'media' => 'mediaInfoAttributes',
-                    'faq',
+                    'media',
+					'mediaFiles' => 'mediaInfoAttributes',
+					'faq',
                     'product_state',
-//					'enabled',
-//					'collections',
-//					'madetoorder',
-//					'bespoke',
-//					'preorder',
-//					'returns',
-//					'warranty',
-//					'currency',
-//					'weight_unit',
-//					'references',
-//					'options' => 'productOptions',
-//					'url_images' => 'urlImagesLocation',
+					'enabled',
+					'collections',
+					'madetoorder',
+					'bespoke',
+					'preorder',
+					'returns',
+					'warranty',
+					'currency',
+					'weight_unit',
+					'references',
+					'options' => 'productOptions',
+					'url_images' => 'urlImagesLocation',
                     'position',
 					'price_stock',
                 ];
                 static::$retrieveExtraFields = [
                     'deviser_id',
+					'options',
 //					'sizechart',
 
                 ];
@@ -374,26 +375,28 @@ class Product2 extends CActiveRecord {
                     'slug',
                     'description',
                     'categories',
-                    'media' => 'mediaInfoAttributes',
-                    'faq',
+                    'media',
+					'mediaFiles' => 'mediaInfoAttributes',
+					'faq',
                     'product_state',
-//					'enabled',
-//					'collections',
-//					'madetoorder',
-//					'bespoke',
-//					'preorder',
-//					'returns',
-//					'warranty',
-//					'currency',
-//					'weight_unit',
-//					'references',
-//					'options' => 'productOptions',
-//					'url_images' => 'urlImagesLocation',
+					'enabled',
+					'collections',
+					'madetoorder',
+					'bespoke',
+					'preorder',
+					'returns',
+					'warranty',
+					'currency',
+					'weight_unit',
+					'references',
+					'options' => 'productOptions',
+					'url_images' => 'urlImagesLocation',
                     'position',
 					'price_stock',
                 ];
                 static::$retrieveExtraFields = [
                     'deviser_id',
+					'options',
 //					'sizechart',
 //
                 ];
@@ -828,7 +831,7 @@ class Product2 extends CActiveRecord {
 	{
 		$loaded = parent::load($data, $formName);
 
-        if (array_key_exists('media', $data)) {
+		if (array_key_exists('media', $data)) {
             $this->mediaFiles->load($data, 'media');
         }
 
