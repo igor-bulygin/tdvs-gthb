@@ -20,7 +20,6 @@
 			}).$promise.then(function (dataProduct) {
 				vm.product = dataProduct;
 				vm.minimum_price = getMinimumPrice(vm.product.price_stock);
-				vm.price_showing = vm.minimum_price;
 				vm.total_stock = getTotalStock(vm.product.price_stock);
 				vm.stock = vm.total_stock;
 				vm.price = vm.minimum_price;
