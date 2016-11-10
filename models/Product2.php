@@ -361,7 +361,7 @@ class Product2 extends Product {
                 static::$retrieveExtraFields = [
                     'deviser_id',
 					'options',
-//					'sizechart',
+					'sizechart',
 
                 ];
 
@@ -397,7 +397,7 @@ class Product2 extends Product {
                 static::$retrieveExtraFields = [
                     'deviser_id',
 					'options',
-//					'sizechart',
+					'sizechart',
 //
                 ];
 
