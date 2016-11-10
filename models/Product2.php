@@ -97,7 +97,7 @@ class Product2 extends CActiveRecord {
 //			'warranty',
 //			'currency',
 //			'weight_unit',
-//			'price_stock',
+			'price_stock',
 			'position',
 			'created_at',
 			'updated_at',
@@ -140,7 +140,7 @@ class Product2 extends CActiveRecord {
 //		$this->warranty = [];
 //		$this->currency = "";
 //		$this->weight_unit = "";
-//		$this->price_stock = [];
+		$this->price_stock = [];
 //		$this->references = [];
 		$this->position = 0;
 	}
@@ -179,6 +179,16 @@ class Product2 extends CActiveRecord {
 
         if ($insert) {
             //TODO: Move photos to definitive location
+			/*foreach ($this->media->photos as $onephoto) {
+
+				//die(Utils::join_paths(Yii::getAlias("@product"), $this->short_id));
+
+				if(!file_exists(Utils::join_paths(Yii::getAlias("@product"), $this->short_id))) {
+					if (!copy(Utils::join_paths(Yii::getAlias("@product"), "temp")."/".$onephoto->name, Utils::join_paths(Yii::getAlias("@product"), $this->short_id)."/".$onephoto->name)) {
+						echo "Error al copiar fichero de la carpeta: ".Utils::join_paths(Yii::getAlias("@product"), "temp")."/".$onephoto->name." a la carpeta: ".Utils::join_paths(Yii::getAlias("@product"), $this->short_id)."/".$onephoto->name."\n";
+					}
+				}
+			}*/
         }
 
 		$slugs = [];
@@ -259,7 +269,7 @@ class Product2 extends CActiveRecord {
 //					'warranty',
 //					'currency',
 //					'weight_unit',
-//					'price_stock',
+					'price_stock',
                     'position',
                     'product_state',
                 ],
@@ -323,8 +333,6 @@ class Product2 extends CActiveRecord {
 				];
 				break;
             case self::SERIALIZE_SCENARIO_PUBLIC:
-//			case self::SCENARIO_PRODUCT_CREATE_DRAFT:
-//			case self::SCENARIO_PRODUCT_UPDATE_DRAFT:
                 static::$serializeFields = [
                     'id' => 'short_id',
                     'deviser' => "deviserPreview",
@@ -348,11 +356,12 @@ class Product2 extends CActiveRecord {
 //					'options' => 'productOptions',
 //					'url_images' => 'urlImagesLocation',
                     'position',
+					'price_stock',
                 ];
                 static::$retrieveExtraFields = [
                     'deviser_id',
 //					'sizechart',
-//					'price_stock',
+
                 ];
 
                 static::$translateFields = true;
@@ -381,11 +390,12 @@ class Product2 extends CActiveRecord {
 //					'options' => 'productOptions',
 //					'url_images' => 'urlImagesLocation',
                     'position',
+					'price_stock',
                 ];
                 static::$retrieveExtraFields = [
                     'deviser_id',
 //					'sizechart',
-//					'price_stock',
+//
                 ];
 
                 static::$translateFields = false;
