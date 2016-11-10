@@ -8,7 +8,8 @@
 
 		//events
 		$provide.value("productEvents", {
-			setTagsFromCategory: 'set-tags-from-category'
+			setTagsFromCategory: 'set-tags-from-category',
+			requiredErrors: 'set-required-errors'
 		});
 
 		localStorageServiceProvider

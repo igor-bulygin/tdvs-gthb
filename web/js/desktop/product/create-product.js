@@ -1,6 +1,6 @@
 (function () {
 
-	function controller(deviserDataService, productDataService, languageDataService, toastr, UtilService, localStorageService, tagDataService) {
+	function controller(deviserDataService, productDataService, languageDataService, toastr, UtilService, localStorageService, tagDataService, productEvents, $rootScope) {
 		var vm = this;
 		vm.save = save;
 		vm.deviser_id = UtilService.returnDeviserIdFromUrl();
@@ -31,7 +31,7 @@
 		init();
 
 		function getCategories() {
-			productDataService.Categories.get({scope: 'all', limit: 999})
+			productDataService.Categories.get({scope: 'all'})
 				.$promise.then(function(dataCategories) {
 					vm.allCategories = dataCategories.items;
 				}, function(err) {
@@ -90,10 +90,21 @@
 			}
 		}
 
+		function parseEmptyFields(obj) {
+			for(var key in obj) {
+				if(obj[key].length === 0)
+					delete obj[key];
+			}
+		}
+
 		function save(state) {
-			//vm.products.push(vm.product);
-			//localStorageService.set('draftProducts', vm.products);
+			//set state of the product
 			vm.product.product_state = angular.copy(state);
+
+			//parse empty multilanguage fields
+			parseEmptyFields(vm.product.name);
+			parseEmptyFields(vm.product.description);
+			
 			if(vm.product.id) {
 				vm.product.$update({
 					idProduct: vm.product.id
@@ -107,6 +118,10 @@
 					.then(function (dataSaved) {
 						vm.product = dataSaved;
 						toastr.success('Saved!');
+					}, function(err) {
+						console.log(err);
+						//send errors to components
+						$rootScope.$broadcast(productEvents.requiredErrors, {required: err.data.errors.required})
 					});
 			}
 		}

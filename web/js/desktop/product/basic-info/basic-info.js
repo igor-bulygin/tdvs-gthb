@@ -181,7 +181,10 @@
 
 		//events
 		//TO DO: set name required if it is empty in english (vm.nameRequired=true)
-
+		$scope.$on(productEvents.requiredErrors, function(event, args){
+			console.log(args.required);
+			
+		})
 	}
 
 	var component = {

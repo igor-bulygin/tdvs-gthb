@@ -17,6 +17,7 @@ class ProductDetailAsset extends AssetBundle {
 	];
 	public $depends = [
 		'app\assets\desktop\pub\PublicCommonAsset',
+		'app\assets\libs\nyaBootstrapSelectAsset',
 		'app\assets\libs\macyAsset',
 		'app\assets\libs\angularAsset',
 		'app\assets\libs\angularToastrAsset',
