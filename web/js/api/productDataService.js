@@ -9,7 +9,7 @@
 		//priv
 		this.ProductPriv = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'products/:idProduct', {}, {
 			'update': {
-				method: 'PATCH'
+				method: 'PUT'
 			}
 		});
 		this.Uploads = apiConfig.baseUrl + "priv/" + apiConfig.version + 'uploads';

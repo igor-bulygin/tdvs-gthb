@@ -7,17 +7,19 @@
 			<span class="title">Work Options</span>
 			</div>
 			<div ng-repeat="tag in productVariationsCtrl.tags_for_work | orderBy:[productVariationsCtrl.tagComparator]">
-				<div class="row">
+				<div class="row" ng-if="tag.n_options > 0" ng-cloak>
 					<div class="col-md-4">
 						<label data-ng-for="{{tag.name}}" ng-bind="tag.name"></label>
 					</div>
-					<div class="col-md-8">
-						<ol class="about-edit-select nya-bs-select" ng-model="productVariationsCtrl.product.options[tag.id]" multiple>
-							<li nya-bs-option="option in tag.options" data-value="option.value" deep-watch="true">
-								<a><span ng-bind="option.text['en-US']"><span class="glyphicon glyphicon-ok check-mark"></span></span></a>
+					<div class="col-md-8" ng-repeat="item in productVariationsCtrl.product.options[tag.id] track by $index">
+						<span>{{$index+1}}:&nbsp;</span>
+						<ol class="nya-bs-select" ng-model="productVariationsCtrl.product.options[tag.id][$index]" multiple>
+							<li nya-bs-option="option in tag.options" data-value="option.value" deep-watch="true" class="ng-class:{'disabled': productVariationsCtrl.product.options[tag.id][$index].length >= tag.n_options}">
+								<a><span ng-bind="option.text['en-US']"></span><span class="glyphicon glyphicon-ok check-mark"></span></a>
 							</li>
 						</ol>
 					</div>
+					<p><span ng-click="productVariationsCtrl.product.options[tag.id].push([])">+ add another option</span></p>
 				</div>
 			</div>
 		</div>

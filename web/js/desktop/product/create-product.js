@@ -7,22 +7,19 @@
 
 		function init() {
 			vm.product = new productDataService.ProductPriv();
-			vm.product = {
-				categories: [],
-				media: {
-					photos: [],
-					description_photos: []
-				},
-				faq: [],
-				tags: [],
-				madetoorder: {
-					type: 0
-				},
-				preorder: {
-					type: 0
-				},
-				options: {}
-			}
+			vm.product.categories = [];
+			vm.product.media = {
+				photos: [],
+				description_photos: []
+			};
+			vm.product.faq = [];
+			vm.product.options = {};
+			vm.product.madetoorder = {
+				type: 0
+			};
+			vm.product.preorder = {
+				type: 0
+			};
 			getLanguages();
 			getCategories();
 			getDeviser();
@@ -93,17 +90,23 @@
 			}
 		}
 
-		function save() {
+		function save(state) {
 			//vm.products.push(vm.product);
 			//localStorageService.set('draftProducts', vm.products);
+			vm.product.product_state = angular.copy(state);
 			if(vm.product.id) {
-				//put
+				vm.product.$update({
+					idProduct: vm.product.id
+				}).then(function(dataSaved) {
+					vm.product = dataSaved;
+					toastr.success('Saved!');
+				});
 			}
 			else {
 				vm.product.$save()
 					.then(function (dataSaved) {
+						vm.product = dataSaved;
 						toastr.success('Saved!');
-						console.log(dataSaved);
 					});
 			}
 		}
