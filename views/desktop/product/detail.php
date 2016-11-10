@@ -100,15 +100,15 @@ $videos = $product->getVideos();
 								<i class="ion-ios-star"></i>
 							</span>
 							<span class="number-score">(20)</span>
-                            <div class="avatar-wrapper-side">
-                                <div class="avatar">
-                                    <a href="<?= Url::to(["deviser/store", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id]) ?>">
-                                        <img class="cover" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($deviser->getAvatarImage())->resize(128, 128) ?>" data-pin-nopin="true">
-                                        <span><?= $deviser->personalInfo->getBrandName() ?></span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+							<div class="avatar-wrapper-side">
+								<div class="avatar">
+									<a href="<?= Url::to(["deviser/store", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id]) ?>">
+										<img class="cover" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($deviser->getAvatarImage())->resize(128, 128) ?>" data-pin-nopin="true">
+										<span><?= $deviser->personalInfo->getBrandName() ?></span>
+									</a>
+								</div>
+							</div>
+						</div>
 						<div class="product-data">
 							<div class="price-stock pull-left">
 								<div class="stock"><span ng-bind="detailProductCtrl.stock"></span> in stock</div>
@@ -117,10 +117,10 @@ $videos = $product->getVideos();
 							<div class="quantity-wrapper pull-right">
 								<span class="atr quantity-name">Quantity</span>
 								<div class="number" ng-bind="detailProductCtrl.quantity"></div>
-								<button class="btn btn-green btn-summatory">
+								<button class="btn btn-green btn-summatory" ng-click="detailProductCtrl.addQuantity()">
 									<span>+</span>
 								</button>
-								<button class="btn btn-green btn-summatory">
+								<button class="btn btn-green btn-summatory" ng-click="detailProductCtrl.subQuantity()">
 									<span>-</span>
 								</button>
 							</div>
@@ -139,7 +139,7 @@ $videos = $product->getVideos();
 									<div class="form-group">
 										<div class="row-size expand" ng-repeat="option in detailProductCtrl.product.options | orderBy:[detailProductCtrl.selectComparator]">
 											<label class="col-sm-3 control-label product-label"><span class="atr" ng-bind="option.name"></span></label>
-											<div class="col-sm-9" ng-if="option.values.length > 1">
+											<div class="col-sm-9" ng-if="option.values.length > 1" ng-cloak>
 												<div class="row">
 													<div class="col-sm-8">
 														<ol class="nya-bs-select btn-group bootstrap-select form-control product-select" ng-model="detailProductCtrl.option_selected[$index]">
@@ -162,94 +162,6 @@ $videos = $product->getVideos();
 									</div>
 								</div>
 							</div>
-							<div class="row-size">
-								<form class="form-horizontal">
-									<div class="form-group">
-										<label class="col-sm-3 control-label product-label"><span class="atr">Size</span></label>
-										<div class="col-sm-6">
-											<select class="form-control selectpicker product-select" title="Select an option">
-												<option></option>
-												<option>
-													XS (+ € 1.95)
-												</option>
-												<option>
-													S (+ € 1.95)
-												</option>
-												<option>
-													M (+ € 0.95)
-												</option>
-												<option>
-													L (+ € 0.95)
-												</option>
-												<option>
-													XL (+ € 1.95)
-												</option>
-												<option>
-													XXL (+ € 1.95)
-												</option>
-											</select>
-										</div>
-										<div class="col-sm-3 no-pad">
-											<a class="view-chart-size" href="#" data-toggle="modal" data-target="#chartModal">View size chart</a>
-										</div>
-									</div>
-								</form>
-                            </div>
-                            <div class="row-size">
-                                <form class="form-horizontal">
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label product-label"><span class="atr">Color</span></label>
-                                        <div class="col-sm-6">
-                                            <select class="form-control selectpicker product-select" title="Select an option">
-                                              <option></option>
-                                              <option>
-                                                  Yellow (+ € 1.95)
-                                              </option>
-                                              <option>
-                                                  Blue (+ € 0.95)
-                                              </option>
-                                              <option>
-                                                  Pink (+ € 1.95)
-                                              </option>
-                                              <option>
-                                                  Orange (+ € 0.95)
-                                              </option>
-                                            </select>
-                                        </div>
-                                        <div class="col-sm-3 no-pad">
-                                          
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="row-size">
-                                <form class="form-horizontal">
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label product-label"><span class="atr">Color</span></label>
-                                        <div class="col-sm-9">
-                                            <div class="atribute-selected">Silk</div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label product-label"><span class="atr">Occasion</span></label>
-                                        <div class="col-sm-9">
-                                            <div class="atribute-selected">Casual</div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label product-label"><span class="atr">Season</span></label>
-                                        <div class="col-sm-9">
-                                            <div class="atribute-selected">All year</div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label product-label"><span class="atr">Technique</span></label>
-                                        <div class="col-sm-9">
-                                            <div class="atribute-selected">Other</div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
 							<!--<div class="row-size">
 								<form class="form-horizontal" name="detailProductCtrl.selectorForm">
 									<div class="form-group" ng-repeat="option in detailProductCtrl.product.options | orderBy:[detailProductCtrl.selectComparator]">
@@ -260,7 +172,7 @@ $videos = $product->getVideos();
 								</form>
 							</div>-->
 							<div class="row-size">
-								<button type="button" class="btn btn-green btn-add-to-cart"><i class="ion-ios-cart cart-icon-btn"></i> <span>Add to cart</span></button>
+								<button type="button" class="btn btn-green btn-add-to-cart" ng-disabled="detailProductCtrl.stock === 0"><i class="ion-ios-cart cart-icon-btn"></i> <span>Add to cart</span></button>
 							</div>
 						</div>
 						<!--<div class="product-data">
@@ -367,34 +279,34 @@ $videos = $product->getVideos();
 				<div role="tabpanel" class="tab-pane work-description-wrapper active" id="description">
 					<div class="work-profile-description-wrapper">
 						<div class="col-sm-8 pad-product">
-							<div class="title">Work Description</div>
+							<div class="title">Description</div>
 							<p class="description">
 								<?= $product->description ?>
 							</p>
 						</div>
 						<div class="col-sm-4">
 							<div class="shipping-policies-wrapper">
-                                <div class="title">Shipping &amp; Policies</div>
-                                <div class="policies-row">
-                                    <form class="form-horizontal">
-                                        <div class="form-group">
-                                            <label class="col-sm-4 control-label shipping-label"><span>Shipping price to</span></label>
-                                            <div class="col-sm-5 pad-product">
-                                                <select class="form-control selectpicker shipping-select product-select" title="Choose country">
-                                                    <option>USA</option>
-                                                    <option>SPAIN</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-sm-3">
-                                                is <span class="tax">€4.5</span>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="returns-row">
-                                    Returns: 14 days
-                                </div>
-                                <div class="returns-row">
+								<div class="title">Shipping &amp; Policies</div>
+									<div class="policies-row">
+									<form class="form-horizontal">
+										<div class="form-group">
+											<label class="col-sm-4 control-label shipping-label"><span>Shipping price to</span></label>
+											<div class="col-sm-5 pad-product">
+												<select class="form-control selectpicker shipping-select product-select" title="Choose country">
+													<option>USA</option>
+													<option>SPAIN</option>
+												</select>
+											</div>
+											<div class="col-sm-3">
+												is <span class="tax">€4.5</span>
+											</div>
+										</div>
+									</form>
+								</div>
+								<div class="returns-row">
+									Returns: 14 days
+								</div>
+								<div class="returns-row">
                                     Warranty:
                                     <?= $product->getWarrantyLabel() ?>
                                 </div>
@@ -406,6 +318,7 @@ $videos = $product->getVideos();
 <!--                            <div class="col-md-3 work-profile-description-tb">-->
 <!--                                <img src="/imgs/pullera.jpg">-->
 <!--                                <span class="tb-title">Lorem ipsum sit amet</span>  -->
+		
 <!--                                <span class="tb-description">Swim like a crazy person with this amazing watch Swim like a crazy person with this amazing watch</span>  -->
 <!--                            </div>-->
 <!--                            <div class="col-md-3 work-profile-description-tb">-->

@@ -5,6 +5,8 @@
 		var vm = this;
 		vm.quantity = 1;
 		vm.optionsSelected = {};
+		vm.addQuantity = addQuantity;
+		vm.subQuantity = subQuantity;
 		vm.getReferencesFromOptions = getReferencesFromOptions;
 		vm.selectComparator = selectComparator;
 		var select_order = ['size', 'color', 'select']
@@ -33,6 +35,8 @@
 			getProductId();
 			getProduct();
 		}
+
+		init();
 
 		function getMinimumPrice(references) {
 			if(references.length > 0) {
@@ -74,7 +78,15 @@
 			//return references_filtered;
 		}
 
-		init();
+		function addQuantity(){
+			vm.quantity += 1;
+		}
+
+		function subQuantity(){
+			if(vm.quantity >1){
+				vm.quantity -= 1;
+			}
+		}
 
 		function selectComparator(option) {
 			return select_order.indexOf(option.widget_type)
