@@ -104,11 +104,20 @@
 			//parse empty multilanguage fields
 			parseEmptyFields(vm.product.name);
 			parseEmptyFields(vm.product.description);
-			
+
+			//parse faq
+			 if(vm.product.faq.length > 0) {
+				vm.product.faq.forEach(function(element) {
+					parseEmptyFields(element.question);
+					parseEmptyFields(element.answer)
+				});
+			}
+
 			if(vm.product.id) {
 				vm.product.$update({
 					idProduct: vm.product.id
 				}).then(function(dataSaved) {
+					console.log(dataSaved);
 					vm.product = dataSaved;
 					toastr.success('Saved!');
 				});
@@ -116,6 +125,7 @@
 			else {
 				vm.product.$save()
 					.then(function (dataSaved) {
+						console.log(dataSaved);
 						vm.product = dataSaved;
 						toastr.success('Saved!');
 					}, function(err) {

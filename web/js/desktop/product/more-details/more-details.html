@@ -92,11 +92,11 @@
 						<a href="" class="delete-link pull-right" ng-click="productMoreDetailsCtrl.deleteQuestion($index)">Delete question</a>
 						<div class="edit-faq-panel">
 							<div class="faq-language-menu">
-								<ol class="nya-bs-select form-control" ng-model="question.languageSelected" ng-change="productMoreDetailsCtrl.parseQuestion(question)">
-									<li nya-bs-option="language in productMoreDetailsCtrl.languages" class="ng-class:{'lang-selected': productMoreDetailsCtrl.isLanguageOk(language.code, question)}" data-value="language.code" deep-watch="true">
+								<ol class="nya-bs-select form-control" ng-model="productMoreDetailsCtrl.faq_helper[$index].languageSelected" ng-change="productMoreDetailsCtrl.parseQuestion(question, $index)">
+									<li nya-bs-option="language in productMoreDetailsCtrl.languages" class="ng-class:{'lang-selected': productMoreDetailsCtrl.isLanguageOk(language.code, $parent.$index)}" data-value="language.code" deep-watch="true">
 										<a href="">
 											<span ng-bind="language.name"></span>
-											<span class="glyphicon glyphicon-ok ok-white-icon pull-right" ng-if="productMoreDetailsCtrl.isLanguageOk(language.code, question)"></span>
+											<span class="glyphicon glyphicon-ok ok-white-icon pull-right" ng-if="productMoreDetailsCtrl.isLanguageOk(language.code, $parent.$index)"></span>
 										</a>
 									</li>
 								</ol>
@@ -105,7 +105,7 @@
 										<span class="faq-edit-question">Question</span>
 									</div>
 									<div class="col-sm-11">
-										<input type="text" class="faq-edit-answer" placeholder="Question" ng-model="question.question[question.languageSelected]">
+										<input type="text" class="faq-edit-answer" placeholder="Question" ng-model="question.question[productMoreDetailsCtrl.faq_helper[$index].languageSelected]">
 									</div>
 								</div>
 								<div class="faq-row">
@@ -113,7 +113,7 @@
 										<span class="faq-edit-question">Answer</span>
 									</div>
 									<div class="col-sm-11">
-										<div class="faq-edit-answer" text-angular ng-model="question.answer[question.languageSelected]" ta-toolbar="[]" placeholder="Answer"></div>
+										<div class="faq-edit-answer" text-angular ng-model="question.answer[productMoreDetailsCtrl.faq_helper[$index].languageSelected]" ta-toolbar="[]" placeholder="Answer"></div>
 									</div>
 								</div>
 							</div>
