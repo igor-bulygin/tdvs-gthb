@@ -317,12 +317,13 @@ class Product extends CActiveRecord {
 					'position',
 					'options' => 'productOptions',
 					'url_images' => 'urlImagesLocation',
+					'price_stock',
 				];
 				static::$retrieveExtraFields = [
 					'deviser_id',
 					'options',
 					'sizechart',
-					'price_stock',
+
 				];
 
 				static::$translateFields = true;
