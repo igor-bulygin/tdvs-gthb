@@ -8,7 +8,7 @@
 				
 		vm.deviser_id = UtilService.returnDeviserIdFromUrl();
 		vm.product_id = UtilService.returnProductIdFromUrl();
-		vm.loadCategory = [];
+		vm.categories_helper = [];
 				
 		
 		function init(){
@@ -31,7 +31,7 @@
 		}
 
 		function getCategories() {
-			productDataService.Categories.get({scope: 'all'})
+			productDataService.Categories.get({scope: 'all',limit: '999'})
 				.$promise.then(function (dataCategories) {
 					vm.allCategories = dataCategories.items;
 				}, function(err) {
@@ -67,14 +67,12 @@
 							catHelp = values.path.split("/");
 							catHelp.shift();
 							catHelp.pop();
-							vm.loadCategory[key]=catHelp;
-							console.log(catHelp);
-							
+							vm.categories_helper[key]=catHelp;
 						}
 					});
 					
 				});
-				//console.log(vm.loadCategory);
+				console.log(vm.categories_helper);
 
 
 			}, function (err) {
