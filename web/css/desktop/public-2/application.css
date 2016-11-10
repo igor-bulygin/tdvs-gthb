@@ -391,7 +391,7 @@ a, a:hover, a:focus {
 .product-data .dropdown-menu > li > a:focus {
   background-color: #bfbfbf; }
 .product-data .dropdown-menu {
-  top: 30px;
+  top: 20px;
   left: -10px; }
 .product-data .bootstrap-select.btn-group .dropdown-menu {
   width: 200px !important;
@@ -3269,6 +3269,8 @@ input[type="radio"] .styled:checked + label::after {
         .product .product-data-wrapper .product-data .quantity-wrapper .btn-summatory {
           padding: 0;
           margin: 0 0 0 2px; }
+      .product .product-data-wrapper .product-data .row-size.expand {
+        padding: 20px 0; }
       .product .product-data-wrapper .product-data .row-size .info {
         color: #bfbfbf;
         cursor: pointer; }
@@ -3401,6 +3403,13 @@ input[type="radio"] .styled:checked + label::after {
   .view-chart-size:hover {
     color: #1C1919;
     font-weight: bold; }
+
+.product-select button {
+  color: #9a9a9a;
+  height: 26px;
+  background-color: #e9e9e9;
+  padding: 2px 12px;
+  max-width: 175px; }
 
 .product-description {
   background-color: #ffffff; }
@@ -4113,7 +4122,8 @@ tags-input .tags .tag-item {
   font-family: "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif; }
 
 .manufacturing-answer {
-  font-family: "Playfair Display", Georgia, serif; }
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 12px; }
 
 footer {
   width: 100%;

@@ -115,7 +115,7 @@
 							</label>
 						</div>
 					</div>
-					<div ng-if="productVariationsCtrl.made_to_order_selected" ng-cloak>
+					<div class="mt-50" ng-if="productVariationsCtrl.made_to_order_selected" ng-cloak>
 						<div class="col-md-2">
 							<input type="number" name="madetoorder" class="form-control col-md-1" ng-model="productVariationsCtrl.product['madetoorder'].value" ng-min="0" ng-required="true">
 						</div>
@@ -140,7 +140,7 @@
 							</label>
 						</div>
 					</div>
-					<div ng-if="productVariationsCtrl.bespoke_selected" ng-cloak>
+					<div class="mt-50" ng-if="productVariationsCtrl.bespoke_selected" ng-cloak>
 						<p>What information do you need from the customer before manufacturing this work?</p>
 						<ol class="nya-bs-select" ng-model="productVariationsCtrl.bespoke_language">
 							<li nya-bs-option="language in productVariationsCtrl.languages" data-value="language.code" deep-watch="true">

@@ -134,25 +134,27 @@ $videos = $product->getVideos();
 <!--                                    <a href="#prints" aria-controls="works" role="tab" data-toggle="tab">Prints</a>-->
 <!--                                </li>-->
 <!--                            </ul>-->
-							<div class="row-size">
+							<div>
 								<div class="form-horizontal">
 									<div class="form-group">
-										<div class="row" ng-repeat="option in detailProductCtrl.product.options | orderBy:[detailProductCtrl.selectComparator]">
+										<div class="row-size expand" ng-repeat="option in detailProductCtrl.product.options | orderBy:[detailProductCtrl.selectComparator]">
 											<label class="col-sm-3 control-label product-label"><span class="atr" ng-bind="option.name"></span></label>
-											<span ng-if="option.values.length > 1">
-												<div class="col-sm-6">
-													<ol class="nya-bs-select" ng-model="detailProductCtrl.option_selected[$index]">
-														<li nya-bs-option="value in option.values">
-															<a href="">
-																<span>{{value.text}}</span>
-															</a>
-														</li>
-													</ol>
+											<div class="col-sm-9" ng-if="option.values.length > 1">
+												<div class="row">
+													<div class="col-sm-8">
+														<ol class="nya-bs-select btn-group bootstrap-select form-control product-select" ng-model="detailProductCtrl.option_selected[$index]">
+															<li nya-bs-option="value in option.values">
+																<a href="">
+																	<span>{{value.text}}</span>
+																</a>
+															</li>
+														</ol>
+													</div>
+													<div class="col-sm-4 no-pad">
+														<a class="view-chart-size" href="view-chart-size" href="#" data-toggle="modal" data-target="#chartModal" ng-if="option.id==='size'">View size chart</a>
+													</div>
 												</div>
-												<div class="col-sm-3 no-pad">
-													<a href="view-chart-size" href="#" data-toggle="modal" data-target="#chartModal" ng-if="option.id==='size'">View size chart</a>
-												</div>
-											</span>
+											</div>
 											<div class="col-sm-9" ng-if="option.values.length === 1">
 												<div class="atribute-selected"><span ng-bind="option.values[0].text"></span></div>
 											</div>
