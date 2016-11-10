@@ -6,6 +6,7 @@
 		vm.description_language = 'en-US';
 		vm.tags_language = 'en-US';
 		vm.faq_selected = false;
+		vm.faq_helper = [];
 		vm.images = [];
 		vm.parseQuestion = parseQuestion;
 		vm.isLanguageOk = isLanguageOk;
@@ -31,31 +32,39 @@
 		}
 
 		function addFaq() {
+			vm.faq_helper.unshift({
+				completedLanguages: [],
+				languageSelected: 'en-US'
+			});
 			vm.product.faq.unshift({
 				question: {},
 				answer: {},
-				completedLanguages: [],
-				languageSelected: 'en-US'
+				//completedLanguages: [],
+				//languageSelected: 'en-US'
 			});
 		}
 
 		function deleteQuestion(index) {
 			vm.product.faq.splice(index, 1);
+			vm.faq_selected.splice(index, 1);
 			if(vm.product.faq.length===0)
 				vm.faq_selected = false;
 		}
 
-		function parseQuestion(question) {
-			question.completedLanguages = [];
-			vm.languages.forEach(function (element) {
-				if (question.question[element.code] && question.question[element.code] !== "" && question.answer[element.code] && question.answer[element.code] !== "") {
-					question.completedLanguages.push(element.code)
+		function parseQuestion(question, index) {
+			vm.languages.forEach(function(element) {
+				if(question.question[element.code] && 
+					question.question[element.code] !== "" && 
+					question.answer[element.code] && 
+					question.answer[element.code] !== "" && 
+					vm.faq_helper[index].completedLanguages.indexOf(element.code) === -1) {
+						vm.faq_helper[index].completedLanguages.push(element.code);
 				}
 			})
 		}
 
-		function isLanguageOk(code, question) {
-			return question.completedLanguages.indexOf(code) > -1 ? true : false;
+		function isLanguageOk(code, index) {
+			return vm.faq_helper[index].completedLanguages.indexOf(code) > -1 ? true : false;
 		}
 
 		function addTag(tag) {

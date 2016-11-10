@@ -4,6 +4,7 @@ namespace app\modules\api\pub\v1\controllers;
 
 use app\helpers\CActiveRecord;
 use app\models\Product;
+use app\models\Product2;
 use Yii;
 use yii\mongodb\ActiveQuery;
 use yii\rest\Controller;
@@ -20,10 +21,10 @@ class ProductController extends Controller {
 	public function actionView($id)
 	{
 		// show only fields needed in this scenario
-		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_PUBLIC);
+		Product2::setSerializeScenario(Product2::SERIALIZE_SCENARIO_PUBLIC);
 
 		/** @var Product $product */
-		$product = Product::findOneSerialized($id);
+		$product = Product2::findOneSerialized($id);
 		if (!$product) {
 			throw new NotFoundHttpException('Product not found');
 		}
@@ -34,7 +35,7 @@ class ProductController extends Controller {
 	public function actionIndex()
     {
 	    // show only fields needed in this scenario
-	    Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_PUBLIC);
+		Product2::setSerializeScenario(Product2::SERIALIZE_SCENARIO_PUBLIC);
 
 	    // set pagination values
 	    $limit = Yii::$app->request->get('limit', 20);
@@ -45,7 +46,7 @@ class ProductController extends Controller {
 	    $page = ($page < 1) ? 1 : $page;
 	    $offset = ($limit * ($page - 1));
 
-	    $products = Product::findSerialized([
+	    $products = Product2::findSerialized([
 		    "name" => Yii::$app->request->get("name"), // search only in name attribute
 		    "text" => Yii::$app->request->get("q"), // search in name, description, and more
 		    "id" => Yii::$app->request->get("id"),
@@ -58,7 +59,7 @@ class ProductController extends Controller {
 	    return [
 	    	"items" => $products,
 		    "meta" => [
-			    "total_count" => Product::$countItemsFound,
+			    "total_count" => Product2::$countItemsFound,
 			    "current_page" => $page,
 			    "per_page" => $limit,
 		    ]

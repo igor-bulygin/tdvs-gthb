@@ -341,29 +341,29 @@ class Tag extends CActiveRecord
 					}
 				}
 			}
-			if ($this->getWidgetType() == "color") {
-				// TODO force add two color for test client side (remove when test ends)
-				$values[] = [
-					"value" => "temp_rand_id_" . uniqid(),
-					"text" => "Blue",
-					"hint" => null,
-					"image" => null,
-					"default" => null,
-					"colors" => [TagOption::HEXADECIMAL_COLORS[TagOption::BLUE]],
-				];
-
-				$values[] = [
-					"value" => "temp_rand_id_" . uniqid(),
-					"text" => "Blue and White",
-					"hint" => null,
-					"image" => null,
-					"default" => null,
-					"colors" => [
-						TagOption::HEXADECIMAL_COLORS[TagOption::BLUE],
-						TagOption::HEXADECIMAL_COLORS[TagOption::WHITE],
-					],
-				];
-			}
+//			if ($this->getWidgetType() == "color") {
+//				// TODO force add two color for test client side (remove when test ends)
+//				$values[] = [
+//					"value" => "temp_rand_id_" . uniqid(),
+//					"text" => "Blue",
+//					"hint" => null,
+//					"image" => null,
+//					"default" => null,
+//					"colors" => [TagOption::HEXADECIMAL_COLORS[TagOption::BLUE]],
+//				];
+//
+//				$values[] = [
+//					"value" => "temp_rand_id_" . uniqid(),
+//					"text" => "Blue and White",
+//					"hint" => null,
+//					"image" => null,
+//					"default" => null,
+//					"colors" => [
+//						TagOption::HEXADECIMAL_COLORS[TagOption::BLUE],
+//						TagOption::HEXADECIMAL_COLORS[TagOption::WHITE],
+//					],
+//				];
+//			}
 		}
 
 

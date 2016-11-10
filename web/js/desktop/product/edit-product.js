@@ -31,7 +31,7 @@
 		}
 
 		function getCategories() {
-			productDataService.Categories.get({scope: 'all',limit: '999'})
+			productDataService.Categories.get({scope: 'all'})
 				.$promise.then(function (dataCategories) {
 					vm.allCategories = dataCategories.items;
 				}, function(err) {
@@ -57,22 +57,22 @@
 			}).$promise.then(function(dataProduct) {
 				vm.product = dataProduct;
 				vm.product_original = angular.copy(dataProduct);
-				
-				angular.forEach(dataProduct.categories, function(value, key){
-						
-					angular.forEach(vm.allCategories, function(values,keys){
 
+				angular.forEach(dataProduct.categories, function(value, key){
+
+					angular.forEach(vm.allCategories, function(values,keys){
+						
 						if(value == values.id){
 							var catHelp =[]
 							catHelp = values.path.split("/");
 							catHelp.shift();
 							catHelp.pop();
+							catHelp.push(value);
 							vm.categories_helper[key]=catHelp;
 						}
 					});
-					
 				});
-				console.log(vm.categories_helper);
+				console.log(vm.product);
 
 
 			}, function (err) {
