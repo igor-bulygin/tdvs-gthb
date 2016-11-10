@@ -124,8 +124,9 @@ class Category extends CActiveRecord {
 	    // Count how many items are with those conditions, before limit them for pagination
 	    static::$countItemsFound = $query->count();
 
+
 	    // limit
-	    if ((array_key_exists("limit", $criteria)) && (!empty($criteria["limit"]))) {
+	    if ((array_key_exists("limit", $criteria)) && (!empty($criteria["limit"])) && $criteria["scope"] != "all") {
 		    $query->limit($criteria["limit"]);
 	    }
 
