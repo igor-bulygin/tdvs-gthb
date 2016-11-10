@@ -116,7 +116,8 @@ class Category extends CActiveRecord {
 					break;
 				case "roots":
 				default:
-					$query->andWhere(["path" => "/"]);
+					// Filter by roots apply only when no limit sets
+					if(!array_key_exists("limit", $criteria) || empty($criteria["limit"])) $query->andWhere(["path" => "/"]);
 					break;
 			}
 	    }
