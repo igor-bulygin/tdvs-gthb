@@ -11,7 +11,7 @@
 					<div class="col-md-4">
 						<label data-ng-for="{{tag.name}}" ng-bind="tag.name"></label>
 					</div>
-					<div class="col-md-8 ng-class:{'col-md-offset-4': $index > 0}" ng-repeat="item in productVariationsCtrl.product.options[tag.id] track by $index">
+					<div class="mb-20 col-md-8 ng-class:{'col-md-offset-4': $index > 0}" ng-repeat="item in productVariationsCtrl.product.options[tag.id] track by $index">
 						<span>{{$index+1}}:&nbsp;</span>
 						<ol class="nya-bs-select" ng-model="productVariationsCtrl.product.options[tag.id][$index]" multiple>
 							<li nya-bs-option="option in tag.options" data-value="option.value" deep-watch="true" class="ng-class:{'disabled': productVariationsCtrl.product.options[tag.id][$index].length >= tag.n_options}">
@@ -19,7 +19,9 @@
 							</li>
 						</ol>
 					</div>
-					<p><span ng-click="productVariationsCtrl.product.options[tag.id].push([])">+ add another option</span></p>
+					<div class="col-md-8 col-md-offset-4">
+						<span class="add-cathegory" ng-click="productVariationsCtrl.product.options[tag.id].push([])">+ add another option</span>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -27,47 +29,60 @@
 			<span class="title">Manufacturing information</span>
 			<div class="form-group">
 				<div class="row">
-					<span>Is this product in pre-order?</span>
-					<div class="radio radio-inline ml-30">
-						<input type="radio" name="preorder_selected" id="preorder_selected" ng-model="productVariationsCtrl.preorder_selected" ng-value="true" ng-change="productVariationsCtrl.setPreorder(productVariationsCtrl.preorder_selected)">
-						<label for="preorder_selected">
-							YES
-						</label>
+					<div class="col-md-4 pad-about">
+						<span>Is this product in pre-order?</span>
 					</div>
-					<div class="radio radio-inline">
-						<input type="radio" name="preorder_unselected" id="preorder_unselected" ng-model="productVariationsCtrl.preorder_selected" ng-value="false" checked ng-change="productVariationsCtrl.setPreorder(productVariationsCtrl.preorder_selected)">
-						<label for="preorder_unselected">
-							NO
-						</label>
+					<div class="col-md-8 pad-about">
+						<div class="radio radio-inline ml-30">
+							<input type="radio" name="preorder_selected" id="preorder_selected" ng-model="productVariationsCtrl.preorder_selected" ng-value="true" ng-change="productVariationsCtrl.setPreorder(productVariationsCtrl.preorder_selected)">
+							<label for="preorder_selected">
+								YES
+							</label>
+						</div>
+						<div class="radio radio-inline">
+							<input type="radio" name="preorder_unselected" id="preorder_unselected" ng-model="productVariationsCtrl.preorder_selected" ng-value="false" checked ng-change="productVariationsCtrl.setPreorder(productVariationsCtrl.preorder_selected)">
+							<label for="preorder_unselected">
+								NO
+							</label>
+						</div>
 					</div>
-					<div ng-if="productVariationsCtrl.preorder_selected">
-						<div>
-							<p>When will the pre-order period end?</p>
-							<p>When the pre-order is over, you will be reminded to update the stock of the product.</p>
-							<div class="dropdown" ng-if="!productVariationsCtrl.product.preorder.end">
-								<a href="#" data-target="#" class="dropdown-toggle-preorder" id="preorderEnd" role="button" data-toggle="dropdown">Calendar</a>
-								<ul class="dropdown-menu" role="menu" aria-labelledby="preorderEnd">
-									<datetimepicker data-ng-model="productVariationsCtrl.preorder_end_data" data-datetimepicker-config="{ dropdownSelector: '.dropdown-toggle-preorder', startView:'day', minView:'day'}" data-on-set-time="productVariationsCtrl.setPreorderEnd(newDate, oldDate)"></datetimepicker>
-								</ul>
+					<div class="mt-50" ng-if="productVariationsCtrl.preorder_selected">
+						<div class="row mt-20">
+							<div class="col-md-6">
+								<p class="manufacturing-question">When will the pre-order period end?</p>
+								<p class="manufacturing-answer">When the pre-order is over, you will be reminded to update the stock of the product.</p>
 							</div>
-							<div ng-if="productVariationsCtrl.product.preorder.end">
-								<p>{{productVariationsCtrl.product.preorder.end | date: 'MMM dd yyyy'}}</p>
-								<div class="dropdown">
-									<a href="#" data-target="#" class="dropdown-toggle-preorder" id="preorderEnd" role="button" data-toggle="dropdown"><span class="glyphicon glyphicon-pencil"></span>&nbsp;<span>Change date</span></a>
+							<div class="col-md-6">
+								<div class="dropdown" ng-if="!productVariationsCtrl.product.preorder.end">
+									<a href="#" data-target="#" class="dropdown-toggle-preorder" id="preorderEnd" role="button" data-toggle="dropdown">Calendar</a>
 									<ul class="dropdown-menu" role="menu" aria-labelledby="preorderEnd">
-										<datetimepicker data-ng-model="productVariationsCtrl.preorder_data" data-datetimepicker-config="{ dropdownSelector: '.dropdown-toggle-preorder', startView:'day', minView:'day'}" data-on-set-time="productVariationsCtrl.setPreorderEnd(newDate, oldDate)"></datetimepicker>
+										<datetimepicker data-ng-model="productVariationsCtrl.preorder_end_data" data-datetimepicker-config="{ dropdownSelector: '.dropdown-toggle-preorder', startView:'day', minView:'day'}" data-on-set-time="productVariationsCtrl.setPreorderEnd(newDate, oldDate)"></datetimepicker>
+									</ul>
+								</div>
+								<div ng-if="productVariationsCtrl.product.preorder.end">
+									<p>{{productVariationsCtrl.product.preorder.end | date: 'MMM dd yyyy'}}</p>
+									<div class="dropdown">
+										<a href="#" data-target="#" class="dropdown-toggle-preorder" id="preorderEnd" role="button" data-toggle="dropdown"><span class="glyphicon glyphicon-pencil"></span>&nbsp;<span>Change date</span></a>
+										<ul class="dropdown-menu" role="menu" aria-labelledby="preorderEnd">
+											<datetimepicker data-ng-model="productVariationsCtrl.preorder_data" data-datetimepicker-config="{ dropdownSelector: '.dropdown-toggle-preorder', startView:'day', minView:'day'}" data-on-set-time="productVariationsCtrl.setPreorderEnd(newDate, oldDate)"></datetimepicker>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<p class="manufacturing-question">When will the product be shipped?</p>
+							</div>
+							<div class="col-md-6">
+								<div class="dropdown" ng-if="!productVariationsCtrl.product.preorder.ship">
+									<a href="#" data-target="#" class="dropdown-toggle-preorder-ship" id="preorderShip" role="button" data-toggle="dropdown">Calendar</a>
+									<ul class="dropdown-menu" role="menu" aria-labbeledby="preorderShip">
+										<datetimepicker data-ng-model="productVariationsCtrl.preorder_ship_data" data-datetimepicker-config="{ dropdownSelector: '.dropdown-toggle-preorder-ship', startView: 'day', minView: 'day'}" data-on-set-time="productVariationsCtrl.setPreorderShip(newDate, oldDate)"></datetimepicker>
 									</ul>
 								</div>
 							</div>
 						</div>
-						<div>
-							<p>When will the product be shipped?</p>
-							<div class="dropdown" ng-if="!productVariationsCtrl.product.preorder.ship">
-								<a href="#" data-target="#" class="dropdown-toggle-preorder-ship" id="preorderShip" role="button" data-toggle="dropdown">Calendar</a>
-								<ul class="dropdown-menu" role="menu" aria-labbeledby="preorderShip">
-									<datetimepicker data-ng-model="productVariationsCtrl.preorder_ship_data" data-datetimepicker-config="{ dropdownSelector: '.dropdown-toggle-preorder-ship', startView: 'day', minView: 'day'}" data-on-set-time="productVariationsCtrl.setPreorderShip(newDate, oldDate)"></datetimepicker>
-								</ul>
-							</div>
 							<div ng-if="productVariationsCtrl.product.preorder.ship">
 								<p>{{productVariationsCtrl.product.preorder.ship | date: 'MMM dd yyyy'}}</p>
 								<div class="dropdown">
@@ -83,18 +98,22 @@
 					</div>
 				</div>
 				<div class="row">
-					<span>Is this a made-to-order product?</span>
-					<div class="radio radio-inline ml-30">
-						<input type="radio" name="made_to_order_selected" id="made_to_order_selected" ng-model="productVariationsCtrl.made_to_order_selected" ng-value="true" ng-change="productVariationsCtrl.setMadeToOrder(productVariationsCtrl.made_to_order_selected)">
-						<label for="made_to_order_selected">
-							YES
-						</label>
+					<div class="col-md-4 pad-about">
+						<span>Is this a made-to-order product?</span>
 					</div>
-					<div class="radio radio-inline">
-						<input type="radio" name="made_to_order_unselected" id="made_to_order_unselected" ng-model="productVariationsCtrl.made_to_order_selected" ng-value="false" checked ng-change="productVariationsCtrl.setMadeToOrder(productVariationsCtrl.made_to_order_selected)">
-						<label for="made_to_order_unselected">
-							NO
-						</label>
+					<div class="col-md-8 pad-about">
+						<div class="radio radio-inline ml-30">
+							<input type="radio" name="made_to_order_selected" id="made_to_order_selected" ng-model="productVariationsCtrl.made_to_order_selected" ng-value="true" ng-change="productVariationsCtrl.setMadeToOrder(productVariationsCtrl.made_to_order_selected)">
+							<label for="made_to_order_selected">
+								YES
+							</label>
+						</div>
+						<div class="radio radio-inline">
+							<input type="radio" name="made_to_order_unselected" id="made_to_order_unselected" ng-model="productVariationsCtrl.made_to_order_selected" ng-value="false" checked ng-change="productVariationsCtrl.setMadeToOrder(productVariationsCtrl.made_to_order_selected)">
+							<label for="made_to_order_unselected">
+								NO
+							</label>
+						</div>
 					</div>
 					<div ng-if="productVariationsCtrl.made_to_order_selected" ng-cloak>
 						<div class="col-md-2">
@@ -104,18 +123,22 @@
 					</div>
 				</div>
 				<div class="row">
-					<span>Is this a bespoke product?</span>
-					<div class="radio radio-inline ml-30">
-						<input type="radio" name="bespoke_selected" id="bespoke_selected" value="bespoke_selected" ng-model="productVariationsCtrl.bespoke_selected" ng-value="true">
-						<label for="bespoke_selected">
-							YES
-						</label>
+					<div class="col-md-4 pad-about">
+						<span>Is this a bespoke product?</span>
 					</div>
-					<div class="radio radio-inline">
-						<input type="radio" name="bespoke_unselected" id="bespoke_unselected" value="bespoke_unselected" ng-model="productVariationsCtrl.bespoke_selected" ng-value="false" checked>
-						<label for="bespoke_unselected">
-							NO
-						</label>
+					<div class="col-md-8 pad-about">
+						<div class="radio radio-inline ml-30">
+							<input type="radio" name="bespoke_selected" id="bespoke_selected" value="bespoke_selected" ng-model="productVariationsCtrl.bespoke_selected" ng-value="true">
+							<label for="bespoke_selected">
+								YES
+							</label>
+						</div>
+						<div class="radio radio-inline">
+							<input type="radio" name="bespoke_unselected" id="bespoke_unselected" value="bespoke_unselected" ng-model="productVariationsCtrl.bespoke_selected" ng-value="false" checked>
+							<label for="bespoke_unselected">
+								NO
+							</label>
+						</div>
 					</div>
 					<div ng-if="productVariationsCtrl.bespoke_selected" ng-cloak>
 						<p>What information do you need from the customer before manufacturing this work?</p>
