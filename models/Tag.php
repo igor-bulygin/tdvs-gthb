@@ -328,7 +328,25 @@ class Tag extends CActiveRecord
 			}
 		} else {
 			foreach ($this->options as $key => $option) {
-				if (!empty($this->product->options[$this->short_id][0])) {
+
+				///////////print_r($this->product->options);
+
+
+				if (count($this->product->options[$this->short_id]) !=0) {
+					foreach ($this->product->options[$this->short_id] as $oneoption){
+						if ($oneoption[0] == $option["value"]) {
+							$values[] = [
+								"value" => $option["value"],
+								"text" => Utils::l($option["text"]),
+								"hint" => null,
+								"image" => null,
+								"default" => null,
+								"colors" => $this->getOptionColor($option),
+							];
+						}
+					}
+				}
+/*				if (!empty($this->product->options[$this->short_id][0])) {
 					if ($this->product->options[$this->short_id][0][0] == $option["value"]) {
 						$values[] = [
 							"value" => $option["value"],
@@ -339,7 +357,9 @@ class Tag extends CActiveRecord
 							"colors" => $this->getOptionColor($option),
 						];
 					}
-				}
+				}*/
+
+
 			}
 //			if ($this->getWidgetType() == "color") {
 //				// TODO force add two color for test client side (remove when test ends)
