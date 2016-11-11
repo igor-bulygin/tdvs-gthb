@@ -735,10 +735,6 @@ class Product2 extends Product {
 		$options = [];
 		foreach ($this->options as $tag_id => $option) {
 
-			/////echo "# Tag_ID: ".$tag_id.":\nOptions: ";
-			//////print_r($option);
-			/////echo "\n\n";
-
 			/** @var Tag $tag */
 			$tag = Tag::findOne(["short_id" => $tag_id]);
 			if ($tag) {
