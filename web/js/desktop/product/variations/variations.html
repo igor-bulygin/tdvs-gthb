@@ -117,9 +117,9 @@
 					</div>
 					<div class="mt-50" ng-if="productVariationsCtrl.made_to_order_selected" ng-cloak>
 						<div class="col-md-2">
-							<input type="number" name="madetoorder" class="form-control col-md-1" ng-model="productVariationsCtrl.product['madetoorder'].value" ng-min="0" ng-required="true">
+							<input type="number" name="madetoorder" class="form-control rounded-number-input col-md-1" ng-model="productVariationsCtrl.product['madetoorder'].value" ng-min="0" ng-required="true">
 						</div>
-						<label for="madetoorder">days needed to manufacture this work</label>
+						<label class="little-label-number" for="madetoorder">days needed to manufacture this work</label>
 					</div>
 				</div>
 				<div class="row">
@@ -142,16 +142,15 @@
 					</div>
 					<div class="mt-50" ng-if="productVariationsCtrl.bespoke_selected" ng-cloak>
 						<p>What information do you need from the customer before manufacturing this work?</p>
-						<ol class="nya-bs-select" ng-model="productVariationsCtrl.bespoke_language">
+						<ol class="nya-bs-select about-edit-select title-lang-btn manufacturing-lang" ng-model="productVariationsCtrl.bespoke_language">
 							<li nya-bs-option="language in productVariationsCtrl.languages" data-value="language.code" deep-watch="true">
 								<a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
 							</li>
 						</ol>
-						<textarea name="bespoke_text" id="bespoke_text" cols="30" rows="10" class="form-control" ng-model="productVariationsCtrl.product.bespoke[productVariationsCtrl.bespoke_language]"></textarea>
+						<textarea name="bespoke_text" id="bespoke_text" cols="30" rows="10" class="form-control manufacturing-textarea" ng-model="productVariationsCtrl.product.bespoke[productVariationsCtrl.bespoke_language]"></textarea>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 	</form>
 </div>

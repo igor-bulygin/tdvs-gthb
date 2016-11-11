@@ -4125,6 +4125,25 @@ tags-input .tags .tag-item {
   font-family: "Playfair Display", Georgia, serif;
   font-size: 12px; }
 
+.little-label-number {
+  font-family: "Univers Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  text-transform: none !important;
+  margin: 5px 0 0 0; }
+
+.rounded-number-input {
+  border-radius: 90px 90px 90px 90px !important;
+  -webkit-border-radius: 90px 90px 90px 90px !important;
+  -moz-border-radius: 90px 90px 90px 90px !important; }
+
+.manufacturing-textarea {
+  padding-top: 60px;
+  border-radius: 20px 20px 20px 20px !important;
+  -webkit-border-radius: 20px 20px 20px 20px !important;
+  -moz-border-radius: 20px 20px 20px 20px !important; }
+
+.manufacturing-lang {
+  top: 25px !important; }
+
 footer {
   width: 100%;
   height: 260px;

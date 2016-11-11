@@ -388,3 +388,18 @@ tags-input .tags .tag-item {
 	font-family: $font-family--serif;
 	font-size: 12px;
 }
+.little-label-number{
+	font-family: $font-family--primary!important;
+	text-transform: none!important;
+	margin: 5px 0 0 0;
+}
+.rounded-number-input{
+	@include border-radius(90px,90px,90px,90px);
+}
+.manufacturing-textarea{
+	padding-top: 60px;
+	@include border-radius(20px,20px,20px,20px);
+}
+.manufacturing-lang{
+	top:25px!important;
+}
