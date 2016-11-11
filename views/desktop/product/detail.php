@@ -142,10 +142,10 @@ $videos = $product->getVideos();
 											<div class="col-sm-9" ng-if="option.values.length > 1" ng-cloak>
 												<div class="row">
 													<div class="col-sm-8">
-														<ol class="nya-bs-select btn-group bootstrap-select form-control product-select" ng-model="detailProductCtrl.option_selected[$index]">
-															<li nya-bs-option="value in option.values">
+														<ol class="nya-bs-select btn-group bootstrap-select form-control product-select" ng-model="detailProductCtrl.option_selected[option.id]" ng-change="detailProductCtrl.parseOptions(option.id, detailProductCtrl.option_selected[option.id])">
+															<li nya-bs-option="value in option.values" data-value="value.value" ng-class="{'disabled': value.disabled}">
 																<a href="">
-																	<span>{{value.text}}</span>
+																	<span ng-bind="value.text"></span>
 																</a>
 															</li>
 														</ol>

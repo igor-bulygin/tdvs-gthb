@@ -5,6 +5,7 @@
 		var vm = this;
 		vm.quantity = 1;
 		vm.optionsSelected = {};
+		vm.parseOptions = parseOptions;
 		vm.addQuantity = addQuantity;
 		vm.subQuantity = subQuantity;
 		vm.getReferencesFromOptions = getReferencesFromOptions;
@@ -58,6 +59,56 @@
 				stock += references[i].stock;
 			}
 			return stock;
+		}
+
+		function parseOptions(option_id, value) {
+			if(option_id === 'size')
+				value = getSizeText(value);
+			resetOptions();
+			vm.product.price_stock.forEach(function(element) {
+				if(element.stock === 0 && ((angular.isArray(element.options[option_id]) && element.options[option_id].indexOf(value) > -1) || 
+					(option_id === 'size' && element.options[option_id] === value))) {
+						for(var key in element.options) {
+							if(key !== option_id) {
+								vm.product.options.forEach(function (option) {
+									if(key === option.id) {
+										option.values.forEach(function(unit) {
+												if(key == 'size') {
+													if(unit.text == element.options[key])
+														unit.disabled=true;
+												} else {
+													if(unit.value == element.options[key][0])
+														unit.disabled=true;
+												}
+										});
+									}
+								});
+							}
+						}
+				}
+			});
+		}
+
+		function getSizeText(value) {
+			var text = null;
+			vm.product.options.forEach(function(option) {
+				if(option.id == "size") {
+					option.values.forEach(function (element) {
+						if(value == element.value) {
+							text = element.text;
+						}
+					})
+				}
+			})
+			return text;
+		}
+
+		function resetOptions() {
+			vm.product.options.forEach(function(element) {
+				element.values.forEach(function(value) {
+					value['disabled'] = false;
+				})
+			})
 		}
 
 		function getReferencesFromOptions(options) {
