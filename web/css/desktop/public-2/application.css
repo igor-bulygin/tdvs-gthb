@@ -3712,19 +3712,17 @@ input[type="radio"] .styled:checked + label::after {
 .thumbs .active {
   border: solid 1px transparent !important; }
 
-.product-photos-wrapper {
-  border-right: 1px solid #bfbfbf; }
-  .product-photos-wrapper .carousel-inner .item {
-    height: 500px; }
-    .product-photos-wrapper .carousel-inner .item img {
-      width: auto;
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      margin: auto;
-      max-height: 500px; }
+.product-photos-wrapper .carousel-inner .item {
+  height: 500px; }
+  .product-photos-wrapper .carousel-inner .item img {
+    width: auto;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    max-height: 500px; }
 
 .new-product-header {
   background-color: #484848;

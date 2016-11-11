@@ -142,10 +142,10 @@ $videos = $product->getVideos();
 											<div class="col-sm-9" ng-if="option.values.length > 1" ng-cloak>
 												<div class="row">
 													<div class="col-sm-8">
-														<ol class="nya-bs-select btn-group bootstrap-select form-control product-select" ng-model="detailProductCtrl.option_selected[$index]">
-															<li nya-bs-option="value in option.values">
+														<ol class="nya-bs-select btn-group bootstrap-select form-control product-select" ng-model="detailProductCtrl.option_selected[option.id]" ng-change="detailProductCtrl.parseOptions(option.id, detailProductCtrl.option_selected[option.id])">
+															<li nya-bs-option="value in option.values" data-value="value.value" ng-class="{'disabled': value.disabled}">
 																<a href="">
-																	<span>{{value.text}}</span>
+																	<span ng-bind="value.text"></span>
 																</a>
 															</li>
 														</ol>
@@ -261,6 +261,7 @@ $videos = $product->getVideos();
 	<!-- PRODUCT DESCRIPTION -->
 	<div class="product-description">
 	    <!-- Nav tabs -->
+	    <div class="container">
 			<ul class="nav nav-tabs product-tabs" role="tablist">
 				<li role="presentation" class="active no-b-r">
 					<a href="#description" aria-controls="description" role="tab" data-toggle="tab">Description &amp; User
@@ -273,6 +274,7 @@ $videos = $product->getVideos();
 					<a href="#works" aria-controls="works" role="tab" data-toggle="tab">More by <?= $deviser->personalInfo->getBrandName() ?></a>
 				</li>
 			</ul>
+		</div>
 		<div class="container">
 			<!-- Tab panes -->
 			<div class="tab-content product-description-content">
@@ -283,37 +285,7 @@ $videos = $product->getVideos();
 							<p class="description">
 								<?= $product->description ?>
 							</p>
-						</div>
-						<div class="col-sm-4">
-							<div class="shipping-policies-wrapper">
-								<div class="title">Shipping &amp; Policies</div>
-									<div class="policies-row">
-									<form class="form-horizontal">
-										<div class="form-group">
-											<label class="col-sm-4 control-label shipping-label"><span>Shipping price to</span></label>
-											<div class="col-sm-5 pad-product">
-												<select class="form-control selectpicker shipping-select product-select" title="Choose country">
-													<option>USA</option>
-													<option>SPAIN</option>
-												</select>
-											</div>
-											<div class="col-sm-3">
-												is <span class="tax">€4.5</span>
-											</div>
-										</div>
-									</form>
-								</div>
-								<div class="returns-row">
-									Returns: 14 days
-								</div>
-								<div class="returns-row">
-                                    Warranty:
-                                    <?= $product->getWarrantyLabel() ?>
-                                </div>
-                            </div>
-						</div>
-					</div>
-<!--					<div class="tb-wrapper">-->
+							<!--					<div class="tb-wrapper">-->
 <!--                        <div class="row">-->
 <!--                            <div class="col-md-3 work-profile-description-tb">-->
 <!--                                <img src="/imgs/pullera.jpg">-->
@@ -348,6 +320,36 @@ $videos = $product->getVideos();
 <!--                            </div>-->
 <!--                        </div>-->
 <!--                    </div>-->
+						</div>
+						<div class="col-sm-4">
+							<div class="shipping-policies-wrapper">
+								<div class="title">Shipping &amp; Policies</div>
+									<div class="policies-row">
+									<form class="form-horizontal">
+										<div class="form-group">
+											<label class="col-sm-4 control-label shipping-label"><span>Shipping price to</span></label>
+											<div class="col-sm-5 pad-product">
+												<select class="form-control selectpicker shipping-select product-select" title="Choose country">
+													<option>USA</option>
+													<option>SPAIN</option>
+												</select>
+											</div>
+											<div class="col-sm-3">
+												is <span class="tax">€4.5</span>
+											</div>
+										</div>
+									</form>
+								</div>
+								<div class="returns-row">
+									Returns: 14 days
+								</div>
+								<div class="returns-row">
+                                    Warranty:
+                                    <?= $product->getWarrantyLabel() ?>
+                                </div>
+                            </div>
+						</div>
+					</div>
 					<div class="title">WORK FAQs</div>
 					<div class="q-a-wrapper">
 						<p class="question">
