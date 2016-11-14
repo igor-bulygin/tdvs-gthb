@@ -4146,6 +4146,9 @@ tags-input .tags .tag-item {
 .manufacturing-lang {
   top: 25px !important; }
 
+.purple-text {
+  color: #b933f4 !important; }
+
 footer {
   width: 100%;
   height: 260px;
