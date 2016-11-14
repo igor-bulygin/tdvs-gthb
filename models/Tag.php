@@ -327,63 +327,70 @@ class Tag extends CActiveRecord
 				}
 			}
 		} else {
+
+			// For each tag options find in product options if exists
 			foreach ($this->options as $key => $option) {
 
-				///////////print_r($this->product->options);
-
-
+				// If exists, find all attributes
 				if (count($this->product->options[$this->short_id]) !=0) {
 					foreach ($this->product->options[$this->short_id] as $oneoption){
-						if ($oneoption[0] == $option["value"]) {
-							$values[] = [
-								"value" => $option["value"],
-								"text" => Utils::l($option["text"]),
-								"hint" => null,
-								"image" => null,
-								"default" => null,
-								"colors" => $this->getOptionColor($option),
-							];
+
+						// Case 1: Option attribute has two or more values (compose). Return arrays of: value, text and colors
+						if(count($oneoption) > 1){
+
+							$arr_value = $arr_text = $arr_colors = array();
+
+							// If one is located, find next ones
+							if ($oneoption[0] == $option["value"]) {
+								$arr_value[] = $option["value"];
+								$arr_text[] = Utils::l($option["text"]);
+								$arr_colors[] =  $this->getOptionColor($option);
+
+								// second and next values
+								for($i=1;$i < count($oneoption);$i++){
+
+									$otheroption = self::getOptionTagByValue($oneoption[$i], $this->options);
+									if($otheroption != null) {
+										$arr_value[] = $otheroption["value"];
+										$arr_text[] = Utils::l($otheroption["text"]);
+										$arr_colors[] = $this->getOptionColor($otheroption);
+
+
+									}
+								}
+
+								$values[] = [
+									"value" => $arr_value,
+									"text" => $arr_text,
+									"hint" => null,
+									"image" => null,
+									"default" => null,
+									"colors" => $arr_colors,
+								];
+							}
+
+
+						} else {
+
+							// Case 2: Option attribute has only one value. Return value, text and colors
+							if ($oneoption[0] == $option["value"]) {
+								$values[] = [
+									"value" => $option["value"],
+									"text" => Utils::l($option["text"]),
+									"hint" => null,
+									"image" => null,
+									"default" => null,
+									"colors" => $this->getOptionColor($option),
+								];
+
+
+							}
 						}
+
 					}
 				}
-/*				if (!empty($this->product->options[$this->short_id][0])) {
-					if ($this->product->options[$this->short_id][0][0] == $option["value"]) {
-						$values[] = [
-							"value" => $option["value"],
-							"text" => Utils::l($option["text"]),
-							"hint" => null,
-							"image" => null,
-							"default" => null,
-							"colors" => $this->getOptionColor($option),
-						];
-					}
-				}*/
-
 
 			}
-//			if ($this->getWidgetType() == "color") {
-//				// TODO force add two color for test client side (remove when test ends)
-//				$values[] = [
-//					"value" => "temp_rand_id_" . uniqid(),
-//					"text" => "Blue",
-//					"hint" => null,
-//					"image" => null,
-//					"default" => null,
-//					"colors" => [TagOption::HEXADECIMAL_COLORS[TagOption::BLUE]],
-//				];
-//
-//				$values[] = [
-//					"value" => "temp_rand_id_" . uniqid(),
-//					"text" => "Blue and White",
-//					"hint" => null,
-//					"image" => null,
-//					"default" => null,
-//					"colors" => [
-//						TagOption::HEXADECIMAL_COLORS[TagOption::BLUE],
-//						TagOption::HEXADECIMAL_COLORS[TagOption::WHITE],
-//					],
-//				];
-//			}
 		}
 
 
@@ -452,4 +459,19 @@ class Tag extends CActiveRecord
 		return $this;
 	}
 
+
+	public function getOptionTagByValue($value,$options){
+
+		$option_find = null;
+
+		foreach ($options as $key => $oneoption) {
+
+			if ($value == $oneoption["value"]) {
+				$option_find = $oneoption;
+				break;
+			}
+		}
+
+		return $option_find;
+	}
 }
