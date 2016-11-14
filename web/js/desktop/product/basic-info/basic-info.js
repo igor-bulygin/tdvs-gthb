@@ -183,7 +183,19 @@
 		//TO DO: set name required if it is empty in english (vm.nameRequired=true)
 		$scope.$on(productEvents.requiredErrors, function(event, args){
 			console.log(args.required);
-			
+			//set name error
+			if(args.required.indexOf('name') > -1) {
+				vm.nameRequired = true;
+			}
+			if(args.required.indexOf('photos') > -1) {
+				vm.photosRequired = true;
+			}
+			if(args.required.indexOf('main_photo') > -1) {
+				//set main photo
+			}
+			if(args.required.indexOf('categories') > -1) {
+				//set categories
+			}
 		})
 	}
 

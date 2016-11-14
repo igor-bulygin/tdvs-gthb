@@ -129,7 +129,6 @@
 						vm.product = dataSaved;
 						toastr.success('Saved!');
 					}, function(err) {
-						console.log(err);
 						//send errors to components
 						$rootScope.$broadcast(productEvents.requiredErrors, {required: err.data.errors.required})
 					});
