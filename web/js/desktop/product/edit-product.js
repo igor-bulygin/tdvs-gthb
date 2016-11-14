@@ -9,7 +9,9 @@
 		vm.deviser_id = UtilService.returnDeviserIdFromUrl();
 		vm.product_id = UtilService.returnProductIdFromUrl();
 		vm.categories_helper = [];
-				
+		vm.image_helper = [];
+		vm.images = [];
+		
 		
 		function init(){
 			getLanguages();
@@ -50,7 +52,7 @@
 			});
 
 		}
-
+		
 		function getProduct() {
 			productDataService.ProductPriv.get({
 				idProduct: UtilService.returnProductIdFromUrl()
@@ -72,8 +74,16 @@
 						}
 					});
 				});
-				console.log(vm.product);
-
+				
+				for (var i = 0; i < vm.product.media.photos.length; i++) {
+				vm.images[i] = {
+					pos: i,
+					url: currentHost() + vm.product.url_images + vm.product.media.photos[i].name,
+					filename: vm.product.media.photos[i].name
+					};
+				}	
+				
+				
 
 			}, function (err) {
 				toastr.error(err);
