@@ -98,6 +98,7 @@
 		}
 
 		function save(state) {
+			var required = [];
 			//set state of the product
 			vm.product.product_state = angular.copy(state);
 
@@ -106,33 +107,64 @@
 			parseEmptyFields(vm.product.description);
 
 			//parse faq
-			 if(vm.product.faq.length > 0) {
+			if(angular.isArray(vm.product.faq) && vm.product.faq.length > 0) {
 				vm.product.faq.forEach(function(element) {
 					parseEmptyFields(element.question);
 					parseEmptyFields(element.answer)
 				});
 			}
 
-			if(vm.product.id) {
-				vm.product.$update({
-					idProduct: vm.product.id
-				}).then(function(dataSaved) {
-					console.log(dataSaved);
-					vm.product = dataSaved;
-					toastr.success('Saved!');
+			//check existing main photo
+			var main_photo = false;
+			if(angular.isArray(vm.product.media.photos) && vm.product.media.photos.length > 0) {
+				vm.product.media.photos.forEach(function(element) {
+					if(element.main_product_photo)
+						main_photo=true;
 				});
 			}
-			else {
-				vm.product.$save()
-					.then(function (dataSaved) {
+
+			//validations
+			if(!vm.product.name || !vm.product.name['en-US']) {
+				required.push('name');
+			}
+
+			if(angular.isArray(vm.product.categories) && vm.product.categories.length === 0) {
+				required.push('categories');
+			}
+
+			if(angular.isArray(vm.product.media.photos) && vm.product.media.photos.length === 0) {
+				required.push('photos');
+			}
+
+			if(angular.isArray(vm.product.media.photos) && vm.product.media.photos.length > 0 && !main_photo) {
+				required.push('main_photo');
+			}
+
+			if(required.length === 0) {
+				if(vm.product.id) {
+					vm.product.$update({
+						idProduct: vm.product.id
+					}).then(function(dataSaved) {
 						console.log(dataSaved);
 						vm.product = dataSaved;
 						toastr.success('Saved!');
-					}, function(err) {
-						//send errors to components
-						$rootScope.$broadcast(productEvents.requiredErrors, {required: err.data.errors.required})
 					});
+				}
+				else {
+					vm.product.$save()
+						.then(function (dataSaved) {
+							console.log(dataSaved);
+							vm.product = dataSaved;
+							toastr.success('Saved!');
+						}, function(err) {
+							//send errors to components
+							$rootScope.$broadcast(productEvents.requiredErrors, {required: err.data.errors.required})
+						});
+				}
+			} else {
+				$rootScope.$broadcast(productEvents.requiredErrors, {required: required});
 			}
+
 		}
 
 	}
