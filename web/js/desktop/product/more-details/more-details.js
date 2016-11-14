@@ -103,17 +103,17 @@
 					modalInstance.result.then(function (imageData) {
 						if(angular.isObject(imageData) && (imageData.photoCropped || imageData.title || imageData.description)) {
 								//upload cropped photo
-								var type;
-								if(vm.product.id) {
-									type = "known-product-photo";
-								} else {
-									type = "unknown-product-photo";
-								}
 								var data = {
-									type: type,
 									deviser_id: UtilService.returnDeviserIdFromUrl(),
 									file: Upload.dataUrltoBlob(imageData.photoCropped, "temp.png")
 								};
+								var type;
+								if(vm.product.id) {
+									data['type'] = "known-product-photo";
+									data['product_id'] = vm.product.id;
+								} else {
+									data['type'] = "unknown-product-photo";
+								}
 								Upload.upload({
 									url: productDataService.Uploads,
 									data: data

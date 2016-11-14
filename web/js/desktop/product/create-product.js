@@ -7,6 +7,7 @@
 
 		function init() {
 			vm.product = new productDataService.ProductPriv();
+			vm.product.slug = {};
 			vm.product.categories = [];
 			vm.product.media = {
 				photos: [],
@@ -89,6 +90,12 @@
 				type: 0
 			}
 			vm.product.options = {};
+			vm.product.returns = {
+				type: 0
+			};
+			vm.product.warranty = {
+				type: 0
+			};
 		}
 
 		function parseEmptyFields(obj) {
@@ -162,8 +169,10 @@
 					vm.product.$update({
 						idProduct: vm.product.id
 					}).then(function(dataSaved) {
-						console.log(dataSaved);
-						vm.product = dataSaved;
+						var options_to_convert = ['name', 'description', 'slug', 'sizechart', 'preorder', 'returns', 'warranty'];
+						for(var i=0; i < options_to_convert.length; i++) {
+							vm.product[options_to_convert[i]] = UtilService.emptyArrayToObject(vm.product[options_to_convert[i]]);
+						}
 						toastr.success('Saved!');
 					}, function (err) {
 						console.log(err);
@@ -174,9 +183,11 @@
 				else {
 					vm.product.$save()
 						.then(function (dataSaved) {
-							console.log(dataSaved);
-							vm.product = dataSaved;
 							toastr.success('Saved!');
+							var options_to_convert = ['name', 'description', 'slug', 'sizechart', 'preorder', 'returns', 'warranty'];
+							for(var i=0; i < options_to_convert.length; i++) {
+								vm.product[options_to_convert[i]] = UtilService.emptyArrayToObject(vm.product[options_to_convert[i]]);
+							}
 						}, function(err) {
 							console.log(err);
 							//send errors to components
