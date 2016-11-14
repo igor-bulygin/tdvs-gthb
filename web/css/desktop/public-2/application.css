@@ -3858,6 +3858,8 @@ input[type="radio"] .styled:checked + label::after {
   border: 1px solid #1C1919;
   margin: 0;
   width: 123px !important; }
+  .basic-info-add-photos .plus-add-wrapper.purple {
+    border-color: #b933f4 !important; }
 .basic-info-add-photos:hover .plus-add {
   background-color: #7AB83A;
   -moz-transition-property: background-color;
