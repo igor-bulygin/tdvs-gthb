@@ -180,7 +180,6 @@
 		});
 
 		//events
-		//TO DO: set name required if it is empty in english (vm.nameRequired=true)
 		$scope.$on(productEvents.requiredErrors, function(event, args){
 			console.log(args.required);
 			//set name error
@@ -191,10 +190,10 @@
 				vm.photosRequired = true;
 			}
 			if(args.required.indexOf('main_photo') > -1) {
-				//set main photo
+				vm.mainPhotoRequired = true;
 			}
 			if(args.required.indexOf('categories') > -1) {
-				//set categories
+				//set categories required
 			}
 		})
 	}
