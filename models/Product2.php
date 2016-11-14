@@ -396,7 +396,7 @@ class Product2 extends Product {
 					'currency',
 					'weight_unit',
 					'references',
-					'options' => 'productOptions',
+					'options',
 					'url_images' => 'urlImagesLocation',
                     'position',
 					'price_stock',
