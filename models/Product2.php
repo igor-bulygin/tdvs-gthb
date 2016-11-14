@@ -39,6 +39,7 @@ use yii\helpers\FileHelper;
  * @property string currency
  * @property string weight_unit
  * @property array price_stock
+ * @property array tags
  * @property array references
  * @property string $product_state
  * @property int position
@@ -99,6 +100,7 @@ class Product2 extends Product {
 			'currency',
 			'weight_unit',
 			'price_stock',
+			'tags',
 			'position',
 			'created_at',
 			'updated_at',
@@ -138,6 +140,7 @@ class Product2 extends Product {
 		$this->currency = "";
 		$this->weight_unit = "";
 		$this->price_stock = [];
+		$this->tags = [];
 		$this->references = [];
 		$this->position = 0;
 	}
@@ -189,6 +192,13 @@ class Product2 extends Product {
 				}
 			}
         }
+
+		// short_id on price_stock
+		foreach ($this->price_stock as $priceStock) {
+			if (!isset($priceStock['short_id'])) {
+				$priceStock['short_id'] = Utils::shortID(7);
+			}
+		}
 
 		$slugs = [];
 		foreach ($this->name as $lang => $text) {
@@ -277,6 +287,7 @@ class Product2 extends Product {
 					'currency',
 					'weight_unit',
 					'price_stock',
+					'tags',
                     'position',
                     'product_state',
                 ],
@@ -365,6 +376,7 @@ class Product2 extends Product {
 					'url_images' => 'urlImagesLocation',
                     'position',
 					'price_stock',
+					'tags',
                 ];
                 static::$retrieveExtraFields = [
                     'deviser_id',
@@ -400,6 +412,7 @@ class Product2 extends Product {
 					'url_images' => 'urlImagesLocation',
                     'position',
 					'price_stock',
+					'tags',
                 ];
                 static::$retrieveExtraFields = [
                     'deviser_id',
@@ -433,6 +446,7 @@ class Product2 extends Product {
 					'currency',
 					'weight_unit',
 					'price_stock',
+					'tags',
 					'url_images' => 'urlImagesLocation',
                     'product_state',
 				];
