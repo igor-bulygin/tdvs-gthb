@@ -124,22 +124,36 @@
 			}
 
 			//validations
-			if(!vm.product.name || !vm.product.name['en-US']) {
-				required.push('name');
-			}
+			if(vm.product.product_state !== 'product_state_draft') {
+				//name
+				if(!vm.product.name || !vm.product.name['en-US']) {
+					required.push('name');
+				}
+				//categories
+				if(angular.isArray(vm.product.categories) && vm.product.categories.length === 0) {
+					required.push('categories');
+				} else if(vm.product.categories.indexOf(null) > -1) {
+					required.push('categories');
+				}
+				//photos
+				if(angular.isArray(vm.product.media.photos) && vm.product.media.photos.length === 0) {
+					required.push('photos');
+				}
 
-			if(angular.isArray(vm.product.categories) && vm.product.categories.length === 0) {
-				required.push('categories');
-			} else if(vm.product.categories.indexOf(null) > -1) {
-				required.push('categories');
-			}
+				if(angular.isArray(vm.product.media.photos) && vm.product.media.photos.length > 0 && !main_photo) {
+					required.push('main_photo');
+				}
 
-			if(angular.isArray(vm.product.media.photos) && vm.product.media.photos.length === 0) {
-				required.push('photos');
-			}
-
-			if(angular.isArray(vm.product.media.photos) && vm.product.media.photos.length > 0 && !main_photo) {
-				required.push('main_photo');
+				//description
+				if(!vm.product.description || !vm.product.description['en-US']) {
+					required.push('description');
+				}
+			} else {
+				//check for null categories
+				while(vm.product.categories.indexOf(null) > -1){
+					var pos = vm.product.categories.indexOf(null);
+					vm.product.categories.splice(pos, 1);
+				}
 			}
 
 			if(required.length === 0) {
@@ -160,7 +174,8 @@
 							toastr.success('Saved!');
 						}, function(err) {
 							//send errors to components
-							$rootScope.$broadcast(productEvents.requiredErrors, {required: err.data.errors.required})
+							if(err.data.errors && err.data.errors.required && angular.isArray(err.data.errors.required))
+								$rootScope.$broadcast(productEvents.requiredErrors, {required: err.data.errors.required})
 						});
 				}
 			} else {

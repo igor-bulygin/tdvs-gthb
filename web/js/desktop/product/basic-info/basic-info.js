@@ -75,22 +75,21 @@
 		function uploadPhoto(images, errImages) {
 			vm.files = images;
 			vm.errFiles = errImages;
-			var data = {
-				deviser_id: UtilService.returnDeviserIdFromUrl()
-			};
-			var type;
-			if(vm.product.id){
-					type = 'known-product-photo';
-					data['product_id'] = vm.product.id;
-				}
-			else {
-				type = 'unknown-product-photo';
-			}
-			data['type'] = type;
 
 			//upload photos
 			angular.forEach(vm.files, function(file) {
-				data['file'] = file;
+				var data = {
+					deviser_id: UtilService.returnDeviserIdFromUrl(),
+					file: file
+				};
+				var type;
+				if(vm.product.id){
+						data['type'] = 'known-product-photo';
+						data['product_id'] = vm.product.id;
+					}
+				else {
+					data['type'] = 'unknown-product-photo';
+				}
 				Upload.upload({
 					url: productDataService.Uploads,
 					data: data
