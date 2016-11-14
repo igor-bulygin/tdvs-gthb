@@ -133,6 +133,7 @@
 .basic-info-add-photos{
 	.plus-add-wrapper{
 		&.purple{
+			background-color: transparent!important;
 			border-color:#b933f4!important;
 		}
 		border: 1px solid $black;
