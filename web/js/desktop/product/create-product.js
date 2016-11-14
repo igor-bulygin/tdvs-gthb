@@ -130,6 +130,8 @@
 
 			if(angular.isArray(vm.product.categories) && vm.product.categories.length === 0) {
 				required.push('categories');
+			} else if(vm.product.categories.indexOf(null) > -1) {
+				required.push('categories');
 			}
 
 			if(angular.isArray(vm.product.media.photos) && vm.product.media.photos.length === 0) {

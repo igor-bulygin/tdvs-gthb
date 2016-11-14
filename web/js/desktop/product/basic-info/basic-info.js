@@ -25,6 +25,7 @@
 				categories_selected: [null],
 				categories: [vm.rootCategories]
 			})
+			vm.product.categories.push(null);
 		}
 
 		function categorySelected(category, index_helper, index) {
@@ -172,6 +173,7 @@
 			}
 		});
 
+		//when get categories, set first
 		$scope.$watch('productBasicInfoCtrl.categories', function(newValue, oldValue) {
 			if(!oldValue && newValue) {
 				vm.rootCategories = filterCategory(newValue, '');
@@ -179,21 +181,52 @@
 			}
 		});
 
+		//watch name error
+		$scope.$watch('productBasicInfoCtrl.product.name', function(newValue, oldValue) {
+			if(newValue && newValue['en-US'] && newValue['en-US'].length > 0) {
+				vm.nameRequired = false;
+			} else if(oldValue && oldValue['en-US'] && newValue['en-US'].length === 0) {
+				vm.nameRequired = true;
+			}
+		}, true);
+
+		//watch photos and main photo errors
+		$scope.$watch('productBasicInfoCtrl.product.media.photos', function (newValue, oldValue) {
+			if(newValue.length > 0 && vm.photosRequired) {
+				vm.photosRequired = false;
+			}
+			if(vm.mainPhotoRequired) {
+				newValue.forEach(function (element) {
+					if(element.main_product_photo)
+						vm.mainPhotoRequired = false;
+				});
+			}
+		}, true);
+
+		//watch categories errors
+		$scope.$watch('productBasicInfoCtrl.product.categories', function(newValue, oldValue) {
+			if(newValue.indexOf(null) === -1) {
+				vm.form.$submitted = false;
+			}
+		}, true);
+
 		//events
 		$scope.$on(productEvents.requiredErrors, function(event, args){
-			console.log(args.required);
 			//set name error
 			if(args.required.indexOf('name') > -1) {
 				vm.nameRequired = true;
 			}
+			//set photos error
 			if(args.required.indexOf('photos') > -1) {
 				vm.photosRequired = true;
 			}
+			//set main photo error
 			if(args.required.indexOf('main_photo') > -1) {
 				vm.mainPhotoRequired = true;
 			}
+			//set categories error
 			if(args.required.indexOf('categories') > -1) {
-				//set categories required
+				vm.form.$setSubmitted();
 			}
 		})
 	}
