@@ -3805,6 +3805,10 @@ input[type="radio"] .styled:checked + label::after {
     -moz-border-radius: 20px 20px 20px 20px !important; }
   .items-row .categories-select {
     min-width: 136px; }
+    .items-row .categories-select.purple {
+      background-color: transparent; }
+      .items-row .categories-select.purple button {
+        border: 1px solid #b933f4; }
   .items-row .close-row {
     color: #ffffff;
     background-color: #bfbfbf;

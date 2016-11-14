@@ -94,6 +94,12 @@
 		@include border-radius(20px,20px,20px,20px);
 	}
 	.categories-select{
+		&.purple{
+			background-color: transparent;
+			button{
+				border: 1px solid #b933f4;
+			}
+		}
 		min-width: 136px;
 	}
 	.close-row{
