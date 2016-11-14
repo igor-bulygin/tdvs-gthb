@@ -54,6 +54,7 @@ class ProductController extends AppPrivateController
                 return ["errors" => $product->errors];
             }
         } catch (Exception $e) {
+            throw $e;
             throw new BadRequestHttpException($e->getMessage());
         }
     }
@@ -80,6 +81,7 @@ class ProductController extends AppPrivateController
                 return ["errors" => $product->errors];
             }
         } catch (Exception $e) {
+            throw $e;
             throw new BadRequestHttpException($e->getMessage());
         }
     }

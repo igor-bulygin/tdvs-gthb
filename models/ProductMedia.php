@@ -3,22 +3,17 @@ namespace app\models;
 
 use app\helpers\CActiveRecord;
 use yii\base\Model;
+use yii2tech\embedded\ContainerInterface;
+use yii2tech\embedded\ContainerTrait;
 
 /**
  * @property ProductPhoto[] $photosInfo
- * @property array $photos
+ * @property ProductDescriptionPhoto[] $descriptionPhotosInfo
+ * @property array $videos_links
  */
 class ProductMedia extends CActiveRecord
 {
-	/**
-	 * @var array $photos
-	 */
 	public $photos;
-
-	/**
-	 * @var array $video_links
-	 */
-	public $video_links;
 
 	/** @var  Product2 */
 	protected $product;
@@ -27,21 +22,14 @@ class ProductMedia extends CActiveRecord
 	{
 		return [
 			'photos',
-			'video_links',
+			'description_photos',
+			'videos_links',
 		];
 	}
 
-	/**
-	 * Initialize model attributes
-	 */
-	public function init()
+	public function getParentAttribute()
 	{
-		$this->photosInfo = [];
-	}
-
-	public function embedPhotosInfo()
-	{
-		return $this->mapEmbeddedList('photos', ProductPhoto::className());
+		return "media";
 	}
 
 	/**
@@ -60,9 +48,27 @@ class ProductMedia extends CActiveRecord
 		$this->product = $product;
 	}
 
-	public function getParentAttribute()
+	public function beforeValidate()
 	{
-		return "media";
+		foreach ($this->photosInfo as $photo) {
+			$photo->setMedia($this);
+		}
+		foreach ($this->descriptionPhotosInfo as $descriptionPhoto) {
+			$descriptionPhoto->setMedia($this);
+		}
+		$this->setScenario($this->getProduct()->getScenario());
+
+		return parent::beforeValidate();
+	}
+
+	public function embedPhotosInfo()
+	{
+		return $this->mapEmbeddedList('photos', ProductPhoto::className(), array('unsetSource' => false));
+	}
+
+	public function embedDescriptionPhotosInfo()
+	{
+		return $this->mapEmbeddedList('description_photos', ProductDescriptionPhoto::className(), array('unsetSource' => false));
 	}
 
 	/**
@@ -77,8 +83,8 @@ class ProductMedia extends CActiveRecord
 		$loaded = parent::load($data, $formName);
 
 //		if (array_key_exists('photos', $data)) {
-//            $this->photosInfo->load($data, 'photos');
-//        }
+//			$this->photosInfo->load($data, 'photos');
+//		}
 
 		return $loaded;
 	}
@@ -87,9 +93,15 @@ class ProductMedia extends CActiveRecord
 	public function rules()
 	{
 		return [
-//			[['photos'], 'validateDeviserPhotosExists', 'on' => Product2::SCENARIO_PRODUCT_PUBLIC], //TODO: implement this validation
-			[['photos'], 'safe', 'on' => [Product2::SCENARIO_PRODUCT_DRAFT]],
-			[['photos'], 'required', 'on' => [Product2::SCENARIO_PRODUCT_PUBLIC]],
+			['photos', 'safe'], // to load data posted from WebServices
+			['photos', 'required', 'on' => [Product2::SCENARIO_PRODUCT_PUBLIC]],
+			['photosInfo', 'app\validators\EmbedDocValidator'], // to apply rules
+//			['photosInfo', 'validateAmountPhotos'],
+//			['photosInfo', 'validateProductMediaFileExists'], // commented, cause the mediafile can exists in a temporal folder, so we must to check against temporal uploads and product uploads.
+			['description_photos', 'safe'], // to load data posted from WebServices
+			['descriptionPhotosInfo', 'app\validators\EmbedDocValidator'], // to apply rules
+			['descriptionPhotosInfo', 'validateAmountDescriptionPhotos'],
+			['videos_links', 'safe', 'on' => [Product2::SCENARIO_PRODUCT_DRAFT, Product2::SCENARIO_PRODUCT_PUBLIC]],
 		];
 	}
 
@@ -99,12 +111,26 @@ class ProductMedia extends CActiveRecord
 	 * @param $attribute
 	 * @param $params
 	 */
-	public function validateDeviserPhotosExists($attribute, $params)
+	public function validateAmountDescriptionPhotos($attribute, $params)
 	{
 		$photos = $this->$attribute;
-		foreach ($photos as $filename) {
-			if (!$this->product->existMediaFile($filename)) {
-				$this->addError($attribute, sprintf('File %s not found', $filename));
+		if (count($photos) > 4) {
+			$this->addError($attribute, 'Must upload a maximum of 4 photos.');
+		}
+	}
+
+	/**
+	 * Custom validator for amount of photos
+	 *
+	 * @param $attribute
+	 * @param $params
+	 */
+	public function validateProductMediaFileExists($attribute, $params)
+	{
+		$photos = $this->$attribute; /* @var ProductPhoto[] $photos */
+		foreach ($photos as $photo) {
+			if (!$this->product->existMediaFile($photo->name)) {
+				$this->addError($attribute, sprintf('File %s not found', $photo->name));
 			}
 		}
 	}
