@@ -88,6 +88,7 @@
 			vm.product.madetoorder = {
 				type: 0
 			}
+			vm.product.options = {};
 		}
 
 		function parseEmptyFields(obj) {
@@ -164,6 +165,10 @@
 						console.log(dataSaved);
 						vm.product = dataSaved;
 						toastr.success('Saved!');
+					}, function (err) {
+						console.log(err);
+						if(err.data.errors && err.data.errors.required && angular.isArray(err.data.errors.required))
+								$rootScope.$broadcast(productEvents.requiredErrors, {required: err.data.errors.required})
 					});
 				}
 				else {
@@ -173,6 +178,7 @@
 							vm.product = dataSaved;
 							toastr.success('Saved!');
 						}, function(err) {
+							console.log(err);
 							//send errors to components
 							if(err.data.errors && err.data.errors.required && angular.isArray(err.data.errors.required))
 								$rootScope.$broadcast(productEvents.requiredErrors, {required: err.data.errors.required})
