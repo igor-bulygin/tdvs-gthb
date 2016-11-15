@@ -26,13 +26,12 @@ class SizechartController extends Controller {
 			"limit" => $limit,
 		    "offset" => $offset,
 	    ]);
-		$total = SizeChart::$countItemsFound;
 
 	    return [
 		    "items" => $sizeCharts,
 		    "meta" => [
 			    "total_returned" => count($sizeCharts),
-			    "total_count" => $total,
+			    "total_count" => SizeChart::$countItemsFound,
 			    "current_page" => $page,
 			    "per_page" => $limit,
 		    ]

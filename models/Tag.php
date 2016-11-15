@@ -270,14 +270,12 @@ class Tag extends CActiveRecord
 		// Retrieve only fields that gonna be used
 		$query->select(self::getSelectFields());
 
-		// only root nodes, or all
 		if (array_key_exists("scope", $criteria)) {
 			switch ($criteria["scope"]) {
 				case "all":
+					// nothing to do here...
 					break;
-				case "roots":
 				default:
-					$query->andWhere(["path" => "/"]);
 					break;
 			}
 		}
@@ -286,12 +284,12 @@ class Tag extends CActiveRecord
 		static::$countItemsFound = $query->count();
 
 		// limit
-		if ((array_key_exists("limit", $criteria)) && (!empty($criteria["limit"]))) {
+		if ((array_key_exists("limit", $criteria)) && (!empty($criteria["limit"])) && $criteria["scope"] != "all") {
 			$query->limit($criteria["limit"]);
 		}
 
 		// offset for pagination
-		if ((array_key_exists("offset", $criteria)) && (!empty($criteria["offset"]))) {
+		if ((array_key_exists("offset", $criteria)) && (!empty($criteria["offset"])) && $criteria["scope"] != "all") {
 			$query->offset($criteria["offset"]);
 		}
 

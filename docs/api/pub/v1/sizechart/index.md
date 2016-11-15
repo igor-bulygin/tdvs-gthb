@@ -27,6 +27,7 @@ SizeChart
     {
        ...
     }
+    ...
    ],
   "meta": {
     "total_returned": 6,

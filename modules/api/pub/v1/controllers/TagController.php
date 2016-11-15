@@ -27,14 +27,16 @@ class TagController extends Controller {
 	    $offset = ($limit * ($page - 1));
 
 	    $tags = Tag::findSerialized([
-	        "limit" => $limit,
+			"scope" => Yii::$app->request->get("scope", "all"),
+			"limit" => $limit,
 		    "offset" => $offset,
 	    ]);
 
 	    return [
 		    "items" => $tags,
 		    "meta" => [
-			    "total_count" => count($tags),
+				"total_returned" => count($tags),
+				"total_count" => Tag::$countItemsFound,
 			    "current_page" => $page,
 			    "per_page" => $limit,
 		    ]
