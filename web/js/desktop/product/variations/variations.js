@@ -11,6 +11,7 @@
 			vm.setPreorderEnd = setPreorderEnd;
 			vm.setPreorderShip = setPreorderShip;
 			vm.limitTagOption = limitTagOption;
+			vm.deleteOption = deleteOption;
 			//vars
 			vm.tag_order = ['Color', 'Material', 'Size', 'Style'];
 			vm.tagComparator = tagComparator;
@@ -66,6 +67,12 @@
 		function limitTagOption(limit, array) {
 			if(array.length > limit)
 				array.splice(1, array.length-1);
+		}
+
+		function deleteOption(tag, index) {
+			if(index >= 0) {
+				vm.product.options[tag].splice(index,1);
+			}
 		}
 
 		//watchs

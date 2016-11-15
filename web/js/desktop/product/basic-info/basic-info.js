@@ -65,7 +65,7 @@
 		}
 
 		function deleteCategory(index) {
-			if(index > 0) {
+			if(index >= 0) {
 				vm.product.categories.splice(index, 1);
 				vm.categories_helper.splice(index, 1);
 				$rootScope.$broadcast(productEvents.setTagsFromCategory, {categories: vm.product.categories});

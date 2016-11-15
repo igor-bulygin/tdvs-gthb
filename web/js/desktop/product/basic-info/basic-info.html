@@ -30,7 +30,7 @@
 							</li>
 						</ol>
 					</span>
-					<span class="glyphicon glyphicon-remove close-row" ng-if="$index > 0" ng-click="productBasicInfoCtrl.deleteCategory($index)"></span>
+					<span class="glyphicon glyphicon-remove close-row" ng-if="productBasicInfoCtrl.product.categories.length > 1" ng-click="productBasicInfoCtrl.deleteCategory($index)"></span>
 				</div>
 			</div>
 			<span class="add-cathegory" ng-click="productBasicInfoCtrl.addCategory(productBasicInfoCtrl.categories_helper[$parent.$index].categories_selected[$index])">+ Add another category</span>
