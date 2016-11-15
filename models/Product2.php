@@ -39,6 +39,7 @@ use yii\helpers\FileHelper;
  * @property string currency
  * @property string weight_unit
  * @property array price_stock
+ * @property array tags
  * @property array references
  * @property string $product_state
  * @property int position
@@ -99,6 +100,7 @@ class Product2 extends Product {
 			'currency',
 			'weight_unit',
 			'price_stock',
+			'tags',
 			'position',
 			'created_at',
 			'updated_at',
@@ -138,27 +140,19 @@ class Product2 extends Product {
 		$this->currency = "";
 		$this->weight_unit = "";
 		$this->price_stock = [];
+		$this->tags = [];
 		$this->references = [];
 		$this->position = 0;
-
-		$this->mediaFiles = new ProductMedia();
-		$this->mediaFiles->setProduct($this);
 	}
-
-    public function setScenario($value)
-    {
-        parent::setScenario($value);
-        $this->mediaFiles->setScenario($value);
-    }
 
     public function embedMediaFiles()
     {
-        return $this->mapEmbedded('media', ProductMedia::className());
+        return $this->mapEmbedded('media', ProductMedia::className(), array('unsetSource' => false));
     }
 
     public function embedFaqInfo()
     {
-        return $this->mapEmbeddedList('faq', FaqQuestion::className());
+        return $this->mapEmbeddedList('faq', FaqQuestion::className(), array('unsetSource' => false));
     }
 
     /**
@@ -169,11 +163,13 @@ class Product2 extends Product {
     public function afterFind()
     {
         parent::afterFind();
-
-        $this->mediaFiles->load($this, 'media');
-        $this->mediaFiles->setProduct($this);
     }
 
+	public function beforeValidate()
+	{
+		$this->mediaFiles->setProduct($this);
+		return parent::beforeValidate();
+	}
 
 	public function beforeSave($insert) {
 
@@ -196,6 +192,13 @@ class Product2 extends Product {
 				}
 			}
         }
+
+		// short_id on price_stock
+		foreach ($this->price_stock as $priceStock) {
+			if (!isset($priceStock['short_id'])) {
+				$priceStock['short_id'] = Utils::shortID(7);
+			}
+		}
 
 		$slugs = [];
 		foreach ($this->name as $lang => $text) {
@@ -250,12 +253,21 @@ class Product2 extends Product {
             [
                 [
                     'deviser_id',
-                    'name',
-                    'categories',
-                ],
+					'name',
+					'categories',
+					'description',
+				],
                 'required',
                 'on' => [self::SCENARIO_PRODUCT_PUBLIC],
             ],
+			[
+				[
+					'name',
+					'description',
+				],
+				'app\validators\TranslatableRequiredValidator',
+				'on' => self::SCENARIO_PRODUCT_PUBLIC,
+			],
             [
                 [
                     'deviser_id',
@@ -263,7 +275,6 @@ class Product2 extends Product {
                     'slug',
                     'description',
                     'categories',
-                    'media',
                     'faq',
 					'collections',
 					'options',
@@ -276,6 +287,7 @@ class Product2 extends Product {
 					'currency',
 					'weight_unit',
 					'price_stock',
+					'tags',
                     'position',
                     'product_state',
                 ],
@@ -302,6 +314,7 @@ class Product2 extends Product {
                 'app\validators\CategoriesValidator',
                 'on' => [self::SCENARIO_PRODUCT_DRAFT, self::SCENARIO_PRODUCT_PUBLIC],
             ],
+            [   'media', 'safe'], // to load data posted from WebServices
             [   'mediaFiles', 'app\validators\EmbedDocValidator'], // to apply rules
             [   'faq', 'safe'], // to load data posted from WebServices
             [   'faqInfo', 'app\validators\EmbedDocValidator'], // to apply rules
@@ -346,8 +359,7 @@ class Product2 extends Product {
                     'slug',
                     'description',
                     'categories',
-                    'media',
-					'mediaFiles' => 'mediaInfoAttributes',
+					'media',
 					'faq',
                     'product_state',
 					'enabled',
@@ -364,6 +376,7 @@ class Product2 extends Product {
 					'url_images' => 'urlImagesLocation',
                     'position',
 					'price_stock',
+					'tags',
                 ];
                 static::$retrieveExtraFields = [
                     'deviser_id',
@@ -382,8 +395,7 @@ class Product2 extends Product {
                     'slug',
                     'description',
                     'categories',
-                    'media',
-					'mediaFiles' => 'mediaInfoAttributes',
+					'media',
 					'faq',
                     'product_state',
 					'enabled',
@@ -396,10 +408,11 @@ class Product2 extends Product {
 					'currency',
 					'weight_unit',
 					'references',
-					'options' => 'productOptions',
+					'options',
 					'url_images' => 'urlImagesLocation',
                     'position',
 					'price_stock',
+					'tags',
                 ];
                 static::$retrieveExtraFields = [
                     'deviser_id',
@@ -433,6 +446,7 @@ class Product2 extends Product {
 					'currency',
 					'weight_unit',
 					'price_stock',
+					'tags',
 					'url_images' => 'urlImagesLocation',
                     'product_state',
 				];
@@ -815,18 +829,6 @@ class Product2 extends Product {
 	{
 		return Yii::getAlias("@product_url") . "/" . $this->short_id . "/";
 	}
-
-    /**
-     * Get media files attributes from their own Model, not from array.
-     *
-     * @return array
-     */
-    public function getMediaInfoAttributes()
-    {
-        $media = $this->mediaFiles->getAttributes();
-
-        return $media;
-    }
 
 	/**
 	 * Spread data for sub documents

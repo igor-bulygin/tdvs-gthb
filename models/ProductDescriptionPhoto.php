@@ -2,9 +2,15 @@
 namespace app\models;
 
 use app\helpers\CActiveRecord;
+use kartik\color\ColorInputAsset;
 use yii\base\Model;
 
-class ProductPhoto extends Model
+/**
+ * @property string|mixed name
+ * @property string|mixed title
+ * @property string|mixed description
+ */
+class ProductDescriptionPhoto extends Model
 {
 	/**
 	 * @var string
@@ -12,13 +18,25 @@ class ProductPhoto extends Model
 	public $name;
 
 	/**
-	 * @var boolean
+	 * @var array
 	 */
-	public $main_product_photo;
+	public $title;
+
+	/**
+	 * @var array
+	 */
+	public $description;
+
+	/**
+	 * The attributes that should be translated
+	 *
+	 * @var array
+	 */
+	public $translatedAttributes = ['title', 'description'];
 
 	public function getParentAttribute()
 	{
-		return "photos";
+		return "description_photos";
 	}
 
 	/**
@@ -46,9 +64,9 @@ class ProductPhoto extends Model
 	public function rules()
     {
         return [
-	        [['name', 'main_product_photo'], 'safe', 'on' => [Product2::SCENARIO_PRODUCT_DRAFT, Product2::SCENARIO_PRODUCT_PUBLIC]],
+	        [['name'], 'safe', 'on' => [Product2::SCENARIO_PRODUCT_DRAFT, Product2::SCENARIO_PRODUCT_PUBLIC]],
             [['name'], 'required', 'on' => Product2::SCENARIO_PRODUCT_PUBLIC],
-	        [['main_product_photo'], 'boolean'],
+			[['title', 'description'], 'app\validators\TranslatableRequiredValidator'],
         ];
     }
 

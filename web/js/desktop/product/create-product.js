@@ -7,6 +7,7 @@
 
 		function init() {
 			vm.product = new productDataService.ProductPriv();
+			vm.product.slug = {};
 			vm.product.categories = [];
 			vm.product.media = {
 				photos: [],
@@ -88,6 +89,13 @@
 			vm.product.madetoorder = {
 				type: 0
 			}
+			vm.product.options = {};
+			vm.product.returns = {
+				type: 0
+			};
+			vm.product.warranty = {
+				type: 0
+			};
 		}
 
 		function parseEmptyFields(obj) {
@@ -124,22 +132,36 @@
 			}
 
 			//validations
-			if(!vm.product.name || !vm.product.name['en-US']) {
-				required.push('name');
-			}
+			if(vm.product.product_state !== 'product_state_draft') {
+				//name
+				if(!vm.product.name || !vm.product.name['en-US']) {
+					required.push('name');
+				}
+				//categories
+				if(angular.isArray(vm.product.categories) && vm.product.categories.length === 0) {
+					required.push('categories');
+				} else if(vm.product.categories.indexOf(null) > -1) {
+					required.push('categories');
+				}
+				//photos
+				if(angular.isArray(vm.product.media.photos) && vm.product.media.photos.length === 0) {
+					required.push('photos');
+				}
 
-			if(angular.isArray(vm.product.categories) && vm.product.categories.length === 0) {
-				required.push('categories');
-			} else if(vm.product.categories.indexOf(null) > -1) {
-				required.push('categories');
-			}
+				if(angular.isArray(vm.product.media.photos) && vm.product.media.photos.length > 0 && !main_photo) {
+					required.push('main_photo');
+				}
 
-			if(angular.isArray(vm.product.media.photos) && vm.product.media.photos.length === 0) {
-				required.push('photos');
-			}
-
-			if(angular.isArray(vm.product.media.photos) && vm.product.media.photos.length > 0 && !main_photo) {
-				required.push('main_photo');
+				//description
+				if(!vm.product.description || !vm.product.description['en-US']) {
+					required.push('description');
+				}
+			} else {
+				//check for null categories
+				while(vm.product.categories.indexOf(null) > -1){
+					var pos = vm.product.categories.indexOf(null);
+					vm.product.categories.splice(pos, 1);
+				}
 			}
 
 			if(required.length === 0) {
@@ -147,20 +169,30 @@
 					vm.product.$update({
 						idProduct: vm.product.id
 					}).then(function(dataSaved) {
-						console.log(dataSaved);
-						vm.product = dataSaved;
+						var options_to_convert = ['name', 'description', 'slug', 'sizechart', 'preorder', 'returns', 'warranty'];
+						for(var i=0; i < options_to_convert.length; i++) {
+							vm.product[options_to_convert[i]] = UtilService.emptyArrayToObject(vm.product[options_to_convert[i]]);
+						}
 						toastr.success('Saved!');
+					}, function (err) {
+						console.log(err);
+						if(err.data.errors && err.data.errors.required && angular.isArray(err.data.errors.required))
+								$rootScope.$broadcast(productEvents.requiredErrors, {required: err.data.errors.required})
 					});
 				}
 				else {
 					vm.product.$save()
 						.then(function (dataSaved) {
-							console.log(dataSaved);
-							vm.product = dataSaved;
 							toastr.success('Saved!');
+							var options_to_convert = ['name', 'description', 'slug', 'sizechart', 'preorder', 'returns', 'warranty'];
+							for(var i=0; i < options_to_convert.length; i++) {
+								vm.product[options_to_convert[i]] = UtilService.emptyArrayToObject(vm.product[options_to_convert[i]]);
+							}
 						}, function(err) {
+							console.log(err);
 							//send errors to components
-							$rootScope.$broadcast(productEvents.requiredErrors, {required: err.data.errors.required})
+							if(err.data.errors && err.data.errors.required && angular.isArray(err.data.errors.required))
+								$rootScope.$broadcast(productEvents.requiredErrors, {required: err.data.errors.required})
 						});
 				}
 			} else {
