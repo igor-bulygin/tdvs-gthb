@@ -45,7 +45,7 @@
 				//if not
 				vm.product.categories[index_helper] = category;
 				//send event to get tags by category
-				$rootScope.$broadcast(productEvents.setTagsFromCategory, {categories: vm.product.categories});
+				$rootScope.$broadcast(productEvents.setVariations, {categories: vm.product.categories});
 			}
 		}
 

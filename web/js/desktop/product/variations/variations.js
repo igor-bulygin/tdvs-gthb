@@ -75,16 +75,35 @@
 			}
 		}
 
+		function searchPrintsSizecharts(id) {
+			var prints = false;
+			var sizecharts = false;
+			for(var i = 0; i < vm.categories.length; i++) {
+				if(vm.categories[i].id === id) {
+					return [vm.categories[i]['prints'], vm.categories[i]['sizecharts']];
+				}
+			}
+			return false;
+		}
+
 		//watchs
 		//watch product
 
 		//events
 		////TO DO: set bespoke text required if it is empty in english
-
-		$scope.$on(productEvents.setTagsFromCategory, function(event, args) {
+		$scope.$on(productEvents.setVariations, function(event, args) {
+			//get tags
 			getTagsByCategory(args.categories);
-			//get sizecharts value
-			//get prints value
+			//get sizecharts and prints value
+			vm.sizecharts = false;
+			vm.prints = false;
+			args.categories.forEach(function(element) {
+				var values = searchPrintsSizecharts(element);
+				if(values[0])
+					vm.prints = true;
+				if(values[1])
+					vm.sizecharts = true;
+			});
 		});
 
 		//orders
@@ -101,8 +120,9 @@
 		controllerAs: 'productVariationsCtrl',
 		bindings: {
 			product: '<',
-			languages: '=',
-			tags: '='
+			languages: '<',
+			tags: '<',
+			categories: '<'
 		}
 	}
 

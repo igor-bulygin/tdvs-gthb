@@ -8,7 +8,7 @@
 
 		//events
 		$provide.value("productEvents", {
-			setTagsFromCategory: 'set-tags-from-category',
+			setVariations: 'set-variations',
 			requiredErrors: 'set-required-errors'
 		});
 
