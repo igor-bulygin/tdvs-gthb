@@ -52,6 +52,7 @@ class ProductController extends Controller {
 		    "id" => Yii::$app->request->get("id"),
 		    "deviser_id" => Yii::$app->request->get("deviser"),
 	    	"categories" => Yii::$app->request->get("categories"),
+			"product_state"=>  Yii::$app->request->get("product_state"),
 		    "limit" => $limit,
 		    "offset" => $offset,
 	    ]);

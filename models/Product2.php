@@ -524,6 +524,10 @@ class Product2 extends Product {
             $query->andWhere(["categories" => $ids]);
         }
 
+		// if product_state is specified
+		if ((array_key_exists("product_state", $criteria)) && (!empty($criteria["product_state"]))) {
+			$query->andWhere(["product_state" => $criteria["product_state"]]);
+		}
         // if name is specified
         if ((array_key_exists("name", $criteria)) && (!empty($criteria["name"]))) {
 //			// search the word in all available languages
@@ -536,6 +540,8 @@ class Product2 extends Product {
 //			// search the word in all available languages
             $query->andFilterWhere(Utils::getFilterForTranslatableField("description", $criteria["text"]));
         }
+
+
 
         // Count how many items are with those conditions, before limit them for pagination
         static::$countItemsFound = $query->count();
