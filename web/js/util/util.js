@@ -7,6 +7,7 @@
 		this.returnDeviserIdFromUrl = returnDeviserIdFromUrl;
 		this.returnProductIdFromUrl = returnProductIdFromUrl;
 		this.emptyArrayToObject = emptyArrayToObject;
+		this.parseMultiLanguageEmptyFields = parseMultiLanguageEmptyFields;
 		this.has_error = has_error;
 		this.parseImagesUrl = parseImagesUrl;
 		//regex from: https://gist.github.com/dperini/729294
@@ -75,6 +76,14 @@
 			}
 			else {
 				return array;
+			}
+		}
+
+		function parseMultiLanguageEmptyFields(obj) {
+			for(var key in obj) {
+				if(obj[key].length === 0) {
+					delete obj[key];
+				}
 			}
 		}
 
