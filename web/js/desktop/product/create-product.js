@@ -21,12 +21,11 @@
 			vm.product.preorder = {
 				type: 0
 			};
+			vm.product.tags = {};
 			getLanguages();
 			getCategories();
 			getDeviser();
 			getTags();
-			//getStorage();
-			
 		}
 
 		init();
@@ -71,54 +70,20 @@
 				})
 		}
 
-		function getStorage() {
-			// vm.products = localStorageService.get('draftProducts');
-			// if(vm.products === undefined || vm.products === null) {
-			// 	vm.products = [];
-			// 	localStorageService.set('draftProducts', vm.products);
-			// }
-			vm.product = new productDataService.ProductPriv();
-			vm.product.categories = [];
-			vm.product.id = vm.products.length+1;
-			vm.product.media = {
-				photos: [],
-				description_photos: []
-			}
-			vm.product.faq = [];
-			vm.product.tags = [];
-			vm.product.madetoorder = {
-				type: 0
-			}
-			vm.product.options = {};
-			vm.product.returns = {
-				type: 0
-			};
-			vm.product.warranty = {
-				type: 0
-			};
-		}
-
-		function parseEmptyFields(obj) {
-			for(var key in obj) {
-				if(obj[key].length === 0)
-					delete obj[key];
-			}
-		}
-
 		function save(state) {
 			var required = [];
 			//set state of the product
 			vm.product.product_state = angular.copy(state);
 
 			//parse empty multilanguage fields
-			parseEmptyFields(vm.product.name);
-			parseEmptyFields(vm.product.description);
+			UtilService.parseMultiLanguageEmptyFields(vm.product.name);
+			UtilService.parseMultiLanguageEmptyFields(vm.product.description);
 
 			//parse faq
 			if(angular.isArray(vm.product.faq) && vm.product.faq.length > 0) {
 				vm.product.faq.forEach(function(element) {
-					parseEmptyFields(element.question);
-					parseEmptyFields(element.answer)
+					UtilService.parseMultiLanguageEmptyFields(element.question);
+					UtilService.parseMultiLanguageEmptyFields(element.answer)
 				});
 			}
 
@@ -169,7 +134,7 @@
 					vm.product.$update({
 						idProduct: vm.product.id
 					}).then(function(dataSaved) {
-						var options_to_convert = ['name', 'description', 'slug', 'sizechart', 'preorder', 'returns', 'warranty'];
+						var options_to_convert = ['name', 'description', 'slug', 'sizechart', 'preorder', 'returns', 'warranty', 'tags'];
 						for(var i=0; i < options_to_convert.length; i++) {
 							vm.product[options_to_convert[i]] = UtilService.emptyArrayToObject(vm.product[options_to_convert[i]]);
 						}
