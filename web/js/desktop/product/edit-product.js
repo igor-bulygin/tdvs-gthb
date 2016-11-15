@@ -6,12 +6,9 @@
 		var vm = this;
 		
 				
-		vm.deviser_id = UtilService.returnDeviserIdFromUrl();
-		vm.product_id = UtilService.returnProductIdFromUrl();
 		vm.categories_helper = [];
-		vm.image_helper = [];
 		vm.images = [];
-		
+				
 		
 		function init(){
 			getLanguages();
@@ -40,13 +37,14 @@
 
 				});
 		}
-		//The getDeviser probably can be deleted.
 		function getDeviser(){
 			deviserDataService.Profile.get({
 				deviser_id: UtilService.returnDeviserIdFromUrl()
 			}).$promise.then(function(dataDeviser) {
 				vm.deviser = dataDeviser;
-				vm.deviser_original = angular.copy(dataDeviser);
+				vm.link_profile = '/deviser/' + dataDeviser.slug + '/' + dataDeviser.id + '/store/edit';
+				vm.profile = currentHost()+vm.deviser.url_images+vm.deviser.media.profile_cropped;
+				vm.product.deviser_id = dataDeviser.id;
 			}, function(err) {
 
 			});
@@ -81,19 +79,15 @@
 					url: currentHost() + vm.product.url_images + vm.product.media.photos[i].name,
 					filename: vm.product.media.photos[i].name
 					};
-				}	
+				}
+				console.log(vm);	
 				
-				
-
 			}, function (err) {
 				toastr.error(err);
 			});
 		}
 		
-		
-	//}
-		
-}
+	}
 
 	angular
 		.module('todevise')
