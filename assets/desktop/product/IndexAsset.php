@@ -23,6 +23,7 @@ class IndexAsset extends AssetBundle {
 		'app\assets\libs\ngImgCropAsset',
 		'app\assets\libs\ngTagsInputAsset',
 		'app\assets\libs\angularLocalStorageAsset',
-		'app\assets\libs\angularBootstrapDatetimePickerAsset'
+		'app\assets\libs\angularBootstrapDatetimePickerAsset',
+		'app\assets\libs\macyAsset'
 	];
 }

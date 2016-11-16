@@ -144,7 +144,7 @@
 		}
 	}
 
-	angular.module('todevise', ['api', 'toastr', 'nya.bootstrap.select'])
+	angular.module('todevise')
 		.controller('detailProductCtrl', controller)
 
 }());

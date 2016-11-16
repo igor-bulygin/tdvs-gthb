@@ -1,6 +1,6 @@
 <?php
 use app\assets\desktop\pub\Product2Asset;
-use app\assets\desktop\pub\ProductDetailAsset;
+use app\assets\desktop\product\ProductDetailAsset;
 use app\assets\desktop\pub\PublicCommonAsset;
 use app\models\Category;
 use app\models\Person;
