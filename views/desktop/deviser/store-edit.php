@@ -78,8 +78,8 @@ $this->params['deviser'] = $deviser;
 														<figure class="effect-zoe">
 															<img class="grid-image" ng-src="{{product.main_photo}}">
 															<figcaption>
-																<p class="instauser">{{product.name}}</p>
-																<p class="price">€ 0</p>
+																<p class="instauser">{{product.name || "Untitled"}}</p>
+																<p class="price">€{{product.min_price}}</p>
 															</figcaption>
 														</figure>
 													</div>
@@ -109,7 +109,7 @@ $this->params['deviser'] = $deviser;
 														<img class="grid-image" ng-src="{{product.main_photo}}">
 														<figcaption>
 															<p class="instauser">{{product.name}}</p>
-															<p class="price">€ 0</p>
+															<p class="price">€{{product.min_price}}</p>
 														</figcaption>
 													</figure>
 												</div>

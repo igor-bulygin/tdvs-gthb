@@ -6,6 +6,8 @@
 		vm.update = update;
 		vm.deviser_id = UtilService.returnDeviserIdFromUrl();
 		vm.language = 'en-US';
+		vm.minPrice = [];
+		
 
 		function parseCategories() {
 			var url = $location.absUrl();
@@ -22,7 +24,7 @@
 		}
 	
 		function getProducts() {
-			vm.publishedProducts = [];
+			
 			var data = {
 				"deviser": UtilService.returnDeviserIdFromUrl(),
 				"limit": 9999,
@@ -36,8 +38,11 @@
 			}
 			productDataService.Product.get(data).$promise.then(function (dataProducts) {
 				vm.products = dataProducts.items;
-				parseMainPhoto(vm.products);
+				vm.products.forEach(function(element) {
+					setMinimumPrice(element);
+				})
 			});
+
 		}
 		
 		function init() {
@@ -67,6 +72,22 @@
 				});
 			} else {
 				toastr.error("Cannot be updated!");
+			}
+		}
+
+		function setMinimumPrice(product) {
+			var min_price;
+			if(angular.isArray(product.price_stock) &&
+				product.price_stock.length > 0) {
+				min_price = product.price_stock[0].price;
+				for(var i = 0; i < product.price_stock.length; i++) {
+					if(product.price_stock[i].price < min_price) {
+						min_price = product.price_stock[i].price;
+					}
+				}
+				product.min_price = min_price;
+			}else{
+				product.min_price = '-';
 			}
 		}
 
