@@ -350,6 +350,7 @@ $videos = $product->getVideos();
                             </div>
 						</div>
 					</div>
+					
 					<div class="title">WORK FAQs</div>
 					<div class="q-a-wrapper">
 						<p class="question">
@@ -381,6 +382,7 @@ $videos = $product->getVideos();
 							<span>Yes</span>
 						</p>
 					</div>
+					
 					<div class="reviews-wrapper">
 						<div class="title">User reviews</div>
 						<div class="review-rates">

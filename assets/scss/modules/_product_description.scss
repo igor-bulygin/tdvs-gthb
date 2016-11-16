@@ -192,6 +192,9 @@
     }
 }
 .work-profile-description-wrapper{
+	border-bottom: solid 1px #9a9a9a;
+    padding: 0 0 40px;
+    margin: 0 0 40px;
     @extend %block;
     .description{
         font-family: $font-family--serif;
