@@ -1,12 +1,12 @@
 (function () {
 	"use strict";
 
-	function controller(productDataService, UtilService, toastr, $location, localStorageService) {
+	function controller(productDataService, UtilService, toastr, $location) {
 		var vm = this;
 		vm.update = update;
 		vm.deviser_id = UtilService.returnDeviserIdFromUrl();
 		vm.language = 'en-US';
-
+		
 		function parseCategories() {
 			var url = $location.absUrl();
 			if(url.split("?").length > 1) {
@@ -20,11 +20,12 @@
 				}
 			}
 		}
-
+	
 		function getProducts() {
+			
 			var data = {
 				"deviser": UtilService.returnDeviserIdFromUrl(),
-				"limit": 9999
+				"limit": 9999,
 			}
 			if(vm.subcategory || vm.category) {
 				data["categories[]"] = [];
@@ -35,31 +36,20 @@
 			}
 			productDataService.Product.get(data).$promise.then(function (dataProducts) {
 				vm.products = dataProducts.items;
-				parseMainPhoto(vm.products);
-			});
-		}
-
-		function getUnpublishedProducts() {
-			vm.allUnpublishedProducts = localStorageService.get('draftProducts');
-			if(vm.allUnpublishedProducts !== undefined && vm.allUnpublishedProducts !== null) {
-				vm.unpublishedProducts = [];
-				for(var i = 0; i < vm.allUnpublishedProducts.length; i++) {
-					if(vm.allUnpublishedProducts[i].deviser_id === vm.deviser_id) {
-						vm.allUnpublishedProducts[i].url_images = '/uploads/product/temp/';
-						vm.unpublishedProducts.push(vm.allUnpublishedProducts[i]);
-					}
-				}
-				if(vm.unpublishedProducts.length > 0) {
-					parseMainPhoto(vm.unpublishedProducts);
-				}
+				vm.products.forEach(function(element) {
+					setMinimumPrice(element);
+				})
 				
-			}
-		}
+				parseMainPhoto(vm.products);
+				
+			});
 
+		}
+		
 		function init() {
 			parseCategories();
 			getProducts();
-			getUnpublishedProducts();
+			
 		}
 
 		function update(index, product) {
@@ -86,6 +76,22 @@
 			}
 		}
 
+		function setMinimumPrice(product) {
+			var min_price;
+			if(angular.isArray(product.price_stock) &&
+				product.price_stock.length > 0) {
+				min_price = product.price_stock[0].price;
+				for(var i = 0; i < product.price_stock.length; i++) {
+					if(product.price_stock[i].price < min_price) {
+						min_price = product.price_stock[i].price;
+					}
+				}
+				product.min_price = min_price;
+			}else{
+				product.min_price = '-';
+			}
+		}
+
 		function parseMainPhoto(products) {
 			products.forEach(function (element) {
 					for (var i = 0; i < element.media.photos.length; i++) {
@@ -97,11 +103,36 @@
 
 		init();
 
+
+
 	}
 
+	function draftProduct(){
+		return function(input){
+			var draft=[];
+			angular.forEach(input,function(product){
+				if(product.product_state === 'product_state_draft')
+					draft.push(product)
+				})
+			return draft;
+		}
+	}
+
+	function publishedProduct(){
+		return function(input){
+			var draft=[];
+			angular.forEach(input,function(product){
+				if(product.product_state === 'product_state_active' || product.product_state === null)//delete the null with the refactor
+					draft.push(product)
+				})
+			return draft;
+		}
+	}
 
 	angular
 		.module('todevise')
-		.controller('editStoreCtrl', controller);
+		.controller('editStoreCtrl', controller)
+		.filter('draftProduct',draftProduct)
+		.filter('publishedProduct', publishedProduct);
 
 }());

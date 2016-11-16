@@ -72,15 +72,14 @@ $this->params['deviser'] = $deviser;
 									</div>
 									<p class="message-tagline">Only you are able to see your unpublished works.</p>
 									<div class="row m-0">
-										<div class="col-md-3 pad-grid" ng-repeat="product in editStoreCtrl.unpublishedProducts">
-
+										<div class="col-md-3 pad-grid" ng-repeat="product in editStoreCtrl.products | draftProduct">
 												<a href="">
 													<div class="grid">
 														<figure class="effect-zoe">
 															<img class="grid-image" ng-src="{{product.main_photo}}">
 															<figcaption>
-																<p class="instauser">{{product.name[editStoreCtrl.language]}}</p>
-																<p class="price">€ 0</p>
+																<p class="instauser">{{product.name || "Untitled"}}</p>
+																<p class="price">€{{product.min_price}}</p>
 															</figcaption>
 														</figure>
 													</div>
@@ -103,14 +102,14 @@ $this->params['deviser'] = $deviser;
 										</ul>
 									</nav>
 									<div class="mesonry-row" dnd-list="editStoreCtrl.products">
-										<div class="menu-category list-group" ng-repeat="product in editStoreCtrl.products" ng-if="product.main_photo" dnd-draggable="product" dnd-effect-allowed="move" dnd-moved="editStoreCtrl.update($index, product)">
+										<div class="menu-category list-group" ng-repeat="product in editStoreCtrl.products | publishedProduct" ng-if="product.main_photo" dnd-draggable="product" dnd-effect-allowed="move" dnd-moved="editStoreCtrl.update($index, product)">
 											<a href="">
 												<div class="grid">
 													<figure class="effect-zoe">
 														<img class="grid-image" ng-src="{{product.main_photo}}">
 														<figcaption>
 															<p class="instauser">{{product.name}}</p>
-															<p class="price">€ 0</p>
+															<p class="price">€{{product.min_price}}</p>
 														</figcaption>
 													</figure>
 												</div>

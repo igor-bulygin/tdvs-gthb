@@ -6,9 +6,8 @@
 		var vm = this;
 		
 				
-		vm.deviser_id = UtilService.returnDeviserIdFromUrl();
-		vm.product_id = UtilService.returnProductIdFromUrl();
 		vm.categories_helper = [];
+		vm.images = [];
 				
 		
 		function init(){
@@ -38,19 +37,20 @@
 
 				});
 		}
-		//The getDeviser probably can be deleted.
 		function getDeviser(){
 			deviserDataService.Profile.get({
 				deviser_id: UtilService.returnDeviserIdFromUrl()
 			}).$promise.then(function(dataDeviser) {
 				vm.deviser = dataDeviser;
-				vm.deviser_original = angular.copy(dataDeviser);
+				vm.link_profile = '/deviser/' + dataDeviser.slug + '/' + dataDeviser.id + '/store/edit';
+				vm.profile = currentHost()+vm.deviser.url_images+vm.deviser.media.profile_cropped;
+				vm.product.deviser_id = dataDeviser.id;
 			}, function(err) {
 
 			});
 
 		}
-
+		
 		function getProduct() {
 			productDataService.ProductPriv.get({
 				idProduct: UtilService.returnProductIdFromUrl()
@@ -72,18 +72,22 @@
 						}
 					});
 				});
-				console.log(vm.product);
-
-
+				
+				for (var i = 0; i < vm.product.media.photos.length; i++) {
+				vm.images[i] = {
+					pos: i,
+					url: currentHost() + vm.product.url_images + vm.product.media.photos[i].name,
+					filename: vm.product.media.photos[i].name
+					};
+				}
+				console.log(vm);	
+				
 			}, function (err) {
 				toastr.error(err);
 			});
 		}
 		
-		
-	//}
-		
-}
+	}
 
 	angular
 		.module('todevise')

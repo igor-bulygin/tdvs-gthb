@@ -237,7 +237,8 @@
 		bindings: {
 			product: '=',
 			categories: '<',
-			languages: '<'
+			languages: '<',
+			images: '<'
 		}
 	}
 

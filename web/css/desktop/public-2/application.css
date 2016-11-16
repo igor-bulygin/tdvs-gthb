@@ -279,6 +279,9 @@ ul {
   cursor: default;
   border: none; }
 
+.bold {
+  font-family: "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+
 .error-text {
   color: #924cfc !important; }
 
@@ -299,6 +302,9 @@ ul {
 
 .ml-30 {
   margin-left: 30px; }
+
+.no-pad-r {
+  padding-right: 0 !important; }
 
 /* Dont display dropable zone on dragg and drop */
 .dndDraggingSource {
@@ -3562,11 +3568,15 @@ input[type="radio"] .styled:checked + label::after {
         float: right;
         color: #9a9a9a; }
 
-.work-profile-description-wrapper .description {
-  font-family: "Playfair Display", Georgia, serif;
-  font-size: 15px;
-  line-height: 1.53;
-  color: #484848; }
+.work-profile-description-wrapper {
+  border-bottom: solid 1px #9a9a9a;
+  padding: 0 0 40px;
+  margin: 0 0 40px; }
+  .work-profile-description-wrapper .description {
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 15px;
+    line-height: 1.53;
+    color: #484848; }
 
 .other-products-wrapper {
   margin-bottom: 80px; }

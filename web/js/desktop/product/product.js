@@ -3,7 +3,7 @@
 
 	function config(nyaBsConfigProvider, $provide, localStorageServiceProvider) {
 		nyaBsConfigProvider.setLocalizedText('en-us', {
-			defaultNoneSelection: 'Choose an option'
+			defaultNoneSelection: 'Select an option'
 		});
 
 		//events

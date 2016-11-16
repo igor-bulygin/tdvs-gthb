@@ -26,11 +26,34 @@
 					</div>
 				</div>
 			</div>
-			<div class="row" ng-if="productVariationsCtrl.sizecharts">
-				<span class="title">Sizes</span>
+			<div ng-if="productVariationsCtrl.sizecharts" ng-cloak>
+				<div class="row">
+					<span class="title">Sizes</span>
+				</div>
 			</div>
-			<div class="row" ng-if="productVariationsCtrl.prints">
-				<span class="title">Prints</span>
+			<div ng-if="productVariationsCtrl.prints" ng-cloak>
+				<div class="row">
+					<span class="title">Prints</span>
+				</div>
+				<div class="row">
+					<div class="col-md-4 pad-about">
+						<span>Do you offer prints of your work?</span>
+					</div>
+					<div class="col-md-8 pad-about">
+						<div class="radio radio-inline ml-30">
+							<input type="radio" name="prints_selected" id="prints_selected" ng-model="productVariationsCtrl.prints_selected" ng-value="true" ng-change="productVariationsCtrl.setPrintsSelected(productVariationsCtrl.prints_selected)">
+							<label for="prints_selected">
+								Yes
+							</label>
+						</div>
+						<div class="radio radio-inline">
+							<input type="radio" name="prints_unselected" id="prints_unselected" ng-model="productVariationsCtrl.prints_selected" ng-value="false" checked ng-change="productVariationsCtrl.setPrintsSelected(productVariationsCtrl.prints_selected">
+							<label for="prints_unselected">
+								No
+							</label>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div class="col-md-6">
@@ -44,13 +67,13 @@
 						<div class="radio radio-inline ml-30">
 							<input type="radio" name="preorder_selected" id="preorder_selected" ng-model="productVariationsCtrl.preorder_selected" ng-value="true" ng-change="productVariationsCtrl.setPreorder(productVariationsCtrl.preorder_selected)">
 							<label for="preorder_selected">
-								YES
+								Yes
 							</label>
 						</div>
 						<div class="radio radio-inline">
 							<input type="radio" name="preorder_unselected" id="preorder_unselected" ng-model="productVariationsCtrl.preorder_selected" ng-value="false" checked ng-change="productVariationsCtrl.setPreorder(productVariationsCtrl.preorder_selected)">
 							<label for="preorder_unselected">
-								NO
+								No
 							</label>
 						</div>
 					</div>
@@ -113,13 +136,13 @@
 						<div class="radio radio-inline ml-30">
 							<input type="radio" name="made_to_order_selected" id="made_to_order_selected" ng-model="productVariationsCtrl.made_to_order_selected" ng-value="true" ng-change="productVariationsCtrl.setMadeToOrder(productVariationsCtrl.made_to_order_selected)">
 							<label for="made_to_order_selected">
-								YES
+								Yes
 							</label>
 						</div>
 						<div class="radio radio-inline">
 							<input type="radio" name="made_to_order_unselected" id="made_to_order_unselected" ng-model="productVariationsCtrl.made_to_order_selected" ng-value="false" checked ng-change="productVariationsCtrl.setMadeToOrder(productVariationsCtrl.made_to_order_selected)">
 							<label for="made_to_order_unselected">
-								NO
+								No
 							</label>
 						</div>
 					</div>

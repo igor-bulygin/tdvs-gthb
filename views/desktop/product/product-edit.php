@@ -42,7 +42,7 @@ $this->title = $deviser->getBrandName() . ' - Todevise';
 		</div>
 	</div>
 	<div class="container">
-		<product-basic-info product="editProductCtrl.product" categories="editProductCtrl.allCategories" languages="editProductCtrl.languages"></product-basic-info>
+		<product-basic-info product="editProductCtrl.product" categories="editProductCtrl.allCategories" languages="editProductCtrl.languages" images= "editProductCtrl.images"></product-basic-info>
 		<product-more-details product="editProductCtrl.product" languages="editProductCtrl.languages"></product-more-details>
 		<product-variations product="editProductCtrl.product" languages="editProductCtrl.languages" tags="editProductCtrl.tags"></product-variations>
 	</div>
