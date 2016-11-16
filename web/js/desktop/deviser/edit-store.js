@@ -6,9 +6,7 @@
 		vm.update = update;
 		vm.deviser_id = UtilService.returnDeviserIdFromUrl();
 		vm.language = 'en-US';
-		vm.minPrice = [];
 		
-
 		function parseCategories() {
 			var url = $location.absUrl();
 			if(url.split("?").length > 1) {
@@ -41,7 +39,7 @@
 				vm.products.forEach(function(element) {
 					setMinimumPrice(element);
 				})
-				//getMinimumPrice();
+				
 				parseMainPhoto(vm.products);
 				
 			});
