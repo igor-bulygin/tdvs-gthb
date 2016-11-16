@@ -12,6 +12,7 @@ Tags
 * `400`: Bad request
   
 **Request parameters**:
+* `scope`: Customize filters. Available values: "all" (default: "all). Note that "all" scope means that no limit will be applied
 * `page`: Set the result page that want to be retrieved (default: 1)
 * `limit`: Limit the results returned for page (default: 100)
     
@@ -40,7 +41,13 @@ Tags
       'name' => "Water Resistance",
       'description' => "WATCHES - Water Resistance",
       'categories' => ['31316','bd70t',]
-      },
     },
+  ],
+  "meta": {
+    "total_returned": 2,
+    "total_count": 100,
+    "current_page": 1,
+    "per_page": 2
+  }
 }
 ```
