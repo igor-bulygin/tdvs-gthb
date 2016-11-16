@@ -6,6 +6,7 @@
 
 		function init(){
 			//functions
+			vm.setPrintsSelected = setPrintsSelected;
 			vm.setMadeToOrder = setMadeToOrder;
 			vm.setPreorder = setPreorder;
 			vm.setPreorderEnd = setPreorderEnd;
@@ -16,6 +17,7 @@
 			vm.tag_order = ['Color', 'Material', 'Size', 'Style'];
 			vm.tagComparator = tagComparator;
 			vm.tags_for_work = [];
+			vm.show_prints = false;
 			vm.preorder_selected = false;
 			vm.made_to_order_selected = false;
 			vm.bespoke_selected = false;
@@ -24,6 +26,10 @@
 		}
 
 		init();
+
+		function setPrintsSelected(value) {
+			vm.show_prints = value;
+		}
 
 		function setMadeToOrder(value) {
 			vm.product['madetoorder']['type'] = value ? 1 : 0;
