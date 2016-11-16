@@ -10,10 +10,7 @@ class ProductDetailAsset extends AssetBundle {
 	];
 	public $js = [
 		'js/desktop/product/detail.js',
-		'js/desktop/product/products-grid.js',
-		//'js/desktop/product/select-selector/select-selector.js',
-		//'js/desktop/product/color-selector/color-selector.js',
-		//'js/desktop/product/size-selector/size-selector.js',
+		'js/desktop/product/products-grid.js'
 	];
 	public $depends = [
 		'app\assets\desktop\product\IndexAsset',
