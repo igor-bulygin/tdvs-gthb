@@ -327,7 +327,7 @@ $videos = $product->getVideos();
 									<div class="policies-row">
 									<form class="form-horizontal">
 										<div class="form-group">
-											<label class="col-sm-4 control-label shipping-label"><span>Shipping price to</span></label>
+											<label class="col-sm-4 control-label shipping-label no-pad-r"><span>Shipping price to</span></label>
 											<div class="col-sm-5 pad-product">
 												<select class="form-control selectpicker shipping-select product-select" title="Choose country">
 													<option>USA</option>
@@ -341,11 +341,11 @@ $videos = $product->getVideos();
 									</form>
 								</div>
 								<div class="returns-row">
-									Returns: 14 days
+									Returns: <span class="bold">14 days</span>
 								</div>
 								<div class="returns-row">
                                     Warranty:
-                                    <?= $product->getWarrantyLabel() ?>
+                                    <span class="bold"><?= $product->getWarrantyLabel() ?></span>
                                 </div>
                             </div>
 						</div>
