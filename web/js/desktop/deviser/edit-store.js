@@ -41,6 +41,9 @@
 				vm.products.forEach(function(element) {
 					setMinimumPrice(element);
 				})
+				//getMinimumPrice();
+				parseMainPhoto(vm.products);
+				
 			});
 
 		}
