@@ -158,18 +158,19 @@ class ModelUtils {
 					break;
 				}
 			}
-		}
-
-		if ($image === "") {
-			if (count($product["media"]["photos"]) == 0) {
-				$image = $fallback;
-			} else {
-				$image = $product["media"]["photos"][0]["name"];
-
-				if (!empty($image) && !file_exists(Yii::getAlias("@web") . "/" . $product["short_id"] . "/" . $image )) {
+			if ($image === "") {
+				if (count($product["media"]["photos"]) == 0) {
 					$image = $fallback;
+				} else {
+					$image = $product["media"]["photos"][0]["name"];
+
+					if (!empty($image) && !file_exists(Yii::getAlias("@web") . "/" . $product["short_id"] . "/" . $image )) {
+						$image = $fallback;
+					}
 				}
 			}
+		} else {
+			$image = $fallback;
 		}
 
 		if ($urlify === true) {
