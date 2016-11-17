@@ -4,6 +4,7 @@ use app\models\Category;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
+use yii\widgets\ActiveForm;
 /** @var Category $category */
 
 ?>
@@ -110,36 +111,46 @@ use yii\helpers\Url;
 						<i class="ion-ios-cart active"></i>
 					</a>
 				</li>
-				<li class="log">
-					<a href="#">
-						Sign up
-					</a>
-				</li>
-				<li class="log">
-					<span>or</span>
-				</li>
-				<li class="dropdown log">
-					<a href="#" class="dropdown-toggle log" data-toggle="dropdown" role="button" aria-haspopup="true"
-					   aria-expanded="false">Log in</a>
-	
-                        <div class="dropdown-menu login-wrapper black-form">
-                            <div class="row">
-                                <label>Name</label>
-                                <input type="text" class="form-control">
-                            </div>
-                            <div class="row">
-                                <label>Email</label>
-                                <input type="email" class="form-control">
-                            </div>
-                            <div class="forgot-remember">
-                                <a href="#">Forgot your password?</a>
-                            </div>
-                            <div class="row">
-                                <button type="button" class="btn btn-default btn-black">Login</button>
-                            </div>
-                        </div>
-				
-				</li>
+				<?php if (Yii::$app->user->isGuest) { ?>
+					<li class="log">
+						<a href="#">
+							Sign up
+						</a>
+					</li>
+					<li class="log">
+						<span>or</span>
+					</li>
+					<li class="dropdown log">
+						<a href="#" class="dropdown-toggle log" data-toggle="dropdown" role="button" aria-haspopup="true"
+						   aria-expanded="false">Log in</a>
+
+						<div class="dropdown-menu login-wrapper black-form">
+							<?php $form = ActiveForm::begin(); ?>
+
+							<div class="row">
+								<label for="email">Email</label>
+								<input type="email" id="email" name="Login[email]" class="form-control" />
+							</div>
+							<div class="row">
+								<label for="password">Password</label>
+								<input type="password" id="password" name="Login[password]" class="form-control" />
+							</div>
+							<div class="forgot-remember">
+								<a href="#">Forgot your password?</a>
+							</div>
+
+							<div class="row">
+								<button type="submit" class="btn btn-default btn-black">Login</button>
+							</div>
+
+							<?php ActiveForm::end(); ?>
+						</div>
+					</li>
+				<?php } else { ?>
+					<li class="log">
+						<a href="<?=Url::to('global/logout')?>">Logout</a>
+					</li>
+				<?php } ?>
 			</ul>
 		</div><!-- /.navbar-collapse -->
 	</div><!-- /.container-fluid -->
