@@ -65,7 +65,7 @@ class Login extends Model {
 	/**
 	 * Finds user by [[username]]
 	 *
-	 * @return User|null
+	 * @return Person|null
 	 */
 	public function getUser()
 	{
