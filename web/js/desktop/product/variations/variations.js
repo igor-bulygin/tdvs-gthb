@@ -18,6 +18,7 @@
 			vm.tagComparator = tagComparator;
 			vm.tags_for_work = [];
 			vm.show_prints = false;
+			vm.prints_selected = false;
 			vm.preorder_selected = false;
 			vm.made_to_order_selected = false;
 			vm.bespoke_selected = false;
@@ -102,14 +103,14 @@
 			//get tags
 			getTagsByCategory(args.categories);
 			//get sizecharts and prints value
-			vm.sizecharts = false;
+			vm.show_sizecharts = false;
 			vm.prints = false;
 			args.categories.forEach(function(element) {
 				var values = searchPrintsSizecharts(element);
 				if(values[0])
 					vm.prints = true;
 				if(values[1])
-					vm.sizecharts = true;
+					vm.show_sizecharts = true;
 			});
 		});
 
@@ -130,7 +131,7 @@
 			languages: '<',
 			tags: '<',
 			categories: '<',
-			sizechart: '<'
+			sizecharts: '<'
 		}
 	}
 
