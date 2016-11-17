@@ -158,44 +158,61 @@
 	<hr style="height: 2px; color: black">
 	<div class="row">
 		<div class="col-md-12">
-				<div ng-if="productVariationsCtrl.sizecharts" ng-cloak>
+			<div ng-if="productVariationsCtrl.show_sizecharts" ng-cloak>
 				<div class="row">
 					<span class="title">Sizes</span>
 				</div>
 				<div class= "row">
-							<div class="col-md-4">
-								<span>Create new size chart</span>
-							</div>
-							<div class="col-md-8 pad-about">
-								<input type="dropdownSelector">
-							</div>
-						</div>
-						<div class ="row">
-							<div class="col-md-4">
-								<span>Use a saved sizechart</span>
-							</div>
-							<div class="col-md-8 pad-about">
-								<input type="dropdownSelector">
-							</div>
-						</div>
-						<table class="table table-striped">
-							<thead>
-								<tr>
-									<th>Country</th><!-- product.sizechart.country-->
-									<th>Values</th><!-- product.sizechart.columns-->
-									<th>of</th>
-									<th>products</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr><!--ng-repeat of product.sizechart.values-->
-									<td>34</td>
-									<td>100 mm</td>
-									<td>100 mm</td>
-									<td>100 mm</td>
-								</tr>
-							</tbody>
-						</table>
+					<div class="col-md-4">
+						<span>Create new size chart</span>
+					</div>
+					<div class="col-md-8 pad-about">
+						<input type="dropdownSelector">
+						<input type="dropdownSelector">
+					</div>
+				</div>
+				<div class ="row" >
+					<div class="col-md-4">
+						<span>OR</span>
+					</div>
+				</div>
+				<div class ="row">
+					<div class="col-md-4">
+						<span>Use a saved sizechart</span>
+					</div>
+					<div class="col-md-8 pad-about">
+						<input type="dropdownSelector">
+					</div>
+				</div>
+				<div class ="row">
+					<div class="col-md-6">
+						<span>In which sizes is this work available?</span>
+						<input type="dropdownSelector"></span>
+						<span class="glyphicon glyphicon-plus"></span>
+					</div>
+					<div class="col-md-6">
+						<span>What scale are your size in?</span>
+						<input type="dropdownSelector">
+					</div>
+				</div>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Country</th><!-- product.sizechart.country-->
+							<th>Values</th><!-- product.sizechart.columns-->
+							<th>of</th>
+							<th>products</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr><!--ng-repeat of product.sizechart.values-->
+							<td>34</td> <!-- -->
+							<td>100 mm</td>
+							<td>100 mm</td>
+							<td>100 mm</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 			<div ng-if="productVariationsCtrl.prints" ng-cloak>
 				<div class="row">
@@ -227,7 +244,7 @@
 						</div>
 						<div class="col-md-10 pad-about track by $index">
 							<span>{{$index+1}}:&nbsp;</span>
-							<input name="paper">
+							<input name="paper" size="40">
 						</div>
 						<div class="col-md-10 col-md-offset-2">
 							<span class="add-option" ng-click="productVariationsCtrl.product.options[tag.id].push([])">+ add another option</span>
@@ -241,14 +258,14 @@
 							<span>{{$index+1}}:&nbsp;</span>
 							<span>Width  </span> <input name="width">
 							<span>Lenght </span> <input name="lenght">
-							<!--<input type="dropdown">-->
+							<input name="scale" type="dropdown">
 						</div>
 						<div>
 							<span class="glyphicon glyphicon-remove close-row" ng-if="productBasicInfoCtrl.product.categories.length > 1" ng-click="productBasicInfoCtrl.deleteCategory($index)"></span>
 						</div>
 						<div class="col-md-10 col-md-offset-2">
 							<span class="add-option" ng-click="productVariationsCtrl.product.options[tag.id].push([])">+ add another option</span>
-							</div>
+						</div>
 					</div>
 				</div>
 			</div>

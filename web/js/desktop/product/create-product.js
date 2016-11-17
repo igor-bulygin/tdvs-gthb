@@ -44,8 +44,8 @@
 		function getSizechart() {
 			sizechartDataService.Sizechart.get({scope: 'all'})
 				.$promise.then(function (dataSizechart) {
-					vm.sizechart = dataSizechart;
-					console.log(vm.sizechart);
+					vm.sizecharts = dataSizechart.items;
+					console.log(vm.sizecharts);
 				}, function(err) {
 					toastr.error(err);
 				});
