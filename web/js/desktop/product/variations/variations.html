@@ -26,99 +26,7 @@
 					</div>
 				</div>
 			</div>
-			<div ng-if="productVariationsCtrl.sizecharts" ng-cloak>
-				<div class="row">
-					<span class="title">Sizes</span>
-				</div>
-				<div class= "row">
-							<div class="col-md-4">
-								<span>Create new size chart</span>
-							</div>
-							<div class="col-md-8 pad-about">
-								<input type="dropdownSelector">
-							</div>
-						</div>
-						<div class ="row">
-							<div class="col-md-4">
-								<span>Use a saved sizechart</span>
-							</div>
-							<div class="col-md-8 pad-about">
-								<input type="dropdownSelector">
-							</div>
-						</div>
-						<table class="table table-striped">
-							<thead>
-								<tr>
-									<th>Country</th><!-- product.sizechart.country-->
-									<th>Values</th><!-- product.sizechart.columns-->
-									<th>of</th>
-									<th>products</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr><!--ng-repeat of product.sizechart.values-->
-									<td>34</td>
-									<td>100 mm</td>
-									<td>100 mm</td>
-									<td>100 mm</td>
-								</tr>
-							</tbody>
-						</table>
-			</div>
-			<div ng-if="productVariationsCtrl.prints" ng-cloak>
-				<div class="row">
-					<span class="title">Prints</span>
-				</div>
-				<div class="row">
-					<div class="col-md-4 pad-about">
-						<span>Do you offer prints of your work?</span>
-					</div>
-					<div class="col-md-8 pad-about">
-						<div class="radio radio-inline ml-30">
-							<input type="radio" name="prints_selected" id="prints_selected" ng-model="productVariationsCtrl.prints_selected" ng-value="true" ng-change="productVariationsCtrl.setPrintsSelected(productVariationsCtrl.prints_selected)">
-							<label for="prints_selected">
-								Yes
-							</label>
-						</div>
-						<div class="radio radio-inline">
-							<input type="radio" name="prints_unselected" id="prints_unselected" ng-model="productVariationsCtrl.prints_selected" ng-value="false"  checked ng-change="productVariationsCtrl.setPrintsSelected(productVariationsCtrl.prints_selected">
-							<label for="prints_unselected">
-								No
-							</label>
-						</div>
-					</div>
-				</div>
-				<div class="row" ng-if="productVariationsCtrl.prints_selected">
-					<div class="row">
-						<div class="col-md-4">
-							<span> TYPE OF PAPER </span>
-						</div>
-						<div class="col-md-8 pad-about">
-							<input name="paper">
-						</div>
-						<div class="col-md-8 col-md-offset-4">
-							<span class="add-option" ng-click="productVariationsCtrl.product.options[tag.id].push([])">+ add another option</span>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-2">
-							<span> Print size</span> <!--ng-repeat ng-if ?¿sizechart.XX-->
-						</div>
-						<div class="col-md-10 pad-about track by $index">
-							<span>{{$index+1}}:&nbsp;</span>
-							<span>Width  </span> <input name="width">
-							<span>Lenght </span> <input name="lenght">
-							<!--<input type="dropdown">-->
-						</div>
-						<div>
-							<span class="glyphicon glyphicon-remove close-row" ng-if="productBasicInfoCtrl.product.categories.length > 1" ng-click="productBasicInfoCtrl.deleteCategory($index)"></span>
-						</div>
-						<div class="col-md-8 col-md-offset-4">
-							<span class="add-option" ng-click="productVariationsCtrl.product.options[tag.id].push([])">+ add another option</span>
-							</div>
-					</div>
-				</div>
-			</div>
+		
 		</div>
 		<div class="col-md-6">
 			<span class="title">Manufacturing information</span>
@@ -243,6 +151,105 @@
 						</li>
 					</ol>
 					<textarea name="bespoke_text" id="bespoke_text" cols="30" rows="10" class="form-control manufacturing-textarea" ng-model="productVariationsCtrl.product.bespoke[productVariationsCtrl.bespoke_language]"></textarea>
+				</div>
+			</div>
+		</div>
+	</div>
+	<hr style="height: 2px; color: black">
+	<div class="row">
+		<div class="col-md-12">
+				<div ng-if="productVariationsCtrl.sizecharts" ng-cloak>
+				<div class="row">
+					<span class="title">Sizes</span>
+				</div>
+				<div class= "row">
+							<div class="col-md-4">
+								<span>Create new size chart</span>
+							</div>
+							<div class="col-md-8 pad-about">
+								<input type="dropdownSelector">
+							</div>
+						</div>
+						<div class ="row">
+							<div class="col-md-4">
+								<span>Use a saved sizechart</span>
+							</div>
+							<div class="col-md-8 pad-about">
+								<input type="dropdownSelector">
+							</div>
+						</div>
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>Country</th><!-- product.sizechart.country-->
+									<th>Values</th><!-- product.sizechart.columns-->
+									<th>of</th>
+									<th>products</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr><!--ng-repeat of product.sizechart.values-->
+									<td>34</td>
+									<td>100 mm</td>
+									<td>100 mm</td>
+									<td>100 mm</td>
+								</tr>
+							</tbody>
+						</table>
+			</div>
+			<div ng-if="productVariationsCtrl.prints" ng-cloak>
+				<div class="row">
+					<span class="title">Prints</span>
+				</div>
+				<div class="row">
+					<div class="col-md-4 pad-about">
+						<span>Do you offer prints of your work?</span>
+					</div>
+					<div class="col-md-8 pad-about">
+						<div class="radio radio-inline ml-30">
+							<input type="radio" name="prints_selected" id="prints_selected" ng-model="productVariationsCtrl.prints_selected" ng-value="true" ng-change="productVariationsCtrl.setPrintsSelected(productVariationsCtrl.prints_selected)">
+							<label for="prints_selected">
+								Yes
+							</label>
+						</div>
+						<div class="radio radio-inline">
+							<input type="radio" name="prints_unselected" id="prints_unselected" ng-model="productVariationsCtrl.prints_selected" ng-value="false"  checked ng-change="productVariationsCtrl.setPrintsSelected(productVariationsCtrl.prints_selected">
+							<label for="prints_unselected">
+								No
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="row" ng-if="productVariationsCtrl.prints_selected">
+					<div class="row">
+						<div class="mb-20 col-md-2">
+							<span> TYPE OF PAPER </span>
+						</div>
+						<div class="col-md-10 pad-about track by $index">
+							<span>{{$index+1}}:&nbsp;</span>
+							<input name="paper">
+						</div>
+						<div class="col-md-10 col-md-offset-2">
+							<span class="add-option" ng-click="productVariationsCtrl.product.options[tag.id].push([])">+ add another option</span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="mb-20 col-md-2">
+							<span> Print size</span> <!--ng-repeat ng-if ?¿sizechart.XX-->
+						</div>
+						<div class="col-md-10 pad-about track by $index">
+							<span>{{$index+1}}:&nbsp;</span>
+							<span>Width  </span> <input name="width">
+							<span>Lenght </span> <input name="lenght">
+							<!--<input type="dropdown">-->
+						</div>
+						<div>
+							<span class="glyphicon glyphicon-remove close-row" ng-if="productBasicInfoCtrl.product.categories.length > 1" ng-click="productBasicInfoCtrl.deleteCategory($index)"></span>
+						</div>
+						<div class="col-md-10 col-md-offset-2">
+							<span class="add-option" ng-click="productVariationsCtrl.product.options[tag.id].push([])">+ add another option</span>
+							</div>
+					</div>
 				</div>
 			</div>
 		</div>

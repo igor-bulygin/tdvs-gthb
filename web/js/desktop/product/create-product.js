@@ -1,10 +1,10 @@
 (function () {
 
-	function controller(deviserDataService, productDataService, languageDataService, toastr, UtilService, localStorageService, tagDataService, productEvents, $rootScope) {
+	function controller(deviserDataService, sizechartDataService, productDataService, languageDataService, toastr, UtilService, localStorageService, tagDataService, productEvents, $rootScope) {
 		var vm = this;
 		vm.save = save;
 		vm.deviser_id = UtilService.returnDeviserIdFromUrl();
-
+		
 		function init() {
 			vm.product = new productDataService.ProductPriv();
 			vm.product.slug = {};
@@ -26,6 +26,8 @@
 			getCategories();
 			getDeviser();
 			getTags();
+			getSizechart();
+
 		}
 
 		init();
@@ -34,6 +36,16 @@
 			productDataService.Categories.get({scope: 'all'})
 				.$promise.then(function(dataCategories) {
 					vm.allCategories = dataCategories.items;
+				}, function(err) {
+					toastr.error(err);
+				});
+		}
+
+		function getSizechart() {
+			sizechartDataService.Sizechart.get({scope: 'all'})
+				.$promise.then(function (dataSizechart) {
+					vm.sizechart = dataSizechart;
+					console.log(vm.sizechart);
 				}, function(err) {
 					toastr.error(err);
 				});

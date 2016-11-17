@@ -51,6 +51,7 @@
 
 		function getTagsByCategory(categories) {
 			//categories come in array form
+			console.log(vm);
 			vm.tags_setted = []; //helper
 			vm.tags_for_work = [];
 			categories.forEach(function(idCategory) {
@@ -128,7 +129,8 @@
 			product: '<',
 			languages: '<',
 			tags: '<',
-			categories: '<'
+			categories: '<',
+			sizechart: '<'
 		}
 	}
 
