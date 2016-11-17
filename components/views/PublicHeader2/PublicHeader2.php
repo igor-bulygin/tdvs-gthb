@@ -4,12 +4,6 @@ use app\models\Category;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-
-use app\components\PublicMyAccount;
-//use app\components\assets\publicHeaderAsset;
-
-//publicHeaderAsset::register($this);
-
 /** @var Category $category */
 
 ?>
@@ -34,6 +28,7 @@ use app\components\PublicMyAccount;
 		</form>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div>
 			<ul class="nav navbar-nav">
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle menu-title" data-toggle="dropdown" role="button"
@@ -115,10 +110,37 @@ use app\components\PublicMyAccount;
 						<i class="ion-ios-cart active"></i>
 					</a>
 				</li>
-
-				<?= PublicMyAccount::widget() ?>
-
+				<li class="log">
+					<a href="#">
+						Sign up
+					</a>
+				</li>
+				<li class="log">
+					<span>or</span>
+				</li>
+				<li class="dropdown log">
+					<a href="#" class="dropdown-toggle log" data-toggle="dropdown" role="button" aria-haspopup="true"
+					   aria-expanded="false">Log in</a>
+	
+                        <div class="dropdown-menu login-wrapper black-form">
+                            <div class="row">
+                                <label>Name</label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="row">
+                                <label>Email</label>
+                                <input type="email" class="form-control">
+                            </div>
+                            <div class="forgot-remember">
+                                <a href="#">Forgot your password?</a>
+                            </div>
+                            <div class="row">
+                                <button type="button" class="btn btn-default btn-black">Login</button>
+                            </div>
+                        </div>
+				
+				</li>
 			</ul>
-		</div>
-	</div>
+		</div><!-- /.navbar-collapse -->
+	</div><!-- /.container-fluid -->
 </nav>
