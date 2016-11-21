@@ -18,12 +18,7 @@ class MetricController extends Controller {
 
     public function actionIndex()
     {
-		$object = new \stdClass();
-		$units = MetricType::UNITS;
-		$object->size = $units[MetricType::SIZE];
-		$object->weight = $units[MetricType::WEIGHT];
-
-	    return $object;
+		return MetricType::getSerialized();
     }
 }
 

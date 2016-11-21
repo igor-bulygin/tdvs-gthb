@@ -31,4 +31,14 @@ class MetricType {
 		Yii::t("app/admin", "Size");
 		Yii::t("app/admin", "Weight");
 	}
+
+	public static function getSerialized()
+	{
+		$object = new \stdClass();
+		$units = MetricType::UNITS;
+		$object->size = $units[MetricType::SIZE];
+		$object->weight = $units[MetricType::WEIGHT];
+
+		return $object;
+	}
 }
