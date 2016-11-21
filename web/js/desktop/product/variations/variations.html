@@ -181,35 +181,42 @@
 						<span>Use a saved sizechart</span>
 					</div>
 					<div class="col-md-8 pad-about">
-						<input type="dropdownSelector">
+						<ol class="nya-bs-select" ng-model="productVariationsCtrl.sizecharts[$index]">
+							<li nya-bs-option="sizecharts in productVariationsCtrl.sizecharts" data-value="sizecharts.id">
+								<a><span ng-bind="sizecharts.name['en-US']"></span></a>
+							</li>
+						</ol>
 					</div>
 				</div>
 				<div class ="row">
-					<div class="col-md-6">
+					<div class="col-md-4">
 						<span>In which sizes is this work available?</span>
 						<input type="dropdownSelector"></span>
 						<span class="glyphicon glyphicon-plus"></span>
 					</div>
-					<div class="col-md-6">
+					<div class="col-md-4">
 						<span>What scale are your size in?</span>
-						<input type="dropdownSelector">
+					</div>
+					<div class="col-md-4">
+						<ol class="nya-bs-select" ng-model="productVariationsCtrl.metric.size[$index]">
+							<li nya-bs-option="size in productVariationsCtrl.metric.size" data-value="size">
+								<a><span ng-bind="size"></span></a>
+							</li>
+						</ol>
 					</div>
 				</div>
+				
 				<table class="table table-striped">
 					<thead>
 						<tr>
-							<th>Country</th><!-- product.sizechart.country-->
-							<th>Values</th><!-- product.sizechart.columns-->
-							<th>of</th>
-							<th>products</th>
+							<th>EEUU<th>
+							<th ng-repeat="values in productVariationsCtrl.sizecharts[0].columns">{{values['en-US']}}</th><!-- product.sizechart.country-->
 						</tr>
 					</thead>
 					<tbody>
-						<tr><!--ng-repeat of product.sizechart.values-->
-							<td>34</td> <!-- -->
-							<td>100 mm</td>
-							<td>100 mm</td>
-							<td>100 mm</td>
+						<tr ng-repeat="values in productVariationsCtrl.sizecharts[0].values"><!--ng-repeat of product.sizechart.values-->
+							<td>{{values[0]}}</td> 
+							<td ng-repeat="value in productVariationsCtrl.sizecharts[0].values"><input name="sizes_values" size="10" value="{{values[$index+5]}}"><span>{{productVariationsCtrl.sizecharts[0].metric_unit}}</td>
 						</tr>
 					</tbody>
 				</table>

@@ -17,7 +17,8 @@ class ApiAsset extends AssetBundle {
 		'js/api/languageDataService.js',
 		'js/api/sizechartDataService.js',
 		'js/api/locationDataService.js',
-		'js/api/tagDataService.js'
+		'js/api/tagDataService.js',
+		'js/api/metricDataService.js'
 	];
 	public $depends = [
 		'app\assets\AppAsset',

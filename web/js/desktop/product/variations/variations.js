@@ -13,6 +13,7 @@
 			vm.setPreorderShip = setPreorderShip;
 			vm.limitTagOption = limitTagOption;
 			vm.deleteOption = deleteOption;
+			//deviserSizecharts();
 			//vars
 			vm.tag_order = ['Color', 'Material', 'Size', 'Style'];
 			vm.tagComparator = tagComparator;
@@ -23,6 +24,7 @@
 			vm.made_to_order_selected = false;
 			vm.bespoke_selected = false;
 			vm.bespoke_language = 'en-US';
+			vm.deviserSizecharts = [];
 
 		}
 
@@ -52,7 +54,6 @@
 
 		function getTagsByCategory(categories) {
 			//categories come in array form
-			console.log(vm);
 			vm.tags_setted = []; //helper
 			vm.tags_for_work = [];
 			categories.forEach(function(idCategory) {
@@ -81,6 +82,15 @@
 			if(index >= 0) {
 				vm.product.options[tag].splice(index,1);
 			}
+		}
+		function deviserSizecharts() {
+			console.log(vm);
+			console.log(vm.sizecharts);
+			vm.sizecharts.forEach(function(element) {
+					if(element.type == 1)
+						vm.deviserSizecharts.push(element)	
+				})
+				
 		}
 
 		function searchPrintsSizecharts(id) {
@@ -131,6 +141,7 @@
 			languages: '<',
 			tags: '<',
 			categories: '<',
+			metric: '<',
 			sizecharts: '<'
 		}
 	}
