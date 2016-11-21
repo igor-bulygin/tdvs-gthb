@@ -168,8 +168,8 @@
 					</div>
 					<div class="col-md-8 pad-about">
 						<ol class="nya-bs-select" ng-model="productVariationsCtrl.sizechart_helper[$index]">
-							<li nya-bs-option="sizecharts in productVariationsCtrl.sizechart_helper" data-value="sizecharts.id">
-								<a><span ng-bin="sizecharts.name['en-US']"></span></a>
+							<li nya-bs-option="sizechart in productVariationsCtrl.sizechart_helper" data-value="sizechart.id">
+								<a><span ng-bind="sizechart.name['en-US']"></span></a>
 							</li>
 						</ol>
 						<input type="dropdownSelector">
