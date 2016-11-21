@@ -13,7 +13,7 @@
 			vm.setPreorderShip = setPreorderShip;
 			vm.limitTagOption = limitTagOption;
 			vm.deleteOption = deleteOption;
-			//deviserSizecharts();
+			
 			//vars
 			vm.tag_order = ['Color', 'Material', 'Size', 'Style'];
 			vm.tagComparator = tagComparator;
@@ -25,7 +25,7 @@
 			vm.bespoke_selected = false;
 			vm.bespoke_language = 'en-US';
 			vm.deviserSizecharts = [];
-
+			vm.sizechart_helper = [];
 		}
 
 		init();
@@ -83,14 +83,25 @@
 				vm.product.options[tag].splice(index,1);
 			}
 		}
+
+		function categoriesSizecharts() {
+			vm.product.categories.forEach(function(cate) {
+				vm.sizecharts.forEach(function(element) {
+					for (var i = 0; i < element.categories.length; i++) {
+						if(element.categories[i]==cate)
+							vm.sizechart_helper.push(element);
+					}
+				});	
+			});
+		}
+
 		function deviserSizecharts() {
-			console.log(vm);
-			console.log(vm.sizecharts);
 			vm.sizecharts.forEach(function(element) {
 					if(element.type == 1)
 						vm.deviserSizecharts.push(element)	
-				})
-				
+
+				});
+							
 		}
 
 		function searchPrintsSizecharts(id) {
@@ -112,6 +123,8 @@
 		$scope.$on(productEvents.setVariations, function(event, args) {
 			//get tags
 			getTagsByCategory(args.categories);
+			deviserSizecharts();
+			categoriesSizecharts();
 			//get sizecharts and prints value
 			vm.show_sizecharts = false;
 			vm.prints = false;
@@ -142,7 +155,8 @@
 			tags: '<',
 			categories: '<',
 			metric: '<',
-			sizecharts: '<'
+			sizecharts: '<',
+			deviser: '<'
 		}
 	}
 
