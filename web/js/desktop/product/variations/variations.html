@@ -167,7 +167,11 @@
 						<span>Create new size chart</span>
 					</div>
 					<div class="col-md-8 pad-about">
-						<input type="dropdownSelector">
+						<ol class="nya-bs-select" ng-model="productVariationsCtrl.sizechart_helper[$index]">
+							<li nya-bs-option="sizechart in productVariationsCtrl.sizechart_helper" data-value="sizechart.id">
+								<a><span ng-bind="sizechart.name['en-US']"></span></a>
+							</li>
+						</ol>
 						<input type="dropdownSelector">
 					</div>
 				</div>
@@ -181,8 +185,8 @@
 						<span>Use a saved sizechart</span>
 					</div>
 					<div class="col-md-8 pad-about">
-						<ol class="nya-bs-select" ng-model="productVariationsCtrl.sizecharts[$index]">
-							<li nya-bs-option="sizecharts in productVariationsCtrl.sizecharts" data-value="sizecharts.id">
+						<ol class="nya-bs-select" ng-model="productVariationsCtrl.deviserSizecharts[$index]">
+							<li nya-bs-option="sizecharts in productVariationsCtrl.deviserSizecharts" data-value="sizecharts.id">
 								<a><span ng-bind="sizecharts.name['en-US']"></span></a>
 							</li>
 						</ol>
@@ -191,7 +195,11 @@
 				<div class ="row">
 					<div class="col-md-4">
 						<span>In which sizes is this work available?</span>
-						<input type="dropdownSelector"></span>
+					</div>
+					<div>
+						<input type="dropdownSelector">
+					</div>
+					<div>
 						<span class="glyphicon glyphicon-plus"></span>
 					</div>
 					<div class="col-md-4">
@@ -216,7 +224,7 @@
 					<tbody>
 						<tr ng-repeat="values in productVariationsCtrl.sizecharts[0].values"><!--ng-repeat of product.sizechart.values-->
 							<td>{{values[0]}}</td> 
-							<td ng-repeat="value in productVariationsCtrl.sizecharts[0].values"><input name="sizes_values" size="10" value="{{values[$index+5]}}"><span>{{productVariationsCtrl.sizecharts[0].metric_unit}}</td>
+							<td ng-repeat="value in productVariationsCtrl.sizecharts[0].values"><input name="sizes_values" size="10" value="{{values[$index+5]}}"><span>{{productVariationsCtrl.sizecharts[0].metric_unit}}</td> <!--The "values[$index+5]" the 5 should be raplace with countries.lengh-->
 						</tr>
 					</tbody>
 				</table>
