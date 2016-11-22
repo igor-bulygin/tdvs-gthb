@@ -189,14 +189,14 @@
 						<span>Use a saved sizechart</span>
 					</div>
 					<div class="col-md-8 pad-about">
-						<ol class="nya-bs-select" ng-model="productVariationsCtrl.deviserSizecharts[$index]">
-							<li nya-bs-option="sizecharts in productVariationsCtrl.deviserSizecharts" data-value="sizecharts.id">
+						<ol class="nya-bs-select" ng-model="productVariationsCtrl.deviserSizecharts[$index]" ng-change="productVariationsCtrl.sizesSelect(productVariationsCtrl.deviserSizecharts[$index])">
+							<li nya-bs-option="sizecharts in productVariationsCtrl.deviserSizecharts" data-value="sizecharts">
 								<a><span ng-bind="sizecharts.name['en-US']"></span></a>
 							</li>
 						</ol>
 					</div>
 				</div>
-				<div class ="row">
+				<div class ="row" ng-if ="productVariationsCtrl.size_selected || productVariationsCtrl.savedSize_selected">
 					<div class="col-md-4">
 						<span>In which sizes is this work available?</span>
 					</div>
@@ -206,10 +206,9 @@
 								<a><span ng-bind="size"></span></a>
 							</li>
 						</ol>
+						<a href ="" ng-click=""><span class="glyphicon glyphicon-plus"></span></a>
 					</div>
-					<div>
-						<span class="glyphicon glyphicon-plus"></span>
-					</div>
+								
 					<div class="col-md-4">
 						<span>What scale are your size in?</span>
 					</div>
@@ -230,9 +229,9 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr ng-repeat="values in productVariationsCtrl.sizecharts[$index].values">
-							<td>{{values[$index]}}</td> 
-							<td ng-repeat="value in productVariationsCtrl.sizecharts[$index].values"><input name="sizes_values" size="10" value="{{values[$index+5]}}"><span>{{productVariationsCtrl.sizecharts[$index].metric_unit}}</td> <!--The "values[$index+5]" the 5 should be raplace with countries.lengh-->
+						<tr ng-repeat="values in productVariationsCtrl.finalTable">
+							<td><input name ="sizes" size ="10" value="{{values[productVariationsCtrl.pos]}}"</td> <!-- didn't draw correctly all the inputs -->
+							<td ng-repeat="value in productVariationsCtrl.finalTable[$index] track by $index"><input name="sizes_values" size="10" value="{{values[$index+productVariationsCtrl.lon]}}"><span>{{productVariationsCtrl.sizecharts[$index].metric_unit}}</span></td>
 						</tr>
 					</tbody>
 				</table>
