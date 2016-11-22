@@ -11,7 +11,14 @@ class PaperTypeController extends Controller {
 
     public function actionIndex()
 	{
-		return PaperType::getSerialized();
+		$items = PaperType::getSerialized();
+
+		return [
+				"items" => $items,
+				"meta" => [
+					"total" => count($items),
+				]
+		];
 	}
 }
 
