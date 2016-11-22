@@ -4,6 +4,7 @@
 	function productDataService($resource, apiConfig) {
 		//pub
 		this.Product = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'products/:idProduct');
+		this.PaperType = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'paper-type');
 		this.Categories = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'categories');
 
 		//priv

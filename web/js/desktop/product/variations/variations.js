@@ -1,45 +1,51 @@
 (function () {
 	"use strict";
 
-	function controller($scope, productEvents) {
+	function controller($scope, productEvents, productDataService) {
 		var vm = this;
+		//functions
+		vm.setPrintsSelected = setPrintsSelected;
+		vm.setMadeToOrder = setMadeToOrder;
+		vm.setPreorder = setPreorder;
+		vm.setPreorderEnd = setPreorderEnd;
+		vm.setPreorderShip = setPreorderShip;
+		vm.deleteSize = deleteSize;
+		vm.addSize = addSize;
+		vm.countriesSelect = countriesSelect;
+		vm.sizesSelect = sizesSelect;
+		vm.limitTagOption = limitTagOption;
+		vm.deleteOption = deleteOption;
+
+		//vars
+		vm.tag_order = ['Color', 'Material', 'Size', 'Style'];
+		vm.tagComparator = tagComparator;
+		vm.tags_for_work = [];
+		vm.show_prints = false;
+		vm.prints_selected = false;
+		vm.size_selected = false;
+		vm.savedSize_selected = false;
+		vm.preorder_selected = false;
+		vm.made_to_order_selected = false;
+		vm.bespoke_selected = false;
+		vm.bespoke_language = 'en-US';
+		vm.deviserSizecharts = [];
+		vm.countriesAvailable = [];
+		vm.sizechart_helper = [];
+		vm.finalColumns = [];
+		vm.finalCountry;
 
 		function init(){
-			//functions
-			vm.setPrintsSelected = setPrintsSelected;
-			vm.setMadeToOrder = setMadeToOrder;
-			vm.setPreorder = setPreorder;
-			vm.setPreorderEnd = setPreorderEnd;
-			vm.setPreorderShip = setPreorderShip;
-			vm.countriesSelect = countriesSelect;
-			vm.sizesSelect = sizesSelect;
-			vm.limitTagOption = limitTagOption;
-			vm.deleteOption = deleteOption;
-			
-			//vars
-			vm.tag_order = ['Color', 'Material', 'Size', 'Style'];
-			vm.tagComparator = tagComparator;
-			vm.tags_for_work = [];
-			vm.show_prints = false;
-			vm.prints_selected = false;
-			vm.size_selected = false;
-			vm.savedSize_selected = false;
-			vm.preorder_selected = false;
-			vm.made_to_order_selected = false;
-			vm.bespoke_selected = false;
-			vm.bespoke_language = 'en-US';
-			vm.deviserSizecharts = [];
-			vm.countriesAvailable = [];
-			vm.sizechart_helper = [];
-			vm.finalColumns = [];
-			vm.finalCountry;
-							
+			getPaperType();
 		}
 
 		init();
 
 		function setPrintsSelected(value) {
 			vm.show_prints = value;
+			vm.product.prints={
+				type: [null],
+				sizes: [null]
+			}
 		}
 
 		function setMadeToOrder(value) {
@@ -58,6 +64,25 @@
 		function setPreorderShip(newDate, oldDate) {
 			vm.product.preorder.type = 1;
 			vm.product.preorder['ship'] = newDate;
+		}
+
+		function getPaperType() {
+			productDataService.PaperType.get()
+				.$promise.then(function (dataPaperType) {
+					vm.paperTypes = dataPaperType.items;
+				}, function (err){
+					console.log(err);
+				});
+		}
+
+		function addSize() {
+			vm.product.prints.sizes.push(null)
+		}
+
+		function deleteSize(index) {
+			if(vm.product.prints.sizes.length > index) {
+				vm.product.prints.sizes.splice(index, 1);
+			}
 		}
 
 		function getTagsByCategory(categories) {
