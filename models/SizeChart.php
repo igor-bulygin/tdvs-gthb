@@ -6,6 +6,20 @@ use Yii;
 use app\helpers\CActiveRecord;
 use yii\mongodb\ActiveQuery;
 
+
+/**
+ * @property string short_id
+ * @property array name
+ * @property boolean enabled
+ * @property int type
+ * @property string deviser_id
+ * @property array categories
+ * @property string metric_unit
+ * @property array countries
+ * @property array columns
+ * @property array values
+ * @property string country
+ */
 class SizeChart extends CActiveRecord {
 
 	const TODEVISE = 0;
@@ -29,7 +43,11 @@ class SizeChart extends CActiveRecord {
 			'metric_unit',
 			'countries',
 			'columns',
-			'values'
+			'values',
+			// country is a fake attribute, is need for manage a bad property inserted by a migration for a "deviser sizechart"
+			// that uses country single value instead of countries array values
+			// remove uses of this property if that migration is fixed
+			'country',
 		];
 	}
 
@@ -86,9 +104,13 @@ class SizeChart extends CActiveRecord {
 					'deviser_id',
 					'categories',
 					'metric_unit',
-					'countries',
+					'countries' => 'countriesInfo',
 					'columns',
 					'values'
+				];
+				static::$retrieveExtraFields = [
+					'countries',
+					'country',
 				];
 				static::$translateFields = false;
 
@@ -102,6 +124,21 @@ class SizeChart extends CActiveRecord {
 	}
 
 	/**
+	 * Hack to solve a problem with a migration that inserts a "deviser sizechart" using country value instead of countries array
+	 *
+	 * @return array
+	 */
+	public function getCountriesInfo() {
+		$countries = $this->countries;
+		if (isset($this->country)) {
+			if (!in_array($this->country, $countries)) {
+				$countries[] = $this->country;
+			}
+		}
+		return $countries;
+	}
+
+	/**
 	 * Get a collection of entities serialized, according to serialization configuration
 	 *
 	 * @param array $criteria
@@ -109,7 +146,6 @@ class SizeChart extends CActiveRecord {
 	 */
 	public static function findSerialized($criteria = [])
 	{
-
 		$query = new ActiveQuery(self::className());
 
 		// Retrieve only fields that gonna be used
