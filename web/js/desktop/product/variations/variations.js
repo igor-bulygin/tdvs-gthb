@@ -11,6 +11,8 @@
 			vm.setPreorder = setPreorder;
 			vm.setPreorderEnd = setPreorderEnd;
 			vm.setPreorderShip = setPreorderShip;
+			vm.countriesSelect = countriesSelect;
+			vm.sizesSelect = sizesSelect;
 			vm.limitTagOption = limitTagOption;
 			vm.deleteOption = deleteOption;
 			
@@ -20,12 +22,18 @@
 			vm.tags_for_work = [];
 			vm.show_prints = false;
 			vm.prints_selected = false;
+			vm.size_selected = false;
+			vm.savedSize_selected = false;
 			vm.preorder_selected = false;
 			vm.made_to_order_selected = false;
 			vm.bespoke_selected = false;
 			vm.bespoke_language = 'en-US';
 			vm.deviserSizecharts = [];
+			vm.countriesAvailable = [];
 			vm.sizechart_helper = [];
+			vm.finalColumns = [];
+			vm.finalCountry;
+							
 		}
 
 		init();
@@ -84,6 +92,9 @@
 			}
 		}
 
+		//This function serves to chose the sizecharts of the categories selecteds || CAREFULL. It was not controlled what happens when you chose 2 categories
+		// it will be controled because generate duplicates
+		// I'm testing with the category /Fashion/Womenswear/b/c but works with others as well
 		function categoriesSizecharts() {
 			vm.product.categories.forEach(function(cate) {
 				vm.sizecharts.forEach(function(element) {
@@ -95,13 +106,45 @@
 			});
 		}
 
-		function deviserSizecharts() {
+		//If you choose a personal Sizechart you need to search how many do you have. You can have none.
+		function deviserSizecharts() { 
 			vm.sizecharts.forEach(function(element) {
-					if(element.type == 1)
+					if(element.type == 1) //&& element.deviser_id == vm.product.deviser_id) || IMPORTANT, the comment is for test only.
 						vm.deviserSizecharts.push(element)	
-
 				});
-							
+		}
+		//
+
+		function countriesSelect(sizechart) {
+			vm.countriesAvailable =  sizechart.countries;
+		}
+
+		//In this function we select all the data for populate the table, we should rename it for give it a better notion of his work
+		function sizesSelect(sizechart, country) {
+			vm.pos; // I think this is a very bad solution, having to store the lenght, maybe is other better solution 
+			vm.lon;
+			vm.finalSizes = [];
+			vm.finalTable = [];
+			if (typeof country === "undefined"){ 	//If you select a deviserSizechart you dont have countries, you only have one
+				vm.finalCountry = sizechart.country //Is not returning the variable 'country' when is a deviserSizechart
+				vm.pos=0;
+				vm.lon=0;
+			}
+			else{
+				vm.lon = sizechart.countries.length;
+				for (var i = 0; i < vm.lon; i++) {
+					if(sizechart.countries[i] == country){
+						vm.pos=i;
+						vm.finalCountry = country;
+					}
+				}
+			}
+			sizechart.values.forEach(function(element) {
+					vm.finalSizes.push(element[vm.pos])
+				});	
+			vm.finalColumns = sizechart.columns;
+			vm.finalTable=sizechart.values;
+			vm.size_selected = true;
 		}
 
 		function searchPrintsSizecharts(id) {
