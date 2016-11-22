@@ -11,6 +11,8 @@
 			vm.setPreorder = setPreorder;
 			vm.setPreorderEnd = setPreorderEnd;
 			vm.setPreorderShip = setPreorderShip;
+			vm.countriesSelect = countriesSelect;
+			vm.sizesSelect = sizesSelect;
 			vm.limitTagOption = limitTagOption;
 			vm.deleteOption = deleteOption;
 			
@@ -25,7 +27,11 @@
 			vm.bespoke_selected = false;
 			vm.bespoke_language = 'en-US';
 			vm.deviserSizecharts = [];
+			vm.countriesAvailable = [];
 			vm.sizechart_helper = [];
+			vm.finalColumns = [];
+			vm.finalCountry;
+			vm.finalSizes = [];
 		}
 
 		init();
@@ -97,11 +103,28 @@
 
 		function deviserSizecharts() {
 			vm.sizecharts.forEach(function(element) {
-					if(element.type == 1)
+					if(element.type == 1) //&& element.deviser_id == vm.product.deviser_id) || IMPORTANT, the coment is for test only.
 						vm.deviserSizecharts.push(element)	
-
 				});
-							
+		}
+
+		function countriesSelect(sizechart) {
+			vm.countriesAvailable =  sizechart.countries;
+		}
+
+		function sizesSelect(sizechart, country) {
+			var pos;
+			for (var i = 0; i < sizechart.countries.length; i++) {
+				if(sizechart.countries[i] == country){
+					pos=i;
+					vm.finalCountry = country;
+				}
+
+			}
+			vm.finalColumns = sizechart.columns;
+			sizechart.values.forEach(function(element) {
+				vm.finalSizes.push(element[pos])
+			});
 		}
 
 		function searchPrintsSizecharts(id) {

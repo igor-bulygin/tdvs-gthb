@@ -167,12 +167,16 @@
 						<span>Create new size chart</span>
 					</div>
 					<div class="col-md-8 pad-about">
-						<ol class="nya-bs-select" ng-model="productVariationsCtrl.sizechart_helper[$index]">
-							<li nya-bs-option="sizechart in productVariationsCtrl.sizechart_helper" data-value="sizechart.id">
+						<ol class="nya-bs-select" ng-model="productVariationsCtrl.sizechart_helper[$index]" ng-change="productVariationsCtrl.countriesSelect(productVariationsCtrl.sizechart_helper[$index])">
+							<li nya-bs-option="sizechart in productVariationsCtrl.sizechart_helper" data-value="sizechart">
 								<a><span ng-bind="sizechart.name['en-US']"></span></a>
 							</li>
 						</ol>
-						<input type="dropdownSelector">
+						<ol class="nya-bs-select" ng-model="productVariationsCtrl.countriesAvailable[$index]" ng-change="productVariationsCtrl.sizesSelect(productVariationsCtrl.sizechart_helper[$index],productVariationsCtrl.countriesAvailable[$index])">
+							<li nya-bs-option=" country in productVariationsCtrl.countriesAvailable" data-value="country">
+								<a><span ng-bind="country"></span></a>
+							</li>
+						</ol>
 					</div>
 				</div>
 				<div class ="row" >
@@ -197,7 +201,11 @@
 						<span>In which sizes is this work available?</span>
 					</div>
 					<div>
-						<input type="dropdownSelector">
+						<ol class="nya-bs-select" ng-model="productVariationsCtrl.finalSizes[$index]">
+							<li nya-bs-option="size in productVariationsCtrl.finalSizes" data-value="size">
+								<a><span ng-bind="size"></span></a>
+							</li>
+						</ol>
 					</div>
 					<div>
 						<span class="glyphicon glyphicon-plus"></span>
@@ -217,14 +225,14 @@
 				<table class="table table-striped">
 					<thead>
 						<tr>
-							<th>EEUU<th>
-							<th ng-repeat="values in productVariationsCtrl.sizecharts[0].columns">{{values['en-US']}}</th><!-- product.sizechart.country-->
+							<th><span>{{productVariationsCtrl.finalCountry}}</span><th>
+							<th ng-repeat="values in productVariationsCtrl.finalColumns">{{values['en-US']}}</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr ng-repeat="values in productVariationsCtrl.sizecharts[0].values"><!--ng-repeat of product.sizechart.values-->
-							<td>{{values[0]}}</td> 
-							<td ng-repeat="value in productVariationsCtrl.sizecharts[0].values"><input name="sizes_values" size="10" value="{{values[$index+5]}}"><span>{{productVariationsCtrl.sizecharts[0].metric_unit}}</td> <!--The "values[$index+5]" the 5 should be raplace with countries.lengh-->
+						<tr ng-repeat="values in productVariationsCtrl.sizecharts[$index].values">
+							<td>{{values[$index]}}</td> 
+							<td ng-repeat="value in productVariationsCtrl.sizecharts[$index].values"><input name="sizes_values" size="10" value="{{values[$index+5]}}"><span>{{productVariationsCtrl.sizecharts[$index].metric_unit}}</td> <!--The "values[$index+5]" the 5 should be raplace with countries.lengh-->
 						</tr>
 					</tbody>
 				</table>
@@ -272,7 +280,7 @@
 						<div class="col-md-10 pad-about track by $index">
 							<span>{{$index+1}}:&nbsp;</span>
 							<span>Width  </span> <input name="width">
-							<span>Lenght </span> <input name="lenght">
+							<span>Length </span> <input name="length">
 							<input name="scale" type="dropdown">
 						</div>
 						<div>
