@@ -172,8 +172,8 @@
 								<a><span ng-bind="sizechart.name['en-US']"></span></a>
 							</li>
 						</ol>
-						<ol class="nya-bs-select" ng-model="productVariationsCtrl.countriesAvailable[$index]" ng-change="productVariationsCtrl.sizesSelect(productVariationsCtrl.sizechart_helper[$index],productVariationsCtrl.countriesAvailable[$index])">
-							<li nya-bs-option=" country in productVariationsCtrl.countriesAvailable" data-value="country">
+						<ol class="nya-bs-select" ng-model="productVariationsCtrl.countriesAvailable[$index]" ng-if="productVariationsCtrl.countriesAvailable.length > 0" ng-change="productVariationsCtrl.sizesSelect(productVariationsCtrl.sizechart_helper[$index], productVariationsCtrl.countriesAvailable[$index])">
+							<li nya-bs-option="country in productVariationsCtrl.countriesAvailable" data-value="country">
 								<a><span ng-bind="country"></span></a>
 							</li>
 						</ol>
@@ -196,42 +196,41 @@
 						</ol>
 					</div>
 				</div>
-				<div class ="row" ng-if ="productVariationsCtrl.size_selected || productVariationsCtrl.savedSize_selected">
-					<div class="col-md-4">
+				<div class="row" ng-if="productVariationsCtrl.product.sizechart">
+					<div class="col-md-3">
 						<span>In which sizes is this work available?</span>
 					</div>
-					<div>
-						<ol class="nya-bs-select" ng-model="productVariationsCtrl.finalSizes[$index]">
-							<li nya-bs-option="size in productVariationsCtrl.finalSizes" data-value="size">
-								<a><span ng-bind="size"></span></a>
+					<div class="col-md-3">
+						<ol class="nya-bs-select" ng-model="productVariationsCtrl.size_to_add">
+							<li nya-bs-option="size in productVariationsCtrl.product.sizechart.values">
+								<a><span ng-bind="size[0]"></span></a>
 							</li>
 						</ol>
-						<a href ="" ng-click=""><span class="glyphicon glyphicon-plus"></span></a>
+						<a href="" ng-click=""><span class="glyphicon glyphicon-plus"></span></a>
 					</div>
-								
-					<div class="col-md-4">
+					<div class="col-md-2">
 						<span>What scale are your size in?</span>
 					</div>
-					<div class="col-md-4">
-						<ol class="nya-bs-select" ng-model="productVariationsCtrl.metric.size[$index]">
-							<li nya-bs-option="size in productVariationsCtrl.metric.size" data-value="size">
+					<div class="col-md-2">
+						<ol class="nya-bs-select" ng-model="productVariationsCtrl.product.sizechart['metric_unit']">
+							<li nya-bs-option="size in productVariationsCtrl.metric.size">
 								<a><span ng-bind="size"></span></a>
 							</li>
 						</ol>
 					</div>
 				</div>
-				
 				<table class="table table-striped">
 					<thead>
 						<tr>
-							<th><span>{{productVariationsCtrl.finalCountry}}</span><th>
-							<th ng-repeat="values in productVariationsCtrl.finalColumns">{{values['en-US']}}</th>
+							<th><span ng-bind="productVariationsCtrl.product.sizechart.country"></span></th>
+							<th ng-repeat="column in productVariationsCtrl.product.sizechart.columns"><span ng-bind="column['en-US']"></span></th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr ng-repeat="values in productVariationsCtrl.finalTable">
-							<td><input name ="sizes" size ="10" value="{{values[productVariationsCtrl.pos]}}"</td> <!-- didn't draw correctly all the inputs -->
-							<td ng-repeat="value in productVariationsCtrl.finalTable[$index] track by $index"><input name="sizes_values" size="10" value="{{values[$index+productVariationsCtrl.lon]}}"><span>{{productVariationsCtrl.sizecharts[$index].metric_unit}}</span></td>
+						<tr ng-repeat="line in productVariationsCtrl.product.sizechart.values track by $index">
+							<td ng-repeat="value in line track by $index" class="col-md-2">
+								<span ng-if="$first" ng-bind="value"></span>
+								<input ng-if="!$first" type="number" class="form-control" ng-model="value">&nbsp;<span ng-if="!$first && productVariationsCtrl.product.sizechart.metric_unit" ng-bind="productVariationsCtrl.product.sizechart.metric_unit"></span></td>
 						</tr>
 					</tbody>
 				</table>

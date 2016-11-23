@@ -138,38 +138,28 @@
 						vm.deviserSizecharts.push(element)	
 				});
 		}
-		//
 
 		function countriesSelect(sizechart) {
-			vm.countriesAvailable =  sizechart.countries;
+			vm.countriesAvailable = angular.copy(sizechart.countries);
 		}
 
 		//In this function we select all the data for populate the table, we should rename it for give it a better notion of his work
 		function sizesSelect(sizechart, country) {
-			vm.pos; // I think this is a very bad solution, having to store the lenght, maybe is other better solution 
-			vm.lon;
-			vm.finalSizes = [];
-			vm.finalTable = [];
-			if (typeof country === "undefined"){ 	//If you select a deviserSizechart you dont have countries, you only have one
-				vm.finalCountry = sizechart.country //Is not returning the variable 'country' when is a deviserSizechart
-				vm.pos=0;
-				vm.lon=0;
-			}
-			else{
-				vm.lon = sizechart.countries.length;
-				for (var i = 0; i < vm.lon; i++) {
-					if(sizechart.countries[i] == country){
-						vm.pos=i;
-						vm.finalCountry = country;
+			vm.product.sizechart = {
+				country: country,
+				columns: [],
+				values: []
+			};
+			vm.product.sizechart.columns = angular.copy(sizechart.columns);
+			var pos = sizechart.countries.indexOf(country);
+			if(pos > -1){
+				for(var i = 0; i < sizechart.values.length; i++) {
+					vm.product.sizechart.values.push([sizechart.values[i][pos]]);
+					for(var j = sizechart.countries.length; j < sizechart.values[i].length; j++) {
+						vm.product.sizechart.values[i].push(sizechart.values[i][j]);
 					}
 				}
 			}
-			sizechart.values.forEach(function(element) {
-					vm.finalSizes.push(element[vm.pos])
-				});	
-			vm.finalColumns = sizechart.columns;
-			vm.finalTable=sizechart.values;
-			vm.size_selected = true;
 		}
 
 		function searchPrintsSizecharts(id) {
@@ -202,6 +192,8 @@
 					vm.prints = true;
 				if(values[1])
 					vm.show_sizecharts = true;
+					if(vm.product.sizechart)
+						delete vm.product.sizechart;
 			});
 		});
 
