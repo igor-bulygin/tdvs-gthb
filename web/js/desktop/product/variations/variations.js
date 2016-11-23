@@ -30,7 +30,7 @@
 		vm.bespoke_language = 'en-US';
 		vm.deviserSizecharts = [];
 		vm.countriesAvailable = [];
-		vm.sizechart_helper = [];
+
 		vm.finalColumns = [];
 		vm.finalCountry;
 
@@ -103,7 +103,7 @@
 				if(!vm.product.options[element]) {
 					vm.product.options[element] = [[]];
 				}
-			})
+			});
 		}
 
 		function limitTagOption(limit, array) {
@@ -117,17 +117,17 @@
 			}
 		}
 
-		//This function serves to chose the sizecharts of the categories selecteds || CAREFULL. It was not controlled what happens when you chose 2 categories
-		// it will be controled because generate duplicates
-		// I'm testing with the category /Fashion/Womenswear/b/c but works with others as well
-		function categoriesSizecharts() {
-			vm.product.categories.forEach(function(cate) {
-				vm.sizecharts.forEach(function(element) {
-					for (var i = 0; i < element.categories.length; i++) {
-						if(element.categories[i]==cate)
-							vm.sizechart_helper.push(element);
+		//Get sizecharts by categories.
+		function categoriesSizecharts(categories) {
+			vm.sizechart_helper = [];
+			vm.sizechart_helper_id = [];
+			vm.sizecharts.forEach(function(sizechart) {
+				for(var i = 0; i < categories.length; i++) {
+					if(sizechart.categories.indexOf(categories[i]) > -1 && vm.sizechart_helper_id.indexOf(sizechart.id) === -1) {
+						vm.sizechart_helper_id.push(sizechart.id)
+						vm.sizechart_helper.push(sizechart);
 					}
-				});	
+				}
 			});
 		}
 
@@ -191,8 +191,8 @@
 		$scope.$on(productEvents.setVariations, function(event, args) {
 			//get tags
 			getTagsByCategory(args.categories);
+			categoriesSizecharts(args.categories);
 			deviserSizecharts();
-			categoriesSizecharts();
 			//get sizecharts and prints value
 			vm.show_sizecharts = false;
 			vm.prints = false;
