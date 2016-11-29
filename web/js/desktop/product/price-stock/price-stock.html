@@ -1,3 +1,27 @@
 <div class="card">
 	<span class="title">4/ Price &amp; Stock</span>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Variation availability</th>
+				<th></th>
+				<th>SKU (Optional)</th>
+				<th>Weight</th>
+				<th>Package dimensions</th>
+				<th>Stock</th>
+				<th>Price</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="product in productPriceStockCtrl.product.price_stock">
+				<td ng-bind="productPriceStockCtrl.titles[$index]"></td>
+				<td><input type="checkbox" class="form-control" ng-model="product.available"></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>{{product.stock}}</td>
+				<td>{{product.price}}</td>
+			</tr>
+		</tbody>
+	</table>
 </div>
