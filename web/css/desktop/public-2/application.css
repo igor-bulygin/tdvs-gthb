@@ -996,9 +996,9 @@ input[type="radio"] .styled:checked + label::after {
   -webkit-border-radius: 180px 180px 180px 180px !important;
   -moz-border-radius: 180px 180px 180px 180px !important; }
 
-.log a, .add-lang, .request-invitation-wrapper .request-invitation-container .add-new {
+.log a, .add-lang, .request-invitation-wrapper .request-invitation-container .add-new, .red-text {
   color: #F7284B !important; }
-  .log a:hover, .add-lang:hover, .request-invitation-wrapper .request-invitation-container .add-new:hover {
+  .log a:hover, .add-lang:hover, .request-invitation-wrapper .request-invitation-container .add-new:hover, .red-text:hover {
     color: #C91C39 !important;
     text-decoration: none;
     -moz-transition-property: color;
@@ -4161,6 +4161,16 @@ tags-input .tags .tag-item {
 
 .purple-text {
   color: #b933f4 !important; }
+
+.date-variations {
+  border: 1px solid #cccccc;
+  text-transform: uppercase;
+  display: inline-block;
+  padding: 5px 10px;
+  margin: 0 0 6px;
+  border-radius: 90px 90px 90px 90px !important;
+  -webkit-border-radius: 90px 90px 90px 90px !important;
+  -moz-border-radius: 90px 90px 90px 90px !important; }
 
 footer {
   width: 100%;
