@@ -8,13 +8,26 @@
 			vm.titles = [];
 			vm.product.price_stock.forEach(function (element) {
 				var title = [];
+				if(element.options['type']) {
+					for(var i = 0; i < vm.papertypes.length; i++) {
+						if(element.options['type'] == vm.papertypes[i].type) {
+							title.push(vm.papertypes[i].name);
+						}
+					}
+
+				}
+				if(element.options['size']){
+					if(angular.isObject(element.options['size'])) {
+						if(element.options.size.width && element.options.size.length && element.options.size.metric_unit)
+							title.push(element.options.size.width + ' x ' + element.options.size.length + element.options.size.metric_unit);
+					}
+				}
 				for(var key in element.options) {
 					for(var i = 0; i < vm.tags.length; i++) {
-						if(key === vm.tags[i].id) {
+						if(key === vm.tags[i].id && vm.tags[i].stock_and_price === true) {
 							//look for tag.options.values and compare them to each element.options[key]
 							vm.tags[i].options.forEach(function (option) {
 								if(element.options[key].indexOf(option.value) > -1) {
-									console.log(option.text['en-US']);
 									title.push(option.text['en-US']);
 								}
 							})
@@ -96,7 +109,8 @@
 		controllerAs: 'productPriceStockCtrl',
 		bindings: {
 			product: '<',
-			tags: '<'
+			tags: '<',
+			papertypes: '<'
 		}
 	}
 

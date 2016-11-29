@@ -245,7 +245,8 @@ class Tag extends CActiveRecord
 					'name',
 					'description',
 					'categories',
-					'options'
+					'options',
+					'stock_and_price'
 				];
 				break;
 
