@@ -11,6 +11,7 @@
 		vm.setPreorderShip = setPreorderShip;
 		vm.deleteSize = deleteSize;
 		vm.addSize = addSize;
+		vm.addType = addType;
 		vm.countriesSelect = countriesSelect;
 		vm.sizesSelect = sizesSelect;
 		vm.limitTagOption = limitTagOption;
@@ -43,8 +44,8 @@
 		function setPrintsSelected(value) {
 			vm.show_prints = value;
 			vm.product.prints={
-				type: [null],
-				sizes: [null]
+				type: [[]],
+				sizes: [{}]
 			}
 		}
 
@@ -76,7 +77,11 @@
 		}
 
 		function addSize() {
-			vm.product.prints.sizes.push(null)
+			vm.product.prints.sizes.push({});
+		}
+
+		function addType() {
+			vm.product.prints.type.push([]);
 		}
 
 		function deleteSize(index) {
