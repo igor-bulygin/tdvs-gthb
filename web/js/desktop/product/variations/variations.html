@@ -147,7 +147,7 @@
 						</label>
 					</div>
 				</div>
-				<div class="mt-50" ng-if="productVariationsCtrl.bespoke_selected" ng-cloak>
+				<div class="mt-50 bespoke-wraper" ng-if="productVariationsCtrl.bespoke_selected" ng-cloak>
 					<p>What information do you need from the customer before manufacturing this work?</p>
 					<ol class="nya-bs-select about-edit-select title-lang-btn manufacturing-lang" ng-model="productVariationsCtrl.bespoke_language">
 						<li nya-bs-option="language in productVariationsCtrl.languages" data-value="language.code" deep-watch="true">

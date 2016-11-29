@@ -427,3 +427,9 @@ tags-input .tags .tag-item {
     margin: 0 0 6px;
 	@include border-radius(90px,90px,90px,90px);
 }
+.bespoke-wraper{
+	padding: 0 20px;
+	p{
+		color:$dark_grey;
+	}
+}
