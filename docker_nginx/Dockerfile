@@ -53,7 +53,6 @@ RUN apk add --no-cache bash \
     mkdir -p /run/nginx && \
     mkdir -p /var/log/supervisor &&\
     php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
-    php -r "if (hash_file('SHA384', 'composer-setup.php') === '${composer_hash}') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" && \
     php composer-setup.php --install-dir=/usr/bin --filename=composer && \
     php -r "unlink('composer-setup.php');" && \
     pip install -U certbot && \
@@ -62,6 +61,11 @@ RUN apk add --no-cache bash \
 
 RUN apk add /tmp/php5-mongo-1.6.14-r0.apk
 RUN apk add /tmp/php5-redis-2.2.8-r0.apk
+
+RUN echo "@community http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
+RUN apk add --no-cache php5-xdebug@community && \
+    rm -f /etc/php5/conf.d/xdebug.ini
+COPY conf/xdebug.ini /etc/php5/conf.d/
 
 ADD conf/supervisord.conf /etc/supervisord.conf
 
