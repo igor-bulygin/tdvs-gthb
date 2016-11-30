@@ -3,6 +3,7 @@
 
 	function UtilService($location) {
 		this.isObject = isObject;
+		this.isEmpty = isEmpty;
 		this.diff = diff;
 		this.returnDeviserIdFromUrl = returnDeviserIdFromUrl;
 		this.returnProductIdFromUrl = returnProductIdFromUrl;
@@ -26,6 +27,18 @@
 
 		function isObject(object) {
 			return (object !== null && typeof object === "object");
+		}
+
+		function isEmpty(object) {
+			var hasOwnProperty = Object.prototype.hasOwnProperty;
+			if (object == null) return true;
+			if (object.length > 0) return false;
+			if (object.length === 0) return true;
+			if (typeof object !== "object") return true;
+			for (var key in object) {
+				if (hasOwnProperty.call(object, key)) return false;
+			}
+			return true;
 		}
 
 		function diff(obj1, obj2) {

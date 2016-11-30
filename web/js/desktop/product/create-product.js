@@ -22,6 +22,7 @@
 				type: 0
 			};
 			vm.product.tags = {};
+			vm.product.price_stock = [];
 
 			getLanguages();
 			getCategories();
