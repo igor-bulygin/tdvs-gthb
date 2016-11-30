@@ -433,3 +433,18 @@ tags-input .tags .tag-item {
 		color:$dark_grey;
 	}
 }
+.red-plus{
+	border: 1px solid #cccccc;
+	@include border-radius(90px,90px,90px,90px);
+	color: $red;
+	padding: 6px 10px;
+	&:hover{
+		color: $dark_red;
+	}
+}
+.product-table{
+	input{
+		@include border-radius(90px,90px,90px,90px);
+		min-width: 35px;
+	}
+}

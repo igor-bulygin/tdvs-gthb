@@ -1,25 +1,27 @@
 (function () {
 	"use strict";
 
-	function controller($scope) {
+	function controller($scope, productEvents, UtilService) {
 		var vm = this;
 
 		function parseTitles() {
 			vm.titles = [];
 			vm.product.price_stock.forEach(function (element) {
 				var title = [];
+				//order matters
+				if(element.options['size']){
+					if(angular.isObject(element.options['size'])) {
+						if(element.options.size.width && element.options.size.length && element.options.size.metric_unit)
+							title.push(element.options.size.width + ' x ' + element.options.size.length + element.options.size.metric_unit);
+					} else {
+						title.push(element.options.size);
+					}
+				}
 				if(element.options['type']) {
 					for(var i = 0; i < vm.papertypes.length; i++) {
 						if(element.options['type'] == vm.papertypes[i].type) {
 							title.push(vm.papertypes[i].name);
 						}
-					}
-
-				}
-				if(element.options['size']){
-					if(angular.isObject(element.options['size'])) {
-						if(element.options.size.width && element.options.size.length && element.options.size.metric_unit)
-							title.push(element.options.size.width + ' x ' + element.options.size.length + element.options.size.metric_unit);
 					}
 				}
 				for(var key in element.options) {
@@ -64,22 +66,30 @@
 		function createTable() {
 			vm.product.price_stock = [];
 			var object = {};
-			for (var key in vm.product.options) {
-				object[key] = vm.product.options[key];
+			if(!UtilService.isEmpty(vm.product.options)) {
+				for (var key in vm.product.options) {
+					object[key] = vm.product.options[key];
+				}
+				if(angular.isObject(vm.product.prints) && !UtilService.isEmpty(vm.product.prints)) {
+					object['type'] = vm.product.prints.type;
+					object['size'] = vm.product.prints.sizes;
+				}
+				if(angular.isObject(vm.product.sizechart) && !UtilService.isEmpty(vm.product.sizechart)) {
+					object['size'] = [];
+					vm.product.sizechart.values.forEach(function (element) {
+						object['size'].push(element[0]);
+					});
+				}
+				var cartesian = objectProduct(object);
+				for (var i = 0; i < cartesian.length; i++) {
+					vm.product.price_stock.push({
+						options: cartesian[i],
+						price: 0,
+						stock: 0
+					});
+				}
+				parseTitles();
 			}
-			if(angular.isObject(vm.product.prints)) {
-				object['type'] = vm.product.prints.type;
-				object['size'] = vm.product.prints.sizes;
-			}
-			var cartesian = objectProduct(object);
-			for (var i = 0; i < cartesian.length; i++) {
-				vm.product.price_stock.push({
-					options: cartesian[i],
-					price: 0,
-					stock: 0
-				});
-			}
-			parseTitles();
 		}
 
 		//watches
@@ -100,6 +110,11 @@
 				createTable();
 			}
 		}, true)
+
+		//events
+		$scope.$on('productEvents.setVariations', function(args, event) {
+			delete vm.product.price_stock;
+		})
 
 	}
 

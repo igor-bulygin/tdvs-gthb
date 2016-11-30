@@ -160,12 +160,11 @@
 		</div>
 	</div>
 	<hr style="height: 2px; color: black">
-	<div class="row">
+	<div class="row items-row">
 		<div class="col-md-12">
 			<div ng-if="productVariationsCtrl.show_sizecharts" ng-cloak>
-				<div class="row">
-					<span class="title">Sizes</span>
-				</div>
+					<label>Sizes</label>
+
 				<div class="row">
 					<div class="col-md-2">
 						<span>Create new size chart</span>
@@ -204,18 +203,18 @@
 					<div class="col-md-3">
 						<span>In which sizes is this work available?</span>
 					</div>
-					<div class="col-md-3">
+					<div class="col-md-3 pad-about">
 						<ol class="nya-bs-select" ng-model="productVariationsCtrl.size_to_add">
 							<li nya-bs-option="size in productVariationsCtrl.product.sizechart.values">
 								<a><span ng-bind="size[0]"></span></a>
 							</li>
 						</ol>
-						<a href="" ng-click=""><span class="glyphicon glyphicon-plus"></span></a>
+						<a href="" ng-click="" class="ion-plus red-plus"></a>
 					</div>
-					<div class="col-md-2">
+					<div class="col-md-3">
 						<span>What scale are your size in?</span>
 					</div>
-					<div class="col-md-2">
+					<div class="col-md-1 pad-about">
 						<ol class="nya-bs-select" ng-model="productVariationsCtrl.product.sizechart['metric_unit']">
 							<li nya-bs-option="size in productVariationsCtrl.metric.size">
 								<a><span ng-bind="size"></span></a>
@@ -223,7 +222,7 @@
 						</ol>
 					</div>
 				</div>
-				<table class="table table-striped">
+				<table class="table table-striped product-table">
 					<thead>
 						<tr>
 							<th><span ng-bind="productVariationsCtrl.product.sizechart.country"></span></th>
