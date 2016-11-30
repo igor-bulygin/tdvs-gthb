@@ -148,7 +148,7 @@ use yii\widgets\ActiveForm;
 					</li>
 				<?php } else { ?>
 					<li class="log">
-						<a href="<?=Url::to('global/logout')?>">Logout</a>
+						<a href="<?=Url::to('/global/logout')?>">Logout</a>
 					</li>
 				<?php } ?>
 			</ul>
