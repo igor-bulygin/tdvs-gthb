@@ -174,31 +174,29 @@ class Product2 extends Product {
 	public function beforeSave($insert) {
 
         if ($insert) {
-
 			foreach ($this->media['photos'] as $onephoto) {
 				$find_photo = $onephoto['name'];
-				$source_tmp = Utils::join_paths(Yii::getAlias("@product"), "temp",$find_photo);
+				$source_tmp = Utils::join_paths(Yii::getAlias("@product"), "temp", $find_photo);
 				$path_destination = $this->getUploadedFilesPath();
 				$destination = Utils::join_paths($path_destination, $find_photo);
 
-				if(!file_exists($destination)) {
-
-					if(file_exists($source_tmp)) {
-
-						if(!file_exists($path_destination)) FileHelper::createDirectory($path_destination);
-						rename($source_tmp, $destination );
-
+				if (!file_exists($destination) && file_exists($source_tmp)) {
+					if (!file_exists($path_destination)) {
+						FileHelper::createDirectory($path_destination);
 					}
+					rename($source_tmp, $destination);
 				}
 			}
-        }
+		}
 
 		// short_id on price_stock
-		foreach ($this->price_stock as $priceStock) {
-			if (!isset($priceStock['short_id'])) {
-				$priceStock['short_id'] = Utils::shortID(7);
+		$priceStock = $this->price_stock;
+		foreach ($priceStock as $k => $item) {
+			if (!isset($item['short_id'])) {
+				$priceStock[$k]['short_id'] = $this->short_id . Utils::shortID(7);
 			}
 		}
+		$this->setAttribute('price_stock', $priceStock);
 
 		$slugs = [];
 		foreach ($this->name as $lang => $text) {
