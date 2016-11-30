@@ -36,7 +36,6 @@
 		vm.finalCountry;
 
 		function init(){
-			getPaperType();
 		}
 
 		init();
@@ -65,15 +64,6 @@
 		function setPreorderShip(newDate, oldDate) {
 			vm.product.preorder.type = 1;
 			vm.product.preorder['ship'] = newDate;
-		}
-
-		function getPaperType() {
-			productDataService.PaperType.get()
-				.$promise.then(function (dataPaperType) {
-					vm.paperTypes = dataPaperType.items;
-				}, function (err){
-					console.log(err);
-				});
 		}
 
 		function addSize() {
@@ -221,7 +211,8 @@
 			categories: '<',
 			metric: '<',
 			sizecharts: '<',
-			deviser: '<'
+			deviser: '<',
+			papertypes: '<'
 		}
 	}
 

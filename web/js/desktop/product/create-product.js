@@ -29,7 +29,7 @@
 			getTags();
 			getMetric();
 			getSizechart();
-
+			getPaperType();
 		}
 
 		init();
@@ -91,6 +91,15 @@
 				}, function(err) {
 					//err
 				})
+		}
+
+		function getPaperType() {
+			productDataService.PaperType.get()
+				.$promise.then(function (dataPaperType) {
+					vm.papertypes = dataPaperType.items;
+				}, function (err){
+					console.log(err);
+				});
 		}
 
 		function save(state) {
