@@ -73,7 +73,8 @@
 			var object = {};
 			if(!UtilService.isEmpty(vm.product.options)) {
 				for (var key in vm.product.options) {
-					object[key] = vm.product.options[key];
+					if(vm.product.options[key][0].length > 0)
+						object[key] = vm.product.options[key];
 				}
 				if(angular.isObject(vm.product.prints) && !UtilService.isEmpty(vm.product.prints)) {
 					object['type'] = vm.product.prints.type;
@@ -86,32 +87,30 @@
 					});
 				}
 				var cartesian = objectProduct(object);
-				for (var i = 0; i < cartesian.length; i++) {
-					vm.product.price_stock.push({
-						options: cartesian[i],
-						price: 0,
-						stock: 0,
-						weight: 0,
-						width: 0,
-						height: 0,
-						length: 0
-					});
-				}
-				if(set_original_artwork) {
-					if(vm.product.price_stock.length > 1) {
-						vm.product.price_stock.unshift({
-							options: [],
-							original_artwork: true,
+				if(!UtilService.isEmpty(cartesian[0])) {
+					for (var i = 0; i < cartesian.length; i++) {
+						vm.product.price_stock.push({
+							options: cartesian[i],
 							price: 0,
 							stock: 0,
 							weight: 0,
 							width: 0,
 							height: 0,
 							length: 0
-						})
-					} else if (vm.product.price_stock.length === 1) {
-						vm.product.price_stock[0]['original_artwork'] = true;
+						});
 					}
+				}
+				if(set_original_artwork) {
+					vm.product.price_stock.unshift({
+						options: [],
+						original_artwork: true,
+						price: 0,
+						stock: 0,
+						weight: 0,
+						width: 0,
+						height: 0,
+						length: 0
+					})
 				}
 				parseTitles();
 			}
