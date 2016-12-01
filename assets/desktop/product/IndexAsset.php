@@ -24,6 +24,7 @@ class IndexAsset extends AssetBundle {
 		'app\assets\libs\ngTagsInputAsset',
 		'app\assets\libs\angularLocalStorageAsset',
 		'app\assets\libs\angularBootstrapDatetimePickerAsset',
+		'app\assets\libs\angularXEditable',
 		'app\assets\libs\macyAsset'
 	];
 }

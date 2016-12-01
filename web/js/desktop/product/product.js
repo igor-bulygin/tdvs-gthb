@@ -17,6 +17,11 @@
 	}
 
 	angular
-		.module('todevise', ['api', 'util', 'toastr', 'nya.bootstrap.select', 'textAngular', 'ngFileUpload', 'dndLists', 'ui.bootstrap', 'ngImgCrop', 'ngTagsInput', 'ui.bootstrap.datetimepicker', 'LocalStorageModule'])
+		.module('todevise', ['api', 'util', 'toastr', 'nya.bootstrap.select', 'textAngular', 'ngFileUpload',
+			'dndLists', 'ui.bootstrap', 'ngImgCrop', 'ngTagsInput', 'ui.bootstrap.datetimepicker', 'LocalStorageModule',
+			'xeditable'])
 		.config(config)
+		.run(function(editableOptions) {
+			editableOptions.theme = 'bs3';
+		})
 }());

@@ -85,7 +85,11 @@
 					vm.product.price_stock.push({
 						options: cartesian[i],
 						price: 0,
-						stock: 0
+						stock: 0,
+						weight: 0,
+						width: 0,
+						height: 0,
+						length: 0
 					});
 				}
 				parseTitles();
@@ -125,7 +129,8 @@
 		bindings: {
 			product: '<',
 			tags: '<',
-			papertypes: '<'
+			papertypes: '<',
+			metric: '<',
 		}
 	}
 

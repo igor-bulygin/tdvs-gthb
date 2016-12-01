@@ -43,6 +43,6 @@ $this->title = $deviser->getBrandName() . ' - Todevise';
 		<product-basic-info product="createProductCtrl.product" categories="createProductCtrl.allCategories" languages="createProductCtrl.languages"></product-basic-info>
 		<product-more-details product="createProductCtrl.product" languages="createProductCtrl.languages"></product-more-details>
 		<product-variations product="createProductCtrl.product" categories="createProductCtrl.allCategories" languages="createProductCtrl.languages" tags="createProductCtrl.tags" sizecharts="createProductCtrl.sizecharts" metric="createProductCtrl.metric" deviser="createProductCtrl.deviser" papertypes="createProductCtrl.papertypes"></product-variations>
-		<product-price-stock product="createProductCtrl.product" tags="createProductCtrl.tags" papertypes="createProductCtrl.papertypes"></product-price-stock>
+		<product-price-stock product="createProductCtrl.product" tags="createProductCtrl.tags" papertypes="createProductCtrl.papertypes" metric="createProductCtrl.metric"></product-price-stock>
 	</div>
 </div>

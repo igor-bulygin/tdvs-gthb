@@ -1,13 +1,27 @@
 <div class="card">
 	<span class="title">4/ Price &amp; Stock</span>
-	<table class="table" ng-if="productPriceStockCtrl.product.price_stock.length > 0">
+	<div class="row items-row">
+		<label for="weight">Weight</label>
+		<ol class="nya-bs-select" ng-model="productPriceStockCtrl.product.weight_unit">
+			<li nya-bs-option="unit in productPriceStockCtrl.metric.weight">
+				<a href="#"><span ng-bind="unit"></span></a>
+			</li>
+		</ol>
+		<label for="dimension">Dimension</label>
+		<ol class="nya-bs-select" ng-model="productPriceStockCtrl.product.dimension_unit">
+			<li nya-bs-option="unit in productPriceStockCtrl.metric.size">
+				<a href="#"><span ng-bind="unit"></span></a>
+			</li>
+		</ol>
+	</div>
+	<table class="table product-table" ng-if="productPriceStockCtrl.product.price_stock.length > 0">
 		<thead>
 			<tr>
 				<th>Variation availability</th>
 				<th></th>
 				<th>SKU (Optional)</th>
 				<th>Weight</th>
-				<th>Package dimensions</th>
+				<th>Package dimensions <p>Length Width Height</p></th>
 				<th>Stock</th>
 				<th>Price</th>
 			</tr>
@@ -16,12 +30,13 @@
 			<tr ng-repeat="product in productPriceStockCtrl.product.price_stock">
 				<td ng-bind="productPriceStockCtrl.titles[$index]"></td>
 				<td><input type="checkbox" class="form-control" ng-model="product.available"></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td>{{product.stock}}</td>
-				<td>{{product.price}}</td>
+				<td><input type="text" class="form-control" ng-model="product.sku"></td>
+				<td><a href="#" editable-text="product.weight" buttons="no">{{product.weight || 0}}</a>&nbsp;<span ng-if="productPriceStockCtrl.product.weight_unit" ng-bind="productPriceStockCtrl.product.weight_unit"></span></td>
+				<td><a href="#" editable-text="product.length" buttons="no">{{product.length || 0}}</a>&nbsp;<span ng-if="productPriceStockCtrl.product.dimension_unit" ng-bind="productPriceStockCtrl.product.dimension_unit"></span>&nbsp;x&nbsp;<a href="#" editable-text="product.width" buttons="no">{{product.width || 0}}</a></span>&nbsp;<span ng-if="productPriceStockCtrl.product.dimension_unit" ng-bind="productPriceStockCtrl.product.dimension_unit"></span>&nbsp;x&nbsp;<a href="#" editable-text="product.height" buttons="no">{{product.height || 0}}</a>&nbsp;<span ng-if="productPriceStockCtrl.product.dimension_unit" ng-bind="productPriceStockCtrl.product.dimension_unit"></span></td>
+				<td><a href="#" editable-text="product.stock" buttons="no">{{product.stock || 0}}</a></td>
+				<td>€ <a href="#" editable-text="product.price" buttons="no">{{product.price || 0}}</a></span></td>
 			</tr>
 		</tbody>
 	</table>
 </div>
+<div><pre ng-bind="(productPriceStockCtrl.product.price_stock | json)"></pre></div>
