@@ -448,3 +448,16 @@ tags-input .tags .tag-item {
 		min-width: 35px;
 	}
 }
+a.editable-click { 
+    color: $black!important;
+    border-bottom: dotted 2px transparent!important;
+	border:0!important;
+}
+a.editable-click:hover { 
+    color: $black!important;
+    border-bottom-color: transparent!important;
+	border:0!important;
+}
+.editable-controls input{
+	max-width:30px;
+}
