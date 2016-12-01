@@ -671,8 +671,16 @@ class Utils
 	 */
 	public static function getYoutubeVideoIdByUrl($urlYoutubeVideo)
 	{
+		// New way using regexp: (thanks to http://stackoverflow.com/a/6382259)
+		if (preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $urlYoutubeVideo, $match)) {
+			return $match[1];
+		}
+		return null;
+
+		// Old way:
 //		$urlYoutubeVideo = 'https://www.youtube.com/watch?v=XA6K2gQf95Y';
 //		$urlYoutubeVideo = 'https://youtu.be/01p8XH3sq85';
+		/*
 		$domain = ltrim(ltrim($urlYoutubeVideo, 'http://'), 'https://');
 		$parts = explode('/', $domain);
 		$domain = $parts[0];
@@ -694,6 +702,7 @@ class Utils
 		}
 
 		return null;
+		*/
 	}
 
 }
