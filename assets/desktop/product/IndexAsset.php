@@ -7,7 +7,8 @@ class IndexAsset extends AssetBundle {
 	public $basePath = '@webroot';
 	public $baseUrl = '@web';
 	public $js = [
-		'js/desktop/product/product.js'
+		'js/desktop/product/product.js',
+		'js/desktop/product/productService.js'
 	];
 	public $depends = [
 		'app\assets\libs\angularAsset',

@@ -1,14 +1,19 @@
 (function () {
 	"use strict";
 
-	function controller($scope, productEvents, UtilService) {
+	function controller($scope, productEvents, UtilService, productService) {
 		var vm = this;
+		vm.isZero = isZero;
+		var set_original_artwork = false;
 
 		function parseTitles() {
 			vm.titles = [];
 			vm.product.price_stock.forEach(function (element) {
 				var title = [];
 				//order matters
+				if(element.original_artwork) {
+					title.push('Original artwork');
+				}
 				if(element.options['size']){
 					if(angular.isObject(element.options['size'])) {
 						if(element.options.size.width && element.options.size.length && element.options.size.metric_unit)
@@ -92,8 +97,28 @@
 						length: 0
 					});
 				}
+				if(set_original_artwork) {
+					if(vm.product.price_stock.length > 1) {
+						vm.product.price_stock.unshift({
+							options: [],
+							original_artwork: true,
+							price: 0,
+							stock: 0,
+							weight: 0,
+							width: 0,
+							height: 0,
+							length: 0
+						})
+					} else if (vm.product.price_stock.length === 1) {
+						vm.product.price_stock[0]['original_artwork'] = true;
+					}
+				}
 				parseTitles();
 			}
+		}
+
+		function isZero(value) {
+			return value === 0 ? true : false;
 		}
 
 		//watches
@@ -101,24 +126,33 @@
 			if(angular.isObject(newValue)) {
 				createTable();
 			}
-		}, true)
+		}, true);
 
 		$scope.$watch('productPriceStockCtrl.product.options', function(newValue, oldValue) {
 			if(angular.isObject(newValue)) {
 				createTable();
 			}
-		}, true)
+		}, true);
 
 		$scope.$watch('productPriceStockCtrl.product.sizechart', function(newValue, oldValue) {
 			if(angular.isObject(newValue)) {
 				createTable();
 			}
-		}, true)
+		}, true);
 
 		//events
-		$scope.$on('productEvents.setVariations', function(args, event) {
+		$scope.$on(productEvents.setVariations, function(event, args) {
+			args.categories.forEach(function(element) {
+				var values = productService.searchPrintSizechartsOnCategory(vm.categories, element);
+				//if we do have prints, set original artwork to true
+				if(values[0])
+					set_original_artwork = true;
+				else {
+					set_original_artwork = false;
+				}
+			})
 			delete vm.product.price_stock;
-		})
+		});
 
 	}
 
@@ -131,6 +165,7 @@
 			tags: '<',
 			papertypes: '<',
 			metric: '<',
+			categories: '<'
 		}
 	}
 

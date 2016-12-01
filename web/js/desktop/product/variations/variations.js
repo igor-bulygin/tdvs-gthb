@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller($scope, productEvents, productDataService) {
+	function controller($scope, productEvents, productDataService, productService) {
 		var vm = this;
 		//functions
 		vm.setPrintsSelected = setPrintsSelected;
@@ -157,17 +157,6 @@
 			}
 		}
 
-		function searchPrintsSizecharts(id) {
-			var prints = false;
-			var sizecharts = false;
-			for(var i = 0; i < vm.categories.length; i++) {
-				if(vm.categories[i].id === id) {
-					return [vm.categories[i]['prints'], vm.categories[i]['sizecharts']];
-				}
-			}
-			return false;
-		}
-
 		//watchs
 		//watch product
 
@@ -182,7 +171,7 @@
 			vm.show_sizecharts = false;
 			vm.prints = false;
 			args.categories.forEach(function(element) {
-				var values = searchPrintsSizecharts(element);
+				var values = productService.searchPrintSizechartsOnCategory(vm.categories, element);
 				if(values[0])
 					vm.prints = true;
 				if(values[1])
