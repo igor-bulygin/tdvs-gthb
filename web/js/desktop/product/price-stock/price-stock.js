@@ -164,7 +164,6 @@
 			//vm.forms_submitted is true if we sent the form and we have to apply validations
 			vm.form_submitted = true;
 		})
-
 	}
 
 	var component = {

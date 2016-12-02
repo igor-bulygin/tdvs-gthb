@@ -162,6 +162,21 @@
 				if(!vm.product.dimension_unit) {
 					required.push('dimension_unit');
 				}
+				//price_stock and all price_stock values
+				if(!vm.product.price_stock || vm.product.price_stock.length === 0){
+					required.push('price_stock');
+				}
+				vm.product.price_stock.forEach(function (element) {
+					//if availability
+					if(element.available &&
+						UtilService.isZeroOrLess(element.weight) || 
+						UtilService.isZeroOrLess(element.width) ||
+						UtilService.isZeroOrLess(element.length) ||
+						UtilService.isZeroOrLess(element.price) ||
+						UtilService.isZeroOrLess(element.stock)) {
+							required.push('price_stock');
+						}
+				})
 			} else {
 				//check for null categories
 				while(vm.product.categories.indexOf(null) > -1){
