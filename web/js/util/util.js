@@ -95,7 +95,7 @@
 
 		function parseMultiLanguageEmptyFields(obj) {
 			for(var key in obj) {
-				if(obj[key].length === 0) {
+				if(obj[key] && obj[key].length === 0) {
 					delete obj[key];
 				}
 			}

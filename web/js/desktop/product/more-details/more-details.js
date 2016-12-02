@@ -1,8 +1,9 @@
 (function () {
 	"use strict";
 
-	function controller(Upload, $uibModal, productDataService, UtilService){
+	function controller(Upload, $uibModal, productDataService, UtilService, $scope, productEvents){
 		var vm = this;
+		vm.has_error = UtilService.has_error;
 		vm.description_language = 'en-US';
 		vm.tags_language = 'en-US';
 		vm.faq_selected = false;
@@ -146,10 +147,23 @@
 			}
 		}
 		//watches
+		$scope.$watch('productMoreDetailsCtrl.product.description', function(newValue, oldValue) {
+			vm.descriptionRequired = false;
+		}, true);
+		$scope.$watch('productMoreDetailsCtrl.product.faq', function(newValue, oldValue) {
+			vm.faqRequired = false;
+		}, true);
 
 		//events
-		//TO DO: set description required if it is empty in english (vm.descriptionRequired = true)
-		//TO DO: set faq required if it is not empty and english is not filled
+		$scope.$on(productEvents.requiredErrors, function(event, args) {
+			//set description error
+			if(args.required.indexOf('description') > -1) {
+				vm.descriptionRequired = true;
+			}
+			if(args.required.indexOf('faq') > -1) {
+				vm.faqRequired = true;
+			}
+		})
 
 	}
 

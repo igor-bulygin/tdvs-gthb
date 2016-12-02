@@ -105,7 +105,7 @@
 										<span class="faq-edit-question">Question</span>
 									</div>
 									<div class="col-sm-11">
-										<input type="text" class="faq-edit-answer" placeholder="Question" ng-model="question.question[productMoreDetailsCtrl.faq_helper[$index].languageSelected]">
+										<input type="text" name="{{'faq_question_' + $index}}" class="faq-edit-answer ng-class:{'error-input': productMoreDetailsCtrl.faqRequired && !question.question['en-US']}" placeholder="Question" ng-model="question.question[productMoreDetailsCtrl.faq_helper[$index].languageSelected]" required>
 									</div>
 								</div>
 								<div class="faq-row">
@@ -113,7 +113,7 @@
 										<span class="faq-edit-question">Answer</span>
 									</div>
 									<div class="col-sm-11">
-										<div class="faq-edit-answer" text-angular ng-model="question.answer[productMoreDetailsCtrl.faq_helper[$index].languageSelected]" ta-toolbar="[]" placeholder="Answer"></div>
+										<div class="faq-edit-answer ng-class:{'error-input': productMoreDetailsCtrl.faqRequired && !question.answer['en-US']}" name="{{'faq_answer_' + $index}}" text-angular ng-model="question.answer[productMoreDetailsCtrl.faq_helper[$index].languageSelected]" ta-toolbar="[]" placeholder="Answer" required></div>
 									</div>
 								</div>
 							</div>

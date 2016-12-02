@@ -154,6 +154,18 @@
 					required.push('description');
 				}
 
+				//faqs
+				if(angular.isArray(vm.product.faq) && vm.product.faq.length > 0) {
+					vm.product.faq.forEach(function(element) {
+						if(!element.question['en-US'] ||
+							element.question['en-US'] === "" ||
+							!element.answer['en-US'] ||
+							element.answer['en-US'] === "") {
+								required.push('faq');
+						}
+					})
+				}
+
 				//weight_unit
 				if(!vm.product.weight_unit) {
 					required.push('weight_unit');
