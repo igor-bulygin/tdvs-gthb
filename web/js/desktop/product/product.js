@@ -23,5 +23,6 @@
 		.config(config)
 		.run(function(editableOptions) {
 			editableOptions.theme = 'bs3';
+			editableOptions.blurElem = 'submit';
 		})
 }());

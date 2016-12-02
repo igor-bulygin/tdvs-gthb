@@ -4,7 +4,8 @@
 	function controller($scope, productEvents, UtilService, productService) {
 		var vm = this;
 		vm.has_error = UtilService.has_error;
-		vm.isZeroOrLess = isZeroOrLess;
+		vm.priceStockValuesValidation = priceStockValuesValidation;
+
 		var set_original_artwork = false;
 
 		function parseTitles() {
@@ -97,7 +98,8 @@
 							weight: 0,
 							width: 0,
 							height: 0,
-							length: 0
+							length: 0,
+							available: true
 						});
 					}
 				}
@@ -110,15 +112,18 @@
 						weight: 0,
 						width: 0,
 						height: 0,
-						length: 0
+						length: 0,
+						available: true
 					})
 				}
 				parseTitles();
 			}
 		}
 
-		function isZeroOrLess(value) {
-			return value <= 0 ? true : false;
+		//show validation error only if value <= 0, if product is available and the form has been submitted
+		function priceStockValuesValidation(value, available) {
+			return UtilService.isZeroOrLess(value) && available && vm.form_submitted ? true : false;
+
 		}
 
 		//watches
@@ -156,6 +161,8 @@
 
 		$scope.$on(productEvents.requiredErrors, function (event, args) {
 			vm.form.$setSubmitted();
+			//vm.forms_submitted is true if we sent the form and we have to apply validations
+			vm.form_submitted = true;
 		})
 
 	}
