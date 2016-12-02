@@ -449,12 +449,12 @@ tags-input .tags .tag-item {
 	}
 }
 a.editable-click { 
-    color: $black!important;
+    color: $black;
     border-bottom: dotted 2px transparent!important;
 	border:0!important;
 }
 a.editable-click:hover { 
-    color: $black!important;
+    color: $black;
     border-bottom-color: transparent!important;
 	border:0!important;
 }

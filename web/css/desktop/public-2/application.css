@@ -4194,12 +4194,12 @@ tags-input .tags .tag-item {
   min-width: 35px; }
 
 a.editable-click {
-  color: #1C1919 !important;
+  color: #1C1919;
   border-bottom: dotted 2px transparent !important;
   border: 0 !important; }
 
 a.editable-click:hover {
-  color: #1C1919 !important;
+  color: #1C1919;
   border-bottom-color: transparent !important;
   border: 0 !important; }
 
