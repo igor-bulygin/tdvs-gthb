@@ -3,7 +3,7 @@
 
 	function controller($scope, productEvents, UtilService, productService) {
 		var vm = this;
-		vm.isZero = isZero;
+		vm.isZeroOrLess = isZeroOrLess;
 		var set_original_artwork = false;
 
 		function parseTitles() {
@@ -116,8 +116,8 @@
 			}
 		}
 
-		function isZero(value) {
-			return value === 0 ? true : false;
+		function isZeroOrLess(value) {
+			return value <= 0 ? true : false;
 		}
 
 		//watches
