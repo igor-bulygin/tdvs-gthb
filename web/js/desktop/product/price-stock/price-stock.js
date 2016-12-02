@@ -3,6 +3,7 @@
 
 	function controller($scope, productEvents, UtilService, productService) {
 		var vm = this;
+		vm.has_error = UtilService.has_error;
 		vm.isZeroOrLess = isZeroOrLess;
 		var set_original_artwork = false;
 
@@ -152,6 +153,10 @@
 			})
 			delete vm.product.price_stock;
 		});
+
+		$scope.$on(productEvents.requiredErrors, function (event, args) {
+			vm.form.$setSubmitted();
+		})
 
 	}
 

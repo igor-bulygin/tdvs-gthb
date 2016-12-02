@@ -1,41 +1,43 @@
 <div class="card">
 	<span class="title">4/ Price &amp; Stock</span>
-	<div class="row items-row">
-		<label for="weight">Weight</label>
-		<ol class="nya-bs-select" ng-model="productPriceStockCtrl.product.weight_unit">
-			<li nya-bs-option="unit in productPriceStockCtrl.metric.weight">
-				<a href="#"><span ng-bind="unit"></span></a>
-			</li>
-		</ol>
-		<label for="dimension">Dimension</label>
-		<ol class="nya-bs-select" ng-model="productPriceStockCtrl.product.dimension_unit">
-			<li nya-bs-option="unit in productPriceStockCtrl.metric.size">
-				<a href="#"><span ng-bind="unit"></span></a>
-			</li>
-		</ol>
-	</div>
-	<table class="table product-table" ng-if="productPriceStockCtrl.product.price_stock.length > 0">
-		<thead>
-			<tr>
-				<th>Variation availability</th>
-				<th></th>
-				<th>SKU (Optional)</th>
-				<th>Weight</th>
-				<th>Package dimensions <p>Length Width Height</p></th>
-				<th>Stock</th>
-				<th>Price</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr ng-repeat="product in productPriceStockCtrl.product.price_stock">
-				<td ng-bind="productPriceStockCtrl.titles[$index]"></td>
-				<td><input type="checkbox" class="form-control" ng-model="product.available"></td>
-				<td><input type="text" class="form-control" ng-model="product.sku"></td>
-				<td><a href="#" editable-number="product.weight" buttons="no" blur="submit" e-min="0" class="ng-class:{'purple-text': productPriceStockCtrl.isZeroOrLess(product.weight)}" ng-bind="(product.weight || 0)"></a>&nbsp;<span ng-if="productPriceStockCtrl.product.weight_unit" ng-bind="productPriceStockCtrl.product.weight_unit"></span></td>
-				<td><a href="#" editable-number="product.length" buttons="no" blur="submit" e-min="0" class="ng-class:{'purple-text': productPriceStockCtrl.isZeroOrLess(product.length)}" ng-bind="(product.length || 0)"></a>&nbsp;<span ng-if="productPriceStockCtrl.product.dimension_unit" ng-bind="productPriceStockCtrl.product.dimension_unit"></span>&nbsp;x&nbsp;<a href="#" editable-number="product.width" buttons="no" blur="submit" e-min="0" class="ng-class:{'purple-text': productPriceStockCtrl.isZeroOrLess(product.width)}" ng-bind="(product.width || 0)"></a></span>&nbsp;<span ng-if="productPriceStockCtrl.product.dimension_unit" ng-bind="productPriceStockCtrl.product.dimension_unit"></span>&nbsp;x&nbsp;<a href="#" editable-number="product.height" buttons="no" blur="submit" e-min="0" class="ng-class:{'purple-text': productPriceStockCtrl.isZeroOrLess(product.height)}" ng-bind="(product.height || 0)"></a>&nbsp;<span ng-if="productPriceStockCtrl.product.dimension_unit" ng-bind="productPriceStockCtrl.product.dimension_unit"></span></td>
-				<td><a href="#" editable-number="product.stock" buttons="no" blur="submit" e-min="0" class="ng-class:{'purple-text': productPriceStockCtrl.isZeroOrLess(product.stock)}" ng-bind="(product.stock || 0)"></a></td>
-				<td>€ <a href="#" editable-number="product.price" buttons="no" blur="submit" e-min="0" class="ng-class:{'purple-text': productPriceStockCtrl.isZeroOrLess(product.price)}" ng-bind="(product.price || 0)"></a></span></td>
-			</tr>
-		</tbody>
-	</table>
+	<form name="productPriceStockCtrl.form" novalidate>
+		<div class="row items-row">
+			<label for="weight">Weight</label>
+			<ol class="nya-bs-select categories-select ng-class:{'purple': productPriceStockCtrl.has_error(productPriceStockCtrl.form, productPriceStockCtrl.form.weight_unit)}" ng-model="productPriceStockCtrl.product.weight_unit" name="weight_unit" required>
+				<li nya-bs-option="unit in productPriceStockCtrl.metric.weight">
+					<a href="#"><span ng-bind="unit"></span></a>
+				</li>
+			</ol>
+			<label for="dimension">Dimension</label>
+			<ol class="nya-bs-select categories-select ng-class:{'purple': productPriceStockCtrl.has_error(productPriceStockCtrl.form, productPriceStockCtrl.form.dimension_unit)}" ng-model="productPriceStockCtrl.product.dimension_unit" name="dimension_unit" required>
+				<li nya-bs-option="unit in productPriceStockCtrl.metric.size">
+					<a href="#"><span ng-bind="unit"></span></a>
+				</li>
+			</ol>
+		</div>
+		<table class="table product-table" ng-if="productPriceStockCtrl.product.price_stock.length > 0">
+			<thead>
+				<tr>
+					<th>Variation availability</th>
+					<th></th>
+					<th>SKU (Optional)</th>
+					<th>Weight</th>
+					<th>Package dimensions <p>Length Width Height</p></th>
+					<th>Stock</th>
+					<th>Price</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="product in productPriceStockCtrl.product.price_stock">
+					<td ng-bind="productPriceStockCtrl.titles[$index]"></td>
+					<td><input type="checkbox" class="form-control" ng-model="product.available"></td>
+					<td><input type="text" class="form-control" ng-model="product.sku"></td>
+					<td><a href="#" editable-number="product.weight" buttons="no" blur="submit" e-min="0" class="ng-class:{'purple-text': productPriceStockCtrl.isZeroOrLess(product.weight)}" ng-bind="(product.weight || 0)"></a>&nbsp;<span ng-if="productPriceStockCtrl.product.weight_unit" ng-bind="productPriceStockCtrl.product.weight_unit"></span></td>
+					<td><a href="#" editable-number="product.length" buttons="no" blur="submit" e-min="0" class="ng-class:{'purple-text': productPriceStockCtrl.isZeroOrLess(product.length)}" ng-bind="(product.length || 0)"></a>&nbsp;<span ng-if="productPriceStockCtrl.product.dimension_unit" ng-bind="productPriceStockCtrl.product.dimension_unit"></span>&nbsp;x&nbsp;<a href="#" editable-number="product.width" buttons="no" blur="submit" e-min="0" class="ng-class:{'purple-text': productPriceStockCtrl.isZeroOrLess(product.width)}" ng-bind="(product.width || 0)"></a></span>&nbsp;<span ng-if="productPriceStockCtrl.product.dimension_unit" ng-bind="productPriceStockCtrl.product.dimension_unit"></span>&nbsp;x&nbsp;<a href="#" editable-number="product.height" buttons="no" blur="submit" e-min="0" class="ng-class:{'purple-text': productPriceStockCtrl.isZeroOrLess(product.height)}" ng-bind="(product.height || 0)"></a>&nbsp;<span ng-if="productPriceStockCtrl.product.dimension_unit" ng-bind="productPriceStockCtrl.product.dimension_unit"></span></td>
+					<td><a href="#" editable-number="product.stock" buttons="no" blur="submit" e-min="0" class="ng-class:{'purple-text': productPriceStockCtrl.isZeroOrLess(product.stock)}" ng-bind="(product.stock || 0)"></a></td>
+					<td>€ <a href="#" editable-number="product.price" buttons="no" blur="submit" e-min="0" class="ng-class:{'purple-text': productPriceStockCtrl.isZeroOrLess(product.price)}" ng-bind="(product.price || 0)"></a></span></td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
 </div>

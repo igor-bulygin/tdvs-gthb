@@ -145,7 +145,6 @@
 				if(angular.isArray(vm.product.media.photos) && vm.product.media.photos.length === 0) {
 					required.push('photos');
 				}
-
 				if(angular.isArray(vm.product.media.photos) && vm.product.media.photos.length > 0 && !main_photo) {
 					required.push('main_photo');
 				}
@@ -153,6 +152,15 @@
 				//description
 				if(!vm.product.description || !vm.product.description['en-US']) {
 					required.push('description');
+				}
+
+				//weight_unit
+				if(!vm.product.weight_unit) {
+					required.push('weight_unit');
+				}
+				//dimension_unit
+				if(!vm.product.dimension_unit) {
+					required.push('dimension_unit');
 				}
 			} else {
 				//check for null categories
