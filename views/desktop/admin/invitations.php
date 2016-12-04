@@ -51,6 +51,9 @@ $this->title = 'Todevise / Admin / Invitations';
 				'options' => [
 					'class' => 'funiv fc-fff fs1-071',
 				],
+				'tableOptions' => [
+						'class' => 'table table-bordered',
+				],
 				'pager' => [
 					'options' => [
 						'class' => 'pagination flex flex-justify-center'
