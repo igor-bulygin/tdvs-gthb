@@ -12,6 +12,18 @@ class ProductPhoto extends Model
 	public $name;
 
 	/**
+	 * @var array
+	 */
+	public $tags;
+
+	/**
+	 * @deprecated This property was found in a bucle of products, at this moment, I dont know what it is for
+	 *
+	 * @var boolean
+	 */
+	public $not_uploaded;
+
+	/**
 	 * @var boolean
 	 */
 	public $main_product_photo;
