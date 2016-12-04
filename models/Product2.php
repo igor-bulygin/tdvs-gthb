@@ -204,6 +204,14 @@ class Product2 extends Product {
 		}
 		$this->setAttribute("slug", $slugs);
 
+		if (!$this->preorder['type']) {
+			// Remove ship and end fields if "type" is no (no preorder)
+			$preorder = $this->preorder;
+			unset($preorder['ship']);
+			unset($preorder['end']);
+			$this->setAttribute('preorder', $preorder);
+		}
+
         if (empty($this->product_state)) {
             $this->product_state = Product2::PRODUCT_STATE_DRAFT;
         }
@@ -316,6 +324,16 @@ class Product2 extends Product {
             [   'mediaFiles', 'app\validators\EmbedDocValidator'], // to apply rules
             [   'faq', 'safe'], // to load data posted from WebServices
             [   'faqInfo', 'app\validators\EmbedDocValidator'], // to apply rules
+			[
+				'preorder',
+				'app\validators\PreorderValidator',
+				'on' => [self::SCENARIO_PRODUCT_DRAFT, self::SCENARIO_PRODUCT_PUBLIC],
+			],
+			[
+				'madetoorder',
+				'app\validators\MadeToOrderValidator',
+				'on' => [self::SCENARIO_PRODUCT_DRAFT, self::SCENARIO_PRODUCT_PUBLIC],
+			],
 
 
 //			[
@@ -815,12 +833,14 @@ class Product2 extends Product {
 	 */
 	public function getWarrantyLabel()
 	{
-		$warrantyType = $this->warranty["type"];
 		$label = '';
-		if (($warrantyType != Warranty::NONE) && (array_key_exists("value", $this->warranty))) {
-			$label .= $this->warranty["value"] . ' ';
+		if (!empty($this->warranty)) {
+			$warrantyType = $this->warranty["type"];
+			if (($warrantyType != Warranty::NONE) && (array_key_exists("value", $this->warranty))) {
+				$label .= $this->warranty["value"] . ' ';
+			}
+			$label .= Warranty::getDescription($this->warranty["type"]);
 		}
-		$label .= Warranty::getDescription($this->warranty["type"]);
 		return $label;
 	}
 
