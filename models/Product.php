@@ -605,12 +605,14 @@ class Product extends CActiveRecord {
 	 */
 	public function getWarrantyLabel()
 	{
-		$warrantyType = $this->warranty["type"];
 		$label = '';
-		if (($warrantyType != Warranty::NONE) && (array_key_exists("value", $this->warranty))) {
-			$label .= $this->warranty["value"] . ' ';
+		if (!empty($this->warranty)) {
+			$warrantyType = $this->warranty["type"];
+			if (($warrantyType != Warranty::NONE) && (array_key_exists("value", $this->warranty))) {
+				$label .= $this->warranty["value"] . ' ';
+			}
+			$label .= Warranty::getDescription($this->warranty["type"]);
 		}
-		$label .= Warranty::getDescription($this->warranty["type"]);
 		return $label;
 	}
 

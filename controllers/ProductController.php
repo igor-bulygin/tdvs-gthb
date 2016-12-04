@@ -1,6 +1,7 @@
 <?php
 namespace app\controllers;
 
+use app\models\Product2;
 use Yii;
 use app\models\Tag;
 use app\models\Lang;
@@ -117,6 +118,19 @@ class ProductController extends CController {
 		}
 		Yii::$app->response->setStatusCode(200); // Success, without body
 		var_dump("done (" . $cant . ")");
+	}
+
+	public function actionFixProducts()
+	{
+		ini_set('memory_limit', '2048M');
+
+		Product2::setSerializeScenario(Product2::SERIALIZE_SCENARIO_OWNER);
+		$products = Product2::findSerialized();
+		foreach ($products as $product) {
+			// saving the product, we force to create any missing short_id on price&stock
+			$product->save();
+		}
+		Yii::$app->response->setStatusCode(200); // Success, without body
 	}
 
 }
