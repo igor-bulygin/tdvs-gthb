@@ -452,6 +452,10 @@ a.editable-click {
     color: $black!important;
     border-bottom: dotted 2px transparent!important;
 	border:0!important;
+	display: inline-block;
+    margin-top: 7px;
+    text-align: right;
+    width: 15px;
 }
 a.editable-click:hover { 
     color: $black!important;

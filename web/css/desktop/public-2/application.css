@@ -4196,7 +4196,11 @@ tags-input .tags .tag-item {
 a.editable-click {
   color: #1C1919 !important;
   border-bottom: dotted 2px transparent !important;
-  border: 0 !important; }
+  border: 0 !important;
+  display: inline-block;
+  margin-top: 7px;
+  text-align: right;
+  width: 15px; }
 
 a.editable-click:hover {
   color: #1C1919 !important;
