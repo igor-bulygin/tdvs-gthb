@@ -16,6 +16,8 @@
 		vm.sizesSelect = sizesSelect;
 		vm.limitTagOption = limitTagOption;
 		vm.deleteOption = deleteOption;
+		vm.addSizeToSizechart = addSizeToSizechart;
+		vm.deleteSizeFromSizechart = deleteSizeFromSizechart;
 
 		//vars
 		vm.tag_order = ['Color', 'Material', 'Size', 'Style'];
@@ -130,7 +132,7 @@
 		function deviserSizecharts() { 
 			vm.sizecharts.forEach(function(element) {
 					if(element.type == 1) //&& element.deviser_id == vm.product.deviser_id) || IMPORTANT, the comment is for test only.
-						vm.deviserSizecharts.push(element)	
+						vm.deviserSizecharts.push(element)
 				});
 		}
 
@@ -146,15 +148,24 @@
 				values: []
 			};
 			vm.product.sizechart.columns = angular.copy(sizechart.columns);
+			vm.sizechart_empty = angular.copy(vm.product.sizechart);
 			var pos = sizechart.countries.indexOf(country);
 			if(pos > -1){
 				for(var i = 0; i < sizechart.values.length; i++) {
-					vm.product.sizechart.values.push([sizechart.values[i][pos]]);
+					vm.sizechart_empty.values.push([sizechart.values[i][pos]]);
 					for(var j = sizechart.countries.length; j < sizechart.values[i].length; j++) {
-						vm.product.sizechart.values[i].push(sizechart.values[i][j]);
+						vm.sizechart_empty.values[i].push(sizechart.values[i][j]);
 					}
 				}
 			}
+		}
+
+		function addSizeToSizechart(pos) {
+			vm.product.sizechart.values.push(vm.sizechart_empty.values[pos]);
+		}
+
+		function deleteSizeFromSizechart(pos) {
+			vm.product.sizechart.values.splice(pos, 1);
 		}
 
 		//watchs
@@ -174,10 +185,11 @@
 				var values = productService.searchPrintSizechartsOnCategory(vm.categories, element);
 				if(values[0])
 					vm.prints = true;
-				if(values[1])
+				if(values[1]) {
 					vm.show_sizecharts = true;
 					if(vm.product.sizechart)
 						delete vm.product.sizechart;
+				}
 			});
 		});
 

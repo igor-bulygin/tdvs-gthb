@@ -205,11 +205,11 @@
 					</div>
 					<div class="col-md-3 pad-about">
 						<ol class="nya-bs-select" ng-model="productVariationsCtrl.size_to_add">
-							<li nya-bs-option="size in productVariationsCtrl.product.sizechart.values">
+							<li nya-bs-option="size in productVariationsCtrl.sizechart_empty.values" data-value="$index">
 								<a><span ng-bind="size[0]"></span></a>
 							</li>
 						</ol>
-						<a href="" ng-click="" class="ion-plus red-plus"></a>
+						<a href="#" ng-click="productVariationsCtrl.addSizeToSizechart(productVariationsCtrl.size_to_add)" class="ion-plus red-plus"></a>
 					</div>
 					<div class="col-md-3">
 						<span>What scale are your size in?</span>
@@ -232,7 +232,7 @@
 					<tbody>
 						<tr ng-repeat="line in productVariationsCtrl.product.sizechart.values track by $index">
 							<td ng-repeat="value in line track by $index" class="col-md-2">
-								<span ng-if="$first" ng-bind="value"></span>
+								<span ng-if="$first" ng-bind="value"></span><span ng-if="$first" class="glyphicon glyphicon-remove close-row" ng-click="productVariationsCtrl.deleteSizeFromSizechart($index)"></span>
 								<input ng-if="!$first" type="number" class="form-control" ng-model="value">&nbsp;<span ng-if="!$first && productVariationsCtrl.product.sizechart.metric_unit" ng-bind="productVariationsCtrl.product.sizechart.metric_unit"></span></td>
 						</tr>
 					</tbody>
