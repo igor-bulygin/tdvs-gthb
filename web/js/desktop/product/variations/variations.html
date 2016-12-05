@@ -123,7 +123,7 @@
 				</div>
 				<div class="mt-50" ng-if="productVariationsCtrl.made_to_order_selected" ng-cloak>
 					<div class="col-md-2">
-						<input type="number" name="madetoorder" class="form-control rounded-number-input col-md-1" ng-model="productVariationsCtrl.product['madetoorder'].value" ng-min="0" ng-required="true">
+						<input type="number" name="madetoorder" class="form-control rounded-number-input col-md-1 ng-class:{'error-input': !productVariationsCtrl.product['madetoorder'].value && productVariationsCtrl.required_madetoorder}" ng-model="productVariationsCtrl.product['madetoorder'].value" ng-min="0" ng-required="true">
 					</div>
 					<label class="little-label-number" for="madetoorder">days needed to manufacture this work</label>
 				</div>

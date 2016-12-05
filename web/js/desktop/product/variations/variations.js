@@ -231,6 +231,15 @@
 		$scope.$on(productEvents.requiredErrors, function (event, args) {
 			//vm.forms_submitted is true if we sent the form and we have to apply validations
 			vm.form_submitted = true;
+			if(args.required.indexOf('madetoorder') > -1) {
+				vm.required_madetoorder = true;
+			}
+			if(args.required.indexOf('preorder') > -1) {
+				vm.required_preorder = true; 
+			}
+			if(args.required.indexOf('bespoke') > -1) {
+				vm.required_bespoke = true;
+			}
 		});
 
 		//tag orders
