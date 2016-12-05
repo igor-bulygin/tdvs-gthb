@@ -25,6 +25,9 @@ use yii\helpers\FileHelper;
  * @property array description
  * @property array categories
  * @property ProductMedia $mediaFiles
+ * @property Preorder $preorderInfo
+ * @property MadeToOrder $madeToOrderInfo
+ * @property Bespoke $bespokeInfo
  * @property FaqQuestion[] $faqInfo
 *
  * @property array collections
@@ -155,6 +158,21 @@ class Product2 extends Product {
         return $this->mapEmbeddedList('faq', FaqQuestion::className(), array('unsetSource' => false));
     }
 
+	public function embedPreorderInfo()
+	{
+		return $this->mapEmbedded('preorder', Preorder::className(), array('unsetSource' => false));
+	}
+
+	public function embedMadeToOrderInfo()
+	{
+		return $this->mapEmbedded('madetoorder', MadeToOrder::className(), array('unsetSource' => false));
+	}
+
+//	public function embedBespokeInfo()
+//	{
+//		return $this->mapEmbedded('bespoke', Bespoke::className(), array('unsetSource' => false));
+//	}
+
     /**
      * Load sub documents after find the object
      *
@@ -168,6 +186,9 @@ class Product2 extends Product {
 	public function beforeValidate()
 	{
 		$this->mediaFiles->setProduct($this);
+		$this->preorderInfo->setProduct($this);
+		$this->madeToOrderInfo->setProduct($this);
+//		$this->bespokeInfo->setProduct($this);
 		return parent::beforeValidate();
 	}
 
@@ -203,14 +224,6 @@ class Product2 extends Product {
 			$slugs[$lang] = Slugger::slugify($text);
 		}
 		$this->setAttribute("slug", $slugs);
-
-		if (!$this->preorder['type']) {
-			// Remove ship and end fields if "type" is no (no preorder)
-			$preorder = $this->preorder;
-			unset($preorder['ship']);
-			unset($preorder['end']);
-			$this->setAttribute('preorder', $preorder);
-		}
 
         if (empty($this->product_state)) {
             $this->product_state = Product2::PRODUCT_STATE_DRAFT;
@@ -324,25 +337,12 @@ class Product2 extends Product {
             [   'mediaFiles', 'app\validators\EmbedDocValidator'], // to apply rules
             [   'faq', 'safe'], // to load data posted from WebServices
             [   'faqInfo', 'app\validators\EmbedDocValidator'], // to apply rules
-			[
-				'preorder',
-				'app\validators\PreorderValidator',
-				'on' => [self::SCENARIO_PRODUCT_DRAFT, self::SCENARIO_PRODUCT_PUBLIC],
-			],
-			[
-				'madetoorder',
-				'app\validators\MadeToOrderValidator',
-				'on' => [self::SCENARIO_PRODUCT_DRAFT, self::SCENARIO_PRODUCT_PUBLIC],
-			],
-
-
-//			[
-//				['references'],
-//				'app\validators\EmbedDocValidator',
-//				'required',
-//				'on' => [self::SCENARIO_PRODUCT_OLD_API, self::SCENARIO_PRODUCT_DRAFT, self::SCENARIO_PRODUCT_PUBLIC],
-//				'model' => '\app\models\ProductReference'
-//			],
+			[   'preorder', 'safe'], // to load data posted from WebServices
+			[   'preorderInfo', 'app\validators\EmbedDocValidator'], // to apply rules
+			[   'madetoorder', 'safe'], // to load data posted from WebServices
+			[   'madeToOrderInfo', 'app\validators\EmbedDocValidator'], // to apply rules
+			[   'bespoke', 'safe'], // to load data posted from WebServices
+//			[   'bespokeInfo', 'app\validators\EmbedDocValidator'], // to apply rules
         ];
     }
 
@@ -869,6 +869,18 @@ class Product2 extends Product {
             $this->mediaFiles->load($data, 'media');
         }
 
+		if (array_key_exists('preorder', $data)) {
+			$this->preorderInfo->load($data, 'preorder');
+		}
+
+		if (array_key_exists('madetoorder', $data)) {
+			$this->madeToOrderInfo->load($data, 'madetoorder');
+		}
+
+//		if (array_key_exists('bespoke', $data)) {
+//			$this->bespokeInfo->load($data, 'madetoorder');
+//		}
+
 		// use position behavior method to move it (only if it has primary key)
 		// commented until be needed...
 //		if (array_key_exists("position", $data) && $data['id']) {
@@ -909,6 +921,7 @@ class Product2 extends Product {
                     if (strpos($error[0], 'cannot be blank') !== false || strpos($error[0], 'no puede estar vacío') !== false) {
                         $this->addError("required", $attribute);
                     }
+					$this->addError("fields", $attribute);
                     break;
             }
         };
