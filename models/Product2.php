@@ -1,22 +1,14 @@
 <?php
 namespace app\models;
 
-use app\models\Warranty;
+use app\helpers\Utils;
 use EasySlugger\Slugger;
 use Exception;
 use MongoDate;
 use Yii;
-use app\helpers\Utils;
-use app\helpers\CActiveRecord;
-use yii\mongodb\ActiveQuery;
-use yii\mongodb\Collection;
-use yii\mongodb\Connection;
-use yii\mongodb\rbac\MongoDbManager;
-use yii\web\IdentityInterface;
-use yii\base\NotSupportedException;
-use yii2tech\ar\position\PositionBehavior;
-use yii2tech\embedded\Mapping;
 use yii\helpers\FileHelper;
+use yii\mongodb\ActiveQuery;
+use yii2tech\ar\position\PositionBehavior;
 
 /**
  * @property string deviser_id
@@ -41,6 +33,7 @@ use yii\helpers\FileHelper;
  * @property array warranty
  * @property string currency
  * @property string weight_unit
+ * @property string dimension_unit
  * @property array price_stock
  * @property array tags
  * @property array references
@@ -102,6 +95,7 @@ class Product2 extends Product {
 			'warranty',
 			'currency',
 			'weight_unit',
+			'dimension_unit',
 			'price_stock',
 			'tags',
 			'position',
@@ -142,6 +136,7 @@ class Product2 extends Product {
 		$this->warranty = [];
 		$this->currency = "";
 		$this->weight_unit = "";
+		$this->dimension_unit = "";
 		$this->price_stock = [];
 		$this->tags = [];
 		$this->references = [];
@@ -305,6 +300,7 @@ class Product2 extends Product {
 					'warranty',
 					'currency',
 					'weight_unit',
+					'dimension_unit',
 					'price_stock',
 					'tags',
                     'position',
@@ -346,6 +342,21 @@ class Product2 extends Product {
 			[
 				'options',
 				'app\validators\OptionsValidator',
+				'on' => [self::SCENARIO_PRODUCT_DRAFT, self::SCENARIO_PRODUCT_PUBLIC],
+			],
+			[
+				'price_stock',
+				'app\validators\PriceStockValidator',
+				'on' => [self::SCENARIO_PRODUCT_DRAFT, self::SCENARIO_PRODUCT_PUBLIC],
+			],
+			[
+				'weight_unit',
+				'app\validators\WeightUnitValidator',
+				'on' => [self::SCENARIO_PRODUCT_DRAFT, self::SCENARIO_PRODUCT_PUBLIC],
+			],
+			[
+				'dimension_unit',
+				'app\validators\DimensionUnitValidator',
 				'on' => [self::SCENARIO_PRODUCT_DRAFT, self::SCENARIO_PRODUCT_PUBLIC],
 			],
         ];
@@ -392,6 +403,7 @@ class Product2 extends Product {
 					'warranty',
 					'currency',
 					'weight_unit',
+					'dimension_unit',
 					'references',
 					'options' => 'productOptions',
 					'url_images' => 'urlImagesLocation',
@@ -428,6 +440,7 @@ class Product2 extends Product {
 					'warranty',
 					'currency',
 					'weight_unit',
+					'dimension_unit',
 					'references',
 					'options',
 					'url_images' => 'urlImagesLocation',
@@ -466,6 +479,7 @@ class Product2 extends Product {
 					'warranty',
 					'currency',
 					'weight_unit',
+					'dimension_unit',
 					'price_stock',
 					'tags',
 					'url_images' => 'urlImagesLocation',
