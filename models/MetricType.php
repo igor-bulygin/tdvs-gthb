@@ -2,7 +2,6 @@
 namespace app\models;
 
 use Yii;
-use app\models\MetricUnit;
 
 class MetricType {
 	/*
@@ -40,5 +39,25 @@ class MetricType {
 		$object->weight = $units[MetricType::WEIGHT];
 
 		return $object;
+	}
+
+	/**
+	 * Returns all available dimensions
+	 *
+	 * @return array
+	 */
+	public static function getAvailableDimensions() {
+		$units = self::UNITS;
+		return $units[self::SIZE];
+	}
+
+	/**
+	 * Returns all available weights
+	 *
+	 * @return array
+	 */
+	public static function getAvailableWeights() {
+		$units = self::UNITS;
+		return $units[self::WEIGHT];
 	}
 }
