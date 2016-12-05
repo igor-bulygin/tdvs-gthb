@@ -9,6 +9,7 @@
 		vm.setPreorder = setPreorder;
 		vm.setPreorderEnd = setPreorderEnd;
 		vm.setPreorderShip = setPreorderShip;
+		vm.setBespoke = setBespoke;
 		vm.deleteSize = deleteSize;
 		vm.addSize = addSize;
 		vm.addType = addType;
@@ -50,7 +51,10 @@
 				if(!vm.product.prints) {
 					vm.product.prints={
 						type: [[]],
-						sizes: [{}]
+						sizes: [{
+							width: 0,
+							length: 0
+						}]
 					}
 				} else {
 					vm.product.prints = angular.copy(vm.prints_copy);
@@ -79,8 +83,19 @@
 			vm.product.preorder['ship'] = newDate;
 		}
 
+		function setBespoke(value) {
+			if(value) {
+				vm.product.bespoke = {
+					type: 1,
+					value: {}
+				}
+			} else {
+				delete vm.product.bespoke;
+			}
+		}
+
 		function addSize() {
-			vm.product.prints.sizes.push({});
+			vm.product.prints.sizes.push({width:0,length:0});
 		}
 
 		function addType() {
