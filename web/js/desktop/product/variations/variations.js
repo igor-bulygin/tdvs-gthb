@@ -84,14 +84,7 @@
 		}
 
 		function setBespoke(value) {
-			if(value) {
-				vm.product.bespoke = {
-					type: 1,
-					value: {}
-				}
-			} else {
-				delete vm.product.bespoke;
-			}
+			vm.product['bespoke']['type'] = value ? 1 : 0;
 		}
 
 		function addSize() {
@@ -238,7 +231,7 @@
 		$scope.$on(productEvents.requiredErrors, function (event, args) {
 			//vm.forms_submitted is true if we sent the form and we have to apply validations
 			vm.form_submitted = true;
-		})
+		});
 
 		//tag orders
 		function tagComparator(option) {
