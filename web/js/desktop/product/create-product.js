@@ -253,7 +253,7 @@
 					vm.product.$save()
 						.then(function (dataSaved) {
 							toastr.success('Saved!');
-							var options_to_convert = ['name', 'description', 'slug', 'sizechart', 'preorder', 'returns', 'warranty'];
+							var options_to_convert = ['name', 'description', 'slug', 'sizechart', 'preorder', 'returns', 'warranty', 'bespoke'];
 							for(var i=0; i < options_to_convert.length; i++) {
 								vm.product[options_to_convert[i]] = UtilService.emptyArrayToObject(vm.product[options_to_convert[i]]);
 							}
