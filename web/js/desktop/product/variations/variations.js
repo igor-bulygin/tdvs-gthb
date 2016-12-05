@@ -140,7 +140,7 @@
 			vm.countriesAvailable = angular.copy(sizechart.countries);
 		}
 
-		//In this function we select all the data for populate the table, we should rename it for give it a better notion of his work
+		//creates both a new empty sizechart and a new helper empty sizechart
 		function sizesSelect(sizechart, country) {
 			vm.product.sizechart = {
 				country: country,
@@ -149,10 +149,12 @@
 			};
 			vm.product.sizechart.columns = angular.copy(sizechart.columns);
 			vm.sizechart_empty = angular.copy(vm.product.sizechart);
+			vm.sizechart_available_values = [];
 			var pos = sizechart.countries.indexOf(country);
 			if(pos > -1){
 				for(var i = 0; i < sizechart.values.length; i++) {
 					vm.sizechart_empty.values.push([sizechart.values[i][pos]]);
+					vm.sizechart_available_values[i] = true;
 					for(var j = sizechart.countries.length; j < sizechart.values[i].length; j++) {
 						vm.sizechart_empty.values[i].push(sizechart.values[i][j]);
 					}
@@ -162,9 +164,15 @@
 
 		function addSizeToSizechart(pos) {
 			vm.product.sizechart.values.push(vm.sizechart_empty.values[pos]);
+			vm.sizechart_available_values[pos] = false;
+			vm.size_to_add=null;
 		}
 
 		function deleteSizeFromSizechart(pos) {
+			for(var i = 0; i < vm.sizechart_empty.values.length; i++) {
+				if(vm.sizechart_empty.values[i][0] == vm.product.sizechart.values[pos][0])
+					vm.sizechart_available_values[i] = true;
+			}
 			vm.product.sizechart.values.splice(pos, 1);
 		}
 
