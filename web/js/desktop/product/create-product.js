@@ -21,6 +21,9 @@
 			vm.product.preorder = {
 				type: 0
 			};
+			vm.product.bespoke = {
+				type: 0
+			};
 			vm.product.tags = {};
 			vm.product.price_stock = [];
 
@@ -162,6 +165,39 @@
 							!element.answer['en-US'] ||
 							element.answer['en-US'] === "") {
 								required.push('faq');
+						}
+					})
+				}
+
+				//manufacturing options
+				//madetoorder
+				if(angular.isObject(vm.product.madetoorder) && vm.product.madetoorder.type==1) {
+					if(vm.product.madetoorder.value == null || vm.product.madetoorder.value == undefined || typeof(vm.product.madetoorder.value) !== "number" || vm.product.madetoorder.value <= 0) {
+						required.push('madetoorder');
+					}
+				}
+
+				//preorder
+				if(angular.isObject(vm.product.preorder) && vm.product.preorder.type==1) {
+					if(!vm.product.preorder.ship || !vm.product.preorder.end) {
+						required.push('preorder');
+					}
+				}
+
+				//bespoke
+				if(angular.isObject(vm.product.bespoke) && vm.product.bespoke.type==1) {
+					if(!vm.product.bespoke.value || !vm.product.bespoke.value['en-US'] || vm.product.bespoke.value['en-US'] == "") {
+						required.push('bespoke');
+					}
+				}
+
+				//sizecharts
+				if(angular.isObject(vm.product.sizechart)) {
+					if(!vm.product.sizechart.metric_unit)
+						required.push('metric_unit');
+					vm.product.sizechart.values.forEach(function (element) {
+						if(element.indexOf(0)>-1) {
+							required.push('sizechart_values');
 						}
 					})
 				}
