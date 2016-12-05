@@ -128,7 +128,7 @@
 
 		//watches
 		$scope.$watch('productPriceStockCtrl.product.prints', function(newValue, oldValue) {
-			if(angular.isObject(newValue)) {
+			if(angular.isObject(newValue) || (!newValue && angular.isObject(oldValue))) {
 				createTable();
 			}
 		}, true);

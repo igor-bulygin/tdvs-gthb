@@ -9,6 +9,7 @@
 		vm.setPreorder = setPreorder;
 		vm.setPreorderEnd = setPreorderEnd;
 		vm.setPreorderShip = setPreorderShip;
+		vm.setBespoke = setBespoke;
 		vm.deleteSize = deleteSize;
 		vm.addSize = addSize;
 		vm.addType = addType;
@@ -19,6 +20,7 @@
 		vm.addSizeToSizechart = addSizeToSizechart;
 		vm.deleteSizeFromSizechart = deleteSizeFromSizechart;
 		vm.sizechartValuesValidation = sizechartValuesValidation;
+		vm.optionValidation = optionValidation;
 
 		//vars
 		vm.tag_order = ['Color', 'Material', 'Size', 'Style'];
@@ -45,9 +47,21 @@
 
 		function setPrintsSelected(value) {
 			vm.show_prints = value;
-			vm.product.prints={
-				type: [[]],
-				sizes: [{}]
+			if(value) {
+				if(!vm.product.prints) {
+					vm.product.prints={
+						type: [[]],
+						sizes: [{
+							width: 0,
+							length: 0
+						}]
+					}
+				} else {
+					vm.product.prints = angular.copy(vm.prints_copy);
+				}
+			} else {
+				vm.prints_copy = angular.copy(vm.product.prints);
+				delete vm.product.prints;
 			}
 		}
 
@@ -69,8 +83,19 @@
 			vm.product.preorder['ship'] = newDate;
 		}
 
+		function setBespoke(value) {
+			if(value) {
+				vm.product.bespoke = {
+					type: 1,
+					value: {}
+				}
+			} else {
+				delete vm.product.bespoke;
+			}
+		}
+
 		function addSize() {
-			vm.product.prints.sizes.push({});
+			vm.product.prints.sizes.push({width:0,length:0});
 		}
 
 		function addType() {
@@ -178,7 +203,11 @@
 		}
 
 		function sizechartValuesValidation(value) {
-			return UtilService.isZeroOrLess(value);
+			return UtilService.isZeroOrLess(value) && vm.form_submitted;
+		}
+
+		function optionValidation(option) {
+			return option.length <= 0 && vm.form_submitted;
 		}
 
 		//watchs
@@ -206,7 +235,12 @@
 			});
 		});
 
-		//orders
+		$scope.$on(productEvents.requiredErrors, function (event, args) {
+			//vm.forms_submitted is true if we sent the form and we have to apply validations
+			vm.form_submitted = true;
+		})
+
+		//tag orders
 		function tagComparator(option) {
 			if(vm.tag_order.indexOf(option.name) > -1)
 				return vm.tag_order.indexOf(option.name)

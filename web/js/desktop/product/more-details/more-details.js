@@ -47,8 +47,8 @@
 
 		function deleteQuestion(index) {
 			vm.product.faq.splice(index, 1);
-			vm.faq_selected.splice(index, 1);
-			if(vm.product.faq.length===0)
+			vm.faq_helper.splice(index, 1);
+			if(vm.product.faq.length === 0)
 				vm.faq_selected = false;
 		}
 

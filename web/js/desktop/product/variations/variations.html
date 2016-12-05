@@ -14,9 +14,9 @@
 					</div>
 					<div class="mb-20 col-md-8 ng-class:{'col-md-offset-4': $index > 0}" ng-repeat="item in productVariationsCtrl.product.options[tag.id] track by $index">
 						<span>{{$index+1}}:&nbsp;</span>
-						<ol class="nya-bs-select" ng-model="productVariationsCtrl.product.options[tag.id][$index]" multiple>
+						<ol class="nya-bs-select categories-select ng-class:{'purple': productVariationsCtrl.optionValidation(productVariationsCtrl.product.options[tag.id][$index])}" ng-model="productVariationsCtrl.product.options[tag.id][$index]" multiple>
 							<li nya-bs-option="option in tag.options" data-value="option.value" deep-watch="true" class="ng-class:{'disabled': productVariationsCtrl.product.options[tag.id][$index].length >= tag.n_options}">
-								<a><span ng-bind="option.text['en-US']"></span><span class="glyphicon glyphicon-ok check-mark"></span></a>
+								<a href="#"><span ng-bind="option.text['en-US']"></span><span class="glyphicon glyphicon-ok check-mark"></span></a>
 							</li>
 						</ol>
 						<span class="glyphicon glyphicon-remove close-row" ng-if="productVariationsCtrl.product.options[tag.id].length > 1" ng-click="productVariationsCtrl.deleteOption(tag.id, $index)"></span>
@@ -64,7 +64,7 @@
 									</ul>
 								</div>
 								<div ng-if="productVariationsCtrl.product.preorder.end">
-									<p class="date-variations">{{productVariationsCtrl.product.preorder.end | date: 'MMM dd yyyy'}}</p>
+									<p class="date-variations" ng-bind="(productVariationsCtrl.product.preorder.end | date: 'MMM dd yyyy')"></p>
 									<div class="dropdown">
 										<a href="#" data-target="#" class="dropdown-toggle-preorder red-text" id="preorderEnd" role="button" data-toggle="dropdown"><span class="glyphicon glyphicon-pencil"></span>&nbsp;<span>Change date</span></a>
 										<ul class="dropdown-menu" role="menu" aria-labelledby="preorderEnd">
@@ -88,7 +88,7 @@
 									</ul>
 								</div>
 								<div ng-if="productVariationsCtrl.product.preorder.ship">
-									<p class="date-variations">{{productVariationsCtrl.product.preorder.ship | date: 'MMM dd yyyy'}}</p>
+									<p class="date-variations" ng-bind="(productVariationsCtrl.product.preorder.ship | date: 'MMM dd yyyy')"></p>
 									<div class="dropdown">
 										<a href="#" data-target="#" class="dropdown-toggle-preorder-ship red-text" id="preorderShip" role="button" data-toggle="dropdown">
 											<span class="glyphicon glyphicon-pencil"></span>&nbsp;<span>Change date</span>
@@ -134,13 +134,13 @@
 				</div>
 				<div class="col-md-8 pad-about">
 					<div class="radio radio-inline ml-30">
-						<input type="radio" name="bespoke_selected" id="bespoke_selected" value="bespoke_selected" ng-model="productVariationsCtrl.bespoke_selected" ng-value="true">
+						<input type="radio" name="bespoke_selected" id="bespoke_selected" value="bespoke_selected" ng-model="productVariationsCtrl.bespoke_selected" ng-value="true" ng-change="productVariationsCtrl.setBespoke(productVariationsCtrl.bespoke_selected)">
 						<label for="bespoke_selected">
 							YES
 						</label>
 					</div>
 					<div class="radio radio-inline">
-						<input type="radio" name="bespoke_unselected" id="bespoke_unselected" value="bespoke_unselected" ng-model="productVariationsCtrl.bespoke_selected" ng-value="false" checked>
+						<input type="radio" name="bespoke_unselected" id="bespoke_unselected" value="bespoke_unselected" ng-model="productVariationsCtrl.bespoke_selected" ng-value="false" checked ng-change="productVariationsCtrl.setBespoke(productVariationsCtrl.bespoke_selected)">
 						<label for="bespoke_unselected">
 							NO
 						</label>
@@ -153,7 +153,7 @@
 							<a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
 						</li>
 					</ol>
-					<textarea name="bespoke_text" id="bespoke_text" cols="30" rows="10" class="form-control manufacturing-textarea" ng-model="productVariationsCtrl.product.bespoke[productVariationsCtrl.bespoke_language]"></textarea>
+					<textarea name="bespoke_text" id="bespoke_text" cols="30" rows="10" class="form-control manufacturing-textarea" ng-model="productVariationsCtrl.product.bespoke.value[productVariationsCtrl.bespoke_language]"></textarea>
 				</div>
 			</div>
 		</div>
@@ -273,7 +273,7 @@
 							</div>
 							<div class="mb-20 col-md-10 pad-about ng-class:{'col-md-offset-2': $index > 0}" ng-repeat="type in productVariationsCtrl.product.prints.type track by $index">
 								<span>{{$index+1}}:&nbsp;</span>
-								<ol class="nya-bs-select categories-select col-md-4" ng-model="productVariationsCtrl.product.prints.type[$index]" multiple>
+								<ol class="nya-bs-select categories-select col-md-4 ng-class:{'purple': productVariationsCtrl.optionValidation(productVariationsCtrl.product.prints.type[$index])}" ng-model="productVariationsCtrl.product.prints.type[$index]" required>
 									<li nya-bs-option="paperType in productVariationsCtrl.papertypes" data-value="paperType.type">
 										<a href="#">
 											<span ng-bind="paperType.name"></span><span class="glyphicon glyphicon-ok check-mark"></span>
@@ -295,9 +295,9 @@
 							</div>
 							<div class="col-md-10 pad-about form-inline ng-class:{'col-md-offset-2': $index > 0}" ng-repeat="size in productVariationsCtrl.product.prints.sizes track by $index">
 								<span class="pull-left">{{$index+1}}:&nbsp;</span>
-								<label for="width" class="col-md-1" style="font-size: 12px;">Width</label><input name="width" type="number" class="form-control col-md-1" ng-model="productVariationsCtrl.product.prints.sizes[$index]['width']">
-								<label for="length" class="col-md-1" style="font-size: 12px;">Length</label><input name="length" type="number" class="form-control col-md-1" ng-model="productVariationsCtrl.product.prints.sizes[$index]['length']">
-								<ol class="nya-bs-select categories-select col-md-2" ng-model="productVariationsCtrl.product.prints.sizes[$index]['metric_unit']">
+								<label for="width" class="col-md-1" style="font-size: 12px;">Width</label><input name="width" type="number" class="form-control col-md-1 ng-class:{'error-input': productVariationsCtrl.sizechartValuesValidation(productVariationsCtrl.product.prints.sizes[$index]['width'])}" ng-model="productVariationsCtrl.product.prints.sizes[$index]['width']" ng-min="0">
+								<label for="length" class="col-md-1" style="font-size: 12px;">Length</label><input name="length" type="number" class="form-control col-md-1 ng-class:{'error-input': productVariationsCtrl.sizechartValuesValidation(productVariationsCtrl.product.prints.sizes[$index]['length'])}" ng-model="productVariationsCtrl.product.prints.sizes[$index]['length']" ng-min="0">
+								<ol class="nya-bs-select categories-select col-md-2 ng-class:{'purple': productVariationsCtrl.form_submitted && !productVariationsCtrl.product.print.sizes[$index]['metric_unit']}" ng-model="productVariationsCtrl.product.prints.sizes[$index]['metric_unit']">
 									<li nya-bs-option="unit in productVariationsCtrl.metric.size">
 										<a href="">
 											<span ng-bind="unit"></span>
