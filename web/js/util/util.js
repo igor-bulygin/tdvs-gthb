@@ -102,7 +102,7 @@
 		}
 
 		function isZeroOrLess(value) {
-			if(!value || value===null) return false;
+			if(value === undefined || value === null) return false;
 			return value <= 0 ? true : false;
 		}
 
