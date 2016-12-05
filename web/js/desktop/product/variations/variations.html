@@ -64,7 +64,7 @@
 									</ul>
 								</div>
 								<div ng-if="productVariationsCtrl.product.preorder.end">
-									<p class="date-variations">{{productVariationsCtrl.product.preorder.end | date: 'MMM dd yyyy'}}</p>
+									<p class="date-variations" ng-bind="(productVariationsCtrl.product.preorder.end | date: 'MMM dd yyyy')"></p>
 									<div class="dropdown">
 										<a href="#" data-target="#" class="dropdown-toggle-preorder red-text" id="preorderEnd" role="button" data-toggle="dropdown"><span class="glyphicon glyphicon-pencil"></span>&nbsp;<span>Change date</span></a>
 										<ul class="dropdown-menu" role="menu" aria-labelledby="preorderEnd">
@@ -88,7 +88,7 @@
 									</ul>
 								</div>
 								<div ng-if="productVariationsCtrl.product.preorder.ship">
-									<p class="date-variations">{{productVariationsCtrl.product.preorder.ship | date: 'MMM dd yyyy'}}</p>
+									<p class="date-variations" ng-bind="(productVariationsCtrl.product.preorder.ship | date: 'MMM dd yyyy')"></p>
 									<div class="dropdown">
 										<a href="#" data-target="#" class="dropdown-toggle-preorder-ship red-text" id="preorderShip" role="button" data-toggle="dropdown">
 											<span class="glyphicon glyphicon-pencil"></span>&nbsp;<span>Change date</span>
@@ -273,7 +273,7 @@
 							</div>
 							<div class="mb-20 col-md-10 pad-about ng-class:{'col-md-offset-2': $index > 0}" ng-repeat="type in productVariationsCtrl.product.prints.type track by $index">
 								<span>{{$index+1}}:&nbsp;</span>
-								<ol class="nya-bs-select categories-select col-md-4" ng-model="productVariationsCtrl.product.prints.type[$index]" multiple>
+								<ol class="nya-bs-select categories-select col-md-4 ng-class:{'purple': productVariationsCtrl.optionValidation(productVariationsCtrl.product.prints.type[$index])}" ng-model="productVariationsCtrl.product.prints.type[$index]" required>
 									<li nya-bs-option="paperType in productVariationsCtrl.papertypes" data-value="paperType.type">
 										<a href="#">
 											<span ng-bind="paperType.name"></span><span class="glyphicon glyphicon-ok check-mark"></span>

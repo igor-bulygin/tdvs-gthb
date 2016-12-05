@@ -46,9 +46,18 @@
 
 		function setPrintsSelected(value) {
 			vm.show_prints = value;
-			vm.product.prints={
-				type: [[]],
-				sizes: [{}]
+			if(value) {
+				if(!vm.product.prints) {
+					vm.product.prints={
+						type: [[]],
+						sizes: [{}]
+					}
+				} else {
+					vm.product.prints = angular.copy(vm.prints_copy);
+				}
+			} else {
+				vm.prints_copy = angular.copy(vm.product.prints);
+				delete vm.product.prints;
 			}
 		}
 
