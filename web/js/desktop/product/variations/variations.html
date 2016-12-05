@@ -164,18 +164,17 @@
 		<div class="col-md-12">
 			<div ng-if="productVariationsCtrl.show_sizecharts" ng-cloak>
 					<label>Sizes</label>
-
 				<div class="row">
 					<div class="col-md-2">
 						<span>Create new size chart</span>
 					</div>
 					<div class="col-md-8 pad-about">
-						<ol class="nya-bs-select" ng-model="productVariationsCtrl.sizechart_helper[$index]" ng-change="productVariationsCtrl.countriesSelect(productVariationsCtrl.sizechart_helper[$index])">
+						<ol class="nya-bs-select categories-select ng-class:{'purple': productVariationsCtrl.form_submitted && !productVariationsCtrl.selected_sizechart}" ng-model="productVariationsCtrl.selected_sizechart" ng-change="productVariationsCtrl.countriesSelect(productVariationsCtrl.selected_sizechart)">
 							<li nya-bs-option="sizechart in productVariationsCtrl.sizechart_helper" data-value="sizechart">
 								<a><span ng-bind="sizechart.name['en-US']"></span></a>
 							</li>
 						</ol>
-						<ol class="nya-bs-select" ng-model="productVariationsCtrl.countriesAvailable[$index]" ng-if="productVariationsCtrl.countriesAvailable.length > 0" ng-change="productVariationsCtrl.sizesSelect(productVariationsCtrl.sizechart_helper[$index], productVariationsCtrl.countriesAvailable[$index])">
+						<ol class="nya-bs-select categories-select ng-class:{'purple': productVariationsCtrl.form_submitted && !productVariationsCtrl.selected_sizechart_country}" ng-model="productVariationsCtrl.selected_sizechart_country" ng-if="productVariationsCtrl.countriesAvailable.length > 0" ng-change="productVariationsCtrl.sizesSelect(productVariationsCtrl.selected_sizechart, productVariationsCtrl.selected_sizechart_country)">
 							<li nya-bs-option="country in productVariationsCtrl.countriesAvailable" data-value="country">
 								<a><span ng-bind="country"></span></a>
 							</li>
@@ -209,13 +208,13 @@
 								<a href="#" ng-if="productVariationsCtrl.sizechart_available_values[$index]"><span ng-bind="size[0]"></span></a>
 							</li>
 						</ol>
-						<a href="#" ng-click="productVariationsCtrl.addSizeToSizechart(productVariationsCtrl.size_to_add)" class="ion-plus red-plus"></a>
+						<a href="#" ng-click="productVariationsCtrl.addSizeToSizechart(productVariationsCtrl.size_to_add)" class="ion-plus red-plus" ng-disabled="productVariationsCtrl.size_to_add == null"></a>
 					</div>
 					<div class="col-md-3">
 						<span>What scale are your size in?</span>
 					</div>
 					<div class="col-md-1 pad-about">
-						<ol class="nya-bs-select" ng-model="productVariationsCtrl.product.sizechart['metric_unit']">
+						<ol class="nya-bs-select categories-select ng-class:{'purple': productVariationsCtrl.form_submitted && !productVariationsCtrl.product.sizechart['metric_unit']}" ng-model="productVariationsCtrl.product.sizechart['metric_unit']">
 							<li nya-bs-option="size in productVariationsCtrl.metric.size">
 								<a><span ng-bind="size"></span></a>
 							</li>
