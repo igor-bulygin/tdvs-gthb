@@ -26,7 +26,6 @@
 					</div>
 				</div>
 			</div>
-		
 		</div>
 		<div class="col-md-6">
 			<span class="title">Manufacturing information</span>
@@ -159,6 +158,7 @@
 			</div>
 		</div>
 	</div>
+	</form>
 	<hr style="height: 2px; color: black">
 	<div class="row items-row">
 		<div class="col-md-12">
@@ -233,7 +233,11 @@
 						<tr ng-repeat="line in productVariationsCtrl.product.sizechart.values track by $index">
 							<td ng-repeat="value in line track by $index" class="col-md-2">
 								<span ng-if="$first" ng-bind="value"></span>&nbsp;<span ng-if="$first" class="glyphicon glyphicon-remove close-row" ng-click="productVariationsCtrl.deleteSizeFromSizechart($index)"></span>
-								<input ng-if="!$first" type="number" class="form-control" ng-model="value">&nbsp;<span ng-if="!$first && productVariationsCtrl.product.sizechart.metric_unit" ng-bind="productVariationsCtrl.product.sizechart.metric_unit"></span></td>
+								<span ng-if="!$first">
+									<a href="#" editable-number="value" buttons="no" e-min="0" blur="submit" class="ng-class:{'purple-text': productVariationsCtrl.sizechartValuesValidation(value)}" ng-bind="(value || 0)"></a>
+									&nbsp;<span ng-if="productVariationsCtrl.product.sizechart.metric_unit" ng-bind="productVariationsCtrl.product.sizechart.metric_unit"></span>
+								</span>
+							</td>
 						</tr>
 					</tbody>
 				</table>
@@ -313,5 +317,4 @@
 			</div>
 		</div>
 	</div>
-	</form>
 </div>

@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller($scope, productEvents, productDataService, productService) {
+	function controller($scope, productEvents, productDataService, productService, UtilService) {
 		var vm = this;
 		//functions
 		vm.setPrintsSelected = setPrintsSelected;
@@ -18,6 +18,7 @@
 		vm.deleteOption = deleteOption;
 		vm.addSizeToSizechart = addSizeToSizechart;
 		vm.deleteSizeFromSizechart = deleteSizeFromSizechart;
+		vm.sizechartValuesValidation = sizechartValuesValidation;
 
 		//vars
 		vm.tag_order = ['Color', 'Material', 'Size', 'Style'];
@@ -174,6 +175,10 @@
 					vm.sizechart_available_values[i] = true;
 			}
 			vm.product.sizechart.values.splice(pos, 1);
+		}
+
+		function sizechartValuesValidation(value) {
+			return UtilService.isZeroOrLess(value);
 		}
 
 		//watchs
