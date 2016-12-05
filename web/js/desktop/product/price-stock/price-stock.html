@@ -31,7 +31,13 @@
 			<tbody>
 				<tr ng-repeat="product in productPriceStockCtrl.product.price_stock">
 					<td ng-bind="productPriceStockCtrl.titles[$index]"></td>
-					<td><input type="checkbox" class="form-control" ng-model="product.available"></td>
+					<td>
+						<label class="switch">
+						  <input type="checkbox" ng-model="product.available" checked>
+						  <div class="slider round"></div>
+						</label>
+						<!--<input type="checkbox" class="form-control" ng-model="product.available">-->
+					</td>
 					<td><input type="text" class="form-control" ng-model="product.sku"></td>
 					<td>
 						<a href="#" editable-number="product.weight" buttons="no" e-min="0" class="ng-class:{'purple-text': productPriceStockCtrl.priceStockValuesValidation(product.weight, product.available)}" ng-bind="(product.weight || 0)" blur="submit">
