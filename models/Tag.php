@@ -348,7 +348,7 @@ class Tag extends CActiveRecord
 								// second and next values
 								for($i=1;$i < count($oneoption);$i++){
 
-									$otheroption = self::getOptionTagByValue($oneoption[$i], $this->options);
+									$otheroption = $this->getOptionTagByValue($oneoption[$i]);
 									if($otheroption != null) {
 										$arr_value[] = $otheroption["value"];
 										$arr_text[] = Utils::l($otheroption["text"]);
@@ -459,11 +459,11 @@ class Tag extends CActiveRecord
 	}
 
 
-	public function getOptionTagByValue($value,$options){
+	public function getOptionTagByValue($value){
 
 		$option_find = null;
 
-		foreach ($options as $key => $oneoption) {
+		foreach ($this->options as $key => $oneoption) {
 
 			if ($value == $oneoption["value"]) {
 				$option_find = $oneoption;

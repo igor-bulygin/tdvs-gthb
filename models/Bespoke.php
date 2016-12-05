@@ -57,9 +57,6 @@ class Bespoke extends Model
 		return [
 				['type', 'required', 'on' => Product2::SCENARIO_PRODUCT_PUBLIC],
 				['type', 'in', 'range' => [self::YES, self::NO], 'on' => [Product2::SCENARIO_PRODUCT_PUBLIC, Product2::SCENARIO_PRODUCT_DRAFT]],
-				['value', 'required', 'when' => function($model) {
-					return $model->type == self::YES;
-				}],
 				[
 					'value',
 					'app\validators\TranslatableValidator',

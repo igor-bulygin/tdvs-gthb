@@ -168,10 +168,10 @@ class Product2 extends Product {
 		return $this->mapEmbedded('madetoorder', MadeToOrder::className(), array('unsetSource' => false));
 	}
 
-//	public function embedBespokeInfo()
-//	{
-//		return $this->mapEmbedded('bespoke', Bespoke::className(), array('unsetSource' => false));
-//	}
+	public function embedBespokeInfo()
+	{
+		return $this->mapEmbedded('bespoke', Bespoke::className(), array('unsetSource' => false));
+	}
 
     /**
      * Load sub documents after find the object
@@ -188,7 +188,7 @@ class Product2 extends Product {
 		$this->mediaFiles->setProduct($this);
 		$this->preorderInfo->setProduct($this);
 		$this->madeToOrderInfo->setProduct($this);
-//		$this->bespokeInfo->setProduct($this);
+		$this->bespokeInfo->setProduct($this);
 		return parent::beforeValidate();
 	}
 
@@ -342,7 +342,12 @@ class Product2 extends Product {
 			[   'madetoorder', 'safe'], // to load data posted from WebServices
 			[   'madeToOrderInfo', 'app\validators\EmbedDocValidator'], // to apply rules
 			[   'bespoke', 'safe'], // to load data posted from WebServices
-//			[   'bespokeInfo', 'app\validators\EmbedDocValidator'], // to apply rules
+			[   'bespokeInfo', 'app\validators\EmbedDocValidator'], // to apply rules
+			[
+				'options',
+				'app\validators\OptionsValidator',
+				'on' => [self::SCENARIO_PRODUCT_DRAFT, self::SCENARIO_PRODUCT_PUBLIC],
+			],
         ];
     }
 
@@ -877,9 +882,9 @@ class Product2 extends Product {
 			$this->madeToOrderInfo->load($data, 'madetoorder');
 		}
 
-//		if (array_key_exists('bespoke', $data)) {
-//			$this->bespokeInfo->load($data, 'madetoorder');
-//		}
+		if (array_key_exists('bespoke', $data)) {
+			$this->bespokeInfo->load($data, 'madetoorder');
+		}
 
 		// use position behavior method to move it (only if it has primary key)
 		// commented until be needed...
