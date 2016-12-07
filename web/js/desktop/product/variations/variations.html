@@ -55,8 +55,8 @@
 								<p class="manufacturing-answer">When the pre-order is over, you will be reminded to update the stock of the product.</p>
 							</div>
 							<div class="col-md-6">
-								<div class="dropdown log" ng-if="!productVariationsCtrl.product.preorder.end">
-									<a href="#" data-target="#" class="dropdown-toggle-preorder" id="preorderEnd" role="button" data-toggle="dropdown">
+								<div class="dropdown" ng-if="!productVariationsCtrl.product.preorder.end">
+									<a href="#" data-target="#" class="calendar-icon dropdown-toggle-preorder" id="preorderEnd" role="button" data-toggle="dropdown">
 										<i class="fa fa-calendar" aria-hidden="true"></i>
 									</a>
 									<ul class="dropdown-menu" role="menu" aria-labelledby="preorderEnd">
@@ -79,8 +79,8 @@
 								<p class="manufacturing-question">When will the product be shipped?</p>
 							</div>
 							<div class="col-md-6">
-								<div class="dropdown log" ng-if="!productVariationsCtrl.product.preorder.ship">
-									<a href="#" data-target="#" class="dropdown-toggle-preorder-ship" id="preorderShip" role="button" data-toggle="dropdown">
+								<div class="dropdown" ng-if="!productVariationsCtrl.product.preorder.ship">
+									<a href="#" data-target="#" class="calendar-icon dropdown-toggle-preorder-ship" id="preorderShip" role="button" data-toggle="dropdown">
 										<i class="fa fa-calendar" aria-hidden="true"></i>
 									</a>
 									<ul class="dropdown-menu" role="menu" aria-labbeledby="preorderShip">
