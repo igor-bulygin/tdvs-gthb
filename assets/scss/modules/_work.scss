@@ -535,3 +535,24 @@ input:checked + .slider:before {
 .error-input .ta-editor{
 	border-color:$violet;
 }
+
+.calendar-icon{
+	border: 1px solid transparent;
+    @include border-radius(90px,90px,90px,90px);
+    width: 34px;
+    height: 34px;
+    text-align: center;
+    padding: 5px 0 0 0;
+    display: inline-block;
+	color: $red;
+	margin-top: -10px;
+	i{
+		color: $red;
+		&:hover{
+		color: $dark_red;	
+	}
+	}
+	&.error-input{
+		border: 1px solid $violet;
+	}
+}
