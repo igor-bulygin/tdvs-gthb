@@ -149,10 +149,10 @@
 		}
 
 		//If you choose a personal Sizechart you need to search how many do you have. You can have none.
-		function deviserSizecharts() { 
+		function deviserSizecharts() {
 			vm.sizecharts.forEach(function(element) {
-					if(element.type == 1) //&& element.deviser_id == vm.product.deviser_id) || IMPORTANT, the comment is for test only.
-						vm.deviserSizecharts.push(element)
+					if(element.type === 1 && element.deviser_id === UtilService.returnDeviserIdFromUrl())
+						vm.deviserSizecharts.push(element);
 				});
 		}
 
@@ -160,7 +160,7 @@
 			vm.countriesAvailable = angular.copy(sizechart.countries);
 		}
 
-		//creates both a new empty sizechart and a new helper empty sizechart
+		//creates both a new empty sizechart and a new empty helper sizechart
 		function sizesSelect(sizechart, country) {
 			vm.product.sizechart = {
 				country: country,
@@ -171,12 +171,20 @@
 			vm.product.sizechart.columns = angular.copy(sizechart.columns);
 			vm.sizechart_empty = angular.copy(vm.product.sizechart);
 			vm.sizechart_available_values = [];
-			var pos = sizechart.countries.indexOf(country);
+			var pos, length;
+			if(angular.isArray(sizechart.countries) && sizechart.countries.length > 0) {
+				pos = sizechart.countries.indexOf(country);
+				length = sizechart.countries.length;
+			}
+			else {
+				pos = 0;
+				length = 1;
+			}
 			if(pos > -1){
 				for(var i = 0; i < sizechart.values.length; i++) {
 					vm.sizechart_empty.values.push([sizechart.values[i][pos]]);
 					vm.sizechart_available_values[i] = true;
-					for(var j = sizechart.countries.length; j < sizechart.values[i].length; j++) {
+					for(var j = length; j < sizechart.values[i].length; j++) {
 						vm.sizechart_empty.values[i].push(sizechart.values[i][j]);
 					}
 				}

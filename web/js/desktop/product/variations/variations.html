@@ -191,7 +191,7 @@
 						<span>Use a saved sizechart</span>
 					</div>
 					<div class="col-md-8 pad-about">
-						<ol class="nya-bs-select" ng-model="productVariationsCtrl.deviserSizecharts[$index]" ng-change="productVariationsCtrl.sizesSelect(productVariationsCtrl.deviserSizecharts[$index])">
+						<ol class="nya-bs-select" ng-model="productVariationsCtrl.deviserSizecharts[$index]" ng-change="productVariationsCtrl.sizesSelect(productVariationsCtrl.deviserSizecharts[$index], productVariationsCtrl.deviserSizecharts[$index].countries[0])">
 							<li nya-bs-option="sizecharts in productVariationsCtrl.deviserSizecharts" data-value="sizecharts">
 								<a><span ng-bind="sizecharts.name['en-US']"></span></a>
 							</li>
