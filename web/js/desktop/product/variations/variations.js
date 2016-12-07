@@ -21,6 +21,7 @@
 		vm.deleteSizeFromSizechart = deleteSizeFromSizechart;
 		vm.sizechartValuesValidation = sizechartValuesValidation;
 		vm.optionValidation = optionValidation;
+		vm.textFieldValidation = textFieldValidation;
 
 		//vars
 		vm.tag_order = ['Color', 'Material', 'Size', 'Style'];
@@ -202,6 +203,10 @@
 
 		function optionValidation(option) {
 			return option.length <= 0 && vm.form_submitted;
+		}
+
+		function textFieldValidation(textField, requiredOption) {
+			return requiredOption && (!angular.isObject(textField) || !textField['en-US'] || textField['en-US'] == '' || textField['en-US'] == undefined);
 		}
 
 		//watchs
