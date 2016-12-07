@@ -29,6 +29,9 @@ class PriceStockValidator extends Validator
 					if ($optionId == 20000) {
 						//wtf do here??
 						continue;
+					} elseif ($optionId == 'size') {
+						//wtf do here??
+						continue;
 					}
 					$tag = Tag::findOne(["short_id" => $optionId]);
 					/* @var $tag Tag */
