@@ -22,6 +22,7 @@ class SizechartController extends Controller {
 	    $offset = ($limit * ($page - 1));
 
 	    $sizeCharts = SizeChart::findSerialized([
+			// "type" => SizeChart::TODEVISE, // only show "todevise" sizecharts, ignoring custom sizecharts from devisers
 			"scope" => Yii::$app->request->get("scope", "all"),
 			"limit" => $limit,
 		    "offset" => $offset,
