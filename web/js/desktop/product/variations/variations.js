@@ -164,7 +164,8 @@
 			vm.product.sizechart = {
 				country: country,
 				columns: [],
-				values: []
+				values: [],
+				short_id: sizechart.id
 			};
 			vm.product.sizechart.columns = angular.copy(sizechart.columns);
 			vm.sizechart_empty = angular.copy(vm.product.sizechart);
