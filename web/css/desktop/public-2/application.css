@@ -4220,14 +4220,14 @@ a.editable-click.purple-text:hover {
 .editable-controls input {
   max-width: 60px; }
 
-.switch {
+.switch-checkbox {
   position: relative;
   display: inline-block;
   width: 34px;
   height: 20px;
   margin-top: 4px; }
 
-.switch input {
+.switch-checkbox input {
   display: none; }
 
 .slider {
