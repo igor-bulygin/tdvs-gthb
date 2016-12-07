@@ -238,7 +238,6 @@
 			product: '=',
 			categories: '<',
 			languages: '<',
-			images: '<'
 		}
 	}
 
