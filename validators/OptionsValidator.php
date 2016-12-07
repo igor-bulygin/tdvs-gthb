@@ -2,6 +2,7 @@
 namespace app\validators;
 
 use app\models\Lang;
+use app\models\Product2;
 use app\models\Tag;
 use Yii;
 use yii\validators\Validator;
@@ -57,7 +58,7 @@ class OptionsValidator extends Validator
 					if (isset($options[$tag->short_id])) {
 						$values = $options[$tag->short_id];
 						foreach ($values as $value) {
-							if (empty($value)) {
+							if ($object->scenario == Product2::SCENARIO_PRODUCT_PUBLIC && empty($value)) {
 								$this->addError($object, $attribute, sprintf('Option %s must have a selected value', $tag->name[Lang::EN_US]));
 							} elseif (is_array($value)) {
 								foreach ($value as $oneValue) {

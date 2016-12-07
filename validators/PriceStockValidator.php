@@ -1,6 +1,7 @@
 <?php
 namespace app\validators;
 
+use app\models\Product2;
 use app\models\Tag;
 use Yii;
 use yii\validators\Validator;
@@ -55,9 +56,11 @@ class PriceStockValidator extends Validator
 						}
 					}
 				}
-				foreach ($positiveFields as $field) {
-					if (!isset($item[$field]) || !is_numeric($item[$field]) || $item[$field] <= 0) {
-						$this->addError($object, $attribute, sprintf('%s must be a positive value', $field));
+				if ($object->scenario == Product2::SCENARIO_PRODUCT_PUBLIC) {
+					foreach ($positiveFields as $field) {
+						if (!isset($item[$field]) || !is_numeric($item[$field]) || $item[$field] <= 0) {
+							$this->addError($object, $attribute, sprintf('%s must be a positive value', $field));
+						}
 					}
 				}
 			}
