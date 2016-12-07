@@ -1,9 +1,9 @@
 <?php
 namespace app\models;
 
+use app\helpers\CActiveRecord;
 use app\helpers\Utils;
 use Yii;
-use app\helpers\CActiveRecord;
 use yii\mongodb\ActiveQuery;
 
 
@@ -129,9 +129,9 @@ class SizeChart extends CActiveRecord {
 	 * @return array
 	 */
 	public function getCountriesInfo() {
-		$countries = $this->countries;
+		$countries = $this->countries ?: [];
 		if (isset($this->country)) {
-			if (!in_array($this->country, $countries)) {
+			if (!is_array($countries) || !in_array($this->country, $countries)) {
 				$countries[] = $this->country;
 			}
 		}
