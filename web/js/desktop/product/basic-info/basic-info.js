@@ -20,6 +20,7 @@
 
 		init();
 
+		//categories
 		function addCategory() {
 			vm.categories_helper.push({
 				categories_selected: [null],
@@ -72,6 +73,7 @@
 			}
 		}
 
+		//photos
 		function uploadPhoto(images, errImages) {
 			vm.files = images;
 			vm.errFiles = errImages;
@@ -177,6 +179,13 @@
 			if(!oldValue && newValue) {
 				vm.rootCategories = filterCategory(newValue, '');
 				addCategory();
+			}
+		});
+
+		$scope.$watch('productBasicInfoCtrl.product.id', function(newValue, oldValue) {
+			if(!oldValue && newValue) {
+				if(angular.isArray(vm.product.media.photos) && vm.product.media.photos.length > 0)
+					vm.images = UtilService.parseImagesUrl(vm.product.media.photos, '/uploads/product/' + newValue + '/');
 			}
 		});
 

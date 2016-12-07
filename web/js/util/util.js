@@ -75,9 +75,15 @@
 		function parseImagesUrl(images, url) {
 			var parsed_images = [];
 			for (var i = 0; i < images.length; i++) {
+				var name;
+				if(images[i].name && images[i].name !== null && images[i].name !== undefined) {
+					name = images[i].name;
+				} else {
+					name = images[i];
+				}
 				parsed_images[i] = {
 					pos: i,
-					url: currentHost() + url + images[i],
+					url: currentHost() + url + name,
 					filename: images[i]
 				};
 			}

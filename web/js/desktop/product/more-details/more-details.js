@@ -121,7 +121,7 @@
 								}).then(function (dataUpload) {
 									//save photo
 									vm.images.unshift({
-										url: currentHost() + '/' + dataUpload.data.url
+										url: currentHost() + dataUpload.data.url
 									})
 									vm.product.media.description_photos.unshift({
 										name: dataUpload.data.filename,
@@ -153,6 +153,13 @@
 		$scope.$watch('productMoreDetailsCtrl.product.faq', function(newValue, oldValue) {
 			vm.faqRequired = false;
 		}, true);
+
+		$scope.$watch('productMoreDetailsCtrl.product.id', function(newValue, oldValue) {
+			if(!oldValue && newValue) {
+				if(angular.isArray(vm.product.media.description_photos) && vm.product.media.description_photos.length > 0)
+					vm.images = UtilService.parseImagesUrl(vm.product.media.description_photos, '/uploads/product/' + newValue + '/');
+			}
+		});
 
 		//events
 		$scope.$on(productEvents.requiredErrors, function(event, args) {
