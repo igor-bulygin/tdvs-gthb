@@ -1,19 +1,12 @@
 <?php
 namespace app\models;
 
-use app\models\Warranty;
-use EasySlugger\Slugger;
+use app\helpers\CActiveRecord;
+use app\helpers\Utils;
 use Exception;
 use MongoDate;
 use Yii;
-use app\helpers\Utils;
-use app\helpers\CActiveRecord;
 use yii\mongodb\ActiveQuery;
-use yii\mongodb\Collection;
-use yii\mongodb\Connection;
-use yii\mongodb\rbac\MongoDbManager;
-use yii\web\IdentityInterface;
-use yii\base\NotSupportedException;
 use yii2tech\ar\position\PositionBehavior;
 
 /**
@@ -554,7 +547,7 @@ class Product extends CActiveRecord {
 		if ((isset($this->sizechart)) && (array_key_exists("values", $this->sizechart)) && (count($this->sizechart["values"]) > 0)){
 			$tag = new Tag();
 			$tag->forceIsSizeTag = true; // TODO Temp attribute, until products options are refactored
-			$tag->sizeCart = $this->sizechart; // TODO Temp attribute, until products options are refactored
+			$tag->sizeChart = $this->sizechart; // TODO Temp attribute, until products options are refactored
 			$tag->short_id = "size";
 			$tag->required = true;
 			$tag->name = [Lang::EN_US => "Size", Lang::ES_ES => "Talla", Lang::CA_ES => "Talla"];

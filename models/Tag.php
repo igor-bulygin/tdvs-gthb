@@ -1,10 +1,9 @@
 <?php
 namespace app\models;
 
-use app\helpers\Utils;
-use Exception;
-use Yii;
 use app\helpers\CActiveRecord;
+use app\helpers\Utils;
+use Yii;
 use yii\mongodb\ActiveQuery;
 
 class TagOption
@@ -139,7 +138,7 @@ class Tag extends CActiveRecord
 	public $forceIsSizeTag = false;
 
 	/** @var array */
-	public $sizeCart = [];
+	public $sizeChart = [];
 
 	public static function collectionName()
 	{
@@ -313,7 +312,7 @@ class Tag extends CActiveRecord
 		$values = [];
 
 		if ($this->forceIsSizeTag) {
-			foreach ($this->sizeCart["values"] as $key => $option) {
+			foreach ($this->sizeChart["values"] as $key => $option) {
 				if (count($option) > 0) {
 					$values[] = [
 						"value" => ($key+1),

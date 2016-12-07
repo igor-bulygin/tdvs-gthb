@@ -443,6 +443,7 @@ class Product2 extends Product {
 					'dimension_unit',
 					'references',
 					'options',
+					'sizechart',
 					'url_images' => 'urlImagesLocation',
                     'position',
 					'price_stock',
@@ -450,8 +451,6 @@ class Product2 extends Product {
                 ];
                 static::$retrieveExtraFields = [
                     'deviser_id',
-					'options',
-					'sizechart',
 //
                 ];
 
@@ -801,7 +800,7 @@ class Product2 extends Product {
 		if ((isset($this->sizechart)) && (array_key_exists("values", $this->sizechart)) && (count($this->sizechart["values"]) > 0)){
 			$tag = new Tag();
 			$tag->forceIsSizeTag = true; // TODO Temp attribute, until products options are refactored
-			$tag->sizeCart = $this->sizechart; // TODO Temp attribute, until products options are refactored
+			$tag->sizeChart = $this->sizechart; // TODO Temp attribute, until products options are refactored
 			$tag->short_id = "size";
 			$tag->required = true;
 			$tag->name = [Lang::EN_US => "Size", Lang::ES_ES => "Talla", Lang::CA_ES => "Talla"];
