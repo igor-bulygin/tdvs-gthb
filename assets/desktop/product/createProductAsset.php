@@ -11,7 +11,8 @@ class createProductAsset extends AssetBundle {
 		'js/desktop/product/basic-info/basic-info.js',
 		'js/desktop/product/more-details/more-details.js',
 		'js/desktop/product/variations/variations.js',
-		'js/desktop/product/price-stock/price-stock.js'
+		'js/desktop/product/price-stock/price-stock.js',
+		'js/desktop/product/xeditable-select.js'
 	];
 	public $depends = [
 		'app\assets\desktop\product\IndexAsset'
