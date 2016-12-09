@@ -151,6 +151,17 @@ class SizeChart extends CActiveRecord {
 		// Retrieve only fields that gonna be used
 		$query->select(self::getSelectFields());
 
+		if (array_key_exists("deviser_id", $criteria)) {
+			$query->andFilterWhere(
+				['or',
+					['type' => self::TODEVISE],
+					['deviser_id' => $criteria['deviser_id']],
+				]
+			);
+		} else {
+			$query->andFilterWhere(['type' => self::TODEVISE]);
+		}
+
 		if (array_key_exists("scope", $criteria)) {
 			switch ($criteria["scope"]) {
 				case "all":
