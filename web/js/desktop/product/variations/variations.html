@@ -230,7 +230,7 @@
 					</thead>
 					<tbody>
 						<tr ng-repeat="line in productVariationsCtrl.product.sizechart.values track by $index">
-							<td ng-repeat="value in line track by $index" class="col-md-2">
+							<td ng-repeat="value in line track by $index">
 								<span ng-if="$first" ng-bind="value"></span>&nbsp;<span ng-if="$first" class="glyphicon glyphicon-remove close-row" ng-click="productVariationsCtrl.deleteSizeFromSizechart($index)"></span>
 								<span ng-if="!$first">
 									<a href="#" editable-number="line[$index]" buttons="no" e-min="0" blur="submit" class="ng-class:{'purple-text': productVariationsCtrl.sizechartValuesValidation(value)}" ng-bind="line[$index]"></a>
