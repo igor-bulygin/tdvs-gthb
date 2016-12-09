@@ -56,7 +56,7 @@
 							</div>
 							<div class="col-md-6">
 								<div class="dropdown" ng-if="!productVariationsCtrl.product.preorder.end">
-									<a href="#" data-target="#" class="calendar-icon dropdown-toggle-preorder" id="preorderEnd" role="button" data-toggle="dropdown">
+									<a href="#" data-target="#" class="calendar-icon dropdown-toggle-preorder ng-class:{'error-input': !productVariationsCtrl.preorder_end_data && productVariationsCtrl.required_preorder}" id="preorderEnd" role="button" data-toggle="dropdown">
 										<i class="fa fa-calendar" aria-hidden="true"></i>
 									</a>
 									<ul class="dropdown-menu" role="menu" aria-labelledby="preorderEnd">
@@ -80,7 +80,7 @@
 							</div>
 							<div class="col-md-6">
 								<div class="dropdown" ng-if="!productVariationsCtrl.product.preorder.ship">
-									<a href="#" data-target="#" class="calendar-icon dropdown-toggle-preorder-ship" id="preorderShip" role="button" data-toggle="dropdown">
+									<a href="#" data-target="#" class="calendar-icon dropdown-toggle-preorder-ship ng-class:{'error-input': !productVariationsCtrl.preorder_ship_data && productVariationsCtrl.required_preorder}" id="preorderShip" role="button" data-toggle="dropdown">
 										<i class="fa fa-calendar" aria-hidden="true"></i>
 									</a>
 									<ul class="dropdown-menu" role="menu" aria-labbeledby="preorderShip">
@@ -153,7 +153,7 @@
 							<a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
 						</li>
 					</ol>
-					<textarea name="bespoke_text" id="bespoke_text" cols="30" rows="10" class="form-control manufacturing-textarea" ng-model="productVariationsCtrl.product.bespoke.value[productVariationsCtrl.bespoke_language]"></textarea>
+					<textarea name="bespoke_text" id="bespoke_text" cols="30" rows="10" class="form-control manufacturing-textarea ng-class:{'error-input': productVariationsCtrl.textFieldValidation(productVariationsCtrl.product.bespoke.value, productVariationsCtrl.required_bespoke)}" ng-model="productVariationsCtrl.product.bespoke.value[productVariationsCtrl.bespoke_language]"></textarea>
 				</div>
 			</div>
 		</div>
@@ -191,7 +191,7 @@
 						<span>Use a saved sizechart</span>
 					</div>
 					<div class="col-md-8 pad-about">
-						<ol class="nya-bs-select" ng-model="productVariationsCtrl.deviserSizecharts[$index]" ng-change="productVariationsCtrl.sizesSelect(productVariationsCtrl.deviserSizecharts[$index])">
+						<ol class="nya-bs-select" ng-model="productVariationsCtrl.deviserSizecharts[$index]" ng-change="productVariationsCtrl.sizesSelect(productVariationsCtrl.deviserSizecharts[$index], productVariationsCtrl.deviserSizecharts[$index].countries[0])">
 							<li nya-bs-option="sizecharts in productVariationsCtrl.deviserSizecharts" data-value="sizecharts">
 								<a><span ng-bind="sizecharts.name['en-US']"></span></a>
 							</li>
@@ -232,7 +232,7 @@
 						<tr ng-repeat="line in productVariationsCtrl.product.sizechart.values track by $index">
 							<td ng-repeat="value in line track by $index">
 								<span ng-if="$first" ng-bind="value"></span>&nbsp;<span ng-if="$first" class="glyphicon glyphicon-remove close-row" ng-click="productVariationsCtrl.deleteSizeFromSizechart($index)"></span>
-								<span ng-if="!$first">
+								<span ng-if="!$first" xeditable-select>
 									<a href="#" editable-number="line[$index]" buttons="no" e-min="0" blur="submit" class="ng-class:{'purple-text': productVariationsCtrl.sizechartValuesValidation(value)}" ng-bind="line[$index]"></a>
 									&nbsp;<span ng-if="productVariationsCtrl.product.sizechart.metric_unit" ng-bind="productVariationsCtrl.product.sizechart.metric_unit"></span>
 								</span>

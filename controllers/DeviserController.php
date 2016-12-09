@@ -1,25 +1,38 @@
 <?php
 namespace app\controllers;
 
-use Yii;
-use app\models\Tag;
-use app\models\Lang;
-use yii\helpers\Json;
-use app\helpers\Utils;
-use app\models\Person;
-use app\models\Country;
-use app\models\Product;
-use app\models\Category;
-use app\models\SizeChart;
-use app\models\MetricType;
-use yii\filters\VerbFilter;
 use app\helpers\CController;
-use app\helpers\CActiveRecord;
-use yii\filters\AccessControl;
+use app\helpers\Utils;
+use app\models\Category;
+use app\models\Country;
+use app\models\MetricType;
+use app\models\Person;
+use app\models\Product;
+use app\models\SizeChart;
+use app\models\Tag;
+use Yii;
+use yii\helpers\Json;
 
 class DeviserController extends CController
 {
 	public $defaultAction = "index";
+
+//	public function behaviors()
+//	{
+//		return [
+//				'access' => [
+//						'class' => AccessControl::className(),
+//						'only' => ['about-edit', 'delete-product-photo', 'faq-edit', 'press-edit', 'store-edit', 'upload-header-photo', 'upload-product-photo', 'upload-profile-photo', 'videos-edit'],
+//						'rules' => [
+//								[
+//										'allow' => true,
+//										'actions' => ['about-edit', 'delete-product-photo', 'faq-edit', 'press-edit', 'store-edit', 'upload-header-photo', 'upload-product-photo', 'upload-profile-photo', 'videos-edit'],
+//										'roles' => ['@'],
+//								],
+//						],
+//				],
+//		];
+//	}
 
 	public function actionIndex()
 	{

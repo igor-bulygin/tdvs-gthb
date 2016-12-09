@@ -315,12 +315,12 @@ class Tag extends CActiveRecord
 			foreach ($this->sizeChart["values"] as $key => $option) {
 				if (count($option) > 0) {
 					$values[] = [
-						"value" => ($key+1),
-						"text" => $option[0],
-						"hint" => null,
-						"image" => null,
-						"default" => null,
-						"colors" => [],
+							"value" => ($key + 1),
+							"text" => $option[0],
+							"hint" => null,
+							"image" => null,
+							"default" => null,
+							"colors" => [],
 					];
 				}
 			}
@@ -329,68 +329,64 @@ class Tag extends CActiveRecord
 			// For each tag options find in product options if exists
 			foreach ($this->options as $key => $option) {
 
+				if (!isset($this->product->options[$this->short_id]) || empty($this->product->options[$this->short_id])) {
+					continue;
+				}
+
 				// If exists, find all attributes
-				if (count($this->product->options[$this->short_id]) !=0) {
-					foreach ($this->product->options[$this->short_id] as $oneoption){
+				foreach ($this->product->options[$this->short_id] as $oneoption) {
 
-						// Case 1: Option attribute has two or more values (compose). Return arrays of: value, text and colors
-						if(count($oneoption) > 1){
+					// Case 1: Option attribute has two or more values (compose). Return arrays of: value, text and colors
+					if (count($oneoption) > 1) {
 
-							$arr_value = $arr_text = $arr_colors = array();
+						$arr_value = $arr_text = $arr_colors = array();
 
-							// If one is located, find next ones
-							if ($oneoption[0] == $option["value"]) {
-								$arr_value[] = $option["value"];
-								$arr_text[] = Utils::l($option["text"]);
-								$arr_colors[] =  $this->getOptionColor($option);
+						// If one is located, find next ones
+						if ($oneoption[0] == $option["value"]) {
+							$arr_value[] = $option["value"];
+							$arr_text[] = Utils::l($option["text"]);
+							$arr_colors[] = $this->getOptionColor($option);
 
-								// second and next values
-								for($i=1;$i < count($oneoption);$i++){
-
-									$otheroption = $this->getOptionTagByValue($oneoption[$i]);
-									if($otheroption != null) {
-										$arr_value[] = $otheroption["value"];
-										$arr_text[] = Utils::l($otheroption["text"]);
-										$arr_colors[] = $this->getOptionColor($otheroption);
-
-
-									}
+							// second and next values
+							for ($i = 1; $i < count($oneoption); $i++) {
+								$otheroption = $this->getOptionTagByValue($oneoption[$i]);
+								if ($otheroption != null) {
+									$arr_value[] = $otheroption["value"];
+									$arr_text[] = Utils::l($otheroption["text"]);
+									$arr_colors[] = $this->getOptionColor($otheroption);
 								}
+							}
 
-								$values[] = [
+							$values[] = [
 									"value" => $arr_value,
 									"text" => $arr_text,
 									"hint" => null,
 									"image" => null,
 									"default" => null,
 									"colors" => $arr_colors,
-								];
-							}
+							];
+						}
 
 
-						} else {
+					} else {
 
-							// Case 2: Option attribute has only one value. Return value, text and colors
-							if ($oneoption[0] == $option["value"]) {
-								$values[] = [
+						// Case 2: Option attribute has only one value. Return value, text and colors
+						if ($oneoption[0] == $option["value"]) {
+							$values[] = [
 									"value" => $option["value"],
 									"text" => Utils::l($option["text"]),
 									"hint" => null,
 									"image" => null,
 									"default" => null,
 									"colors" => $this->getOptionColor($option),
-								];
+							];
 
-
-							}
 						}
-
 					}
 				}
 
 			}
 		}
-
 
 		return $values;
 	}

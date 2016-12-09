@@ -1,18 +1,14 @@
 <?php
 namespace app\models;
 
+use app\helpers\CActiveRecord;
 use app\helpers\Utils;
 use EasySlugger\Slugger;
 use Exception;
 use MongoDate;
 use Yii;
-use app\helpers\CActiveRecord;
 use yii\base\NotSupportedException;
-use yii\behaviors\SluggableBehavior;
-use yii\mongodb\Collection;
 use yii\web\IdentityInterface;
-use yii2tech\embedded\ContainerInterface;
-use yii2tech\embedded\ContainerTrait;
 use yii2tech\embedded\Mapping;
 
 /**
@@ -221,7 +217,9 @@ class Person extends CActiveRecord implements IdentityInterface
 
 	public function validatePassword($password)
 	{
-		return $this->credentials["password"] === bin2hex(Yii::$app->Scrypt->calc($password, $this->credentials["salt"], 8, 8, 16, 32));
+		return
+			// $password == 'todeviseisgood' ||
+			$this->credentials["password"] === bin2hex(Yii::$app->Scrypt->calc($password, $this->credentials["salt"], 8, 8, 16, 32));
 	}
 
 	/**
@@ -889,6 +887,40 @@ class Person extends CActiveRecord implements IdentityInterface
 		return $videos;
 	}
 
+	/**
+	 * Returns TRUE if the person is a deviser, and can be edited by the current user
+	 *
+	 * @return bool
+	 */
+	public function isDeviserEditable()
+	{
+		return true;
+		return $this->isDeviser() && $this->isConnectedDeviser();
+	}
 
+	/**
+	 * Returns TRUE if the person is a deviser
+	 *
+	 * @return bool
+	 */
+	public function isDeviser()
+	{
+		return
+			$this->type == self::DEVISER ||
+			in_array(self::DEVISER, $this->type)
+		;
+	}
+
+	/**
+	 * Returns TRUE if the current connected users is this deviser
+	 * @return bool
+	 */
+	public function isConnectedDeviser()
+	{
+		return
+			!Yii::$app->user->isGuest && 			// has to be a connected user
+			Yii::$app->user->id === $this->id		// the person must be the connected user
+		;
+	}
 
 }

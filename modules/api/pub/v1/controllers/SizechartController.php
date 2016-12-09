@@ -2,6 +2,7 @@
 
 namespace app\modules\api\pub\v1\controllers;
 
+use app\models\Person;
 use app\models\SizeChart;
 use Yii;
 use yii\rest\Controller;
@@ -21,12 +22,20 @@ class SizechartController extends Controller {
 	    $page = ($page < 1) ? 1 : $page;
 	    $offset = ($limit * ($page - 1));
 
-	    $sizeCharts = SizeChart::findSerialized([
-			"scope" => Yii::$app->request->get("scope", "all"),
-			"limit" => $limit,
-		    "offset" => $offset,
-	    ]);
+		$criteria = [
+				"scope" => Yii::$app->request->get("scope", "all"),
+				"limit" => $limit,
+				"offset" => $offset,
+		];
 
+		if (!Yii::$app->user->isGuest) {
+			// If there is a connected deviser, we also return custom sizecharts
+			$person = Yii::$app->user->getIdentity(); /* @var Person $person */
+			if ($person->isDeviser()) {
+				$criteria["deviser_id"] = $person->short_id;
+			}
+		}
+	    $sizeCharts = SizeChart::findSerialized($criteria);
 	    return [
 		    "items" => $sizeCharts,
 		    "meta" => [
