@@ -190,19 +190,7 @@ class Product2 extends Product {
 	public function beforeSave($insert) {
 
         if ($insert) {
-			foreach ($this->media['photos'] as $onephoto) {
-				$find_photo = $onephoto['name'];
-				$source_tmp = Utils::join_paths(Yii::getAlias("@product"), "temp", $find_photo);
-				$path_destination = $this->getUploadedFilesPath();
-				$destination = Utils::join_paths($path_destination, $find_photo);
-
-				if (!file_exists($destination) && file_exists($source_tmp)) {
-					if (!file_exists($path_destination)) {
-						FileHelper::createDirectory($path_destination);
-					}
-					rename($source_tmp, $destination);
-				}
-			}
+			$this->moveTempUploadsToProductPath();
 		}
 
 		// short_id on price_stock
@@ -945,6 +933,12 @@ class Product2 extends Product {
         };
     }
 
+	public function getTempUploadedFilesPath()
+	{
+		return Utils::join_paths(Yii::getAlias("@product"), "temp");
+
+	}
+
     public function getUploadedFilesPath()
     {
         return Utils::join_paths(Yii::getAlias("@product"), $this->short_id);
@@ -963,5 +957,35 @@ class Product2 extends Product {
         $filePath = $this->getUploadedFilesPath() . '/' . $filename;
         return file_exists($filePath);
     }
+
+	/**
+	 * Moves all temporary uploads to definitive product's path
+	 */
+	public function moveTempUploadsToProductPath()
+	{
+		foreach ($this->media['photos'] as $onephoto) {
+			$this->moveTempFileToProductPath($onephoto['name']);
+		}
+		foreach ($this->media['description_photos'] as $onephoto) {
+			$this->moveTempFileToProductPath($onephoto['name']);
+		}
+	}
+
+	protected function moveTempFileToProductPath($file)
+	{
+		$tempFile = Utils::join_paths(Yii::getAlias("@product"), "temp", $file);
+		if (!file_exists($tempFile)) {
+			return;
+		}
+		$path_destination = $this->getUploadedFilesPath();
+		$destination = Utils::join_paths($path_destination, $file);
+
+		if (!file_exists($destination)) {
+			if (!file_exists($path_destination)) {
+				FileHelper::createDirectory($path_destination);
+			}
+			rename($tempFile, $destination);
+		}
+	}
 
 }
