@@ -73,7 +73,7 @@ $this->params['deviser'] = $deviser;
 									<p class="message-tagline">Only you are able to see your unpublished works.</p>
 									<div class="row m-0">
 										<div class="col-md-3 pad-grid" ng-repeat="product in editStoreCtrl.products | draftProduct">
-												<a href="">
+												<a ng-src="product.edit_link" title="Edit work">
 													<div class="grid">
 														<figure class="effect-zoe">
 															<img class="grid-image" ng-src="{{product.main_photo || '/imgs/product_placeholder.png'}}">
