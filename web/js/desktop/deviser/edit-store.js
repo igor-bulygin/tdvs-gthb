@@ -6,7 +6,7 @@
 		vm.update = update;
 		vm.deviser_id = UtilService.returnDeviserIdFromUrl();
 		vm.language = 'en-US';
-		
+
 		function parseCategories() {
 			var url = $location.absUrl();
 			if(url.split("?").length > 1) {
@@ -25,7 +25,7 @@
 			
 			var data = {
 				"deviser": UtilService.returnDeviserIdFromUrl(),
-				"limit": 9999,
+				"limit": 1000
 			}
 			if(vm.subcategory || vm.category) {
 				data["categories[]"] = [];
@@ -107,7 +107,7 @@
 
 	}
 
-	function draftProduct(){
+	function draftProduct() {
 		return function(input){
 			var draft=[];
 			angular.forEach(input,function(product){
