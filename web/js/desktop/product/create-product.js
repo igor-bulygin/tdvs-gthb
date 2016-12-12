@@ -1,6 +1,8 @@
 (function () {
 
-	function controller(deviserDataService, metricDataService, sizechartDataService, productDataService, languageDataService, toastr, UtilService, localStorageService, tagDataService, productEvents, $rootScope) {
+	function controller(deviserDataService, metricDataService, sizechartDataService, 
+		productDataService, languageDataService, toastr, UtilService, 
+		localStorageService, tagDataService, productEvents, $rootScope) {
 		var vm = this;
 		vm.save = save;
 		vm.deviser_id = UtilService.returnDeviserIdFromUrl();
@@ -75,6 +77,24 @@
 				});
 		}
 
+		function getTags() {
+			tagDataService.Tags.get()
+				.$promise.then(function (dataTags) {
+					vm.tags = dataTags.items;
+				}, function(err) {
+					//err
+				});
+		}
+
+		function getPaperType() {
+			productDataService.PaperType.get()
+				.$promise.then(function (dataPaperType) {
+					vm.papertypes = dataPaperType.items;
+				}, function (err){
+					console.log(err);
+				});
+		}
+
 		function getDeviser() {
 			deviserDataService.Profile.get({
 				deviser_id: UtilService.returnDeviserIdFromUrl()
@@ -86,24 +106,6 @@
 			}, function(err) {
 				//err
 			});
-		}
-
-		function getTags() {
-			tagDataService.Tags.get()
-				.$promise.then(function (dataTags) {
-					vm.tags = dataTags.items;
-				}, function(err) {
-					//err
-				})
-		}
-
-		function getPaperType() {
-			productDataService.PaperType.get()
-				.$promise.then(function (dataPaperType) {
-					vm.papertypes = dataPaperType.items;
-				}, function (err){
-					console.log(err);
-				});
 		}
 
 		function save(state) {

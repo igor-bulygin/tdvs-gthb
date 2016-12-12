@@ -38,6 +38,7 @@
 				vm.products = dataProducts.items;
 				vm.products.forEach(function(element) {
 					setMinimumPrice(element);
+					element.edit_link = '/deviser/' + vm.deviser.slug + '/works/' + element.id + '/edit';
 				})
 				
 				parseMainPhoto(vm.products);
@@ -102,8 +103,6 @@
 		}
 
 		init();
-
-
 
 	}
 

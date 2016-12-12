@@ -2,41 +2,100 @@
 
 	"use strict";
 
-	function controller(deviserDataService, productDataService, languageDataService, toastr, UtilService, tagDataService, $scope, $rootScope, productEvents, $location) {
+	function controller(deviserDataService, productDataService, languageDataService, 
+		metricDataService, toastr, UtilService, tagDataService, $scope, $rootScope, 
+		productEvents, sizechartDataService, $location) {
 		var vm = this;
-		
-				
 		vm.categories_helper = [];
-		vm.images = [];
-				
-		
+
 		function init(){
+			vm.product = new productDataService.ProductPriv();
+			vm.product.slug = {};
+			vm.product.categories = [];
+			vm.product.media = {
+				photos: [],
+				description_photos: []
+			};
+			vm.product.faq = [];
+			vm.product.options = {};
+			vm.product.madetoorder = {
+				type: 0
+			};
+			vm.product.preorder = {
+				type: 0
+			};
+			vm.product.bespoke = {
+				type: 0
+			};
+			vm.product.tags = {};
+			vm.product.price_stock = [];
+
 			getLanguages();
 			getCategories();
 			getDeviser();
+			getTags();
+			getMetric();
+			getSizechart();
+			getPaperType();
 			getProduct();
 		}
 
 		init();
-
-		function getLanguages() {
-			languageDataService.Languages.get()
-				.$promise.then(function(dataLanguages) {
-					vm.languages = dataLanguages.items;
-				}, function(err) {
-					toastr.erro(err);
-				});
-
-		}
 
 		function getCategories() {
 			productDataService.Categories.get({scope: 'all'})
 				.$promise.then(function (dataCategories) {
 					vm.allCategories = dataCategories.items;
 				}, function(err) {
-
+					//errors
 				});
 		}
+
+		function getMetric() {
+			metricDataService.Metric.get()
+				.$promise.then(function (dataMetric) {
+					vm.metric = dataMetric;
+				}, function(err) {
+					//errors
+				})
+		}
+
+		function getSizechart() {
+			sizechartDataService.Sizechart.get({scope: 'all'})
+				.$promise.then(function (dataSizechart) {
+					vm.sizecharts = dataSizechart.items;
+				}, function (err) {
+					//error
+				});
+		}
+
+		function getLanguages() {
+			languageDataService.Languages.get()
+				.$promise.then(function(dataLanguages) {
+					vm.languages = dataLanguages.items;
+				}, function(err) {
+					//errors
+				});
+		}
+
+		function getTags() {
+			tagDataService.Tags.get()
+				.$promise.then(function (dataTags) {
+					vm.tags = dataTags.items;
+				}, function (err) {
+					//err
+				});
+		}
+
+		function getPaperType() {
+			productDataService.PaperType.get()
+				.$promise.then(function (dataPaperType) {
+					vm.papertypes = dataPaperType.items;
+				}, function (err) {
+					//errors
+				});
+		}
+
 		function getDeviser(){
 			deviserDataService.Profile.get({
 				deviser_id: UtilService.returnDeviserIdFromUrl()
@@ -44,11 +103,9 @@
 				vm.deviser = dataDeviser;
 				vm.link_profile = '/deviser/' + dataDeviser.slug + '/' + dataDeviser.id + '/store/edit';
 				vm.profile = currentHost()+vm.deviser.url_images+vm.deviser.media.profile_cropped;
-				vm.product.deviser_id = dataDeviser.id;
 			}, function(err) {
-
+				//errors
 			});
-
 		}
 		
 		function getProduct() {
@@ -57,36 +114,10 @@
 			}).$promise.then(function(dataProduct) {
 				vm.product = dataProduct;
 				vm.product_original = angular.copy(dataProduct);
-
-				angular.forEach(dataProduct.categories, function(value, key){
-
-					angular.forEach(vm.allCategories, function(values,keys){
-						
-						if(value == values.id){
-							var catHelp =[]
-							catHelp = values.path.split("/");
-							catHelp.shift();
-							catHelp.pop();
-							catHelp.push(value);
-							vm.categories_helper[key]=catHelp;
-						}
-					});
-				});
-				
-				for (var i = 0; i < vm.product.media.photos.length; i++) {
-				vm.images[i] = {
-					pos: i,
-					url: currentHost() + vm.product.url_images + vm.product.media.photos[i].name,
-					filename: vm.product.media.photos[i].name
-					};
-				}
-				console.log(vm);	
-				
 			}, function (err) {
-				toastr.error(err);
+				//err
 			});
 		}
-		
 	}
 
 	angular

@@ -26,7 +26,7 @@
 				categories_selected: [null],
 				categories: [vm.rootCategories]
 			})
-			vm.product.categories.push(null);
+			vm.product['categories'].push(null);
 		}
 
 		function categorySelected(category, index_helper, index) {
@@ -153,6 +153,10 @@
 						vm.product.media.photos[index].name = dataUpload.data.filename;
 						unSetMainPhoto();
 						vm.product.media.photos[index]['main_product_photo'] = true;
+					}, function(err) {
+						//errors
+					}, function(evt) {
+						//evt when marking as main photo
 					})
 				}
 			}, function(err) {
@@ -181,6 +185,27 @@
 			}
 		});
 
+		$scope.$watch('productBasicInfoCtrl.product.categories', function(newValue, oldValue) {
+			if(angular.isArray(oldValue) && oldValue[0]===null && angular.isArray(newValue) && newValue.length > 0 && vm.product.id) {
+				for(var i = 0; i < newValue.length; i++) {
+					var path = UtilService.returnPathFromCategory(vm.categories, newValue[i]);
+					var path_array = path.split('/');
+					path_array.splice(0, 1)
+					path_array.splice(path_array.length-1,1);
+					path_array.push(newValue[i]);
+					for(var j = 0; j < path_array.length; j++) {
+						categorySelected(path_array[j], i, j);
+					}
+					if(i < newValue.length - 1) {
+						vm.categories_helper.push({
+							categories_selected: [null],
+							categories: [vm.rootCategories]
+						})
+					}
+				}
+			}
+		}, true);
+
 		//when get categories, set first
 		$scope.$watch('productBasicInfoCtrl.categories', function(newValue, oldValue) {
 			if(!oldValue && newValue) {
@@ -207,7 +232,7 @@
 
 		//watch photos and main photo errors
 		$scope.$watch('productBasicInfoCtrl.product.media.photos', function (newValue, oldValue) {
-			if(newValue.length > 0 && vm.photosRequired) {
+			if(angular.isArray(newValue) && newValue.length > 0 && vm.photosRequired) {
 				vm.photosRequired = false;
 			}
 			if(vm.mainPhotoRequired) {
@@ -220,7 +245,7 @@
 
 		//watch categories errors
 		$scope.$watch('productBasicInfoCtrl.product.categories', function(newValue, oldValue) {
-			if(newValue.indexOf(null) === -1) {
+			if(angular.isArray(newValue) && newValue.indexOf(null) === -1) {
 				vm.form.$submitted = false;
 			}
 		}, true);
