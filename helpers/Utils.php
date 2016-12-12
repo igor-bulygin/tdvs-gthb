@@ -1,17 +1,13 @@
 <?php
 namespace app\helpers;
 
-use app\models\Product;
+use app\models\Lang;
 use Exception;
-use Iterator;
-use IteratorAggregate;
+use Thumbor\Url\Builder;
 use Traversable;
 use Yii;
-use app\models\Lang;
-use yii\base\Model;
-use yii\helpers\Url;
 use yii\helpers\Json;
-use Thumbor\Url\Builder;
+use yii\helpers\Url;
 
 class Utils
 {
@@ -636,13 +632,19 @@ class Utils
 					['img' => '/imgs/banner_decoration.jpg', 'alt' => 'Header image', "active" => true],
 				];
 				break;
+			case 'f0cco': // "Gadgets"
+				return [
+						['img' => '/imgs/banner_gadgets.jpg', 'alt' => 'Header image', "active" => true],
+				];
+				break;
+			case 'ffeec': // "More"
 			default:
 				return [
-					['img' => '/imgs/banner-4.jpg', 'alt' => 'Header image', "active" => false],
-					['img' => '/imgs/banner-5.jpg', 'alt' => 'Header image', "active" => false],
-					['img' => '/imgs/banner-1.jpg', 'alt' => 'Header image', "active" => true],
-					['img' => '/imgs/banner-2.jpg', 'alt' => 'Header image', "active" => false],
-					['img' => '/imgs/banner-3.jpg', 'alt' => 'Header image', "active" => false],
+						['img' => '/imgs/banner-4.jpg', 'url' => 'http://dev.todevise.com/deviser/vaskolg-vaskolg/96a3290/store', 'alt' => 'Header image', "active" => false],
+						['img' => '/imgs/banner-5.jpg', 'url' => 'http://dev.todevise.com/deviser/charbonize-charbonize/4211c6d/store', 'alt' => 'Header image', "active" => false],
+						['img' => '/imgs/banner-1.jpg', 'url' => 'http://dev.todevise.com/deviser/serpent-andtheswan/ed833ej/store', 'alt' => 'Header image', "active" => false],
+						['img' => '/imgs/banner-2.jpg', 'url' => 'http://dev.todevise.com/deviser/be-headwear/51c0f3s/store', 'alt' => 'Header image', "active" => false],
+						['img' => '/imgs/banner-3.jpg', 'url' => 'http://dev.todevise.com/deviser/nina-monizdamaia/23239c1/store', 'alt' => 'Header image', "active" => true],
 				];
 		}
 	}
