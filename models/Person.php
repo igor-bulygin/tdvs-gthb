@@ -933,26 +933,21 @@ class Person extends CActiveRecord implements IdentityInterface
 	 */
 	public static function getRandomDevisers($limit, $categories = [])
 	{
-		// Filter by deviser and exclude unpublished profiles
-		$conditions[] =
-				[
-						'$match' => [
-								"type" => [
-										'$in' => [
-												Person::DEVISER,
-										]
-								],
-								"account_state" => [
-										'$ne' => [
-												Person::ACCOUNT_STATE_BLOCKED,
-												Person::ACCOUNT_STATE_DRAFT,
-										]
-								],
-						],
-				];
-
-		// Filter by category if present
 		if (!empty($categories)) {
+
+			// Exclude drafts
+			$conditions[] =
+					[
+							'$match' => [
+									"product_state" => [
+											'$ne' => [
+													Product2::PRODUCT_STATE_DRAFT,
+											]
+									]
+							]
+					];
+
+			// Filter by category
 			$conditions[] =
 					[
 							'$match' => [
@@ -961,23 +956,60 @@ class Person extends CActiveRecord implements IdentityInterface
 									]
 							]
 					];
-		}
-		// Randomize
-		$conditions[] =
-				[
-						'$sample' => [
-								'size' => $limit,
-						]
-				];
 
-		$randomDevisers = Yii::$app->mongodb->getCollection('person')->aggregate($conditions);
+			// Randomize
+			$conditions[] =
+					[
+							'$sample' => [
+									'size' => $limit,
+							]
+					];
 
-		$deviserIds = [];
-		foreach ($randomDevisers as $deviser) {
-			$deviserIds[] = $deviser['_id'];
+			$randomWorks = Yii::$app->mongodb->getCollection('product')->aggregate($conditions);
+
+			$deviserIds = [];
+			foreach ($randomWorks as $work) {
+				$deviserIds[] = $work['deviser_id'];
+			}
+
+		} else {
+
+			// Filter by deviser and exclude unpublished profiles
+			$conditions[] =
+					[
+							'$match' => [
+									"type" => [
+											'$in' => [
+													Person::DEVISER,
+											]
+									],
+									"account_state" => [
+											'$ne' => [
+													Person::ACCOUNT_STATE_BLOCKED,
+													Person::ACCOUNT_STATE_DRAFT,
+											]
+									],
+							],
+					];
+			// Randomize
+			$conditions[] =
+					[
+							'$sample' => [
+									'size' => $limit,
+							]
+					];
+
+			$randomDevisers = Yii::$app->mongodb->getCollection('person')->aggregate($conditions);
+
+			$deviserIds = [];
+			foreach ($randomDevisers as $deviser) {
+				$deviserIds[] = $deviser['short_id'];
+			}
 		}
+
+
 		$query = new ActiveQuery(Person::className());
-		$query->where(['in', '_id', $deviserIds]);
+		$query->where(['in', 'short_id', $deviserIds]);
 		$devisers = $query->all();
 		shuffle($devisers);
 

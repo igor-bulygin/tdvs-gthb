@@ -24,9 +24,9 @@ $this->title = 'Todevise / Home';
 		</ol>
 		<div class="carousel-inner home-carousel" role="listbox">
 			<?php foreach ($banners as $i => $banner) { ?>
-				
+
 					<div class="item <?= ($banner["active"]) ? 'active' : '' ?>">
-					 	<a href="<?= $banner['url']?>">
+					 	<a href="<?= isset($banner['url']) ? $banner['url'] : '#'?>">
 							<img src="<?= $banner["img"] ?>" alt="<?= $banner["alt"] ?>" title="">
 						</a>
 					</div>
