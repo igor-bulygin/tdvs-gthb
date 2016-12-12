@@ -31,9 +31,13 @@ $this->title = 'Todevise / Home';
 		</ol>
 		<div class="carousel-inner home-carousel" role="listbox">
 			<?php foreach ($banners as $i => $banner) { ?>
-				<div class="item <?= ($banner["active"]) ? 'active' : '' ?>">
-					<img src="<?= $banner["img"] ?>" alt="<?= $banner["alt"] ?>" title="">
-				</div>
+				
+					<div class="item <?= ($banner["active"]) ? 'active' : '' ?>">
+					 	<a href="http://dev.todevise.com/deviser/serpent-andtheswan/ed833ej/store">
+							<img src="<?= $banner["img"] ?>" alt="<?= $banner["alt"] ?>" title="">
+						</a>
+					</div>
+				
 			<?php } ?>
 		</div>
 	</div>
