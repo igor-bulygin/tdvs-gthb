@@ -47,7 +47,6 @@ use yii\widgets\ActiveForm;
 							<?php } ?>
 						</ul>
 						<?php
-						$active = 'active';
 						foreach ($categories as $category) {
 							if ($category->hasGroupsOfCategories()) {
 
@@ -55,7 +54,7 @@ use yii\widgets\ActiveForm;
 								foreach ($subCategories as $subCategory) {
 
 									$subSubCategories = $subCategory->getSubCategoriesHeader(); ?>
-									<ul class="shop-secondary-menu-wrapper <?=$active?> category category-<?=$category->slug?>">
+									<ul class="shop-secondary-menu-wrapper category category-<?=$category->slug?>">
 										<li><?= Utils::l($subCategory->name)?></li>
 										<?php foreach ($subSubCategories as $subSubCategory) { ?>
 											<li>
@@ -73,7 +72,7 @@ use yii\widgets\ActiveForm;
 							} else {
 								$subCategories = $category->getSubCategoriesHeader(); ?>
 
-								<ul class="shop-secondary-menu-wrapper <?= $active ?> category category-<?= $category->slug ?>">
+								<ul class="shop-secondary-menu-wrapper category category-<?= $category->slug ?>">
 									<?php foreach ($subCategories as $subCategory) { ?>
 										<li>
 											<a href="<?= Url::to(["public/category-b", "slug" => $subCategory->slug, 'category_id' => $subCategory->short_id]) ?>"><?= Utils::l($subCategory->name) ?></a>
@@ -88,7 +87,6 @@ use yii\widgets\ActiveForm;
 									} ?>
 								</ul><?php
 							}
-							$active = '';
 						} ?>
 					</div>
 				</li>
