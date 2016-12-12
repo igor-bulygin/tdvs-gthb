@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(productDataService, toastr, Upload, $scope, UtilService, $uibModal, $rootScope, productEvents) {
+	function controller(productDataService, toastr, Upload, $scope, UtilService, $uibModal, $rootScope, productEvents, $timeout) {
 		var vm = this;
 		vm.has_error = UtilService.has_error;
 		vm.name_language = 'en-US';
@@ -103,6 +103,13 @@
 					vm.product.media.photos.unshift({
 						name: dataUpload.data.filename
 					});
+					$timeout(function () {
+						delete file.progress;
+					}, 1000);
+				}, function (err) {
+					//errors
+				}, function (evt) {
+					file.progress = parseInt(100.0 * evt.loaded / evt.total);
 				})
 			})
 		}
@@ -217,6 +224,13 @@
 				vm.form.$submitted = false;
 			}
 		}, true);
+
+		//delete files array when done uploading
+		// $scope.$watch('productBasicInfoCtrl.files', function(newValue, oldValue) {
+		// 	console.log(newValue);
+		// 	// if(angular.isArray(newValue) && newValue.length === 1 && angular.isObject(newValue[0]) && UtilService.isEmpty(newValue[0]))
+		// 	// 	delete vm.files;
+		// }, true);
 
 		//events
 		$scope.$on(productEvents.requiredErrors, function(event, args){

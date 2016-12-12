@@ -63,6 +63,12 @@
 					<span class="delete ion-android-close" ng-click="productBasicInfoCtrl.deleteImage($index)"></span>
 					<p class="main-marked" ng-if="productBasicInfoCtrl.product.media.photos[$index].main_product_photo">Marked as main photo</p>
 				</div>
+				<div class="col-md-2 image-basic-info-edit" ng-repeat="item in productBasicInfoCtrl.files" ng-if="item.progress">
+					<div ng-if="item.progress <= 100">
+						<uib-progressbar value="item.progress" class="progress-striped active">{{item.progress}}</uib-progressbar>
+						<img ngf-thumbnail="item" class="grid-image">
+					</div>
+				</div>
 			</div>
 			<div class="row purple-text" ng-if="productBasicInfoCtrl.photosRequired" ng-cloak><p>Please upload at least 1 photo.</p></div>
 			<div class="row purple-text" ng-if="productBasicInfoCtrl.mainPhotoRequired" ng-cloak><p>Please mark one of the photos as main by clicking the star icon.</p></div>
