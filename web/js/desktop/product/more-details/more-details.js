@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(Upload, $uibModal, productDataService, UtilService, $scope, productEvents){
+	function controller($scope, $timeout, $uibModal, Upload, productDataService, UtilService, productEvents){
 		var vm = this;
 		vm.has_error = UtilService.has_error;
 		vm.description_language = 'en-US';
@@ -104,6 +104,7 @@
 					modalInstance.result.then(function (imageData) {
 						if(angular.isObject(imageData) && (imageData.photoCropped || imageData.title || imageData.description)) {
 								//upload cropped photo
+								vm.file = angular.copy(Upload.dataUrltoBlob(imageData.photoCropped, "temp.png"));
 								var data = {
 									deviser_id: UtilService.returnDeviserIdFromUrl(),
 									file: Upload.dataUrltoBlob(imageData.photoCropped, "temp.png")
@@ -128,6 +129,13 @@
 										title: imageData.title,
 										description: imageData.description
 									});
+									$timeout(function () {
+										delete vm.file;
+									}, 1000)
+								}, function (err) {
+									//errors
+								}, function (evt) {
+									vm.file.progress = parseInt(100.0 * evt.loaded/evt.total);
 								})
 						}
 					}, function (err) {

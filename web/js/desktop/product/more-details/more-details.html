@@ -43,6 +43,12 @@
 					<img class="grid-image" ng-src="{{image.url}}" alt="">
 					<span class="delete ion-android-close" ng-click="productMoreDetailsCtrl.deleteImage($index)"></span>
 				</div>
+				<div class="col-md-2 image-description-edit" ng-if="productMoreDetailsCtrl.file.progress">
+					<div ng-if="productMoreDetailsCtrl.file.progress <= 100">
+						<uib-progressbar value="productMoreDetailsCtrl.file.progress" class="progress-striped active">{{productMoreDetailsCtrl.file.progress}}</uib-progressbar>
+						<img ngf-thumbnail="productMoreDetailsCtrl.file" class="grid-image">
+					</div>
+				</div>
 			</div>
 			<div class="col-md-3">
 				<p class="info">Enrich your work description with photos that showcase its main features. You can upload maximum 4 photos.</p>
