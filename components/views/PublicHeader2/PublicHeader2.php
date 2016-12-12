@@ -1,11 +1,12 @@
 <?php
 use app\helpers\Utils;
 use app\models\Category;
-use yii\helpers\Html;
 use yii\helpers\Url;
-
 use yii\widgets\ActiveForm;
+
 /** @var Category $category */
+
+\app\components\assets\PublicHeader2Asset::register($this);
 
 ?>
 
@@ -38,60 +39,57 @@ use yii\widgets\ActiveForm;
 						<span>Shop by departament</span>
 					</a>
 
-				<div class="dropdown-menu dropdown-shop">
+					<div class="dropdown-menu dropdown-shop">
 						<ul class="shop-menu-wrapper">
 							<?php foreach($categories as $category) { ?>
-								<li><a class="ion-chevron-right" href="<?= Url::to(["public/category-b", "slug" => $category->slug, 'category_id' => $category->short_id])?>"><?= Utils::l($category->name)?></a></li>
+								<li class="toggle-category" data-target=".category-<?=$category->slug?>"><a class="ion-chevron-right" href="<?= Url::to(["public/category-b", "slug" => $category->slug, 'category_id' => $category->short_id])?>"><?= Utils::l($category->name)?></a></li>
 								<li role="separator" class="divider"></li>
 							<?php } ?>
-							<li><a class="ion-chevron-right" href="/">Gadgets</a></li>
 						</ul>
-						<ul class="shop-secondary-menu-wrapper">
-							<li>Womanswear</li>
-							<li>
-								<a href="">Accesories</a>
-							</li>
-							<li>
-								<a href="">Clothes</a>
-							</li>
-							<li>
-								<a href="">Intimate Appareal</a>
-							</li>
-							<li>
-								<a href="">Footwear</a>
-							</li>
-							<li>
-								<a href="">Sportswear</a>
-							</li>
-							<li class="minibanner">
-								<a href="#">
-									<img src="/imgs/mini-banner-1.jpg">
-								</a>
-							</li>
-						</ul>
-						<ul class="shop-secondary-menu-wrapper">
-							<li>Menswear</li>
-							<li>
-								<a href="">Accesories</a>
-							</li>
-							<li>
-								<a href="">Clothes</a>
-							</li>
-							<li>
-								<a href="">Footwear</a>
-							</li>
-							<li>
-								<a href="">Intimate Appareal</a>
-							</li>
-							<li>
-								<a href="">Sportswear</a>
-							</li>
-							<li class="minibanner">
-								<a href="#">
-									<img src="/imgs/mini-banner-2.jpg">
-								</a>
-							</li>
-						</ul>
+						<?php
+						$active = 'active';
+						foreach ($categories as $category) {
+							if ($category->hasGroupsOfCategories()) {
+
+								$subCategories = $category->getSubCategories();
+								foreach ($subCategories as $subCategory) {
+
+									$subSubCategories = $subCategory->getSubCategoriesHeader(); ?>
+									<ul class="shop-secondary-menu-wrapper <?=$active?> category category-<?=$category->slug?>">
+										<li><?= Utils::l($subCategory->name)?></li>
+										<?php foreach ($subSubCategories as $subSubCategory) { ?>
+											<li>
+												<a href="<?= Url::to(["public/category-b", "slug" => $subSubCategory->slug, 'category_id' => $subSubCategory->short_id])?>"><?=Utils::l($subSubCategory->name)?></a>
+											</li>
+										<?php } ?>
+										<li class="minibanner">
+											<a href="#">
+												<img src="<?=$category->getHeaderImage()?>">
+											</a>
+										</li>
+									</ul>
+								<?php }
+
+							} else {
+								$subCategories = $category->getSubCategoriesHeader(); ?>
+
+								<ul class="shop-secondary-menu-wrapper <?= $active ?> category category-<?= $category->slug ?>">
+									<?php foreach ($subCategories as $subCategory) { ?>
+										<li>
+											<a href="<?= Url::to(["public/category-b", "slug" => $subCategory->slug, 'category_id' => $subCategory->short_id]) ?>"><?= Utils::l($subCategory->name) ?></a>
+										</li><?php
+									}
+									if ($subCategories) { ?>
+										<li class="minibanner">
+											<a href="#">
+												<img src="<?=$category->getHeaderImage()?>">
+											</a>
+										</li><?php
+									} ?>
+								</ul><?php
+							}
+							$active = '';
+						} ?>
 					</div>
 				</li>
 			</ul>

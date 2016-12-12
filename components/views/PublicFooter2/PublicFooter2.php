@@ -2,7 +2,6 @@
 
 use app\helpers\Utils;
 use app\models\Category;
-use yii\helpers\Html;
 use yii\helpers\Url;
 
 /** @var Category $category */
@@ -27,9 +26,6 @@ $footerMode = 'collapsed';
 							<a href="<?= Url::to(["public/category-b", "slug" => $category->slug, 'category_id' => $category->short_id])?>"><?=Utils::l($category->name)?></a>
 						</li>
 					<?php } ?>
-					<li>
-						<a href="<?= Url::to(["public/create-deviser-account", "uuid" => "asdf"]) ?>">Other</a>
-					</li>
 				</ul>
 			</div>
 			<div class="col-sm-3">

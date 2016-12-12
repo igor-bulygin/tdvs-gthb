@@ -1,9 +1,9 @@
 <?php
 namespace app\models;
 
+use app\helpers\CActiveRecord;
 use app\helpers\Utils;
 use Yii;
-use app\helpers\CActiveRecord;
 use yii\mongodb\ActiveQuery;
 use yii\mongodb\Query;
 
@@ -154,7 +154,7 @@ class Category extends CActiveRecord {
 	public static function getHeaderCategories()
 	{
 		// TODO Forced for the demo. This must be selected in "admin" panel.
-		return Category::find()->where(["short_id" => ['1a23b', '4a2b4', '3f78g', '2r67s']])->all();
+		return Category::find()->where(["path" => "/"])->all();
 	}
 
 	/**
@@ -165,10 +165,86 @@ class Category extends CActiveRecord {
 	public static function getFooterCategories()
 	{
 		// TODO Forced for the demo. This must be selected in "admin" panel.
-		return Category::find()->where(["short_id" => ['1a23b', '2r67s', '4a2b4']])->all();
+		return Category::find()->where(["path" => "/"])->all();
 	}
 
-	public function getSubCategories($current_path = null) {
+	/**
+	 * @return Category[]
+	 */
+	public function getSubCategories() {
+		return Category::find()->where(["path" => $this->path . $this->short_id . "/"])->all();
+	}
+
+	/**
+	 * @return Category[]
+	 */
+	public function getSubCategoriesHeader() {
+
+		/*
+		FASHION - WOMENSWEAR - Accessories, Coats & Jackets, Dresses, Footwear, Jeans, Knitwear, Tops
+
+		FASHION - MENSWEAR - Accessories, Coats & Jackets, Footwear, Jeans, Shirts, Suits & Blazers, T-shirts
+
+		DECORATION: Carpets, Furniture, Home Accessories, Lighting, Tableware
+
+		ART: Ceramic, Painting, Photography, Printmaking, Sculpture
+
+		JEWELRY: Bracelets, Collars, Earrings, Necklaces, Rings, Watches
+
+		GADGETS: sin subcategorías (si pinchamos en GADGETS nos lleva a la home de GADGETS)
+
+		FOOD & BEVERAGE: sin subcategorías (si pinchamos en FOOD & BEVERAGES nos lleva a la home de FOOD & BEVERAGE)
+		*/
+
+		$fixedCategories = [
+			// Womenswear
+			'bf73v',
+			'22ecr',
+			'd9aaa',
+			'e7d15',
+			'4c1d2',
+			'3ac6t',
+			'5d2ek',
+
+			// Menswear
+			'9e5e6',
+			'ada11',
+			'2029g',
+			'ab0a7',
+			'8d1a2',
+			'b5144',
+			'8c303',
+
+			// Decoration
+			'2b11c',
+			'2a10b',
+			'4f2a0',
+			'2237e',
+			'7707g',
+
+			// Art
+			'1b34c',
+			'1h10i',
+			'1i11j',
+			'1j12k',
+			'1k13l',
+
+			// jewelry
+			'ef4ch',
+			'9a7bu',
+			'3abc9',
+			'3klm5',
+			'3145q',
+			'3lva9',
+		];
+		$current_path =$this->path . $this->short_id . "/";
+		return Category::find()
+				->where(["REGEX", "path", "/^$current_path/"])
+				->andWhere(['in', 'short_id', $fixedCategories])
+				->all();
+	}
+
+	public function getSubCategoriesOld($current_path = null) {
 		if ($current_path === null) {
 			$current_path = $this->path . $this->short_id . "/";
 		}
@@ -201,7 +277,7 @@ class Category extends CActiveRecord {
 
 		$ids = [$this->short_id];
 		if ($includeChild) {
-			$subs = $this->getSubCategories($current_path);
+			$subs = $this->getSubCategoriesOld($current_path);
 			foreach ($subs as $sub) {
 				$ids[] = $sub["short_id"];
 			}
@@ -271,7 +347,7 @@ class Category extends CActiveRecord {
 				$current_path = $dirty_values["path"] . $this->short_id . "/";
 				$new_sub_path = $this->path . $this->short_id . "/";
 
-				foreach($this->getSubCategories($current_path) as $category) {
+				foreach($this->getSubCategoriesOld($current_path) as $category) {
 					//TODO: Optimize with an update instead of find + save?
 					$category = Category::findOne(['short_id' => $category["short_id"]]);
 					$category->path = str_replace($current_path, $new_sub_path, $category->path, $count = 1);
@@ -284,7 +360,7 @@ class Category extends CActiveRecord {
 	}
 
 	public function beforeDelete() {
-		foreach($this->getSubCategories() as $category) {
+		foreach($this->getSubCategoriesOld() as $category) {
 			$category = Category::findOne(["short_id" => $category["short_id"]]);
 			//TODO: Find all products and remove this category from each one
 			//TODO: Notify the product's deviser that this product was removed from the category we're about to delete
@@ -294,6 +370,40 @@ class Category extends CActiveRecord {
 		return parent::beforeDelete();
 	}
 
+	/**
+	 * Returns the main category (first level category) of the current object
+	 *
+	 * @return Category
+	 */
+	public function getMainCategory()
+	{
+		if ($this->path == '/') {
+			return $this;
+		}
+		$paths = array_filter(explode('/', $this->path));
+		$category = Category::findOne(['short_id' => reset($paths)]);
+		return $category;
+	}
 
+	/**
+	 * Returns the path to de image to be shown on the "shop by deparment" section of the header
+	 * @return string
+	 */
+	public function getHeaderImage()
+	{
+		//TODO: define one image for each "first level" category. Until this, randomize images :)
+		if (rand(0, 10) > 5) {
+			return "/imgs/mini-banner-1.jpg";
+		}
+		return "/imgs/mini-banner-2.jpg";
+	}
 
+	/**
+	 * Returns TRUE if the current category has groups of categories to be shown on the "shop by deparment" header
+	 *
+	 * @return bool
+	 */
+	public function hasGroupsOfCategories() {
+		return $this->short_id == '4a2b4'; // at this moment only fashion has this behaviour
+	}
 }
