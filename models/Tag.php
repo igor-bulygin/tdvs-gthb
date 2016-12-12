@@ -370,8 +370,10 @@ class Tag extends CActiveRecord
 
 					} else {
 
+						$firstOption = reset($oneoption);
+
 						// Case 2: Option attribute has only one value. Return value, text and colors
-						if ($oneoption[0] == $option["value"]) {
+						if ($firstOption == $option["value"]) {
 							$values[] = [
 									"value" => $option["value"],
 									"text" => Utils::l($option["text"]),
