@@ -2,33 +2,24 @@
 
 namespace app\controllers;
 
-use app\helpers\CActiveRecord;
-use app\models\Invitation;
-use Yii;
-use app\models\Tag;
-use app\models\StaticText;
-use yii\helpers\Url;
-use app\models\Person;
+use app\helpers\CController;
+use app\helpers\ModelUtils;
 use app\helpers\Utils;
-use yii\mongodb\ActiveQuery;
-use yii\mongodb\Query;
-use yii\web\BadRequestHttpException;
-use yii\web\Controller;
-use app\models\Product;
 use app\models\Become;
 use app\models\Category;
 use app\models\ContactForm;
-use yii\base\DynamicModel;
-use yii\filters\VerbFilter;
-use app\helpers\ModelUtils;
-use app\helpers\CController;
-use yii\filters\AccessControl;
-use yii\data\ArrayDataProvider;
-use yii\data\ActiveDataProvider;
-use yii\base\ViewContextInterface;
 use app\models\Faq;
-use yii\web\Response;
+use app\models\Invitation;
+use app\models\Person;
+use app\models\Product;
+use app\models\Product2;
+use app\models\Tag;
 use app\models\Term;
+use Yii;
+use yii\base\DynamicModel;
+use yii\data\ArrayDataProvider;
+use yii\mongodb\ActiveQuery;
+use yii\web\Response;
 
 class PublicController extends CController
 {
@@ -207,20 +198,10 @@ class PublicController extends CController
 		$banners = Utils::getBannerImages();
 
 		// Devisers
-		$query = new ActiveQuery(Person::className());
-		// filter devisers related
-		// TODO remove forced devisers for the demo
-//		$query->limit(20)->offset(rand(1, 100));
-		$query->where($this->getDevisersFilterForDemo());
-		$devisers = $query->all();
+		$devisers = Person::getRandomDevisers(20);
 
 		// Works
-		$query = new ActiveQuery(Product::className());
-		// TODO improve random works
-//		$query->limit(60)->offset(rand(1, 100));
-		$query->where($this->getProductsFilterForDemo(300));
-		$works = $query->all();
-		shuffle($works);
+		$works = Product2::getRandomWorks(300);
 
 		// divide then in blocks to be rendered in bottom section
 		$moreWork = [];
@@ -249,33 +230,16 @@ class PublicController extends CController
 
 	public function actionCategoryB($slug, $category_id)
 	{
-		$banners = Utils::getBannerImages($category_id);
-
-//		$category_id = '1a23b'; // "Art"
-//		$category_id = '4a2b4'; // "Fashion"
-//		$category_id = '2r67s'; // "Decoration"
-//		$category_id = '2p45q'; // "Industrial Design"
-//		$category_id = '3f78g'; // "Jewelry"
 
 		// get the category object
-		$category = Category::findOne(["short_id" => $category_id]);
-//		print_r(count($category->getShortIds()));
+		$category = Category::findOne(["short_id" => $category_id]); /* @var Category $category */
 
 		// Devisers
-		$query = new ActiveQuery(Person::className());
-		// filter devisers related
-		$query->where(['categories' => $category->getShortIds()]);
-		// TODO improve random devisers
-		$query->limit(20)->offset(rand(1, 8));
-		$devisers = $query->all();
+		$devisers = Person::getRandomDevisers(20, $category->getShortIds());
 
 		// Works
-		$query = new ActiveQuery(Product::className());
-		$query->where(['categories' => $category->getShortIds()]);
-		// TODO improve random works
-		$query->limit(180)->offset(rand(1, 12));
-		$works = $query->all();
-		shuffle($works);
+		$works = Product2::getRandomWorks(300, $category->getShortIds());
+
 
 		// divide then in blocks to be rendered in bottom section
 		$moreWork = [];
@@ -286,6 +250,12 @@ class PublicController extends CController
 				"three" => array_slice($works, ($start + 12), 3),
 			];
 		}
+		if ($category->path == "/") {
+			$category_id_banners = $category->short_id;
+		} else {
+			$category_id_banners = $category->getMainCategory()->short_id;
+		}
+		$banners = Utils::getBannerImages($category_id_banners);
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("index-2", [

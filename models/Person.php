@@ -8,6 +8,7 @@ use Exception;
 use MongoDate;
 use Yii;
 use yii\base\NotSupportedException;
+use yii\mongodb\ActiveQuery;
 use yii\web\IdentityInterface;
 use yii2tech\embedded\Mapping;
 
@@ -921,6 +922,66 @@ class Person extends CActiveRecord implements IdentityInterface
 			!Yii::$app->user->isGuest && 			// has to be a connected user
 			Yii::$app->user->id === $this->id		// the person must be the connected user
 		;
+	}
+
+	/**
+	 * Returns a number of random devisers.
+	 *
+	 * @param int $limit
+	 * @param array $categories
+	 * @return Product2[]
+	 */
+	public static function getRandomDevisers($limit, $categories = [])
+	{
+		// Filter by deviser and exclude unpublished profiles
+		$conditions[] =
+				[
+						'$match' => [
+								"type" => [
+										'$in' => [
+												Person::DEVISER,
+										]
+								],
+								"account_state" => [
+										'$ne' => [
+												Person::ACCOUNT_STATE_BLOCKED,
+												Person::ACCOUNT_STATE_DRAFT,
+										]
+								],
+						],
+				];
+
+		// Filter by category if present
+		if (!empty($categories)) {
+			$conditions[] =
+					[
+							'$match' => [
+									"categories" => [
+											'$in' => $categories
+									]
+							]
+					];
+		}
+		// Randomize
+		$conditions[] =
+				[
+						'$sample' => [
+								'size' => $limit,
+						]
+				];
+
+		$randomDevisers = Yii::$app->mongodb->getCollection('person')->aggregate($conditions);
+
+		$deviserIds = [];
+		foreach ($randomDevisers as $deviser) {
+			$deviserIds[] = $deviser['_id'];
+		}
+		$query = new ActiveQuery(Person::className());
+		$query->where(['in', '_id', $deviserIds]);
+		$devisers = $query->all();
+		shuffle($devisers);
+
+		return $devisers;
 	}
 
 }

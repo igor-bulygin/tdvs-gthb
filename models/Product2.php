@@ -988,4 +988,59 @@ class Product2 extends Product {
 		}
 	}
 
+	/**
+	 * Returns a number of random works.
+	 *
+	 * @param int $limit
+	 * @param array $categories
+	 * @return Product2[]
+	 */
+	public static function getRandomWorks($limit, $categories = [])
+	{
+		// Exclude drafts
+		$conditions[] =
+				[
+						'$match' => [
+								"product_state" => [
+										'$ne' => [
+												Product2::PRODUCT_STATE_DRAFT,
+										]
+								]
+						]
+				];
+
+		// Filter by category if present
+		if (!empty($categories)) {
+			$conditions[] =
+					[
+							'$match' => [
+									"categories" => [
+											'$in' => $categories
+									]
+							]
+					];
+		}
+
+		// Randomize
+		$conditions[] =
+				[
+						'$sample' => [
+								'size' => $limit,
+						]
+				];
+
+		$randomWorks = Yii::$app->mongodb->getCollection('product')->aggregate($conditions);
+
+		$worksId = [];
+		foreach ($randomWorks as $work) {
+			$worksId[] = $work['_id'];
+		}
+		$query = new ActiveQuery(Product2::className());
+		$query->where(['in', '_id', $worksId]);
+		$works = $query->all();
+		shuffle($works);
+
+		return $works;
+	}
+
 }
