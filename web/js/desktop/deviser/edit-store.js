@@ -1,28 +1,20 @@
 (function () {
 	"use strict";
 
-	function controller(productDataService, UtilService, toastr, $location) {
+	function controller(productDataService, deviserDataService, UtilService, toastr, $location) {
 		var vm = this;
 		vm.update = update;
 		vm.deviser_id = UtilService.returnDeviserIdFromUrl();
 		vm.language = 'en-US';
 
-		function parseCategories() {
-			var url = $location.absUrl();
-			if(url.split("?").length > 1) {
-				var queries = url.split("?")[1];
-				var categories = queries.split('=');
-				if (categories.length > 2) {
-					vm.category = categories[1].split('&')[0];
-					vm.subcategory = categories[2];
-				} else {
-					vm.category = categories[1];
-				}
-			}
+		function init() {
+			parseCategories();
+			getDeviser();
 		}
-	
+
+		init();
+
 		function getProducts() {
-			
 			var data = {
 				"deviser": UtilService.returnDeviserIdFromUrl(),
 				"limit": 1000
@@ -38,19 +30,35 @@
 				vm.products = dataProducts.items;
 				vm.products.forEach(function(element) {
 					setMinimumPrice(element);
-					element.edit_link = '/deviser/' + vm.deviser.slug + '/works/' + element.id + '/edit';
+					element.edit_link = currentHost() + '/deviser/' + vm.deviser.slug + '/' + vm.deviser.id + '/works/' + element.id + '/edit';
 				})
-				
 				parseMainPhoto(vm.products);
-				
 			});
-
 		}
-		
-		function init() {
-			parseCategories();
-			getProducts();
-			
+
+		function getDeviser() {
+			deviserDataService.Profile.get({
+				deviser_id: UtilService.returnDeviserIdFromUrl()
+			}).$promise.then(function(dataDeviser) {
+				vm.deviser = dataDeviser;
+				getProducts();
+			}, function(err) {
+				//errors
+			});
+		}
+
+		function parseCategories() {
+			var url = $location.absUrl();
+			if(url.split("?").length > 1) {
+				var queries = url.split("?")[1];
+				var categories = queries.split('=');
+				if (categories.length > 2) {
+					vm.category = categories[1].split('&')[0];
+					vm.subcategory = categories[2];
+				} else {
+					vm.category = categories[1];
+				}
+			}
 		}
 
 		function update(index, product) {
@@ -102,8 +110,6 @@
 				});
 		}
 
-		init();
-
 	}
 
 	function draftProduct() {
@@ -121,9 +127,9 @@
 		return function(input){
 			var draft=[];
 			angular.forEach(input,function(product){
-				if(product.product_state === 'product_state_active' || product.product_state === null)//delete the null with the refactor
+				if(product.product_state === 'product_state_active' || product.product_state === null)
 					draft.push(product)
-				})
+			});
 			return draft;
 		}
 	}
