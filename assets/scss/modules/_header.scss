@@ -199,6 +199,7 @@
         }
     }
     .shop-secondary-menu-wrapper{
+		display: none;
 		&.active{
 			display:block;
 		}
