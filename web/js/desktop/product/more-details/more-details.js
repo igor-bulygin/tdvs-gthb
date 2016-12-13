@@ -9,6 +9,7 @@
 		vm.faq_selected = false;
 		vm.faq_helper = [];
 		vm.images = [];
+		vm.tags = {};
 		vm.parseQuestion = parseQuestion;
 		vm.isLanguageOk = isLanguageOk;
 		vm.addFaq = addFaq;
@@ -68,12 +69,12 @@
 			return vm.faq_helper[index].completedLanguages.indexOf(code) > -1 ? true : false;
 		}
 
-		function addTag(tag) {
-			if(!vm.product.tags[vm.tags_language])
-				vm.product.tags[vm.tags_language]=[tag.text];
+		function addTag(tag, language) {
+			if(!vm.product.tags[language])
+				vm.product.tags[language]=[tag.text];
 			else {
-				if(vm.product.tags[vm.tags_language].indexOf(tag.text) === -1)
-					vm.product.tags[vm.tags_language].push(tag.text)
+				if(vm.product.tags[language].indexOf(tag.text) === -1)
+					vm.product.tags[language].push(tag.text)
 			}
 		}
 
@@ -168,6 +169,17 @@
 					vm.images = UtilService.parseImagesUrl(vm.product.media.description_photos, '/uploads/product/' + newValue + '/');
 			}
 		});
+
+		$scope.$watch('productMoreDetailsCtrl.product.tags', function(newValue, oldValue) {
+			if(angular.isObject(oldValue) && UtilService.isEmpty(oldValue) && angular.isObject(newValue) && !UtilService.isEmpty(newValue)) {
+				for(var key in newValue) {
+					vm.tags[key] = [];
+					newValue[key].forEach(function(element) {
+						vm.tags[key].push({text: element});
+					});
+				}
+			}
+		}, true);
 
 		//events
 		$scope.$on(productEvents.requiredErrors, function(event, args) {
