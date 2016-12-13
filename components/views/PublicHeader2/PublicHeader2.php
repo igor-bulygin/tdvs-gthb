@@ -38,8 +38,9 @@ use yii\widgets\ActiveForm;
 						<i class="fa fa-bars" aria-hidden="true"></i>
 						<span>Shop by departament</span>
 					</a>
-
+					
 					<div class="dropdown-menu dropdown-shop">
+						
 						<ul class="shop-menu-wrapper">
 							<?php foreach($categories as $category) { ?>
 								<li class="toggle-category" data-target=".category-<?=$category->slug?>"><a class="ion-chevron-right" href="<?= Url::to(["public/category-b", "slug" => $category->slug, 'category_id' => $category->short_id])?>"><?= Utils::l($category->name)?></a></li>
@@ -88,6 +89,7 @@ use yii\widgets\ActiveForm;
 								</ul><?php
 							}
 						} ?>
+
 					</div>
 				</li>
 			</ul>

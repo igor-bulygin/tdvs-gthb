@@ -1299,6 +1299,8 @@ input[type="radio"] .styled:checked + label::after {
   .dropdown-shop .shop-secondary-menu-wrapper {
     float: left;
     padding: 5px 20px; }
+    .dropdown-shop .shop-secondary-menu-wrapper.active {
+      display: block; }
     @media (max-width: 768px) {
       .dropdown-shop .shop-secondary-menu-wrapper {
         display: none; } }

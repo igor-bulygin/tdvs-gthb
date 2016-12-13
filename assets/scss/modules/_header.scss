@@ -199,6 +199,9 @@
         }
     }
     .shop-secondary-menu-wrapper{
+		&.active{
+			display:block;
+		}
         float:left;
         padding: 5px 20px;
         @media (max-width: 768px){
@@ -263,5 +266,6 @@
         }
     }
 }
+
 
 
