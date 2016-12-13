@@ -2,18 +2,22 @@
 	<span class="title">4/ Price &amp; Stock</span>
 	<form name="productPriceStockCtrl.form" novalidate>
 		<div class="row items-row">
-			<label for="weight">Weight</label>
-			<ol class="nya-bs-select categories-select ng-class:{'purple': productPriceStockCtrl.has_error(productPriceStockCtrl.form, productPriceStockCtrl.form.weight_unit)}" ng-model="productPriceStockCtrl.product.weight_unit" name="weight_unit" required>
-				<li nya-bs-option="unit in productPriceStockCtrl.metric.weight">
-					<a href="#"><span ng-bind="unit"></span></a>
-				</li>
-			</ol>
-			<label for="dimension">Dimension</label>
-			<ol class="nya-bs-select categories-select ng-class:{'purple': productPriceStockCtrl.has_error(productPriceStockCtrl.form, productPriceStockCtrl.form.dimension_unit)}" ng-model="productPriceStockCtrl.product.dimension_unit" name="dimension_unit" required>
-				<li nya-bs-option="unit in productPriceStockCtrl.metric.size">
-					<a href="#"><span ng-bind="unit"></span></a>
-				</li>
-			</ol>
+			
+				<label for="weight">Weight</label>
+				<ol class="nya-bs-select categories-select ng-class:{'purple': productPriceStockCtrl.has_error(productPriceStockCtrl.form, productPriceStockCtrl.form.weight_unit)}" ng-model="productPriceStockCtrl.product.weight_unit" name="weight_unit" required>
+					<li nya-bs-option="unit in productPriceStockCtrl.metric.weight">
+						<a href="#"><span ng-bind="unit"></span></a>
+					</li>
+				</ol>
+	
+		
+				<label class="ml-15" for="dimension">Dimension</label>
+				<ol class="nya-bs-select categories-select ng-class:{'purple': productPriceStockCtrl.has_error(productPriceStockCtrl.form, productPriceStockCtrl.form.dimension_unit)}" ng-model="productPriceStockCtrl.product.dimension_unit" name="dimension_unit" required>
+					<li nya-bs-option="unit in productPriceStockCtrl.metric.size">
+						<a href="#"><span ng-bind="unit"></span></a>
+					</li>
+				</ol>
+
 		</div>
 	</form>
 		<table class="table product-table" ng-if="productPriceStockCtrl.product.price_stock.length > 0">
