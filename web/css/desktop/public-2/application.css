@@ -3279,7 +3279,10 @@ input[type="radio"] .styled:checked + label::after {
           padding: 0;
           margin: 0 0 0 2px; }
       .product .product-data-wrapper .product-data .row-size.expand {
-        padding: 20px 0; }
+        padding: 5px 0;
+        display: block;
+        width: 100%;
+        float: left; }
       .product .product-data-wrapper .product-data .row-size .info {
         color: #bfbfbf;
         cursor: pointer; }
