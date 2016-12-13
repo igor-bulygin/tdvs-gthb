@@ -53,43 +53,45 @@ use yii\widgets\ActiveForm;
 							if ($category->hasGroupsOfCategories()) {
 
 								$subCategories = $category->getSubCategories();
-								foreach ($subCategories as $subCategory) {
+								if ($subCategories) {
+									foreach ($subCategories as $subCategory) {
 
-									$subSubCategories = $subCategory->getSubCategoriesHeader(); ?>
-									<ul class="shop-secondary-menu-wrapper category category-<?=$category->slug?> <?=$active?>">
-										<li><?= Utils::l($subCategory->name)?></li>
-										<?php foreach ($subSubCategories as $subSubCategory) { ?>
-											<li>
-												<a href="<?= Url::to(["public/category-b", "slug" => $subSubCategory->slug, 'category_id' => $subSubCategory->short_id])?>"><?=Utils::l($subSubCategory->name)?></a>
-											</li>
-										<?php }
-										if (($image = $subCategory->getHeaderImage()) !== null) { ?>
-											<li class="minibanner">
+										$subSubCategories = $subCategory->getSubCategoriesHeader(); ?>
+										<ul class="shop-secondary-menu-wrapper category category-<?= $category->slug ?> <?= $active ?>">
+											<li><?= Utils::l($subCategory->name) ?></li>
+											<?php foreach ($subSubCategories as $subSubCategory) { ?>
+												<li>
+													<a href="<?= Url::to(["public/category-b", "slug" => $subSubCategory->slug, 'category_id' => $subSubCategory->short_id]) ?>"><?= Utils::l($subSubCategory->name) ?></a>
+												</li>
+											<?php }
+											if (($image = $subCategory->getHeaderImage()) !== null) { ?>
+												<li class="minibanner">
 												<a href="#">
 													<img src="<?= $image ?>">
 												</a>
+												</li><?php
+											} ?>
+										</ul>
+									<?php }
+								}
+							} else {
+								$subCategories = $category->getSubCategoriesHeader();
+								if ($subCategories) { ?>
+									<ul class="shop-secondary-menu-wrapper category category-<?= $category->slug ?> <?= $active ?>">
+										<?php foreach ($subCategories as $subCategory) { ?>
+											<li>
+											<a href="<?= Url::to(["public/category-b", "slug" => $subCategory->slug, 'category_id' => $subCategory->short_id]) ?>"><?= Utils::l($subCategory->name) ?></a>
+											</li><?php
+										}
+										if (($image = $category->getHeaderImage()) !== null) { ?>
+											<li class="minibanner">
+											<a href="#">
+												<img src="<?= $image ?>">
+											</a>
 											</li><?php
 										} ?>
-									</ul>
-								<?php }
-
-							} else {
-								$subCategories = $category->getSubCategoriesHeader(); ?>
-
-								<ul class="shop-secondary-menu-wrapper category category-<?= $category->slug ?> <?=$active?>">
-									<?php foreach ($subCategories as $subCategory) { ?>
-										<li>
-											<a href="<?= Url::to(["public/category-b", "slug" => $subCategory->slug, 'category_id' => $subCategory->short_id]) ?>"><?= Utils::l($subCategory->name) ?></a>
-										</li><?php
-									}
-									if (($image = $category->getHeaderImage()) !== null) { ?>
-										<li class="minibanner">
-											<a href="#">
-												<img src="<?=$image?>">
-											</a>
-										</li><?php
-									} ?>
-								</ul><?php
+									</ul><?php
+								}
 							}
 							$active = '';
 						} ?>
