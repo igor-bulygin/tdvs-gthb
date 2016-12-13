@@ -217,7 +217,20 @@
 			return requiredOption && (!angular.isObject(textField) || !textField['en-US'] || textField['en-US'] == '' || textField['en-US'] == undefined);
 		}
 
-		//watchs
+		//watches
+		$scope.$watch('productVariationsCtrl.product.bespoke', function(newValue, oldValue) {
+			if(angular.isObject(oldValue) && oldValue.type === 0 && angular.isObject(newValue) && newValue.type === 1) {
+				vm.bespoke_selected = true;
+			}
+		}, true);
+
+		$scope.$watch('productVariationsCtrl.product.preorder', function(newValue, oldValue) {
+			//console.log(newValue, oldValue);
+		}, true);
+
+		$scope.$watch('productVariationsCtrl.product.madetoorder', function(newValue, oldValue) {
+			//console.log(newValue, oldValue);
+		}, true);
 		//watch product
 
 		//events
