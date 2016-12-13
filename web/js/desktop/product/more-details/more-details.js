@@ -160,6 +160,16 @@
 			vm.descriptionRequired = false;
 		}, true);
 		$scope.$watch('productMoreDetailsCtrl.product.faq', function(newValue, oldValue) {
+			if(angular.isArray(oldValue) && oldValue.length === 0 && angular.isArray(newValue) && newValue.length > 0) {
+				vm.faq_selected = true;
+				for(var i = 0; i < newValue.length; i++) {
+					vm.faq_helper.unshift({
+						completedLanguages: [],
+						languageSelected: 'en-US'
+					})
+					parseQuestion(newValue[i], i);
+				}
+			}
 			vm.faqRequired = false;
 		}, true);
 
