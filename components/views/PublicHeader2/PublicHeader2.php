@@ -38,7 +38,7 @@ use yii\widgets\ActiveForm;
 						<i class="fa fa-bars" aria-hidden="true"></i>
 						<span>Shop by departament</span>
 					</a>
-					
+					<div class="dropdowns-wrapper">
 					<div class="dropdown-menu dropdown-shop">
 						
 						<ul class="shop-menu-wrapper">
@@ -93,7 +93,7 @@ use yii\widgets\ActiveForm;
 							}
 							$active = '';
 						} ?>
-
+						</div>
 					</div>
 				</li>
 			</ul>

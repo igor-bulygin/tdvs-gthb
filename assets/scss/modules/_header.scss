@@ -144,8 +144,6 @@
     }
 }
 .dropdown-shop{
-    top: 59px;
-    min-width:634px;
     @media (max-width: 768px){
         top: 10px;
         min-width:100%;
@@ -266,6 +264,12 @@
             display: inline-block;
         }
     }
+}
+.dropdowns-wrapper{
+	position: absolute;
+    top: 57px;
+    width: 633px;
+    float: left;
 }
 
 
