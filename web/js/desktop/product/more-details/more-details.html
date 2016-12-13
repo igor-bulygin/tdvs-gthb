@@ -96,7 +96,7 @@
 				<div ng-if="productMoreDetailsCtrl.faq_selected">
 					<div class="col-md-12 pad-about" ng-repeat="question in productMoreDetailsCtrl.product.faq track by $index" class="delete-options-wrapper">
 						<a href="" class="delete-link pull-right" ng-click="productMoreDetailsCtrl.deleteQuestion($index)">Delete question</a>
-						<div class="edit-faq-panel">
+						<div class="edit-faq-panel no-mar">
 							<div class="faq-language-menu">
 								<ol class="nya-bs-select form-control" ng-model="productMoreDetailsCtrl.faq_helper[$index].languageSelected" ng-change="productMoreDetailsCtrl.parseQuestion(question, $index)">
 									<li nya-bs-option="language in productMoreDetailsCtrl.languages" class="ng-class:{'lang-selected': productMoreDetailsCtrl.isLanguageOk(language.code, $parent.$index)}" data-value="language.code" deep-watch="true">

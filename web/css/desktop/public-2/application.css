@@ -306,6 +306,9 @@ ul {
 .no-pad-r {
   padding-right: 0 !important; }
 
+.no-mar {
+  margin: 0 !important; }
+
 /* Dont display dropable zone on dragg and drop */
 .dndDraggingSource {
   display: none; }
@@ -3276,7 +3279,10 @@ input[type="radio"] .styled:checked + label::after {
           padding: 0;
           margin: 0 0 0 2px; }
       .product .product-data-wrapper .product-data .row-size.expand {
-        padding: 20px 0; }
+        padding: 5px 0;
+        display: block;
+        width: 100%;
+        float: left; }
       .product .product-data-wrapper .product-data .row-size .info {
         color: #bfbfbf;
         cursor: pointer; }
@@ -3848,6 +3854,8 @@ input[type="radio"] .styled:checked + label::after {
       transition-timing-function: ease-out; }
 
 .add-cathegory {
+  margin: -15px 0 0 0;
+  display: block;
   color: #7AB83A;
   cursor: pointer; }
   .add-cathegory:hover {
