@@ -3820,6 +3820,7 @@ input[type="radio"] .styled:checked + label::after {
       .items-row .categories-select.purple button {
         border: 1px solid #b933f4; }
   .items-row .close-row {
+    margin: 0 8px;
     color: #ffffff;
     background-color: #bfbfbf;
     font-size: 11px;
