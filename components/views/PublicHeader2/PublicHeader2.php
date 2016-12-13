@@ -60,12 +60,14 @@ use yii\widgets\ActiveForm;
 											<li>
 												<a href="<?= Url::to(["public/category-b", "slug" => $subSubCategory->slug, 'category_id' => $subSubCategory->short_id])?>"><?=Utils::l($subSubCategory->name)?></a>
 											</li>
-										<?php } ?>
-										<li class="minibanner">
-											<a href="#">
-												<img src="<?=$category->getHeaderImage()?>">
-											</a>
-										</li>
+										<?php }
+										if (($image = $subCategory->getHeaderImage()) !== null) { ?>
+											<li class="minibanner">
+												<a href="#">
+													<img src="<?= $image ?>">
+												</a>
+											</li><?php
+										} ?>
 									</ul>
 								<?php }
 
@@ -78,10 +80,10 @@ use yii\widgets\ActiveForm;
 											<a href="<?= Url::to(["public/category-b", "slug" => $subCategory->slug, 'category_id' => $subCategory->short_id]) ?>"><?= Utils::l($subCategory->name) ?></a>
 										</li><?php
 									}
-									if ($subCategories) { ?>
+									if (($image = $category->getHeaderImage()) !== null) { ?>
 										<li class="minibanner">
 											<a href="#">
-												<img src="<?=$category->getHeaderImage()?>">
+												<img src="<?=$image?>">
 											</a>
 										</li><?php
 									} ?>
