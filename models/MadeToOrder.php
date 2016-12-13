@@ -56,7 +56,7 @@ class MadeToOrder extends Model {
 		return [
 				['type', 'required', 'on' => Product2::SCENARIO_PRODUCT_PUBLIC],
 				['type', 'in', 'range' => [self::NONE, self::DAYS], 'on' => [Product2::SCENARIO_PRODUCT_PUBLIC, Product2::SCENARIO_PRODUCT_DRAFT]],
-				['value', 'required', 'when' => function($model) {
+				['value', 'required', 'on' => Product2::SCENARIO_PRODUCT_PUBLIC, 'when' => function($model) {
 					return $model->type == self::DAYS;
 				}],
 				['value', 'integer', 'when' => function($model) {

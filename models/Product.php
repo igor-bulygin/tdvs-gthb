@@ -646,13 +646,6 @@ class Product extends CActiveRecord {
 				'safe',
 				'on' => [self::SCENARIO_PRODUCT_OLD_API, self::SCENARIO_PRODUCT_UPDATE_DRAFT]
 			],
-//			[
-//				['references'],
-//				'app\validators\EmbedDocValidator',
-//				'required',
-//				'on' => [self::SCENARIO_PRODUCT_OLD_API, self::SCENARIO_PRODUCT_UPDATE_DRAFT],
-//				'model' => '\app\models\ProductReference'
-//			],
 		];
 	}
 
