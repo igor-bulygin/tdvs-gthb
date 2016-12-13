@@ -306,6 +306,9 @@ ul {
 .no-pad-r {
   padding-right: 0 !important; }
 
+.no-mar {
+  margin: 0 !important; }
+
 /* Dont display dropable zone on dragg and drop */
 .dndDraggingSource {
   display: none; }
@@ -3848,6 +3851,8 @@ input[type="radio"] .styled:checked + label::after {
       transition-timing-function: ease-out; }
 
 .add-cathegory {
+  margin: -15px 0 0 0;
+  display: block;
   color: #7AB83A;
   cursor: pointer; }
   .add-cathegory:hover {
