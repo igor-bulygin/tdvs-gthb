@@ -115,6 +115,7 @@
 				vm.product = dataProduct;
 				vm.product_original = angular.copy(dataProduct);
 				vm.product = productService.parseProductFromService(vm.product);
+				vm.product.from_edit = true;
 			}, function (err) {
 				//err
 			});

@@ -123,26 +123,35 @@
 		//show validation error only if value <= 0, if product is available and the form has been submitted
 		function priceStockValuesValidation(value, available) {
 			return UtilService.isZeroOrLess(value) && available && vm.form_submitted ? true : false;
-
 		}
 
 		//watches
 		$scope.$watch('productPriceStockCtrl.product.prints', function(newValue, oldValue) {
-			if(angular.isObject(newValue) || (!newValue && angular.isObject(oldValue))) {
-				createTable();
-			}
+			if(!vm.product.from_edit)
+				if(angular.isObject(newValue) || (!newValue && angular.isObject(oldValue))) {
+					createTable();
+				}
 		}, true);
 
 		$scope.$watch('productPriceStockCtrl.product.options', function(newValue, oldValue) {
-			if(angular.isObject(newValue)) {
-				createTable();
-			}
+			if(!vm.product.from_edit)
+				if(angular.isObject(newValue)) {
+					createTable();
+				}
 		}, true);
 
 		$scope.$watch('productPriceStockCtrl.product.sizechart', function(newValue, oldValue) {
-			if(angular.isObject(newValue)) {
-				createTable();
-			}
+			if(!vm.product.from_edit)
+				if(angular.isObject(newValue)) {
+					createTable();
+				}
+		}, true);
+
+		$scope.$watch('productPriceStockCtrl.product.price_stock', function(newValue, oldValue) {
+			if(vm.product.from_edit) {
+				parseTitles();
+				delete vm.product.from_edit;
+			} 
 		}, true);
 
 		//events
@@ -156,7 +165,8 @@
 					set_original_artwork = false;
 				}
 			})
-			delete vm.product.price_stock;
+			if(!vm.product.from_edit)
+				delete vm.product.price_stock;
 		});
 
 		$scope.$on(productEvents.requiredErrors, function (event, args) {
