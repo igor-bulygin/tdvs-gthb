@@ -1,7 +1,7 @@
 (function () {
 
 	function controller(deviserDataService, metricDataService, sizechartDataService, 
-		productDataService, languageDataService, toastr, UtilService, 
+		productDataService, languageDataService, toastr, UtilService, productService,
 		localStorageService, tagDataService, productEvents, $rootScope) {
 		var vm = this;
 		vm.save = save;
@@ -125,108 +125,8 @@
 				});
 			}
 
-			//check existing main photo
-			var main_photo = false;
-			if(angular.isArray(vm.product.media.photos) && vm.product.media.photos.length > 0) {
-				vm.product.media.photos.forEach(function(element) {
-					if(element.main_product_photo)
-						main_photo=true;
-				});
-			}
-
-			//validations
 			if(vm.product.product_state !== 'product_state_draft') {
-				//name
-				if(!vm.product.name || !vm.product.name['en-US']) {
-					required.push('name');
-				}
-				//categories
-				if(angular.isArray(vm.product.categories) && vm.product.categories.length === 0) {
-					required.push('categories');
-				} else if(vm.product.categories.indexOf(null) > -1) {
-					required.push('categories');
-				}
-				//photos
-				if(angular.isArray(vm.product.media.photos) && vm.product.media.photos.length === 0) {
-					required.push('photos');
-				}
-				if(angular.isArray(vm.product.media.photos) && vm.product.media.photos.length > 0 && !main_photo) {
-					required.push('main_photo');
-				}
-
-				//description
-				if(!vm.product.description || !vm.product.description['en-US']) {
-					required.push('description');
-				}
-
-				//faqs
-				if(angular.isArray(vm.product.faq) && vm.product.faq.length > 0) {
-					vm.product.faq.forEach(function(element) {
-						if(!element.question['en-US'] ||
-							element.question['en-US'] === "" ||
-							!element.answer['en-US'] ||
-							element.answer['en-US'] === "") {
-								required.push('faq');
-						}
-					})
-				}
-
-				//manufacturing options
-				//madetoorder
-				if(angular.isObject(vm.product.madetoorder) && vm.product.madetoorder.type==1) {
-					if(vm.product.madetoorder.value == null || vm.product.madetoorder.value == undefined || typeof(vm.product.madetoorder.value) !== "number" || vm.product.madetoorder.value <= 0) {
-						required.push('madetoorder');
-					}
-				}
-
-				//preorder
-				if(angular.isObject(vm.product.preorder) && vm.product.preorder.type==1) {
-					if(!vm.product.preorder.ship || !vm.product.preorder.end) {
-						required.push('preorder');
-					}
-				}
-
-				//bespoke
-				if(angular.isObject(vm.product.bespoke) && vm.product.bespoke.type==1) {
-					if(!vm.product.bespoke.value || !vm.product.bespoke.value['en-US'] || vm.product.bespoke.value['en-US'] == "") {
-						required.push('bespoke');
-					}
-				}
-
-				//sizecharts
-				if(angular.isObject(vm.product.sizechart)) {
-					if(!vm.product.sizechart.metric_unit)
-						required.push('metric_unit');
-					vm.product.sizechart.values.forEach(function (element) {
-						if(element.indexOf(0)>-1) {
-							required.push('sizechart_values');
-						}
-					})
-				}
-
-				//weight_unit
-				if(!vm.product.weight_unit) {
-					required.push('weight_unit');
-				}
-				//dimension_unit
-				if(!vm.product.dimension_unit) {
-					required.push('dimension_unit');
-				}
-				//price_stock and all price_stock values
-				if(!vm.product.price_stock || vm.product.price_stock.length === 0){
-					required.push('price_stock');
-				}
-				vm.product.price_stock.forEach(function (element) {
-					//if availability
-					if(element.available &&
-						UtilService.isZeroOrLess(element.weight) || 
-						UtilService.isZeroOrLess(element.width) ||
-						UtilService.isZeroOrLess(element.length) ||
-						UtilService.isZeroOrLess(element.price) ||
-						UtilService.isZeroOrLess(element.stock)) {
-							required.push('price_stock');
-						}
-				})
+				required = productService.validate(vm.product);
 			} else {
 				//check for null categories
 				while(vm.product.categories.indexOf(null) > -1){

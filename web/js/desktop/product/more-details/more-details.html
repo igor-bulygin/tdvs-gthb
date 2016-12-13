@@ -66,7 +66,7 @@
 						<a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
 					</li>
 				</ol>
-				<tags-input class="tags-wrapper" ng-model="productMoreDetailsCtrl.tags[productMoreDetailsCtrl.tags_language]" on-tag-added="productMoreDetailsCtrl.addTag($tag)" on-tag-removed="productMoreDetailsCtrl.removeTag($tag)"></tags-input>
+				<tags-input class="tags-wrapper" ng-model="productMoreDetailsCtrl.tags[productMoreDetailsCtrl.tags_language]" on-tag-added="productMoreDetailsCtrl.addTag($tag, productMoreDetailsCtrl.tags_language)" on-tag-removed="productMoreDetailsCtrl.removeTag($tag)"></tags-input>
 			</div>
 			<div class="col-md-3">
 				<p class="info">Use as many tags as possible, both broad and specific, to increase the chances to be found when our customers use our search engine. Tags can be translated as well.</p>

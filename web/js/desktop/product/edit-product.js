@@ -2,11 +2,11 @@
 
 	"use strict";
 
-	function controller(deviserDataService, productDataService, languageDataService, 
-		metricDataService, toastr, UtilService, tagDataService, $scope, $rootScope, 
-		productEvents, sizechartDataService, $location) {
+	function controller(productService, deviserDataService, productDataService, languageDataService, metricDataService, toastr, 
+		UtilService, tagDataService, $scope, $rootScope, productEvents, sizechartDataService, $location) {
 		var vm = this;
 		vm.categories_helper = [];
+		vm.save = save;
 
 		function init(){
 			vm.product = new productDataService.ProductPriv();
@@ -114,9 +114,53 @@
 			}).$promise.then(function(dataProduct) {
 				vm.product = dataProduct;
 				vm.product_original = angular.copy(dataProduct);
+				vm.product = productService.parseProductFromService(vm.product);
 			}, function (err) {
 				//err
 			});
+		}
+
+		function save(state) {
+			var required = [];
+			vm.product.product_state = angular.copy(state);
+
+			//parse empty multilanguage fields
+			UtilService.parseMultiLanguageEmptyFields(vm.product.name);
+			UtilService.parseMultiLanguageEmptyFields(vm.product.description);
+			//parse faq
+			if(angular.isArray(vm.product.faq) && vm.product.faq.length > 0) {
+				vm.product.faq.forEach(function(element) {
+					UtilService.parseMultiLanguageEmptyFields(element.question);
+					UtilService.parseMultiLanguageEmptyFields(element.answer);
+				});
+			}
+
+			//validations
+			if(vm.product.product_state !== 'product_state_draft') {
+				required = productService.validate(vm.product);
+			} else {
+				//check for null categories
+				while(vm.product.categories.indexOf(null) > -1) {
+					var pos = vm.product.categories.indexOf(null);
+					vm.product.categories.splice(pos, 1);
+				}
+			}
+
+			if(required.length === 0) {
+				vm.product.$update({
+					idProduct: vm.product.id
+				}).then(function (dataSaved) {
+					vm.product = productService.parseProductFromService(vm.product);
+					toastr.success('Saved!');
+				}, function (err) {
+					console.log(err);
+					if(err.data.errors && err.data.errors.required && angular.isArray(err.data.errors.required))
+						$rootScope.$broadcast(productEvents.requiredErrors, {required: err.data.errors.required});
+				});
+			} else {
+				$rootScope.$broadcast(productEvents.requiredErrors, {required: required});
+			}
+
 		}
 	}
 

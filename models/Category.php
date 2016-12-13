@@ -191,9 +191,12 @@ class Category extends CActiveRecord {
 
 		JEWELRY: Bracelets, Collars, Earrings, Necklaces, Rings, Watches
 
-		GADGETS: sin subcategorías (si pinchamos en GADGETS nos lleva a la home de GADGETS)
+		TECNOLOGY: sin subcategorías (si pinchamos en GADGETS nos lleva a la home de GADGETS)
 
 		FOOD & BEVERAGE: sin subcategorías (si pinchamos en FOOD & BEVERAGES nos lleva a la home de FOOD & BEVERAGE)
+
+		MORE que salgan las 3 categorías que hay actualmente si es posible: automotive, living, musical instruments
+
 		*/
 
 		$fixedCategories = [
@@ -236,6 +239,12 @@ class Category extends CActiveRecord {
 			'3klm5',
 			'3145q',
 			'3lva9',
+
+			// more
+			'663d4',
+			'7642n',
+			'76de8',
+
 		];
 		$current_path =$this->path . $this->short_id . "/";
 		return Category::find()
@@ -391,11 +400,11 @@ class Category extends CActiveRecord {
 	 */
 	public function getHeaderImage()
 	{
-		//TODO: define one image for each "first level" category. Until this, randomize images :)
-		if (rand(0, 10) > 5) {
-			return "/imgs/mini-banner-1.jpg";
+		$fileName = "/imgs/mini-banner-" . strtolower($this->slug) . ".jpg";
+		if (file_exists(Yii::getAlias('@webroot') . $fileName)) {
+			return $fileName;
 		}
-		return "/imgs/mini-banner-2.jpg";
+		return null;
 	}
 
 	/**
