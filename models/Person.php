@@ -25,7 +25,7 @@ use yii2tech\embedded\Mapping;
  * @property PersonMedia $mediaFiles
  * @property array $press
  * @property Mapping $videosInfo
- * @property Mapping $faqInfo
+ * @property FaqQuestion[] $faqInfo
  * @property array $credentials
  * @property array $preferences
  * @property string $curriculum
@@ -237,6 +237,14 @@ class Person extends CActiveRecord implements IdentityInterface
 		$this->personalInfo->setPerson($this);
 		$this->mediaFiles->load($this, 'media');
 		$this->mediaFiles->setPerson($this);
+	}
+
+	public function beforeValidate()
+	{
+		foreach ($this->faqInfo as $faqInfo) {
+			$faqInfo->setModel($this);
+		}
+		return parent::beforeValidate();
 	}
 
 	/**
