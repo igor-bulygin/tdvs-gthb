@@ -303,6 +303,9 @@ ul {
 .ml-30 {
   margin-left: 30px; }
 
+.pt-0 {
+  padding-top: 0 !important; }
+
 .no-pad-r {
   padding-right: 0 !important; }
 
@@ -672,6 +675,15 @@ a, a:hover, a:focus {
   .black-form .grey-input:-ms-input-placeholder {
     color: #ffffff;
     text-transform: uppercase; }
+
+.login-title {
+  margin-top: 20px;
+  font-size: 18px;
+  display: block;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #bfbfbf;
+  text-align: center; }
 
 /* Awesome Bootstrap Checkbox*/
 .checkbox {

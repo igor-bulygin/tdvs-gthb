@@ -30,3 +30,12 @@
         &:-ms-input-placeholder      {color:$white;text-transform: uppercase;}
     }
 }
+.login-title{
+	margin-top: 20px;
+	font-size: 18px;
+	display: block;
+  	font-weight: bold;
+	text-transform: uppercase;
+	color: $light_grey;
+	text-align: center;
+}
