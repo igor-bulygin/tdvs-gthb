@@ -903,7 +903,7 @@ class Person extends CActiveRecord implements IdentityInterface
 	 */
 	public function isDeviserEditable()
 	{
-		return true;
+		return !Yii::$app->user->isGuest;
 		return $this->isDeviser() && $this->isConnectedDeviser();
 	}
 
