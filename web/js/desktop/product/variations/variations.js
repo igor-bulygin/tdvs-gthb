@@ -225,11 +225,15 @@
 		}, true);
 
 		$scope.$watch('productVariationsCtrl.product.preorder', function(newValue, oldValue) {
-			//console.log(newValue, oldValue);
+			if(angular.isObject(oldValue) && oldValue.type === 0 && angular.isObject(newValue) && newValue.type === 1) {
+				vm.preorder_selected = true;
+			}
 		}, true);
 
 		$scope.$watch('productVariationsCtrl.product.madetoorder', function(newValue, oldValue) {
-			//console.log(newValue, oldValue);
+			if(angular.isObject(oldValue) && oldValue.type === 0 && angular.isObject(newValue) && newValue.type === 1) {
+				vm.made_to_order_selected = true;
+			}
 		}, true);
 		//watch product
 
