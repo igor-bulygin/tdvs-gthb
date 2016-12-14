@@ -11,34 +11,39 @@ use app\models\Product;
 use app\models\SizeChart;
 use app\models\Tag;
 use Yii;
+use yii\filters\AccessControl;
 use yii\helpers\Json;
 
 class DeviserController extends CController
 {
 	public $defaultAction = "index";
 
-//	public function behaviors()
-//	{
-//		return [
-//				'access' => [
-//						'class' => AccessControl::className(),
-//						'only' => ['about-edit', 'delete-product-photo', 'faq-edit', 'press-edit', 'store-edit', 'upload-header-photo', 'upload-product-photo', 'upload-profile-photo', 'videos-edit'],
-//						'rules' => [
-//								[
-//										'allow' => true,
-//										'actions' => ['about-edit', 'delete-product-photo', 'faq-edit', 'press-edit', 'store-edit', 'upload-header-photo', 'upload-product-photo', 'upload-profile-photo', 'videos-edit'],
-//										'roles' => ['@'],
-//								],
-//						],
-//				],
-//		];
-//	}
+	public function behaviors()
+	{
+		return [
+				'access' => [
+						'class' => AccessControl::className(),
+						'only' => ['about-edit', 'delete-product-photo', 'faq-edit', 'press-edit', 'store-edit', 'upload-header-photo', 'upload-product-photo', 'upload-profile-photo', 'videos-edit'],
+						'rules' => [
+								[
+										'allow' => true,
+										'roles' => ['@'],
+								],
+						],
+				],
+		];
+	}
 
 	public function actionIndex()
 	{
 		return $this->render("index");
 	}
 
+	/**
+	 * @param $slug
+	 * @return string
+	 * @deprecated
+	 */
 	public function actionEditInfo($slug)
 	{
 		$countries = Country::find()
@@ -74,6 +79,11 @@ class DeviserController extends CController
 		]);
 	}
 
+	/**
+	 * @param $short_id
+	 * @return string
+	 * @deprecated
+	 */
 	public function actionEditWork($short_id)
 	{
 		$countries = Country::find()

@@ -154,7 +154,14 @@ class Category extends CActiveRecord {
 	public static function getHeaderCategories()
 	{
 		// TODO Forced for the demo. This must be selected in "admin" panel.
-		return Category::find()->where(["path" => "/"])->all();
+		$categories = Category::find()->where(["path" => "/"])->all();
+		foreach ($categories as $k => $category) {
+			if ($category->short_id == 'ffeec') { // More must be the last one
+				unset($categories[$k]);
+				$categories[$k] = $category;
+			}
+		}
+		return $categories;
 	}
 
 	/**
@@ -165,7 +172,14 @@ class Category extends CActiveRecord {
 	public static function getFooterCategories()
 	{
 		// TODO Forced for the demo. This must be selected in "admin" panel.
-		return Category::find()->where(["path" => "/"])->all();
+		$categories = Category::find()->where(["path" => "/"])->all();
+		foreach ($categories as $k => $category) {
+			if ($category->short_id == 'ffeec') { // More must be the last one
+				unset($categories[$k]);
+				$categories[$k] = $category;
+			}
+		}
+		return $categories;
 	}
 
 	/**
@@ -392,6 +406,19 @@ class Category extends CActiveRecord {
 		$paths = array_filter(explode('/', $this->path));
 		$category = Category::findOne(['short_id' => reset($paths)]);
 		return $category;
+	}
+
+	/**
+	 * Returns the path to de image to be shown on the main banner of the home page
+	 * @return string
+	 */
+	public function getBannerImage()
+	{
+		$fileName = "/imgs/banner-" . strtolower($this->slug) . ".jpg";
+		if (file_exists(Yii::getAlias('@webroot') . $fileName)) {
+			return $fileName;
+		}
+		return null;
 	}
 
 	/**

@@ -2,13 +2,12 @@
 
 namespace app\controllers;
 
+use app\models\ContactForm;
 use app\models\Login;
 use Yii;
 use yii\filters\AccessControl;
-use yii\web\Controller;
 use yii\filters\VerbFilter;
-use app\models\LoginForm;
-use app\models\ContactForm;
+use yii\web\Controller;
 
 class SiteController extends Controller
 {
@@ -17,8 +16,21 @@ class SiteController extends Controller
 		return [
 			'access' => [
 				'class' => AccessControl::className(),
-				'only' => ['logout'],
+				'only' => ['login', 'logout'],
 				'rules' => [
+						[
+								'actions' => ['login'],
+								'allow' => true,
+								'roles' => ['?'],
+						],
+						[
+								'actions' => ['login'],
+								'allow' => false,
+								'roles' => ['@'],
+								'denyCallback' => function ($rule, $action) {
+									return $this->goHome();
+								}
+						],
 					[
 						'actions' => ['logout'],
 						'allow' => true,
@@ -73,8 +85,18 @@ class SiteController extends Controller
 
 	public function actionLogin()
 	{
-		$this->layout = '/desktop/empty-layout.php';
-		return $this->render("login-2");
+		$model = new Login();
+		$invalidLogin = false;
+		if ($model->load(Yii::$app->request->post())) {
+			if ($model->login()) {
+				return $this->goBack();
+			}
+			$invalidLogin = true;
+		}
+		$this->layout = '/desktop/public-2.php';
+		return $this->render("login-2", [
+			'invalidLogin' => $invalidLogin
+		]);
 	}
 
 	public function actionLogout()

@@ -61,7 +61,7 @@ class Preorder extends Model {
 		return [
 			['type', 'required', 'on' => Product2::SCENARIO_PRODUCT_PUBLIC],
 			['type', 'in', 'range' => [self::YES, self::NO], 'on' => [Product2::SCENARIO_PRODUCT_PUBLIC, Product2::SCENARIO_PRODUCT_DRAFT]],
-			[['ship', 'end'], 'required', 'when' => function($model) {
+			[['ship', 'end'], 'required', 'on' => Product2::SCENARIO_PRODUCT_PUBLIC, 'when' => function($model) {
 				return $model->type == self::YES;
 			}],
 		];

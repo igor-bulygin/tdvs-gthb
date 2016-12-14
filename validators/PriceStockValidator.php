@@ -25,13 +25,11 @@ class PriceStockValidator extends Validator
 		if (!is_array($priceStock)) {
 			$this->addError($object, $attribute, 'Pricestock must be an array');
 		} else {
+			$noOptionIdOptions = ['size', 'type', 20000]; // this values can be received and must be considered valid, although there are not options ids
 			foreach ($priceStock as $item) {
 				foreach ($item['options'] as $optionId => $values) {
-					if ($optionId == 20000) {
-						//wtf do here??
-						continue;
-					} elseif ($optionId == 'size') {
-						//wtf do here??
+					if (in_array($optionId, $noOptionIdOptions)) {
+						// nothing to do here??
 						continue;
 					}
 					$tag = Tag::findOne(["short_id" => $optionId]);

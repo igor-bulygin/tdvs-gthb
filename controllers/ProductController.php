@@ -1,27 +1,34 @@
 <?php
 namespace app\controllers;
 
+use app\helpers\CController;
+use app\models\Person;
+use app\models\Product;
 use app\models\Product2;
 use Yii;
-use app\models\Tag;
-use app\models\Lang;
-use yii\helpers\Json;
-use app\helpers\Utils;
-use app\models\Person;
-use app\models\Country;
-use app\models\Product;
-use app\models\Category;
-use app\models\SizeChart;
-use app\models\MetricType;
-use yii\filters\VerbFilter;
-use app\helpers\CController;
-use app\helpers\CActiveRecord;
 use yii\filters\AccessControl;
 use yii\mongodb\Collection;
 use yii\web\BadRequestHttpException;
 
-class ProductController extends CController {
+class ProductController extends CController
+{
 	public $defaultAction = "detail";
+
+	public function behaviors()
+	{
+		return [
+				'access' => [
+						'class' => AccessControl::className(),
+						'only' => ['create', 'edit'],
+						'rules' => [
+								[
+										'allow' => true,
+										'roles' => ['@'],
+								],
+						],
+				],
+		];
+	}
 
 
 	public function actionDetail($slug, $product_id)

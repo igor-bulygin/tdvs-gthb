@@ -184,6 +184,9 @@ class Product2 extends Product {
 		$this->preorderInfo->setProduct($this);
 		$this->madeToOrderInfo->setProduct($this);
 		$this->bespokeInfo->setProduct($this);
+		foreach ($this->faqInfo as $faqInfo) {
+			$faqInfo->setModel($this);
+		}
 		return parent::beforeValidate();
 	}
 

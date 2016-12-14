@@ -1,7 +1,7 @@
 <?php
 
-use yii\web\Response;
 use yii\filters\ContentNegotiator;
+use yii\web\Response;
 
 $config = [
 	'id' => 'basic',
@@ -296,7 +296,7 @@ $config = [
 			'identityClass' => 'app\models\Person',
 			'enableAutoLogin' => true,
 			'enableSession' => true,
-			'loginUrl' => ['/'],
+			'loginUrl' => ['/login'],
 		]
 
 	],

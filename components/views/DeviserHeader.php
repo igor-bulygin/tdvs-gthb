@@ -1,5 +1,4 @@
 <?php
-use app\components\assets\cropAsset;
 use app\helpers\Utils;
 use app\models\Person;
 use yii\helpers\Url;
@@ -21,9 +20,11 @@ $deviser = $this->params['deviser'];
 						<div class="avatar">
 							<img class="cover" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($deviser->getAvatarImage())->resize(340, 340) ?>">
 						</div>
-						<div class="edit-profile-btn">
-							<a class="btn btn-default btn-transparent btn-header" href="<?= Url::to(["deviser/about-edit", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id])?>">Edit profile</a>
-						</div>
+						<?php if ($deviser->isDeviserEditable()) {?>
+							<div class="edit-profile-btn">
+								<a class="btn btn-default btn-transparent btn-header" href="<?= Url::to(["deviser/about-edit", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id])?>">Edit profile</a>
+							</div>
+						<?php } ?>
 						<div class="deviser-data">
 							<div class="name">
 								<?= $deviser->personalInfo->getBrandName() ?>
@@ -37,7 +38,9 @@ $deviser = $this->params['deviser'];
 						</div>
 					</div>
 				</div>
+				<?php if ($deviser->isDeviserEditable()) {?>
 					<a class="btn btn-default btn-green btn-add-work" href="<?= Url::to(["product/create", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id])?>">Add Work</a>
+				<?php } ?>
 			</div>
 		</div>
 	</div>
