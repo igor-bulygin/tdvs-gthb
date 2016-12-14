@@ -395,6 +395,19 @@ class Category extends CActiveRecord {
 	}
 
 	/**
+	 * Returns the path to de image to be shown on the main banner of the home page
+	 * @return string
+	 */
+	public function getBannerImage()
+	{
+		$fileName = "/imgs/banner-" . strtolower($this->slug) . ".jpg";
+		if (file_exists(Yii::getAlias('@webroot') . $fileName)) {
+			return $fileName;
+		}
+		return null;
+	}
+
+	/**
 	 * Returns the path to de image to be shown on the "shop by deparment" section of the header
 	 * @return string
 	 */

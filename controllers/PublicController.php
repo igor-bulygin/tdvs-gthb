@@ -250,12 +250,7 @@ class PublicController extends CController
 				"three" => array_slice($works, ($start + 12), 3),
 			];
 		}
-		if ($category->path == "/") {
-			$category_id_banners = $category->short_id;
-		} else {
-			$category_id_banners = $category->getMainCategory()->short_id;
-		}
-		$banners = Utils::getBannerImages($category_id_banners);
+		$banners = Utils::getBannerImages($category->getMainCategory());
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("index-2", [

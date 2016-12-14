@@ -1,6 +1,7 @@
 <?php
 namespace app\helpers;
 
+use app\models\Category;
 use app\models\Lang;
 use Exception;
 use Thumbor\Url\Builder;
@@ -605,48 +606,68 @@ class Utils
 	/**
 	 * Get images to use in header slider, for a specific category
 	 *
-	 * @param null $category_id
+	 * @param Category $category
 	 * @return array
 	 */
-	public static function getBannerImages($category_id = null)
+	public static function getBannerImages($category = null)
 	{
-		// TODO This is an temp method to use in the demo !!. Will be removed when Banners model are implemented
-		switch ($category_id) {
-			case '1a23b': // "Art"
-				return [
-					['img' => '/imgs/banner_art.jpg', 'alt' => 'Header image', "active" => true],
-				];
-				break;
-			case '4a2b4': // "Fashion"
-				return [
-					['img' => '/imgs/banner_fashion.jpg', 'alt' => 'Header image', "active" => true],
-				];
-				break;
-			case '3f78g': // "Jewelry"
-				return [
-					['img' => '/imgs/banner_jewelry.jpg', 'alt' => 'Header image', "active" => true],
-				];
-				break;
-			case '2r67s': // "Decoration"
-				return [
-					['img' => '/imgs/banner_decoration.jpg', 'alt' => 'Header image', "active" => true],
-				];
-				break;
-			case 'f0cco': // "Gadgets"
-				return [
-						['img' => '/imgs/banner_gadgets.jpg', 'alt' => 'Header image', "active" => true],
-				];
-				break;
-			case 'ffeec': // "More"
-			default:
-				return [
-						['img' => '/imgs/banner-4.jpg', 'url' => 'http://dev.todevise.com/deviser/vaskolg-vaskolg/96a3290/store', 'alt' => 'Header image', "active" => false],
-						['img' => '/imgs/banner-5.jpg', 'url' => 'http://dev.todevise.com/deviser/charbonize-charbonize/4211c6d/store', 'alt' => 'Header image', "active" => false],
-						['img' => '/imgs/banner-1.jpg', 'url' => 'http://dev.todevise.com/deviser/serpent-andtheswan/ed833ej/store', 'alt' => 'Header image', "active" => false],
-						['img' => '/imgs/banner-2.jpg', 'url' => 'http://dev.todevise.com/deviser/be-headwear/51c0f3s/store', 'alt' => 'Header image', "active" => false],
-						['img' => '/imgs/banner-3.jpg', 'url' => 'http://dev.todevise.com/deviser/nina-monizdamaia/23239c1/store', 'alt' => 'Header image', "active" => true],
-				];
+		if (isset($category)) {
+			$banner = $category->getBannerImage();
 		}
+		if (isset($banner)) {
+			return [
+					['img' => $banner, 'alt' => Utils::l($category->name), "active" => true],
+			];
+		}
+		return [
+				['img' => '/imgs/banner-4.jpg', 'url' => 'http://dev.todevise.com/deviser/vaskolg-vaskolg/96a3290/store', 'alt' => 'Header image', "active" => false],
+				['img' => '/imgs/banner-5.jpg', 'url' => 'http://dev.todevise.com/deviser/charbonize-charbonize/4211c6d/store', 'alt' => 'Header image', "active" => false],
+				['img' => '/imgs/banner-1.jpg', 'url' => 'http://dev.todevise.com/deviser/serpent-andtheswan/ed833ej/store', 'alt' => 'Header image', "active" => false],
+				['img' => '/imgs/banner-2.jpg', 'url' => 'http://dev.todevise.com/deviser/be-headwear/51c0f3s/store', 'alt' => 'Header image', "active" => false],
+				['img' => '/imgs/banner-3.jpg', 'url' => 'http://dev.todevise.com/deviser/nina-monizdamaia/23239c1/store', 'alt' => 'Header image', "active" => true],
+		];
+//		// TODO This is an temp method to use in the demo !!. Will be removed when Banners model are implemented
+//		switch ($category_id) {
+//			case '1a23b': // "Art"
+//				return [
+//					['img' => '/imgs/banner_art.jpg', 'alt' => 'Header image', "active" => true],
+//				];
+//				break;
+//			case '4a2b4': // "Fashion"
+//				return [
+//					['img' => '/imgs/banner_fashion.jpg', 'alt' => 'Header image', "active" => true],
+//				];
+//				break;
+//			case '3f78g': // "Jewelry"
+//				return [
+//					['img' => '/imgs/banner_jewelry.jpg', 'alt' => 'Header image', "active" => true],
+//				];
+//				break;
+//			case '2r67s': // "Decoration"
+//				return [
+//					['img' => '/imgs/banner_decoration.jpg', 'alt' => 'Header image', "active" => true],
+//				];
+//				break;
+//			case 'f0cco': // "Tecnology"
+//				return [
+//						['img' => '/imgs/banner_tecnology.jpg', 'alt' => 'Header image', "active" => true],
+//				];
+//				break;
+//			case '3a54m': // "Architecture"
+//				return [
+//						['img' => '/imgs/banner_architecture.jpg', 'alt' => 'Header image', "active" => true],
+//				];
+//				break;
+//			case 'ffeec': // "More"
+//			default:
+//				return [
+//						['img' => '/imgs/banner-4.jpg', 'url' => 'http://dev.todevise.com/deviser/vaskolg-vaskolg/96a3290/store', 'alt' => 'Header image', "active" => false],
+//						['img' => '/imgs/banner-5.jpg', 'url' => 'http://dev.todevise.com/deviser/charbonize-charbonize/4211c6d/store', 'alt' => 'Header image', "active" => false],
+//						['img' => '/imgs/banner-1.jpg', 'url' => 'http://dev.todevise.com/deviser/serpent-andtheswan/ed833ej/store', 'alt' => 'Header image', "active" => false],
+//						['img' => '/imgs/banner-2.jpg', 'url' => 'http://dev.todevise.com/deviser/be-headwear/51c0f3s/store', 'alt' => 'Header image', "active" => false],
+//						['img' => '/imgs/banner-3.jpg', 'url' => 'http://dev.todevise.com/deviser/nina-monizdamaia/23239c1/store', 'alt' => 'Header image', "active" => true],
+//				];
+//		}
 	}
 
 	/**
