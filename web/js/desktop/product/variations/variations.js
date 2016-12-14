@@ -162,6 +162,8 @@
 
 		//creates both a new empty sizechart and a new empty helper sizechart
 		function sizesSelect(sizechart, country) {
+
+			//create new sizechart
 			vm.product.sizechart = {
 				country: country,
 				columns: [],
@@ -169,6 +171,7 @@
 				short_id: sizechart.id
 			};
 			vm.product.sizechart.columns = angular.copy(sizechart.columns);
+
 			vm.sizechart_empty = angular.copy(vm.product.sizechart);
 			vm.sizechart_available_values = [];
 			var pos, length;
@@ -235,10 +238,13 @@
 				vm.made_to_order_selected = true;
 			}
 		}, true);
+
+		$scope.$watch('productVariationsCtrl.product.prints', function(newValue, oldValue) {
+			//set prints from existing product
+		}, true)
 		//watch product
 
 		//events
-		////TO DO: set bespoke text required if it is empty in english
 		$scope.$on(productEvents.setVariations, function(event, args) {
 			//get tags
 			getTagsByCategory(args.categories);
@@ -253,8 +259,26 @@
 					vm.prints = true;
 				if(values[1]) {
 					vm.show_sizecharts = true;
-					if(vm.product.sizechart)
+					if(vm.product.sizechart && !vm.product.from_edit)
 						delete vm.product.sizechart;
+					else if(vm.product.sizechart && vm.product.from_edit) {
+						var original_sizechart = angular.copy(vm.product.sizechart);
+						for(var i = 0; i < vm.sizecharts.length; i++) {
+							if(vm.product.sizechart.short_id === vm.sizecharts[i].id) {
+								vm.selected_sizechart = vm.sizecharts[i];
+							}
+						}
+						countriesSelect(vm.selected_sizechart);
+						vm.selected_sizechart_country = vm.product.sizechart.country;
+						sizesSelect(vm.selected_sizechart, vm.product.sizechart.country)
+						vm.product.sizechart.values = angular.copy(original_sizechart.values)
+						for(var i = 0; i < vm.sizechart_empty.values.length; i++) {
+							vm.product.sizechart.values.forEach(function (element) {
+								if(element[0] == vm.sizechart_empty.values[i][0])
+									vm.sizechart_available_values[i] = false;
+							})
+						}
+					}
 				}
 			});
 		});
