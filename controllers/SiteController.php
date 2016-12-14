@@ -18,14 +18,19 @@ class SiteController extends Controller
 				'class' => AccessControl::className(),
 				'only' => ['login', 'logout'],
 				'rules' => [
-					[
-						'actions' => ['login'],
-						'allow' => false,
-						'roles' => ['@'],
-						'denyCallback' => function ($rule, $action) {
-							return $this->goHome();
-						}
-					],
+						[
+								'actions' => ['login'],
+								'allow' => true,
+								'roles' => ['?'],
+						],
+						[
+								'actions' => ['login'],
+								'allow' => false,
+								'roles' => ['@'],
+								'denyCallback' => function ($rule, $action) {
+									return $this->goHome();
+								}
+						],
 					[
 						'actions' => ['logout'],
 						'allow' => true,
