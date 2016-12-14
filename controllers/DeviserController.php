@@ -27,7 +27,6 @@ class DeviserController extends CController
 						'rules' => [
 								[
 										'allow' => true,
-										'actions' => ['about-edit', 'delete-product-photo', 'faq-edit', 'press-edit', 'store-edit', 'upload-header-photo', 'upload-product-photo', 'upload-profile-photo', 'videos-edit'],
 										'roles' => ['@'],
 								],
 						],
@@ -40,6 +39,11 @@ class DeviserController extends CController
 		return $this->render("index");
 	}
 
+	/**
+	 * @param $slug
+	 * @return string
+	 * @deprecated
+	 */
 	public function actionEditInfo($slug)
 	{
 		$countries = Country::find()
@@ -75,6 +79,11 @@ class DeviserController extends CController
 		]);
 	}
 
+	/**
+	 * @param $short_id
+	 * @return string
+	 * @deprecated
+	 */
 	public function actionEditWork($short_id)
 	{
 		$countries = Country::find()

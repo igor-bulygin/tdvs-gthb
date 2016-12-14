@@ -7,6 +7,8 @@ $this->title = 'Login';
 
 ?>
 
+Log in to your todevise account
+
 <?php if ($invalidLogin) { ?>
 	<div class="alert alert-danger">Invalid login</div>
 <?php } ?>
