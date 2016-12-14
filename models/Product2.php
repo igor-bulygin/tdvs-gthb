@@ -39,6 +39,7 @@ use yii2tech\ar\position\PositionBehavior;
  * @property array references
  * @property string $product_state
  * @property int position
+ * @property array prints
  * @property MongoDate created_at
  * @property MongoDate updated_at
  * @property int enabled
@@ -99,6 +100,7 @@ class Product2 extends Product {
 			'price_stock',
 			'tags',
 			'position',
+			'prints',
 			'created_at',
 			'updated_at',
 		];
@@ -295,6 +297,7 @@ class Product2 extends Product {
 					'price_stock',
 					'tags',
                     'position',
+                    'prints',
                     'product_state',
                 ],
                 'safe',
@@ -399,6 +402,7 @@ class Product2 extends Product {
 					'options' => 'productOptions',
 					'url_images' => 'urlImagesLocation',
                     'position',
+                    'prints',
 					'price_stock',
 					'tags',
                 ];
@@ -437,6 +441,7 @@ class Product2 extends Product {
 					'sizechart',
 					'url_images' => 'urlImagesLocation',
                     'position',
+                    'prints',
 					'price_stock',
 					'tags',
                 ];
