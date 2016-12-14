@@ -27,7 +27,6 @@
 		vm.tag_order = ['Color', 'Material', 'Size', 'Style'];
 		vm.tagComparator = tagComparator;
 		vm.tags_for_work = [];
-		vm.show_prints = false;
 		vm.prints_selected = false;
 		vm.size_selected = false;
 		vm.savedSize_selected = false;
@@ -47,7 +46,6 @@
 		init();
 
 		function setPrintsSelected(value) {
-			vm.show_prints = value;
 			if(value) {
 				if(!vm.product.prints) {
 					vm.product.prints={
@@ -240,7 +238,9 @@
 		}, true);
 
 		$scope.$watch('productVariationsCtrl.product.prints', function(newValue, oldValue) {
-			//set prints from existing product
+			if(!oldValue && angular.isObject(newValue)) {
+				vm.prints_selected = true;
+			}
 		}, true)
 		//watch product
 
@@ -262,6 +262,7 @@
 					if(vm.product.sizechart && !vm.product.from_edit)
 						delete vm.product.sizechart;
 					else if(vm.product.sizechart && vm.product.from_edit) {
+						delete vm.product.from_edit;
 						var original_sizechart = angular.copy(vm.product.sizechart);
 						for(var i = 0; i < vm.sizecharts.length; i++) {
 							if(vm.product.sizechart.short_id === vm.sizecharts[i].id) {
