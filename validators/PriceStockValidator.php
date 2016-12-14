@@ -25,10 +25,10 @@ class PriceStockValidator extends Validator
 		if (!is_array($priceStock)) {
 			$this->addError($object, $attribute, 'Pricestock must be an array');
 		} else {
-			$noOptionIdsOptions = ['size', 'type', 20000]; // this values can be received and must be considered valids, although there are not options ids
+			$noOptionIdOptions = ['size', 'type', 20000]; // this values can be received and must be considered valid, although there are not options ids
 			foreach ($priceStock as $item) {
 				foreach ($item['options'] as $optionId => $values) {
-					if (in_array($optionId, $noOptionIdsOptions)) {
+					if (in_array($optionId, $noOptionIdOptions)) {
 						// nothing to do here??
 						continue;
 					}
