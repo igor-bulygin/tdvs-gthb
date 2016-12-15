@@ -286,10 +286,10 @@ class Person extends CActiveRecord implements IdentityInterface
 	{
 		$salt = bin2hex(openssl_random_pseudo_bytes(32));
 		$password = bin2hex(Yii::$app->Scrypt->calc($password, $salt, 8, 8, 16, 32));
-		$this->credentials = array_merge_recursive($this->credentials, [
-			"salt" => $salt,
-			"password" => $password
-		]);
+		$credentials = $this->credentials;
+		$credentials['salt'] = $salt;
+		$credentials['password'] = $password;
+		$this->setAttribute('credentials', $credentials);
 	}
 
 	public function setLanguage($lang)

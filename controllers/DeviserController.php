@@ -453,4 +453,19 @@ class DeviserController extends CController
 		return null;
 	}
 
+	public function actionUpdatePasswords()
+	{
+		$devisers = Person::find()->where(
+			[
+				'type' => [Person::DEVISER],
+			]
+		)->all();
+		foreach ($devisers as $deviser) {
+			$deviser->setPassword('todevise1234');
+			$deviser->save(false);
+			echo $deviser->short_id.'<br />';
+		}
+		echo "finito";
+	}
+
 }
