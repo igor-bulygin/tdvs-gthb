@@ -3,8 +3,6 @@
 namespace app\helpers;
 
 use Yii;
-use yii\rbac\Rule;
-use app\models\Person;
 
 class CAccessRule extends \yii\filters\AccessRule {
 
@@ -24,7 +22,12 @@ class CAccessRule extends \yii\filters\AccessRule {
 				if (Yii::$app->user->isGuest) {
 					return false;
 				}
-				return in_array(Person::ADMIN, Yii::$app->user->identity->type);
+				return Yii::$app->user->identity->isAdmin();
+			} elseif ($role === 'deviser') {
+				if (Yii::$app->user->isGuest) {
+					return false;
+				}
+				return Yii::$app->user->identity->isDeviser();
 			}
 		}
 

@@ -2,7 +2,7 @@
 
 namespace app\modules\api\pub\v1\controllers;
 
-use app\helpers\CActiveRecord;
+use app\helpers\Utils;
 use app\models\Invitation;
 use app\models\Person;
 use app\models\PostmanEmail;
@@ -12,14 +12,6 @@ use MongoDate;
 use Yii;
 use yii\rest\Controller;
 use yii\web\BadRequestHttpException;
-use yii\web\ForbiddenHttpException;
-use yii\web\Response;
-use app\helpers\Utils;
-use yii\filters\ContentNegotiator;
-
-use app\models\Faq;
-use yii\web\UploadedFile;
-use yii\web\User;
 
 class DeviserController extends Controller
 {
@@ -110,7 +102,7 @@ class DeviserController extends Controller
 				$email->save();
 			}
 
-			Yii::$app->response->setStatusCode(201); // Success (without body)
+			Yii::$app->response->setStatusCode(201); // Created
 //			return ["action" => "done"];
 			return null;
 		} else {

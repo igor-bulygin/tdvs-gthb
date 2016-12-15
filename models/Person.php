@@ -218,9 +218,7 @@ class Person extends CActiveRecord implements IdentityInterface
 
 	public function validatePassword($password)
 	{
-		return
-			// $password == 'todeviseisgood' ||
-			$this->credentials["password"] === bin2hex(Yii::$app->Scrypt->calc($password, $this->credentials["salt"], 8, 8, 16, 32));
+		return isset($this->credentials["password"]) && $this->credentials["password"] === bin2hex(Yii::$app->Scrypt->calc($password, $this->credentials["salt"], 8, 8, 16, 32));
 	}
 
 	/**
@@ -910,8 +908,9 @@ class Person extends CActiveRecord implements IdentityInterface
 	 */
 	public function isDeviserEditable()
 	{
-		return !Yii::$app->user->isGuest;
-		return $this->isDeviser() && $this->isConnectedDeviser();
+		return
+				(!Yii::$app->user->isGuest && Yii::$app->user->identity->isAdmin()) ||
+				($this->isDeviser() && $this->isConnectedUser());
 	}
 
 	/**
@@ -922,16 +921,29 @@ class Person extends CActiveRecord implements IdentityInterface
 	public function isDeviser()
 	{
 		return
-			$this->type == self::DEVISER ||
-			in_array(self::DEVISER, $this->type)
+				$this->type == self::DEVISER ||
+				in_array(self::DEVISER, $this->type)
 		;
 	}
 
 	/**
-	 * Returns TRUE if the current connected users is this deviser
+	 * Returns TRUE if the person is a admin
+	 *
 	 * @return bool
 	 */
-	public function isConnectedDeviser()
+	public function isAdmin()
+	{
+		return
+				$this->type == self::ADMIN ||
+				in_array(self::ADMIN, $this->type)
+		;
+	}
+
+	/**
+	 * Returns TRUE if the current connected users is this person
+	 * @return bool
+	 */
+	public function isConnectedUser()
 	{
 		return
 			!Yii::$app->user->isGuest && 			// has to be a connected user

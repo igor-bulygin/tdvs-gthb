@@ -27,7 +27,7 @@ $this->title = 'Login';
 
 		<div class="row">
 			<div class="checkbox checkbox-circle remember-me">
-				<input id="checkbox7" name="Login[rememberMe]" class="styled" type="checkbox">
+				<input id="checkbox7" name="Login[rememberMe]" class="styled" type="checkbox" value="1">
 				<label for="checkbox7">
 					Remember me
 				</label>
