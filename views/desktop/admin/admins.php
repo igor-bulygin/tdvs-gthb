@@ -1,12 +1,11 @@
 <?php
-use yii\web\View;
-use app\models\Lang;
-use yii\helpers\Url;
-use yii\helpers\Html;
-use yii\helpers\Json;
+use app\assets\desktop\admin\AdminsAsset;
 use app\models\Person;
 use yii\grid\GridView;
-use app\assets\desktop\admin\AdminsAsset;
+use yii\helpers\Html;
+use yii\helpers\Json;
+use yii\helpers\Url;
+use yii\web\View;
 
 /* @var $this yii\web\View */
 /* @var $admins yii\data\ActiveDataProvider */
@@ -80,7 +79,10 @@ $this->title = 'Todevise / Admin / Admins';
 					],
 					[
 						'value' => function($model){
-							return $model->personal_info["name"] . " " . join($model->personal_info["surnames"], " ");
+							if (isset($model->personal_info["surnames"])) {
+								return $model->personal_info["name"] . " " . join($model->personal_info["surnames"], " ");
+							}
+							return $model->personal_info["name"];
 						},
 						'label' => Yii::t("app/admin", "Name")
 					],
