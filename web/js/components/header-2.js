@@ -2,7 +2,7 @@
  * Show or hide subcategories on hover on main categories
  */
 $(function () {
-    $('.toggle-category').on('hover', function (e) {
+    $('.toggle-category').on('mouseover', function (e) {
         $('ul.category').each(function() {
             $(this).removeClass('active');
         });
