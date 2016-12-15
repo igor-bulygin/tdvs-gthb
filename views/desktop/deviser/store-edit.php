@@ -73,18 +73,19 @@ $this->params['deviser'] = $deviser;
 									<p class="message-tagline">Only you are able to see your unpublished works.</p>
 									<div class="row m-0">
 										<div class="col-md-3 pad-grid" ng-repeat="product in editStoreCtrl.products | draftProduct">
-												<a ng-href="{{product.edit_link}}" title="Edit work">
-													<div class="grid">
-														<figure class="effect-zoe">
-															<img class="grid-image" ng-src="{{product.main_photo || '/imgs/product_placeholder.png'}}">
-															<figcaption>
-																<p class="instauser">{{product.name['en-US'] || "Untitled"}}</p>
-																<p class="price">€{{product.min_price || '-'}}</p>
-															</figcaption>
-														</figure>
-													</div>
-												</a>
-				
+											<div class="grid">
+												<figure class="effect-zoe">
+													<span class="glyphicon glyphicon-remove" ng-click="editStoreCtrl.open_modal_delete(product.id)"></span>
+													<img class="grid-image" ng-src="{{product.main_photo || '/imgs/product_placeholder.png'}}">
+													<figcaption>
+														<p class="instauser">{{product.name || "Untitled"}}</p>
+														<p class="price">€{{product.min_price || '-'}}</p>
+														<a ng-href="{{product.edit_link}}" title="Edit work">
+															<span class="glyphicon glyphicon-edit"></span>
+														</a>
+													</figcaption>
+												</figure>
+											</div>
 										</div>
 									</div>
 									<div class="mt-20">
@@ -119,6 +120,19 @@ $this->params['deviser'] = $deviser;
 								</div>
 							</div>
 						</div>
+						<script type="text/ng-template" id="modalDeleteProduct.html">
+							<div class="modal-header">
+								<h3 class="modal-title"></h3>
+							</div>
+							<div class="modal-body">
+								<p>Are you sure you want to delete this work?</p>
+							</div>
+							<div class="modal-footer">
+								<button class="btn btn-default btn-green" ng-click="modalDeleteProductCtrl.close()">Cancel</button>
+								<button class="btn btn-default" ng-click="modalDeleteProductCtrl.ok()">DELETE</button>
+							</div>
+						</script>
+
 					</div>
 				</div>
 			</div>

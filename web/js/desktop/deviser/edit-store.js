@@ -1,9 +1,10 @@
 (function () {
 	"use strict";
 
-	function controller(productDataService, deviserDataService, UtilService, toastr, $location) {
+	function controller(productDataService, deviserDataService, UtilService, toastr, $location, $uibModal) {
 		var vm = this;
 		vm.update = update;
+		vm.open_modal_delete = open_modal_delete;
 		vm.deviser_id = UtilService.returnDeviserIdFromUrl();
 		vm.language = 'en-US';
 
@@ -110,6 +111,27 @@
 				});
 		}
 
+		function open_modal_delete(id) {
+			vm.id_to_delete = id;
+			var modalInstance = $uibModal.open({
+				templateUrl: 'modalDeleteProduct.html',
+				controller: 'modalDeleteProductCtrl',
+				controllerAs: 'modalDeleteProductCtrl'
+			})
+
+			modalInstance.result.then(function () {
+				deleteProduct(vm.id_to_delete);
+			});
+		}
+
+		function deleteProduct(id) {
+			productDataService.ProductPriv.delete({
+				idProduct: id
+			}).$promise.then(function(deleteData) {
+				getProducts();
+			});
+		}
+
 	}
 
 	function draftProduct() {
@@ -134,9 +156,24 @@
 		}
 	}
 
+	function modalController($uibModalInstance) {
+		var vm = this;
+		vm.close = close;
+		vm.ok = ok;
+
+		function close() {
+			$uibModalInstance.dismiss('cancel');
+		}
+
+		function ok() {
+			$uibModalInstance.close();
+		}
+	}
+
 	angular
 		.module('todevise')
 		.controller('editStoreCtrl', controller)
+		.controller('modalDeleteProductCtrl', modalController)
 		.filter('draftProduct',draftProduct)
 		.filter('publishedProduct', publishedProduct);
 
