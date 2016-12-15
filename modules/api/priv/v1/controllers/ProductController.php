@@ -2,23 +2,10 @@
 
 namespace app\modules\api\priv\v1\controllers;
 
-use app\helpers\CActiveRecord;
-use app\models\Person;
-use app\models\Product;
 use app\models\Product2;
-use app\modules\api\priv\v1\forms\UploadForm;
 use Exception;
 use Yii;
-use yii\rest\Controller;
 use yii\web\BadRequestHttpException;
-use yii\web\ForbiddenHttpException;
-use yii\web\Response;
-use app\helpers\Utils;
-use yii\filters\ContentNegotiator;
-
-use app\models\Faq;
-use yii\web\UploadedFile;
-use yii\web\User;
 
 class ProductController extends AppPrivateController
 {
@@ -86,7 +73,19 @@ class ProductController extends AppPrivateController
 
     public function actionDelete($id)
     {
-        return ["action" => "delete " . $id];
+        try {
+            /** @var Product2 $product */
+            $product = Product2::findOneSerialized($id);
+            if (!$product) {
+                throw new BadRequestHttpException('Product not found');
+            }
+            $product->delete();
+            Yii::$app->response->setStatusCode(204); // No content
+
+            return null;
+        } catch (Exception $e) {
+            throw new BadRequestHttpException($e->getMessage());
+        }
     }
 
     /**
