@@ -132,6 +132,10 @@ use yii\helpers\Url;
 							<li class="log">
 								<a href="<?= Url::to(["deviser/about", "slug" => $person->slug, 'deviser_id' => $person->short_id])?>"> View profile</a>
 							</li>
+						<?php } elseif ($person->isAdmin()) { ?>
+							<li class="log">
+								<a href="#"> Admin</a>
+							</li>
 						<?php } ?>
 						<li class="log">
 							<a href="<?=Url::to('/global/logout')?>">Logout</a>
