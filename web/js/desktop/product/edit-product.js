@@ -121,6 +121,8 @@
 			});
 		}
 
+
+
 		function save(state) {
 			var required = [];
 			vm.product.product_state = angular.copy(state);
@@ -151,14 +153,20 @@
 				vm.product.$update({
 					idProduct: vm.product.id
 				}).then(function (dataSaved) {
-					vm.product = productService.parseProductFromService(vm.product);
-					toastr.success('Saved!');
+					if(state === 'product_state_draft') {
+						vm.product = productService.parseProductFromService(vm.product);
+						toastr.success('Saved!');
+					} else if (state === 'product_state_active') {
+						$location.href = currentHost() + vm.link_profile + '?published';
+					}
 				}, function (err) {
-					console.log(err);
+					vm.errors = true;
 					if(err.data.errors && err.data.errors.required && angular.isArray(err.data.errors.required))
 						$rootScope.$broadcast(productEvents.requiredErrors, {required: err.data.errors.required});
 				});
 			} else {
+				vm.errors = true;
+				console.log(required);
 				$rootScope.$broadcast(productEvents.requiredErrors, {required: required});
 			}
 

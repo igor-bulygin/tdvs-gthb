@@ -28,14 +28,15 @@ $this->title = $deviser->getBrandName() . ' - Todevise';
 ?>
 
 <div ng-controller="editProductCtrl as editProductCtrl" class="create-work-wrapper">
-	<div id="newProductHeader" class="new-product-header">
+	<div id="newProductHeader" class="new-product-header ng-class:{'purple': editProductCtrl.errors}">
 		<div class="pull-left">
 			<a class="back-link" ng-href="{{editProductCtrl.link_profile}}"> &lt go back to your profile</a>
 		</div>
 		<div class="avatar">
 			<img ng-src="{{editProductCtrl.profile}}">
 		</div>
-		<div class="text-center"><h4 class="title">Mockup</h4></div>
+		<div class="text-center" ng-if="!editProductCtrl.errors"><h4 class="title">Edit work</h4></div>
+		<div class="text-center" ng-if="editProductCtrl.errors"><p>Please complete all the required fields before publishing your work.</p></div>
 		<div class="btns-group">
 			<button class="btn btn-transparent" ng-click="editProductCtrl.save('product_state_draft')">Save progress</button>
 			<button class="btn btn-default btn-green" ng-click="editProductCtrl.save('product_state_active')">Publish work</button>
