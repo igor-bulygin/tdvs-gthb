@@ -132,10 +132,12 @@ class ProductController extends CController
 		ini_set('memory_limit', '2048M');
 
 		Product2::setSerializeScenario(Product2::SERIALIZE_SCENARIO_OWNER);
+
+		/* @var Product2[] $products */
 		$products = Product2::findSerialized();
 		foreach ($products as $product) {
 			// saving the product, we force to create any missing short_id on price&stock
-			$product->save();
+			$product->save(false);
 		}
 		Yii::$app->response->setStatusCode(200); // Success, without body
 	}

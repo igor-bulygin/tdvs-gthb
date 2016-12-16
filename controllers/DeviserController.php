@@ -13,6 +13,7 @@ use app\models\Tag;
 use Yii;
 use yii\filters\AccessControl;
 use yii\helpers\Json;
+use yii\mongodb\Collection;
 
 class DeviserController extends CController
 {
@@ -455,6 +456,7 @@ class DeviserController extends CController
 
 	public function actionUpdatePasswords()
 	{
+		/* @var Person[] $devisers */
 		$devisers = Person::find()->where(
 			[
 				'type' => [Person::DEVISER],
@@ -462,10 +464,19 @@ class DeviserController extends CController
 		)->all();
 		foreach ($devisers as $deviser) {
 			$deviser->setPassword('todevise1234');
-			$deviser->save(false);
-			echo $deviser->short_id.'<br />';
+
+			// Update directly in low level, to avoid no desired behaviors of ActiveRecord
+			/** @var Collection $collection */
+			$collection = Yii::$app->mongodb->getCollection('person');
+			$collection->update(
+					[
+							'short_id' => $deviser->short_id
+					],
+					[
+							'credentials' => $deviser->credentials
+					]
+			);
 		}
-		echo "finito";
 	}
 
 }
