@@ -936,7 +936,20 @@ class Person extends CActiveRecord implements IdentityInterface
 		return
 				$this->type == self::ADMIN ||
 				in_array(self::ADMIN, $this->type)
-		;
+				;
+	}
+
+	/**
+	 * Returns TRUE if the person is a client
+	 *
+	 * @return bool
+	 */
+	public function isClient()
+	{
+		return
+				$this->type == self::CLIENT ||
+				in_array(self::CLIENT, $this->type)
+				;
 	}
 
 	/**

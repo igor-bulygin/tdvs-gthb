@@ -148,9 +148,49 @@ use yii\widgets\ActiveForm;
 							<?php ActiveForm::end(); ?>
 						</div>
 					</li>
-				<?php } else { ?>
-					<li class="log">
-						<a href="<?=Url::to('/global/logout')?>">Logout</a>
+				<?php } else {
+					$person = Yii::$app->user->identity; /* @var \app\models\Person $person */?>
+					<li class="dropdown log">
+
+						<img src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getAvatarImage())->resize(25, 25) ?>">
+
+						<a href="#" class="dropdown-toggle log" data-toggle="dropdown" role="button" aria-haspopup="true"
+						   aria-expanded="false">My todevise</a>
+
+						<div class="dropdown-menu login-wrapper black-form">
+
+							<ul>
+								<?php if ($person->isAdmin()) { ?>
+
+									<li><a href="#"><?=$person->personalInfo->getBrandName()?></a></li>
+
+									<li><a href="<?=Url::to('/admin')?>">Administration</a></li>
+
+									<li><a href="<?=Url::to('/admin/invitations')?>">Invitations</a></li>
+
+									<li><a href="#">Settings</a></li>
+
+								<?php } elseif ($person->isDeviser()) { ?>
+
+									<li><a href="<?= Url::to(["deviser/about", "slug" => $person->slug, 'deviser_id' => $person->short_id])?>"> View profile</a></li>
+
+									<li><a href="#">Sales</a></li>
+
+									<li><a href="#">Settings</a></li>
+
+								<?php } elseif ($person->isClient()) { ?>
+
+									<li><a href="#"><?=$person->personalInfo->getBrandName()?></a></li>
+
+									<li><a href="#">My orders</a></li>
+
+									<li><a href="#">Settings</a></li>
+
+								<?php } ?>
+
+								<li><a href="<?=Url::to('/global/logout')?>">Logout</a></li>
+							</ul>
+						</div>
 					</li>
 				<?php } ?>
 			</ul>
