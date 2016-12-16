@@ -216,6 +216,7 @@ class PublicController extends CController
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("index-2", [
 			'banners' => $banners,
+			'totalDevisers' => count($devisers),
 			'devisers' => [
 				array_slice($devisers, 0, 5),
 				array_slice($devisers, 5, 5),
@@ -255,7 +256,8 @@ class PublicController extends CController
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("index-2", [
 			'banners' => $banners,
-			'devisers' => [
+			'totalDevisers' => count($devisers),
+				'devisers' => [
 				array_slice($devisers, 0, 5),
 				array_slice($devisers, 5, 5),
 				array_slice($devisers, 10, 5),

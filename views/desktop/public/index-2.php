@@ -125,17 +125,19 @@ $this->title = 'Todevise / Home';
 			</div>
 			<!-- Controls -->
 			<div class="prev-next-wrapper">
-				<a class="prev" href="#carousel-devisers" role="button" data-slide="prev">
-					<i class="ion-ios-arrow-left"></i>
-					<span>Previous</span>
-				</a>
-				<a class="next" href="#carousel-devisers" role="button" data-slide="next">
-					<span>Next</span>
-					<i class="ion-ios-arrow-right"></i>
-				</a>
+				<?php if ($totalDevisers > 5) { ?>
+					<a class="prev" href="#carousel-devisers" role="button" data-slide="prev">
+						<i class="ion-ios-arrow-left"></i>
+						<span>Previous</span>
+					</a>
+					<a class="next" href="#carousel-devisers" role="button" data-slide="next">
+						<span>Next</span>
+						<i class="ion-ios-arrow-right"></i>
+					</a>
+				<?php } ?>
 			</div>
-				<div class="carousel slide" id="carousel-devisers" data-ride="carousel">
-					<div class="carousel-inner" role="listbox">
+				<div class="<?= $totalDevisers > 5 ? 'carousel slide' : ''?>" id="carousel-devisers" data-ride="carousel">
+					<div class="<?= $totalDevisers > 5 ? 'carousel-inner' : ''?>" role="listbox">
 						<?php foreach ($devisers as $i => $group) { ?>
 					<div class="item <?= ($i==0) ? 'active' : '' ?>">
 						<?php foreach ($group as $i => $deviser) { ?>
