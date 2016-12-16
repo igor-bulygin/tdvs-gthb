@@ -50,7 +50,7 @@ $this->params['deviser'] = $deviser;
 							<?php if (count($categories) > 1) { ?>
 								<div class="cathegory-wrapper">
 									<div class="col-md-3 col-sm-3 col-xs-3 pad-cathegory">
-										<div class="unpublished-square">
+										<div class="unpublished-square" ng-click="editStoreCtrl.show_unpublished_works()">
 											<p>Unpublished<br>works</p>
 										</div>
 									</div>
@@ -72,56 +72,60 @@ $this->params['deviser'] = $deviser;
 							<?php } ?>
 							<div class="store-grid">
 								<div class="title-wrapper">
-									<div class="title-wrapper">
-										<span class="title">Unpublished works</span>
-									</div>
-									<p class="message-tagline">Only you are able to see your unpublished works.</p>
-									<div class="row m-0">
-										<div class="col-md-3 pad-grid" ng-repeat="product in editStoreCtrl.products | draftProduct">
-											<div class="grid">
-												<figure class="effect-zoe">
-													<span class="close-product-icon" ng-click="editStoreCtrl.open_modal_delete(product.id)">
-														<i class="ion-android-close"></i>
-													</span>
-													<img class="grid-image" ng-src="{{product.main_photo || '/imgs/product_placeholder.png'}}">
-													<figcaption>
-														<p class="instauser">{{product.name || "Untitled"}}</p>
-														<p class="price">€{{product.min_price || '-'}}</p>
-														<a class="edit-product-icon" ng-href="{{product.edit_link}}" title="Edit work">
-															<i class="ion-edit"></i>
-														</a>
-													</figcaption>
-												</figure>
-											</div>
+									<div ng-if="editStoreCtrl.view_unpublished_works">
+										<div class="title-wrapper">
+											<span class="title">Unpublished works</span>
 										</div>
-									</div>
-									<div class="mt-20">
-										<span class="title"><?= Utils::l($selectedCategory->name) ?></span>
-									</div>
-									<nav class="products-menu">
-										<ul>
-											<?php if (count($selectedCategory->getDeviserSubcategories()) > 1) { ?>
-												<?php foreach ($selectedCategory->getDeviserSubcategories() as $i => $subcategory) { ?>
-													<li>
-														<a href="<?= Url::to(["deviser/store-edit", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id, 'category' => $selectedCategory->short_id, 'subcategory' => $subcategory->short_id])?>" class="<?= ($selectedSubcategory->short_id==$subcategory->short_id) ? 'active' : '' ?>"><?= Utils::l($subcategory["name"]) ?></a>
-													</li>
-												<?php } ?>
-											<?php } ?>
-										</ul>
-									</nav>
-									<div class="mesonry-row" dnd-list="editStoreCtrl.products">
-										<div class="menu-category list-group" ng-repeat="product in editStoreCtrl.products | publishedProduct" ng-if="product.main_photo" dnd-draggable="product" dnd-effect-allowed="move" dnd-moved="editStoreCtrl.update($index, product)">
-											<a href="">
+										<p class="message-tagline">Only you are able to see your unpublished works.</p>
+										<div class="row m-0">
+											<div class="col-md-3 pad-grid" ng-repeat="product in editStoreCtrl.products | draftProduct">
 												<div class="grid">
 													<figure class="effect-zoe">
-														<img class="grid-image" ng-src="{{product.main_photo}}">
+														<span class="close-product-icon" ng-click="editStoreCtrl.open_modal_delete(product.id)">
+															<i class="ion-android-close"></i>
+														</span>
+														<img class="grid-image" ng-src="{{product.main_photo || '/imgs/product_placeholder.png'}}">
 														<figcaption>
-															<p class="instauser">{{product.name}}</p>
-															<p class="price">€{{product.min_price}}</p>
+															<p class="instauser">{{product.name || "Untitled"}}</p>
+															<p class="price">€{{product.min_price || '-'}}</p>
+															<a class="edit-product-icon" ng-href="{{product.edit_link}}" title="Edit work">
+																<i class="ion-edit"></i>
+															</a>
 														</figcaption>
 													</figure>
 												</div>
-											</a>
+											</div>
+										</div>
+									</div>
+									<div ng-if="!editStoreCtrl.view_unpublished_works">
+										<div class="mt-20">
+											<span class="title"><?= Utils::l($selectedCategory->name) ?></span>
+										</div>
+										<nav class="products-menu">
+											<ul>
+												<?php if (count($selectedCategory->getDeviserSubcategories()) > 1) { ?>
+													<?php foreach ($selectedCategory->getDeviserSubcategories() as $i => $subcategory) { ?>
+														<li>
+															<a href="<?= Url::to(["deviser/store-edit", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id, 'category' => $selectedCategory->short_id, 'subcategory' => $subcategory->short_id])?>" class="<?= ($selectedSubcategory->short_id==$subcategory->short_id) ? 'active' : '' ?>"><?= Utils::l($subcategory["name"]) ?></a>
+														</li>
+													<?php } ?>
+												<?php } ?>
+											</ul>
+										</nav>
+										<div class="mesonry-row" dnd-list="editStoreCtrl.products">
+											<div class="menu-category list-group" ng-repeat="product in editStoreCtrl.products | publishedProduct" ng-if="product.main_photo" dnd-draggable="product" dnd-effect-allowed="move" dnd-moved="editStoreCtrl.update($index, product)">
+												<a href="">
+													<div class="grid">
+														<figure class="effect-zoe">
+															<img class="grid-image" ng-src="{{product.main_photo}}">
+															<figcaption>
+																<p class="instauser">{{product.name}}</p>
+																<p class="price">€{{product.min_price}}</p>
+															</figcaption>
+														</figure>
+													</div>
+												</a>
+											</div>
 										</div>
 									</div>
 								</div>

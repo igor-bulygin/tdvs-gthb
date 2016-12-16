@@ -6,6 +6,7 @@
 		vm.update = update;
 		vm.open_modal_delete = open_modal_delete;
 		vm.deviser_id = UtilService.returnDeviserIdFromUrl();
+		vm.show_unpublished_works = show_unpublished_works;
 		vm.language = 'en-US';
 
 		function init() {
@@ -130,6 +131,10 @@
 			}).$promise.then(function(deleteData) {
 				getProducts();
 			});
+		}
+
+		function show_unpublished_works(){
+			vm.view_unpublished_works = true;
 		}
 
 	}
