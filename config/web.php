@@ -158,6 +158,7 @@ $config = [
 				'/work/<slug:[^/.]*?>/<product_id:[^/.]*?>' => 'product/detail',
 
 				'/works/fix-products' => 'product/fix-products',
+				'/deviser/update-passwords' => 'deviser/update-passwords',
 
 
 				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/store' => 'deviser/store',
