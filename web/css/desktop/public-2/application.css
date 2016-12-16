@@ -2307,6 +2307,18 @@ input[type="radio"] .styled:checked + label::after {
     color: #6b6b6b;
     font-size: 16px; }
 
+.unpublished-square {
+  border: 1px solid #9a9a9a;
+  min-height: 158px;
+  padding: 35px;
+  border: 1px solid #9a9a9a; }
+  .unpublished-square p {
+    text-transform: uppercase;
+    color: #484848;
+    text-align: center;
+    font-size: 18px;
+    line-height: 38px; }
+
 .about-wrapper {
   width: 100%;
   padding: 40px 60px; }

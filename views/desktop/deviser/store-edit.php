@@ -49,6 +49,11 @@ $this->params['deviser'] = $deviser;
 						<div class="content-store">
 							<?php if (count($categories) > 1) { ?>
 								<div class="cathegory-wrapper">
+									<div class="col-md-3 col-sm-3 col-xs-3 pad-cathegory">
+										<div class="unpublished-square">
+											<p>Unpublished<br>works</p>
+										</div>
+									</div>
 									<?php foreach ($categories as $i => $category) { ?>
 										<div class="col-md-3 col-sm-3 col-xs-3 pad-cathegory">
 											<a href="<?= Url::to(["deviser/store-edit", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id, 'category' => $category->short_id])?>">
