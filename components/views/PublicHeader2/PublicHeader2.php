@@ -152,7 +152,7 @@ use yii\widgets\ActiveForm;
 					$person = Yii::$app->user->identity; /* @var \app\models\Person $person */?>
 					<li class="dropdown log">
 
-						<img src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getAvatarImage())->resize(25, 25) ?>">
+						<?php /*<img src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getAvatarImage())->resize(25, 25) ?>">*/ ?>
 
 						<a href="#" class="dropdown-toggle log" data-toggle="dropdown" role="button" aria-haspopup="true"
 						   aria-expanded="false">My todevise</a>
@@ -162,7 +162,10 @@ use yii\widgets\ActiveForm;
 							<ul>
 								<?php if ($person->isAdmin()) { ?>
 
-									<li><a href="#"><?=$person->personalInfo->getBrandName()?></a></li>
+									<li>
+										<img src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getAvatarImage())->resize(25, 25) ?>">
+										<?=$person->personalInfo->getBrandName()?>
+									</li>
 
 									<li><a href="<?=Url::to('/admin')?>">Administration</a></li>
 
@@ -172,13 +175,22 @@ use yii\widgets\ActiveForm;
 
 								<?php } elseif ($person->isDeviser()) { ?>
 
-									<li><a href="<?= Url::to(["deviser/about", "slug" => $person->slug, 'deviser_id' => $person->short_id])?>"> View profile</a></li>
+									<li>
+										<img src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getAvatarImage())->resize(25, 25) ?>">
+										<?=$person->personalInfo->getBrandName()?>
+										<a href="<?= Url::to(["deviser/about", "slug" => $person->slug, 'deviser_id' => $person->short_id])?>"> View profile</a>
+									</li>
 
 									<li><a href="#">Sales</a></li>
 
 									<li><a href="#">Settings</a></li>
 
 								<?php } elseif ($person->isClient()) { ?>
+
+									<li>
+										<img src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getAvatarImage())->resize(25, 25) ?>">
+										<?=$person->personalInfo->getBrandName()?>
+									</li>
 
 									<li><a href="#"><?=$person->personalInfo->getBrandName()?></a></li>
 
