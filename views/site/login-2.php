@@ -9,9 +9,6 @@ $this->title = 'Login';
 
 <?php $form = ActiveForm::begin(); ?>
 <div class="create-deviser-account-wrapper pt-0">
-	<?php if ($invalidLogin) { ?>
-		<div class="alert alert-danger">Invalid login</div>
-	<?php } ?>
 	<span class="login-title">Log in to your todevise account</span>
 	<div class="create-deviser-account-container black-form">
 		<div class="row">
@@ -32,6 +29,10 @@ $this->title = 'Login';
 				</label>
 			</div>
 		</div>
+
+		<?php if ($invalidLogin) { ?>
+			<div class="alert alert-danger">Your email or password are not valid</div>
+		<?php } ?>
 
 		<div class="row">
 			<button type="submit" class="btn-red send-btn" >
