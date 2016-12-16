@@ -27,7 +27,7 @@
 				});
 			}
 			//name
-			if(!product.name || product.name['en-US']) {
+			if(!angular.isObject(product.name) || product.name['en-US'] === undefined || product.name['en-US'] === "") {
 				required.push('name');
 			}
 			//categories
@@ -45,7 +45,7 @@
 			}
 
 			//description
-			if(!product.description || product.description['en-US']) {
+			if(!product.description || !product.description['en-US']) {
 				required.push('description');
 			}
 
@@ -78,7 +78,7 @@
 
 			//bespoke
 			if(angular.isObject(product.bespoke) && product.bespoke.type == 1) {
-				if(product.bespoke.value || !product.bespoke.value['en-US'] || product.bespoke.value['en-US'] == "") {
+				if(!product.bespoke.value || !product.bespoke.value['en-US'] || product.bespoke.value['en-US'] == "") {
 					required.push('bespoke');
 				}
 			}
@@ -95,7 +95,7 @@
 			}
 
 			//weight_unit
-			if(product.weight_unit) {
+			if(!product.weight_unit) {
 				required.push('weight_unit');
 			}
 			//dimension_unit
@@ -103,17 +103,17 @@
 				required.push('dimension_unit');
 			}
 			//price_stock and all price_stock values
-			if(product.price_stock || product.price_stock.length === 0) {
+			if(!angular.isArray(product.price_stock) || product.price_stock.length === 0) {
 				required.push('price_stock');
 			}
 			product.price_stock.forEach(function(element) {
 				//if availability
 				if(element.available &&
-					UtilService.isZeroOrLess(element.weight) || 
+					(UtilService.isZeroOrLess(element.weight) || 
 					UtilService.isZeroOrLess(element.width) ||
 					UtilService.isZeroOrLess(element.length) ||
 					UtilService.isZeroOrLess(element.price) ||
-					UtilService.isZeroOrLess(element.stock)) {
+					UtilService.isZeroOrLess(element.stock))) {
 						required.push('price_stock');
 				}
 			});

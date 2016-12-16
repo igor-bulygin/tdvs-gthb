@@ -2,7 +2,7 @@
 
 	function controller(deviserDataService, metricDataService, sizechartDataService, 
 		productDataService, languageDataService, toastr, UtilService, productService,
-		localStorageService, tagDataService, productEvents, $rootScope) {
+		localStorageService, tagDataService, productEvents, $rootScope, $location) {
 		var vm = this;
 		vm.save = save;
 		vm.deviser_id = UtilService.returnDeviserIdFromUrl();
@@ -108,6 +108,15 @@
 			});
 		}
 
+		function saved_draft(){
+			vm.product = productService.parseProductFromService(vm.product);
+			toastr.success('Saved!');
+		}
+
+		function product_published() {
+			$location.href = currentHost() + vm.link_profile + '?published';
+		}
+
 		function save(state) {
 			var required = [];
 			//set state of the product
@@ -140,13 +149,12 @@
 					vm.product.$update({
 						idProduct: vm.product.id
 					}).then(function(dataSaved) {
-						var options_to_convert = ['name', 'description', 'slug', 'sizechart', 'preorder', 'returns', 'warranty', 'tags'];
-						for(var i=0; i < options_to_convert.length; i++) {
-							vm.product[options_to_convert[i]] = UtilService.emptyArrayToObject(vm.product[options_to_convert[i]]);
+						if(state === 'product_state_draft') {
+							saved_draft();
+						} else if(state === 'product_state_active') {
+							product_published();
 						}
-						toastr.success('Saved!');
 					}, function (err) {
-						console.log(err);
 						if(err.data.errors && err.data.errors.required && angular.isArray(err.data.errors.required))
 								$rootScope.$broadcast(productEvents.requiredErrors, {required: err.data.errors.required})
 					});
@@ -154,19 +162,20 @@
 				else {
 					vm.product.$save()
 						.then(function (dataSaved) {
-							toastr.success('Saved!');
-							var options_to_convert = ['name', 'description', 'slug', 'sizechart', 'preorder', 'returns', 'warranty', 'bespoke'];
-							for(var i=0; i < options_to_convert.length; i++) {
-								vm.product[options_to_convert[i]] = UtilService.emptyArrayToObject(vm.product[options_to_convert[i]]);
+							if(state==='product_state_draft') {
+								saved_draft();
+							} else if (state === 'product_state_active') {
+								product_published();
 							}
 						}, function(err) {
-							console.log(err);
+							vm.errors = true;
 							//send errors to components
 							if(err.data.errors && err.data.errors.required && angular.isArray(err.data.errors.required))
 								$rootScope.$broadcast(productEvents.requiredErrors, {required: err.data.errors.required})
 						});
 				}
 			} else {
+				vm.errors = true;
 				$rootScope.$broadcast(productEvents.requiredErrors, {required: required});
 			}
 

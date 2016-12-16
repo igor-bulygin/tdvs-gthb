@@ -255,9 +255,16 @@
 			vm.prints = false;
 			args.categories.forEach(function(element) {
 				var values = productService.searchPrintSizechartsOnCategory(vm.categories, element);
-				if(values[0])
+				if(values[0]) {
 					vm.prints = true;
+					if(angular.isObject(vm.product.sizechart)) {
+						delete vm.product.sizechart;
+					}
+				}
 				if(values[1]) {
+					if(angular.isObject(vm.product.prints)) {
+						delete vm.product.prints;
+					}
 					vm.show_sizecharts = true;
 					if(vm.product.sizechart && !vm.product.from_edit)
 						delete vm.product.sizechart;
