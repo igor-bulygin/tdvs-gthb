@@ -1005,6 +1005,18 @@ input[type="radio"] .styled:checked + label::after {
   height: 350px;
   margin-bottom: 20px; }
 
+.modal-delete {
+  padding: 10px 50px; }
+  .modal-delete .modal-footer {
+    border-top: none; }
+  .modal-delete p {
+    text-align: center;
+    font-size: 21px; }
+  .modal-delete button {
+    width: 120px;
+    height: 43px;
+    font-size: 19px; }
+
 .showcase figcaption img, .banner-deviser-content .deviser-profile .avatar img, .product-description .product-description-content .work-description-wrapper .comment-wrapper .avatar img, .product-description .product-description-content .work-description-wrapper .comment-user .avatar img {
   border: 1px solid #9a9a9a;
   border-radius: 180px 180px 180px 180px !important;

@@ -27,4 +27,19 @@
     height:350px;
     margin-bottom:20px;
 }
+.modal-delete{
+	padding: 10px 50px;
+	.modal-footer{
+		border-top:none;
+	}
+	p{
+		text-align: center;
+    	font-size: 21px;
+	}
+	button{
+		width: 120px;
+		height: 43px;
+		font-size: 19px;
+	}
+}
 

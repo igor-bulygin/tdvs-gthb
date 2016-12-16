@@ -121,6 +121,7 @@ $this->params['deviser'] = $deviser;
 							</div>
 						</div>
 						<script type="text/ng-template" id="modalDeleteProduct.html">
+						<div class="modal-delete">
 							<div class="modal-header">
 								<h3 class="modal-title"></h3>
 							</div>
@@ -128,9 +129,10 @@ $this->params['deviser'] = $deviser;
 								<p>Are you sure you want to delete this work?</p>
 							</div>
 							<div class="modal-footer">
-								<button class="btn btn-default btn-green" ng-click="modalDeleteProductCtrl.close()">Cancel</button>
-								<button class="btn btn-default" ng-click="modalDeleteProductCtrl.ok()">DELETE</button>
+								<button class="btn btn-default btn-green pull-left" ng-click="modalDeleteProductCtrl.close()">Cancel</button>
+								<button class="btn btn-default pull-right" ng-click="modalDeleteProductCtrl.ok()">DELETE</button>
 							</div>
+						</div>
 						</script>
 
 					</div>
