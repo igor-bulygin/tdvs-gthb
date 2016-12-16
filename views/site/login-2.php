@@ -7,12 +7,11 @@ $this->title = 'Login';
 
 ?>
 
-<?php if ($invalidLogin) { ?>
-	<div class="alert alert-danger">Invalid login</div>
-<?php } ?>
-
 <?php $form = ActiveForm::begin(); ?>
 <div class="create-deviser-account-wrapper pt-0">
+	<?php if ($invalidLogin) { ?>
+		<div class="alert alert-danger">Invalid login</div>
+	<?php } ?>
 	<span class="login-title">Log in to your todevise account</span>
 	<div class="create-deviser-account-container black-form">
 		<div class="row">
