@@ -75,13 +75,15 @@ $this->params['deviser'] = $deviser;
 										<div class="col-md-3 pad-grid" ng-repeat="product in editStoreCtrl.products | draftProduct">
 											<div class="grid">
 												<figure class="effect-zoe">
-													<span class="glyphicon glyphicon-remove" ng-click="editStoreCtrl.open_modal_delete(product.id)"></span>
+													<span class="close-product-icon" ng-click="editStoreCtrl.open_modal_delete(product.id)">
+														<i class="ion-android-close"></i>
+													</span>
 													<img class="grid-image" ng-src="{{product.main_photo || '/imgs/product_placeholder.png'}}">
 													<figcaption>
 														<p class="instauser">{{product.name || "Untitled"}}</p>
 														<p class="price">€{{product.min_price || '-'}}</p>
-														<a ng-href="{{product.edit_link}}" title="Edit work">
-															<span class="glyphicon glyphicon-edit"></span>
+														<a class="edit-product-icon" ng-href="{{product.edit_link}}" title="Edit work">
+															<i class="ion-edit"></i>
 														</a>
 													</figcaption>
 												</figure>
