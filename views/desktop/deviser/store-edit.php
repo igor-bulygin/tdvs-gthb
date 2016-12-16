@@ -1,21 +1,14 @@
 <?php
+use app\assets\desktop\deviser\EditStoreAsset;
+use app\assets\desktop\pub\Index2Asset;
 use app\components\DeviserHeader;
-use app\components\DeviserAdminHeader;
 use app\components\DeviserMakeProfilePublic;
 use app\components\DeviserMenu;
+use app\helpers\Utils;
 use app\models\Category;
 use app\models\Person;
 use app\models\Product;
-use yii\web\View;
 use yii\helpers\Url;
-use app\models\Lang;
-use yii\helpers\Html;
-use yii\widgets\Pjax;
-use app\helpers\Utils;
-use yii\widgets\ListView;
-use yii\widgets\ActiveForm;
-use app\assets\desktop\pub\Index2Asset;
-use app\assets\desktop\deviser\EditStoreAsset;
 
 EditStoreAsset::register($this);
 
@@ -50,9 +43,11 @@ $this->params['deviser'] = $deviser;
 							<?php if (count($categories) > 1) { ?>
 								<div class="cathegory-wrapper">
 									<div class="col-md-3 col-sm-3 col-xs-3 pad-cathegory">
-										<div class="unpublished-square" ng-click="editStoreCtrl.show_unpublished_works()">
-											<p>Unpublished<br>works</p>
-										</div>
+										<a href="<?= Url::to(["deviser/store-edit", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id, 'product_state' => \app\models\Product2::PRODUCT_STATE_DRAFT])?>">
+											<div class="unpublished-square" ng-click="editStoreCtrl.show_unpublished_works()">
+												<p>Unpublished<br>works</p>
+											</div>
+										</a>
 									</div>
 									<?php foreach ($categories as $i => $category) { ?>
 										<div class="col-md-3 col-sm-3 col-xs-3 pad-cathegory">
