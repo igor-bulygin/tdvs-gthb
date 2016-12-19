@@ -444,7 +444,7 @@ class Product2 extends Product {
                     'prints',
 					'price_stock',
 					'tags',
-                ];
+				];
                 static::$retrieveExtraFields = [
                     'deviser_id',
 //
@@ -675,18 +675,22 @@ class Product2 extends Product {
 
 	/**
 	 * Helper to determine the minimum price in stock & price data.
-	 * In the future, this must be in Product class.
 	 *
 	 * @return float|null
 	 */
 	public function getMinimumPrice()
 	{
-		// TODO find minimum price, not first one
-		// some products hasn't price and stock in database !!
 		if (isset($this->price_stock)) {
-			if (count($this->price_stock) > 0) {
-				return $this->price_stock[0]["price"];
+			$min = null;
+			foreach ($this->price_stock as $item) {
+				if ($item['available']) {
+					if (!isset($min)) {
+						$min = $item['price'];
+					}
+					$min = min($min, $item['price']);
+				}
 			}
+			return $min;
 		}
 		return null;
 	}
