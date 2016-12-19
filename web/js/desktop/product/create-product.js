@@ -118,6 +118,7 @@
 		}
 
 		function save(state) {
+			vm.disable_save_buttons = true;
 			var required = [];
 			//set state of the product
 			vm.product.product_state = angular.copy(state);
@@ -149,12 +150,14 @@
 					vm.product.$update({
 						idProduct: vm.product.id
 					}).then(function(dataSaved) {
+						vm.disable_save_buttons = false;
 						if(state === 'product_state_draft') {
 							saved_draft();
 						} else if(state === 'product_state_active') {
 							product_published();
 						}
 					}, function (err) {
+						vm.disable_save_buttons = false;
 						if(err.data.errors && err.data.errors.required && angular.isArray(err.data.errors.required))
 								$rootScope.$broadcast(productEvents.requiredErrors, {required: err.data.errors.required})
 					});
@@ -162,12 +165,15 @@
 				else {
 					vm.product.$save()
 						.then(function (dataSaved) {
+							vm.disable_save_buttons = false;
 							if(state==='product_state_draft') {
 								saved_draft();
 							} else if (state === 'product_state_active') {
+								vm.disable_save_buttons = false;
 								product_published();
 							}
 						}, function(err) {
+							vm.disable_save_buttons = false;
 							vm.errors = true;
 							//send errors to components
 							if(err.data.errors && err.data.errors.required && angular.isArray(err.data.errors.required))
@@ -175,10 +181,10 @@
 						});
 				}
 			} else {
+				vm.disable_save_buttons = false;
 				vm.errors = true;
 				$rootScope.$broadcast(productEvents.requiredErrors, {required: required});
 			}
-
 		}
 
 	}

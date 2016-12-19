@@ -36,8 +36,8 @@ $this->title = $deviser->getBrandName() . ' - Todevise';
 		<div class="text-center" ng-if="!createProductCtrl.errors"><h4 class="title">New work</h4></div>
 		<div class="text-center" ng-if="createProductCtrl.errors"><p>Please complete all the required fields before publishing your work.</p></div>
 		<div class="btns-group">
-			<button class="btn btn-transparent" ng-click="createProductCtrl.save('product_state_draft')">Save progress</button>
-			<button class="btn btn-default btn-green" ng-click="createProductCtrl.save('product_state_active')">Publish work</button>
+			<button class="btn btn-transparent" ng-click="createProductCtrl.save('product_state_draft')" ng-disabled="createProductCtrl.disable_save_buttons">Save progress</button>
+			<button class="btn btn-default btn-green" ng-click="createProductCtrl.save('product_state_active')" ng-disabled="createProductCtrl.disable_save_buttons">Publish work</button>
 		</div>
 	</div>
 	<div class="container">

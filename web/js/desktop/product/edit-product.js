@@ -121,9 +121,8 @@
 			});
 		}
 
-
-
 		function save(state) {
+			vm.disable_save_buttons = true;
 			var required = [];
 			vm.product.product_state = angular.copy(state);
 
@@ -153,6 +152,7 @@
 				vm.product.$update({
 					idProduct: vm.product.id
 				}).then(function (dataSaved) {
+					vm.disable_save_buttons=false;
 					if(state === 'product_state_draft') {
 						vm.product = productService.parseProductFromService(vm.product);
 						toastr.success('Saved!');
@@ -160,11 +160,13 @@
 						$location.href = currentHost() + vm.link_profile + '?published=true';
 					}
 				}, function (err) {
+					vm.disable_save_buttons=false;
 					vm.errors = true;
 					if(err.data.errors && err.data.errors.required && angular.isArray(err.data.errors.required))
 						$rootScope.$broadcast(productEvents.requiredErrors, {required: err.data.errors.required});
 				});
 			} else {
+				vm.disable_save_buttons=false;
 				vm.errors = true;
 				$rootScope.$broadcast(productEvents.requiredErrors, {required: required});
 			}
