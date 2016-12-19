@@ -1,19 +1,12 @@
 <?php
-use app\assets\desktop\pub\Product2Asset;
 use app\assets\desktop\product\ProductDetailAsset;
+use app\assets\desktop\pub\Product2Asset;
 use app\assets\desktop\pub\PublicCommonAsset;
-use app\models\Category;
+use app\helpers\Utils;
 use app\models\Person;
 use app\models\PersonVideo;
 use app\models\Product;
-use yii\web\View;
 use yii\helpers\Url;
-use app\models\Lang;
-use yii\helpers\Html;
-use yii\widgets\Pjax;
-use app\helpers\Utils;
-use yii\widgets\ListView;
-use yii\widgets\ActiveForm;
 
 ProductDetailAsset::register($this);
 
@@ -267,9 +260,11 @@ $videos = $product->getVideos();
 					<a href="#description" aria-controls="description" role="tab" data-toggle="tab">Description &amp; User
 					reviews</a>
 				</li>
+				<?php if ($videos) { ?>
 				<li role="presentation" class="no-b-r">
 					<a href="#videos" aria-controls="works" role="tab" data-toggle="tab">Videos</a>
 				</li>
+				<?php } ?>
 				<li role="presentation">
 					<a href="#works" aria-controls="works" role="tab" data-toggle="tab">More by <?= $deviser->personalInfo->getBrandName() ?></a>
 				</li>
@@ -534,21 +529,23 @@ $videos = $product->getVideos();
 						</div>
 					</div>
 				</div>
-				<div role="tabpanel" class="tab-pane work-description-wrapper" id="videos">
-                    <div class="other-products-wrapper">
-                        <div style="height:500px;">
-	                        <div class="video-container">
-		                        <?php foreach ($videos as $video) { ?>
-			                        <div class="col-sm-6">
-				                        <div class="video-wrapper">
-					                        <iframe width="560" height="315" src="<?= $video->getUrlEmbeddedYoutubePlayer() ?>" frameborder="0" allowfullscreen></iframe>
-				                        </div>
-			                        </div>
-		                        <?php }  ?>
-	                        </div>
-                        </div>
-                    </div>
-                </div>
+				<?php if ($videos) { ?>
+					<div role="tabpanel" class="tab-pane work-description-wrapper" id="videos">
+						<div class="other-products-wrapper">
+							<div style="height:500px;">
+								<div class="video-container">
+									<?php foreach ($videos as $video) { ?>
+										<div class="col-sm-6">
+											<div class="video-wrapper">
+												<iframe width="560" height="315" src="<?= $video->getUrlEmbeddedYoutubePlayer() ?>" frameborder="0" allowfullscreen></iframe>
+											</div>
+										</div>
+									<?php }  ?>
+								</div>
+							</div>
+						</div>
+					</div>
+				<?php } ?>
 				<div role="tabpanel" class="tab-pane" id="works">
 					<nav class="products-menu">
 						<ul>
