@@ -25,9 +25,10 @@ class PriceStockValidator extends Validator
 		if (!is_array($priceStock)) {
 			$this->addError($object, $attribute, 'Pricestock must be an array');
 		} else {
-			$noOptionIdOptions = ['size', 'type', 20000]; // this values can be received and must be considered valid, although there are not options ids
+			$noOptionIdOptions = ['size', 'type']; // this values can be received and must be considered valid, although there are not options ids
 			foreach ($priceStock as $item) {
 				foreach ($item['options'] as $optionId => $values) {
+					$optionId = (string) $optionId; // force cast to string (short_id are allways strings)
 					if (in_array($optionId, $noOptionIdOptions)) {
 						// nothing to do here??
 						continue;
@@ -54,7 +55,7 @@ class PriceStockValidator extends Validator
 						}
 					}
 				}
-				if ($object->scenario == Product2::SCENARIO_PRODUCT_PUBLIC) {
+				if ($item['available'] && $object->scenario == Product2::SCENARIO_PRODUCT_PUBLIC) {
 					foreach ($positiveFields as $field) {
 						if (!isset($item[$field]) || !is_numeric($item[$field]) || $item[$field] <= 0) {
 							$this->addError($object, $attribute, sprintf('%s must be a positive value', $field));
