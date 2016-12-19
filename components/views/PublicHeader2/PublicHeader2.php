@@ -126,7 +126,7 @@ use yii\helpers\Url;
 					</li>
 				<?php } else {
 					$person = Yii::$app->user->identity; /* @var \app\models\Person $person */?>
-					<?php if (true) {
+					<?php if (false) {
 						// temporary links, while we dont have dropdown menu ?>
 						<?php if ($person->isDeviser()) { ?>
 							<li class="log">
@@ -144,22 +144,21 @@ use yii\helpers\Url;
 						// real navigation bar for logged users?>
 						<li class="dropdown log">
 
-							<img src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getAvatarImage())->resize(25, 25) ?>">
+							<img class="avatar-logued-user" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getAvatarImage())->resize(25, 25) ?>">
 
-							<a href="#" class="dropdown-toggle log" data-toggle="dropdown" role="button" aria-haspopup="true"
+							<a class="logued-text" href="#" class="dropdown-toggle log" data-toggle="dropdown" role="button" aria-haspopup="true"
 							   aria-expanded="false">My todevise</a>
 
 							<div class="dropdown-menu login-wrapper black-form">
 
-								<ul>
+								<ul class="menu-logued">
 									<?php if ($person->isAdmin()) { ?>
 
-										<li>
-											<img src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getAvatarImage())->resize(25, 25) ?>">
+										<li class="separator-item">
+											<img class="avatar-logued-user" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getAvatarImage())->resize(25, 25) ?>">
 											<?=$person->personalInfo->getBrandName()?>
+											<a href="<?=Url::to('/admin')?>">Administration</a>
 										</li>
-
-										<li><a href="<?=Url::to('/admin')?>">Administration</a></li>
 
 										<li><a href="<?=Url::to('/admin/invitations')?>">Invitations</a></li>
 

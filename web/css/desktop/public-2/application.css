@@ -1377,6 +1377,24 @@ input[type="radio"] .styled:checked + label::after {
   width: 633px;
   float: left; }
 
+.avatar-logued-user {
+  margin: 11px 5px 0;
+  float: left;
+  border-radius: 90px 90px 90px 90px !important;
+  -webkit-border-radius: 90px 90px 90px 90px !important;
+  -moz-border-radius: 90px 90px 90px 90px !important; }
+
+.logued-text {
+  float: left; }
+
+.separator-item {
+  display: block;
+  width: 100%; }
+
+.menu-logued li a {
+  color: #9a9a9a;
+  text-transform: capitalize; }
+
 .carousel-indicators li {
   margin: 1px 5px;
   border: none;

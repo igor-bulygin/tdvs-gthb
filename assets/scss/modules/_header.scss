@@ -271,6 +271,25 @@
     width: 633px;
     float: left;
 }
-
+.avatar-logued-user{
+	margin: 11px 5px 0;
+	float: left;
+	@include border-radius(90px,90px,90px,90px);
+}
+.logued-text{
+	float: left;
+}
+.separator-item{
+	display: block;
+	width: 100%;
+}
+.menu-logued{
+	li{
+		a{
+			color: $dark_grey;
+			text-transform: capitalize;
+		}
+	}
+}
 
 
