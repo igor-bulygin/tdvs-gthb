@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(productDataService, deviserDataService, UtilService, toastr, $location, $uibModal) {
+	function controller(productDataService, deviserDataService, UtilService, toastr, $location, $uibModal, $timeout) {
 		var vm = this;
 		vm.update = update;
 		vm.open_modal_delete = open_modal_delete;
@@ -66,6 +66,9 @@
 					switch (key) {
 						case 'published':
 							vm.view_published_topbar = params_obj[key];
+							$timeout(function(){
+								vm.view_published_topbar = false;
+							}, 10000);
 							break;
 						case 'product_state':
 							if(params_obj[key] === 'product_state_draft')

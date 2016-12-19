@@ -26,7 +26,11 @@ $this->params['deviser_links_target'] = 'edit_view';
 $this->params['deviser'] = $deviser;
 
 ?>
-
+<div ng-controller="editStoreCtrl as editStoreCtrl">
+	<div ng-if="editStoreCtrl.view_published_topbar" style="background: #b8e986; height: 50px;">
+		<p class="text-center">Your work has been published successfully.</p>
+		<span class="pull-right" ng-click="editStoreCtrl.view_published_topbar=false">X</span>
+	</div>
 	<?php if ($deviser->isDraft()) { ?>
 		<?= DeviserMakeProfilePublic::widget() ?>
 	<?php } ?>
@@ -38,7 +42,8 @@ $this->params['deviser'] = $deviser;
 					<div class="col-md-2">
 						<?= DeviserMenu::widget() ?>
 					</div>
-					<div class="col-md-10" ng-controller="editStoreCtrl as editStoreCtrl">
+					<div class="col-md-10">
+						
 						<div class="content-store">
 							<?php if (count($categories) > 1) { ?>
 								<div class="cathegory-wrapper">
@@ -145,3 +150,4 @@ $this->params['deviser'] = $deviser;
 				</div>
 			</div>
 		</div>
+</div>
