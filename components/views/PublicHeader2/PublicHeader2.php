@@ -158,41 +158,36 @@ use yii\helpers\Url;
 											<span><?=$person->personalInfo->getBrandName()?></span>
 											<img class="avatar-logued-user" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getAvatarImage())->resize(25, 25) ?>">
 										</li>
-										<li>
-											<a href="<?=Url::to('/admin')?>">Administration</a>
-										</li>
+										<li><a href="<?=Url::to('/admin')?>">Administration</a></li>
 										<li><a href="<?=Url::to('/admin/invitations')?>">Invitations</a></li>
 									    <li class="separation-line"></li>
 										<li><a href="#">Settings</a></li>
+										<li><a href="<?=Url::to('/global/logout')?>">Logout</a></li>
 
 									<?php } elseif ($person->isDeviser()) { ?>
 
-										<li>
-											<img src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getAvatarImage())->resize(25, 25) ?>">
-											<?=$person->personalInfo->getBrandName()?>
-											<a href="<?= Url::to(["deviser/about", "slug" => $person->slug, 'deviser_id' => $person->short_id])?>"> View profile</a>
+										<li class="header-item">
+											<a href="<?= Url::to(["deviser/about", "slug" => $person->slug, 'deviser_id' => $person->short_id])?>"> <span><?=$person->personalInfo->getBrandName()?></span></a>
+											<img class="avatar-logued-user" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getAvatarImage())->resize(25, 25) ?>">
 										</li>
-
 										<li><a href="#">Sales</a></li>
-
+										<li class="separation-line"></li>
 										<li><a href="#">Settings</a></li>
+										<li><a href="<?=Url::to('/global/logout')?>">Logout</a></li>
 
 									<?php } elseif ($person->isClient()) { ?>
 
-										<li>
-											<img src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getAvatarImage())->resize(25, 25) ?>">
-											<?=$person->personalInfo->getBrandName()?>
+										<li class="header-item">
+											<span><?=$person->personalInfo->getBrandName()?></span>
+											<img class="avatar-logued-user" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getAvatarImage())->resize(25, 25) ?>">
 										</li>
-
 										<li><a href="#"><?=$person->personalInfo->getBrandName()?></a></li>
-
 										<li><a href="#">My orders</a></li>
-
+										<li class="separation-line"></li>
 										<li><a href="#">Settings</a></li>
+										<li><a href="<?=Url::to('/global/logout')?>">Logout</a></li>
 
 									<?php } ?>
-
-									<li><a href="<?=Url::to('/global/logout')?>">Logout</a></li>
 								</ul>
 							</div>
 						</li>
