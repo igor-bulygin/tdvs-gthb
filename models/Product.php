@@ -413,9 +413,12 @@ class Product extends CActiveRecord {
 	 */
 	public function getVideos()
 	{
+		// temporary, return all deviser videos
+		$deviser = Person::findOne(["short_id" => $this->deviser_id]); /** @var Person $deviser */
+		return $deviser->videosInfo;
+
 		$videos = [];
 		$persons = Person::find()->where(["videos.products" => $this->short_id])->all();
-		/** @var Person $person */
 		foreach ($persons as $person) {
 			/** @var PersonVideo $video */
 			foreach ($person->findVideosByProductId($this->short_id) as $video) {
