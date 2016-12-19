@@ -4410,6 +4410,10 @@ input:checked + .slider:before {
   .calendar-icon.error-input {
     border: 1px solid #924cfc; }
 
+.purple .text-center {
+  color: #ffffff;
+  margin-top: 8px; }
+
 footer {
   width: 100%;
   height: 260px;
