@@ -22,11 +22,15 @@
 				"limit": 1000
 			}
 			if(vm.subcategory || vm.category) {
-				data["categories[]"] = [];
-				if(vm.subcategory)
-					data["categories[]"].push(vm.subcategory);
-				if(vm.category)
-					data["categories[]"].push(vm.category);
+				if(vm.category !== 'product_state_draft') {
+					data["categories[]"] = [];
+					if(vm.subcategory)
+						data["categories[]"].push(vm.subcategory);
+					if(vm.category)
+						data["categories[]"].push(vm.category);
+				} else {
+					vm.view_unpublished_works=true;
+				}
 			}
 			productDataService.Product.get(data).$promise.then(function (dataProducts) {
 				vm.products = dataProducts.items;
@@ -56,7 +60,8 @@
 				var categories = queries.split('=');
 				if (categories.length > 2) {
 					vm.category = categories[1].split('&')[0];
-					vm.subcategory = categories[2];
+					if(vm.category !== 'product_state_draft')
+						vm.subcategory = categories[2];
 				} else {
 					vm.category = categories[1];
 				}
