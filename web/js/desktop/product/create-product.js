@@ -114,7 +114,7 @@
 		}
 
 		function product_published() {
-			$location.href = currentHost() + vm.link_profile + '?published';
+			$location.href = currentHost() + vm.link_profile + '?published=true';
 		}
 
 		function save(state) {

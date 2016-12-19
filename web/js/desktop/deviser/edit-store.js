@@ -28,8 +28,6 @@
 						data["categories[]"].push(vm.subcategory);
 					if(vm.category)
 						data["categories[]"].push(vm.category);
-				} else {
-					vm.view_unpublished_works=true;
 				}
 			}
 			productDataService.Product.get(data).$promise.then(function (dataProducts) {
@@ -54,16 +52,32 @@
 		}
 
 		function parseCategories() {
+			//get category in vm.category and subcategory in vm.subcategory
 			var url = $location.absUrl();
 			if(url.split("?").length > 1) {
 				var queries = url.split("?")[1];
-				var categories = queries.split('=');
-				if (categories.length > 2) {
-					vm.category = categories[1].split('&')[0];
-					if(vm.category !== 'product_state_draft')
-						vm.subcategory = categories[2];
-				} else {
-					vm.category = categories[1];
+				var params = queries.split('&');
+				var params_obj = {};
+				params.forEach(function (element) {
+					var item = element.split('=')
+					params_obj[item[0]] = item[1];
+				})
+				for(var key in params_obj) {
+					switch (key) {
+						case 'published':
+							vm.view_published_topbar = params_obj[key];
+							break;
+						case 'product_state':
+							if(params_obj[key] === 'product_state_draft')
+								vm.view_unpublished_works = true;
+							break;
+						case 'category':
+							vm.category = params_obj[key];
+							break;
+						case 'subcategory':
+							vm.subcategory = params_obj[key];
+							break;
+					}
 				}
 			}
 		}

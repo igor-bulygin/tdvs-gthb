@@ -157,7 +157,7 @@
 						vm.product = productService.parseProductFromService(vm.product);
 						toastr.success('Saved!');
 					} else if (state === 'product_state_active') {
-						$location.href = currentHost() + vm.link_profile + '?published';
+						$location.href = currentHost() + vm.link_profile + '?published=true';
 					}
 				}, function (err) {
 					vm.errors = true;
@@ -166,7 +166,6 @@
 				});
 			} else {
 				vm.errors = true;
-				console.log(required);
 				$rootScope.$broadcast(productEvents.requiredErrors, {required: required});
 			}
 
