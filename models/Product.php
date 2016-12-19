@@ -435,7 +435,7 @@ class Product extends CActiveRecord {
 		if (isset($this->price_stock)) {
 			$min = null;
 			foreach ($this->price_stock as $item) {
-				if ($item['available']) {
+				if (!isset($item['available']) || $item['available']) {
 					if (!isset($min)) {
 						$min = $item['price'];
 					}
