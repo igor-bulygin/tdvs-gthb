@@ -149,19 +149,20 @@ use yii\helpers\Url;
 							<a class="logued-text" href="#" class="dropdown-toggle log" data-toggle="dropdown" role="button" aria-haspopup="true"
 							   aria-expanded="false">My todevise</a>
 
-							<div class="dropdown-menu login-wrapper black-form">
+							<div class="dropdown-menu admin-wrapper black-form">
 
 								<ul class="menu-logued">
 									<?php if ($person->isAdmin()) { ?>
 
-										<li class="separator-item">
+										<li class="header-item">
+											<span><?=$person->personalInfo->getBrandName()?></span>
 											<img class="avatar-logued-user" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getAvatarImage())->resize(25, 25) ?>">
-											<?=$person->personalInfo->getBrandName()?>
+										</li>
+										<li>
 											<a href="<?=Url::to('/admin')?>">Administration</a>
 										</li>
-
 										<li><a href="<?=Url::to('/admin/invitations')?>">Invitations</a></li>
-
+									    <li class="separation-line"></li>
 										<li><a href="#">Settings</a></li>
 
 									<?php } elseif ($person->isDeviser()) { ?>

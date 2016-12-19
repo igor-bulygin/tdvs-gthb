@@ -559,3 +559,28 @@ input:checked + .slider:before {
 		border: 1px solid $violet;
 	}
 }
+.purple{
+	.text-center{
+		color: $white;
+		    margin-top: 8px;
+	}
+}
+.success-bar{
+	background: $dark_green;
+	height: 50px;
+	color: $white;
+	position: relative;
+	.text-center{
+		padding-top: 15px;
+	}
+	span{
+		color: $white;
+		position: absolute;
+		top:10px;
+		right: 15px;
+		cursor:pointer;
+		i{
+			font-size:21px;
+		}
+	}
+}

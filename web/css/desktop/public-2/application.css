@@ -1231,24 +1231,24 @@ input[type="radio"] .styled:checked + label::after {
   cursor: pointer;
   float: left; }
 
-.login-wrapper {
-  padding: 10px 40px 20px;
-  width: 290px;
-  top: 59px; }
-  .login-wrapper input {
+.admin-wrapper {
+  width: 190px;
+  top: 59px;
+  padding: 0 0 15px; }
+  .admin-wrapper input {
     background-color: #e9e9e9;
     border-radius: 25px 25px 25px 25px !important;
     -webkit-border-radius: 25px 25px 25px 25px !important;
     -moz-border-radius: 25px 25px 25px 25px !important; }
   @media (max-width: 768px) {
-    .login-wrapper {
+    .admin-wrapper {
       position: absolute !important;
       background-color: #ffffff !important;
       right: 0 !important;
       left: auto;
       width: 250px !important; } }
   @media (max-width: 768px) {
-    .login-wrapper li {
+    .admin-wrapper li {
       display: block !important; } }
 
 .log {
@@ -1380,20 +1380,44 @@ input[type="radio"] .styled:checked + label::after {
 .avatar-logued-user {
   margin: 11px 5px 0;
   float: left;
+  display: block;
+  width: 30px;
   border-radius: 90px 90px 90px 90px !important;
   -webkit-border-radius: 90px 90px 90px 90px !important;
   -moz-border-radius: 90px 90px 90px 90px !important; }
 
 .logued-text {
-  float: left; }
+  float: left;
+  display: block; }
 
-.separator-item {
+.header-item {
   display: block;
-  width: 100%; }
+  width: 100%;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 10px !important; }
+  .header-item img {
+    float: right; }
+  .header-item span {
+    margin-right: 15px;
+    float: right;
+    text-transform: capitalize; }
 
-.menu-logued li a {
-  color: #9a9a9a;
-  text-transform: capitalize; }
+.menu-logued li {
+  padding: 0;
+  margin: 0;
+  float: left;
+  width: 100%; }
+  .menu-logued li a {
+    padding: 5px 15px !important;
+    color: #9a9a9a !important;
+    text-transform: capitalize;
+    float: right; }
+
+.separation-line {
+  display: block;
+  width: 100%;
+  border-bottom: 1px solid #ccc;
+  margin: 10px 0 !important; }
 
 .carousel-indicators li {
   margin: 1px 5px;
@@ -4385,6 +4409,26 @@ input:checked + .slider:before {
       color: #C91C39; }
   .calendar-icon.error-input {
     border: 1px solid #924cfc; }
+
+.purple .text-center {
+  color: #ffffff;
+  margin-top: 8px; }
+
+.success-bar {
+  background: #7AB83A;
+  height: 50px;
+  color: #ffffff;
+  position: relative; }
+  .success-bar .text-center {
+    padding-top: 15px; }
+  .success-bar span {
+    color: #ffffff;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    cursor: pointer; }
+    .success-bar span i {
+      font-size: 21px; }
 
 footer {
   width: 100%;

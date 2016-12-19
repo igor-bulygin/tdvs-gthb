@@ -27,9 +27,11 @@ $this->params['deviser'] = $deviser;
 
 ?>
 <div ng-controller="editStoreCtrl as editStoreCtrl">
-	<div ng-if="editStoreCtrl.view_published_topbar" style="background: #b8e986; height: 50px;">
+	<div class="success-bar" ng-if="editStoreCtrl.view_published_topbar" style="background: #b8e986; height: 50px;">
 		<p class="text-center">Your work has been published successfully.</p>
-		<span class="pull-right" ng-click="editStoreCtrl.view_published_topbar=false">X</span>
+		<span ng-click="editStoreCtrl.view_published_topbar=false">
+			<i class="ion-android-close"></i>
+		</span>
 	</div>
 	<?php if ($deviser->isDraft()) { ?>
 		<?= DeviserMakeProfilePublic::widget() ?>
