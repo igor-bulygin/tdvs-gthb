@@ -10,7 +10,12 @@ class Login2Asset extends AssetBundle {
         'css/desktop/public-2/login-2.css',
     ];
     public $js = [
+    	'js/desktop/public-2/login.js',
     ];
 	public $depends = [
+		'app\assets\desktop\pub\PublicCommonAsset',
+		'app\assets\api\ApiAsset',
+		'app\assets\libs\angularAsset',
+		'app\assets\libs\utilAsset'
 	];
 }

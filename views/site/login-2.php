@@ -1,5 +1,7 @@
 <?php
-use yii\bootstrap\ActiveForm;
+use app\assets\desktop\pub\Login2Asset;
+
+Login2Asset::register($this);
 
 /* @var $this yii\web\View */
 
@@ -7,39 +9,37 @@ $this->title = 'Login';
 
 ?>
 
-<?php $form = ActiveForm::begin(); ?>
-<div class="create-deviser-account-wrapper pt-0">
+<div class="create-deviser-account-wrapper pt-0" ng-controller="loginCtrl as loginCtrl">
+	<form name="loginCtrl.form">
 	<span class="login-title">Log in to your todevise account</span>
 	<div class="create-deviser-account-container black-form">
 		<div class="row">
 			<label for="email">Email</label>
-			<input type="email" id="email" name="Login[email]" class="form-control grey-input" />
+			<input type="email" id="email" name="email" ng-model="loginCtrl.user.email" class="form-control grey-input" />
 		</div>
 
 		<div class="row">
 			<label for="password">Password</label>
-			<input type="password" id="password" name="Login[password]" class="form-control grey-input" />
+			<input type="password" id="password" name="password" ng-model="loginCtrl.user.password" class="form-control grey-input" />
 		</div>
 
 		<div class="row">
 			<div class="checkbox checkbox-circle remember-me">
-				<input id="checkbox7" name="Login[rememberMe]" class="styled" type="checkbox" value="1">
+				<input id="checkbox7" name="remember" ng-model="loginCtrl.user.remember" class="styled" type="checkbox" value="1">
 				<label for="checkbox7">
 					Remember me
 				</label>
 			</div>
 		</div>
 
-		<?php if ($invalidLogin) { ?>
-			<div class="alert alert-danger">Your email or password are not valid</div>
-		<?php } ?>
+		
+		<div class="alert alert-danger" ng-if="loginCtrl.errors" ng-cloak>Your email or password are not valid</div>
 
 		<div class="row">
-			<button type="submit" class="btn-red send-btn" >
+			<button type="submit" class="btn-red send-btn" ng-click="loginCtrl.login()">
 				<i class="ion-android-navigate"></i>
 			</button>
 		</div>
 	</div>
+	</form>
 </div>
-<?php ActiveForm::end(); ?>
-
