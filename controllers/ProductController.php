@@ -32,9 +32,48 @@ class ProductController extends CController
 
 	public function actionIndex()
 	{
+		// show only fields needed in this scenario
+		Product2::setSerializeScenario(Product2::SERIALIZE_SCENARIO_PUBLIC);
+
+		// set pagination values
+		$limit = Yii::$app->request->get('limit', 20);
+		$limit = ($limit < 1) ? 1 : $limit;
+		// not allow more than 100 products for request
+	    $limit = ($limit > 100) ? 100 : $limit;
+		$page = Yii::$app->request->get('page', 1);
+		$page = ($page < 1) ? 1 : $page;
+		$offset = ($limit * ($page - 1));
+
+		$text = Yii::$app->request->get("q"); // search in name, description, and more
+		$products = Product2::findSerialized([
+				"name" => Yii::$app->request->get("name"), // search only in name attribute
+				"id" => Yii::$app->request->get("id"),
+				"text" => null,
+				"deviser_id" => Yii::$app->request->get("deviser"),
+				"categories" => Yii::$app->request->get("categories"),
+				"product_state"=>  Yii::$app->request->get("product_state"),
+				"limit" => $limit,
+				"offset" => $offset,
+		]);
+
+		// divide then in blocks to be rendered in bottom section
+		$moreWork = [];
+		for ($i = 1; $i <= 19; $i++) {
+			$start = $i * 15;
+			$moreWork[] =  [
+					"twelve" => array_slice($products, $start, 12),
+					"three" => array_slice($products, ($start + 12), 3),
+			];
+		}
+
 		$this->layout = '/desktop/public-2.php';
 
-		return $this->render("products");
+		return $this->render("products", [
+			'text' => $text,
+			'total' => Product2::$countItemsFound,
+			'products' => $products,
+			'moreWork' => $moreWork,
+		]);
 	}
 
 
