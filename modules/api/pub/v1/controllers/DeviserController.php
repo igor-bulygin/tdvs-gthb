@@ -10,10 +10,9 @@ use app\models\PostmanEmailTask;
 use app\modules\api\pub\v1\forms\BecomeDeviserForm;
 use MongoDate;
 use Yii;
-use yii\rest\Controller;
 use yii\web\BadRequestHttpException;
 
-class DeviserController extends Controller
+class DeviserController extends AppPublicController
 {
 
 	/**

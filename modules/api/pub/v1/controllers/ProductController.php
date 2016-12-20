@@ -2,21 +2,12 @@
 
 namespace app\modules\api\pub\v1\controllers;
 
-use app\helpers\CActiveRecord;
 use app\models\Product;
 use app\models\Product2;
 use Yii;
-use yii\mongodb\ActiveQuery;
-use yii\rest\Controller;
-use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
-use yii\web\Response;
-use app\helpers\Utils;
-use yii\filters\ContentNegotiator;
 
-use app\models\Faq;
-
-class ProductController extends Controller {
+class ProductController extends AppPublicController {
 
 	public function actionView($id)
 	{

@@ -5,10 +5,9 @@ namespace app\modules\api\pub\v1\controllers;
 use app\models\Person;
 use app\models\SizeChart;
 use Yii;
-use yii\rest\Controller;
 
 
-class SizechartController extends Controller {
+class SizechartController extends AppPublicController {
 
     public function actionIndex()
     {

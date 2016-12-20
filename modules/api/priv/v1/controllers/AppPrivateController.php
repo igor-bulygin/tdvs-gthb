@@ -2,34 +2,40 @@
 
 namespace app\modules\api\priv\v1\controllers;
 
-use app\helpers\CActiveRecord;
 use app\models\Person;
-use app\modules\api\priv\v1\forms\UploadForm;
 use Yii;
 use yii\rest\Controller;
 use yii\web\BadRequestHttpException;
-use yii\web\ForbiddenHttpException;
-use yii\web\Response;
-use app\helpers\Utils;
-use yii\filters\ContentNegotiator;
-
-use app\models\Faq;
-use yii\web\UploadedFile;
-use yii\web\User;
 
 class AppPrivateController extends Controller
 {
-
 	public function init()
 	{
 		parent::init();
 
-		// TODO: retrieve current identity from one of the available authentication methods in Yii
-//		$deviser_id = Yii::$app->request->isGet ? Yii::$app->request->get("deviser_id") : Yii::$app->request->post("deviser_id");
-//		if (empty($deviser_id)) {
-//			throw new BadRequestHttpException('Deviser not specified');
-//		}
-//		Yii::$app->user->login(Person::findOne(["short_id" => $deviser_id]));
+		\Yii::$app->user->enableSession = false; // restfull must be stateless => no session
+		\Yii::$app->user->loginUrl = null; 		 // force 403 response
+	}
+
+	public function behaviors()
+	{
+
+		$behaviors = parent::behaviors();
+
+//		$behaviors['authenticator'] = [
+//				'class' => HttpBearerAuth::className(),
+//		];
+//		$behaviors['access'] = [
+//				'class' => AccessControl::className(),
+//				'rules' => [
+//						[
+//								'allow' => true,
+//								'roles' => ['@'] //? guest, @ authenticated
+//						]
+//				]
+//		];
+
+		return $behaviors;
 	}
 
 	/**

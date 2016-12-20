@@ -2,17 +2,11 @@
 
 namespace app\modules\api\pub\v1\controllers;
 
-use app\helpers\CActiveRecord;
 use app\models\Tag;
 use Yii;
-use yii\rest\Controller;
-use yii\web\ForbiddenHttpException;
-use yii\web\Response;
-use app\helpers\Utils;
-use yii\filters\ContentNegotiator;
 
 
-class TagController extends Controller {
+class TagController extends AppPublicController {
 
     public function actionIndex()
     {
