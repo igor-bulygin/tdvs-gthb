@@ -12,7 +12,7 @@ use yii\web\BadRequestHttpException;
 
 class ProductController extends CController
 {
-	public $defaultAction = "detail";
+	public $defaultAction = "index";
 
 	public function behaviors()
 	{
@@ -28,6 +28,13 @@ class ProductController extends CController
 						],
 				],
 		];
+	}
+
+	public function actionIndex()
+	{
+		$this->layout = '/desktop/public-2.php';
+
+		return $this->render("products");
 	}
 
 

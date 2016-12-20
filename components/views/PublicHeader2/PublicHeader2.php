@@ -17,11 +17,11 @@ use yii\helpers\Url;
 				<img src="/imgs/logo.png">
 			</a>
 		</div>
-		<form class="navbar-form navbar-left navbar-searcher mobile">
+		<form class="navbar-form navbar-left navbar-searcher mobile" action="<?=Url::to(["/works"])?>" method="get">
 			<div class="input-group searcher-header">
-				<input type="text" class="form-control" placeholder="Search">
+				<input type="text" name="q" class="form-control" placeholder="Search">
 				<span class="input-group-btn">
-                    <button class="btn btn-default btn-send" type="button">
+                    <button class="btn btn-default btn-send" type="submit">
                         <span class="ion-search"></span>
                     </button>
                 </span>
@@ -96,11 +96,11 @@ use yii\helpers\Url;
 					</div>
 				</li>
 			</ul>
-			<form class="navbar-form navbar-left navbar-searcher">
+			<form class="navbar-form navbar-left navbar-searcher" action="<?=Url::to(['/works'])?>" method="get">
 				<div class="input-group searcher-header">
-					<input type="text" class="form-control" placeholder="Search">
+					<input type="text" class="form-control" name="q" placeholder="Search">
 					<span class="input-group-btn">
-                            <button class="btn btn-default btn-send" type="button">
+                            <button class="btn btn-default btn-send" type="submit">
                                 <span class="ion-search"></span>
                             </button>
                         </span>

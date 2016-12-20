@@ -157,9 +157,11 @@ $config = [
 				'/category/<slug:[^/.]*?>/<category_id:[^/.]*?>' => 'public/category-b',
 				'/work/<slug:[^/.]*?>/<product_id:[^/.]*?>' => 'product/detail',
 
+				// temporary routes to fix database problems
 				'/works/fix-products' => 'product/fix-products',
 				'/deviser/update-passwords' => 'deviser/update-passwords',
 
+				'/works' => 'product/index',
 
 				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/store' => 'deviser/store',
 				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/about' => 'deviser/about',
