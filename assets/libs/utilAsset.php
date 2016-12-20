@@ -24,6 +24,7 @@ class utilAsset extends AssetBundle {
 	
 	public $depends = [
 		'app\assets\libs\angularMessagesAsset',
-		'app\assets\libs\ngImgCropAsset'
+		'app\assets\libs\ngImgCropAsset',
+		'app\assets\libs\angularLocalStorageAsset'
 	];
 }
