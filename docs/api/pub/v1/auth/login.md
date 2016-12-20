@@ -18,6 +18,7 @@ Example about how to call to Web Service to login with todevise account
 
 ```
     {
-        "access_token" : "0yWT6m....."
+        "access_token" : "0yWT6.....",
+        "return_url" : "/deviser/phuong-my/dffbd75/works/create",
     }
 ```
