@@ -3,7 +3,7 @@
 	"use strict";
 
 	function controller(productService, deviserDataService, productDataService, languageDataService, metricDataService, toastr, 
-		UtilService, tagDataService, $scope, $rootScope, productEvents, sizechartDataService, $location) {
+		UtilService, tagDataService, $scope, $rootScope, productEvents, sizechartDataService, $window) {
 		var vm = this;
 		vm.categories_helper = [];
 		vm.save = save;
@@ -157,7 +157,7 @@
 						vm.product = productService.parseProductFromService(vm.product);
 						toastr.success('Saved!');
 					} else if (state === 'product_state_active') {
-						$location.href = currentHost() + vm.link_profile + '?published=true';
+						$window.location.href = currentHost() + vm.link_profile + '?published=true';
 					}
 				}, function (err) {
 					vm.disable_save_buttons=false;
