@@ -4,6 +4,8 @@ namespace app\modules\api\priv\v1\controllers;
 
 use app\models\Person;
 use Yii;
+use yii\filters\AccessControl;
+use yii\filters\auth\HttpBearerAuth;
 use yii\rest\Controller;
 use yii\web\BadRequestHttpException;
 
@@ -22,18 +24,18 @@ class AppPrivateController extends Controller
 
 		$behaviors = parent::behaviors();
 
-//		$behaviors['authenticator'] = [
-//				'class' => HttpBearerAuth::className(),
-//		];
-//		$behaviors['access'] = [
-//				'class' => AccessControl::className(),
-//				'rules' => [
-//						[
-//								'allow' => true,
-//								'roles' => ['@'] //? guest, @ authenticated
-//						]
-//				]
-//		];
+		$behaviors['authenticator'] = [
+				'class' => HttpBearerAuth::className(),
+		];
+		$behaviors['access'] = [
+				'class' => AccessControl::className(),
+				'rules' => [
+						[
+								'allow' => true,
+								'roles' => ['@'] //? guest, @ authenticated
+						]
+				]
+		];
 
 		return $behaviors;
 	}
