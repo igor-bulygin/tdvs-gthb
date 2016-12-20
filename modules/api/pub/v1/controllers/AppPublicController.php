@@ -18,18 +18,19 @@ class AppPublicController extends Controller
 
 	public function behaviors()
 	{
-		return [
-				'access' => [
-						'class' => AccessControl::className(),
-						//'only' => ['', ''],
-						'rules' => [
-								[
-										'allow' => true,
-										'roles' => ['?', '@'] //? guest, @ authenticated
-								]
+		$behaviors = parent::behaviors();
+		$behaviors['access'] = [
+				'class' => AccessControl::className(),
+			//'only' => ['', ''],
+				'rules' => [
+						[
+								'allow' => true,
+								'roles' => ['?', '@'] //? guest, @ authenticated
 						]
 				]
 		];
+
+		return $behaviors;
 	}
 
 }

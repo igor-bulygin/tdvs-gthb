@@ -7,7 +7,6 @@ use EasySlugger\Slugger;
 use Exception;
 use MongoDate;
 use Yii;
-use yii\base\NotSupportedException;
 use yii\mongodb\ActiveQuery;
 use yii\web\IdentityInterface;
 use yii2tech\embedded\Mapping;
@@ -188,7 +187,7 @@ class Person extends CActiveRecord implements IdentityInterface
 
 	public static function findIdentityByAccessToken($token, $type = null)
 	{
-		throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
+		return Person::findOne(['credentials.auth_key' => $token]);
 	}
 
 	public static function findByEmail($username)
@@ -219,6 +218,11 @@ class Person extends CActiveRecord implements IdentityInterface
 	public function validatePassword($password)
 	{
 		return isset($this->credentials["password"]) && $this->credentials["password"] === bin2hex(Yii::$app->Scrypt->calc($password, $this->credentials["salt"], 8, 8, 16, 32));
+	}
+
+	public function getAccessToken()
+	{
+		return $this->getAuthKey();
 	}
 
 	/**
