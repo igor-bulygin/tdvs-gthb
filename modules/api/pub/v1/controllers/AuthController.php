@@ -13,7 +13,7 @@ class AuthController extends AppPublicController
 	{
 		parent::init();
 
-		\Yii::$app->user->enableSession = true;
+		\Yii::$app->user->enableSession = true; // this controller must save authentication info on sesion
 	}
 
 	public function actionLogin()
