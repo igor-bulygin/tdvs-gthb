@@ -23,7 +23,10 @@ class AuthController extends AppPublicController
 			if ($model->load(Yii::$app->getRequest()->getBodyParams(), '') && $model->login()) {
 
 				Yii::$app->response->setStatusCode(200); // Created
-				return ['access_token' => Yii::$app->user->identity->getAccessToken()];
+				return [
+					'access_token' => Yii::$app->user->identity->getAccessToken(),
+					'return_url' => Yii::$app->getUser()->getReturnUrl(),
+				];
 
 			} else {
 				Yii::$app->response->setStatusCode(400); // Bad Request
