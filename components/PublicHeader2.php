@@ -2,11 +2,11 @@
 
 namespace app\components;
 
+use app\helpers\Utils;
 use app\models\Category;
 use app\models\Login;
 use Yii;
 use yii\base\Widget;
-use app\helpers\Utils;
 
 class PublicHeader2 extends Widget {
 	/**
@@ -21,7 +21,8 @@ class PublicHeader2 extends Widget {
 
 		return $this->render('PublicHeader2', [
 			'categories' => Category::getHeaderCategories(),
-			'login_model' => $model
+			'login_model' => $model,
+			'q' => Yii::$app->request->get('q'),
 		]);
 	}
 

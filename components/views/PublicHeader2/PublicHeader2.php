@@ -19,7 +19,7 @@ use yii\helpers\Url;
 		</div>
 		<form class="navbar-form navbar-left navbar-searcher mobile" action="<?=Url::to(["/works"])?>" method="get">
 			<div class="input-group searcher-header">
-				<input type="text" name="q" class="form-control" placeholder="Search">
+				<input type="text" name="q" value="<?=$q?>" class="form-control" placeholder="Search">
 				<span class="input-group-btn">
                     <button class="btn btn-default btn-send" type="submit">
                         <span class="ion-search"></span>
@@ -98,7 +98,7 @@ use yii\helpers\Url;
 			</ul>
 			<form class="navbar-form navbar-left navbar-searcher" action="<?=Url::to(['/works'])?>" method="get">
 				<div class="input-group searcher-header">
-					<input type="text" class="form-control" name="q" placeholder="Search">
+					<input type="text" class="form-control" name="q" value="<?=$q?>"placeholder="Search">
 					<span class="input-group-btn">
                             <button class="btn btn-default btn-send" type="submit">
                                 <span class="ion-search"></span>
