@@ -2,7 +2,7 @@
 
 	function controller(deviserDataService, metricDataService, sizechartDataService, 
 		productDataService, languageDataService, toastr, UtilService, productService,
-		localStorageService, tagDataService, productEvents, $rootScope, $location) {
+		localStorageService, tagDataService, productEvents, $rootScope, $window) {
 		var vm = this;
 		vm.save = save;
 		vm.deviser_id = UtilService.returnDeviserIdFromUrl();
@@ -114,7 +114,7 @@
 		}
 
 		function product_published() {
-			$location.href = currentHost() + vm.link_profile + '?published=true';
+			$window.location.href = currentHost() + vm.link_profile + '?published=true';
 		}
 
 		function save(state) {
@@ -168,7 +168,7 @@
 							vm.disable_save_buttons = false;
 							if(state==='product_state_draft') {
 								saved_draft();
-							} else if (state === 'product_state_active') {
+							} else if(state === 'product_state_active') {
 								vm.disable_save_buttons = false;
 								product_published();
 							}
