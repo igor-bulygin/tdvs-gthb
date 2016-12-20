@@ -131,7 +131,14 @@
 		}
 	}
 
+	function config(localStorageServiceProvider) {
+		localStorageServiceProvider
+			.setPrefix('todevise-')
+			.setStorageType('localStorage')
+	}
+
 	angular.module('util', ['util.formMessages', 'LocalStorageModule'])
-		.service('UtilService', UtilService);
+		.service('UtilService', UtilService)
+		.config(config);
 
 }());

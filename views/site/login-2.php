@@ -25,7 +25,7 @@ $this->title = 'Login';
 
 		<div class="row">
 			<div class="checkbox checkbox-circle remember-me">
-				<input id="checkbox7" name="remember" ng-model="loginCtrl.user.remember" class="styled" type="checkbox" value="1">
+				<input id="checkbox7" name="remember" ng-model="loginCtrl.user.rememberMe" class="styled" type="checkbox" value="1">
 				<label for="checkbox7">
 					Remember me
 				</label>
