@@ -110,13 +110,17 @@ $videos = $product->getVideos();
 							<div class="quantity-wrapper pull-right">
 								<span class="atr quantity-name">Quantity</span>
 								<div class="number" ng-bind="detailProductCtrl.quantity"></div>
-								<button class="btn btn-green btn-summatory" ng-click="detailProductCtrl.addQuantity()">
+								<button class="btn btn-green btn-summatory" ng-click="detailProductCtrl.changeQuantity(1)">
 									<span>+</span>
 								</button>
-								<button class="btn btn-green btn-summatory" ng-click="detailProductCtrl.subQuantity()">
+								<button class="btn btn-green btn-summatory" ng-click="detailProductCtrl.changeQuantity(-1)">
 									<span>-</span>
 								</button>
 							</div>
+						</div>
+						<div ng-if="detailProductCtrl.original_artwork">
+							<input class="form-control" type="radio" ng-model="detailProductCtrl.original_selected" ng-value="true" ng-change="detailProductCtrl.changeOriginalArtwork(true)"> Original Artwork
+							<input class="form-control" type="radio" ng-model="detailProductCtrl.original_selected" ng-value="false" ng-change="detailProductCtrl.changeOriginalArtwork(false)"> Prints
 						</div>
 						<div class="product-data">
 <!--                            <ul class="nav nav-tabs product-detail-tabs" role="tablist">-->

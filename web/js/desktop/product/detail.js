@@ -6,11 +6,18 @@
 		vm.quantity = 1;
 		vm.optionsSelected = {};
 		vm.parseOptions = parseOptions;
-		vm.addQuantity = addQuantity;
-		vm.subQuantity = subQuantity;
+		vm.changeQuantity = changeQuantity;
+		vm.changeOriginalArtwork = changeOriginalArtwork;
 		vm.getReferencesFromOptions = getReferencesFromOptions;
 		vm.selectComparator = selectComparator;
 		var select_order = ['size', 'color', 'select']
+
+		function init() {
+			getProductId();
+			getProduct();
+		}
+
+		init();
 
 		function getProductId() {			
 			var url = $location.absUrl().split("#")[0].split("/");
@@ -22,6 +29,8 @@
 				idProduct: vm.product_id
 			}).$promise.then(function (dataProduct) {
 				vm.product = dataProduct;
+				//checks
+				setOriginalArtwork(vm.product);
 				vm.minimum_price = getMinimumPrice(vm.product.price_stock);
 				vm.total_stock = getTotalStock(vm.product.price_stock);
 				vm.stock = vm.total_stock;
@@ -31,13 +40,6 @@
 				toastr.error(err);
 			})
 		}
-
-		function init() {
-			getProductId();
-			getProduct();
-		}
-
-		init();
 
 		function getMinimumPrice(references) {
 			if(references.length > 0) {
@@ -56,7 +58,8 @@
 		function getTotalStock(references) {
 			var stock = 0;
 			for(var i = 0; i < references.length; i++) {
-				stock += references[i].stock;
+				if(references[i].available && !references[i].original_artwork)
+					stock += references[i].stock;
 			}
 			return stock;
 		}
@@ -129,13 +132,35 @@
 			//return references_filtered;
 		}
 
-		function addQuantity(){
-			vm.quantity += 1;
+		function changeQuantity(value){
+			if(vm.quantity <= vm.stock) {
+				if(value < 0) {
+					if(vm.quantity > 1)
+						vm.quantity += value;
+				}
+				else if(vm.quantity < vm.stock) {
+					vm.quantity += value;
+				}
+			}
 		}
 
-		function subQuantity(){
-			if(vm.quantity >1){
-				vm.quantity -= 1;
+		function setOriginalArtwork(product) {
+			for(var i = 0; i < product.price_stock.length; i++) {
+				if(product.price_stock[i].original_artwork && product.price_stock[i].available) {
+					vm.original_pos = i;
+					vm.original_artwork = true;
+					vm.original_selected = false;
+				}
+			}
+		}
+
+		function changeOriginalArtwork(value) {
+			if(value == true) {
+				vm.stock = vm.product.price_stock[vm.original_pos].stock;
+				vm.price = vm.product.price_stock[vm.original_pos].price;
+			} else {
+				vm.stock = vm.total_stock;
+				vm.price = vm.minimum_price;
 			}
 		}
 
