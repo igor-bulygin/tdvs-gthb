@@ -9,6 +9,13 @@ use yii\web\BadRequestHttpException;
 
 class AuthController extends AppPublicController
 {
+	public function init()
+	{
+		parent::init();
+
+		\Yii::$app->user->enableSession = true;
+	}
+
 	public function actionLogin()
 	{
 		try {
