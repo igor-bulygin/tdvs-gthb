@@ -13,6 +13,7 @@ Example about how to call to Web Service to login with todevise account
 **Request parameters**:
 * `email`: email of the user to be logged in
 * `password`: password of the user
+* `rememberMe`: (boolean) if the user stay connected
 
 **Response body**:
 
