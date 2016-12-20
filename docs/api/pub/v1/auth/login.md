@@ -15,4 +15,9 @@ Example about how to call to Web Service to login with todevise account
 * `password`: password of the user
 
 **Response body**:
-* {"access_token":"0yWT6m....."}
+
+```
+    {
+        "access_token" : "0yWT6m....."
+    }
+```
