@@ -564,11 +564,11 @@ class Product2 extends Product {
             $query->andFilterWhere(Utils::getFilterForTranslatableField("name", $criteria["name"]));
         }
 
-        // if name is specified
+        // if text is specified
         if ((array_key_exists("text", $criteria)) && (!empty($criteria["text"]))) {
-            // TODO, find not only in description, in name, and other text attributes to be specified too
 //			// search the word in all available languages
-            $query->andFilterWhere(Utils::getFilterForTranslatableField("description", $criteria["text"]));
+			$query->andFilterWhere(Utils::getFilterForTranslatableField("name", $criteria["text"]));
+			$query->andFilterWhere(Utils::getFilterForTranslatableField("description", $criteria["text"]));
         }
 
 
