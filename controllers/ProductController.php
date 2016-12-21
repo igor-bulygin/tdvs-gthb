@@ -35,11 +35,12 @@ class ProductController extends CController
 		// show only fields needed in this scenario
 		Product2::setSerializeScenario(Product2::SERIALIZE_SCENARIO_PUBLIC);
 
+		$defaultLimit = 60;
+		$maxLimit = 60;
 		// set pagination values
-		$limit = Yii::$app->request->get('limit', 20);
-		$limit = ($limit < 1) ? 1 : $limit;
-		// not allow more than 100 products for request
-	    $limit = ($limit > 100) ? 100 : $limit;
+		$limit = Yii::$app->request->get('limit', $defaultLimit);
+		$limit = max(1, $limit);
+	    $limit = min($limit, $maxLimit);
 		$page = Yii::$app->request->get('page', 1);
 		$page = ($page < 1) ? 1 : $page;
 		$offset = ($limit * ($page - 1));
@@ -58,7 +59,7 @@ class ProductController extends CController
 
 		// divide then in blocks to be rendered in bottom section
 		$moreWork = [];
-		for ($i = 1; $i <= 19; $i++) {
+		for ($i = 0; $i < 19; $i++) {
 			$start = $i * 15;
 			$moreWork[] =  [
 					"twelve" => array_slice($products, $start, 12),
