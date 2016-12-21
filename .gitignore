@@ -48,3 +48,6 @@ test_rest
 
 #sass cache
 .sass-cache/
+
+#backups created by mongo sync script
+db_backup
