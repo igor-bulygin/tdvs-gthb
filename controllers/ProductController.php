@@ -186,16 +186,21 @@ class ProductController extends CController
 		$products = Product2::findSerialized();
 		foreach ($products as $product) {
 			// saving the product, we force to create any missing short_id on price&stock
-			if (empty($product->product_state)) {
-				$product->product_state = Product2::PRODUCT_STATE_ACTIVE;
-			}
-			if (!is_array($product->name)) {
+			if (!empty($product->name) && !is_array($product->name)) {
 				$name = [];
 				foreach (Lang::getAvailableLanguagesDescriptions() as $key => $langName) {
 					$name[$key] = $product->name;
 				}
 				$product->setAttribute('name', $name);
 			}
+			if (empty($product->product_state)) {
+				if (empty($product->categories) || empty($product->deviser_id) || empty($product->name) || empty($product->price_stock) || empty($product->mediaFiles) || empty($product->mediaFiles->photos)) {
+					$product->product_state = Product2::PRODUCT_STATE_DRAFT;
+				} else {
+					$product->product_state = Product2::PRODUCT_STATE_ACTIVE;
+				}
+			}
+
 			$product->save(false);
 		}
 		Yii::$app->response->setStatusCode(200); // Success, without body
