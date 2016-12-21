@@ -465,17 +465,22 @@ class Utils
 	 *      ]
 	 * );
 	 *
-	 * @param string $fieldName
+	 * @param array|string $fieldNames
 	 * @param $value
 	 * @param string $operator
 	 * @return array
 	 */
-	public static function getFilterForTranslatableField($fieldName, $value, $operator = 'LIKE')
+	public static function getFilterForTranslatableField($fieldNames, $value, $operator = 'LIKE')
 	{
+		if (!is_array($fieldNames)) {
+			$fieldNames = [$fieldNames];
+		}
 		$nameFilter = ['or'];
 		foreach (Lang::getAvailableLanguagesDescriptions() as $key => $name) {
-			$field = ($fieldName . "." . $key);
-			$nameFilter[] = [$operator, $field, $value];
+			foreach ($fieldNames as $fieldName) {
+				$field = ($fieldName . "." . $key);
+				$nameFilter[] = [$operator, $field, $value];
+			}
 		}
 		return $nameFilter;
 	}

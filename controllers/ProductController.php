@@ -2,6 +2,7 @@
 namespace app\controllers;
 
 use app\helpers\CController;
+use app\models\Lang;
 use app\models\Person;
 use app\models\Product;
 use app\models\Product2;
@@ -52,7 +53,7 @@ class ProductController extends CController
 				"text" => $text,
 				"deviser_id" => Yii::$app->request->get("deviser"),
 				"categories" => Yii::$app->request->get("categories"),
-				"product_state"=>  Yii::$app->request->get("product_state"),
+				"product_state"=>  Product2::PRODUCT_STATE_ACTIVE,
 				"limit" => $limit,
 				"offset" => $offset,
 		]);
@@ -177,6 +178,7 @@ class ProductController extends CController
 	public function actionFixProducts()
 	{
 		ini_set('memory_limit', '2048M');
+		set_time_limit(-1);
 
 		Product2::setSerializeScenario(Product2::SERIALIZE_SCENARIO_OWNER);
 
@@ -184,6 +186,16 @@ class ProductController extends CController
 		$products = Product2::findSerialized();
 		foreach ($products as $product) {
 			// saving the product, we force to create any missing short_id on price&stock
+			if (empty($product->product_state)) {
+				$product->product_state = Product2::PRODUCT_STATE_ACTIVE;
+			}
+			if (!is_array($product->name)) {
+				$name = [];
+				foreach (Lang::getAvailableLanguagesDescriptions() as $key => $langName) {
+					$name[$key] = $product->name;
+				}
+				$product->setAttribute('name', $name);
+			}
 			$product->save(false);
 		}
 		Yii::$app->response->setStatusCode(200); // Success, without body

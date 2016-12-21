@@ -113,6 +113,8 @@ class Product2 extends Product {
 	 */
 	public $translatedAttributes = ['name', 'description', 'slug'];
 
+	public static $textFilterAttributes = ['name', 'description'];
+
 	/**
 	 * Initialize model attributes
 	 */
@@ -194,7 +196,7 @@ class Product2 extends Product {
 
 	public function beforeSave($insert) {
 
-        if ($insert) {
+		if ($insert) {
 			$this->moveTempUploadsToProductPath();
 		}
 
@@ -213,20 +215,14 @@ class Product2 extends Product {
 		}
 		$this->setAttribute("slug", $slugs);
 
-        if (empty($this->product_state)) {
-            $this->product_state = Product2::PRODUCT_STATE_DRAFT;
-        }
+		if (empty($this->product_state)) {
+			$this->product_state = Product2::PRODUCT_STATE_DRAFT;
+		}
 
 		if (empty($this->created_at)) {
 			$this->created_at = new MongoDate();
 		}
 		$this->updated_at = new MongoDate();
-
-//		if (empty($this->slug)) {
-//			$this->slug = [
-//				Lang::EN_US => Slugger::slugify($this->name[Lang::EN_US])
-//			];
-//		}
 
 		return parent::beforeSave($insert);
 	}
@@ -567,11 +563,8 @@ class Product2 extends Product {
         // if text is specified
         if ((array_key_exists("text", $criteria)) && (!empty($criteria["text"]))) {
 //			// search the word in all available languages
-			$query->andFilterWhere(Utils::getFilterForTranslatableField("name", $criteria["text"]));
-			$query->andFilterWhere(Utils::getFilterForTranslatableField("description", $criteria["text"]));
+			$query->andFilterWhere(Utils::getFilterForTranslatableField(static::$textFilterAttributes, $criteria["text"]));
         }
-
-
 
         // Count how many items are with those conditions, before limit them for pagination
         static::$countItemsFound = $query->count();
@@ -586,7 +579,11 @@ class Product2 extends Product {
             $query->offset($criteria["offset"]);
         }
 
-        $query->orderBy("deviser_id, position");
+		if ((array_key_exists("order_by", $criteria)) && (!empty($criteria["order_by"]))) {
+			$query->orderBy($criteria["order_by"]);
+		} else {
+			$query->orderBy("deviser_id, position");
+		}
 
         $products = $query->all();
 
