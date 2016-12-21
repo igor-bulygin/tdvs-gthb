@@ -2,6 +2,7 @@
 namespace app\controllers;
 
 use app\helpers\CController;
+use app\models\Lang;
 use app\models\Person;
 use app\models\Product;
 use app\models\Product2;
@@ -35,11 +36,12 @@ class ProductController extends CController
 		// show only fields needed in this scenario
 		Product2::setSerializeScenario(Product2::SERIALIZE_SCENARIO_PUBLIC);
 
+		$defaultLimit = 60;
+		$maxLimit = 60;
 		// set pagination values
-		$limit = Yii::$app->request->get('limit', 20);
-		$limit = ($limit < 1) ? 1 : $limit;
-		// not allow more than 100 products for request
-	    $limit = ($limit > 100) ? 100 : $limit;
+		$limit = Yii::$app->request->get('limit', $defaultLimit);
+		$limit = max(1, $limit);
+	    $limit = min($limit, $maxLimit);
 		$page = Yii::$app->request->get('page', 1);
 		$page = ($page < 1) ? 1 : $page;
 		$offset = ($limit * ($page - 1));
@@ -48,17 +50,17 @@ class ProductController extends CController
 		$products = Product2::findSerialized([
 				"name" => Yii::$app->request->get("name"), // search only in name attribute
 				"id" => Yii::$app->request->get("id"),
-				"text" => null,
+				"text" => $text,
 				"deviser_id" => Yii::$app->request->get("deviser"),
 				"categories" => Yii::$app->request->get("categories"),
-				"product_state"=>  Yii::$app->request->get("product_state"),
+				"product_state"=>  Product2::PRODUCT_STATE_ACTIVE,
 				"limit" => $limit,
 				"offset" => $offset,
 		]);
 
 		// divide then in blocks to be rendered in bottom section
 		$moreWork = [];
-		for ($i = 1; $i <= 19; $i++) {
+		for ($i = 0; $i < 19; $i++) {
 			$start = $i * 15;
 			$moreWork[] =  [
 					"twelve" => array_slice($products, $start, 12),
@@ -176,6 +178,7 @@ class ProductController extends CController
 	public function actionFixProducts()
 	{
 		ini_set('memory_limit', '2048M');
+		set_time_limit(-1);
 
 		Product2::setSerializeScenario(Product2::SERIALIZE_SCENARIO_OWNER);
 
@@ -183,6 +186,21 @@ class ProductController extends CController
 		$products = Product2::findSerialized();
 		foreach ($products as $product) {
 			// saving the product, we force to create any missing short_id on price&stock
+			if (!empty($product->name) && !is_array($product->name)) {
+				$name = [];
+				foreach (Lang::getAvailableLanguagesDescriptions() as $key => $langName) {
+					$name[$key] = $product->name;
+				}
+				$product->setAttribute('name', $name);
+			}
+			if (empty($product->product_state)) {
+				if (empty($product->categories) || empty($product->deviser_id) || empty($product->name) || empty($product->price_stock) || empty($product->mediaFiles) || empty($product->mediaFiles->photos)) {
+					$product->product_state = Product2::PRODUCT_STATE_DRAFT;
+				} else {
+					$product->product_state = Product2::PRODUCT_STATE_ACTIVE;
+				}
+			}
+
 			$product->save(false);
 		}
 		Yii::$app->response->setStatusCode(200); // Success, without body

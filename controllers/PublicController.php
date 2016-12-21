@@ -244,7 +244,7 @@ class PublicController extends CController
 
 		// divide then in blocks to be rendered in bottom section
 		$moreWork = [];
-		for ($i = 1; $i <= 19; $i++) {
+		for ($i = 0; $i < 19; $i++) {
 			$start = $i * 15;
 			$moreWork[] =  [
 				"twelve" => array_slice($works, $start, 12),

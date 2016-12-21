@@ -1,8 +1,8 @@
 <?php
 namespace app\helpers;
 
-use Yii;
 use Exception;
+use Yii;
 use yii2tech\embedded\mongodb\ActiveRecord;
 
 /**
@@ -48,6 +48,13 @@ class CActiveRecord extends ActiveRecord
 	 * @var array
 	 */
 	public $translatedAttributes = [];
+
+	/**
+	 * The attributes that should be used when a keyword search is done
+	 *
+	 * @var array
+	 */
+	public static $textFilterAttributes = [];
 
 	public function genValidID($length = 6)
 	{
