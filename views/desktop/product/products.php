@@ -17,13 +17,13 @@ $this->title = 'Works - Todevise';
 		<div id="macy-container">
 			<?php foreach ($products as $i => $work) { ?>
 				<div>
-					<a href="<?= Url::to(["product/detail", "slug" => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
+					<a href="<?= Url::to(["product/detail", "slug" => $work->slug, 'product_id' => $work->short_id])?>">
 						<div class="grid">
 							<figure class="effect-zoe">
 								<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($work->getMainImage())->resize(100, 0) ?>">
 								<figcaption>
 									<p class="instauser">
-										<?= Utils::l($work->name) ?>
+										<?= $work->name ?>
 									</p>
 									<p class="price">€ <?= $work->getMinimumPrice() ?></p>
 								</figcaption>

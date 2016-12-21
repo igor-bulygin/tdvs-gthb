@@ -49,7 +49,7 @@ class ProductController extends CController
 		$products = Product2::findSerialized([
 				"name" => Yii::$app->request->get("name"), // search only in name attribute
 				"id" => Yii::$app->request->get("id"),
-				"text" => null,
+				"text" => $text,
 				"deviser_id" => Yii::$app->request->get("deviser"),
 				"categories" => Yii::$app->request->get("categories"),
 				"product_state"=>  Yii::$app->request->get("product_state"),
