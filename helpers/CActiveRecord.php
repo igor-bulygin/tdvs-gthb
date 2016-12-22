@@ -80,7 +80,10 @@ class CActiveRecord extends ActiveRecord
 	 */
 	public function fields()
 	{
-		return static::$serializeFields;
+		if (!empty(static::$serializeFields)) {
+			return static::$serializeFields;
+		}
+		return $this->attributes();
 	}
 
 	/**
