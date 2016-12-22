@@ -119,10 +119,16 @@ $this->params['deviser'] = $deviser;
 												<a href="">
 													<div class="grid">
 														<figure class="effect-zoe">
+															<span class="close-product-icon" ng-click="editStoreCtrl.open_modal_delete(product.id)">
+																<i class="ion-android-close"></i>
+															</span>
 															<img class="grid-image" ng-src="{{product.main_photo}}">
 															<figcaption>
 																<p class="instauser">{{product.name}}</p>
 																<p class="price">€{{product.min_price}}</p>
+																<a href="" class="edit-product-icon" ng-href="{{product.edit_link}}" title="Edit work">
+																	<i class="ion-edit"></i>
+																</a>
 															</figcaption>
 														</figure>
 													</div>
