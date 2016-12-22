@@ -118,19 +118,15 @@ $videos = $product->getVideos();
 								</button>
 							</div>
 						</div>
-						<div ng-if="detailProductCtrl.original_artwork">
-							<input class="form-control" type="radio" ng-model="detailProductCtrl.original_selected" ng-value="true" ng-change="detailProductCtrl.changeOriginalArtwork(true)"> Original Artwork
-							<input class="form-control" type="radio" ng-model="detailProductCtrl.original_selected" ng-value="false" ng-change="detailProductCtrl.changeOriginalArtwork(false)"> Prints
-						</div>
 						<div class="product-data">
-<!--                            <ul class="nav nav-tabs product-detail-tabs" role="tablist">-->
-<!--                                <li role="presentation" class="active no-b-r">-->
-<!--                                    <a href="#original" aria-controls="description" role="tab" data-toggle="tab">Original</a>-->
-<!--                                </li>-->
-<!--                                <li role="presentation">-->
-<!--                                    <a href="#prints" aria-controls="works" role="tab" data-toggle="tab">Prints</a>-->
-<!--                                </li>-->
-<!--                            </ul>-->
+							<ul class="nav nav-tabs product-detail-tabs" role="tablist" ng-if="detailProductCtrl.original_artwork" ng-cloak>
+								<li role="presentation" class="no-b-r">
+									<a href="#" aria-controls="description" role="tab" data-toggle="tab" ng-click="detailProductCtrl.changeOriginalArtwork(true)">Original</a>
+								</li>
+								<li role="presentation" class="active">
+									<a href="#" aria-controls="works" role="tab" data-toggle="tab" ng-click="detailProductCtrl.changeOriginalArtwork(false)">Prints</a>
+								</li>
+							</ul>
 							<div>
 								<div class="form-horizontal">
 									<div class="form-group">

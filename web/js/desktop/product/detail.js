@@ -149,7 +149,6 @@
 				if(product.price_stock[i].original_artwork && product.price_stock[i].available) {
 					vm.original_pos = i;
 					vm.original_artwork = true;
-					vm.original_selected = false;
 				}
 			}
 		}
