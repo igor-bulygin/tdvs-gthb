@@ -53,7 +53,7 @@ class ProductController extends CController
 				"text" => $text,
 				"deviser_id" => Yii::$app->request->get("deviser"),
 				"categories" => Yii::$app->request->get("categories"),
-				"product_state"=>  Product2::PRODUCT_STATE_ACTIVE,
+				"product_state"=>  null, //TODO Product2::PRODUCT_STATE_ACTIVE,
 				"limit" => $limit,
 				"offset" => $offset,
 		]);
@@ -185,6 +185,9 @@ class ProductController extends CController
 		/* @var Product2[] $products */
 		$products = Product2::findSerialized();
 		foreach ($products as $product) {
+			if ($product->short_id != "30a4dbab") {
+				continue;
+			}
 			// saving the product, we force to create any missing short_id on price&stock
 			if (!empty($product->name) && !is_array($product->name)) {
 				$name = [];
