@@ -14,7 +14,7 @@
 		function login() {
 			vm.user.$save().then(function (loginData) {
 				UtilService.setLocalStorage('access_token', loginData.access_token);
-				$window.location.href = currentHost() + '/' + loginData.return_url;
+				$window.location.href = currentHost() + loginData.return_url;
 			}, function (err) {
 				vm.errors = true;
 			});
