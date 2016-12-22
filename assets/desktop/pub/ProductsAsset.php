@@ -12,7 +12,7 @@ class ProductsAsset extends AssetBundle {
 		'js/desktop/pub/products.js'
 	];
 	public $depends = [
-		'app\assets\desktop\pub\GlobalAsset',
+		'app\assets\desktop\pub\PublicCommonAsset',
 		'app\assets\libs\macyAsset',
 	];
 }
