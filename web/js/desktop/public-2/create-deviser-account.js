@@ -46,7 +46,7 @@
 	}
 
 	angular
-		.module('todevise', ['api', 'util', 'toastr', 'ui.bootstrap'])
+		.module('todevise', ['api', 'util', 'header', 'toastr', 'ui.bootstrap'])
 		.controller('createDeviserCtrl', controller);
 
 }());

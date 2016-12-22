@@ -15,6 +15,6 @@ class GlobalAsset extends AssetBundle {
 	public $depends = [
 		'app\assets\AppAsset',
 		'app\assets\libs\angularAsset',
-		'app\assets\libs\angularToastrAsset'
+		'app\assets\libs\angularToastrAsset',
 	];
 }

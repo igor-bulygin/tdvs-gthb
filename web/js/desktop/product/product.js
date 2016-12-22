@@ -17,7 +17,7 @@
 	}
 
 	angular
-		.module('todevise', ['api', 'util', 'toastr', 'nya.bootstrap.select', 'textAngular', 'ngFileUpload',
+		.module('todevise', ['api', 'util', 'header', 'toastr', 'nya.bootstrap.select', 'textAngular', 'ngFileUpload',
 			'dndLists', 'ui.bootstrap', 'ngImgCrop', 'ngTagsInput', 'ui.bootstrap.datetimepicker', 'LocalStorageModule',
 			'xeditable'])
 		.config(config)

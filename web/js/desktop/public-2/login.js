@@ -21,7 +21,7 @@
 		}
 	}
 
-angular.module('todevise', ['api', 'util'])
+angular.module('todevise', ['api', 'util', 'header'])
 	.controller('loginCtrl', controller);
 
 }());

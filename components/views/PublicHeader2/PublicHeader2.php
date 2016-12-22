@@ -2,14 +2,14 @@
 use app\helpers\Utils;
 use app\models\Category;
 use yii\helpers\Url;
-
+use app\components\assets\PublicHeader2Asset;
 /** @var Category $category */
 
-\app\components\assets\PublicHeader2Asset::register($this);
+app\components\assets\PublicHeader2Asset::register($this);
 
 ?>
 
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default" ng-controller="publicHeaderCtrl as publicHeaderCtrl">
 	<div class="container">
 		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header">
@@ -138,7 +138,7 @@ use yii\helpers\Url;
 							</li>
 						<?php } ?>
 						<li class="log">
-							<a href="<?=Url::to('/global/logout')?>">Logout</a>
+							<a href="#" ng-click="publicHeaderCtrl.logout()">Logout</a>
 						</li>
 					<?php } else {
 						// real navigation bar for logged users?>

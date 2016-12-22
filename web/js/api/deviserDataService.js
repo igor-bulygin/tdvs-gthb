@@ -7,6 +7,7 @@
 		this.Invitation = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'invitations/:idInvitation');
 		this.Devisers = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'devisers');
 		this.Login = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'auth/login');
+		this.Logout = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'auth/logout');
 
 		this.Profile = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'profile/deviser', {}, {
 			'update': {

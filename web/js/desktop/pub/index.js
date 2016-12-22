@@ -1,4 +1,4 @@
-var todevise = angular.module('todevise', []);
+var todevise = angular.module('todevise', ['api', 'util', 'header']);
 
 /*
  * This makes the 'Devisers' row scroll when the mouse moves inside the div.

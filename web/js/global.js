@@ -1,5 +1,6 @@
 console.log("Global");
 var global = angular.module('global', []);
+var todevise = angular.module('todevise', ['header']);
 
 /**
  * Iterate over a list of properties of an object and if any of those is an empty array, convert it to an object.

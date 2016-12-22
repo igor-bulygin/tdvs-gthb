@@ -14,6 +14,9 @@ class PublicCommonAsset extends AssetBundle {
         'js/desktop/public-2/bootstrap-select.min.js',
     ];
 	public $depends = [
-		'app\assets\libs\bootstrapAsset'
+		'app\assets\libs\bootstrapAsset',
+		'app\assets\libs\angularAsset',
+		'app\components\assets\PublicHeader2Asset',
+		'app\assets\desktop\GlobalAsset',
 	];
 }

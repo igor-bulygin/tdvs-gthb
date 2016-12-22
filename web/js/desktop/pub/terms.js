@@ -22,6 +22,6 @@
 
 	}
 
-	angular.module('todevise', [])
+	angular.module('todevise', ['api','util','header'])
 		.controller('termsCtrl', termsCtrl)
 }());
