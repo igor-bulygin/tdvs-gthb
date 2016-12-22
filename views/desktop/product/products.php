@@ -20,7 +20,7 @@ $this->title = 'Works - Todevise';
 					<a href="<?= Url::to(["product/detail", "slug" => $work->slug, 'product_id' => $work->short_id])?>">
 						<div class="grid">
 							<figure class="effect-zoe">
-								<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($work->getMainImage())->resize(100, 0) ?>">
+								<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($work->getMainImage())->resize(400, 0) ?>">
 								<figcaption>
 									<p class="instauser">
 										<?= $work->name ?>
