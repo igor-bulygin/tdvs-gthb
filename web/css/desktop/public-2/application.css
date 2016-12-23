@@ -1505,7 +1505,12 @@ input[type="radio"] .styled:checked + label::after {
             padding: 91px 29px 0; } }
 
 .grid-wrapper {
-  padding: 10px 0 50px; }
+  padding: 10px 0 80px;
+  background-color: #1C1919; }
+
+.text-primary {
+  color: #ffffff !important;
+  padding-bottom: 20px; }
 
 /*-------------------------------*/
 /***** EFECTO HOVER EN FOTOS *****/

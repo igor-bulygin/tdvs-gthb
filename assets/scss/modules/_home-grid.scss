@@ -2,7 +2,12 @@
 // Home Grid
 // ==========================================================================
 .grid-wrapper{
-    padding:10px 0 50px;
+    padding:10px 0 80px;
+	background-color: $black;
+}
+.text-primary {
+    color: $white!important;
+	padding-bottom: 20px;
 }
 /*-------------------------------*/
 /***** EFECTO HOVER EN FOTOS *****/
