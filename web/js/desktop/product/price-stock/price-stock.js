@@ -75,7 +75,7 @@
 			var object = {};
 			if(!UtilService.isEmpty(vm.product.options)) {
 				for (var key in vm.product.options) {
-					if(vm.product.options[key][0].length > 0)
+					if(vm.product.options[key].length > 0 && vm.product.options[key][0].length > 0)
 						object[key] = vm.product.options[key];
 				}
 				if(angular.isObject(vm.product.prints) && !UtilService.isEmpty(vm.product.prints)) {
