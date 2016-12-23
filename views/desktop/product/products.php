@@ -16,7 +16,7 @@ $this->title = 'Works - Todevise';
 		<p class="text-primary"><?=$total?> results <?=($text ? 'of <b>'.$text.'</b>' : '')?></p>
 		<div id="macy-container">
 			<?php foreach ($products as $i => $work) { ?>
-				<div>
+				<div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
 					<a href="<?= Url::to(["product/detail", "slug" => $work->slug, 'product_id' => $work->short_id])?>">
 						<div class="grid">
 							<figure class="effect-zoe">
