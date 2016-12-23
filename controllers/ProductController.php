@@ -2,6 +2,7 @@
 namespace app\controllers;
 
 use app\helpers\CController;
+use app\models\Bespoke;
 use app\models\Lang;
 use app\models\Person;
 use app\models\Product;
@@ -201,7 +202,20 @@ class ProductController extends CController
 					$product->product_state = Product2::PRODUCT_STATE_ACTIVE;
 				}
 			}
+			// available on price_stock
+			$priceStock = $product->price_stock;
+			foreach ($priceStock as $k => $item) {
+				if (!isset($item['available'])) {
+					$priceStock[$k]['available'] = true;
+				}
+			}
+			$product->setAttribute('price_stock', $priceStock);
 
+			// bespoke
+			if (empty($product->bespoke)) {
+				$bespoke = ['type' => Bespoke::NO];
+				$product->setAttribute('bespoke', $bespoke);
+			}
 			// save make other fixes (created_at and updated_at dates, short_ids on price&stock....)
 			$product->save(false);
 		}
