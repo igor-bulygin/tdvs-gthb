@@ -12,8 +12,8 @@ $this->title = 'Works - Todevise';
 
 
 <section class="grid-wrapper">
-	<p><?=$total?> results <?=($text ? 'of <b>'.$text.'</b>' : '')?></p>
 	<div class="container">
+		<p class="text-primary"><?=$total?> results <?=($text ? 'of <b>'.$text.'</b>' : '')?></p>
 		<div id="macy-container">
 			<?php foreach ($products as $i => $work) { ?>
 				<div>

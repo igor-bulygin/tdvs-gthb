@@ -37,8 +37,8 @@ class ProductController extends CController
 		// show only fields needed in this scenario
 		Product2::setSerializeScenario(Product2::SERIALIZE_SCENARIO_PUBLIC);
 
-		$defaultLimit = 60;
-		$maxLimit = 60;
+		$defaultLimit = 300;
+		$maxLimit = 300;
 		// set pagination values
 		$limit = Yii::$app->request->get('limit', $defaultLimit);
 		$limit = max(1, $limit);
@@ -211,11 +211,12 @@ class ProductController extends CController
 			}
 			$product->setAttribute('price_stock', $priceStock);
 
-			// bespoke
+			// bespoke default
 			if (empty($product->bespoke)) {
 				$bespoke = ['type' => Bespoke::NO];
 				$product->setAttribute('bespoke', $bespoke);
 			}
+
 			// save make other fixes (created_at and updated_at dates, short_ids on price&stock....)
 			$product->save(false);
 		}
