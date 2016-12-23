@@ -4,6 +4,7 @@ namespace app\controllers;
 use app\helpers\CController;
 use app\models\Bespoke;
 use app\models\Lang;
+use app\models\MadeToOrder;
 use app\models\Person;
 use app\models\Product;
 use app\models\Product2;
@@ -216,6 +217,19 @@ class ProductController extends CController
 				$bespoke = ['type' => Bespoke::NO];
 				$product->setAttribute('bespoke', $bespoke);
 			}
+
+			// madetoorder...
+			$madeToOrder = $product->madetoorder;
+			$value = isset($madeToOrder['value']) ? $madeToOrder['value'] : null;
+			$type = isset($madeToOrder['type']) ? $madeToOrder['type'] : null;
+			if (!empty($value)) {
+				$madeToOrder['type'] = MadeToOrder::DAYS;
+				$madeToOrder['value'] = (int) $value;
+			} else {
+				$madeToOrder['type'] = MadeToOrder::NONE;
+				unset($madeToOrder['value']);
+			}
+			$product->setAttribute('madetoorder', $madeToOrder);
 
 			// save make other fixes (created_at and updated_at dates, short_ids on price&stock....)
 			$product->save(false);
