@@ -281,7 +281,7 @@
 						sizesSelect(vm.selected_sizechart, vm.product.sizechart.country)
 						vm.product.sizechart.values = angular.copy(original_sizechart.values)
 						if(original_sizechart.metric_unit)
-							vm.produt.sizechart['metric_unit'] = angular.copy(original_sizechart.metric_unit);
+							vm.product.sizechart['metric_unit'] = angular.copy(original_sizechart.metric_unit);
 						for(var i = 0; i < vm.sizechart_empty.values.length; i++) {
 							vm.product.sizechart.values.forEach(function (element) {
 								if(element[0] == vm.sizechart_empty.values[i][0])
