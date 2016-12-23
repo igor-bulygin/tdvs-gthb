@@ -1,6 +1,7 @@
 <?php
 namespace app\helpers;
 
+use app\models\Lang;
 use Exception;
 use Yii;
 use yii2tech\embedded\mongodb\ActiveRecord;
@@ -23,31 +24,31 @@ class CActiveRecord extends ActiveRecord
 	 *
 	 * @var array
 	 */
-	static protected $serializeFields = [];
+	protected static $serializeFields = [];
 
 	/**
 	 * The attributes that should be serialized
 	 *
 	 * @var array
 	 */
-	static protected $retrieveExtraFields = [];
+	protected static $retrieveExtraFields = [];
 
 	/** @var  int */
-	static public $countItemsFound = 0;
+	public static $countItemsFound = 0;
 
 	/**
 	 * Determine if serialization have to translate "translatable" attributes automatically
 	 *
 	 * @var bool
 	 */
-	static protected $translateFields = true;
+	protected static $translateFields = true;
 
 	/**
 	 * The attributes that should be translatable
 	 *
 	 * @var array
 	 */
-	public $translatedAttributes = [];
+	public static $translatedAttributes = [];
 
 	/**
 	 * The attributes that should be used when a keyword search is done
@@ -92,7 +93,7 @@ class CActiveRecord extends ActiveRecord
 	 *
 	 * @return array
 	 */
-	static public function getSelectFields()
+	public static function getSelectFields()
 	{
 		// fields that want to be serialized, and extra fields for internal use
 		return array_merge(array_values(static::$serializeFields), static::$retrieveExtraFields);
@@ -106,7 +107,7 @@ class CActiveRecord extends ActiveRecord
 	 * @param string $tags
 	 * @return array|null|string
 	 */
-	static public function stripNotAllowedHtmlTags($mix, $tags = "<p>")
+	public static function stripNotAllowedHtmlTags($mix, $tags = "<p>")
 	{
 		$newValue = null;
 
@@ -120,6 +121,42 @@ class CActiveRecord extends ActiveRecord
 		}
 
 		return $newValue;
+	}
+
+
+	/**
+	 * Compose an array to use as condition in where(), in ActiveQuery, like:
+	 *
+	 * $query->andFilterWhere(
+	 *      ['or',
+	 *          ['LIKE', 'name.en-US', "my filter"],
+	 *          ['LIKE', 'name.es-ES', "my filter"],
+	 *      ]
+	 * );
+	 *
+	 * @param array|string $fieldNames
+	 * @param $value
+	 * @param string $operator
+	 * @return array
+	 */
+	public static function getFilterForText($fieldNames, $value, $operator = 'LIKE')
+	{
+		if (!is_array($fieldNames)) {
+			$fieldNames = [$fieldNames];
+		}
+		$nameFilter = ['or'];
+		foreach ($fieldNames as $fieldName) {
+			if (in_array($fieldName, static::$translatedAttributes)) {
+				foreach (Lang::getAvailableLanguagesDescriptions() as $key => $name) {
+					$field = ($fieldName . "." . $key);
+					$nameFilter[] = [$operator, $field, $value];
+				}
+			} else {
+				$nameFilter[] = [$operator, $fieldName, $value];
+
+			}
+		}
+		return $nameFilter;
 	}
 
 }

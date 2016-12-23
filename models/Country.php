@@ -1,9 +1,9 @@
 <?php
 namespace app\models;
 
+use app\helpers\CActiveRecord;
 use app\helpers\Utils;
 use Yii;
-use app\helpers\CActiveRecord;
 use yii\mongodb\ActiveQuery;
 
 /**
@@ -70,7 +70,7 @@ class Country extends CActiveRecord
 	 *
 	 * @var array
 	 */
-	public $translatedAttributes = ['country_name'];
+	public static $translatedAttributes = ['country_name'];
 
 
 	/**

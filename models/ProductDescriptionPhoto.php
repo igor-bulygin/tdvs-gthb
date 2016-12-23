@@ -1,8 +1,6 @@
 <?php
 namespace app\models;
 
-use app\helpers\CActiveRecord;
-use kartik\color\ColorInputAsset;
 use yii\base\Model;
 
 /**
@@ -32,7 +30,7 @@ class ProductDescriptionPhoto extends Model
 	 *
 	 * @var array
 	 */
-	public $translatedAttributes = ['title', 'description'];
+	public static $translatedAttributes = ['title', 'description'];
 
 	public function getParentAttribute()
 	{

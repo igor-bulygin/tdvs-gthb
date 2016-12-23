@@ -379,7 +379,7 @@ class Utils
 	 */
 	public static function translateModel(CActiveRecord $model)
 	{
-		foreach ($model->translatedAttributes as $translatedAttribute) {
+		foreach ($model::$translatedAttributes as $translatedAttribute) {
 			Utils::translateModelAttribute($model, $translatedAttribute);
 		}
 
@@ -460,27 +460,22 @@ class Utils
 	 *
 	 * $query->andFilterWhere(
 	 *      ['or',
-     *          ['LIKE', 'name.en-US', "my filter"],
+	 *          ['LIKE', 'name.en-US', "my filter"],
 	 *          ['LIKE', 'name.es-ES', "my filter"],
 	 *      ]
 	 * );
 	 *
-	 * @param array|string $fieldNames
+	 * @param string $fieldName
 	 * @param $value
 	 * @param string $operator
 	 * @return array
 	 */
-	public static function getFilterForTranslatableField($fieldNames, $value, $operator = 'LIKE')
+	public static function getFilterForTranslatableField($fieldName, $value, $operator = 'LIKE')
 	{
-		if (!is_array($fieldNames)) {
-			$fieldNames = [$fieldNames];
-		}
 		$nameFilter = ['or'];
 		foreach (Lang::getAvailableLanguagesDescriptions() as $key => $name) {
-			foreach ($fieldNames as $fieldName) {
-				$field = ($fieldName . "." . $key);
-				$nameFilter[] = [$operator, $field, $value];
-			}
+			$field = ($fieldName . "." . $key);
+			$nameFilter[] = [$operator, $field, $value];
 		}
 		return $nameFilter;
 	}

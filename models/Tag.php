@@ -167,7 +167,7 @@ class Tag extends CActiveRecord
 	 *
 	 * @var array
 	 */
-	public $translatedAttributes = ['name', 'description'];
+	public static $translatedAttributes = ['name', 'description'];
 
 	/**
 	 * Initialize model attributes

@@ -1,11 +1,9 @@
 <?php
 namespace app\models;
 
-use Yii;
-use app\helpers\Utils;
 use app\helpers\CActiveRecord;
-use yii\web\IdentityInterface;
-use yii\base\NotSupportedException;
+use app\helpers\Utils;
+use Yii;
 
 class Term extends CActiveRecord {
 	public static function collectionName() {
@@ -26,7 +24,7 @@ class Term extends CActiveRecord {
      *
      * @var array
      */
-    public $translatedAttributes = ['title', 'terms.question', 'terms.answer'];
+    public static $translatedAttributes = ['title', 'terms.question', 'terms.answer'];
 
 	public function getTerms($current_path = null) {
 		return $this->terms;

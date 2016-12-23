@@ -91,7 +91,7 @@ class Product extends CActiveRecord {
 	 *
 	 * @var array
 	 */
-	public $translatedAttributes = ['name', 'description', 'slug'];
+	public static $translatedAttributes = ['name', 'description', 'slug'];
 
 	/**
 	 * Initialize model attributes

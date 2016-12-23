@@ -108,7 +108,7 @@ class Person extends CActiveRecord implements IdentityInterface
 	 *
 	 * @var array
 	 */
-	public $translatedAttributes = ['text_short_description', 'text_biography', 'faq.question', 'faq.answer'];
+	public static $translatedAttributes = ['text_short_description', 'text_biography', 'faq.question', 'faq.answer'];
 
 	/**
 	 * Initialize model attributes

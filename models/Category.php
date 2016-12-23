@@ -45,7 +45,7 @@ class Category extends CActiveRecord {
      *
      * @var array
      */
-    public $translatedAttributes = ['name'];
+    public static $translatedAttributes = ['name'];
 
 	/**
 	 * Initialize model attributes

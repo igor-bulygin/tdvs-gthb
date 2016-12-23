@@ -1,11 +1,9 @@
 <?php
 namespace app\models;
 
-use Yii;
-use app\helpers\Utils;
 use app\helpers\CActiveRecord;
-use yii\web\IdentityInterface;
-use yii\base\NotSupportedException;
+use app\helpers\Utils;
+use Yii;
 
 class Faq extends CActiveRecord {
 
@@ -14,7 +12,7 @@ class Faq extends CActiveRecord {
      *
      * @var array
      */
-    public $translatedAttributes = ['title', 'faqs.question', 'faqs.answer'];
+    public static $translatedAttributes = ['title', 'faqs.question', 'faqs.answer'];
 
 	public static function collectionName() {
 		return 'faq';

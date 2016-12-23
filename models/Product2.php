@@ -111,9 +111,9 @@ class Product2 extends Product {
 	 *
 	 * @var array
 	 */
-	public $translatedAttributes = ['name', 'description', 'slug'];
+	public static $translatedAttributes = ['name', 'description', 'slug', 'tags'];
 
-	public static $textFilterAttributes = ['name', 'description'];
+	public static $textFilterAttributes = ['name', 'description', 'tags'];
 
 	/**
 	 * Initialize model attributes
@@ -563,7 +563,7 @@ class Product2 extends Product {
         // if text is specified
         if ((array_key_exists("text", $criteria)) && (!empty($criteria["text"]))) {
 //			// search the word in all available languages
-			$query->andFilterWhere(Utils::getFilterForTranslatableField(static::$textFilterAttributes, $criteria["text"]));
+			$query->andFilterWhere(static::getFilterForText(static::$textFilterAttributes, $criteria["text"]));
         }
 
         // Count how many items are with those conditions, before limit them for pagination
