@@ -159,6 +159,7 @@ $config = [
 
 				// temporary routes to fix database problems
 				'/works/fix-products' => 'product/fix-products',
+				'/works/more-works' => 'product/more-works',
 				'/deviser/update-passwords' => 'deviser/update-passwords',
 
 				'/works' => 'product/index',
