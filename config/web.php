@@ -271,6 +271,9 @@ $config = [
 
 				'POST api3/pub/v1/auth/login' => 'api3/pub/v1/auth/login',
 
+				'GET api3/pub/v1/cart' => 'api3/pub/v1/cart/index',
+				'POST api3/pub/v1/cart' => 'api3/pub/v1/cart/create',
+
 				// API routing (private)
 				'GET api3/priv/v1/profile/deviser' => 'api3/priv/v1/deviser/view',
 				'PATCH api3/priv/v1/profile/deviser' => 'api3/priv/v1/deviser/update',
