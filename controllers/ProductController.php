@@ -91,7 +91,6 @@ class ProductController extends CController
 		$page = ($page < 1) ? 1 : $page;
 		$offset = ($limit * ($page - 1));
 
-		$text = Yii::$app->request->get("q"); // search in name, description, and more
 		$products = Product2::findSerialized([
 				"id" => Yii::$app->request->get("id"),
 				"name" => Yii::$app->request->get("name"), // search only in name attribute
@@ -114,10 +113,7 @@ class ProductController extends CController
 
 		return json_encode([
 			'html' => $html,
-			'more' => $more,
-			"text" => $text,
-			"page" => $page + 1,
-			"total" => $total,
+			"page" => $more ? $page + 1 : null,
 		]);
 	}
 

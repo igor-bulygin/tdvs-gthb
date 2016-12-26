@@ -1,3 +1,4 @@
+var page = 2;
 $(window).scroll(function() {
 	var current = ($(window).scrollTop() + $(window).height());
 	var limit = $(document).height()-1500;
@@ -7,28 +8,26 @@ $(window).scroll(function() {
 });
 
 function moreWorks() {
-	var more = $('#more').val();
-	if (more == 1) {
-		$('#more').val(0);
-		var data = $('#formPagination').serialize();
+	if (page != null) {
+		var data = location.search.replace('?', '') + '&page=' + page;
+		page = null;
 		$.get('works/more-works', data)
-			.done(function (r) {
-				var data = JSON.parse(r);
-				$('#macy-container').append(data.html);
-				$('#page').val(data.page);
-				$('#more').val(data.more);
-				Macy.recalculate();
-			})
-			.fail(function () {
-				location.reload();
-			});
+				.done(function (r) {
+					var data = JSON.parse(r);
+					$('#macy-container').append(data.html);
+					page = data.page;
+					Macy.recalculate();
+				})
+				.fail(function () {
+					location.reload();
+				});
 	}
 }
 
 function initMacyProducts() {
 	Macy.init({
 		container: '#macy-container',
-		trueOrder: true,
+		trueOrder: false,
 		waitForImages: false,
 		margin: 2,
 		columns: 6,
@@ -38,6 +37,10 @@ function initMacyProducts() {
 			520: 2,
 			400: 1
 		}
+	});
+
+	Macy.onImageLoad(null, function () {
+		Macy.recalculate();
 	});
 }
 
