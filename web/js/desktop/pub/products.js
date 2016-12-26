@@ -1,9 +1,14 @@
 var page = 2;
 $(window).scroll(function() {
 	var current = ($(window).scrollTop() + $(window).height());
-	var limit = $(document).height()-1500;
+	var height = $(document).height();
+	var limit = height-1500;
+	console.log('current: '+current+'; height: '+height+'; limit: '+limit);
 	if (current >= limit) {
 		moreWorks();
+	}
+	if (current == height) {
+		Macy.recalculate(); // force macy recalculate at the end of the page
 	}
 });
 
