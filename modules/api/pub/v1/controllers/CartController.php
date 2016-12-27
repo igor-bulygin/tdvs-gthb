@@ -94,7 +94,7 @@ class CartController extends AppPublicController
 				$cart->updateProduct($product);
 				$cart->save();
 
-				Yii::$app->response->setStatusCode(201); // Created
+				Yii::$app->response->setStatusCode(200); // Ok
 				return $cart;
 			} else {
 				Yii::$app->response->setStatusCode(400); // Bad Request

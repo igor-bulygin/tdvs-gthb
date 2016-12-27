@@ -2,7 +2,7 @@
 
 Example about how to call to Web Service to add a product to the cart
 
-**URL**: `/api/pub/v1/cart/product`
+**URL**: `/api/pub/v1/cart/<:cartId>/product`
 
 **Method**: `POST`
 
@@ -16,17 +16,19 @@ Example about how to call to Web Service to add a product to the cart
 * `price_stock_id`: Price&stock identifier (Required)
 * `quantity`: Quantity of items (Required)
 
+
+**Response body**:
 ```
 {
-  "id": "00454ac8",
+  "id": "4cf9b192",
   "order_state": "order_state_cart",
-  "client_id": null,
+  "client_id": "c2a37cs",
   "client_info": [],
   "products": [
     {
       "product_id": "b8066597",
       "price_stock_id": "b806659772d3e06",
-      "quantity": 5,
+      "quantity": 25,
       "deviser_id": "18d910a",
       "price": 75,
       "weight": 0,
@@ -53,7 +55,7 @@ Example about how to call to Web Service to add a product to the cart
       }
     }
   ],
-  "subtotal": 375
+  "subtotal": 1875
 }
 ```
 

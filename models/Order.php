@@ -354,6 +354,7 @@ class Order extends CActiveRecord {
 		$orderProduct->weight = $priceStock['weight'];
 		$orderProduct->price = $priceStock['price'];
 		$orderProduct->options = $priceStock['options'];
+		$orderProduct->deviser_id = $product->deviser_id;
 
 		if (isset($key)) {
 			$this->productsMapping[$key] = $orderProduct;
