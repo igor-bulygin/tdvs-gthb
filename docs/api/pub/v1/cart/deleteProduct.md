@@ -1,10 +1,10 @@
-### Update product to cart - Post
+### Delete product from the cart - Post
 
-Example about how to call to Web Service to update a product to the cart
+Example about how to call to Web Service to delete a product from the cart
 
 **URL**: `/api/pub/v1/cart/<:cartId>/product/<:priceStockId>`
 
-**Method**: `POST`
+**Method**: `DELETE`
 
 **Response codes**:
 * `200`: Updated
@@ -16,10 +16,9 @@ Example about how to call to Web Service to update a product to the cart
 * `:priceStockId`: Id of the price stock item that want to update
 
 
-**Request body**:
-* `product_id`: Product identifier (Required)
-* `price_stock_id`: Price&stock identifier (Required)
-* `quantity`: Quantity of items (Required)
-
+**Response body**:
+```
+cart object (view getCart.md)
+```
 
 

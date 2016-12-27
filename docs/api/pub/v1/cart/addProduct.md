@@ -11,6 +11,9 @@ Example about how to call to Web Service to add a product to the cart
 * `400`: Bad request
 * `403`: Not allowed
 
+**Request parameters**:
+* `:cartId`: Id of the cart that want to update with the new product
+
 **Request body**:
 * `product_id`: Product identifier (Required)
 * `price_stock_id`: Price&stock identifier (Required)
@@ -19,44 +22,5 @@ Example about how to call to Web Service to add a product to the cart
 
 **Response body**:
 ```
-{
-  "id": "4cf9b192",
-  "order_state": "order_state_cart",
-  "client_id": "c2a37cs",
-  "client_info": [],
-  "products": [
-    {
-      "product_id": "b8066597",
-      "price_stock_id": "b806659772d3e06",
-      "quantity": 25,
-      "deviser_id": "18d910a",
-      "price": 75,
-      "weight": 0,
-      "options": {
-        "20000": [
-          {
-            "metric_unit": "mm",
-            "value": 0
-          },
-          {
-            "metric_unit": "cm",
-            "value": "30"
-          },
-          {
-            "metric_unit": "mm",
-            "value": 0
-          }
-        ],
-        "731ct": [
-          "white",
-          "blue",
-          "pink"
-        ]
-      }
-    }
-  ],
-  "subtotal": 1875
-}
+cart object (view getCart.md)
 ```
-
-
