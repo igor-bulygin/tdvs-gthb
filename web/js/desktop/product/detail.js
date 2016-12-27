@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(productDataService, $location, toastr) {
+	function controller(productDataService, tagDataService, $location, toastr) {
 		var vm = this;
 		vm.quantity = 1;
 		vm.optionsSelected = {};
@@ -15,6 +15,7 @@
 		function init() {
 			getProductId();
 			getProduct();
+			getTags();
 		}
 
 		init();
@@ -39,6 +40,15 @@
 			}, function (err) {
 				toastr.error(err);
 			})
+		}
+
+		function getTags() {
+			tagDataService.Tags.get()
+				.$promise.then(function(dataTags) {
+					vm.tags = dataTags.items;
+				}, function(err) {
+					//error
+				});
 		}
 
 		function getMinimumPrice(references) {
@@ -67,6 +77,7 @@
 		function parseOptions(option_id, value) {
 			if(option_id === 'size')
 				value = getSizeText(value);
+			vm.reference_id = getReferenceId(vm.option_selected);
 			resetOptions();
 			vm.product.price_stock.forEach(function(element) {
 				if(element.stock === 0 && ((angular.isArray(element.options[option_id]) && element.options[option_id].indexOf(value) > -1) || 
@@ -112,6 +123,39 @@
 					value['disabled'] = false;
 				})
 			})
+		}
+
+		function isOptionRequired(key) {
+			vm.tags.forEach(function(element){
+				if(element.short_id === key) {
+					return element.required;
+				}
+			})
+		}
+
+		function getReferenceId(options_selected) {
+			var options = angular.copy(options_selected);
+			var reference;
+			if(options['size']) {
+				options['size'] = getSizeText(options['size']);
+			}
+			for (var key in options) {
+				if(key !== 'size' && !isOptionRequired(key)) {
+					delete options[key];
+				}
+			}
+			vm.product.price_stock.forEach(function (element) {
+				var isReference = true;
+				for(var key in options) {
+					if(!angular.equals(options[key], element.options[key]))
+						isReference = false;
+				}
+				if(isReference) {
+					reference = element.short_id;
+				}
+			});
+			return reference;
+
 		}
 
 		function getReferencesFromOptions(options) {
