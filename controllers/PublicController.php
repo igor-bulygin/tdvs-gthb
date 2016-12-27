@@ -455,7 +455,7 @@ class PublicController extends CController
 		]);
 	}
 
-	public function actionCart()
+	public function actionCartOld()
 	{
 		//Manage ajax query an return feedback
 		if (Yii::$app->request->isAjax) {
@@ -470,9 +470,15 @@ class PublicController extends CController
 		}
 
 		//Show cart view
-		return $this->render("cart", [
+		return $this->render("cart-old", [
 			'test' => 'this is a test text'
 		]);
+	}
+
+	public function actionCart()
+	{
+		$this->layout = '/desktop/public-2.php';
+		return $this->render("cart", []);
 	}
 
 	public function actionFaq()

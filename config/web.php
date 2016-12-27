@@ -187,7 +187,7 @@ $config = [
 
 				//Links for a cart listing
 				'cart/' => 'public/cart',
-				'public/cart/' => 'public/cart',
+				'public/cart/' => 'public/cart-old',
 
 				//links for terms
 				'terms/' => 'public/terms',
