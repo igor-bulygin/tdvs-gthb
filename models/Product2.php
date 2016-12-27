@@ -1052,4 +1052,13 @@ class Product2 extends Product {
 		return $works;
 	}
 
+	public function getPriceStockItem($priceStockId) {
+		$priceStock = $this->price_stock;
+		foreach ($priceStock as $item) {
+			if ($item['short_id'] == $priceStockId) {
+				return $item;
+			}
+		}
+		return null;
+	}
 }
