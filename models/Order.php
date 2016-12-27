@@ -111,7 +111,6 @@ class Order extends CActiveRecord {
 	}
 
 	public function beforeSave($insert) {
-
 		if (empty($this->order_state)) {
 			$this->order_state = Order::ORDER_STATE_CART;
 		}
@@ -301,19 +300,79 @@ class Order extends CActiveRecord {
 
 	public function addProduct(OrderProduct $orderProduct) {
 		$product = Product2::findOneSerialized($orderProduct->product_id); /* @var Product2 $product */
-		if (empty($product)) {
+		if (empty($orderProduct)) {
 			throw new Exception(sprintf("Product with id %s does not exists", $orderProduct->product_id));
 		}
-		$item = $product->getPriceStockItem($orderProduct->price_stock_id);
-		if (empty($item)) {
+		$priceStock = $product->getPriceStockItem($orderProduct->price_stock_id);
+		if (empty($priceStock)) {
 			throw new Exception(sprintf("Price stock item with id %s does not exists", $orderProduct->price_stock_id));
 		}
 
+		$products = $this->productsMapping;
+		$quantity = $orderProduct->quantity;
+		$key = null;
+		foreach ($products as $i => $item) {
+			if ($item->price_stock_id == $orderProduct->price_stock_id) {
+				$key = $i;
+				$quantity += $item['quantity'];
+				break;
+			}
+		}
+
 		$orderProduct->deviser_id = $product->deviser_id;
-		$orderProduct->weight = $item['weight'];
-		$orderProduct->price = $item['price'];
-		$orderProduct->options = $item['options'];
-		$this->productsMapping[] = $orderProduct;
+		$orderProduct->quantity = $quantity;
+		$orderProduct->weight = $priceStock['weight'];
+		$orderProduct->price = $priceStock['price'];
+		$orderProduct->options = $priceStock['options'];
+
+		if (isset($key)) {
+			$this->productsMapping[$key] = $orderProduct;
+		} else {
+			$this->productsMapping[] = $orderProduct;
+		}
+		$this->recalculateTotal();
+	}
+
+	public function updateProduct(OrderProduct $orderProduct) {
+		$product = Product2::findOneSerialized($orderProduct->product_id); /* @var Product2 $product */
+		if (empty($orderProduct)) {
+			throw new Exception(sprintf("Product with id %s does not exists", $orderProduct->product_id));
+		}
+		$priceStock = $product->getPriceStockItem($orderProduct->price_stock_id);
+		if (empty($priceStock)) {
+			throw new Exception(sprintf("Price stock item with id %s does not exists", $orderProduct->price_stock_id));
+		}
+
+		$products = $this->productsMapping;
+		$key = null;
+		foreach ($products as $i => $item) {
+			if ($item->price_stock_id == $orderProduct->price_stock_id) {
+				$key = $i;
+				break;
+			}
+		}
+		$orderProduct->weight = $priceStock['weight'];
+		$orderProduct->price = $priceStock['price'];
+		$orderProduct->options = $priceStock['options'];
+
+		if (isset($key)) {
+			$this->productsMapping[$key] = $orderProduct;
+		} else {
+			$this->productsMapping[] = $orderProduct;
+		}
+		$this->recalculateTotal();
+	}
+
+	public function deleteProduct(OrderProduct $orderProduct) {
+		$products = $this->productsMapping; /* @var \ArrayObject $products */
+		$key = null;
+		foreach ($products as $i => $item) {
+			if ($item->price_stock_id == $orderProduct->price_stock_id) {
+				$products->offsetUnset($i);
+				break;
+			}
+		}
+		$this->productsMapping = $products;
 		$this->recalculateTotal();
 	}
 
@@ -326,10 +385,15 @@ class Order extends CActiveRecord {
 		$this->subtotal = $subtotal;
 	}
 
-	public function getProductItem($productId) {
+	/**
+	 * @param $priceStockId
+	 * @return OrderProduct|null
+	 */
+	public function getPriceStockItem($priceStockId) {
 		$products = $this->productsMapping;
 		foreach ($products as $item) {
-			if ($item->product_id == $productId) {
+			if ($item->price_stock_id == $priceStockId) {
+				$item->setModel($this);
 				return $item;
 			}
 		}

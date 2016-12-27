@@ -62,7 +62,7 @@ class OrderProduct extends CActiveRecord
 	public function rules()
 	{
 		return [
-				[['product_id', 'price_stock_id', 'quantity'], 'required'],
+				[['product_id', 'price_stock_id', 'quantity', 'deviser_id', 'price', 'weight', 'options'], 'safe'],
 //				[['question', 'answer'], 'app\validators\TranslatableValidator', 'on' => [Person::SCENARIO_DEVISER_CREATE_DRAFT, Person::SCENARIO_DEVISER_UPDATE_DRAFT, Person::SCENARIO_DEVISER_PUBLISH_PROFILE, Person::SCENARIO_DEVISER_UPDATE_PROFILE, Product2::SCENARIO_PRODUCT_DRAFT, Product2::SCENARIO_PRODUCT_PUBLIC ]],
 		];
 	}
