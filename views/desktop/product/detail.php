@@ -165,7 +165,7 @@ $videos = $product->getVideos();
 								</form>
 							</div>-->
 							<div class="row-size">
-								<button type="button" class="btn btn-green btn-add-to-cart" ng-disabled="detailProductCtrl.stock === 0"><i class="ion-ios-cart cart-icon-btn"></i> <span>Add to cart</span></button>
+								<button type="button" class="btn btn-green btn-add-to-cart" ng-disabled="detailProductCtrl.stock === 0" ng-click="detailProductCtrl.addToCart()"><i class="ion-ios-cart cart-icon-btn"></i> <span>Add to cart</span></button>
 							</div>
 						</div>
 						<!--<div class="product-data">

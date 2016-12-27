@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(productDataService, tagDataService, $location, toastr) {
+	function controller(productDataService, tagDataService, cartDataService, $location, toastr, UtilService) {
 		var vm = this;
 		vm.quantity = 1;
 		vm.optionsSelected = {};
@@ -10,12 +10,14 @@
 		vm.changeOriginalArtwork = changeOriginalArtwork;
 		vm.getReferencesFromOptions = getReferencesFromOptions;
 		vm.selectComparator = selectComparator;
+		vm.addToCart = addToCart;
 		var select_order = ['size', 'color', 'select']
 
 		function init() {
 			getProductId();
 			getProduct();
 			getTags();
+
 		}
 
 		init();
@@ -155,7 +157,6 @@
 				}
 			});
 			return reference;
-
 		}
 
 		function getReferencesFromOptions(options) {
@@ -209,6 +210,41 @@
 
 		function selectComparator(option) {
 			return select_order.indexOf(option.widget_type)
+		}
+
+		function saveProduct(cart_id) {
+			var cartProduct = new CartDataService.cartProduct;
+			cartProduct.product_id = angular.copy(vm.product.id);
+			cartProduct.price_stock_id = angular.copy(vm.reference_id);
+			cartProduct.quantity = angular.copy(vm.quantity);
+			cartProduct.$save({
+				id: cart_id
+			}).then(function(savedData) {
+				console.log(savedData);
+				//toastr or notification
+			}, function (err) {
+				//err
+			});
+		}
+
+		function addToCart() {
+			if(vm.reference_id){
+				var cart_id = UtilService.getLocalStorage('cart_id');
+				if(cart_id) {
+					//POST to product
+					saveProduct(cart_id);
+				} else {
+					//create cart
+					cartDataService.Cart.save()
+						.$promise.then(function (cartData) {
+							cart_id = cartData.id;
+							UtilService.setLocalStorage('cart_id', cart_id);
+							saveProduct(cart_id);
+						}, function(err) {
+							//err
+						})
+				}
+			}
 		}
 	}
 
