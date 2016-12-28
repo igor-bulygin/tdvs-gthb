@@ -1,7 +1,6 @@
 <?php
 use app\assets\desktop\product\ProductDetailAsset;
 use app\assets\desktop\pub\Product2Asset;
-use app\assets\desktop\pub\PublicCommonAsset;
 use app\helpers\Utils;
 use app\models\Person;
 use app\models\PersonVideo;
@@ -260,7 +259,7 @@ $videos = $product->getVideos();
 					<a href="#description" aria-controls="description" role="tab" data-toggle="tab">Description &amp; User
 					reviews</a>
 				</li>
-				<?php if ($videos) { ?>
+				<?php if (count($videos)) { ?>
 				<li role="presentation" class="no-b-r">
 					<a href="#videos" aria-controls="works" role="tab" data-toggle="tab">Videos</a>
 				</li>
@@ -529,7 +528,7 @@ $videos = $product->getVideos();
 						</div>
 					</div>
 				</div>
-				<?php if ($videos) { ?>
+				<?php if (count($videos)) { ?>
 					<div role="tabpanel" class="tab-pane work-description-wrapper" id="videos">
 						<div class="other-products-wrapper">
 							<div style="height:500px;">
