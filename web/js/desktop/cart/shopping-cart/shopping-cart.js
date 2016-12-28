@@ -1,8 +1,21 @@
 (function () {
 	"use strict";
 
-	function controller() {
+	function controller(cartDataService, UtilService) {
 		var vm = this;
+		vm.deleteItem = deleteItem;
+		var cart_id = UtilService.getLocalStorage('cart_id');
+
+		function deleteItem(price_stock_id) {
+			cartDataService.CartProduct.delete({
+				id: cart_id,
+				productId: price_stock_id
+			}).$promise.then(function(deletedData) {
+				vm.cart = angular.copy(deletedData);
+			});
+		}
+
+
 	}
 
 	var component = {

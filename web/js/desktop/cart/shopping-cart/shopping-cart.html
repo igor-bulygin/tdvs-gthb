@@ -1,9 +1,31 @@
 <div>
 	<h4>Your shopping cart</h4>
-	<div ng-repeat="deviser in shoppingCartCtrl.devisers">
-		<h5 ng-bind="deviser"></h5>
-		<div ng-repeat="product in shoppingCartCtrl.cart.products | filter:{deviser_id : deviser}">
-			<div><pre ng-bind="(product | json)"></pre></div>
-		</div>
-	</div>
+	<table class="table" ng-repeat="deviser in shoppingCartCtrl.devisers">
+		<thead>
+			<tr>
+				<td>Deviser</td>
+				<td ng-bind="deviser"></td>
+				<td></td>
+				<td>Quantity</td>
+				<td>Subtotal</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="product in shoppingCartCtrl.cart.products | filter:{deviser_id: deviser}">
+				<td></td>
+				<td>Image</td>
+				<td>
+					<p>Product name</p>
+					<p>Tags</p>
+				</td>
+				<td>
+					<p ng-bind="product.quantity"></p>
+				</td>
+				<td>
+					<p>€<span ng-bind="product.price"></span></p>
+					<p><a href="#" ng-click="shoppingCartCtrl.deleteItem(product.price_stock_id)">&times; Delete</a></p>
+				</td>
+			</tr>
+		</tbody>
+	</table>
 </div>

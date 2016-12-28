@@ -19,11 +19,7 @@
 					id: cart_id
 				}).$promise.then(function (cartData) {
 					vm.cart = angular.copy(cartData);
-					vm.cart.products.forEach(function(product) {
-						if(vm.devisers.indexOf(product.deviser_id) < 0) {
-							vm.devisers.push(product.deviser_id);
-						}
-					});
+					parseDevisersFromProducts(vm.cart);
 				}, function(err) {
 					//log err
 				});
@@ -37,6 +33,15 @@
 				}, function(err) {
 					//error
 				});
+		}
+
+		function parseDevisersFromProducts(cart){
+			vm.devisers = [];
+			cart.products.forEach(function(product) {
+				if(vm.devisers.indexOf(product.deviser_id) < 0) {
+					vm.devisers.push(product.deviser_id);
+				}
+			})
 		}
 
 	}
