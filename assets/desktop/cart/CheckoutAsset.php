@@ -8,6 +8,7 @@ class CheckoutAsset extends AssetBundle {
 	public $baseUrl = '@web';
 	public $css = [];
 	public $js = [
+		'js/desktop/cart/checkout.js',
 		'js/desktop/cart/shopping-cart/shopping-cart.js'
 	];
 	public $depends = [
