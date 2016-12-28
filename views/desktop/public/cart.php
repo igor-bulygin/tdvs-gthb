@@ -12,7 +12,7 @@ $this->title = 'Todevise / Cart';
 <div class="store" ng-controller="checkoutCtrl as checkoutCtrl">
 	<div class="container">
 		<div class="pull-right"><a href="/">Continue shopping</a></div>
-		<shopping-cart></shopping-cart>
+		<shopping-cart cart="checkoutCtrl.cart" devisers="checkoutCtrl.devisers"></shopping-cart>
 
 	</div>
 </div>

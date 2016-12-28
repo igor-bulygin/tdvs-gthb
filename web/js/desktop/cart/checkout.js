@@ -1,11 +1,15 @@
 (function () {
 	"use strict";
 
-	function controller(cartDataService, UtilService) {
+	function controller(cartDataService, tagDataService, productDataService, UtilService) {
 		var vm = this;
+		vm.devisers = [];
+
+		init();
 
 		function init() {
 			getCart();
+			getTags();
 		}
 
 		function getCart() {
@@ -15,13 +19,26 @@
 					id: cart_id
 				}).$promise.then(function (cartData) {
 					vm.cart = angular.copy(cartData);
+					vm.cart.products.forEach(function(product) {
+						if(vm.devisers.indexOf(product.deviser_id) < 0) {
+							vm.devisers.push(product.deviser_id);
+						}
+					});
 				}, function(err) {
 					//log err
-				})
+				});
 			}
 		}
 
-		init();
+		function getTags() {
+			tagDataService.Tags.get()
+				.$promise.then(function(dataTags) {
+					vm.tags = angular.copy(dataTags.items);
+				}, function(err) {
+					//error
+				});
+		}
+
 	}
 
 	angular.module('todevise')

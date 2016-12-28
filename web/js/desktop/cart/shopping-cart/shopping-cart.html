@@ -1,3 +1,9 @@
 <div>
 	<h4>Your shopping cart</h4>
+	<div ng-repeat="deviser in shoppingCartCtrl.devisers">
+		<h5 ng-bind="deviser"></h5>
+		<div ng-repeat="product in shoppingCartCtrl.cart.products | filter:{deviser_id : deviser}">
+			<div><pre ng-bind="(product | json)"></pre></div>
+		</div>
+	</div>
 </div>

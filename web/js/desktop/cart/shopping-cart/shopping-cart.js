@@ -9,6 +9,10 @@
 		templateUrl: currentHost() + '/js/desktop/cart/shopping-cart/shopping-cart.html',
 		controller: controller,
 		controllerAs: 'shoppingCartCtrl',
+		bindings: {
+			cart: '<',
+			devisers: '<'
+		}
 	}
 
 	angular
