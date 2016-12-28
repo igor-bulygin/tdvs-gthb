@@ -213,7 +213,7 @@
 		}
 
 		function saveProduct(cart_id) {
-			var cartProduct = new CartDataService.cartProduct;
+			var cartProduct = new cartDataService.CartProduct;
 			cartProduct.product_id = angular.copy(vm.product.id);
 			cartProduct.price_stock_id = angular.copy(vm.reference_id);
 			cartProduct.quantity = angular.copy(vm.quantity);
@@ -237,7 +237,7 @@
 					//create cart
 					cartDataService.Cart.save()
 						.$promise.then(function (cartData) {
-							cart_id = cartData.id;
+							cart_id = angular.copy(cartData.id);
 							UtilService.setLocalStorage('cart_id', cart_id);
 							saveProduct(cart_id);
 						}, function(err) {
