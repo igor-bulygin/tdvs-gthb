@@ -2,7 +2,7 @@
 use app\helpers\Utils;
 use app\models\Category;
 use yii\helpers\Url;
-use app\components\assets\PublicHeader2Asset;
+
 /** @var Category $category */
 
 app\components\assets\PublicHeader2Asset::register($this);
@@ -108,7 +108,7 @@ app\components\assets\PublicHeader2Asset::register($this);
 			</form>
 			<ul class="nav navbar-nav navbar-right cart-login-wrapper">
 				<li class="cart-item">
-					<a href="#">
+					<a href="<?=Url::to(['/cart'])?>">
 						<i class="ion-ios-cart active"></i>
 					</a>
 				</li>
