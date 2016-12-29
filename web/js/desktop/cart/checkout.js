@@ -1,9 +1,8 @@
 (function () {
 	"use strict";
 
-	function controller(cartDataService, tagDataService, productDataService, UtilService) {
+	function controller(cartDataService, tagDataService, productDataService, UtilService, cartService) {
 		var vm = this;
-		vm.devisers = [];
 
 		init();
 
@@ -19,7 +18,7 @@
 					id: cart_id
 				}).$promise.then(function (cartData) {
 					vm.cart = angular.copy(cartData);
-					parseDevisersFromProducts(vm.cart);
+					vm.devisers = cartService.parseDevisersFromProducts(vm.cart);
 				}, function(err) {
 					//log err
 				});
@@ -34,16 +33,6 @@
 					//error
 				});
 		}
-
-		function parseDevisersFromProducts(cart){
-			vm.devisers = [];
-			cart.products.forEach(function(product) {
-				if(vm.devisers.indexOf(product.deviser_id) < 0) {
-					vm.devisers.push(product.deviser_id);
-				}
-			})
-		}
-
 	}
 
 	angular.module('todevise')

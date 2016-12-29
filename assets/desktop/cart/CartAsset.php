@@ -9,6 +9,7 @@ class CartAsset extends AssetBundle {
 	public $css = [];
 	public $js = [
 		'js/desktop/cart/cart.js',
+		'js/desktop/cart/cartService.js',
 	];
 	public $depends = [
 		'app\assets\desktop\pub\PublicCommonAsset',

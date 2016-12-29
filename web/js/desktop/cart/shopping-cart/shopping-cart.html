@@ -4,18 +4,18 @@
 		<thead>
 			<tr>
 				<td>Deviser</td>
-				<td ng-bind="deviser"></td>
+				<td><strong><span ng-bind="deviser.deviser_name"></span></strong></td>
 				<td></td>
 				<td>Quantity</td>
 				<td>Subtotal</td>
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="product in shoppingCartCtrl.cart.products | filter:{deviser_id: deviser}">
+			<tr ng-repeat="product in shoppingCartCtrl.cart.products | filter:{deviser_id: deviser.deviser_id}">
 				<td></td>
-				<td>Image</td>
+				<td><img ng-src="{{product.product_photo}}" ng-alt="product.product_name" ng-title="product.product_name" style="max-height: 80px;"></td>
 				<td>
-					<p>Product name</p>
+					<p ng-bind="product.product_name"></p>
 					<p>Tags</p>
 				</td>
 				<td>

@@ -1,8 +1,15 @@
 <h5>Cart summary</h5>
 <br>
 <div ng-repeat="deviser in summaryCtrl.devisers">
-	<p><strong><span ng-bind="deviser"></span></strong></p>
-	<div ng-repeat="product in summaryCtrl.cart.products | filter: {deviser_id: deviser}">
-		<div><pre>{{product}}</pre></div>
+	<p><strong><span ng-bind="deviser.deviser_name"></span></strong></p>
+	<div ng-repeat="product in summaryCtrl.cart.products | filter: {deviser_id: deviser.deviser_id}">
+		<div>
+			<p>
+				<span ng-bind="product.product_name"></span><span class="pull-right">€<span ng-bind="product.price"></span></span>
+			</p>
+		</div>
 	</div>
+</div>
+<div>
+	<p><strong><span>Subtotal</span></strong><span class="pull-right">€<span ng-bind="summaryCtrl.cart.subtotal"></span></span></p>
 </div>
