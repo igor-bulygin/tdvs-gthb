@@ -142,8 +142,15 @@
 			.setStorageType('localStorage')
 	}
 
+	function capitalize() {
+		return function(input) {
+			return(!!input ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '');
+		}
+	}
+
 	angular.module('util', ['util.formMessages', 'LocalStorageModule'])
 		.service('UtilService', UtilService)
+		.filter('capitalize', capitalize)
 		.config(config);
 
 }());
