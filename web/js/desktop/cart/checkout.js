@@ -8,7 +8,6 @@
 
 		function init() {
 			getCart();
-			getTags();
 		}
 
 		function getCart() {
@@ -18,20 +17,12 @@
 					id: cart_id
 				}).$promise.then(function (cartData) {
 					vm.cart = angular.copy(cartData);
+					cartService.parseTags(vm.cart);
 					vm.devisers = cartService.parseDevisersFromProducts(vm.cart);
 				}, function(err) {
 					//log err
 				});
 			}
-		}
-
-		function getTags() {
-			tagDataService.Tags.get()
-				.$promise.then(function(dataTags) {
-					vm.tags = angular.copy(dataTags.items);
-				}, function(err) {
-					//error
-				});
 		}
 	}
 

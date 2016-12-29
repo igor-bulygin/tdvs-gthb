@@ -4,6 +4,7 @@
 	function controller(cartDataService, UtilService, cartService) {
 		var vm = this;
 		vm.deleteItem = deleteItem;
+		vm.isObject = UtilService.isObject;
 		var cart_id = UtilService.getLocalStorage('cart_id');
 
 		function deleteItem(price_stock_id) {
@@ -13,6 +14,7 @@
 			}).$promise.then(function(deletedData) {
 				vm.cart = angular.copy(deletedData);
 				vm.devisers = cartService.parseDevisersFromProducts(vm.cart);
+				cartService.parseTags(vm.cart);
 			});
 		}
 

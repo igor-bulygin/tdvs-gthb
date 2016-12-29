@@ -15,8 +15,14 @@
 				<td></td>
 				<td><img ng-src="{{product.product_photo}}" ng-alt="product.product_name" ng-title="product.product_name" style="max-height: 80px;"></td>
 				<td>
-					<p ng-bind="product.product_name"></p>
-					<p>Tags</p>
+					<p><strong><span ng-bind="(product.product_name | uppercase)"></span></strong></p>
+					<div ng-repeat="tag in product.tags">
+						<span ng-bind="tag.name"></span>&nbsp;
+							<span ng-repeat="value in tag.values track by $index">
+								<span ng-if="!shoppingCartCtrl.isObject(value)">
+									<span ng-if="$index>0">/&nbsp;</span><span ng-bind="(value | capitalize)"></span>&nbsp;</span>
+								</span>
+					</div>
 				</td>
 				<td>
 					<p ng-bind="product.quantity"></p>
