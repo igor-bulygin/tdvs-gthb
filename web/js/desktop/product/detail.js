@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(productDataService, tagDataService, cartDataService, $location, toastr, UtilService) {
+	function controller(productDataService, tagDataService, cartDataService, $location, toastr, UtilService, $window) {
 		var vm = this;
 		vm.quantity = 1;
 		vm.optionsSelected = {};
@@ -220,8 +220,7 @@
 			cartProduct.$save({
 				id: cart_id
 			}).then(function(savedData) {
-				console.log(savedData);
-				//toastr or notification
+				$window.location.href = currentHost() + "/cart";
 			}, function (err) {
 				//err
 			});
