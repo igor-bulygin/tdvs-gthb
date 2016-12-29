@@ -157,10 +157,11 @@ class Order extends CActiveRecord {
 					'order_state',
 					'client_id',
 					'client_info',
-					'products',
+					'products' => 'productsInfo',
 					'subtotal',
                 ];
                 static::$retrieveExtraFields = [
+					'products',
                 ];
 
                 static::$translateFields = false;
@@ -170,6 +171,25 @@ class Order extends CActiveRecord {
 				static::$serializeFields = [];
 				break;
 		}
+	}
+
+	public function getProductsInfo() {
+		$products = $this->products;
+
+		$result = [];
+		Product2::setSerializeScenario(Product2::SERIALIZE_SCENARIO_PUBLIC);
+		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_PUBLIC);
+		foreach ($products as $p) {
+			$product = Product2::findOneSerialized($p['product_id']);
+			$deviser = Person::findOneSerialized($p['deviser_id']);
+			$p['product_name'] = $product->name;
+			$p['product_photo'] = $product->getMainImage();
+			$p['deviser_name'] = $deviser->name;
+			$p['deviser_photo'] = $deviser->getAvatarImage();
+			$result[] = $p;
+		}
+
+		return $result;
 	}
 
     /**

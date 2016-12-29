@@ -24,35 +24,6 @@ Example about how to call to Web Service to get tthe cart
   "client_info": [],
   "products": [
     {
-      "product_id": "b8066597",
-      "price_stock_id": "b806659772d3e06",
-      "quantity": 35,
-      "deviser_id": "18d910a",
-      "price": 75,
-      "weight": 0,
-      "options": {
-        "20000": [
-          {
-            "metric_unit": "mm",
-            "value": 0
-          },
-          {
-            "metric_unit": "cm",
-            "value": "30"
-          },
-          {
-            "metric_unit": "mm",
-            "value": 0
-          }
-        ],
-        "731ct": [
-          "white",
-          "blue",
-          "pink"
-        ]
-      }
-    },
-    {
       "product_id": "d8823222",
       "price_stock_id": "d8823222ffb2f8b",
       "quantity": 5,
@@ -64,9 +35,13 @@ Example about how to call to Web Service to get tthe cart
         "731ct": [
           "black"
         ]
-      }
+      },
+      "product_name": "DOUBLE MONK STAP SHOES",
+      "product_photo": "/uploads/product/d8823222/2016-05-17-05-55-35-2caf7.jpg",
+      "deviser_name": "Inch2",
+      "deviser_photo": "/imgs/default-avatar.jpg"
     }
   ],
-  "subtotal": 4175
+  "subtotal": 1550
 }
 ```
