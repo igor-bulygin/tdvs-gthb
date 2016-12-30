@@ -20,22 +20,34 @@ $videos = $product->getVideos();
 ?>
 
 	<!-- PRODUCT CARD -->
-	<!-- Modal -->
-    <div class="modal fade" id="chartModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Chart sizes</h4>
-          </div>
-          <div class="modal-body">
-            [PLACE CHART SIZE HERE]
-          </div>
-        </div>
-      </div>
-    </div>
 	
-	<div class="product">
+	<div class="product" ng-controller="detailProductCtrl as detailProductCtrl">
+		<!-- Modal -->
+		<div class="modal fade" id="chartModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">Chart sizes</h4>
+					</div>
+					<div class="modal-body">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<td><span ng-bind="detailProductCtrl.product.sizechart.country"></span></td>
+									<td ng-repeat="column in detailProductCtrl.product.sizechart.columns"><span ng-bind="column['en-US']"></span></td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="value in detailProductCtrl.product.sizechart.values">
+									<td ng-repeat="item in value track by $index"><span ng-bind="item"></span></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div>
 			<div class="container">
 				<div class="col-md-8 pad-product">
@@ -58,11 +70,11 @@ $videos = $product->getVideos();
 										<!-- Controls -->
 										<a class='left carousel-control' href='#carousel-custom' data-slide='prev'>
 											<span class='ion-ios-arrow-left arrow'>
-                                                    </span>
+													</span>
 										</a>
 										<a class='right carousel-control' href='#carousel-custom' data-slide='next'>
 											<span class='ion-ios-arrow-right arrow'>
-                                                    </span>
+													</span>
 										</a>
 										<?php } ?>
 									</div>
@@ -80,7 +92,7 @@ $videos = $product->getVideos();
 						</div>
 					</div>
 				</div>
-				<div class="col-md-4 pad-product" ng-controller="detailProductCtrl as detailProductCtrl">
+				<div class="col-md-4 pad-product">
 					<div class="product-data-wrapper">
 						<div class="product-data">
 							<span class="title" ng-bind="detailProductCtrl.product.name"></span>
@@ -143,7 +155,7 @@ $videos = $product->getVideos();
 														</ol>
 													</div>
 													<div class="col-sm-4 no-pad">
-														<a class="view-chart-size" href="view-chart-size" href="#" data-toggle="modal" data-target="#chartModal" ng-if="option.id==='size'">View size chart</a>
+														<a class="view-chart-size" href="#" href="#" data-toggle="modal" data-target="#chartModal" ng-if="option.id==='size'">View size chart</a>
 													</div>
 												</div>
 											</div>
@@ -255,8 +267,8 @@ $videos = $product->getVideos();
 	<!-- /PRODUCT CARD -->
 	<!-- PRODUCT DESCRIPTION -->
 	<div class="product-description">
-	    <!-- Nav tabs -->
-	    <div class="container">
+		<!-- Nav tabs -->
+		<div class="container">
 			<ul class="nav nav-tabs product-tabs" role="tablist">
 				<li role="presentation" class="active no-b-r">
 					<a href="#description" aria-controls="description" role="tab" data-toggle="tab">Description &amp; User
@@ -283,40 +295,40 @@ $videos = $product->getVideos();
 								<?= $product->description ?>
 							</p>
 							<!--					<div class="tb-wrapper">-->
-<!--                        <div class="row">-->
-<!--                            <div class="col-md-3 work-profile-description-tb">-->
-<!--                                <img src="/imgs/pullera.jpg">-->
-<!--                                <span class="tb-title">Lorem ipsum sit amet</span>  -->
+<!--						<div class="row">-->
+<!--							<div class="col-md-3 work-profile-description-tb">-->
+<!--								<img src="/imgs/pullera.jpg">-->
+<!--								<span class="tb-title">Lorem ipsum sit amet</span>  -->
 		
-<!--                                <span class="tb-description">Swim like a crazy person with this amazing watch Swim like a crazy person with this amazing watch</span>  -->
-<!--                            </div>-->
-<!--                            <div class="col-md-3 work-profile-description-tb">-->
-<!--                                <img src="/imgs/pullera.jpg">-->
-<!--                                <span class="tb-title">Lorem ipsum sit amet</span>  -->
-<!--                                <span class="tb-description">Swim like a crazy person with this amazing watch Swim like a crazy person with this amazing watch</span>  -->
-<!--                            </div>-->
-<!--                            <div class="col-md-3 work-profile-description-tb">-->
-<!--                                <img src="/imgs/pullera.jpg">-->
-<!--                                <span class="tb-title">Lorem ipsum sit amet</span>  -->
-<!--                                <span class="tb-description">Swim like a crazy person with this amazing watch Swim like a crazy person with this amazing watch</span>  -->
-<!--                            </div>-->
-<!--                            <div class="col-md-3 work-profile-description-tb">-->
-<!--                                <img src="/imgs/pullera.jpg">-->
-<!--                                <span class="tb-title">Lorem ipsum sit amet</span>  -->
-<!--                                <span class="tb-description">Swim like a crazy person with this amazing watch Swim like a crazy person with this amazing watch</span>  -->
-<!--                            </div>-->
-<!--                            <div class="col-md-3 work-profile-description-tb">-->
-<!--                                <img src="/imgs/pullera.jpg">-->
-<!--                                <span class="tb-title">Lorem ipsum sit amet</span>  -->
-<!--                                <span class="tb-description">Swim like a crazy person with this amazing watch Swim like a crazy person with this amazing watch</span>  -->
-<!--                            </div>-->
-<!--                            <div class="col-md-3 work-profile-description-tb">-->
-<!--                                <img src="/imgs/pullera.jpg">-->
-<!--                                <span class="tb-title">Lorem ipsum sit amet</span>  -->
-<!--                                <span class="tb-description">Swim like a crazy person with this amazing watch Swim like a crazy person with this amazing watch</span>  -->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
+<!--								<span class="tb-description">Swim like a crazy person with this amazing watch Swim like a crazy person with this amazing watch</span>  -->
+<!--							</div>-->
+<!--							<div class="col-md-3 work-profile-description-tb">-->
+<!--								<img src="/imgs/pullera.jpg">-->
+<!--								<span class="tb-title">Lorem ipsum sit amet</span>  -->
+<!--								<span class="tb-description">Swim like a crazy person with this amazing watch Swim like a crazy person with this amazing watch</span>  -->
+<!--							</div>-->
+<!--							<div class="col-md-3 work-profile-description-tb">-->
+<!--								<img src="/imgs/pullera.jpg">-->
+<!--								<span class="tb-title">Lorem ipsum sit amet</span>  -->
+<!--								<span class="tb-description">Swim like a crazy person with this amazing watch Swim like a crazy person with this amazing watch</span>  -->
+<!--							</div>-->
+<!--							<div class="col-md-3 work-profile-description-tb">-->
+<!--								<img src="/imgs/pullera.jpg">-->
+<!--								<span class="tb-title">Lorem ipsum sit amet</span>  -->
+<!--								<span class="tb-description">Swim like a crazy person with this amazing watch Swim like a crazy person with this amazing watch</span>  -->
+<!--							</div>-->
+<!--							<div class="col-md-3 work-profile-description-tb">-->
+<!--								<img src="/imgs/pullera.jpg">-->
+<!--								<span class="tb-title">Lorem ipsum sit amet</span>  -->
+<!--								<span class="tb-description">Swim like a crazy person with this amazing watch Swim like a crazy person with this amazing watch</span>  -->
+<!--							</div>-->
+<!--							<div class="col-md-3 work-profile-description-tb">-->
+<!--								<img src="/imgs/pullera.jpg">-->
+<!--								<span class="tb-title">Lorem ipsum sit amet</span>  -->
+<!--								<span class="tb-description">Swim like a crazy person with this amazing watch Swim like a crazy person with this amazing watch</span>  -->
+<!--							</div>-->
+<!--						</div>-->
+<!--					</div>-->
 						</div>
 						<div class="col-sm-4">
 							<div class="shipping-policies-wrapper">
@@ -341,10 +353,10 @@ $videos = $product->getVideos();
 									Returns: <span class="bold">14 days</span>
 								</div>
 								<div class="returns-row">
-                                    Warranty:
-                                    <span class="bold"><?= $product->getWarrantyLabel() ?></span>
-                                </div>
-                            </div>
+									Warranty:
+									<span class="bold"><?= $product->getWarrantyLabel() ?></span>
+								</div>
+							</div>
 						</div>
 					</div>
 					
@@ -384,12 +396,12 @@ $videos = $product->getVideos();
 						<div class="title">User reviews</div>
 						<div class="review-rates">
 							<span class="score">
-                                    <i class="ion-ios-star"></i>
-                                    <i class="ion-ios-star"></i>
-                                    <i class="ion-ios-star"></i>
-                                    <i class="ion-ios-star"></i>
-                                    <i class="ion-ios-star"></i>
-                                </span>
+									<i class="ion-ios-star"></i>
+									<i class="ion-ios-star"></i>
+									<i class="ion-ios-star"></i>
+									<i class="ion-ios-star"></i>
+									<i class="ion-ios-star"></i>
+								</span>
 							<span class="number-score">(20)</span>
 							<div class="by-stars"><span>5 stars</span> <span class="number-score">(15)</span></div>
 							<div class="by-stars"><span>4 stars</span> <span class="number-score">(5)</span></div>
@@ -405,12 +417,12 @@ $videos = $product->getVideos();
 								<div class="rate-product">
 									<span>Rate this product</span>
 									<span class="score">
-                                            <i class="ion-ios-star"></i>
-                                            <i class="ion-ios-star"></i>
-                                            <i class="ion-ios-star"></i>
-                                            <i class="ion-ios-star"></i>
-                                            <i class="ion-ios-star"></i>
-                                        </span>
+											<i class="ion-ios-star"></i>
+											<i class="ion-ios-star"></i>
+											<i class="ion-ios-star"></i>
+											<i class="ion-ios-star"></i>
+											<i class="ion-ios-star"></i>
+										</span>
 								</div>
 							</div>
 							<div class="col-sm-1">
@@ -433,12 +445,12 @@ $videos = $product->getVideos();
 								<div class="replay">
 									<span>Reply</span>
 									<span class="score">
-                                            <i class="ion-ios-star"></i>
-                                            <i class="ion-ios-star"></i>
-                                            <i class="ion-ios-star"></i>
-                                            <i class="ion-ios-star"></i>
-                                            <i class="ion-ios-star"></i>
-                                        </span>
+											<i class="ion-ios-star"></i>
+											<i class="ion-ios-star"></i>
+											<i class="ion-ios-star"></i>
+											<i class="ion-ios-star"></i>
+											<i class="ion-ios-star"></i>
+										</span>
 									<span class="useful">300  member found this comment useful</span>
 								</div>
 							</div>
@@ -462,12 +474,12 @@ $videos = $product->getVideos();
 								<div class="replay">
 									<span>Reply</span>
 									<span class="score">
-                                            <i class="ion-ios-star"></i>
-                                            <i class="ion-ios-star"></i>
-                                            <i class="ion-ios-star"></i>
-                                            <i class="ion-ios-star"></i>
-                                            <i class="ion-ios-star"></i>
-                                        </span>
+											<i class="ion-ios-star"></i>
+											<i class="ion-ios-star"></i>
+											<i class="ion-ios-star"></i>
+											<i class="ion-ios-star"></i>
+											<i class="ion-ios-star"></i>
+										</span>
 									<span class="useful">300  member found this comment useful</span>
 								</div>
 							</div>
@@ -509,12 +521,12 @@ $videos = $product->getVideos();
 								<div class="replay">
 									<span>Reply</span>
 									<span class="score">
-                                            <i class="ion-ios-star"></i>
-                                            <i class="ion-ios-star"></i>
-                                            <i class="ion-ios-star"></i>
-                                            <i class="ion-ios-star"></i>
-                                            <i class="ion-ios-star"></i>
-                                        </span>
+											<i class="ion-ios-star"></i>
+											<i class="ion-ios-star"></i>
+											<i class="ion-ios-star"></i>
+											<i class="ion-ios-star"></i>
+											<i class="ion-ios-star"></i>
+										</span>
 									<span class="useful">300  member found this comment useful</span>
 								</div>
 							</div>
@@ -563,27 +575,27 @@ $videos = $product->getVideos();
 						</ul>
 					</nav>
 					<div class="other-products-wrapper">
-                        <div id="macy-container">
-                            <?php foreach ($deviserProducts as $i => $product) { ?>
-                                <div class="menu-category list-group">
-                                    <a href="<?= Url::to(["product/detail", "slug" => $product->slug, 'product_id' => $product->short_id])?>">
-                                        <div class="grid">
-                                            <figure class="effect-zoe">
-                                                <img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getMainImage())->resize(400, 0) ?>">
-                                                <figcaption>
-                                                    <p class="instauser">
-                                                        <?= $product->name ?>
-                                                    </p>
-                                                    <p class="price">€
-                                                        <?= $product->getMinimumPrice()?>
-                                                    </p>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                    </a>
-                                </div>
-                            <?php } ?>
-                        </div>
+						<div id="macy-container">
+							<?php foreach ($deviserProducts as $i => $product) { ?>
+								<div class="menu-category list-group">
+									<a href="<?= Url::to(["product/detail", "slug" => $product->slug, 'product_id' => $product->short_id])?>">
+										<div class="grid">
+											<figure class="effect-zoe">
+												<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getMainImage())->resize(400, 0) ?>">
+												<figcaption>
+													<p class="instauser">
+														<?= $product->name ?>
+													</p>
+													<p class="price">€
+														<?= $product->getMinimumPrice()?>
+													</p>
+												</figcaption>
+											</figure>
+										</div>
+									</a>
+								</div>
+							<?php } ?>
+						</div>
 					</div>
 				</div>
 			</div>

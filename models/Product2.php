@@ -47,12 +47,12 @@ use yii2tech\ar\position\PositionBehavior;
  */
 class Product2 extends Product {
 
-    const PRODUCT_STATE_DRAFT = 'product_state_draft';
-    const PRODUCT_STATE_ACTIVE = 'product_state_active';
+	const PRODUCT_STATE_DRAFT = 'product_state_draft';
+	const PRODUCT_STATE_ACTIVE = 'product_state_active';
 
 	const SCENARIO_PRODUCT_OLD_API = 'scenario-product-old-api';
 	const SCENARIO_PRODUCT_DRAFT = 'scenario-product-draft';
-    const SCENARIO_PRODUCT_PUBLIC = 'scenario-product-public';
+	const SCENARIO_PRODUCT_PUBLIC = 'scenario-product-public';
 
 	/**
 	 * The attributes that should be serialized
@@ -147,15 +147,15 @@ class Product2 extends Product {
 		$this->position = 0;
 	}
 
-    public function embedMediaFiles()
-    {
-        return $this->mapEmbedded('media', ProductMedia::className(), array('unsetSource' => false));
-    }
+	public function embedMediaFiles()
+	{
+		return $this->mapEmbedded('media', ProductMedia::className(), array('unsetSource' => false));
+	}
 
-    public function embedFaqInfo()
-    {
-        return $this->mapEmbeddedList('faq', FaqQuestion::className(), array('unsetSource' => false));
-    }
+	public function embedFaqInfo()
+	{
+		return $this->mapEmbeddedList('faq', FaqQuestion::className(), array('unsetSource' => false));
+	}
 
 	public function embedPreorderInfo()
 	{
@@ -172,15 +172,15 @@ class Product2 extends Product {
 		return $this->mapEmbedded('bespoke', Bespoke::className(), array('unsetSource' => false));
 	}
 
-    /**
-     * Load sub documents after find the object
-     *
-     * @return void
-     */
-    public function afterFind()
-    {
-        parent::afterFind();
-    }
+	/**
+	 * Load sub documents after find the object
+	 *
+	 * @return void
+	 */
+	public function afterFind()
+	{
+		parent::afterFind();
+	}
 
 	public function beforeValidate()
 	{
@@ -243,26 +243,26 @@ class Product2 extends Product {
 		);
 	}
 
-    public function rules()
-    {
-        return [
-            [
-                [
-                    'deviser_id',
-                ],
-                'required',
-                'on' => [self::SCENARIO_PRODUCT_DRAFT]
-            ],
-            [
-                [
-                    'deviser_id',
+	public function rules()
+	{
+		return [
+			[
+				[
+					'deviser_id',
+				],
+				'required',
+				'on' => [self::SCENARIO_PRODUCT_DRAFT]
+			],
+			[
+				[
+					'deviser_id',
 					'name',
 					'categories',
 					'description',
 				],
-                'required',
-                'on' => [self::SCENARIO_PRODUCT_PUBLIC],
-            ],
+				'required',
+				'on' => [self::SCENARIO_PRODUCT_PUBLIC],
+			],
 			[
 				[
 					'name',
@@ -271,14 +271,14 @@ class Product2 extends Product {
 				'app\validators\TranslatableRequiredValidator',
 				'on' => self::SCENARIO_PRODUCT_PUBLIC,
 			],
-            [
-                [
-                    'deviser_id',
-                    'name',
-                    'slug',
-                    'description',
-                    'categories',
-                    'faq',
+			[
+				[
+					'deviser_id',
+					'name',
+					'slug',
+					'description',
+					'categories',
+					'faq',
 					'collections',
 					'options',
 					'madetoorder',
@@ -292,37 +292,37 @@ class Product2 extends Product {
 					'dimension_unit',
 					'price_stock',
 					'tags',
-                    'position',
-                    'prints',
-                    'product_state',
-                ],
-                'safe',
-                'on' => [self::SCENARIO_PRODUCT_OLD_API, self::SCENARIO_PRODUCT_DRAFT, self::SCENARIO_PRODUCT_PUBLIC]
-            ],
-            [
-                'product_state',
-                'in',
-                'range' => [self::PRODUCT_STATE_DRAFT, self::PRODUCT_STATE_ACTIVE],
-            ],
-            [
-                'name',
-                'app\validators\TranslatableValidator',
-                'on' => [self::SCENARIO_PRODUCT_DRAFT, self::SCENARIO_PRODUCT_PUBLIC],
-            ],
-            [
-                'description',
-                'app\validators\TranslatableValidator',
-                'on' => [self::SCENARIO_PRODUCT_DRAFT, self::SCENARIO_PRODUCT_PUBLIC],
-            ],
-            [
-                'categories',
-                'app\validators\CategoriesValidator',
-                'on' => [self::SCENARIO_PRODUCT_DRAFT, self::SCENARIO_PRODUCT_PUBLIC],
-            ],
-            [   'media', 'safe'], // to load data posted from WebServices
-            [   'mediaFiles', 'app\validators\EmbedDocValidator'], // to apply rules
-            [   'faq', 'safe'], // to load data posted from WebServices
-            [   'faqInfo', 'app\validators\EmbedDocValidator'], // to apply rules
+					'position',
+					'prints',
+					'product_state',
+				],
+				'safe',
+				'on' => [self::SCENARIO_PRODUCT_OLD_API, self::SCENARIO_PRODUCT_DRAFT, self::SCENARIO_PRODUCT_PUBLIC]
+			],
+			[
+				'product_state',
+				'in',
+				'range' => [self::PRODUCT_STATE_DRAFT, self::PRODUCT_STATE_ACTIVE],
+			],
+			[
+				'name',
+				'app\validators\TranslatableValidator',
+				'on' => [self::SCENARIO_PRODUCT_DRAFT, self::SCENARIO_PRODUCT_PUBLIC],
+			],
+			[
+				'description',
+				'app\validators\TranslatableValidator',
+				'on' => [self::SCENARIO_PRODUCT_DRAFT, self::SCENARIO_PRODUCT_PUBLIC],
+			],
+			[
+				'categories',
+				'app\validators\CategoriesValidator',
+				'on' => [self::SCENARIO_PRODUCT_DRAFT, self::SCENARIO_PRODUCT_PUBLIC],
+			],
+			[   'media', 'safe'], // to load data posted from WebServices
+			[   'mediaFiles', 'app\validators\EmbedDocValidator'], // to apply rules
+			[   'faq', 'safe'], // to load data posted from WebServices
+			[   'faqInfo', 'app\validators\EmbedDocValidator'], // to apply rules
 			[   'preorder', 'safe'], // to load data posted from WebServices
 			[   'preorderInfo', 'app\validators\EmbedDocValidator'], // to apply rules
 			[   'madetoorder', 'safe'], // to load data posted from WebServices
@@ -349,8 +349,8 @@ class Product2 extends Product {
 				'app\validators\DimensionUnitValidator',
 				'on' => [self::SCENARIO_PRODUCT_DRAFT, self::SCENARIO_PRODUCT_PUBLIC],
 			],
-        ];
-    }
+		];
+	}
 
 	/**
 	 * Prepare the ActiveRecord properties to serialize the objects properly, to retrieve an serialize
@@ -373,17 +373,17 @@ class Product2 extends Product {
 					'deviser_id',
 				];
 				break;
-            case self::SERIALIZE_SCENARIO_PUBLIC:
-                static::$serializeFields = [
-                    'id' => 'short_id',
-                    'deviser' => "deviserPreview",
-                    'name',
-                    'slug',
-                    'description',
-                    'categories',
+			case self::SERIALIZE_SCENARIO_PUBLIC:
+				static::$serializeFields = [
+					'id' => 'short_id',
+					'deviser' => "deviserPreview",
+					'name',
+					'slug',
+					'description',
+					'categories',
 					'media',
 					'faq',
-                    'product_state',
+					'product_state',
 					'enabled',
 					'collections',
 					'madetoorder',
@@ -397,31 +397,31 @@ class Product2 extends Product {
 					'references',
 					'options' => 'productOptions',
 					'url_images' => 'urlImagesLocation',
-                    'position',
-                    'prints',
+					'position',
+					'prints',
+					'sizechart',
 					'price_stock',
-					'tags',
-                ];
-                static::$retrieveExtraFields = [
-                    'deviser_id',
+					'tags'
+				];
+				static::$retrieveExtraFields = [
+					'deviser_id',
 					'options',
 					'sizechart',
+				];
 
-                ];
-
-                static::$translateFields = true;
-                break;
-            case self::SERIALIZE_SCENARIO_OWNER:
-                static::$serializeFields = [
-                    'id' => 'short_id',
-                    'deviser' => "deviserPreview",
-                    'name',
-                    'slug',
-                    'description',
-                    'categories',
+				static::$translateFields = true;
+				break;
+			case self::SERIALIZE_SCENARIO_OWNER:
+				static::$serializeFields = [
+					'id' => 'short_id',
+					'deviser' => "deviserPreview",
+					'name',
+					'slug',
+					'description',
+					'categories',
 					'media',
 					'faq',
-                    'product_state',
+					'product_state',
 					'enabled',
 					'collections',
 					'madetoorder',
@@ -436,18 +436,18 @@ class Product2 extends Product {
 					'options',
 					'sizechart',
 					'url_images' => 'urlImagesLocation',
-                    'position',
-                    'prints',
+					'position',
+					'prints',
 					'price_stock',
 					'tags',
 				];
-                static::$retrieveExtraFields = [
-                    'deviser_id',
+				static::$retrieveExtraFields = [
+					'deviser_id',
 //
-                ];
+				];
 
-                static::$translateFields = false;
-                break;
+				static::$translateFields = false;
+				break;
 			case self::SERIALIZE_SCENARIO_ADMIN:
 				static::$serializeFields = [
 					'id' => 'short_id',
@@ -474,7 +474,7 @@ class Product2 extends Product {
 					'price_stock',
 					'tags',
 					'url_images' => 'urlImagesLocation',
-                    'product_state',
+					'product_state',
 				];
 				static::$translateFields = false;
 				break;
@@ -485,99 +485,99 @@ class Product2 extends Product {
 		}
 	}
 
-    /**
-     * Get one entity serialized
-     *
-     * @param string $id
-     * @return Product2|null
-     * @throws Exception
-     */
-    public static function findOneSerialized($id)
-    {
-        /** @var Product $product */
-        $product = static::find()->select(self::getSelectFields())->where(["short_id" => $id])->one();
+	/**
+	 * Get one entity serialized
+	 *
+	 * @param string $id
+	 * @return Product2|null
+	 * @throws Exception
+	 */
+	public static function findOneSerialized($id)
+	{
+		/** @var Product $product */
+		$product = static::find()->select(self::getSelectFields())->where(["short_id" => $id])->one();
 
-        // if automatic translation is enabled
-        if (static::$translateFields) {
-            Utils::translate($product);
-        }
-        return $product;
-    }
+		// if automatic translation is enabled
+		if (static::$translateFields) {
+			Utils::translate($product);
+		}
+		return $product;
+	}
 
-    /**
-     * Get a collection of entities serialized, according to serialization configuration
-     *
-     * @param array $criteria
-     * @return array
-     * @throws Exception
-     */
-    public static function findSerialized($criteria = [])
-    {
+	/**
+	 * Get a collection of entities serialized, according to serialization configuration
+	 *
+	 * @param array $criteria
+	 * @return array
+	 * @throws Exception
+	 */
+	public static function findSerialized($criteria = [])
+	{
 
-        // Products query
-        $query = new ActiveQuery(static::className());
+		// Products query
+		$query = new ActiveQuery(static::className());
 
-        // Retrieve only fields that gonna be used
-        $query->select(self::getSelectFields());
+		// Retrieve only fields that gonna be used
+		$query->select(self::getSelectFields());
 
-        // if product id is specified
-        if ((array_key_exists("id", $criteria)) && (!empty($criteria["id"]))) {
-            $query->andWhere(["short_id" => $criteria["id"]]);
-        }
+		// if product id is specified
+		if ((array_key_exists("id", $criteria)) && (!empty($criteria["id"]))) {
+			$query->andWhere(["short_id" => $criteria["id"]]);
+		}
 
-        // if deviser id is specified
-        if ((array_key_exists("deviser_id", $criteria)) && (!empty($criteria["deviser_id"]))) {
-            $query->andWhere(["deviser_id" => $criteria["deviser_id"]]);
-        }
+		// if deviser id is specified
+		if ((array_key_exists("deviser_id", $criteria)) && (!empty($criteria["deviser_id"]))) {
+			$query->andWhere(["deviser_id" => $criteria["deviser_id"]]);
+		}
 
-        // if categories are specified
-        if ((array_key_exists("categories", $criteria)) && (!empty($criteria["categories"]))) {
-            if (is_array($criteria["categories"])) {
-                $ids = [];
-                foreach ($criteria["categories"] as $categoryId) {
-                    $category = Category::findOne(["short_id" => $categoryId]);
-                    if ($category) {
-                        $ids = array_merge($ids, $category->getShortIds());
-                    }
-                }
-            } else {
-                $ids = [];
-                $category = Category::findOne(["short_id" => $criteria["categories"]]);
-                if ($category) {
-                    $ids = array_merge($ids, $category->getShortIds());
-                }
-            }
-            $query->andWhere(["categories" => $ids]);
-        }
+		// if categories are specified
+		if ((array_key_exists("categories", $criteria)) && (!empty($criteria["categories"]))) {
+			if (is_array($criteria["categories"])) {
+				$ids = [];
+				foreach ($criteria["categories"] as $categoryId) {
+					$category = Category::findOne(["short_id" => $categoryId]);
+					if ($category) {
+						$ids = array_merge($ids, $category->getShortIds());
+					}
+				}
+			} else {
+				$ids = [];
+				$category = Category::findOne(["short_id" => $criteria["categories"]]);
+				if ($category) {
+					$ids = array_merge($ids, $category->getShortIds());
+				}
+			}
+			$query->andWhere(["categories" => $ids]);
+		}
 
 		// if product_state is specified
 		if ((array_key_exists("product_state", $criteria)) && (!empty($criteria["product_state"]))) {
 			$query->andWhere(["product_state" => $criteria["product_state"]]);
 		}
-        // if name is specified
-        if ((array_key_exists("name", $criteria)) && (!empty($criteria["name"]))) {
+		// if name is specified
+		if ((array_key_exists("name", $criteria)) && (!empty($criteria["name"]))) {
 //			// search the word in all available languages
-            $query->andFilterWhere(Utils::getFilterForTranslatableField("name", $criteria["name"]));
-        }
+			$query->andFilterWhere(Utils::getFilterForTranslatableField("name", $criteria["name"]));
+		}
 
-        // if text is specified
-        if ((array_key_exists("text", $criteria)) && (!empty($criteria["text"]))) {
+		// if text is specified
+		if ((array_key_exists("text", $criteria)) && (!empty($criteria["text"]))) {
 //			// search the word in all available languages
 			$query->andFilterWhere(static::getFilterForText(static::$textFilterAttributes, $criteria["text"]));
-        }
+		}
 
-        // Count how many items are with those conditions, before limit them for pagination
-        static::$countItemsFound = $query->count();
+		// Count how many items are with those conditions, before limit them for pagination
+		static::$countItemsFound = $query->count();
 
-        // limit
-        if ((array_key_exists("limit", $criteria)) && (!empty($criteria["limit"]))) {
-            $query->limit($criteria["limit"]);
-        }
+		// limit
+		if ((array_key_exists("limit", $criteria)) && (!empty($criteria["limit"]))) {
+			$query->limit($criteria["limit"]);
+		}
 
-        // offset for pagination
-        if ((array_key_exists("offset", $criteria)) && (!empty($criteria["offset"]))) {
-            $query->offset($criteria["offset"]);
-        }
+		// offset for pagination
+		if ((array_key_exists("offset", $criteria)) && (!empty($criteria["offset"]))) {
+			$query->offset($criteria["offset"]);
+		}
 
 		if ((array_key_exists("order_by", $criteria)) && (!empty($criteria["order_by"]))) {
 			$query->orderBy($criteria["order_by"]);
@@ -585,20 +585,20 @@ class Product2 extends Product {
 			$query->orderBy("deviser_id, position");
 		}
 
-        $products = $query->all();
+		$products = $query->all();
 
-        // if automatic translation is enabled
-        if (static::$translateFields) {
-            Utils::translate($products);
-        }
-        return $products;
-    }
+		// if automatic translation is enabled
+		if (static::$translateFields) {
+			Utils::translate($products);
+		}
+		return $products;
+	}
 
-    public function deletePhotos() {
-        $product_path = Utils::join_paths(Yii::getAlias("@product"), $this->short_id);
+	public function deletePhotos() {
+		$product_path = Utils::join_paths(Yii::getAlias("@product"), $this->short_id);
 
-        Utils::rmdir($product_path);
-    }
+		Utils::rmdir($product_path);
+	}
 
 	/**
 	 * Get the path to main product image
@@ -881,8 +881,8 @@ class Product2 extends Product {
 		$loaded = parent::load($data, $formName);
 
 		if (array_key_exists('media', $data)) {
-            $this->mediaFiles->load($data, 'media');
-        }
+			$this->mediaFiles->load($data, 'media');
+		}
 
 		if (array_key_exists('preorder', $data)) {
 			$this->preorderInfo->load($data, 'preorder');
@@ -923,24 +923,24 @@ class Product2 extends Product {
 		];
 	}
 
-    /**
-     * Add additional error to make easy show labels in client side
-     */
-    public function afterValidate()
-    {
-        parent::afterValidate();
-        foreach ($this->errors as $attribute => $error) {
-            switch ($attribute) {
-                default:
-                    //TODO: Fix this! Find other way to determine if was a "required" field
-                    if (strpos($error[0], 'cannot be blank') !== false || strpos($error[0], 'no puede estar vacío') !== false) {
-                        $this->addError("required", $attribute);
-                    }
+	/**
+	 * Add additional error to make easy show labels in client side
+	 */
+	public function afterValidate()
+	{
+		parent::afterValidate();
+		foreach ($this->errors as $attribute => $error) {
+			switch ($attribute) {
+				default:
+					//TODO: Fix this! Find other way to determine if was a "required" field
+					if (strpos($error[0], 'cannot be blank') !== false || strpos($error[0], 'no puede estar vacío') !== false) {
+						$this->addError("required", $attribute);
+					}
 					$this->addError("fields", $attribute);
-                    break;
-            }
-        };
-    }
+					break;
+			}
+		};
+	}
 
 	public function getTempUploadedFilesPath()
 	{
@@ -948,24 +948,24 @@ class Product2 extends Product {
 
 	}
 
-    public function getUploadedFilesPath()
-    {
-        return Utils::join_paths(Yii::getAlias("@product"), $this->short_id);
-    }
+	public function getUploadedFilesPath()
+	{
+		return Utils::join_paths(Yii::getAlias("@product"), $this->short_id);
+	}
 
-    /**
-     * Check if Deviser media file is exists
-     *
-     * @param string $filename
-     * @return bool
-     */
-    public function existMediaFile($filename)
-    {
-        if (empty($filename)) { return false; }
+	/**
+	 * Check if Deviser media file is exists
+	 *
+	 * @param string $filename
+	 * @return bool
+	 */
+	public function existMediaFile($filename)
+	{
+		if (empty($filename)) { return false; }
 
-        $filePath = $this->getUploadedFilesPath() . '/' . $filename;
-        return file_exists($filePath);
-    }
+		$filePath = $this->getUploadedFilesPath() . '/' . $filename;
+		return file_exists($filePath);
+	}
 
 	/**
 	 * Moves all temporary uploads to definitive product's path
