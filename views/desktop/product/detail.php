@@ -131,7 +131,7 @@ $videos = $product->getVideos();
 									<div class="form-group">
 										<div class="row-size expand" ng-repeat="option in detailProductCtrl.product.options | orderBy:[detailProductCtrl.selectComparator]">
 											<label class="col-sm-3 control-label product-label"><span class="atr" ng-bind="option.name"></span></label>
-											<div class="col-sm-9" ng-if="option.values.length > 1" ng-cloak>
+											<div class="col-sm-9" ng-if="option.values.length > 1 && option.change_reference" ng-cloak>
 												<div class="row">
 													<div class="col-sm-8">
 														<ol class="nya-bs-select btn-group bootstrap-select form-control product-select" ng-model="detailProductCtrl.option_selected[option.id]" ng-change="detailProductCtrl.parseOptions(option.id, detailProductCtrl.option_selected[option.id])">
@@ -147,8 +147,11 @@ $videos = $product->getVideos();
 													</div>
 												</div>
 											</div>
-											<div class="col-sm-9" ng-if="option.values.length === 1">
-												<div class="atribute-selected"><span ng-bind="option.values[0].text"></span></div>
+											<div class="col-sm-9" ng-if="option.values.length === 1 || !option.change_reference">
+												<div class="atribute-selected" ng-if="option.values.length === 1"><span ng-bind="option.values[0].text"></span></div>
+												<div class="atribute-selected" ng-if="option.values.length > 1" ng-repeat="values in option.values">
+													<span ng-bind="values.text"></span>
+												</div>
 											</div>
 										</div>
 									</div>
