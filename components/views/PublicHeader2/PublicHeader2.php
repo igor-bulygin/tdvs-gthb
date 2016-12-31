@@ -126,22 +126,6 @@ app\components\assets\PublicHeader2Asset::register($this);
 					</li>
 				<?php } else {
 					$person = Yii::$app->user->identity; /* @var \app\models\Person $person */?>
-					<?php if (false) {
-						// temporary links, while we dont have dropdown menu ?>
-						<?php if ($person->isDeviser()) { ?>
-							<li class="log">
-								<a href="<?= Url::to(["deviser/about", "slug" => $person->slug, 'deviser_id' => $person->short_id])?>"> View profile</a>
-							</li>
-						<?php } elseif ($person->isAdmin()) { ?>
-							<li class="log">
-								<a href="#"> Admin</a>
-							</li>
-						<?php } ?>
-						<li class="log">
-							<a href="#" ng-click="publicHeaderCtrl.logout()">Logout</a>
-						</li>
-					<?php } else {
-						// real navigation bar for logged users?>
 						<li class="dropdown log">
 
 							<img class="avatar-logued-user" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getAvatarImage())->resize(25, 25) ?>">
@@ -160,9 +144,6 @@ app\components\assets\PublicHeader2Asset::register($this);
 										</li>
 										<li><a href="<?=Url::to('/admin')?>">Administration</a></li>
 										<li><a href="<?=Url::to('/admin/invitations')?>">Invitations</a></li>
-									    <li class="separation-line"></li>
-										<li><a href="#">Settings</a></li>
-										<li><a href="<?=Url::to('/global/logout')?>">Logout</a></li>
 
 									<?php } elseif ($person->isDeviser()) { ?>
 
@@ -171,9 +152,6 @@ app\components\assets\PublicHeader2Asset::register($this);
 											<img class="avatar-logued-user" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getAvatarImage())->resize(25, 25) ?>">
 										</li>
 										<li><a href="#">Sales</a></li>
-										<li class="separation-line"></li>
-										<li><a href="#">Settings</a></li>
-										<li><a href="<?=Url::to('/global/logout')?>">Logout</a></li>
 
 									<?php } elseif ($person->isClient()) { ?>
 
@@ -183,15 +161,15 @@ app\components\assets\PublicHeader2Asset::register($this);
 										</li>
 										<li><a href="#"><?=$person->personalInfo->getBrandName()?></a></li>
 										<li><a href="#">My orders</a></li>
-										<li class="separation-line"></li>
-										<li><a href="#">Settings</a></li>
-										<li><a href="<?=Url::to('/global/logout')?>">Logout</a></li>
 
 									<?php } ?>
+
+									<li class="separation-line"></li>
+									<li><a href="#">Settings</a></li>
+									<li><a href="#" ng-click="publicHeaderCtrl.logout()">Logout</a></li>
 								</ul>
 							</div>
 						</li>
-					<?php } ?>
 				<?php } ?>
 			</ul>
 		</div><!-- /.navbar-collapse -->
