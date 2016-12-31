@@ -2,23 +2,21 @@
 
 namespace app\controllers;
 
-use app\helpers\CActiveRecord;
-use Yii;
-use yii\web\Response;
+use app\helpers\CController;
 use app\helpers\Utils;
+use app\models\Category;
+use app\models\Country;
+use app\models\Faq;
 use app\models\Person;
 use app\models\Product;
-use app\models\Country;
 use app\models\SizeChart;
-use yii\base\ActionFilter;
-use yii\filters\VerbFilter;
-use yii\filters\ContentNegotiator;
-
 use app\models\Tag;
-use app\models\Category;
-use app\models\Faq;
 use app\models\Term;
-use app\helpers\CController;
+use Yii;
+use yii\base\ActionFilter;
+use yii\filters\ContentNegotiator;
+use yii\filters\VerbFilter;
+use yii\web\Response;
 
 class IsAjaxFilter extends ActionFilter {
 	public function beforeAction($action) {
@@ -27,39 +25,41 @@ class IsAjaxFilter extends ActionFilter {
 }
 
 class ApiController extends CController {
-	public function behaviors() {
-		return [
-			'format' => [
+
+	public function behaviors()
+	{
+		$behaviors = parent::behaviors();
+
+		$behaviors['format'] = [
 				'class' => ContentNegotiator::className(),
 				'formats' => [
-					'application/json' => Response::FORMAT_JSON
+						'application/json' => Response::FORMAT_JSON
 				]
-			],
+		];
 
-			'verbs' => [
+		$behaviors['verbs'] = [
 				'class' => VerbFilter::className(),
 				'actions' => [
-					'categories' => ['get', 'post', 'delete']
+						'categories' => ['get', 'post', 'delete']
 				]
-			],
-
-			'ajax' => [
-				'class' => IsAjaxFilter::className()
-			],
-
-			/*
-			'access' => [
-				'class' => AccessControl::className(),
-				//'only' => ['', ''],
-				'rules' => [
-					[
-						'allow' => true,
-						'roles' => ['?', '@'] //? guest, @ authenticated
-					]
-				]
-			]
-			*/
 		];
+
+		$behaviors['ajax'] = [
+				'class' => IsAjaxFilter::className()
+		];
+
+//		$behaviors['access'] = [
+//				'class' => AccessControl::className(),
+//			//'only' => ['', ''],
+//				'rules' => [
+//						[
+//								'allow' => true,
+//								'roles' => ['?', '@'] //? guest, @ authenticated
+//						]
+//				]
+//		];
+
+		return $behaviors;
 	}
 
 	//$subcategories = Category::findAll(["path" => "/^$current_path/"]);
