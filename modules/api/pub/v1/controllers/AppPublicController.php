@@ -4,7 +4,6 @@ namespace app\modules\api\pub\v1\controllers;
 
 use Yii;
 use yii\filters\AccessControl;
-use yii\filters\auth\HttpBearerAuth;
 use yii\rest\Controller;
 
 class AppPublicController extends Controller
@@ -21,9 +20,9 @@ class AppPublicController extends Controller
 	{
 		$behaviors = parent::behaviors();
 
-		$behaviors['authenticator'] = [
-				'class' => HttpBearerAuth::className(),
-		];
+//		$behaviors['authenticator'] = [
+//				'class' => HttpBearerAuth::className(),
+//		];
 		$behaviors['access'] = [
 				'class' => AccessControl::className(),
 				'rules' => [
@@ -31,7 +30,10 @@ class AppPublicController extends Controller
 								'allow' => true,
 								'roles' => ['?', '@'] //? guest, @ authenticated
 						]
-				]
+				],
+//				'ruleConfig' => [
+//						'class' => CAccessRule::className(),
+//				],
 		];
 
 		return $behaviors;
