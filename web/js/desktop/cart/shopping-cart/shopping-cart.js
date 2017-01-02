@@ -25,6 +25,7 @@
 		controller: controller,
 		controllerAs: 'shoppingCartCtrl',
 		bindings: {
+			state: '<',
 			cart: '<',
 			devisers: '<'
 		}

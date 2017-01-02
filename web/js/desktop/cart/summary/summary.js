@@ -3,6 +3,11 @@
 
 	function controller() {
 		var vm = this;
+		vm.proceedToCheckout = proceedToCheckout;
+
+		function proceedToCheckout() {
+			vm.state.state = 2;
+		}
 
 	}
 
@@ -11,6 +16,7 @@
 		controller: controller,
 		controllerAs: 'summaryCtrl',
 		bindings: {
+			state: '<',
 			cart: '<',
 			devisers: '<'
 		}
