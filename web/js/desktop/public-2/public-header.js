@@ -8,11 +8,11 @@
 		init();
 
 		function init(){
-			vm.logout = new deviserDataService.Logout;
+			vm.session_logout = new deviserDataService.Logout;
 		}
 
-		function logout() {
-			vm.logout.$save().then(function (logoutData) {
+		function logout(){
+			vm.session_logout.$save().then(function (logoutData) {
 				UtilService.removeLocalStorage('access_token');
 				$window.location.href = currentHost();
 			}, function(err) {
