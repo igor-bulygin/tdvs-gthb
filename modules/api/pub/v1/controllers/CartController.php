@@ -95,7 +95,7 @@ class CartController extends AppPublicController
 			}
 			$product = $cart->getPriceStockItem($priceStockId);
 			if (empty($product)) {
-				throw new Exception(sprintf("Price&Stock item with id %s does not exists", $priceStockId));
+				throw new NotFoundHttpException(sprintf("Price&Stock item with id %s does not exists", $priceStockId));
 			}
 
 			if ($product->load(Yii::$app->request->post(), '') && $product->validate()) {
@@ -129,7 +129,7 @@ class CartController extends AppPublicController
 			}
 			$product = $cart->getPriceStockItem($priceStockId);
 			if (empty($product)) {
-				throw new Exception(sprintf("Price&Stock item with id %s does not exists", $priceStockId));
+				throw new NotFoundHttpException(sprintf("Price&Stock item with id %s does not exists", $priceStockId));
 			}
 
 			$cart->deleteProduct($product);
