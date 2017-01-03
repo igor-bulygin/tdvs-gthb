@@ -232,14 +232,27 @@ class ProductController extends CController
 				}
 				$product->setAttribute('name', $name);
 			}
+
+			// fix description field, must be an array
+			if (!empty($product->description) && !is_array($product->description)) {
+				$description = [];
+				foreach (Lang::getAvailableLanguagesDescriptions() as $key => $langName) {
+					$description[$key] = $product->description;
+				}
+				$product->setAttribute('description', $description);
+			}
+
 			// set product state. If it has minimal info, we set the product as public
 			if (empty($product->product_state)) {
-				if (empty($product->categories) || empty($product->deviser_id) || empty($product->name) || empty($product->price_stock) || empty($product->mediaFiles) || empty($product->mediaFiles->photos)) {
-					$product->product_state = Product2::PRODUCT_STATE_DRAFT;
-				} else {
-					$product->product_state = Product2::PRODUCT_STATE_ACTIVE;
-				}
+//				if (empty($product->categories) || empty($product->deviser_id) || empty($product->name) || empty($product->price_stock) || empty($product->mediaFiles) || empty($product->mediaFiles->photos)) {
+//					$product->product_state = Product2::PRODUCT_STATE_DRAFT;
+//				} else {
+//					$product->product_state = Product2::PRODUCT_STATE_ACTIVE;
+//				}
+				// for the moment all products are public
+				$product->product_state = Product2::PRODUCT_STATE_ACTIVE;
 			}
+
 			// available on price_stock
 			$priceStock = $product->price_stock;
 			foreach ($priceStock as $k => $item) {
@@ -250,7 +263,7 @@ class ProductController extends CController
 			$product->setAttribute('price_stock', $priceStock);
 
 			// bespoke default
-			if (empty($product->bespoke)) {
+			if (empty($product->bespoke) || !is_array($product->bespoke)) {
 				$bespoke = ['type' => Bespoke::NO];
 				$product->setAttribute('bespoke', $bespoke);
 			}
@@ -261,7 +274,7 @@ class ProductController extends CController
 			$type = isset($madeToOrder['type']) ? $madeToOrder['type'] : null;
 			if (!empty($value)) {
 				$madeToOrder['type'] = MadeToOrder::DAYS;
-				$madeToOrder['value'] = (int) $value;
+				$madeToOrder['value'] = (int)$value;
 			} else {
 				$madeToOrder['type'] = MadeToOrder::NONE;
 				unset($madeToOrder['value']);
@@ -269,7 +282,8 @@ class ProductController extends CController
 			$product->setAttribute('madetoorder', $madeToOrder);
 
 			// save make other fixes (created_at and updated_at dates, short_ids on price&stock....)
-			$product->save(false);
+			$product->save(false); // false parameter for prevent validation
+
 		}
 		Yii::$app->response->setStatusCode(200); // Success, without body
 	}
