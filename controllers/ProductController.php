@@ -12,6 +12,7 @@ use Yii;
 use yii\filters\AccessControl;
 use yii\mongodb\Collection;
 use yii\web\BadRequestHttpException;
+use yii\web\HttpException;
 
 class ProductController extends CController
 {
@@ -54,7 +55,7 @@ class ProductController extends CController
 				"text" => Yii::$app->request->get("q"), // search in name, description, and more
 				"deviser_id" => Yii::$app->request->get("deviser"),
 				"categories" => Yii::$app->request->get("categories"),
-				"product_state" => null, //TODO Product2::PRODUCT_STATE_ACTIVE,
+				"product_state" => Product2::PRODUCT_STATE_ACTIVE,
 				"limit" => $limit,
 				"offset" => $offset,
 		]);
@@ -97,7 +98,7 @@ class ProductController extends CController
 				"text" => Yii::$app->request->get("q"), // search in name, description, and more
 				"deviser_id" => Yii::$app->request->get("deviser"),
 				"categories" => Yii::$app->request->get("categories"),
-				"product_state" => null, //TODO Product2::PRODUCT_STATE_ACTIVE,
+				"product_state" => Product2::PRODUCT_STATE_ACTIVE,
 				"limit" => $limit,
 				"offset" => $offset,
 		]);
@@ -122,13 +123,17 @@ class ProductController extends CController
 	{
 
 		// get the product
-		$product = Product::findOneSerialized($product_id);
+		$product = Product2::findOneSerialized($product_id);
+
+		if ($product->product_state != Product2::PRODUCT_STATE_ACTIVE) {
+			throw new HttpException(404, 'The requested item could not be found.');
+		}
 
 		// get the deviser
 		$deviser = Person::findOneSerialized($product->deviser_id);
 
 		// get other products of the deviser
-		$deviserProducts = Product::findSerialized(["deviser_id" => $product->deviser_id]);
+		$deviserProducts = Product2::findSerialized(["deviser_id" => $product->deviser_id]);
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("detail", [

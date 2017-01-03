@@ -1011,8 +1011,8 @@ class Product2 extends Product {
 				[
 						'$match' => [
 								"product_state" => [
-										'$ne' => [
-												Product2::PRODUCT_STATE_DRAFT,
+										'$eq' => [
+												Product2::PRODUCT_STATE_ACTIVE,
 										]
 								]
 						]

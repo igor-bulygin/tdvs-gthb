@@ -984,8 +984,8 @@ class Person extends CActiveRecord implements IdentityInterface
 					[
 							'$match' => [
 									"product_state" => [
-											'$ne' => [
-													Product2::PRODUCT_STATE_DRAFT,
+											'$eq' => [
+													Product2::PRODUCT_STATE_ACTIVE,
 											]
 									]
 							]
