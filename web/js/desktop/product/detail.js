@@ -229,7 +229,14 @@
 			}).then(function(savedData) {
 				$window.location.href = currentHost() + "/cart";
 			}, function (err) {
-				//err
+				if(err.status === 404) {
+					cartDataService.Cart.save()
+						.$promise.then(function(cartData) {
+							cart_id = angular.copy(cartData.id);
+							UtilService.setLocalStorage('cart_id', cart_id);
+							saveProduct(cart_id);
+						});
+				}
 			});
 		}
 

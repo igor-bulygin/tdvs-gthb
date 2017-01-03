@@ -24,6 +24,7 @@
 					vm.devisers = cartService.parseDevisersFromProducts(vm.cart);
 				}, function(err) {
 					//log err
+					console.log(err);
 				});
 			}
 		}
