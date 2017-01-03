@@ -4,7 +4,7 @@
 	function controller(productDataService, tagDataService, cartDataService, $location, toastr, UtilService, $window) {
 		var vm = this;
 		vm.quantity = 1;
-		vm.optionsSelected = {};
+		vm.option_selected = {};
 		vm.parseOptions = parseOptions;
 		vm.changeQuantity = changeQuantity;
 		vm.changeOriginalArtwork = changeOriginalArtwork;
@@ -38,7 +38,14 @@
 				vm.total_stock = getTotalStock(vm.product.price_stock);
 				vm.stock = vm.total_stock;
 				vm.price = vm.minimum_price;
-				getReferencesFromOptions();
+				//getReferencesFromOptions();
+				//parse options with only one value
+				vm.product.options.forEach(function(option){
+					if(option.values.length === 1) {
+						vm.option_selected[option.id] = option.value;
+						parseOptions(option.id, option.value);
+					}
+				})
 			}, function (err) {
 				toastr.error(err);
 			})
