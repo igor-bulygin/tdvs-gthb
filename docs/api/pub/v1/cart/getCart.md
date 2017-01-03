@@ -21,7 +21,23 @@ Example about how to call to Web Service to get tthe cart
   "id": "4cf9b192",
   "order_state": "order_state_cart",
   "client_id": "c2a37cs",
-  "client_info": [],
+  "client_info": {
+    "first_name": "Jose",
+    "last_name": "Vázquez",
+    "email": "jose.vazquez.viader@gmail.com",
+    "phone1": {
+      "prefix": "+34",
+      "number": "981981981"
+    },
+    "phone2": {
+      "prefix": "+34",
+      "number": "900900900"
+    },
+    "country": "ES",
+    "city": "A Coruña",
+    "address": "Real 1",
+    "zipcode": "15001"
+  },
   "products": [
     {
       "product_id": "d8823222",
