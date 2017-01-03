@@ -25,3 +25,9 @@ Example about how to call to Web Service to create a new cart
 ```
 
 
+**Response body**:
+```
+cart object (view getCart.md)
+```
+
+

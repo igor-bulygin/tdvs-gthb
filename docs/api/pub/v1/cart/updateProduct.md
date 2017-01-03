@@ -22,4 +22,9 @@ Example about how to call to Web Service to update a product to the cart
 * `quantity`: Quantity of items (Required)
 
 
+**Response body**:
+```
+cart object (view getCart.md)
+```
+
 
