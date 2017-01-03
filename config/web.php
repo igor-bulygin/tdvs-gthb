@@ -278,6 +278,7 @@ $config = [
 				'POST api3/pub/v1/cart/<cartId:[^/.]*?>/product' => 'api3/pub/v1/cart/add-product',
 				'PUT api3/pub/v1/cart/<cartId:[^/.]*?>/product/<priceStockId:[^/.]*?>' => 'api3/pub/v1/cart/update-product',
 				'DELETE api3/pub/v1/cart/<cartId:[^/.]*?>/product/<priceStockId:[^/.]*?>' => 'api3/pub/v1/cart/delete-product',
+				'POST api3/pub/v1/cart/<cartId:[^/.]*?>/clientInfo' => 'api3/pub/v1/cart/client-info',
 
 				// API routing (private)
 				'GET api3/priv/v1/profile/deviser' => 'api3/priv/v1/deviser/view',

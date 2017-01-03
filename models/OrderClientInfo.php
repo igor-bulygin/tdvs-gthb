@@ -1,21 +1,43 @@
 <?php
 namespace app\models;
 
+use app\helpers\CActiveRecord;
 use Yii;
 use yii\base\Model;
 
 /**
  * @property string $first_name
  * @property string $last_name
+ * @property string $email
+ * @property array $phone1
+ * @property array $phone2
+ * @property string $country
+ * @property string $city
+ * @property string $address
+ * @property string $zipcode
  */
-class OrderClientInfo extends Model
+class OrderClientInfo extends CActiveRecord
 {
 	/** @var  Model */
 	protected $model;
 
 	public function getParentAttribute()
 	{
-		return "order";
+		return "client_info";
+	}
+
+	public function attributes() {
+		return [
+			'first_name',
+			'last_name',
+			'email',
+			'phone1',
+			'phone2',
+			'country',
+			'city',
+			'address',
+			'zipcode',
+		];
 	}
 
 	/**
@@ -44,8 +66,7 @@ class OrderClientInfo extends Model
 	public function rules()
 	{
 		return [
-//				[['question', 'answer'], 'required', 'on' => [Person::SCENARIO_DEVISER_UPDATE_PROFILE, Product2::SCENARIO_PRODUCT_PUBLIC]],
-//				[['question', 'answer'], 'app\validators\TranslatableValidator', 'on' => [Person::SCENARIO_DEVISER_CREATE_DRAFT, Person::SCENARIO_DEVISER_UPDATE_DRAFT, Person::SCENARIO_DEVISER_PUBLISH_PROFILE, Person::SCENARIO_DEVISER_UPDATE_PROFILE, Product2::SCENARIO_PRODUCT_DRAFT, Product2::SCENARIO_PRODUCT_PUBLIC ]],
+			[$this->attributes(), 'safe']
 		];
 	}
 

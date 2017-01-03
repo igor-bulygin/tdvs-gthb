@@ -3,6 +3,7 @@
 namespace app\modules\api\pub\v1\controllers;
 
 use app\models\Order;
+use app\models\OrderClientInfo;
 use app\models\OrderProduct;
 use Yii;
 use yii\base\Exception;
@@ -131,14 +132,35 @@ class CartController extends AppPublicController
 		}
 	}
 
-	protected function convertToObject($array) {
-		$object = new \stdClass();
-		foreach ($array as $key => $value) {
-			if (is_array($value)) {
-				$value = $this->convertToObject($value);
+
+	public function actionClientInfo($cartId)
+	{
+		try {
+
+			Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_PUBLIC);
+			$cart = Order::findOneSerialized($cartId); /* @var Order $cart */
+
+			if (empty($cart)) {
+				throw new Exception(sprintf("Cart with id %s does not exists", $cartId));
 			}
-			$object->$key = $value;
+
+			$clientInfo = new OrderClientInfo();
+			$clientInfo->setModel($cart);
+
+			if ($clientInfo->load(Yii::$app->request->post(), '') && $clientInfo->validate()) {
+
+				$cart->clientInfoMapping = $clientInfo;
+				$cart->save();
+
+				Yii::$app->response->setStatusCode(200); // Created
+				return $cart;
+			} else {
+				Yii::$app->response->setStatusCode(400); // Bad Request
+				return ["errors" => $clientInfo->errors];
+			}
+
+		} catch (Exception $e) {
+			throw new BadRequestHttpException($e->getMessage());
 		}
-		return $object;
 	}
 }
