@@ -5,28 +5,28 @@
 			<div class="form-group">
 				<label for="first_name" class="col-md-3">First name</label>
 				<div class="col-md-9">
-					<input type="text" ng-model="personalInfoCtrl.user.first_name" class="form-control">
+					<input type="text" ng-model="personalInfoCtrl.user.first_name" class="form-control" required>
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="last_name" class="col-md-3">Last name</label>
 				<div class="col-md-9">
-					<input type="text" ng-model="personalInfoCtrl.user.last_name" class="form-control">
+					<input type="text" ng-model="personalInfoCtrl.user.last_name" class="form-control" required>
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="email" class="col-md-3">E-mail</label>
 				<div class="col-md-9">
-					<input type="email" ng-model="personalInfoCtrl.user.email" class="form-control">
+					<input type="email" ng-model="personalInfoCtrl.user.email" class="form-control" required>
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="phone" class="col-md-3">Phone</label>
 				<div class="col-md-3">
-					<input type="text" ng-model="personalInfoCtrl.user.phone1.prefix" class="form-control">
+					<input type="text" ng-model="personalInfoCtrl.user.phone1.prefix" class="form-control" required>
 				</div>
 				<div class="col-md-6">
-					<input type="text" ng-model="personalInfoCtrl.user.phone1.number" class="form-control"> <!-- include phone pattern !-->
+					<input type="text" ng-model="personalInfoCtrl.user.phone1.number" class="form-control" required> <!-- include phone pattern !-->
 				</div>
 			</div>
 			<div class="form-group">
@@ -54,21 +54,24 @@
 		<div class="form-group">
 			<label for="city" class="col-md-3">City</label>
 			<div class="col-md-9">
-				<input type="text" ng-model="personalInfoCtrl.user.city" class="form-control">
+				<input type="text" ng-model="personalInfoCtrl.user.city" class="form-control" required>
 			</div>
 		</div>
 		<div class="form-group">
 			<label for="address" class="col-md-3">Address</label>
 			<div class="col-md-9">
-				<input type="text" ng-model="personalInfoCtrl.user.address" class="form-control">
+				<input type="text" ng-model="personalInfoCtrl.user.address" class="form-control" required>
 			</div>
 		</div>
 		<div class="form-group">
 			<label for="zip_code" class="col-md-3">ZIP Code</label>
 			<div class="col-md-4">
-				<input type="text" ng-model="personalInfoCtrl.user.zip_code" class="form-control">
+				<input type="text" ng-model="personalInfoCtrl.user.zipcode" class="form-control" required>
 			</div>
 		</div>
 	</div>
 	</form>
+	<div class="col-md-12 text-center">
+		<button class="btn btn-green" ng-click="personalInfoCtrl.save(personalInfoCtrl.form)">Continue to shipping methods</button>
+	</div>
 </div>
