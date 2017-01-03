@@ -8,6 +8,8 @@ use app\models\OrderProduct;
 use Yii;
 use yii\base\Exception;
 use yii\web\BadRequestHttpException;
+use yii\web\HttpException;
+use yii\web\NotFoundHttpException;
 
 class CartController extends AppPublicController
 {
@@ -26,6 +28,8 @@ class CartController extends AppPublicController
 			Yii::$app->response->setStatusCode(201); // Created
 			return $cart;
 
+		} catch (HttpException $e) {
+			throw $e;
 		} catch (Exception $e) {
 			throw new BadRequestHttpException($e->getMessage());
 		}
@@ -50,11 +54,11 @@ class CartController extends AppPublicController
 		try {
 
 			Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_PUBLIC);
-			$cart = Order::findOneSerialized($cartId); /* @var Order $cart */
+			$cart = Order::findOneSerialized($cartId);
+			/* @var Order $cart */
 
 			if (empty($cart)) {
-				Yii::$app->response->setStatusCode(404); // Not found
-				return ["invalid_cart_id"];
+				throw new NotFoundHttpException(sprintf("Cart with id %s does not exists", $cartId));
 			}
 			$product = new OrderProduct();
 			$product->setModel($cart);
@@ -71,6 +75,8 @@ class CartController extends AppPublicController
 				return ["errors" => $product->errors];
 			}
 
+		} catch (HttpException $e) {
+			throw $e;
 		} catch (Exception $e) {
 			throw new BadRequestHttpException($e->getMessage());
 		}
@@ -82,10 +88,10 @@ class CartController extends AppPublicController
 		try {
 
 			Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_PUBLIC);
-			$cart = Order::findOneSerialized($cartId); /* @var Order $cart */
+			$cart = Order::findOneSerialized($cartId);
+			/* @var Order $cart */
 			if (empty($cart)) {
-				Yii::$app->response->setStatusCode(404); // Not found
-				return ["invalid_cart_id"];
+				throw new NotFoundHttpException(sprintf("Cart with id %s does not exists", $cartId));
 			}
 			$product = $cart->getPriceStockItem($priceStockId);
 			if (empty($product)) {
@@ -104,6 +110,8 @@ class CartController extends AppPublicController
 				return ["errors" => $product->errors];
 			}
 
+		} catch (HttpException $e) {
+			throw $e;
 		} catch (Exception $e) {
 			throw new BadRequestHttpException($e->getMessage());
 		}
@@ -114,10 +122,10 @@ class CartController extends AppPublicController
 	{
 		try {
 			Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_PUBLIC);
-			$cart = Order::findOneSerialized($cartId); /* @var Order $cart */
+			$cart = Order::findOneSerialized($cartId);
+			/* @var Order $cart */
 			if (empty($cart)) {
-				Yii::$app->response->setStatusCode(404); // Not found
-				return ["invalid_cart_id"];
+				throw new NotFoundHttpException(sprintf("Cart with id %s does not exists", $cartId));
 			}
 			$product = $cart->getPriceStockItem($priceStockId);
 			if (empty($product)) {
@@ -130,6 +138,9 @@ class CartController extends AppPublicController
 			Yii::$app->response->setStatusCode(200); // Ok
 
 			return $cart;
+
+		} catch (HttpException $e) {
+			throw $e;
 		} catch (Exception $e) {
 			throw new BadRequestHttpException($e->getMessage());
 		}
@@ -141,12 +152,11 @@ class CartController extends AppPublicController
 		try {
 
 			Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_PUBLIC);
-			$cart = Order::findOneSerialized($cartId); /* @var Order $cart */
+			$cart = Order::findOneSerialized($cartId);
+			/* @var Order $cart */
 
 			if (empty($cart)) {
-				Yii::$app->response->setStatusCode(404); // Not found
-				return ["invalid_cart_id"];
-//				throw new Exception(sprintf("Cart with id %s does not exists", $cartId));
+				throw new NotFoundHttpException(sprintf("Cart with id %s does not exists", $cartId));
 			}
 
 			$clientInfo = new OrderClientInfo();
@@ -164,6 +174,8 @@ class CartController extends AppPublicController
 				return ["errors" => $clientInfo->errors];
 			}
 
+		} catch (HttpException $e) {
+			throw $e;
 		} catch (Exception $e) {
 			throw new BadRequestHttpException($e->getMessage());
 		}
