@@ -23,19 +23,19 @@
 			<div class="form-group">
 				<label for="phone" class="col-md-3">Phone</label>
 				<div class="col-md-3">
-					<input type="text" ng-model="personalInfoCtrl.user.prefix_phone" class="form-control">
+					<input type="text" ng-model="personalInfoCtrl.user.phone1.prefix" class="form-control">
 				</div>
 				<div class="col-md-6">
-					<input type="text" ng-model="personalInfoCtrl.user.phone" class="form-control"> <!-- include phone pattern !-->
+					<input type="text" ng-model="personalInfoCtrl.user.phone1.number" class="form-control"> <!-- include phone pattern !-->
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="phone_2" class="col-md-3">Phone 2</label>
 				<div class="col-md-3">
-					<input type="text" ng-model="personalInfoCtrl.user.prefix_phone_2" class="form-control">
+					<input type="text" ng-model="personalInfoCtrl.user.phone2.prefix" class="form-control">
 				</div>
 				<div class="col-md-6">
-					<input type="text" ng-model="personalInfoCtrl.user.phone_2" class="form-control"> <!-- include phone pattern !-->
+					<input type="text" ng-model="personalInfoCtrl.user.phone2.number" class="form-control"> <!-- include phone pattern !-->
 				</div>
 			</div>
 	</div>
@@ -44,7 +44,11 @@
 		<div class="form-group">
 			<label for="country" class="col-md-3">Country</label>
 			<div class="col-md-9">
-				
+				<ol class="nya-bs-select" ng-model="personalInfoCtrl.user.country">
+					<li nya-bs-option="country in personalInfoCtrl.countries" data-value="country.id">
+						<a href=""><span ng-bind="country.country_name"></span></a>
+					</li>
+				</ol>
 			</div>
 		</div>
 		<div class="form-group">
