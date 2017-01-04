@@ -312,6 +312,9 @@ ul {
 .no-mar {
   margin: 0 !important; }
 
+.no-pad {
+  padding: 0 !important; }
+
 /* Dont display dropable zone on dragg and drop */
 .dndDraggingSource {
   display: none; }
@@ -4434,6 +4437,47 @@ input:checked + .slider:before {
     cursor: pointer; }
     .success-bar span i {
       font-size: 21px; }
+
+.cart-top-bar {
+  background-color: #bfbfbf;
+  height: 31px; }
+
+.continue-shopping-btn {
+  background-color: #ffffff;
+  color: #9a9a9a;
+  border-radius: 8px 8px 8px 8px !important;
+  -webkit-border-radius: 8px 8px 8px 8px !important;
+  -moz-border-radius: 8px 8px 8px 8px !important;
+  display: block;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 11px;
+  width: 133px;
+  height: 21px;
+  margin: 4px 0 0 0;
+  padding: 5px 0 0 0;
+  text-align: center;
+  font-family: "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  .continue-shopping-btn:hover {
+    background-color: #f3f3f3;
+    color: #484848; }
+
+.shopping-cart-wrapper {
+  background-color: #ffffff;
+  width: 100%;
+  float: left; }
+
+.shopping-cart-title {
+  text-transform: uppercase;
+  font-family: "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  border-bottom: 1px solid #9a9a9a;
+  padding: 15px 0;
+  margin: 0 15px 15px;
+  display: block; }
+
+.summary-cart-wrapper {
+  padding: 0 15px; }
 
 footer {
   width: 100%;

@@ -1,5 +1,5 @@
-<h5>Cart summary</h5>
-<br>
+<span class="shopping-cart-title">Cart summary</span>
+
 <div ng-if="summaryCtrl.state.state === 2">
 	<div ng-repeat="deviser in summaryCtrl.devisers">
 		<p><strong><span ng-bind="deviser.deviser_name"></span></strong></p>
@@ -12,9 +12,9 @@
 		</div>
 	</div>
 </div>
-<div>
-	<p><strong><span>Subtotal</span></strong><span class="pull-right">€<span ng-bind="summaryCtrl.cart.subtotal"></span></span></p>
+<div class="summary-cart-wrapper">
+	<p><span class="bold">Subtotal</span><span class="pull-right">€<span ng-bind="summaryCtrl.cart.subtotal"></span></span></p>
 </div>
-<div ng-if="summaryCtrl.state.state === 1">
-	<button class="btn btn-green col-md-12" ng-click="summaryCtrl.proceedToCheckout()">Proceed to checkout</button>
+<div class="summary-cart-wrapper" ng-if="summaryCtrl.state.state === 1">
+	<button class="btn btn-green col-md-12 mb-20" ng-click="summaryCtrl.proceedToCheckout()">Proceed to checkout</button>
 </div>
