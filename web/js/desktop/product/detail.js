@@ -42,8 +42,8 @@
 				//parse options with only one value
 				vm.product.options.forEach(function(option){
 					if(option.values.length === 1) {
-						vm.option_selected[option.id] = option.value;
-						parseOptions(option.id, option.value);
+						vm.option_selected[option.id] = option.values[0].value;
+						parseOptions(option.id, option.values[0].value);
 					}
 				})
 			}, function (err) {
