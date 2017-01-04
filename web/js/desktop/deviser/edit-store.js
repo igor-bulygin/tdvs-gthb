@@ -30,7 +30,7 @@
 						data["categories[]"].push(vm.category);
 				}
 			}
-			productDataService.Product.get(data).$promise.then(function (dataProducts) {
+			productDataService.ProductPriv.get(data).$promise.then(function (dataProducts) {
 				vm.products = dataProducts.items;
 				vm.products.forEach(function(element) {
 					setMinimumPrice(element);

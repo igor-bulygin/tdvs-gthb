@@ -66,7 +66,7 @@
 			if (key.length < 4)
 				vm.product_min_length = true;
 			else {
-				productDataService.Product.get({
+				productDataService.ProductPriv.get({
 					name: key
 				}).$promise.then(function (dataProducts) {
 					if (dataProducts.items.length === 0)
