@@ -3,7 +3,7 @@
 Example about how to call to Web Service to get a public list of 
 Products
 
-**URL**: `/api/pub/v1/products`
+**URL**: `/api/priv/v1/products`
 
 **Method**: `GET`
 
