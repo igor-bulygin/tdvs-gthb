@@ -15,5 +15,6 @@ class CheckoutAsset extends AssetBundle {
 	];
 	public $depends = [
 		'app\assets\desktop\cart\CartAsset',
+		'app\assets\libs\nyaBootstrapSelectAsset',
 	];
 }

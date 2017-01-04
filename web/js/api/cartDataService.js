@@ -8,6 +8,7 @@
 				'method': "PUT"
 			}
 		});
+		this.CartClientInfo = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'cart/:id/clientInfo');
 	}
 
 	angular

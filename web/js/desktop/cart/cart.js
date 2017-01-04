@@ -8,6 +8,6 @@
 	}
 
 	angular
-		.module('todevise', ['api', 'util', 'header'])
+		.module('todevise', ['api', 'util', 'header', 'nya.bootstrap.select'])
 
 }());
