@@ -1,35 +1,35 @@
 <div class="shopping-cart-wrapper">
-	<span class="shopping-cart-title">Your shopping cart</span>
-	<table class="table" ng-repeat="deviser in shoppingCartCtrl.devisers">
+	<span class="shopping-cart-title no-mar">Your shopping cart</span>
+	<table class="table checkout-table" ng-repeat="deviser in shoppingCartCtrl.devisers">
 		<thead>
 			<tr>
-				<td>Deviser</td>
-				<td><strong><span ng-bind="deviser.deviser_name"></span></strong></td>
+				<td class="deviser"><span class="title-checkout">Deviser</span></td>
+				<td class="deviser-name"><span class="deviser-name" ng-bind="deviser.deviser_name"></span></td>
 				<td></td>
-				<td>Quantity</td>
-				<td>Subtotal</td>
+				<td class="quantity"><span class="title-checkout deviser">Quantity</span></td>
+				<td class="subtotal"><span class="title-checkout deviser">Subtotal</span></td>
 			</tr>
 		</thead>
 		<tbody>
 			<tr ng-repeat="product in shoppingCartCtrl.cart.products | filter:{deviser_id: deviser.deviser_id}">
-				<td></td>
-				<td><img ng-src="{{product.product_photo}}" ng-alt="product.product_name" ng-title="product.product_name" style="max-height: 80px;"></td>
+				<td class="deviser"></td>
+				<td class="deviser-name"><img ng-src="{{product.product_photo}}" ng-alt="product.product_name" ng-title="product.product_name" style="max-height: 80px;"></td>
 				<td>
-					<p><strong><span ng-bind="(product.product_name | uppercase)"></span></strong></p>
+					<p><span class="product-name" ng-bind="(product.product_name | uppercase)"></span></p>
 					<div ng-repeat="tag in product.tags">
-						<span ng-bind="tag.name"></span>&nbsp;
+						<span class="tag-name" ng-bind="tag.name"></span>&nbsp;
 							<span ng-repeat="value in tag.values track by $index">
 								<span ng-if="!shoppingCartCtrl.isObject(value)">
 									<span ng-if="$index>0">/&nbsp;</span><span ng-bind="(value | capitalize)"></span>&nbsp;</span>
 								</span>
 					</div>
 				</td>
-				<td>
-					<p ng-bind="product.quantity"></p>
+				<td class="quantity">
+					<span class="quntity-number" ng-bind="product.quantity"></span>
 				</td>
-				<td>
-					<p>€<span ng-bind="product.price"></span></p>
-					<p><a href="#" ng-click="shoppingCartCtrl.deleteItem(product.price_stock_id)">&times; Delete</a></p>
+				<td class="subtotal">
+					<span class="subtotal-amount">€<span ng-bind="product.price"></span></span>
+					<span class="subtotal-delete"><a href="#" ng-click="shoppingCartCtrl.deleteItem(product.price_stock_id)">&times; Delete</a></span>
 				</td>
 			</tr>
 		</tbody>

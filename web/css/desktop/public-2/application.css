@@ -4465,7 +4465,8 @@ input:checked + .slider:before {
 .shopping-cart-wrapper {
   background-color: #ffffff;
   width: 100%;
-  float: left; }
+  float: left;
+  padding: 0 15px; }
 
 .shopping-cart-title {
   text-transform: uppercase;
@@ -4478,6 +4479,45 @@ input:checked + .slider:before {
 
 .summary-cart-wrapper {
   padding: 0 15px; }
+
+.subtotal-amount {
+  letter-spacing: 0.5px;
+  font-weight: bold;
+  color: #7AB83A;
+  padding: 0 0 0 3px; }
+
+.checkout-table td {
+  padding: 10px 0 !important; }
+  .checkout-table td.deviser {
+    width: 60px; }
+  .checkout-table td.deviser-name {
+    width: 120px; }
+  .checkout-table td.quantity {
+    width: 80px; }
+  .checkout-table td.subtotal {
+    width: 60px; }
+  .checkout-table td .product-name {
+    font-family: "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  .checkout-table td .quntity-number {
+    text-align: center;
+    width: 60px;
+    display: block; }
+  .checkout-table td .subtotal-delete {
+    display: block;
+    font-family: "Univers Condensed Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+    font-size: 10px; }
+    .checkout-table td .subtotal-delete a {
+      color: #9a9a9a !important; }
+.checkout-table .title-checkout {
+  font-family: "Univers Condensed Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #9a9a9a;
+  text-transform: uppercase; }
+.checkout-table .deviser-name {
+  text-align: left;
+  font-family: "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+.checkout-table .tag-name {
+  color: #9a9a9a; }
 
 footer {
   width: 100%;
