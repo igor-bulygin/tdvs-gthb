@@ -4,6 +4,7 @@
 	function controller(locationDataService, cartDataService, UtilService) {
 		var vm = this;
 		vm.user = new cartDataService.CartClientInfo;
+		vm.has_error = UtilService.has_error;
 		vm.save = save;
 
 		init();
