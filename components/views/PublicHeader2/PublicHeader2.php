@@ -165,7 +165,7 @@ app\components\assets\PublicHeader2Asset::register($this);
 									<?php } ?>
 
 									<li class="separation-line"></li>
-									<li><a href="#">Settings</a></li>
+									<li><a href="<?= Url::to(["settings/index", "slug" => $person->slug, 'person_id' => $person->short_id])?>">Settings</a></li>
 									<li><a href="#" ng-click="publicHeaderCtrl.logout()">Logout</a></li>
 								</ul>
 							</div>

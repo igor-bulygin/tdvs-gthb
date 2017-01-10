@@ -178,6 +178,10 @@ $config = [
 				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/video/edit' => 'deviser/videos-edit',
 				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/faq/edit' => 'deviser/faq-edit',
 
+				//Settings
+				'/settings/<slug:[^/.]*?>/<person_id:[^/.]*?>' => 'settings/index',
+				'/settings/<slug:[^/.]*?>/<person_id:[^/.]*?>/billing' => 'settings/billing',
+
 				//Links for contact
 				'login' => 'site/login',
 

@@ -23,7 +23,9 @@ class DeviserController extends CController
 		return [
 				'access' => [
 						'class' => AccessControl::className(),
-						'only' => ['about-edit', 'delete-product-photo', 'faq-edit', 'press-edit', 'store-edit', 'upload-header-photo', 'upload-product-photo', 'upload-profile-photo', 'videos-edit'],
+						'only' => [
+								'about-edit', 'delete-product-photo', 'faq-edit', 'press-edit', 'store-edit', 'upload-header-photo', 'upload-product-photo', 'upload-profile-photo', 'videos-edit',
+						],
 						'rules' => [
 								[
 										'allow' => true,
