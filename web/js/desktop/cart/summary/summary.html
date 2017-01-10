@@ -1,8 +1,8 @@
 <span class="shopping-cart-title">Cart summary</span>
 
-<div ng-if="summaryCtrl.state.state === 2">
+<div class="summary-cart-wrapper" ng-if="summaryCtrl.state.state === 2">
 	<div ng-repeat="deviser in summaryCtrl.devisers">
-		<p><strong><span ng-bind="deviser.deviser_name"></span></strong></p>
+		<span span class="deviser-name" ng-bind="deviser.deviser_name"></span>
 		<div ng-repeat="product in summaryCtrl.cart.products | filter: {deviser_id: deviser.deviser_id}">
 			<div>
 				<p>

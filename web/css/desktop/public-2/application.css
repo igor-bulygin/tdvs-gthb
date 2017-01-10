@@ -4534,6 +4534,10 @@ input:checked + .slider:before {
   float: left;
   background-color: #ffffff;
   padding: 0 0 20px 0; }
+  .personal-info-wrapper input, .personal-info-wrapper button {
+    border-radius: 90px 90px 90px 90px !important;
+    -webkit-border-radius: 90px 90px 90px 90px !important;
+    -moz-border-radius: 90px 90px 90px 90px !important; }
 
 .shopping-cart-section-header {
   text-transform: uppercase;
@@ -4543,6 +4547,13 @@ input:checked + .slider:before {
   margin: 0 0 15px;
   display: block;
   background-color: #e9e9e9; }
+
+.checkout-sidebar {
+  background-color: #f4f4f4; }
+
+.deviser-name {
+  text-align: left;
+  font-family: "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif; }
 
 footer {
   width: 100%;
