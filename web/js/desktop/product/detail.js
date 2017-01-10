@@ -22,7 +22,7 @@
 
 		init();
 
-		function getProductId() {			
+		function getProductId() {
 			var url = $location.absUrl().split("#")[0].split("/");
 			vm.product_id = url[url.length - 1];
 		}

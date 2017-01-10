@@ -1,9 +1,9 @@
 <?php
-use app\assets\desktop\pub\PublicCommonAsset;
+use app\assets\desktop\settings\BillingAsset;
 use app\components\SettingsHeader;
 use app\models\Person;
 
-PublicCommonAsset::register($this);
+BillingAsset::register($this);
 
 /** @var Person $person */
 
@@ -15,4 +15,8 @@ $this->params['settings_menu_active_option'] = 'billing';
 
 <?= SettingsHeader::widget() ?>
 
-Billing & Payments
+<div ng-controller="billingCtrl as billingCtrl" class="personal-info-wrapper"> <!-- please change class, is not semantic -->
+	<h1>Addresses</h1>
+	<h1>Bank Information</h1>
+	<h1>Payments</h1>
+</div>
