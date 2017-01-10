@@ -13,9 +13,13 @@
 		<tbody>
 			<tr ng-repeat="product in shoppingCartCtrl.cart.products | filter:{deviser_id: deviser.deviser_id}">
 				<td class="deviser"></td>
-				<td class="deviser-name"><img ng-src="{{product.product_photo}}" ng-alt="product.product_name" ng-title="product.product_name" style="max-height: 80px;"></td>
+				<td class="deviser-name">
+					<div class="img-checkout-wrapper">
+						<img ng-src="{{product.product_photo}}" ng-alt="product.product_name" ng-title="product.product_name">
+					</div>
+				</td>
 				<td>
-					<p><span class="product-name" ng-bind="(product.product_name | uppercase)"></span></p>
+					<p><span class="product-name" ng-bind="(product.product_name)"></span></p>
 					<div ng-repeat="tag in product.tags">
 						<span class="tag-name" ng-bind="tag.name"></span>&nbsp;
 							<span ng-repeat="value in tag.values track by $index">

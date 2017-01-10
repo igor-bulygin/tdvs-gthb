@@ -25,7 +25,7 @@
 	background-color: $white;
 	width: 100%;
     float: left;
-	padding: 0 15px;
+	padding: 0 15px 80px;
 }
 .shopping-cart-title{
 	text-transform: uppercase;
@@ -90,4 +90,30 @@
 	.tag-name{
 		color: $dark_grey;
 	}
+}
+.img-checkout-wrapper{
+	width:82px; 
+	height:70px;
+	overflow: hidden;
+	border: solid 1px #d7d7d7;
+	img{
+		max-height: 70px;
+		margin: 0 auto;
+    	display: block;
+	}
+}
+.personal-info-wrapper{
+	width: 100%;
+	float: left;
+	background-color: $white;
+	padding: 0 0 20px 0;
+}
+.shopping-cart-section-header{
+	text-transform: uppercase;
+	font-family: $font-family--bold;
+	font-size: 14px;
+	padding: 15px 0;
+    margin: 0 0 15px;
+    display: block;
+	background-color: #e9e9e9;
 }
