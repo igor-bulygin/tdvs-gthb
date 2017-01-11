@@ -10,6 +10,10 @@ class BillingAsset extends AssetBundle {
 	];
 	public $js = [
 		'js/desktop/settings/billing/billing.js',
+		'js/desktop/settings/billing/canada/canada.js',
+		'js/desktop/settings/billing/usa/usa.js',
+		'js/desktop/settings/billing/newZealand/newZealand.js',
+		'js/desktop/settings/billing/other/otherBankInformation.js'
 	];
 	public $depends = [
 		'app\assets\desktop\settings\IndexAsset',

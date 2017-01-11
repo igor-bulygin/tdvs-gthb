@@ -11,6 +11,7 @@ class IndexAsset extends AssetBundle {
 	];
 	public $depends = [
 		'app\assets\libs\angularAsset',
-		'app\assets\desktop\pub\PublicCommonAsset'
+		'app\assets\desktop\pub\PublicCommonAsset',
+		'app\assets\libs\nyaBootstrapSelectAsset',
 	];
 }
