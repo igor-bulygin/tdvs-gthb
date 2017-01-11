@@ -15,74 +15,82 @@ $this->params['settings_menu_active_option'] = 'billing';
 
 <?= SettingsHeader::widget() ?>
 
-<div ng-controller="billingCtrl as billingCtrl" class="personal-info-wrapper container"> <!-- please change this class, is not semantic -->
-	<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-		<div class="panel panel-default">
-			<div class="panel-heading" role="tab" id="addressesHeading">
-				<h1 class="panel-title">
-					<a role="button" data-toggle="collapse" data-parent="#accordion" href="#addressesCollapse" aria-expanded="true" aria-controls="addressesCollapse">
-						Addresses
-					</a>
-				</h1>
-			</div>
-			<div id="addressesCollapse" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="addressesHeading">
-				<div class="panel-body">
-					<form name="billingCtrl.addressesForm" class="form-horizontal">
-						<div class="form-group">
-							<label for="city" class="col-md-1">City</label>
-							<div class="col-md-4">
-								<input type="text" name="city" class="form-control" ng-model="billingCtrl.addresses.city">
+<div ng-controller="billingCtrl as billingCtrl" class="personal-info-wrapper"> <!-- please change this class, is not semantic -->
+	<div class="container">
+		<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+			<!-- <div class="panel panel-default">
+				<div class="panel-heading" role="tab" id="addressesHeading">
+					<h1 class="panel-title">
+						<a role="button" data-toggle="collapse" data-parent="#accordion" href="#addressesCollapse" aria-expanded="true" aria-controls="addressesCollapse">
+							Addresses
+						</a>
+					</h1>
+				</div>
+				<div id="addressesCollapse" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="addressesHeading">
+					<div class="panel-body">
+						<form name="billingCtrl.addressesForm" class="form-horizontal">
+							<div class="form-group">
+								<label for="city" class="col-md-1">City</label>
+								<div class="col-md-4">
+									<input type="text" name="city" class="form-control" ng-model="billingCtrl.addresses.city">
+								</div>
 							</div>
-						</div>
-						<div class="form-group">
-							<label for="street" class="col-md-1">Street</label>
-							<div class="col-md-2">
-								<input type="text" name="street" class="form-control" ng-model="billingCtrl.addresses.street">
+							<div class="form-group">
+								<label for="street" class="col-md-1">Street</label>
+								<div class="col-md-2">
+									<input type="text" name="street" class="form-control" ng-model="billingCtrl.addresses.street">
+								</div>
+								<label for="number" class="col-md-1">Number</label>
+								<div class="col-md-1">
+									<input type="text" name="number" class="form-control" ng-model="billingCtrl.addresses.number">
+								</div>
+								<label for="zipcode" class="col-md-1">ZIP</label>
+								<div class="col-md-1">
+									<input type="text" name="zipcode" class="form-control" ng-model="billingCtrl.addresses.zipcode">
+								</div>
 							</div>
-							<label for="number" class="col-md-1">Number</label>
-							<div class="col-md-1">
-								<input type="text" name="number" class="form-control" ng-model="billingCtrl.addresses.number">
+						</form>
+					</div>
+				</div> -->
+			<div class="panel panel-default">
+				<div class="panel-heading" role="tab" id="bankInformationHeading">
+					<h1 class="panel-title">
+						<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#bankInformationCollapse" aria-expanded="false" aria-controls="bankInformationCollapse">Bank Information</a>
+					</h1>
+				</div>
+				<div id="bankInformationCollapse" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="bankInformationHeading">
+					<div class="panel-body">
+						<form name="billingCtrl.bankInformationForm" class="form-horizontal">
+							<div class="form-group">
+								<label for="location" class="col-md-2">Location of bank</label>
+								<div class="col-md-6">
+									<ol class="nya-bs-select" ng-model="billingCtrl.bank_information.location">
+										<li nya-bs-option="location in billingCtrl.bank_location">
+											<a href="" ng-bind="location"></a>
+										</li>
+									</ol>
+								</div>
 							</div>
-							<label for="zipcode" class="col-md-1">ZIP</label>
-							<div class="col-md-1">
-								<input type="text" name="zipcode" class="form-control" ng-model="billingCtrl.addresses.zipcode">
-							</div>
-						</div>
-					</form>
+							<canada-bank-information bank-information="billingCtrl.bank_information" ng-if="billingCtrl.bank_information.location === 'Canada'"></canada-bank-information>
+							<usa-bank-information bank-information="billingCtrl.bank_information" ng-if="billingCtrl.bank_information.location === 'USA'"></usa-bank-information>
+							<new-zealand-bank-information bank-information="billingCtrl.bank_information" ng-if="billingCtrl.bank_information.location === 'New Zealand'"></new-zealand-bank-information>
+							<other-bank-information bank-information="billingCtrl.bank_information" ng-if="billingCtrl.bank_information.location === 'Rest of the world'"></other-bank-information>
+						</form>
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="panel panel-default">
-			<div class="panel-heading" role="tab" id="bankInformationHeading">
-				<h1 class="panel-title">
-					<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#bankInformationCollapse" aria-expanded="false" aria-controls="bankInformationCollapse">Bank Information</a>
-				</h1>
-			</div>
-			<div id="bankInformationCollapse" class="panel-collapse collapse" role="tabpanel" aria-labelledby="bankInformationHeading">
-				<div class="panel-body">
-					<p><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore repellat quos adipisci a itaque, dignissimos voluptatem reprehenderit inventore deserunt explicabo voluptatum dicta natus, debitis fugiat molestiae vero, ipsum quas consequatur.</span>
-					<span>Quibusdam magni laudantium eos animi enim, dolores beatae officiis pariatur adipisci eius hic iste dolore accusantium repellat, quas, voluptate, officia doloribus ex quod voluptatem in quos vel? Minima, placeat, eaque.</span>
-					<span>Qui corrupti eum quo sed tempora commodi necessitatibus laborum sequi dolorum quos repellat, eveniet omnis, maxime cupiditate asperiores atque amet nisi, quia unde consequuntur numquam! Ab cum optio saepe corporis?</span>
-					<span>Ullam vel magni, ut, corporis nihil, numquam alias eius labore sequi quisquam animi sunt impedit delectus. Dolores tempore quibusdam quo, ad quam enim nobis suscipit cum dicta, molestiae dolore eligendi.</span>
-					<span>Porro voluptates possimus inventore rem dolore doloribus, ea, eum. Enim accusantium, veritatis unde delectus neque omnis, nam at nulla? Dolorem sed error a tenetur corporis explicabo modi et veritatis dolor.</span></p>
+	<!-- 		<div class="panel panel-default">
+				<div class="panel-heading" role="tab" id="paymentsHeading">
+					<h1 class="panel-title">
+						<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#paymentsCollapse" aria-expanded="false" aria-controls="paymentsCollapse">Payments</a>
+					</h1>
 				</div>
-			</div>
-		</div>
-		<div class="panel panel-default">
-			<div class="panel-heading" role="tab" id="paymentsHeading">
-				<h1 class="panel-title">
-					<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#paymentsCollapse" aria-expanded="false" aria-controls="paymentsCollapse">Payments</a>
-				</h1>
-			</div>
-			<div id="paymentsCollapse" class="panel-collapse collapse" role="tabpanel" aria-labelledby="paymentsHeading">
-				<div class="panel-body">
-					<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, similique, necessitatibus. Quas neque excepturi commodi voluptatem, quidem iure ex incidunt, itaque architecto, modi vel alias ipsa error ratione minus necessitatibus.</div>
-					<div>Ab aspernatur numquam pariatur nisi eos fugit, voluptate eum repellat at ut, repellendus perferendis veritatis nemo exercitationem reiciendis maiores quisquam accusamus sint eligendi neque id dolor deserunt esse. Consequuntur, facere.</div>
-					<div>Nobis odit placeat esse atque tempora numquam sunt incidunt expedita, provident possimus! Nulla exercitationem nihil dolore sapiente enim atque, deleniti ratione ducimus harum laborum quis aut debitis eveniet et accusantium!</div>
-					<div>Harum natus commodi repudiandae minus, accusamus! Neque expedita suscipit quas laborum doloremque reprehenderit quia facere nisi non aliquam, veniam nemo dolor ut nihil, quae. Esse non aliquam quae illum quaerat!</div>
-					<div>Dolore at, facere, saepe eos nulla voluptas obcaecati dignissimos, neque esse quo iusto quos repellat deleniti nostrum magnam enim officia! Rem sapiente illum optio ipsa, eum nobis dolorem aliquid eius.</div>
+				<div id="paymentsCollapse" class="panel-collapse collapse" role="tabpanel" aria-labelledby="paymentsHeading">
+					<div class="panel-body">
+						
+					</div>
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</div>
 </div>
