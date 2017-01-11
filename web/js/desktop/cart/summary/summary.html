@@ -1,19 +1,20 @@
 <span class="shopping-cart-title">Cart summary</span>
 
-<div class="summary-cart-wrapper" ng-if="summaryCtrl.state.state === 2">
+<div ng-if="summaryCtrl.state.state === 2">
 	<div ng-repeat="deviser in summaryCtrl.devisers">
-		<span span class="deviser-name" ng-bind="deviser.deviser_name"></span>
-		<div ng-repeat="product in summaryCtrl.cart.products | filter: {deviser_id: deviser.deviser_id}">
+		<span span class="deviser-name-item summary-cart-wrapper" ng-bind="deviser.deviser_name"></span>
+		<div class="summary-cart-wrapper summary-white-item" ng-repeat="product in summaryCtrl.cart.products | filter: {deviser_id: deviser.deviser_id}">
 			<div>
-				<p>
-					<span ng-bind="product.product_name"></span><span class="pull-right">€<span ng-bind="product.price"></span></span>
-				</p>
+
+					<span class="product-name" ng-bind="product.product_name"></span>
+					<span class="pull-right text-green">€<span ng-bind="product.price"></span></span>
+
 			</div>
 		</div>
 	</div>
 </div>
 <div class="summary-cart-wrapper">
-	<p><span class="bold">Subtotal</span><span class="pull-right subtotal-amount">€<span class="subtotal-amount" ng-bind="summaryCtrl.cart.subtotal"></span></span></p>
+	<span class="subtotal-amount-wrapper"><span class="bold">Subtotal</span><span class="pull-right subtotal-amount">€<span class="subtotal-amount" ng-bind="summaryCtrl.cart.subtotal"></span></span></span>
 </div>
 <div class="summary-cart-wrapper" ng-if="summaryCtrl.state.state === 1">
 	<button class="btn btn-green col-md-12 mb-20" ng-click="summaryCtrl.proceedToCheckout()">Proceed to checkout</button>
