@@ -45,7 +45,7 @@
 			<label for="country" class="col-md-3">Country</label>
 			<div class="col-md-9">
 				<ol class="nya-bs-select" ng-model="personalInfoCtrl.user.country">
-					<li nya-bs-option="country in personalInfoCtrl.countries" data-value="country.id">
+					<li nya-bs-option="country in personalInfoCtrl.countries | orderBy:'country_name'" data-value="country.id">
 						<a href=""><span ng-bind="country.country_name"></span></a>
 					</li>
 				</ol>
