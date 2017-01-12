@@ -1,8 +1,9 @@
 (function () {
 	"use strict";
 
-	function controller() {
+	function controller(UtilService) {
 		var vm = this;
+		vm.isObject = UtilService.isObject;
 		vm.proceedToCheckout = proceedToCheckout;
 
 		function proceedToCheckout() {
