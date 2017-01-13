@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(UtilService) {
+	function controller(UtilService, cartEvents, $scope, cartService) {
 		var vm = this;
 		vm.isObject = UtilService.isObject;
 		vm.proceedToCheckout = proceedToCheckout;
@@ -9,6 +9,12 @@
 		function proceedToCheckout() {
 			vm.state.state = 2;
 		}
+
+		$scope.$on(cartEvents.cartUpdated, function(event, args) {
+			vm.cart = angular.copy(args.cart);
+			cartService.parseTags(vm.cart);
+			vm.devisers = cartService.parseDevisersFromProducts(vm.cart);
+		});
 
 	}
 

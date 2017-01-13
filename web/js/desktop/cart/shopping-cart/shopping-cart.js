@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(cartDataService, UtilService, cartService) {
+	function controller(cartDataService, UtilService, cartService, cartEvents, $rootScope) {
 		var vm = this;
 		vm.deleteItem = deleteItem;
 		vm.isObject = UtilService.isObject;
@@ -13,6 +13,7 @@
 				productId: price_stock_id
 			}).$promise.then(function(deletedData) {
 				vm.cart = angular.copy(deletedData);
+				$rootScope.$broadcast(cartEvents.cartUpdated, {cart: vm.cart});
 				vm.devisers = cartService.parseDevisersFromProducts(vm.cart);
 				cartService.parseTags(vm.cart);
 			});
