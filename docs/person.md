@@ -9,6 +9,15 @@ This is how a single person looks like:
 
 	slug: "foo-bar", // This will exist if the person is a deviser. Note that this field isn't an object-like value containing translations for multiple languages. This is by design; devisers aren't supposed to have slugs in more than one language.
 
+    text_short_description: '', // String
+
+    text_biography: '', // String
+
+    account_state: ['draft', 'active', 'blocked'], // String
+
+	type: [0, 1], // Each person can have a single or multiple roles, for example, Client and Deviser.
+	// Check the constants in Person model for all the valid values for this. Note that even if the person has only one type, the value would still be an array.
+
 	categories: ["30000", "50000"], //Informational only (for the time being, but it might be used at some point). Note that this field doesn't make any sense for non-devise type users.
 
 	collections: [
@@ -28,25 +37,56 @@ This is how a single person looks like:
 		}
 	], //Exists only if deviser (not implemented yet)
 
-	type: [0, 1], // Each person can have a single or multiple roles, for example, Client and Deviser.
-	// Check the constants in Person model for all the valid values for this. Note that even if the person has only one type, the value would still be an array.
-
 	personal_info: {
 		name: '', // String
-		surnames: ['', '', ''...], // Array of strings
-		bday: , ISODate('1969-12-31'), // MongoDB Date
-		city: '', // Free text
+		last_name: '', // String
+		brand_name: '', // String
 		country: 'EN' // Country code
+		city: '', // Free text
+		surnames: ['', '', ''...], // Array of strings (deprecated)
+		bday: , ISODate('1969-12-31'), // MongoDB Date
 	},
 
 	media: {
+		header: "header.jpg" // This is (at least per current specs) available only for devisers. This is the image that appears as a background in the deviser's profile page.
+		header_cropped: "header_cropped.jpg" // Same as header, but cropped...
+		profile: "profile.png", // This is the person's avatar (the circular image)
+		profile_cropped: "profile_croped.png", // Same as profile, but cropped...
+		photos: [
+		    "deviser.photo.01234.jpg",
+		    "deviser.photo.56789.jpg",
+		],
 		video_links: [
 			"http://foo.bar",
 			"https://bar.foo"
 		],
-		profile: "profile.png", // This is the person's avatar (the circular image)
-		header: "header.jpg" // This is (at least per current specs) available only for devisers. This is the image that appears as a background in the deviser's profile page.
 	},
+
+    settings: {
+        "bank_info: {
+            location: "US",
+            bank_name : "Name of the bank",
+            institution_number : "123456789",
+            transit_number : "123456789",
+            account_number: "111222333444",
+            swift_bic: "DABAIE2D",
+            account_type: "savings",
+            routing_number: "123"
+        }
+    },
+
+    press: [
+
+    ],
+
+    videos: [
+        "http://foo.bar",
+        "https://bar.foo"
+    ],
+
+    faq: [
+
+    ]
 
 	credentials: {
 		email: 'foo@bar.com', // User email
@@ -56,7 +96,14 @@ This is how a single person looks like:
 	},
 
 	preferences: {
-		language: "en-US", // Look at the keys in config/langs.php for all possible values
-		currency: "EUR" // Look at helpers/Utils (Currencies class) for all possible values
-	}
+        language: "en-US", // Look at the keys in config/langs.php for all possible values
+        currency: "EUR" // Look at helpers/Utils (Currencies class) for all possible values
+    },
+
+    curriculum: '', // String
+
+    created_at: '', // Mongo date
+
+    updated_at: '' // Mongo date
+
 ~~~

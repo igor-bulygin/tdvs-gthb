@@ -9,7 +9,6 @@ use MongoDate;
 use Yii;
 use yii\mongodb\ActiveQuery;
 use yii\web\IdentityInterface;
-use yii2tech\embedded\Mapping;
 
 /**
  * @property string $slug
@@ -24,7 +23,7 @@ use yii2tech\embedded\Mapping;
  * @property PersonMedia $mediaFiles
  * @property PersonSettings $settingsMapping
  * @property array $press
- * @property Mapping $videosInfo
+ * @property PersonVideo[] $videosInfo
  * @property FaqQuestion[] $faqInfo
  * @property array $credentials
  * @property array $preferences

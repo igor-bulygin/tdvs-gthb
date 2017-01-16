@@ -1,7 +1,6 @@
 <?php
 namespace app\models;
 
-use app\helpers\CActiveRecord;
 use app\helpers\Utils;
 use yii\base\Model;
 
@@ -44,6 +43,11 @@ class PersonPersonalInfo extends Model
 	 * @var string
 	 */
 	public $city;
+
+	/**
+	 * @var \MongoDate
+	 */
+	public $bday;
 
 	/** @var  Person */
 	protected $person;
@@ -149,7 +153,7 @@ class PersonPersonalInfo extends Model
 	{
 		return [
 			[['name', 'brand_name', 'country', 'city'], 'required', 'on' => Person::SCENARIO_DEVISER_UPDATE_PROFILE],
-			[['last_name'], 'safe', 'on' => Person::SCENARIO_DEVISER_UPDATE_PROFILE],
+			[['last_name', 'bday'], 'safe', 'on' => Person::SCENARIO_DEVISER_UPDATE_PROFILE],
 			[['name', 'last_name', 'brand_name', 'country', 'city'], 'safe', 'on' => [Person::SERIALIZE_SCENARIO_LOAD_SUB_DOCUMENT, Person::SCENARIO_DEVISER_UPDATE_DRAFT, Person::SCENARIO_DEVISER_CREATE_DRAFT]],
 		];
 	}
