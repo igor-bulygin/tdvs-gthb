@@ -394,7 +394,6 @@ class PublicController extends CController
 			];
 		}
 
-		//TODO: Fix, this should be random
 		$devisers = Yii::$app->mongodb->getCollection('person')
 				->aggregate(
 						[

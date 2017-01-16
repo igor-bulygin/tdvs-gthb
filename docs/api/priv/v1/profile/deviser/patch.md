@@ -26,6 +26,16 @@ Example about how to call to Web Service to update Deviser profile
 * `preferences`: 
  * `lang`: code of default language ("en-US")
  * `currency`: code of default currency ("EUR")
+* `settings`:
+ * `bank_info`:
+  * `location`: code of country ("US")
+  * `bank_name`: name of the bank",
+  * `institution_number`
+  * `transit_number`
+  * `account_number`
+  * `swift_bic`
+  * `account_type`: posible values: `savings` and `checking`
+  * `routing_number`
 * `media`: 
  * `header`: filename of image to use in header cover, original version ("filename1.jpg")
  * `header_cropped`: filename of image to use in header cover, cropped version ("filename1.jpg")

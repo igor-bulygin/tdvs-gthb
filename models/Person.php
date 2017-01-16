@@ -22,6 +22,7 @@ use yii2tech\embedded\Mapping;
  * @property PersonPreferences $preferencesInfo
  * @property PersonPersonalInfo $personalInfo
  * @property PersonMedia $mediaFiles
+ * @property PersonSettings $settingsMapping
  * @property array $press
  * @property Mapping $videosInfo
  * @property FaqQuestion[] $faqInfo
@@ -93,6 +94,7 @@ class Person extends CActiveRecord implements IdentityInterface
 //			'personalInfo',
 			'curriculum',
 			'media',
+			'settings',
 			'credentials',
 			'preferences',
 			'press',
@@ -159,6 +161,11 @@ class Person extends CActiveRecord implements IdentityInterface
 	public function embedFaqInfo()
 	{
 		return $this->mapEmbeddedList('faq', FaqQuestion::className());
+	}
+
+	public function embedSettingsMapping()
+	{
+		return $this->mapEmbedded('settings', PersonSettings::className());
 	}
 
 	/**
@@ -246,6 +253,7 @@ class Person extends CActiveRecord implements IdentityInterface
 		foreach ($this->faqInfo as $faqInfo) {
 			$faqInfo->setModel($this);
 		}
+		$this->settingsMapping->setPerson($this);
 		return parent::beforeValidate();
 	}
 
@@ -325,6 +333,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'preferences',
 					'curriculum',
 					'media',
+					'settings',
 					'press',
 					'videos',
 					'faq',
@@ -366,6 +375,11 @@ class Person extends CActiveRecord implements IdentityInterface
 			],
 			[
 				'mediaFiles',
+				'app\validators\EmbedDocValidator',
+				'on' => [self::SCENARIO_DEVISER_UPDATE_DRAFT, self::SCENARIO_DEVISER_UPDATE_PROFILE],
+			],
+			[
+				'settingsMapping',
 				'app\validators\EmbedDocValidator',
 				'on' => [self::SCENARIO_DEVISER_UPDATE_DRAFT, self::SCENARIO_DEVISER_UPDATE_PROFILE],
 			],
@@ -434,6 +448,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'name' => "brandName",
 					'url_images' => 'urlImagesLocation',
 					'url_avatar' => "avatarImage128",
+					'type',
 				];
 
 				static::$retrieveExtraFields = [
@@ -452,6 +467,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'collections',
 					'personal_info',
 					'media'  => 'mediaInfoAttributes',
+					'settings',
 					'press',
 					'videos' => 'videosPreview',
 					'faq',
@@ -459,6 +475,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'account_state',
 					'preferences',
 					'url_images' => 'urlImagesLocation',
+					'type',
 				];
 
 				static::$retrieveExtraFields = [
@@ -477,6 +494,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'collections',
 					'personal_info',
 					'media'  => 'mediaInfoAttributes',
+					'settings',
 					'press',
 					'videos',
 					'faq',

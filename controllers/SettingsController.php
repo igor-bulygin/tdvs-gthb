@@ -6,6 +6,7 @@ use app\helpers\CController;
 use app\models\Person;
 use Yii;
 use yii\filters\AccessControl;
+use yii\web\NotFoundHttpException;
 
 class SettingsController extends CController
 {
@@ -38,7 +39,12 @@ class SettingsController extends CController
 		// get the category object
 		$person = Person::findOneSerialized($person_id);
 
+		if (!$person->isDeviser()) {
+			throw new  NotFoundHttpException();
+		}
+
 		$this->layout = '/desktop/public-2.php';
+
 		return $this->render("billing", [
 				'person' => $person,
 		]);
