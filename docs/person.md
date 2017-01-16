@@ -63,7 +63,7 @@ This is how a single person looks like:
 	},
 
     settings: {
-        "bank_info: {
+        bank_info: {
             location: "US",
             bank_name : "Name of the bank",
             institution_number : "123456789",
