@@ -54,7 +54,7 @@
 				if(!UtilService.isObject(vm.deviser.settings)) {
 					vm.deviser.settings = {};
 				}
-				vm.deviser.settings.bank_information = angular.copy(vm.bank_information);
+				vm.deviser.settings.bank_info = angular.copy(vm.bank_information);
 				vm.deviser.deviser_id = vm.deviser.id;
 				vm.deviser.$update().then(function (dataDeviser) {
 					vm.deviser = angular.copy(dataDeviser);
