@@ -1,42 +1,43 @@
 <?php
 namespace app\models;
 
-use yii\base\Model;
+use app\helpers\CActiveRecord;
 
-class PersonBankInfo extends Model
+/**
+ * @propery string $location
+ * @propery string $bank_name
+ * @propery string $institution_number
+ * @propery string $transit_number
+ * @propery string $account_number
+ * @propery string $iban
+ * @propery string $swift_bic
+ * @propery string $account_type
+ * @propery string $routing_number
+ */
+class PersonBankInfo extends CActiveRecord
 {
-
 	const ACCOUNT_TYPE_CHECKING = 'checking';
 	const ACCOUNT_TYPE_SAVINGS= 'savings';
-
-	/* @var string */
-	public $location;
-
-	/* @var string */
-	public $bank_name;
-
-	/* @var string */
-	public $institution_number;
-
-	/* @var string */
-	public $transit_number;
-
-	/* @var string */
-	public $account_number;
-
-	/* @var string */
-	public $swift_bic;
-
-	/* @var string */
-	public $account_type;
-
-	/* @var string */
-	public $routing_number;
 
 	/**
 	 * @var PersonSettings
 	 */
 	protected $settings;
+
+	public function attributes()
+	{
+		return [
+			'location',
+			'bank_name',
+			'institution_number',
+			'transit_number',
+			'account_number',
+			'iban',
+			'swift_bic',
+			'account_type',
+			'routing_number',
+		];
+	}
 
 
 	public function getParentAttribute()

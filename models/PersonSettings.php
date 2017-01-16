@@ -4,12 +4,11 @@ namespace app\models;
 use app\helpers\CActiveRecord;
 
 /**
+ * @propery string $bank_info
  * @property PersonBankInfo $bankInfoMapping
  */
 class PersonSettings extends CActiveRecord
 {
-	public $bank_info;
-
 	/** @var  Person */
 	protected $person;
 
