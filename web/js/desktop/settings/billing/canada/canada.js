@@ -1,8 +1,9 @@
 (function () {
 	"use strict";
 
-	function controller() {
+	function controller(UtilService) {
 		var vm = this;
+		vm.has_error = UtilService.has_error;
 	}
 
 	var component = {

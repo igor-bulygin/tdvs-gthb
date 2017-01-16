@@ -13,12 +13,11 @@
 				productId: price_stock_id
 			}).$promise.then(function(deletedData) {
 				vm.cart = angular.copy(deletedData);
-				$rootScope.$broadcast(cartEvents.cartUpdated, {cart: vm.cart});
 				vm.devisers = cartService.parseDevisersFromProducts(vm.cart);
 				cartService.parseTags(vm.cart);
+				$rootScope.$broadcast(cartEvents.cartUpdated, {cart: vm.cart});
 			});
 		}
-
 	}
 
 	var component = {

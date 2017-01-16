@@ -1,30 +1,30 @@
 <div class="form-group">
 	<label for="bank_name" class="col-md-2">Name of bank</label>
 	<div class="col-md-4">
-		<input type="text" name="bank_name" class="form-control" ng-model="canadaBankInformationCtrl.bank_information.bank_name" required>
+		<input type="text" name="bank_name" class="form-control ng-class:{'error-input': canadaBankInformationCtrl.has_error(canadaBankInformationCtrl.form, canadaBankInformationCtrl.form.bank_name)}" ng-model="canadaBankInformationCtrl.bank_information.bank_name" required>
 	</div>
 </div>
 <div class="form-group">
 	<label for="institution_number" class="col-md-2">Institution number</label>
 	<div class="col-md-5">
-		<input type="text" name="institution_number" class="form-control" ng-model="canadaBankInformationCtrl.bank_information.institution_number" required>
+		<input type="text" name="institution_number" class="form-control ng-class:{'error-input': canadaBankInformationCtrl.has_error(canadaBankInformationCtrl.form, canadaBankInformationCtrl.form.institution_number)}" ng-model="canadaBankInformationCtrl.bank_information.institution_number" required>
 	</div>
 </div>
 <div class="form-group">
 	<label for="transit_number" class="col-md-2">Transit number</label>
 	<div class="col-md-5">
-		<input type="text" name="transit_number" class="form-control" ng-model="canadaBankInformationCtrl.bank_information.transit_number" required>
+		<input type="text" name="transit_number" class="form-control ng-class:{'error-input': canadaBankInformationCtrl.has_error(canadaBankInformationCtrl.form, canadaBankInformationCtrl.form.transit_number)}" ng-model="canadaBankInformationCtrl.bank_information.transit_number" required>
 	</div>
 </div>
 <div class="form-group">
 	<label for="account_number" class="col-md-2">Account number</label>
 	<div class="col-md-5">
-		<input type="text" name="account_number" class="form-control" ng-model="canadaBankInformationCtrl.bank_information.account_number" required>
+		<input type="text" name="account_number" class="form-control ng-class:{'error-input': canadaBankInformationCtrl.has_error(canadaBankInformationCtrl.form, canadaBankInformationCtrl.form.account_number)}" ng-model="canadaBankInformationCtrl.bank_information.account_number" required>
 	</div>
 </div>
 <div class="form-group">
 	<label for="swift_bic" class="col-md-2">Swift / BIC</label>
 	<div class="col-md-5">
-		<input type="text" name="swift_bic" class="form-control" ng-model="canadaBankInformationCtrl.bank_information.swift_bic" required>
+		<input type="text" name="swift_bic" class="form-control ng-class:{'error-input': canadaBankInformationCtrl.has_error(canadaBankInformationCtrl.form, canadaBankInformationCtrl.form.swift_bic)}" ng-model="canadaBankInformationCtrl.bank_information.swift_bic" required>
 	</div>
 </div>

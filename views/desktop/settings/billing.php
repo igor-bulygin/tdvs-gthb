@@ -65,16 +65,16 @@ $this->params['settings_menu_active_option'] = 'billing';
 								<label for="location" class="col-md-2">Location of bank</label>
 								<div class="col-md-6">
 									<ol class="nya-bs-select" ng-model="billingCtrl.bank_information.location">
-										<li nya-bs-option="location in billingCtrl.bank_location">
-											<a href="" ng-bind="location"></a>
+										<li nya-bs-option="location in billingCtrl.bank_location" data-value="location.country_code">
+											<a href="" ng-bind="location.country_name"></a>
 										</li>
 									</ol>
 								</div>
 							</div>
-							<canada-bank-information bank-information="billingCtrl.bank_information" ng-if="billingCtrl.bank_information.location === 'Canada'"></canada-bank-information>
-							<usa-bank-information bank-information="billingCtrl.bank_information" ng-if="billingCtrl.bank_information.location === 'USA'"></usa-bank-information>
-							<new-zealand-bank-information bank-information="billingCtrl.bank_information" ng-if="billingCtrl.bank_information.location === 'New Zealand'"></new-zealand-bank-information>
-							<other-bank-information bank-information="billingCtrl.bank_information" ng-if="billingCtrl.bank_information.location === 'Rest of the world'"></other-bank-information>
+							<canada-bank-information bank-information="billingCtrl.bank_information" ng-if="billingCtrl.bank_information.location === 'CA'"></canada-bank-information>
+							<usa-bank-information bank-information="billingCtrl.bank_information" ng-if="billingCtrl.bank_information.location === 'US'"></usa-bank-information>
+							<new-zealand-bank-information bank-information="billingCtrl.bank_information" ng-if="billingCtrl.bank_information.location === 'NZ'"></new-zealand-bank-information>
+							<other-bank-information bank-information="billingCtrl.bank_information" ng-if="billingCtrl.bank_information.location === 'OTHER'"></other-bank-information>
 						</form>
 					</div>
 				</div>
@@ -92,5 +92,8 @@ $this->params['settings_menu_active_option'] = 'billing';
 				</div>
 			</div> -->
 		</div>
+	</div>
+	<div class="text-center">
+		<button class="btn btn-green" ng-click="billingCtrl.saveBankInformation(billingCtrl.bankInformationForm)">Save</button>
 	</div>
 </div>
