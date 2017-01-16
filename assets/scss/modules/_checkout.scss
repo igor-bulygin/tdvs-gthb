@@ -38,6 +38,12 @@
 }
 .summary-cart-wrapper{
 	padding: 0 15px;
+	.summary-row{
+		display: block;
+		width: 100%;
+		float: left;
+		color:$darker_grey;
+	}
 }
 .subtotal-amount{
 	letter-spacing: 0.5px;
@@ -158,6 +164,8 @@
 		width: 290px;
 		float: left;
 		display: block;
+		color:$darker_grey;
+		font-family: $font-family--bold;
 	}
 }
 .bordered-left{

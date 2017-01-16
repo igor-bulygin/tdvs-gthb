@@ -4479,6 +4479,11 @@ input:checked + .slider:before {
 
 .summary-cart-wrapper {
   padding: 0 15px; }
+  .summary-cart-wrapper .summary-row {
+    display: block;
+    width: 100%;
+    float: left;
+    color: #6b6b6b; }
 
 .subtotal-amount {
   letter-spacing: 0.5px;
@@ -4585,7 +4590,9 @@ input:checked + .slider:before {
   .summary-white-item .product-name {
     width: 290px;
     float: left;
-    display: block; }
+    display: block;
+    color: #6b6b6b;
+    font-family: "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif; }
 
 .bordered-left {
   border-left: 1px solid #f4f4f4; }

@@ -6,9 +6,9 @@
 		<div class="summary-cart-wrapper summary-white-item" ng-repeat="product in summaryCtrl.cart.products | filter: {deviser_id: deviser.deviser_id}">
 			<div>
 					<span class="product-name" ng-bind="product.product_name"></span>
-					<span class="pull-right text-green">€<span ng-bind="product.price"></span></span>
+					<span class="pull-right text-green bold">€<span ng-bind="product.price"></span></span>
 			</div>
-			<div>
+			<div class="summary-row">
 				<span>Ud: 1</span>
 				<span>Tags: <span ng-repeat="tag in product.tags">
 								<span ng-repeat="value in tag.values track by $index">
