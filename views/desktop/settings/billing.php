@@ -58,6 +58,7 @@ $this->params['settings_menu_active_option'] = 'billing';
 							</ol>
 						</div>
 					</div>
+					<australia-bank-information bank-information="billingCtrl.bank_information" ng-if="billingCtrl.bank_information.location === 'AU'"></australia-bank-information>
 					<canada-bank-information bank-information="billingCtrl.bank_information" ng-if="billingCtrl.bank_information.location === 'CA'"></canada-bank-information>
 					<usa-bank-information bank-information="billingCtrl.bank_information" ng-if="billingCtrl.bank_information.location === 'US'"></usa-bank-information>
 					<new-zealand-bank-information bank-information="billingCtrl.bank_information" ng-if="billingCtrl.bank_information.location === 'NZ'"></new-zealand-bank-information>

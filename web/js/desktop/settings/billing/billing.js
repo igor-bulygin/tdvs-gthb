@@ -4,6 +4,9 @@
 	function controller(UtilService, deviserDataService, locationDataService, settingsEvents, $scope) {
 		var vm = this;
 		vm.bank_location = [{
+			country_name: 'Australia',
+			country_code: 'AU'
+		},{
 			country_name: 'Canada',
 			country_code: 'CA'
 		}, {
