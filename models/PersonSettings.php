@@ -64,6 +64,7 @@ class PersonSettings extends CActiveRecord
 	}
 
 
+
 	/**
 	 * Add additional error to make easy show labels in client side
 	 */
@@ -71,15 +72,11 @@ class PersonSettings extends CActiveRecord
 	{
 		parent::afterValidate();
 		foreach ($this->errors as $attribute => $error) {
-			switch ($attribute) {
-				default:
-					//TODO: Fix this! Find other way to determine if was a "required" field
-					if (strpos($error[0], 'cannot be blank') !== false || strpos($error[0], 'no puede estar vacío') !== false) {
-						$this->getPerson()->addError("required", $attribute);
-					}
-					break;
+			foreach ($error as $oneError) {
+				$this->getPerson()->addError($attribute, $oneError);
 			}
 		};
+		$this->clearErrors();
 	}
 
 }
