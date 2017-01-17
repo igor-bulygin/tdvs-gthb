@@ -101,7 +101,6 @@ class PersonBankInfo extends CActiveRecord
 	 *
 	 * @param $attribute
 	 * @param $params
-	 * @return bool TRUE if valid
 	 */
 	public function validateInstitutionNumber($attribute, $params)
 	{
@@ -110,7 +109,9 @@ class PersonBankInfo extends CActiveRecord
 		$value = $this->$attribute;
 		preg_match($regExp, $value, $matches);
 
-		return !empty($matches);
+		if (empty($matches)) {
+			$this->addError($attribute, sprintf('%s is not a valid institution number', $value));
+		}
 	}
 
 	/**
@@ -118,7 +119,6 @@ class PersonBankInfo extends CActiveRecord
 	 *
 	 * @param $attribute
 	 * @param $params
-	 * @return bool TRUE if valid
 	 */
 	public function validateTransitNumber($attribute, $params)
 	{
@@ -127,7 +127,9 @@ class PersonBankInfo extends CActiveRecord
 		$value = $this->$attribute;
 		preg_match($regExp, $value, $matches);
 
-		return !empty($matches);
+		if (empty($matches)) {
+			$this->addError($attribute, sprintf('%s is not a valid transit number', $value));
+		}
 	}
 
 	/**
@@ -135,30 +137,28 @@ class PersonBankInfo extends CActiveRecord
 	 *
 	 * @param $attribute
 	 * @param $params
-	 * @return bool TRUE if valid
 	 */
 	public function validateAccountNumber($attribute, $params)
 	{
 
 		$value = $this->$attribute;
-		if ($this->location == 'CN') {
-
+		if ($this->location == 'CA') {
 			$regExp = "/^[0-9]{12}$/"; // Canada
-
 		} elseif ($this->location == 'NZ') {
-
-			$regExp = "/^[0-9]{15}[0-9]+$/"; // New Zeland
-
+			$regExp = "/^[0-9]{15}([0-9]{1})?$/"; // New Zeland
 		} elseif ($this->location == 'US') {
-			
 			$regExp = "/^[0-9]{6}[0-9]*$/"; // USA
-
-		} else {
-			return true;
 		}
+
+		if (empty($regExp)) {
+			return; // nothing to do
+		}
+
 		preg_match($regExp, $value, $matches);
 
-		return !empty($matches);
+		if (empty($matches)) {
+			$this->addError($attribute, sprintf('%s is not a valid account number for %s location', $value, $this->location));
+		}
 	}
 
 }
