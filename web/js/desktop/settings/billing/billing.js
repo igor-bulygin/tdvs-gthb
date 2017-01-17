@@ -19,13 +19,13 @@
 		vm.bank_information = {
 			location: 'OTHER'
 		}
+		vm.resetBankInfo = resetBankInfo;
 		vm.saveBankInformation = saveBankInformation;
 
 		init();
 
 		function init(){
 			getDeviser();
-			getCountries();
 		}
 
 		function getDeviser() {
@@ -38,13 +38,10 @@
 				});
 		}
 
-		function getCountries(){
-			locationDataService.Country.get()
-				.$promise.then(function(dataCountries) {
-					vm.countries = angular.copy(dataCountries.items);
-				}, function(err) {
-					//err
-				})
+		function resetBankInfo(location){
+			vm.bank_information = {
+				location: location
+			}
 		}
 
 		function saveBankInformation(form){

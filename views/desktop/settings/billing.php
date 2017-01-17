@@ -64,7 +64,7 @@ $this->params['settings_menu_active_option'] = 'billing';
 							<div class="form-group">
 								<label for="location" class="col-md-2">Location of bank</label>
 								<div class="col-md-6">
-									<ol class="nya-bs-select" ng-model="billingCtrl.bank_information.location">
+									<ol class="nya-bs-select" ng-model="billingCtrl.bank_information.location" ng-change="billingCtrl.resetBankInfo(billingCtrl.bank_information.location)">
 										<li nya-bs-option="location in billingCtrl.bank_location" data-value="location.country_code">
 											<a href="" ng-bind="location.country_name"></a>
 										</li>
