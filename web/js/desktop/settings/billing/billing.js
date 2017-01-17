@@ -39,6 +39,8 @@
 		}
 
 		function resetBankInfo(location){
+			vm.bankInformationForm.$setPristine();
+			vm.bankInformationForm.$submitted = false;
 			vm.bank_information = {
 				location: location
 			}
@@ -56,12 +58,12 @@
 					vm.deviser = angular.copy(dataDeviser);
 				})
 			} else {
-
+				//TODO: Show errors
 			}
 		}
 
 		$scope.$on(settingsEvents.saveChanges, function(event, args) {
-			saveBankInformation(vm.bankInformationForm)
+			saveBankInformation(vm.bankInformationForm);
 		})
 	}
 
