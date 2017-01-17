@@ -71,6 +71,9 @@ class PersonBankInfo extends CActiveRecord
 	{
 		return [
 			[['location', 'bank_name', 'institution_number', 'transit_number', 'account_number', 'iban', 'swift_bic', 'routing_number'], 'safe', 'on' => [Person::SCENARIO_DEVISER_CREATE_DRAFT, Person::SCENARIO_DEVISER_UPDATE_DRAFT, Person::SCENARIO_DEVISER_UPDATE_PROFILE]],
+			['institution_number', 'validateInstitutionNumber'],
+			['transit_number', 'validateTransitNumber'],
+			['account_number', 'validateAccountNumber'],
 			['iban', 'app\validators\EIBANValidator'],
 			['routing_number', 'app\validators\EABARoutingNumberValidator'],
 			['swift_bic', 'app\validators\SwiftBicValidator'],
@@ -91,6 +94,71 @@ class PersonBankInfo extends CActiveRecord
 			}
 		};
 		$this->clearErrors();
+	}
+
+	/**
+	 * Validates an institution number
+	 *
+	 * @param $attribute
+	 * @param $params
+	 * @return bool TRUE if valid
+	 */
+	public function validateInstitutionNumber($attribute, $params)
+	{
+		$regExp = "/^[0-9]{3}$/";
+
+		$value = $this->$attribute;
+		preg_match($regExp, $value, $matches);
+
+		return !empty($matches);
+	}
+
+	/**
+	 * Validates a transit number
+	 *
+	 * @param $attribute
+	 * @param $params
+	 * @return bool TRUE if valid
+	 */
+	public function validateTransitNumber($attribute, $params)
+	{
+		$regExp = "/^[0-9]{5}$/";
+
+		$value = $this->$attribute;
+		preg_match($regExp, $value, $matches);
+
+		return !empty($matches);
+	}
+
+	/**
+	 * Validates an account number
+	 *
+	 * @param $attribute
+	 * @param $params
+	 * @return bool TRUE if valid
+	 */
+	public function validateAccountNumber($attribute, $params)
+	{
+
+		$value = $this->$attribute;
+		if ($this->location == 'CN') {
+
+			$regExp = "/^[0-9]{12}$/"; // Canada
+
+		} elseif ($this->location == 'NZ') {
+
+			$regExp = "/^[0-9]{15}[0-9]+$/"; // New Zeland
+
+		} elseif ($this->location == 'US') {
+			
+			$regExp = "/^[0-9]{6}[0-9]*$/"; // USA
+
+		} else {
+			return true;
+		}
+		preg_match($regExp, $value, $matches);
+
+		return !empty($matches);
 	}
 
 }
