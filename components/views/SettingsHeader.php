@@ -12,27 +12,32 @@ $activeOption = array_key_exists('settings_menu_active_option', $this->params) ?
 
 ?>
 
+<div>
 
 <img src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getAvatarImage())->resize(50, 50) ?>">
 
 <?=$person->personalInfo->getBrandName()?>
 
-Settings
-
-<ul>
-	<li>
+<ul class="nav nav-tabs">
+	<li role="presentation">
 		<a class="<?= ($activeOption=='settings') ? 'active' : '' ?>" href="#">Settings</a>
 	</li>
-	<li>
+	<li role="presentation">
 		<a class="<?= ($activeOption=='orders') ? 'active' : '' ?>" href="#">My Orders</a>
 	</li>
-	<li>
+	<li role="presentation">
 		<a class="<?= ($activeOption=='stock') ? 'active' : '' ?>" href="#">Stock & Price</a>
 	</li>
-	<li>
+	<li role="presentation">
 		<a class="<?= ($activeOption=='billing') ? 'active' : '' ?>" href="<?= Url::to(["settings/billing", "slug" => $person->slug, 'person_id' => $person->short_id])?>">Billing & Payments</a>
 	</li>
-	<li>
+	<li role="presentation">
 		<a class="<?= ($activeOption=='shipping') ? 'active' : '' ?>" href="#">Shipping</a>
 	</li>
+	<li class="pull-right">
+		<button class="btn btn-green">Save changes</button>
+	</li>
 </ul>
+
+
+</div>
