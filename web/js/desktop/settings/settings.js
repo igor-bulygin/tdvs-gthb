@@ -1,7 +1,15 @@
 (function () {
 	"use strict";
 
-	angular
-		.module('todevise', ['api', 'util', 'header', 'nya.bootstrap.select']);
+	function config($provide) {
 
+		//events
+		$provide.value('settingsEvents', {
+			saveChanges: 'save-changes'
+		});
+	}
+
+	angular
+		.module('todevise', ['api', 'util', 'header', 'nya.bootstrap.select'])
+		.config(config);
 }());

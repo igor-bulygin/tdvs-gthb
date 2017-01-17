@@ -3,6 +3,9 @@ use app\helpers\Utils;
 use app\models\Person;
 use yii\helpers\Url;
 
+app\components\assets\SettingsHeaderAsset::register($this);
+
+
 // use params to share data between views :(
 /** @var Person $person */
 $person = $this->params['person'];
@@ -12,7 +15,7 @@ $activeOption = array_key_exists('settings_menu_active_option', $this->params) ?
 
 ?>
 
-<div>
+<div ng-controller="settingsHeaderCtrl as settingsHeaderCtrl">
 
 <img src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getAvatarImage())->resize(50, 50) ?>">
 
@@ -35,7 +38,7 @@ $activeOption = array_key_exists('settings_menu_active_option', $this->params) ?
 		<a class="<?= ($activeOption=='shipping') ? 'active' : '' ?>" href="#">Shipping</a>
 	</li>
 	<li class="pull-right">
-		<button class="btn btn-green">Save changes</button>
+		<button class="btn btn-green" ng-click="settingsHeaderCtrl.saveChanges()">Save changes</button>
 	</li>
 </ul>
 

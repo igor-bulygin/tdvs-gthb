@@ -93,7 +93,4 @@ $this->params['settings_menu_active_option'] = 'billing';
 			</div> -->
 		</div>
 	</div>
-	<div class="text-center">
-		<button class="btn btn-green" ng-click="billingCtrl.saveBankInformation(billingCtrl.bankInformationForm)">Save</button>
-	</div>
 </div>

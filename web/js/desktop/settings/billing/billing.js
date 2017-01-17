@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(UtilService, deviserDataService, locationDataService) {
+	function controller(UtilService, deviserDataService, locationDataService, settingsEvents, $scope) {
 		var vm = this;
 		vm.bank_location = [{
 			country_name: 'Canada',
@@ -45,7 +45,6 @@
 		}
 
 		function saveBankInformation(form){
-			console.log(form.$valid);
 			form.$setSubmitted();
 			if(form.$valid) {
 				if(!UtilService.isObject(vm.deviser.settings)) {
@@ -60,6 +59,10 @@
 
 			}
 		}
+
+		$scope.$on(settingsEvents.saveChanges, function(event, args) {
+			saveBankInformation(vm.bankInformationForm)
+		})
 	}
 
 	angular.module('todevise')
