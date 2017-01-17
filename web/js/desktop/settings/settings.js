@@ -10,6 +10,6 @@
 	}
 
 	angular
-		.module('todevise', ['api', 'util', 'header', 'nya.bootstrap.select'])
+		.module('todevise', ['api', 'util', 'header', 'ui.bootstrap', 'nya.bootstrap.select'])
 		.config(config);
 }());
