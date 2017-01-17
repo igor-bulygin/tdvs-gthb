@@ -42,5 +42,17 @@ $activeOption = array_key_exists('settings_menu_active_option', $this->params) ?
 	</li>
 </ul>
 
-
 </div>
+
+<script type="text/ng-template" id="changesSaved.html">
+	<div class="modal-body">
+		<span>Changes saved successfully</span>
+		<span class="pull-right" ng-click="$dismiss()">&times;</span>
+	</div>
+</script>
+<script type="text/ng-template" id="invalidForm.html">
+	<div class="modal-body">
+		<span class="purple-text">Please correct the errors below and try saving again</span>
+		<span class="pull-right" ng-click="$dismiss()">&times;</span>
+	</div>
+</script>

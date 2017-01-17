@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(UtilService, deviserDataService, locationDataService, settingsEvents, $scope) {
+	function controller(UtilService, deviserDataService, locationDataService, settingsEvents, $scope, $rootScope) {
 		var vm = this;
 		vm.bank_location = [{
 			country_name: 'Australia',
@@ -59,8 +59,13 @@
 				vm.deviser.deviser_id = vm.deviser.id;
 				vm.deviser.$update().then(function (dataDeviser) {
 					vm.deviser = angular.copy(dataDeviser);
+					$rootScope.$broadcast(settingsEvents.changesSaved);
+				}, function (err) {
+					$rootScope.$broadcast(settingsEvents.invalidForm);
+					//TODO: Show errors
 				})
 			} else {
+				$rootScope.$broadcast(settingsEvents.invalidForm);
 				//TODO: Show errors
 			}
 		}

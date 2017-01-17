@@ -5,7 +5,9 @@
 
 		//events
 		$provide.value('settingsEvents', {
-			saveChanges: 'save-changes'
+			saveChanges: 'save-changes',
+			changesSaved: 'changes-saved',
+			invalidForm: 'invalid-form'
 		});
 	}
 
