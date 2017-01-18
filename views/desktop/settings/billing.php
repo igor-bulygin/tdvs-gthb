@@ -7,7 +7,7 @@ BillingAsset::register($this);
 
 /** @var Person $person */
 
-$this->title = 'Billing & Payments - ' . $person->personalInfo->getBrandName() . ' - Todevise';
+$this->title = 'Billing & Payments - ' . $person->personalInfoMapping->getBrandName() . ' - Todevise';
 $this->params['person'] = $person;
 $this->params['settings_menu_active_option'] = 'billing';
 

@@ -3,23 +3,12 @@ use app\assets\desktop\pub\PublicCommonAsset;
 use app\components\DeviserHeader;
 use app\components\DeviserMenu;
 use app\models\Person;
-use app\models\Product;
-use yii\web\View;
-use yii\helpers\Url;
-use app\models\Lang;
-use yii\helpers\Html;
-use yii\widgets\Pjax;
-use app\helpers\Utils;
-use yii\widgets\ListView;
-use yii\widgets\ActiveForm;
-use app\assets\desktop\pub\IndexAsset;
-use app\assets\desktop\pub\Index2Asset;
 
 PublicCommonAsset::register($this);
 
 /** @var Person $deviser */
 
-$this->title = 'About ' . $deviser->personalInfo->getBrandName() . ' - Todevise';
+$this->title = 'About ' . $deviser->personalInfoMapping->getBrandName() . ' - Todevise';
 $this->params['deviser_menu_active_option'] = 'about';
 $this->params['deviser_links_target'] = 'public_view';
 $this->params['deviser'] = $deviser;
@@ -84,10 +73,10 @@ foreach ($deviser->getAboutUrlImages() as $key => $urlImage) {
 							<!--<div class="title">Abo<br>ut</div>-->
 							<div class="name-location-wrapper">
 								<div class="name">
-									<?= $deviser->personalInfo->getBrandName() ?>
+									<?= $deviser->personalInfoMapping->getBrandName() ?>
 								</div>
 								<div class="location">
-									<?= $deviser->personalInfo->getLocationLabel() ?>
+									<?= $deviser->personalInfoMapping->getLocationLabel() ?>
 								</div>
 							</div>
 							<div class="subtitle">

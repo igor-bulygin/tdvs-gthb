@@ -1,8 +1,6 @@
 <?php
 namespace app\models;
 
-use app\helpers\CActiveRecord;
-
 /**
  * @property string location
  * @property string bank_name
@@ -13,16 +11,12 @@ use app\helpers\CActiveRecord;
  * @property string swift_bic
  * @property string account_type
  * @property string routing_number
+ * @property string bsb_code
  */
-class PersonBankInfo extends CActiveRecord
+class PersonBankInfo extends EmbedModel
 {
 	const ACCOUNT_TYPE_CHECKING = 'checking';
 	const ACCOUNT_TYPE_SAVINGS= 'savings';
-
-	/**
-	 * @var PersonSettings
-	 */
-	protected $settings;
 
 	public function attributes()
 	{
@@ -36,6 +30,7 @@ class PersonBankInfo extends CActiveRecord
 			'swift_bic',
 			'account_type',
 			'routing_number',
+			'bsb_code',
 		];
 	}
 
@@ -43,28 +38,6 @@ class PersonBankInfo extends CActiveRecord
 	public function getParentAttribute()
 	{
 		return "bank_info";
-	}
-
-	/**
-	 * @return PersonSettings
-	 */
-	public function getSettings()
-	{
-		return $this->settings;
-	}
-
-	/**
-	 * @param PersonSettings $settings
-	 */
-	public function setSettings($settings)
-	{
-		$this->settings = $settings;
-	}
-
-	public function beforeValidate()
-	{
-		$this->setScenario($this->getSettings()->getScenario());
-		return parent::beforeValidate();
 	}
 
 	public function rules()
@@ -77,23 +50,9 @@ class PersonBankInfo extends CActiveRecord
 			['iban', 'app\validators\EIBANValidator'],
 			['routing_number', 'app\validators\EABARoutingNumberValidator'],
 			['swift_bic', 'app\validators\SwiftBicValidator'],
+			['bsb_code', 'validateBsbCode'],
 			['account_type', 'in', 'range' => [self::ACCOUNT_TYPE_CHECKING, self::ACCOUNT_TYPE_SAVINGS]],
 		];
-	}
-
-
-	/**
-	 * Add additional error to make easy show labels in client side
-	 */
-	public function afterValidate()
-	{
-		parent::afterValidate();
-		foreach ($this->errors as $attribute => $error) {
-			foreach ($error as $oneError) {
-				$this->getSettings()->addError($attribute, $oneError);
-			}
-		};
-		$this->clearErrors();
 	}
 
 	/**
@@ -110,7 +69,7 @@ class PersonBankInfo extends CActiveRecord
 		preg_match($regExp, $value, $matches);
 
 		if (empty($matches)) {
-			$this->addError($attribute, sprintf('%s is not a valid institution number', $value));
+			$this->addError($attribute, 'The institution number must contain 3 digits');
 		}
 	}
 
@@ -128,7 +87,7 @@ class PersonBankInfo extends CActiveRecord
 		preg_match($regExp, $value, $matches);
 
 		if (empty($matches)) {
-			$this->addError($attribute, sprintf('%s is not a valid transit number', $value));
+			$this->addError($attribute, 'The transit number must contain 5 digits');
 		}
 	}
 
@@ -144,10 +103,16 @@ class PersonBankInfo extends CActiveRecord
 		$value = $this->$attribute;
 		if ($this->location == 'CA') {
 			$regExp = "/^[0-9]{12}$/"; // Canada
+			$message = 'The account number must contain 12 digits for Canada';
 		} elseif ($this->location == 'NZ') {
 			$regExp = "/^[0-9]{15}([0-9]{1})?$/"; // New Zeland
+			$message = 'The account number must contain 15-16 digits for New Zeland';
 		} elseif ($this->location == 'US') {
 			$regExp = "/^[0-9]{6}[0-9]*$/"; // USA
+			$message = 'The account number must contain 6 or more digits for US';
+		} elseif ($this->location == 'AU') {
+			$regExp = "/^[A-Z0-9]{6,10}*$/"; // Australia
+			$message = 'The account number must contain 6 to 10 characteres for Australia';
 		}
 
 		if (empty($regExp)) {
@@ -157,7 +122,26 @@ class PersonBankInfo extends CActiveRecord
 		preg_match($regExp, $value, $matches);
 
 		if (empty($matches)) {
-			$this->addError($attribute, sprintf('%s is not a valid account number for %s location', $value, $this->location));
+			$this->addError($attribute, $message);
+		}
+	}
+
+	/**
+	 * Validates an account number
+	 *
+	 * @param $attribute
+	 * @param $params
+	 */
+	public function validateBsbCode($attribute, $params)
+	{
+
+		$value = $this->$attribute;
+		$regExp = "/^[0-9]{6}$/";
+
+		preg_match($regExp, $value, $matches);
+
+		if (empty($matches)) {
+			$this->addError($attribute, 'The BSB code must contain 6 digits');
 		}
 	}
 

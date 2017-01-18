@@ -27,10 +27,10 @@ $deviser = $this->params['deviser'];
 						<?php } ?>
 						<div class="deviser-data">
 							<div class="name">
-								<?= $deviser->personalInfo->getBrandName() ?>
+								<?= $deviser->personalInfoMapping->getBrandName() ?>
 							</div>
 							<div class="location">
-								<?= $deviser->personalInfo->getCityLabel() ?>
+								<?= $deviser->personalInfoMapping->getCityLabel() ?>
 							</div>
 							<div class="description">
 								<?= $deviser->text_short_description ?>

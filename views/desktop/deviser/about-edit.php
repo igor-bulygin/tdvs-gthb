@@ -1,26 +1,15 @@
 <?php
+use app\assets\desktop\deviser\EditAboutAsset;
 use app\components\DeviserAdminHeader;
-use app\components\DeviserHeader;
 use app\components\DeviserMakeProfilePublic;
 use app\components\DeviserMenu;
 use app\models\Person;
-use app\models\Product;
-use yii\web\View;
-use yii\helpers\Url;
-use app\models\Lang;
-use yii\helpers\Html;
-use yii\widgets\Pjax;
-use app\helpers\Utils;
-use yii\widgets\ListView;
-use yii\widgets\ActiveForm;
-use app\assets\desktop\pub\Index2Asset;
-use app\assets\desktop\deviser\EditAboutAsset;
 
 EditAboutAsset::register($this);
 
 /** @var Person $deviser */
 
-$this->title = 'About ' . $deviser->personalInfo->getBrandName() . ' - Todevise';
+$this->title = 'About ' . $deviser->personalInfoMapping->getBrandName() . ' - Todevise';
 $this->params['deviser_menu_active_option'] = 'about';
 $this->params['deviser_links_target'] = 'edit_view';
 $this->params['deviser'] = $deviser;

@@ -139,7 +139,7 @@ app\components\assets\PublicHeader2Asset::register($this);
 									<?php if ($person->isAdmin()) { ?>
 
 										<li class="header-item">
-											<span><?=$person->personalInfo->getBrandName()?></span>
+											<span><?=$person->personalInfoMapping->getBrandName()?></span>
 											<img class="avatar-logued-user" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getAvatarImage())->resize(25, 25) ?>">
 										</li>
 										<li><a href="<?=Url::to('/admin')?>">Administration</a></li>
@@ -148,7 +148,7 @@ app\components\assets\PublicHeader2Asset::register($this);
 									<?php } elseif ($person->isDeviser()) { ?>
 
 										<li class="header-item">
-											<a href="<?= Url::to(["deviser/about", "slug" => $person->slug, 'deviser_id' => $person->short_id])?>"> <span><?=$person->personalInfo->getBrandName()?></span></a>
+											<a href="<?= Url::to(["deviser/about", "slug" => $person->slug, 'deviser_id' => $person->short_id])?>"> <span><?=$person->personalInfoMapping->getBrandName()?></span></a>
 											<img class="avatar-logued-user" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getAvatarImage())->resize(25, 25) ?>">
 										</li>
 										<li><a href="#">Sales</a></li>
@@ -156,10 +156,10 @@ app\components\assets\PublicHeader2Asset::register($this);
 									<?php } elseif ($person->isClient()) { ?>
 
 										<li class="header-item">
-											<span><?=$person->personalInfo->getBrandName()?></span>
+											<span><?=$person->personalInfoMapping->getBrandName()?></span>
 											<img class="avatar-logued-user" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getAvatarImage())->resize(25, 25) ?>">
 										</li>
-										<li><a href="#"><?=$person->personalInfo->getBrandName()?></a></li>
+										<li><a href="#"><?=$person->personalInfoMapping->getBrandName()?></a></li>
 										<li><a href="#">My orders</a></li>
 
 									<?php } ?>

@@ -1,6 +1,5 @@
 <?php
 use app\assets\desktop\deviser\EditStoreAsset;
-use app\assets\desktop\pub\Index2Asset;
 use app\components\DeviserHeader;
 use app\components\DeviserMakeProfilePublic;
 use app\components\DeviserMenu;
@@ -17,7 +16,7 @@ EditStoreAsset::register($this);
 /** @var Category $category */
 /** @var Category $selectedCategory */
 
-$this->title = $deviser->personalInfo->getBrandName() . ' - Todevise';
+$this->title = $deviser->personalInfoMapping->getBrandName() . ' - Todevise';
 
 // use params to share data between views :(
 $this->params['deviser_menu_categories'] = $categories;

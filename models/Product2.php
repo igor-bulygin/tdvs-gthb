@@ -16,11 +16,11 @@ use yii2tech\ar\position\PositionBehavior;
  * @property array slug
  * @property array description
  * @property array categories
- * @property ProductMedia $mediaFiles
- * @property Preorder $preorderInfo
- * @property MadeToOrder $madeToOrderInfo
- * @property Bespoke $bespokeInfo
- * @property FaqQuestion[] $faqInfo
+ * @property ProductMedia $mediaMapping
+ * @property Preorder $preorderMapping
+ * @property MadeToOrder $madeToOrderMapping
+ * @property Bespoke $bespokeMapping
+ * @property FaqQuestion[] $faqMapping
 *
  * @property array collections
  * @property array media
@@ -147,27 +147,27 @@ class Product2 extends Product {
 		$this->position = 0;
 	}
 
-	public function embedMediaFiles()
+	public function embedMediaMapping()
 	{
 		return $this->mapEmbedded('media', ProductMedia::className(), array('unsetSource' => false));
 	}
 
-	public function embedFaqInfo()
+	public function embedFaqMapping()
 	{
 		return $this->mapEmbeddedList('faq', FaqQuestion::className(), array('unsetSource' => false));
 	}
 
-	public function embedPreorderInfo()
+	public function embedPreorderMapping()
 	{
 		return $this->mapEmbedded('preorder', Preorder::className(), array('unsetSource' => false));
 	}
 
-	public function embedMadeToOrderInfo()
+	public function embedMadeToOrderMapping()
 	{
 		return $this->mapEmbedded('madetoorder', MadeToOrder::className(), array('unsetSource' => false));
 	}
 
-	public function embedBespokeInfo()
+	public function embedBespokeMapping()
 	{
 		return $this->mapEmbedded('bespoke', Bespoke::className(), array('unsetSource' => false));
 	}
@@ -184,12 +184,12 @@ class Product2 extends Product {
 
 	public function beforeValidate()
 	{
-		$this->mediaFiles->setProduct($this);
-		$this->preorderInfo->setProduct($this);
-		$this->madeToOrderInfo->setProduct($this);
-		$this->bespokeInfo->setProduct($this);
-		foreach ($this->faqInfo as $faqInfo) {
-			$faqInfo->setModel($this);
+		$this->mediaMapping->setProduct($this);
+		$this->preorderMapping->setProduct($this);
+		$this->madeToOrderMapping->setProduct($this);
+		$this->bespokeMapping->setProduct($this);
+		foreach ($this->faqMapping as $faqMapping) {
+			$faqMapping->setModel($this);
 		}
 		return parent::beforeValidate();
 	}
@@ -322,13 +322,13 @@ class Product2 extends Product {
 			[   'media', 'safe'], // to load data posted from WebServices
 			[   'mediaFiles', 'app\validators\EmbedDocValidator'], // to apply rules
 			[   'faq', 'safe'], // to load data posted from WebServices
-			[   'faqInfo', 'app\validators\EmbedDocValidator'], // to apply rules
+			[   'faqMapping', 'app\validators\EmbedDocValidator'], // to apply rules
 			[   'preorder', 'safe'], // to load data posted from WebServices
-			[   'preorderInfo', 'app\validators\EmbedDocValidator'], // to apply rules
+			[   'preorderMapping', 'app\validators\EmbedDocValidator'], // to apply rules
 			[   'madetoorder', 'safe'], // to load data posted from WebServices
-			[   'madeToOrderInfo', 'app\validators\EmbedDocValidator'], // to apply rules
+			[   'madeToOrderMapping', 'app\validators\EmbedDocValidator'], // to apply rules
 			[   'bespoke', 'safe'], // to load data posted from WebServices
-			[   'bespokeInfo', 'app\validators\EmbedDocValidator'], // to apply rules
+			[   'bespokeMapping', 'app\validators\EmbedDocValidator'], // to apply rules
 			[
 				'options',
 				'app\validators\OptionsValidator',
@@ -881,19 +881,19 @@ class Product2 extends Product {
 		$loaded = parent::load($data, $formName);
 
 		if (array_key_exists('media', $data)) {
-			$this->mediaFiles->load($data, 'media');
+			$this->mediaMapping->load($data, 'media');
 		}
 
 		if (array_key_exists('preorder', $data)) {
-			$this->preorderInfo->load($data, 'preorder');
+			$this->preorderMapping->load($data, 'preorder');
 		}
 
 		if (array_key_exists('madetoorder', $data)) {
-			$this->madeToOrderInfo->load($data, 'madetoorder');
+			$this->madeToOrderMapping->load($data, 'madetoorder');
 		}
 
 		if (array_key_exists('bespoke', $data)) {
-			$this->bespokeInfo->load($data, 'madetoorder');
+			$this->bespokeMapping->load($data, 'madetoorder');
 		}
 
 		// use position behavior method to move it (only if it has primary key)

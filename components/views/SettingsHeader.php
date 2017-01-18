@@ -19,7 +19,7 @@ $activeOption = array_key_exists('settings_menu_active_option', $this->params) ?
 
 <img src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getAvatarImage())->resize(50, 50) ?>">
 
-<?=$person->personalInfo->getBrandName()?>
+<?=$person->personalInfoMapping->getBrandName()?>
 
 <ul class="nav nav-tabs">
 	<li role="presentation">

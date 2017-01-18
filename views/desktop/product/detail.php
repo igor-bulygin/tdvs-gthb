@@ -108,7 +108,7 @@ $videos = $product->getVideos();
 								<div class="avatar">
 									<a href="<?= Url::to(["deviser/store", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id]) ?>">
 										<img class="cover" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($deviser->getAvatarImage())->resize(128, 128) ?>" data-pin-nopin="true">
-										<span><?= $deviser->personalInfo->getBrandName() ?></span>
+										<span><?= $deviser->personalInfoMapping->getBrandName() ?></span>
 									</a>
 								</div>
 							</div>
@@ -280,7 +280,7 @@ $videos = $product->getVideos();
 				</li>
 				<?php } ?>
 				<li role="presentation">
-					<a href="#works" aria-controls="works" role="tab" data-toggle="tab">More by <?= $deviser->personalInfo->getBrandName() ?></a>
+					<a href="#works" aria-controls="works" role="tab" data-toggle="tab">More by <?= $deviser->personalInfoMapping->getBrandName() ?></a>
 				</li>
 			</ul>
 		</div>

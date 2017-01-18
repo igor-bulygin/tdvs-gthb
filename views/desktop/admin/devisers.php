@@ -1,12 +1,11 @@
 <?php
-use yii\web\View;
-use app\models\Lang;
-use yii\helpers\Url;
-use yii\helpers\Html;
-use yii\helpers\Json;
+use app\assets\desktop\admin\DevisersAsset;
 use app\models\Person;
 use yii\grid\GridView;
-use app\assets\desktop\admin\DevisersAsset;
+use yii\helpers\Html;
+use yii\helpers\Json;
+use yii\helpers\Url;
+use yii\web\View;
 
 /* @var $this yii\web\View */
 /* @var $countries ArrayObject */
@@ -92,7 +91,7 @@ $this->title = 'Todevise / Admin / Devisers';
 					[
 						'value' => function($model){
 							/** @var Person $model */
-							return $model->personalInfo->getBrandName();
+							return $model->personalInfoMapping->getBrandName();
 						},
 						'label' => Yii::t("app/admin", "Name")
 					],
@@ -105,8 +104,8 @@ $this->title = 'Todevise / Admin / Devisers';
 					[
 						'value' => function($model) use ($countries_lookup){
 							/** @var Person $model */
-							if (array_key_exists($model->personalInfo->country, $countries_lookup)) {
-								return $countries_lookup[$model->personalInfo->country];
+							if (array_key_exists($model->personalInfoMapping->country, $countries_lookup)) {
+								return $countries_lookup[$model->personalInfoMapping->country];
 							}
 							return null;
 						},

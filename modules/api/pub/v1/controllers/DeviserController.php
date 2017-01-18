@@ -44,7 +44,7 @@ class DeviserController extends AppPublicController
 
 		$deviser->setScenario(Person::SCENARIO_DEVISER_CREATE_DRAFT);
 		$deviser->load(Yii::$app->request->post(), '');
-		$deviser->personalInfo->load(Yii::$app->request->post(), '');
+		$deviser->personalInfoMapping->load(Yii::$app->request->post(), '');
 
 		$deviser->credentials = ["email" => $invitation->email];
 		$deviser->setPassword(Yii::$app->request->post("password"));

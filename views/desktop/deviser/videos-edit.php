@@ -1,21 +1,15 @@
 <?php
+use app\assets\desktop\deviser\EditVideosAsset;
 use app\components\DeviserHeader;
-use app\components\DeviserAdminHeader;
 use app\components\DeviserMakeProfilePublic;
 use app\components\DeviserMenu;
-use app\helpers\Utils;
 use app\models\Person;
-use yii\web\View;
-use app\models\Lang;
-use app\assets\desktop\pub\Index2Asset;
-use yii\helpers\Json;
-use app\assets\desktop\deviser\EditVideosAsset;
 
 EditVideosAsset::register($this);
 
 /** @var Person $deviser */
 
-$this->title = 'About ' . $deviser->personalInfo->getBrandName() . ' - Todevise';
+$this->title = 'About ' . $deviser->personalInfoMapping->getBrandName() . ' - Todevise';
 $this->params['deviser'] = $deviser;
 $this->params['deviser_menu_active_option'] = 'videos';
 $this->params['deviser_links_target'] = 'edit_view';

@@ -18,13 +18,13 @@ use yii\web\IdentityInterface;
  * @property mixed $type
  * @property array $categories
  * @property array $collections
- * @property PersonPreferences $preferencesInfo
- * @property PersonPersonalInfo $personalInfo
- * @property PersonMedia $mediaFiles
+ * @property PersonPreferences $preferencesMapping
+ * @property PersonPersonalInfo $personalInfoMapping
+ * @property PersonMedia $mediaMapping
  * @property PersonSettings $settingsMapping
  * @property array $press
- * @property PersonVideo[] $videosInfo
- * @property FaqQuestion[] $faqInfo
+ * @property PersonVideo[] $videosMapping
+ * @property FaqQuestion[] $faqMapping
  * @property array $credentials
  * @property array $preferences
  * @property string $curriculum
@@ -90,7 +90,7 @@ class Person extends CActiveRecord implements IdentityInterface
 			'categories',
 			'collections',
 			'personal_info',
-//			'personalInfo',
+//			'personalInfoMapping',
 			'curriculum',
 			'media',
 			'settings',
@@ -120,9 +120,9 @@ class Person extends CActiveRecord implements IdentityInterface
 
 		$this->short_id = Utils::shortID(7);
 
-		$this->preferencesInfo = new PersonPreferences();
-		$this->personalInfo = new PersonPersonalInfo();
-		$this->mediaFiles = new PersonMedia();
+		$this->preferencesMapping = new PersonPreferences();
+		$this->personalInfoMapping = new PersonPersonalInfo();
+		$this->mediaMapping = new PersonMedia();
 
 		// initialize attributes
 		$this->categories = [];
@@ -137,27 +137,27 @@ class Person extends CActiveRecord implements IdentityInterface
 		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_PUBLIC);
 	}
 
-	public function embedPreferencesInfo()
+	public function embedPreferencesMapping()
 	{
 		return $this->mapEmbedded('preferences', PersonPreferences::className());
 	}
 
-	public function embedPersonalInfo()
+	public function embedPersonalInfoMapping()
 	{
 		return $this->mapEmbedded('personal_info', PersonPersonalInfo::className());
 	}
 
-	public function embedMediaFiles()
+	public function embedMediaMapping()
 	{
 		return $this->mapEmbedded('media', PersonMedia::className());
 	}
 
-	public function embedVideosInfo()
+	public function embedVideosMapping()
 	{
 		return $this->mapEmbeddedList('videos', PersonVideo::className());
 	}
 
-	public function embedFaqInfo()
+	public function embedFaqMapping()
 	{
 		return $this->mapEmbeddedList('faq', FaqQuestion::className());
 	}
@@ -240,19 +240,19 @@ class Person extends CActiveRecord implements IdentityInterface
 	{
 		parent::afterFind();
 
-		$this->preferencesInfo->load($this, 'preferences');
-		$this->personalInfo->load($this, 'personal_info');
-		$this->personalInfo->setPerson($this);
-		$this->mediaFiles->load($this, 'media');
-		$this->mediaFiles->setPerson($this);
+		$this->preferencesMapping->load($this, 'preferences');
+		$this->personalInfoMapping->load($this, 'personal_info');
+		$this->personalInfoMapping->setPerson($this);
+		$this->mediaMapping->load($this, 'media');
+		$this->mediaMapping->setPerson($this);
 	}
 
 	public function beforeValidate()
 	{
-		foreach ($this->faqInfo as $faqInfo) {
-			$faqInfo->setModel($this);
+		foreach ($this->faqMapping as $faqMapping) {
+			$faqMapping->setModel($this);
 		}
-		$this->settingsMapping->setPerson($this);
+		$this->settingsMapping->setParentObject($this);
 		return parent::beforeValidate();
 	}
 
@@ -267,9 +267,9 @@ class Person extends CActiveRecord implements IdentityInterface
 		// remove not allowed html tags
 		$this->text_short_description = Person::stripNotAllowedHtmlTags($this->text_short_description);
 		$this->text_biography = Person::stripNotAllowedHtmlTags($this->text_biography);
-		$this->personalInfo->name = Person::stripNotAllowedHtmlTags($this->personalInfo->name, '');
-		$this->personalInfo->last_name = Person::stripNotAllowedHtmlTags($this->personalInfo->last_name, '');
-		$this->personalInfo->brand_name = Person::stripNotAllowedHtmlTags($this->personalInfo->brand_name, '');
+		$this->personalInfoMapping->name = Person::stripNotAllowedHtmlTags($this->personalInfoMapping->name, '');
+		$this->personalInfoMapping->last_name = Person::stripNotAllowedHtmlTags($this->personalInfoMapping->last_name, '');
+		$this->personalInfoMapping->brand_name = Person::stripNotAllowedHtmlTags($this->personalInfoMapping->brand_name, '');
 
 		if (!array_key_exists("auth_key", $this->credentials) || $this->credentials["auth_key"] === null) {
 			$this->credentials = array_merge_recursive($this->credentials, [
@@ -278,7 +278,7 @@ class Person extends CActiveRecord implements IdentityInterface
 		}
 
 		if (empty($this->slug)) {
-			$this->slug = Slugger::slugify($this->personalInfo->getBrandName());
+			$this->slug = Slugger::slugify($this->personalInfoMapping->getBrandName());
 		}
 
 		if (empty($this->account_state)) {
@@ -305,7 +305,7 @@ class Person extends CActiveRecord implements IdentityInterface
 
 	public function setLanguage($lang)
 	{
-		$this->preferencesInfo->lang = $lang;
+		$this->preferencesMapping->lang = $lang;
 	}
 
 	public function rules()
@@ -316,7 +316,7 @@ class Person extends CActiveRecord implements IdentityInterface
 			// the name, email, subject and body attributes are required
 			[
 				[
-					'personalInfo',
+					'personal_info',
 					'credentials',
 				],
 				'required',
@@ -363,17 +363,17 @@ class Person extends CActiveRecord implements IdentityInterface
 				'on' => [self::SCENARIO_DEVISER_UPDATE_PROFILE],
 			],
 			[
-				'preferencesInfo',
+				'preferencesMapping',
 				'yii2tech\embedded\Validator',
 				'on' => [self::SCENARIO_DEVISER_CREATE_DRAFT],
 			],
 			[
-				'personalInfo',
+				'personalInfoMapping',
 				'app\validators\EmbedDocValidator',
 				'on' => [self::SCENARIO_DEVISER_UPDATE_DRAFT, self::SCENARIO_DEVISER_UPDATE_PROFILE],
 			],
 			[
-				'mediaFiles',
+				'mediaMapping',
 				'app\validators\EmbedDocValidator',
 				'on' => [self::SCENARIO_DEVISER_UPDATE_DRAFT, self::SCENARIO_DEVISER_UPDATE_PROFILE],
 			],
@@ -389,9 +389,9 @@ class Person extends CActiveRecord implements IdentityInterface
 			],
 			[   'press', 'app\validators\PersonPressFilesValidator'],
 			[   'videos', 'safe'], // to load data posted from WebServices
-			[   'videosInfo', 'app\validators\EmbedDocValidator'], // to apply rules
+			[   'videosMapping', 'app\validators\EmbedDocValidator'], // to apply rules
 			[   'faq', 'safe'], // to load data posted from WebServices
-			[   'faqInfo', 'app\validators\EmbedDocValidator'], // to apply rules
+			[   'faqMapping', 'app\validators\EmbedDocValidator'], // to apply rules
 		];
 	}
 
@@ -438,7 +438,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'text_biography',
 					'categories',
 					'personal_info',
-					'media'  => 'mediaInfoAttributes',
+					'media', //  => 'mediaInfoAttributes',
 					'press',
 					'videos' => 'videosPreview',
 					'faq',
@@ -465,7 +465,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'categories',
 					'collections',
 					'personal_info',
-					'media'  => 'mediaInfoAttributes',
+					'media', //  => 'mediaInfoAttributes',
 					'settings',
 					'press',
 					'videos' => 'videosPreview',
@@ -492,7 +492,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'categories',
 					'collections',
 					'personal_info',
-					'media'  => 'mediaInfoAttributes',
+					'media', //  => 'mediaInfoAttributes',
 					'settings',
 					'press',
 					'videos',
@@ -567,10 +567,10 @@ class Person extends CActiveRecord implements IdentityInterface
 	public function getHeaderBackgroundImage($urlify = true, $minHeight = null, $minWidth = null)
 	{
 		$image = "/imgs/default-cover.jpg";
-		if (Person::existMediaFile($this->mediaFiles->header_cropped)) {
-			$image = Person::getUrlImagesLocation() . $this->mediaFiles->header_cropped;
-		} elseif (Person::existMediaFile($this->mediaFiles->header)) {
-			$image = Person::getUrlImagesLocation() . $this->mediaFiles->header;
+		if (Person::existMediaFile($this->mediaMapping->header_cropped)) {
+			$image = Person::getUrlImagesLocation() . $this->mediaMapping->header_cropped;
+		} elseif (Person::existMediaFile($this->mediaMapping->header)) {
+			$image = Person::getUrlImagesLocation() . $this->mediaMapping->header;
 		}
 
 		if ((!empty($minHeight)) || (!empty($minWidth))) {
@@ -596,10 +596,10 @@ class Person extends CActiveRecord implements IdentityInterface
 	public function getAvatarImage($urlify = true, $minHeight = null, $minWidth = null)
 	{
 		$image = "/imgs/default-avatar.jpg";
-		if (Person::existMediaFile($this->mediaFiles->profile_cropped)) {
-			$image = Person::getUrlImagesLocation() . $this->mediaFiles->profile_cropped;
-		} elseif (Person::existMediaFile($this->mediaFiles->profile)) {
-			$image = Person::getUrlImagesLocation() . $this->mediaFiles->profile;
+		if (Person::existMediaFile($this->mediaMapping->profile_cropped)) {
+			$image = Person::getUrlImagesLocation() . $this->mediaMapping->profile_cropped;
+		} elseif (Person::existMediaFile($this->mediaMapping->profile)) {
+			$image = Person::getUrlImagesLocation() . $this->mediaMapping->profile;
 		}
 
 		if ((!empty($minHeight)) || (!empty($minWidth))) {
@@ -634,7 +634,7 @@ class Person extends CActiveRecord implements IdentityInterface
 	public function getVideosPreview()
 	{
 		$videos = [];
-		foreach ($this->videosInfo as $item) {
+		foreach ($this->videosMapping as $item) {
 			/** @var PersonVideo $item*/
 			$products = [];
 			foreach ($item->products as $product_id) {
@@ -658,7 +658,7 @@ class Person extends CActiveRecord implements IdentityInterface
 	 */
 	public function getMediaInfoAttributes()
 	{
-		$media = $this->mediaFiles->getAttributes();
+		$media = $this->mediaMapping->getAttributes();
 
 		return $media;
 	}
@@ -801,7 +801,7 @@ class Person extends CActiveRecord implements IdentityInterface
 		return [
 			"id" => $this->short_id,
 			"slug" => $this->slug,
-			"name" => $this->personalInfo->getBrandName(),
+			"name" => $this->personalInfoMapping->getBrandName(),
 			"url_avatar" => $this->getAvatarImage128()
 		];
 	}
@@ -813,7 +813,7 @@ class Person extends CActiveRecord implements IdentityInterface
 	 */
 	public function getBrandName()
 	{
-		return $this->personalInfo->getBrandName();
+		return $this->personalInfoMapping->getBrandName();
 	}
 
 	/**
@@ -836,7 +836,7 @@ class Person extends CActiveRecord implements IdentityInterface
 
 		// if photos are stored, then return them
 		$urls = [];
-		foreach ($this->mediaFiles->photos as $filename) {
+		foreach ($this->mediaMapping->photos as $filename) {
 			$urls[] = $this->getUrlImagesLocation() . $filename;
 		}
 
@@ -851,9 +851,9 @@ class Person extends CActiveRecord implements IdentityInterface
 	public function setScenario($value)
 	{
 		parent::setScenario($value);
-		$this->personalInfo->setScenario($value);
-		$this->mediaFiles->setScenario($value);
-		$this->preferencesInfo->setScenario($value);
+		$this->personalInfoMapping->setScenario($value);
+		$this->mediaMapping->setScenario($value);
+		$this->preferencesMapping->setScenario($value);
 	}
 
 	/**
@@ -868,13 +868,13 @@ class Person extends CActiveRecord implements IdentityInterface
 		$loaded = parent::load($data, $formName);
 
 		if (array_key_exists('personal_info', $data)) {
-			$this->personalInfo->load($data, 'personal_info');
+			$this->personalInfoMapping->load($data, 'personal_info');
 		}
 		if (array_key_exists('media', $data)) {
-			$this->mediaFiles->load($data, 'media');
+			$this->mediaMapping->load($data, 'media');
 		}
 		if (array_key_exists('preferences', $data)) {
-			$this->preferencesInfo->load($data, 'preferences');
+			$this->preferencesMapping->load($data, 'preferences');
 		}
 
 		return ($loaded);
@@ -914,7 +914,7 @@ class Person extends CActiveRecord implements IdentityInterface
 	{
 		$videos = [];
 		/** @var PersonVideo $video */
-		foreach ($this->videosInfo as $video) {
+		foreach ($this->videosMapping as $video) {
 			if (in_array($productId, $video->products)) {
 				$videos[] = $video;
 			}

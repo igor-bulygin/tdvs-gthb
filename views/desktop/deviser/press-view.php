@@ -1,6 +1,5 @@
 <?php
 use app\assets\desktop\deviser\EditPressAsset;
-use app\assets\desktop\pub\Index2Asset;
 use app\components\DeviserHeader;
 use app\components\DeviserMenu;
 use app\helpers\Utils;
@@ -12,7 +11,7 @@ EditPressAsset::register($this);
 /** @var Person $deviser */
 /** @var array $press */
 
-$this->title = 'About ' . $deviser->personalInfo->getBrandName() . ' - Todevise';
+$this->title = 'About ' . $deviser->personalInfoMapping->getBrandName() . ' - Todevise';
 $this->params['deviser'] = $deviser;
 $this->params['deviser_menu_active_option'] = 'press';
 $this->params['deviser_links_target'] = 'public_view';

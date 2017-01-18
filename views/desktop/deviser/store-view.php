@@ -2,19 +2,11 @@
 use app\assets\desktop\pub\DeviserStoreViewAsset;
 use app\components\DeviserHeader;
 use app\components\DeviserMenu;
+use app\helpers\Utils;
 use app\models\Category;
 use app\models\Person;
 use app\models\Product;
-use yii\web\View;
 use yii\helpers\Url;
-use app\models\Lang;
-use yii\helpers\Html;
-use yii\widgets\Pjax;
-use app\helpers\Utils;
-use yii\widgets\ListView;
-use yii\widgets\ActiveForm;
-use app\assets\desktop\pub\IndexAsset;
-use app\assets\desktop\pub\Index2Asset;
 
 DeviserStoreViewAsset::register($this);
 
@@ -23,7 +15,7 @@ DeviserStoreViewAsset::register($this);
 /** @var Category $category */
 /** @var Category $selectedCategory */
 
-$this->title = $deviser->personalInfo->getBrandName() . ' - Todevise';
+$this->title = $deviser->personalInfoMapping->getBrandName() . ' - Todevise';
 
 // use params to share data between views :(
 $this->params['deviser_menu_categories'] = $categories;
