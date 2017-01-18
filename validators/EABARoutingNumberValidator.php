@@ -62,7 +62,7 @@ class EABARoutingNumberValidator extends Validator
 		$return = $this->validateABARoutingNumber($value);
 
 		if (true !== $return) {
-			$message = $this->message !== null ? $this->message : sprintf('%s has failed the ABA Routine Number check', $value);
+			$message = $this->message !== null ? $this->message : sprintf('The ABA routing number is not valid', $value);
 			$this->addError($object, $attribute, $message);
 		}
 	}

@@ -45,7 +45,7 @@ class SwiftBicValidator extends Validator
 			$return = $this->validateSwiftBic($value);
 
 			if (!$return) {
-				$message = $this->message !== null ? $this->message : sprintf('%s is not a valid swift/bic number', $value);
+				$message = $this->message !== null ? $this->message : 'The SWIFT/BIC code must be 8 or 11 characters long';
 				$this->addError($object, $attribute, $message);
 			}
 		}
