@@ -9,6 +9,9 @@
 	<div class="col-md-5">
 		<input type="text" name="bsb_code" class="form-control ng-class:{'error-input': australiaBankInformationCtrl.has_error(australiaBankInformationCtrl.form, australiaBankInformationCtrl.form.bsb_code)}" ng-model="australiaBankInformationCtrl.bankInformation.bsb_code" required>
 	</div>
+	<div class="col-md-5">
+		<show-billing-errors errors="australiaBankInformationCtrl.errors" field="bsb_code"></show-bank-errors>
+	</div>
 </div>
 <div class="form-group">
 	<label for="account_number" class="col-md-2">Account number</label>
@@ -20,5 +23,8 @@
 	<label for="swift_bic" class="col-md-2">Swift / BIC</label>
 	<div class="col-md-5">
 		<input type="text" name="swift_bic" class="form-control ng-class:{'error-input': australiaBankInformationCtrl.has_error(australiaBankInformationCtrl.form, australiaBankInformationCtrl.form.swift_bic)}" ng-model="australiaBankInformationCtrl.bankInformation.swift_bic" required>
+	</div>
+	<div class="col-md-5">
+		<show-billing-errors errors="australiaBankInformationCtrl.errors" field="swift_bic"></show-bank-errors>
 	</div>
 </div>

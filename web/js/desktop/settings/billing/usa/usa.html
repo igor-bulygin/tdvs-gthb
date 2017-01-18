@@ -19,10 +19,16 @@
 	<div class="col-md-5">
 		<input type="text" name="routing_number" class="form-control ng-class:{'error-input': usaBankInformationCtrl.has_error(usaBankInformationCtrl.form, usaBankInformationCtrl.form.routing_number)}" ng-model="usaBankInformationCtrl.bankInformation.routing_number" required>
 	</div>
+	<div class="col-md-5">
+		<show-billing-errors errors="usaBankInformationCtrl.errors" field="routing_number"></show-bank-errors>
+	</div>
 </div>
 <div class="form-group">
 	<label for="account_number" class="col-md-2">Account number</label>
 	<div class="col-md-5">
 		<input type="text" name="account_number" class="form-control ng-class:{'error-input': usaBankInformationCtrl.has_error(usaBankInformationCtrl.form, usaBankInformationCtrl.form.account_number)}" ng-model="usaBankInformationCtrl.bankInformation.account_number" required>
+	</div>
+	<div class="col-md-5">
+		<show-billing-errors errors="usaBankInformationCtrl.errors" field="account_number"></show-bank-errors>
 	</div>
 </div>
