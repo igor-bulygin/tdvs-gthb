@@ -1,2 +1,2 @@
 #!/bin/bash
-rsync -razhe ssh --progress root@dev.todevise.com:/var/www/dev.todevise.com/web/web/uploads/ ./web/uploads/
+rsync -razhe "ssh -p 1021" --progress todeviseapp@dev.todevise.com:/var/www/todevise/web/current/web/uploads ./web/uploads/
