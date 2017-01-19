@@ -408,7 +408,12 @@ class Utils
 			$translatedValue = Utils::getValue($model->getAttribute($rootParticle), Yii::$app->language, array_keys(Lang::EN_US_DESC)[0]);
 		} elseif (count($particles) > 1) {
 			// want to translate a sub attribute. now, are stored in arrays, not custom models
-			$translatedValue = Utils::translateArrayAttribute($model->getAttribute($rootParticle), implode('.', $otherParticles));
+			$value = $model->getAttribute($rootParticle);
+			if ($value) {
+				$translatedValue = Utils::translateArrayAttribute($value, implode('.', $otherParticles));
+			} else {
+				$translatedValue = [];
+			}
 		}
 
 		$model->setAttribute($rootParticle, $translatedValue);
