@@ -4,7 +4,6 @@ namespace app\controllers;
 use app\helpers\CAccessRule;
 use app\helpers\CController;
 use app\models\Person;
-use Yii;
 use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
 
@@ -39,7 +38,7 @@ class SettingsController extends CController
 		// get the category object
 		$person = Person::findOneSerialized($person_id);
 
-		if (!$person->isDeviser()) {
+		if (!$person->isDeviser() || !$person->isDeviserEditable()) {
 			throw new  NotFoundHttpException();
 		}
 
