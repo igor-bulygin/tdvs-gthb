@@ -14,7 +14,8 @@
 			form: '^form'
 		},
 		bindings: {
-			bankInformation: '<'
+			bankInformation: '<',
+			errors: '<'
 		}
 	}
 

@@ -42,6 +42,7 @@
 		}
 
 		function resetBankInfo(location){
+			if(vm.errors) delete vm.errors;
 			vm.bankInformationForm.$setPristine();
 			vm.bankInformationForm.$submitted = false;
 			vm.bank_information = {
@@ -62,7 +63,12 @@
 					$rootScope.$broadcast(settingsEvents.changesSaved);
 				}, function (err) {
 					$rootScope.$broadcast(settingsEvents.invalidForm);
-					//TODO: Show errors
+					if(UtilService.isObject(err.data.errors)) {
+						vm.errors = angular.copy(err.data.errors);
+						for(var key in vm.errors) {
+							form[key].$setValidity('valid', false);
+						}
+					}
 				})
 			} else {
 				$rootScope.$broadcast(settingsEvents.invalidForm);
