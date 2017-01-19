@@ -22,7 +22,15 @@ class EmbedModel extends CActiveRecord
 	public function setParentObject($object)
 	{
 		$this->parentObject = $object;
-		$this->setScenario($this->getParentObject()->getScenario());
+	}
+
+	public function beforeValidate()
+	{
+		if ($this->getParentObject()) {
+			$this->setScenario($this->getParentObject()->getScenario());
+		}
+
+		return parent::beforeValidate();
 	}
 
 
