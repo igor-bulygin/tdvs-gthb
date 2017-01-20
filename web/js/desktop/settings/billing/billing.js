@@ -63,6 +63,7 @@
 					$rootScope.$broadcast(settingsEvents.changesSaved);
 				}, function (err) {
 					$rootScope.$broadcast(settingsEvents.invalidForm);
+					form.$setPristine();
 					if(UtilService.isObject(err.data.errors)) {
 						vm.errors = angular.copy(err.data.errors);
 						for(var key in vm.errors) {
@@ -79,6 +80,15 @@
 		$scope.$on(settingsEvents.saveChanges, function(event, args) {
 			saveBankInformation(vm.bankInformationForm);
 		})
+
+		$scope.$watch('billingCtrl.bank_information', function(newValue, oldValue) {
+			if(vm.bankInformationForm.$invalid) {
+				for(var key in vm.errors) {
+					vm.bankInformationForm[key].$setValidity('valid', true);
+				}
+				delete vm.errors;
+			}
+		}, true);
 	}
 
 	angular.module('todevise')

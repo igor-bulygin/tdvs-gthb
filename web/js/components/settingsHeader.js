@@ -14,8 +14,7 @@
 		function openModal(template) {
 			$uibModal.open({
 				templateUrl: template,
-				size: 'sm',
-				backdrop: false
+				size: 'sm'
 			})
 		}
 
