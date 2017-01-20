@@ -15,7 +15,7 @@ $this->params['settings_menu_active_option'] = 'billing';
 
 <?= SettingsHeader::widget() ?>
 
-<div ng-controller="billingCtrl as billingCtrl" class="personal-info-wrapper"> <!-- please change this class, is not semantic -->
+<div ng-controller="billingCtrl as billingCtrl" class="personal-info-wrapper bank-settings-wrapper"> <!-- please change this class, is not semantic -->
 	<div class="container">
 		<uib-accordion>
 			<div uib-accordion-group class="panel-default" heading="Addresses" is-disabled="true" ng-cloak>
