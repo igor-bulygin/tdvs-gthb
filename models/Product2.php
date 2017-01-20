@@ -184,7 +184,7 @@ class Product2 extends Product {
 
 	public function beforeValidate()
 	{
-		$this->mediaMapping->setProduct($this);
+		$this->mediaMapping->setParentObject($this);
 		$this->preorderMapping->setProduct($this);
 		$this->madeToOrderMapping->setProduct($this);
 		$this->bespokeMapping->setProduct($this);
@@ -320,7 +320,7 @@ class Product2 extends Product {
 				'on' => [self::SCENARIO_PRODUCT_DRAFT, self::SCENARIO_PRODUCT_PUBLIC],
 			],
 			[   'media', 'safe'], // to load data posted from WebServices
-			[   'mediaFiles', 'app\validators\EmbedDocValidator'], // to apply rules
+			[   'mediaMapping', 'app\validators\EmbedDocValidator'], // to apply rules
 			[   'faq', 'safe'], // to load data posted from WebServices
 			[   'faqMapping', 'app\validators\EmbedDocValidator'], // to apply rules
 			[   'preorder', 'safe'], // to load data posted from WebServices

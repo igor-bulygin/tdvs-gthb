@@ -339,7 +339,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'slug',
 				],
 				'safe',
-				'on' => [self::SCENARIO_DEVISER_UPDATE_DRAFT]
+				'on' => [self::SCENARIO_DEVISER_UPDATE_DRAFT, self::SCENARIO_DEVISER_UPDATE_PROFILE, self::SCENARIO_DEVISER_PUBLISH_PROFILE]
 			],
 			[
 				'account_state',

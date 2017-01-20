@@ -1,22 +1,14 @@
 <?php
 namespace app\models;
 
-use app\helpers\CActiveRecord;
-use yii\base\Model;
-use yii2tech\embedded\ContainerInterface;
-use yii2tech\embedded\ContainerTrait;
-
 /**
  * @property ProductPhoto[] $photosInfo
  * @property ProductDescriptionPhoto[] $descriptionPhotosInfo
  * @property array $videos_links
  */
-class ProductMedia extends CActiveRecord
+class ProductMedia extends EmbedModel
 {
 	public $photos;
-
-	/** @var  Product2 */
-	protected $product;
 
 	public function attributes()
 	{
@@ -32,22 +24,6 @@ class ProductMedia extends CActiveRecord
 		return "media";
 	}
 
-	/**
-	 * @return Product2
-	 */
-	public function getProduct()
-	{
-		return $this->product;
-	}
-
-	/**
-	 * @param Product2 $product
-	 */
-	public function setProduct($product)
-	{
-		$this->product = $product;
-	}
-
 	public function beforeValidate()
 	{
 		foreach ($this->photosInfo as $photo) {
@@ -56,7 +32,6 @@ class ProductMedia extends CActiveRecord
 		foreach ($this->descriptionPhotosInfo as $descriptionPhoto) {
 			$descriptionPhoto->setMedia($this);
 		}
-		$this->setScenario($this->getProduct()->getScenario());
 
 		return parent::beforeValidate();
 	}
@@ -70,25 +45,6 @@ class ProductMedia extends CActiveRecord
 	{
 		return $this->mapEmbeddedList('description_photos', ProductDescriptionPhoto::className(), array('unsetSource' => false));
 	}
-
-	/**
-	 * Assign some default attributes for historical objects
-	 *
-	 * @param array $data
-	 * @param null $formName
-	 * @return bool
-	 */
-	public function load($data, $formName = null)
-	{
-		$loaded = parent::load($data, $formName);
-
-//		if (array_key_exists('photos', $data)) {
-//			$this->photosInfo->load($data, 'photos');
-//		}
-
-		return $loaded;
-	}
-
 
 	public function rules()
 	{
@@ -127,9 +83,10 @@ class ProductMedia extends CActiveRecord
 	 */
 	public function validateProductMediaFileExists($attribute, $params)
 	{
+		$product = $this->getParentObject(); /* @var Product2 $product */
 		$photos = $this->$attribute; /* @var ProductPhoto[] $photos */
 		foreach ($photos as $photo) {
-			if (!$this->product->existMediaFile($photo->name)) {
+			if (!$product->existMediaFile($photo->name)) {
 				$this->addError($attribute, sprintf('File %s not found', $photo->name));
 			}
 		}
@@ -146,7 +103,7 @@ class ProductMedia extends CActiveRecord
 				default:
 					//TODO: Fix this! Find other way to determine if was a "required" field
 					if (strpos($error[0], 'cannot be blank') !== false || strpos($error[0], 'no puede estar vacío') !== false) {
-						$this->getProduct()->addError("required", $attribute);
+						$this->getParentObject()->addError("required", $attribute);
 					}
 					break;
 			}

@@ -34,7 +34,6 @@ class PersonBankInfo extends EmbedModel
 		];
 	}
 
-
 	public function getParentAttribute()
 	{
 		return "bank_info";

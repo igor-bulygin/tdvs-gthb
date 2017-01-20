@@ -2,7 +2,6 @@
 namespace app\models;
 
 /**
- * @propery string $bank_info
  * @property PersonBankInfo $bankInfoMapping
  */
 class PersonSettings extends EmbedModel
@@ -11,7 +10,7 @@ class PersonSettings extends EmbedModel
 	public function attributes()
 	{
 		return [
-				'bank_info',
+			'bank_info',
 		];
 	}
 
