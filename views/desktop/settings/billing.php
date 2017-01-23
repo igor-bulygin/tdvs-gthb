@@ -18,7 +18,7 @@ $this->params['settings_menu_active_option'] = 'billing';
 <div ng-controller="billingCtrl as billingCtrl" class="personal-info-wrapper bank-settings-wrapper"> <!-- please change this class, is not semantic -->
 	<div class="container">
 		<uib-accordion>
-			<div uib-accordion-group class="panel-default" heading="Addresses" is-disabled="true" ng-cloak>
+			<div uib-accordion-group class="panel-default panel-billing" heading="Addresses" is-disabled="true" ng-cloak>
 				<form name="billingCtrl.addressesForm" class="form-horizontal">
 					<div class="form-group">
 						<label for="city" class="col-md-1">City</label>
@@ -46,7 +46,7 @@ $this->params['settings_menu_active_option'] = 'billing';
 					</div>
 				</form>
 			</div>
-			<div uib-accordion-group class="panel-default" heading="Bank Information" is-open="true" ng-cloak>
+			<div uib-accordion-group class="panel-default panel-billing" heading="Bank Information" is-open="true" ng-cloak>
 				<form name="billingCtrl.bankInformationForm" class="form-horizontal">
 					<div class="form-group">
 						<label for="location" class="col-md-2">Location of bank</label>
@@ -65,7 +65,7 @@ $this->params['settings_menu_active_option'] = 'billing';
 					<other-bank-information bank-information="billingCtrl.bank_information" errors="billingCtrl.errors" ng-if="billingCtrl.bank_information.location === 'OTHER'"></other-bank-information>
 				</form>
 			</div>
-			<div uib-accordion-group class="panel-default" heading="Payments" is-disabled="true" ng-cloak>
+			<div uib-accordion-group class="panel-default panel-billing" heading="Payments" is-disabled="true" ng-cloak>
 				<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat soluta maxime incidunt similique quo fuga eum neque sunt, voluptatibus! Corrupti rerum voluptate sunt, officia fugit, iste velit aliquam animi itaque.</div>
 				<div>Dolores deleniti, distinctio nihil deserunt possimus expedita veritatis doloribus consequatur a facere unde aliquid similique non dolor dolore animi placeat, sunt earum sint laudantium quas? Perferendis sit quibusdam laboriosam aliquam.</div>
 				<div>Nemo nobis nihil, a recusandae obcaecati id, amet porro eum, excepturi perferendis autem quam fugit dicta nisi facilis iste sint laudantium. Vel quis doloribus nemo, quidem, reprehenderit nisi vitae ea.</div>

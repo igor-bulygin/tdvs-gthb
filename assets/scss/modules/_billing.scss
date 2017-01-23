@@ -1,0 +1,25 @@
+// ==========================================================================
+// Billing
+// ==========================================================================
+.panel-billing{
+	.panel-heading{
+		background-color: transparent !important;	
+	}
+	h4{
+		text-transform: uppercase;
+		font-family: $font-family--bold;
+		font-size: 14px;
+    	margin: 7px 0 0 10px;
+	}
+}
+.bank-settings-wrapper{
+	.panel-group .panel-heading + .panel-collapse > .panel-body, .panel-group .panel-heading + .panel-collapse > .list-group {
+		margin: 0 25px;
+		padding: 20px 0;
+	}
+	label{
+		margin-top: 7px;
+    	color: #6b6b6b;
+		font-family: $font-family--secondary;
+	}
+}
