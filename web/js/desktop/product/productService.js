@@ -7,14 +7,12 @@
 		this.parseProductFromService = parseProductFromService;
 		
 		function searchPrintSizechartsOnCategory(categories, id) {
-			var prints = false;
-			var sizecharts = false;
 			for(var i=0; i < categories.length; i++) {
 				if(categories[i].id === id) {
 					return [categories[i]['prints'], categories[i]['sizecharts']];
 				}
 			}
-			return false
+			return false;
 		}
 
 		function validate(product) {

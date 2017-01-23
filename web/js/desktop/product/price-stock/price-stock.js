@@ -16,7 +16,7 @@
 				if(element.original_artwork) {
 					title.push('Original artwork');
 				}
-				if(element.options['size']){
+				if(UtilService.isObject(element.options) && element.options['size']){
 					if(angular.isObject(element.options['size'])) {
 						if(element.options.size.width && element.options.size.length && element.options.size.metric_unit)
 							title.push(element.options.size.width + ' x ' + element.options.size.length + element.options.size.metric_unit);
@@ -24,7 +24,7 @@
 						title.push(element.options.size);
 					}
 				}
-				if(element.options['type']) {
+				if(UtilService.isObject(element.options) && element.options['type']) {
 					for(var i = 0; i < vm.papertypes.length; i++) {
 						if(element.options['type'] == vm.papertypes[i].type) {
 							title.push(vm.papertypes[i].name);
@@ -102,6 +102,17 @@
 							available: true
 						});
 					}
+				} else {
+					vm.product.price_stock.push({
+						options: [],
+						price: 0,
+						stock: 0,
+						weight: 0,
+						width: 0,
+						height: 0,
+						length: 0,
+						available: true
+					});
 				}
 				if(set_original_artwork) {
 					vm.product.price_stock.unshift({
@@ -116,8 +127,8 @@
 						available: true
 					})
 				}
-				parseTitles();
 			}
+			parseTitles();
 		}
 
 		//show validation error only if value <= 0, if product is available and the form has been submitted
@@ -158,6 +169,9 @@
 		$scope.$on(productEvents.setVariations, function(event, args) {
 			args.categories.forEach(function(element) {
 				var values = productService.searchPrintSizechartsOnCategory(vm.categories, element);
+				if(!values[0] && !values[1]) {
+					createTable();
+				}
 				//if we do have prints, set original artwork to true
 				if(values[0])
 					set_original_artwork = true;
