@@ -7,7 +7,7 @@ use app\models\Category;
 use app\models\Country;
 use app\models\MetricType;
 use app\models\Person;
-use app\models\Product;
+use app\models\Product2;
 use app\models\SizeChart;
 use app\models\Tag;
 use Yii;
@@ -101,7 +101,7 @@ class DeviserController extends CController
 			$countries_lookup[$code] = Yii::t("app/admin", $continent);
 		}
 
-		$product = Product::find()
+		$product = Product2::find()
 			->select(["_id" => 0])
 			->where(["short_id" => $short_id])
 			->asArray()
@@ -221,7 +221,7 @@ class DeviserController extends CController
 	public function actionUploadProductPhoto($slug, $short_id)
 	{
 		/* @var $product \app\models\Product */
-		$product = Product::findOne(["short_id" => $short_id]);
+		$product = Product2::findOne(["short_id" => $short_id]);
 
 		$data = Yii::$app->request->getBodyParam("data", null);
 		if ($data === null) return;
@@ -242,7 +242,7 @@ class DeviserController extends CController
 			$product->media = $media;
 			$product->save();
 
-			Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_ADMIN);
+			Product2::setSerializeScenario(Product2::SERIALIZE_SCENARIO_ADMIN);
 			return $product;
 		}
 	}
@@ -250,7 +250,7 @@ class DeviserController extends CController
 	public function actionDeleteProductPhoto($slug, $short_id)
 	{
 		/* @var $product \app\models\Product */
-		$product = Product::findOne(["short_id" => $short_id]);
+		$product = Product2::findOne(["short_id" => $short_id]);
 		$product_path = Utils::join_paths(Yii::getAlias("@product"), $product->short_id);
 		$photo_name = $this->getJsonFromRequest("photo_name");
 
@@ -263,7 +263,7 @@ class DeviserController extends CController
 		$product->media = $media;
 		$product->save();
 
-		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_ADMIN);
+		Product2::setSerializeScenario(Product2::SERIALIZE_SCENARIO_ADMIN);
 		return $product;
 	}
 
@@ -285,9 +285,10 @@ class DeviserController extends CController
 		}
 
 		// their products, for selected category
-		$products = Product::findSerialized([
+		$products = Product2::findSerialized([
 			"deviser_id" => $deviser_id,
-			"categories" => (empty($selectedSubcategory->short_id)) ? $selectedCategory->getShortIds() : $selectedSubcategory->getShortIds()
+			"categories" => (empty($selectedSubcategory->short_id)) ? $selectedCategory->getShortIds() : $selectedSubcategory->getShortIds(),
+			"product_state" => Product2::PRODUCT_STATE_ACTIVE,
 		]);
 
 		$this->layout = '/desktop/public-2.php';
