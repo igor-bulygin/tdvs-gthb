@@ -318,12 +318,18 @@ class DeviserController extends CController
 			$selectedSubcategory = (count($selectedCategory->getDeviserSubcategories()) > 0) ? $selectedCategory->getDeviserSubcategories()[0] : new Category();
 		}
 
+		$unpublishedWorks = Product2::findSerialized([
+			"deviser_id" => $deviser_id,
+			"product_state" => Product2::PRODUCT_STATE_DRAFT,
+		]);
+
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("store-edit", [
 			'deviser' => $deviser,
 			'categories' => $categories,
 			'selectedCategory' => $selectedCategory,
 			'selectedSubcategory' => $selectedSubcategory,
+			'unpublishedWorks' => $unpublishedWorks,
 		]);
 	}
 
