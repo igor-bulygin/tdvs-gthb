@@ -5,6 +5,7 @@
 		this.searchPrintSizechartsOnCategory = searchPrintSizechartsOnCategory;
 		this.validate = validate;
 		this.parseProductFromService = parseProductFromService;
+		this.tagChangesStockAndPrice = tagChangesStockAndPrice;
 		
 		function searchPrintSizechartsOnCategory(categories, id) {
 			for(var i=0; i < categories.length; i++) {
@@ -124,6 +125,14 @@
 				product[options_to_convert[i]] = UtilService.emptyArrayToObject(product[options_to_convert[i]]);
 			}
 			return product;
+		}
+
+		function tagChangesStockAndPrice(tags, key) {
+			for(i = 0; i < tags.length; i++) {
+				if(tags[i].id === key) {
+					return tags[i].stock_and_price ? true : false;
+				}
+			}
 		}
 	}
 
