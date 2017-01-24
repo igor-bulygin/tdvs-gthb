@@ -31,34 +31,35 @@
 			vm.product.price_stock = [];
 
 			getLanguages();
-			getCategories();
+			getTags();
 			getDeviser();
 		}
 
 		init();
 
+		function getTags() {
+			tagDataService.Tags.get()
+				.$promise.then(function (dataTags) {
+					vm.tags = dataTags.items;
+					getCategories();
+				}, function (err) {
+					//err
+				});
+		}
+		
 		function getCategories() {
 			productDataService.Categories.get({scope: 'all'})
 				.$promise.then(function (dataCategories) {
 					vm.allCategories = dataCategories.items;
-					getTags();
+					getMetric();
+					getSizechart();
+					getPaperType();
+					getProduct();
 				}, function(err) {
 					//errors
 				});
 		}
 
-		function getTags() {
-			tagDataService.Tags.get()
-				.$promise.then(function (dataTags) {
-					vm.tags = dataTags.items;
-					getMetric();
-					getSizechart();
-					getPaperType();
-					getProduct();
-				}, function (err) {
-					//err
-				});
-		}
 
 		function getMetric() {
 			metricDataService.Metric.get()
