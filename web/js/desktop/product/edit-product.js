@@ -33,11 +33,6 @@
 			getLanguages();
 			getCategories();
 			getDeviser();
-			getTags();
-			getMetric();
-			getSizechart();
-			getPaperType();
-			getProduct();
 		}
 
 		init();
@@ -46,8 +41,22 @@
 			productDataService.Categories.get({scope: 'all'})
 				.$promise.then(function (dataCategories) {
 					vm.allCategories = dataCategories.items;
+					getTags();
 				}, function(err) {
 					//errors
+				});
+		}
+
+		function getTags() {
+			tagDataService.Tags.get()
+				.$promise.then(function (dataTags) {
+					vm.tags = dataTags.items;
+					getMetric();
+					getSizechart();
+					getPaperType();
+					getProduct();
+				}, function (err) {
+					//err
 				});
 		}
 
@@ -69,24 +78,6 @@
 				});
 		}
 
-		function getLanguages() {
-			languageDataService.Languages.get()
-				.$promise.then(function(dataLanguages) {
-					vm.languages = dataLanguages.items;
-				}, function(err) {
-					//errors
-				});
-		}
-
-		function getTags() {
-			tagDataService.Tags.get()
-				.$promise.then(function (dataTags) {
-					vm.tags = dataTags.items;
-				}, function (err) {
-					//err
-				});
-		}
-
 		function getPaperType() {
 			productDataService.PaperType.get()
 				.$promise.then(function (dataPaperType) {
@@ -96,18 +87,15 @@
 				});
 		}
 
-		function getDeviser(){
-			deviserDataService.Profile.get({
-				deviser_id: UtilService.returnDeviserIdFromUrl()
-			}).$promise.then(function(dataDeviser) {
-				vm.deviser = dataDeviser;
-				vm.link_profile = '/deviser/' + dataDeviser.slug + '/' + dataDeviser.id + '/store/edit';
-				vm.profile = currentHost()+vm.deviser.url_images+vm.deviser.media.profile_cropped;
-			}, function(err) {
-				//errors
-			});
+		function getLanguages() {
+			languageDataService.Languages.get()
+				.$promise.then(function(dataLanguages) {
+					vm.languages = dataLanguages.items;
+				}, function(err) {
+					//errors
+				});
 		}
-		
+
 		function getProduct() {
 			productDataService.ProductPriv.get({
 				idProduct: UtilService.returnProductIdFromUrl()
@@ -120,6 +108,19 @@
 				//err
 			});
 		}
+		
+		function getDeviser(){
+			deviserDataService.Profile.get({
+				deviser_id: UtilService.returnDeviserIdFromUrl()
+			}).$promise.then(function(dataDeviser) {
+				vm.deviser = dataDeviser;
+				vm.link_profile = '/deviser/' + dataDeviser.slug + '/' + dataDeviser.id + '/store/edit';
+				vm.profile = currentHost()+vm.deviser.url_images+vm.deviser.media.profile_cropped;
+			}, function(err) {
+				//errors
+			});
+		}
+		
 
 		function save(state) {
 			vm.disable_save_buttons = true;
