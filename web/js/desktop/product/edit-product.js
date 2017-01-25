@@ -34,6 +34,8 @@
 			getLanguages();
 			getTags();
 			getDeviser();
+			getMetric();
+			getPaperType();
 		}
 
 		init();
@@ -52,10 +54,7 @@
 			productDataService.Categories.get({scope: 'all'})
 				.$promise.then(function (dataCategories) {
 					vm.allCategories = dataCategories.items;
-					getMetric();
 					getSizechart();
-					getPaperType();
-					getProduct();
 				}, function(err) {
 					//errors
 				});
@@ -75,6 +74,7 @@
 			sizechartDataService.Sizechart.get({scope: 'all'})
 				.$promise.then(function (dataSizechart) {
 					vm.sizecharts = dataSizechart.items;
+					getProduct();
 				}, function (err) {
 					//error
 				});

@@ -36,7 +36,6 @@
 		vm.bespoke_language = 'en-US';
 		vm.deviserSizecharts = [];
 		vm.countriesAvailable = [];
-
 		vm.finalColumns = [];
 		vm.finalCountry;
 
@@ -160,7 +159,6 @@
 
 		//creates both a new empty sizechart and a new empty helper sizechart
 		function sizesSelect(sizechart, country) {
-
 			//create new sizechart
 			vm.product.sizechart = {
 				country: country,
@@ -266,10 +264,10 @@
 						delete vm.product.prints;
 					}
 					vm.show_sizecharts = true;
-					if(vm.product.sizechart && !vm.product.from_edit)
+					if(vm.product.sizechart && !vm.fromedit)
 						delete vm.product.sizechart;
-					else if(vm.product.sizechart && vm.product.from_edit) {
-						delete vm.product.from_edit;
+					else if(vm.product.sizechart && vm.fromedit) {
+						delete vm.fromedit;
 						var original_sizechart = angular.copy(vm.product.sizechart);
 						for(var i = 0; i < vm.sizecharts.length; i++) {
 							if(vm.product.sizechart.short_id === vm.sizecharts[i].id) {
@@ -327,7 +325,8 @@
 			metric: '<',
 			sizecharts: '<',
 			deviser: '<',
-			papertypes: '<'
+			papertypes: '<',
+			fromedit: '<'
 		}
 	}
 
