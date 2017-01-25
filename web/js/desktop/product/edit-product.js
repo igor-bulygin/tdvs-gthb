@@ -9,6 +9,7 @@
 		vm.save = save;
 
 		function init(){
+			vm.from_edit = false;
 			vm.product = new productDataService.ProductPriv();
 			vm.product.slug = {};
 			vm.product.categories = [];
@@ -101,10 +102,10 @@
 			productDataService.ProductPriv.get({
 				idProduct: UtilService.returnProductIdFromUrl()
 			}).$promise.then(function(dataProduct) {
-				vm.product = dataProduct;
+				vm.product = angular.copy(dataProduct);
+				vm.from_edit = true;
 				vm.product_original = angular.copy(dataProduct);
 				vm.product = productService.parseProductFromService(vm.product);
-				vm.product.from_edit = true;
 			}, function (err) {
 				//err
 			});

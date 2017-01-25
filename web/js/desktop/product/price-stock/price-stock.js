@@ -140,30 +140,33 @@
 
 		//watches
 		$scope.$watch('productPriceStockCtrl.product.prints', function(newValue, oldValue) {
-			if(!vm.product.from_edit)
+			if(!vm.fromedit) {
 				if(angular.isObject(newValue) || (!newValue && angular.isObject(oldValue))) {
 					createTable();
 				}
+			}
 		}, true);
 
 		$scope.$watch('productPriceStockCtrl.product.options', function(newValue, oldValue) {
-			if(!vm.product.from_edit)
+			if(!vm.fromedit) {
 				if(angular.isObject(newValue)) {
 					createTable();
 				}
+			}
 		}, true);
 
 		$scope.$watch('productPriceStockCtrl.product.sizechart', function(newValue, oldValue) {
-			if(!vm.product.from_edit)
+			if(!vm.fromedit) {
 				if(angular.isObject(newValue)) {
 					createTable();
 				}
+			}
 		}, true);
 
 		$scope.$watch('productPriceStockCtrl.product.price_stock', function(newValue, oldValue) {
-			if(vm.product.from_edit) {
+			if(vm.fromedit) {
 				parseTitles();
-				delete vm.product.from_edit;
+				delete vm.fromedit;
 			} 
 		}, true);
 
@@ -172,6 +175,7 @@
 			args.categories.forEach(function(element) {
 				var values = productService.searchPrintSizechartsOnCategory(vm.categories, element);
 				if(!values[0] && !values[1]) {
+					console.log("from variations")
 					createTable();
 				}
 				//if we do have prints, set original artwork to true
@@ -181,7 +185,7 @@
 					set_original_artwork = false;
 				}
 			})
-			if(!vm.product.from_edit)
+			if(!vm.fromedit)
 				delete vm.product.price_stock;
 		});
 
@@ -201,7 +205,8 @@
 			tags: '<',
 			papertypes: '<',
 			metric: '<',
-			categories: '<'
+			categories: '<',
+			fromedit: '<'
 		}
 	}
 
