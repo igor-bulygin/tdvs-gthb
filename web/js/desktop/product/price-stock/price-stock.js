@@ -175,8 +175,9 @@
 			args.categories.forEach(function(element) {
 				var values = productService.searchPrintSizechartsOnCategory(vm.categories, element);
 				if(!values[0] && !values[1]) {
-					console.log("from variations")
-					createTable();
+					if(!vm.fromedit) {
+						createTable();
+					}
 				}
 				//if we do have prints, set original artwork to true
 				if(values[0])
