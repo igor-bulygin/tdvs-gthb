@@ -116,8 +116,7 @@ class Category extends CActiveRecord {
 					break;
 				case "roots":
 				default:
-					// Filter by roots apply only when no limit sets
-					if(!array_key_exists("limit", $criteria) || empty($criteria["limit"])) $query->andWhere(["path" => "/"]);
+					$query->andWhere(["path" => "/"]);
 					break;
 			}
 	    }
@@ -127,12 +126,12 @@ class Category extends CActiveRecord {
 
 
 	    // limit
-	    if ((array_key_exists("limit", $criteria)) && (!empty($criteria["limit"])) && $criteria["scope"] != "all") {
+	    if (array_key_exists("limit", $criteria) && !empty($criteria["limit"])) {
 		    $query->limit($criteria["limit"]);
 	    }
 
 	    // offset for pagination
-	    if ((array_key_exists("offset", $criteria)) && (!empty($criteria["offset"]))) {
+	    if (array_key_exists("offset", $criteria) && !empty($criteria["offset"])) {
 		    $query->offset($criteria["offset"]);
 	    }
 
