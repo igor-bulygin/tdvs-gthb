@@ -2,21 +2,10 @@
 
 namespace app\modules\api\priv\v1\controllers;
 
-use app\helpers\CActiveRecord;
 use app\models\Person;
-use app\modules\api\priv\v1\forms\UploadForm;
 use Exception;
 use Yii;
-use yii\rest\Controller;
 use yii\web\BadRequestHttpException;
-use yii\web\ForbiddenHttpException;
-use yii\web\Response;
-use app\helpers\Utils;
-use yii\filters\ContentNegotiator;
-
-use app\models\Faq;
-use yii\web\UploadedFile;
-use yii\web\User;
 
 class DeviserController extends AppPrivateController
 {
@@ -40,9 +29,8 @@ class DeviserController extends AppPrivateController
 			$this->checkDeviserAccountState($deviser, $newAccountState); // check for allowed new account state only
 
 			$deviser->setScenario($this->getDetermineScenario($deviser)); // safe and required attributes are related with scenario
-			if (($deviser->load(Yii::$app->request->post(), '')) && $deviser->save()) {
-				// TODO: return the deviser data, only for test. remove when finish.
-//                  Yii::$app->response->setStatusCode(204); // Success, without body
+			if ($deviser->load(Yii::$app->request->post(), '') && $deviser->save()) {
+
 				Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
 				return $deviser;
 			} else {
