@@ -439,7 +439,7 @@ class Utils
 			}
 			// can be a set of items
 			foreach ($arr as $key => &$attr) {
-				if ((is_array($attr)) && (array_key_exists($rootParticle, $attr))) {
+				if (is_array($attr) && array_key_exists($rootParticle, $attr)) {
 					$attr[$rootParticle] = Utils::getValue($attr[$rootParticle], Yii::$app->language, array_keys(Lang::EN_US_DESC)[0]);
 				}
 			}
@@ -450,7 +450,7 @@ class Utils
 			}
 			// can be a set of items
 			foreach ($arr as &$attr) {
-				if (array_key_exists($rootParticle, $attr)) {
+				if (is_array($attr) && array_key_exists($rootParticle, $attr)) {
 					Utils::translateArrayAttribute($attr[$rootParticle], implode('.', $otherParticles));
 				}
 			}
