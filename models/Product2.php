@@ -175,11 +175,11 @@ class Product2 extends Product {
 	public function setParentOnEmbbedMappings()
 	{
 		$this->mediaMapping->setParentObject($this);
-		$this->preorderMapping->setProduct($this);
-		$this->madeToOrderMapping->setProduct($this);
-		$this->bespokeMapping->setProduct($this);
+		$this->preorderMapping->setParentObject($this);
+		$this->madeToOrderMapping->setParentObject($this);
+		$this->bespokeMapping->setParentObject($this);
 		foreach ($this->faqMapping as $faqMapping) {
-			$faqMapping->setModel($this);
+			$faqMapping->setParentObject($this);
 		}
 	}
 

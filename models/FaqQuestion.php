@@ -7,34 +7,21 @@ use yii\base\Model;
  * @property array $question
  * @property array $answer
  */
-class FaqQuestion extends Model
+class FaqQuestion extends EmbedModel
 {
 
-    /**
-     * @var array
-     */
-    public $question;
-
-    /**
-     * @var array
-     */
-    public $answer;
-
-	/** @var  Model */
-	protected $model;
+	public function attributes() {
+		return [
+			'question',
+			'answer',
+		];
+	}
 
 	public function getParentAttribute()
 	{
 		return "faq";
 	}
 
-	/**
-	 * @return Model
-	 */
-	public function getModel()
-	{
-		return $this->model;
-	}
 
 	/**
 	 * @param Model $model
@@ -42,13 +29,6 @@ class FaqQuestion extends Model
 	public function setModel($model)
 	{
 		$this->model = $model;
-	}
-
-	public function beforeValidate()
-	{
-		$this->setScenario($this->getModel()->getScenario());
-
-		return parent::beforeValidate();
 	}
 
     public function rules()

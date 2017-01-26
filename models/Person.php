@@ -247,13 +247,12 @@ class Person extends CActiveRecord implements IdentityInterface
 		$this->mediaMapping->setPerson($this);
 	}
 
-	public function beforeValidate()
+	public function setParentOnEmbbedMappings()
 	{
 		foreach ($this->faqMapping as $faqMapping) {
-			$faqMapping->setModel($this);
+			$faqMapping->setParentObject($this);
 		}
 		$this->settingsMapping->setParentObject($this);
-		return parent::beforeValidate();
 	}
 
 	/**

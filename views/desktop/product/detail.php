@@ -338,17 +338,17 @@ $videos = $product->getVideos();
 						</div>
 					</div>
 
+                    <div class="title">WORK FAQs</div>
                     <?php if (count($product->faqMapping) > 0) { ?>
-                        <div class="title">WORK FAQs</div>
                         <?php foreach ($product->faqMapping as $faq) { ?>
                             <div class="q-a-wrapper">
                                 <p class="question">
                                     <span>Q:</span>
-                                    <span class="important"><?= $faq->question?></span>
+                                    <span class="important"><?= Utils::l($faq->question)?></span>
                                 </p>
                                 <p class="question">
                                     <span>A:</span>
-                                    <span><?= $faq->answer?></span>
+                                    <span><?= Utils::l($faq->answer)?></span>
                                 </p>
                             </div>
                         <?php } ?>

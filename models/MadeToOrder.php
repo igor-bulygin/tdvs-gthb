@@ -1,54 +1,24 @@
 <?php
 namespace app\models;
 
-use yii\base\Model;
-
-class MadeToOrder extends Model {
+/**
+ * @property int $type
+ * @property int $value
+ */
+class MadeToOrder extends EmbedModel {
 	const NONE = 0;
 	const DAYS = 1;
 
-	/**
-	 * @var int
-	 */
-	public $type;
-
-	/**
-	 * @var int
-	 */
-	public $value;
-
-	/** @var  Product2 */
-	protected $product;
-
+	public function attributes() {
+		return [
+			'type',
+			'value',
+		];
+	}
 
 	public function getParentAttribute()
 	{
 		return "madetoorder";
-	}
-
-
-	/**
-	 * @return Product2
-	 */
-	public function getProduct()
-	{
-		return $this->product;
-	}
-
-	/**
-	 * @param Product2 $product
-	 */
-	public function setProduct($product)
-	{
-		$this->product = $product;
-	}
-
-
-	public function beforeValidate()
-	{
-		$this->setScenario($this->getProduct()->getScenario());
-
-		return parent::beforeValidate();
 	}
 
 	public function rules()
