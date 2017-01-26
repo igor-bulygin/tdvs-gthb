@@ -127,7 +127,7 @@ class ProductController extends CController
 		// get the product
 		$product = Product2::findOneSerialized($product_id);
 
-		if ($product->product_state != Product2::PRODUCT_STATE_ACTIVE) {
+		if (empty($product) || $product->product_state != Product2::PRODUCT_STATE_ACTIVE) {
 			throw new HttpException(404, 'The requested item could not be found.');
 		}
 
