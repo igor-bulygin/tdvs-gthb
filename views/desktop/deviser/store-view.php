@@ -77,17 +77,25 @@ $this->params['deviser'] = $deviser;
 							<?php foreach ($products as $i => $product) { ?>
 								<div class="menu-category list-group">
 									<a href="<?= Url::to(["product/detail", "slug" => $product->slug, 'product_id' => $product->short_id])?>">
-										<div class="grid">
-											<figure class="effect-zoe">
-												<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getMainImage())->resize(400, 0) ?>">
-												<figcaption>
-													<p class="instauser">
-														<?= $product->name ?>
-													</p>
-													<p class="price">€ <?= $product->getMinimumPrice() ?></p>
-												</figcaption>
-											</figure>
-										</div>
+                                        <div class="grid">
+                                            <figure class="effect-zoe">
+                                                <?php /*
+                                                <span class="close-product-icon" ng-click="editStoreCtrl.open_modal_delete(product.id)">
+                                                    <i class="ion-android-close"></i>
+                                                </span>
+                                                */ ?>
+                                                <img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getMainImage())->resize(400, 0) ?>">
+                                                <figcaption>
+                                                    <p class="instauser"><?= $product->name ?></p>
+                                                    <p class="price">€ <?= $product->getMinimumPrice() ?></p>
+                                                    <?php if ($deviser->isDeviserEditable()) { ?>
+                                                        <a class="edit-product-icon" href="<?= Url::to(["product/edit", "slug" => $product->slug, 'product_id' => $product->short_id, 'deviser_id' => $deviser->short_id])?>" title="Edit work">
+                                                            <i class="ion-edit"></i>
+                                                        </a>
+                                                    <?php } ?>
+                                                </figcaption>
+                                            </figure>
+                                        </div>
 									</a>
 								</div>
 							<?php } ?>
