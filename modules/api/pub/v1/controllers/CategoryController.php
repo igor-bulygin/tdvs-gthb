@@ -14,11 +14,11 @@ class CategoryController extends AppPublicController {
         Category::setSerializeScenario(Category::SERIALIZE_SCENARIO_PUBLIC);
 
 	    // set pagination values
-	    $limit = Yii::$app->request->get('limit', 100);
-	    $limit = ($limit < 1) ? 1 : $limit;
-	    $page = Yii::$app->request->get('page', 1);
-	    $page = ($page < 1) ? 1 : $page;
-	    $offset = ($limit * ($page - 1));
+	    $limit = Yii::$app->request->get('limit', 99999);
+		$limit = ($limit < 1) ? 1 : $limit;
+		$page = Yii::$app->request->get('page', 1);
+		$page = ($page < 1) ? 1 : $page;
+		$offset = ($limit * ($page - 1));
 
 	    $categories = Category::findSerialized([
 	        "scope" => Yii::$app->request->get("scope", "roots"),
