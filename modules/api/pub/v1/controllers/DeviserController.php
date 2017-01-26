@@ -18,7 +18,6 @@ class DeviserController extends AppPublicController
 	/**
 	 * Create a new Deviser account
 	 *
-	 * @return Person|array|void
 	 * @throws BadRequestHttpException
 	 */
 	public function actionCreate()
@@ -44,11 +43,15 @@ class DeviserController extends AppPublicController
 
 		$deviser->setScenario(Person::SCENARIO_DEVISER_CREATE_DRAFT);
 		$deviser->load(Yii::$app->request->post(), '');
-		$deviser->personalInfoMapping->load(Yii::$app->request->post(), '');
 
 		$deviser->credentials = ["email" => $invitation->email];
 		$deviser->setPassword(Yii::$app->request->post("password"));
 		$deviser->type = [Person::DEVISER];
+
+		// Load personal info directly to subdocument
+		$deviser->personalInfoMapping->load(Yii::$app->request->post(), '');
+		// Refresh properties from the embed
+		$deviser->refreshFromEmbedded();
 
 		if ($deviser->validate()) {
 			$deviser->save();
@@ -61,6 +64,7 @@ class DeviserController extends AppPublicController
 
 			// return information needed to client side
 			Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_PUBLIC);
+
 			return $deviser;
 		} else {
 			Yii::$app->response->setStatusCode(400); // Bad Request
@@ -68,10 +72,9 @@ class DeviserController extends AppPublicController
 		}
 	}
 
-		/**
+	/**
 	 * Process the request of new Devisers to join the platform
 	 *
-	 * @return array|void
 	 */
 	public function actionInvitationRequestsPost()
 	{
@@ -121,4 +124,3 @@ class DeviserController extends AppPublicController
 		return Utils::join_paths('@app', 'mail', 'deviser');
 	}
 }
-

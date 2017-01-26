@@ -242,17 +242,18 @@ class Person extends CActiveRecord implements IdentityInterface
 
 		$this->preferencesMapping->load($this, 'preferences');
 		$this->personalInfoMapping->load($this, 'personal_info');
-		$this->personalInfoMapping->setPerson($this);
 		$this->mediaMapping->load($this, 'media');
 		$this->mediaMapping->setPerson($this);
 	}
 
 	public function setParentOnEmbbedMappings()
 	{
+		$this->personalInfoMapping->setParentObject($this);
+		$this->settingsMapping->setParentObject($this);
+
 		foreach ($this->faqMapping as $faqMapping) {
 			$faqMapping->setParentObject($this);
 		}
-		$this->settingsMapping->setParentObject($this);
 	}
 
 	/**
