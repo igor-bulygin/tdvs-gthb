@@ -145,16 +145,13 @@ class Product2 extends Product {
 		$this->tags = [];
 		$this->references = [];
 		$this->position = 0;
+
+		Product2::setSerializeScenario(Product2::SERIALIZE_SCENARIO_PUBLIC);
 	}
 
 	public function embedMediaMapping()
 	{
 		return $this->mapEmbedded('media', ProductMedia::className(), array('unsetSource' => false));
-	}
-
-	public function embedFaqMapping()
-	{
-		return $this->mapEmbeddedList('faq', FaqQuestion::className(), array('unsetSource' => false));
 	}
 
 	public function embedPreorderMapping()
@@ -170,6 +167,11 @@ class Product2 extends Product {
 	public function embedBespokeMapping()
 	{
 		return $this->mapEmbedded('bespoke', Bespoke::className(), array('unsetSource' => false));
+	}
+
+	public function embedFaqMapping()
+	{
+		return $this->mapEmbeddedList('faq', FaqQuestion::className(), array('unsetSource' => false));
 	}
 
 	public function setParentOnEmbbedMappings()
@@ -648,13 +650,21 @@ class Product2 extends Product {
 	public function getVideos()
 	{
 		$videos = [];
+
 		$persons = Person::find()->where(["videos.products" => $this->short_id])->all();
 		/** @var Person $person */
 		foreach ($persons as $person) {
 			/** @var PersonVideo $video */
 			foreach ($person->findVideosByProductId($this->short_id) as $video) {
-				$videos[] = $video;
+				$videos[$video->url] = $video;
 			}
+		}
+
+		// Add all deviser videos
+		$deviser = Person::findOneSerialized($this->deviser_id);
+		$deviserVideos = $deviser->videosMapping;
+		foreach ($deviserVideos as $oneVideo) {
+			$videos[$oneVideo->url] = $oneVideo;
 		}
 		return $videos;
 	}
@@ -884,12 +894,6 @@ class Product2 extends Product {
 		if (array_key_exists('bespoke', $data)) {
 			$this->bespokeMapping->load($data, 'madetoorder');
 		}
-
-		// use position behavior method to move it (only if it has primary key)
-		// commented until be needed...
-//		if (array_key_exists("position", $data) && $data['id']) {
-//			$this->moveToPosition($data["position"]);
-//		}
 
 		return ($loaded);
 	}
