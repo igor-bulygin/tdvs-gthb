@@ -163,7 +163,7 @@
 				var isReference = true;
 				for(var key in options) {
 					var valueToCompare;
-					if(key === 'size')
+					if(key === 'size' || !angular.isString(options[key]))
 						valueToCompare = options[key];
 					else {
 						valueToCompare = [options[key]];
