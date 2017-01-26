@@ -34,7 +34,7 @@ $this->params['deviser'] = $deviser;
 												<div class="deviser-data-about-edit">
 													<form class="grey-form" name="editAboutCtrl.form">
 														<label for="fields">Choose your field(s) of work</label>
-														<ol class="work-field nya-bs-select ng-class:{'error-input': editAboutCtrl.setCategoriesRequired}" ng-model="editAboutCtrl.deviser.categories" selected-text-format="count>4" multiple ng-cloak ng-if="editAboutCtrl.categories">
+														<ol class="work-field nya-bs-select ng-class:{'error-input': editAboutCtrl.setCategoriesRequired}" ng-model="editAboutCtrl.deviser.categories" selected-text-format="count>4" multiple ng-cloak ng-if="editAboutCtrl.categories" size="5">
 															<li nya-bs-option="category in editAboutCtrl.categories" data-value="category.id" deep-watch="true">
 																<a href=""><span ng-bind="category.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
 															</li>
