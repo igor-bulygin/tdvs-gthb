@@ -24,18 +24,6 @@ class ProductMedia extends EmbedModel
 		return "media";
 	}
 
-	public function beforeValidate()
-	{
-		foreach ($this->photosInfo as $photo) {
-			$photo->setMedia($this);
-		}
-		foreach ($this->descriptionPhotosInfo as $descriptionPhoto) {
-			$descriptionPhoto->setMedia($this);
-		}
-
-		return parent::beforeValidate();
-	}
-
 	public function embedPhotosInfo()
 	{
 		return $this->mapEmbeddedList('photos', ProductPhoto::className(), array('unsetSource' => false));
@@ -44,6 +32,18 @@ class ProductMedia extends EmbedModel
 	public function embedDescriptionPhotosInfo()
 	{
 		return $this->mapEmbeddedList('description_photos', ProductDescriptionPhoto::className(), array('unsetSource' => false));
+	}
+
+	public function setParentOnEmbbedMappings()
+	{
+		foreach ($this->photosInfo as $item) {
+			$item->setParentObject($this);
+		}
+		foreach ($this->descriptionPhotosInfo as $item) {
+			$item->setParentObject($this);
+		}
+
+		parent::setParentOnEmbbedMappings();
 	}
 
 	public function rules()

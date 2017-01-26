@@ -1,58 +1,26 @@
 <?php
 namespace app\models;
 
-use app\helpers\CActiveRecord;
-use yii\base\Model;
-
-class ProductPhoto extends Model
+/**
+ * @property string|mixed name
+ * @property array tags
+ * @property bool $not_uploaded
+ * @property bool $main_product_photo
+ */
+class ProductPhoto extends EmbedModel
 {
-	/**
-	 * @var string
-	 */
-	public $name;
-
-	/**
-	 * @var array
-	 */
-	public $tags;
-
-	/**
-	 * @deprecated This property was found in a bucle of products, at this moment, I dont know what it is for
-	 *
-	 * @var boolean
-	 */
-	public $not_uploaded;
-
-	/**
-	 * @var boolean
-	 */
-	public $main_product_photo;
-
 	public function getParentAttribute()
 	{
 		return "photos";
 	}
 
-	/**
-	 * @return ProductMedia
-	 */
-	public function getMedia()
-	{
-		return $this->media;
-	}
-
-	/**
-	 * @param ProductMedia $media
-	 */
-	public function setMedia($media)
-	{
-		$this->media = $media;
-	}
-
-	public function beforeValidate()
-	{
-		$this->setScenario($this->getMedia()->getScenario());
-		return parent::beforeValidate();
+	public function attributes() {
+		return [
+			'name',
+			'tags',
+			'not_uploaded',
+			'main_product_photo',
+		];
 	}
 
 	public function rules()
@@ -63,5 +31,16 @@ class ProductPhoto extends Model
 	        [['main_product_photo'], 'boolean'],
         ];
     }
+
+	/**
+	 * Returns the (relative) url of the photo
+	 *
+	 * @return string
+	 */
+	public function getPhotoUrl()
+	{
+		$product = $this->getParentObject(); /** @var Product2 $product */
+		return $product->getUrlImagesLocation().$this->name;
+	}
 
 }

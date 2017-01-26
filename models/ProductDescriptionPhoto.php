@@ -1,62 +1,24 @@
 <?php
 namespace app\models;
 
-use yii\base\Model;
-
 /**
  * @property string|mixed name
  * @property string|mixed title
  * @property string|mixed description
  */
-class ProductDescriptionPhoto extends Model
+class ProductDescriptionPhoto extends EmbedModel
 {
-	/**
-	 * @var string
-	 */
-	public $name;
-
-	/**
-	 * @var array
-	 */
-	public $title;
-
-	/**
-	 * @var array
-	 */
-	public $description;
-
-	/**
-	 * The attributes that should be translated
-	 *
-	 * @var array
-	 */
-	public static $translatedAttributes = ['title', 'description'];
-
 	public function getParentAttribute()
 	{
 		return "description_photos";
 	}
 
-	/**
-	 * @return ProductMedia
-	 */
-	public function getMedia()
-	{
-		return $this->media;
-	}
-
-	/**
-	 * @param ProductMedia $media
-	 */
-	public function setMedia($media)
-	{
-		$this->media = $media;
-	}
-
-	public function beforeValidate()
-	{
-		$this->setScenario($this->getMedia()->getScenario());
-		return parent::beforeValidate();
+	public function attributes() {
+		return [
+			'name',
+			'title',
+			'description',
+		];
 	}
 
 	public function rules()
@@ -67,5 +29,16 @@ class ProductDescriptionPhoto extends Model
 			[['title', 'description'], 'app\validators\TranslatableRequiredValidator'],
         ];
     }
+
+	/**
+	 * Returns the (relative) url of the photo
+	 *
+	 * @return string
+	 */
+    public function getPhotoUrl()
+	{
+		$product = $this->getParentObject()->getParentObject(); /** @var Product2 $product */
+		return $product->getUrlImagesLocation().$this->name;
+	}
 
 }

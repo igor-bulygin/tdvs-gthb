@@ -293,41 +293,20 @@ $videos = $product->getVideos();
 							<p class="description">
 								<?= $product->description ?>
 							</p>
-							<!--					<div class="tb-wrapper">-->
-<!--						<div class="row">-->
-<!--							<div class="col-md-3 work-profile-description-tb">-->
-<!--								<img src="/imgs/pullera.jpg">-->
-<!--								<span class="tb-title">Lorem ipsum sit amet</span>  -->
-		
-<!--								<span class="tb-description">Swim like a crazy person with this amazing watch Swim like a crazy person with this amazing watch</span>  -->
-<!--							</div>-->
-<!--							<div class="col-md-3 work-profile-description-tb">-->
-<!--								<img src="/imgs/pullera.jpg">-->
-<!--								<span class="tb-title">Lorem ipsum sit amet</span>  -->
-<!--								<span class="tb-description">Swim like a crazy person with this amazing watch Swim like a crazy person with this amazing watch</span>  -->
-<!--							</div>-->
-<!--							<div class="col-md-3 work-profile-description-tb">-->
-<!--								<img src="/imgs/pullera.jpg">-->
-<!--								<span class="tb-title">Lorem ipsum sit amet</span>  -->
-<!--								<span class="tb-description">Swim like a crazy person with this amazing watch Swim like a crazy person with this amazing watch</span>  -->
-<!--							</div>-->
-<!--							<div class="col-md-3 work-profile-description-tb">-->
-<!--								<img src="/imgs/pullera.jpg">-->
-<!--								<span class="tb-title">Lorem ipsum sit amet</span>  -->
-<!--								<span class="tb-description">Swim like a crazy person with this amazing watch Swim like a crazy person with this amazing watch</span>  -->
-<!--							</div>-->
-<!--							<div class="col-md-3 work-profile-description-tb">-->
-<!--								<img src="/imgs/pullera.jpg">-->
-<!--								<span class="tb-title">Lorem ipsum sit amet</span>  -->
-<!--								<span class="tb-description">Swim like a crazy person with this amazing watch Swim like a crazy person with this amazing watch</span>  -->
-<!--							</div>-->
-<!--							<div class="col-md-3 work-profile-description-tb">-->
-<!--								<img src="/imgs/pullera.jpg">-->
-<!--								<span class="tb-title">Lorem ipsum sit amet</span>  -->
-<!--								<span class="tb-description">Swim like a crazy person with this amazing watch Swim like a crazy person with this amazing watch</span>  -->
-<!--							</div>-->
-<!--						</div>-->
-<!--					</div>-->
+                            <?php if (count($product->mediaMapping->descriptionPhotosInfo) > 0) { ?>
+                                <div class="tb-wrapper">
+                                    <div class="row">
+                                        <?php foreach ($product->mediaMapping->descriptionPhotosInfo as $descriptionPhoto) { ?>
+                                        <div class="col-md-3 work-profile-description-tb">
+                                            <img src="<?= Utils::url_scheme() ?><?= Utils::thumborize($descriptionPhoto->getPhotoUrl())->resize(480, 0)?>">
+                                            <span class="tb-title"><?= Utils::l($descriptionPhoto->title)?></span>
+
+                                            <span class="tb-description"><?= Utils::l($descriptionPhoto->description)?></span>
+                                        </div>
+                                        <?php } ?>
+                                    </div>
+                                </div>
+                            <?php } ?>
 						</div>
 						<div class="col-sm-4">
 							<div class="shipping-policies-wrapper">
@@ -365,11 +344,11 @@ $videos = $product->getVideos();
                             <div class="q-a-wrapper">
                                 <p class="question">
                                     <span>Q:</span>
-                                    <span class="important"><?=$faq->question?></span>
+                                    <span class="important"><?= $faq->question?></span>
                                 </p>
                                 <p class="question">
                                     <span>A:</span>
-                                    <span><?=$faq->answer?></span>
+                                    <span><?= $faq->answer?></span>
                                 </p>
                             </div>
                         <?php } ?>

@@ -23,6 +23,7 @@ class EmbedModel extends CActiveRecord
 	public function setParentObject($object)
 	{
 		$this->parentObject = $object;
+		$this->setParentOnEmbbedMappings();
 	}
 
 	public function beforeValidate()

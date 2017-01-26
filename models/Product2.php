@@ -111,7 +111,7 @@ class Product2 extends Product {
 	 *
 	 * @var array
 	 */
-	public static $translatedAttributes = ['name', 'description', 'slug', 'tags', 'faq.question', 'faq.answer'];
+	public static $translatedAttributes = ['name', 'description', 'slug', 'tags', 'faq.question', 'faq.answer', 'media.description_photos.title', 'media.description_photos.description'];
 
 	public static $textFilterAttributes = ['name', 'description', 'tags'];
 
@@ -172,17 +172,7 @@ class Product2 extends Product {
 		return $this->mapEmbedded('bespoke', Bespoke::className(), array('unsetSource' => false));
 	}
 
-	/**
-	 * Load sub documents after find the object
-	 *
-	 * @return void
-	 */
-	public function afterFind()
-	{
-		parent::afterFind();
-	}
-
-	public function beforeValidate()
+	public function setParentOnEmbbedMappings()
 	{
 		$this->mediaMapping->setParentObject($this);
 		$this->preorderMapping->setProduct($this);
@@ -191,7 +181,6 @@ class Product2 extends Product {
 		foreach ($this->faqMapping as $faqMapping) {
 			$faqMapping->setModel($this);
 		}
-		return parent::beforeValidate();
 	}
 
 	public function beforeSave($insert) {
@@ -494,7 +483,7 @@ class Product2 extends Product {
 	 */
 	public static function findOneSerialized($id)
 	{
-		/** @var Product $product */
+		/** @var Product2 $product */
 		$product = static::find()->select(self::getSelectFields())->where(["short_id" => $id])->one();
 
 		// if automatic translation is enabled

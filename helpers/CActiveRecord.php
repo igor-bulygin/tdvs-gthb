@@ -162,4 +162,33 @@ class CActiveRecord extends ActiveRecord
 		return $nameFilter;
 	}
 
+	/**
+	 * Set the current object as parent on embbed objects
+	 * By default, this function makes nothing. It has to be implemented on child clases
+	 *
+	 * TODO: try to implement the logig here using the functions provided by the embbed library
+	 *
+	 */
+	public function setParentOnEmbbedMappings() {}
+
+	/**
+	 * Before validate an object, set the object as parent on embbed objects
+	 *
+	 * @return bool
+	 */
+	public function beforeValidate()
+	{
+		$this->setParentOnEmbbedMappings();
+		return parent::beforeValidate();
+	}
+
+	/**
+	 * After find an object, set the object as parent on embbed objects
+	 */
+	public function afterFind()
+	{
+		$this->setParentOnEmbbedMappings();
+		parent::afterFind();
+	}
+
 }
