@@ -39,7 +39,9 @@ $this->params['deviser'] = $deviser;
                         <div class="cathegory-wrapper">
                             <div class="col-md-3 col-sm-3 col-xs-3 pad-cathegory">
                                 <a href="<?= Url::to(["deviser/store-edit", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id, 'product_state' => \app\models\Product2::PRODUCT_STATE_DRAFT])?>">
-                                    <p>Unpublished<br>works</p>
+                                    <div class="unpublished-square">
+                                        <p>Unpublished<br>works</p>
+                                    </div>
                                 </a>
                             </div>
                             <?php foreach ($categories as $i => $category) { ?>
