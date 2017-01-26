@@ -139,7 +139,10 @@ class ProductController extends CController
 		$deviser = Person::findOneSerialized($product->deviser_id);
 
 		// get other products of the deviser
-		$deviserProducts = Product2::findSerialized(["deviser_id" => $product->deviser_id]);
+		$deviserProducts = Product2::findSerialized([
+			'deviser_id' => $product->deviser_id,
+			'product_state' => Product2::PRODUCT_STATE_ACTIVE,
+		]);
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("detail", [
