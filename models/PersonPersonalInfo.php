@@ -10,6 +10,7 @@ use app\helpers\Utils;
  * @property string $country
  * @property string $city
  * @property \MongoDate $bday
+ * @property string $surnames
  *
  * @method Person getParentObject()
  */
@@ -25,6 +26,7 @@ class PersonPersonalInfo extends EmbedModel
 			'country',
 			'city',
 			'bday',
+			'surnames',
 		];
 	}
 

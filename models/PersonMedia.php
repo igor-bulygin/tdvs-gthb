@@ -7,6 +7,7 @@ namespace app\models;
  * @property string $profile
  * @property string $profile_cropped
  * @property array $photos
+ * @property array $videos_links
  *
  * @method Person getParentObject()
  */
@@ -21,6 +22,7 @@ class PersonMedia extends EmbedModel
 			'profile',
 			'profile_cropped',
 			'photos',
+			'videos_links',
 		];
 	}
 
