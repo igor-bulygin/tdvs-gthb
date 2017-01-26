@@ -4,13 +4,12 @@ use app\assets\desktop\pub\Product2Asset;
 use app\helpers\Utils;
 use app\models\Person;
 use app\models\PersonVideo;
-use app\models\Product;
 use yii\helpers\Url;
 
 ProductDetailAsset::register($this);
 
 /** @var Person $deviser */
-/** @var Product $product */
+/** @var \app\models\Product2 $product */
 /** @var PersonVideo $video */
 
 $this->title = $product->name . ' - Todevise';
@@ -359,39 +358,23 @@ $videos = $product->getVideos();
 							</div>
 						</div>
 					</div>
-					
-					<div class="title">WORK FAQs</div>
-					<div class="q-a-wrapper">
-						<p class="question">
-							<span>Q:</span>
-							<span class="important">How does it work?</span>
-						</p>
-						<p class="question">
-							<span>A:</span>
-							<span>It’s the best product ever. It’s the best product ever. It’s the best product ever. It’s the best product ever. It’s the best product ever. It’s the best product ever. It’s the best product ever. It’s the best product ever. It’s the best product ever. It’s the best product ever. It’s the best product ever. It’s the best product ever.</span>
-						</p>
-					</div>
-					<div class="q-a-wrapper">
-						<p class="question">
-							<span>Q:</span>
-							<span class="important">How many screens does it have?</span>
-						</p>
-						<p class="question">
-							<span>A:</span>
-							<span>100</span>
-						</p>
-					</div>
-					<div class="q-a-wrapper">
-						<p class="question">
-							<span>Q:</span>
-							<span class="important">Does it have worldwide warranty?</span>
-						</p>
-						<p class="question">
-							<span>A:</span>
-							<span>Yes</span>
-						</p>
-					</div>
-					
+
+                    <?php if (count($product->faqMapping) > 0) { ?>
+                        <div class="title">WORK FAQs</div>
+                        <?php foreach ($product->faqMapping as $faq) { ?>
+                            <div class="q-a-wrapper">
+                                <p class="question">
+                                    <span>Q:</span>
+                                    <span class="important"><?=$faq->question?></span>
+                                </p>
+                                <p class="question">
+                                    <span>A:</span>
+                                    <span><?=$faq->answer?></span>
+                                </p>
+                            </div>
+                        <?php } ?>
+                    <?php } ?>
+
 					<div class="reviews-wrapper">
 						<div class="title">User reviews</div>
 						<div class="review-rates">

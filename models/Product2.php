@@ -111,7 +111,7 @@ class Product2 extends Product {
 	 *
 	 * @var array
 	 */
-	public static $translatedAttributes = ['name', 'description', 'slug', 'tags'];
+	public static $translatedAttributes = ['name', 'description', 'slug', 'tags', 'faq.question', 'faq.answer'];
 
 	public static $textFilterAttributes = ['name', 'description', 'tags'];
 
