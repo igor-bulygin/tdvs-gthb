@@ -2,35 +2,38 @@
 namespace app\models;
 
 use app\helpers\Utils;
-use yii\base\Model;
 
 /**
  * @property string $url
  * @property array $products
+ *
+ * @method Person getParentObject()
  */
-class PersonVideo extends Model
+class PersonVideo extends EmbedModel
 {
 
-	/**
-	 * @var string
-	 */
-	public $url;
-
-	/**
-	 * @var array
-	 */
-	public $products = [];
+	public function attributes()
+	{
+		return [
+			'url',
+			'products',
+		];
+	}
 
 	public function getParentAttribute()
 	{
 		return "videos";
 	}
 
-	public function init()
+	public function rules()
 	{
-		parent::init();
-
-		$this->setScenario(Person::SERIALIZE_SCENARIO_LOAD_SUB_DOCUMENT);
+		return [
+			[$this->attributes(), 'safe', 'on' => [Person::SCENARIO_DEVISER_UPDATE_DRAFT, Person::SCENARIO_DEVISER_UPDATE_PROFILE, Person::SCENARIO_DEVISER_PUBLISH_PROFILE]],
+			[['url'], 'required', 'on' => Person::SCENARIO_DEVISER_UPDATE_PROFILE],
+			[['url'], 'url'],
+			[['products'], 'safe', 'on' => Person::SCENARIO_DEVISER_UPDATE_PROFILE],
+			[['products'], 'validateProductIds'],
+		];
 	}
 
 	/**
@@ -42,17 +45,6 @@ class PersonVideo extends Model
 	public function getUrlEmbeddedYoutubePlayer()
 	{
 		return Utils::getUrlEmbeddedYoutubePlayer($this->url);
-	}
-
-	public function rules()
-	{
-		return [
-			[['url'], 'required', 'on' => Person::SCENARIO_DEVISER_UPDATE_PROFILE],
-			[['url'], 'url'],
-			[['products'], 'safe', 'on' => Person::SCENARIO_DEVISER_UPDATE_PROFILE],
-			[['products'], 'validateProductIds'],
-			[['url', 'products'], 'safe', 'on' => [Person::SERIALIZE_SCENARIO_LOAD_SUB_DOCUMENT, Person::SCENARIO_DEVISER_UPDATE_DRAFT]],
-		];
 	}
 
 	public function validateProductIds($attribute, $params)

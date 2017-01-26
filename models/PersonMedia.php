@@ -1,74 +1,32 @@
 <?php
 namespace app\models;
 
-use yii\base\Model;
-
 /**
  * @property string $header
  * @property string $header_cropped
  * @property string $profile
  * @property string $profile_cropped
  * @property array $photos
+ *
+ * @method Person getParentObject()
  */
-class PersonMedia extends Model
+class PersonMedia extends EmbedModel
 {
 
-	/**
-	 * @var string
-	 */
-	public $header;
-
-	/**
-	 * @var string
-	 */
-	public $header_cropped;
-
-	/**
-	 * @var string
-	 */
-	public $profile;
-
-	/**
-	 * @var string
-	 */
-	public $profile_cropped;
-
-	/**
-	 * @var array
-	 */
-	public $photos;
-
-	/** @var  Person */
-	protected $person;
-
-	/**
-	 * @return Person
-	 */
-	public function getPerson()
+	public function attributes()
 	{
-		return $this->person;
-	}
-
-	/**
-	 * @param Person $person
-	 */
-	public function setPerson($person)
-	{
-		$this->person = $person;
+		return [
+			'header',
+			'header_cropped',
+			'profile',
+			'profile_cropped',
+			'photos',
+		];
 	}
 
 	public function getParentAttribute()
 	{
 		return "media";
-	}
-
-	public function init()
-	{
-		parent::init();
-
-		$this->photos = [];
-
-		$this->setScenario(Person::SERIALIZE_SCENARIO_LOAD_SUB_DOCUMENT);
 	}
 
 	/**
@@ -101,7 +59,7 @@ class PersonMedia extends Model
 			[['header', 'header_cropped', 'profile', 'profile_cropped'], 'validateDeviserMediaFileExist', 'on' => Person::SCENARIO_DEVISER_UPDATE_PROFILE],
 			[['photos'], 'validateDeviserPhotosExists', 'on' => Person::SCENARIO_DEVISER_UPDATE_PROFILE],
 			[['photos'], 'validateAmountPhotos', 'on' => Person::SCENARIO_DEVISER_UPDATE_PROFILE],
-			[['header', 'header_cropped', 'profile', 'profile_cropped', 'photos'], 'safe', 'on' => [Person::SERIALIZE_SCENARIO_LOAD_SUB_DOCUMENT, Person::SCENARIO_DEVISER_UPDATE_DRAFT, Person::SCENARIO_DEVISER_CREATE_DRAFT]],
+			[['header', 'header_cropped', 'profile', 'profile_cropped', 'photos'], 'safe', 'on' => [Person::SCENARIO_DEVISER_UPDATE_DRAFT, Person::SCENARIO_DEVISER_CREATE_DRAFT]],
 		];
 	}
 
@@ -128,7 +86,7 @@ class PersonMedia extends Model
 	public function validateDeviserMediaFileExist($attribute, $params)
 	{
 		$filename = $this->$attribute;
-		if (!$this->person->existMediaFile($filename)) {
+		if (!$this->getParentObject()->existMediaFile($filename)) {
 			$this->addError($attribute, sprintf('File %s not found', $filename));
 		}
 	}
@@ -143,7 +101,7 @@ class PersonMedia extends Model
 	{
 		$photos = $this->$attribute;
 		foreach ($photos as $filename) {
-			if (!$this->person->existMediaFile($filename)) {
+			if (!$this->getParentObject()->existMediaFile($filename)) {
 				$this->addError($attribute, sprintf('File %s not found', $filename));
 			}
 		}
@@ -159,19 +117,19 @@ class PersonMedia extends Model
 			switch ($attribute) {
 				case 'header':
 				case 'header_cropped':
-					if (!in_array("header", $this->getPerson()->getErrors("required"))) {
-						$this->getPerson()->addError("required", "header");
+					if (!in_array("header", $this->getParentObject()->getErrors("required"))) {
+						$this->getParentObject()->addError("required", "header");
 					}
 					break;
 				case 'profile':
 				case 'profile_cropped':
-					if (!in_array("profile", $this->getPerson()->getErrors("required"))) {
-						$this->getPerson()->addError("required", "profile");
+					if (!in_array("profile", $this->getParentObject()->getErrors("required"))) {
+						$this->getParentObject()->addError("required", "profile");
 					}
 					break;
 				case 'photos':
-					$this->getPerson()->addError("required", "about");
-					$this->getPerson()->addError("required", "photos");
+					$this->getParentObject()->addError("required", "about");
+					$this->getParentObject()->addError("required", "photos");
 					break;
 			}
 		};

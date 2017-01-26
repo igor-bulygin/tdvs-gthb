@@ -1,38 +1,40 @@
 <?php
 namespace app\models;
 
-use yii\base\Model;
-
 /**
  * @property string lang
  * @property string currency
+ *
+ * @method Person getParentObject()
  */
-class PersonPreferences extends Model
+class PersonPreferences extends EmbedModel
 {
+	public function attributes()
+	{
+		return [
+			'lang',
+			'currency',
+		];
+	}
 
-    /**
-     * @var string $lang
-     */
-    public $lang = Lang::EN_US;
-
-    /**
-     * @var string $currency
-     */
-    public $currency;
+	public function getParentAttribute()
+	{
+		return "preferences";
+	}
 
 	public function init()
 	{
 		parent::init();
 
-		$this->setScenario(Person::SERIALIZE_SCENARIO_LOAD_SUB_DOCUMENT);
+		$this->lang = Lang::EN_US;
 	}
 
 
 	public function rules()
     {
         return [
-            [['lang', 'currency'], 'required', 'on' => Person::SCENARIO_DEVISER_UPDATE_PROFILE],
-	        [['lang', 'currency'], 'safe', 'on' => [Person::SERIALIZE_SCENARIO_LOAD_SUB_DOCUMENT, Person::SCENARIO_DEVISER_UPDATE_DRAFT, Person::SCENARIO_DEVISER_CREATE_DRAFT]],
+			[$this->attributes(), 'safe', 'on' => [Person::SCENARIO_DEVISER_CREATE_DRAFT,  Person::SCENARIO_DEVISER_UPDATE_DRAFT,  Person::SCENARIO_DEVISER_UPDATE_PROFILE, Person::SCENARIO_DEVISER_PUBLISH_PROFILE]],
+			[['lang', 'currency'], 'required', 'on' => Person::SCENARIO_DEVISER_UPDATE_PROFILE],
         ];
     }
 

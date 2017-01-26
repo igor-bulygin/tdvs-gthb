@@ -120,10 +120,6 @@ class Person extends CActiveRecord implements IdentityInterface
 
 		$this->short_id = Utils::shortID(7);
 
-		$this->preferencesMapping = new PersonPreferences();
-		$this->personalInfoMapping = new PersonPersonalInfo();
-		$this->mediaMapping = new PersonMedia();
-
 		// initialize attributes
 		$this->categories = [];
 		$this->collections = [];
@@ -139,32 +135,32 @@ class Person extends CActiveRecord implements IdentityInterface
 
 	public function embedPreferencesMapping()
 	{
-		return $this->mapEmbedded('preferences', PersonPreferences::className());
+		return $this->mapEmbedded('preferences', PersonPreferences::className(), array('unsetSource' => false));
 	}
 
 	public function embedPersonalInfoMapping()
 	{
-		return $this->mapEmbedded('personal_info', PersonPersonalInfo::className());
+		return $this->mapEmbedded('personal_info', PersonPersonalInfo::className(), array('unsetSource' => false));
 	}
 
 	public function embedMediaMapping()
 	{
-		return $this->mapEmbedded('media', PersonMedia::className());
-	}
-
-	public function embedVideosMapping()
-	{
-		return $this->mapEmbeddedList('videos', PersonVideo::className());
-	}
-
-	public function embedFaqMapping()
-	{
-		return $this->mapEmbeddedList('faq', FaqQuestion::className());
+		return $this->mapEmbedded('media', PersonMedia::className(), array('unsetSource' => false));
 	}
 
 	public function embedSettingsMapping()
 	{
-		return $this->mapEmbedded('settings', PersonSettings::className());
+		return $this->mapEmbedded('settings', PersonSettings::className(), array('unsetSource' => false));
+	}
+
+	public function embedVideosMapping()
+	{
+		return $this->mapEmbeddedList('videos', PersonVideo::className(), array('unsetSource' => false));
+	}
+
+	public function embedFaqMapping()
+	{
+		return $this->mapEmbeddedList('faq', FaqQuestion::className(), array('unsetSource' => false));
 	}
 
 	/**
@@ -231,26 +227,16 @@ class Person extends CActiveRecord implements IdentityInterface
 		return $this->getAuthKey();
 	}
 
-	/**
-	 * Load sub documents after find the object
-	 *
-	 * @return void
-	 */
-	public function afterFind()
-	{
-		parent::afterFind();
-
-		$this->preferencesMapping->load($this, 'preferences');
-		$this->personalInfoMapping->load($this, 'personal_info');
-		$this->mediaMapping->load($this, 'media');
-		$this->mediaMapping->setPerson($this);
-	}
-
 	public function setParentOnEmbbedMappings()
 	{
+		$this->preferencesMapping->setParentObject($this);
 		$this->personalInfoMapping->setParentObject($this);
+		$this->mediaMapping->setParentObject($this);
 		$this->settingsMapping->setParentObject($this);
 
+		foreach ($this->videosMapping as $videoMapping) {
+			$videoMapping->setParentObject($this);
+		}
 		foreach ($this->faqMapping as $faqMapping) {
 			$faqMapping->setParentObject($this);
 		}
@@ -875,6 +861,9 @@ class Person extends CActiveRecord implements IdentityInterface
 		}
 		if (array_key_exists('preferences', $data)) {
 			$this->preferencesMapping->load($data, 'preferences');
+		}
+		if (array_key_exists('settings', $data)) {
+			$this->settingsMapping->load($data, 'settings');
 		}
 
 		return ($loaded);

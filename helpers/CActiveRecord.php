@@ -18,11 +18,6 @@ class CActiveRecord extends ActiveRecord
 	const SERIALIZE_SCENARIO_ADMIN = 'serialize_scenario_admin';
 
 	/**
-	 * @deprecated No use this scenario. Scenario in subdocuments must be setted on setScenario of parent objects, with $this->[subdocument_mapping]->setScenario($value)
-	 */
-	const SERIALIZE_SCENARIO_LOAD_SUB_DOCUMENT = 'serialize_scenario_load_sub_document';
-
-	/**
 	 * The attributes that should be serialized
 	 *
 	 * @var array
@@ -187,7 +182,7 @@ class CActiveRecord extends ActiveRecord
 	 */
 	public function afterFind()
 	{
-		$this->setParentOnEmbbedMappings();
+//		$this->setParentOnEmbbedMappings();
 		parent::afterFind();
 	}
 
