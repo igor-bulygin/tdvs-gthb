@@ -30,7 +30,7 @@
 		}
 
 		function getCategories() {
-			productDataService.Categories.get()
+			productDataService.Categories.get({scope: 'roots'})
 				.$promise.then(function (dataCategories) {
 					vm.categories = dataCategories.items;
 				}, function (err) {
