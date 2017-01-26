@@ -138,35 +138,37 @@ $videos = $product->getVideos();
 								</li>
 							</ul>
 							<div>
-								<div class="form-horizontal">
-									<div class="form-group">
-										<div class="row-size expand" ng-repeat="option in detailProductCtrl.product.options | orderBy:[detailProductCtrl.selectComparator]">
-											<label class="col-sm-3 control-label product-label"><span class="atr" ng-bind="option.name"></span></label>
-											<div class="col-sm-9" ng-if="option.values.length > 1 && option.change_reference" ng-cloak>
-												<div class="row">
-													<div class="col-sm-8">
-														<ol class="nya-bs-select btn-group bootstrap-select form-control product-select" ng-model="detailProductCtrl.option_selected[option.id]" ng-change="detailProductCtrl.parseOptions(option.id, detailProductCtrl.option_selected[option.id])">
-															<li nya-bs-option="value in option.values" data-value="value.value" ng-class="{'disabled': value.disabled}">
-																<a href="">
-																	<span ng-bind="value.text"></span>
-																</a>
-															</li>
-														</ol>
-													</div>
-													<div class="col-sm-4 no-pad">
-														<a class="view-chart-size" href="#" href="#" data-toggle="modal" data-target="#chartModal" ng-if="option.id==='size'">View size chart</a>
+								<form name="detailProductCtrl.tagsForm">
+									<div class="form-horizontal">
+										<div class="form-group">
+											<div class="row-size expand" ng-repeat="option in detailProductCtrl.product.options | orderBy:[detailProductCtrl.selectComparator]">
+												<label class="col-sm-3 control-label product-label"><span class="atr" ng-bind="option.name"></span></label>
+												<div class="col-sm-9" ng-if="option.values.length > 1 && option.change_reference" ng-cloak>
+													<div class="row">
+														<div class="col-sm-8">
+															<ol name="{{option.id}}" class="nya-bs-select btn-group bootstrap-select form-control product-select ng-class:{'error-input': detailProductCtrl.has_error(detailProductCtrl.tagsForm, detailProductCtrl.tagsForm[option.id])}" ng-model="detailProductCtrl.option_selected[option.id]" ng-change="detailProductCtrl.parseOptions(option.id, detailProductCtrl.option_selected[option.id])" required>
+																<li nya-bs-option="value in option.values" data-value="value.value" ng-class="{'disabled': value.disabled}">
+																	<a href="">
+																		<span ng-bind="value.text"></span>
+																	</a>
+																</li>
+															</ol>
+														</div>
+														<div class="col-sm-4 no-pad">
+															<a class="view-chart-size" href="#" href="#" data-toggle="modal" data-target="#chartModal" ng-if="option.id==='size'">View size chart</a>
+														</div>
 													</div>
 												</div>
-											</div>
-											<div class="col-sm-9" ng-if="option.values.length === 1 || !option.change_reference">
-												<div class="atribute-selected" ng-if="option.values.length === 1"><span ng-bind="option.values[0].text"></span></div>
-												<div class="atribute-selected" ng-if="option.values.length > 1" ng-repeat="values in option.values">
-													<span ng-bind="values.text"></span>
+												<div class="col-sm-9" ng-if="option.values.length === 1 || !option.change_reference">
+													<div class="atribute-selected" ng-if="option.values.length === 1"><span ng-bind="option.values[0].text"></span></div>
+													<div class="atribute-selected" ng-if="option.values.length > 1" ng-repeat="values in option.values">
+														<span ng-bind="values.text"></span>
+													</div>
 												</div>
 											</div>
 										</div>
 									</div>
-								</div>
+								</form>
 							</div>
 							<!--<div class="row-size">
 								<form class="form-horizontal" name="detailProductCtrl.selectorForm">
@@ -178,7 +180,7 @@ $videos = $product->getVideos();
 								</form>
 							</div>-->
 							<div class="row-size">
-								<button type="button" class="btn btn-green btn-add-to-cart" ng-disabled="detailProductCtrl.stock === 0" ng-click="detailProductCtrl.addToCart()"><i class="ion-ios-cart cart-icon-btn"></i> <span>Add to cart</span></button>
+								<button type="button" class="btn btn-green btn-add-to-cart" ng-disabled="detailProductCtrl.stock === 0" ng-click="detailProductCtrl.addToCart(detailProductCtrl.tagsForm)"><i class="ion-ios-cart cart-icon-btn"></i> <span>Add to cart</span></button>
 							</div>
 						</div>
 						<!--<div class="product-data">

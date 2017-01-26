@@ -5,6 +5,7 @@
 		var vm = this;
 		vm.quantity = 1;
 		vm.option_selected = {};
+		vm.has_error = UtilService.has_error;
 		vm.parseOptions = parseOptions;
 		vm.changeQuantity = changeQuantity;
 		vm.changeOriginalArtwork = changeOriginalArtwork;
@@ -90,18 +91,20 @@
 			resetOptions();
 			vm.product.price_stock.forEach(function(element) {
 				if(element.stock === 0 && ((angular.isArray(element.options[option_id]) && element.options[option_id].indexOf(value) > -1) || 
-					(option_id === 'size' && element.options[option_id] === value))) {
+					(option_id === 'size' && angular.equals(element.options[option_id],value)) ) ) {
 						for(var key in element.options) {
 							if(key !== option_id) {
 								vm.product.options.forEach(function (option) {
 									if(key === option.id) {
 										option.values.forEach(function(unit) {
 												if(key == 'size') {
-													if(unit.text == element.options[key])
+													if(unit.text == element.options[key]) {
 														unit.disabled=true;
+													}
 												} else {
-													if(unit.value == element.options[key][0])
+													if(unit.value == element.options[key][0]) {
 														unit.disabled=true;
+													}
 												}
 										});
 									}
@@ -135,11 +138,13 @@
 		}
 
 		function isOptionRequired(key) {
+			var isRequired;
 			vm.tags.forEach(function(element){
-				if(element.short_id === key) {
-					return element.required;
+				if(element.id === key) {
+					isRequired = element.required;
 				}
-			})
+			});
+			return isRequired;
 		}
 
 		function getReferenceId(options_selected) {
@@ -149,14 +154,21 @@
 				options['size'] = getSizeText(options['size']);
 			}
 			for (var key in options) {
-				if(key !== 'size' && !isOptionRequired(key)) {
+				var optionRequired = isOptionRequired(key);
+				if(key !== 'size' && optionRequired !== undefined && !optionRequired) {
 					delete options[key];
 				}
 			}
 			vm.product.price_stock.forEach(function (element) {
 				var isReference = true;
 				for(var key in options) {
-					if(!angular.equals(options[key], element.options[key]))
+					var valueToCompare;
+					if(key === 'size')
+						valueToCompare = options[key];
+					else {
+						valueToCompare = [options[key]];
+					}
+					if(!angular.equals(valueToCompare, element.options[key]))
 						isReference = false;
 				}
 				if(isReference) {
@@ -240,8 +252,9 @@
 			});
 		}
 
-		function addToCart() {
-			if(vm.reference_id){
+		function addToCart(form) {
+			form.$setSubmitted();
+			if(form.$valid && vm.reference_id) {
 				var cart_id = UtilService.getLocalStorage('cart_id');
 				if(cart_id) {
 					//POST to product
