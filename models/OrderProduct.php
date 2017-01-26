@@ -9,6 +9,8 @@ namespace app\models;
  * @property double $price
  * @property double $weight
  * @property array $options
+ *
+ * @method Order getParentObject()
  */
 class OrderProduct extends EmbedModel
 {

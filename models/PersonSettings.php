@@ -3,6 +3,8 @@ namespace app\models;
 
 /**
  * @property PersonBankInfo $bankInfoMapping
+ *
+ * @method Person getParentObject()
  */
 class PersonSettings extends EmbedModel
 {

@@ -4,6 +4,8 @@ namespace app\models;
 /**
  * @property int $type
  * @property int $value
+ *
+ * @method Product2 getParentObject()
  */
 class MadeToOrder extends EmbedModel {
 	const NONE = 0;

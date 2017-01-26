@@ -12,6 +12,8 @@ namespace app\models;
  * @property string account_type
  * @property string routing_number
  * @property string bsb_code
+ *
+ * @method PersonSettings getParentObject()
  */
 class PersonBankInfo extends EmbedModel
 {

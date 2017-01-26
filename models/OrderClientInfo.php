@@ -11,6 +11,8 @@ namespace app\models;
  * @property string $city
  * @property string $address
  * @property string $zipcode
+ *
+ * @method Order getParentObject()
  */
 class OrderClientInfo extends EmbedModel
 {

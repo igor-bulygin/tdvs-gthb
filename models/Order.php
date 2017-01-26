@@ -89,24 +89,13 @@ class Order extends CActiveRecord {
         return $this->mapEmbedded('client_info', OrderClientInfo::className(), array('unsetSource' => false));
     }
 
-    /**
-     * Load sub documents after find the object
-     *
-     * @return void
-     */
-    public function afterFind()
-    {
-        parent::afterFind();
-    }
-
-	public function beforeValidate()
+	public function setParentOnEmbbedMappings()
 	{
 		$this->clientInfoMapping->setParentObject($this);
 
 		foreach ($this->productsMapping as $product) {
 			$product->setParentObject($this);
 		}
-		return parent::beforeValidate();
 	}
 
 	public function beforeSave($insert) {

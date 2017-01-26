@@ -5,6 +5,8 @@ namespace app\models;
  * @property string|mixed name
  * @property string|mixed title
  * @property string|mixed description
+ *
+ * @method ProductMedia getParentObject()
  */
 class ProductDescriptionPhoto extends EmbedModel
 {

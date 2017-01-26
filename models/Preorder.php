@@ -6,6 +6,8 @@ namespace app\models;
  * @property int $type
  * @property \MongoDate $end
  * @property \MongoDate $ship
+ *
+ * @method Product2 getParentObject()
  */
 class Preorder extends EmbedModel {
 

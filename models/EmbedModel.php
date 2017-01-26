@@ -28,9 +28,7 @@ class EmbedModel extends CActiveRecord
 
 	public function beforeValidate()
 	{
-		if ($this->getParentObject()) {
-			$this->setScenario($this->getParentObject()->getScenario());
-		}
+		$this->setScenario($this->getParentObject()->getScenario());
 
 		return parent::beforeValidate();
 	}
@@ -41,15 +39,13 @@ class EmbedModel extends CActiveRecord
 	 */
 	public function afterValidate()
 	{
-		if ($this->getParentObject()) {
-			foreach ($this->errors as $attribute => $error) {
-				foreach ($error as $oneError) {
-					$this->getParentObject()->addError($attribute, $oneError);
-				}
-			};
-			$this->clearErrors();
-		}
+		foreach ($this->errors as $attribute => $error) {
+			foreach ($error as $oneError) {
+				$this->getParentObject()->addError($attribute, $oneError);
+			}
+		};
+		$this->clearErrors();
+
 		parent::afterValidate();
 	}
-
 }

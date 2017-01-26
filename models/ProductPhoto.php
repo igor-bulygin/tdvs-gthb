@@ -6,6 +6,8 @@ namespace app\models;
  * @property array tags
  * @property bool $not_uploaded
  * @property bool $main_product_photo
+ *
+ * @method ProductMedia getParentObject()
  */
 class ProductPhoto extends EmbedModel
 {

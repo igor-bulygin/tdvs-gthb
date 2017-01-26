@@ -5,6 +5,8 @@ namespace app\models;
  * @property ProductPhoto[] $photosInfo
  * @property ProductDescriptionPhoto[] $descriptionPhotosInfo
  * @property array $videos_links
+ *
+ * @method Product2 getParentObject()
  */
 class ProductMedia extends EmbedModel
 {
@@ -49,15 +51,13 @@ class ProductMedia extends EmbedModel
 	public function rules()
 	{
 		return [
-			['photos', 'safe'], // to load data posted from WebServices
+			[$this->attributes(), 'safe', 'on' => [Product2::SCENARIO_PRODUCT_DRAFT, Product2::SCENARIO_PRODUCT_PUBLIC]], // to load data posted from WebServices
 			['photos', 'required', 'on' => [Product2::SCENARIO_PRODUCT_PUBLIC]],
 			['photosInfo', 'app\validators\EmbedDocValidator'], // to apply rules
 //			['photosInfo', 'validateAmountPhotos'],
 //			['photosInfo', 'validateProductMediaFileExists'], // commented, cause the mediafile can exists in a temporal folder, so we must to check against temporal uploads and product uploads.
-			['description_photos', 'safe'], // to load data posted from WebServices
 			['descriptionPhotosInfo', 'app\validators\EmbedDocValidator'], // to apply rules
 			['descriptionPhotosInfo', 'validateAmountDescriptionPhotos'],
-			['videos_links', 'safe', 'on' => [Product2::SCENARIO_PRODUCT_DRAFT, Product2::SCENARIO_PRODUCT_PUBLIC]],
 		];
 	}
 
