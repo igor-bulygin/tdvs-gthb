@@ -61,7 +61,7 @@ class CartController extends AppPublicController
 				throw new NotFoundHttpException(sprintf("Cart with id %s does not exists", $cartId));
 			}
 			$product = new OrderProduct();
-			$product->setModel($cart);
+			$product->setParentObject($cart);
 
 			if ($product->load(Yii::$app->request->post(), '') && $product->validate()) {
 
@@ -160,7 +160,7 @@ class CartController extends AppPublicController
 			}
 
 			$clientInfo = new OrderClientInfo();
-			$clientInfo->setModel($cart);
+			$clientInfo->setParentObject($cart);
 
 			if ($clientInfo->load(Yii::$app->request->post(), '') && $clientInfo->validate()) {
 

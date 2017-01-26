@@ -5,7 +5,6 @@ use app\helpers\CActiveRecord;
 use app\helpers\Utils;
 use Exception;
 use MongoDate;
-use Yii;
 use yii\mongodb\ActiveQuery;
 
 /**
@@ -102,10 +101,10 @@ class Order extends CActiveRecord {
 
 	public function beforeValidate()
 	{
-		$this->clientInfoMapping->setModel($this);
+		$this->clientInfoMapping->setParentObject($this);
 
 		foreach ($this->productsMapping as $product) {
-			$product->setModel($this);
+			$product->setParentObject($this);
 		}
 		return parent::beforeValidate();
 	}
@@ -414,7 +413,7 @@ class Order extends CActiveRecord {
 		$products = $this->productsMapping;
 		foreach ($products as $item) {
 			if ($item->price_stock_id == $priceStockId) {
-				$item->setModel($this);
+				$item->setParentObject($this);
 				return $item;
 			}
 		}

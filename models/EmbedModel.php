@@ -2,12 +2,9 @@
 namespace app\models;
 
 use app\helpers\CActiveRecord;
-use yii2tech\embedded\ContainerInterface;
-use yii2tech\embedded\ContainerTrait;
 
-class EmbedModel extends CActiveRecord implements ContainerInterface
+class EmbedModel extends CActiveRecord
 {
-	use ContainerTrait;
 
 	/** @var  CActiveRecord */
 	protected $parentObject;

@@ -1,10 +1,6 @@
 <?php
 namespace app\models;
 
-use app\helpers\CActiveRecord;
-use Yii;
-use yii\base\Model;
-
 /**
  * @property string $first_name
  * @property string $last_name
@@ -16,10 +12,8 @@ use yii\base\Model;
  * @property string $address
  * @property string $zipcode
  */
-class OrderClientInfo extends CActiveRecord
+class OrderClientInfo extends EmbedModel
 {
-	/** @var  Model */
-	protected $model;
 
 	public function getParentAttribute()
 	{
@@ -38,29 +32,6 @@ class OrderClientInfo extends CActiveRecord
 			'address',
 			'zipcode',
 		];
-	}
-
-	/**
-	 * @return Model
-	 */
-	public function getModel()
-	{
-		return $this->model;
-	}
-
-	/**
-	 * @param Model $model
-	 */
-	public function setModel($model)
-	{
-		$this->model = $model;
-	}
-
-	public function beforeValidate()
-	{
-		$this->setScenario($this->getModel()->getScenario());
-
-		return parent::beforeValidate();
 	}
 
 	public function rules()

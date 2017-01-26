@@ -1,10 +1,6 @@
 <?php
 namespace app\models;
 
-use app\helpers\CActiveRecord;
-use Yii;
-use yii\base\Model;
-
 /**
  * @property string $product_id
  * @property string $price_stock_id
@@ -14,11 +10,8 @@ use yii\base\Model;
  * @property double $weight
  * @property array $options
  */
-class OrderProduct extends CActiveRecord
+class OrderProduct extends EmbedModel
 {
-	/** @var  Model */
-	protected $model;
-
 	public function getParentAttribute()
 	{
 		return "products";
@@ -34,29 +27,6 @@ class OrderProduct extends CActiveRecord
 				'weight',
 				'options',
 		];
-	}
-
-	/**
-	 * @return Model
-	 */
-	public function getModel()
-	{
-		return $this->model;
-	}
-
-	/**
-	 * @param Model $model
-	 */
-	public function setModel($model)
-	{
-		$this->model = $model;
-	}
-
-	public function beforeValidate()
-	{
-		$this->setScenario($this->getModel()->getScenario());
-
-		return parent::beforeValidate();
 	}
 
 	public function rules()

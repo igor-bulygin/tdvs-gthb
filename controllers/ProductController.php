@@ -10,6 +10,7 @@ use app\models\Product;
 use app\models\Product2;
 use Yii;
 use yii\filters\AccessControl;
+use yii\helpers\Url;
 use yii\mongodb\Collection;
 use yii\web\BadRequestHttpException;
 use yii\web\HttpException;
@@ -121,12 +122,17 @@ class ProductController extends CController
 
 	public function actionDetail($slug, $product_id)
 	{
+		Product2::setSerializeScenario(Product2::SERIALIZE_SCENARIO_PUBLIC);
 
 		// get the product
 		$product = Product2::findOneSerialized($product_id);
 
 		if ($product->product_state != Product2::PRODUCT_STATE_ACTIVE) {
 			throw new HttpException(404, 'The requested item could not be found.');
+		}
+
+		if ($product->slug != $slug) {
+			return $this->redirect(Url::to(["product/detail", "slug" => $product->slug, 'product_id' => $product->short_id]), 301);
 		}
 
 		// get the deviser
