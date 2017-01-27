@@ -1,9 +1,6 @@
 <?php
 namespace app\modules\api\pub\v1\forms;
 
-use app\models\Person;
-use Yii;
-use app\helpers\Utils;
 use yii\base\Model;
 
 class BecomeDeviserForm extends Model {
@@ -61,7 +58,7 @@ class BecomeDeviserForm extends Model {
 		return [
 			[['email', 'representative_name', 'creations_description', 'urls_portfolio'], 'required'],
 			[['email'], 'email'],
-			[['urls_portfolio', 'urls_video'], 'each', 'rule' => ['url']],
+			[['urls_portfolio', 'urls_video'], 'each', 'rule' => ['url', 'defaultScheme' => 'http']],
 			[['brand_name', 'phone_number', 'observations'], 'safe'],
 		];
 	}
