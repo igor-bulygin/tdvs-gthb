@@ -48,13 +48,15 @@ $this->params['deviser'] = $deviser;
 						<div class="content-store">
 							<?php if ($unpublishedWorks || count($categories) > 1) { ?>
 								<div class="cathegory-wrapper">
-									<div class="col-md-3 col-sm-3 col-xs-3 pad-cathegory">
-										<a href="<?= Url::to(["deviser/store-edit", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id, 'product_state' => \app\models\Product2::PRODUCT_STATE_DRAFT])?>">
-											<div class="unpublished-square" ng-click="editStoreCtrl.show_unpublished_works()">
-												<p>Unpublished<br>works</p>
-											</div>
-										</a>
-									</div>
+									<?php if ($unpublishedWorks) { ?>
+                                        <div class="col-md-3 col-sm-3 col-xs-3 pad-cathegory">
+                                            <a href="<?= Url::to(["deviser/store-edit", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id, 'product_state' => \app\models\Product2::PRODUCT_STATE_DRAFT])?>">
+                                                <div class="unpublished-square" ng-click="editStoreCtrl.show_unpublished_works()">
+                                                    <p>Unpublished<br>works</p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    <?php } ?>
                                     <?php foreach ($categories as $i => $category) { ?>
                                         <div class="col-md-3 col-sm-3 col-xs-3 pad-cathegory">
                                             <a href="<?= Url::to(["deviser/store-edit", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id, 'category' => $category->short_id])?>">
