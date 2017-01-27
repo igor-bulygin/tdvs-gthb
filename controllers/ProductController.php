@@ -14,6 +14,8 @@ use yii\helpers\Url;
 use yii\mongodb\Collection;
 use yii\web\BadRequestHttpException;
 use yii\web\HttpException;
+use yii\web\NotFoundHttpException;
+use yii\web\UnauthorizedHttpException;
 
 class ProductController extends CController
 {
@@ -158,7 +160,11 @@ class ProductController extends CController
 		$deviser = Person::findOneSerialized($deviser_id);
 
 		if (!$deviser) {
-			throw new BadRequestHttpException("Not found");
+			throw new NotFoundHttpException();
+		}
+
+		if (!$deviser->isDeviserEditable()) {
+			throw new UnauthorizedHttpException();
 		}
 
 		$this->layout = '/desktop/public-2.php';
@@ -171,6 +177,14 @@ class ProductController extends CController
 	{
 		/** @var Person $deviser */
 		$deviser = Person::findOneSerialized($deviser_id);
+
+		if (!$deviser) {
+			throw new NotFoundHttpException();
+		}
+
+		if (!$deviser->isDeviserEditable()) {
+			throw new UnauthorizedHttpException();
+		}
 
 		$product = Product::findOneSerialized($product_id);
 

@@ -13,6 +13,8 @@ use app\models\Tag;
 use Yii;
 use yii\filters\AccessControl;
 use yii\helpers\Json;
+use yii\web\NotFoundHttpException;
+use yii\web\UnauthorizedHttpException;
 
 class DeviserController extends CController
 {
@@ -175,6 +177,12 @@ class DeviserController extends CController
 		]);
 	}
 
+	/**
+	 * @param $slug
+	 *
+	 * @return Person
+	 * @deprecated
+	 */
 	public function actionUploadHeaderPhoto($slug)
 	{
 		/* @var $deviser \app\models\Person */
@@ -196,6 +204,12 @@ class DeviserController extends CController
 		}
 	}
 
+	/**
+	 * @param $slug
+	 *
+	 * @return Person
+	 * @deprecated
+	 */
 	public function actionUploadProfilePhoto($slug)
 	{
 		/* @var $deviser \app\models\Person */
@@ -218,6 +232,13 @@ class DeviserController extends CController
 		}
 	}
 
+	/**
+	 * @param $slug
+	 * @param $short_id
+	 *
+	 * @return \app\models\Product|void
+	 * @deprecated
+	 */
 	public function actionUploadProductPhoto($slug, $short_id)
 	{
 		/* @var $product \app\models\Product */
@@ -247,6 +268,13 @@ class DeviserController extends CController
 		}
 	}
 
+	/**
+	 * @param $slug
+	 * @param $short_id
+	 *
+	 * @return \app\models\Product
+	 * @deprecated
+	 */
 	public function actionDeleteProductPhoto($slug, $short_id)
 	{
 		/* @var $product \app\models\Product */
@@ -269,8 +297,12 @@ class DeviserController extends CController
 
 	public function actionStore($slug, $deviser_id)
 	{
-		// get the category object
 		$deviser = Person::findOneSerialized($deviser_id);
+
+		if (!$deviser) {
+			throw new NotFoundHttpException();
+		}
+
 		// categories of all products
 		$categories = $deviser->getCategoriesOfProducts();
 		/** @var Category $selectedCategory */
@@ -315,6 +347,15 @@ class DeviserController extends CController
 	{
 		// get the category object
 		$deviser = Person::findOneSerialized($deviser_id);
+
+		if (!$deviser) {
+			throw new NotFoundHttpException();
+		}
+
+		if (!$deviser->isDeviserEditable()) {
+			throw new UnauthorizedHttpException();
+		}
+
 		// categories of all products
 		$categories = $deviser->getCategoriesOfProducts();
 		/** @var Category $selectedCategory */
@@ -345,8 +386,11 @@ class DeviserController extends CController
 
 	public function actionAbout($slug, $deviser_id)
 	{
-		// get the category object
 		$deviser = Person::findOneSerialized($deviser_id);
+
+		if (!$deviser) {
+			throw new NotFoundHttpException();
+		}
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("about-view", [
@@ -356,8 +400,15 @@ class DeviserController extends CController
 
 	public function actionAboutEdit($slug, $deviser_id)
 	{
-		// get the category object
 		$deviser = Person::findOneSerialized($deviser_id);
+
+		if (!$deviser) {
+			throw new NotFoundHttpException();
+		}
+
+		if (!$deviser->isDeviserEditable()) {
+			throw new UnauthorizedHttpException();
+		}
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("about-edit", [
@@ -367,8 +418,11 @@ class DeviserController extends CController
 
 	public function actionPress($slug, $deviser_id)
 	{
-		// get the category object
 		$deviser = Person::findOneSerialized($deviser_id);
+
+		if (!$deviser) {
+			throw new NotFoundHttpException();
+		}
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("press-view", [
@@ -382,6 +436,14 @@ class DeviserController extends CController
 		// get the category object
 		$deviser = Person::findOneSerialized($deviser_id);
 
+		if (!$deviser) {
+			throw new NotFoundHttpException();
+		}
+
+		if (!$deviser->isDeviserEditable()) {
+			throw new UnauthorizedHttpException();
+		}
+
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("press-edit", [
 			'deviser' => $deviser,
@@ -390,8 +452,11 @@ class DeviserController extends CController
 
 	public function actionVideos($slug, $deviser_id)
 	{
-		// get the category object
 		$deviser = Person::findOneSerialized($deviser_id);
+
+		if (!$deviser) {
+			throw new NotFoundHttpException();
+		}
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("videos-view", [
@@ -405,6 +470,14 @@ class DeviserController extends CController
 		// get the category object
 		$deviser = Person::findOneSerialized($deviser_id);
 
+		if (!$deviser) {
+			throw new NotFoundHttpException();
+		}
+
+		if (!$deviser->isDeviserEditable()) {
+			throw new UnauthorizedHttpException();
+		}
+
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("videos-edit", [
 			'deviser' => $deviser,
@@ -413,8 +486,11 @@ class DeviserController extends CController
 
 	public function actionFaq($slug, $deviser_id)
 	{
-		// get the category object
 		$deviser = Person::findOneSerialized($deviser_id);
+
+		if (!$deviser) {
+			throw new NotFoundHttpException();
+		}
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("faq-view", [
@@ -427,6 +503,14 @@ class DeviserController extends CController
 	{
 		// get the category object
 		$deviser = Person::findOneSerialized($deviser_id);
+
+		if (!$deviser) {
+			throw new NotFoundHttpException();
+		}
+
+		if (!$deviser->isDeviserEditable()) {
+			throw new UnauthorizedHttpException();
+		}
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("faq-edit", [
