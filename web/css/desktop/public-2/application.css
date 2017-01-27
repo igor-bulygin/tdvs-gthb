@@ -3929,7 +3929,8 @@ input[type="radio"] .styled:checked + label::after {
         -webkit-border-radius: 25px 25px 25px 25px !important;
         -moz-border-radius: 25px 25px 25px 25px !important; }
       .create-work-wrapper .card .row .description-input .ta-scroll-window.form-control {
-        height: auto !important; }
+        height: auto !important;
+        background-color: transparent !important; }
 
 .items-row {
   margin-left: 0; }
@@ -4179,7 +4180,7 @@ tags-input .tags {
   font-size: 14px;
   line-height: 1.42857143;
   color: #555;
-  background-color: #fff;
+  background-color: transparent !important;
   background-image: none;
   border: 1px solid #ccc;
   border-radius: 25px 25px 25px 25px !important;
