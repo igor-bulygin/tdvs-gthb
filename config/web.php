@@ -109,7 +109,7 @@ $config = [
 			// send all mails to a file by default. You have to set
 			// 'useFileTransport' to false and configure a transport
 			// for the mailer to send real emails.
-			'useFileTransport' => YII_ENV_DEV ? true : false,
+			'useFileTransport' => YII_ENV_DEV ? false : false,
 			'transport' => [
 				'class' => 'Swift_SmtpTransport',
 				'host' => '10.0.1.1',
