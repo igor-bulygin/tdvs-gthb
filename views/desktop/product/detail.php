@@ -340,8 +340,8 @@ $videos = $product->getVideos();
 						</div>
 					</div>
 
-                    <div class="title">WORK FAQs</div>
                     <?php if (count($product->faqMapping) > 0) { ?>
+                        <div class="title">WORK FAQs</div>
                         <?php foreach ($product->faqMapping as $faq) { ?>
                             <div class="q-a-wrapper">
                                 <p class="question">
@@ -354,6 +354,28 @@ $videos = $product->getVideos();
                                 </p>
                             </div>
                         <?php } ?>
+                    <?php } else { ?>
+                        <div class="title">WORK FAQs</div>
+                        <div class="q-a-wrapper">
+                            <p class="question">
+                                <span>Q:</span>
+                                <span class="important">Question?</span>
+                            </p>
+                            <p class="question">
+                                <span>A:</span>
+                                <span>Answer</span>
+                            </p>
+                        </div>
+                        <div class="q-a-wrapper">
+                            <p class="question">
+                                <span>Q:</span>
+                                <span class="important">Question?</span>
+                            </p>
+                            <p class="question">
+                                <span>A:</span>
+                                <span>Answer</span>
+                            </p>
+                        </div>
                     <?php } ?>
 
 					<div class="reviews-wrapper">
