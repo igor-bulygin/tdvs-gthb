@@ -13,6 +13,7 @@ use app\models\Tag;
 use Yii;
 use yii\filters\AccessControl;
 use yii\helpers\Json;
+use yii\mongodb\Collection;
 use yii\web\NotFoundHttpException;
 use yii\web\UnauthorizedHttpException;
 
@@ -562,32 +563,32 @@ class DeviserController extends CController
 	 * @deprecated
 	 * @throws \yii\mongodb\Exception
 	 */
-//	public function actionUpdatePasswords()
-//	{
-//		ini_set('memory_limit', '2048M');
-//		set_time_limit(-1);
-//
-//		/* @var Person[] $devisers */
-//		$devisers = Person::find()->where(
-//			[
-//				'type' => [Person::DEVISER],
-//			]
-//		)->all();
-//		foreach ($devisers as $deviser) {
-//			$deviser->setPassword('todevise1234');
-//
-//			// Update directly in low level, to avoid no desired behaviors of ActiveRecord
-//			/** @var Collection $collection */
-//			$collection = Yii::$app->mongodb->getCollection('person');
-//			$collection->update(
-//					[
-//							'short_id' => $deviser->short_id
-//					],
-//					[
-//							'credentials' => $deviser->credentials
-//					]
-//			);
-//		}
-//	}
+	public function actionUpdatePasswords()
+	{
+		ini_set('memory_limit', '2048M');
+		set_time_limit(-1);
+
+		/* @var Person[] $devisers */
+		$devisers = Person::find()->where(
+			[
+				'type' => [Person::DEVISER],
+			]
+		)->all();
+		foreach ($devisers as $deviser) {
+			$deviser->setPassword('todevise1234');
+
+			// Update directly in low level, to avoid no desired behaviors of ActiveRecord
+			/** @var Collection $collection */
+			$collection = Yii::$app->mongodb->getCollection('person');
+			$collection->update(
+					[
+							'short_id' => $deviser->short_id
+					],
+					[
+							'credentials' => $deviser->credentials
+					]
+			);
+		}
+	}
 
 }
