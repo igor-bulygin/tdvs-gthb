@@ -11,7 +11,8 @@ class CheckoutAsset extends AssetBundle {
 		'js/desktop/cart/checkout.js',
 		'js/desktop/cart/summary/summary.js',
 		'js/desktop/cart/shopping-cart/shopping-cart.js',
-		'js/desktop/cart/personal-info/personal-info.js'
+		'js/desktop/cart/personal-info/personal-info.js',
+		'js/desktop/cart/payment-methods/payment-methods.js'
 	];
 	public $depends = [
 		'app\assets\desktop\cart\CartAsset',

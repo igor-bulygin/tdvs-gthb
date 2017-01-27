@@ -24,6 +24,7 @@ $this->title = 'Todevise / Cart';
 			<div class="col-md-8 no-pad">
 				<shopping-cart state="checkoutCtrl.cart_state" cart="checkoutCtrl.cart" devisers="checkoutCtrl.devisers" ng-if="checkoutCtrl.cart_state.state===1"></shopping-cart>
 				<personal-info state="checkoutCtrl.cart_state" cart="checkoutCtrl.cart" ng-if="checkoutCtrl.cart_state.state===2"></personal-info>
+				<payment-methods state="checkoutCtrl.cart_state" cart="checkoutCtrl.cart" ng-if="checkoutCtrl.cart_state.state===3"></payment-methods>
 			</div>
 			<div class="col-md-4 no-pad bordered-left">
 				<cart-summary state="checkoutCtrl.cart_state" cart="checkoutCtrl.cart" devisers="checkoutCtrl.devisers"></cart-summary>

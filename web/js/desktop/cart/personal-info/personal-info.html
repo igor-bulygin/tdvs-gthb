@@ -44,7 +44,7 @@
 		<div class="form-group form-personal-info">
 			<label for="country" class="col-md-3">Country</label>
 			<div class="col-md-9">
-				<ol class="nya-bs-select" ng-model="personalInfoCtrl.user.country">
+				<ol class="nya-bs-select" ng-model="personalInfoCtrl.user.country" size="5">
 					<li nya-bs-option="country in personalInfoCtrl.countries | orderBy:'country_name'" data-value="country.id">
 						<a href=""><span ng-bind="country.country_name"></span></a>
 					</li>
@@ -72,6 +72,6 @@
 	</div>
 	</form>
 	<div class="col-md-12 text-center">
-		<button class="btn btn-green" ng-click="personalInfoCtrl.save(personalInfoCtrl.form)">Continue to shipping methods</button>
+		<button class="btn btn-green" ng-click="personalInfoCtrl.save(personalInfoCtrl.form)">Continue to payment methods</button>
 	</div>
 </div>

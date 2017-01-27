@@ -300,6 +300,9 @@ ul {
 .ml-15 {
   margin-left: 15px; }
 
+.ml-0 {
+  margin-left: 0 !important; }
+
 .ml-30 {
   margin-left: 30px; }
 
@@ -3917,6 +3920,7 @@ input[type="radio"] .styled:checked + label::after {
         margin-top: -20px;
         padding: 30px 20px 0;
         height: 80px;
+        background-color: transparent !important;
         border-radius: 25px 25px 25px 25px !important;
         -webkit-border-radius: 25px 25px 25px 25px !important;
         -moz-border-radius: 25px 25px 25px 25px !important; }
@@ -3928,7 +3932,8 @@ input[type="radio"] .styled:checked + label::after {
         -webkit-border-radius: 25px 25px 25px 25px !important;
         -moz-border-radius: 25px 25px 25px 25px !important; }
       .create-work-wrapper .card .row .description-input .ta-scroll-window.form-control {
-        height: auto !important; }
+        height: auto !important;
+        background-color: transparent !important; }
 
 .items-row {
   margin-left: 0; }
@@ -4178,7 +4183,7 @@ tags-input .tags {
   font-size: 14px;
   line-height: 1.42857143;
   color: #555;
-  background-color: #fff;
+  background-color: transparent !important;
   background-image: none;
   border: 1px solid #ccc;
   border-radius: 25px 25px 25px 25px !important;
@@ -4437,6 +4442,9 @@ input:checked + .slider:before {
     cursor: pointer; }
     .success-bar span i {
       font-size: 21px; }
+
+.p-s-label {
+  margin: 0 15px 0 30px; }
 
 .cart-top-bar {
   background-color: #bfbfbf;
