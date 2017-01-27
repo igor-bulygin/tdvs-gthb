@@ -300,6 +300,9 @@ ul {
 .ml-15 {
   margin-left: 15px; }
 
+.ml-0 {
+  margin-left: 0 !important; }
+
 .ml-30 {
   margin-left: 30px; }
 
@@ -4439,6 +4442,9 @@ input:checked + .slider:before {
     cursor: pointer; }
     .success-bar span i {
       font-size: 21px; }
+
+.p-s-label {
+  margin: 0 15px 0 30px; }
 
 .cart-top-bar {
   background-color: #bfbfbf;
