@@ -3917,6 +3917,7 @@ input[type="radio"] .styled:checked + label::after {
         margin-top: -20px;
         padding: 30px 20px 0;
         height: 80px;
+        background-color: transparent !important;
         border-radius: 25px 25px 25px 25px !important;
         -webkit-border-radius: 25px 25px 25px 25px !important;
         -moz-border-radius: 25px 25px 25px 25px !important; }
