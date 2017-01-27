@@ -10,6 +10,11 @@
 		init();
 		function init(){
 			getCountries();
+			if(angular.isObject(vm.cart.client_info)) {
+				for(var key in vm.cart.client_info) {
+					vm.user[key] = angular.copy(vm.cart.client_info[key]);
+				}
+			}
 		}
 
 		function getCountries(){
@@ -28,9 +33,10 @@
 				vm.user.$save({
 					id: vm.cart.id
 				}).then(function(dataSaved) {
-					//TODO: go to step 3
+					vm.cart.client_info = angular.copy(dataSaved.client_info);
+					vm.state.state=3;
 				}, function (err) {
-					console.log(err);
+					//TODO: Show err
 				});
 			}
 		}
