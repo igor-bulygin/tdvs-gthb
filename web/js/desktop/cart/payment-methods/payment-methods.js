@@ -1,9 +1,11 @@
 (function () {
 	"use strict";
 
-	function controller() {
+	function controller(UtilService) {
 		var vm = this;
+		vm.has_error = UtilService.has_error;
 		vm.editPersonalInfo = editPersonalInfo;
+		vm.cvvPattern = new RegExp("[0-9]{3}", "g")
 
 		init();
 

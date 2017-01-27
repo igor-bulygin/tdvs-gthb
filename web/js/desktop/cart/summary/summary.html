@@ -1,12 +1,12 @@
 <span class="shopping-cart-title">Cart summary</span>
 
-<div ng-if="summaryCtrl.state.state === 2">
+<div ng-if="summaryCtrl.state.state > 1">
 	<div ng-repeat="deviser in summaryCtrl.devisers">
 		<span span class="deviser-name-item summary-cart-wrapper" ng-bind="deviser.deviser_name"></span>
 		<div class="summary-cart-wrapper summary-white-item" ng-repeat="product in summaryCtrl.cart.products | filter: {deviser_id: deviser.deviser_id}">
 			<div>
 					<span class="product-name" ng-bind="product.product_name"></span>
-					<span class="pull-right text-green bold">€<span ng-bind="product.price"></span></span>
+					<span class="pull-right text-green bold">€<span ng-bind="product.quantity * product.price"></span></span>
 			</div>
 			<div class="summary-row">
 				<span>Ud: <span ng-bind="product.quantity"></span></span>
