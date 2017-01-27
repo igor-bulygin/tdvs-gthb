@@ -16,7 +16,6 @@
 
 		function init() {
 			getProductId();
-			getProduct();
 			getTags();
 
 		}
@@ -56,6 +55,7 @@
 			tagDataService.Tags.get()
 				.$promise.then(function(dataTags) {
 					vm.tags = dataTags.items;
+					getProduct();
 				}, function(err) {
 					//error
 				});
