@@ -1,9 +1,6 @@
 <?php
-use app\helpers\Utils;
 use app\models\Invitation;
 use app\models\PostmanEmailAction;
-use app\modules\api\pub\v1\forms\BecomeDeviserForm;
-use yii\helpers\Html;
 use yii\helpers\Url;
 
 /** @var $this \yii\web\View view component instance */
@@ -12,8 +9,8 @@ use yii\helpers\Url;
 ?>
 
 <!doctype html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml"
-      xmlns:o="urn:schemas-microsoft-com:office:office">
+<html xmlns="http://www.w3.org/1999/xhtml"
+>
 <head>
 	<!-- NAME: 1 COLUMN -->
 	<!--[if gte mso 15]>
@@ -530,7 +527,7 @@ use yii\helpers\Url;
 												    style="padding-right: 9px;padding-left: 9px;padding-top: 0;padding-bottom:0;text-align: center;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
 													<a href="#">
 														<img align="center" alt=""
-														     src="/imgs/todevise.email.logo.png"
+														     src="<?= Url::base(true) ?>/imgs/todevise.email.logo.png"
 														     width="110"
 														     style="max-width: 110px;padding-bottom: 0;display: inline !important;vertical-align: bottom;border:0;height: auto;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;"
 														     class="mcnImage">
@@ -706,7 +703,7 @@ use yii\helpers\Url;
 													<br>
 													<em>To learn more about Todevise, click on this link</em> <a
 														href="<?= Url::to('about-us', true); ?>"
-														style="line-height: 1.6;mso-line-height-rule:exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #656565;font-weight: normal;text-decoration: underline;">http://www.todevise.com/about-us</a><br>
+														style="line-height: 1.6;mso-line-height-rule:exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #656565;font-weight: normal;text-decoration: underline;"><?= Url::to('about-us', true); ?></a><br>
 													<em>Copyright @ 2016 Todevise, All rights reserved.</em><br>
 													<br>
 													&nbsp;
