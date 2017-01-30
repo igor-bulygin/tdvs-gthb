@@ -2,18 +2,12 @@
 
 namespace app\modules\api\admin\v1\controllers;
 
-use app\helpers\CActiveRecord;
+use app\models\Faq;
 use app\models\Invitation;
-use DateTime;
 use MongoDate;
 use Yii;
 use yii\rest\Controller;
 use yii\web\ForbiddenHttpException;
-use yii\web\Response;
-use app\helpers\Utils;
-use yii\filters\ContentNegotiator;
-
-use app\models\Faq;
 
 class InvitationController extends Controller
 {
@@ -46,14 +40,18 @@ class InvitationController extends Controller
 			// save the invitation
 			$invitation->save();
 
+			$no_invitation = Yii::$app->request->post('no_email', false);
+
 			// send the email to invited person
 			$email = $invitation->composeEmail();
 			$taskId = $email->findCurrentPendingTaskId();
-			if ($email->send($taskId)) {
+			if ($no_invitation || $email->send($taskId)) {
 				$email->save();
 
-				$invitation->date_sent = new MongoDate();
-				$invitation->save();
+				if (!$no_invitation) {
+					$invitation->date_sent = new MongoDate();
+					$invitation->save();
+				}
 			}
 
 			Yii::$app->response->setStatusCode(201); // Created

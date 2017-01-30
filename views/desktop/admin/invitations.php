@@ -1,14 +1,11 @@
 <?php
 use app\assets\desktop\admin\InvitationsAsset;
 use app\models\Invitation;
-use yii\web\View;
-use app\models\Lang;
-use yii\helpers\Url;
-use yii\helpers\Html;
-use yii\helpers\Json;
 use app\models\Person;
 use yii\grid\GridView;
-use app\assets\desktop\admin\AdminsAsset;
+use yii\helpers\Html;
+use yii\helpers\Json;
+use yii\web\View;
 
 /* @var $this yii\web\View */
 /* @var $admins yii\data\ActiveDataProvider */
@@ -125,26 +122,31 @@ $this->title = 'Todevise / Admin / Invitations';
 		<div class='modal-header'>
 			<h3 class='modal-title funiv fs1'><?= Yii::t("app/admin", "Create new invitation"); ?></h3>
 		</div>
-		<div class='modal-body'>
-			<label class="modal-title funiv fs1 fnormal fc-18"><?= Yii::t("app/admin", "Email"); ?></label>
-			<div class="input-group">
-				<input id="email" type="email" required="" type="text" class="form-control funiv fs1" placeholder="<?= Yii::t("app/admin", "Email..."); ?>" aria-describedby="basic-addon-email" ng-model="create_newCtrl.email" name="email">
-				<span class="input-group-addon alert-danger funiv fs0-929" id="basic-addon-email" ng-show="create_newCtrl.form.$submitted && !create_newCtrl.form.$valid && !create_newCtrl.form['email'].$valid">
-					<span ng-show="create_newCtrl.form['email'].$error.required"><?= Yii::t("app/admin", "Required!"); ?></span>
-					<span ng-show="create_newCtrl.form['email'].$error.email"><?= Yii::t("app/admin", "Invalid!"); ?></span>
-				</span>
-			</div>
+		<div class='modal-body form'>
+            <div class="form-group">
+                <label class="modal-title funiv fs1 fnormal fc-18 control-label"><?= Yii::t("app/admin", "Email"); ?></label>
+                <input id="email" type="email" required="" type="text" class="form-control funiv fs1" placeholder="<?= Yii::t("app/admin", "Email..."); ?>" aria-describedby="basic-addon-email" ng-model="create_newCtrl.email" name="email">
+                <span class="input-group-addon alert-danger funiv fs0-929" id="basic-addon-email" ng-show="create_newCtrl.form.$submitted && !create_newCtrl.form.$valid && !create_newCtrl.form['email'].$valid">
+                    <span ng-show="create_newCtrl.form['email'].$error.required"><?= Yii::t("app/admin", "Required!"); ?></span>
+                    <span ng-show="create_newCtrl.form['email'].$error.email"><?= Yii::t("app/admin", "Invalid!"); ?></span>
+                </span>
+            </div>
 
-			<br />
+            <div class="form-group">
+                <label class="modal-title funiv fs1 fnormal fc-18 control-label"><?= Yii::t("app/admin", "First name"); ?></label>
+                <input id="first_name" required="" type="text" class="form-control funiv fs1" placeholder="<?= Yii::t("app/admin", "First name"); ?>" ng-model="create_newCtrl.first_name" name="first_name">
+                <span class="input-group-addon alert-danger funiv fs0-929" id="basic-addon-password" ng-show="create_newCtrl.form.$submitted && !create_newCtrl.form.$valid && !create_newCtrl.form['first_name'].$valid">
+                    <span ng-show="create_newCtrl.form['first_name'].$error.required"><?= Yii::t("app/admin", "Required!"); ?></span>
+                    <span ng-show="create_newCtrl.form['first_name'].$error.pattern"><?= Yii::t("app/admin", "Invalid!"); ?></span>
+                </span>
+            </div>
 
-			<label class="modal-title funiv fs1 fnormal fc-18"><?= Yii::t("app/admin", "First name"); ?></label>
-			<div class="input-group">
-				<input id="first_name" required="" type="text" class="form-control funiv fs1" placeholder="<?= Yii::t("app/admin", "First name"); ?>" ng-model="create_newCtrl.first_name" name="first_name">
-				<span class="input-group-addon alert-danger funiv fs0-929" id="basic-addon-password" ng-show="create_newCtrl.form.$submitted && !create_newCtrl.form.$valid && !create_newCtrl.form['first_name'].$valid">
-					<span ng-show="create_newCtrl.form['first_name'].$error.required"><?= Yii::t("app/admin", "Required!"); ?></span>
-					<span ng-show="create_newCtrl.form['first_name'].$error.pattern"><?= Yii::t("app/admin", "Invalid!"); ?></span>
-				</span>
-			</div>
+            <div class="checkbox">
+                <label>
+                    <input id="no_email" type="checkbox" ng-model="create_newCtrl.no_email" name="no_email" value="1">
+                    Don't send the email
+                </label>
+            </div>
 		</div>
 		<div class='modal-footer'>
 			<button class='btn btn-light-green fc-18 funiv fs0-786 fs-upper' ng-click='create_newCtrl.form.$submitted = true; create_newCtrl.form.$valid && create_newCtrl.ok()'><?= Yii::t("app/admin", "Confirm"); ?></button>

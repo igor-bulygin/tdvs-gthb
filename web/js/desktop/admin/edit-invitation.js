@@ -63,7 +63,8 @@
 		vm.ok = function () {
 			$uibModalInstance.close({
 				email: vm.email,
-				first_name: vm.first_name
+				first_name: vm.first_name,
+				no_email: vm.no_email
 			});
 		};
 
