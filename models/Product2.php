@@ -145,8 +145,6 @@ class Product2 extends Product {
 		$this->tags = [];
 		$this->references = [];
 		$this->position = 0;
-
-		Product2::setSerializeScenario(Product2::SERIALIZE_SCENARIO_PUBLIC);
 	}
 
 	public function embedMediaMapping()
