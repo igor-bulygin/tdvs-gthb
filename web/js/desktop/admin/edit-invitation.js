@@ -42,7 +42,11 @@
 				data.code_invitation_type = 'invitation-deviser';
 				invitationDataService.Invitation.save(data).$promise.then(function (data) {
 					toastr.success("Invitations sent !");
-					$window.location.reload();
+					if (data.url) {
+						$window.location = data.url;
+					} else {
+                        $window.location.reload();
+                    }
 				}, function (err) {
 					toastr.error(err);
 				});

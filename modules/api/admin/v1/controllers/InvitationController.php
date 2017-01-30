@@ -45,6 +45,7 @@ class InvitationController extends Controller
 			// send the email to invited person
 			$email = $invitation->composeEmail();
 			$taskId = $email->findCurrentPendingTaskId();
+			$url = null;
 			if ($no_invitation || $email->send($taskId)) {
 				$email->save();
 
@@ -52,10 +53,18 @@ class InvitationController extends Controller
 					$invitation->date_sent = new MongoDate();
 					$invitation->save();
 				}
+
+
+				if ($no_invitation && !empty($email->actions)) {
+					$url = $invitation->getActionUrl($email->actions[0]['uuid']);
+				}
 			}
 
 			Yii::$app->response->setStatusCode(201); // Created
-			return ["action" => "created"];
+			return [
+				"action" => "created",
+				"url" => $url,
+			];
 		} else {
 			Yii::$app->response->setStatusCode(400); // Bad Request
 			return ["errors" => $invitation->errors];

@@ -1,17 +1,14 @@
 <?php
 namespace app\models;
 
+use app\helpers\CActiveRecord;
 use app\helpers\Utils;
-use DateTime;
 use Exception;
 use MongoDate;
 use Ramsey\Uuid\Uuid;
 use Yii;
-use app\helpers\CActiveRecord;
-use yii\base\NotSupportedException;
 use yii\helpers\Url;
 use yii\mongodb\ActiveQuery;
-use yii\mongodb\Collection;
 
 /**
  * @property string $uuid
@@ -257,8 +254,7 @@ class Invitation extends CActiveRecord
 			$this->getEmailView(),
 			[
 				"message" => $this->message,
-				"invitation" => $this,
-				"actionAccept" => $action,
+				"actionUrl" =>  $this->getActionUrl($action->uuid),
 			]
 		);
 		$email->save();
@@ -268,6 +264,17 @@ class Invitation extends CActiveRecord
 		$this->save(true, ["postman_email_id"]);
 
 		return $email;
+	}
+
+	/**
+	 * Returns de URL of an email action associated with the current invitation
+	 *
+	 * @param string $actionUuid
+	 *
+	 * @return string
+	 */
+	public function getActionUrl($actionUuid) {
+		return Url::to(["/public/create-deviser-account", "uuid" => $this->uuid, "action" => $actionUuid], true);
 	}
 
 	/**
