@@ -2,7 +2,7 @@
 	<span class="title">2/ More details about your work</span>
 	<form name="productMoreDetailsCtrl.form" novalidate>
 		<div class="row">
-			<div class="col-md-1">
+			<div class="col-md-2">
 				<label for="description">Description</label>
 			</div>
 			<div class="col-md-8">
@@ -14,12 +14,12 @@
 				<div class="description-input ng-class:{'error-input': productMoreDetailsCtrl.descriptionRequired}" text-angular ng-model="productMoreDetailsCtrl.product.description[productMoreDetailsCtrl.description_language]" ng-cloak ta-toolbar="[]"></div>
 				<div class="error-text" ng-if="productMoreDetailsCtrl.descriptionRequired">Description in english is mandatory.</div>
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-2">
 				<p class="info">Give your customers a detailed overview of your work. And as always, translating this information will open your products to new markets.</p>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-1">
+			<div class="col-md-2">
 				<label for="description_photos">Description photos</label>
 				<span class="optional-text block-0">Optional</span>
 			</div>
@@ -50,13 +50,13 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-2">
 				<p class="info">Enrich your work description with photos that showcase its main features. You can upload maximum 4 photos.</p>
 				<p class="info"><a class="black-link" href="">See example</a></p>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-1">
+			<div class="col-md-2">
 				<label for="tags">Tags</label>
 				<span class="optional-text block-0">Optional</span>
 			</div>
@@ -68,12 +68,12 @@
 				</ol>
 				<tags-input class="tags-wrapper" ng-model="productMoreDetailsCtrl.tags[productMoreDetailsCtrl.tags_language]" on-tag-added="productMoreDetailsCtrl.addTag($tag, productMoreDetailsCtrl.tags_language)" on-tag-removed="productMoreDetailsCtrl.removeTag($tag)"></tags-input>
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-2">
 				<p class="info">Use as many tags as possible, both broad and specific, to increase the chances to be found when our customers use our search engine. Tags can be translated as well.</p>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-1">
+			<div class="col-md-2">
 				<label for="faqs">WORK FAQs</label>
 				<span class="optional-text block-0">Optional</span>
 			</div>
@@ -128,7 +128,7 @@
 					<a class="add-cathegory" href="" ng-click="productMoreDetailsCtrl.addFaq()">+ Add another question</a>
 				</div>
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-2">
 				<p class="info">If you have specific questions or policies for this work, write them here.</p>
 			</div>
 		</div>
