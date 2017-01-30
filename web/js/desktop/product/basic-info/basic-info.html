@@ -2,7 +2,7 @@
 	<span class="title">1/ Basic work information</span>
 	<form name="productBasicInfoCtrl.form" novalidate>
 	<div class="row">
-		<div class="col-md-1"><label for="name">Title</label></div>
+		<div class="col-md-2"><label for="name">Title</label></div>
 		<div class="col-md-8">
 			<ol class="about-edit-select title-lang-btn nya-bs-select" ng-model="productBasicInfoCtrl.name_language">
 				<li nya-bs-option="language in productBasicInfoCtrl.languages" data-value="language.code" deep-watch="true">
@@ -12,12 +12,12 @@
 			<input class="title-input form-control ng-class:{'error-input': productBasicInfoCtrl.nameRequired}" type="text" name="name" ng-model="productBasicInfoCtrl.product.name[productBasicInfoCtrl.name_language]">
 			<div class="error-text" ng-if="productBasicInfoCtrl.nameRequired">Title in english is mandatory.</div>
 		</div>
-		<div class="col-md-3">
+		<div class="col-md-2">
 			<p class="info">Translate your work title by simply selecting different languages from the drop-down menu. Translate in as many languages as possible to reach a broader audience</p>
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-1"><label for="categories">Categories</label></div>
+		<div class="col-md-2"><label for="categories">Categories</label></div>
 		<div class="col-md-8">
 			<div ng-repeat="item in productBasicInfoCtrl.categories_helper track by $index">
 				<div class="row items-row">
@@ -35,12 +35,12 @@
 			</div>
 			<span class="add-cathegory" ng-click="productBasicInfoCtrl.addCategory(productBasicInfoCtrl.categories_helper[$parent.$index].categories_selected[$index])">+ Add another category</span>
 		</div>
-		<div class="col-md-3">
+		<div class="col-md-2">
 			<p class="info">Your work can go into 1 or more categories.</p>
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-1">
+		<div class="col-md-2">
 			<label for="Photos">Photos</label></div>
 		<div class="col-md-8">
 			<div class="row">
@@ -73,7 +73,7 @@
 			<div class="row purple-text" ng-if="productBasicInfoCtrl.photosRequired" ng-cloak><p>Please upload at least 1 photo.</p></div>
 			<div class="row purple-text" ng-if="productBasicInfoCtrl.mainPhotoRequired" ng-cloak><p>Please mark one of the photos as main by clicking the star icon.</p></div>
 		</div>
-		<div class="col-md-3">
+		<div class="col-md-2">
 			<p class="info">Mark one of the photos as "main photo" by clicking the star icon. The main photo of the work will be displayed on Todevise's homepage.</p>
 		</div>
 	</div>
