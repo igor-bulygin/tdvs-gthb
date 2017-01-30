@@ -130,7 +130,6 @@ class Person extends CActiveRecord implements IdentityInterface
 		$this->videos = [];
 		$this->faq = [];
 
-		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_PUBLIC);
 	}
 
 	public function embedPreferencesMapping()
@@ -451,10 +450,10 @@ class Person extends CActiveRecord implements IdentityInterface
 					'categories',
 					'collections',
 					'personal_info',
-					'media', //  => 'mediaInfoAttributes',
+					'media',
 					'settings',
 					'press',
-					'videos' => 'videosPreview',
+					'videos',
 					'faq',
 					'curriculum',
 					'account_state',
