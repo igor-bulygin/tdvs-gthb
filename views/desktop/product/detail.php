@@ -160,7 +160,12 @@ $videos = $product->getVideos();
 													</div>
 												</div>
 												<div class="col-sm-9" ng-if="option.values.length === 1 || !option.change_reference">
-													<div class="atribute-selected" ng-if="option.values.length === 1"><span ng-bind="option.values[0].text"></span></div>
+													<div class="atribute-selected" ng-if="option.values.length === 1">
+														<span ng-if="option.values[0].text.length > 1 && !detailProductCtrl.isString(option.values[0].text)" ng-repeat="text in option.values[0].text">
+															<span ng-bind="text"></span><span ng-if="!$last" ng-cloak>,&nbsp;</span>
+														</span>
+														<span ng-if="detailProductCtrl.isString(option.values[0].text)" ng-bind="option.values[0].text"></span>
+													</div>
 													<div class="atribute-selected" ng-if="option.values.length > 1" ng-repeat="values in option.values">
 														<span ng-bind="values.text"></span>
 													</div>
