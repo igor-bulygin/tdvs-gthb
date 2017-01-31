@@ -329,7 +329,7 @@ $videos = $product->getVideos();
 										</div>
 									</form>
 								</div>
-								<div class="returns-row">
+								<div class="returns-row mt-30">
 									Returns: <span class="bold">14 days</span>
 								</div>
 								<div class="returns-row">
