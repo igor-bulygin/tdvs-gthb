@@ -24,6 +24,7 @@ use yii\mongodb\ActiveQuery;
 class Order extends CActiveRecord {
 
     const ORDER_STATE_CART = 'order_state_cart';
+    const ORDER_STATE_PAID = 'order_state_paid';
 
 	/**
 	 * The attributes that should be serialized

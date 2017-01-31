@@ -18,7 +18,7 @@
 </div>
 <div class="row">
 	<span class="shopping-cart-section-header">Payment methods</span>
-		<form name="paymentMethodsCtrl.paymentForm" class="form-horizontal">
+		<form name="paymentMethodsCtrl.paymentForm" class="form-horizontal" >
 			<div class="col-md-6">
 				<div class="form-group">
 					<label for="cardholder" class="col-md-4">Cardholder name</label>
@@ -60,4 +60,18 @@
 				<button class="btn btn-default btn-green">Checkout</button>
 			</div>
 		</form>
+
+	<form action="/stripe/paid" method="POST">
+		<script
+				src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+				data-key="pk_test_p1DPyiicE2IerEV676oj5t89"
+				data-amount="999"
+				data-name="Todevise"
+				data-description="Lorem ipsum dolor sit amet"
+				data-locale="auto"
+				data-zip-code="true"
+				data-currency="eur">
+		</script>
+		<input type="hidden" name="order_id"  ng-model="paymentMethodsCtrl.cart.id" />
+	</form>
 </div>
