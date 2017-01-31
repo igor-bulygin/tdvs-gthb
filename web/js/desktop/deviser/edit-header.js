@@ -111,7 +111,9 @@
 				vm.deviser_changed = false;
 				setLeavingModal(false);
 			}, function(err) {
-				//errors
+				//TODO: show errors
+				vm.deviser_changed = true;
+				setLeavingModal(true);
 			});
 		}
 
@@ -119,14 +121,17 @@
 			var data = {
 				deviser_id: vm.deviser.id,
 			}
+			var wait_for_cropped = false;
 			switch (type) {
 			case "header":
 				data.type = 'deviser-media-header-original';
 				data.file = image;
+				wait_for_cropped = true;
 				break;
 			case "profile":
 				data.type = 'deviser-media-profile-original';
 				data.file = image;
+				wait_for_cropped = true;
 				break;
 			case "header_cropped":
 				data.type = 'deviser-media-header-cropped';
@@ -141,7 +146,23 @@
 				url: deviserDataService.Uploads,
 				data: data
 			}).then(function (dataUpload) {
-				vm.deviser.media[type] = dataUpload.data.filename;
+				if(wait_for_cropped) {
+					//when uploading original, wait for cropped to save data in the deviser model
+					vm.media_upload_helper = {
+						type: type,
+						filename: dataUpload.data.filename
+					}
+					//open modals once upload is complete
+					if(type === 'header')
+						openCropModal(vm.new_header, 'header_cropped');
+					if(type === 'profile')
+						openCropModal(vm.new_profile, 'profile_cropped');
+				}
+				else {
+					vm.deviser.media[type] = dataUpload.data.filename;
+					vm.deviser.media[vm.media_upload_helper.type] = vm.media_upload_helper.filename;
+					delete vm.media_upload_helper;
+				}
 			});
 		}
 
@@ -222,8 +243,6 @@
 			if (newValue) {
 				//upload original
 				upload(newValue, "header");
-				//crop
-				openCropModal(vm.new_header, 'header_cropped');
 			}
 		})
 
@@ -231,8 +250,6 @@
 			if (newValue) {
 				//upload original
 				upload(newValue, "profile");
-				//crop
-				openCropModal(vm.new_profile, 'profile_cropped');
 			}
 		})
 
