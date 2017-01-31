@@ -213,6 +213,7 @@
         .shipping-label{
             padding-top: 3px;
             text-align: left;
+			font-weight: normal!important;
         }
         .tax{
             font-family: $font-family--bold;
@@ -221,7 +222,7 @@
         }
     }
     .returns-row{
-        font-weight: bold;
+        font-weight: normal!important;
         color: $almost_black;
     }
 }

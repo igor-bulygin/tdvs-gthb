@@ -3717,13 +3717,14 @@ input[type="radio"] .styled:checked + label::after {
   font-family: "Univers Condensed Light", "Helvetica Neue", Helvetica, Arial, sans-serif; }
   .shipping-policies-wrapper .policies-row .shipping-label {
     padding-top: 3px;
-    text-align: left; }
+    text-align: left;
+    font-weight: normal !important; }
   .shipping-policies-wrapper .policies-row .tax {
     font-family: "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
     margin: 3px 0 0 0;
     display: inline-block; }
   .shipping-policies-wrapper .returns-row {
-    font-weight: bold;
+    font-weight: normal !important;
     color: #484848; }
 
 .product-detail-tabs {
