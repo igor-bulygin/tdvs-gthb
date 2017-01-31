@@ -339,7 +339,7 @@ $videos = $product->getVideos();
 								</div>
 								<div class="returns-row">
 									Warranty:
-									<span class="bold"><?= $product->getWarrantyLabel() ?></span>
+									<span class="bold"><?= $product->getWarrantyLabel() ?: '12 months'?></span>
 								</div>
 							</div>
 						</div>
