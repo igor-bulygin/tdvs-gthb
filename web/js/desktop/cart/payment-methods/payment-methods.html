@@ -58,8 +58,11 @@
 			</div>
 			<div class="col-md-12 text-center">
 				<button class="btn btn-default btn-green">Checkout</button>
+				<br />
+				<br />
+				<a class="btn btn-default btn-green" ng-href="/order/checkout-test/{{paymentMethodsCtrl.cart.id}}">Pay with Stripe</a>
+				<br />
 			</div>
 		</form>
 
-		<a ng-href="/order/checkout-test/{{paymentMethodsCtrl.cart.id}}">Pay with Stripe</a>
 </div>
