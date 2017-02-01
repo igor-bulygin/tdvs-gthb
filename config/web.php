@@ -161,7 +161,6 @@ $config = [
 				// Public routing
 				'/' => 'public/index',
 				'/index-new' => 'public/index',
-				'/index-old' => 'public/index-old',
 				'/category/<slug:[^/.]*?>/<category_id:[^/.]*?>' => 'public/category-b',
 				'/work/<slug:[^/.]*?>/<product_id:[^/.]*?>' => 'product/detail',
 
@@ -187,10 +186,13 @@ $config = [
 				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/video/edit' => 'deviser/videos-edit',
 				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/faq/edit' => 'deviser/faq-edit',
 
-
 				//Settings
 				'/settings/<slug:[^/.]*?>/<person_id:[^/.]*?>' => 'settings/index',
 				'/settings/<slug:[^/.]*?>/<person_id:[^/.]*?>/billing' => 'settings/billing',
+
+				//Orders
+				'order/checkout-test/<order_id:\w{8}>' => 'order/checkout-test',
+				'order/receive-payment' => 'order/receive-payment',
 
 				//Links for contact
 				'login' => 'site/login',
@@ -201,13 +203,9 @@ $config = [
 
 				//Links for a cart listing
 				'cart/' => 'public/cart',
-				'public/cart/' => 'public/cart-old',
 
 				//links for terms
 				'terms/' => 'public/terms',
-
-				//links for become a deviser
-				'become/' => 'public/become',
 
 				//Links for faq
 				'faq/' => 'public/faq',
@@ -223,6 +221,37 @@ $config = [
 				'/postman/mockups/deviser-request-invitation' => 'postman/mockup-deviser-request-invitation-view',
 				'/postman/mockups/deviser-invitation' => 'postman/mockup-deviser-invitation-view',
 
+				//Links for admin
+				'admin/faq/<faq_id:\w{5}>/' => 'admin/faq',
+				'admin/faq/<faq_id:\w{5}>/<faq_subid:\w{1}>' => 'admin/faq',
+				'admin/term/<term_id:\w{5}>/' => 'admin/term',
+				'admin/term/<term_id:\w{5}>/<term_subid:\w{1}>' => 'admin/term',
+				'admin/tag/<tag_id:\w{5}>/' => 'admin/tag',
+				'admin/size-chart/<size_chart_id:\w{5}>/' => 'admin/size-chart',
+				'admin/admin/<short_id:\w{7}>/' => 'admin/admin',
+				'admin/<action:[^/.]*?>/' => 'admin/<action>',
+
+				/********************************** @deprecated routes ************************************************/
+
+				// Public routing
+				'/index-old' => 'public/index-old',
+
+				//Links for a category listing
+				'<category_id:\w{5}>/<slug:[^/.]*?$>/' => 'public/category',
+
+				//Links for a product profile
+				'<category_id:\w{5}>/<product_id:\w{8}>/<slug:[^/.]*?$>/' => 'public/product',
+				'public/<category_id:\w{5}>/<product_id:\d{8}>/<slug:[^/.]*?$>/' => 'public/product',
+
+				//Links for a product profile
+				'<deviser_id:\w{7}>/<slug:[0-9a-z-A-Z\-]*?>/' => 'public/deviser',
+				'public/<deviser_id:\w{7}>/<slug:[0-9a-z-A-Z\-]*?>/' => 'public/deviser',
+
+				//Links for a cart listing
+				'public/cart/' => 'public/cart-old',
+
+				//links for become a deviser
+				'become/' => 'public/become',
 
 				//Links for deviser profile
 				'<slug:[0-9a-z-A-Z\-]*?>/products/' => 'admin/products',
@@ -240,28 +269,8 @@ $config = [
 				//Link for deviser work photo upload
 				'<slug:[0-9a-z-A-Z\-]*?>/upload-product-photo/<short_id:\w{8}>/' => 'deviser/upload-product-photo',
 
-				//Links for admin
-				'admin/faq/<faq_id:\w{5}>/' => 'admin/faq',
-				'admin/faq/<faq_id:\w{5}>/<faq_subid:\w{1}>' => 'admin/faq',
-				'admin/term/<term_id:\w{5}>/' => 'admin/term',
-				'admin/term/<term_id:\w{5}>/<term_subid:\w{1}>' => 'admin/term',
-				'admin/tag/<tag_id:\w{5}>/' => 'admin/tag',
-				'admin/size-chart/<size_chart_id:\w{5}>/' => 'admin/size-chart',
-				'admin/admin/<short_id:\w{7}>/' => 'admin/admin',
-				'admin/<action:[^/.]*?>/' => 'admin/<action>',
+				/******************************************************************************************************/
 
-
-				//Links for a category listing
-				'<category_id:\w{5}>/<slug:[^/.]*?$>/' => 'public/category',
-				'public/<category_id:\w{5}>/<' => 'public/tag',
-
-				//Links for a product profile
-				'<category_id:\w{5}>/<product_id:\w{8}>/<slug:[^/.]*?$>/' => 'public/product',
-				'public/<category_id:\w{5}>/<product_id:\d{8}>/<slug:[^/.]*?$>/' => 'public/product',
-
-				//Links for a product profile
-				'<deviser_id:\w{7}>/<slug:[0-9a-z-A-Z\-]*?>/' => 'public/deviser',
-				'public/<deviser_id:\w{7}>/<slug:[0-9a-z-A-Z\-]*?>/' => 'public/deviser',
 
 				// API routing
 				/* 'api/<action:[^/.]*?>/'  => 'api/<action>', */

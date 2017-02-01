@@ -4,6 +4,7 @@
 	function controller($scope, $timeout, $uibModal, Upload, productDataService, UtilService, productEvents){
 		var vm = this;
 		vm.has_error = UtilService.has_error;
+		vm.stripHTMLTags = UtilService.stripHTMLTags;
 		vm.description_language = 'en-US';
 		vm.tags_language = 'en-US';
 		vm.faq_selected = false;
@@ -34,11 +35,11 @@
 		}
 
 		function addFaq() {
-			vm.faq_helper.unshift({
+			vm.faq_helper.push({
 				completedLanguages: [],
 				languageSelected: 'en-US'
 			});
-			vm.product.faq.unshift({
+			vm.product.faq.push({
 				question: {},
 				answer: {},
 				//completedLanguages: [],

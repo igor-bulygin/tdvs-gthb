@@ -146,8 +146,8 @@
 				url: deviserDataService.Uploads,
 				data: data
 			}).then(function (dataUpload) {
+				//when uploading original, wait for cropped to save data in the deviser model
 				if(wait_for_cropped) {
-					//when uploading original, wait for cropped to save data in the deviser model
 					vm.media_upload_helper = {
 						type: type,
 						filename: dataUpload.data.filename

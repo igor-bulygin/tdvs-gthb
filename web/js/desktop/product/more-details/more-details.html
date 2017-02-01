@@ -11,7 +11,7 @@
 						<a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
 					</li>
 				</ol>
-				<div class="description-input ng-class:{'error-input': productMoreDetailsCtrl.descriptionRequired}" text-angular ng-model="productMoreDetailsCtrl.product.description[productMoreDetailsCtrl.description_language]" ng-cloak ta-toolbar="[]"></div>
+				<div class="description-input ng-class:{'error-input': productMoreDetailsCtrl.descriptionRequired}" text-angular ng-model="productMoreDetailsCtrl.product.description[productMoreDetailsCtrl.description_language]" ng-cloak ta-toolbar="[]" ta-paste="productMoreDetailsCtrl.stripHTMLTags($html)"></div>
 				<div class="error-text" ng-if="productMoreDetailsCtrl.descriptionRequired">Description in english is mandatory.</div>
 			</div>
 			<div class="col-md-2">
@@ -119,7 +119,7 @@
 										<span class="faq-edit-question">Answer</span>
 									</div>
 									<div class="col-sm-11">
-										<div class="faq-edit-answer ng-class:{'error-input': productMoreDetailsCtrl.faqRequired && !question.answer['en-US']}" name="{{'faq_answer_' + $index}}" text-angular ng-model="question.answer[productMoreDetailsCtrl.faq_helper[$index].languageSelected]" ta-toolbar="[]" placeholder="Answer" required></div>
+										<div class="faq-edit-answer ng-class:{'error-input': productMoreDetailsCtrl.faqRequired && !question.answer['en-US']}" name="{{'faq_answer_' + $index}}" text-angular ng-model="question.answer[productMoreDetailsCtrl.faq_helper[$index].languageSelected]" ta-toolbar="[]" placeholder="Answer" ta-paste="productMoreDetailsCtrl.stripHTMLTags($html)" required></div>
 									</div>
 								</div>
 							</div>

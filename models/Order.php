@@ -25,6 +25,7 @@ class Order extends CActiveRecord {
 
     const ORDER_STATE_CART = 'order_state_cart';
     const ORDER_STATE_PAID = 'order_state_paid';
+    const ORDER_STATE_UNPAID = 'order_state_unpaid';
 
 	/**
 	 * The attributes that should be serialized

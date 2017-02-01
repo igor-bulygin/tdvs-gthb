@@ -117,7 +117,7 @@ $this->params['deviser'] = $deviser;
 										</nav>
 										<div class="mesonry-row" dnd-list="editStoreCtrl.products">
 											<div class="menu-category list-group" ng-repeat="product in editStoreCtrl.products | publishedProduct" ng-if="product.main_photo" dnd-draggable="product" dnd-effect-allowed="move" dnd-moved="editStoreCtrl.update($index, product)">
-												<a href="">
+												<a ng-href="{{product.link}}">
 													<div class="grid">
 														<figure class="effect-zoe">
 															<span class="close-product-icon" ng-click="editStoreCtrl.open_modal_delete(product.id)">
