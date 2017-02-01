@@ -32,7 +32,7 @@
 					<span class="quntity-number" ng-bind="product.quantity"></span>
 				</td>
 				<td class="subtotal">
-					<span class="subtotal-amount">€<span ng-bind="product.price"></span></span>
+					<span class="subtotal-amount">€<span ng-bind="product.price*product.quantity"></span></span>
 					<span class="subtotal-delete"><a href="#" ng-click="shoppingCartCtrl.deleteItem(product.price_stock_id)">&times; Delete</a></span>
 				</td>
 			</tr>
