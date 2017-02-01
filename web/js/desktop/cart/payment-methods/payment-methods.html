@@ -57,12 +57,13 @@
 				</div>
 			</div>
 			<div class="col-md-12 text-center">
-				<button class="btn btn-default btn-green">Checkout</button>
-				<br />
-				<br />
-				<a class="btn btn-default btn-green" ng-href="/order/checkout-test/{{paymentMethodsCtrl.cart.id}}">Pay with Stripe</a>
-				<br />
+				<!--<button class="btn btn-default btn-green" ng-click="paymentMethodsCtrl.stripejs()">Checkout</button>-->
 			</div>
 		</form>
+
+        <div class="col-md-12 text-center">
+            <!--<button class="btn btn-default btn-green" ng-click="paymentMethodsCtrl.checkout()">Pay with Stripe</button>-->
+            <a class="btn btn-default btn-green" ng-href="/order/checkout-test/{{paymentMethodsCtrl.cart.id}}">Pay with Stripe</a><br />
+        </div>
 
 </div>
