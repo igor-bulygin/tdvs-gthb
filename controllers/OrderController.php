@@ -71,8 +71,8 @@ class OrderController extends CController
 
 				$charge = \Stripe\Charge::create([
 					'customer' => $customer->id,
-					'currency' => 'usd',
-					'amount' => $order->subtotal,
+					'currency' => 'eur',
+					'amount' => $order->subtotal*10,
 					"description" => "Order Nº " . $order->short_id,
 					"metadata" => [
 						"order_id" => $order->short_id,
