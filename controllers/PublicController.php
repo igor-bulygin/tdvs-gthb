@@ -135,6 +135,16 @@ class PublicController extends CController
 		return $this->render("cart", []);
 	}
 
+	public function actionAboutUs()
+	{
+		$this->layout = '/desktop/public-2.php';
+		return $this->render("about-us");
+	}
+
+	/**
+	 * @deprecated
+	 * @return string
+	 */
 	public function actionFaq()
 	{
 		$lang = Yii::$app->language;
@@ -159,13 +169,10 @@ class PublicController extends CController
 		]);
 	}
 
-	public function actionAboutUs()
-	{
-		$this->layout = '/desktop/public-2.php';
-		return $this->render("about-us");
-	}
-
-
+	/**
+	 * @deprecated
+	 * @return string
+	 */
 	public function actionTerms()
 	{
 		$lang = Yii::$app->language;
@@ -185,6 +192,10 @@ class PublicController extends CController
 		]);
 	}
 
+	/**
+	 * @deprecated
+	 * @return string
+	 */
 	public function actionContact()
 	{
 		$dropdown_members = ['a' => 'ORDERS'];
@@ -219,6 +230,10 @@ class PublicController extends CController
 		}
 	}
 
+	/**
+	 * @deprecated
+	 * @return string
+	 */
 	public function actionBecome()
 	{
 		$model = new Become();
@@ -262,6 +277,10 @@ class PublicController extends CController
 		return $this->render("become", ['model' => $model, "showCheckEmail" => $showCheckEmail]);
 	}
 
+	/**
+	 * @deprecated Was used only for demo
+	 * @return array
+	 */
 	private function getDevisersFilterForDemo()
 	{
 		return [
@@ -290,6 +309,10 @@ class PublicController extends CController
 		];
 	}
 
+	/**
+	 * @deprecated Was used only for demo
+	 * @return array
+	 */
 	private function getProductsFilterForDemo($limit = 60)
 	{
 		// selected products ids
