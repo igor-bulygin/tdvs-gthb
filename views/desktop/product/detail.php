@@ -361,30 +361,6 @@ $videos = $product->getVideos();
                             </div>
                         <?php } ?>
                         </div>
-                    <?php } else { ?>
-                       <div class="work-profile-description-wrapper faq-wrapper">
-                        <div class="title">WORK FAQs</div>
-                        <div class="q-a-wrapper">
-                            <p class="question">
-                                <span>Q:</span>
-                                <span class="important">Question?</span>
-                            </p>
-                            <p class="question">
-                                <span>A:</span>
-                                <span>Answer</span>
-                            </p>
-                        </div>
-                        <div class="q-a-wrapper">
-                            <p class="question">
-                                <span>Q:</span>
-                                <span class="important">Question?</span>
-                            </p>
-                            <p class="question">
-                                <span>A:</span>
-                                <span>Answer</span>
-                            </p>
-                        </div>
-					</div>
                     <?php } ?>
 
 					<div class="reviews-wrapper">
