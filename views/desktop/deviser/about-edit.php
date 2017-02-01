@@ -74,7 +74,7 @@ $this->params['deviser'] = $deviser;
 													<div class="text">ADD PHOTOS</div>
 												</div>
 												<span class="photo-loader-warning ng-class:{'error-text': editAboutCtrl.setPhotosRequired}" ng-if="editAboutCtrl.images.length < 3 && editAboutCtrl.deviser.account_state==='draft'" ng-cloak>Please upload a minimum of 3 and a maximum of 5 photos.</span>
-												<span class="photo-loader-warning" ng-if="editAboutCtrl.images.length < 3 && editAboutCtrl.deviser.account_state==='active'" ng-cloak>You need to have at least 3 photos to be able to SAVE CHANGES to your profile.</span>
+												<span class="photo-loader-warning error-text" ng-if="editAboutCtrl.images.length < 3 && editAboutCtrl.deviser.account_state==='active'" ng-cloak>You need to have at least 3 photos to be able to SAVE CHANGES to your profile.</span>
 											</div>
 											<div class="photo-loader loader-about" ng-if="editAboutCtrl.images.length >= 5" ng-click="editAboutCtrl.checkPhotos()" ng-cloak>
 												<span class="photo-loader-title">Enrich your about section with photos</span>
