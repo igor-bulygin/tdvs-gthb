@@ -35,6 +35,7 @@
 				vm.products.forEach(function(element) {
 					setMinimumPrice(element);
 					element.edit_link = currentHost() + '/deviser/' + vm.deviser.slug + '/' + vm.deviser.id + '/works/' + element.id + '/edit';
+					element.link = currentHost() + '/work/' + element.slug + '/' + element.id;
 				})
 				parseMainPhoto(vm.products);
 			});

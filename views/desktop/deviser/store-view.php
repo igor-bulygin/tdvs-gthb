@@ -80,7 +80,7 @@ $this->params['deviser'] = $deviser;
 						<div id="macy-container">
 							<?php foreach ($products as $i => $product) { ?>
 								<div class="menu-category list-group">
-									<a href="<?= Url::to(["product/detail", "slug" => $product->slug, 'product_id' => $product->short_id])?>">
+									<a href="<?= Url::to(['product/detail', 'slug' => $product->slug, 'product_id' => $product->short_id])?>">
                                         <div class="grid">
                                             <figure class="effect-zoe">
                                                 <?php /*
@@ -93,7 +93,7 @@ $this->params['deviser'] = $deviser;
                                                     <p class="instauser"><?= $product->name ?></p>
                                                     <p class="price">€ <?= $product->getMinimumPrice() ?></p>
                                                     <?php if ($deviser->isDeviserEditable()) { ?>
-                                                        <a class="edit-product-icon" href="<?= Url::to(["product/edit", "slug" => $product->slug, 'product_id' => $product->short_id, 'deviser_id' => $deviser->short_id])?>" title="Edit work">
+                                                        <a class="edit-product-icon" href="<?= Url::to(['product/edit', 'slug' => $product->slug, 'product_id' => $product->short_id, 'deviser_id' => $deviser->short_id])?>" title="Edit work">
                                                             <i class="ion-edit"></i>
                                                         </a>
                                                     <?php } ?>
