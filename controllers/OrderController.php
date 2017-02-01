@@ -83,21 +83,26 @@ class OrderController extends CController
 				$order->order_state = Order::ORDER_STATE_PAID;
 				$order->save();
 
-				echo '<h1>Successfully charged '.$order->subtotal.'</h1>';
+				$message = 'Your purchase is complete';
 
 			} catch (\Exception $e) {
 
 				$order->order_state = Order::ORDER_STATE_UNPAID;
 				$order->save();
 
-				echo '<h1>Error processing your charge: '.$e->getMessage().'</h1>';
+				$message = 'Error processing your charge: '.$e->getMessage();
 
 			}
 
 
 		} else {
-			echo '<h1>Order '.$order_id.' not found</h1>';
+			$message = 'Order '.$order_id.' not found';
 		}
+
+		$this->layout = '/desktop/public-2.php';
+		return $this->render("payment-received", [
+			'message' => $message,
+		]);
 	}
 
 	public function moreTest() {
