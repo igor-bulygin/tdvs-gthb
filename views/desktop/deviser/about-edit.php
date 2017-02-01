@@ -48,7 +48,7 @@ $this->params['deviser'] = $deviser;
 																</a>
 															</li>
 														</ol>
-														<div class="textarea-edit-about ng-class:{'error-input': editAboutCtrl.setClassBiographyRequired}" text-angular ng-model="editAboutCtrl.deviser.text_biography[editAboutCtrl.biography_language]" ng-cloak ta-toolbar="[]" placeholder="Write your brand statement / mission / biography."></div>
+														<div class="textarea-edit-about ng-class:{'error-input': editAboutCtrl.setClassBiographyRequired}" text-angular ng-model="editAboutCtrl.deviser.text_biography[editAboutCtrl.biography_language]" ng-cloak ta-toolbar="[]" ta-paste="editAboutCtrl.stripHTMLTags($html)" placeholder="Write your brand statement / mission / biography."></div>
 														<label class="pull-left" for="resume">Resume or brand presentation</label>
 														<span class="optional-text pull-left">Optional</span>
 														<span class="small-grey">Even more things to tell your customers? Upload it here.</span>

@@ -3,6 +3,7 @@
 
 	function controller(deviserDataService, UtilService, languageDataService, toastr, productDataService, Upload, $timeout, $rootScope, $scope, deviserEvents, $uibModal, dragndropService) {
 		var vm = this;
+		vm.stripHTMLTags = UtilService.stripHTMLTags;
 		vm.uploadPhoto = uploadPhoto;
 		vm.openCropModal = openCropModal;
 		vm.uploadCV = uploadCV;

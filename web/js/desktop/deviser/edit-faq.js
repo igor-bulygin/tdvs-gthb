@@ -3,6 +3,7 @@
 
 	function controller(deviserDataService, toastr, UtilService, languageDataService, $window, dragndropService) {
 		var vm = this;
+		vm.stripHTMLTags = UtilService.stripHTMLTags;
 		vm.addQuestion = addQuestion;
 		vm.deleteQuestion = deleteQuestion;
 		vm.parseQuestion = parseQuestion;

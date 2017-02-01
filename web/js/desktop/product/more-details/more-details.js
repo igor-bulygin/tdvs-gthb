@@ -4,6 +4,7 @@
 	function controller($scope, $timeout, $uibModal, Upload, productDataService, UtilService, productEvents){
 		var vm = this;
 		vm.has_error = UtilService.has_error;
+		vm.stripHTMLTags = UtilService.stripHTMLTags;
 		vm.description_language = 'en-US';
 		vm.tags_language = 'en-US';
 		vm.faq_selected = false;
