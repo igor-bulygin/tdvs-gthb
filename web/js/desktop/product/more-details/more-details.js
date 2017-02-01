@@ -35,11 +35,11 @@
 		}
 
 		function addFaq() {
-			vm.faq_helper.unshift({
+			vm.faq_helper.push({
 				completedLanguages: [],
 				languageSelected: 'en-US'
 			});
-			vm.product.faq.unshift({
+			vm.product.faq.push({
 				question: {},
 				answer: {},
 				//completedLanguages: [],
