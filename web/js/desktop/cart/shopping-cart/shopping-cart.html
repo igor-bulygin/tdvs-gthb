@@ -19,7 +19,7 @@
 					</div>
 				</td>
 				<td>
-					<p><span class="product-name" ng-bind="(product.product_name)"></span></p>
+					<p><a ng-href="{{product.link}}"><span class="product-name" ng-bind="(product.product_name)"></span></a></p>
 					<div ng-repeat="tag in product.tags">
 						<span class="tag-name" ng-bind="tag.name"></span>&nbsp;
 							<span ng-repeat="value in tag.values track by $index">
