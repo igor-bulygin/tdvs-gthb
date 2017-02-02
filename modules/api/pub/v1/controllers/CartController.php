@@ -256,8 +256,9 @@ class CartController extends AppPublicController
 					],
 				]);
 
-				$order->order_state = Order::ORDER_STATE_PAID;
-				$order->save();
+				//TODO: set paid status
+//				$order->order_state = Order::ORDER_STATE_PAID;
+//				$order->save();
 
 				//TODO: send email to customer
 

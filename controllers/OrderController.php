@@ -4,7 +4,6 @@ namespace app\controllers;
 
 use app\helpers\CController;
 use app\models\Order;
-use yii\base\Exception;
 use yii\web\NotFoundHttpException;
 
 class OrderController extends CController
@@ -29,12 +28,10 @@ class OrderController extends CController
 			throw new NotFoundHttpException();
 		}
 
-		if ($order->order_state != Order::ORDER_STATE_PAID) {
-			throw new Exception("This order is in an invalid state");
-		}
-
-		$order->order_state = Order::ORDER_STATE_CART;
-		$order->save();
+		//TODO: check paid status
+//		if ($order->order_state != Order::ORDER_STATE_PAID) {
+//			throw new Exception("This order is in an invalid state");
+//		}
 
 		$this->layout = '/desktop/public-2.php';
 
