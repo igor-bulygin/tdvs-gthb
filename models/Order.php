@@ -178,7 +178,7 @@ class Order extends CActiveRecord {
 			$p['product_name'] = $product->name;
 			$p['product_photo'] = $product->getMainImage();
 			$p['product_slug'] = $product->slug;
-			$p['product_url'] = Url::to(["product/detail", "slug" => $this->slug, 'product_id' => $this->short_id]);
+			$p['product_url'] = Url::to(["product/detail", "slug" => $product->slug, 'product_id' => $product->short_id]);
 			$p['deviser_name'] = $deviser->name;
 			$p['deviser_photo'] = $deviser->getAvatarImage();
 			$p['deviser_slug'] = $deviser->slug;
