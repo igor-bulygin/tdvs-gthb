@@ -5,6 +5,7 @@ use app\helpers\CActiveRecord;
 use app\helpers\Utils;
 use Exception;
 use MongoDate;
+use yii\helpers\Url;
 use yii\mongodb\ActiveQuery;
 
 /**
@@ -176,8 +177,12 @@ class Order extends CActiveRecord {
 			$deviser = Person::findOneSerialized($p['deviser_id']);
 			$p['product_name'] = $product->name;
 			$p['product_photo'] = $product->getMainImage();
+			$p['product_slug'] = $product->slug;
+			$p['product_url'] = Url::to(["product/detail", "slug" => $this->slug, 'product_id' => $this->short_id]);
 			$p['deviser_name'] = $deviser->name;
 			$p['deviser_photo'] = $deviser->getAvatarImage();
+			$p['deviser_slug'] = $deviser->slug;
+			$p['deviser_url'] = Url::to(["deviser/store", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id]);
 			$result[] = $p;
 		}
 
@@ -392,7 +397,7 @@ class Order extends CActiveRecord {
 	}
 
 	/**
-	 * @bool $send Sends the email
+	 * @param bool $send Sends the email
 	 * @return PostmanEmail
 	 */
 	public function composeEmailOrderPaid($send) {
