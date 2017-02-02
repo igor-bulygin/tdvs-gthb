@@ -22,7 +22,6 @@
 					vm.cart = angular.copy(cartData);
 					cartService.parseTags(vm.cart);
 					vm.cart.products.forEach(function(product) {
-						console.log(product);
 						product.link = currentHost() + '/work/' + product.slug + '/' + product.product_id;
 					});
 					vm.devisers = cartService.parseDevisersFromProducts(vm.cart);
