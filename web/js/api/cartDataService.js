@@ -9,6 +9,7 @@
 			}
 		});
 		this.CartClientInfo = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'cart/:id/clientInfo');
+		this.CartReceiveToken = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'cart/:cartId/receiveToken');
 	}
 
 	angular

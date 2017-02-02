@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(UtilService, $locale) {
+	function controller(UtilService, $locale, cartDataService) {
 		var vm = this;
 		vm.has_error = UtilService.has_error;
 		vm.editPersonalInfo = editPersonalInfo;
@@ -9,6 +9,7 @@
         vm.stripejs = stripejs;
         vm.cvvPattern = new RegExp("[0-9]{3}", "g");
         var datetime = $locale.DATETIME_FORMATS;
+        var cartToken = new cartDataService.CartReceiveToken;
 
 
 		init();
@@ -28,19 +29,16 @@
                 image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
                 locale: 'auto',
                 token: function(token) {
-
-                	$.post({
-                		url: 'http://localhost:8080/api3/pub/v1/cart/'+vm.cart.id+'/receiveToken',
-						data: token,
-						success: function(r, t, xhr) {
-                			if (xhr.status == 200) {
-                				location.href = 'http://localhost:8080/order/success/'+vm.cart.id
-							} else {
-                				alert('An error occurred with your purchase');
-							}
-						}
-					});
-
+                    var cartReceiveToken = new cartDataService.cartReceiveToken;
+                    cartReceiveToken.token = angular.copy(token);
+                    cartReceiveToken.$save({
+                        cartId: vm.cart.id
+                    }).then(function(dataSaved) {
+                        $window.location.href = currentHost()+'/order/success/'+vm.cart.id
+                    }, function (err) {
+                        //TODO manage errors
+                        alert('An error occurred with your purchase');
+                    });
                 }
             });
 

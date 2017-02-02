@@ -230,7 +230,7 @@ class CartController extends AppPublicController
 			}
 			*/
 
-			$currentPaymentInfo = Yii::$app->request->post();;
+			$currentPaymentInfo = Yii::$app->request->post('token');
 
 			$order->setAttribute('payment_info', $currentPaymentInfo);
 			if ($order->save()) {
