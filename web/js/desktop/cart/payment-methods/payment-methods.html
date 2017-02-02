@@ -62,8 +62,9 @@
 		</form>
 
         <div class="col-md-12 text-center">
-            <!--<button class="btn btn-default btn-green" ng-click="paymentMethodsCtrl.checkout()">Pay with Stripe</button>-->
-            <a class="btn btn-default btn-green" ng-href="/order/checkout-test/{{paymentMethodsCtrl.cart.id}}">Pay with Stripe</a><br />
+            <!--<button class="btn btn-default btn-green" ng-click="paymentMethodsCtrl.stripejs()">Pay with Stripe.js</button><br />-->
+            <button class="btn btn-default btn-green" ng-click="paymentMethodsCtrl.checkout()">Pay with Checkout</button><br />
+            <!--<a class="btn btn-default btn-green" ng-href="/stripe/checkout-test/{{paymentMethodsCtrl.cart.id}}">Pay with Stripe (new window)</a><br />-->
         </div>
 
 </div>

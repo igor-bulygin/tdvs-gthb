@@ -12,6 +12,7 @@ use yii\mongodb\ActiveQuery;
  * @property string order_state
  * @property string client_id
  * @property array client_info
+ * @property array payment_info
  * @property array products
  * @property double subtotal
  * @property MongoDate created_at
@@ -52,6 +53,7 @@ class Order extends CActiveRecord {
 			'order_state',
 			'client_id',
 			'client_info',
+			'payment_info',
 			'products',
 			'subtotal',
 			'created_at',
@@ -186,19 +188,19 @@ class Order extends CActiveRecord {
      * Get one entity serialized
      *
      * @param string $id
-     * @return Product2|null
+     * @return Order|null
      * @throws Exception
      */
     public static function findOneSerialized($id)
     {
-        /** @var Product $product */
-        $product = static::find()->select(self::getSelectFields())->where(["short_id" => $id])->one();
+        /** @var Order $order */
+        $order = static::find()->select(self::getSelectFields())->where(["short_id" => $id])->one();
 
         // if automatic translation is enabled
         if (static::$translateFields) {
-            Utils::translate($product);
+            Utils::translate($order);
         }
-        return $product;
+        return $order;
     }
 
     /**
@@ -211,13 +213,13 @@ class Order extends CActiveRecord {
     public static function findSerialized($criteria = [])
     {
 
-        // Products query
+        // Order query
         $query = new ActiveQuery(static::className());
 
         // Retrieve only fields that gonna be used
         $query->select(self::getSelectFields());
 
-        // if product id is specified
+        // if order id is specified
         if ((array_key_exists("id", $criteria)) && (!empty($criteria["id"]))) {
             $query->andWhere(["short_id" => $criteria["id"]]);
         }
@@ -227,7 +229,7 @@ class Order extends CActiveRecord {
             $query->andWhere(["client_id" => $criteria["client_id"]]);
         }
 
-		// if product_state is specified
+		// if order_state is specified
 		if ((array_key_exists("order_state", $criteria)) && (!empty($criteria["order_state"]))) {
 			$query->andWhere(["order_state" => $criteria["order_state"]]);
 		}
@@ -257,36 +259,14 @@ class Order extends CActiveRecord {
 			$query->orderBy(["created_at" => "desc"]);
 		}
 
-        $products = $query->all();
+        $orders = $query->all();
 
         // if automatic translation is enabled
         if (static::$translateFields) {
-            Utils::translate($products);
+            Utils::translate($orders);
         }
-        return $products;
+        return $orders;
     }
-
-	/**
-	 * Spread data for sub documents
-	 *
-	 * @param array $data
-	 * @param null $formName
-	 * @return bool
-	 */
-	public function load($data, $formName = null)
-	{
-		$loaded = parent::load($data, $formName);
-
-//		if (array_key_exists('products', $data)) {
-//            $this->productsMapping->load($data, 'products');
-//        }
-//
-//		if (array_key_exists('client_info', $data)) {
-//			$this->clientInfoMapping->load($data, 'client_info');
-//		}
-
-		return ($loaded);
-	}
 
 
     /**

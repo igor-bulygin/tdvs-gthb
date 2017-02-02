@@ -5,6 +5,7 @@ namespace app\modules\api\pub\v1\controllers;
 use app\models\Order;
 use app\models\OrderClientInfo;
 use app\models\OrderProduct;
+use Stripe\Stripe;
 use Yii;
 use yii\base\Exception;
 use yii\web\BadRequestHttpException;
@@ -38,11 +39,11 @@ class CartController extends AppPublicController
 	public function actionView($cartId)
 	{
 		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_PUBLIC);
-		$cart = Order::findOneSerialized($cartId);
+		$order = Order::findOneSerialized($cartId);
 
-		if ($cart) {
+		if ($order && $order->order_state == Order::ORDER_STATE_CART) {
 			Yii::$app->response->setStatusCode(200); // Ok
-			return $cart;
+			return $order;
 		} else {
 			Yii::$app->response->setStatusCode(400); // Bad Request
 			return [];
@@ -172,6 +173,99 @@ class CartController extends AppPublicController
 			} else {
 				Yii::$app->response->setStatusCode(400); // Bad Request
 				return ["errors" => $clientInfo->errors];
+			}
+
+		} catch (HttpException $e) {
+			throw $e;
+		} catch (Exception $e) {
+			throw new BadRequestHttpException($e->getMessage());
+		}
+	}
+
+
+	public function actionReceiveToken($cartId)
+	{
+		try {
+
+			Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_PUBLIC);
+			$order = Order::findOneSerialized($cartId);
+			/* @var Order $order */
+
+			if (empty($order)) {
+				throw new NotFoundHttpException(sprintf("Cart with id %s does not exists", $cartId));
+			}
+			/*
+			{
+			  "id": "tok_19igOXJt4mveficFYDqFqBcB",
+			  "object": "token",
+			  "card": {
+				"id": "card_19igOXJt4mveficFdxIMWpw9",
+				"object": "card",
+				"address_city": null,
+				"address_country": null,
+				"address_line1": null,
+				"address_line1_check": null,
+				"address_line2": null,
+				"address_state": null,
+				"address_zip": "15177",
+				"address_zip_check": "pass",
+				"brand": "Visa",
+				"country": "US",
+				"cvc_check": "pass",
+				"dynamic_last4": null,
+				"exp_month": 5,
+				"exp_year": 2020,
+				"funding": "credit",
+				"last4": "4242",
+				"metadata": {},
+				"name": "jose.vazquez.viader@gmail.com",
+				"tokenization_method": null
+			  },
+			  "client_ip": "83.63.169.121",
+			  "created": 1486025805,
+			  "email": "jose.vazquez.viader@gmail.com",
+			  "livemode": false,
+			  "type": "card",
+			  "used": false
+			}
+			*/
+
+			$currentPaymentInfo = Yii::$app->request->post();;
+
+			$order->setAttribute('payment_info', $currentPaymentInfo);
+			if ($order->save()) {
+
+				if ($order->order_state != Order::ORDER_STATE_CART) {
+					throw new Exception("This order is in an invalid state");
+				}
+
+				Stripe::setApiKey('sk_test_eLdJxVmKSGQxGPhX2bqpoRk4');
+				$customer = \Stripe\Customer::create([
+					'email' => $order->clientInfoMapping->email,
+					'source' => $currentPaymentInfo['id'],
+				]);
+
+				$charge = \Stripe\Charge::create([
+					'customer' => $customer->id,
+					'currency' => 'eur',
+					'amount' => $order->subtotal*100,
+					"description" => "Order Nº " . $order->short_id,
+					"metadata" => [
+						"order_id" => $order->short_id,
+						"order" => json_encode($order),
+					],
+				]);
+
+				$order->order_state = Order::ORDER_STATE_PAID;
+				$order->save();
+
+				//TODO: send email to customer
+
+				Yii::$app->response->setStatusCode(200); // Created
+				return $order;
+			} else {
+				Yii::$app->response->setStatusCode(400); // Bad Request
+				return ["errors" => $order->errors];
 			}
 
 		} catch (HttpException $e) {

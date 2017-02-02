@@ -192,7 +192,8 @@ $config = [
 
 				//Orders
 				'order/checkout-test/<order_id:\w{8}>' => 'order/checkout-test',
-				'order/receive-payment' => 'order/receive-payment',
+				'order/receive-payment/<order_id:\w{8}>' => 'order/receive-payment',
+				'order/success/<order_id:\w{8}>' => 'order/success',
 
 				//Links for contact
 				'login' => 'site/login',
@@ -302,6 +303,7 @@ $config = [
 				'PUT api3/pub/v1/cart/<cartId:[^/.]*?>/product/<priceStockId:[^/.]*?>' => 'api3/pub/v1/cart/update-product',
 				'DELETE api3/pub/v1/cart/<cartId:[^/.]*?>/product/<priceStockId:[^/.]*?>' => 'api3/pub/v1/cart/delete-product',
 				'POST api3/pub/v1/cart/<cartId:[^/.]*?>/clientInfo' => 'api3/pub/v1/cart/client-info',
+				'POST api3/pub/v1/cart/<cartId:[^/.]*?>/receiveToken' => 'api3/pub/v1/cart/receive-token',
 
 				// API routing (private)
 				'GET api3/priv/v1/profile/deviser' => 'api3/priv/v1/deviser/view',

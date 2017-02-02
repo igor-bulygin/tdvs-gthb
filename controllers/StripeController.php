@@ -3,9 +3,14 @@
 namespace app\controllers;
 
 use app\helpers\CController;
+use app\models\Order;
 use app\models\Person;
 use Stripe\Account;
 use Stripe\Stripe;
+use Yii;
+use yii\base\Exception;
+use yii\helpers\Url;
+
 
 class StripeController extends CController
 {
@@ -19,6 +24,86 @@ class StripeController extends CController
 		}
 
 		return parent::beforeAction($action);
+	}
+
+	public function actionCheckoutTest($order_id)
+	{
+		$order = Order::findOneSerialized($order_id);
+		/* @var Order $order */
+		$order->order_state = Order::ORDER_STATE_CART;
+		$order->save();
+
+		$html = '
+			<form action="/stripe/receive-payment/' . $order_id . '" method="POST">
+			  <script
+				src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+				data-key="pk_test_p1DPyiicE2IerEV676oj5t89"
+				data-amount="' . ($order->subtotal * 100) . '"
+				data-name="Todevise"
+				data-description="Order Nº ' . $order_id . '"
+				data-image="' . Url::base(true) . '/imgs/logo.png"
+				data-locale="auto"
+				data-zip-code="true"
+				data-currency="eur">
+			  </script>
+			  <input type="hidden" name="order_id" value="' . $order_id . '"/>
+			</form>';
+		echo $html;
+	}
+
+	public function actionReceivePayment($order_id)
+	{
+
+		Stripe::setApiKey('sk_test_eLdJxVmKSGQxGPhX2bqpoRk4');
+
+		$token = Yii::$app->request->post('stripeToken');
+
+		$order = Order::findOneSerialized($order_id);
+		/* @var Order $order */
+		if ($order) {
+
+			try {
+
+				if ($order->order_state != Order::ORDER_STATE_CART) {
+					throw new Exception("This order is in an invalid state");
+				}
+
+				$customer = \Stripe\Customer::create([
+					'email' => $order->clientInfoMapping->email,
+					'source' => $token,
+				]);
+
+				$charge = \Stripe\Charge::create([
+					'customer' => $customer->id,
+					'currency' => 'eur',
+					'amount' => $order->subtotal * 100,
+					"description" => "Order Nº " . $order->short_id,
+					"metadata" => [
+						"order_id" => $order->short_id,
+						"order" => json_encode($order),
+					],
+				]);
+
+				$order->order_state = Order::ORDER_STATE_PAID;
+				$order->save();
+
+				$message = 'Your purchase is complete';
+
+			} catch (\Exception $e) {
+
+				$order->order_state = Order::ORDER_STATE_UNPAID;
+				$order->save();
+
+				$message = 'Error processing your charge: ' . $e->getMessage();
+
+			}
+
+
+		} else {
+			$message = 'Order ' . $order_id . ' not found';
+		}
+
+		echo $message;
 	}
 
 	public function actionTestConnect()

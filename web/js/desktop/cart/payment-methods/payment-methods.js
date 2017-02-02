@@ -28,9 +28,19 @@
                 image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
                 locale: 'auto',
                 token: function(token) {
-                	console.log('received token: ');
-                	console.log(token);
-                	alert('now, we need to send info to the server')
+
+                	$.post({
+                		url: 'http://localhost:8080/api3/pub/v1/cart/'+vm.cart.id+'/receiveToken',
+						data: token,
+						success: function(r, t, xhr) {
+                			if (xhr.status == 200) {
+                				location.href = 'http://localhost:8080/order/success/'+vm.cart.id
+							} else {
+                				alert('An error occurred with your purchase');
+							}
+						}
+					});
+
                 }
             });
 
