@@ -61,10 +61,15 @@
 			<!--</div>-->
 		<!--</form>-->
 
-        <div class="col-md-12 text-center">
-            <!--<button class="btn btn-default btn-green" ng-click="paymentMethodsCtrl.stripejs()">Pay with Stripe.js</button><br />-->
-            <button class="btn btn-default btn-green" ng-click="paymentMethodsCtrl.checkout()">Checkout</button><br />
-            <!--<a class="btn btn-default btn-green" ng-href="/stripe/checkout-test/{{paymentMethodsCtrl.cart.id}}">Pay with Stripe (new window)</a><br />-->
-        </div>
+		<div class="col-md-12 text-center">
+			<p class="text-center">Securely pay with any type of credit or debit card.</p>
+			<!--<button class="btn btn-default btn-green" ng-click="paymentMethodsCtrl.stripejs()">Pay with Stripe.js</button><br />-->
+			<button class="btn btn-default btn-green" ng-click="paymentMethodsCtrl.checkout()">Pay with card</button><br />
+			<div class="text-center purple-text" ng-if="paymentMethodsCtrl.errors">
+				<p>There was an issue with the transaction. Your card has not been charged.</p>
+				<p>Please try again, and if the issue persists contact us.</p>
+			</div>
+			<!--<a class="btn btn-default btn-green" ng-href="/stripe/checkout-test/{{paymentMethodsCtrl.cart.id}}">Pay with Stripe (new window)</a><br />-->
+		</div>
 
 </div>
