@@ -33,6 +33,9 @@ class OrderController extends CController
 			throw new Exception("This order is in an invalid state");
 		}
 
+		$order->order_state = Order::ORDER_STATE_CART;
+		$order->save();
+
 		$this->layout = '/desktop/public-2.php';
 
 		return $this->render("success", [
