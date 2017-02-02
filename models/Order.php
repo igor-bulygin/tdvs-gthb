@@ -150,6 +150,7 @@ class Order extends CActiveRecord {
 					'order_state',
 					'client_id',
 					'client_info',
+					'payment_info',
 					'products' => 'productsInfo',
 					'subtotal',
                 ];

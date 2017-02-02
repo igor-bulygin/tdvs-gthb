@@ -29,7 +29,7 @@ $this->title = 'Todevise / Your purchase is complete';
 				</tr>
 				<tr>
 					<td>Payment method</td>
-					<td></td>
+					<td ng-bind="orderSuccessCtrl.cart.payment_info.card.brand + ' **** ' + orderSuccessCtrl.cart.payment_info.card.last4"></td>
 				</tr>
 				<tr>
 					<td>Phone</td>
