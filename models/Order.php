@@ -391,4 +391,35 @@ class Order extends CActiveRecord {
 		return null;
 	}
 
+	/**
+	 * @bool $send Sends the email
+	 * @return PostmanEmail
+	 */
+	public function composeEmailOrderPaid($send) {
+		$email = new PostmanEmail();
+		$email->code_email_content_type = PostmanEmail::EMAIL_CONTENT_TYPE_ORDER_PAID;
+		$email->to_email = $this->clientInfoMapping->email;
+		$email->subject = 'Todevise - '.$this->short_id.' - Your purchase is complete';
+
+		// add task only one send task (to allow retries)
+		$task = new PostmanEmailTask();
+		$task->date_send_scheduled = new MongoDate();
+		$email->addTask($task);
+
+		$email->body_html = \Yii::$app->view->render(
+			'@app/mail/order/order-paid',
+			[
+				"order" => $this,
+			],
+			$this
+		);
+		$email->save();
+
+		if ($send) {
+			$email->send($task->id);
+		}
+
+		return $email;
+	}
+
 }

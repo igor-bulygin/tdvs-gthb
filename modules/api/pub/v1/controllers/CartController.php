@@ -11,6 +11,7 @@ use yii\base\Exception;
 use yii\web\BadRequestHttpException;
 use yii\web\HttpException;
 use yii\web\NotFoundHttpException;
+use yii\web\UnauthorizedHttpException;
 
 class CartController extends AppPublicController
 {
@@ -19,15 +20,15 @@ class CartController extends AppPublicController
 	{
 		try {
 			Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_PUBLIC);
-			$cart = new Order();
+			$order = new Order();
 			if (!Yii::$app->user->isGuest) {
-				$cart->client_id = Yii::$app->user->identity->short_id;
+				$order->client_id = Yii::$app->user->identity->short_id;
 			}
-			$cart->subtotal = 0;
-			$cart->save();
+			$order->subtotal = 0;
+			$order->save();
 
 			Yii::$app->response->setStatusCode(201); // Created
-			return $cart;
+			return $order;
 
 		} catch (HttpException $e) {
 			throw $e;
@@ -38,39 +39,57 @@ class CartController extends AppPublicController
 
 	public function actionView($cartId)
 	{
-		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_PUBLIC);
-		$order = Order::findOneSerialized($cartId);
+		try {
+			Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_PUBLIC);
+			$order = Order::findOneSerialized($cartId);
 
-		if ($order && $order->order_state == Order::ORDER_STATE_CART) {
+			if (empty($order)) {
+				throw new NotFoundHttpException();
+			}
+
+			if ($order->order_state != Order::ORDER_STATE_CART) {
+				throw new NotFoundHttpException();
+			}
+
+			if (!Yii::$app->user->isGuest) {
+				if ($order->client_id != Yii::$app->user->identity->short_id) {
+					throw new UnauthorizedHttpException();
+				}
+			} else {
+				if (!empty($order->client_id)) {
+					throw new UnauthorizedHttpException();
+				}
+			}
 			Yii::$app->response->setStatusCode(200); // Ok
 			return $order;
-		} else {
-			Yii::$app->response->setStatusCode(400); // Bad Request
-			return [];
+
+		} catch (HttpException $e) {
+			throw $e;
+		} catch (Exception $e) {
+			throw new BadRequestHttpException($e->getMessage());
 		}
 	}
 
 	public function actionAddProduct($cartId)
 	{
 		try {
-
 			Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_PUBLIC);
-			$cart = Order::findOneSerialized($cartId);
-			/* @var Order $cart */
+			$order = Order::findOneSerialized($cartId);
+			/* @var Order $order */
 
-			if (empty($cart)) {
+			if (empty($order)) {
 				throw new NotFoundHttpException(sprintf("Cart with id %s does not exists", $cartId));
 			}
 			$product = new OrderProduct();
-			$product->setParentObject($cart);
+			$product->setParentObject($order);
 
 			if ($product->load(Yii::$app->request->post(), '') && $product->validate()) {
 
-				$cart->addProduct($product);
-				$cart->save();
+				$order->addProduct($product);
+				$order->save();
 
 				Yii::$app->response->setStatusCode(201); // Created
-				return $cart;
+				return $order;
 			} else {
 				Yii::$app->response->setStatusCode(400); // Bad Request
 				return ["errors" => $product->errors];
@@ -89,23 +108,23 @@ class CartController extends AppPublicController
 		try {
 
 			Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_PUBLIC);
-			$cart = Order::findOneSerialized($cartId);
-			/* @var Order $cart */
-			if (empty($cart)) {
+			$order = Order::findOneSerialized($cartId);
+			/* @var Order $order */
+			if (empty($order)) {
 				throw new NotFoundHttpException(sprintf("Cart with id %s does not exists", $cartId));
 			}
-			$product = $cart->getPriceStockItem($priceStockId);
+			$product = $order->getPriceStockItem($priceStockId);
 			if (empty($product)) {
 				throw new NotFoundHttpException(sprintf("Price&Stock item with id %s does not exists", $priceStockId));
 			}
 
 			if ($product->load(Yii::$app->request->post(), '') && $product->validate()) {
 
-				$cart->updateProduct($product);
-				$cart->save();
+				$order->updateProduct($product);
+				$order->save();
 
 				Yii::$app->response->setStatusCode(200); // Ok
-				return $cart;
+				return $order;
 			} else {
 				Yii::$app->response->setStatusCode(400); // Bad Request
 				return ["errors" => $product->errors];
@@ -123,22 +142,22 @@ class CartController extends AppPublicController
 	{
 		try {
 			Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_PUBLIC);
-			$cart = Order::findOneSerialized($cartId);
-			/* @var Order $cart */
-			if (empty($cart)) {
+			$order = Order::findOneSerialized($cartId);
+			/* @var Order $order */
+			if (empty($order)) {
 				throw new NotFoundHttpException(sprintf("Cart with id %s does not exists", $cartId));
 			}
-			$product = $cart->getPriceStockItem($priceStockId);
+			$product = $order->getPriceStockItem($priceStockId);
 			if (empty($product)) {
 				throw new NotFoundHttpException(sprintf("Price&Stock item with id %s does not exists", $priceStockId));
 			}
 
-			$cart->deleteProduct($product);
-			$cart->save();
+			$order->deleteProduct($product);
+			$order->save();
 
 			Yii::$app->response->setStatusCode(200); // Ok
 
-			return $cart;
+			return $order;
 
 		} catch (HttpException $e) {
 			throw $e;
@@ -153,23 +172,23 @@ class CartController extends AppPublicController
 		try {
 
 			Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_PUBLIC);
-			$cart = Order::findOneSerialized($cartId);
-			/* @var Order $cart */
+			$order = Order::findOneSerialized($cartId);
+			/* @var Order $order */
 
-			if (empty($cart)) {
+			if (empty($order)) {
 				throw new NotFoundHttpException(sprintf("Cart with id %s does not exists", $cartId));
 			}
 
 			$clientInfo = new OrderClientInfo();
-			$clientInfo->setParentObject($cart);
+			$clientInfo->setParentObject($order);
 
 			if ($clientInfo->load(Yii::$app->request->post(), '') && $clientInfo->validate()) {
 
-				$cart->clientInfoMapping = $clientInfo;
-				$cart->save();
+				$order->clientInfoMapping = $clientInfo;
+				$order->save();
 
 				Yii::$app->response->setStatusCode(200); // Created
-				return $cart;
+				return $order;
 			} else {
 				Yii::$app->response->setStatusCode(400); // Bad Request
 				return ["errors" => $clientInfo->errors];
@@ -232,42 +251,36 @@ class CartController extends AppPublicController
 
 			$currentPaymentInfo = Yii::$app->request->post('token');
 
-			$order->setAttribute('payment_info', $currentPaymentInfo);
-			if ($order->save()) {
-
-				if ($order->order_state != Order::ORDER_STATE_CART) {
-					throw new Exception("This order is in an invalid state");
-				}
-
-				Stripe::setApiKey('sk_test_eLdJxVmKSGQxGPhX2bqpoRk4');
-				$customer = \Stripe\Customer::create([
-					'email' => $order->clientInfoMapping->email,
-					'source' => $currentPaymentInfo['id'],
-				]);
-
-				$charge = \Stripe\Charge::create([
-					'customer' => $customer->id,
-					'currency' => 'eur',
-					'amount' => $order->subtotal*100,
-					"description" => "Order Nº " . $order->short_id,
-					"metadata" => [
-						"order_id" => $order->short_id,
-						"order" => json_encode($order),
-					],
-				]);
-
-				//TODO: set paid status
-//				$order->order_state = Order::ORDER_STATE_PAID;
-//				$order->save();
-
-				//TODO: send email to customer
-
-				Yii::$app->response->setStatusCode(200); // Created
-				return $order;
-			} else {
-				Yii::$app->response->setStatusCode(400); // Bad Request
-				return ["errors" => $order->errors];
+			if ($order->order_state != Order::ORDER_STATE_CART) {
+				throw new Exception("This order is in an invalid state");
 			}
+
+			Stripe::setApiKey('sk_test_eLdJxVmKSGQxGPhX2bqpoRk4');
+			$customer = \Stripe\Customer::create([
+				'email' => $order->clientInfoMapping->email,
+				'source' => $currentPaymentInfo['id'],
+			]);
+
+			$charge = \Stripe\Charge::create([
+				'customer' => $customer->id,
+				'currency' => 'eur',
+				'amount' => $order->subtotal * 100,
+				"description" => "Order Nº " . $order->short_id,
+				"metadata" => [
+					"order_id" => $order->short_id,
+					"order" => json_encode($order),
+				],
+			]);
+
+			$order->setAttribute('payment_info', $currentPaymentInfo);
+			//TODO: set paid status
+//				$order->order_state = Order::ORDER_STATE_PAID;
+			$order->save();
+
+			$order->composeEmailOrderPaid(true);
+
+			Yii::$app->response->setStatusCode(200); // Created
+			return $order;
 
 		} catch (HttpException $e) {
 			throw $e;

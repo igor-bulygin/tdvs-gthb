@@ -43,4 +43,31 @@ class OrderClientInfo extends EmbedModel
 		];
 	}
 
+	/**
+	 * Returns phone1 formmated
+	 *
+	 * @return string
+	 */
+	public function getPhone1() {
+		return '+'.$this->phone1['prefix'].' '.$this->phone1['number'];
+	}
+
+	/**
+	 * Returns phone2 formmated
+	 *
+	 * @return string
+	 */
+	public function getPhone2() {
+		return '+'.$this->phone2['prefix'].' '.$this->phone2['number'];
+	}
+
+	/**
+	 * Returns the full name of customer, without spaces
+	 *
+	 * @return string
+	 */
+	public function getFullName() {
+		return trim($this->first_name.' '.$this->last_name);
+	}
+
 }

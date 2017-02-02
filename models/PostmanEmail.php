@@ -1,16 +1,13 @@
 <?php
 namespace app\models;
 
+use app\helpers\CActiveRecord;
 use app\helpers\Utils;
-use DateTime;
 use Exception;
 use MongoDate;
 use Ramsey\Uuid\Uuid;
 use Yii;
-use app\helpers\CActiveRecord;
-use yii\base\NotSupportedException;
 use yii\mongodb\ActiveQuery;
-use yii\mongodb\Collection;
 
 /**
  * @property string $uuid
@@ -39,6 +36,7 @@ class PostmanEmail extends CActiveRecord
 
 	const EMAIL_CONTENT_TYPE_DEVISER_REQUEST_INVITATION = 'deviser-request-invitation';
 	const EMAIL_CONTENT_TYPE_DEVISER_INVITATION = 'deviser-invitation';
+	const EMAIL_CONTENT_TYPE_ORDER_PAID = 'order-paid';
 
 	/**
 	 * The attributes that should be serialized

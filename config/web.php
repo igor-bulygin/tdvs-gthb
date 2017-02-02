@@ -191,9 +191,11 @@ $config = [
 				'/settings/<slug:[^/.]*?>/<person_id:[^/.]*?>/billing' => 'settings/billing',
 
 				//Orders
-				'order/checkout-test/<order_id:\w{8}>' => 'order/checkout-test',
-				'order/receive-payment/<order_id:\w{8}>' => 'order/receive-payment',
 				'order/success/<order_id:\w{8}>' => 'order/success',
+
+				//Stripe testing
+				'stripe/checkout-test/<order_id:\w{8}>' => 'stripe/checkout-test',
+				'stripe/receive-payment/<order_id:\w{8}>' => 'stripe/receive-payment',
 
 				//Links for contact
 				'login' => 'site/login',
