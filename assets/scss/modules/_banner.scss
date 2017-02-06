@@ -18,4 +18,18 @@
 .home-carousel{
     max-height: 400px;
 }
+.glyphicon-chevron-left:before, .glyphicon-chevron-right:before{
+    content: none;
+}
+.banner-btn i{
+	color: $red;
+	background-color: $white;
+	text-shadow: none!important;
+    display: block;
+    width: 44px;
+    height: 44px;
+	font-size: 25px;
+    padding-top: 8px;
+	@include border-radius(45px,45px,45px,45px);
+}
 

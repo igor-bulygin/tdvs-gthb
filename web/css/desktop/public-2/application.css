@@ -1445,6 +1445,22 @@ input[type="radio"] .styled:checked + label::after {
 .home-carousel {
   max-height: 400px; }
 
+.glyphicon-chevron-left:before, .glyphicon-chevron-right:before {
+  content: none; }
+
+.banner-btn i {
+  color: #F7284B;
+  background-color: #ffffff;
+  text-shadow: none !important;
+  display: block;
+  width: 44px;
+  height: 44px;
+  font-size: 25px;
+  padding-top: 8px;
+  border-radius: 45px 45px 45px 45px !important;
+  -webkit-border-radius: 45px 45px 45px 45px !important;
+  -moz-border-radius: 45px 45px 45px 45px !important; }
+
 .sub-banner {
   background-color: #ffffff;
   height: 185px; }
