@@ -10,6 +10,7 @@ use Stripe\Stripe;
 use Yii;
 use yii\base\Exception;
 use yii\helpers\Url;
+use yii\web\NotFoundHttpException;
 
 
 class StripeController extends CController
@@ -24,6 +25,74 @@ class StripeController extends CController
 		}
 
 		return parent::beforeAction($action);
+	}
+
+	public function actionConnectButton()
+	{
+		$html = '<a href="https://connect.stripe.com/oauth/authorize?response_type=code&client_id='.\Yii::$app->params['stripe_client_id'].'&scope=read_write">Connect with stripe</a>';
+		echo $html;
+	}
+
+	public function actionConnectBack()
+	{
+		$person_id = Yii::$app->session->get('person_id_stripe_connection');
+		if (empty($person_id)) {
+			throw new \Exception("Missing required person identifier");
+		}
+		Yii::$app->session->remove('person_id_stripe_connection');
+
+		$person = Person::findOneSerialized($person_id);
+		if (!$person->isDeviser() || !$person->isDeviserEditable()) {
+			throw new NotFoundHttpException();
+		}
+
+
+		if (isset($_GET['code'])) {
+
+			// Redirect w/ code
+			$code = $_GET['code'];
+
+			$token_request_body = [
+				'grant_type' => 'authorization_code',
+				'client_id' => Yii::$app->params['stripe_client_id'],
+				'code' => $code,
+				'client_secret' => Yii::$app->params['stripe_secret_key'],
+			];
+
+			$req = curl_init('https://connect.stripe.com/oauth/token');
+			curl_setopt($req, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($req, CURLOPT_POST, true);
+			curl_setopt($req, CURLOPT_POSTFIELDS, http_build_query($token_request_body));
+
+			// TODO: Additional error handling
+			$respCode = curl_getinfo($req, CURLINFO_HTTP_CODE);
+			$resp = json_decode(curl_exec($req), true);
+			curl_close($req);
+
+			$person->settingsMapping->stripe_info = $resp;
+			$person->save();
+
+			$this->redirect(Url::to(['settings/billing', 'slug' => $person->slug, 'person_id' => $person->short_id]));
+
+
+		} else if (isset($_GET['error'])) {
+
+			// Error
+			echo $_GET['error_description'];
+
+		} else {
+
+			// Show OAuth link
+			$authorize_request_body = [
+				'response_type' => 'code',
+				'scope' => 'read_write',
+				'client_id' => Yii::$app->params['stripe_client_id'],
+			];
+
+			$url = 'https://connect.stripe.com/oauth/authorize' . '?' . http_build_query($authorize_request_body);
+			echo "<a href='$url'>Connect with Stripe</a>";
+
+		}
 	}
 
 	public function actionCheckoutTest($order_id)
@@ -54,7 +123,7 @@ class StripeController extends CController
 	public function actionReceivePayment($order_id)
 	{
 
-		Stripe::setApiKey('sk_test_eLdJxVmKSGQxGPhX2bqpoRk4');
+		Stripe::setApiKey(Yii::$app->params['stripe_secret_key']);
 
 		$token = Yii::$app->request->post('stripeToken');
 
@@ -109,11 +178,11 @@ class StripeController extends CController
 	public function actionTestConnect()
 	{
 		$stripe = array(
-			"secret_key"      => "sk_test_eLdJxVmKSGQxGPhX2bqpoRk4",
-			"publishable_key" => "pk_test_p1DPyiicE2IerEV676oj5t89"
+			"secret_key"      => Yii::$app->params['stripe_secret_key'],
+			"publishable_key"      => Yii::$app->params['stripe_publishable_key'],
 		);
 
-		Stripe::setApiKey('sk_test_eLdJxVmKSGQxGPhX2bqpoRk4');
+		Stripe::setApiKey(Yii::$app->params['stripe_secret_key']);
 
 		$deviser = Person::findOneSerialized('13cc33k');
 
@@ -306,3 +375,7 @@ class StripeController extends CController
 //				]
 //			}
 //		}
+//
+//
+//
+// client_id: ca_9z47cPhqGcOPdRgTMEOXnF3hc7Cwf59g

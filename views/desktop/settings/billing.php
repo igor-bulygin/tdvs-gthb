@@ -2,6 +2,7 @@
 use app\assets\desktop\settings\BillingAsset;
 use app\components\SettingsHeader;
 use app\models\Person;
+use yii\helpers\Url;
 
 BillingAsset::register($this);
 
@@ -46,7 +47,7 @@ $this->params['settings_menu_active_option'] = 'billing';
 					</div>
 				</form>
 			</div>
-			<div uib-accordion-group class="panel-default panel-billing" heading="Bank Information" is-open="true" ng-cloak>
+			<div uib-accordion-group class="panel-default panel-billing" heading="Bank Information" is-disabled="true" ng-cloak>
 				<form name="billingCtrl.bankInformationForm" class="form-horizontal">
 					<div class="form-group">
 						<label for="location" class="col-md-2">Location of bank</label>
@@ -64,7 +65,15 @@ $this->params['settings_menu_active_option'] = 'billing';
 					<new-zealand-bank-information bank-information="billingCtrl.bank_information" errors="billingCtrl.errors" ng-if="billingCtrl.bank_information.location === 'NZ'"></new-zealand-bank-information>
 					<other-bank-information bank-information="billingCtrl.bank_information" errors="billingCtrl.errors" ng-if="billingCtrl.bank_information.location === 'OTHER'"></other-bank-information>
 				</form>
-			</div>
+            </div>
+            <div uib-accordion-group class="panel-default panel-billing" heading="Stripe account" is-open="true" ng-cloak>
+                <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat soluta maxime incidunt similique quo fuga eum neque sunt, voluptatibus! Corrupti rerum voluptate sunt, officia fugit, iste velit aliquam animi itaque.</div>
+                <?php if (empty($person->settingsMapping->stripeInfoMapping->access_token)) { ?>
+                    <a class="btn btn-green" href="<?=Url::to(['settings/connect-stripe', 'slug' => $person->slug, 'person_id' => $person->short_id])?>">Connect my stripe account</a>
+                <?php } else { ?>
+                    <a class="btn btn-green" href="<?=Url::to(['settings/disconnect-stripe', 'slug' => $person->slug, 'person_id' => $person->short_id])?>">Disconnect my stripe account</a>
+                <?php } ?>
+            </div>
 			<div uib-accordion-group class="panel-default panel-billing" heading="Payments" is-disabled="true" ng-cloak>
 				<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat soluta maxime incidunt similique quo fuga eum neque sunt, voluptatibus! Corrupti rerum voluptate sunt, officia fugit, iste velit aliquam animi itaque.</div>
 				<div>Dolores deleniti, distinctio nihil deserunt possimus expedita veritatis doloribus consequatur a facere unde aliquid similique non dolor dolore animi placeat, sunt earum sint laudantium quas? Perferendis sit quibusdam laboriosam aliquam.</div>

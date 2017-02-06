@@ -38,7 +38,6 @@
 						//TODO manage errors
 						vm.errors = true;
 						console.log(err);
-						alert('An error occurred with your purchase: '+err.data.message);
 					});
 				}
 			});

@@ -189,11 +189,15 @@ $config = [
 				//Settings
 				'/settings/<slug:[^/.]*?>/<person_id:[^/.]*?>' => 'settings/index',
 				'/settings/<slug:[^/.]*?>/<person_id:[^/.]*?>/billing' => 'settings/billing',
+				'/settings/<slug:[^/.]*?>/<person_id:[^/.]*?>/connect-stripe' => 'settings/connect-stripe',
+				'/settings/<slug:[^/.]*?>/<person_id:[^/.]*?>/disconnect-stripe' => 'settings/disconnect-stripe',
 
 				//Orders
 				'order/success/<order_id:\w{8}>' => 'order/success',
 
 				//Stripe testing
+				'stripe/connect-button' => 'stripe/connect-button',
+				'stripe/connect-back' => 'stripe/connect-back',
 				'stripe/checkout-test/<order_id:\w{8}>' => 'stripe/checkout-test',
 				'stripe/receive-payment/<order_id:\w{8}>' => 'stripe/receive-payment',
 

@@ -5,6 +5,7 @@ namespace app\modules\api\pub\v1\controllers;
 use app\models\Order;
 use app\models\OrderClientInfo;
 use app\models\OrderProduct;
+use app\models\Person;
 use Stripe\Stripe;
 use Yii;
 use yii\base\Exception;
@@ -250,29 +251,92 @@ class CartController extends AppPublicController
 			*/
 
 			$currentPaymentInfo = Yii::$app->request->post('token');
+			$token = $currentPaymentInfo['id'];
 
 			if ($order->order_state != Order::ORDER_STATE_CART) {
 				throw new Exception("This order is in an invalid state");
 			}
 
-			Stripe::setApiKey('sk_test_eLdJxVmKSGQxGPhX2bqpoRk4');
+			Stripe::setApiKey(Yii::$app->params['stripe_secret_key']);
+
+			$products = $order->productsMapping;
+
+			$devisers = [];
+			foreach ($products as $product) {
+				if (isset($devisers[$product->deviser_id])) {
+					$amount = $devisers[$product->deviser_id]['amount'];
+				} else {
+					$amount = 0;
+				}
+				$devisers[$product->deviser_id] = [
+					'amount' => $amount + ($product->price * $product->quantity),
+					'deviser' => Person::findOneSerialized($product->deviser_id),
+				];
+			}
+
 			$customer = \Stripe\Customer::create([
 				'email' => $order->clientInfoMapping->email,
-				'source' => $currentPaymentInfo['id'],
+				'source' => $token,
 			]);
 
-			$charge = \Stripe\Charge::create([
-				'customer' => $customer->id,
-				'currency' => 'eur',
-				'amount' => $order->subtotal * 100,
-				"description" => "Order Nº " . $order->short_id,
-				"metadata" => [
-					"order_id" => $order->short_id,
-					"order" => json_encode($order),
-				],
-			]);
+			$charges = [];
+			foreach ($devisers as $oneDeviser) {
+				$amount = $oneDeviser['amount'];
+				$deviser = $oneDeviser['deviser']; /* @var Person $deviser */
 
-			$order->setAttribute('payment_info', $currentPaymentInfo);
+				$stripeAmount = (int)($amount * 100);
+				$todeviseFee = (int)($stripeAmount * 0.04);
+
+				if (empty($deviser->settingsMapping->stripeInfoMapping->access_token)) {
+
+					// If the deviser has no a connected stripe account, we charge directly to todevise account
+					$charges[] = \Stripe\Charge::create([
+						'customer' => $customer->id,
+						'currency' => 'eur',
+						'amount' => $stripeAmount,
+						"description" => "Order Nº " . $order->short_id,
+						"metadata" => [
+							"order_id" => $order->short_id,
+							"order" => json_encode($order),
+						],
+					]);
+
+				} else {
+
+					// Create a Token from the existing customer on the platform's account
+					$token = \Stripe\Token::create(
+						[
+							"customer" => $customer->id,
+							"card" => $currentPaymentInfo['card']['id'],
+						],
+						["stripe_account" => $deviser->settingsMapping->stripeInfoMapping->stripe_user_id] // id of the connected account
+					);
+
+					$charges[] = \Stripe\Charge::create([
+						'source' => $token,
+						'currency' => 'eur',
+						'amount' => $stripeAmount,
+						"description" => "Order Nº " . $order->short_id,
+						'application_fee' => $todeviseFee,
+						"metadata" => [
+							"order_id" => $order->short_id,
+						],
+					],
+						[
+							'stripe_account' => $deviser->settingsMapping->stripeInfoMapping->stripe_user_id,
+						]
+					);
+
+				}
+
+			}
+
+			$payment_info = [
+				'token' => $currentPaymentInfo,
+				'charges' => json_encode($charges),
+			];
+			$order->setAttribute('payment_info', $payment_info);
+
 			//TODO: set paid status
 //				$order->order_state = Order::ORDER_STATE_PAID;
 			$order->save();

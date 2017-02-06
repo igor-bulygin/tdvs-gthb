@@ -3,6 +3,7 @@ namespace app\models;
 
 /**
  * @property PersonBankInfo $bankInfoMapping
+ * @property PersonStripeInfo $stripeInfoMapping
  *
  * @method Person getParentObject()
  */
@@ -13,6 +14,7 @@ class PersonSettings extends EmbedModel
 	{
 		return [
 			'bank_info',
+			'stripe_info',
 		];
 	}
 
@@ -25,6 +27,7 @@ class PersonSettings extends EmbedModel
 	public function beforeValidate()
 	{
 		$this->bankInfoMapping->setParentObject($this);
+		$this->stripeInfoMapping->setParentObject($this);
 
 		return parent::beforeValidate();
 	}
@@ -34,12 +37,21 @@ class PersonSettings extends EmbedModel
 		return $this->mapEmbedded('bank_info', PersonBankInfo::className(), array('unsetSource' => false));
 	}
 
+	public function embedStripeInfoMapping()
+	{
+		return $this->mapEmbedded('stripe_info', PersonStripeInfo::className(), array('unsetSource' => false));
+	}
+
 
 	public function rules()
 	{
 		return [
-				['bank_info', 'safe', 'on' => [Person::SCENARIO_DEVISER_CREATE_DRAFT, Person::SCENARIO_DEVISER_UPDATE_DRAFT, Person::SCENARIO_DEVISER_UPDATE_PROFILE]],
+				[[
+					'bank_info',
+					'stripe_info',
+					], 'safe', 'on' => [Person::SCENARIO_DEVISER_CREATE_DRAFT, Person::SCENARIO_DEVISER_UPDATE_DRAFT, Person::SCENARIO_DEVISER_UPDATE_PROFILE]],
 				['bankInfoMapping', 'app\validators\EmbedDocValidator'], // to apply rules
+				['stripeInfoMapping', 'app\validators\EmbedDocValidator'], // to apply rules
 		];
 	}
 
