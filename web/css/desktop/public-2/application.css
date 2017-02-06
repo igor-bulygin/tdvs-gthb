@@ -2176,7 +2176,8 @@ input[type="radio"] .styled:checked + label::after {
     position: relative; }
     .banner-deviser-content .deviser-profile .avatar {
       float: left;
-      position: relative; }
+      position: relative;
+      margin: 0 0 0 6px; }
       .banner-deviser-content .deviser-profile .avatar img {
         width: 155px;
         height: 155px;
