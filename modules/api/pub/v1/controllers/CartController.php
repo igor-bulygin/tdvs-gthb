@@ -337,8 +337,7 @@ class CartController extends AppPublicController
 			];
 			$order->setAttribute('payment_info', $payment_info);
 
-			//TODO: set paid status
-//				$order->order_state = Order::ORDER_STATE_PAID;
+			$order->order_state = Order::ORDER_STATE_PAID;
 			$order->save();
 
 			$order->composeEmailOrderPaid(true);
