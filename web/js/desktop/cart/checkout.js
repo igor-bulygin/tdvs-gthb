@@ -13,6 +13,16 @@
 			getCart();
 		}
 
+		function createCart() {
+			cartDataService.Cart.save()
+				.$promise.then(function (cartData) {
+					var cart_id = cartData.id;
+					UtilService.setLocalStorage('cart_id', cart_id);
+				}, function (err) {
+					//TODO: show err;
+				})
+		}
+
 		function getCart() {
 			var cart_id = UtilService.getLocalStorage('cart_id');
 			if(cart_id) {
@@ -22,13 +32,16 @@
 					vm.cart = angular.copy(cartData);
 					cartService.parseTags(vm.cart);
 					vm.cart.products.forEach(function(product) {
-						product.link = currentHost() + '/work/' + product.slug + '/' + product.product_id;
+						product.link = currentHost() + '/work/' + product.product_slug + '/' + product.product_id;
 					});
 					vm.devisers = cartService.parseDevisersFromProducts(vm.cart);
 				}, function(err) {
-					//log err
+					createCart();
+					//TODO: show err
 					console.log(err);
 				});
+			} else {
+				createCart();
 			}
 		}
 	}

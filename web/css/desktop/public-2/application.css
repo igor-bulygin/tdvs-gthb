@@ -289,7 +289,7 @@ ul {
   margin-top: 20px; }
 
 .mt-30 {
-  margin-top: 30px; }
+  margin-top: 30px !important; }
 
 .mt-40 {
   margin-top: 40px; }
@@ -1445,6 +1445,22 @@ input[type="radio"] .styled:checked + label::after {
 .home-carousel {
   max-height: 400px; }
 
+.glyphicon-chevron-left:before, .glyphicon-chevron-right:before {
+  content: none; }
+
+.banner-btn i {
+  color: #F7284B;
+  background-color: #ffffff;
+  text-shadow: none !important;
+  display: block;
+  width: 44px;
+  height: 44px;
+  font-size: 25px;
+  padding-top: 8px;
+  border-radius: 45px 45px 45px 45px !important;
+  -webkit-border-radius: 45px 45px 45px 45px !important;
+  -moz-border-radius: 45px 45px 45px 45px !important; }
+
 .sub-banner {
   background-color: #ffffff;
   height: 185px; }
@@ -2176,7 +2192,8 @@ input[type="radio"] .styled:checked + label::after {
     position: relative; }
     .banner-deviser-content .deviser-profile .avatar {
       float: left;
-      position: relative; }
+      position: relative;
+      margin: 0 0 0 6px; }
       .banner-deviser-content .deviser-profile .avatar img {
         width: 155px;
         height: 155px;
@@ -3717,7 +3734,7 @@ input[type="radio"] .styled:checked + label::after {
     font-weight: normal !important; }
   .shipping-policies-wrapper .policies-row .tax {
     font-family: "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    margin: 3px 0 0 0;
+    margin: 3px 0 0 3px;
     display: inline-block; }
   .shipping-policies-wrapper .returns-row {
     font-weight: normal !important;
@@ -4581,14 +4598,14 @@ input:checked + .slider:before {
   float: left; }
 
 .form-personal-info {
-  margin: 20px 10px; }
+  margin: 10px 0px !important; }
   .form-personal-info label {
     margin-top: 9px;
     color: #6b6b6b;
     font-family: "Univers Condensed Light", "Helvetica Neue", Helvetica, Arial, sans-serif; }
 
 .billing-header {
-  margin: 25px 0 30px;
+  margin: 18px 0 16px 15px;
   font-weight: bold;
   display: block; }
 
