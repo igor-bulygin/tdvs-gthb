@@ -289,7 +289,7 @@ ul {
   margin-top: 20px; }
 
 .mt-30 {
-  margin-top: 30px; }
+  margin-top: 30px !important; }
 
 .mt-40 {
   margin-top: 40px; }
@@ -4582,14 +4582,14 @@ input:checked + .slider:before {
   float: left; }
 
 .form-personal-info {
-  margin: 20px 10px; }
+  margin: 10px 0px !important; }
   .form-personal-info label {
     margin-top: 9px;
     color: #6b6b6b;
     font-family: "Univers Condensed Light", "Helvetica Neue", Helvetica, Arial, sans-serif; }
 
 .billing-header {
-  margin: 25px 0 30px;
+  margin: 18px 0 16px 15px;
   font-weight: bold;
   display: block; }
 
