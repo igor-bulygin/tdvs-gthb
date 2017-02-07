@@ -306,9 +306,8 @@ $videos = $product->getVideos();
                                         <?php foreach ($product->mediaMapping->descriptionPhotosInfo as $descriptionPhoto) { ?>
                                         <div class="col-md-3 work-profile-description-tb">
                                             <img src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getUrlImagesLocation().$descriptionPhoto->name)->resize(480, 0)?>">
-                                            <span class="tb-title"><?= Utils::l($descriptionPhoto->title)?></span>
-
-                                            <span class="tb-description"><?= Utils::l($descriptionPhoto->description)?></span>
+                                            <span class="tb-title"><?= $descriptionPhoto->title?></span>
+                                            <span class="tb-description"><?= $descriptionPhoto->description?></span>
                                         </div>
                                         <?php } ?>
                                     </div>
