@@ -331,12 +331,8 @@ class CartController extends AppPublicController
 
 			}
 
-			$payment_info = [
-				'token' => $currentPaymentInfo,
-				'charges' => json_encode($charges),
-			];
-			$order->setAttribute('payment_info', $payment_info);
-
+			$order->setAttribute('payment_info', $currentPaymentInfo);
+			$order->setAttribute('charges', json_encode($charges));
 			$order->order_state = Order::ORDER_STATE_PAID;
 			$order->save();
 

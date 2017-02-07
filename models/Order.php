@@ -14,6 +14,7 @@ use yii\mongodb\ActiveQuery;
  * @property string client_id
  * @property array client_info
  * @property array payment_info
+ * @property array charges
  * @property array products
  * @property double subtotal
  * @property MongoDate created_at
@@ -55,6 +56,7 @@ class Order extends CActiveRecord {
 			'client_id',
 			'client_info',
 			'payment_info',
+			'charges',
 			'products',
 			'subtotal',
 			'created_at',
@@ -151,6 +153,7 @@ class Order extends CActiveRecord {
 					'client_id',
 					'client_info',
 					'payment_info',
+//					'charges',
 					'products' => 'productsInfo',
 					'subtotal',
                 ];
@@ -426,6 +429,20 @@ class Order extends CActiveRecord {
 		}
 
 		return $email;
+	}
+
+	/**
+	 * Returns the payment method of the order (if exists)
+	 *
+	 * @return string
+	 */
+	public function getPaymentMethod()
+	{
+		if (!empty($this->payment_info) && isset($this->payment_info['card'])) {
+			return $this->payment_info['card']['brand'] . ' **** ' . $this->payment_info['card']['last4'];
+		}
+
+		return '';
 	}
 
 }
