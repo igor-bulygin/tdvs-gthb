@@ -3,7 +3,6 @@ namespace app\validators;
 
 use app\models\Product2;
 use app\models\Tag;
-use Yii;
 use yii\validators\Validator;
 
 class PriceStockValidator extends Validator
@@ -30,7 +29,7 @@ class PriceStockValidator extends Validator
 				foreach ($item['options'] as $optionId => $values) {
 					$optionId = (string) $optionId; // force cast to string (short_id are allways strings)
 					if (in_array($optionId, $noOptionIdOptions)) {
-						// nothing to do here??
+						// TODO: nothing to do here??
 						continue;
 					}
 					$tag = Tag::findOne(["short_id" => $optionId]);

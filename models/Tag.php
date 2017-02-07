@@ -470,4 +470,13 @@ class Tag extends CActiveRecord
 
 		return $option_find;
 	}
+
+	/**
+	 * Returns TRUE if the Tag is a "rare tag" (tags inserted by a migration that, at the moment, it is no clear what is for)
+	 * @return bool
+	 */
+	public function isRareTag() {
+		$short_ids = [10000, 20000, 30000, 40000, 50000, 60000];
+		return in_array($this->short_id, $short_ids);
+	}
 }
