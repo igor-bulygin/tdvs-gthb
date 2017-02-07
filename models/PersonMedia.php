@@ -31,6 +31,11 @@ class PersonMedia extends EmbedModel
 		return "media";
 	}
 
+	public function init() {
+		$this->photos = [];
+		$this->videos_links = [];
+	}
+
 	/**
 	 * Assign some default attributes for historical objects
 	 *
