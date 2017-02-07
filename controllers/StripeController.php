@@ -51,24 +51,6 @@ class StripeController extends CController
 			// Redirect w/ code
 			$code = $_GET['code'];
 
-			$token_request_body = [
-				'grant_type' => 'authorization_code',
-				'client_id' => Yii::$app->params['stripe_client_id'],
-				'code' => $code,
-				'client_secret' => Yii::$app->params['stripe_secret_key'],
-			];
-
-			$req = curl_init('https://connect.stripe.com/oauth/token');
-			curl_setopt($req, CURLOPT_RETURNTRANSFER, true);
-			curl_setopt($req, CURLOPT_POST, true);
-			curl_setopt($req, CURLOPT_POSTFIELDS, http_build_query($token_request_body));
-
-			// TODO: Additional error handling
-			$respCode = curl_getinfo($req, CURLINFO_HTTP_CODE);
-			$resp = json_decode(curl_exec($req), true);
-			curl_close($req);
-
-
 			if ($person->settingsMapping->stripeInfoMapping->access_token) {
 				// Disconnect previous account connected
 				$apiKey = \Yii::$app->params['stripe_secret_key'];
@@ -89,6 +71,23 @@ class StripeController extends CController
 				$resp = curl_exec($curl);
 				curl_close($curl);
 			}
+
+			$token_request_body = [
+				'grant_type' => 'authorization_code',
+				'client_id' => Yii::$app->params['stripe_client_id'],
+				'code' => $code,
+				'client_secret' => Yii::$app->params['stripe_secret_key'],
+			];
+
+			$req = curl_init('https://connect.stripe.com/oauth/token');
+			curl_setopt($req, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($req, CURLOPT_POST, true);
+			curl_setopt($req, CURLOPT_POSTFIELDS, http_build_query($token_request_body));
+
+			// TODO: Additional error handling
+			$respCode = curl_getinfo($req, CURLINFO_HTTP_CODE);
+			$resp = json_decode(curl_exec($req), true);
+			curl_close($req);
 
 			// Save current connect info
 			$person->settingsMapping->stripe_info = $resp;

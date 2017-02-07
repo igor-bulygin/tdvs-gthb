@@ -19,12 +19,13 @@ class ApiAsset extends AssetBundle {
 		'js/api/locationDataService.js',
 		'js/api/tagDataService.js',
 		'js/api/metricDataService.js',
-		'js/api/cartDataService.js'
+		'js/api/cartDataService.js',
+		'js/api/orderDataService.js',
 	];
 	public $depends = [
 		'app\assets\AppAsset',
 		'app\assets\libs\angularAsset',
 		'app\assets\libs\angularResourceAsset',
-		'app\assets\libs\utilAsset'
+		'app\assets\libs\utilAsset',
 	];
 }

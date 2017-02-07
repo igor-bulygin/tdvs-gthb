@@ -25,24 +25,24 @@ $this->title = 'Todevise / Your purchase is complete';
 			<table class="table table-condensed">
 				<tr>
 					<td>Order id</td>
-					<td ng-bind="orderSuccessCtrl.cart.id"></td>
+					<td ng-bind="orderSuccessCtrl.order.id"></td>
 				</tr>
 				<tr>
 					<td>Payment method</td>
-					<td ng-bind="orderSuccessCtrl.cart.payment_info.card.brand + ' **** ' + orderSuccessCtrl.cart.payment_info.card.last4"></td>
+					<td ng-bind="orderSuccessCtrl.order.payment_info.card.brand + ' **** ' + orderSuccessCtrl.order.payment_info.card.last4"></td>
 				</tr>
 				<tr>
 					<td>Phone</td>
-					<td ng-bind="orderSuccessCtrl.cart.client_info.phone1.prefix + ' ' + orderSuccessCtrl.cart.client_info.phone1.number"></td>
+					<td ng-bind="orderSuccessCtrl.order.client_info.phone1.prefix + ' ' + orderSuccessCtrl.order.client_info.phone1.number"></td>
 				</tr>
 				<tr>
 					<td>Email</td>
-					<td ng-bind="orderSuccessCtrl.cart.client_info.email"></td>
+					<td ng-bind="orderSuccessCtrl.order.client_info.email"></td>
 				</tr>
 			</table>
 		</div>
 		<div class="col-md-6 col-md-offset-2">
-			<cart-summary state="orderSuccessCtrl.state" cart="orderSuccessCtrl.cart" devisers="orderSuccessCtrl.devisers"></cart-summary>
+			<cart-summary state="orderSuccessCtrl.state" cart="orderSuccessCtrl.order" devisers="orderSuccessCtrl.devisers"></cart-summary>
 		</div>
 	</div>
 </div>

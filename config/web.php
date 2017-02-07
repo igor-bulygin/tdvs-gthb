@@ -311,6 +311,9 @@ $config = [
 				'POST api3/pub/v1/cart/<cartId:[^/.]*?>/clientInfo' => 'api3/pub/v1/cart/client-info',
 				'POST api3/pub/v1/cart/<cartId:[^/.]*?>/receiveToken' => 'api3/pub/v1/cart/receive-token',
 
+				// ORDER
+				'GET api3/pub/v1/order/<orderId:[^/.]*?>' => 'api3/pub/v1/order/view',
+
 				// API routing (private)
 				'GET api3/priv/v1/profile/deviser' => 'api3/priv/v1/deviser/view',
 				'PATCH api3/priv/v1/profile/deviser' => 'api3/priv/v1/deviser/update',
