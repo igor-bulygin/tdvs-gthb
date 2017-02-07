@@ -46,7 +46,6 @@ class StripeController extends CController
 			throw new NotFoundHttpException();
 		}
 
-
 		if (isset($_GET['code'])) {
 
 			// Redirect w/ code
@@ -69,6 +68,29 @@ class StripeController extends CController
 			$resp = json_decode(curl_exec($req), true);
 			curl_close($req);
 
+
+			if ($person->settingsMapping->stripeInfoMapping->access_token) {
+				// Disconnect previous account connected
+				$apiKey = \Yii::$app->params['stripe_secret_key'];
+				$clientId = \Yii::$app->params['stripe_client_id'];
+				$stripeUserId = $person->settingsMapping->stripeInfoMapping->stripe_user_id;
+
+				$curl = curl_init();
+				curl_setopt_array($curl, [
+					CURLOPT_RETURNTRANSFER => 1,
+					CURLOPT_URL => 'https://connect.stripe.com/oauth/deauthorize',
+					CURLOPT_POST => 1,
+					CURLOPT_USERPWD => $apiKey . ':',
+					CURLOPT_POSTFIELDS => http_build_query([
+						'client_id' => $clientId,
+						'stripe_user_id' => $stripeUserId,
+					])
+				]);
+				$resp = curl_exec($curl);
+				curl_close($curl);
+			}
+
+			// Save current connect info
 			$person->settingsMapping->stripe_info = $resp;
 			$person->save();
 
@@ -170,6 +192,47 @@ class StripeController extends CController
 
 		} else {
 			$message = 'Order ' . $order_id . ' not found';
+		}
+
+		echo $message;
+	}
+
+	public function actionTestTransfer()
+	{
+
+		Stripe::setApiKey(Yii::$app->params['stripe_secret_key']);
+
+		$deviser = Person::findOneSerialized('51fb4b9');
+		/* @var Order $order */
+		if ($deviser) {
+
+			try {
+
+				$result = \Stripe\Balance::retrieve();
+				echo '<pre>'.$result.'</pre>';
+
+				$result = \Stripe\Transfer::create(array(
+					'amount' => 100,
+					'currency' => "eur",
+					'destination' => $deviser->settingsMapping->stripeInfoMapping->stripe_user_id,
+					'description' => 'Transfer 1000€ from todevise to test account',
+				));
+
+				echo '<pre>'.$result.'</pre>';
+
+				var_dump($result);
+
+				$message = 'Transfer completed';
+
+			} catch (\Exception $e) {
+
+				$message = 'Error processing your charge: ' . $e->getMessage();
+
+			}
+
+
+		} else {
+			$message = 'Deviser not found';
 		}
 
 		echo $message;

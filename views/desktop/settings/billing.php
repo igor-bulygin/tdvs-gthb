@@ -47,6 +47,7 @@ $this->params['settings_menu_active_option'] = 'billing';
 					</div>
 				</form>
 			</div>
+            <?php /*
 			<div uib-accordion-group class="panel-default panel-billing" heading="Bank Information" is-disabled="true" ng-cloak>
 				<form name="billingCtrl.bankInformationForm" class="form-horizontal">
 					<div class="form-group">
@@ -66,12 +67,18 @@ $this->params['settings_menu_active_option'] = 'billing';
 					<other-bank-information bank-information="billingCtrl.bank_information" errors="billingCtrl.errors" ng-if="billingCtrl.bank_information.location === 'OTHER'"></other-bank-information>
 				</form>
             </div>
-            <div uib-accordion-group class="panel-default panel-billing" heading="Stripe account" is-open="true" ng-cloak>
-                <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat soluta maxime incidunt similique quo fuga eum neque sunt, voluptatibus! Corrupti rerum voluptate sunt, officia fugit, iste velit aliquam animi itaque.</div>
+            */ ?>
+            <div uib-accordion-group class="panel-default panel-billing" heading="Connect with your stripe account" is-open="true" ng-cloak>
                 <?php if (empty($person->settingsMapping->stripeInfoMapping->access_token)) { ?>
-                    <a class="btn btn-green" href="<?=Url::to(['settings/connect-stripe', 'slug' => $person->slug, 'person_id' => $person->short_id])?>">Connect my stripe account</a>
+                    <div>All the payments on Todevise are made through Stripe, a payment processing platform. We use Stripe because it is very secure, fast and easy to use. The Stripe commission is 1,40% + 0,25€ for each transaction. The money will be transfered to your Stripe account immediately after each purchase. <br /<br/To start selling on Todevise, you must open a Stripe account (it’s 100% free) and connect it to your Todevise profile. To do so, press the button below. When you finish creating your Stripe account, you will be redirected back to this page.</div>
+                    <div class="col-md-12 text-center">
+                        <a class="btn btn-default btn-green" href="<?=Url::to(['settings/connect-stripe', 'slug' => $person->slug, 'person_id' => $person->short_id])?>">Connect with stripe</a>
+                    </div>
                 <?php } else { ?>
-                    <a class="btn btn-green" href="<?=Url::to(['settings/disconnect-stripe', 'slug' => $person->slug, 'person_id' => $person->short_id])?>">Disconnect my stripe account</a>
+                    <div>Your Todevise profile and Stripe account are now linked. Do you want to connect your profile to a different Stripe account? Press the button below.</div>
+                    <div class="col-md-12 text-center">
+                        <a class="btn btn-default btn-green" href="<?=Url::to(['settings/connect-stripe', 'slug' => $person->slug, 'person_id' => $person->short_id])?>">Connect with a different stripe account</a>
+                    </div>
                 <?php } ?>
             </div>
 			<div uib-accordion-group class="panel-default panel-billing" heading="Payments" is-disabled="true" ng-cloak>
