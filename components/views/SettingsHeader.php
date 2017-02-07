@@ -20,7 +20,7 @@ $activeOption = array_key_exists('settings_menu_active_option', $this->params) ?
 		<div class="container">
 			<img class="avatar" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getAvatarImage())->resize(50, 50) ?>">
 			<span class="deviser-name"><?=$person->personalInfoMapping->getBrandName()?></span>
-			<button class="btn btn-green pull-right" ng-click="settingsHeaderCtrl.saveChanges()">Save changes</button>
+			<?php /*<button class="btn btn-green pull-right" ng-click="settingsHeaderCtrl.saveChanges()">Save changes</button>*/ ?>
 		</div>
 	</div>
 	<ul class="nav nav-tabs header-settings-tabs">
