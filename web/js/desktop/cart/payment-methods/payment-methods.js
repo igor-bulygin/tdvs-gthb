@@ -72,7 +72,7 @@
 		function checkout() {
 			console.log('checkout!');
 			vm.handler.open({
-				name: 'Todevise',
+				name: '',
 				description: 'Order Nº '+vm.cart.id,
 				zipCode: true,
 				locale: 'auto',
