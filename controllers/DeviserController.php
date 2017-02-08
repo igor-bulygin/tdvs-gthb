@@ -13,6 +13,7 @@ use app\models\Tag;
 use Yii;
 use yii\filters\AccessControl;
 use yii\helpers\Json;
+use yii\helpers\Url;
 use yii\mongodb\Collection;
 use yii\web\NotFoundHttpException;
 use yii\web\UnauthorizedHttpException;
@@ -393,6 +394,14 @@ class DeviserController extends CController
 			throw new NotFoundHttpException();
 		}
 
+		if ($deviser->account_state != Person::ACCOUNT_STATE_ACTIVE) {
+			if ($deviser->isDeviserEditable()) {
+				$this->redirect(Url::to(['deviser/about-edit', 'deviser_id' => $deviser_id, 'slug' => $slug]));
+			} else {
+				throw new NotFoundHttpException();
+			}
+		}
+
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("about-view", [
 			'deviser' => $deviser,
@@ -423,6 +432,14 @@ class DeviserController extends CController
 
 		if (!$deviser) {
 			throw new NotFoundHttpException();
+		}
+
+		if ($deviser->account_state != Person::ACCOUNT_STATE_ACTIVE) {
+			if ($deviser->isDeviserEditable()) {
+				$this->redirect(Url::to(['deviser/about-edit', 'deviser_id' => $deviser_id, 'slug' => $slug]));
+			} else {
+				throw new NotFoundHttpException();
+			}
 		}
 
 		$this->layout = '/desktop/public-2.php';
@@ -459,6 +476,14 @@ class DeviserController extends CController
 			throw new NotFoundHttpException();
 		}
 
+		if ($deviser->account_state != Person::ACCOUNT_STATE_ACTIVE) {
+			if ($deviser->isDeviserEditable()) {
+				$this->redirect(Url::to(['deviser/about-edit', 'deviser_id' => $deviser_id, 'slug' => $slug]));
+			} else {
+				throw new NotFoundHttpException();
+			}
+		}
+
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("videos-view", [
 			'deviser' => $deviser,
@@ -491,6 +516,14 @@ class DeviserController extends CController
 
 		if (!$deviser) {
 			throw new NotFoundHttpException();
+		}
+
+		if ($deviser->account_state != Person::ACCOUNT_STATE_ACTIVE) {
+			if ($deviser->isDeviserEditable()) {
+				$this->redirect(Url::to(['deviser/about-edit', 'deviser_id' => $deviser_id, 'slug' => $slug]));
+			} else {
+				throw new NotFoundHttpException();
+			}
 		}
 
 		$this->layout = '/desktop/public-2.php';
