@@ -126,7 +126,6 @@ class Product2 extends Product {
 
 		// initialize attributes
 		$this->categories = [];
-		$this->faq = [];
 		$this->collections = [];
 		$this->name = [];
 		$this->slug = [];
@@ -145,6 +144,8 @@ class Product2 extends Product {
 		$this->tags = [];
 		$this->references = [];
 		$this->position = 0;
+
+		$this->faq = [];
 	}
 
 	public function embedMediaMapping()
