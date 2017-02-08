@@ -7,6 +7,8 @@
 			state: 4
 		};
 
+		init();
+
 		function init() {
 			getOrder();
 		}
@@ -17,18 +19,16 @@
             orderDataService.Order.get({
 				id: order_id
 			}).$promise.then(function (orderData) {
-				vm.order = angular.copy(orderData);
+			vm.order = angular.copy(orderData);
 				cartService.parseTags(vm.order);
 				vm.devisers = cartService.parseDevisersFromProducts(vm.order);
-				console.log(orderData);
-			}, function(err) {
+			}, function (err) {
 				console.log(err);
-			})
+			});
 		}
-
-		init();
 	}
+ 
+ 	angular.module('todevise')
+ 		.controller('orderSuccessCtrl', controller);
 
-	angular.module('todevise')
-		.controller('orderSuccessCtrl', controller);
 }());

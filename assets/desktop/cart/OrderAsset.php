@@ -8,7 +8,7 @@ class OrderAsset extends AssetBundle {
 	public $baseUrl = '@web';
 	public $css = [];
 	public $js = [
-		'js/desktop/cart/success.js',
+		'js/desktop/order/success.js',
 		'js/desktop/cart/summary/summary.js',
 	];
 	public $depends = [
