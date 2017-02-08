@@ -3,7 +3,6 @@
 namespace app\modules\api\priv\v1\controllers;
 
 use app\models\Person;
-use Exception;
 use Yii;
 use yii\web\BadRequestHttpException;
 
@@ -24,21 +23,17 @@ class DeviserController extends AppPrivateController
 		/** @var Person $deviser */
 		$deviser = $this->getPerson();
 
-		try {
-			$newAccountState = Yii::$app->request->post('account_state');
-			$this->checkDeviserAccountState($deviser, $newAccountState); // check for allowed new account state only
+		$newAccountState = Yii::$app->request->post('account_state');
+		$this->checkDeviserAccountState($deviser, $newAccountState); // check for allowed new account state only
 
-			$deviser->setScenario($this->getDetermineScenario($deviser)); // safe and required attributes are related with scenario
-			if ($deviser->load(Yii::$app->request->post(), '') && $deviser->save()) {
+		$deviser->setScenario($this->getDetermineScenario($deviser)); // safe and required attributes are related with scenario
+		if ($deviser->load(Yii::$app->request->post(), '') && $deviser->save()) {
 
-				Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
-				return $deviser;
-			} else {
-				Yii::$app->response->setStatusCode(400); // Bad Request
-				return ["errors" => $deviser->errors];
-			}
-		} catch (Exception $e) {
-			throw new BadRequestHttpException($e->getMessage());
+			Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
+			return $deviser;
+		} else {
+			Yii::$app->response->setStatusCode(400); // Bad Request
+			return ["errors" => $deviser->errors];
 		}
 
 	}

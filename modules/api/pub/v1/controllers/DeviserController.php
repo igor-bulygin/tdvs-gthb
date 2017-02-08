@@ -11,6 +11,7 @@ use app\modules\api\pub\v1\forms\BecomeDeviserForm;
 use MongoDate;
 use Yii;
 use yii\web\BadRequestHttpException;
+use yii\web\NotFoundHttpException;
 
 class DeviserController extends AppPublicController
 {
@@ -30,7 +31,7 @@ class DeviserController extends AppPublicController
 		$invitation = Invitation::findOneSerialized($invitation_id);
 
 		if (!$invitation) {
-			throw new BadRequestHttpException(Yii::t("app/api", "Invitation not found"));
+			throw new NotFoundHttpException(Yii::t("app/api", "Invitation not found"));
 		}
 
 		if (!$invitation->canUse()) {
