@@ -6,7 +6,6 @@
 		vm.has_error = UtilService.has_error;
 		vm.editPersonalInfo = editPersonalInfo;
 		vm.checkout = checkout;
-		vm.stripejs = stripejs;
 		vm.cvvPattern = new RegExp("[0-9]{3}", "g");
 		var datetime = $locale.DATETIME_FORMATS;
 
@@ -77,7 +76,7 @@
 				zipCode: true,
 				locale: 'auto',
 				currency: 'eur',
-				image: '/imgs/logo.png',
+				image: '/imgs/logo_stripe.png',
 				amount: vm.cart.subtotal*100
 			});
 		}
