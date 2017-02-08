@@ -18,8 +18,8 @@ $activeOption = array_key_exists('settings_menu_active_option', $this->params) ?
 <div ng-controller="settingsHeaderCtrl as settingsHeaderCtrl">
 	<div class="upper-setting-header">
 		<div class="container">
-			<img class="avatar" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getAvatarImage())->resize(50, 50) ?>">
-			<span class="deviser-name"><?=$person->personalInfoMapping->getBrandName()?></span>
+			<a href="<?=Url::to(['deviser/about', 'deviser_id' => $person->short_id, 'slug' => $person->slug])?>"><img class="avatar" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getAvatarImage())->resize(50, 50) ?>"></a>
+			<a href="<?=Url::to(['deviser/about', 'deviser_id' => $person->short_id, 'slug' => $person->slug])?>"><span class="deviser-name"><?=$person->personalInfoMapping->getBrandName()?></span></a>
 			<?php /*<button class="btn btn-green pull-right" ng-click="settingsHeaderCtrl.saveChanges()">Save changes</button>*/ ?>
 		</div>
 	</div>
