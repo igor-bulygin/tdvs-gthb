@@ -99,7 +99,7 @@ $config = [
 			'targets' => [
 				[
 					'class' => 'yii\log\FileTarget',
-					'levels' => ['error', 'warning']
+					'levels' => YII_DEBUG ? ['error', 'warning', 'info'] : ['error', 'warning']
 				]
 			]
 		],
@@ -195,11 +195,8 @@ $config = [
 				//Orders
 				'order/success/<order_id:\w{8}>' => 'order/success',
 
-				//Stripe testing
-				'stripe/connect-button' => 'stripe/connect-button',
+				//Stripe
 				'stripe/connect-back' => 'stripe/connect-back',
-				'stripe/checkout-test/<order_id:\w{8}>' => 'stripe/checkout-test',
-				'stripe/receive-payment/<order_id:\w{8}>' => 'stripe/receive-payment',
 
 				//Links for contact
 				'login' => 'site/login',

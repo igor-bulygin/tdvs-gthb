@@ -3,11 +3,11 @@ namespace app\controllers;
 
 use app\helpers\CAccessRule;
 use app\helpers\CController;
+use app\helpers\StripeHelper;
 use app\models\Person;
-use app\models\PersonStripeInfo;
 use yii\filters\AccessControl;
-use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
+use yii\web\UnauthorizedHttpException;
 
 class SettingsController extends CController
 {
@@ -40,8 +40,12 @@ class SettingsController extends CController
 		// get the category object
 		$person = Person::findOneSerialized($person_id);
 
-		if (!$person->isDeviser() || !$person->isDeviserEditable()) {
+		if (!$person->isDeviser()) {
 			throw new NotFoundHttpException();
+		}
+
+		if (!$person->isDeviserEditable()) {
+			throw new UnauthorizedHttpException();
 		}
 
 		$this->layout = '/desktop/public-2.php';
@@ -56,22 +60,31 @@ class SettingsController extends CController
 		// get the category object
 		$person = Person::findOneSerialized($person_id);
 
-		if (!$person->isDeviser() || !$person->isDeviserEditable()) {
+		if (!$person->isDeviser()) {
 			throw new NotFoundHttpException();
+		}
+
+		if (!$person->isDeviserEditable()) {
+			throw new UnauthorizedHttpException();
 		}
 
 		\Yii::$app->session->set('person_id_stripe_connection', $person->short_id);
 
-		$this->redirect('https://connect.stripe.com/oauth/authorize?response_type=code&client_id='.\Yii::$app->params['stripe_client_id'].'&scope=read_write');
+		$this->redirect(StripeHelper::getAuthorizeUrl());
 	}
 
+	/*
 	public function actionDisconnectStripe($slug, $person_id) {
 
 		// get the category object
 		$person = Person::findOneSerialized($person_id);
 
-		if (!$person->isDeviser() || !$person->isDeviserEditable()) {
+		if (!$person->isDeviser()) {
 			throw new NotFoundHttpException();
+		}
+
+		if (!$person->isDeviserEditable()) {
+			throw new UnauthorizedHttpException();
 		}
 
 		$apiKey = \Yii::$app->params['stripe_secret_key'];
@@ -98,4 +111,5 @@ class SettingsController extends CController
 		$this->redirect(Url::to(['settings/billing', 'slug' => $person->slug, 'person_id' => $person->short_id]));
 
 	}
+	*/
 }

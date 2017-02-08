@@ -9,18 +9,6 @@ use yii\web\NotFoundHttpException;
 
 class OrderController extends CController
 {
-	/**
-	 * @inheritdoc
-	 */
-	public function beforeAction($action)
-	{
-		if ($action->id == 'receive-payment') {
-			$this->enableCsrfValidation = false;
-		}
-
-		return parent::beforeAction($action);
-	}
-
 	public function actionSuccess($order_id)
 	{
 		$order = Order::findOneSerialized($order_id);
