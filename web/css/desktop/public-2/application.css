@@ -1035,9 +1035,9 @@ input[type="radio"] .styled:checked + label::after {
   -webkit-border-radius: 180px 180px 180px 180px !important;
   -moz-border-radius: 180px 180px 180px 180px !important; }
 
-.log a, .add-lang, .request-invitation-wrapper .request-invitation-container .add-new, .red-text {
+.link-red, .log a, .add-lang, .request-invitation-wrapper .request-invitation-container .add-new, .red-text {
   color: #F7284B !important; }
-  .log a:hover, .add-lang:hover, .request-invitation-wrapper .request-invitation-container .add-new:hover, .red-text:hover {
+  .link-red:hover, .log a:hover, .add-lang:hover, .request-invitation-wrapper .request-invitation-container .add-new:hover, .red-text:hover {
     color: #C91C39 !important;
     text-decoration: none;
     -moz-transition-property: color;
@@ -4632,6 +4632,9 @@ input:checked + .slider:before {
   float: left;
   width: 100%;
   margin: 15px 0; }
+
+.summary-side {
+  background-color: #e9e9e9; }
 
 .upper-setting-header {
   height: 76px;
