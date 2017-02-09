@@ -2,23 +2,22 @@
 
 namespace app\controllers;
 
-use app\models\Invitation;
-use app\models\PostmanEmail;
-use Yii;
-use app\models\Tag;
-use yii\helpers\Json;
-use app\helpers\Utils;
-use app\models\Person;
-use app\models\Country;
-use app\models\Product;
-use app\models\Category;
-use app\models\SizeChart;
-use app\models\MetricType;
-use yii\filters\VerbFilter;
 use app\helpers\CAccessRule;
 use app\helpers\CController;
-use yii\filters\AccessControl;
+use app\helpers\Utils;
+use app\models\Category;
+use app\models\Country;
+use app\models\Invitation;
+use app\models\MetricType;
+use app\models\Person;
+use app\models\PostmanEmail;
+use app\models\Product;
+use app\models\SizeChart;
+use app\models\Tag;
+use Yii;
 use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 
 class AdminController extends CController {
 	public $defaultAction = "index";
@@ -65,7 +64,7 @@ class AdminController extends CController {
 		$devisers = new ActiveDataProvider([
 			'query' => Person::find()->select(["_id" => 0])->where($filters),
 			'pagination' => [
-				'pageSize' => 15,
+				'pageSize' => 100,
 			],
 		]);
 
@@ -93,7 +92,7 @@ class AdminController extends CController {
 		$admins = new ActiveDataProvider([
 			'query' => Person::find()->select(["_id" => 0])->where($filters),
 			'pagination' => [
-				'pageSize' => 15,
+				'pageSize' => 100,
 			],
 		]);
 
@@ -111,7 +110,7 @@ class AdminController extends CController {
 		$invitations = new ActiveDataProvider([
 			'query' => Invitation::find()->orderBy(["created_at" => SORT_DESC]),
 			'pagination' => [
-				'pageSize' => 15,
+				'pageSize' => 100,
 			],
 		]);
 
@@ -127,7 +126,7 @@ class AdminController extends CController {
 		$emails = new ActiveDataProvider([
 			'query' => PostmanEmail::find()->orderBy(["created_at" => SORT_DESC]),
 			'pagination' => [
-				'pageSize' => 50,
+				'pageSize' => 100,
 			],
 		]);
 
@@ -144,7 +143,7 @@ class AdminController extends CController {
 		$tags = new ActiveDataProvider([
 			'query' => Tag::find()->select(["_id" => 0])->where($filters),
 			'pagination' => [
-				'pageSize' => 15,
+				'pageSize' => 100,
 			],
 		]);
 
@@ -175,7 +174,7 @@ class AdminController extends CController {
 		$sizecharts = new ActiveDataProvider([
 			'query' => SizeChart::find()->select(["_id" => 0])->where($filters),
 			'pagination' => [
-				'pageSize' => 15,
+				'pageSize' => 100,
 			],
 		]);
 
@@ -272,7 +271,7 @@ class AdminController extends CController {
 		$products = new ActiveDataProvider([
 			'query' => Product::find()->select(["_id" => 0])->where(['deviser_id' => $deviser['short_id']]),
 			'pagination' => [
-				'pageSize' => 15,
+				'pageSize' => 100,
 			],
 		]);
 

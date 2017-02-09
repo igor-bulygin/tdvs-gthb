@@ -1,11 +1,11 @@
 <?php
-use yii\web\View;
-use yii\helpers\Url;
+use app\assets\desktop\admin\ProductsAsset;
+use app\helpers\Utils;
+use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Json;
-use yii\grid\GridView;
-use app\helpers\Utils;
-use app\assets\desktop\admin\ProductsAsset;
+use yii\helpers\Url;
+use yii\web\View;
 
 $this->params['breadcrumbs'][] = [
 	'label' => 'Products',
@@ -48,10 +48,16 @@ $this->title = 'Todevise / Admin / Products';
 				'columns' => [
 					[
 						'class' => 'yii\grid\ActionColumn',
-						'template' => "{view} {delete}",
+						'template' => "{view} {edit} {delete}",
 						'buttons' => [
+
 							'view' => function($url, $model, $key) use ($deviser) {
-								$url = Url::to(["deviser/edit-work", "slug" => $deviser['slug'], "short_id" => $model['short_id']]);
+								$url = Url::to(["product/detail", "slug" => Utils::l($model->slug), "product_id" => $model->short_id]);
+								return Html::a('<span class="glyphicon glyphicon-eye-open fc-fff fs1"></span>', $url);
+							},
+
+							'edit' => function($url, $model, $key) use ($deviser) {
+								$url = Url::to(["product/edit", "slug" => $deviser['slug'], "deviser_id"=> $deviser['short_id'], "product_id" => $model['short_id']]);
 								return Html::a('<span class="glyphicon glyphicon-edit fc-fff fs1"></span>', $url);
 							},
 
