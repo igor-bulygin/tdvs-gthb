@@ -278,6 +278,16 @@ class Person extends CActiveRecord implements IdentityInterface
 		return parent::beforeSave($insert);
 	}
 
+	public function beforeDelete() {
+		if ($this->isDeviser()) {
+			$products = Product2::findSerialized(["deviser_id" => $this->id]); /* @var Product2[] $products */
+			foreach ($products as $product) {
+				$product->delete();
+			}
+		}
+		return parent::beforeDelete();
+	}
+
 	public function setPassword($password)
 	{
 		$salt = bin2hex(openssl_random_pseudo_bytes(32));
