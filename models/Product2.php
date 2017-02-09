@@ -217,6 +217,12 @@ class Product2 extends Product {
 		return parent::beforeSave($insert);
 	}
 
+	public function beforeDelete() {
+		$this->deletePhotos();
+
+		return parent::beforeDelete();
+	}
+
 	public function behaviors()
 	{
 		return array_merge(
