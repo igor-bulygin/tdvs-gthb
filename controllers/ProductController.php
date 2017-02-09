@@ -316,4 +316,21 @@ class ProductController extends CController
 		Yii::$app->response->setStatusCode(200); // Success, without body
 	}
 
+	public function actionFixProductsWithNoDeviser()
+	{
+		ini_set('memory_limit', '2048M');
+		set_time_limit(-1);
+
+		Product2::setSerializeScenario(Product2::SERIALIZE_SCENARIO_OWNER);
+
+		/* @var Product2[] $products */
+		$products = Product2::findSerialized();
+		foreach ($products as $product) {
+			$deviser = Person::findOneSerialized($product->deviser_id);
+			if (empty($deviser) || empty($product->deviser_id)) {
+				$product->delete();
+			}
+		}
+	}
+
 }
