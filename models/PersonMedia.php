@@ -32,8 +32,12 @@ class PersonMedia extends EmbedModel
 	}
 
 	public function init() {
-		$this->photos = [];
-		$this->videos_links = [];
+		if (!is_array($this->photos)) {
+			$this->photos = [];
+		}
+		if (!is_array($this->videos_links)) {
+			$this->videos_links = [];
+		}
 	}
 
 	/**
