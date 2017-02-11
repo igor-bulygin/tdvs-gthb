@@ -182,4 +182,16 @@
 .summary-side{
 	background-color: $background_grey;
 }
+.serif{
+	font-family: $font-family--serif;
+}
+.label-personal{
+	color: $dark-grey;
+	min-width: 57px;
+    display: block;
+    float: left;
+}
+.payment-methods-wrapper{
+	font-family: $font-family--secondary;
+}
 
