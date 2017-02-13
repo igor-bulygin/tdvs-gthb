@@ -5,10 +5,10 @@
 		var vm = this;
 		vm.setLoved = setLoved;
 		vm.productId = $scope.productId;
-        vm.isLoved = $scope.isLoved ? true : false;
+        vm.isLoved = $scope.isLoved == 1 ? true : false;
 
 		function init() {
-            vm.isLoved = $scope.isLoved ? true : false;
+            vm.isLoved = $scope.isLoved == 1 ? true : false;
 		}
 
 		function setLoved() {
