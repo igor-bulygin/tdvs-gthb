@@ -57,6 +57,10 @@ $this->params['deviser_links_target'] = 'public_view';
                                                     <div image-hover-buttons>
                                                         <img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getMainImage())->resize(400, 0) ?>">
                                                     </div>
+                                                    <figcaption>
+                                                        <p class="instauser"><?= $product->name ?></p>
+                                                        <p class="price">€ <?= $product->getMinimumPrice() ?></p>
+                                                    </figcaption>
                                                 </figure>
                                             </div>
                                         </a>
