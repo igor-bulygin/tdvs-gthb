@@ -4682,6 +4682,38 @@ input:checked + .slider:before {
   margin: -25px 0 10px 0;
   font-family: "Univers Condensed Light", "Helvetica Neue", Helvetica, Arial, sans-serif; }
 
+.table-order-success {
+  border-top: 1px solid #9a9a9a;
+  border-bottom: 1px solid #9a9a9a; }
+  .table-order-success tbody tr td {
+    border: 0; }
+    .table-order-success tbody tr td.table-label {
+      color: #6b6b6b;
+      font-family: "Univers Condensed Light", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+    .table-order-success tbody tr td.table-item {
+      font-family: "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+
+.order-success-summary-wrapper {
+  border-top: 1px solid #9a9a9a;
+  border-bottom: 1px solid #9a9a9a;
+  width: 100%;
+  float: left;
+  margin: 0 0 150px; }
+  .order-success-summary-wrapper .deviser-name-item {
+    padding: 0 0 15px;
+    margin: 15px 0 0 0;
+    border-bottom: 1px solid #9a9a9a; }
+  .order-success-summary-wrapper .summary-white-item {
+    border-bottom: 1px solid #9a9a9a;
+    background-color: transparent;
+    padding: 15px 0 20px; }
+    .order-success-summary-wrapper .summary-white-item .img-checkout-wrapper {
+      width: 38px;
+      height: 38px;
+      margin: 0 15px; }
+    .order-success-summary-wrapper .summary-white-item .product-name {
+      font-family: "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+
 .upper-setting-header {
   height: 76px;
   background-color: #666;

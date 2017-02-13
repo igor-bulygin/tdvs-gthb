@@ -222,3 +222,46 @@
 	margin: -25px 0 10px 0;
 	font-family: $font-family--secondary;
 }
+.table-order-success{
+	border-top: 1px solid $dark_grey;
+	border-bottom: 1px solid $dark_grey;
+	tbody{
+		tr{
+			td{
+				border:0;
+				&.table-label{
+					color: $darker_grey;
+					font-family: $font-family--secondary;
+				}
+				&.table-item{
+					font-family: $font-family--bold;
+				}
+			}
+		}
+	}
+}
+.order-success-summary-wrapper{
+	border-top: 1px solid $dark_grey;
+	border-bottom: 1px solid $dark_grey;
+	width: 100%;
+    float: left;
+    margin: 0 0 150px;
+	.deviser-name-item{
+		padding: 0 0 15px;
+		margin: 15px 0 0 0;
+		border-bottom: 1px solid $dark_grey;
+	}
+	.summary-white-item{
+		border-bottom: 1px solid $dark_grey;
+		background-color: transparent;
+		padding: 15px 0 20px;
+		.img-checkout-wrapper{
+			width: 38px;
+			height: 38px;
+			margin: 0 15px;
+		}
+		.product-name{
+			font-family: $font-family--bold ;
+		}
+	}
+}
