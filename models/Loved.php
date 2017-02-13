@@ -155,6 +155,9 @@ class Loved extends CActiveRecord
 		if (!$product) {
 			$this->addError($attribute, sprintf('Product %s not found', $product_id));
 		}
+		if ($product->deviser_id == Yii::$app->user->identity->short_id) {
+			$this->addError($attribute, 'You cannot loved your own products');
+		}
 	}
 
 	/**
