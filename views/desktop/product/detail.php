@@ -219,13 +219,12 @@ $videos = $product->getVideos();
 							</div>
 						</div>-->
 						<div class="product-data no-border">
-							<!--<div class="row-size">
+							<div class="row-size">
 
 								<button type="button" class="btn btn-grey btn-hart pull-left">
 									<i class="ion-ios-heart"></i>
 									<span>Love work</span>
 								</button>
-
 
 								<button type="button" class="btn btn-grey btn-hart pull-right">
 									<i class="ion-ios-box"></i>
@@ -234,9 +233,9 @@ $videos = $product->getVideos();
 
 							</div>
 							<div class="row-size">
-								<span class="btn-tagline loved pull-left">Loved 342 times</span>
+								<span class="btn-tagline loved pull-left">Loved <?=$product->loveds?> times</span>
 								<span class="btn-tagline saved pull-right">Saved in 1500 boxes</span>
-							</div>-->
+							</div>
 							<div>
 								<ul class="social-items">
 									<li>
