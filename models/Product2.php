@@ -39,6 +39,7 @@ use yii2tech\ar\position\PositionBehavior;
  * @property array references
  * @property string $product_state
  * @property int position
+ * @property int loveds
  * @property array prints
  * @property MongoDate created_at
  * @property MongoDate updated_at
@@ -100,6 +101,7 @@ class Product2 extends Product {
 			'price_stock',
 			'tags',
 			'position',
+			'loveds',
 			'prints',
 			'created_at',
 			'updated_at',
@@ -209,6 +211,10 @@ class Product2 extends Product {
 			$this->product_state = Product2::PRODUCT_STATE_DRAFT;
 		}
 
+		if (empty($this->loveds)) {
+			$this->loveds = 0;
+		}
+
 		if (empty($this->created_at)) {
 			$this->created_at = new MongoDate();
 		}
@@ -289,6 +295,7 @@ class Product2 extends Product {
 					'price_stock',
 					'tags',
 					'position',
+					'loveds',
 					'prints',
 					'product_state',
 				],
@@ -394,6 +401,7 @@ class Product2 extends Product {
 					'options' => 'productOptions',
 					'url_images' => 'urlImagesLocation',
 					'position',
+					'loveds',
 					'prints',
 					'sizechart',
 					'price_stock',
@@ -433,6 +441,7 @@ class Product2 extends Product {
 					'sizechart',
 					'url_images' => 'urlImagesLocation',
 					'position',
+					'loveds',
 					'prints',
 					'price_stock',
 					'tags',

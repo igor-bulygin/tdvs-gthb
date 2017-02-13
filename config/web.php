@@ -327,6 +327,11 @@ $config = [
 				'PUT api3/priv/v1/products/<id:[^/.]*?>' => 'api3/priv/v1/product/update',
 				'DELETE api3/priv/v1/products/<id:[^/.]*?>' => 'api3/priv/v1/product/delete',
 
+				'GET api3/priv/v1/loved/<id:[^/.]*?>' => 'api3/priv/v1/loved/view',
+				'GET api3/priv/v1/loved' => 'api3/priv/v1/loved/index',
+				'POST api3/priv/v1/loved' => 'api3/priv/v1/loved/create',
+				'DELETE api3/priv/v1/loved/<id:[^/.]*?>' => 'api3/priv/v1/loved/delete',
+
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/priv/v1/upload'],
 
 				// API routing (admin)
