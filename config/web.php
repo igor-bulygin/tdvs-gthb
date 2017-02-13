@@ -331,7 +331,7 @@ $config = [
 				'GET api3/pub/v1/loved/<id:[^/.]*?>' => 'api3/pub/v1/loved/view',
 				'GET api3/pub/v1/loved' => 'api3/pub/v1/loved/index',
 				'POST api3/priv/v1/loved' => 'api3/priv/v1/loved/create',
-				'DELETE api3/priv/v1/loved/<id:[^/.]*?>' => 'api3/priv/v1/loved/delete',
+				'DELETE api3/priv/v1/loved/<product_id:[^/.]*?>' => 'api3/priv/v1/loved/delete',
 
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/priv/v1/upload'],
 

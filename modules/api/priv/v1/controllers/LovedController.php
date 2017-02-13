@@ -73,17 +73,19 @@ class LovedController extends AppPrivateController
 		}
 	}
 
-	public function actionDelete($id)
+	public function actionDelete($product_id)
 	{
 		/** @var Loved $loved */
-		$loved = Loved::findOneSerialized($id);
-		if (!$loved) {
+		$loveds = Loved::findSerialized([
+			'product_id' => $product_id,
+			'person_id' => Yii::$app->user->identity->short_id,
+		]);
+		if (!$loveds) {
 			throw new BadRequestHttpException('Loved not found');
 		}
-		if (!$loved->isEditable()) {
-			throw new UnauthorizedHttpException();
+		foreach ($loveds as $loved) {
+			$loved->delete();
 		}
-		$loved->delete();
 		Yii::$app->response->setStatusCode(204); // No content
 
 		return null;
