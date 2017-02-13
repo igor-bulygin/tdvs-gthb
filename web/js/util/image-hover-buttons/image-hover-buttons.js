@@ -1,13 +1,20 @@
 (function () {
 	"use strict";
 
-	function controller($scope) {
+	function controller($scope, lovedDataService) {
 		var vm = this;
 		vm.setLoved = setLoved;
-		console.log($scope.productId);
+		vm.productId = $scope.productId;
 
 		function setLoved() {
-			//call to API with $scope.productId
+			var loved = new lovedDataService.LovedPriv;
+			loved.product_id = vm.productId;
+			loved.$save()
+				.then(function (dataSaved) {
+					console.log(dataSaved)
+				}, function (err) {
+					console.log(err);
+				});
 		}
 		
 	}
