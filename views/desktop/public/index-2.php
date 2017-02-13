@@ -186,37 +186,45 @@ $this->title = 'Todevise / Home';
 			<?php foreach ($moreWork as $worksGroup) { ?>
 			<?php foreach ($worksGroup["twelve"] as $i => $work) { ?>
 			<div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
-				<a href="<?= Url::to(["product/detail", "slug" => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
 					<div class="grid">
 						<figure class="effect-zoe">
-							<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($work->getMainImage())->resize(362, 450) ?>">
+							<image-hover-buttons product-id="{{'<?= $work->short_id ?>'}}" is-loved="{{'<?=$work->isLovedByCurrentUser() ? 1 : 0 ?>'}}">
+								<a href="<?= Url::to(["product/detail", "slug" => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
+									<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($work->getMainImage())->resize(362, 450) ?>">
+								</a>
+							</image-hover-buttons>
+							<a href="<?= Url::to(["product/detail", "slug" => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
 							<figcaption>
 								<p class="instauser">
 									<?= Utils::l($work->name) ?>
 								</p>
 								<p class="price">€ <?= $work->getMinimumPrice() ?></p>
 							</figcaption>
+							</a>
 						</figure>
 					</div>
-				</a>
 			</div>
 			<?php } ?>
 
 			<?php foreach ($worksGroup["three"] as $i => $work) { ?>
 			<div class="col-md-4 col-sm-4 pad-grid pad-grid-h">
-				<a href="<?= Url::to(["product/detail", "slug" => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
 					<div class="grid">
 						<figure class="effect-zoe">
-							<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($work->getMainImage())->resize(375, 220) ?>">
-							<figcaption>
-								<p class="instauser">
-									<?= Utils::l($work->name) ?>
-								</p>
-								<p class="price">€ <?= $work->getMinimumPrice() ?></p>
-							</figcaption>
+							<image-hover-buttons product-id="{{'<?= $work->short_id ?>'}}" is-loved="{{'<?=$work->isLovedByCurrentUser() ? 1 : 0 ?>'}}">
+								<a href="<?= Url::to(["product/detail", "slug" => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
+									<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($work->getMainImage())->resize(375, 220) ?>">
+								</a>
+							</image-hover-buttons>
+							<a href="<?= Url::to(["product/detail", "slug" => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
+								<figcaption>
+									<p class="instauser">
+										<?= Utils::l($work->name) ?>
+									</p>
+									<p class="price">€ <?= $work->getMinimumPrice() ?></p>
+								</figcaption>
+							</a>
 						</figure>
 					</div>
-				</a>
 			</div>
 			<?php } ?>
 			<?php } ?>
