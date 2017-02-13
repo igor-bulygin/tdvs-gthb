@@ -294,8 +294,14 @@ ul {
 .mt-40 {
   margin-top: 40px; }
 
+.mt-60 {
+  margin-top: 60px; }
+
 .mt-50 {
   margin-top: 50px; }
+
+.mb-100 {
+  margin-bottom: 100px; }
 
 .mb-20 {
   margin-bottom: 20px; }
@@ -4636,6 +4642,46 @@ input:checked + .slider:before {
 .summary-side {
   background-color: #e9e9e9; }
 
+.serif {
+  font-family: "Playfair Display", Georgia, serif; }
+
+.label-personal {
+  color: #9a9a9a;
+  min-width: 57px;
+  display: block;
+  float: left; }
+
+.payment-methods-wrapper {
+  font-family: "Univers Condensed Light", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+
+.success-header {
+  background-color: #484848;
+  padding: 20px 0;
+  margin: 0px 0 50px; }
+
+.green-title {
+  font-family: "Playfair Display", Georgia, serif;
+  color: #B8E986;
+  display: block;
+  font-style: italic;
+  font-size: 16px;
+  margin: 0 0 10px; }
+
+.success-header-message {
+  font-family: "Univers Thin Ultra Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  font-size: 57px;
+  display: block;
+  color: #ffffff;
+  letter-spacing: 0.7px; }
+
+.success-header-tagline {
+  color: #ffffff;
+  font-size: 14px;
+  display: block;
+  margin: -25px 0 10px 0;
+  font-family: "Univers Condensed Light", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+
 .upper-setting-header {
   height: 76px;
   background-color: #666;
@@ -4677,6 +4723,7 @@ input:checked + .slider:before {
     -moz-border-radius: 0px 0px 0px 0px !important; }
 
 .bank-settings-wrapper {
+  background-color: #e9e9e9;
   padding: 40px 0 120px 0 !important; }
 
 .panel-billing .panel-heading {

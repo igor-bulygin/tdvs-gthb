@@ -1,22 +1,35 @@
-<div class="row no-mar">
+<div class="row no-mar payment-methods-wrapper">
 	<span class="shopping-cart-section-header">Personal info & billing address</span>
 	<div class="col-md-10">
-		<div class="col-md-6">
-			<p>Name <span ng-bind="paymentMethodsCtrl.cart.client_info.first_name"></span>&nbsp;<span ng-bind="paymentMethodsCtrl.cart.client_info.last_name"></span></p>
-			<p>Mail <span ng-bind="paymentMethodsCtrl.cart.client_info.email"></span></p>
-			<p>Phone <span ng-bind="paymentMethodsCtrl.cart.client_info.phone1.prefix"></span><span ng-bind="paymentMethodsCtrl.cart.client_info.phone1.number"></span></p>
+		<div class="col-md-5">
+			<div>
+				<span class="label-personal">Name</span> <span class="bold" ng-bind="paymentMethodsCtrl.cart.client_info.first_name"></span>&nbsp;<span class="bold" ng-bind="paymentMethodsCtrl.cart.client_info.last_name"></span>
+			</div>
+			<div>
+				<span class="label-personal">Mail</span> <span ng-bind="paymentMethodsCtrl.cart.client_info.email"></span>
+			</div>
+			<div>
+				<span class="label-personal mb-100">Phone</span> <span ng-bind="paymentMethodsCtrl.cart.client_info.phone1.prefix"></span><span ng-bind="paymentMethodsCtrl.cart.client_info.phone1.number"></span>
+			</div>
 		</div>
-		<div class="col-md-6">
-			<p>Billing information <span ng-bind="paymentMethodsCtrl.cart.client_info.address"></span></p>
-			<p><span ng-bind="paymentMethodsCtrl.cart.client_info.city"></span>&nbsp;<span ng-bind="paymentMethodsCtrl.cart.client_info.zipcode"></span></p>
-			<p><span ng-bind="paymentMethodsCtrl.cart.client_info.country"></span></p>
+		<div class="col-md-7">
+			<div class="row no-mar">
+				<div class="col-md-5">
+				<p><span class="label-personal">Billing information</span><p>
+				</div>
+				<div class="col-md-7">
+					<span ng-bind="paymentMethodsCtrl.cart.client_info.address"></span>
+					<span ng-bind="paymentMethodsCtrl.cart.client_info.city"></span>&nbsp;<span ng-bind="paymentMethodsCtrl.cart.client_info.zipcode"></span>
+					<span class="mb-20" ng-bind="paymentMethodsCtrl.cart.client_info.country"></span>
+				</div>
+			</div>
 		</div>
 	</div>
 	<div class="col-md-2">
 		<a class="link-red pull-right" href="#" ng-click="paymentMethodsCtrl.editPersonalInfo()">Edit</a>
 	</div>
 </div>
-<div class="row no-mar">
+<div class="row no-mar payment-methods-wrapper">
 	<span class="shopping-cart-section-header">Payment methods</span>
 		<!--<form name="paymentMethodsCtrl.paymentForm" class="form-horizontal" >-->
 			<!--<div class="col-md-6">-->
@@ -62,9 +75,9 @@
 		<!--</form>-->
 
 		<div class="col-md-12 text-center">
-			<p class="text-center">Securely pay with any type of credit or debit card.</p>
+			<p class="text-center mt-20 serif">Securely pay with any type of credit or debit card.</p>
 			<!--<button class="btn btn-default btn-green" ng-click="paymentMethodsCtrl.stripejs()">Pay with Stripe.js</button><br />-->
-			<button class="btn btn-default btn-green" ng-click="paymentMethodsCtrl.checkout()">Pay with card</button><br />
+			<button class="btn btn-default btn-green mt-20" ng-click="paymentMethodsCtrl.checkout()">Pay with card</button><br />
 			<div class="text-center purple-text" ng-if="paymentMethodsCtrl.errors">
 				<p>There was an issue with the transaction. Your card has not been charged.</p>
 				<p>Please try again, and if the issue persists contact us.</p>

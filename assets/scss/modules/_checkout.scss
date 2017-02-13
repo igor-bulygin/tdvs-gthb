@@ -182,4 +182,43 @@
 .summary-side{
 	background-color: $background_grey;
 }
-
+.serif{
+	font-family: $font-family--serif;
+}
+.label-personal{
+	color: $dark-grey;
+	min-width: 57px;
+    display: block;
+    float: left;
+}
+.payment-methods-wrapper{
+	font-family: $font-family--secondary;
+}
+.success-header{
+	background-color: $almost_black;
+	padding: 20px 0;
+	margin: 0px 0 50px;
+}
+.green-title{
+	font-family: $font-family--serif;
+	color: $green;
+	display: block;
+	font-style: italic;
+	font-size: 16px;
+	margin: 0 0 10px;
+}
+.success-header-message{
+	font-family: $font-family--name;
+	text-transform: uppercase;
+	font-size: 57px;
+	display: block;
+	color: $white;
+	letter-spacing: 0.7px;
+}
+.success-header-tagline{
+	color: $white;
+	font-size: 14px;
+	display: block;
+	margin: -25px 0 10px 0;
+	font-family: $font-family--secondary;
+}
