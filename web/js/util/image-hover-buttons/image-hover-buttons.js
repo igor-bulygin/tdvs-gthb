@@ -11,14 +11,24 @@
 		}
 
 		function setLoved() {
-			var loved = new lovedDataService.LovedPriv;
-			loved.product_id = vm.productId;
-			loved.$save()
-				.then(function (dataSaved) {
-					vm.isLoved = true;
+			if(!vm.isLoved) {
+				var loved = new lovedDataService.LovedPriv;
+				loved.product_id = vm.productId;
+				loved.$save()
+					.then(function (dataSaved) {
+						vm.isLoved = true;
+					}, function (err) {
+						//ToDo: show errors?
+					});
+			} else {
+				lovedDataService.LovedPriv.delete({
+					productId: vm.productId
+				}).$promise.then(function (dataDeleted) {
+					vm.isLoved = false;
 				}, function (err) {
 					//ToDo: show errors?
 				});
+			}
 		}
 		
 	}
