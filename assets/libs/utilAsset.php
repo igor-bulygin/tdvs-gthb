@@ -19,7 +19,8 @@ class utilAsset extends AssetBundle {
 		'js/util/modal-confirm-leave/modal-confirm-leave.js',
 		'js/util/modal-crop-description/modal-crop-description.js',
 		'js/util/contenteditable.js',
-		'js/util/dragndropService.js'
+		'js/util/dragndropService.js',
+		'js/util/image-hover-buttons/image-hover-buttons.js'
 	];
 	
 	public $depends = [
