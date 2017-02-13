@@ -1,18 +1,27 @@
 (function () {
 	"use strict";
 
-	function controller() {
+	function controller($scope) {
 		var vm = this;
-		console.log("directive!!");
+		vm.setLoved = setLoved;
+		console.log($scope.productId);
+
+		function setLoved() {
+			//call to API with $scope.productId
+		}
+		
 	}
 
 	function directive() {
 		return {
-			restrict: 'A',
+			restrict: 'E',
 			templateUrl: currentHost() + '/js/util/image-hover-buttons/image-hover-buttons.html',
 			controller: controller,
 			controllerAs: 'imageHoverButtonsCtrl',
-			transclude: true
+			transclude: true,
+			scope: {
+				productId: '@'
+			}
 		}
 	}
 
