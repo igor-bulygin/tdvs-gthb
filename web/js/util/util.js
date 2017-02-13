@@ -153,7 +153,7 @@
 		}
 	}
 
-	angular.module('util', ['util.formMessages', 'LocalStorageModule'])
+	angular.module('util', ['util.formMessages', 'LocalStorageModule', 'ui.bootstrap'])
 		.service('UtilService', UtilService)
 		.filter('capitalize', capitalize)
 		.config(config);

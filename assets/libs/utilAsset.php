@@ -20,12 +20,14 @@ class utilAsset extends AssetBundle {
 		'js/util/modal-crop-description/modal-crop-description.js',
 		'js/util/contenteditable.js',
 		'js/util/dragndropService.js',
-		'js/util/image-hover-buttons/image-hover-buttons.js'
+		'js/util/image-hover-buttons/image-hover-buttons.js',
+		'js/util/modal-signup-loved/modal-signup-loved.js',
 	];
 	
 	public $depends = [
 		'app\assets\libs\angularMessagesAsset',
 		'app\assets\libs\ngImgCropAsset',
-		'app\assets\libs\angularLocalStorageAsset'
+		'app\assets\libs\angularLocalStorageAsset',
+		'app\assets\libs\angularBootstrapAsset',
 	];
 }

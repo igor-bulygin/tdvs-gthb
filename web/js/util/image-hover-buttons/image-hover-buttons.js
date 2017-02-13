@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller($scope, lovedDataService) {
+	function controller($scope, lovedDataService, $uibModal) {
 		var vm = this;
 		vm.setLoved = setLoved;
 		vm.productId = $scope.productId;
@@ -18,7 +18,8 @@
 					.then(function (dataSaved) {
 						vm.isLoved = true;
 					}, function (err) {
-						//ToDo: show errors?
+						if(err.status === 401)
+							openSignUpModal();
 					});
 			} else {
 				lovedDataService.LovedPriv.delete({
@@ -26,9 +27,17 @@
 				}).$promise.then(function (dataDeleted) {
 					vm.isLoved = false;
 				}, function (err) {
-					//ToDo: show errors?
+					if(err.status === 401)
+						openSignUpModal();
 				});
 			}
+		}
+
+		function openSignUpModal() {
+			var modalInstance = $uibModal.open({
+				component: 'modalSignUpLoved',
+				size: 'sm'
+			});
 		}
 		
 	}
