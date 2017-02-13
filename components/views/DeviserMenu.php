@@ -1,5 +1,4 @@
 <?php
-use app\components\assets\cropAsset;
 use app\helpers\Utils;
 use app\models\Person;
 use yii\helpers\Url;
@@ -27,6 +26,9 @@ $deviser = $this->params['deviser'];
 			</ul>
 			<?php } ?>
 		</li>
+        <li>
+			<a class="<?= ($deviser->account_state == Person::ACCOUNT_STATE_DRAFT) ? 'disabled-link' : '' ?> <?= ($activeOption=='loved') ? 'active' : '' ?>" href="<?= Url::to(["deviser/loved" , "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id])?>">Loved</a>
+        </li>
 	</ul>
 	<ul class="menu-deviser-bottom">
 		<li>

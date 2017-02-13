@@ -5,6 +5,7 @@ use app\helpers\CController;
 use app\helpers\Utils;
 use app\models\Category;
 use app\models\Country;
+use app\models\Loved;
 use app\models\MetricType;
 use app\models\Person;
 use app\models\Product2;
@@ -549,6 +550,30 @@ class DeviserController extends CController
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("faq-edit", [
 			'deviser' => $deviser,
+		]);
+	}
+
+	public function actionLoved($slug, $deviser_id)
+	{
+		$deviser = Person::findOneSerialized($deviser_id);
+
+		if (!$deviser) {
+			throw new NotFoundHttpException();
+		}
+
+		if ($deviser->account_state != Person::ACCOUNT_STATE_ACTIVE) {
+			if ($deviser->isDeviserEditable()) {
+				$this->redirect(Url::to(['deviser/about-edit', 'deviser_id' => $deviser_id, 'slug' => $slug]));
+			} else {
+				throw new NotFoundHttpException();
+			}
+		}
+
+		$loveds = Loved::findSerialized(['person_id' => $deviser_id]);
+		$this->layout = '/desktop/public-2.php';
+		return $this->render("loved-view", [
+			'deviser' => $deviser,
+			'loveds' => $loveds,
 		]);
 	}
 
