@@ -102,15 +102,17 @@ class Loved extends CActiveRecord
 	public function afterDelete()
 	{
 		$product = $this->getProduct();
-		$collection = Yii::$app->mongodb->getCollection('product');
-		$collection->update(
-			[
-				'short_id' => $product->short_id
-			],
-			[
-				'loveds' => $product->loveds - 1
-			]
-		);
+		if ($product) {
+			$collection = Yii::$app->mongodb->getCollection('product');
+			$collection->update(
+				[
+					'short_id' => $product->short_id
+				],
+				[
+					'loveds' => $product->loveds - 1
+				]
+			);
+		}
 
 		parent::afterDelete();
 	}

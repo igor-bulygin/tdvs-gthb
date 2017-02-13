@@ -227,6 +227,11 @@ class Product2 extends Product {
 	public function beforeDelete() {
 		$this->deletePhotos();
 
+		$loveds = $this->getLoveds();
+		foreach ($loveds as $loved) {
+			$loved->delete();
+		}
+
 		return parent::beforeDelete();
 	}
 
@@ -1080,5 +1085,14 @@ class Product2 extends Product {
 		$person_id = Yii::$app->user->identity->short_id;
 
 		return Utils::productLovedByPerson($this->short_id, $person_id);
+	}
+
+	/**
+	 * Returns Loveds from the product
+	 *
+	 * @return Loved[]
+	 */
+	public function getLoveds() {
+		return Loved::findSerialized(['product_id' => $this->short_id]);
 	}
 }
