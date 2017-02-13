@@ -1,5 +1,5 @@
 <div style="position: relative">
-	<span class="glyphicon glyphicon-heart" style="color: black; position: absolute; display:block; top: 5px; right: 25px;" ng-click="imageHoverButtonsCtrl.setLoved()"></span>
+	<span class="glyphicon glyphicon-heart ng-class:{'red-text': imageHoverButtonsCtrl.isLoved, 'black-link': !imageHoverButtonsCtrl.isLoved}" style="position: absolute; display:block; top: 5px; right: 25px;" ng-click="imageHoverButtonsCtrl.setLoved()"></span>
 	<span class="glyphicon glyphicon-inbox" style="color: black; position: absolute; display:block; top: 5px; right: 5px;"></span>
 	<ng-transclude></ng-transclude>
 </div>

@@ -5,15 +5,19 @@
 		var vm = this;
 		vm.setLoved = setLoved;
 		vm.productId = $scope.productId;
+		
+		function init() {
+			vm.isLoved = $scope.isLoved ? true : false;
+		}
 
 		function setLoved() {
 			var loved = new lovedDataService.LovedPriv;
 			loved.product_id = vm.productId;
 			loved.$save()
 				.then(function (dataSaved) {
-					console.log(dataSaved)
+					vm.isLoved = true;
 				}, function (err) {
-					console.log(err);
+					//ToDo: show errors?
 				});
 		}
 		
@@ -27,7 +31,8 @@
 			controllerAs: 'imageHoverButtonsCtrl',
 			transclude: true,
 			scope: {
-				productId: '@'
+				productId: '@',
+				isLoved: '@'
 			}
 		}
 	}
