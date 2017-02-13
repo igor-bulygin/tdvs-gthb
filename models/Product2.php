@@ -1067,4 +1067,18 @@ class Product2 extends Product {
 		}
 		return null;
 	}
+
+	/**
+	 * Returns TRUE if the product is loved by the connected user
+	 *
+	 * @return bool
+	 */
+	public function isLovedByCurrentUser() {
+		if (Yii::$app->user->isGuest) {
+			return false;
+		}
+		$person_id = Yii::$app->user->identity->short_id;
+
+		return Utils::productLovedByPerson($this->short_id, $person_id);
+	}
 }

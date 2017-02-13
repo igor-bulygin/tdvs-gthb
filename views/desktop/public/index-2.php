@@ -2,7 +2,6 @@
 use app\assets\desktop\pub\Index2Asset;
 use app\helpers\Utils;
 use app\models\Person;
-use app\models\Product;
 use yii\helpers\Url;
 
 Index2Asset::register($this);
@@ -10,7 +9,7 @@ Index2Asset::register($this);
 $this->title = 'Todevise / Home';
 
 /** @var Person $deviser */
-/** @var Product $work */
+/** @var \app\models\Product2 $work */
 
 ?>
 
@@ -83,7 +82,7 @@ $this->title = 'Todevise / Home';
 					<a href="<?= Url::to(["product/detail", "slug" => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
 						<div class="grid">
 							<figure class="effect-zoe">
-								<image-hover-buttons product-id="{{'<?= $work->short_id ?>'}}">
+								<image-hover-buttons product-id="{{'<?= $work->short_id ?>'}}" is-loved="{{'<?=$work->isLovedByCurrentUser() ? 1 : 0 ?>'}}">
 									<img class="grid-image"
 										src="<?= Utils::url_scheme() ?><?= Utils::thumborize($work->getMainImage())->resize(362, 450) ?>">
 								</image-hover-buttons>

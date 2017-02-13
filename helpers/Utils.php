@@ -3,6 +3,7 @@ namespace app\helpers;
 
 use app\models\Category;
 use app\models\Lang;
+use app\models\Loved;
 use Exception;
 use Thumbor\Url\Builder;
 use Traversable;
@@ -12,7 +13,7 @@ use yii\helpers\Url;
 
 class Utils
 {
-
+	public static $loveds = [];
 	/**
 	 * Return all the available languages
 	 * @return mixed
@@ -731,6 +732,28 @@ class Utils
 
 		return null;
 		*/
+	}
+
+	/**
+	 * Returns TRUE if the product is loved by de person especified by params
+	 *
+	 * @param string $product_id
+	 * @param string $person_id
+	 *
+	 * @return bool
+	 */
+	public static function productLovedByPerson($product_id, $person_id) {
+		if (!isset(static::$loveds[$person_id])) {
+			$loveds = Loved::findSerialized(['person_id' => $person_id]);
+
+			$product_ids = [];
+			foreach ($loveds as $loved) {
+				$product_ids[] = $loved->product_id;
+			}
+			static::$loveds[$person_id] = $product_ids;
+		}
+
+		return in_array($product_id, static::$loveds[$person_id]);
 	}
 
 }

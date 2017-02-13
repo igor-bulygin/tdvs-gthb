@@ -49,7 +49,10 @@ $this->params['deviser_links_target'] = 'public_view';
                             </div>
                             <div id="macy-container">
                                 <?php foreach ($loveds as $loved) {
-                                    $product = $loved->getProduct(); ?>
+                                    $product = $loved->getProduct();
+                                    if ($product->product_state != \app\models\Product2::PRODUCT_STATE_ACTIVE) {
+										continue;
+									} ?>
                                     <div class="menu-category list-group">
                                         <a href="<?= Url::to(['product/detail', 'slug' => $product->slug, 'product_id' => $product->short_id])?>">
                                             <div class="grid">
