@@ -87,12 +87,14 @@ $this->title = 'Todevise / Home';
 										src="<?= Utils::url_scheme() ?><?= Utils::thumborize($work->getMainImage())->resize(362, 450) ?>">
 										</a>
 								</image-hover-buttons>
-								<figcaption>
-									<p class="instauser">
-										<?= Utils::l($work->name) ?>
-									</p>
-									<p class="price">€ <?= $work->getMinimumPrice() ?></p>
-								</figcaption>
+								<a href="<?= Url::to(["product/detail", "slug" => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
+									<figcaption>
+										<p class="instauser">
+											<?= Utils::l($work->name) ?>
+										</p>
+										<p class="price">€ <?= $work->getMinimumPrice() ?></p>
+									</figcaption>
+								</a>
 							</figure>
 						</div>
 					
