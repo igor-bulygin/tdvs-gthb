@@ -80,27 +80,35 @@ $this->params['deviser'] = $deviser;
 						<div id="macy-container">
 							<?php foreach ($products as $i => $product) { ?>
 								<div class="menu-category list-group">
-									<a href="<?= Url::to(['product/detail', 'slug' => $product->slug, 'product_id' => $product->short_id])?>">
-                                        <div class="grid">
-                                            <figure class="effect-zoe">
-                                                <?php /*
+                                    <div class="grid">
+                                        <figure class="effect-zoe">
+
+											<?php /*
                                                 <span class="close-product-icon" ng-click="editStoreCtrl.open_modal_delete(product.id)">
                                                     <i class="ion-android-close"></i>
                                                 </span>
                                                 */ ?>
-                                                <img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getMainImage())->resize(400, 0) ?>">
+                                            <image-hover-buttons product-id="{{'<?= $product->short_id ?>'}}" is-loved="{{'<?=$product->isLovedByCurrentUser() ? 1 : 0 ?>'}}">
+                                                <a href="<?= Url::to(["product/detail", "slug" => $product->slug, 'product_id' => $product->short_id])?>">
+                                                    <img class="grid-image"
+                                                         src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getMainImage())->resize(400, 0) ?>">
+                                                </a>
+                                            </image-hover-buttons>
+                                            <a href="<?= Url::to(["product/detail", "slug" => $product->slug, 'product_id' => $product->short_id])?>">
                                                 <figcaption>
-                                                    <p class="instauser"><?= $product->name ?></p>
+                                                    <p class="instauser">
+														<?= $product->name ?>
+                                                    </p>
                                                     <p class="price">€ <?= $product->getMinimumPrice() ?></p>
-                                                    <?php if ($deviser->isDeviserEditable()) { ?>
+													<?php if ($deviser->isDeviserEditable()) { ?>
                                                         <a class="edit-product-icon" href="<?= Url::to(['product/edit', 'slug' => $product->slug, 'product_id' => $product->short_id, 'deviser_id' => $deviser->short_id])?>" title="Edit work">
                                                             <i class="ion-edit"></i>
                                                         </a>
-                                                    <?php } ?>
+													<?php } ?>
                                                 </figcaption>
-                                            </figure>
-                                        </div>
-									</a>
+                                            </a>
+                                        </figure>
+                                    </div>
 								</div>
 							<?php } ?>
 						</div>

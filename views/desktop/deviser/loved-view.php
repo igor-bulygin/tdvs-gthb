@@ -54,19 +54,24 @@ $this->params['deviser_links_target'] = 'public_view';
 										continue;
 									} ?>
                                     <div class="menu-category list-group">
-                                        <a href="<?= Url::to(['product/detail', 'slug' => $product->slug, 'product_id' => $product->short_id])?>">
-                                            <div class="grid">
-                                                <figure class="effect-zoe">
-                                                    <div image-hover-buttons>
-                                                        <img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getMainImage())->resize(400, 0) ?>">
-                                                    </div>
+                                        <div class="grid">
+                                            <figure class="effect-zoe">
+                                                <image-hover-buttons product-id="{{'<?= $product->short_id ?>'}}" is-loved="{{'<?=$product->isLovedByCurrentUser() ? 1 : 0 ?>'}}">
+                                                    <a href="<?= Url::to(["product/detail", "slug" => $product->slug, 'product_id' => $product->short_id])?>">
+                                                        <img class="grid-image"
+                                                             src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getMainImage())->resize(400, 0) ?>">
+                                                    </a>
+                                                </image-hover-buttons>
+                                                <a href="<?= Url::to(["product/detail", "slug" => $product->slug, 'product_id' => $product->short_id])?>">
                                                     <figcaption>
-                                                        <p class="instauser"><?= $product->name ?></p>
+                                                        <p class="instauser">
+															<?= $product->name ?>
+                                                        </p>
                                                         <p class="price">€ <?= $product->getMinimumPrice() ?></p>
                                                     </figcaption>
-                                                </figure>
-                                            </div>
-                                        </a>
+                                                </a>
+                                            </figure>
+                                        </div>
                                     </div>
                                 <?php } ?>
                             </div>
