@@ -79,12 +79,13 @@ $this->title = 'Todevise / Home';
 		<div>
 			<?php foreach ($works12 as $i => $work) { ?>
 				<div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
-					<a href="<?= Url::to(["product/detail", "slug" => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
 						<div class="grid">
 							<figure class="effect-zoe">
 								<image-hover-buttons product-id="{{'<?= $work->short_id ?>'}}" is-loved="{{'<?=$work->isLovedByCurrentUser() ? 1 : 0 ?>'}}">
+									<a href="<?= Url::to(["product/detail", "slug" => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
 									<img class="grid-image"
 										src="<?= Utils::url_scheme() ?><?= Utils::thumborize($work->getMainImage())->resize(362, 450) ?>">
+										</a>
 								</image-hover-buttons>
 								<figcaption>
 									<p class="instauser">
@@ -94,7 +95,7 @@ $this->title = 'Todevise / Home';
 								</figcaption>
 							</figure>
 						</div>
-					</a>
+					
 				</div>
 			<?php } ?>
 			<?php foreach ($works3 as $i => $work) { ?>

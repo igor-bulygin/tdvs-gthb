@@ -64,3 +64,15 @@
         }
     }
 }
+.hover-btns-wrapper{
+	position: absolute;
+    top: 5px;
+    right: 5px;
+    z-index: 9;
+    width: 34px;
+    height: 20px;
+	.icons-hover{
+		&.box{	
+		}
+	}
+}

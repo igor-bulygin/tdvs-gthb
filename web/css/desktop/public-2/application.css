@@ -1604,6 +1604,14 @@ input[type="radio"] .styled:checked + label::after {
         font-weight: bold;
         color: #9a9a9a; }
 
+.hover-btns-wrapper {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  z-index: 9;
+  width: 34px;
+  height: 20px; }
+
 .showcase-wrapper {
   opacity: #e9e9e9;
   background-color: #ffffff;
