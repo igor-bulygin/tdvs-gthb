@@ -34,8 +34,8 @@
 					data: function () {
 						return {
 							title: "Are you sure?",
-							text: "You are about to delete a product!"
-						};
+                            text: "You are about to delete a deviser! All items related to this product will be deleted. This action can not be undone"
+                        };
 					}
 				}
 			});

@@ -2,6 +2,7 @@
 namespace app\controllers;
 
 use app\helpers\CController;
+use app\helpers\Utils;
 use app\models\Bespoke;
 use app\models\Lang;
 use app\models\MadeToOrder;
@@ -328,6 +329,7 @@ class ProductController extends CController
 		foreach ($products as $product) {
 			$deviser = Person::findOneSerialized($product->deviser_id);
 			if (empty($deviser) || empty($product->deviser_id)) {
+				echo Utils::l($product->name).' - '.$product->short_id.'<br />';
 				$product->delete();
 			}
 		}

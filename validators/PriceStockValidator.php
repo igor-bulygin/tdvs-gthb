@@ -20,6 +20,7 @@ class PriceStockValidator extends Validator
 	public function validateAttribute($object, $attribute)
 	{
 		$positiveFields = ['price', 'stock', 'weight', 'width', 'height', 'length'];
+//		$positiveFields = ['price', 'stock', 'weight'];
 		$priceStock = $object->{$attribute};
 		if (!is_array($priceStock)) {
 			$this->addError($object, $attribute, 'Pricestock must be an array');
