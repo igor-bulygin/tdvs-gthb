@@ -927,9 +927,19 @@ class Person extends CActiveRecord implements IdentityInterface
 	 */
 	public function isDeviserEditable()
 	{
-		return
-				(!Yii::$app->user->isGuest && Yii::$app->user->identity->isAdmin()) ||
-				($this->isDeviser() && $this->isConnectedUser());
+		if (!$this->isDeviser()) {
+			return false;
+		}
+		if (Yii::$app->user->isGuest) {
+			return false;
+		}
+		if (Yii::$app->user->identity->isAdmin()) {
+			return true;
+		}
+		if ($this->isConnectedUser()) {
+			return true;
+		}
+		return false;
 	}
 
 	/**
