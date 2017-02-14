@@ -8,15 +8,21 @@
 		var cart_id = UtilService.getLocalStorage('cart_id');
 
 		function deleteItem(price_stock_id) {
-			cartDataService.CartProduct.delete({
-				id: cart_id,
-				productId: price_stock_id
-			}).$promise.then(function(deletedData) {
-				vm.cart = angular.copy(deletedData);
+			function onDeleteItemSuccess(data) {
+				vm.cart = angular.copy(data);
 				vm.devisers = cartService.parseDevisersFromProducts(vm.cart);
 				cartService.parseTags(vm.cart);
 				$rootScope.$broadcast(cartEvents.cartUpdated, {cart: vm.cart});
-			});
+			}
+
+			function onDeleteItemError(err){
+				console.log(err);
+			}
+
+			cartDataService.deleteItem({
+				id: cart_id,
+				productId: price_stock_id
+			}, onDeleteItemSuccess, onDeleteItemError);
 		}
 	}
 

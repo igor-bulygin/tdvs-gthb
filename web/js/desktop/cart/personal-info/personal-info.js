@@ -3,7 +3,7 @@
 
 	function controller(locationDataService, cartDataService, UtilService) {
 		var vm = this;
-		vm.user = new cartDataService.CartClientInfo;
+		vm.user = {};
 		vm.has_error = UtilService.has_error;
 		vm.save = save;
 
@@ -21,23 +21,25 @@
 			locationDataService.Country.get()
 			.$promise.then(function(dataCountries) {
 				vm.countries = angular.copy(dataCountries.items);
-			 }, function (err) {
-			 	//err
-			 	console.log(err);
-			 })
+			}, function (err) {
+				//err
+				console.log(err);
+			})
 		}
 
 		function save(form){
+			function onSaveSuccess(data) {
+				vm.cart.client_info = angular.copy(data.client_info);
+				vm.state.state = 3;
+			}
+			function onSaveError(err) {
+				console.log(err);
+			}
+
 			form.$submitted = true;
 			if(form.$valid) {
-				vm.user.$save({
-					id: vm.cart.id
-				}).then(function(dataSaved) {
-					vm.cart.client_info = angular.copy(dataSaved.client_info);
-					vm.state.state=3;
-				}, function (err) {
-					//TODO: Show err
-				});
+				cartDataService.saveUserInfo(vm.user, {id: vm.cart.id},
+					onSaveSuccess, onSaveError);
 			}
 		}
 

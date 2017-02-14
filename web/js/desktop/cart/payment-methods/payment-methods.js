@@ -22,22 +22,29 @@
 		function configureStripe() {
 			Stripe.setPublishableKey('pk_test_p1DPyiicE2IerEV676oj5t89');
 
+			function onReceiveTokenSuccess(data) {
+				$window.location.href = currentHost() + '/order/success/' + vm.cart.id;
+			}
+
+			function onReceiveTokenError(err) {
+				//ToDo: Manage errors
+				vm.errors = true;
+				console.log(err);
+			}
+
 			vm.handler = StripeCheckout.configure({
 				key: 'pk_test_p1DPyiicE2IerEV676oj5t89',
 				image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
 				locale: 'auto',
 				token: function(token) {
-					var cartReceiveToken = new cartDataService.CartReceiveToken;
-					cartReceiveToken.token = angular.copy(token);
-					cartReceiveToken.$save({
-						cartId: vm.cart.id
-					}).then(function(dataSaved) {
-						$window.location.href = currentHost()+'/order/success/'+vm.cart.id
-					}, function (err) {
-						//TODO manage errors
-						vm.errors = true;
-						console.log(err);
-					});
+							cartDataService.getCartToken(
+								{
+									token: angular.copy(token)
+								},
+								{
+									cartId: vm.cart.id
+								},
+								onReceiveTokenSuccess, onReceiveTokenError);
 				}
 			});
 
