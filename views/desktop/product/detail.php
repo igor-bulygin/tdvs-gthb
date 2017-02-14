@@ -221,7 +221,7 @@ $videos = $product->getVideos();
 						<div class="product-data no-border">
 							<div class="row-size">
 
-								<button type="button" class="btn btn-grey btn-hart pull-left">
+								<button type="button" class="btn btn-grey btn-hart pull-left" ng-click="detailProductCtrl.setLoved()">
 									<i class="ion-ios-heart"></i>
 									<span>Love work</span>
 								</button>
@@ -233,7 +233,7 @@ $videos = $product->getVideos();
 
 							</div>
 							<div class="row-size">
-								<span class="btn-tagline loved pull-left">Loved <?=$product->loveds?> times</span>
+								<span class="btn-tagline loved pull-left">Loved <span ng-bind="detailProductCtrl.product.loveds"></span> times</span>
 								<span class="btn-tagline saved pull-right">Saved in 1500 boxes</span>
 							</div>
 							<div>

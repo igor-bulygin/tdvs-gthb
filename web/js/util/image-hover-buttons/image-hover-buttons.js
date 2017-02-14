@@ -14,25 +14,27 @@
 
 		function setLoved() {
 			if(!vm.isLoved) {
-				var loved = new lovedDataService.LovedPriv;
-				loved.product_id = vm.productId;
-				loved.$save()
-					.then(function (dataSaved) {
-						vm.isLoved = true;
-					}, function (err) {
-						if(err.status === 401)
-							openSignUpModal();
-					});
+				lovedDataService.setLoved({
+					product_id: vm.productId
+				}, setLovedSuccess, setLovedError);
 			} else {
-				lovedDataService.LovedPriv.delete({
-					productId: vm.productId
-				}).$promise.then(function (dataDeleted) {
-					vm.isLoved = false;
-				}, function (err) {
-					if(err.status === 401)
-						openSignUpModal();
-				});
+				lovedDataService.deleteLoved({
+						productId: vm.productId
+					}, deleteLovedSuccess, setLovedError);
 			}
+		}
+
+		function setLovedSuccess(data) {
+			vm.isLoved = true;
+		}
+
+		function setLovedError(err) {
+			if(err.status === 401)
+				openSignUpModal();
+		}
+
+		function deleteLovedSuccess(data) {
+			vm.isLoved = false;
 		}
 
 		function openSignUpModal() {

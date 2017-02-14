@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(productDataService, tagDataService, cartDataService, $location, toastr, UtilService, $window) {
+	function controller(productDataService, tagDataService, cartDataService, lovedDataService, $location, toastr, UtilService, $window, $uibModal) {
 		var vm = this;
 		vm.quantity = 1;
 		vm.option_selected = {};
@@ -13,12 +13,12 @@
 		vm.getReferencesFromOptions = getReferencesFromOptions;
 		vm.selectComparator = selectComparator;
 		vm.addToCart = addToCart;
+		vm.setLoved = setLoved;
 		var select_order = ['size', 'color', 'select']
 
 		function init() {
 			getProductId();
 			getTags();
-
 		}
 
 		init();
@@ -272,6 +272,37 @@
 						})
 				}
 			}
+		}
+
+		function setLoved() {
+			//if is not loved
+			//if(!vm.isLoved)
+			lovedDataService.setLoved({
+				product_id: vm.product_id
+			}, setLovedSuccess, setLovedError);
+			//else (if it's loved, delete it)
+			/*
+			lovedDataService.deleteLoved({
+				productId: vm.product_id
+			}, setLovedSuccess, setLovedError)
+			*/
+
+		}
+
+		function setLovedSuccess(data) {
+			getProduct();
+		}
+
+		function setLovedError(err) {
+			if(err.status===401)
+				openSignUpLovedModal();
+		}
+
+		function openSignUpLovedModal(){
+			var modalInstance = $uibModal.open({
+				component: 'modalSignUpLoved',
+				size: 'sm'
+			});
 		}
 	}
 
