@@ -3,32 +3,31 @@
 
 	function lovedDataService($resource, apiConfig) {
 		//priv
-		this.LovedPriv = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'loved/:productId');
-
+		var LovedPriv = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'loved/:productId');
 		//pub
-		this.Loved = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'loved/:productId');
+		var Loved = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'loved/:productId');
 
 		this.setLoved = setLoved;
 		this.deleteLoved = deleteLoved;
 
-		function setLoved(data, success, error) {
-			var loved = new this.LovedPriv;
+		function setLoved(data, onsuccess, onerror) {
+			var loved = new LovedPriv;
 			for(var key in data) {
 				loved[key] = angular.copy(data[key]);
 			}
 			loved.$save()
 				.then(function(dataSuccess) {
-					success(dataSuccess)
+					onsuccess(dataSuccess)
 				}, function (err) {
-					error(err)
+					onerror(err)
 				});
 		}
 
-		function deleteLoved(params, success, error) {
-			this.LovedPriv.delete(params).$promise.then(function(dataDeleted) {
-				success(dataDeleted)
+		function deleteLoved(params, onsuccess, onerror) {
+			LovedPriv.delete(params).$promise.then(function(dataDeleted) {
+				onsuccess(dataDeleted)
 			}, function(err) {
-				error(err);
+				onerror(err);
 			});
 		}
 	}

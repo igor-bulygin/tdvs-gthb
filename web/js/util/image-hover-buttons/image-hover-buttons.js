@@ -43,7 +43,6 @@
 				size: 'sm'
 			});
 		}
-		
 	}
 
 	function directive() {
