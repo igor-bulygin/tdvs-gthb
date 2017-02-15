@@ -4830,6 +4830,11 @@ footer {
   footer .footer-items {
     padding: 0;
     margin: 0; }
+    footer .footer-items.split {
+      columns: 2;
+      -webkit-columns: 2;
+      -moz-columns: 2;
+      width: 210px; }
     @media (max-width: 768px) {
       footer .footer-items {
         text-align: center;

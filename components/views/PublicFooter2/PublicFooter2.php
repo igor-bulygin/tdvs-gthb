@@ -20,7 +20,7 @@ $footerMode = 'collapsed';
 		<div class="row">
 			<div class="col-sm-3">
 				<div class="title">Categories</div>
-				<ul class="footer-items">
+				<ul class="footer-items split">
 					<?php foreach($categories as $category) { ?>
 						<li>
 							<a href="<?= Url::to(["public/category-b", "slug" => $category->slug, 'category_id' => $category->short_id])?>"><?=Utils::l($category->name)?></a>
