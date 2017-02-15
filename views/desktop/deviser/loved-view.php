@@ -36,7 +36,7 @@ $this->params['deviser_links_target'] = 'public_view';
                     <div class="empty-wrapper">
                         <?php if ($deviser->isConnectedUser()) { ?>
                             <p class="no-video-text">You haven't loved any works yet.</p>
-                            <p>Start now by clicking the (icono loved) button inside a work.</p>
+                            <p>Start now by clicking the <span class="glyphicon glyphicon-heart"></span> button inside a work.</p>
                         <?php } else { ?>
                             <p class="no-video-text"><?=$deviser->getBrandName()?> haven't loved any works yet.</p>
                         <?php } ?>

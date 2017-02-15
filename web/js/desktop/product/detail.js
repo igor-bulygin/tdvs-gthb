@@ -275,27 +275,26 @@
 		}
 
 		function setLoved() {
+			function setLovedSuccess(data) {
+				getProduct();
+			}
+			function setLovedError(err) {
+				if(err.status === 401) openSignUpLovedModal();
+			}
+
 			//if is not loved
-			//if(!vm.isLoved)
-			lovedDataService.setLoved({
-				product_id: vm.product_id
-			}, setLovedSuccess, setLovedError);
-			//else (if it's loved, delete it)
-			/*
-			lovedDataService.deleteLoved({
-				productId: vm.product_id
-			}, setLovedSuccess, setLovedError)
-			*/
-
-		}
-
-		function setLovedSuccess(data) {
-			getProduct();
-		}
-
-		function setLovedError(err) {
-			if(err.status===401)
-				openSignUpLovedModal();
+			if(!vm.product.isLoved) {
+				lovedDataService.setLoved({
+					product_id: vm.product_id
+				}, setLovedSuccess, setLovedError);
+				
+			}
+			//(if it's loved, delete it)
+			if(vm.product.isLoved) {
+				lovedDataService.deleteLoved({
+					productId: vm.product_id
+				}, setLovedSuccess, setLovedError)
+			}
 		}
 
 		function openSignUpLovedModal(){
