@@ -29,6 +29,9 @@
                       @include opacity(1);  
                 } 
             }
+			.hover-btns-wrapper{
+				display: block;
+			}
         }
         img{
             width:100%;
@@ -71,6 +74,7 @@
     z-index: 9;
     width: 34px;
     height: 20px;
+	display: none;
 	.icons-hover{
 		&.box{	
 		}
