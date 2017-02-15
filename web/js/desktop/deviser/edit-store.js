@@ -16,29 +16,35 @@
 
 		init();
 
+		function onError(err) {
+			console.log(err);
+		}
+
 		function getProducts() {
-			var data = {
-				"deviser": UtilService.returnDeviserIdFromUrl(),
-				"limit": 1000
-			}
-			if(vm.subcategory || vm.category) {
-				if(vm.category !== 'product_state_draft') {
-					data["categories[]"] = [];
-					if(vm.subcategory)
-						data["categories[]"].push(vm.subcategory);
-					if(vm.category)
-						data["categories[]"].push(vm.category);
-				}
-			}
-			productDataService.ProductPriv.get(data).$promise.then(function (dataProducts) {
-				vm.products = dataProducts.items;
+			function onGetProductsSuccess(data) {
+				vm.products = data.items;
 				vm.products.forEach(function(element) {
 					setMinimumPrice(element);
 					element.edit_link = currentHost() + '/deviser/' + vm.deviser.slug + '/' + vm.deviser.id + '/works/' + element.id + '/edit';
 					element.link = currentHost() + '/work/' + element.slug + '/' + element.id;
 				})
 				parseMainPhoto(vm.products);
-			});
+			}
+			var params = {
+				"deviser": UtilService.returnDeviserIdFromUrl(),
+				"limit": 1000
+			}
+			if(vm.subcategory || vm.category) {
+				if(vm.category !== 'product_state_draft') {
+					params["categories[]"] = [];
+					if(vm.subcategory)
+						params["categories[]"].push(vm.subcategory);
+					if(vm.category)
+						params["categories[]"].push(vm.category);
+				}
+			}
+
+			productDataService.getProductPriv(params, onGetProductsSuccess, onError);
 		}
 
 		function getDeviser() {

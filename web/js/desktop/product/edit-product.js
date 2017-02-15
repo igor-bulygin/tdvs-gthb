@@ -84,12 +84,11 @@
 		}
 
 		function getPaperType() {
-			productDataService.PaperType.get()
-				.$promise.then(function (dataPaperType) {
-					vm.papertypes = dataPaperType.items;
-				}, function (err) {
-					//errors
-				});
+			function onGetPaperTypeSuccess(data) {
+				vm.papertypes = data.items;
+			}
+
+			productDataService.getPaperType(onGetPaperTypeSuccess, onError)
 		}
 
 		function getLanguages() {
@@ -102,16 +101,16 @@
 		}
 
 		function getProduct() {
-			productDataService.ProductPriv.get({
-				idProduct: UtilService.returnProductIdFromUrl()
-			}).$promise.then(function(dataProduct) {
-				vm.product = angular.copy(dataProduct);
+			function onGetProductPrivSuccess(data){
+				vm.product = angular.copy(data);
 				vm.from_edit = true;
-				vm.product_original = angular.copy(dataProduct);
+				vm.product_original = angular.copy(data);
 				vm.product = productService.parseProductFromService(vm.product);
-			}, function (err) {
-				//err
-			});
+			}
+			var params = {
+				idProduct: UtilService.returnProductIdFromUrl()
+			}
+			productDataService.getProductPriv(params, onGetProductPrivSuccess, onError);
 		}
 		
 		function getDeviser(){

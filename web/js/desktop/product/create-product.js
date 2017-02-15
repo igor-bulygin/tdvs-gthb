@@ -90,12 +90,11 @@
 		}
 
 		function getPaperType() {
-			productDataService.PaperType.get()
-				.$promise.then(function (dataPaperType) {
-					vm.papertypes = dataPaperType.items;
-				}, function (err){
-					console.log(err);
-				});
+			function onGetPaperTypeSuccess(data) {
+				vm.papertypes = data.items;
+			}
+
+			productDataService.getPaperType(onGetPaperTypeSuccess, onError);
 		}
 
 		function getDeviser() {

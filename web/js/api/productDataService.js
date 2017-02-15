@@ -4,7 +4,7 @@
 	function productDataService($resource, apiConfig) {
 		//pub
 		var Product = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'products/:idProduct');
-		this.PaperType = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'paper-type');
+		var PaperType = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'paper-type');
 		var Categories = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'categories');
 
 		//priv
@@ -17,10 +17,21 @@
 
 		//functions
 		this.getProductPub = getProductPub;
+		this.getPaperType = getPaperType;
 		this.getCategories = getCategories;
+		this.getProductPriv = getProductPriv;
 
 		function getProductPub(params, onsuccess, onerror) {
 			Product.get(params)
+				.$promise.then(function (returnData) {
+					onsuccess(returnData);
+				}, function (err) {
+					onerror(err);
+				})
+		}
+
+		function getPaperType(onsuccess, onerror) {
+			PaperType.get()
 				.$promise.then(function (returnData) {
 					onsuccess(returnData);
 				}, function (err) {
@@ -33,6 +44,15 @@
 				.$promise.then(function(returnData) {
 					onsuccess(returnData);
 				}, function (err) {
+					onerror(err);
+				});
+		}
+
+		function getProductPriv(params, onsuccess, onerror) {
+			this.ProductPriv.get(params)
+				.$promise.then(function(returnData) {
+					onsuccess(returnData);
+				}, function(err) {
 					onerror(err);
 				});
 		}
