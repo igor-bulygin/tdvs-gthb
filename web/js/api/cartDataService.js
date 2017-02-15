@@ -21,7 +21,7 @@
 		this.getCartToken = getCartToken;
 		this.addProduct = addProduct;
 
-		function createCart(data, onsuccess, onerror) {
+		function createCart(onsuccess, onerror) {
 			Cart.save()
 				.$promise.then(function(returnData) {
 					onsuccess(returnData);

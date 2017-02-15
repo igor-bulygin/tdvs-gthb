@@ -238,7 +238,7 @@
 			}
 			function onSaveProductError(err) {
 				if(err.status === 404) {
-					cartDataService.createCart(null, onCreateCartSuccess, onCreateCartError);
+					cartDataService.createCart(onCreateCartSuccess, onCreateCartError);
 				}
 			}
 			cartDataService.addProduct({
@@ -265,11 +265,9 @@
 			if(form.$valid && vm.reference_id) {
 				var cart_id = UtilService.getLocalStorage('cart_id');
 				if(cart_id) {
-					//POST to product
 					saveProduct(cart_id);
 				} else {
-					//create cart
-					cartDataService.createCart(null, onCreateCartSuccess, onCreateCartError)
+					cartDataService.createCart(onCreateCartSuccess, onCreateCartError);
 				}
 			}
 		}
