@@ -93,24 +93,25 @@
 		}
 
 		function update(index, product) {
+			function onUpdateProductSuccess(data) {
+				getProducts();
+			}
+
 			if (index >= 0) {
 				vm.products.splice(index, 1);
 			}
-			var patch = new productDataService.ProductPriv;
 			var pos = -1;
 			for (var i = 0; i < vm.products.length; i++) {
 				if (product.id === vm.products[i].id)
 					pos = i;
 			}
 			if (pos > -1) {
-				patch.position = (pos + 1);
-				patch.$update({
+				var position = (pos + 1);
+				productDataService.updateProductPriv({
+					position: position
+				},{
 					idProduct: product.id
-				}).then(function (dataProduct) {
-					getProducts();
-				}, function (err) {
-					toastr.error(err);
-				});
+				}, onUpdateProductSuccess, onError);
 			} else {
 				toastr.error("Cannot be updated!");
 			}

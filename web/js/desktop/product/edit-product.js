@@ -10,7 +10,7 @@
 
 		function init(){
 			vm.from_edit = false;
-			vm.product = new productDataService.ProductPriv();
+			vm.product = {};
 			vm.product.slug = {};
 			vm.product.categories = [];
 			vm.product.media = {
@@ -127,6 +127,22 @@
 		
 
 		function save(state) {
+			function onUpdateProductSuccess(data) {
+				vm.disable_save_buttons=false;
+				if(state === 'product_state_draft') {
+					vm.product = productService.parseProductFromService(vm.product);
+					toastr.success('Saved!');
+				} else if (state === 'product_state_active') {
+					$window.location.href = currentHost() + vm.link_profile + '?published=true';
+				}
+			}
+			function onUpdateProductError(err) {
+				vm.disable_save_buttons=false;
+				vm.errors = true;
+				if(err.data.errors && err.data.errors.required && angular.isArray(err.data.errors.required))
+					$rootScope.$broadcast(productEvents.requiredErrors, {required: err.data.errors.required});
+			}
+
 			vm.disable_save_buttons = true;
 			var required = [];
 			vm.product.product_state = angular.copy(state);
@@ -154,22 +170,9 @@
 			}
 
 			if(required.length === 0) {
-				vm.product.$update({
+				productDataService.updateProductPriv(vm.product, {
 					idProduct: vm.product.id
-				}).then(function (dataSaved) {
-					vm.disable_save_buttons=false;
-					if(state === 'product_state_draft') {
-						vm.product = productService.parseProductFromService(vm.product);
-						toastr.success('Saved!');
-					} else if (state === 'product_state_active') {
-						$window.location.href = currentHost() + vm.link_profile + '?published=true';
-					}
-				}, function (err) {
-					vm.disable_save_buttons=false;
-					vm.errors = true;
-					if(err.data.errors && err.data.errors.required && angular.isArray(err.data.errors.required))
-						$rootScope.$broadcast(productEvents.requiredErrors, {required: err.data.errors.required});
-				});
+				}, onUpdateProductSuccess, onUpdateProductError);
 			} else {
 				vm.disable_save_buttons=false;
 				vm.errors = true;

@@ -8,7 +8,7 @@
 		vm.deviser_id = UtilService.returnDeviserIdFromUrl();
 		
 		function init() {
-			vm.product = new productDataService.ProductPriv();
+			vm.product = {};
 			vm.product.slug = {};
 			vm.product.categories = [];
 			vm.product.media = {
@@ -120,6 +120,39 @@
 		}
 
 		function save(state) {
+			function onUpdateProductSuccess(data) {
+				vm.disable_save_buttons = false;
+				if(state === 'product_state_draft') {
+					saved_draft();
+				} else if(state === 'product_state_active') {
+					product_published();
+				}
+			}
+
+			function onUpdateProductError(err) {
+				vm.disable_save_buttons = false;
+				if(err.data.errors && err.data.errors.required && angular.isArray(err.data.errors.required))
+					$rootScope.$broadcast(productEvents.requiredErrors, {required: err.data.errors.required})
+			}
+			
+			function onSaveProductSuccess(data) {
+				vm.disable_save_buttons = false;
+				if(state==='product_state_draft') {
+					saved_draft();
+				} else if(state === 'product_state_active') {
+					vm.disable_save_buttons = false;
+					product_published();
+				}
+			}
+			
+			function onSaveProductError(err) {
+				vm.disable_save_buttons = false;
+				vm.errors = true;
+				//send errors to components
+				if(err.data.errors && err.data.errors.required && angular.isArray(err.data.errors.required))
+					$rootScope.$broadcast(productEvents.requiredErrors, {required: err.data.errors.required})
+			}
+
 			vm.disable_save_buttons = true;
 			var required = [];
 			//set state of the product
@@ -149,38 +182,12 @@
 
 			if(required.length === 0) {
 				if(vm.product.id) {
-					vm.product.$update({
+					productDataService.updateProductPriv(vm.product, {
 						idProduct: vm.product.id
-					}).then(function(dataSaved) {
-						vm.disable_save_buttons = false;
-						if(state === 'product_state_draft') {
-							saved_draft();
-						} else if(state === 'product_state_active') {
-							product_published();
-						}
-					}, function (err) {
-						vm.disable_save_buttons = false;
-						if(err.data.errors && err.data.errors.required && angular.isArray(err.data.errors.required))
-								$rootScope.$broadcast(productEvents.requiredErrors, {required: err.data.errors.required})
-					});
+					}, onUpdateProductSuccess, onUpdateProductError);
 				}
 				else {
-					vm.product.$save()
-						.then(function (dataSaved) {
-							vm.disable_save_buttons = false;
-							if(state==='product_state_draft') {
-								saved_draft();
-							} else if(state === 'product_state_active') {
-								vm.disable_save_buttons = false;
-								product_published();
-							}
-						}, function(err) {
-							vm.disable_save_buttons = false;
-							vm.errors = true;
-							//send errors to components
-							if(err.data.errors && err.data.errors.required && angular.isArray(err.data.errors.required))
-								$rootScope.$broadcast(productEvents.requiredErrors, {required: err.data.errors.required})
-						});
+					productDataService.postProductPriv(vm.product, onSaveProductSuccess, onSaveProductError);
 				}
 			} else {
 				vm.disable_save_buttons = false;
