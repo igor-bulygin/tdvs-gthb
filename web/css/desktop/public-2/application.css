@@ -1618,9 +1618,25 @@ input[type="radio"] .styled:checked + label::after {
   top: 5px;
   right: 5px;
   z-index: 9;
-  width: 34px;
-  height: 20px;
   display: none; }
+  .hover-btns-wrapper .icons-hover {
+    float: left;
+    width: 30px;
+    height: 30px;
+    background-color: #e9e9e9;
+    font-size: 17px;
+    margin: 0 0 0 5px;
+    padding: 3px 0 0 0;
+    text-align: center;
+    border-radius: 90px 90px 90px 90px !important;
+    -webkit-border-radius: 90px 90px 90px 90px !important;
+    -moz-border-radius: 90px 90px 90px 90px !important; }
+    .hover-btns-wrapper .icons-hover.box {
+      background: url("/imgs/box.svg") 0 5px no-repeat #e9e9e9;
+      display: inline-block; }
+
+.grey-link {
+  color: #9a9a9a; }
 
 .showcase-wrapper {
   opacity: #e9e9e9;
