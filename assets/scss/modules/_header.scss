@@ -293,7 +293,11 @@
 	span{
 		margin-right: 15px;
 		float: right;
-		text-transform: capitalize;
+		text-transform: initial;
+		max-width: 115px;
+		text-align: right;
+		max-height: 80px;
+    	overflow: hidden;
 	}
 }
 .menu-logued{
