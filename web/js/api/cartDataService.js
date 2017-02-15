@@ -19,6 +19,7 @@
 		this.deleteItem = deleteItem;
 		this.saveUserInfo = saveUserInfo;
 		this.getCartToken = getCartToken;
+		this.addProduct = addProduct;
 
 		function createCart(data, onsuccess, onerror) {
 			Cart.save()
@@ -69,6 +70,19 @@
 				.then(function(returnData) {
 					onsuccess(returnData);
 				}, function (err) {
+					onerror(err);
+				})
+		}
+
+		function addProduct(data, params, onsuccess, onerror) {
+			var newProduct = new CartProduct;
+			for(var key in data) {
+				newProduct[key] = angular.copy(data[key]);
+			}
+			newProduct.$save(params)
+				.then(function(returnData){
+					onsuccess(returnData);
+				}, function(err){
 					onerror(err);
 				})
 		}

@@ -233,24 +233,31 @@
 		}
 
 		function saveProduct(cart_id) {
-			var cartProduct = new cartDataService.CartProduct;
-			cartProduct.product_id = angular.copy(vm.product.id);
-			cartProduct.price_stock_id = angular.copy(vm.reference_id);
-			cartProduct.quantity = angular.copy(vm.quantity);
-			cartProduct.$save({
-				id: cart_id
-			}).then(function(savedData) {
-				$window.location.href = currentHost() + "/cart";
-			}, function (err) {
+			function onSaveProductSuccess(data) {
+				$window.location.href = currentHost() + '/cart';
+			}
+			function onSaveProductError(err) {
 				if(err.status === 404) {
-					cartDataService.Cart.save()
-						.$promise.then(function(cartData) {
-							cart_id = angular.copy(cartData.id);
-							UtilService.setLocalStorage('cart_id', cart_id);
-							saveProduct(cart_id);
-						});
+					cartDataService.createCart(null, onCreateCartSuccess, onCreateCartError);
 				}
-			});
+			}
+			cartDataService.addProduct({
+				product_id: vm.product.id,
+				price_stock_id: vm.reference_id,
+				quantity: vm.quantity
+			}, {
+				id: cart_id
+			}, onSaveProductSuccess, onSaveProductError);
+		}
+
+		function onCreateCartSuccess(data) {
+			var cart_id = angular.copy(data.id);
+			UtilService.setLocalStorage('cart_id', cart_id);
+			saveProduct(cart_id);
+		}
+
+		function onCreateCartError(err) {
+			console.log(err);
 		}
 
 		function addToCart(form) {
@@ -262,14 +269,7 @@
 					saveProduct(cart_id);
 				} else {
 					//create cart
-					cartDataService.Cart.save()
-						.$promise.then(function (cartData) {
-							cart_id = angular.copy(cartData.id);
-							UtilService.setLocalStorage('cart_id', cart_id);
-							saveProduct(cart_id);
-						}, function(err) {
-							//err
-						})
+					cartDataService.createCart(null, onCreateCartSuccess, onCreateCartError)
 				}
 			}
 		}
