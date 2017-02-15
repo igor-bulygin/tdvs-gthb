@@ -92,6 +92,7 @@
 }
 .items-row{
 	margin-left:0;
+	position: relative;
 	button{
 		@include border-radius(20px,20px,20px,20px);
 	}
@@ -107,6 +108,8 @@
 	.close-row{
 		margin: 0 8px;
 		color:$white;
+		position: absolute;
+    	top: 5px;
 		background-color: $light_grey;
 		font-size: 11px;
 		width: 22px;

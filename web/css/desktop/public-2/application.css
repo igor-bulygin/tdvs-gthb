@@ -3974,7 +3974,8 @@ input[type="radio"] .styled:checked + label::after {
         background-color: transparent !important; }
 
 .items-row {
-  margin-left: 0; }
+  margin-left: 0;
+  position: relative; }
   .items-row button {
     border-radius: 20px 20px 20px 20px !important;
     -webkit-border-radius: 20px 20px 20px 20px !important;
@@ -3988,6 +3989,8 @@ input[type="radio"] .styled:checked + label::after {
   .items-row .close-row {
     margin: 0 8px;
     color: #ffffff;
+    position: absolute;
+    top: 5px;
     background-color: #bfbfbf;
     font-size: 11px;
     width: 22px;
