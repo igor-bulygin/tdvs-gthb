@@ -408,6 +408,7 @@ class Product2 extends Product {
 					'url_images' => 'urlImagesLocation',
 					'position',
 					'loveds',
+					'isLoved' => 'isLoved',
 					'prints',
 					'sizechart',
 					'price_stock',
@@ -839,6 +840,10 @@ class Product2 extends Product {
 		/** @var Person $deviser */
 		$deviser = Person::findOneSerialized($this->deviser_id);
 		return $deviser->getPreviewSerialized();
+	}
+
+	public function getIsLoved() {
+		return $this->isLovedByCurrentUser();
 	}
 
 	/**
