@@ -222,8 +222,9 @@ $videos = $product->getVideos();
 							<div class="row-size">
 
 								<button type="button" class="btn btn-grey btn-hart pull-left" ng-click="detailProductCtrl.setLoved()">
-									<i class="ion-ios-heart"></i>
-									<span>Love work</span>
+									<i class="ion-ios-heart ng-class:{'red-text': detailProductCtrl.product.isLoved}"></i>
+									<span ng-if="!detailProductCtrl.product.isLoved">Love work</span>
+									<span ng-if="detailProductCtrl.product.isLoved">Loved!</span>
 								</button>
 
 								<button type="button" class="btn btn-grey btn-hart pull-right">
