@@ -22,6 +22,7 @@
 		this.getProductPriv = getProductPriv;
 		this.postProductPriv = postProductPriv;
 		this.updateProductPriv = updateProductPriv;
+		this.deleteProductPriv = deleteProductPriv;
 
 		function getProductPub(params, onsuccess, onerror) {
 			Product.get(params)
