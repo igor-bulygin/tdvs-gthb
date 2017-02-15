@@ -8,7 +8,7 @@
 		var Categories = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'categories');
 
 		//priv
-		this.ProductPriv = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'products/:idProduct', {}, {
+		var ProductPriv = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'products/:idProduct', {}, {
 			'update': {
 				method: 'PUT'
 			}
@@ -51,7 +51,7 @@
 		}
 
 		function getProductPriv(params, onsuccess, onerror) {
-			this.ProductPriv.get(params)
+			ProductPriv.get(params)
 				.$promise.then(function(returnData) {
 					onsuccess(returnData);
 				}, function(err) {
@@ -60,7 +60,7 @@
 		}
 
 		function postProductPriv(data, onsuccess, onerror) {
-			var new_product = new this.ProductPriv;
+			var new_product = new ProductPriv;
 			for(var key in data) {
 				new_product[key] = angular.copy(data[key]);
 			}
@@ -73,7 +73,7 @@
 		}
 
 		function updateProductPriv(data, params, onsuccess, onerror) {
-			var update_product = new this.ProductPriv;
+			var update_product = new ProductPriv;
 			for(var key in data) {
 				update_product[key] = angular.copy(data[key])
 			}
@@ -83,6 +83,15 @@
 				}, function(err) {
 					onerror(err);
 				})
+		}
+
+		function deleteProductPriv(params, onsuccess, onerror) {
+			ProductPriv.delete(params)
+				.$promise.then(function(returnData) {
+					onsuccess(returnData);
+				}, function(err) {
+					onerror(err);
+				});
 		}
 	}
 

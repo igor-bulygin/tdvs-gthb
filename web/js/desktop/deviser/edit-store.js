@@ -156,11 +156,13 @@
 		}
 
 		function deleteProduct(id) {
-			productDataService.ProductPriv.delete({
-				idProduct: id
-			}).$promise.then(function(deleteData) {
+			function onDeleteProductPrivSuccess(data) {
 				getProducts();
-			});
+			}
+			
+			productDataService.deleteProductPriv({
+				idProduct: id
+			}, onDeleteProductPrivSuccess, onError)
 		}
 
 		function show_unpublished_works(){
