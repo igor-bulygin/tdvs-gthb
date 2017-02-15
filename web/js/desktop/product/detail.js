@@ -10,7 +10,6 @@
 		vm.parseOptions = parseOptions;
 		vm.changeQuantity = changeQuantity;
 		vm.changeOriginalArtwork = changeOriginalArtwork;
-		vm.getReferencesFromOptions = getReferencesFromOptions;
 		vm.selectComparator = selectComparator;
 		vm.addToCart = addToCart;
 		vm.setLoved = setLoved;
@@ -23,23 +22,24 @@
 
 		init();
 
+		function onError(err) {
+			console.log(err);
+		}
+
 		function getProductId() {
 			var url = $location.absUrl().split("#")[0].split("/");
 			vm.product_id = url[url.length - 1];
 		}
 
 		function getProduct() {
-			productDataService.Product.get({
-				idProduct: vm.product_id
-			}).$promise.then(function (dataProduct) {
-				vm.product = dataProduct;
+			function onGetProductSuccess(data) {
+				vm.product = angular.copy(data);
 				//checks
 				setOriginalArtwork(vm.product);
 				vm.minimum_price = getMinimumPrice(vm.product.price_stock);
 				vm.total_stock = getTotalStock(vm.product.price_stock);
 				vm.stock = vm.total_stock;
 				vm.price = vm.minimum_price;
-				//getReferencesFromOptions();
 				//parse options with only one value
 				vm.product.options.forEach(function(option){
 					if(option.values.length === 1) {
@@ -47,9 +47,11 @@
 						parseOptions(option.id, option.values[0].value);
 					}
 				})
-			}, function (err) {
-				toastr.error(err);
-			})
+			}
+
+			productDataService.getProductPub({
+				idProduct: vm.product_id
+			}, onGetProductSuccess, onError);
 		}
 
 		function getTags() {
@@ -177,24 +179,6 @@
 				}
 			});
 			return reference;
-		}
-
-		function getReferencesFromOptions(options) {
-			//searchs all the references looking for matches with options
-			var references_filtered = [];
-			vm.product.references.forEach(function (element) {
-				var flag = true;
-				for (var key in options) {
-					if (key in element.options && (element.options[key] == options[key])) {
-						//ok
-					} else {
-						flag = false;
-					}
-				}
-				if (flag) references_filtered.push(element);
-			})
-			getMinimumPrice(references_filtered);
-			//return references_filtered;
 		}
 
 		function changeQuantity(value){

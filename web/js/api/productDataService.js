@@ -3,7 +3,7 @@
 
 	function productDataService($resource, apiConfig) {
 		//pub
-		this.Product = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'products/:idProduct');
+		var Product = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'products/:idProduct');
 		this.PaperType = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'paper-type');
 		var Categories = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'categories');
 
@@ -16,8 +16,17 @@
 		this.Uploads = apiConfig.baseUrl + "priv/" + apiConfig.version + 'uploads';
 
 		//functions
+		this.getProductPub = getProductPub;
 		this.getCategories = getCategories;
 
+		function getProductPub(params, onsuccess, onerror) {
+			Product.get(params)
+				.$promise.then(function (returnData) {
+					onsuccess(returnData);
+				}, function (err) {
+					onerror(err);
+				})
+		}
 
 		function getCategories(params, onsuccess, onerror) {
 			Categories.get(params)
