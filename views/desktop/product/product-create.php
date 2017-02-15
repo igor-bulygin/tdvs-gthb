@@ -27,17 +27,19 @@ $this->title = $deviser->getBrandName() . ' - Todevise';
 ?>
 <div ng-controller="createProductCtrl as createProductCtrl" class="create-work-wrapper">
 	<div id="newProductHeader" class="new-product-header ng-class:{'purple': createProductCtrl.errors}">
-		<div class="pull-left">
-			<a class="back-link" ng-href="{{createProductCtrl.link_profile}}"> &lt go back to your profile</a>
-		</div>
-		<div class="avatar">
-			<img ng-src="{{createProductCtrl.profile}}">
-		</div>
-		<div class="text-center" ng-if="!createProductCtrl.errors"><h4 class="title">New work</h4></div>
-		<div class="text-center" ng-if="createProductCtrl.errors"><p>Please complete all the required fields before publishing your work.</p></div>
-		<div class="btns-group">
-			<button class="btn btn-transparent" ng-click="createProductCtrl.save('product_state_draft')" ng-disabled="createProductCtrl.disable_save_buttons">Save progress</button>
-			<button class="btn btn-default btn-green" ng-click="createProductCtrl.save('product_state_active')" ng-disabled="createProductCtrl.disable_save_buttons">Publish work</button>
+		<div class="container relative">
+			<div class="pull-left">
+				<a class="back-link" ng-href="{{createProductCtrl.link_profile}}"> &lt go back to your profile</a>
+			</div>
+			<div class="avatar">
+				<img ng-src="{{createProductCtrl.profile}}">
+			</div>
+			<div class="text-center" ng-if="!createProductCtrl.errors"><h4 class="title">New work</h4></div>
+			<div class="text-center" ng-if="createProductCtrl.errors"><p>Please complete all the required fields before publishing your work.</p></div>
+			<div class="btns-group">
+				<button class="btn btn-transparent" ng-click="createProductCtrl.save('product_state_draft')" ng-disabled="createProductCtrl.disable_save_buttons">Save progress</button>
+				<button class="btn btn-default btn-green" ng-click="createProductCtrl.save('product_state_active')" ng-disabled="createProductCtrl.disable_save_buttons">Publish work</button>
+			</div>
 		</div>
 	</div>
 	<div class="container">
