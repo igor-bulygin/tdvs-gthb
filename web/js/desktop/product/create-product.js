@@ -40,13 +40,16 @@
 
 		init();
 
+		function onError(err) {
+			console.log(err);
+		}
+
 		function getCategories() {
-			productDataService.Categories.get({scope: 'all'})
-				.$promise.then(function(dataCategories) {
-					vm.allCategories = dataCategories.items;
-				}, function(err) {
-					toastr.error(err);
-				});
+			function onGetCategoriesSuccess(data) {
+				vm.allCategories = data.items;
+			}
+
+			productDataService.getCategories({scope: 'all'}, onGetCategoriesSuccess, onError);
 		}
 
 		function getMetric() {

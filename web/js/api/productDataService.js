@@ -5,7 +5,7 @@
 		//pub
 		this.Product = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'products/:idProduct');
 		this.PaperType = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'paper-type');
-		this.Categories = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'categories');
+		var Categories = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'categories');
 
 		//priv
 		this.ProductPriv = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'products/:idProduct', {}, {
@@ -14,6 +14,19 @@
 			}
 		});
 		this.Uploads = apiConfig.baseUrl + "priv/" + apiConfig.version + 'uploads';
+
+		//functions
+		this.getCategories = getCategories;
+
+
+		function getCategories(params, onsuccess, onerror) {
+			Categories.get(params)
+				.$promise.then(function(returnData) {
+					onsuccess(returnData);
+				}, function (err) {
+					onerror(err);
+				});
+		}
 	}
 
 	angular.module('api')

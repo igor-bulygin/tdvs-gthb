@@ -40,6 +40,10 @@
 
 		init();
 
+		function onError(err) {
+			console.log(err);
+		}
+
 		function getTags() {
 			tagDataService.Tags.get()
 				.$promise.then(function (dataTags) {
@@ -49,15 +53,14 @@
 					//err
 				});
 		}
-		
+
 		function getCategories() {
-			productDataService.Categories.get({scope: 'all'})
-				.$promise.then(function (dataCategories) {
-					vm.allCategories = dataCategories.items;
-					getSizechart();
-				}, function(err) {
-					//errors
-				});
+			function onGetCategoriesSuccess(data) {
+				vm.allCategories = data.items;
+				getSizechart();
+			}
+
+			productDataService.getCategories({scope: 'all'}, onGetCategoriesSuccess, onError);
 		}
 
 
