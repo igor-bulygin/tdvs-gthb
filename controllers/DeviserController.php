@@ -3,6 +3,7 @@ namespace app\controllers;
 
 use app\helpers\CController;
 use app\helpers\Utils;
+use app\models\Box;
 use app\models\Category;
 use app\models\Country;
 use app\models\Loved;
@@ -574,6 +575,30 @@ class DeviserController extends CController
 		return $this->render("loved-view", [
 			'deviser' => $deviser,
 			'loveds' => $loveds,
+		]);
+	}
+
+	public function actionBoxes($slug, $deviser_id)
+	{
+		$deviser = Person::findOneSerialized($deviser_id);
+
+		if (!$deviser) {
+			throw new NotFoundHttpException();
+		}
+
+		if ($deviser->account_state != Person::ACCOUNT_STATE_ACTIVE) {
+			if ($deviser->isDeviserEditable()) {
+				$this->redirect(Url::to(['deviser/about-edit', 'deviser_id' => $deviser_id, 'slug' => $slug]));
+			} else {
+				throw new NotFoundHttpException();
+			}
+		}
+
+		$boxes = Box::findSerialized(['person_id' => $deviser_id]);
+		$this->layout = '/desktop/public-2.php';
+		return $this->render("boxes-view", [
+			'deviser' => $deviser,
+			'boxes' => $boxes,
 		]);
 	}
 

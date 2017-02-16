@@ -29,6 +29,9 @@ $deviser = $this->params['deviser'];
         <li>
 			<a class="<?= ($deviser->account_state == Person::ACCOUNT_STATE_DRAFT) ? 'disabled-link' : '' ?> <?= ($activeOption=='loved') ? 'active' : '' ?>" href="<?= Url::to(["deviser/loved" , "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id])?>">Loved</a>
         </li>
+        <li>
+			<a class="<?= ($deviser->account_state == Person::ACCOUNT_STATE_DRAFT) ? 'disabled-link' : '' ?> <?= ($activeOption=='boxes') ? 'active' : '' ?>" href="<?= Url::to(["deviser/boxes" , "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id])?>">Boxes</a>
+        </li>
 	</ul>
 	<ul class="menu-deviser-bottom">
 		<li>

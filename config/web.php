@@ -181,6 +181,7 @@ $config = [
 				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/works/create' => 'product/create',
 				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/works/<product_id:[^/.]*?>/edit' => 'product/edit',
 				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/loved' => 'deviser/loved',
+				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/boxes' => 'deviser/boxes',
 
 				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/store/edit' => 'deviser/store-edit',
 				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/about/edit' => 'deviser/about-edit',
