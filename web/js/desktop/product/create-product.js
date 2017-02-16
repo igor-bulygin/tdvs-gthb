@@ -49,12 +49,11 @@
 		}
 
 		function getMetric() {
-			metricDataService.Metric.get()
-				.$promise.then(function(dataMetric) {
-					vm.metric = dataMetric;
-				}, function(err) {
-					toastr.error(err);
-				});
+			function onGetMetricSuccess(data) {
+				vm.metric = angular.copy(data);
+			}
+
+			metricDataService.getMetric(onGetMetricSuccess, UtilService.onError);
 		}
 
 

@@ -60,12 +60,11 @@
 
 
 		function getMetric() {
-			metricDataService.Metric.get()
-				.$promise.then(function (dataMetric) {
-					vm.metric = dataMetric;
-				}, function(err) {
-					//errors
-				})
+			function onGetMetricSuccess(data) {
+				vm.metric = angular.copy(data);
+			}
+
+			metricDataService.getMetric(onGetMetricSuccess, UtilService.onError);
 		}
 
 		function getSizechart() {
