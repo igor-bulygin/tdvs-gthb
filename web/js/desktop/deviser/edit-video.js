@@ -61,24 +61,24 @@
 		}
 
 		function findProducts(key, index) {
+			function onGetProductPrivSuccess(data) {
+				if(data.items.length === 0)
+					vm.noProducts = true;
+				vm.works[index] = data.items;
+				vm.works[index].forEach(function(element) {
+					element.url_image_preview = element.url_images + element.media.photos[0].name;
+				})
+			}
+
 			vm.noProducts = false;
 			vm.product_min_length = false;
 			if (key.length < 4)
 				vm.product_min_length = true;
 			else {
-				productDataService.ProductPriv.get({
+				var params = {
 					name: key
-				}).$promise.then(function (dataProducts) {
-					if (dataProducts.items.length === 0)
-						vm.noProducts = true;
-					vm.works[index] = dataProducts.items;
-					vm.works[index].forEach(function (element) {
-						element.url_image_preview = element.url_images + element.media.photos[0].name;
-					})
-
-				}, function (err) {
-					toastr.error(err);
-				});
+				}
+				productDataService.getProductPriv(params, onGetProductPrivSuccess, UtilService.onError);
 			}
 		}
 

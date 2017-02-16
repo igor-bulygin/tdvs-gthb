@@ -31,21 +31,19 @@
 		}
 
 		function getCategories() {
-			productDataService.Categories.get({scope: 'roots'})
-				.$promise.then(function (dataCategories) {
-					vm.categories = dataCategories.items;
-				}, function (err) {
-					//errors
-				});
+			function onGetCategoriesSuccess(data) {
+				vm.categories = data.items;
+			}
+
+			productDataService.getCategories({scope: 'roots'}, onGetCategoriesSuccess, UtilService.onError);
 		}
 
 		function getLanguages() {
-			languageDataService.Languages.get()
-				.$promise.then(function (dataLanguages) {
-					vm.languages = dataLanguages.items;
-				}, function (err) {
-					//errors
-				});
+			function onGetLanguagesSuccess(data) {
+				vm.languages = data.items;
+			}
+
+			languageDataService.getLanguages(onGetLanguagesSuccess, UtilService.onError);
 		}
 
 		function init() {

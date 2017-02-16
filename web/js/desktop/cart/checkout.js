@@ -20,7 +20,7 @@
 			function onCreateCartError(err) {
 				console.log(err);
 			}
-			cartDataService.createCart({}, onCreateCartSuccess, onCreateCartError)
+			cartDataService.createCart(onCreateCartSuccess, onCreateCartError)
 		}
 
 

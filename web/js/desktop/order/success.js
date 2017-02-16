@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(orderDataService, cartService, $location) {
+	function controller(orderDataService, cartService, $location, UtilService) {
 		var vm = this;
 		vm.state = {
 			state: 4
@@ -14,17 +14,15 @@
 		}
 
 		function getOrder() {
-			var url = $location.absUrl();
-			var order_id = url.split('/')[url.split('/').length-1];
-            orderDataService.Order.get({
-				id: order_id
-			}).$promise.then(function (orderData) {
-			vm.order = angular.copy(orderData);
+			function onGetOrderSuccess(data) {
+				vm.order = angular.copy(orderData);
 				cartService.parseTags(vm.order);
 				vm.devisers = cartService.parseDevisersFromProducts(vm.order);
-			}, function (err) {
-				console.log(err);
-			});
+			}
+			var url = $location.absUrl();
+			var order_id = url.split('/')[url.split('/').length-1];
+
+			orderDataService.getOrder({id:order_id}, onGetOrderSuccess, UtilService.onError);
 		}
 	}
  

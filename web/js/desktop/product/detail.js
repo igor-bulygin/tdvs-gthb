@@ -10,7 +10,6 @@
 		vm.parseOptions = parseOptions;
 		vm.changeQuantity = changeQuantity;
 		vm.changeOriginalArtwork = changeOriginalArtwork;
-		vm.getReferencesFromOptions = getReferencesFromOptions;
 		vm.selectComparator = selectComparator;
 		vm.addToCart = addToCart;
 		vm.setLoved = setLoved;
@@ -29,17 +28,14 @@
 		}
 
 		function getProduct() {
-			productDataService.Product.get({
-				idProduct: vm.product_id
-			}).$promise.then(function (dataProduct) {
-				vm.product = dataProduct;
+			function onGetProductSuccess(data) {
+				vm.product = angular.copy(data);
 				//checks
 				setOriginalArtwork(vm.product);
 				vm.minimum_price = getMinimumPrice(vm.product.price_stock);
 				vm.total_stock = getTotalStock(vm.product.price_stock);
 				vm.stock = vm.total_stock;
 				vm.price = vm.minimum_price;
-				//getReferencesFromOptions();
 				//parse options with only one value
 				vm.product.options.forEach(function(option){
 					if(option.values.length === 1) {
@@ -47,19 +43,19 @@
 						parseOptions(option.id, option.values[0].value);
 					}
 				})
-			}, function (err) {
-				toastr.error(err);
-			})
+			}
+
+			productDataService.getProductPub({
+				idProduct: vm.product_id
+			}, onGetProductSuccess, UtilService.onError);
 		}
 
 		function getTags() {
-			tagDataService.Tags.get()
-				.$promise.then(function(dataTags) {
-					vm.tags = dataTags.items;
-					getProduct();
-				}, function(err) {
-					//error
-				});
+			function onGetTagsSuccess(data) {
+				vm.tags = angular.copy(data.items);
+				getProduct();
+			}
+			tagDataService.getTags(onGetTagsSuccess, UtilService.onError);
 		}
 
 		function getMinimumPrice(references) {
@@ -179,24 +175,6 @@
 			return reference;
 		}
 
-		function getReferencesFromOptions(options) {
-			//searchs all the references looking for matches with options
-			var references_filtered = [];
-			vm.product.references.forEach(function (element) {
-				var flag = true;
-				for (var key in options) {
-					if (key in element.options && (element.options[key] == options[key])) {
-						//ok
-					} else {
-						flag = false;
-					}
-				}
-				if (flag) references_filtered.push(element);
-			})
-			getMinimumPrice(references_filtered);
-			//return references_filtered;
-		}
-
 		function changeQuantity(value){
 			if(vm.quantity <= vm.stock) {
 				if(value < 0) {
@@ -233,24 +211,31 @@
 		}
 
 		function saveProduct(cart_id) {
-			var cartProduct = new cartDataService.CartProduct;
-			cartProduct.product_id = angular.copy(vm.product.id);
-			cartProduct.price_stock_id = angular.copy(vm.reference_id);
-			cartProduct.quantity = angular.copy(vm.quantity);
-			cartProduct.$save({
-				id: cart_id
-			}).then(function(savedData) {
-				$window.location.href = currentHost() + "/cart";
-			}, function (err) {
+			function onSaveProductSuccess(data) {
+				$window.location.href = currentHost() + '/cart';
+			}
+			function onSaveProductError(err) {
 				if(err.status === 404) {
-					cartDataService.Cart.save()
-						.$promise.then(function(cartData) {
-							cart_id = angular.copy(cartData.id);
-							UtilService.setLocalStorage('cart_id', cart_id);
-							saveProduct(cart_id);
-						});
+					cartDataService.createCart(onCreateCartSuccess, onCreateCartError);
 				}
-			});
+			}
+			cartDataService.addProduct({
+				product_id: vm.product.id,
+				price_stock_id: vm.reference_id,
+				quantity: vm.quantity
+			}, {
+				id: cart_id
+			}, onSaveProductSuccess, onSaveProductError);
+		}
+
+		function onCreateCartSuccess(data) {
+			var cart_id = angular.copy(data.id);
+			UtilService.setLocalStorage('cart_id', cart_id);
+			saveProduct(cart_id);
+		}
+
+		function onCreateCartError(err) {
+			console.log(err);
 		}
 
 		function addToCart(form) {
@@ -258,18 +243,9 @@
 			if(form.$valid && vm.reference_id) {
 				var cart_id = UtilService.getLocalStorage('cart_id');
 				if(cart_id) {
-					//POST to product
 					saveProduct(cart_id);
 				} else {
-					//create cart
-					cartDataService.Cart.save()
-						.$promise.then(function (cartData) {
-							cart_id = angular.copy(cartData.id);
-							UtilService.setLocalStorage('cart_id', cart_id);
-							saveProduct(cart_id);
-						}, function(err) {
-							//err
-						})
+					cartDataService.createCart(onCreateCartSuccess, onCreateCartError);
 				}
 			}
 		}

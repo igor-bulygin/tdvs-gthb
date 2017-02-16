@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function service(tagDataService) {
+	function service(tagDataService, UtilService) {
 		this.parseDevisersFromProducts = parseDevisersFromProducts;
 		this.parseTags = parseTags;
 
@@ -24,12 +24,12 @@
 		}
 
 		function parseTags(cart){
-			tagDataService.Tags.get()
-				.$promise.then(function(dataTags) {
+
+			function onGetTagsSuccess(data) {
 					cart.products.forEach(function(product) {
 						product.tags = [];
 						for(var key in product.options) {
-							for(var i = 0; i < dataTags.items.length; i++) {
+							for(var i = 0; i < data.items.length; i++) {
 								var obj = {
 									values: []
 								}
@@ -39,9 +39,9 @@
 									product.tags.push(obj);
 									break;
 								}
-								else if(key === dataTags.items[i].id) {
-									obj.name = dataTags.items[i].name;
-									if(dataTags.items[i].name==='Size') {
+								else if(key === data.items[i].id) {
+									obj.name = data.items[i].name;
+									if(data.items[i].name==='Size') {
 										for(var j = 0; j < product.options[key].length; j++){
 											var str = product.options[key][j]['value'] + ' ' + product.options[key][j]['metric_unit'];
 											obj.values.push(str);
@@ -58,8 +58,9 @@
 							}
 						}
 					})
+			}
 
-				})
+			tagDataService.getTags(onGetTagsSuccess, UtilService.onError);
 		}
 	}
 

@@ -3,7 +3,19 @@
 
 	function tagDataService($resource, apiConfig) {
 		//pub
-		this.Tags = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'tag/:idTag');
+		var Tags = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'tag/:idTag');
+
+		//functions
+		this.getTags = getTags;
+
+		function getTags(onsuccess, onerror) {
+			Tags.get()
+				.$promise.then(function(returnData) {
+					onsuccess(returnData);
+				}, function(err) {
+					onerror(err);
+				});
+		}
 	}
 
 	angular.module('api')
