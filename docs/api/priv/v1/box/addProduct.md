@@ -9,7 +9,8 @@ Example about how to call to Web Service to add a product to a box
 **Response codes**: 
 * `201`: Created
 * `400`: Bad request
-* `403`: Not allowed
+* `401`: Unauthorized 
+* `403`: Forbidden
   
 **Request body**: 
 * `product_id`: Product identifier. (Required)

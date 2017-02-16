@@ -10,7 +10,8 @@ Products
 **Response codes**: 
 * `200`: Success
 * `400`: Bad request
-* `403`: Not allowed
+* `401`: Unauthorized 
+* `403`: Forbidden
   
 **Request parameters**:
 * `id`: Filter a specific product for id

@@ -9,6 +9,7 @@ Example about how to call to Web Service to delete a loved product for the conne
 **Response codes**:
 * `204`: No contect
 * `400`: Bad request
-* `403`: Not allowed
+* `401`: Unauthorized 
+* `403`: Forbidden
 
 **Request body**: No body

@@ -9,7 +9,8 @@ Example about how to call to Web Service to create a new Product
 **Response codes**: 
 * `201`: Created
 * `400`: Bad request
-* `403`: Not allowed
+* `401`: Unauthorized 
+* `403`: Forbidden
   
 **Request body**: 
 * `deviser_id`: Deviser (product's owner) identifier. (Required)

@@ -9,7 +9,8 @@ Example about how to call to Web Service to upload a media file
 **Response codes**: 
 * `200`: Success
 * `400`: Bad request
-* `403`: Not allowed
+* `401`: Unauthorized 
+* `403`: Forbidden
   
 **Request body**: 
 * `type`: one of available upload use:

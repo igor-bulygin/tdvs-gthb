@@ -9,7 +9,8 @@ Example about how to call to Web Service to update Deviser profile
 **Response codes**: 
 * `204`: Success, without body
 * `400`: Bad request
-* `403`: Not allowed
+* `401`: Unauthorized 
+* `403`: Forbidden
   
   
 **Request body**: 
