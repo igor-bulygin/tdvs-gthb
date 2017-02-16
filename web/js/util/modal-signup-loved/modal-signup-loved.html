@@ -2,7 +2,10 @@
 	<button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="modalSignUpLovedCtrl.dismiss()">
 		<span class="ion-ios-close" aria-hidden="true"></span>
 	</button>
-	<h3>You must be a Todevise member to <span class="glyphicon glyphicon-heart"></span> a product.</h3>
+	<h3>You must be a Todevise member to 
+		<span class="glyphicon glyphicon-heart" ng-if="modalSignUpLovedCtrl.resolve.icon === 'loved'" ng-cloak></span>
+		<span class="glyphicon glyphicon-gift" ng-if="modalSignUpLovedCtrl.resolve.icon === 'boxes'" ng-cloak></span>
+		 a product.</h3>
 </div>
 <div class="modal-body">
 	<div class="row">

@@ -1,9 +1,10 @@
 (function () {
 	"use strict";
 
-	function controller($scope, lovedDataService, $uibModal) {
+	function controller($scope, lovedDataService, boxDataService, $uibModal) {
 		var vm = this;
 		vm.setLoved = setLoved;
+		vm.setBoxes = setBoxes;
 		vm.productId = $scope.productId;
 
 		function init() {
@@ -13,6 +14,14 @@
 		init();
 
 		function setLoved() {
+			function setLovedSuccess(data) {
+				vm.isLoved = true;
+			}
+
+			function setLovedError(err) {
+				if(err.status === 401)
+					openSignUpModal('loved');
+			}
 			if(!vm.isLoved) {
 				lovedDataService.setLoved({
 					product_id: vm.productId
@@ -24,23 +33,40 @@
 			}
 		}
 
-		function setLovedSuccess(data) {
-			vm.isLoved = true;
-		}
-
-		function setLovedError(err) {
-			if(err.status === 401)
-				openSignUpModal();
-		}
-
 		function deleteLovedSuccess(data) {
 			vm.isLoved = false;
 		}
 
-		function openSignUpModal() {
+		function setBoxes() {
+			function onGetBoxSuccess(data) {
+				var modalInstance = $uibModal.open({
+					component: 'modalSaveBox',
+					size: 'sm',
+					resolve: {
+						productId: function() {
+							return vm.productId;
+						}
+					}
+				});
+			}
+
+			function onGetBoxError(err) {
+				if(err.status === 401 || err.status === 404)
+					openSignUpModal('boxes');
+			}
+
+			boxDataService.getBoxPriv(null, onGetBoxSuccess, onGetBoxError);
+		}
+
+		function openSignUpModal(component) {
 			var modalInstance = $uibModal.open({
 				component: 'modalSignUpLoved',
-				size: 'sm'
+				size: 'sm',
+				resolve: {
+					icon: function () {
+						return component;
+					}
+				}
 			});
 		}
 	}

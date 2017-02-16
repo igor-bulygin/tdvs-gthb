@@ -9,19 +9,29 @@
 		var BoxProduct = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'box/:idBox/product');
 
 		//functions
-		this.getBox = getBox;
+		this.getBoxPub = getBoxPub;
+		this.getBoxPriv = getBoxPriv;
 		this.createBox = createBox;
 		this.deleteBox = deleteBox;
 		this.addProduct = addProduct;
 		this.deleteProduct = deleteProduct;
 
-		function getBox(params, onsuccess, onerror) {
+		function getBoxPub(params, onsuccess, onerror) {
 			Box.get(params)
 				.$promise.then(function(returnData) {
 					onsuccess(returnData);
 				}, function(err) {
 					onerror(err);
 				});
+		}
+
+		function getBoxPriv(params, onsuccess, onerror) {
+			BoxPriv.get(params)
+				.$promise.then(function (returnData) {
+					onsuccess(returnData);
+				}, function(err) {
+					onerror(err);
+				})
 		}
 
 		function createBox(data, onsuccess, onerror) {
@@ -67,9 +77,10 @@
 				});
 		}
 
-
 	}
 
+	angular.module('api')
+		.service('boxDataService', boxDataService);
 	
 }());
 

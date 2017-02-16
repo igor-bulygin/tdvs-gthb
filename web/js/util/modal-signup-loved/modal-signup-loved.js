@@ -13,7 +13,8 @@
 		controllerAs: 'modalSignUpLovedCtrl',
 		bindings: {
 			dismiss: '&',
-			close: '&'
+			close: '&',
+			resolve: '<'
 		}
 	}
 
