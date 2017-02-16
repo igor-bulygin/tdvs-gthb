@@ -233,7 +233,7 @@ $videos = $product->getVideos();
 							</div>
 							<div class="row-size">
 								<span class="btn-tagline loved pull-left">Loved <span ng-bind="detailProductCtrl.product.loveds"></span> times</span>
-								<span class="btn-tagline saved pull-right">Saved in 1500 boxes</span>
+								<span class="btn-tagline saved pull-right">Saved in <span ng-bind="detailProductCtrl.product.boxes"></span> boxes</span>
 							</div>
 							<div>
 								<ul class="social-items">

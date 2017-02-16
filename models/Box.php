@@ -91,7 +91,6 @@ class Box extends CActiveRecord
 
 	public function beforeSave($insert)
 	{
-
 		if (empty($this->created_at)) {
 			$this->created_at = new MongoDate();
 		}
@@ -320,8 +319,10 @@ class Box extends CActiveRecord
 		$products = $this->productsMapping;
 		foreach ($products as $item) {
 			$product = Product2::findOneSerialized($item->product_id);
-			$return[] = $product;
+			$return[$item->created_at.'_'.$item->product_id] = $product;
 		}
+		ksort($return); // Sort by key, to force products in creation order
+		$return = array_reverse($return); // Reverse to return in inverse order of creation
 
 		return $return;
 	}
@@ -384,8 +385,10 @@ class Box extends CActiveRecord
 	 *
 	 * @throws Exception
 	 */
-	public function addProduct($boxProduct) {
-		$product = Product2::findOneSerialized($boxProduct->product_id); /* @var Product2 $product */
+	public function addProduct($boxProduct)
+	{
+		$product = Product2::findOneSerialized($boxProduct->product_id);
+		/* @var Product2 $product */
 		if (empty($product)) {
 			throw new Exception(sprintf("Product with id %s does not exists", $boxProduct->product_id));
 		}
@@ -400,10 +403,19 @@ class Box extends CActiveRecord
 		}
 		if (!isset($key)) {
 			$this->productsMapping[] = $boxProduct;
+
+			$this->save();
+
+			$collection = Yii::$app->mongodb->getCollection('product');
+			$collection->update(
+				[
+					'short_id' => $product->short_id
+				],
+				[
+					'boxes' => $product->boxes + 1
+				]
+			);
 		}
-
-		$this->save();
-
 	}
 
 	public function deleteProduct($productId) {
