@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function service(tagDataService) {
+	function service(tagDataService, UtilService) {
 		this.parseDevisersFromProducts = parseDevisersFromProducts;
 		this.parseTags = parseTags;
 
@@ -24,9 +24,6 @@
 		}
 
 		function parseTags(cart){
-			function onError(err) {
-				console.log(err);
-			}
 
 			function onGetTagsSuccess(data) {
 					cart.products.forEach(function(product) {
@@ -63,7 +60,7 @@
 					})
 			}
 
-			tagDataService.getTags(onGetTagsSuccess, onError);
+			tagDataService.getTags(onGetTagsSuccess, UtilService.onError);
 		}
 	}
 

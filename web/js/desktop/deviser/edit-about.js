@@ -17,10 +17,6 @@
 		vm.biography_language = "en-US";
 		vm.images = [];
 
-		function onError(err) {
-			console.log(err);
-		}
-		
 		function getDeviser() {
 			deviserDataService.Profile.get({
 				deviser_id: UtilService.returnDeviserIdFromUrl()
@@ -39,7 +35,7 @@
 				vm.categories = data.items;
 			}
 
-			productDataService.getCategories({scope: 'roots'}, onGetCategoriesSuccess, onError);
+			productDataService.getCategories({scope: 'roots'}, onGetCategoriesSuccess, UtilService.onError);
 		}
 
 		function getLanguages() {

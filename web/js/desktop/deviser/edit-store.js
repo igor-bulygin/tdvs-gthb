@@ -16,10 +16,6 @@
 
 		init();
 
-		function onError(err) {
-			console.log(err);
-		}
-
 		function getProducts() {
 			function onGetProductsSuccess(data) {
 				vm.products = data.items;
@@ -44,7 +40,7 @@
 				}
 			}
 
-			productDataService.getProductPriv(params, onGetProductsSuccess, onError);
+			productDataService.getProductPriv(params, onGetProductsSuccess, UtilService.onError);
 		}
 
 		function getDeviser() {
@@ -111,7 +107,7 @@
 					position: position
 				},{
 					idProduct: product.id
-				}, onUpdateProductSuccess, onError);
+				}, onUpdateProductSuccess, UtilService.onError);
 			} else {
 				toastr.error("Cannot be updated!");
 			}
@@ -162,7 +158,7 @@
 			
 			productDataService.deleteProductPriv({
 				idProduct: id
-			}, onDeleteProductPrivSuccess, onError)
+			}, onDeleteProductPrivSuccess, UtilService.onError)
 		}
 
 		function show_unpublished_works(){

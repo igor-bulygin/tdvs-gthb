@@ -40,17 +40,13 @@
 
 		init();
 
-		function onError(err) {
-			console.log(err);
-		}
-
 		function getTags() {
 			function onGetTagsSuccess(data) {
 				vm.tags = angular.copy(data.items);
 				getCategories();
 			}
 
-			tagDataService.getTags(onGetTagsSuccess, onError);
+			tagDataService.getTags(onGetTagsSuccess, UtilService.onError);
 		}
 
 		function getCategories() {
@@ -59,7 +55,7 @@
 				getSizechart();
 			}
 
-			productDataService.getCategories({scope: 'all'}, onGetCategoriesSuccess, onError);
+			productDataService.getCategories({scope: 'all'}, onGetCategoriesSuccess, UtilService.onError);
 		}
 
 
@@ -80,7 +76,7 @@
 
 			sizechartDataService.getSizechart({
 				scope: 'all'
-			}, onGetSizechartSuccess, onError);
+			}, onGetSizechartSuccess, UtilService.onError);
 		}
 
 		function getPaperType() {
@@ -88,7 +84,7 @@
 				vm.papertypes = data.items;
 			}
 
-			productDataService.getPaperType(onGetPaperTypeSuccess, onError)
+			productDataService.getPaperType(onGetPaperTypeSuccess, UtilService.onError)
 		}
 
 		function getLanguages() {
@@ -110,7 +106,7 @@
 			var params = {
 				idProduct: UtilService.returnProductIdFromUrl()
 			}
-			productDataService.getProductPriv(params, onGetProductPrivSuccess, onError);
+			productDataService.getProductPriv(params, onGetProductPrivSuccess, UtilService.onError);
 		}
 		
 		function getDeviser(){

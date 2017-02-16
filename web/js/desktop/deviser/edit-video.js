@@ -21,10 +21,6 @@
 			getDeviser();
 		}
 
-		function onError(err) {
-			console.log(err);
-		}
-
 		function getDeviser() {
 			deviserDataService.Profile.get({
 				deviser_id: UtilService.returnDeviserIdFromUrl()
@@ -82,7 +78,7 @@
 				var params = {
 					name: key
 				}
-				productDataService.getProductPriv(params, onGetProductPrivSuccess, onError);
+				productDataService.getProductPriv(params, onGetProductPrivSuccess, UtilService.onError);
 			}
 		}
 

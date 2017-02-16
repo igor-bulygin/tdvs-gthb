@@ -22,10 +22,6 @@
 
 		init();
 
-		function onError(err) {
-			console.log(err);
-		}
-
 		function getProductId() {
 			var url = $location.absUrl().split("#")[0].split("/");
 			vm.product_id = url[url.length - 1];
@@ -51,7 +47,7 @@
 
 			productDataService.getProductPub({
 				idProduct: vm.product_id
-			}, onGetProductSuccess, onError);
+			}, onGetProductSuccess, UtilService.onError);
 		}
 
 		function getTags() {
@@ -59,7 +55,7 @@
 				vm.tags = angular.copy(data.items);
 				getProduct();
 			}
-			tagDataService.getTags(onGetTagsSuccess, onError);
+			tagDataService.getTags(onGetTagsSuccess, UtilService.onError);
 		}
 
 		function getMinimumPrice(references) {
