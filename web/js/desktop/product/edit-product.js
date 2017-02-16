@@ -74,13 +74,14 @@
 		}
 
 		function getSizechart() {
-			sizechartDataService.Sizechart.get({scope: 'all'})
-				.$promise.then(function (dataSizechart) {
-					vm.sizecharts = dataSizechart.items;
-					getProduct();
-				}, function (err) {
-					//error
-				});
+			function onGetSizechartSuccess(data) {
+				vm.sizecharts = data.items;
+				getProduct();
+			}
+
+			sizechartDataService.getSizechart({
+				scope: 'all'
+			}, onGetSizechartSuccess, onError);
 		}
 
 		function getPaperType() {
