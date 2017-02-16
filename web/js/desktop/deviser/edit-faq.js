@@ -23,8 +23,8 @@
 					vm.deviser.faq.forEach(function (element) {
 						parseQuestion(element);
 					})
+				}
 			}
-
 
 			deviserDataService.Profile.get({
 				deviser_id: UtilService.returnDeviserIdFromUrl()
