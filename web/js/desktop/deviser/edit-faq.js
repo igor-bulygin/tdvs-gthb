@@ -15,25 +15,24 @@
 		vm.done = done;
 
 		function getDeviser() {
+			function onGetLanguagesSuccess(data) {
+				vm.languages = data.items;
+				if (!vm.deviser.faq)
+					vm.deviser.faq = [];
+				else {
+					vm.deviser.faq.forEach(function (element) {
+						parseQuestion(element);
+					})
+			}
+
+
 			deviserDataService.Profile.get({
 				deviser_id: UtilService.returnDeviserIdFromUrl()
 			}).$promise.then(function (dataDeviser) {
 				vm.deviser = dataDeviser;
 				vm.deviser_original = angular.copy(dataDeviser);
 				//we need languages before parse questions
-				languageDataService.Languages.get().$promise.then(function (dataLanguages) {
-					vm.languages = dataLanguages.items;
-					if (!vm.deviser.faq)
-						vm.deviser.faq = [];
-					else {
-						vm.deviser.faq.forEach(function (element) {
-							parseQuestion(element);
-						})
-					}
-				}, function (err) {
-					toastr.error(err);
-				});
-
+				languageDataService.getLanguages(onGetLanguagesSuccess, UtilService.onError);
 			}, function (err) {
 				toastr.error(err);
 			})

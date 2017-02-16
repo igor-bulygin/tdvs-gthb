@@ -39,12 +39,11 @@
 		}
 
 		function getLanguages() {
-			languageDataService.Languages.get()
-				.$promise.then(function (dataLanguages) {
-					vm.languages = dataLanguages.items;
-				}, function (err) {
-					//errors
-				});
+			function onGetLanguagesSuccess(data) {
+				vm.languages = data.items;
+			}
+
+			languageDataService.getLanguages(onGetLanguagesSuccess, UtilService.onError);
 		}
 
 		function init() {

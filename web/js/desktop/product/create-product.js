@@ -67,12 +67,11 @@
 		}
 
 		function getLanguages() {
-			languageDataService.Languages.get()
-				.$promise.then(function (dataLanguages) {
-					vm.languages = dataLanguages.items;
-				}, function (err) {
-					toastr.error(err);
-				});
+			function onGetLanguagesSuccess(data) {
+				vm.languages = data.items;
+			}
+
+			languageDataService.getLanguages(onGetLanguagesSuccess, UtilService.onError);
 		}
 
 		function getTags() {
