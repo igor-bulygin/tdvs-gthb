@@ -55,13 +55,11 @@
 		}
 
 		function getTags() {
-			tagDataService.Tags.get()
-				.$promise.then(function(dataTags) {
-					vm.tags = dataTags.items;
-					getProduct();
-				}, function(err) {
-					//error
-				});
+			function onGetTagsSuccess(data) {
+				vm.tags = angular.copy(data.items);
+				getProduct();
+			}
+			tagDataService.getTags(onGetTagsSuccess, onError);
 		}
 
 		function getMinimumPrice(references) {

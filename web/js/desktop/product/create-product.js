@@ -81,12 +81,10 @@
 		}
 
 		function getTags() {
-			tagDataService.Tags.get()
-				.$promise.then(function (dataTags) {
-					vm.tags = dataTags.items;
-				}, function(err) {
-					//err
-				});
+			function onGetTagsSuccess(data) {
+				vm.tags = angular.copy(data.items);
+			}
+			tagDataService.getTags(onGetTagsSuccess, onError);
 		}
 
 		function getPaperType() {

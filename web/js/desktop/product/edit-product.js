@@ -45,13 +45,12 @@
 		}
 
 		function getTags() {
-			tagDataService.Tags.get()
-				.$promise.then(function (dataTags) {
-					vm.tags = dataTags.items;
-					getCategories();
-				}, function (err) {
-					//err
-				});
+			function onGetTagsSuccess(data) {
+				vm.tags = angular.copy(data.items);
+				getCategories();
+			}
+
+			tagDataService.getTags(onGetTagsSuccess, onError);
 		}
 
 		function getCategories() {
