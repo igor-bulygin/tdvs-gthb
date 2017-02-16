@@ -385,8 +385,10 @@ class Box extends CActiveRecord
 	 *
 	 * @throws Exception
 	 */
-	public function addProduct($boxProduct) {
-		$product = Product2::findOneSerialized($boxProduct->product_id); /* @var Product2 $product */
+	public function addProduct($boxProduct)
+	{
+		$product = Product2::findOneSerialized($boxProduct->product_id);
+		/* @var Product2 $product */
 		if (empty($product)) {
 			throw new Exception(sprintf("Product with id %s does not exists", $boxProduct->product_id));
 		}
@@ -401,10 +403,19 @@ class Box extends CActiveRecord
 		}
 		if (!isset($key)) {
 			$this->productsMapping[] = $boxProduct;
+
+			$this->save();
+
+			$collection = Yii::$app->mongodb->getCollection('product');
+			$collection->update(
+				[
+					'short_id' => $product->short_id
+				],
+				[
+					'boxes' => $product->boxes + 1
+				]
+			);
 		}
-
-		$this->save();
-
 	}
 
 	public function deleteProduct($productId) {
