@@ -40,6 +40,7 @@ use yii2tech\ar\position\PositionBehavior;
  * @property string $product_state
  * @property int position
  * @property int loveds
+ * @property int boxes
  * @property array prints
  * @property MongoDate created_at
  * @property MongoDate updated_at
@@ -102,6 +103,7 @@ class Product2 extends Product {
 			'tags',
 			'position',
 			'loveds',
+			'boxes',
 			'prints',
 			'created_at',
 			'updated_at',
@@ -147,6 +149,7 @@ class Product2 extends Product {
 		$this->references = [];
 		$this->position = 0;
 		$this->loveds = 0;
+		$this->boxes = 0;
 
 		$this->faq = [];
 	}
@@ -212,8 +215,12 @@ class Product2 extends Product {
 			$this->product_state = Product2::PRODUCT_STATE_DRAFT;
 		}
 
-		if (empty($this->loveds)) {
+		if (!isset($this->loveds)) {
 			$this->loveds = 0;
+		}
+
+		if (!isset($this->boxes)) {
+			$this->boxes = 0;
 		}
 
 		if (empty($this->created_at)) {
@@ -230,6 +237,11 @@ class Product2 extends Product {
 		$loveds = $this->getLoveds();
 		foreach ($loveds as $loved) {
 			$loved->delete();
+		}
+
+		$boxes = $this->getBoxes();
+		foreach ($boxes as $box) {
+			$box->deleteProduct($this->short_id);
 		}
 
 		return parent::beforeDelete();
@@ -302,6 +314,7 @@ class Product2 extends Product {
 					'tags',
 					'position',
 					'loveds',
+					'boxes',
 					'prints',
 					'product_state',
 				],
@@ -409,6 +422,7 @@ class Product2 extends Product {
 					'position',
 					'loveds',
 					'isLoved' => 'isLoved',
+					'boxes',
 					'prints',
 					'sizechart',
 					'price_stock',
@@ -449,6 +463,7 @@ class Product2 extends Product {
 					'url_images' => 'urlImagesLocation',
 					'position',
 					'loveds',
+					'boxes',
 					'prints',
 					'price_stock',
 					'tags',
@@ -1099,5 +1114,14 @@ class Product2 extends Product {
 	 */
 	public function getLoveds() {
 		return Loved::findSerialized(['product_id' => $this->short_id]);
+	}
+
+	/**
+	 * Returns boxes that include this product
+	 *
+	 * @return Box[]
+	 */
+	public function getBoxes() {
+		return Box::findSerialized(['product_id' => $this->short_id]);
 	}
 }

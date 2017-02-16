@@ -4,8 +4,7 @@ namespace app\modules\api\priv\v1\controllers;
 
 use app\models\Loved;
 use Yii;
-use yii\web\BadRequestHttpException;
-use yii\web\UnauthorizedHttpException;
+use yii\web\NotFoundHttpException;
 
 class LovedController extends AppPrivateController
 {
@@ -73,15 +72,16 @@ class LovedController extends AppPrivateController
 		}
 	}
 
-	public function actionDelete($product_id)
+	public function actionDelete($productId)
 	{
 		/** @var Loved $loved */
 		$loveds = Loved::findSerialized([
-			'product_id' => $product_id,
+			'product_id' => $productId,
 			'person_id' => Yii::$app->user->identity->short_id,
 		]);
 		if (!$loveds) {
-			throw new BadRequestHttpException('Loved not found');
+			throw new NotFoundHttpException('Loved not found');
+
 		}
 		foreach ($loveds as $loved) {
 			$loved->delete();

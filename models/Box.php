@@ -11,15 +11,17 @@ use yii\mongodb\ActiveQuery;
 /**
  * @property string short_id
  * @property string $person_id
- * @property string product_id
+ * @property string name
+ * @property string description
+ * @property BoxProduct[] productsMapping
  * @property MongoDate created_at
  * @property MongoDate updated_at
  */
-class Loved extends CActiveRecord
+class Box extends CActiveRecord
 {
 
-	const SCENARIO_LOVED_PRODUCT = 'scenario-loved-product';
-	const SCENARIO_LOVED_BOX = 'scenario-loved-box';
+	const SCENARIO_BOX_CREATE = 'scenario-box-create';
+	const SCENARIO_BOX_ADD_PRODUCT= 'scenario-box-add-product';
 
 	/**
 	 * The attributes that should be serialized
@@ -37,7 +39,7 @@ class Loved extends CActiveRecord
 
 	public static function collectionName()
 	{
-		return 'loved';
+		return 'box';
 	}
 
 	public function attributes()
@@ -46,7 +48,9 @@ class Loved extends CActiveRecord
 			'_id',
 			'short_id',
 			'person_id',
-			'product_id',
+			'name',
+			'description',
+			'products',
 			'created_at',
 			'updated_at',
 		];
@@ -69,6 +73,20 @@ class Loved extends CActiveRecord
 		parent::init();
 
 		$this->short_id = Utils::shortID(7);
+
+		$this->products = [];
+	}
+
+	public function embedProductsMapping()
+	{
+		return $this->mapEmbeddedList('products', BoxProduct::className(), array('unsetSource' => false));
+	}
+
+	public function setParentOnEmbbedMappings()
+	{
+		foreach ($this->productsMapping as $item) {
+			$item->setParentObject($this);
+		}
 	}
 
 	public function beforeSave($insert)
@@ -84,34 +102,25 @@ class Loved extends CActiveRecord
 
 	public function afterSave($insert, $changedAttributes)
 	{
-		if ($insert) {
-			$product = $this->getProduct();
-			$collection = Yii::$app->mongodb->getCollection('product');
-			$collection->update(
-				[
-					'short_id' => $product->short_id
-				],
-				[
-					'loveds' => $product->loveds + 1
-				]
-			);
-		}
 		parent::afterSave($insert, $changedAttributes);
 	}
 
 	public function afterDelete()
 	{
-		$product = $this->getProduct();
-		if ($product) {
-			$collection = Yii::$app->mongodb->getCollection('product');
-			$collection->update(
-				[
-					'short_id' => $product->short_id
-				],
-				[
-					'loveds' => $product->loveds - 1
-				]
-			);
+		$products = $this->getProducts();
+		foreach ($products as $item) {
+			$product = Product2::findOneSerialized($item->product_id);
+			if ($product) {
+				$collection = Yii::$app->mongodb->getCollection('product');
+				$collection->update(
+					[
+						'short_id' => $product->short_id
+					],
+					[
+						'boxes' => $product->boxes - 1
+					]
+				);
+			}
 		}
 
 		parent::afterDelete();
@@ -120,10 +129,15 @@ class Loved extends CActiveRecord
 	public function rules()
 	{
 		return [
-			[['person_id', 'product_id'], 'required', 'on' => [self::SCENARIO_LOVED_PRODUCT]],
+			[['person_id', 'name', 'description'], 'required', 'on' => [self::SCENARIO_BOX_CREATE]],
+			[$this->attributes(), 'safe'],
 			[['person_id'], 'validatePersonExists'],
-			[['product_id'], 'validateProductExists', 'on' => [self::SCENARIO_LOVED_PRODUCT]],
-			[['person_id'], 'validateUniqueLoved', 'on' => [self::SCENARIO_LOVED_PRODUCT], 'params' => ['product_id' => $this->product_id]],
+			[['products'], 'validateProductsExists', 'on' => [self::SCENARIO_BOX_ADD_PRODUCT]],
+			[
+				'productsMapping',
+				'yii2tech\embedded\Validator',
+				'on' => [self::SCENARIO_BOX_ADD_PRODUCT],
+			],
 		];
 	}
 
@@ -148,34 +162,14 @@ class Loved extends CActiveRecord
 	 * @param $attribute
 	 * @param $params
 	 */
-	public function validateProductExists($attribute, $params)
+	public function validateProductsExists($attribute, $params)
 	{
-		$product_id = $this->$attribute;
-		$product = Product2::findOneSerialized($product_id);
-		if (!$product) {
-			$this->addError($attribute, sprintf('Product %s not found', $product_id));
-		}
-		if ($product->deviser_id == Yii::$app->user->identity->short_id) {
-			$this->addError($attribute, 'You cannot loved your own products');
-		}
-	}
-
-	/**
-	 * Custom validator that limit one loved per person/product
-	 *
-	 * @param $attribute
-	 * @param $params
-	 */
-	public function validateUniqueLoved($attribute, $params)
-	{
-		$person_id = $this->$attribute;
-		$product_id = $this->product_id;
-		$loved = Loved::findSerialized([
-			'person_id' => $person_id,
-			'product_id' => $product_id,
-		]);
-		if ($loved) {
-			$this->addError($attribute, sprintf('Product %s already loved by person %s', $product_id, $person_id));
+		$products = $this->$attribute;
+		foreach ($products as $item) {
+			$product = Product2::findOneSerialized($item['product_id']);
+			if (!$product) {
+				$this->addError($attribute, sprintf('Product %s not found', $item->product_id));
+			}
 		}
 	}
 
@@ -197,11 +191,13 @@ class Loved extends CActiveRecord
 					'id' => 'short_id',
 					'person_id',
 					'person' => "personPreview",
-					'product_id',
-					'product' => "productPreview",
+					'name',
+					'description',
+					'products' => "productsPreview",
 				];
 
 				static::$retrieveExtraFields = [
+					'products'
 				];
 
 				static::$translateFields = false;
@@ -219,20 +215,20 @@ class Loved extends CActiveRecord
 	 *
 	 * @param string $id
 	 *
-	 * @return Loved|null
+	 * @return Box|null
 	 * @throws Exception
 	 */
 	public static function findOneSerialized($id)
 	{
-		/** @var Loved $loved */
-		$loved = static::find()->select(self::getSelectFields())->where(["short_id" => $id])->one();
+		/** @var Box $box */
+		$box = static::find()->select(self::getSelectFields())->where(["short_id" => $id])->one();
 
 		// if automatic translation is enabled
 		if (static::$translateFields) {
-			Utils::translate($loved);
+			Utils::translate($box);
 		}
 
-		return $loved;
+		return $box;
 	}
 
 	/**
@@ -264,7 +260,7 @@ class Loved extends CActiveRecord
 
 		// if product id is specified
 		if ((array_key_exists("product_id", $criteria)) && (!empty($criteria["product_id"]))) {
-			$query->andWhere(["product_id" => $criteria["product_id"]]);
+			$query->andWhere(["product.product_id" => $criteria["product_id"]]);
 		}
 
 		// Count how many items are with those conditions, before limit them for pagination
@@ -313,31 +309,40 @@ class Loved extends CActiveRecord
 
 
 	/**
-	 * Get the product related with this loved
+	 * Get the products related with this box
 	 *
-	 * @return Product2
+	 * @return Product2[]
 	 */
-	public function getProduct()
+	public function getProducts()
 	{
+		$return = [];
 		Product2::setSerializeScenario(Product2::SERIALIZE_SCENARIO_PUBLIC);
+		$products = $this->productsMapping;
+		foreach ($products as $item) {
+			$product = Product2::findOneSerialized($item->product_id);
+			$return[] = $product;
+		}
 
-		/** @var Product2 $product */
-		$product = Product2::findOneSerialized($this->product_id);
-
-		return $product;
+		return $return;
 	}
 
 
 	/**
-	 * Get a preview version of the product related with this loved
+	 * Get a preview version of the products related with this box
 	 *
 	 * @return array
 	 */
-	public function getProductPreview()
+	public function getProductsPreview()
 	{
-		$product = $this->getProduct();
+		$return = [];
 
-		return $product->getPreviewSerialized();
+		$products = $this->getProducts();
+
+		foreach ($products as $product) {
+			$return[] = $product->getPreviewSerialized();
+		}
+
+		return $return;
 	}
 	
 	public function getPerson() {
@@ -355,7 +360,7 @@ class Loved extends CActiveRecord
 	}
 
 	/**
-	 * Returns TRUE if the loved object can be edited by the current user
+	 * Returns TRUE if the box object can be edited by the current user
 	 *
 	 * @return bool
 	 */
@@ -372,5 +377,46 @@ class Loved extends CActiveRecord
 		}
 
 		return false;
+	}
+
+	/**
+	 * @param BoxProduct $boxProduct
+	 *
+	 * @throws Exception
+	 */
+	public function addProduct($boxProduct) {
+		$product = Product2::findOneSerialized($boxProduct->product_id); /* @var Product2 $product */
+		if (empty($product)) {
+			throw new Exception(sprintf("Product with id %s does not exists", $boxProduct->product_id));
+		}
+
+		$products = $this->productsMapping;
+		$key = null;
+		foreach ($products as $i => $item) {
+			if ($item->product_id == $boxProduct->product_id) {
+				$key = $i;
+				break;
+			}
+		}
+		if (!isset($key)) {
+			$this->productsMapping[] = $boxProduct;
+		}
+
+		$this->save();
+
+	}
+
+	public function deleteProduct($productId) {
+		$products = $this->productsMapping; /* @var \ArrayObject $products */
+		$key = null;
+		foreach ($products as $i => $item) {
+			if ($item->product_id == $productId) {
+				$products->offsetUnset($i);
+				break;
+			}
+		}
+		$this->productsMapping = $products;
+
+		$this->save();
 	}
 }

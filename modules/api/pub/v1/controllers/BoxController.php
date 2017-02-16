@@ -2,39 +2,39 @@
 
 namespace app\modules\api\pub\v1\controllers;
 
-use app\models\Loved;
+use app\models\Box;
 use Yii;
 use yii\web\NotFoundHttpException;
 
-class LovedController extends AppPublicController
+class BoxController extends AppPublicController
 {
 
-	public function actionView($lovedId)
+	public function actionView($boxId)
 	{
-		Loved::setSerializeScenario(Loved::SERIALIZE_SCENARIO_OWNER);
-		$loved = Loved::findOneSerialized($lovedId);
-		if (empty($loved)){
-			throw new NotFoundHttpException(sprintf("Loved with id %s does not exists", $lovedId));
+		Box::setSerializeScenario(Box::SERIALIZE_SCENARIO_OWNER);
+		$box = Box::findOneSerialized($boxId);
+		if (empty($box)){
+			throw new NotFoundHttpException(sprintf("Box with id %s does not exists", $boxId));
 		}
 
-		return $loved;
+		return $box;
 	}
 
 	public function actionIndex()
 	{
 		// show only fields needed in this scenario
-		Loved::setSerializeScenario(Loved::SERIALIZE_SCENARIO_PUBLIC);
+		Box::setSerializeScenario(Box::SERIALIZE_SCENARIO_PUBLIC);
 
 		// set pagination values
 		$limit = Yii::$app->request->get('limit', 20);
 		$limit = ($limit < 1) ? 1 : $limit;
-		// not allow more than 100 loveds for request
+		// not allow more than 100 boxs for request
 //	    $limit = ($limit > 100) ? 100 : $limit;
 		$page = Yii::$app->request->get('page', 1);
 		$page = ($page < 1) ? 1 : $page;
 		$offset = ($limit * ($page - 1));
 
-		$loveds = Loved::findSerialized([
+		$boxs = Box::findSerialized([
 			"id" => Yii::$app->request->get("id"),
 			"person_id" => Yii::$app->request->get("person_id"),
 			"product_id" => Yii::$app->request->get("product_id"),
@@ -43,9 +43,9 @@ class LovedController extends AppPublicController
 		]);
 
 		return [
-			"items" => $loveds,
+			"items" => $boxs,
 			"meta" => [
-				"total_count" => Loved::$countItemsFound,
+				"total_count" => Box::$countItemsFound,
 				"current_page" => $page,
 				"per_page" => $limit,
 			]
