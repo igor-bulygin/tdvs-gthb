@@ -22,6 +22,7 @@ class ApiAsset extends AssetBundle {
 		'js/api/cartDataService.js',
 		'js/api/orderDataService.js',
 		'js/api/lovedDataService.js',
+		'js/api/boxDataService.js',
 	];
 	public $depends = [
 		'app\assets\AppAsset',
