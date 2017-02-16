@@ -52,64 +52,65 @@ $this->params['deviser_links_target'] = 'public_view';
                                 <span class="title">Boxes by <?=$deviser->getBrandName()?></span>
                             </div>
                             <div class="row">
-                                <div class="col-lg-4">
-                                    <button>Add box</button>
-                                </div>
-                            <?php foreach ($boxes as $box) {
-							    $products = $box->getProducts(); ?>
-                                <div class="col-lg-4">
-                                    <?php if (empty($products)) { ?>
-                                        <div>Empty box</div>
-                                    <?php } else {
-                                        $sizes = [
-                                            1 => [
-                                                [273, 373],
-                                            ],
-                                            2 => [
-												[273, 105],
-												[273, 257],
-											],
-                                            3 => [
-												[132, 105],
-												[132, 105],
-												[273, 257],
-											],
-                                        ];
-                                        if (count($products) >= 3) {
-                                            $size = $sizes[3];
-                                        } elseif (count($products) == 2) {
-                                            $size = $sizes[2];
-                                        } else {
-                                            $size = $sizes[1];
-                                        }
-                                        $count = 0;
-                                        foreach ($products as $product) {
-                                            if ($product->product_state != \app\models\Product2::PRODUCT_STATE_ACTIVE || $count > 3) {
-                                                continue;
+                                <?php if ($deviser->isDeviserEditable()) { ?>
+                                    <div class="col-lg-4">
+                                        <button>Add box</button>
+                                    </div>
+                                <?php } ?>
+                                <?php foreach ($boxes as $box) {
+                                    $products = $box->getProducts(); ?>
+                                    <div class="col-lg-4">
+                                        <?php if (empty($products)) { ?>
+                                            <div>Empty box</div>
+                                        <?php } else {
+                                            $sizes = [
+                                                1 => [
+                                                    [273, 373],
+                                                ],
+                                                2 => [
+                                                    [273, 105],
+                                                    [273, 257],
+                                                ],
+                                                3 => [
+                                                    [132, 105],
+                                                    [132, 105],
+                                                    [273, 257],
+                                                ],
+                                            ];
+                                            if (count($products) >= 3) {
+                                                $size = $sizes[3];
+                                            } elseif (count($products) == 2) {
+                                                $size = $sizes[2];
+                                            } else {
+                                                $size = $sizes[1];
                                             }
-                                            $count++;
-                                            if ($count == 1) { ?>
-                                                <a href="<?= Url::to(["product/detail", "slug" => $product->slug, 'product_id' => $product->short_id])?>">
-                                                    <img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getMainImage())->resize($size[0][0], $size[0][1]) ?>">
-                                                </a>
-                                            <?php } elseif ($count == 2) { ?>
-                                                <a href="<?= Url::to(["product/detail", "slug" => $product->slug, 'product_id' => $product->short_id])?>">
-                                                    <img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getMainImage())->resize($size[1][0], $size[1][1]) ?>">
-                                                </a>
-                                            <?php } elseif ($count == 3) { ?>
-                                                <a href="<?= Url::to(["product/detail", "slug" => $product->slug, 'product_id' => $product->short_id])?>">
-                                                    <img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getMainImage())->resize($size[2][0], $size[2][1]) ?>">
-                                                </a>
+                                            $count = 0;
+                                            foreach ($products as $product) {
+                                                if ($product->product_state != \app\models\Product2::PRODUCT_STATE_ACTIVE || $count > 3) {
+                                                    continue;
+                                                }
+                                                $count++;
+                                                if ($count == 1) { ?>
+                                                    <a href="<?= Url::to(["product/detail", "slug" => $product->slug, 'product_id' => $product->short_id])?>">
+                                                        <img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getMainImage())->resize($size[0][0], $size[0][1]) ?>">
+                                                    </a>
+                                                <?php } elseif ($count == 2) { ?>
+                                                    <a href="<?= Url::to(["product/detail", "slug" => $product->slug, 'product_id' => $product->short_id])?>">
+                                                        <img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getMainImage())->resize($size[1][0], $size[1][1]) ?>">
+                                                    </a>
+                                                <?php } elseif ($count == 3) { ?>
+                                                    <a href="<?= Url::to(["product/detail", "slug" => $product->slug, 'product_id' => $product->short_id])?>">
+                                                        <img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getMainImage())->resize($size[2][0], $size[2][1]) ?>">
+                                                    </a>
+                                                <?php } ?>
                                             <?php } ?>
                                         <?php } ?>
-                                    <?php } ?>
 
-                                    <span>
                                         <?=$box->name?> (<?=count($products)?>)
-                                    </span>
 
-                                </div>
-                            <?php } ?>
+                                    </div>
+                                <?php } ?>
+                            </div>
                         </div>
                     </div>
 
