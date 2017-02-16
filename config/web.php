@@ -331,12 +331,18 @@ $config = [
 
 				'GET api3/pub/v1/loved/<lovedId:[^/.]*?>' => 'api3/pub/v1/loved/view',
 				'GET api3/pub/v1/loved' => 'api3/pub/v1/loved/index',
+
+				'GET api3/priv/v1/loved/<lovedId:[^/.]*?>' => 'api3/priv/v1/loved/view',
+				'GET api3/priv/v1/loved' => 'api3/priv/v1/loved/index',
 				'POST api3/priv/v1/loved' => 'api3/priv/v1/loved/create',
 				'DELETE api3/priv/v1/loved/<productId:[^/.]*?>' => 'api3/priv/v1/loved/delete',
 
 
 				'GET api3/pub/v1/box/<boxId:[^/.]*?>' => 'api3/pub/v1/box/view',
 				'GET api3/pub/v1/box' => 'api3/pub/v1/box/index',
+
+				'GET api3/priv/v1/box' => 'api3/priv/v1/box/index',
+				'GET api3/priv/v1/box/<boxId:[^/.]*?>' => 'api3/priv/v1/box/view',
 				'POST api3/priv/v1/box' => 'api3/priv/v1/box/create',
 				'DELETE api3/priv/v1/box/<boxId:[^/.]*?>' => 'api3/priv/v1/box/delete',
 				'POST api3/priv/v1/box/<boxId:[^/.]*?>/product' => 'api3/priv/v1/box/add-product',
