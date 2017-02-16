@@ -5,8 +5,8 @@ namespace app\modules\api\pub\v1\controllers;
 use app\models\Order;
 use Yii;
 use yii\web\BadRequestHttpException;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
-use yii\web\UnauthorizedHttpException;
 
 class OrderController extends AppPublicController
 {
@@ -26,11 +26,11 @@ class OrderController extends AppPublicController
 
 		if (!Yii::$app->user->isGuest) {
 			if ($order->client_id != Yii::$app->user->identity->short_id) {
-				throw new UnauthorizedHttpException();
+				throw new ForbiddenHttpException();
 			}
 		} else {
 			if (!empty($order->client_id)) {
-				throw new UnauthorizedHttpException();
+				throw new ForbiddenHttpException();
 			}
 		}
 		Yii::$app->response->setStatusCode(200); // Ok
