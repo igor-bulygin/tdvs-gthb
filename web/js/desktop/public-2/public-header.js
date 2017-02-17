@@ -22,6 +22,6 @@
 		}
 	}
 
-	angular.module('header', ['api', 'util'])
+	angular.module('header', ['api', 'util', 'box'])
 		.controller('publicHeaderCtrl', controller);
 }());

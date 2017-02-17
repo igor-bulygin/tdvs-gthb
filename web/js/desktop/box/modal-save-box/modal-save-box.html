@@ -1,0 +1,28 @@
+<div class="modal-header">
+	<img ng-src="{{modalSaveBoxCtrl.product_main_photo}}" width="50" class="pull-left" ng-cloak>
+	<button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="modalSaveBoxCtrl.dismiss()">
+		<span class="ion-ios-close" aria-hidden="true"></span>
+	</button>
+	<h3>Save in a box</h3>
+	<span>Select box (<span ng-bind="modalSaveBoxCtrl.resolve.boxes.meta.total_count"></span> total)</span>
+</div>
+<div class="modal-body">
+	<div class="row">
+		<form class="form-inline">
+			<div class="form-group">
+				<div class="input-group">
+					<input type="text" class="form-control" ng-model="modalSaveBoxCtrl.search_term">
+					<div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
+				</div>
+			</div>
+		</form>
+		<button class="btn btn-default" ng-click="modalSaveBoxCtrl.createBox()">Create box</button>
+	</div>
+	<div class="row" ng-repeat="box in modalSaveBoxCtrl.resolve.boxes.items" ng-if="modalSaveBoxCtrl.resolve.boxes.items.length > 0">
+		<p ng-bind="box.name"></p>
+	</div>
+	<div class="row" ng-if="modalSaveBoxCtrl.resolve.boxes.items.length === 0">
+		<p>You don't have any boxes yet.</p>
+		<p>Create one by clicking the CREATE NEW BOX button.</p>
+	</div>
+</div>

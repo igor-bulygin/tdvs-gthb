@@ -8,6 +8,6 @@ class IndexAsset extends AssetBundle {
 	public $baseUrl = '@web';
 	public $js = [
 		'js/desktop/box/box.js',
-		'js/desktop/box/modal-save/modal-save.js',
+		'js/desktop/box/modal-save-box/modal-save-box.js',
 	];
 }
