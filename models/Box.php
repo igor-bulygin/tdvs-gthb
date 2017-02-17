@@ -128,8 +128,8 @@ class Box extends CActiveRecord
 	public function rules()
 	{
 		return [
-			[['person_id', 'name', 'description'], 'required', 'on' => [self::SCENARIO_BOX_CREATE]],
 			[$this->attributes(), 'safe'],
+			[['person_id', 'name'], 'required', 'on' => [self::SCENARIO_BOX_CREATE]],
 			[['person_id'], 'validatePersonExists'],
 			[['products'], 'validateProductsExists', 'on' => [self::SCENARIO_BOX_ADD_PRODUCT]],
 			[
