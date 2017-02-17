@@ -3,23 +3,32 @@
 	<button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="modalSaveBoxCtrl.dismiss()">
 		<span class="ion-ios-close" aria-hidden="true"></span>
 	</button>
-	<h3>Save in a box</h3>
-	<span>Select box (<span ng-bind="modalSaveBoxCtrl.resolve.boxes.meta.total_count"></span> total)</span>
+	<h3 class="modal-title">Save in a box</h3>
+	<p>Select box (<span ng-bind="modalSaveBoxCtrl.resolve.boxes.meta.total_count"></span> total)</p>
 </div>
 <div class="modal-body">
-	<div class="row">
-		<form class="form-inline">
+	<div class="row" ng-hide="modalSaveBoxCtrl.creatingBox">
+		<form class="form-inline" name="modalSaveBoxCtrl.search_form">
 			<div class="form-group">
 				<div class="input-group">
-					<input type="text" class="form-control" ng-model="modalSaveBoxCtrl.search_term">
+					<input type="text" class="form-control" ng-model="modalSaveBoxCtrl.search_term.name">
 					<div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
 				</div>
 			</div>
 		</form>
-		<button class="btn btn-default" ng-click="modalSaveBoxCtrl.createBox()">Create box</button>
+		<button class="btn btn-default" ng-click="modalSaveBoxCtrl.showCreateBox()">Create box</button>
 	</div>
-	<div class="row" ng-repeat="box in modalSaveBoxCtrl.resolve.boxes.items" ng-if="modalSaveBoxCtrl.resolve.boxes.items.length > 0">
-		<p ng-bind="box.name"></p>
+	<div class="row" ng-if="modalSaveBoxCtrl.creatingBox">
+		<form class="form-inline" name="modalSaveBoxCtrl.create_form">
+			<div class="form-group">
+				<input type="text" class="form-control" ng-model="modalSaveBoxCtrl.new_box_name" required>
+				<button class="btn btn-default btn-green" ng-click="modalSaveBoxCtrl.createBox(modalSaveBoxCtrl.create_form)">Create</button>
+			</div>
+		</form>
+	</div>
+	<div class="row" ng-repeat="box in modalSaveBoxCtrl.resolve.boxes.items | filter:modalSaveBoxCtrl.search_term" ng-if="modalSaveBoxCtrl.resolve.boxes.items.length > 0">
+		<span ng-bind="box.name"></span>
+		<span class="pull-right glyphicon glyphicon-download-alt" ng-click="modalSaveBoxCtrl.addProductToBox(modalSaveBoxCtrl.product.id, box.id)"></span>
 	</div>
 	<div class="row" ng-if="modalSaveBoxCtrl.resolve.boxes.items.length === 0">
 		<p>You don't have any boxes yet.</p>
