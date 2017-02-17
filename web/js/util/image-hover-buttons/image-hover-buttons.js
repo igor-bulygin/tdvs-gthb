@@ -45,6 +45,9 @@
 					resolve: {
 						productId: function() {
 							return vm.productId;
+						},
+						boxes: function() {
+							return data;
 						}
 					}
 				});

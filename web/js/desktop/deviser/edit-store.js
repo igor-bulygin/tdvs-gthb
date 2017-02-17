@@ -131,10 +131,9 @@
 
 		function parseMainPhoto(products) {
 			products.forEach(function (element) {
-					for (var i = 0; i < element.media.photos.length; i++) {
-						if (element.media.photos[i].main_product_photo)
-							element.main_photo = currentHost() + element.url_images + element.media.photos[i].name;
-					}
+					var main_photo = element.media.photos.find((photo) => {return photo.main_product_photo});
+					if (angular.isObject(main_photo))
+						element.main_photo = currentHost() + element.url_images + main_photo.name;
 				});
 		}
 
