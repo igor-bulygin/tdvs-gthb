@@ -25,7 +25,7 @@ $this->params['deviser_links_target'] = 'public_view';
 
 <?= DeviserHeader::widget() ?>
 
-<div class="store">
+<div class="store" ng-controller="viewBoxesCtrl as viewBoxesCtrl">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-2">
@@ -38,7 +38,7 @@ $this->params['deviser_links_target'] = 'public_view';
                         <?php if ($deviser->isConnectedUser()) { ?>
                             <img class="sad-face" src="/imgs/sad-face.svg">
                             <p class="no-video-text">You have no boxes!</p>
-                            <button class="btn btn-default btn-green btn-upload-file">ADD BOX</button>
+                            <button class="btn btn-default btn-green btn-upload-file" ng-click="viewBoxesCtrl.openCreateBoxModal()">ADD BOX</button>
 						<?php } else { ?>
                             <p class="no-video-text"><?=$deviser->getBrandName()?> have no boxes.</p>
                         <?php } ?>
@@ -54,7 +54,7 @@ $this->params['deviser_links_target'] = 'public_view';
                             <div class="row">
                                 <?php if ($deviser->isDeviserEditable()) { ?>
                                     <div class="col-lg-4">
-                                        <button>Add box</button>
+                                        <button class="btn btn-default" ng-click="viewBoxesCtrl.openCreateBoxModal()">Add box</button>
                                     </div>
                                 <?php } ?>
                                 <?php foreach ($boxes as $box) {

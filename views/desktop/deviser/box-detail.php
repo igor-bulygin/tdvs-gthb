@@ -21,8 +21,6 @@ $this->params['deviser_links_target'] = 'public_view';
 
 ?>
 
-<?= DeviserHeader::widget() ?>
-
 <div class="store">
 	<div class="container">
 		<div class="row">

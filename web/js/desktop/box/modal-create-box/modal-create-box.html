@@ -1,0 +1,15 @@
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="modalCreateBoxCtrl.dismiss()">
+		<span class="ion-ios-close" aria-hidden="true"></span>
+	</button>
+	<h3>Create box</h3>
+</div>
+<div class="modal-body">
+	<form name="modalCreateBoxCtrl.form">
+		<input type="text" name="name" placeholder="Name of the box" ng-model="modalCreateBoxCtrl.box.name" class="form-control" required>
+		<textarea name="description" cols="30" rows="10" placeholder="Description" ng-model="modalCreateBoxCtrl.box.description" class="form-control"></textarea>
+		<div class="text-center">
+			<button class="btn btn-default btn-green" ng-click="modalCreateBoxCtrl.createBox(modalCreateBoxCtrl.form)">Create</button>
+		</div>
+	</form>
+</div>
