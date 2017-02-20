@@ -5,13 +5,18 @@
 		//pub
 		var Box = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'box/:idBox');
 		//priv
-		var BoxPriv = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'box/:idBox');
+		var BoxPriv = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'box/:idBox', null, {
+			'update': {
+				method: 'PATCH'
+			}
+		});
 		var BoxProduct = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'box/:idBox/product');
 
 		//functions
 		this.getBoxPub = getBoxPub;
 		this.getBoxPriv = getBoxPriv;
 		this.createBox = createBox;
+		this.updateBox = updateBox;
 		this.deleteBox = deleteBox;
 		this.addProduct = addProduct;
 		this.deleteProduct = deleteProduct;
@@ -41,6 +46,18 @@
 			}
 			newBox.$save().then(function(returnData) {
 				onsuccess(returnData);
+			}, function (err) {
+				onerror(err);
+			});
+		}
+
+		function updateBox(data, params, onsuccess, onerror) {
+			var boxUpdated = new BoxPriv;
+			for (var key in data) {
+				boxUpdated[key] = angular.copy(data[key]);
+			}
+			boxUpdated.$update(params).then(function (returnData) {
+				onsuccess(returnData)
 			}, function (err) {
 				onerror(err);
 			});
