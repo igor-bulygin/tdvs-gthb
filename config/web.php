@@ -41,7 +41,7 @@ $config = [
 			'appendTimestamp' => true,
 			'bundles' => [
 				'yii\bootstrap\BootstrapAsset' => [
-					'sourcePath' => '',
+					//'sourcePath' => '',
 					'css' => []
 				],
 			],
