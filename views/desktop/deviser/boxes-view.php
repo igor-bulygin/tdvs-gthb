@@ -106,7 +106,7 @@ $this->params['deviser_links_target'] = 'public_view';
                                             <?php } ?>
                                         <?php } ?>
 
-                                        <?=$box->name?> (<?=count($products)?>)
+                                        <a href="<?= Url::to(["box-detail", "slug" => $deviser->slug, "deviser_id" => $deviser->short_id, "box_id" => $box->short_id])?>"><?=$box->name?> (<?=count($products)?>)</a>
 
                                     </div>
                                 <?php } ?>

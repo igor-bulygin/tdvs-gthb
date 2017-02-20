@@ -17,6 +17,7 @@ use yii\filters\AccessControl;
 use yii\helpers\Json;
 use yii\helpers\Url;
 use yii\mongodb\Collection;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\web\UnauthorizedHttpException;
 
@@ -599,6 +600,39 @@ class DeviserController extends CController
 		return $this->render("boxes-view", [
 			'deviser' => $deviser,
 			'boxes' => $boxes,
+		]);
+	}
+
+	public function actionBoxDetail($slug, $deviser_id, $box_id)
+	{
+		$deviser = Person::findOneSerialized($deviser_id);
+
+		if (!$deviser) {
+			throw new NotFoundHttpException();
+		}
+
+		if ($deviser->account_state != Person::ACCOUNT_STATE_ACTIVE) {
+			if ($deviser->isDeviserEditable()) {
+				$this->redirect(Url::to(['deviser/about-edit', 'deviser_id' => $deviser_id, 'slug' => $slug]));
+			} else {
+				throw new NotFoundHttpException();
+			}
+		}
+
+		Box::setSerializeScenario(Box::SERIALIZE_SCENARIO_PUBLIC);
+		$box = Box::findOneSerialized($box_id);
+		if (!$box) {
+			throw new NotFoundHttpException();
+		}
+
+		if ($box->person_id != $deviser->short_id) {
+			throw new ForbiddenHttpException();
+		}
+
+		$this->layout = '/desktop/public-2.php';
+		return $this->render("box-detail", [
+			'deviser' => $deviser,
+			'box' => $box,
 		]);
 	}
 
