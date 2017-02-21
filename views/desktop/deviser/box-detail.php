@@ -1,6 +1,5 @@
 <?php
 use app\assets\desktop\pub\BoxesViewAsset;
-use app\components\DeviserMenu;
 use app\helpers\Utils;
 use app\models\Person;
 use yii\helpers\Json;
@@ -70,13 +69,13 @@ $this->registerJs("var box = ".Json::encode($box), yii\web\View::POS_HEAD, 'box-
 									<i class="ion-android-close"></i>
 								</span>
 							<?php } ?>
-								<a href="<?= Url::to(["product/detail", "slug" => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
+								<a href="<?= Url::to(["product/detail", "slug" => $work->slug, 'product_id' => $work->short_id])?>">
 									<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($work->getMainImage()) ?>" title="<?= $work->name ?>">
 								</a>
 							<?php if (!$deviser->isConnectedUser()) { ?>
 								</image-hover-buttons>
 							<?php } ?>
-							<a href="<?= Url::to(["product/detail", "slug" => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
+							<a href="<?= Url::to(["product/detail", "slug" => $work->slug, 'product_id' => $work->short_id])?>">
 								<figcaption>
 									<p class="instauser">
 										<?= $work->name ?>
