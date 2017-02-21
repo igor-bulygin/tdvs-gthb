@@ -1,9 +1,8 @@
 <?php
 use app\assets\desktop\pub\LovedViewAsset;
-use app\components\DeviserHeader;
 use app\components\DeviserMenu;
-use app\models\Person;
 use app\helpers\Utils;
+use app\models\Person;
 use yii\helpers\Json;
 use yii\helpers\Url;
 
@@ -56,7 +55,9 @@ $this->registerJs("var box = ".Json::encode($box), yii\web\View::POS_HEAD, 'box-
 			</div>
 			<div class="col-md-7" style="background-color: black; opacity: 0.3;">
 
-				<?php foreach ($box->getProducts() as $work) { ?>
+				<?php
+                $products = $box->getProducts();
+                foreach ($products as $work) { ?>
 				<div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
 					<div class="grid">
 						<figure class="effect-zoe">
@@ -76,7 +77,7 @@ $this->registerJs("var box = ".Json::encode($box), yii\web\View::POS_HEAD, 'box-
 							<a href="<?= Url::to(["product/detail", "slug" => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
 								<figcaption>
 									<p class="instauser">
-										<?= Utils::l($work->name) ?>
+										<?= $work->name ?>
 									</p>
 								</figcaption>
 							</a>
