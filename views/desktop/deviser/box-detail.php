@@ -3,7 +3,9 @@ use app\assets\desktop\pub\LovedViewAsset;
 use app\components\DeviserHeader;
 use app\components\DeviserMenu;
 use app\models\Person;
+use app\helpers\Utils;
 use yii\helpers\Json;
+use yii\helpers\Url;
 
 LovedViewAsset::register($this);
 
@@ -32,7 +34,9 @@ $this->registerJs("var box = ".Json::encode($box), yii\web\View::POS_HEAD, 'box-
 				<div class="col-md-8" style="padding-top: 10px;">
 					<img src="<?=$deviser->getAvatarImage128()?>" style="max-width: 50px;">
 					<?php if ($deviser->isConnectedUser()) { ?>
-						<span style="color: white;">&lt; My profile</span>
+						<a href="<?=Url::to(["deviser/boxes", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id]);?>">
+							<span style="color: white;">&lt; My profile</span>
+						</a>
 					<?php } else  { ?>
 						<span style="color: white;">&lt; <?=$deviser->getBrandName()?></span>
 					<?php } ?>
@@ -51,7 +55,35 @@ $this->registerJs("var box = ".Json::encode($box), yii\web\View::POS_HEAD, 'box-
 				<p style="color:white;" ng-bind="boxDetailCtrl.box.description"></p>
 			</div>
 			<div class="col-md-7" style="background-color: black; opacity: 0.3;">
-				<!-- repeat -->
+
+				<?php foreach ($box->getProducts() as $work) { ?>
+				<div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
+					<div class="grid">
+						<figure class="effect-zoe">
+							<?php if (!$deviser->isConnectedUser()) { ?>
+								<image-hover-buttons product-id="{{'<?= $work->short_id?>'}}" is-loved="{{'<?= $work->isLovedByCurrentUser() ? 1 : 0 ?> '}}">
+							<?php } else { ?>
+								<!-- open delete button -->
+							<?php } ?>
+								<a href="<?= Url::to(["product/detail", "slug" => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
+									<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($work->getMainImage()) ?>" title="<?= $work->name ?>">
+								</a>
+							<?php if (!$deviser->isConnectedUser()) { ?>
+								</image-hover-buttons>
+							<?php } else { ?>
+								<!--end delete button -->
+							<?php } ?>
+							<a href="<?= Url::to(["product/detail", "slug" => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
+								<figcaption>
+									<p class="instauser">
+										<?= Utils::l($work->name) ?>
+									</p>
+								</figcaption>
+							</a>
+						</figure>
+					</div>
+				</div>
+				<?php } ?>
 			</div>
 		</div>
 	</div>
