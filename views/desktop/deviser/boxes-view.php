@@ -1,12 +1,12 @@
 <?php
-use app\assets\desktop\pub\LovedViewAsset;
+use app\assets\desktop\pub\BoxesViewAsset;
 use app\components\DeviserHeader;
 use app\components\DeviserMenu;
 use app\helpers\Utils;
 use app\models\Person;
 use yii\helpers\Url;
 
-LovedViewAsset::register($this);
+BoxesViewAsset::register($this);
 
 /** @var Person $deviser */
 /** @var \app\models\Box[] $boxes */
