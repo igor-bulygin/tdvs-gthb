@@ -18,7 +18,7 @@
 
 			form.$setSubmitted();
 			if(form.$valid) {
-				boxDataService.updateBox(vm.resolve.box, {
+				boxDataService.updateBox(vm.box, {
 					idBox: vm.box.id
 				}, onSaveBoxSuccess, UtilService.onError);
 			} //TODO: else, wrong form
