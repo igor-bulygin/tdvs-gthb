@@ -26,10 +26,7 @@ $this->registerJs("var box = ".Json::encode($box), yii\web\View::POS_HEAD, 'box-
 <div class="store" ng-controller="boxDetailCtrl as boxDetailCtrl">
 	<div class="container">
 		<div class="row">
-			<div class="col-md-2">
-				<?= DeviserMenu::widget() ?>
-			</div>
-			<div class="col-md-10" style="background-color: #2e2e2e; height: 73px; opacity: 0.8;">
+			<div class="col-md-12" style="background-color: #2e2e2e; height: 73px; opacity: 0.8;">
 				<div class="col-md-8" style="padding-top: 10px;">
 					<img src="<?=$deviser->getAvatarImage128()?>" style="max-width: 50px;">
 					<?php if ($deviser->isConnectedUser()) { ?>
@@ -37,10 +34,12 @@ $this->registerJs("var box = ".Json::encode($box), yii\web\View::POS_HEAD, 'box-
 							<span style="color: white;">&lt; My profile</span>
 						</a>
 					<?php } else  { ?>
-						<span style="color: white;">&lt; <?=$deviser->getBrandName()?></span>
+						<a href="<?=Url::to(["deviser/boxes", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id]);?>">
+							<span style="color: white;">&lt; <?=$deviser->getBrandName()?></span>
+						</a>
 					<?php } ?>
 				</div>
-				<?php if ($deviser->isConnectedUser()) { ?>
+				<?php if ($deviser->isDeviserEditable()) { ?>
 					<div class="col-md-2" style="padding-top: 17px;">
 						<button class="btn btn-default btn-green" ng-click="boxDetailCtrl.openEditBoxModal()">Edit box</button>
 					</div>
@@ -53,11 +52,14 @@ $this->registerJs("var box = ".Json::encode($box), yii\web\View::POS_HEAD, 'box-
 				<h3 style="color: white;" ng-bind="boxDetailCtrl.box.name"></h3>
 				<p style="color:white;" ng-bind="boxDetailCtrl.box.description"></p>
 			</div>
-			<div class="col-md-7" style="background-color: black; opacity: 0.3;">
-
-				<?php
-                $products = $box->getProducts();
-                foreach ($products as $work) { ?>
+			<div class="col-md-9" style="background-color: black;">
+				<?php 
+					$products = $box->getProducts();
+					if(!$products) { ?>
+					<p class="text-center" style="font-size: 24px; color: white;">This box is empty</p>
+				<?php 
+					} else {
+					foreach ($products as $work) { ?>
 				<div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
 					<div class="grid">
 						<figure class="effect-zoe">
@@ -84,7 +86,8 @@ $this->registerJs("var box = ".Json::encode($box), yii\web\View::POS_HEAD, 'box-
 						</figure>
 					</div>
 				</div>
-				<?php } ?>
+				<?php } 
+				} ?>
 			</div>
 		</div>
 	</div>
