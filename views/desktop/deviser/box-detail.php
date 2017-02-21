@@ -1,6 +1,5 @@
 <?php
 use app\assets\desktop\pub\BoxesViewAsset;
-use app\helpers\Utils;
 use app\models\Person;
 use yii\helpers\Json;
 use yii\helpers\Url;
@@ -52,41 +51,34 @@ $this->registerJs("var box = ".Json::encode($box), yii\web\View::POS_HEAD, 'box-
 				<p style="color:white;" ng-bind="boxDetailCtrl.box.description"></p>
 			</div>
 			<div class="col-md-9" style="background-color: black;">
-				<?php 
-					$products = $box->getProducts();
-					if(!$products) { ?>
-					<p class="text-center" style="font-size: 24px; color: white;">This box is empty</p>
-				<?php 
-					} else {
-					foreach ($products as $work) { ?>
-				<div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
-					<div class="grid">
+                <p class="text-center" style="font-size: 24px; color: white;" ng-if="boxDetailCtrl.box.products.length == 0">This box is empty</p>
+
+                <div class="col-md-2 col-sm-4 col-xs-6 pad-grid" ng-if="boxDetailCtrl.box.products.length > 0" ng-repeat="work in boxDetailCtrl.box.products">
+                    <div class="grid">
 						<figure class="effect-zoe">
 							<?php if (!$deviser->isConnectedUser()) { ?>
-								<image-hover-buttons product-id="{{'<?= $work->short_id?>'}}" is-loved="{{'<?= $work->isLovedByCurrentUser() ? 1 : 0 ?> '}}">
+								<image-hover-buttons product-id="{{work.id}}" is-loved="{{work.isLoved ? 1 : 0}}">
 							<?php } else { ?>
-								<span class="close-product-icon" ng-click="boxDetailCtrl.deleteProduct('<?= $work->short_id ?>')">
+								<span class="close-product-icon" ng-click="boxDetailCtrl.deleteProduct(work.id)">
 									<i class="ion-android-close"></i>
 								</span>
 							<?php } ?>
-								<a href="<?= Url::to(["product/detail", "slug" => $work->slug, 'product_id' => $work->short_id])?>">
-									<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($work->getMainImage()) ?>" title="<?= $work->name ?>">
+                                <a ng-href="{{work.link}}">
+                                    <img class="grid-image" ng-src="{{work.url_image_preview || '/imgs/product_placeholder.png'}}">
 								</a>
 							<?php if (!$deviser->isConnectedUser()) { ?>
 								</image-hover-buttons>
 							<?php } ?>
-							<a href="<?= Url::to(["product/detail", "slug" => $work->slug, 'product_id' => $work->short_id])?>">
-								<figcaption>
-									<p class="instauser">
-										<?= $work->name ?>
-									</p>
-								</figcaption>
-							</a>
+                            <figcaption>
+                                <a ng-href="{{work.link}}">
+                                    <p class="instauser">
+                                        <span ng-bind="work.name"></span>
+                                    </p>
+                                </a>
+                            </figcaption>
 						</figure>
 					</div>
 				</div>
-				<?php } 
-				} ?>
 			</div>
 		</div>
 	</div>
