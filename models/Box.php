@@ -108,19 +108,16 @@ class Box extends CActiveRecord
 	public function afterDelete()
 	{
 		$products = $this->getProducts();
-		foreach ($products as $item) {
-			$product = Product2::findOneSerialized($item->product_id);
-			if ($product) {
-				$collection = Yii::$app->mongodb->getCollection('product');
-				$collection->update(
-					[
-						'short_id' => $product->short_id
-					],
-					[
-						'boxes' => $product->boxes - 1
-					]
-				);
-			}
+		foreach ($products as $product) {
+			$collection = Yii::$app->mongodb->getCollection('product');
+			$collection->update(
+				[
+					'short_id' => $product->short_id
+				],
+				[
+					'boxes' => $product->boxes - 1
+				]
+			);
 		}
 
 		parent::afterDelete();
