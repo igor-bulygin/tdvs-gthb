@@ -1,11 +1,12 @@
 (function () {
 	"use strict";
 
-	function controller(deviserDataService, toastr, UtilService) {
+	function controller(deviserDataService, toastr, UtilService, $anchorScroll, $location) {
 		var vm = this;
 		vm.submitForm = submitForm;
 		vm.addUrlPortfolio = addUrlPortfolio;
 		vm.addUrlVideo = addUrlVideo;
+		vm.scrollToForm = scrollToForm;
 		vm.urlRegEx = UtilService.urlRegEx;
 		vm.has_error = UtilService.has_error;
 
@@ -19,6 +20,11 @@
 		}
 
 		init();
+
+		function scrollToForm() {
+			$location.hash('form');
+			$anchorScroll();
+		}
 
 		function submitForm(form) {
 			form.$setSubmitted();

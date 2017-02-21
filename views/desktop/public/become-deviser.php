@@ -23,7 +23,7 @@ $this->title = 'Become a Deviser - Todevise';
 
 ?>
 
-	<div class="become-deviser-wrapper">
+	<div class="become-deviser-wrapper" ng-controller="becomeDeviserCtrl as becomeDeviserCtrl">
 		<div>
 			<div class="container-fluid become-deviser-container">
 				<div class="become-deviser-cover">
@@ -41,7 +41,7 @@ $this->title = 'Become a Deviser - Todevise';
 								<div class="tagline">
 									Yourself
 								</div>
-								<button class="btn btn-white btn-request">Request invitation</button>
+								<button class="btn btn-white btn-request" ng-click="becomeDeviserCtrl.scrollToForm()">Request invitation</button>
 							</div>
 						</div>
 					</div>
@@ -101,7 +101,7 @@ $this->title = 'Become a Deviser - Todevise';
 				</div>
 				</div>
 			</div>
-			<div class="request-invitation-wrapper" ng-controller="becomeDeviserCtrl as becomeDeviserCtrl">
+			<div class="request-invitation-wrapper" id="form">
 					<div class="title">Request invitation</div>
 					<div class="tagline">We constantly strive for excellence, and for this reason an invitation is needed to register a deviser.</div>
 					<div class="request-invitation-container black-form">
