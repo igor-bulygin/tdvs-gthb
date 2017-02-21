@@ -21,6 +21,7 @@ class Box extends CActiveRecord
 {
 
 	const SCENARIO_BOX_CREATE = 'scenario-box-create';
+	const SCENARIO_BOX_UPDATE = 'scenario-box-update';
 	const SCENARIO_BOX_ADD_PRODUCT= 'scenario-box-add-product';
 
 	/**
@@ -129,7 +130,7 @@ class Box extends CActiveRecord
 	{
 		return [
 			[$this->attributes(), 'safe'],
-			[['person_id', 'name'], 'required', 'on' => [self::SCENARIO_BOX_CREATE]],
+			[['person_id', 'name'], 'required', 'on' => [self::SCENARIO_BOX_CREATE, self::SCENARIO_BOX_UPDATE]],
 			[['person_id'], 'validatePersonExists'],
 			[['products'], 'validateProductsExists', 'on' => [self::SCENARIO_BOX_ADD_PRODUCT]],
 			[

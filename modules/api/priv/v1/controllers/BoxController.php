@@ -73,6 +73,31 @@ class BoxController extends AppPrivateController
 		}
 	}
 
+	public function actionUpdate($boxId)
+	{
+		Box::setSerializeScenario(Box::SERIALIZE_SCENARIO_OWNER);
+
+		$box = Box::findOneSerialized($boxId); /* @var Box $box */
+
+		if (empty($box)) {
+			throw new NotFoundHttpException(sprintf("Box with id %s does not exists", $boxId));
+		}
+		if (!$box->isEditable()) {
+			throw new ForbiddenHttpException();
+		}
+		$box->setScenario(Box::SCENARIO_BOX_UPDATE);
+		if ($box->load(Yii::$app->request->post(), '') && $box->validate()) {
+
+			$box->save();
+
+			Yii::$app->response->setStatusCode(201); // Created
+			return $box;
+		} else {
+			Yii::$app->response->setStatusCode(400); // Bad Request
+			return ["errors" => $box->errors];
+		}
+	}
+
 	public function actionDelete($boxId)
 	{
 		$box = Box::findOneSerialized($boxId); /* @var Box $box */

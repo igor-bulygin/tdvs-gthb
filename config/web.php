@@ -345,6 +345,7 @@ $config = [
 				'GET api3/priv/v1/box' => 'api3/priv/v1/box/index',
 				'GET api3/priv/v1/box/<boxId:[^/.]*?>' => 'api3/priv/v1/box/view',
 				'POST api3/priv/v1/box' => 'api3/priv/v1/box/create',
+				'PATCH api3/priv/v1/box' => 'api3/priv/v1/box/update',
 				'DELETE api3/priv/v1/box/<boxId:[^/.]*?>' => 'api3/priv/v1/box/delete',
 				'POST api3/priv/v1/box/<boxId:[^/.]*?>/product' => 'api3/priv/v1/box/add-product',
 				'DELETE api3/priv/v1/box/<boxId:[^/.]*?>/product/<productId:[^/.]*?>' => 'api3/priv/v1/box/delete-product',
