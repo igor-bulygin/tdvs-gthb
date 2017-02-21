@@ -11,7 +11,6 @@ use app\models\Product;
 use app\models\Product2;
 use Yii;
 use yii\filters\AccessControl;
-use yii\helpers\Url;
 use yii\mongodb\Collection;
 use yii\web\BadRequestHttpException;
 use yii\web\HttpException;
@@ -135,7 +134,7 @@ class ProductController extends CController
 		}
 
 		if ($product->slug != $slug) {
-			return $this->redirect(Url::to(["product/detail", "slug" => $product->slug, 'product_id' => $product->short_id]), 301);
+			return $this->redirect($product->getViewLink(), 301);
 		}
 
 		// get the deviser

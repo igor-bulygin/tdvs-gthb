@@ -91,15 +91,15 @@ $this->params['deviser_links_target'] = 'public_view';
                                                 }
                                                 $count++;
                                                 if ($count == 1) { ?>
-                                                    <a href="<?= Url::to(["product/detail", "slug" => $product->slug, 'product_id' => $product->short_id])?>">
+                                                    <a href="<?= $product->getViewLink()?>">
                                                         <img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getMainImage())->resize($size[0][0], $size[0][1]) ?>">
                                                     </a>
                                                 <?php } elseif ($count == 2) { ?>
-                                                    <a href="<?= Url::to(["product/detail", "slug" => $product->slug, 'product_id' => $product->short_id])?>">
+                                                    <a href="<?= $product->getViewLink()?>">
                                                         <img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getMainImage())->resize($size[1][0], $size[1][1]) ?>">
                                                     </a>
                                                 <?php } elseif ($count == 3) { ?>
-                                                    <a href="<?= Url::to(["product/detail", "slug" => $product->slug, 'product_id' => $product->short_id])?>">
+                                                    <a href="<?= $product->getViewLink()?>">
                                                         <img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getMainImage())->resize($size[2][0], $size[2][1]) ?>">
                                                     </a>
                                                 <?php } ?>

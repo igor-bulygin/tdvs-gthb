@@ -7,6 +7,7 @@ use Exception;
 use MongoDate;
 use Yii;
 use yii\helpers\FileHelper;
+use yii\helpers\Url;
 use yii\mongodb\ActiveQuery;
 use yii2tech\ar\position\PositionBehavior;
 
@@ -390,6 +391,10 @@ class Product2 extends Product {
 					'slug',
 					'deviser' => "deviserPreview",
 					'url_image_preview' => "imagePreview128",
+					'link' => 'viewLink',
+					'edit_link' => 'editLink',
+					'isLoved' => 'isLoved',
+					'min_price' => 'minimumPrice',
 				];
 				static::$retrieveExtraFields = [
 					'deviser_id',
@@ -426,7 +431,11 @@ class Product2 extends Product {
 					'prints',
 					'sizechart',
 					'price_stock',
-					'tags'
+					'tags',
+					'link' => 'viewLink',
+					'edit_link' => 'editLink',
+					'main_photo' => 'mainImage',
+					'min_price' => 'minimumPrice',
 				];
 				static::$retrieveExtraFields = [
 					'deviser_id',
@@ -663,6 +672,24 @@ class Product2 extends Product {
 		}
 
 		return $image;
+	}
+
+	public function getViewLink() {
+		if (is_array($this->slug)) {
+			$slug = Utils::l($this->slug);
+		} else {
+			$slug = $this->slug;
+		}
+		return Url::to(["product/detail", "slug" => $slug, 'product_id' => $this->short_id]);
+	}
+
+	public function getEditLink() {
+		if (is_array($this->slug)) {
+			$slug = Utils::l($this->slug);
+		} else {
+			$slug = $this->slug;
+		}
+		return Url::to(['product/edit', 'slug' => $slug, 'product_id' => $this->short_id, 'deviser_id' => $this->deviser_id]);
 	}
 
 	/**
@@ -946,13 +973,17 @@ class Product2 extends Product {
 	public function getPreviewSerialized()
 	{
 		return [
-			"id" => $this->short_id,
-			"slug" => $this->slug,
-			"name" => $this->name,
-			"media" => $this->media,
-			"deviser" => $this->getDeviserPreview(),
+			'id' => $this->short_id,
+			'slug' => $this->slug,
+			'name' => $this->name,
+			'media' => $this->media,
+			'deviser' => $this->getDeviserPreview(),
 			'url_image_preview' => $this->getImagePreview128(),
-			"url_images" => $this->getUrlImagesLocation(),
+			'url_images' => $this->getUrlImagesLocation(),
+			'link' => $this->getViewLink(),
+			'edit_link' => $this->getEditLink(),
+			'isLoved' => $this->getIsLoved(),
+			'min_price' => $this->getMinimumPrice(),
 		];
 	}
 

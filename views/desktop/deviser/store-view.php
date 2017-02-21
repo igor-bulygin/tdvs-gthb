@@ -5,13 +5,13 @@ use app\components\DeviserMenu;
 use app\helpers\Utils;
 use app\models\Category;
 use app\models\Person;
-use app\models\Product;
+use app\models\Product2;
 use yii\helpers\Url;
 
 DeviserStoreViewAsset::register($this);
 
 /** @var Person $deviser */
-/** @var Product $product */
+/** @var Product2[] $products */
 /** @var Category $category */
 /** @var Category $selectedCategory */
 
@@ -89,19 +89,19 @@ $this->params['deviser'] = $deviser;
                                                 </span>
                                                 */ ?>
                                             <image-hover-buttons product-id="{{'<?= $product->short_id ?>'}}" is-loved="{{'<?=$product->isLovedByCurrentUser() ? 1 : 0 ?>'}}">
-                                                <a href="<?= Url::to(["product/detail", "slug" => $product->slug, 'product_id' => $product->short_id])?>">
+                                                <a href="<?= $product->getViewLink() ?>">
                                                     <img class="grid-image"
                                                          src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getMainImage())->resize(400, 0) ?>">
                                                 </a>
                                             </image-hover-buttons>
-                                            <a href="<?= Url::to(["product/detail", "slug" => $product->slug, 'product_id' => $product->short_id])?>">
+                                            <a href="<?= $product->getViewLink()?>">
                                                 <figcaption>
                                                     <p class="instauser">
 														<?= $product->name ?>
                                                     </p>
                                                     <p class="price">€ <?= $product->getMinimumPrice() ?></p>
 													<?php if ($deviser->isDeviserEditable()) { ?>
-                                                        <a class="edit-product-icon" href="<?= Url::to(['product/edit', 'slug' => $product->slug, 'product_id' => $product->short_id, 'deviser_id' => $deviser->short_id])?>" title="Edit work">
+                                                        <a class="edit-product-icon" href="<?= $product->getEditLink()?>" title="Edit work">
                                                             <i class="ion-edit"></i>
                                                         </a>
 													<?php } ?>

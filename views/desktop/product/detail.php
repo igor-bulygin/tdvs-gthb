@@ -549,12 +549,12 @@ $videos = $product->getVideos();
                                     <div class="grid">
                                         <figure class="effect-zoe">
                                             <image-hover-buttons product-id="{{'<?= $product->short_id ?>'}}" is-loved="{{'<?=$product->isLovedByCurrentUser() ? 1 : 0 ?>'}}">
-                                                <a href="<?= Url::to(["product/detail", "slug" => $product->slug, 'product_id' => $product->short_id])?>">
+                                                <a href="<?= $product->getViewLink() ?>">
                                                     <img class="grid-image"
                                                          src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getMainImage())->resize(400, 0) ?>">
                                                 </a>
                                             </image-hover-buttons>
-                                            <a href="<?= Url::to(["product/detail", "slug" => $product->slug, 'product_id' => $product->short_id])?>">
+                                            <a href="<?= $product->getViewLink() ?>">
                                                 <figcaption>
                                                     <p class="instauser">
 														<?= $product->name ?>

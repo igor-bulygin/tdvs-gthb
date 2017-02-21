@@ -4,7 +4,6 @@ use app\helpers\Utils;
 use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Json;
-use yii\helpers\Url;
 use yii\web\View;
 
 $this->params['breadcrumbs'][] = [
@@ -52,12 +51,12 @@ $this->title = 'Todevise / Admin / Products';
 						'buttons' => [
 
 							'view' => function($url, $model, $key) use ($deviser) {
-								$url = Url::to(["product/detail", "slug" => Utils::l($model->slug), "product_id" => $model->short_id]);
+								$url = $model->getViewLink();
 								return Html::a('<span class="glyphicon glyphicon-eye-open fc-fff fs1"></span>', $url);
 							},
 
 							'edit' => function($url, $model, $key) use ($deviser) {
-								$url = Url::to(["product/edit", "slug" => $deviser['slug'], "deviser_id"=> $deviser['short_id'], "product_id" => $model['short_id']]);
+								$url = $model->getEditLink();
 								return Html::a('<span class="glyphicon glyphicon-edit fc-fff fs1"></span>', $url);
 							},
 

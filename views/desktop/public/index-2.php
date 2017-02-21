@@ -82,12 +82,12 @@ $this->title = 'Todevise / Home';
 						<div class="grid">
 							<figure class="effect-zoe">
 								<image-hover-buttons product-id="{{'<?= $work->short_id ?>'}}" is-loved="{{'<?=$work->isLovedByCurrentUser() ? 1 : 0 ?>'}}">
-									<a href="<?= Url::to(["product/detail", "slug" => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
+									<a href="<?= $work->getViewLink()?>">
 										<img class="grid-image"
 											src="<?= Utils::url_scheme() ?><?= Utils::thumborize($work->getMainImage())->resize(362, 450) ?>">
 									</a>
 								</image-hover-buttons>
-								<a href="<?= Url::to(["product/detail", "slug" => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
+								<a href="<?= $work->getViewLink()?>">
 									<figcaption>
 										<p class="instauser">
 											<?= Utils::l($work->name) ?>
@@ -105,12 +105,12 @@ $this->title = 'Todevise / Home';
 						<div class="grid">
 							<figure class="effect-zoe">
 								<image-hover-buttons product-id="{{'<?= $work->short_id ?>'}}" is-loved="{{'<?=$work->isLovedByCurrentUser() ? 1 : 0 ?>'}}">
-									<a href="<?= Url::to(["product/detail", "slug" => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
+									<a href="<?= $work->getViewLink()?>">
 									<img class="grid-image"
 										src="<?= Utils::url_scheme() ?><?= Utils::thumborize($work->getMainImage())->resize(375, 220) ?>">
 									</a>
 								</image-hover-buttons>
-								<a href="<?= Url::to(["product/detail", "slug" => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
+								<a href="<?= $work->getViewLink()?>">
 									<figcaption>
 										<p class="instauser">
 											<?= Utils::l($work->name) ?>
@@ -189,11 +189,11 @@ $this->title = 'Todevise / Home';
 					<div class="grid">
 						<figure class="effect-zoe">
 							<image-hover-buttons product-id="{{'<?= $work->short_id ?>'}}" is-loved="{{'<?=$work->isLovedByCurrentUser() ? 1 : 0 ?>'}}">
-								<a href="<?= Url::to(["product/detail", "slug" => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
+								<a href="<?= $work->getViewLink()?>">
 									<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($work->getMainImage())->resize(362, 450) ?>">
 								</a>
 							</image-hover-buttons>
-							<a href="<?= Url::to(["product/detail", "slug" => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
+							<a href="<?= $work->getViewLink()?>">
 							<figcaption>
 								<p class="instauser">
 									<?= Utils::l($work->name) ?>
@@ -211,11 +211,11 @@ $this->title = 'Todevise / Home';
 					<div class="grid">
 						<figure class="effect-zoe">
 							<image-hover-buttons product-id="{{'<?= $work->short_id ?>'}}" is-loved="{{'<?=$work->isLovedByCurrentUser() ? 1 : 0 ?>'}}">
-								<a href="<?= Url::to(["product/detail", "slug" => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
+								<a href="<?= $work->getViewLink()?>">
 									<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($work->getMainImage())->resize(375, 220) ?>">
 								</a>
 							</image-hover-buttons>
-							<a href="<?= Url::to(["product/detail", "slug" => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
+							<a href="<?= $work->getViewLink()?>">
 								<figcaption>
 									<p class="instauser">
 										<?= Utils::l($work->name) ?>
