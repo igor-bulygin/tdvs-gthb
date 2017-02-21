@@ -10,7 +10,7 @@
 				method: 'PATCH'
 			}
 		});
-		var BoxProduct = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'box/:idBox/product');
+		var BoxProduct = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'box/:idBox/product/:idProduct');
 
 		//functions
 		this.getBoxPub = getBoxPub;

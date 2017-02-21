@@ -1,11 +1,12 @@
 (function () {
 	"use strict";
 
-	function controller(boxDataService, $uibModal) {
+	function controller(boxDataService, $uibModal, UtilService, $window) {
 		var vm = this;
 		vm.box = angular.copy(box);
 		vm.openEditBoxModal = openEditBoxModal;
 		vm.openDeleteBoxModal = openDeleteBoxModal;
+		vm.deleteProduct = deleteProduct;
 
 		function openDeleteBoxModal() {
 			var modalInstance = $uibModal.open({
@@ -40,6 +41,17 @@
 			}, function (err) {
 				//errors
 			});
+		}
+
+		function deleteProduct(productId) {
+			function onDeleteProductSuccess(data) {
+				$window.location.reload();
+			}
+
+			boxDataService.deleteProduct({
+				idBox: vm.box.id,
+				idProduct: productId
+			}, onDeleteProductSuccess, UtilService.onError);
 		}
 
 	}

@@ -66,15 +66,15 @@ $this->registerJs("var box = ".Json::encode($box), yii\web\View::POS_HEAD, 'box-
 							<?php if (!$deviser->isConnectedUser()) { ?>
 								<image-hover-buttons product-id="{{'<?= $work->short_id?>'}}" is-loved="{{'<?= $work->isLovedByCurrentUser() ? 1 : 0 ?> '}}">
 							<?php } else { ?>
-								<!-- open delete button -->
+								<span class="close-product-icon" ng-click="boxDetailCtrl.deleteProduct('<?= $work->short_id ?>')">
+									<i class="ion-android-close"></i>
+								</span>
 							<?php } ?>
 								<a href="<?= Url::to(["product/detail", "slug" => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
 									<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($work->getMainImage()) ?>" title="<?= $work->name ?>">
 								</a>
 							<?php if (!$deviser->isConnectedUser()) { ?>
 								</image-hover-buttons>
-							<?php } else { ?>
-								<!--end delete button -->
 							<?php } ?>
 							<a href="<?= Url::to(["product/detail", "slug" => Utils::l($work->slug), 'product_id' => $work->short_id])?>">
 								<figcaption>

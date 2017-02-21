@@ -65,7 +65,6 @@
 			var params = {idBox: idBox};
 
 			function onAddProductSuccess(returnData) {
-				console.log(returnData);
 				vm.dismiss();
 			}
 
