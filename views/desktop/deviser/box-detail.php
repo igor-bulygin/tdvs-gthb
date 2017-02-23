@@ -51,9 +51,9 @@ $this->registerJs("var box = ".Json::encode($box), yii\web\View::POS_HEAD, 'box-
 				<p style="color:white;" ng-bind="boxDetailCtrl.box.description"></p>
 			</div>
 			<div class="col-md-9" style="background-color: black;">
-                <p class="text-center" style="font-size: 24px; color: white;" ng-if="boxDetailCtrl.box.products.length == 0">This box is empty</p>
+                <p class="text-center" style="font-size: 24px; color: white;" ng-if="boxDetailCtrl.box.products.length == 0" ng-cloak>This box is empty</p>
 
-                <div class="col-md-2 col-sm-4 col-xs-6 pad-grid" ng-if="boxDetailCtrl.box.products.length > 0" ng-repeat="work in boxDetailCtrl.box.products">
+                <div class="col-md-2 col-sm-4 col-xs-6 pad-grid" ng-if="boxDetailCtrl.box.products.length > 0" ng-cloak ng-repeat="work in boxDetailCtrl.box.products">
                     <div class="grid">
 						<figure class="effect-zoe">
 							<?php if (!$deviser->isConnectedUser()) { ?>
