@@ -629,10 +629,13 @@ class DeviserController extends CController
 			throw new ForbiddenHttpException();
 		}
 
+		$boxes = Box::getRandomBoxes(16, $box->short_id);
+
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("box-detail", [
 			'deviser' => $deviser,
 			'box' => $box,
+			'moreBoxes' => $boxes,
 		]);
 	}
 

@@ -674,6 +674,11 @@ class Product2 extends Product {
 		return $image;
 	}
 
+	/**
+	 * Returns the url to view the product
+	 *
+	 * @return string
+	 */
 	public function getViewLink() {
 		if (is_array($this->slug)) {
 			$slug = Utils::l($this->slug);
@@ -683,6 +688,11 @@ class Product2 extends Product {
 		return Url::to(["product/detail", "slug" => $slug, 'product_id' => $this->short_id]);
 	}
 
+	/**
+	 * Returns the url to edit the product
+	 *
+	 * @return string
+	 */
 	public function getEditLink() {
 		if (is_array($this->slug)) {
 			$slug = Utils::l($this->slug);
