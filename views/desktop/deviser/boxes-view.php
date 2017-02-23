@@ -4,7 +4,6 @@ use app\components\DeviserHeader;
 use app\components\DeviserMenu;
 use app\helpers\Utils;
 use app\models\Person;
-use yii\helpers\Url;
 
 BoxesViewAsset::register($this);
 
@@ -65,16 +64,16 @@ $this->params['deviser_links_target'] = 'public_view';
                                         <?php } else {
                                             $sizes = [
                                                 1 => [
-                                                    [273, 373],
+                                                    [272, 373],
                                                 ],
                                                 2 => [
-                                                    [273, 105],
-                                                    [273, 257],
+                                                    [272, 116],
+                                                    [272, 257],
                                                 ],
                                                 3 => [
-                                                    [132, 105],
-                                                    [132, 105],
-                                                    [273, 257],
+                                                    [134, 116],
+                                                    [134, 116],
+                                                    [272, 257],
                                                 ],
                                             ];
                                             if (count($products) >= 3) {
@@ -106,7 +105,7 @@ $this->params['deviser_links_target'] = 'public_view';
                                             <?php } ?>
                                         <?php } ?>
 
-                                        <a href="<?= Url::to(["box-detail", "slug" => $deviser->slug, "deviser_id" => $deviser->short_id, "box_id" => $box->short_id])?>"><?=$box->name?> (<?=count($products)?>)</a>
+                                        <a href="<?= $box->getViewLink() ?>"><?=$box->name?> (<?=count($products)?>)</a>
 
                                     </div>
                                 <?php } ?>
