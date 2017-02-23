@@ -30,7 +30,7 @@ $this->registerJs("var deviser = ".Json::encode($deviser), yii\web\View::POS_HEA
 						</div>
 						<?php if ($deviser->isDeviserEditable()) {?>
 							<div class="edit-profile-btn">
-								<button class="btn btn-default btn-transparent btn-header" ng-click="deviserHeaderCtrl.editHeader()">Edit profile</button>
+								<button class="btn btn-default btn-transparent btn-header" ng-click="deviserHeaderCtrl.editHeader()">Edit header</button>
 							</div>
 						<?php } ?>
 						<div class="deviser-data">
