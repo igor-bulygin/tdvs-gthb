@@ -152,8 +152,8 @@ $this->title = 'Become a Deviser - Todevise';
 								</div>
 								<a href="" class="add-new" ng-click="becomeDeviserCtrl.addUrlPortfolio()">Add new +</a>
 								<div class="col-sm-12">
-									<div ng-repeat="url in becomeDeviserCtrl.invitation.urls_video track by $index">
 									<label>Link to video</label>
+									<div ng-repeat="url in becomeDeviserCtrl.invitation.urls_video track by $index">
 									<input name="{{'video_' + $index}}" type="text" class="form-control grey-input ng-class:{'error-input': becomeDeviserCtrl.has_error(becomeDeviserCtrl.form, becomeDeviserCtrl.form['video_'+$index])}" ng-model="becomeDeviserCtrl.invitation.urls_video[$index]" ng-pattern="becomeDeviserCtrl.urlRegEx">
 									<span class="optional-input">Optional</span>
 									<form-errors field="becomeDeviserCtrl.form['video_'+$index]" condition="becomeDeviserCtrl.has_error(becomeDeviserCtrl.form, becomeDeviserCtrl.form['video_'+$index])"></form-errors>
