@@ -7,7 +7,7 @@
 
 		function active() {
 			var patch = new deviserDataService.Profile;
-			patch.deviser_id = UtilService.returnDeviserIdFromUrl();
+			patch.deviser_id = deviser.short_id;
 			patch.scenario = "deviser-update-profile";
 			patch.account_state = "active";
 			patch.$update().then(function (updateData) {
