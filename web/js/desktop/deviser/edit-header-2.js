@@ -3,7 +3,6 @@
 
 	function controller(deviserDataService, deviserEvents, languageDataService, UtilService, Upload, $uibModal, locationDataService, $scope, $location) {
 		var vm = this;
-		vm.editingHeader = false;
 		vm.showCities = false;
 		vm.limit_text_biography = 140;
 		vm.description_language = 'en-US';
@@ -18,11 +17,9 @@
 		init();
 
 		function init() {
+			vm.editingHeader = deviser.account_state === 'draft' ? true : false;
 			getDeviser();
 			getLanguages();
-			var url = $location.absUrl().split('/');
-			if(url[url.length-1] === 'edit')
-				vm.editingHeader = true;
 		}
 
 		function getDeviser() {
