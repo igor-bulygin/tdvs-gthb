@@ -114,7 +114,8 @@
 		}
 
 		function isZeroOrLess(value) {
-			if(value === undefined || value === null) return false;
+			if(value === undefined || value === null) return true;
+			if(typeof value !== 'number') return false;
 			return value <= 0 ? true : false;
 		}
 
