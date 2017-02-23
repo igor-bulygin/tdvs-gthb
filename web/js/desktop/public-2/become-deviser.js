@@ -7,6 +7,8 @@
 		vm.addUrlPortfolio = addUrlPortfolio;
 		vm.addUrlVideo = addUrlVideo;
 		vm.scrollToForm = scrollToForm;
+		vm.splicePortfolio = splicePortfolio;
+		vm.spliceVideos = spliceVideos;
 		vm.urlRegEx = UtilService.urlRegEx;
 		vm.has_error = UtilService.has_error;
 
@@ -64,6 +66,14 @@
 						vm.invitation.urls_video.push(null);
 				}
 			}
+		}
+
+		function splicePortfolio(index) {
+			vm.invitation.urls_portfolio.splice(index, 1);
+		}
+
+		function spliceVideos(index) {
+			vm.invitation.urls_video.splice(index, 1);
 		}
 
 	}

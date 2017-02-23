@@ -145,9 +145,9 @@ $this->title = 'Become a Deviser - Todevise';
 								<div class="col-sm-12">
 									<label>Link to portfolio</label>
 									<div ng-repeat="url in becomeDeviserCtrl.invitation.urls_portfolio track by $index">
-									<input name="{{'portfolio_' + $index}}" type="text" class="form-control grey-input ng-class:{'error-input': becomeDeviserCtrl.has_error(becomeDeviserCtrl.form, becomeDeviserCtrl.form['portfolio_'+$index])}" required ng-model="becomeDeviserCtrl.invitation.urls_portfolio[$index]" ng-pattern="becomeDeviserCtrl.urlRegEx">
-									<form-errors field="becomeDeviserCtrl.form['portfolio_'+$index]" condition="becomeDeviserCtrl.has_error(becomeDeviserCtrl.form, becomeDeviserCtrl.form['portfolio_'+$index])"></form-errors>
-									<!-- <div><pre>{{becomeDeviserCtrl.form.portfolio_0 | json}}</pre></div> -->
+										<input name="{{'portfolio_' + $index}}" type="text" class="form-control grey-input ng-class:{'error-input': becomeDeviserCtrl.has_error(becomeDeviserCtrl.form, becomeDeviserCtrl.form['portfolio_'+$index])}" required ng-model="becomeDeviserCtrl.invitation.urls_portfolio[$index]" ng-pattern="becomeDeviserCtrl.urlRegEx">
+										<span class="glyphicon glyphicon-remove" style="background-color: #c7c7c7; border-radius: 10px; min-width: 10px; min-height: 10px;" ng-click="becomeDeviserCtrl.splicePortfolio($index)" ng-if="becomeDeviserCtrl.invitation.urls_portfolio.length > 1" ng-cloak></span>
+										<form-errors field="becomeDeviserCtrl.form['portfolio_'+$index]" condition="becomeDeviserCtrl.has_error(becomeDeviserCtrl.form, becomeDeviserCtrl.form['portfolio_'+$index])"></form-errors>
 									</div>
 								</div>
 								<a href="" class="add-new" ng-click="becomeDeviserCtrl.addUrlPortfolio()">Add new +</a>
@@ -156,6 +156,7 @@ $this->title = 'Become a Deviser - Todevise';
 									<div ng-repeat="url in becomeDeviserCtrl.invitation.urls_video track by $index">
 									<input name="{{'video_' + $index}}" type="text" class="form-control grey-input ng-class:{'error-input': becomeDeviserCtrl.has_error(becomeDeviserCtrl.form, becomeDeviserCtrl.form['video_'+$index])}" ng-model="becomeDeviserCtrl.invitation.urls_video[$index]" ng-pattern="becomeDeviserCtrl.urlRegEx">
 									<span class="optional-input">Optional</span>
+									<span class="glyphicon glyphicon-remove" style="background-color: #c7c7c7; border-radius: 10px; min-width: 10px; min-height: 10px;" ng-click="becomeDeviserCtrl.spliceVideos($index)" ng-if="becomeDeviserCtrl.invitation.urls_video.length > 1" ng-cloak></span>
 									<form-errors field="becomeDeviserCtrl.form['video_'+$index]" condition="becomeDeviserCtrl.has_error(becomeDeviserCtrl.form, becomeDeviserCtrl.form['video_'+$index])"></form-errors>
 									</div>
 								</div>
@@ -167,10 +168,10 @@ $this->title = 'Become a Deviser - Todevise';
 									<form-errors field="becomeDeviserCtrl.form.observations" condition="becomeDeviserCtrl.has_error(becomeDeviserCtrl.form, becomeDeviserCtrl.form.observations)"></form-errors>
 								</div>
 							</div>
-							<button class="btn-red send-btn" ng-click="becomeDeviserCtrl.submitForm(becomeDeviserCtrl.form)" ng-if="!becomeDeviserCtrl.success">
+							<button class="btn-red send-btn" ng-click="becomeDeviserCtrl.submitForm(becomeDeviserCtrl.form)" ng-if="!becomeDeviserCtrl.success" ng-cloak>
 								<i class="ion-android-navigate"></i>
 							</button>
-							<div class="ok-sent-mesg-wrapper" ng-if="becomeDeviserCtrl.success">
+							<div class="ok-sent-mesg-wrapper" ng-if="becomeDeviserCtrl.success" ng-cloak>
 								<span class="glyphicon glyphicon-ok ok-icon-rounded"></span>
 								<p>Your message has been sent successfully.
 									<br>We will contact you shortly.</p>
