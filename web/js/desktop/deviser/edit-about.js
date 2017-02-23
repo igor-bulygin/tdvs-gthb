@@ -17,9 +17,17 @@
 		vm.biography_language = "en-US";
 		vm.images = [];
 
+		function init() {
+			getDeviser();
+			getLanguages();
+			getCategories();
+		}
+
+		init();
+
 		function getDeviser() {
 			deviserDataService.Profile.get({
-				deviser_id: UtilService.returnDeviserIdFromUrl()
+				deviser_id: deviser.short_id
 			}).$promise.then(function (dataDeviser) {
 				vm.deviser = dataDeviser;
 				vm.deviser_original = angular.copy(dataDeviser);
@@ -46,13 +54,6 @@
 			languageDataService.getLanguages(onGetLanguagesSuccess, UtilService.onError);
 		}
 
-		function init() {
-			getDeviser();
-			getLanguages();
-			getCategories();
-		}
-
-		init();
 
 		function parsePhotos() {
 			var media = vm.deviser.media;
@@ -197,16 +198,17 @@
 			//set form submitted
 			vm.form.$setSubmitted();
 			//set fields
-			for(var i=0; i<args.required_fields.length; i++) {
-				if(args.required_fields[i]==='photos') {
-					vm.setPhotosRequired = true;
-				}
-				if(args.required_fields[i]==='biography') {
-					vm.setBiographyRequired = true;
-				}
-				if(args.required_fields[i]==='categories') {
-					vm.setCategoriesRequired = true;
-				}
+			console.log(args);
+			if(args.required_fields && args.required_fields.length > 0) {
+				args.required_fields.forEach(function(element) {
+					console.log(element);
+					if(element === 'photos')
+						vm.setPhotosRequired = true;
+					if(element === 'biography')
+						vm.setBiographyRequired = true;
+					if(element === 'categories')
+						vm.setCategoriesRequired = true;
+				});
 			}
 		});
 

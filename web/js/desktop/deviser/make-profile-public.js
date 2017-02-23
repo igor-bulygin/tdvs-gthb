@@ -16,7 +16,7 @@
 				vm.errorsRequired = true;
 				$rootScope.$broadcast(deviserEvents.make_profile_public_errors, {required_fields: err.data.errors.required});
 				for (var key in err.data.errors) {
-					toastr.error(err.data.errors[key]);
+					console.log(err.data.errors[key]);
 				}
 			});
 		}
