@@ -81,7 +81,7 @@ $this->title = 'Todevise / Home';
 				<div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
 						<div class="grid">
 							<figure class="effect-zoe">
-								<image-hover-buttons product-id="{{'<?= $work->short_id ?>'}}" is-loved="{{'<?=$work->isLovedByCurrentUser() ? 1 : 0 ?>'}}">
+								<image-hover-buttons product-id="{{'<?= $work->short_id ?>'}}" is-loved="{{'<?=$work->isLovedByCurrentUser() ? 1 : 0 ?>'}}" is-mine="{{'<?= $work->isWorkFromCurrentUser() ? 1 : 0 ?>'}}">
 									<a href="<?= $work->getViewLink()?>">
 										<img class="grid-image"
 											src="<?= Utils::url_scheme() ?><?= Utils::thumborize($work->getMainImage())->resize(362, 450) ?>">
@@ -104,7 +104,7 @@ $this->title = 'Todevise / Home';
 				<div class="col-md-4 col-sm-4 pad-grid pad-grid-h">
 						<div class="grid">
 							<figure class="effect-zoe">
-								<image-hover-buttons product-id="{{'<?= $work->short_id ?>'}}" is-loved="{{'<?=$work->isLovedByCurrentUser() ? 1 : 0 ?>'}}">
+								<image-hover-buttons product-id="{{'<?= $work->short_id ?>'}}" is-loved="{{'<?=$work->isLovedByCurrentUser() ? 1 : 0 ?>'}}" is-mine="{{'<?= $work->isWorkFromCurrentUser() ? 1 : 0 ?>'}}">
 									<a href="<?= $work->getViewLink()?>">
 									<img class="grid-image"
 										src="<?= Utils::url_scheme() ?><?= Utils::thumborize($work->getMainImage())->resize(375, 220) ?>">
@@ -188,7 +188,7 @@ $this->title = 'Todevise / Home';
 			<div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
 					<div class="grid">
 						<figure class="effect-zoe">
-							<image-hover-buttons product-id="{{'<?= $work->short_id ?>'}}" is-loved="{{'<?=$work->isLovedByCurrentUser() ? 1 : 0 ?>'}}">
+							<image-hover-buttons product-id="{{'<?= $work->short_id ?>'}}" is-loved="{{'<?=$work->isLovedByCurrentUser() ? 1 : 0 ?>'}}" is-mine="{{'<?= $work->isWorkFromCurrentUser() ? 1 : 0 ?>'}}">
 								<a href="<?= $work->getViewLink()?>">
 									<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($work->getMainImage())->resize(362, 450) ?>">
 								</a>
@@ -210,7 +210,7 @@ $this->title = 'Todevise / Home';
 			<div class="col-md-4 col-sm-4 pad-grid pad-grid-h">
 					<div class="grid">
 						<figure class="effect-zoe">
-							<image-hover-buttons product-id="{{'<?= $work->short_id ?>'}}" is-loved="{{'<?=$work->isLovedByCurrentUser() ? 1 : 0 ?>'}}">
+							<image-hover-buttons product-id="{{'<?= $work->short_id ?>'}}" is-loved="{{'<?=$work->isLovedByCurrentUser() ? 1 : 0 ?>'}}" is-mine="{{'<?= $work->isWorkFromCurrentUser() ? 1 : 0 ?>'}}">
 								<a href="<?= $work->getViewLink()?>">
 									<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($work->getMainImage())->resize(375, 220) ?>">
 								</a>

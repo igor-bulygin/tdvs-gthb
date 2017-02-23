@@ -1,6 +1,6 @@
 <div>
 	<div class="hover-btns-wrapper">
-		<span class="ion-heart icons-hover" ng-class=" imageHoverButtonsCtrl.isLoved ? 'red-text' : 'black-link'" ng-click="imageHoverButtonsCtrl.setLoved()"></span>
+		<span class="ion-heart icons-hover" ng-class="imageHoverButtonsCtrl.isLoved ? 'red-text' : 'black-link'" ng-click="imageHoverButtonsCtrl.setLoved()" ng-if="!imageHoverButtonsCtrl.isMine"></span>
 		<span class="icons-hover box black-link" ng-click="imageHoverButtonsCtrl.setBoxes()"></span>
 	</div>
 	<ng-transclude></ng-transclude>

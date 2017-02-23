@@ -9,6 +9,8 @@
 
 		function init() {
 			vm.isLoved = $scope.isLoved == 1 ? true : false;
+			vm.isMine = $scope.isMine == 1 ? true : false;
+			console.log(vm.isMine);
 		}
 
 		init();
@@ -83,7 +85,8 @@
 			transclude: true,
 			scope: {
 				productId: '@',
-				isLoved: '@'
+				isLoved: '@',
+				isMine: '@'
 			}
 		}
 	}

@@ -1134,6 +1134,14 @@ class Product2 extends Product {
 		return null;
 	}
 
+	public function isWorkFromCurrentUser() {
+		if(Yii::$app->user->isGuest) {
+			return false;
+		}
+		$person_id = Yii::$app->user->identity->short_id;
+		return $this->deviser_id == $person_id;
+	}
+
 	/**
 	 * Returns TRUE if the product is loved by the connected user
 	 *

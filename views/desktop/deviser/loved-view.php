@@ -55,7 +55,7 @@ $this->params['deviser_links_target'] = 'public_view';
                                     <div class="menu-category list-group">
                                         <div class="grid">
                                             <figure class="effect-zoe">
-                                                <image-hover-buttons product-id="{{'<?= $product->short_id ?>'}}" is-loved="{{'<?=$product->isLovedByCurrentUser() ? 1 : 0 ?>'}}">
+                                                <image-hover-buttons product-id="{{'<?= $product->short_id ?>'}}" is-loved="{{'<?=$product->isLovedByCurrentUser() ? 1 : 0 ?>'}}" is-mine="{{'<?= $product->isWorkFromCurrentUser() ? 1 : 0 ?>'}}">
                                                     <a href="<?= $product->getViewLink() ?>">
                                                         <img class="grid-image"
                                                              src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getMainImage())->resize(400, 0) ?>">
