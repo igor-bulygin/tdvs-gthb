@@ -6,6 +6,7 @@ use app\helpers\Utils;
 use Exception;
 use MongoDate;
 use Yii;
+use yii\helpers\Url;
 use yii\mongodb\ActiveQuery;
 
 /**
@@ -191,6 +192,7 @@ class Box extends CActiveRecord
 					'name',
 					'description',
 					'products' => "productsPreview",
+					'link' => 'viewLink',
 				];
 
 				static::$retrieveExtraFields = [
@@ -428,5 +430,60 @@ class Box extends CActiveRecord
 		$this->productsMapping = $products;
 
 		$this->save();
+	}
+
+	/**
+	 * Returns the url to view the box detail
+	 *
+	 * @return string
+	 */
+	public function getViewLink() {
+		$person = $this->getPerson();
+		if (is_array($person->slug)) {
+			$slug = Utils::l($person->slug);
+		} else {
+			$slug = $person->slug;
+		}
+		return Url::to(["box-detail", "slug" => $slug, "deviser_id" => $person->short_id, "box_id" => $this->short_id]);
+	}
+
+	/**
+	 * Returns a number of random boxes
+	 *
+	 * @param int $limit
+	 * @return Box[]
+	 */
+	public static function getRandomBoxes($limit, $idBoxIgnore)
+	{
+		// Exclude drafts
+		$conditions[] =
+			[
+				'$match' => [
+					"short_id" => [
+						'$ne' => $idBoxIgnore,
+					]
+				]
+			];
+
+		// Randomize
+		$conditions[] =
+			[
+				'$sample' => [
+					'size' => $limit,
+				]
+			];
+
+		$randomBoxes = Yii::$app->mongodb->getCollection('box')->aggregate($conditions);
+
+		$boxId = [];
+		foreach ($randomBoxes as $work) {
+			$boxId[] = $work['_id'];
+		}
+		$query = new ActiveQuery(Box::className());
+		$query->where(['in', '_id', $boxId]);
+		$boxes = $query->all();
+		shuffle($boxes);
+
+		return $boxes;
 	}
 }
