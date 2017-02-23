@@ -65,7 +65,7 @@
 			var params = {idBox: idBox};
 
 			function onAddProductSuccess(returnData) {
-				vm.dismiss();
+				vm.close();
 			}
 
 			boxDataService.addProduct(data, params, onAddProductSuccess, UtilService.onError);

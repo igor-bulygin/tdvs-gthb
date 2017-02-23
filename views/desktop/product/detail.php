@@ -225,7 +225,7 @@ $videos = $product->getVideos();
 									<span ng-if="!detailProductCtrl.product.isLoved" ng-cloak>Love work</span>
 									<span ng-if="detailProductCtrl.product.isLoved" ng-cloak>You love this work</span>
 								</button>
-								<button type="button" class="btn btn-grey btn-hart pull-right">
+								<button type="button" class="btn btn-grey btn-hart pull-right" ng-click="detailProductCtrl.setBox()">
 									<i class="ion-ios-box"></i>
 									<span>Save in a box</span>
 								</button>

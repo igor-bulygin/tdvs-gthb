@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(productDataService, tagDataService, cartDataService, lovedDataService, $location, toastr, UtilService, $window, $uibModal) {
+	function controller(productDataService, tagDataService, cartDataService, lovedDataService, boxDataService, $location, toastr, UtilService, $window, $uibModal) {
 		var vm = this;
 		vm.quantity = 1;
 		vm.option_selected = {};
@@ -13,6 +13,7 @@
 		vm.selectComparator = selectComparator;
 		vm.addToCart = addToCart;
 		vm.setLoved = setLoved;
+		vm.setBox = setBox;
 		var select_order = ['size', 'color', 'select']
 
 		function init() {
@@ -255,7 +256,7 @@
 				getProduct();
 			}
 			function setLovedError(err) {
-				if(err.status === 401) openSignUpLovedModal();
+				if(err.status === 401) openSignUpModal('loved');
 			}
 
 			//if is not loved
@@ -273,10 +274,44 @@
 			}
 		}
 
-		function openSignUpLovedModal(){
+		function setBox() {
+			function onGetBoxSuccess(data) {
+				var modalInstance = $uibModal.open({
+					component: 'modalSaveBox',
+					size: 'sm',
+					resolve: {
+						productId: function() {
+							return vm.product_id;
+						},
+						boxes: function() {
+							return data;
+						}
+					}
+				});
+
+				modalInstance.result.then(function () {
+					console.log("Here!");
+					getProduct();
+				});
+			}
+
+			function onGetBoxError(err) {
+				if(err.status === 401 || err.status === 404)
+					openSignUpModal('boxes')
+			}
+
+			boxDataService.getBoxPriv(null, onGetBoxSuccess, onGetBoxError);
+		}
+
+		function openSignUpModal(component){
 			var modalInstance = $uibModal.open({
 				component: 'modalSignUpLoved',
-				size: 'sm'
+				size: 'sm',
+				resolve: {
+					icon: function() {
+						return component;
+					}
+				}
 			});
 		}
 	}
