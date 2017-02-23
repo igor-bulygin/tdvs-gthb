@@ -220,10 +220,10 @@ $videos = $product->getVideos();
 						</div>-->
 						<div class="product-data no-border">
 							<div class="row-size">
-								<button type="button" class="btn btn-grey btn-hart pull-left" ng-click="detailProductCtrl.setLoved()">
-									<i class="ion-ios-heart ng-class:{'red-text': detailProductCtrl.product.isLoved}"></i>
+								<button type="button" class="btn btn-hart pull-left" ng-class="detailProductCtrl.product.isLoved ? 'btn-red' : 'btn-grey'" ng-click="detailProductCtrl.setLoved()">
+									<i class="ion-ios-heart"></i>
 									<span ng-if="!detailProductCtrl.product.isLoved" ng-cloak>Love work</span>
-									<span ng-if="detailProductCtrl.product.isLoved" ng-cloak>Loved!</span>
+									<span ng-if="detailProductCtrl.product.isLoved" ng-cloak>You love this work</span>
 								</button>
 								<button type="button" class="btn btn-grey btn-hart pull-right">
 									<i class="ion-ios-box"></i>
