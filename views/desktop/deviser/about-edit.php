@@ -1,9 +1,10 @@
 <?php
 use app\assets\desktop\deviser\EditAboutAsset;
-use app\components\DeviserAdminHeader;
+use app\components\DeviserHeader;
 use app\components\DeviserMakeProfilePublic;
 use app\components\DeviserMenu;
 use app\models\Person;
+use yii\helpers\Json;
 
 EditAboutAsset::register($this);
 
@@ -14,12 +15,14 @@ $this->params['deviser_menu_active_option'] = 'about';
 $this->params['deviser_links_target'] = 'edit_view';
 $this->params['deviser'] = $deviser;
 
+$this->registerJs("var deviser = ".Json::encode($deviser), yii\web\View::POS_HEAD, 'deviser-var-script');
+
 ?>
 
 	<?php if ($deviser->isDraft()) { ?>
 		<?= DeviserMakeProfilePublic::widget() ?>
 			<?php } ?>
-				<?= DeviserAdminHeader::widget() ?>
+				<?= DeviserHeader::widget() ?>
 					<div class="store">
 						<div class="container">
 							<div class="row">
