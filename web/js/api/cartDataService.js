@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function cartDataService($resource, apiConfig) {
+	function cartDataService($resource, apiConfig, apiMethods) {
 		//resources
 		//pub
 		var Cart = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'cart/:id');
@@ -21,70 +21,28 @@
 		this.getCartToken = getCartToken;
 		this.addProduct = addProduct;
 
-		function createCart(onsuccess, onerror) {
-			Cart.save()
-				.$promise.then(function(returnData) {
-					onsuccess(returnData);
-				}, function(err) {
-					onerror(err);
-				});
+		function createCart(onSuccess, onError) {
+			apiMethods.create(Cart, null, null, onSuccess, onError);
 		}
 
-		function getCart(data, onsuccess, onerror) {
-			Cart.get(data)
-				.$promise.then(function(returnData) {
-					onsuccess(returnData);
-				}, function(err) {
-					onerror(err);
-				});
+		function getCart(params, onSuccess, onError) {
+			apiMethods.get(Cart, params, onSuccess, onError);
 		}
 
-		function deleteItem(data, onsuccess, onerror) {
-			CartProduct.delete(data)
-				.$promise.then(function(returnData) {
-					onsuccess(returnData);
-				}, function(err) {
-					onerror(err);
-				});
+		function deleteItem(params, onSuccess, onError) {
+			apiMethods.deleteItem(CartProduct, params, onSuccess, onError);
 		}
 
-		function saveUserInfo(data, params, onsuccess, onerror) {
-			var client_info = new CartClientInfo;
-			for(var key in data) {
-				client_info[key] = angular.copy(data[key]);
-			}
-			client_info.$save(params)
-				.then(function(returnData) {
-					onsuccess(returnData);
-				}, function (err) {
-					onerror(err);
-				});
+		function saveUserInfo(data, params, onSuccess, onError) {
+			apiMethods.create(CartClientInfo, data, params, onSuccess, onError);
 		}
 
-		function getCartToken(data, params, onsuccess, onerror) {
-			var cartToken = new CartReceiveToken;
-			for(var key in data) {
-				cartToken[key] = angular.copy(data[key]);
-			}
-			cartToken.$save(params)
-				.then(function(returnData) {
-					onsuccess(returnData);
-				}, function (err) {
-					onerror(err);
-				})
+		function getCartToken(data, params, onSuccess, onError) {
+			apiMethods.create(CartReceiveToken, data, params, onSuccess, onError);
 		}
 
-		function addProduct(data, params, onsuccess, onerror) {
-			var newProduct = new CartProduct;
-			for(var key in data) {
-				newProduct[key] = angular.copy(data[key]);
-			}
-			newProduct.$save(params)
-				.then(function(returnData){
-					onsuccess(returnData);
-				}, function(err){
-					onerror(err);
-				})
+		function addProduct(data, params, onSuccess, onError) {
+			apiMethods.create(CartProduct, data, params, onSuccess, onError);
 		}
 
 
