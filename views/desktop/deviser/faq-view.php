@@ -36,7 +36,7 @@ $this->params['deviser_links_target'] = 'public_view';
 								<div><a class="red-link-btn" href="<?= Url::to(["deviser/faq-edit", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id])?>">Add / edit questions</a></div>
 							<?php } ?>
 							<img class="sad-face" src="/imgs/sad-face.svg">
-							<p class="no-video-text">You don't have any question!</p>
+							<p class="no-video-text">You don't have any questions!</p>
 						</div>
 					<?php } else { ?>
 				<div class="faq-wrapper">
