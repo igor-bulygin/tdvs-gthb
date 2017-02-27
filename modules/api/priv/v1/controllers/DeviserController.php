@@ -47,23 +47,24 @@ class DeviserController extends AppPrivateController
 	 */
 	private function getDetermineScenario(Person $deviser)
 	{
-		// get scenario to use in validations, from request
-		$scenario = Yii::$app->request->post('scenario', Person::SCENARIO_DEVISER_UPDATE_PROFILE);
-		$account_state = Yii::$app->request->post('account_state', Person::SCENARIO_DEVISER_UPDATE_PROFILE);
+//		// get scenario to use in validations, from request
+//		$scenario = Yii::$app->request->post('scenario', Person::SCENARIO_DEVISER_UPDATE_PROFILE);
+//
+//		// check that is a valid scenario for this controller
+//		if (!in_array($scenario, [
+//			Person::SCENARIO_DEVISER_CREATE_DRAFT,
+//			Person::SCENARIO_DEVISER_UPDATE_DRAFT,
+////			Person::SCENARIO_DEVISER_PUBLISH_PROFILE,
+//			Person::SCENARIO_DEVISER_UPDATE_PROFILE,
+////			Person::SCENARIO_DEVISER_PRESS_UPDATE,
+////			Person::SCENARIO_DEVISER_VIDEOS_UPDATE,
+////			Person::SCENARIO_DEVISER_FAQ_UPDATE,
+//		])
+//		) {
+//			throw new BadRequestHttpException('Invalid scenario');
+//		}
 
-		// check that is a valid scenario for this controller
-		if (!in_array($scenario, [
-			Person::SCENARIO_DEVISER_CREATE_DRAFT,
-			Person::SCENARIO_DEVISER_UPDATE_DRAFT,
-//			Person::SCENARIO_DEVISER_PUBLISH_PROFILE,
-			Person::SCENARIO_DEVISER_UPDATE_PROFILE,
-//			Person::SCENARIO_DEVISER_PRESS_UPDATE,
-//			Person::SCENARIO_DEVISER_VIDEOS_UPDATE,
-//			Person::SCENARIO_DEVISER_FAQ_UPDATE,
-		])
-		) {
-			throw new BadRequestHttpException('Invalid scenario');
-		}
+		$account_state = Yii::$app->request->post('account_state', Person::SCENARIO_DEVISER_UPDATE_PROFILE);
 
 		// can't change from "active" to "draft"
 		if ($deviser->account_state == Person::ACCOUNT_STATE_ACTIVE || $account_state == Person::ACCOUNT_STATE_ACTIVE) {
