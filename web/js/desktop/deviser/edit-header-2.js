@@ -145,7 +145,7 @@
 
 		function saveHeader() {
 			var patch = new deviserDataService.Profile;
-			patch.scenario = "deviser-update-profile";
+			//patch.scenario = "deviser-update-profile";
 			patch.deviser_id = vm.deviser.id;
 			for(var key in vm.deviser) {
 				//delete unwanted tags on text_biography
@@ -157,16 +157,15 @@
 				if(key!=='account_state')
 					patch[key] = angular.copy(vm.deviser[key]);
 				
-				patch.$update().then(function(updateData) {
-					vm.deviser = angular.copy(updateData);
-					vm.deviser_original = angular.copy(updateData)
-					parseDeviserInfo(vm.deviser)
-					vm.editingHeader = false;
-				}, function(err) {
-					UtilService.onError(err);
-				});
 			}
-
+			patch.$update().then(function(updateData) {
+				vm.deviser = angular.copy(updateData);
+				vm.deviser_original = angular.copy(updateData)
+				parseDeviserInfo(vm.deviser)
+				vm.editingHeader = false;
+			}, function(err) {
+				UtilService.onError(err);
+			});
 		}
 
 		function cancelEdit() {
