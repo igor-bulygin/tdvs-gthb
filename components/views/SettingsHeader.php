@@ -27,18 +27,18 @@ $activeOption = array_key_exists('settings_menu_active_option', $this->params) ?
 		<li role="presentation">
 			<a class="<?= ($activeOption=='settings') ? 'active' : '' ?>" href="#">Settings</a>
 		</li>
-		<li role="presentation">
-			<a class="<?= ($activeOption=='orders') ? 'active' : '' ?>" href="#">My Orders</a>
-		</li>
-		<li role="presentation">
-			<a class="<?= ($activeOption=='stock') ? 'active' : '' ?>" href="#">Stock & Price</a>
-		</li>
+<!--		<li role="presentation">-->
+<!--			<a class="--><?//= ($activeOption=='orders') ? 'active' : '' ?><!--" href="#">My Orders</a>-->
+<!--		</li>-->
+<!--		<li role="presentation">-->
+<!--			<a class="--><?//= ($activeOption=='stock') ? 'active' : '' ?><!--" href="#">Stock & Price</a>-->
+<!--		</li>-->
 		<li role="presentation">
 			<a class="<?= ($activeOption=='billing') ? 'active' : '' ?>" href="<?= Url::to(["settings/billing", "slug" => $person->slug, 'person_id' => $person->short_id])?>">Billing & Payments</a>
 		</li>
-		<li role="presentation">
-			<a class="<?= ($activeOption=='shipping') ? 'active' : '' ?>" href="#">Shipping</a>
-		</li>
+<!--		<li role="presentation">-->
+<!--			<a class="--><?//= ($activeOption=='shipping') ? 'active' : '' ?><!--" href="#">Shipping</a>-->
+<!--		</li>-->
 	</ul>
 
 </div>
