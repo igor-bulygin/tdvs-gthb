@@ -106,8 +106,8 @@ class PersonPersonalInfo extends EmbedModel
 	public function rules()
 	{
 		return [
-			[$this->attributes(), 'safe', 'on' => [Person::SCENARIO_DEVISER_CREATE_DRAFT,  Person::SCENARIO_DEVISER_UPDATE_DRAFT,  Person::SCENARIO_DEVISER_UPDATE_PROFILE, Person::SCENARIO_DEVISER_PUBLISH_PROFILE]],
-			[['name', 'brand_name', 'country', 'city'], 'required', 'on' => Person::SCENARIO_DEVISER_PUBLISH_PROFILE],
+			[$this->attributes(), 'safe', 'on' => [Person::SCENARIO_DEVISER_CREATE_DRAFT,  Person::SCENARIO_DEVISER_UPDATE_DRAFT,  Person::SCENARIO_DEVISER_UPDATE_PROFILE]],
+			[['name', 'brand_name', 'country', 'city'], 'required', 'on' => Person::SCENARIO_DEVISER_UPDATE_PROFILE],
 		];
 	}
 

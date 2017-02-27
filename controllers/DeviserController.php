@@ -15,7 +15,6 @@ use app\models\Tag;
 use Yii;
 use yii\filters\AccessControl;
 use yii\helpers\Json;
-use yii\helpers\Url;
 use yii\mongodb\Collection;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
@@ -399,7 +398,7 @@ class DeviserController extends CController
 
 		if ($deviser->account_state != Person::ACCOUNT_STATE_ACTIVE) {
 			if ($deviser->isDeviserEditable()) {
-				$this->redirect(Url::to(['deviser/about-edit', 'deviser_id' => $deviser_id, 'slug' => $slug]));
+				$this->redirect($deviser->getEditDeviserAboutLink());
 			} else {
 				throw new NotFoundHttpException();
 			}
@@ -439,7 +438,7 @@ class DeviserController extends CController
 
 		if ($deviser->account_state != Person::ACCOUNT_STATE_ACTIVE) {
 			if ($deviser->isDeviserEditable()) {
-				$this->redirect(Url::to(['deviser/about-edit', 'deviser_id' => $deviser_id, 'slug' => $slug]));
+				$this->redirect($deviser->getEditDeviserAboutLink());
 			} else {
 				throw new NotFoundHttpException();
 			}
@@ -481,7 +480,7 @@ class DeviserController extends CController
 
 		if ($deviser->account_state != Person::ACCOUNT_STATE_ACTIVE) {
 			if ($deviser->isDeviserEditable()) {
-				$this->redirect(Url::to(['deviser/about-edit', 'deviser_id' => $deviser_id, 'slug' => $slug]));
+				$this->redirect($deviser->getEditDeviserAboutLink());
 			} else {
 				throw new NotFoundHttpException();
 			}
@@ -523,7 +522,7 @@ class DeviserController extends CController
 
 		if ($deviser->account_state != Person::ACCOUNT_STATE_ACTIVE) {
 			if ($deviser->isDeviserEditable()) {
-				$this->redirect(Url::to(['deviser/about-edit', 'deviser_id' => $deviser_id, 'slug' => $slug]));
+				$this->redirect($deviser->getEditDeviserAboutLink());
 			} else {
 				throw new NotFoundHttpException();
 			}
@@ -565,7 +564,7 @@ class DeviserController extends CController
 
 		if ($deviser->account_state != Person::ACCOUNT_STATE_ACTIVE) {
 			if ($deviser->isDeviserEditable()) {
-				$this->redirect(Url::to(['deviser/about-edit', 'deviser_id' => $deviser_id, 'slug' => $slug]));
+				$this->redirect($deviser->getEditDeviserAboutLink());
 			} else {
 				throw new NotFoundHttpException();
 			}
@@ -589,7 +588,7 @@ class DeviserController extends CController
 
 		if ($deviser->account_state != Person::ACCOUNT_STATE_ACTIVE) {
 			if ($deviser->isDeviserEditable()) {
-				$this->redirect(Url::to(['deviser/about-edit', 'deviser_id' => $deviser_id, 'slug' => $slug]));
+				$this->redirect($deviser->getEditDeviserAboutLink());
 			} else {
 				throw new NotFoundHttpException();
 			}
@@ -613,7 +612,7 @@ class DeviserController extends CController
 
 		if ($deviser->account_state != Person::ACCOUNT_STATE_ACTIVE) {
 			if ($deviser->isDeviserEditable()) {
-				$this->redirect(Url::to(['deviser/about-edit', 'deviser_id' => $deviser_id, 'slug' => $slug]));
+				$this->redirect($deviser->getEditDeviserAboutLink());
 			} else {
 				throw new NotFoundHttpException();
 			}
