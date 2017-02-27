@@ -394,6 +394,7 @@ class Product2 extends Product {
 					'link' => 'viewLink',
 					'edit_link' => 'editLink',
 					'isLoved' => 'isLoved',
+					'isMine' => 'isMine',
 					'min_price' => 'minimumPrice',
 				];
 				static::$retrieveExtraFields = [
@@ -427,6 +428,7 @@ class Product2 extends Product {
 					'position',
 					'loveds',
 					'isLoved' => 'isLoved',
+					'isMine' => 'isMine',
 					'boxes',
 					'prints',
 					'sizechart',
@@ -898,6 +900,10 @@ class Product2 extends Product {
 		return $this->isLovedByCurrentUser();
 	}
 
+	public function getIsMine() {
+		return $this->isWorkFromCurrentUser();
+	}
+
 	/**
 	 * @deprecated
 	 * @param $tag_id
@@ -993,6 +999,7 @@ class Product2 extends Product {
 			'link' => $this->getViewLink(),
 			'edit_link' => $this->getEditLink(),
 			'isLoved' => $this->getIsLoved(),
+			'isMine' => $this->getIsMine(),
 			'min_price' => $this->getMinimumPrice(),
 		];
 	}
@@ -1134,6 +1141,11 @@ class Product2 extends Product {
 		return null;
 	}
 
+	/**
+	 * Returns TRUE if the product is from the connected user
+	 *
+	 * @return bool
+	 */
 	public function isWorkFromCurrentUser() {
 		if(Yii::$app->user->isGuest) {
 			return false;
