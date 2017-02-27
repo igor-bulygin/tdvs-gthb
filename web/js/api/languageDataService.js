@@ -1,19 +1,14 @@
 (function () {
 	"use strict";
 	
-	function languageDataService($resource, apiConfig) {
+	function languageDataService($resource, apiConfig, apiMethods) {
 		var Languages = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'languages');
 
 		//functions
 		this.getLanguages = getLanguages;
 
-		function getLanguages(onsuccess, onerror) {
-			Languages.get()
-				.$promise.then(function (returnData) {
-					onsuccess(returnData);
-				}, function (err) {
-					onerror(err);
-				});
+		function getLanguages(onSuccess, onError) {
+			apiMethods.get(Languages, null, onSuccess, onError)
 		}
 	}
 	

@@ -66,17 +66,17 @@
 		}
 
 		function searchPlace(place) {
-			locationDataService.Location.get({
-				q: place
-			}).$promise.then(function (dataLocation) {
-				if(dataLocation.items.length === 0) {
+			function onGetLocationSuccess(data) {
+				if(data.items.length === 0) {
 					vm.showCities = false;
 				}
-				if(dataLocation.items.length > 0) {
+				if(data.items.length > 0) {
 					vm.showCities = true;
-					vm.cities = dataLocation.items;
+					vm.cities = angular.copy(data.items);
 				}
-			});
+			}
+
+			locationDataService.getLocation({q: place}, onGetLocationSuccess, UtilService.onError);
 		}
 
 		function selectCity(city) {

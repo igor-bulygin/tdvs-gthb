@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(UtilService, deviserDataService, locationDataService, settingsEvents, $scope, $rootScope) {
+	function controller(UtilService, deviserDataService, settingsEvents, $scope, $rootScope) {
 		var vm = this;
 		vm.bank_location = [{
 			country_name: 'Australia',

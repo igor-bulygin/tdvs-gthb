@@ -189,7 +189,7 @@
 			for(var key in vm.deviser) {
 				if(key === 'text_biography') {
 					for(var language in vm.deviser[key]) {
-						vm.deviser[key][language] = parseTags(vm.deviser[key][language]);
+						vm.deviser[key][language] = UtilService.stripHTMLTags(vm.deviser[key][language]);
 					}
 				}
 				if(key !== 'account_state')
