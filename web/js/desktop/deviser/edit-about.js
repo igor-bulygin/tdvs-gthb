@@ -1,9 +1,11 @@
 (function () {
 	"use strict";
 
-	function controller(deviserDataService, UtilService, languageDataService, toastr, productDataService, Upload, $timeout, $rootScope, $scope, deviserEvents, $uibModal, dragndropService) {
+	function controller(deviserDataService, UtilService, languageDataService, toastr, productDataService, 
+		Upload, $timeout, $rootScope, $scope, deviserEvents, $uibModal, dragndropService, $window) {
 		var vm = this;
 		vm.stripHTMLTags = UtilService.stripHTMLTags;
+		vm.save = save;
 		vm.uploadPhoto = uploadPhoto;
 		vm.openCropModal = openCropModal;
 		vm.uploadCV = uploadCV;
@@ -17,14 +19,15 @@
 		vm.biography_language = "en-US";
 		vm.images = [];
 
+		init();
+
 		function init() {
 			getDeviser();
 			getLanguages();
 			getCategories();
 		}
 
-		init();
-
+		/*Initial functions*/
 		function getDeviser() {
 			deviserDataService.Profile.get({
 				deviser_id: deviser.short_id
@@ -34,7 +37,7 @@
 				vm.images = UtilService.parseImagesUrl(vm.deviser.media.photos, vm.deviser.url_images);
 				vm.curriculum = currentHost() + vm.deviser.url_images + vm.deviser.curriculum;
 			}, function (err) {
-				//errors
+				UtilService.onError(err);
 			});
 		}
 
@@ -54,7 +57,7 @@
 			languageDataService.getLanguages(onGetLanguagesSuccess, UtilService.onError);
 		}
 
-
+		/* photos functions */
 		function parsePhotos() {
 			var media = vm.deviser.media;
 			media.photos = [];
@@ -63,26 +66,6 @@
 					media.photos.push(element.filename);
 			});
 			return media;
-		}
-
-		function uploadCV(file) {
-			var data = {
-				type: 'deviser-curriculum',
-				deviser_id: vm.deviser.id,
-				file: file
-			}
-			Upload.upload({
-				url: deviserDataService.Uploads,
-				data: data
-			}).then(function (dataCV) {
-				vm.deviser.curriculum = dataCV.data.filename;
-			}, function (err) {
-				//errors
-			})
-		}
-
-		function deleteCV() {
-			vm.deviser.curriculum = '';
 		}
 
 		function openCropModal(photo, index) {
@@ -146,6 +129,38 @@
 				checkPhotos();
 		}
 
+		function checkPhotos(){
+			if(vm.images.length >= 5) {
+				vm.showMaxPhotosLimit = true;
+			}
+			else {
+				vm.showMaxPhotosLimit = false;
+			}
+		}
+
+		/* cv functions */
+		function uploadCV(file) {
+			var data = {
+				type: 'deviser-curriculum',
+				deviser_id: vm.deviser.id,
+				file: file
+			}
+			Upload.upload({
+				url: deviserDataService.Uploads,
+				data: data
+			}).then(function (dataCV) {
+				vm.deviser.curriculum = dataCV.data.filename;
+			}, function (err) {
+				//errors
+			})
+		}
+
+		function deleteCV() {
+			vm.deviser.curriculum = '';
+		}
+
+		/* drag and drop functions */
+
 		function dragStart(index) {
 			dragndropService.dragStart(index, vm.images);
 		}
@@ -164,36 +179,31 @@
 			vm.images = dragndropService.canceled();
 		}
 
-		function checkPhotos(){
-			if(vm.images.length >= 5) {
-				vm.showMaxPhotosLimit = true;
+		function save() {
+			function parseTags(value) {
+				return value.replace(/<[^\/>][^>]*><\/[^>]+>/gim, "");
 			}
-			else {
-				vm.showMaxPhotosLimit = false;
+
+			var patch = new deviserDataService.Profile;
+			patch.deviser_id = vm.deviser.id;
+			for(var key in vm.deviser) {
+				if(key === 'text_biography') {
+					for(var language in vm.deviser[key]) {
+						vm.deviser[key][language] = parseTags(vm.deviser[key][language]);
+					}
+				}
+				if(key !== 'account_state')
+					patch[key] = angular.copy(vm.deviser[key]);
 			}
+			patch.$update().then(function(updateData) {
+				$window.location.href = currentHost() + '/deviser/' + vm.deviser.slug + '/' + vm.deviser.id +'/about'
+			}, function(err) {
+				UtilService.onError(err);
+			})
+
 		}
 
-		//watches
-		$scope.$watch('editAboutCtrl.deviser', function (newValue, oldValue) {
-			if(newValue) {
-				if(!angular.equals(newValue, vm.deviser_original)) {
-					$rootScope.$broadcast(deviserEvents.deviser_changed, {value: true, deviser: newValue});
-				} else {
-					$rootScope.$broadcast(deviserEvents.deviser_changed, {value: false});
-				}
-			}
-		}, true);
-
 		//events
-		$scope.$on(deviserEvents.deviser_updated, function(event, args) {
-			getDeviser();
-		});
-
-		$scope.$on(deviserEvents.deviser_changed, function(event, args) {
-			if(args.deviser)
-				vm.deviser = angular.copy(args.deviser);
-		});
-
 		$scope.$on(deviserEvents.make_profile_public_errors, function(event, args) {
 			//set form submitted
 			vm.form.$setSubmitted();

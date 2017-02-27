@@ -1,4 +1,5 @@
 <?php
+use yii\helpers\Url;
 use app\assets\desktop\pub\PublicCommonAsset;
 use app\components\DeviserHeader;
 use app\components\DeviserMenu;
@@ -70,6 +71,9 @@ foreach ($deviser->getAboutUrlImages() as $key => $urlImage) {
 				<div class="col-md-5 pad-about">
 					<div class="about-wrapper">
 						<div class="about-container">
+							<?php if ($deviser->isDeviserEditable()) { ?>
+								<div><a class="red-link-btn" href="<?= Url::to(["deviser/about-edit", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id])?>">Edit about</a></div>
+							<?php } ?>
 							<!--<div class="title">Abo<br>ut</div>-->
 							<div class="name-location-wrapper">
 								<div class="name">
