@@ -3,7 +3,7 @@ namespace app\assets\desktop\pub;
 
 use yii\web\AssetBundle;
 
-class DeviserStoreViewAsset extends AssetBundle {
+class StoreViewAsset extends AssetBundle {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [];

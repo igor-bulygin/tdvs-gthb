@@ -1,5 +1,5 @@
 <?php
-use app\assets\desktop\pub\DeviserStoreViewAsset;
+use app\assets\desktop\pub\StoreViewAsset;
 use app\components\DeviserHeader;
 use app\components\DeviserMenu;
 use app\helpers\Utils;
@@ -8,7 +8,7 @@ use app\models\Person;
 use app\models\Product2;
 use yii\helpers\Url;
 
-DeviserStoreViewAsset::register($this);
+StoreViewAsset::register($this);
 
 /** @var Person $deviser */
 /** @var Product2[] $products */
