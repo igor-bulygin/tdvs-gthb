@@ -49,6 +49,9 @@ class AppPrivateController extends Controller
 		// TODO: retrieve current identity from one of the available authentication methods in Yii
 		$person_id = Yii::$app->request->isGet ? Yii::$app->request->get("deviser_id") : Yii::$app->request->post("deviser_id");
 		if (empty($person_id)) {
+			$person_id = Yii::$app->request->isGet ? Yii::$app->request->get("person_id") : Yii::$app->request->post("person_id");
+		}
+		if (empty($person_id)) {
 			throw new BadRequestHttpException('Person id not specified');
 		}
 		/** @var Person $person */
