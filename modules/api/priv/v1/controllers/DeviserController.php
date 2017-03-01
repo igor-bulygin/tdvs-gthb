@@ -26,7 +26,7 @@ class DeviserController extends AppPrivateController
 		$newAccountState = Yii::$app->request->post('account_state');
 		$this->checkDeviserAccountState($deviser, $newAccountState); // check for allowed new account state only
 
-		$deviser->setScenario($this->getDetermineScenario($deviser)); // safe and required attributes are related with scenario
+		$deviser->setScenario($this->getScenarioFromRequest($deviser)); // safe and required attributes are related with scenario
 		if ($deviser->load(Yii::$app->request->post(), '') && $deviser->save()) {
 
 			Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
@@ -45,25 +45,8 @@ class DeviserController extends AppPrivateController
 	 * @return string
 	 * @throws BadRequestHttpException
 	 */
-	private function getDetermineScenario(Person $deviser)
+	private function getScenarioFromRequest(Person $deviser)
 	{
-//		// get scenario to use in validations, from request
-//		$scenario = Yii::$app->request->post('scenario', Person::SCENARIO_DEVISER_UPDATE_PROFILE);
-//
-//		// check that is a valid scenario for this controller
-//		if (!in_array($scenario, [
-//			Person::SCENARIO_DEVISER_CREATE_DRAFT,
-//			Person::SCENARIO_DEVISER_UPDATE_DRAFT,
-////			Person::SCENARIO_DEVISER_PUBLISH_PROFILE,
-//			Person::SCENARIO_DEVISER_UPDATE_PROFILE,
-////			Person::SCENARIO_DEVISER_PRESS_UPDATE,
-////			Person::SCENARIO_DEVISER_VIDEOS_UPDATE,
-////			Person::SCENARIO_DEVISER_FAQ_UPDATE,
-//		])
-//		) {
-//			throw new BadRequestHttpException('Invalid scenario');
-//		}
-
 		$account_state = Yii::$app->request->post('account_state', Person::SCENARIO_DEVISER_UPDATE_PROFILE);
 
 		// can't change from "active" to "draft"

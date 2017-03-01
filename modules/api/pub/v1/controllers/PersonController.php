@@ -37,7 +37,7 @@ class PersonController extends AppPublicController
 			throw new BadRequestHttpException(Yii::t("app/api", "The invitation is for another email account"));
 		}
 
-		$person->setScenario($this->getScenario());
+		$person->setScenario($this->getScenarioFromRequest($person));
 		$person->load(Yii::$app->request->post(), '');
 
 		$person->credentials = ["email" => $invitation->email];
@@ -67,7 +67,14 @@ class PersonController extends AppPublicController
 		}
 	}
 
-	protected function getScenario()
+	/**
+	 * Get validation scenario from request param
+	 *
+	 * @param Person $deviser
+	 * @return string
+	 * @throws BadRequestHttpException
+	 */
+	private function getScenarioFromRequest(Person $deviser)
 	{
 		$type = Yii::$app->request->post('type');
 
