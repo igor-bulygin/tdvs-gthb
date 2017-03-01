@@ -338,7 +338,12 @@ class Person extends CActiveRecord implements IdentityInterface
 				'on' => [self::SCENARIO_DEVISER_UPDATE_DRAFT, self::SCENARIO_DEVISER_UPDATE_PROFILE]
 			],
 			[
-				'account_state',
+				[
+					'account_state',
+					'personal_info',
+					'categories',
+					'text_biography',
+				],
 				'required',
 				'on' => [self::SCENARIO_DEVISER_UPDATE_PROFILE],
 			],
