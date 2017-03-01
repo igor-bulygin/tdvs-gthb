@@ -12,7 +12,7 @@
 			'update': {
 				method: 'PATCH'
 			}
-		})
+		});
 		var Upload = apiConfig.baseUrl + 'priv' + apiConfig.version + 'uploads';
 
 		//methods
@@ -20,6 +20,8 @@
 		this.createInfluencer = createInfluencer;
 		this.login = login;
 		this.logout = logout;
+		this.getProfile = getProfile;
+		this.updateProfile = updateProfile;
 
 		function createDeviser(data, params, onSuccess, onError) {
 			data = Object.assign(data, {type: [2]});
@@ -37,6 +39,14 @@
 
 		function logout(data, params, onSuccess, onError) {
 			apiMethods.create(Logout, data, params, onSuccess, onError);
+		}
+
+		function getProfile(params, onSuccess, onError) {
+			apiMethods.get(Profile, params, onSuccess, onError);
+		}
+
+		function updateProfile(data, params, onSuccess, onError) {
+			apiMethods.update(Profile, data, params, onSuccess, onError);
 		}
 
 	}

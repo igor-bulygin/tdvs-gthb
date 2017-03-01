@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(deviserDataService, toastr, UtilService, languageDataService, $window, dragndropService) {
+	function controller(personDataService, toastr, UtilService, languageDataService, $window, dragndropService) {
 		var vm = this;
 		vm.stripHTMLTags = UtilService.stripHTMLTags;
 		vm.addQuestion = addQuestion;
@@ -26,16 +26,16 @@
 				}
 			}
 
-			deviserDataService.Profile.get({
-				deviser_id: UtilService.returnDeviserIdFromUrl()
-			}).$promise.then(function (dataDeviser) {
-				vm.deviser = dataDeviser;
-				vm.deviser_original = angular.copy(dataDeviser);
+			function onGetProfileSuccess(data) {
+				vm.deviser = angular.copy(data);
+				vm.deviser_original = angular.copy(data);
 				//we need languages before parse questions
 				languageDataService.getLanguages(onGetLanguagesSuccess, UtilService.onError);
-			}, function (err) {
-				toastr.error(err);
-			})
+			}
+
+			personDataService.getProfile({
+				person_id: deviser.short_id
+			}, onGetProfileSuccess, UtilService.onError);
 		}
 
 		function init() {
@@ -75,9 +75,35 @@
 		}
 
 		function update() {
-			var patch = new deviserDataService.Profile;
+			var data = {
+				scenario: 'deviser-update-profile',
+				faq: [],
+				person_id: deviser.short_id
+			};
+
+			function onUpdateProfileSuccess(data) {
+				$window.location.href = '/deviser/' + data.slug + '/' + data.id + '/faq';
+			}
+
+			function parseFaqs(element) {
+				parseQuestion(element);
+				for(var key in element.answer) {
+					element.answer[key] = element.answer[key].replace(/<[^\/>][^>]*><\/[^>]+>/gim, "");
+				}
+				data.faq.push({
+					question: angular.copy(element.question),
+					answer: angular.copy(element.answer)
+				});
+			}
+
+			vm.deviser.faq.map(parseFaqs);
+
+			personDataService.updateProfile(data, null, onUpdateProfileSuccess, UtilService.onError);
+
+/*			var patch = new deviserDataService.Profile;
 			patch.scenario = 'deviser-update-profile';
 			patch.faq = [];
+			patch.deviser_id = vm.deviser.id;
 			vm.deviser.faq.forEach(function (element) {
 				parseQuestion(element);
 				for(var key in element.answer) {
@@ -88,12 +114,11 @@
 					answer: angular.copy(element.answer)
 				});
 			});
-			patch.deviser_id = vm.deviser.id;
 			patch.$update().then(function(dataFaq) {
 				$window.location.href = '/deviser/' + dataFaq.slug + '/' + dataFaq.id + '/faq';
 			}, function (err) {
 				toastr.error(err);
-			});
+			});*/
 		}
 
 		function dragStart(index) {

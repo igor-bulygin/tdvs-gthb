@@ -1,4 +1,5 @@
 <?php
+use yii\helpers\Json;
 use app\assets\desktop\deviser\EditFaqAsset;
 use app\components\DeviserHeader;
 use app\components\DeviserMakeProfilePublic;
@@ -13,6 +14,7 @@ $this->title = 'About ' . $deviser->personalInfoMapping->getBrandName() . ' - To
 $this->params['deviser'] = $deviser;
 $this->params['deviser_menu_active_option'] = 'faq';
 $this->params['deviser_links_target'] = 'edit_view';
+$this->registerJs("var deviser = ".Json::encode($deviser), yii\web\View::POS_HEAD, 'deviser-var-script');
 
 ?>
 
