@@ -1,23 +1,22 @@
 (function () {
 	"use strict";
 
-	function controller(deviserDataService, $window, UtilService) {
+	function controller(personDataService, $window, UtilService) {
 		var vm = this;
 		vm.login = login;
 
-		init();
-
-		function init() {
-			vm.user = new deviserDataService.Login;
-		}
-
 		function login() {
-			vm.user.$save().then(function (loginData) {
-				UtilService.setLocalStorage('access_token', loginData.access_token);
-				$window.location.href = currentHost() + loginData.return_url;
-			}, function (err) {
+			function onLoginSuccess(data) {
+				UtilService.setLocalStorage('access_token', data.access_token);
+				$window.location.href = currentHost() + data.return_url;
+			}
+
+			function onLoginError(err) {
+				UtilService.onError(err);
 				vm.errors = true;
-			});
+			}
+
+			personDataService.login(vm.user, null, onLoginSuccess, onLoginError);
 		}
 	}
 
