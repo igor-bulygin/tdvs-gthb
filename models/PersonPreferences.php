@@ -33,7 +33,7 @@ class PersonPreferences extends EmbedModel
 	public function rules()
     {
         return [
-			[$this->attributes(), 'safe', 'on' => [Person::SCENARIO_DEVISER_CREATE_DRAFT,  Person::SCENARIO_DEVISER_UPDATE_DRAFT,  Person::SCENARIO_DEVISER_UPDATE_PROFILE]],
+			[$this->attributes(), 'safe', 'on' => [Person::SCENARIO_DEVISER_CREATE_DRAFT,  Person::SCENARIO_DEVISER_UPDATE_DRAFT,  Person::SCENARIO_DEVISER_UPDATE_PROFILE, Person::SCENARIO_INFLUENCER_CREATE_DRAFT]],
 			[['lang', 'currency'], 'required', 'on' => Person::SCENARIO_DEVISER_UPDATE_PROFILE],
         ];
     }

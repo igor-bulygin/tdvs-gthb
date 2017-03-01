@@ -119,14 +119,21 @@ class PublicController extends CController
 		$invitationId = Yii::$app->request->get("uuid");
 		$actionId = Yii::$app->request->get("action");
 		/** @var Invitation $invitation */
-//		$invitation = Invitation::findOneSerialized($invitationId);
 		$invitation = Invitation::findByEmailAction($actionId);
-//		if (!$invitation) {
-//			throw new BadRequestHttpException(Yii::t("app/public", 'Invalid invitation'));
-//		}
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("create-deviser-account", ["invitation" => $invitation]);
+	}
+
+	public function actionCreateInfluencerAccount()
+	{
+		$invitationId = Yii::$app->request->get("uuid");
+		$actionId = Yii::$app->request->get("action");
+		/** @var Invitation $invitation */
+		$invitation = Invitation::findByEmailAction($actionId);
+
+		$this->layout = '/desktop/public-2.php';
+		return $this->render("create-influencer-account", ["invitation" => $invitation]);
 	}
 
 	public function actionCart()

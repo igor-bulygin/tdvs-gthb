@@ -49,7 +49,7 @@ class PersonSettings extends EmbedModel
 				[[
 					'bank_info',
 					'stripe_info',
-					], 'safe', 'on' => [Person::SCENARIO_DEVISER_CREATE_DRAFT, Person::SCENARIO_DEVISER_UPDATE_DRAFT, Person::SCENARIO_DEVISER_UPDATE_PROFILE]],
+					], 'safe', 'on' => [Person::SCENARIO_DEVISER_CREATE_DRAFT, Person::SCENARIO_DEVISER_UPDATE_DRAFT, Person::SCENARIO_DEVISER_UPDATE_PROFILE, Person::SCENARIO_INFLUENCER_CREATE_DRAFT]],
 				['bankInfoMapping', 'app\validators\EmbedDocValidator'], // to apply rules
 				['stripeInfoMapping', 'app\validators\EmbedDocValidator'], // to apply rules
 		];

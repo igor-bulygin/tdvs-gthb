@@ -23,6 +23,13 @@
 			apiMethods.create(Person, data, params, onSuccess, onError)
 		}
 
+		this.createInfluencer = createInfluencer;
+
+		function createInfluencer(data, params, onSuccess, onError) {
+			data = Object.assign(data, {type: [3]});
+			apiMethods.create(Person, data, params, onSuccess, onError)
+		}
+
 	}
 
 	angular

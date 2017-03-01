@@ -297,7 +297,6 @@ $config = [
 				// Refactor API
 				'POST api3/pub/v1/person' => 'api3/pub/v1/person/create',
 				'POST api3/pub/v1/devisers' => 'api3/pub/v1/deviser/create', // TODO: delete
-				'POST api3/pub/v1/influencers' => 'api3/pub/v1/influencer/create', // TODO: delete
 
 				'POST api3/pub/v1/invitation/request-become-deviser' => 'api3/pub/v1/invitation/request-become-deviser',
 				'POST api3/pub/v1/devisers/invitation-requests' => 'api3/pub/v1/deviser/invitation-requests-post', // TODO: delete

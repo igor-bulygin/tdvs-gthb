@@ -21,7 +21,7 @@ class PersonController extends AppPublicController
 
 		$person = new Person();
 
-		$invitation_id = Yii::$app->request->post("invitation_id");
+		$invitation_id = Yii::$app->request->post("uuid");
 		/** @var Invitation $invitation */
 		$invitation = Invitation::findOneSerialized($invitation_id);
 
