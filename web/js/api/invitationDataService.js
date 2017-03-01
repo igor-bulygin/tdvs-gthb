@@ -10,6 +10,7 @@
 
 		//methods
 		this.getInvitation = getInvitation;
+		this.createInvitationRequest = createInvitationRequest;
 
 		function getInvitation(params, onSuccess, onError) {
 			apiMethods.get(Invitation, params, onSuccess, onError);
