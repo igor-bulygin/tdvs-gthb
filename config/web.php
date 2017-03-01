@@ -208,6 +208,7 @@ $config = [
 				// Request become a Deviser
 				'/become-a-deviser' => 'public/become-deviser',
 				'/create-deviser-account' => 'public/create-deviser-account',
+				'/create-influencer-account' => 'public/create-influencer-account',
 
 				//Links for a cart listing
 				'cart/' => 'public/cart',
@@ -292,7 +293,11 @@ $config = [
 				// API routing (public)
 				'GET api3/pub/v1/products/<id:[^/.]*?>' => 'api3/pub/v1/product/view', // override "view" action to accept alphanumeric ids
 				'POST api3/pub/v1/devisers/invitation-requests' => 'api3/pub/v1/deviser/invitation-requests-post',
+
 				'POST api3/pub/v1/devisers' => 'api3/pub/v1/deviser/create',
+				'POST api3/pub/v1/influencers' => 'api3/pub/v1/influencer/create',
+				'POST api3/pub/v1/person' => 'api3/pub/v1/person/create',
+
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/product'],
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/faq'],
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/term'],
