@@ -15,8 +15,7 @@ $this->registerJs("var invitation = ".\yii\helpers\Json::encode($invitation), yi
 
 <div class="create-deviser-account-wrapper">
     <div class="logo">
-        <h1 class="text-center">WELCOME</h1>
-        <p class="text-center">to</p>
+        <h1 class="text-center text-primary">WELCOME<br />to</h1>
         <a href="#">
             <img src="/imgs/logo.png" data-pin-nopin="true">
         </a>
