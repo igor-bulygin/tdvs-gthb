@@ -13,15 +13,15 @@
 		init();
 
 		function submitForm(form) {
+			function onCreateDeviser(data) {
+				$window.location.href = '/deviser/' + dataSaved.slug + '/' + dataSaved.id + '/about/edit';
+			}
 			if (form.password_confirm.$error.same)
 				form.$setValidity('password_confirm', false);
 			else {
 				form.$setValidity('password_confirm', true);
 			}
 			if (form.$valid) {
-				function onCreateDeviser(data) {
-					$window.location.href = '/deviser/' + dataSaved.slug + '/' + dataSaved.id + '/about/edit';
-				}
 
 				form.$setSubmitted();
 				personDataService.createDeviser(vm.deviser, null, onCreateDeviser, UtilService.onError);

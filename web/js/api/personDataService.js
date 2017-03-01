@@ -3,7 +3,6 @@
 
 	function personDataService($resource, apiConfig, apiMethods) {
 		//pub
-		var Invitation = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'invitations/:idInvitation');
 		var Person = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'person');
 		var Login = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'auth/login');
 		var Logout = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'auth/logout');
