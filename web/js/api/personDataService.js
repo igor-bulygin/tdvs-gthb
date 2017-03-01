@@ -15,19 +15,28 @@
 		})
 		var Upload = apiConfig.baseUrl + 'priv' + apiConfig.version + 'uploads';
 
-
+		//methods
 		this.createDeviser = createDeviser;
+		this.createInfluencer = createInfluencer;
+		this.login = login;
+		this.logout = logout;
 
 		function createDeviser(data, params, onSuccess, onError) {
 			data = Object.assign(data, {type: [2]});
-			apiMethods.create(Person, data, params, onSuccess, onError)
+			apiMethods.create(Person, data, params, onSuccess, onError);
 		}
-
-		this.createInfluencer = createInfluencer;
 
 		function createInfluencer(data, params, onSuccess, onError) {
 			data = Object.assign(data, {type: [3]});
-			apiMethods.create(Person, data, params, onSuccess, onError)
+			apiMethods.create(Person, data, params, onSuccess, onError);
+		}
+
+		function login(data, params, onSuccess, onError) {
+			apiMethods.create(Login, data, params, onSuccess, onError);
+		}
+
+		function logout(data, params, onSuccess, onError) {
+			apiMethods.create(Logout, data, params, onSuccess, onError);
 		}
 
 	}
