@@ -110,6 +110,12 @@ $this->title = 'Todevise / Admin / Invitations';
 						},
 						'label' => Yii::t("app/admin", "Date")
 					],
+					[
+						'value' => function($model){
+							return $model->code_invitation_type;
+						},
+						'label' => Yii::t("app/admin", "Type")
+					],
 				]
 			]);
 		?>
