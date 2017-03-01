@@ -18,13 +18,11 @@
 		}
 
 		function getCountries(){
-			locationDataService.Country.get()
-			.$promise.then(function(dataCountries) {
-				vm.countries = angular.copy(dataCountries.items);
-			}, function (err) {
-				//err
-				console.log(err);
-			})
+			function onGetCountrySuccess(data) {
+				vm.countries = angular.copy(data.items);
+			}
+
+			locationDataService.getCountry(null, onGetCountrySuccess, UtilService.onError);
 		}
 
 		function save(form){

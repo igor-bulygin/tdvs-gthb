@@ -8,8 +8,6 @@
 
 		//events
 		$provide.value("deviserEvents", {
-			deviser_changed: 'deviser-changed',
-			deviser_updated: 'deviser-updated',
 			make_profile_public_errors: 'make-profile-public-errors'
 		});
 

@@ -1,12 +1,6 @@
 (function () {
 	"use strict";
 
-	angular.module('api', ['ngResource', 'util'])
-		.constant('apiConfig', {
-			baseUrl: currentHost() + '/api3/',
-			version: 'v1/'
-		})
-		.config(interceptorsRegistry);
 
 	function interceptorsRegistry($httpProvider) {
 		$httpProvider.interceptors.push(securityInterceptor);
@@ -23,5 +17,46 @@
 			request: requestInterceptor
 		}
 	}
+
+	function methods() {
+		this.get = get;
+		this.deleteItem = deleteItem;
+		this.create = create;
+		this.update = update;
+
+		function parseInfo(resource, data) {
+			var o = new resource;
+			for(var key in data) {
+				o[key] = data[key];
+			}
+			return o;
+		}
+
+		function get(resource, params, onSuccess, onError) {
+			resource.get(params).$promise.then(function(returnData) { onSuccess(returnData); }, function(err) { onError(err); });
+		}
+
+		function deleteItem(resource, params, onSuccess, onError) {
+			resource.delete(params).$promise.then(function(returnData) { onSuccess(returnData); }, function(err) { onError(err); });
+		}
+
+		function create(resource, data, params, onSuccess, onError) {
+			var newResource = parseInfo(resource, data);
+			newResource.$save(params).then(function(returnData) { onSuccess(returnData); }, function(err) { onError(err); });
+		}
+
+		function update(resource, data, params, onSuccess, onError) {
+			var newResource = parseInfo(resource, data);
+			newResource.$update(params).then(function(returnData) { onSuccess(returnData); }, function(err) { onError(err); });
+		}
+	}
+
+	angular.module('api', ['ngResource', 'util'])
+		.constant('apiConfig', {
+			baseUrl: currentHost() + '/api3/',
+			version: 'v1/'
+		})
+		.config(interceptorsRegistry)
+		.service('apiMethods', methods);
 
 }());

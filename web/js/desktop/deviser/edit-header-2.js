@@ -66,17 +66,17 @@
 		}
 
 		function searchPlace(place) {
-			locationDataService.Location.get({
-				q: place
-			}).$promise.then(function (dataLocation) {
-				if(dataLocation.items.length === 0) {
+			function onGetLocationSuccess(data) {
+				if(data.items.length === 0) {
 					vm.showCities = false;
 				}
-				if(dataLocation.items.length > 0) {
+				if(data.items.length > 0) {
 					vm.showCities = true;
-					vm.cities = dataLocation.items;
+					vm.cities = angular.copy(data.items);
 				}
-			});
+			}
+
+			locationDataService.getLocation({q: place}, onGetLocationSuccess, UtilService.onError);
 		}
 
 		function selectCity(city) {
@@ -84,10 +84,6 @@
 			vm.deviser.personal_info.country = city.country_code;
 			vm.city = vm.deviser.personal_info.city + ', ' + vm.deviser.personal_info.country;
 			vm.showCities = false;
-		}
-
-		function parseTags(value) {
-			return value.replace(/<[^\/>][^>]*><\/[^>]+>/gim, "");
 		}
 
 		function upload(image, type) {
@@ -148,12 +144,6 @@
 			//patch.scenario = "deviser-update-profile";
 			patch.deviser_id = vm.deviser.id;
 			for(var key in vm.deviser) {
-				//delete unwanted tags on text_biography
-				if(key === 'text_biography') {
-					for(var language in vm.deviser[key]) {
-						vm.deviser[key][language]= parseTags(vm.deviser[key][language]);
-					}
-				}
 				if(key!=='account_state')
 					patch[key] = angular.copy(vm.deviser[key]);
 				
