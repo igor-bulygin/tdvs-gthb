@@ -2,7 +2,7 @@
 
 Example about how to call to Web Service to get a Person
 
-**URL**: `/api/priv/v1/profile/person/<:personId>`
+**URL**: `/api/priv/v1/person/<:personId>`
 
 **Method**: `GET`
 
