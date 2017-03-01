@@ -1,20 +1,15 @@
 (function () {
 	"use strict";
 
-	function orderDataService($resource, apiConfig) {
+	function orderDataService($resource, apiConfig, apiMethods) {
 		//pub
 		var Order = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'order/:id');
 
 		//functions
 		this.getOrder = getOrder;
 
-		function getOrder(params, onsuccess, onerror) {
-			Order.get(params)
-				.$promise.then(function(returnData) {
-					onsuccess(returnData);
-				}, function (err) {
-					onerror(err);
-				})
+		function getOrder(params, onSuccess, onError) {
+			apiMethods.get(Order, params, onSuccess, onError);
 		}
 	}
 

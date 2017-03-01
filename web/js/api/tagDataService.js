@@ -1,20 +1,15 @@
 (function () {
 	"use strict";
 
-	function tagDataService($resource, apiConfig) {
+	function tagDataService($resource, apiConfig, apiMethods) {
 		//pub
 		var Tags = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'tag/:idTag');
 
 		//functions
 		this.getTags = getTags;
 
-		function getTags(onsuccess, onerror) {
-			Tags.get()
-				.$promise.then(function(returnData) {
-					onsuccess(returnData);
-				}, function(err) {
-					onerror(err);
-				});
+		function getTags(params, onSuccess, onError) {
+			apiMethods.get(Tags, params, onSuccess, onError);
 		}
 	}
 

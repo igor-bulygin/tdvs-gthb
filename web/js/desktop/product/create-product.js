@@ -78,7 +78,7 @@
 			function onGetTagsSuccess(data) {
 				vm.tags = angular.copy(data.items);
 			}
-			tagDataService.getTags(onGetTagsSuccess, UtilService.onError);
+			tagDataService.getTags(null, onGetTagsSuccess, UtilService.onError);
 		}
 
 		function getPaperType() {
@@ -86,7 +86,7 @@
 				vm.papertypes = data.items;
 			}
 
-			productDataService.getPaperType(onGetPaperTypeSuccess, UtilService.onError);
+			productDataService.getPaperType(null, onGetPaperTypeSuccess, UtilService.onError);
 		}
 
 		function getDeviser() {
@@ -179,7 +179,7 @@
 					}, onUpdateProductSuccess, onUpdateProductError);
 				}
 				else {
-					productDataService.postProductPriv(vm.product, onSaveProductSuccess, onSaveProductError);
+					productDataService.postProductPriv(vm.product, null, onSaveProductSuccess, onSaveProductError);
 				}
 			} else {
 				vm.disable_save_buttons = false;

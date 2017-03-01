@@ -60,7 +60,7 @@
 					})
 			}
 
-			tagDataService.getTags(onGetTagsSuccess, UtilService.onError);
+			tagDataService.getTags(null, onGetTagsSuccess, UtilService.onError);
 		}
 	}
 

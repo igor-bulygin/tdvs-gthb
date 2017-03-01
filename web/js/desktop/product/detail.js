@@ -56,7 +56,7 @@
 				vm.tags = angular.copy(data.items);
 				getProduct();
 			}
-			tagDataService.getTags(onGetTagsSuccess, UtilService.onError);
+			tagDataService.getTags(null, onGetTagsSuccess, UtilService.onError);
 		}
 
 		function getMinimumPrice(references) {

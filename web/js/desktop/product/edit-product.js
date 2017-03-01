@@ -46,7 +46,7 @@
 				getCategories();
 			}
 
-			tagDataService.getTags(onGetTagsSuccess, UtilService.onError);
+			tagDataService.getTags(null, onGetTagsSuccess, UtilService.onError);
 		}
 
 		function getCategories() {
@@ -83,7 +83,7 @@
 				vm.papertypes = data.items;
 			}
 
-			productDataService.getPaperType(onGetPaperTypeSuccess, UtilService.onError)
+			productDataService.getPaperType(null, onGetPaperTypeSuccess, UtilService.onError)
 		}
 
 		function getLanguages() {

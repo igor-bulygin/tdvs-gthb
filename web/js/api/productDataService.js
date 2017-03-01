@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function productDataService($resource, apiConfig) {
+	function productDataService($resource, apiConfig, apiMethods) {
 		//pub
 		var Product = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'products/:idProduct');
 		var PaperType = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'paper-type');
@@ -24,75 +24,32 @@
 		this.updateProductPriv = updateProductPriv;
 		this.deleteProductPriv = deleteProductPriv;
 
-		function getProductPub(params, onsuccess, onerror) {
-			Product.get(params)
-				.$promise.then(function (returnData) {
-					onsuccess(returnData);
-				}, function (err) {
-					onerror(err);
-				})
+		function getProductPub(params, onSuccess, onError) {
+			apiMethods.get(Product, params, onSuccess, onError);
 		}
 
-		function getPaperType(onsuccess, onerror) {
-			PaperType.get()
-				.$promise.then(function (returnData) {
-					onsuccess(returnData);
-				}, function (err) {
-					onerror(err);
-				})
+		function getPaperType(params, onSuccess, onError) {
+			apiMethods.get(PaperType, params, onSuccess, onError);
 		}
 
-		function getCategories(params, onsuccess, onerror) {
-			Categories.get(params)
-				.$promise.then(function(returnData) {
-					onsuccess(returnData);
-				}, function (err) {
-					onerror(err);
-				});
+		function getCategories(params, onSuccess, onError) {
+			apiMethods.get(Categories, params, onSuccess, onError);
 		}
 
-		function getProductPriv(params, onsuccess, onerror) {
-			ProductPriv.get(params)
-				.$promise.then(function(returnData) {
-					onsuccess(returnData);
-				}, function(err) {
-					onerror(err);
-				});
+		function getProductPriv(params, onSuccess, onError) {
+			apiMethods.get(ProductPriv, params, onSuccess, onError);
 		}
 
-		function postProductPriv(data, onsuccess, onerror) {
-			var new_product = new ProductPriv;
-			for(var key in data) {
-				new_product[key] = angular.copy(data[key]);
-			}
-			new_product.$save()
-				.then(function(returnData) {
-					onsuccess(returnData);
-				}, function(err) {
-					onerror(err);
-				})
+		function postProductPriv(data, params, onSuccess, onError) {
+			apiMethods.create(ProductPriv, data, params, onSuccess, onError);
 		}
 
-		function updateProductPriv(data, params, onsuccess, onerror) {
-			var update_product = new ProductPriv;
-			for(var key in data) {
-				update_product[key] = angular.copy(data[key])
-			}
-			update_product.$update(params)
-				.then(function(returnData) {
-					onsuccess(returnData);
-				}, function(err) {
-					onerror(err);
-				})
+		function updateProductPriv(data, params, onSuccess, onError) {
+			apiMethods.update(ProductPriv, data, params, onSuccess, onError);
 		}
 
-		function deleteProductPriv(params, onsuccess, onerror) {
-			ProductPriv.delete(params)
-				.$promise.then(function(returnData) {
-					onsuccess(returnData);
-				}, function(err) {
-					onerror(err);
-				});
+		function deleteProductPriv(params, onSuccess, onError) {
+			apiMethods.deleteItem(ProductPriv, params, onSuccess, onError);
 		}
 	}
 
