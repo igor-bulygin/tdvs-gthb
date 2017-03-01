@@ -8,7 +8,7 @@ class EditAboutAsset extends AssetBundle {
 	public $baseUrl = '@web';
 	public $css = [];
 	public $js = [
-		'js/desktop/deviser/edit-about.js',
+		'js/desktop/person/edit-about/edit-about.js'
 	];
 	public $depends = [
 		'app\assets\desktop\deviser\IndexAsset',
