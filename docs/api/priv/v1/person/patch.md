@@ -2,7 +2,7 @@
 
 Example about how to call to Web Service to update Person profile
 
-**URL**: `/api/priv/v1/profile/person/<:id>`
+**URL**: `/api/priv/v1/profile/person/<:personId>`
 
 **Method**: `PATCH`
 

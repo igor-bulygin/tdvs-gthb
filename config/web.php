@@ -338,9 +338,9 @@ $config = [
 				'GET api3/pub/v1/order/<orderId:[^/.]*?>' => 'api3/pub/v1/order/view',
 
 				// API routing (private)
-				'GET api3/priv/v1/profile/deviser' => 'api3/priv/v1/deviser/view', // TODO: delete
-
 				'GET api3/priv/v1/profile/person/<personId:[^/.]*?>' => 'api3/priv/v1/person/view',
+				'PATCH api3/priv/v1/profile/person/<personId:[^/.]*?>' => 'api3/priv/v1/person/update',
+				'PUT api3/priv/v1/profile/person/<personId:[^/.]*?>' => 'api3/priv/v1/person/update',
 
 				'GET api3/priv/v1/products/<id:[^/.]*?>' => 'api3/priv/v1/product/view',
 				'GET api3/priv/v1/products' => 'api3/priv/v1/product/index',
