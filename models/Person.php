@@ -952,6 +952,28 @@ class Person extends CActiveRecord implements IdentityInterface
 	}
 
 	/**
+	 * Returns TRUE if the person is an influencer, and can be edited by the current user
+	 *
+	 * @return bool
+	 */
+	public function isInfluencerEditable()
+	{
+		if (!$this->isInfluencer()) {
+			return false;
+		}
+		if (Yii::$app->user->isGuest) {
+			return false;
+		}
+		if (Yii::$app->user->identity->isAdmin()) {
+			return true;
+		}
+		if ($this->isConnectedUser()) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
 	 * Returns TRUE if the person is a deviser
 	 *
 	 * @return bool
@@ -1028,6 +1050,21 @@ class Person extends CActiveRecord implements IdentityInterface
 			$slug = $this->slug;
 		}
 		return Url::to(['deviser/about-edit', 'deviser_id' => $this->short_id, 'slug' => $slug]);
+	}
+
+
+	/**
+	 * Returns the url to edit the deviser about
+	 *
+	 * @return string
+	 */
+	public function getEditInfluencerAboutLink() {
+		if (is_array($this->slug)) {
+			$slug = Utils::l($this->slug);
+		} else {
+			$slug = $this->slug;
+		}
+		return Url::to(['influencer/about-edit', 'person_id' => $this->short_id, 'slug' => $slug]);
 	}
 
 	/**

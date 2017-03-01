@@ -172,6 +172,7 @@ $config = [
 
 				'/works' => 'product/index',
 
+				//Deviser
 				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>' => 'deviser/about',
 				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/store' => 'deviser/store',
 				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/about' => 'deviser/about',
@@ -189,6 +190,19 @@ $config = [
 				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/press/edit' => 'deviser/press-edit',
 				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/video/edit' => 'deviser/videos-edit',
 				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/faq/edit' => 'deviser/faq-edit',
+
+				//Influencer
+				'/influencer/<slug:[^/.]*?>/<person_id:[^/.]*?>' => 'influencer/about',
+				'/influencer/<slug:[^/.]*?>/<person_id:[^/.]*?>/about' => 'influencer/about',
+				'/influencer/<slug:[^/.]*?>/<person_id:[^/.]*?>/press' => 'influencer/press',
+				'/influencer/<slug:[^/.]*?>/<person_id:[^/.]*?>/video' => 'influencer/videos',
+				'/influencer/<slug:[^/.]*?>/<person_id:[^/.]*?>/loved' => 'influencer/loved',
+				'/influencer/<slug:[^/.]*?>/<person_id:[^/.]*?>/boxes' => 'influencer/boxes',
+				'/influencer/<slug:[^/.]*?>/<person_id:[^/.]*?>/box/<box_id:[^/.]*?>' => 'influencer/box-detail',
+
+				'/influencer/<slug:[^/.]*?>/<person_id:[^/.]*?>/about/edit' => 'influencer/about-edit',
+				'/influencer/<slug:[^/.]*?>/<person_id:[^/.]*?>/press/edit' => 'influencer/press-edit',
+				'/influencer/<slug:[^/.]*?>/<person_id:[^/.]*?>/video/edit' => 'influencer/videos-edit',
 
 				//Settings
 				'/settings/<slug:[^/.]*?>/<person_id:[^/.]*?>' => 'settings/index',
@@ -325,11 +339,8 @@ $config = [
 
 				// API routing (private)
 				'GET api3/priv/v1/profile/deviser' => 'api3/priv/v1/deviser/view',
-				'PATCH api3/priv/v1/profile/deviser' => 'api3/priv/v1/deviser/update',
-				'PUT api3/priv/v1/profile/deviser' => 'api3/priv/v1/deviser/update',
 
-				'GET api3/priv/v1/profile/user' => 'api3/priv/v1/user/view',
-				'PATCH api3/priv/v1/profile/user' => 'api3/priv/v1/user/update',
+				'GET api3/priv/v1/profile/person' => 'api3/priv/v1/person/view',
 
 				'GET api3/priv/v1/products/<id:[^/.]*?>' => 'api3/priv/v1/product/view',
 				'GET api3/priv/v1/products' => 'api3/priv/v1/product/index',
