@@ -34,9 +34,9 @@ $this->title = 'Todevise / Admin / Devisers';
 				<div class="col-xs-6 col-height col-middle flex flex-align-center">
 
 				</div>
-				<div class="col-xs-4 col-height col-middle">
-					<button class="btn btn-default btn-purple fc-fff funiv fs0-786 fs-upper pull-right" ng-click="devisersCtrl.create_new()"><?= Yii::t("app/admin", "Create new"); ?></button>
-				</div>
+<!--				<div class="col-xs-4 col-height col-middle">-->
+<!--					<button class="btn btn-default btn-purple fc-fff funiv fs0-786 fs-upper pull-right" ng-click="devisersCtrl.create_new()">--><?//= Yii::t("app/admin", "Create new"); ?><!--</button>-->
+<!--				</div>-->
 			</div>
 		</div>
 

@@ -1,16 +1,16 @@
 <?php
-use yii\web\View;
-use app\models\Lang;
-use yii\helpers\Url;
-use yii\helpers\Json;
-use yii\helpers\Html;
 use app\helpers\Utils;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
-use yii\widgets\Breadcrumbs;
-
+use app\models\Lang;
 use kartik\sidenav\SideNav;
 use lajax\languagepicker\widgets\LanguagePicker;
+use yii\bootstrap\Nav;
+use yii\bootstrap\NavBar;
+use yii\helpers\Html;
+use yii\helpers\Json;
+use yii\helpers\Url;
+use yii\web\View;
+use yii\widgets\Breadcrumbs;
+
 /* @var $this \yii\web\View */
 /* @var $content string */
 
@@ -66,6 +66,17 @@ use lajax\languagepicker\widgets\LanguagePicker;
 												'active' => (
 													Utils::compareURL('admin/devisers') ||
 													Utils::compareURL('admin/deviser')
+												)
+											],
+											[
+												'options' => [
+													'class' => 'item-submenu funiv fs0-929',
+												],
+												'label' => 'Influencers',
+												'url' => Url::toRoute(['admin/influencers']),
+												'active' => (
+													Utils::compareURL('admin/influencers') ||
+													Utils::compareURL('admin/influencer')
 												)
 											],
 											[

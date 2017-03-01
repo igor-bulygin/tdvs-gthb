@@ -85,6 +85,24 @@ class AdminController extends CController {
 		return Yii::$app->request->isAjax ? $this->renderPartial("devisers", $data) : $this->render("devisers", $data);
 	}
 
+	public function actionInfluencers($filters = null) {
+		$filters = Utils::stringToFilter($filters);
+		$filters["type"]['$in'] = [Person::INFLUENCER];
+
+		$influencers = new ActiveDataProvider([
+			'query' => Person::find()->select(["_id" => 0])->where($filters),
+			'pagination' => [
+				'pageSize' => 100,
+			],
+		]);
+
+		$data = [
+			'influencers' => $influencers,
+		];
+
+		return Yii::$app->request->isAjax ? $this->renderPartial("influencers", $data) : $this->render("influencers", $data);
+	}
+
 	public function actionAdmins($filters = null) {
 		$filters = Utils::stringToFilter($filters);
 		$filters["type"]['$in'] = [Person::ADMIN];
