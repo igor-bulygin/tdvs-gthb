@@ -11,6 +11,7 @@ use app\models\Lang;
 use yii\helpers\Html;
 use yii\widgets\Pjax;
 use app\helpers\Utils;
+use yii\helpers\Json;
 use yii\widgets\ListView;
 use yii\widgets\ActiveForm;
 use app\assets\desktop\pub\Index2Asset;
@@ -21,6 +22,7 @@ CreateDeviserAsset::register($this);
 /** @var Invitation $invitation */
 
 $this->title = 'Create a Deviser account - Todevise';
+$this->registerJs("var invitation = ".Json::encode($invitation), yii\web\View::POS_HEAD, 'invitation-var-script');
 
 ?>
 

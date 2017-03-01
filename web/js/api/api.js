@@ -26,10 +26,7 @@
 
 		function parseInfo(resource, data) {
 			var o = new resource;
-			for(var key in data) {
-				o[key] = data[key];
-			}
-			return o;
+			return Object.assign(o, data);
 		}
 
 		function get(resource, params, onSuccess, onError) {
