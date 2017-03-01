@@ -14,7 +14,7 @@
 
         function submitForm(form) {
             function onCreateInfluencer(data) {
-                $window.location.href = '/influencer/' + dataSaved.slug + '/' + dataSaved.id + '/about/edit';
+                $window.location.href = '/influencer/' + data.slug + '/' + data.id + '/about/edit';
             }
             if (form.password_confirm.$error.same)
                 form.$setValidity('password_confirm', false);
