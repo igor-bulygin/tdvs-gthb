@@ -11,7 +11,9 @@ Example about how to call to Web Service to update Person profile
 * `400`: Bad request
 * `401`: Unauthorized 
 * `403`: Forbidden
-  
+
+**Request parameters**:
+* `:personId`: Id of the person that want to upadte
   
 **Request body**: 
 * `scenario`: available values ["deviser-update-profile"]
