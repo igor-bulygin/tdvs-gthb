@@ -292,11 +292,15 @@ $config = [
 
 				// API routing (public)
 				'GET api3/pub/v1/products/<id:[^/.]*?>' => 'api3/pub/v1/product/view', // override "view" action to accept alphanumeric ids
-				'POST api3/pub/v1/devisers/invitation-requests' => 'api3/pub/v1/deviser/invitation-requests-post',
 
-				'POST api3/pub/v1/devisers' => 'api3/pub/v1/deviser/create',
-				'POST api3/pub/v1/influencers' => 'api3/pub/v1/influencer/create',
+
+				// Refactor API
 				'POST api3/pub/v1/person' => 'api3/pub/v1/person/create',
+				'POST api3/pub/v1/devisers' => 'api3/pub/v1/deviser/create', // TODO: delete
+				'POST api3/pub/v1/influencers' => 'api3/pub/v1/influencer/create', // TODO: delete
+
+				'POST api3/pub/v1/invitation/request-become-deviser' => 'api3/pub/v1/invitation/request-become-deviser',
+				'POST api3/pub/v1/devisers/invitation-requests' => 'api3/pub/v1/deviser/invitation-requests-post', // TODO: delete
 
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/product'],
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/faq'],
