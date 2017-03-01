@@ -9,19 +9,26 @@ use yii\web\BadRequestHttpException;
 class PersonController extends AppPrivateController
 {
 
-	public function actionView()
+	public function actionView($personId)
 	{
 		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
+
 		/** @var Person $person */
-		$person = $this->getPerson();
+		$person = Person::findOne(["short_id" => $personId]);
+		if (empty($person)) {
+			throw new BadRequestHttpException('Person not found');
+		}
 
 		return $person;
 	}
 
-	public function actionUpdate()
+	public function actionUpdate($personId)
 	{
 		/** @var Person $person */
-		$person = $this->getPerson();
+		$person = Person::findOne(["short_id" => $personId]);
+		if (empty($person)) {
+			throw new BadRequestHttpException('Person not found');
+		}
 
 		$newAccountState = Yii::$app->request->post('account_state');
 		$this->checkDeviserAccountState($person, $newAccountState); // check for allowed new account state only
