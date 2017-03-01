@@ -124,6 +124,19 @@ $this->title = 'Todevise / Admin / Invitations';
 		</div>
 		<div class='modal-body form'>
             <div class="form-group">
+                <label class="modal-title funiv fs1 fnormal fc-18 control-label">Type of invitation:</label>
+                <label class="radio-inline">
+                    <input type="radio" ng-model="create_newCtrl.code_invitation_type" name="code_invitation_type" value="<?=Invitation::INVITATION_TYPE_DEVISER?>" checked/>DEVISER
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" ng-model="create_newCtrl.code_invitation_type" name="code_invitation_type" value="<?=Invitation::INVITATION_TYPE_INFLUENCER?>"/>INFLUENCER
+                </label>
+                <span class="input-group-addon alert-danger funiv fs0-929" ng-show="create_newCtrl.form.$submitted && !create_newCtrl.form.$valid && !create_newCtrl.form['code_invitation_type'].$valid">
+                    <span ng-show="create_newCtrl.form['code_invitation_type'].$error.required"><?= Yii::t("app/admin", "Required!"); ?></span>
+                    <span ng-show="create_newCtrl.form['code_invitation_type'].$error.email"><?= Yii::t("app/admin", "Invalid!"); ?></span>
+                </span>
+            </div>
+            <div class="form-group">
                 <label class="modal-title funiv fs1 fnormal fc-18 control-label"><?= Yii::t("app/admin", "Email"); ?></label>
                 <input id="email" type="email" required="" type="text" class="form-control funiv fs1" placeholder="<?= Yii::t("app/admin", "Email..."); ?>" aria-describedby="basic-addon-email" ng-model="create_newCtrl.email" name="email">
                 <span class="input-group-addon alert-danger funiv fs0-929" id="basic-addon-email" ng-show="create_newCtrl.form.$submitted && !create_newCtrl.form.$valid && !create_newCtrl.form['email'].$valid">

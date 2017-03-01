@@ -701,7 +701,7 @@ use yii\helpers\Url;
 													<em>To learn more about Todevise, click on this link</em> <a
 														href="<?= Url::to('about-us', true); ?>"
 														style="line-height: 1.6;mso-line-height-rule:exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #656565;font-weight: normal;text-decoration: underline;"><?= Url::to('about-us', true); ?></a><br>
-													<em>Copyright @ 2016 Todevise, All rights reserved.</em><br>
+													<em>Copyright @ <?=date('yyyy')?>> Todevise, All rights reserved.</em><br>
 													<br>
 													&nbsp;
 												</td>

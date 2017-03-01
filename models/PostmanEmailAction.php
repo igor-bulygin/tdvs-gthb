@@ -1,17 +1,9 @@
 <?php
 namespace app\models;
 
-use app\helpers\Utils;
-use DateTime;
-use Exception;
+use app\helpers\CActiveRecord;
 use MongoDate;
 use Ramsey\Uuid\Uuid;
-use Yii;
-use app\helpers\CActiveRecord;
-use yii\base\NotSupportedException;
-use yii\mongodb\ActiveQuery;
-use yii\mongodb\Collection;
-
 
 
 /**
@@ -32,6 +24,7 @@ class PostmanEmailAction extends CActiveRecord
 {
 
 	const EMAIL_ACTION_TYPE_DEVISER_INVITATION_ACCEPT = 'deviser-invitation-accept';
+	const EMAIL_ACTION_TYPE_INFLUENCER_INVITATION_ACCEPT = 'influencer-invitation-accept';
 
 	const EMAIL_ACTION_STATE_PENDING = 'pending';
 	const EMAIL_ACTION_STATE_UNNECESSARY = 'unnecessary';

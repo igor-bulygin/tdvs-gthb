@@ -1,8 +1,8 @@
 <?php
 
+use app\helpers\Currency;
 use app\models\Lang;
 use app\models\Person;
-use app\helpers\Currency;
 use yii\mongodb\Migration;
 
 class m150405_184924_create_person extends Migration {
@@ -89,7 +89,7 @@ class m150405_184924_create_person extends Migration {
 
 		$this->insert('person', [
 			"short_id" => "4000000",
-			"type" => [Person::COLLABORATOR],
+			"type" => [Person::INFLUENCER],
 			"categories" => ["30000", "50000"],
 			"personal_info" => [
 				"name" => "Collaborator",

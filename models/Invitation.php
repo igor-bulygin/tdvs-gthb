@@ -29,7 +29,7 @@ class Invitation extends CActiveRecord
 {
 
 	const INVITATION_TYPE_DEVISER = 'invitation-deviser';
-	const INVITATION_TYPE_TREND_SETTER = 'invitation-trend-setter';
+	const INVITATION_TYPE_INFLUENCER = 'invitation-influencer';
 
 	const USE_STATE_UNUSED = 'unused';
 	const USE_STATE_USED = 'used';
@@ -180,7 +180,7 @@ class Invitation extends CActiveRecord
 	{
 		switch ($this->$attribute) {
 			case Invitation::INVITATION_TYPE_DEVISER:
-			case Invitation::INVITATION_TYPE_TREND_SETTER:
+			case Invitation::INVITATION_TYPE_INFLUENCER:
 				break;
 			default:
 				$this->addError($attribute, 'Invalid type');
@@ -236,7 +236,7 @@ class Invitation extends CActiveRecord
 	public function composeEmail()
 	{
 		$email = new PostmanEmail();
-		$email->code_email_content_type = PostmanEmail::EMAIL_CONTENT_TYPE_DEVISER_INVITATION;
+		$email->code_email_content_type = $this->getCodeEmailContentType();
 		$email->to_email = $this->email;
 		$email->subject = $this->getEmailSubject();
 
@@ -247,7 +247,7 @@ class Invitation extends CActiveRecord
 
 		// register the attached action: invitation link
 		$action = new PostmanEmailAction();
-		$action->code_email_action_type = PostmanEmailAction::EMAIL_ACTION_TYPE_DEVISER_INVITATION_ACCEPT;
+		$action->code_email_action_type = $this->getCodeEmailActionType();
 		$email->addAction($action);
 
 		$email->body_html = Yii::$app->view->render(
@@ -274,7 +274,13 @@ class Invitation extends CActiveRecord
 	 * @return string
 	 */
 	public function getActionUrl($actionUuid) {
-		return Url::to(["/public/create-deviser-account", "uuid" => $this->uuid, "action" => $actionUuid], true);
+		switch ($this->code_invitation_type) {
+			case self::INVITATION_TYPE_DEVISER:
+				return Url::to(["/public/create-deviser-account", "uuid" => $this->uuid, "action" => $actionUuid], true);
+			case self::INVITATION_TYPE_INFLUENCER:
+				return Url::to(["/public/create-influencer-account", "uuid" => $this->uuid, "action" => $actionUuid], true);
+		}
+		throw new Exception("Invalid type");
 	}
 
 	/**
@@ -306,7 +312,50 @@ class Invitation extends CActiveRecord
 	 */
 	private function getEmailView()
 	{
-		return '@app/mail/deviser/invitation';
+		switch ($this->code_invitation_type) {
+			case Invitation::INVITATION_TYPE_DEVISER:
+				return '@app/mail/deviser/invitation';
+			case Invitation::INVITATION_TYPE_INFLUENCER:
+				return '@app/mail/influencer/invitation';
+
+		}
+		throw new Exception("Invalid type");
+	}
+
+	/**
+	 * Returns de code of the email content type according to invitation type
+	 *
+	 * @return string
+	 * @throws Exception
+	 */
+	private function getCodeEmailContentType()
+	{
+		switch ($this->code_invitation_type) {
+			case Invitation::INVITATION_TYPE_DEVISER:
+				return PostmanEmail::EMAIL_CONTENT_TYPE_DEVISER_INVITATION;
+			case Invitation::INVITATION_TYPE_INFLUENCER:
+				return PostmanEmail::EMAIL_CONTENT_TYPE_INFLUENCER_INVITATION;
+
+		}
+		throw new Exception("Invalid type");
+	}
+
+	/**
+	 * Returns de code of the email content type according to invitation type
+	 *
+	 * @return string
+	 * @throws Exception
+	 */
+	private function getCodeEmailActionType()
+	{
+		switch ($this->code_invitation_type) {
+			case Invitation::INVITATION_TYPE_DEVISER:
+				return PostmanEmailAction::EMAIL_ACTION_TYPE_DEVISER_INVITATION_ACCEPT;
+			case Invitation::INVITATION_TYPE_INFLUENCER:
+				return PostmanEmailAction::EMAIL_ACTION_TYPE_INFLUENCER_INVITATION_ACCEPT;
+
+		}
+		throw new Exception("Invalid type");
 	}
 
 	/**

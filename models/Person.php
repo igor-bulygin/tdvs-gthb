@@ -38,7 +38,7 @@ class Person extends CActiveRecord implements IdentityInterface
 	const ADMIN = 0;
 	const CLIENT = 1;
 	const DEVISER = 2;
-	const COLLABORATOR = 3;
+	const INFLUENCER = 3;
 
 	const ACCOUNT_STATE_DRAFT = 'draft';
 	const ACCOUNT_STATE_ACTIVE = 'active';
@@ -53,6 +53,8 @@ class Person extends CActiveRecord implements IdentityInterface
 //	const SCENARIO_DEVISER_PRESS_UPDATE = 'deviser-press-update';
 //	const SCENARIO_DEVISER_VIDEOS_UPDATE = 'deviser-videos-update';
 //	const SCENARIO_DEVISER_FAQ_UPDATE = 'deviser-faq-update';
+
+	const SCENARIO_INFLUENCER_CREATE_DRAFT = 'influencer-create-draft';
 
 	const SCENARIO_TREND_SETTER_PROFILE_UPDATE = 'trend-setter-profile-update';
 
@@ -314,9 +316,10 @@ class Person extends CActiveRecord implements IdentityInterface
 				[
 					'personal_info',
 					'credentials',
+					'type',
 				],
 				'required',
-				'on' => [self::SCENARIO_DEVISER_CREATE_DRAFT]
+				'on' => [self::SCENARIO_DEVISER_CREATE_DRAFT, self::SCENARIO_INFLUENCER_CREATE_DRAFT]
 			],
 			[
 				[
@@ -366,7 +369,7 @@ class Person extends CActiveRecord implements IdentityInterface
 			[
 				'preferencesMapping',
 				'yii2tech\embedded\Validator',
-				'on' => [self::SCENARIO_DEVISER_CREATE_DRAFT],
+				'on' => [self::SCENARIO_DEVISER_CREATE_DRAFT, self::SCENARIO_INFLUENCER_CREATE_DRAFT],
 			],
 			[
 				'personalInfoMapping',
@@ -984,6 +987,19 @@ class Person extends CActiveRecord implements IdentityInterface
 		return
 				$this->type == self::CLIENT ||
 				in_array(self::CLIENT, $this->type)
+				;
+	}
+
+	/**
+	 * Returns TRUE if the person is a client
+	 *
+	 * @return bool
+	 */
+	public function isInfluencer()
+	{
+		return
+				$this->type == self::INFLUENCER ||
+				in_array(self::INFLUENCER, $this->type)
 				;
 	}
 

@@ -39,7 +39,6 @@
 
 			modalInstance.result.then(function (data) {
 				// invitation to a new Deviser
-				data.code_invitation_type = 'invitation-deviser';
 				invitationDataService.Invitation.save(data).$promise.then(function (data) {
 					toastr.success("Invitations sent !");
 					if (data.url) {
@@ -68,7 +67,8 @@
 			$uibModalInstance.close({
 				email: vm.email,
 				first_name: vm.first_name,
-				no_email: vm.no_email
+				no_email: vm.no_email,
+                code_invitation_type: vm.code_invitation_type
 			});
 		};
 
