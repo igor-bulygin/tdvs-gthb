@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(deviserDataService, Upload, toastr, UtilService, $timeout, $window, dragndropService) {
+	function controller(personDataService, Upload, toastr, UtilService, $timeout, $window, dragndropService) {
 		var vm = this;
 		vm.upload = upload;
 		vm.update = update;
@@ -12,37 +12,41 @@
 		vm.canceled = canceled;
 		vm.done = done;
 
-		function getDeviser() {
-			deviserDataService.Profile.get({
-				deviser_id: UtilService.returnDeviserIdFromUrl()
-			}).$promise.then(function (dataDeviser) {
-				vm.deviser = dataDeviser;
-				if (!vm.deviser.press)
-					vm.deviser.press = [];
-				vm.images = UtilService.parseImagesUrl(vm.deviser.press, vm.deviser.url_images);
-			}, function (err) {
-				toastr.error(err);
-			});
-		}
+		init();
 
 		function init() {
-			getDeviser();
+			getPerson();
+		}
+
+		function getPerson() {
+			function onGetProfileSuccess(data) {
+				vm.person = angular.copy(data);
+				if(!vm.person.press)
+					vm.person.press = [];
+				vm.images = UtilService.parseImagesUrl(vm.person.press, vm.person.url_images);
+			}
+
+			personDataService.getProfile({
+				personId: person.short_id
+			}, onGetProfileSuccess, UtilService.onError);
 		}
 
 		function update() {
-			var patch = new deviserDataService.Profile;
-			patch.scenario = "deviser-update-profile";
-			patch.press = [];
-			patch.deviser_id = vm.deviser.id;
+			function onUpdateProfileSuccess(data) {
+				$window.location.href = '/deviser/' + data.slug + '/' + data.id + '/press';
+			}
+
+			var data = {
+				press: []
+			}
 			vm.images.forEach(function (element) {
-				if(patch.press.indexOf(element.filename)<0)
-					patch.press.push(element.filename);
+				if(data.press.indexOf(element.filename)<0)
+					data.press.push(element.filename);
 			});
-			patch.$update().then(function (dataPress) {
-				$window.location.href = '/deviser/' + dataPress.slug + '/' + dataPress.id + '/press';
-			}, function (err) {
-				toastr.error(err);
-			});
+
+			personDataService.updateProfile(data, {
+				personId: person.short_id
+			}, onUpdateProfileSuccess, UtilService.onError);
 		}
 
 		function upload(images, errImages) {
@@ -51,31 +55,29 @@
 			angular.forEach(vm.files, function (file) {
 				var data = {
 					type: "deviser-press",
-					deviser_id: vm.deviser.id,
+					person_id: person.short_id,
 					file: file
 				};
 				Upload.upload({
-					url: deviserDataService.Uploads,
+					url: personDataService.Uploads,
 					data: data
 				}).then(function (dataUpload) {
-					toastr.success("Photo uploaded!");
-					vm.deviser.press.unshift(dataUpload.data.filename);
-					vm.images = UtilService.parseImagesUrl(vm.deviser.press, vm.deviser.url_images);
+					vm.person.press.unshift(dataUpload.data.filename);
+					vm.images = UtilService.parseImagesUrl(vm.person.press, vm.person.url_images);
 					$timeout(function () {
 						delete file.progress;
 					}, 1000);
 				}, function (err) {
-					toastr.error(err);
+					UtilService.onError(err);
 				}, function (evt) {
 					file.progress = parseInt(100.0 * evt.loaded / evt.total);
-					console.log('progress: ' + file.progress + '% ' + evt.config.data.file.name);
 				});
 			});
 		}
 
 		function delete_image(index) {
 			vm.images.splice(index, 1);
-			vm.deviser.press.splice(index, 1);
+			vm.person.press.splice(index, 1);
 		}
 
 		function dragStart(index) {
@@ -99,7 +101,6 @@
 			update();
 		}
 
-		init();
 
 	}
 
