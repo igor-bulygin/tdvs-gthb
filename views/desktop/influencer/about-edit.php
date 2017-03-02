@@ -15,7 +15,7 @@ $this->params['person'] = $person;
 $this->params['deviser_menu_active_option'] = 'about';
 $this->params['deviser_links_target'] = 'edit_view';
 
-$this->registerJs("var deviser = ".Json::encode($person), yii\web\View::POS_HEAD, 'deviser-var-script');
+$this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD, 'person-var-script');
 
 ?>
 
