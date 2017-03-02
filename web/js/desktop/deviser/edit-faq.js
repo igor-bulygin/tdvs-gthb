@@ -34,7 +34,7 @@
 			}
 
 			personDataService.getProfile({
-				person_id: deviser.short_id
+				personId: deviser.short_id
 			}, onGetProfileSuccess, UtilService.onError);
 		}
 
@@ -78,7 +78,6 @@
 			var data = {
 				scenario: 'deviser-update-profile',
 				faq: [],
-				person_id: deviser.short_id
 			};
 
 			function onUpdateProfileSuccess(data) {
@@ -98,7 +97,9 @@
 
 			vm.deviser.faq.map(parseFaqs);
 
-			personDataService.updateProfile(data, null, onUpdateProfileSuccess, UtilService.onError);
+			personDataService.updateProfile(data, {
+				personId: deviser.short_id
+			}, onUpdateProfileSuccess, UtilService.onError);
 
 /*			var patch = new deviserDataService.Profile;
 			patch.scenario = 'deviser-update-profile';

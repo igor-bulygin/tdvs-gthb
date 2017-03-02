@@ -8,7 +8,7 @@
 		var Logout = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'auth/logout');
 
 		//priv
-		var Profile = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'profile/person', {}, {
+		var Profile = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'person/:personId', {}, {
 			'update': {
 				method: 'PATCH'
 			}
