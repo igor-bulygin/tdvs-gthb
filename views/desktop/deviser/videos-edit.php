@@ -10,7 +10,6 @@ EditVideosAsset::register($this);
 /** @var Person $person */
 
 $this->title = 'About ' . $person->personalInfoMapping->getBrandName() . ' - Todevise';
-$this->params['deviser'] = $person;
 $this->params['person'] = $person;
 $this->params['deviser_menu_active_option'] = 'videos';
 $this->params['deviser_links_target'] = 'edit_view';

@@ -9,7 +9,7 @@ EditHeaderAsset::register($this);
 
 // use params to share data between views :(
 /** @var Person $person */
-$person = isset($this->params['person']) ? $this->params['person'] : $this->params['deviser'];
+$person = $this->params['person'];
 $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD, 'person-var-script');
 ?>
 

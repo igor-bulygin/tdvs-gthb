@@ -12,7 +12,6 @@ EditPressAsset::register($this);
 /** @var array $press */
 
 $this->title = 'About ' . $person->personalInfoMapping->getBrandName() . ' - Todevise';
-$this->params['deviser'] = $person;
 $this->params['person'] = $person;
 $this->params['deviser_menu_active_option'] = 'press';
 $this->params['deviser_links_target'] = 'public_view';

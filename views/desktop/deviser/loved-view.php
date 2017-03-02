@@ -11,7 +11,6 @@ LovedViewAsset::register($this);
 /** @var \app\models\Loved[] $loveds */
 
 $this->title = 'Loved by ' . $person->personalInfoMapping->getBrandName() . ' - Todevise';
-$this->params['deviser'] = $person;
 $this->params['person'] = $person;
 $this->params['deviser_menu_active_option'] = 'loved';
 $this->params['deviser_links_target'] = 'public_view';

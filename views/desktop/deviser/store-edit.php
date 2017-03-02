@@ -19,7 +19,6 @@ EditStoreAsset::register($this);
 $this->title = $person->personalInfoMapping->getBrandName() . ' - Todevise';
 
 // use params to share data between views :(
-$this->params['deviser'] = $person;
 $this->params['person'] = $person;
 $this->params['deviser_menu_active_option'] = 'store';
 $this->params['deviser_links_target'] = 'edit_view';

@@ -1,15 +1,12 @@
 <?php
-use app\components\assets\cropAsset;
-use app\helpers\Utils;
-use app\models\Person;
-use yii\helpers\Url;
 use app\assets\desktop\deviser\EditHeaderAsset;
+use app\models\Person;
 
 EditHeaderAsset::register($this);
 
 // use params to share data between views :(
-/** @var Person $deviser */
-$deviser = $this->params['deviser'];
+/** @var Person $person */
+$person = $this->params['person'];
 
 ?>
 	<div class="banner-deviser" ng-controller="editHeaderCtrl as editHeaderCtrl">
