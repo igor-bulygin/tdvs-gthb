@@ -3175,6 +3175,9 @@ input[type="radio"] .styled:checked + label::after {
   width: 500px;
   margin: 20px 0 0 0; }
 
+.title-loved {
+  margin-bottom: 15px; }
+
 .become-deviser-wrapper .become-deviser-cover {
   background: url("/imgs/become_a_deviser_background.png") no-repeat;
   background-size: cover; }

@@ -46,7 +46,7 @@ $this->params['deviser_links_target'] = 'public_view';
                 <?php } else { ?>
                     <div class="content-store">
                         <div class="store-grid">
-                            <div class="title-wrapper">
+                            <div class="title-wrapper title-loved">
                                 <span class="title">Loved by <?=$person->getBrandName()?></span>
                             </div>
                             <div id="macy-container">
