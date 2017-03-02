@@ -1,12 +1,12 @@
 (function () {
 	"use strict";
 
-	function controller(deviserDataService, productDataService, toastr, UtilService, $window) {
+	function controller(personDataService, productDataService, toastr, UtilService, $window) {
 		var vm = this;
 		vm.addVideo = addVideo;
 		vm.findProducts = findProducts;
 		vm.selectProduct = selectProduct;
-		vm.updateDeviserVideos = updateDeviserVideos;
+		vm.updatePersonVideos = updatePersonVideos;
 		vm.deleteVideo = deleteVideo;
 		vm.deleteTag = deleteTag;
 		vm.showAddVideo = showAddVideo;
@@ -18,46 +18,68 @@
 		init();
 
 		function init() {
-			getDeviser();
+			getPerson();
 		}
 
-		function getDeviser() {
-			deviserDataService.Profile.get({
-				deviser_id: UtilService.returnDeviserIdFromUrl()
-			}).$promise.then(function (dataDeviser) {
-				vm.deviser = dataDeviser;
-				if (!vm.deviser.videos)
-					vm.deviser.videos = [];
-			})
+		function getPerson() {
+			function onGetProfileSuccess(data) {
+				vm.person = angular.copy(data);
+				if(!vm.person.videos)
+					vm.person.videos = [];
+				else if(angular.isArray(vm.person.videos) && vm.person.videos.length > 0) {
+					vm.person.videos.map(function(element) {
+						element.products.map(function(product, index) {
+							function onProductDataSuccess(data) {
+								element.products[index] = Object.assign({}, data);
+							}
+							productDataService.getProductPub({
+								idProduct: product
+							}, onProductDataSuccess, UtilService.onError);
+						})
+					})
+				}
+			}
+
+			personDataService.getProfile({
+				personId: person.short_id
+			}, onGetProfileSuccess, UtilService.onError);
 		}
 
-		function updateDeviserVideos(index) {
+		function updatePersonVideos(index) {
+			function onUpdateVideosSuccess(data) {
+				$window.location.href = '/deviser/' + data.slug + '/' + data.id + '/video';
+			}
+
+			function onUpdateVideosError(err) {
+				UtilService.onError(err);
+				getPerson();
+			}
+
 			//if it comes from rearrange
 			if (index >= 0) {
-				vm.deviser.videos.splice(index, 1);
+				vm.person.videos.splice(index, 1);
 				vm.works = [];
 				vm.searchTerm = [];
 			}
-			var patch = new deviserDataService.Profile;
-			patch.deviser_id = vm.deviser.id;
-			patch.scenario = "deviser-update-profile";
-			patch.videos = [];
+			var data = {
+				videos: []
+			}
+
 			//set videos and product_id's
-			vm.deviser.videos.forEach(function (element, vid_index) {
-				patch.videos[vid_index] = {
+			vm.person.videos.forEach(function (element, index) {
+				data.videos.push({
 					url: element.url,
 					products: []
-				}
+				});
+
 				element.products.forEach(function (product) {
-					patch.videos[vid_index].products.push(product.id)
+					data.videos[index].products.push(product.id)
 				})
 			})
-			patch.$update().then(function (dataVideos) {
-				$window.location.href = '/deviser/' + dataVideos.slug + '/' + dataVideos.id + '/video';
-			}, function (err) {
-				toastr.error(err);
-				getDeviser();
-			});
+
+			personDataService.updateProfile(data, {
+				personId: person.short_id
+			}, onUpdateVideosSuccess, onUpdateVideosError);
 		}
 
 		function findProducts(key, index) {
@@ -84,7 +106,7 @@
 
 		function addVideo() {
 			if (vm.url) {
-				vm.deviser.videos.unshift({
+				vm.person.videos.unshift({
 					url: vm.url,
 					products: []
 				});
@@ -93,17 +115,17 @@
 		}
 
 		function selectProduct(index, work) {
-			if (!vm.deviser.videos[index].products)
-				vm.deviser.videos[index].products = [];
-			vm.deviser.videos[index].products.push(work);
+			if (!vm.person.videos[index].products)
+				vm.person.videos[index].products = [];
+			vm.person.videos[index].products.push(work);
 		}
 
 		function deleteVideo(index) {
-			vm.deviser.videos.splice(index, 1);
+			vm.person.videos.splice(index, 1);
 		}
 
 		function deleteTag(video_index, tag_index) {
-			vm.deviser.videos[video_index].products.splice(tag_index, 1);
+			vm.person.videos[video_index].products.splice(tag_index, 1);
 		}
 
 		function showAddVideo() {
@@ -111,7 +133,7 @@
 		}
 
 		function done() {
-			updateDeviserVideos();
+			updatePersonVideos();
 		}
 	}
 
