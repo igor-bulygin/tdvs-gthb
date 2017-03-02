@@ -7,16 +7,17 @@ use yii\helpers\Url;
 
 PublicCommonAsset::register($this);
 
-/** @var Person $deviser */
+/** @var Person $person */
 
-$this->title = 'About ' . $deviser->personalInfoMapping->getBrandName() . ' - Todevise';
-$this->params['deviser'] = $deviser;
+$this->title = 'About ' . $person->personalInfoMapping->getBrandName() . ' - Todevise';
+$this->params['deviser'] = $person;
+$this->params['person'] = $person;
 $this->params['deviser_menu_active_option'] = 'faq';
 $this->params['deviser_links_target'] = 'public_view';
 
 /** array $faq */
 
-// <a class="edit-faq-btn" href="<***?= Url::to(["deviser/faq-edit", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id])?****>">+ ADD / EDIT QUESTIONS</a>
+// <a class="edit-faq-btn" href="<***?= Url::to(["deviser/faq-edit", "slug" => $person->slug, 'deviser_id' => $person->short_id])?****>">+ ADD / EDIT QUESTIONS</a>
 
 
 ?>
@@ -32,16 +33,16 @@ $this->params['deviser_links_target'] = 'public_view';
 			<div class="col-md-10">
 					<?php if (count($faq) == 0) { ?>
 						<div class="empty-wrapper">
-							<?php if ($deviser->isDeviserEditable()) { ?>
-								<div><a class="red-link-btn" href="<?= Url::to(["deviser/faq-edit", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id])?>">Add / edit questions</a></div>
+							<?php if ($person->isDeviserEditable()) { ?>
+								<div><a class="red-link-btn" href="<?= Url::to(["deviser/faq-edit", "slug" => $person->slug, 'deviser_id' => $person->short_id])?>">Add / edit questions</a></div>
 							<?php } ?>
 							<img class="sad-face" src="/imgs/sad-face.svg">
 							<p class="no-video-text">You don't have any questions!</p>
 						</div>
 					<?php } else { ?>
 				<div class="faq-wrapper">
-						<?php if ($deviser->isDeviserEditable()) { ?>
-							<div><a class="red-link-btn" href="<?= Url::to(["deviser/faq-edit", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id])?>">Add / edit questions</a></div>
+						<?php if ($person->isDeviserEditable()) { ?>
+							<div><a class="red-link-btn" href="<?= Url::to(["deviser/faq-edit", "slug" => $person->slug, 'deviser_id' => $person->short_id])?>">Add / edit questions</a></div>
 						<?php } ?>
 						<div id="accordion" role="tablist" aria-multiselectable="true">
 							<?php foreach ($faq as $key => $item) { ?>

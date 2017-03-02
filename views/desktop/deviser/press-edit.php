@@ -9,20 +9,21 @@ use yii\web\View;
 
 EditPressAsset::register($this);
 
-/** @var Person $deviser */
+/** @var Person $person */
 
-$this->title = 'About ' . $deviser->personalInfoMapping->getBrandName() . ' - Todevise';
-$this->params['deviser'] = $deviser;
+$this->title = 'About ' . $person->personalInfoMapping->getBrandName() . ' - Todevise';
+$this->params['deviser'] = $person;
+$this->params['person'] = $person;
 $this->params['deviser_menu_active_option'] = 'press';
 $this->params['deviser_links_target'] = 'edit_view';
 
 ?>
 
 	<?= PersonHeader::widget() ?>
-	<?php if ($deviser->isDraft()) { ?>
+	<?php if ($person->isDraft()) { ?>
 		<?= DeviserMakeProfilePublic::widget() ?>
 	<?php } ?>
-		<?php $this->registerJs("var _deviser = " . Json::encode($deviser) . ";", View::POS_HEAD); ?>
+		<?php $this->registerJs("var _deviser = " . Json::encode($person) . ";", View::POS_HEAD); ?>
 
 			<div class="store" ng-controller="editPressCtrl as editPressCtrl">
 				<div class="container">

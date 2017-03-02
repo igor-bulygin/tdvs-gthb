@@ -49,14 +49,14 @@ class DeviserController extends CController
 
 	public function actionStore($slug, $deviser_id)
 	{
-		$deviser = Person::findOneSerialized($deviser_id);
+		$person = Person::findOneSerialized($deviser_id);
 
-		if (!$deviser) {
+		if (!$person) {
 			throw new NotFoundHttpException();
 		}
 
 		// categories of all products
-		$categories = $deviser->getCategoriesOfProducts();
+		$categories = $person->getCategoriesOfProducts();
 		/** @var Category $selectedCategory */
 		$selectedCategory = $this->getCategoryById($categories, Yii::$app->request->get('category'));
 		if (!isset($selectedCategory)) {
@@ -68,7 +68,7 @@ class DeviserController extends CController
 			$selectedSubcategory = (count($selectedCategory->getDeviserSubcategories()) > 0) ? $selectedCategory->getDeviserSubcategories()[0] : new Category();
 		}
 
-		if ($deviser->isDeviserEditable()) {
+		if ($person->isDeviserEditable()) {
 			$unpublishedWorks = Product2::findSerialized([
 				"deviser_id" => $deviser_id,
 				"product_state" => Product2::PRODUCT_STATE_DRAFT,
@@ -86,7 +86,7 @@ class DeviserController extends CController
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("store-view", [
-			'deviser' => $deviser,
+			'person' => $person,
 			'products' => $products,
 			'categories' => $categories,
 			'selectedCategory' => $selectedCategory,
@@ -98,18 +98,18 @@ class DeviserController extends CController
 	public function actionStoreEdit($slug, $deviser_id)
 	{
 		// get the category object
-		$deviser = Person::findOneSerialized($deviser_id);
+		$person = Person::findOneSerialized($deviser_id);
 
-		if (!$deviser) {
+		if (!$person) {
 			throw new NotFoundHttpException();
 		}
 
-		if (!$deviser->isDeviserEditable()) {
+		if (!$person->isDeviserEditable()) {
 			throw new UnauthorizedHttpException();
 		}
 
 		// categories of all products
-		$categories = $deviser->getCategoriesOfProducts();
+		$categories = $person->getCategoriesOfProducts();
 		/** @var Category $selectedCategory */
 		$selectedCategory = $this->getCategoryById($categories, Yii::$app->request->get('category'));
 		if (!isset($selectedCategory)) {
@@ -128,7 +128,7 @@ class DeviserController extends CController
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("store-edit", [
-			'deviser' => $deviser,
+			'person' => $person,
 			'categories' => $categories,
 			'selectedCategory' => $selectedCategory,
 			'selectedSubcategory' => $selectedSubcategory,
@@ -138,15 +138,15 @@ class DeviserController extends CController
 
 	public function actionAbout($slug, $deviser_id)
 	{
-		$deviser = Person::findOneSerialized($deviser_id);
+		$person = Person::findOneSerialized($deviser_id);
 
-		if (!$deviser) {
+		if (!$person) {
 			throw new NotFoundHttpException();
 		}
 
-		if ($deviser->account_state != Person::ACCOUNT_STATE_ACTIVE) {
-			if ($deviser->isDeviserEditable()) {
-				$this->redirect($deviser->getEditDeviserAboutLink());
+		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE) {
+			if ($person->isDeviserEditable()) {
+				$this->redirect($person->getEditDeviserAboutLink());
 			} else {
 				throw new NotFoundHttpException();
 			}
@@ -154,39 +154,39 @@ class DeviserController extends CController
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("about-view", [
-			'deviser' => $deviser,
+			'person' => $person,
 		]);
 	}
 
 	public function actionAboutEdit($slug, $deviser_id)
 	{
-		$deviser = Person::findOneSerialized($deviser_id);
+		$person = Person::findOneSerialized($deviser_id);
 
-		if (!$deviser) {
+		if (!$person) {
 			throw new NotFoundHttpException();
 		}
 
-		if (!$deviser->isDeviserEditable()) {
+		if (!$person->isDeviserEditable()) {
 			throw new UnauthorizedHttpException();
 		}
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("about-edit", [
-			'deviser' => $deviser,
+			'person' => $person,
 		]);
 	}
 
 	public function actionPress($slug, $deviser_id)
 	{
-		$deviser = Person::findOneSerialized($deviser_id);
+		$person = Person::findOneSerialized($deviser_id);
 
-		if (!$deviser) {
+		if (!$person) {
 			throw new NotFoundHttpException();
 		}
 
-		if ($deviser->account_state != Person::ACCOUNT_STATE_ACTIVE) {
-			if ($deviser->isDeviserEditable()) {
-				$this->redirect($deviser->getEditDeviserAboutLink());
+		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE) {
+			if ($person->isDeviserEditable()) {
+				$this->redirect($person->getEditDeviserAboutLink());
 			} else {
 				throw new NotFoundHttpException();
 			}
@@ -194,41 +194,41 @@ class DeviserController extends CController
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("press-view", [
-			'deviser' => $deviser,
-			'press' => $deviser->press,
+			'person' => $person,
+			'press' => $person->press,
 		]);
 	}
 
 	public function actionPressEdit($slug, $deviser_id)
 	{
 		// get the category object
-		$deviser = Person::findOneSerialized($deviser_id);
+		$person = Person::findOneSerialized($deviser_id);
 
-		if (!$deviser) {
+		if (!$person) {
 			throw new NotFoundHttpException();
 		}
 
-		if (!$deviser->isDeviserEditable()) {
+		if (!$person->isDeviserEditable()) {
 			throw new UnauthorizedHttpException();
 		}
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("press-edit", [
-			'deviser' => $deviser,
+			'person' => $person,
 		]);
 	}
 
 	public function actionVideos($slug, $deviser_id)
 	{
-		$deviser = Person::findOneSerialized($deviser_id);
+		$person = Person::findOneSerialized($deviser_id);
 
-		if (!$deviser) {
+		if (!$person) {
 			throw new NotFoundHttpException();
 		}
 
-		if ($deviser->account_state != Person::ACCOUNT_STATE_ACTIVE) {
-			if ($deviser->isDeviserEditable()) {
-				$this->redirect($deviser->getEditDeviserAboutLink());
+		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE) {
+			if ($person->isDeviserEditable()) {
+				$this->redirect($person->getEditDeviserAboutLink());
 			} else {
 				throw new NotFoundHttpException();
 			}
@@ -236,41 +236,41 @@ class DeviserController extends CController
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("videos-view", [
-			'deviser' => $deviser,
-			'videos' => $deviser->videosMapping,
+			'person' => $person,
+			'videos' => $person->videosMapping,
 		]);
 	}
 
 	public function actionVideosEdit($slug, $deviser_id)
 	{
 		// get the category object
-		$deviser = Person::findOneSerialized($deviser_id);
+		$person = Person::findOneSerialized($deviser_id);
 
-		if (!$deviser) {
+		if (!$person) {
 			throw new NotFoundHttpException();
 		}
 
-		if (!$deviser->isDeviserEditable()) {
+		if (!$person->isDeviserEditable()) {
 			throw new UnauthorizedHttpException();
 		}
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("videos-edit", [
-			'deviser' => $deviser,
+			'person' => $person,
 		]);
 	}
 
 	public function actionFaq($slug, $deviser_id)
 	{
-		$deviser = Person::findOneSerialized($deviser_id);
+		$person = Person::findOneSerialized($deviser_id);
 
-		if (!$deviser) {
+		if (!$person) {
 			throw new NotFoundHttpException();
 		}
 
-		if ($deviser->account_state != Person::ACCOUNT_STATE_ACTIVE) {
-			if ($deviser->isDeviserEditable()) {
-				$this->redirect($deviser->getEditDeviserAboutLink());
+		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE) {
+			if ($person->isDeviserEditable()) {
+				$this->redirect($person->getEditDeviserAboutLink());
 			} else {
 				throw new NotFoundHttpException();
 			}
@@ -278,41 +278,41 @@ class DeviserController extends CController
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("faq-view", [
-			'deviser' => $deviser,
-			'faq' => $deviser->faq,
+			'person' => $person,
+			'faq' => $person->faq,
 		]);
 	}
 
 	public function actionFaqEdit($slug, $deviser_id)
 	{
 		// get the category object
-		$deviser = Person::findOneSerialized($deviser_id);
+		$person = Person::findOneSerialized($deviser_id);
 
-		if (!$deviser) {
+		if (!$person) {
 			throw new NotFoundHttpException();
 		}
 
-		if (!$deviser->isDeviserEditable()) {
+		if (!$person->isDeviserEditable()) {
 			throw new UnauthorizedHttpException();
 		}
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("faq-edit", [
-			'deviser' => $deviser,
+			'person' => $person,
 		]);
 	}
 
 	public function actionLoved($slug, $deviser_id)
 	{
-		$deviser = Person::findOneSerialized($deviser_id);
+		$person = Person::findOneSerialized($deviser_id);
 
-		if (!$deviser) {
+		if (!$person) {
 			throw new NotFoundHttpException();
 		}
 
-		if ($deviser->account_state != Person::ACCOUNT_STATE_ACTIVE) {
-			if ($deviser->isDeviserEditable()) {
-				$this->redirect($deviser->getEditDeviserAboutLink());
+		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE) {
+			if ($person->isDeviserEditable()) {
+				$this->redirect($person->getEditDeviserAboutLink());
 			} else {
 				throw new NotFoundHttpException();
 			}
@@ -321,22 +321,22 @@ class DeviserController extends CController
 		$loveds = Loved::findSerialized(['person_id' => $deviser_id]);
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("loved-view", [
-			'deviser' => $deviser,
+			'person' => $person,
 			'loveds' => $loveds,
 		]);
 	}
 
 	public function actionBoxes($slug, $deviser_id)
 	{
-		$deviser = Person::findOneSerialized($deviser_id);
+		$person = Person::findOneSerialized($deviser_id);
 
-		if (!$deviser) {
+		if (!$person) {
 			throw new NotFoundHttpException();
 		}
 
-		if ($deviser->account_state != Person::ACCOUNT_STATE_ACTIVE) {
-			if ($deviser->isDeviserEditable()) {
-				$this->redirect($deviser->getEditDeviserAboutLink());
+		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE) {
+			if ($person->isDeviserEditable()) {
+				$this->redirect($person->getEditDeviserAboutLink());
 			} else {
 				throw new NotFoundHttpException();
 			}
@@ -345,22 +345,22 @@ class DeviserController extends CController
 		$boxes = Box::findSerialized(['person_id' => $deviser_id]);
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("boxes-view", [
-			'deviser' => $deviser,
+			'person' => $person,
 			'boxes' => $boxes,
 		]);
 	}
 
 	public function actionBoxDetail($slug, $deviser_id, $box_id)
 	{
-		$deviser = Person::findOneSerialized($deviser_id);
+		$person = Person::findOneSerialized($deviser_id);
 
-		if (!$deviser) {
+		if (!$person) {
 			throw new NotFoundHttpException();
 		}
 
-		if ($deviser->account_state != Person::ACCOUNT_STATE_ACTIVE) {
-			if ($deviser->isDeviserEditable()) {
-				$this->redirect($deviser->getEditDeviserAboutLink());
+		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE) {
+			if ($person->isDeviserEditable()) {
+				$this->redirect($person->getEditDeviserAboutLink());
 			} else {
 				throw new NotFoundHttpException();
 			}
@@ -372,7 +372,7 @@ class DeviserController extends CController
 			throw new NotFoundHttpException();
 		}
 
-		if ($box->person_id != $deviser->short_id) {
+		if ($box->person_id != $person->short_id) {
 			throw new ForbiddenHttpException();
 		}
 
@@ -380,7 +380,7 @@ class DeviserController extends CController
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("box-detail", [
-			'deviser' => $deviser,
+			'person' => $person,
 			'box' => $box,
 			'moreBoxes' => $boxes,
 		]);
@@ -443,8 +443,8 @@ class DeviserController extends CController
 		Utils::l_collection($countries, "country_name");
 
 		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
-		$deviser = Person::findOneSerialized(Yii::$app->request->get('deviser_id'))->toArray();
-		$deviser["short_id"] = $deviser["id"];
+		$person = Person::findOneSerialized(Yii::$app->request->get('deviser_id'))->toArray();
+		$person["short_id"] = $person["id"];
 
 		$categories = Category::find()
 			->select(["_id" => 0])
@@ -455,7 +455,7 @@ class DeviserController extends CController
 		Utils::l_collection($categories, "name");
 
 		return $this->render("edit-info", [
-			"deviser" => $deviser,
+			"deviser" => $person,
 			"slug" => $slug,
 			'categories' => $categories,
 			"countries" => $countries
@@ -488,7 +488,7 @@ class DeviserController extends CController
 			->asArray()
 			->all();
 
-		$deviser = Person::find()
+		$person = Person::find()
 			->select(["_id" => 0])
 			->where(["short_id" => $product[0]["deviser_id"]])
 			->asArray()
@@ -519,7 +519,7 @@ class DeviserController extends CController
 
 		$deviser_sizecharts = SizeChart::find()
 			->select(["_id" => 0])
-			->where(["type" => SizeChart::DEVISER, "deviser_id" => $deviser["short_id"]])
+			->where(["type" => SizeChart::DEVISER, "deviser_id" => $person["short_id"]])
 			->asArray()
 			->all();
 		Utils::l_collection($deviser_sizecharts, "name");
@@ -544,7 +544,7 @@ class DeviserController extends CController
 		];
 
 		return $this->render("edit-work", [
-			"deviser" => $deviser,
+			"deviser" => $person,
 			"product" => $product[0],
 			"tags" => $tags,
 			'categories' => $categories,
@@ -564,22 +564,22 @@ class DeviserController extends CController
 	 */
 	public function actionUploadHeaderPhoto($slug)
 	{
-		/* @var $deviser \app\models\Person */
-		$deviser = Person::findOne(["slug" => $slug]);
-		$deviser_path = Utils::join_paths(Yii::getAlias("@deviser"), $deviser->short_id);
+		/* @var $person \app\models\Person */
+		$person = Person::findOne(["slug" => $slug]);
+		$deviser_path = Utils::join_paths(Yii::getAlias("@deviser"), $person->short_id);
 
 		$res = $this->savePostedFile($deviser_path, ("header." . uniqid()));
 		if ($res !== false) {
 			//Delete the old header picture if it didn't get overridden by the new one
-//			if (isset($deviser["media"]["header"]) && strcmp($deviser["media"]["header"], $res) !== 0) {
-//				@unlink(Utils::join_paths($deviser_path, $deviser["media"]["header"]));
+//			if (isset($person["media"]["header"]) && strcmp($person["media"]["header"], $res) !== 0) {
+//				@unlink(Utils::join_paths($deviser_path, $person["media"]["header"]));
 //			}
 
-			$deviser->mediaFiles->header = $res;
-			$deviser->save(false);
+			$person->mediaFiles->header = $res;
+			$person->save(false);
 
 			Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_ADMIN);
-			return $deviser;
+			return $person;
 		}
 	}
 
@@ -591,23 +591,23 @@ class DeviserController extends CController
 	 */
 	public function actionUploadProfilePhoto($slug)
 	{
-		/* @var $deviser \app\models\Person */
-		$deviser = Person::findOne(["slug" => $slug]);
-		$deviser_path = Utils::join_paths(Yii::getAlias("@deviser"), $deviser->short_id);
+		/* @var $person \app\models\Person */
+		$person = Person::findOne(["slug" => $slug]);
+		$deviser_path = Utils::join_paths(Yii::getAlias("@deviser"), $person->short_id);
 
 		$res = $this->savePostedFile($deviser_path, ("profile." . uniqid()));
 		if ($res !== false) {
 			//Delete the old profile picture if it didn't get overridden by the new one
-//			if (isset($deviser["media"]["profile"]) && strcmp($deviser["media"]["profile"], $res) !== 0) {
-//				@unlink(Utils::join_paths($deviser_path, $deviser["media"]["profile"]));
+//			if (isset($person["media"]["profile"]) && strcmp($person["media"]["profile"], $res) !== 0) {
+//				@unlink(Utils::join_paths($deviser_path, $person["media"]["profile"]));
 //			}
 
-			$deviser->mediaFiles->profile = $res;
+			$person->mediaFiles->profile = $res;
 
-			$deviser->save(false);
+			$person->save(false);
 
 			Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_ADMIN);
-			return $deviser;
+			return $person;
 		}
 	}
 
@@ -685,24 +685,24 @@ class DeviserController extends CController
 		ini_set('memory_limit', '2048M');
 		set_time_limit(-1);
 
-		/* @var Person[] $devisers */
-		$devisers = Person::find()->where(
+		/* @var Person[] $persons */
+		$persons = Person::find()->where(
 			[
 				'type' => [Person::DEVISER],
 			]
 		)->all();
-		foreach ($devisers as $deviser) {
-			$deviser->setPassword('todevise1234');
+		foreach ($persons as $person) {
+			$person->setPassword('todevise1234');
 
 			// Update directly in low level, to avoid no desired behaviors of ActiveRecord
 			/** @var Collection $collection */
 			$collection = Yii::$app->mongodb->getCollection('person');
 			$collection->update(
 					[
-							'short_id' => $deviser->short_id
+							'short_id' => $person->short_id
 					],
 					[
-							'credentials' => $deviser->credentials
+							'credentials' => $person->credentials
 					]
 			);
 		}

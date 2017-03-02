@@ -7,17 +7,18 @@ use app\models\Person;
 
 BoxesViewAsset::register($this);
 
-/** @var Person $deviser */
+/** @var Person $person */
 /** @var \app\models\Box[] $boxes */
 
-$this->title = 'Boxes by ' . $deviser->personalInfoMapping->getBrandName() . ' - Todevise';
-$this->params['deviser'] = $deviser;
+$this->title = 'Boxes by ' . $person->personalInfoMapping->getBrandName() . ' - Todevise';
+$this->params['deviser'] = $person;
+$this->params['person'] = $person;
 $this->params['deviser_menu_active_option'] = 'boxes';
 $this->params['deviser_links_target'] = 'public_view';
 
 /** array $faq */
 
-// <a class="edit-faq-btn" href="<***?= Url::to(["deviser/faq-edit", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id])?****>">+ ADD / EDIT QUESTIONS</a>
+// <a class="edit-faq-btn" href="<***?= Url::to(["deviser/faq-edit", "slug" => $person->slug, 'deviser_id' => $person->short_id])?****>">+ ADD / EDIT QUESTIONS</a>
 
 
 ?>
@@ -34,12 +35,12 @@ $this->params['deviser_links_target'] = 'public_view';
                 <?php if (empty($boxes)) { ?>
 
                     <div class="empty-wrapper">
-                        <?php if ($deviser->isConnectedUser()) { ?>
+                        <?php if ($person->isConnectedUser()) { ?>
                             <img class="sad-face" src="/imgs/sad-face.svg">
                             <p class="no-video-text">You have no boxes!</p>
                             <button class="btn btn-default btn-green btn-upload-file" ng-click="viewBoxesCtrl.openCreateBoxModal()">ADD BOX</button>
 						<?php } else { ?>
-                            <p class="no-video-text"><?=$deviser->getBrandName()?> have no boxes.</p>
+                            <p class="no-video-text"><?=$person->getBrandName()?> have no boxes.</p>
                         <?php } ?>
                     </div>
 
@@ -48,10 +49,10 @@ $this->params['deviser_links_target'] = 'public_view';
                     <div class="content-store">
                         <div class="store-grid">
                             <div class="title-wrapper">
-                                <span class="title">Boxes by <?=$deviser->getBrandName()?></span>
+                                <span class="title">Boxes by <?=$person->getBrandName()?></span>
                             </div>
                             <div class="row">
-                                <?php if ($deviser->isDeviserEditable()) { ?>
+                                <?php if ($person->isDeviserEditable()) { ?>
                                     <div class="col-lg-4">
                                         <button class="btn btn-default" ng-click="viewBoxesCtrl.openCreateBoxModal()">Add box</button>
                                     </div>

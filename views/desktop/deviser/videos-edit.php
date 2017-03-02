@@ -7,17 +7,18 @@ use app\models\Person;
 
 EditVideosAsset::register($this);
 
-/** @var Person $deviser */
+/** @var Person $person */
 
-$this->title = 'About ' . $deviser->personalInfoMapping->getBrandName() . ' - Todevise';
-$this->params['deviser'] = $deviser;
+$this->title = 'About ' . $person->personalInfoMapping->getBrandName() . ' - Todevise';
+$this->params['deviser'] = $person;
+$this->params['person'] = $person;
 $this->params['deviser_menu_active_option'] = 'videos';
 $this->params['deviser_links_target'] = 'edit_view';
 
 ?>
 
 	<?= PersonHeader::widget() ?>
-	<?php if ($deviser->isDraft()) { ?>
+	<?php if ($person->isDraft()) { ?>
 		<?= DeviserMakeProfilePublic::widget() ?>
 	<?php } ?>
 

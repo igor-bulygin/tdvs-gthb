@@ -7,18 +7,19 @@ use yii\helpers\Url;
 
 BoxesViewAsset::register($this);
 
-/** @var Person $deviser */
+/** @var Person $person */
 /** @var \app\models\Box $box */
 /** @var \app\models\Box[] $moreBoxes */
 
-$this->title = 'Box '.$box->name.' by ' . $deviser->personalInfoMapping->getBrandName() . ' - Todevise';
-$this->params['deviser'] = $deviser;
+$this->title = 'Box '.$box->name.' by ' . $person->personalInfoMapping->getBrandName() . ' - Todevise';
+$this->params['deviser'] = $person;
+$this->params['person'] = $person;
 $this->params['deviser_menu_active_option'] = 'boxes';
 $this->params['deviser_links_target'] = 'public_view';
 
 /** array $faq */
 
-// <a class="edit-faq-btn" href="<***?= Url::to(["deviser/faq-edit", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id])?****>">+ ADD / EDIT QUESTIONS</a>
+// <a class="edit-faq-btn" href="<***?= Url::to(["deviser/faq-edit", "slug" => $person->slug, 'deviser_id' => $person->short_id])?****>">+ ADD / EDIT QUESTIONS</a>
 $this->registerJs("var box = ".Json::encode($box), yii\web\View::POS_HEAD, 'box-script');
 
 ?>
@@ -27,18 +28,18 @@ $this->registerJs("var box = ".Json::encode($box), yii\web\View::POS_HEAD, 'box-
 	<div class="container">
         <div class="row" style="background-color: #2e2e2e; height: 73px; opacity: 0.8;">
             <div class="col-md-8" style="padding-top: 10px;">
-                <img src="<?=$deviser->getAvatarImage128()?>" style="max-width: 50px;">
-                <?php if ($deviser->isConnectedUser()) { ?>
-                    <a href="<?=Url::to(["deviser/boxes", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id]);?>">
+                <img src="<?=$person->getAvatarImage128()?>" style="max-width: 50px;">
+                <?php if ($person->isConnectedUser()) { ?>
+                    <a href="<?=Url::to(["deviser/boxes", "slug" => $person->slug, 'deviser_id' => $person->short_id]);?>">
                         <span style="color: white;">&lt; My profile</span>
                     </a>
                 <?php } else  { ?>
-                    <a href="<?=Url::to(["deviser/boxes", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id]);?>">
-                        <span style="color: white;">&lt; <?=$deviser->getBrandName()?></span>
+                    <a href="<?=Url::to(["deviser/boxes", "slug" => $person->slug, 'deviser_id' => $person->short_id]);?>">
+                        <span style="color: white;">&lt; <?=$person->getBrandName()?></span>
                     </a>
                 <?php } ?>
             </div>
-            <?php if ($deviser->isDeviserEditable()) { ?>
+            <?php if ($person->isDeviserEditable()) { ?>
                 <div class="col-md-2" style="padding-top: 17px;">
                     <button class="btn btn-default btn-green" ng-click="boxDetailCtrl.openEditBoxModal()">Edit box</button>
                 </div>
@@ -58,7 +59,7 @@ $this->registerJs("var box = ".Json::encode($box), yii\web\View::POS_HEAD, 'box-
                 <div class="col-md-2 col-sm-4 col-xs-6 pad-grid" ng-if="boxDetailCtrl.box.products.length > 0" ng-cloak ng-repeat="work in boxDetailCtrl.box.products">
                     <div class="grid">
 						<figure class="effect-zoe">
-							<?php if (!$deviser->isConnectedUser()) { ?>
+							<?php if (!$person->isConnectedUser()) { ?>
 								<image-hover-buttons product-id="{{work.id}}" is-loved="{{work.isLoved ? 1 : 0}}">
 							<?php } else { ?>
 								<span class="close-product-icon" ng-click="boxDetailCtrl.deleteProduct(work.id)">
@@ -68,7 +69,7 @@ $this->registerJs("var box = ".Json::encode($box), yii\web\View::POS_HEAD, 'box-
                                 <a ng-href="{{work.link}}">
                                     <img class="grid-image" ng-src="{{work.url_image_preview || '/imgs/product_placeholder.png'}}">
 								</a>
-							<?php if (!$deviser->isConnectedUser()) { ?>
+							<?php if (!$person->isConnectedUser()) { ?>
 								</image-hover-buttons>
 							<?php } ?>
                             <figcaption>

@@ -8,18 +8,19 @@ use yii\helpers\Json;
 
 EditFaqAsset::register($this);
 
-/** @var Person $deviser */
+/** @var Person $person */
 
-$this->title = 'About ' . $deviser->personalInfoMapping->getBrandName() . ' - Todevise';
-$this->params['deviser'] = $deviser;
+$this->title = 'About ' . $person->personalInfoMapping->getBrandName() . ' - Todevise';
+$this->params['deviser'] = $person;
+$this->params['person'] = $person;
 $this->params['deviser_menu_active_option'] = 'faq';
 $this->params['deviser_links_target'] = 'edit_view';
-$this->registerJs("var person = ".Json::encode($deviser), yii\web\View::POS_HEAD, 'person-var-script');
+$this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD, 'person-var-script');
 
 ?>
 
 	<?= PersonHeader::widget() ?>
-	<?php if ($deviser->isDraft()) { ?>
+	<?php if ($person->isDraft()) { ?>
 		<?= DeviserMakeProfilePublic::widget() ?>
 	<?php } ?>
 
