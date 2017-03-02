@@ -2,7 +2,7 @@
 
 	"use strict";
 
-	function controller(productService, deviserDataService, productDataService, languageDataService, metricDataService, toastr, 
+	function controller(productService, personDataService, productDataService, languageDataService, metricDataService,
 		UtilService, tagDataService, $scope, $rootScope, productEvents, sizechartDataService, $window) {
 		var vm = this;
 		vm.categories_helper = [];
@@ -108,15 +108,15 @@
 		}
 		
 		function getDeviser(){
-			deviserDataService.Profile.get({
-				deviser_id: UtilService.returnDeviserIdFromUrl()
-			}).$promise.then(function(dataDeviser) {
-				vm.deviser = dataDeviser;
-				vm.link_profile = '/deviser/' + dataDeviser.slug + '/' + dataDeviser.id + '/store/edit';
+			function onGetProfileSuccess(data) {
+				vm.deviser = angular.copy(data);
+				vm.link_profile = '/deviser/' + data.slug + '/' + data.id + '/store/edit';
 				vm.profile = currentHost()+vm.deviser.url_images+vm.deviser.media.profile_cropped;
-			}, function(err) {
-				//errors
-			});
+			}
+
+			personDataService.getProfile({
+				personId: person.short_id
+			}, onGetProfileSuccess, UtilService.onError);
 		}
 		
 
@@ -125,7 +125,6 @@
 				vm.disable_save_buttons=false;
 				if(state === 'product_state_draft') {
 					vm.product = productService.parseProductFromService(vm.product);
-					toastr.success('Saved!');
 				} else if (state === 'product_state_active') {
 					$window.location.href = currentHost() + vm.link_profile + '?published=true';
 				}

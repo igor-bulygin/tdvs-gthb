@@ -52,28 +52,28 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 							<?php if ($unpublishedWorks || count($categories) > 1) { ?>
 								<div class="cathegory-wrapper">
 									<?php if ($unpublishedWorks) { ?>
-                                        <div class="col-md-3 col-sm-3 col-xs-3 pad-cathegory">
-                                            <a href="<?= Url::to(["deviser/store-edit", "slug" => $person->slug, 'deviser_id' => $person->short_id, 'product_state' => \app\models\Product2::PRODUCT_STATE_DRAFT])?>">
-                                                <div class="unpublished-square" ng-click="editStoreCtrl.show_unpublished_works()">
-                                                    <p>Unpublished<br>works</p>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    <?php } ?>
-                                    <?php foreach ($categories as $i => $category) { ?>
-                                        <div class="col-md-3 col-sm-3 col-xs-3 pad-cathegory">
-                                            <a href="<?= Url::to(["deviser/store-edit", "slug" => $person->slug, 'deviser_id' => $person->short_id, 'category' => $category->short_id])?>">
-                                                <figure class="cathegory">
-                                                    <img class="<?= ($selectedCategory->short_id==$category->short_id) ? 'active' : '' ?>" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($category->getDeviserProduct()->getMainImage())->resize(240, 175) ?>">
-                                                    <figcaption>
-                                                        <span class="name">
-                                                            <?= Utils::l($category->name) ?>
-                                                        </span>
-                                                    </figcaption>
-                                                </figure>
-                                            </a>
-                                        </div>
-                                    <?php } ?>
+										<div class="col-md-3 col-sm-3 col-xs-3 pad-cathegory">
+											<a href="<?= Url::to(["deviser/store-edit", "slug" => $person->slug, 'deviser_id' => $person->short_id, 'product_state' => \app\models\Product2::PRODUCT_STATE_DRAFT])?>">
+												<div class="unpublished-square" ng-click="editStoreCtrl.show_unpublished_works()">
+													<p>Unpublished<br>works</p>
+												</div>
+											</a>
+										</div>
+									<?php } ?>
+									<?php foreach ($categories as $i => $category) { ?>
+										<div class="col-md-3 col-sm-3 col-xs-3 pad-cathegory">
+											<a href="<?= Url::to(["deviser/store-edit", "slug" => $person->slug, 'deviser_id' => $person->short_id, 'category' => $category->short_id])?>">
+												<figure class="cathegory">
+													<img class="<?= ($selectedCategory->short_id==$category->short_id) ? 'active' : '' ?>" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($category->getDeviserProduct()->getMainImage())->resize(240, 175) ?>">
+													<figcaption>
+														<span class="name">
+															<?= Utils::l($category->name) ?>
+														</span>
+													</figcaption>
+												</figure>
+											</a>
+										</div>
+									<?php } ?>
 								</div>
 							<?php } ?>
 							<div class="store-grid">
@@ -120,25 +120,25 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 										</nav>
 										<div class="mesonry-row" dnd-list="editStoreCtrl.products">
 											<div class="menu-category list-group" ng-repeat="product in editStoreCtrl.products | publishedProduct" ng-if="product.main_photo" dnd-draggable="product" dnd-effect-allowed="move" dnd-moved="editStoreCtrl.update($index, product)">
-                                                <div class="grid">
-                                                    <figure class="effect-zoe">
-                                                        <span class="close-product-icon" ng-click="editStoreCtrl.open_modal_delete(product.id)">
-                                                            <i class="ion-android-close"></i>
-                                                        </span>
-                                                        <a ng-href="{{product.link}}">
-                                                            <img class="grid-image" ng-src="{{product.main_photo}}">
-                                                        </a>
-                                                        <figcaption>
-                                                            <a ng-href="{{product.link}}">
-                                                                <p class="instauser">{{product.name}}</p>
-                                                                <p class="price">€{{product.min_price}}</p>
-                                                            </a>
-                                                            <a href="" class="edit-product-icon" ng-href="{{product.edit_link}}" title="Edit work">
-                                                                <i class="ion-edit"></i>
-                                                            </a>
-                                                        </figcaption>
-                                                    </figure>
-                                                </div>
+												<div class="grid">
+													<figure class="effect-zoe">
+														<span class="close-product-icon" ng-click="editStoreCtrl.open_modal_delete(product.id)">
+															<i class="ion-android-close"></i>
+														</span>
+														<a ng-href="{{product.link}}">
+															<img class="grid-image" ng-src="{{product.main_photo}}">
+														</a>
+														<figcaption>
+															<a ng-href="{{product.link}}">
+																<p class="instauser">{{product.name}}</p>
+																<p class="price">€{{product.min_price}}</p>
+															</a>
+															<a href="" class="edit-product-icon" ng-href="{{product.edit_link}}" title="Edit work">
+																<i class="ion-edit"></i>
+															</a>
+														</figcaption>
+													</figure>
+												</div>
 											</div>
 										</div>
 									</div>

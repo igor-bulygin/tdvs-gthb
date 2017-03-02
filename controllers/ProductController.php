@@ -194,7 +194,7 @@ class ProductController extends CController
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("product-edit", [
-			'deviser' => $deviser,
+			'person' => $deviser,
 			'product' => $product,
 		]);
 	}
