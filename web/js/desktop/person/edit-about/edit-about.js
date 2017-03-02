@@ -1,6 +1,6 @@
 (function() {
 
-	function controller(deviserDataService, UtilService, languageDataService, toastr, productDataService, 
+	function controller(personDataService, UtilService, languageDataService, toastr, productDataService, 
 		Upload, $timeout, $rootScope, $scope, deviserEvents, $uibModal, dragndropService, $window) {
 
 		var vm = this;
@@ -22,23 +22,23 @@
 		init();
 
 		function init() {
-			getDeviser();
+			getPerson();
 			getLanguages();
 			getCategories();
 		}
 
 		/*Initial functions*/
-		function getDeviser() {
-			deviserDataService.Profile.get({
-				deviser_id: deviser.short_id
-			}).$promise.then(function (dataDeviser) {
-				vm.deviser = dataDeviser;
-				vm.deviser_original = angular.copy(dataDeviser);
-				vm.images = UtilService.parseImagesUrl(vm.deviser.media.photos, vm.deviser.url_images);
-				vm.curriculum = currentHost() + vm.deviser.url_images + vm.deviser.curriculum;
-			}, function (err) {
-				UtilService.onError(err);
-			});
+		function getPerson() {
+			function onGetProfileSuccess(data) {
+				vm.person = angular.copy(data);
+				vm.person_original = angular.copy(data);
+				vm.images = UtilService.parseImagesUrl(vm.person.media.photos, vm.person.url_images);
+				vm.curriculum = currentHost() + vm.person.url_images + vm.person.curriculum;
+			}
+
+			personDataService.getProfile({
+				personId: person.short_id
+			}, onGetProfileSuccess, UtilService.onError);
 		}
 
 		function getCategories() {
@@ -59,7 +59,7 @@
 
 		/* photos functions */
 		function parsePhotos() {
-			var media = vm.deviser.media;
+			var media = vm.person.media;
 			media.photos = [];
 			vm.images.forEach(function (element) {
 				if(media.photos.indexOf(element.filename) < 0)
@@ -94,7 +94,7 @@
 			angular.forEach(vm.files, function (file) {
 				var data = {
 					type: "deviser-media-photos",
-					deviser_id: vm.deviser.id,
+					person_id: person.short_id,
 					file: file
 				}
 				Upload.upload({
@@ -103,14 +103,14 @@
 				}).then(function (dataUpload) {
 					//if uplading crop, replace it
 					if(index!==null && index>-1) {
-						vm.deviser.media.photos[index] = dataUpload.data.filename;
+						vm.person.media.photos[index] = dataUpload.data.filename;
 					} else {
 						//if not, add it and crop it
-						vm.deviser.media.photos.unshift(dataUpload.data.filename);
-						var imageToCrop = currentHost() + vm.deviser.url_images + dataUpload.data.filename;
+						vm.person.media.photos.unshift(dataUpload.data.filename);
+						var imageToCrop = currentHost() + vm.person.url_images + dataUpload.data.filename;
 						openCropModal(imageToCrop, 0);
 					}
-					vm.images = UtilService.parseImagesUrl(vm.deviser.media.photos, vm.deviser.url_images);
+					vm.images = UtilService.parseImagesUrl(vm.person.media.photos, vm.person.url_images);
 					$timeout(function () {
 						delete file.progress;
 					}, 1000);
@@ -125,7 +125,7 @@
 
 		function delete_image(index) {
 				vm.images.splice(index, 1);
-				vm.deviser.media = parsePhotos();
+				vm.person.media = parsePhotos();
 				checkPhotos();
 		}
 
@@ -142,21 +142,21 @@
 		function uploadCV(file) {
 			var data = {
 				type: 'deviser-curriculum',
-				deviser_id: vm.deviser.id,
+				person_id: person.short_id,
 				file: file
 			}
 			Upload.upload({
 				url: deviserDataService.Uploads,
 				data: data
 			}).then(function (dataCV) {
-				vm.deviser.curriculum = dataCV.data.filename;
+				vm.person.curriculum = dataCV.data.filename;
 			}, function (err) {
 				//errors
 			})
 		}
 
 		function deleteCV() {
-			vm.deviser.curriculum = '';
+			vm.person.curriculum = '';
 		}
 
 		/* drag and drop functions */
@@ -172,7 +172,7 @@
 
 		function moved(index) {
 			vm.images = dragndropService.moved(vm.images);
-			vm.deviser.media = parsePhotos();
+			vm.person.media = parsePhotos();
 		}
 
 		function canceled(){
@@ -184,23 +184,24 @@
 				return value.replace(/<[^\/>][^>]*><\/[^>]+>/gim, "");
 			}
 
-			var patch = new deviserDataService.Profile;
-			patch.deviser_id = vm.deviser.id;
-			for(var key in vm.deviser) {
+			function onUpdateProfileSuccess(data) {
+				$window.location.href = currentHost() + '/deviser/' + vm.person.slug + '/' + vm.person.id +'/about';
+			}
+
+			var data = {}
+			for(var key in vm.person) {
 				if(key === 'text_biography') {
-					for(var language in vm.deviser[key]) {
-						vm.deviser[key][language] = UtilService.stripHTMLTags(vm.deviser[key][language]);
+					for(var language in vm.person[key]) {
+						vm.person[key][language] = UtilService.stripHTMLTags(vm.person[key][language]);
 					}
 				}
 				if(key !== 'account_state')
-					patch[key] = angular.copy(vm.deviser[key]);
+					data[key] = angular.copy(vm.person[key]);
 			}
-			patch.$update().then(function(updateData) {
-				$window.location.href = currentHost() + '/deviser/' + vm.deviser.slug + '/' + vm.deviser.id +'/about'
-			}, function(err) {
-				UtilService.onError(err);
-			})
 
+			personDataService.updateProfile(data, {
+				personId: person.short_id
+			}, onUpdateProfileSuccess, UtilService.onError);
 		}
 
 		//events
@@ -208,10 +209,8 @@
 			//set form submitted
 			vm.form.$setSubmitted();
 			//set fields
-			//console.log(args);
 			if(args.required_fields && args.required_fields.length > 0) {
 				args.required_fields.forEach(function(element) {
-					//console.log(element);
 					if(element === 'photos')
 						vm.setPhotosRequired = true;
 					if(element === 'biography')
