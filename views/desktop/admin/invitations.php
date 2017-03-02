@@ -106,6 +106,12 @@ $this->title = 'Todevise / Admin / Invitations';
 					],
 					[
 						'value' => function($model){
+							return $model->first_name;
+						},
+						'label' => Yii::t("app/admin", "Name")
+					],
+					[
+						'value' => function($model){
 							return $model->created_at->toDateTime()->format('Y-m-d H:i:s');
 						},
 						'label' => Yii::t("app/admin", "Date")
