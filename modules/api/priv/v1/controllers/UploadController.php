@@ -28,7 +28,7 @@ class UploadController extends AppPrivateController
 		$uploadForm->setScenarioByUploadType();
 		//	    $uploadForm->type = UploadForm::UPLOAD_TYPE_DEVISER_PRESS_IMAGES;
 		// force to relate images to logged user
-		$uploadForm->deviser_id = $deviser->short_id;
+		$uploadForm->person_id = $deviser->short_id;
 		$uploadForm->file = UploadedFile::getInstanceByName("file");
 		if ($uploadForm->upload()) {
 			// file is uploaded successfully

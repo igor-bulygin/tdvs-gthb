@@ -1,10 +1,10 @@
 <?php
 namespace app\modules\api\priv\v1\forms;
 
+use app\helpers\Utils;
 use app\models\Person;
 use app\models\Product2;
 use Yii;
-use app\helpers\Utils;
 use yii\base\Model;
 use yii\web\UploadedFile;
 
@@ -34,7 +34,7 @@ class UploadForm extends Model {
 	/**
 	 * @var string
 	 */
-	public $deviser_id;
+	public $person_id;
 
 	/**
 	 * @var string
@@ -65,7 +65,7 @@ class UploadForm extends Model {
 	{
 		return [
 			[['type'], 'validateType'],
-			[['deviser_id', 'product_id'], 'safe'],
+			[['person_id', 'product_id'], 'safe'],
 			[['file'], 'file', 'skipOnEmpty' => false, 'extensions' => ['png', 'jpg', 'jpeg'], 'on' => [self::SCENARIO_UPLOAD_DEVISER_IMAGE, self::SCENARIO_UPLOAD_PRODUCT_IMAGE]],
 			[['file'], 'file', 'skipOnEmpty' => false, 'extensions' => ['png', 'jpg', 'jpeg', 'pdf'], 'on' => self::SCENARIO_UPLOAD_DEVISER_CURRICULUM],
 		];
@@ -116,7 +116,7 @@ class UploadForm extends Model {
 			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PHOTOS:
 			case UploadForm::UPLOAD_TYPE_DEVISER_PRESS_IMAGES:
 			case UploadForm::UPLOAD_TYPE_DEVISER_CURRICULUM:
-				$path = Utils::join_paths(Yii::getAlias("@deviser"), $this->deviser_id);
+				$path = Utils::join_paths(Yii::getAlias("@deviser"), $this->person_id);
 				break;
 			case UploadForm::UPLOAD_TYPE_KNOWN_PRODUCT_PHOTO:
 				$path = Utils::join_paths(Yii::getAlias("@product"), $this->product_id);
@@ -170,7 +170,7 @@ class UploadForm extends Model {
 			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PHOTOS:
 			case UploadForm::UPLOAD_TYPE_DEVISER_PRESS_IMAGES:
 			case UploadForm::UPLOAD_TYPE_DEVISER_CURRICULUM:
-				if (empty($this->deviser_id)) {
+				if (empty($this->person_id)) {
 					$this->addError($attribute, 'Deviser id must be specified');
 				}
 				if (empty($this->getDeviser())) {
@@ -208,7 +208,7 @@ class UploadForm extends Model {
 			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PHOTOS:
 			case UploadForm::UPLOAD_TYPE_DEVISER_PRESS_IMAGES:
 			case UploadForm::UPLOAD_TYPE_DEVISER_CURRICULUM:
-				$url = (Yii::getAlias("@deviser_url") . "/" . $this->deviser_id . "/" . $this->filename);
+				$url = (Yii::getAlias("@deviser_url") . "/" . $this->person_id . "/" . $this->filename);
 				break;
 			case UploadForm::UPLOAD_TYPE_KNOWN_PRODUCT_PHOTO:
 				$url = (Yii::getAlias("@product_url") . "/" . $this->product_id . "/" . $this->filename);
@@ -261,7 +261,7 @@ class UploadForm extends Model {
 	 */
 	public function getDeviser()
 	{
-		return Person::findOne(['short_id' => $this->deviser_id]);
+		return Person::findOne(['short_id' => $this->person_id]);
 	}
 
 	/**
