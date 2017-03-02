@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(UtilService, deviserDataService, settingsEvents, $scope, $rootScope) {
+	function controller(UtilService, personDataService, settingsEvents, $scope, $rootScope) {
 		var vm = this;
 		vm.bank_location = [{
 			country_name: 'Australia',
@@ -32,13 +32,13 @@
 		}
 
 		function getDeviser() {
-			deviserDataService.Profile.get({
-				deviser_id: UtilService.returnDeviserIdFromUrl()
-			}).$promise.then(function(dataDeviser) {
-					vm.deviser = angular.copy(dataDeviser);
-				}, function(err){
-					//err
-				});
+			function onGetProfileSuccess(data) {
+				vm.deviser = angular.copy(data);
+			}
+
+			personDataService.getProfile({
+				personId: person.short_id
+			}, onGetProfileSuccess, UtilService.onError);
 		}
 
 		function resetBankInfo(location){
@@ -82,7 +82,7 @@
 		})
 
 		$scope.$watch('billingCtrl.bank_information', function(newValue, oldValue) {
-			if(vm.bankInformationForm.$invalid) {
+			if(vm.bankInformationForm && vm.bankInformationForm.$invalid) {
 				for(var key in vm.errors) {
 					vm.bankInformationForm[key].$setValidity('valid', true);
 				}
