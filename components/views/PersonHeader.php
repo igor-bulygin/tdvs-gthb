@@ -8,12 +8,12 @@ use yii\helpers\Url;
 EditHeaderAsset::register($this);
 
 // use params to share data between views :(
-/** @var Person $deviser */
-$deviser = $this->params['deviser'];
-$this->registerJs("var deviser = ".Json::encode($deviser), yii\web\View::POS_HEAD, 'deviser-var-script');
+/** @var Person $person */
+$person = isset($this->params['person']) ? $this->params['person'] : $this->params['deviser'];
+$this->registerJs("var deviser = ".Json::encode($person), yii\web\View::POS_HEAD, 'deviser-var-script');
 ?>
 
-<?php if ($deviser->isDraft()) { ?>
+<?php if ($person->isDraft()) { ?>
 	<?= DeviserMakeProfilePublic::widget() ?>
 <?php } ?>
 <div class="banner-deviser" ng-controller="deviserHeaderCtrl as deviserHeaderCtrl">
@@ -27,7 +27,7 @@ $this->registerJs("var deviser = ".Json::encode($deviser), yii\web\View::POS_HEA
 						<div class="avatar">
 							<img class="cover" ng-src="{{deviserHeaderCtrl.profile}}">
 						</div>
-						<?php if ($deviser->isDeviserEditable()) {?>
+						<?php if ($person->isPersonEditable()) {?>
 							<div class="edit-profile-btn">
 								<button class="btn btn-default btn-transparent btn-header" ng-click="deviserHeaderCtrl.editHeader()">Edit header</button>
 							</div>
@@ -45,8 +45,8 @@ $this->registerJs("var deviser = ".Json::encode($deviser), yii\web\View::POS_HEA
 						</div>
 					</div>
 				</div>
-				<?php if ($deviser->isDeviserEditable()) {?>
-					<a class="btn btn-default btn-green btn-add-work" href="<?= Url::to(["product/create", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id])?>">Add Work</a>
+				<?php if ($person->isPersonEditable()) {?>
+					<a class="btn btn-default btn-green btn-add-work" href="<?= Url::to(["product/create", "slug" => $person->slug, 'deviser_id' => $person->short_id])?>">Add Work</a>
 				<?php } ?>
 			</div>
 		</div>

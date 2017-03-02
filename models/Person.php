@@ -930,15 +930,12 @@ class Person extends CActiveRecord implements IdentityInterface
 	}
 
 	/**
-	 * Returns TRUE if the person is a deviser, and can be edited by the current user
+	 * Returns TRUE if the person can be edited by the current user
 	 *
 	 * @return bool
 	 */
-	public function isDeviserEditable()
+	public function isPersonEditable()
 	{
-		if (!$this->isDeviser()) {
-			return false;
-		}
 		if (Yii::$app->user->isGuest) {
 			return false;
 		}
@@ -952,25 +949,29 @@ class Person extends CActiveRecord implements IdentityInterface
 	}
 
 	/**
+	 * Returns TRUE if the person is a deviser, and can be edited by the current user
+	 *
+	 * @return bool
+	 */
+	public function isDeviserEditable()
+	{
+		if (!$this->isDeviser() || !$this->isPersonEditable()) {
+			return false;
+		}
+		return true;
+	}
+
+	/**
 	 * Returns TRUE if the person is an influencer, and can be edited by the current user
 	 *
 	 * @return bool
 	 */
 	public function isInfluencerEditable()
 	{
-		if (!$this->isInfluencer()) {
+		if (!$this->isInfluencer() || !$this->isPersonEditable()) {
 			return false;
 		}
-		if (Yii::$app->user->isGuest) {
-			return false;
-		}
-		if (Yii::$app->user->identity->isAdmin()) {
-			return true;
-		}
-		if ($this->isConnectedUser()) {
-			return true;
-		}
-		return false;
+		return true;
 	}
 
 	/**
