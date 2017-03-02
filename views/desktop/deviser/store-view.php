@@ -1,7 +1,7 @@
 <?php
 use app\assets\desktop\pub\StoreViewAsset;
-use app\components\DeviserHeader;
 use app\components\DeviserMenu;
+use app\components\PersonHeader;
 use app\helpers\Utils;
 use app\models\Category;
 use app\models\Person;
@@ -25,7 +25,7 @@ $this->params['deviser'] = $deviser;
 
 ?>
 
-<?= DeviserHeader::widget() ?>
+<?= PersonHeader::widget() ?>
 
 <div class="store">
 	<div class="container">

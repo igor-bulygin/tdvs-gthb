@@ -1,8 +1,8 @@
 <?php
 use app\assets\desktop\deviser\EditVideosAsset;
-use app\components\DeviserHeader;
 use app\components\DeviserMakeProfilePublic;
 use app\components\DeviserMenu;
+use app\components\PersonHeader;
 use app\models\Person;
 
 EditVideosAsset::register($this);
@@ -16,7 +16,7 @@ $this->params['deviser_links_target'] = 'edit_view';
 
 ?>
 
-	<?= DeviserHeader::widget() ?>
+	<?= PersonHeader::widget() ?>
 	<?php if ($deviser->isDraft()) { ?>
 		<?= DeviserMakeProfilePublic::widget() ?>
 	<?php } ?>

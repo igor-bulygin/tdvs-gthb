@@ -1,8 +1,8 @@
 <?php
 use app\assets\desktop\deviser\EditStoreAsset;
-use app\components\DeviserHeader;
 use app\components\DeviserMakeProfilePublic;
 use app\components\DeviserMenu;
+use app\components\PersonHeader;
 use app\helpers\Utils;
 use app\models\Category;
 use app\models\Person;
@@ -35,7 +35,7 @@ $this->params['deviser'] = $deviser;
 	<?php if ($deviser->isDraft()) { ?>
 		<?= DeviserMakeProfilePublic::widget() ?>
 	<?php } ?>
-	<?= DeviserHeader::widget() ?>
+	<?= PersonHeader::widget() ?>
 
 		<div class="store">
 			<div class="container">

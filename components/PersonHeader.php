@@ -2,18 +2,16 @@
 
 namespace app\components;
 
-use app\models\Category;
-use Yii;
-use yii\base\Widget;
 use app\helpers\Utils;
+use yii\base\Widget;
 
-class DeviserHeader extends Widget {
+class PersonHeader extends Widget {
 	/**
 	 * @inheritdoc
 	 */
 
 	public function run() {
-		return $this->render('DeviserHeader');
+		return $this->render('PersonHeader');
 	}
 
 	public function getViewPath() {

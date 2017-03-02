@@ -1,7 +1,7 @@
 <?php
 use app\assets\desktop\pub\LovedViewAsset;
-use app\components\DeviserHeader;
 use app\components\DeviserMenu;
+use app\components\PersonHeader;
 use app\helpers\Utils;
 use app\models\Person;
 
@@ -22,7 +22,7 @@ $this->params['deviser_links_target'] = 'public_view';
 
 ?>
 
-<?= DeviserHeader::widget() ?>
+<?= PersonHeader::widget() ?>
 
 <div class="store">
 	<div class="container">

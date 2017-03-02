@@ -1,11 +1,8 @@
 <?php
 namespace app\helpers;
 
-use Yii;
-use app\models\Lang;
-use yii\helpers\Json;
-use app\helpers\Utils;
 use app\models\Category;
+use Yii;
 
 class ModelUtils {
 
@@ -75,7 +72,7 @@ class ModelUtils {
 		return @$pinfo['name'] . ' ' . @implode(" ", @$pinfo['surnames']);
 	}
 
-	public static function getDeviserHeader($deviser, $urlify = true) {
+	public static function getPersonHeader($deviser, $urlify = true) {
 		$image = "";
 		$fallback = "deviser_header_placeholder.jpg";
 

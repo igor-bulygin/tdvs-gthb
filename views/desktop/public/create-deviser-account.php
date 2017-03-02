@@ -1,21 +1,8 @@
 <?php
-use app\assets\desktop\pub\PublicCommonAsset;
-use app\components\DeviserHeader;
-use app\components\DeviserMenu;
-use app\models\Invitation;
-use app\models\Person;
-use app\models\Product;
-use yii\web\View;
-use yii\helpers\Url;
-use app\models\Lang;
-use yii\helpers\Html;
-use yii\widgets\Pjax;
-use app\helpers\Utils;
-use yii\helpers\Json;
-use yii\widgets\ListView;
-use yii\widgets\ActiveForm;
-use app\assets\desktop\pub\Index2Asset;
 use app\assets\desktop\pub\CreateDeviserAsset;
+use app\models\Invitation;
+use yii\helpers\Json;
+use yii\helpers\Url;
 
 CreateDeviserAsset::register($this);
 

@@ -1,10 +1,9 @@
 <?php
-use app\helpers\Utils;
-use app\models\Person;
-use app\components\DeviserMakeProfilePublic;
 use app\assets\desktop\deviser\EditHeaderAsset;
-use yii\helpers\Url;
+use app\components\DeviserMakeProfilePublic;
+use app\models\Person;
 use yii\helpers\Json;
+use yii\helpers\Url;
 
 EditHeaderAsset::register($this);
 

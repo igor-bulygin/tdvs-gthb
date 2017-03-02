@@ -1,10 +1,10 @@
 <?php
-use yii\helpers\Json;
 use app\assets\desktop\deviser\EditFaqAsset;
-use app\components\DeviserHeader;
 use app\components\DeviserMakeProfilePublic;
 use app\components\DeviserMenu;
+use app\components\PersonHeader;
 use app\models\Person;
+use yii\helpers\Json;
 
 EditFaqAsset::register($this);
 
@@ -18,7 +18,7 @@ $this->registerJs("var deviser = ".Json::encode($deviser), yii\web\View::POS_HEA
 
 ?>
 
-	<?= DeviserHeader::widget() ?>
+	<?= PersonHeader::widget() ?>
 	<?php if ($deviser->isDraft()) { ?>
 		<?= DeviserMakeProfilePublic::widget() ?>
 	<?php } ?>

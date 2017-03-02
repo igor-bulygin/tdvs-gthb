@@ -1,9 +1,9 @@
 <?php
-use yii\helpers\Url;
 use app\assets\desktop\pub\PublicCommonAsset;
-use app\components\DeviserHeader;
 use app\components\DeviserMenu;
+use app\components\PersonHeader;
 use app\models\Person;
+use yii\helpers\Url;
 
 PublicCommonAsset::register($this);
 
@@ -59,7 +59,7 @@ foreach ($deviser->getAboutUrlImages() as $key => $urlImage) {
 
 ?>
 
-<?= DeviserHeader::widget() ?>
+<?= PersonHeader::widget() ?>
 
 <div class="store">
 	<div class="container">

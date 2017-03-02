@@ -734,7 +734,7 @@ class PublicController extends CController
 		$deviser['name'] = ModelUtils::getDeviserFullName($deviser);
 		$deviser['category'] = ModelUtils::getDeviserCategoriesNames($deviser)[0];
 		$deviser['img'] = ModelUtils::getDeviserAvatar($deviser);
-		$deviser['img_header'] = ModelUtils::getDeviserHeader($deviser);
+		$deviser['img_header'] = ModelUtils::getPersonHeader($deviser);
 
 		$tmp = Product::find()->select(["_id" => 0])->where(["deviser_id" => $deviser_id])->asArray()->all();
 
