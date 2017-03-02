@@ -13,7 +13,7 @@
 				method: 'PATCH'
 			}
 		});
-		var Upload = apiConfig.baseUrl + 'priv' + apiConfig.version + 'uploads';
+		this.Uploads = apiConfig.baseUrl + 'priv/' + apiConfig.version + 'uploads';
 
 		//methods
 		this.createDeviser = createDeviser;
