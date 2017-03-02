@@ -51,7 +51,7 @@ class DeviserController extends CController
 	{
 		$person = Person::findOneSerialized($deviser_id);
 
-		if (!$person) {
+		if (!$person || !$person->isDeviser()) {
 			throw new NotFoundHttpException();
 		}
 
@@ -100,7 +100,7 @@ class DeviserController extends CController
 		// get the category object
 		$person = Person::findOneSerialized($deviser_id);
 
-		if (!$person) {
+		if (!$person || !$person->isDeviser()) {
 			throw new NotFoundHttpException();
 		}
 
@@ -140,7 +140,7 @@ class DeviserController extends CController
 	{
 		$person = Person::findOneSerialized($deviser_id);
 
-		if (!$person) {
+		if (!$person || !$person->isDeviser()) {
 			throw new NotFoundHttpException();
 		}
 
@@ -162,7 +162,7 @@ class DeviserController extends CController
 	{
 		$person = Person::findOneSerialized($deviser_id);
 
-		if (!$person) {
+		if (!$person || !$person->isDeviser()) {
 			throw new NotFoundHttpException();
 		}
 
@@ -180,7 +180,7 @@ class DeviserController extends CController
 	{
 		$person = Person::findOneSerialized($deviser_id);
 
-		if (!$person) {
+		if (!$person || !$person->isDeviser()) {
 			throw new NotFoundHttpException();
 		}
 
@@ -204,7 +204,7 @@ class DeviserController extends CController
 		// get the category object
 		$person = Person::findOneSerialized($deviser_id);
 
-		if (!$person) {
+		if (!$person || !$person->isDeviser()) {
 			throw new NotFoundHttpException();
 		}
 
@@ -222,7 +222,7 @@ class DeviserController extends CController
 	{
 		$person = Person::findOneSerialized($deviser_id);
 
-		if (!$person) {
+		if (!$person || !$person->isDeviser()) {
 			throw new NotFoundHttpException();
 		}
 
@@ -246,7 +246,7 @@ class DeviserController extends CController
 		// get the category object
 		$person = Person::findOneSerialized($deviser_id);
 
-		if (!$person) {
+		if (!$person || !$person->isDeviser()) {
 			throw new NotFoundHttpException();
 		}
 
@@ -264,7 +264,7 @@ class DeviserController extends CController
 	{
 		$person = Person::findOneSerialized($deviser_id);
 
-		if (!$person) {
+		if (!$person || !$person->isDeviser()) {
 			throw new NotFoundHttpException();
 		}
 
@@ -288,7 +288,7 @@ class DeviserController extends CController
 		// get the category object
 		$person = Person::findOneSerialized($deviser_id);
 
-		if (!$person) {
+		if (!$person || !$person->isDeviser()) {
 			throw new NotFoundHttpException();
 		}
 
@@ -306,7 +306,7 @@ class DeviserController extends CController
 	{
 		$person = Person::findOneSerialized($deviser_id);
 
-		if (!$person) {
+		if (!$person || !$person->isDeviser()) {
 			throw new NotFoundHttpException();
 		}
 
@@ -330,7 +330,7 @@ class DeviserController extends CController
 	{
 		$person = Person::findOneSerialized($deviser_id);
 
-		if (!$person) {
+		if (!$person || !$person->isDeviser()) {
 			throw new NotFoundHttpException();
 		}
 
@@ -354,7 +354,7 @@ class DeviserController extends CController
 	{
 		$person = Person::findOneSerialized($deviser_id);
 
-		if (!$person) {
+		if (!$person || !$person->isDeviser()) {
 			throw new NotFoundHttpException();
 		}
 

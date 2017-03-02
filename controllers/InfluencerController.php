@@ -41,7 +41,7 @@ class InfluencerController extends CController
 	{
 		$person = Person::findOneSerialized($person_id);
 
-		if (!$person) {
+		if (!$person || !$person->isInfluencer()) {
 			throw new NotFoundHttpException();
 		}
 
@@ -63,7 +63,7 @@ class InfluencerController extends CController
 	{
 		$person = Person::findOneSerialized($person_id);
 
-		if (!$person) {
+		if (!$person || !$person->isInfluencer()) {
 			throw new NotFoundHttpException();
 		}
 
@@ -81,7 +81,7 @@ class InfluencerController extends CController
 	{
 		$person = Person::findOneSerialized($person_id);
 
-		if (!$person) {
+		if (!$person || !$person->isInfluencer()) {
 			throw new NotFoundHttpException();
 		}
 
@@ -105,7 +105,7 @@ class InfluencerController extends CController
 		// get the category object
 		$person = Person::findOneSerialized($person_id);
 
-		if (!$person) {
+		if (!$person || !$person->isInfluencer()) {
 			throw new NotFoundHttpException();
 		}
 
@@ -123,7 +123,7 @@ class InfluencerController extends CController
 	{
 		$person = Person::findOneSerialized($person_id);
 
-		if (!$person) {
+		if (!$person || !$person->isInfluencer()) {
 			throw new NotFoundHttpException();
 		}
 
@@ -147,7 +147,7 @@ class InfluencerController extends CController
 		// get the category object
 		$person = Person::findOneSerialized($person_id);
 
-		if (!$person) {
+		if (!$person || !$person->isInfluencer()) {
 			throw new NotFoundHttpException();
 		}
 
@@ -165,7 +165,7 @@ class InfluencerController extends CController
 	{
 		$person = Person::findOneSerialized($person_id);
 
-		if (!$person) {
+		if (!$person || !$person->isInfluencer()) {
 			throw new NotFoundHttpException();
 		}
 
@@ -189,7 +189,7 @@ class InfluencerController extends CController
 	{
 		$person = Person::findOneSerialized($person_id);
 
-		if (!$person) {
+		if (!$person || !$person->isInfluencer()) {
 			throw new NotFoundHttpException();
 		}
 
@@ -213,7 +213,7 @@ class InfluencerController extends CController
 	{
 		$person = Person::findOneSerialized($person_id);
 
-		if (!$person) {
+		if (!$person || !$person->isInfluencer()) {
 			throw new NotFoundHttpException();
 		}
 
