@@ -25,7 +25,6 @@ editProductAsset::register($this);
 /** @var PersonVideo $video */
 
 $this->title = $person->getBrandName() . ' - Todevise';
-$this->params['person'] = $person;
 $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD, 'person-var-script');
 
 ?>
