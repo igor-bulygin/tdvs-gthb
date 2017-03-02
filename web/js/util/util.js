@@ -80,19 +80,19 @@
 
 		function parseImagesUrl(images, url) {
 			var parsed_images = [];
-			for (var i = 0; i < images.length; i++) {
+			images.map(function(element, index) {
 				var name;
-				if(images[i].name && images[i].name !== null && images[i].name !== undefined) {
-					name = images[i].name;
-				} else {
-					name = images[i];
+				if(element.name && element.name !== null && element.name !== undefined)
+					name = element.name
+				else {
+					name = element;
 				}
-				parsed_images[i] = {
-					pos: i,
+				parsed_images.push({
+					pos: index,
 					url: currentHost() + url + name,
-					filename: images[i]
-				};
-			}
+					filename: element
+				})
+			})
 			return parsed_images;
 		}
 
@@ -120,10 +120,10 @@
 		}
 
 		function returnPathFromCategory(categories, id) {
-			for(var i = 0; i < categories.length; i++) {
-				if(categories[i].id === id)
-					return categories[i].path;
-			}
+			var category = categories.find(function(element) {
+				return element.id === id
+			});
+			return category.path;
 		}
 
 		function setLocalStorage(key, value) {
