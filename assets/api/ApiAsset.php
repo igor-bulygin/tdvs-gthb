@@ -14,7 +14,6 @@ class ApiAsset extends AssetBundle {
 		'js/api/services.js',
 		'js/api/personDataService.js',
 		'js/api/invitationDataService.js',
-		'js/api/deviserDataService.js',
 		'js/api/productDataService.js',
 		'js/api/languageDataService.js',
 		'js/api/sizechartDataService.js',

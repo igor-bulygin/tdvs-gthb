@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(deviserDataService, personDataService, deviserEvents, languageDataService, UtilService, Upload, $uibModal, locationDataService, $scope, $location) {
+	function controller(personDataService, deviserEvents, languageDataService, UtilService, Upload, $uibModal, locationDataService, $scope, $location) {
 		var vm = this;
 		vm.showCities = false;
 		vm.limit_text_biography = 140;
