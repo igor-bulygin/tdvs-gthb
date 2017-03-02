@@ -46,12 +46,18 @@ class PersonSettings extends EmbedModel
 	public function rules()
 	{
 		return [
-				[[
-					'bank_info',
-					'stripe_info',
-					], 'safe', 'on' => [Person::SCENARIO_DEVISER_CREATE_DRAFT, Person::SCENARIO_DEVISER_UPDATE_DRAFT, Person::SCENARIO_DEVISER_UPDATE_PROFILE, Person::SCENARIO_INFLUENCER_CREATE_DRAFT]],
-				['bankInfoMapping', 'app\validators\EmbedDocValidator'], // to apply rules
-				['stripeInfoMapping', 'app\validators\EmbedDocValidator'], // to apply rules
+			[
+				$this-$this->attributes(),
+				'safe',
+				'on' => [
+					Person::SCENARIO_DEVISER_CREATE_DRAFT,
+					Person::SCENARIO_DEVISER_UPDATE_DRAFT,
+					Person::SCENARIO_DEVISER_UPDATE_PROFILE,
+					Person::SCENARIO_INFLUENCER_CREATE_DRAFT,
+				]
+			],
+			['bankInfoMapping', 'app\validators\EmbedDocValidator'], // to apply rules
+			['stripeInfoMapping', 'app\validators\EmbedDocValidator'], // to apply rules
 		];
 	}
 

@@ -1,7 +1,7 @@
 <?php
 use app\assets\desktop\deviser\EditPressAsset;
-use app\components\DeviserMakeProfilePublic;
 use app\components\DeviserMenu;
+use app\components\MakeProfilePublic;
 use app\components\PersonHeader;
 use app\models\Person;
 use yii\helpers\Json;
@@ -21,7 +21,7 @@ $this->params['deviser_links_target'] = 'edit_view';
 
 	<?= PersonHeader::widget() ?>
 	<?php if ($person->isDraft()) { ?>
-		<?= DeviserMakeProfilePublic::widget() ?>
+		<?= MakeProfilePublic::widget() ?>
 	<?php } ?>
 		<?php $this->registerJs("var _deviser = " . Json::encode($person) . ";", View::POS_HEAD); ?>
 

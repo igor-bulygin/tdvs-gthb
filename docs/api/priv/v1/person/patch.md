@@ -16,7 +16,6 @@ Example about how to call to Web Service to update Person profile
 * `:personId`: Id of the person that want to upadte
   
 **Request body**: 
-* `scenario`: available values ["deviser-update-profile"]
 * `categories`: [] array with category ids (["f0cco", "1234"]) 
 * `text_biography`: multi-language field with biographies in different languages ({"en-US": "my biography", "es-ES": "mi biografía"}) 
 * `text_short_description`: multi-language field with a short description in different languages ({"en-US": "my description", "es-ES": "mi descripcion"}) 
@@ -54,7 +53,7 @@ Example about how to call to Web Service to update Person profile
  * `answer`: multi-language field with the answer ({"en-US": "my answer", "es-ES": "mi respuesta"})
 * `account_state`: available values ["active"]
 
-All attributes are required or optional, based on account_state of the Deviser.
+All attributes are required or optional, based on account_state and type of person
  
 * You can change any value when the account is in "draft" mode
 * You must have some of them filled when you want to change the state to "active", or you want to update an "active" profile.

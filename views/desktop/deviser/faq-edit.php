@@ -1,7 +1,7 @@
 <?php
 use app\assets\desktop\deviser\EditFaqAsset;
-use app\components\DeviserMakeProfilePublic;
 use app\components\DeviserMenu;
+use app\components\MakeProfilePublic;
 use app\components\PersonHeader;
 use app\models\Person;
 use yii\helpers\Json;
@@ -21,7 +21,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 
 	<?= PersonHeader::widget() ?>
 	<?php if ($person->isDraft()) { ?>
-		<?= DeviserMakeProfilePublic::widget() ?>
+		<?= MakeProfilePublic::widget() ?>
 	<?php } ?>
 
 <div class="store">

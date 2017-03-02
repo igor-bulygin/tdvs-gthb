@@ -1,7 +1,7 @@
 <?php
 use app\assets\desktop\deviser\EditStoreAsset;
-use app\components\DeviserMakeProfilePublic;
 use app\components\DeviserMenu;
+use app\components\MakeProfilePublic;
 use app\components\PersonHeader;
 use app\helpers\Utils;
 use app\models\Category;
@@ -34,7 +34,7 @@ $this->params['deviser_menu_categories'] = $categories;
 		</span>
 	</div>
 	<?php if ($person->isDraft()) { ?>
-		<?= DeviserMakeProfilePublic::widget() ?>
+		<?= MakeProfilePublic::widget() ?>
 	<?php } ?>
 	<?= PersonHeader::widget() ?>
 

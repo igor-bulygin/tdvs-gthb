@@ -1,7 +1,7 @@
 <?php
 use app\assets\desktop\deviser\EditVideosAsset;
-use app\components\DeviserMakeProfilePublic;
 use app\components\DeviserMenu;
+use app\components\MakeProfilePublic;
 use app\components\PersonHeader;
 use app\models\Person;
 
@@ -19,7 +19,7 @@ $this->params['deviser_links_target'] = 'edit_view';
 
 	<?= PersonHeader::widget() ?>
 	<?php if ($person->isDraft()) { ?>
-		<?= DeviserMakeProfilePublic::widget() ?>
+		<?= MakeProfilePublic::widget() ?>
 	<?php } ?>
 
 		<div class="store">

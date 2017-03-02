@@ -1,8 +1,4 @@
 <?php
-use app\components\assets\cropAsset;
-use app\helpers\Utils;
-use app\models\Person;
-use yii\helpers\Url;
 use app\assets\desktop\deviser\MakeProfilePublicAsset;
 
 MakeProfilePublicAsset::register($this)

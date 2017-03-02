@@ -2,18 +2,16 @@
 
 namespace app\components;
 
-use app\models\Category;
-use Yii;
-use yii\base\Widget;
 use app\helpers\Utils;
+use yii\base\Widget;
 
-class DeviserMakeProfilePublic extends Widget {
+class MakeProfilePublic extends Widget {
 	/**
 	 * @inheritdoc
 	 */
 
 	public function run() {
-		return $this->render('DeviserMakeProfilePublic');
+		return $this->render('MakeProfilePublic');
 	}
 
 	public function getViewPath() {

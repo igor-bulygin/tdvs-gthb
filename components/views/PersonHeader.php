@@ -1,6 +1,6 @@
 <?php
 use app\assets\desktop\deviser\EditHeaderAsset;
-use app\components\DeviserMakeProfilePublic;
+use app\components\MakeProfilePublic;
 use app\models\Person;
 use yii\helpers\Json;
 use yii\helpers\Url;
@@ -14,7 +14,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 ?>
 
 <?php if ($person->isDraft()) { ?>
-	<?= DeviserMakeProfilePublic::widget() ?>
+	<?= MakeProfilePublic::widget() ?>
 <?php } ?>
 <div class="banner-deviser" ng-controller="personHeaderCtrl as personHeaderCtrl">
 	<div class="container pad-about" ng-if="!personHeaderCtrl.editingHeader" ng-cloak>

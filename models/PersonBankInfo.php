@@ -44,7 +44,24 @@ class PersonBankInfo extends EmbedModel
 	public function rules()
 	{
 		return [
-			[['location', 'bank_name', 'institution_number', 'transit_number', 'account_number', 'iban', 'swift_bic', 'routing_number'], 'safe', 'on' => [Person::SCENARIO_DEVISER_CREATE_DRAFT, Person::SCENARIO_DEVISER_UPDATE_DRAFT, Person::SCENARIO_DEVISER_UPDATE_PROFILE, Person::SCENARIO_INFLUENCER_CREATE_DRAFT]],
+			[
+				[
+					'location',
+					'bank_name',
+					'institution_number',
+					'transit_number',
+					'account_number',
+					'iban',
+					'swift_bic',
+					'routing_number'
+				],
+				'safe',
+				'on' => [
+					Person::SCENARIO_DEVISER_CREATE_DRAFT,
+					Person::SCENARIO_DEVISER_UPDATE_DRAFT,
+					Person::SCENARIO_DEVISER_UPDATE_PROFILE,
+				]
+			],
 			['institution_number', 'validateInstitutionNumber'],
 			['transit_number', 'validateTransitNumber'],
 			['account_number', 'validateAccountNumber'],

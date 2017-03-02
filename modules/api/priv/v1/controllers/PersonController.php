@@ -4,6 +4,7 @@ namespace app\modules\api\priv\v1\controllers;
 
 use app\models\Person;
 use Yii;
+use yii\base\Exception;
 use yii\web\BadRequestHttpException;
 
 class PersonController extends AppPrivateController
@@ -54,15 +55,27 @@ class PersonController extends AppPrivateController
 	 */
 	private function getScenarioFromRequest(Person $person)
 	{
-		$account_state = Yii::$app->request->post('account_state', Person::SCENARIO_DEVISER_UPDATE_PROFILE);
+		$account_state = Yii::$app->request->post('account_state', Person::ACCOUNT_STATE_ACTIVE);
 
 		// can't change from "active" to "draft"
 		if ($person->account_state == Person::ACCOUNT_STATE_ACTIVE || $account_state == Person::ACCOUNT_STATE_ACTIVE) {
 			// it is updating a active profile (or a profile that want to be active)
-			$scenario = Person::SCENARIO_DEVISER_UPDATE_PROFILE;
+			if ($person->isDeviser()) {
+				$scenario = Person::SCENARIO_DEVISER_UPDATE_PROFILE;
+			} elseif ($person->isInfluencer()) {
+				$scenario = Person::SCENARIO_INFLUENCER_UPDATE_PROFILE;
+			} else {
+				throw new Exception("Unknown person type");
+			}
 		} else {
 			// it is updating a draft profile
-			$scenario = Person::SCENARIO_DEVISER_UPDATE_DRAFT;
+			if ($person->isDeviser()) {
+				$scenario = Person::SCENARIO_DEVISER_UPDATE_DRAFT;
+			} elseif ($person->isInfluencer()) {
+				$scenario = Person::SCENARIO_INFLUENCER_UPDATE_DRAFT;
+			} else {
+				throw new Exception("Unknown person type");
+			}
 		}
 
 		return $scenario;

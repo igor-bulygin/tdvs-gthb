@@ -66,11 +66,27 @@ class PersonMedia extends EmbedModel
 	public function rules()
 	{
 		return [
-			[['header', 'header_cropped', 'profile', 'profile_cropped', 'photos'], 'required', 'on' => Person::SCENARIO_DEVISER_UPDATE_PROFILE],
-			[['header', 'header_cropped', 'profile', 'profile_cropped'], 'validateDeviserMediaFileExist', 'on' => Person::SCENARIO_DEVISER_UPDATE_PROFILE],
+			[
+				['header', 'header_cropped', 'profile', 'profile_cropped', 'photos'],
+				'safe',
+				'on' => [
+					Person::SCENARIO_DEVISER_CREATE_DRAFT,
+					Person::SCENARIO_DEVISER_UPDATE_DRAFT,
+					Person::SCENARIO_INFLUENCER_CREATE_DRAFT,
+				]
+			],
+			[
+				['header', 'header_cropped', 'profile', 'profile_cropped', 'photos'],
+				'required',
+				'on' => Person::SCENARIO_DEVISER_UPDATE_PROFILE
+			],
+			[
+				['header', 'header_cropped', 'profile', 'profile_cropped'],
+				'validateDeviserMediaFileExist',
+				'on' => Person::SCENARIO_DEVISER_UPDATE_PROFILE
+			],
 			[['photos'], 'validateDeviserPhotosExists', 'on' => Person::SCENARIO_DEVISER_UPDATE_PROFILE],
 			[['photos'], 'validateAmountPhotos', 'on' => Person::SCENARIO_DEVISER_UPDATE_PROFILE],
-			[['header', 'header_cropped', 'profile', 'profile_cropped', 'photos'], 'safe', 'on' => [Person::SCENARIO_DEVISER_UPDATE_DRAFT, Person::SCENARIO_DEVISER_CREATE_DRAFT, Person::SCENARIO_INFLUENCER_CREATE_DRAFT]],
 		];
 	}
 

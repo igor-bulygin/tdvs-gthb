@@ -48,13 +48,11 @@ class Person extends CActiveRecord implements IdentityInterface
 
 	const SCENARIO_DEVISER_CREATE_DRAFT = 'deviser-create-draft';
 	const SCENARIO_DEVISER_UPDATE_DRAFT = 'deviser-update-draft';
-//	const SCENARIO_DEVISER_PUBLISH_PROFILE = 'deviser-publish-profile';
 	const SCENARIO_DEVISER_UPDATE_PROFILE = 'deviser-update-profile';
-//	const SCENARIO_DEVISER_PRESS_UPDATE = 'deviser-press-update';
-//	const SCENARIO_DEVISER_VIDEOS_UPDATE = 'deviser-videos-update';
-//	const SCENARIO_DEVISER_FAQ_UPDATE = 'deviser-faq-update';
 
 	const SCENARIO_INFLUENCER_CREATE_DRAFT = 'influencer-create-draft';
+	const SCENARIO_INFLUENCER_UPDATE_DRAFT = 'influencer-update-draft';
+	const SCENARIO_INFLUENCER_UPDATE_PROFILE = 'influencer-update-profile';
 
 	const SCENARIO_TREND_SETTER_PROFILE_UPDATE = 'trend-setter-profile-update';
 
