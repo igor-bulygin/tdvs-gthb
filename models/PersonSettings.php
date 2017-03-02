@@ -47,7 +47,7 @@ class PersonSettings extends EmbedModel
 	{
 		return [
 			[
-				$this-$this->attributes(),
+				$this->attributes(),
 				'safe',
 				'on' => [
 					Person::SCENARIO_DEVISER_CREATE_DRAFT,
