@@ -35,8 +35,8 @@ $this->title = $deviser->getBrandName() . ' - Todevise';
 		<div class="avatar">
 			<img ng-src="{{editProductCtrl.profile}}">
 		</div>
-		<div class="text-center" ng-if="!editProductCtrl.errors"><h4 class="title">Edit work</h4></div>
-		<div class="text-center" ng-if="editProductCtrl.errors"><p>Please complete all the required fields before publishing your work.</p></div>
+		<div class="text-center" ng-if="!editProductCtrl.errors" ng-cloak><h4 class="title">Edit work</h4></div>
+		<div class="text-center" ng-if="editProductCtrl.errors" ng-cloak><p>Please complete all the required fields before publishing your work.</p></div>
 		<div class="btns-group">
 			<button class="btn btn-transparent" ng-click="editProductCtrl.save('product_state_draft')" ng-disabled="editProductCtrl.disable_save_buttons">Save progress</button>
 			<button class="btn btn-default btn-green" ng-click="editProductCtrl.save('product_state_active')" ng-disabled="editProductCtrl.disable_save_buttons">Publish work</button>

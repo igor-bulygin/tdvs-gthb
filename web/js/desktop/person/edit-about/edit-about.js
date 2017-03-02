@@ -98,7 +98,7 @@
 					file: file
 				}
 				Upload.upload({
-					url: deviserDataService.Uploads,
+					url: personDataService.Uploads,
 					data: data
 				}).then(function (dataUpload) {
 					//if uplading crop, replace it
@@ -146,7 +146,7 @@
 				file: file
 			}
 			Upload.upload({
-				url: deviserDataService.Uploads,
+				url: personDataService.Uploads,
 				data: data
 			}).then(function (dataCV) {
 				vm.person.curriculum = dataCV.data.filename;
