@@ -14,38 +14,40 @@
 		vm.canceled = canceled;
 		vm.done = done;
 
-		function getDeviser() {
+		function init() {
+			getPerson();
+		}
+
+		init();
+
+		function getPerson() {
 			function onGetLanguagesSuccess(data) {
 				vm.languages = data.items;
-				if (!vm.deviser.faq)
-					vm.deviser.faq = [];
+				if (!vm.person.faq)
+					vm.person.faq = [];
 				else {
-					vm.deviser.faq.forEach(function (element) {
+					vm.person.faq.forEach(function (element) {
 						parseQuestion(element);
 					})
 				}
 			}
 
 			function onGetProfileSuccess(data) {
-				vm.deviser = angular.copy(data);
-				vm.deviser_original = angular.copy(data);
+				vm.person = angular.copy(data);
+				vm.person_original = angular.copy(data);
 				//we need languages before parse questions
 				languageDataService.getLanguages(onGetLanguagesSuccess, UtilService.onError);
 			}
 
 			personDataService.getProfile({
-				personId: deviser.short_id
+				personId: person.short_id
 			}, onGetProfileSuccess, UtilService.onError);
 		}
 
-		function init() {
-			getDeviser();
-		}
 
-		init();
 
 		function addQuestion() {
-			vm.deviser.faq.unshift({
+			vm.person.faq.unshift({
 				question: {},
 				answer: {},
 				completedLanguages: [],
@@ -54,7 +56,7 @@
 		}
 
 		function deleteQuestion(index) {
-			vm.deviser.faq.splice(index, 1);
+			vm.person.faq.splice(index, 1);
 		}
 
 		function parseQuestion(question) {
@@ -95,48 +97,28 @@
 				});
 			}
 
-			vm.deviser.faq.map(parseFaqs);
+			vm.person.faq.map(parseFaqs);
 
 			personDataService.updateProfile(data, {
-				personId: deviser.short_id
+				personId: person.short_id
 			}, onUpdateProfileSuccess, UtilService.onError);
-
-/*			var patch = new deviserDataService.Profile;
-			patch.scenario = 'deviser-update-profile';
-			patch.faq = [];
-			patch.deviser_id = vm.deviser.id;
-			vm.deviser.faq.forEach(function (element) {
-				parseQuestion(element);
-				for(var key in element.answer) {
-					element.answer[key] = element.answer[key].replace(/<[^\/>][^>]*><\/[^>]+>/gim, "");
-				}
-				patch.faq.push({
-					question: angular.copy(element.question),
-					answer: angular.copy(element.answer)
-				});
-			});
-			patch.$update().then(function(dataFaq) {
-				$window.location.href = '/deviser/' + dataFaq.slug + '/' + dataFaq.id + '/faq';
-			}, function (err) {
-				toastr.error(err);
-			});*/
 		}
 
 		function dragStart(index) {
-			dragndropService.dragStart(index, vm.deviser.faq);
+			dragndropService.dragStart(index, vm.person.faq);
 		}
 
 		function dragOver(index) {
-			vm.deviser.faq = dragndropService.dragOver(index, vm.deviser.faq);
+			vm.person.faq = dragndropService.dragOver(index, vm.person.faq);
 			return true;
 		}
 
 		function moved(index) {
-			vm.deviser.faq = dragndropService.moved(index);
+			vm.person.faq = dragndropService.moved(index);
 		}
 
 		function canceled() {
-			vm.deviser.faq = dragndropService.canceled();
+			vm.person.faq = dragndropService.canceled();
 		}
 
 	}

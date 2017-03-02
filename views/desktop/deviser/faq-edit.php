@@ -14,7 +14,7 @@ $this->title = 'About ' . $deviser->personalInfoMapping->getBrandName() . ' - To
 $this->params['deviser'] = $deviser;
 $this->params['deviser_menu_active_option'] = 'faq';
 $this->params['deviser_links_target'] = 'edit_view';
-$this->registerJs("var deviser = ".Json::encode($deviser), yii\web\View::POS_HEAD, 'deviser-var-script');
+$this->registerJs("var person = ".Json::encode($deviser), yii\web\View::POS_HEAD, 'person-var-script');
 
 ?>
 
@@ -32,17 +32,17 @@ $this->registerJs("var deviser = ".Json::encode($deviser), yii\web\View::POS_HEA
 			<div class="col-md-10" ng-controller="editFaqCtrl as editFaqCtrl">
 				<div class="faq-wrapper faq-edit-list">
 					<!-- <div class="section-title">FAQ</div> -->
-					<div ng-if="editFaqCtrl.deviser.faq.length>0">
+					<div ng-if="editFaqCtrl.person.faq.length>0">
 						<a class="red-link-btn" href="#" ng-click="editFaqCtrl.done()">I'm done editing</a></div>
-					<div class="edit-faq-wrapper" ng-cloak ng-if="editFaqCtrl.deviser.faq.length > 0">
-						<div class="plus-add-wrapper" ng-if="editFaqCtrl.deviser.faq.length > 0" ng-click="editFaqCtrl.addQuestion()">
+					<div class="edit-faq-wrapper" ng-cloak ng-if="editFaqCtrl.person.faq.length > 0">
+						<div class="plus-add-wrapper" ng-if="editFaqCtrl.person.faq.length > 0" ng-click="editFaqCtrl.addQuestion()">
 							<div class="plus-add">
 								<span>+</span>
 							</div>
 							<div class="text">ADD QUESTION</div>
 						</div>
-						<div dnd-list="editFaqCtrl.deviser.faq" dnd-dragover="editFaqCtrl.dragOver(index)">
-							<div class="delete-options-wrapper" ng-repeat="question in editFaqCtrl.deviser.faq track by $index" style="cursor:move;" dnd-draggable="question" dnd-effect-allowed="move" dnd-dragstart="editFaqCtrl.dragStart($index)" dnd-canceled="editFaqCtrl.canceled()" dnd-moved="editFaqCtrl.moved($index)">
+						<div dnd-list="editFaqCtrl.person.faq" dnd-dragover="editFaqCtrl.dragOver(index)">
+							<div class="delete-options-wrapper" ng-repeat="question in editFaqCtrl.person.faq track by $index" style="cursor:move;" dnd-draggable="question" dnd-effect-allowed="move" dnd-dragstart="editFaqCtrl.dragStart($index)" dnd-canceled="editFaqCtrl.canceled()" dnd-moved="editFaqCtrl.moved($index)">
 								<a class="delete-link pull-right" href="#" ng-click="editFaqCtrl.deleteQuestion($index)">Delete question</a>
 								<div class="edit-faq-panel">
 									<div class="faq-language-menu">
@@ -75,7 +75,7 @@ $this->registerJs("var deviser = ".Json::encode($deviser), yii\web\View::POS_HEA
 							</div>
 						</div>
 					</div>
-					<div class="faq-edit-empty" ng-if="editFaqCtrl.deviser.faq.length === 0" ng-cloak>
+					<div class="faq-edit-empty" ng-if="editFaqCtrl.person.faq.length === 0" ng-cloak>
 						<img class="sad-face" src="/imgs/sad-face.svg">
 						<p>You haven’t written any FAQs.
 							<br/> Start now by clicking the <b>ADD QUESTION</b> button.</p>

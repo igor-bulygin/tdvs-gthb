@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(deviserDataService, deviserEvents, languageDataService, UtilService, Upload, $uibModal, locationDataService, $scope, $location) {
+	function controller(deviserDataService, personDataService, deviserEvents, languageDataService, UtilService, Upload, $uibModal, locationDataService, $scope, $location) {
 		var vm = this;
 		vm.showCities = false;
 		vm.limit_text_biography = 140;
@@ -17,21 +17,21 @@
 		init();
 
 		function init() {
-			vm.editingHeader = deviser.account_state === 'draft' ? true : false;
-			getDeviser();
+			vm.editingHeader = person.account_state === 'draft' ? true : false;
+			getPerson();
 			getLanguages();
 		}
 
-		function getDeviser() {
-			deviserDataService.Profile.get({
-				deviser_id: deviser.short_id
-			}).$promise.then(function (dataDeviser) {
-				vm.deviser = dataDeviser;
-				vm.deviser_original = angular.copy(dataDeviser);
-				parseDeviserInfo(vm.deviser);
-			}, function(err) {
-				UtilService.onError(err);
-			})
+		function getPerson() {
+			function onGetProfileSuccess(data) {
+				vm.person = angular.copy(data);
+				vm.person_original = angular.copy(data);
+				parsePersonInfo(vm.person);
+			}
+
+			personDataService.getProfile({
+				personId: person.short_id,
+			}, onGetProfileSuccess, UtilService.onError);
 		}
 
 		function getLanguages() {
@@ -42,27 +42,27 @@
 			languageDataService.getLanguages(onGetLanguagesSuccess, UtilService.onError);
 		}
 
-		function parseDeviserInfo(deviser){
+		function parsePersonInfo(person){
 			function setHostImage(image){
-				return currentHost() + deviser.url_images + image;
+				return currentHost() + person.url_images + image;
 			}
 			//set name
-			if(!deviser.personal_info.brand_name)
-				deviser.personal_info.brand_name = angular.copy(deviser.personal_info.name);
+			if(!person.personal_info.brand_name)
+				person.personal_info.brand_name = angular.copy(person.personal_info.name);
 			//set status
-			vm.isProfilePublic = (deviser.account_state === 'draft' ? false: true);
+			vm.isProfilePublic = (person.account_state === 'draft' ? false: true);
 			//set city
-			if(deviser.personal_info.city && deviser.personal_info.country)
-				vm.city = deviser.personal_info.city + ', ' + deviser.personal_info.country;
+			if(person.personal_info.city && person.personal_info.country)
+				vm.city = person.personal_info.city + ', ' + person.personal_info.country;
 			//set images
-			if(deviser.media.header_cropped)
-				vm.header = setHostImage(deviser.media.header_cropped);
-			if(deviser.media.profile_cropped)
-				vm.profile = setHostImage(deviser.media.profile_cropped);
-			if(deviser.media.header)
-				vm.header_original = setHostImage(deviser.media.header);
-			if(deviser.media.profile)
-				vm.profile_original = setHostImage(deviser.media.profile);
+			if(person.media.header_cropped)
+				vm.header = setHostImage(person.media.header_cropped);
+			if(person.media.profile_cropped)
+				vm.profile = setHostImage(person.media.profile_cropped);
+			if(person.media.header)
+				vm.header_original = setHostImage(person.media.header);
+			if(person.media.profile)
+				vm.profile_original = setHostImage(person.media.profile);
 		}
 
 		function searchPlace(place) {
@@ -80,15 +80,15 @@
 		}
 
 		function selectCity(city) {
-			vm.deviser.personal_info.city = city.city;
-			vm.deviser.personal_info.country = city.country_code;
-			vm.city = vm.deviser.personal_info.city + ', ' + vm.deviser.personal_info.country;
+			vm.person.personal_info.city = city.city;
+			vm.person.personal_info.country = city.country_code;
+			vm.city = vm.person.personal_info.city + ', ' + vm.person.personal_info.country;
 			vm.showCities = false;
 		}
 
 		function upload(image, type) {
 			var data = {
-				deviser_id: vm.deviser.id,
+				person_id: vm.person.id,
 			}
 			var wait_for_cropped = false;
 			switch (type) {
@@ -112,10 +112,10 @@
 				break;
 			}
 			Upload.upload({
-				url: deviserDataService.Uploads,
+				url: personDataService.Uploads,
 				data: data
 			}).then(function (dataUpload) {
-				//when uploading original, wait for cropped to save data in the deviser model
+				//when uploading original, wait for cropped to save data in the person model
 				if(wait_for_cropped) {
 					vm.media_upload_helper = {
 						type: type,
@@ -128,8 +128,8 @@
 						openCropModal(vm.new_profile, 'profile_cropped');
 				}
 				else {
-					vm.deviser.media[type] = dataUpload.data.filename;
-					vm.deviser.media[vm.media_upload_helper.type] = vm.media_upload_helper.filename;
+					vm.person.media[type] = dataUpload.data.filename;
+					vm.person.media[vm.media_upload_helper.type] = vm.media_upload_helper.filename;
 					delete vm.media_upload_helper;
 				}
 			});
@@ -140,28 +140,22 @@
 		}
 
 		function saveHeader() {
-			var patch = new deviserDataService.Profile;
-			//patch.scenario = "deviser-update-profile";
-			patch.deviser_id = vm.deviser.id;
-			for(var key in vm.deviser) {
-				if(key!=='account_state')
-					patch[key] = angular.copy(vm.deviser[key]);
-				
-			}
-			patch.$update().then(function(updateData) {
-				vm.deviser = angular.copy(updateData);
-				vm.deviser_original = angular.copy(updateData)
-				parseDeviserInfo(vm.deviser)
+			function onSaveHeaderSuccess(data) {
+				vm.person = angular.copy(data);
+				vm.person_original = angular.copy(data);
+				parsePersonInfo(vm.person);
 				vm.editingHeader = false;
-			}, function(err) {
-				UtilService.onError(err);
-			});
+			}
+
+			personDataService.updateProfile(vm.person, {
+				personId: person.short_id
+			}, onSaveHeaderSuccess, UtilService.onError);
 		}
 
 		function cancelEdit() {
 			vm.editingHeader = false;
-			parseDeviserInfo(vm.deviser_original);
-			vm.deviser = angular.copy(vm.deviser_original);
+			parsePersonInfo(vm.person_original);
+			vm.person = angular.copy(vm.person_original);
 		}
 
 		//modals
@@ -197,23 +191,23 @@
 		}
 
 		//watches
-		$scope.$watch('deviserHeaderCtrl.new_header', function (newValue, oldValue) {
+		$scope.$watch('personHeaderCtrl.new_header', function (newValue, oldValue) {
 			if (newValue) {
 				//upload original
 				upload(newValue, "header");
 			}
 		});
 
-		$scope.$watch('deviserHeaderCtrl.new_profile', function (newValue, oldValue) {
+		$scope.$watch('personHeaderCtrl.new_profile', function (newValue, oldValue) {
 			if (newValue) {
 				//upload original
 				upload(newValue, "profile");
 			}
 		});
 
-		$scope.$watch('deviserHeaderCtrl.deviser.text_short_description[deviserHeaderCtrl.description_language]', function (newValue, oldValue) {
+		$scope.$watch('personHeaderCtrl.person.text_short_description[personHeaderCtrl.description_language]', function (newValue, oldValue) {
 			if (newValue && newValue.length > vm.limit_text_biography)
-				vm.deviser.text_short_description[vm.description_language] = oldValue;
+				vm.person.text_short_description[vm.description_language] = oldValue;
 		});
 
 		$scope.$on(deviserEvents.make_profile_public_errors, function(event, args) {
@@ -234,5 +228,5 @@
 
 	angular
 		.module('todevise')
-		.controller('deviserHeaderCtrl', controller)
+		.controller('personHeaderCtrl', controller)
 }());
