@@ -8,6 +8,7 @@ use app\models\Category;
 use app\models\Person;
 use app\models\Product;
 use yii\helpers\Url;
+use yii\helpers\Json;
 
 EditStoreAsset::register($this);
 
@@ -24,9 +25,11 @@ $this->params['deviser_menu_active_option'] = 'store';
 $this->params['deviser_links_target'] = 'edit_view';
 $this->params['deviser_menu_categories'] = $categories;
 
+$this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD, 'person-var-script');
+
 ?>
 <div ng-controller="editStoreCtrl as editStoreCtrl">
-	<div class="success-bar" ng-if="editStoreCtrl.view_published_topbar" style="background: #b8e986; height: 50px;">
+	<div class="success-bar" ng-if="editStoreCtrl.view_published_topbar" style="background: #b8e986; height: 50px;" ng-cloak>
 		<p class="text-center">Your work has been published successfully.</p>
 		<span ng-click="editStoreCtrl.view_published_topbar=false">
 			<i class="ion-android-close"></i>

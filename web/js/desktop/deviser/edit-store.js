@@ -1,11 +1,10 @@
 (function () {
 	"use strict";
 
-	function controller(productDataService, deviserDataService, UtilService, toastr, $location, $uibModal, $timeout) {
+	function controller(productDataService, personDataService, UtilService, toastr, $location, $uibModal, $timeout) {
 		var vm = this;
 		vm.update = update;
 		vm.open_modal_delete = open_modal_delete;
-		vm.deviser_id = UtilService.returnDeviserIdFromUrl();
 		vm.show_unpublished_works = show_unpublished_works;
 		vm.language = 'en-US';
 
@@ -27,7 +26,7 @@
 				parseMainPhoto(vm.products);
 			}
 			var params = {
-				"deviser": UtilService.returnDeviserIdFromUrl(),
+				"deviser": person.short_id,
 				"limit": 1000
 			}
 			if(vm.subcategory || vm.category) {
@@ -44,14 +43,14 @@
 		}
 
 		function getDeviser() {
-			deviserDataService.Profile.get({
-				deviser_id: UtilService.returnDeviserIdFromUrl()
-			}).$promise.then(function(dataDeviser) {
-				vm.deviser = dataDeviser;
+			function onGetProfileSuccess(data) {
+				vm.deviser = angular.copy(data);
 				getProducts();
-			}, function(err) {
-				//errors
-			});
+			}
+
+			personDataService.getProfile({
+				personId: person.short_id
+			}, onGetProfileSuccess, UtilService.onError);
 		}
 
 		function parseCategories() {
@@ -109,7 +108,7 @@
 					idProduct: product.id
 				}, onUpdateProductSuccess, UtilService.onError);
 			} else {
-				toastr.error("Cannot be updated!");
+				UtilService.onError("Cannot be updated!");
 			}
 		}
 
