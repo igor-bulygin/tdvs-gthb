@@ -39,6 +39,9 @@ $this->params['deviser_links_target'] = 'public_view';
                         <?php } else { ?>
                             <p class="no-video-text"><?=$person->getBrandName()?> haven't loved any works yet.</p>
                         <?php } ?>
+                        
+                        <img class="image-loved" src="/imgs/loved-image.png">
+                        
                     </div>
                 <?php } else { ?>
                     <div class="content-store">
