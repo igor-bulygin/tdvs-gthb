@@ -2,18 +2,16 @@
 
 namespace app\components;
 
-use app\models\Category;
-use Yii;
-use yii\base\Widget;
 use app\helpers\Utils;
+use yii\base\Widget;
 
-class DeviserMenu extends Widget {
+class PersonMenu extends Widget {
 	/**
 	 * @inheritdoc
 	 */
 
 	public function run() {
-		return $this->render('DeviserMenu');
+		return $this->render('PersonMenu');
 	}
 
 	public function getViewPath() {

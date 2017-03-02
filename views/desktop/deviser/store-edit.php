@@ -1,8 +1,8 @@
 <?php
 use app\assets\desktop\deviser\EditStoreAsset;
-use app\components\DeviserMenu;
 use app\components\MakeProfilePublic;
 use app\components\PersonHeader;
+use app\components\PersonMenu;
 use app\helpers\Utils;
 use app\models\Category;
 use app\models\Person;
@@ -41,7 +41,7 @@ $this->params['deviser_menu_categories'] = $categories;
 			<div class="container">
 				<div class="row">
 					<div class="col-md-2">
-						<?= DeviserMenu::widget() ?>
+						<?= PersonMenu::widget() ?>
 					</div>
 					<div class="col-md-10">
 						

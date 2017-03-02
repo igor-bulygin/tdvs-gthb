@@ -47,7 +47,7 @@ class InfluencerController extends CController
 
 		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE) {
 			if ($person->isInfluencerEditable()) {
-				$this->redirect($person->getEditInfluencerAboutLink());
+				$this->redirect($person->getAboutEditLink());
 			} else {
 				throw new NotFoundHttpException();
 			}
@@ -87,7 +87,7 @@ class InfluencerController extends CController
 
 		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE) {
 			if ($person->isInfluencerEditable()) {
-				$this->redirect($person->getEditInfluencerAboutLink());
+				$this->redirect($person->getAboutEditLink());
 			} else {
 				throw new NotFoundHttpException();
 			}
@@ -129,7 +129,7 @@ class InfluencerController extends CController
 
 		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE) {
 			if ($person->isInfluencerEditable()) {
-				$this->redirect($person->getEditInfluencerAboutLink());
+				$this->redirect($person->getAboutEditLink());
 			} else {
 				throw new NotFoundHttpException();
 			}
@@ -171,7 +171,7 @@ class InfluencerController extends CController
 
 		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE) {
 			if ($person->isInfluencerEditable()) {
-				$this->redirect($person->getEditInfluencerAboutLink());
+				$this->redirect($person->getAboutEditLink());
 			} else {
 				throw new NotFoundHttpException();
 			}
@@ -195,7 +195,7 @@ class InfluencerController extends CController
 
 		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE) {
 			if ($person->isInfluencerEditable()) {
-				$this->redirect($person->getEditInfluencerAboutLink());
+				$this->redirect($person->getAboutEditLink());
 			} else {
 				throw new NotFoundHttpException();
 			}
@@ -219,7 +219,7 @@ class InfluencerController extends CController
 
 		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE) {
 			if ($person->isInfluencerEditable()) {
-				$this->redirect($person->getEditInfluencerAboutLink());
+				$this->redirect($person->getAboutEditLink());
 			} else {
 				throw new NotFoundHttpException();
 			}

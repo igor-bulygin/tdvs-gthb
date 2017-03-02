@@ -1043,36 +1043,106 @@ class Person extends CActiveRecord implements IdentityInterface
 		;
 	}
 
+	public function getStoreLink($category = null) {
+		return Url::to(["deviser/store", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id, 'category' => $category]);
+	}
 
-	/**
-	 * Returns the url to edit the deviser about
-	 *
-	 * @return string
-	 */
-	public function getEditDeviserAboutLink() {
+	public function getStoreEditLink($categoryId = null) {
+		return Url::to(["deviser/store-edit", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id, 'category' => $categoryId]);
+	}
+
+	public function getLovedLink() {
+		return Url::to(["deviser/loved" , "slug" => $this->getSlug(), 'deviser_id' => $this->short_id]);
+	}
+
+	public function getBoxesLink() {
+		return Url::to(["deviser/boxes" , "slug" => $this->getSlug(), 'deviser_id' => $this->short_id]);
+	}
+
+	public function getAboutLink() {
+		if ($this->isDeviser()) {
+			return Url::to(["deviser/about", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id]);
+
+		} elseif ($this->isInfluencer()) {
+			return Url::to(["influencer/about", "slug" => $this->getSlug(), 'person_id' => $this->short_id]);
+		}
+	}
+
+	public function getAboutEditLink() {
+		if ($this->isDeviser()) {
+			return Url::to(["deviser/about-edit", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id]);
+
+		} elseif ($this->isInfluencer()) {
+			return Url::to(["influencer/about-edit", "slug" => $this->getSlug(), 'person_id' => $this->short_id]);
+		}
+	}
+
+	public function getPressLink() {
+		if ($this->isDeviser()) {
+			return Url::to(["deviser/press", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id]);
+
+		} elseif ($this->isInfluencer()) {
+			return Url::to(["influencer/press", "slug" => $this->getSlug(), 'person_id' => $this->short_id]);
+		}
+	}
+
+	public function getPressEditLink() {
+		if ($this->isDeviser()) {
+			return Url::to(["deviser/press-edit", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id]);
+
+		} elseif ($this->isInfluencer()) {
+			return Url::to(["influencer/press-edit", "slug" => $this->getSlug(), 'person_id' => $this->short_id]);
+		}
+	}
+
+
+	public function getVideosLink() {
+		if ($this->isDeviser()) {
+			return Url::to(["deviser/videos", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id]);
+
+		} elseif ($this->isInfluencer()) {
+			return Url::to(["influencer/videos", "slug" => $this->getSlug(), 'person_id' => $this->short_id]);
+		}
+	}
+
+	public function getVideosEditLink() {
+		if ($this->isDeviser()) {
+			return Url::to(["deviser/videos-edit", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id]);
+
+		} elseif ($this->isInfluencer()) {
+			return Url::to(["influencer/videos-edit", "slug" => $this->getSlug(), 'person_id' => $this->short_id]);
+		}
+	}
+
+
+	public function getFaqLink() {
+		if ($this->isDeviser()) {
+			return Url::to(["deviser/faq", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id]);
+
+		} elseif ($this->isInfluencer()) {
+			return Url::to(["influencer/faq", "slug" => $this->getSlug(), 'person_id' => $this->short_id]);
+		}
+	}
+
+	public function getFaqEditLink() {
+		if ($this->isDeviser()) {
+			return Url::to(["deviser/faq-edit", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id]);
+
+		} elseif ($this->isInfluencer()) {
+			return Url::to(["influencer/faq-edit", "slug" => $this->getSlug(), 'person_id' => $this->short_id]);
+		}
+	}
+
+	public function getSlug()
+	{
 		if (is_array($this->slug)) {
 			$slug = Utils::l($this->slug);
 		} else {
 			$slug = $this->slug;
 		}
-		return Url::to(['deviser/about-edit', 'deviser_id' => $this->short_id, 'slug' => $slug]);
+		return $slug;
 	}
-
-
-	/**
-	 * Returns the url to edit the deviser about
-	 *
-	 * @return string
-	 */
-	public function getEditInfluencerAboutLink() {
-		if (is_array($this->slug)) {
-			$slug = Utils::l($this->slug);
-		} else {
-			$slug = $this->slug;
-		}
-		return Url::to(['influencer/about-edit', 'person_id' => $this->short_id, 'slug' => $slug]);
-	}
-
+	
 	/**
 	 * Returns a number of random devisers.
 	 *

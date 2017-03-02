@@ -1,7 +1,7 @@
 <?php
 use app\assets\desktop\pub\StoreViewAsset;
-use app\components\DeviserMenu;
 use app\components\PersonHeader;
+use app\components\PersonMenu;
 use app\helpers\Utils;
 use app\models\Category;
 use app\models\Person;
@@ -31,7 +31,7 @@ $this->params['deviser_menu_categories'] = $categories;
 	<div class="container">
 		<div class="row">
 			<div class="col-md-2">
-				<?= DeviserMenu::widget() ?>
+				<?= PersonMenu::widget() ?>
 			</div>
 			<div class="col-md-10">
 				<div class="content-store">

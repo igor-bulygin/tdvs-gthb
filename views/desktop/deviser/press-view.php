@@ -1,7 +1,7 @@
 <?php
 use app\assets\desktop\deviser\EditPressAsset;
-use app\components\DeviserMenu;
 use app\components\PersonHeader;
+use app\components\PersonMenu;
 use app\helpers\Utils;
 use app\models\Person;
 use yii\helpers\Url;
@@ -24,7 +24,7 @@ $this->params['deviser_links_target'] = 'public_view';
 	<div class="container">
 		<div class="row">
 			<div class="col-md-2">
-				<?= DeviserMenu::widget() ?>
+				<?= PersonMenu::widget() ?>
 			</div>
 			<div class="col-md-10">
 				<?php if (count($press) == 0) { ?>

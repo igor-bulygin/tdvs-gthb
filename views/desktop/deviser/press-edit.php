@@ -1,8 +1,8 @@
 <?php
 use app\assets\desktop\deviser\EditPressAsset;
-use app\components\DeviserMenu;
 use app\components\MakeProfilePublic;
 use app\components\PersonHeader;
+use app\components\PersonMenu;
 use app\models\Person;
 use yii\helpers\Json;
 use yii\web\View;
@@ -28,7 +28,7 @@ $this->params['deviser_links_target'] = 'edit_view';
 				<div class="container">
 					<div class="row">
 						<div class="col-md-2">
-							<?= DeviserMenu::widget() ?>
+							<?= PersonMenu::widget() ?>
 						</div>
 						<div class="col-md-10">
 							<div class="empty-wrapper">

@@ -146,7 +146,7 @@ class DeviserController extends CController
 
 		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE) {
 			if ($person->isDeviserEditable()) {
-				$this->redirect($person->getEditDeviserAboutLink());
+				$this->redirect($person->getAboutEditLink());
 			} else {
 				throw new NotFoundHttpException();
 			}
@@ -186,7 +186,7 @@ class DeviserController extends CController
 
 		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE) {
 			if ($person->isDeviserEditable()) {
-				$this->redirect($person->getEditDeviserAboutLink());
+				$this->redirect($person->getAboutEditLink());
 			} else {
 				throw new NotFoundHttpException();
 			}
@@ -228,7 +228,7 @@ class DeviserController extends CController
 
 		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE) {
 			if ($person->isDeviserEditable()) {
-				$this->redirect($person->getEditDeviserAboutLink());
+				$this->redirect($person->getAboutEditLink());
 			} else {
 				throw new NotFoundHttpException();
 			}
@@ -270,7 +270,7 @@ class DeviserController extends CController
 
 		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE) {
 			if ($person->isDeviserEditable()) {
-				$this->redirect($person->getEditDeviserAboutLink());
+				$this->redirect($person->getAboutEditLink());
 			} else {
 				throw new NotFoundHttpException();
 			}
@@ -312,7 +312,7 @@ class DeviserController extends CController
 
 		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE) {
 			if ($person->isDeviserEditable()) {
-				$this->redirect($person->getEditDeviserAboutLink());
+				$this->redirect($person->getAboutEditLink());
 			} else {
 				throw new NotFoundHttpException();
 			}
@@ -336,7 +336,7 @@ class DeviserController extends CController
 
 		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE) {
 			if ($person->isDeviserEditable()) {
-				$this->redirect($person->getEditDeviserAboutLink());
+				$this->redirect($person->getAboutEditLink());
 			} else {
 				throw new NotFoundHttpException();
 			}
@@ -360,7 +360,7 @@ class DeviserController extends CController
 
 		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE) {
 			if ($person->isDeviserEditable()) {
-				$this->redirect($person->getEditDeviserAboutLink());
+				$this->redirect($person->getAboutEditLink());
 			} else {
 				throw new NotFoundHttpException();
 			}
