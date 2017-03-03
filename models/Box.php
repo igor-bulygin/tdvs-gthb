@@ -439,12 +439,7 @@ class Box extends CActiveRecord
 	 */
 	public function getViewLink() {
 		$person = $this->getPerson();
-		if (is_array($person->slug)) {
-			$slug = Utils::l($person->slug);
-		} else {
-			$slug = $person->slug;
-		}
-		return Url::to(["box-detail", "slug" => $slug, "deviser_id" => $person->short_id, "box_id" => $this->short_id]);
+		return Url::to(["/box-detail", "slug" => $person->getSlug(), "deviser_id" => $person->short_id, "box_id" => $this->short_id], true);
 	}
 
 	/**
