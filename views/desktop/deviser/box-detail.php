@@ -172,6 +172,145 @@ $this->registerJs("var box = ".Json::encode($box), yii\web\View::POS_HEAD, 'box-
             </div>
         </div>
         */ ?>
+        <div class="work-description-wrapper">
+        	<div class="reviews-wrapper">
+						<div class="comment-wrapper">
+							<div class="col-sm-1">
+								<div class="avatar">
+									<img class="cover" src="/imgs/avatar-deviser.jpg">
+								</div>
+							</div>
+							<div class="col-sm-10">
+								<input type="text" class="form-control comment-input" id="exampleInputEmail1" placeholder="Add your comment">
+								<div class="rate-product">
+									<span>Rate this product</span>
+									<span class="score">
+											<i class="ion-ios-star"></i>
+											<i class="ion-ios-star"></i>
+											<i class="ion-ios-star"></i>
+											<i class="ion-ios-star"></i>
+											<i class="ion-ios-star"></i>
+										</span>
+								</div>
+							</div>
+							<div class="col-sm-1">
+								<div class="arrow-btn">
+									<i class="ion-android-navigate"></i>
+								</div>
+							</div>
+						</div>
+						<div class="comment-user">
+							<div class="avatar">
+								<img class="cover" src="/imgs/avatar-deviser.jpg">
+							</div>
+							<div class="comment">
+								<div class="name-date">
+									<span class="name">Alice Pierce</span>
+									<span class="date">1 day ago</span>
+								</div>
+								<div class="comment-text">Vivamus ultricies mauris mi, nec imperdiet quam facilisis eget.
+								</div>
+								<div class="replay">
+									<span>Reply</span>
+									<span class="score">
+											<i class="ion-ios-star"></i>
+											<i class="ion-ios-star"></i>
+											<i class="ion-ios-star"></i>
+											<i class="ion-ios-star"></i>
+											<i class="ion-ios-star"></i>
+										</span>
+									<span class="useful">300  member found this comment useful</span>
+								</div>
+							</div>
+							<div class="helpful">
+								<span>Is this review helpful to you ?</span>
+								<div class="rounded-btn">Yes</div>
+								<div class="rounded-btn">No</div>
+							</div>
+						</div>
+						<div class="comment-user">
+							<div class="avatar">
+								<img class="cover" src="/imgs/avatar-deviser.jpg">
+							</div>
+							<div class="comment">
+								<div class="name-date">
+									<span class="name">Alice Pierce</span>
+									<span class="date">1 day ago</span>
+								</div>
+								<div class="comment-text">Vivamus ultricies mauris mi, nec imperdiet quam facilisis eget.
+								</div>
+								<div class="replay">
+									<span>Reply</span>
+									<span class="score">
+											<i class="ion-ios-star"></i>
+											<i class="ion-ios-star"></i>
+											<i class="ion-ios-star"></i>
+											<i class="ion-ios-star"></i>
+											<i class="ion-ios-star"></i>
+										</span>
+									<span class="useful">300  member found this comment useful</span>
+								</div>
+							</div>
+							<div class="helpful">
+								<span>Is this review helpful to you ?</span>
+								<div class="rounded-btn">Yes</div>
+								<div class="rounded-btn">No</div>
+							</div>
+						</div>
+						<div class="comment-user response">
+							<div class="avatar">
+								<img class="cover" src="/imgs/avatar-deviser.jpg">
+							</div>
+							<div class="comment">
+								<div class="name-date">
+									<span class="name">Alice Pierce</span>
+									<span class="date">1 day ago</span>
+								</div>
+								<div class="comment-text">Vivamus ultricies mauris mi, nec imperdiet quam facilisis eget ultricies mauris mi, nec imperdiet quam facilisis eget ultricies mauris mi, nec imperdiet quam facilisis eget ultricies mauris mi, nec imperdiet quam facilisis eget ultricies mauris mi, nec imperdiet quam facilisis eget ultricies mauris mi, nec imperdiet quam facilisis eget.
+								</div>
+							</div>
+							<div class="helpful">
+								<span>Is this review helpful to you ?</span>
+								<div class="rounded-btn">Yes</div>
+								<div class="rounded-btn">No</div>
+							</div>
+						</div>
+						<div class="comment-user">
+							<div class="avatar">
+								<img class="cover" src="/imgs/avatar-deviser.jpg">
+							</div>
+							<div class="comment">
+								<div class="name-date">
+									<span class="name">Alice Pierce</span>
+									<span class="date">1 day ago</span>
+								</div>
+								<div class="comment-text">Vivamus ultricies mauris mi, nec imperdiet quam facilisis eget.
+								</div>
+								<div class="replay">
+									<span>Reply</span>
+									<span class="score">
+											<i class="ion-ios-star"></i>
+											<i class="ion-ios-star"></i>
+											<i class="ion-ios-star"></i>
+											<i class="ion-ios-star"></i>
+											<i class="ion-ios-star"></i>
+										</span>
+									<span class="useful">300  member found this comment useful</span>
+								</div>
+							</div>
+							<div class="helpful">
+								<span>Is this review helpful to you ?</span>
+								<div class="rounded-btn">Yes</div>
+								<div class="rounded-btn">No</div>
+							</div>
+						</div>
+						<div class="load-wrapper">
+							<i class="ion-ios-arrow-down"></i>
+							<span>LOAD MORE</span>
+							<span class="more">24 comments more</span>
+						</div>
+					</div>
+      			</div>
         <div class="row">
             <p class="text-center">More boxes</p>
             <br />
