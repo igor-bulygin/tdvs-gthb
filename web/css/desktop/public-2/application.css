@@ -3178,6 +3178,30 @@ input[type="radio"] .styled:checked + label::after {
 .title-loved {
   margin-bottom: 15px; }
 
+.empty-box-text {
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: bold;
+  color: #ffffff;
+  font-size: 18px;
+  letter-spacing: 0.1px;
+  margin: 150px 0; }
+
+.left-box-column {
+  background-color: #6b6b6b;
+  min-height: 325px;
+  padding: 20px 30px; }
+  .left-box-column .title {
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: "Univers Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin: 0 0 20px;
+    display: block; }
+  .left-box-column p {
+    color: #ffffff;
+    font-family: "Univers Condensed Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px; }
+
 .become-deviser-wrapper .become-deviser-cover {
   background: url("/imgs/become_a_deviser_background.png") no-repeat;
   background-size: cover; }

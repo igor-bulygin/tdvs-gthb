@@ -48,12 +48,12 @@ $this->registerJs("var box = ".Json::encode($box), yii\web\View::POS_HEAD, 'box-
             <?php } ?>
         </div>
 		<div class="row" style="background-color: black;">
-			<div class="col-md-3" style="background-color: #636363">
-				<h3 style="color: white;" ng-bind="boxDetailCtrl.box.name"></h3>
-				<p style="color:white;" ng-bind="boxDetailCtrl.box.description"></p>
+			<div class="col-md-3 left-box-column">
+				<span class="title" ng-bind="boxDetailCtrl.box.name"></span>
+				<p ng-bind="boxDetailCtrl.box.description"></p>
 			</div>
 			<div class="col-md-9">
-                <p class="text-center" style="font-size: 24px; color: white;" ng-if="boxDetailCtrl.box.products.length == 0" ng-cloak>This box is empty</p>
+                <p class="text-center empty-box-text" ng-if="boxDetailCtrl.box.products.length == 0" ng-cloak>This box is empty</p>
 
                 <div class="col-md-2 col-sm-4 col-xs-6 pad-grid" ng-if="boxDetailCtrl.box.products.length > 0" ng-cloak ng-repeat="work in boxDetailCtrl.box.products">
                     <div class="grid">
