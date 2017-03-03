@@ -131,9 +131,9 @@ $this->title = 'Become a Deviser - Todevise';
 								</div>
 								<div class="col-sm-12">
 									<label>Link to portfolio</label>
-									<div ng-repeat="url in becomeDeviserCtrl.invitation.urls_portfolio track by $index">
+									<div class="add-portfolio-input" ng-repeat="url in becomeDeviserCtrl.invitation.urls_portfolio track by $index">
 										<input name="{{'portfolio_' + $index}}" type="text" class="form-control grey-input ng-class:{'error-input': becomeDeviserCtrl.has_error(becomeDeviserCtrl.form, becomeDeviserCtrl.form['portfolio_'+$index])}" required ng-model="becomeDeviserCtrl.invitation.urls_portfolio[$index]" ng-pattern="becomeDeviserCtrl.urlRegEx">
-										<span class="glyphicon glyphicon-remove" style="background-color: #c7c7c7; border-radius: 10px; min-width: 10px; min-height: 10px;" ng-click="becomeDeviserCtrl.splicePortfolio($index)" ng-if="becomeDeviserCtrl.invitation.urls_portfolio.length > 1" ng-cloak></span>
+										<span class="ion-close close-add-portfolio" ng-click="becomeDeviserCtrl.splicePortfolio($index)" ng-if="becomeDeviserCtrl.invitation.urls_portfolio.length > 1" ng-cloak></span>
 										<form-errors field="becomeDeviserCtrl.form['portfolio_'+$index]" condition="becomeDeviserCtrl.has_error(becomeDeviserCtrl.form, becomeDeviserCtrl.form['portfolio_'+$index])"></form-errors>
 									</div>
 								</div>

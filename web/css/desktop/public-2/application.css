@@ -3380,6 +3380,25 @@ input[type="radio"] .styled:checked + label::after {
   .ok-sent-mesg-wrapper p {
     font-family: "Playfair Display", Georgia, serif; }
 
+.add-portfolio-input {
+  position: relative; }
+
+.close-add-portfolio {
+  background-color: #c7c7c7;
+  border-radius: 90px 90px 90px 90px !important;
+  -webkit-border-radius: 90px 90px 90px 90px !important;
+  -moz-border-radius: 90px 90px 90px 90px !important;
+  font-size: 11px;
+  text-align: center;
+  padding: 4px 0 0 1px;
+  width: 22px;
+  height: 22px;
+  display: block;
+  cursor: pointer;
+  position: absolute;
+  right: -32px;
+  top: 6px; }
+
 .create-deviser-account-wrapper {
   padding: 80px 200px; }
   .create-deviser-account-wrapper .logo {
