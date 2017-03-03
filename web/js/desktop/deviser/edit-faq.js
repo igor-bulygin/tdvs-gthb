@@ -83,7 +83,7 @@
 			};
 
 			function onUpdateProfileSuccess(data) {
-				$window.location.href = '/deviser/' + data.slug + '/' + data.id + '/faq';
+				$window.location.href = vm.person.faq_link;
 			}
 
 			function parseFaqs(element) {

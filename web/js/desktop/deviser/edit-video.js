@@ -47,7 +47,7 @@
 
 		function updatePersonVideos(index) {
 			function onUpdateVideosSuccess(data) {
-				$window.location.href = '/deviser/' + data.slug + '/' + data.id + '/video';
+				$window.location.href = vm.person.videos_link;
 			}
 
 			function onUpdateVideosError(err) {

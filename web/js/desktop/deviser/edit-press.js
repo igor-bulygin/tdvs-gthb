@@ -33,7 +33,7 @@
 
 		function update() {
 			function onUpdateProfileSuccess(data) {
-				$window.location.href = '/deviser/' + data.slug + '/' + data.id + '/press';
+				$window.location.href = vm.person.press_link;
 			}
 
 			var data = {
