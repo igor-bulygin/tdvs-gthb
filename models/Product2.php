@@ -682,12 +682,7 @@ class Product2 extends Product {
 	 * @return string
 	 */
 	public function getViewLink() {
-		if (is_array($this->slug)) {
-			$slug = Utils::l($this->slug);
-		} else {
-			$slug = $this->slug;
-		}
-		return Url::to(["product/detail", "slug" => $slug, 'product_id' => $this->short_id]);
+		return Url::to(["/product/detail", "slug" => $this->getSlug(), 'product_id' => $this->short_id], true);
 	}
 
 	/**
@@ -696,12 +691,16 @@ class Product2 extends Product {
 	 * @return string
 	 */
 	public function getEditLink() {
+		return Url::to(['/product/edit', 'slug' => $this->getSlug(), 'product_id' => $this->short_id, 'deviser_id' => $this->deviser_id], true);
+	}
+
+	public function getSlug() {
 		if (is_array($this->slug)) {
 			$slug = Utils::l($this->slug);
 		} else {
 			$slug = $this->slug;
 		}
-		return Url::to(['product/edit', 'slug' => $slug, 'product_id' => $this->short_id, 'deviser_id' => $this->deviser_id]);
+		return $slug;
 	}
 
 	/**

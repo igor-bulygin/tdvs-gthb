@@ -484,6 +484,18 @@ class Person extends CActiveRecord implements IdentityInterface
 					'preferences',
 					'url_images' => 'urlImagesLocation',
 					'type',
+					'store_link' => 'storeLink',
+					'store_edit_link' => 'storeEditLink',
+					'loved_link' => 'lovedLink',
+					'boxes_link' => 'boxesLink',
+					'about_link' => 'aboutLink',
+					'about_edit_link' => 'aboutEditLink',
+					'press_link' => 'pressLink',
+					'press_edit_link' => 'pressEditLink',
+					'videos_link' => 'videosLink',
+					'videos_edit_link' => 'videosEditLink',
+					'faq_link' => 'faqLink',
+					'faq_edit_link' => 'faqEditLink',
 				];
 
 				static::$retrieveExtraFields = [
@@ -1044,92 +1056,92 @@ class Person extends CActiveRecord implements IdentityInterface
 	}
 
 	public function getStoreLink($category = null) {
-		return Url::to(["deviser/store", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id, 'category' => $category]);
+		return Url::to(["/deviser/store", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id, 'category' => $category], true);
 	}
 
 	public function getStoreEditLink($categoryId = null) {
-		return Url::to(["deviser/store-edit", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id, 'category' => $categoryId]);
+		return Url::to(["/deviser/store-edit", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id, 'category' => $categoryId], true);
 	}
 
 	public function getLovedLink() {
-		return Url::to(["deviser/loved" , "slug" => $this->getSlug(), 'deviser_id' => $this->short_id]);
+		return Url::to(["/deviser/loved" , "slug" => $this->getSlug(), 'deviser_id' => $this->short_id], true);
 	}
 
 	public function getBoxesLink() {
-		return Url::to(["deviser/boxes" , "slug" => $this->getSlug(), 'deviser_id' => $this->short_id]);
+		return Url::to(["/deviser/boxes" , "slug" => $this->getSlug(), 'deviser_id' => $this->short_id], true);
 	}
 
 	public function getAboutLink() {
 		if ($this->isDeviser()) {
-			return Url::to(["deviser/about", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id]);
+			return Url::to(["/deviser/about", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id], true);
 
 		} elseif ($this->isInfluencer()) {
-			return Url::to(["influencer/about", "slug" => $this->getSlug(), 'person_id' => $this->short_id]);
+			return Url::to(["/influencer/about", "slug" => $this->getSlug(), 'person_id' => $this->short_id], true);
 		}
 	}
 
 	public function getAboutEditLink() {
 		if ($this->isDeviser()) {
-			return Url::to(["deviser/about-edit", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id]);
+			return Url::to(["/deviser/about-edit", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id], true);
 
 		} elseif ($this->isInfluencer()) {
-			return Url::to(["influencer/about-edit", "slug" => $this->getSlug(), 'person_id' => $this->short_id]);
+			return Url::to(["/influencer/about-edit", "slug" => $this->getSlug(), 'person_id' => $this->short_id], true);
 		}
 	}
 
 	public function getPressLink() {
 		if ($this->isDeviser()) {
-			return Url::to(["deviser/press", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id]);
+			return Url::to(["/deviser/press", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id], true);
 
 		} elseif ($this->isInfluencer()) {
-			return Url::to(["influencer/press", "slug" => $this->getSlug(), 'person_id' => $this->short_id]);
+			return Url::to(["/influencer/press", "slug" => $this->getSlug(), 'person_id' => $this->short_id], true);
 		}
 	}
 
 	public function getPressEditLink() {
 		if ($this->isDeviser()) {
-			return Url::to(["deviser/press-edit", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id]);
+			return Url::to(["/deviser/press-edit", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id], true);
 
 		} elseif ($this->isInfluencer()) {
-			return Url::to(["influencer/press-edit", "slug" => $this->getSlug(), 'person_id' => $this->short_id]);
+			return Url::to(["/influencer/press-edit", "slug" => $this->getSlug(), 'person_id' => $this->short_id], true);
 		}
 	}
 
 
 	public function getVideosLink() {
 		if ($this->isDeviser()) {
-			return Url::to(["deviser/videos", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id]);
+			return Url::to(["/deviser/videos", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id], true);
 
 		} elseif ($this->isInfluencer()) {
-			return Url::to(["influencer/videos", "slug" => $this->getSlug(), 'person_id' => $this->short_id]);
+			return Url::to(["/influencer/videos", "slug" => $this->getSlug(), 'person_id' => $this->short_id], true);
 		}
 	}
 
 	public function getVideosEditLink() {
 		if ($this->isDeviser()) {
-			return Url::to(["deviser/videos-edit", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id]);
+			return Url::to(["/deviser/videos-edit", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id], true);
 
 		} elseif ($this->isInfluencer()) {
-			return Url::to(["influencer/videos-edit", "slug" => $this->getSlug(), 'person_id' => $this->short_id]);
+			return Url::to(["/influencer/videos-edit", "slug" => $this->getSlug(), 'person_id' => $this->short_id], true);
 		}
 	}
 
 
 	public function getFaqLink() {
 		if ($this->isDeviser()) {
-			return Url::to(["deviser/faq", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id]);
+			return Url::to(["/deviser/faq", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id], true);
 
 		} elseif ($this->isInfluencer()) {
-			return Url::to(["influencer/faq", "slug" => $this->getSlug(), 'person_id' => $this->short_id]);
+			return Url::to(["/influencer/faq", "slug" => $this->getSlug(), 'person_id' => $this->short_id], true);
 		}
 	}
 
 	public function getFaqEditLink() {
 		if ($this->isDeviser()) {
-			return Url::to(["deviser/faq-edit", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id]);
+			return Url::to(["/deviser/faq-edit", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id], true);
 
 		} elseif ($this->isInfluencer()) {
-			return Url::to(["influencer/faq-edit", "slug" => $this->getSlug(), 'person_id' => $this->short_id]);
+			return Url::to(["/influencer/faq-edit", "slug" => $this->getSlug(), 'person_id' => $this->short_id], true);
 		}
 	}
 
