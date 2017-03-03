@@ -47,7 +47,7 @@
 
 		function updatePersonVideos(index) {
 			function onUpdateVideosSuccess(data) {
-				$window.location.href = '/deviser/' + data.slug + '/' + data.id + '/video';
+				$window.location.href = vm.person.videos_link;
 			}
 
 			function onUpdateVideosError(err) {
@@ -137,7 +137,14 @@
 		}
 	}
 
-	angular.module('todevise')
-		.controller('editVideosCtrl', controller);
+	var component = {
+		templateUrl: currentHost() + '/js/desktop/person/edit-videos/edit-videos.html',
+		controller: controller,
+		controllerAs: 'editVideosCtrl'
+	}
+
+	angular
+	.module('todevise')
+	.component('editVideos', component)
 
 }());

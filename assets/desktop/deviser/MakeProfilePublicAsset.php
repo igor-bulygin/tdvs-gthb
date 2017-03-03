@@ -8,7 +8,7 @@ class MakeProfilePublicAsset extends AssetBundle {
 	public $baseUrl = '@web';
 	public $css = [];
 	public $js = [
-		'js/desktop/deviser/make-profile-public.js',
+		'js/desktop/person/make-profile-public.js',
 	];
 	public $depends = [
 		'app\assets\desktop\deviser\IndexAsset',

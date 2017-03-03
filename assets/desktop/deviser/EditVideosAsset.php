@@ -8,7 +8,7 @@ class EditVideosAsset extends AssetBundle {
 	public $baseUrl = '@web';
 	public $css = [];
 	public $js = [
-		'js/desktop/deviser/edit-video.js',
+		'js/desktop/person/edit-videos/edit-videos.js',
 	];
 	public $depends = [
 		'app\assets\desktop\deviser\IndexAsset',

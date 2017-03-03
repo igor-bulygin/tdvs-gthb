@@ -185,7 +185,7 @@
 			}
 
 			function onUpdateProfileSuccess(data) {
-				$window.location.href = currentHost() + '/deviser/' + vm.person.slug + '/' + vm.person.id +'/about';
+				$window.location.href = vm.person.about_link;
 			}
 
 			var data = {}

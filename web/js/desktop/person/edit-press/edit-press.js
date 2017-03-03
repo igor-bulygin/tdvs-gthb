@@ -33,7 +33,7 @@
 
 		function update() {
 			function onUpdateProfileSuccess(data) {
-				$window.location.href = '/deviser/' + data.slug + '/' + data.id + '/press';
+				$window.location.href = vm.person.press_link;
 			}
 
 			var data = {
@@ -100,11 +100,16 @@
 		function done() {
 			update();
 		}
-
-
 	}
 
-	angular.module('todevise')
-		.controller('editPressCtrl', controller);
+	var component = {
+		templateUrl: currentHost() + '/js/desktop/person/edit-press/edit-press.html',
+		controller: controller,
+		controllerAs: 'editPressCtrl'
+	}
+
+	angular
+		.module('todevise')
+		.component('editPress', component);
 
 }());

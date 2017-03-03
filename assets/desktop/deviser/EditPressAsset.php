@@ -8,7 +8,7 @@ class EditPressAsset extends AssetBundle {
 	public $baseUrl = '@web';
 	public $css = [];
 	public $js = [
-		'js/desktop/deviser/edit-press.js',
+		'js/desktop/person/edit-press/edit-press.js',
 	];
 	public $depends = [
 		'app\assets\desktop\deviser\IndexAsset',
