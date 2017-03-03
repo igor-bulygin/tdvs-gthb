@@ -137,7 +137,14 @@
 		}
 	}
 
-	angular.module('todevise')
-		.controller('editVideosCtrl', controller);
+	var component = {
+		templateUrl: currentHost() + '/js/desktop/person/edit-videos/edit-videos.html',
+		controller: controller,
+		controllerAs: 'editVideosCtrl'
+	}
+
+	angular
+	.module('todevise')
+	.component('editVideos', component)
 
 }());
