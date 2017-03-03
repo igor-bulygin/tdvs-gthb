@@ -13,8 +13,8 @@ BoxesViewAsset::register($this);
 
 $this->title = 'Box '.$box->name.' by ' . $person->personalInfoMapping->getBrandName() . ' - Todevise';
 $this->params['person'] = $person;
-$this->params['deviser_menu_active_option'] = 'boxes';
-$this->params['deviser_links_target'] = 'public_view';
+$this->params['person_menu_active_option'] = 'boxes';
+$this->params['person_links_target'] = 'public_view';
 
 /** array $faq */
 

@@ -12,8 +12,8 @@ EditAboutAsset::register($this);
 
 $this->title = 'About ' . $person->personalInfoMapping->getBrandName() . ' - Todevise';
 $this->params['person'] = $person;
-$this->params['deviser_menu_active_option'] = 'about';
-$this->params['deviser_links_target'] = 'edit_view';
+$this->params['person_menu_active_option'] = 'about';
+$this->params['person_links_target'] = 'edit_view';
 
 $this->registerJs("var deviser = ".Json::encode($person), yii\web\View::POS_HEAD, 'deviser-var-script');
 

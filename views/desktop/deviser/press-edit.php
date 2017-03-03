@@ -5,7 +5,6 @@ use app\components\PersonHeader;
 use app\components\PersonMenu;
 use app\models\Person;
 use yii\helpers\Json;
-use yii\web\View;
 
 EditPressAsset::register($this);
 
@@ -13,8 +12,8 @@ EditPressAsset::register($this);
 
 $this->title = 'About ' . $person->personalInfoMapping->getBrandName() . ' - Todevise';
 $this->params['person'] = $person;
-$this->params['deviser_menu_active_option'] = 'press';
-$this->params['deviser_links_target'] = 'edit_view';
+$this->params['person_menu_active_option'] = 'press';
+$this->params['person_links_target'] = 'edit_view';
 
 $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD, 'person-var-script');
 

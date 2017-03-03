@@ -19,9 +19,9 @@ $this->title = $person->personalInfoMapping->getBrandName() . ' - Todevise';
 
 // use params to share data between views :(
 $this->params['person'] = $person;
-$this->params['deviser_menu_active_option'] = 'store';
-$this->params['deviser_links_target'] = 'public_view';
-$this->params['deviser_menu_categories'] = $categories;
+$this->params['person_menu_active_option'] = 'store';
+$this->params['person_links_target'] = 'public_view';
+$this->params['person_menu_store_categories'] = $categories;
 
 ?>
 

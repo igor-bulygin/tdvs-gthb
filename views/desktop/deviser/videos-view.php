@@ -12,8 +12,8 @@ PublicCommonAsset::register($this);
 
 $this->title = 'About ' . $person->personalInfoMapping->getBrandName() . ' - Todevise';
 $this->params['person'] = $person;
-$this->params['deviser_menu_active_option'] = 'videos';
-$this->params['deviser_links_target'] = 'public_view';
+$this->params['person_menu_active_option'] = 'videos';
+$this->params['person_links_target'] = 'public_view';
 
 /** @var $video PersonVideo */
 

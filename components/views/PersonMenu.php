@@ -3,9 +3,9 @@ use app\helpers\Utils;
 use app\models\Person;
 
 // use params to share data between views :(
-$categories = array_key_exists('deviser_menu_categories', $this->params) ? $this->params['deviser_menu_categories'] : [];
-$activeOption = array_key_exists('deviser_menu_active_option', $this->params) ? $this->params['deviser_menu_active_option'] : '';
-$linksTarget = array_key_exists('deviser_links_target', $this->params) ? $this->params['deviser_links_target'] : '';
+$categories = array_key_exists('person_menu_store_categories', $this->params) ? $this->params['person_menu_store_categories'] : [];
+$activeOption = array_key_exists('person_menu_active_option', $this->params) ? $this->params['person_menu_active_option'] : '';
+$linksTarget = array_key_exists('person_links_target', $this->params) ? $this->params['person_links_target'] : '';
 /** @var Person $person */
 $person = $this->params['person'];
 
