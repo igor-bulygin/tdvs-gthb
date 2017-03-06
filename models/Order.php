@@ -5,7 +5,6 @@ use app\helpers\CActiveRecord;
 use app\helpers\Utils;
 use Exception;
 use MongoDate;
-use yii\helpers\Url;
 use yii\mongodb\ActiveQuery;
 
 /**
@@ -186,7 +185,7 @@ class Order extends CActiveRecord {
 			$p['deviser_name'] = $deviser->name;
 			$p['deviser_photo'] = $deviser->getAvatarImage();
 			$p['deviser_slug'] = $deviser->slug;
-			$p['deviser_url'] = Url::to(["deviser/store", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id]);
+			$p['deviser_url'] = $deviser->getStoreLink();
 			$result[] = $p;
 		}
 

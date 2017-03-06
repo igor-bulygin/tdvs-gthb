@@ -4,7 +4,6 @@ use app\assets\desktop\pub\Product2Asset;
 use app\helpers\Utils;
 use app\models\Person;
 use app\models\PersonVideo;
-use yii\helpers\Url;
 
 ProductDetailAsset::register($this);
 
@@ -105,7 +104,7 @@ $videos = $product->getVideos();
 							<span class="number-score">(20)</span>
 							<div class="avatar-wrapper-side">
 								<div class="avatar">
-									<a href="<?= Url::to(["deviser/store", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id]) ?>">
+									<a href="<?= $deviser->getStoreLink() ?>">
 										<img class="cover" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($deviser->getAvatarImage())->resize(128, 128) ?>" data-pin-nopin="true">
 										<span><?= $deviser->personalInfoMapping->getBrandName() ?></span>
 									</a>

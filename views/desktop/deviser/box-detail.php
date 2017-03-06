@@ -3,7 +3,6 @@ use app\assets\desktop\pub\BoxesViewAsset;
 use app\helpers\Utils;
 use app\models\Person;
 use yii\helpers\Json;
-use yii\helpers\Url;
 
 BoxesViewAsset::register($this);
 
@@ -16,9 +15,6 @@ $this->params['person'] = $person;
 $this->params['person_menu_active_option'] = 'boxes';
 $this->params['person_links_target'] = 'public_view';
 
-/** array $faq */
-
-// <a class="edit-faq-btn" href="<***?= Url::to(["deviser/faq-edit", "slug" => $person->slug, 'deviser_id' => $person->short_id])?****>">+ ADD / EDIT QUESTIONS</a>
 $this->registerJs("var box = ".Json::encode($box), yii\web\View::POS_HEAD, 'box-script');
 
 ?>
@@ -29,11 +25,11 @@ $this->registerJs("var box = ".Json::encode($box), yii\web\View::POS_HEAD, 'box-
             <div class="col-md-8" style="padding-top: 10px;">
                 <img src="<?=$person->getAvatarImage128()?>" style="max-width: 50px;">
                 <?php if ($person->isConnectedUser()) { ?>
-                    <a href="<?=Url::to(["deviser/boxes", "slug" => $person->slug, 'deviser_id' => $person->short_id]);?>">
+                    <a href="<?=$person->getBoxesLink()?>">
                         <span style="color: white;">&lt; My profile</span>
                     </a>
                 <?php } else  { ?>
-                    <a href="<?=Url::to(["deviser/boxes", "slug" => $person->slug, 'deviser_id' => $person->short_id]);?>">
+                    <a href="<?=$person->getBoxesLink()?>">
                         <span style="color: white;">&lt; <?=$person->getBrandName()?></span>
                     </a>
                 <?php } ?>

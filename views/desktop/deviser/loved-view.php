@@ -15,11 +15,6 @@ $this->params['person'] = $person;
 $this->params['person_menu_active_option'] = 'loved';
 $this->params['person_links_target'] = 'public_view';
 
-/** array $faq */
-
-// <a class="edit-faq-btn" href="<***?= Url::to(["deviser/faq-edit", "slug" => $person->slug, 'deviser_id' => $person->short_id])?****>">+ ADD / EDIT QUESTIONS</a>
-
-
 ?>
 
 <?= PersonHeader::widget() ?>

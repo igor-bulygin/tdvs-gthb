@@ -2,7 +2,6 @@
 use app\assets\desktop\pub\Index2Asset;
 use app\helpers\Utils;
 use app\models\Person;
-use yii\helpers\Url;
 
 Index2Asset::register($this);
 
@@ -154,7 +153,7 @@ $this->title = 'Todevise / Home';
 					<div class="item <?= ($i==0) ? 'active' : '' ?>">
 						<?php foreach ($group as $i => $deviser) { ?>
 						<div class="col-md-15 col-sm-15 col-xs-6 pad-showcase">
-								<a href="<?= Url::to(["deviser/store", "slug" => $deviser->slug, 'deviser_id' => $deviser->short_id])?>">
+								<a href="<?= $deviser->getStoreLink()?>">
 								<figure class="showcase">
 								<button class="btn btn-default btn-follow"><i class="ion-star"></i><span>Follow</span>
 								</button>

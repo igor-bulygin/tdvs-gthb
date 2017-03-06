@@ -3,7 +3,6 @@ use app\assets\desktop\pub\PublicCommonAsset;
 use app\components\PersonHeader;
 use app\components\PersonMenu;
 use app\models\Person;
-use yii\helpers\Url;
 
 PublicCommonAsset::register($this);
 
@@ -13,11 +12,6 @@ $this->title = 'About ' . $person->personalInfoMapping->getBrandName() . ' - Tod
 $this->params['person'] = $person;
 $this->params['person_menu_active_option'] = 'faq';
 $this->params['person_links_target'] = 'public_view';
-
-/** array $faq */
-
-// <a class="edit-faq-btn" href="<***?= Url::to(["deviser/faq-edit", "slug" => $person->slug, 'deviser_id' => $person->short_id])?****>">+ ADD / EDIT QUESTIONS</a>
-
 
 ?>
 
@@ -33,7 +27,7 @@ $this->params['person_links_target'] = 'public_view';
 					<?php if (count($faq) == 0) { ?>
 						<div class="empty-wrapper">
 							<?php if ($person->isPersonEditable()) { ?>
-								<div><a class="red-link-btn" href="<?= Url::to(["deviser/faq-edit", "slug" => $person->slug, 'deviser_id' => $person->short_id])?>">Add / edit questions</a></div>
+								<div><a class="red-link-btn" href="<?= $person->getFaqEditLink()?>">Add / edit questions</a></div>
 							<?php } ?>
 							<img class="sad-face" src="/imgs/sad-face.svg">
 							<p class="no-video-text">You don't have any questions!</p>
@@ -41,7 +35,7 @@ $this->params['person_links_target'] = 'public_view';
 					<?php } else { ?>
 				<div class="faq-wrapper">
 						<?php if ($person->isPersonEditable()) { ?>
-							<div><a class="red-link-btn" href="<?= Url::to(["deviser/faq-edit", "slug" => $person->slug, 'deviser_id' => $person->short_id])?>">Add / edit questions</a></div>
+							<div><a class="red-link-btn" href="<?= $person->getFaqEditLink()?>">Add / edit questions</a></div>
 						<?php } ?>
 						<div id="accordion" role="tablist" aria-multiselectable="true">
 							<?php foreach ($faq as $key => $item) { ?>

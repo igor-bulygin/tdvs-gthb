@@ -20,7 +20,7 @@ $person = $this->params['person'];
                 <ul class="submenu-store">
                     <?php foreach ($categories as $i => $category) { ?>
                         <li class="<?= (($i==0) ? 'mt10' : (($i==(count($categories)-1)) ? 'mt20' : '')) ?>">
-                            <a class="<?= ($person->account_state == Person::ACCOUNT_STATE_DRAFT) ? 'disabled-link' : '' ?>" href="<?= $linksTarget=="edit_view" ? $person->getStoreEditLink($category->short_id) : $person->getStoreLink($category->short_id)?>"><?= Utils::l($category->name) ?></a>
+                            <a class="<?= ($person->account_state == Person::ACCOUNT_STATE_DRAFT) ? 'disabled-link' : '' ?>" href="<?= $linksTarget=="edit_view" ? $person->getStoreEditLink(['categoryId' => $category->short_id]) : $person->getStoreLink($category->short_id)?>"><?= Utils::l($category->name) ?></a>
                         </li>
                     <?php } ?>
                 </ul>

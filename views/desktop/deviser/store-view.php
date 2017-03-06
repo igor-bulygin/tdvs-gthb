@@ -6,7 +6,6 @@ use app\helpers\Utils;
 use app\models\Category;
 use app\models\Person;
 use app\models\Product2;
-use yii\helpers\Url;
 
 StoreViewAsset::register($this);
 
@@ -39,7 +38,7 @@ $this->params['person_menu_store_categories'] = $categories;
                         <div class="cathegory-wrapper">
                             <?php if ($unpublishedWorks) { ?>
                                 <div class="col-md-3 col-sm-3 col-xs-3 pad-cathegory">
-                                    <a href="<?= Url::to(["deviser/store-edit", "slug" => $person->slug, 'deviser_id' => $person->short_id, 'product_state' => \app\models\Product2::PRODUCT_STATE_DRAFT])?>">
+                                    <a href="<?= $person->getStoreEditLink(['product_state' => \app\models\Product2::PRODUCT_STATE_DRAFT])?>">
                                         <div class="unpublished-square">
                                             <p>Unpublished<br>works</p>
                                         </div>
@@ -48,7 +47,7 @@ $this->params['person_menu_store_categories'] = $categories;
                             <?php } ?>
                             <?php foreach ($categories as $i => $category) { ?>
                                 <div class="col-md-3 col-sm-3 col-xs-3 pad-cathegory">
-                                    <a href="<?= Url::to(["deviser/store", "slug" => $person->slug, 'deviser_id' => $person->short_id, 'category' => $category->short_id])?>">
+                                    <a href="<?= $person->getStoreEditLink(['category' => $category->short_id])?>">
                                         <figure class="cathegory">
                                             <img class="<?= ($selectedCategory->short_id==$category->short_id) ? 'active' : '' ?>" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($category->getDeviserProduct()->getMainImage())->resize(240, 175) ?>">
                                             <figcaption>
@@ -71,8 +70,8 @@ $this->params['person_menu_store_categories'] = $categories;
 								<?php if (count($selectedCategory->getDeviserSubcategories()) > 1) { ?>
 								<?php foreach ($selectedCategory->getDeviserSubcategories() as $i => $subcategory) { ?>
 									<li>
-										<a href="<?= Url::to(["deviser/store", "slug" => $person->slug, 'deviser_id' => $person->short_id, 'category' => $selectedCategory->short_id, 'subcategory' => $subcategory->short_id])?>" class="<?= ($selectedSubcategory->short_id==$subcategory->short_id) ? 'active' : '' ?>"><?= Utils::l($subcategory["name"]) ?></a>
-									</li>
+                                        <a href="<?= $person->getStoreEditLink(['category' => $selectedCategory->short_id, 'subcategory' => $subcategory->short_id])?>" class="<?= ($selectedSubcategory->short_id==$subcategory->short_id) ? 'active' : '' ?>"><?= Utils::l($subcategory["name"]) ?></a>
+                                    </li>
 								<?php } ?>
 								<?php } ?>
 							</ul>

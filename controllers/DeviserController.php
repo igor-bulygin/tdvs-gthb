@@ -47,9 +47,9 @@ class DeviserController extends CController
 		return $this->render("index");
 	}
 
-	public function actionStore($slug, $deviser_id)
+	public function actionStore($slug, $person_id)
 	{
-		$person = Person::findOneSerialized($deviser_id);
+		$person = Person::findOneSerialized($person_id);
 
 		if (!$person || !$person->isDeviser()) {
 			throw new NotFoundHttpException();
@@ -70,7 +70,7 @@ class DeviserController extends CController
 
 		if ($person->isPersonEditable()) {
 			$unpublishedWorks = Product2::findSerialized([
-				"deviser_id" => $deviser_id,
+				"deviser_id" => $person_id,
 				"product_state" => Product2::PRODUCT_STATE_DRAFT,
 			]);
 		} else {
@@ -79,7 +79,7 @@ class DeviserController extends CController
 
 		// their products, for selected category
 		$products = Product2::findSerialized([
-			"deviser_id" => $deviser_id,
+			"deviser_id" => $person_id,
 			"categories" => (empty($selectedSubcategory->short_id)) ? $selectedCategory->getShortIds() : $selectedSubcategory->getShortIds(),
 			"product_state" => Product2::PRODUCT_STATE_ACTIVE,
 		]);
@@ -95,10 +95,10 @@ class DeviserController extends CController
 		]);
 	}
 
-	public function actionStoreEdit($slug, $deviser_id)
+	public function actionStoreEdit($slug, $person_id)
 	{
 		// get the category object
-		$person = Person::findOneSerialized($deviser_id);
+		$person = Person::findOneSerialized($person_id);
 
 		if (!$person || !$person->isDeviser()) {
 			throw new NotFoundHttpException();
@@ -122,7 +122,7 @@ class DeviserController extends CController
 		}
 
 		$unpublishedWorks = Product2::findSerialized([
-			"deviser_id" => $deviser_id,
+			"deviser_id" => $person_id,
 			"product_state" => Product2::PRODUCT_STATE_DRAFT,
 		]);
 
@@ -136,9 +136,9 @@ class DeviserController extends CController
 		]);
 	}
 
-	public function actionAbout($slug, $deviser_id)
+	public function actionAbout($slug, $person_id)
 	{
-		$person = Person::findOneSerialized($deviser_id);
+		$person = Person::findOneSerialized($person_id);
 
 		if (!$person || !$person->isDeviser()) {
 			throw new NotFoundHttpException();
@@ -158,9 +158,9 @@ class DeviserController extends CController
 		]);
 	}
 
-	public function actionAboutEdit($slug, $deviser_id)
+	public function actionAboutEdit($slug, $person_id)
 	{
-		$person = Person::findOneSerialized($deviser_id);
+		$person = Person::findOneSerialized($person_id);
 
 		if (!$person || !$person->isDeviser()) {
 			throw new NotFoundHttpException();
@@ -176,9 +176,9 @@ class DeviserController extends CController
 		]);
 	}
 
-	public function actionPress($slug, $deviser_id)
+	public function actionPress($slug, $person_id)
 	{
-		$person = Person::findOneSerialized($deviser_id);
+		$person = Person::findOneSerialized($person_id);
 
 		if (!$person || !$person->isDeviser()) {
 			throw new NotFoundHttpException();
@@ -199,10 +199,10 @@ class DeviserController extends CController
 		]);
 	}
 
-	public function actionPressEdit($slug, $deviser_id)
+	public function actionPressEdit($slug, $person_id)
 	{
 		// get the category object
-		$person = Person::findOneSerialized($deviser_id);
+		$person = Person::findOneSerialized($person_id);
 
 		if (!$person || !$person->isDeviser()) {
 			throw new NotFoundHttpException();
@@ -218,9 +218,9 @@ class DeviserController extends CController
 		]);
 	}
 
-	public function actionVideos($slug, $deviser_id)
+	public function actionVideos($slug, $person_id)
 	{
-		$person = Person::findOneSerialized($deviser_id);
+		$person = Person::findOneSerialized($person_id);
 
 		if (!$person || !$person->isDeviser()) {
 			throw new NotFoundHttpException();
@@ -241,10 +241,10 @@ class DeviserController extends CController
 		]);
 	}
 
-	public function actionVideosEdit($slug, $deviser_id)
+	public function actionVideosEdit($slug, $person_id)
 	{
 		// get the category object
-		$person = Person::findOneSerialized($deviser_id);
+		$person = Person::findOneSerialized($person_id);
 
 		if (!$person || !$person->isDeviser()) {
 			throw new NotFoundHttpException();
@@ -260,9 +260,9 @@ class DeviserController extends CController
 		]);
 	}
 
-	public function actionFaq($slug, $deviser_id)
+	public function actionFaq($slug, $person_id)
 	{
-		$person = Person::findOneSerialized($deviser_id);
+		$person = Person::findOneSerialized($person_id);
 
 		if (!$person || !$person->isDeviser()) {
 			throw new NotFoundHttpException();
@@ -283,10 +283,10 @@ class DeviserController extends CController
 		]);
 	}
 
-	public function actionFaqEdit($slug, $deviser_id)
+	public function actionFaqEdit($slug, $person_id)
 	{
 		// get the category object
-		$person = Person::findOneSerialized($deviser_id);
+		$person = Person::findOneSerialized($person_id);
 
 		if (!$person || !$person->isDeviser()) {
 			throw new NotFoundHttpException();
@@ -302,9 +302,9 @@ class DeviserController extends CController
 		]);
 	}
 
-	public function actionLoved($slug, $deviser_id)
+	public function actionLoved($slug, $person_id)
 	{
-		$person = Person::findOneSerialized($deviser_id);
+		$person = Person::findOneSerialized($person_id);
 
 		if (!$person || !$person->isDeviser()) {
 			throw new NotFoundHttpException();
@@ -318,7 +318,7 @@ class DeviserController extends CController
 			}
 		}
 
-		$loveds = Loved::findSerialized(['person_id' => $deviser_id]);
+		$loveds = Loved::findSerialized(['person_id' => $person_id]);
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("loved-view", [
 			'person' => $person,
@@ -326,9 +326,9 @@ class DeviserController extends CController
 		]);
 	}
 
-	public function actionBoxes($slug, $deviser_id)
+	public function actionBoxes($slug, $person_id)
 	{
-		$person = Person::findOneSerialized($deviser_id);
+		$person = Person::findOneSerialized($person_id);
 
 		if (!$person || !$person->isDeviser()) {
 			throw new NotFoundHttpException();
@@ -342,7 +342,7 @@ class DeviserController extends CController
 			}
 		}
 
-		$boxes = Box::findSerialized(['person_id' => $deviser_id]);
+		$boxes = Box::findSerialized(['person_id' => $person_id]);
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("boxes-view", [
 			'person' => $person,
@@ -350,9 +350,9 @@ class DeviserController extends CController
 		]);
 	}
 
-	public function actionBoxDetail($slug, $deviser_id, $box_id)
+	public function actionBoxDetail($slug, $person_id, $box_id)
 	{
-		$person = Person::findOneSerialized($deviser_id);
+		$person = Person::findOneSerialized($person_id);
 
 		if (!$person || !$person->isDeviser()) {
 			throw new NotFoundHttpException();

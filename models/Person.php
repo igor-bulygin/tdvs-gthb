@@ -1141,23 +1141,31 @@ class Person extends CActiveRecord implements IdentityInterface
 	public function getStoreLink($categoryId = null)
 	{
 		if ($this->isDeviser()) {
-			return Url::to(["/deviser/store", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id, 'category' => $categoryId], true);
+			return Url::to(["/deviser/store", "slug" => $this->getSlug(), 'person_id' => $this->short_id, 'category' => $categoryId], true);
 		} else {
 			return null;
 		}
 	}
 
-	public function getStoreEditLink($categoryId = null)
+	public function getStoreEditLink($params = [])
 	{
 		if ($this->isDeviser()) {
-			return Url::to(["/deviser/store-edit", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id, 'category' => $categoryId], true);
+			$params = array_merge(
+				[
+					"/deviser/store-edit",
+					"slug" => $this->getSlug(),
+					'person_id' => $this->short_id,
+				],
+				$params
+			);
+			return Url::to($params, true);
 		}
 	}
 
 	public function getLovedLink()
 	{
 		if ($this->isDeviser()) {
-			return Url::to(["/deviser/loved", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id], true);
+			return Url::to(["/deviser/loved", "slug" => $this->getSlug(), 'person_id' => $this->short_id], true);
 		} elseif ($this->isInfluencer()) {
 			return Url::to(["/influencer/loved", "slug" => $this->getSlug(), 'person_id' => $this->short_id], true);
 		} elseif ($this->isClient()) {
@@ -1169,7 +1177,7 @@ class Person extends CActiveRecord implements IdentityInterface
 	public function getBoxesLink()
 	{
 		if ($this->isDeviser()) {
-			return Url::to(["/deviser/boxes", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id], true);
+			return Url::to(["/deviser/boxes", "slug" => $this->getSlug(), 'person_id' => $this->short_id], true);
 		} elseif ($this->isInfluencer()) {
 			return Url::to(["/influencer/boxes", "slug" => $this->getSlug(), 'person_id' => $this->short_id], true);
 		} elseif ($this->isClient()) {
@@ -1181,7 +1189,7 @@ class Person extends CActiveRecord implements IdentityInterface
 	public function getAboutLink()
 	{
 		if ($this->isDeviser()) {
-			return Url::to(["/deviser/about", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id], true);
+			return Url::to(["/deviser/about", "slug" => $this->getSlug(), 'person_id' => $this->short_id], true);
 		} elseif ($this->isInfluencer()) {
 			return Url::to(["/influencer/about", "slug" => $this->getSlug(), 'person_id' => $this->short_id], true);
 		} elseif ($this->isClient()) {
@@ -1193,7 +1201,7 @@ class Person extends CActiveRecord implements IdentityInterface
 	public function getAboutEditLink()
 	{
 		if ($this->isDeviser()) {
-			return Url::to(["/deviser/about-edit", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id], true);
+			return Url::to(["/deviser/about-edit", "slug" => $this->getSlug(), 'person_id' => $this->short_id], true);
 		} elseif ($this->isInfluencer()) {
 			return Url::to(["/influencer/about-edit", "slug" => $this->getSlug(), 'person_id' => $this->short_id], true);
 		}
@@ -1203,7 +1211,7 @@ class Person extends CActiveRecord implements IdentityInterface
 	public function getPressLink()
 	{
 		if ($this->isDeviser()) {
-			return Url::to(["/deviser/press", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id], true);
+			return Url::to(["/deviser/press", "slug" => $this->getSlug(), 'person_id' => $this->short_id], true);
 		} elseif ($this->isInfluencer()) {
 			return Url::to(["/influencer/press", "slug" => $this->getSlug(), 'person_id' => $this->short_id], true);
 		}
@@ -1213,7 +1221,7 @@ class Person extends CActiveRecord implements IdentityInterface
 	public function getPressEditLink()
 	{
 		if ($this->isDeviser()) {
-			return Url::to(["/deviser/press-edit", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id], true);
+			return Url::to(["/deviser/press-edit", "slug" => $this->getSlug(), 'person_id' => $this->short_id], true);
 		} elseif ($this->isInfluencer()) {
 			return Url::to(["/influencer/press-edit", "slug" => $this->getSlug(), 'person_id' => $this->short_id],true);
 		}
@@ -1224,7 +1232,7 @@ class Person extends CActiveRecord implements IdentityInterface
 	public function getVideosLink()
 	{
 		if ($this->isDeviser()) {
-			return Url::to(["/deviser/videos", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id], true);
+			return Url::to(["/deviser/videos", "slug" => $this->getSlug(), 'person_id' => $this->short_id], true);
 		} elseif ($this->isInfluencer()) {
 			return Url::to(["/influencer/videos", "slug" => $this->getSlug(), 'person_id' => $this->short_id], true);
 		}
@@ -1234,7 +1242,7 @@ class Person extends CActiveRecord implements IdentityInterface
 	public function getVideosEditLink()
 	{
 		if ($this->isDeviser()) {
-			return Url::to(["/deviser/videos-edit", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id], true);
+			return Url::to(["/deviser/videos-edit", "slug" => $this->getSlug(), 'person_id' => $this->short_id], true);
 		} elseif ($this->isInfluencer()) {
 			return Url::to(["/influencer/videos-edit", "slug" => $this->getSlug(), 'person_id' => $this->short_id], true);
 		}
@@ -1245,7 +1253,7 @@ class Person extends CActiveRecord implements IdentityInterface
 	public function getFaqLink()
 	{
 		if ($this->isDeviser()) {
-			return Url::to(["/deviser/faq", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id], true);
+			return Url::to(["/deviser/faq", "slug" => $this->getSlug(), 'person_id' => $this->short_id], true);
 		} elseif ($this->isInfluencer()) {
 			return Url::to(["/influencer/faq", "slug" => $this->getSlug(), 'person_id' => $this->short_id], true);
 		}
@@ -1255,7 +1263,7 @@ class Person extends CActiveRecord implements IdentityInterface
 	public function getFaqEditLink()
 	{
 		if ($this->isDeviser()) {
-			return Url::to(["/deviser/faq-edit", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id], true);
+			return Url::to(["/deviser/faq-edit", "slug" => $this->getSlug(), 'person_id' => $this->short_id], true);
 		} elseif ($this->isInfluencer()) {
 			return Url::to(["/influencer/faq-edit", "slug" => $this->getSlug(), 'person_id' => $this->short_id], true);
 		}
