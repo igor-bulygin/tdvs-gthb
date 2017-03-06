@@ -14,7 +14,7 @@
 
 		function submitForm(form) {
 			function onCreateDeviser(data) {
-				$window.location.href = '/deviser/' + data.slug + '/' + data.id + '/about/edit';
+				$window.location.href = data.about_edit_link;
 			}
 			if (form.password_confirm.$error.same)
 				form.$setValidity('password_confirm', false);

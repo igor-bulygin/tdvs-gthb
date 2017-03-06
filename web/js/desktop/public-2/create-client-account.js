@@ -1,19 +1,19 @@
 (function () {
 	"use strict";
 
-	function controller(UtilService, personDataService, invitationDataService, $location, $window) {
+	function controller(UtilService, personDataService, $location, $window) {
 		var vm = this;
 		vm.submitForm = submitForm;
 		vm.has_error = UtilService.has_error;
 
 		function init() {
-			vm.influencer = Object.assign({}, invitation);
+
 		}
 
 		init();
 
 		function submitForm(form) {
-			function onCreateInfluencer(data) {
+			function onCreateClient(data) {
 				$window.location.href = data.about_edit_link;
 			}
 			if (form.password_confirm.$error.same)
@@ -24,7 +24,7 @@
 			if (form.$valid) {
 
 				form.$setSubmitted();
-				personDataService.createInfluencer(vm.influencer, null, onCreateInfluencer, UtilService.onError);
+				personDataService.createDeviser(vm.user, null, onCreateClient, UtilService.onError);
 			}
 		}
 
@@ -32,6 +32,6 @@
 
 	angular
 		.module('todevise', ['api', 'util', 'header', 'ui.bootstrap'])
-		.controller('createInfluencerCtrl', controller);
+		.controller('createClientCtrl', controller);
 
 }());

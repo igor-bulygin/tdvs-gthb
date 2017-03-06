@@ -16,12 +16,18 @@
 		this.Uploads = apiConfig.baseUrl + 'priv/' + apiConfig.version + 'uploads';
 
 		//methods
+		this.createClient = createClient;
 		this.createDeviser = createDeviser;
 		this.createInfluencer = createInfluencer;
 		this.login = login;
 		this.logout = logout;
 		this.getProfile = getProfile;
 		this.updateProfile = updateProfile;
+
+		function createClient(data, params, onSuccess, onError) {
+			data = Object.assign(data, {type: [1]});
+			apiMethods.create(Person, data, params, onSuccess, onError);
+		}
 
 		function createDeviser(data, params, onSuccess, onError) {
 			data = Object.assign(data, {type: [2]});
