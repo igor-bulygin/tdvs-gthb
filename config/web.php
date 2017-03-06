@@ -336,7 +336,6 @@ $config = [
 
 				// PERSON
 				'POST api3/pub/v1/person' => 'api3/pub/v1/person/create',
-				'POST api3/pub/v1/person/signup' => 'api3/pub/v1/person/signup',
 				'GET api3/priv/v1/person/<personId:[^/.]*?>' => 'api3/priv/v1/person/view',
 				'PATCH api3/priv/v1/person/<personId:[^/.]*?>' => 'api3/priv/v1/person/update',
 				'PUT api3/priv/v1/person/<personId:[^/.]*?>' => 'api3/priv/v1/person/update',

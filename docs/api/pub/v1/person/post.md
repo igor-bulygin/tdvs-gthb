@@ -25,3 +25,11 @@ Example about how to call to Web Service to create a new Person account
 * `email`: email of deviser (required)
 * `name`: representative name (required)
 * `password`: password (required)
+
+
+**Request parameters for create a Client**:
+* `type` : array with only one element, with value 1 (required)
+* `email`: email of deviser (required)
+* `name`: representative first name (required)
+* `password`: password (required)
+  
