@@ -46,7 +46,7 @@ class InfluencerController extends CController
 		}
 
 		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE) {
-			if ($person->isInfluencerEditable()) {
+			if ($person->isPersonEditable()) {
 				$this->redirect($person->getAboutEditLink());
 			} else {
 				throw new NotFoundHttpException();
@@ -67,7 +67,7 @@ class InfluencerController extends CController
 			throw new NotFoundHttpException();
 		}
 
-		if (!$person->isInfluencerEditable()) {
+		if (!$person->isPersonEditable()) {
 			throw new UnauthorizedHttpException();
 		}
 
@@ -86,7 +86,7 @@ class InfluencerController extends CController
 		}
 
 		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE) {
-			if ($person->isInfluencerEditable()) {
+			if ($person->isPersonEditable()) {
 				$this->redirect($person->getAboutEditLink());
 			} else {
 				throw new NotFoundHttpException();
@@ -109,7 +109,7 @@ class InfluencerController extends CController
 			throw new NotFoundHttpException();
 		}
 
-		if (!$person->isInfluencerEditable()) {
+		if (!$person->isPersonEditable()) {
 			throw new UnauthorizedHttpException();
 		}
 
@@ -128,7 +128,7 @@ class InfluencerController extends CController
 		}
 
 		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE) {
-			if ($person->isInfluencerEditable()) {
+			if ($person->isPersonEditable()) {
 				$this->redirect($person->getAboutEditLink());
 			} else {
 				throw new NotFoundHttpException();
@@ -151,7 +151,7 @@ class InfluencerController extends CController
 			throw new NotFoundHttpException();
 		}
 
-		if (!$person->isInfluencerEditable()) {
+		if (!$person->isPersonEditable()) {
 			throw new UnauthorizedHttpException();
 		}
 
@@ -170,7 +170,7 @@ class InfluencerController extends CController
 		}
 
 		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE) {
-			if ($person->isInfluencerEditable()) {
+			if ($person->isPersonEditable()) {
 				$this->redirect($person->getAboutEditLink());
 			} else {
 				throw new NotFoundHttpException();
@@ -194,7 +194,7 @@ class InfluencerController extends CController
 		}
 
 		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE) {
-			if ($person->isInfluencerEditable()) {
+			if ($person->isPersonEditable()) {
 				$this->redirect($person->getAboutEditLink());
 			} else {
 				throw new NotFoundHttpException();
@@ -218,7 +218,7 @@ class InfluencerController extends CController
 		}
 
 		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE) {
-			if ($person->isInfluencerEditable()) {
+			if ($person->isPersonEditable()) {
 				$this->redirect($person->getAboutEditLink());
 			} else {
 				throw new NotFoundHttpException();

@@ -30,7 +30,7 @@ $this->params['person_links_target'] = 'public_view';
 			<div class="col-md-10">
 				<?php if (count($videos) == 0) { ?>
 					<div class="empty-wrapper">
-						<?php if ($person->isDeviserEditable()) { ?>
+						<?php if ($person->isPersonEditable()) { ?>
 							<div><a class="red-link-btn" href="<?= Url::to(["deviser/videos-edit", "slug" => $person->slug, 'deviser_id' => $person->short_id])?>">Add / remove videos</a></div>
 						<?php } ?>
 						<img class="sad-face" src="/imgs/sad-face.svg">
@@ -38,7 +38,7 @@ $this->params['person_links_target'] = 'public_view';
 					</div>
 				<?php } else { ?>
 				<div class="video-container">
-					<?php if ($person->isDeviserEditable()) { ?>
+					<?php if ($person->isPersonEditable()) { ?>
 						<div><a class="red-link-btn" href="<?= Url::to(["deviser/videos-edit", "slug" => $person->slug, 'deviser_id' => $person->short_id])?>">Add / remove videos</a></div>
 					<?php } ?>
 					<?php foreach ($videos as $video) { ?>

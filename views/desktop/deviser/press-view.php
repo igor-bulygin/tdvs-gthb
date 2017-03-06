@@ -29,7 +29,7 @@ $this->params['person_links_target'] = 'public_view';
 			<div class="col-md-10">
 				<?php if (count($press) == 0) { ?>
 					<div class="empty-wrapper">
-						<?php if ($person->isDeviserEditable()) { ?>
+						<?php if ($person->isPersonEditable()) { ?>
 							<div><a href="<?= Url::to(["deviser/press-edit", "slug" => $person->slug, 'deviser_id' => $person->short_id])?>" class="red-link-btn">Add / remove photos</a></div>
 						<?php } ?>
 						<img class="sad-face" src="/imgs/sad-face.svg">
@@ -37,7 +37,7 @@ $this->params['person_links_target'] = 'public_view';
 					</div>
 				<?php } else { ?>
 					<div class="empty-wrapper">
-						<?php if ($person->isDeviserEditable()) { ?>
+						<?php if ($person->isPersonEditable()) { ?>
 							<div><a href="<?= Url::to(["deviser/press-edit", "slug" => $person->slug, 'deviser_id' => $person->short_id])?>" class="red-link-btn">Add / remove photos</a></div>
 						<?php } ?>
 						<div class="mesonry-row press-3">

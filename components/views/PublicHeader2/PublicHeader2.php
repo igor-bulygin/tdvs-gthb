@@ -148,7 +148,7 @@ app\components\assets\PublicHeader2Asset::register($this);
 									<?php } elseif ($person->isDeviser()) { ?>
 
 										<li class="header-item">
-											<a href="<?= Url::to(["deviser/about", "slug" => $person->slug, 'deviser_id' => $person->short_id])?>"> <span><?=$person->personalInfoMapping->getBrandName()?></span></a>
+											<a href="<?= $person->getAboutLink()?>"> <span><?=$person->personalInfoMapping->getBrandName()?></span></a>
 											<img class="avatar-logued-user" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getAvatarImage())->resize(25, 25) ?>">
 										</li>
 										<li><a href="#">Sales</a></li>
@@ -162,7 +162,14 @@ app\components\assets\PublicHeader2Asset::register($this);
 										<li><a href="#"><?=$person->personalInfoMapping->getBrandName()?></a></li>
 										<li><a href="#">My orders</a></li>
 
-									<?php } ?>
+									<?php } elseif ($person->isInfluencer()) { ?>
+
+                                        <li class="header-item">
+                                            <a href="<?= $person->getAboutLink()?>"> <span><?=$person->personalInfoMapping->getBrandName()?></span></a>
+                                            <img class="avatar-logued-user" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getAvatarImage())->resize(25, 25) ?>">
+                                        </li>
+
+									<?php }?>
 
 									<li class="separation-line"></li>
 									<li><a href="<?= Url::to(["settings/index", "slug" => $person->slug, 'person_id' => $person->short_id])?>">Settings</a></li>

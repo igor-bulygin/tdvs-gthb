@@ -100,7 +100,7 @@ $this->params['person_menu_store_categories'] = $categories;
 														<?= $product->name ?>
                                                     </p>
                                                     <p class="price">€ <?= $product->getMinimumPrice() ?></p>
-													<?php if ($person->isDeviserEditable()) { ?>
+													<?php if ($person->isPersonEditable()) { ?>
                                                         <a class="edit-product-icon" href="<?= $product->getEditLink()?>" title="Edit work">
                                                             <i class="ion-edit"></i>
                                                         </a>
