@@ -203,6 +203,7 @@
 			}
 
 			function onUpdateProfileSuccess(data) {
+				UtilService.setLeavingModal(false);
 				$window.location.href = vm.person.about_link;
 			}
 
@@ -238,6 +239,18 @@
 				});
 			}
 		});
+
+		//watches
+		$scope.$watch('editAboutCtrl.person', function (newValue, oldValue) {
+			if(newValue) {
+				if(!angular.equals(newValue, vm.person_original)) {
+					UtilService.setLeavingModal(true);
+				} else {
+					UtilService.setLeavingModal(false);
+				}
+			}
+}, true);
+
 
 	}
 

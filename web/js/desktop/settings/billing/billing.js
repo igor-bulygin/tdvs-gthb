@@ -34,6 +34,7 @@
 		function getDeviser() {
 			function onGetProfileSuccess(data) {
 				vm.deviser = angular.copy(data);
+				vm.deviser_original = angular.copy(data);
 			}
 
 			personDataService.getProfile({
@@ -51,6 +52,23 @@
 		}
 
 		function saveBankInformation(form){
+			function onUpdateProfileSuccess(data) {
+				vm.deviser = angular.copy(data);
+				vm.deviser_original = angular.copy(data);
+				$rootScope.$broadcast(settingsEvents.changesSaved);
+			}
+
+			function onUpdateProfileError(err) {
+				$rootScope.$broadcast(settingsEvents.invalidForm);
+				form.$setPristine();
+				if(UtilService.isObject(err.data.errors)) {
+					vm.errors = angular.copy(err.data.errors);
+						for(var key in vm.errors) {
+							form[key].$setValidity('valid', false);
+						}
+				}
+			}
+
 			form.$setSubmitted();
 			if(form.$valid) {
 				if(!UtilService.isObject(vm.deviser.settings)) {
@@ -58,29 +76,22 @@
 				}
 				vm.deviser.settings.bank_info = angular.copy(vm.bank_information);
 				vm.deviser.deviser_id = vm.deviser.id;
-				vm.deviser.$update().then(function (dataDeviser) {
-					vm.deviser = angular.copy(dataDeviser);
-					$rootScope.$broadcast(settingsEvents.changesSaved);
-				}, function (err) {
-					$rootScope.$broadcast(settingsEvents.invalidForm);
-					form.$setPristine();
-					if(UtilService.isObject(err.data.errors)) {
-						vm.errors = angular.copy(err.data.errors);
-						for(var key in vm.errors) {
-							form[key].$setValidity('valid', false);
-						}
-					}
-				})
+
+				personDataService.updateProfile(vm.deviser, {
+					personId: vm.deviser.deviser_id
+				}, onUpdateProfileSuccess, onUpdateProfileError);
 			} else {
 				$rootScope.$broadcast(settingsEvents.invalidForm);
 				//TODO: Show errors
 			}
 		}
 
+		//events
 		$scope.$on(settingsEvents.saveChanges, function(event, args) {
 			saveBankInformation(vm.bankInformationForm);
 		})
 
+		//watches
 		$scope.$watch('billingCtrl.bank_information', function(newValue, oldValue) {
 			if(vm.bankInformationForm && vm.bankInformationForm.$invalid) {
 				for(var key in vm.errors) {
@@ -89,6 +100,17 @@
 				delete vm.errors;
 			}
 		}, true);
+
+		$scope.$watch('billingCtrl.deviser', function(newValue, oldValue) {
+			if(newValue) {
+				if(!angular.equals(newValue, vm.deviser_original)) {
+					UtilService.setLeavingModal(true);
+				} else {
+					UtilService.setLeavingModal(false);
+				}
+			}
+		})
+
 	}
 
 	angular.module('todevise')
