@@ -42,4 +42,30 @@
 		font-size: 19px;
 	}
 }
+.modal-sm {
+    width: 425px!important;
+	@media (max-width: 768px){
+        width: 300px!important;
+    }
+	.modal-content{
+		min-width: auto!important;
+		@media (max-width: 768px){
+			min-width: auto!important;
+		}
+	}
+	h3{
+		margin:3px 0 0 0;
+	}
+	.modal-header{
+		padding: 20px 20px 10px;
+	}
+	.modal-body{
+		padding: 10px 20px 20px;
+	}
+	.green-modal-btn{
+		width: 114px;
+  		height: 40px;
+		margin-top: 5px;
+	}
+}
 
