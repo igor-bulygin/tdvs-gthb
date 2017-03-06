@@ -156,10 +156,9 @@ app\components\assets\PublicHeader2Asset::register($this);
 									<?php } elseif ($person->isClient()) { ?>
 
 										<li class="header-item">
-											<span><?=$person->personalInfoMapping->getBrandName()?></span>
+                                            <a href="<?= $person->getAboutLink()?>"> <span><?=$person->personalInfoMapping->getBrandName()?></span></a>
 											<img class="avatar-logued-user" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getAvatarImage())->resize(25, 25) ?>">
 										</li>
-										<li><a href="#"><?=$person->personalInfoMapping->getBrandName()?></a></li>
 										<li><a href="#">My orders</a></li>
 
 									<?php } elseif ($person->isInfluencer()) { ?>
