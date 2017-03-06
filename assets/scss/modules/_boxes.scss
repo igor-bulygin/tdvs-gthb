@@ -34,3 +34,24 @@
 	font-size: 16px;
 	margin: 50px 0 0 0;
 }
+.image-save-wrapper{
+	width: 50px;
+	height: 50px;
+	overflow: hidden;
+	border: 1px solid $light-grey;
+	float:left;
+}
+.save-box-searcher-wrapper{
+	input{}
+	input-group-addon{}
+}
+.form-save-box{
+	float: left;
+}
+.btn-create-box{
+	float: right;
+}
+.save-modal-row{
+	clear: both;
+    width: 100%;
+}

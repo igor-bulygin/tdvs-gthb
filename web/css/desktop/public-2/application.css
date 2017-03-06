@@ -709,7 +709,7 @@ a, a:hover, a:focus {
 .white-rounded-input {
   margin-bottom: 15px;
   height: 40px;
-  color: #ffffff;
+  color: #1C1919;
   background-color: #ffffff;
   border: 1px solid #d7d7d7;
   font-family: "Univers Condensed Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -1082,6 +1082,22 @@ input[type="radio"] .styled:checked + label::after {
     width: 114px;
     height: 40px;
     margin-top: 5px; }
+
+.modal-save-title {
+  font-size: 18px !important;
+  display: block;
+  width: 100%;
+  text-align: left;
+  float: none !important; }
+
+.modal-save-subtitle {
+  font-family: "Univers Condensed Light", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+
+.title-subtitle-wrapper {
+  margin: 0 0 0 63px; }
+
+.modal-save-total {
+  color: #9a9a9a; }
 
 .showcase figcaption img, .banner-deviser-content .deviser-profile .avatar img, .product-description .product-description-content .work-description-wrapper .comment-wrapper .avatar img, .product-description .product-description-content .work-description-wrapper .comment-user .avatar img, .work-description-wrapper .comment-wrapper .avatar img, .work-description-wrapper .comment-user .avatar img {
   border: 1px solid #9a9a9a;
@@ -3253,6 +3269,23 @@ input[type="radio"] .styled:checked + label::after {
   padding: 3px 0 0 0;
   font-size: 16px;
   margin: 50px 0 0 0; }
+
+.image-save-wrapper {
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+  border: 1px solid #bfbfbf;
+  float: left; }
+
+.form-save-box {
+  float: left; }
+
+.btn-create-box {
+  float: right; }
+
+.save-modal-row {
+  clear: both;
+  width: 100%; }
 
 .become-deviser-wrapper .become-deviser-cover {
   background: url("/imgs/become_a_deviser_background.png") no-repeat;
