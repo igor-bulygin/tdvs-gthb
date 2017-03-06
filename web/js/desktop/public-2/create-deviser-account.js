@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(UtilService, personDataService, invitationDataService, toastr, $location, $window) {
+	function controller(UtilService, personDataService, invitationDataService, $location, $window) {
 		var vm = this;
 		vm.submitForm = submitForm;
 		vm.has_error = UtilService.has_error;
@@ -31,7 +31,7 @@
 	}
 
 	angular
-		.module('todevise', ['api', 'util', 'header', 'toastr', 'ui.bootstrap'])
+		.module('todevise', ['api', 'util', 'header', 'ui.bootstrap'])
 		.controller('createDeviserCtrl', controller);
 
 }());
