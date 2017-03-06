@@ -114,7 +114,7 @@ app\components\assets\PublicHeader2Asset::register($this);
 				</li>
 				<?php if (Yii::$app->user->isGuest) { ?>
 					<li class="log">
-						<a href="#">
+						<a href="<?=Url::to(['/signup'])?>">
 							Sign up
 						</a>
 					</li>

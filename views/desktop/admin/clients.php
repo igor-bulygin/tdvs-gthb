@@ -1,5 +1,5 @@
 <?php
-use app\assets\desktop\admin\InfluencersAsset;
+use app\assets\desktop\admin\ClientsAsset;
 use app\models\Person;
 use yii\grid\GridView;
 use yii\helpers\Html;
@@ -7,19 +7,19 @@ use yii\helpers\Json;
 use yii\web\View;
 
 /* @var $this yii\web\View */
-/* @var $influencers yii\data\ActiveDataProvider */
+/* @var $clients yii\data\ActiveDataProvider */
 
 $this->params['breadcrumbs'][] = [
-	'label' => 'Influencers',
-	'url' => ['/admin/influencers']
+	'label' => 'clients',
+	'url' => ['/admin/clients']
 ];
 
-InfluencersAsset::register($this);
+ClientsAsset::register($this);
 
-$this->title = 'Todevise / Admin / Influencers';
+$this->title = 'Todevise / Admin / Clients';
 ?>
 
-<div class="row no-gutter" ng-controller="influencersCtrl as influencersCtrl">
+<div class="row no-gutter" ng-controller="clientsCtrl as clientsCtrl">
 	<div class="col-xs-12 no-horizontal-padding">
 
 		<?php $this->registerJs("var _DEVISER = " . Json::encode(Person::DEVISER) . ";", View::POS_HEAD); ?>
@@ -27,21 +27,21 @@ $this->title = 'Todevise / Admin / Influencers';
 		<div class="row no-gutter page-title-row">
 			<div class="row-same-height">
 				<div class="col-xs-2 col-height col-middle">
-					<h2 class="page-title funiv_bold fs-upper fc-fff fs1-071"><?= Yii::t("app/admin", "Influencers"); ?></h2>
+					<h2 class="page-title funiv_bold fs-upper fc-fff fs1-071"><?= Yii::t("app/admin", "Clients"); ?></h2>
 				</div>
 				<div class="col-xs-6 col-height col-middle flex flex-align-center">
 
 				</div>
 <!--				<div class="col-xs-4 col-height col-middle">-->
-<!--					<button class="btn btn-default btn-purple fc-fff funiv fs0-786 fs-upper pull-right" ng-click="influencersCtrl.create_new()">--><?//= Yii::t("app/admin", "Create new"); ?><!--</button>-->
+<!--					<button class="btn btn-default btn-purple fc-fff funiv fs0-786 fs-upper pull-right" ng-click="clientsCtrl.create_new()">--><?//= Yii::t("app/admin", "Create new"); ?><!--</button>-->
 <!--				</div>-->
 			</div>
 		</div>
 
 		<?php
 			echo GridView::widget([
-				'id' => 'influencers_list',
-				'dataProvider' => $influencers,
+				'id' => 'clients_list',
+				'dataProvider' => $clients,
 				'options' => [
 					'class' => 'funiv fc-fff fs1-071',
 				],
@@ -71,7 +71,7 @@ $this->title = 'Todevise / Admin / Influencers';
 							'delete' => function($url, $model, $key) {
 								return Html::tag("span", "", [
 									"class" => "pointer glyphicon glyphicon-trash fc-fff fs1",
-									"ng-click" => "influencersCtrl.delete('$model->short_id')"
+									"ng-click" => "clientsCtrl.delete('$model->short_id')"
 								]);
 							}
 						],

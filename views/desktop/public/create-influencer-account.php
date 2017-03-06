@@ -35,18 +35,18 @@ $this->registerJs("var invitation = ".\yii\helpers\Json::encode($invitation), yi
                         <form-errors field="createInfluencerCtrl.form.email" condition="createInfluencerCtrl.has_error(createInfluencerCtrl.form, createInfluencerCtrl.form.email)"></form-errors>
                     </div>
                     <div class="row">
-                        <label>Name</label>
-                        <input type="text" class="form-control grey-input ng-class:{'error-input': createInfluencerCtrl.has_error(createInfluencerCtrl.form, createInfluencerCtrl.form.name)}" name="name" ng-model="createInfluencerCtrl.influencer.name" required>
+                        <label for="name">Name</label>
+                        <input type="text" id="name"" class="form-control grey-input ng-class:{'error-input': createInfluencerCtrl.has_error(createInfluencerCtrl.form, createInfluencerCtrl.form.name)}" name="name" ng-model="createInfluencerCtrl.influencer.name" required>
                         <form-errors field="createInfluencerCtrl.form.name" condition="createInfluencerCtrl.has_error(createInfluencerCtrl.form, createInfluencerCtrl.form.name)"></form-errors>
                     </div>
                     <div class="row">
-                        <label>Set your password</label>
-                        <input type="password" id="email" class="form-control grey-input password ng-class:{'error-input':createInfluencerCtrl.has_error(createInfluencerCtrl.form, createInfluencerCtrl.form.password)}" name="password" ng-model="createInfluencerCtrl.influencer.password" required>
+                        <label for="password">Set your password</label>
+                        <input type="password" id="password" class="form-control grey-input password ng-class:{'error-input':createInfluencerCtrl.has_error(createInfluencerCtrl.form, createInfluencerCtrl.form.password)}" name="password" ng-model="createInfluencerCtrl.influencer.password" required>
                         <form-errors field="createInfluencerCtrl.form.password" condition="createInfluencerCtrl.has_error(createInfluencerCtrl.form, createInfluencerCtrl.form.password)"></form-errors>
                     </div>
                     <div class="row">
-                        <label>Repeat password</label>
-                        <input type="password" id="email" class="form-control grey-input password ng-class:{'error-input': createInfluencerCtrl.has_error(createInfluencerCtrl.form, createInfluencerCtrl.form.password_confirm) && createInfluencerCtrl.form.password_confirm.$error.same}" name="password_confirm" ng-model="createInfluencerCtrl.password_confirm" required>
+                        <label for="password_confirm">Repeat password</label>
+                        <input type="password" id="password_confirm" class="form-control grey-input password ng-class:{'error-input': createInfluencerCtrl.has_error(createInfluencerCtrl.form, createInfluencerCtrl.form.password_confirm) && createInfluencerCtrl.form.password_confirm.$error.same}" name="password_confirm" ng-model="createInfluencerCtrl.password_confirm" required>
                         <div ng-show="createInfluencerCtrl.has_error(createInfluencerCtrl.form, createInfluencerCtrl.form.password_confirm) && createInfluencerCtrl.form.password_confirm.$error.same" tdv-comparator value1="{{createInfluencerCtrl.influencer.password}}" value2="{{createInfluencerCtrl.password_confirm}}" result="createInfluencerCtrl.form.password_confirm.$error.same">
                             <form-messages field="createInfluencerCtrl.form.password_confirm"></form-messages>
                         </div>

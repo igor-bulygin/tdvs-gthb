@@ -223,6 +223,7 @@ $config = [
 				'/become-a-deviser' => 'public/become-deviser',
 				'/create-deviser-account' => 'public/create-deviser-account',
 				'/create-influencer-account' => 'public/create-influencer-account',
+				'/signup' => 'public/signup',
 
 				//Links for a cart listing
 				'cart/' => 'public/cart',
@@ -306,14 +307,7 @@ $config = [
 
 				// API routing (public)
 				'GET api3/pub/v1/products/<id:[^/.]*?>' => 'api3/pub/v1/product/view', // override "view" action to accept alphanumeric ids
-
-
-				// Refactor API
-				'POST api3/pub/v1/person' => 'api3/pub/v1/person/create',
-				'POST api3/pub/v1/devisers' => 'api3/pub/v1/deviser/create', // TODO: delete
-
 				'POST api3/pub/v1/invitation/request-become-deviser' => 'api3/pub/v1/invitation/request-become-deviser',
-				'POST api3/pub/v1/devisers/invitation-requests' => 'api3/pub/v1/deviser/invitation-requests-post', // TODO: delete
 
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/product'],
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/faq'],
@@ -337,11 +331,14 @@ $config = [
 				// ORDER
 				'GET api3/pub/v1/order/<orderId:[^/.]*?>' => 'api3/pub/v1/order/view',
 
-				// API routing (private)
+				// PERSON
+				'POST api3/pub/v1/person' => 'api3/pub/v1/person/create',
+				'POST api3/pub/v1/person/signup' => 'api3/pub/v1/person/signup',
 				'GET api3/priv/v1/person/<personId:[^/.]*?>' => 'api3/priv/v1/person/view',
 				'PATCH api3/priv/v1/person/<personId:[^/.]*?>' => 'api3/priv/v1/person/update',
 				'PUT api3/priv/v1/person/<personId:[^/.]*?>' => 'api3/priv/v1/person/update',
 
+				// PRODUCT
 				'GET api3/priv/v1/products/<id:[^/.]*?>' => 'api3/priv/v1/product/view',
 				'GET api3/priv/v1/products' => 'api3/priv/v1/product/index',
 				'POST api3/priv/v1/products' => 'api3/priv/v1/product/create',

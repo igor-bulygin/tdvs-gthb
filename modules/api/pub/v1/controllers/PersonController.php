@@ -68,6 +68,41 @@ class PersonController extends AppPublicController
 	}
 
 	/**
+	 * Create a new Person (client) account
+	 *
+	 * @throws BadRequestHttpException
+	 */
+	public function actionSignup()
+	{
+
+		$person = new Person();
+		$person->type = [Person::CLIENT];
+
+		$person->setScenario(Person::SCENARIO_CLIENT_CREATE);
+		$person->load(Yii::$app->request->post(), '');
+
+		$person->credentials = ["email" => Yii::$app->request->post('email')];
+		$person->setPassword(Yii::$app->request->post("password"));
+
+		// Load personal info directly to subdocument
+		$person->personalInfoMapping->load(Yii::$app->request->post(), '');
+		// Refresh properties from the embed
+		$person->refreshFromEmbedded();
+
+		if ($person->validate()) {
+			$person->save();
+
+			// return information needed to client side
+			Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_PUBLIC);
+
+			return $person;
+		} else {
+			Yii::$app->response->setStatusCode(400); // Bad Request
+			return ["errors" => $person->errors];
+		}
+	}
+
+	/**
 	 * Get validation scenario from request param
 	 *
 	 * @param Person $deviser

@@ -83,6 +83,17 @@ use yii\widgets\Breadcrumbs;
 												'options' => [
 													'class' => 'item-submenu funiv fs0-929',
 												],
+												'label' => 'Clients',
+												'url' => Url::toRoute(['admin/clients']),
+												'active' => (
+													Utils::compareURL('admin/clients') ||
+													Utils::compareURL('admin/client')
+												)
+											],
+											[
+												'options' => [
+													'class' => 'item-submenu funiv fs0-929',
+												],
 												'label' => 'Customers',
 												'url' => Url::toRoute(['admin/customers']),
 												'active' => (

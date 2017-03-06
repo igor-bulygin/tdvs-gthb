@@ -4,7 +4,6 @@ use app\models\Person;
 use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Json;
-use yii\helpers\Url;
 use yii\web\View;
 
 /* @var $this yii\web\View */
@@ -58,17 +57,17 @@ $this->title = 'Todevise / Admin / Devisers';
 						'template' => "{products} {view} {update} {delete}",
 						'buttons' => [
 							'products' => function($url, $model, $key) {
-								$url = Url::to(["admin/products", "slug" => $model->slug]);
+								$url = $model->getStoreLink();
 								return Html::a('<span class="glyphicon glyphicon-th fc-fff fs1"></span>', $url);
 							},
 
 							'view' => function($url, $model, $key) {
-								$url = Url::to(["deviser/about", "slug" => $model->slug, 'deviser_id' => $model->short_id]);
+								$url = $model->getAboutLink();
 								return Html::a('<span class="glyphicon glyphicon-user fc-fff fs1"></span>', $url);
 							},
 
 							'update' => function($url, $model, $key) {
-								$url = Url::to(["deviser/about-edit", "slug" => $model->slug, 'deviser_id' => $model->short_id]);
+								$url = $model->getAboutEditLink();
 								return Html::a('<span class="glyphicon glyphicon-edit fc-fff fs1"></span>', $url);
 							},
 

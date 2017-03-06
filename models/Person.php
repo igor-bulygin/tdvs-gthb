@@ -54,6 +54,8 @@ class Person extends CActiveRecord implements IdentityInterface
 	const SCENARIO_INFLUENCER_UPDATE_DRAFT = 'influencer-update-draft';
 	const SCENARIO_INFLUENCER_UPDATE_PROFILE = 'influencer-update-profile';
 
+	const SCENARIO_CLIENT_CREATE = 'client-create';
+
 	const SCENARIO_TREND_SETTER_PROFILE_UPDATE = 'trend-setter-profile-update';
 
 	/**
@@ -326,7 +328,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'type',
 				],
 				'required',
-				'on' => [self::SCENARIO_DEVISER_CREATE_DRAFT, self::SCENARIO_INFLUENCER_CREATE_DRAFT]
+				'on' => [self::SCENARIO_DEVISER_CREATE_DRAFT, self::SCENARIO_INFLUENCER_CREATE_DRAFT, self::SCENARIO_CLIENT_CREATE]
 			],
 			[
 				[

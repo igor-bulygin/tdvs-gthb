@@ -136,6 +136,12 @@ class PublicController extends CController
 		return $this->render("create-influencer-account", ["invitation" => $invitation]);
 	}
 
+	public function actionSignup()
+	{
+		$this->layout = '/desktop/public-2.php';
+		return $this->render("signup", []);
+	}
+
 	public function actionCart()
 	{
 		$this->layout = '/desktop/public-2.php';
