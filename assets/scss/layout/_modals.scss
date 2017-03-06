@@ -68,4 +68,19 @@
 		margin-top: 5px;
 	}
 }
-
+.modal-save-title{
+	font-size: 18px!important;
+	display: block;
+	width: 100%;
+	text-align: left;
+	float: none!important;
+}
+.modal-save-subtitle{
+	font-family: $font-family--secondary; 
+}
+.title-subtitle-wrapper{
+	margin: 0 0 0 63px;
+}
+.modal-save-total{
+	color: $dark_grey;
+}

@@ -1,24 +1,28 @@
 <div class="modal-header">
-	<img ng-src="{{modalSaveBoxCtrl.product_main_photo}}" width="50" class="pull-left" ng-cloak>
+	<div class="image-save-wrapper">
+		<img ng-src="{{modalSaveBoxCtrl.product_main_photo}}" width="50" class="pull-left" ng-cloak>
+	</div>
 	<button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="modalSaveBoxCtrl.dismiss()">
 		<span class="ion-ios-close" aria-hidden="true"></span>
 	</button>
-	<h3 class="modal-title">Save in a box</h3>
-	<p>Select box (<span ng-bind="modalSaveBoxCtrl.resolve.boxes.meta.total_count"></span> total)</p>
+	<div class="title-subtitle-wrapper">
+		<h3 class="modal-save-title">Save in a box</h3>
+		<p class="modal-save-subtitle">Select box <span class="modal-save-total">(<span ng-bind="modalSaveBoxCtrl.resolve.boxes.meta.total_count"></span> total)</span></p>
+	</div>
 </div>
 <div class="modal-body">
-	<div class="row" ng-hide="modalSaveBoxCtrl.creatingBox">
-		<form class="form-inline" name="modalSaveBoxCtrl.search_form">
+	<div class="save-modal-row" ng-hide="modalSaveBoxCtrl.creatingBox">
+		<form class="form-inline form-save-box" name="modalSaveBoxCtrl.search_form">
 			<div class="form-group">
-				<div class="input-group">
-					<input type="text" class="form-control" ng-model="modalSaveBoxCtrl.search_term.name">
+				<div class="input-group save-box-searcher-wrapper">
+					<input type="text" class="form-control" ng-model="modalSaveBoxCtrl.search_term.name" placeholder="Buscar">
 					<div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
 				</div>
 			</div>
 		</form>
-		<button class="btn btn-default" ng-click="modalSaveBoxCtrl.showCreateBox()">Create box</button>
+		<button class="btn btn-default btn-create-box" ng-click="modalSaveBoxCtrl.showCreateBox()">Create new box</button>
 	</div>
-	<div class="row" ng-if="modalSaveBoxCtrl.creatingBox">
+	<div class="save-modal-row" ng-if="modalSaveBoxCtrl.creatingBox">
 		<form class="form-inline" name="modalSaveBoxCtrl.create_form">
 			<div class="form-group">
 				<input type="text" class="form-control" ng-model="modalSaveBoxCtrl.new_box_name" required>
@@ -26,11 +30,11 @@
 			</div>
 		</form>
 	</div>
-	<div class="row" ng-repeat="box in modalSaveBoxCtrl.resolve.boxes.items | filter:modalSaveBoxCtrl.search_term" ng-if="modalSaveBoxCtrl.resolve.boxes.items.length > 0">
+	<div class="save-modal-row" ng-repeat="box in modalSaveBoxCtrl.resolve.boxes.items | filter:modalSaveBoxCtrl.search_term" ng-if="modalSaveBoxCtrl.resolve.boxes.items.length > 0">
 		<span ng-bind="box.name"></span>
 		<span class="pull-right glyphicon glyphicon-download-alt" ng-click="modalSaveBoxCtrl.addProductToBox(modalSaveBoxCtrl.product.id, box.id)"></span>
 	</div>
-	<div class="row" ng-if="modalSaveBoxCtrl.resolve.boxes.items.length === 0">
+	<div class="save-modal-row" ng-if="modalSaveBoxCtrl.resolve.boxes.items.length === 0">
 		<p>You don't have any boxes yet.</p>
 		<p>Create one by clicking the CREATE NEW BOX button.</p>
 	</div>
