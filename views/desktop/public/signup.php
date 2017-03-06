@@ -41,7 +41,7 @@ $this->title = 'Create an account - Todevise';
 				</div>
 				<div class="row">
 					<div class="checkbox checkbox-circle remember-me">
-						<input id="checkbox7" class="styled" type="checkbox">
+						<input id="checkbox7" class="styled" type="checkbox" required>
 						<label for="checkbox7">
 							I accept the Todevise Terms & Conditions
 						</label>

@@ -509,6 +509,13 @@ class Person extends CActiveRecord implements IdentityInterface
 					'name' => "brandName",
 					'url_images' => 'urlImagesLocation',
 					'url_avatar' => "avatarImage128",
+					'store_link' => 'storeLink',
+					'loved_link' => 'lovedLink',
+					'boxes_link' => 'boxesLink',
+					'about_link' => 'aboutLink',
+					'press_link' => 'pressLink',
+					'videos_link' => 'videosLink',
+					'faq_link' => 'faqLink',
 					'type',
 				];
 
@@ -1131,24 +1138,20 @@ class Person extends CActiveRecord implements IdentityInterface
 			;
 	}
 
-	public function getStoreLink($category = null)
+	public function getStoreLink($categoryId = null)
 	{
-		return Url::to([
-			"/deviser/store",
-			"slug" => $this->getSlug(),
-			'deviser_id' => $this->short_id,
-			'category' => $category
-		], true);
+		if ($this->isDeviser()) {
+			return Url::to(["/deviser/store", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id, 'category' => $categoryId], true);
+		} else {
+			return null;
+		}
 	}
 
 	public function getStoreEditLink($categoryId = null)
 	{
-		return Url::to([
-			"/deviser/store-edit",
-			"slug" => $this->getSlug(),
-			'deviser_id' => $this->short_id,
-			'category' => $categoryId
-		], true);
+		if ($this->isDeviser()) {
+			return Url::to(["/deviser/store-edit", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id, 'category' => $categoryId], true);
+		}
 	}
 
 	public function getLovedLink()
@@ -1160,6 +1163,7 @@ class Person extends CActiveRecord implements IdentityInterface
 		} elseif ($this->isClient()) {
 			return Url::to(["/client/loved", "slug" => $this->getSlug(), 'person_id' => $this->short_id], true);
 		}
+		return null;
 	}
 
 	public function getBoxesLink()
@@ -1171,6 +1175,7 @@ class Person extends CActiveRecord implements IdentityInterface
 		} elseif ($this->isClient()) {
 			return Url::to(["/client/boxes", "slug" => $this->getSlug(), 'person_id' => $this->short_id], true);
 		}
+		return null;
 	}
 
 	public function getAboutLink()
@@ -1182,38 +1187,37 @@ class Person extends CActiveRecord implements IdentityInterface
 		} elseif ($this->isClient()) {
 			return $this->getLovedLink();
 		}
+		return null;
 	}
 
 	public function getAboutEditLink()
 	{
 		if ($this->isDeviser()) {
 			return Url::to(["/deviser/about-edit", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id], true);
-
 		} elseif ($this->isInfluencer()) {
-			return Url::to(["/influencer/about-edit", "slug" => $this->getSlug(), 'person_id' => $this->short_id],
-				true);
+			return Url::to(["/influencer/about-edit", "slug" => $this->getSlug(), 'person_id' => $this->short_id], true);
 		}
+		return null;
 	}
 
 	public function getPressLink()
 	{
 		if ($this->isDeviser()) {
 			return Url::to(["/deviser/press", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id], true);
-
 		} elseif ($this->isInfluencer()) {
 			return Url::to(["/influencer/press", "slug" => $this->getSlug(), 'person_id' => $this->short_id], true);
 		}
+		return null;
 	}
 
 	public function getPressEditLink()
 	{
 		if ($this->isDeviser()) {
 			return Url::to(["/deviser/press-edit", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id], true);
-
 		} elseif ($this->isInfluencer()) {
-			return Url::to(["/influencer/press-edit", "slug" => $this->getSlug(), 'person_id' => $this->short_id],
-				true);
+			return Url::to(["/influencer/press-edit", "slug" => $this->getSlug(), 'person_id' => $this->short_id],true);
 		}
+		return null;
 	}
 
 
@@ -1221,21 +1225,20 @@ class Person extends CActiveRecord implements IdentityInterface
 	{
 		if ($this->isDeviser()) {
 			return Url::to(["/deviser/videos", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id], true);
-
 		} elseif ($this->isInfluencer()) {
 			return Url::to(["/influencer/videos", "slug" => $this->getSlug(), 'person_id' => $this->short_id], true);
 		}
+		return null;
 	}
 
 	public function getVideosEditLink()
 	{
 		if ($this->isDeviser()) {
 			return Url::to(["/deviser/videos-edit", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id], true);
-
 		} elseif ($this->isInfluencer()) {
-			return Url::to(["/influencer/videos-edit", "slug" => $this->getSlug(), 'person_id' => $this->short_id],
-				true);
+			return Url::to(["/influencer/videos-edit", "slug" => $this->getSlug(), 'person_id' => $this->short_id], true);
 		}
+		return null;
 	}
 
 
@@ -1243,20 +1246,20 @@ class Person extends CActiveRecord implements IdentityInterface
 	{
 		if ($this->isDeviser()) {
 			return Url::to(["/deviser/faq", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id], true);
-
 		} elseif ($this->isInfluencer()) {
 			return Url::to(["/influencer/faq", "slug" => $this->getSlug(), 'person_id' => $this->short_id], true);
 		}
+		return null;
 	}
 
 	public function getFaqEditLink()
 	{
 		if ($this->isDeviser()) {
 			return Url::to(["/deviser/faq-edit", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id], true);
-
 		} elseif ($this->isInfluencer()) {
 			return Url::to(["/influencer/faq-edit", "slug" => $this->getSlug(), 'person_id' => $this->short_id], true);
 		}
+		return null;
 	}
 
 	public function getSlug()
