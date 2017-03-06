@@ -5,6 +5,7 @@
 		var vm = this;
 		vm.has_error = UtilService.has_error;
 		vm.priceStockValuesValidation = priceStockValuesValidation;
+		vm.applyToAll = applyToAll;
 
 		var set_original_artwork = false;
 
@@ -131,6 +132,20 @@
 				}
 			}
 			parseTitles();
+		}
+
+		function applyToAll(type, value) {
+			switch(type) {
+				case 'dimensions':
+					vm.product.price_stock.map((element) => {
+						Object.assign(element, value);
+					});
+					break;
+				default:
+					vm.product.price_stock.map((element) => element[type] = value)
+					break;
+			}
+
 		}
 
 		//show validation error only if value <= 0, if product is available and the form has been submitted
