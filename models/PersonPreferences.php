@@ -43,6 +43,7 @@ class PersonPreferences extends EmbedModel
 					Person::SCENARIO_INFLUENCER_CREATE_DRAFT,
 					Person::SCENARIO_INFLUENCER_UPDATE_DRAFT,
 					Person::SCENARIO_INFLUENCER_UPDATE_PROFILE,
+					Person::SCENARIO_CLIENT_UPDATE,
 				]
 			],
 			[['lang', 'currency'], 'required', 'on' => Person::SCENARIO_DEVISER_UPDATE_PROFILE],

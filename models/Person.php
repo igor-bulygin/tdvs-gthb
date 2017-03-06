@@ -55,6 +55,7 @@ class Person extends CActiveRecord implements IdentityInterface
 	const SCENARIO_INFLUENCER_UPDATE_PROFILE = 'influencer-update-profile';
 
 	const SCENARIO_CLIENT_CREATE = 'client-create';
+	const SCENARIO_CLIENT_UPDATE= 'client-update';
 
 	const SCENARIO_TREND_SETTER_PROFILE_UPDATE = 'trend-setter-profile-update';
 
@@ -356,6 +357,22 @@ class Person extends CActiveRecord implements IdentityInterface
 			],
 			[
 				[
+					'personal_info',
+					'credentials',
+					'text_short_description',
+					'text_biography',
+					'preferences',
+					'media',
+					'settings',
+					'slug',
+				],
+				'safe',
+				'on' => [
+					Person::SCENARIO_CLIENT_UPDATE,
+				]
+			],
+			[
+				[
 					'account_state',
 					'personal_info',
 					'categories',
@@ -375,22 +392,22 @@ class Person extends CActiveRecord implements IdentityInterface
 				'account_state',
 				'in',
 				'range' => [self::ACCOUNT_STATE_DRAFT, self::ACCOUNT_STATE_ACTIVE],
-				'on' => [self::SCENARIO_DEVISER_UPDATE_PROFILE, self::SCENARIO_INFLUENCER_UPDATE_PROFILE],
+				'on' => [self::SCENARIO_DEVISER_UPDATE_PROFILE, self::SCENARIO_INFLUENCER_UPDATE_PROFILE, self::SCENARIO_CLIENT_UPDATE],
 			],
 			[
 				'text_short_description',
 				'app\validators\TranslatableValidator',
-				'on' => [self::SCENARIO_DEVISER_UPDATE_PROFILE, self::SCENARIO_INFLUENCER_UPDATE_PROFILE],
+				'on' => [self::SCENARIO_DEVISER_UPDATE_PROFILE, self::SCENARIO_INFLUENCER_UPDATE_PROFILE, self::SCENARIO_CLIENT_UPDATE],
 			],
 			[
 				'text_biography',
 				'app\validators\TranslatableValidator',
-				'on' => [self::SCENARIO_DEVISER_UPDATE_PROFILE, self::SCENARIO_INFLUENCER_UPDATE_PROFILE],
+				'on' => [self::SCENARIO_DEVISER_UPDATE_PROFILE, self::SCENARIO_INFLUENCER_UPDATE_PROFILE, self::SCENARIO_CLIENT_UPDATE],
 			],
 			[
 				'preferencesMapping',
 				'yii2tech\embedded\Validator',
-				'on' => [self::SCENARIO_DEVISER_CREATE_DRAFT, self::SCENARIO_INFLUENCER_CREATE_DRAFT],
+				'on' => [self::SCENARIO_DEVISER_CREATE_DRAFT, self::SCENARIO_INFLUENCER_CREATE_DRAFT, self::SCENARIO_CLIENT_UPDATE],
 			],
 			[
 				'personalInfoMapping',
@@ -400,6 +417,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					self::SCENARIO_DEVISER_UPDATE_PROFILE,
 					self::SCENARIO_INFLUENCER_UPDATE_DRAFT,
 					self::SCENARIO_INFLUENCER_UPDATE_PROFILE,
+					self::SCENARIO_CLIENT_UPDATE,
 				],
 			],
 			[
@@ -410,6 +428,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					self::SCENARIO_DEVISER_UPDATE_PROFILE,
 					self::SCENARIO_INFLUENCER_UPDATE_DRAFT,
 					self::SCENARIO_INFLUENCER_UPDATE_PROFILE,
+					self::SCENARIO_CLIENT_UPDATE,
 				],
 			],
 			[
@@ -420,6 +439,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					self::SCENARIO_DEVISER_UPDATE_PROFILE,
 					self::SCENARIO_INFLUENCER_UPDATE_DRAFT,
 					self::SCENARIO_INFLUENCER_UPDATE_PROFILE,
+					self::SCENARIO_CLIENT_UPDATE,
 				],
 			],
 			[

@@ -54,6 +54,7 @@ class PersonSettings extends EmbedModel
 					Person::SCENARIO_DEVISER_UPDATE_PROFILE,
 					Person::SCENARIO_INFLUENCER_UPDATE_DRAFT,
 					Person::SCENARIO_INFLUENCER_UPDATE_PROFILE,
+					Person::SCENARIO_CLIENT_UPDATE,
 				]
 			],
 			[

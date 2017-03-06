@@ -64,7 +64,9 @@ class PersonController extends AppPrivateController
 				$scenario = Person::SCENARIO_DEVISER_UPDATE_PROFILE;
 			} elseif ($person->isInfluencer()) {
 				$scenario = Person::SCENARIO_INFLUENCER_UPDATE_PROFILE;
-			} else {
+			} elseif ($person->isClient()) {
+				$scenario = Person::SCENARIO_CLIENT_UPDATE;
+			} else{
 				throw new Exception("Unknown person type");
 			}
 		} else {
@@ -73,6 +75,8 @@ class PersonController extends AppPrivateController
 				$scenario = Person::SCENARIO_DEVISER_UPDATE_DRAFT;
 			} elseif ($person->isInfluencer()) {
 				$scenario = Person::SCENARIO_INFLUENCER_UPDATE_DRAFT;
+			} elseif ($person->isClient()) {
+				$scenario = Person::SCENARIO_CLIENT_UPDATE;
 			} else {
 				throw new Exception("Unknown person type");
 			}
