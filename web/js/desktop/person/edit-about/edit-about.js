@@ -29,11 +29,29 @@
 
 		/*Initial functions*/
 		function getPerson() {
+			function setEditTexts(type) {
+				switch(type) {
+					case 2: 
+						vm.categories_text = "Choose your field(s) of work";
+						vm.biography_text = "Brand statement / biography";
+						vm.resume_text = "Resume or brand presentation";
+						vm.resume_sub_text = "Even more things to tell your customers? Upload it here."
+						break;
+					default:
+						vm.categories_text = "Choose your field(s) of expertise";
+						vm.biography_text = "Tell us more about yourself";
+						vm.resume_text = "Resume or presentation";
+						vm.resume_sub_text = "Even more ways to tell your story."
+						break;
+				}
+			}
+
 			function onGetProfileSuccess(data) {
 				vm.person = angular.copy(data);
 				vm.person_original = angular.copy(data);
 				vm.images = UtilService.parseImagesUrl(vm.person.media.photos, vm.person.url_images);
 				vm.curriculum = currentHost() + vm.person.url_images + vm.person.curriculum;
+				setEditTexts(data.type[0])
 			}
 
 			personDataService.getProfile({
