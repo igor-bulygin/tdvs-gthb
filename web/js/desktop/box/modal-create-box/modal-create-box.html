@@ -6,10 +6,10 @@
 </div>
 <div class="modal-body">
 	<form name="modalCreateBoxCtrl.form">
-		<input type="text" name="name" placeholder="Name of the box" ng-model="modalCreateBoxCtrl.box.name" class="form-control" required>
-		<textarea name="description" cols="30" rows="10" placeholder="Description" ng-model="modalCreateBoxCtrl.box.description" class="form-control"></textarea>
+		<input type="text" name="name" placeholder="Name of the box" ng-model="modalCreateBoxCtrl.box.name" class="form-control white-rounded-input" required>
+		<textarea name="description" cols="30" rows="10" placeholder="Description" ng-model="modalCreateBoxCtrl.box.description" class="form-control white-rounded-textbox"></textarea>
 		<div class="text-center">
-			<button class="btn btn-default btn-green" ng-click="modalCreateBoxCtrl.createBox(modalCreateBoxCtrl.form)">Create</button>
+			<button class="btn btn-green green-modal-btn" ng-click="modalCreateBoxCtrl.createBox(modalCreateBoxCtrl.form)">Create</button>
 		</div>
 	</form>
 </div>

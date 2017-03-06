@@ -11,7 +11,7 @@
 		function openDeleteBoxModal() {
 			var modalInstance = $uibModal.open({
 				component: 'modalDeleteBox',
-				size: 'sm',
+				size: 'md',
 				resolve: {
 					boxId: function() {
 						return vm.box.id

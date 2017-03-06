@@ -39,3 +39,23 @@
 	color: $light_grey;
 	text-align: center;
 }
+.white-rounded-input{
+	margin-bottom: 15px;
+	height: 40px;
+	color: $white;
+	background-color: $white;
+	border: 1px solid #d7d7d7;
+	font-family: $font-family--secondary;
+	@include border-radius(25px,25px,25px,25px);
+}
+.white-rounded-textbox{
+	margin-bottom: 15px;
+	padding: 15px;
+	color: $black;
+	max-width: 383px;
+	max-height: 125px;
+	background-color: $white;
+	border: 1px solid #d7d7d7;
+	font-family: $font-family--secondary;
+	@include border-radius(25px,25px,25px,25px);
+}

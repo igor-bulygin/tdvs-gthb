@@ -706,6 +706,30 @@ a, a:hover, a:focus {
   color: #bfbfbf;
   text-align: center; }
 
+.white-rounded-input {
+  margin-bottom: 15px;
+  height: 40px;
+  color: #ffffff;
+  background-color: #ffffff;
+  border: 1px solid #d7d7d7;
+  font-family: "Univers Condensed Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  border-radius: 25px 25px 25px 25px !important;
+  -webkit-border-radius: 25px 25px 25px 25px !important;
+  -moz-border-radius: 25px 25px 25px 25px !important; }
+
+.white-rounded-textbox {
+  margin-bottom: 15px;
+  padding: 15px;
+  color: #1C1919;
+  max-width: 383px;
+  max-height: 125px;
+  background-color: #ffffff;
+  border: 1px solid #d7d7d7;
+  font-family: "Univers Condensed Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  border-radius: 25px 25px 25px 25px !important;
+  -webkit-border-radius: 25px 25px 25px 25px !important;
+  -moz-border-radius: 25px 25px 25px 25px !important; }
+
 /* Awesome Bootstrap Checkbox*/
 .checkbox {
   padding-left: 20px; }
@@ -1037,6 +1061,27 @@ input[type="radio"] .styled:checked + label::after {
     width: 120px;
     height: 43px;
     font-size: 19px; }
+
+.modal-sm {
+  width: 425px !important; }
+  @media (max-width: 768px) {
+    .modal-sm {
+      width: 300px !important; } }
+  .modal-sm .modal-content {
+    min-width: auto !important; }
+    @media (max-width: 768px) {
+      .modal-sm .modal-content {
+        min-width: auto !important; } }
+  .modal-sm h3 {
+    margin: 3px 0 0 0; }
+  .modal-sm .modal-header {
+    padding: 20px 20px 10px; }
+  .modal-sm .modal-body {
+    padding: 10px 20px 20px; }
+  .modal-sm .green-modal-btn {
+    width: 114px;
+    height: 40px;
+    margin-top: 5px; }
 
 .showcase figcaption img, .banner-deviser-content .deviser-profile .avatar img, .product-description .product-description-content .work-description-wrapper .comment-wrapper .avatar img, .product-description .product-description-content .work-description-wrapper .comment-user .avatar img, .work-description-wrapper .comment-wrapper .avatar img, .work-description-wrapper .comment-user .avatar img {
   border: 1px solid #9a9a9a;
