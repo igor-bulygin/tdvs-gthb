@@ -22,9 +22,8 @@
 				form.$setValidity('password_confirm', true);
 			}
 			if (form.$valid) {
-
 				form.$setSubmitted();
-				personDataService.createDeviser(vm.user, null, onCreateClient, UtilService.onError);
+				personDataService.createClient(vm.user, null, onCreateClient, UtilService.onError);
 			}
 		}
 
