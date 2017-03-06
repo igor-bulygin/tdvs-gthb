@@ -672,7 +672,7 @@ class Person extends CActiveRecord implements IdentityInterface
 	 */
 	public function getAvatarImage($urlify = true, $minHeight = null, $minWidth = null)
 	{
-		$image = "/imgs/default-avatar.jpg";
+		$image = "/imgs/default-avatar.png";
 		if (Person::existMediaFile($this->mediaMapping->profile_cropped)) {
 			$image = Person::getUrlImagesLocation() . $this->mediaMapping->profile_cropped;
 		} elseif (Person::existMediaFile($this->mediaMapping->profile)) {

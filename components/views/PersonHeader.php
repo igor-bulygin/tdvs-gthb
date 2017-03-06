@@ -62,7 +62,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 				<div class="deviser-profile">
 					<div class="avatar-buttons-wrapper">
 						<div class="avatar">
-							<img class="cover" ngf-thumbnail="personHeaderCtrl.profile || '/imgs/default-avatar.jpg'">
+							<img class="cover" ngf-thumbnail="personHeaderCtrl.profile || '/imgs/default-avatar.png'">
 							<span tooltip-placement="top" uib-tooltip="ADD PHOTO" class="button ion-camera edit-avatar-photo-icon ng-class:{'two':personHeaderCtrl.profile_original}" ngf-select ng-model="personHeaderCtrl.new_profile" name="profile" ngf-pattern="'image/*'" ngf-accept="'image/*'"></span>
 							<span tooltip-placement="top" uib-tooltip="CROP PHOTO" class="button ion-crop crop-avatar-photo-icon" ng-if="personHeaderCtrl.profile_original" ng-click="personHeaderCtrl.openCropModal(personHeaderCtrl.profile_original, 'profile_cropped')" ng-cloak></span>
 							<div ng-if="personHeaderCtrl.profileRequired && !personHeaderCtrl.new_profile" ng-cloak><p class="req-2">REQUIRED</p></div>
