@@ -184,7 +184,6 @@ $config = [
 				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/loved' => 'deviser/loved',
 				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/boxes' => 'deviser/boxes',
 				'/deviser/<slug:[^/.]*?>/<person_id:[^/.]*?>/box/<box_id:[^/.]*?>' => 'deviser/box-detail',
-
 				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/store/edit' => 'deviser/store-edit',
 				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/about/edit' => 'deviser/about-edit',
 				'/deviser/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/press/edit' => 'deviser/press-edit',
@@ -199,10 +198,14 @@ $config = [
 				'/influencer/<slug:[^/.]*?>/<person_id:[^/.]*?>/loved' => 'influencer/loved',
 				'/influencer/<slug:[^/.]*?>/<person_id:[^/.]*?>/boxes' => 'influencer/boxes',
 				'/influencer/<slug:[^/.]*?>/<person_id:[^/.]*?>/box/<box_id:[^/.]*?>' => 'influencer/box-detail',
-
 				'/influencer/<slug:[^/.]*?>/<person_id:[^/.]*?>/about/edit' => 'influencer/about-edit',
 				'/influencer/<slug:[^/.]*?>/<person_id:[^/.]*?>/press/edit' => 'influencer/press-edit',
 				'/influencer/<slug:[^/.]*?>/<person_id:[^/.]*?>/video/edit' => 'influencer/videos-edit',
+
+				//Client
+				'/client/<slug:[^/.]*?>/<person_id:[^/.]*?>/loved' => 'client/loved',
+				'/client/<slug:[^/.]*?>/<person_id:[^/.]*?>/boxes' => 'client/boxes',
+				'/client/<slug:[^/.]*?>/<person_id:[^/.]*?>/box/<box_id:[^/.]*?>' => 'client/box-detail',
 
 				//Settings
 				'/settings/<slug:[^/.]*?>/<person_id:[^/.]*?>' => 'settings/index',

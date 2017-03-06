@@ -45,7 +45,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 						</div>
 					</div>
 				</div>
-				<?php if ($person->isPersonEditable()) {?>
+				<?php if ($person->isDeviserEditable()) {?>
 					<a class="btn btn-default btn-green btn-add-work" href="<?= Url::to(["product/create", "slug" => $person->slug, 'deviser_id' => $person->short_id])?>">Add Work</a>
 				<?php } ?>
 			</div>

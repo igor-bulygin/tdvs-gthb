@@ -56,16 +56,11 @@ $this->title = 'Todevise / Admin / Clients';
 				'columns' => [
 					[
 						'class' => 'yii\grid\ActionColumn',
-						'template' => "{view} {update} {delete}",
+						'template' => "{view} {delete}",
 						'buttons' => [
 							'view' => function($url, $model, $key) {
 								$url = $model->getAboutLink();
 								return Html::a('<span class="glyphicon glyphicon-user fc-fff fs1"></span>', $url);
-							},
-
-							'update' => function($url, $model, $key) {
-			                    $url = $model->getAboutEditLink();
-								return Html::a('<span class="glyphicon glyphicon-edit fc-fff fs1"></span>', $url);
 							},
 
 							'delete' => function($url, $model, $key) {

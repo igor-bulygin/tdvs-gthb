@@ -35,15 +35,21 @@ $person = $this->params['person'];
         </li>
 	</ul>
 	<ul class="menu-deviser-bottom">
-		<li>
-			<a class="<?= ($activeOption=='about') ? 'active' : '' ?>" href="<?= $linksTarget == "edit_view" ? $person->getAboutEditLink() : $person->getAboutLink()?>">About</a>
-		</li>
-		<li>
-			<a class="<?= ($person->account_state == Person::ACCOUNT_STATE_DRAFT) ? 'disabled-link' : '' ?> <?= ($activeOption=='press') ? 'active' : '' ?>" href="<?= $linksTarget == "edit_view" ? $person->getPressEditLink() : $person->getPressLink()?>">Press</a>
-		</li>
-		<li>
-			<a class="<?= ($person->account_state == Person::ACCOUNT_STATE_DRAFT) ? 'disabled-link' : '' ?> <?= ($activeOption=='videos') ? 'active' : '' ?>" href="<?=$linksTarget == "edit_view" ? $person->getVideosEditLink() : $person->getVideosLink()?>">Videos</a>
-		</li>
+		<?php if ($person->isDeviser() || $person->isInfluencer()) { ?>
+            <li>
+                <a class="<?= ($activeOption=='about') ? 'active' : '' ?>" href="<?= $linksTarget == "edit_view" ? $person->getAboutEditLink() : $person->getAboutLink()?>">About</a>
+            </li>
+		<?php } ?>
+		<?php if ($person->isDeviser() || $person->isInfluencer()) { ?>
+            <li>
+                <a class="<?= ($person->account_state == Person::ACCOUNT_STATE_DRAFT) ? 'disabled-link' : '' ?> <?= ($activeOption=='press') ? 'active' : '' ?>" href="<?= $linksTarget == "edit_view" ? $person->getPressEditLink() : $person->getPressLink()?>">Press</a>
+            </li>
+        <?php } ?>
+		<?php if ($person->isDeviser() || $person->isInfluencer()) { ?>
+            <li>
+                <a class="<?= ($person->account_state == Person::ACCOUNT_STATE_DRAFT) ? 'disabled-link' : '' ?> <?= ($activeOption=='videos') ? 'active' : '' ?>" href="<?=$linksTarget == "edit_view" ? $person->getVideosEditLink() : $person->getVideosLink()?>">Videos</a>
+            </li>
+        <?php } ?>
         <?php if ($person->isDeviser()) { ?>
             <li>
                 <a class="<?= ($person->account_state == Person::ACCOUNT_STATE_DRAFT) ? 'disabled-link' : '' ?> <?= ($activeOption=='faq') ? 'active' : '' ?>" href="<?= $linksTarget == "edit_view" ? $person->getFaqEditLink() : $person->getFaqLink()?>">FAQ</a>

@@ -77,6 +77,7 @@ class PersonController extends AppPublicController
 
 		$person = new Person();
 		$person->type = [Person::CLIENT];
+		$person->account_state = Person::ACCOUNT_STATE_ACTIVE;
 
 		$person->setScenario(Person::SCENARIO_CLIENT_CREATE);
 		$person->load(Yii::$app->request->post(), '');

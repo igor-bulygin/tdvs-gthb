@@ -1137,6 +1137,8 @@ class Person extends CActiveRecord implements IdentityInterface
 			return Url::to(["/deviser/loved", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id], true);
 		} elseif ($this->isInfluencer()) {
 			return Url::to(["/influencer/loved", "slug" => $this->getSlug(), 'person_id' => $this->short_id], true);
+		} elseif ($this->isClient()) {
+			return Url::to(["/client/loved", "slug" => $this->getSlug(), 'person_id' => $this->short_id], true);
 		}
 	}
 
@@ -1144,9 +1146,10 @@ class Person extends CActiveRecord implements IdentityInterface
 	{
 		if ($this->isDeviser()) {
 			return Url::to(["/deviser/boxes", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id], true);
-
 		} elseif ($this->isInfluencer()) {
 			return Url::to(["/influencer/boxes", "slug" => $this->getSlug(), 'person_id' => $this->short_id], true);
+		} elseif ($this->isClient()) {
+			return Url::to(["/client/boxes", "slug" => $this->getSlug(), 'person_id' => $this->short_id], true);
 		}
 	}
 
@@ -1154,9 +1157,10 @@ class Person extends CActiveRecord implements IdentityInterface
 	{
 		if ($this->isDeviser()) {
 			return Url::to(["/deviser/about", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id], true);
-
 		} elseif ($this->isInfluencer()) {
 			return Url::to(["/influencer/about", "slug" => $this->getSlug(), 'person_id' => $this->short_id], true);
+		} elseif ($this->isClient()) {
+			return $this->getLovedLink();
 		}
 	}
 

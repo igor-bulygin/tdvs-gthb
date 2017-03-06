@@ -445,6 +445,8 @@ class Box extends CActiveRecord
 
 		} elseif ($person->isInfluencer()) {
 			return Url::to(["/influencer/box-detail", "slug" => $person->getSlug(), "person_id" => $person->short_id, "box_id" => $this->short_id], true);
+		} elseif ($person->isClient()) {
+			return Url::to(["/client/box-detail", "slug" => $person->getSlug(), "person_id" => $person->short_id, "box_id" => $this->short_id], true);
 		}
 	}
 
