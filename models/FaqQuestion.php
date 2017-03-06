@@ -40,10 +40,10 @@ class FaqQuestion extends EmbedModel
 				$this->attributes(),
 				'safe',
 				'on' => [
-					Person::SCENARIO_DEVISER_CREATE_DRAFT,
 					Person::SCENARIO_DEVISER_UPDATE_DRAFT,
 					Person::SCENARIO_DEVISER_UPDATE_PROFILE,
-					Person::SCENARIO_INFLUENCER_CREATE_DRAFT,
+					Person::SCENARIO_INFLUENCER_UPDATE_DRAFT,
+					Person::SCENARIO_INFLUENCER_UPDATE_PROFILE,
 					Product2::SCENARIO_PRODUCT_DRAFT,
 					Product2::SCENARIO_PRODUCT_PUBLIC,
 				]
@@ -53,6 +53,7 @@ class FaqQuestion extends EmbedModel
 				'required',
 				'on' => [
 					Person::SCENARIO_DEVISER_UPDATE_PROFILE,
+					Person::SCENARIO_INFLUENCER_UPDATE_PROFILE,
 					Product2::SCENARIO_PRODUCT_PUBLIC,
 				]
 			],
@@ -60,10 +61,10 @@ class FaqQuestion extends EmbedModel
 				['question', 'answer'],
 				'app\validators\TranslatableValidator',
 				'on' => [
-					Person::SCENARIO_DEVISER_CREATE_DRAFT,
 					Person::SCENARIO_DEVISER_UPDATE_DRAFT,
 					Person::SCENARIO_DEVISER_UPDATE_PROFILE,
-					Person::SCENARIO_INFLUENCER_CREATE_DRAFT,
+					Person::SCENARIO_INFLUENCER_UPDATE_DRAFT,
+					Person::SCENARIO_INFLUENCER_UPDATE_PROFILE,
 					Product2::SCENARIO_PRODUCT_DRAFT,
 					Product2::SCENARIO_PRODUCT_PUBLIC,
 				]

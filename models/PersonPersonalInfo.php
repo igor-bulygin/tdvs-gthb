@@ -114,6 +114,8 @@ class PersonPersonalInfo extends EmbedModel
 					Person::SCENARIO_DEVISER_UPDATE_DRAFT,
 					Person::SCENARIO_DEVISER_UPDATE_PROFILE,
 					Person::SCENARIO_INFLUENCER_CREATE_DRAFT,
+					Person::SCENARIO_INFLUENCER_UPDATE_DRAFT,
+					Person::SCENARIO_INFLUENCER_UPDATE_PROFILE,
 				]
 			],
 			[['name', 'brand_name', 'country', 'city'], 'required', 'on' => Person::SCENARIO_DEVISER_UPDATE_PROFILE],

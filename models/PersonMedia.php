@@ -70,23 +70,36 @@ class PersonMedia extends EmbedModel
 				['header', 'header_cropped', 'profile', 'profile_cropped', 'photos'],
 				'safe',
 				'on' => [
-					Person::SCENARIO_DEVISER_CREATE_DRAFT,
 					Person::SCENARIO_DEVISER_UPDATE_DRAFT,
-					Person::SCENARIO_INFLUENCER_CREATE_DRAFT,
+					Person::SCENARIO_INFLUENCER_UPDATE_DRAFT,
 				]
 			],
 			[
 				['header', 'header_cropped', 'profile', 'profile_cropped', 'photos'],
 				'required',
-				'on' => Person::SCENARIO_DEVISER_UPDATE_PROFILE
+				'on' => [
+					Person::SCENARIO_DEVISER_UPDATE_PROFILE,
+					Person::SCENARIO_INFLUENCER_UPDATE_PROFILE,
+				],
 			],
 			[
 				['header', 'header_cropped', 'profile', 'profile_cropped'],
 				'validateDeviserMediaFileExist',
-				'on' => Person::SCENARIO_DEVISER_UPDATE_PROFILE
+				'on' => [
+					Person::SCENARIO_DEVISER_UPDATE_PROFILE,
+					Person::SCENARIO_INFLUENCER_UPDATE_PROFILE,
+				],
 			],
-			[['photos'], 'validateDeviserPhotosExists', 'on' => Person::SCENARIO_DEVISER_UPDATE_PROFILE],
-			[['photos'], 'validateAmountPhotos', 'on' => Person::SCENARIO_DEVISER_UPDATE_PROFILE],
+			[
+				['photos'],
+				'validateDeviserPhotosExists',
+				'on' => [Person::SCENARIO_DEVISER_UPDATE_PROFILE, Person::SCENARIO_INFLUENCER_UPDATE_PROFILE],
+			],
+			[
+				['photos'],
+				'validateAmountPhotos',
+				'on' => [Person::SCENARIO_DEVISER_UPDATE_PROFILE],
+			],
 		];
 	}
 

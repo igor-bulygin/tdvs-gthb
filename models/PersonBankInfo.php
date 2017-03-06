@@ -57,7 +57,6 @@ class PersonBankInfo extends EmbedModel
 				],
 				'safe',
 				'on' => [
-					Person::SCENARIO_DEVISER_CREATE_DRAFT,
 					Person::SCENARIO_DEVISER_UPDATE_DRAFT,
 					Person::SCENARIO_DEVISER_UPDATE_PROFILE,
 				]

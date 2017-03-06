@@ -50,14 +50,22 @@ class PersonSettings extends EmbedModel
 				$this->attributes(),
 				'safe',
 				'on' => [
-					Person::SCENARIO_DEVISER_CREATE_DRAFT,
 					Person::SCENARIO_DEVISER_UPDATE_DRAFT,
 					Person::SCENARIO_DEVISER_UPDATE_PROFILE,
-					Person::SCENARIO_INFLUENCER_CREATE_DRAFT,
+					Person::SCENARIO_INFLUENCER_UPDATE_DRAFT,
+					Person::SCENARIO_INFLUENCER_UPDATE_PROFILE,
 				]
 			],
-			['bankInfoMapping', 'app\validators\EmbedDocValidator'], // to apply rules
-			['stripeInfoMapping', 'app\validators\EmbedDocValidator'], // to apply rules
+			[
+				'bankInfoMapping',
+				'app\validators\EmbedDocValidator',
+				'on' => [Person::SCENARIO_DEVISER_UPDATE_DRAFT, Person::SCENARIO_DEVISER_UPDATE_PROFILE]
+			],
+			[
+				'stripeInfoMapping',
+				'app\validators\EmbedDocValidator',
+				'on' => [Person::SCENARIO_DEVISER_UPDATE_DRAFT, Person::SCENARIO_DEVISER_UPDATE_PROFILE]
+			],
 		];
 	}
 

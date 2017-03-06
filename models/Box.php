@@ -437,9 +437,15 @@ class Box extends CActiveRecord
 	 *
 	 * @return string
 	 */
-	public function getViewLink() {
+	public function getViewLink()
+	{
 		$person = $this->getPerson();
-		return Url::to(["/box-detail", "slug" => $person->getSlug(), "deviser_id" => $person->short_id, "box_id" => $this->short_id], true);
+		if ($person->isDeviser()) {
+			return Url::to(["/deviser/box-detail", "slug" => $person->getSlug(), "person_id" => $person->short_id, "box_id" => $this->short_id], true);
+
+		} elseif ($person->isInfluencer()) {
+			return Url::to(["/influencer/box-detail", "slug" => $person->getSlug(), "person_id" => $person->short_id, "box_id" => $this->short_id], true);
+		}
 	}
 
 	/**
