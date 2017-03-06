@@ -21,7 +21,7 @@ class PersonController extends AppPublicController
 	{
 		$type = Yii::$app->request->post("type");
 
-		switch ($type) {
+		switch ($type[0]) {
 			case Person::CLIENT:
 				$account_state = Person::ACCOUNT_STATE_ACTIVE;
 				break;
@@ -50,7 +50,7 @@ class PersonController extends AppPublicController
 
 
 		$person = new Person();
-		$person->type = [$type];
+		$person->type = $type;
 		$person->account_state = $account_state;
 		$person->setScenario($this->getScenarioFromRequest($person));
 		$person->load(Yii::$app->request->post(), '');
@@ -103,6 +103,10 @@ class PersonController extends AppPublicController
 			return Person::SCENARIO_INFLUENCER_CREATE_DRAFT;
 		}
 
-		throw new BadRequestHttpException("Invalid type");
+		if ($type == Person::CLIENT || in_array(Person::CLIENT, $type)) {
+			return Person::SCENARIO_CLIENT_CREATE;
+		}
+
+		throw new BadRequestHttpException("Invalid person type");
 	}
 }
