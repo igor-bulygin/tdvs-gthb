@@ -3202,6 +3202,13 @@ input[type="radio"] .styled:checked + label::after {
     font-family: "Univers Condensed Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 16px; }
 
+.btn-add-box {
+  height: 45px;
+  width: 193px;
+  padding: 3px 0 0 0;
+  font-size: 16px;
+  margin: 50px 0 0 0; }
+
 .become-deviser-wrapper .become-deviser-cover {
   background: url("/imgs/become_a_deviser_background.png") no-repeat;
   background-size: cover; }

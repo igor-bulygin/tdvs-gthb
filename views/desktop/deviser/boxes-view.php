@@ -32,7 +32,7 @@ $this->params['person_links_target'] = 'public_view';
                         <?php if ($person->isConnectedUser()) { ?>
                             <img class="sad-face" src="/imgs/sad-face.svg">
                             <p class="no-video-text">You have no boxes!</p>
-                            <button class="btn btn-default btn-green btn-upload-file" ng-click="viewBoxesCtrl.openCreateBoxModal()">ADD BOX</button>
+                            <button class="btn btn-green btn-add-box" ng-click="viewBoxesCtrl.openCreateBoxModal()">ADD BOX</button>
 						<?php } else { ?>
                             <p class="no-video-text"><?=$person->getBrandName()?> have no boxes.</p>
                         <?php } ?>
