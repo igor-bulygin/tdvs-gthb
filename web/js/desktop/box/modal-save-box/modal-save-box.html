@@ -34,8 +34,8 @@
 		<span class="box-name" ng-bind="box.name"></span>
 		<span class="pull-right ion-arrow-down-a save-box-btn" ng-click="modalSaveBoxCtrl.addProductToBox(modalSaveBoxCtrl.product.id, box.id)"></span>
 	</div>
-	<div class="save-modal-row" ng-if="modalSaveBoxCtrl.resolve.boxes.items.length === 0">
+	<div class="save-modal-text-row" ng-if="modalSaveBoxCtrl.resolve.boxes.items.length === 0">
 		<p>You don't have any boxes yet.</p>
-		<p>Create one by clicking the CREATE NEW BOX button.</p>
+		<p>Create one by clicking the <span>create new box</span> button.</p>
 	</div>
 </div>

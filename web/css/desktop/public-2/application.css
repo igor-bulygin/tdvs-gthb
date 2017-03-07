@@ -3350,6 +3350,18 @@ input[type="radio"] .styled:checked + label::after {
   min-height: 148px;
   padding: 0px !important; }
 
+.save-modal-text-row {
+  width: 100%;
+  float: left;
+  padding: 60px 85px 120px; }
+  .save-modal-text-row p {
+    font-family: "Playfair Display", Georgia, serif;
+    text-align: center;
+    font-size: 16px; }
+    .save-modal-text-row p span {
+      font-weight: bold;
+      text-transform: uppercase; }
+
 .become-deviser-wrapper .become-deviser-cover {
   background: url("/imgs/become_a_deviser_background.png") no-repeat;
   background-size: cover; }
