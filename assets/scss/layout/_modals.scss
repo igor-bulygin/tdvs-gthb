@@ -65,9 +65,18 @@
 		padding: 10px 20px 20px;
 	}
 	.green-modal-btn{
-		width: 114px;
+		width: 120px;
+		text-align: center;
+		height: 40px;
+		margin: 5px;
+		padding: 12px 0;
+	}
+	.btn-cancel{
+		width: 120px;
   		height: 40px;
-		margin-top: 5px;
+		margin: 5px;
+		text-transform: uppercase;
+		font-weight: bold;
 	}
 }
 .modal-save-title{
