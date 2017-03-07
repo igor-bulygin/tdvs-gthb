@@ -13,9 +13,17 @@
 		init();
 
 		function submitForm(form) {
-			function onCreateClient(data) {
-				$window.location.href = data.about_edit_link;
+			var url = "";
+			function onLoginSuccess(data) {
+				UtilService.setLocalStorage('access_token', data.access_token);
+				$window.location.href = url;
 			}
+
+			function onCreateClientSuccess(data) {
+				url = data.about_link;
+				personDataService.login(vm.user, null, onLoginSuccess, UtilService.onError);
+			}
+
 			if (form.password_confirm.$error.same)
 				form.$setValidity('password_confirm', false);
 			else {
@@ -23,7 +31,7 @@
 			}
 			if (form.$valid) {
 				form.$setSubmitted();
-				personDataService.createClient(vm.user, null, onCreateClient, UtilService.onError);
+				personDataService.createClient(vm.user, null, onCreateClientSuccess, UtilService.onError);
 			}
 		}
 

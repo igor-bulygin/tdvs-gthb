@@ -13,8 +13,16 @@
 		init();
 
 		function submitForm(form) {
-			function onCreateDeviser(data) {
-				$window.location.href = data.about_edit_link;
+			var url = "";
+
+			function onLoginSuccess(data){
+				UtilService.setLocalStorage('access_token', data.access_token);
+				$window.location.href = url;
+			}
+
+			function onCreateDeviserSuccess(data) {
+				url = data.about_link;
+				personDataService.login(vm.deviser, null, onLoginSuccess, UtilService.onError);
 			}
 			if (form.password_confirm.$error.same)
 				form.$setValidity('password_confirm', false);
@@ -22,9 +30,8 @@
 				form.$setValidity('password_confirm', true);
 			}
 			if (form.$valid) {
-
 				form.$setSubmitted();
-				personDataService.createDeviser(vm.deviser, null, onCreateDeviser, UtilService.onError);
+				personDataService.createDeviser(vm.deviser, null, onCreateDeviserSuccess, UtilService.onError);
 			}
 		}
 
