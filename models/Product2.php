@@ -651,7 +651,11 @@ class Product2 extends Product {
 		if (isset($this->media) && isset($this->media["photos"])) {
 			foreach ($this->media["photos"] as $key => $photo) {
 				if (isset($photo["main_product_photo"]) && $photo["main_product_photo"]) {
-					$image = $photo["name"];
+					if (isset($photo['name_cropped'])) {
+						$image = $photo["name_cropped"];
+					} else {
+						$image = $photo["name"];
+					}
 					break;
 				}
 			}

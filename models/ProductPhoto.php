@@ -3,6 +3,7 @@ namespace app\models;
 
 /**
  * @property string|mixed name
+ * @property string|mixed name_cropped
  * @property array tags
  * @property bool $not_uploaded
  * @property bool $main_product_photo
@@ -19,6 +20,7 @@ class ProductPhoto extends EmbedModel
 	public function attributes() {
 		return [
 			'name',
+			'name_cropped',
 			'tags',
 			'not_uploaded',
 			'main_product_photo',
@@ -30,9 +32,25 @@ class ProductPhoto extends EmbedModel
         return [
 	        [['name', 'main_product_photo'], 'safe', 'on' => [Product2::SCENARIO_PRODUCT_DRAFT, Product2::SCENARIO_PRODUCT_PUBLIC]],
             [['name'], 'required', 'on' => Product2::SCENARIO_PRODUCT_PUBLIC],
+            [
+            	'name_cropped',
+				'required',
+				'when' => function($model) {
+					return $model->main_product_photo;
+				},
+			],
 	        [['main_product_photo'], 'boolean'],
         ];
-    }
+	}
+
+	public function beforeValidate()
+	{
+		if ($this->main_product_photo && empty($this->name_cropped)) {
+			$this->name_cropped = $this->name;
+		}
+
+		return parent::beforeValidate();
+	}
 
 	/**
 	 * Returns the (relative) url of the photo

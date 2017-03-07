@@ -144,6 +144,14 @@ class ModelUtils {
 		return $categories;
 	}
 
+
+	/**
+	 * @param $product
+	 * @param bool $urlify
+	 *
+	 * @return string
+	 * @deprecated Use Product->getMainImage
+	 */
 	public static function getProductMainPhoto($product, $urlify = true) {
 		$image = "";
 		$fallback = "product_placeholder.png";
