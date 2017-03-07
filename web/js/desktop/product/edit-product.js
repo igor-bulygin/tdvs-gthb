@@ -3,7 +3,7 @@
 	"use strict";
 
 	function controller(productService, personDataService, productDataService, languageDataService, metricDataService,
-		UtilService, tagDataService, $scope, $rootScope, productEvents, sizechartDataService, $window) {
+		UtilService, tagDataService, $scope, $rootScope, productEvents, sizechartDataService, $window, $timeout) {
 		var vm = this;
 		vm.categories_helper = [];
 		vm.save = save;
@@ -118,13 +118,21 @@
 				personId: person.short_id
 			}, onGetProfileSuccess, UtilService.onError);
 		}
+
+		function saved_draft() {
+			vm.product = productService.parseProductFromService(vm.product);
+			vm.progressSaved = true;
+			$timeout(() => {
+				vm.progressSaved = false;
+			}, 5000);
+		}
 		
 
 		function save(state) {
 			function onUpdateProductSuccess(data) {
 				vm.disable_save_buttons=false;
 				if(state === 'product_state_draft') {
-					vm.product = productService.parseProductFromService(vm.product);
+					saved_draft();
 				} else if (state === 'product_state_active') {
 					$window.location.href = currentHost() + vm.link_profile + '?published=true';
 				}

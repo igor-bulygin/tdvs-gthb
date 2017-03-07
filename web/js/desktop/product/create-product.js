@@ -2,7 +2,7 @@
 
 	function controller(personDataService, metricDataService, sizechartDataService, 
 		productDataService, languageDataService, toastr, UtilService, productService,
-		localStorageService, tagDataService, productEvents, $rootScope, $window) {
+		localStorageService, tagDataService, productEvents, $rootScope, $window, $timeout) {
 		var vm = this;
 		vm.save = save;
 
@@ -103,7 +103,10 @@
 
 		function saved_draft(){
 			vm.product = productService.parseProductFromService(vm.product);
-			toastr.success('Saved!');
+			vm.progressSaved = true;
+			$timeout(() => {
+				vm.progressSaved = false;
+			}, 5000);
 		}
 
 		function product_published() {

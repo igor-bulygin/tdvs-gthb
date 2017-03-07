@@ -37,13 +37,14 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 		<div class="avatar">
 			<img ng-src="{{editProductCtrl.profile}}">
 		</div>
-		<div class="text-center" ng-if="!editProductCtrl.errors" ng-cloak><h4 class="title">Edit work</h4></div>
+		<div class="text-center" ng-if="!editProductCtrl.errors"><h4 class="title">Edit work</h4></div>
 		<div class="text-center" ng-if="editProductCtrl.errors" ng-cloak><p>Please complete all the required fields before publishing your work.</p></div>
 		<div class="btns-group">
 			<button class="btn btn-transparent" ng-click="editProductCtrl.save('product_state_draft')" ng-disabled="editProductCtrl.disable_save_buttons">Save progress</button>
 			<button class="btn btn-default btn-green" ng-click="editProductCtrl.save('product_state_active')" ng-disabled="editProductCtrl.disable_save_buttons">Publish work</button>
 		</div>
 	</div>
+	<div id="productSaved" style="background-color: #B8E986; min-height: 50px;" ng-if="editProductCtrl.progressSaved" ng-cloak><p class="text-center">Product saved</p></div>
 	<div class="container">
 		<product-basic-info product="editProductCtrl.product" categories="editProductCtrl.allCategories" languages="editProductCtrl.languages"></product-basic-info>
 		<product-more-details product="editProductCtrl.product" languages="editProductCtrl.languages"></product-more-details>
