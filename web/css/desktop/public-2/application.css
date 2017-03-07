@@ -1075,7 +1075,9 @@ input[type="radio"] .styled:checked + label::after {
       .modal-sm .modal-content {
         min-width: auto !important; } }
   .modal-sm h3 {
-    margin: 3px 0 0 0; }
+    margin: 3px 0 0 0;
+    text-align: left;
+    max-width: 350px; }
   .modal-sm .modal-header {
     padding: 20px 20px 10px; }
   .modal-sm .modal-body {
@@ -1108,6 +1110,10 @@ input[type="radio"] .styled:checked + label::after {
 
 .modal-save-total {
   color: #9a9a9a; }
+
+.modal-delete-text {
+  font-family: "Univers Condensed Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: -15px 0 20px; }
 
 .showcase figcaption img, .banner-deviser-content .deviser-profile .avatar img, .product-description .product-description-content .work-description-wrapper .comment-wrapper .avatar img, .product-description .product-description-content .work-description-wrapper .comment-user .avatar img, .work-description-wrapper .comment-wrapper .avatar img, .work-description-wrapper .comment-user .avatar img {
   border: 1px solid #9a9a9a;
