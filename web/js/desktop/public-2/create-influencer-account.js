@@ -13,8 +13,15 @@
 		init();
 
 		function submitForm(form) {
-			function onCreateInfluencer(data) {
-				$window.location.href = data.about_edit_link;
+			var url = "";
+			function onLoginSuccess(data) {
+				UtilService.setLocalStorage('access_token', data.access_token);
+				$window.location.href = url;
+			}
+
+			function onCreateInfluencerSuccess(data) {
+				url = data.about_link;
+				personDataService.login(vm.influencer, null, onLoginSuccess, UtilService.onError);
 			}
 			if (form.password_confirm.$error.same)
 				form.$setValidity('password_confirm', false);
@@ -22,9 +29,8 @@
 				form.$setValidity('password_confirm', true);
 			}
 			if (form.$valid) {
-
 				form.$setSubmitted();
-				personDataService.createInfluencer(vm.influencer, null, onCreateInfluencer, UtilService.onError);
+				personDataService.createInfluencer(vm.influencer, null, onCreateInfluencerSuccess, UtilService.onError);
 			}
 		}
 
