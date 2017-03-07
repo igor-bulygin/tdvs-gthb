@@ -49,6 +49,8 @@
     }
 	.modal-content{
 		min-width: auto!important;
+		float: left;
+    	width: 100%;
 		@media (max-width: 768px){
 			min-width: auto!important;
 		}
