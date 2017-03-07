@@ -691,7 +691,8 @@ class Product2 extends Product {
 	 * @return string
 	 */
 	public function getEditLink() {
-		return Url::to(['/product/edit', 'slug' => $this->getSlug(), 'product_id' => $this->short_id, 'deviser_id' => $this->deviser_id], true);
+		$deviser = $this->getDeviser();
+		return Url::to(['/product/edit', 'slug' => $deviser->getSlug(), 'product_id' => $this->short_id, 'deviser_id' => $this->deviser_id], true);
 	}
 
 	public function getSlug() {
@@ -884,6 +885,16 @@ class Product2 extends Product {
 	}
 
 	/**
+	 * Returns the deviser owner of the product
+	 *
+	 * @return Person
+	 */
+	public function getDeviser()
+	{
+		return Person::findOneSerialized($this->deviser_id);
+	}
+
+	/**
 	 * Get a preview version of a Deviser
 	 *
 	 * @return array
@@ -891,7 +902,7 @@ class Product2 extends Product {
 	public function getDeviserPreview()
 	{
 		/** @var Person $deviser */
-		$deviser = Person::findOneSerialized($this->deviser_id);
+		$deviser = $this->getDeviser();
 		return $deviser->getPreviewSerialized();
 	}
 
