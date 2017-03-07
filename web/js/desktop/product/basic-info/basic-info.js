@@ -147,20 +147,20 @@
 						url: productDataService.Uploads,
 						data: data
 					}).then(function(dataUpload) {
-						//set image filename in vm.images[index].url
-						vm.images[index].url = currentHost() + '/' + dataUpload.data.url;
-						//set image filename in vm.product.media.photos[index].filename
-						vm.product.media.photos[index].name = dataUpload.data.filename;
+						//set image filename in helper
 						unSetMainPhoto();
+						vm.images[index].url = currentHost() + '/' + dataUpload.data.url;
+						//set image filename in model cropped name
+						vm.product.media.photos[index]['name_cropped'] = angular.copy(dataUpload.data.filename);
 						vm.product.media.photos[index]['main_product_photo'] = true;
 					}, function(err) {
-						//errors
+						UtilService.onError(err);
 					}, function(evt) {
 						//evt when marking as main photo
 					})
 				}
 			}, function(err) {
-				//errors
+				UtilService.onError(err);
 			})
 		}
 
@@ -172,10 +172,12 @@
 		}
 
 		function unSetMainPhoto() {
-			for(var i = 0; i < vm.product.media.photos.length; i++) {
-				if(vm.product.media.photos[i].main_product_photo)
-					delete vm.product.media.photos[i].main_product_photo;
-			}
+			var main_photo = vm.product.media.photos.find((photo) => {
+				return photo.main_product_photo;
+			});
+			delete main_photo.main_product_photo;
+			if(main_photo.name_cropped)
+				delete main_photo.name_cropped;
 		}
 
 		//watches
