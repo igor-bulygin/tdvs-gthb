@@ -39,9 +39,11 @@
 						<input type="file" name="file" ngf-select="productMoreDetailsCtrl.openCropModal($file)" ngf-accept="'image/*'" ngf-drop-available="productMoreDetailsCtrl.isDropAvailable" ngf-multiple="true">
 					</div>
 				</div>
-				<div class="col-md-2 image-description-edit" ng-repeat="image in productMoreDetailsCtrl.images">
-					<img class="grid-image" ng-src="{{image.url}}" alt="">
-					<span class="delete ion-android-close" ng-click="productMoreDetailsCtrl.deleteImage($index)"></span>
+				<div class="item draggable-list" dnd-list="productMoreDetailsCtrl.images" dnd-dragover="productMoreDetailsCtrl.dragOver(index)">
+					<div class="col-md-2 image-description-edit" ng-repeat="image in productMoreDetailsCtrl.images" dnd-draggable="image" dnd-effect-allowed="move" dnd-dragstart="productMoreDetailsCtrl.dragStart($index)" dnd-canceled="productMoreDetailsCtrl.canceled()" dnd-moved="productMoreDetailsCtrl.moved($index)">
+						<img class="grid-image" ng-src="{{image.url}}" alt="">
+						<span class="delete ion-android-close" ng-click="productMoreDetailsCtrl.deleteImage($index)"></span>
+					</div>
 				</div>
 				<div class="col-md-2 image-description-edit" ng-if="productMoreDetailsCtrl.file.progress">
 					<div ng-if="productMoreDetailsCtrl.file.progress <= 100">

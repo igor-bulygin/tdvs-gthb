@@ -207,7 +207,6 @@
 
 		function parseImages() {
 			vm.images = UtilService.parseImagesUrl(vm.product.media.photos, '/uploads/product/' + vm.product.id + '/');
-			console.log(vm.images);
 		}
 
 		//watches

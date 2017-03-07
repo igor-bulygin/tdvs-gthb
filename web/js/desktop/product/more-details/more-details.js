@@ -1,7 +1,8 @@
 (function () {
 	"use strict";
 
-	function controller($scope, $timeout, $uibModal, Upload, productDataService, UtilService, productEvents){
+	function controller($scope, $timeout, $uibModal, Upload, productDataService, 
+		UtilService, productEvents, dragndropService){
 		var vm = this;
 		vm.has_error = UtilService.has_error;
 		vm.stripHTMLTags = UtilService.stripHTMLTags;
@@ -22,6 +23,10 @@
 		vm.removeTag = removeTag;
 		vm.openCropModal = openCropModal;
 		vm.deleteImage = deleteImage;
+		vm.dragOver = dragOver;
+		vm.dragStart = dragStart;
+		vm.moved = moved;
+		vm.canceled = canceled;
 
 		function init(){
 			//init functions
@@ -156,6 +161,31 @@
 				vm.product.media.description_photos.splice(index, 1);
 			}
 		}
+
+		/* drag and drop functions */
+		function dragStart(index) {
+			dragndropService.dragStart(index, vm.images);
+		}
+
+		function dragOver(index) {
+			vm.images = dragndropService.dragOver(index, vm.images);
+			return true;
+		}
+
+		function moved(index) {
+			vm.images = dragndropService.moved(vm.images);
+			console.log(vm.images);
+			vm.product.media.description_photos = vm.images.map(e => Object.assign({}, e.filename));
+		}
+
+		function canceled(){
+			vm.images = dragndropService.canceled();
+		}
+
+		function parseImages() {
+			vm.images = UtilService.parseImagesUrl(vm.product.media.description_photos, '/uploads/product/' + vm.product.id + '/');
+		}
+
 		//watches
 		$scope.$watch('productMoreDetailsCtrl.product.description', function(newValue, oldValue) {
 			vm.descriptionRequired = false;
@@ -177,7 +207,7 @@
 		$scope.$watch('productMoreDetailsCtrl.product.id', function(newValue, oldValue) {
 			if(!oldValue && newValue) {
 				if(angular.isArray(vm.product.media.description_photos) && vm.product.media.description_photos.length > 0)
-					vm.images = UtilService.parseImagesUrl(vm.product.media.description_photos, '/uploads/product/' + newValue + '/');
+					parseImages();
 			}
 		});
 
