@@ -232,7 +232,7 @@
 				args.required_fields.forEach(function(element) {
 					if(element === 'photos')
 						vm.setPhotosRequired = true;
-					if(element === 'biography')
+					if(element === 'text_biography')
 						vm.setBiographyRequired = true;
 					if(element === 'categories')
 						vm.setCategoriesRequired = true;
