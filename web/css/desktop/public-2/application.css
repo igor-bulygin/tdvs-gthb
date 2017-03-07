@@ -3328,7 +3328,8 @@ input[type="radio"] .styled:checked + label::after {
   overflow: hidden;
   cursor: pointer; }
   .save-modal-row-box:hover {
-    background-color: #B8E986; }
+    background-color: #B8E986;
+    height: 61px; }
     .save-modal-row-box:hover .save-box-btn {
       display: inline-block; }
   .save-modal-row-box .box-name {
@@ -3339,6 +3340,7 @@ input[type="radio"] .styled:checked + label::after {
     border: 1px solid #1C1919;
     font-size: 18px;
     padding: 0 6px;
+    margin: -5px 0 0 0;
     border-radius: 6px 6px 6px 6px !important;
     -webkit-border-radius: 6px 6px 6px 6px !important;
     -moz-border-radius: 6px 6px 6px 6px !important;
@@ -3361,6 +3363,16 @@ input[type="radio"] .styled:checked + label::after {
     .save-modal-text-row p span {
       font-weight: bold;
       text-transform: uppercase; }
+
+.create-box-input {
+  font-size: 16px;
+  width: 285px !important;
+  margin-right: 5px; }
+
+.boxes-items-wrapper {
+  float: left;
+  width: 100%;
+  margin: 0 0 10px; }
 
 .become-deviser-wrapper .become-deviser-cover {
   background: url("/imgs/become_a_deviser_background.png") no-repeat;

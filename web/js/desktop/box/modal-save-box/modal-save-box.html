@@ -25,14 +25,16 @@
 	<div class="save-modal-row" ng-if="modalSaveBoxCtrl.creatingBox">
 		<form class="form-inline" name="modalSaveBoxCtrl.create_form">
 			<div class="form-group">
-				<input type="text" class="form-control" ng-model="modalSaveBoxCtrl.new_box_name" required>
+				<input type="text" class="form-control create-box-input" ng-model="modalSaveBoxCtrl.new_box_name" placeholder="Name of the box" required>
 				<button class="btn btn-default btn-green" ng-click="modalSaveBoxCtrl.createBox(modalSaveBoxCtrl.create_form)">Create</button>
 			</div>
 		</form>
 	</div>
-	<div class="save-modal-row-box" ng-repeat="box in modalSaveBoxCtrl.resolve.boxes.items | filter:modalSaveBoxCtrl.search_term" ng-if="modalSaveBoxCtrl.resolve.boxes.items.length > 0">
-		<span class="box-name" ng-bind="box.name"></span>
-		<span class="pull-right ion-arrow-down-a save-box-btn" ng-click="modalSaveBoxCtrl.addProductToBox(modalSaveBoxCtrl.product.id, box.id)"></span>
+	<div class="boxes-items-wrapper">
+		<div class="save-modal-row-box" ng-repeat="box in modalSaveBoxCtrl.resolve.boxes.items | filter:modalSaveBoxCtrl.search_term" ng-if="modalSaveBoxCtrl.resolve.boxes.items.length > 0">
+			<span class="box-name" ng-bind="box.name"></span>
+			<span class="pull-right ion-arrow-down-a save-box-btn" ng-click="modalSaveBoxCtrl.addProductToBox(modalSaveBoxCtrl.product.id, box.id)"></span>
+		</div>
 	</div>
 	<div class="save-modal-text-row" ng-if="modalSaveBoxCtrl.resolve.boxes.items.length === 0">
 		<p>You don't have any boxes yet.</p>
