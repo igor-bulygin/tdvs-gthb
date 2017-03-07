@@ -1,7 +1,8 @@
 (function () {
 	"use strict";
 
-	function controller(productDataService, toastr, Upload, $scope, UtilService, $uibModal, $rootScope, productEvents, $timeout) {
+	function controller(productDataService, toastr, Upload, $scope, UtilService, $uibModal, $rootScope, 
+		productEvents, $timeout, dragndropService) {
 		var vm = this;
 		vm.has_error = UtilService.has_error;
 		vm.name_language = 'en-US';
@@ -13,6 +14,10 @@
 		vm.openCropModal = openCropModal;
 		vm.uploadPhoto = uploadPhoto;
 		vm.deleteImage = deleteImage;
+		vm.dragOver = dragOver;
+		vm.dragStart = dragStart;
+		vm.moved = moved;
+		vm.canceled = canceled;
 		
 		function init(){
 			//init values or functions
@@ -153,6 +158,7 @@
 						//set image filename in model cropped name
 						vm.product.media.photos[index]['name_cropped'] = angular.copy(dataUpload.data.filename);
 						vm.product.media.photos[index]['main_product_photo'] = true;
+						parseImages();
 					}, function(err) {
 						UtilService.onError(err);
 					}, function(evt) {
@@ -178,6 +184,30 @@
 			delete main_photo.main_product_photo;
 			if(main_photo.name_cropped)
 				delete main_photo.name_cropped;
+		}
+
+		/* drag and drop functions */
+		function dragStart(index) {
+			dragndropService.dragStart(index, vm.images);
+		}
+
+		function dragOver(index) {
+			vm.images = dragndropService.dragOver(index, vm.images);
+			return true;
+		}
+
+		function moved(index) {
+			vm.images = dragndropService.moved(vm.images);
+			vm.product.media.photos = vm.images.map(e => Object.assign({}, e.filename));
+		}
+
+		function canceled(){
+			vm.images = dragndropService.canceled();
+		}
+
+		function parseImages() {
+			vm.images = UtilService.parseImagesUrl(vm.product.media.photos, '/uploads/product/' + vm.product.id + '/');
+			console.log(vm.images);
 		}
 
 		//watches
@@ -219,7 +249,7 @@
 		$scope.$watch('productBasicInfoCtrl.product.id', function(newValue, oldValue) {
 			if(!oldValue && newValue) {
 				if(angular.isArray(vm.product.media.photos) && vm.product.media.photos.length > 0)
-					vm.images = UtilService.parseImagesUrl(vm.product.media.photos, '/uploads/product/' + newValue + '/');
+					parseImages();
 			}
 		});
 

@@ -1,6 +1,6 @@
 (function() {
 
-	function controller(personDataService, UtilService, languageDataService, toastr, productDataService, 
+	function controller(personDataService, UtilService, languageDataService, productDataService, 
 		Upload, $timeout, $rootScope, $scope, deviserEvents, $uibModal, dragndropService, $window) {
 
 		var vm = this;
