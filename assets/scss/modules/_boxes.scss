@@ -33,6 +33,7 @@
 .right-box-column{
 	padding: 20px;
 	background-color: $black;
+	min-height: 350px;
 	.grid{
 		figure{
 			.close-product-icon{
@@ -286,4 +287,11 @@
 .boxes-wrapper{
 	position: relative;
 	margin-bottom: 30px;
+}
+.more-boxes-wrapper{
+	padding: 0 0 100px;
+}
+.more-boxes-text{
+	font-family: $font-family--serif;
+	text-transform: uppercase;
 }

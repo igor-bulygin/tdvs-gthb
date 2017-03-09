@@ -306,8 +306,8 @@ $this->registerJs("var box = ".Json::encode($box), yii\web\View::POS_HEAD, 'box-
 						</div>
 					</div>
       			</div>
-        <div class="row">
-            <p class="text-center">More boxes</p>
+        <div class="row more-boxes-wrapper">
+            <p class="text-center more-boxes-text">More boxes</p>
             <br />
         <?php foreach ($moreBoxes as $oneBox) {
             $products = $oneBox->getProducts();
@@ -315,20 +315,22 @@ $this->registerJs("var box = ".Json::encode($box), yii\web\View::POS_HEAD, 'box-
                 continue;
             } ?>
             <div class="col-lg-3">
-
+				
+				<div class="boxes-wrapper">
+			
 				<?php
 				$sizes = [
 					1 => [
-						[251, 373],
+						[262, 373],
 					],
 					2 => [
-						[251, 116],
-						[251, 257],
+						[262, 116],
+						[262, 257],
 					],
 					3 => [
-						[124, 116],
-						[124, 116],
-						[251, 257],
+						[130, 116],
+						[129, 116],
+						[262, 257],
 					],
 				];
 				if (count($products) >= 3) {
@@ -358,7 +360,10 @@ $this->registerJs("var box = ".Json::encode($box), yii\web\View::POS_HEAD, 'box-
                         </a>
 					<?php } ?>
 				<?php } ?>
-                <a href="<?= $oneBox->getViewLink() ?>"><?=$oneBox->name?> (<?=count($products)?>)</a>
+                <a class="group-box-title" href="<?= $oneBox->getViewLink() ?>">
+                	<span><?=$oneBox->name?> (<?=count($products)?>)</span>
+                </a>
+                </div>
             </div>
         <?php } ?>
         </div>

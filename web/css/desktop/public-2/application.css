@@ -3284,7 +3284,8 @@ input[type="radio"] .styled:checked + label::after {
 
 .right-box-column {
   padding: 20px;
-  background-color: #1C1919; }
+  background-color: #1C1919;
+  min-height: 350px; }
   .right-box-column .grid figure .close-product-icon {
     border-radius: 4px 4px 4px 4px !important;
     -webkit-border-radius: 4px 4px 4px 4px !important;
@@ -3534,6 +3535,13 @@ input[type="radio"] .styled:checked + label::after {
 .boxes-wrapper {
   position: relative;
   margin-bottom: 30px; }
+
+.more-boxes-wrapper {
+  padding: 0 0 100px; }
+
+.more-boxes-text {
+  font-family: "Playfair Display", Georgia, serif;
+  text-transform: uppercase; }
 
 .become-deviser-wrapper .become-deviser-cover {
   background: url("/imgs/become_a_deviser_background.png") no-repeat;
