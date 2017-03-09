@@ -9,6 +9,9 @@
     letter-spacing: 0.1px;
     margin: 150px 0;
 }
+.box-columns-wrapper{
+	background-color: $darker_grey;
+}
 .left-box-column{
 	background-color: $darker_grey;
 	min-height: 325px;
@@ -25,6 +28,33 @@
 		color: $white;
 		font-family: $font-family--secondary;
 		font-size: 16px;
+	}
+}
+.right-box-column{
+	padding: 20px;
+	background-color: $black;
+	.grid{
+		figure{
+			.close-product-icon{
+				@include border-radius(4px,4px,4px,4px);
+				top: 6px;
+				right: 6px;
+				width: 24px;
+				height: 24px;
+				padding-top: 0px;
+				padding-left: 7px;
+				background-color: $dark_grey;
+				i{
+					color: $white;
+    				font-size: 17px;
+				}
+			}
+			figcaption{
+				a{
+					color: $black;
+				}
+			}
+		}
 	}
 }
 .btn-add-box{
@@ -128,4 +158,51 @@
 	float: left;
 	width:100%;
 	margin: 0 0 10px;
+}
+.header-boxes{
+	background-color: #2e2e2e;
+	height: 73px;
+	opacity: 0.8;
+	.delete-btn{
+		width: 129px;
+		text-transform: uppercase;
+		border: 1px solid #bfbfbf;
+		color: $white;
+		background-color: transparent;
+		height: 36px;
+		margin-left: 10px;
+		font-weight: bold;
+		&:hover{
+			color: $black;
+			background-color: $white;
+			font-weight: bold;
+			@include transition-property(background-color);
+			@include transition-duration(0.3s);
+			@include transition-timing-function(ease-out);
+		}
+	}
+	.edit-btn{
+		width: 129px;
+	}
+}
+.avatar-boxes-wrapper{
+	padding: 15px 20px;
+	i{
+		font-size: 30px;
+		color: $white;
+		vertical-align: middle;
+	}
+	.avatar-header-boxes{
+		height: 38px;
+		width: 38px;
+		overflow: hidden;
+		border: 1px solid $white;
+		@include border-radius(90px,90px,90px,90px);
+		margin: 0 5px;
+	}
+	span{
+		color: $white;
+		font-weight: bold;
+		font-size: 16px;
+	}
 }

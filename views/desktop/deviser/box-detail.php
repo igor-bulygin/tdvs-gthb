@@ -21,37 +21,36 @@ $this->registerJs("var box = ".Json::encode($box), yii\web\View::POS_HEAD, 'box-
 
 <div class="store" ng-controller="boxDetailCtrl as boxDetailCtrl">
 	<div class="container">
-        <div class="row" style="background-color: #2e2e2e; height: 73px; opacity: 0.8;">
-            <div class="col-md-8" style="padding-top: 10px;">
-                <img src="<?=$person->getAvatarImage128()?>" style="max-width: 50px;">
+        <div class="row header-boxes">
+            <div class="col-md-8 avatar-boxes-wrapper">
+                <i class="ion-ios-arrow-left"></i>
+                <img class="avatar-header-boxes" src="<?=$person->getAvatarImage128()?>">
                 <?php if ($person->isConnectedUser()) { ?>
                     <a href="<?=$person->getBoxesLink()?>">
-                        <span style="color: white;">&lt; My profile</span>
+                        <span>My profile</span>
                     </a>
                 <?php } else  { ?>
                     <a href="<?=$person->getBoxesLink()?>">
-                        <span style="color: white;">&lt; <?=$person->getBrandName()?></span>
+                        <span><?=$person->getBrandName()?></span>
                     </a>
                 <?php } ?>
             </div>
             <?php if ($person->isPersonEditable()) { ?>
-                <div class="col-md-2" style="padding-top: 17px;">
-                    <button class="btn btn-default btn-green" ng-click="boxDetailCtrl.openEditBoxModal()">Edit box</button>
-                </div>
-                <div class="col-md-2" style="padding-top: 17px;">
-                    <button class="btn btn-default" ng-click="boxDetailCtrl.openDeleteBoxModal()">Delete box</button>
+                <div class="col-md-4" style="padding-top: 17px;">
+                    <button class="btn btn-default pull-right delete-btn" ng-click="boxDetailCtrl.openDeleteBoxModal()">Delete box</button>
+                    <button class="btn btn-green pull-right edit-btn" ng-click="boxDetailCtrl.openEditBoxModal()">Edit box</button>
                 </div>
             <?php } ?>
         </div>
-		<div class="row" style="background-color: black;">
+		<div class="row box-columns-wrapper">
 			<div class="col-md-3 left-box-column">
 				<span class="title" ng-bind="boxDetailCtrl.box.name"></span>
 				<p ng-bind="boxDetailCtrl.box.description"></p>
 			</div>
-			<div class="col-md-9">
+			<div class="col-md-9 right-box-column">
                 <p class="text-center empty-box-text" ng-if="boxDetailCtrl.box.products.length == 0" ng-cloak>This box is empty</p>
 
-                <div class="col-md-2 col-sm-4 col-xs-6 pad-grid" ng-if="boxDetailCtrl.box.products.length > 0" ng-cloak ng-repeat="work in boxDetailCtrl.box.products">
+                <div class="col-md-3 col-xs-6 pad-grid" ng-if="boxDetailCtrl.box.products.length > 0" ng-cloak ng-repeat="work in boxDetailCtrl.box.products">
                     <div class="grid">
 						<figure class="effect-zoe">
 							<?php if (!$person->isConnectedUser()) { ?>
