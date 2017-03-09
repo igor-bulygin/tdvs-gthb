@@ -32,6 +32,8 @@ $this->params['person_links_target'] = 'public_view';
                         <?php if ($person->isConnectedUser()) { ?>
                             <img class="sad-face" src="/imgs/sad-face.svg">
                             <p class="no-video-text">You have no boxes!</p>
+                            
+                            
                             <button class="btn btn-green btn-add-box" ng-click="viewBoxesCtrl.openCreateBoxModal()">ADD BOX</button>
 						<?php } else { ?>
                             <p class="no-video-text"><?=$person->getBrandName()?> have no boxes.</p>
@@ -42,33 +44,44 @@ $this->params['person_links_target'] = 'public_view';
 
                     <div class="content-store">
                         <div class="store-grid">
-                            <div class="title-wrapper">
+                            <div class="title-wrapper-boxes title-wrapper">
                                 <span class="title">Boxes by <?=$person->getBrandName()?></span>
                             </div>
                             <div class="row">
                                 <?php if ($person->isPersonEditable()) { ?>
                                     <div class="col-lg-4">
-                                        <button class="btn btn-default" ng-click="viewBoxesCtrl.openCreateBoxModal()">Add box</button>
+                                        <!--<button class="btn btn-default" ng-click="viewBoxesCtrl.openCreateBoxModal()">Add boxxxx</button>-->
+                                        <div class="box-loader-wrapper" ng-click="viewBoxesCtrl.openCreateBoxModal()">
+											<div class="plus-add-wrapper">
+												<div class="plus-add">
+													<span>+</span>
+												</div>
+												<div class="text">Add box</div>
+											</div>
+										</div>
                                     </div>
                                 <?php } ?>
                                 <?php foreach ($boxes as $box) {
                                     $products = $box->getProducts(); ?>
                                     <div class="col-lg-4">
+                                        <div class="boxes-wrapper">
                                         <?php if (empty($products)) { ?>
-                                            <div>Empty box</div>
+                                            <div class="empty-box">
+                                            	<span class="empty-title">Empty box</span>
+                                            </div>
                                         <?php } else {
                                             $sizes = [
                                                 1 => [
-                                                    [272, 373],
+                                                    [295, 372],
                                                 ],
                                                 2 => [
-                                                    [272, 116],
-                                                    [272, 257],
+                                                    [295, 115],
+                                                    [295, 257],
                                                 ],
                                                 3 => [
-                                                    [134, 116],
-                                                    [134, 116],
-                                                    [272, 257],
+                                                    [146, 116],
+                                                    [145, 116],
+                                                    [295, 257],
                                                 ],
                                             ];
                                             if (count($products) >= 3) {
@@ -100,8 +113,10 @@ $this->params['person_links_target'] = 'public_view';
                                             <?php } ?>
                                         <?php } ?>
 
-                                        <a href="<?= $box->getViewLink() ?>"><?=$box->name?> (<?=count($products)?>)</a>
-
+                                        <a class="group-box-title" href="<?= $box->getViewLink() ?>">
+                                        	<span><?=$box->name?> (<?=count($products)?>)</span>
+                                        </a>
+										</div>
                                     </div>
                                 <?php } ?>
                             </div>
