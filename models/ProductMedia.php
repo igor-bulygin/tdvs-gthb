@@ -58,6 +58,7 @@ class ProductMedia extends EmbedModel
 //			['photosInfo', 'validateProductMediaFileExists'], // commented, cause the mediafile can exists in a temporal folder, so we must to check against temporal uploads and product uploads.
 			['descriptionPhotosInfo', 'app\validators\EmbedDocValidator'], // to apply rules
 			['descriptionPhotosInfo', 'validateAmountDescriptionPhotos'],
+//			['descriptionPhotosInfo', 'validateProductMediaFileExists'], // commented, cause the mediafile can exists in a temporal folder, so we must to check against temporal uploads and product uploads.
 		];
 	}
 
