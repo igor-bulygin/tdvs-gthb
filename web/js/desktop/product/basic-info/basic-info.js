@@ -178,12 +178,17 @@
 		}
 
 		function unSetMainPhoto() {
-			var main_photo = vm.product.media.photos.find((photo) => {
-				return photo.main_product_photo;
-			});
-			delete main_photo.main_product_photo;
-			if(main_photo.name_cropped)
-				delete main_photo.name_cropped;
+			if(angular.isArray(vm.product.media.photos) && vm.product.media.photos.length > 0) {
+				var main_photo = vm.product.media.photos.find((photo) => {
+					return photo.main_product_photo;
+				});
+				if(main_photo) {
+					if(main_photo.main_product_photo)
+						delete main_photo.main_product_photo;
+					if(main_photo.name_cropped)
+						delete main_photo.name_cropped;
+				}
+			}
 		}
 
 		/* drag and drop functions */
