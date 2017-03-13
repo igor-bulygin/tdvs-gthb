@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(productDataService, personDataService, UtilService, toastr, $location, $uibModal, $timeout) {
+	function controller(productDataService, personDataService, UtilService, $location, $uibModal, $timeout) {
 		var vm = this;
 		vm.update = update;
 		vm.open_modal_delete = open_modal_delete;

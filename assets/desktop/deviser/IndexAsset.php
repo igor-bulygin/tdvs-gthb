@@ -7,7 +7,8 @@ class IndexAsset extends AssetBundle {
 	public $basePath = '@webroot';
 	public $baseUrl = '@web';
 	public $js = [
-		'js/desktop/deviser/deviser.js'
+		'js/desktop/deviser/deviser.js',
+		'js/desktop/deviser/view-store.js'
 	];
 	public $depends = [
 		'app\assets\desktop\pub\PublicCommonAsset',
