@@ -2,7 +2,7 @@
 // Footer
 // ==========================================================================
 footer{
-    @include size(100%,260px);
+    @include size(100%,270px);
     max-height: 400px;
     background: url('/imgs/footer-bg.png') center $black;
     @include bg-size(cover);
@@ -40,7 +40,7 @@ footer{
         text-transform: uppercase;
         letter-spacing: 0.5px;
         font-size: 13px;
-        margin:0 0 15px;
+        margin:5px 0 20px;
         @media (max-width: 768px){
                 text-align:center;
                 margin: 0;
