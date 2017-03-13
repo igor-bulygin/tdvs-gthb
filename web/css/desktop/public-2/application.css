@@ -1115,6 +1115,15 @@ input[type="radio"] .styled:checked + label::after {
   font-family: "Univers Condensed Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin: -15px 0 20px; }
 
+.success-message-120 {
+  background-color: #7AB83A;
+  color: #ffffff;
+  height: 50px;
+  padding: 16px 0 0 0;
+  position: absolute;
+  width: 100%;
+  top: 120px; }
+
 .showcase figcaption img, .banner-deviser-content .deviser-profile .avatar img, .product-description .product-description-content .work-description-wrapper .comment-wrapper .avatar img, .product-description .product-description-content .work-description-wrapper .comment-user .avatar img, .work-description-wrapper .comment-wrapper .avatar img, .work-description-wrapper .comment-user .avatar img {
   border: 1px solid #9a9a9a;
   border-radius: 180px 180px 180px 180px !important;

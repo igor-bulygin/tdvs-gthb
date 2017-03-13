@@ -44,7 +44,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 			<button class="btn btn-default btn-green" ng-click="editProductCtrl.save('product_state_active')" ng-disabled="editProductCtrl.disable_save_buttons">Publish work</button>
 		</div>
 	</div>
-	<div id="productSaved" style="background-color: #B8E986; min-height: 50px;" ng-if="editProductCtrl.progressSaved" ng-cloak><p class="text-center">Product saved</p></div>
+	<div id="productSaved" class="success-message-120" ng-if="editProductCtrl.progressSaved" ng-cloak><p class="text-center">Product saved</p></div>
 	<div class="container">
 		<product-basic-info product="editProductCtrl.product" categories="editProductCtrl.allCategories" languages="editProductCtrl.languages"></product-basic-info>
 		<product-more-details product="editProductCtrl.product" languages="editProductCtrl.languages"></product-more-details>
