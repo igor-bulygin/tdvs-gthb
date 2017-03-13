@@ -101,3 +101,25 @@
 	font-family: $font-family--secondary;
 	margin: -15px 0 20px;
 }
+.title-modal-border{
+	border-bottom: 1px solid $dark_grey;
+	padding: 0 0 15px;
+}
+.row-modal{
+	margin: 5px 0 15px;
+	p{
+		font-family: $font-family--secondary;
+		margin: 15px 0 0 0;
+	}
+}
+.grey-heart{
+	color: $light_grey;
+	font-size: 21px;
+	margin: 0 2px;
+}
+.grey-box{
+	background: url(/imgs/box.svg) 0 5px no-repeat $white;
+	width: 31px;
+    height: 23px;
+    display: inline-block;
+}

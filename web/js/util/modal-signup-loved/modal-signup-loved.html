@@ -2,24 +2,24 @@
 	<button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="modalSignUpLovedCtrl.dismiss()">
 		<span class="ion-ios-close" aria-hidden="true"></span>
 	</button>
-	<h3>You must be a Todevise member to 
-		<span class="glyphicon glyphicon-heart" ng-if="modalSignUpLovedCtrl.resolve.icon === 'loved'" ng-cloak></span>
-		<span class="glyphicon glyphicon-gift" ng-if="modalSignUpLovedCtrl.resolve.icon === 'boxes'" ng-cloak></span>
+	<h3 class="title-modal-border">You must be a Todevise member to 
+		<span class="glyphicon glyphicon-heart grey-heart" ng-if="modalSignUpLovedCtrl.resolve.icon === 'loved'" ng-cloak></span>
+		<span class="grey-box" ng-if="modalSignUpLovedCtrl.resolve.icon === 'boxes'" ng-cloak></span>
 		 a product.</h3>
 </div>
 <div class="modal-body">
-	<div class="row">
+	<div class="row row-modal">
 		<p class="col-md-6">Already a member</p>
 		<div class="col-md-6">
 			<a ng-href="{{modalSignUpLovedCtrl.login}}">
-				<button class="btn btn-default">Login</button>
+				<button class="btn  btn-default btn-cancel">Log in</button>
 			</a>
 		</div>
 	</div>
-	<div class="row">
+	<div class="row row-modal">
 		<p class="col-md-6">Become a Todevise member (it's 100% free)</p>
 		<div class="col-md-6">
-			<button class="btn btn-default btn-green">Sign Up</button>
+			<button class="btn btn-green green-modal-btn">Sign Up</button>
 		</div>
 	</div>
 </div>

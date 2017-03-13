@@ -1115,6 +1115,27 @@ input[type="radio"] .styled:checked + label::after {
   font-family: "Univers Condensed Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin: -15px 0 20px; }
 
+.title-modal-border {
+  border-bottom: 1px solid #9a9a9a;
+  padding: 0 0 15px; }
+
+.row-modal {
+  margin: 5px 0 15px; }
+  .row-modal p {
+    font-family: "Univers Condensed Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin: 15px 0 0 0; }
+
+.grey-heart {
+  color: #bfbfbf;
+  font-size: 21px;
+  margin: 0 2px; }
+
+.grey-box {
+  background: url(/imgs/box.svg) 0 5px no-repeat #ffffff;
+  width: 31px;
+  height: 23px;
+  display: inline-block; }
+
 .success-message-120 {
   background-color: #7AB83A;
   color: #ffffff;
