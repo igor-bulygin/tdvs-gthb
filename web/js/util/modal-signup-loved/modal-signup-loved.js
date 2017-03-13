@@ -4,7 +4,7 @@
 	function controller(){
 		var vm = this;
 		vm.login = currentHost() + '/login';
-		vm.signup = currentHost(); //add signup
+		vm.signup = currentHost() + '/signup';
 	}
 
 	var component = {
