@@ -4474,7 +4474,7 @@ input[type="radio"] .styled:checked + label::after {
   background-color: #484848;
   height: 50px;
   margin: -40px 0 40px 0;
-  padding-top: 6px; }
+  padding: 6px 15px; }
   .new-product-header .title {
     color: #ffffff;
     text-transform: uppercase; }
