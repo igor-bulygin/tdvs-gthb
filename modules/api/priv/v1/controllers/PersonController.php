@@ -55,7 +55,7 @@ class PersonController extends AppPrivateController
 	 */
 	private function getScenarioFromRequest(Person $person)
 	{
-		$account_state = Yii::$app->request->post('account_state', Person::ACCOUNT_STATE_ACTIVE);
+		$account_state = Yii::$app->request->post('account_state', $person->account_state);
 
 		// can't change from "active" to "draft"
 		if ($person->account_state == Person::ACCOUNT_STATE_ACTIVE || $account_state == Person::ACCOUNT_STATE_ACTIVE) {
