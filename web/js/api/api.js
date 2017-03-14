@@ -6,10 +6,10 @@
 		$httpProvider.interceptors.push(securityInterceptor);
 	}
 
-	function securityInterceptor($injector, $q, $rootScope, UtilService) {
+	function securityInterceptor($injector, $q, $rootScope, localStorageUtilService) {
 		function requestInterceptor(request) {
-			if(UtilService.getLocalStorage('access_token')) {
-				request.headers.Authorization = 'Bearer ' + UtilService.getLocalStorage('access_token');
+			if(localStorageUtilService.getLocalStorage('access_token')) {
+				request.headers.Authorization = 'Bearer ' + localStorageUtilService.getLocalStorage('access_token');
 			}
 			return request ||$q.when(request);
 		}

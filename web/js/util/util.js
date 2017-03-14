@@ -11,9 +11,6 @@
 		this.parseImagesUrl = parseImagesUrl;
 		this.isZeroOrLess = isZeroOrLess;
 		this.returnPathFromCategory = returnPathFromCategory;
-		this.setLocalStorage = setLocalStorage;
-		this.getLocalStorage = getLocalStorage;
-		this.removeLocalStorage = removeLocalStorage;
 		this.stripHTMLTags = stripHTMLTags;
 		this.onError = onError;
 		this.setLeavingModal = setLeavingModal;
@@ -113,18 +110,6 @@
 				return element.id === id
 			});
 			return category.path;
-		}
-
-		function setLocalStorage(key, value) {
-			return localStorageService.set(key, value);
-		}
-
-		function getLocalStorage(key) {
-			return localStorageService.get(key);
-		}
-
-		function removeLocalStorage(key) {
-			return localStorageService.remove(key)
 		}
 
 		function stripHTMLTags(value) {

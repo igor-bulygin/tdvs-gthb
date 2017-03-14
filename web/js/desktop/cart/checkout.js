@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(cartDataService, tagDataService, productDataService, UtilService, cartService) {
+	function controller(cartDataService, tagDataService, productDataService, UtilService, cartService, localStorageUtilService) {
 		var vm = this;
 		vm.cart_state = {
 			state: 1
@@ -15,17 +15,15 @@
 
 		function createCart() {
 			function onCreateCartSuccess(data) {
-				UtilService.setLocalStorage('cart_id', data.id);
+				localStorageUtilService.setLocalStorage('cart_id', data.id);
 			}
-			function onCreateCartError(err) {
-				console.log(err);
-			}
-			cartDataService.createCart(onCreateCartSuccess, onCreateCartError)
+
+			cartDataService.createCart(onCreateCartSuccess, UtilService.onError);
 		}
 
 
 		function getCart() {
-			var cart_id = UtilService.getLocalStorage('cart_id');
+			var cart_id = localStorageUtilService.getLocalStorage('cart_id');
 
 			function onGetCartSuccess(data) {
 				vm.cart = angular.copy(data);
@@ -38,7 +36,7 @@
 
 			function onGetCartError(err) {
 				createCart();
-				console.log(err);
+				UtilService.onError(err);
 			}
 
 			if(cart_id) {

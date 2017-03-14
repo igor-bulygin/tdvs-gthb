@@ -1,14 +1,14 @@
 (function () {
 	"use strict";
 
-	function controller(personDataService, $window, UtilService) {
+	function controller(personDataService, $window, UtilService, localStorageUtilService) {
 		var vm = this;
 		vm.logout = logout;
 
 		function logout(){
 			function onLogoutSuccess(data) {
-				UtilService.removeLocalStorage('access_token');
-				UtilService.removeLocalStorage('cart_id');
+				localStorageUtilService.removeLocalStorage('access_token');
+				localStorageUtilService.removeLocalStorage('cart_id');
 				$window.location.href = currentHost();
 			}
 

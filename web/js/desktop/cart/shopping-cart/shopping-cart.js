@@ -1,11 +1,11 @@
 (function () {
 	"use strict";
 
-	function controller(cartDataService, UtilService, cartService, cartEvents, $rootScope) {
+	function controller(cartDataService, UtilService, cartService, cartEvents, $rootScope, localStorageUtilService) {
 		var vm = this;
 		vm.deleteItem = deleteItem;
 		vm.isObject = UtilService.isObject;
-		var cart_id = UtilService.getLocalStorage('cart_id');
+		var cart_id = localStorageUtilService.getLocalStorage('cart_id');
 
 		function deleteItem(price_stock_id) {
 			function onDeleteItemSuccess(data) {

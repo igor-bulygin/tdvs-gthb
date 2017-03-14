@@ -1,7 +1,8 @@
 (function () {
 	"use strict";
 
-	function controller(productDataService, tagDataService, cartDataService, lovedDataService, boxDataService, $location, toastr, UtilService, $window, $uibModal) {
+	function controller(productDataService, tagDataService, cartDataService, lovedDataService, boxDataService, 
+		$location, toastr, UtilService, $window, $uibModal, localStorageUtilService) {
 		var vm = this;
 		vm.quantity = 1;
 		vm.option_selected = {};
@@ -231,7 +232,7 @@
 
 		function onCreateCartSuccess(data) {
 			var cart_id = angular.copy(data.id);
-			UtilService.setLocalStorage('cart_id', cart_id);
+			localStorageUtilService.setLocalStorage('cart_id', cart_id);
 			saveProduct(cart_id);
 		}
 
@@ -242,7 +243,7 @@
 		function addToCart(form) {
 			form.$setSubmitted();
 			if(form.$valid && vm.reference_id) {
-				var cart_id = UtilService.getLocalStorage('cart_id');
+				var cart_id = localStorageUtilService.getLocalStorage('cart_id');
 				if(cart_id) {
 					saveProduct(cart_id);
 				} else {

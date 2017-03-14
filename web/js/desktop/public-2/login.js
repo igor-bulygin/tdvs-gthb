@@ -1,13 +1,13 @@
 (function () {
 	"use strict";
 
-	function controller(personDataService, $window, UtilService) {
+	function controller(personDataService, $window, UtilService,localStorageUtilService) {
 		var vm = this;
 		vm.login = login;
 
 		function login() {
 			function onLoginSuccess(data) {
-				UtilService.setLocalStorage('access_token', data.access_token);
+				localStorageUtilService.setLocalStorage('access_token', data.access_token);
 				$window.location.href = currentHost() + data.return_url;
 			}
 

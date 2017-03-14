@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(UtilService, personDataService, invitationDataService, $location, $window) {
+	function controller(UtilService, personDataService, invitationDataService, $location, $window, localStorageUtilService) {
 		var vm = this;
 		vm.submitForm = submitForm;
 		vm.has_error = UtilService.has_error;
@@ -15,7 +15,7 @@
 		function submitForm(form) {
 			var url = "";
 			function onLoginSuccess(data) {
-				UtilService.setLocalStorage('access_token', data.access_token);
+				localStorageUtilService.setLocalStorage('access_token', data.access_token);
 				$window.location.href = url;
 			}
 
