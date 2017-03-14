@@ -8,18 +8,23 @@ use app\helpers\Utils;
 
 <?php foreach ($products as $i => $work) { ?>
 	<div class="col-md-2 col-sm-4 col-xs-6 pad-grid">
-		<a href="<?= $work->getViewLink() ?>">
-			<div class="grid">
-				<figure class="effect-zoe">
-					<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($work->getMainImage())->resize(400, 0) ?>">
-					<figcaption>
-						<p class="instauser">
-							<?= $work->name ?>
-						</p>
-						<p class="price">€ <?= $work->getMinimumPrice() ?></p>
-					</figcaption>
-				</figure>
-			</div>
-		</a>
+        <div class="grid">
+            <figure class="effect-zoe">
+                <image-hover-buttons product-id="{{'<?= $work->short_id ?>'}}" is-loved="{{'<?=$work->isLovedByCurrentUser() ? 1 : 0 ?>'}}" is-mine="{{'<?= $work->isWorkFromCurrentUser() ? 1 : 0 ?>'}}">
+                    <a href="<?= $work->getViewLink()?>">
+                        <img class="grid-image"
+                             src="<?= Utils::url_scheme() ?><?= Utils::thumborize($work->getMainImage())->resize(362, 450) ?>">
+                    </a>
+                </image-hover-buttons>
+                <a href="<?= $work->getViewLink()?>">
+                    <figcaption>
+                        <p class="instauser">
+                            <?= $work->name ?>
+                        </p>
+                        <p class="price">€ <?= $work->getMinimumPrice() ?></p>
+                    </figcaption>
+                </a>
+            </figure>
+        </div>
 	</div>
 <?php } ?>
