@@ -8,12 +8,15 @@ $this->title = 'Create an account - Todevise';
 ?>
 
 <div class="create-deviser-account-wrapper">
-	<div class="logo">
-		<h1 class="text-center text-primary">WELCOME<br />to</h1>
-		<a href="#">
-			<img src="/imgs/logo.png" data-pin-nopin="true">
-		</a>
-	</div>
+    <div class="logo">
+		<span class="title-create-account">
+			<span class="first-title">welcome</span>
+			<span class="second-title">to</span>
+		</span>
+        <a class="image-create-account" href="#">
+            <img src="/imgs/logo.png" data-pin-nopin="true">
+        </a>
+    </div>
 	<div class="create-deviser-account-container black-form" ng-controller="createClientCtrl as createClientCtrl">
 		<form name="createClientCtrl.form" novalidate>
 			<div>

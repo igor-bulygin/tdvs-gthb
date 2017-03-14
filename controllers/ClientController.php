@@ -54,7 +54,7 @@ class ClientController extends CController
 
 		$loveds = Loved::findSerialized(['person_id' => $person_id]);
 		$this->layout = '/desktop/public-2.php';
-		return $this->render("loved-view", [
+		return $this->render("@app/views/desktop/person/loved-view", [
 			'person' => $person,
 			'loveds' => $loveds,
 		]);
@@ -78,7 +78,7 @@ class ClientController extends CController
 
 		$boxes = Box::findSerialized(['person_id' => $person_id]);
 		$this->layout = '/desktop/public-2.php';
-		return $this->render("boxes-view", [
+		return $this->render("@app/views/desktop/person/boxes-view", [
 			'person' => $person,
 			'boxes' => $boxes,
 		]);
@@ -113,7 +113,7 @@ class ClientController extends CController
 		$boxes = Box::getRandomBoxes(16, $box->short_id);
 
 		$this->layout = '/desktop/public-2.php';
-		return $this->render("box-detail", [
+		return $this->render("@app/views/desktop/person/box-detail", [
 			'person' => $person,
 			'box' => $box,
 			'moreBoxes' => $boxes,

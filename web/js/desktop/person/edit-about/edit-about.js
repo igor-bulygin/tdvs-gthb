@@ -49,6 +49,7 @@
 			function onGetProfileSuccess(data) {
 				vm.person = angular.copy(data);
 				vm.person_original = angular.copy(data);
+				vm.isDraft = (vm.person.account_state === 'draft') ? true : false;
 				vm.images = UtilService.parseImagesUrl(vm.person.media.photos, vm.person.url_images);
 				vm.curriculum = currentHost() + vm.person.url_images + vm.person.curriculum;
 				setEditTexts(data.type[0])
@@ -204,6 +205,15 @@
 
 			function onUpdateProfileSuccess(data) {
 				UtilService.setLeavingModal(false);
+				var newObject = {
+					categories: vm.person.categories || [],
+					curriculum: vm.person.curriculum || null,
+					media: {
+						photos: vm.person.media.photos || []
+					},
+					text_biography: vm.person.text_biography || {},
+				}
+				$rootScope.$broadcast(deviserEvents.updated_deviser, newObject);
 				$window.location.href = vm.person.about_link;
 			}
 
@@ -224,6 +234,10 @@
 		}
 
 		//events
+		$scope.$on(deviserEvents.updated_deviser, function(event, args) {
+			vm.person = Object.assign(vm.person, args);
+		})
+
 		$scope.$on(deviserEvents.make_profile_public_errors, function(event, args) {
 			//set form submitted
 			vm.form.$setSubmitted();

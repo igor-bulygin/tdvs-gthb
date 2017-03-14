@@ -8,7 +8,8 @@
 
 		//events
 		$provide.value("deviserEvents", {
-			make_profile_public_errors: 'make-profile-public-errors'
+			make_profile_public_errors: 'make-profile-public-errors',
+			updated_deviser: 'updated_deviser'
 		});
 
 		localStorageServiceProvider
