@@ -82,7 +82,7 @@ $this->params['person_menu_store_categories'] = $categories;
 									<div class="grid">
 										<figure class="effect-zoe">
 											<?php if ($person->isPersonEditable()) { ?>
-											<span class="close-product-icon" ng-click="viewStoreCtrl.open_modal_delete('<?=$product->short_id?>')">
+											<span class="close-product-icon-left" ng-click="viewStoreCtrl.open_modal_delete('<?=$product->short_id?>')">
 												<i class="ion-android-close"></i>
 											</span>
 											<?php } ?>
