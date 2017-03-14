@@ -102,7 +102,7 @@
 				vm.product = productService.parseProductFromService(vm.product);
 			}
 			var params = {
-				idProduct: UtilService.returnProductIdFromUrl()
+				idProduct: product.short_id
 			}
 			productDataService.getProductPriv(params, onGetProductPrivSuccess, UtilService.onError);
 		}

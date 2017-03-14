@@ -39,7 +39,7 @@
 					vm.box = angular.copy(returnData);
 				}
 			}, function (err) {
-				//errors
+				UtilService.onError(err);
 			});
 		}
 

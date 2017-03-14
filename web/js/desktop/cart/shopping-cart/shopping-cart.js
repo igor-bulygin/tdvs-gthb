@@ -15,14 +15,10 @@
 				$rootScope.$broadcast(cartEvents.cartUpdated, {cart: vm.cart});
 			}
 
-			function onDeleteItemError(err){
-				console.log(err);
-			}
-
 			cartDataService.deleteItem({
 				id: cart_id,
 				productId: price_stock_id
-			}, onDeleteItemSuccess, onDeleteItemError);
+			}, onDeleteItemSuccess, UtilService.onError);
 		}
 	}
 

@@ -113,7 +113,7 @@
 								//upload cropped photo
 								vm.file = angular.copy(Upload.dataUrltoBlob(imageData.photoCropped, "temp.png"));
 								var data = {
-									deviser_id: UtilService.returnDeviserIdFromUrl(),
+									deviser_id: person.short_id,
 									file: Upload.dataUrltoBlob(imageData.photoCropped, "temp.png")
 								};
 								var type;

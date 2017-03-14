@@ -148,7 +148,7 @@
 		//If you choose a personal Sizechart you need to search how many do you have. You can have none.
 		function deviserSizecharts() {
 			vm.sizecharts.forEach(function(element) {
-					if(element.type === 1 && element.deviser_id === UtilService.returnDeviserIdFromUrl())
+					if(element.type === 1 && element.deviser_id === person.short_id)
 						vm.deviserSizecharts.push(element);
 				});
 		}

@@ -1,9 +1,0 @@
-<label class="col-sm-3 control-label product-label"><span class="atr">Size</span> <i class="ion-information-circled info"></i></label>
-<div class="col-sm-9">
-	<div class="size-box" data-toggle="tooltip" data-placement="top" title="+ €" ng-repeat="size in sizeSelectorCtrl.option.values">
-		<input type="radio" name="size" ng-attr-id="{{'size-' + $index}}" ng-model="sizeSelectorCtrl.optionsSelected[sizeSelectorCtrl.option.id]" ng-change="sizeSelectorCtrl.getReferences({options: sizeSelectorCtrl.optionsSelected})" ng-value="size.value">
-		<label ng-attr-for="{{'size-' + $index}}">
-			<span class="radio" ng-bind="size.text"></span>
-		</label>
-	</div>
-</div>

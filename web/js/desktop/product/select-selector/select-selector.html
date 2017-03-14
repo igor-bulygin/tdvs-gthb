@@ -1,8 +1,0 @@
-<label class="col-sm-3 control-label product-label"><span class="atr" ng-bind="selectSelectorCtrl.option.name"></span></label>
-<div class="col-sm-9">
-	<select ng-attr-name="{{selectSelectorCtrl.option.name}}" class="form-control selectpicker product-select" ng-attr-title="Choose {{selectSelectorCtrl.option.name}}" ng-model="selectSelectorCtrl.optionsSelected[selectSelectorCtrl.option.id]" ng-options="value.value as value.text for value in selectSelectorCtrl.option.values" ng-required="option.required" ng-change="selectSelectorCtrl.getReferences({options: selectSelectorCtrl.optionsSelected})" ng-if="selectSelectorCtrl.option.values.length > 1">
-		<option value="" style="display:none;"></option>
-	</select>
-	<div class="atribute-selected" ng-if="selectSelectorCtrl.option.values.length === 1" ng-bind="selectSelectorCtrl.option.values[0].text">
-	</div>
-</div>

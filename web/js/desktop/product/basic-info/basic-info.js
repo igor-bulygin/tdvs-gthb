@@ -86,7 +86,7 @@
 			//upload photos
 			angular.forEach(vm.files, function(file) {
 				var data = {
-					deviser_id: UtilService.returnDeviserIdFromUrl(),
+					deviser_id: person.short_id,
 					file: file
 				};
 				var type;
@@ -136,7 +136,7 @@
 				if(imageCropped) {
 					//upload image
 					var data = {
-						deviser_id: UtilService.returnDeviserIdFromUrl(),
+						deviser_id: person.short_id,
 						file: Upload.dataUrltoBlob(imageCropped, "temp.png")
 					}
 					var type;

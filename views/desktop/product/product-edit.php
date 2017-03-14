@@ -19,13 +19,9 @@ use app\assets\desktop\product\editProductAsset;
 
 editProductAsset::register($this);
 
-/** change this */
-/** @var Person $deviser */
-/** @var Product $product */
-/** @var PersonVideo $video */
-
 $this->title = $person->getBrandName() . ' - Todevise';
 $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD, 'person-var-script');
+$this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEAD, 'product-var-script');
 
 ?>
 
