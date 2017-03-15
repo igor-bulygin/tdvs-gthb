@@ -8,15 +8,15 @@ $this->title = 'Create an account - Todevise';
 ?>
 
 <div class="create-deviser-account-wrapper">
-    <div class="logo">
+	<div class="logo">
 		<span class="title-create-account">
 			<span class="first-title">welcome</span>
 			<span class="second-title">to</span>
 		</span>
-        <a class="image-create-account" href="#">
-            <img src="/imgs/logo.png" data-pin-nopin="true">
-        </a>
-    </div>
+		<a class="image-create-account" href="#">	º
+			<img src="/imgs/logo.png" data-pin-nopin="true">
+		</a>
+	</div>
 	<div class="create-deviser-account-container black-form" ng-controller="createClientCtrl as createClientCtrl">
 		<form name="createClientCtrl.form" novalidate>
 			<div>
@@ -44,13 +44,15 @@ $this->title = 'Create an account - Todevise';
 				</div>
 				<div class="row">
 					<div class="checkbox checkbox-circle remember-me">
-						<input id="checkbox7" class="styled" type="checkbox" required>
+						<input id="checkbox7" class="styled ng-class:{'error-input': createClientCtrl.has_error(createClientCtrl.form, createClientCtrl.form.terms)}" type="checkbox" name="terms" ng-model="createClientCtrl.terms" required>
 						<label for="checkbox7">
 							I accept the Todevise Terms & Conditions
 						</label>
 					</div>
+					<form-errors field="createClientCtrl.form.terms" condition="createClientCtrl.has_error(createClientCtrl.form, createClientCtrl.form.terms)"></form-errors>
 				</div>
 			</div>
+			<div ng-if="createClientCtrl.error_message" class="text-center error-text" ng-cloak><p ng-bind="createClientCtrl.error_message"></p></div>
 			<button class="btn-red send-btn" ng-click="createClientCtrl.submitForm(createClientCtrl.form)">
 				<i class="ion-android-navigate"></i>
 			</button>

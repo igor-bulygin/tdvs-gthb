@@ -24,14 +24,21 @@
 				personDataService.login(vm.user, null, onLoginSuccess, UtilService.onError);
 			}
 
+			function onCreateClientError(err) {
+				if(err.status === 409)
+					vm.error_message = "This account already exists."
+			}
+
 			if (form.password_confirm.$error.same)
 				form.$setValidity('password_confirm', false);
 			else {
 				form.$setValidity('password_confirm', true);
 			}
+
+			form.$setSubmitted();
+
 			if (form.$valid) {
-				form.$setSubmitted();
-				personDataService.createClient(vm.user, null, onCreateClientSuccess, UtilService.onError);
+				personDataService.createClient(vm.user, null, onCreateClientSuccess, onCreateClientError);
 			}
 		}
 
