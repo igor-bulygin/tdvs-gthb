@@ -219,11 +219,18 @@ $videos = $product->getVideos();
 						</div>-->
 						<div class="product-data no-border">
 							<div class="row-size">
-								<button type="button" class="btn btn-hart pull-left" ng-class="detailProductCtrl.product.isLoved ? 'btn-red' : 'btn-grey'" ng-click="detailProductCtrl.setLoved()">
-									<i class="ion-ios-heart"></i>
-									<span ng-if="!detailProductCtrl.product.isLoved" ng-cloak>Love work</span>
-									<span ng-if="detailProductCtrl.product.isLoved" ng-cloak>You love this work</span>
-								</button>
+                                <?php if ($product->isWorkFromCurrentUser()) { ?>
+                                    <a href="<?=$product->getEditLink()?>" class="btn btn-hart btn-grey pull-left">
+                                        <i class="ion-edit"></i>
+                                        <span>Edit work</span>
+                                    </a>
+                                <?php } else { ?>
+                                    <button type="button" class="btn btn-hart pull-left" ng-class="detailProductCtrl.product.isLoved ? 'btn-red' : 'btn-grey'" ng-click="detailProductCtrl.setLoved()">
+                                        <i class="ion-ios-heart"></i>
+                                        <span ng-if="!detailProductCtrl.product.isLoved" ng-cloak>Love work</span>
+                                        <span ng-if="detailProductCtrl.product.isLoved" ng-cloak>You love this work</span>
+                                    </button>
+                                <?php } ?>
 								<button type="button" class="btn btn-grey btn-hart pull-right" ng-click="detailProductCtrl.setBox()">
 									<i class="ion-ios-box"></i>
 									<span>Save in a box</span>
