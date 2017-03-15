@@ -38,17 +38,8 @@
 			});
 
 			modalInstance.result.then(function (data) {
-				// invitation to a new Deviser
-				invitationDataService.Invitation.save(data).$promise.then(function (data) {
-					toastr.success("Invitations sent !");
-					if (data.url) {
-						$window.location = data.url;
-					} else {
-                        $window.location.reload();
-                    }
-				}, function (err) {
-					toastr.error(err);
-				});
+				//ok
+				$window.location.reload();
 			}, function () {
 				//Cancel
 			});
@@ -58,19 +49,32 @@
 
 	}
 
-	function create_newCtrl($uibModalInstance, data) {
+	function create_newCtrl($uibModalInstance, data, invitationDataService) {
 		var vm = this;
-
 		vm.data = data;
+		vm.createInvitation = createInvitation;
 
-		vm.ok = function () {
-			$uibModalInstance.close({
-				email: vm.email,
-				first_name: vm.first_name,
-				no_email: vm.no_email,
-                code_invitation_type: vm.code_invitation_type
-			});
-		};
+		function createInvitation(form) {
+			function onCreateInvitationSuccess(data) {
+				$uibModalInstance.close();
+			}
+
+			function onCreateInvitationError(err) {
+				if(err.status === 409)
+					vm.error_messages = "This account already exists."
+			}
+
+			form.$setSubmitted();
+			if(form.$valid) {
+				invitationDataService.createInvitationAdmin({
+					email: vm.email,
+					first_name: vm.first_name,
+					no_email: vm.no_email,
+					code_invitation_type: vm.code_invitation_type
+				}, null, onCreateInvitationSuccess, onCreateInvitationError);
+			}
+
+		}
 
 		vm.cancel = function () {
 			$uibModalInstance.dismiss();
