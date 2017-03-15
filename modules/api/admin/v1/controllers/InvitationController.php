@@ -4,9 +4,11 @@ namespace app\modules\api\admin\v1\controllers;
 
 use app\models\Faq;
 use app\models\Invitation;
+use app\models\Person;
 use MongoDate;
 use Yii;
 use yii\rest\Controller;
+use yii\web\ConflictHttpException;
 use yii\web\ForbiddenHttpException;
 
 class InvitationController extends Controller
@@ -35,6 +37,12 @@ class InvitationController extends Controller
 
 	public function actionCreate()
 	{
+		$email = Yii::$app->request->post('email');
+		$personExists = Person::findByEmail($email);
+		if ($personExists) {
+			throw new ConflictHttpException("Email ".$email." already in use");
+		}
+
 		$invitation = new Invitation();
 		if ($invitation->load(Yii::$app->request->post(), '') && $invitation->validate()) {
 			// save the invitation

@@ -7,6 +7,7 @@ use app\models\Person;
 use Yii;
 use yii\base\Exception;
 use yii\web\BadRequestHttpException;
+use yii\web\ConflictHttpException;
 use yii\web\NotFoundHttpException;
 
 class PersonController extends AppPublicController
@@ -48,6 +49,11 @@ class PersonController extends AppPublicController
 				throw new Exception("Invalid person type");
 		}
 
+		$email = Yii::$app->request->post('email');
+		$personExists = Person::findByEmail($email);
+		if ($personExists) {
+			throw new ConflictHttpException("Email ".$email." already in use");
+		}
 
 		$person = new Person();
 		$person->type = $type;
@@ -55,7 +61,7 @@ class PersonController extends AppPublicController
 		$person->setScenario($this->getScenarioFromRequest($person));
 		$person->load(Yii::$app->request->post(), '');
 
-		$person->credentials = ["email" => Yii::$app->request->post('email')];
+		$person->credentials = ["email" => $email];
 		$person->setPassword(Yii::$app->request->post("password"));
 
 		// Load personal info directly to subdocument

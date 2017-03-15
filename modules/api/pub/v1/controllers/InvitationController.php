@@ -3,10 +3,12 @@
 namespace app\modules\api\pub\v1\controllers;
 
 use app\models\Invitation;
+use app\models\Person;
 use app\models\PostmanEmail;
 use app\models\PostmanEmailTask;
 use app\modules\api\pub\v1\forms\BecomeDeviserForm;
 use Yii;
+use yii\web\ConflictHttpException;
 use yii\web\NotFoundHttpException;
 
 class InvitationController extends AppPublicController {
@@ -31,6 +33,12 @@ class InvitationController extends AppPublicController {
 	 */
 	public function actionRequestBecomeDeviser()
 	{
+		$email = Yii::$app->request->post('email');
+		$personExists = Person::findByEmail($email);
+		if ($personExists) {
+			throw new ConflictHttpException("Email ".$email." already in use");
+		}
+
 		$form = new BecomeDeviserForm();
 		if ($form->load(Yii::$app->request->post(), '') && $form->validate()) {
 			// handle success
