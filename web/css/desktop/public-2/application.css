@@ -1136,6 +1136,9 @@ input[type="radio"] .styled:checked + label::after {
   height: 23px;
   display: inline-block; }
 
+.error-input .btn-default {
+  border-color: #924cfc; }
+
 .success-message-120 {
   background-color: #7AB83A;
   color: #ffffff;
@@ -2427,7 +2430,7 @@ input[type="radio"] .styled:checked + label::after {
 .req-2 {
   position: absolute;
   top: 60px;
-  left: 48px;
+  left: 0;
   color: #924cfc;
   z-index: 99999;
   text-align: center;
