@@ -13,7 +13,7 @@ $this->title = 'Create an account - Todevise';
 			<span class="first-title">welcome</span>
 			<span class="second-title">to</span>
 		</span>
-		<a class="image-create-account" href="#">	º
+		<a class="image-create-account" href="#">
 			<img src="/imgs/logo.png" data-pin-nopin="true">
 		</a>
 	</div>
@@ -22,7 +22,7 @@ $this->title = 'Create an account - Todevise';
 			<div>
 				<div class="row">
 					<label for="name">Name</label>
-					<input type="text" id="name"" class="form-control grey-input ng-class:{'error-input': createClientCtrl.has_error(createClientCtrl.form, createClientCtrl.form.name)}" name="name" ng-model="createClientCtrl.user.name" required>
+					<input type="text" id="name" class="form-control grey-input ng-class:{'error-input': createClientCtrl.has_error(createClientCtrl.form, createClientCtrl.form.name)}" name="name" ng-model="createClientCtrl.user.name" required>
 					<form-errors field="createClientCtrl.form.name" condition="createClientCtrl.has_error(createClientCtrl.form, createClientCtrl.form.name)"></form-errors>
 				</div>
 				<div class="row">
@@ -43,8 +43,8 @@ $this->title = 'Create an account - Todevise';
 					</div>
 				</div>
 				<div class="row">
-					<div class="checkbox checkbox-circle remember-me">
-						<input id="checkbox7" class="styled ng-class:{'error-input': createClientCtrl.has_error(createClientCtrl.form, createClientCtrl.form.terms)}" type="checkbox" name="terms" ng-model="createClientCtrl.terms" required>
+					<div class="checkbox checkbox-circle remember-me ng-class:{'error-input': createClientCtrl.has_error(createClientCtrl.form, createClientCtrl.form.terms)}">
+						<input id="checkbox7" class="styled" type="checkbox" name="terms" ng-model="createClientCtrl.terms" required>
 						<label for="checkbox7">
 							I accept the Todevise Terms & Conditions
 						</label>

@@ -5,4 +5,7 @@
 	.btn-default {
 		border-color: $violet;
 	}
+	label::before{
+		border:1px solid $violet!important;
+	}
 }

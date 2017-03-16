@@ -1138,6 +1138,8 @@ input[type="radio"] .styled:checked + label::after {
 
 .error-input .btn-default {
   border-color: #924cfc; }
+.error-input label::before {
+  border: 1px solid #924cfc !important; }
 
 .success-message-120 {
   background-color: #7AB83A;
