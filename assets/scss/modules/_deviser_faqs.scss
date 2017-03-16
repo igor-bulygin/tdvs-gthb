@@ -237,4 +237,9 @@
     &:hover{
         color: $dark_red;
     }
+	&.top{
+		z-index: 9999;
+		cursor: pointer;
+		position: relative;
+	}
 }

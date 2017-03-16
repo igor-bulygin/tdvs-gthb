@@ -2322,6 +2322,10 @@ input[type="radio"] .styled:checked + label::after {
   font-family: "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif; }
   .red-link-btn:hover {
     color: #C91C39; }
+  .red-link-btn.top {
+    z-index: 9999;
+    cursor: pointer;
+    position: relative; }
 
 .banner-deviser {
   position: relative;
