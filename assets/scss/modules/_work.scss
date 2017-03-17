@@ -595,3 +595,7 @@ input:checked + .slider:before {
 .draggable-list{
 	list-style: none;
 }
+.apply-to-all-btn{
+	cursor: pointer;
+	color: $dark_green;
+}

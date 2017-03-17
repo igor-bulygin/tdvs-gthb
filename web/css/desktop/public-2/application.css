@@ -5107,6 +5107,10 @@ input:checked + .slider:before {
 .draggable-list {
   list-style: none; }
 
+.apply-to-all-btn {
+  cursor: pointer;
+  color: #7AB83A; }
+
 .cart-top-bar {
   background-color: #bfbfbf;
   height: 31px; }
