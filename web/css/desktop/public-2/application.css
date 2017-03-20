@@ -1141,6 +1141,18 @@ input[type="radio"] .styled:checked + label::after {
 .error-input label::before {
   border: 1px solid #924cfc !important; }
 
+.error-input .ta-editor {
+  border-color: #924cfc; }
+
+.calendar-icon.error-input {
+  border: 1px solid #924cfc; }
+
+.error-input {
+  border-color: #924cfc !important; }
+
+.error-text {
+  color: #924cfc !important; }
+
 .success-message-120 {
   background-color: #7AB83A;
   color: #ffffff;
@@ -3768,12 +3780,6 @@ input[type="radio"] .styled:checked + label::after {
     color: #ffffff;
     font-size: 28px; }
 
-.error-input {
-  border-color: #924cfc !important; }
-
-.error-text {
-  color: #924cfc !important; }
-
 .optional-input {
   color: #418400;
   text-transform: uppercase;
@@ -5059,9 +5065,6 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%; }
-
-.error-input .ta-editor {
-  border-color: #924cfc; }
 
 .calendar-icon {
   border: 1px solid transparent;

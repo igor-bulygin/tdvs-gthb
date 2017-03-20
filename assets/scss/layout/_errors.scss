@@ -9,3 +9,17 @@
 		border:1px solid $violet!important;
 	}
 }
+.error-input .ta-editor{
+	border-color:$violet;
+}
+.calendar-icon{
+	&.error-input{
+		border: 1px solid $violet;
+	}
+}
+.error-input{
+    border-color: #924cfc!important;
+}
+.error-text{
+     color: #924cfc!important;
+}

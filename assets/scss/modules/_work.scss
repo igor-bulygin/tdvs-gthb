@@ -539,11 +539,6 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
-
-.error-input .ta-editor{
-	border-color:$violet;
-}
-
 .calendar-icon{
 	border: 1px solid transparent;
     @include border-radius(90px,90px,90px,90px);
@@ -558,7 +553,7 @@ input:checked + .slider:before {
 		color: $red;
 		&:hover{
 		color: $dark_red;	
-	}
+		}
 	}
 	&.error-input{
 		border: 1px solid $violet;
