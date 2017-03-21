@@ -2343,8 +2343,7 @@ input[type="radio"] .styled:checked + label::after {
 
 .banner-deviser {
   position: relative;
-  background-color: #e9e9e9;
-  height: 411px; }
+  background-color: #e9e9e9; }
   .banner-deviser .cover {
     width: 100%; }
 
@@ -2353,7 +2352,7 @@ input[type="radio"] .styled:checked + label::after {
   min-height: 200px; }
   .banner-deviser-content .grey-overlay {
     width: 100%;
-    height: 230px;
+    height: 240px;
     background-color: #484848;
     opacity: 0.45;
     filter: alpha(opacity=45); }

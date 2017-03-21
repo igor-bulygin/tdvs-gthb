@@ -4,7 +4,6 @@
 .banner-deviser{
     position: relative;
     background-color: $background_grey;
-    height: 411px;
     .cover{
         width:100%;
     }
@@ -15,7 +14,7 @@
 	min-height: 200px;
     .grey-overlay{
         @extend %absolut-bottom;
-        @include size(100%,230px);
+        @include size(100%,240px);
         background-color: $almost_black;
         @include opacity(0.45)
     }
