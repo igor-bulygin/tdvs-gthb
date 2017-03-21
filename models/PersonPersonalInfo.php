@@ -98,6 +98,8 @@ class PersonPersonalInfo extends EmbedModel
 
 		if (empty($this->brand_name)) {
 			$this->brand_name = rtrim($this->name . ' ' . $this->last_name);
+		} elseif (empty($this->name)) {
+			$this->name = $this->brand_name;
 		}
 
 		return $loaded;
@@ -123,23 +125,5 @@ class PersonPersonalInfo extends EmbedModel
 			[['name', 'city'], 'required', 'on' => Person::SCENARIO_INFLUENCER_UPDATE_PROFILE],
 			[['name'], 'required', 'on' => [Person::SCENARIO_CLIENT_CREATE, Person::SCENARIO_CLIENT_UPDATE]],
 		];
-	}
-
-	/**
-	 * Add additional error to make easy show labels in client side
-	 */
-	public function afterValidate()
-	{
-		parent::afterValidate();
-		foreach ($this->errors as $attribute => $error) {
-			switch ($attribute) {
-				case 'brand_name':
-				case 'name':
-				case 'country':
-				case 'city':
-					$this->getParentObject()->addError("required", $attribute);
-					break;
-			}
-		};
 	}
 }

@@ -286,10 +286,9 @@ class Order extends CActiveRecord {
         foreach ($this->errors as $attribute => $error) {
             switch ($attribute) {
                 default:
-                    //TODO: Fix this! Find other way to determine if was a "required" field
-                    if (strpos($error[0], 'cannot be blank') !== false || strpos($error[0], 'no puede estar vacío') !== false) {
-                        $this->addError("required", $attribute);
-                    }
+					if (Utils::isRequiredError($error)) {
+						$this->addError("required", $attribute);
+					}
 					$this->addError("fields", $attribute);
                     break;
             }

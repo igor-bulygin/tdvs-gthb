@@ -756,4 +756,26 @@ class Utils
 		return in_array($product_id, static::$loveds[$person_id]);
 	}
 
+	/**
+	 * Returns TRUE when the error represents a "required" error
+	 *
+	 * @param array|string $error
+	 *
+	 * @return bool
+	 */
+	public static function isRequiredError($error)
+	{
+		//TODO: Fix this! Find other way to determine if was a "required" field
+		if (is_array($error)) {
+			$error = $error[0];
+		}
+		if (strpos($error, 'cannot be blank') !== false ||
+			strpos($error, 'no puede estar vacío') !== false ||
+			strpos($error, 'can not be empty') !== false
+		) {
+			return true;
+		}
+
+		return false;
+	}
 }

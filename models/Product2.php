@@ -1031,8 +1031,7 @@ class Product2 extends Product {
 		foreach ($this->errors as $attribute => $error) {
 			switch ($attribute) {
 				default:
-					//TODO: Fix this! Find other way to determine if was a "required" field
-					if (strpos($error[0], 'cannot be blank') !== false || strpos($error[0], 'no puede estar vacío') !== false) {
+					if (Utils::isRequiredError($error)) {
 						$this->addError("required", $attribute);
 					}
 					$this->addError("fields", $attribute);
