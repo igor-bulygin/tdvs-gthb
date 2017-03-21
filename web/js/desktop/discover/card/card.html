@@ -1,0 +1,14 @@
+<div class="col-md-4 col-sm-4 col-xs-6 pad-showcase">
+	<a ng-href="{{discoverCardCtrl.person.store_link}}">
+	<figure class="showcase">
+	<button class="btn btn-default btn-follow"><i class="ion-star"></i><span>Follow</span>
+	</button>
+	<img ng-src="{{ discoverCardCtrl.person.url_images + discoverCardCtrl.person.media.header_cropped }}" class="showcase-image">
+	<figcaption>
+		<img class="showcase-image" ng-src="{{discoverCardCtrl.person.url_avatar}}">
+		<span class="name" ng-bind="discoverCardCtrl.person.name"></span>
+		<span class="location" ng-bind="discoverCardCtrl.person.personal_info.city"></span>
+	</figcaption>
+	</figure>
+	</a>
+</div>
