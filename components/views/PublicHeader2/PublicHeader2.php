@@ -21,10 +21,10 @@ app\components\assets\PublicHeader2Asset::register($this);
 			<div class="input-group searcher-header">
 				<input type="text" name="q" value="<?=$q?>" class="form-control" placeholder="Search">
 				<span class="input-group-btn">
-                    <button class="btn btn-default btn-send" type="submit">
-                        <span class="ion-search"></span>
-                    </button>
-                </span>
+					<button class="btn btn-default btn-send" type="submit">
+						<span class="ion-search"></span>
+					</button>
+				</span>
 			</div>
 		</form>
 
@@ -100,10 +100,10 @@ app\components\assets\PublicHeader2Asset::register($this);
 				<div class="input-group searcher-header">
 					<input type="text" class="form-control" name="q" value="<?=$q?>"placeholder="Search">
 					<span class="input-group-btn">
-                            <button class="btn btn-default btn-send" type="submit">
-                                <span class="ion-search"></span>
-                            </button>
-                        </span>
+							<button class="btn btn-default btn-send" type="submit">
+								<span class="ion-search"></span>
+							</button>
+						</span>
 				</div>
 			</form>
 			<ul class="nav navbar-nav navbar-right cart-login-wrapper">
@@ -145,6 +145,10 @@ app\components\assets\PublicHeader2Asset::register($this);
 										<li><a href="<?=Url::to('/admin')?>">Administration</a></li>
 										<li><a href="<?=Url::to('/admin/invitations')?>">Invitations</a></li>
 
+										<li class="separation-line"></li>
+										<li><a href="#">Settings</a></li>
+										<li><a href="#" ng-click="publicHeaderCtrl.logout()">Logout</a></li>
+
 									<?php } elseif ($person->isDeviser()) { ?>
 
 										<li class="header-item">
@@ -153,26 +157,34 @@ app\components\assets\PublicHeader2Asset::register($this);
 										</li>
 										<li><a href="#">Sales</a></li>
 
+										<li class="separation-line"></li>
+										<li><a href="<?= Url::to(["settings/index", "slug" => $person->slug, 'person_id' => $person->short_id])?>">Settings</a></li>
+										<li><a href="#" ng-click="publicHeaderCtrl.logout()">Logout</a></li>
+
 									<?php } elseif ($person->isClient()) { ?>
 
 										<li class="header-item">
-                                            <a href="<?= $person->getAboutLink()?>"> <span><?=$person->personalInfoMapping->getBrandName()?></span></a>
+											<a href="<?= $person->getAboutLink()?>"> <span><?=$person->personalInfoMapping->getBrandName()?></span></a>
 											<img class="avatar-logued-user" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getAvatarImage())->resize(25, 25) ?>">
 										</li>
 										<li><a href="#">My orders</a></li>
 
+										<li class="separation-line"></li>
+										<li><a href="#">Settings</a></li>
+										<li><a href="#" ng-click="publicHeaderCtrl.logout()">Logout</a></li>
+
 									<?php } elseif ($person->isInfluencer()) { ?>
 
-                                        <li class="header-item">
-                                            <a href="<?= $person->getAboutLink()?>"> <span><?=$person->personalInfoMapping->getBrandName()?></span></a>
-                                            <img class="avatar-logued-user" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getAvatarImage())->resize(25, 25) ?>">
-                                        </li>
+										<li class="header-item">
+											<a href="<?= $person->getAboutLink()?>"> <span><?=$person->personalInfoMapping->getBrandName()?></span></a>
+											<img class="avatar-logued-user" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getAvatarImage())->resize(25, 25) ?>">
+										</li>
 
-									<?php }?>
+										<li class="separation-line"></li>
+										<li><a href="#">Settings</a></li>
+										<li><a href="#" ng-click="publicHeaderCtrl.logout()">Logout</a></li>
 
-									<li class="separation-line"></li>
-									<li><a href="<?= Url::to(["settings/index", "slug" => $person->slug, 'person_id' => $person->short_id])?>">Settings</a></li>
-									<li><a href="#" ng-click="publicHeaderCtrl.logout()">Logout</a></li>
+									<?php } ?>
 								</ul>
 							</div>
 						</li>

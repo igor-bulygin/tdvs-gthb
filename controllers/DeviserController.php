@@ -688,7 +688,7 @@ class DeviserController extends CController
 		/* @var Person[] $persons */
 		$persons = Person::find()->where(
 			[
-				'type' => [Person::DEVISER],
+				'type' => [Person::CLIENT],
 			]
 		)->all();
 		foreach ($persons as $person) {
