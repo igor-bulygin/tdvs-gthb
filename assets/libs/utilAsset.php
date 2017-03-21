@@ -23,6 +23,7 @@ class utilAsset extends AssetBundle {
 		'js/util/dragndropService.js',
 		'js/util/image-hover-buttons/image-hover-buttons.js',
 		'js/util/modal-signup-loved/modal-signup-loved.js',
+		'js/util/onPressEnter.js',
 	];
 	
 	public $depends = [
