@@ -18,7 +18,7 @@
 		init();
 
 		function init() {
-			vm.editingHeader = person.account_state === 'draft' ? true : false;
+			vm.editingHeader = false;
 			getPerson();
 			getLanguages();
 		}
@@ -78,13 +78,22 @@
 				}
 			}
 
-			locationDataService.getLocation({q: place}, onGetLocationSuccess, UtilService.onError);
+			if(place)
+				locationDataService.getLocation({q: place}, onGetLocationSuccess, UtilService.onError);
+			else {
+				selectCity({
+					city: null,
+					country_code: null
+				})
+			}
+
 		}
 
 		function selectCity(city) {
 			vm.person.personal_info.city = city.city;
 			vm.person.personal_info.country = city.country_code;
-			vm.city = vm.person.personal_info.city + ', ' + vm.person.personal_info.country;
+			if(city.city && city.country_code)
+				vm.city = vm.person.personal_info.city + ', ' + vm.person.personal_info.country;
 			vm.showCities = false;
 		}
 
