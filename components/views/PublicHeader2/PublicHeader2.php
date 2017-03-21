@@ -138,7 +138,7 @@ app\components\assets\PublicHeader2Asset::register($this);
 
 										<li class="header-item">
 											<span><?=$person->personalInfoMapping->getBrandName()?></span>
-											<img class="avatar-logued-user" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getAvatarImage())->resize(25, 25) ?>">
+											<img class="avatar-logued-user" src="<?= $person->getAvatarImage() ?>">
 										</li>
 										<li><a href="<?=Url::to('/admin')?>">Administration</a></li>
 										<li><a href="<?=Url::to('/admin/invitations')?>">Invitations</a></li>
@@ -151,7 +151,7 @@ app\components\assets\PublicHeader2Asset::register($this);
 
 										<li class="header-item">
 											<a href="<?= $person->getAboutLink()?>"> <span><?=$person->personalInfoMapping->getBrandName()?></span></a>
-											<img class="avatar-logued-user" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getAvatarImage())->resize(25, 25) ?>">
+											<img class="avatar-logued-user" src="<?= $person->getAvatarImage() ?>">
 										</li>
 										<li><a href="#">Sales</a></li>
 
@@ -163,7 +163,7 @@ app\components\assets\PublicHeader2Asset::register($this);
 
 										<li class="header-item">
 											<a href="<?= $person->getAboutLink()?>"> <span><?=$person->personalInfoMapping->getBrandName()?></span></a>
-											<img class="avatar-logued-user" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getAvatarImage())->resize(25, 25) ?>">
+											<img class="avatar-logued-user" src="<?= $person->getAvatarImage() ?>">
 										</li>
 										<li><a href="#">My orders</a></li>
 
@@ -175,10 +175,9 @@ app\components\assets\PublicHeader2Asset::register($this);
 
 										<li class="header-item">
 											<a href="<?= $person->getAboutLink()?>"> <span><?=$person->personalInfoMapping->getBrandName()?></span></a>
-											<img class="avatar-logued-user" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getAvatarImage())->resize(25, 25) ?>">
+											<img class="avatar-logued-user" src="<?= $person->getAvatarImage() ?>">
 										</li>
 
-										<li class="separation-line"></li>
 										<li><a href="#">Settings</a></li>
 										<li><a href="#" ng-click="publicHeaderCtrl.logout()">Logout</a></li>
 
