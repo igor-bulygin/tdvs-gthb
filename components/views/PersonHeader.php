@@ -25,7 +25,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 				<div class="deviser-profile">
 					<div class="avatar-btn-profile">
 						<div class="avatar">
-							<img class="cover" ng-src="{{personHeaderCtrl.profile}}">
+							<img class="cover" ng-src="{{personHeaderCtrl.profile || '/imgs/default-avatar.png'}}">
 						</div>
 						<?php if ($person->isPersonEditable()) {?>
 							<div class="edit-profile-btn">
