@@ -9,7 +9,7 @@
 			function onCreateBoxSuccess(data){
 				//go to the box
 				vm.close();
-				$window.location.href = currentHost() + '/deviser/' + data.person.slug + '/' + data.person.id + '/box/' + data.id;
+				$window.location.href = data.link;
 			}
 
 			form.$setSubmitted();

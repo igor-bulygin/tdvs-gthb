@@ -1141,10 +1141,14 @@ class Person extends CActiveRecord implements IdentityInterface
 	public function getStoreLink($categoryId = null)
 	{
 		if ($this->isDeviser()) {
-			return Url::to(["/deviser/store", "slug" => $this->getSlug(), 'person_id' => $this->short_id, 'category' => $categoryId], true);
-		} else {
-			return null;
+			return Url::to([
+				"/deviser/store",
+				"slug" => $this->getSlug(),
+				'person_id' => $this->short_id,
+				'category' => $categoryId
+			], true);
 		}
+		return null;
 	}
 
 	public function getStoreEditLink($params = [])
@@ -1160,6 +1164,7 @@ class Person extends CActiveRecord implements IdentityInterface
 			);
 			return Url::to($params, true);
 		}
+		return null;
 	}
 
 	public function getLovedLink()

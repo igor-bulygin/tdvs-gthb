@@ -8,7 +8,7 @@
 		function deleteBox(id) {
 			function onDeleteBoxSuccess(data) {
 				vm.close();
-				$window.location.href= currentHost() + "/deviser/" + vm.resolve.deviser.slug + "/" + vm.resolve.deviser.id + '/boxes';
+				$window.location.href= vm.resolve.deviser.boxes_link;
 			}
 
 			boxDataService.deleteBox({

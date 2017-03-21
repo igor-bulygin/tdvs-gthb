@@ -7,7 +7,11 @@
 
 		function active() {
 			function onUpdateProfileSuccess(data) {
-				$window.location.href = '/deviser/' + data.slug + '/' + data.id + '/store/edit';
+				if (data.store_edit_link) {
+					$window.location.href = data.store_edit_link;
+				} else {
+					$window.location.href = data.about_link;
+				}
 			}
 
 			function onUpdateProfileError(err) {
