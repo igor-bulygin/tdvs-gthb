@@ -202,6 +202,94 @@ class Person extends CActiveRecord implements IdentityInterface
 		return Person::findOne(['credentials.email' => $username]);
 	}
 
+	/**
+	 * Get a collection of entities serialized, according to serialization configuration
+	 *
+	 * @param array $criteria
+	 * @return array
+	 * @throws Exception
+	 */
+	public static function findSerialized($criteria = [])
+	{
+
+		// Products query
+		$query = new ActiveQuery(static::className());
+
+		// Retrieve only fields that gonna be used
+		$query->select(self::getSelectFields());
+
+		// if person id is specified
+		if ((array_key_exists("id", $criteria)) && (!empty($criteria["id"]))) {
+			$query->andWhere(["short_id" => $criteria["id"]]);
+		}
+
+		// if categories are specified
+//		if ((array_key_exists("categories", $criteria)) && (!empty($criteria["categories"]))) {
+//			if (is_array($criteria["categories"])) {
+//				$ids = [];
+//				foreach ($criteria["categories"] as $categoryId) {
+//					$category = Category::findOne(["short_id" => $categoryId]);
+//					if ($category) {
+//						$ids = array_merge($ids, $category->getShortIds());
+//					}
+//				}
+//			} else {
+//				$ids = [];
+//				$category = Category::findOne(["short_id" => $criteria["categories"]]);
+//				if ($category) {
+//					$ids = array_merge($ids, $category->getShortIds());
+//				}
+//			}
+//			$query->andWhere(["categories" => $ids]);
+//		}
+
+		// if account_state is specified
+		if ((array_key_exists("account_state", $criteria)) && (!empty($criteria["account_state"]))) {
+			$query->andWhere(["account_state" => $criteria["account_state"]]);
+		}
+
+		// if name is specified
+//		if ((array_key_exists("name", $criteria)) && (!empty($criteria["name"]))) {
+////			// search the word in all available languages
+//			$query->andFilterWhere(Utils::getFilterForTranslatableField("name", $criteria["name"]));
+//		}
+
+		// if text is specified
+		if ((array_key_exists("text", $criteria)) && (!empty($criteria["text"]))) {
+//			// search the word in all available languages
+			$query->andFilterWhere(static::getFilterForText(static::$textFilterAttributes, $criteria["text"]));
+		}
+
+		// Count how many items are with those conditions, before limit them for pagination
+		static::$countItemsFound = $query->count();
+
+		// limit
+		if ((array_key_exists("limit", $criteria)) && (!empty($criteria["limit"]))) {
+			$query->limit($criteria["limit"]);
+		}
+
+		// offset for pagination
+		if ((array_key_exists("offset", $criteria)) && (!empty($criteria["offset"]))) {
+			$query->offset($criteria["offset"]);
+		}
+
+		if ((array_key_exists("order_by", $criteria)) && (!empty($criteria["order_by"]))) {
+			$query->orderBy($criteria["order_by"]);
+		} else {
+			$query->orderBy([
+				"created_at" => SORT_DESC,
+			]);
+		}
+
+		$products = $query->all();
+
+		// if automatic translation is enabled
+		if (static::$translateFields) {
+			Utils::translate($products);
+		}
+		return $products;
+	}
+
 	public function getUploadedFilesPath()
 	{
 		return Utils::join_paths(Yii::getAlias("@deviser"), $this->short_id);
