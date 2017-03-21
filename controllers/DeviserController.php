@@ -184,12 +184,8 @@ class DeviserController extends CController
 			throw new NotFoundHttpException();
 		}
 
-		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE) {
-			if ($person->isPersonEditable()) {
-				$this->redirect($person->getAboutEditLink());
-			} else {
-				throw new NotFoundHttpException();
-			}
+		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE && !$person->isPersonEditable()) {
+			throw new UnauthorizedHttpException();
 		}
 
 		$this->layout = '/desktop/public-2.php';
@@ -226,12 +222,8 @@ class DeviserController extends CController
 			throw new NotFoundHttpException();
 		}
 
-		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE) {
-			if ($person->isPersonEditable()) {
-				$this->redirect($person->getAboutEditLink());
-			} else {
-				throw new NotFoundHttpException();
-			}
+		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE && !$person->isPersonEditable()) {
+			throw new UnauthorizedHttpException();
 		}
 
 		$this->layout = '/desktop/public-2.php';
@@ -268,12 +260,8 @@ class DeviserController extends CController
 			throw new NotFoundHttpException();
 		}
 
-		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE) {
-			if ($person->isPersonEditable()) {
-				$this->redirect($person->getAboutEditLink());
-			} else {
-				throw new NotFoundHttpException();
-			}
+		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE && !$person->isPersonEditable()) {
+			throw new UnauthorizedHttpException();
 		}
 
 		$this->layout = '/desktop/public-2.php';
@@ -310,12 +298,8 @@ class DeviserController extends CController
 			throw new NotFoundHttpException();
 		}
 
-		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE) {
-			if ($person->isPersonEditable()) {
-				$this->redirect($person->getAboutEditLink());
-			} else {
-				throw new NotFoundHttpException();
-			}
+		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE && !$person->isPersonEditable()) {
+			throw new UnauthorizedHttpException();
 		}
 
 		$loveds = Loved::findSerialized(['person_id' => $person_id]);
@@ -334,12 +318,8 @@ class DeviserController extends CController
 			throw new NotFoundHttpException();
 		}
 
-		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE) {
-			if ($person->isPersonEditable()) {
-				$this->redirect($person->getAboutEditLink());
-			} else {
-				throw new NotFoundHttpException();
-			}
+		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE && !$person->isPersonEditable()) {
+			throw new UnauthorizedHttpException();
 		}
 
 		$boxes = Box::findSerialized(['person_id' => $person_id]);
@@ -358,12 +338,8 @@ class DeviserController extends CController
 			throw new NotFoundHttpException();
 		}
 
-		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE) {
-			if ($person->isPersonEditable()) {
-				$this->redirect($person->getAboutEditLink());
-			} else {
-				throw new NotFoundHttpException();
-			}
+		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE && !$person->isPersonEditable()) {
+			throw new UnauthorizedHttpException();
 		}
 
 		Box::setSerializeScenario(Box::SERIALIZE_SCENARIO_PUBLIC);
