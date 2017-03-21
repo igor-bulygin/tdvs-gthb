@@ -45,7 +45,7 @@
 			apiMethods.create(BoxProduct, data, params, onSuccess, onError);
 		}
 
-		function deleteProduct(params, onSuccess, onerror) {
+		function deleteProduct(params, onSuccess, onError) {
 			apiMethods.deleteItem(BoxProduct, params, onSuccess, onError);
 		}
 
