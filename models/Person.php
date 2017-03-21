@@ -243,6 +243,11 @@ class Person extends CActiveRecord implements IdentityInterface
 //			$query->andWhere(["categories" => $ids]);
 //		}
 
+		// if type is specified
+		if ((array_key_exists("type", $criteria)) && (!empty($criteria["type"]))) {
+			$query->andWhere(["type" => (int)$criteria["type"]]);
+		}
+
 		// if account_state is specified
 		if ((array_key_exists("account_state", $criteria)) && (!empty($criteria["account_state"]))) {
 			$query->andWhere(["account_state" => $criteria["account_state"]]);
@@ -281,13 +286,13 @@ class Person extends CActiveRecord implements IdentityInterface
 			]);
 		}
 
-		$products = $query->all();
+		$persons = $query->all();
 
 		// if automatic translation is enabled
 		if (static::$translateFields) {
-			Utils::translate($products);
+			Utils::translate($persons);
 		}
-		return $products;
+		return $persons;
 	}
 
 	public function getUploadedFilesPath()
@@ -622,6 +627,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'name' => "brandName",
 					'url_images' => 'urlImagesLocation',
 					'url_avatar' => "avatarImage128",
+					'main_link' => 'mainLink',
 					'store_link' => 'storeLink',
 					'loved_link' => 'lovedLink',
 					'boxes_link' => 'boxesLink',
@@ -657,6 +663,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'preferences',
 					'url_images' => 'urlImagesLocation',
 					'type',
+					'main_link' => 'mainLink',
 					'store_link' => 'storeLink',
 					'store_edit_link' => 'storeEditLink',
 					'loved_link' => 'lovedLink',
@@ -1249,6 +1256,15 @@ class Person extends CActiveRecord implements IdentityInterface
 			!Yii::$app->user->isGuest &&            // has to be a connected user
 			Yii::$app->user->id === $this->id        // the person must be the connected user
 			;
+	}
+
+	public function getMainLink() {
+		if ($this->isDeviser()) {
+			return $this->getStoreLink();
+		} elseif ($this->isInfluencer()) {
+			return $this->getAboutLink();
+		}
+		return $this->getLovedLink();
 	}
 
 	public function getStoreLink($categoryId = null)
