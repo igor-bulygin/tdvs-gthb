@@ -116,6 +116,13 @@ class Person extends CActiveRecord implements IdentityInterface
 	public static $translatedAttributes = ['text_short_description', 'text_biography', 'faq.question', 'faq.answer'];
 
 	/**
+	 * The attributes that should be used when a keyword search is done
+	 *
+	 * @var array
+	 */
+	public static $textFilterAttributes = ['personal_info.name', 'personal_info.brand_name', 'text_short_description'];
+
+	/**
 	 * Initialize model attributes
 	 */
 	public function init()
@@ -224,24 +231,24 @@ class Person extends CActiveRecord implements IdentityInterface
 		}
 
 		// if categories are specified
-//		if ((array_key_exists("categories", $criteria)) && (!empty($criteria["categories"]))) {
-//			if (is_array($criteria["categories"])) {
-//				$ids = [];
-//				foreach ($criteria["categories"] as $categoryId) {
-//					$category = Category::findOne(["short_id" => $categoryId]);
-//					if ($category) {
-//						$ids = array_merge($ids, $category->getShortIds());
-//					}
-//				}
-//			} else {
-//				$ids = [];
-//				$category = Category::findOne(["short_id" => $criteria["categories"]]);
-//				if ($category) {
-//					$ids = array_merge($ids, $category->getShortIds());
-//				}
-//			}
-//			$query->andWhere(["categories" => $ids]);
-//		}
+		if ((array_key_exists("categories", $criteria)) && (!empty($criteria["categories"]))) {
+			if (is_array($criteria["categories"])) {
+				$ids = [];
+				foreach ($criteria["categories"] as $categoryId) {
+					$category = Category::findOne(["short_id" => $categoryId]);
+					if ($category) {
+						$ids = array_merge($ids, $category->getShortIds());
+					}
+				}
+			} else {
+				$ids = [];
+				$category = Category::findOne(["short_id" => $criteria["categories"]]);
+				if ($category) {
+					$ids = array_merge($ids, $category->getShortIds());
+				}
+			}
+			$query->andWhere(["categories" => $ids]);
+		}
 
 		// if type is specified
 		if ((array_key_exists("type", $criteria)) && (!empty($criteria["type"]))) {
@@ -254,10 +261,10 @@ class Person extends CActiveRecord implements IdentityInterface
 		}
 
 		// if name is specified
-//		if ((array_key_exists("name", $criteria)) && (!empty($criteria["name"]))) {
-////			// search the word in all available languages
-//			$query->andFilterWhere(Utils::getFilterForTranslatableField("name", $criteria["name"]));
-//		}
+		if ((array_key_exists("name", $criteria)) && (!empty($criteria["name"]))) {
+//			// search the word in all available languages
+			$query->andFilterWhere(static::getFilterForText(['personal_info.name', 'personal_info.brand_name'], $criteria["name"]));
+		}
 
 		// if text is specified
 		if ((array_key_exists("text", $criteria)) && (!empty($criteria["text"]))) {
