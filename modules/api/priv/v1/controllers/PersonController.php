@@ -41,12 +41,10 @@ class PersonController extends AppPrivateController
 			return $person;
 		} else {
 			$required_sections = [];
-			if ($person->errors->required) {
-				if ($person->isDeviser()) {
-					$required_sections = ["header", "about", "store"];
-				} elseif ($person->isInfluencer()) {
-					$required_sections = ["header", "about"];
-				}
+			if ($person->isDeviser()) {
+				$required_sections = ["header", "about", "store"];
+			} elseif ($person->isInfluencer()) {
+				$required_sections = ["header", "about"];
 			}
 			Yii::$app->response->setStatusCode(400); // Bad Request
 			return [
