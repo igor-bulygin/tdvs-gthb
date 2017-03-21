@@ -40,8 +40,19 @@ class PersonController extends AppPrivateController
 			Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
 			return $person;
 		} else {
+			$required_sections = [];
+			if ($person->errors->required) {
+				if ($person->isDeviser()) {
+					$required_sections = ["header", "about", "store"];
+				} elseif ($person->isInfluencer()) {
+					$required_sections = ["header", "about"];
+				}
+			}
 			Yii::$app->response->setStatusCode(400); // Bad Request
-			return ["errors" => $person->errors];
+			return [
+				"errors" => $person->errors,
+				"required_sections" => $required_sections,
+			];
 		}
 
 	}
