@@ -387,10 +387,13 @@ class Product2 extends Product {
 			case self::SERIALIZE_SCENARIO_PREVIEW:
 				static::$serializeFields = [
 					'id' => 'short_id',
-					'name',
 					'slug',
+					'name',
+					'media',
 					'deviser' => "deviserPreview",
 					'url_image_preview' => "imagePreview128",
+					'main_photo' => 'mainImage',
+					'url_images' => 'urlImagesLocation',
 					'link' => 'viewLink',
 					'edit_link' => 'editLink',
 					'isLoved' => 'isLoved',
@@ -1009,6 +1012,7 @@ class Product2 extends Product {
 			'media' => $this->media,
 			'deviser' => $this->getDeviserPreview(),
 			'url_image_preview' => $this->getImagePreview128(),
+			'main_photo' => $this->getMainImage(),
 			'url_images' => $this->getUrlImagesLocation(),
 			'link' => $this->getViewLink(),
 			'edit_link' => $this->getEditLink(),
