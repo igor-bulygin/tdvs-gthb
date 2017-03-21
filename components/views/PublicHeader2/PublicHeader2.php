@@ -128,8 +128,8 @@ app\components\assets\PublicHeader2Asset::register($this);
 					$person = Yii::$app->user->identity; /* @var \app\models\Person $person */?>
 						<li class="dropdown log">
 
-							<img class="avatar-logued-user" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getAvatarImage())->resize(25, 25) ?>">
-
+							<i class="ion-android-person"></i>
+							
 							<a class="logued-text" href="#" class="dropdown-toggle log" data-toggle="dropdown" role="button" aria-haspopup="true"
 							   aria-expanded="false">My todevise</a>
 
