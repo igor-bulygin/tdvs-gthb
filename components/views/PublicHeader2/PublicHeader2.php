@@ -128,10 +128,8 @@ app\components\assets\PublicHeader2Asset::register($this);
 					$person = Yii::$app->user->identity; /* @var \app\models\Person $person */?>
 						<li class="dropdown log">
 
-							<i class="ion-android-person"></i>
-							
 							<a class="logued-text" href="#" class="dropdown-toggle log" data-toggle="dropdown" role="button" aria-haspopup="true"
-							   aria-expanded="false">My todevise</a>
+							   aria-expanded="false"><i class="ion-android-person"></i> My todevise</a>
 
 							<div class="dropdown-menu admin-wrapper black-form">
 
