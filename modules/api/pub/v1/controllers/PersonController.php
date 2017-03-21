@@ -19,10 +19,8 @@ class PersonController extends AppPublicController
 		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_PUBLIC);
 
 		// set pagination values
-		$limit = Yii::$app->request->get('limit', 20);
+		$limit = Yii::$app->request->get('limit', 99999);
 		$limit = ($limit < 1) ? 1 : $limit;
-		// not allow more than 100 products for request
-//	    $limit = ($limit > 100) ? 100 : $limit;
 		$page = Yii::$app->request->get('page', 1);
 		$page = ($page < 1) ? 1 : $page;
 		$offset = ($limit * ($page - 1));
@@ -32,6 +30,7 @@ class PersonController extends AppPublicController
 			"name" => Yii::$app->request->get("name"), // search only in name attribute
 			"text" => Yii::$app->request->get("q"), // search in name, description, and more
 			"type" => Yii::$app->request->get("type"),
+			"categories" => Yii::$app->request->get("categories"),
 			"account_state" => Person::ACCOUNT_STATE_ACTIVE,
 			"limit" => $limit,
 			"offset" => $offset,

@@ -15,7 +15,7 @@ class SizechartController extends AppPublicController {
         SizeChart::setSerializeScenario(SizeChart::SERIALIZE_SCENARIO_PUBLIC);
 
 	    // set pagination values
-	    $limit = Yii::$app->request->get('limit', 100);
+	    $limit = Yii::$app->request->get('limit', 99999);
 	    $limit = ($limit < 1) ? 1 : $limit;
 	    $page = Yii::$app->request->get('page', 1);
 	    $page = ($page < 1) ? 1 : $page;
