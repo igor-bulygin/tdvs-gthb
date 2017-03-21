@@ -55,7 +55,7 @@ Example about how to call to Web Service to get tthe cart
       "product_name": "DOUBLE MONK STAP SHOES",
       "product_photo": "/uploads/product/d8823222/2016-05-17-05-55-35-2caf7.jpg",
       "deviser_name": "Inch2",
-      "deviser_photo": "/imgs/default-avatar.jpg"
+      "deviser_photo": "/imgs/default-avatar.png"
     }
   ],
   "subtotal": 1550
