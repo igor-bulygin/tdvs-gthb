@@ -20,7 +20,7 @@
 			}
 
 			function onCreateInfluencerSuccess(data) {
-				url = data.about_link;
+				url = data.main_link;
 				personDataService.login(vm.influencer, null, onLoginSuccess, UtilService.onError);
 			}
 			if (form.password_confirm.$error.same)

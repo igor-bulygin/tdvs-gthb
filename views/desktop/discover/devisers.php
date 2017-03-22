@@ -16,6 +16,6 @@ $this->registerJs("var type = 2", yii\web\View::POS_HEAD, 'person-type-script');
 		</div>
 	</form>
 	<div class="col-md-10 col-md-offset-2">
-		<discover-results key="{{discoverCtrl.key_search}}" results="discoverCtrl.results" ng-cloak ng-if="discoverCtrl.results"></discover-results>
+		<discover-results key="{{discoverCtrl.key_search}}" results="discoverCtrl.results" ng-if="discoverCtrl.results" ng-cloak></discover-results>
 	</div>
 </div>

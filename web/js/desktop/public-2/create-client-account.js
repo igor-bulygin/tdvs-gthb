@@ -20,7 +20,7 @@
 			}
 
 			function onCreateClientSuccess(data) {
-				url = data.about_link;
+				url = data.main_link;
 				personDataService.login(vm.user, null, onLoginSuccess, UtilService.onError);
 			}
 
