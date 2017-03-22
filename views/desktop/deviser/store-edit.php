@@ -8,6 +8,7 @@ use app\models\Category;
 use app\models\Person;
 use app\models\Product;
 use yii\helpers\Json;
+use yii\helpers\Url;
 
 EditStoreAsset::register($this);
 
@@ -77,7 +78,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 							<?php } ?>
 							<div class="store-grid">
 								<div class="title-wrapper">
-									<div ng-if="editStoreCtrl.view_unpublished_works">
+									<div ng-if="editStoreCtrl.view_unpublished_works" ng-cloak>
 										<div class="title-wrapper">
 											<span class="title">Unpublished works</span>
 										</div>
@@ -117,7 +118,13 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 												<?php } ?>
 											</ul>
 										</nav>
-										<div class="mesonry-row" dnd-list="editStoreCtrl.products">
+										<div ng-if="editStoreCtrl.products.length === 0" ng-cloak>
+											<div class="text-center">
+											<p>...your profile is starting to look great, but you can make it even greater by adding your first work</p>
+											<a class="btn btn-default btn-green btn-add-work" href="<?= Url::to(["product/create", "slug" => $person->slug, 'deviser_id' => $person->short_id])?>">Add Work</a>
+											</div>
+										</div>
+										<div class="mesonry-row" dnd-list="editStoreCtrl.products" ng-if="editStoreCtrl.products.length > 0" ng-cloak>
 											<div class="menu-category list-group" ng-repeat="product in editStoreCtrl.products | publishedProduct" ng-if="product.main_photo" dnd-draggable="product" dnd-effect-allowed="move" dnd-moved="editStoreCtrl.update($index, product)">
 												<div class="grid">
 													<figure class="effect-zoe">

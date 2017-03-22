@@ -34,7 +34,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 				<a class="back-link" ng-href="{{createProductCtrl.link_profile}}"> &lt go back to your profile</a>
 			</div>
 			<div class="avatar">
-				<img ng-src="{{createProductCtrl.profile}}">
+				<img ng-src="{{createProductCtrl.profile || '/imgs/default-avatar.png'}}">
 			</div>
 			<div class="text-center" ng-if="!createProductCtrl.errors"><h4 class="title">New work</h4></div>
 			<div class="text-center" ng-if="createProductCtrl.errors" ng-cloak><p>Please complete all the required fields before publishing your work.</p></div>

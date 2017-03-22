@@ -92,7 +92,8 @@
 			function onGetProfileSuccess(data) {
 				vm.deviser = angular.copy(data);
 				vm.link_profile = '/deviser/' + data.slug + '/' + data.id + '/store/edit';
-				vm.profile = currentHost()+vm.deviser.url_images+vm.deviser.media.profile_cropped;
+				if(vm.deviser.media.profile_cropped)
+					vm.profile = currentHost()+vm.deviser.url_images+vm.deviser.media.profile_cropped;
 				vm.product.deviser_id = data.id;
 			}
 
