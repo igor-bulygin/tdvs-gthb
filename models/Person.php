@@ -474,11 +474,8 @@ class Person extends CActiveRecord implements IdentityInterface
 			[
 				[
 					'account_state',
-					'personal_info',
-					'categories',
-					'text_biography',
 				],
-				'required',
+				'validateAmountProducts',
 				'on' => [self::SCENARIO_DEVISER_UPDATE_PROFILE],
 			],
 			[
@@ -556,6 +553,23 @@ class Person extends CActiveRecord implements IdentityInterface
 	}
 
 	/**
+	 * Custom validator for amount of products published
+	 *
+	 * @param $attribute
+	 * @param $params
+	 */
+	public function validateAmountProducts($attribute, $params)
+	{
+		$products = Product2::findSerialized([
+			'deviser_id' => $this->id,
+			'product_state' => Product2::PRODUCT_STATE_ACTIVE,
+		]);
+		if (empty($products)) {
+			$this->addError('products', 'Must have at least one work published.');
+		}
+	}
+
+	/**
 	 * Add additional error to make easy show labels in client side
 	 */
 	public function afterValidate()
@@ -579,7 +593,7 @@ class Person extends CActiveRecord implements IdentityInterface
 				'categories',
 			],
 			'store' => [
-				'works',
+				'products',
 			],
 		];
 		foreach ($this->errors as $attribute => $error) {
