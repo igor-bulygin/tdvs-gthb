@@ -223,6 +223,10 @@ $config = [
 				//Links for contact
 				'login' => 'site/login',
 
+				//Discover
+				'discover-devisers' => 'discover/devisers',
+				'discover-influencers' => 'discover/influencers',
+
 				// Request become a Deviser
 				'/become-a-deviser' => 'public/become-deviser',
 				'/create-deviser-account' => 'public/create-deviser-account',

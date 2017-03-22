@@ -29,7 +29,7 @@ class LovedController extends AppPrivateController
 		Loved::setSerializeScenario(Loved::SERIALIZE_SCENARIO_PUBLIC);
 
 		// set pagination values
-		$limit = Yii::$app->request->get('limit', 9999);
+		$limit = Yii::$app->request->get('limit', 99999);
 		$limit = ($limit < 1) ? 1 : $limit;
 		$page = Yii::$app->request->get('page', 1);
 		$page = ($page < 1) ? 1 : $page;

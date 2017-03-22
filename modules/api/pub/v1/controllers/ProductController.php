@@ -29,10 +29,8 @@ class ProductController extends AppPublicController {
 		Product2::setSerializeScenario(Product2::SERIALIZE_SCENARIO_PUBLIC);
 
 		// set pagination values
-		$limit = Yii::$app->request->get('limit', 20);
+		$limit = Yii::$app->request->get('limit', 99999);
 		$limit = ($limit < 1) ? 1 : $limit;
-		// not allow more than 100 products for request
-//	    $limit = ($limit > 100) ? 100 : $limit;
 		$page = Yii::$app->request->get('page', 1);
 		$page = ($page < 1) ? 1 : $page;
 		$offset = ($limit * ($page - 1));
