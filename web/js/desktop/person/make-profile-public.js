@@ -4,6 +4,7 @@
 	function controller(personDataService, UtilService, toastr, $window, $rootScope, deviserEvents) {
 		var vm = this;
 		vm.active = active;
+		vm.type = person.type[0];
 
 		function active() {
 			function onUpdateProfileSuccess(data) {
