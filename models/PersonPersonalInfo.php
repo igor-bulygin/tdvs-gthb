@@ -61,7 +61,7 @@ class PersonPersonalInfo extends EmbedModel
 	 */
 	public function getBrandName()
 	{
-		return (isset($this->brand_name)) ? $this->brand_name : $this->name . (!empty($this->last_name) ? $this->last_name : '');
+		return $this->brand_name ?: trim($this->name . ' '.$this->last_name);
 	}
 
 	/**
