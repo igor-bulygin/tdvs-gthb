@@ -7,6 +7,7 @@
 		vm.showCities = false;
 		vm.limit_text_biography = 140;
 		vm.description_language = 'en-US';
+		vm.required = {};
 		vm.openCropModal = openCropModal;
 		vm.selectCity = selectCity;
 		vm.searchPlace = searchPlace;
@@ -212,6 +213,12 @@
 			});
 		}
 
+		function setErrors(error_array) {
+			error_array.forEach(function (element) {
+				vm.required[element] = true;
+			})
+		}
+
 		//watches
 		$scope.$watch('personHeaderCtrl.new_header', function (newValue, oldValue) {
 			if (newValue) {
@@ -238,15 +245,14 @@
 
 		$scope.$on(deviserEvents.make_profile_public_errors, function(event, args) {
 			//set form as submitted
-			vm.form.$setSubmitted();
-			//check for both header and profile requireds
+			if(vm.form)
+				vm.form.$setSubmitted();
+			//check for required fields and sections
 			if(args.required_fields && args.required_fields.length > 0) {
-				args.required_fields.forEach(function(element){
-					if(element === 'profile')
-						vm.profileRequired = true;
-					if(element === 'header')
-						vm.headerRequired = true;
-				})
+				setErrors(args.required_fields);
+			}
+			if(args.required_sections && args.required_sections.length > 0) {
+				setErrors(args.required_sections);
 			}
 		})
 

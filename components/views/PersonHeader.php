@@ -29,7 +29,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 						</div>
 						<?php if ($person->isPersonEditable()) {?>
 							<div class="edit-profile-btn">
-								<button class="btn btn-default btn-transparent btn-header" ng-click="personHeaderCtrl.editHeader()">Edit header</button>
+								<button class="btn btn-default btn-transparent btn-header ng-class:{'button-error': personHeaderCtrl.required['header']}" ng-click="personHeaderCtrl.editHeader()">Edit header</button>
 							</div>
 						<?php } ?>
 						<div class="deviser-data">
@@ -46,7 +46,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 					</div>
 				</div>
 				<?php if ($person->isDeviserEditable()) {?>
-					<a class="btn btn-default btn-green btn-add-work" href="<?= Url::to(["product/create", "slug" => $person->slug, 'deviser_id' => $person->short_id])?>">Add Work</a>
+					<a class="btn btn-default btn-add-work" ng-class="personHeaderCtrl.required['store'] ? 'button-error' : 'btn-green'" href="<?= Url::to(["product/create", "slug" => $person->slug, 'deviser_id' => $person->short_id])?>">Add Work</a>
 				<?php } ?>
 			</div>
 		</div>
@@ -54,7 +54,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 	<div class="container pad-about edit-header-container" ng-if="personHeaderCtrl.editingHeader" ng-cloak>
 		<span tooltip-placement="top" uib-tooltip="ADD COVER PHOTO" class="button ion-camera edit-cover-icon photo" ngf-select ng-model="personHeaderCtrl.new_header" name="header" ngf-pattern="'image/*'" ngf-accept="'image/*'"></span>
 		<span tooltip-placement="top" uib-tooltip="CROP PHOTO" class="button ion-crop edit-cover-icon crop" ng-click="personHeaderCtrl.openCropModal(personHeaderCtrl.header_original, 'header_cropped')" ng-if="personHeaderCtrl.header" ng-cloak></span>
-		<span class="req-1" ng-if="personHeaderCtrl.headerRequired && !personHeaderCtrl.new_header" ng-cloak>REQUIRED</span>
+		<span class="req-1" ng-if="personHeaderCtrl.required['header'] && !personHeaderCtrl.new_header" ng-cloak>REQUIRED</span>
 		<img class="cover" ngf-thumbnail="personHeaderCtrl.header || '/imgs/default-cover.jpg'" style="height: 411px;">
 		<div class="banner-deviser-content banner-deviser-edit-header-content">
 			<div class="grey-overlay"></div>
@@ -65,7 +65,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 							<img class="cover" ngf-thumbnail="personHeaderCtrl.profile || '/imgs/default-avatar.png'">
 							<span tooltip-placement="top" uib-tooltip="ADD PHOTO" class="button ion-camera edit-avatar-photo-icon ng-class:{'two':personHeaderCtrl.profile_original}" ngf-select ng-model="personHeaderCtrl.new_profile" name="profile" ngf-pattern="'image/*'" ngf-accept="'image/*'"></span>
 							<span tooltip-placement="top" uib-tooltip="CROP PHOTO" class="button ion-crop crop-avatar-photo-icon" ng-if="personHeaderCtrl.profile_original" ng-click="personHeaderCtrl.openCropModal(personHeaderCtrl.profile_original, 'profile_cropped')" ng-cloak></span>
-							<div ng-if="personHeaderCtrl.profileRequired && !personHeaderCtrl.new_profile" ng-cloak><p class="req-2">REQUIRED</p></div>
+							<div ng-if="personHeaderCtrl.required['profile'] && !personHeaderCtrl.new_profile" ng-cloak><p class="req-2">REQUIRED</p></div>
 						</div>
 
 						<!--BUTTONS-->

@@ -16,10 +16,11 @@
 
 			function onUpdateProfileError(err) {
 				vm.errorsRequired = true;
-				$rootScope.$broadcast(deviserEvents.make_profile_public_errors, {required_fields: err.data.errors.required});
-				for (var key in err.data.errors) {
+				$rootScope.$broadcast(deviserEvents.make_profile_public_errors, 
+						{required_fields: err.data.errors.required, required_sections: err.data.errors.sections});
+				/*for (var key in err.data.errors) {
 					UtilService.onError(err.data.errors[key]);
-				}
+				}*/
 			}
 
 			var data = {
