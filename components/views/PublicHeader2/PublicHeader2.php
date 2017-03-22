@@ -134,54 +134,34 @@ app\components\assets\PublicHeader2Asset::register($this);
 							<div class="dropdown-menu admin-wrapper black-form">
 
 								<ul class="menu-logued">
+
+									<li class="header-item">
+										<a href="<?= $person->getMainLink()?>"> <span><?=$person->personalInfoMapping->getBrandName()?></span></a>
+										<img class="avatar-logued-user" src="<?= $person->getAvatarImage() ?>">
+									</li>
+
 									<?php if ($person->isAdmin()) { ?>
 
-										<li class="header-item">
-											<span><?=$person->personalInfoMapping->getBrandName()?></span>
-											<img class="avatar-logued-user" src="<?= $person->getAvatarImage() ?>">
-										</li>
 										<li><a href="<?=Url::to('/admin')?>">Administration</a></li>
 										<li><a href="<?=Url::to('/admin/invitations')?>">Invitations</a></li>
-
 										<li class="separation-line"></li>
-										<li><a href="#">Settings</a></li>
-										<li><a href="#" ng-click="publicHeaderCtrl.logout()">Logout</a></li>
 
 									<?php } elseif ($person->isDeviser()) { ?>
 
-										<li class="header-item">
-											<a href="<?= $person->getAboutLink()?>"> <span><?=$person->personalInfoMapping->getBrandName()?></span></a>
-											<img class="avatar-logued-user" src="<?= $person->getAvatarImage() ?>">
-										</li>
 										<li><a href="#">Sales</a></li>
-
 										<li class="separation-line"></li>
-										<li><a href="<?= Url::to(["settings/index", "slug" => $person->slug, 'person_id' => $person->short_id])?>">Settings</a></li>
-										<li><a href="#" ng-click="publicHeaderCtrl.logout()">Logout</a></li>
 
 									<?php } elseif ($person->isClient()) { ?>
 
-										<li class="header-item">
-											<a href="<?= $person->getAboutLink()?>"> <span><?=$person->personalInfoMapping->getBrandName()?></span></a>
-											<img class="avatar-logued-user" src="<?= $person->getAvatarImage() ?>">
-										</li>
 										<li><a href="#">My orders</a></li>
-
 										<li class="separation-line"></li>
-										<li><a href="#">Settings</a></li>
-										<li><a href="#" ng-click="publicHeaderCtrl.logout()">Logout</a></li>
 
 									<?php } elseif ($person->isInfluencer()) { ?>
 
-										<li class="header-item">
-											<a href="<?= $person->getAboutLink()?>"> <span><?=$person->personalInfoMapping->getBrandName()?></span></a>
-											<img class="avatar-logued-user" src="<?= $person->getAvatarImage() ?>">
-										</li>
-
-										<li><a href="#">Settings</a></li>
-										<li><a href="#" ng-click="publicHeaderCtrl.logout()">Logout</a></li>
-
 									<?php } ?>
+
+									<li><a href="<?= $person->getSettingsLink()?>">Settings</a></li>
+									<li><a href="#" ng-click="publicHeaderCtrl.logout()">Logout</a></li>
 								</ul>
 							</div>
 						</li>

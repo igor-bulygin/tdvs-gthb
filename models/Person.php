@@ -361,10 +361,8 @@ class Person extends CActiveRecord implements IdentityInterface
 		$this->text_short_description = Person::stripNotAllowedHtmlTags($this->text_short_description);
 		$this->text_biography = Person::stripNotAllowedHtmlTags($this->text_biography);
 		$this->personalInfoMapping->name = Person::stripNotAllowedHtmlTags($this->personalInfoMapping->name, '');
-		$this->personalInfoMapping->last_name = Person::stripNotAllowedHtmlTags($this->personalInfoMapping->last_name,
-			'');
-		$this->personalInfoMapping->brand_name = Person::stripNotAllowedHtmlTags($this->personalInfoMapping->brand_name,
-			'');
+		$this->personalInfoMapping->last_name = Person::stripNotAllowedHtmlTags($this->personalInfoMapping->last_name, '');
+		$this->personalInfoMapping->brand_name = Person::stripNotAllowedHtmlTags($this->personalInfoMapping->brand_name, '');
 
 		if (!array_key_exists("auth_key", $this->credentials) || $this->credentials["auth_key"] === null) {
 			$this->credentials = array_merge_recursive($this->credentials, [
@@ -372,9 +370,10 @@ class Person extends CActiveRecord implements IdentityInterface
 			]);
 		}
 
-		if (empty($this->slug)) {
+		// Always update slug ?
+//		if (empty($this->slug)) {
 			$this->slug = Slugger::slugify($this->personalInfoMapping->getBrandName());
-		}
+//		}
 
 		if (empty($this->account_state)) {
 			$this->account_state = Person::ACCOUNT_STATE_DRAFT;
@@ -1284,8 +1283,17 @@ class Person extends CActiveRecord implements IdentityInterface
 			return $this->getStoreLink();
 		} elseif ($this->isInfluencer()) {
 			return $this->getAboutLink();
+		} elseif ($this->isClient()) {
+			return $this->getLovedLink();
 		}
-		return $this->getLovedLink();
+		return '#';
+	}
+
+	public function getSettingsLink() {
+		if ($this->isDeviser()) {
+			return Url::to(["settings/index", "slug" => $this->getSlug(), 'person_id' => $this->short_id]);
+		}
+		return '#';
 	}
 
 	public function getStoreLink($categoryId = null)
