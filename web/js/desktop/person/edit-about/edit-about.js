@@ -219,13 +219,14 @@
 
 			var data = {}
 			for(var key in vm.person) {
-				if(key === 'text_biography') {
-					for(var language in vm.person[key]) {
-						vm.person[key][language] = UtilService.stripHTMLTags(vm.person[key][language]);
-					}
-				}
 				if(key !== 'account_state')
 					data[key] = angular.copy(vm.person[key]);
+				if(key === 'text_biography') {
+					data[key] = {}
+					for(var language in vm.person[key]) {
+						data[key][language] = parseTags(vm.person[key][language]);
+					}
+				}
 			}
 
 			personDataService.updateProfile(data, {
@@ -235,7 +236,9 @@
 
 		//events
 		$scope.$on(deviserEvents.updated_deviser, function(event, args) {
-			vm.person = Object.assign(vm.person, args);
+			vm.person_original = Object.assign(vm.person, args);
+			vm.person = angular.copy(vm.person_original);
+			UtilService.setLeavingModal(false);
 		})
 
 		$scope.$on(deviserEvents.make_profile_public_errors, function(event, args) {
