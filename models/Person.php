@@ -582,7 +582,7 @@ class Person extends CActiveRecord implements IdentityInterface
 
 		$sections = [];
 		$viewSections = [
-			'header' => [
+			'header_info' => [
 				'header',
 				'profile',
 				'name',
