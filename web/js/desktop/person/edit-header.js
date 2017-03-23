@@ -241,7 +241,7 @@
 
 		$scope.$on(deviserEvents.updated_deviser, function(event, args) {
 			vm.person_original = Object.assign(vm.person, args)
-			vm.person = angular.copy(vm.person_original);
+			vm.person = Object.assign(vm.person, args);
 			UtilService.setLeavingModal(false);
 		})
 
