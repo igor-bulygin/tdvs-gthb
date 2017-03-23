@@ -31,6 +31,7 @@ class PersonController extends AppPublicController
 			"text" => Yii::$app->request->get("q"), // search in name, description, and more
 			"type" => Yii::$app->request->get("type"),
 			"categories" => Yii::$app->request->get("categories"),
+			"countries" => Yii::$app->request->get("countries"),
 			"account_state" => Person::ACCOUNT_STATE_ACTIVE,
 			"limit" => $limit,
 			"offset" => $offset,

@@ -250,6 +250,11 @@ class Person extends CActiveRecord implements IdentityInterface
 			$query->andWhere(["categories" => $ids]);
 		}
 
+		// if countries are specified
+		if ((array_key_exists("countries", $criteria)) && (!empty($criteria["countries"]))) {
+			$query->andWhere(["personal_info.country" => $criteria['countries']]);
+		}
+
 		// if type is specified
 		if ((array_key_exists("type", $criteria)) && (!empty($criteria["type"]))) {
 			$query->andWhere(["type" => (int)$criteria["type"]]);

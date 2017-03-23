@@ -17,7 +17,8 @@ Persons
 * `id`: Filter a specific product for id
 * `name`: Search word/s in name attribute (LIKE)
 * `q`: Search word/s in name and description (LIKE)
-* `categories`: Filter persons related with any category of the list
+* `categories`: Array of ids, to filter persons related with any category of the list
+* `countries`: Array of country codes, to filter persons related with any country of the list
 * `type`: Type of account (1: client, 2: deviser, 3: influencer)
 * `page`: Set the result page that want to be retrieved (default: 1)
 * `limit`: Limit the results returned for page (default: 20)
