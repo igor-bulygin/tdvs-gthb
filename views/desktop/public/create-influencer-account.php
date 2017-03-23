@@ -38,9 +38,9 @@ $this->registerJs("var invitation = ".\yii\helpers\Json::encode($invitation), yi
 						<form-errors field="createInfluencerCtrl.form.email" condition="createInfluencerCtrl.has_error(createInfluencerCtrl.form, createInfluencerCtrl.form.email)"></form-errors>
 					</div>
 					<div class="row">
-						<label for="name">Name</label>
-						<input type="text" id="name"" class="form-control grey-input ng-class:{'error-input': createInfluencerCtrl.has_error(createInfluencerCtrl.form, createInfluencerCtrl.form.name)}" name="name" ng-model="createInfluencerCtrl.influencer.name" required>
-						<form-errors field="createInfluencerCtrl.form.name" condition="createInfluencerCtrl.has_error(createInfluencerCtrl.form, createInfluencerCtrl.form.name)"></form-errors>
+						<label for="first_name">Name</label>
+						<input type="text" id="first_name" class="form-control grey-input ng-class:{'error-input': createInfluencerCtrl.has_error(createInfluencerCtrl.form, createInfluencerCtrl.form.first_name)}" name="first_name" ng-model="createInfluencerCtrl.influencer.first_name" required>
+						<form-errors field="createInfluencerCtrl.form.first_name" condition="createInfluencerCtrl.has_error(createInfluencerCtrl.form, createInfluencerCtrl.form.first_name)"></form-errors>
 					</div>
 					<div class="row">
 						<label for="password">Set your password</label>
