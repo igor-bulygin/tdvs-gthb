@@ -18,8 +18,19 @@
 	}
 }
 .error-input{
-    border-color: #924cfc!important;
+    border-color:$violet!important;
 }
 .error-text{
-     color: #924cfc!important;
+     color: $violet!important;
+}
+.button-error{
+    @extend %btn;
+    background-color:$violet!important;
+    border: 1px solid $violet;
+    color: $white;
+    &:hover{
+        background-color:$violet;
+        color: $white;
+        border: 1px solid $violet;
+    }
 }

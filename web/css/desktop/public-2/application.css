@@ -487,7 +487,7 @@ a, a:hover, a:focus {
 .bootstrap-select.btn-group .dropdown-menu.inner {
   margin: -26px 0 0 0; }
 
-.btn-red, .btn-green, .btn-grey, .btn-black, .btn-follow, .btn-white, .btn-transparent {
+.btn-red, .btn-green, .btn-grey, .btn-black, .btn-follow, .btn-white, .btn-transparent, .button-error {
   text-transform: uppercase;
   font-family: "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
@@ -497,7 +497,7 @@ a, a:hover, a:focus {
   border: none;
   text-align: center;
   cursor: pointer; }
-  .btn-red:hover, .btn-green:hover, .btn-grey:hover, .btn-black:hover, .btn-follow:hover, .btn-white:hover, .btn-transparent:hover {
+  .btn-red:hover, .btn-green:hover, .btn-grey:hover, .btn-black:hover, .btn-follow:hover, .btn-white:hover, .btn-transparent:hover, .button-error:hover {
     -moz-transition-property: background-color;
     -o-transition-property: background-color;
     -webkit-transition-property: background-color;
@@ -1152,6 +1152,15 @@ input[type="radio"] .styled:checked + label::after {
 
 .error-text {
   color: #924cfc !important; }
+
+.button-error {
+  background-color: #924cfc !important;
+  border: 1px solid #924cfc;
+  color: #ffffff; }
+  .button-error:hover {
+    background-color: #924cfc;
+    color: #ffffff;
+    border: 1px solid #924cfc; }
 
 .success-message-120 {
   background-color: #7AB83A;
