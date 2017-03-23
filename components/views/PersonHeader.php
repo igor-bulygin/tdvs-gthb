@@ -29,7 +29,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 						</div>
 						<?php if ($person->isPersonEditable()) {?>
 							<div class="edit-profile-btn">
-								<button class="btn btn-default btn-transparent btn-header ng-class:{'button-error': personHeaderCtrl.required['header']}" ng-click="personHeaderCtrl.editHeader()">Edit header</button>
+								<button class="btn btn-default btn-transparent btn-header ng-class:{'button-error': personHeaderCtrl.required['header_info']}" ng-click="personHeaderCtrl.editHeader()">Edit header</button>
 							</div>
 						<?php } ?>
 						<div class="deviser-data">
