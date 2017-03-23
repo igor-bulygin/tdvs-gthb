@@ -1534,6 +1534,18 @@ input[type="radio"] .styled:checked + label::after {
 .logued-text {
   float: left;
   display: block; }
+  .logued-text i {
+    color: #ffffff;
+    display: inline-block;
+    height: 25px;
+    border: solid 1px #717171;
+    width: 25px;
+    text-align: center;
+    border-radius: 90px 90px 90px 90px !important;
+    -webkit-border-radius: 90px 90px 90px 90px !important;
+    -moz-border-radius: 90px 90px 90px 90px !important;
+    font-size: 18px;
+    padding: 1px 0 0 1px; }
 
 .header-item {
   display: block;

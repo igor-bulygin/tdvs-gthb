@@ -281,6 +281,17 @@
 .logued-text{
 	float: left;
 	display: block;
+	i{
+		color: $white;
+		display: inline-block;
+		height: 25px;
+		border: solid 1px #717171;
+		width: 25px;
+		text-align: center;
+		@include border-radius(90px,90px,90px,90px);
+		font-size: 18px;
+		padding: 1px 0 0 1px;
+	}
 }
 .header-item{
 	display: block;
