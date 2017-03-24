@@ -37,9 +37,8 @@
 
 		//watches
 		$scope.$watch('discoverCtrl.filters', function (newValue, oldValue) {
-			if(newValue) {
+			if(!angular.equals(newValue, {}))
 				search(vm.form)
-			}
 		}, true);
 
 	}

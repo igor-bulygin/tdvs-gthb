@@ -3,6 +3,8 @@
 
 	function controller(UtilService, productDataService, locationDataService) {
 		var vm = this;
+		vm.seeMore = seeMore;
+		vm.show_countries = 10;
 
 		init();
 
@@ -25,7 +27,7 @@
 
 		function getCountries(){
 			function onGetCountriesSuccess(data) {
-				vm.countries = angular.copy(data.items);
+				vm.countries = angular.copy(data);
 			}
 
 			var params = {
@@ -33,6 +35,17 @@
 			}
 
 			locationDataService.getCountry(params, onGetCountriesSuccess, UtilService.onError);
+		}
+
+		function seeMore(value) {
+			switch(value) {
+				case 'countries':
+					if(vm.show_countries < vm.countries.meta.total_count)
+						vm.show_countries += 10;
+					break;
+				default:
+					break;
+			}
 		}
 
 	}
