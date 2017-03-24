@@ -29,7 +29,7 @@
 					if(vm.filters[filter_type][filter])
 						new_filter.push(filter);
 				})
-				params[filter_type] = new_filter;
+				params[filter_type+'[]'] = new_filter;
 			})
 
 			personDataService.getPeople(params, onGetPeopleSuccess, UtilService.onError);
