@@ -1,9 +1,16 @@
 <div style="background-color: grey;">
-	<p>Filter by theme</p>
 	<form name="discoverFiltersCtrl.form">
+		<p>Filter by theme</p>
 		<div class="checkbox" ng-repeat="category in discoverFiltersCtrl.categories">
 			<label>
-				<input type="checkbox" name="selected" ng-model="discoverFiltersCtrl.filters.categories[category.id]" ng-change="discoverFiltersCtrl.search()"><span ng-bind="category.name"></span>
+				<input type="checkbox" name="categories" ng-model="discoverFiltersCtrl.filters.categories[category.id]"><span ng-bind="category.name"></span>
+			</label>
+		</div>
+		<br>
+		<p>Filter by country</p>
+		<div class="checkbox" ng-repeat="country in discoverFiltersCtrl.countries | orderBy: 'country_name'" >
+			<label>
+				<input type="checkbox" name="categories" ng-model="discoverFiltersCtrl.filters.countries[country.id]"><span ng-bind="country.country_name"></span>
 			</label>
 		</div>
 	</form>

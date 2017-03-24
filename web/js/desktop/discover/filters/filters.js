@@ -1,13 +1,14 @@
 (function () {
 	"use strict";
 
-	function controller(UtilService, productDataService) {
+	function controller(UtilService, productDataService, locationDataService) {
 		var vm = this;
 
 		init();
 
 		function init(){
 			getCategories();
+			getCountries();
 		}
 
 		function getCategories(){
@@ -15,7 +16,23 @@
 				vm.categories = angular.copy(data.items);
 			}
 
-			productDataService.getCategories({scope: 'roots'}, onGetCategoriesSuccess, UtilService.onError);
+			var params = {
+				scope: 'roots'
+			}
+
+			productDataService.getCategories(params, onGetCategoriesSuccess, UtilService.onError);
+		}
+
+		function getCountries(){
+			function onGetCountriesSuccess(data) {
+				vm.countries = angular.copy(data.items);
+			}
+
+			var params = {
+				person_type: type
+			}
+
+			locationDataService.getCountry(params, onGetCountriesSuccess, UtilService.onError);
 		}
 
 	}
