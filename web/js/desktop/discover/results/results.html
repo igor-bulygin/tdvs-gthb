@@ -1,6 +1,4 @@
 <div>
-	<p>We found <span ng-bind="discoverResultsCtrl.results.meta.total_count"></span> with the keywords "<span ng-bind="discoverResultsCtrl.key"></span>"</p>
-	<hr />
 	<div ng-repeat="person in discoverResultsCtrl.results.items">
 		<discover-card person="person"></discover-card>
 	</div>

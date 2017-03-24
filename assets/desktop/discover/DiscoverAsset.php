@@ -11,6 +11,7 @@ class DiscoverAsset extends AssetBundle {
 		'js/desktop/discover/discoverCtrl.js',
 		'js/desktop/discover/results/results.js',
 		'js/desktop/discover/card/card.js',
+		'js/desktop/discover/filters/filters.js',
 	];
 	public $depends = [
 		'app\assets\desktop\pub\PublicCommonAsset',

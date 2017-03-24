@@ -1,0 +1,10 @@
+<div style="background-color: grey;">
+	<p>Filter by theme</p>
+	<form name="discoverFiltersCtrl.form">
+		<div class="checkbox" ng-repeat="category in discoverFiltersCtrl.categories">
+			<label>
+				<input type="checkbox" name="selected" ng-model="discoverFiltersCtrl.filters.categories[category.id]" ng-change="discoverFiltersCtrl.search()"><span ng-bind="category.name"></span>
+			</label>
+		</div>
+	</form>
+</div>

@@ -10,7 +10,6 @@
 		controller: controller,
 		controllerAs: 'discoverResultsCtrl',
 		bindings: {
-			key: '@',
 			results: '<'
 		}
 	}

@@ -266,7 +266,7 @@
 					UtilService.setLeavingModal(false);
 				}
 			}
-}, true);
+		}, true);
 
 
 	}
