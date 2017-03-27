@@ -22,6 +22,8 @@ Persons
 * `type`: Type of account (1: client, 2: deviser, 3: influencer)
 * `page`: Set the result page that want to be retrieved (default: 1)
 * `limit`: Limit the results returned for page (default: 20)
+* `order_col`: Optional. Name of the column to order by
+* `order_direction`: Optional. Direcction of the order. Available values: asc / desc
 
 **Response body**:
 //TODO

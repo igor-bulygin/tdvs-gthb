@@ -127,6 +127,16 @@ class Country extends CActiveRecord
 			$query->andFilterWhere(Utils::getFilterForTranslatableField("country_name", $criteria["name"]));
 		}
 
+		// if person_type is specified
+		if ((array_key_exists("person_type", $criteria)) && (!empty($criteria["person_type"]))) {
+			// Get different countries available by person type
+			$queryPerson= new ActiveQuery(Person::className());
+			$queryPerson->andWhere(["type" => (int)$criteria["person_type"]]);
+			$countries = $queryPerson->distinct("personal_info.country");
+
+			$query->andFilterWhere(["in", "country_code", $countries]);
+		}
+
 		// Count how many items are with those conditions, before limit them for pagination
 		static::$countItemsFound = $query->count();
 

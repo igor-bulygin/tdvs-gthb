@@ -78,22 +78,34 @@ class UploadForm extends Model {
 	 */
 	public function upload()
 	{
+		Yii::warning('uplad init');
 
 		if ($this->validate()) {
+			Yii::warning('upload after validate');
+
 			$this->pathUpload = $this->getPathUpload();
+			Yii::warning('upload pathUpload: '.$this->pathUpload);
 
 			if ($this->type == UploadForm::UPLOAD_TYPE_DEVISER_CURRICULUM) {
 				$this->filename = $this->file->name;
 			} else {
 				$this->filename = $this->getPrefix() . uniqid() . '.' . Utils::getFileExtensionFromMimeType($this->file->type);
 			}
+			Yii::warning('upload filename: '.$this->filename);
 
 			if (!file_exists($this->pathUpload)) {
+				Yii::warning('upload before mkdir '.$this->pathUpload);
 				Utils::mkdir($this->pathUpload);
+				Yii::warning('upload after mkdir '.$this->pathUpload);
 			}
 
+			Yii::warning('upload before save in '.$this->pathUpload.'/'.$this->filename);
 			$this->file->saveAs($this->pathUpload . '/' . $this->filename);
+			Yii::warning('upload after save');
+
 			$this->url = $this->getUrlUpload();
+
+			Yii::warning('upload end');
 			return true;
 		} else {
 			return false;

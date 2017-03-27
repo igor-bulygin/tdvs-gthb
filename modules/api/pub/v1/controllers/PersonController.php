@@ -35,6 +35,8 @@ class PersonController extends AppPublicController
 			"account_state" => Person::ACCOUNT_STATE_ACTIVE,
 			"limit" => $limit,
 			"offset" => $offset,
+			"order_col" => Yii::$app->request->get("order_col"),
+			"order_dir" => Yii::$app->request->get("order_dir"),
 		]);
 
 		return [
