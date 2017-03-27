@@ -2403,7 +2403,7 @@ input[type="radio"] .styled:checked + label::after {
   .red-link-btn:hover {
     color: #C91C39; }
   .red-link-btn.top {
-    z-index: 9999;
+    z-index: 99;
     cursor: pointer;
     position: relative; }
 
