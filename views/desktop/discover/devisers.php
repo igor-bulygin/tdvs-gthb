@@ -11,7 +11,7 @@ $this->registerJs("var type = 2", yii\web\View::POS_HEAD, 'person-type-script');
 <div class="container" ng-controller="discoverCtrl as discoverCtrl">
 	<div class="our-devisers-header">
 		<h3>Our devisers</h3>
-		<h5 class="text-center" style="color: white;">Discover innovative and talented creators from around the globe</h5>
+		<h5 class="text-center">Discover innovative and talented creators from around the globe</h5>
 		<div class="row">
 			<form name="discoverCtrl.form">
 				<div class="devisers-searcher">

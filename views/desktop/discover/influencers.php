@@ -9,16 +9,17 @@ $this->registerJs("var type = 3", yii\web\View::POS_HEAD, 'person-type-script');
 ?>
 
 <div class="container" ng-controller="discoverCtrl as discoverCtrl">
-	<div class="row">
-		<h3>Our incluencers</h3>
-		<h5 class="text-center" style="color: white;">Discover talented influencers from around the globe</h5>
-	</div>
-	<div class="row">
-	<form name="discoverCtrl.form">
-		<div class="col-md-4 col-md-offset-4">
-			<input type="text" class="form-control" name="key" ng-model="discoverCtrl.key" on-press-enter="discoverCtrl.search(discoverCtrl.form)" placeholder="Search keyword">
+	<div class="our-influencers-header">
+		<h3>Our influencers</h3>
+		<h5 class="text-center">Discover talented influencers from around the globe</h5>
+		<div class="row">
+			<form name="discoverCtrl.form">
+				<div class="devisers-searcher">
+					<input type="text" class="form-control white-rounded-input" name="key" ng-model="discoverCtrl.key" on-press-enter="discoverCtrl.search(discoverCtrl.form)" placeholder="Search keyword">
+					<span class="ion-search"></span>
+				</div>
+			</form>
 		</div>
-	</form>
 	</div>
 	<div class="row">
 		<div class="col-md-2">
