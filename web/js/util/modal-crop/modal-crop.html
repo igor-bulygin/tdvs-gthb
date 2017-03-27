@@ -9,6 +9,6 @@
 		<img-crop image="modalCropCtrl.resolve.photo" area-type="{{modalCropCtrl.area_type}}" chargement="'Loading'" aspect-ratio="modalCropCtrl.aspect_ratio" result-image="modalCropCtrl.photoCropped" init-max-area="true" result-image-size="modalCropCtrl.size"></img-crop>
 	</div>
 	<div class="text-center">
-		<button class="btn btn-default btn-green" ng-click="modalCropCtrl.ok()">Apply</button>
+		<button class="btn btn-default btn-green" ng-click="modalCropCtrl.ok()" ng-disabled="modalCropCtrl.disableApply">Apply</button>
 	</div>
 </div>

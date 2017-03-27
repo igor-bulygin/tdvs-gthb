@@ -29,6 +29,7 @@ class ApiAsset extends AssetBundle {
 		'app\assets\AppAsset',
 		'app\assets\libs\angularAsset',
 		'app\assets\libs\angularResourceAsset',
+		'app\assets\libs\ngFileUploadAsset',
 		'app\assets\libs\utilAsset',
 	];
 }

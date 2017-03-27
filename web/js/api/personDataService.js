@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function personDataService($resource, apiConfig, apiMethods) {
+	function personDataService($resource, apiConfig, apiMethods, Upload) {
 		//pub
 		var Person = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'person');
 		var Login = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'auth/login');
@@ -24,6 +24,7 @@
 		this.logout = logout;
 		this.getProfile = getProfile;
 		this.updateProfile = updateProfile;
+		this.UploadFile = UploadFile;
 
 		function getPeople(params, onSuccess, onError) {
 			apiMethods.get(Person, params, onSuccess, onError);
@@ -58,6 +59,13 @@
 
 		function updateProfile(data, params, onSuccess, onError) {
 			apiMethods.update(Profile, data, params, onSuccess, onError);
+		}
+
+		function UploadFile(data, onSuccess, onError, onUploading) {
+			Upload.upload({
+				url: this.Uploads,
+				data: data
+			}).then(function(returnData) { onSuccess(returnData)}, function(err) { onError(err); }, function(evt) { onUploading(evt)} );
 		}
 
 	}

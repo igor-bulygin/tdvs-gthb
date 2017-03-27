@@ -93,21 +93,46 @@
 				resolve: {
 					photo: function() {
 						return photo;
+					},
+					person: function() {
+						return vm.person;
+					},
+					index: function() {
+						return index;
+					},
+					type: function() {
+						return "deviser-photos";
 					}
 				}
 			});
 
 			modalInstance.result.then(function (imageCropped) {
-				if(imageCropped) {
-					uploadPhoto([Upload.dataUrltoBlob(imageCropped, "temp.png")], null, index, false);
+				if(index !== null && index >-1) {
+					vm.person.media.photos[index] = imageCropped;
+					vm.images = UtilService.parseImagesUrl(vm.person.media.photos, vm.person.url_images);
 				}
+				
 			}, function (err) {
-				//errors
+				UtilService.onError(err);
 			});
 
 		}
 
 		function uploadPhoto(images, errImages, index, cropOption) {
+			function onUploadPhotoSuccess(data) {
+				/*$timeout(function() {
+					delete file.progress;
+				}, 1000);*/
+				vm.person.media.photos.unshift(data.data.filename);
+				var imageToCrop = currentHost() + vm.person.url_images + data.data.filename;
+				openCropModal(imageToCrop, 0);
+				//vm.images = UtilService.parseImagesUrl(vm.person.media.photos, vm.person.url_images);
+			}
+
+			function onWhileUploading(evt) {
+				//file.progress = parseInt(100.0 * evt.loaded / evt.total);
+			}
+
 			vm.files = images;
 			vm.errFiles = errImages;
 			angular.forEach(vm.files, function (file) {
@@ -116,30 +141,8 @@
 					person_id: person.short_id,
 					file: file
 				}
-				Upload.upload({
-					url: personDataService.Uploads,
-					data: data
-				}).then(function (dataUpload) {
-					//if uplading crop, replace it
-					if(index!==null && index>-1) {
-						vm.person.media.photos[index] = dataUpload.data.filename;
-					} else {
-						//if not, add it and crop it
-						vm.person.media.photos.unshift(dataUpload.data.filename);
-						var imageToCrop = currentHost() + vm.person.url_images + dataUpload.data.filename;
-						openCropModal(imageToCrop, 0);
-					}
-					vm.images = UtilService.parseImagesUrl(vm.person.media.photos, vm.person.url_images);
-					$timeout(function () {
-						delete file.progress;
-					}, 1000);
-				}, function (err) {
-					//errors
-				}, function (evt) {
-					//progress
-					file.progress = parseInt(100.0 * evt.loaded / evt.total);
-				});
-			})
+				personDataService.UploadFile(data, onUploadPhotoSuccess, UtilService.onError, onWhileUploading);
+			});
 		}
 
 		function delete_image(index) {

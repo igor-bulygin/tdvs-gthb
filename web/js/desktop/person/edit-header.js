@@ -98,55 +98,6 @@
 			vm.showCities = false;
 		}
 
-		function upload(image, type) {
-			var data = {
-				person_id: vm.person.id,
-			}
-			var wait_for_cropped = false;
-			switch (type) {
-			case "header":
-				data.type = 'deviser-media-header-original';
-				data.file = image;
-				wait_for_cropped = true;
-				break;
-			case "profile":
-				data.type = 'deviser-media-profile-original';
-				data.file = image;
-				wait_for_cropped = true;
-				break;
-			case "header_cropped":
-				data.type = 'deviser-media-header-cropped';
-				data.file = Upload.dataUrltoBlob(image, "temp.png")
-				break;
-			case "profile_cropped":
-				data.type = 'deviser-media-profile-cropped';
-				data.file = Upload.dataUrltoBlob(image, "temp.png")
-				break;
-			}
-			Upload.upload({
-				url: personDataService.Uploads,
-				data: data
-			}).then(function (dataUpload) {
-				//when uploading original, wait for cropped to save data in the person model
-				if(wait_for_cropped) {
-					vm.media_upload_helper = {
-						type: type,
-						filename: dataUpload.data.filename
-					}
-					//open modals once upload is complete
-					if(type === 'header')
-						openCropModal(vm.new_header, 'header_cropped');
-					if(type === 'profile')
-						openCropModal(vm.new_profile, 'profile_cropped');
-				}
-				else {
-					vm.person.media[type] = dataUpload.data.filename;
-					vm.person.media[vm.media_upload_helper.type] = vm.media_upload_helper.filename;
-					delete vm.media_upload_helper;
-				}
-			});
-		}
-
 		function editHeader() {
 			vm.editingHeader = true;
 		}
@@ -191,23 +142,16 @@
 					},
 					type: function () {
 						return type;
+					},
+					person: function() {
+						return vm.person;
 					}
 				}
 			})
 
 			modalInstance.result.then(function (imageCropped) {
-				if(imageCropped) {
-					switch (type) {
-					case "header_cropped":
-						vm.header = imageCropped;
-						upload(imageCropped, type);
-						break;
-					case "profile_cropped":
-						vm.profile = imageCropped;
-						upload(imageCropped, type);
-						break;
-					}
-				}
+				vm.person.media[type] = imageCropped;
+				parsePersonInfo(vm.person);
 			}, function () {
 				console.log("dismissed");
 			});
@@ -221,16 +165,36 @@
 
 		//watches
 		$scope.$watch('personHeaderCtrl.new_header', function (newValue, oldValue) {
+			function onUploadHeaderSuccess(data) {
+				vm.person.media['header'] = angular.copy(data.data.filename);
+				//then, open modal
+				openCropModal(newValue, 'header_cropped');
+			}
 			if (newValue) {
 				//upload original
-				upload(newValue, "header");
+				var data = {
+					person_id: vm.person.id,
+					type: 'deviser-media-header-original',
+					file: newValue
+				}
+				personDataService.UploadFile(data, onUploadHeaderSuccess, UtilService.onError, console.log);
 			}
 		});
 
 		$scope.$watch('personHeaderCtrl.new_profile', function (newValue, oldValue) {
+			function onUploadProfileSuccess(data) {
+				vm.person.media['profile'] = angular.copy(data.data.filename);
+				//then, open modal
+				openCropModal(newValue, 'profile_cropped');
+			}
 			if (newValue) {
 				//upload original
-				upload(newValue, "profile");
+				var data = {
+					person_id: vm.person.id,
+					type: 'deviser-media-profile-original',
+					file: newValue
+				}
+				personDataService.UploadFile(data, onUploadProfileSuccess, UtilService.onError, console.log);
 			}
 		});
 
