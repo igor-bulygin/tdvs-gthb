@@ -21,14 +21,14 @@ $this->registerJs("var type = 3", yii\web\View::POS_HEAD, 'person-type-script');
 	</form>
 	</div>
 	<div class="row">
-		<p ng-if="discoverCtrl.key">We found <span ng-bind="discoverCtrl.results.meta.total_count"></span> influencers with the keywords "<span ng-bind="discoverCtrl.key"></span>"</p>
-	</div>
-	<div class="row">
 		<div class="col-md-2">
 			<discover-filters filters="discoverCtrl.filters"></discover-filters>
 		</div>
 	</div>
 	<div class="col-md-10">
+		<div class="row">
+			<p ng-if="discoverCtrl.key">We found <span ng-bind="discoverCtrl.results.meta.total_count"></span> influencers with the keywords "<span ng-bind="discoverCtrl.key"></span>"</p>
+		</div>
 		<discover-results results="discoverCtrl.results" ng-if="discoverCtrl.results" ng-cloak></discover-results>
 	</div>
 </div>

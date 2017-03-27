@@ -1879,6 +1879,28 @@ input[type="radio"] .styled:checked + label::after {
 .pad-showcase {
   padding: 10px; }
 
+.our-devisers-header {
+  margin: -20px 0 0 0;
+  padding: 50px 0 42px;
+  background: url(/imgs/devisers-cover.jpg) center #000000 no-repeat;
+  background-size: 1150px 267px; }
+  .our-devisers-header h3 {
+    font-family: "Univers Thin Ultra Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #ffffff; }
+  .our-devisers-header h5 {
+    font-family: "Playfair Display", Georgia, serif;
+    font-style: italic; }
+  .our-devisers-header .devisers-searcher {
+    width: 300px;
+    position: relative;
+    margin: 10px auto 0; }
+    .our-devisers-header .devisers-searcher span {
+      color: #F7284B;
+      position: absolute;
+      right: 12px;
+      top: 4px;
+      font-size: 21px; }
+
 /*.col-xs-15,
 .col-sm-15,
 .col-md-15,
