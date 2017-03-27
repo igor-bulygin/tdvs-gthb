@@ -35,7 +35,10 @@
 			default: 
 				vm.area_type = 'rectangle';
 				vm.aspect_ratio = 1;
-				vm.size = 'max';
+				vm.size = {
+					w: 500,
+					h: 500
+				};
 				break;
 			}
 		}
