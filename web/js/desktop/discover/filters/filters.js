@@ -60,7 +60,7 @@
 	}
 
 	angular
-		.module('todevise')
-		.component('discoverFilters', component);
+	.module('todevise')
+	.component('discoverFilters', component);
 
 }());

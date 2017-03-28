@@ -15,6 +15,6 @@
 				<span ng-bind="country.country_name"></span>
 			</label>
 		</div>
-		<span ng-click="discoverFiltersCtrl.seeMore('countries')" style="cursor: pointer;">see more</span>
+		<span ng-click="discoverFiltersCtrl.seeMore('countries')" style="cursor: pointer;" ng-if="discoverFiltersCtrl.show_countries < discoverFiltersCtrl.countries.meta.total_count" ng-cloak>see more</span>
 	</form>
 </div>
