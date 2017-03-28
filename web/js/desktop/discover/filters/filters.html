@@ -1,13 +1,13 @@
-<div style="background-color: grey;">
+<div class="filter-wrapper">
 	<form name="discoverFiltersCtrl.form">
-		<p>Filter by theme</p>
+		<span class="filter-title">Filter by theme</span>
 		<div class="checkbox" ng-repeat="category in discoverFiltersCtrl.categories">
 			<label>
 				<input type="checkbox" name="categories" ng-model="discoverFiltersCtrl.filters.categories[category.id]"><span ng-bind="category.name"></span>
 			</label>
 		</div>
 		<br>
-		<p>Filter by country</p>
+		<span class="filter-title">Filter by country</span>
 		<div class="checkbox" ng-repeat="country in discoverFiltersCtrl.countries.items | orderBy: 'country_name'" ng-if="$index < discoverFiltersCtrl.show_countries">
 			<label>
 				<input type="checkbox" name="categories" ng-model="discoverFiltersCtrl.filters.countries[country.id]"><span ng-bind="country.country_name"></span>
