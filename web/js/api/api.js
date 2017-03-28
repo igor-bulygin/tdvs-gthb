@@ -48,7 +48,7 @@
 		}
 	}
 
-	angular.module('api', ['ngResource', 'util'])
+	angular.module('api', ['ngResource', 'util', 'ngFileUpload'])
 		.constant('apiConfig', {
 			baseUrl: currentHost() + '/api3/',
 			version: 'v1/'

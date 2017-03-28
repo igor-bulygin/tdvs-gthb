@@ -1,11 +1,13 @@
 (function () {
 	"use strict";
 
-	function controller() {
+	function controller(Upload, personDataService, UtilService) {
 		var vm = this;
 		vm.ok = ok;
 		vm.dismiss = dismiss;
-
+		var data = {
+			person_id: vm.resolve.person.id
+		};
 
 		function init() {
 			switch (vm.resolve.type) {
@@ -33,7 +35,10 @@
 			default: 
 				vm.area_type = 'rectangle';
 				vm.aspect_ratio = 1;
-				vm.size = 'max';
+				vm.size = {
+					w: 500,
+					h: 500
+				};
 				break;
 			}
 		}
@@ -41,9 +46,35 @@
 		init();
 
 		function ok() {
-			vm.close({
-				$value: vm.photoCropped
-			});
+			function onUploadFileSuccess(data) {
+				vm.disableApply = false;
+				vm.close({
+					$value: data.data.filename
+				})
+			}
+
+			function onUploadFileError(err) {
+				UtilService.onError(err);
+				vm.disableApply = false;
+			}
+
+			if(vm.resolve.index && vm.resolve.index >= 0)
+				data.index = angular.copy(index);
+			data.file = Upload.dataUrltoBlob(vm.photoCropped, "temp.png");
+			switch (vm.resolve.type) {
+				case "header_cropped":
+					data.type = "deviser-media-header-cropped";
+					break;
+				case "profile_cropped":
+					data.type = "deviser-media-profile-cropped";
+					break;
+				case "deviser-photos":
+					data.type = "deviser-media-photos";
+					break;
+				default:
+					break;
+			}
+			personDataService.UploadFile(data, onUploadFileSuccess, onUploadFileError, console.log);
 		}
 
 		function dismiss() {
