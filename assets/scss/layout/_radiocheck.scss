@@ -270,3 +270,12 @@ input[type="radio"] .styled:checked + label::before {
 input[type="checkbox"] .styled:checked + label::after,
 input[type="radio"] .styled:checked + label::after {
   color: #fff; }
+
+.checkbox-red input[type="checkbox"]:checked + label::before,
+.checkbox-red input[type="radio"]:checked + label::before {
+  background-color: $white;}
+.checkbox-red input[type="checkbox"]:checked + label::after,
+.checkbox-red input[type="radio"]:checked + label::after {
+  color: $red; }
+
+

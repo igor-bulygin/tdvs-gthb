@@ -1,16 +1,18 @@
 <div class="filter-wrapper">
 	<form name="discoverFiltersCtrl.form">
 		<span class="filter-title">Filter by theme</span>
-		<div class="checkbox" ng-repeat="category in discoverFiltersCtrl.categories">
-			<label>
-				<input type="checkbox" name="categories" ng-model="discoverFiltersCtrl.filters.categories[category.id]"><span ng-bind="category.name"></span>
+		<div class="checkbox checkbox-red" ng-repeat="category in discoverFiltersCtrl.categories">
+			<input ng-attr-id="{{'checkbox'+ ($index+10)}}" type="checkbox" name="categories" ng-model="discoverFiltersCtrl.filters.categories[category.id]">
+			<label ng-attr-for="{{'checkbox'+ ($index+10)}}">
+				<span ng-bind="category.name"></span>
 			</label>
 		</div>
 		<br>
 		<span class="filter-title">Filter by country</span>
-		<div class="checkbox" ng-repeat="country in discoverFiltersCtrl.countries.items | orderBy: 'country_name'" ng-if="$index < discoverFiltersCtrl.show_countries">
-			<label>
-				<input type="checkbox" name="categories" ng-model="discoverFiltersCtrl.filters.countries[country.id]"><span ng-bind="country.country_name"></span>
+		<div class="checkbox checkbox-red" ng-repeat="country in discoverFiltersCtrl.countries.items | orderBy: 'country_name'" ng-if="$index < discoverFiltersCtrl.show_countries">
+			<input ng-attr-id="{{'checkbox'+ ($index+10+discoverFiltersCtrl.categories.length)}}" type="checkbox" name="categories" ng-model="discoverFiltersCtrl.filters.countries[country.id]" class="ng-class:{'checked': discoverFiltersCtrl.filters.countries[category.id]}">
+			<label ng-attr-for="{{'checkbox'+ ($index+10+discoverFiltersCtrl.categories.length)}}">
+				<span ng-bind="country.country_name"></span>
 			</label>
 		</div>
 		<span ng-click="discoverFiltersCtrl.seeMore('countries')" style="cursor: pointer;">see more</span>
