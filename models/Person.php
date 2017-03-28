@@ -1309,15 +1309,18 @@ class Person extends CActiveRecord implements IdentityInterface
 		return '#';
 	}
 
-	public function getStoreLink($categoryId = null)
+	public function getStoreLink($params = [])
 	{
 		if ($this->isDeviser()) {
-			return Url::to([
-				"/deviser/store",
-				"slug" => $this->getSlug(),
-				'person_id' => $this->short_id,
-				'category' => $categoryId
-			], true);
+			$params = array_merge(
+				[
+					"/deviser/store",
+					"slug" => $this->getSlug(),
+					'person_id' => $this->short_id,
+				],
+				$params
+			);
+			return Url::to($params, true);
 		}
 		return null;
 	}
