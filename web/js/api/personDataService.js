@@ -3,7 +3,7 @@
 
 	function personDataService($resource, apiConfig, apiMethods, Upload) {
 		//pub
-		var Person = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'person');
+		var Person = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'person/:personId');
 		var Login = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'auth/login');
 		var Logout = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'auth/logout');
 
@@ -23,6 +23,7 @@
 		this.login = login;
 		this.logout = logout;
 		this.getProfile = getProfile;
+		this.getProfilePublic = getProfilePublic;
 		this.updateProfile = updateProfile;
 		this.UploadFile = UploadFile;
 
@@ -51,6 +52,10 @@
 
 		function logout(data, params, onSuccess, onError) {
 			apiMethods.create(Logout, data, params, onSuccess, onError);
+		}
+
+		function getProfilePublic(params, onSuccess, onError) {
+			apiMethods.get(Person, params, onSuccess, onError);
 		}
 
 		function getProfile(params, onSuccess, onError) {

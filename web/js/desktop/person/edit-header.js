@@ -31,7 +31,7 @@
 				parsePersonInfo(vm.person);
 			}
 
-			personDataService.getProfile({
+			personDataService.getProfilePublic({
 				personId: person.short_id,
 			}, onGetProfileSuccess, UtilService.onError);
 		}
