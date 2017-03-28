@@ -30,72 +30,7 @@ app\components\assets\PublicHeader2Asset::register($this);
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div>
-			<ul class="nav navbar-nav">
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle menu-title" data-toggle="dropdown" role="button"
-					   aria-haspopup="true" aria-expanded="false">
-						<i class="fa fa-bars" aria-hidden="true"></i>
-						<span>Shop by departament</span>
-					</a>
-					<div class="dropdowns-wrapper">
-						<div class="dropdown-menu dropdown-shop">
-							<ul class="shop-menu-wrapper">
-								<?php foreach($categories as $category) { ?>
-									<li class="toggle-category" data-target=".category-<?=$category->short_id?>"><a class="ion-chevron-right" href="<?= Url::to(["public/category-b", "slug" => $category->slug, 'category_id' => $category->short_id])?>"><?= Utils::l($category->name)?></a></li>
-									<li role="separator" class="divider"></li>
-								<?php } ?>
-							</ul>
-							<?php
-							$active = 'active';
-							foreach ($categories as $category) {
-								if ($category->hasGroupsOfCategories()) {
-									$subCategories = $category->getSubCategories();
-									if ($subCategories) {
-										foreach ($subCategories as $subCategory) {
-
-											$subSubCategories = $subCategory->getSubCategoriesHeader(); ?>
-											<ul class="shop-secondary-menu-wrapper category category-<?=$category->short_id ?> <?=$active?>">
-												<li><?= Utils::l($subCategory->name) ?></li>
-												<?php foreach ($subSubCategories as $subSubCategory) { ?>
-													<li>
-														<a href="<?= Url::to(["public/category-b", "slug" => $subSubCategory->slug, 'category_id' => $subSubCategory->short_id]) ?>"><?= Utils::l($subSubCategory->name) ?></a>
-													</li>
-												<?php }
-												if (($image = $subCategory->getHeaderImage()) !== null) { ?>
-													<li class="minibanner">
-													<a href="#">
-														<img src="<?= $image ?>">
-													</a>
-													</li><?php
-												} ?>
-											</ul>
-										<?php }
-									}
-								} else {
-									$subCategories = $category->getSubCategoriesHeader();
-									if ($subCategories) { ?>
-										<ul class="shop-secondary-menu-wrapper category category-<?=$category->short_id ?> <?=$active?>">
-											<?php foreach ($subCategories as $subCategory) { ?>
-												<li>
-													<a href="<?= Url::to(["public/category-b", "slug" => $subCategory->slug, 'category_id' => $subCategory->short_id]) ?>"><?= Utils::l($subCategory->name) ?></a>
-												</li><?php
-											}
-											if (($image = $category->getHeaderImage()) !== null) { ?>
-												<li class="minibanner">
-													<a href="#">
-														<img src="<?= $image ?>">
-													</a>
-												</li><?php
-											} ?>
-										</ul><?php
-									}
-								}
-								$active = '';
-							} ?>
-						</div>
-					</div>
-				</li>
-			</ul>
+	
 			<form class="navbar-form navbar-left navbar-searcher" action="<?=Url::to(['/works'])?>" method="get">
 				<div class="input-group searcher-header">
 					<input type="text" class="form-control" name="q" value="<?=$q?>"placeholder="Search">
@@ -169,4 +104,81 @@ app\components\assets\PublicHeader2Asset::register($this);
 			</ul>
 		</div><!-- /.navbar-collapse -->
 	</div><!-- /.container -->
+</nav>
+<nav class="navbar navbar-default secondary">
+	<div class="container">
+		<ul class="nav navbar-nav">
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle menu-title" data-toggle="dropdown" role="button"
+					   aria-haspopup="true" aria-expanded="false">
+						<i class="fa fa-bars" aria-hidden="true"></i>
+						<span>Shop by departament</span>
+					</a>
+					<div class="dropdowns-wrapper">
+						<div class="dropdown-menu dropdown-shop">
+							<ul class="shop-menu-wrapper">
+								<?php foreach($categories as $category) { ?>
+									<li class="toggle-category" data-target=".category-<?=$category->short_id?>"><a class="ion-chevron-right" href="<?= Url::to(["public/category-b", "slug" => $category->slug, 'category_id' => $category->short_id])?>"><?= Utils::l($category->name)?></a></li>
+									<li role="separator" class="divider"></li>
+								<?php } ?>
+							</ul>
+							<?php
+							$active = 'active';
+							foreach ($categories as $category) {
+								if ($category->hasGroupsOfCategories()) {
+									$subCategories = $category->getSubCategories();
+									if ($subCategories) {
+										foreach ($subCategories as $subCategory) {
+
+											$subSubCategories = $subCategory->getSubCategoriesHeader(); ?>
+											<ul class="shop-secondary-menu-wrapper category category-<?=$category->short_id ?> <?=$active?>">
+												<li><?= Utils::l($subCategory->name) ?></li>
+												<?php foreach ($subSubCategories as $subSubCategory) { ?>
+													<li>
+														<a href="<?= Url::to(["public/category-b", "slug" => $subSubCategory->slug, 'category_id' => $subSubCategory->short_id]) ?>"><?= Utils::l($subSubCategory->name) ?></a>
+													</li>
+												<?php }
+												if (($image = $subCategory->getHeaderImage()) !== null) { ?>
+													<li class="minibanner">
+													<a href="#">
+														<img src="<?= $image ?>">
+													</a>
+													</li><?php
+												} ?>
+											</ul>
+										<?php }
+									}
+								} else {
+									$subCategories = $category->getSubCategoriesHeader();
+									if ($subCategories) { ?>
+										<ul class="shop-secondary-menu-wrapper category category-<?=$category->short_id ?> <?=$active?>">
+											<?php foreach ($subCategories as $subCategory) { ?>
+												<li>
+													<a href="<?= Url::to(["public/category-b", "slug" => $subCategory->slug, 'category_id' => $subCategory->short_id]) ?>"><?= Utils::l($subCategory->name) ?></a>
+												</li><?php
+											}
+											if (($image = $category->getHeaderImage()) !== null) { ?>
+												<li class="minibanner">
+													<a href="#">
+														<img src="<?= $image ?>">
+													</a>
+												</li><?php
+											} ?>
+										</ul><?php
+									}
+								}
+								$active = '';
+							} ?>
+						</div>
+					</div>
+				</li>
+			</ul>
+		<ul class="nav navbar-nav navbar-right">
+			<li><a href="#">Stories</a></li>
+			<li><a href="#">Explore Boxes</a></li>
+			<li><a href="#">Discover devisers</a></li>
+			<li><a href="#">Influencers</a></li>
+			<li><a href="#">Projects</a></li>
+		</ul>
+	</div>
 </nav>

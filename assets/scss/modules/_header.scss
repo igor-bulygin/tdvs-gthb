@@ -9,6 +9,34 @@
     height: 70px;
     padding: 10px 0;
     z-index:1000;
+	&.secondary{
+		float: left;
+		width: 100%;
+		height: 50px;
+		background-color: $white;
+		padding: 0;
+		.menu-title{
+        	color: $black!important;
+			padding-left: 0;
+		}
+		ul{
+			li{
+				width: 100px;
+				a{
+					color: $black;
+					text-transform: uppercase;
+					padding: 15px 30px;
+					&:hover{
+						color:$dark_grey!important;
+						text-decoration: none;
+						@include transition-property(color);
+						@include transition-duration(0.3s);
+						@include transition-timing-function(ease-out);
+					}
+				}
+			}
+		}
+	}
     @media (max-width: 768px){
                 height: auto;
             }
@@ -45,12 +73,13 @@
                     padding: 0 20px;
                 }
         input{
-                min-width: 500px;
+				margin: 0 0 0 30px;
+                min-width: 600px;
                 color: $white;
                 background-color: $almost_black;
                 @include border-radius(0px,0px,0px,0px);
                 @extend %input-border-none;
-                @include border-radius(25px,0px,0px,25px);
+                @include border-radius(0px,0px,0px,0px);
                 &:focus{
                     border-right: 0;
                 }
@@ -67,7 +96,7 @@
             font-size: 23px;
             padding: 0 10px;
             border-left: 0;
-            @include border-radius(0px,25px,25px,0px);
+            @include border-radius(0px,0px,0px,0px);
             border-color:$almost_black;
             &:hover, &:active{
                 color: $red;
@@ -144,6 +173,7 @@
     }
 }
 .dropdown-shop{
+	@include border-radius(0px,0px,0px,0px);
     @media (max-width: 768px){
         top: 10px;
         min-width:100%;
@@ -267,9 +297,12 @@
 }
 .dropdowns-wrapper{
 	position: absolute;
-    top: 57px;
+    top: 47px;
     width: 633px;
     float: left;
+	li{
+		cursor: pointer;
+	}
 }
 .avatar-logued-user{
 	margin: 11px 5px 0;
