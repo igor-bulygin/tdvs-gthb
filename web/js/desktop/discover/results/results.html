@@ -1,5 +1,6 @@
-<div>
-	<div ng-repeat="person in discoverResultsCtrl.results.items">
+<div infinite-scroll="discoverResultsCtrl.addMoreItems()" infinite-scroll-distance="2">
+	<div ng-repeat="person in discoverResultsCtrl.results_infinite">
 		<discover-card person="person"></discover-card>
 	</div>
+	<div style='clear: both;'></div>
 </div>

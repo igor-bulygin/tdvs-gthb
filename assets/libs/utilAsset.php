@@ -31,5 +31,6 @@ class utilAsset extends AssetBundle {
 		'app\assets\libs\ngImgCropAsset',
 		'app\assets\libs\angularLocalStorageAsset',
 		'app\assets\libs\angularBootstrapAsset',
+		'app\assets\libs\ngInfiniteScrollAsset'
 	];
 }

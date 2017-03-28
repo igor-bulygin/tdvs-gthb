@@ -14,7 +14,8 @@
 
 		function search(form) {
 			var params = {
-				type: type
+				type: type,
+				rand: true
 			}
 			function onGetPeopleSuccess(data) {
 				vm.search_key = angular.copy(vm.key);
@@ -44,7 +45,8 @@
 
 	}
 
-	angular.module('todevise')
+	angular
+		.module('todevise')
 		.controller('discoverCtrl', controller);
 
 }());
