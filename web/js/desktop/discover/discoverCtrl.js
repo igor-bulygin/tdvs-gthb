@@ -17,6 +17,7 @@
 				type: type
 			}
 			function onGetPeopleSuccess(data) {
+				vm.search_key = angular.copy(vm.key);
 				vm.results = angular.copy(data);
 			}
 
