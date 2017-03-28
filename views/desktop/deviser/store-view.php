@@ -36,7 +36,7 @@ $this->params['person_menu_store_categories'] = $categories;
 				<div class="content-store">
 					<?php if ($unpublishedWorks || count($categories) > 1) { ?>
 						<div class="cathegory-wrapper">
-							<?php if ($unpublishedWorks) { ?>
+							<?php if ($unpublishedWorks && $person->isDeviserEditable()) { ?>
 								<div class="col-md-3 col-sm-3 col-xs-3 pad-cathegory">
 									<a href="<?= $person->getStoreEditLink(['product_state' => \app\models\Product2::PRODUCT_STATE_DRAFT])?>">
 										<div class="unpublished-square">
@@ -47,7 +47,7 @@ $this->params['person_menu_store_categories'] = $categories;
 							<?php } ?>
 							<?php foreach ($categories as $i => $category) { ?>
 								<div class="col-md-3 col-sm-3 col-xs-3 pad-cathegory">
-									<a href="<?= $person->getStoreEditLink(['category' => $category->short_id])?>">
+									<a href="<?= $person->getStoreLink(['category' => $category->short_id])?>">
 										<figure class="cathegory">
 											<img class="<?= ($selectedCategory->short_id==$category->short_id) ? 'active' : '' ?>" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($category->getDeviserProduct()->getMainImage())->resize(240, 175) ?>">
 											<figcaption>
@@ -70,7 +70,7 @@ $this->params['person_menu_store_categories'] = $categories;
 								<?php if (count($selectedCategory->getDeviserSubcategories()) > 1) { ?>
 								<?php foreach ($selectedCategory->getDeviserSubcategories() as $i => $subcategory) { ?>
 									<li>
-										<a href="<?= $person->getStoreEditLink(['category' => $selectedCategory->short_id, 'subcategory' => $subcategory->short_id])?>" class="<?= ($selectedSubcategory->short_id==$subcategory->short_id) ? 'active' : '' ?>"><?= Utils::l($subcategory["name"]) ?></a>
+										<a href="<?= $person->getStoreLink(['category' => $selectedCategory->short_id, 'subcategory' => $subcategory->short_id])?>" class="<?= ($selectedSubcategory->short_id==$subcategory->short_id) ? 'active' : '' ?>"><?= Utils::l($subcategory["name"]) ?></a>
 									</li>
 								<?php } ?>
 								<?php } ?>
