@@ -27,17 +27,19 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 
 <div ng-controller="editProductCtrl as editProductCtrl" class="create-work-wrapper">
 	<div id="newProductHeader" class="new-product-header ng-class:{'purple': editProductCtrl.errors}">
-		<div class="pull-left">
-			<a class="back-link" ng-href="{{editProductCtrl.link_profile}}"> &lt go back to your profile</a>
-		</div>
-		<div class="avatar">
-			<img ng-src="{{editProductCtrl.profile}}">
-		</div>
-		<div class="text-center" ng-if="!editProductCtrl.errors"><h4 class="title">Edit work</h4></div>
-		<div class="text-center" ng-if="editProductCtrl.errors" ng-cloak><p>Please complete all the required fields before publishing your work.</p></div>
-		<div class="btns-group">
-			<button class="btn btn-transparent" ng-click="editProductCtrl.save('product_state_draft')" ng-disabled="editProductCtrl.disable_save_buttons">Save progress</button>
-			<button class="btn btn-default btn-green" ng-click="editProductCtrl.save('product_state_active')" ng-disabled="editProductCtrl.disable_save_buttons">Publish work</button>
+		<div class="container relative">
+			<div class="pull-left">
+				<a class="back-link" ng-href="{{editProductCtrl.link_profile}}"> &lt go back to your profile</a>
+			</div>
+			<div class="avatar">
+				<img ng-src="{{editProductCtrl.profile}}">
+			</div>
+			<div class="text-center" ng-if="!editProductCtrl.errors"><h4 class="title">Edit work</h4></div>
+			<div class="text-center" ng-if="editProductCtrl.errors" ng-cloak><p>Please complete all the required fields before publishing your work.</p></div>
+			<div class="btns-group">
+				<button class="btn btn-transparent" ng-click="editProductCtrl.save('product_state_draft')" ng-disabled="editProductCtrl.disable_save_buttons">Save progress</button>
+				<button class="btn btn-default btn-green" ng-click="editProductCtrl.save('product_state_active')" ng-disabled="editProductCtrl.disable_save_buttons">Publish work</button>
+			</div>
 		</div>
 	</div>
 	<div id="productSaved" class="success-message-120" ng-if="editProductCtrl.progressSaved" ng-cloak><p class="text-center">Product saved</p></div>
