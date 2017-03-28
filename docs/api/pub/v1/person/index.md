@@ -24,6 +24,7 @@ Persons
 * `limit`: Limit the results returned for page (default: 20)
 * `order_col`: Optional. Name of the column to order by
 * `order_direction`: Optional. Direcction of the order. Available values: asc / desc
+* `rand`: Optional. If it is present, results are randomized
 
 **Response body**:
 //TODO

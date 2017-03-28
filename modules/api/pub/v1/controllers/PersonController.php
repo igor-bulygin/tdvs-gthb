@@ -19,13 +19,13 @@ class PersonController extends AppPublicController
 		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_PUBLIC);
 
 		// set pagination values
-		$limit = Yii::$app->request->get('limit', 99999);
-		$limit = ($limit < 1) ? 1 : $limit;
+		$limit = Yii::$app->request->get('limit', 0);
+		$limit = ($limit < 0) ? 1 : $limit;
 		$page = Yii::$app->request->get('page', 1);
 		$page = ($page < 1) ? 1 : $page;
 		$offset = ($limit * ($page - 1));
 
-		$products = Person::findSerialized([
+		$persons = Person::findSerialized([
 			"id" => Yii::$app->request->get("id"),
 			"name" => Yii::$app->request->get("name"), // search only in name attribute
 			"text" => Yii::$app->request->get("q"), // search in name, description, and more
@@ -39,8 +39,12 @@ class PersonController extends AppPublicController
 			"order_dir" => Yii::$app->request->get("order_dir"),
 		]);
 
+		if (Yii::$app->request->get('rand', false)) {
+			shuffle($persons);
+		}
+
 		return [
-			"items" => $products,
+			"items" => $persons,
 			"meta" => [
 				"total_count" => Person::$countItemsFound,
 				"current_page" => $page,
