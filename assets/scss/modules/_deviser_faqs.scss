@@ -243,3 +243,11 @@
 		position: relative;
 	}
 }
+.showcase{
+	&.influencers{
+		    min-height: 250px;
+			img{
+				max-width: 286px;
+			}
+	}
+}
