@@ -2441,6 +2441,11 @@ input[type="radio"] .styled:checked + label::after {
     cursor: pointer;
     position: relative; }
 
+.showcase.influencers {
+  min-height: 250px; }
+  .showcase.influencers img {
+    max-width: 286px; }
+
 .banner-deviser {
   position: relative;
   background-color: #e9e9e9;
