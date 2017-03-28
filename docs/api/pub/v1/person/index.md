@@ -14,7 +14,7 @@ Persons
 * `400`: Bad request
   
 **Request parameters**:
-* `id`: Filter a specific product for id
+* `id`: Filter a specific person for id
 * `name`: Search word/s in name attribute (LIKE)
 * `q`: Search word/s in name and description (LIKE)
 * `categories`: Array of ids, to filter persons related with any category of the list
