@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function productDataService($resource, apiConfig, apiMethods) {
+	function productDataService($resource, apiConfig, apiMethods, Upload) {
 		//pub
 		var Product = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'products/:idProduct');
 		var PaperType = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'paper-type');
@@ -23,6 +23,7 @@
 		this.postProductPriv = postProductPriv;
 		this.updateProductPriv = updateProductPriv;
 		this.deleteProductPriv = deleteProductPriv;
+		this.UploadFile = UploadFile;
 
 		function getProductPub(params, onSuccess, onError) {
 			apiMethods.get(Product, params, onSuccess, onError);
@@ -50,6 +51,13 @@
 
 		function deleteProductPriv(params, onSuccess, onError) {
 			apiMethods.deleteItem(ProductPriv, params, onSuccess, onError);
+		}
+
+		function UploadFile(data, onSuccess, onError, onUploading) {
+			Upload.upload({
+				url: this.Uploads,
+				data: data
+			}).then(function(returnData) { onSuccess(returnData)}, function(err) {onError(err);}, function(evt) { onUploading(evt)} );
 		}
 	}
 

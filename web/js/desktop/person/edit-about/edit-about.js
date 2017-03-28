@@ -106,9 +106,9 @@
 				}
 			});
 
-			modalInstance.result.then(function (imageCropped) {
+			modalInstance.result.then(function (data) {
 				if(index !== null && index >-1) {
-					vm.person.media.photos[index] = imageCropped;
+					vm.person.media.photos[index] = data.data.filename;
 					vm.images = UtilService.parseImagesUrl(vm.person.media.photos, vm.person.url_images);
 				}
 				

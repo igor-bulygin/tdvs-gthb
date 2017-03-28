@@ -44,7 +44,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 			</div>
 		</div>
 	</div>
-	<div id="productSaved" class="success-message" ng-if="createProductCtrl.progressSaved" ng-cloak><p class="text-center">Product saved</p></div>
+	<div id="productSaved" class="success-message-120" ng-if="createProductCtrl.progressSaved" ng-cloak><p class="text-center">Product saved</p></div>
 	<div class="container">
 		<product-basic-info product="createProductCtrl.product" categories="createProductCtrl.allCategories" languages="createProductCtrl.languages"></product-basic-info>
 		<product-more-details product="createProductCtrl.product" languages="createProductCtrl.languages"></product-more-details>

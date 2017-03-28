@@ -1,12 +1,12 @@
 (function () {
 	"use strict";
 
-	function controller(Upload, personDataService, UtilService) {
+	function controller(Upload, personDataService, productDataService, UtilService) {
 		var vm = this;
 		vm.ok = ok;
 		vm.dismiss = dismiss;
 		var data = {
-			person_id: vm.resolve.person.id
+			person_id: vm.resolve.person.id || vm.resolve.person.short_id
 		};
 
 		function init() {
@@ -49,7 +49,7 @@
 			function onUploadFileSuccess(data) {
 				vm.disableApply = false;
 				vm.close({
-					$value: data.data.filename
+					$value: data
 				})
 			}
 
@@ -60,7 +60,9 @@
 
 			if(vm.resolve.index && vm.resolve.index >= 0)
 				data.index = angular.copy(index);
+
 			data.file = Upload.dataUrltoBlob(vm.photoCropped, "temp.png");
+
 			switch (vm.resolve.type) {
 				case "header_cropped":
 					data.type = "deviser-media-header-cropped";
@@ -71,10 +73,23 @@
 				case "deviser-photos":
 					data.type = "deviser-media-photos";
 					break;
+				case "work_photo":
+					data.deviser_id = data.person_id;
+					if(vm.resolve.product_id) {
+						data.type = "known-product-photo";
+						data.product_id = vm.resolve.product_id;
+					}
+					else {
+						data.type = 'unknown-product-photo';
+					}
 				default:
 					break;
 			}
-			personDataService.UploadFile(data, onUploadFileSuccess, onUploadFileError, console.log);
+			if(data.deviser_id)
+				productDataService.UploadFile(data, onUploadFileSuccess, onUploadFileError, console.log);
+			else {
+				personDataService.UploadFile(data, onUploadFileSuccess, onUploadFileError, console.log);
+			}
 		}
 
 		function dismiss() {
