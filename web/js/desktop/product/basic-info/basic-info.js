@@ -120,6 +120,7 @@
 		}
 
 		function openCropModal(photo, index) {
+
 			var modalInstance = $uibModal.open({
 				component: 'modalCrop',
 				resolve: {
@@ -128,42 +129,28 @@
 					},
 					type: function () {
 						return 'work_photo';
+					},
+					person: function() {
+						return person;
+					},
+					product_id: function() {
+						if(vm.product.id)
+							return vm.product.id;
+						else {
+							return null;
+						}
 					}
 				}
 			});
 
-			modalInstance.result.then(function(imageCropped) {
-				if(imageCropped) {
-					//upload image
-					var data = {
-						deviser_id: person.short_id,
-						file: Upload.dataUrltoBlob(imageCropped, "temp.png")
-					}
-					var type;
-					if(vm.product.id) {
-							type = 'known-product-photo';
-							data['product_id'] = vm.product.id;
-						}
-					else {
-						type = 'unknown-product-photo';
-					}
-					data['type'] = type;
-					Upload.upload({
-						url: productDataService.Uploads,
-						data: data
-					}).then(function(dataUpload) {
-						//set image filename in helper
-						unSetMainPhoto();
-						vm.images[index].url = currentHost() + '/' + dataUpload.data.url;
-						//set image filename in model cropped name
-						vm.product.media.photos[index]['name_cropped'] = angular.copy(dataUpload.data.filename);
-						vm.product.media.photos[index]['main_product_photo'] = true;
-						parseImages();
-					}, function(err) {
-						UtilService.onError(err);
-					}, function(evt) {
-						//evt when marking as main photo
-					})
+			modalInstance.result.then(function(data) {
+				if(angular.isObject(data)) {
+					unSetMainPhoto();
+					//set image filename in helper
+					vm.images[index].url = currentHost() + '/' + data.data.url;
+					//set image filename in model cropped name
+					vm.product.media.photos[index]['name_cropped'] = angular.copy(data.data.filename);
+					vm.product.media.photos[index]['main_product_photo'] = true;
 				}
 			}, function(err) {
 				UtilService.onError(err);

@@ -149,8 +149,8 @@
 				}
 			})
 
-			modalInstance.result.then(function (imageCropped) {
-				vm.person.media[type] = imageCropped;
+			modalInstance.result.then(function (data) {
+				vm.person.media[type] = data.data.filename;
 				parsePersonInfo(vm.person);
 			}, function () {
 				console.log("dismissed");

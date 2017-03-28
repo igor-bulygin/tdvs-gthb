@@ -62,7 +62,7 @@
 						<img class="grid-image" ng-src="{{image.url}}">
 						<div class="crop ion-android-star-outline" ng-click="productBasicInfoCtrl.openCropModal(image.url, $index)"></div>
 						<span class="delete ion-android-close" ng-click="productBasicInfoCtrl.deleteImage($index)"></span>
-						<p class="main-marked" ng-if="productBasicInfoCtrl.images[$index].filename.main_product_photo">Marked as main photo</p>
+						<p class="main-marked" ng-if="image.filename.main_product_photo">Marked as main photo</p>
 					</div>
 				</div>
 				<div class="col-md-2 image-basic-info-edit" ng-repeat="item in productBasicInfoCtrl.files" ng-if="item.progress">
