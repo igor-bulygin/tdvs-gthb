@@ -9,9 +9,27 @@ use yii\base\Exception;
 use yii\web\BadRequestHttpException;
 use yii\web\ConflictHttpException;
 use yii\web\NotFoundHttpException;
+use yii\web\UnauthorizedHttpException;
 
 class PersonController extends AppPublicController
 {
+
+	public function actionView($personId)
+	{
+		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_PUBLIC);
+
+		/** @var Person $person */
+		$person = Person::findOne(["short_id" => $personId]);
+		if (empty($person)) {
+			throw new BadRequestHttpException('Person not found');
+		}
+
+		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE && !$person->isPersonEditable()) {
+			throw new UnauthorizedHttpException();
+		}
+
+		return $person;
+	}
 
 	public function actionIndex()
 	{

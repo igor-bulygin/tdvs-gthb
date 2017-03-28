@@ -339,9 +339,12 @@ $config = [
 				// ORDER
 				'GET api3/pub/v1/order/<orderId:[^/.]*?>' => 'api3/pub/v1/order/view',
 
-				// PERSON
-				'POST api3/pub/v1/person' => 'api3/pub/v1/person/create',
+				// PERSON (public)
 				'GET api3/pub/v1/person' => 'api3/pub/v1/person/index',
+				'GET api3/pub/v1/person/<personId:[^/.]*?>' => 'api3/pub/v1/person/view',
+				'POST api3/pub/v1/person' => 'api3/pub/v1/person/create',
+
+				// PERSON (priv)
 				'GET api3/priv/v1/person/<personId:[^/.]*?>' => 'api3/priv/v1/person/view',
 				'PATCH api3/priv/v1/person/<personId:[^/.]*?>' => 'api3/priv/v1/person/update',
 				'PUT api3/priv/v1/person/<personId:[^/.]*?>' => 'api3/priv/v1/person/update',
