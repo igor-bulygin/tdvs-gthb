@@ -12,8 +12,12 @@
 		}
 
 		$scope.$watch('discoverResultsCtrl.results', function(newValue, oldValue) {
-			if(angular.isObject(newValue) && newValue.items.length > 0) {
-				vm.results_infinite = newValue.items.slice(0, show_items);
+			if(angular.isObject(newValue)) {
+				if(newValue.items.length > 0)
+					vm.results_infinite = newValue.items.slice(0, show_items);
+				else {
+					vm.results_infinite = [];
+				}
 			}
 		}, true)
 	}
