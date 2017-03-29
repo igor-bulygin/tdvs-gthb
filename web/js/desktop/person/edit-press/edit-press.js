@@ -50,6 +50,18 @@
 		}
 
 		function upload(images, errImages) {
+			function onUploadFileSuccess(data, file) {
+				$timeout(function () {
+					delete file.progress;
+				}, 1000);
+				vm.person.press.unshift(data.data.filename);
+				vm.images = UtilService.parseImagesUrl(vm.person.press, vm.person.url_images);
+			}
+
+			function onWhileUploadingFile(evt, file) {
+				file.progress = parseInt(100.0 * evt.loaded / evt.total);
+			}
+
 			vm.files = images;
 			vm.errFiles = errImages;
 			angular.forEach(vm.files, function (file) {
@@ -58,20 +70,14 @@
 					person_id: person.short_id,
 					file: file
 				};
-				Upload.upload({
-					url: personDataService.Uploads,
-					data: data
-				}).then(function (dataUpload) {
-					vm.person.press.unshift(dataUpload.data.filename);
-					vm.images = UtilService.parseImagesUrl(vm.person.press, vm.person.url_images);
-					$timeout(function () {
-						delete file.progress;
-					}, 1000);
-				}, function (err) {
-					UtilService.onError(err);
-				}, function (evt) {
-					file.progress = parseInt(100.0 * evt.loaded / evt.total);
-				});
+
+				personDataService.UploadFile(data, 
+					function(data) {
+						return onUploadFileSuccess(data, file);
+					}, UtilService.onError,
+					function(evt) {
+						return onWhileUploadingFile(evt, file);
+					})
 			});
 		}
 
