@@ -2950,7 +2950,7 @@ input[type="radio"] .styled:checked + label::after {
 .top-bar-red {
   background-color: #F7284B;
   position: absolute;
-  top: 70px;
+  top: 120px;
   width: 100%;
   z-index: 999; }
   .top-bar-red span {
@@ -2973,7 +2973,7 @@ input[type="radio"] .styled:checked + label::after {
 .top-bar-violet {
   background-color: #924cfc;
   position: absolute;
-  top: 70px;
+  top: 120px;
   width: 100%;
   z-index: 999; }
   .top-bar-violet span {
