@@ -80,6 +80,23 @@
 
 		//photos
 		function uploadPhoto(images, errImages) {
+			function onUploadPhotoSuccess(data, file) {
+				$timeout(function() {
+					delete file.progress;
+				}, 1000);
+				//parse images
+				vm.images.unshift({
+					url: currentHost() + '/' + data.data.url
+				});
+				vm.product.media.photos.unshift({
+					name: data.data.filename
+				});
+			}
+
+			function onWhileUploadingPhoto(evt, file) {
+				file.progress = parseInt(100.0 * evt.loaded / evt.total);
+			}
+
 			vm.files = images;
 			vm.errFiles = errImages;
 
@@ -97,26 +114,15 @@
 				else {
 					data['type'] = 'unknown-product-photo';
 				}
-				Upload.upload({
-					url: productDataService.Uploads,
-					data: data
-				}).then(function(dataUpload) {
-					//parse images
-					vm.images.unshift({
-						url: currentHost() + '/' + dataUpload.data.url
-					})
-					vm.product.media.photos.unshift({
-						name: dataUpload.data.filename
+
+				productDataService.UploadFile(data,
+					function(data) {
+						return onUploadPhotoSuccess(data, file);
+					}, UtilService.onError,
+					function(evt) {
+						return onWhileUploadingPhoto(evt, file);
 					});
-					$timeout(function () {
-						delete file.progress;
-					}, 1000);
-				}, function (err) {
-					//errors
-				}, function (evt) {
-					file.progress = parseInt(100.0 * evt.loaded / evt.total);
-				})
-			})
+			});
 		}
 
 		function openCropModal(photo, index) {
@@ -151,6 +157,7 @@
 					//set image filename in model cropped name
 					vm.product.media.photos[index]['name_cropped'] = angular.copy(data.data.filename);
 					vm.product.media.photos[index]['main_product_photo'] = true;
+					parseImages();
 				}
 			}, function(err) {
 				UtilService.onError(err);
