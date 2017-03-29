@@ -20,7 +20,7 @@
 					data: function () {
 						return {
 							title: "Are you sure?",
-							text: "You are about to delete a deviser! All items related to this user (products, settings, media....) will be deleted. This action can not be undone"
+							text: "You are about to delete a deviser! All items related to this user (products, loved, boxes, settings, media....) will be deleted. This action can not be undone"
 						};
 					}
 				}
