@@ -144,7 +144,7 @@
 		}
 	}
 
-	angular.module('util', ['util.formMessages', 'LocalStorageModule', 'ui.bootstrap', 'infinite-scroll'])
+	angular.module('util', ['util.formMessages', 'LocalStorageModule', 'ui.bootstrap', 'infinite-scroll', 'uiCropper'])
 		.service('UtilService', UtilService)
 		.filter('capitalize', capitalize)
 		.config(config);
