@@ -149,7 +149,7 @@ $config = [
 		'newrelic' => [
 			'class' => 'bazilio\yii\newrelic\Newrelic',
 			'name' => 'Dev Todevise',
-			'handler' => 'class/name',
+//			'handler' => 'class/name',
 			'enabled' => true,
 		],
 
