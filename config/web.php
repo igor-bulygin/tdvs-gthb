@@ -23,7 +23,8 @@ $config = [
 		],
 		'devicedetect',
 		'languagepicker',
-		'app\components\Aliases'
+		'app\components\Aliases',
+		'newrelic',
 	],
 
 
@@ -142,6 +143,14 @@ $config = [
 
 		'Scrypt' => [
 			'class' => 'alexandernst\Scrypt\Scrypt'
+		],
+
+		// new relic
+		'newrelic' => [
+			'class' => 'bazilio\yii\newrelic\Newrelic',
+			'name' => 'Dev Todevise',
+//			'handler' => 'class/name',
+			'enabled' => true,
 		],
 
 		//URLs
