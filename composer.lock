@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "29ecb8f8a7330210272b5ef81ef0b6d8",
-    "content-hash": "0bbbef4da15803c68028b5356ab382d9",
+    "hash": "f96d6e5f159c12bdc53af753a8e7ff1d",
+    "content-hash": "82f8efe73bba05489fed9e03c9a9780b",
     "packages": [
         {
             "name": "99designs/phumbor",
@@ -143,6 +143,50 @@
                 "yii2"
             ],
             "time": "2015-04-04 15:17:53"
+        },
+        {
+            "name": "bazilio/yii2-newrelic",
+            "version": "0.0.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bazilio91/yii2-newrelic.git",
+                "reference": "5590b5db1ce1ed77bc1058c080ad3977b1a6f90f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bazilio91/yii2-newrelic/zipball/5590b5db1ce1ed77bc1058c080ad3977b1a6f90f",
+                "reference": "5590b5db1ce1ed77bc1058c080ad3977b1a6f90f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "sobanvuex/php-newrelic": "1.*",
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "bazilio\\yii\\newrelic\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vasily Ostanin",
+                    "email": "bazilio91@gmail.com"
+                }
+            ],
+            "description": "Newrelic integration for Yii2",
+            "keywords": [
+                "debug",
+                "monitoring",
+                "newrelic",
+                "yii2"
+            ],
+            "time": "2016-07-10 18:12:02"
         },
         {
             "name": "bower-asset/bootstrap",
@@ -1938,6 +1982,53 @@
                 "uuid"
             ],
             "time": "2016-10-02 15:51:17"
+        },
+        {
+            "name": "sobanvuex/php-newrelic",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SobanVuex/php-newrelic.git",
+                "reference": "e8a5af806c7b8394fb406f27d3191071f7cff6f9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SobanVuex/php-newrelic/zipball/e8a5af806c7b8394fb406f27d3191071f7cff6f9",
+                "reference": "e8a5af806c7b8394fb406f27d3191071f7cff6f9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "suggest": {
+                "ext-newrelic": "Get the New Relic PHP extension from http://newrelic.com"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "NewRelic\\": "src/NewRelic/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alex Soban",
+                    "email": "me@soban.co",
+                    "homepage": "https://soban.co"
+                }
+            ],
+            "description": "PHP SDK for New Relic Agent API",
+            "keywords": [
+                "monitoring",
+                "newrelic"
+            ],
+            "time": "2014-09-14 20:32:12"
         },
         {
             "name": "stripe/stripe-php",
