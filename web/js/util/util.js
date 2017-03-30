@@ -68,8 +68,14 @@
 			var parsed_images = [];
 			images.map(function(element, index) {
 				var name;
-				if(element.name && element.name !== null && element.name !== undefined)
+				if(element.main_product_photo) {
+					if(element.name_cropped && element.name_cropped !== null && element.name_cropped !== undefined) {
+						name = element.name_cropped;
+					}
+				}
+				else if(element.name && element.name !== null && element.name !== undefined) {
 					name = element.name
+				}
 				else {
 					name = element;
 				}
@@ -144,7 +150,7 @@
 		}
 	}
 
-	angular.module('util', ['util.formMessages', 'LocalStorageModule', 'ui.bootstrap', 'infinite-scroll'])
+	angular.module('util', ['util.formMessages', 'LocalStorageModule', 'ui.bootstrap', 'infinite-scroll', 'uiCropper'])
 		.service('UtilService', UtilService)
 		.filter('capitalize', capitalize)
 		.config(config);

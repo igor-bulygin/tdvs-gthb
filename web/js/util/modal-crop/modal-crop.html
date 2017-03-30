@@ -6,7 +6,7 @@
 </div>
 <div class="modal-body">
 	<div class="crop-modal">
-		<img-crop image="modalCropCtrl.resolve.photo" area-type="{{modalCropCtrl.area_type}}" chargement="'Loading'" aspect-ratio="modalCropCtrl.aspect_ratio" result-image="modalCropCtrl.photoCropped" init-max-area="true" area-min-size="20" result-image-size="modalCropCtrl.size" result-image-quality="0.0"></img-crop>
+		<ui-cropper image="modalCropCtrl.resolve.photo" area-type="{{modalCropCtrl.area_type}}" chargement="'Loading'" aspect-ratio="modalCropCtrl.aspect_ratio" result-image="modalCropCtrl.photoCropped" init-max-area="true" area-min-size="20" result-image-size="modalCropCtrl.size" result-image-quality="0.0"></ui-cropper>
 	</div>
 	<div class="text-center">
 		<button class="btn btn-default btn-green" ng-click="modalCropCtrl.ok()" ng-disabled="modalCropCtrl.disableApply">Apply</button>

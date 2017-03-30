@@ -13,7 +13,7 @@
 				method: 'PUT'
 			}
 		});
-		this.Uploads = apiConfig.baseUrl + "priv/" + apiConfig.version + 'uploads';
+		var Uploads = apiConfig.baseUrl + "priv/" + apiConfig.version + 'uploads';
 
 		//functions
 		this.getProductPub = getProductPub;
@@ -55,7 +55,7 @@
 
 		function UploadFile(data, onSuccess, onError, onUploading) {
 			Upload.upload({
-				url: this.Uploads,
+				url: Uploads,
 				data: data
 			}).then(function(returnData) { onSuccess(returnData)}, function(err) {onError(err);}, function(evt) { onUploading(evt)} );
 		}

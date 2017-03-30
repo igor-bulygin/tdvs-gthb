@@ -119,18 +119,18 @@
 		}
 
 		function uploadPhoto(images, errImages, index, cropOption) {
-			function onUploadPhotoSuccess(data) {
-				/*$timeout(function() {
+			function onUploadPhotoSuccess(data, file) {
+				$timeout(function() {
 					delete file.progress;
-				}, 1000);*/
+				}, 1000);
 				vm.person.media.photos.unshift(data.data.filename);
 				var imageToCrop = currentHost() + vm.person.url_images + data.data.filename;
 				openCropModal(imageToCrop, 0);
 				//vm.images = UtilService.parseImagesUrl(vm.person.media.photos, vm.person.url_images);
 			}
 
-			function onWhileUploading(evt) {
-				//file.progress = parseInt(100.0 * evt.loaded / evt.total);
+			function onWhileUploading(evt, file) {
+				file.progress = parseInt(100.0 * evt.loaded / evt.total);
 			}
 
 			vm.files = images;
@@ -141,7 +141,13 @@
 					person_id: person.short_id,
 					file: file
 				}
-				personDataService.UploadFile(data, onUploadPhotoSuccess, UtilService.onError, onWhileUploading);
+				personDataService.UploadFile(data, 
+					function(data) {
+						return onUploadPhotoSuccess(data, file)}, 
+					UtilService.onError, 
+					function(evt){
+						return onWhileUploading(evt, file);
+					});
 			});
 		}
 
@@ -162,19 +168,17 @@
 
 		/* cv functions */
 		function uploadCV(file) {
+			function onUploadCVSuccess(data) {
+				vm.person.curriculum = data.data.filename;
+			}
+
 			var data = {
 				type: 'deviser-curriculum',
 				person_id: person.short_id,
 				file: file
 			}
-			Upload.upload({
-				url: personDataService.Uploads,
-				data: data
-			}).then(function (dataCV) {
-				vm.person.curriculum = dataCV.data.filename;
-			}, function (err) {
-				//errors
-			})
+
+			personDataService.UploadFile(data, onUploadCVSuccess, UtilService.onError, console.log)
 		}
 
 		function deleteCV() {
