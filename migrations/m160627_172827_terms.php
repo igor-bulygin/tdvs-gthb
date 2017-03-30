@@ -1,6 +1,5 @@
 <?php
 use app\models\Lang;
-use app\models\Faq;
 use yii\mongodb\Migration;
 
 class m160627_172827_terms extends Migration
@@ -38,7 +37,7 @@ class m160627_172827_terms extends Migration
 			]
 		]);
 
-		$this->insert('tern',[
+		$this->insert('term',[
 			'short_id' => '20000',
 			'title' => [
 				$en => 'Getting started as a member'

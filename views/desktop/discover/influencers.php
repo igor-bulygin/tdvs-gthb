@@ -30,6 +30,9 @@ $this->registerJs("var type = 3", yii\web\View::POS_HEAD, 'person-type-script');
 					<p ng-if="discoverCtrl.search_key" ng-cloak>We found <span ng-bind="discoverCtrl.results.meta.total_count"></span> influencers with the keywords "<span class="key" ng-bind="discoverCtrl.search_key"></span>"</p>
 				</div>
 				<hr />
+				<div ng-if="discoverCtrl.searching" ng-cloak>
+					<p class="text-center">Searching...</p>
+				</div>
 				<discover-results results="discoverCtrl.results" ng-if="discoverCtrl.results" ng-cloak></discover-results>
 			</div>
 		</div>

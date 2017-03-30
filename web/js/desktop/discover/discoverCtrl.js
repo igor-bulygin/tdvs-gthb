@@ -13,11 +13,14 @@
 		}
 
 		function search(form) {
+			delete vm.results;
+			vm.searching = true;
 			var params = {
 				type: type,
 				rand: true
 			}
 			function onGetPeopleSuccess(data) {
+				vm.searching = false;
 				vm.search_key = angular.copy(vm.key);
 				vm.results = angular.copy(data);
 			}
