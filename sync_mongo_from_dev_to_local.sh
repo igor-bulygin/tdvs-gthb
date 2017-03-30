@@ -23,7 +23,7 @@ do
     printf "\n"
 
     echo "Importing $collection"
-    mongoimport -h localhost:27017 -d todevise -c $collection --drop --file $folder/$collection.json
+    mongoimport -h localhost:27017 -d todevise -c $collection --upsert --file $folder/$collection.json
 
     printf "\n"
     printf "\n"
