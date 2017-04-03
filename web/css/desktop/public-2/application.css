@@ -1312,7 +1312,6 @@ input[type="radio"] .styled:checked + label::after {
   padding: 10px 0;
   z-index: 1000; }
   .navbar.secondary {
-    float: left;
     width: 100%;
     height: 50px;
     background-color: #ffffff;
@@ -1347,7 +1346,7 @@ input[type="radio"] .styled:checked + label::after {
   .navbar .navbar-brand {
     padding: 10px 15px; }
   .navbar .dropdown {
-    height: 60px; }
+    height: 50px; }
   .navbar .dropdown:hover .dropdown-shop {
     display: block; }
   .navbar .dropdown-shop:hover {
@@ -2966,10 +2965,8 @@ input[type="radio"] .styled:checked + label::after {
 
 .top-bar-red {
   background-color: #F7284B;
-  position: fixed;
-  top: 0;
   width: 100%;
-  z-index: 999; }
+  z-index: 99999; }
   .top-bar-red span {
     color: #ffffff;
     text-align: center;
@@ -2980,9 +2977,8 @@ input[type="radio"] .styled:checked + label::after {
     float: right;
     border: 1px solid #ffffff;
     font-size: 12px;
-    position: absolute;
-    right: 20px;
-    top: 10px;
+    position: relative;
+    margin: -47px 61px 0 0;
     background-color: transparent; }
     .top-bar-red button:hover {
       background-color: #C91C39; }

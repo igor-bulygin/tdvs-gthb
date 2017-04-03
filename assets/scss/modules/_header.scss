@@ -10,7 +10,6 @@
     padding: 10px 0;
     z-index:1000;
 	&.secondary{
-		float: left;
 		width: 100%;
 		height: 50px;
 		background-color: $white;
@@ -45,7 +44,7 @@
         padding: 10px 15px;
     }
     .dropdown{
-        height: 60px;
+        height: 50px;
     }
     .dropdown:hover .dropdown-shop {
         display: block;
