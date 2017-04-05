@@ -24,9 +24,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEAD, 'product-var-script');
 
 ?>
-
-<div ng-controller="editProductCtrl as editProductCtrl" class="create-work-wrapper">
-	<div id="newProductHeader" class="new-product-header ng-class:{'purple': editProductCtrl.errors}">
+<div id="newProductHeader" class="new-product-header ng-class:{'purple': editProductCtrl.errors}" data-spy="affix" data-offset-top="120">
 		<div class="container relative">
 			<div class="pull-left">
 				<a class="back-link" ng-href="{{editProductCtrl.link_profile}}"> &lt go back to your profile</a>
@@ -42,6 +40,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 			</div>
 		</div>
 	</div>
+<div ng-controller="editProductCtrl as editProductCtrl" class="create-work-wrapper">
 	<div id="productSaved" class="success-message-120" ng-if="editProductCtrl.progressSaved" ng-cloak><p class="text-center">Product saved</p></div>
 	<div class="container">
 		<product-basic-info product="editProductCtrl.product" categories="editProductCtrl.allCategories" languages="editProductCtrl.languages"></product-basic-info>

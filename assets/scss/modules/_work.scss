@@ -4,7 +4,8 @@
 .new-product-header{
 	background-color: $almost_black;
 	height:50px;
-	margin: -40px 0 40px 0;
+	width: 100%;
+	z-index: 999999999999999;
 	padding: 6px 15px;
 	.title{
 		color: $white;
@@ -38,7 +39,7 @@
 }
 .create-work-wrapper{
 	background-color: $background_grey;
-	padding: 90px 0 120px;
+	padding: 20px 0 120px;
 	.card{
 		background-color: $white;
 		padding: 35px 35px 10px;
