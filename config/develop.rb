@@ -10,6 +10,7 @@ task :composerdev do
       run "ln -nfs #{shared_path}/system/vendor #{releases_path}/#{release_name}/vendor"
       run "cd #{releases_path}/#{release_name} ; composer -q global require \"fxp/composer-asset-plugin:~1.1.1\""
       run "cd #{releases_path}/#{release_name} ; composer -q install"
+      run "cd #{releases_path}/#{release_name} ; ./yii mongodb-migrate --interactive=0"
     end
 end
 task :npmdev do
