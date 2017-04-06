@@ -5,16 +5,15 @@
 		var vm = this;
 		vm.search = search;
 		vm.filters = {};
-		var original_results;
 
 		init();
 
 		function init() {
-			search(vm.form, true);
+			search(vm.form);
 		}
 
 		/* use init_search to save all devisers on init and minimize calls to server*/
-		function search(form, init_search) {
+		function search(form) {
 			delete vm.results;
 			vm.searching = true;
 			var params = {
@@ -24,8 +23,6 @@
 			function onGetPeopleSuccess(data) {
 				vm.searching = false;
 				vm.search_key = angular.copy(vm.key);
-				if(init_search)
-					original_results = angular.copy(data);
 				vm.results = angular.copy(data);
 			}
 
@@ -52,18 +49,7 @@
 
 		//watches
 		$scope.$watch('discoverCtrl.filters', function (newValue, oldValue) {
-			var filters_present = false;
-			Object.keys(newValue).find(function(filter_type) {
-				Object.keys(newValue[filter_type]).find(function(filter) {
-					if(newValue[filter_type][filter])
-						filters_present = true;
-				});
-			});
-			if(filters_present)
-				search(vm.form, false);
-			else {
-				vm.results = angular.copy(original_results);
-			}
+			search(vm.form)
 		}, true);
 
 	}
