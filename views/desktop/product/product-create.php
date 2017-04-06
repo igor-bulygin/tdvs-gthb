@@ -27,8 +27,7 @@ $this->title = $person->getBrandName() . ' - Todevise';
 $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD, 'person-var-script');
 
 ?>
-<div ng-controller="createProductCtrl as createProductCtrl" class="create-work-wrapper">
-	<div id="newProductHeader" class="new-product-header ng-class:{'purple': createProductCtrl.errors}">
+<div id="newProductHeader" class="new-product-header ng-class:{'purple': createProductCtrl.errors}" data-spy="affix" data-offset-top="120">
 		<div class="container relative">
 			<div class="pull-left">
 				<a class="back-link" ng-href="{{createProductCtrl.link_profile}}"> &lt go back to your profile</a>
@@ -44,6 +43,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 			</div>
 		</div>
 	</div>
+<div ng-controller="createProductCtrl as createProductCtrl" class="create-work-wrapper">
 	<div id="productSaved" class="success-message-120" ng-if="createProductCtrl.progressSaved" ng-cloak><p class="text-center">Product saved</p></div>
 	<div class="container">
 		<product-basic-info product="createProductCtrl.product" categories="createProductCtrl.allCategories" languages="createProductCtrl.languages"></product-basic-info>
