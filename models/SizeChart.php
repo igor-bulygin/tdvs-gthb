@@ -60,7 +60,7 @@ class SizeChart extends CActiveRecord {
 		}
 
 		if($this->type == null) {
-			$this["type"] = 0;
+			$this["type"] = self::TODEVISE;
 		}
 
 		if($this->countries == null) {
