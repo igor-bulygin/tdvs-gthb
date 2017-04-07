@@ -205,7 +205,8 @@
 		}
 
 		function parseImages() {
-			vm.images = UtilService.parseImagesUrl(vm.product.media.photos, '/uploads/product/' + vm.product.id + '/');
+			var url = vm.product.id ? vm.product.id : 'temp';
+			vm.images = UtilService.parseImagesUrl(vm.product.media.photos, '/uploads/product/' + url + '/');
 		}
 
 		//watches
