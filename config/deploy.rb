@@ -1,4 +1,4 @@
-# mentos workarea
+# todevise 
 
 set :application, "todevise20"
 set :repository,  "git@github.com:jordioliu/todevise20.git"
@@ -8,12 +8,13 @@ set :deploy_via, :export
 set :copy_exclude, [".git/*", ".svn/*", ".DS_Store"]
 set :scm, :git
 set :use_sudo, false
+set :keep_releases, 5
 
 namespace :deploy do
   task :update do
     transaction do
       update_code
-   #   cleanup
+      cleanup
     end
   end
   task :finalize_update do
