@@ -132,6 +132,7 @@
 			
 			function onSaveProductSuccess(data) {
 				vm.disable_save_buttons = false;
+				vm.product.id = angular.copy(data.id);
 				if(state==='product_state_draft') {
 					saved_draft();
 				} else if(state === 'product_state_active') {
