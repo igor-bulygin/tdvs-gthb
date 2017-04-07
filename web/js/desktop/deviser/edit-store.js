@@ -21,7 +21,6 @@
 				vm.products.forEach(function(element) {
 					setMinimumPrice(element);
 				})
-				parseMainPhoto(vm.products);
 			}
 			var params = {
 				"deviser": person.short_id,
@@ -124,14 +123,6 @@
 			}else{
 				product.min_price = '-';
 			}
-		}
-
-		function parseMainPhoto(products) {
-			products.forEach(function (element) {
-					var main_photo = element.media.photos.find((photo) => {return photo.main_product_photo});
-					if (angular.isObject(main_photo))
-						element.main_photo = currentHost() + element.url_images + main_photo.name;
-				});
 		}
 
 		function open_modal_delete(id) {
