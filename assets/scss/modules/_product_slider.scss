@@ -20,18 +20,17 @@
     background-color: transparent;
     @include border-radius(0,0,0,0);
     display: block;
-    height: auto;
-    margin: 0 0 10px;
-    width: auto;
-    height: 75px;
-    margin: 0 5px 10px;
-    width: 75px;
+   	height: 54px;
+    margin: 0;
+    padding:0;
+    width: 54px;
     overflow: hidden;
+	border: none!important;
 }
 #carousel-custom .carousel-indicators li img {
     display: block;
     @include opacity(0.5);
-    height: 80px;
+    height: 50px;
 }
 #carousel-custom .carousel-indicators li.active img {
     @include opacity(1);
@@ -41,6 +40,7 @@
 }
 #carousel-custom .carousel-outer {
     position: relative;
+	background-color: #eee;
 }
 .product-slide{
     /*max-width: 480px!important;*/
@@ -58,7 +58,7 @@
     @include size(50px,50px);
     color: $black;
     display: block;
-    background-color: $background_grey;
+    background-color: $dark_grey;
     @include border-radius(32px,32px,32px,32px);
     text-shadow: none;
     font-size: 34px;
