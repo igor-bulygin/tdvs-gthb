@@ -1059,9 +1059,29 @@ class Product2 extends Product {
 	 */
 	public function existMediaFile($filename)
 	{
-		if (empty($filename)) { return false; }
+		if (empty($filename)) {
+			return false;
+		}
 
-		$filePath = $this->getUploadedFilesPath() . '/' . $filename;
+		$filePath = Utils::join_paths($this->getUploadedFilesPath(), $filename);
+
+		return file_exists($filePath);
+	}
+
+	/**
+	 * Check if Deviser media file is exists
+	 *
+	 * @param string $filename
+	 * @return bool
+	 */
+	public function existMediaTempFile($filename)
+	{
+		if (empty($filename)) {
+			return false;
+		}
+
+		$filePath = Utils::join_paths($this->getTempUploadedFilesPath(), $filename);
+
 		return file_exists($filePath);
 	}
 
@@ -1072,15 +1092,21 @@ class Product2 extends Product {
 	{
 		foreach ($this->media['photos'] as $onephoto) {
 			$this->moveTempFileToProductPath($onephoto['name']);
+			if (isset($onephoto['name_cropped'])) {
+				$this->moveTempFileToProductPath($onephoto['name_cropped']);
+			}
 		}
 		foreach ($this->media['description_photos'] as $onephoto) {
 			$this->moveTempFileToProductPath($onephoto['name']);
+			if (isset($onephoto['name_cropped'])) {
+				$this->moveTempFileToProductPath($onephoto['name_cropped']);
+			}
 		}
 	}
 
 	protected function moveTempFileToProductPath($file)
 	{
-		$tempFile = Utils::join_paths(Yii::getAlias("@product"), "temp", $file);
+		$tempFile = Utils::join_paths($this->getTempUploadedFilesPath(), $file);
 		if (!file_exists($tempFile)) {
 			return;
 		}
