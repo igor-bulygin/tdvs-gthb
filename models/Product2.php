@@ -649,35 +649,43 @@ class Product2 extends Product {
 	public function getMainImage($urlify = true)
 	{
 		$image = "";
-		$fallback = "product_placeholder.png";
+		$defaultImage = "product_placeholder.png";
 
-		if (isset($this->media) && isset($this->media["photos"])) {
+		if (isset($this->media) && !empty($this->media["photos"])) {
+			// Try to find the "main_product_photo"
 			foreach ($this->media["photos"] as $key => $photo) {
 				if (isset($photo["main_product_photo"]) && $photo["main_product_photo"]) {
+
+					// Try to get the cropped photo
 					if (isset($photo['name_cropped'])) {
 						$image = $photo["name_cropped"];
 					} else {
 						$image = $photo["name"];
 					}
+
 					break;
 				}
 			}
-		}
 
-		if ($image === "") {
-			if (count($this->media["photos"]) == 0) {
-				$image = $fallback;
-			} else {
+			if (!$image) {
+				// If there is no image... we use the first image
 				$image = $this->media["photos"][0]["name"];
 			}
+
+			if ($image && $this->existMediaFile($image)) {
+				// Only use the image if it exists...
+				if ($urlify) {
+					$image = Yii::getAlias("@product_url") . "/" . $this->short_id . "/" . $image;
+				}
+
+				return $image;
+			}
 		}
 
+		// Default image
+		$image = $defaultImage;
 		if ($urlify === true) {
-			if ($image === $fallback) {
-				$image = Yii::getAlias("@web") . "/imgs/" . $image;
-			} else {
-				$image = Yii::getAlias("@product_url") . "/" . $this->short_id . "/" . $image;
-			}
+			$image = Yii::getAlias("@web") . "/imgs/" . $image;
 		}
 
 		return $image;
