@@ -34,13 +34,34 @@ class PublicController extends CController
 
 	public function actionIndex()
 	{
-		$banners = Utils::getBannerImages();
+		return $this->mainPage();
+	}
+
+	public function actionCategoryB($slug, $category_id)
+	{
+		return $this->mainPage($slug, $category_id);
+	}
+
+	protected function mainPage($slug = null, $category_id = null) {
+
+		if ($category_id) {
+
+			$category = Category::findOne(["short_id" => $category_id]); /* @var Category $category */
+			$categoryShortIds = $category->getShortIds();
+
+			$banners = Utils::getBannerImages($category->getMainCategory());
+
+		} else {
+
+			$categoryShortIds = [];
+			$banners = Utils::getBannerImages();
+		}
 
 		// Devisers
-		$devisers = Person::getRandomDevisers(20);
+		$devisers = Person::getRandomDevisers(20, $categoryShortIds);
 
 		// Works
-		$works = Product2::getRandomWorks(300);
+		$works = Product2::getRandomWorks(300, $categoryShortIds);
 
 		// divide then in blocks to be rendered in bottom section
 		$moreWork = [];
@@ -56,7 +77,7 @@ class PublicController extends CController
 		$boxes = Box::getRandomBoxes(12, null, true);
 
 		// Influencers
-		$influencers = Person::getRandomInfluencers(12);
+		$influencers = Person::getRandomInfluencers(12, $categoryShortIds);
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("index-2", [
@@ -80,47 +101,6 @@ class PublicController extends CController
 			],
 			'totalInfluencers' => count($influencers),
 		]);
-	}
-
-	public function actionCategoryB($slug, $category_id)
-	{
-
-		// get the category object
-		$category = Category::findOne(["short_id" => $category_id]); /* @var Category $category */
-
-		// Devisers
-		$devisers = Person::getRandomDevisers(20, $category->getShortIds());
-
-		// Works
-		$works = Product2::getRandomWorks(300, $category->getShortIds());
-
-
-		// divide then in blocks to be rendered in bottom section
-		$moreWork = [];
-		for ($i = 0; $i < 19; $i++) {
-			$start = $i * 15;
-			$moreWork[] =  [
-				"twelve" => array_slice($works, $start, 12),
-				"three" => array_slice($works, ($start + 12), 3),
-			];
-		}
-		$banners = Utils::getBannerImages($category->getMainCategory());
-
-		$this->layout = '/desktop/public-2.php';
-		return $this->render("index-2", [
-			'banners' => $banners,
-			'totalDevisers' => count($devisers),
-				'devisers' => [
-				array_slice($devisers, 0, 5),
-				array_slice($devisers, 5, 5),
-				array_slice($devisers, 10, 5),
-				array_slice($devisers, 15, 5),
-			],
-			'works12' => array_slice($works, 0, 12),
-			'works3' => array_slice($works, 12, 3),
-			'moreWork' => $moreWork,
-		]);
-
 	}
 
 	public function actionBecomeDeviser()

@@ -246,7 +246,7 @@ $this->title = 'Todevise / Home';
 	</section>
 <?php } ?>
 
-<?php if ($influencers) { ?>
+<?php if ($totalInfluencers) { ?>
 	<section class="showcase-wrapper">
 		<div class="container">
 			<h3>Discover the works they love</h3>
