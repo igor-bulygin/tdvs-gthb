@@ -259,7 +259,12 @@ class Box extends CActiveRecord
 
 		// if product id is specified
 		if ((array_key_exists("product_id", $criteria)) && (!empty($criteria["product_id"]))) {
-			$query->andWhere(["product.product_id" => $criteria["product_id"]]);
+			$query->andWhere(["products.product_id" => $criteria["product_id"]]);
+		}
+
+		// if product id is specified
+		if ((array_key_exists("ignore_empty_boxes", $criteria)) && $criteria["ignore_empty_boxes"]) {
+			//TODO
 		}
 
 		// Count how many items are with those conditions, before limit them for pagination
@@ -309,6 +314,7 @@ class Box extends CActiveRecord
 
 	/**
 	 * Get the products related with this box
+	 * ATTENTION: If an unactive product is in the box, it will not be retrieved
 	 *
 	 * @return Product2[]
 	 */
@@ -319,7 +325,9 @@ class Box extends CActiveRecord
 		$products = $this->productsMapping;
 		foreach ($products as $item) {
 			$product = Product2::findOneSerialized($item->product_id);
-			$return[$item->created_at.'_'.$item->product_id] = $product;
+			if ($product->product_state == Product2::PRODUCT_STATE_ACTIVE) {
+				$return[$item->created_at . '_' . $item->product_id] = $product;
+			}
 		}
 		ksort($return); // Sort by key, to force products in creation order
 		$return = array_reverse($return); // Reverse to return in inverse order of creation
@@ -327,25 +335,47 @@ class Box extends CActiveRecord
 		return $return;
 	}
 
-
-	/**
-	 * Get a preview version of the products related with this box
-	 *
-	 * @return array
-	 */
 	public function getProductsPreview()
 	{
 		$return = [];
-
 		$products = $this->getProducts();
+		$sizes = [
+			1 => [
+				[295, 372],
+			],
+			2 => [
+				[295, 115],
+				[295, 257],
+			],
+			3 => [
+				[146, 116],
+				[145, 116],
+				[295, 257],
+			],
+		];
+		if (count($products) >= 3) {
+			$sizesSelected = $sizes[3];
+		} elseif (count($products) == 2) {
+			$sizesSelected = $sizes[2];
+		} else {
+			$sizesSelected = $sizes[1];
+		}
 
+		$i = 0;
 		foreach ($products as $product) {
-			$return[] = $product->getPreviewSerialized();
+			$item = $product->getPreviewSerialized();
+
+			if ($i < count($sizesSelected)) {
+				$size = $sizesSelected[$i];
+				$item['box_photo'] = Utils::url_scheme() . Utils::thumborize($product->getMainImage())->resize($size[0], $size[1]);
+			}
+			$return[] = $item;
+			$i++;
 		}
 
 		return $return;
 	}
-	
+
 	public function getPerson() {
 		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_PUBLIC);
 

@@ -184,7 +184,7 @@ $this->title = 'Todevise / Home';
 			</div>
 			<div>
 				<?php foreach ($boxes as $box) {
-					$products = $box->getProducts(); ?>
+					$products = $box->getProductsPreview(); ?>
 					<div class="col-md-4 col-xs-6 pad-grid">
 						<div class="boxes-wrapper">
 							<?php if (empty($products)) { ?>
@@ -192,49 +192,18 @@ $this->title = 'Todevise / Home';
 									<span class="empty-title">Empty box</span>
 								</div>
 							<?php } else {
-								$sizes = [
-									1 => [
-										[295, 372],
-									],
-									2 => [
-										[295, 115],
-										[295, 257],
-									],
-									3 => [
-										[146, 116],
-										[145, 116],
-										[295, 257],
-									],
-								];
-								if (count($products) >= 3) {
-									$size = $sizes[3];
-								} elseif (count($products) == 2) {
-									$size = $sizes[2];
-								} else {
-									$size = $sizes[1];
-								}
-								$count = 0;
+								$count  = 1;
 								foreach ($products as $product) {
-									if ($product->product_state != \app\models\Product2::PRODUCT_STATE_ACTIVE || $count > 3) {
-										continue;
-									}
-									$count++;
-									if ($count == 1) { ?>
-										<a href="<?= $product->getViewLink()?>">
-											<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getMainImage())->resize($size[0][0], $size[0][1]) ?>">
-										</a>
-									<?php } elseif ($count == 2) { ?>
-										<a href="<?= $product->getViewLink()?>">
-											<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getMainImage())->resize($size[1][0], $size[1][1]) ?>">
-										</a>
-									<?php } elseif ($count == 3) { ?>
-										<a href="<?= $product->getViewLink()?>">
-											<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getMainImage())->resize($size[2][0], $size[2][1]) ?>">
-										</a>
-									<?php } ?>
-								<?php } ?>
+									if ($count > 3) {
+										break;
+									} ?>
+									<a href="<?= $product['link']?>">
+										<img class="grid-image" src="<?=$product['box_photo']?>">
+									</a>
+									<?php
+									$count ++;
+								} ?>
 							<?php } ?>
-
 							<a class="group-box-title" href="<?= $box->getViewLink() ?>">
 								<span><?=$box->name?> (<?=count($products)?>)</span>
 							</a>
