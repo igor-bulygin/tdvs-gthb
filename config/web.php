@@ -235,6 +235,7 @@ $config = [
 				//Discover
 				'discover-devisers' => 'discover/devisers',
 				'discover-influencers' => 'discover/influencers',
+				'explore-boxes' => 'discover/boxes',
 
 				// Request become a Deviser
 				'/become-a-deviser' => 'public/become-deviser',

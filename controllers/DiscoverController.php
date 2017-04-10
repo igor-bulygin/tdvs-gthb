@@ -19,4 +19,10 @@ class DiscoverController extends CController
 		return $this->render("devisers", []);
 	}
 
+	public function actionBoxes()
+	{
+		$this->layout = '/desktop/public-2.php';
+		return $this->render("boxes", []);
+	}
+
 }
