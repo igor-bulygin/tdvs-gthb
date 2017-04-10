@@ -7,7 +7,8 @@ Index2Asset::register($this);
 
 $this->title = 'Todevise / Home';
 
-/** @var Person $deviser */
+/** @var Person[][] $devisers */
+/** @var Person[][] $influencers */
 /** @var \app\models\Product2 $work */
 
 ?>
@@ -240,6 +241,54 @@ $this->title = 'Todevise / Home';
 						</div>
 					</div>
 				<?php } ?>
+			</div>
+		</div>
+	</section>
+<?php } ?>
+
+<?php if ($influencers) { ?>
+	<section class="showcase-wrapper">
+		<div class="container">
+			<h3>Discover the works they love</h3>
+			<div class="section-title">
+				Influencers
+			</div>
+			<!-- Controls -->
+			<div class="prev-next-wrapper">
+				<?php if ($totalInfluencers > 5) { ?>
+					<a class="prev" href="#carousel-influencers" role="button" data-slide="prev">
+						<i class="ion-ios-arrow-left"></i>
+						<span>Previous</span>
+					</a>
+					<a class="next" href="#carousel-influencers" role="button" data-slide="next">
+						<span>Next</span>
+						<i class="ion-ios-arrow-right"></i>
+					</a>
+				<?php } ?>
+			</div>
+			<div class="<?= $totalInfluencers > 3 ? 'carousel slide' : ''?>" id="carousel-influencers" data-ride="carousel">
+				<div class="<?= $totalInfluencers > 3 ? 'carousel-inner' : ''?>" role="listbox">
+					<?php foreach ($influencers as $i => $group) { ?>
+						<div class="item <?= ($i==0) ? 'active' : '' ?>">
+							<?php foreach ($group as $i => $influencer) { ?>
+								<div class="col-md-15 col-sm-15 col-xs-6 pad-showcase">
+									<a href="<?= $influencer->getLovedLink()?>">
+										<figure class="showcase">
+											<button class="btn btn-default btn-follow"><i class="ion-star"></i><span>Follow</span>
+											</button>
+											<img src="<?= Utils::url_scheme() ?><?= Utils::thumborize($influencer->getHeaderBackgroundImage())->resize(350, 344) ?>" class="showcase-image">
+											<figcaption>
+												<img class="showcase-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($influencer->getAvatarImage())->resize(0, 110) ?>">
+												<span class="name"><?= $influencer->personalInfoMapping->getBrandName() ?></span>
+												<span class="location"><?= $influencer->personalInfoMapping->getCityLabel() ?></span>
+											</figcaption>
+										</figure>
+									</a>
+								</div>
+							<?php } ?>
+						</div>
+					<?php } ?>
+				</div>
 			</div>
 		</div>
 	</section>

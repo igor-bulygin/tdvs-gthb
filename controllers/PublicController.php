@@ -52,7 +52,11 @@ class PublicController extends CController
 			];
 		}
 
-		$boxes = Box::getRandomBoxes(9, null, true);
+		// Boxes
+		$boxes = Box::getRandomBoxes(12, null, true);
+
+		// Influencers
+		$influencers = Person::getRandomInfluencers(12);
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("index-2", [
@@ -68,6 +72,13 @@ class PublicController extends CController
 			'works3' => array_slice($works, 12, 3),
 			'moreWork' => $moreWork,
 			'boxes' => $boxes,
+			'influencers' => [
+				array_slice($influencers, 0, 3),
+				array_slice($influencers, 3, 3),
+				array_slice($influencers, 6, 3),
+				array_slice($influencers, 9, 3),
+			],
+			'totalInfluencers' => count($influencers),
 		]);
 	}
 

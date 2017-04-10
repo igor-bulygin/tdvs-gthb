@@ -1550,4 +1550,67 @@ class Person extends CActiveRecord implements IdentityInterface
 
 		return $devisers;
 	}
+
+	/**
+	 * Returns a number of random devisers.
+	 *
+	 * @param int $limit
+	 * @param array $categories
+	 *
+	 * @return Product2[]
+	 */
+	public static function getRandomInfluencers($limit, $categories = [])
+	{
+		// Filter by influencer and exclude unpublished profiles
+		$conditions[] =
+			[
+				'$match' => [
+					"type" => [
+						'$in' => [
+							Person::INFLUENCER,
+						]
+					],
+					"account_state" => [
+						'$ne' => [
+							Person::ACCOUNT_STATE_BLOCKED,
+							Person::ACCOUNT_STATE_DRAFT,
+						]
+					],
+				],
+			];
+
+		if (!empty($categories)) {
+			// Filter by category
+			$conditions[] =
+				[
+					'$match' => [
+						"categories" => [
+							'$in' => $categories
+						]
+					]
+				];
+		}
+		// Randomize
+		$conditions[] =
+			[
+				'$sample' => [
+					'size' => $limit,
+				]
+			];
+
+		$randomInfluencers = Yii::$app->mongodb->getCollection('person')->aggregate($conditions);
+
+		$deviserIds = [];
+		foreach ($randomInfluencers as $influencer) {
+			$deviserIds[] = $influencer['short_id'];
+		}
+
+
+		$query = new ActiveQuery(Person::className());
+		$query->where(['in', 'short_id', $deviserIds]);
+		$influencers = $query->all();
+		shuffle($influencers);
+
+		return $influencers;
+	}
 }
