@@ -23,7 +23,7 @@
 	}
 
 	var component = {
-		templateUrl: currentHost() + '/js/desktop/discover/results/results.html',
+		templateUrl: currentHost() + '/js/desktop/discover/person/results/results.html',
 		controller: controller,
 		controllerAs: 'discoverResultsCtrl',
 		bindings: {

@@ -6,7 +6,7 @@
 	}
 
 	var component = {
-		templateUrl: currentHost() + '/js/desktop/discover/card/card.html',
+		templateUrl: currentHost() + '/js/desktop/discover/person/card/card.html',
 		controller: controller,
 		controllerAs: 'discoverCardCtrl',
 		bindings: {

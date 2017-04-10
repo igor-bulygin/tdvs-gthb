@@ -8,10 +8,10 @@ class DiscoverAsset extends AssetBundle {
 	public $baseUrl = '@web';
 	public $css = [];
 	public $js = [
-		'js/desktop/discover/discoverCtrl.js',
-		'js/desktop/discover/results/results.js',
-		'js/desktop/discover/card/card.js',
-		'js/desktop/discover/filters/filters.js',
+		'js/desktop/discover/person/discoverCtrl.js',
+		'js/desktop/discover/person/results/results.js',
+		'js/desktop/discover/person/card/card.js',
+		'js/desktop/discover/person/filters/filters.js',
 	];
 	public $depends = [
 		'app\assets\desktop\pub\PublicCommonAsset',

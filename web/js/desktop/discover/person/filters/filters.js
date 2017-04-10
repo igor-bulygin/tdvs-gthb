@@ -51,7 +51,7 @@
 	}
 
 	var component = {
-		templateUrl: currentHost() + '/js/desktop/discover/filters/filters.html',
+		templateUrl: currentHost() + '/js/desktop/discover/person/filters/filters.html',
 		controller: controller,
 		controllerAs: 'discoverFiltersCtrl',
 		bindings: {
