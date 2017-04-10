@@ -55,7 +55,7 @@ $this->params['person_links_target'] = 'public_view';
 	</div>
 </div>
 <div class="modal fade" id="carouselModal">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" title="Close"><span class="glyphicon glyphicon-remove"></span></button>
@@ -67,7 +67,7 @@ $this->params['person_links_target'] = 'public_view';
 					$active = true;
 					foreach($press as $modal_index=>$item) { ?>
 						<div class="item <?=$active ? 'active' : ''?>">
-							<img src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getUrlImagesLocation() . $item)->resize(355, 0) ?>">
+							<img src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getUrlImagesLocation() . $item)->resize(0, 0) ?>">
 						</div>
 					<?php
 						$active = false;
