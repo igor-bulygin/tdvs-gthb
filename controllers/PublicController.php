@@ -6,6 +6,7 @@ use app\helpers\CController;
 use app\helpers\ModelUtils;
 use app\helpers\Utils;
 use app\models\Become;
+use app\models\Box;
 use app\models\Category;
 use app\models\ContactForm;
 use app\models\Faq;
@@ -51,6 +52,8 @@ class PublicController extends CController
 			];
 		}
 
+		$boxes = Box::getRandomBoxes(9, null, true);
+
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("index-2", [
 			'banners' => $banners,
@@ -64,6 +67,7 @@ class PublicController extends CController
 			'works12' => array_slice($works, 0, 12),
 			'works3' => array_slice($works, 12, 3),
 			'moreWork' => $moreWork,
+			'boxes' => $boxes,
 		]);
 	}
 

@@ -87,7 +87,7 @@ class ProductMedia extends EmbedModel
 		$product = $this->getParentObject(); /* @var Product2 $product */
 		$photos = $this->$attribute; /* @var ProductPhoto[] $photos */
 		foreach ($photos as $photo) {
-			if (!$product->existMediaFile($photo->name)) {
+			if (!$product->existMediaFile($photo->name) && !$product->existMediaTempFile($photo->name)) {
 				$this->addError($attribute, sprintf('File %s not found', $photo->name));
 			}
 		}

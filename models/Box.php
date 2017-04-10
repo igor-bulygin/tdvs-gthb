@@ -454,19 +454,47 @@ class Box extends CActiveRecord
 	 * Returns a number of random boxes
 	 *
 	 * @param int $limit
+	 * @param int $idBoxIgnore A box id to ignore in the results
+	 * @param bool $onlyActiveAndNotEmpty If TRUE, only not empty boxes of active accounts are retrieved
 	 * @return Box[]
 	 */
-	public static function getRandomBoxes($limit, $idBoxIgnore)
+	public static function getRandomBoxes($limit, $idBoxIgnore = null, $onlyActiveAndNotEmpty = false)
 	{
-		// Exclude drafts
-		$conditions[] =
-			[
-				'$match' => [
-					"short_id" => [
-						'$ne' => $idBoxIgnore,
+		$conditions = [];
+
+		// Ignored box
+		if ($idBoxIgnore) {
+			$conditions[] =
+				[
+					'$match' => [
+						"short_id" => [
+							'$ne' => $idBoxIgnore,
+						]
 					]
-				]
-			];
+				];
+		}
+
+		if ($onlyActiveAndNotEmpty) {
+			$activePersons = Person::findSerialized(['account_state' => Person::ACCOUNT_STATE_ACTIVE]);
+			$idsActivePersons = [];
+			foreach ($activePersons as $activePerson) {
+				$idsActivePersons[] = $activePerson->short_id;
+			}
+			$conditions[] =
+				[
+					'$match' => [
+						'products' => [
+							'$exists' => true,
+							'$not' => [
+								'$size' => 0,
+							]
+						],
+						'person_id' => [
+							'$in' => $idsActivePersons,
+						],
+					]
+				];
+		}
 
 		// Randomize
 		$conditions[] =
