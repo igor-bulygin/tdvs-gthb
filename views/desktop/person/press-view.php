@@ -63,11 +63,15 @@ $this->params['person_links_target'] = 'public_view';
 			<div class="modal-body">
 				<div id="pressGallery" class="carousel slide" data-interval="false">
 						<div class="carousel-inner">
-					<?php foreach($press as $modal_index=>$item) { ?>
-							<div class="item">
-								<img src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getUrlImagesLocation() . $item)->resize(355, 0) ?>">
-							</div>
-					<?php } ?>
+					<?php
+					$active = true;
+					foreach($press as $modal_index=>$item) { ?>
+						<div class="item <?=$active ? 'active' : ''?>">
+							<img src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getUrlImagesLocation() . $item)->resize(355, 0) ?>">
+						</div>
+					<?php
+						$active = false;
+					} ?>
 						</div>
 				</div>
 				<a href="#pressGallery" class="left carousel-control" role="button" data-slide="prev">&lt;</span></a>

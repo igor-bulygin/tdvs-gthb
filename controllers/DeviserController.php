@@ -85,7 +85,7 @@ class DeviserController extends CController
 		]);
 
 		$this->layout = '/desktop/public-2.php';
-		return $this->render("store-view", [
+		return $this->render("@app/views/desktop/person/store-view", [
 			'person' => $person,
 			'products' => $products,
 			'categories' => $categories,
@@ -127,7 +127,7 @@ class DeviserController extends CController
 		]);
 
 		$this->layout = '/desktop/public-2.php';
-		return $this->render("store-edit", [
+		return $this->render("@app/views/desktop/person/store-edit", [
 			'person' => $person,
 			'categories' => $categories,
 			'selectedCategory' => $selectedCategory,
@@ -153,7 +153,7 @@ class DeviserController extends CController
 		}
 
 		$this->layout = '/desktop/public-2.php';
-		return $this->render("about-view", [
+		return $this->render("@app/views/desktop/person/about-view", [
 			'person' => $person,
 		]);
 	}
@@ -171,7 +171,7 @@ class DeviserController extends CController
 		}
 
 		$this->layout = '/desktop/public-2.php';
-		return $this->render("about-edit", [
+		return $this->render("@app/views/desktop/person/about-edit", [
 			'person' => $person,
 		]);
 	}
@@ -189,7 +189,7 @@ class DeviserController extends CController
 		}
 
 		$this->layout = '/desktop/public-2.php';
-		return $this->render("press-view", [
+		return $this->render("@app/views/desktop/person/press-view", [
 			'person' => $person,
 			'press' => $person->press,
 		]);
@@ -209,7 +209,7 @@ class DeviserController extends CController
 		}
 
 		$this->layout = '/desktop/public-2.php';
-		return $this->render("press-edit", [
+		return $this->render("@app/views/desktop/person/press-edit", [
 			'person' => $person,
 		]);
 	}
@@ -227,7 +227,7 @@ class DeviserController extends CController
 		}
 
 		$this->layout = '/desktop/public-2.php';
-		return $this->render("videos-view", [
+		return $this->render("@app/views/desktop/person/videos-view", [
 			'person' => $person,
 			'videos' => $person->videosMapping,
 		]);
@@ -247,7 +247,7 @@ class DeviserController extends CController
 		}
 
 		$this->layout = '/desktop/public-2.php';
-		return $this->render("videos-edit", [
+		return $this->render("@app/views/desktop/person/videos-edit", [
 			'person' => $person,
 		]);
 	}
@@ -265,7 +265,7 @@ class DeviserController extends CController
 		}
 
 		$this->layout = '/desktop/public-2.php';
-		return $this->render("faq-view", [
+		return $this->render("@app/views/desktop/person/faq-view", [
 			'person' => $person,
 			'faq' => $person->faq,
 		]);
@@ -285,7 +285,7 @@ class DeviserController extends CController
 		}
 
 		$this->layout = '/desktop/public-2.php';
-		return $this->render("faq-edit", [
+		return $this->render("@app/views/desktop/person/faq-edit", [
 			'person' => $person,
 		]);
 	}
