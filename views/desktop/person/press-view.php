@@ -58,7 +58,7 @@ $this->params['person_links_target'] = 'public_view';
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-body">
-				<button type="button" class="close" data-dismiss="modal" title="Close"><span class="glyphicon glyphicon-remove"></span></button>
+				<button type="button" class="close" data-dismiss="modal" title="Close"><span class="ion-ios-close-empty"></span></button>
 				<div id="pressGallery" class="carousel slide" data-interval="false">
 						<div class="carousel-inner">
 					<?php
@@ -72,8 +72,8 @@ $this->params['person_links_target'] = 'public_view';
 					} ?>
 						</div>
 				</div>
-				<a href="#pressGallery" class="left carousel-control" role="button" data-slide="prev">&lt;</a>
-				<a href="#pressGallery" class="right carousel-control" role="button" data-slide="next">&gt;</a>
+				<a href="#pressGallery" class="left carousel-control" role="button" data-slide="prev"><i class="ion-ios-arrow-left"></i></a>
+				<a href="#pressGallery" class="right carousel-control" role="button" data-slide="next"><i class="ion-ios-arrow-right"></i></a>
 			</div>
 		</div>
 	</div>

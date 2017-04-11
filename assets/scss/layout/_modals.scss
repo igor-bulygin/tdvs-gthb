@@ -128,10 +128,11 @@
 	.modal-body{
 		padding: 0;
 		.close{
-			top: 10px;
+			top: 0;
 			position: absolute;
-			right: 10px;
-			z-index: 999;
+			right: 15px;
+    		z-index: 999;
+    		font-size: 50px;
 		}
 		.carousel-control{
 			top:300px;
