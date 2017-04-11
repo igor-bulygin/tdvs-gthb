@@ -264,7 +264,7 @@ class Box extends CActiveRecord
 
 		// if ignore_empty_boxes is specified
 		if ((array_key_exists("ignore_empty_boxes", $criteria)) && $criteria["ignore_empty_boxes"]) {
-			//TODO
+			$query->andWhere(["<>", "products", []]);
 		}
 
 		// if countries are specified
