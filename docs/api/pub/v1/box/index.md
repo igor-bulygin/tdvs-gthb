@@ -14,6 +14,7 @@ Box
   
 **Request parameters**:
 * `id`: Filter a specific product for id
+* `q`: Search word/s in name and description (LIKE)
 * `person_id`: Filter boxes of a specific person only
 * `product_id`: Filter boxes of a specific product only
 * `ignore_empty_boxes`: Boolean, to get only boxes with at least one product

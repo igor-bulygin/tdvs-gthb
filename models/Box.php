@@ -65,7 +65,12 @@ class Box extends CActiveRecord
 	 */
 	public static $translatedAttributes = [];
 
-	public static $textFilterAttributes = [];
+	/**
+	 * The attributes that should be used when a keyword search is done
+	 *
+	 * @var array
+	 */
+	public static $textFilterAttributes = ['name', 'description', ''];
 
 	/**
 	 * Initialize model attributes
@@ -295,6 +300,12 @@ class Box extends CActiveRecord
 			} else {
 				$query->andFilterWhere(["in", "person_id", "dummy_person"]); // Force no results if there are no boxes
 			}
+		}
+
+		// if text is specified
+		if ((array_key_exists("text", $criteria)) && (!empty($criteria["text"]))) {
+//			// search the word in all available languages
+			$query->andFilterWhere(static::getFilterForText(static::$textFilterAttributes, $criteria["text"]));
 		}
 
 		// Count how many items are with those conditions, before limit them for pagination

@@ -34,6 +34,7 @@ class BoxController extends AppPublicController
 
 		$boxs = Box::findSerialized([
 			"id" => Yii::$app->request->get("id"),
+			"text" => Yii::$app->request->get("q"), // search in name, description, and more
 			"person_id" => Yii::$app->request->get("person_id"),
 			"product_id" => Yii::$app->request->get("product_id"),
 			"ignore_empty_boxes" => Yii::$app->request->get("ignore_empty_boxes", false),
