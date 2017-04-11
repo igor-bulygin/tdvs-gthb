@@ -1144,6 +1144,9 @@ input[type="radio"] .styled:checked + label::after {
   height: 23px;
   display: inline-block; }
 
+.full-modal .modal-header {
+  padding: 0; }
+
 .error-input .btn-default {
   border-color: #924cfc; }
 .error-input label::before {
@@ -3764,7 +3767,9 @@ input[type="radio"] .styled:checked + label::after {
 
 .boxes-wrapper {
   position: relative;
-  margin-bottom: 30px; }
+  margin-bottom: 30px;
+  overflow: hidden;
+  max-width: 295px; }
 
 .more-boxes-wrapper {
   padding: 0 0 100px; }
