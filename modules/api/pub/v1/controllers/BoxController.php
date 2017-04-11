@@ -37,6 +37,7 @@ class BoxController extends AppPublicController
 			"person_id" => Yii::$app->request->get("person_id"),
 			"product_id" => Yii::$app->request->get("product_id"),
 			"ignore_empty_boxes" => Yii::$app->request->get("ignore_empty_boxes", false),
+			"countries" => Yii::$app->request->get("countries"),
 			"limit" => $limit,
 			"offset" => $offset,
 		]);

@@ -262,9 +262,24 @@ class Box extends CActiveRecord
 			$query->andWhere(["products.product_id" => $criteria["product_id"]]);
 		}
 
-		// if product id is specified
+		// if ignore_empty_boxes is specified
 		if ((array_key_exists("ignore_empty_boxes", $criteria)) && $criteria["ignore_empty_boxes"]) {
 			//TODO
+		}
+
+		// if countries are specified
+		if ((array_key_exists("countries", $criteria)) && (!empty($criteria["countries"]))) {
+
+			// Get different person_ids available by country
+			$queryPerson= new ActiveQuery(Person::className());
+			$queryPerson->andWhere(["in", "personal_info.country", $criteria["countries"]]);
+			$idsPerson = $queryPerson->distinct("short_id");
+
+			if ($idsPerson) {
+				$query->andFilterWhere(["in", "person_id", $idsPerson]);
+			} else {
+				$query->andFilterWhere(["in", "person_id", "dummy_person"]); // Force no results if there are no boxes
+			}
 		}
 
 		// Count how many items are with those conditions, before limit them for pagination

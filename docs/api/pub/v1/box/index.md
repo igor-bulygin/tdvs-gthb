@@ -17,6 +17,7 @@ Box
 * `person_id`: Filter boxes of a specific person only
 * `product_id`: Filter boxes of a specific product only
 * `ignore_empty_boxes`: Boolean, to get only boxes with at least one product
+* `countries`: Array of country codes, to filter boxes of persons related with any country of the list
 * `page`: Set the result page that want to be retrieved (default: 1)
 * `limit`: Limit the results returned for page (default: 20)
 
