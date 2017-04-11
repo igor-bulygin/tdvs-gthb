@@ -124,7 +124,24 @@
     display: inline-block;
 }
 .full-modal{
-	.modal-header{
+	z-index: 9999999;
+	.modal-body{
 		padding: 0;
+		.close{
+			top: 10px;
+			position: absolute;
+			right: 10px;
+			z-index: 999;
+		}
+		.carousel-control{
+			top:300px;
+			font-size: 50px;
+			&.right{
+				right: -35px;
+			}
+			&.left{
+				left: -35px;
+			}
+		}
 	}
 }

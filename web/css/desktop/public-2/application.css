@@ -1144,8 +1144,22 @@ input[type="radio"] .styled:checked + label::after {
   height: 23px;
   display: inline-block; }
 
-.full-modal .modal-header {
-  padding: 0; }
+.full-modal {
+  z-index: 9999999; }
+  .full-modal .modal-body {
+    padding: 0; }
+    .full-modal .modal-body .close {
+      top: 10px;
+      position: absolute;
+      right: 10px;
+      z-index: 999; }
+    .full-modal .modal-body .carousel-control {
+      top: 300px;
+      font-size: 50px; }
+      .full-modal .modal-body .carousel-control.right {
+        right: -35px; }
+      .full-modal .modal-body .carousel-control.left {
+        left: -35px; }
 
 .error-input .btn-default {
   border-color: #924cfc; }

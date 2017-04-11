@@ -57,10 +57,8 @@ $this->params['person_links_target'] = 'public_view';
 <div class="modal full-modal fade" id="carouselModal">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" title="Close"><span class="glyphicon glyphicon-remove"></span></button>
-			</div>
 			<div class="modal-body">
+				<button type="button" class="close" data-dismiss="modal" title="Close"><span class="glyphicon glyphicon-remove"></span></button>
 				<div id="pressGallery" class="carousel slide" data-interval="false">
 						<div class="carousel-inner">
 					<?php
