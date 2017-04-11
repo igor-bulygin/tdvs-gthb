@@ -282,6 +282,21 @@ class Box extends CActiveRecord
 			}
 		}
 
+		// if countries are specified
+		if ((array_key_exists("only_active_persons", $criteria)) && (!empty($criteria["only_active_persons"]))) {
+
+			// Get different person_ids available by country
+			$queryPerson= new ActiveQuery(Person::className());
+			$queryPerson->andWhere(["account_state" => Person::ACCOUNT_STATE_ACTIVE]);
+			$idsPerson = $queryPerson->distinct("short_id");
+
+			if ($idsPerson) {
+				$query->andFilterWhere(["in", "person_id", $idsPerson]);
+			} else {
+				$query->andFilterWhere(["in", "person_id", "dummy_person"]); // Force no results if there are no boxes
+			}
+		}
+
 		// Count how many items are with those conditions, before limit them for pagination
 		static::$countItemsFound = $query->count();
 

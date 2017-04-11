@@ -15,6 +15,7 @@ Example about how to call to Web Service to get a private lists of Boxes of the 
 **Request parameters**:
 * `id`: Filter a specific product for id
 * `product_id`: Filter boxes of a specific product only
+* `ignore_empty_boxes`: Boolean, to get only boxes with at least one product
 * `page`: Set the result page that want to be retrieved (default: 1)
 * `limit`: Limit the results returned for page (default: 20)
 
