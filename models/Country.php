@@ -139,13 +139,17 @@ class Country extends CActiveRecord
 
 		// if only_with_boxes is specified
 		if ((array_key_exists("only_with_boxes", $criteria)) && (!empty($criteria["only_with_boxes"]))) {
-			// Get ids of persons with boxes
-			$boxes = Box::findSerialized();
+
+			// Get all boxes not empty and actives
+			$boxes = Box::findSerialized([
+				"ignore_empty_boxes" => true,
+				"only_active_persons" => true,
+			]);
+
 			$idsPersons = [];
 			foreach ($boxes as $box) {
 				$idsPersons[] = $box->person_id;
 			}
-
 
 			// Get different countries of persons with boxes
 			if ($idsPersons) {
