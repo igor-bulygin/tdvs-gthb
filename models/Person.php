@@ -1502,9 +1502,9 @@ class Person extends CActiveRecord implements IdentityInterface
 
 			$randomWorks = Yii::$app->mongodb->getCollection('product')->aggregate($conditions);
 
-			$deviserIds = [];
+			$personIds = [];
 			foreach ($randomWorks as $work) {
-				$deviserIds[] = $work['deviser_id'];
+				$personIds[] = $work['deviser_id'];
 			}
 
 		} else {
@@ -1519,7 +1519,7 @@ class Person extends CActiveRecord implements IdentityInterface
 							]
 						],
 						"account_state" => [
-							'$ne' => [
+							'$nin' => [
 								Person::ACCOUNT_STATE_BLOCKED,
 								Person::ACCOUNT_STATE_DRAFT,
 							]
@@ -1534,21 +1534,21 @@ class Person extends CActiveRecord implements IdentityInterface
 					]
 				];
 
-			$randomDevisers = Yii::$app->mongodb->getCollection('person')->aggregate($conditions);
+			$randomPersons = Yii::$app->mongodb->getCollection('person')->aggregate($conditions);
 
-			$deviserIds = [];
-			foreach ($randomDevisers as $deviser) {
-				$deviserIds[] = $deviser['short_id'];
+			$personIds = [];
+			foreach ($randomPersons as $deviser) {
+				$personIds[] = $deviser['short_id'];
 			}
 		}
 
 
 		$query = new ActiveQuery(Person::className());
-		$query->where(['in', 'short_id', $deviserIds]);
-		$devisers = $query->all();
-		shuffle($devisers);
+		$query->where(['in', 'short_id', $personIds]);
+		$persons = $query->all();
+		shuffle($persons);
 
-		return $devisers;
+		return $persons;
 	}
 
 	/**
@@ -1571,7 +1571,7 @@ class Person extends CActiveRecord implements IdentityInterface
 						]
 					],
 					"account_state" => [
-						'$ne' => [
+						'$nin' => [
 							Person::ACCOUNT_STATE_BLOCKED,
 							Person::ACCOUNT_STATE_DRAFT,
 						]
@@ -1598,19 +1598,19 @@ class Person extends CActiveRecord implements IdentityInterface
 				]
 			];
 
-		$randomInfluencers = Yii::$app->mongodb->getCollection('person')->aggregate($conditions);
+		$randomPersons = Yii::$app->mongodb->getCollection('person')->aggregate($conditions);
 
-		$deviserIds = [];
-		foreach ($randomInfluencers as $influencer) {
-			$deviserIds[] = $influencer['short_id'];
+		$personIds = [];
+		foreach ($randomPersons as $influencer) {
+			$personIds[] = $influencer['short_id'];
 		}
 
 
 		$query = new ActiveQuery(Person::className());
-		$query->where(['in', 'short_id', $deviserIds]);
-		$influencers = $query->all();
-		shuffle($influencers);
+		$query->where(['in', 'short_id', $personIds]);
+		$persons = $query->all();
+		shuffle($persons);
 
-		return $influencers;
+		return $persons;
 	}
 }

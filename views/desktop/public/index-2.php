@@ -8,8 +8,14 @@ Index2Asset::register($this);
 $this->title = 'Todevise / Home';
 
 /** @var Person[][] $devisers */
+/** @var int $totalDevisers */
 /** @var Person[][] $influencers */
-/** @var \app\models\Product2 $work */
+/** @var int $totalInfluencers */
+/** @var \app\models\Product2[] $works12 */
+/** @var \app\models\Product2[] $works3 */
+/** @var \app\models\Product2[][] $moreWork */
+/** @var \app\models\Box[] $boxes */
+/** @var array $banners */
 
 ?>
 
@@ -152,7 +158,7 @@ $this->title = 'Todevise / Home';
 					<div class="<?= $totalDevisers > 5 ? 'carousel-inner' : ''?>" role="listbox">
 						<?php foreach ($devisers as $i => $group) { ?>
 					<div class="item <?= ($i==0) ? 'active' : '' ?>">
-						<?php foreach ($group as $i => $deviser) { ?>
+						<?php foreach ($group as $k => $deviser) { ?>
 						<div class="col-md-15 col-sm-15 col-xs-6 pad-showcase">
 								<a href="<?= $deviser->getStoreLink()?>">
 								<figure class="showcase">
@@ -239,7 +245,7 @@ $this->title = 'Todevise / Home';
 				<div class="<?= $totalInfluencers > 3 ? 'carousel-inner' : ''?>" role="listbox">
 					<?php foreach ($influencers as $i => $group) { ?>
 						<div class="item <?= ($i==0) ? 'active' : '' ?>">
-							<?php foreach ($group as $i => $influencer) { ?>
+							<?php foreach ($group as $k => $influencer) { ?>
 								<div class="col-md-15 col-sm-15 col-xs-6 pad-showcase">
 									<a href="<?= $influencer->getLovedLink()?>">
 										<figure class="showcase">
