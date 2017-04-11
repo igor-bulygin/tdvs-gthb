@@ -11,7 +11,7 @@
 			vm.results_infinite = vm.results_infinite.concat(vm.results.items.slice(last, last+show_items));
 		}
 
-		$scope.$watch('discoverResultsCtrl.results', function(newValue, oldValue) {
+		$scope.$watch('exploreBoxesResultsCtrl.results', function(newValue, oldValue) {
 			if(angular.isObject(newValue)) {
 				if(newValue.items.length > 0)
 					vm.results_infinite = newValue.items.slice(0, show_items);
@@ -19,13 +19,13 @@
 					vm.results_infinite = [];
 				}
 			}
-		}, true)
+		}, true);
 	}
 
 	var component = {
-		templateUrl: currentHost() + '/js/desktop/discover/person/results/results.html',
+		templateUrl: currentHost() + '/js/desktop/discover/boxes/results/results.html',
 		controller: controller,
-		controllerAs: 'discoverResultsCtrl',
+		controllerAs: 'exploreBoxesResultsCtrl',
 		bindings: {
 			results: '<'
 		}
@@ -33,6 +33,6 @@
 
 	angular
 		.module('todevise')
-		.component('discoverResults', component);
+		.component('exploreBoxesResults', component);
 
 }());

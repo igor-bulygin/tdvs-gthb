@@ -8,7 +8,9 @@ class ExploreBoxesAsset extends AssetBundle {
 	public $baseUrl = '@web';
 	public $css = [];
 	public $js = [
-		'js/desktop/discover/boxes/exploreBoxesCtrl.js'
+		'js/desktop/discover/boxes/exploreBoxesCtrl.js',
+		'js/desktop/discover/boxes/filters/filters.js',
+		'js/desktop/discover/boxes/results/results.js',
 	];
 	public $depends = [
 		'app\assets\desktop\pub\PublicCommonAsset',

@@ -12,7 +12,6 @@
 			search(vm.form);
 		}
 
-		/* use init_search to save all devisers on init and minimize calls to server*/
 		function search(form) {
 			delete vm.results;
 			vm.searching = true;

@@ -1,8 +1,10 @@
 (function () {
 	"use strict";
 
-	function controller(UtilService, boxDataService) {
+	function controller(UtilService, boxDataService, $scope) {
 		var vm = this;
+		vm.search = search;
+		vm.filters = {};
 
 		init();
 
@@ -10,33 +12,43 @@
 			search();
 		}
 
-		function search() {
-			function onGetBoxesSuccess(data) {
-				vm.results = angular.copy(data);
-				
-				// filter only boxes with > 0 products
-				vm.boxes = vm.results.items.filter((box) => {
-					return angular.isArray(box.products) && box.products.length > 0;
-				});
-
-				//parse main_product_photo
-				vm.boxes = vm.boxes.map((box) => {
-					box.products = box.products.map((product) => {
-						product.main_photo = product.media.photos.find((photo) => {
-							return photo.main_product_photo
-						})
-						return product;
-					})
-					return box;
-				})
-			}
-
+		function search(form) {
+			delete vm.results;
+			vm.searching = true;
 			var params = {
 				ignore_empty_boxes: true
 			}
+			if(vm.key)
+				params = Object.assign(params, {q: vm.key});
+			
+			Object.keys(vm.filters).map(function(filter_type) {
+				var new_filter = []
+				Object.keys(vm.filters[filter_type]).map(function(filter) {
+					if(vm.filters[filter_type][filter])
+						new_filter.push(filter);
+				})
+				if(new_filter.length > 0)
+					params[filter_type+'[]'] = new_filter;
+			})
 
-			boxDataService.getBoxPub(params, onGetBoxesSuccess, UtilService.onError);
+			function onGetBoxesSuccess(data) {
+				vm.searching= false;
+				vm.search_key = angular.copy(vm.key);
+				vm.results = angular.copy(data);
+			}
+
+			function onGetBoxesError(err) {
+				UtilService.onError(err);
+				vm.searching = false;
+			}
+
+			boxDataService.getBoxPub(params, onGetBoxesSuccess, onGetBoxesError);
 		}
+
+		//watches
+		$scope.$watch('exploreBoxesCtrl.filters', function(newValue, oldValue) {
+			search(vm.form)
+		}, true);
 
 	}
 
