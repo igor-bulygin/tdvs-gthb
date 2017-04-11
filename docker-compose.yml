@@ -12,7 +12,7 @@ services:
             GIT_EMAIL: "alexandernst@gmail.com"
             WEBROOT: "/var/www/html/web"
             THUMBOR_SECURITY_KEY: "ccpXNPgnXHaONlWlzXTEGg458K9HfE"
-            THUMBOR_SERVER: "thumbor.todevise.com:8000"
+            THUMBOR_SERVER: "localhost.thumbor.todevise.com:8000"
         command: bash -c "cd /var/www/html && composer install -v --prefer-dist && ./yii mongodb-migrate --interactive=0 && /start.sh"
         ports:
             - "8443:8443"
