@@ -137,6 +137,29 @@ class Country extends CActiveRecord
 			$query->andFilterWhere(["in", "country_code", $countries]);
 		}
 
+		// if only_with_boxes is specified
+		if ((array_key_exists("only_with_boxes", $criteria)) && (!empty($criteria["only_with_boxes"]))) {
+			// Get ids of persons with boxes
+			$boxes = Box::findSerialized();
+			$idsPersons = [];
+			foreach ($boxes as $box) {
+				$idsPersons[] = $box->person_id;
+			}
+
+
+			// Get different countries of persons with boxes
+			if ($idsPersons) {
+				$queryPerson = new ActiveQuery(Person::className());
+				$queryPerson->andWhere(["account_state" => Person::ACCOUNT_STATE_ACTIVE]);
+				$queryPerson->andWhere(["short_id" => $idsPersons]);
+				$countries = $queryPerson->distinct("personal_info.country");
+
+				$query->andFilterWhere(["in", "country_code", $countries]);
+			} else {
+				$query->andFilterWhere(["in", "country_code", "dummy_country"]); // Force no results if there are no boxes
+			}
+		}
+
 		// Count how many items are with those conditions, before limit them for pagination
 		static::$countItemsFound = $query->count();
 

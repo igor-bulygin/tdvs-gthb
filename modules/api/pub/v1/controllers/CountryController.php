@@ -22,6 +22,7 @@ class CountryController extends AppPublicController {
 	    $countries = Country::findSerialized([
 		    "name" => Yii::$app->request->get("name"), // search only in name attribute
 		    "person_type" => Yii::$app->request->get("person_type", null),
+		    "only_with_boxes" => Yii::$app->request->get("only_with_boxes", null),
 		    "limit" => $limit,
 		    "offset" => $offset,
 	    ]);
