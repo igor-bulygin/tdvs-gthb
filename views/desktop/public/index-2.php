@@ -185,7 +185,7 @@ $this->title = 'Todevise / Home';
 			<div>
 				<?php foreach ($boxes as $box) {
 					$products = $box->getProducts(); ?>
-					<div class="col-md-4 col-xs-6 pad-grid">
+					<div class="col-md-4 pad-grid">
 						<div class="boxes-wrapper">
 							<?php if (empty($products)) { ?>
 								<div class="empty-box">

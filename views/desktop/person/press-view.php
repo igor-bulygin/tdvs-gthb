@@ -54,7 +54,7 @@ $this->params['person_links_target'] = 'public_view';
 		</div>
 	</div>
 </div>
-<div class="modal fade" id="carouselModal">
+<div class="modal full-modal fade" id="carouselModal">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -74,8 +74,8 @@ $this->params['person_links_target'] = 'public_view';
 					} ?>
 						</div>
 				</div>
-				<a href="#pressGallery" class="left carousel-control" role="button" data-slide="prev">&lt;</span></a>
-				<a href="#pressGallery" class="right carousel-control" role="button" data-slide="next">&gt;</span></a>
+				<a href="#pressGallery" class="left carousel-control" role="button" data-slide="prev">&lt;</a>
+				<a href="#pressGallery" class="right carousel-control" role="button" data-slide="next">&gt;</a>
 			</div>
 		</div>
 	</div>
