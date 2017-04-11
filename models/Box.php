@@ -70,7 +70,7 @@ class Box extends CActiveRecord
 	 *
 	 * @var array
 	 */
-	public static $textFilterAttributes = ['name', 'description', ''];
+	public static $textFilterAttributes = ['name', 'description'];
 
 	/**
 	 * Initialize model attributes
