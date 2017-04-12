@@ -273,10 +273,8 @@
 }
 .top-bar-violet{
     background-color: $violet;
-    position: absolute;
-    top: 120px;
     width: 100%;
-    z-index: 999;
+    z-index: 99999;
     span{
         color: $white;
         text-align: center;
@@ -290,7 +288,6 @@
         font-size: 12px;
         position: absolute;
         right: 20px;
-        top: 10px;
         background-color: transparent;
         &:hover{
             background-color: #753cca;

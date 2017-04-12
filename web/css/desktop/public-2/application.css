@@ -3003,10 +3003,8 @@ input[type="radio"] .styled:checked + label::after {
 
 .top-bar-violet {
   background-color: #924cfc;
-  position: absolute;
-  top: 120px;
   width: 100%;
-  z-index: 999; }
+  z-index: 99999; }
   .top-bar-violet span {
     color: #ffffff;
     text-align: center;
@@ -3019,7 +3017,6 @@ input[type="radio"] .styled:checked + label::after {
     font-size: 12px;
     position: absolute;
     right: 20px;
-    top: 10px;
     background-color: transparent; }
     .top-bar-violet button:hover {
       background-color: #753cca; }
