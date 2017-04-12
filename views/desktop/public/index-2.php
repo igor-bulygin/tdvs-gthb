@@ -230,7 +230,7 @@ $this->title = 'Todevise / Home';
 			</div>
 			<!-- Controls -->
 			<div class="prev-next-wrapper">
-				<?php if ($totalInfluencers > 5) { ?>
+				<?php if ($totalInfluencers > 3) { ?>
 					<a class="prev" href="#carousel-influencers" role="button" data-slide="prev">
 						<i class="ion-ios-arrow-left"></i>
 						<span>Previous</span>
