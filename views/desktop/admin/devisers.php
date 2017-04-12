@@ -90,7 +90,7 @@ $this->title = 'Todevise / Admin / Devisers';
 					[
 						'value' => function($model){
 							/** @var Person $model */
-							return $model->personalInfoMapping->getBrandName();
+							return $model->getName();
 						},
 						'label' => Yii::t("app/admin", "Name")
 					],

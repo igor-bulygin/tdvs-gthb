@@ -9,7 +9,7 @@ BoxesViewAsset::register($this);
 /** @var Person $person */
 /** @var \app\models\Box[] $boxes */
 
-$this->title = 'Boxes by ' . $person->personalInfoMapping->getBrandName() . ' - Todevise';
+$this->title = 'Boxes by ' . $person->getName() . ' - Todevise';
 $this->params['person'] = $person;
 $this->params['person_menu_active_option'] = 'boxes';
 $this->params['person_links_target'] = 'public_view';
@@ -34,7 +34,7 @@ $this->params['person_links_target'] = 'public_view';
 
 							<button class="btn btn-green btn-add-box" ng-click="viewBoxesCtrl.openCreateBoxModal()">ADD BOX</button>
 						<?php } else { ?>
-							<p class="no-video-text"><?=$person->getBrandName()?> have no boxes.</p>
+							<p class="no-video-text"><?=$person->getName()?> have no boxes.</p>
 						<?php } ?>
 					</div>
 
@@ -43,7 +43,7 @@ $this->params['person_links_target'] = 'public_view';
 					<div class="content-store">
 						<div class="store-grid">
 							<div class="title-wrapper-boxes title-wrapper">
-								<span class="title">Boxes by <?=$person->getBrandName()?></span>
+								<span class="title">Boxes by <?=$person->getName()?></span>
 							</div>
 							<div class="row">
 								<?php if ($person->isPersonEditable()) { ?>

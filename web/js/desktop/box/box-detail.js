@@ -16,7 +16,7 @@
 					boxId: function() {
 						return vm.box.id
 					},
-					deviser: function() {
+					person: function() {
 						return vm.box.person
 					}
 				}

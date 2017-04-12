@@ -10,7 +10,7 @@ EditPressAsset::register($this);
 
 /** @var Person $person */
 
-$this->title = 'About ' . $person->personalInfoMapping->getBrandName() . ' - Todevise';
+$this->title = 'About ' . $person->getName() . ' - Todevise';
 $this->params['person'] = $person;
 $this->params['person_menu_active_option'] = 'press';
 $this->params['person_links_target'] = 'edit_view';

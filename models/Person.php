@@ -120,7 +120,7 @@ class Person extends CActiveRecord implements IdentityInterface
 	 *
 	 * @var array
 	 */
-	public static $textFilterAttributes = ['personal_info.name', 'personal_info.brand_name', 'text_short_description'];
+	public static $textFilterAttributes = ['personal_info.name', 'personal_info.last_name', 'personal_info.brand_name', 'text_short_description'];
 
 	/**
 	 * Initialize model attributes
@@ -268,7 +268,7 @@ class Person extends CActiveRecord implements IdentityInterface
 		// if name is specified
 		if ((array_key_exists("name", $criteria)) && (!empty($criteria["name"]))) {
 //			// search the word in all available languages
-			$query->andFilterWhere(static::getFilterForText(['personal_info.name', 'personal_info.brand_name'], $criteria["name"]));
+			$query->andFilterWhere(static::getFilterForText(['personal_info.name', 'personal_info.last_name', 'personal_info.brand_name'], $criteria["name"]));
 		}
 
 		// if text is specified
@@ -380,7 +380,7 @@ class Person extends CActiveRecord implements IdentityInterface
 
 		// Always update slug ?
 //		if (empty($this->slug)) {
-			$this->slug = Slugger::slugify($this->personalInfoMapping->getBrandName());
+			$this->slug = Slugger::slugify($this->personalInfoMapping->getVisibleName());
 //		}
 
 		if (empty($this->account_state)) {
@@ -517,10 +517,13 @@ class Person extends CActiveRecord implements IdentityInterface
 				'personalInfoMapping',
 				'app\validators\EmbedDocValidator',
 				'on' => [
+					self::SCENARIO_DEVISER_CREATE_DRAFT,
 					self::SCENARIO_DEVISER_UPDATE_DRAFT,
 					self::SCENARIO_DEVISER_UPDATE_PROFILE,
+					self::SCENARIO_INFLUENCER_CREATE_DRAFT,
 					self::SCENARIO_INFLUENCER_UPDATE_DRAFT,
 					self::SCENARIO_INFLUENCER_UPDATE_PROFILE,
+					self::SCENARIO_CLIENT_CREATE,
 					self::SCENARIO_CLIENT_UPDATE,
 				],
 			],
@@ -589,6 +592,7 @@ class Person extends CActiveRecord implements IdentityInterface
 				'header',
 				'profile',
 				'name',
+				'last_name',
 				'brand_name',
 				'country',
 				'city',
@@ -634,8 +638,16 @@ class Person extends CActiveRecord implements IdentityInterface
 				self::$serializeFields = [
 					'id' => 'short_id',
 					'slug',
-					'name' => "brandName",
+					'name' => "name",
 					'url_avatar' => "avatarImage128",
+					'main_link' => 'mainLink',
+					'store_link' => 'storeLink',
+					'loved_link' => 'lovedLink',
+					'boxes_link' => 'boxesLink',
+					'about_link' => 'aboutLink',
+					'press_link' => 'pressLink',
+					'videos_link' => 'videosLink',
+					'faq_link' => 'faqLink',
 				];
 				break;
 			case self::SERIALIZE_SCENARIO_PUBLIC:
@@ -653,7 +665,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'faq',
 					'curriculum',
 					'account_state',
-					'name' => "brandName",
+					'name' => "name",
 					'url_images' => 'urlImagesLocation',
 					'url_avatar' => "avatarImage128",
 					'main_link' => 'mainLink',
@@ -688,7 +700,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'faq',
 					'curriculum',
 					'account_state',
-					'name' => "brandName",
+					'name' => "name",
 					'url_images' => 'urlImagesLocation',
 					'url_avatar' => "avatarImage128",
 					'main_link' => 'mainLink',
@@ -779,21 +791,6 @@ class Person extends CActiveRecord implements IdentityInterface
 		$filePath = $this->getUploadedFilesPath() . '/' . $this->curriculum;
 
 		return (($this->curriculum) && (file_exists($filePath)));
-	}
-
-
-	/**
-	 * Get first name from Person
-	 *
-	 * @return string
-	 */
-	public function getName()
-	{
-		if (!isset($this->personal_info)) {
-			return "";
-		}
-
-		return $this->personal_info['name'];
 	}
 
 	/**
@@ -1052,19 +1049,27 @@ class Person extends CActiveRecord implements IdentityInterface
 		return [
 			"id" => $this->short_id,
 			"slug" => $this->slug,
-			"name" => $this->personalInfoMapping->getBrandName(),
-			"url_avatar" => $this->getAvatarImage128()
+			"name" => $this->personalInfoMapping->getVisibleName(),
+			"url_avatar" => $this->getAvatarImage128(),
+			'main_link' => $this->getMainLink(),
+			'store_link' => $this->getStoreLink(),
+			'loved_link' => $this->getLovedLink(),
+			'boxes_link' => $this->getBoxesLink(),
+			'about_link' => $this->getAboutLink(),
+			'press_link' => $this->getPressLink(),
+			'videos_link' => $this->getVideosLink(),
+			'faq_link' => $this->getFaqLink(),
 		];
 	}
 
 	/**
-	 * Shortcut to get the brand name
+	 * Shortcut to get the name
 	 *
 	 * @return string
 	 */
-	public function getBrandName()
+	public function getName()
 	{
-		return $this->personalInfoMapping->getBrandName();
+		return $this->personalInfoMapping->getVisibleName();
 	}
 
 	/**

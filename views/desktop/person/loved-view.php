@@ -10,7 +10,7 @@ LovedViewAsset::register($this);
 /** @var Person $person */
 /** @var \app\models\Loved[] $loveds */
 
-$this->title = 'Loved by ' . $person->personalInfoMapping->getBrandName() . ' - Todevise';
+$this->title = 'Loved by ' . $person->getName() . ' - Todevise';
 $this->params['person'] = $person;
 $this->params['person_menu_active_option'] = 'loved';
 $this->params['person_links_target'] = 'public_view';
@@ -32,7 +32,7 @@ $this->params['person_links_target'] = 'public_view';
                             <p class="no-video-text">You haven't loved any works yet.</p>
                             <p>Start now by clicking the <span class="glyphicon glyphicon-heart"></span> button inside a work.</p>
                         <?php } else { ?>
-                            <p class="no-video-text"><?=$person->getBrandName()?> haven't loved any works yet.</p>
+                            <p class="no-video-text"><?=$person->getName()?> haven't loved any works yet.</p>
                         <?php } ?>
                         
                         <img class="image-loved" src="/imgs/loved-image.png">
@@ -42,7 +42,7 @@ $this->params['person_links_target'] = 'public_view';
                     <div class="content-store">
                         <div class="store-grid">
                             <div class="title-wrapper title-loved">
-                                <span class="title">Loved by <?=$person->getBrandName()?></span>
+                                <span class="title">Loved by <?=$person->getName()?></span>
                             </div>
                             <div id="macy-container">
                                 <?php foreach ($loveds as $loved) {

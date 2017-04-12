@@ -167,7 +167,7 @@ $this->title = 'Todevise / Home';
 								<img src="<?= Utils::url_scheme() ?><?= Utils::thumborize($deviser->getHeaderBackgroundImage())->resize(350, 344) ?>" class="showcase-image">
 								<figcaption>
 									<img class="showcase-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($deviser->getAvatarImage())->resize(0, 110) ?>">
-									<span class="name"><?= $deviser->personalInfoMapping->getBrandName() ?></span>
+									<span class="name"><?= $deviser->getName() ?></span>
 									<span class="location"><?= $deviser->personalInfoMapping->getCityLabel() ?></span>
 								</figcaption>
 								</figure>
@@ -182,7 +182,7 @@ $this->title = 'Todevise / Home';
 	</section>
 	<!-- /SHOWCASE -->
 
-<?php if (false && $boxes) { ?>
+<?php if ($boxes) { ?>
 	<section class="grid-wrapper">
 		<div class="container">
 			<div class="section-title">
@@ -221,7 +221,7 @@ $this->title = 'Todevise / Home';
 	</section>
 <?php } ?>
 
-<?php if (false && $totalInfluencers) { ?>
+<?php if ($totalInfluencers) { ?>
 	<section class="showcase-wrapper">
 		<div class="container">
 			<h3>Discover the works they love</h3>
@@ -254,7 +254,7 @@ $this->title = 'Todevise / Home';
 											<img src="<?= Utils::url_scheme() ?><?= Utils::thumborize($influencer->getHeaderBackgroundImage())->resize(350, 344) ?>" class="showcase-image">
 											<figcaption>
 												<img class="showcase-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($influencer->getAvatarImage())->resize(0, 110) ?>">
-												<span class="name"><?= $influencer->personalInfoMapping->getBrandName() ?></span>
+												<span class="name"><?= $influencer->getName() ?></span>
 												<span class="location"><?= $influencer->personalInfoMapping->getCityLabel() ?></span>
 											</figcaption>
 										</figure>

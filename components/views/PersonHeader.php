@@ -34,7 +34,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 						<?php } ?>
 						<div class="deviser-data">
 							<div class="name">
-								{{personHeaderCtrl.person.personal_info.brand_name}}
+								{{personHeaderCtrl.person.name}}
 							</div>
 							<div class="location">
 								{{personHeaderCtrl.person.personal_info.city}}
@@ -77,10 +77,16 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 				</div>
 				<div class="deviser-data-edit">
 					<form class="grey-form" name="personHeaderCtrl.form">
-						<!-- brand name -->
-						<div>
+						<!-- names -->
+						<div ng-if="personHeaderCtrl.isDeviser(personHeaderCtrl.person)">
 							<label for="brand_name">Brand name</label>
 							<input type="text" class="form-control ng-class:{'error-input': personHeaderCtrl.has_error(personHeaderCtrl.form, personHeaderCtrl.form.brand_name)}" ng-model="personHeaderCtrl.person.personal_info.brand_name" placeholder="{{personHeaderCtrl.person.name}}" name="brand_name" required>
+						</div>
+						<div ng-if="personHeaderCtrl.isInfluencer(personHeaderCtrl.person) || personHeaderCtrl.isClient(personHeaderCtrl.person)">
+							<label for="name">First name</label>
+							<input type="text" class="form-control ng-class:{'error-input': personHeaderCtrl.has_error(personHeaderCtrl.form, personHeaderCtrl.form.name)}" ng-model="personHeaderCtrl.person.personal_info.name" placeholder="{{personHeaderCtrl.person.name}}" name="name" required>
+							<label for="last_name">Last name</label>
+							<input type="text" class="form-control ng-class:{'error-input': personHeaderCtrl.has_error(personHeaderCtrl.form, personHeaderCtrl.form.last_name)}" ng-model="personHeaderCtrl.person.personal_info.last_name" placeholder="{{personHeaderCtrl.person.last_name}}" name="last_name" required>
 						</div>
 						<!-- city -->
 						<div>

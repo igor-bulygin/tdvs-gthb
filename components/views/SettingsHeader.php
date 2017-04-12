@@ -19,7 +19,7 @@ $activeOption = array_key_exists('settings_menu_active_option', $this->params) ?
 	<div class="upper-setting-header">
 		<div class="container">
 			<a href="<?=$person->getAboutLink()?>"><img class="avatar" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getAvatarImage())->resize(50, 50) ?>"></a>
-			<a href="<?=$person->getAboutLink()?>"><span class="deviser-name"><?=$person->personalInfoMapping->getBrandName()?></span></a>
+			<a href="<?=$person->getAboutLink()?>"><span class="deviser-name"><?=$person->getName()?></span></a>
 			<?php /*<button class="btn btn-green pull-right" ng-click="settingsHeaderCtrl.saveChanges()">Save changes</button>*/ ?>
 		</div>
 	</div>

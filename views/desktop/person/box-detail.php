@@ -10,7 +10,7 @@ BoxesViewAsset::register($this);
 /** @var \app\models\Box $box */
 /** @var \app\models\Box[] $moreBoxes */
 
-$this->title = 'Box '.$box->name.' by ' . $person->personalInfoMapping->getBrandName() . ' - Todevise';
+$this->title = 'Box '.$box->name.' by ' . $person->getName() . ' - Todevise';
 $this->params['person'] = $person;
 $this->params['person_menu_active_option'] = 'boxes';
 $this->params['person_links_target'] = 'public_view';
@@ -31,7 +31,7 @@ $this->registerJs("var box = ".Json::encode($box), yii\web\View::POS_HEAD, 'box-
 					</a>
 				<?php } else  { ?>
 					<a href="<?=$person->getBoxesLink()?>">
-						<span><?=$person->getBrandName()?></span>
+						<span><?=$person->getName()?></span>
 					</a>
 				<?php } ?>
 			</div>
