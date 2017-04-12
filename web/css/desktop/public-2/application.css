@@ -1994,10 +1994,34 @@ input[type="radio"] .styled:checked + label::after {
       top: 4px;
       font-size: 21px; }
 
+.our-boxes-header {
+  margin: -20px 0 0 0;
+  padding: 50px 0 42px;
+  background: url(/imgs/boxes-cover.jpg) center #000000 no-repeat;
+  background-size: 1150px 267px; }
+  .our-boxes-header h3 {
+    font-family: "Univers Thin Ultra Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #ffffff; }
+  .our-boxes-header h5 {
+    font-family: "Playfair Display", Georgia, serif;
+    font-style: italic;
+    color: #ffffff; }
+  .our-boxes-header .devisers-searcher {
+    width: 300px;
+    position: relative;
+    margin: 10px auto 0; }
+    .our-boxes-header .devisers-searcher span {
+      color: #F7284B;
+      position: absolute;
+      right: 12px;
+      top: 4px;
+      font-size: 21px; }
+
 .our-devisers-body {
   background-color: #e9e9e9;
   float: left;
-  width: 100%; }
+  width: 100%;
+  margin-bottom: 100px; }
   .our-devisers-body hr {
     border-top: 1px solid #9a9a9a; }
 
