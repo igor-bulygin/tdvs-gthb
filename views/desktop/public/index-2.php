@@ -182,7 +182,7 @@ $this->title = 'Todevise / Home';
 	</section>
 	<!-- /SHOWCASE -->
 
-<?php if (false && $boxes) { ?>
+<?php if ($boxes) { ?>
 	<section class="grid-wrapper">
 		<div class="container">
 			<div class="section-title">
@@ -221,7 +221,7 @@ $this->title = 'Todevise / Home';
 	</section>
 <?php } ?>
 
-<?php if (false && $totalInfluencers) { ?>
+<?php if ($totalInfluencers) { ?>
 	<section class="showcase-wrapper">
 		<div class="container">
 			<h3>Discover the works they love</h3>
