@@ -246,9 +246,9 @@ $this->title = 'Todevise / Home';
 					<?php foreach ($influencers as $i => $group) { ?>
 						<div class="item <?= ($i==0) ? 'active' : '' ?>">
 							<?php foreach ($group as $k => $influencer) { ?>
-								<div class="col-md-15 col-sm-15 col-xs-6 pad-showcase">
+								<div class="col-md-4 col-sm-4 col-xs-6 pad-showcase">
 									<a href="<?= $influencer->getLovedLink()?>">
-										<figure class="showcase">
+										<figure class="showcase showcase-influencers">
 											<button class="btn btn-default btn-follow"><i class="ion-star"></i><span>Follow</span>
 											</button>
 											<img src="<?= Utils::url_scheme() ?><?= Utils::thumborize($influencer->getHeaderBackgroundImage())->resize(350, 344) ?>" class="showcase-image">
