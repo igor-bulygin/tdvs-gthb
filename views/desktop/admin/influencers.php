@@ -87,7 +87,7 @@ $this->title = 'Todevise / Admin / Influencers';
 					[
 						'value' => function($model){
 							/** @var Person $model */
-							return $model->personalInfoMapping->getBrandName();
+							return $model->getName();
 						},
 						'label' => Yii::t("app/admin", "Name")
 					],

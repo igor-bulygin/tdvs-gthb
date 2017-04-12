@@ -34,7 +34,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 						<?php } ?>
 						<div class="deviser-data">
 							<div class="name">
-								{{personHeaderCtrl.person.personal_info.brand_name}}
+								{{personHeaderCtrl.person.name}}
 							</div>
 							<div class="location">
 								{{personHeaderCtrl.person.personal_info.city}}

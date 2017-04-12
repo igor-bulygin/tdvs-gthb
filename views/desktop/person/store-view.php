@@ -14,7 +14,7 @@ StoreViewAsset::register($this);
 /** @var Category $category */
 /** @var Category $selectedCategory */
 
-$this->title = $person->personalInfoMapping->getBrandName() . ' - Todevise';
+$this->title = $person->getName() . ' - Todevise';
 
 // use params to share data between views :(
 $this->params['person'] = $person;

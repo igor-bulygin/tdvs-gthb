@@ -55,11 +55,11 @@ class PersonPersonalInfo extends EmbedModel
 	}
 
 	/**
-	 * Get brand name from Person
+	 * Get the visible name of the person
 	 *
 	 * @return string
 	 */
-	public function getBrandName()
+	public function getVisibleName()
 	{
 		return $this->brand_name ?: trim($this->name . ' '.$this->last_name);
 	}
@@ -96,11 +96,11 @@ class PersonPersonalInfo extends EmbedModel
 
 		$loaded = parent::load($data, $formName);
 
-		if (empty($this->brand_name)) {
-			$this->brand_name = rtrim($this->name . ' ' . $this->last_name);
-		} elseif (empty($this->name)) {
-			$this->name = $this->brand_name;
-		}
+//		if (empty($this->brand_name)) {
+//			$this->brand_name = rtrim($this->name . ' ' . $this->last_name);
+//		} elseif (empty($this->name)) {
+//			$this->name = $this->brand_name;
+//		}
 
 		return $loaded;
 	}
@@ -121,9 +121,9 @@ class PersonPersonalInfo extends EmbedModel
 					Person::SCENARIO_CLIENT_UPDATE,
 				]
 			],
-			[['name', 'brand_name', 'country', 'city'], 'required', 'on' => Person::SCENARIO_DEVISER_UPDATE_PROFILE],
-			[['name', 'city'], 'required', 'on' => Person::SCENARIO_INFLUENCER_UPDATE_PROFILE],
-			[['name'], 'required', 'on' => [Person::SCENARIO_CLIENT_CREATE, Person::SCENARIO_CLIENT_UPDATE]],
+			[['name', 'last_name', 'city', 'country', 'brand_name'], 'required', 'on' => Person::SCENARIO_DEVISER_UPDATE_PROFILE],
+			[['name', 'last_name', 'city'], 'required', 'on' => Person::SCENARIO_INFLUENCER_UPDATE_PROFILE],
+			[['name', 'last_name'], 'required', 'on' => [Person::SCENARIO_CLIENT_CREATE, Person::SCENARIO_CLIENT_UPDATE]],
 		];
 	}
 }
