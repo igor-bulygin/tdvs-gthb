@@ -640,6 +640,14 @@ class Person extends CActiveRecord implements IdentityInterface
 					'slug',
 					'name' => "name",
 					'url_avatar' => "avatarImage128",
+					'main_link' => 'mainLink',
+					'store_link' => 'storeLink',
+					'loved_link' => 'lovedLink',
+					'boxes_link' => 'boxesLink',
+					'about_link' => 'aboutLink',
+					'press_link' => 'pressLink',
+					'videos_link' => 'videosLink',
+					'faq_link' => 'faqLink',
 				];
 				break;
 			case self::SERIALIZE_SCENARIO_PUBLIC:
@@ -1042,7 +1050,15 @@ class Person extends CActiveRecord implements IdentityInterface
 			"id" => $this->short_id,
 			"slug" => $this->slug,
 			"name" => $this->personalInfoMapping->getVisibleName(),
-			"url_avatar" => $this->getAvatarImage128()
+			"url_avatar" => $this->getAvatarImage128(),
+			'main_link' => $this->getMainLink(),
+			'store_link' => $this->getStoreLink(),
+			'loved_link' => $this->getLovedLink(),
+			'boxes_link' => $this->getBoxesLink(),
+			'about_link' => $this->getAboutLink(),
+			'press_link' => $this->getPressLink(),
+			'videos_link' => $this->getVideosLink(),
+			'faq_link' => $this->getFaqLink(),
 		];
 	}
 
