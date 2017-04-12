@@ -14,6 +14,9 @@
 		vm.editHeader = editHeader;
 		vm.saveHeader = saveHeader;
 		vm.cancelEdit = cancelEdit;
+		vm.isDeviser = UtilService.isDeviser;
+		vm.isInfluencer = UtilService.isInfluencer;
+		vm.isClient = UtilService.isClient;
 		vm.has_error = UtilService.has_error;
 
 		init();
@@ -48,9 +51,6 @@
 			function setHostImage(image){
 				return currentHost() + person.url_images + image;
 			}
-			//set name
-			if(!person.personal_info.brand_name)
-				person.personal_info.brand_name = angular.copy(person.personal_info.name);
 			//set status
 			vm.isProfilePublic = (person.account_state === 'draft' ? false: true);
 			person.text_short_description = UtilService.emptyArrayToObject(person.text_short_description);
