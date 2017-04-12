@@ -40,8 +40,8 @@ $this->registerJs("var invitation = ".Json::encode($invitation), yii\web\View::P
 				</div>
 				<div class="row">
 					<label>Representative name <i tooltip-placement="top" uib-tooltip="This name will not be made public. We will only use it to communicate with you." class="ion-information-circled info"></i></label>
-					<input type="text" class="form-control grey-input ng-class:{'error-input': createDeviserCtrl.has_error(createDeviserCtrl.form, createDeviserCtrl.form.first_name)}" name="first_name" ng-model="createDeviserCtrl.deviser.first_name" placeholder="FIRST NAME" required>
-					<form-errors field="createDeviserCtrl.form.first_name" condition="createDeviserCtrl.has_error(createDeviserCtrl.form, createDeviserCtrl.form.first_name)"></form-errors>
+					<input type="text" class="form-control grey-input ng-class:{'error-input': createDeviserCtrl.has_error(createDeviserCtrl.form, createDeviserCtrl.form.name)}" name="name" ng-model="createDeviserCtrl.deviser.name" placeholder="FIRST NAME" required>
+					<form-errors field="createDeviserCtrl.form.name" condition="createDeviserCtrl.has_error(createDeviserCtrl.form, createDeviserCtrl.form.name)"></form-errors>
 				</div>
 				<div class="row">
 					<input type="text" class="form-control grey-input ng-class:{'error-input': createDeviserCtrl.has_error(createDeviserCtrl.form, createDeviserCtrl.form.last_name)}" name="last_name" ng-model="createDeviserCtrl.deviser.last_name" placeholder="LAST NAME" required>

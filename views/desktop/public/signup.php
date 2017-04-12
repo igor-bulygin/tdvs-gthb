@@ -26,6 +26,11 @@ $this->title = 'Create an account - Todevise';
 					<form-errors field="createClientCtrl.form.name" condition="createClientCtrl.has_error(createClientCtrl.form, createClientCtrl.form.name)"></form-errors>
 				</div>
 				<div class="row">
+					<label for="last_name">Last name</label>
+					<input type="text" id="last_name" class="form-control grey-input ng-class:{'error-input': createClientCtrl.has_error(createClientCtrl.form, createClientCtrl.form.last_name)}" name="last_name" ng-model="createClientCtrl.user.last_name" required>
+					<form-errors field="createClientCtrl.form.last_name" condition="createClientCtrl.has_error(createClientCtrl.form, createClientCtrl.form.last_name)"></form-errors>
+				</div>
+				<div class="row">
 					<label for="email">Email</label>
 					<input type="email" id="email" class="form-control grey-input ng-class:{'error-input': createClientCtrl.has_error(createClientCtrl.form, createClientCtrl.form.email)}" name="email" ng-model="createClientCtrl.user.email" required>
 					<form-errors field="createClientCtrl.form.email" condition="createClientCtrl.has_error(createClientCtrl.form, createClientCtrl.form.email)"></form-errors>
