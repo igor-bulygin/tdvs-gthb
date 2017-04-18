@@ -264,7 +264,9 @@ class Order extends CActiveRecord {
 		if ((array_key_exists("order_by", $criteria)) && (!empty($criteria["order_by"]))) {
 			$query->orderBy($criteria["order_by"]);
 		} else {
-			$query->orderBy(["created_at" => "desc"]);
+			$query->orderBy([
+				"created_at" => SORT_DESC,
+			]);
 		}
 
         $orders = $query->all();
