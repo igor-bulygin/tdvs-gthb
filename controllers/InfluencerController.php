@@ -5,6 +5,7 @@ use app\helpers\CController;
 use app\models\Box;
 use app\models\Loved;
 use app\models\Person;
+use app\models\Story;
 use yii\filters\AccessControl;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
@@ -218,6 +219,55 @@ class InfluencerController extends CController
 			'person' => $person,
 			'box' => $box,
 			'moreBoxes' => $boxes,
+		]);
+	}
+
+	public function actionStories($slug, $person_id)
+	{
+		$person = Person::findOneSerialized($person_id);
+
+		if (!$person || !$person->isInfluencer()) {
+			throw new NotFoundHttpException();
+		}
+
+		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE && !$person->isPersonEditable()) {
+			throw new UnauthorizedHttpException();
+		}
+
+		$stories = Story::findSerialized(['person_id' => $person_id]);
+		$this->layout = '/desktop/public-2.php';
+		return $this->render("@app/views/desktop/person/stories-view", [
+			'person' => $person,
+			'stories' => $stories,
+		]);
+	}
+
+	public function actionStoryDetail($slug, $person_id, $story_id)
+	{
+		$person = Person::findOneSerialized($person_id);
+
+		if (!$person || !$person->isInfluencer()) {
+			throw new NotFoundHttpException();
+		}
+
+		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE && !$person->isPersonEditable()) {
+			throw new UnauthorizedHttpException();
+		}
+
+		Story::setSerializeScenario(Story::SERIALIZE_SCENARIO_PUBLIC);
+		$story = Story::findOneSerialized($story_id);
+		if (!$story) {
+			throw new NotFoundHttpException();
+		}
+
+		if ($story->person_id != $person->short_id) {
+			throw new ForbiddenHttpException();
+		}
+
+		$this->layout = '/desktop/public-2.php';
+		return $this->render("@app/views/desktop/person/story-detail", [
+			'person' => $person,
+			'story' => $story,
 		]);
 	}
 }

@@ -644,6 +644,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'store_link' => 'storeLink',
 					'loved_link' => 'lovedLink',
 					'boxes_link' => 'boxesLink',
+					'stories_link' => 'storiesLink',
 					'about_link' => 'aboutLink',
 					'press_link' => 'pressLink',
 					'videos_link' => 'videosLink',
@@ -672,6 +673,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'store_link' => 'storeLink',
 					'loved_link' => 'lovedLink',
 					'boxes_link' => 'boxesLink',
+					'stories_link' => 'storiesLink',
 					'about_link' => 'aboutLink',
 					'press_link' => 'pressLink',
 					'videos_link' => 'videosLink',
@@ -707,6 +709,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'store_link' => 'storeLink',
 					'loved_link' => 'lovedLink',
 					'boxes_link' => 'boxesLink',
+					'stories_link' => 'storiesLink',
 					'about_link' => 'aboutLink',
 					'press_link' => 'pressLink',
 					'videos_link' => 'videosLink',
@@ -1055,6 +1058,7 @@ class Person extends CActiveRecord implements IdentityInterface
 			'store_link' => $this->getStoreLink(),
 			'loved_link' => $this->getLovedLink(),
 			'boxes_link' => $this->getBoxesLink(),
+			'stories_link' => $this->getStoreLink(),
 			'about_link' => $this->getAboutLink(),
 			'press_link' => $this->getPressLink(),
 			'videos_link' => $this->getVideosLink(),
@@ -1366,6 +1370,16 @@ class Person extends CActiveRecord implements IdentityInterface
 			return Url::to(["/influencer/boxes", "slug" => $this->getSlug(), 'person_id' => $this->short_id], true);
 		} elseif ($this->isClient()) {
 			return Url::to(["/client/boxes", "slug" => $this->getSlug(), 'person_id' => $this->short_id], true);
+		}
+		return null;
+	}
+
+	public function getStoriesLink()
+	{
+		if ($this->isDeviser()) {
+			return Url::to(["/deviser/stories", "slug" => $this->getSlug(), 'person_id' => $this->short_id], true);
+		} elseif ($this->isInfluencer()) {
+			return Url::to(["/influencer/stories", "slug" => $this->getSlug(), 'person_id' => $this->short_id], true);
 		}
 		return null;
 	}

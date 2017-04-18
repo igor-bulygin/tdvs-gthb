@@ -36,6 +36,11 @@ $person = $this->params['person'];
 		<li>
 			<a class=" <?= ($activeOption=='boxes') ? 'active' : '' ?>" href="<?= $person->getBoxesLink()?>">Boxes</a>
 		</li>
+		<?php if ($person->isDeviser() || $person->isInfluencer()) { ?>
+			<li>
+				<a class=" <?= ($activeOption=='stories') ? 'active' : '' ?>" href="<?= $person->getStoriesLink()?>">Stories</a>
+			</li>
+		<?php } ?>
 	</ul>
 	<ul class="menu-deviser-bottom">
 		<?php if ($person->isDeviser() || $person->isInfluencer()) { ?>

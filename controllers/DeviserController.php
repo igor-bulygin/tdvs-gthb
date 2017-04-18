@@ -11,6 +11,7 @@ use app\models\MetricType;
 use app\models\Person;
 use app\models\Product2;
 use app\models\SizeChart;
+use app\models\Story;
 use app\models\Tag;
 use Yii;
 use yii\filters\AccessControl;
@@ -359,6 +360,55 @@ class DeviserController extends CController
 			'person' => $person,
 			'box' => $box,
 			'moreBoxes' => $boxes,
+		]);
+	}
+
+	public function actionStories($slug, $person_id)
+	{
+		$person = Person::findOneSerialized($person_id);
+
+		if (!$person || !$person->isDeviser()) {
+			throw new NotFoundHttpException();
+		}
+
+		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE && !$person->isPersonEditable()) {
+			throw new UnauthorizedHttpException();
+		}
+
+		$stories = Story::findSerialized(['person_id' => $person_id]);
+		$this->layout = '/desktop/public-2.php';
+		return $this->render("@app/views/desktop/person/stories-view", [
+			'person' => $person,
+			'stories' => $stories,
+		]);
+	}
+
+	public function actionStoryDetail($slug, $person_id, $story_id)
+	{
+		$person = Person::findOneSerialized($person_id);
+
+		if (!$person || !$person->isDeviser()) {
+			throw new NotFoundHttpException();
+		}
+
+		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE && !$person->isPersonEditable()) {
+			throw new UnauthorizedHttpException();
+		}
+
+		Story::setSerializeScenario(Story::SERIALIZE_SCENARIO_PUBLIC);
+		$story = Story::findOneSerialized($story_id);
+		if (!$story) {
+			throw new NotFoundHttpException();
+		}
+
+		if ($story->person_id != $person->short_id) {
+			throw new ForbiddenHttpException();
+		}
+
+		$this->layout = '/desktop/public-2.php';
+		return $this->render("@app/views/desktop/person/story-detail", [
+			'person' => $person,
+			'story' => $story,
 		]);
 	}
 

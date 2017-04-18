@@ -191,6 +191,8 @@ $config = [
 				'/deviser/<slug:[^/.]*?>/<person_id:[^/.]*?>/loved' => 'deviser/loved',
 				'/deviser/<slug:[^/.]*?>/<person_id:[^/.]*?>/boxes' => 'deviser/boxes',
 				'/deviser/<slug:[^/.]*?>/<person_id:[^/.]*?>/box/<box_id:[^/.]*?>' => 'deviser/box-detail',
+				'/deviser/<slug:[^/.]*?>/<person_id:[^/.]*?>/stories' => 'deviser/stories',
+				'/deviser/<slug:[^/.]*?>/<person_id:[^/.]*?>/story_id:[^/.]*?>' => 'deviser/story-detail',
 				'/deviser/<slug:[^/.]*?>/<person_id:[^/.]*?>/store/edit' => 'deviser/store-edit',
 				'/deviser/<slug:[^/.]*?>/<person_id:[^/.]*?>/about/edit' => 'deviser/about-edit',
 				'/deviser/<slug:[^/.]*?>/<person_id:[^/.]*?>/press/edit' => 'deviser/press-edit',
@@ -208,6 +210,8 @@ $config = [
 				'/influencer/<slug:[^/.]*?>/<person_id:[^/.]*?>/loved' => 'influencer/loved',
 				'/influencer/<slug:[^/.]*?>/<person_id:[^/.]*?>/boxes' => 'influencer/boxes',
 				'/influencer/<slug:[^/.]*?>/<person_id:[^/.]*?>/box/<box_id:[^/.]*?>' => 'influencer/box-detail',
+				'/influencer/<slug:[^/.]*?>/<person_id:[^/.]*?>/stories' => 'deviser/stories',
+				'/influencer/<slug:[^/.]*?>/<person_id:[^/.]*?>/story_id:[^/.]*?>' => 'deviser/story-detail',
 				'/influencer/<slug:[^/.]*?>/<person_id:[^/.]*?>/about/edit' => 'influencer/about-edit',
 				'/influencer/<slug:[^/.]*?>/<person_id:[^/.]*?>/press/edit' => 'influencer/press-edit',
 				'/influencer/<slug:[^/.]*?>/<person_id:[^/.]*?>/video/edit' => 'influencer/videos-edit',
@@ -324,7 +328,6 @@ $config = [
 
 
 				// API routing (public)
-				'GET api3/pub/v1/products/<id:[^/.]*?>' => 'api3/pub/v1/product/view', // override "view" action to accept alphanumeric ids
 				'POST api3/pub/v1/invitation/request-become-deviser' => 'api3/pub/v1/invitation/request-become-deviser',
 
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/product'],
@@ -337,7 +340,7 @@ $config = [
 
 				'POST api3/pub/v1/auth/login' => 'api3/pub/v1/auth/login',
 
-				// CART
+				// Cart - public
 				'POST api3/pub/v1/cart' => 'api3/pub/v1/cart/create-cart',
 				'GET api3/pub/v1/cart/<cartId:[^/.]*?>' => 'api3/pub/v1/cart/view',
 				'POST api3/pub/v1/cart/<cartId:[^/.]*?>/product' => 'api3/pub/v1/cart/add-product',
@@ -346,20 +349,21 @@ $config = [
 				'POST api3/pub/v1/cart/<cartId:[^/.]*?>/clientInfo' => 'api3/pub/v1/cart/client-info',
 				'POST api3/pub/v1/cart/<cartId:[^/.]*?>/receiveToken' => 'api3/pub/v1/cart/receive-token',
 
-				// ORDER
+				// Order - public
 				'GET api3/pub/v1/order/<orderId:[^/.]*?>' => 'api3/pub/v1/order/view',
 
-				// PERSON (public)
+				// Person - public
 				'GET api3/pub/v1/person' => 'api3/pub/v1/person/index',
 				'GET api3/pub/v1/person/<personId:[^/.]*?>' => 'api3/pub/v1/person/view',
 				'POST api3/pub/v1/person' => 'api3/pub/v1/person/create',
-
-				// PERSON (priv)
+				// Person - private
 				'GET api3/priv/v1/person/<personId:[^/.]*?>' => 'api3/priv/v1/person/view',
 				'PATCH api3/priv/v1/person/<personId:[^/.]*?>' => 'api3/priv/v1/person/update',
 				'PUT api3/priv/v1/person/<personId:[^/.]*?>' => 'api3/priv/v1/person/update',
 
-				// PRODUCT
+				// Product - public
+				'GET api3/pub/v1/products/<id:[^/.]*?>' => 'api3/pub/v1/product/view',
+				// Product - private
 				'GET api3/priv/v1/products/<id:[^/.]*?>' => 'api3/priv/v1/product/view',
 				'GET api3/priv/v1/products' => 'api3/priv/v1/product/index',
 				'POST api3/priv/v1/products' => 'api3/priv/v1/product/create',
@@ -367,18 +371,19 @@ $config = [
 				'PUT api3/priv/v1/products/<id:[^/.]*?>' => 'api3/priv/v1/product/update',
 				'DELETE api3/priv/v1/products/<id:[^/.]*?>' => 'api3/priv/v1/product/delete',
 
+				// Loved - public
 				'GET api3/pub/v1/loved/<lovedId:[^/.]*?>' => 'api3/pub/v1/loved/view',
 				'GET api3/pub/v1/loved' => 'api3/pub/v1/loved/index',
-
+				// Loved - private
 				'GET api3/priv/v1/loved/<lovedId:[^/.]*?>' => 'api3/priv/v1/loved/view',
 				'GET api3/priv/v1/loved' => 'api3/priv/v1/loved/index',
 				'POST api3/priv/v1/loved' => 'api3/priv/v1/loved/create',
 				'DELETE api3/priv/v1/loved/<productId:[^/.]*?>' => 'api3/priv/v1/loved/delete',
 
-
+				// Box - public
 				'GET api3/pub/v1/box/<boxId:[^/.]*?>' => 'api3/pub/v1/box/view',
 				'GET api3/pub/v1/box' => 'api3/pub/v1/box/index',
-
+				// Box - private
 				'GET api3/priv/v1/box' => 'api3/priv/v1/box/index',
 				'GET api3/priv/v1/box/<boxId:[^/.]*?>' => 'api3/priv/v1/box/view',
 				'POST api3/priv/v1/box' => 'api3/priv/v1/box/create',
@@ -386,6 +391,16 @@ $config = [
 				'DELETE api3/priv/v1/box/<boxId:[^/.]*?>' => 'api3/priv/v1/box/delete',
 				'POST api3/priv/v1/box/<boxId:[^/.]*?>/product' => 'api3/priv/v1/box/add-product',
 				'DELETE api3/priv/v1/box/<boxId:[^/.]*?>/product/<productId:[^/.]*?>' => 'api3/priv/v1/box/delete-product',
+
+				// Story - public
+				'GET api3/pub/v1/story/<boxId:[^/.]*?>' => 'api3/pub/v1/story/view',
+				'GET api3/pub/v1/story' => 'api3/pub/v1/story/index',
+				// Story - private
+				'GET api3/priv/v1/story' => 'api3/priv/v1/story/index',
+				'GET api3/priv/v1/story/<storyId:[^/.]*?>' => 'api3/priv/v1/story/view',
+				'POST api3/priv/v1/story' => 'api3/priv/v1/story/create',
+				'PATCH api3/priv/v1/story/<storyId:[^/.]*?>' => 'api3/priv/v1/story/update',
+				'DELETE api3/priv/v1/story/<boxId:[^/.]*?>' => 'api3/priv/v1/story/delete',
 
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/priv/v1/upload'],
 
