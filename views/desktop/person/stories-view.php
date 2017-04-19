@@ -27,11 +27,12 @@ $this->params['person_links_target'] = 'public_view';
 
 					<div class="empty-wrapper">
 						<?php if ($person->isConnectedUser()) { ?>
+							<div><a class="red-link-btn" href="#">See an example</a></div>
 							<img class="sad-face" src="/imgs/sad-face.svg">
-							<p class="no-video-text">"Stories" is your blog inside Todevise.</p>
 							<p class="no-video-text">Express yourself, start writing your first one now.</p>
 							<a class="btn btn-green btn-add-box" href="<?=$person->getStoryCreateLink()?>">WRITE STORY</a>
 						<?php } else { ?>
+							<img class="sad-face" src="/imgs/sad-face.svg">
 							<p class="no-video-text"><?=$person->getName()?> have no stories.</p>
 						<?php } ?>
 					</div>

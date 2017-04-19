@@ -9,6 +9,11 @@ use yii\filters\AccessControl;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 
+/**
+ * Class ClientController
+ * @package app\controllers
+ * @deprecated
+ */
 class ClientController extends CController
 {
 	public $defaultAction = "index";

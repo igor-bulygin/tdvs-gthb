@@ -11,6 +11,11 @@ use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\web\UnauthorizedHttpException;
 
+/**
+ * Class InfluencerController
+ * @package app\controllers
+ * @deprecated
+ */
 class InfluencerController extends CController
 {
 	public $defaultAction = "index";
