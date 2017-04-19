@@ -18,5 +18,6 @@ class CreateStoryAsset extends AssetBundle {
 	];
 	public $depends = [
 		'app\assets\desktop\deviser\IndexAsset',
+		'app\assets\libs\ngFileUploadAsset',
 	];
 }

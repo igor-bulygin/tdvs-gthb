@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller() {
+	function controller(UtilService, Upload) {
 		var vm = this;
 	}
 

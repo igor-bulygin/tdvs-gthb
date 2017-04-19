@@ -1,1 +1,10 @@
-<h1>Main media</h1>
+<div ng-if="storyMainMediaCtrl.isDropAvailable">
+	<div ngf-drag-over-class="drag-over" ngf-drop ngf-select ngf-accept="'image/*'" ngf-drop-available="storyMainMediaCtrl.isDropAvailable" style="border-width: 1px; border-color: grey; border-style:dashed; height: 264px;">
+		<p>Cover photo</p>
+		<p>Drag your photo her or click the button below</p>
+		<button class="btn btn-default">Upload photo</button>
+	</div>
+</div>
+<div ngf-no-file-drop>
+	<input type="file" name="file" ngf-select="storyMainMediaCtrl.uploadPhoto($file)" ngf-accept="'image/*'" ngf-drop-available="storyMainMediaCtrl.isDropAvailable">
+</div>
