@@ -1,1 +1,13 @@
-<h1>Main title</h1>
+<div class="col-md-3">
+	<ol class="nya-bs-select form-control" ng-model="storyMainTitleCtrl.languageSelected" ng-change="storyMainTitleCtrl.parseTitle(storyMainTitleCtrl.story.title)">
+		<li nya-bs-option="language in storyMainTitleCtrl.languages" data-value="language.code" deep-watch="true" ng-init="storyMainTitleCtrl.languageSelected='en-US'" class="ng-class:{'lang-selected': storyMainTitleCtrl.isLanguageOk(language.code, title)}">
+			<a href="">
+				<span ng-bind="language.name"></span>
+				<span class="glyphicon glyphicon-ok ok-white-icon pull-right" ng-if="storyMainTitleCtrl.isLanguageOk(language.code,storyMainTitleCtrl.story.title)"></span>
+			</a>
+		</li>
+	</ol>
+</div>
+<div class="col-md-12">
+	<input type="text" class="form-control" placeholder="Main title" ng-model="storyMainTitleCtrl.story.title[storyMainTitleCtrl.languageSelected]">
+</div>

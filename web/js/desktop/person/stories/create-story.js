@@ -3,6 +3,7 @@
 
 	function controller(languageDataService, UtilService) {
 		var vm = this;
+		vm.story = {};
 
 		init();
 
