@@ -1058,7 +1058,7 @@ class Person extends CActiveRecord implements IdentityInterface
 			'store_link' => $this->getStoreLink(),
 			'loved_link' => $this->getLovedLink(),
 			'boxes_link' => $this->getBoxesLink(),
-			'stories_link' => $this->getStoreLink(),
+			'stories_link' => $this->getStoriesLink(),
 			'about_link' => $this->getAboutLink(),
 			'press_link' => $this->getPressLink(),
 			'videos_link' => $this->getVideosLink(),
@@ -1380,6 +1380,16 @@ class Person extends CActiveRecord implements IdentityInterface
 			return Url::to(["/deviser/stories", "slug" => $this->getSlug(), 'person_id' => $this->short_id], true);
 		} elseif ($this->isInfluencer()) {
 			return Url::to(["/influencer/stories", "slug" => $this->getSlug(), 'person_id' => $this->short_id], true);
+		}
+		return null;
+	}
+
+	public function getStoryCreateLink()
+	{
+		if ($this->isDeviser()) {
+			return Url::to(["/deviser/story-create", "slug" => $this->getSlug(), 'person_id' => $this->short_id], true);
+		} elseif ($this->isInfluencer()) {
+			return Url::to(["/influencer/story-create", "slug" => $this->getSlug(), 'person_id' => $this->short_id], true);
 		}
 		return null;
 	}

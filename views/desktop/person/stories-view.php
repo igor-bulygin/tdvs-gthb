@@ -16,7 +16,7 @@ $this->params['person_links_target'] = 'public_view';
 
 <?= PersonHeader::widget() ?>
 
-<div class="store" ng-controller="viewStoriesCtrl as viewStoriesCtrl">
+<div class="store">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-2">
@@ -30,8 +30,7 @@ $this->params['person_links_target'] = 'public_view';
 							<img class="sad-face" src="/imgs/sad-face.svg">
 							<p class="no-video-text">"Stories" is your blog inside Todevise.</p>
 							<p class="no-video-text">Express yourself, start writing your first one now.</p>
-
-							<button class="btn btn-green btn-add-box" ng-click="viewStoriesCtrl.openCreateStoryModal()">WRITE STORY</button>
+							<a class="btn btn-green btn-add-box" href="<?=$person->getStoryCreateLink()?>">WRITE STORY</a>
 						<?php } else { ?>
 							<p class="no-video-text"><?=$person->getName()?> have no stories.</p>
 						<?php } ?>
@@ -47,15 +46,16 @@ $this->params['person_links_target'] = 'public_view';
 							<div class="row">
 								<?php if ($person->isPersonEditable()) { ?>
 									<div class="col-lg-4">
-										<!--<button class="btn btn-default" ng-click="viewStoriesCtrl.openCreateStoryModal()">Add boxxxx</button>-->
-										<div class="box-loader-wrapper" ng-click="viewStoriesCtrl.openCreateStoryModal()">
-											<div class="plus-add-wrapper">
-												<div class="plus-add">
-													<span>+</span>
+										<a href="<?=$person->getStoryCreateLink()?>">
+											<div class="box-loader-wrapper">
+												<div class="plus-add-wrapper">
+													<div class="plus-add">
+														<span>+</span>
+													</div>
+													<div class="text">Write a story</div>
 												</div>
-												<div class="text">Write a story</div>
 											</div>
-										</div>
+										</a>
 									</div>
 								<?php } ?>
 								<?php foreach ($stories as $story) { ?>

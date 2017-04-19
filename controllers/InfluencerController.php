@@ -242,6 +242,24 @@ class InfluencerController extends CController
 		]);
 	}
 
+	public function actionStoryCreate($slug, $person_id)
+	{
+		$person = Person::findOneSerialized($person_id);
+
+		if (!$person || !$person->isInfluencer()) {
+			throw new NotFoundHttpException();
+		}
+
+		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE && !$person->isPersonEditable()) {
+			throw new UnauthorizedHttpException();
+		}
+
+		$this->layout = '/desktop/public-2.php';
+		return $this->render("@app/views/desktop/person/story-create", [
+			'person' => $person,
+		]);
+	}
+
 	public function actionStoryDetail($slug, $person_id, $story_id)
 	{
 		$person = Person::findOneSerialized($person_id);
