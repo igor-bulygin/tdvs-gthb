@@ -98,12 +98,16 @@ class StoryComponent extends EmbedModel
 	{
 		$photos = $this->$attribute;
 		$person = $this->getParentObject()->getPerson();
-		foreach ($photos as $itemPhoto) {
-			if (!is_array($itemPhoto) || !isset($itemPhoto['photo'])) {
-				$this->addError('items', sprintf('Invalid format to photo item'));
+		foreach ($photos as $item) {
+			if (!is_array($item) || !isset($item['photo']) || !isset($item['position'])) {
+				$this->addError('items', sprintf('Invalid format for photo item'));
 				break;
 			}
-			$photo = $itemPhoto['photo'];
+			$photo = $item['photo'];
+			$position = $item['position'];
+			if (!is_int($position) || $position <= 0) {
+				$this->addError('items', sprintf('Invalid position (%s) for photo %s', $position, $photo));
+			}
 			if (!$person->existMediaFile($photo)) {
 				$this->addError('items', sprintf('Photo %s does not exists', $photo));
 			}
@@ -113,7 +117,16 @@ class StoryComponent extends EmbedModel
 	public function validateWorks($attribute, $params)
 	{
 		$works = $this->$attribute;
-		foreach ($works as $workId) {
+		foreach ($works as $item) {
+			if (!is_array($item) || !isset($item['work']) || !isset($item['position'])) {
+				$this->addError('items', sprintf('Invalid format for work item'));
+				break;
+			}
+			$workId = $item['work'];
+			$position = $item['position'];
+			if (!is_int($position) || $position <= 0) {
+				$this->addError('items', sprintf('Invalid position (%s) for work %s', $position, $workId));
+			}
 			$work = Product2::findOneSerialized($workId);
 			if (!$work) {
 				$this->addError('items', sprintf('Work %s does not exists', $workId));

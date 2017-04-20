@@ -13,6 +13,5 @@ Example about how to call to Web Service to update a story
 * `403`: Forbidden
   
 **Request body**: 
-* `title`: Multilanguage field. Title of the story. (Required)
-
+See post.md
 
