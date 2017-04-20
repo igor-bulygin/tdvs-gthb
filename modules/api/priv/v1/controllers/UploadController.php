@@ -21,15 +21,15 @@ class UploadController extends AppPrivateController
 	public function actionCreate()
 	{
 		Yii::warning("\n\n\n uploadController->actionCreate init");
-		/** @var Person $deviser */
-		$deviser = $this->getPerson();
+		/** @var Person $person */
+		$person = $this->getPerson();
 
 		$uploadForm = new UploadForm();
 		$uploadForm->load(Yii::$app->request->post(), '');
 		$uploadForm->setScenarioByUploadType();
-		//	    $uploadForm->type = UploadForm::UPLOAD_TYPE_DEVISER_PRESS_IMAGES;
+		//	    $uploadForm->type = UploadForm::UPLOAD_TYPE_PERSON_PRESS_IMAGES;
 		// force to relate images to logged user
-		$uploadForm->person_id = $deviser->short_id;
+		$uploadForm->person_id = $person->short_id;
 		$uploadForm->file = UploadedFile::getInstanceByName("file");
 		if ($uploadForm->upload()) {
 			// file is uploaded successfully

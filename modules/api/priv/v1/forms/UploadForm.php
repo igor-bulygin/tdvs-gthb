@@ -10,13 +10,15 @@ use yii\web\UploadedFile;
 
 class UploadForm extends Model {
 
-	const UPLOAD_TYPE_DEVISER_MEDIA_HEADER_ORIGINAL = 'deviser-media-header-original';
-	const UPLOAD_TYPE_DEVISER_MEDIA_HEADER_CROPPED = 'deviser-media-header-cropped';
-	const UPLOAD_TYPE_DEVISER_MEDIA_PROFILE_ORIGINAL = 'deviser-media-profile-original';
-	const UPLOAD_TYPE_DEVISER_MEDIA_PROFILE_CROPPED = 'deviser-media-profile-cropped';
-	const UPLOAD_TYPE_DEVISER_MEDIA_PHOTOS = 'deviser-media-photos';
-	const UPLOAD_TYPE_DEVISER_PRESS_IMAGES = 'deviser-press';
-	const UPLOAD_TYPE_DEVISER_CURRICULUM = 'deviser-curriculum';
+	const UPLOAD_TYPE_PERSON_MEDIA_HEADER_ORIGINAL = 'deviser-media-header-original';
+	const UPLOAD_TYPE_PERSON_MEDIA_HEADER_CROPPED = 'deviser-media-header-cropped';
+	const UPLOAD_TYPE_PERSON_MEDIA_PROFILE_ORIGINAL = 'deviser-media-profile-original';
+	const UPLOAD_TYPE_PERSON_MEDIA_PROFILE_CROPPED = 'deviser-media-profile-cropped';
+	const UPLOAD_TYPE_PERSON_MEDIA_PHOTOS = 'deviser-media-photos';
+	const UPLOAD_TYPE_PERSON_PRESS_IMAGES = 'deviser-press';
+	const UPLOAD_TYPE_PERSON_CURRICULUM = 'deviser-curriculum';
+
+	const UPLOAD_TYPE_PERSON_STORY_PHOTOS = 'story-photos';
 
 	const UPLOAD_TYPE_KNOWN_PRODUCT_PHOTO = 'known-product-photo';
 	const UPLOAD_TYPE_UNKNOWN_PRODUCT_PHOTO = 'unknown-product-photo';
@@ -86,7 +88,7 @@ class UploadForm extends Model {
 			$this->pathUpload = $this->getPathUpload();
 			Yii::warning('upload pathUpload: '.$this->pathUpload);
 
-			if ($this->type == UploadForm::UPLOAD_TYPE_DEVISER_CURRICULUM) {
+			if ($this->type == UploadForm::UPLOAD_TYPE_PERSON_CURRICULUM) {
 				$this->filename = $this->file->name;
 			} else {
 				$this->filename = $this->getPrefix() . uniqid() . '.' . Utils::getFileExtensionFromMimeType($this->file->type);
@@ -121,13 +123,14 @@ class UploadForm extends Model {
 	{
 
 		switch ($this->type) {
-			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_HEADER_ORIGINAL:
-			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_HEADER_CROPPED:
-			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PROFILE_ORIGINAL:
-			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PROFILE_CROPPED:
-			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PHOTOS:
-			case UploadForm::UPLOAD_TYPE_DEVISER_PRESS_IMAGES:
-			case UploadForm::UPLOAD_TYPE_DEVISER_CURRICULUM:
+			case UploadForm::UPLOAD_TYPE_PERSON_MEDIA_HEADER_ORIGINAL:
+			case UploadForm::UPLOAD_TYPE_PERSON_MEDIA_HEADER_CROPPED:
+			case UploadForm::UPLOAD_TYPE_PERSON_MEDIA_PROFILE_ORIGINAL:
+			case UploadForm::UPLOAD_TYPE_PERSON_MEDIA_PROFILE_CROPPED:
+			case UploadForm::UPLOAD_TYPE_PERSON_MEDIA_PHOTOS:
+			case UploadForm::UPLOAD_TYPE_PERSON_PRESS_IMAGES:
+			case UploadForm::UPLOAD_TYPE_PERSON_CURRICULUM:
+			case UploadForm::UPLOAD_TYPE_PERSON_STORY_PHOTOS:
 				$path = Utils::join_paths(Yii::getAlias("@deviser"), $this->person_id);
 				break;
 			case UploadForm::UPLOAD_TYPE_KNOWN_PRODUCT_PHOTO:
@@ -151,13 +154,15 @@ class UploadForm extends Model {
 	private function getPrefix()
 	{
 		$prefixes = [
-			UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_HEADER_ORIGINAL => 'deviser.header.original.',
-			UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_HEADER_CROPPED => 'deviser.header.cropped.',
-			UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PROFILE_ORIGINAL => 'deviser.profile.original.',
-			UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PROFILE_CROPPED => 'deviser.profile.cropped.',
-			UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PHOTOS => 'deviser.photo.',
-			UploadForm::UPLOAD_TYPE_DEVISER_PRESS_IMAGES => 'deviser.press.',
-			UploadForm::UPLOAD_TYPE_DEVISER_CURRICULUM => 'deviser.cv.',
+			UploadForm::UPLOAD_TYPE_PERSON_MEDIA_HEADER_ORIGINAL => 'person.header.original.',
+			UploadForm::UPLOAD_TYPE_PERSON_MEDIA_HEADER_CROPPED => 'person.header.cropped.',
+			UploadForm::UPLOAD_TYPE_PERSON_MEDIA_PROFILE_ORIGINAL => 'person.profile.original.',
+			UploadForm::UPLOAD_TYPE_PERSON_MEDIA_PROFILE_CROPPED => 'person.profile.cropped.',
+			UploadForm::UPLOAD_TYPE_PERSON_MEDIA_PHOTOS => 'person.photo.',
+			UploadForm::UPLOAD_TYPE_PERSON_PRESS_IMAGES => 'person.press.',
+			UploadForm::UPLOAD_TYPE_PERSON_CURRICULUM => 'person.cv.',
+			UploadForm::UPLOAD_TYPE_PERSON_STORY_PHOTOS => 'person.story.',
+
 			UploadForm::UPLOAD_TYPE_KNOWN_PRODUCT_PHOTO => 'product.photo.',
 			UploadForm::UPLOAD_TYPE_UNKNOWN_PRODUCT_PHOTO => 'product.photo.',
 
@@ -175,13 +180,14 @@ class UploadForm extends Model {
 	public function validateType($attribute, $params)
 	{
 		switch ($this->$attribute) {
-			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_HEADER_ORIGINAL:
-			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_HEADER_CROPPED:
-			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PROFILE_ORIGINAL:
-			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PROFILE_CROPPED:
-			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PHOTOS:
-			case UploadForm::UPLOAD_TYPE_DEVISER_PRESS_IMAGES:
-			case UploadForm::UPLOAD_TYPE_DEVISER_CURRICULUM:
+			case UploadForm::UPLOAD_TYPE_PERSON_MEDIA_HEADER_ORIGINAL:
+			case UploadForm::UPLOAD_TYPE_PERSON_MEDIA_HEADER_CROPPED:
+			case UploadForm::UPLOAD_TYPE_PERSON_MEDIA_PROFILE_ORIGINAL:
+			case UploadForm::UPLOAD_TYPE_PERSON_MEDIA_PROFILE_CROPPED:
+			case UploadForm::UPLOAD_TYPE_PERSON_MEDIA_PHOTOS:
+			case UploadForm::UPLOAD_TYPE_PERSON_PRESS_IMAGES:
+			case UploadForm::UPLOAD_TYPE_PERSON_CURRICULUM:
+			case UploadForm::UPLOAD_TYPE_PERSON_STORY_PHOTOS:
 				if (empty($this->person_id)) {
 					$this->addError($attribute, 'Deviser id must be specified');
 				}
@@ -213,13 +219,14 @@ class UploadForm extends Model {
 	private function getUrlUpload()
 	{
 		switch ($this->type) {
-			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_HEADER_ORIGINAL:
-			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_HEADER_CROPPED:
-			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PROFILE_ORIGINAL:
-			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PROFILE_CROPPED:
-			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PHOTOS:
-			case UploadForm::UPLOAD_TYPE_DEVISER_PRESS_IMAGES:
-			case UploadForm::UPLOAD_TYPE_DEVISER_CURRICULUM:
+			case UploadForm::UPLOAD_TYPE_PERSON_MEDIA_HEADER_ORIGINAL:
+			case UploadForm::UPLOAD_TYPE_PERSON_MEDIA_HEADER_CROPPED:
+			case UploadForm::UPLOAD_TYPE_PERSON_MEDIA_PROFILE_ORIGINAL:
+			case UploadForm::UPLOAD_TYPE_PERSON_MEDIA_PROFILE_CROPPED:
+			case UploadForm::UPLOAD_TYPE_PERSON_MEDIA_PHOTOS:
+			case UploadForm::UPLOAD_TYPE_PERSON_PRESS_IMAGES:
+			case UploadForm::UPLOAD_TYPE_PERSON_CURRICULUM:
+			case UploadForm::UPLOAD_TYPE_PERSON_STORY_PHOTOS:
 				$url = (Yii::getAlias("@deviser_url") . "/" . $this->person_id . "/" . $this->filename);
 				break;
 			case UploadForm::UPLOAD_TYPE_KNOWN_PRODUCT_PHOTO:
@@ -243,15 +250,16 @@ class UploadForm extends Model {
 	public function setScenarioByUploadType()
 	{
 		switch ($this->type) {
-			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_HEADER_ORIGINAL:
-			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_HEADER_CROPPED:
-			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PROFILE_ORIGINAL:
-			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PROFILE_CROPPED:
-			case UploadForm::UPLOAD_TYPE_DEVISER_MEDIA_PHOTOS:
-			case UploadForm::UPLOAD_TYPE_DEVISER_PRESS_IMAGES:
+			case UploadForm::UPLOAD_TYPE_PERSON_MEDIA_HEADER_ORIGINAL:
+			case UploadForm::UPLOAD_TYPE_PERSON_MEDIA_HEADER_CROPPED:
+			case UploadForm::UPLOAD_TYPE_PERSON_MEDIA_PROFILE_ORIGINAL:
+			case UploadForm::UPLOAD_TYPE_PERSON_MEDIA_PROFILE_CROPPED:
+			case UploadForm::UPLOAD_TYPE_PERSON_MEDIA_PHOTOS:
+			case UploadForm::UPLOAD_TYPE_PERSON_PRESS_IMAGES:
+			case UploadForm::UPLOAD_TYPE_PERSON_STORY_PHOTOS:
 				$this->setScenario(UploadForm::SCENARIO_UPLOAD_DEVISER_IMAGE);
 				break;
-			case UploadForm::UPLOAD_TYPE_DEVISER_CURRICULUM:
+			case UploadForm::UPLOAD_TYPE_PERSON_CURRICULUM:
 				$this->setScenario(UploadForm::SCENARIO_UPLOAD_DEVISER_CURRICULUM);
 				break;
 			case UploadForm::UPLOAD_TYPE_KNOWN_PRODUCT_PHOTO:
