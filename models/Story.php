@@ -22,6 +22,7 @@ use yii\mongodb\ActiveQuery;
  *
  * Mappings:
  * @property StoryComponent[] $componentsMapping
+ * @property StoryMainMedia $mainMediaMapping
  */
 class Story extends CActiveRecord {
 
@@ -85,6 +86,8 @@ class Story extends CActiveRecord {
 		$this->short_id = Utils::shortID(8);
 
 		// initialize attributes
+		$this->categories = [];
+		$this->tags = [];
 		$this->components = [];
 	}
 
@@ -93,11 +96,17 @@ class Story extends CActiveRecord {
         return $this->mapEmbeddedList('components', StoryComponent::className(), array('unsetSource' => false));
     }
 
+    public function embedMainMediaMapping()
+    {
+        return $this->mapEmbedded('main_media', StoryMainMedia::className(), array('unsetSource' => false));
+    }
+
 	public function setParentOnEmbbedMappings()
 	{
 		foreach ($this->componentsMapping as $item) {
 			$item->setParentObject($this);
 		}
+		$this->mainMediaMapping->setParentObject($this);
 	}
 
 	public function beforeSave($insert) {
@@ -114,29 +123,35 @@ class Story extends CActiveRecord {
 	}
 
     public function rules()
-    {
-        return [
-			[['title'], 'safe', 'on' => [self::SCENARIO_STORY_CREATE_DRAFT, self::SCENARIO_STORY_UPDATE_DRAFT, self::SCENARIO_STORY_UPDATE_ACTIVE]],
-			[['person_id'], 'required', 'on' => [self::SCENARIO_STORY_CREATE_DRAFT, self::SCENARIO_STORY_UPDATE_DRAFT, self::SCENARIO_STORY_UPDATE_ACTIVE]],
-			[['person_id'], 'validatePersonExists'],
-			[['components'], 'safe'],
-			[['componentsMapping'], 'yii2tech\embedded\Validator'],
-        ];
-    }
-
-	/**
-	 * Custom validator for person_id
-	 *
-	 * @param $attribute
-	 * @param $params
-	 */
-	public function validatePersonExists($attribute, $params)
 	{
-		$person_id = $this->$attribute;
-		$person = Person::findOneSerialized($person_id);
-		if (!$person) {
-			$this->addError($attribute, sprintf('Person %s not found', $person_id));
-		}
+		return [
+			['short_id', 'unique'],
+
+			[
+				['title', 'categories', 'tags', 'components'],
+				'safe',
+				'on' => [
+					self::SCENARIO_STORY_CREATE_DRAFT,
+					self::SCENARIO_STORY_UPDATE_DRAFT,
+					self::SCENARIO_STORY_UPDATE_ACTIVE
+				]
+			],
+
+			['story_state', 'in', 'range' => [self::STORY_STATE_ACTIVE, self::STORY_STATE_DRAFT]],
+
+			['person_id', 'app\validators\PersonIdValidator'],
+
+			['title', 'app\validators\TranslatableRequiredValidator'],
+
+			['categories', 'app\validators\CategoriesValidator'],
+
+			['components', 'safe'],
+			['componentsMapping', 'yii2tech\embedded\Validator'],
+
+			['main_media', 'safe'],
+			['mainMediaMapping', 'yii2tech\embedded\Validator'],
+
+		];
 	}
 
 	/**
