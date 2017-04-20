@@ -14,17 +14,18 @@ Example about how to call to Web Service to upload a media file
   
 **Request body**: 
 * `type`: one of available upload use:
- * `deviser-media-header-original`
- * `deviser-media-header-cropped`
- * `deviser-media-profile-original`
- * `deviser-media-profile-cropped`
- * `deviser-media-photos`
- * `deviser-press`
- * `deviser-curriculum`
- * `known-product-photo`
- * `unknown-product-photo`
+** `deviser-media-header-original`
+** `deviser-media-header-cropped`
+** `deviser-media-profile-original`
+** `deviser-media-profile-cropped`
+** `deviser-media-photos`
+** `deviser-press`
+** `deviser-curriculum`
+** `story-photos`
+** `known-product-photo`
+** `unknown-product-photo`
  
-* `deviser_id`: id of the deviser related with the media file (only for use types related with devisers) 
+* `person_id`: id of the person related with the media file (only for use types related with persons) 
 * `product_id`: id of the product related with the media file (only for use types related with products)
 * `file`: media file to be uploaded
  
