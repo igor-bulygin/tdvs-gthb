@@ -174,7 +174,7 @@ app\components\assets\PublicHeader2Asset::register($this);
 				</li>
 			</ul>
 		<ul class="nav navbar-nav navbar-right">
-			<li><a href="#">Stories</a></li>
+			<li><a href="<?=Url::to(['/discover/stories'])?>">Stories</a></li>
 			<li><a href="<?=Url::to(['/discover/boxes'])?>">Explore Boxes</a></li>
 			<li><a href="<?=Url::to(['/discover/devisers'])?>">Discover devisers</a></li>
 			<li><a href="<?=Url::to(['/discover/influencers'])?>">Influencers</a></li>
