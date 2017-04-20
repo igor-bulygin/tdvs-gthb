@@ -14,4 +14,7 @@
 		}
 	}
 
+	angular.module('api')
+		.service('uploadDataService', uploadDataService);
+
 }());
