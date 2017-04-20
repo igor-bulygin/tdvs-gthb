@@ -18,5 +18,8 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 		<p>New Story</p>
 		<story-main-title story="createStoryCtrl.story" languages="createStoryCtrl.languages"></story-main-title>
 		<story-main-media story="createStoryCtrl.story"></story-main-media>
+		<div class="text-center">
+			<button class="btn btn-default btn-green">Publish story</button>
+		</div>
 	</div>
 </div>

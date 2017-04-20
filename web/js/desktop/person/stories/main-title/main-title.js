@@ -14,6 +14,8 @@
 					vm.completedLanguages.push(language.code)
 				}
 			})
+			if(!title[vm.languageSelected] || title[vm.languageSelected] == '')
+				title[vm.languageSelected] = 'Main title';
 		}
 
 		function isLanguageOk(code, title) {
