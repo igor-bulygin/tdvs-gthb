@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function personDataService($resource, apiConfig, apiMethods, Upload) {
+	function personDataService($resource, apiConfig, apiMethods) {
 		//pub
 		var Person = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'person/:personId');
 		var Login = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'auth/login');
@@ -13,7 +13,6 @@
 				method: 'PATCH'
 			}
 		});
-		var Uploads = apiConfig.baseUrl + 'priv/' + apiConfig.version + 'uploads';
 
 		//methods
 		this.getPeople = getPeople;
@@ -25,7 +24,6 @@
 		this.getProfile = getProfile;
 		this.getProfilePublic = getProfilePublic;
 		this.updateProfile = updateProfile;
-		this.UploadFile = UploadFile;
 
 		function getPeople(params, onSuccess, onError) {
 			apiMethods.get(Person, params, onSuccess, onError);
@@ -65,14 +63,6 @@
 		function updateProfile(data, params, onSuccess, onError) {
 			apiMethods.update(Profile, data, params, onSuccess, onError);
 		}
-
-		function UploadFile(data, onSuccess, onError, onUploading) {
-			Upload.upload({
-				url: Uploads,
-				data: data
-			}).then(function(returnData) { onSuccess(returnData)}, function(err) { onError(err); }, function(evt) { onUploading(evt)} );
-		}
-
 	}
 
 	angular
