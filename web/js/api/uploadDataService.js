@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function uploadDataService(Upload) {
+	function uploadDataService(Upload, apiConfig) {
 		var Uploads = apiConfig.baseUrl + 'priv/' + apiConfig.version + 'uploads';
 
 		this.UploadFile = UploadFile;
