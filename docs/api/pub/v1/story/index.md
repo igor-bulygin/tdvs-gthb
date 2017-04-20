@@ -13,8 +13,8 @@ Story
 * `403`: Not allowed
   
 **Request parameters**:
-* `id`: Filter a specific product for id
-* `q`: Search word/s in name and description (LIKE)
+* `id`: Filter a specific story for id
+* `q`: Search word/s in the title of the story (LIKE)
 * `person_id`: Filter stories of a specific person only
 * `story_state`: Filter stories by state (values: story_state_draft, story_state_active)
 * `page`: Set the result page that want to be retrieved (default: 1)
