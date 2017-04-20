@@ -24,6 +24,7 @@ class ApiAsset extends AssetBundle {
 		'js/api/orderDataService.js',
 		'js/api/lovedDataService.js',
 		'js/api/boxDataService.js',
+		'js/api/storyDataService.js',
 	];
 	public $depends = [
 		'app\assets\AppAsset',
