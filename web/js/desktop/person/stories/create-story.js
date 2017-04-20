@@ -3,12 +3,20 @@
 
 	function controller(languageDataService, UtilService) {
 		var vm = this;
-		vm.story = {};
 
 		init();
 
 		function init() {
+			vm.story = newStory();
 			getLanguages();
+		}
+
+		function newStory() {
+			var story = {};
+			story['title'] = {
+				'en-US': 'Main title'
+			}
+			return story;
 		}
 
 		function getLanguages() {
@@ -21,7 +29,7 @@
 	}
 
 	angular
-		.module('todevise')
+		.module('todevise', ['api', 'util', 'header', 'xeditable', 'nya.bootstrap.select'])
 		.controller('createStoryCtrl', controller);
 
 }());

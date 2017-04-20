@@ -4,7 +4,7 @@ namespace app\assets\libs;
 
 use yii\web\AssetBundle;
 
-class angularXEditable extends AssetBundle {
+class angularXEditableAsset extends AssetBundle {
 	public $sourcePath = '@npm/angular-xeditable/dist';
 	public $css = [
 		YII_ENV_DEV ? 'css/xeditable.css' : 'css/xeditable.min.css'
