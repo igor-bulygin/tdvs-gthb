@@ -111,7 +111,7 @@ class Story extends CActiveRecord {
 
 	public function beforeSave($insert) {
 		if (empty($this->story_state)) {
-			$this->story_state = Story::STORY_STATE_DRAFT;
+			$this->story_state = Story::STORY_STATE_ACTIVE;
 		}
 
 		if (empty($this->created_at)) {

@@ -42,6 +42,9 @@ class EmbedModel extends CActiveRecord
 		foreach ($this->errors as $attribute => $error) {
 			foreach ($error as $oneError) {
 				$this->getParentObject()->addError($attribute, $oneError);
+				if (method_exists($this, 'getParentAttribute')) {
+					$this->getParentObject()->addError($this->getParentAttribute(), $oneError);
+				}
 			}
 		};
 		$this->clearErrors();

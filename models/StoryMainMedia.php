@@ -9,7 +9,7 @@ namespace app\models;
  */
 class StoryMainMedia extends EmbedModel {
 
-	const STORY_MAIN_MEDIA_TYPE_PHOTO = 'photo';
+	const STORY_MAIN_MEDIA_TYPE_PHOTO = 1;
 
 	public function attributes() {
 		return [

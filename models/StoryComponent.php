@@ -14,10 +14,10 @@ use yii\validators\UrlValidator;
 class StoryComponent extends EmbedModel
 {
 
-	const STORY_COMPONENT_TYPE_TEXT = 'text';
-	const STORY_COMPONENT_TYPE_PHOTOS = 'photos';
-	const STORY_COMPONENT_TYPE_VIDEOS = 'videos';
-	const STORY_COMPONENT_TYPE_WORKS = 'works';
+	const STORY_COMPONENT_TYPE_TEXT = 1;
+	const STORY_COMPONENT_TYPE_PHOTOS = 2;
+	const STORY_COMPONENT_TYPE_WORKS = 3;
+	const STORY_COMPONENT_TYPE_VIDEOS = 4;
 
 	public function attributes()
 	{
@@ -98,7 +98,12 @@ class StoryComponent extends EmbedModel
 	{
 		$photos = $this->$attribute;
 		$person = $this->getParentObject()->getPerson();
-		foreach ($photos as $photo) {
+		foreach ($photos as $itemPhoto) {
+			if (!is_array($itemPhoto) || !isset($itemPhoto['photo'])) {
+				$this->addError('items', sprintf('Invalid format to photo item'));
+				break;
+			}
+			$photo = $itemPhoto['photo'];
 			if (!$person->existMediaFile($photo)) {
 				$this->addError('items', sprintf('Photo %s does not exists', $photo));
 			}
