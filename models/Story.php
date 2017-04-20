@@ -13,7 +13,10 @@ use yii\mongodb\ActiveQuery;
  * @property string $story_state
  * @property string person_id
  * @property array title
+ * @property array categories
+ * @property array tags
  * @property array components
+ * @property array main_media
  * @property MongoDate created_at
  * @property MongoDate updated_at
  *
@@ -55,7 +58,9 @@ class Story extends CActiveRecord {
 			'person_id',
 			'title',
 			'categories',
+			'tags',
 			'components',
+			'main_media',
 			'created_at',
 			'updated_at',
 		];
@@ -153,7 +158,9 @@ class Story extends CActiveRecord {
 					'person_id',
 					'title',
 					'categories',
+					'tags',
 					'components',
+					'main_media',
                 ];
                 static::$retrieveExtraFields = [
                 ];
