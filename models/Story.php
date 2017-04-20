@@ -138,7 +138,7 @@ class Story extends CActiveRecord {
 			],
 
 			[
-				['title', 'components'],
+				['title', 'components', 'main_media'],
 				'required',
 				'on' => [
 					self::SCENARIO_STORY_UPDATE_ACTIVE
