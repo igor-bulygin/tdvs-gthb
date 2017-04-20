@@ -9,7 +9,8 @@ class ExploreStoriesAsset extends AssetBundle {
 	public $css = [];
 	public $js = [
 		'js/desktop/discover/stories/exploreStoriesCtrl.js',
-		'js/desktop/discover/stories/results/results.js',
+		'js/desktop/discover/stories/results/results.js',		
+		'js/desktop/discover/stories/filters/filters.js',
 	];
 	public $depends = [
 		'app\assets\desktop\pub\PublicCommonAsset',

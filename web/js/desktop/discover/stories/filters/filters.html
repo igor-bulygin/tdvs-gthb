@@ -1,0 +1,12 @@
+<div class="filter-wrapper">
+	<form name="exploreStoriesFiltersCtrl.form">
+		<span class="filter-title">Filter by location</span>
+		<div class="checkbox checkbox-red" ng-repeat="country in exploreStoriesFiltersCtrl.countries.items | orderBy: 'country.name'" ng-if="$index < exploreStoriesFiltersCtrl.show_countries">
+			<input ng-attr-id="{{'checkbox'+($index+10)}}" type="checkbox" name="countries" ng-model="exploreStoriesFiltersCtrl.filters.countries[country.id]" class="ng-class:{'checked': exploreStoriesFiltersCtrl.filters.countries[country.id]}">
+			<label ng-attr-for="{{'checkbox'+($index+10)}}">
+				<span ng-bind="country.country_name"></span>
+			</label>
+		</div>
+		<span class="more-btn" ng-click="exploreStoriesFiltersCtrl.seeMore('countries')" ng-if="exploreStoriesFiltersCtrl.show_countries < exploreStoriesFiltersCtrl.countries.meta.total_count" ng-cloak>see more</span>
+	</form>
+</div>
