@@ -20,20 +20,20 @@ class PriceStockValidator extends Validator
 	public function validateAttribute($object, $attribute)
 	{
 		$positiveFields = ['price', 'stock', 'weight', 'width', 'height', 'length'];
-//		$positiveFields = ['price', 'stock', 'weight'];
+
 		$priceStock = $object->{$attribute};
 		if (!is_array($priceStock)) {
 			$this->addError($object, $attribute, 'Pricestock must be an array');
 		} else {
-			$noOptionIdOptions = ['size', 'type']; // this values can be received and must be considered valid, although there are not options ids
+
 			foreach ($priceStock as $item) {
 				foreach ($item['options'] as $optionId => $values) {
-					$optionId = (string) $optionId; // force cast to string (short_id are allways strings)
-					if (in_array($optionId, $noOptionIdOptions)) {
-						// TODO: nothing to do here??
+					$optionId = (string)$optionId; // force cast to string (short_id are allways strings)
+					$tag = Tag::findOne(["short_id" => $optionId]);
+					if ($tag->isRareTag()) {
+						// TODO: wtf do here?
 						continue;
 					}
-					$tag = Tag::findOne(["short_id" => $optionId]);
 					/* @var $tag Tag */
 					if (!$tag) {
 						$this->addError($object, $attribute, sprintf('Option %s not found', $optionId));
@@ -43,13 +43,15 @@ class PriceStockValidator extends Validator
 								foreach ($value as $oneValue) {
 									$optionTag = $tag->getOptionTagByValue($oneValue);
 									if (!$optionTag) {
-										$this->addError($object, $attribute, sprintf('Value %s not valid for tag %s', $oneValue, $optionId));
+										$this->addError($object, $attribute,
+											sprintf('Value %s not valid for tag %s', $oneValue, $optionId));
 									}
 								}
 							} else {
 								$optionTag = $tag->getOptionTagByValue($value);
 								if (!$optionTag) {
-									$this->addError($object, $attribute, sprintf('Value %s not valid for tag %s', $value, $optionId));
+									$this->addError($object, $attribute,
+										sprintf('Value %s not valid for tag %s', $value, $optionId));
 								}
 							}
 						}
