@@ -1,0 +1,8 @@
+<div infinite-scroll="exploreStoriesResultsCtrl.addMoreItems()" infinite-scroll-distance="1">
+	<div ng-repeat="story in exploreStoriesResultsCtrl.results_infinite" ng-cloak>        
+		<div class="col-md-4 col-xs-6 pad-grid">
+			{{story.title}} 
+		</div>
+	</div>
+	<div style="clear: both;"></div>
+</div>
