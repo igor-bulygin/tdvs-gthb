@@ -4,7 +4,8 @@
 	function controller(UtilService, storyDataService, $scope) {
 		var vm = this;
 		vm.search = search;
-
+		vm.filters = {};
+        vm.resultsFounded=false;
 		init();
 
 		function init() {
@@ -20,18 +21,29 @@
 			if(vm.key)
 				params = Object.assign(params, {q: vm.key});
 			
-			
+			Object.keys(vm.filters).map(function(filter_type) {
+				var new_filter = []
+				Object.keys(vm.filters[filter_type]).map(function(filter) {
+					if(vm.filters[filter_type][filter])
+						new_filter.push(filter);
+				})
+				if(new_filter.length > 0)
+					params[filter_type+'[]'] = new_filter;
+			})
 
 			function onGetStoriesSuccess(data) {
 				vm.searching= false;
 				vm.search_key = angular.copy(vm.key);
 				vm.results = angular.copy(data);
-				j= vm.results.items.length;
+				if (vm.results.items.length > 0) {
+					vm.resultsFounded=true;
+				}
 			}
 
 			function onGetStoriesError(err) {
 				UtilService.onError(err);
 				vm.searching = false;
+				vm.resultsFounded=false;
 			}
 
 			storyDataService.getStoryPub(params, onGetStoriesSuccess, onGetStoriesError);

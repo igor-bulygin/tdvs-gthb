@@ -8,8 +8,8 @@ $this->title = 'Stories - Todevise';
 <div class="our-devisers-wrapper" ng-controller="exploreStoriesCtrl as exploreStoriesCtrl">
 	<div class="container">
 		<div class="our-boxes-header">
-			<h3>Explore stories</h3>
-			<h5 class="text-center">Its time to discover the latest stories</h5>
+			<h3>Stories</h3>
+			<h5 class="text-center">See the world from a whole different perspective</h5>
 			<div class="row">
 				<form name="exploreStoriesCtrl.form">
 					<div class="devisers-searcher">
@@ -20,6 +20,7 @@ $this->title = 'Stories - Todevise';
 			</div>
 		</div>
 		<div class="our-devisers-body">
+			<div class="col-md-2"><explore-stories-filters filters="exploreStoriesCtrl.filters"></explore-stories-filters></div>
 			<div class="col-md-10">
 				<div class="found-header">
 					<p ng-if="exploreStoriesCtrl.search_key" ng-cloak>We found <span ng-bind="exploreStoriesCtrl.results.meta.total_count"></span> stories with the keywords "<span class="key" ng-bind="exploreStoriesCtrl.search_key"></span>"</p>
@@ -31,7 +32,7 @@ $this->title = 'Stories - Todevise';
 				<div ng-if="exploreBoxesCtrl.results.items.length === 0" ng-cloak>
 					<p class="text-center">No stories found with the specified search criteria.</p>
 				</div>
-                <div ng-cloak>
+                <div ng-if="exploreBoxesCtrl.results.items.length != 0" ng-cloak>
 				    <explore-stories-results results="exploreStoriesCtrl.results" ng-if="exploreStoriesCtrl.results && exploreStoriesCtrl.results.items.length > 0" ng-cloak></explore-stories-results>
                 </div>
 			</div>
