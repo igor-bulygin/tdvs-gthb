@@ -137,6 +137,14 @@ class Story extends CActiveRecord {
 				]
 			],
 
+			[
+				['title', 'components'],
+				'required',
+				'on' => [
+					self::SCENARIO_STORY_UPDATE_ACTIVE
+				]
+			],
+
 			['story_state', 'in', 'range' => [self::STORY_STATE_ACTIVE, self::STORY_STATE_DRAFT]],
 
 			['person_id', 'app\validators\PersonIdValidator'],
