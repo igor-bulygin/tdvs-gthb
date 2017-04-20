@@ -16,4 +16,5 @@ Example about how to call to Web Service to get specific story of the connected 
 * `:id`: Id of the story that want to get
   
 **Response body**:
-See index.md
+
+See the structure of a story in index.md
