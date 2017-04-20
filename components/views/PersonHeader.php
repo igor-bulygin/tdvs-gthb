@@ -3,7 +3,6 @@ use app\assets\desktop\deviser\EditHeaderAsset;
 use app\components\MakeProfilePublic;
 use app\models\Person;
 use yii\helpers\Json;
-use yii\helpers\Url;
 
 EditHeaderAsset::register($this);
 
@@ -46,7 +45,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 					</div>
 				</div>
 				<?php if ($person->isDeviserEditable()) {?>
-					<a class="btn btn-default btn-add-work" ng-class="personHeaderCtrl.required['store'] ? 'button-error' : 'btn-green'" href="<?= Url::to(["product/create", "slug" => $person->slug, 'deviser_id' => $person->short_id])?>">Add Work</a>
+					<a class="btn btn-default btn-add-work" ng-class="personHeaderCtrl.required['store'] ? 'button-error' : 'btn-green'" href="<?= $person->getCreateWorkLink()?>">Add Work</a>
 				<?php } ?>
 			</div>
 		</div>

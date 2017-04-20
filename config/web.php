@@ -199,8 +199,9 @@ $config = [
 				'/<person_type:(deviser)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/faq/edit' => 'person/faq-edit',
 				'/<person_type:(deviser)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/store' => 'person/store',
 				'/<person_type:(deviser)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/store/edit' => 'person/store-edit',
-				'/<person_type:(deviser)>/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/works/create' => 'person/create',
-				'/<person_type:(deviser)>/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/works/<product_id:[^/.]*?>/edit' => 'person/edit',
+
+				'/<person_type:(deviser)>/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/works/create' => 'product/create',
+				'/<person_type:(deviser)>/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/works/<product_id:[^/.]*?>/edit' => 'product/edit',
 
 				//Settings
 				'/settings/<slug:[^/.]*?>/<person_id:[^/.]*?>' => 'settings/index',
@@ -221,6 +222,7 @@ $config = [
 				'discover-devisers' => 'discover/devisers',
 				'discover-influencers' => 'discover/influencers',
 				'explore-boxes' => 'discover/boxes',
+				'stories' => 'discover/stories',
 
 				// Request become a Deviser
 				'/become-a-deviser' => 'public/become-deviser',

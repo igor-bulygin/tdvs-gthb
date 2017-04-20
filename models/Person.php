@@ -1423,6 +1423,11 @@ class Person extends CActiveRecord implements IdentityInterface
 		return Url::to(["/person/faq-edit", "slug" => $this->getSlug(), 'person_id' => $this->short_id, "person_type" => $this->getPersonTypeForUrl()], true);
 	}
 
+	public function getCreateWorkLink()
+	{
+		return Url::to(["/product/create", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id, "person_type" => $this->getPersonTypeForUrl()], true);
+	}
+
 	public function getSlug()
 	{
 		if (is_array($this->slug)) {
