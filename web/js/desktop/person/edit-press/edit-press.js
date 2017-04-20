@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(personDataService, Upload, toastr, UtilService, $timeout, $window, dragndropService) {
+	function controller(personDataService, Upload, uploadDataService, toastr, UtilService, $timeout, $window, dragndropService) {
 		var vm = this;
 		vm.upload = upload;
 		vm.update = update;
@@ -71,7 +71,7 @@
 					file: file
 				};
 
-				personDataService.UploadFile(data, 
+				uploadDataService.UploadFile(data, 
 					function(data) {
 						return onUploadFileSuccess(data, file);
 					}, UtilService.onError,

@@ -1,7 +1,7 @@
 (function() {
 
 	function controller(personDataService, UtilService, languageDataService, productDataService, 
-		Upload, $timeout, $rootScope, $scope, deviserEvents, $uibModal, dragndropService, $window) {
+		Upload, uploadDataService, $timeout, $rootScope, $scope, deviserEvents, $uibModal, dragndropService, $window) {
 
 		var vm = this;
 		vm.stripHTMLTags = UtilService.stripHTMLTags;
@@ -141,7 +141,7 @@
 					person_id: person.short_id,
 					file: file
 				}
-				personDataService.UploadFile(data, 
+				uploadDataService.UploadFile(data, 
 					function(data) {
 						return onUploadPhotoSuccess(data, file)}, 
 					UtilService.onError, 
@@ -178,7 +178,7 @@
 				file: file
 			}
 
-			personDataService.UploadFile(data, onUploadCVSuccess, UtilService.onError, console.log)
+			uploadDataService.UploadFile(data, onUploadCVSuccess, UtilService.onError, console.log)
 		}
 
 		function deleteCV() {

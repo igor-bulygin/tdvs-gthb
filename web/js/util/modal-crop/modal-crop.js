@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(Upload, personDataService, productDataService, UtilService) {
+	function controller(Upload, personDataService, productDataService, uploadDataService, UtilService) {
 		var vm = this;
 		vm.ok = ok;
 		vm.dismiss = dismiss;
@@ -85,11 +85,7 @@
 				default:
 					break;
 			}
-			if(data.deviser_id)
-				productDataService.UploadFile(data, onUploadFileSuccess, onUploadFileError, console.log);
-			else {
-				personDataService.UploadFile(data, onUploadFileSuccess, onUploadFileError, console.log);
-			}
+			uploadDataService.UploadFile(data, onUploadFileSuccess, onUploadFileError, console.log);
 		}
 
 		function dismiss() {

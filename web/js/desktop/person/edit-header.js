@@ -2,7 +2,7 @@
 	"use strict";
 
 	function controller(personDataService, deviserEvents, languageDataService, UtilService, Upload, 
-		$uibModal, locationDataService, $scope, $location, $rootScope) {
+		uploadDataService, $uibModal, locationDataService, $scope, $location, $rootScope) {
 		var vm = this;
 		vm.showCities = false;
 		vm.limit_text_biography = 140;
@@ -177,7 +177,7 @@
 					type: 'deviser-media-header-original',
 					file: newValue
 				}
-				personDataService.UploadFile(data, onUploadHeaderSuccess, UtilService.onError, console.log);
+				uploadDataService.UploadFile(data, onUploadHeaderSuccess, UtilService.onError, console.log);
 			}
 		});
 
@@ -194,7 +194,7 @@
 					type: 'deviser-media-profile-original',
 					file: newValue
 				}
-				personDataService.UploadFile(data, onUploadProfileSuccess, UtilService.onError, console.log);
+				uploadDataService.UploadFile(data, onUploadProfileSuccess, UtilService.onError, console.log);
 			}
 		});
 

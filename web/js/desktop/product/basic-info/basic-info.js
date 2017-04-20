@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(productDataService, toastr, Upload, $scope, UtilService, $uibModal, $rootScope, 
+	function controller(productDataService, toastr, Upload, uploadDataService, $scope, UtilService, $uibModal, $rootScope, 
 		productEvents, $timeout, dragndropService) {
 		var vm = this;
 		vm.has_error = UtilService.has_error;
@@ -115,7 +115,7 @@
 					data['type'] = 'unknown-product-photo';
 				}
 
-				productDataService.UploadFile(data,
+				uploadDataService.UploadFile(data,
 					function(data) {
 						return onUploadPhotoSuccess(data, file);
 					}, UtilService.onError,
