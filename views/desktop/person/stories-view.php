@@ -46,7 +46,7 @@ $this->params['person_links_target'] = 'public_view';
 							</div>
 							<div class="row">
 								<?php if ($person->isPersonEditable()) { ?>
-									<div class="col-lg-4">
+									<div class="col-lg-6">
 										<a href="<?=$person->getStoryCreateLink()?>">
 											<div class="box-loader-wrapper">
 												<div class="plus-add-wrapper">
@@ -59,9 +59,35 @@ $this->params['person_links_target'] = 'public_view';
 										</a>
 									</div>
 								<?php } ?>
-								<?php foreach ($stories as $story) { ?>
-									<?= $story->getTitle() ?>
+
+								<?php /***** PUT HERE STATIC STORIES AS HTML EXAMPLE *****/ ?>
+
+								<?php if (false) { ?>
+								<?php foreach ($stories as $story) {
+									$firstText = $story->getFirstTextComponent();
+									$text = $firstText ? $firstText->getText() : null;
+									$photoUrl = $story->mainMediaMapping->getPhotoUrl(); ?>
+									<a href="<?=$story->getViewLink()?>">
+										<div class="col-lg-6">
+
+											<div class="title"><?= $story->getTitle() ?></div>
+
+											<div><?=$text?></div>
+
+											<div>
+												<span class="ion-heart"></span>
+												<span class="fa fa-comment"></span>
+											</div>
+
+											<?php if ($photoUrl) { ?>
+												<img src="<?=$photoUrl?>" class="img-responsive" />
+											<?php } ?>
+
+										</div>
+									</a>
 								<?php } ?>
+								<?php } ?>
+
 							</div>
 						</div>
 					</div>

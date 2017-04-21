@@ -379,7 +379,16 @@ class PersonController extends CController
 			throw new UnauthorizedHttpException();
 		}
 
-		$stories = Story::findSerialized(['person_id' => $person_id]);
+		if ($person->isPersonEditable()) {
+			$stories = Story::findSerialized(['person_id' => $person_id]);
+		} else {
+			$stories = Story::findSerialized(
+				[
+					'person_id' => $person_id,
+					'story_state' => Story::STORY_STATE_ACTIVE,
+				]
+			);
+		}
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("@app/views/desktop/person/stories-view", [
 			'person' => $person,

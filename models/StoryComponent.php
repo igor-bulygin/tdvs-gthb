@@ -1,6 +1,7 @@
 <?php
 namespace app\models;
 
+use app\helpers\Utils;
 use app\validators\TranslatableRequiredValidator;
 use yii\validators\UrlValidator;
 
@@ -39,8 +40,6 @@ class StoryComponent extends EmbedModel
 	public function init()
 	{
 		parent::init();
-
-		$this->position = 0;
 	}
 
 	public function rules()
@@ -170,5 +169,22 @@ class StoryComponent extends EmbedModel
 			case self::STORY_COMPONENT_TYPE_WORKS:
 				break;
 		}
+	}
+
+	/**
+	 * Returns the text of the component (if it is a "text" component)
+	 *
+	 * @return string|null
+	 */
+	public function getText() {
+		if ($this->type == self::STORY_COMPONENT_TYPE_TEXT) {
+			if (is_array($this->items)) {
+				return Utils::l($this->items);
+			}
+
+			return $this->items;
+		}
+
+		return null;
 	}
 }

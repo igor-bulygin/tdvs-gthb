@@ -63,4 +63,18 @@ class StoryMainMedia extends EmbedModel {
 			$this->addError('photo', sprintf('Photo %s does not exists', $photo));
 		}
 	}
+
+	/**
+	 * Returns the url of the photo (if it photo main media)
+	 *
+	 * @return null|string
+	 */
+	public function getPhotoUrl() {
+		if ($this->type == self::STORY_MAIN_MEDIA_TYPE_PHOTO) {
+			$person = $this->getParentObject()->getPerson();
+			return $person->getUrlImagesLocation().$this->photo;
+		}
+
+		return null;
+	}
 }

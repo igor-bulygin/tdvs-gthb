@@ -6,6 +6,7 @@ use app\helpers\Utils;
 use Exception;
 use MongoDate;
 use Yii;
+use yii\helpers\Url;
 use yii\mongodb\ActiveQuery;
 
 /**
@@ -400,5 +401,55 @@ class Story extends CActiveRecord {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Returns the first component of type "text" (if exists)
+	 *
+	 * @return StoryComponent|null
+	 */
+	public function getFirstTextComponent() {
+		return $this->getFirstComponentByType(StoryComponent::STORY_COMPONENT_TYPE_TEXT);
+	}
+
+	/**
+	 * Returns the first component of the specified type
+	 * @param $componentType
+	 *
+	 * @return StoryComponent|null
+	 */
+	protected function getFirstComponentByType($componentType) {
+		$components = $this->componentsMapping;
+
+		$sortedComponents = [];
+		foreach ($components as $component) {
+			$sortedComponents[$component->position] = $component;
+		}
+
+		foreach ($sortedComponents as $component) {
+			if ($component->type == $componentType) {
+				return $component;
+			}
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the url to view the story detail
+	 *
+	 * @return string
+	 */
+	public function getViewLink()
+	{
+		$person = $this->getPerson();
+
+		return Url::to([
+			"/person/story-detail",
+			"slug" => $person->getSlug(),
+			"person_id" => $person->short_id,
+			"story_id" => $this->short_id,
+			"person_type" => $person->getPersonTypeForUrl()
+		]);
 	}
 }
