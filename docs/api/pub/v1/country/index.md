@@ -15,6 +15,7 @@ Countries
 * `name`: Search word/s in name attribute (LIKE)
 * `person_type`: Only get countries of persons of specified type
 * `only_with_boxes`: Only get countries of persons with boxes
+* `only_with_stories`: Only get countries of persons with stories
 * `page`: Set the result page that want to be retrieved (default: 1)
 * `limit`: Limit the results returned for page (default: 9999)
     

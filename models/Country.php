@@ -164,6 +164,33 @@ class Country extends CActiveRecord
 			}
 		}
 
+		// if only_with_stories is specified
+		if ((array_key_exists("only_with_stories", $criteria)) && (!empty($criteria["only_with_stories"]))) {
+
+			// Get all stories not empty and actives
+			$stories = Story::findSerialized([
+				"story_account_state" => Story::STORY_STATE_ACTIVE,
+				"only_active_persons" => true,
+			]);
+
+			$idsPersons = [];
+			foreach ($stories as $story) {
+				$idsPersons[] = $story->person_id;
+			}
+
+			// Get different countries of persons with stories
+			if ($idsPersons) {
+				$queryPerson = new ActiveQuery(Person::className());
+				$queryPerson->andWhere(["account_state" => Person::ACCOUNT_STATE_ACTIVE]);
+				$queryPerson->andWhere(["short_id" => $idsPersons]);
+				$countries = $queryPerson->distinct("personal_info.country");
+
+				$query->andFilterWhere(["in", "country_code", $countries]);
+			} else {
+				$query->andFilterWhere(["in", "country_code", "dummy_country"]); // Force no results if there are no stories
+			}
+		}
+
 		// Count how many items are with those conditions, before limit them for pagination
 		static::$countItemsFound = $query->count();
 
