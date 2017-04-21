@@ -287,7 +287,7 @@ class Box extends CActiveRecord
 			}
 		}
 
-		// if countries are specified
+		// if only_active_persons are specified
 		if ((array_key_exists("only_active_persons", $criteria)) && (!empty($criteria["only_active_persons"]))) {
 
 			// Get different person_ids available by country
