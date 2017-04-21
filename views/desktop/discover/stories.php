@@ -20,7 +20,8 @@ $this->title = 'Stories - Todevise';
 			</div>
 		</div>
 		<div class="our-devisers-body">
-			<div class="col-md-2"><explore-stories-filters filters="exploreStoriesCtrl.filters"></explore-stories-filters></div>
+			<div class="col-md-2">
+                <explore-stories-filters filters="exploreStoriesCtrl.filters"></explore-stories-filters></div>
 			<div class="col-md-10">
 				<div class="found-header">
 					<p ng-if="exploreStoriesCtrl.search_key" ng-cloak>We found <span ng-bind="exploreStoriesCtrl.results.meta.total_count"></span> stories with the keywords "<span class="key" ng-bind="exploreStoriesCtrl.search_key"></span>"</p>
