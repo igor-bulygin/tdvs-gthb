@@ -20,6 +20,9 @@ Story
 * `page`: Set the result page that want to be retrieved (default: 1)
 * `limit`: Limit the results returned for page (default: 20)
 
+**NOTES**
+Title and slug fields (multilanguage fields) are automatically translated in the response body
+
 **Response body**:
 
 ```
@@ -29,9 +32,8 @@ Story
       "id": "b09e4cdb",
       "story_state": "story_state_active",
       "person_id": "485902r",
-      "title": {
-    	"en-US": "first story"
-      },
+      "title": "first story",
+      "slug": "first-story",
       "categories": [
     	"1b34c",
     	"1h10i"

@@ -3,6 +3,7 @@ namespace app\models;
 
 use app\helpers\CActiveRecord;
 use app\helpers\Utils;
+use EasySlugger\Slugger;
 use Exception;
 use MongoDate;
 use Yii;
@@ -14,6 +15,7 @@ use yii\mongodb\ActiveQuery;
  * @property string $story_state
  * @property string person_id
  * @property array title
+ * @property array slug
  * @property array categories
  * @property array tags
  * @property array components
@@ -59,6 +61,7 @@ class Story extends CActiveRecord {
 			'story_state',
 			'person_id',
 			'title',
+			'slug',
 			'categories',
 			'tags',
 			'components',
@@ -73,7 +76,7 @@ class Story extends CActiveRecord {
 	 *
 	 * @var array
 	 */
-	public static $translatedAttributes = ['title'];
+	public static $translatedAttributes = ['title', 'slug'];
 
 	public static $textFilterAttributes = ['title'];
 
@@ -87,6 +90,8 @@ class Story extends CActiveRecord {
 		$this->short_id = Utils::shortID(8);
 
 		// initialize attributes
+		$this->title = [];
+		$this->slug = [];
 		$this->categories = [];
 		$this->tags = [];
 		$this->components = [];
@@ -114,6 +119,12 @@ class Story extends CActiveRecord {
 		if (empty($this->story_state)) {
 			$this->story_state = Story::STORY_STATE_ACTIVE;
 		}
+
+		$slugs = [];
+		foreach ($this->title as $lang => $text) {
+			$slugs[$lang] = Slugger::slugify($text);
+		}
+		$this->setAttribute("slug", $slugs);
 
 		if (empty($this->created_at)) {
 			$this->created_at = new MongoDate();
@@ -174,6 +185,23 @@ class Story extends CActiveRecord {
 		switch ($view) {
 			case self::SERIALIZE_SCENARIO_PREVIEW:
             case self::SERIALIZE_SCENARIO_PUBLIC:
+				static::$serializeFields = [
+					'id' => 'short_id',
+					'story_state',
+					'person_id',
+					'title',
+					'slug',
+					'categories',
+					'tags',
+					'components',
+					'main_media',
+					'view_link' => 'viewLink',
+				];
+				static::$retrieveExtraFields = [
+				];
+
+				static::$translateFields = true;
+				break;
             case self::SERIALIZE_SCENARIO_OWNER:
 			case self::SERIALIZE_SCENARIO_ADMIN:
                 static::$serializeFields = [
@@ -181,10 +209,12 @@ class Story extends CActiveRecord {
 					'story_state',
 					'person_id',
 					'title',
+					'slug',
 					'categories',
 					'tags',
 					'components',
 					'main_media',
+					'view_link' => 'viewLink',
                 ];
                 static::$retrieveExtraFields = [
                 ];
@@ -449,7 +479,17 @@ class Story extends CActiveRecord {
 			"slug" => $person->getSlug(),
 			"person_id" => $person->short_id,
 			"story_id" => $this->short_id,
-			"person_type" => $person->getPersonTypeForUrl()
+			"person_type" => $person->getPersonTypeForUrl(),
+			"slug_story" => $this->getSlug(),
 		]);
+	}
+
+	public function getSlug() {
+		if (is_array($this->slug)) {
+			$slug = Utils::l($this->slug);
+		} else {
+			$slug = $this->slug;
+		}
+		return $slug;
 	}
 }

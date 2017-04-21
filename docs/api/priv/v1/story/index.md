@@ -31,6 +31,9 @@ Example about how to call to Web Service to get a private lists of Stories of th
       "title": {
     	"en-US": "first story"
       },
+      "slug": {
+    	"en-US": "first-story"
+      },
       "categories": [
     	"1b34c",
     	"1h10i"
