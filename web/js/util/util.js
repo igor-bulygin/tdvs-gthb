@@ -69,14 +69,12 @@
 
 		function parseImagesUrl(images, url) {
 			var parsed_images = [];
-			images.map(function(element, index) {
+			images.map(function (element, index) {
 				var name;
-				if(element.main_product_photo) {
-					if(element.name_cropped && element.name_cropped !== null && element.name_cropped !== undefined) {
-						name = element.name_cropped;
-					}
+				if (element.main_product_photo) {if( element.name_cropped && element.name_cropped !== null && element.name_cropped !== undefined) {
+					name = element.name_cropped;
 				}
-				else if(element.name && element.name !== null && element.name !== undefined) {
+				else if (element.name && element.name !== null && element.name !== undefined) {
 					name = element.name
 				}
 				else {

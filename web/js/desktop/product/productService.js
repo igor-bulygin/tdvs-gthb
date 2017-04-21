@@ -83,7 +83,7 @@
 			}
 
 			//sizecharts
-			if(angular.isObject(product.sizechart) && !UtilService.isEmpty(product.sizechart)) {
+			if(angular.isObject(product.sizechart) && !UtilService.isEmpty(product.sizechart) && !UtilService.isEmpty(product.sizechart.values)) {
 				if(!product.sizechart.metric_unit)
 					required.push('metric_unit');
 				product.sizechart.values.forEach(function(element) {
