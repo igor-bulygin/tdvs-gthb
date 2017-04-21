@@ -27,6 +27,9 @@ class PriceStockValidator extends Validator
 		} else {
 
 			foreach ($priceStock as $item) {
+				if (!isset($item['options']) || empty($item['options'])) {
+					$this->addError($object, $attribute, 'Pricestock options must be an array and must be no empty');
+				}
 				foreach ($item['options'] as $optionId => $values) {
 					$optionId = (string)$optionId; // force cast to string (short_id are allways strings)
 					$tag = Tag::findOne(["short_id" => $optionId]);
