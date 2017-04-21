@@ -86,10 +86,12 @@
 					object['size'] = vm.product.prints.sizes;
 				}
 				if(angular.isObject(vm.product.sizechart) && !UtilService.isEmpty(vm.product.sizechart)) {
-					object['size'] = [];
-					vm.product.sizechart.values.forEach(function (element) {
-						object['size'].push(element[0]);
-					});
+					if(angular.isArray(vm.product.sizechart.values) && vm.product.sizechart.values.length > 0) {
+						object['size'] = [];
+						vm.product.sizechart.values.forEach(function (element) {
+							object['size'].push(element[0]);
+						});
+					}
 				}
 				var cartesian = objectProduct(object);
 				if(!UtilService.isEmpty(cartesian[0])) {
