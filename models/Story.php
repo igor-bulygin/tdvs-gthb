@@ -247,6 +247,56 @@ class Story extends CActiveRecord {
 			$query->andWhere(["story_state" => $criteria["story_state"]]);
 		}
 
+		// if categories are specified
+		if ((array_key_exists("categories", $criteria)) && (!empty($criteria["categories"]))) {
+			if (is_array($criteria["categories"])) {
+				$ids = [];
+				foreach ($criteria["categories"] as $categoryId) {
+					$category = Category::findOne(["short_id" => $categoryId]);
+					if ($category) {
+						$ids = array_merge($ids, $category->getShortIds());
+					}
+				}
+			} else {
+				$ids = [];
+				$category = Category::findOne(["short_id" => $criteria["categories"]]);
+				if ($category) {
+					$ids = array_merge($ids, $category->getShortIds());
+				}
+			}
+			$query->andWhere(["categories" => $ids]);
+		}
+
+		// if countries are specified
+		if ((array_key_exists("countries", $criteria)) && (!empty($criteria["countries"]))) {
+
+			// Get different person_ids available by country
+			$queryPerson= new ActiveQuery(Person::className());
+			$queryPerson->andWhere(["in", "personal_info.country", $criteria["countries"]]);
+			$idsPerson = $queryPerson->distinct("short_id");
+
+			if ($idsPerson) {
+				$query->andFilterWhere(["in", "person_id", $idsPerson]);
+			} else {
+				$query->andFilterWhere(["in", "person_id", "dummy_person"]); // Force no results if there are no boxes
+			}
+		}
+
+		// if only_active_persons are specified
+		if ((array_key_exists("only_active_persons", $criteria)) && (!empty($criteria["only_active_persons"]))) {
+
+			// Get different person_ids available by country
+			$queryPerson= new ActiveQuery(Person::className());
+			$queryPerson->andWhere(["account_state" => Person::ACCOUNT_STATE_ACTIVE]);
+			$idsPerson = $queryPerson->distinct("short_id");
+
+			if ($idsPerson) {
+				$query->andFilterWhere(["in", "person_id", $idsPerson]);
+			} else {
+				$query->andFilterWhere(["in", "person_id", "dummy_person"]); // Force no results if there are no boxes
+			}
+		}
+
         // if text is specified
         if ((array_key_exists("text", $criteria)) && (!empty($criteria["text"]))) {
 //			// search the word in all available languages

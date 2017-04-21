@@ -44,7 +44,10 @@ class StoryController extends AppPublicController
 			"id" => Yii::$app->request->get("id"),
 			"text" => Yii::$app->request->get("q"), // search in name, description, and more
 			"person_id" => Yii::$app->request->get("person_id"),
-			"story_state" => Yii::$app->request->get("story_state"),
+			"categories" => Yii::$app->request->get("categories"),
+			"countries" => Yii::$app->request->get("countries"),
+			"story_state" => Story::STORY_STATE_ACTIVE,
+			"only_active_persons" => true,
 			"limit" => $limit,
 			"offset" => $offset,
 		]);
