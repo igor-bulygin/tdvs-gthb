@@ -1,14 +1,18 @@
 (function () {
 	"use strict";
 
-	function controller(UtilService, locationDataService) {
+	function controller(UtilService, locationDataService, productDataService) {
 		var vm = this;
-		vm.seeMore = seeMore;
+		vm.seeMoreCountries = seeMoreCountries;
 		vm.show_countries = 10;
+        vm.seeMoreCategories = seeMoreCategories;
+		vm.show_categories = 10;
+
 
 		init();
 
 		function init() {
+            getCategories();
 			getCountries();
 		}
 
@@ -24,11 +28,34 @@
 			locationDataService.getCountry(params, onGetContriesSuccess, UtilService.onError);
 		}
 
-		function seeMore(value) {
+		function seeMoreCountries(value) {
 			switch(value) {
 				case 'countries':
 					if(vm.show_countries < vm.countries.meta.total_count)
 						vm.show_countries += 10;
+					break;
+				default:
+					break;
+			}
+		}
+
+        function getCategories() {
+			function onGetCategoriesSuccess(data) {
+				vm.categories = angular.copy(data);
+			}
+
+			var params = {
+				only_with_stories: true
+			}
+
+			productDataService.getCategories(params, onGetCategoriesSuccess, UtilService.onError);
+		}
+
+        function seeMoreCategories(value) {
+			switch(value) {
+				case 'categories':
+					if(vm.show_categories < vm.categories.meta.total_count)
+						vm.show_categories += 10;
 					break;
 				default:
 					break;
