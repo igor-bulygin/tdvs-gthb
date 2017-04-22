@@ -1,8 +1,9 @@
 (function () {
 	"use strict";
 
-	function controller(languageDataService, UtilService) {
+	function controller(languageDataService, UtilService, storyDataService, $window) {
 		var vm = this;
+		vm.save = save;
 
 		init();
 
@@ -13,9 +14,6 @@
 
 		function newStory() {
 			var story = {};
-			story['title'] = {
-				'en-US': 'Main title'
-			}
 			return story;
 		}
 
@@ -26,10 +24,19 @@
 
 			languageDataService.getLanguages(onGetLanguagesSuccess, UtilService.onError);
 		}
+
+		function save(story) {
+			function onCreateStorySuccess(data) {
+				//console.log(data);
+				$window.location.href = currentHost() + data.view_link;
+			}
+
+			storyDataService.createStory(story, onCreateStorySuccess, UtilService.onError);
+		}
 	}
 
 	angular
-		.module('todevise', ['api', 'util', 'header', 'xeditable', 'nya.bootstrap.select'])
+		.module('todevise')
 		.controller('createStoryCtrl', controller);
 
 }());

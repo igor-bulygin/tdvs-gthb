@@ -18,8 +18,5 @@ class CreateStoryAsset extends AssetBundle {
 	];
 	public $depends = [
 		'app\assets\desktop\deviser\IndexAsset',
-		'app\assets\libs\nyaBootstrapSelectAsset',
-		'app\assets\libs\ngFileUploadAsset',
-		'app\assets\libs\angularXEditableAsset',
 	];
 }

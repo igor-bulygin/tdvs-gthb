@@ -6,9 +6,8 @@ use yii\helpers\Json;
 CreateStoryAsset::register($this);
 
 /** @var Person $person */
-/** @var Product $product */
-/** @var PersonVideo $video */
 
+$this->params['person'] = $person;
 $this->title = $person->getName() . ' - Todevise';
 $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD, 'person-var-script');
 
@@ -18,8 +17,8 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 		<p>New Story</p>
 		<story-main-title story="createStoryCtrl.story" languages="createStoryCtrl.languages"></story-main-title>
 		<story-main-media story="createStoryCtrl.story"></story-main-media>
-		<div class="text-center">
-			<button class="btn btn-default btn-green">Publish story</button>
+		<div class="text-center" style="display: block; width: 100%; float: left;">
+			<button class="btn btn-default btn-green" ng-click="createStoryCtrl.save(createStoryCtrl.story)">Publish story</button>
 		</div>
 	</div>
 </div>
