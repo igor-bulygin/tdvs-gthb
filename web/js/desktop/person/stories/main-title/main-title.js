@@ -16,7 +16,7 @@
 			})
 		}
 
-		function isLanguageOk(code, title) {
+		function isLanguageOk(code) {
 			return vm.completedLanguages.indexOf(code) > -1 ? true : false;
 		}
 	}
