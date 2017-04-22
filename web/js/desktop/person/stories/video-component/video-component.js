@@ -10,7 +10,7 @@
 		controller: controller,
 		controllerAs: "storyVideoComponentCtrl",
 		bindings: {
-			story: '<'
+			component: '<'
 		}
 	}
 

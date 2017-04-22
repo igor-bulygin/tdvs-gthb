@@ -13,7 +13,10 @@
 		}
 
 		function newStory() {
-			var story = {};
+			var story = {
+				title: {},
+				components: []
+			};
 			return story;
 		}
 

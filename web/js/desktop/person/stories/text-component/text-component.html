@@ -1,0 +1,1 @@
+<h1>Text component</h1>

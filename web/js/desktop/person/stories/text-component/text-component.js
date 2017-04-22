@@ -10,7 +10,7 @@
 		controller: controller,
 		controllerAs: "storyTextComponentCtrl",
 		bindings: {
-			story: '<'
+			component: '<'
 		}
 	}
 

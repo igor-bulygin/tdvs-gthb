@@ -1,0 +1,1 @@
+<h1>Video component</h1>
