@@ -4,7 +4,9 @@
 			<div class="col-xs-12" ng-bind="story.title">
 			</div>
 			<div class="col-xs-12 boxes-wrapper">		
-						<img class="grid-image" ng-src="{{story.main_media}}" ng-attr-alt="{{story.title}}" ng-attr-title="{{story.title}}">
+				<a ng-href="{{story.view_link}}">		
+					<img ng-if="story.main_media.type===1" class="grid-image" ng-src="{{story.main_media.photo}}" ng-attr-alt="{{story.title}}" ng-attr-title="{{story.title}}">		
+				</a>				
 			</div>
 		</div>
 	</div>
