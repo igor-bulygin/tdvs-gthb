@@ -10,7 +10,7 @@
 		controller: controller,
 		controllerAs: "storyWorkComponentCtrl",
 		bindings: {
-			story: '<'
+			component: '<'
 		}
 	}
 
