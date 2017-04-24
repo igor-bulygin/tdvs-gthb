@@ -20,7 +20,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 		<move-delete-component story="createStoryCtrl.story" position="$index" ng-repeat="component in createStoryCtrl.story.components">
 			<story-text-component component="component" languages="createStoryCtrl.languages" ng-if="component.type === 1"></story-text-component>
 			<story-photo-component component="component" ng-if="component.type === 2"></story-photo-component>
-			<story-work-component component="component" ng-if="component.type === 3"></story-work-component>
+			<story-work-component component="component" devisers="createStoryCtrl.devisers" ng-if="component.type === 3"></story-work-component>
 			<story-video-component component="component" ng-if="component.type === 4"></story-video-component>
 		</move-delete-component>
 		<story-add-component story="createStoryCtrl.story"></story-add-component>

@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(languageDataService, UtilService, storyDataService, $window) {
+	function controller(languageDataService, UtilService, storyDataService, personDataService, $window) {
 		var vm = this;
 		vm.save = save;
 
@@ -10,6 +10,7 @@
 		function init() {
 			vm.story = newStory();
 			getLanguages();
+			getDevisers();
 		}
 
 		function newStory() {
@@ -26,6 +27,17 @@
 			}
 
 			languageDataService.getLanguages(onGetLanguagesSuccess, UtilService.onError);
+		}
+
+		function getDevisers() {
+			var params = {
+				type: 2
+			}
+			function onGetDevisersSuccess(data) {
+				vm.devisers = angular.copy(data.items);
+			}
+
+			personDataService.getPeople(params, onGetDevisersSuccess, UtilService.onError);
 		}
 
 		function save(story) {
