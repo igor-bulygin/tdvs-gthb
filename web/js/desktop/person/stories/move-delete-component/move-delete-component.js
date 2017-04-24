@@ -1,8 +1,13 @@
 (function () {
 	"use strict";
 
-	function controller() {
+	function controller($scope) {
 		var vm = this;
+		vm.removeComponent = removeComponent;
+
+		function removeComponent() {
+			$scope.story.components.splice($scope.position, 1);
+		}
 	}
 
 	function directive() {
@@ -13,7 +18,8 @@
 			controllerAs: 'moveDeleteComponentCtrl',
 			transclude: true,
 			scope: {
-				story: '='
+				story: '=',
+				position: '='
 			}
 		}
 	}
