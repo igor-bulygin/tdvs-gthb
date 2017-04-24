@@ -1,0 +1,68 @@
+// ==========================================================================
+// Stories
+// ==========================================================================
+.storie-box-wrapper{
+	background-color: $white;
+	float: left;
+    width: 100%;
+	margin-bottom: 30px;
+	.storie-box-text{
+		padding: 10px 20px 20px;
+		h5{
+			font-size: 18px;
+			font-family:$font-family--bold;
+		}
+		p{
+			color: $darker_grey;
+			font-family: $font-family--serif;
+			letter-spacing: 0.3px;
+			height: 82px;
+    		display: block;
+   			overflow: hidden;
+		}
+		&:before{
+			content: '';
+			position: absolute;
+			top: 176px;
+			z-index: 9;
+			left: 50%;
+			right: auto;
+			-webkit-transform: rotate(180deg);
+			-ms-transform: rotate(180deg);
+			transform: rotate(180deg);
+			height: 0;
+			width: 0;
+			border: 6px solid transparent;
+			border-bottom-color: $white;
+		}
+	}
+	.storie-box-image{
+		overflow: hidden;
+		height: 196px;
+		width: 100%;
+ 		img{
+			max-height: 212px;
+    		transform: translate(-20%);
+		}
+	}
+	.loved-comments-wrapper{
+		float: right;
+		color: $light_grey;
+		margin: 0 0 15px;
+		.loved-wrapper{
+			margin: 0 20px 0 0;
+			float: left;
+			font-family: $font-family--secondary;
+			span{
+				    font-size: 12px;
+			}
+		}
+		.comments-wrapper{
+			float: left;
+			font-family: $font-family--secondary;
+			span{
+				    font-size: 12px;
+			}
+		}
+	}
+}

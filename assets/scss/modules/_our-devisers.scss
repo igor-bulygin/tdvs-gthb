@@ -88,6 +88,33 @@
 		}
 	}
 }
+.our-stories-header{
+	margin: -20px 0 0 0;
+    padding: 50px 0 42px;
+    background: url(/imgs/stories-cover.jpg) center #000000 no-repeat;
+    background-size: 1150px 267px;
+	h3{
+		font-family: $font-family--name;
+		color: $white;
+	}
+	h5{
+		font-family: $font-family--serif;
+		font-style: italic;
+		color: $white;
+	}
+	.devisers-searcher{
+		width: 300px;
+		position: relative;
+    	margin: 10px auto 0;
+		span{
+			color: $red;
+			position: absolute;
+			right: 12px;
+			top: 4px;
+			font-size: 21px;
+		}
+	}
+}
 .our-devisers-body{
 	background-color: $background_grey;
 	float: left;

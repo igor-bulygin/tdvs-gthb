@@ -23,7 +23,7 @@ $this->params['person_links_target'] = 'public_view';
 				<?= PersonMenu::widget() ?>
 			</div>
 			<div class="col-md-10">
-				<?php if (empty($stories)) { ?>
+				 <?php if (false) { ?>
 
 					<div class="empty-wrapper">
 						<?php if ($person->isConnectedUser()) { ?>
@@ -41,7 +41,7 @@ $this->params['person_links_target'] = 'public_view';
 
 					<div class="content-store">
 						<div class="store-grid">
-							<div class="title-wrapper-stories title-wrapper">
+							<div class="title-wrapper-stories title-wrapper title-wrapper-boxes">
 								<span class="title">Stories by <?=$person->getName()?></span>
 							</div>
 							<div class="row">
@@ -61,6 +61,75 @@ $this->params['person_links_target'] = 'public_view';
 								<?php } ?>
 
 								<?php /***** PUT HERE STATIC STORIES AS HTML EXAMPLE *****/ ?>
+								<div class="col-lg-6">
+									<div class="storie-box-wrapper">
+										<div class="storie-box-text">
+											<h5>Chanante ipsum</h5>
+											<p>Chanante ipsum dolor sit amet, muchachada tollina ayy qué gustico adipisicing nuiiiii atiendee pataliebre aliqua. Veniam labore et ad melifluo. Chotera vivo con tu madre en un castillo soooy crossoverr nui. Coconut cosica eiusmod et nostrud ut consectetur no te digo ná y te lo digo tó gaticos asquerosito droja tunante gatete elit. Elit magna ea sed traeros tol jamón eveniet.</p>
+											<div>
+												<div class="loved-comments-wrapper">
+													<div class="loved-wrapper">
+														<i class="ion-ios-heart"></i>
+														<span>342</span>
+													</div>
+													<div class="comments-wrapper">
+														<i class="ion-chatbox"></i>
+														<span>15</span>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="storie-box-image">
+											<img src="/imgs/stories-cover.jpg">
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="storie-box-wrapper">
+										<div class="storie-box-text">
+											<h5>Chanante ipsum</h5>
+											<p>Chanante ipsum dolor sit amet, muchachada tollina ayy qué gustico adipisicing nuiiiii atiendee pataliebre aliqua. Veniam labore et ad melifluo. Chotera vivo con tu madre en un castillo soooy crossoverr nui. Coconut cosica eiusmod et nostrud ut consectetur no te digo ná y te lo digo tó gaticos asquerosito droja tunante gatete elit. Elit magna ea sed traeros tol jamón eveniet.</p>
+											<div>
+												<div class="loved-comments-wrapper">
+													<div class="loved-wrapper">
+														<i class="ion-ios-heart"></i>
+														<span>342</span>
+													</div>
+													<div class="comments-wrapper">
+														<i class="ion-chatbox"></i>
+														<span>15</span>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="storie-box-image">
+											<img src="/imgs/stories-cover.jpg">
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="storie-box-wrapper">
+										<div class="storie-box-text">
+											<h5>Chanante ipsum</h5>
+											<p>Chanante ipsum dolor sit amet, muchachada tollina ayy qué gustico adipisicing nuiiiii atiendee pataliebre aliqua. Veniam labore et ad melifluo. Chotera vivo con tu madre en un castillo soooy crossoverr nui. Coconut cosica eiusmod et nostrud ut consectetur no te digo ná y te lo digo tó gaticos asquerosito droja tunante gatete elit. Elit magna ea sed traeros tol jamón eveniet.</p>
+											<div>
+												<div class="loved-comments-wrapper">
+													<div class="loved-wrapper">
+														<i class="ion-ios-heart"></i>
+														<span>342</span>
+													</div>
+													<div class="comments-wrapper">
+														<i class="ion-chatbox"></i>
+														<span>15</span>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="storie-box-image">
+											<img src="/imgs/stories-cover.jpg">
+										</div>
+									</div>
+								</div>
 
 								<?php if (false) { ?>
 								<?php foreach ($stories as $story) {
