@@ -1,14 +1,19 @@
 <div infinite-scroll="exploreStoriesResultsCtrl.addMoreItems()" infinite-scroll-distance="1">
 	<div ng-repeat="story in exploreStoriesResultsCtrl.results_infinite" ng-cloak>        
-		<div class="col-md-4 col-xs-6 pad-grid">
-			<div class="col-xs-12" ng-bind="story.title">
+		<div class="col-xs-6 pad-grid">
+			<div class="col-xs-12" ng-bind="story.title"></div>
+			<div class="col-xs-12" >Donec facilis tortor</br>Donec facilis tortor</div>
+			<div class="col-xs-offset-6 col-xs-6">
+				<!--TODO fix when story lovers and story comments available-->
+				<span class="ion-heart"> 12</span>
+				<span class="ion-chatbox"> 26</span>
 			</div>
-			<div class="col-xs-12 boxes-wrapper">		
+			<div class="col-xs-12">
 				<a ng-href="{{story.view_link}}">		
 					<img ng-if="story.main_media.type===1" class="grid-image" ng-src="{{story.main_media.photo}}" ng-attr-alt="{{story.title}}" ng-attr-title="{{story.title}}">		
-				</a>				
+				</a>
 			</div>
 		</div>
 	</div>
-	<div style="clear: both;"></div>
 </div>
+<div style="clear: both;"></div>
