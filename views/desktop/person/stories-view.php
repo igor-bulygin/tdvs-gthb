@@ -69,7 +69,7 @@ $this->params['person_links_target'] = 'public_view';
 											<div class="storie-box-wrapper">
 												<div class="storie-box-text">
 													<h5 ng-bind="story.title"></h5>
-													<p>Chanante ipsum dolor sit amet, muchachada tollina ayy qué gustico adipisicing nuiiiii atiendee pataliebre aliqua. Veniam labore et ad melifluo. Chotera vivo con tu madre en un castillo soooy crossoverr nui. Coconut cosica eiusmod et nostrud ut consectetur no te digo ná y te lo digo tó gaticos asquerosito droja tunante gatete elit. Elit magna ea sed traeros tol jamón eveniet.</p>
+													<p ng-bind="story.first_text"></p>
 													<div>
 														<div class="loved-comments-wrapper">
 															<div class="loved-wrapper">
@@ -84,38 +84,12 @@ $this->params['person_links_target'] = 'public_view';
 													</div>
 												</div>
 												<div class="storie-box-image" ng-if="story.main_media.type===1">
-													<img ng-src="{{story.main_media.photo}}">
+													<img ng-src="{{story.main_photo_url}}">
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-
-								<?php if (false) { ?>
-								<?php foreach ($stories as $story) {
-									$firstText = $story->getFirstTextComponent();
-									$text = $firstText ? $firstText->getText() : null;
-									$photoUrl = $story->mainMediaMapping->getPhotoUrl(); ?>
-									<a href="<?=$story->getViewLink()?>">
-										<div class="col-lg-6">
-
-											<div class="title"><?= $story->getTitle() ?></div>
-
-											<div><?=$text?></div>
-
-											<div>
-												<span class="ion-heart"></span>
-												<span class="fa fa-comment"></span>
-											</div>
-
-											<?php if ($photoUrl) { ?>
-												<img src="<?=$photoUrl?>" class="img-responsive" />
-											<?php } ?>
-
-										</div>
-									</a>
-								<?php } ?>
-								<?php } ?>
 
 							</div>
 						</div>

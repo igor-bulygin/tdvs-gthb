@@ -185,6 +185,8 @@ class Story extends CActiveRecord {
 		switch ($view) {
 			case self::SERIALIZE_SCENARIO_PREVIEW:
             case self::SERIALIZE_SCENARIO_PUBLIC:
+			case self::SERIALIZE_SCENARIO_OWNER:
+			case self::SERIALIZE_SCENARIO_ADMIN:
 				static::$serializeFields = [
 					'id' => 'short_id',
 					'story_state',
@@ -196,28 +198,11 @@ class Story extends CActiveRecord {
 					'components',
 					'main_media',
 					'view_link' => 'viewLink',
+					'first_text' => 'firstText',
+					'main_photo_url' => 'mainPhotoUrl',
 				];
 				static::$retrieveExtraFields = [
 				];
-
-				static::$translateFields = true;
-				break;
-            case self::SERIALIZE_SCENARIO_OWNER:
-			case self::SERIALIZE_SCENARIO_ADMIN:
-                static::$serializeFields = [
-                    'id' => 'short_id',
-					'story_state',
-					'person_id',
-					'title',
-					'slug',
-					'categories',
-					'tags',
-					'components',
-					'main_media',
-					'view_link' => 'viewLink',
-                ];
-                static::$retrieveExtraFields = [
-                ];
 
                 static::$translateFields = false;
                 break;
@@ -440,6 +425,29 @@ class Story extends CActiveRecord {
 	 */
 	public function getFirstTextComponent() {
 		return $this->getFirstComponentByType(StoryComponent::STORY_COMPONENT_TYPE_TEXT);
+	}
+
+	/**
+	 * Returns the texts of the first component of type "text" (if exists)
+	 *
+	 * @return null|string
+	 */
+	public function getFirstText() {
+		$firstTextComponent = $this->getFirstTextComponent();
+		if ($firstTextComponent) {
+			return $firstTextComponent->getText();
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the absolute url to the main media photo (if exists)
+	 *
+	 * @return null|string
+	 */
+	public function getMainPhotoUrl() {
+		return $this->mainMediaMapping->getPhotoUrl();
 	}
 
 	/**

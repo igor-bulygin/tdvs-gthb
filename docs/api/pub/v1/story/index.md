@@ -101,7 +101,9 @@ Title and slug fields (multilanguage fields) are automatically translated in the
       "main_media": {
     	"type": 1,
     	"photo": "profile.57d69c5e69900.png"
-      }
+      },
+      "first_text" : "lorem ipsum english", 										// get the text of the first text type component (translated)
+      "main_photo_url" : "http://www.todevise.com/.../profile.57d69c5e69900.png" 	// gets the absolute url to the main photo (if main media is photo)
     }
   ],
   "meta": {
