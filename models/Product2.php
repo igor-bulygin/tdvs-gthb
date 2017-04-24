@@ -707,7 +707,8 @@ class Product2 extends Product {
 	 */
 	public function getEditLink() {
 		$deviser = $this->getDeviser();
-		return Url::to(['/product/edit', 'slug' => $deviser->getSlug(), 'product_id' => $this->short_id, 'deviser_id' => $this->deviser_id], true);
+		return Url::to(['/product/edit', 'slug' => $deviser->getSlug(), 'product_id' => $this->short_id, 'deviser_id' => $this->deviser_id,
+			"person_type" => $deviser->getPersonTypeForUrl()], true);
 	}
 
 	public function getSlug() {

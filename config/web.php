@@ -171,7 +171,6 @@ $config = [
 				'/' => 'public/index',
 				'/index-new' => 'public/index',
 				'/category/<slug:[^/.]*?>/<category_id:[^/.]*?>' => 'public/category-b',
-				'/work/<slug:[^/.]*?>/<product_id:[^/.]*?>' => 'product/detail',
 
 				// temporary routes to fix database problems
 				'/works/fix-products' => 'product/fix-products',
@@ -202,6 +201,7 @@ $config = [
 
 				'/<person_type:(deviser)>/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/works/create' => 'product/create',
 				'/<person_type:(deviser)>/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/works/<product_id:[^/.]*?>/edit' => 'product/edit',
+				'/work/<slug:[^/.]*?>/<product_id:[^/.]*?>' => 'product/detail',
 
 				//Settings
 				'/settings/<slug:[^/.]*?>/<person_id:[^/.]*?>' => 'settings/index',
