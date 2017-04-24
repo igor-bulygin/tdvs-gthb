@@ -384,6 +384,10 @@ class Utils
 			Utils::translateModelAttribute($model, $translatedAttribute);
 		}
 
+		// After translate, we set parent on embbed mappings.
+		// This function is also called in afterFind(), only when there is no translation
+		$model->setParentOnEmbbedMappings();
+
 		return $model;
 	}
 

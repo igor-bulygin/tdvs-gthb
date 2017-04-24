@@ -14,6 +14,7 @@ use app\models\Invitation;
 use app\models\Person;
 use app\models\Product;
 use app\models\Product2;
+use app\models\Story;
 use app\models\Tag;
 use app\models\Term;
 use Yii;
@@ -74,7 +75,10 @@ class PublicController extends CController
 		}
 
 		// Boxes
-		$boxes = Box::getRandomBoxes(12, null, true);
+		$boxes = Box::getRandomBoxes(8, null, true);
+
+		// Stories
+		$stories = Story::getRandomStories(3);
 
 		// Influencers
 		$influencers = Person::getRandomInfluencers(12, $categoryShortIds);
@@ -93,6 +97,7 @@ class PublicController extends CController
 			'works3' => array_slice($works, 12, 3),
 			'moreWork' => $moreWork,
 			'boxes' => $boxes,
+			'stories' => $stories,
 			'influencers' => [
 				array_slice($influencers, 0, 3),
 				array_slice($influencers, 3, 3),

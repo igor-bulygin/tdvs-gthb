@@ -161,7 +161,7 @@ class CActiveRecord extends ActiveRecord
 	 * Set the current object as parent on embbed objects
 	 * By default, this function makes nothing. It has to be implemented on child clases
 	 *
-	 * TODO: try to implement the logig here using the functions provided by the embbed library
+	 * TODO: try to implement the logic here using the functions provided by the embbed library
 	 *
 	 */
 	public function setParentOnEmbbedMappings() {}
@@ -182,7 +182,11 @@ class CActiveRecord extends ActiveRecord
 	 */
 	public function afterFind()
 	{
-//		$this->setParentOnEmbbedMappings();
+		if (!static::$translateFields) {
+			// Only if we are not goint to translate fields...
+			// if fields are translated, this function is called un Utils::translateModel
+			$this->setParentOnEmbbedMappings();
+		}
 		parent::afterFind();
 	}
 

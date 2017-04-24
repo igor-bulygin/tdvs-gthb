@@ -309,7 +309,7 @@ class Story extends CActiveRecord {
 			if ($idsPerson) {
 				$query->andFilterWhere(["in", "person_id", $idsPerson]);
 			} else {
-				$query->andFilterWhere(["in", "person_id", "dummy_person"]); // Force no results if there are no boxes
+				$query->andFilterWhere(["in", "person_id", "dummy_person"]); // Force no results if there are no stories
 			}
 		}
 
@@ -324,7 +324,7 @@ class Story extends CActiveRecord {
 			if ($idsPerson) {
 				$query->andFilterWhere(["in", "person_id", $idsPerson]);
 			} else {
-				$query->andFilterWhere(["in", "person_id", "dummy_person"]); // Force no results if there are no boxes
+				$query->andFilterWhere(["in", "person_id", "dummy_person"]); // Force no results if there are no stories
 			}
 		}
 
@@ -414,7 +414,7 @@ class Story extends CActiveRecord {
 	}
 
 	/**
-	 * Returns TRUE if the box object can be edited by the current user
+	 * Returns TRUE if the story object can be edited by the current user
 	 *
 	 * @return bool
 	 */
@@ -491,5 +491,61 @@ class Story extends CActiveRecord {
 			$slug = $this->slug;
 		}
 		return $slug;
+	}
+
+	/**
+	 * Returns a number of random stories
+	 *
+	 * @param int $limit
+	 * @return Story[]
+	 */
+	public static function getRandomStories($limit)
+	{
+		$conditions = [];
+
+		// Actived boxces
+		$conditions[] =
+			[
+				'$match' => [
+					"story_state" => [
+						'$eq' => self::STORY_STATE_ACTIVE,
+					]
+				]
+			];
+
+
+		// Of active persons
+		$activePersons = Person::findSerialized(['account_state' => Person::ACCOUNT_STATE_ACTIVE]);
+		$idsActivePersons = [];
+		foreach ($activePersons as $activePerson) {
+			$idsActivePersons[] = $activePerson->short_id;
+		}
+		$conditions[] =
+			[
+				'$match' => [
+					'person_id' => [
+						'$in' => $idsActivePersons,
+					],
+				]
+			];
+
+		// Randomize
+		$conditions[] =
+			[
+				'$sample' => [
+					'size' => $limit,
+				]
+			];
+
+		$randomStories = Yii::$app->mongodb->getCollection('story')->aggregate($conditions);
+
+		$storyId = [];
+		foreach ($randomStories as $work) {
+			$storyId[] = $work['short_id'];
+		}
+		$stories = self::findSerialized(['id' => $storyId]);
+		shuffle($stories);
+
+		return $stories;
 	}
 }

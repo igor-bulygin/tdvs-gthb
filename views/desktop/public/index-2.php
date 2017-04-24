@@ -15,6 +15,7 @@ $this->title = 'Todevise / Home';
 /** @var \app\models\Product2[] $works3 */
 /** @var \app\models\Product2[][] $moreWork */
 /** @var \app\models\Box[] $boxes */
+/** @var \app\models\Story[] $stories */
 /** @var array $banners */
 
 ?>
@@ -185,37 +186,68 @@ $this->title = 'Todevise / Home';
 <?php if ($boxes) { ?>
 	<section class="grid-wrapper">
 		<div class="container">
-			<div class="section-title">
-				Boxes
-			</div>
-			<div>
-				<?php foreach ($boxes as $box) {
-					$products = $box->getProductsPreview(); ?>
-					<div class="col-md-4 col-xs-6 pad-grid">
-						<div class="boxes-wrapper">
-							<?php if (empty($products)) { ?>
-								<div class="empty-box">
-									<span class="empty-title">Empty box</span>
-								</div>
-							<?php } else {
-								$count  = 1;
-								foreach ($products as $product) {
-									if ($count > 3) {
-										break;
+			<div class="col-lg-8">
+				<div class="section-title">
+					Boxes
+				</div>
+				<div>
+					<?php foreach ($boxes as $box) {
+						$products = $box->getProductsPreview(); ?>
+						<div class="col-xs-6 pad-grid">
+							<div class="boxes-wrapper">
+								<?php if (empty($products)) { ?>
+									<div class="empty-box">
+										<span class="empty-title">Empty box</span>
+									</div>
+								<?php } else {
+									$count  = 1;
+									foreach ($products as $product) {
+										if ($count > 3) {
+											break;
+										} ?>
+										<a href="<?= $product['link']?>">
+											<img class="grid-image" src="<?=$product['box_photo']?>">
+										</a>
+										<?php
+										$count ++;
 									} ?>
-									<a href="<?= $product['link']?>">
-										<img class="grid-image" src="<?=$product['box_photo']?>">
-									</a>
-									<?php
-									$count ++;
-								} ?>
-							<?php } ?>
-							<a class="group-box-title" href="<?= $box->getViewLink() ?>">
-								<span><?=$box->name?> (<?=count($products)?>)</span>
-							</a>
+								<?php } ?>
+								<a class="group-box-title" href="<?= $box->getViewLink() ?>">
+									<span><?=$box->name?> (<?=count($products)?>)</span>
+								</a>
+							</div>
 						</div>
-					</div>
-				<?php } ?>
+					<?php } ?>
+				</div>
+			</div>
+			<div class="col-lg-4">
+				<div class="section-title">
+					Stories
+				</div>
+				<div>
+					<?php foreach ($stories as $story) {
+						$firstText = $story->getFirstTextComponent();
+						$text = $firstText ? $firstText->getText() : null;
+						$photoUrl = $story->mainMediaMapping->getPhotoUrl(); ?>
+						<a href="<?=$story->getViewLink()?>">
+							<div>
+
+								<div class="title"><?= $story->getTitle() ?></div>
+
+								<div><?=$story->getPerson()->getName()?></div>
+
+								<div>Fashion designer</div>
+
+								<?php if ($photoUrl) { ?>
+									<div><img src="<?=$photoUrl?>" class="img-responsive" /></div>
+								<?php } ?>
+
+								<div><?=$text?></div>
+
+							</div>
+						</a>
+					<?php } ?>
+				</div>
 			</div>
 		</div>
 	</section>
