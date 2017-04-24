@@ -11,7 +11,7 @@
 			
 			function onUploadPhotoSuccess(data) {
 				vm.component.items.push({
-					pos: vm.component.items.length-1,
+					pos: vm.component.items.length,
 					photo: data.data.filename,
 					url: data.data.url
 				})
