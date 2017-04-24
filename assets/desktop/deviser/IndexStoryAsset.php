@@ -14,7 +14,8 @@ class IndexStoryAsset extends AssetBundle {
 		'js/desktop/person/stories/photo-component/photo-component.js',
 		'js/desktop/person/stories/video-component/video-component.js',
 		'js/desktop/person/stories/work-component/work-component.js',
-		'js/desktop/person/stories/add-component/add-component.js'
+		'js/desktop/person/stories/add-component/add-component.js',
+		'js/desktop/person/stories/move-delete-component/move-delete-component.js',
 	];
 	public $depends = [
 		'app\assets\desktop\deviser\IndexAsset',
