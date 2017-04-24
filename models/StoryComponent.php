@@ -156,10 +156,13 @@ class StoryComponent extends EmbedModel
 		switch ($type) {
 			case self::STORY_COMPONENT_TYPE_TEXT:
 				$texts = $this->items;
-				$transatableRequiredvalidator = new TranslatableRequiredValidator();
-				$transatableRequiredvalidator->validate($this->items);
 				if (empty($texts)) {
-					$this->addError($attribute, sprintf('You must to  %s not found', $person_id));
+					$this->addError($attribute, sprintf('You must to specify some text'));
+				}
+				$transatableRequiredvalidator = new TranslatableRequiredValidator();
+				$valid = $transatableRequiredvalidator->validate($this->items);
+				if (!$valid) {
+					$this->addError($attribute, sprintf('Component text must be a translatable field'));
 				}
 				break;
 			case self::STORY_COMPONENT_TYPE_PHOTOS:
@@ -177,14 +180,6 @@ class StoryComponent extends EmbedModel
 	 * @return string|null
 	 */
 	public function getText() {
-		if ($this->type == self::STORY_COMPONENT_TYPE_TEXT) {
-			if (is_array($this->items)) {
-				return Utils::l($this->items);
-			}
-
-			return $this->items;
-		}
-
-		return null;
+		return Utils::l($this->items);
 	}
 }

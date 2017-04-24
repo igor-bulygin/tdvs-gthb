@@ -492,6 +492,24 @@ class Story extends CActiveRecord {
 		]);
 	}
 
+	/**
+	 * Returns the url to view the story detail
+	 *
+	 * @return string
+	 */
+	public function getEditLink()
+	{
+		$person = $this->getPerson();
+
+		return Url::to([
+			"/person/story-edit",
+			"slug" => $person->getSlug(),
+			"person_id" => $person->short_id,
+			"story_id" => $this->short_id,
+			"person_type" => $person->getPersonTypeForUrl(),
+		]);
+	}
+
 	public function getSlug() {
 		if (is_array($this->slug)) {
 			$slug = Utils::l($this->slug);
