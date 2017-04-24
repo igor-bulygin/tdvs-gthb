@@ -1,1 +1,15 @@
-<h1>Photo component</h1>
+<div>
+	<div ng-if="storyPhotoComponentCtrl.isDropAvailable">
+		<div ngf-drag-over-class="drag-over" ngf-drop ngf-select ngf-change="storyPhotoComponentCtrl.uploadPhotos($files, $invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="storyPhotoComponentCtrl.isDropAvailable" ngf-multiple="true">
+			<p>Photos</p>
+			<p>Drag your photos here or click the button below</p>
+			<button class="btn btn-default">Upload photo</button>
+		</div>
+	</div>
+	<div ngf-no-file-drop>
+		<input type="file" name="file" ngf-select="storyPhotoComponentCtrl.uploadPhotos($files, $invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="storyPhotoComponentCtrl.isDropAvailable" ngf-multiple="true">
+	</div>
+	<span ng-repeat="image in storyPhotoComponentCtrl.component.items" ng-if="storyPhotoComponentCtrl.component.items.length > 0">
+		<img ngf-thumbnail="image.url" style="max-width: 200px;">
+	</span>
+</div>

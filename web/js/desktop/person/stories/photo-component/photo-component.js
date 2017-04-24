@@ -1,8 +1,38 @@
 (function () {
 	"use strict";
 
-	function controller() {
+	function controller(Upload, uploadDataService, UtilService) {
 		var vm = this;
+		vm.uploadPhotos = uploadPhotos;
+
+		function uploadPhotos(images, errImages) {
+			if(!angular.isArray(vm.component.items))
+				vm.component.items = [];
+			
+			function onUploadPhotoSuccess(data) {
+				vm.component.items.push({
+					pos: vm.component.items.length-1,
+					photo: data.data.filename,
+					url: data.data.url
+				})
+			}
+
+			images.forEach(function(image) {
+				var data = {
+					type: 'story-photos',
+					person_id: person.short_id,
+					file: image
+				}
+				uploadDataService.UploadFile(data, 
+					function(data) {
+						return onUploadPhotoSuccess(data)
+					},
+					UtilService.onError,
+					function(evt) {
+						return console.log(evt);
+					});
+			});
+		}
 	}
 
 	var component = {
