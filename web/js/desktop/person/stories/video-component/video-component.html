@@ -1,1 +1,11 @@
-<h1>Video component</h1>
+<div>
+	<p>Video</p>
+	<p>Paste the YouTube video in the field below.</p>
+	<form name="storyVideoComponentCtrl.form">
+		<input type="text" name="video" ng-pattern="storyVideoComponentCtrl.youTubeRegEx" class="form-control ng-class:{'error-input': storyVideoComponentCtrl.has_error(storyVideoComponentCtrl.form, storyVideoComponentCtrl.form.video)}" placeholder="http://" ng-model="storyVideoComponentCtrl.video_url">
+	</form>
+	<button ng-click="storyVideoComponentCtrl.addVideo(storyVideoComponentCtrl.form)">+</button>
+	<div ng-if="storyVideoComponentCtrl.component.items.length > 0">
+		<ng-youtube-embed url="storyVideoComponentCtrl.component.items[0]" autoplay="false" color="white" disablekb="true" width="100%"></ng-youtube-embed>
+	</div>
+</div>
