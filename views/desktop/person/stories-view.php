@@ -26,7 +26,7 @@ $this->params['person_links_target'] = 'public_view';
 				<?= PersonMenu::widget() ?>
 			</div>
 			<div class="col-md-10">
-				 <?php if (false) { ?>
+				 <?php if (empty($stories)) { ?>
 
 					<div class="empty-wrapper">
 						<?php if ($person->isConnectedUser()) { ?>

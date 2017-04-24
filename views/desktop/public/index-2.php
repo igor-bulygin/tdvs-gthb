@@ -186,14 +186,19 @@ $this->title = 'Todevise / Home';
 <?php if ($boxes) { ?>
 	<section class="grid-wrapper">
 		<div class="container">
+
+		<?php if ($stories) { ?>
 			<div class="col-lg-8">
+		<?php } ?>
+
 				<div class="section-title">
 					Boxes
 				</div>
+
 				<div>
 					<?php foreach ($boxes as $box) {
 						$products = $box->getProductsPreview(); ?>
-						<div class="col-xs-6 pad-grid">
+						<div class="<?=$stories ? 'col-md-6' : 'col-md-4'?> col-xs-6 pad-grid">
 							<div class="boxes-wrapper">
 								<?php if (empty($products)) { ?>
 									<div class="empty-box">
@@ -219,7 +224,10 @@ $this->title = 'Todevise / Home';
 						</div>
 					<?php } ?>
 				</div>
+
+		<?php if ($stories) { ?>
 			</div>
+
 			<div class="col-lg-4">
 				<div class="section-title">
 					Stories
@@ -249,6 +257,9 @@ $this->title = 'Todevise / Home';
 					<?php } ?>
 				</div>
 			</div>
+
+		<?php } ?>
+
 		</div>
 	</section>
 <?php } ?>
