@@ -128,7 +128,7 @@
 		}
 		
 
-		//publish is true when publishing the product, otherwise is false
+		//publish is true when publishing the product
 		function save(publish) {
 			function onUpdateProductSuccess(data) {
 				vm.disable_save_buttons=false;
