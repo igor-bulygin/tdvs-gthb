@@ -96,7 +96,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 						<!-- city -->
 						<div>
 							<label for="city">City</label>
-							<input type="text" class="form-control ng-class:{'error-input': personHeaderCtrl.has_error(personHeaderCtrl.form, personHeaderCtrl.form.city)}" ng-model="personHeaderCtrl.city" ng-change="personHeaderCtrl.searchPlace(personHeaderCtrl.city)" placeholder="Your city" name="city" required>
+							<input type="text" class="form-control ng-class:{'error-input': personHeaderCtrl.has_error(personHeaderCtrl.form, personHeaderCtrl.form.city)}" ng-model="personHeaderCtrl.city" ng-model-options='{ debounce: 500 }' ng-change="personHeaderCtrl.searchPlace(personHeaderCtrl.city)" placeholder="Your city" name="city" required>
 						</div>
 						<div ng-if="personHeaderCtrl.showCities" ng-cloak>
 							<ul class="city-selection">
