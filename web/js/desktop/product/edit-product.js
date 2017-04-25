@@ -128,12 +128,13 @@
 		}
 		
 
-		function save(state) {
+		//publish is true when publishing the product, otherwise is false
+		function save(publish) {
 			function onUpdateProductSuccess(data) {
 				vm.disable_save_buttons=false;
-				if(state === 'product_state_draft') {
+				if(vm.product.product_state === 'product_state_draft') {
 					saved_draft();
-				} else if (state === 'product_state_active') {
+				} else if (vm.product.product_state === 'product_state_active') {
 					$window.location.href = currentHost() + vm.link_profile + '?published=true';
 				}
 			}
@@ -146,7 +147,8 @@
 
 			vm.disable_save_buttons = true;
 			var required = [];
-			vm.product.product_state = angular.copy(state);
+			if(publish)
+				vm.product.product_state = 'product_state_active';
 
 			//parse empty multilanguage fields
 			UtilService.parseMultiLanguageEmptyFields(vm.product.name);
