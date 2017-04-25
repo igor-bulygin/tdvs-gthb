@@ -23,7 +23,7 @@ $this->registerJs("var type = 2", yii\web\View::POS_HEAD, 'person-type-script');
 		</div>
 		<div class="our-devisers-body">
 			<div class="col-md-2">
-				<discover-filters filters="discoverCtrl.filters"></discover-filters>
+				<discover-filters filters="discoverCtrl.filters" searching="discoverCtrl.searching"></discover-filters>
 			</div>
 			<div class="col-md-10">
 				<div class="found-header">
