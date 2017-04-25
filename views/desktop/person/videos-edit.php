@@ -1,6 +1,5 @@
 <?php
 use app\assets\desktop\deviser\EditVideosAsset;
-use app\components\MakeProfilePublic;
 use app\components\PersonHeader;
 use app\components\PersonMenu;
 use app\models\Person;
@@ -17,9 +16,6 @@ $this->params['person_links_target'] = 'edit_view';
 ?>
 
 <?= PersonHeader::widget() ?>
-<?php if ($person->isDraft()) { ?>
-	<?= MakeProfilePublic::widget() ?>
-<?php } ?>
 
 <div class="store">
 	<div class="container">

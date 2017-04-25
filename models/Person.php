@@ -400,9 +400,24 @@ class Person extends CActiveRecord implements IdentityInterface
 		if ($this->isDeviser()) {
 			$products = Product2::findSerialized(["deviser_id" => $this->id]);
 			/* @var Product2[] $products */
-			foreach ($products as $product) {
-				$product->delete();
+			foreach ($products as $item) {
+				$item->delete();
 			}
+		}
+
+		$boxes = Box::findSerialized(["person_id" => $this->id]);
+		foreach ($boxes as $item) {
+			$item->delete();
+		}
+
+		$loveds = Loved::findSerialized(["person_id" => $this->id]);
+		foreach ($loveds as $item) {
+			$item->delete();
+		}
+
+		$stories = Story::findSerialized(["person_id" => $this->id]);
+		foreach ($stories as $item) {
+			$item->delete();
 		}
 
 		return parent::beforeDelete();

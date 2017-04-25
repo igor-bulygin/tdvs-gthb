@@ -79,6 +79,7 @@ class PublicController extends CController
 
 		// Stories
 		$stories = Story::getRandomStories(3);
+		$stories = [];
 
 		// Influencers
 		$influencers = Person::getRandomInfluencers(12, $categoryShortIds);

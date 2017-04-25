@@ -26,10 +26,13 @@ $this->registerJs("var story = ".Json::encode($story), yii\web\View::POS_HEAD, '
 		</a>
 		</div>
 		<div class="pull-right">
+
+			<?php /*
 			<button class="btn btn-default" type="button">
 				<i class="ion-ios-heart"></i>
 				Love Story
 			</button>
+ 			*/ ?>
 
 			<a class="btn btn-default" href="<?=$story->getEditLink()?>">
 				<i class="ion-edit"></i>
