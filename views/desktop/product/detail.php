@@ -379,7 +379,7 @@ $videos = $product->getVideos();
 							<span class="number-score">(20)</span>
 							<div class="by-stars"><span>5 stars</span> <span class="number-score">(15)</span></div>
 							<div class="by-stars"><span>4 stars</span> <span class="number-score">(5)</span></div>
-						</div>exit
+						</div>
 						<div class="comment-wrapper">
 							<div class="col-sm-1">
 								<div class="avatar">
