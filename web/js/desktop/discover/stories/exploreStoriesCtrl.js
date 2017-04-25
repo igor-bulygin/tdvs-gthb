@@ -15,7 +15,7 @@
             delete vm.results;
             vm.searching = true;
             var params = {
-                ignore_empty_stories: false
+                ignore_empty_stories: true
             }
             if (vm.key)
                 params = Object.assign(params, { q: vm.key });
