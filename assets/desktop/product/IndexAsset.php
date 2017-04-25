@@ -21,7 +21,7 @@ class IndexAsset extends AssetBundle {
 		'app\assets\libs\textAngularAsset',
 		'app\assets\libs\ngFileUploadAsset',
 		'app\assets\libs\angularDragAndDropAsset',
-		'app\assets\libs\ngImgCropAsset',
+		'app\assets\libs\uiCropperAsset',
 		'app\assets\libs\ngTagsInputAsset',
 		'app\assets\libs\angularLocalStorageAsset',
 		'app\assets\libs\angularBootstrapDatetimePickerAsset',

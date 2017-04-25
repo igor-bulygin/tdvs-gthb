@@ -18,7 +18,7 @@
 
 	angular
 		.module('todevise', ['api', 'util', 'header', 'toastr', 'nya.bootstrap.select', 'textAngular', 'ngFileUpload',
-			'dndLists', 'ui.bootstrap', 'ngImgCrop', 'ngTagsInput', 'ui.bootstrap.datetimepicker', 'LocalStorageModule',
+			'dndLists', 'ui.bootstrap', 'uiCropper', 'ngTagsInput', 'ui.bootstrap.datetimepicker', 'LocalStorageModule',
 			'xeditable'])
 		.config(config)
 		.run(function(editableOptions) {
