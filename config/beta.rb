@@ -1,5 +1,5 @@
 task :beta do
-        set :branch, 'develop'
+        set :branch, 'beta'
         set :user, "todeviseapp"
         server "beta.todevise.com", :app, :web, :primary => true
         set :deploy_to, "/var/www/todevise/web"
@@ -21,9 +21,9 @@ task :npmbeta do
 end
 task :linkbeta do
     transaction do
-      run "ln -nfs /images/ #{releases_path}/#{release_name}/web/uploads"
-      run "ln -nfs /images_resized/ #{releases_path}/#{release_name}/thumbor_resized"
-      run "ln -nfs /images_cache/ #{releases_path}/#{release_name}/web/thumbor_cache"
+      run "ln -nfs #{shared_path}/public/images #{releases_path}/#{release_name}/web/uploads"
+      #run "ln -nfs /images_resized/ #{releases_path}/#{release_name}/web/thumbor_resized"
+      #run "ln -nfs /images_cache/ #{releases_path}/#{release_name}/web/thumbor_cache"
     end
 end
 task :symlink do

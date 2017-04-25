@@ -158,7 +158,8 @@
 
 	}
 
-	angular.module('todevise', ['ngAnimate', 'ui.bootstrap', 'angular-multi-select', 'angular-img-dl', 'global-deviser', 'global-desktop', 'api', 'ngFileUpload', 'ngImgCrop'])
+	angular.module('todevise', ['ngAnimate', 'ui.bootstrap', 'angular-multi-select', 'angular-img-dl', 'global-deviser', 'global-desktop', 
+		'api', 'ngFileUpload', 'uiCropper'])
 		.controller('deviserCtrl', controller)
 
 }());
