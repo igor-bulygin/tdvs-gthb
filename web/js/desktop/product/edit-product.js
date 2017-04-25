@@ -132,9 +132,9 @@
 		function save(publish) {
 			function onUpdateProductSuccess(data) {
 				vm.disable_save_buttons=false;
-				if(vm.product.product_state === 'product_state_draft') {
+				if(vm.product.product_state === 'product_state_draft' || !publish) {
 					saved_draft();
-				} else if (vm.product.product_state === 'product_state_active') {
+				} else if (vm.product.product_state === 'product_state_active' && publish) {
 					$window.location.href = currentHost() + vm.link_profile + '?published=true';
 				}
 			}
