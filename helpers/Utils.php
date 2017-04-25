@@ -386,7 +386,7 @@ class Utils
 
 		// After translate, we set parent on embbed mappings.
 		// This function is also called in afterFind(), only when there is no translation
-		$model->setParentOnEmbbedMappings();
+//		$model->setParentOnEmbbedMappings();
 
 		return $model;
 	}

@@ -185,7 +185,7 @@ class CActiveRecord extends ActiveRecord
 		if (!static::$translateFields) {
 			// Only if we are not goint to translate fields...
 			// if fields are translated, this function is called un Utils::translateModel
-			$this->setParentOnEmbbedMappings();
+//			$this->setParentOnEmbbedMappings();
 		}
 		parent::afterFind();
 	}
