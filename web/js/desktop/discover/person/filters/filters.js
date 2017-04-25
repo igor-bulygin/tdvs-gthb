@@ -55,7 +55,7 @@
         controller: controller,
         controllerAs: 'discoverFiltersCtrl',
         bindings: {
-            searching: '=',
+            searching: '<',
             filters: '<'
         }
     }
