@@ -1,6 +1,5 @@
 <?php
 use app\assets\desktop\deviser\EditStoreAsset;
-use app\components\MakeProfilePublic;
 use app\components\PersonHeader;
 use app\components\PersonMenu;
 use app\helpers\Utils;
@@ -34,9 +33,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 			<i class="ion-android-close"></i>
 		</span>
 	</div>
-	<?php if ($person->isDraft()) { ?>
-		<?= MakeProfilePublic::widget() ?>
-	<?php } ?>
+
 	<?= PersonHeader::widget() ?>
 
 		<div class="store">

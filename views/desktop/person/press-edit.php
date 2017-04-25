@@ -1,6 +1,5 @@
 <?php
 use app\assets\desktop\deviser\EditPressAsset;
-use app\components\MakeProfilePublic;
 use app\components\PersonHeader;
 use app\components\PersonMenu;
 use app\models\Person;
@@ -20,9 +19,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 ?>
 
 <?= PersonHeader::widget() ?>
-<?php if ($person->isDraft()) { ?>
-	<?= MakeProfilePublic::widget() ?>
-<?php } ?>
+
 <div class="store">
 	<div class="container">
 		<div class="row">
