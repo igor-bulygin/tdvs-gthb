@@ -13,6 +13,7 @@ Example about how to call to Web Service to create a new story
 * `403`: Forbidden
   
 **Request body**: 
+* `person_id`: Person identifier of the story's owner. (Required)
 * `story_state`: State of the story. Available values: (`story_state_draft` and `story_state_active`)
 * `title`: Multilanguage field. Title of the story. (Required)
 * `categories`: [] array with category ids (["f0cco", "1234"])
@@ -20,9 +21,6 @@ Example about how to call to Web Service to create a new story
 * `components`: [] array with components (see above)
 * `main_media.type`: Type of main media. Available values: (1: photo)
 * `main_media.photo`: Photo marked as main media
-
-**Notes**
-The story is automatically asigned to the connected user
 
 **Components**:
 

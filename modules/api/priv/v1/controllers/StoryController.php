@@ -60,7 +60,6 @@ class StoryController extends AppPrivateController
 
 		$story->setScenario($this->getScenarioFromRequest($story)); // safe and required attributes are related with scenario
 
-		$story->person_id = Yii::$app->user->identity->short_id;
 		if ($story->load(Yii::$app->request->post(), '') && $story->validate()) {
 
 			$story->save();
