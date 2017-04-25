@@ -232,30 +232,33 @@ $this->title = 'Todevise / Home';
 				<div class="section-title">
 					Stories
 				</div>
-				<div>
-					<?php foreach ($stories as $story) {
-						$firstText = $story->getFirstTextComponent();
-						$text = $firstText ? $firstText->getText() : null;
-						$photoUrl = $story->mainMediaMapping->getPhotoUrl(); ?>
-						<a href="<?=$story->getViewLink()?>">
-							<div>
-
-								<div class="title"><?= $story->getTitle() ?></div>
-
-								<div><?=$story->getPerson()->getName()?></div>
-
-								<div>Fashion designer</div>
-
-								<?php if ($photoUrl) { ?>
-									<div><img src="<?=$photoUrl?>" class="img-responsive" /></div>
-								<?php } ?>
-
-								<div><?=$text?></div>
-
+				<?php foreach ($stories as $story) { ?>
+					<a href="<?=$story->getViewLink()?>">
+						<div class="storie-box-wrapper">
+							<div class="storie-box-text">
+								<h5><?=$story->title?></h5>
+								<p><?=$story->getFirstText()?></p>
+								<div>
+									<div class="loved-comments-wrapper">
+										<div class="loved-wrapper">
+											<i class="ion-ios-heart"></i>
+											<span>342</span>
+										</div>
+										<div class="comments-wrapper">
+											<i class="ion-chatbox"></i>
+											<span>15</span>
+										</div>
+									</div>
+								</div>
 							</div>
-						</a>
-					<?php } ?>
-				</div>
+							<?php if ($story->mainMediaMapping->type == \app\models\StoryMainMedia::STORY_MAIN_MEDIA_TYPE_PHOTO) { ?>
+								<div class="storie-box-image">
+									<img src="<?=$story->getMainPhotoUrl()?>">
+								</div>
+							<?php } ?>
+					</div>
+					</a>
+				<?php } ?>
 			</div>
 
 		<?php } ?>

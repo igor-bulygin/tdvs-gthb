@@ -185,6 +185,25 @@ class Story extends CActiveRecord {
 		switch ($view) {
 			case self::SERIALIZE_SCENARIO_PREVIEW:
             case self::SERIALIZE_SCENARIO_PUBLIC:
+				static::$serializeFields = [
+					'id' => 'short_id',
+					'story_state',
+					'person_id',
+					'title',
+					'slug',
+					'categories',
+					'tags',
+					'components',
+					'main_media',
+					'view_link' => 'viewLink',
+					'first_text' => 'firstText',
+					'main_photo_url' => 'mainPhotoUrl',
+				];
+				static::$retrieveExtraFields = [
+				];
+
+				static::$translateFields = true;
+				break;
 			case self::SERIALIZE_SCENARIO_OWNER:
 			case self::SERIALIZE_SCENARIO_ADMIN:
 				static::$serializeFields = [

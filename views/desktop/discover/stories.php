@@ -34,7 +34,7 @@ $this->title = 'Stories - Todevise';
 					<p class="text-center">No stories found with the specified search criteria.</p>
 				</div>
                 <div ng-if="exploreBoxesCtrl.results.items.length != 0" ng-cloak>
-				    <explore-stories-results results="exploreStoriesCtrl.results" ng-if="exploreStoriesCtrl.results && exploreStoriesCtrl.results.items.length > 0" ng-cloak></explore-stories-results>
+				    <explore-stories-results results="exploreStoriesCtrl.results" ng-if="exploreStoriesCtrl.results.items.length > 0" ng-cloak></explore-stories-results>
                 </div>
 			</div>
 		</div>
