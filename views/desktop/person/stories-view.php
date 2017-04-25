@@ -19,7 +19,7 @@ $this->params['person_links_target'] = 'public_view';
 
 <?= PersonHeader::widget() ?>
 
-<div class="store" ng-controller="viewStoriesCtrl as viewStoriesCtrl">
+<div class="store">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-2">
@@ -62,7 +62,10 @@ $this->params['person_links_target'] = 'public_view';
 										</a>
 									</div>
 								<?php } ?>
-								
+
+								<?php /*
+
+ 								// ANGULAR EXAMPLE
 								<div ng-if="viewStoriesCtrl.results.meta.total_count>0">
 									<div ng-repeat="story in viewStoriesCtrl.results.items" ng-cloak>
 										<div class="col-lg-6">
@@ -90,6 +93,37 @@ $this->params['person_links_target'] = 'public_view';
 										</div>
 									</div>
 								</div>
+
+ 								*/ ?>
+								<?php foreach ($stories as $story) { ?>
+									<a href="<?=$story->getViewLink()?>">
+										<div class="col-lg-6">
+											<div class="storie-box-wrapper">
+												<div class="storie-box-text">
+													<h5><?=$story->title?></h5>
+													<p><?=$story->getFirstText()?></p>
+													<div>
+														<div class="loved-comments-wrapper">
+															<div class="loved-wrapper">
+																<i class="ion-ios-heart"></i>
+																<span>342</span>
+															</div>
+															<div class="comments-wrapper">
+																<i class="ion-chatbox"></i>
+																<span>15</span>
+															</div>
+														</div>
+													</div>
+												</div>
+												<?php if ($story->mainMediaMapping->type == \app\models\StoryMainMedia::STORY_MAIN_MEDIA_TYPE_PHOTO) { ?>
+												<div class="storie-box-image">
+													<img src="<?=$story->getMainPhotoUrl()?>">
+												</div>
+												<?php } ?>
+											</div>
+										</div>
+									</a>
+								<?php } ?>
 
 							</div>
 						</div>
