@@ -3,10 +3,10 @@
 
 	function controller($scope) {
 		var vm = this;
-		vm.removeComponent = removeComponent;
+		vm.removeItem = removeItem;
 
-		function removeComponent() {
-			$scope.story.components.splice($scope.position, 1);
+		function removeItem() {
+			$scope.array.splice($scope.position, 1);
 		}
 	}
 
@@ -18,7 +18,7 @@
 			controllerAs: 'moveDeleteComponentCtrl',
 			transclude: true,
 			scope: {
-				story: '=',
+				array: '=',
 				position: '='
 			}
 		}

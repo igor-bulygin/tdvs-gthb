@@ -3,9 +3,11 @@
 
 	function controller(productDataService, UtilService) {
 		var vm = this;
-		vm.person_id = person.id;
+		vm.person_id = person.short_id;
 		vm.getDeviserWorks = getDeviserWorks;
 		vm.setWork = setWork;
+		vm.findWorkInItems = findWorkInItems;
+		vm.works_helper = [];
 
 		function getDeviserWorks(id) {
 			function onGetWorksSuccess(data) {
@@ -24,19 +26,23 @@
 			})
 		}
 
-		function setWork(id) {
+		function setWork(work) {
 			if(!angular.isArray(vm.component.items))
 				vm.component['items'] = []
-			var position = findWorkInItems(id);
+			var position = findWorkInItems(work.id);
 			if(position < 0) {
 				vm.component.items.push({
 					position: vm.component.items.length,
-					work: id
+					work: work.id
 				})
+				vm.works_helper.push(work)
 			} else {
 				vm.component.items.splice(position, 1);
+				vm.works_helper.splice(position, 1);
 			}
 		}
+
+
 
 	}
 

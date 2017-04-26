@@ -17,12 +17,14 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 		<p>New Story</p>
 		<story-main-title story="createStoryCtrl.story" languages="createStoryCtrl.languages"></story-main-title>
 		<story-main-media story="createStoryCtrl.story"></story-main-media>
-		<move-delete-component story="createStoryCtrl.story" position="$index" ng-repeat="component in createStoryCtrl.story.components">
-			<story-text-component component="component" languages="createStoryCtrl.languages" ng-if="component.type === 1"></story-text-component>
-			<story-photo-component component="component" ng-if="component.type === 2"></story-photo-component>
-			<story-work-component component="component" devisers="createStoryCtrl.devisers" ng-if="component.type === 3"></story-work-component>
-			<story-video-component component="component" ng-if="component.type === 4"></story-video-component>
-		</move-delete-component>
+			<move-delete-component array="createStoryCtrl.story.components" position="$index" ng-repeat="component in createStoryCtrl.story.components">
+				<div style="display:block; width: 100%; float:left; border-width: 1px; border-style: dashed; border-color: grey;">
+					<story-text-component component="component" languages="createStoryCtrl.languages" ng-if="component.type === 1"></story-text-component>
+					<story-photo-component component="component" ng-if="component.type === 2"></story-photo-component>
+					<story-work-component component="component" devisers="createStoryCtrl.devisers" ng-if="component.type === 3"></story-work-component>
+					<story-video-component component="component" ng-if="component.type === 4"></story-video-component>
+				</div>
+			</move-delete-component>
 		<story-add-component story="createStoryCtrl.story"></story-add-component>
 		<div class="text-center" style="display: block; width: 100%; float: left;">
 			<button class="btn btn-default btn-green" ng-click="createStoryCtrl.save(createStoryCtrl.story)">Publish story</button>

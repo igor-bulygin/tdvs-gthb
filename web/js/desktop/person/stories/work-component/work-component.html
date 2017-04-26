@@ -10,9 +10,17 @@
 		</div>
 	</div>
 	<div class="pull-left" style="width: 400px; height: 400px; overflow-y: scroll;">
-		<div ng-repeat="work in storyWorkComponentCtrl.works" ng-click="storyWorkComponentCtrl.setWork(work.id)">
+		<div ng-repeat="work in storyWorkComponentCtrl.works" ng-click="storyWorkComponentCtrl.setWork(work)">
 			<img style="width: 50px;" ng-src="{{work.main_photo}}" ng-attr-alt="work.name" ng-attr-title="work.name">
-			<span ng-bind="work.name"></span>
+			<span ng-bind="work.name"></span><span class="glyphicon glyphicon-minus-sign" ng-if="storyWorkComponentCtrl.findWorkInItems(work.id) > -1"></span>
 		</div>
 	</div>
+</div>
+<div>
+	<span style="width: 200px;">
+		<move-delete-component array="storyWorkComponentCtrl.works_helper" position="$index" ng-repeat="work in storyWorkComponentCtrl.works_helper">
+			<img ng-src="{{work.main_photo}}" ng-attr-alt="work.name" ng-attr-title="work.name" style="width: 200px;">
+			<span ng-bind="work.name"></span>
+		</move-delete-component>
+	</span>
 </div>
