@@ -23,7 +23,6 @@ class EmbedModel extends CActiveRecord
 	public function setParentObject($object)
 	{
 		$this->parentObject = $object;
-		$this->setParentOnEmbbedMappings();
 	}
 
 	public function beforeValidate()
@@ -32,7 +31,6 @@ class EmbedModel extends CActiveRecord
 
 		return parent::beforeValidate();
 	}
-
 
 	/**
 	 * Add additional error to make easy show labels in client side

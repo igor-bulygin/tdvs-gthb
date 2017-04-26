@@ -1,6 +1,7 @@
 <?php
 namespace app\helpers;
 
+use app\models\EmbedModel;
 use app\models\Lang;
 use Exception;
 use yii2tech\embedded\mongodb\ActiveRecord;
@@ -173,7 +174,6 @@ class CActiveRecord extends ActiveRecord
 	 */
 	public function beforeValidate()
 	{
-		$this->setParentOnEmbbedMappings();
 		return parent::beforeValidate();
 	}
 
@@ -182,12 +182,24 @@ class CActiveRecord extends ActiveRecord
 	 */
 	public function afterFind()
 	{
-		if (!static::$translateFields) {
-			// Only if we are not goint to translate fields...
-			// if fields are translated, this function is called un Utils::translateModel
-//			$this->setParentOnEmbbedMappings();
-		}
 		parent::afterFind();
+	}
+
+	/**
+	 * Returns embedded object or list of objects.
+	 *
+	 * @param string $name embedded name.
+	 * @return object|object[]|null embedded value.
+	 */
+	public function getEmbedded($name)
+	{
+		$embedded = parent::getEmbedded($name);
+		if ($embedded && $embedded instanceof EmbedModel && empty($embedded->getParentObject())) {
+			// Only when we get embedded object for first time, we set the reference to parent object
+			$embedded->setParentObject($this);
+		}
+
+		return $embedded;
 	}
 
 }
