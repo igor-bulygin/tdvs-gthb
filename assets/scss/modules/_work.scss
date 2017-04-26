@@ -127,7 +127,7 @@
 		}
 	}
 	.close-row-sizes{
-		margin: 0 0 0 30px;
+		float: right;
 		color:$white;
     	top: 5px;
 		background-color: $light_grey;
@@ -613,4 +613,8 @@ input:checked + .slider:before {
 .apply-to-all-btn{
 	cursor: pointer;
 	color: $dark_green;
+}
+.editable-fix{
+	display: block;
+	margin: 7px 0 7px 0;
 }

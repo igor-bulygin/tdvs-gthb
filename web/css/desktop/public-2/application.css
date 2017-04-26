@@ -4926,7 +4926,7 @@ input[type="radio"] .styled:checked + label::after {
       -webkit-transition-timing-function: ease-out;
       transition-timing-function: ease-out; }
   .items-row .close-row-sizes {
-    margin: 0 0 0 30px;
+    float: right;
     color: #ffffff;
     top: 5px;
     background-color: #bfbfbf;
@@ -5428,6 +5428,10 @@ input:checked + .slider:before {
 .apply-to-all-btn {
   cursor: pointer;
   color: #7AB83A; }
+
+.editable-fix {
+  display: block;
+  margin: 7px 0 7px 0; }
 
 .cart-top-bar {
   background-color: #bfbfbf;
