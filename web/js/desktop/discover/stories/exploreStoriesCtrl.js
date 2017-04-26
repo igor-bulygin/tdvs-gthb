@@ -41,7 +41,6 @@
                 UtilService.onError(err);
                 vm.searching = false;
             }
-
             storyDataService.getStoryPub(params, onGetStoriesSuccess, onGetStoriesError);
         }
 
@@ -49,7 +48,6 @@
         $scope.$watch('exploreStoriesCtrl.filters', function(newValue, oldValue) {
             search(vm.form)
         }, true);
-
     }
 
     angular

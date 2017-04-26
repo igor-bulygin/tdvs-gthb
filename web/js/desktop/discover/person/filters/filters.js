@@ -47,7 +47,6 @@
                     break;
             }
         }
-
     }
 
     var component = {

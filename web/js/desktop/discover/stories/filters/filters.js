@@ -7,7 +7,6 @@
         vm.show_countries = 10;
         vm.show_categories = 10;
 
-
         init();
 
         function init() {
@@ -53,7 +52,6 @@
 
             productDataService.getCategories(params, onGetCategoriesSuccess, UtilService.onError);
         }
-
     }
 
     var component = {
