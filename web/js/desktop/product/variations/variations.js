@@ -197,9 +197,11 @@
 		}
 
 		function deleteSizeFromSizechart(pos) {
-			for(var i = 0; i < vm.sizechart_empty.values.length; i++) {
-				if(vm.sizechart_empty.values[i][0] == vm.product.sizechart.values[pos][0])
-					vm.sizechart_available_values[i] = true;
+			if(angular.isArray(vm.product.sizechart.values[pos]) && vm.product.sizechart.values.length > 0) {
+				for(var i = 0; i < vm.sizechart_empty.values.length; i++) {
+					if(vm.sizechart_empty.values[i][0] == vm.product.sizechart.values[pos][0])
+						vm.sizechart_available_values[i] = true;
+				}
 			}
 			vm.product.sizechart.values.splice(pos, 1);
 		}
@@ -282,7 +284,7 @@
 							vm.product.sizechart['metric_unit'] = angular.copy(original_sizechart.metric_unit);
 						for(var i = 0; i < vm.sizechart_empty.values.length; i++) {
 							vm.product.sizechart.values.forEach(function (element) {
-								if(element[0] == vm.sizechart_empty.values[i][0])
+								if(angular.isArray(element) && element.length > 0 && element[0] == vm.sizechart_empty.values[i][0])
 									vm.sizechart_available_values[i] = false;
 							})
 						}
