@@ -1,0 +1,12 @@
+<div>
+	<h4>Story information</h4>
+	<span>What product categories is this story about?</span>
+	<ol class="nya-bs-select" ng-model="storyCategoryComponentCtrl.story.categories" multiple>
+		<li nya-bs-option="category in storyCategoryComponentCtrl.categories" data-value="category.id" deep-watch="true" class="ng-class:{'lang-selected': storyCategoryComponentCtrl.isCategorySelected(category.id)}">
+			<a href="">
+				<span ng-bind="category.name"></span>
+				<span class="glyphicon glyphicon-ok ok-white-icon pull-right" ng-if="storyCategoryComponentCtrl.isCategorySelected(category.id)"></span>
+			</a>
+		</li>
+	</ol>
+</div>
