@@ -38,16 +38,10 @@ Example about how to call to Web Service to get a private lists of Stories of th
     	"1b34c",
     	"1h10i"
       ],
-      "tags": [
-    	{
-    	  "en-US": "super",
-    	  "es-ES": "super"
-    	},
-    	{
-    	  "en-US": "story",
-    	  "es-ES": "historia"
-    	}
-      ],
+	  "tags": {
+		"en-US": ["super", "story"],
+		"es-ES": ["super", "historia"]
+	  },
       "components": [
     	{
     	  "type": 1,
