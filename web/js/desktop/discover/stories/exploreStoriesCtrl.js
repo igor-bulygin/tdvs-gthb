@@ -51,7 +51,7 @@
     }
 
     angular
-        .module('todevise')
-        .controller('exploreStoriesCtrl', controller);
+    .module('todevise')
+    .controller('exploreStoriesCtrl', controller);
 
 }())
