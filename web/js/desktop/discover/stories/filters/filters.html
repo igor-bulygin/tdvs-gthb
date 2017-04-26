@@ -2,7 +2,7 @@
     <form name="exploreStoriesFiltersCtrl.form">
         <span class="filter-title">Filter by theme</span>
         <div class="checkbox checkbox-red" ng-repeat="category in exploreStoriesFiltersCtrl.categories.items | orderBy: 'category.name'" ng-if="$index < exploreStoriesFiltersCtrl.show_categories">
-            <input ng-attr-id="{{'checkbox'+($index+10)}}" type="checkbox" name="categories" ng-model="exploreStoriesFiltersCtrl.filters.categories[category.id]" class="ng-class:{'checked': exploreStoriesFiltersCtrl.filters.categories[category.id]}">
+            <input ng-attr-id="{{'checkbox'+($index+10)}}" type="checkbox" name="categories" ng-model="exploreStoriesFiltersCtrl.filters.categories[category.id]" class="ng-class:{'checked': exploreStoriesFiltersCtrl.filters.categories[category.id]}" ng-disabled="exploreStoriesFiltersCtrl.searching">
             <label ng-attr-for="{{'checkbox'+($index+10)}}">
 				<span ng-bind="category.name"></span>
 			</label>
@@ -10,7 +10,7 @@
         <span class="more-btn" ng-click="exploreStoriesFiltersCtrl.seeMore('categories')" ng-if="exploreStoriesFiltersCtrl.show_categories < exploreStoriesFiltersCtrl.categories.meta.total_count" ng-cloak>see more</span>
         <span class="filter-title">Filter by location</span>
         <div class="checkbox checkbox-red" ng-repeat="country in exploreStoriesFiltersCtrl.countries.items | orderBy: 'country.name'" ng-if="$index < exploreStoriesFiltersCtrl.show_countries">
-            <input ng-attr-id="{{'checkbox'+($index+10+exploreStoriesFiltersCtrl.categories.items.length)}}" type="checkbox" name="countries" ng-model="exploreStoriesFiltersCtrl.filters.countries[country.id]" class="ng-class:{'checked': exploreStoriesFiltersCtrl.filters.countries[country.id]}">
+            <input ng-attr-id="{{'checkbox'+($index+10+exploreStoriesFiltersCtrl.categories.items.length)}}" type="checkbox" name="countries" ng-model="exploreStoriesFiltersCtrl.filters.countries[country.id]" class="ng-class:{'checked': exploreStoriesFiltersCtrl.filters.countries[country.id]}" ng-disabled="exploreStoriesFiltersCtrl.searching">
             <label ng-attr-for="{{'checkbox'+($index+10+exploreStoriesFiltersCtrl.categories.items.length)}}">
 				<span ng-bind="country.country_name"></span>
 			</label>

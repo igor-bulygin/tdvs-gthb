@@ -59,6 +59,7 @@
         controller: controller,
         controllerAs: 'exploreStoriesFiltersCtrl',
         bindings: {
+            searching:'<',
             filters: '<'
         }
     }
