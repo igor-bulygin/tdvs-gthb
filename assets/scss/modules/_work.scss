@@ -126,6 +126,25 @@
 			@include transition-timing-function(ease-out);
 		}
 	}
+	.close-row-sizes{
+		margin: 0 0 0 30px;
+		color:$white;
+    	top: 5px;
+		background-color: $light_grey;
+		font-size: 11px;
+		width: 22px;
+		height: 22px;
+		@include border-radius(90px,90px,90px,90px);
+		text-align: center;
+		padding-top: 6px;
+		cursor: pointer;
+		&:hover{
+			background-color: $dark_grey;
+			@include transition-property(background-color);
+			@include transition-duration(0.3s);
+			@include transition-timing-function(ease-out);
+		}
+	}
 }
 .add-cathegory{
 	margin:-15px 0 0 0;
