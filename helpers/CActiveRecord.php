@@ -194,9 +194,20 @@ class CActiveRecord extends ActiveRecord
 	public function getEmbedded($name)
 	{
 		$embedded = parent::getEmbedded($name);
-		if ($embedded && $embedded instanceof EmbedModel && empty($embedded->getParentObject())) {
-			// Only when we get embedded object for first time, we set the reference to parent object
-			$embedded->setParentObject($this);
+		if ($embedded) {
+			if ($embedded instanceof EmbedModel && empty($embedded->getParentObject())) {
+				// Embedded Item
+				// Only when we get embedded object for first time, we set the reference to parent object
+				$embedded->setParentObject($this);
+			} elseif ($embedded instanceof \ArrayObject) {
+				// Embedded List
+				foreach ($embedded as $item) {
+					if ($item instanceof EmbedModel && empty($item->getParentObject())) {
+						// Only when we get embedded object for first time, we set the reference to parent object
+						$item->setParentObject($this);
+					}
+				}
+			}
 		}
 
 		return $embedded;
