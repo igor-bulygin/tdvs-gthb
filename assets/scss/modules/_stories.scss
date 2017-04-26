@@ -66,3 +66,103 @@
 		}
 	}
 }
+.stories-wrapper{
+	float: left;
+	width: 100%;
+	padding: 20px 0;
+	.stories-title{
+		font-family: $font-family--bold;
+		color: $black;
+		text-align: left;
+		margin-bottom: 10px;
+		display: block;
+		text-transform: uppercase;
+		font-weight: bold;
+		font-size: 14px;
+	}
+}
+.edit-faq-wrapper{
+    @extend %block;
+    margin: 15px 0;
+    .plus-add{
+        background-color: $green;
+        border: 1px solid $black;
+        margin: 0 auto;
+        font-size: 43px;
+        text-align: center;
+        @include size(50px,50px);
+        @include border-radius(90px,90px,90px,90px);
+        span{
+            display: block;
+            margin: -9px 0 0 0;
+        }
+        &:hover{
+            background-color: $dark_green;
+            @include transition-property(background-color);
+            @include transition-duration(0.3s);
+            @include transition-timing-function(ease-out);
+        }
+    }
+}
+.edit-faq-panel{
+    @extend %block;
+    background-color: $pale_white;
+    padding: 5px;
+    @include border-radius(6px,6px,6px,6px);
+    margin: 0 0 50px;
+}
+.faq-language-menu{
+    ol{
+        background-color:$pale_white!important;
+        border-bottom: 1px solid #fff!important;
+        @include border-radius(0px,0px,0px,0px);
+        button{
+            font-family: $font-family--bold;
+            color: $black!important;
+            border-top: 1px solid transparent!important;
+            border-left: 1px solid transparent!important;
+            border-right: 1px solid transparent!important;
+            background-color: transparent!important;
+            border-bottom: 1px solid $red!important;
+            background-color:$pale_white!important;
+            width:94px!important;
+            @include border-radius(0px,0px,0px,0px);
+            text-transform: uppercase;
+        }
+    }
+    .dropdown-menu{
+        background-color:$background_grey!important;
+    }
+    ul{
+        border-bottom: 1px solid #fff;
+        background-color: $background_grey!important;
+        li{
+            &:hover{
+                @include box-shadow(0,0,0,transparent);
+            }
+            a{
+                &:hover{
+                    background-color:$white;
+                }
+                &:focus{
+                    background-color:$light_grey;
+                }
+            }
+        }
+    }
+}
+.lang-selected{
+    background-color: $green!important;
+    a{
+        background-color: $green!important;
+    }
+    a:hover{
+        background-color: $green!important;   
+    }
+    a:focus{
+        background-color: $green!important;   
+    }
+}
+.ok-white-icon{
+    color: $white;
+}
