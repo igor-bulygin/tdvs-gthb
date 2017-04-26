@@ -28,7 +28,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 		<story-add-component story="createStoryCtrl.story"></story-add-component>
 		<story-category-component story="createStoryCtrl.story" categories="createStoryCtrl.categories"></story-category-component>
 		<story-tag-component story="createStoryCtrl.story" languages="createStoryCtrl.languages"></story-tag-component>
-		<div class="text-center" style="display: block; width: 100%; float: left;">
+		<div class="text-center" style="display: block; width: 100%; float: left; margin:50px 0 100px;">
 			<button class="btn btn-default btn-green" ng-click="createStoryCtrl.save(createStoryCtrl.story)">Publish story</button>
 		</div>
 	</div>
