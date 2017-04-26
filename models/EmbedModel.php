@@ -27,7 +27,10 @@ class EmbedModel extends CActiveRecord
 
 	public function beforeValidate()
 	{
-		$this->setScenario($this->getParentObject()->getScenario());
+		$parentObject = $this->getParentObject();
+		if ($parentObject) {
+			$this->setScenario($parentObject->getScenario());
+		}
 
 		return parent::beforeValidate();
 	}
