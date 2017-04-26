@@ -61,7 +61,7 @@
 			if(vm.resolve.index && vm.resolve.index >= 0)
 				data.index = angular.copy(index);
 
-			data.file = Upload.dataUrltoBlob(vm.photoCropped, "temp.png");
+			data.file = Upload.dataUrltoBlob(vm.photoCropped, "temp.jpg");
 
 			switch (vm.resolve.type) {
 				case "header_cropped":
