@@ -23,16 +23,17 @@ class EmbedModel extends CActiveRecord
 	public function setParentObject($object)
 	{
 		$this->parentObject = $object;
-		$this->setParentOnEmbbedMappings();
 	}
 
 	public function beforeValidate()
 	{
-		$this->setScenario($this->getParentObject()->getScenario());
+		$parentObject = $this->getParentObject();
+		if ($parentObject) {
+			$this->setScenario($parentObject->getScenario());
+		}
 
 		return parent::beforeValidate();
 	}
-
 
 	/**
 	 * Add additional error to make easy show labels in client side

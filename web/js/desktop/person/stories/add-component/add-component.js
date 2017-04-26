@@ -6,9 +6,15 @@
 		vm.addComponent = addComponent;
 
 		function addComponent(type) {
-			vm.story.components.unshift({
+			var items;
+			if(type === 1)
+				items = {};
+			else {
+				items = [];
+			}
+			vm.story.components.push({
 				type: type,
-				items: [],
+				items: items,
 				position: vm.story.components.length+1
 			});
 		}

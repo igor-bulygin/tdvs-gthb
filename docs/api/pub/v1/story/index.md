@@ -16,7 +16,8 @@ Story
 * `id`: Filter a specific story for id
 * `q`: Search word/s in the title of the story (LIKE)
 * `person_id`: Filter stories of a specific person only
-* `story_state`: Filter stories by state (values: story_state_draft, story_state_active)
+* `categories`: Array of ids, to filter stories related with any category of the list
+* `countries`: Array of country codes, to filter stories of persons related with any country of the list
 * `page`: Set the result page that want to be retrieved (default: 1)
 * `limit`: Limit the results returned for page (default: 20)
 
@@ -38,16 +39,10 @@ Title and slug fields (multilanguage fields) are automatically translated in the
     	"1b34c",
     	"1h10i"
       ],
-      "tags": [
-    	{
-    	  "en-US": "super",
-    	  "es-ES": "super"
-    	},
-    	{
-    	  "en-US": "story",
-    	  "es-ES": "historia"
-    	}
-      ],
+	  "tags": {
+		"en-US": ["super", "story"],
+		"es-ES": ["super", "historia"]
+	  },
       "components": [
     	{
     	  "type": 1,

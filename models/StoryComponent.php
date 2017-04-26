@@ -90,6 +90,9 @@ class StoryComponent extends EmbedModel
 					return $model->type == self::STORY_COMPONENT_TYPE_VIDEOS;
 				}
 			],
+			[
+				'position', 'number', 'min' => 0
+			]
 		];
 	}
 
@@ -104,7 +107,7 @@ class StoryComponent extends EmbedModel
 			}
 			$photo = $item['photo'];
 			$position = $item['position'];
-			if (!is_int($position) || $position <= 0) {
+			if (!is_int($position) || $position < 0) {
 				$this->addError('items', sprintf('Invalid position (%s) for photo %s', $position, $photo));
 			}
 			if (!$person->existMediaFile($photo)) {
@@ -123,7 +126,7 @@ class StoryComponent extends EmbedModel
 			}
 			$workId = $item['work'];
 			$position = $item['position'];
-			if (!is_int($position) || $position <= 0) {
+			if (!is_int($position) || $position < 0) {
 				$this->addError('items', sprintf('Invalid position (%s) for work %s', $position, $workId));
 			}
 			$work = Product2::findOneSerialized($workId);
