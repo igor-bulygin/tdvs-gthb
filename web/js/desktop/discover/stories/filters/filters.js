@@ -1,71 +1,71 @@
 (function() {
-    "use strict";
+	"use strict";
 
-    function controller(UtilService, locationDataService, productDataService) {
-        var vm = this;
-        vm.seeMore = seeMore;
-        vm.show_countries = 10;
-        vm.show_categories = 10;
+	function controller(UtilService, locationDataService, productDataService) {
+		var vm = this;
+		vm.seeMore = seeMore;
+		vm.show_countries = 10;
+		vm.show_categories = 10;
 
-        init();
+		init();
 
-        function init() {
-            getCategories();
-            getCountries();
-        }
+		function init() {
+			getCategories();
+			getCountries();
+		}
 
-        function getCountries() {
-            function onGetContriesSuccess(data) {
-                vm.countries = angular.copy(data);
-            }
+		function getCountries() {
+			function onGetContriesSuccess(data) {
+				vm.countries = angular.copy(data);
+			}
 
-            var params = {
-                only_with_stories: true
-            }
+			var params = {
+				only_with_stories: true
+			}
 
-            locationDataService.getCountry(params, onGetContriesSuccess, UtilService.onError);
-        }
+			locationDataService.getCountry(params, onGetContriesSuccess, UtilService.onError);
+		}
 
-        function seeMore(value) {
-            switch (value) {
-                case 'countries':
-                    if (vm.show_countries < vm.countries.meta.total_count)
-                        vm.show_countries += 10;
-                    break;
-                case 'categories':
-                    if (vm.show_categories < vm.categories.meta.total_count)
-                        vm.show_categories += 10;
-                    break;
-                default:
-                    break;
-            }
-        }
+		function seeMore(value) {
+			switch (value) {
+				case 'countries':
+				if (vm.show_countries < vm.countries.meta.total_count)
+					vm.show_countries += 10;
+				break;
+				case 'categories':
+				if (vm.show_categories < vm.categories.meta.total_count)
+					vm.show_categories += 10;
+				break;
+				default:
+				break;
+			}
+		}
 
-        function getCategories() {
-            function onGetCategoriesSuccess(data) {
-                vm.categories = angular.copy(data);
-            }
+		function getCategories() {
+			function onGetCategoriesSuccess(data) {
+				vm.categories = angular.copy(data);
+			}
 
-            var params = {
-                only_with_stories: true
-            }
+			var params = {
+				only_with_stories: true
+			}
 
-            productDataService.getCategories(params, onGetCategoriesSuccess, UtilService.onError);
-        }
-    }
+			productDataService.getCategories(params, onGetCategoriesSuccess, UtilService.onError);
+		}
+	}
 
-    var component = {
-        templateUrl: currentHost() + '/js/desktop/discover/stories/filters/filters.html',
-        controller: controller,
-        controllerAs: 'exploreStoriesFiltersCtrl',
-        bindings: {
-            searching:'<',
-            filters: '<'
-        }
-    }
+	var component = {
+		templateUrl: currentHost() + '/js/desktop/discover/stories/filters/filters.html',
+		controller: controller,
+		controllerAs: 'exploreStoriesFiltersCtrl',
+		bindings: {
+			searching:'<',
+			filters: '<'
+		}
+	}
 
-    angular
-    .module('todevise')
-    .component('exploreStoriesFilters', component);
+	angular
+	.module('todevise')
+	.component('exploreStoriesFilters', component);
 
 }());

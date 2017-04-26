@@ -21,22 +21,22 @@ $this->title = 'Stories - Todevise';
 		</div>
 		<div class="our-devisers-body">
 			<div class="col-md-2">
-                <explore-stories-filters filters="exploreStoriesCtrl.filters" searching="exploreStoriesCtrl.searching"></explore-stories-filters></div>
-			<div class="col-md-10">
-				<div class="found-header">
-					<p ng-if="exploreStoriesCtrl.search_key" ng-cloak>We found <span ng-bind="exploreStoriesCtrl.results.meta.total_count"></span> stories with the keywords "<span class="key" ng-bind="exploreStoriesCtrl.search_key"></span>"</p>
+				<explore-stories-filters filters="exploreStoriesCtrl.filters" searching="exploreStoriesCtrl.searching"></explore-stories-filters></div>
+				<div class="col-md-10">
+					<div class="found-header">
+						<p ng-if="exploreStoriesCtrl.search_key" ng-cloak>We found <span ng-bind="exploreStoriesCtrl.results.meta.total_count"></span> stories with the keywords "<span class="key" ng-bind="exploreStoriesCtrl.search_key"></span>"</p>
+					</div>
+					<hr />
+					<div ng-if="exploreStoriesCtrl.searching" ng-cloak>
+						<p class="text-center">Searching...</p>
+					</div>
+					<div ng-if="exploreBoxesCtrl.results.items.length === 0" ng-cloak>
+						<p class="text-center">No stories found with the specified search criteria.</p>
+					</div>
+					<div ng-if="exploreBoxesCtrl.results.items.length != 0" ng-cloak>
+						<explore-stories-results results="exploreStoriesCtrl.results" ng-if="exploreStoriesCtrl.results.items.length > 0" ng-cloak></explore-stories-results>
+					</div>
 				</div>
-				<hr />
-				<div ng-if="exploreStoriesCtrl.searching" ng-cloak>
-					<p class="text-center">Searching...</p>
-				</div>
-				<div ng-if="exploreBoxesCtrl.results.items.length === 0" ng-cloak>
-					<p class="text-center">No stories found with the specified search criteria.</p>
-				</div>
-                <div ng-if="exploreBoxesCtrl.results.items.length != 0" ng-cloak>
-				    <explore-stories-results results="exploreStoriesCtrl.results" ng-if="exploreStoriesCtrl.results.items.length > 0" ng-cloak></explore-stories-results>
-                </div>
 			</div>
 		</div>
 	</div>
-</div>
