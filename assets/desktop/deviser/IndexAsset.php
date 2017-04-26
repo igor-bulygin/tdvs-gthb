@@ -24,6 +24,7 @@ class IndexAsset extends AssetBundle {
 		'app\assets\libs\ngYoutubeEmbedAsset',
 		'app\assets\libs\uiCropperAsset',
 		'app\assets\libs\angularMasonryAsset',
-		'app\assets\libs\angularLocalStorageAsset'
+		'app\assets\libs\angularLocalStorageAsset',
+		'app\assets\libs\ngTagsInputAsset',
 	];
 }

@@ -1,0 +1,13 @@
+<div>
+	<h4>Tags</h4>
+	<div class="col-md-3">
+		<ol class="nya-bs-select form-control" ng-model="storyTagComponentCtrl.languageSelected">
+			<li nya-bs-option="language in storyTagComponentCtrl.languages" data-value="language.code" deep-watch="true" ng-init="storyTagComponentCtrl.languageSelected='en-US'">
+				<a href="">
+					<span ng-bind="language.name"></span>
+				</a>
+			</li>
+		</ol>
+		<tags-input ng-model="storyTagComponentCtrl.tags[storyTagComponentCtrl.languageSelected]" on-tag-added="storyTagComponentCtrl.addTag($tag, storyTagComponentCtrl.languageSelected)" on-tag-removed="storyTagComponentCtrl.removeTag($tag)"></tags-input>
+	</div>
+</div>
