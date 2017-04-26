@@ -29,7 +29,7 @@ $this->params['person_links_target'] = 'public_view';
 				 <?php if (empty($stories)) { ?>
 
 					<div class="empty-wrapper">
-						<?php if ($person->isConnectedUser()) { ?>
+						<?php if ($person->isPersonEditable()) { ?>
 							<div><a class="red-link-btn" href="#">See an example</a></div>
 							<img class="sad-face" src="/imgs/sad-face.svg">
 							<p class="no-video-text">Express yourself, start writing your first one now.</p>
