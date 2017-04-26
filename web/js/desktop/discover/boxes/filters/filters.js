@@ -41,6 +41,7 @@
 		controller: controller,
 		controllerAs: 'exploreBoxesFiltersCtrl',
 		bindings: {
+			searching:'<',
 			filters: '<'
 		}
 	}

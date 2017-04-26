@@ -20,7 +20,7 @@ $this->title = 'Explore boxes - Todevise';
 			</div>
 		</div>
 		<div class="our-devisers-body">
-			<div class="col-md-2"><explore-boxes-filters filters="exploreBoxesCtrl.filters"></explore-boxes-filters></div>
+			<div class="col-md-2"><explore-boxes-filters filters="exploreBoxesCtrl.filters" searching="exploreBoxesCtrl.searching"></explore-boxes-filters></div>
 			<div class="col-md-10">
 				<div class="found-header">
 					<p ng-if="exploreBoxesCtrl.search_key" ng-cloak>We found <span ng-bind="exploreBoxesCtrl.results.meta.total_count"></span> boxes with the keywords "<span class="key" ng-bind="exploreBoxesCtrl.search_key"></span>"</p>

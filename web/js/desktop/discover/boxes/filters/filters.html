@@ -2,7 +2,7 @@
 	<form name="exploreBoxesFiltersCtrl.form">
 		<span class="filter-title">Filter by country</span>
 		<div class="checkbox checkbox-red" ng-repeat="country in exploreBoxesFiltersCtrl.countries.items | orderBy: 'country.name'" ng-if="$index < exploreBoxesFiltersCtrl.show_countries">
-			<input ng-attr-id="{{'checkbox'+($index+10)}}" type="checkbox" name="countries" ng-model="exploreBoxesFiltersCtrl.filters.countries[country.id]" class="ng-class:{'checked': exploreBoxesFiltersCtrl.filters.countries[country.id]}">
+			<input ng-attr-id="{{'checkbox'+($index+10)}}" type="checkbox" name="countries" ng-model="exploreBoxesFiltersCtrl.filters.countries[country.id]" class="ng-class:{'checked': exploreBoxesFiltersCtrl.filters.countries[country.id]}" ng-disabled="exploreBoxesFiltersCtrl.searching">
 			<label ng-attr-for="{{'checkbox'+($index+10)}}">
 				<span ng-bind="country.country_name"></span>
 			</label>
