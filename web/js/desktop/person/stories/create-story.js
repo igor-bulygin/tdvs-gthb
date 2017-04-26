@@ -18,7 +18,9 @@
 		function newStory() {
 			var story = {
 				title: {},
-				components: []
+				components: [],
+				categories: [],
+				tags: {}
 			};
 			return story;
 		}

@@ -16,6 +16,7 @@ class IndexStoryAsset extends AssetBundle {
 		'js/desktop/person/stories/work-component/work-component.js',
 		'js/desktop/person/stories/add-component/add-component.js',
 		'js/desktop/person/stories/category-component/category-component.js',
+		'js/desktop/person/stories/tag-component/tag-component.js',
 		'js/desktop/person/stories/move-delete-component/move-delete-component.js',
 	];
 	public $depends = [
