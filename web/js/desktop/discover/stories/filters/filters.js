@@ -18,12 +18,7 @@
 			function onGetContriesSuccess(data) {
 				vm.countries = angular.copy(data);
 			}
-
-			var params = {
-				only_with_stories: true
-			}
-
-			locationDataService.getCountry(params, onGetContriesSuccess, UtilService.onError);
+			locationDataService.getCountry({}, onGetContriesSuccess, UtilService.onError);
 		}
 
 		function seeMore(value) {
@@ -45,12 +40,7 @@
 			function onGetCategoriesSuccess(data) {
 				vm.categories = angular.copy(data);
 			}
-
-			var params = {
-				only_with_stories: true
-			}
-
-			productDataService.getCategories(params, onGetCategoriesSuccess, UtilService.onError);
+			productDataService.getCategories({}, onGetCategoriesSuccess, UtilService.onError);
 		}
 	}
 

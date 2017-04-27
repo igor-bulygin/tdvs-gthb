@@ -14,9 +14,6 @@
 		function search(form) {
 			delete vm.results;
 			vm.searching = true;
-			var params = {
-				ignore_empty_stories: true
-			}
 			if (vm.key)
 				params = Object.assign(params, { q: vm.key });
 
@@ -41,7 +38,7 @@
 			UtilService.onError(err);
 			vm.searching = false;
 		}
-		storyDataService.getStoryPub(params, onGetStoriesSuccess, onGetStoriesError);
+		storyDataService.getStoryPub({}, onGetStoriesSuccess, onGetStoriesError);
 	}
 
 //watches
