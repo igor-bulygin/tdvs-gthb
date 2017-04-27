@@ -1,7 +1,7 @@
 (function() {
 	"use strict";
 
-	function controller(UtilService, storyDataService, $scope) {
+	function controller(UtilService, storyDataService, $scope,$sce) {
 		var vm = this;
 		vm.search = search;
 		vm.filters = {};
@@ -31,7 +31,11 @@
 				vm.searching = false;
 				vm.search_key = angular.copy(vm.key);
 				vm.results = angular.copy(data);
-				if (vm.results.items.length > 0) {}
+				angular.forEach(vm.results.items, function(value){
+					if (!angular.isUndefined(value.first_text)) {
+						value.first_text = $sce.trustAsHtml(value.first_text);
+					}
+				});
 			}
 
 		function onGetStoriesError(err) {
