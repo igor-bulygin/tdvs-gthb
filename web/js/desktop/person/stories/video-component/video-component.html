@@ -1,10 +1,18 @@
-<div>
+<div class="add-videos-wrapper">
 	<p>Video</p>
 	<p>Paste the YouTube video in the field below.</p>
 	<form name="storyVideoComponentCtrl.form">
-		<input type="text" name="video" ng-pattern="storyVideoComponentCtrl.youTubeRegEx" class="form-control ng-class:{'error-input': storyVideoComponentCtrl.has_error(storyVideoComponentCtrl.form, storyVideoComponentCtrl.form.video)}" placeholder="http://" ng-model="storyVideoComponentCtrl.video_url">
+		<div class="input-group input-group-lg input-video">
+			<span class="input-group-addon" id="sizing-addon1">Video url</span>
+			<input type="text" name="video" ng-pattern="storyVideoComponentCtrl.youTubeRegEx" class="form-control input-add-video ng-class:{'error-input': storyVideoComponentCtrl.has_error(storyVideoComponentCtrl.form, storyVideoComponentCtrl.form.video)}" placeholder="http://" ng-model="storyVideoComponentCtrl.video_url">
+		</div>
 	</form>
-	<button ng-click="storyVideoComponentCtrl.addVideo(storyVideoComponentCtrl.form)">+</button>
+	<div class="plus-add-wrapper" ng-click="storyVideoComponentCtrl.addVideo(storyVideoComponentCtrl.form)">
+		<div class="plus-add">
+			<span>+</span>
+		</div>
+		<div class="text">ADD VIDEOS</div>
+	</div>
 	<div ng-if="storyVideoComponentCtrl.component.items.length > 0">
 		<ng-youtube-embed url="storyVideoComponentCtrl.component.items[0]" autoplay="false" color="white" disablekb="true" width="100%"></ng-youtube-embed>
 	</div>
