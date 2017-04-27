@@ -5,7 +5,6 @@
 		$window) {
 		var vm = this;
 		vm.save = save;
-
 		init();
 
 		function init() {
@@ -20,7 +19,8 @@
 				title: {},
 				components: [],
 				categories: [],
-				tags: {}
+				tags: {},
+				person_id: person.short_id
 			};
 			return story;
 		}
