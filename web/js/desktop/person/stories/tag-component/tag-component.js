@@ -1,11 +1,24 @@
 (function () {
 	"use strict";
 
-	function controller() {
+	function controller(UtilService) {
 		var vm = this;
 		vm.addTag = addTag;
 		vm.removeTag = removeTag;
 		vm.tags = {};
+
+		init();
+
+		function init() {
+			if(angular.isObject(vm.story.tags) && !UtilService.isEmpty(vm.story.tags)) {
+				for(var key in vm.story.tags) {
+					vm.tags[key] = []
+					vm.story.tags[key].forEach(function(element) {
+						vm.tags[key].push(element);
+					});
+				}
+			}
+		}
 		
 		function addTag(tag) {
 			if(!vm.story.tags[vm.languageSelected])
@@ -17,7 +30,7 @@
 		}
 
 		function removeTag(tag) {
-			var pos = vm.product.tags[vm.languageSelected].indexOf(tag.text);
+			var pos = vm.story.tags[vm.languageSelected].indexOf(tag.text);
 			if(pos > -1)
 				vm.story.tags[vm.languageSelected].splice(pos, 1);
 			if(vm.story.tags[vm.languageSelected].length === 0)

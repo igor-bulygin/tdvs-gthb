@@ -5,6 +5,13 @@
 		var vm = this;
 		vm.upload = upload;
 
+		init();
+
+		function init() {
+			if(vm.story.main_photo_url)
+				vm.image = angular.copy(vm.story.main_photo_url);
+		}
+
 		function upload(file) {
 			function onUploadFileSuccess(data) {
 				vm.image = angular.copy(data.data.url);

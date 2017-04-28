@@ -426,7 +426,7 @@ class PersonController extends CController
 			throw new UnauthorizedHttpException();
 		}
 
-		Story::setSerializeScenario(Story::SERIALIZE_SCENARIO_PUBLIC);
+		Story::setSerializeScenario(Story::SERIALIZE_SCENARIO_OWNER);
 		$story = Story::findOneSerialized($story_id);
 		if (!$story) {
 			throw new NotFoundHttpException();
