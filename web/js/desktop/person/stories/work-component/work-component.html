@@ -1,26 +1,33 @@
-<div>
-	<p>Deviser <span class="pull-rigth" ng-click="storyWorkComponentCtrl.getDeviserWorks(storyWorkComponentCtrl.person_id)">Your works</span></p>
-	<form name="storyWorkComponentCtrl.search_deviser_form">
-		<input type="text" ng-model="storyWorkComponentCtrl.search_deviser_key" class="form-control" placeholder="Search">
-	</form>
-	<div class="pull-left" style="width: 400px; height: 400px; overflow-y: scroll;">
-		<div ng-repeat="deviser in storyWorkComponentCtrl.devisers" ng-click="storyWorkComponentCtrl.getDeviserWorks(deviser.id)">
-			<img style="width: 50px;" ng-src="{{deviser.url_avatar}}" ng-attr-alt="deviser.personal_info.brand_name" ng-attr-title="deviser.personal_info.brand_name">
-			<span ng-bind="deviser.personal_info.brand_name"></span>
+<div class="create-stories-wrapper">
+	<div class="devisers-works-wrapper">
+		<div class="devisers-works-header">
+			<span class="title">Deviser</span>
+			<span class="pull-rigth" ng-click="storyWorkComponentCtrl.getDeviserWorks(storyWorkComponentCtrl.person_id)">Your works</span>
+		</div>
+		<div class="devisers-works-searcher">
+			<form name="storyWorkComponentCtrl.search_deviser_form">
+				<input type="text" ng-model="storyWorkComponentCtrl.search_deviser_key" class="form-control" placeholder="Search">
+			</form>
+		</div>
+		<div class="pull-left" style="width: 400px; height: 400px; overflow-y: scroll;">
+			<div ng-repeat="deviser in storyWorkComponentCtrl.devisers" ng-click="storyWorkComponentCtrl.getDeviserWorks(deviser.id)">
+				<img style="width: 50px;" ng-src="{{deviser.url_avatar}}" ng-attr-alt="deviser.personal_info.brand_name" ng-attr-title="deviser.personal_info.brand_name">
+				<span ng-bind="deviser.personal_info.brand_name"></span>
+			</div>
 		</div>
 	</div>
-	<div class="pull-left" style="width: 400px; height: 400px; overflow-y: scroll;">
+	<div class="pull-right" style="width: 400px; height: 400px; overflow-y: scroll;">
 		<div ng-repeat="work in storyWorkComponentCtrl.works" ng-click="storyWorkComponentCtrl.setWork(work)">
 			<img style="width: 50px;" ng-src="{{work.main_photo}}" ng-attr-alt="work.name" ng-attr-title="work.name">
 			<span ng-bind="work.name"></span><span class="glyphicon glyphicon-minus-sign" ng-if="storyWorkComponentCtrl.findWorkInItems(work.id) > -1"></span>
 		</div>
 	</div>
-</div>
-<div>
-	<span style="width: 200px;">
-		<move-delete-component array="storyWorkComponentCtrl.works_helper" position="$index" ng-repeat="work in storyWorkComponentCtrl.works_helper">
-			<img ng-src="{{work.main_photo}}" ng-attr-alt="work.name" ng-attr-title="work.name" style="width: 200px;">
-			<span ng-bind="work.name"></span>
-		</move-delete-component>
-	</span>
+	<div>
+		<span style="width: 200px;">
+			<move-delete-component array="storyWorkComponentCtrl.works_helper" position="$index" ng-repeat="work in storyWorkComponentCtrl.works_helper">
+				<img ng-src="{{work.main_photo}}" ng-attr-alt="work.name" ng-attr-title="work.name" style="width: 200px;">
+				<span ng-bind="work.name"></span>
+			</move-delete-component>
+		</span>
+	</div>
 </div>
