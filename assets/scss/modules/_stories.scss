@@ -70,6 +70,7 @@
 	float: left;
 	width: 100%;
 	padding: 20px 0;
+	position: relative;
 	.stories-title{
 		font-family: $font-family--bold;
 		color: $black;
@@ -79,6 +80,45 @@
 		text-transform: uppercase;
 		font-weight: bold;
 		font-size: 14px;
+	}
+	.edit-faq-panel{
+		@extend %block;
+		background-color: $pale_white;
+		padding: 5px;
+		@include border-radius(6px,6px,6px,6px);
+		margin: 0;
+	}
+	.add-videos-wrapper{
+		width: 100%;
+		@include border-radius(20px,20px,20px,20px);
+		text-align: center;
+		margin: 0 auto 20px;
+		padding: 20px 20px 0;
+		border: 1px solid #1C1919;
+		cursor: pointer;
+		background-color: #e9e9e9;
+		margin: 10px 2px 0;
+		&:hover{
+			.plus-add{
+				background-color: $dark_green;
+				@include transition-property(background-color);
+				@include transition-duration(0.3s);
+				@include transition-timing-function(ease-out);
+			}
+		}
+		.plus-add{
+			background-color: $green;
+			border: 1px solid $black;
+			margin: 0 auto;
+			font-size: 43px;
+			text-align: center;
+			@include size(50px,50px);
+			@include border-radius(90px,90px,90px,90px);
+			span{
+				display: block;
+				margin: -9px 0 0 0;
+			}
+		}
 	}
 }
 .edit-faq-wrapper{
@@ -103,13 +143,6 @@
             @include transition-timing-function(ease-out);
         }
     }
-}
-.edit-faq-panel{
-    @extend %block;
-    background-color: $pale_white;
-    padding: 5px;
-    @include border-radius(6px,6px,6px,6px);
-    margin: 0 0 50px;
 }
 .faq-language-menu{
     ol{
@@ -231,37 +264,7 @@
         }
     }
 }
-.add-videos-wrapper{
-    width: 80%;
-    @include border-radius(20px,20px,20px,20px);
-    text-align: center;
-    margin: 0 auto 20px;
-    padding: 20px 20px 0;
-    border: 1px solid $dark_grey;
-    cursor: pointer;
-    background-color: #e9e9e9;
-    &:hover{
-        .plus-add{
-            background-color: $dark_green;
-            @include transition-property(background-color);
-            @include transition-duration(0.3s);
-            @include transition-timing-function(ease-out);
-        }
-    }
-    .plus-add{
-        background-color: $green;
-        border: 1px solid $black;
-        margin: 0 auto;
-        font-size: 43px;
-        text-align: center;
-        @include size(50px,50px);
-        @include border-radius(90px,90px,90px,90px);
-        span{
-            display: block;
-            margin: -9px 0 0 0;
-        }
-    }
-}
+
 
     .input-video{
         width: 80%;
@@ -308,3 +311,18 @@
         cursor: move;
         float: left;
     }
+.story-component-wrapper{
+	display: block;
+    width: 100%;
+    float: left;
+	position: relative;
+}
+.story-component-wrapper{
+	position: relative;
+}
+.move-remove-elements{
+	position: absolute;
+    right: 25px;
+    top: 25px;
+    z-index: 9;
+}
