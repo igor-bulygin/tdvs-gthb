@@ -454,7 +454,7 @@ class Story extends CActiveRecord {
 	public function getFirstText() {
 		$firstTextComponent = $this->getFirstTextComponent();
 		if ($firstTextComponent) {
-			return $firstTextComponent->getText();
+			return strip_tags($firstTextComponent->getText());
 		}
 
 		return null;
