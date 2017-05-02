@@ -21,7 +21,7 @@
 				categories: [],
 				tags: {},
 				person_id: person.short_id,
-				story_state: story_state_active
+				story_state: 'story_state_active'
 			};
 			return story;
 		}

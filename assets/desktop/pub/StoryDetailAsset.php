@@ -12,5 +12,6 @@ class StoryDetailAsset extends AssetBundle {
 	];
 	public $depends = [
 		'app\assets\desktop\pub\PublicCommonAsset',
+		'app\assets\libs\angularBootstrapAsset',
 	];
 }

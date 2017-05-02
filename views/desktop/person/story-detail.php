@@ -39,7 +39,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 				Edit Story
 			</a>
 
-			<button class="btn btn-default" type="button" ng-click="detailStoryCtrl.deleteStory(detailStoryCtrl.story.id)">
+			<button class="btn btn-default" type="button" ng-click="detailStoryCtrl.openModal()">
 				<i class="ion-delete"></i>
 				Delete Story
 			</button>
@@ -124,3 +124,16 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 
 	</div>
 </div>
+
+<script type="text/ng-template" id="deleteStoryModal.html">
+	<div class="modal-header">
+		<h3 class="modal-title">Are you sure you want to delete this story?</h3>
+	</div>
+	<div class="modal-body">
+		<p>You will not be able to recover it.</p>
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-default" ng-click="deleteStoryModalCtrl.ok()">Delete</button>
+		<button class="btn btn-default btn-green" ng-click="deleteStoryModalCtrl.cancel()">Cancel</button>
+	</div>
+</script>
