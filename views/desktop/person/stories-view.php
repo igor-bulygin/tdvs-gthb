@@ -30,7 +30,9 @@ $this->params['person_links_target'] = 'public_view';
 
 					<div class="empty-wrapper">
 						<?php if ($person->isPersonEditable()) { ?>
-							<div><a class="red-link-btn pull-right" href="#">See an example</a></div>
+							<div>
+								<a class="red-link-btn pull-right" href="#" data-toggle="modal" data-target="#exampleModal">See an example</a>
+							</div>
 							<img class="sad-face" src="/imgs/no-stories.jpg">
 							<p class="no-video-text">"Stories" is your blog inside Todevise.</p>
 							<p class="no-video-text">Express yourself, start writing your first one now.</p>
@@ -104,3 +106,12 @@ $this->params['person_links_target'] = 'public_view';
 	</div>
 </div>
 
+<div class="modal fade" tabindex="-1" role="dialog" id="exampleModal">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-body">
+				<img src="/imgs/story-example.jpg" alt="Story example" title="Story example" width="100%">
+			</div>
+		</div>
+	</div>
+</div>

@@ -53,7 +53,7 @@
 
 		function setPositions() {
 			vm.component.items = vm.component.items.map(function(element, index) {
-				element.position = index;
+				element.position = index+1;
 				return element;
 			});
 		}

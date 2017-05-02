@@ -88,6 +88,27 @@
 		@include border-radius(6px,6px,6px,6px);
 		margin: 0;
 	}
+	.create-stories-wrapper{
+		width: 100%;
+		@include border-radius(20px,20px,20px,20px);
+		border: 1px solid #1C1919;
+		float: left;
+		margin: 10px 0 0 0;
+		padding: 20px;
+		.devisers-works-wrapper{
+			width: 400px;
+			float: left;
+			background-color: $pale_white;
+			border: 1px solid $white;
+			.devisers-works-header{
+				padding: 5px;
+				.title{
+					text-transform: uppercase;
+					font-family: $font-family--bold;
+				}
+			}
+		}
+	}
 	.add-videos-wrapper{
 		width: 100%;
 		@include border-radius(20px,20px,20px,20px);
