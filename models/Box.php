@@ -240,7 +240,7 @@ class Box extends CActiveRecord
 	 *
 	 * @param array $criteria
 	 *
-	 * @return array
+	 * @return CActiveRecord[]
 	 * @throws Exception
 	 */
 	public static function findSerialized($criteria = [])
@@ -327,14 +327,14 @@ class Box extends CActiveRecord
 			$query->orderBy(["created_at" => SORT_DESC]);
 		}
 
-		$products = $query->all();
+		$boxes = $query->all();
 
 		// if automatic translation is enabled
 		if (static::$translateFields) {
-			Utils::translate($products);
+			Utils::translate($boxes);
 		}
 
-		return $products;
+		return $boxes;
 	}
 
 	/**
