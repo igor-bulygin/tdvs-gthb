@@ -2,9 +2,13 @@
 	"use strict";
 
 	function controller(languageDataService, UtilService, storyDataService, personDataService, productDataService,
-		$window) {
+		$window, dragndropService) {
 		var vm = this;
 		vm.save = save;
+		vm.dragStart = dragStart;
+		vm.dragOver = dragOver;
+		vm.moved = moved;
+		vm.canceled = canceled;
 		init();
 
 		function init() {
@@ -60,6 +64,31 @@
 			}
 
 			storyDataService.createStory(story, onCreateStorySuccess, UtilService.onError);
+		}
+
+		function dragStart(index) {
+			dragndropService.dragStart(index, vm.story.components);
+		}
+
+		function dragOver(index) {
+			vm.story.components = dragndropService.dragOver(index, vm.story.components);
+			return true;
+		}
+
+		function moved(index) {
+			vm.story.components = dragndropService.moved(index);
+			parseComponentsPosition();
+		}
+
+		function canceled() {
+			vm.story.components = dragndropService.canceled();
+		}
+
+		function parseComponentsPosition() {
+			vm.story.components = vm.story.components.map(function(element, index) {
+				element.position = index+1;
+				return element;
+			})
 		}
 	}
 
