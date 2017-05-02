@@ -383,7 +383,7 @@ $config = [
 				'GET api3/priv/v1/story/<storyId:[^/.]*?>' => 'api3/priv/v1/story/view',
 				'POST api3/priv/v1/story' => 'api3/priv/v1/story/create',
 				'PATCH api3/priv/v1/story/<storyId:[^/.]*?>' => 'api3/priv/v1/story/update',
-				'DELETE api3/priv/v1/story/<boxId:[^/.]*?>' => 'api3/priv/v1/story/delete',
+				'DELETE api3/priv/v1/story/<storyId:[^/.]*?>' => 'api3/priv/v1/story/delete',
 
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/priv/v1/upload'],
 
