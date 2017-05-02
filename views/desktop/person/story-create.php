@@ -18,8 +18,8 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 			<h5 class="stories-title">New Story</h5>
 			<story-main-title story="createStoryCtrl.story" languages="createStoryCtrl.languages"></story-main-title>
 			<story-main-media story="createStoryCtrl.story"></story-main-media>
-				<move-delete-component array="createStoryCtrl.story.components" position="$index" ng-repeat="component in createStoryCtrl.story.components">
-					<div style="display:block; width: 100%; float:left; border-width: 1px; border-style: dashed; border-color: grey;">
+				<move-delete-component class="story-component-wrapper" array="createStoryCtrl.story.components" position="$index" ng-repeat="component in createStoryCtrl.story.components">
+					<div class="story-component-wrapper">
 						<story-text-component component="component" languages="createStoryCtrl.languages" ng-if="component.type === 1"></story-text-component>
 						<story-photo-component component="component" ng-if="component.type === 2"></story-photo-component>
 						<story-work-component component="component" devisers="createStoryCtrl.devisers" ng-if="component.type === 3"></story-work-component>
