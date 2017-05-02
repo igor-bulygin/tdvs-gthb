@@ -30,13 +30,14 @@ $this->params['person_links_target'] = 'public_view';
 
 					<div class="empty-wrapper">
 						<?php if ($person->isPersonEditable()) { ?>
-							<div><a class="red-link-btn" href="#">See an example</a></div>
-							<img class="sad-face" src="/imgs/sad-face.svg">
+							<div><a class="red-link-btn pull-right" href="#">See an example</a></div>
+							<img class="sad-face" src="/imgs/no-stories.jpg">
+							<p class="no-video-text">"Stories" is your blog inside Todevise.</p>
 							<p class="no-video-text">Express yourself, start writing your first one now.</p>
 							<a class="btn btn-green btn-add-box" href="<?=$person->getStoryCreateLink()?>">WRITE STORY</a>
 						<?php } else { ?>
-							<img class="sad-face" src="/imgs/sad-face.svg">
-							<p class="no-video-text"><?=$person->getName()?> have no stories.</p>
+							<img class="sad-face" src="/imgs/no-stories.jpg">
+							<p class="no-video-text"><?=$person->getName()?> hasn't written any stories yet.</p>
 						<?php } ?>
 					</div>
 
