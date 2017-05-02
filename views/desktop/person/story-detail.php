@@ -1,10 +1,10 @@
-	<?php
-	use app\assets\desktop\pub\StoriesViewAsset;
-	use app\helpers\Utils;
-	use app\models\Person;
-	use yii\helpers\Json;
+<?php
+use app\assets\desktop\pub\StoryDetailAsset;
+use app\helpers\Utils;
+use app\models\Person;
+use yii\helpers\Json;
 
-	\app\assets\desktop\pub\StoryDetailAsset::register($this);
+app\assets\desktop\pub\StoryDetailAsset::register($this);
 
 /** @var Person $person */
 /** @var \app\models\Story $story */
@@ -14,10 +14,11 @@ $this->params['person'] = $person;
 $this->params['person_menu_active_option'] = 'stories';
 $this->params['person_links_target'] = 'public_view';
 
-$this->registerJs("var story = ".Json::encode($story), yii\web\View::POS_HEAD, 'story-script');
+$this->registerJs("var story = ".Json::encode($story), yii\web\View::POS_HEAD, 'story-var-script');
+$this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD, 'person-var-script');
 
 ?>
-<div class="our-devisers-wrapper">
+<div class="our-devisers-wrapper" ng-controller="detailStoryCtrl as detailStoryCtrl">
 	<div class="container relative">
 		<div class="pull-left">
 		<a href="<?= $person->getMainLink()?>">
@@ -39,7 +40,7 @@ $this->registerJs("var story = ".Json::encode($story), yii\web\View::POS_HEAD, '
 				Edit Story
 			</a>
 
-			<button class="btn btn-default" type="button">
+			<button class="btn btn-default" type="button" ng-click="detailStoryCtrl.deleteStory(detailStoryCtrl.story.id)">
 				<i class="ion-delete"></i>
 				Delete Story
 			</button>
@@ -47,9 +48,7 @@ $this->registerJs("var story = ".Json::encode($story), yii\web\View::POS_HEAD, '
 	</div>
 
 	<div class="container">
-
 		<div><?= $story->getTitle() ?></div>
-
 		<div>
 			<div class="loved-comments-wrapper">
 				<div class="loved-wrapper">

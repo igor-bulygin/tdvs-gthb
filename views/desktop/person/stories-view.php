@@ -63,38 +63,6 @@ $this->params['person_links_target'] = 'public_view';
 									</div>
 								<?php } ?>
 
-								<?php /*
-
- 								// ANGULAR EXAMPLE
-								<div ng-if="viewStoriesCtrl.results.meta.total_count>0">
-									<div ng-repeat="story in viewStoriesCtrl.results.items" ng-cloak>
-										<div class="col-lg-6">
-											<div class="storie-box-wrapper">
-												<div class="storie-box-text">
-													<h5 ng-bind="story.title"></h5>
-													<p ng-bind="story.first_text"></p>
-													<div>
-														<div class="loved-comments-wrapper">
-															<div class="loved-wrapper">
-																<i class="ion-ios-heart"></i>
-																<span>342</span>
-															</div>
-															<div class="comments-wrapper">
-																<i class="ion-chatbox"></i>
-																<span>15</span>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div class="storie-box-image" ng-if="story.main_media.type===1">
-													<img ng-src="{{story.main_photo_url}}">
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-
- 								*/ ?>
 								<?php foreach ($stories as $story) { ?>
 									<a href="<?=$story->getViewLink()?>">
 										<div class="col-lg-6">
