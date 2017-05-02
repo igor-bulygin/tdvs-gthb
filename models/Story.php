@@ -20,6 +20,7 @@ use yii\mongodb\ActiveQuery;
  * @property array tags
  * @property array components
  * @property array main_media
+ * @property MongoDate published_at
  * @property MongoDate created_at
  * @property MongoDate updated_at
  *
@@ -66,6 +67,7 @@ class Story extends CActiveRecord {
 			'tags',
 			'components',
 			'main_media',
+			'published_at',
 			'created_at',
 			'updated_at',
 		];
@@ -120,6 +122,10 @@ class Story extends CActiveRecord {
 			$this->story_state = Story::STORY_STATE_ACTIVE;
 		}
 
+		if ($this->story_state == Story::STORY_STATE_ACTIVE && empty($this->published_at)) {
+			$this->published_at = new MongoDate();
+		}
+
 		$slugs = [];
 		foreach ($this->title as $lang => $text) {
 			$slugs[$lang] = Slugger::slugify($text);
@@ -150,7 +156,7 @@ class Story extends CActiveRecord {
 			],
 
 			[
-				['title', 'components', 'main_media'],
+				['title', 'main_media', 'story_state', 'person_id'],
 				'required',
 				'on' => [
 					self::SCENARIO_STORY_UPDATE_ACTIVE
@@ -195,6 +201,7 @@ class Story extends CActiveRecord {
 					'tags',
 					'components',
 					'main_media',
+					'published_at',
 					'view_link' => 'viewLink',
 					'first_text' => 'firstText',
 					'main_photo_url' => 'mainPhotoUrl',
@@ -216,6 +223,7 @@ class Story extends CActiveRecord {
 					'tags',
 					'components',
 					'main_media',
+					'published_at',
 					'view_link' => 'viewLink',
 					'first_text' => 'firstText',
 					'main_photo_url' => 'mainPhotoUrl',
@@ -536,6 +544,23 @@ class Story extends CActiveRecord {
 			$slug = $this->slug;
 		}
 		return $slug;
+	}
+
+	/**
+	 * May 8 2017
+	 *
+	 * @return null|string
+	 */
+	public function getPublishingDateFormatted() {
+		if ($this->published_at) {
+			$dateTime  = $this->published_at->toDateTime();
+			if ($dateTime) {
+				$format = '%h %e %G';
+				return strftime($format, $dateTime->getTimestamp());
+			}
+		}
+
+		return null;
 	}
 
 	/**

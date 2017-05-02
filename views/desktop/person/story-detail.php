@@ -1,5 +1,4 @@
 <?php
-use app\assets\desktop\pub\StoryDetailAsset;
 use app\helpers\Utils;
 use app\models\Person;
 use yii\helpers\Json;
@@ -62,7 +61,9 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 			</div>
 		</div>
 
-		<div>Published on May 8 2015</div>
+		<?php if ($story->published_at) { ?>
+			<div>Published on <?=$story->getPublishingDateFormatted()?></div>
+		<?php } ?>
 
 		<?php foreach ($story->componentsMapping as $component) { ?>
 
