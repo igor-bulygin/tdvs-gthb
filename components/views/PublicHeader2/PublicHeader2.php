@@ -178,7 +178,6 @@ app\components\assets\PublicHeader2Asset::register($this);
 			<li><a href="<?=Url::to(['/discover/boxes'])?>">Explore Boxes</a></li>
 			<li><a href="<?=Url::to(['/discover/devisers'])?>">Discover devisers</a></li>
 			<li><a href="<?=Url::to(['/discover/influencers'])?>">Influencers</a></li>
-			<li><a href="#">Projects</a></li>
 		</ul>
 	</div>
 </nav>
