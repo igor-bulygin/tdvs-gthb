@@ -87,6 +87,8 @@ class PersonMedia extends EmbedModel
 				['header', 'header_cropped', 'profile', 'profile_cropped'],
 				'validatePersonPhotoItemExists',
 				'on' => [
+					Person::SCENARIO_DEVISER_UPDATE_DRAFT,
+					Person::SCENARIO_INFLUENCER_UPDATE_DRAFT,
 					Person::SCENARIO_DEVISER_UPDATE_PROFILE,
 					Person::SCENARIO_INFLUENCER_UPDATE_PROFILE,
 					Person::SCENARIO_CLIENT_UPDATE,
@@ -96,16 +98,22 @@ class PersonMedia extends EmbedModel
 				['photos'],
 				'validatePersonPhotosExists',
 				'on' => [
+					Person::SCENARIO_DEVISER_UPDATE_DRAFT,
+					Person::SCENARIO_INFLUENCER_UPDATE_DRAFT,
 					Person::SCENARIO_DEVISER_UPDATE_PROFILE,
 					Person::SCENARIO_INFLUENCER_UPDATE_PROFILE,
+					Person::SCENARIO_CLIENT_UPDATE,
 				],
 			],
 			[
 				['photos'],
 				'validateAmountPhotos',
 				'on' => [
+					Person::SCENARIO_DEVISER_UPDATE_DRAFT,
+					Person::SCENARIO_INFLUENCER_UPDATE_DRAFT,
 					Person::SCENARIO_DEVISER_UPDATE_PROFILE,
 					Person::SCENARIO_INFLUENCER_UPDATE_PROFILE,
+					Person::SCENARIO_CLIENT_UPDATE,
 				],
 			],
 		];

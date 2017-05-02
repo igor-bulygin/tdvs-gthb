@@ -54,11 +54,11 @@ class ProductMedia extends EmbedModel
 			[$this->attributes(), 'safe', 'on' => [Product2::SCENARIO_PRODUCT_DRAFT, Product2::SCENARIO_PRODUCT_PUBLIC]], // to load data posted from WebServices
 			['photos', 'required', 'on' => [Product2::SCENARIO_PRODUCT_PUBLIC]],
 			['photosInfo', 'app\validators\EmbedDocValidator'], // to apply rules
-//			['photosInfo', 'validateAmountPhotos'],
-//			['photosInfo', 'validateProductMediaFileExists'], // commented, cause the mediafile can exists in a temporal folder, so we must to check against temporal uploads and product uploads.
+			['photosInfo', 'validateAmountPhotos'],
+			['photosInfo', 'validateProductMediaFileExists'], // commented, cause the mediafile can exists in a temporal folder, so we must to check against temporal uploads and product uploads.
 			['descriptionPhotosInfo', 'app\validators\EmbedDocValidator'], // to apply rules
 			['descriptionPhotosInfo', 'validateAmountDescriptionPhotos'],
-//			['descriptionPhotosInfo', 'validateProductMediaFileExists'], // commented, cause the mediafile can exists in a temporal folder, so we must to check against temporal uploads and product uploads.
+			['descriptionPhotosInfo', 'validateProductMediaFileExists'], // commented, cause the mediafile can exists in a temporal folder, so we must to check against temporal uploads and product uploads.
 		];
 	}
 
