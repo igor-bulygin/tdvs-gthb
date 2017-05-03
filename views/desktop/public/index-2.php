@@ -210,7 +210,7 @@ $this->title = 'Todevise / Home';
 										if ($count > 3) {
 											break;
 										} ?>
-										<a href="<?= $product['link']?>">
+										<a href="<?= $box->getViewLink()?>">
 											<img class="grid-image" src="<?=$product['box_photo']?>">
 										</a>
 										<?php

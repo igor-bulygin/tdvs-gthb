@@ -3,9 +3,9 @@
 		<div class="col-md-4 col-xs-6 pad-grid">
 			<div class="boxes-wrapper">
 			
-					<a ng-href="{{product.link}}" ng-repeat="product in box.products" ng-show="$index < 3">
-						<img class="grid-image" ng-src="{{product.box_photo}}" ng-attr-alt="{{product.name}}" ng-attr-title="{{product.name}}">
-					</a>
+				<a ng-href="{{box.link}}" ng-repeat="product in box.products" ng-show="$index < 3">
+					<img class="grid-image" ng-src="{{product.box_photo}}" ng-attr-alt="{{product.name}}" ng-attr-title="{{product.name}}">
+				</a>
 			
 				<a ng-href="{{box.link}}" class="group-box-title"><span><span ng-bind="box.name"></span> (<span ng-bind="box.products.length"></span>)</span></a>
 			</div>
