@@ -14,7 +14,13 @@
 	<div ngf-no-file-drop>
 		<input type="file" name="file" ngf-select="storyPhotoComponentCtrl.uploadPhotos($files, $invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="storyPhotoComponentCtrl.isDropAvailable" ngf-multiple="true">
 	</div>
-	<span ng-repeat="image in storyPhotoComponentCtrl.component.items" ng-if="storyPhotoComponentCtrl.component.items.length > 0">
-		<img ngf-thumbnail="image.url" style="max-width: 200px;">
-	</span>
+	<div class="devisers-works-photos-row row">
+		<div dnd-list="storyPhotoComponentCtrl.component.items" dnd-dragover="storyPhotoComponentCtrl.dragOver(index)" dnd-allowed-types="['image']">
+			<div class="photo col-md-4" ng-if="storyPhotoComponentCtrl.component.items.length > 0" ng-repeat="image in storyPhotoComponentCtrl.component.items" dnd-draggable="image" dnd-effect-allowed="move" dnd-dragstart="storyPhotoComponentCtrl.dragStart($index)" dnd-canceled="storyPhotoComponentCtrl.canceled()" dnd-moved="storyPhotoComponentCtrl.moved($index)" dnd-type="'image'">
+				<move-delete-component array="storyPhotoComponentCtrl.component.items" position="$index">
+					<img ng-src="{{image.url}}" style="width: 200px;">
+				</move-delete-component>
+			</div>
+		</div>
+	</div>
 </div>

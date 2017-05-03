@@ -1,9 +1,13 @@
 (function () {
 	"use strict";
 
-	function controller(Upload, uploadDataService, UtilService) {
+	function controller(Upload, uploadDataService, UtilService, dragndropService) {
 		var vm = this;
 		vm.uploadPhotos = uploadPhotos;
+		vm.dragStart = dragStart;
+		vm.dragOver = dragOver;
+		vm.moved = moved;
+		vm.canceled = canceled;
 
 		function uploadPhotos(images, errImages) {
 			if(!angular.isArray(vm.component.items))
@@ -32,6 +36,24 @@
 						return console.log(evt);
 					});
 			});
+		}
+
+		function dragStart(index) {
+			dragndropService.dragStart(index, vm.component.items);
+		}
+
+		function dragOver(index) {
+			vm.component.items = dragndropService.dragOver(index, vm.component.items);
+			return true;
+		}
+
+		function moved(index) {
+			vm.component.items = dragndropService.moved(index);
+			vm.component.items = UtilService.setElementPosition(vm.component.items);
+		}
+
+		function canceled() {
+			vm.component.items = dragndropService.canceled();
 		}
 	}
 
