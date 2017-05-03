@@ -2259,6 +2259,9 @@ input[type="radio"] .styled:checked + label::after {
     float: left;
     margin: 10px 0 0 0;
     padding: 20px; }
+    .stories-wrapper .create-stories-wrapper .inner-wrapper {
+      width: 820px;
+      margin: 0 auto; }
     .stories-wrapper .create-stories-wrapper .devisers-works-wrapper {
       width: 400px;
       float: left;
@@ -2292,14 +2295,32 @@ input[type="radio"] .styled:checked + label::after {
         width: 400px;
         height: 200px;
         overflow-y: scroll; }
+        .stories-wrapper .create-stories-wrapper .devisers-works-wrapper .deviser-works-list.works {
+          height: 261px; }
         .stories-wrapper .create-stories-wrapper .devisers-works-wrapper .deviser-works-list .deviser-works-item {
+          cursor: pointer;
           padding: 10px;
-          border-bottom: 1px solid #ffffff; }
+          border-bottom: 1px solid #ffffff;
+          float: left;
+          width: 100%;
+          position: relative; }
+          .stories-wrapper .create-stories-wrapper .devisers-works-wrapper .deviser-works-list .deviser-works-item .item-cover {
+            height: 43px;
+            display: inline-block;
+            overflow: hidden; }
+          .stories-wrapper .create-stories-wrapper .devisers-works-wrapper .deviser-works-list .deviser-works-item .minus-icon {
+            float: right;
+            font-size: 20px;
+            color: #F7284B;
+            margin: 15px; }
           .stories-wrapper .create-stories-wrapper .devisers-works-wrapper .deviser-works-list .deviser-works-item img {
             width: 50px; }
           .stories-wrapper .create-stories-wrapper .devisers-works-wrapper .deviser-works-list .deviser-works-item span {
             font-family: "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
             margin-left: 15px; }
+            .stories-wrapper .create-stories-wrapper .devisers-works-wrapper .deviser-works-list .deviser-works-item span.cover {
+              position: absolute;
+              top: 25px; }
   .stories-wrapper .add-videos-wrapper {
     width: 100%;
     border-radius: 20px 20px 20px 20px !important;
