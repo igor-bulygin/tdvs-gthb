@@ -2265,10 +2265,41 @@ input[type="radio"] .styled:checked + label::after {
       background-color: #f3f3f3;
       border: 1px solid #ffffff; }
       .stories-wrapper .create-stories-wrapper .devisers-works-wrapper .devisers-works-header {
-        padding: 5px; }
+        padding: 10px 20px;
+        border-bottom: 1px solid #ffffff; }
         .stories-wrapper .create-stories-wrapper .devisers-works-wrapper .devisers-works-header .title {
           text-transform: uppercase;
           font-family: "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+        .stories-wrapper .create-stories-wrapper .devisers-works-wrapper .devisers-works-header .works-link {
+          color: #F7284B;
+          cursor: pointer;
+          float: right;
+          font-family: "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+      .stories-wrapper .create-stories-wrapper .devisers-works-wrapper .devisers-works-searcher {
+        padding: 10px 20px 0px;
+        border-bottom: 1px solid #ffffff;
+        position: relative; }
+        .stories-wrapper .create-stories-wrapper .devisers-works-wrapper .devisers-works-searcher .icon-magnifier {
+          position: absolute;
+          color: #9a9a9a;
+          top: 20px;
+          font-size: 18px;
+          left: 30px; }
+        .stories-wrapper .create-stories-wrapper .devisers-works-wrapper .devisers-works-searcher input {
+          margin-bottom: 10px !important;
+          padding-left: 35px; }
+      .stories-wrapper .create-stories-wrapper .devisers-works-wrapper .deviser-works-list {
+        width: 400px;
+        height: 200px;
+        overflow-y: scroll; }
+        .stories-wrapper .create-stories-wrapper .devisers-works-wrapper .deviser-works-list .deviser-works-item {
+          padding: 10px;
+          border-bottom: 1px solid #ffffff; }
+          .stories-wrapper .create-stories-wrapper .devisers-works-wrapper .deviser-works-list .deviser-works-item img {
+            width: 50px; }
+          .stories-wrapper .create-stories-wrapper .devisers-works-wrapper .deviser-works-list .deviser-works-item span {
+            font-family: "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            margin-left: 15px; }
   .stories-wrapper .add-videos-wrapper {
     width: 100%;
     border-radius: 20px 20px 20px 20px !important;

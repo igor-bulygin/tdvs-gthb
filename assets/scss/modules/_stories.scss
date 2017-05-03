@@ -101,10 +101,49 @@
 			background-color: $pale_white;
 			border: 1px solid $white;
 			.devisers-works-header{
-				padding: 5px;
+				padding: 10px 20px;
+    			border-bottom: 1px solid $white;
 				.title{
 					text-transform: uppercase;
 					font-family: $font-family--bold;
+				}
+				.works-link{
+					color: $red;
+					cursor: pointer;
+					float: right;
+					font-family: $font-family--bold;
+				}
+			}
+			.devisers-works-searcher{
+				padding: 10px 20px 0px;
+    			border-bottom: 1px solid $white;
+				position: relative;
+				.icon-magnifier{
+					position: absolute;
+					color: $dark_grey;
+					top: 20px;
+    				font-size: 18px;
+    				left: 30px;	
+				}
+				input{
+					margin-bottom: 10px!important;
+					padding-left: 35px;
+				}
+			}
+			.deviser-works-list{
+				width: 400px;
+				height: 200px;
+				overflow-y: scroll;
+				.deviser-works-item{
+					padding: 10px;
+    				border-bottom: 1px solid $white;
+					img{
+						width: 50px;
+					}
+					span{
+						font-family: $font-family--bold;
+						margin-left: 15px;
+					}
 				}
 			}
 		}
