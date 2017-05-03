@@ -20,8 +20,8 @@ $this->registerJs("var story = ".Json::encode($story), yii\web\View::POS_HEAD, '
 			<h5 class="stories-title">Edit Story</h5>
 			<story-main-title story="editStoryCtrl.story" languages="editStoryCtrl.languages"></story-main-title>
 			<story-main-media story="editStoryCtrl.story"></story-main-media>
-			<div dnd-list="editStoryCtrl.story.components" dnd-dragover="editStoryCtrl.dragOver(index)">
-				<move-delete-component class="story-component-wrapper" array="editStoryCtrl.story.components" position="$index" ng-repeat="component in editStoryCtrl.story.components" dnd-draggable="component" dnd-effect-allowed="move" dnd-dragstart="editStoryCtrl.dragStart($index)" dnd-canceled="editStoryCtrl.canceled()" dnd-moved="editStoryCtrl.moved($index)">
+			<div dnd-list="editStoryCtrl.story.components" dnd-dragover="editStoryCtrl.dragOver(index)" dnd-allowed-types="['component']">
+				<move-delete-component class="story-component-wrapper" array="editStoryCtrl.story.components" position="$index" ng-repeat="component in editStoryCtrl.story.components" dnd-draggable="component" dnd-effect-allowed="move" dnd-dragstart="editStoryCtrl.dragStart($index)" dnd-canceled="editStoryCtrl.canceled()" dnd-moved="editStoryCtrl.moved($index)" dnd-type="'component'">
 					<div class="story-component-wrapper">
 						<story-text-component component="component" languages="editStoryCtrl.languages" ng-if="component.type === 1"></story-text-component>
 						<story-photo-component component="component" ng-if="component.type === 2"></story-photo-component>

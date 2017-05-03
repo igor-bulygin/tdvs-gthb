@@ -1,15 +1,19 @@
 (function () {
 	"use strict";
 
-	function controller(productDataService, UtilService, $scope) {
+	function controller(productDataService, UtilService, dragndropService, $scope) {
 		var vm = this;
+		vm.works_helper = [];
 		vm.person_id = person.short_id;
 		vm.getDeviserWorks = getDeviserWorks;
 		vm.setWork = setWork;
 		vm.findWorkInItems = findWorkInItems;
-		vm.works_helper = [];
+		vm.dragStart = dragStart;
+		vm.dragOver = dragOver;
+		vm.moved = moved;
+		vm.canceled = canceled;
 
-		init();
+		init()
 
 		function init() {
 			if(!angular.isArray(vm.component.items))
@@ -43,7 +47,7 @@
 		function findWorkInItems(id) {
 			if(vm.works_helper.length > 0) {
 				return vm.works_helper.findIndex(function(item) {
-					if(item.id)
+					if(item && item.id)
 						return item.id === id;
 				})
 			} else {
@@ -66,6 +70,23 @@
 			} else {
 				deleteWorkFromHelper(position);
 			}
+		}
+
+		function dragStart(index) {
+			dragndropService.dragStart(index, vm.works_helper);
+		}
+
+		function dragOver(index) {
+			vm.works_helper = dragndropService.dragOver(index, vm.works_helper)
+			return true;
+		}
+
+		function moved(index) {
+			vm.works_helper = dragndropService.moved(index);
+		}
+
+		function canceled() {
+			vm.works_helper = dragndropService.canceled();
 		}
 
 		$scope.$watch('storyWorkComponentCtrl.works_helper', function(newValue, oldValue) {
