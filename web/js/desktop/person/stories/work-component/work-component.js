@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(productDataService, UtilService) {
+	function controller(productDataService, UtilService, $scope) {
 		var vm = this;
 		vm.person_id = person.short_id;
 		vm.getDeviserWorks = getDeviserWorks;
@@ -33,7 +33,7 @@
 
 		function getProduct(id, position) {
 			function onGetProductSuccess(data) {
-				addWorkToHelper(data, position);
+				addWorkToHelper(data);
 			}
 			productDataService.getProductPub({
 				idProduct: id
@@ -41,14 +41,18 @@
 		}
 
 		function findWorkInItems(id) {
-			return vm.component.items.findIndex(function(item) {
-				if(item.work)
-					return item.work === id;
-			})
+			if(vm.works_helper.length > 0) {
+				return vm.works_helper.findIndex(function(item) {
+					if(item.id)
+						return item.id === id;
+				})
+			} else {
+				return -1;
+			}
 		}
 
-		function addWorkToHelper(work, position) {
-			vm.works_helper[position] = work;
+		function addWorkToHelper(work) {
+			vm.works_helper.push(work);
 		}
 
 		function deleteWorkFromHelper(pos) {
@@ -58,17 +62,17 @@
 		function setWork(work) {
 			var position = findWorkInItems(work.id);
 			if(position < 0) {
-				vm.component.items.push({
-					position: vm.component.items.length,
-					work: work.id
-				})
-				addWorkToHelper(work, vm.component.items.length-1);
+				addWorkToHelper(work);
 			} else {
-				vm.component.items.splice(position, 1);
 				deleteWorkFromHelper(position);
-				vm.component.items = UtilService.setElementPosition(vm.component.items);
 			}
 		}
+
+		$scope.$watch('storyWorkComponentCtrl.works_helper', function(newValue, oldValue) {
+			vm.component.items = newValue.map(function(element, index) {
+				return Object.assign({}, {work: element.id, position: index+1})
+			})
+		}, true)
 
 	}
 

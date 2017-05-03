@@ -35,14 +35,12 @@
 
 
 		<div class="devisers-works-photos-row row">
-			<div>
-					<div class="photo col-md-4" array="storyWorkComponentCtrl.works_helper" position="$index" ng-repeat="work in storyWorkComponentCtrl.works_helper">
-						<move-delete-component>
-					</move-delete-component>
+				<div class="photo col-md-4" ng-if="storyWorkComponentCtrl.works_helper.length > 0" ng-repeat="work in storyWorkComponentCtrl.works_helper">
+					<move-delete-component array="storyWorkComponentCtrl.works_helper" position="$index">
 						<img ng-src="{{work.main_photo}}" ng-attr-alt="work.name" ng-attr-title="work.name" style="width: 200px;">
 						<span class="photo-title" ng-bind="work.name"></span>
-					</div>
-			</div>
+					</move-delete-component>
+				</div>
 		</div>
 	</div>
 </div>
