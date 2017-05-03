@@ -89,6 +89,10 @@
 		margin: 0;
 	}
 	.create-stories-wrapper{
+		.inner-wrapper{
+			width: 820px;
+			margin: 0 auto;
+		}
 		width: 100%;
 		@include border-radius(20px,20px,20px,20px);
 		border: 1px solid #1C1919;
@@ -101,10 +105,71 @@
 			background-color: $pale_white;
 			border: 1px solid $white;
 			.devisers-works-header{
-				padding: 5px;
+				padding: 10px 20px;
+    			border-bottom: 1px solid $white;
 				.title{
 					text-transform: uppercase;
 					font-family: $font-family--bold;
+				}
+				.works-link{
+					color: $red;
+					cursor: pointer;
+					float: right;
+					font-family: $font-family--bold;
+				}
+			}
+			.devisers-works-searcher{
+				padding: 10px 20px 0px;
+    			border-bottom: 1px solid $white;
+				position: relative;
+				.icon-magnifier{
+					position: absolute;
+					color: $dark_grey;
+					top: 20px;
+    				font-size: 18px;
+    				left: 30px;	
+				}
+				input{
+					margin-bottom: 10px!important;
+					padding-left: 35px;
+				}
+			}
+			.deviser-works-list{
+				width: 400px;
+				height: 200px;
+				overflow-y: scroll;
+				&.works{
+					height: 261px;
+				}
+				.deviser-works-item{
+					cursor: pointer;
+					padding: 10px;
+    				border-bottom: 1px solid $white;
+					float: left;
+					width:100%;
+					position: relative;
+					.item-cover{
+						height: 43px;
+						display: inline-block;
+						overflow: hidden;
+					}
+					.minus-icon{
+						float: right;
+						font-size: 20px;
+						color: $red;
+						margin: 15px;
+					}
+					img{
+						width: 50px;
+					}
+					span{
+						font-family: $font-family--bold;
+						margin-left: 15px;
+						&.cover{
+							position: absolute;
+    						top: 25px;
+						}
+					}
 				}
 			}
 		}
