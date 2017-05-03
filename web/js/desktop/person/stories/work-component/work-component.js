@@ -51,13 +51,6 @@
 			vm.works_helper[position] = work;
 		}
 
-		function setPositions() {
-			vm.component.items = vm.component.items.map(function(element, index) {
-				element.position = index+1;
-				return element;
-			});
-		}
-
 		function deleteWorkFromHelper(pos) {
 			vm.works_helper.splice(pos, 1);
 		}
@@ -73,7 +66,7 @@
 			} else {
 				vm.component.items.splice(position, 1);
 				deleteWorkFromHelper(position);
-				setPositions();
+				vm.component.items = UtilService.setElementPosition(vm.component.items);
 			}
 		}
 

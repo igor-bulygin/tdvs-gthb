@@ -77,18 +77,11 @@
 
 		function moved(index) {
 			vm.story.components = dragndropService.moved(index);
-			parseComponentsPosition();
+			vm.story.components = UtilService.setElementPosition(vm.story.components);
 		}
 
 		function canceled() {
 			vm.story.components = dragndropService.canceled();
-		}
-
-		function parseComponentsPosition() {
-			vm.story.components = vm.story.components.map(function(element, index) {
-				element.position = index+1;
-				return element;
-			})
 		}
 	}
 

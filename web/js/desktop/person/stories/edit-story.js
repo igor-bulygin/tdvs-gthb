@@ -1,10 +1,15 @@
 (function () {
 	"use strict";
 
-	function controller(storyDataService, languageDataService, UtilService, personDataService, productDataService, $window) {
+	function controller(storyDataService, languageDataService, UtilService, personDataService, productDataService, 
+		$window, dragndropService) {
 		var vm = this;
 		vm.story = angular.copy(story);
 		vm.save = save;
+		vm.dragStart = dragStart;
+		vm.dragOver = dragOver;
+		vm.moved = moved;
+		vm.canceled = canceled;
 
 		init();
 
@@ -52,6 +57,24 @@
 			}
 
 			storyDataService.updateStory(vm.story, params, onUpdateStorySuccess, UtilService.onError);
+		}
+
+		function dragStart(index) {
+			dragndropService.dragStart(index, vm.story.components);
+		}
+
+		function dragOver(index) {
+			vm.story.components = dragndropService.dragOver(index, vm.story.components);
+			return true;
+		}
+
+		function moved(index) {
+			vm.story.components = dragndropService.moved(index);
+			vm.story.components = UtilService.setElementPosition(vm.story.components);
+		}
+
+		function canceled() {
+			vm.story.components = dragndropService.canceled();
 		}
 	}
 
