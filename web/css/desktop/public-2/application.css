@@ -2321,6 +2321,15 @@ input[type="radio"] .styled:checked + label::after {
             .stories-wrapper .create-stories-wrapper .devisers-works-wrapper .deviser-works-list .deviser-works-item span.cover {
               position: absolute;
               top: 25px; }
+    .stories-wrapper .create-stories-wrapper .devisers-works-photos-row {
+      margin: 30px 0 0 0;
+      width: 100%;
+      float: left; }
+      .stories-wrapper .create-stories-wrapper .devisers-works-photos-row .photo {
+        width: 200px;
+        float: left;
+        height: 250px;
+        margin: 0 5px; }
   .stories-wrapper .add-videos-wrapper {
     width: 100%;
     border-radius: 20px 20px 20px 20px !important;
