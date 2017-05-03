@@ -88,6 +88,15 @@
 		@include border-radius(6px,6px,6px,6px);
 		margin: 0;
 	}
+	.add-component-wrapper{
+		width: 100%;
+		float: left;
+		margin: 30px 0 0 0;
+		p{
+			font-family: $font-family--serif;
+			font-size: 14px;
+		}
+	}
 	.create-stories-wrapper{
 		.inner-wrapper{
 			width: 820px;
@@ -174,14 +183,27 @@
 			}
 		}
 		.devisers-works-photos-row{
-			margin: 30px 0 0 0;
+			margin: 30px -2px;
 			width: 100%;
 			float: left;
 			.photo{
-				width: 200px;
 				float: left;
 				height: 250px;
-    			margin: 0 5px;
+				background-color: $white;
+    			margin: 2px;
+				position: relative;
+				width: 24.4%;
+				padding: 0;
+				.photo-title{
+					text-align: center;
+					display: block;
+					font-family: $font-family--bold;
+   				 	background-color: rgba(255, 255, 255, 0.6);
+					width: 100%;
+					position: absolute;
+					padding: 5px;
+					bottom: 0;
+				}
 			}
 		}
 	}
