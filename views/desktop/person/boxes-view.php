@@ -73,7 +73,7 @@ $this->params['person_links_target'] = 'public_view';
 												if ($count > 3) {
 													break;
 												} ?>
-												<a href="<?= $product['link']?>">
+												<a href="<?= $box->getViewLink()?>">
 													<img class="grid-image" src="<?=$product['box_photo']?>">
 												</a>
 												<?php
