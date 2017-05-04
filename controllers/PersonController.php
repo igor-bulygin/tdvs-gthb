@@ -149,12 +149,8 @@ class PersonController extends CController
 			throw new NotFoundHttpException();
 		}
 
-		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE) {
-			if ($person->isPersonEditable()) {
-				$this->redirect($person->getAboutEditLink());
-			} else {
-				throw new NotFoundHttpException();
-			}
+		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE && !$person->isPersonEditable()) {
+			throw new NotFoundHttpException();
 		}
 
 		$this->layout = '/desktop/public-2.php';
