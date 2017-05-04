@@ -8,7 +8,7 @@
 			<div class="devisers-works-searcher">
 				<i class="fa fa-search icon-magnifier" aria-hidden="true"></i>
 				<form name="storyWorkComponentCtrl.search_deviser_form">
-					<input type="text" ng-model="storyWorkComponentCtrl.search_deviser_key" class="form-control white-rounded-input" placeholder="Search">
+					<input type="text" ng-model="storyWorkComponentCtrl.search_deviser_key" class="form-control white-rounded-input" placeholder="Search" on-press-enter="storyWorkComponentCtrl.searchDeviser(storyWorkComponentCtrl.search_deviser_form)">
 				</form>
 			</div>
 			<div class="deviser-works-list">

@@ -1,13 +1,14 @@
 (function () {
 	"use strict";
 
-	function controller(productDataService, UtilService, dragndropService, $scope) {
+	function controller(productDataService, UtilService, dragndropService, $scope, personDataService) {
 		var vm = this;
 		vm.works_helper = [];
 		vm.person_id = person.short_id;
 		vm.getDeviserWorks = getDeviserWorks;
 		vm.setWork = setWork;
 		vm.findWorkInItems = findWorkInItems;
+		vm.searchDeviser = searchDeviser;
 		vm.dragStart = dragStart;
 		vm.dragOver = dragOver;
 		vm.moved = moved;
@@ -70,6 +71,23 @@
 			} else {
 				deleteWorkFromHelper(position);
 			}
+		}
+
+		function searchDeviser(form) {
+			delete vm.devisers;
+			var params = {
+				type: 2
+			};
+
+			if(vm.search_deviser_key)
+				params = Object.assign(params, {q: vm.search_deviser_key});
+
+
+			function onGetDevisersSuccess(data) {
+				vm.devisers = angular.copy(data.items);
+			}
+
+			personDataService.getPeople(params, onGetDevisersSuccess, UtilService.onError);
 		}
 
 		function dragStart(index) {
