@@ -32,7 +32,7 @@ $this->params['person_links_target'] = 'public_view';
                             <p class="no-video-text">You haven't loved any works yet.</p>
                             <p>Start now by clicking the <span class="glyphicon glyphicon-heart"></span> button inside a work.</p>
                         <?php } else { ?>
-                            <p class="no-video-text"><?=$person->getName()?> haven't loved any works yet.</p>
+                            <p class="no-video-text"><?=$person->getName()?> hasn't loved any works yet.</p>
                         <?php } ?>
                         
                         <img class="image-loved" src="/imgs/loved-image.png">

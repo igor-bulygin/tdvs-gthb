@@ -34,7 +34,7 @@ $this->params['person_links_target'] = 'public_view';
 
 							<button class="btn btn-green btn-add-box" ng-click="viewBoxesCtrl.openCreateBoxModal()">ADD BOX</button>
 						<?php } else { ?>
-							<p class="no-video-text"><?=$person->getName()?> have no boxes.</p>
+							<p class="no-video-text"><?=$person->getName()?> has no boxes.</p>
 						<?php } ?>
 					</div>
 
