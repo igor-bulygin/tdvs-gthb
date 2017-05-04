@@ -19,9 +19,9 @@
 						var actualChildren=editableChildrens[0]; //take first editable and not edited children
 						actualChildren.className += " editatedElement"; //mark for navigated elements
 						actualChildren.click();
-					}
-					else {
-						element.find('a').removeClass("editatedElement"); //clean marks when finish all childrens edition
+						if (!element.children('.editable-click').not('.editatedElement').length>0) {
+							element.find('a').removeClass("editatedElement"); //clean marks when finish all childrens edition
+						}
 					}
 				}
 				else {
