@@ -59,7 +59,6 @@
 
 		function save(story) {
 			function onCreateStorySuccess(data) {
-				//console.log(data);
 				$window.location.href = currentHost() + data.view_link;
 			}
 

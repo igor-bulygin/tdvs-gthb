@@ -52,8 +52,7 @@
 			}
 
 			function onUpdateStorySuccess(data) {
-				console.log(data);
-				//$window.location.href = currentHost() + data.view_link;
+				$window.location.href = currentHost() + data.view_link;
 			}
 
 			storyDataService.updateStory(vm.story, params, onUpdateStorySuccess, UtilService.onError);
