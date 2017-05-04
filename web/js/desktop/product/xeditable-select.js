@@ -11,9 +11,22 @@
 			element.find('.editable').on('click', function() {
 				element.find('.editable-input').select();
 			});
-			//Fix to editing when element is focused (tab key navigation for editable elements in table)
+			//Fix for editing when td is focused (tab key navigation on table)
 			element.find('.editable').on('focus', function() {
-				element.find('.editable-click').click();
+				if (element.children('.editable-click').length>1) { //td with multiple editable elements nested
+					var editableChildrens=element.children('.editable-click').not('.editatedElement');
+					if (editableChildrens.length>0) {
+						var actualChildren=editableChildrens[0]; //take first editable and not edited children
+						actualChildren.className += " editatedElement"; //mark for navigated elements
+						actualChildren.click();
+					}
+					else {
+						element.find('a').removeClass("editatedElement"); //clean marks when finish all childrens edition
+					}
+				}
+				else {
+					element.find('.editable-click').click();
+				}
 			});
 		}
 	}
