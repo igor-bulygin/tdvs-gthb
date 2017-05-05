@@ -4373,13 +4373,15 @@ input[type="radio"] .styled:checked + label::after {
     -moz-border-radius: 90px 90px 90px 90px !important; }
     .box-loader-wrapper .plus-add span {
       display: block;
-      margin: -9px 0 0 0; }
+      margin: -9px 0 0 0;
+      color: #1C1919; }
   .box-loader-wrapper .plus-add-wrapper {
     margin: 72px auto;
     background-color: transparent; }
     .box-loader-wrapper .plus-add-wrapper .text {
       font-family: "Playfair Display", Georgia, serif !important;
-      font-weight: bold; }
+      font-weight: bold;
+      color: #1C1919; }
 
 .title-wrapper-boxes {
   margin-bottom: 15px; }
