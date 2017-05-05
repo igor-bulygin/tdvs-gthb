@@ -84,7 +84,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 		</div>
 		
 		<div class="cover-photo">
-			<img src="<?= $person->getAvatarImage() ?>">	
+			<img src="<?= $story->getMainPhotoUrl() ?>">
 		</div>
 		
 		<?php foreach ($story->componentsMapping as $component) { ?>
