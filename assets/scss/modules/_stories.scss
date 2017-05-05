@@ -538,7 +538,8 @@
 	}
 }
 .stories-detail-content{
-	padding: 100px 80px;
+	padding: 100px 0px;
+    max-width: 800px;
 	.detail-title{
 		font-family:$font-family--bold;
 		font-size: 32px;
@@ -599,5 +600,13 @@
 	}
 	.component-photos{
 		margin-bottom: 40px;
+	}
+	.component-video{
+		margin-bottom: 40px;
+		iframe{
+			width: 500px;
+			margin: 0 auto;
+			display: block;
+		}
 	}
 }

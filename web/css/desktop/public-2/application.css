@@ -2708,7 +2708,8 @@ input[type="radio"] .styled:checked + label::after {
     margin: 0 0 0 10px; }
 
 .stories-detail-content {
-  padding: 100px 80px; }
+  padding: 100px 0px;
+  max-width: 800px; }
   .stories-detail-content .detail-title {
     font-family: "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 32px;
@@ -2755,6 +2756,12 @@ input[type="radio"] .styled:checked + label::after {
     margin-bottom: 40px; }
   .stories-detail-content .component-photos {
     margin-bottom: 40px; }
+  .stories-detail-content .component-video {
+    margin-bottom: 40px; }
+    .stories-detail-content .component-video iframe {
+      width: 500px;
+      margin: 0 auto;
+      display: block; }
 
 .photo-loader {
   width: 309px;

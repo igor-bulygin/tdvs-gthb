@@ -115,9 +115,9 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 
 			<?php if ($component->type == \app\models\StoryComponent::STORY_COMPONENT_TYPE_VIDEOS) { ?>
 
-				<div class="row">
+				<div class="component-video row">
 					<?php foreach ($component->items as $video) { ?>
-						<div class="col-lg-3">
+						<div>
 							<iframe height="315" src="<?= Utils::getUrlEmbeddedYoutubePlayer($video) ?>" frameborder="0" allowfullscreen></iframe>
 						</div>
 					<?php } ?>
@@ -128,7 +128,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 
 			<?php if ($component->type == \app\models\StoryComponent::STORY_COMPONENT_TYPE_WORKS) { ?>
 
-				<div class="row">
+				<div class="row component-photos">
 					<?php foreach ($component->items as $workId) {
 						$work = \app\models\Product2::findOneSerialized($workId['work']); ?>
 						<div class="col-lg-3">
