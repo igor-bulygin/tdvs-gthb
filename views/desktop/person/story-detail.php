@@ -91,7 +91,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 
 			<?php if ($component->type == \app\models\StoryComponent::STORY_COMPONENT_TYPE_TEXT) { ?>
 
-				<div class="row">
+				<div class="row component-text">
 					<div class="col-lg-12">
 						<?=\app\helpers\Utils::l($component->items); ?>
 					</div>
@@ -102,7 +102,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 
 			<?php if ($component->type == \app\models\StoryComponent::STORY_COMPONENT_TYPE_PHOTOS) { ?>
 
-				<div class="row">
+				<div class="row component-photos">
 					<?php foreach ($component->items as $photo) { ?>
 						<div class="col-lg-3">
 							<img src="<?=$person->getUrlImagesLocation().$photo['photo']?>" class="img-responsive" />

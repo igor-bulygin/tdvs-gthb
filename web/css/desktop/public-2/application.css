@@ -2750,6 +2750,11 @@ input[type="radio"] .styled:checked + label::after {
     margin-bottom: 40px; }
     .stories-detail-content .cover-photo img {
       width: 100%; }
+  .stories-detail-content .component-text {
+    font-family: "Playfair Display", Georgia, serif;
+    margin-bottom: 40px; }
+  .stories-detail-content .component-photos {
+    margin-bottom: 40px; }
 
 .photo-loader {
   width: 309px;
