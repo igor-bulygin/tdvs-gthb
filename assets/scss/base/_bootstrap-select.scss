@@ -106,3 +106,6 @@
 .bootstrap-select.btn-group .dropdown-menu.inner {
     margin: -26px 0 0 0;
 }
+.nya-bs-select.btn-group:not(.input-group-btn), .nya-bs-select.btn-group[class*="col-"]{
+	background-color: transparent!important;
+}

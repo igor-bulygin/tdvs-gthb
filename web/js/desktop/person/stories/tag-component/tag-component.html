@@ -1,7 +1,7 @@
-<div>
-	<h4>Tags</h4>
-	<div class="col-md-3">
-		<ol class="nya-bs-select form-control" ng-model="storyTagComponentCtrl.languageSelected">
+<div class="tag-component-wrapper">
+	<h5 class="stories-title">Tags</h5>
+	<div>
+		<ol class="nya-bs-select form-control about-edit-select tag-component-lang" ng-model="storyTagComponentCtrl.languageSelected">
 			<li nya-bs-option="language in storyTagComponentCtrl.languages" data-value="language.code" deep-watch="true" ng-init="storyTagComponentCtrl.languageSelected='en-US'">
 				<a href="">
 					<span ng-bind="language.name"></span>
