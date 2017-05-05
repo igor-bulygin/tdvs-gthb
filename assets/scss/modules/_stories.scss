@@ -583,4 +583,14 @@
 		color: $dark_grey;
 	    font-size: 12px;
 	}
+	.cover-photo{
+		max-height: 400px;
+		overflow: hidden;
+		float: left;
+		width: 100%;
+		margin-bottom: 40px;
+		img{
+			width: 100%;
+		}
+	}
 }

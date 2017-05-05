@@ -2742,6 +2742,14 @@ input[type="radio"] .styled:checked + label::after {
     float: right;
     color: #9a9a9a;
     font-size: 12px; }
+  .stories-detail-content .cover-photo {
+    max-height: 400px;
+    overflow: hidden;
+    float: left;
+    width: 100%;
+    margin-bottom: 40px; }
+    .stories-detail-content .cover-photo img {
+      width: 100%; }
 
 .photo-loader {
   width: 309px;
