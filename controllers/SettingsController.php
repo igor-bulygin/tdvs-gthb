@@ -32,7 +32,22 @@ class SettingsController extends CController
 	}
 
 	public function actionIndex($slug, $person_id) {
-		return $this->actionBilling($slug, $person_id);
+		return $this->actionGeneral($slug, $person_id);
+	}
+
+	public function actionGeneral($slug, $person_id) {
+		// get the category object
+		$person = Person::findOneSerialized($person_id);
+
+		if (!$person->isPersonEditable()) {
+			throw new UnauthorizedHttpException();
+		}
+
+		$this->layout = '/desktop/public-2.php';
+
+		return $this->render("general", [
+			'person' => $person,
+		]);
 	}
 
 	public function actionBilling($slug, $person_id)
