@@ -7,7 +7,7 @@ class GeneralSettingsAsset extends AssetBundle {
 	public $basePath = '@webroot';
 	public $baseUrl = '@web';
 	public $js = [
-		'js/desktop/settings/general.js',
+		'js/desktop/settings/general/general.js',
 	];
 	public $depends = [
 		'app\assets\desktop\settings\IndexAsset',
