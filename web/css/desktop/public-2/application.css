@@ -2763,6 +2763,32 @@ input[type="radio"] .styled:checked + label::after {
       margin: 0 auto;
       display: block; }
 
+.stories-exemple-link {
+  position: absolute;
+  right: 0; }
+
+.newspaper-stories-icon {
+  width: 90px;
+  margin: 0 auto 30px;
+  display: block; }
+
+.no-story-text {
+  font-size: 16px;
+  font-family: "Playfair Display", Georgia, serif;
+  margin: 0 0 5px; }
+
+.no-story-text-bold {
+  font-size: 16px;
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: bold; }
+
+.btn-create-story {
+  height: 45px;
+  width: 193px;
+  padding: 14px 0 0 0;
+  font-size: 16px;
+  margin: 50px 0 150px 0; }
+
 .photo-loader {
   width: 309px;
   height: 400px;
