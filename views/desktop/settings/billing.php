@@ -18,7 +18,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 
 <?= SettingsHeader::widget() ?>
 
-<div ng-controller="billingCtrl as billingCtrl" class="personal-info-wrapper bank-settings-wrapper"> <!-- please change this class, is not semantic -->
+<div ng-controller="billingCtrl as billingCtrl" class="personal-info-wrapper bank-settings-wrapper">
 	<div class="container">
 		<uib-accordion>
 			<div uib-accordion-group class="panel-default panel-billing" heading="Addresses" is-disabled="true" ng-cloak>
