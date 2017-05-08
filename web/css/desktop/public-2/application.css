@@ -4019,7 +4019,8 @@ input[type="radio"] .styled:checked + label::after {
 
 .empty-wrapper {
   padding: 40px 0;
-  text-align: center; }
+  text-align: center;
+  min-height: 560px; }
 
 .tag-select-row {
   padding: 20px;
