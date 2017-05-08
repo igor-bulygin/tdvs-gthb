@@ -70,6 +70,26 @@ class SettingsController extends CController
 		]);
 	}
 
+	public function actionShipping($slug, $person_id)
+	{
+		// get the category object
+		$person = Person::findOneSerialized($person_id);
+
+		if (!$person->isDeviser()) {
+			throw new NotFoundHttpException();
+		}
+
+		if (!$person->isDeviserEditable()) {
+			throw new UnauthorizedHttpException();
+		}
+
+		$this->layout = '/desktop/public-2.php';
+
+		return $this->render("shipping", [
+			'person' => $person,
+		]);
+	}
+
 	public function actionConnectStripe($slug, $person_id) {
 
 		// get the category object
