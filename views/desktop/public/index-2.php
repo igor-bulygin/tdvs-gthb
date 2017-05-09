@@ -195,7 +195,7 @@ $this->title = 'Todevise / Home';
 					Boxes
 				</div>
 
-				<div class="row">
+				<div class="row no-mar">
 					<?php foreach ($boxes as $box) {
 						$products = $box->getProductsPreview(); ?>
 						<div class="<?=$stories ? 'col-md-6' : 'col-md-4'?> col-xs-6 pad-grid">
