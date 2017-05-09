@@ -202,8 +202,16 @@
 		height: 127px;
 		position: relative;
 		margin: 0 15px 15px 0;
+		&:hover{
+			.crop{
+				display: block;
+			}
+			.delete{
+				display: block;
+			}
+		}
 	img{
-		max-height: 122px;
+		max-height: 114px;
 		width: auto;
 		max-width: 122px;
 		position: absolute;
@@ -226,6 +234,7 @@
 		text-align: center;
 		padding: 1px 0 0 0;
 		@include border-radius(7px,7px,7px,7px);
+		display: none;
 	}
 	.delete{
 		background-color: $dark_grey;
@@ -240,6 +249,7 @@
 		text-align: center;
 		padding: 1px 0 0 0;
 		@include border-radius(7px,7px,7px,7px);
+		display: none;
 	}
 	.main-marked{
 		position: absolute;
