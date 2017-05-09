@@ -104,18 +104,19 @@
 			//price_stock and all price_stock values
 			if(!angular.isArray(product.price_stock) || product.price_stock.length === 0) {
 				required.push('price_stock');
-			}
-			product.price_stock.forEach(function(element) {
-				//if availability
-				if(element.available &&
-					(UtilService.isZeroOrLess(element.weight) || 
-					UtilService.isZeroOrLess(element.width) ||
-					UtilService.isZeroOrLess(element.length) ||
-					UtilService.isZeroOrLess(element.price) ||
-					UtilService.isZeroOrLess(element.stock))) {
+			} else {
+				product.price_stock.forEach(function (element) {
+					//if availability
+					if (element.available &&
+						(UtilService.isZeroOrLess(element.weight) ||
+						UtilService.isZeroOrLess(element.width) ||
+						UtilService.isZeroOrLess(element.length) ||
+						UtilService.isZeroOrLess(element.price) ||
+						UtilService.isZeroOrLess(element.stock))) {
 						required.push('price_stock');
-				}
-			});
+					}
+				});
+			}
 			return required;
 		}
 
