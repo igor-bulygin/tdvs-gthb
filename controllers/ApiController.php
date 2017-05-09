@@ -225,6 +225,47 @@ class ApiController extends CController {
 		return $res;
 	}
 
+	public function actionPersons($filters = null) {
+		$request = Yii::$app->getRequest();
+		$res = null;
+
+		if ($request->isGet) {
+			$filters = json_decode($filters, true) ?: [];
+
+			if (!empty($filters)) {
+				$filters = Utils::removeAllExcept($filters, ['short_id']);
+				//TODO: If not admin, force some fields (enabled only, visible by public only, etc...)
+			}
+
+			$res = empty($filters) ? Person::find() : Person::find()->where($filters);
+
+			$res = $res->asArray()->all();
+		} else if ($request->isPost) {
+			$_deviser = $this->getJsonFromRequest("person");
+
+			if ($_deviser["short_id"] === "new") {
+				$_deviser["short_id"] = (new Person())->genValidID(7);
+			}
+
+			/* @var $deviser \app\models\Person */
+			$deviser = Person::findOne(["short_id" => $_deviser["short_id"]]);
+			$deviser->setAttributes($_deviser, false);
+			$deviser->personalInfoMapping->load($_deviser, "personal_info");
+			$deviser->save(false);
+
+			$res = $deviser;
+		} else if ($request->isDelete) {
+			$deviser = $this->getJsonFromRequest("person");
+
+			/* @var $deviser \app\models\Person */
+			$deviser = Person::findOne(["short_id" => $deviser["short_id"]]);
+			$deviser->delete();
+		}
+
+		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_ADMIN);
+		return $res;
+	}
+
 	public function actionProducts($filters = null) {
 		$request = Yii::$app->getRequest();
 		$res = null;

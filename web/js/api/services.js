@@ -110,6 +110,36 @@
 		return deviserObject;
 	}
 
+	function $person($services_util) {
+		var api_point = currentHost() + "/api/persons/";
+
+		var personObject = {};
+
+		personObject.get = _get;
+		personObject.modify = _modify;
+		personObject.delete = _delete;
+
+		function _get(filters) {
+			var req = $services_util._get(api_point, filters);
+
+			return req.then($services_util._handleSuccess, $services_util._handleError);
+		}
+
+		function _modify(method, person) {
+			var req = $services_util._modify(api_point, method, {
+				person: person
+			});
+
+			return req.then($services_util._handleSuccess, $services_util._handleError);
+		}
+
+		function _delete(person) {
+			return this.modify("DELETE", person);
+		}
+
+		return personObject;
+	}
+
 	function $product($services_util) {
 		var api_point = currentHost() + "/api/products/";
 
@@ -326,6 +356,7 @@
 		.factory("$services_util", $services_util)
 		.service("$admin", $admin)
 		.service("$deviser", $deviser)
+		.service("$person", $person)
 		.service("$product", $product)
 		.service("$tag", $tag)
 		.service("$sizechart", $sizechart)

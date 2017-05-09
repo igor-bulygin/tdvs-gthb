@@ -420,7 +420,13 @@ class Person extends CActiveRecord implements IdentityInterface
 			$item->delete();
 		}
 
+		$this->deletePhotos();
+
 		return parent::beforeDelete();
+	}
+
+	public function deletePhotos() {
+		Utils::rmdir($this->getUploadedFilesPath());
 	}
 
 	public function setPassword($password)
