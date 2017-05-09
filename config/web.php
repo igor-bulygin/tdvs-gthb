@@ -117,7 +117,7 @@ $config = [
 					? true : false,
 			'transport' => [
 				'class' => 'Swift_SmtpTransport',
-				'host' => '10.0.1.1',
+				'host' => 'localhost',
 				'username' => '',
 				'password' => '',
 				'port' => '25',
