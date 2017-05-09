@@ -24,7 +24,7 @@ $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD
 			<shipping-zones></shipping-zones>
 			<shipping-weights></shipping-weights>
 			<shipping-prices></shipping-prices>
-			<shipping-observations></shipping-observations>
+			<shipping-observations languages="shippingSettingsCtrl.languages"></shipping-observations>
 		</uib-accordion>
 	</div>
 </div>

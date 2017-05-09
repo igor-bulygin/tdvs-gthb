@@ -2,4 +2,23 @@
 	<div class="col-md-10">
 		Please add any observations, if any, regarding the shipping process. If there is specific information for each product, you will be able to add it when you create the product.
 	</div>
+	<div class="edit-faq-wrapper">
+		<div class="edit-faq-panel">
+			<div class="faq-language-menu">
+				<ol class="nya-bs-select form-control" ng-model="shippingObservationsCtrl.languageSelected" ng-change="shippingObservationsCtrl.parseText(shippingObservationsCtrl.observations)">
+					<li nya-bs-option="language in shippingObservationsCtrl.languages" data-value="language.code" deep-watch="true" ng-init="shippingObservationsCtrl.languageSelected='en-US'" class="ng-class:{'lang-selected': shippingObservationsCtrl.isLanguageOk(language.code)}">
+						<a href="#">
+							<span ng-bind="language.name"></span>
+							<span class="glyphicon glyphicon-ok ok-white-icon pull-right" ng-if="shippingObservationsCtrl.isLanguageOk(language.code)"></span>
+						</a>
+					</li>
+				</ol>
+				<div class="faq-row">
+					<div class="col-md-12">
+						<div class="faq-edit-answer" text-angular ng-model="shippingObservationsCtrl.observations[shippingObservationsCtrl.languageSelected]" ng-cloak ta-toolbar="[]" placeholder="DESCRIPTION" ta-paste="shippingObservationsCtrl.stripHTMLTags($html)"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

@@ -12,6 +12,6 @@
 	}
 
 	angular
-		.module('todevise', ['api', 'util', 'header', 'ui.bootstrap', 'nya.bootstrap.select'])
+		.module('todevise', ['api', 'util', 'header', 'ui.bootstrap', 'nya.bootstrap.select', 'textAngular'])
 		.config(config);
 }());
