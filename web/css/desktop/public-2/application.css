@@ -3120,7 +3120,6 @@ input[type="radio"] .styled:checked + label::after {
   border: 1px solid #bfbfbf;
   padding: 10px;
   height: auto;
-  min-height: 100px;
   width: 100%;
   border-radius: 6px 6px 6px 6px !important;
   -webkit-border-radius: 6px 6px 6px 6px !important;
