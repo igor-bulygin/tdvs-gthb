@@ -3693,8 +3693,7 @@ input[type="radio"] .styled:checked + label::after {
   padding: 0 0 0 10px; }
 
 .ta-scroll-window > .ta-bind {
-  padding: 0 !important;
-  min-height: auto !important; }
+  padding: 0 !important; }
 
 .short-description-input {
   color: #ffffff;
