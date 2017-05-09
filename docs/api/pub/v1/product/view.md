@@ -9,6 +9,7 @@ Example about how to call to Web Service to get specific product
 **Response codes**: 
 * `200`: Success
 * `400`: Bad request
+* `404`: Not found
   
 **Request parameters**:
 * `:id`: Id of the product that want to get 

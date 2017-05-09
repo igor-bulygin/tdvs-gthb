@@ -9,6 +9,8 @@ Example about how to call to Web Service to create a new Person account
 **Response codes**: 
 * `201`: Success (without body)
 * `400`: Bad request
+* `404`: Not found (invitation not found)
+* `409`: Conflict (email already in use)
   
 **Request parameters for create a Deviser**:
 * `type` : array with only one element, with value 2 (required)
@@ -32,4 +34,8 @@ Example about how to call to Web Service to create a new Person account
 * `email`: email of deviser (required)
 * `name`: representative first name (required)
 * `password`: password (required)
+
+**Response body**:
+
+See the structure of a story in view.md
   

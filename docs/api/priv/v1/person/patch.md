@@ -7,10 +7,9 @@ Example about how to call to Web Service to update Person profile
 **Method**: `PATCH`
 
 **Response codes**: 
-* `204`: Success, without body
-* `400`: Bad request
-* `401`: Unauthorized 
-* `403`: Forbidden
+* `200`: Success
+* `401`: Unauthorized
+* `404`: Not found
 
 **Request parameters**:
 * `:personId`: Id of the person that want to upadte
@@ -59,3 +58,6 @@ All attributes are required or optional, based on account_state and type of pers
 * You must have some of them filled when you want to change the state to "active", or you want to update an "active" profile.
 
 
+**Response body**:
+
+See the structure of a story in view.md

@@ -27,4 +27,5 @@ Persons
 * `rand`: Optional. If it is present, results are randomized
 
 **Response body**:
-//TODO
+
+See the structure of a story in view.md

@@ -20,7 +20,7 @@ class StoryController extends AppPublicController
 			throw new NotFoundHttpException();
 		}
 
-		if ($story->order_state != Story::STORY_STATE_ACTIVE) {
+		if ($story->story_state != Story::STORY_STATE_ACTIVE) {
 			throw new BadRequestHttpException();
 		}
 

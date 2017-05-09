@@ -6,6 +6,8 @@ use app\models\Person;
 use Yii;
 use yii\base\Exception;
 use yii\web\BadRequestHttpException;
+use yii\web\NotFoundHttpException;
+use yii\web\UnauthorizedHttpException;
 
 class PersonController extends AppPrivateController
 {
@@ -17,7 +19,11 @@ class PersonController extends AppPrivateController
 		/** @var Person $person */
 		$person = Person::findOne(["short_id" => $personId]);
 		if (empty($person)) {
-			throw new BadRequestHttpException('Person not found');
+			throw new NotFoundHttpException('Person not found');
+		}
+
+		if (!$person->isPersonEditable()) {
+			throw new UnauthorizedHttpException();
 		}
 
 		return $person;
@@ -28,7 +34,11 @@ class PersonController extends AppPrivateController
 		/** @var Person $person */
 		$person = Person::findOne(["short_id" => $personId]);
 		if (empty($person)) {
-			throw new BadRequestHttpException('Person not found');
+			throw new NotFoundHttpException('Person not found');
+		}
+
+		if (!$person->isPersonEditable()) {
+			throw new UnauthorizedHttpException();
 		}
 
 		$newAccountState = Yii::$app->request->post('account_state');

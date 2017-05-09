@@ -5,11 +5,9 @@ namespace app\modules\api\pub\v1\controllers;
 use app\models\Invitation;
 use app\models\Person;
 use Yii;
-use yii\base\Exception;
 use yii\web\BadRequestHttpException;
 use yii\web\ConflictHttpException;
 use yii\web\NotFoundHttpException;
-use yii\web\UnauthorizedHttpException;
 
 class PersonController extends AppPublicController
 {
@@ -21,11 +19,12 @@ class PersonController extends AppPublicController
 		/** @var Person $person */
 		$person = Person::findOne(["short_id" => $personId]);
 		if (empty($person)) {
-			throw new BadRequestHttpException('Person not found');
+			throw new NotFoundHttpException('Person not found');
 		}
 
 		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE && !$person->isPersonEditable()) {
-			throw new UnauthorizedHttpException();
+			Yii::$app->response->setStatusCode(204); // No content
+			return null;
 		}
 
 		return $person;
@@ -104,7 +103,7 @@ class PersonController extends AppPublicController
 				$account_state = Person::ACCOUNT_STATE_DRAFT;
 				break;
 			default:
-				throw new Exception("Invalid person type");
+				throw new BadRequestHttpException("Invalid person type");
 		}
 
 		$email = Yii::$app->request->post('email');
