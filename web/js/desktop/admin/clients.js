@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function clientsCtrl($scope, $timeout, $client, $client_util, toastr, $uibModal, $compile, $http) {
+	function clientsCtrl($scope, $timeout, $person, toastr, $uibModal, $compile, $http) {
 		var vm = this;
 
 		vm.renderPartial = function () {
@@ -27,13 +27,13 @@
 			});
 
 			modalInstance.result.then(function () {
-				$client.get({
+				$person.get({
 					short_id: client_id
 				}).then(function (client) {
 					if (client.length !== 1) return;
 					client = client.shift();
 
-					$client.delete(client).then(function (data) {
+					$person.delete(client).then(function (data) {
 						toastr.success("Influencer deleted!");
 						vm.renderPartial();
 					}, function (err) {
