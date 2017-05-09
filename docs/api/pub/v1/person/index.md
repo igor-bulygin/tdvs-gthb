@@ -28,4 +28,21 @@ Persons
 
 **Response body**:
 
-See the structure of a story in view.md
+See the structure of the complete item in view.md
+
+```
+{
+  "items": [
+    {
+      "id": "a04c31dc",
+      ...
+    },
+    ... 
+  ],
+  "meta": [
+    "total_count": 123,    
+    "current_page": 1,    
+    "per_page": 20,    
+  ]
+}
+```

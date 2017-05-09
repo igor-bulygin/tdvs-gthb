@@ -24,14 +24,13 @@ Products
 
 **Response body**:
 
+See the structure of the complete item in view.md
+
 ```
 {
   "items": [
     {
       "id": "a04c31dc",
-      "name": "test product",
-      "slug": "test-product",
-      "description": "The piece",
       ...
     },
     ... 

@@ -37,5 +37,4 @@ Example about how to call to Web Service to create a new Person account
 
 **Response body**:
 
-See the structure of a story in view.md
-  
+See the structure of the complete item in view.md  

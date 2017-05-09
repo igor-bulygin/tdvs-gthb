@@ -2,7 +2,6 @@
 
 namespace app\modules\api\pub\v1\controllers;
 
-use app\models\Product;
 use app\models\Product2;
 use Yii;
 use yii\web\NotFoundHttpException;
@@ -14,10 +13,15 @@ class ProductController extends AppPublicController {
 		// show only fields needed in this scenario
 		Product2::setSerializeScenario(Product2::SERIALIZE_SCENARIO_PUBLIC);
 
-		/** @var Product $product */
+		/** @var Product2 $product */
 		$product = Product2::findOneSerialized($id);
 		if (!$product) {
 			throw new NotFoundHttpException('Product not found');
+		}
+
+		if ($product->product_state != Product2::PRODUCT_STATE_ACTIVE && !$product->getDeviser()->isPersonEditable()) {
+			Yii::$app->response->setStatusCode(204); // No content
+			return null;
 		}
 
 		return $product;
