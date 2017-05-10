@@ -3,6 +3,7 @@
 
 	function controller(personDataService, languageDataService, UtilService) {
 		var vm = this;
+		vm.person = angular.copy(person);
 
 		init();
 		
@@ -17,6 +18,7 @@
 
 			languageDataService.getLanguages(onGetLanguagesSuccess, UtilService.onError);
 		}
+
 	}
 
 	angular

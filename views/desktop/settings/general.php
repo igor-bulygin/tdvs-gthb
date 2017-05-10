@@ -26,44 +26,47 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 					<div class="form-group">
 						<label for="brand_name" class="col-md-2">Brand / Artist name</label>
 						<div class="col-md-4">
-							<input type="text" name="brand_name" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.brand_name">
+							<input type="text" name="brand_name" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.brand_name"><!--only devisers -->
 						</div>
 						<label for="city" class="col-md-2">City</label>
 						<div class="col-md-4">
-							<input type="text" name="city" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.city">
+							<input type="text" name="city" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.city"><!-- with google API -->
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="representative_name" class="col-md-2">Representative name</label>
-						<div class="col-md-4">
-							<input type="text" name="representative_name" class="form-control" ng-model="generalSettingsCtrl.person.settings.representative_name">
+						<div class="col-md-2">
+							<input type="text" name="name" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.name">
+						</div>
+						<div class="col-md-2">
+							<input type="text" name="last_name" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.last_name"> <!--required -->
 						</div>
 						<label for="street" class="col-md-2">Street</label>
 						<div class="col-md-4">
-							<input type="text" name="street" class="form-control" ng-model="generalSettingsCtrl.person.settings.street">
+							<input type="text" name="street" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.street">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="phone" class="col-md-2">Phone number</label>
 						<div class="col-md-4">
-							<input type="text" name="phone" class="form-control" ng-model="generalSettingsCtrl.person.settings.phone_number">
+							<input type="text" name="phone" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.phone_number">
 						</div>
 						<label for="number" class="col-md-2">Number</label>
 						<div class="col-md-4">
-							<input type="text" name="number" class="form-control" ng-model="generalSettingsCtrl.person.settings.number">
+							<input type="text" name="number" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.number">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="password" class="col-md-2">Password</label>
 						<div class="col-md-2">
-							<input type="password" name="password" class="form-control">
+							<input type="password" name="password" class="form-control" placeholder="*******"><!-- delete this -->
 						</div>
 						<div class="col-md-2">
 							<a href="#"><span class="glyphicon glyphicon-refresh"></span> Change password</a>
 						</div>
 						<label for="zip" class="col-md-2">ZIP</label>
 						<div class="col-md-4">
-							<input type="zip" name="zip" class="form-control" ng-model="generalSettingsCtrl.person.settings.zip">
+							<input type="zip" name="zip" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.zip">
 						</div>
 					</div>
 					<div class="form-group">

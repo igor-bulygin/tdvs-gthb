@@ -9,21 +9,12 @@
 			"text": "EURO",
 			"value": "EUR" 
 		}]
+		vm.person = angular.copy(person);
 
 		init();
 
 		function init() {
-			getPerson();
-		}
-
-		function getPerson() {
-			function onGetPersonSuccess(data) {
-				vm.person = angular.copy(data);
-			}
-
-			personDataService.getProfile({
-				personId: person.short_id
-			}, onGetPersonSuccess, UtilService.onError);
+			
 		}
 	}
 
