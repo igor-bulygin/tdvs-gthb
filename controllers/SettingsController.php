@@ -31,6 +31,13 @@ class SettingsController extends CController
 		];
 	}
 
+	public function beforeAction($action)
+	{
+		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
+
+		return parent::beforeAction($action);
+	}
+
 	public function actionIndex($slug, $person_id) {
 		return $this->actionGeneral($slug, $person_id);
 	}
