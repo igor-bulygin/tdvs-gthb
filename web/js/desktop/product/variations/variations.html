@@ -12,10 +12,10 @@
 						<label data-ng-for="{{tag.name}}" ng-bind="tag.name"></label>
 						<span class="optional-text block-0" ng-if="!tag.required">OPTIONAL</span>
 					</div>
-					<div class="mb-20 col-md-8 ng-class:{'col-md-offset-4': $index > 0}" ng-repeat="item in productVariationsCtrl.product.options[tag.id] track by $index">
-						<span>{{$index+1}}:&nbsp;</span>
-						<ol class="nya-bs-select categories-select ng-class:{'purple': productVariationsCtrl.optionValidation(productVariationsCtrl.product.options[tag.id][$index])}" ng-model="productVariationsCtrl.product.options[tag.id][$index]" multiple>
-							<li nya-bs-option="option in tag.options" data-value="option.value" deep-watch="true" class="ng-class:{'disabled': productVariationsCtrl.product.options[tag.id][$parent.$index].length >= tag.n_options}">
+					<div class="mb-20 col-md-8 ng-class:{'col-md-offset-4': $index > 0}" ng-repeat="(itemIndex,item) in productVariationsCtrl.product.options[tag.id] track by itemIndex">
+						<span>{{itemIndex+1}}:&nbsp;</span>
+						<ol class="nya-bs-select categories-select ng-class:{'purple': productVariationsCtrl.optionValidation(productVariationsCtrl.product.options[tag.id][itemIndex])}" ng-model="productVariationsCtrl.product.options[tag.id][itemIndex]" multiple>
+							<li nya-bs-option="option in tag.options" data-value="option.value" deep-watch="true" class="ng-class:{'disabled': productVariationsCtrl.product.options[tag.id][itemIndex].length >= tag.n_options && productVariationsCtrl.product.options[tag.id][itemIndex].indexOf(option.value) < 0}">
 								<a href="#"><span ng-bind="option.text['en-US']"></span><span class="glyphicon glyphicon-ok check-mark"></span></a>
 							</li>
 						</ol>
