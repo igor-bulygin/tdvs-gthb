@@ -25,7 +25,7 @@ class PersonPersonalInfo extends EmbedModel
 			'brand_name',
 			'country',
 			'city',
-//			'bday',
+			'bday',
 			'surnames',
 			'street',
 			'number',
