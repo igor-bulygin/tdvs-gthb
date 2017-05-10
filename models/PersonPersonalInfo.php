@@ -121,7 +121,8 @@ class PersonPersonalInfo extends EmbedModel
 					Person::SCENARIO_CLIENT_UPDATE,
 				]
 			],
-			[['name', 'last_name', 'city', 'country', 'brand_name'], 'required', 'on' => Person::SCENARIO_DEVISER_UPDATE_PROFILE],
+			[['name', 'city', 'country', 'brand_name'], 'required', 'on' => Person::SCENARIO_DEVISER_UPDATE_PROFILE],
+//			[['name', 'last_name', 'city', 'country', 'brand_name'], 'required', 'on' => Person::SCENARIO_DEVISER_UPDATE_PROFILE], // we have a lot of devisers without last_name... we cannot make it required
 			[['name', 'last_name', 'city'], 'required', 'on' => Person::SCENARIO_INFLUENCER_UPDATE_PROFILE],
 			[['name', 'last_name'], 'required', 'on' => [Person::SCENARIO_CLIENT_CREATE, Person::SCENARIO_CLIENT_UPDATE]],
 		];
