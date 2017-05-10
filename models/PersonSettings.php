@@ -13,6 +13,8 @@ class PersonSettings extends EmbedModel
 	public function attributes()
 	{
 		return [
+			'currency',
+			'lang',
 			'bank_info',
 			'stripe_info',
 		];
