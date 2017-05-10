@@ -27,34 +27,37 @@ class PriceStockValidator extends Validator
 		} else {
 
 			foreach ($priceStock as $item) {
-				if (!isset($item['options']) || empty($item['options'])) {
-					$this->addError($object, $attribute, 'Pricestock options must be an array and must be no empty');
-				}
-				foreach ($item['options'] as $optionId => $values) {
-					$optionId = (string)$optionId; // force cast to string (short_id are allways strings)
-					$tag = Tag::findOne(["short_id" => $optionId]);
-					if ($tag->isRareTag()) {
-						// TODO: wtf do here?
-						continue;
+				if (!isset($item['original_artwork']) || !$item['original_artwork']) {
+					if (!isset($item['options']) || empty($item['options'])) {
+						$this->addError($object, $attribute,
+							'Pricestock options must be an array and must be no empty');
 					}
-					/* @var $tag Tag */
-					if (!$tag) {
-						$this->addError($object, $attribute, sprintf('Option %s not found', $optionId));
-					} else {
-						foreach ($values as $value) {
-							if (is_array($value)) {
-								foreach ($value as $oneValue) {
-									$optionTag = $tag->getOptionTagByValue($oneValue);
+					foreach ($item['options'] as $optionId => $values) {
+						$optionId = (string)$optionId; // force cast to string (short_id are allways strings)
+						$tag = Tag::findOne(["short_id" => $optionId]);
+						if ($tag->isRareTag()) {
+							// TODO: wtf do here?
+							continue;
+						}
+						/* @var $tag Tag */
+						if (!$tag) {
+							$this->addError($object, $attribute, sprintf('Option %s not found', $optionId));
+						} else {
+							foreach ($values as $value) {
+								if (is_array($value)) {
+									foreach ($value as $oneValue) {
+										$optionTag = $tag->getOptionTagByValue($oneValue);
+										if (!$optionTag) {
+											$this->addError($object, $attribute,
+												sprintf('Value %s not valid for tag %s', $oneValue, $optionId));
+										}
+									}
+								} else {
+									$optionTag = $tag->getOptionTagByValue($value);
 									if (!$optionTag) {
 										$this->addError($object, $attribute,
-											sprintf('Value %s not valid for tag %s', $oneValue, $optionId));
+											sprintf('Value %s not valid for tag %s', $value, $optionId));
 									}
-								}
-							} else {
-								$optionTag = $tag->getOptionTagByValue($value);
-								if (!$optionTag) {
-									$this->addError($object, $attribute,
-										sprintf('Value %s not valid for tag %s', $value, $optionId));
 								}
 							}
 						}

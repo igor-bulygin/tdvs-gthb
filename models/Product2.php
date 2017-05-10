@@ -191,12 +191,16 @@ class Product2 extends Product {
 		}
 	}
 
-	public function beforeSave($insert) {
-
+	public function afterSave($insert, $changedAttributes) {
 		if ($insert) {
 			$this->moveTempUploadsToProductPath();
 		}
 
+		parent::afterSave($insert, $changedAttributes);
+	}
+
+	public function beforeSave($insert)
+	{
 		// short_id on price_stock
 		$priceStock = $this->price_stock;
 		foreach ($priceStock as $k => $item) {
@@ -643,7 +647,7 @@ class Product2 extends Product {
 
 	/**
 	 * Get the path to main product image
-	 * 
+	 *
 	 * @return string
 	 */
 	public function getMainImage($urlify = true)
@@ -863,7 +867,7 @@ class Product2 extends Product {
 		}
 		return $references;
 	}
-	
+
 	/**
 	 * Build an structure with all references to be handled by client side.
 	 * By reference, we understand a combination of a product, and each options combinations where
