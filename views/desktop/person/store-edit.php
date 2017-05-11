@@ -58,7 +58,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 									<?php } ?>
 									<?php foreach ($categories as $i => $category) { ?>
 										<div class="col-md-3 col-sm-3 col-xs-3 pad-cathegory">
-											<a href="<?= $person->getStoreEditLink(['categoryId' => $category->short_id])?>">
+											<a href="<?= $person->getStoreEditLink(['category' => $category->short_id])?>">
 												<figure class="cathegory">
 													<img class="<?= ($selectedCategory->short_id==$category->short_id) ? 'active' : '' ?>" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($category->getDeviserProduct()->getMainImage())->resize(240, 175) ?>">
 													<figcaption>
