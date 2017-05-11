@@ -132,10 +132,23 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 					<?php foreach ($component->items as $workId) {
 						$work = \app\models\Product2::findOneSerialized($workId['work']); ?>
 						<div class="col-lg-3">
-							<a href="<?=$work->getViewLink()?>">
-								<img src="<?=$work->getMainImage()?>" class="img-responsive" />
-								<p><?=Utils::l($work->name)?></p>
-							</a>
+							<div class="grid">
+								<figure class="effect-zoe">
+									<image-hover-buttons product-id="{{'<?= $work->short_id ?>'}}" is-loved="{{'<?=$work->isLovedByCurrentUser() ? 1 : 0 ?>'}}" is-mine="{{'<?= $work->isWorkFromCurrentUser() ? 1 : 0 ?>'}}">
+										<a href="<?= $work->getViewLink()?>">
+											<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($work->getMainImage())->resize(375, 220) ?>">
+										</a>
+									</image-hover-buttons>
+									<a href="<?= $work->getViewLink()?>">
+										<figcaption>
+											<p class="instauser">
+												<?=Utils::l($work->name)?>
+											</p>
+											<p class="price">€ <?= $work->getMinimumPrice() ?></p>
+										</figcaption>
+									</a>
+								</figure>
+							</div>
 						</div>
 					<?php } ?>
 				</div>
