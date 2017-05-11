@@ -141,9 +141,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 									</image-hover-buttons>
 									<a href="<?= $work->getViewLink()?>">
 										<figcaption>
-											<p class="instauser">
-												<?=Utils::l($work->name)?>
-											</p>
+											<p class="instauser"><?=$work->name?></p>
 											<p class="price">€ <?= $work->getMinimumPrice() ?></p>
 										</figcaption>
 									</a>
