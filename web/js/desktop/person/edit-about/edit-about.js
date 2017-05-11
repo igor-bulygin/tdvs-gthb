@@ -1,7 +1,7 @@
 (function() {
 
 	function controller(personDataService, UtilService, languageDataService, productDataService, 
-		Upload, uploadDataService, $timeout, $rootScope, $scope, deviserEvents, $uibModal, dragndropService, $window) {
+		Upload, uploadDataService, $timeout, $rootScope, $scope, deviserEvents, $uibModal, $window) {
 
 		var vm = this;
 		vm.stripHTMLTags = UtilService.stripHTMLTags;
@@ -11,10 +11,6 @@
 		vm.uploadCV = uploadCV;
 		vm.deleteCV = deleteCV;
 		vm.deleteImage = delete_image;
-		vm.dragOver = dragOver;
-		vm.dragStart = dragStart;
-		vm.moved = moved;
-		vm.canceled = canceled;
 		vm.checkPhotos = checkPhotos;
 		vm.biography_language = "en-US";
 		vm.images = [];
@@ -185,26 +181,6 @@
 			vm.person.curriculum = '';
 		}
 
-		/* drag and drop functions */
-
-		function dragStart(index) {
-			dragndropService.dragStart(index, vm.images);
-		}
-
-		function dragOver(index) {
-			vm.images = dragndropService.dragOver(index, vm.images);
-			return true;
-		}
-
-		function moved(index) {
-			vm.images = dragndropService.moved(vm.images);
-			vm.person.media = parsePhotos();
-		}
-
-		function canceled(){
-			vm.images = dragndropService.canceled();
-		}
-
 		function save() {
 			function parseTags(value) {
 				return value.replace(/<[^\/>][^>]*><\/[^>]+>/gim, "");
@@ -274,7 +250,6 @@
 				}
 			}
 		}, true);
-
 
 	}
 

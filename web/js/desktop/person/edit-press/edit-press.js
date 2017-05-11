@@ -6,10 +6,6 @@
 		vm.upload = upload;
 		vm.update = update;
 		vm.deleteImage = delete_image;
-		vm.dragOver = dragOver;
-		vm.dragStart = dragStart;
-		vm.moved = moved;
-		vm.canceled = canceled;
 		vm.done = done;
 
 		init();
@@ -84,23 +80,6 @@
 		function delete_image(index) {
 			vm.images.splice(index, 1);
 			vm.person.press.splice(index, 1);
-		}
-
-		function dragStart(index) {
-			dragndropService.dragStart(index, vm.images);
-		}
-
-		function dragOver(index) {
-			vm.images = dragndropService.dragOver(index, vm.images);
-			return true;
-		}
-
-		function moved(index) {
-			vm.images = dragndropService.moved(index)
-		}
-
-		function canceled() {
-			vm.images = dragndropService.canceled();
 		}
 
 		function done() {

@@ -57,14 +57,14 @@
 				<div class="col-md-2" ngf-no-file-drop>
 					<input type="file" name="file" ngf-select="productBasicInfoCtrl.uploadPhoto($files, $invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="productBasicInfoCtrl.isDropAvailable" ngf-multiple="true">
 				</div>
-				<div class="item draggable-list" dnd-list="productBasicInfoCtrl.images" dnd-dragover="productBasicInfoCtrl.dragOver(index)">
-					<div class="col-md-2 image-basic-info-edit" ng-repeat="image in productBasicInfoCtrl.images" dnd-draggable="image" dnd-effect-allowed="move" dnd-dragstart="productBasicInfoCtrl.dragStart($index)" dnd-canceled="productBasicInfoCtrl.canceled()" dnd-moved="productBasicInfoCtrl.moved($index)">
-						<img class="grid-image" ng-src="{{image.url}}">
+				<ul class="item draggable-list" ui-sortable ng-model="productBasicInfoCtrl.images">
+					<li class="col-md-2 image-basic-info-edit" ng-repeat="image in productBasicInfoCtrl.images">
+						<img class="grid-image" ng-src="{{image.url}}" draggable="false">
 						<div class="crop ion-android-star-outline" ng-click="productBasicInfoCtrl.openCropModal(image.url, $index)"></div>
 						<span class="delete ion-android-close" ng-click="productBasicInfoCtrl.deleteImage($index)"></span>
 						<p class="main-marked" ng-if="image.filename.main_product_photo">Marked as main photo</p>
-					</div>
-				</div>
+					</li>
+				</ul>
 				<div class="col-md-2 image-basic-info-edit" ng-repeat="item in productBasicInfoCtrl.files" ng-if="item.progress">
 					<div ng-if="item.progress <= 100">
 						<uib-progressbar value="item.progress" class="progress-striped active">{{item.progress}}</uib-progressbar>

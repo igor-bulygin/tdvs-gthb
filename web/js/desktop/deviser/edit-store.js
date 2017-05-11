@@ -3,6 +3,11 @@
 
 	function controller(productDataService, personDataService, UtilService, $location, $uibModal, $timeout) {
 		var vm = this;
+		vm.sortableOptions = {
+			update: function(e, ui) {
+				update(ui.item.sortable.dropindex, ui.item.sortable.model);
+			}
+		}
 		vm.update = update;
 		vm.open_modal_delete = open_modal_delete;
 		vm.show_unpublished_works = show_unpublished_works;

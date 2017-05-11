@@ -120,8 +120,8 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 											<a class="btn btn-default btn-green btn-add-work" href="<?=$person->getCreateWorkLink()?>">Add Work</a>
 											</div>
 										</div>
-										<div class="mesonry-row" dnd-list="editStoreCtrl.products" ng-if="editStoreCtrl.products.length > 0" ng-cloak>
-											<div class="menu-category list-group" ng-repeat="product in editStoreCtrl.products | publishedProduct" ng-if="product.main_photo" dnd-draggable="product" dnd-effect-allowed="move" dnd-moved="editStoreCtrl.update($index, product)">
+										<div class="mesonry-row" ui-sortable="editStoreCtrl.sortableOptions" ng-model="editStoreCtrl.products" ng-if="editStoreCtrl.products.length > 0" ng-cloak>
+											<div class="menu-category list-group" ng-repeat="product in editStoreCtrl.products | publishedProduct" ng-if="product.main_photo">
 												<div class="grid">
 													<figure class="effect-zoe">
 														<span class="close-product-icon" ng-click="editStoreCtrl.open_modal_delete(product.id)">

@@ -9,10 +9,6 @@
 		vm.setWork = setWork;
 		vm.findWorkInItems = findWorkInItems;
 		vm.searchDeviser = searchDeviser;
-		vm.dragStart = dragStart;
-		vm.dragOver = dragOver;
-		vm.moved = moved;
-		vm.canceled = canceled;
 
 		init()
 
@@ -88,23 +84,6 @@
 			}
 
 			personDataService.getPeople(params, onGetDevisersSuccess, UtilService.onError);
-		}
-
-		function dragStart(index) {
-			dragndropService.dragStart(index, vm.works_helper);
-		}
-
-		function dragOver(index) {
-			vm.works_helper = dragndropService.dragOver(index, vm.works_helper)
-			return true;
-		}
-
-		function moved(index) {
-			vm.works_helper = dragndropService.moved(index);
-		}
-
-		function canceled() {
-			vm.works_helper = dragndropService.canceled();
 		}
 
 		$scope.$watch('storyWorkComponentCtrl.works_helper', function(newValue, oldValue) {

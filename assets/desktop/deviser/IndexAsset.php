@@ -26,5 +26,6 @@ class IndexAsset extends AssetBundle {
 		'app\assets\libs\angularMasonryAsset',
 		'app\assets\libs\angularLocalStorageAsset',
 		'app\assets\libs\ngTagsInputAsset',
+		'app\assets\libs\angularUiSortableAsset',
 	];
 }

@@ -19,6 +19,6 @@
 	angular
 		.module('todevise', ['api', 'util', 'header', 'toastr', 'nya.bootstrap.select',
 			'textAngular', 'ngFileUpload', 'dndLists', 'ui.bootstrap', 
-			'ngYoutubeEmbed', 'uiCropper', 'LocalStorageModule', 'ngTagsInput'])
+			'ngYoutubeEmbed', 'uiCropper', 'LocalStorageModule', 'ngTagsInput', 'ui.sortable'])
 		.config(config)
 }());

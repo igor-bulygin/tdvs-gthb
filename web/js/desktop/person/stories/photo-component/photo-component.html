@@ -10,8 +10,8 @@
 			</div>
 			<span class="photo-loader-warning">Drag your photos here or click the button below.</span>
 			<div class="devisers-works-load-photos-row row">
-				<div dnd-list="storyPhotoComponentCtrl.component.items" dnd-dragover="storyPhotoComponentCtrl.dragOver(index)" dnd-allowed-types="['image']">
-					<div class="photo col-md-4" ng-if="storyPhotoComponentCtrl.component.items.length > 0" ng-repeat="image in storyPhotoComponentCtrl.component.items" dnd-draggable="image" dnd-effect-allowed="move" dnd-dragstart="storyPhotoComponentCtrl.dragStart($index)" dnd-canceled="storyPhotoComponentCtrl.canceled()" dnd-moved="storyPhotoComponentCtrl.moved($index)" dnd-type="'image'">
+				<div ui-sortable ng-model="storyPhotoComponentCtrl.component.items">
+					<div class="photo col-md-4" ng-if="storyPhotoComponentCtrl.component.items.length > 0" ng-repeat="image in storyPhotoComponentCtrl.component.items">
 						<move-delete-component array="storyPhotoComponentCtrl.component.items" position="$index">
 							<img ng-src="{{image.url}}">
 						</move-delete-component>

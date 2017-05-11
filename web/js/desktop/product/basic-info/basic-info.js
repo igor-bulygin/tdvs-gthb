@@ -14,10 +14,6 @@
 		vm.openCropModal = openCropModal;
 		vm.uploadPhoto = uploadPhoto;
 		vm.deleteImage = deleteImage;
-		vm.dragOver = dragOver;
-		vm.dragStart = dragStart;
-		vm.moved = moved;
-		vm.canceled = canceled;
 		
 		function init(){
 			//init values or functions
@@ -183,25 +179,6 @@
 						delete main_photo.name_cropped;
 				}
 			}
-		}
-
-		/* drag and drop functions */
-		function dragStart(index) {
-			dragndropService.dragStart(index, vm.images);
-		}
-
-		function dragOver(index) {
-			vm.images = dragndropService.dragOver(index, vm.images);
-			return true;
-		}
-
-		function moved(index) {
-			vm.images = dragndropService.moved(vm.images);
-			vm.product.media.photos = vm.images.map(e => Object.assign({}, e.filename));
-		}
-
-		function canceled(){
-			vm.images = dragndropService.canceled();
 		}
 
 		function parseImages() {

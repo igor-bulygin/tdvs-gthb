@@ -19,7 +19,7 @@
 	angular
 		.module('todevise', ['api', 'util', 'header', 'toastr', 'nya.bootstrap.select', 'textAngular', 'ngFileUpload',
 			'dndLists', 'ui.bootstrap', 'uiCropper', 'ngTagsInput', 'ui.bootstrap.datetimepicker', 'LocalStorageModule',
-			'xeditable'])
+			'xeditable', 'ui.sortable'])
 		.config(config)
 		.run(function(editableOptions) {
 			editableOptions.theme = 'bs3';

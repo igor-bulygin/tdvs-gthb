@@ -23,8 +23,8 @@
 			<p class="no-video-text">You have no videos</p>
 			<button class="btn btn-default btn-green" ng-click="editVideosCtrl.showAddVideo()" ng-if="!editVideosCtrl.addVideosClicked">Add Videos</button>
 		</div>
-		<div class="video-edit-list" ng-cloak dnd-list="editVideosCtrl.person.videos">
-			<div class="row video-row" dnd-draggable="video" dnd-effect-allowed="move" dnd-moved="editVideosCtrl.updatePersonVideos($index)" ng-repeat="video in editVideosCtrl.person.videos">
+		<div class="video-edit-list" ng-cloak ui-sortable ng-model="editVideosCtrl.person.videos">
+			<div class="row video-row" ng-repeat="video in editVideosCtrl.person.videos">
 				<div class="col-md-6">
 					<ng-youtube-embed url="video.url" autoplay="false" color="white" disablekb="true" width="100%"></ng-youtube-embed>
 				</div>
