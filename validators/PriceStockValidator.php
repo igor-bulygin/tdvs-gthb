@@ -35,7 +35,7 @@ class PriceStockValidator extends Validator
 					foreach ($item['options'] as $optionId => $values) {
 						$optionId = (string)$optionId; // force cast to string (short_id are allways strings)
 						$tag = Tag::findOne(["short_id" => $optionId]);
-						if ($tag->isRareTag()) {
+						if (!$tag || $tag->isRareTag()) {
 							// TODO: wtf do here?
 							continue;
 						}

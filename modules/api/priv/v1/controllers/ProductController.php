@@ -58,7 +58,7 @@ class ProductController extends AppPrivateController
 		$product->setScenario($this->getDetermineScenario($product));
 		if ($product->load(Yii::$app->request->post(), '') && $product->validate()) {
 
-			$product->save();
+			$product->save(false);
 
 			Yii::$app->response->setStatusCode(201); // Created
 			return $product;
@@ -78,9 +78,9 @@ class ProductController extends AppPrivateController
 		}
 
 		$product->setScenario($this->getDetermineScenario($product));
-		if ($product->load(Yii::$app->request->post(), '') && $product->validate()) {
+		if ($product->load(Yii::$app->request->post(), '') && $product->validate(array_keys(Yii::$app->request->post()))) {
 
-			$product->save();
+			$product->save(false);
 
 			Yii::$app->response->setStatusCode(200); // Ok
 			return $product;

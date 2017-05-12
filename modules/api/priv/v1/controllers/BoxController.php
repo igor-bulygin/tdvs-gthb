@@ -64,7 +64,7 @@ class BoxController extends AppPrivateController
 		$box->person_id = Yii::$app->user->identity->short_id;
 		if ($box->load(Yii::$app->request->post(), '') && $box->validate()) {
 
-			$box->save();
+			$box->save(false);
 
 			Yii::$app->response->setStatusCode(201); // Created
 			return $box;
@@ -87,9 +87,9 @@ class BoxController extends AppPrivateController
 			throw new ForbiddenHttpException();
 		}
 		$box->setScenario(Box::SCENARIO_BOX_UPDATE);
-		if ($box->load(Yii::$app->request->post(), '') && $box->validate()) {
+		if ($box->load(Yii::$app->request->post(), '') && $box->validate(array_keys(Yii::$app->request->post()))) {
 
-			$box->save();
+			$box->save(false);
 
 			Yii::$app->response->setStatusCode(201); // Created
 			return $box;
@@ -129,19 +129,19 @@ class BoxController extends AppPrivateController
 		if (!$box->isEditable()) {
 			throw new ForbiddenHttpException();
 		}
-		$product = new BoxProduct();
-		$product->setParentObject($box);
+		$boxProduct = new BoxProduct();
+		$boxProduct->setParentObject($box);
 
-		if ($product->load(Yii::$app->request->post(), '') && $product->validate()) {
+		if ($boxProduct->load(Yii::$app->request->post(), '') && $boxProduct->validate()) {
 
-			$box->addProduct($product);
+			$box->addProduct($boxProduct);
 
 			Yii::$app->response->setStatusCode(201); // Created
 			return $box;
 
 		} else {
 			Yii::$app->response->setStatusCode(400); // Bad Request
-			return ["errors" => $product->errors];
+			return ["errors" => $boxProduct->errors];
 		}
 	}
 

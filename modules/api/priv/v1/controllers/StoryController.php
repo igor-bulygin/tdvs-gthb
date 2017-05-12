@@ -62,7 +62,7 @@ class StoryController extends AppPrivateController
 
 		if ($story->load(Yii::$app->request->post(), '') && $story->validate()) {
 
-			$story->save();
+			$story->save(false);
 
 			Yii::$app->response->setStatusCode(201); // Created
 			return $story;
@@ -86,9 +86,9 @@ class StoryController extends AppPrivateController
 		}
 		$story->setScenario($this->getScenarioFromRequest($story)); // safe and required attributes are related with scenario
 
-		if ($story->load(Yii::$app->request->post(), '') && $story->validate()) {
+		if ($story->load(Yii::$app->request->post(), '') && $story->validate(array_keys(Yii::$app->request->post()))) {
 
-			$story->save();
+			$story->save(false);
 
 			Yii::$app->response->setStatusCode(201); // Created
 			return $story;

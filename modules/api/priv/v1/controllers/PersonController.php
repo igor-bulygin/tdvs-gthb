@@ -45,7 +45,9 @@ class PersonController extends AppPrivateController
 		$this->checkDeviserAccountState($person, $newAccountState); // check for allowed new account state only
 
 		$person->setScenario($this->getScenarioFromRequest($person)); // safe and required attributes are related with scenario
-		if ($person->load(Yii::$app->request->post(), '') && $person->save()) {
+		if ($person->load(Yii::$app->request->post(), '') && $person->validate(array_keys(Yii::$app->request->post()))) {
+
+			$person->save(false);
 
 			Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
 			return $person;

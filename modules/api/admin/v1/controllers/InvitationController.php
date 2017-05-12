@@ -44,7 +44,7 @@ class InvitationController extends Controller
 		$invitation = new Invitation();
 		if ($invitation->load(Yii::$app->request->post(), '') && $invitation->validate()) {
 			// save the invitation
-			$invitation->save();
+			$invitation->save(false);
 
 			$no_invitation = Yii::$app->request->post('no_email', false);
 

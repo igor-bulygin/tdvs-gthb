@@ -127,7 +127,7 @@ class PersonController extends AppPublicController
 		$person->refreshFromEmbedded();
 
 		if ($person->validate()) {
-			$person->save();
+			$person->save(false);
 
 			if (isset($invitation)) {
 				// relate invitation and new person
