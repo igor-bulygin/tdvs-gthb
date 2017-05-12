@@ -95,22 +95,11 @@
 			}
 
 			if (index >= 0) {
-				vm.products.splice(index, 1);
-			}
-			var pos = -1;
-			for (var i = 0; i < vm.products.length; i++) {
-				if (product.id === vm.products[i].id)
-					pos = i;
-			}
-			if (pos > -1) {
-				var position = (pos + 1);
 				productDataService.updateProductPriv({
-					position: position
+					position: index+1
 				},{
 					idProduct: product.id
 				}, onUpdateProductSuccess, UtilService.onError);
-			} else {
-				UtilService.onError("Cannot be updated!");
 			}
 		}
 
