@@ -115,6 +115,7 @@
 		}
 
 		function save(state) {
+			vm.errors = false;
 			function onUpdateProductSuccess(data) {
 				vm.disable_save_buttons = false;
 				if(state === 'product_state_draft') {
