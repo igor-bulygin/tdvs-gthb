@@ -1,7 +1,6 @@
 <?php
 namespace app\models;
 
-use Yii;
 use app\helpers\Currency as C;
 
 class Currency {
@@ -167,4 +166,9 @@ class Currency {
 			"value" => C::_ZAR
 		]
 	];
+
+	public static function getSerialized()
+	{
+		return static::CURRENCIES;
+	}
 }
