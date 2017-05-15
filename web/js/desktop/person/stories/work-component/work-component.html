@@ -13,8 +13,8 @@
 			</div>
 			<div class="deviser-works-list">
 				<div class="deviser-works-item" ng-repeat="deviser in storyWorkComponentCtrl.devisers" ng-click="storyWorkComponentCtrl.getDeviserWorks(deviser.id)">
-					<img ng-src="{{deviser.url_avatar}}" ng-attr-alt="deviser.personal_info.brand_name" ng-attr-title="deviser.personal_info.brand_name">
-					<span ng-bind="deviser.personal_info.brand_name"></span>
+					<img ng-src="{{deviser.url_avatar}}" ng-attr-alt="deviser.name" ng-attr-title="deviser.name">
+					<span ng-bind="deviser.name"></span>
 				</div>
 			</div>
 		</div>

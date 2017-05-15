@@ -680,6 +680,8 @@ class Person extends CActiveRecord implements IdentityInterface
 					'text_biography',
 					'categories',
 					'collections',
+					'city' => 'city',
+					'country' => 'country',
 					'personal_info',
 					'media',
 					'press',
@@ -703,7 +705,8 @@ class Person extends CActiveRecord implements IdentityInterface
 				];
 
 				static::$retrieveExtraFields = [
-					'videos'
+					'videos',
+//					'personal_info',
 				];
 
 				break;
@@ -783,6 +786,14 @@ class Person extends CActiveRecord implements IdentityInterface
 				static::$serializeFields = [];
 				break;
 		}
+	}
+
+	public function getCity() {
+		return $this->personalInfoMapping->city;
+	}
+
+	public function getCountry() {
+		return $this->personalInfoMapping->country;
 	}
 
 	/**
