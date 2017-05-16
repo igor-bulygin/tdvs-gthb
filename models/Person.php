@@ -19,7 +19,7 @@ use yii\web\IdentityInterface;
  * @property mixed $type
  * @property array $categories
  * @property array $collections
- * @property PersonPreferences $preferencesMapping
+// * @property PersonPreferences $preferencesMapping
  * @property PersonPersonalInfo $personalInfoMapping
  * @property PersonMedia $mediaMapping
  * @property PersonSettings $settingsMapping
@@ -99,7 +99,7 @@ class Person extends CActiveRecord implements IdentityInterface
 			'media',
 			'settings',
 			'credentials',
-			'preferences',
+//			'preferences',
 			'press',
 			'videos',
 			'faq',
@@ -143,10 +143,10 @@ class Person extends CActiveRecord implements IdentityInterface
 
 	}
 
-	public function embedPreferencesMapping()
-	{
-		return $this->mapEmbedded('preferences', PersonPreferences::className(), ['unsetSource' => false]);
-	}
+//	public function embedPreferencesMapping()
+//	{
+//		return $this->mapEmbedded('preferences', PersonPreferences::className(), ['unsetSource' => false]);
+//	}
 
 	public function embedPersonalInfoMapping()
 	{
@@ -343,7 +343,7 @@ class Person extends CActiveRecord implements IdentityInterface
 
 	public function setParentOnEmbbedMappings()
 	{
-		$this->preferencesMapping->setParentObject($this);
+//		$this->preferencesMapping->setParentObject($this);
 		$this->personalInfoMapping->setParentObject($this);
 		$this->mediaMapping->setParentObject($this);
 		$this->settingsMapping->setParentObject($this);
@@ -441,7 +441,8 @@ class Person extends CActiveRecord implements IdentityInterface
 
 	public function setLanguage($lang)
 	{
-		$this->preferencesMapping->lang = $lang;
+//		$this->preferencesMapping->lang = $lang;
+		$this->settingsMapping->lang = $lang;
 	}
 
 	public function rules()
@@ -466,7 +467,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'credentials',
 					'text_short_description',
 					'text_biography',
-					'preferences',
+//					'preferences',
 					'curriculum',
 					'media',
 					'settings',
@@ -489,7 +490,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'credentials',
 					'text_short_description',
 					'text_biography',
-					'preferences',
+//					'preferences',
 					'media',
 					'settings',
 					'slug',
@@ -529,11 +530,11 @@ class Person extends CActiveRecord implements IdentityInterface
 				'app\validators\TranslatableValidator',
 				'on' => [self::SCENARIO_DEVISER_UPDATE_PROFILE, self::SCENARIO_INFLUENCER_UPDATE_PROFILE, self::SCENARIO_CLIENT_UPDATE],
 			],
-			[
-				'preferencesMapping',
-				'yii2tech\embedded\Validator',
-				'on' => [self::SCENARIO_DEVISER_CREATE_DRAFT, self::SCENARIO_INFLUENCER_CREATE_DRAFT, self::SCENARIO_CLIENT_UPDATE],
-			],
+//			[
+//				'preferencesMapping',
+//				'yii2tech\embedded\Validator',
+//				'on' => [self::SCENARIO_DEVISER_CREATE_DRAFT, self::SCENARIO_INFLUENCER_CREATE_DRAFT, self::SCENARIO_CLIENT_UPDATE],
+//			],
 			[
 				'personalInfoMapping',
 				'app\validators\EmbedDocValidator',
@@ -746,7 +747,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'press_edit_link' => 'pressEditLink',
 					'videos_edit_link' => 'videosEditLink',
 					'faq_edit_link' => 'faqEditLink',
-					'preferences',
+//					'preferences',
 					'settings',
 				];
 
@@ -772,7 +773,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'faq',
 					'curriculum',
 					'account_state',
-					'preferences',
+//					'preferences',
 					'url_images' => 'urlImagesLocation',
 				];
 
@@ -1142,10 +1143,11 @@ class Person extends CActiveRecord implements IdentityInterface
 	 */
 	public function setScenario($value)
 	{
+		//TODO: delete this method? This behaviour should be controlled by EmbedModel
 		parent::setScenario($value);
 		$this->personalInfoMapping->setScenario($value);
 		$this->mediaMapping->setScenario($value);
-		$this->preferencesMapping->setScenario($value);
+//		$this->preferencesMapping->setScenario($value);
 	}
 
 	/**
@@ -1166,9 +1168,9 @@ class Person extends CActiveRecord implements IdentityInterface
 		if (array_key_exists('media', $data)) {
 			$this->mediaMapping->load($data, 'media');
 		}
-		if (array_key_exists('preferences', $data)) {
-			$this->preferencesMapping->load($data, 'preferences');
-		}
+//		if (array_key_exists('preferences', $data)) {
+//			$this->preferencesMapping->load($data, 'preferences');
+//		}
 		if (array_key_exists('settings', $data)) {
 			$this->settingsMapping->load($data, 'settings');
 		}

@@ -2,6 +2,8 @@
 namespace app\models;
 
 /**
+ * @property string currency
+ * @property string lang
  * @property PersonBankInfo $bankInfoMapping
  * @property PersonStripeInfo $stripeInfoMapping
  *

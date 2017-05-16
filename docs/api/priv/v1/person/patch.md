@@ -24,10 +24,9 @@ Example about how to call to Web Service to update Person profile
  * `brand_name`: brand name 
  * `city`: city name
  * `country`: code of country ("AN")
-* `preferences`: 
+* `settings`:
  * `lang`: code of default language ("en-US")
  * `currency`: code of default currency ("EUR")
-* `settings`:
  * `bank_info`:
   * `location`: code of country ("US")
   * `bank_name`: name of the bank",
