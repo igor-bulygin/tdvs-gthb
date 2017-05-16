@@ -381,13 +381,16 @@ class Box extends CActiveRecord
 		$return = [];
 		$products = $this->getProducts();
 		$sizes = [
+			// one product
 			1 => [
 				[295, 372],
 			],
+			// two products
 			2 => [
 				[295, 115],
 				[295, 257],
 			],
+			// three (or more) products
 			3 => [
 				[146, 116],
 				[145, 116],

@@ -350,6 +350,7 @@ $config = [
 				'GET api3/priv/v1/person/<personId:[^/.]*?>' => 'api3/priv/v1/person/view',
 				'PATCH api3/priv/v1/person/<personId:[^/.]*?>' => 'api3/priv/v1/person/update',
 				'PUT api3/priv/v1/person/<personId:[^/.]*?>' => 'api3/priv/v1/person/update',
+				'PUT api3/priv/v1/person/<personId:[^/.]*?>/update-password' => 'api3/priv/v1/person/update-password',
 
 				// Product - public
 				'GET api3/pub/v1/products/<id:[^/.]*?>' => 'api3/pub/v1/product/view',
