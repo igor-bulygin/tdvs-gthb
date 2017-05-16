@@ -75,8 +75,11 @@ class PersonController extends AppPrivateController
 		$oldPassword = Yii::$app->request->post('oldpassword');
 		$newPassword = Yii::$app->request->post('newpassword');
 
-		if (!empty($person->credentials['password']) && !$person->validatePassword($oldPassword)) {
+		if (empty($oldPassword) || !empty($person->credentials['password']) && !$person->validatePassword($oldPassword)) {
 			throw new BadRequestHttpException("Invalid old password");
+		}
+		if (empty($newPassword)) {
+			throw new BadRequestHttpException("Invalid new password");
 		}
 		$person->setPassword($newPassword);
 		$person->save();
