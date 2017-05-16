@@ -9,6 +9,11 @@ use app\helpers\Utils;
  * @property string $brand_name
  * @property string $country
  * @property string $city
+ * @property string $street
+ * @property string $number
+ * @property string $phone_number
+ * @property string $zip
+ *
  * @property \MongoDate $bday
  * @property string $surnames
  *
@@ -25,12 +30,14 @@ class PersonPersonalInfo extends EmbedModel
 			'brand_name',
 			'country',
 			'city',
-			'bday',
-			'surnames',
 			'street',
 			'number',
 			'phone_number',
 			'zip',
+
+			// TODO deprecate
+			'bday',
+			'surnames',
 		];
 	}
 
