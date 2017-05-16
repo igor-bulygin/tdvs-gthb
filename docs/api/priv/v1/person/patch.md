@@ -8,7 +8,9 @@ Example about how to call to Web Service to update Person profile
 
 **Response codes**: 
 * `200`: Success
+* `400`: Bad request
 * `401`: Unauthorized
+* `403`: Forbidden
 * `404`: Not found
 
 **Request parameters**:

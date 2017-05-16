@@ -60,6 +60,32 @@ class PersonController extends AppPrivateController
 
 	}
 
+	public function actionUpdatePassword($personId)
+	{
+		/** @var Person $person */
+		$person = Person::findOne(["short_id" => $personId]);
+		if (empty($person)) {
+			throw new NotFoundHttpException('Person not found');
+		}
+
+		if (!$person->isPersonEditable()) {
+			throw new UnauthorizedHttpException();
+		}
+
+		$oldPassword = Yii::$app->request->post('oldpassword');
+		$newPassword = Yii::$app->request->post('newpassword');
+
+		if (!empty($person->credentials['password']) && !$person->validatePassword($oldPassword)) {
+			throw new BadRequestHttpException("Invalid old password");
+		}
+		$person->setPassword($newPassword);
+		$person->save();
+
+		Yii::$app->response->setStatusCode(204); // No content
+
+		return null;
+	}
+
 	/**
 	 * Get validation scenario from request param
 	 *
