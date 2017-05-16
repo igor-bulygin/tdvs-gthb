@@ -5,7 +5,7 @@
 		localStorageService, tagDataService, productEvents, $rootScope, $window, $timeout) {
 		var vm = this;
 		vm.save = save;
-
+		vm.saving=false;
 		function init() {
 			vm.product = {};
 			vm.product.slug = {};
@@ -116,6 +116,7 @@
 
 		function save(state) {
 			vm.errors = false;
+			vm.saving=true;
 			function onUpdateProductSuccess(data) {
 				vm.disable_save_buttons = false;
 				if(state === 'product_state_draft') {
@@ -189,8 +190,10 @@
 			} else {
 				vm.disable_save_buttons = false;
 				vm.errors = true;
+				vm.saving=false;
 				$rootScope.$broadcast(productEvents.requiredErrors, {required: required});
 			}
+
 		}
 
 	}

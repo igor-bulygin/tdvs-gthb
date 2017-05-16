@@ -2203,7 +2203,8 @@ input[type="radio"] .styled:checked + label::after {
       color: #6b6b6b;
       font-family: "Playfair Display", Georgia, serif;
       letter-spacing: 0.3px;
-      height: 82px;
+      height: 63px;
+      margin-bottom: 12px;
       display: block;
       overflow: hidden; }
     .storie-box-wrapper .storie-box-text:before {
@@ -4449,6 +4450,10 @@ input[type="radio"] .styled:checked + label::after {
   margin-bottom: 30px;
   overflow: hidden;
   max-width: 295px; }
+  .boxes-wrapper .small-photo-box {
+    width: 49%; }
+  .boxes-wrapper.home {
+    max-height: 350px; }
 
 .more-boxes-wrapper {
   padding: 0 0 100px; }
