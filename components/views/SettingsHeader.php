@@ -14,7 +14,6 @@ $person = $this->params['person'];
 $activeOption = array_key_exists('settings_menu_active_option', $this->params) ? $this->params['settings_menu_active_option'] : '';
 
 ?>
-
 <div ng-controller="settingsHeaderCtrl as settingsHeaderCtrl">
 	<div class="upper-setting-header">
 		<div class="container">
