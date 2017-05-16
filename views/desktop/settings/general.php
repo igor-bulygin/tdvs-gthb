@@ -71,11 +71,18 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 					</div>
 					<div class="form-group">
 						<label for="currency" class="col-md-2">Currency</label>
-						<ol class="nya-bs-select" ng-model="generalSettingsCtrl.person.settings.currency">
-							<li nya-bs-option="currency in generalSettingsCtrl.currencies" data-value="currency.value">
-								<a href="#"><span ng-bind="currency.symbol"></span>&nbsp;<span ng-bind="currency.text"></span></a>
-							</li>
-						</ol>
+						<div class="col-md-4">
+							<ol class="col-md-12 nya-bs-select" ng-model="generalSettingsCtrl.person.settings.currency">
+								<li nya-bs-option="currency in generalSettingsCtrl.currencies" data-value="currency.value">
+									<a href="#"><span ng-bind="currency.symbol"></span>&nbsp;<span ng-bind="currency.text"></span></a>
+								</li>
+							</ol>
+						</div>
+						<div class="col-md-6 text-right">
+						<span>{{generalSettingsCtrl.counter}}</span>
+							<button class="btn btn-default btn-green" ng-click="generalSettingsCtrl.counter=generalSettingsCtrl.counter+1">expresion</button>
+							<button class="btn btn-default btn-green" ng-click="generalSettingsCtrl.count()">function</button>
+						</div>
 					</div>
 				</form>
 			</div>

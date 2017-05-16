@@ -1,20 +1,23 @@
 (function () {
 	"use strict";
 
-	function controller(personDataService, UtilService) {
+	function controller(personDataService) {
 		var vm = this;
 		//TODO: Get currencies via API
 		vm.currencies = [{
 			"symbol": "€",
 			"text": "EURO",
 			"value": "EUR" 
-		}]
-		vm.person = angular.copy(person);
-
+		}];
+		vm.person=angular.copy(person);
+		vm.counter=0;
 		init();
 
 		function init() {
-			
+		}
+
+		function count() {
+			vm.counter=vm.counter+1;
 		}
 	}
 
