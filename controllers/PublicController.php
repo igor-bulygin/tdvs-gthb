@@ -75,7 +75,7 @@ class PublicController extends CController
 		}
 
 		// Boxes
-		$boxes = Box::getRandomBoxes(8, null, true);
+		$boxes = Box::getRandomBoxes(9, null, true);
 
 		// Stories
 		$stories = Story::getRandomStories(3);
