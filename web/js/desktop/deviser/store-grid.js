@@ -1,6 +1,6 @@
 Macy.init({
     container: '#macy-container',
-    trueOrder: false,
+    trueOrder: true,
     waitForImages: false,
     margin: 2,
     columns: 5,
