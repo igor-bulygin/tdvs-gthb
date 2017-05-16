@@ -198,8 +198,8 @@ $this->title = 'Todevise / Home';
 				<div class="row no-mar">
 					<?php foreach ($boxes as $box) {
 						$products = $box->getProductsPreview(); ?>
-						<div class="<?=$stories ? 'col-md-6' : 'col-md-4'?> col-xs-6 pad-grid">
-							<div class="boxes-wrapper">
+						<div class="<?=$stories ? 'col-md-4' : 'col-md-4'?> col-xs-6 pad-grid">
+							<div class="boxes-wrapper home">
 								<?php if (empty($products)) { ?>
 									<div class="empty-box">
 										<span class="empty-title">Empty box</span>
@@ -211,7 +211,7 @@ $this->title = 'Todevise / Home';
 											break;
 										} ?>
 										<a href="<?= $box->getViewLink()?>">
-											<img class="grid-image" src="<?=$product['box_photo']?>">
+											<img class="grid-image <?=count($products) >= 3 && $count < 3 ? 'small-photo-box' : ''?>" src="<?=$product['box_photo']?>">
 										</a>
 										<?php
 										$count ++;
