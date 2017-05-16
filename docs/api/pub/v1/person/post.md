@@ -14,7 +14,7 @@ Example about how to call to Web Service to create a new Person account
   
 **Request parameters for create a Deviser**:
 * `type` : array with only one element, with value 2 (required)
-* `invitation_id`: uuid of invitation (required)
+* `uuid`: uuid of invitation (required)
 * `email`: email of deviser (required)
 * `first_name`: representative first name (required)
 * `last_name`: representative last name (required)
