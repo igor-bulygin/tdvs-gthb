@@ -1,11 +1,16 @@
 <?php
 namespace app\models;
 
-use Yii;
 use app\helpers\CActiveRecord;
+use Yii;
 use yii\base\NotSupportedException;
 use yii\web\IdentityInterface;
 
+/**
+ * Class Become
+ * @deprecated unused collection
+ * @package app\models
+ */
 class Become extends CActiveRecord implements IdentityInterface {
 
 	const ADMIN = 0;
