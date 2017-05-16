@@ -79,9 +79,7 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 							</ol>
 						</div>
 						<div class="col-md-6 text-right">
-						<span>{{generalSettingsCtrl.counter}}</span>
-							<button class="btn btn-default btn-green" ng-click="generalSettingsCtrl.counter=generalSettingsCtrl.counter+1">expresion</button>
-							<button class="btn btn-default btn-green" ng-click="generalSettingsCtrl.count()">function</button>
+							<button class="btn btn-default btn-green" ng-click="generalSettingsCtrl.update()">function</button>
 						</div>
 					</div>
 				</form>

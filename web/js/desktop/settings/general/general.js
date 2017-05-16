@@ -9,15 +9,26 @@
 			"text": "EURO",
 			"value": "EUR" 
 		}];
-		vm.person=angular.copy(person);
-		vm.counter=0;
+
+		vm.person = {id:person.id, personal_info:angular.copy(person.personal_info)};
+		vm.update=update;
 		init();
 
 		function init() {
 		}
 
-		function count() {
-			vm.counter=vm.counter+1;
+		function update() {
+			vm.saving=true;
+			function onUpdateGeneralSettingsSuccess(data) {
+				vm.saving=false;
+				//$window.location.href = currentHost() + data.view_link;
+			}
+
+			function onUpdateGeneralSettingsError(data) {
+				vm.saving=false;
+			 }
+
+			personDataService.updateProfile(vm.person,{personId: vm.person.id}, onUpdateGeneralSettingsSuccess, onUpdateGeneralSettingsError);
 		}
 	}
 
