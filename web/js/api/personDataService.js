@@ -6,14 +6,14 @@
 		var Person = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'person/:personId');
 		var Login = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'auth/login');
 		var Logout = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'auth/logout');
-
+		var Currency = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'currency');
+		
 		//priv
 		var Profile = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'person/:personId', {}, {
 			'update': {
 				method: 'PATCH'
 			}
 		});
-		var Currency = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'currency');
 
 		//methods
 		this.getPeople = getPeople;
