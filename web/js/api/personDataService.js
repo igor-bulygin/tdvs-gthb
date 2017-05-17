@@ -13,6 +13,7 @@
 				method: 'PATCH'
 			}
 		});
+		var Currency = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'currency');
 
 		//methods
 		this.getPeople = getPeople;
@@ -24,6 +25,7 @@
 		this.getProfile = getProfile;
 		this.getProfilePublic = getProfilePublic;
 		this.updateProfile = updateProfile;
+		this.getCurrencies = getCurrencies;
 
 		function getPeople(params, onSuccess, onError) {
 			apiMethods.get(Person, params, onSuccess, onError);
@@ -62,6 +64,10 @@
 
 		function updateProfile(data, params, onSuccess, onError) {
 			apiMethods.update(Profile, data, params, onSuccess, onError);
+		}
+
+		function getCurrencies(onSuccess, onError) {
+			apiMethods.query(Currency,{}, onSuccess, onError);
 		}
 	}
 
