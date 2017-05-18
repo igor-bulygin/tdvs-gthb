@@ -6,7 +6,6 @@
 		var Person = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'person/:personId');
 		var Login = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'auth/login');
 		var Logout = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'auth/logout');
-		var Currency = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'currency');
 		
 		//priv
 		var Profile = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'person/:personId', {}, {
@@ -14,6 +13,10 @@
 				method: 'PATCH'
 			}
 		});
+		var Password = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'person/:personId/update-password',{},{
+			'update': {
+				method: 'PUT'
+			}});
 
 		//methods
 		this.getPeople = getPeople;
@@ -25,7 +28,7 @@
 		this.getProfile = getProfile;
 		this.getProfilePublic = getProfilePublic;
 		this.updateProfile = updateProfile;
-		this.getCurrencies = getCurrencies;
+		this.updatePassword = updatePassword;
 
 		function getPeople(params, onSuccess, onError) {
 			apiMethods.get(Person, params, onSuccess, onError);
@@ -66,8 +69,8 @@
 			apiMethods.update(Profile, data, params, onSuccess, onError);
 		}
 
-		function getCurrencies(onSuccess, onError) {
-			apiMethods.query(Currency,{}, onSuccess, onError);
+		function updatePassword(data, params, onSuccess, onError) {
+			apiMethods.update(Password, data, params, onSuccess, onError);
 		}
 	}
 
