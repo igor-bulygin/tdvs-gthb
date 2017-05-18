@@ -1210,6 +1210,22 @@ input[type="radio"] .styled:checked + label::after {
   width: 100%;
   top: 120px; }
 
+.panel .panel-heading {
+  background-color: transparent !important; }
+.panel h4 {
+  text-transform: uppercase;
+  font-family: "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  margin: 7px 0 0 10px; }
+
+.bank-settings-wrapper .panel-group .panel-heading + .panel-collapse > .panel-body, .bank-settings-wrapper .panel-group .panel-heading + .panel-collapse > .list-group {
+  margin: 0 25px;
+  padding: 20px 0; }
+.bank-settings-wrapper label {
+  margin-top: 7px;
+  color: #6b6b6b;
+  font-family: "Univers Condensed Light", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+
 .showcase figcaption img, .banner-deviser-content .deviser-profile .avatar img, .product-description .product-description-content .work-description-wrapper .comment-wrapper .avatar img, .product-description .product-description-content .work-description-wrapper .comment-user .avatar img, .work-description-wrapper .comment-wrapper .avatar img, .work-description-wrapper .comment-user .avatar img {
   border: 1px solid #9a9a9a;
   border-radius: 180px 180px 180px 180px !important;
