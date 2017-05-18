@@ -7,7 +7,6 @@
 		vm.parseText = parseText;
 		vm.isLanguageOk = isLanguageOk;
 		vm.completedLanguages = [];
-		vm.observations = {};
 
 		function parseText(text) {
 			vm.completedLanguages = [];
@@ -28,6 +27,7 @@
 		controller: controller,
 		controllerAs: "shippingObservationsCtrl",
 		bindings: {
+			zone: '<',
 			languages: '<'
 		}
 	}

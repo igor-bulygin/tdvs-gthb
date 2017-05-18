@@ -1,0 +1,66 @@
+<div class="row">
+	<div class="col-md-4">
+		<p>Please create the weight ranges for your products. The prices will be set depending on the weights. You can edit, delete and create weight ranges at any time.</p>
+		<form name="shippingWeightsPricesCtrl.metricsForm" class="form-horizontal">
+			<div class="form-group">
+				<label for="measure" class="col-md-2">Measure</label>
+				<div class="col-md-6">
+				<ol class="nya-bs-select form-control" ng-model="shippingWeightsPricesCtrl.weight_measure">
+					<li nya-bs-option="weight in shippingWeightsPricesCtrl.weights" data-value="weight">
+						<a href="#">
+							<span ng-bind="weight"></span>
+						</a>
+					</li>
+				</ol>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="currency" class="col-md-2">Currency</label>
+				<div class="col-md-6">
+					<ol class="nya-bs-select form-control" ng-model="shippingWeightsPricesCtrl.currency">
+						<li nya-bs-option="currency in shippingWeightsPricesCtrl.currencies" data-value="currency.value">
+							<a href="#">
+								<span ng-bind="currency.text"></span>
+							</a>
+						</li>
+					</ol>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="col-md-8 text-center">
+		<div ng-repeat="price in shippingWeightsPricesCtrl.zone.prices" class="row">
+			<div class="col-md-1">
+				<p>Range {{$index+1}}</p>
+			</div>
+			<div class="col-md-1">
+				<p>From</p>
+			</div>
+			<div class="col-md-2">
+				<input type="number" ng-model="price.min_weight" class="form-control">
+			</div>
+			<div class="col-md-1">
+				<p>to</p>
+			</div>
+			<div class="col-md-2">
+				<input type="number" ng-model="price.max_weight" class="form-control">
+				<span ng-bind="shippingWeightsPricesCtrl.zone.weight_measure"></span>
+			</div>
+			<div class="col-md-1">
+				<p>Standard shipping</p>
+			</div>
+			<div class="col-md-2">
+				<input type="number" ng-model="price.price" class="form-control">
+			</div>
+			<div ng-if="shippingWeightsPricesCtrl.zone.shipping_express_time" ng-cloak>
+				<div class="col-md-1">
+					<p>Express shipping</p>
+				</div>
+				<div class="col-md-2">
+					<input type="number" ng-model="price.price_express" class="form-control">
+				</div>
+			</div>
+		</div>
+		<div><a href="#" ng-click="shippingWeightsPricesCtrl.addPrice()">+ Add Range</a></div>
+	</div>
+</div>

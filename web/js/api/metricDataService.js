@@ -10,12 +10,12 @@
 		this.getMetric = getMetric;
 		this.getCurrencies = getCurrencies;
 
-		function getMetric(onSuccess, onError) {
-			apiMethods.get(Metric, null, onSuccess, onError);
+		function getMetric(params, onSuccess, onError) {
+			apiMethods.get(Metric, params, onSuccess, onError);
 		}
 
 		function getCurrencies(params, onSuccess, onError) {
-			apiMethods.query(Currency,params, onSuccess, onError);
+			apiMethods.query(Currency, params, onSuccess, onError);
 		}
 
 	}

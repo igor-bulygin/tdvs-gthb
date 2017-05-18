@@ -11,8 +11,7 @@ class ShippingAsset extends AssetBundle {
 	public $js = [
 		'js/desktop/settings/shipping/shipping.js',
 		'js/desktop/settings/shipping/zones/zones.js',
-		'js/desktop/settings/shipping/weights/weights.js',
-		'js/desktop/settings/shipping/prices/prices.js',
+		'js/desktop/settings/shipping/weights-prices/weights-prices.js',
 		'js/desktop/settings/shipping/observations/observations.js',
 	];
 	public $depends = [

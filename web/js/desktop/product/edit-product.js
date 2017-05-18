@@ -64,7 +64,7 @@
 				vm.metric = angular.copy(data);
 			}
 
-			metricDataService.getMetric(onGetMetricSuccess, UtilService.onError);
+			metricDataService.getMetric(null, onGetMetricSuccess, UtilService.onError);
 		}
 
 		function getSizechart() {
