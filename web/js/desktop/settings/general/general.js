@@ -1,9 +1,10 @@
 (function () {
 	"use strict";
 
-	function controller(personDataService,UtilService,locationDataService) {
+	function controller(personDataService,UtilService,locationDataService,$uibModal, metricDataService,$scope) {
 		var vm = this;
 		vm.person = {id:person.id, personal_info:angular.copy(person.personal_info), settings:angular.copy(person.settings)};
+		vm.notCurrencySelected=false;
 		vm.city = vm.person.personal_info.city + ', ' + vm.person.personal_info.country;
 		init();
 		vm.update=update;
@@ -13,6 +14,11 @@
 		vm.searchPlace=searchPlace;
 		vm.selectCity=selectCity;
 		vm.showCities = false;
+		vm.updatePassword=updatePassword;
+		vm.distinctPasswords=false;
+		vm.showPasswordErrors=false;
+		vm.openModal=openModal;
+		vm.passwordModal=null;
 		
 		function init() {
 			getCurrencies();
@@ -22,7 +28,7 @@
 			function onGetCurrenciesSuccess(data) {
 				vm.currencies = data;
 			}
-			personDataService.getCurrencies(onGetCurrenciesSuccess, UtilService.onError);
+			metricDataService.getCurrencies({},onGetCurrenciesSuccess, UtilService.onError);
 		}
 
 		function searchPlace(place) {
@@ -56,20 +62,17 @@
 		}
 
 		function update() {
-			if (!vm.dataForm.$valid) {
-				for (var i = array.length - 1; i > -1; i--) {
-					if (array[i].name === "zipCode")
-						array.splice(i, 1);
-				}
+			vm.saved=false;
+			if (angular.isUndefined(vm.person.settings.currency) || vm.person.settings.currency === null ) {
+				vm.notCurrencySelected=true;
 			}
-			else {
+			if (vm.dataForm.$valid) {
 				vm.saving=true;
 				function onUpdateGeneralSettingsSuccess(data) {
 					vm.saving=false;
 					vm.saved=true;
 					vm.dataForm.$dirty=false;
 				}
-
 				function onUpdateGeneralSettingsError(data) {
 					vm.saving=false;
 				}
@@ -77,9 +80,46 @@
 			}
 		}
 
-		function existRequiredError(fieldName) {
+		function openModal() {
+			vm.passwordModal=$uibModal.open({
+				templateUrl: 'passwordModal',
+				scope: $scope,
+				size: 'sm'
+			});
+		}
+
+		function updatePassword() {
+			vm.errorMsg='';
+			vm.distinctPasswords=false;
+			vm.showPasswordErrors=false;
+			if (!vm.passwordForm.$valid) {
+				vm.showPasswordErrors=true;
+				return;
+			}
+			if (vm.newPassword != vm.newPasswordBis) {
+				vm.distinctPasswords=true;
+				return;
+			}
+			vm.savingPassword=true;
+			function onUpdatePasswordSuccess(data) {
+				vm.savingPassword=false;
+				vm.saved=true;
+				vm.dataForm.$dirty=false;
+				vm.passwordModal.close();
+			}
+			function onUpdatePasswordError(err) {
+				vm.savingPassword=false;
+				vm.errorMsg=err.data.message;
+			}
+			personDataService.updatePassword({oldpassword:vm.currentPassword, newpassword:vm.newPassword},{personId: vm.person.id}, onUpdatePasswordSuccess, onUpdatePasswordError);
+		}
+
+		function existRequiredError(fieldName, form) {
 			var exists=false;
-			angular.forEach(vm.dataForm.$error.required, function(value){
+			if (angular.isUndefined(form)) {
+				return exists;
+			}			
+			angular.forEach(form.$error.required, function(value){
 				if (!angular.isUndefined(value.$name) && value.$name==fieldName) {
 					exists=true;
 				}
