@@ -25,12 +25,14 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 				<form name="generalSettingsCtrl.dataForm" class="form-horizontal" >
 					<div ng-hide="generalSettingsCtrl.saving">
 						<div class="form-group">
-							<label for="brand_name" class="col-md-2">Brand / Artist name</label>
-							<div class="col-md-4 text-right">
-								<input type="text" name="brand_name" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.brand_name" ng-class="{'error-input': generalSettingsCtrl.dataForm.brand_name.$invalid}" required><!--only devisers -->
-								<span class="purple-text" ng-show="generalSettingsCtrl.existRequiredError('brand_name',generalSettingsCtrl.dataForm)">Please, fill out this field</span>
+							<div ng-if="generalSettingsCtrl.isDeviser">
+								<label for="brand_name" class="col-md-2">Brand / Artist name</label>
+								<div class="col-md-4 text-right">
+									<input type="text" name="brand_name" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.brand_name" ng-class="{'error-input': generalSettingsCtrl.dataForm.brand_name.$invalid}" required><!--only devisers -->
+									<span class="purple-text" ng-show="generalSettingsCtrl.existRequiredError('brand_name',generalSettingsCtrl.dataForm)">Please, fill out this field</span>
+								</div>
 							</div>
-							<label for="city" class="col-md-2">City</label>
+							<label for="city" class="col-md-2" ng-class="{'col-md-offset-6': !generalSettingsCtrl.isDeviser}">City</label>
 							<div class="col-md-4 text-right">
 								<input type="text" name="city" class="form-control" ng-model="generalSettingsCtrl.city" ng-class="{'error-input': generalSettingsCtrl.dataForm.city.$invalid}" ng-model-options='{ debounce: 100 }' ng-change="generalSettingsCtrl.searchPlace(generalSettingsCtrl.person.personal_info.city)" required>
 								<div ng-if="generalSettingsCtrl.showCities" ng-cloak>

@@ -4,6 +4,10 @@
 	function controller(personDataService,UtilService,locationDataService,$uibModal, metricDataService,$scope) {
 		var vm = this;
 		vm.person = {id:person.id, personal_info:angular.copy(person.personal_info), settings:angular.copy(person.settings)};
+		vm.isDeviser=false;
+		if (person.type[0]==2) {
+			vm.isDeviser=true;
+		}
 		vm.notCurrencySelected=false;
 		vm.city = vm.person.personal_info.city + ', ' + vm.person.personal_info.country;
 		init();
