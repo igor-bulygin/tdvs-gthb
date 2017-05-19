@@ -102,7 +102,7 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 								<button class="btn btn-default btn-green" ng-click="generalSettingsCtrl.update()" ng-disabled="generalSettingsCtrl.saving">Save</button>
 							</div>
 						</div>
-						<div class="col-xs-12 text-center red-text" ng-show="generalSettingsCtrl.saved&&!generalSettingsCtrl.dataForm.$dirty">
+						<div class="col-xs-12 text-center text-green" ng-show="generalSettingsCtrl.saved&&!generalSettingsCtrl.dataForm.$dirty">
 							<span>Changes updated</span>
 						</div>						
 					</div>
