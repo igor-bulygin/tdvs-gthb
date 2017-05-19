@@ -38,5 +38,28 @@ class CountryController extends AppPublicController {
 	    ];
     }
 
+    public function actionWorldwide() {
+
+    	$continents = [];
+    	foreach (Country::CONTINENTS as $code => $name) {
+    		if ($code != Country::WORLD_WIDE) {
+				$continent = new \stdClass();
+				$continent->code = $code;
+				$continent->name = $name;
+				$continent->path = Country::WORLD_WIDE.'/'.$code;
+				$continent->items = Country::findSerialized(['continent' => $code]);
+				$continents[] = $continent;
+			}
+		}
+
+		$worldwide = new \stdClass();
+		$worldwide->code = Country::WORLD_WIDE;
+		$worldwide->name = Country::CONTINENTS[Country::WORLD_WIDE];
+		$worldwide->path = Country::WORLD_WIDE;
+		$worldwide->items = $continents;
+
+		return $worldwide;
+	}
+
 }
 
