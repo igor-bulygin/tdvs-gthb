@@ -9,6 +9,7 @@ use app\models\Become;
 use app\models\Box;
 use app\models\Category;
 use app\models\ContactForm;
+use app\models\Country;
 use app\models\Faq;
 use app\models\Invitation;
 use app\models\Person;
@@ -788,5 +789,13 @@ class PublicController extends CController
 		return $this->render("cart-old", [
 				'test' => 'this is a test text'
 		]);
+	}
+
+	public function actionCreateCountryPaths() {
+		$countries = Country::findSerialized(); /* @var $countries Country[] */
+		foreach ($countries as $country) {
+			$country->path = Country::WORLD_WIDE.'/'.$country->continent.'/'.$country->country_code;
+			$country->save(true, ['path']);
+		}
 	}
 }

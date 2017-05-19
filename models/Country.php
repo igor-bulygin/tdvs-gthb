@@ -11,6 +11,7 @@ use yii\mongodb\ActiveQuery;
  * @property string country_name
  * @property string currency_code
  * @property string continent
+ * @property string path
  */
 class Country extends CActiveRecord
 {
@@ -61,7 +62,8 @@ class Country extends CActiveRecord
 			'country_code',
 			'country_name',
 			'currency_code',
-			'continent'
+			'continent',
+			'path',
 		];
 	}
 
@@ -107,6 +109,26 @@ class Country extends CActiveRecord
 		}
 	}
 
+	public function rules()
+	{
+		return [
+			[
+				[
+					'country_code',
+					'country_name',
+					'currency_code',
+					'continent',
+					'path',
+				],
+				'safe',
+			],
+			[
+				'country_name',
+				'app\validators\TranslatableValidator',
+			],
+		];
+	}
+
 	/**
 	 * Get a collection of entities serialized, according to serialization configuration
 	 *
@@ -125,6 +147,11 @@ class Country extends CActiveRecord
 		if ((array_key_exists("name", $criteria)) && (!empty($criteria["name"]))) {
 //			// search the word in all available languages
 			$query->andFilterWhere(Utils::getFilterForTranslatableField("country_name", $criteria["name"]));
+		}
+
+		// if continent is specified
+		if ((array_key_exists("continent", $criteria)) && (!empty($criteria["continent"]))) {
+			$query->andWhere(["continent" => $criteria['continent']]);
 		}
 
 		// if person_type is specified
