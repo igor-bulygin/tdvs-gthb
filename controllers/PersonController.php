@@ -522,11 +522,7 @@ class PersonController extends CController
 		set_time_limit(-1);
 
 		/* @var Person[] $persons */
-		$persons = Person::find()->where(
-			[
-				'type' => [Person::CLIENT],
-			]
-		)->all();
+		$persons = Person::find()->all();
 		foreach ($persons as $person) {
 			$person->setPassword('todevise1234');
 
