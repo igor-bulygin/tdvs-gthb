@@ -16,5 +16,7 @@ class ShippingAsset extends AssetBundle {
 	];
 	public $depends = [
 		'app\assets\desktop\settings\IndexAsset',
+		'app\assets\libs\ngjstreeAsset',
+		'app\assets\libs\jstreeActionsAsset',
 	];
 }

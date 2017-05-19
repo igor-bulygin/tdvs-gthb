@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(locationDataService, UtilService) {
+	function controller(locationDataService, UtilService, treeService) {
 		var vm = this;
 		vm.deleteShippingExpressTime = deleteShippingExpressTime;
 
@@ -13,10 +13,10 @@
 
 		function getCountries() {
 			function onGetCountriesSuccess(data) {
-				vm.countries = angular.copy(data.items);
+				vm.countries = parseCountryToNode(data);
 			}
 
-			locationDataService.getCountry(null, onGetCountriesSuccess, UtilService.onError);
+			locationDataService.getWorldWide(null, onGetCountriesSuccess, UtilService.onError);
 		}
 
 		function deleteShippingExpressTime() {
@@ -26,6 +26,18 @@
 					delete element.price_express;
 				return element;
 			});
+		}
+
+		function parseCountryToNode(data) {
+			var object = {
+				id: data.code || data.country_code,
+				text: data.name || data.country_name,
+				path: data.path
+			}
+			if(data.items && angular.isArray(data.items) && data.items.length > 0) {
+				object['children'] = data.items.map((element) => {return parseCountryToNode(element)})
+			}
+			return object;
 		}
 	}
 
