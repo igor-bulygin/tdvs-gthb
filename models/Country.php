@@ -241,4 +241,25 @@ class Country extends CActiveRecord
 		return $items;
 	}
 
+	/**
+	 * Returns TRUE if the continentCode is valid.
+	 * If countryCode is present, it checks that continent and country are both valid
+	 *
+	 * @param string $continentCode
+	 * @param string $countryCode
+	 *
+	 * @return bool
+	 */
+	public static function validateContinentCode($continentCode, $countryCode = null) {
+		$continents = static::CONTINENTS;
+		$valid = isset($continents[$continentCode]);
+		if ($countryCode) {
+			$country = static::findOne(['country_code' => $countryCode]);
+			if (empty($country) || $country->continent != $continentCode) {
+				$valid = false;
+			}
+		}
+
+		return $valid;
+	}
 }
