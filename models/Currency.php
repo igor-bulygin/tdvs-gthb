@@ -171,4 +171,21 @@ class Currency {
 	{
 		return static::CURRENCIES;
 	}
+
+	/**
+	 * Returns all available currency codes
+	 *
+	 * @return array
+	 */
+	public static function getCurrenciesCodes() {
+		$currencies = static::CURRENCIES;
+		$codes = [];
+
+		foreach ($currencies as $currency) {
+			$codes[] = $currency["text"];
+		}
+
+		return $codes;
+
+	}
 }
