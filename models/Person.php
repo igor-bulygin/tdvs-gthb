@@ -29,6 +29,7 @@ use yii\web\IdentityInterface;
  * @property array $credentials
  * @property array $preferences
  * @property string $curriculum
+ * @property PersonShippingSettings[] $shippingSettingsMapping
  * @property MongoDate $created_at
  * @property MongoDate $updated_at
  */
@@ -103,6 +104,7 @@ class Person extends CActiveRecord implements IdentityInterface
 			'press',
 			'videos',
 			'faq',
+			'shipping_settings',
 			'created_at',
 			'updated_at',
 		];
@@ -140,6 +142,7 @@ class Person extends CActiveRecord implements IdentityInterface
 
 		$this->videos = [];
 		$this->faq = [];
+		$this->shipping_settings = [];
 
 	}
 
@@ -171,6 +174,11 @@ class Person extends CActiveRecord implements IdentityInterface
 	public function embedFaqMapping()
 	{
 		return $this->mapEmbeddedList('faq', FaqQuestion::className(), ['unsetSource' => false]);
+	}
+
+	public function embedShippingSettingsMapping()
+	{
+		return $this->mapEmbeddedList('shipping_settings', PersonShippingSettings::className(), ['unsetSource' => false]);
 	}
 
 	/**
@@ -348,12 +356,40 @@ class Person extends CActiveRecord implements IdentityInterface
 		$this->mediaMapping->setParentObject($this);
 		$this->settingsMapping->setParentObject($this);
 
-		foreach ($this->videosMapping as $videoMapping) {
-			$videoMapping->setParentObject($this);
+		foreach ($this->videosMapping as $item) {
+			$item->setParentObject($this);
 		}
-		foreach ($this->faqMapping as $faqMapping) {
-			$faqMapping->setParentObject($this);
+		foreach ($this->faqMapping as $item) {
+			$item->setParentObject($this);
 		}
+		foreach ($this->shippingSettingsMapping as $item) {
+			$item->setParentObject($this);
+		}
+	}
+
+	public function validate($attributeNames = null, $clearErrors = true)
+	{
+		if (is_array($attributeNames) && !empty($attributeNames)) {
+			if (in_array('personal_info', $attributeNames)) {
+				$attributeNames[] = 'personalInfoMapping';
+			};
+			if (in_array('media', $attributeNames)) {
+				$attributeNames[] = 'mediaMapping';
+			}
+			if (in_array('settings', $attributeNames)) {
+				$attributeNames[] = 'settingsMapping';
+			}
+			if (in_array('videos', $attributeNames)) {
+				$attributeNames[] = 'videosMapping';
+			}
+			if (in_array('faq', $attributeNames)) {
+				$attributeNames[] = 'faqMapping';
+			}
+			if (in_array('shipping_settings', $attributeNames)) {
+				$attributeNames[] = 'shippingSettingsMapping';
+			}
+		}
+		return parent::validate($attributeNames, $clearErrors);
 	}
 
 	/**
@@ -486,6 +522,16 @@ class Person extends CActiveRecord implements IdentityInterface
 			],
 			[
 				[
+					'shipping_settings',
+				],
+				'safe',
+				'on' => [
+					self::SCENARIO_DEVISER_UPDATE_DRAFT,
+					self::SCENARIO_DEVISER_UPDATE_PROFILE,
+				]
+			],
+			[
+				[
 					'personal_info',
 					'credentials',
 					'text_short_description',
@@ -577,10 +623,9 @@ class Person extends CActiveRecord implements IdentityInterface
 				'on' => [self::SCENARIO_DEVISER_UPDATE_PROFILE, self::SCENARIO_INFLUENCER_UPDATE_PROFILE],
 			],
 			['press', 'app\validators\PersonPressFilesValidator'],
-			['videos', 'safe'], // to load data posted from WebServices
 			['videosMapping', 'app\validators\EmbedDocValidator'], // to apply rules
-			['faq', 'safe'], // to load data posted from WebServices
 			['faqMapping', 'app\validators\EmbedDocValidator'], // to apply rules
+			['shippingSettingsMapping', 'app\validators\EmbedDocValidator'], // to apply rules
 		];
 	}
 
@@ -725,6 +770,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'press',
 					'videos',
 					'faq',
+					'shipping_settings',
 					'curriculum',
 					'account_state',
 					'name' => "name",
@@ -771,6 +817,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'press',
 					'videos',
 					'faq',
+					'shipping_settings',
 					'curriculum',
 					'account_state',
 //					'preferences',
