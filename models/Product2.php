@@ -191,6 +191,28 @@ class Product2 extends Product {
 		}
 	}
 
+	public function validate($attributeNames = null, $clearErrors = true)
+	{
+		if (is_array($attributeNames) && !empty($attributeNames)) {
+			if (in_array('media', $attributeNames)) {
+				$attributeNames[] = 'mediaMapping';
+			}
+			if (in_array('faq', $attributeNames)) {
+				$attributeNames[] = 'faqMapping';
+			}
+			if (in_array('preorder', $attributeNames)) {
+				$attributeNames[] = 'preorderMapping';
+			}
+			if (in_array('madetoorder', $attributeNames)) {
+				$attributeNames[] = 'madeToOrderMapping';
+			}
+			if (in_array('bespoke', $attributeNames)) {
+				$attributeNames[] = 'bespokeMapping';
+			}
+		}
+		return parent::validate($attributeNames, $clearErrors);
+	}
+
 	public function afterSave($insert, $changedAttributes) {
 		if ($insert) {
 			$this->moveTempUploadsToProductPath();
