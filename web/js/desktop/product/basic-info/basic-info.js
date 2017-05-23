@@ -14,6 +14,7 @@
 		vm.openCropModal = openCropModal;
 		vm.uploadPhoto = uploadPhoto;
 		vm.deleteImage = deleteImage;
+		vm.tempFiles=[];
 		
 		function init(){
 			//init values or functions
@@ -87,13 +88,31 @@
 				vm.product.media.photos.unshift({
 					name: data.data.filename
 				});
+				var index=-1;
+				angular.forEach(vm.tempFiles, function(uploadingFile) {
+					if (uploadingFile.$$hashKey==file.$$hashKey) {
+						index=-vm.tempFiles.indexOf(uploadingFile);
+					}
+				});
+				if (index != -1)
+				{
+					vm.tempFiles.splice(index,1);
+				}
 			}
 
 			function onWhileUploadingPhoto(evt, file) {
-				file.progress = parseInt(100.0 * evt.loaded / evt.total);
+				angular.forEach(vm.tempFiles, function(uploadingFile) {
+					if (uploadingFile.$$hashKey==file.$$hashKey) {
+						uploadingFile.progress = parseInt(100.0 * evt.loaded / evt.total);
+					}
+				});
 			}
 
-			vm.files = images;
+			
+			angular.forEach(images, function(image) {
+				vm.tempFiles.push(image);
+			});
+			vm.files=images
 			vm.errFiles = errImages;
 
 			//upload photos

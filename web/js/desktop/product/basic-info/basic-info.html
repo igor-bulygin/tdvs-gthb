@@ -65,7 +65,7 @@
 						<p class="main-marked" ng-if="image.filename.main_product_photo">Marked as main photo</p>
 					</li>
 				</ul>
-				<div class="col-md-2 image-basic-info-edit" ng-repeat="item in productBasicInfoCtrl.files" ng-if="item.progress">
+				<div class="col-md-2 image-basic-info-edit" ng-repeat="item in productBasicInfoCtrl.tempFiles" ng-if="item.progress">
 					<div ng-if="item.progress <= 100">
 						<uib-progressbar value="item.progress" class="progress-striped active">{{item.progress}}</uib-progressbar>
 						<img ngf-thumbnail="item" class="grid-image">
