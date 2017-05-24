@@ -30,7 +30,7 @@
 		<div class="col-md-6">
 			<span class="title">Manufacturing information</span>
 			<div class="form-group">
-				<div class="row">
+				<div class="row" id="preorder">
 					<div class="col-md-4 pad-about">
 						<span>Is this product in pre-order?</span>
 					</div>
@@ -103,7 +103,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row" id="madetoorder">
 				<div class="col-md-4 pad-about">
 					<span>Is this a made-to-order product?</span>
 				</div>
@@ -128,7 +128,7 @@
 					<label class="little-label-number" for="madetoorder">days needed to manufacture this work</label>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row" id="bespoke">
 				<div class="col-md-4 pad-about">
 					<span>Is this a bespoke product?</span>
 				</div>
@@ -162,7 +162,7 @@
 	<hr style="height: 2px; color: black">
 	<div class="row items-row">
 		<div class="col-md-12">
-			<div ng-if="productVariationsCtrl.show_sizecharts" ng-cloak>
+			<div ng-if="productVariationsCtrl.show_sizecharts" ng-cloak id="sizechart_values">
 					<label>Sizes</label>
 				<div class="row">
 					<div class="col-md-2">

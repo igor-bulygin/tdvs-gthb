@@ -2,7 +2,7 @@
 
 	function controller(personDataService, metricDataService, sizechartDataService, 
 		productDataService, languageDataService, toastr, UtilService, productService,
-		localStorageService, tagDataService, productEvents, $rootScope, $window, $timeout) {
+		localStorageService, tagDataService, productEvents, $rootScope, $window, $timeout,$anchorScroll) {
 		var vm = this;
 		vm.save = save;
 		vm.saving=false;
@@ -192,6 +192,7 @@
 				vm.errors = true;
 				vm.saving=false;
 				$rootScope.$broadcast(productEvents.requiredErrors, {required: required});
+				$anchorScroll(required[0]);
 			}
 
 		}

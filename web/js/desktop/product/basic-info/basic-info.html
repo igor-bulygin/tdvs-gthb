@@ -1,7 +1,7 @@
 <div class="card">
 	<span class="title">1/ Basic work information</span>
 	<form name="productBasicInfoCtrl.form" novalidate>
-	<div class="row">
+	<div class="row" id="name">
 		<div class="col-md-2"><label for="name">Title</label></div>
 		<div class="col-md-8">
 			<ol class="about-edit-select title-lang-btn nya-bs-select" ng-model="productBasicInfoCtrl.name_language">
@@ -16,7 +16,7 @@
 			<p class="info">Translate your work title by simply selecting different languages from the drop-down menu. Translate in as many languages as possible to reach a broader audience</p>
 		</div>
 	</div>
-	<div class="row">
+	<div class="row" id="categories">
 		<div class="col-md-2"><label for="categories">Categories</label></div>
 		<div class="col-md-8">
 			<div ng-repeat="item in productBasicInfoCtrl.categories_helper track by $index">
@@ -39,8 +39,8 @@
 			<p class="info">Your work can go into 1 or more categories.</p>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-md-2">
+	<div class="row" id="main_photo">
+		<div class="col-md-2" id="photos">
 			<label for="Photos">Photos</label></div>
 		<div class="col-md-8 ml-15">
 			<div class="row">
