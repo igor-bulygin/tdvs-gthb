@@ -29,7 +29,7 @@
 		</form>
 	</div>
 	<div class="col-md-8 text-center">
-		<div ng-repeat="price in shippingWeightsPricesCtrl.zone.prices" class="row">
+		<div ng-repeat="price in shippingWeightsPricesCtrl.setting.prices" class="row">
 			<div class="col-md-1">
 				<p>Range {{$index+1}}</p>
 			</div>
@@ -44,7 +44,7 @@
 			</div>
 			<div class="col-md-2">
 				<input type="number" ng-model="price.max_weight" class="form-control">
-				<span ng-bind="shippingWeightsPricesCtrl.zone.weight_measure"></span>
+				<span ng-bind="shippingWeightsPricesCtrl.setting.weight_measure"></span>
 			</div>
 			<div class="col-md-1">
 				<p>Standard shipping</p>
@@ -52,7 +52,7 @@
 			<div class="col-md-2">
 				<input type="number" ng-model="price.price" class="form-control">
 			</div>
-			<div ng-if="shippingWeightsPricesCtrl.zone.shipping_express_time" ng-cloak>
+			<div ng-if="shippingWeightsPricesCtrl.setting.shipping_express_time" ng-cloak>
 				<div class="col-md-1">
 					<p>Express shipping</p>
 				</div>

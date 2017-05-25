@@ -10,9 +10,8 @@
 		function init() {
 			getMetrics();
 			getCurrencies();
-			if(!angular.isArray(vm.zone.prices) || vm.zone.prices.length == 0) {
-				vm.zone.prices = []
-				addPrice();
+			if(!angular.isArray(vm.setting.prices) || vm.setting.prices.length == 0) {
+				vm.setting.prices = []
 			}
 		}
 
@@ -38,9 +37,9 @@
 				max_weight: 0,
 				price: 0,
 			}
-			if(vm.zone.shipping_express_time > 0)
+			if(vm.setting.shipping_express_time > 0)
 				object['price_express'] = 0;
-			vm.zone.prices.push(object);
+			vm.setting.prices.push(object);
 		}
 
 	}
@@ -50,7 +49,7 @@
 		controller: controller,
 		controllerAs: "shippingWeightsPricesCtrl",
 		bindings: {
-			zone: '<',
+			setting: '<',
 		}
 	}
 

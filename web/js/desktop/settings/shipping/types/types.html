@@ -1,0 +1,23 @@
+<h4>Shipping type</h4>
+<form name="shippingTypesCtrl.shippingTypeForm" class="form-horizontal">
+	<h5>Standard shipping</h5>
+	<div class="form-group">
+		<label for="shipping_time" class="col-md-1">Shipping time</label>
+		<div class="col-sm-1">
+			<input type="number" min="1" ng-model="shippingTypesCtrl.setting.shipping_time" class="form-control">
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="checkbox checkbox-circle">
+			<input id="show_express_shipping" type="checkbox" ng-model="shippingTypesCtrl.show_express_shipping" name="show_express_shipping" class="styled" ng-change="shippingTypesCtrl.deleteShippingExpressTime()">
+			<label for="show_express_shipping">Add express shipping
+			</label>
+		</div>
+	</div>
+	<div class="form-group" ng-if="shippingTypesCtrl.show_express_shipping" ng-cloak>
+		<label for="express_shipping_time" class="col-md-1">Express time</label>
+		<div class="col-sm-1">
+			<input type="number" min="1" ng-model="shippingTypesCtrl.setting.shipping_express_time" class="form-control">
+		</div>
+	</div>
+</form>
