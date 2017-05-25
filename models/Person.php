@@ -793,8 +793,9 @@ class Person extends CActiveRecord implements IdentityInterface
 					'press_edit_link' => 'pressEditLink',
 					'videos_edit_link' => 'videosEditLink',
 					'faq_edit_link' => 'faqEditLink',
-//					'preferences',
 					'settings',
+					'available_countries' => 'availableCountries',
+//					'preferences',
 				];
 
 				static::$retrieveExtraFields = [
@@ -842,6 +843,12 @@ class Person extends CActiveRecord implements IdentityInterface
 
 	public function getCountry() {
 		return $this->personalInfoMapping->country;
+	}
+
+	public function getAvailableCountries() {
+		return array(
+			'ES',
+		);
 	}
 
 	/**
