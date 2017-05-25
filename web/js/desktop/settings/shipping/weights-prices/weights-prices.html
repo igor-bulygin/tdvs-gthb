@@ -29,35 +29,45 @@
 		</form>
 	</div>
 	<div class="col-md-8 text-center">
-		<div ng-repeat="price in shippingWeightsPricesCtrl.setting.prices" class="row">
-			<div class="col-md-1">
-				<p>Range {{$index+1}}</p>
-			</div>
-			<div class="col-md-1">
-				<p>From</p>
-			</div>
-			<div class="col-md-2">
-				<input type="number" ng-model="price.min_weight" class="form-control">
-			</div>
-			<div class="col-md-1">
-				<p>to</p>
-			</div>
-			<div class="col-md-2">
-				<input type="number" ng-model="price.max_weight" class="form-control">
-				<span ng-bind="shippingWeightsPricesCtrl.setting.weight_measure"></span>
-			</div>
-			<div class="col-md-1">
-				<p>Standard shipping</p>
-			</div>
-			<div class="col-md-2">
-				<input type="number" ng-model="price.price" class="form-control">
-			</div>
-			<div ng-if="shippingWeightsPricesCtrl.setting.shipping_express_time" ng-cloak>
+		<div ng-repeat="price in shippingWeightsPricesCtrl.setting.prices">
+			<div class="row">
 				<div class="col-md-1">
-					<p>Express shipping</p>
+					<p>Range {{$index+1}}</p>
+				</div>
+				<div class="col-md-1">
+					<p>From</p>
 				</div>
 				<div class="col-md-2">
-					<input type="number" ng-model="price.price_express" class="form-control">
+					<input type="number" ng-model="price.min_weight" class="form-control">
+				</div>
+				<div class="col-md-1">
+					<p>to</p>
+				</div>
+				<div class="col-md-2">
+					<input type="number" ng-model="price.max_weight" class="form-control" ng-disabled="price.max_weight == null">
+					<span ng-bind="shippingWeightsPricesCtrl.setting.weight_measure"></span>
+				</div>
+				<div class="col-md-1">
+					<p>Standard shipping</p>
+				</div>
+				<div class="col-md-2">
+					<input type="number" ng-model="price.price" class="form-control">
+				</div>
+				<div ng-if="shippingWeightsPricesCtrl.setting.shipping_express_time" ng-cloak>
+					<div class="col-md-1">
+						<p>Express shipping</p>
+					</div>
+					<div class="col-md-2">
+						<input type="number" ng-model="price.price_express" class="form-control">
+					</div>
+				</div>
+			</div>
+			<div class="row" ng-if="$last">
+				<div class="form-group">
+					<div class="checkbox checkbox-circle">
+						<input id="unlimited_{{$index}}" type="checkbox" ng-model="shippingWeightsPricesCtrl.unlimited_weight" ng-change="shippingWeightsPricesCtrl.setUnlimitedWeight()">
+						<label for="unlimited_{{$index}}">Unlimited weight</label>
+					</div>
 				</div>
 			</div>
 		</div>

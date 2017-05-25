@@ -43,5 +43,4 @@ $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD
 			</uib-accordion>
 		</div>
 	</div>
-	<div><pre>{{shippingSettingsCtrl.person.shipping_settings | json}}</pre></div>
 </div>

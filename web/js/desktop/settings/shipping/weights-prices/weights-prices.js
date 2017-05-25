@@ -4,6 +4,7 @@
 	function controller(metricDataService, UtilService) {
 		var vm = this;
 		vm.addPrice = addPrice;
+		vm.setUnlimitedWeight = setUnlimitedWeight;
 
 		init();
 
@@ -40,6 +41,10 @@
 			if(vm.setting.shipping_express_time > 0)
 				object['price_express'] = 0;
 			vm.setting.prices.push(object);
+		}
+
+		function setUnlimitedWeight() {
+			vm.setting.prices[vm.setting.prices.length-1].max_weight = vm.unlimited_weight ? null : 0
 		}
 
 	}
