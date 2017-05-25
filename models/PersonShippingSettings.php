@@ -2,26 +2,27 @@
 namespace app\models;
 
 /**
+ * @property string country_code
  * @property string weight_measure
  * @property string currency
  * @property int shipping_time
  * @property int shipping_express_time
- * @property array zones
  * @property array prices
  *
  * @method Person getParentObject()
  */
 class PersonShippingSettings extends EmbedModel
 {
+	public $zones;
 
 	public function attributes()
 	{
 		return [
+			'country_code',
 			'weight_measure',
 			'currency',
 			'shipping_time',
 			'shipping_express_time',
-			'zones',
 			'prices',
 		];
 	}
@@ -42,7 +43,16 @@ class PersonShippingSettings extends EmbedModel
 					Person::SCENARIO_DEVISER_UPDATE_PROFILE,
 				]
 			],
-			[['weight_measure', 'currency', 'shipping_time'], 'required'],
+			[['country_code', 'weight_measure', 'currency', 'shipping_time'], 'required'],
+			[
+				'country_code',
+				'in',
+				'range' => Country::getCountryCodes(),
+				'on' => [
+					Person::SCENARIO_DEVISER_UPDATE_DRAFT,
+					Person::SCENARIO_DEVISER_UPDATE_PROFILE,
+				]
+			],
 			[
 				'weight_measure',
 				'in',
@@ -69,6 +79,7 @@ class PersonShippingSettings extends EmbedModel
 					Person::SCENARIO_DEVISER_UPDATE_PROFILE,
 				]
 			],
+			/*
 			[
 				'zones',
 				'validateZones',
@@ -77,6 +88,7 @@ class PersonShippingSettings extends EmbedModel
 					Person::SCENARIO_DEVISER_UPDATE_PROFILE,
 				]
 			],
+			*/
 			[
 				'prices',
 				'validatePrices',
@@ -88,6 +100,7 @@ class PersonShippingSettings extends EmbedModel
 		];
 	}
 
+	/*
 	public function validateZones($attribute, $params)
 	{
 		$zones = $this->zones;
@@ -121,6 +134,7 @@ class PersonShippingSettings extends EmbedModel
 			}
 		}
 	}
+	*/
 
 	public function validatePrices($attribute, $params)
 	{
@@ -137,12 +151,16 @@ class PersonShippingSettings extends EmbedModel
 			foreach ($positiveFields as $field) {
 				$value = $price[$field];
 				if (empty($value) || !is_numeric($value) || $value <= 0) {
-					$this->addError('prices', sprintf('%s must be a positive value', $field));
+					$this->addError('prices', sprintf('%s %s must be a positive value', $field, $value));
 				}
 			}
 			$maxWeight = $price['max_weight'];
-			if ($maxWeight !== null && (!is_numeric($maxWeight) || $maxWeight <= 0)) {
-				$this->addError('prices', 'max_weight must be a positive value or null');
+			if ($maxWeight !== null) {
+				if (!is_numeric($maxWeight) || $maxWeight <= 0) {
+					$this->addError('prices', sprintf('max_weight %s must be a positive value or null', $maxWeight));
+				} elseif ($maxWeight <= $price['min_weight']) {
+					$this->addError('prices', sprintf('max_weight %s must be greater than min_weight', $maxWeight));
+				}
 			}
 		}
 	}

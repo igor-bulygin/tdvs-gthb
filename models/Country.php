@@ -262,4 +262,19 @@ class Country extends CActiveRecord
 
 		return $valid;
 	}
+
+	/**
+	 * Returns all available country_codes
+	 *
+	 * @return array
+	 */
+	public static function getCountryCodes() {
+		$countries = Country::findSerialized();
+		$country_codes = [];
+		foreach  ($countries as $country) {
+			$country_codes[] = $country->country_code;
+		}
+
+		return $country_codes;
+	}
 }
