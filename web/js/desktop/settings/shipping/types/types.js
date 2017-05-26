@@ -9,6 +9,8 @@
 		init();
 
 		function init() {
+			if(vm.setting.shipping_express_time)
+				vm.show_express_shipping = true;
 		}
 
 		function deleteShippingExpressTime() {

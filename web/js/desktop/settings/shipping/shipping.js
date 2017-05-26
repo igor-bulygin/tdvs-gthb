@@ -69,8 +69,9 @@
 				console.log(data);
 			}
 
+			var data = Object.assign({}, {shipping_settings: vm.person.shipping_settings})
 
-			personDataService.updateProfile(vm.person, {
+			personDataService.updateProfile(data, {
 				personId: person.short_id
 			}, onUpdateProfileSuccess, UtilService.onError);
 		}
