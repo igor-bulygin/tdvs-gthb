@@ -5,6 +5,7 @@
 		var vm = this;
 		vm.addPrice = addPrice;
 		vm.setUnlimitedWeight = setUnlimitedWeight;
+		vm.has_error = UtilService.has_error;
 
 		init();
 
@@ -33,9 +34,10 @@
 		}
 
 		function addPrice() {
+			var weight = vm.setting.prices.length > 0 ? vm.setting.prices[vm.setting.prices.length - 1]['max_weight'] : 0;
 			var object = {
-				min_weight: 0,
-				max_weight: 0,
+				min_weight: weight,
+				max_weight: weight,
 				price: 0,
 			}
 			if(vm.setting.shipping_express_time > 0)

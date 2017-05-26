@@ -4,8 +4,9 @@
 	function controller(personDataService, languageDataService, locationDataService, UtilService) {
 		var vm = this;
 		vm.person = angular.copy(person);
-		vm.toggleStatus = toggleStatus;
 		vm.country_helper = [];
+		vm.toggleStatus = toggleStatus;
+		vm.save = save;
 
 		init();
 		
@@ -61,6 +62,17 @@
 
 		function toggleStatus(index) {
 			vm.country_helper[index]['status'] = !vm.country_helper[index]['status'];
+		}
+
+		function save() {
+			function onUpdateProfileSuccess(data) {
+				console.log(data);
+			}
+
+
+			personDataService.updateProfile(vm.person, {
+				personId: person.short_id
+			}, onUpdateProfileSuccess, UtilService.onError);
 		}
 
 	}

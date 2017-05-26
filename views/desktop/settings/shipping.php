@@ -36,7 +36,7 @@ $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD
 					<hr>
 					<shipping-observations setting="setting" languages="shippingSettingsCtrl.languages"></shipping-observations>
 					<div class="row text-center">
-						<button class="btn btn-default btn-green">Save</button>
+						<button class="btn btn-default btn-green" ng-click="shippingSettingsCtrl.save()">Save</button>
 						<button class="btn btn-default">Cancel</button>
 					</div>
 				</div>

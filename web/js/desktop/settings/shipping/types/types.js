@@ -1,9 +1,10 @@
 (function () {
 	"use strict";
 
-	function controller(locationDataService, UtilService, treeService) {
+	function controller(locationDataService, UtilService) {
 		var vm = this;
 		vm.deleteShippingExpressTime = deleteShippingExpressTime;
+		vm.has_error = UtilService.has_error;
 
 		init();
 
