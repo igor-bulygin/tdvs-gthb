@@ -2,7 +2,7 @@
 namespace app\models;
 
 /**
- * @property string currency
+ * @property string weight_measure
  * @property string lang
  * @property PersonBankInfo $bankInfoMapping
  * @property PersonStripeInfo $stripeInfoMapping
@@ -11,11 +11,13 @@ namespace app\models;
  */
 class PersonSettings extends EmbedModel
 {
+	// TODO deprecate
+	public $currency;
 
 	public function attributes()
 	{
 		return [
-			'currency',
+			'weight_measure',
 			'lang',
 			'bank_info',
 			'stripe_info',
@@ -59,6 +61,15 @@ class PersonSettings extends EmbedModel
 					Person::SCENARIO_INFLUENCER_UPDATE_DRAFT,
 					Person::SCENARIO_INFLUENCER_UPDATE_PROFILE,
 					Person::SCENARIO_CLIENT_UPDATE,
+				]
+			],
+			[
+				'weight_measure',
+				'in',
+				'range' => MetricType::UNITS[MetricType::WEIGHT],
+				'on' => [
+					Person::SCENARIO_DEVISER_UPDATE_DRAFT,
+					Person::SCENARIO_DEVISER_UPDATE_PROFILE,
 				]
 			],
 			[

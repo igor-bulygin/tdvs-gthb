@@ -3,8 +3,6 @@ namespace app\models;
 
 /**
  * @property string country_code
- * @property string weight_measure
- * @property string currency
  * @property int shipping_time
  * @property int shipping_express_time
  * @property array prices
@@ -19,8 +17,10 @@ class PersonShippingSettings extends EmbedModel
 	{
 		return [
 			'country_code',
+			/*
 			'weight_measure',
 			'currency',
+			*/
 			'shipping_time',
 			'shipping_express_time',
 			'prices',
@@ -43,7 +43,7 @@ class PersonShippingSettings extends EmbedModel
 					Person::SCENARIO_DEVISER_UPDATE_PROFILE,
 				]
 			],
-			[['country_code', 'weight_measure', 'currency', 'shipping_time'], 'required'],
+			[['country_code', 'shipping_time'], 'required'],
 			[
 				'country_code',
 				'in',
@@ -53,6 +53,7 @@ class PersonShippingSettings extends EmbedModel
 					Person::SCENARIO_DEVISER_UPDATE_PROFILE,
 				]
 			],
+			/*
 			[
 				'weight_measure',
 				'in',
@@ -71,6 +72,7 @@ class PersonShippingSettings extends EmbedModel
 					Person::SCENARIO_DEVISER_UPDATE_PROFILE,
 				]
 			],
+			*/
 			[
 				['shipping_time', 'shipping_express_time'],
 				'integer', 'min' => 1,

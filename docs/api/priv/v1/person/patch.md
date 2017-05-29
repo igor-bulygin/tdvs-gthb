@@ -29,6 +29,7 @@ Example about how to call to Web Service to update Person profile
   * `city`: city name
   * `street`: street name
   * `number`: street number
+  * `phone_number_prefix`: phone number prefix
   * `phone_number`: phone number
   * `zip`: zip postal code
   * `bday`: deprecated
@@ -42,7 +43,7 @@ Example about how to call to Web Service to update Person profile
   * `photos`: [] array of file names to use in "about" gallery (["filename3.jpg", "filename4.jpg"])
 * `settings`:
   * `lang`: code of default language ("en-US")
-  * `currency`: code of default currency ("EUR")
+  * `weight_measure`: mg, g, kg, oz, or lb
   * `bank_info`:
     * `location`: code of country ("US")
     * `bank_name`: name of the bank",

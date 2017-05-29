@@ -40,7 +40,8 @@ Example about how to call to Web Service to get specific person
     "city": "Concord",
     "street": null,
     "number": null,
-    "phone_number": null,
+    `phone_number_prefix`: "999999999",
+    `phone_number`: "+34",
     "zip": null,
     "bday": null,
     "surnames": null
