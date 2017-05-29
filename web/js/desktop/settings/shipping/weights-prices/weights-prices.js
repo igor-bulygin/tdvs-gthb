@@ -10,27 +10,9 @@
 		init();
 
 		function init() {
-			getMetrics();
-			getCurrencies();
 			if(!angular.isArray(vm.setting.prices) || vm.setting.prices.length == 0) {
 				vm.setting.prices = []
 			}
-		}
-
-		function getMetrics() {
-			function onGetMetricsSuccess(data) {
-				vm.weights = angular.copy(data.weight);
-			}
-
-			metricDataService.getMetric(null, onGetMetricsSuccess, UtilService.onError);
-		}
-
-		function getCurrencies() {
-			function onGetCurrenciesSuccess(data) {
-				vm.currencies = angular.copy(data);
-			}
-
-			metricDataService.getCurrencies(null, onGetCurrenciesSuccess, UtilService.onError)
 		}
 
 		function addPrice() {

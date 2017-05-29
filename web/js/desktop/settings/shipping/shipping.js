@@ -67,6 +67,9 @@
 		function save() {
 			function onUpdateProfileSuccess(data) {
 				console.log(data);
+				vm.country_helper.forEach(function(helper) {
+					helper.status = false;
+				})
 			}
 
 			var data = Object.assign({}, {shipping_settings: vm.person.shipping_settings})
