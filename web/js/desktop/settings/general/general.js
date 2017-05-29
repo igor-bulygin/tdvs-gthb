@@ -8,7 +8,7 @@
 		if (person.type[0]==2) {
 			vm.isDeviser=true;
 		}
-		vm.notCurrencySelected=false;
+		vm.notWeightMeasureSelected=false;
 		vm.city = vm.person.personal_info.city + ', ' + vm.person.personal_info.country;
 		init();
 		vm.update=update;
@@ -23,16 +23,21 @@
 		vm.showPasswordErrors=false;
 		vm.openModal=openModal;
 		vm.passwordModal=null;
+		vm.weightMeasures=[];
+		vm.weightCharged=false;
+		vm.dismiss=dismiss;
 		
 		function init() {
-			getCurrencies();
+			getWeightUnits();
 		}
 
-		function getCurrencies() {
-			function onGetCurrenciesSuccess(data) {
-				vm.currencies = data;
+		function getWeightUnits() {
+			function onGetMetricSuccess(data) {
+				vm.weightMeasures = data.weight;
+				vm.weightCharged=true;
 			}
-			metricDataService.getCurrencies({},onGetCurrenciesSuccess, UtilService.onError);
+			vm.weightCharged=false;
+			metricDataService.getMetric({},onGetMetricSuccess, UtilService.onError);
 		}
 
 		function searchPlace(place) {
@@ -67,10 +72,13 @@
 
 		function update() {
 			vm.saved=false;
-			if (angular.isUndefined(vm.person.settings.currency) || vm.person.settings.currency === null ) {
-				vm.notCurrencySelected=true;
+			if (angular.isUndefined(vm.person.settings.weight_measure) || vm.person.settings.weight_measure === null ) {
+				vm.notWeightMeasureSelected=true;
 			}
 			if (vm.dataForm.$valid) {
+				if (vm.person.personal_info.phone_number_prefix.indexOf('+') == -1) {
+					vm.person.personal_info.phone_number_prefix='+' + vm.person.personal_info.phone_number_prefix;
+				}
 				vm.saving=true;
 				function onUpdateGeneralSettingsSuccess(data) {
 					vm.saving=false;
@@ -90,6 +98,10 @@
 				scope: $scope,
 				size: 'sm'
 			});
+		}
+
+		function dismiss() {
+			vm.passwordModal.close();
 		}
 
 		function updatePassword() {
