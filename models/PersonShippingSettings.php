@@ -185,10 +185,8 @@ class PersonShippingSettings extends EmbedModel
 
 			$maxWeight = $price['max_weight'];
 			if ($maxWeight !== null) {
-				if (!is_numeric($maxWeight) || $maxWeight <= 0) {
-					$this->addError('prices', sprintf('max_weight %s must be a positive value or null', $maxWeight));
-				} elseif ($maxWeight <= $minWeight) {
-					$this->addError('prices', sprintf('max_weight %s must be greater than min_weight', $maxWeight));
+				if (!is_numeric($maxWeight) || $maxWeight <= $minWeight) {
+					$this->addError('prices', sprintf('max_weight %s must be greater than min_weight %s', $maxWeight, $minWeight));
 				}
 			}
 
