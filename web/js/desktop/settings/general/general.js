@@ -23,7 +23,6 @@
 		vm.showPasswordErrors=false;
 		vm.openModal=openModal;
 		vm.passwordModal=null;
-		vm.weightMeasures=[];
 		vm.weightCharged=false;
 		vm.dismiss=dismiss;
 		
@@ -32,8 +31,11 @@
 		}
 
 		function getWeightUnits() {
-			function onGetMetricSuccess(data) {
-				vm.weightMeasures = data.weight;
+			function onGetMetricSuccess(data) {				
+				vm.weightMeasures=[];
+				if (!angular.isUndefined(data) && !angular.isUndefined(data.weight)) {
+					vm.weightMeasures = data.weight;
+				}
 				vm.weightCharged=true;
 			}
 			vm.weightCharged=false;
