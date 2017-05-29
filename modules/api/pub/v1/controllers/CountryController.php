@@ -7,6 +7,19 @@ use Yii;
 
 class CountryController extends AppPublicController {
 
+	public function actionView($countryCode)
+	{
+		Country::setSerializeScenario(Country::SERIALIZE_SCENARIO_PUBLIC);
+
+		/** @var Country $country */
+		$country = Country::findOne(["country_code" => $countryCode]);
+		if (empty($country)) {
+			throw new NotFoundHttpException('Country not found');
+		}
+
+		return $country;
+	}
+
     public function actionIndex()
     {
         // set the scenario to serialize objects
