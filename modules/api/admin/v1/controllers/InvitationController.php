@@ -70,6 +70,7 @@ class InvitationController extends Controller
 			return [
 				"action" => "created",
 				"url" => $url,
+				"uuid" => $invitation->uuid,
 			];
 		} else {
 			Yii::$app->response->setStatusCode(400); // Bad Request
