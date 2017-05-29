@@ -2,7 +2,7 @@
 
 Example about how to call to Web Service to get specific country
 
-**URL**: `/api/pub/v1/country/<:countryCode>`
+**URL**: `/api/pub/v1/countries/<:countryCode>`
 
 **Method**: `GET`
 
