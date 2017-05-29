@@ -5,7 +5,7 @@
 	<div class="edit-faq-wrapper">
 		<div class="edit-faq-panel">
 			<div class="faq-language-menu">
-				<ol class="nya-bs-select form-control" ng-model="shippingObservationsCtrl.languageSelected" ng-change="shippingObservationsCtrl.parseText(shippingObservationsCtrl.zone.observations)">
+				<ol class="nya-bs-select form-control" ng-model="shippingObservationsCtrl.languageSelected" ng-change="shippingObservationsCtrl.parseText(shippingObservationsCtrl.setting.observations)">
 					<li nya-bs-option="language in shippingObservationsCtrl.languages" data-value="language.code" deep-watch="true" ng-init="shippingObservationsCtrl.languageSelected='en-US'" class="ng-class:{'lang-selected': shippingObservationsCtrl.isLanguageOk(language.code)}">
 						<a href="#">
 							<span ng-bind="language.name"></span>
@@ -15,7 +15,7 @@
 				</ol>
 				<div class="faq-row">
 					<div class="col-md-12">
-						<div class="faq-edit-answer" text-angular ng-model="shippingObservationsCtrl.zone.observations[shippingObservationsCtrl.languageSelected]" ng-cloak ta-toolbar="[]" placeholder="DESCRIPTION" ta-paste="shippingObservationsCtrl.stripHTMLTags($html)"></div>
+						<div class="faq-edit-answer" text-angular ng-model="shippingObservationsCtrl.setting.observations[shippingObservationsCtrl.languageSelected]" ng-cloak ta-toolbar="[]" placeholder="DESCRIPTION" ta-paste="shippingObservationsCtrl.stripHTMLTags($html)"></div>
 					</div>
 				</div>
 			</div>

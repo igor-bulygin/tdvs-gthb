@@ -4,15 +4,16 @@
 	function controller(metricDataService, UtilService) {
 		var vm = this;
 		vm.addPrice = addPrice;
+		vm.setUnlimitedWeight = setUnlimitedWeight;
+		vm.has_error = UtilService.has_error;
 
 		init();
 
 		function init() {
 			getMetrics();
 			getCurrencies();
-			if(!angular.isArray(vm.zone.prices) || vm.zone.prices.length == 0) {
-				vm.zone.prices = []
-				addPrice();
+			if(!angular.isArray(vm.setting.prices) || vm.setting.prices.length == 0) {
+				vm.setting.prices = []
 			}
 		}
 
@@ -33,14 +34,19 @@
 		}
 
 		function addPrice() {
+			var weight = vm.setting.prices.length > 0 ? vm.setting.prices[vm.setting.prices.length - 1]['max_weight'] : 0;
 			var object = {
-				min_weight: 0,
-				max_weight: 0,
+				min_weight: weight,
+				max_weight: weight,
 				price: 0,
 			}
-			if(vm.zone.shipping_express_time > 0)
+			if(vm.setting.shipping_express_time > 0)
 				object['price_express'] = 0;
-			vm.zone.prices.push(object);
+			vm.setting.prices.push(object);
+		}
+
+		function setUnlimitedWeight() {
+			vm.setting.prices[vm.setting.prices.length-1].max_weight = vm.unlimited_weight ? null : 0
 		}
 
 	}
@@ -50,7 +56,7 @@
 		controller: controller,
 		controllerAs: "shippingWeightsPricesCtrl",
 		bindings: {
-			zone: '<',
+			setting: '<',
 		}
 	}
 

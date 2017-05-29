@@ -27,7 +27,7 @@
 		controller: controller,
 		controllerAs: "shippingObservationsCtrl",
 		bindings: {
-			zone: '<',
+			setting: '<',
 			languages: '<'
 		}
 	}

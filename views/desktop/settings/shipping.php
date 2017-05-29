@@ -20,31 +20,27 @@ $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD
 
 <div ng-controller="shippingSettingsCtrl as shippingSettingsCtrl" class="personal-info-wrapper bank-settings-wrapper">
 	<div class="container">
-		<div ng-if="shippingSettingsCtrl.person.shipping_settings.length == 0" ng-cloak>
-			<p class="text-center">You have no zones yet.</p>
-		</div>
-		<div ng-if="shippingSettingsCtrl.person.shipping_settings.length > 0" ng-repeat="zone in shippingSettingsCtrl.person.shipping_settings" ng-cloak>
+		<div ng-repeat="setting in shippingSettingsCtrl.person.shipping_settings" ng-cloak>
 			<uib-accordion>
-				<div uib-accordion-group class="panel-default panel-billing" heading="Zone {{$index+1}}" ng-cloak is-open="shippingSettingsCtrl.status[$index]" is-disabled="true">
+				<div uib-accordion-group class="panel-default panel-billing" ng-cloak is-open="shippingSettingsCtrl.country_helper[$index]['status']" is-disabled="true">
 					<div uib-accordion-heading>
-						<span ng-click="shippingSettingsCtrl.toggleStatus($index)">Zone {{$index+1}}</span>
-						<span class="glyphicon glyphicon-remove pull-right" style="cursor:pointer;" ng-click="shippingSettingsCtrl.deleteZone($index)"></span>
-						<span class="glyphicon glyphicon-edit pull-right"></span>
+						<span ng-click="shippingSettingsCtrl.toggleStatus($index)" ng-bind="shippingSettingsCtrl.country_helper[$index].country_name"></span>
+						<span ng-click="shippingSettingsCtrl.toggleStatus($index)" ng-if="!shippingSettingsCtrl.country_helper[$index]['status']">
+							<span class="glyphicon glyphicon-edit pull-right" ng-if="setting.prices && setting.prices.length > 0" ng-cloak></span>
+							<button class="btn btn-default btn-green pull-right" ng-if="!setting.prices || setting.prices.length <= 0" ng-cloak>Add shipping prices</button>
+						</span>
 					</div>
-					<shipping-zones zone="zone"></shipping-zones>
+					<shipping-types setting="setting"></shipping-types>
 					<hr>
-					<shipping-weights-prices zone="zone" weights="shippingSettingsCtrl.metrics.weights"></shipping-weights-prices>
+					<shipping-weights-prices setting="setting" weights="shippingSettingsCtrl.metrics.weights"></shipping-weights-prices>
 					<hr>
-					<shipping-observations zone="zone" languages="shippingSettingsCtrl.languages"></shipping-observations>
+					<shipping-observations setting="setting" languages="shippingSettingsCtrl.languages"></shipping-observations>
 					<div class="row text-center">
-						<button class="btn btn-default btn-green">Save</button>
+						<button class="btn btn-default btn-green" ng-click="shippingSettingsCtrl.save()">Save</button>
 						<button class="btn btn-default">Cancel</button>
 					</div>
 				</div>
 			</uib-accordion>
-		</div>
-		<div class="text-center">
-			<button class="btn btn-default btn-green" ng-click="shippingSettingsCtrl.addZone()">Create zone</button>
 		</div>
 	</div>
 </div>
