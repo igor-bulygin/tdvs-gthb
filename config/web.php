@@ -324,9 +324,10 @@ $config = [
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/faq'],
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/term'],
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/category'],
-				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/country'],
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/location'],
+				'GET api3/pub/v1/countries' => 'api3/pub/v1/country/index',
 				'GET api3/pub/v1/countries/worldwide' => 'api3/pub/v1/country/worldwide',
+				'GET api3/pub/v1/countries/<countryCode:[^/.]*?>' => 'api3/pub/v1/country/view',
 				'GET api3/pub/v1/invitations/<uuid:[^/.]*?>' => 'api3/pub/v1/invitation/view', // override "view" action to accept alphanumeric ids
 
 				'POST api3/pub/v1/auth/login' => 'api3/pub/v1/auth/login',

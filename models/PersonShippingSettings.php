@@ -12,7 +12,12 @@ namespace app\models;
  */
 class PersonShippingSettings extends EmbedModel
 {
+	//TODO deprecate:
 	public $zones;
+	//TODO deprecate:
+	public $weight_measure;
+	//TODO deprecate:
+	public $currency;
 
 	public function attributes()
 	{
@@ -150,35 +155,56 @@ class PersonShippingSettings extends EmbedModel
 
 	public function validatePrices($attribute, $params)
 	{
-		$positiveFields = [
-			'min_weight',
-			'price',
-		];
-
 		$prices = $this->prices;
 
+		$last = 0;
 		foreach ($prices as $price) {
 
-			foreach ($positiveFields as $field) {
-				$value = $price[$field];
-				if (empty($value) || !is_numeric($value) || $value <= 0) {
-					$this->addError('prices', sprintf('%s %s must be a positive value', $field, $value));
+			if (!array_key_exists('min_weight', $price)) {
+				$this->addError('prices', 'min_weight is required');
+			}
+
+			if (!array_key_exists('max_weight', $price)) {
+				$this->addError('prices', 'max_weight is required');
+			}
+
+			if (!array_key_exists('price', $price)) {
+				$this->addError('prices', 'price is required');
+			}
+
+			if ($this->shipping_express_time && !array_key_exists('price_express', $price)) {
+				$this->addError('prices', 'price_express is required');
+			}
+
+			$minWeight = $price['min_weight'];
+			if ($minWeight !== null) {
+				if (!is_numeric($minWeight) || $minWeight < $last) {
+					$this->addError('prices', sprintf('min_weight %s must be a positive value greater or equal to %s', $minWeight, $last));
 				}
 			}
+
 			$maxWeight = $price['max_weight'];
 			if ($maxWeight !== null) {
-				if (!is_numeric($maxWeight) || $maxWeight <= 0) {
-					$this->addError('prices', sprintf('max_weight %s must be a positive value or null', $maxWeight));
-				} elseif ($maxWeight <= $price['min_weight']) {
-					$this->addError('prices', sprintf('max_weight %s must be greater than min_weight', $maxWeight));
+				if (!is_numeric($maxWeight) || $maxWeight <= $minWeight) {
+					$this->addError('prices', sprintf('max_weight %s must be greater than min_weight %s', $maxWeight, $minWeight));
+				}
+			}
+
+			$price = $price['price'];
+			if ($price !== null) {
+				if (!is_numeric($price) || $price < 0) {
+					$this->addError('prices', sprintf('price %s must be a positive value or zero', $price));
 				}
 			}
 
 			if (isset($price['price_express'])) {
-				if (empty($value) || !is_numeric($value) || $value <= 0) {
-					$this->addError('prices', sprintf('price_express %s must be a positive value', $value));
+				$priceExpress = $price['price_express'];
+				if (!is_numeric($priceExpress) || $priceExpress < 0) {
+					$this->addError('prices', sprintf('price_express %s must be a positive value or zero', $priceExpress));
 				}
 			}
+
+			$last = $maxWeight;
 		}
 	}
 }

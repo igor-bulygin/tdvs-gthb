@@ -20,13 +20,14 @@
 					</div>
 					<div class="col-md-2">
 						<input type="number" ng-model="price.max_weight" class="form-control ng-class:{'error-input': shippingWeightsPricesCtrl.has_error(shippingWeightsPricesCtrl.pricesForm, shippingWeightsPricesCtrl.pricesForm['max_weight_'+$index])}" name="{{'max_weight_'+$index}}" ng-disabled="$last && price.max_weight === null && shippingWeightsPricesCtrl.unlimited_weight" ng-min="price.min_weight" ng-required="!shippingWeightsPricesCtrl.unlimited_weight || (shippingWeightsPricesCtrl.unlimited_weight && !$last && shippingWeightsPricesCtrl.setting.prices.length > 1)" min="0">
-						<span ng-bind="shippingWeightsPricesCtrl.setting.weight_measure"></span>
+						<span ng-bind="shippingWeightsPricesCtrl.person.settings.weight_measure"></span>
 					</div>
 					<div class="col-md-1">
 						<p>Standard shipping</p>
 					</div>
 					<div class="col-md-2">
 						<input type="number" ng-model="price.price" class="form-control ng-class:{'error-input': shippingWeightsPricesCtrl.has_error(shippingWeightsPricesCtrl.pricesForm, shippingWeightsPricesCtrl.pricesForm['price_'+$index])}" name="{{'price_'+$index}}" required min="0">
+						<span ng-bind="shippingWeightsPricesCtrl.currency"></span>
 					</div>
 					<div ng-if="shippingWeightsPricesCtrl.setting.shipping_express_time" ng-cloak>
 						<div class="col-md-1">
@@ -34,6 +35,7 @@
 						</div>
 						<div class="col-md-2">
 							<input type="number" ng-model="price.price_express" class="form-control ng-class:{'error-input': shippingWeightsPricesCtrl.has_error(shippingWeightsPricesCtrl.pricesForm, shippingWeightsPricesCtrl.pricesForm['price_express_'+$index])}" name="{{'price_express_'+$index}}" ng-required="setting.shipping_express_time" min="0">
+							<span ng-bind="shippingWeightsPricesCtrl.currency"></span>
 						</div>
 					</div>
 					<form-errors condition="shippingWeightsPricesCtrl.has_error(shippingWeightsPricesCtrl.pricesForm, shippingWeightsPricesCtrl.pricesForm['min_weight_'+$index])" field="shippingWeightsPricesCtrl.pricesForm['min_weight_'+$index]"></form-errors>
