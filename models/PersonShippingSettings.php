@@ -6,6 +6,7 @@ namespace app\models;
  * @property int shipping_time
  * @property int shipping_express_time
  * @property array prices
+ * @property array observations
  *
  * @method Person getParentObject()
  */
@@ -24,6 +25,7 @@ class PersonShippingSettings extends EmbedModel
 			'shipping_time',
 			'shipping_express_time',
 			'prices',
+			'observations',
 		];
 	}
 
@@ -94,6 +96,14 @@ class PersonShippingSettings extends EmbedModel
 			[
 				'prices',
 				'validatePrices',
+				'on' => [
+					Person::SCENARIO_DEVISER_UPDATE_DRAFT,
+					Person::SCENARIO_DEVISER_UPDATE_PROFILE,
+				]
+			],
+			[
+				'observations',
+				'app\validators\TranslatableValidator',
 				'on' => [
 					Person::SCENARIO_DEVISER_UPDATE_DRAFT,
 					Person::SCENARIO_DEVISER_UPDATE_PROFILE,

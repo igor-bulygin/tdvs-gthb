@@ -347,7 +347,10 @@ Example about how to call to Web Service to get specific person
           "price": 20,
           "price_express": 30
         }
-      ]
+      ],
+      "observations" : {
+        "en-US" : "lorem ipsum dolor..."
+      }
     }
   ],
   "curriculum": null,
