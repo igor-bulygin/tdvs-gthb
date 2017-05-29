@@ -3,7 +3,7 @@
 
 	function locationDataService($resource, apiConfig, apiMethods) {
 		var Location = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'locations');
-		var Country = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'countries');
+		var Country = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'countries/:countryCode');
 		var WorldWide = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'countries/worldwide');
 
 		this.getCountry = getCountry;

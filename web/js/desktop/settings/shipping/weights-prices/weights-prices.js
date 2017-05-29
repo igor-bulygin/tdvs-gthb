@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(metricDataService, UtilService) {
+	function controller(UtilService, locationDataService) {
 		var vm = this;
 		vm.addPrice = addPrice;
 		vm.setUnlimitedWeight = setUnlimitedWeight;
@@ -10,9 +10,21 @@
 		init();
 
 		function init() {
+			getCurrency();
 			if(!angular.isArray(vm.setting.prices) || vm.setting.prices.length == 0) {
 				vm.setting.prices = []
 			}
+		}
+
+		function getCurrency() {
+			function onGetCountrySuccess(data) {
+				vm.currency = angular.copy(data.currency_code);
+			}
+
+
+			locationDataService.getCountry({
+				countryCode: vm.setting.country_code
+			}, onGetCountrySuccess, UtilService.onError)
 		}
 
 		function addPrice() {
@@ -39,6 +51,7 @@
 		controllerAs: "shippingWeightsPricesCtrl",
 		bindings: {
 			setting: '<',
+			person: '<'
 		}
 	}
 
