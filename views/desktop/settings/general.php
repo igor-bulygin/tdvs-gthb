@@ -121,6 +121,9 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 	</div>
 	<script type="text/ng-template" id="passwordModal">
 		<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="generalSettingsCtrl.dismiss()">
+			<span class="ion-ios-close" aria-hidden="true"></span>
+		</button>
 			<h3 class="modal-title" id="modal-title">Change password</h3>
 		</div>
 		<div class="modal-body personal-info-wrapper">

@@ -25,6 +25,7 @@
 		vm.passwordModal=null;
 		vm.weightMeasures=[];
 		vm.weightCharged=false;
+		vm.dismiss=dismiss;
 		
 		function init() {
 			getWeightUnits();
@@ -97,6 +98,10 @@
 				scope: $scope,
 				size: 'sm'
 			});
+		}
+
+		function dismiss() {
+			vm.passwordModal.close();
 		}
 
 		function updatePassword() {
