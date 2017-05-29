@@ -153,7 +153,6 @@ class PersonShippingSettings extends EmbedModel
 		$positiveFields = [
 			'min_weight',
 			'price',
-			'price_express',
 		];
 
 		$prices = $this->prices;
@@ -172,6 +171,12 @@ class PersonShippingSettings extends EmbedModel
 					$this->addError('prices', sprintf('max_weight %s must be a positive value or null', $maxWeight));
 				} elseif ($maxWeight <= $price['min_weight']) {
 					$this->addError('prices', sprintf('max_weight %s must be greater than min_weight', $maxWeight));
+				}
+			}
+
+			if (isset($price['price_express'])) {
+				if (empty($value) || !is_numeric($value) || $value <= 0) {
+					$this->addError('prices', sprintf('price_express %s must be a positive value', $value));
 				}
 			}
 		}
