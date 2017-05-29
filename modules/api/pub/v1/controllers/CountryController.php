@@ -53,6 +53,9 @@ class CountryController extends AppPublicController {
 
     public function actionWorldwide() {
 
+		// set the scenario to serialize objects
+		Country::setSerializeScenario(Country::SERIALIZE_SCENARIO_PUBLIC);
+
     	$continents = [];
     	foreach (Country::CONTINENTS as $code => $name) {
     		if ($code != Country::WORLD_WIDE) {
