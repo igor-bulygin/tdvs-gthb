@@ -41,7 +41,8 @@ Example about how to call to Web Service to get specific person
     "city": "Concord",
     "street": null,
     "number": null,
-    "phone_number": null,
+    `phone_number_prefix`: "999999999",
+    `phone_number`: "+34",
     "zip": null,
     "bday": null,
     "surnames": null
@@ -325,8 +326,6 @@ Example about how to call to Web Service to get specific person
   "shipping_settings": [
     {
       "country_code": "ES",
-      "weight_measure": "g",
-      "currency": "EUR",
       "shipping_time": 1,
       "shipping_express_time": 1,
       "prices": [
@@ -374,7 +373,7 @@ Example about how to call to Web Service to get specific person
   "videos_edit_link": "http://localhost:8080/deviser/dechoker/bf2583c/video/edit",
   "faq_edit_link": "http://localhost:8080/deviser/dechoker/bf2583c/faq/edit",
   "settings": {
-    "currency": null,
+    "weight_measure": "g",
     "lang": null,
     "bank_info": {
       "location": null,
