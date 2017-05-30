@@ -24,40 +24,24 @@
 		}
 
 		function getCountries() {
-			function onGetCountrySuccess(data) {
-				vm.countries = angular.copy(data.items);
-				checkCountries();
-				parseCountries();
-			}
-			locationDataService.getCountry(null, onGetCountrySuccess, UtilService.onError);
-		}
-
-		function checkCountries() {
-			if(vm.person.available_countries.length > vm.person.shipping_settings.length) {
-				vm.person.available_countries.forEach(function(code) {
-					var setting = vm.person.shipping_settings.find(function(settings) {
-						return settings.country_code == code
-					})
-					if(!setting) {
-						vm.person.shipping_settings.push({
-							country_code: code
-						})
-					}
+			vm.person.available_countries.forEach(function(code) {
+				var setting = vm.person.shipping_settings.find(function(setting) {
+					return settings.country_code == code
 				})
-			}
-		}
-
-		function parseCountries() {
-			if(vm.person.shipping_settings.length > 0) {
-				vm.person.shipping_settings.forEach(function (setting) {
-					var country = vm.countries.find(function(country) {
-						return setting.country_code == country.id
+				if(!setting) {
+					vm.person.shipping_settings.push({
+						country_code: code
 					})
+				}
+				locationDataService.getCountry({
+					countryCode: code
+				}, function(data) {
 					vm.country_helper.push({
-						country_name: country.country_name
+						country_name: data.country_name,
+						currency: data.currency_code
 					})
-				})
-			}
+				}, UtilService.onError);
+			});
 		}
 
 		function toggleStatus(index) {
@@ -66,7 +50,6 @@
 
 		function save() {
 			function onUpdateProfileSuccess(data) {
-				console.log(data);
 				vm.country_helper.forEach(function(helper) {
 					helper.status = false;
 				})

@@ -32,7 +32,7 @@ $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD
 					</div>
 					<shipping-types setting="setting"></shipping-types>
 					<hr>
-					<shipping-weights-prices setting="setting" person="shippingSettingsCtrl.person"></shipping-weights-prices>
+					<shipping-weights-prices setting="setting" person="shippingSettingsCtrl.person" currency="shippingSettingsCtrl.country_helper[$index].currency"></shipping-weights-prices>
 					<hr>
 					<shipping-observations setting="setting" languages="shippingSettingsCtrl.languages"></shipping-observations>
 					<div class="row text-center">
