@@ -25,10 +25,10 @@
 
 		function getCountries() {
 			vm.person.available_countries.forEach(function(code) {
-				var setting = vm.person.shipping_settings.find(function(setting) {
-					return settings.country_code == code
+				var setting_found = vm.person.shipping_settings.find(function(setting) {
+					return setting.country_code == code
 				})
-				if(!setting) {
+				if(!setting_found) {
 					vm.person.shipping_settings.push({
 						country_code: code
 					})
