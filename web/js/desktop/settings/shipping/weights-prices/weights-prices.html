@@ -41,6 +41,7 @@
 					<form-errors condition="shippingWeightsPricesCtrl.has_error(shippingWeightsPricesCtrl.pricesForm, shippingWeightsPricesCtrl.pricesForm['min_weight_'+$index])" field="shippingWeightsPricesCtrl.pricesForm['min_weight_'+$index]"></form-errors>
 					<form-errors condition="shippingWeightsPricesCtrl.has_error(shippingWeightsPricesCtrl.pricesForm, shippingWeightsPricesCtrl.pricesForm['max_weight_'+$index])" field="shippingWeightsPricesCtrl.pricesForm['max_weight_'+$index]"></form-errors>
 				</div>
+				<span class="glyphicon glyphicon-remove" ng-click="shippingWeightsPricesCtrl.deletePrice($index)"></span>
 				<div class="row" ng-if="$last">
 					<div class="form-group">
 						<div class="checkbox checkbox-circle">

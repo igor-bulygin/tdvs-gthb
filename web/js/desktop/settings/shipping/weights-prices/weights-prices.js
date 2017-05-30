@@ -4,6 +4,7 @@
 	function controller(UtilService, locationDataService, $scope) {
 		var vm = this;
 		vm.addPrice = addPrice;
+		vm.deletePrice = deletePrice;
 		vm.setUnlimitedWeight = setUnlimitedWeight;
 		vm.has_error = UtilService.has_error;
 
@@ -29,6 +30,10 @@
 			if(vm.setting.shipping_express_time > 0)
 				object['price_express'] = 0;
 			vm.setting.prices.push(object);
+		}
+
+		function deletePrice(index) {
+			vm.setting.prices.splice(index, 1);
 		}
 
 		function setUnlimitedWeight() {
