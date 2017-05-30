@@ -65,8 +65,7 @@ class PersonSettings extends EmbedModel
 			],
 			[
 				'weight_measure',
-				'in',
-				'range' => MetricType::UNITS[MetricType::WEIGHT],
+				'app\validators\WeightUnitValidator',
 				'on' => [
 					Person::SCENARIO_DEVISER_UPDATE_DRAFT,
 					Person::SCENARIO_DEVISER_UPDATE_PROFILE,
