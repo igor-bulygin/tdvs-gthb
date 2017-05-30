@@ -14,7 +14,7 @@
 		}
 
 		function getOrder() {
-			function onGetOrderSuccess(data) {
+			function onGetOrderSuccess(orderData) {
 				vm.order = angular.copy(orderData);
 				cartService.parseTags(vm.order);
 				vm.devisers = cartService.parseDevisersFromProducts(vm.order);
