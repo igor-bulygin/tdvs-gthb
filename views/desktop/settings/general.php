@@ -34,7 +34,7 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 							</div>
 							<label for="city" class="col-md-2" ng-class="{'col-md-offset-6': !generalSettingsCtrl.isDeviser}">CITY</label>
 							<div class="col-md-4 text-right">
-								<input type="text" name="city" class="form-control" ng-model="generalSettingsCtrl.city" ng-class="{'error-input': generalSettingsCtrl.dataForm.city.$invalid}" ng-model-options='{ debounce: 100 }' ng-change="generalSettingsCtrl.searchPlace(generalSettingsCtrl.person.personal_info.city)" required>
+								<input type="text" name="city" class="form-control" ng-model="generalSettingsCtrl.city" ng-class="{'error-input': generalSettingsCtrl.dataForm.city.$invalid}" ng-model-options='{ debounce: 80 }' ng-change="generalSettingsCtrl.searchPlace(generalSettingsCtrl.city)" required>
 								<div ng-if="generalSettingsCtrl.showCities" ng-cloak>
 									<ul class="city-selection">
 										<li ng-repeat="city in generalSettingsCtrl.cities">
