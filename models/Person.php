@@ -1411,10 +1411,7 @@ class Person extends CActiveRecord implements IdentityInterface
 	}
 
 	public function getSettingsLink() {
-		if ($this->isDeviser()) {
-			return Url::to(["settings/index", "slug" => $this->getSlug(), 'person_id' => $this->short_id]);
-		}
-		return '#';
+		return Url::to(["settings/index", "slug" => $this->getSlug(), 'person_id' => $this->short_id]);
 	}
 
 	public function getStoreLink($params = [])
