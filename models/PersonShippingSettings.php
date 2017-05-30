@@ -23,10 +23,6 @@ class PersonShippingSettings extends EmbedModel
 	{
 		return [
 			'country_code',
-			/*
-			'weight_measure',
-			'currency',
-			*/
 			'shipping_time',
 			'shipping_express_time',
 			'prices',
@@ -53,51 +49,21 @@ class PersonShippingSettings extends EmbedModel
 			[['country_code', 'shipping_time'], 'required'],
 			[
 				'country_code',
-				'in',
-				'range' => Country::getCountryCodes(),
+				'app\validators\CountryCodeValidator',
 				'on' => [
 					Person::SCENARIO_DEVISER_UPDATE_DRAFT,
 					Person::SCENARIO_DEVISER_UPDATE_PROFILE,
 				]
 			],
-			/*
-			[
-				'weight_measure',
-				'in',
-				'range' => MetricType::UNITS[MetricType::WEIGHT],
-				'on' => [
-					Person::SCENARIO_DEVISER_UPDATE_DRAFT,
-					Person::SCENARIO_DEVISER_UPDATE_PROFILE,
-				]
-			],
-			[
-				'currency',
-				'in',
-				'range' => Currency::getCurrenciesCodes(),
-				'on' => [
-					Person::SCENARIO_DEVISER_UPDATE_DRAFT,
-					Person::SCENARIO_DEVISER_UPDATE_PROFILE,
-				]
-			],
-			*/
 			[
 				['shipping_time', 'shipping_express_time'],
-				'integer', 'min' => 1,
+				'integer',
+				'min' => 1,
 				'on' => [
 					Person::SCENARIO_DEVISER_UPDATE_DRAFT,
 					Person::SCENARIO_DEVISER_UPDATE_PROFILE,
 				]
 			],
-			/*
-			[
-				'zones',
-				'validateZones',
-				'on' => [
-					Person::SCENARIO_DEVISER_UPDATE_DRAFT,
-					Person::SCENARIO_DEVISER_UPDATE_PROFILE,
-				]
-			],
-			*/
 			[
 				'prices',
 				'validatePrices',
@@ -117,47 +83,11 @@ class PersonShippingSettings extends EmbedModel
 		];
 	}
 
-	/*
-	public function validateZones($attribute, $params)
-	{
-		$zones = $this->zones;
-
-		foreach ($zones as $zone) {
-
-			$parts = explode('/', $zone);
-			if (empty($parts)) {
-				$this->addError('zones', sprintf('Code %s is not valid. Each zone must be in format WW/{continent_code}/{country_code}', $zone));
-				break;
-			}
-			$worldWide = $parts[0];
-			if ($worldWide != Country::WORLD_WIDE) {
-				$this->addError('zones', sprintf('Code %s is not valid. First part of each zone must be Worldwide (WW)', $worldWide));
-				break;
-			}
-
-			if (count($parts) > 1) {
-				$continentCode = $parts[1];
-				if (count($parts) > 2) {
-					$countryCode = $parts[2];
-					$country = Country::findOne(['country_code' => $countryCode]);
-					if (empty($country)) {
-						$this->addError('zones', sprintf('Country code %s is not valid', $countryCode));
-					} elseif ($country->continent != $continentCode) {
-						$this->addError('zones', sprintf('Country code %s is not valid for continent %s', $countryCode, $continentCode));
-					}
-				} elseif (!Country::validateContinentCode($continentCode)) {
-					$this->addError('zones', sprintf('Continent code %s is not valid', $continentCode));
-				}
-			}
-		}
-	}
-	*/
-
 	public function validatePrices($attribute, $params)
 	{
-		$prices = $this->prices;
+		$prices = $this->{$attribute};
 
-		$last = 0;
+		$lastWeight = 0;
 		foreach ($prices as $price) {
 
 			if (!array_key_exists('min_weight', $price)) {
@@ -177,24 +107,19 @@ class PersonShippingSettings extends EmbedModel
 			}
 
 			$minWeight = $price['min_weight'];
-			if ($minWeight !== null) {
-				if (!is_numeric($minWeight) || $minWeight < $last) {
-					$this->addError('prices', sprintf('min_weight %s must be a positive value greater or equal to %s', $minWeight, $last));
-				}
-			}
-
 			$maxWeight = $price['max_weight'];
-			if ($maxWeight !== null) {
-				if (!is_numeric($maxWeight) || $maxWeight <= $minWeight) {
-					$this->addError('prices', sprintf('max_weight %s must be greater than min_weight %s', $maxWeight, $minWeight));
-				}
+			$price = $price['price'];
+
+			if (!is_numeric($minWeight) || $minWeight < $lastWeight) {
+				$this->addError('prices', sprintf('min_weight %s must be a positive value greater or equal to %s', $minWeight, $lastWeight));
 			}
 
-			$price = $price['price'];
-			if ($price !== null) {
-				if (!is_numeric($price) || $price < 0) {
-					$this->addError('prices', sprintf('price %s must be a positive value or zero', $price));
-				}
+			if ($maxWeight !== null && (!is_numeric($maxWeight) || $maxWeight <= $minWeight)) {
+				$this->addError('prices', sprintf('max_weight %s must be null, or positive value greater than min_weight %s', $maxWeight, $minWeight));
+			}
+
+			if (!is_numeric($price) || $price < 0) {
+				$this->addError('prices', sprintf('price %s must be a positive value or zero', $price));
 			}
 
 			if (isset($price['price_express'])) {
@@ -204,7 +129,7 @@ class PersonShippingSettings extends EmbedModel
 				}
 			}
 
-			$last = $maxWeight;
+			$lastWeight = $maxWeight;
 		}
 	}
 }
