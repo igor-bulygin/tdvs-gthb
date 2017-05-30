@@ -378,18 +378,6 @@ Example about how to call to Web Service to get specific person
   "settings": {
     "weight_measure": "g",
     "lang": null,
-    "bank_info": {
-      "location": null,
-      "bank_name": null,
-      "institution_number": null,
-      "transit_number": null,
-      "account_number": null,
-      "iban": null,
-      "swift_bic": null,
-      "account_type": null,
-      "routing_number": null,
-      "bsb_code": null
-    },
     "stripe_info": {
       "access_token": null,
       "livemode": null,

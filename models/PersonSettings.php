@@ -13,13 +13,15 @@ class PersonSettings extends EmbedModel
 {
 	// TODO deprecate
 	public $currency;
+	// TODO deprecate
+	public $bank_info;
 
 	public function attributes()
 	{
 		return [
 			'weight_measure',
 			'lang',
-			'bank_info',
+//			'bank_info',
 			'stripe_info',
 		];
 	}
@@ -32,16 +34,16 @@ class PersonSettings extends EmbedModel
 
 	public function beforeValidate()
 	{
-		$this->bankInfoMapping->setParentObject($this);
+		//$this->bankInfoMapping->setParentObject($this);
 		$this->stripeInfoMapping->setParentObject($this);
 
 		return parent::beforeValidate();
 	}
 
-	public function embedBankInfoMapping()
-	{
-		return $this->mapEmbedded('bank_info', PersonBankInfo::className(), array('unsetSource' => false));
-	}
+//	public function embedBankInfoMapping()
+//	{
+//		return $this->mapEmbedded('bank_info', PersonBankInfo::className(), array('unsetSource' => false));
+//	}
 
 	public function embedStripeInfoMapping()
 	{
@@ -53,7 +55,12 @@ class PersonSettings extends EmbedModel
 	{
 		return [
 			[
-				$this->attributes(),
+				[
+					'weight_measure',
+					'lang',
+					// 'bank_info',
+					// 'stripe_info',
+				],
 				'safe',
 				'on' => [
 					Person::SCENARIO_DEVISER_UPDATE_DRAFT,
@@ -71,11 +78,13 @@ class PersonSettings extends EmbedModel
 					Person::SCENARIO_DEVISER_UPDATE_PROFILE,
 				]
 			],
+			/*
 			[
 				'bankInfoMapping',
 				'app\validators\EmbedDocValidator',
 				'on' => [Person::SCENARIO_DEVISER_UPDATE_DRAFT, Person::SCENARIO_DEVISER_UPDATE_PROFILE]
 			],
+			*/
 			[
 				'stripeInfoMapping',
 				'app\validators\EmbedDocValidator',

@@ -44,15 +44,6 @@ Example about how to call to Web Service to update Person profile
 * `settings`:
   * `lang`: code of default language ("en-US")
   * `weight_measure`: mg, g, kg, oz, or lb
-  * `bank_info`:
-    * `location`: code of country ("US")
-    * `bank_name`: name of the bank",
-    * `institution_number`
-    * `transit_number`
-    * `account_number`
-    * `swift_bic`
-    * `account_type`: posible values: `savings` and `checking`
-    * `routing_number`
 * `press`: [] array with images names about press related with the Person (["deviser.press.1.jpg", "deviser.press.2.jpg"])
 * `videos`: [] array of documents with info about videos related with the Person. Each element has:
   * `url`: URL of video streaming ("http://youtube.com/?v=asdf")
