@@ -90,20 +90,29 @@ class PersonShippingSettings extends EmbedModel
 		$lastWeight = 0;
 		foreach ($prices as $price) {
 
+			$hasErrors = false;
 			if (!array_key_exists('min_weight', $price)) {
 				$this->addError('prices', 'min_weight is required');
+				$hasErrors = true;
 			}
 
 			if (!array_key_exists('max_weight', $price)) {
 				$this->addError('prices', 'max_weight is required');
+				$hasErrors = true;
 			}
 
 			if (!array_key_exists('price', $price)) {
 				$this->addError('prices', 'price is required');
+				$hasErrors = true;
 			}
 
 			if ($this->shipping_express_time && !array_key_exists('price_express', $price)) {
 				$this->addError('prices', 'price_express is required');
+				$hasErrors = true;
+			}
+
+			if ($hasErrors) {
+				continue;
 			}
 
 			$minWeight = $price['min_weight'];
