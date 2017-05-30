@@ -130,6 +130,26 @@ class Country extends CActiveRecord
 	}
 
 	/**
+	 * Get one entity serialized
+	 *
+	 * @param string $id
+	 *
+	 * @return Country|null
+	 */
+	public static function findOneSerialized($id)
+	{
+		/** @var Country $country */
+		$country = static::find()->select(self::getSelectFields())->where(["country_code" => $id])->one();
+
+		// if automatic translation is enabled
+		if (static::$translateFields) {
+			Utils::translate($country);
+		}
+
+		return $country;
+	}
+
+	/**
 	 * Get a collection of entities serialized, according to serialization configuration
 	 *
 	 * @param array $criteria

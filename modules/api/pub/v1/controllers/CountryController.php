@@ -4,6 +4,7 @@ namespace app\modules\api\pub\v1\controllers;
 
 use app\models\Country;
 use Yii;
+use yii\web\NotFoundHttpException;
 
 class CountryController extends AppPublicController {
 
@@ -12,7 +13,7 @@ class CountryController extends AppPublicController {
 		Country::setSerializeScenario(Country::SERIALIZE_SCENARIO_PUBLIC);
 
 		/** @var Country $country */
-		$country = Country::findOne(["country_code" => $countryCode]);
+		$country = Country::findOneSerialized($countryCode);
 		if (empty($country)) {
 			throw new NotFoundHttpException('Country not found');
 		}
