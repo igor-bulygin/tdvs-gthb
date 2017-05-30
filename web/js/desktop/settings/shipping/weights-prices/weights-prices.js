@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(UtilService, locationDataService) {
+	function controller(UtilService, locationDataService, $scope) {
 		var vm = this;
 		vm.addPrice = addPrice;
 		vm.setUnlimitedWeight = setUnlimitedWeight;
@@ -12,6 +12,10 @@
 		function init() {
 			if(!angular.isArray(vm.setting.prices) || vm.setting.prices.length == 0) {
 				vm.setting.prices = []
+			}
+			else {
+				if(vm.setting.prices[vm.setting.prices.length-1].max_weight === null)
+					vm.unlimited_weight = true;
 			}
 		}
 
@@ -30,6 +34,17 @@
 		function setUnlimitedWeight() {
 			vm.setting.prices[vm.setting.prices.length-1].max_weight = vm.unlimited_weight ? null : 0
 		}
+
+		$scope.$watch('shippingWeightsPricesCtrl.pricesForm.$error', function(newValue, oldValue){
+			if(angular.isObject(newValue) && newValue !== null) {
+				for(var key in newValue) {
+					newValue[key].forEach(function(field) {
+						var name = field['$name'];
+						vm.pricesForm[name].$setTouched();
+					});
+				}
+			}
+		}, true)
 
 	}
 
