@@ -2,25 +2,12 @@
 
 namespace app\modules\api\admin\v1\controllers;
 
-use app\helpers\CActiveRecord;
+use app\models\Term;
 use Yii;
+use yii\filters\ContentNegotiator;
 use yii\rest\Controller;
 use yii\web\ForbiddenHttpException;
-use yii\web\NotFoundHttpException;
 use yii\web\Response;
-use app\helpers\Utils;
-use app\models\Person;
-use app\models\Product;
-use app\models\Country;
-use app\models\SizeChart;
-use yii\base\ActionFilter;
-use yii\filters\VerbFilter;
-use yii\filters\ContentNegotiator;
-
-use app\models\Tag;
-use app\models\Category;
-use app\models\Faq;
-use app\models\Term;
 
 class TermController extends Controller {
 

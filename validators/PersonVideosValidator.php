@@ -1,12 +1,7 @@
 <?php
 namespace app\validators;
 
-use app\helpers\Utils;
-use app\models\Person;
-use app\models\Product;
-use Yii;
-use yii\base\Model;
-use yii\helpers\Html;
+use app\models\Product2;
 use yii\validators\UrlValidator;
 use yii\validators\Validator;
 
@@ -42,7 +37,7 @@ class PersonVideosValidator extends Validator
 			// if products are specified, must exist
 			if ((array_key_exists("products", $videoData)) && (!empty($videoData["products"])) && is_array($videoData["products"])) {
 				foreach ($videoData["products"] as $id) {
-					if (!Product::findOne((["short_id" => $id]))) {
+					if (!Product2::findOne((["short_id" => $id]))) {
 						$this->addError($object, $attribute, sprintf("Product %s not found", $id));
 					}
 				}

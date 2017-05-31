@@ -232,12 +232,12 @@ class DeviserController extends CController
 	 * @param $slug
 	 * @param $short_id
 	 *
-	 * @return \app\models\Product|void
+	 * @return \app\models\Product2|void
 	 * @deprecated
 	 */
 	public function actionUploadProductPhoto($slug, $short_id)
 	{
-		/* @var $product \app\models\Product */
+		/* @var $product \app\models\Product2 */
 		$product = Product2::findOne(["short_id" => $short_id]);
 
 		$data = Yii::$app->request->getBodyParam("data", null);
@@ -268,12 +268,12 @@ class DeviserController extends CController
 	 * @param $slug
 	 * @param $short_id
 	 *
-	 * @return \app\models\Product
+	 * @return \app\models\Product2
 	 * @deprecated
 	 */
 	public function actionDeleteProductPhoto($slug, $short_id)
 	{
-		/* @var $product \app\models\Product */
+		/* @var $product \app\models\Product2 */
 		$product = Product2::findOne(["short_id" => $short_id]);
 		$product_path = Utils::join_paths(Yii::getAlias("@product"), $product->short_id);
 		$photo_name = $this->getJsonFromRequest("photo_name");

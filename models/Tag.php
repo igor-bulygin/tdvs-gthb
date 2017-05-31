@@ -131,7 +131,7 @@ class Tag extends CActiveRecord
 	 */
 	static protected $serializeFields = [];
 
-	/** @var  Product */
+	/** @var  Product2|Product */
 	private $product;
 
 	/** @var  bool */
@@ -446,7 +446,7 @@ class Tag extends CActiveRecord
 	/**
 	 * Set the product to use to filter the list of values to show
 	 *
-	 * @param Product|Product2 $product
+	 * @param Product2|Product $product
 	 * @return Tag
 	 */
 	public function setFilterProduct($product)

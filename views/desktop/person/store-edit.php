@@ -5,13 +5,13 @@ use app\components\PersonMenu;
 use app\helpers\Utils;
 use app\models\Category;
 use app\models\Person;
-use app\models\Product;
+use app\models\Product2;
 use yii\helpers\Json;
 
 EditStoreAsset::register($this);
 
 /** @var Person $person */
-/** @var Product $product */
+/** @var Product2 $product */
 /** @var Category $category */
 /** @var Category $selectedCategory */
 

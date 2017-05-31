@@ -1,16 +1,14 @@
 <?php
 use app\assets\desktop\product\createProductAsset;
-use app\assets\desktop\pub\Product2Asset;
-use app\assets\desktop\pub\ProductDetailAsset;
 use app\models\Person;
 use app\models\PersonVideo;
-use app\models\Product;
+use app\models\Product2;
 use yii\helpers\Json;
 
 createProductAsset::register($this);
 
 /** @var Person $deviser */
-/** @var Product $product */
+/** @var Product2 $product */
 /** @var PersonVideo $video */
 
 $this->title = $person->getName() . ' - Todevise';

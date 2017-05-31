@@ -7,7 +7,6 @@ use app\models\Bespoke;
 use app\models\Lang;
 use app\models\MadeToOrder;
 use app\models\Person;
-use app\models\Product;
 use app\models\Product2;
 use Yii;
 use yii\filters\AccessControl;
@@ -156,37 +155,37 @@ class ProductController extends CController
 
 	public function actionCreate($slug, $deviser_id)
 	{
-		/** @var Person $deviser */
-		$deviser = Person::findOneSerialized($deviser_id);
+		/** @var Person $person */
+		$person = Person::findOneSerialized($deviser_id);
 
-		if (!$deviser) {
+		if (!$person) {
 			throw new NotFoundHttpException();
 		}
 
-		if (!$deviser->isDeviserEditable()) {
+		if (!$person->isDeviserEditable()) {
 			throw new UnauthorizedHttpException();
 		}
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("product-create", [
-			'person' => $deviser,
+			'person' => $person,
 		]);
 	}
 
 	public function actionEdit($slug, $deviser_id, $product_id)
 	{
-		/** @var Person $deviser */
-		$deviser = Person::findOneSerialized($deviser_id);
+		/** @var Person $person */
+		$person = Person::findOneSerialized($deviser_id);
 
-		if (!$deviser) {
+		if (!$person) {
 			throw new NotFoundHttpException();
 		}
 
-		if (!$deviser->isDeviserEditable()) {
+		if (!$person->isDeviserEditable()) {
 			throw new UnauthorizedHttpException();
 		}
 
-		$product = Product::findOneSerialized($product_id);
+		$product = Product2::findOneSerialized($product_id);
 
 		if (!$product) {
 			throw new BadRequestHttpException("Not found");
@@ -194,7 +193,7 @@ class ProductController extends CController
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("product-edit", [
-			'person' => $deviser,
+			'person' => $person,
 			'product' => $product,
 		]);
 	}
@@ -219,9 +218,9 @@ class ProductController extends CController
 		$cant = 0;
 		/** @var Person $deviser */
 		foreach ($devisers as $deviser) {
-			$products = Product::find()->where(["deviser_id" => $deviser->short_id])->all();
+			$products = Product2::find()->where(["deviser_id" => $deviser->short_id])->all();
 			$i = 0;
-			/** @var Product $product */
+			/** @var Product2 $product */
 			foreach ($products as $product) {
 				$i++;
 				// Update directly in low level, to avoid no desired behaviors of ActiveRecord

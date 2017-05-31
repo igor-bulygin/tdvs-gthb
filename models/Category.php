@@ -16,7 +16,7 @@ use yii\mongodb\Query;
  */
 class Category extends CActiveRecord {
 
-	/** @var Product */
+	/** @var Product2 */
 	private $deviserProduct;
 
 	/** @var array */
@@ -308,7 +308,7 @@ class Category extends CActiveRecord {
 	}
 
 	/**
-	 * @return Product
+	 * @return Product2
 	 */
 	public function getDeviserProduct()
 	{
@@ -316,7 +316,7 @@ class Category extends CActiveRecord {
 	}
 
 	/**
-	 * @param Product $deviserProduct
+	 * @param Product2 $deviserProduct
 	 */
 	public function setDeviserProduct($deviserProduct)
 	{
