@@ -288,6 +288,9 @@ ul {
 .relative {
   position: relative; }
 
+.mt-10 {
+  margin-top: 10px !important; }
+
 .mt-20 {
   margin-top: 20px; }
 
@@ -570,6 +573,11 @@ a, a:hover, a:focus {
     background-color: #bfbfbf;
     color: #ffffff;
     border: 1px solid #ffffff; }
+
+.btn-acordion {
+  margin-top: -10px !important;
+  height: 28px;
+  padding-top: 6px; }
 
 .products-menu ul {
   margin: 20px 0 40px;
@@ -1209,6 +1217,36 @@ input[type="radio"] .styled:checked + label::after {
   position: absolute;
   width: 100%;
   top: 120px; }
+
+.shipping-title {
+  text-transform: uppercase;
+  font-family: "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px; }
+
+.time-shipping {
+  max-width: 50px;
+  margin: 0 5px; }
+
+.shipping-time-wrapper {
+  margin-left: 0 !important;
+  margin-bottom: 0 !important;
+  margin-right: 0 !important;
+  font-family: "Univers Condensed Light", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+
+.days {
+  margin-top: 7px;
+  margin-left: 10px; }
+
+.serif {
+  font-family: "Playfair Display", Georgia, serif; }
+
+.green-link {
+  color: #7AB83A;
+  text-transform: uppercase; }
+  .green-link:hover {
+    color: #B8E986; }
+  .green-link:focus {
+    color: #B8E986; }
 
 .panel .panel-heading {
   background-color: transparent !important; }

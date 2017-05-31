@@ -1,0 +1,25 @@
+// ==========================================================================
+// Shipping
+// ==========================================================================
+.shipping-title{
+	text-transform: uppercase;
+    font-family: $font-family--bold;
+    font-size: 14px;
+}
+.time-shipping{
+	max-width: 50px;
+    margin: 0 5px;
+}
+.shipping-time-wrapper{
+	margin-left: 0!important;
+	margin-bottom: 0!important;
+	margin-right: 0!important;
+	font-family: $font-family--secondary;
+}
+.days{
+	margin-top: 7px;
+    margin-left: 10px;
+}
+.serif{
+	font-family: $font-family--serif;
+}

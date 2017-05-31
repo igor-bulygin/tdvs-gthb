@@ -4,3 +4,13 @@
 .link-red{
 	@extend %link-red;
 }
+.green-link{
+	color: $dark_green;
+	text-transform: uppercase;
+	&:hover{
+		color: $green;
+	}
+	&:focus{
+		color: $green;
+	}
+}

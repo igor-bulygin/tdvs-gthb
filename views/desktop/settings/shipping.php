@@ -27,7 +27,7 @@ $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD
 						<span ng-click="shippingSettingsCtrl.toggleStatus($index)" ng-bind="shippingSettingsCtrl.country_helper[$index].country_name"></span>
 						<span ng-click="shippingSettingsCtrl.toggleStatus($index)" ng-if="!shippingSettingsCtrl.country_helper[$index]['status']">
 							<span class="glyphicon glyphicon-edit pull-right" ng-if="setting.prices && setting.prices.length > 0" ng-cloak></span>
-							<button class="btn btn-default btn-green pull-right" ng-if="!setting.prices || setting.prices.length <= 0" ng-cloak>Add shipping prices</button>
+							<button class="btn btn-default btn-green btn-acordion pull-right" ng-if="!setting.prices || setting.prices.length <= 0" ng-cloak>Add shipping prices</button>
 						</span>
 					</div>
 					<shipping-types setting="setting"></shipping-types>
