@@ -17,7 +17,7 @@ class PersonController extends AppPrivateController
 		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
 
 		/** @var Person $person */
-		$person = Person::findOne(["short_id" => $personId]);
+		$person = Person::findOneSerialized($personId);
 		if (empty($person)) {
 			throw new NotFoundHttpException('Person not found');
 		}

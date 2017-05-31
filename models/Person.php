@@ -717,6 +717,9 @@ class Person extends CActiveRecord implements IdentityInterface
 					'videos_link' => 'videosLink',
 					'faq_link' => 'faqLink',
 				];
+
+				self::$translateFields = true;
+
 				break;
 			case self::SERIALIZE_SCENARIO_PUBLIC:
 				self::$serializeFields = [
@@ -754,6 +757,8 @@ class Person extends CActiveRecord implements IdentityInterface
 					'videos',
 //					'personal_info',
 				];
+
+				self::$translateFields = true;
 
 				break;
 			case self::SERIALIZE_SCENARIO_OWNER:
@@ -802,6 +807,8 @@ class Person extends CActiveRecord implements IdentityInterface
 					'videos'
 				];
 
+				self::$translateFields = false;
+
 				break;
 			case self::SERIALIZE_SCENARIO_ADMIN:
 				static::$serializeFields = [
@@ -825,10 +832,8 @@ class Person extends CActiveRecord implements IdentityInterface
 					'url_images' => 'urlImagesLocation',
 				];
 
-				// field name is "name", its value is defined by a PHP callback
-//            'name' => function () {
-//                return $this->first_name . ' ' . $this->last_name;
-//            },
+				self::$translateFields = false;
+
 				break;
 			default:
 				// now available for this Model
