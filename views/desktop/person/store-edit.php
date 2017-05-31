@@ -5,13 +5,13 @@ use app\components\PersonMenu;
 use app\helpers\Utils;
 use app\models\Category;
 use app\models\Person;
-use app\models\Product2;
+use app\models\Product;
 use yii\helpers\Json;
 
 EditStoreAsset::register($this);
 
 /** @var Person $person */
-/** @var Product2 $product */
+/** @var Product $product */
 /** @var Category $category */
 /** @var Category $selectedCategory */
 
@@ -49,7 +49,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 								<div class="cathegory-wrapper">
 									<?php if ($unpublishedWorks) { ?>
 										<div class="col-md-3 col-sm-3 col-xs-3 pad-cathegory">
-											<a href="<?= $person->getStoreEditLink(['product_state' => \app\models\Product2::PRODUCT_STATE_DRAFT])?>">
+											<a href="<?= $person->getStoreEditLink(['product_state' => \app\models\Product::PRODUCT_STATE_DRAFT])?>">
 												<div class="unpublished-square" ng-click="editStoreCtrl.show_unpublished_works()">
 													<p>Unpublished<br>works</p>
 												</div>

@@ -1,7 +1,7 @@
 <?php
 
-/* @var \app\models\Product2[] $products */
-/* @var \app\models\Product2[][] $moreWork */
+/* @var \app\models\Product[] $products */
+/* @var \app\models\Product[][] $moreWork */
 $this->title = 'Works - Todevise';
 
 \app\assets\desktop\pub\ProductsAsset::register($this);

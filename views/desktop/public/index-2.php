@@ -11,9 +11,9 @@ $this->title = 'Todevise / Home';
 /** @var int $totalDevisers */
 /** @var Person[][] $influencers */
 /** @var int $totalInfluencers */
-/** @var \app\models\Product2[] $works12 */
-/** @var \app\models\Product2[] $works3 */
-/** @var \app\models\Product2[][] $moreWork */
+/** @var \app\models\Product[] $works12 */
+/** @var \app\models\Product[] $works3 */
+/** @var \app\models\Product[][] $moreWork */
 /** @var \app\models\Box[] $boxes */
 /** @var \app\models\Story[] $stories */
 /** @var array $banners */

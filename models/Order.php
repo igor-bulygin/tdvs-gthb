@@ -173,10 +173,10 @@ class Order extends CActiveRecord {
 		$products = $this->products;
 
 		$result = [];
-		Product2::setSerializeScenario(Product2::SERIALIZE_SCENARIO_PUBLIC);
+		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_PUBLIC);
 		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_PUBLIC);
 		foreach ($products as $p) {
-			$product = Product2::findOneSerialized($p['product_id']);
+			$product = Product::findOneSerialized($p['product_id']);
 			$deviser = Person::findOneSerialized($p['deviser_id']);
 			$p['product_name'] = $product->name;
 			$p['product_photo'] = $product->getMainImage();
@@ -298,7 +298,7 @@ class Order extends CActiveRecord {
     }
 
 	public function addProduct(OrderProduct $orderProduct) {
-		$product = Product2::findOneSerialized($orderProduct->product_id); /* @var Product2 $product */
+		$product = Product::findOneSerialized($orderProduct->product_id); /* @var Product $product */
 		if (empty($orderProduct)) {
 			throw new Exception(sprintf("Product with id %s does not exists", $orderProduct->product_id));
 		}
@@ -333,7 +333,7 @@ class Order extends CActiveRecord {
 	}
 
 	public function updateProduct(OrderProduct $orderProduct) {
-		$product = Product2::findOneSerialized($orderProduct->product_id); /* @var Product2 $product */
+		$product = Product::findOneSerialized($orderProduct->product_id); /* @var Product $product */
 		if (empty($orderProduct)) {
 			throw new Exception(sprintf("Product with id %s does not exists", $orderProduct->product_id));
 		}

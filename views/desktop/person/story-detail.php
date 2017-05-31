@@ -130,7 +130,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 
 				<div class="row component-photos">
 					<?php foreach ($component->items as $workId) {
-						$work = \app\models\Product2::findOneSerialized($workId['work']); ?>
+						$work = \app\models\Product::findOneSerialized($workId['work']); ?>
 						<div class="col-lg-3">
 							<div class="grid">
 								<figure class="effect-zoe">

@@ -6,7 +6,7 @@ use app\models\Box;
 use app\models\Category;
 use app\models\Loved;
 use app\models\Person;
-use app\models\Product2;
+use app\models\Product;
 use app\models\Story;
 use Yii;
 use yii\filters\AccessControl;
@@ -74,19 +74,19 @@ class PersonController extends CController
 		}
 
 		if ($person->isPersonEditable()) {
-			$unpublishedWorks = Product2::findSerialized([
+			$unpublishedWorks = Product::findSerialized([
 				"deviser_id" => $person_id,
-				"product_state" => Product2::PRODUCT_STATE_DRAFT,
+				"product_state" => Product::PRODUCT_STATE_DRAFT,
 			]);
 		} else {
 			$unpublishedWorks = [];
 		}
 
 		// their products, for selected category
-		$products = Product2::findSerialized([
+		$products = Product::findSerialized([
 			"deviser_id" => $person_id,
 			"categories" => (empty($selectedSubcategory->short_id)) ? $selectedCategory->getShortIds() : $selectedSubcategory->getShortIds(),
-			"product_state" => Product2::PRODUCT_STATE_ACTIVE,
+			"product_state" => Product::PRODUCT_STATE_ACTIVE,
 		]);
 
 		$this->layout = '/desktop/public-2.php';
@@ -126,9 +126,9 @@ class PersonController extends CController
 			$selectedSubcategory = (count($selectedCategory->getDeviserSubcategories()) > 0) ? $selectedCategory->getDeviserSubcategories()[0] : new Category();
 		}
 
-		$unpublishedWorks = Product2::findSerialized([
+		$unpublishedWorks = Product::findSerialized([
 			"deviser_id" => $person_id,
-			"product_state" => Product2::PRODUCT_STATE_DRAFT,
+			"product_state" => Product::PRODUCT_STATE_DRAFT,
 		]);
 
 		$this->layout = '/desktop/public-2.php';

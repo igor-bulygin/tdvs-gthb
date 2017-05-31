@@ -169,7 +169,7 @@ class Box extends CActiveRecord
 	{
 		$products = $this->$attribute;
 		foreach ($products as $item) {
-			$product = Product2::findOneSerialized($item['product_id']);
+			$product = Product::findOneSerialized($item['product_id']);
 			if (!$product) {
 				$this->addError($attribute, sprintf('Product %s not found', $item->product_id));
 			}
@@ -357,16 +357,16 @@ class Box extends CActiveRecord
 	 * Get the products related with this box
 	 * ATTENTION: If an unactive product is in the box, it will not be retrieved
 	 *
-	 * @return Product2[]
+	 * @return Product[]
 	 */
 	public function getProducts()
 	{
 		$return = [];
-		Product2::setSerializeScenario(Product2::SERIALIZE_SCENARIO_PUBLIC);
+		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_PUBLIC);
 		$products = $this->productsMapping;
 		foreach ($products as $item) {
-			$product = Product2::findOneSerialized($item->product_id);
-			if ($product->product_state == Product2::PRODUCT_STATE_ACTIVE) {
+			$product = Product::findOneSerialized($item->product_id);
+			if ($product->product_state == Product::PRODUCT_STATE_ACTIVE) {
 				$return[$item->created_at . '_' . $item->product_id] = $product;
 			}
 		}
@@ -461,8 +461,8 @@ class Box extends CActiveRecord
 	 */
 	public function addProduct($boxProduct)
 	{
-		$product = Product2::findOneSerialized($boxProduct->product_id);
-		/* @var Product2 $product */
+		$product = Product::findOneSerialized($boxProduct->product_id);
+		/* @var Product $product */
 		if (empty($product)) {
 			throw new Exception(sprintf("Product with id %s does not exists", $boxProduct->product_id));
 		}

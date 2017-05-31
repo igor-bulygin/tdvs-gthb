@@ -49,7 +49,7 @@ use yii2tech\ar\position\PositionBehavior;
  * @property int enabled
  * @method   PositionBehavior moveToPosition($position)
  */
-class Product2 extends CActiveRecord {
+class Product extends CActiveRecord {
 
 	const PRODUCT_STATE_DRAFT = 'product_state_draft';
 	const PRODUCT_STATE_ACTIVE = 'product_state_active';
@@ -240,7 +240,7 @@ class Product2 extends CActiveRecord {
 		$this->setAttribute("slug", $slugs);
 
 		if (empty($this->product_state)) {
-			$this->product_state = Product2::PRODUCT_STATE_DRAFT;
+			$this->product_state = Product::PRODUCT_STATE_DRAFT;
 		}
 
 		if (!isset($this->loveds)) {
@@ -559,12 +559,13 @@ class Product2 extends CActiveRecord {
 	 * Get one entity serialized
 	 *
 	 * @param string $id
-	 * @return Product2|null
+	 *
+	 * @return Product|null
 	 * @throws Exception
 	 */
 	public static function findOneSerialized($id)
 	{
-		/** @var Product2 $product */
+		/** @var Product $product */
 		$product = static::find()->select(self::getSelectFields())->where(["short_id" => $id])->one();
 
 		// if automatic translation is enabled
@@ -1164,7 +1165,7 @@ class Product2 extends CActiveRecord {
 	 *
 	 * @param int $limit
 	 * @param array $categories
-	 * @return Product2[]
+	 * @return Product[]
 	 */
 	public static function getRandomWorks($limit, $categories = [])
 	{
@@ -1173,7 +1174,7 @@ class Product2 extends CActiveRecord {
 				[
 						'$match' => [
 								"product_state" => [
-										'$eq' => Product2::PRODUCT_STATE_ACTIVE,
+										'$eq' => Product::PRODUCT_STATE_ACTIVE,
 								]
 						]
 				];
@@ -1204,7 +1205,7 @@ class Product2 extends CActiveRecord {
 		foreach ($randomWorks as $work) {
 			$worksId[] = $work['_id'];
 		}
-		$query = new ActiveQuery(Product2::className());
+		$query = new ActiveQuery(Product::className());
 		$query->where(['in', '_id', $worksId]);
 		$works = $query->all();
 		shuffle($works);

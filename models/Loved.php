@@ -151,7 +151,7 @@ class Loved extends CActiveRecord
 	public function validateProductExists($attribute, $params)
 	{
 		$product_id = $this->$attribute;
-		$product = Product2::findOneSerialized($product_id);
+		$product = Product::findOneSerialized($product_id);
 		if (!$product) {
 			$this->addError($attribute, sprintf('Product %s not found', $product_id));
 		}
@@ -315,14 +315,14 @@ class Loved extends CActiveRecord
 	/**
 	 * Get the product related with this loved
 	 *
-	 * @return Product2
+	 * @return Product
 	 */
 	public function getProduct()
 	{
-		Product2::setSerializeScenario(Product2::SERIALIZE_SCENARIO_PUBLIC);
+		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_PUBLIC);
 
-		/** @var Product2 $product */
-		$product = Product2::findOneSerialized($this->product_id);
+		/** @var Product $product */
+		$product = Product::findOneSerialized($this->product_id);
 
 		return $product;
 	}

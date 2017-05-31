@@ -2,7 +2,7 @@
 
 namespace app\modules\api\priv\v1\controllers;
 
-use app\models\Product2;
+use app\models\Product;
 use Yii;
 use yii\web\BadRequestHttpException;
 
@@ -11,8 +11,8 @@ class ProductController extends AppPrivateController
 
 	public function actionView($id)
 	{
-		Product2::setSerializeScenario(Product2::SERIALIZE_SCENARIO_OWNER);
-		$product = Product2::findOneSerialized($id);
+		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_OWNER);
+		$product = Product::findOneSerialized($id);
 
 		return $product;
 	}
@@ -20,7 +20,7 @@ class ProductController extends AppPrivateController
 	public function actionIndex()
 	{
 		// show only fields needed in this scenario
-		Product2::setSerializeScenario(Product2::SERIALIZE_SCENARIO_PUBLIC);
+		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_PUBLIC);
 
 		// set pagination values
 		$limit = Yii::$app->request->get('limit', 100);
@@ -29,7 +29,7 @@ class ProductController extends AppPrivateController
 		$page = ($page < 1) ? 1 : $page;
 		$offset = ($limit * ($page - 1));
 
-		$products = Product2::findSerialized([
+		$products = Product::findSerialized([
 			"id" => Yii::$app->request->get("id"),
 			"name" => Yii::$app->request->get("name"), // search only in name attribute
 			"text" => Yii::$app->request->get("q"), // search in name, description, and more
@@ -43,7 +43,7 @@ class ProductController extends AppPrivateController
 		return [
 			"items" => $products,
 			"meta" => [
-				"total_count" => Product2::$countItemsFound,
+				"total_count" => Product::$countItemsFound,
 				"current_page" => $page,
 				"per_page" => $limit,
 			]
@@ -52,8 +52,8 @@ class ProductController extends AppPrivateController
 
 	public function actionCreate()
 	{
-		Product2::setSerializeScenario(Product2::SERIALIZE_SCENARIO_OWNER);
-		$product = new Product2();
+		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_OWNER);
+		$product = new Product();
 
 		$product->setScenario($this->getDetermineScenario($product));
 		if ($product->load(Yii::$app->request->post(), '') && $product->validate()) {
@@ -70,9 +70,9 @@ class ProductController extends AppPrivateController
 
 	public function actionUpdate($id)
 	{
-		Product2::setSerializeScenario(Product2::SERIALIZE_SCENARIO_OWNER);
-		/** @var Product2 $product */
-		$product = Product2::findOneSerialized($id);
+		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_OWNER);
+		/** @var Product $product */
+		$product = Product::findOneSerialized($id);
 		if (!$product) {
 			throw new BadRequestHttpException('Product not found');
 		}
@@ -92,8 +92,8 @@ class ProductController extends AppPrivateController
 
 	public function actionDelete($id)
 	{
-		/** @var Product2 $product */
-		$product = Product2::findOneSerialized($id);
+		/** @var Product $product */
+		$product = Product::findOneSerialized($id);
 		if (!$product) {
 			throw new BadRequestHttpException('Product not found');
 		}
@@ -106,23 +106,23 @@ class ProductController extends AppPrivateController
 	/**
 	 * Get validation scenario from request param
 	 *
-	 * @param Product2 $product
+	 * @param Product $product
 	 *
 	 * @return string
 	 * @throws BadRequestHttpException
 	 */
-	private function getDetermineScenario(Product2 $product)
+	private function getDetermineScenario(Product $product)
 	{
 		// get scenario to use in validations, from request
-		$product_state = Yii::$app->request->post('product_state', Product2::PRODUCT_STATE_DRAFT);
+		$product_state = Yii::$app->request->post('product_state', Product::PRODUCT_STATE_DRAFT);
 
 		// can't change from "active" to "draft"
-		if ($product_state == Product2::PRODUCT_STATE_ACTIVE || $product->product_state == Product2::PRODUCT_STATE_ACTIVE) {
+		if ($product_state == Product::PRODUCT_STATE_ACTIVE || $product->product_state == Product::PRODUCT_STATE_ACTIVE) {
 			// it is updating a active product (or a product that want to be active)
-			$scenario = Product2::SCENARIO_PRODUCT_PUBLIC;
+			$scenario = Product::SCENARIO_PRODUCT_PUBLIC;
 		} else {
 			// it is updating a draft product
-			$scenario = Product2::SCENARIO_PRODUCT_DRAFT;
+			$scenario = Product::SCENARIO_PRODUCT_DRAFT;
 		}
 
 		return $scenario;

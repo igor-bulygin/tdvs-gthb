@@ -14,7 +14,7 @@ use app\models\Faq;
 use app\models\Invitation;
 use app\models\OldProduct;
 use app\models\Person;
-use app\models\Product2;
+use app\models\Product;
 use app\models\Story;
 use app\models\Tag;
 use app\models\Term;
@@ -63,7 +63,7 @@ class PublicController extends CController
 		$devisers = Person::getRandomDevisers(20, $categoryShortIds);
 
 		// Works
-		$works = Product2::getRandomWorks(300, $categoryShortIds);
+		$works = Product::getRandomWorks(300, $categoryShortIds);
 
 		// divide then in blocks to be rendered in bottom section
 		$moreWork = [];

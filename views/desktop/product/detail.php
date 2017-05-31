@@ -8,7 +8,7 @@ use app\models\PersonVideo;
 ProductDetailAsset::register($this);
 
 /** @var Person $deviser */
-/** @var \app\models\Product2 $product */
+/** @var \app\models\Product $product */
 /** @var PersonVideo $video */
 
 $this->title = $product->name . ' - Todevise';

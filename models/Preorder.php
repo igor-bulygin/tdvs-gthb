@@ -7,7 +7,7 @@ namespace app\models;
  * @property \MongoDate $end
  * @property \MongoDate $ship
  *
- * @method Product2 getParentObject()
+ * @method Product getParentObject()
  */
 class Preorder extends EmbedModel {
 
@@ -30,9 +30,9 @@ class Preorder extends EmbedModel {
 	public function rules()
 	{
 		return [
-			['type', 'required', 'on' => Product2::SCENARIO_PRODUCT_PUBLIC],
-			['type', 'in', 'range' => [self::YES, self::NO], 'on' => [Product2::SCENARIO_PRODUCT_PUBLIC, Product2::SCENARIO_PRODUCT_DRAFT]],
-			[['ship', 'end'], 'required', 'on' => Product2::SCENARIO_PRODUCT_PUBLIC, 'when' => function($model) {
+			['type', 'required', 'on' => Product::SCENARIO_PRODUCT_PUBLIC],
+			['type', 'in', 'range' => [self::YES, self::NO], 'on' => [Product::SCENARIO_PRODUCT_PUBLIC, Product::SCENARIO_PRODUCT_DRAFT]],
+			[['ship', 'end'], 'required', 'on' => Product::SCENARIO_PRODUCT_PUBLIC, 'when' => function($model) {
 				return $model->type == self::YES;
 			}],
 		];

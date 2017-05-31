@@ -129,7 +129,7 @@ class StoryComponent extends EmbedModel
 			if (!is_int($position) || $position < 0) {
 				$this->addError('items', sprintf('Invalid position (%s) for work %s', $position, $workId));
 			}
-			$work = Product2::findOneSerialized($workId);
+			$work = Product::findOneSerialized($workId);
 			if (!$work) {
 				$this->addError('items', sprintf('Work %s does not exists', $workId));
 			}

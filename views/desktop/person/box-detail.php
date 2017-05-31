@@ -346,7 +346,7 @@ $this->registerJs("var box = ".Json::encode($box), yii\web\View::POS_HEAD, 'box-
 				}
 				$count = 0;
 				foreach ($products as $product) {
-					if ($product->product_state != \app\models\Product2::PRODUCT_STATE_ACTIVE || $count > 3) {
+					if ($product->product_state != \app\models\Product::PRODUCT_STATE_ACTIVE || $count > 3) {
 						continue;
 					}
 					$count++;

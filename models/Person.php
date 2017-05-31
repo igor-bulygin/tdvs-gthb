@@ -434,8 +434,8 @@ class Person extends CActiveRecord implements IdentityInterface
 	public function beforeDelete()
 	{
 		if ($this->isDeviser()) {
-			$products = Product2::findSerialized(["deviser_id" => $this->id]);
-			/* @var Product2[] $products */
+			$products = Product::findSerialized(["deviser_id" => $this->id]);
+			/* @var Product[] $products */
 			foreach ($products as $item) {
 				$item->delete();
 			}
@@ -637,9 +637,9 @@ class Person extends CActiveRecord implements IdentityInterface
 	 */
 	public function validateAmountProducts($attribute, $params)
 	{
-		$products = Product2::findSerialized([
+		$products = Product::findSerialized([
 			'deviser_id' => $this->id,
-			'product_state' => Product2::PRODUCT_STATE_ACTIVE,
+			'product_state' => Product::PRODUCT_STATE_ACTIVE,
 		]);
 		if (empty($products)) {
 			$this->addError('products', 'Must have at least one work published.');
@@ -968,8 +968,8 @@ class Person extends CActiveRecord implements IdentityInterface
 			/** @var PersonVideo $item */
 			$products = [];
 			foreach ($item->products as $product_id) {
-				/** @var Product2 $product */
-				$product = Product2::findOneSerialized($product_id);
+				/** @var Product $product */
+				$product = Product::findOneSerialized($product_id);
 				$products[] = $product->getPreviewSerialized();
 			}
 			$videos[] = [
@@ -1048,13 +1048,13 @@ class Person extends CActiveRecord implements IdentityInterface
 		$level2Categories = [];
 
 		// TODO could be optimized with an aggregation ??
-		$products = Product2::find()->select([
+		$products = Product::find()->select([
 			'short_id',
 			'categories',
 			'media'
 		])->where(['deviser_id' => $this->short_id])->all();
 		$detailCategoriesIds = [];
-		/** @var Product2 $product */
+		/** @var Product $product */
 		foreach ($products as $product) {
 			$detailCategoriesIds = array_unique(array_merge($detailCategoriesIds, $product->categories));
 		}
@@ -1094,7 +1094,7 @@ class Person extends CActiveRecord implements IdentityInterface
 			$category = Category::findOne(['short_id' => $id]);
 			if ($category) {
 				// assign one product of the deviser, related with this category
-				$category->setDeviserProduct(Product2::findOne([
+				$category->setDeviserProduct(Product::findOne([
 					"deviser_id" => $this->short_id,
 					"categories" => $category->getShortIds()
 				]));
@@ -1127,7 +1127,7 @@ class Person extends CActiveRecord implements IdentityInterface
 				Lang::EN_US => "All Products",
 				Lang::ES_ES => "Todos los productos",
 			];
-			$category->setDeviserProduct(Product2::findOne(["deviser_id" => $this->short_id]));
+			$category->setDeviserProduct(Product::findOne(["deviser_id" => $this->short_id]));
 			$level2Categories = array_merge([$category], $level2Categories);
 		}
 
@@ -1535,7 +1535,7 @@ class Person extends CActiveRecord implements IdentityInterface
 	 * @param int $limit
 	 * @param array $categories
 	 *
-	 * @return Product2[]
+	 * @return Product[]
 	 */
 	public static function getRandomDevisers($limit, $categories = [])
 	{
@@ -1546,7 +1546,7 @@ class Person extends CActiveRecord implements IdentityInterface
 				[
 					'$match' => [
 						"product_state" => [
-							'$eq' => Product2::PRODUCT_STATE_ACTIVE,
+							'$eq' => Product::PRODUCT_STATE_ACTIVE,
 						]
 					]
 				];
@@ -1626,7 +1626,7 @@ class Person extends CActiveRecord implements IdentityInterface
 	 * @param int $limit
 	 * @param array $categories
 	 *
-	 * @return Product2[]
+	 * @return Product[]
 	 */
 	public static function getRandomInfluencers($limit, $categories = [])
 	{

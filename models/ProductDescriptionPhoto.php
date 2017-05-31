@@ -26,8 +26,8 @@ class ProductDescriptionPhoto extends EmbedModel
 	public function rules()
     {
         return [
-	        [['name'], 'safe', 'on' => [Product2::SCENARIO_PRODUCT_DRAFT, Product2::SCENARIO_PRODUCT_PUBLIC]],
-            [['name'], 'required', 'on' => Product2::SCENARIO_PRODUCT_PUBLIC],
+	        [['name'], 'safe', 'on' => [Product::SCENARIO_PRODUCT_DRAFT, Product::SCENARIO_PRODUCT_PUBLIC]],
+            [['name'], 'required', 'on' => Product::SCENARIO_PRODUCT_PUBLIC],
 			[['title', 'description'], 'app\validators\TranslatableRequiredValidator'],
         ];
     }
@@ -39,7 +39,7 @@ class ProductDescriptionPhoto extends EmbedModel
 	 */
     public function getPhotoUrl()
 	{
-		$product = $this->getParentObject()->getParentObject(); /** @var Product2 $product */
+		$product = $this->getParentObject()->getParentObject(); /** @var Product $product */
 		return $product->getUrlImagesLocation().$this->name;
 	}
 

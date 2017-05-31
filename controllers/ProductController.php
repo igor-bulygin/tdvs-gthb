@@ -7,7 +7,7 @@ use app\models\Bespoke;
 use app\models\Lang;
 use app\models\MadeToOrder;
 use app\models\Person;
-use app\models\Product2;
+use app\models\Product;
 use Yii;
 use yii\filters\AccessControl;
 use yii\mongodb\Collection;
@@ -39,7 +39,7 @@ class ProductController extends CController
 	public function actionIndex()
 	{
 		// show only fields needed in this scenario
-		Product2::setSerializeScenario(Product2::SERIALIZE_SCENARIO_PUBLIC);
+		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_PUBLIC);
 
 		$maxLimit = 120;
 		// set pagination values
@@ -51,17 +51,17 @@ class ProductController extends CController
 		$offset = ($limit * ($page - 1));
 
 		$text = Yii::$app->request->get("q"); // search in name, description, and more
-		$products = Product2::findSerialized([
+		$products = Product::findSerialized([
 				"id" => Yii::$app->request->get("id"),
 				"name" => Yii::$app->request->get("name"), // search only in name attribute
 				"text" => Yii::$app->request->get("q"), // search in name, description, and more
 				"deviser_id" => Yii::$app->request->get("deviser"),
 				"categories" => Yii::$app->request->get("categories"),
-				"product_state" => Product2::PRODUCT_STATE_ACTIVE,
+				"product_state" => Product::PRODUCT_STATE_ACTIVE,
 				"limit" => $limit,
 				"offset" => $offset,
 		]);
-		$total = Product2::$countItemsFound;
+		$total = Product::$countItemsFound;
 		$more = $total > ($page * $limit) ? 1 : 0;
 
 		$htmlWorks = $this->renderPartial("more-products", [
@@ -83,7 +83,7 @@ class ProductController extends CController
 	public function actionMoreWorks()
 	{
 		// show only fields needed in this scenario
-		Product2::setSerializeScenario(Product2::SERIALIZE_SCENARIO_PUBLIC);
+		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_PUBLIC);
 
 		$maxLimit = 120;
 		// set pagination values
@@ -94,17 +94,17 @@ class ProductController extends CController
 		$page = ($page < 1) ? 1 : $page;
 		$offset = ($limit * ($page - 1));
 
-		$products = Product2::findSerialized([
+		$products = Product::findSerialized([
 				"id" => Yii::$app->request->get("id"),
 				"name" => Yii::$app->request->get("name"), // search only in name attribute
 				"text" => Yii::$app->request->get("q"), // search in name, description, and more
 				"deviser_id" => Yii::$app->request->get("deviser"),
 				"categories" => Yii::$app->request->get("categories"),
-				"product_state" => Product2::PRODUCT_STATE_ACTIVE,
+				"product_state" => Product::PRODUCT_STATE_ACTIVE,
 				"limit" => $limit,
 				"offset" => $offset,
 		]);
-		$total = Product2::$countItemsFound;
+		$total = Product::$countItemsFound;
 		$more = $total > ($page * $limit) ? 1 : 0;
 
 		$this->layout = '/desktop/empty-layout.php';
@@ -123,12 +123,12 @@ class ProductController extends CController
 
 	public function actionDetail($slug, $product_id)
 	{
-		Product2::setSerializeScenario(Product2::SERIALIZE_SCENARIO_PUBLIC);
+		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_PUBLIC);
 
 		// get the product
-		$product = Product2::findOneSerialized($product_id);
+		$product = Product::findOneSerialized($product_id);
 
-		if (empty($product) || $product->product_state != Product2::PRODUCT_STATE_ACTIVE) {
+		if (empty($product) || $product->product_state != Product::PRODUCT_STATE_ACTIVE) {
 			throw new HttpException(404, 'The requested item could not be found.');
 		}
 
@@ -140,9 +140,9 @@ class ProductController extends CController
 		$deviser = Person::findOneSerialized($product->deviser_id);
 
 		// get other products of the deviser
-		$deviserProducts = Product2::findSerialized([
+		$deviserProducts = Product::findSerialized([
 			'deviser_id' => $product->deviser_id,
-			'product_state' => Product2::PRODUCT_STATE_ACTIVE,
+			'product_state' => Product::PRODUCT_STATE_ACTIVE,
 		]);
 
 		$this->layout = '/desktop/public-2.php';
@@ -185,7 +185,7 @@ class ProductController extends CController
 			throw new UnauthorizedHttpException();
 		}
 
-		$product = Product2::findOneSerialized($product_id);
+		$product = Product::findOneSerialized($product_id);
 
 		if (!$product) {
 			throw new BadRequestHttpException("Not found");
@@ -218,9 +218,9 @@ class ProductController extends CController
 		$cant = 0;
 		/** @var Person $deviser */
 		foreach ($devisers as $deviser) {
-			$products = Product2::find()->where(["deviser_id" => $deviser->short_id])->all();
+			$products = Product::find()->where(["deviser_id" => $deviser->short_id])->all();
 			$i = 0;
-			/** @var Product2 $product */
+			/** @var Product $product */
 			foreach ($products as $product) {
 				$i++;
 				// Update directly in low level, to avoid no desired behaviors of ActiveRecord
@@ -246,10 +246,10 @@ class ProductController extends CController
 		ini_set('memory_limit', '2048M');
 		set_time_limit(-1);
 
-		Product2::setSerializeScenario(Product2::SERIALIZE_SCENARIO_OWNER);
+		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_OWNER);
 
-		/* @var Product2[] $products */
-		$products = Product2::findSerialized();
+		/* @var Product[] $products */
+		$products = Product::findSerialized();
 		foreach ($products as $product) {
 			// fix name field, must be an array
 			if (!empty($product->name) && !is_array($product->name)) {
@@ -277,7 +277,7 @@ class ProductController extends CController
 //					$product->product_state = Product2::PRODUCT_STATE_ACTIVE;
 //				}
 				// for the moment all products are public
-				$product->product_state = Product2::PRODUCT_STATE_ACTIVE;
+				$product->product_state = Product::PRODUCT_STATE_ACTIVE;
 			}
 
 			// available on price_stock
@@ -320,10 +320,10 @@ class ProductController extends CController
 		ini_set('memory_limit', '2048M');
 		set_time_limit(-1);
 
-		Product2::setSerializeScenario(Product2::SERIALIZE_SCENARIO_OWNER);
+		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_OWNER);
 
-		/* @var Product2[] $products */
-		$products = Product2::findSerialized();
+		/* @var Product[] $products */
+		$products = Product::findSerialized();
 		foreach ($products as $product) {
 			$deviser = Person::findOneSerialized($product->deviser_id);
 			if (empty($deviser) || empty($product->deviser_id)) {

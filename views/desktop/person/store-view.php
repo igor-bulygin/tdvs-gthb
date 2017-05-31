@@ -5,12 +5,12 @@ use app\components\PersonMenu;
 use app\helpers\Utils;
 use app\models\Category;
 use app\models\Person;
-use app\models\Product2;
+use app\models\Product;
 
 StoreViewAsset::register($this);
 
 /** @var Person $person */
-/** @var Product2[] $products */
+/** @var Product[] $products */
 /** @var Category $category */
 /** @var Category $selectedCategory */
 
@@ -38,7 +38,7 @@ $this->params['person_menu_store_categories'] = $categories;
 						<div class="cathegory-wrapper">
 							<?php if ($unpublishedWorks && $person->isDeviserEditable()) { ?>
 								<div class="col-md-3 col-sm-3 col-xs-3 pad-cathegory">
-									<a href="<?= $person->getStoreEditLink(['product_state' => \app\models\Product2::PRODUCT_STATE_DRAFT])?>">
+									<a href="<?= $person->getStoreEditLink(['product_state' => \app\models\Product::PRODUCT_STATE_DRAFT])?>">
 										<div class="unpublished-square">
 											<p>Unpublished<br>works</p>
 										</div>
