@@ -9,9 +9,9 @@ use app\models\Category;
 use app\models\Country;
 use app\models\Invitation;
 use app\models\MetricType;
+use app\models\OldProduct;
 use app\models\Person;
 use app\models\PostmanEmail;
-use app\models\Product;
 use app\models\SizeChart;
 use app\models\Tag;
 use Yii;
@@ -305,7 +305,7 @@ class AdminController extends CController {
 		$deviser = Person::find()->select(["_id" => 0])->where(["slug" => $slug, "type" => ['$in' => [Person::DEVISER]]])->asArray()->one();
 
 		$products = new ActiveDataProvider([
-			'query' => Product::find()->select(["_id" => 0])->where(['deviser_id' => $deviser['short_id']]),
+			'query' => OldProduct::find()->select(["_id" => 0])->where(['deviser_id' => $deviser['short_id']]),
 			'pagination' => [
 				'pageSize' => 100,
 			],

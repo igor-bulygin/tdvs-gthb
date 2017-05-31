@@ -12,8 +12,8 @@ use app\models\ContactForm;
 use app\models\Country;
 use app\models\Faq;
 use app\models\Invitation;
+use app\models\OldProduct;
 use app\models\Person;
-use app\models\Product;
 use app\models\Product2;
 use app\models\Story;
 use app\models\Tag;
@@ -394,7 +394,7 @@ class PublicController extends CController
 		];
 
 		// other random products ids to complete the grid
-		$query = new ActiveQuery(Product::className());
+		$query = new ActiveQuery(OldProduct::className());
 		$query->select(["short_id"]);
 		$query->where(["not in", "short_id", $selectedIds]);
 		// filter products not saved properly, without name, and other attributes
@@ -404,7 +404,7 @@ class PublicController extends CController
 		$products = $query->all();
 		$otherIds = [];
 		foreach ($products as $product) {
-			/** @var Product $product */
+			/** @var OldProduct $product */
 			$otherIds[] = $product->short_id;
 		}
 
@@ -637,7 +637,7 @@ class PublicController extends CController
 	public function actionProduct($category_id, $product_id, $slug)
 	{
 
-		$product = Product::find()
+		$product = OldProduct::find()
 				->where([
 						"short_id" => $product_id
 				])
@@ -666,7 +666,7 @@ class PublicController extends CController
 								]
 						]
 				);
-		$tmp = Product::find()->where(['deviser_id' => $product['deviser_id']])->asArray()->all();
+		$tmp = OldProduct::find()->where(['deviser_id' => $product['deviser_id']])->asArray()->all();
 
 		Utils::l_collection($tmp, "name");
 		Utils::l_collection($tmp, "slug");
@@ -743,7 +743,7 @@ class PublicController extends CController
 		$deviser['img'] = ModelUtils::getDeviserAvatar($deviser);
 		$deviser['img_header'] = ModelUtils::getPersonHeader($deviser);
 
-		$tmp = Product::find()->select(["_id" => 0])->where(["deviser_id" => $deviser_id])->asArray()->all();
+		$tmp = OldProduct::find()->select(["_id" => 0])->where(["deviser_id" => $deviser_id])->asArray()->all();
 
 		Utils::l_collection($tmp, "name");
 		Utils::l_collection($tmp, "slug");

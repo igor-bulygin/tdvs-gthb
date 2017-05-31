@@ -34,7 +34,7 @@ use yii2tech\ar\position\PositionBehavior;
  * @property int enabled
  * @method   PositionBehavior moveToPosition($position)
  */
-class Product extends CActiveRecord {
+class OldProduct extends CActiveRecord {
 
 	const SCENARIO_PRODUCT_OLD_API = 'scenario-product-old-api';
 	const SCENARIO_PRODUCT_UPDATE_DRAFT = 'scenario-product-update-draft';
@@ -163,13 +163,14 @@ class Product extends CActiveRecord {
 	 * Get one entity serialized
 	 *
 	 * @param string $id
-	 * @return Product|null
+	 *
+	 * @return OldProduct|null
 	 * @throws Exception
 	 */
 	public static function findOneSerialized($id)
 	{
-		/** @var Product $product */
-		$product = Product::find()->select(self::getSelectFields())->where(["short_id" => $id])->one();
+		/** @var OldProduct $product */
+		$product = OldProduct::find()->select(self::getSelectFields())->where(["short_id" => $id])->one();
 
 		// if automatic translation is enabled
 		if (static::$translateFields) {
@@ -189,7 +190,7 @@ class Product extends CActiveRecord {
 	{
 
 		// Products query
-		$query = new ActiveQuery(Product::className());
+		$query = new ActiveQuery(OldProduct::className());
 
 		// Retrieve only fields that gonna be used
 		$query->select(self::getSelectFields());
