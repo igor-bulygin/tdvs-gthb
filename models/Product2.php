@@ -1,6 +1,7 @@
 <?php
 namespace app\models;
 
+use app\helpers\CActiveRecord;
 use app\helpers\Utils;
 use EasySlugger\Slugger;
 use Exception;
@@ -48,7 +49,7 @@ use yii2tech\ar\position\PositionBehavior;
  * @property int enabled
  * @method   PositionBehavior moveToPosition($position)
  */
-class Product2 extends Product {
+class Product2 extends CActiveRecord {
 
 	const PRODUCT_STATE_DRAFT = 'product_state_draft';
 	const PRODUCT_STATE_ACTIVE = 'product_state_active';

@@ -63,7 +63,7 @@ class PersonVideo extends EmbedModel
 	public function validateProductIds($attribute, $params)
 	{
 		foreach ($this->$attribute as $id) {
-			$product = Product::findOne(["short_id" => $id]);
+			$product = Product2::findOne(["short_id" => $id]);
 			if (!$product) {
 				$this->addError($attribute, sprintf("Product %s not found", $id));
 			}

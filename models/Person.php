@@ -968,8 +968,8 @@ class Person extends CActiveRecord implements IdentityInterface
 			/** @var PersonVideo $item */
 			$products = [];
 			foreach ($item->products as $product_id) {
-				/** @var Product $product */
-				$product = Product::findOneSerialized($product_id);
+				/** @var Product2 $product */
+				$product = Product2::findOneSerialized($product_id);
 				$products[] = $product->getPreviewSerialized();
 			}
 			$videos[] = [
@@ -1048,13 +1048,13 @@ class Person extends CActiveRecord implements IdentityInterface
 		$level2Categories = [];
 
 		// TODO could be optimized with an aggregation ??
-		$products = Product::find()->select([
+		$products = Product2::find()->select([
 			'short_id',
 			'categories',
 			'media'
 		])->where(['deviser_id' => $this->short_id])->all();
 		$detailCategoriesIds = [];
-		/** @var Product $product */
+		/** @var Product2 $product */
 		foreach ($products as $product) {
 			$detailCategoriesIds = array_unique(array_merge($detailCategoriesIds, $product->categories));
 		}
@@ -1094,7 +1094,7 @@ class Person extends CActiveRecord implements IdentityInterface
 			$category = Category::findOne(['short_id' => $id]);
 			if ($category) {
 				// assign one product of the deviser, related with this category
-				$category->setDeviserProduct(Product::findOne([
+				$category->setDeviserProduct(Product2::findOne([
 					"deviser_id" => $this->short_id,
 					"categories" => $category->getShortIds()
 				]));
@@ -1127,7 +1127,7 @@ class Person extends CActiveRecord implements IdentityInterface
 				Lang::EN_US => "All Products",
 				Lang::ES_ES => "Todos los productos",
 			];
-			$category->setDeviserProduct(Product::findOne(["deviser_id" => $this->short_id]));
+			$category->setDeviserProduct(Product2::findOne(["deviser_id" => $this->short_id]));
 			$level2Categories = array_merge([$category], $level2Categories);
 		}
 

@@ -446,10 +446,10 @@ class Tag extends CActiveRecord
 	/**
 	 * Set the product to use to filter the list of values to show
 	 *
-	 * @param Product $product
+	 * @param Product|Product2 $product
 	 * @return Tag
 	 */
-	public function setFilterProduct(Product $product)
+	public function setFilterProduct($product)
 	{
 		$this->product = $product;
 		return $this;
