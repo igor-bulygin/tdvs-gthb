@@ -19,7 +19,7 @@ $config = [
 				'application/json' => Response::FORMAT_JSON,
 				'application/xml' => Response::FORMAT_XML
 			],
-			'languages' => array_keys(require(__DIR__ . '/langs.php'))
+			'languages' => require(__DIR__ . '/langs.php')
 		],
 		'devicedetect',
 		'languagepicker',

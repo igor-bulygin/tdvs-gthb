@@ -20,13 +20,13 @@ class Lang {
 	}
 
 	static public function getAvailableLanguages()
-    {
-        return array_merge(
-            self::EN_US,
-            self::ES_ES,
-            self::CA_ES
-        );
-    }
+	{
+		return [
+			self::EN_US,
+//			self::ES_ES,
+//			self::CA_ES,
+		];
+	}
 
 	static public function getAvailableLanguagesDescriptions()
     {

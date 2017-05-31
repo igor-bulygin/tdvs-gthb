@@ -429,6 +429,8 @@ class Product2 extends Product {
 				static::$retrieveExtraFields = [
 					'deviser_id',
 				];
+
+				static::$translateFields = true;
 				break;
 			case self::SERIALIZE_SCENARIO_PUBLIC:
 				static::$serializeFields = [
