@@ -33,7 +33,7 @@ class ProductController extends AppPublicController {
 		Product2::setSerializeScenario(Product2::SERIALIZE_SCENARIO_PUBLIC);
 
 		// set pagination values
-		$limit = Yii::$app->request->get('limit', 99999);
+		$limit = Yii::$app->request->get('limit', 100);
 		$limit = ($limit < 1) ? 1 : $limit;
 		$page = Yii::$app->request->get('page', 1);
 		$page = ($page < 1) ? 1 : $page;
