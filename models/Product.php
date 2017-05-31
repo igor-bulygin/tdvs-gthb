@@ -350,6 +350,11 @@ class Product extends CActiveRecord {
 				'on' => [self::SCENARIO_PRODUCT_OLD_API, self::SCENARIO_PRODUCT_DRAFT, self::SCENARIO_PRODUCT_PUBLIC]
 			],
 			[
+				'position',
+				'integer',
+				'min' => 1,
+			],
+			[
 				'product_state',
 				'in',
 				'range' => [self::PRODUCT_STATE_DRAFT, self::PRODUCT_STATE_ACTIVE],
