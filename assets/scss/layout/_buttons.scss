@@ -77,3 +77,7 @@
     height: 28px;
     padding-top: 6px;
 }
+.btn-xl{
+	min-width: 200px;
+	@include border-radius(8px,8px,8px,8px);
+}
