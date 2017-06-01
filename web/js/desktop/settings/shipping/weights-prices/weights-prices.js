@@ -43,10 +43,12 @@
 		$scope.$watch('shippingWeightsPricesCtrl.pricesForm.$error', function(newValue, oldValue){
 			if(angular.isObject(newValue) && newValue !== null) {
 				for(var key in newValue) {
-					newValue[key].forEach(function(field) {
-						var name = field['$name'];
-						vm.pricesForm[name].$setTouched();
-					});
+					if(key === 'min') {
+						newValue[key].forEach(function(field) {
+							var name = field['$name'];
+							vm.pricesForm[name].$setTouched();
+						});
+					}
 				}
 			}
 		}, true)
