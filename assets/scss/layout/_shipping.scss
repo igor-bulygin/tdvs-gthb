@@ -33,6 +33,7 @@
 	font-family: $font-family--secondary;
 	text-transform: uppercase;
 	color: $dark_grey;
+	margin-right: 15px;
 }
 .input-medium-size{
 	width: 60px;
@@ -47,4 +48,20 @@
 	float: right;
     font-size: 22px;
     cursor: pointer;
+}
+.two-lines-label{
+	font-family: $font-family--secondary;
+	color: $dark_grey;
+	width: 50px;
+    line-height: 15px;
+    margin-left: 20px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.separator-to{
+	margin: 0 10px;
+}
+.label-small-bold{
+	font-weight: bold!important;
+	font-family: $font-family--primary!important;
 }

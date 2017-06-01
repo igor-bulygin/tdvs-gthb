@@ -1251,7 +1251,8 @@ input[type="radio"] .styled:checked + label::after {
 .range-title {
   font-family: "Univers Condensed Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-transform: uppercase;
-  color: #9a9a9a; }
+  color: #9a9a9a;
+  margin-right: 15px; }
 
 .input-medium-size {
   width: 60px;
@@ -1266,6 +1267,22 @@ input[type="radio"] .styled:checked + label::after {
   float: right;
   font-size: 22px;
   cursor: pointer; }
+
+.two-lines-label {
+  font-family: "Univers Condensed Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #9a9a9a;
+  width: 50px;
+  line-height: 15px;
+  margin-left: 20px;
+  display: inline-block;
+  vertical-align: middle; }
+
+.separator-to {
+  margin: 0 10px; }
+
+.label-small-bold {
+  font-weight: bold !important;
+  font-family: "Univers Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif !important; }
 
 .green-link {
   color: #7AB83A;
