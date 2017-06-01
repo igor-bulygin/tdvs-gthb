@@ -1240,6 +1240,33 @@ input[type="radio"] .styled:checked + label::after {
 .serif {
   font-family: "Playfair Display", Georgia, serif; }
 
+.range-wrapper {
+  border: 1px solid #bfbfbf;
+  border-radius: 8px 8px 8px 8px !important;
+  -webkit-border-radius: 8px 8px 8px 8px !important;
+  -moz-border-radius: 8px 8px 8px 8px !important;
+  padding: 15px;
+  margin-bottom: 20px; }
+
+.range-title {
+  font-family: "Univers Condensed Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  color: #9a9a9a; }
+
+.input-medium-size {
+  width: 60px;
+  display: inline; }
+
+.unlimited-weight-wrapper {
+  display: inline-block;
+  vertical-align: top; }
+
+.close-range {
+  color: #bfbfbf;
+  float: right;
+  font-size: 22px;
+  cursor: pointer; }
+
 .green-link {
   color: #7AB83A;
   text-transform: uppercase; }
