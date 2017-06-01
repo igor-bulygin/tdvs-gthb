@@ -65,3 +65,11 @@
 	font-weight: bold!important;
 	font-family: $font-family--primary!important;
 }
+.btn-save{
+	@extend %btn; 
+    background-color:$green;
+    color: $black;
+    &:hover{
+        background-color:$dark_green;
+    }
+}

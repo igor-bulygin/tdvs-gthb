@@ -493,7 +493,7 @@ a, a:hover, a:focus {
 .nya-bs-select.btn-group:not(.input-group-btn), .nya-bs-select.btn-group[class*="col-"] {
   background-color: transparent !important; }
 
-.btn-red, .btn-green, .btn-grey, .btn-black, .btn-follow, .btn-white, .btn-transparent, .button-error {
+.btn-red, .btn-green, .btn-grey, .btn-black, .btn-follow, .btn-white, .btn-transparent, .button-error, .btn-save {
   text-transform: uppercase;
   font-family: "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
@@ -503,7 +503,7 @@ a, a:hover, a:focus {
   border: none;
   text-align: center;
   cursor: pointer; }
-  .btn-red:hover, .btn-green:hover, .btn-grey:hover, .btn-black:hover, .btn-follow:hover, .btn-white:hover, .btn-transparent:hover, .button-error:hover {
+  .btn-red:hover, .btn-green:hover, .btn-grey:hover, .btn-black:hover, .btn-follow:hover, .btn-white:hover, .btn-transparent:hover, .button-error:hover, .btn-save:hover {
     -moz-transition-property: background-color;
     -o-transition-property: background-color;
     -webkit-transition-property: background-color;
@@ -578,6 +578,12 @@ a, a:hover, a:focus {
   margin-top: -10px !important;
   height: 28px;
   padding-top: 6px; }
+
+.btn-xl {
+  min-width: 200px;
+  border-radius: 8px 8px 8px 8px !important;
+  -webkit-border-radius: 8px 8px 8px 8px !important;
+  -moz-border-radius: 8px 8px 8px 8px !important; }
 
 .products-menu ul {
   margin: 20px 0 40px;
@@ -1283,6 +1289,12 @@ input[type="radio"] .styled:checked + label::after {
 .label-small-bold {
   font-weight: bold !important;
   font-family: "Univers Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif !important; }
+
+.btn-save {
+  background-color: #B8E986;
+  color: #1C1919; }
+  .btn-save:hover {
+    background-color: #7AB83A; }
 
 .green-link {
   color: #7AB83A;
