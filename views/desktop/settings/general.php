@@ -50,13 +50,15 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 						</div>
 
 						<div class="form-group">
-							<label for="representative_name" class="col-md-2">REPRESENTATIVE NAME</label>
+							<div class=col-xs-2>
+								<label for="representative_name">REPRESENTATIVE NAME</label>
+								<span class="col-xs-12 text-green">OPTIONAL</span>
+							</div>
 							<div class="col-md-2">
-								<input type="text" name="name" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.name" ng-class="{'error-input': generalSettingsCtrl.dataForm.name.$invalid}">								
+								<input type="text" name="name" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.name" ng-class="{'error-input': generalSettingsCtrl.dataForm.name.$invalid}" placeholder="First Name">
 							</div>
 							<div class="col-md-2 text-right">
-								<input type="text" name="last_name" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.last_name" ng-class="{'error-input': generalSettingsCtrl.last_name.$invalid}">
-								<span class="text-green">OPTIONAL</span>
+								<input type="text" name="last_name" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.last_name" ng-class="{'error-input': generalSettingsCtrl.last_name.$invalid}" placeholder="Last Name">								
 							</div>
 							<label for="street" class="col-md-2">STREET</label>
 							<div class="col-md-4 text-right">
@@ -67,8 +69,7 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 						<div class="form-group">
 							<label for="phone" class="col-md-2">PHONE NUMBER</label>
 							<div class="col-md-1 text-right">
-								<input type="tel" name="phone_prefix" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.phone_number_prefix" ng-class="{'error-input': generalSettingsCtrl.dataForm.phone_prefix.$invalid}" placeholder="prefix" required>
-								<span class="purple-text" ng-show="generalSettingsCtrl.existRequiredError('phone_prefix',generalSettingsCtrl.dataForm)">Please, fill out this field</span>
+								<input type="tel" name="phone_prefix" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.phone_number_prefix" ng-class="{'error-input': generalSettingsCtrl.dataForm.phone_prefix.$invalid}" required>
 							</div>
 							<div class="col-md-3 text-right">
 								<input type="tel" name="phone" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.phone_number" ng-class="{'error-input': generalSettingsCtrl.dataForm.phone.$invalid}" required>
