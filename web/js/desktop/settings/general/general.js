@@ -125,6 +125,9 @@
 		}
 
 		function openModal() {
+			vm.currentPassword="";
+			vm.newPassword="";
+			vm.newPasswordBis="";
 			vm.passwordModal=$uibModal.open({
 				templateUrl: 'passwordModal',
 				scope: $scope,
