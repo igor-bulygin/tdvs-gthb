@@ -4,6 +4,7 @@
 	function controller(personDataService,UtilService,locationDataService,$uibModal, metricDataService,$scope) {
 		var vm = this;
 		vm.person = {id:person.id, personal_info:angular.copy(person.personal_info), settings:angular.copy(person.settings)};
+		
 		vm.isDeviser=false;
 		if (person.type[0]==2) {
 			vm.isDeviser=true;
@@ -15,8 +16,7 @@
 			if (!angular.isUndefined(vm.person.personal_info.country) && vm.person.personal_info.country.length>0) {
 				vm.city =vm.city + ', ' + vm.person.personal_info.country;
 			}
-		}
-		
+		}		
 		vm.update=update;
 		vm.saving=false;
 		vm.saved=false;
@@ -31,17 +31,17 @@
 		vm.passwordModal=null;
 		vm.weightCharged=false;
 		vm.dismiss=dismiss;
-		vm.showInvalid=false;
-		vm.setPrefix=setPrefix;
+		vm.showInvalid=false;		
 		vm.invalidPrefix=false;
 
 		init();
 		
-		function init() {
-			vm.setPrefix();
+		function init() {	
+			setPrefix();
 			if (vm.person.personal_info.phone_number_prefix.length<2) {
 				vm.invalidPrefix=true;
 			}
+			vm.person_original = angular.copy(vm.person);
 			getWeightUnits();
 		}
 
@@ -178,6 +178,17 @@
 			}
 			return (value.length<1 && vm.showPasswordErrors);
 		}
+
+		//watches
+		$scope.$watch('generalSettingsCtrl.person', function (newValue, oldValue) {
+			if(newValue) {
+				if(!angular.equals(newValue, vm.person_original)) {
+					UtilService.setLeavingModal(true);
+				} else {
+					UtilService.setLeavingModal(false);
+				}
+			}
+		}, true);
 	}
 
 	angular	
