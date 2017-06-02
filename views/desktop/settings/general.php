@@ -28,13 +28,13 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 							<div ng-if="generalSettingsCtrl.isDeviser">
 								<label for="brand_name" class="col-md-2">BRAND / ARTIST NAME</label>
 								<div class="col-md-4 text-right">
-									<input type="text" name="brand_name" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.brand_name" ng-class="{'error-input': generalSettingsCtrl.dataForm.brand_name.$invalid}" required><!--only devisers -->
-									<span class="purple-text" ng-show="generalSettingsCtrl.existRequiredError('brand_name',generalSettingsCtrl.dataForm)">Please, fill out this field</span>
+									<input type="text" name="brand_name" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.brand_name" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.brand_name)}"><!--only devisers -->
+									<span class="purple-text" ng-show="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.brand_name)">Please, fill in this field</span>
 								</div>
 							</div>
 							<label for="city" class="col-md-2" ng-class="{'col-md-offset-6': !generalSettingsCtrl.isDeviser}">CITY</label>
 							<div class="col-md-4 text-right">
-								<input type="text" name="city" class="form-control" ng-model="generalSettingsCtrl.city" ng-class="{'error-input': generalSettingsCtrl.dataForm.city.$invalid}" ng-model-options='{ debounce: 80 }' ng-change="generalSettingsCtrl.searchPlace(generalSettingsCtrl.city)" required>
+								<input type="text" name="city" class="form-control" ng-model="generalSettingsCtrl.city" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.city)}" ng-model-options='{ debounce: 80 }' ng-change="generalSettingsCtrl.searchPlace(generalSettingsCtrl.city)">
 								<div ng-if="generalSettingsCtrl.showCities" ng-cloak>
 									<ul class="city-selection">
 										<li ng-repeat="city in generalSettingsCtrl.cities">
@@ -45,7 +45,7 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 										</li>
 									</ul>
 								</div>
-								<span class="purple-text" ng-show="generalSettingsCtrl.existRequiredError('city',generalSettingsCtrl.dataForm)">Please, fill out this field</span>
+								<span class="purple-text" ng-show="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.city)">Please, fill in this field</span>
 							</div>
 						</div>
 
@@ -55,44 +55,44 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 								<span class="col-xs-12 text-green">OPTIONAL</span>
 							</div>
 							<div class="col-md-2">
-								<input type="text" name="name" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.name" ng-class="{'error-input': generalSettingsCtrl.dataForm.name.$invalid}" placeholder="First Name">
+								<input type="text" name="name" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.name" placeholder="First Name">
 							</div>
 							<div class="col-md-2 text-right">
-								<input type="text" name="last_name" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.last_name" ng-class="{'error-input': generalSettingsCtrl.last_name.$invalid}" placeholder="Last Name">								
+								<input type="text" name="last_name" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.last_name" placeholder="Last Name">								
 							</div>
 							<label for="street" class="col-md-2">STREET</label>
 							<div class="col-md-4 text-right">
-								<input type="text" name="street" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.street" ng-class="{'error-input': generalSettingsCtrl.dataForm.street.$invalid}" required>
-								<span class="purple-text" ng-show="generalSettingsCtrl.existRequiredError('street',generalSettingsCtrl.dataForm)">Please, fill out this field</span>
+								<input type="text" name="street" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.street" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.street)}">
+								<span class="purple-text" ng-show="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.street)">Please, fill in this field</span>
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="phone" class="col-md-2">PHONE NUMBER</label>
 							<div class="col-md-1 text-right">
-								<input type="tel" name="phone_prefix" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.phone_number_prefix" ng-class="{'error-input': generalSettingsCtrl.dataForm.phone_prefix.$invalid}" required>
+								<input type="tel" name="phone_prefix" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.phone_number_prefix" ng-class="{'error-input': generalSettingsCtrl.invalidPrefix }" ng-change="generalSettingsCtrl.setPrefix()">
 							</div>
 							<div class="col-md-3 text-right">
-								<input type="tel" name="phone" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.phone_number" ng-class="{'error-input': generalSettingsCtrl.dataForm.phone.$invalid}" required>
-								<span class="purple-text" ng-show="generalSettingsCtrl.existRequiredError('phone',generalSettingsCtrl.dataForm)">Please, fill out this field</span>
+								<input type="tel" name="phone" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.phone_number" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.phone_number)}">
+								<span class="purple-text" ng-show="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.phone_number)">Please, fill in this field</span>
 							</div>
 							<label for="number" class="col-md-2">NUMBER</label>
 							<div class="col-md-4 text-right">
-								<input type="text" name="number" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.number" ng-class="{'error-input': generalSettingsCtrl.dataForm.number.$invalid}" required>
-								<span class="purple-text" ng-show="generalSettingsCtrl.existRequiredError('number',generalSettingsCtrl.dataForm)">Please, fill out this field</span>
+								<input type="text" name="number" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.number" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.number)}">
+								<span class="purple-text" ng-show="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.number)">Please, fill in this field</span>
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="password" class="col-md-2">PASSWORD</label>
 							<div class="col-md-2 text-right">
-								<input type="password" name="password" class="form-control" ng-class="{'error-input': generalSettingsCtrl.dataForm.password.$invalid}" placeholder="*********" disabled>
+								<input type="password" name="password" class="form-control" placeholder="*********" disabled>
 							</div>
 							<div class="col-md-2">
 								<a href="#" class="red-text" ng-click="generalSettingsCtrl.openModal()"><span class="glyphicon glyphicon-refresh"></span> Change password</a>
 							</div>
 							<label for="zip" class="col-md-2">ZIP</label>
 							<div class="col-md-4 text-right">
-								<input type="text" name="zip" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.zip" ng-class="{'error-input': generalSettingsCtrl.dataForm.zip.$invalid}" required>
-								<span class="purple-text" ng-show="generalSettingsCtrl.existRequiredError('zip',generalSettingsCtrl.dataForm)">Please, fill out this field</span>
+								<input type="text" name="zip" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.zip" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.zip)}">
+								<span class="purple-text" ng-show="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.zip)">Please, fill in this field</span>
 							</div>
 						</div>
 						<div class="form-group">
@@ -103,10 +103,11 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 										<a href="#"><span ng-bind="weightMeasure"></span></a>
 									</li>
 								</ol>
-								<span class="purple-text" ng-show="generalSettingsCtrl.notweightMeasureSelected">Please, select an option</span>
+								<span class="purple-text col-xs-12" ng-show="generalSettingsCtrl.showInvalid && generalSettingsCtrl.notWeightMeasureSelected">Please select a unit of measurement</span>
 							</div>
 							<div class="col-md-6 text-right">
-								<button class="btn btn-default btn-green" ng-click="generalSettingsCtrl.update()" ng-disabled="generalSettingsCtrl.saving">Save</button>
+								<button class="btn btn-default btn-green col-md-offset-10 col-md-2" ng-click="generalSettingsCtrl.update()" ng-disabled="generalSettingsCtrl.saving">Save</button>
+								<span class="purple-text col-xs-12" ng-show="generalSettingsCtrl.showInvalid">Please, fill in all the required fields</span>
 							</div>
 						</div>
 						<div class="col-xs-12 text-center" ng-show="generalSettingsCtrl.saved&&!generalSettingsCtrl.dataForm.$dirty">
@@ -131,16 +132,16 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 			<form name="generalSettingsCtrl.passwordForm" class="form-horizontal col-xs-12">
 				<div ng-hide="generalSettingsCtrl.savingPassword">
 					<div class="col-xs-10 col-xs-offset-1">
-						<input type="password" name="currentPassword" class="form-control" ng-class="{'error-input': generalSettingsCtrl.passwordForm.currentPassword.$invalid && generalSettingsCtrl.showPasswordErrors}" ng-model="generalSettingsCtrl.currentPassword" placeholder="CURRENT PASSWORD" required>
-						<span class="purple-text" ng-show="generalSettingsCtrl.showPasswordErrors && generalSettingsCtrl.existRequiredError('currentPassword',generalSettingsCtrl.passwordForm)">Please, fill out this field</span>
+						<input type="password" name="currentPassword" class="form-control" ng-class="{'error-input': generalSettingsCtrl.existPasswordRequiredError(generalSettingsCtrl.currentPassword)}" ng-model="generalSettingsCtrl.currentPassword" placeholder="CURRENT PASSWORD">
+						<span class="purple-text" ng-show="generalSettingsCtrl.existPasswordRequiredError(generalSettingsCtrl.currentPassword)">Please, fill in this field</span>
 					</div>
 					<div class="col-xs-10 col-xs-offset-1">
-						<input type="password" name="newPassword" class="form-control" ng-class="{'error-input': generalSettingsCtrl.passwordForm.newPassword.$invalid && generalSettingsCtrl.showPasswordErrors}" ng-model="generalSettingsCtrl.newPassword" placeholder="NEW PASSWORD" required>
-						<span class="purple-text" ng-show="generalSettingsCtrl.showPasswordErrors && generalSettingsCtrl.existRequiredError('newPassword',generalSettingsCtrl.passwordForm)">Please, fill out this field</span>
+						<input type="password" name="newPassword" class="form-control" ng-class="{'error-input': generalSettingsCtrl.existPasswordRequiredError(generalSettingsCtrl.newPassword)}" ng-model="generalSettingsCtrl.newPassword" placeholder="NEW PASSWORD">
+						<span class="purple-text" ng-show="generalSettingsCtrl.existPasswordRequiredError(generalSettingsCtrl.newPassword)">Please, fill in this field</span>
 					</div>
 					<div class="col-xs-10 col-xs-offset-1">
-						<input type="password" name="newPasswordBis" class="form-control" ng-class="{'error-input': generalSettingsCtrl.passwordForm.newPassword.$invalid && generalSettingsCtrl.showPasswordErrors}" ng-model="generalSettingsCtrl.newPasswordBis" placeholder="CONFIRM NEW PASSWORD" required>
-						<span class="purple-text" ng-show="generalSettingsCtrl.showPasswordErrors && generalSettingsCtrl.existRequiredError('newPasswordBis',generalSettingsCtrl.passwordForm)">Please, fill out this field</span>
+						<input type="password" name="newPasswordBis" class="form-control" ng-class="{'error-input': generalSettingsCtrl.existPasswordRequiredError(generalSettingsCtrl.newPasswordBis)}" ng-model="generalSettingsCtrl.newPasswordBis" placeholder="CONFIRM NEW PASSWORD">
+						<span class="purple-text" ng-show="generalSettingsCtrl.existPasswordRequiredError(generalSettingsCtrl.newPasswordBis)">Please, fill in this field</span>
 						<span class="purple-text" ng-show="generalSettingsCtrl.distinctPasswords">Password don't match</span>
 					</div>
 					<div class="text-center">						

@@ -9,8 +9,14 @@
 			vm.isDeviser=true;
 		}
 		vm.notWeightMeasureSelected=false;
-		vm.city = vm.person.personal_info.city + ', ' + vm.person.personal_info.country;
-		init();
+		vm.city ="";
+		if (!angular.isUndefined(vm.person.personal_info.city) && vm.person.personal_info.city.length>0) {
+			vm.city=vm.person.personal_info.city;
+			if (!angular.isUndefined(vm.person.personal_info.country) && vm.person.personal_info.country.length>0) {
+				vm.city =vm.city + ', ' + vm.person.personal_info.country;
+			}
+		}
+		
 		vm.update=update;
 		vm.saving=false;
 		vm.saved=false;
@@ -25,13 +31,22 @@
 		vm.passwordModal=null;
 		vm.weightCharged=false;
 		vm.dismiss=dismiss;
+		vm.showInvalid=false;
+		vm.setPrefix=setPrefix;
+		vm.invalidPrefix=false;
+
+		init();
 		
 		function init() {
+			vm.setPrefix();
+			if (vm.person.personal_info.phone_number_prefix.length<2) {
+				vm.invalidPrefix=true;
+			}
 			getWeightUnits();
 		}
 
 		function getWeightUnits() {
-			function onGetMetricSuccess(data) {				
+			function onGetMetricSuccess(data) {
 				vm.weightMeasures=[];
 				if (!angular.isUndefined(data) && !angular.isUndefined(data.weight)) {
 					vm.weightMeasures = data.weight;
@@ -72,18 +87,25 @@
 			vm.showCities = false;
 		}
 
+		function setPrefix() {
+			if (angular.isUndefined(vm.person.personal_info.phone_number_prefix)) {
+				vm.person.personal_info.phone_number_prefix="+";
+			}
+			if (vm.person.personal_info.phone_number_prefix.indexOf('+') == -1) {
+				vm.person.personal_info.phone_number_prefix='+' + vm.person.personal_info.phone_number_prefix;
+			}
+		}
+
 		function update() {
 			vm.saved=false;
-			if (angular.isUndefined(vm.person.settings.weight_measure) || vm.person.settings.weight_measure === null ) {
+			if (angular.isUndefined(vm.person.settings.weight_measure) || vm.person.settings.weight_measure === null || vm.person.settings.weight_measure.length<1 ) {
 				vm.notWeightMeasureSelected=true;
 			}
-			if (vm.dataForm.$valid) {
-				if (vm.person.personal_info.phone_number_prefix.indexOf('+') == -1) {
-					vm.person.personal_info.phone_number_prefix='+' + vm.person.personal_info.phone_number_prefix;
-				}
+			if (isValidForm() && !vm.invalidPrefix) {
 				vm.saving=true;
 				function onUpdateGeneralSettingsSuccess(data) {
 					vm.saving=false;
+					vm.showInvalid=false;
 					vm.saved=true;
 					vm.dataForm.$dirty=false;
 				}
@@ -92,6 +114,14 @@
 				}
 				personDataService.updateProfile(vm.person,{personId: vm.person.id}, onUpdateGeneralSettingsSuccess, onUpdateGeneralSettingsError);
 			}
+			else {
+				vm.showInvalid=true;
+			}
+		}
+		function isValidForm() {
+			return (((vm.isDeviser && vm.dataForm.brand_name.length>0) || !vm.isDeviser) 
+				&& vm.dataForm.city.length>0 && vm.dataForm.street.length>0 && vm.dataForm.street.length>0 && !vm.invalidPrefix  && vm.dataForm.street.length>0 
+				&& vm.dataForm.phone.length>0  && vm.dataForm.number.length>0  && vm.dataForm.zip.length>0 && !vm.notWeightMeasureSelected)
 		}
 
 		function openModal() {
@@ -132,17 +162,18 @@
 			personDataService.updatePassword({oldpassword:vm.currentPassword, newpassword:vm.newPassword},{personId: vm.person.id}, onUpdatePasswordSuccess, onUpdatePasswordError);
 		}
 
-		function existRequiredError(fieldName, form) {
-			var exists=false;
-			if (angular.isUndefined(form)) {
-				return exists;
-			}			
-			angular.forEach(form.$error.required, function(value){
-				if (!angular.isUndefined(value.$name) && value.$name==fieldName) {
-					exists=true;
-				}
-			});
-			return exists;
+		function existRequiredError(value) {
+			if (angular.isUndefined(value)) {
+				return vm.showInvalid;
+			}
+			return (value.length<1 && vm.showInvalid);
+		}
+
+		function existPaswordRequiredError(value) {
+			if (angular.isUndefined(value)) {
+				return vm.showInvalid;
+			}
+			return (value.length<1 && vm.showPasswordErrors);
 		}
 	}
 
