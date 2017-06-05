@@ -29,7 +29,7 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 								<label for="brand_name" class="col-md-2">BRAND / ARTIST NAME</label>
 								<div class="col-md-4 text-right">
 									<input type="text" name="brand_name" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.brand_name" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.brand_name)}"><!--only devisers -->
-									<span class="purple-text" ng-show="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.brand_name)">Please, fill in this field</span>
+									<span class="purple-text" ng-if="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.brand_name)">Please, fill in this field</span>
 								</div>
 							</div>
 							<label for="city" class="col-md-2" ng-class="{'col-md-offset-6': !generalSettingsCtrl.isDeviser}">CITY</label>
@@ -45,7 +45,7 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 										</li>
 									</ul>
 								</div>
-								<span class="purple-text" ng-show="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.city)">Please, fill in this field</span>
+								<span class="purple-text" ng-if="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.city)">Please, fill in this field</span>
 							</div>
 						</div>
 
@@ -63,7 +63,7 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 							<label for="street" class="col-md-2">STREET</label>
 							<div class="col-md-4 text-right">
 								<input type="text" name="street" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.street" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.street)}">
-								<span class="purple-text" ng-show="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.street)">Please, fill in this field</span>
+								<span class="purple-text" ng-if="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.street)">Please, fill in this field</span>
 							</div>
 						</div>
 						<div class="form-group">
@@ -73,12 +73,12 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 							</div>
 							<div class="col-md-3 text-right">
 								<input type="tel" name="phone" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.phone_number" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.phone_number)}">
-								<span class="purple-text" ng-show="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.phone_number)">Please, fill in this field</span>
+								<span class="purple-text" ng-if="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.phone_number)">Please, fill in this field</span>
 							</div>
 							<label for="number" class="col-md-2">NUMBER</label>
 							<div class="col-md-4 text-right">
 								<input type="text" name="number" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.number" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.number)}">
-								<span class="purple-text" ng-show="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.number)">Please, fill in this field</span>
+								<span class="purple-text" ng-if="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.number)">Please, fill in this field</span>
 							</div>
 						</div>
 						<div class="form-group">
@@ -92,7 +92,7 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 							<label for="zip" class="col-md-2">ZIP</label>
 							<div class="col-md-4 text-right">
 								<input type="text" name="zip" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.zip" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.zip)}">
-								<span class="purple-text" ng-show="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.zip)">Please, fill in this field</span>
+								<span class="purple-text" ng-if="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.zip)">Please, fill in this field</span>
 							</div>
 						</div>
 						<div class="form-group">
@@ -103,14 +103,14 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 										<a href="#"><span ng-bind="weightMeasure"></span></a>
 									</li>
 								</ol>
-								<span class="purple-text col-xs-12" ng-show="generalSettingsCtrl.showInvalid && generalSettingsCtrl.notWeightMeasureSelected">Please select a unit of measurement</span>
+								<span class="purple-text col-xs-12" ng-if="generalSettingsCtrl.showInvalid && generalSettingsCtrl.notWeightMeasureSelected">Please select a unit of measurement</span>
 							</div>
 							<div class="col-md-6 text-right">
 								<button class="btn btn-default btn-green col-md-offset-10 col-md-2" ng-click="generalSettingsCtrl.update()" ng-disabled="generalSettingsCtrl.saving">Save</button>
-								<span class="purple-text col-xs-12" ng-show="generalSettingsCtrl.showInvalid">Please, fill in all the required fields</span>
+								<span class="purple-text col-xs-12" ng-if="generalSettingsCtrl.showInvalid">Please, fill in all the required fields</span>
 							</div>
 						</div>
-						<div class="col-xs-12 text-center" ng-show="generalSettingsCtrl.saved&&!generalSettingsCtrl.dataForm.$dirty">
+						<div class="col-xs-12 text-center" ng-if="generalSettingsCtrl.saved&&!generalSettingsCtrl.dataForm.$dirty">
 							<span><i class="ion-checkmark text-green"></i> The changes have been saved!</span>
 						</div>						
 					</div>
@@ -133,16 +133,16 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 				<div ng-hide="generalSettingsCtrl.savingPassword">
 					<div class="col-xs-10 col-xs-offset-1">
 						<input type="password" name="currentPassword" class="form-control" ng-class="{'error-input': generalSettingsCtrl.existPasswordRequiredError(generalSettingsCtrl.currentPassword)}" ng-model="generalSettingsCtrl.currentPassword" placeholder="CURRENT PASSWORD">
-						<span class="purple-text" ng-show="generalSettingsCtrl.existPasswordRequiredError(generalSettingsCtrl.currentPassword)">Please, fill in this field</span>
+						<span class="purple-text" ng-if="generalSettingsCtrl.existPasswordRequiredError(generalSettingsCtrl.currentPassword)">Please, fill in this field</span>
 					</div>
 					<div class="col-xs-10 col-xs-offset-1">
 						<input type="password" name="newPassword" class="form-control" ng-class="{'error-input': generalSettingsCtrl.existPasswordRequiredError(generalSettingsCtrl.newPassword)}" ng-model="generalSettingsCtrl.newPassword" placeholder="NEW PASSWORD">
-						<span class="purple-text" ng-show="generalSettingsCtrl.existPasswordRequiredError(generalSettingsCtrl.newPassword)">Please, fill in this field</span>
+						<span class="purple-text" ng-if="generalSettingsCtrl.existPasswordRequiredError(generalSettingsCtrl.newPassword)">Please, fill in this field</span>
 					</div>
 					<div class="col-xs-10 col-xs-offset-1">
 						<input type="password" name="newPasswordBis" class="form-control" ng-class="{'error-input': generalSettingsCtrl.existPasswordRequiredError(generalSettingsCtrl.newPasswordBis)}" ng-model="generalSettingsCtrl.newPasswordBis" placeholder="CONFIRM NEW PASSWORD">
-						<span class="purple-text" ng-show="generalSettingsCtrl.existPasswordRequiredError(generalSettingsCtrl.newPasswordBis)">Please, fill in this field</span>
-						<span class="purple-text" ng-show="generalSettingsCtrl.distinctPasswords">Password don't match</span>
+						<span class="purple-text" ng-if="generalSettingsCtrl.existPasswordRequiredError(generalSettingsCtrl.newPasswordBis)">Please, fill in this field</span>
+						<span class="purple-text" ng-if="generalSettingsCtrl.distinctPasswords">Password don't match</span>
 					</div>
 					<div class="text-center">						
 						<button class="btn btn-default btn-green" ng-click="generalSettingsCtrl.updatePassword()" ng-disabled="generalSettingsCtrl.savingPassword">CHANGE</button>

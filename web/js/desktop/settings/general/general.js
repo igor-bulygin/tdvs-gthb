@@ -37,10 +37,7 @@
 		init();
 		
 		function init() {	
-			setPrefix();
-			if (vm.person.personal_info.phone_number_prefix.length<2) {
-				vm.invalidPrefix=true;
-			}
+			setPrefix();			
 			vm.person_original = angular.copy(vm.person);
 			getWeightUnits();
 		}
@@ -98,10 +95,15 @@
 
 		function update() {
 			vm.saved=false;
+			vm.invalidPrefix=false;
+			setPrefix();
 			if (angular.isUndefined(vm.person.settings.weight_measure) || vm.person.settings.weight_measure === null || vm.person.settings.weight_measure.length<1 ) {
 				vm.notWeightMeasureSelected=true;
 			}
-			if (isValidForm() && !vm.invalidPrefix) {
+			if (vm.person.personal_info.phone_number_prefix.length<2) {
+				vm.invalidPrefix=true;
+			}
+			if (isValidForm()) {
 				vm.saving=true;
 				function onUpdateGeneralSettingsSuccess(data) {
 					vm.saving=false;
@@ -119,9 +121,11 @@
 			}
 		}
 		function isValidForm() {
-			return (((vm.isDeviser && vm.dataForm.brand_name.length>0) || !vm.isDeviser) 
-				&& vm.dataForm.city.length>0 && vm.dataForm.street.length>0 && vm.dataForm.street.length>0 && !vm.invalidPrefix  && vm.dataForm.street.length>0 
-				&& vm.dataForm.phone.length>0  && vm.dataForm.number.length>0  && vm.dataForm.zip.length>0 && !vm.notWeightMeasureSelected)
+			return (((vm.isDeviser && !angular.isUndefined(vm.dataForm.brand_name.$viewValue) && vm.dataForm.brand_name.$viewValue.length>0) || !vm.isDeviser) 
+				&& !angular.isUndefined(vm.dataForm.city.$viewValue) && vm.dataForm.city.$viewValue.length>0 && !angular.isUndefined(vm.dataForm.street.$viewValue)  && vm.dataForm.street.$viewValue.length>0 
+				 && !vm.invalidPrefix && !angular.isUndefined(vm.dataForm.phone.$viewValue) && vm.dataForm.phone.$viewValue.length>0  
+				&& !angular.isUndefined(vm.dataForm.number.$viewValue) && vm.dataForm.number.$viewValue.length>0 
+				&& !angular.isUndefined(vm.dataForm.zip.$viewValue) && vm.dataForm.zip.$viewValue.length>0 && !vm.notWeightMeasureSelected)
 		}
 
 		function openModal() {
