@@ -1,9 +1,21 @@
 <div ng-messages="field.$error" class="error-text">
-	<div ng-message="required">Please fill in this field.</div>
-	<div ng-message="same">Passwords don't match.</div>
-	<div ng-message="email">Invalid email.</div>
-	<div ng-message="url">Invalid URL.</div>
-	<div ng-message="pattern">Invalid URL.</div>
-	<div ng-message="min">Minimum value not valid.</div>
-	<div ng-message="max">Maximum value not valid.</div>
+	<div ng-switch on="field.$name">
+		<div ng-switch-when="password">
+			<div ng-message="minlength">The password must be at least 6 characteres long.</div>
+			<div ng-message="required">Please enter the password</div>
+		</div>
+		<div ng-switch-when="password_confirm">
+			<div ng-message="required">Please repeat the password</div>
+			<div ng-message="same">The passwords don't match</div>
+		</div>
+		<div ng-switch-default>
+			<div ng-message="required">Please fill in this field.</div>
+			<div ng-message="same">The passwords don't match.</div>
+			<div ng-message="email">Please enter a valid email address.</div>
+			<div ng-message="url">Invalid URL.</div>
+			<div ng-message="pattern">Invalid URL.</div>
+			<div ng-message="min">Minimum value not valid.</div>
+			<div ng-message="max">Maximum value not valid.</div>
+		</div>
+	</div>
 </div>

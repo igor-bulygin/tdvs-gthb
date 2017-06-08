@@ -34,22 +34,8 @@ $this->registerJs("var invitation = ".Json::encode($invitation), yii\web\View::P
 					<form-errors field="createDeviserCtrl.form.email" condition="createDeviserCtrl.has_error(createDeviserCtrl.form, createDeviserCtrl.form.email)"></form-errors>
 				</div>
 				<div class="row">
-					<label>Brand name</label>
-					<input type="text" class="form-control grey-input ng-class:{'error-input': createDeviserCtrl.has_error(createDeviserCtrl.form, createDeviserCtrl.form.brand_name)}" name="brand_name" ng-model="createDeviserCtrl.deviser.brand_name" required>
-					<form-errors field="createDeviserCtrl.form.brand_name" condition="createDeviserCtrl.has_error(createDeviserCtrl.form, createDeviserCtrl.form.brand_name)"></form-errors>
-				</div>
-				<div class="row">
-					<label>Representative name <i tooltip-placement="top" uib-tooltip="This name will not be made public. We will only use it to communicate with you." class="ion-information-circled info"></i></label>
-					<input type="text" class="form-control grey-input ng-class:{'error-input': createDeviserCtrl.has_error(createDeviserCtrl.form, createDeviserCtrl.form.name)}" name="name" ng-model="createDeviserCtrl.deviser.name" placeholder="FIRST NAME" required>
-					<form-errors field="createDeviserCtrl.form.name" condition="createDeviserCtrl.has_error(createDeviserCtrl.form, createDeviserCtrl.form.name)"></form-errors>
-				</div>
-				<div class="row">
-					<input type="text" class="form-control grey-input ng-class:{'error-input': createDeviserCtrl.has_error(createDeviserCtrl.form, createDeviserCtrl.form.last_name)}" name="last_name" ng-model="createDeviserCtrl.deviser.last_name" placeholder="LAST NAME" required>
-					<form-errors field="createDeviserCtrl.form.last_name" condition="createDeviserCtrl.has_error(createDeviserCtrl.form, createDeviserCtrl.form.last_name)"></form-errors>
-				</div>
-				<div class="row">
 					<label>Set your password</label>
-					<input type="password" id="email" class="form-control grey-input password ng-class:{'error-input':createDeviserCtrl.has_error(createDeviserCtrl.form, createDeviserCtrl.form.password)}" name="password" ng-model="createDeviserCtrl.deviser.password" required>
+					<input type="password" id="email" class="form-control grey-input password ng-class:{'error-input':createDeviserCtrl.has_error(createDeviserCtrl.form, createDeviserCtrl.form.password)}" name="password" ng-model="createDeviserCtrl.deviser.password" ng-minlength="6" required>
 					<form-errors field="createDeviserCtrl.form.password" condition="createDeviserCtrl.has_error(createDeviserCtrl.form, createDeviserCtrl.form.password)"></form-errors>
 				</div>
 				<div class="row">
@@ -61,9 +47,9 @@ $this->registerJs("var invitation = ".Json::encode($invitation), yii\web\View::P
 				</div>
 				<div class="row">
 					<div class="checkbox checkbox-circle remember-me">
-						<input id="checkbox7" class="styled" type="checkbox">
+						<input id="checkbox7" class="styled" type="checkbox" name="terms_and_conditions">
 						<label for="checkbox7">
-							Remember me
+							I accept the Todevise Terms & Conditions
 						</label>
 					</div>
 				</div>
