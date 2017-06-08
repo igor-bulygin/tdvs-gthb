@@ -47,11 +47,12 @@ $this->registerJs("var invitation = ".Json::encode($invitation), yii\web\View::P
 				</div>
 				<div class="row">
 					<div class="checkbox checkbox-circle remember-me">
-						<input id="checkbox7" class="styled" type="checkbox" name="terms_and_conditions">
+						<input id="checkbox7" class="styled" type="checkbox" name="terms_and_conditions" ng-model="createDeviserCtrl.terms_and_conditions" required>
 						<label for="checkbox7">
 							I accept the Todevise Terms & Conditions
 						</label>
 					</div>
+					<form-errors field="createDeviserCtrl.form.terms_and_conditions" condition="createDeviserCtrl.has_error(createDeviserCtrl.form, createDeviserCtrl.form.terms_and_conditions)"></form-errors>
 				</div>
 			</div>
 			<button class="btn-red send-btn" ng-click="createDeviserCtrl.submitForm(createDeviserCtrl.form)">

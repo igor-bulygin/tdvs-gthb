@@ -2,11 +2,14 @@
 	<div ng-switch on="field.$name">
 		<div ng-switch-when="password">
 			<div ng-message="minlength">The password must be at least 6 characteres long.</div>
-			<div ng-message="required">Please enter the password</div>
+			<div ng-message="required">Please enter the password.</div>
 		</div>
 		<div ng-switch-when="password_confirm">
-			<div ng-message="required">Please repeat the password</div>
-			<div ng-message="same">The passwords don't match</div>
+			<div ng-message="required">Please repeat the password.</div>
+			<div ng-message="same">The passwords don't match.</div>
+		</div>
+		<div ng-switch-when="terms_and_conditions">
+			<div ng-message="required">You have to accept the Terms & Conditions before proceeding.</div>
 		</div>
 		<div ng-switch-default>
 			<div ng-message="required">Please fill in this field.</div>
