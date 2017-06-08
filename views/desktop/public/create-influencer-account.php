@@ -38,18 +38,8 @@ $this->registerJs("var invitation = ".\yii\helpers\Json::encode($invitation), yi
 						<form-errors field="createInfluencerCtrl.form.email" condition="createInfluencerCtrl.has_error(createInfluencerCtrl.form, createInfluencerCtrl.form.email)"></form-errors>
 					</div>
 					<div class="row">
-						<label for="name">Name</label>
-						<input type="text" id="name" class="form-control grey-input ng-class:{'error-input': createInfluencerCtrl.has_error(createInfluencerCtrl.form, createInfluencerCtrl.form.name)}" name="name" ng-model="createInfluencerCtrl.influencer.name" required>
-						<form-errors field="createInfluencerCtrl.form.name" condition="createInfluencerCtrl.has_error(createInfluencerCtrl.form, createInfluencerCtrl.form.name)"></form-errors>
-					</div>
-					<div class="row">
-						<label for="last_name">Last name</label>
-						<input type="text" id="last_name" class="form-control grey-input ng-class:{'error-input': createInfluencerCtrl.has_error(createInfluencerCtrl.form, createInfluencerCtrl.form.last_name)}" name="last_name" ng-model="createInfluencerCtrl.influencer.last_name" required>
-						<form-errors field="createInfluencerCtrl.form.last_name" condition="createInfluencerCtrl.has_error(createInfluencerCtrl.form, createInfluencerCtrl.form.last_name"></form-errors>
-					</div>
-					<div class="row">
 						<label for="password">Set your password</label>
-						<input type="password" id="password" class="form-control grey-input password ng-class:{'error-input':createInfluencerCtrl.has_error(createInfluencerCtrl.form, createInfluencerCtrl.form.password)}" name="password" ng-model="createInfluencerCtrl.influencer.password" required>
+						<input type="password" id="password" class="form-control grey-input password ng-class:{'error-input':createInfluencerCtrl.has_error(createInfluencerCtrl.form, createInfluencerCtrl.form.password)}" name="password" ng-model="createInfluencerCtrl.influencer.password" ng-minlength="6" required>
 						<form-errors field="createInfluencerCtrl.form.password" condition="createInfluencerCtrl.has_error(createInfluencerCtrl.form, createInfluencerCtrl.form.password)"></form-errors>
 					</div>
 					<div class="row">
@@ -61,11 +51,12 @@ $this->registerJs("var invitation = ".\yii\helpers\Json::encode($invitation), yi
 					</div>
 					<div class="row">
 						<div class="checkbox checkbox-circle remember-me">
-							<input id="checkbox7" class="styled" type="checkbox">
+							<input id="checkbox7" class="styled" type="checkbox" name="terms_and_conditions" ng-model="createInfluencerCtrl.terms_and_conditions" required>
 							<label for="checkbox7">
 								I accept the Todevise Terms & Conditions
 							</label>
 						</div>
+						<form-errors field="createInfluencerCtrl.form.terms_and_conditions" condition="createInfluencerCtrl.has_error(createInfluencerCtrl.form, createInfluencerCtrl.form.terms_and_conditions)"></form-errors>
 					</div>
 				</div>
 				<button class="btn-red send-btn" ng-click="createInfluencerCtrl.submitForm(createInfluencerCtrl.form)">
