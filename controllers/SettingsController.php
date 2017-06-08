@@ -46,9 +46,15 @@ class SettingsController extends CController
 		// get the category object
 		$person = Person::findOneSerialized($person_id);
 
+		if (!$person) {
+			throw new NotFoundHttpException();
+		}
+
 		if (!$person->isPersonEditable()) {
 			throw new UnauthorizedHttpException();
 		}
+
+		$this->checkProfileState($person);
 
 		$this->layout = '/desktop/public-2.php';
 
@@ -62,6 +68,10 @@ class SettingsController extends CController
 		// get the category object
 		$person = Person::findOneSerialized($person_id);
 
+		if (!$person) {
+			throw new NotFoundHttpException();
+		}
+
 		if (!$person->isDeviser()) {
 			throw new NotFoundHttpException();
 		}
@@ -69,6 +79,8 @@ class SettingsController extends CController
 		if (!$person->isDeviserEditable()) {
 			throw new UnauthorizedHttpException();
 		}
+
+		$this->checkProfileState($person);
 
 		$this->layout = '/desktop/public-2.php';
 
@@ -81,6 +93,10 @@ class SettingsController extends CController
 	{
 		// get the category object
 		$person = Person::findOneSerialized($person_id);
+
+		if (!$person) {
+			throw new NotFoundHttpException();
+		}
 
 		if (!$person->isDeviser()) {
 			throw new NotFoundHttpException();
@@ -102,6 +118,10 @@ class SettingsController extends CController
 		// get the category object
 		$person = Person::findOneSerialized($person_id);
 
+		if (!$person) {
+			throw new NotFoundHttpException();
+		}
+
 		if (!$person->isDeviser()) {
 			throw new NotFoundHttpException();
 		}
@@ -113,6 +133,18 @@ class SettingsController extends CController
 		\Yii::$app->session->set('person_id_stripe_connection', $person->short_id);
 
 		$this->redirect(StripeHelper::getAuthorizeUrl());
+	}
+
+	protected function checkProfileState(Person $person)
+	{
+		if (!$person->isCompletedProfile()) {
+			$this->redirect($person->getCompleteProfileLink());
+		}
+		if ($person->isDeviser()) {
+			if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE) {
+				$this->redirect($person->getDeviserNotPublicLink());
+			}
+		}
 	}
 
 	/*

@@ -186,12 +186,15 @@ $config = [
 
 				//Person
 				'/<person_type:(deviser|influencer)>/<slug:[^/.]*?>/<person_id:[^/.]*?>' => 'person/about',
+				'/<person_type:(deviser|influencer)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/complete-profile' => 'person/complete-profile',
 				'/<person_type:(deviser|influencer)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/about' => 'person/about',
 				'/<person_type:(deviser|influencer)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/press' => 'person/press',
 				'/<person_type:(deviser|influencer)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/video' => 'person/videos',
+
 				'/<person_type:(deviser|influencer|client)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/loved' => 'person/loved',
 				'/<person_type:(deviser|influencer|client)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/boxes' => 'person/boxes',
 				'/<person_type:(deviser|influencer|client)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/box/<box_id:[^/.]*?>' => 'person/box-detail',
+
 				'/<person_type:(deviser|influencer)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/stories' => 'person/stories',
 				'/<person_type:(deviser|influencer)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/stories/create' => 'person/story-create',
 				'/<person_type:(deviser|influencer)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/story/<story_id:[^/.]*?>/edit' => 'person/story-edit',
@@ -199,6 +202,8 @@ $config = [
 				'/<person_type:(deviser|influencer)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/about/edit' => 'person/about-edit',
 				'/<person_type:(deviser|influencer)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/press/edit' => 'person/press-edit',
 				'/<person_type:(deviser|influencer)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/video/edit' => 'person/videos-edit',
+
+				'/<person_type:(deviser)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/deviser-not-public' => 'person/deviser-not-public',
 				'/<person_type:(deviser)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/faq' => 'person/faq',
 				'/<person_type:(deviser)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/faq/edit' => 'person/faq-edit',
 				'/<person_type:(deviser)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/store' => 'person/store',
@@ -209,7 +214,7 @@ $config = [
 				'/work/<slug:[^/.]*?>/<product_id:[^/.]*?>' => 'product/detail',
 
 				//Settings
-				'/settings/<slug:[^/.]*?>/<person_id:[^/.]*?>' => 'settings/index',
+				'/settings/<slug:[^/.]*?>/<person_id:[^/.]*?>' => 'settings',
 				'/settings/<slug:[^/.]*?>/<person_id:[^/.]*?>/general' => 'settings/general',
 				'/settings/<slug:[^/.]*?>/<person_id:[^/.]*?>/billing' => 'settings/billing',
 				'/settings/<slug:[^/.]*?>/<person_id:[^/.]*?>/shipping' => 'settings/shipping',
@@ -222,7 +227,7 @@ $config = [
 				//Stripe
 				'stripe/connect-back' => 'stripe/connect-back',
 
-				//Links for contact
+				//Login
 				'login' => 'site/login',
 
 				//Discover

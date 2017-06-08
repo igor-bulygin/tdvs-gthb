@@ -52,6 +52,42 @@ class PersonController extends CController
 		return $this->render("index");
 	}
 
+	public function actionCompleteProfile($slug, $person_id)
+	{
+		$person = Person::findOneSerialized($person_id);
+
+		if (!$person) {
+			throw new NotFoundHttpException();
+		}
+
+		if ($person->isCompletedProfile()) {
+			$this->redirect($person->getMainLink());
+		}
+
+		$this->layout = '/desktop/public-2.php';
+		return $this->render("@app/views/desktop/person/complete-profile", [
+			'person' => $person,
+		]);
+	}
+
+	public function actionDeviserNotPublic($slug, $person_id)
+	{
+		$person = Person::findOneSerialized($person_id);
+
+		if (!$person) {
+			throw new NotFoundHttpException();
+		}
+
+		if ($person->isPublic()) {
+			$this->redirect($person->getMainLink());
+		}
+
+		$this->layout = '/desktop/public-2.php';
+		return $this->render("@app/views/desktop/person/deviser-not-public", [
+			'person' => $person,
+		]);
+	}
+
 	public function actionStore($slug, $person_id)
 	{
 		$person = Person::findOneSerialized($person_id);
@@ -59,6 +95,8 @@ class PersonController extends CController
 		if (!$person) {
 			throw new NotFoundHttpException();
 		}
+
+		$this->checkProfileState($person);
 
 		// categories of all products
 		$categories = $person->getCategoriesOfProducts();
@@ -113,6 +151,8 @@ class PersonController extends CController
 			throw new UnauthorizedHttpException();
 		}
 
+		$this->checkProfileState($person);
+
 		// categories of all products
 		$categories = $person->getCategoriesOfProducts();
 		/** @var Category $selectedCategory */
@@ -153,6 +193,8 @@ class PersonController extends CController
 			throw new NotFoundHttpException();
 		}
 
+		$this->checkProfileState($person);
+
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("@app/views/desktop/person/about-view", [
 			'person' => $person,
@@ -171,6 +213,8 @@ class PersonController extends CController
 			throw new UnauthorizedHttpException();
 		}
 
+		$this->checkProfileState($person);
+
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("@app/views/desktop/person/about-edit", [
 			'person' => $person,
@@ -188,6 +232,8 @@ class PersonController extends CController
 		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE && !$person->isPersonEditable()) {
 			throw new UnauthorizedHttpException();
 		}
+
+		$this->checkProfileState($person);
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("@app/views/desktop/person/press-view", [
@@ -209,6 +255,8 @@ class PersonController extends CController
 			throw new UnauthorizedHttpException();
 		}
 
+		$this->checkProfileState($person);
+
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("@app/views/desktop/person/press-edit", [
 			'person' => $person,
@@ -226,6 +274,8 @@ class PersonController extends CController
 		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE && !$person->isPersonEditable()) {
 			throw new UnauthorizedHttpException();
 		}
+
+		$this->checkProfileState($person);
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("@app/views/desktop/person/videos-view", [
@@ -247,6 +297,8 @@ class PersonController extends CController
 			throw new UnauthorizedHttpException();
 		}
 
+		$this->checkProfileState($person);
+
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("@app/views/desktop/person/videos-edit", [
 			'person' => $person,
@@ -264,6 +316,8 @@ class PersonController extends CController
 		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE && !$person->isPersonEditable()) {
 			throw new UnauthorizedHttpException();
 		}
+
+		$this->checkProfileState($person);
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("@app/views/desktop/person/faq-view", [
@@ -285,6 +339,8 @@ class PersonController extends CController
 			throw new UnauthorizedHttpException();
 		}
 
+		$this->checkProfileState($person);
+
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("@app/views/desktop/person/faq-edit", [
 			'person' => $person,
@@ -302,6 +358,8 @@ class PersonController extends CController
 		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE && !$person->isPersonEditable()) {
 			throw new UnauthorizedHttpException();
 		}
+
+		$this->checkProfileState($person);
 
 		$loveds = Loved::findSerialized(['person_id' => $person_id]);
 		$this->layout = '/desktop/public-2.php';
@@ -323,6 +381,8 @@ class PersonController extends CController
 			throw new UnauthorizedHttpException();
 		}
 
+		$this->checkProfileState($person);
+
 		$boxes = Box::findSerialized(['person_id' => $person_id]);
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("@app/views/desktop/person/boxes-view", [
@@ -342,6 +402,8 @@ class PersonController extends CController
 		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE && !$person->isPersonEditable()) {
 			throw new UnauthorizedHttpException();
 		}
+
+		$this->checkProfileState($person);
 
 		Box::setSerializeScenario(Box::SERIALIZE_SCENARIO_PUBLIC);
 		$box = Box::findOneSerialized($box_id);
@@ -375,6 +437,8 @@ class PersonController extends CController
 			throw new UnauthorizedHttpException();
 		}
 
+		$this->checkProfileState($person);
+
 		if ($person->isPersonEditable()) {
 			$stories = Story::findSerialized(['person_id' => $person_id]);
 		} else {
@@ -404,6 +468,8 @@ class PersonController extends CController
 			throw new UnauthorizedHttpException();
 		}
 
+		$this->checkProfileState($person);
+
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("@app/views/desktop/person/story-create", [
 			'person' => $person,
@@ -421,6 +487,8 @@ class PersonController extends CController
 		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE && !$person->isPersonEditable()) {
 			throw new UnauthorizedHttpException();
 		}
+
+		$this->checkProfileState($person);
 
 		Story::setSerializeScenario(Story::SERIALIZE_SCENARIO_OWNER);
 		$story = Story::findOneSerialized($story_id);
@@ -450,6 +518,8 @@ class PersonController extends CController
 		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE && !$person->isPersonEditable()) {
 			throw new UnauthorizedHttpException();
 		}
+
+		$this->checkProfileState($person);
 
 		Story::setSerializeScenario(Story::SERIALIZE_SCENARIO_PUBLIC);
 		$story = Story::findOneSerialized($story_id);
@@ -508,6 +578,19 @@ class PersonController extends CController
 		}
 
 		return null;
+	}
+
+	protected function checkProfileState(Person $person)
+	{
+		if (!$person->isCompletedProfile()) {
+			$this->redirect($person->getCompleteProfileLink());
+		} else {
+			if ($person->isDeviser()) {
+				if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE) {
+					$this->redirect($person->getDeviserNotPublicLink());
+				}
+			}
+		}
 	}
 
 	/**

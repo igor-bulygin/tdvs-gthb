@@ -483,18 +483,21 @@ class Person extends CActiveRecord implements IdentityInterface
 
 	public function rules()
 	{
-		// TODO use core validators: "in", "each" (http://www.yiiframework.com/doc-2.0/guide-tutorial-core-validators.html)
-
 		return [
-			// the name, email, subject and body attributes are required
 			[
 				[
-					'personal_info',
 					'credentials',
 					'type',
 				],
 				'required',
 				'on' => [self::SCENARIO_DEVISER_CREATE_DRAFT, self::SCENARIO_INFLUENCER_CREATE_DRAFT, self::SCENARIO_CLIENT_CREATE]
+			],
+			[
+				[
+					'personal_info',
+				],
+				'required',
+				'on' => [self::SCENARIO_CLIENT_CREATE]
 			],
 			[
 				[
@@ -798,6 +801,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'press_edit_link' => 'pressEditLink',
 					'videos_edit_link' => 'videosEditLink',
 					'faq_edit_link' => 'faqEditLink',
+
 					'settings',
 					'available_countries' => 'availableCountries',
 //					'preferences',
@@ -1415,8 +1419,12 @@ class Person extends CActiveRecord implements IdentityInterface
 		return '#';
 	}
 
-	public function getSettingsLink() {
-		return Url::to(["settings/index", "slug" => $this->getSlug(), 'person_id' => $this->short_id]);
+	public function getSettingsLink($action = 'index') {
+		return Url::to(["settings/".$action, "slug" => $this->getSlug(), 'person_id' => $this->short_id]);
+	}
+
+	public function getSettingsBaseLink($action = 'index') {
+		return Url::to(["settings/", "slug" => $this->getSlug(), 'person_id' => $this->short_id]);
 	}
 
 	public function getStoreLink($params = [])
@@ -1451,6 +1459,16 @@ class Person extends CActiveRecord implements IdentityInterface
 			return Url::to($params, true);
 		}
 		return null;
+	}
+
+	public function getCompleteProfileLink()
+	{
+		return Url::to(["/person/complete-profile", "slug" => $this->getSlug(), 'person_id' => $this->short_id, "person_type" => $this->getPersonTypeForUrl()], true);
+	}
+
+	public function getDeviserNotPublicLink()
+	{
+		return Url::to(["/person/deviser-not-public", "slug" => $this->getSlug(), 'person_id' => $this->short_id, "person_type" => $this->getPersonTypeForUrl()], true);
 	}
 
 	public function getLovedLink()
@@ -1515,7 +1533,7 @@ class Person extends CActiveRecord implements IdentityInterface
 
 	public function getCreateWorkLink()
 	{
-		return Url::to(["/product/create", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id, "person_type" => $this->getPersonTypeForUrl()], true);
+		return Url::to(["/product/create", "slug" => $this->getSlug(), 'person_id' => $this->short_id, "person_type" => $this->getPersonTypeForUrl()], true);
 	}
 
 	public function getSlug()
@@ -1681,5 +1699,81 @@ class Person extends CActiveRecord implements IdentityInterface
 		shuffle($persons);
 
 		return $persons;
+	}
+
+	/**
+	 * Returns TRUE if profile is completed: all fields in "step 2" of register are filled
+	 *
+	 * @return bool
+	 */
+	public function isCompletedProfile() {
+		return !(
+			empty($this->getName()) ||
+			empty($this->getCity()) ||
+			empty($this->categories) ||
+			empty($this->text_short_description) ||
+			empty($this->text_biography) ||
+			empty($this->mediaMapping->header) ||
+			empty($this->mediaMapping->profile) ||
+			false
+		);
+	}
+
+	/**
+	 * Returns TRUE if profile is public
+	 *
+	 * @return bool
+	 */
+	public function isPublic() {
+		return $this->account_state == Person::ACCOUNT_STATE_ACTIVE;
+	}
+
+	/**
+	 * Returns TRUE if profile can be published
+	 *
+	 * @return bool
+	 */
+	public function canPublishProfile() {
+		if ($this->isDeviser()) {
+			return
+				$this->hasShippingSettings() &&
+				$this->hasStripeInfo() &&
+				$this->hasPublishedProducts();
+		}
+
+		return true;
+	}
+
+	/**
+	 * Returns TRUE if the user (deviser) has any shipping settings
+	 *
+	 * @return bool
+	 */
+	public function hasShippingSettings() {
+		return count($this->shippingSettingsMapping) > 0;
+	}
+
+	/**
+	 * Returns TRUE if the user (deviser) has any stripe connection
+	 *
+	 * @return bool
+	 */
+	public function hasStripeInfo() {
+		return !empty($this->settingsMapping->stripeInfoMapping->access_token);
+	}
+
+	/**
+	 * Returns TRUE if the user (deviser) has any published product
+	 *
+	 * @return bool
+	 */
+	public function hasPublishedProducts() {
+		$products = Product::findSerialized(
+			[
+				'deviser_id' => $this->short_id,
+				'product_state' => Product::PRODUCT_STATE_ACTIVE,
+			]
+		);
+		return !empty($products);
 	}
 }
