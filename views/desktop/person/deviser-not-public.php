@@ -25,7 +25,7 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 				<p>Before making your profile public, please complete the following steps:</p>
 
 				<?php if (!$person->hasShippingSettings()) { ?>
-					<a class="btn btn-default" href="<?=$person->getSettingsBaseLink()?>">Add shipping prices</a>
+					<a class="btn btn-default" href="<?=$person->getSettingsLink('shipping')?>">Add shipping prices</a>
 				<?php } else { ?>
 					<a class="btn btn-default" href="<?=$person->getSettingsLink('shipping')?>">Add shipping prices (DONE)</a>
 				<?php } ?>

@@ -1419,7 +1419,7 @@ class Person extends CActiveRecord implements IdentityInterface
 		return '#';
 	}
 
-	public function getSettingsLink($action = 'index') {
+	public function getSettingsLink($action = null) {
 		return Url::to(["settings/".$action, "slug" => $this->getSlug(), 'person_id' => $this->short_id]);
 	}
 
