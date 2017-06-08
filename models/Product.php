@@ -742,7 +742,7 @@ class Product extends CActiveRecord {
 	 */
 	public function getEditLink() {
 		$deviser = $this->getDeviser();
-		return Url::to(['/product/edit', 'slug' => $deviser->getSlug(), 'product_id' => $this->short_id, 'deviser_id' => $this->deviser_id,
+		return Url::to(['/product/edit', 'slug' => $deviser->getSlug(), 'product_id' => $this->short_id, 'person_id' => $this->deviser_id,
 			"person_type" => $deviser->getPersonTypeForUrl()], true);
 	}
 

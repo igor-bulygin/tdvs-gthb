@@ -153,10 +153,10 @@ class ProductController extends CController
 		]);
 	}
 
-	public function actionCreate($slug, $deviser_id)
+	public function actionCreate($slug, $person_id)
 	{
 		/** @var Person $person */
-		$person = Person::findOneSerialized($deviser_id);
+		$person = Person::findOneSerialized($person_id);
 
 		if (!$person) {
 			throw new NotFoundHttpException();
@@ -172,10 +172,10 @@ class ProductController extends CController
 		]);
 	}
 
-	public function actionEdit($slug, $deviser_id, $product_id)
+	public function actionEdit($slug, $person_id, $product_id)
 	{
 		/** @var Person $person */
-		$person = Person::findOneSerialized($deviser_id);
+		$person = Person::findOneSerialized($person_id);
 
 		if (!$person) {
 			throw new NotFoundHttpException();

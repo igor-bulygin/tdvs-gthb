@@ -209,8 +209,9 @@ $config = [
 				'/<person_type:(deviser)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/store' => 'person/store',
 				'/<person_type:(deviser)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/store/edit' => 'person/store-edit',
 
-				'/<person_type:(deviser)>/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/works/create' => 'product/create',
-				'/<person_type:(deviser)>/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/works/<product_id:[^/.]*?>/edit' => 'product/edit',
+				'/<person_type:(deviser)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/works/create' => 'product/create',
+				'/<person_type:(deviser)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/works/<product_id:[^/.]*?>/edit' => 'product/edit',
+
 				'/work/<slug:[^/.]*?>/<product_id:[^/.]*?>' => 'product/detail',
 
 				//Settings
