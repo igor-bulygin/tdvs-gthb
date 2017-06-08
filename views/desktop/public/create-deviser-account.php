@@ -15,6 +15,10 @@ $this->registerJs("var invitation = ".Json::encode($invitation), yii\web\View::P
 
 <div class="create-deviser-account-wrapper">
 	<div class="logo">
+		<span class="title-create-account">
+			<span class="first-title">welcome</span>
+			<span class="second-title">to</span>
+		</span>
 		<a href="#">
 			<img src="/imgs/logo.png" data-pin-nopin="true">
 		</a>
@@ -63,12 +67,12 @@ $this->registerJs("var invitation = ".Json::encode($invitation), yii\web\View::P
 	<?php } elseif ($invitation->isUsed()) { ?>
 	<div class="invitation-messages">
 		<p>You have created a Deviser account with this invitation. Login to access to your account.</p>
-		<a href="<?= Url::to([" public/index "]) ?>" class="btn btn-red">Login</a>
+		<a href="<?= Url::to(["/site/login"]) ?>" class="btn btn-red">Login</a>
 	</div>
 	<?php } else { ?>
 	<div class="invitation-messages">
 		<p>This invitation is not longer available. You can ask for a new one in "Become a Deviser".</p>
-		<a href="<?= Url::to([" public/become-deviser "]) ?>" class="btn btn-red">Become a Deviser</a>
+		<a href="<?= Url::to(["/public/become-deviser"]) ?>" class="btn btn-red">Become a Deviser</a>
 	</div>
 	<?php } ?>
 </div>
