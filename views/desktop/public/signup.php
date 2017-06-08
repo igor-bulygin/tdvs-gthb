@@ -26,18 +26,13 @@ $this->title = 'Create an account - Todevise';
 					<form-errors field="createClientCtrl.form.name" condition="createClientCtrl.has_error(createClientCtrl.form, createClientCtrl.form.name)"></form-errors>
 				</div>
 				<div class="row">
-					<label for="last_name">Last name</label>
-					<input type="text" id="last_name" class="form-control grey-input ng-class:{'error-input': createClientCtrl.has_error(createClientCtrl.form, createClientCtrl.form.last_name)}" name="last_name" ng-model="createClientCtrl.user.last_name" required>
-					<form-errors field="createClientCtrl.form.last_name" condition="createClientCtrl.has_error(createClientCtrl.form, createClientCtrl.form.last_name)"></form-errors>
-				</div>
-				<div class="row">
 					<label for="email">Email</label>
 					<input type="email" id="email" class="form-control grey-input ng-class:{'error-input': createClientCtrl.has_error(createClientCtrl.form, createClientCtrl.form.email)}" name="email" ng-model="createClientCtrl.user.email" required>
 					<form-errors field="createClientCtrl.form.email" condition="createClientCtrl.has_error(createClientCtrl.form, createClientCtrl.form.email)"></form-errors>
 				</div>
 				<div class="row">
 					<label for="password">Set your password</label>
-					<input type="password" id="password" class="form-control grey-input password ng-class:{'error-input':createClientCtrl.has_error(createClientCtrl.form, createClientCtrl.form.password)}" name="password" ng-model="createClientCtrl.user.password" required>
+					<input type="password" id="password" class="form-control grey-input password ng-class:{'error-input':createClientCtrl.has_error(createClientCtrl.form, createClientCtrl.form.password)}" name="password" ng-model="createClientCtrl.user.password" ng-minlength="6" required>
 					<form-errors field="createClientCtrl.form.password" condition="createClientCtrl.has_error(createClientCtrl.form, createClientCtrl.form.password)"></form-errors>
 				</div>
 				<div class="row">
@@ -48,13 +43,13 @@ $this->title = 'Create an account - Todevise';
 					</div>
 				</div>
 				<div class="row">
-					<div class="checkbox checkbox-circle remember-me ng-class:{'error-input': createClientCtrl.has_error(createClientCtrl.form, createClientCtrl.form.terms)}">
-						<input id="checkbox7" class="styled" type="checkbox" name="terms" ng-model="createClientCtrl.terms" required>
+					<div class="checkbox checkbox-circle remember-me ng-class:{'error-input': createClientCtrl.has_error(createClientCtrl.form, createClientCtrl.form.terms_and_conditions)}">
+						<input id="checkbox7" class="styled" type="checkbox" name="terms_and_conditions" ng-model="createClientCtrl.terms_and_conditions" required>
 						<label for="checkbox7">
 							I accept the Todevise Terms & Conditions
 						</label>
 					</div>
-					<form-errors field="createClientCtrl.form.terms" condition="createClientCtrl.has_error(createClientCtrl.form, createClientCtrl.form.terms)"></form-errors>
+					<form-errors field="createClientCtrl.form.terms_and_conditions" condition="createClientCtrl.has_error(createClientCtrl.form, createClientCtrl.form.terms_and_conditions)"></form-errors>
 				</div>
 			</div>
 			<div ng-if="createClientCtrl.error_message" class="text-center error-text" ng-cloak><p ng-bind="createClientCtrl.error_message"></p></div>

@@ -46,7 +46,7 @@ $this->registerJs("var invitation = ".Json::encode($invitation), yii\web\View::P
 					</div>
 				</div>
 				<div class="row">
-					<div class="checkbox checkbox-circle remember-me">
+					<div class="checkbox checkbox-circle remember-me ng-class:{'error-input': createDeviserCtrl.has_error(createDeviserCtrl.form, createDeviserCtrl.form.terms_and_conditions)}">
 						<input id="checkbox7" class="styled" type="checkbox" name="terms_and_conditions" ng-model="createDeviserCtrl.terms_and_conditions" required>
 						<label for="checkbox7">
 							I accept the Todevise Terms & Conditions
