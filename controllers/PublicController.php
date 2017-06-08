@@ -122,6 +122,10 @@ class PublicController extends CController
 		/** @var Invitation $invitation */
 		$invitation = Invitation::findByEmailAction($actionId);
 
+		if ($invitation->uuid != $invitationId) {
+			$invitation = null;
+		}
+
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("create-deviser-account", ["invitation" => $invitation]);
 	}
@@ -132,6 +136,10 @@ class PublicController extends CController
 		$actionId = Yii::$app->request->get("action");
 		/** @var Invitation $invitation */
 		$invitation = Invitation::findByEmailAction($actionId);
+
+		if ($invitation->uuid != $invitationId) {
+			$invitation = null;
+		}
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("create-influencer-account", ["invitation" => $invitation]);
