@@ -85,7 +85,7 @@
 		}
 
 		function setPrefix() {
-			if (angular.isUndefined(vm.person.personal_info.phone_number_prefix)) {
+			if (vm.person.personal_info.phone_number_prefix==null || angular.isUndefined(vm.person.personal_info.phone_number_prefix) || vm.person.personal_info.phone_number_prefix.length<1) {
 				vm.person.personal_info.phone_number_prefix="+";
 			}
 			if (vm.person.personal_info.phone_number_prefix.indexOf('+') == -1) {
