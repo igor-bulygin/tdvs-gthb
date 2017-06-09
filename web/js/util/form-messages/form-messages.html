@@ -14,6 +14,21 @@
 		<div ng-switch-when="terms_and_conditions">
 			<div ng-message="required">You have to accept the Terms & Conditions before proceeding.</div>
 		</div>
+		<div ng-switch-when="brand_name">
+			<div ng-message="required">Please enter your brand name.</div>
+		</div>
+		<div ng-switch-when="city">
+			<div ng-message="required">Please enter a city.</div>
+		</div>
+		<div ng-switch-when="categories">
+			<div ng-message="required">Please select one or more fields of work.</div>
+		</div>
+		<div ng-switch-when="text_short_description">
+			<div ng-message="required">Please enter a short description of your brand.</div>
+		</div>
+		<div ng-switch-when="text_biography">
+			<div ng-message="required">The about section cannot be blank.</div>
+		</div>
 		<div ng-switch-default>
 			<div ng-message="required">Please fill in this field.</div>
 			<div ng-message="same">The passwords don't match.</div>
