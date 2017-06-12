@@ -1,18 +1,16 @@
 <div class="card">
-	<span class="title">3/ Variations &amp; Manufacturing</span>
+	<span class="title">Variations &amp; Manufacturing</span>
 	<form name="productVariationsCtrl.form" novalidate>
 	<div class="row">
 		<div class="col-md-6">
-			<div class="row">
 			<span class="title">Work Options</span>
-			</div>
 			<div ng-repeat="tag in productVariationsCtrl.tags_for_work | orderBy:[productVariationsCtrl.tagComparator]">
 				<div class="row items-row" ng-if="tag.n_options > 0" ng-cloak>
-					<div class="col-md-4">
+					<div class="">
 						<label data-ng-for="{{tag.name}}" ng-bind="tag.name"></label>
-						<span class="optional-text block-0" ng-if="!tag.required">OPTIONAL</span>
+						<span class="optional-text" ng-if="!tag.required">OPTIONAL</span>
 					</div>
-					<div class="mb-20 col-md-8 ng-class:{'col-md-offset-4': $index > 0}" ng-repeat="(itemIndex,item) in productVariationsCtrl.product.options[tag.id] track by itemIndex">
+					<div class="mb-20 ng-class:{'col-md-offset-4': $index > 0}" ng-repeat="(itemIndex,item) in productVariationsCtrl.product.options[tag.id] track by itemIndex">
 						<span>{{itemIndex+1}}:&nbsp;</span>
 						<ol class="nya-bs-select categories-select ng-class:{'purple': productVariationsCtrl.optionValidation(productVariationsCtrl.product.options[tag.id][itemIndex])}" ng-model="productVariationsCtrl.product.options[tag.id][itemIndex]" multiple>
 							<li nya-bs-option="option in tag.options" data-value="option.value" deep-watch="true" class="ng-class:{'disabled': productVariationsCtrl.product.options[tag.id][itemIndex].length >= tag.n_options && productVariationsCtrl.product.options[tag.id][itemIndex].indexOf(option.value) < 0}">
@@ -21,15 +19,15 @@
 						</ol>
 						<span class="glyphicon glyphicon-remove close-row" ng-if="productVariationsCtrl.product.options[tag.id].length > 1" ng-click="productVariationsCtrl.deleteOption(tag.id, $index)"></span>
 					</div>
-					<div class="col-md-8 col-md-offset-4">
+					<div>
 						<span class="add-cathegory" ng-click="productVariationsCtrl.product.options[tag.id].push([])">+ Add another option</span>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="col-md-6">
-			<span class="title">Manufacturing information</span>
-			<div class="form-group">
+			<span class="title text-left">Manufacturing information</span>
+			<div class="form-group col-md-12">
 				<div class="row" id="preorder">
 					<div class="col-md-4 pad-about">
 						<span>Is this product in pre-order?</span>
@@ -103,7 +101,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="row" id="madetoorder">
+			<div class="row col-md-12" id="madetoorder">
 				<div class="col-md-4 pad-about">
 					<span>Is this a made-to-order product?</span>
 				</div>
@@ -128,7 +126,7 @@
 					<label class="little-label-number" for="madetoorder">days needed to manufacture this work</label>
 				</div>
 			</div>
-			<div class="row" id="bespoke">
+			<div class="row col-md-12" id="bespoke">
 				<div class="col-md-4 pad-about">
 					<span>Is this a bespoke product?</span>
 				</div>
