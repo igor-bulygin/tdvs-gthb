@@ -51,7 +51,7 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 			<hr>
 			<div class="row">
 				<label for="text_short_description">Short description</label>
-				<textarea name="text_short_description" cols="50" rows="10" class="form-control" ng-model="completeProfileCtrl.person.text_short_description[completeProfileCtrl.description_language]" required></textarea>
+				<textarea name="text_short_description" cols="50" rows="10" class="form-control ng-class:{'error-input': completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.text_short_description)}" ng-model="completeProfileCtrl.person.text_short_description[completeProfileCtrl.description_language]" required></textarea>
 				<form-errors field="completeProfileCtrl.form.text_short_description" condition="completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.text_short_description)"></form-errors>
 				<! -- language selector -->
 				<ol class="nya-bs-select" ng-model="completeProfileCtrl.description_language" ng-cloak ng-if="completeProfileCtrl.languages">
@@ -69,7 +69,7 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 			</div>
 			<div class="row">
 				<label for="text_biography">About</label>
-				<div name="text_biography" text-angular ta-toolbar="[]" ta-paste="completeProfileCtrl.stripHTMLTags($html)" ng-model="completeProfileCtrl.person.text_biography[completeProfileCtrl.biography_language]" ng-cloak required></div>
+				<div name="text_biography" text-angular ta-toolbar="[]" ta-paste="completeProfileCtrl.stripHTMLTags($html)" ng-model="completeProfileCtrl.person.text_biography[completeProfileCtrl.biography_language]" ng-cloak required class="ng-class:{'error-input': completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.text_biography)}"></div>
 				<form-errors field="completeProfileCtrl.form.text_biography" condition="completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.text_biography)"></form-errors>
 				<! -- language selector -->
 				<ol class="nya-bs-select" ng-model="completeProfileCtrl.biography_language" ng-cloak ng-if="completeProfileCtrl.languages">
@@ -81,6 +81,28 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 				<i class="fa fa-info-circle" aria-hidden="true" uib-tooltip="Tell your customers more about your brand and its philosophy."></i>
 			</div>
 			<hr>
+			<div class="row">
+				<div class="ng-class:{'error-input': completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.profile)}" ngf-select ngf-accept="'image/*'" ngf-pattern="'image/*'" ng-model="completeProfileCtrl.profile" name="profile" required>
+					<h4><i class="fa fa-camera"></i> Upload profile photo</h4>
+					<p ng-if="!completeProfileCtrl.profile_cropped">The profile photo cannot be left blank. </p>
+				</div>
+				<div class="crop-modal" ng-if="completeProfileCtrl.profile" ng-cloak>
+					<ui-cropper image="completeProfileCtrl.profile_crop" area-type="{{completeProfileCtrl.crop_options.profile.area_type}}" chargement="'Loading'" aspect-ratio="completeProfileCtrl.crop_options.profile.aspect_ratio" init-max-area="true" result-image="completeProfileCtrl.profile_cropped" result-image-format="'image/jpeg'" area-min-size="20" result-image-quality="0.5"></ui-cropper>
+				</div>
+			</div>
+			<div class="row">
+				<div class="ng-class:{'error-input': completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.header)}" ngf-select ngf-accept="'image/*'" ngf-pattern="'image/*'" ng-model="completeProfileCtrl.header" name="header" required>
+					<h4><i class="fa fa-camera"></i> Upload cover photo</h4>
+				</div>
+				<div class="crop-modal" ng-if="completeProfileCtrl.header" ng-cloak>
+					<ui-cropper image="completeProfileCtrl.header_crop" area-type="{{completeProfileCtrl.crop_options.header.area_type}}" chargement="'Loading'" aspect-ratio="completeProfileCtrl.crop_options.header.aspect_ratio" init-max-area="true" result-image="completeProfileCtrl.header_cropped" result-image-size="completeProfileCtrl.crop_options.header.size" result-image-format="'image/jpeg'" area-min-size="20" result-image-quality="0.5"></ui-cropper>
+				</div>
+			</div>
+			<div class="row">
+				<button class="btn-red send-btn" ng-click="completeProfileCtrl.save(completeProfileCtrl.form)">
+				<i class="ion-android-navigate"></i>
+			</button>
+			</div>
 		</form>
 	</div>
 </div>

@@ -1,16 +1,34 @@
 (function() {
 	"use strict";
 
-	function controller(UtilService, locationDataService, productDataService, languageDataService, $scope) {
+	function controller(personDataService, UtilService, locationDataService, productDataService, languageDataService, Upload, uploadDataService, $scope, $window) {
 		var vm = this;
 		vm.has_error = UtilService.has_error;
 		vm.stripHTMLTags = UtilService.stripHTMLTags;
 		vm.person = person;
-		console.log(person);
 		vm.description_language = vm.biography_language = 'en-US';
 		vm.limit_text_short_description = 140;
 		vm.searchPlace = searchPlace;
 		vm.selectCity = selectCity;
+		vm.save = save;
+		vm.crop_options = {
+			profile: {
+				area_type: 'circle',
+				size: {
+					w: 340,
+					h: 340
+				},
+				aspect_ratio: 1
+			},
+			header: {
+				area_type: 'rectangle',
+				size: {
+					w: 1280,
+					h: 450
+				},
+				aspect_ratio: "2.8"
+			}
+		}
 
 		init();
 
@@ -65,11 +83,80 @@
 			vm.showCities = false;
 		}
 
+		function save(form) {
+			function onUploadProfileCroppedSuccess(data) {
+				vm.person.media.profile_cropped = data.data.filename;
+				var fileData = {
+					person_id: vm.person.short_id,
+					type: 'deviser-media-header-cropped',
+					file: Upload.dataUrltoBlob(vm.header_cropped, "temp.jpg")
+				}
+
+				uploadDataService.UploadFile(fileData, onUploadHeaderCroppedSuccess, UtilService.onError, console.log);
+			}
+			
+			function onUploadHeaderCroppedSuccess(data) {
+				vm.person.media.header_cropped = data.data.filename;
+				personDataService.updateProfile(vm.person, {
+					personId: vm.person.short_id,
+				}, onUpdateProfileSuccess, UtilService.onError)
+			}
+
+			function onUpdateProfileSuccess(data) {
+				if(data.main_link)
+					$window.location.href = data.main_link;
+			}
+
+			form.$setSubmitted();
+
+			if(form.$valid) {
+				//callback hell
+				var fileData = {
+					person_id: vm.person.short_id,
+					type: 'deviser-media-profile-cropped',
+					file: Upload.dataUrltoBlob(vm.profile_cropped, "temp.jpg")
+				}
+				uploadDataService.UploadFile(fileData, onUploadProfileCroppedSuccess, UtilService.onError, console.log);
+			}
+		}
+
 		//watches
 		$scope.$watch('completeProfileCtrl.person.text_short_description[completeProfileCtrl.description_language]', function(newValue, oldValue) {
 			if(newValue && newValue.length > vm.limit_text_short_description)
 				vm.person.text_short_description[vm.description_language] = oldValue;
 		});
+
+		$scope.$watch('completeProfileCtrl.profile', function(newValue, oldValue) {
+			function onUploadProfileSuccess(data) {
+				vm.person.media.profile = angular.copy(data.data.filename);
+				vm.profile_crop = newValue;
+			}
+			if(newValue) {
+				//upload original
+				var data = {
+					person_id: vm.person.short_id,
+					type: 'deviser-media-profile-original',
+					file: newValue
+				}
+				uploadDataService.UploadFile(data, onUploadProfileSuccess, UtilService.onError, console.log);
+			}
+		});
+
+		$scope.$watch('completeProfileCtrl.header', function(newValue, oldValue) {
+			function onUploadHeaderSuccess(data) {
+				vm.person.media.header = angular.copy(data.data.filename);
+				vm.header_crop = newValue;
+			}
+			if(newValue) {
+				//upload original
+				var data = {
+					person_id: vm.person.short_id,
+					type: 'deviser-media-header-original',
+					file: newValue
+				}
+				uploadDataService.UploadFile(data, onUploadHeaderSuccess, UtilService.onError, console.log);
+			}
+		})
 
 	}
 
