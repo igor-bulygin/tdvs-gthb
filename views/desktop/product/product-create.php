@@ -37,9 +37,9 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 		<div class="container">
 			<div ng-hide="createProductCtrl.saving">
 				<product-basic-info product="createProductCtrl.product" categories="createProductCtrl.allCategories" languages="createProductCtrl.languages"></product-basic-info>
-				<product-more-details product="createProductCtrl.product" languages="createProductCtrl.languages"></product-more-details>
 				<product-variations product="createProductCtrl.product" categories="createProductCtrl.allCategories" languages="createProductCtrl.languages" tags="createProductCtrl.tags" sizecharts="createProductCtrl.sizecharts" metric="createProductCtrl.metric" deviser="createProductCtrl.deviser" papertypes="createProductCtrl.papertypes"></product-variations>
 				<product-price-stock product="createProductCtrl.product" categories="createProductCtrl.allCategories" tags="createProductCtrl.tags" papertypes="createProductCtrl.papertypes" metric="createProductCtrl.metric"></product-price-stock>
+				<product-more-details product="createProductCtrl.product" languages="createProductCtrl.languages"></product-more-details>
 			</div>
 			<div class="text-center" ng-show="createProductCtrl.saving">
 				<img src="/imgs/loading.gif">

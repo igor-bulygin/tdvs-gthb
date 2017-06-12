@@ -14,7 +14,13 @@
 		vm.openCropModal = openCropModal;
 		vm.uploadPhoto = uploadPhoto;
 		vm.deleteImage = deleteImage;
-		vm.tempFiles=[];
+		vm.tempFiles=[];		
+		vm.stripHTMLTags = UtilService.stripHTMLTags;		
+		vm.description_language = 'en-US';		
+		vm.tags_language = 'en-US';		
+		vm.tags = {};		
+		vm.addTag = addTag;		
+		vm.removeTag = removeTag;
 		
 		function init(){
 			//init values or functions
@@ -205,6 +211,23 @@
 			vm.images = UtilService.parseImagesUrl(vm.product.media.photos, '/uploads/product/' + url + '/');
 		}
 
+		function removeTag(tag) {
+			var pos = vm.product.tags[vm.tags_language].indexOf(tag.text);
+			if(pos > -1)
+				vm.product.tags[vm.tags_language].splice(pos, 1);
+			if(vm.product.tags[vm.tags_language].length === 0)
+				delete vm.product.tags[vm.tags_language];
+		}
+
+		function addTag(tag, language) {
+			if(!vm.product.tags[language])
+				vm.product.tags[language]=[tag.text];
+			else {
+				if(vm.product.tags[language].indexOf(tag.text) === -1)
+					vm.product.tags[language].push(tag.text)
+			}
+		}
+
 		//watches
 		$scope.$watch('productBasicInfoCtrl.product', function(newValue, oldValue) {
 			if(!oldValue && newValue) {
@@ -277,12 +300,20 @@
 			}
 		}, true);
 
-		//delete files array when done uploading
-		// $scope.$watch('productBasicInfoCtrl.files', function(newValue, oldValue) {
-		// 	console.log(newValue);
-		// 	// if(angular.isArray(newValue) && newValue.length === 1 && angular.isObject(newValue[0]) && UtilService.isEmpty(newValue[0]))
-		// 	// 	delete vm.files;
-		// }, true);
+		$scope.$watch('productMoreDetailsCtrl.product.description', function(newValue, oldValue) {
+			vm.descriptionRequired = false;
+		}, true);
+
+		$scope.$watch('productMoreDetailsCtrl.product.tags', function(newValue, oldValue) {
+			if(angular.isObject(oldValue) && UtilService.isEmpty(oldValue) && angular.isObject(newValue) && !UtilService.isEmpty(newValue)) {
+				for(var key in newValue) {
+					vm.tags[key] = [];
+					newValue[key].forEach(function(element) {
+						vm.tags[key].push({text: element});
+					});
+				}
+			}
+		}, true);
 
 		//events
 		$scope.$on(productEvents.requiredErrors, function(event, args){
@@ -301,6 +332,10 @@
 			//set categories error
 			if(args.required.indexOf('categories') > -1) {
 				vm.form.$setSubmitted();
+			}
+			//set description error
+			if(args.required.indexOf('description') > -1) {
+				vm.descriptionRequired = true;
 			}
 		})
 	}
