@@ -14,15 +14,11 @@ $this->registerJs("var invitation = ".Json::encode($invitation), yii\web\View::P
 ?>
 
 <div class="create-deviser-account-wrapper">
-	<div class="logo">
-		<span class="title-create-account">
-			<span class="first-title">welcome</span>
-			<span class="second-title">to</span>
-		</span>
-		<a href="#">
-			<img src="/imgs/logo.png" data-pin-nopin="true">
-		</a>
-	</div>
+
+	<img class="logo-md auto-center" src="/imgs/logo.svg" data-pin-nopin="true">
+	<div class="white-title-lg text-center">Welcome to todevise</div>
+	<div class="white-subtitle-lg text-center">You can now start creating your profile</div>
+
 	<?php if (!$invitation) { ?>
 	<div class="invitation-messages">
 		<p>You need an invitation to create an account. You can ask for one in "Become a Deviser".</p>

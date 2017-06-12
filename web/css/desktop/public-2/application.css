@@ -493,6 +493,9 @@ a, a:hover, a:focus {
 .nya-bs-select.btn-group:not(.input-group-btn), .nya-bs-select.btn-group[class*="col-"] {
   background-color: transparent !important; }
 
+.auto-center {
+  margin: 0 auto; }
+
 .btn-red, .btn-green, .btn-grey, .btn-black, .btn-follow, .btn-white, .btn-transparent, .button-error, .btn-save {
   text-transform: uppercase;
   font-family: "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -1295,6 +1298,24 @@ input[type="radio"] .styled:checked + label::after {
   color: #1C1919; }
   .btn-save:hover {
     background-color: #7AB83A; }
+
+.logo-md {
+  width: 142px;
+  display: block; }
+
+.white-title-lg {
+  color: #ffffff;
+  font-size: 58px;
+  letter-spacing: 5.5px;
+  text-transform: uppercase;
+  font-family: "Univers Thin Ultra Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+
+.white-subtitle-lg {
+  color: #ffffff;
+  font-size: 21px;
+  font-family: "Roboto Condensed", sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.5px; }
 
 .green-link {
   color: #7AB83A;
@@ -4788,7 +4809,7 @@ input[type="radio"] .styled:checked + label::after {
   top: 6px; }
 
 .create-deviser-account-wrapper {
-  padding: 80px 200px 200px;
+  padding: 30px 200px 200px;
   background-color: #1C1919; }
   .create-deviser-account-wrapper .logo {
     width: 110px;
