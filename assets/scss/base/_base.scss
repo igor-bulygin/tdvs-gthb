@@ -4,6 +4,8 @@
 * {
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
+	-webkit-font-smoothing: antialiased;
+  	-moz-osx-font-smoothing: grayscale;
 }
 html{
     background-color: $background_grey;
@@ -66,54 +68,6 @@ ul{
 }
 .relative{
 	position: relative;
-}
-.mt-10{
-	margin-top: 10px!important;
-}
-.mt-20{
-	margin-top: 20px;
-}
-.mt-30{
-	margin-top: 30px!important;
-}
-.mt-40{
-	margin-top: 40px;
-}
-.mt-60{
-	margin-top: 60px;
-}
-.mt-50{
-	margin-top: 50px;
-}
-.mb-100{
-	margin-bottom: 100px;
-}
-.mb-20{
-	margin-bottom: 20px;
-}
-.mr-15{
-	margin-right: 15px;
-}
-.ml-15{
-	margin-left: 15px;
-}
-.ml-0{
-	margin-left: 0!important;
-}
-.ml-30{
-	margin-left: 30px;
-}
-.pt-0{
-	padding-top:0!important;
-}
-.no-pad-r{
-	padding-right: 0!important;
-}
-.no-mar{
-	margin:0!important;
-}
-.no-pad{
-	padding:0!important;
 }
 /* Dont display dropable zone on dragg and drop */
 .dndDraggingSource {

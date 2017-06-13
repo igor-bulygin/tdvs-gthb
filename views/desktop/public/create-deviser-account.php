@@ -16,7 +16,7 @@ $this->registerJs("var invitation = ".Json::encode($invitation), yii\web\View::P
 <div class="create-deviser-account-wrapper">
 
 	<img class="logo-md auto-center" src="/imgs/logo.svg" data-pin-nopin="true">
-	<div class="white-title-lg text-center">Welcome to todevise</div>
+	<div class="white-title-lg text-center mt-40">Welcome to todevise</div>
 	<div class="white-subtitle-lg text-center">You can now start creating your profile</div>
 
 	<?php if (!$invitation) { ?>
@@ -29,7 +29,7 @@ $this->registerJs("var invitation = ".Json::encode($invitation), yii\web\View::P
 		<form name="createDeviserCtrl.form" novalidate>
 			<div>
 				<div class="row">
-					<label for="email">Email address</label>
+					<label for="email">Email</label>
 					<input type="email" id="email" class="form-control grey-input ng-class:{'error-input': createDeviserCtrl.has_error(createDeviserCtrl.form, createDeviserCtrl.form.email)}" name="email" ng-model="createDeviserCtrl.deviser.email" required disabled="true">
 					<form-errors field="createDeviserCtrl.form.email" condition="createDeviserCtrl.has_error(createDeviserCtrl.form, createDeviserCtrl.form.email)"></form-errors>
 				</div>
