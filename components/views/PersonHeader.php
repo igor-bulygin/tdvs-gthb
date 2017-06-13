@@ -12,9 +12,6 @@ $person = $this->params['person'];
 $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD, 'person-var-script');
 ?>
 
-<?php if ($person->isDraft()) { ?>
-	<?= MakeProfilePublic::widget() ?>
-<?php } ?>
 <div class="banner-deviser" ng-controller="personHeaderCtrl as personHeaderCtrl">
 	<div class="container pad-about" ng-if="!personHeaderCtrl.editingHeader" ng-cloak>
 		<img class="cover" ng-src="{{personHeaderCtrl.header}}">
@@ -26,7 +23,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 						<div class="avatar">
 							<img class="cover" ng-src="{{personHeaderCtrl.profile || '/imgs/default-avatar.png'}}">
 						</div>
-						<?php if ($person->isPersonEditable()) {?>
+						<?php if ($person->isPersonEditable() && $person->isPublic()) {?>
 							<div class="edit-profile-btn">
 								<button class="btn btn-default btn-transparent btn-header ng-class:{'button-error': personHeaderCtrl.required['header_info']}" ng-click="personHeaderCtrl.editHeader()">Edit header</button>
 							</div>
@@ -44,7 +41,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 						</div>
 					</div>
 				</div>
-				<?php if ($person->isDeviserEditable()) {?>
+				<?php if ($person->isDeviserEditable() && $person->isPublic()) {?>
 					<a class="btn btn-default btn-add-work" ng-class="personHeaderCtrl.required['store'] ? 'button-error' : 'btn-green'" href="<?= $person->getCreateWorkLink()?>">Add Work</a>
 				<?php } ?>
 			</div>
