@@ -3,12 +3,12 @@
 // ==========================================================================
 .black-form{
     label{
-        font-family: $font-family--primary;
-        font-weight: bold;
-        font-size: 12px;
-        color: $light_grey;
+        font-family: $font-family--regular;
+        font-size: 18px;
+    	font-weight: 400;
+        color: $background_grey;
         text-transform: uppercase;
-        margin: 10px 0 0 0;
+        margin: 15px 0 5px 15px;
         i{
             padding: 0 5px;
             cursor: pointer;
@@ -16,14 +16,18 @@
     }
     .grey-input{
         margin: 5px 0 10px;
-        color: $white;
-        background-color: $dark_grey;
-        border: 1px solid $darker_grey;
+		font-weight: bold;
+    	color: $background_grey;
+    	font-size: 18px;
+    	padding: 0 0 0 30px;
+        background-color: rgba(147, 147, 147, 0.5);
+        border: none;
+		height: 48px;
         letter-spacing: 0.4px;
         &.password{
             letter-spacing: 5px;
         }
-        @include border-radius(25px,25px,25px,25px);
+        @include border-radius(20px,20px,20px,20px);
         &::-webkit-input-placeholder {color:$white;text-transform: uppercase;}
         &:-moz-placeholder           {color:$white;text-transform: uppercase;}
         &::-moz-placeholder          {color:$white;text-transform: uppercase;}
