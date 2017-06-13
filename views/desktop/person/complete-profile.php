@@ -21,12 +21,26 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 	</div>
 	<div class="create-deviser-account-container black-form">
 		<form name="completeProfileCtrl.form">
+		<?php if($person->isInfluencer()) {?>
+			<div class="row">
+				<label for="first_name">First name</label>
+				<input type="text" name="name" class="form-control grey-input ng-class:{'error-input': completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.name)}" ng-model="completeProfileCtrl.person.personal_info.name" required>
+				<form-errors field="completeProfileCtrl.form.name" condition="completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.name)"></form-errors>
+			</div>
+			<div class="row">
+				<label for="last_name">Last name</label>
+				<input type="text" name="last_name" class="form-control grey-input ng-class:{'error-input': completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.last_name)}" ng-model="completeProfileCtrl.person.personal_info.last_name" required>
+				<form-errors field="completeProfileCtrl.form.last_name" condition="completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.last_name)"></form-errors>
+			</div>
+			<?php } ?>
 			<?php if($person->isDeviser()) {?>
 				<div class="row">
 					<label for="brand_name">Brand name</label>
 					<input type="text" name="brand_name" class="form-control grey-input ng-class:{'error-input': completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.brand_name)}" ng-model="completeProfileCtrl.person.personal_info.brand_name" required>
 					<form-errors field="completeProfileCtrl.form.brand_name" condition="completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.brand_name)"></form-errors>
 				</div>
+			<?php } ?>
+			<?php if($person->isDeviser() || $person->isInfluencer()) {?>
 				<div class="row">
 					<label for="city">City</label>
 					<input type="text" name="city" class="form-control grey-input ng-class:{'error-input': completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.city)}" ng-model="completeProfileCtrl.city" ng-model-options="{debounce: 500}" ng-change="completeProfileCtrl.searchPlace(completeProfileCtrl.city)" required>
@@ -38,6 +52,8 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 						</ul>
 					</div>
 				</div>
+			<?php } ?>
+			<?php if($person->isDeviser()) {?>
 				<div class="row">
 					<label for="categories">Field</label>
 					<div>
@@ -51,13 +67,6 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 				</div>
 				<hr>
 			<?php } ?>
-			<?php if($person->isInfluencer()) {?>
-			<div class="row">
-				<label for="first_name">Name</label>
-				<input type="text" name="name" class="form-control ng-class:{'error-input': completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.name)}" ng-model="completeProfileCtrl.person.personal_info.name" required>
-				<form-errors field="completeProfileCtrl.form.name" condition="completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.name)"></form-errors>
-			</div>
-			<?php } ?>
 			<div class="row">
 				<?php if($person->isDeviser()) {?>
 				<label for="text_short_description">Short description</label>
@@ -65,7 +74,7 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 				<?php if($person->isInfluencer()) {?>
 				<label for="text_short_description">Short bio</label>
 				<?php } ?>
-				<textarea name="text_short_description" cols="50" rows="10" class="form-control ng-class:{'error-input': completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.text_short_description)}" ng-model="completeProfileCtrl.person.text_short_description[completeProfileCtrl.description_language]" required></textarea>
+				<textarea name="text_short_description" cols="50" rows="10" class="form-control grey-input ng-class:{'error-input': completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.text_short_description)}" ng-model="completeProfileCtrl.person.text_short_description[completeProfileCtrl.description_language]" required></textarea>
 				<form-errors field="completeProfileCtrl.form.text_short_description" condition="completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.text_short_description)"></form-errors>
 				<! -- language selector -->
 				<ol class="nya-bs-select" ng-model="completeProfileCtrl.description_language" ng-cloak ng-if="completeProfileCtrl.languages">
