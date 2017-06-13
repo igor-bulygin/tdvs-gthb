@@ -300,11 +300,11 @@
 			}
 		}, true);
 
-		$scope.$watch('productMoreDetailsCtrl.product.description', function(newValue, oldValue) {
+		$scope.$watch('productBasicInfoCtrl.product.description', function(newValue, oldValue) {
 			vm.descriptionRequired = false;
 		}, true);
 
-		$scope.$watch('productMoreDetailsCtrl.product.tags', function(newValue, oldValue) {
+		$scope.$watch('productBasicInfoCtrl.product.tags', function(newValue, oldValue) {
 			if(angular.isObject(oldValue) && UtilService.isEmpty(oldValue) && angular.isObject(newValue) && !UtilService.isEmpty(newValue)) {
 				for(var key in newValue) {
 					vm.tags[key] = [];
