@@ -1707,16 +1707,35 @@ class Person extends CActiveRecord implements IdentityInterface
 	 * @return bool
 	 */
 	public function isCompletedProfile() {
-		return !(
-			empty($this->getName()) ||
-			empty($this->getCity()) ||
-			empty($this->categories) ||
-			empty($this->text_short_description) ||
-			empty($this->text_biography) ||
-			empty($this->mediaMapping->header) ||
-			empty($this->mediaMapping->profile) ||
-			false
-		);
+		if ($this->isDeviser()) {
+			return !(
+				empty($this->getName()) ||
+				empty($this->getCity()) ||
+				empty($this->categories) ||
+				empty($this->text_short_description) ||
+				empty($this->text_biography) ||
+				empty($this->mediaMapping->header) ||
+				empty($this->mediaMapping->profile) ||
+				false
+			);
+		} elseif ($this->isInfluencer()) {
+			return !(
+				empty($this->getName()) ||
+				empty($this->text_short_description) ||
+				empty($this->mediaMapping->header) ||
+				empty($this->mediaMapping->profile) ||
+				false
+			);
+		} elseif ($this->isClient()) {
+			return !(
+				empty($this->getName()) ||
+				empty($this->text_short_description) ||
+				empty($this->mediaMapping->header) ||
+				empty($this->mediaMapping->profile) ||
+				false
+			);
+		}
+		return true;
 	}
 
 	/**
