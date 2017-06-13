@@ -78,6 +78,10 @@ class PersonController extends CController
 			throw new NotFoundHttpException();
 		}
 
+		if (!$person->isCompletedProfile()) {
+			$this->redirect($person->getCompleteProfileLink());
+		}
+
 		if ($person->isPublic()) {
 			$this->redirect($person->getMainLink());
 		}
