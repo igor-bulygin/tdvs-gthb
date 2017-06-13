@@ -128,6 +128,7 @@
 
 			function onUpdateProductError(err) {
 				vm.disable_save_buttons = false;
+				vm.saving=false;
 				if(err.data.errors && err.data.errors.required && angular.isArray(err.data.errors.required))
 					$rootScope.$broadcast(productEvents.requiredErrors, {required: err.data.errors.required})
 			}
@@ -145,7 +146,8 @@
 			
 			function onSaveProductError(err) {
 				vm.disable_save_buttons = false;
-				vm.errors = true;
+				vm.errors = true;				
+				vm.saving=false;
 				//send errors to components
 				if(err.data.errors && err.data.errors.required && angular.isArray(err.data.errors.required))
 					$rootScope.$broadcast(productEvents.requiredErrors, {required: err.data.errors.required})
@@ -190,7 +192,6 @@
 			} else {
 				vm.disable_save_buttons = false;
 				vm.errors = true;
-				vm.saving=false;
 				$rootScope.$broadcast(productEvents.requiredErrors, {required: required});
 				$anchorScroll(required[0]);
 			}
