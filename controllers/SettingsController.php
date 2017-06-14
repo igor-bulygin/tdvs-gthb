@@ -106,6 +106,10 @@ class SettingsController extends CController
 			throw new UnauthorizedHttpException();
 		}
 
+		if (!$person->isCompletedProfile()) {
+			$this->redirect($person->getCompleteProfileLink());
+		}
+
 		$this->layout = '/desktop/public-2.php';
 
 		return $this->render("shipping", [
@@ -128,6 +132,10 @@ class SettingsController extends CController
 
 		if (!$person->isDeviserEditable()) {
 			throw new UnauthorizedHttpException();
+		}
+
+		if (!$person->isCompletedProfile()) {
+			$this->redirect($person->getCompleteProfileLink());
 		}
 
 		\Yii::$app->session->set('person_id_stripe_connection', $person->short_id);
