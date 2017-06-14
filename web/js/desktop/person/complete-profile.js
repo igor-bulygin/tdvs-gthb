@@ -40,7 +40,7 @@
 		function getCategories() {
 			function onGetCategoriesSuccess(data) {
 				if(data.items && angular.isArray(data.items) && data.items.length > 0)
-					vm.categories = data.items
+					vm.categories = data.items;
 			}
 
 			productDataService.getCategories({scope: 'roots'}, onGetCategoriesSuccess, UtilService.onError);
@@ -84,6 +84,13 @@
 		}
 
 		function save(form) {
+			vm.sendingForm = true;
+
+			function onError(error) {
+				console.log(error);
+				vm.sendingForm = false;
+			}
+
 			function onUploadProfileCroppedSuccess(data) {
 				vm.person.media.profile_cropped = data.data.filename;
 				var fileData = {
@@ -92,14 +99,14 @@
 					file: Upload.dataUrltoBlob(vm.header_cropped, "temp.jpg")
 				}
 
-				uploadDataService.UploadFile(fileData, onUploadHeaderCroppedSuccess, UtilService.onError, console.log);
+				uploadDataService.UploadFile(fileData, onUploadHeaderCroppedSuccess, onError, console.log);
 			}
 			
 			function onUploadHeaderCroppedSuccess(data) {
 				vm.person.media.header_cropped = data.data.filename;
 				personDataService.updateProfile(vm.person, {
 					personId: vm.person.short_id,
-				}, onUpdateProfileSuccess, UtilService.onError)
+				}, onUpdateProfileSuccess, onError)
 			}
 
 			function onUpdateProfileSuccess(data) {
@@ -116,7 +123,11 @@
 					type: 'deviser-media-profile-cropped',
 					file: Upload.dataUrltoBlob(vm.profile_cropped, "temp.jpg")
 				}
-				uploadDataService.UploadFile(fileData, onUploadProfileCroppedSuccess, UtilService.onError, console.log);
+				
+				uploadDataService.UploadFile(fileData, onUploadProfileCroppedSuccess, onError, console.log);
+			} 
+			else {
+				vm.sendingForm = false;
 			}
 		}
 

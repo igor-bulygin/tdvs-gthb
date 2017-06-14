@@ -1,9 +1,9 @@
 <?php
-use app\assets\desktop\pub\PublicCommonAsset;
 use app\components\PersonHeader;
 use app\models\Person;
+use app\assets\desktop\deviser\DeviserNotPublicAsset;
 
-PublicCommonAsset::register($this);
+DeviserNotPublicAsset::register($this);
 
 /** @var Person $person */
 
@@ -16,7 +16,7 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 
 <?= PersonHeader::widget() ?>
 
-<div class="store">
+<div class="store" ng-controller="deviserNotPublicCtrl as deviserNotPublicCtrl">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
@@ -47,7 +47,7 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 		</div>
 		<div class="row text-center">
 				<?php if ($person->canPublishProfile()) { ?>
-					<button class="btn btn-default">Make profile public</button>
+					<button class="btn btn-default" ng-click="deviserNotPublicCtrl.makeProfilePublic()">Make profile public</button>
 				<?php } else { ?>
 					<button class="btn btn-default" disabled>Make profile public</button>
 				<?php } ?>
