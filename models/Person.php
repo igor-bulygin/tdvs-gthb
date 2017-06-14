@@ -1726,14 +1726,6 @@ class Person extends CActiveRecord implements IdentityInterface
 				empty($this->mediaMapping->profile) ||
 				false
 			);
-		} elseif ($this->isClient()) {
-			return !(
-				empty($this->getName()) ||
-				empty($this->text_short_description) ||
-				empty($this->mediaMapping->header) ||
-				empty($this->mediaMapping->profile) ||
-				false
-			);
 		}
 		return true;
 	}
