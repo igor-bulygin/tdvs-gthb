@@ -70,7 +70,7 @@ class PersonController extends CController
 		]);
 	}
 
-	public function actionDeviserNotPublic($slug, $person_id)
+	public function actionPersonNotPublic($slug, $person_id)
 	{
 		$person = Person::findOneSerialized($person_id);
 
@@ -87,7 +87,7 @@ class PersonController extends CController
 		}
 
 		$this->layout = '/desktop/public-2.php';
-		return $this->render("@app/views/desktop/person/deviser-not-public", [
+		return $this->render("@app/views/desktop/person/person-not-public", [
 			'person' => $person,
 		]);
 	}
@@ -589,9 +589,9 @@ class PersonController extends CController
 		if (!$person->isCompletedProfile()) {
 			$this->redirect($person->getCompleteProfileLink());
 		} else {
-			if ($person->isDeviser()) {
-				if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE) {
-					$this->redirect($person->getDeviserNotPublicLink());
+			if ($person->isDeviser() || $person->isInfluencer()) {
+				if (!$person->isPublic()) {
+					$this->redirect($person->getPersonNotPublicLink());
 				}
 			}
 		}

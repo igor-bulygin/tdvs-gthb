@@ -106,6 +106,10 @@ class SettingsController extends CController
 			throw new UnauthorizedHttpException();
 		}
 
+		if (!$person->isCompletedProfile()) {
+			$this->redirect($person->getCompleteProfileLink());
+		}
+
 		$this->layout = '/desktop/public-2.php';
 
 		return $this->render("shipping", [
@@ -130,6 +134,10 @@ class SettingsController extends CController
 			throw new UnauthorizedHttpException();
 		}
 
+		if (!$person->isCompletedProfile()) {
+			$this->redirect($person->getCompleteProfileLink());
+		}
+
 		\Yii::$app->session->set('person_id_stripe_connection', $person->short_id);
 
 		$this->redirect(StripeHelper::getAuthorizeUrl());
@@ -142,7 +150,7 @@ class SettingsController extends CController
 		}
 		if ($person->isDeviser()) {
 			if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE) {
-				$this->redirect($person->getDeviserNotPublicLink());
+				$this->redirect($person->getPersonNotPublicLink());
 			}
 		}
 	}

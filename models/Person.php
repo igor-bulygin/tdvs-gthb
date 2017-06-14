@@ -1466,9 +1466,9 @@ class Person extends CActiveRecord implements IdentityInterface
 		return Url::to(["/person/complete-profile", "slug" => $this->getSlug(), 'person_id' => $this->short_id, "person_type" => $this->getPersonTypeForUrl()], true);
 	}
 
-	public function getDeviserNotPublicLink()
+	public function getPersonNotPublicLink()
 	{
-		return Url::to(["/person/deviser-not-public", "slug" => $this->getSlug(), 'person_id' => $this->short_id, "person_type" => $this->getPersonTypeForUrl()], true);
+		return Url::to(["/person/person-not-public", "slug" => $this->getSlug(), 'person_id' => $this->short_id, "person_type" => $this->getPersonTypeForUrl()], true);
 	}
 
 	public function getLovedLink()
@@ -1719,14 +1719,6 @@ class Person extends CActiveRecord implements IdentityInterface
 				false
 			);
 		} elseif ($this->isInfluencer()) {
-			return !(
-				empty($this->getName()) ||
-				empty($this->text_short_description) ||
-				empty($this->mediaMapping->header) ||
-				empty($this->mediaMapping->profile) ||
-				false
-			);
-		} elseif ($this->isClient()) {
 			return !(
 				empty($this->getName()) ||
 				empty($this->text_short_description) ||
