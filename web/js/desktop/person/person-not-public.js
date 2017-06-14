@@ -6,10 +6,10 @@
 		vm.person = person;
 		vm.makeProfilePublic = makeProfilePublic;
 
-		function makeProfilePublic(){
-			function onUpdateProfileSuccess() {
-				if(data.main_link)
-					$window.location.href = data.main_link
+		function makeProfilePublic() {
+			function onUpdateProfileSuccess(returnData) {
+				if(returnData.main_link)
+					$window.location.href = returnData.main_link;
 			}
 
 			var data = {
@@ -25,6 +25,6 @@
 
 	angular
 		.module('todevise')
-		.controller('deviserNotPublicCtrl', controller);
+		.controller('personNotPublicCtrl', controller);
 
 }());

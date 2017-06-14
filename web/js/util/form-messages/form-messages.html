@@ -1,5 +1,8 @@
 <div ng-messages="field.$error" class="error-text">
 	<div ng-switch on="field.$name">
+		<div ng-switch-when="email">
+			<div ng-message="required">Please enter your email.</div>
+		</div>
 		<div ng-switch-when="name">
 			<div ng-message="required">Please enter your name.</div>
 		</div>

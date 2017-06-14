@@ -16,11 +16,17 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 
 <?= PersonHeader::widget() ?>
 
-<div class="store" ng-controller="deviserNotPublicCtrl as deviserNotPublicCtrl">
+<div class="store" ng-controller="personNotPublicCtrl as personNotPublicCtrl">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
 				<h3 class="text-center">Almost done!</h3>
+				<?php if ($person->isInfluencer()) {?>
+					<div class="text-center">
+						<p>If you prefer, before making your profile public you can fill it with products you like.</p>
+						<img class="image-loved" src="/imgs/loved-image.png">
+					</div>
+				<?php } ?>
 				<?php if ($person->isDeviser()) { ?>
 					<p class="text-center">Before making your profile public, please complete the following steps:</p>
 				<?php } ?>
@@ -37,8 +43,8 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 				<a class="btn btn-default <?=$person->hasPublishedProducts() ? 'done' : ''?>" href="<?=$person->getCreateWorkLink()?>">Add a product</a>
 			</div>
 		<?php } ?>
-		<div class="row text-center">
-			<button class="btn btn-default" ng-click="deviserNotPublicCtrl.makeProfilePublic()" <?=!$person->canPublishProfile() ? ' disabled ' : ''?>>Make profile public</button>
+		<div class="row mb-100 text-center">
+			<button class="btn btn-default" ng-click="personNotPublicCtrl.makeProfilePublic()" <?=!$person->canPublishProfile() ? ' disabled ' : ''?>>Make profile public</button>
 		</div>
 	</div>
 </div>
