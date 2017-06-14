@@ -24,8 +24,8 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 		<?php if($person->isInfluencer()) {?>
 			<div class="row">
 				<label for="first_name">First name</label>
-				<input type="text" name="name" class="form-control grey-input ng-class:{'error-input': completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.name)}" ng-model="completeProfileCtrl.person.personal_info.name" required>
-				<form-errors field="completeProfileCtrl.form.name" condition="completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.name)"></form-errors>
+				<input type="text" name="first_name" class="form-control grey-input ng-class:{'error-input': completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.name)}" ng-model="completeProfileCtrl.person.personal_info.name" required>
+				<form-errors field="completeProfileCtrl.form.first_name" condition="completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.first_name)"></form-errors>
 			</div>
 			<div class="row">
 				<label for="last_name">Last name</label>
