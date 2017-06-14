@@ -352,7 +352,7 @@ class Product extends CActiveRecord {
 			[
 				'position',
 				'integer',
-				'min' => 1,
+				'min' => 0,
 			],
 			[
 				'product_state',
