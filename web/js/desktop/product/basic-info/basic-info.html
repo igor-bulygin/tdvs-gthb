@@ -5,7 +5,7 @@
 			<div class="col-md-12" id="name">
 				<label class="col-md-12" for="name">Title</label>
 				<div class="col-md-10">
-					<input class="title-input form-control ng-class:{'error-input': productBasicInfoCtrl.nameRequired}" type="text" name="name" ng-model="productBasicInfoCtrl.product.name[productBasicInfoCtrl.name_language]">
+					<input class="title-input form-control ng-class:{'error-input': productBasicInfoCtrl.nameRequired}" type="text" name="name" ng-model="productBasicInfoCtrl.product.name[productBasicInfoCtrl.name_language]" uib-popover="Please translate each field into Spanish and English" popover-placement="right" popover-trigger="'focus'" >
 					<div class="error-text" ng-if="productBasicInfoCtrl.nameRequired">Title in english is mandatory.</div>
 				</div>
 					<ol class="col-md-2 about-edit-select title-lang-btn nya-bs-select" ng-model="productBasicInfoCtrl.name_language">
@@ -84,9 +84,10 @@
 						</div>
 						<div class="row purple-text" ng-if="productBasicInfoCtrl.photosRequired" ng-cloak><p>Please upload at least 1 photo.</p></div>
 					</div>
-					<div class="col-md-6 pad-about mr-15" ng-if="productBasicInfoCtrl.isDropAvailable && productBasicInfoCtrl.images.length<1">
-						<div class="basic-info-add-photos" ngf-drop-available="productBasicInfoCtrl.isDropAvailable" ngf-drag-over-class="drag-over" ngf-drop ngf-select ngf-change="productBasicInfoCtrl.uploadPhoto($files, $invalidFiles)" ngf-accept="'image/*'" ngf-multiple="true">
+					<div class="col-md-6 pad-about mr-15" ng-if="productBasicInfoCtrl.images.length<1">
+						<div class="basic-info-add-photos">
 							<div class="plus-add-wrapper ng-class:{'purple': productBasicInfoCtrl.photosRequired}">
+							<br/><br/><br/>
 							</div>
 						</div>
 					</div>
