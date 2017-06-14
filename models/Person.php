@@ -1466,9 +1466,9 @@ class Person extends CActiveRecord implements IdentityInterface
 		return Url::to(["/person/complete-profile", "slug" => $this->getSlug(), 'person_id' => $this->short_id, "person_type" => $this->getPersonTypeForUrl()], true);
 	}
 
-	public function getDeviserNotPublicLink()
+	public function getPersonNotPublicLink()
 	{
-		return Url::to(["/person/deviser-not-public", "slug" => $this->getSlug(), 'person_id' => $this->short_id, "person_type" => $this->getPersonTypeForUrl()], true);
+		return Url::to(["/person/person-not-public", "slug" => $this->getSlug(), 'person_id' => $this->short_id, "person_type" => $this->getPersonTypeForUrl()], true);
 	}
 
 	public function getLovedLink()

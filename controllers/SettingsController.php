@@ -150,7 +150,7 @@ class SettingsController extends CController
 		}
 		if ($person->isDeviser()) {
 			if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE) {
-				$this->redirect($person->getDeviserNotPublicLink());
+				$this->redirect($person->getPersonNotPublicLink());
 			}
 		}
 	}
