@@ -16,7 +16,10 @@ $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD
 
 ?>
 
-<?= SettingsHeader::widget() ?>
+<?php if($person->isPublic()) { ?>
+	<?= SettingsHeader::widget() ?>
+<?php } ?>
+
 
 <div ng-controller="shippingSettingsCtrl as shippingSettingsCtrl" class="personal-info-wrapper bank-settings-wrapper">
 	<div class="container">
