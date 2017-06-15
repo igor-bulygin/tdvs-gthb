@@ -1,10 +1,10 @@
 <?php
-use app\assets\desktop\pub\CreateDeviserAsset;
+use app\assets\desktop\pub\SignupAsset;
 use app\models\Invitation;
 use yii\helpers\Json;
 use yii\helpers\Url;
 
-CreateDeviserAsset::register($this);
+SignupAsset::register($this);
 
 /** @var Invitation $invitation */
 

@@ -1,9 +1,9 @@
 <?php
-use app\assets\desktop\pub\CreateInfluencerAsset;
+use app\assets\desktop\pub\SignupAsset;
 use app\models\Invitation;
 use yii\helpers\Url;
 
-CreateInfluencerAsset::register($this);
+SignupAsset::register($this);
 
 /** @var Invitation $invitation */
 
