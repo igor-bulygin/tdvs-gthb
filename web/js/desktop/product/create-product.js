@@ -118,6 +118,7 @@
 			vm.errors = false;
 			vm.saving=true;
 			function onUpdateProductSuccess(data) {
+				vm.saving=false;
 				vm.disable_save_buttons = false;
 				if(state === 'product_state_draft') {
 					saved_draft();
@@ -134,6 +135,7 @@
 			}
 			
 			function onSaveProductSuccess(data) {
+				vm.saving=false;
 				vm.disable_save_buttons = false;
 				vm.product.id = angular.copy(data.id);
 				if(state==='product_state_draft') {
@@ -152,7 +154,6 @@
 				if(err.data.errors && err.data.errors.required && angular.isArray(err.data.errors.required))
 					$rootScope.$broadcast(productEvents.requiredErrors, {required: err.data.errors.required})
 			}
-
 			vm.disable_save_buttons = true;
 			var required = [];
 			//set state of the product
@@ -189,7 +190,8 @@
 				else {
 					productDataService.postProductPriv(vm.product, null, onSaveProductSuccess, onSaveProductError);
 				}
-			} else {
+			} else {				
+				vm.saving=false;
 				vm.disable_save_buttons = false;
 				vm.errors = true;
 				$rootScope.$broadcast(productEvents.requiredErrors, {required: required});
