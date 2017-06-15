@@ -6,21 +6,21 @@
 				<span class="title">Work Options</span>
 				<div ng-repeat="tag in productVariationsCtrl.tags_for_work | orderBy:[productVariationsCtrl.tagComparator]">
 					<div class="row items-row" ng-if="tag.n_options > 0" ng-cloak>
-						<div class="">
-							<label data-ng-for="{{tag.name}}" ng-bind="tag.name"></label>
+						<div class="col-xs-12">
+							<label class="col-xs-12" data-ng-for="{{tag.name}}" ng-bind="tag.name"></label>
 							<span class="optional-text" ng-if="!tag.required">OPTIONAL</span>
 						</div>
-						<div class="mb-20" ng-repeat="(itemIndex,item) in productVariationsCtrl.product.options[tag.id] track by itemIndex">
-							<span>{{itemIndex+1}}:&nbsp;</span>
-							<ol class="nya-bs-select categories-select ng-class:{'purple': productVariationsCtrl.optionValidation(productVariationsCtrl.product.options[tag.id][itemIndex])}" ng-model="productVariationsCtrl.product.options[tag.id][itemIndex]" multiple>
+						<div class="mb-20 col-md-5" ng-repeat="(itemIndex,item) in productVariationsCtrl.product.options[tag.id] track by itemIndex">
+							<span class="col-xs-1">{{itemIndex+1}}&nbsp;</span>
+							<ol class="nya-bs-select categories-select col-xs-10 ng-class:{'purple': productVariationsCtrl.optionValidation(productVariationsCtrl.product.options[tag.id][itemIndex])} " ng-model="productVariationsCtrl.product.options[tag.id][itemIndex]" multiple>
 								<li nya-bs-option="option in tag.options" data-value="option.value" deep-watch="true" class="ng-class:{'disabled': productVariationsCtrl.product.options[tag.id][itemIndex].length >= tag.n_options && productVariationsCtrl.product.options[tag.id][itemIndex].indexOf(option.value) < 0}">
 									<a href="#"><span ng-bind="option.text['en-US']"></span><span class="glyphicon glyphicon-ok check-mark"></span></a>
 								</li>
 							</ol>
 							<span class="glyphicon glyphicon-remove close-row" ng-if="productVariationsCtrl.product.options[tag.id].length > 1" ng-click="productVariationsCtrl.deleteOption(tag.id, $index)"></span>
 						</div>
-						<div>
-							<span class="add-cathegory" ng-click="productVariationsCtrl.product.options[tag.id].push([])">+ Add another option</span>
+						<div class="col-xs-12">
+							<span class="add-cathegory col-xs-12" ng-click="productVariationsCtrl.product.options[tag.id].push([])">+ Add another option</span>
 						</div>
 					</div>
 				</div>
