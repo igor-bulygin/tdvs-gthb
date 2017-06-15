@@ -1,7 +1,7 @@
 <?php
+use app\assets\desktop\deviser\PersonNotPublicAsset;
 use app\components\PersonHeader;
 use app\models\Person;
-use app\assets\desktop\deviser\PersonNotPublicAsset;
 
 PersonNotPublicAsset::register($this);
 
@@ -34,13 +34,22 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 		</div>
 		<?php if ($person->isDeviser()) { ?>
 			<div class="row text-center">
-				<a class="btn btn-default <?=$person->hasShippingSettings() ? 'done' : ''?>" href="<?=$person->getSettingsLink('shipping')?>">Add shipping prices</a>
+				<a class="btn btn-default <?=$person->hasShippingSettings() ? 'done' : ''?>" href="<?=$person->getSettingsLink('shipping')?>">
+					Add shipping prices
+					<?php if ($person->hasShippingSettings()) { ?><i class="fa fa-check"></i> <?php } ?>
+				</a>
 			</div>
 			<div class="row text-center">
-				<a class="btn btn-default <?=$person->hasStripeInfo() ? 'done' : ''?>" href="<?=$person->getSettingsLink('connect-stripe')?>">Add a bank account</a>
+				<a class="btn btn-default <?=$person->hasStripeInfo() ? 'done' : ''?>" href="<?=$person->getSettingsLink('connect-stripe')?>">
+					Add a bank account
+					<?php if ($person->hasStripeInfo()) { ?><i class="fa fa-check"></i> <?php } ?>
+				</a>
 			</div>
 			<div class="row text-center">
-				<a class="btn btn-default <?=$person->hasPublishedProducts() ? 'done' : ''?>" href="<?=$person->getCreateWorkLink()?>">Add a product</a>
+				<a class="btn btn-default <?=$person->hasPublishedProducts() ? 'done' : ''?>" href="<?=$person->getCreateWorkLink()?>">
+					Add a product
+					<?php if ($person->hasPublishedProducts()) { ?><i class="fa fa-check"></i> <?php } ?>
+				</a>
 			</div>
 		<?php } ?>
 		<div class="row mb-100 text-center">
