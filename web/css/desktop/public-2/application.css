@@ -285,7 +285,7 @@ ul {
   font-family: "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif; }
 
 .error-text {
-  color: #924cfc !important; }
+  color: #FFD55D !important; }
 
 .relative {
   position: relative; }
@@ -360,15 +360,15 @@ a, a:hover, a:focus {
   max-width: 175px; }
 
 .product-data .bootstrap-select .dropdown-toggle:focus {
-  border-color: #924cfc !important; }
+  border-color: #FFD55D !important; }
 .product-data .bootstrap-select .dropdown-toggle:hover {
-  border-color: #924cfc !important; }
+  border-color: #FFD55D !important; }
 .product-data .bootstrap-select .dropdown-toggle:visited {
-  border-color: #924cfc !important; }
+  border-color: #FFD55D !important; }
 .product-data .bootstrap-select .dropdown-toggle:active {
-  border-color: #924cfc !important; }
+  border-color: #FFD55D !important; }
 .product-data .bootstrap-select > .dropdown-toggle.bs-placeholder:hover {
-  border-color: #924cfc !important; }
+  border-color: #FFD55D !important; }
 .product-data .bootstrap-select .dropdown-menu {
   background-color: #e9e9e9;
   border-radius: 4px 4px 4px 4px !important;
@@ -391,7 +391,7 @@ a, a:hover, a:focus {
   outline: none !important;
   -webkit-box-shadow: none !important;
   box-shadow: none !important;
-  border-color: #924cfc !important;
+  border-color: #FFD55D !important;
   background-color: #e9e9e9; }
 
 .bootstrap-select > .dropdown-toggle.bs-placeholder {
@@ -720,7 +720,7 @@ a, a:hover, a:focus {
   font-size: 18px;
   padding: 0 0 0 30px;
   background-color: rgba(147, 147, 147, 0.5);
-  border: none;
+  border: 1px solid #585656;
   height: 48px;
   letter-spacing: 0.4px;
   border-radius: 20px 20px 20px 20px !important;
@@ -857,9 +857,6 @@ a, a:hover, a:focus {
 .checkbox input[type="radio"]:disabled + label::before {
   background-color: #eeeeee;
   cursor: not-allowed; }
-
-.checkbox.checkbox-circle label::before {
-  border-radius: 50%; }
 
 .checkbox.checkbox-inline {
   margin-top: 0; }
@@ -1217,30 +1214,30 @@ input[type="radio"] .styled:checked + label::after {
         left: -35px; }
 
 .error-input .btn-default {
-  border-color: #924cfc; }
+  border-color: #FFD55D; }
 .error-input label::before {
-  border: 1px solid #924cfc !important; }
+  border: 1px solid #FFD55D !important; }
 
 .error-input .ta-editor {
-  border-color: #924cfc; }
+  border-color: #FFD55D; }
 
 .calendar-icon.error-input {
-  border: 1px solid #924cfc; }
+  border: 1px solid #FFD55D; }
 
 .error-input {
-  border-color: #924cfc !important; }
+  border-color: #FFD55D !important; }
 
 .error-text {
-  color: #924cfc !important; }
+  color: #FFD55D !important; }
 
 .button-error {
-  background-color: #924cfc !important;
-  border: 1px solid #924cfc;
+  background-color: #FFD55D !important;
+  border: 1px solid #FFD55D;
   color: #ffffff; }
   .button-error:hover {
-    background-color: #924cfc;
+    background-color: #FFD55D;
     color: #ffffff;
-    border: 1px solid #924cfc; }
+    border: 1px solid #FFD55D; }
 
 .success-message-120 {
   background-color: #7AB83A;
@@ -3447,7 +3444,7 @@ input[type="radio"] .styled:checked + label::after {
 
 .req-1 {
   position: absolute;
-  color: #924cfc;
+  color: #FFD55D;
   z-index: 99999;
   text-align: center;
   width: 100%;
@@ -3458,7 +3455,7 @@ input[type="radio"] .styled:checked + label::after {
   position: absolute;
   top: 60px;
   left: 0;
-  color: #924cfc;
+  color: #FFD55D;
   z-index: 99999;
   text-align: center;
   width: 100%; }
@@ -3826,7 +3823,7 @@ input[type="radio"] .styled:checked + label::after {
       background-color: #c91c39; }
 
 .top-bar-violet {
-  background-color: #924cfc;
+  background-color: #FFD55D;
   width: 100%;
   z-index: 99999; }
   .top-bar-violet span {
@@ -4853,15 +4850,17 @@ input[type="radio"] .styled:checked + label::after {
 
 .remember-me label {
   text-transform: none;
-  font-family: "Univers Condensed Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 14px; }
+  font-size: 13px; }
+  .remember-me label a {
+    text-decoration: underline;
+    color: #ffffff; }
 
 .remember-me label::before {
-  background-color: #939393;
-  border: 1px solid #6b6b6b; }
+  background-color: transparent;
+  border: 1px solid #939393; }
 
 .remember-me label::after {
-  color: #e9e9e9; }
+  color: #F7284B; }
 
 .title-create-account {
   color: #ffffff; }
@@ -6031,12 +6030,12 @@ a.editable-click:hover {
   border: 0 !important; }
 
 a.editable-click.purple-text {
-  color: #924cfc !important;
+  color: #FFD55D !important;
   border-bottom: dotted 2px transparent !important;
   border: 0 !important; }
 
 a.editable-click.purple-text:hover {
-  color: #924cfc !important;
+  color: #FFD55D !important;
   border-bottom-color: transparent !important;
   border: 0 !important; }
 
@@ -6110,7 +6109,7 @@ input:checked + .slider:before {
     .calendar-icon i:hover {
       color: #c91c39; }
   .calendar-icon.error-input {
-    border: 1px solid #924cfc; }
+    border: 1px solid #FFD55D; }
 
 .purple .text-center {
   color: #ffffff;

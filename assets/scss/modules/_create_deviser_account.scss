@@ -46,16 +46,19 @@
 .remember-me{
     label{
         text-transform: none;
-        font-family: $font-family--secondary;
-        font-size: 14px;
+        font-size: 13px;
+		a{
+			text-decoration: underline;
+			color: $white;
+		}
     }
 }
 .remember-me label::before{
-    background-color: $dark_grey;
-    border:1px solid $darker_grey;
+    background-color: transparent;
+    border:1px solid $dark_grey;
 }
 .remember-me label::after{
-    color: $background_grey;
+    color: $red;
 }
 .title-create-account{
 	color: $white;

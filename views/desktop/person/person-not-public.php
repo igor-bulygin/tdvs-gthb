@@ -1,7 +1,7 @@
 <?php
+use app\assets\desktop\deviser\PersonNotPublicAsset;
 use app\components\PersonHeader;
 use app\models\Person;
-use app\assets\desktop\deviser\PersonNotPublicAsset;
 
 PersonNotPublicAsset::register($this);
 
@@ -16,11 +16,17 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 
 <?= PersonHeader::widget() ?>
 
-<div class="store" ng-controller="deviserNotPublicCtrl as deviserNotPublicCtrl">
+<div class="store" ng-controller="personNotPublicCtrl as personNotPublicCtrl">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
 				<h3 class="text-center">Almost done!</h3>
+				<?php if ($person->isInfluencer()) {?>
+					<div class="text-center">
+						<p>If you prefer, before making your profile public you can fill it with products you like.</p>
+						<img class="image-loved" src="/imgs/loved-image.png">
+					</div>
+				<?php } ?>
 				<?php if ($person->isDeviser()) { ?>
 					<p class="text-center">Before making your profile public, please complete the following steps:</p>
 				<?php } ?>
@@ -28,17 +34,26 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 		</div>
 		<?php if ($person->isDeviser()) { ?>
 			<div class="row text-center">
-				<a class="btn btn-default <?=$person->hasShippingSettings() ? 'done' : ''?>" href="<?=$person->getSettingsLink('shipping')?>">Add shipping prices</a>
+				<a class="btn btn-default <?=$person->hasShippingSettings() ? 'done' : ''?>" href="<?=$person->getSettingsLink('shipping')?>">
+					Add shipping prices
+					<?php if ($person->hasShippingSettings()) { ?><i class="fa fa-check"></i> <?php } ?>
+				</a>
 			</div>
 			<div class="row text-center">
-				<a class="btn btn-default <?=$person->hasStripeInfo() ? 'done' : ''?>" href="<?=$person->getSettingsLink('connect-stripe')?>">Add a bank account</a>
+				<a class="btn btn-default <?=$person->hasStripeInfo() ? 'done' : ''?>" href="<?=$person->getSettingsLink('connect-stripe')?>">
+					Add a bank account
+					<?php if ($person->hasStripeInfo()) { ?><i class="fa fa-check"></i> <?php } ?>
+				</a>
 			</div>
 			<div class="row text-center">
-				<a class="btn btn-default <?=$person->hasPublishedProducts() ? 'done' : ''?>" href="<?=$person->getCreateWorkLink()?>">Add a product</a>
+				<a class="btn btn-default <?=$person->hasPublishedProducts() ? 'done' : ''?>" href="<?=$person->getCreateWorkLink()?>">
+					Add a product
+					<?php if ($person->hasPublishedProducts()) { ?><i class="fa fa-check"></i> <?php } ?>
+				</a>
 			</div>
 		<?php } ?>
-		<div class="row text-center">
-			<button class="btn btn-default" ng-click="deviserNotPublicCtrl.makeProfilePublic()" <?=!$person->canPublishProfile() ? ' disabled ' : ''?>>Make profile public</button>
+		<div class="row mb-100 text-center">
+			<button class="btn btn-default" ng-click="personNotPublicCtrl.makeProfilePublic()" <?=!$person->canPublishProfile() ? ' disabled ' : ''?>>Make profile public</button>
 		</div>
 	</div>
 </div>

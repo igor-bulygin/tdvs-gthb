@@ -16,7 +16,10 @@ $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD
 
 ?>
 
-<?= SettingsHeader::widget() ?>
+<?php if($person->isPublic()) { ?>
+	<?= SettingsHeader::widget() ?>
+<?php } ?>
+
 
 <div ng-controller="shippingSettingsCtrl as shippingSettingsCtrl" class="personal-info-wrapper bank-settings-wrapper">
 	<div class="container">
@@ -37,7 +40,9 @@ $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD
 					<shipping-observations setting="setting" languages="shippingSettingsCtrl.languages"></shipping-observations>
 					<div class="row text-center">
 						<button class="btn btn-default btn-save btn-xl" ng-click="shippingSettingsCtrl.save()">Save</button>
-						<button class="btn btn-default btn-xl">Cancel</button>
+						<?php if($person->isPublic()) { ?>
+							<button class="btn btn-default btn-xl">Cancel</button>
+						<?php } ?>
 					</div>
 				</div>
 			</uib-accordion>

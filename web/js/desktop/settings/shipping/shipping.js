@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(personDataService, languageDataService, locationDataService, UtilService) {
+	function controller(personDataService, languageDataService, locationDataService, UtilService, $window) {
 		var vm = this;
 		vm.person = angular.copy(person);
 		vm.country_helper = [];
@@ -13,6 +13,7 @@
 		function init() {
 			getLanguages();
 			getCountries();
+
 		}
 
 		function getLanguages() {
@@ -36,10 +37,12 @@
 				locationDataService.getCountry({
 					countryCode: code
 				}, function(data) {
-					vm.country_helper.push({
+					var newCountry = {
 						country_name: data.country_name,
 						currency: data.currency_code
-					})
+					}
+					newCountry['status'] = UtilService.isDraft(vm.person) ? true : false;
+					vm.country_helper.push(newCountry);
 				}, UtilService.onError);
 			});
 		}
@@ -49,10 +52,14 @@
 		}
 
 		function save() {
-			function onUpdateProfileSuccess(data) {
-				vm.country_helper.forEach(function(helper) {
-					helper.status = false;
-				})
+			function onUpdateProfileSuccess(returnData) {
+				if(UtilService.isPublic(vm.person)) {
+					vm.country_helper.forEach(function(helper) {
+						helper.status = false;
+					})
+				}
+				if(UtilService.isDraft(vm.person))
+					$window.location.href = returnData.main_link;
 			}
 
 			var data = Object.assign({}, {shipping_settings: vm.person.shipping_settings})

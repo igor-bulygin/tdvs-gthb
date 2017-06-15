@@ -57,9 +57,10 @@ class TranslatableValidator extends Validator
 				if (!array_key_exists($key, Lang::getAvailableLanguagesDescriptions())) {
 					$this->addError($object, $attribute, sprintf('Language %s not available for %s', $languageName, $attribute));
 				}
-				if (empty($item)) {
-					$this->addError($object, $attribute, sprintf('Language %s can not be empty for %s', $languageName, $attribute));
-				}
+				// Commented because this validator does not validate "required" fields
+//				if (empty($item)) {
+//					$this->addError($object, $attribute, sprintf('Language %s can not be empty for %s', $languageName, $attribute));
+//				}
 			}
 		}
 	}
