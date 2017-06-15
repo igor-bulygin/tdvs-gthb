@@ -7,7 +7,7 @@ class CreateDeviserAsset extends AssetBundle {
 	public $basePath = '@webroot';
 	public $baseUrl = '@web';
 	public $js = [
-		'js/desktop/public-2/create-deviser-account.js'
+		'js/desktop/public-2/create-account.js'
 	];
 	public $depends = [
 		'app\assets\desktop\pub\PublicCommonAsset',

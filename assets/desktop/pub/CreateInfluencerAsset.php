@@ -7,7 +7,7 @@ class CreateInfluencerAsset extends AssetBundle {
 	public $basePath = '@webroot';
 	public $baseUrl = '@web';
 	public $js = [
-		'js/desktop/public-2/create-influencer-account.js'
+		'js/desktop/public-2/create-account.js'
 	];
 	public $depends = [
 		'app\assets\desktop\pub\PublicCommonAsset',
