@@ -17,6 +17,8 @@
 		this.isDeviser = isDeviser;
 		this.isInfluencer = isInfluencer;
 		this.isClient = isClient;
+		this.isPublic = isPublic;
+		this.isDraft = isDraft;
 		this.setElementPosition = setElementPosition;
 		//regex from: https://gist.github.com/dperini/729294
 		//added "?" after (?:(?:https?|ftp):\/\/) for urls like www.google.es
@@ -150,6 +152,14 @@
 
 		function isClient(person){
 			return person.type.indexOf(1) >= 0 ? true: false;
+		}
+
+		function isPublic(person) {
+			return person.account_state === 'active' ? true : false;
+		}
+
+		function isDraft(person) {
+			return person.account_state === 'draft' ? true : false;
 		}
 
 		function setElementPosition(array) {
