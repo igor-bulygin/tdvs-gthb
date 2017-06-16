@@ -32,6 +32,10 @@
         &:-moz-placeholder           {color:$white;text-transform: uppercase;}
         &::-moz-placeholder          {color:$white;text-transform: uppercase;}
         &:-ms-input-placeholder      {color:$white;text-transform: uppercase;}
+		&.grey-textarea{
+			padding: 20px;
+    		height: 100px;
+		}
     }
 }
 .login-title{
@@ -96,3 +100,41 @@ input:-webkit-autofill:focus {
     -webkit-box-shadow: 0 0 0 50px grey inset;
     -webkit-text-fill-color: white;
 } 
+
+.black-form-select{
+	    width: 100%!important;
+		.btn{
+			font-weight: bold;
+			height: 48px!important;
+			color: $background_grey;
+			font-size: 18px;
+			padding: 0 0 0 30px;
+			background-color: rgba(147, 147, 147, 0.5);
+			border: 1px solid #585656;
+			@include border-radius(20px,20px,20px,20px);
+			.caret{
+				border-top: 6px dashed;
+				border-top: 6px solid \9;
+				border-right: 6px solid transparent;
+				border-left: 6px solid transparent;
+				right: 25px!important;
+			}
+		}
+		&.open > .dropdown-toggle.btn-default{
+			color: $background_grey;
+			background-color: rgba(147, 147, 147, 0.5)important;
+		}
+		.dropdown-menu{
+			width: 100%!important;
+			margin-top: 0!important;
+		}
+}
+.text-angular-black{
+	.ta-scroll-window.form-control{
+		color: $background_grey;
+		font-size: 18px;
+		padding: 0 0 0 30px;
+		background-color: rgba(147, 147, 147, 0.5);
+		border: 1px solid #585656;
+	}
+}

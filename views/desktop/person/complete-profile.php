@@ -57,7 +57,7 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 				<div class="row">
 					<label for="categories">Field</label>
 					<div>
-						<ol class="work-field nya-bs-select" ng-model="completeProfileCtrl.person.categories" selected-text-format="count>4" ng-cloak ng-if="completeProfileCtrl.categories" name="categories" required multiple>
+						<ol class="black-form-select work-field nya-bs-select" ng-model="completeProfileCtrl.person.categories" selected-text-format="count>4" ng-cloak ng-if="completeProfileCtrl.categories" name="categories" required multiple>
 							<li nya-bs-option="category in completeProfileCtrl.categories" data-value="category.id" multiple deep-watch="true">
 								<a href="#"><span ng-bind="category.name"></span> <span class="check-mark glyphicon glyphicon-ok"></span></a>
 							</li>
@@ -74,7 +74,7 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 				<?php if($person->isInfluencer()) {?>
 				<label for="text_short_description">Short bio</label>
 				<?php } ?>
-				<textarea name="text_short_description" cols="50" rows="10" class="form-control grey-input ng-class:{'error-input': completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.text_short_description)}" ng-model="completeProfileCtrl.person.text_short_description[completeProfileCtrl.description_language]" required></textarea>
+				<textarea name="text_short_description" cols="50" rows="10" class="grey-textarea form-control grey-input ng-class:{'error-input': completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.text_short_description)}" ng-model="completeProfileCtrl.person.text_short_description[completeProfileCtrl.description_language]" required></textarea>
 				<form-errors field="completeProfileCtrl.form.text_short_description" condition="completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.text_short_description)"></form-errors>
 				<! -- language selector -->
 				<ol class="nya-bs-select" ng-model="completeProfileCtrl.description_language" ng-cloak ng-if="completeProfileCtrl.languages">
@@ -98,7 +98,7 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 			<?php if($person->isDeviser()) {?>
 			<div class="row">
 				<label for="text_biography">About</label>
-				<div name="text_biography" text-angular ta-toolbar="[]" ta-paste="completeProfileCtrl.stripHTMLTags($html)" ng-model="completeProfileCtrl.person.text_biography[completeProfileCtrl.biography_language]" ng-cloak required class="ng-class:{'error-input': completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.text_biography)}"></div>
+				<div name="text_biography" text-angular ta-toolbar="[]" ta-paste="completeProfileCtrl.stripHTMLTags($html)" ng-model="completeProfileCtrl.person.text_biography[completeProfileCtrl.biography_language]" ng-cloak required class="text-angular-black ng-class:{'error-input': completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.text_biography)}"></div>
 				<form-errors field="completeProfileCtrl.form.text_biography" condition="completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.text_biography)"></form-errors>
 				<! -- language selector -->
 				<ol class="nya-bs-select" ng-model="completeProfileCtrl.biography_language" ng-cloak ng-if="completeProfileCtrl.languages">
