@@ -18,3 +18,15 @@
 	letter-spacing: 0.5px;
 	color: $background_grey;
 }
+.succes-black-title{
+	color: $black;
+	font-family: $font-family--name;
+	text-transform: none;
+	font-size: 65px;
+    letter-spacing: 1px;
+}
+.success-black-subtitle{
+	font-family: $font-family--regular;
+	margin: 60px 0 30px;
+	color: $black;
+}

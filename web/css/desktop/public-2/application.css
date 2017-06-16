@@ -939,6 +939,10 @@ input:-webkit-autofill:focus {
       padding-top: 65px;
       line-height: 25px; }
 
+.upload-photo-section .crop-modal {
+  margin-left: -62px;
+  margin-top: 20px; }
+
 /* Awesome Bootstrap Checkbox*/
 .checkbox {
   padding-left: 20px; }
@@ -1495,6 +1499,18 @@ input[type="radio"] .styled:checked + label::after {
   font-weight: 300;
   letter-spacing: 0.5px;
   color: #e9e9e9; }
+
+.succes-black-title {
+  color: #1C1919;
+  font-family: "Univers Thin Ultra Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-transform: none;
+  font-size: 65px;
+  letter-spacing: 1px; }
+
+.success-black-subtitle {
+  font-family: "Roboto Condensed", sans-serif;
+  margin: 60px 0 30px;
+  color: #1C1919; }
 
 .green-link {
   color: #7AB83A;
@@ -4198,6 +4214,11 @@ input[type="radio"] .styled:checked + label::after {
     cursor: pointer;
     font-size: 21px;
     margin: -5px 0 0 9px; }
+
+.icon-face {
+  width: 50px;
+  margin: 40px auto;
+  display: block; }
 
 .video-container {
   margin: 40px 0; }

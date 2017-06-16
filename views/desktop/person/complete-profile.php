@@ -116,7 +116,7 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 			</div>
 			<?php } ?>
 			<hr class="separator-30-50">
-			<div class="row">
+			<div class="row upload-photo-section">
 				<div class="upload-photo-wrapper ng-class:{'error-input': completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.profile)}" ngf-select ngf-accept="'image/*'" ngf-pattern="'image/*'" ng-model="completeProfileCtrl.profile" name="profile" required>
 					<h4>
 						<i class="fa fa-camera"></i>
@@ -137,7 +137,7 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 					</div>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row upload-photo-section">
 				<div class="upload-photo-wrapper ng-class:{'error-input': completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.header)}" ngf-select ngf-accept="'image/*'" ngf-pattern="'image/*'" ng-model="completeProfileCtrl.header" name="header" required>
 					<h4>
 						<i class="fa fa-camera"></i>

@@ -20,7 +20,8 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<h3 class="text-center">Almost done!</h3>
+				<img class="icon-face" src="/imgs/happy-face.svg">
+				<h3 class="succes-black-title text-center">Almost done!</h3>
 				<?php if ($person->isInfluencer()) {?>
 					<div class="text-center">
 						<p>If you prefer, before making your profile public you can fill it with products you like.</p>
@@ -28,7 +29,7 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 					</div>
 				<?php } ?>
 				<?php if ($person->isDeviser()) { ?>
-					<p class="text-center">Before making your profile public, please complete the following steps:</p>
+					<p class="success-black-subtitle text-center">Before making your profile public, please complete the following steps:</p>
 				<?php } ?>
 			</div>
 		</div>
