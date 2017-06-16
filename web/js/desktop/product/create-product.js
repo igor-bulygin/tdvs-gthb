@@ -118,6 +118,7 @@
 			vm.errors = false;
 			vm.saving=true;
 			function onUpdateProductSuccess(data) {
+				vm.saving=false;
 				vm.disable_save_buttons = false;
 				if(state === 'product_state_draft') {
 					saved_draft();
@@ -128,11 +129,13 @@
 
 			function onUpdateProductError(err) {
 				vm.disable_save_buttons = false;
+				vm.saving=false;
 				if(err.data.errors && err.data.errors.required && angular.isArray(err.data.errors.required))
 					$rootScope.$broadcast(productEvents.requiredErrors, {required: err.data.errors.required})
 			}
 			
 			function onSaveProductSuccess(data) {
+				vm.saving=false;
 				vm.disable_save_buttons = false;
 				vm.product.id = angular.copy(data.id);
 				if(state==='product_state_draft') {
@@ -145,12 +148,12 @@
 			
 			function onSaveProductError(err) {
 				vm.disable_save_buttons = false;
-				vm.errors = true;
+				vm.errors = true;				
+				vm.saving=false;
 				//send errors to components
 				if(err.data.errors && err.data.errors.required && angular.isArray(err.data.errors.required))
 					$rootScope.$broadcast(productEvents.requiredErrors, {required: err.data.errors.required})
 			}
-
 			vm.disable_save_buttons = true;
 			var required = [];
 			//set state of the product
@@ -187,10 +190,10 @@
 				else {
 					productDataService.postProductPriv(vm.product, null, onSaveProductSuccess, onSaveProductError);
 				}
-			} else {
+			} else {				
+				vm.saving=false;
 				vm.disable_save_buttons = false;
 				vm.errors = true;
-				vm.saving=false;
 				$rootScope.$broadcast(productEvents.requiredErrors, {required: required});
 				$anchorScroll(required[0]);
 			}

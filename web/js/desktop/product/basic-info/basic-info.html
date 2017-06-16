@@ -1,83 +1,99 @@
 <div class="card">
-	<span class="title">1/ Basic work information</span>
-	<form name="productBasicInfoCtrl.form" novalidate>
-	<div class="row" id="name">
-		<div class="col-md-2"><label for="name">Title</label></div>
-		<div class="col-md-8">
-			<ol class="about-edit-select title-lang-btn nya-bs-select" ng-model="productBasicInfoCtrl.name_language">
-				<li nya-bs-option="language in productBasicInfoCtrl.languages" data-value="language.code" deep-watch="true">
-					<a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
-				</li>
-			</ol>
-			<input class="title-input form-control ng-class:{'error-input': productBasicInfoCtrl.nameRequired}" type="text" name="name" ng-model="productBasicInfoCtrl.product.name[productBasicInfoCtrl.name_language]">
-			<div class="error-text" ng-if="productBasicInfoCtrl.nameRequired">Title in english is mandatory.</div>
-		</div>
-		<div class="col-md-2">
-			<p class="info">Translate your work title by simply selecting different languages from the drop-down menu. Translate in as many languages as possible to reach a broader audience</p>
-		</div>
-	</div>
-	<div class="row" id="categories">
-		<div class="col-md-2"><label for="categories">Categories</label></div>
-		<div class="col-md-8">
-			<div ng-repeat="item in productBasicInfoCtrl.categories_helper track by $index">
-				<div class="row items-row">
-					<span ng-repeat="category in productBasicInfoCtrl.categories_helper[$index].categories_selected">
-						<ol name="{{'categories_' + $parent.$index + '_' + $index}}" class="col-sm-2 col-md-2 nya-bs-select categories-select ng-class:{'purple': productBasicInfoCtrl.has_error(productBasicInfoCtrl.form, productBasicInfoCtrl.form['categories_'+$parent.$index+'_'+$index])}" ng-model="productBasicInfoCtrl.categories_helper[$parent.$index].categories_selected[$index]" ng-change="productBasicInfoCtrl.categorySelected(productBasicInfoCtrl.categories_helper[$parent.$index].categories_selected[$index], $parent.$index, $index)" required>
-							<li nya-bs-option="subcategory in productBasicInfoCtrl.categories_helper[$parent.$index].categories[$index]" data-value="subcategory.id" deep-watch="true">
-								<a href="">
-									<span ng-bind="subcategory.name"></span>
-								</a>
-							</li>
-						</ol>
-					</span>
-					<span class="glyphicon glyphicon-remove close-row" ng-if="productBasicInfoCtrl.product.categories.length > 1" ng-click="productBasicInfoCtrl.deleteCategory($index)"></span>
+	<span class="title">Basic work information</span>
+	<form class="row" name="productBasicInfoCtrl.form" novalidate>
+		<div class="col-md-6">
+			<div class="col-md-12" id="name">
+				<label class="col-md-12" for="name">Title</label>
+				<div class="col-md-10">
+					<input class="title-input form-control ng-class:{'error-input': productBasicInfoCtrl.nameRequired}" type="text" name="name" ng-model="productBasicInfoCtrl.product.name[productBasicInfoCtrl.name_language]" uib-popover="Please translate each field into Spanish and English" popover-placement="right" popover-trigger="'focus'" >
+					<div class="error-text" ng-if="productBasicInfoCtrl.nameRequired">Title in english is mandatory.</div>
+				</div>
+					<ol class="col-md-2 about-edit-select title-lang-btn nya-bs-select" ng-model="productBasicInfoCtrl.name_language">
+						<li nya-bs-option="language in productBasicInfoCtrl.languages" data-value="language.code" deep-watch="true">
+							<a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
+						</li>
+					</ol>
+			</div>
+			<div class="col-md-12" id="categories">
+				<label class="col-md-12" for="categories">Categories</label>
+				<a><span class="col-md-12" ng-click="productBasicInfoCtrl.addCategory(productBasicInfoCtrl.categories_helper[$parent.$index].categories_selected[$index])">+ Add another category</span></a>
+				<div class="col-md-12" ng-repeat="item in productBasicInfoCtrl.categories_helper track by $index">
+					<div class="items-row">
+						<span ng-repeat="category in productBasicInfoCtrl.categories_helper[$index].categories_selected">
+							<ol name="{{'categories_' + $parent.$index + '_' + $index}}" class="col-sm-2 col-md-2 nya-bs-select categories-select ng-class:{'purple': productBasicInfoCtrl.has_error(productBasicInfoCtrl.form, productBasicInfoCtrl.form['categories_'+$parent.$index+'_'+$index])}" ng-model="productBasicInfoCtrl.categories_helper[$parent.$index].categories_selected[$index]" ng-change="productBasicInfoCtrl.categorySelected(productBasicInfoCtrl.categories_helper[$parent.$index].categories_selected[$index], $parent.$index, $index)" required>
+								<li nya-bs-option="subcategory in productBasicInfoCtrl.categories_helper[$parent.$index].categories[$index]" data-value="subcategory.id" deep-watch="true">
+									<a href="">
+										<span ng-bind="subcategory.name"></span>
+									</a>
+								</li>
+							</ol>
+						</span>
+						<span class="glyphicon glyphicon-remove close-row" ng-if="productBasicInfoCtrl.product.categories.length > 1" ng-click="productBasicInfoCtrl.deleteCategory($index)"></span>
+					</div>
 				</div>
 			</div>
-			<span class="add-cathegory" ng-click="productBasicInfoCtrl.addCategory(productBasicInfoCtrl.categories_helper[$parent.$index].categories_selected[$index])">+ Add another category</span>
+			<div class="col-md-12" id="description">
+					<label class="col-md-12" for="description">Description</label>
+				<div class="col-md-10">
+					<div class="description-input ng-class:{'error-input': productBasicInfoCtrl.descriptionRequired}" text-angular ng-model="productBasicInfoCtrl.product.description[productBasicInfoCtrl.description_language]" ng-cloak ta-toolbar="[]" ta-paste="productBasicInfoCtrl.stripHTMLTags($html)"></div>
+					<div class="error-text" ng-if="productBasicInfoCtrl.descriptionRequired">Description in english is mandatory.</div>
+				</div>
+				<ol class="col-md-2 about-edit-select title-lang-btn nya-bs-select" ng-model="productBasicInfoCtrl.description_language">
+					<li nya-bs-option="language in productBasicInfoCtrl.languages" data-value="language.code" deep-watch="true">
+						<a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
+					</li>
+				</ol>
+			</div>
+			<div class="col-md-12" id="tags">
+					<label class="col-md-12" for="tags">Tags</label>
+					<tags-input class="tags-wrapper col-md-10" ng-model="productBasicInfoCtrl.tags[productBasicInfoCtrl.tags_language]" on-tag-added="productBasicInfoCtrl.addTag($tag, productBasicInfoCtrl.tags_language)" on-tag-removed="productBasicInfoCtrl.removeTag($tag)"></tags-input>
+					<ol class="about-edit-select title-lang-btn nya-bs-select col-md-2" ng-model="productBasicInfoCtrl.tags_language">
+						<li nya-bs-option="language in productBasicInfoCtrl.languages" data-value="language.code" deep-watch="true">
+							<a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
+						</li>
+					</ol>
+			</div>
 		</div>
-		<div class="col-md-2">
-			<p class="info">Your work can go into 1 or more categories.</p>
-		</div>
-	</div>
-	<div class="row" id="main_photo">
-		<div class="col-md-2" id="photos">
-			<label for="Photos">Photos</label></div>
-		<div class="col-md-8 ml-15">
-			<div class="row">
-				<div class="col-md-2 pad-about mr-15" ng-if="productBasicInfoCtrl.isDropAvailable">
-					<div class="basic-info-add-photos" ngf-drop-available="productBasicInfoCtrl.isDropAvailable" ngf-drag-over-class="drag-over" ngf-drop ngf-select ngf-change="productBasicInfoCtrl.uploadPhoto($files, $invalidFiles)" ngf-accept="'image/*'" ngf-multiple="true">
-						<div class="plus-add-wrapper ng-class:{'purple': productBasicInfoCtrl.photosRequired}">
-							<div class="plus-add">
-								<span>+</span>
+		<div class="col-md-6">
+			<div class="col-md-12" id="main_photo">
+				<div id="photos">
+					<label class="col-md-12" for="Photos">Photos</label>
+					<div class="col-md-12">
+						<div class="col-md-3 button" name="file" ngf-select="productBasicInfoCtrl.uploadPhoto($files, $invalidFiles)"  ngf-accept="'image/*'"  ngf-drop-available="productBasicInfoCtrl.isDropAvailable" ngf-multiple="true">+ Add photos</div>
+						<p class="info col-md-6">Mark one of the photos as "main photo" by clicking the star icon.</p>
+					</div>
+					<div class="col-md-12 ml-15">
+						<div class="row">
+							<div class="col-md-3" ngf-no-file-drop>
+								<input type="file" name="file" ngf-select="productBasicInfoCtrl.uploadPhoto($files, $invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="productBasicInfoCtrl.isDropAvailable" ngf-multiple="true">
 							</div>
-							<div class="text">ADD PHOTOS</div>
+							<ul class="item draggable-list" ui-sortable ng-model="productBasicInfoCtrl.images">
+								<li class="col-md-3 image-basic-info-edit" ng-repeat="image in productBasicInfoCtrl.images">
+									<img class="grid-image" ng-src="{{image.url}}" draggable="false">
+									<div class="crop ion-android-star-outline" ng-click="productBasicInfoCtrl.openCropModal(image.url, $index)"></div>
+									<span class="delete ion-android-close" ng-click="productBasicInfoCtrl.deleteImage($index)"></span>
+									<p class="main-marked" ng-if="image.filename.main_product_photo">Marked as main photo</p>
+								</li>
+							</ul>
+							<div class="col-md-3 image-basic-info-edit" ng-repeat="item in productBasicInfoCtrl.tempFiles" ng-if="item.progress">
+								<div ng-if="item.progress <= 100">
+									<uib-progressbar value="item.progress" class="progress-striped active">{{item.progress}}</uib-progressbar>
+									<img ngf-thumbnail="item" class="grid-image">
+								</div>
+							</div>
+						</div>
+						<div class="row purple-text" ng-if="productBasicInfoCtrl.photosRequired" ng-cloak><p>Please upload at least 1 photo.</p></div>
+					</div>
+					<div class="col-md-6 pad-about mr-15" ng-if="productBasicInfoCtrl.images.length<1">
+						<div class="basic-info-add-photos">
+							<div class="plus-add-wrapper ng-class:{'purple': productBasicInfoCtrl.photosRequired}">
+							<br/><br/><br/>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="col-md-2" ngf-no-file-drop>
-					<input type="file" name="file" ngf-select="productBasicInfoCtrl.uploadPhoto($files, $invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="productBasicInfoCtrl.isDropAvailable" ngf-multiple="true">
-				</div>
-				<ul class="item draggable-list" ui-sortable ng-model="productBasicInfoCtrl.images">
-					<li class="col-md-2 image-basic-info-edit" ng-repeat="image in productBasicInfoCtrl.images">
-						<img class="grid-image" ng-src="{{image.url}}" draggable="false">
-						<div class="crop ion-android-star-outline" ng-click="productBasicInfoCtrl.openCropModal(image.url, $index)"></div>
-						<span class="delete ion-android-close" ng-click="productBasicInfoCtrl.deleteImage($index)"></span>
-						<p class="main-marked" ng-if="image.filename.main_product_photo">Marked as main photo</p>
-					</li>
-				</ul>
-				<div class="col-md-2 image-basic-info-edit" ng-repeat="item in productBasicInfoCtrl.tempFiles" ng-if="item.progress">
-					<div ng-if="item.progress <= 100">
-						<uib-progressbar value="item.progress" class="progress-striped active">{{item.progress}}</uib-progressbar>
-						<img ngf-thumbnail="item" class="grid-image">
-					</div>
+					<div class="row purple-text" ng-if="productBasicInfoCtrl.mainPhotoRequired" ng-cloak><p>Mark one of the photos as main by clicking the star icon.</p></div>
 				</div>
 			</div>
-			<div class="row purple-text" ng-if="productBasicInfoCtrl.photosRequired" ng-cloak><p>Please upload at least 1 photo.</p></div>
-			<div class="row purple-text" ng-if="productBasicInfoCtrl.mainPhotoRequired" ng-cloak><p>Please mark one of the photos as main by clicking the star icon.</p></div>
 		</div>
-		<div class="col-md-2">
-			<p class="info">Mark one of the photos as "main photo" by clicking the star icon. The main photo of the work will be displayed on Todevise's homepage.</p>
-		</div>
-	</div>
 	</form>
 </div>

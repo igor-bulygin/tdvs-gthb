@@ -5,13 +5,9 @@
 		UtilService, productEvents, dragndropService){
 		var vm = this;
 		vm.has_error = UtilService.has_error;
-		vm.stripHTMLTags = UtilService.stripHTMLTags;
-		vm.description_language = 'en-US';
-		vm.tags_language = 'en-US';
 		vm.faq_selected = false;
 		vm.faq_helper = [];
 		vm.images = [];
-		vm.tags = {};
 		vm.parseQuestion = parseQuestion;
 		vm.isLanguageOk = isLanguageOk;
 		vm.addFaq = addFaq;
@@ -19,8 +15,6 @@
 		vm.deleteQuestion = deleteQuestion;
 		vm.parseQuestion = parseQuestion;
 		vm.isLanguageOk = isLanguageOk;
-		vm.addTag = addTag;
-		vm.removeTag = removeTag;
 		vm.openCropModal = openCropModal;
 		vm.deleteImage = deleteImage;
 		vm.dragOver = dragOver;
@@ -74,24 +68,7 @@
 		function isLanguageOk(code, index) {
 			return vm.faq_helper[index].completedLanguages.indexOf(code) > -1 ? true : false;
 		}
-
-		function addTag(tag, language) {
-			if(!vm.product.tags[language])
-				vm.product.tags[language]=[tag.text];
-			else {
-				if(vm.product.tags[language].indexOf(tag.text) === -1)
-					vm.product.tags[language].push(tag.text)
-			}
-		}
-
-		function removeTag(tag) {
-			var pos = vm.product.tags[vm.tags_language].indexOf(tag.text);
-			if(pos > -1)
-				vm.product.tags[vm.tags_language].splice(pos, 1);
-			if(vm.product.tags[vm.tags_language].length === 0)
-				delete vm.product.tags[vm.tags_language];
-		}
-
+		
 		function openCropModal(photo) {
 			if(vm.images.length < 4) {
 				if(photo) {
@@ -191,9 +168,7 @@
 		}
 
 		//watches
-		$scope.$watch('productMoreDetailsCtrl.product.description', function(newValue, oldValue) {
-			vm.descriptionRequired = false;
-		}, true);
+		
 		$scope.$watch('productMoreDetailsCtrl.product.faq', function(newValue, oldValue) {
 			if(angular.isArray(oldValue) && oldValue.length === 0 && angular.isArray(newValue) && newValue.length > 0) {
 				vm.faq_selected = true;
@@ -215,23 +190,10 @@
 			}
 		});
 
-		$scope.$watch('productMoreDetailsCtrl.product.tags', function(newValue, oldValue) {
-			if(angular.isObject(oldValue) && UtilService.isEmpty(oldValue) && angular.isObject(newValue) && !UtilService.isEmpty(newValue)) {
-				for(var key in newValue) {
-					vm.tags[key] = [];
-					newValue[key].forEach(function(element) {
-						vm.tags[key].push({text: element});
-					});
-				}
-			}
-		}, true);
+		
 
 		//events
 		$scope.$on(productEvents.requiredErrors, function(event, args) {
-			//set description error
-			if(args.required.indexOf('description') > -1) {
-				vm.descriptionRequired = true;
-			}
 			if(args.required.indexOf('faq') > -1) {
 				vm.faqRequired = true;
 			}
