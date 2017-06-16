@@ -65,7 +65,7 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 					</div>
 					<form-errors field="completeProfileCtrl.form.categories" condition="completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.categories)"></form-errors>
 				</div>
-				<hr>
+				<hr class="separator-30-50">
 			<?php } ?>
 			<div class="row">
 				<?php if($person->isDeviser()) {?>
@@ -74,30 +74,33 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 				<?php if($person->isInfluencer()) {?>
 				<label for="text_short_description">Short bio</label>
 				<?php } ?>
+				<div class="black-area-wrappers">
 				<textarea name="text_short_description" cols="50" rows="10" class="grey-textarea form-control grey-input ng-class:{'error-input': completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.text_short_description)}" ng-model="completeProfileCtrl.person.text_short_description[completeProfileCtrl.description_language]" required></textarea>
 				<form-errors field="completeProfileCtrl.form.text_short_description" condition="completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.text_short_description)"></form-errors>
 				<! -- language selector -->
-				<ol class="nya-bs-select" ng-model="completeProfileCtrl.description_language" ng-cloak ng-if="completeProfileCtrl.languages">
+				<ol class="nya-bs-select area-lang-select" ng-model="completeProfileCtrl.description_language" ng-cloak ng-if="completeProfileCtrl.languages">
 					<li nya-bs-option="language in completeProfileCtrl.languages" data-value="language.code" deep-watch="true">
 						<a href="#"><span ng-bind="language.name"></span></a>
 					</li>
 				</ol>
 				<! -- Characters left -->
-				<div>
+				<div class="black-char-left">
 					<span ng-bind="completeProfileCtrl.limit_text_short_description - completeProfileCtrl.person.text_short_description[completeProfileCtrl.description_language].length"></span>
 					<span>Characters left</span>
 				</div>
 				<!-- tooltip -->
 				<?php if($person->isDeviser()) {?>
-					<i class="fa fa-info-circle" aria-hidden="true" uib-tooltip="Describe your brand in 140 characters"></i>
+					<i class="info-black-areas ion-information-circled" aria-hidden="true" uib-popover="Describe your brand in 140 characters"></i>
 				<?php } ?>
 				<?php if($person->isInfluencer()) {?>
-					<i class="fa fa-info-circle" aria-hidden="true" uib-tooltip="Describe your bio in 140 characters"></i>
+					<i class="info-black-areas ion-information-circled" aria-hidden="true" uib-popover="Describe your bio in 140 characters"></i>
 				<?php } ?>
+				</div>
 			</div>
 			<?php if($person->isDeviser()) {?>
 			<div class="row">
 				<label for="text_biography">About</label>
+				<div class="black-area-wrappers">
 				<div name="text_biography" text-angular ta-toolbar="[]" ta-paste="completeProfileCtrl.stripHTMLTags($html)" ng-model="completeProfileCtrl.person.text_biography[completeProfileCtrl.biography_language]" ng-cloak required class="text-angular-black ng-class:{'error-input': completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.text_biography)}"></div>
 				<form-errors field="completeProfileCtrl.form.text_biography" condition="completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.text_biography)"></form-errors>
 				<! -- language selector -->
@@ -107,10 +110,12 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 					</li>
 				</ol>
 				<!-- tooltip -->
-				<i class="fa fa-info-circle" aria-hidden="true" uib-tooltip="Tell your customers more about your brand and its philosophy."></i>
+				<i class="info-black-areas ion-information-circled" aria-hidden="true" uib-popover="Tell your customers more about your brand and its philosophy."></i>
+				</div>
+				
 			</div>
 			<?php } ?>
-			<hr>
+			<hr class="separator-30-50">
 			<div class="row">
 				<div class="ng-class:{'error-input': completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.profile)}" ngf-select ngf-accept="'image/*'" ngf-pattern="'image/*'" ng-model="completeProfileCtrl.profile" name="profile" required>
 					<h4><i class="fa fa-camera"></i> Upload profile photo</h4>
