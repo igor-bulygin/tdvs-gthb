@@ -107,9 +107,19 @@
 	font-family: $font-family--regular;
 	text-transform: uppercase;
 	border: none;
+}
+.regular-btn{
+	height: 62px;
+  	@include border-radius(5px,5px,5px,5px);
+  	background-color: $dark_red!important;
+	color: $white!important;
+	border: none;
+	text-transform: uppercase;
+	font-weight: bold;
+	min-width: 288px;
+	font-size: 16px;
+	margin-top: 80px;
 	&.disabled{
 		background-color: $light_grey!important;
-		padding-top: 2px;
-		color: $background_grey;
 	}
 }

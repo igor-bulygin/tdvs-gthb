@@ -622,10 +622,22 @@ a, a:hover, a:focus {
   font-family: "Roboto Condensed", sans-serif;
   text-transform: uppercase;
   border: none; }
-  .big-btn.disabled {
-    background-color: #bfbfbf !important;
-    padding-top: 2px;
-    color: #e9e9e9; }
+
+.regular-btn {
+  height: 62px;
+  border-radius: 5px 5px 5px 5px !important;
+  -webkit-border-radius: 5px 5px 5px 5px !important;
+  -moz-border-radius: 5px 5px 5px 5px !important;
+  background-color: #c91c39 !important;
+  color: #ffffff !important;
+  border: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  min-width: 288px;
+  font-size: 16px;
+  margin-top: 80px; }
+  .regular-btn.disabled {
+    background-color: #bfbfbf !important; }
 
 .products-menu ul {
   margin: 20px 0 40px;

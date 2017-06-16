@@ -54,7 +54,7 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 			</div>
 		<?php } ?>
 		<div class="row mb-100 text-center">
-			<button class="big-btn btn btn-default disabled" ng-click="personNotPublicCtrl.makeProfilePublic()" <?=!$person->canPublishProfile() ? ' disabled ' : ''?>>Make profile public</button>
+			<button class="regular-btn btn btn-default disabled" ng-click="personNotPublicCtrl.makeProfilePublic()" <?=!$person->canPublishProfile() ? ' disabled ' : ''?>>Make profile public</button>
 		</div>
 	</div>
 </div>
