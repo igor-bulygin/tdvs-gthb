@@ -95,3 +95,21 @@
         font-size: 42px;
     }
 }
+.big-btn{
+	width: 634px;
+	height: 80px;
+	margin: 20px 0;
+    padding: 20px 0 0 0;
+	@include border-radius(20px,20px,20px,20px);
+	background-color: $background_grey;
+	font-size: 28px;
+  	font-weight: bold;
+	font-family: $font-family--regular;
+	text-transform: uppercase;
+	border: none;
+	&.disabled{
+		background-color: $light_grey!important;
+		padding-top: 2px;
+		color: $background_grey;
+	}
+}

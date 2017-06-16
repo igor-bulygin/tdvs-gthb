@@ -608,6 +608,25 @@ a, a:hover, a:focus {
     color: #ffffff;
     font-size: 42px; }
 
+.big-btn {
+  width: 634px;
+  height: 80px;
+  margin: 20px 0;
+  padding: 20px 0 0 0;
+  border-radius: 20px 20px 20px 20px !important;
+  -webkit-border-radius: 20px 20px 20px 20px !important;
+  -moz-border-radius: 20px 20px 20px 20px !important;
+  background-color: #e9e9e9;
+  font-size: 28px;
+  font-weight: bold;
+  font-family: "Roboto Condensed", sans-serif;
+  text-transform: uppercase;
+  border: none; }
+  .big-btn.disabled {
+    background-color: #bfbfbf !important;
+    padding-top: 2px;
+    color: #e9e9e9; }
+
 .products-menu ul {
   margin: 20px 0 40px;
   text-align: center; }
@@ -3659,7 +3678,7 @@ input[type="radio"] .styled:checked + label::after {
   display: block; }
 
 .store {
-  background-color: #e9e9e9; }
+  background-color: #ffffff; }
   .store .content-store {
     padding: 40px 0; }
     .store .content-store .cathegory-wrapper {

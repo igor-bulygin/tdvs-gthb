@@ -35,26 +35,26 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 		</div>
 		<?php if ($person->isDeviser()) { ?>
 			<div class="row text-center">
-				<a class="btn btn-default <?=$person->hasShippingSettings() ? 'done' : ''?>" href="<?=$person->getSettingsLink('shipping')?>">
+				<a class="big-btn btn btn-default <?=$person->hasShippingSettings() ? 'done' : ''?>" href="<?=$person->getSettingsLink('shipping')?>">
 					Add shipping prices
 					<?php if ($person->hasShippingSettings()) { ?><i class="fa fa-check"></i> <?php } ?>
 				</a>
 			</div>
 			<div class="row text-center">
-				<a class="btn btn-default <?=$person->hasStripeInfo() ? 'done' : ''?>" href="<?=$person->getSettingsLink('connect-stripe')?>">
+				<a class="big-btn btn btn-default <?=$person->hasStripeInfo() ? 'done' : ''?>" href="<?=$person->getSettingsLink('connect-stripe')?>">
 					Add a bank account
 					<?php if ($person->hasStripeInfo()) { ?><i class="fa fa-check"></i> <?php } ?>
 				</a>
 			</div>
 			<div class="row text-center">
-				<a class="btn btn-default <?=$person->hasPublishedProducts() ? 'done' : ''?>" href="<?=$person->getCreateWorkLink()?>">
+				<a class="big-btn btn btn-default <?=$person->hasPublishedProducts() ? 'done' : ''?>" href="<?=$person->getCreateWorkLink()?>">
 					Add a product
 					<?php if ($person->hasPublishedProducts()) { ?><i class="fa fa-check"></i> <?php } ?>
 				</a>
 			</div>
 		<?php } ?>
 		<div class="row mb-100 text-center">
-			<button class="btn btn-default" ng-click="personNotPublicCtrl.makeProfilePublic()" <?=!$person->canPublishProfile() ? ' disabled ' : ''?>>Make profile public</button>
+			<button class="big-btn btn btn-default disabled" ng-click="personNotPublicCtrl.makeProfilePublic()" <?=!$person->canPublishProfile() ? ' disabled ' : ''?>>Make profile public</button>
 		</div>
 	</div>
 </div>
