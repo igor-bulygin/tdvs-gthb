@@ -73,3 +73,26 @@
 		@include border-radius(25px,25px,25px,25px);
 	}
 }
+.input-check-wrapper{
+	position: relative;
+	i{
+		position: absolute;
+		color: $background_grey;
+		top: 9px;
+		font-size: 22px;
+    	right: 25px;
+	}
+}
+input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
+    color: $background_grey!important;
+    background-color: rgba(147, 147, 147, 0.5)!important;
+}
+input:-webkit-autofill {
+    -webkit-box-shadow:0 0 0 50px grey inset; /* Change the color to your own background color */
+    -webkit-text-fill-color: white;
+}
+
+input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 50px grey inset;
+    -webkit-text-fill-color: white;
+} 
