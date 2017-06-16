@@ -22,27 +22,42 @@ $this->title = 'Create an account - Todevise';
 			<div>
 				<div class="row">
 					<label for="name">Name</label>
-					<input type="text" id="name" class="form-control grey-input ng-class:{'error-input': createAccountCtrl.has_error(createAccountCtrl.form, createAccountCtrl.form.name)}" name="name" ng-model="createAccountCtrl.person.name" required>
+					<div class="input-check-wrapper">
+						<input type="text" id="name" class="form-control grey-input ng-class:{'error-input': createAccountCtrl.has_error(createAccountCtrl.form, createAccountCtrl.form.name)}" name="name" ng-model="createAccountCtrl.person.name" required>
+						<i class="ion-checkmark" ng-if="createAccountCtrl.form.name.$valid" ng-cloak></i>
+					</div>
 					<form-errors field="createAccountCtrl.form.name" condition="createAccountCtrl.has_error(createAccountCtrl.form, createAccountCtrl.form.name)"></form-errors>
 				</div>
 				<div class="row">
 					<label for="last_name">Last name</label>
-					<input type="text" id="last_name" name="last_name" class="form-control grey-input ng-class:{'error-input': createAccountCtrl.has_error(createAccountCtrl.form, createAccountCtrl.form.last_name)}" ng-model="createAccountCtrl.person.last_name" required>
+					<div class="input-check-wrapper">
+						<input type="text" id="last_name" name="last_name" class="form-control grey-input ng-class:{'error-input': createAccountCtrl.has_error(createAccountCtrl.form, createAccountCtrl.form.last_name)}" ng-model="createAccountCtrl.person.last_name" required>
+						<i class="ion-checkmark" ng-if="createAccountCtrl.form.last_name.$valid" ng-cloak></i>
+					</div>
 					<form-errors field="createAccountCtrl.form.last_name" condition="createAccountCtrl.has_error(createAccountCtrl.form, createAccountCtrl.form.last_name)"></form-errors>
 				</div>
 				<div class="row">
 					<label for="email">Email</label>
-					<input type="email" id="email" class="form-control grey-input ng-class:{'error-input': createAccountCtrl.has_error(createAccountCtrl.form, createAccountCtrl.form.email)}" name="email" ng-model="createAccountCtrl.person.email" required>
+					<div class="input-check-wrapper">
+						<input type="email" id="email" class="form-control grey-input ng-class:{'error-input': createAccountCtrl.has_error(createAccountCtrl.form, createAccountCtrl.form.email)}" name="email" ng-model="createAccountCtrl.person.email" required>
+						<i class="ion-checkmark" ng-if="createAccountCtrl.form.email.$valid" ng-cloak></i>
+					</div>
 					<form-errors field="createAccountCtrl.form.email" condition="createAccountCtrl.has_error(createAccountCtrl.form, createAccountCtrl.form.email)"></form-errors>
 				</div>
 				<div class="row">
 					<label for="password">Set your password</label>
-					<input type="password" id="password" class="form-control grey-input password ng-class:{'error-input':createAccountCtrl.has_error(createAccountCtrl.form, createAccountCtrl.form.password)}" name="password" ng-model="createAccountCtrl.person.password" ng-minlength="6" required>
+					<div class="input-check-wrapper">
+						<input type="password" id="password" class="form-control grey-input password ng-class:{'error-input':createAccountCtrl.has_error(createAccountCtrl.form, createAccountCtrl.form.password)}" name="password" ng-model="createAccountCtrl.person.password" ng-minlength="6" required>
+						<i class="ion-checkmark" ng-if="createAccountCtrl.form.password.$valid" ng-cloak></i>
+					</div>
 					<form-errors field="createAccountCtrl.form.password" condition="createAccountCtrl.has_error(createAccountCtrl.form, createAccountCtrl.form.password)"></form-errors>
 				</div>
 				<div class="row">
 					<label for="password_confirm">Repeat password</label>
-					<input type="password" id="password_confirm" class="form-control grey-input password ng-class:{'error-input': createAccountCtrl.has_error(createAccountCtrl.form, createAccountCtrl.form.password_confirm) && createAccountCtrl.form.password_confirm.$error.same}" name="password_confirm" ng-model="createAccountCtrl.password_confirm" required>
+					<div class="input-check-wrapper">
+						<input type="password" id="password_confirm" class="form-control grey-input password ng-class:{'error-input': createAccountCtrl.has_error(createAccountCtrl.form, createAccountCtrl.form.password_confirm) && createAccountCtrl.form.password_confirm.$error.same}" name="password_confirm" ng-model="createAccountCtrl.password_confirm" required>
+						<i class="ion-checkmark" ng-if="!createAccountCtrl.form.password_confirm.$pristine && !createAccountCtrl.form.password_confirm.$error.same" ng-cloak></i>
+					</div>
 					<div ng-show="createAccountCtrl.has_error(createAccountCtrl.form, createAccountCtrl.form.password_confirm) && createAccountCtrl.form.password_confirm.$error.same" tdv-comparator value1="{{createAccountCtrl.person.password}}" value2="{{createAccountCtrl.password_confirm}}" result="createAccountCtrl.form.password_confirm.$error.same">
 						<form-messages field="createAccountCtrl.form.password_confirm"></form-messages>
 					</div>
