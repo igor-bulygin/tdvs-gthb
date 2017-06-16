@@ -76,7 +76,7 @@ class PersonMedia extends EmbedModel
 				]
 			],
 			[
-				['header', 'header_cropped', 'profile', 'profile_cropped', 'photos'],
+				['header', 'header_cropped', 'profile', 'profile_cropped'],
 				'required',
 				'on' => [
 					Person::SCENARIO_DEVISER_UPDATE_PROFILE,
