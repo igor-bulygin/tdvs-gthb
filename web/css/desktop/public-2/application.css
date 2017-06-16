@@ -740,6 +740,9 @@ a, a:hover, a:focus {
   .black-form .grey-input:-ms-input-placeholder {
     color: #ffffff;
     text-transform: uppercase; }
+  .black-form .grey-input.grey-textarea {
+    padding: 20px;
+    height: 100px; }
 
 .login-title {
   margin-top: 20px;
@@ -805,6 +808,39 @@ input:-webkit-autofill {
 input:-webkit-autofill:focus {
   -webkit-box-shadow: 0 0 0 50px grey inset;
   -webkit-text-fill-color: white; }
+
+.black-form-select {
+  width: 100% !important; }
+  .black-form-select .btn {
+    font-weight: bold;
+    height: 48px !important;
+    color: #e9e9e9;
+    font-size: 18px;
+    padding: 0 0 0 30px;
+    background-color: rgba(147, 147, 147, 0.5);
+    border: 1px solid #585656;
+    border-radius: 20px 20px 20px 20px !important;
+    -webkit-border-radius: 20px 20px 20px 20px !important;
+    -moz-border-radius: 20px 20px 20px 20px !important; }
+    .black-form-select .btn .caret {
+      border-top: 6px dashed;
+      border-top: 6px solid \9;
+      border-right: 6px solid transparent;
+      border-left: 6px solid transparent;
+      right: 25px !important; }
+  .black-form-select.open > .dropdown-toggle.btn-default {
+    color: #e9e9e9;
+    background-color: rgba(147, 147, 147, 0.5) important; }
+  .black-form-select .dropdown-menu {
+    width: 100% !important;
+    margin-top: 0 !important; }
+
+.text-angular-black .ta-scroll-window.form-control {
+  color: #e9e9e9;
+  font-size: 18px;
+  padding: 0 0 0 30px;
+  background-color: rgba(147, 147, 147, 0.5);
+  border: 1px solid #585656; }
 
 /* Awesome Bootstrap Checkbox*/
 .checkbox {
