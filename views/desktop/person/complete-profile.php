@@ -117,8 +117,11 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 			<?php } ?>
 			<hr class="separator-30-50">
 			<div class="row">
-				<div class="ng-class:{'error-input': completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.profile)}" ngf-select ngf-accept="'image/*'" ngf-pattern="'image/*'" ng-model="completeProfileCtrl.profile" name="profile" required>
-					<h4><i class="fa fa-camera"></i> Upload profile photo</h4>
+				<div class="upload-photo-wrapper ng-class:{'error-input': completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.profile)}" ngf-select ngf-accept="'image/*'" ngf-pattern="'image/*'" ng-model="completeProfileCtrl.profile" name="profile" required>
+					<h4>
+						<i class="fa fa-camera"></i>
+						<span>Upload profile photo</span>
+					</h4>
 					<p ng-if="!completeProfileCtrl.profile_cropped">The profile photo cannot be left blank. </p>
 				</div>
 				<div class="crop-modal" ng-if="completeProfileCtrl.profile" ng-cloak>
@@ -126,11 +129,32 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 				</div>
 			</div>
 			<div class="row">
-				<div class="ng-class:{'error-input': completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.header)}" ngf-select ngf-accept="'image/*'" ngf-pattern="'image/*'" ng-model="completeProfileCtrl.header" name="header" required>
-					<h4><i class="fa fa-camera"></i> Upload cover photo</h4>
+				<div class="outter-border">
+					<div class="inner-square">
+						<div class="inner-circle">
+							Please upload a<br/>profile photo
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="upload-photo-wrapper ng-class:{'error-input': completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.header)}" ngf-select ngf-accept="'image/*'" ngf-pattern="'image/*'" ng-model="completeProfileCtrl.header" name="header" required>
+					<h4>
+						<i class="fa fa-camera"></i>
+						<span>Upload cover photo</span>
+					</h4>
 				</div>
 				<div class="crop-modal" ng-if="completeProfileCtrl.header" ng-cloak>
 					<ui-cropper image="completeProfileCtrl.header_crop" area-type="{{completeProfileCtrl.crop_options.header.area_type}}" chargement="'Loading'" aspect-ratio="completeProfileCtrl.crop_options.header.aspect_ratio" init-max-area="true" result-image="completeProfileCtrl.header_cropped" result-image-size="completeProfileCtrl.crop_options.header.size" result-image-format="'image/jpeg'" area-min-size="20" result-image-quality="0.5"></ui-cropper>
+				</div>
+			</div>
+			<div class="row">
+				<div class="outter-border">
+					<div class="inner-square">
+						<div class="inner-rectangle">
+							Please upload a<br/>profile photo
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="row">
