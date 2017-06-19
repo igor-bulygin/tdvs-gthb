@@ -41,11 +41,15 @@ class PersonController extends AppPrivateController
 			throw new UnauthorizedHttpException();
 		}
 
-		$newAccountState = Yii::$app->request->post('account_state');
+		$newAccountState = Yii::$app->request->post('account_state', $person->account_state);
 		$this->checkDeviserAccountState($person, $newAccountState); // check for allowed new account state only
 
-		$person->setScenario($this->getScenarioFromRequest($person)); // safe and required attributes are related with scenario
-		if ($person->load(Yii::$app->request->post(), '') && $person->validate(array_keys(Yii::$app->request->post()))) {
+		// only validate received fields (only if we are not changing the state)
+		$validateFields = $person->account_state == $newAccountState ? array_keys(Yii::$app->request->post()) : null;
+
+		$person->setScenario($this->getScenarioFromRequest($person));
+
+		if ($person->load(Yii::$app->request->post(), '') && $person->validate($validateFields)) {
 
 			$person->save(false);
 
@@ -147,7 +151,7 @@ class PersonController extends AppPrivateController
 					}
 					break;
 				case Person::ACCOUNT_STATE_ACTIVE:
-					if ($accountState != Person::ACCOUNT_STATE_ACTIVE) {
+					if (!in_array($accountState, [Person::ACCOUNT_STATE_ACTIVE])) {
 						throw new BadRequestHttpException('Invalid account state');
 					}
 					break;
