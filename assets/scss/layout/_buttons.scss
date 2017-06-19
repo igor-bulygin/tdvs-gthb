@@ -121,7 +121,24 @@
 		padding-top: 0px;
 		font-size: 36px;
 	}
+	.big-btn-message{
+		position: absolute;
+		font-family: $font-family--regular;
+		text-align: center;
+		text-transform: none;
+		font-weight: 300;
+		font-size: 18px;
+		 top: 83px;
+    	left: 166px;
+		display: none;
+	}
+	&:hover{
+		.big-btn-message{
+			display: block;
+		}
+	}
 }
+
 .regular-btn{
 	height: 62px;
   	@include border-radius(5px,5px,5px,5px);

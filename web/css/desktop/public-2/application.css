@@ -635,6 +635,18 @@ a, a:hover, a:focus {
     border-radius: 90px;
     padding-top: 0px;
     font-size: 36px; }
+  .big-btn .big-btn-message {
+    position: absolute;
+    font-family: "Roboto Condensed", sans-serif;
+    text-align: center;
+    text-transform: none;
+    font-weight: 300;
+    font-size: 18px;
+    top: 83px;
+    left: 166px;
+    display: none; }
+  .big-btn:hover .big-btn-message {
+    display: block; }
 
 .regular-btn {
   height: 62px;
@@ -5291,6 +5303,30 @@ input[type="radio"] .styled:checked + label::after {
   background-color: #e9e9e9;
   padding: 2px 12px;
   max-width: 175px; }
+
+.products-added-wrapper {
+  margin: 0 auto;
+  max-width: 620px; }
+  .products-added-wrapper .product-added-item {
+    position: relative;
+    width: 112px; }
+    .products-added-wrapper .product-added-item .edit-product {
+      color: #e9e9e9;
+      font-size: 18px;
+      top: 4px;
+      right: 30px;
+      position: absolute; }
+    .products-added-wrapper .product-added-item .remove-product {
+      color: #e9e9e9;
+      cursor: pointer;
+      position: absolute;
+      right: 5px;
+      top: 5px;
+      font-size: 18px; }
+    .products-added-wrapper .product-added-item .product-image {
+      border-radius: 8px 8px 8px 8px !important;
+      -webkit-border-radius: 8px 8px 8px 8px !important;
+      -moz-border-radius: 8px 8px 8px 8px !important; }
 
 .product-description {
   background-color: #ffffff; }
