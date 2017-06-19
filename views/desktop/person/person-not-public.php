@@ -39,19 +39,19 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 			<div class="row text-center">
 				<a class="big-btn btn btn-default <?=$person->hasShippingSettings() ? 'done' : ''?>" href="<?=$person->getSettingsLink('shipping')?>">
 					Add shipping prices
-					<?php if ($person->hasShippingSettings()) { ?><i class="fa fa-check"></i> <?php } ?>
+					<?php if ($person->hasShippingSettings()) { ?><i class="red-check ion-checkmark"></i> <?php } ?>
 				</a>
 			</div>
 			<div class="row text-center">
 				<a class="big-btn btn btn-default <?=$person->hasStripeInfo() ? 'done' : ''?>" href="<?=$person->getSettingsLink('connect-stripe')?>">
 					Add a bank account
-					<?php if ($person->hasStripeInfo()) { ?><i class="fa fa-check"></i> <?php } ?>
+					<?php if ($person->hasStripeInfo()) { ?><i class="red-check ion-checkmark"></i> <?php } ?>
 				</a>
 			</div>
 			<div class="row text-center">
 				<a class="big-btn btn btn-default <?=$person->hasPublishedProducts() ? 'done' : ''?>" href="<?=$person->getCreateWorkLink()?>">
 					Add a product
-					<?php if ($person->hasPublishedProducts()) { ?><i class="fa fa-check"></i> <?php } ?>
+					<?php if ($person->hasPublishedProducts()) { ?><i class="red-check ion-checkmark"></i> <?php } ?>
 				</a>
 			</div>
 

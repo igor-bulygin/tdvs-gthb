@@ -621,7 +621,20 @@ a, a:hover, a:focus {
   font-weight: bold;
   font-family: "Roboto Condensed", sans-serif;
   text-transform: uppercase;
-  border: none; }
+  border: none;
+  position: relative; }
+  .big-btn .red-check {
+    background-color: #c91c39;
+    color: #ffffff;
+    width: 52px;
+    height: 52px;
+    display: block;
+    position: absolute;
+    right: -70px;
+    top: 15px;
+    border-radius: 90px;
+    padding-top: 0px;
+    font-size: 36px; }
 
 .regular-btn {
   height: 62px;
