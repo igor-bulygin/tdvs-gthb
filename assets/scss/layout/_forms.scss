@@ -206,9 +206,11 @@ input:-webkit-autofill:focus {
 	}
 }
 .outter-border{
+	cursor: pointer;
 	margin: 20px 0 40px;
 	background-color: rgba(147, 147, 147, 0.5);
 	padding: 20px 20px 40px;
+	border: 1px solid #585656;
 	@include border-radius(20px,20px,20px,20px);
 	.inner-square{
 		background-color: $dark_grey;
