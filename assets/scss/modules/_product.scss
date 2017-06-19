@@ -248,3 +248,29 @@
 		max-width: 175px;
 	}
 }
+.products-added-wrapper{
+	margin: 0 auto;
+	max-width: 620px;
+	.product-added-item{
+		position: relative;
+		width: 112px;
+		.edit-product{
+			color: $background_grey;
+			font-size: 18px;
+			top: 4px;
+			right: 30px;
+			position: absolute;
+		}
+		.remove-product{
+			color: $background_grey;
+			cursor: pointer;
+			position: absolute;
+			right: 5px;
+			top: 5px;
+			font-size: 18px;
+		}
+		.product-image{
+			@include border-radius(8px,8px,8px,8px);
+		}
+	}
+}
