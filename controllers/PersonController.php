@@ -86,9 +86,16 @@ class PersonController extends CController
 			$this->redirect($person->getMainLink());
 		}
 
+		if ($person->isDeviser()) {
+			$products = Product::findSerialized(['deviser_id' => $person->short_id]);
+		} else {
+			$products = [];
+		}
+
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("@app/views/desktop/person/person-not-public", [
 			'person' => $person,
+			'products' => $products,
 		]);
 	}
 

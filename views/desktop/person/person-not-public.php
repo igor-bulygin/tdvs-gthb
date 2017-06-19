@@ -1,11 +1,13 @@
 <?php
 use app\assets\desktop\deviser\PersonNotPublicAsset;
 use app\components\PersonHeader;
+use app\helpers\Utils;
 use app\models\Person;
 
 PersonNotPublicAsset::register($this);
 
 /** @var Person $person */
+/** @var \app\models\Product[] $products */
 
 $this->title = 'Almost done! ' . $person->getName() . ' - Todevise';
 $this->params['person'] = $person;
@@ -52,6 +54,25 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 					<?php if ($person->hasPublishedProducts()) { ?><i class="fa fa-check"></i> <?php } ?>
 				</a>
 			</div>
+
+			<div class="row">
+				<?php foreach ($products as $i => $product) { ?>
+					<div class="col-lg-3">
+						<?php if ($person->isPersonEditable()) { ?>
+							<span class="close-product-icon">
+								<a class="edit-product-icon" href="<?= $product->getEditLink()?>" title="Edit work">
+									<i class="ion-edit"></i>
+								</a>
+								<i class="ion-android-close"></i>
+							</span>
+						<?php } ?>
+						<a href="<?= $product->getViewLink() ?>">
+							<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getMainImage())->resize(112, 112) ?>">
+						</a>
+					</div>
+				<?php } ?>
+			</div>
+
 		<?php } ?>
 		<div class="row mb-100 text-center">
 			<button class="regular-btn btn btn-default disabled" ng-click="personNotPublicCtrl.makeProfilePublic()" <?=!$person->canPublishProfile() ? ' disabled ' : ''?>>Make profile public</button>
