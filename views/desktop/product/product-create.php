@@ -16,7 +16,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 
 ?>
 <div ng-controller="createProductCtrl as createProductCtrl">
-	<div id="newProductHeader" class="new-product-header ng-class:{'purple': createProductCtrl.errors}" data-spy="affix" data-offset-top="120">
+	<div id="newProductHeader" class="new-product-header ng-class:{'purple': createProductCtrl.errors}" data-spy="affix" data-offset-top="120" ng-if="createProductCtrl.isPublicProfile">
 		<div class="container relative">
 			<div class="pull-left">
 				<a class="back-link" ng-href="{{createProductCtrl.link_profile}}"> &lt go back to your profile</a>

@@ -6,6 +6,7 @@
 		var vm = this;
 		vm.save = save;
 		vm.saving=false;
+		vm.isPublicProfile=(person.account_state==="active");
 		function init() {
 			vm.product = {};
 			vm.product.slug = {};
