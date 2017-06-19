@@ -121,10 +121,11 @@
 					</div>
 					<div class="mt-50" ng-if="productVariationsCtrl.made_to_order_selected" ng-cloak>
 						<div class="col-md-2">
-							<input type="number" name="madetoorder" class="form-control rounded-number-input col-md-1 ng-class:{'error-input': !productVariationsCtrl.product['madetoorder'].value && productVariationsCtrl.required_madetoorder}" ng-model="productVariationsCtrl.product['madetoorder'].value" ng-min="0" ng-required="true">
+							<input type="number" name="madetoorder" class="form-control rounded-number-input col-md-1 ng-class:{'error-input': !productVariationsCtrl.product['madetoorder'].value && productVariationsCtrl.required_madetoorder}" ng-model="productVariationsCtrl.product['madetoorder'].value" ng-min="0" ng-required="true">							
 						</div>
 						<label class="little-label-number" for="madetoorder">days needed to manufacture this work</label>
 					</div>
+					<span ng-if="!productVariationsCtrl.product['madetoorder'].value&&productVariationsCtrl.required_madetoorder" class="error-text">Days value must be greater than 0</span>
 				</div>
 				<div class="row col-md-12" id="bespoke">
 					<div class="col-md-4 pad-about">
@@ -144,14 +145,14 @@
 							</label>
 						</div>
 					</div>
-					<div class="mt-50 bespoke-wraper" ng-if="productVariationsCtrl.bespoke_selected" ng-cloak>
-						<p>What information do you need from the customer before manufacturing this work?</p>
-						<ol class="nya-bs-select about-edit-select title-lang-btn manufacturing-lang" ng-model="productVariationsCtrl.bespoke_language">
+					<div class="mt-50 bespoke-wraper col-md-12" ng-if="productVariationsCtrl.bespoke_selected" ng-cloak>
+						<p class="col-xs-12">What information do you need from the customer before manufacturing this work?</p>						
+						<textarea name="bespoke_text" id="bespoke_text" cols="30" rows="10" class="form-control manufacturing-textarea col-md-10 ng-class:{'error-input': productVariationsCtrl.textFieldValidation(productVariationsCtrl.product.bespoke.value, productVariationsCtrl.required_bespoke)}" ng-model="productVariationsCtrl.product.bespoke.value[productVariationsCtrl.bespoke_language]"></textarea>
+						<ol class="nya-bs-select about-edit-select title-lang-btn manufacturing-lang col-md-2" ng-model="productVariationsCtrl.bespoke_language">
 							<li nya-bs-option="language in productVariationsCtrl.languages" data-value="language.code" deep-watch="true">
 								<a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
 							</li>
 						</ol>
-						<textarea name="bespoke_text" id="bespoke_text" cols="30" rows="10" class="form-control manufacturing-textarea ng-class:{'error-input': productVariationsCtrl.textFieldValidation(productVariationsCtrl.product.bespoke.value, productVariationsCtrl.required_bespoke)}" ng-model="productVariationsCtrl.product.bespoke.value[productVariationsCtrl.bespoke_language]"></textarea>
 					</div>
 				</div>
 			</div>
