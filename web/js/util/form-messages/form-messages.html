@@ -38,6 +38,12 @@
 		<div ng-switch-when="text_biography">
 			<div ng-message="required">The about section cannot be blank.</div>
 		</div>
+		<div ng-switch-when="profile_photo">
+			<div ng-message="required">Please upload a profile photo.</div>
+		</div>
+		<div ng-switch-when="header_photo">
+			<div ng-message="required">Please upload a cover photo.</div>
+		</div>
 		<div ng-switch-default>
 			<div ng-message="required">Please fill in this field.</div>
 			<div ng-message="same">The passwords don't match.</div>
