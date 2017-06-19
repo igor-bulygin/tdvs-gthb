@@ -55,7 +55,7 @@ class ProductController extends AppPrivateController
 		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_OWNER);
 		$product = new Product();
 
-		$product->setScenario($this->getDetermineScenario($product));
+		$product->setScenario($this->getScenarioFromRequest($product));
 		if ($product->load(Yii::$app->request->post(), '') && $product->validate()) {
 
 			$product->save(false);
@@ -77,8 +77,15 @@ class ProductController extends AppPrivateController
 			throw new BadRequestHttpException('Product not found');
 		}
 
-		$product->setScenario($this->getDetermineScenario($product));
-		if ($product->load(Yii::$app->request->post(), '') && $product->validate(array_keys(Yii::$app->request->post()))) {
+		$newProductState = Yii::$app->request->post('product_state', $product->product_state);
+		$this->checkProductState($product, $newProductState); // check for allowed new account state only
+
+		// only validate received fields (only if we are not changing the state)
+		$validateFields = $product->product_state == $newProductState ? array_keys(Yii::$app->request->post()) : null;
+
+		$product->setScenario($this->getScenarioFromRequest($product));
+
+		if ($product->load(Yii::$app->request->post(), '') && $product->validate($validateFields)) {
 
 			$product->save(false);
 
@@ -111,7 +118,7 @@ class ProductController extends AppPrivateController
 	 * @return string
 	 * @throws BadRequestHttpException
 	 */
-	private function getDetermineScenario(Product $product)
+	private function getScenarioFromRequest(Product $product)
 	{
 		// get scenario to use in validations, from request
 		$product_state = Yii::$app->request->post('product_state', Product::PRODUCT_STATE_DRAFT);
@@ -126,5 +133,32 @@ class ProductController extends AppPrivateController
 		}
 
 		return $scenario;
+	}
+
+	/**
+	 * Logic for assign new product state.
+	 * Only allow change state to "active", otherwise, raise an exception
+	 *
+	 * @param Product $product
+	 * @param $productState
+	 *
+	 * @throws BadRequestHttpException
+	 */
+	private function checkProductState(Product $product, $productState)
+	{
+		if (!empty($productState)) {
+			switch ($product->product_state) {
+				case Product::PRODUCT_STATE_DRAFT:
+					if (!in_array($productState, [Product::PRODUCT_STATE_DRAFT, Product::PRODUCT_STATE_ACTIVE])) {
+						throw new BadRequestHttpException('Invalid product state');
+					}
+					break;
+				case Product::PRODUCT_STATE_ACTIVE:
+					if (!in_array($productState, [Product::PRODUCT_STATE_ACTIVE])) {
+						throw new BadRequestHttpException('Invalid product state');
+					}
+					break;
+			}
+		}
 	}
 }
