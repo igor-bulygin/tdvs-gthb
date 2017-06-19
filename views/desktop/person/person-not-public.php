@@ -66,7 +66,7 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 									<a class="edit-product" href="<?= $product->getEditLink()?>" title="Edit work">
 										<i class="ion-edit"></i>
 									</a>
-									<i class="remove-product ion-close-circled"></i>
+									<i class="remove-product ion-close-circled" title="Delete work" ng-click="personNotPublicCtrl.open_modal_delete('<?= $product->short_id ?>')"></i>
 								
 							<?php } ?>
 							<a href="<?= $product->getViewLink() ?>">
@@ -80,7 +80,21 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 
 		<?php } ?>
 		<div class="row mb-100 text-center">
-			<button class="regular-btn btn btn-default disabled" ng-click="personNotPublicCtrl.makeProfilePublic()" <?=!$person->canPublishProfile() ? ' disabled ' : ''?>>Make profile public</button>
+			<button class="regular-btn btn btn-default <?=!$person->canPublishProfile() ? ' disabled ' : ''?>" ng-click="personNotPublicCtrl.makeProfilePublic()" <?=!$person->canPublishProfile() ? ' disabled ' : ''?>>Make profile public</button>
 		</div>
 	</div>
+	<script type="text/ng-template" id="modalDeleteProduct.html">
+		<div class="modal-delete">
+			<div class="modal-header">
+				<h3 class="modal-title"></h3>
+			</div>
+			<div class="modal-body">
+				<p>Are you sure you want to delete this work?</p>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-default btn-green pull-left" ng-click="modalDeleteProductCtrl.close()">Cancel</button>
+				<button class="btn btn-default pull-right" ng-click="modalDeleteProductCtrl.ok()">DELETE</button>
+			</div>
+		</div>
+	</script>
 </div>

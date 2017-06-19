@@ -56,7 +56,7 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 			<?php if($person->isDeviser()) {?>
 				<div class="row">
 					<label for="categories">Field</label>
-					<div>
+					<div class="ng-class:{'error-input': completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.categories)}">
 						<ol class="black-form-select work-field nya-bs-select" ng-model="completeProfileCtrl.person.categories" selected-text-format="count>4" ng-cloak ng-if="completeProfileCtrl.categories" name="categories" required multiple>
 							<li nya-bs-option="category in completeProfileCtrl.categories" data-value="category.id" multiple deep-watch="true">
 								<a href="#"><span ng-bind="category.name"></span> <span class="check-mark glyphicon glyphicon-ok"></span></a>
