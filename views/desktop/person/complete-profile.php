@@ -46,7 +46,7 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 					<input type="text" name="city" class="form-control grey-input ng-class:{'error-input': completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.city)}" ng-model="completeProfileCtrl.city" ng-model-options="{debounce: 500}" ng-change="completeProfileCtrl.searchPlace(completeProfileCtrl.city)" required>
 					<form-errors field="completeProfileCtrl.form.city" condition="completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.city)"></form-errors>
 					<div ng-if="completeProfileCtrl.showCities" ng-cloak>
-						<ul class="city-selection">
+						<ul class="city-selection-center">
 							<li ng-repeat="city in completeProfileCtrl.cities"><span ng-click="completeProfileCtrl.selectCity(city)" style="cursor:pointer;">{{city.city}} - {{city.country_name}}</span></li>
 							<li><img src="/imgs/powered_by_google_on_white_hdpi.png" class="powered-google" title="Powered by Google"></li>
 						</ul>
