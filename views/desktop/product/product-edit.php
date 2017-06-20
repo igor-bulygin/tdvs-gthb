@@ -32,9 +32,9 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 		<div id="productSaved" class="success-message-120" ng-if="editProductCtrl.progressSaved" ng-cloak><p class="text-center">Product saved</p></div>
 		<div class="container">
 			<product-basic-info product="editProductCtrl.product" categories="editProductCtrl.allCategories" languages="editProductCtrl.languages"></product-basic-info>
-			<product-more-details product="editProductCtrl.product" languages="editProductCtrl.languages"></product-more-details>
 			<product-variations product="editProductCtrl.product" categories="editProductCtrl.allCategories" languages="editProductCtrl.languages" tags="editProductCtrl.tags" sizecharts="editProductCtrl.sizecharts" metric="editProductCtrl.metric" deviser="editProductCtrl.deviser" papertypes="editProductCtrl.papertypes" fromedit="editProductCtrl.from_edit"></product-variations>
 			<product-price-stock product="editProductCtrl.product" categories="editProductCtrl.allCategories" tags="editProductCtrl.tags" papertypes="editProductCtrl.papertypes" metric="editProductCtrl.metric" fromedit="editProductCtrl.from_edit"></product-price-stock>
+			<product-more-details product="editProductCtrl.product" languages="editProductCtrl.languages"></product-more-details>
 			<div class="text-center">
 				<button class="btn btn-default btn-green" ng-click="createProductCtrl.save('product_state_active')" ng-disabled="createProductCtrl.disable_save_buttons">Publish work</button>
 			</div>
