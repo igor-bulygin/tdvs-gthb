@@ -136,7 +136,6 @@
 			}
 			
 			function onSaveProductSuccess(data) {
-				vm.saving=false;
 				vm.disable_save_buttons = false;
 				vm.product.id = angular.copy(data.id);
 				if(state==='product_state_draft') {
@@ -145,6 +144,7 @@
 					vm.disable_save_buttons = false;
 					product_published();
 				}
+				vm.saving=false;
 			}
 			
 			function onSaveProductError(err) {
