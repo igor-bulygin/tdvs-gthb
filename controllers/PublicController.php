@@ -163,6 +163,12 @@ class PublicController extends CController
 		return $this->render("about-us");
 	}
 
+	public function actionElements()
+	{
+		$this->layout = '/desktop/public-2.php';
+		return $this->render("elements");
+	}
+
 	/**
 	 * @deprecated
 	 * @return string
