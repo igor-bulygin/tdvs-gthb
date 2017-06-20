@@ -237,6 +237,10 @@ body {
   font-family: "Univers Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
   background-color: #1C1919; }
 
+.elements-wrapper {
+  background-color: #ffffff;
+  min-height: 2000px; }
+
 h2 {
   font-family: "Univers Ultra Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-transform: uppercase;
