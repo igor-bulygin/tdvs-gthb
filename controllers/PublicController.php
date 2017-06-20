@@ -165,7 +165,7 @@ class PublicController extends CController
 
 	public function actionElements()
 	{
-		$this->layout = '/desktop/public-2.php';
+		$this->layout = '/desktop/empty-layout.php';
 		return $this->render("elements");
 	}
 
