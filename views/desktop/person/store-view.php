@@ -1,5 +1,5 @@
 <?php
-use app\assets\desktop\pub\StoreViewAsset;
+use app\assets\desktop\deviser\StoreViewAsset;
 use app\components\PersonHeader;
 use app\components\PersonMenu;
 use app\helpers\Utils;

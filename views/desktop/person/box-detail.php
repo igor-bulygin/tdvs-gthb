@@ -1,5 +1,5 @@
 <?php
-use app\assets\desktop\pub\BoxesViewAsset;
+use app\assets\desktop\deviser\BoxesViewAsset;
 use app\helpers\Utils;
 use app\models\Person;
 use yii\helpers\Json;

@@ -1,9 +1,9 @@
 <?php
-namespace app\assets\desktop\pub;
+namespace app\assets\desktop\deviser;
 
 use yii\web\AssetBundle;
 
-class LovedViewAsset extends AssetBundle {
+class BoxesViewAsset extends AssetBundle {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [];

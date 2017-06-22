@@ -1,8 +1,8 @@
 <?php
-use app\assets\desktop\pub\BecomeDeviserAsset;
+use app\assets\desktop\pub\PublicCommonAsset;
 use app\models\Person;
 
-BecomeDeviserAsset::register($this);
+PublicCommonAsset::register($this);
 
 /** @var Person $deviser */
 

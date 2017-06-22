@@ -1,7 +1,7 @@
 <?php
-use app\assets\desktop\pub\Index2Asset;
+use app\assets\desktop\pub\PublicCommonAsset;
 
-Index2Asset::register($this);
+PublicCommonAsset::register($this);
 
 $this->title = 'Todevise / About us';
 

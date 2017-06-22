@@ -1,5 +1,5 @@
 <?php
-namespace app\assets\desktop\pub;
+namespace app\assets\desktop\deviser;
 
 use yii\web\AssetBundle;
 
@@ -12,6 +12,5 @@ class StoryDetailAsset extends AssetBundle {
 	];
 	public $depends = [
 		'app\assets\desktop\pub\PublicCommonAsset',
-		'app\assets\libs\angularBootstrapAsset',
 	];
 }

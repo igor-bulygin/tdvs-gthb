@@ -1,5 +1,5 @@
 <?php
-namespace app\assets\desktop\pub;
+namespace app\assets\desktop\deviser;
 
 use yii\web\AssetBundle;
 

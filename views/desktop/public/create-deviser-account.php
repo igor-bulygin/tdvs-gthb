@@ -1,10 +1,10 @@
 <?php
-use app\assets\desktop\pub\SignupAsset;
+use app\assets\desktop\pub\PublicCommonAsset;
 use app\models\Invitation;
 use yii\helpers\Json;
 use yii\helpers\Url;
 
-SignupAsset::register($this);
+PublicCommonAsset::register($this);
 
 /** @var Invitation $invitation */
 

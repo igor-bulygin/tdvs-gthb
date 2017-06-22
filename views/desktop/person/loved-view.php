@@ -1,5 +1,5 @@
 <?php
-use app\assets\desktop\pub\LovedViewAsset;
+use app\assets\desktop\deviser\LovedViewAsset;
 use app\components\PersonHeader;
 use app\components\PersonMenu;
 use app\helpers\Utils;

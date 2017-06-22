@@ -1,5 +1,5 @@
 <?php
-use app\assets\desktop\pub\BoxesViewAsset;
+use app\assets\desktop\deviser\BoxesViewAsset;
 use app\components\PersonHeader;
 use app\components\PersonMenu;
 use app\models\Person;

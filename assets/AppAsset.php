@@ -12,11 +12,12 @@ class AppAsset extends AssetBundle {
 		'css/bootstrap-patches.css',
 	];
 	public $js = [
-		'js/global.js'
+		'js/global.functions.js'
 	];
 	public $depends = [
 		'yii\web\YiiAsset',
 		'app\assets\libs\bootstrapAsset',
 		'app\assets\libs\angularAsset',
+		'app\assets\libs\angularBootstrapAsset',
 	];
 }

@@ -1,7 +1,7 @@
 <?php
-use app\assets\desktop\pub\SignupAsset;
+use app\assets\desktop\pub\PublicCommonAsset;
 
-SignupAsset::register($this);
+PublicCommonAsset::register($this);
 
 $this->title = 'Create an account - Todevise';
 

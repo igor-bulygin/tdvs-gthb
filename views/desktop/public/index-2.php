@@ -1,9 +1,9 @@
 <?php
-use app\assets\desktop\pub\Index2Asset;
+use app\assets\desktop\pub\PublicCommonAsset;
 use app\helpers\Utils;
 use app\models\Person;
 
-Index2Asset::register($this);
+PublicCommonAsset::register($this);
 
 $this->title = 'Todevise / Home';
 

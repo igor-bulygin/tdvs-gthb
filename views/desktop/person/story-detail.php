@@ -3,7 +3,7 @@ use app\helpers\Utils;
 use app\models\Person;
 use yii\helpers\Json;
 
-app\assets\desktop\pub\StoryDetailAsset::register($this);
+app\assets\desktop\deviser\StoryDetailAsset::register($this);
 
 /** @var Person $person */
 /** @var \app\models\Story $story */
