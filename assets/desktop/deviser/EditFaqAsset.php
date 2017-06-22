@@ -8,7 +8,7 @@ class EditFaqAsset extends AssetBundle {
 	public $baseUrl = '@web';
 	public $css = [];
 	public $js = [
-		'js/desktop/deviser/edit-faq.js',
+		'js/desktop/person/edit-faq.js',
 	];
 	public $depends = [
 		'app\assets\desktop\deviser\IndexAsset',

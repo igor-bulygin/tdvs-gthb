@@ -8,7 +8,7 @@ class StoreViewAsset extends AssetBundle {
     public $baseUrl = '@web';
     public $css = [];
     public $js = [
-    	'js/desktop/deviser/store-grid.js',
+    	'js/desktop/person/store-grid.js',
     ];
 	public $depends = [
 		'app\assets\desktop\pub\PublicCommonAsset',
