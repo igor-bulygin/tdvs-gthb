@@ -1,10 +1,10 @@
 <?php
-use app\assets\desktop\deviser\StoriesViewAsset;
+use app\assets\desktop\deviser\IndexStoryAsset;
 use app\components\PersonHeader;
 use app\components\PersonMenu;
 use app\models\Person;
 
-StoriesViewAsset::register($this);
+IndexStoryAsset::register($this);
 
 
 /** @var Person $person */

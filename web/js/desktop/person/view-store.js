@@ -50,7 +50,7 @@
 	}
 
 	angular
-		.module('todevise')
+		.module('person')
 		.controller('modalDeleteProductCtrl', modalController)
 		.controller('viewStoreCtrl', controller);
 

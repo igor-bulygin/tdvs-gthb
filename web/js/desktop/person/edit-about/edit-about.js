@@ -259,7 +259,7 @@
 		controllerAs: 'editAboutCtrl',
 	}
 
-	angular.module('todevise')
+	angular.module('person')
 		.component('editAbout', component);
 
 }())

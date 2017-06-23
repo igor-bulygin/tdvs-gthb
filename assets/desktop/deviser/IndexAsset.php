@@ -8,13 +8,9 @@ class IndexAsset extends AssetBundle {
 	public $baseUrl = '@web';
 	public $js = [
 		'js/desktop/person/person.js',
-		'js/desktop/person/view-store.js',
 	];
 	public $depends = [
-		'app\assets\desktop\pub\PublicCommonAsset',
-		'app\assets\libs\angularAsset',
-		'app\assets\libs\angularToastrAsset',
-		'app\assets\libs\angularBootstrapAsset',
+		'app\assets\desktop\GlobalAsset',
 		'app\assets\api\ApiAsset',
 		'app\assets\libs\utilAsset',
 		'app\assets\libs\nyaBootstrapSelectAsset',

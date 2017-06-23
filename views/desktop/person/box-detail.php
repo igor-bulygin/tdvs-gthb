@@ -1,10 +1,10 @@
 <?php
-use app\assets\desktop\deviser\BoxesViewAsset;
+use app\assets\desktop\deviser\GlobalAsset;
 use app\helpers\Utils;
 use app\models\Person;
 use yii\helpers\Json;
 
-BoxesViewAsset::register($this);
+GlobalAsset::register($this);
 
 /** @var Person $person */
 /** @var \app\models\Box $box */

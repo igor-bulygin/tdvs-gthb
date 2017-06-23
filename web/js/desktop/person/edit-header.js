@@ -240,6 +240,6 @@
 	}
 
 	angular
-		.module('todevise')
-		.controller('personHeaderCtrl', controller)
+		.module('person')
+		.controller('personHeaderCtrl', controller);
 }());

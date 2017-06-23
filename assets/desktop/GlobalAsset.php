@@ -12,6 +12,7 @@ class GlobalAsset extends AssetBundle {
 		'css/desktop/public-2/bootstrap-select.min.css',
 	];
 	public $js = [
+		'js/desktop/global.js',
 		'js/desktop/todevise.module.js',
 		'js/desktop/public-2/bootstrap-select.min.js',
 	];

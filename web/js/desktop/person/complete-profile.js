@@ -172,7 +172,7 @@
 	}
 
 	angular
-		.module('todevise')
+		.module('person')
 		.controller('completeProfileCtrl', controller);
 
 }());

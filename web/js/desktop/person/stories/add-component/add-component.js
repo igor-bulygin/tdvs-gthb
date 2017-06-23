@@ -31,7 +31,7 @@
 	}
 
 	angular
-		.module('todevise')
+		.module('person')
 		.component('storyAddComponent', component);
 
 }());

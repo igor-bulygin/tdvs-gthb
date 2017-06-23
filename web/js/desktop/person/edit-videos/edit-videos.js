@@ -144,7 +144,7 @@
 	}
 
 	angular
-	.module('todevise')
+	.module('person')
 	.component('editVideos', component)
 
 }());

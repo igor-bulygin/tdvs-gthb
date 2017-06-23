@@ -1,7 +1,7 @@
 <?php
-use app\assets\desktop\deviser\MakeProfilePublicAsset;
+use app\assets\desktop\deviser\GlobalAsset;
 
-MakeProfilePublicAsset::register($this)
+GlobalAsset::register($this)
 
 ?>
 <div class="top-bar-red ng-class:{'top-bar-violet': makeProfilePublicCtrl.errorsRequired}" ng-controller="makeProfilePublicCtrl as makeProfilePublicCtrl" data-spy="affix" data-offset-top="120">

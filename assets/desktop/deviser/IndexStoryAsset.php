@@ -8,6 +8,9 @@ class IndexStoryAsset extends AssetBundle {
 	public $baseUrl = '@web';
 	public $css = [];
 	public $js = [
+		'js/desktop/person/stories/edit-story.js',
+		'js/desktop/person/stories/detail-story.js',
+		'js/desktop/person/stories/create-story.js',
 		'js/desktop/person/stories/main-title/main-title.js',
 		'js/desktop/person/stories/main-media/main-media.js',
 		'js/desktop/person/stories/text-component/text-component.js',

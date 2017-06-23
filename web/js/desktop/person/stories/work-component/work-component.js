@@ -105,6 +105,6 @@
 	}
 
 	angular
-		.module('todevise')
+		.module('person')
 		.component('storyWorkComponent', component);
 }());

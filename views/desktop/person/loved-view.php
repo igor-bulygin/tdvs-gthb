@@ -1,11 +1,11 @@
 <?php
-use app\assets\desktop\deviser\LovedViewAsset;
+use app\assets\desktop\deviser\GlobalAsset;
 use app\components\PersonHeader;
 use app\components\PersonMenu;
 use app\helpers\Utils;
 use app\models\Person;
 
-LovedViewAsset::register($this);
+GlobalAsset::register($this);
 
 /** @var Person $person */
 /** @var \app\models\Loved[] $loveds */
