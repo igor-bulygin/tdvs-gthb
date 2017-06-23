@@ -927,9 +927,18 @@ input:-webkit-autofill:focus {
     margin-left: 100px !important; }
 
 .black-char-left {
-  color: #939393;
+  position: absolute;
+  right: -170px;
+  top: 37px;
+  color: #e9e9e9;
   margin: -5px 0 0 15px;
   font-family: "Roboto Condensed", sans-serif; }
+  .black-char-left .number {
+    display: block;
+    text-align: center;
+    font-size: 26px; }
+  .black-char-left .text {
+    text-align: center; }
 
 .info-black-areas {
   color: #939393;

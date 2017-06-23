@@ -170,9 +170,20 @@ input:-webkit-autofill:focus {
 	}
 }
 .black-char-left{
-	color: $dark_grey;
+	position: absolute;
+    right: -170px;
+    top: 37px;
+	color: $background_grey;
 	margin: -5px 0 0 15px;
 	font-family: $font-family--regular;
+	.number{
+		display: block;
+		text-align: center;
+		font-size: 26px;
+	}
+	.text{
+		text-align: center;
+	}
 }
 .info-black-areas{
 	color: $dark_grey;
