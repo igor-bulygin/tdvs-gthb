@@ -85,8 +85,8 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 				</ol>
 				<! -- Characters left -->
 				<div class="black-char-left">
-					<span ng-bind="completeProfileCtrl.limit_text_short_description - completeProfileCtrl.person.text_short_description[completeProfileCtrl.description_language].length"></span>
-					<span>Characters left</span>
+					<span class="number" ng-bind="completeProfileCtrl.limit_text_short_description - completeProfileCtrl.person.text_short_description[completeProfileCtrl.description_language].length"></span>
+					<span class="text">Characters left</span>
 				</div>
 				<!-- tooltip -->
 				<?php if($person->isDeviser()) {?>
