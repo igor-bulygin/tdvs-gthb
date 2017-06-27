@@ -27,5 +27,6 @@ class GlobalAsset extends AssetBundle {
 		'app\assets\desktop\product\IndexAsset',
 		'app\assets\desktop\discover\IndexAsset',
 		'app\assets\desktop\settings\IndexAsset',
+		'app\assets\desktop\cart\IndexAsset',
 	];
 }

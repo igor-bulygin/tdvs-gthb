@@ -54,7 +54,7 @@
 	}
 
 	angular
-		.module('todevise')
+		.module('cart')
 		.component('personalInfo', component);
 
 }());

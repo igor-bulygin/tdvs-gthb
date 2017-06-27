@@ -30,7 +30,7 @@
 	}
 
 	angular
-		.module('todevise')
+		.module('cart')
 		.component('cartSummary', component);
 
 }());

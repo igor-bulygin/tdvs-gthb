@@ -1,10 +1,10 @@
 <?php
-use app\assets\desktop\cart\CheckoutAsset;
+use app\assets\desktop\cart\GlobalAsset;
 
 
 /* @var $this yii\web\View */
 
-CheckoutAsset::register($this);
+GlobalAsset::register($this);
 
 $this->title = 'Todevise / Cart';
 ?>

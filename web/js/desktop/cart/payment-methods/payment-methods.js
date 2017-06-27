@@ -100,7 +100,7 @@
 	}
 
 	angular
-		.module('todevise')
+		.module('cart')
 		.component('paymentMethods', component);
 
 }());

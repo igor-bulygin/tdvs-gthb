@@ -1,10 +1,10 @@
 <?php
-use app\assets\desktop\cart\OrderAsset;
+use app\assets\desktop\cart\GlobalAsset;
 
 
 /* @var $this yii\web\View */
 
-OrderAsset::register($this);
+GlobalAsset::register($this);
 
 $this->title = 'Todevise / Your purchase is complete';
 ?>

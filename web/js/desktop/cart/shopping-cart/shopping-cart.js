@@ -34,7 +34,7 @@
 	}
 
 	angular
-		.module('todevise')
+		.module('cart')
 		.component('shoppingCart', component);
 
 }());
