@@ -1707,6 +1707,11 @@ class Person extends CActiveRecord implements IdentityInterface
 	 * @return bool
 	 */
 	public function isCompletedProfile() {
+
+		if ($this->isPublic()) {
+			return true;
+		}
+
 		if ($this->isDeviser()) {
 			return !(
 				empty($this->getName()) ||
