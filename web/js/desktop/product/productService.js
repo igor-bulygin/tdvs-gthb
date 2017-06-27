@@ -137,7 +137,7 @@
 		}
 	}
 
-	angular.module('todevise')
+	angular.module('product')
 		.service('productService', service)
 
 }());

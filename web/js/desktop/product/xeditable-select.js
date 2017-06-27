@@ -32,6 +32,6 @@
 	}
 
 	angular
-		.module('todevise')
+		.module('product')
 		.directive('xeditableSelect', directive);
 }());

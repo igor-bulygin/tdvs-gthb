@@ -333,6 +333,6 @@
 	}
 
 	angular
-		.module('todevise')
+		.module('product')
 		.component('productVariations', component);
 }());

@@ -1,4 +1,4 @@
 (function () {
 	angular
-		.module('todevise', ['header', 'api', 'util', 'toastr', 'box', 'person']);
+		.module('todevise', ['header', 'api', 'util', 'toastr', 'box', 'person', 'product']);
 }());

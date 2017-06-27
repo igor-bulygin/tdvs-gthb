@@ -204,7 +204,7 @@
 	}
 
 	angular
-		.module('todevise')
+		.module('product')
 		.controller('createProductCtrl', controller);
 
 }());

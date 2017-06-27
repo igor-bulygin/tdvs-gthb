@@ -229,6 +229,6 @@
 	}
 
 	angular
-		.module('todevise')
+		.module('product')
 		.component('productPriceStock', component);
 }());

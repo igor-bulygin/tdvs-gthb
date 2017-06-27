@@ -11,12 +11,9 @@ class IndexAsset extends AssetBundle {
 		'js/desktop/product/productService.js'
 	];
 	public $depends = [
-		'app\assets\libs\angularAsset',
-		'app\assets\desktop\pub\PublicCommonAsset',
-		'app\assets\libs\angularToastrAsset',
-		'app\assets\libs\angularBootstrapAsset',
 		'app\assets\api\ApiAsset',
 		'app\assets\libs\utilAsset',
+		'app\assets\libs\angularBootstrapAsset',
 		'app\assets\libs\nyaBootstrapSelectAsset',
 		'app\assets\libs\textAngularAsset',
 		'app\assets\libs\ngFileUploadAsset',

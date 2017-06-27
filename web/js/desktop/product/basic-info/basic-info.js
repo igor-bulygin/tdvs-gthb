@@ -352,7 +352,7 @@
 	}
 
 	angular
-		.module('todevise')
+		.module('product')
 		.component('productBasicInfo', component);
 
 }());

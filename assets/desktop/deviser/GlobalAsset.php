@@ -23,6 +23,7 @@ class GlobalAsset extends AssetBundle {
 	];
 	public $depends = [
 		'app\assets\desktop\deviser\IndexAsset',
+		'app\assets\desktop\GlobalAsset',
 		'app\assets\libs\macyAsset',
 	];
 }

@@ -186,7 +186,7 @@
 	}
 
 	angular
-		.module('todevise')
+		.module('product')
 		.controller('editProductCtrl',controller);
 
 }());

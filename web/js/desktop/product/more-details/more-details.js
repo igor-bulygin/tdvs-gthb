@@ -212,7 +212,7 @@
 	}
 
 	angular
-		.module('todevise')
+		.module('product')
 		.component('productMoreDetails', component);
 
 }());

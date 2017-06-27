@@ -10,7 +10,6 @@ class IndexAsset extends AssetBundle {
 		'js/desktop/person/person.js',
 	];
 	public $depends = [
-		'app\assets\desktop\GlobalAsset',
 		'app\assets\api\ApiAsset',
 		'app\assets\libs\utilAsset',
 		'app\assets\libs\nyaBootstrapSelectAsset',

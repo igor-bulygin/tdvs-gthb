@@ -1,11 +1,11 @@
 <?php
-use app\assets\desktop\product\createProductAsset;
+use app\assets\desktop\product\GlobalAsset;
 use app\models\Person;
 use app\models\PersonVideo;
 use app\models\Product;
 use yii\helpers\Json;
 
-createProductAsset::register($this);
+GlobalAsset::register($this);
 
 /** @var Person $deviser */
 /** @var Product $product */

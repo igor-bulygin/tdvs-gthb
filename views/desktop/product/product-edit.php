@@ -1,10 +1,9 @@
 <?php
-use app\assets\desktop\product\editProductAsset;
+use app\assets\desktop\product\GlobalAsset;
 use app\assets\desktop\pub\Product2Asset;
-use app\assets\desktop\pub\ProductDetailAsset;
 use yii\helpers\Json;
 
-editProductAsset::register($this);
+GlobalAsset::register($this);
 
 $this->title = $person->getName() . ' - Todevise';
 $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD, 'person-var-script');

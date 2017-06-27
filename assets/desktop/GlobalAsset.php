@@ -23,5 +23,7 @@ class GlobalAsset extends AssetBundle {
 		'app\assets\libs\utilAsset',
 		'app\assets\desktop\box\IndexAsset',
 		'app\assets\libs\angularToastrAsset',
+		'app\assets\desktop\deviser\IndexAsset',
+		'app\assets\desktop\product\IndexAsset',
 	];
 }
