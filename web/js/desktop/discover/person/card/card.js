@@ -15,6 +15,6 @@
 	}
 
 	angular
-		.module('todevise')
+		.module('discover')
 		.component('discoverCard', component);
 }());

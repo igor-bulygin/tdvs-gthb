@@ -2,7 +2,7 @@
 
 $this->title = 'Explore boxes - Todevise';
 
-\app\assets\desktop\discover\ExploreBoxesAsset::register($this);
+\app\assets\desktop\discover\GlobalAsset::register($this);
 
 ?>
 <div class="our-devisers-wrapper" ng-controller="exploreBoxesCtrl as exploreBoxesCtrl">

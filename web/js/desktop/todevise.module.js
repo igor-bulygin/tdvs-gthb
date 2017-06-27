@@ -1,4 +1,5 @@
 (function () {
 	angular
-		.module('todevise', ['header', 'api', 'util', 'toastr', 'box', 'person', 'product']);
+		.module('todevise', ['header', 'api', 'util', 'toastr', 'box', 'person', 'product',
+			'discover']);
 }());

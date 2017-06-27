@@ -53,7 +53,7 @@ $scope.$watch('exploreStoriesCtrl.filters', function(newValue, oldValue) {
 }
 
 angular
-.module('todevise')
-.controller('exploreStoriesCtrl', controller);
+	.module('discover')
+	.controller('exploreStoriesCtrl', controller);
 
 }())

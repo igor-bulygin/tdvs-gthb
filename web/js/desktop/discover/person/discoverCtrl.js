@@ -54,7 +54,7 @@
 	}
 
 	angular
-	.module('todevise')
+	.module('discover')
 	.controller('discoverCtrl', controller);
 
 }());
