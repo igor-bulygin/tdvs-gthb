@@ -3,12 +3,15 @@ namespace app\assets\desktop\settings;
 
 use yii\web\AssetBundle;
 
-class BillingAsset extends AssetBundle {
+class GlobalAsset extends AssetBundle {
 	public $basePath = '@webroot';
 	public $baseUrl = '@web';
-	public $css = [
-	];
 	public $js = [
+		'js/desktop/settings/general/general.js',
+		'js/desktop/settings/shipping/shipping.js',
+		'js/desktop/settings/shipping/types/types.js',
+		'js/desktop/settings/shipping/weights-prices/weights-prices.js',
+		'js/desktop/settings/shipping/observations/observations.js',
 		'js/desktop/settings/billing/billing.js',
 		'js/desktop/settings/billing/australia/australia.js',
 		'js/desktop/settings/billing/canada/canada.js',
@@ -19,5 +22,6 @@ class BillingAsset extends AssetBundle {
 	];
 	public $depends = [
 		'app\assets\desktop\settings\IndexAsset',
+		'app\assets\desktop\GlobalAsset',
 	];
 }

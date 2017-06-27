@@ -1,11 +1,11 @@
 <?php
-use app\assets\desktop\settings\BillingAsset;
+use app\assets\desktop\settings\GlobalAsset;
 use app\components\SettingsHeader;
 use app\models\Person;
 use yii\helpers\Json;
 use yii\helpers\Url;
 
-BillingAsset::register($this);
+GlobalAsset::register($this);
 
 /** @var Person $person */
 

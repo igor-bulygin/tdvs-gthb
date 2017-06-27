@@ -20,7 +20,7 @@
 	}
 
 	angular
-		.module('todevise')
+		.module('settings')
 		.component('otherBankInformation', component);
 
 }());

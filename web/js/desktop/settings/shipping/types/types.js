@@ -34,7 +34,7 @@
 	}
 
 	angular
-		.module('todevise')
+		.module('settings')
 		.component('shippingTypes', component);
 
 }());

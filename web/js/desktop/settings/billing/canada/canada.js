@@ -19,6 +19,6 @@
 		}
 	}
 
-	angular.module('todevise')
+	angular.module('settings')
 		.component('canadaBankInformation', component);
 }());

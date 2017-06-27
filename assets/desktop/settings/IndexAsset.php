@@ -10,9 +10,9 @@ class IndexAsset extends AssetBundle {
 		'js/desktop/settings/settings.js',
 	];
 	public $depends = [
-		'app\assets\desktop\pub\PublicCommonAsset',
-		'app\assets\libs\angularAsset',
-		'app\assets\libs\angularBootstrapAsset',
+		'app\assets\api\ApiAsset',
+		'app\assets\libs\utilAsset',
+		'app\components\assets\PublicHeader2Asset',
 		'app\assets\libs\textAngularAsset',
 		'app\assets\libs\nyaBootstrapSelectAsset',
 	];

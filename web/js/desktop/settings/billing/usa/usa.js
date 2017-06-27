@@ -28,7 +28,7 @@
 	}
 
 	angular
-		.module('todevise')
+		.module('settings')
 		.component('usaBankInformation', component);
 
 }());

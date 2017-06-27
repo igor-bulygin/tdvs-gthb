@@ -26,5 +26,6 @@ class GlobalAsset extends AssetBundle {
 		'app\assets\desktop\deviser\IndexAsset',
 		'app\assets\desktop\product\IndexAsset',
 		'app\assets\desktop\discover\IndexAsset',
+		'app\assets\desktop\settings\IndexAsset',
 	];
 }

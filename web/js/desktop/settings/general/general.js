@@ -196,7 +196,7 @@
 	}
 
 	angular	
-	.module('todevise')
+	.module('settings')
 	.controller('generalSettingsCtrl', controller);
 
 }());

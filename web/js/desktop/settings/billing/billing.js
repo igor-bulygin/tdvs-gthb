@@ -113,7 +113,7 @@
 
 	}
 
-	angular.module('todevise')
+	angular.module('settings')
 		.controller('billingCtrl', controller);
 
 }());

@@ -20,6 +20,6 @@
 	}
 
 	angular
-		.module('todevise')
+		.module('settings')
 		.component('newZealandBankInformation', component);
 }());
