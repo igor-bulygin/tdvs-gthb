@@ -20,7 +20,7 @@
 				<div class="col-md-12" ng-repeat="item in productBasicInfoCtrl.categories_helper track by $index">
 					<div class="items-row">
 						<span ng-repeat="category in productBasicInfoCtrl.categories_helper[$index].categories_selected">
-							<ol name="{{'categories_' + $parent.$index + '_' + $index}}" class="col-sm-2 col-md-2 nya-bs-select categories-select ng-class:{'purple': productBasicInfoCtrl.has_error(productBasicInfoCtrl.form, productBasicInfoCtrl.form['categories_'+$parent.$index+'_'+$index])}" ng-model="productBasicInfoCtrl.categories_helper[$parent.$index].categories_selected[$index]" ng-change="productBasicInfoCtrl.categorySelected(productBasicInfoCtrl.categories_helper[$parent.$index].categories_selected[$index], $parent.$index, $index)" required>
+							<ol name="{{'categories_' + $parent.$index + '_' + $index}}" class="col-sm-2 col-md-2 nya-bs-select categories-select ng-class:{'error-input': productBasicInfoCtrl.has_error(productBasicInfoCtrl.form, productBasicInfoCtrl.form['categories_'+$parent.$index+'_'+$index])}" ng-model="productBasicInfoCtrl.categories_helper[$parent.$index].categories_selected[$index]" ng-change="productBasicInfoCtrl.categorySelected(productBasicInfoCtrl.categories_helper[$parent.$index].categories_selected[$index], $parent.$index, $index)" required>
 								<li nya-bs-option="subcategory in productBasicInfoCtrl.categories_helper[$parent.$index].categories[$index]" data-value="subcategory.id" deep-watch="true">
 									<a href="">
 										<span ng-bind="subcategory.name"></span>
@@ -86,7 +86,7 @@
 					</div>
 					<div class="col-md-6 pad-about mr-15" ng-if="productBasicInfoCtrl.images.length<1">
 						<div class="basic-info-add-photos">
-							<div class="plus-add-wrapper ng-class:{'purple': productBasicInfoCtrl.photosRequired}">
+							<div class="plus-add-wrapper ng-class:{'error-input': productBasicInfoCtrl.photosRequired}">
 							<br/><br/><br/>
 							</div>
 						</div>

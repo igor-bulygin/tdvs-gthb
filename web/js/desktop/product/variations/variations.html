@@ -12,7 +12,7 @@
 						</div>
 						<div class="mb-20 col-md-5" ng-repeat="(itemIndex,item) in productVariationsCtrl.product.options[tag.id] track by itemIndex">
 							<span class="col-xs-1">{{itemIndex+1}}&nbsp;</span>
-							<ol class="nya-bs-select categories-select col-xs-10 ng-class:{'purple': productVariationsCtrl.optionValidation(productVariationsCtrl.product.options[tag.id][itemIndex],tag.required)} " ng-model="productVariationsCtrl.product.options[tag.id][itemIndex]" multiple>
+							<ol class="nya-bs-select categories-select col-xs-10 ng-class:{'error-input': productVariationsCtrl.optionValidation(productVariationsCtrl.product.options[tag.id][itemIndex],tag.required)} " ng-model="productVariationsCtrl.product.options[tag.id][itemIndex]" multiple>
 								<li nya-bs-option="option in tag.options" data-value="option.value" deep-watch="true" class="ng-class:{'disabled': productVariationsCtrl.product.options[tag.id][itemIndex].length >= tag.n_options && productVariationsCtrl.product.options[tag.id][itemIndex].indexOf(option.value) < 0}">
 									<a href="#"><span ng-bind="option.text['en-US']"></span><span class="glyphicon glyphicon-ok check-mark"></span></a>
 								</li>
@@ -177,14 +177,14 @@
 				</div>
 				<div class="row">
 					<div class="col-md-3 pad-about">
-						<ol class="nya-bs-select categories-select ng-class:{'purple': productVariationsCtrl.form_submitted && !productVariationsCtrl.selected_sizechart}" ng-model="productVariationsCtrl.selected_sizechart" ng-change="productVariationsCtrl.countriesSelect(productVariationsCtrl.selected_sizechart)">
+						<ol class="nya-bs-select categories-select ng-class:{'error-input': productVariationsCtrl.form_submitted && !productVariationsCtrl.selected_sizechart}" ng-model="productVariationsCtrl.selected_sizechart" ng-change="productVariationsCtrl.countriesSelect(productVariationsCtrl.selected_sizechart)">
 							<li nya-bs-option="sizechart in productVariationsCtrl.sizechart_helper" data-value="sizechart">
 								<a><span ng-bind="sizechart.name['en-US']"></span></a>
 							</li>
 						</ol>
 					</div>
 					<div class="col-md-3 pad-about">
-						<ol class="nya-bs-select categories-select ng-class:{'purple': productVariationsCtrl.form_submitted && !productVariationsCtrl.selected_sizechart_country}" ng-model="productVariationsCtrl.selected_sizechart_country" ng-if="productVariationsCtrl.countriesAvailable.length > 0" ng-change="productVariationsCtrl.sizesSelect(productVariationsCtrl.selected_sizechart, productVariationsCtrl.selected_sizechart_country)">
+						<ol class="nya-bs-select categories-select ng-class:{'error-input': productVariationsCtrl.form_submitted && !productVariationsCtrl.selected_sizechart_country}" ng-model="productVariationsCtrl.selected_sizechart_country" ng-if="productVariationsCtrl.countriesAvailable.length > 0" ng-change="productVariationsCtrl.sizesSelect(productVariationsCtrl.selected_sizechart, productVariationsCtrl.selected_sizechart_country)">
 							<li nya-bs-option="country in productVariationsCtrl.countriesAvailable" data-value="country">
 								<a><span ng-bind="country"></span></a>
 							</li>
@@ -209,7 +209,7 @@
 						<span>Scale</span>
 					</div>
 					<div class="col-md-1 pad-about">
-						<ol class="nya-bs-select categories-select ng-class:{'purple': productVariationsCtrl.form_submitted && !productVariationsCtrl.product.sizechart['metric_unit']}" ng-model="productVariationsCtrl.product.sizechart['metric_unit']">
+						<ol class="nya-bs-select categories-select ng-class:{'error-input': productVariationsCtrl.form_submitted && !productVariationsCtrl.product.sizechart['metric_unit']}" ng-model="productVariationsCtrl.product.sizechart['metric_unit']">
 							<li nya-bs-option="size in productVariationsCtrl.metric.size">
 								<a><span ng-bind="size"></span></a>
 							</li>
@@ -268,7 +268,7 @@
 							</div>
 							<div class="col-md-10 pad-about ng-class:{'col-md-offset-2': $index > 0}" ng-repeat="type in productVariationsCtrl.product.prints.type track by $index">
 								<span>{{$index+1}}:&nbsp;</span>
-								<ol class="nya-bs-select categories-select col-md-4 ng-class:{'purple': productVariationsCtrl.optionValidation(productVariationsCtrl.product.prints.type[$index])}" ng-model="productVariationsCtrl.product.prints.type[$index]" required>
+								<ol class="nya-bs-select categories-select col-md-4 ng-class:{'error-input': productVariationsCtrl.optionValidation(productVariationsCtrl.product.prints.type[$index])}" ng-model="productVariationsCtrl.product.prints.type[$index]" required>
 									<li nya-bs-option="paperType in productVariationsCtrl.papertypes" data-value="paperType.type">
 										<a href="#">
 											<span ng-bind="paperType.name"></span><span class="glyphicon glyphicon-ok check-mark"></span>
@@ -292,7 +292,7 @@
 								<span class="pull-left">{{$index+1}}:&nbsp;</span>
 								<label for="width" class="col-md-1" style="font-size: 12px;">Width</label><input name="width" type="number" class="form-control col-md-1 ng-class:{'error-input': productVariationsCtrl.sizechartValuesValidation(productVariationsCtrl.product.prints.sizes[$index]['width'])}" ng-model="productVariationsCtrl.product.prints.sizes[$index]['width']" ng-min="0">
 								<label for="length" class="col-md-1" style="font-size: 12px;">Length</label><input name="length" type="number" class="form-control col-md-1 ng-class:{'error-input': productVariationsCtrl.sizechartValuesValidation(productVariationsCtrl.product.prints.sizes[$index]['length'])}" ng-model="productVariationsCtrl.product.prints.sizes[$index]['length']" ng-min="0">
-								<ol class="nya-bs-select categories-select col-md-2 ng-class:{'purple': productVariationsCtrl.form_submitted && !productVariationsCtrl.product.print.sizes[$index]['metric_unit']}" ng-model="productVariationsCtrl.product.prints.sizes[$index]['metric_unit']">
+								<ol class="nya-bs-select categories-select col-md-2 ng-class:{'error-input': productVariationsCtrl.form_submitted && !productVariationsCtrl.product.print.sizes[$index]['metric_unit']}" ng-model="productVariationsCtrl.product.prints.sizes[$index]['metric_unit']">
 									<li nya-bs-option="unit in productVariationsCtrl.metric.size">
 										<a href="">
 											<span ng-bind="unit"></span>
