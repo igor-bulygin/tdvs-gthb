@@ -12,7 +12,7 @@
 						</div>
 						<div class="mb-20 col-md-5" ng-repeat="(itemIndex,item) in productVariationsCtrl.product.options[tag.id] track by itemIndex">
 							<span class="col-xs-1">{{itemIndex+1}}&nbsp;</span>
-							<ol class="nya-bs-select categories-select col-xs-10 ng-class:{'purple': productVariationsCtrl.optionValidation(productVariationsCtrl.product.options[tag.id][itemIndex])} " ng-model="productVariationsCtrl.product.options[tag.id][itemIndex]" multiple>
+							<ol class="nya-bs-select categories-select col-xs-10 ng-class:{'purple': productVariationsCtrl.optionValidation(productVariationsCtrl.product.options[tag.id][itemIndex],tag.required)} " ng-model="productVariationsCtrl.product.options[tag.id][itemIndex]" multiple>
 								<li nya-bs-option="option in tag.options" data-value="option.value" deep-watch="true" class="ng-class:{'disabled': productVariationsCtrl.product.options[tag.id][itemIndex].length >= tag.n_options && productVariationsCtrl.product.options[tag.id][itemIndex].indexOf(option.value) < 0}">
 									<a href="#"><span ng-bind="option.text['en-US']"></span><span class="glyphicon glyphicon-ok check-mark"></span></a>
 								</li>
