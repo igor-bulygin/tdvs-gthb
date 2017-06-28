@@ -184,6 +184,7 @@
 				vm.errors = true;
 				vm.saving = false;
 				$rootScope.$broadcast(productEvents.requiredErrors, {required: required});
+				$anchorScroll(required[0]);
 			}
 
 		}
