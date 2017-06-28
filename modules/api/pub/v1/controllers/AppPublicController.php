@@ -4,6 +4,7 @@ namespace app\modules\api\pub\v1\controllers;
 
 use yii\filters\AccessControl;
 use yii\filters\auth\HttpBearerAuth;
+use yii\helpers\Url;
 use yii\rest\Controller;
 
 class AppPublicController extends Controller
@@ -35,6 +36,18 @@ class AppPublicController extends Controller
 		];
 
 		return $behaviors;
+	}
+
+	public function beforeAction($action)
+	{
+		$message =
+			"\nPUBLIC API ACTION".
+			"\n - url => " . Url::current() .
+			"\n - http_authorization => " . (isset($_SERVER["HTTP_AUTHORIZATION"]) ? $_SERVER["HTTP_AUTHORIZATION"] : "") .
+			"\n - body_params => " . \Yii::$app->request->rawBody;
+		\Yii::info($message, __METHOD__);
+
+		return parent::beforeAction($action);
 	}
 
 }

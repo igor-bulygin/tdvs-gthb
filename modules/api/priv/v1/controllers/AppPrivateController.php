@@ -6,6 +6,7 @@ use app\models\Person;
 use Yii;
 use yii\filters\AccessControl;
 use yii\filters\auth\HttpBearerAuth;
+use yii\helpers\Url;
 use yii\rest\Controller;
 use yii\web\BadRequestHttpException;
 
@@ -38,6 +39,18 @@ class AppPrivateController extends Controller
 		];
 
 		return $behaviors;
+	}
+
+	public function beforeAction($action)
+	{
+		$message =
+			"\nPRIVATE API ACTION".
+			"\n - url => " . Url::current() .
+			"\n - http_authorization => " . (isset($_SERVER["HTTP_AUTHORIZATION"]) ? $_SERVER["HTTP_AUTHORIZATION"] : "") .
+			"\n - body_params => " . \Yii::$app->request->rawBody;
+		\Yii::info($message, __METHOD__);
+
+		return parent::beforeAction($action);
 	}
 
 	/**

@@ -3,6 +3,7 @@
 namespace app\modules\api\pub\v1\controllers;
 
 use app\models\Login;
+use app\models\Person;
 use Yii;
 
 class AuthController extends AppPublicController
@@ -18,14 +19,20 @@ class AuthController extends AppPublicController
 	{
 		$model = new Login();
 		if ($model->load(Yii::$app->getRequest()->getBodyParams(), '') && $model->login()) {
-
+			$person = Yii::$app->user->identity; /* @var Person $person */
+			
+			$message = sprintf("LOGIN: User %s logged succesfully via authcontroller", $person->getName());
+			Yii::info($message, __METHOD__);
+			
 			Yii::$app->response->setStatusCode(200); // Created
 			return [
-				'access_token' => Yii::$app->user->identity->getAccessToken(),
+				'access_token' => $person->getAccessToken(),
 				'return_url' => Yii::$app->getUser()->getReturnUrl(),
 			];
 
 		} else {
+			Yii::info('LOGIN: Invalid login', __METHOD__);
+
 			Yii::$app->response->setStatusCode(400); // Bad Request
 			return ["errors" => $model->errors];
 		}
