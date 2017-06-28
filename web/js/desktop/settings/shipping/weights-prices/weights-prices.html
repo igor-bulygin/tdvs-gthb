@@ -24,26 +24,21 @@
 					</div>
 					<span ng-bind="shippingWeightsPricesCtrl.person.settings.weight_measure"></span>
 					<span class="two-lines-label">Standard shipping</span>
-			
-					
 
 					<input type="number" ng-model="price.price" class="input-medium-size form-control ng-class:{'error-input': shippingWeightsPricesCtrl.has_error(shippingWeightsPricesCtrl.pricesForm, shippingWeightsPricesCtrl.pricesForm['price_'+$index])}" name="{{'price_'+$index}}" required min="0">
 					<span ng-bind="shippingWeightsPricesCtrl.currency"></span>
-			
-					
-					<span ng-if="shippingWeightsPricesCtrl.setting.shipping_express_time" ng-cloak>
-				
-					<span class="two-lines-label">Express shipping</span>
 
-						
-					<input type="number" ng-model="price.price_express" class="input-medium-size form-control ng-class:{'error-input': shippingWeightsPricesCtrl.has_error(shippingWeightsPricesCtrl.pricesForm, shippingWeightsPricesCtrl.pricesForm['price_express_'+$index])}" name="{{'price_express_'+$index}}" ng-required="setting.shipping_express_time" min="0">
-					<span ng-bind="shippingWeightsPricesCtrl.currency"></span>
-						
-				
+					<span ng-if="shippingWeightsPricesCtrl.setting.shipping_express_time" ng-cloak>
+						<span class="two-lines-label">Express shipping</span>
+						<input type="number" ng-model="price.price_express" class="input-medium-size form-control ng-class:{'error-input': shippingWeightsPricesCtrl.has_error(shippingWeightsPricesCtrl.pricesForm, shippingWeightsPricesCtrl.pricesForm['price_express_'+$index])}" name="{{'price_express_'+$index}}" ng-required="setting.shipping_express_time" min="0" ng-max="price.price-1">
+						<span ng-bind="shippingWeightsPricesCtrl.currency"></span>
+					</span>
+
 					<form-errors condition="shippingWeightsPricesCtrl.has_error(shippingWeightsPricesCtrl.pricesForm, shippingWeightsPricesCtrl.pricesForm['min_weight_'+$index])" field="shippingWeightsPricesCtrl.pricesForm['min_weight_'+$index]"></form-errors>
 					<form-errors condition="shippingWeightsPricesCtrl.has_error(shippingWeightsPricesCtrl.pricesForm, shippingWeightsPricesCtrl.pricesForm['max_weight_'+$index])" field="shippingWeightsPricesCtrl.pricesForm['max_weight_'+$index]"></form-errors>
-				</span>
-				
+					<form-errors condition="shippingWeightsPricesCtrl.has_error(shippingWeightsPricesCtrl.pricesForm, shippingWeightsPricesCtrl.pricesForm['price_'+$index])" field="shippingWeightsPricesCtrl.pricesForm['price_'+$index]"></form-errors>
+					<form-errors condition="shippingWeightsPricesCtrl.has_error(shippingWeightsPricesCtrl.pricesForm, shippingWeightsPricesCtrl.pricesForm['price_express_'+$index])" field="shippingWeightsPricesCtrl.pricesForm['price_express_'+$index]" ng-if="shippingWeightsPricesCtrl.setting.shipping_express_time" ng-cloak></form-errors>
+
 				<span class="ion-android-close close-range" ng-click="shippingWeightsPricesCtrl.deletePrice($index)"></span>
 				
 			
