@@ -70,7 +70,7 @@
 							<ul class="item draggable-list" ui-sortable ng-model="productBasicInfoCtrl.images">
 								<li class="col-md-3 image-basic-info-edit" ng-repeat="image in productBasicInfoCtrl.images">
 									<img class="grid-image" ng-src="{{image.url}}" draggable="false">
-									<div class="crop ion-android-star-outline" ng-click="productBasicInfoCtrl.openCropModal(image.url, $index)"></div>
+									<div class="crop ion-android-star-outline" ng-if="!image.filename.main_product_photo" ng-click="productBasicInfoCtrl.openCropModal(image.url, $index)"></div>
 									<span class="delete ion-android-close" ng-click="productBasicInfoCtrl.deleteImage($index)"></span>
 									<p class="main-marked" ng-if="image.filename.main_product_photo">Marked as main photo</p>
 								</li>
