@@ -7,6 +7,7 @@
 		var vm = this;
 		vm.categories_helper = [];
 		vm.save = save;
+		vm.saving = false;
 
 		function init(){
 			vm.from_edit = false;
@@ -130,8 +131,10 @@
 
 		//publish is true when publishing the product
 		function save(publish) {
+			vm.saving = true;
 			function onUpdateProductSuccess(data) {
 				vm.disable_save_buttons=false;
+				vm.saving = false;
 				if(vm.product.product_state === 'product_state_draft' || !publish) {
 					saved_draft();
 				} else if (vm.product.product_state === 'product_state_active' && publish) {
@@ -141,6 +144,7 @@
 			function onUpdateProductError(err) {
 				vm.disable_save_buttons=false;
 				vm.errors = true;
+				vm.saving = false;
 				if(err.data.errors && err.data.errors.required && angular.isArray(err.data.errors.required))
 					$rootScope.$broadcast(productEvents.requiredErrors, {required: err.data.errors.required});
 			}
@@ -160,7 +164,6 @@
 					UtilService.parseMultiLanguageEmptyFields(element.answer);
 				});
 			}
-
 			//validations
 			if(vm.product.product_state !== 'product_state_draft') {
 				required = productService.validate(vm.product);
@@ -179,6 +182,7 @@
 			} else {
 				vm.disable_save_buttons=false;
 				vm.errors = true;
+				vm.saving = false;
 				$rootScope.$broadcast(productEvents.requiredErrors, {required: required});
 			}
 

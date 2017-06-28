@@ -22,20 +22,25 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 			<div class="text-center" ng-if="!editProductCtrl.errors"><h4 class="title">Edit work</h4></div>
 			<div class="text-center" ng-if="editProductCtrl.errors" ng-cloak><p>Please complete all the required fields before publishing your work.</p></div>
 			<div class="btns-group">
-				<button class="btn btn-transparent" ng-click="editProductCtrl.save()" ng-disabled="editProductCtrl.disable_save_buttons">Save progress</button>
-				<button class="btn btn-default btn-green" ng-click="editProductCtrl.save('true')" ng-disabled="editProductCtrl.disable_save_buttons">Publish work</button>
+				<button class="btn btn-transparent" ng-click="editProductCtrl.save()" ng-disabled="editProductCtrl.saving">Save progress</button>
+				<button class="btn btn-default btn-green" ng-click="editProductCtrl.save('true')" ng-disabled="editProductCtrl.saving">Publish work</button>
 			</div>
 		</div>
 	</div>
 	<div class="create-work-wrapper">
 		<div id="productSaved" class="success-message-120" ng-if="editProductCtrl.progressSaved" ng-cloak><p class="text-center">Product saved</p></div>
-		<div class="container">
-			<product-basic-info product="editProductCtrl.product" categories="editProductCtrl.allCategories" languages="editProductCtrl.languages"></product-basic-info>
-			<product-variations product="editProductCtrl.product" categories="editProductCtrl.allCategories" languages="editProductCtrl.languages" tags="editProductCtrl.tags" sizecharts="editProductCtrl.sizecharts" metric="editProductCtrl.metric" deviser="editProductCtrl.deviser" papertypes="editProductCtrl.papertypes" fromedit="editProductCtrl.from_edit"></product-variations>
-			<product-price-stock product="editProductCtrl.product" categories="editProductCtrl.allCategories" tags="editProductCtrl.tags" papertypes="editProductCtrl.papertypes" metric="editProductCtrl.metric" fromedit="editProductCtrl.from_edit"></product-price-stock>
-			<product-more-details product="editProductCtrl.product" languages="editProductCtrl.languages"></product-more-details>
-			<div class="text-center">
-				<button class="btn btn-default btn-green" ng-click="createProductCtrl.save('product_state_active')" ng-disabled="createProductCtrl.disable_save_buttons">Publish work</button>
+		<div class="container" >
+			<div ng-hide="editProductCtrl.saving">
+				<product-basic-info product="editProductCtrl.product" categories="editProductCtrl.allCategories" languages="editProductCtrl.languages"></product-basic-info>
+				<product-variations product="editProductCtrl.product" categories="editProductCtrl.allCategories" languages="editProductCtrl.languages" tags="editProductCtrl.tags" sizecharts="editProductCtrl.sizecharts" metric="editProductCtrl.metric" deviser="editProductCtrl.deviser" papertypes="editProductCtrl.papertypes" fromedit="editProductCtrl.from_edit"></product-variations>
+				<product-price-stock product="editProductCtrl.product" categories="editProductCtrl.allCategories" tags="editProductCtrl.tags" papertypes="editProductCtrl.papertypes" metric="editProductCtrl.metric" fromedit="editProductCtrl.from_edit"></product-price-stock>
+				<product-more-details product="editProductCtrl.product" languages="editProductCtrl.languages"></product-more-details>
+				<div class="text-center">
+					<button class="btn btn-default btn-green" ng-click="editProductCtrl.save('true')" ng-disabled="createProductCtrl.saving">Publish work</button>
+				</div>
+			</div>
+			<div class="text-center" ng-show="editProductCtrl.saving">
+				<img src="/imgs/loading.gif">
 			</div>
 		</div>
 	</div>
