@@ -30,7 +30,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 	<div class="create-work-wrapper">
 		<div id="productSaved" class="success-message-120" ng-if="editProductCtrl.progressSaved" ng-cloak><p class="text-center">Product saved</p></div>
 		<div class="container" >
-			<div ng-hide="editProductCtrl.saving">
+			<div ng-if="!editProductCtrl.saving">
 				<product-basic-info product="editProductCtrl.product" categories="editProductCtrl.allCategories" languages="editProductCtrl.languages"></product-basic-info>
 				<product-variations product="editProductCtrl.product" categories="editProductCtrl.allCategories" languages="editProductCtrl.languages" tags="editProductCtrl.tags" sizecharts="editProductCtrl.sizecharts" metric="editProductCtrl.metric" deviser="editProductCtrl.deviser" papertypes="editProductCtrl.papertypes" fromedit="editProductCtrl.from_edit"></product-variations>
 				<product-price-stock product="editProductCtrl.product" categories="editProductCtrl.allCategories" tags="editProductCtrl.tags" papertypes="editProductCtrl.papertypes" metric="editProductCtrl.metric" fromedit="editProductCtrl.from_edit"></product-price-stock>
@@ -39,7 +39,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 					<button class="btn btn-default btn-green" ng-click="editProductCtrl.save('true')" ng-disabled="createProductCtrl.saving">Publish work</button>
 				</div>
 			</div>
-			<div class="text-center" ng-show="editProductCtrl.saving">
+			<div class="text-center" ng-if="editProductCtrl.saving">
 				<img src="/imgs/loading.gif">
 			</div>
 		</div>
