@@ -108,13 +108,12 @@ app\components\assets\PublicHeader2Asset::register($this);
 <nav class="navbar navbar-default secondary">
 	<div class="container">
 		<ul class="nav navbar-nav">
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle menu-title" data-toggle="dropdown" role="button"
-					   aria-haspopup="true" aria-expanded="false">
+				<li>
+					<a href="#" class="menu-title">
 						<i class="fa fa-bars" aria-hidden="true"></i>
 						<span>Shop by departament</span>
 					</a>
-					<div class="dropdowns-wrapper">
+					<!--<div class="dropdowns-wrapper">
 						<div class="dropdown-menu dropdown-shop">
 							<ul class="shop-menu-wrapper">
 								<?php foreach($categories as $category) { ?>
@@ -170,14 +169,86 @@ app\components\assets\PublicHeader2Asset::register($this);
 								$active = '';
 							} ?>
 						</div>
-					</div>
+					</div>-->
 				</li>
 			</ul>
 		<ul class="nav navbar-nav navbar-right">
 			<li><a href="<?=Url::to(['/discover/stories'])?>">Stories</a></li>
 			<li><a href="<?=Url::to(['/discover/boxes'])?>">Explore Boxes</a></li>
 			<li><a href="<?=Url::to(['/discover/devisers'])?>">Discover devisers</a></li>
-			<li><a href="<?=Url::to(['/discover/influencers'])?>">Influencers</a></li>
+			<li><a href="<?=Url::to(['/discover/influencers'])?>">Trend-setters</a></li>
+			<li><a href="#">Projects</a></li>
 		</ul>
 	</div>
 </nav>
+<div class="menu-cathegories">
+	<nav class="navbar navbar-default terciary">
+		<div class="container">
+			<ul>
+				<li>
+					<a class="selected" href="">Art</a>
+				</li>
+				<li>
+					<a href="">Fashion</a>
+				</li>
+				<li>
+					<a href="">Beauty</a>
+				</li>
+				<li>
+					<a href="">Technology</a>
+				</li>
+				<li>
+					<a href="">Sports</a>
+				</li>
+				<li>
+					<a href="">Interior design</a>
+				</li>
+				<li>
+					<a href="">Jewelery</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	<div class="cathegory-menu">
+		<div class="container">
+			<div class="cathegories">
+				<ul>
+					<li>
+						<a href="">Ceramics</a>
+					</li>
+					<li>
+						<a href="">Drawings</a>
+					</li>
+					<li>
+						<a href="">Paintings</a>
+					</li>
+					<li>
+						<a href="">Photography</a>
+					</li>
+					<li>
+						<a href="">Sculptures</a>
+					</li>
+				</ul>
+			</div>
+			<div class="images">
+				<div class="image-1">
+					<a href="#">
+						<img src="/imgs/photo-grid-h-1.jpg">
+					</a>
+				</div>
+				<div class="images-wrapper">
+					<div class="image-2">
+						<a href="#">
+							<img src="/imgs/photo-grid-h-1.jpg">
+						</a>
+					</div>
+					<div class="image-2">
+						<a href="#">
+							<img src="/imgs/photo-grid-h-1.jpg">
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
