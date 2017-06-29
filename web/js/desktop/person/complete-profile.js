@@ -35,6 +35,8 @@
 		function init() {
 			getCategories();
 			getLanguages();
+			setCity();
+			setImages();
 		}
 
 		function getCategories() {
@@ -54,6 +56,28 @@
 			}
 
 			languageDataService.getLanguages(onGetLanguagesSuccess, UtilService.onError);
+		}
+
+		function setCity() {
+			if(angular.isObject(vm.person.personal_info)) {
+				if(vm.person.personal_info.city && vm.person.personal_info.city != "" && vm.person.personal_info.country && vm.person.personal_info.country != "") {
+					selectCity({
+						city: vm.person.personal_info.city,
+						country_code: vm.person.personal_info.country
+					})
+				}
+			} 
+		}
+
+		function setImages() {
+			if(angular.isObject(vm.person.media)) {
+				if(vm.person.media.header && vm.person.media.header != "") {
+					vm.header_crop = vm.header = currentHost() + person.url_images + vm.person.media.header;
+				}
+				if(vm.person.media.profile && vm.person.media.profile != "") {
+					vm.profile_crop = vm.profile = currentHost() + person.url_images + vm.person.media.header;
+				}
+			}
 		}
 
 		function searchPlace(place) {
@@ -158,7 +182,8 @@
 				vm.person.media.header = angular.copy(data.data.filename);
 				vm.header_crop = newValue;
 			}
-			if(newValue) {
+			console.log(newValue);
+			if(angular.isObject(newValue)) {
 				//upload original
 				var data = {
 					person_id: vm.person.short_id,
