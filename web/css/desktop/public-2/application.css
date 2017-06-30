@@ -2159,6 +2159,8 @@ input[type="radio"] .styled:checked + label::after {
   position: absolute;
   width: 100%;
   display: none; }
+  .menu-cathegories.active {
+    display: block; }
 
 .menu-cathegories #submenu-cathegories {
   display: none; }
@@ -2168,6 +2170,8 @@ input[type="radio"] .styled:checked + label::after {
 
 .menu-cathegories .cathegory-menu {
   display: none; }
+  .menu-cathegories .cathegory-menu.active {
+    display: block; }
 
 .carousel-indicators li {
   margin: 1px 5px;
