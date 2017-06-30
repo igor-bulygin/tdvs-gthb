@@ -105,98 +105,100 @@ app\components\assets\PublicHeader2Asset::register($this);
 		</div><!-- /.navbar-collapse -->
 	</div><!-- /.container -->
 </nav>
-<nav class="navbar navbar-default secondary">
-	<div class="container">
-		<ul class="nav navbar-nav">
-				<li>
-					<a href="#" class="menu-title hover-toggle" data-target=".menu-cathegories" data-group=".cathegory-menu">
-						<i class="fa fa-bars" aria-hidden="true"></i>
-						<span>Shop by departament</span>
-					</a>
-				</li>
-			</ul>
-		<ul class="nav navbar-nav navbar-right">
-			<li><a href="<?=Url::to(['/discover/stories'])?>">Stories</a></li>
-			<li><a href="<?=Url::to(['/discover/boxes'])?>">Explore Boxes</a></li>
-			<li><a href="<?=Url::to(['/discover/devisers'])?>">Discover devisers</a></li>
-			<li><a href="<?=Url::to(['/discover/influencers'])?>">Trend-setters</a></li>
-			<li><a href="#">Projects</a></li>
-		</ul>
-	</div>
-</nav>
-<div class="menu-cathegories">
-	<nav class="navbar navbar-default terciary">
+<div id="navbar-wrapper">
+	<nav class="navbar navbar-default secondary">
 		<div class="container">
-			<ul>
-				<?php foreach($categories as $category) { ?>
+			<ul class="nav navbar-nav">
 					<li>
-						<a class="hover-toggle <?=$selectedCategory && $selectedCategory->short_id == $category->short_id ? 'selected' : ''?>" data-group=".cathegory-menu" data-target="#category-<?=$category->short_id?>" href="<?= $category->getMainLink()?>"><?= $category->name?></a>
+						<a href="#" class="menu-title hover-toggle" data-target=".menu-cathegories" data-group=".cathegory-menu">
+							<i class="fa fa-bars" aria-hidden="true"></i>
+							<span>Shop by departament</span>
+						</a>
 					</li>
-				<?php } ?>
+				</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="<?=Url::to(['/discover/stories'])?>">Stories</a></li>
+				<li><a href="<?=Url::to(['/discover/boxes'])?>">Explore Boxes</a></li>
+				<li><a href="<?=Url::to(['/discover/devisers'])?>">Discover devisers</a></li>
+				<li><a href="<?=Url::to(['/discover/influencers'])?>">Trend-setters</a></li>
+				<li><a href="#">Projects</a></li>
 			</ul>
 		</div>
 	</nav>
-	<div id="submenu-cathegories">
-		<?php foreach($categories as $category) { ?>
-			<div class="cathegory-menu" id="category-<?=$category->short_id?>">
-				<div class="container">
-					<div class="cathegories">
-						<ul>
-							<?php
-							if ($category->hasGroupsOfCategories()) {
+	<div class="menu-cathegories">
+		<nav class="navbar navbar-default terciary">
+			<div class="container">
+				<ul>
+					<?php foreach($categories as $category) { ?>
+						<li>
+							<a class="hover-toggle <?=$selectedCategory && $selectedCategory->short_id == $category->short_id ? 'selected' : ''?>" data-group=".cathegory-menu" data-target="#category-<?=$category->short_id?>" href="<?= $category->getMainLink()?>"><?= $category->name?></a>
+						</li>
+					<?php } ?>
+				</ul>
+			</div>
+		</nav>
+		<div id="submenu-cathegories">
+			<?php foreach($categories as $category) { ?>
+				<div class="cathegory-menu" id="category-<?=$category->short_id?>">
+					<div class="container">
+						<div class="cathegories">
+							<ul>
+								<?php
+								if ($category->hasGroupsOfCategories()) {
 
-								$subCategories = $category->getSubCategories();
-								if ($subCategories) {
-									foreach ($subCategories as $subCategory) { ?>
-										<li>
-											<a href="<?=$subCategory->getMainLink()?>"><?= Utils::l($subCategory->name) ?></a>
-										</li>
-										<?php
-
-										$subSubCategories = $subCategory->getSubCategoriesHeader();
-										foreach ($subSubCategories as $subSubCategory) { ?>
+									$subCategories = $category->getSubCategories();
+									if ($subCategories) {
+										foreach ($subCategories as $subCategory) { ?>
 											<li>
-												<a href="<?=$subSubCategory->getMainLink()?>"><?= Utils::l($subSubCategory->name) ?></a>
+												<a href="<?=$subCategory->getMainLink()?>"><?= Utils::l($subCategory->name) ?></a>
+											</li>
+											<?php
+
+											$subSubCategories = $subCategory->getSubCategoriesHeader();
+											foreach ($subSubCategories as $subSubCategory) { ?>
+												<li>
+													<a href="<?=$subSubCategory->getMainLink()?>"><?= Utils::l($subSubCategory->name) ?></a>
+												</li>
+											<?php
+											}
+										}
+									}
+								} else {
+									$subCategories = $category->getSubCategories();
+									if ($subCategories) {
+										foreach ($subCategories as $subCategory) { ?>
+											<li>
+												<a href="<?= $subCategory->getMainLink()?>"><?= Utils::l($subCategory->name) ?></a>
 											</li>
 										<?php
 										}
 									}
-								}
-							} else {
-								$subCategories = $category->getSubCategories();
-								if ($subCategories) {
-									foreach ($subCategories as $subCategory) { ?>
-										<li>
-											<a href="<?= $subCategory->getMainLink()?>"><?= Utils::l($subCategory->name) ?></a>
-										</li>
-									<?php
-									}
-								}
-							}?>
-						</ul>
-					</div>
-					<div class="images">
-						<?php
-						$products = $category->getHeaderProducts(3);
-						$image = 1;
-						foreach ($products as $product) { ?>
-							<div class="image-<?=$image?>">
-								<a href="<?=$product->getViewLink()?>" title="<?=$product->name?>">
-									<img src="<?=Utils::url_scheme().Utils::thumborize($product->getMainImage())->resize(398, 235)?>">
-								</a>
-							</div>
+								}?>
+							</ul>
+						</div>
+						<div class="images">
 							<?php
-							if ($image== 1) {
-								$image = 2;?>
-								<div class="images-wrapper">
-							<?php }
-						}
-						if (count($products) > 1) { ?>
-								</div><!--close image-wrapper-->
-						<?php } ?>
+							$products = $category->getHeaderProducts(3);
+							$image = 1;
+							foreach ($products as $product) { ?>
+								<div class="image-<?=$image?>">
+									<a href="<?=$product->getViewLink()?>" title="<?=$product->name?>">
+										<img src="<?=Utils::url_scheme().Utils::thumborize($product->getMainImage())->resize(398, 235)?>">
+									</a>
+								</div>
+								<?php
+								if ($image== 1) {
+									$image = 2;?>
+									<div class="images-wrapper">
+								<?php }
+							}
+							if (count($products) > 1) { ?>
+									</div><!--close image-wrapper-->
+							<?php } ?>
+						</div>
 					</div>
 				</div>
-			</div>
-		<?php } ?>
+			<?php } ?>
+		</div>
 	</div>
 </div>

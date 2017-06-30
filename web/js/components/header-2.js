@@ -9,18 +9,9 @@ $(function () {
 			$(group).removeClass('active');
 			$(target).addClass('active');
 		});
-	})
-	/*
-    $('.toggle-category').on('mouseover', function (e) {
-        $('.cathegory-menu').each(function() {
-            $(this).hide();
-        });
-        $($(this).data('target')).show();
-    });
-    $('.menu-cathegories').on('mouseout', function(e) {
-		$('.cathegory-menu').each(function() {
-			$(this).hide();
-		});
-    });
-    */
+	});
+	$('#navbar-wrapper').on('mouseleave', function(e) {
+		// hide all submenus
+		$('.menu-cathegories').removeClass('active');
+	});
 });
