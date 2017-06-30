@@ -248,8 +248,10 @@ app\components\assets\PublicHeader2Asset::register($this);
 								$image = 2;?>
 								<div class="images-wrapper">
 							<?php }
-						} ?>
+						}
+						if (count($products) > 1) { ?>
 								</div><!--close image-wrapper-->
+						<?php } ?>
 					</div>
 				</div>
 			</div>

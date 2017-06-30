@@ -443,9 +443,16 @@ class Category extends CActiveRecord {
 	public function getHeaderProducts($limit)
 	{
 		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_PUBLIC);
-		$products = Product::findSerialized(['limit' => 100]);
+		$products = Product::findSerialized(
+			[
+				'categories' => [$this->short_id],
+				'limit' => 100,
+			]
+		);
 
-		$products = array_slice($products, rand(0, count($products)), 3);
+		if (count($products) > 3) {
+			$products = array_slice($products, rand(0, count($products)), 3);
+		}
 		return $products;
 
 	}
