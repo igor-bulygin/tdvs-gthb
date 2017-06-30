@@ -182,7 +182,6 @@
 				vm.person.media.header = angular.copy(data.data.filename);
 				vm.header_crop = newValue;
 			}
-			console.log(newValue);
 			if(angular.isObject(newValue)) {
 				//upload original
 				var data = {
