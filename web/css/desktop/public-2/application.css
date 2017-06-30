@@ -2126,7 +2126,8 @@ input[type="radio"] .styled:checked + label::after {
   z-index: 2; }
   .cathegory-menu .cathegories {
     width: 125px;
-    float: left; }
+    float: left;
+    margin-right: 15px; }
     .cathegory-menu .cathegories ul li a {
       font-family: "Univers Condensed Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-size: 16px;
@@ -2158,7 +2159,8 @@ input[type="radio"] .styled:checked + label::after {
 .menu-cathegories {
   position: absolute;
   width: 100%;
-  display: none; }
+  display: none;
+  z-index: 999999999999999999; }
   .menu-cathegories.active {
     display: block; }
 

@@ -420,6 +420,7 @@
 	.cathegories{
 		width: 125px;
     	float: left;
+		margin-right: 15px;
 		ul{
 			li{
 				a{
@@ -464,6 +465,7 @@
 	position: absolute;
 	width: 100%;
 	display: none;
+	z-index: 999999999999999999;
 	&.active{
 		display: block;
 	}
