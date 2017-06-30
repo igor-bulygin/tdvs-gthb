@@ -418,7 +418,6 @@
     position: relative;
     z-index: 2;
 	.cathegories{
-		width: 125px;
     	float: left;
 		margin-right: 15px;
 		ul{
@@ -435,7 +434,15 @@
 					}
 				}
 			}
+			&.two-categories{
+				margin-right: 15px;
+				float: left;
+				.two-categories-title{
+					font-weight: bold;
+				}
+			}
 		}
+		
 	}
 	.images{
 		float: left;

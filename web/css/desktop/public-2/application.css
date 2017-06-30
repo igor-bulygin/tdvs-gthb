@@ -2125,7 +2125,6 @@ input[type="radio"] .styled:checked + label::after {
   position: relative;
   z-index: 2; }
   .cathegory-menu .cathegories {
-    width: 125px;
     float: left;
     margin-right: 15px; }
     .cathegory-menu .cathegories ul li a {
@@ -2137,6 +2136,11 @@ input[type="radio"] .styled:checked + label::after {
       margin: 10px 0; }
       .cathegory-menu .cathegories ul li a:hover {
         color: #F7284B !important; }
+    .cathegory-menu .cathegories ul.two-categories {
+      margin-right: 15px;
+      float: left; }
+      .cathegory-menu .cathegories ul.two-categories .two-categories-title {
+        font-weight: bold; }
   .cathegory-menu .images {
     float: left; }
     .cathegory-menu .images .image-1 {

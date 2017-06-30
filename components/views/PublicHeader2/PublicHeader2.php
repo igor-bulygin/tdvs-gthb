@@ -149,9 +149,9 @@ app\components\assets\PublicHeader2Asset::register($this);
 									$subCategories = $category->getSubCategories();
 									if ($subCategories) {
 										foreach ($subCategories as $subCategory) { ?>
-											<ul>
+											<ul class="two-categories">
 												<li>
-													<a href="<?=$subCategory->getMainLink()?>"><?= Utils::l($subCategory->name) ?></a>
+													<a class="two-categories-title" href="<?=$subCategory->getMainLink()?>"><?= Utils::l($subCategory->name) ?></a>
 												</li>
 												<?php
 
