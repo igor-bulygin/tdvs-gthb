@@ -19,8 +19,10 @@ class PublicHeader2 extends Widget {
 			//
 		}
 
+		$selectedCategory = isset($this->view->params['selectedCategory']) ? $this->view->params['selectedCategory'] : null;
+
 		return $this->render('PublicHeader2', [
-			'selectedCategory' => $this->view->params['selectedCategory'],
+			'selectedCategory' => $selectedCategory,
 			'categories' => Category::getHeaderCategories(),
 			'login_model' => $model,
 			'q' => Yii::$app->request->get('q'),

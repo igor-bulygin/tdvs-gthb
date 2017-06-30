@@ -110,6 +110,11 @@ class Category extends CActiveRecord {
 	    // Retrieve only fields that gonna be used
 	    $query->select(self::getSelectFields());
 
+		// if category id is specified
+		if ((array_key_exists("id", $criteria)) && (!empty($criteria["id"]))) {
+			$query->andWhere(["short_id" => $criteria["id"]]);
+		}
+
 	    // only root nodes, or all
 	    if (array_key_exists("scope", $criteria)) {
 			switch ($criteria["scope"]) {
@@ -153,14 +158,23 @@ class Category extends CActiveRecord {
 	 */
 	public static function getHeaderCategories()
 	{
-		// TODO Forced for the demo. This must be selected in "admin" panel.
-		$categories = Category::find()->where(["path" => "/"])->all();
-		foreach ($categories as $k => $category) {
-			if ($category->short_id == 'ffeec') { // More must be the last one
-				unset($categories[$k]);
-				$categories[$k] = $category;
-			}
-		}
+		$categoriesIds = [
+			'1a23b', // art
+			'4a2b4', // fashion
+			// beauty
+			'f0cco', // technology
+			'ca82k', // sports
+			'2r67s', // interior design
+			'3f78g', // jewely
+		];
+
+		Category::setSerializeScenario(Category::SERIALIZE_SCENARIO_PUBLIC);
+		$categories = Category::findSerialized(
+			[
+				'id' => $categoriesIds,
+			]
+		);
+
 		return $categories;
 	}
 
@@ -183,10 +197,55 @@ class Category extends CActiveRecord {
 	}
 
 	/**
-	 * @return Category[]
+	 * Returns the products to show in header menu
+	 *
+	 * @param int $limit
+	 * @return Product[]
 	 */
-	public function getSubCategories() {
-		return Category::find()->where(["path" => $this->path . $this->short_id . "/"])->all();
+	public function getHeaderProducts($limit)
+	{
+		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_PUBLIC);
+
+		$products = [
+			'3f78g' => [ //jewelry
+				'e0338af7', '42ab9269', 'b5188907',
+			],
+			'1a23b' => [ // art
+				'b35cb8e', '3bca1b15', 'b479b9ad',
+			],
+			'4a2b4' => [ // fashion
+				'a39ae909', '5e4c190c', '5222de87',
+			],
+			'2r67s' => [  // decoration
+				'1d71d7fb', 'dd095081', 'af0b8163',
+			],
+		];
+
+		if (isset($products[$this->short_id])) {
+
+			// Get hardcoded products
+			$products = Product::findSerialized(
+				[
+					'id' => $products[$this->short_id],
+				]
+			);
+
+		} else {
+			// if there is no hardcoded products, we get randome products of the category
+
+			$products = Product::findSerialized(
+				[
+					'categories' => [$this->short_id],
+					'limit' => 100,
+				]
+			);
+
+			if (count($products) > 3) {
+				$products = array_slice($products, rand(0, count($products)), 3);
+			}
+		}
+		return $products;
+
 	}
 
 	/**
@@ -265,6 +324,13 @@ class Category extends CActiveRecord {
 				->where(["REGEX", "path", "/^$current_path/"])
 				->andWhere(['in', 'short_id', $fixedCategories])
 				->all();
+	}
+
+	/**
+	 * @return Category[]
+	 */
+	public function getSubCategories() {
+		return Category::find()->where(["path" => $this->path . $this->short_id . "/"])->all();
 	}
 
 	public function getSubCategoriesOld($current_path = null) {
@@ -432,22 +498,6 @@ class Category extends CActiveRecord {
 			return $fileName;
 		}
 		return null;
-	}
-
-	/**
-	 * Returns the products to show in header menu
-	 *
-	 * @param int $limit
-	 * @return Product[]
-	 */
-	public function getHeaderProducts($limit)
-	{
-		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_PUBLIC);
-		$products = Product::findSerialized(['limit' => 100]);
-
-		$products = array_slice($products, rand(0, count($products)), 3);
-		return $products;
-
 	}
 
 	/**
