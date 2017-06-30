@@ -5209,7 +5209,7 @@ input[type="radio"] .styled:checked + label::after {
   text-align: center;
   color: #ffffff;
   width: 600px;
-  margin: 40px auto; }
+  margin: 60px auto 40px; }
   .invitation-messages p {
     font-size: 17px;
     font-family: "Univers Condensed Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
