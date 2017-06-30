@@ -11,7 +11,6 @@ class GlobalAsset extends AssetBundle {
 	public $js = [
 		'js/desktop/discover/person/discoverCtrl.js',
 		'js/desktop/discover/person/results/results.js',
-		'js/desktop/discover/person/card/card.js',
 		'js/desktop/discover/person/filters/filters.js',
 		'js/desktop/discover/boxes/exploreBoxesCtrl.js',
 		'js/desktop/discover/boxes/filters/filters.js',
