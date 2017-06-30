@@ -8,6 +8,7 @@
 		vm.categories_helper = [];
 		vm.save = save;
 		vm.saving = false;
+		vm.emptyCategory=false;
 
 		function init(){
 			vm.from_edit = false;
