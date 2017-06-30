@@ -7,6 +7,7 @@
         vm.save = save;
         vm.saving = false;
         vm.isPublicProfile = (person.account_state === "active");
+        vm.emptyCategory=true;
 
         function init() {
             vm.product = {};
