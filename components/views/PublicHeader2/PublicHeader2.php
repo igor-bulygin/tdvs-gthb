@@ -188,7 +188,7 @@ app\components\assets\PublicHeader2Asset::register($this);
 			<ul>
 				<?php foreach($categories as $category) { ?>
 					<li>
-						<a class="toggle-category <?=$selectedCategory == $category ? 'selected' : ''?>" data-target="#category-<?=$category->short_id?>" href="<?= $category->getMainLink()?>"><?= Utils::l($category->name)?></a>
+						<a class="toggle-category <?=$selectedCategory && $selectedCategory->short_id == $category->short_id ? 'selected' : ''?>" data-target="#category-<?=$category->short_id?>" href="<?= $category->getMainLink()?>"><?= $category->name?></a>
 					</li>
 				<?php } ?>
 			</ul>
