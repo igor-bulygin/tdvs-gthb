@@ -2156,7 +2156,8 @@ input[type="radio"] .styled:checked + label::after {
           display: block; }
 
 .menu-cathegories {
-  position: absolute; }
+  position: absolute;
+  width: 100%; }
 
 .menu-cathegories #submenu-cathegories {
   display: none; }
