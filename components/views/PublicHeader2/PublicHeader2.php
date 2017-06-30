@@ -149,18 +149,21 @@ app\components\assets\PublicHeader2Asset::register($this);
 									$subCategories = $category->getSubCategories();
 									if ($subCategories) {
 										foreach ($subCategories as $subCategory) { ?>
-											<li>
-												<a href="<?=$subCategory->getMainLink()?>"><?= Utils::l($subCategory->name) ?></a>
-											</li>
-											<?php
-
-											$subSubCategories = $subCategory->getSubCategoriesHeader();
-											foreach ($subSubCategories as $subSubCategory) { ?>
+											<ul>
 												<li>
-													<a href="<?=$subSubCategory->getMainLink()?>"><?= Utils::l($subSubCategory->name) ?></a>
+													<a href="<?=$subCategory->getMainLink()?>"><?= Utils::l($subCategory->name) ?></a>
 												</li>
+												<?php
+
+												$subSubCategories = $subCategory->getSubCategoriesHeader();
+												foreach ($subSubCategories as $subSubCategory) { ?>
+													<li>
+														<a href="<?=$subSubCategory->getMainLink()?>"><?= Utils::l($subSubCategory->name) ?></a>
+													</li>
+												<?php
+												} ?>
+											</ul>
 											<?php
-											}
 										}
 									}
 								} else {
