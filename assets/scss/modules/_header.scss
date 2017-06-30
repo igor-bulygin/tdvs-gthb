@@ -410,16 +410,16 @@
 	border-bottom: 1px solid #ccc;
 	margin: 10px 0!important;
 }
-.cathegory-menu{
+.category-menu{
 	background-color: #ffffff;
 	padding: 10px 0;
     float: left;
     width: 100%;
     position: relative;
     z-index: 2;
-	.cathegories{
-		width: 125px;
+	.categories{
     	float: left;
+		margin-right: 15px;
 		ul{
 			li{
 				a{
@@ -434,7 +434,15 @@
 					}
 				}
 			}
+			&.two-categories{
+				margin-right: 15px;
+				float: left;
+				.two-categories-title{
+					font-weight: bold;
+				}
+			}
 		}
+		
 	}
 	.images{
 		float: left;
@@ -460,21 +468,22 @@
 		}
 	}
 }
-.menu-cathegories{
+.menu-categories{
 	position: absolute;
 	width: 100%;
 	display: none;
+	z-index: 999999999999999999;
 	&.active{
 		display: block;
 	}
 }
-.menu-cathegories #submenu-cathegories{
+.menu-categories #submenu-categories{
   display: none;
 }
-.menu-cathegories:hover #submenu-cathegories{
+.menu-categories:hover #submenu-categories{
   display: block;
 }
-.menu-cathegories .cathegory-menu{
+.menu-categories .category-menu{
   display: none;
 	&.active{
 		display: block;

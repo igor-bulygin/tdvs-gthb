@@ -60,7 +60,7 @@
 
 		function setCity() {
 			if(angular.isObject(vm.person.personal_info)) {
-				if(vm.person.personal_info.city && vm.person.personal_info.city != "" && vm.person.personal_info.country && vm.person.personal_info.country != "") {
+				if(UtilService.isStringNotEmpty(vm.person.personal_info.city) && UtilService.isStringNotEmpty(vm.person.personal_info.country)) {
 					selectCity({
 						city: vm.person.personal_info.city,
 						country_code: vm.person.personal_info.country
@@ -71,10 +71,10 @@
 
 		function setImages() {
 			if(angular.isObject(vm.person.media)) {
-				if(vm.person.media.header && vm.person.media.header != "") {
+				if(UtilService.isStringNotEmpty(vm.person.media.header)) {
 					vm.header_crop = vm.header = currentHost() + person.url_images + vm.person.media.header;
 				}
-				if(vm.person.media.profile && vm.person.media.profile != "") {
+				if(UtilService.isStringNotEmpty(vm.person.media.profile)) {
 					vm.profile_crop = vm.profile = currentHost() + person.url_images + vm.person.media.header;
 				}
 			}
