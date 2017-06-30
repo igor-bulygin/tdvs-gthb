@@ -3,9 +3,14 @@
  */
 $(function () {
     $('.toggle-category').on('mouseover', function (e) {
-        $('ul.category').each(function() {
-            $(this).removeClass('active');
+        $('.cathegory-menu').each(function() {
+            $(this).hide();
         });
-        $($(this).data('target')).addClass('active');
+        $($(this).data('target')).show();
+    });
+    $('.menu-cathegories').on('mouseout', function(e) {
+		$('.cathegory-menu').each(function() {
+			$(this).hide();
+		});
     });
 });

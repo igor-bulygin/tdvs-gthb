@@ -85,6 +85,8 @@ class PublicController extends CController
 		$influencers = Person::getRandomInfluencers(12, $categoryShortIds);
 
 		$this->layout = '/desktop/public-2.php';
+		$this->view->params['selectedCategory'] = isset($category) ? $category : null;
+
 		return $this->render("index-2", [
 			'banners' => $banners,
 			'totalDevisers' => count($devisers),

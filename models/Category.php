@@ -4,6 +4,7 @@ namespace app\models;
 use app\helpers\CActiveRecord;
 use app\helpers\Utils;
 use Yii;
+use yii\helpers\Url;
 use yii\mongodb\ActiveQuery;
 use yii\mongodb\Query;
 
@@ -434,11 +435,47 @@ class Category extends CActiveRecord {
 	}
 
 	/**
+	 * Returns the products to show in header menu
+	 *
+	 * @param int $limit
+	 * @return Product[]
+	 */
+	public function getHeaderProducts($limit)
+	{
+		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_PUBLIC);
+		$products = Product::findSerialized(['limit' => 100]);
+
+		$products = array_slice($products, rand(0, count($products)), 3);
+		return $products;
+
+	}
+
+	/**
 	 * Returns TRUE if the current category has groups of categories to be shown on the "shop by deparment" header
 	 *
 	 * @return bool
 	 */
 	public function hasGroupsOfCategories() {
 		return $this->short_id == '4a2b4'; // at this moment only fashion has this behaviour
+	}
+
+	public function getSlug()
+	{
+		if (is_array($this->slug)) {
+			$slug = Utils::l($this->slug);
+		} else {
+			$slug = $this->slug;
+		}
+
+		return $slug;
+	}
+
+	public function getMainLink()
+	{
+		return Url::to([
+			"public/category-b",
+			"slug" => $this->getSlug(),
+			'category_id' => $this->short_id
+		]);
 	}
 }

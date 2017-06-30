@@ -20,6 +20,7 @@ class PublicHeader2 extends Widget {
 		}
 
 		return $this->render('PublicHeader2', [
+			'selectedCategory' => $this->view->params['selectedCategory'],
 			'categories' => Category::getHeaderCategories(),
 			'login_model' => $model,
 			'q' => Yii::$app->request->get('q'),

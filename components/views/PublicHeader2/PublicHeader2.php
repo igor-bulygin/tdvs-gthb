@@ -113,7 +113,8 @@ app\components\assets\PublicHeader2Asset::register($this);
 						<i class="fa fa-bars" aria-hidden="true"></i>
 						<span>Shop by departament</span>
 					</a>
-					<!--<div class="dropdowns-wrapper">
+					<!--
+					<div class="dropdowns-wrapper">
 						<div class="dropdown-menu dropdown-shop">
 							<ul class="shop-menu-wrapper">
 								<?php foreach($categories as $category) { ?>
@@ -185,70 +186,73 @@ app\components\assets\PublicHeader2Asset::register($this);
 	<nav class="navbar navbar-default terciary">
 		<div class="container">
 			<ul>
-				<li>
-					<a class="selected" href="">Art</a>
-				</li>
-				<li>
-					<a href="">Fashion</a>
-				</li>
-				<li>
-					<a href="">Beauty</a>
-				</li>
-				<li>
-					<a href="">Technology</a>
-				</li>
-				<li>
-					<a href="">Sports</a>
-				</li>
-				<li>
-					<a href="">Interior design</a>
-				</li>
-				<li>
-					<a href="">Jewelery</a>
-				</li>
+				<?php foreach($categories as $category) { ?>
+					<li>
+						<a class="toggle-category <?=$selectedCategory == $category ? 'selected' : ''?>" data-target="#category-<?=$category->short_id?>" href="<?= $category->getMainLink()?>"><?= Utils::l($category->name)?></a>
+					</li>
+				<?php } ?>
 			</ul>
 		</div>
 	</nav>
-	<div class="cathegory-menu">
-		<div class="container">
-			<div class="cathegories">
-				<ul>
-					<li>
-						<a href="">Ceramics</a>
-					</li>
-					<li>
-						<a href="">Drawings</a>
-					</li>
-					<li>
-						<a href="">Paintings</a>
-					</li>
-					<li>
-						<a href="">Photography</a>
-					</li>
-					<li>
-						<a href="">Sculptures</a>
-					</li>
-				</ul>
-			</div>
-			<div class="images">
-				<div class="image-1">
-					<a href="#">
-						<img src="/imgs/photo-grid-h-1.jpg">
-					</a>
-				</div>
-				<div class="images-wrapper">
-					<div class="image-2">
-						<a href="#">
-							<img src="/imgs/photo-grid-h-1.jpg">
-						</a>
+	<div id="submenu-cathegories">
+		<?php foreach($categories as $category) { ?>
+			<div class="cathegory-menu" id="category-<?=$category->short_id?>">
+				<div class="container">
+					<div class="cathegories">
+						<ul>
+							<?php
+							if ($category->hasGroupsOfCategories()) {
+
+								$subCategories = $category->getSubCategories();
+								if ($subCategories) {
+									foreach ($subCategories as $subCategory) { ?>
+										<li>
+											<a href="<?=$subCategory->getMainLink()?>"><?= Utils::l($subCategory->name) ?></a>
+										</li>
+										<?php
+
+										$subSubCategories = $subCategory->getSubCategoriesHeader();
+										foreach ($subSubCategories as $subSubCategory) { ?>
+											<li>
+												<a href="<?=$subSubCategory->getMainLink()?>"><?= Utils::l($subSubCategory->name) ?></a>
+											</li>
+										<?php
+										}
+									}
+								}
+							} else {
+								$subCategories = $category->getSubCategories();
+								if ($subCategories) {
+									foreach ($subCategories as $subCategory) { ?>
+										<li>
+											<a href="<?= $subCategory->getMainLink()?>"><?= Utils::l($subCategory->name) ?></a>
+										</li>
+									<?php
+									}
+								}
+							}?>
+						</ul>
 					</div>
-					<div class="image-2">
-						<a href="#">
-							<img src="/imgs/photo-grid-h-1.jpg">
-						</a>
+					<div class="images">
+						<?php
+						$products = $category->getHeaderProducts(3);
+						$image = 1;
+						foreach ($products as $product) { ?>
+							<div class="image-<?=$image?>">
+								<a href="<?=$product->getViewLink()?>" title="<?=$product->name?>">
+									<img src="<?=Utils::url_scheme().Utils::thumborize($product->getMainImage())->resize(398, 235)?>">
+								</a>
+							</div>
+							<?php
+							if ($image== 1) {
+								$image = 2;?>
+								<div class="images-wrapper">
+							<?php }
+						} ?>
+								</div><!--close image-wrapper-->
 					</div>
 				</div>
 			</div>
-		</div>
+		<?php } ?>
 	</div>
 </div>
