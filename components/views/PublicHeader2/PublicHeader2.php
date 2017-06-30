@@ -109,68 +109,10 @@ app\components\assets\PublicHeader2Asset::register($this);
 	<div class="container">
 		<ul class="nav navbar-nav">
 				<li>
-					<a href="#" class="menu-title">
+					<a href="#" class="menu-title hover-toggle" data-target=".menu-cathegories" data-group=".cathegory-menu">
 						<i class="fa fa-bars" aria-hidden="true"></i>
 						<span>Shop by departament</span>
 					</a>
-					<!--
-					<div class="dropdowns-wrapper">
-						<div class="dropdown-menu dropdown-shop">
-							<ul class="shop-menu-wrapper">
-								<?php foreach($categories as $category) { ?>
-									<li class="toggle-category" data-target=".category-<?=$category->short_id?>"><a class="ion-chevron-right" href="<?= Url::to(["public/category-b", "slug" => $category->slug, 'category_id' => $category->short_id])?>"><?= Utils::l($category->name)?></a></li>
-									<li role="separator" class="divider"></li>
-								<?php } ?>
-							</ul>
-							<?php
-							$active = 'active';
-							foreach ($categories as $category) {
-								if ($category->hasGroupsOfCategories()) {
-									$subCategories = $category->getSubCategories();
-									if ($subCategories) {
-										foreach ($subCategories as $subCategory) {
-
-											$subSubCategories = $subCategory->getSubCategoriesHeader(); ?>
-											<ul class="shop-secondary-menu-wrapper category category-<?=$category->short_id ?> <?=$active?>">
-												<li><?= Utils::l($subCategory->name) ?></li>
-												<?php foreach ($subSubCategories as $subSubCategory) { ?>
-													<li>
-														<a href="<?= Url::to(["public/category-b", "slug" => $subSubCategory->slug, 'category_id' => $subSubCategory->short_id]) ?>"><?= Utils::l($subSubCategory->name) ?></a>
-													</li>
-												<?php }
-												if (($image = $subCategory->getHeaderImage()) !== null) { ?>
-													<li class="minibanner">
-													<a href="#">
-														<img src="<?= $image ?>">
-													</a>
-													</li><?php
-												} ?>
-											</ul>
-										<?php }
-									}
-								} else {
-									$subCategories = $category->getSubCategoriesHeader();
-									if ($subCategories) { ?>
-										<ul class="shop-secondary-menu-wrapper category category-<?=$category->short_id ?> <?=$active?>">
-											<?php foreach ($subCategories as $subCategory) { ?>
-												<li>
-													<a href="<?= Url::to(["public/category-b", "slug" => $subCategory->slug, 'category_id' => $subCategory->short_id]) ?>"><?= Utils::l($subCategory->name) ?></a>
-												</li><?php
-											}
-											if (($image = $category->getHeaderImage()) !== null) { ?>
-												<li class="minibanner">
-													<a href="#">
-														<img src="<?= $image ?>">
-													</a>
-												</li><?php
-											} ?>
-										</ul><?php
-									}
-								}
-								$active = '';
-							} ?>
-						</div>
-					</div>-->
 				</li>
 			</ul>
 		<ul class="nav navbar-nav navbar-right">
@@ -188,7 +130,7 @@ app\components\assets\PublicHeader2Asset::register($this);
 			<ul>
 				<?php foreach($categories as $category) { ?>
 					<li>
-						<a class="toggle-category <?=$selectedCategory && $selectedCategory->short_id == $category->short_id ? 'selected' : ''?>" data-target="#category-<?=$category->short_id?>" href="<?= $category->getMainLink()?>"><?= $category->name?></a>
+						<a class="hover-toggle <?=$selectedCategory && $selectedCategory->short_id == $category->short_id ? 'selected' : ''?>" data-group=".cathegory-menu" data-target="#category-<?=$category->short_id?>" href="<?= $category->getMainLink()?>"><?= $category->name?></a>
 					</li>
 				<?php } ?>
 			</ul>
