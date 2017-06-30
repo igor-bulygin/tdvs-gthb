@@ -463,5 +463,14 @@
 .menu-cathegories{
 	position: absolute;
 }
+.menu-cathegories #submenu-cathegories{
+  display: none;
+}
+.menu-cathegories:hover #submenu-cathegories{
+  display: block;
+}
+.menu-cathegories .cathegory-menu{
+  display: none;
+}
 
 

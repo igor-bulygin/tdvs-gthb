@@ -2155,6 +2155,18 @@ input[type="radio"] .styled:checked + label::after {
           width: 186px;
           display: block; }
 
+.menu-cathegories {
+  position: absolute; }
+
+.menu-cathegories #submenu-cathegories {
+  display: none; }
+
+.menu-cathegories:hover #submenu-cathegories {
+  display: block; }
+
+.menu-cathegories .cathegory-menu {
+  display: none; }
+
 .carousel-indicators li {
   margin: 1px 5px;
   border: none;
