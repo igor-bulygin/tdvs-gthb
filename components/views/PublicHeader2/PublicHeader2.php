@@ -110,7 +110,7 @@ app\components\assets\PublicHeader2Asset::register($this);
 		<div class="container">
 			<ul class="nav navbar-nav">
 					<li>
-						<a href="#" class="menu-title hover-toggle" data-target=".menu-cathegories" data-group=".cathegory-menu">
+						<a href="#" class="menu-title hover-toggle" data-target=".menu-categories" data-group=".category-menu">
 							<i class="fa fa-bars" aria-hidden="true"></i>
 							<span>Shop by departament</span>
 						</a>
@@ -125,23 +125,23 @@ app\components\assets\PublicHeader2Asset::register($this);
 			</ul>
 		</div>
 	</nav>
-	<div class="menu-cathegories">
+	<div class="menu-categories">
 		<nav class="navbar navbar-default terciary">
 			<div class="container">
 				<ul>
 					<?php foreach($categories as $category) { ?>
 						<li>
-							<a class="hover-toggle <?=$selectedCategory && $selectedCategory->short_id == $category->short_id ? 'selected' : ''?>" data-group=".cathegory-menu" data-target="#category-<?=$category->short_id?>" href="<?= $category->getMainLink()?>"><?= $category->name?></a>
+							<a class="hover-toggle <?=$selectedCategory && $selectedCategory->short_id == $category->short_id ? 'selected' : ''?>" data-group=".category-menu" data-target="#category-<?=$category->short_id?>" href="<?= $category->getMainLink()?>"><?= $category->name?></a>
 						</li>
 					<?php } ?>
 				</ul>
 			</div>
 		</nav>
-		<div id="submenu-cathegories">
+		<div id="submenu-categories">
 			<?php foreach($categories as $category) { ?>
-				<div class="cathegory-menu" id="category-<?=$category->short_id?>">
+				<div class="category-menu" id="category-<?=$category->short_id?>">
 					<div class="container">
-						<div class="cathegories">
+						<div class="categories">
 							<ul>
 								<?php
 								if ($category->hasGroupsOfCategories()) {
