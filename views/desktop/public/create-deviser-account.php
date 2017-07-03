@@ -12,9 +12,6 @@ $this->title = 'Create a Deviser account - Todevise';
 $this->registerJs("var invitation = ".Json::encode($invitation), yii\web\View::POS_HEAD, 'invitation-var-script');
 $this->registerJs("var type = 3", yii\web\View::POS_HEAD, 'person-type-var-script');
 
-$show_header = isset($this->params['show_header']) ? $this->params['show_header'] : true;
-$show_footer = isset($this->params['show_footer']) ? $this->params['show_footer'] : true;
-
 ?>
 
 <div class="create-deviser-account-wrapper">
