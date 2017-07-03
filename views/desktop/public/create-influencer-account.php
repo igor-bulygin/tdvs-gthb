@@ -8,8 +8,12 @@ PublicCommonAsset::register($this);
 /** @var Invitation $invitation */
 
 $this->title = 'Create an influencer account - Todevise';
+
 $this->registerJs("var invitation = ".\yii\helpers\Json::encode($invitation), yii\web\View::POS_HEAD, 'invitation-var-script');
 $this->registerJs("var type = 2", yii\web\View::POS_HEAD, 'person-type-var-script');
+
+$show_header = isset($this->params['show_header']) ? $this->params['show_header'] : true;
+$show_footer = isset($this->params['show_footer']) ? $this->params['show_footer'] : true;
 
 ?>
 
