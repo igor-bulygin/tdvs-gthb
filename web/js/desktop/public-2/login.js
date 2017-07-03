@@ -8,7 +8,7 @@
 		function login() {
 			function onLoginSuccess(data) {
 				localStorageUtilService.setLocalStorage('access_token', data.access_token);
-				$window.location.href = currentHost() + data.return_url;
+				$window.location.href = data.return_url;
 			}
 
 			function onLoginError(err) {
