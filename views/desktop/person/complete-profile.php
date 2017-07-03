@@ -12,7 +12,7 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 
 <div class="create-deviser-account-wrapper" ng-controller="completeProfileCtrl as completeProfileCtrl">
 	<div class="logo">
-		<a href="#">
+		<a href="<?=\yii\helpers\Url::to('/')?>">
 			<img src="/imgs/logo.png" data-pin-nopin="true">
 		</a>
 	</div>
