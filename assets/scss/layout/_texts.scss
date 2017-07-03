@@ -3,8 +3,8 @@
 // ==========================================================================
 .white-title-lg{
 	color: $white;
-	font-size: 68px;
-    letter-spacing: 8px;
+	font-size: 73px;
+    letter-spacing: 5px;
 	line-height: 55px;
     text-transform: uppercase;
 	font-family: $font-family--name;
@@ -12,7 +12,7 @@
 }
 .white-subtitle-lg{
 	color: $white;
-	font-size: 26px;
+	font-size: 24px;
 	font-family: $font-family--regular;
 	font-weight: 300;
 	letter-spacing: 0.5px;
@@ -29,4 +29,5 @@
 	font-family: $font-family--regular;
 	margin: 60px 0 30px;
 	color: $black;
+	font-size: 24px;
 }
