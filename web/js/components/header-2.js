@@ -12,6 +12,6 @@ $(function () {
 	});
 	$('#navbar-wrapper').on('mouseleave', function(e) {
 		// hide all submenus
-		$('.menu-cathegories').removeClass('active');
+		$('.menu-categories').removeClass('active');
 	});
 });
