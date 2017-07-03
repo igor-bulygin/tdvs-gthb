@@ -32,7 +32,7 @@ class AuthController extends AppPublicController
 				$returnUrl = $person->getMainLink();
 			}
 			if (Url::isRelative($returnUrl)) {
-				$returnUrl = Url::base() . $returnUrl;
+				$returnUrl = Url::to($returnUrl, true);
 			}
 			
 			Yii::$app->response->setStatusCode(200); // Created
