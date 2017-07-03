@@ -5,6 +5,7 @@ namespace app\modules\api\pub\v1\controllers;
 use app\models\Login;
 use app\models\Person;
 use Yii;
+use yii\helpers\Url;
 
 class AuthController extends AppPublicController
 {
@@ -29,6 +30,9 @@ class AuthController extends AppPublicController
 			// If return url is "home", we redirect the user to the main link (profile)
 			if ($returnUrl == Yii::$app->getHomeUrl()) {
 				$returnUrl = $person->getMainLink();
+			}
+			if (Url::isRelative($returnUrl)) {
+				$returnUrl = Url::base() . $returnUrl;
 			}
 			
 			Yii::$app->response->setStatusCode(200); // Created

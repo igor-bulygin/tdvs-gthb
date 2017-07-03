@@ -1416,7 +1416,7 @@ class Person extends CActiveRecord implements IdentityInterface
 		} elseif ($this->isClient()) {
 			return $this->getLovedLink();
 		}
-		return '#';
+		return Yii::$app->getHomeUrl();
 	}
 
 	public function getSettingsLink($action = null) {
