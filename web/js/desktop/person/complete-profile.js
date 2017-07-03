@@ -1,7 +1,8 @@
 (function() {
 	"use strict";
 
-	function controller(personDataService, UtilService, locationDataService, productDataService, languageDataService, Upload, uploadDataService, $scope, $window) {
+	function controller(personDataService, UtilService, locationDataService, productDataService, languageDataService, Upload, 
+		uploadDataService, $scope, $window) {
 		var vm = this;
 		vm.has_error = UtilService.has_error;
 		vm.stripHTMLTags = UtilService.stripHTMLTags;
@@ -35,6 +36,9 @@
 		function init() {
 			getCategories();
 			getLanguages();
+
+			//These two functions work only when there is some malfunction in the database and some
+			//essential data get accidentally deleted.
 			setCity();
 			setImages();
 		}
@@ -75,7 +79,7 @@
 					vm.header_crop = vm.header = currentHost() + person.url_images + vm.person.media.header;
 				}
 				if(UtilService.isStringNotEmpty(vm.person.media.profile)) {
-					vm.profile_crop = vm.profile = currentHost() + person.url_images + vm.person.media.header;
+					vm.profile_crop = vm.profile = currentHost() + person.url_images + vm.person.media.profile;
 				}
 			}
 		}
@@ -166,7 +170,7 @@
 				vm.person.media.profile = angular.copy(data.data.filename);
 				vm.profile_crop = newValue;
 			}
-			if(newValue) {
+			if(angular.isObject(newValue)) {
 				//upload original
 				var data = {
 					person_id: vm.person.short_id,
