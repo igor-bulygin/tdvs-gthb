@@ -69,6 +69,9 @@ class PersonController extends CController
 			throw new UnauthorizedHttpException();
 		}
 
+		$this->view->params['show_header'] = false;
+		$this->view->params['show_footer'] = false;
+
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("@app/views/desktop/person/complete-profile", [
 			'person' => $person,
