@@ -19,6 +19,10 @@ collections=`echo "show collections" | mongo localhost:27777/$remote_database_na
 
 for collection in $collections;
 do
+	if [ "$collection" == "todeviselog" ]; then
+    	echo "Ignoring collection $collection"
+		continue
+	fi
     printf "\n"
     printf "\n"
 
