@@ -163,7 +163,7 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 			</div>
 			<div class="row">
 				<button class="btn-red send-btn" ng-click="completeProfileCtrl.save(completeProfileCtrl.form)" ng-disabled="completeProfileCtrl.sendingForm">
-				<i class="ion-android-navigate"></i>
+				<img src="/imgs/plane.svg" data-pin-nopin="true">
 			</button>
 			</div>
 		</form>

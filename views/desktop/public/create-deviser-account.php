@@ -66,7 +66,7 @@ $this->registerJs("var type = 3", yii\web\View::POS_HEAD, 'person-type-var-scrip
 				</div>
 			</div>
 			<button class="btn-red send-btn" ng-click="createAccountCtrl.submitForm(createAccountCtrl.form)">
-				<i class="ion-android-navigate"></i>
+				<img src="/imgs/plane.svg" data-pin-nopin="true">
 			</button>
 		</form>
 	</div>

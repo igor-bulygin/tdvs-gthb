@@ -607,6 +607,15 @@ a, a:hover, a:focus {
   -webkit-border-radius: 90px 90px 90px 90px !important;
   -moz-border-radius: 90px 90px 90px 90px !important;
   cursor: pointer; }
+  .send-btn img {
+    -ms-transform: rotate(270deg);
+    /* IE 9 */
+    -webkit-transform: rotate(270deg);
+    /* Chrome, Safari, Opera */
+    transform: rotate(270deg);
+    margin: 0 0 10px;
+    height: 30px;
+    width: 30px; }
   .send-btn i {
     color: #ffffff;
     font-size: 42px; }
