@@ -14,6 +14,8 @@ use yii\mongodb\Query;
  * @property bool prints
  * @property mixed|string name
  * @property string slug
+ * @property int header_position
+ * @property array header_products
  */
 class Category extends CActiveRecord {
 
@@ -37,7 +39,9 @@ class Category extends CActiveRecord {
 			'sizecharts',
 			'prints',
 			'name',
-			'slug'
+			'slug',
+			'header_position',
+			'header_products',
 		];
 	}
 
@@ -55,6 +59,33 @@ class Category extends CActiveRecord {
 	{
 		parent::init();
 		$this->deviserProduct = [];
+	}
+
+	public function rules()
+	{
+		return [
+			[
+				[
+					'short_id',
+					'path',
+					'sizecharts',
+					'prints',
+					'name',
+					'slug',
+					'header_position',
+					'header_products',
+				],
+				'safe',
+			],
+			[
+				'name',
+				'app\validators\TranslatableValidator',
+			],
+			[
+				'header_position',
+				'integer',
+			]
+		];
 	}
 
 
@@ -75,6 +106,7 @@ class Category extends CActiveRecord {
                     'prints',
                     'name',
                     'slug',
+                    'header_products',
                 ];
                 static::$translateFields = true;
                 break;
@@ -86,6 +118,7 @@ class Category extends CActiveRecord {
                     'prints',
                     'name',
                     'slug',
+					'header_products',
                 ];
                 static::$translateFields = false;
                 break;
@@ -120,6 +153,10 @@ class Category extends CActiveRecord {
 			switch ($criteria["scope"]) {
 				case "all":
 					break;
+				case "header":
+					$query->andWhere([">", "header_position", 0]);
+					$query->andWhere(["path" => "/"]);
+					break;
 				case "roots":
 				default:
 					$query->andWhere(["path" => "/"]);
@@ -141,6 +178,16 @@ class Category extends CActiveRecord {
 		    $query->offset($criteria["offset"]);
 	    }
 
+		if ((array_key_exists("order_col", $criteria)) && (!empty($criteria["order_col"])) &&
+			(array_key_exists("order_dir", $criteria)) && (!empty($criteria["order_dir"]))) {
+			$query->orderBy([
+				$criteria["order_col"] => $criteria["order_dir"] == 'desc' ? SORT_DESC : SORT_ASC,
+			]);
+		} else {
+			$query->orderBy([
+				"created_at" => SORT_DESC,
+			]);
+		}
 	    $items = $query->all();
 
 
@@ -150,6 +197,26 @@ class Category extends CActiveRecord {
         }
         return $items;
     }
+
+	/**
+	 * Get one entity serialized
+	 *
+	 * @param string $id
+	 *
+	 * @return Category|null
+	 */
+	public static function findOneSerialized($id)
+	{
+		/** @var Category $category */
+		$category = Category::find()->select(self::getSelectFields())->where(["short_id" => $id])->one();
+
+		// if automatic translation is enabled
+		if (static::$translateFields) {
+			Utils::translate($category);
+		}
+
+		return $category;
+	}
 
 	/**
 	 * Get list of categories to use in header menu
@@ -171,7 +238,9 @@ class Category extends CActiveRecord {
 		Category::setSerializeScenario(Category::SERIALIZE_SCENARIO_PUBLIC);
 		$categories = Category::findSerialized(
 			[
-				'id' => $categoriesIds,
+				'scope' => 'header',
+				'order_col' => 'header_position',
+				'order_dir' => SORT_ASC,
 			]
 		);
 
@@ -206,31 +275,13 @@ class Category extends CActiveRecord {
 	{
 		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_PUBLIC);
 
-		$products = [
-			'3f78g' => [ //jewelry
-				'e0338af7', '42ab9269', 'b5188907',
-			],
-			'1a23b' => [ // art
-				'b35cb8e', '3bca1b15', 'b479b9ad',
-			],
-			'4a2b4' => [ // fashion
-				'a39ae909', '5e4c190c', '5222de87',
-			],
-			'2r67s' => [  // decoration
-				'1d71d7fb', 'dd095081', 'af0b8163',
-			],
-		];
-
-		if (isset($products[$this->short_id])) {
-
-			// Get hardcoded products
-			$products = Product::findSerialized(
-				[
-					'id' => $products[$this->short_id],
-				]
-			);
+		if ($this->header_products) {
+			$products = Product::findSerialized([
+				'id' => $this->header_products,
+			]);
 
 		} else {
+
 			// if there is no hardcoded products, we get randome products of the category
 
 			$products = Product::findSerialized(
@@ -244,8 +295,8 @@ class Category extends CActiveRecord {
 				$products = array_slice($products, rand(0, count($products)), 3);
 			}
 		}
-		return $products;
 
+		return $products;
 	}
 
 	/**
