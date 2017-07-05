@@ -145,7 +145,9 @@ app\components\assets\PublicHeader2Asset::register($this);
 							<ul>
 								<?php
 								if ($category->hasGroupsOfCategories()) {
-
+									// Category with 3 levels or more.
+									// Each 2nd level is shown as a column with a styled title
+									// Each column shows 3rd level items
 									$subCategories = $category->getSubCategories();
 									if ($subCategories) {
 										foreach ($subCategories as $subCategory) { ?>
@@ -169,11 +171,37 @@ app\components\assets\PublicHeader2Asset::register($this);
 								} else {
 									$subCategories = $category->getSubCategories();
 									if ($subCategories) {
-										foreach ($subCategories as $subCategory) { ?>
-											<li>
-												<a href="<?= $subCategory->getMainLink()?>"><?= Utils::l($subCategory->name) ?></a>
-											</li>
-										<?php
+										if (count($subCategories) > 8) {
+											// Category with 9 or more 2nd level items
+											// Subcategories are shown in columns ?>
+
+											<ul class="two-categories">
+
+											<?php
+											$i = 1;
+											foreach ($subCategories as $subCategory) { ?>
+												<li>
+													<a href="<?= $subCategory->getMainLink() ?>"><?= Utils::l($subCategory->name) ?></a>
+												</li>
+
+												<?php if ($i == ceil(count($subCategories) / 2)) { ?>
+													</ul>
+													<ul class="two-categories">
+												<?php }
+												$i++;
+											} ?>
+											</ul>
+											<?php
+										} else {
+											// Category with 8 or less 2nd level
+											// All subcategories are shown in one column
+
+											foreach ($subCategories as $subCategory) { ?>
+												<li>
+													<a href="<?= $subCategory->getMainLink() ?>"><?= Utils::l($subCategory->name) ?></a>
+												</li>
+												<?php
+											}
 										}
 									}
 								}?>
