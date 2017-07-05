@@ -2188,11 +2188,11 @@ input[type="radio"] .styled:checked + label::after {
       overflow: hidden; }
     .category-menu .images .images-wrapper {
       float: left;
-      margin: 0 0 0 15px; }
+      margin: 0 0 0 20px; }
       .category-menu .images .images-wrapper .image-2 {
         height: 109px;
         width: 186px;
-        margin: 0 0 15px;
+        margin: 0 0 20px;
         overflow: hidden; }
         .category-menu .images .images-wrapper .image-2 img {
           width: 186px;
