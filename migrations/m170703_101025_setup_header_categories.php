@@ -49,9 +49,11 @@ class m170703_101025_setup_header_categories extends \yii\mongodb\Migration
 		Category::setSerializeScenario(\app\models\Category::SERIALIZE_SCENARIO_ADMIN);
 		foreach ($setup as $categoryId => $products) {
 			$category = Category::findOneSerialized($categoryId);
-			$category->header_position = $i;
-			$category->header_products = $products;
-			$category->save();
+			if ($category) {
+				$category->header_position = $i;
+				$category->header_products = $products;
+				$category->save();
+			}
 			$i++;
 		}
 	}
