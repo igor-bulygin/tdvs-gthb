@@ -2160,10 +2160,11 @@ input[type="radio"] .styled:checked + label::after {
   float: left;
   width: 100%;
   position: relative;
-  z-index: 2; }
+  z-index: 2;
+  max-height: 260px; }
   .category-menu .categories {
     float: left;
-    margin-right: 15px; }
+    margin-right: 60px; }
     .category-menu .categories ul li a {
       font-family: "Univers Condensed Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-size: 16px;
@@ -2174,7 +2175,7 @@ input[type="radio"] .styled:checked + label::after {
       .category-menu .categories ul li a:hover {
         color: #F7284B !important; }
     .category-menu .categories ul.two-categories {
-      margin-right: 15px;
+      margin-right: 60px;
       float: left; }
       .category-menu .categories ul.two-categories .two-categories-title {
         font-weight: bold; }

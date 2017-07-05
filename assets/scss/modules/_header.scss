@@ -417,9 +417,10 @@
     width: 100%;
     position: relative;
     z-index: 2;
+	max-height: 260px;
 	.categories{
     	float: left;
-		margin-right: 15px;
+		margin-right: 60px;
 		ul{
 			li{
 				a{
@@ -435,7 +436,7 @@
 				}
 			}
 			&.two-categories{
-				margin-right: 15px;
+				margin-right: 60px;
 				float: left;
 				.two-categories-title{
 					font-weight: bold;
