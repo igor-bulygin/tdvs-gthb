@@ -417,7 +417,7 @@
     width: 100%;
     position: relative;
     z-index: 2;
-	max-height: 260px;
+	height: 280px;
 	.categories{
     	float: left;
 		margin-right: 60px;
@@ -455,11 +455,11 @@
 		}
 		.images-wrapper{
 			float: left;
-			margin: 0 0 0 15px;
+			margin: 0 0 0 20px;
 			.image-2{
 				height: 109px;
 				width: 186px;
-				margin: 0 0 15px;
+				margin: 0 0 20px;
 				overflow: hidden;
 				img{
 					width: 186px;
