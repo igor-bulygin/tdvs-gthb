@@ -26,6 +26,7 @@ class CartController extends AppPublicController
 		$order->save();
 
 		Yii::$app->response->setStatusCode(201); // Created
+
 		return $order;
 	}
 
@@ -52,6 +53,7 @@ class CartController extends AppPublicController
 			}
 		}
 		Yii::$app->response->setStatusCode(200); // Ok
+
 		return $order;
 	}
 
@@ -73,9 +75,11 @@ class CartController extends AppPublicController
 			$order->save();
 
 			Yii::$app->response->setStatusCode(201); // Created
+
 			return $order;
 		} else {
 			Yii::$app->response->setStatusCode(400); // Bad Request
+
 			return ["errors" => $product->errors];
 		}
 	}
@@ -100,9 +104,11 @@ class CartController extends AppPublicController
 			$order->save();
 
 			Yii::$app->response->setStatusCode(200); // Ok
+
 			return $order;
 		} else {
 			Yii::$app->response->setStatusCode(400); // Bad Request
+
 			return ["errors" => $product->errors];
 		}
 	}
@@ -149,9 +155,11 @@ class CartController extends AppPublicController
 			$order->save();
 
 			Yii::$app->response->setStatusCode(200); // Created
+
 			return $order;
 		} else {
 			Yii::$app->response->setStatusCode(400); // Bad Request
+
 			return ["errors" => $clientInfo->errors];
 		}
 	}
@@ -205,93 +213,111 @@ class CartController extends AppPublicController
 		$currentPaymentInfo = Yii::$app->request->post('token');
 		$token = $currentPaymentInfo['id'];
 
+		if (!$token) {
+			$message = sprintf("We didn't received any token from stripe for cart_id %s", $cartId);
+			Yii::info($message, 'Stripe');
+			throw new BadRequestHttpException("No token received from stripe");
+		}
+
 		if ($order->order_state != Order::ORDER_STATE_CART) {
 			throw new BadRequestHttpException("This order is in an invalid state");
 		}
 
-		Stripe::setApiKey(Yii::$app->params['stripe_secret_key']);
+		try {
 
-		$products = $order->productsMapping;
+			Stripe::setApiKey(Yii::$app->params['stripe_secret_key']);
 
-		$devisers = [];
-		foreach ($products as $product) {
-			if (isset($devisers[$product->deviser_id])) {
-				$amount = $devisers[$product->deviser_id]['amount'];
-			} else {
-				$amount = 0;
-			}
-			$devisers[$product->deviser_id] = [
-				'amount' => $amount + ($product->price * $product->quantity),
-				'deviser' => Person::findOneSerialized($product->deviser_id),
-			];
-		}
+			$products = $order->productsMapping;
 
-		$customer = \Stripe\Customer::create([
-			'email' => $order->clientInfoMapping->email,
-			'source' => $token,
-		]);
-
-		$charges = [];
-		foreach ($devisers as $oneDeviser) {
-			$amount = $oneDeviser['amount'];
-			$deviser = $oneDeviser['deviser'];
-			/* @var Person $deviser */
-
-			$stripeAmount = (int)($amount * 100);
-			$todeviseFee = (int)($stripeAmount * 0.04);
-
-			if (empty($deviser->settingsMapping->stripeInfoMapping->access_token)) {
-
-				// If the deviser has no a connected stripe account, we charge directly to todevise account
-				$charges[] = \Stripe\Charge::create([
-					'customer' => $customer->id,
-					'currency' => 'eur',
-					'amount' => $stripeAmount,
-					"description" => "Order Nº " . $order->short_id,
-					"metadata" => [
-						"order_id" => $order->short_id,
-						"order" => json_encode($order),
-					],
-				]);
-
-			} else {
-
-				// Create a Token from the existing customer on the platform's account
-				$token = \Stripe\Token::create(
-					[
-						"customer" => $customer->id,
-						"card" => $currentPaymentInfo['card']['id'],
-					],
-					["stripe_account" => $deviser->settingsMapping->stripeInfoMapping->stripe_user_id] // id of the connected account
-				);
-
-				$charges[] = \Stripe\Charge::create([
-					'source' => $token,
-					'currency' => 'eur',
-					'amount' => $stripeAmount,
-					"description" => "Order Nº " . $order->short_id,
-					'application_fee' => $todeviseFee,
-					"metadata" => [
-						"order_id" => $order->short_id,
-					],
-				],
-					[
-						'stripe_account' => $deviser->settingsMapping->stripeInfoMapping->stripe_user_id,
-					]
-				);
-
+			// Create an array of devisers, with amount price for each
+			$devisers = [];
+			foreach ($products as $product) {
+				if (isset($devisers[$product->deviser_id])) {
+					$amount = $devisers[$product->deviser_id]['amount'];
+				} else {
+					$amount = 0;
+				}
+				$devisers[$product->deviser_id] = [
+					'amount' => $amount + ($product->price * $product->quantity),
+					'deviser' => Person::findOneSerialized($product->deviser_id),
+				];
 			}
 
+			// Create a customer in stripe for the received token
+			$customer = \Stripe\Customer::create([
+				'email' => $order->clientInfoMapping->email,
+				'source' => $token,
+			]);
+
+			$charges = [];
+			foreach ($devisers as $oneDeviser) {
+				$amount = $oneDeviser['amount'];
+				$deviser = $oneDeviser['deviser'];
+				/* @var Person $deviser */
+
+				$stripeAmount = (int)($amount * 100);
+				$todeviseFee = (int)($stripeAmount * Yii::$app->params['default_todevise_fee']);
+
+				if (empty($deviser->settingsMapping->stripeInfoMapping->access_token)) {
+
+					// If the deviser has no a connected stripe account, we charge directly to todevise account
+					$charges[] = \Stripe\Charge::create([
+						'customer' => $customer->id,
+						'currency' => 'eur',
+						'amount' => $stripeAmount,
+						"description" => "Order Nº " . $order->short_id,
+						"metadata" => [
+							"order_id" => $order->short_id,
+							"order" => json_encode($order),
+						],
+					]);
+
+				} else {
+
+					// Create a Token from the existing customer on the deviser stripe account
+					$token = \Stripe\Token::create(
+						[
+							"customer" => $customer->id,
+							"card" => $currentPaymentInfo['card']['id'],
+						],
+						["stripe_account" => $deviser->settingsMapping->stripeInfoMapping->stripe_user_id] // id of the connected account
+					);
+
+					// Create a charge for this deviser
+					$charges[] = \Stripe\Charge::create(
+						[
+							'source' => $token,
+							'currency' => 'eur',
+							'amount' => $stripeAmount,
+							"description" => "Order Nº " . $order->short_id,
+							'application_fee' => $todeviseFee,
+							"metadata" => [
+								"order_id" => $order->short_id,
+							],
+						],
+						[
+							'stripe_account' => $deviser->settingsMapping->stripeInfoMapping->stripe_user_id,
+						]
+					);
+				}
+			}
+
+			// Save charges responses and payment_info in the order
+			$order->setAttribute('payment_info', $currentPaymentInfo);
+			$order->setAttribute('charges', json_encode($charges));
+			$order->order_state = Order::ORDER_STATE_PAID;
+			$order->save();
+
+			$order->composeEmailOrderPaid(true);
+
+			Yii::$app->response->setStatusCode(200); // Created
+
+			return $order;
+		} catch (\Exception $e) {
+			$message = sprintf("Error in receive-token: " . $e->getMessage());
+			Yii::info($message, 'Stripe');
+
+			throw $e;
 		}
-
-		$order->setAttribute('payment_info', $currentPaymentInfo);
-		$order->setAttribute('charges', json_encode($charges));
-		$order->order_state = Order::ORDER_STATE_PAID;
-		$order->save();
-
-		$order->composeEmailOrderPaid(true);
-
-		Yii::$app->response->setStatusCode(200); // Created
-		return $order;
 	}
 }

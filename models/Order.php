@@ -317,6 +317,7 @@ class Order extends CActiveRecord {
 				break;
 			}
 		}
+		$quantity = min($quantity, $priceStock['stock']);
 
 		$orderProduct->deviser_id = $product->deviser_id;
 		$orderProduct->quantity = $quantity;

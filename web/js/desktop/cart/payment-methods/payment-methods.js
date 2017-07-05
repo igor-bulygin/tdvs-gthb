@@ -34,20 +34,31 @@
 
 			vm.handler = StripeCheckout.configure({
 				key: 'pk_test_p1DPyiicE2IerEV676oj5t89',
-				image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+				image: '/imgs/logo_stripe.png',
 				locale: 'auto',
+				zipCode: true,
+				currency: 'eur',
 				token: function(token) {
-							cartDataService.getCartToken(
-								{
-									token: angular.copy(token)
-								},
-								{
-									cartId: vm.cart.id
-								},
-								onReceiveTokenSuccess, onReceiveTokenError);
+					cartDataService.getCartToken(
+						{
+							token: angular.copy(token)
+						},
+						{
+							cartId: vm.cart.id
+						},
+						onReceiveTokenSuccess, onReceiveTokenError);
 				}
 			});
 
+		}
+
+		function checkout() {
+			console.log('checkout!');
+			vm.handler.open({
+				name: '',
+				description: 'Order Nº '+vm.cart.id,
+				amount: vm.cart.subtotal*100
+			});
 		}
 
 		function setMonths() {
@@ -73,19 +84,6 @@
 
 		function editPersonalInfo() {
 			vm.state.state = 2;
-		}
-
-		function checkout() {
-			console.log('checkout!');
-			vm.handler.open({
-				name: '',
-				description: 'Order Nº '+vm.cart.id,
-				zipCode: true,
-				locale: 'auto',
-				currency: 'eur',
-				image: '/imgs/logo_stripe.png',
-				amount: vm.cart.subtotal*100
-			});
 		}
 	}
 

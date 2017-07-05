@@ -49,7 +49,17 @@ class OrderClientInfo extends EmbedModel
 	 * @return string
 	 */
 	public function getPhone1() {
-		return '+'.$this->phone1['prefix'].' '.$this->phone1['number'];
+		if (!isset($this->phone1['number'])) {
+			return null;
+		}
+
+		$phone1 = '';
+		if (isset($this->phone1['prefix'])) {
+			$phone1 .= '+' . $this->phone1['prefix'] . ' ';
+		}
+		$phone1 .= $this->phone1['number'];
+
+		return $phone1;
 	}
 
 	/**
@@ -57,8 +67,19 @@ class OrderClientInfo extends EmbedModel
 	 *
 	 * @return string
 	 */
-	public function getPhone2() {
-		return '+'.$this->phone2['prefix'].' '.$this->phone2['number'];
+	public function getPhone2()
+	{
+		if (!isset($this->phone2['number'])) {
+			return null;
+		}
+
+		$phone2 = '';
+		if (isset($this->phone2['prefix'])) {
+			$phone2 .= '+' . $this->phone2['prefix'] . ' ';
+		}
+		$phone2 .= $this->phone2['number'];
+
+		return $phone2;
 	}
 
 	/**

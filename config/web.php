@@ -120,7 +120,7 @@ $config = [
 				[
 					'class' => 'yii\log\FileTarget',
 					'levels' => ['info'],
-					'categories' => ['app\controllers\Stripe*', 'app\helpers\Stripe*'],
+					'categories' => ['app\controllers\Stripe*', 'app\helpers\Stripe*', 'Stripe'],
 					'logFile' => '@app/runtime/logs/todevise_stripe.log',
 					'logVars' => ['_GET', '_POST', '_FILES', '_COOKIE', '_SESSION', '_SERVER'],
 				],
