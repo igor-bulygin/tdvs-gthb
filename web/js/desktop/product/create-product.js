@@ -152,7 +152,7 @@
                 if (err.data.errors && err.data.errors.required && angular.isArray(err.data.errors.required))
                     $rootScope.$broadcast(productEvents.requiredErrors, { required: err.data.errors.required })
             }
-            var required = [];
+            var required = [];            
             //set state of the product
             vm.product.product_state = angular.copy(state);
 
@@ -170,6 +170,9 @@
 
             if (vm.product.product_state !== 'product_state_draft') {
                 required = productService.validate(vm.product);
+                if (vm.emptyCategory) {
+                    required.push("emptyCategory");
+                }
             } else {
                 //check for null categories
                 while (vm.product.categories.indexOf(null) > -1) {
