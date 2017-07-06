@@ -7,7 +7,6 @@
         vm.save = save;
         vm.saving = false;
         vm.isPublicProfile = (person.account_state === "active");
-        vm.emptyCategory=true;
 
         function init() {
             vm.product = {};
@@ -44,7 +43,8 @@
 
         function getCategories() {
             function onGetCategoriesSuccess(data) {
-                vm.allCategories = data.items;
+                vm.allCategories = data.items;                
+                vm.emptyCategory=true;
             }
 
             productDataService.getCategories({ scope: 'all' }, onGetCategoriesSuccess, UtilService.onError);

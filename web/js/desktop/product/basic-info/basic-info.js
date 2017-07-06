@@ -232,6 +232,11 @@
 		}
 
 		//watches
+		$scope.$watch('createProductCtrl.emptyCategory', function(newValue, oldValue) {
+			if (angular.isUndefined(newValue)) {
+				vm.emptyCategory=true;
+			}
+		});
 
 		$scope.$watch('productBasicInfoCtrl.product.categories', function(newValue, oldValue) {
 			if(angular.isArray(oldValue) && oldValue[0]===null && angular.isArray(newValue) && newValue.length > 0 && vm.product.id) {
