@@ -142,11 +142,13 @@
 					$category.modify("POST", data.category).then(function () {
 						toastr.success("Category modified!");
 
-						var _node = $category_util.categoryToNode(data.category);
-						var _current = _.findWhere(vm.treeData, {
-							id: data.category.short_id
-						});
-						angular.merge(_current, _node);
+						vm.load_categories();
+
+						// var _node = $category_util.categoryToNode(data.category);
+						// var _current = _.findWhere(vm.treeData, {
+						// 	id: data.category.short_id
+						// });
+						// angular.merge(_current, _node);
 					}, function (err) {
 						toastr.error("Couldn't modify category!", err);
 					});

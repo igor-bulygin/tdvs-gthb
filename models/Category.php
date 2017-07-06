@@ -6,6 +6,7 @@ use app\helpers\Utils;
 use Yii;
 use yii\helpers\Url;
 use yii\mongodb\ActiveQuery;
+use yii2tech\ar\position\PositionBehavior;
 
 /**
  * @property string path
@@ -383,7 +384,6 @@ class Category extends CActiveRecord {
 		$this->deviserSubcategories = $deviserSubcategories;
 	}
 
-
 	public function beforeSave($insert) {
 		/*
 		 * Create empty data holders if they don't exist
@@ -453,6 +453,22 @@ class Category extends CActiveRecord {
 		}
 
 		return parent::beforeDelete();
+	}
+
+	public function behaviors()
+	{
+		return array_merge(
+			parent::behaviors(),
+			[
+				'positionBehavior' => [
+					'class' => PositionBehavior::className(),
+					'positionAttribute' => 'header_position',
+					'groupAttributes' => [
+						'path' // multiple lists varying by 'path'
+					],
+				],
+			]
+		);
 	}
 
 	/**
