@@ -322,7 +322,11 @@ class Category extends CActiveRecord {
 	public static function findByPath($path, $recursive = false) {
 
 		if ($recursive) {
-			return Category::find()->andWhere(["REGEX", "path", "/^$path/*"])->all();
+			// Escape slashes
+			$path = str_replace('/', '\/', $path);
+			return Category::find()
+				->andWhere(["REGEX", "path", "/$path\w{5}\//"])
+				->all();
 		}
 
 		return Category::find()->andWhere(["path" => $path])->all();
@@ -501,8 +505,14 @@ class Category extends CActiveRecord {
 
 		$current_path = $this->path . $this->short_id . "/";
 
+		// Escape slashes
+		$current_path = str_replace('/', '\/', $current_path);
+
+		// example of regexp for short_id 4a2b4 (note last slash before $, to get only first level childs):
+		//				     /\/4a2b4\/\w{5}\/$/
+
 		$query = Category::find()
-			->andWhere(["REGEX", "path", "/^$current_path/*"])
+			->andWhere(["REGEX", "path", "/$current_path\w{5}\/$/"])
 			->andWhere([">", "header_position", 0])
 			->orderBy([
 					'header_position' => SORT_ASC,
@@ -512,13 +522,6 @@ class Category extends CActiveRecord {
 		$items = $query->all();
 
 		return !empty($items);
-
-		// if automatic translation is enabled
-		if (static::$translateFields) {
-			Utils::translate($items);
-		}
-
-		return $this->short_id == '4a2b4'; // at this moment only fashion has this behaviour
 	}
 
 	public function getSlug()

@@ -132,7 +132,7 @@
 			return {
 				id: category.short_id,
 				parent: typeof parent_id === "object" ? parent_id[parent_id.length - 2] : parent_id,
-				text: category.name[_lang] || "",
+				text: (category.name[_lang] || "") + (category.header_position ? ' ('+category.header_position +')' : ""),
 				icon: "glyphicon glyphicon-menu-hamburger"
 			};
 		};

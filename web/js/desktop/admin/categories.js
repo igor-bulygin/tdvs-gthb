@@ -6,7 +6,7 @@
 
 		vm.treeData = [];
 
-		vm.treeConfig = treeService.treeDefaultConfig("todevise_faqs_jstree", vm);
+		vm.treeConfig = treeService.treeDefaultConfig("todevise_categories_jstree", vm);
 
 		vm.load_categories = function () {
 			$category.get().then(function (_categories) {
