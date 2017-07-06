@@ -340,6 +340,9 @@
 			if(args.required.indexOf('description') > -1) {
 				vm.descriptionRequired = true;
 			}
+			if(args.required.indexOf('emptyCategory') > -1) {
+				vm.categorySelectionRequired = true;
+			}
 		})
 	}
 
@@ -351,7 +354,7 @@
 			product: '=',
 			categories: '<',
 			languages: '<',
-			emptyCategory:'<'
+			emptyCategory:'='
 		}
 	}
 

@@ -12,7 +12,7 @@ class AppAsset extends AssetBundle {
 		'css/bootstrap-patches.css',
 	];
 	public $js = [
-		'js/global.functions.js'
+		YII_ENV_DEV ? 'js/global.dev.js' : 'js/global.prod.js'
 	];
 	public $depends = [
 		'yii\web\YiiAsset',
