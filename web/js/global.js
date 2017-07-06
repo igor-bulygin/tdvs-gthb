@@ -1,4 +1,4 @@
-console.log("Global");
+console.log("js/global.js loaded");
 var global = angular.module('global', []);
 var todevise = angular.module('todevise', ['header']);
 

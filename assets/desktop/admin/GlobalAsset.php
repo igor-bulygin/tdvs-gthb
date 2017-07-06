@@ -10,7 +10,8 @@ class GlobalAsset extends AssetBundle {
 		'css/desktop/admin/global.css'
 	];
 	public $js = [
-		'js/desktop/admin/global.js'
+		'js/global.js',
+		'js/desktop/admin/global.js',
 	];
 	public $depends = [
 		'app\assets\libs\angularToastrAsset',

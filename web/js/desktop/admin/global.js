@@ -1,4 +1,4 @@
-console.log("Global desktop admin");
+console.log("js/desktop/admin/global.js loaded");
 var global_admin = angular.module('global-admin', ['toastr', 'template/modal/confirm.html']);
 
 global_admin.controller("confirmCtrl", ["$scope", "$uibModalInstance", "data", function($scope, $uibModalInstance, data) {
