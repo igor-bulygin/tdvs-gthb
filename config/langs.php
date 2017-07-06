@@ -5,4 +5,4 @@ require_once(Yii::getAlias("@models/Lang.php"));
 use app\models\Lang;
 
 //Those are all the available languages.
-return Lang::getAvailableLanguages();
+return Lang::getEnabledLanguages();
