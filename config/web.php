@@ -19,7 +19,7 @@ $config = [
 				'application/json' => Response::FORMAT_JSON,
 				'application/xml' => Response::FORMAT_XML
 			],
-			'languages' => require(__DIR__ . '/langs.php')
+			'languages' => array_keys(require(__DIR__ . '/langs.php')), // must be an array of language codes
 		],
 		'devicedetect',
 		'languagepicker',
@@ -82,7 +82,7 @@ $config = [
 		//Available languages
 		'languagepicker' => [
 			'class' => 'lajax\languagepicker\Component',
-			'languages' => require(__DIR__ . '/langs.php'),
+			'languages' => require(__DIR__ . '/langs.php'),  // must be an key => value array of language code => name
 			'expireDays' => 64,
 			'callback' => function () {
 				if (!\Yii::$app->user->isGuest) {
@@ -470,7 +470,7 @@ if (YII_ENV_DEV) {
 				'class' => 'yii\mongodb\debug\MongoDbPanel'
 			]
 		],
-		'allowedIPs' => ['*']
+		'allowedIPs' => ['*'],
 	];
 
 	$config['bootstrap'][] = 'gii';
