@@ -10,6 +10,7 @@
 		this.has_error = has_error;
 		this.parseImagesUrl = parseImagesUrl;
 		this.isZeroOrLess = isZeroOrLess;
+		this.isStringNotEmpty = isStringNotEmpty;
 		this.returnPathFromCategory = returnPathFromCategory;
 		this.stripHTMLTags = stripHTMLTags;
 		this.onError = onError;
@@ -115,6 +116,10 @@
 			if(value === undefined || value === null) return true;
 			if(typeof value !== 'number') return false;
 			return value <= 0 ? true : false;
+		}
+
+		function isStringNotEmpty(string) {
+			return (typeof string == 'string' && string != '') ? true : false;
 		}
 
 		function returnPathFromCategory(categories, id) {

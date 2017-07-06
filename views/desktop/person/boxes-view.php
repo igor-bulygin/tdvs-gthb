@@ -1,10 +1,10 @@
 <?php
-use app\assets\desktop\pub\BoxesViewAsset;
+use app\assets\desktop\deviser\GlobalAsset;
 use app\components\PersonHeader;
 use app\components\PersonMenu;
 use app\models\Person;
 
-BoxesViewAsset::register($this);
+GlobalAsset::register($this);
 
 /** @var Person $person */
 /** @var \app\models\Box[] $boxes */

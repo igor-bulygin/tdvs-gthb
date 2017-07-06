@@ -100,8 +100,40 @@ $config = [
 			'targets' => [
 				[
 					'class' => 'yii\log\FileTarget',
-					'levels' => YII_DEBUG ? ['error', 'warning', 'info'] : ['error', 'warning']
-				]
+					'levels' => ['error'],
+					'logFile' => '@app/runtime/logs/todevise_errors.log',
+					'logVars' => ['_GET', '_POST', '_FILES', '_COOKIE', '_SESSION', '_SERVER'],
+				],
+				[
+					'class' => 'yii\mongodb\log\MongoDbTarget',
+					'levels' => [],
+					'logCollection' => 'todeviselog',
+					'logVars' => [],
+				],
+				[
+					'class' => 'yii\log\FileTarget',
+					'levels' => ['info'],
+					'categories' => ['app\modules\api\*'],
+					'logFile' => '@app/runtime/logs/todevise_api.log',
+					'logVars' => [],
+				],
+				[
+					'class' => 'yii\log\FileTarget',
+					'levels' => ['info'],
+					'categories' => ['app\controllers\Stripe*', 'app\helpers\Stripe*', 'Stripe'],
+					'logFile' => '@app/runtime/logs/todevise_stripe.log',
+					'logVars' => ['_GET', '_POST', '_FILES', '_COOKIE', '_SESSION', '_SERVER'],
+				],
+				[
+					'class' => 'yii\log\EmailTarget',
+					'levels' => ['error'],
+					'categories' => ['yii\db\*'],
+					'message' => [
+						'from' => ['info@todevise.com'],
+						'to' => ['josevazquezviader@gmail.com'],
+						'subject' => 'TODEVISE - Database error',
+					],
+				],
 			]
 		],
 
@@ -154,7 +186,10 @@ $config = [
 			'class' => 'bazilio\yii\newrelic\Newrelic',
 			'name' => 'Dev Todevise',
 //			'handler' => 'class/name',
-			'enabled' => true,
+			'enabled' =>
+				// newrelic is only enabled ind real servers
+				strpos($_SERVER['HTTP_HOST'], 'beta.todevise.com') !== false ||
+				strpos($_SERVER['HTTP_HOST'], 'dev.todevise.com') !== false,
 		],
 
 		//URLs

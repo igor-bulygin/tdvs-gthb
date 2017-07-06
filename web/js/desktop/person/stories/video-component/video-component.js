@@ -27,7 +27,7 @@
 	}
 
 	angular
-		.module('todevise')
+		.module('person')
 		.component('storyVideoComponent', component);
 
 }());

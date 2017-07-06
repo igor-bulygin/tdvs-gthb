@@ -23,10 +23,11 @@
 		<button class="btn btn-default btn-create-box" ng-click="modalSaveBoxCtrl.showCreateBox()">Create new box</button>
 	</div>
 	<div class="save-modal-row" ng-if="modalSaveBoxCtrl.creatingBox">
-		<form class="form-inline" name="modalSaveBoxCtrl.create_form">
+		<form class="form-inline" name="modalSaveBoxCtrl.create_form" novalidate>
 			<div class="form-group">
-				<input type="text" class="form-control create-box-input" ng-model="modalSaveBoxCtrl.new_box_name" placeholder="Name of the box" required>
+				<input type="text" name="box_name" class="form-control create-box-input ng-class:{'error-input': modalSaveBoxCtrl.has_error(modalSaveBoxCtrl.create_form, modalSaveBoxCtrl.create_form.box_name)}" ng-model="modalSaveBoxCtrl.new_box_name" placeholder="Name of the box" required>
 				<button class="btn btn-default btn-green" ng-click="modalSaveBoxCtrl.createBox(modalSaveBoxCtrl.create_form)">Create</button>
+				<form-errors field="modalSaveBoxCtrl.create_form.box_name" condition="modalSaveBoxCtrl.has_error(modalSaveBoxCtrl.create_form, modalSaveBoxCtrl.create_form.box_name)"></form-errors>
 			</div>
 		</form>
 	</div>

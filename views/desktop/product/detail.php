@@ -1,11 +1,11 @@
 <?php
-use app\assets\desktop\product\ProductDetailAsset;
+use app\assets\desktop\product\GlobalAsset;
 use app\assets\desktop\pub\Product2Asset;
 use app\helpers\Utils;
 use app\models\Person;
 use app\models\PersonVideo;
 
-ProductDetailAsset::register($this);
+GlobalAsset::register($this);
 
 /** @var Person $deviser */
 /** @var \app\models\Product $product */

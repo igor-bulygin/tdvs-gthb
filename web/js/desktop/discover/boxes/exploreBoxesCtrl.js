@@ -53,7 +53,7 @@
 	}
 
 	angular
-		.module('todevise')
+		.module('discover')
 		.controller('exploreBoxesCtrl', controller);
 
 }())

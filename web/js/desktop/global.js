@@ -1,4 +1,4 @@
-console.log("Global desktop");
+console.log("js/desktop/global.js loaded");
 var global_desktop = angular.module('global-desktop', []);
 
 global_desktop.run(["$http", function($http) {

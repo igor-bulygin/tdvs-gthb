@@ -12,7 +12,7 @@
 	}
 
 	angular
-		.module('todevise', ['api', 'util', 'header', 'nya.bootstrap.select'])
+		.module('cart', ['api', 'util', 'header', 'nya.bootstrap.select'])
 		.config(config);
 
 }());

@@ -2,7 +2,7 @@
 
 $this->title = 'Discover devisers - Todevise';
 
-\app\assets\desktop\discover\DiscoverAsset::register($this);
+\app\assets\desktop\discover\GlobalAsset::register($this);
 
 $this->registerJs("var type = 2", yii\web\View::POS_HEAD, 'person-type-script');
 

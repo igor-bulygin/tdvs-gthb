@@ -4,6 +4,7 @@ namespace app\models;
 use app\helpers\CActiveRecord;
 use app\helpers\Utils;
 use Yii;
+use yii\helpers\Url;
 use yii\mongodb\ActiveQuery;
 use yii\mongodb\Query;
 
@@ -13,6 +14,8 @@ use yii\mongodb\Query;
  * @property bool prints
  * @property mixed|string name
  * @property string slug
+ * @property int header_position
+ * @property array header_products
  */
 class Category extends CActiveRecord {
 
@@ -36,7 +39,9 @@ class Category extends CActiveRecord {
 			'sizecharts',
 			'prints',
 			'name',
-			'slug'
+			'slug',
+			'header_position',
+			'header_products',
 		];
 	}
 
@@ -54,6 +59,33 @@ class Category extends CActiveRecord {
 	{
 		parent::init();
 		$this->deviserProduct = [];
+	}
+
+	public function rules()
+	{
+		return [
+			[
+				[
+					'short_id',
+					'path',
+					'sizecharts',
+					'prints',
+					'name',
+					'slug',
+					'header_position',
+					'header_products',
+				],
+				'safe',
+			],
+			[
+				'name',
+				'app\validators\TranslatableValidator',
+			],
+			[
+				'header_position',
+				'integer',
+			]
+		];
 	}
 
 
@@ -74,6 +106,7 @@ class Category extends CActiveRecord {
                     'prints',
                     'name',
                     'slug',
+                    'header_products',
                 ];
                 static::$translateFields = true;
                 break;
@@ -85,6 +118,7 @@ class Category extends CActiveRecord {
                     'prints',
                     'name',
                     'slug',
+					'header_products',
                 ];
                 static::$translateFields = false;
                 break;
@@ -109,10 +143,19 @@ class Category extends CActiveRecord {
 	    // Retrieve only fields that gonna be used
 	    $query->select(self::getSelectFields());
 
+		// if category id is specified
+		if ((array_key_exists("id", $criteria)) && (!empty($criteria["id"]))) {
+			$query->andWhere(["short_id" => $criteria["id"]]);
+		}
+
 	    // only root nodes, or all
 	    if (array_key_exists("scope", $criteria)) {
 			switch ($criteria["scope"]) {
 				case "all":
+					break;
+				case "header":
+					$query->andWhere([">", "header_position", 0]);
+					$query->andWhere(["path" => "/"]);
 					break;
 				case "roots":
 				default:
@@ -135,6 +178,16 @@ class Category extends CActiveRecord {
 		    $query->offset($criteria["offset"]);
 	    }
 
+		if ((array_key_exists("order_col", $criteria)) && (!empty($criteria["order_col"])) &&
+			(array_key_exists("order_dir", $criteria)) && (!empty($criteria["order_dir"]))) {
+			$query->orderBy([
+				$criteria["order_col"] => $criteria["order_dir"] == 'desc' ? SORT_DESC : SORT_ASC,
+			]);
+		} else {
+			$query->orderBy([
+				"created_at" => SORT_DESC,
+			]);
+		}
 	    $items = $query->all();
 
 
@@ -146,20 +199,51 @@ class Category extends CActiveRecord {
     }
 
 	/**
+	 * Get one entity serialized
+	 *
+	 * @param string $id
+	 *
+	 * @return Category|null
+	 */
+	public static function findOneSerialized($id)
+	{
+		/** @var Category $category */
+		$category = Category::find()->select(self::getSelectFields())->where(["short_id" => $id])->one();
+
+		// if automatic translation is enabled
+		if (static::$translateFields) {
+			Utils::translate($category);
+		}
+
+		return $category;
+	}
+
+	/**
 	 * Get list of categories to use in header menu
 	 *
 	 * @return array
 	 */
 	public static function getHeaderCategories()
 	{
-		// TODO Forced for the demo. This must be selected in "admin" panel.
-		$categories = Category::find()->where(["path" => "/"])->all();
-		foreach ($categories as $k => $category) {
-			if ($category->short_id == 'ffeec') { // More must be the last one
-				unset($categories[$k]);
-				$categories[$k] = $category;
-			}
-		}
+		$categoriesIds = [
+			'1a23b', // art
+			'4a2b4', // fashion
+			// beauty
+			'f0cco', // technology
+			'ca82k', // sports
+			'2r67s', // interior design
+			'3f78g', // jewely
+		];
+
+		Category::setSerializeScenario(Category::SERIALIZE_SCENARIO_PUBLIC);
+		$categories = Category::findSerialized(
+			[
+				'scope' => 'header',
+				'order_col' => 'header_position',
+				'order_dir' => SORT_ASC,
+			]
+		);
+
 		return $categories;
 	}
 
@@ -182,10 +266,37 @@ class Category extends CActiveRecord {
 	}
 
 	/**
-	 * @return Category[]
+	 * Returns the products to show in header menu
+	 *
+	 * @param int $limit
+	 * @return Product[]
 	 */
-	public function getSubCategories() {
-		return Category::find()->where(["path" => $this->path . $this->short_id . "/"])->all();
+	public function getHeaderProducts($limit)
+	{
+		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_PUBLIC);
+
+		if ($this->header_products) {
+			$products = Product::findSerialized([
+				'id' => $this->header_products,
+			]);
+
+		} else {
+
+			// if there is no hardcoded products, we get randome products of the category
+
+			$products = Product::findSerialized(
+				[
+					'categories' => [$this->short_id],
+					'limit' => 100,
+				]
+			);
+
+			if (count($products) > 3) {
+				$products = array_slice($products, rand(0, count($products)), 3);
+			}
+		}
+
+		return $products;
 	}
 
 	/**
@@ -264,6 +375,13 @@ class Category extends CActiveRecord {
 				->where(["REGEX", "path", "/^$current_path/"])
 				->andWhere(['in', 'short_id', $fixedCategories])
 				->all();
+	}
+
+	/**
+	 * @return Category[]
+	 */
+	public function getSubCategories() {
+		return Category::find()->where(["path" => $this->path . $this->short_id . "/"])->all();
 	}
 
 	public function getSubCategoriesOld($current_path = null) {
@@ -440,5 +558,25 @@ class Category extends CActiveRecord {
 	 */
 	public function hasGroupsOfCategories() {
 		return $this->short_id == '4a2b4'; // at this moment only fashion has this behaviour
+	}
+
+	public function getSlug()
+	{
+		if (is_array($this->slug)) {
+			$slug = Utils::l($this->slug);
+		} else {
+			$slug = $this->slug;
+		}
+
+		return $slug;
+	}
+
+	public function getMainLink()
+	{
+		return Url::to([
+			"public/category-b",
+			"slug" => $this->getSlug(),
+			'category_id' => $this->short_id
+		]);
 	}
 }

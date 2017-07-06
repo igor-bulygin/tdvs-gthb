@@ -56,7 +56,7 @@
 	}
 
 	angular
-		.module('todevise')
+		.module('person')
 		.controller('editStoryCtrl', controller);
 
 }());

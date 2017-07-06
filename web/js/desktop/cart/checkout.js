@@ -47,7 +47,7 @@
 		}
 	}
 
-	angular.module('todevise')
+	angular.module('cart')
 		.controller('checkoutCtrl', controller);
 
 }());

@@ -85,6 +85,8 @@ class PublicController extends CController
 		$influencers = Person::getRandomInfluencers(12, $categoryShortIds);
 
 		$this->layout = '/desktop/public-2.php';
+		$this->view->params['selectedCategory'] = isset($category) ? $category : null;
+
 		return $this->render("index-2", [
 			'banners' => $banners,
 			'totalDevisers' => count($devisers),
@@ -126,6 +128,9 @@ class PublicController extends CController
 			$invitation = null;
 		}
 
+		$this->view->params['show_header'] = false;
+		$this->view->params['show_footer'] = false;
+
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("create-deviser-account", ["invitation" => $invitation]);
 	}
@@ -141,12 +146,18 @@ class PublicController extends CController
 			$invitation = null;
 		}
 
+		$this->view->params['show_header'] = false;
+		$this->view->params['show_footer'] = false;
+
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("create-influencer-account", ["invitation" => $invitation]);
 	}
 
 	public function actionSignup()
 	{
+		$this->view->params['show_header'] = false;
+		$this->view->params['show_footer'] = false;
+
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("signup", []);
 	}

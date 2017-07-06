@@ -61,7 +61,7 @@
 	}
 
 	angular
-		.module('todevise')
+		.module('person')
 		.controller('personNotPublicCtrl', controller)
 		.controller('modalDeleteProductCtrl', modalController);
 

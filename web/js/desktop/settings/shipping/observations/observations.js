@@ -33,7 +33,7 @@
 	}
 
 	angular
-		.module('todevise')
+		.module('settings')
 		.component('shippingObservations', component);
 
 }());

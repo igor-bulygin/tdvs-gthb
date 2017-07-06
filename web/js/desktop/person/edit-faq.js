@@ -123,7 +123,7 @@
 
 	}
 
-	angular.module('todevise')
+	angular.module('person')
 		.controller('editFaqCtrl', controller);
 
 }());

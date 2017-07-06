@@ -20,7 +20,7 @@
 	}
 
 	angular
-		.module('todevise')
+		.module('person')
 		.controller('personMenuCtrl', controller);
 
 }());

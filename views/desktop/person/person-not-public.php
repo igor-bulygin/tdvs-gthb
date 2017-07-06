@@ -1,10 +1,10 @@
 <?php
-use app\assets\desktop\deviser\PersonNotPublicAsset;
+use app\assets\desktop\deviser\GlobalAsset;
 use app\components\PersonHeader;
 use app\helpers\Utils;
 use app\models\Person;
 
-PersonNotPublicAsset::register($this);
+GlobalAsset::register($this);
 
 /** @var Person $person */
 /** @var \app\models\Product[] $products */

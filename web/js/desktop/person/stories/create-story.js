@@ -63,7 +63,7 @@
 	}
 
 	angular
-		.module('todevise')
+		.module('person')
 		.controller('createStoryCtrl', controller);
 
 }());

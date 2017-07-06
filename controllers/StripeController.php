@@ -23,6 +23,8 @@ class StripeController extends CController
 		}
 		Yii::$app->session->remove('person_id_stripe_connection');
 
+		// This action must be done in Owner scenario to get the person object equal to the database object
+		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
 		$person = Person::findOneSerialized($person_id);
 		if (!$person->isDeviser() || !$person->isDeviserEditable()) {
 			throw new NotFoundHttpException();

@@ -2,8 +2,9 @@
 use app\helpers\Utils;
 use app\models\Person;
 use yii\helpers\Json;
+use app\assets\desktop\deviser\IndexStoryAsset;
 
-app\assets\desktop\pub\StoryDetailAsset::register($this);
+IndexStoryAsset::register($this);
 
 /** @var Person $person */
 /** @var \app\models\Story $story */

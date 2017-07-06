@@ -90,19 +90,27 @@
     @include transform(rotate(90deg));
     @include border-radius(90px,90px,90px,90px);
     cursor: pointer;
+	img{
+		-ms-transform: rotate(270deg); /* IE 9 */
+		-webkit-transform: rotate(270deg); /* Chrome, Safari, Opera */
+		transform: rotate(270deg);
+		margin: 0 0 10px;
+		height: 30px;
+    	width: 30px;
+	}
     i{
         color: $white;
         font-size: 42px;
     }
 }
 .big-btn{
-	width: 634px;
-	height: 80px;
-	margin: 20px 0;
-    padding: 20px 0 0 0;
+	width: 460px;
+    height: 60px;
+    margin: 20px 0;
+    padding: 15px 0 0 0;
 	@include border-radius(20px,20px,20px,20px);
 	background-color: $background_grey;
-	font-size: 28px;
+	font-size: 20px;
   	font-weight: bold;
 	font-family: $font-family--regular;
 	text-transform: uppercase;

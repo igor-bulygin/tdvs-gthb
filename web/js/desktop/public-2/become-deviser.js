@@ -75,7 +75,7 @@
 	}
 
 
-	angular.module('todevise', ['api', 'toastr', 'util', 'header'])
+	angular.module('todevise')
 		.controller('becomeDeviserCtrl', controller);
 
 }());

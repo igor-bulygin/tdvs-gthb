@@ -4,6 +4,7 @@
 	function controller(boxDataService, UtilService) {
 		var vm = this;
 		vm.saveBox = saveBox;
+		vm.has_error = UtilService.has_error;
 
 		function init() {
 			vm.box = angular.copy(vm.resolve.box);
@@ -21,7 +22,7 @@
 				boxDataService.updateBox(vm.box, {
 					idBox: vm.box.id
 				}, onSaveBoxSuccess, UtilService.onError);
-			} //TODO: else, wrong form
+			}
 		}
 	}
 

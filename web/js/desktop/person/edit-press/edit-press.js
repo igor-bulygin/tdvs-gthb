@@ -94,7 +94,7 @@
 	}
 
 	angular
-		.module('todevise')
+		.module('person')
 		.component('editPress', component);
 
 }());

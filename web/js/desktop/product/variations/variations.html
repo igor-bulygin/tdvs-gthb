@@ -12,7 +12,7 @@
 						</div>
 						<div class="mb-20 col-md-5" ng-repeat="(itemIndex,item) in productVariationsCtrl.product.options[tag.id] track by itemIndex">
 							<span class="col-xs-1">{{itemIndex+1}}&nbsp;</span>
-							<ol class="nya-bs-select categories-select col-xs-10 ng-class:{'purple': productVariationsCtrl.optionValidation(productVariationsCtrl.product.options[tag.id][itemIndex])} " ng-model="productVariationsCtrl.product.options[tag.id][itemIndex]" multiple>
+							<ol class="nya-bs-select categories-select col-xs-10 ng-class:{'error-input': productVariationsCtrl.optionValidation(productVariationsCtrl.product.options[tag.id][itemIndex],tag.required)} " ng-model="productVariationsCtrl.product.options[tag.id][itemIndex]" multiple>
 								<li nya-bs-option="option in tag.options" data-value="option.value" deep-watch="true" class="ng-class:{'disabled': productVariationsCtrl.product.options[tag.id][itemIndex].length >= tag.n_options && productVariationsCtrl.product.options[tag.id][itemIndex].indexOf(option.value) < 0}">
 									<a href="#"><span ng-bind="option.text['en-US']"></span><span class="glyphicon glyphicon-ok check-mark"></span></a>
 								</li>
@@ -20,7 +20,7 @@
 							<span class="glyphicon glyphicon-remove close-row" ng-if="productVariationsCtrl.product.options[tag.id].length > 1" ng-click="productVariationsCtrl.deleteOption(tag.id, $index)"></span>
 						</div>
 						<div class="col-xs-12">
-							<span class="add-cathegory col-xs-12" ng-click="productVariationsCtrl.product.options[tag.id].push([])">+ Add another option</span>
+							<span class="add-cathegory col-xs-12" ng-if="(productVariationsCtrl.product.options[tag.id][productVariationsCtrl.product.options[tag.id].length-1]).length>0" ng-click="productVariationsCtrl.product.options[tag.id].push([])">+ Add another option</span>
 						</div>
 					</div>
 				</div>
@@ -162,153 +162,149 @@
 	<div class="row items-row">
 		<div class="col-md-12">
 			<div ng-if="productVariationsCtrl.show_sizecharts" ng-cloak id="sizechart_values">
-				<label class="col-xs-12 text-center">Sizes</label>				
-				<div class="col-md-12">
-					<label>NEW SIZE CHART</span>
+				<label class="col-xs-12 text-center">Sizes</label>
+				<div class ="row">
+					<div class="col-md-2">
+						<span>New size chart</span>
 					</div>
-					<div class="row">
+					<div class="col-md-8 pad-about">
+						<ol class="nya-bs-select" ng-model="productVariationsCtrl.deviserSizecharts[$index]" ng-change="productVariationsCtrl.sizesSelect(productVariationsCtrl.deviserSizecharts[$index], productVariationsCtrl.deviserSizecharts[$index].countries[0])">
+							<li nya-bs-option="sizecharts in productVariationsCtrl.deviserSizecharts" data-value="sizecharts">
+								<a><span ng-bind="sizecharts.name['en-US']"></span></a>
+							</li>
+						</ol>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-3 pad-about">
+						<ol class="nya-bs-select categories-select ng-class:{'error-input': productVariationsCtrl.form_submitted && !productVariationsCtrl.selected_sizechart}" ng-model="productVariationsCtrl.selected_sizechart" ng-change="productVariationsCtrl.countriesSelect(productVariationsCtrl.selected_sizechart)">
+							<li nya-bs-option="sizechart in productVariationsCtrl.sizechart_helper" data-value="sizechart">
+								<a><span ng-bind="sizechart.name['en-US']"></span></a>
+							</li>
+						</ol>
+					</div>
+					<div class="col-md-3 pad-about">
+						<ol class="nya-bs-select categories-select ng-class:{'error-input': productVariationsCtrl.form_submitted && !productVariationsCtrl.selected_sizechart_country}" ng-model="productVariationsCtrl.selected_sizechart_country" ng-if="productVariationsCtrl.countriesAvailable.length > 0" ng-change="productVariationsCtrl.sizesSelect(productVariationsCtrl.selected_sizechart, productVariationsCtrl.selected_sizechart_country)">
+							<li nya-bs-option="country in productVariationsCtrl.countriesAvailable" data-value="country">
+								<a><span ng-bind="country"></span></a>
+							</li>
+						</ol>
+					</div>
+					<div ng-if="productVariationsCtrl.product.sizechart">
+						<div class="col-md-3">
+							<span>In which sizes is this work available?</span>
+						</div>
 						<div class="col-md-3 pad-about">
-							<ol class="nya-bs-select categories-select ng-class:{'purple': productVariationsCtrl.form_submitted && !productVariationsCtrl.selected_sizechart}" ng-model="productVariationsCtrl.selected_sizechart" ng-change="productVariationsCtrl.countriesSelect(productVariationsCtrl.selected_sizechart)">
-								<li nya-bs-option="sizechart in productVariationsCtrl.sizechart_helper" data-value="sizechart">
-									<a><span ng-bind="sizechart.name['en-US']"></span></a>
+							<ol class="nya-bs-select col-md-12" ng-model="productVariationsCtrl.size_to_add">
+								<li nya-bs-option="size in productVariationsCtrl.sizechart_empty.values" data-value="$index">
+									<a href="#" ng-if="productVariationsCtrl.sizechart_available_values[$index]"><span ng-bind="size[0]"></span></a>
 								</li>
 							</ol>
-						</div>
-						<div class="col-md-3 pad-about">
-							<ol class="nya-bs-select categories-select ng-class:{'purple': productVariationsCtrl.form_submitted && !productVariationsCtrl.selected_sizechart_country}" ng-model="productVariationsCtrl.selected_sizechart_country" ng-if="productVariationsCtrl.countriesAvailable.length > 0" ng-change="productVariationsCtrl.sizesSelect(productVariationsCtrl.selected_sizechart, productVariationsCtrl.selected_sizechart_country)">
-								<li nya-bs-option="country in productVariationsCtrl.countriesAvailable" data-value="country">
-									<a><span ng-bind="country"></span></a>
-								</li>
-							</ol>
-						</div>
-						<div class="col-md-6" ng-if="productVariationsCtrl.product.sizechart">
-							<div class="col-md-6">
-								<span><strong>In which sizes is this work available?</strong></span>
-							</div>
-							<div class="pad-about col-md-6">
-								<ol class="nya-bs-select col-md-3" ng-model="productVariationsCtrl.size_to_add">
-									<li nya-bs-option="size in productVariationsCtrl.sizechart_empty.values" data-value="$index">
-										<a href="#" ng-if="productVariationsCtrl.sizechart_available_values[$index]"><span ng-bind="size[0]"></span></a>
-									</li>
-								</ol>
-								<a href="#" ng-click="productVariationsCtrl.addSizeToSizechart(productVariationsCtrl.size_to_add)" class="row" ng-disabled="productVariationsCtrl.size_to_add == null">Add size to chart</a>
-							</div>
-						</div>
-					</div>
-					<div class="row" ng-if="productVariationsCtrl.product.sizechart">
-						<div class="col-md-1">
-							<label>Scale</label>
-						</div>
-						<div class="col-md-1 pad-about">
-							<ol class="nya-bs-select categories-select ng-class:{'purple': productVariationsCtrl.form_submitted && !productVariationsCtrl.product.sizechart['metric_unit']}" ng-model="productVariationsCtrl.product.sizechart['metric_unit']">
-								<li nya-bs-option="size in productVariationsCtrl.metric.size">
-									<a><span ng-bind="size"></span></a>
-								</li>
-							</ol>
-						</div>
-					</div>
-					<table class="table table-striped product-table">
-						<thead>
-							<tr>
-								<th><span ng-bind="productVariationsCtrl.product.sizechart.country"></span></th>
-								<th ng-repeat="column in productVariationsCtrl.product.sizechart.columns"><span ng-bind="column['en-US']"></span></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr ng-repeat="line in productVariationsCtrl.product.sizechart.values track by $index">
-								<td ng-repeat="value in line track by $index">
-									<span ng-if="$first" ng-bind="value" class="editable-fix"></span>
-									<span ng-if="!$first" xeditable-select>
-										<a href="#" editable-number="line[$index]" buttons="no" e-min="0" blur="submit" class="ng-class:{'purple-text': productVariationsCtrl.sizechartValuesValidation(value)}">{{line[$index]}}</a>
-										&nbsp;<span ng-if="productVariationsCtrl.product.sizechart.metric_unit" ng-bind="productVariationsCtrl.product.sizechart.metric_unit"></span>
-									</span>
-									<span ng-if="$last" class="glyphicon glyphicon-remove close-row-sizes" ng-click="productVariationsCtrl.deleteSizeFromSizechart($index)"></span>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-					<div class ="row" ng-if="productVariationsCtrl.deviserSizecharts.length>0">
-						<div class="col-md-2">
-							<span>Use a saved sizechart</span>
-						</div>
-						<div class="col-md-8 pad-about">
-							<ol class="nya-bs-select" ng-model="productVariationsCtrl.deviserSizecharts[$index]" ng-change="productVariationsCtrl.sizesSelect(productVariationsCtrl.deviserSizecharts[$index], productVariationsCtrl.deviserSizecharts[$index].countries[0])">
-								<li nya-bs-option="sizecharts in productVariationsCtrl.deviserSizecharts" data-value="sizecharts">
-									<a><span ng-bind="sizecharts.name['en-US']"></span></a>
-								</li>
-							</ol>
+							<a href="#" ng-click="productVariationsCtrl.addSizeToSizechart(productVariationsCtrl.size_to_add)" class="red-text col-md-12" ng-disabled="productVariationsCtrl.size_to_add == null">Add size to chart</a>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-12" ng-if="productVariationsCtrl.prints" ng-cloak>
-					<div class="row">
-						<span class="title">Prints</span>
+				<div class="row" ng-if="productVariationsCtrl.product.sizechart">
+					<div class="col-md-1">
+						<span>Scale</span>
 					</div>
-					<div class="row">
-						<div class="col-md-3 pad-about">
-							<span>Do you offer prints of your work?</span>
+					<div class="col-md-1 pad-about">
+						<ol class="nya-bs-select categories-select ng-class:{'error-input': productVariationsCtrl.form_submitted && !productVariationsCtrl.product.sizechart['metric_unit']}" ng-model="productVariationsCtrl.product.sizechart['metric_unit']">
+							<li nya-bs-option="size in productVariationsCtrl.metric.size">
+								<a><span ng-bind="size"></span></a>
+							</li>
+						</ol>
+					</div>
+				</div>
+				<table class="table table-striped product-table">
+					<thead>
+						<tr>
+							<th><span ng-bind="productVariationsCtrl.product.sizechart.country"></span></th>
+							<th ng-repeat="column in productVariationsCtrl.product.sizechart.columns"><span ng-bind="column['en-US']"></span></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="line in productVariationsCtrl.product.sizechart.values track by $index">
+							<td ng-repeat="value in line track by $index">
+								<span ng-if="$first" ng-bind="value" class="editable-fix"></span>
+								<span ng-if="!$first" xeditable-select>
+									<a href="#" editable-number="line[$index]" buttons="no" e-min="0" blur="submit" class="ng-class:{'purple-text': productVariationsCtrl.sizechartValuesValidation(value)}">{{line[$index]}}</a>
+									&nbsp;<span ng-if="productVariationsCtrl.product.sizechart.metric_unit" ng-bind="productVariationsCtrl.product.sizechart.metric_unit"></span>
+								</span>
+								<span ng-if="$last" class="glyphicon glyphicon-remove close-row-sizes" ng-click="productVariationsCtrl.deleteSizeFromSizechart($index)"></span>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="col-md-12" ng-if="productVariationsCtrl.prints" ng-cloak>
+				<div class="row">
+					<span class="title">Prints</span>
+				</div>
+				<div class="row">
+					<div class="col-md-3 pad-about">
+						<span>Do you offer prints of your work?</span>
+					</div>
+					<div class="col-md-2 pad-about">
+						<div class="radio radio-inline ml-30">
+							<input type="radio" name="prints_selected" id="prints_selected" ng-model="productVariationsCtrl.prints_selected" ng-value="true" ng-change="productVariationsCtrl.setPrintsSelected(productVariationsCtrl.prints_selected)">
+							<label for="prints_selected">
+								Yes
+							</label>
 						</div>
-						<div class="col-md-2 pad-about">
-							<div class="radio radio-inline ml-30">
-								<input type="radio" name="prints_selected" id="prints_selected" ng-model="productVariationsCtrl.prints_selected" ng-value="true" ng-change="productVariationsCtrl.setPrintsSelected(productVariationsCtrl.prints_selected)">
-								<label for="prints_selected">
-									Yes
-								</label>
+						<div class="radio radio-inline">
+							<input type="radio" name="prints_unselected" id="prints_unselected" ng-model="productVariationsCtrl.prints_selected" ng-value="false"  checked ng-change="productVariationsCtrl.setPrintsSelected(productVariationsCtrl.prints_selected)">
+							<label for="prints_unselected">
+								No
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="row" ng-if="productVariationsCtrl.prints_selected">
+					<div class="row items-row">
+						<div class="row">
+							<div class="col-md-2">
+								<label for="paper">Type of paper</label>
 							</div>
-							<div class="radio radio-inline">
-								<input type="radio" name="prints_unselected" id="prints_unselected" ng-model="productVariationsCtrl.prints_selected" ng-value="false"  checked ng-change="productVariationsCtrl.setPrintsSelected(productVariationsCtrl.prints_selected)">
-								<label for="prints_unselected">
-									No
-								</label>
+							<div class="col-md-10 pad-about ng-class:{'col-md-offset-2': $index > 0}" ng-repeat="type in productVariationsCtrl.product.prints.type track by $index">
+								<span>{{$index+1}}:&nbsp;</span>
+								<ol class="nya-bs-select categories-select col-md-4 ng-class:{'error-input': productVariationsCtrl.optionValidation(productVariationsCtrl.product.prints.type[$index])}" ng-model="productVariationsCtrl.product.prints.type[$index]" required>
+									<li nya-bs-option="paperType in productVariationsCtrl.papertypes" data-value="paperType.type">
+										<a href="#">
+											<span ng-bind="paperType.name"></span><span class="glyphicon glyphicon-ok check-mark"></span>
+										</a>
+									</li>
+								</ol>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-3 col-md-offset-2">
+								<span class="add-cathegory" ng-click="productVariationsCtrl.addType()">+ Add another option</span>
 							</div>
 						</div>
 					</div>
-					<div class="row" ng-if="productVariationsCtrl.prints_selected">
-						<div class="row items-row">
-							<div class="row">
-								<div class="col-md-2">
-									<label for="paper">Type of paper</label>
-								</div>
-								<div class="col-md-10 pad-about ng-class:{'col-md-offset-2': $index > 0}" ng-repeat="type in productVariationsCtrl.product.prints.type track by $index">
-									<span>{{$index+1}}:&nbsp;</span>
-									<ol class="nya-bs-select categories-select col-md-4 ng-class:{'purple': productVariationsCtrl.optionValidation(productVariationsCtrl.product.prints.type[$index])}" ng-model="productVariationsCtrl.product.prints.type[$index]" required>
-										<li nya-bs-option="paperType in productVariationsCtrl.papertypes" data-value="paperType.type">
-											<a href="#">
-												<span ng-bind="paperType.name"></span><span class="glyphicon glyphicon-ok check-mark"></span>
-											</a>
-										</li>
-									</ol>
-								</div>
+					<div class="row items-row">
+						<div class="row">
+							<div class="mb-20 col-md-2">
+								<label for="size">Print size</label>
 							</div>
-							<div class="row">
-								<div class="col-md-3 col-md-offset-2">
-									<span class="add-cathegory" ng-click="productVariationsCtrl.addType()">+ Add another option</span>
-								</div>
+							<div class="col-md-10 pad-about form-inline ng-class:{'col-md-offset-2': $index > 0}" ng-repeat="size in productVariationsCtrl.product.prints.sizes track by $index">
+								<span class="pull-left">{{$index+1}}:&nbsp;</span>
+								<label for="width" class="col-md-1" style="font-size: 12px;">Width</label><input name="width" type="number" class="form-control col-md-1 ng-class:{'error-input': productVariationsCtrl.sizechartValuesValidation(productVariationsCtrl.product.prints.sizes[$index]['width'])}" ng-model="productVariationsCtrl.product.prints.sizes[$index]['width']" ng-min="0">
+								<label for="length" class="col-md-1" style="font-size: 12px;">Length</label><input name="length" type="number" class="form-control col-md-1 ng-class:{'error-input': productVariationsCtrl.sizechartValuesValidation(productVariationsCtrl.product.prints.sizes[$index]['length'])}" ng-model="productVariationsCtrl.product.prints.sizes[$index]['length']" ng-min="0">
+								<ol class="nya-bs-select categories-select col-md-2 ng-class:{'error-input': productVariationsCtrl.form_submitted && !productVariationsCtrl.product.print.sizes[$index]['metric_unit']}" ng-model="productVariationsCtrl.product.prints.sizes[$index]['metric_unit']">
+									<li nya-bs-option="unit in productVariationsCtrl.metric.size">
+										<a href="">
+											<span ng-bind="unit"></span>
+										</a>
+									</li>
+								</ol>
+								<span class="glyphicon glyphicon-remove close-row" ng-if="productVariationsCtrl.product.prints.sizes.length > 1" ng-click="productVariationsCtrl.deleteSize($index)"></span>
 							</div>
 						</div>
-						<div class="row items-row">
-							<div class="row">
-								<div class="mb-20 col-md-2">
-									<label for="size">Print size</label>
-								</div>
-								<div class="col-md-10 pad-about form-inline ng-class:{'col-md-offset-2': $index > 0}" ng-repeat="size in productVariationsCtrl.product.prints.sizes track by $index">
-									<span class="pull-left">{{$index+1}}:&nbsp;</span>
-									<label for="width" class="col-md-1" style="font-size: 12px;">Width</label><input name="width" type="number" class="form-control col-md-1 ng-class:{'error-input': productVariationsCtrl.sizechartValuesValidation(productVariationsCtrl.product.prints.sizes[$index]['width'])}" ng-model="productVariationsCtrl.product.prints.sizes[$index]['width']" ng-min="0">
-									<label for="length" class="col-md-1" style="font-size: 12px;">Length</label><input name="length" type="number" class="form-control col-md-1 ng-class:{'error-input': productVariationsCtrl.sizechartValuesValidation(productVariationsCtrl.product.prints.sizes[$index]['length'])}" ng-model="productVariationsCtrl.product.prints.sizes[$index]['length']" ng-min="0">
-									<ol class="nya-bs-select categories-select col-md-2 ng-class:{'purple': productVariationsCtrl.form_submitted && !productVariationsCtrl.product.print.sizes[$index]['metric_unit']}" ng-model="productVariationsCtrl.product.prints.sizes[$index]['metric_unit']">
-										<li nya-bs-option="unit in productVariationsCtrl.metric.size">
-											<a href="">
-												<span ng-bind="unit"></span>
-											</a>
-										</li>
-									</ol>
-									<span class="glyphicon glyphicon-remove close-row" ng-if="productVariationsCtrl.product.prints.sizes.length > 1" ng-click="productVariationsCtrl.deleteSize($index)"></span>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-5 col-md-offset-2">
-									<span class="add-cathegory" ng-click="productVariationsCtrl.addSize()">+ Add another option</span>
-								</div>
+						<div class="row">
+							<div class="col-md-5 col-md-offset-2">
+								<span class="add-cathegory" ng-click="productVariationsCtrl.addSize()">+ Add another option</span>
 							</div>
 						</div>
 					</div>
@@ -316,3 +312,4 @@
 			</div>
 		</div>
 	</div>
+</div>

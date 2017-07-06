@@ -1,5 +1,5 @@
 <?php
-use app\assets\desktop\deviser\EditStoreAsset;
+use app\assets\desktop\deviser\GlobalAsset;
 use app\components\PersonHeader;
 use app\components\PersonMenu;
 use app\helpers\Utils;
@@ -8,7 +8,7 @@ use app\models\Person;
 use app\models\Product;
 use yii\helpers\Json;
 
-EditStoreAsset::register($this);
+GlobalAsset::register($this);
 
 /** @var Person $person */
 /** @var Product $product */

@@ -210,8 +210,8 @@
 			return UtilService.isZeroOrLess(value) && vm.form_submitted;
 		}
 
-		function optionValidation(option) {
-			return option.length <= 0 && vm.form_submitted;
+		function optionValidation(option,required) {
+			return option.length <= 0 && vm.form_submitted && required;
 		}
 
 		function textFieldValidation(textField, requiredOption) {
@@ -333,6 +333,6 @@
 	}
 
 	angular
-		.module('todevise')
+		.module('product')
 		.component('productVariations', component);
 }());

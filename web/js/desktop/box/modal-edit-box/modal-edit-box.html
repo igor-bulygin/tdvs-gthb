@@ -5,9 +5,11 @@
 	<h3>Edit box</h3>
 </div>
 <div class="modal-body">
-	<form name="modalEditBoxCtrl.form">
-		<input type="text" name="name" placeholder="Name of the box" ng-model="modalEditBoxCtrl.box.name" class="form-control white-rounded-input" required>
-		<textarea name="description" cols="30" rows="10" placeholder="Description" ng-model="modalEditBoxCtrl.box.description" class="form-control white-rounded-textbox"></textarea>
+	<form name="modalEditBoxCtrl.form" novalidate>
+		<input type="text" name="box_name" placeholder="Name of the box" ng-model="modalEditBoxCtrl.box.name" class="form-control white-rounded-input ng-class:{'error-input': modalEditBoxCtrl.has_error(modalEditBoxCtrl.form, modalEditBoxCtrl.form.box_name)}" required>
+		<form-errors field="modalEditBoxCtrl.form.box_name" condition="modalEditBoxCtrl.has_error(modalEditBoxCtrl.form, modalEditBoxCtrl.form.box_name)"></form-errors>
+		<textarea name="box_description" cols="30" rows="10" placeholder="Description" ng-model="modalEditBoxCtrl.box.description" class="form-control white-rounded-textbox ng-class:{'error-input': modalEditBoxCtrl.has_error(modalEditBoxCtrl.form, modalEditBoxCtrl.form.box_description)}"></textarea>
+		<form-errors field="modalEditBoxCtrl.form.box_description" condition="modalEditBoxCtrl.has_error(modalEditBoxCtrl.form, modalEditBoxCtrl.form.box_description)"></form-errors>
 	</form>
 	<div class="text-center">
 		<button class="btn btn-default btn-cancel" ng-click="modalEditBoxCtrl.dismiss()">Cancel</button>

@@ -3,10 +3,12 @@
 	"use strict";
 
 	function controller(productService, personDataService, productDataService, languageDataService, metricDataService,
-		UtilService, tagDataService, $scope, $rootScope, productEvents, sizechartDataService, $window, $timeout) {
+		UtilService, tagDataService, $scope, $rootScope, productEvents, sizechartDataService, $window, $timeout,$anchorScroll) {
 		var vm = this;
 		vm.categories_helper = [];
 		vm.save = save;
+		vm.saving = false;
+		vm.emptyCategory=false;
 
 		function init(){
 			vm.from_edit = false;
@@ -130,10 +132,12 @@
 
 		//publish is true when publishing the product
 		function save(publish) {
+			vm.saving = true;
 			function onUpdateProductSuccess(data) {
-				vm.disable_save_buttons=false;
 				if(vm.product.product_state === 'product_state_draft' || !publish) {
-					saved_draft();
+					saved_draft();					
+					vm.disable_save_buttons=false;
+					vm.saving = false;
 				} else if (vm.product.product_state === 'product_state_active' && publish) {
 					$window.location.href = currentHost() + vm.link_profile + '?published=true';
 				}
@@ -141,6 +145,7 @@
 			function onUpdateProductError(err) {
 				vm.disable_save_buttons=false;
 				vm.errors = true;
+				vm.saving = false;
 				if(err.data.errors && err.data.errors.required && angular.isArray(err.data.errors.required))
 					$rootScope.$broadcast(productEvents.requiredErrors, {required: err.data.errors.required});
 			}
@@ -160,7 +165,6 @@
 					UtilService.parseMultiLanguageEmptyFields(element.answer);
 				});
 			}
-
 			//validations
 			if(vm.product.product_state !== 'product_state_draft') {
 				required = productService.validate(vm.product);
@@ -179,14 +183,16 @@
 			} else {
 				vm.disable_save_buttons=false;
 				vm.errors = true;
+				vm.saving = false;
 				$rootScope.$broadcast(productEvents.requiredErrors, {required: required});
+				$anchorScroll(required[0]);
 			}
 
 		}
 	}
 
 	angular
-		.module('todevise')
+		.module('product')
 		.controller('editProductCtrl',controller);
 
 }());

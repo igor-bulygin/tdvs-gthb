@@ -19,7 +19,7 @@
 	<div class="shipping-time-wrapper form-group mt-10" ng-if="shippingTypesCtrl.show_express_shipping" ng-cloak>
 		<label for="express_shipping_time" class="pull-left">Express time</label>
 		<span class="time-shipping pull-left">
-			<input type="number" name="shipping_express_time" min="1" ng-model="shippingTypesCtrl.setting.shipping_express_time" class="form-control ng-class:{'error-input': shippingTypesCtrl.has_error(shippingTypesCtrl.shippingTypeForm, shippingTypesCtrl.shippingTypeForm.shipping_express_time)}" ng-required="shippingTypesCtrl.show_express_shipping">
+			<input type="number" name="shipping_express_time" min="1" ng-model="shippingTypesCtrl.setting.shipping_express_time" class="form-control ng-class:{'error-input': shippingTypesCtrl.has_error(shippingTypesCtrl.shippingTypeForm, shippingTypesCtrl.shippingTypeForm.shipping_express_time)}" ng-required="shippingTypesCtrl.show_express_shipping" ng-max="shippingTypesCtrl.setting.shipping_time - 1">
 		</span>
 		<span class="pull-left days">Days</span>
 		<form-errors condition="shippingTypesCtrl.has_error(shippingTypesCtrl.shippingTypeForm, shippingTypesCtrl.shippingTypeForm.shipping_express_time)" field="shippingTypesCtrl.shippingTypeForm.shipping_express_time"></form-errors>

@@ -1,9 +1,9 @@
 <?php
 use app\models\Person;
 use yii\helpers\Json;
-use app\assets\desktop\deviser\EditStoryAsset;
+use app\assets\desktop\deviser\IndexStoryAsset;
 
-EditStoryAsset::register($this);
+IndexStoryAsset::register($this);
 
 /** @var Person $person */
 

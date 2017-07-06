@@ -64,6 +64,6 @@
 		}
 	}
 
-	angular.module('todevise')
+	angular.module('cart')
 		.service('cartService', service);
 }());

@@ -6,6 +6,7 @@
 		vm.showCreateBox = showCreateBox;
 		vm.createBox = createBox;
 		vm.addProductToBox = addProductToBox;
+		vm.has_error = UtilService.has_error;
 
 		init();
 
@@ -51,8 +52,6 @@
 				boxDataService.createBox({
 					name: vm.new_box_name,
 				}, onCreateBoxSuccess, UtilService.onError);
-			} else {
-				console.log("error creating box");
 			}
 		}
 

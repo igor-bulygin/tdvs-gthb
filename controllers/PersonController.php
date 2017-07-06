@@ -54,6 +54,7 @@ class PersonController extends CController
 
 	public function actionCompleteProfile($slug, $person_id)
 	{
+		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
 		$person = Person::findOneSerialized($person_id);
 
 		if (!$person) {
@@ -64,6 +65,13 @@ class PersonController extends CController
 			$this->redirect($person->getMainLink());
 		}
 
+		if (!$person->isPersonEditable()) {
+			throw new UnauthorizedHttpException();
+		}
+
+		$this->view->params['show_header'] = false;
+		$this->view->params['show_footer'] = false;
+
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("@app/views/desktop/person/complete-profile", [
 			'person' => $person,
@@ -72,6 +80,7 @@ class PersonController extends CController
 
 	public function actionPersonNotPublic($slug, $person_id)
 	{
+		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
 		$person = Person::findOneSerialized($person_id);
 
 		if (!$person) {
@@ -84,6 +93,10 @@ class PersonController extends CController
 
 		if ($person->isPublic()) {
 			$this->redirect($person->getMainLink());
+		}
+
+		if (!$person->isPersonEditable()) {
+			throw new UnauthorizedHttpException();
 		}
 
 		if ($person->isDeviser()) {

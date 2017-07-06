@@ -72,6 +72,6 @@
 	}
 
 	angular
-		.module('todevise')
+		.module('settings')
 		.controller('shippingSettingsCtrl', controller);
 }());

@@ -32,7 +32,7 @@
 	}
 
 	angular
-		.module('todevise')
+		.module('discover')
 		.component('discoverResults', component);
 
 }());

@@ -67,7 +67,7 @@
 	}
 
 	angular
-		.module('todevise')
+		.module('settings')
 		.component('shippingWeightsPrices', component);
 
 }());

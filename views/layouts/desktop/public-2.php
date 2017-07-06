@@ -1,15 +1,12 @@
 <?php
 use app\components\PublicFooter2;
 use app\components\PublicHeader2;
-use yii\web\View;
-use app\models\Lang;
 use yii\helpers\Html;
-use yii\helpers\Json;
-use app\helpers\Utils;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
-
+$show_header = isset($this->params['show_header']) ? $this->params['show_header']: true; 
+$show_footer = isset($this->params['show_footer']) ? $this->params['show_footer']: true; 
 
 ?>
 
@@ -43,11 +40,15 @@ use app\helpers\Utils;
 	<body ng-app="todevise">
 	<?php $this->beginBody() ?>
 
-	<?= PublicHeader2::widget() ?>
+	<?php if ($show_header) {
+		echo PublicHeader2::widget();
+	} ?>
 
 	<?= $content ?>
 
-	<?= PublicFooter2::widget() ?>
+	<?php if ($show_footer) {
+		echo PublicFooter2::widget();
+	} ?>
 
 	<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 	<script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>

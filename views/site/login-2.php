@@ -1,7 +1,7 @@
 <?php
-use app\assets\desktop\pub\Login2Asset;
+use app\assets\desktop\pub\PublicCommonAsset;
 
-Login2Asset::register($this);
+PublicCommonAsset::register($this);
 
 /* @var $this yii\web\View */
 

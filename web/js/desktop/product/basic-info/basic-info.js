@@ -35,9 +35,11 @@
 				categories: [vm.rootCategories]
 			})
 			vm.product['categories'].push(null);
+			vm.emptyCategory=true;
 		}
 
 		function categorySelected(category, index_helper, index) {
+			vm.emptyCategory=true;
 			vm.categories_helper[index_helper].categories_selected[index] = category;
 			//if we change an option with "child" selects
 			if(index < vm.categories_helper[index_helper].categories_selected.length-1) {
@@ -55,6 +57,7 @@
 				vm.product.categories[index_helper] = category;
 				//send event to get tags by category
 				$rootScope.$broadcast(productEvents.setVariations, {categories: vm.product.categories});
+				vm.emptyCategory=false;
 			}
 		}
 
@@ -337,6 +340,9 @@
 			if(args.required.indexOf('description') > -1) {
 				vm.descriptionRequired = true;
 			}
+			if(args.required.indexOf('emptyCategory') > -1) {
+				vm.categorySelectionRequired = true;
+			}
 		})
 	}
 
@@ -348,11 +354,12 @@
 			product: '=',
 			categories: '<',
 			languages: '<',
+			emptyCategory:'='
 		}
 	}
 
 	angular
-		.module('todevise')
+		.module('product')
 		.component('productBasicInfo', component);
 
 }());

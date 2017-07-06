@@ -3,12 +3,11 @@ namespace app\assets\desktop\settings;
 
 use yii\web\AssetBundle;
 
-class ShippingAsset extends AssetBundle {
+class GlobalAsset extends AssetBundle {
 	public $basePath = '@webroot';
 	public $baseUrl = '@web';
-	public $css = [
-	];
 	public $js = [
+		'js/desktop/settings/general/general.js',
 		'js/desktop/settings/shipping/shipping.js',
 		'js/desktop/settings/shipping/types/types.js',
 		'js/desktop/settings/shipping/weights-prices/weights-prices.js',
@@ -16,5 +15,6 @@ class ShippingAsset extends AssetBundle {
 	];
 	public $depends = [
 		'app\assets\desktop\settings\IndexAsset',
+		'app\assets\desktop\GlobalAsset',
 	];
 }

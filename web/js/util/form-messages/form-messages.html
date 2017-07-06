@@ -44,6 +44,12 @@
 		<div ng-switch-when="header_photo">
 			<div ng-message="required">Please upload a cover photo.</div>
 		</div>
+		<div ng-switch-when="shipping_express_time">
+			<div ng-message="max">The express time must be less than the standard time.</div>
+		</div>
+		<div ng-switch-when="box_name">
+			<div ng-message="required">Please enter the name of the box.</div>
+		</div>
 		<div ng-switch-default>
 			<div ng-message="required">Please fill in this field.</div>
 			<div ng-message="same">The passwords don't match.</div>

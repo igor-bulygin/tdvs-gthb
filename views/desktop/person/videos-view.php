@@ -1,11 +1,11 @@
 <?php
-use app\assets\desktop\pub\PublicCommonAsset;
+use app\assets\desktop\deviser\GlobalAsset;
 use app\components\PersonHeader;
 use app\components\PersonMenu;
 use app\models\Person;
 use app\models\PersonVideo;
 
-PublicCommonAsset::register($this);
+GlobalAsset::register($this);
 
 /** @var Person $person */
 

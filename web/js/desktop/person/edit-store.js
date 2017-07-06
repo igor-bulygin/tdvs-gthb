@@ -185,7 +185,7 @@
 	}
 
 	angular
-		.module('todevise')
+		.module('person')
 		.controller('editStoreCtrl', controller)
 		.controller('modalDeleteProductCtrl', modalController)
 		.filter('draftProduct',draftProduct)

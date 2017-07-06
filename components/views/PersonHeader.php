@@ -1,10 +1,10 @@
 <?php
-use app\assets\desktop\deviser\EditHeaderAsset;
+use app\assets\desktop\deviser\GlobalAsset;
 use app\components\MakeProfilePublic;
 use app\models\Person;
 use yii\helpers\Json;
 
-EditHeaderAsset::register($this);
+GlobalAsset::register($this);
 
 // use params to share data between views :(
 /** @var Person $person */

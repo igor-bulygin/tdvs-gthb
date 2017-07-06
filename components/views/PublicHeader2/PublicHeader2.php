@@ -105,79 +105,131 @@ app\components\assets\PublicHeader2Asset::register($this);
 		</div><!-- /.navbar-collapse -->
 	</div><!-- /.container -->
 </nav>
-<nav class="navbar navbar-default secondary">
-	<div class="container">
-		<ul class="nav navbar-nav">
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle menu-title" data-toggle="dropdown" role="button"
-					   aria-haspopup="true" aria-expanded="false">
-						<i class="fa fa-bars" aria-hidden="true"></i>
-						<span>Shop by departament</span>
-					</a>
-					<div class="dropdowns-wrapper">
-						<div class="dropdown-menu dropdown-shop">
-							<ul class="shop-menu-wrapper">
-								<?php foreach($categories as $category) { ?>
-									<li class="toggle-category" data-target=".category-<?=$category->short_id?>"><a class="ion-chevron-right" href="<?= Url::to(["public/category-b", "slug" => $category->slug, 'category_id' => $category->short_id])?>"><?= Utils::l($category->name)?></a></li>
-									<li role="separator" class="divider"></li>
-								<?php } ?>
-							</ul>
-							<?php
-							$active = 'active';
-							foreach ($categories as $category) {
+<div id="navbar-wrapper">
+	<nav class="navbar navbar-default secondary">
+		<div class="container">
+			<ul class="nav navbar-nav">
+					<li>
+						<a href="#" class="menu-title hover-toggle" data-target=".menu-categories" data-group=".category-menu">
+							<i class="fa fa-bars" aria-hidden="true"></i>
+							<span>Shop by departament</span>
+						</a>
+					</li>
+				</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="<?=Url::to(['/discover/stories'])?>">Stories</a></li>
+				<li><a href="<?=Url::to(['/discover/boxes'])?>">Explore Boxes</a></li>
+				<li><a href="<?=Url::to(['/discover/devisers'])?>">Discover devisers</a></li>
+				<li><a href="<?=Url::to(['/discover/influencers'])?>">Trend-setters</a></li>
+				<li><a href="#">Projects</a></li>
+			</ul>
+		</div>
+	</nav>
+	<div class="menu-categories">
+		<nav class="navbar navbar-default terciary">
+			<div class="container">
+				<ul>
+					<?php foreach($categories as $category) { ?>
+						<li>
+							<a class="hover-toggle <?=$selectedCategory && $selectedCategory->short_id == $category->short_id ? 'selected' : ''?>" data-group=".category-menu" data-target="#category-<?=$category->short_id?>" href="<?= $category->getMainLink()?>"><?= $category->name?></a>
+						</li>
+					<?php } ?>
+				</ul>
+			</div>
+		</nav>
+		<div id="submenu-categories">
+			<?php foreach($categories as $category) { ?>
+				<div class="category-menu" id="category-<?=$category->short_id?>">
+					<div class="container">
+						<div class="categories">
+							<ul>
+								<?php
 								if ($category->hasGroupsOfCategories()) {
+									// Category with 3 levels or more.
+									// Each 2nd level is shown as a column with a styled title
+									// Each column shows 3rd level items
 									$subCategories = $category->getSubCategories();
 									if ($subCategories) {
-										foreach ($subCategories as $subCategory) {
+										foreach ($subCategories as $subCategory) { ?>
+											<ul class="two-categories">
+												<li>
+													<a class="two-categories-title" href="<?=$subCategory->getMainLink()?>"><?= Utils::l($subCategory->name) ?></a>
+												</li>
+												<?php
 
-											$subSubCategories = $subCategory->getSubCategoriesHeader(); ?>
-											<ul class="shop-secondary-menu-wrapper category category-<?=$category->short_id ?> <?=$active?>">
-												<li><?= Utils::l($subCategory->name) ?></li>
-												<?php foreach ($subSubCategories as $subSubCategory) { ?>
+												$subSubCategories = $subCategory->getSubCategoriesHeader();
+												foreach ($subSubCategories as $subSubCategory) { ?>
 													<li>
-														<a href="<?= Url::to(["public/category-b", "slug" => $subSubCategory->slug, 'category_id' => $subSubCategory->short_id]) ?>"><?= Utils::l($subSubCategory->name) ?></a>
+														<a href="<?=$subSubCategory->getMainLink()?>"><?= Utils::l($subSubCategory->name) ?></a>
 													</li>
-												<?php }
-												if (($image = $subCategory->getHeaderImage()) !== null) { ?>
-													<li class="minibanner">
-													<a href="#">
-														<img src="<?= $image ?>">
-													</a>
-													</li><?php
+												<?php
 												} ?>
 											</ul>
-										<?php }
+											<?php
+										}
 									}
 								} else {
-									$subCategories = $category->getSubCategoriesHeader();
-									if ($subCategories) { ?>
-										<ul class="shop-secondary-menu-wrapper category category-<?=$category->short_id ?> <?=$active?>">
-											<?php foreach ($subCategories as $subCategory) { ?>
+									$subCategories = $category->getSubCategories();
+									if ($subCategories) {
+										if (count($subCategories) > 8) {
+											// Category with 9 or more 2nd level items
+											// Subcategories are shown in columns ?>
+
+											<ul class="two-categories">
+
+											<?php
+											$i = 1;
+											foreach ($subCategories as $subCategory) { ?>
 												<li>
-													<a href="<?= Url::to(["public/category-b", "slug" => $subCategory->slug, 'category_id' => $subCategory->short_id]) ?>"><?= Utils::l($subCategory->name) ?></a>
-												</li><?php
-											}
-											if (($image = $category->getHeaderImage()) !== null) { ?>
-												<li class="minibanner">
-													<a href="#">
-														<img src="<?= $image ?>">
-													</a>
-												</li><?php
+													<a href="<?= $subCategory->getMainLink() ?>"><?= Utils::l($subCategory->name) ?></a>
+												</li>
+
+												<?php if ($i == ceil(count($subCategories) / 2)) { ?>
+													</ul>
+													<ul class="two-categories">
+												<?php }
+												$i++;
 											} ?>
-										</ul><?php
+											</ul>
+											<?php
+										} else {
+											// Category with 8 or less 2nd level
+											// All subcategories are shown in one column
+
+											foreach ($subCategories as $subCategory) { ?>
+												<li>
+													<a href="<?= $subCategory->getMainLink() ?>"><?= Utils::l($subCategory->name) ?></a>
+												</li>
+												<?php
+											}
+										}
 									}
-								}
-								$active = '';
-							} ?>
+								}?>
+							</ul>
+						</div>
+						<div class="images">
+							<?php
+							$products = $category->getHeaderProducts(3);
+							$image = 1;
+							foreach ($products as $product) { ?>
+								<div class="image-<?=$image?>">
+									<a href="<?=$product->getViewLink()?>" title="<?=$product->name?>">
+										<img src="<?=Utils::url_scheme().Utils::thumborize($product->getMainImage())->resize(398, 235)?>">
+									</a>
+								</div>
+								<?php
+								if ($image== 1) {
+									$image = 2;?>
+									<div class="images-wrapper">
+								<?php }
+							}
+							if (count($products) > 1) { ?>
+									</div><!--close image-wrapper-->
+							<?php } ?>
 						</div>
 					</div>
-				</li>
-			</ul>
-		<ul class="nav navbar-nav navbar-right">
-			<li><a href="<?=Url::to(['/discover/stories'])?>">Stories</a></li>
-			<li><a href="<?=Url::to(['/discover/boxes'])?>">Explore Boxes</a></li>
-			<li><a href="<?=Url::to(['/discover/devisers'])?>">Discover devisers</a></li>
-			<li><a href="<?=Url::to(['/discover/influencers'])?>">Influencers</a></li>
-		</ul>
+				</div>
+			<?php } ?>
+		</div>
 	</div>
-</nav>
+</div>

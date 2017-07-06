@@ -1,7 +1,8 @@
 (function() {
 	"use strict";
 
-	function controller(personDataService, UtilService, locationDataService, productDataService, languageDataService, Upload, uploadDataService, $scope, $window) {
+	function controller(personDataService, UtilService, locationDataService, productDataService, languageDataService, Upload, 
+		uploadDataService, $scope, $window) {
 		var vm = this;
 		vm.has_error = UtilService.has_error;
 		vm.stripHTMLTags = UtilService.stripHTMLTags;
@@ -35,6 +36,11 @@
 		function init() {
 			getCategories();
 			getLanguages();
+
+			//These two functions work only when there is some malfunction in the database and some
+			//essential data get accidentally deleted.
+			setCity();
+			setImages();
 		}
 
 		function getCategories() {
@@ -54,6 +60,28 @@
 			}
 
 			languageDataService.getLanguages(onGetLanguagesSuccess, UtilService.onError);
+		}
+
+		function setCity() {
+			if(angular.isObject(vm.person.personal_info)) {
+				if(UtilService.isStringNotEmpty(vm.person.personal_info.city) && UtilService.isStringNotEmpty(vm.person.personal_info.country)) {
+					selectCity({
+						city: vm.person.personal_info.city,
+						country_code: vm.person.personal_info.country
+					})
+				}
+			} 
+		}
+
+		function setImages() {
+			if(angular.isObject(vm.person.media)) {
+				if(UtilService.isStringNotEmpty(vm.person.media.header)) {
+					vm.header_crop = vm.header = currentHost() + person.url_images + vm.person.media.header;
+				}
+				if(UtilService.isStringNotEmpty(vm.person.media.profile)) {
+					vm.profile_crop = vm.profile = currentHost() + person.url_images + vm.person.media.profile;
+				}
+			}
 		}
 
 		function searchPlace(place) {
@@ -142,7 +170,7 @@
 				vm.person.media.profile = angular.copy(data.data.filename);
 				vm.profile_crop = newValue;
 			}
-			if(newValue) {
+			if(angular.isObject(newValue)) {
 				//upload original
 				var data = {
 					person_id: vm.person.short_id,
@@ -158,7 +186,7 @@
 				vm.person.media.header = angular.copy(data.data.filename);
 				vm.header_crop = newValue;
 			}
-			if(newValue) {
+			if(angular.isObject(newValue)) {
 				//upload original
 				var data = {
 					person_id: vm.person.short_id,
@@ -172,7 +200,7 @@
 	}
 
 	angular
-		.module('todevise')
+		.module('person')
 		.controller('completeProfileCtrl', controller);
 
 }());
