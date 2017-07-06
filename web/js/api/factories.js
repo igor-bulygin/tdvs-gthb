@@ -157,14 +157,15 @@
 			return deferred.promise;
 		};
 
-		utils.newCategory = function (path, name, slug, sizecharts, prints) {
+		utils.newCategory = function (path, name, slug, sizecharts, prints, header_position) {
 			return {
 				short_id: "new",
 				path: path,
 				slug: slug,
 				name: name,
 				sizecharts: sizecharts,
-				prints: prints
+				prints: prints,
+				header_position: header_position
 			};
 		};
 

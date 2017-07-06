@@ -100,7 +100,7 @@
 			});
 
 			modalInstance.result.then(function (data) {
-				var tmp_node = $category_util.newCategory(path, data.langs, data.slug, data.sizecharts, data.prints);
+				var tmp_node = $category_util.newCategory(path, data.langs, data.slug, data.sizecharts, data.prints, data.header_position);
 
 				$category.modify("POST", tmp_node).then(function (category) {
 					toastr.success("Category created!");
@@ -221,7 +221,8 @@
 				langs: vm.langs,
 				slug: vm.slug,
 				sizecharts: vm.sizecharts,
-				prints: vm.prints
+				prints: vm.prints,
+				header_position: vm.header_position
 			});
 		};
 
