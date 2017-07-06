@@ -16,6 +16,7 @@ class GlobalAsset extends AssetBundle {
 		'js/desktop/admin/global.js',
 	];
 	public $depends = [
+		'app\assets\AppAsset',
 		'app\assets\libs\angularToastrAsset',
 		'app\assets\libs\underscoreAsset',
 	];
