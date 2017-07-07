@@ -6,7 +6,6 @@ use app\helpers\Utils;
 use Yii;
 use yii\helpers\Url;
 use yii\mongodb\ActiveQuery;
-use yii2tech\ar\position\PositionBehavior;
 
 /**
  * @property string path
@@ -396,6 +395,10 @@ class Category extends CActiveRecord {
 			$this["slug"] = [];
 		}
 
+		if (empty($this->header_position)) {
+			$this->header_position = null;
+		}
+
 		if($insert) {
 			//insert
 		} else {
@@ -455,21 +458,21 @@ class Category extends CActiveRecord {
 		return parent::beforeDelete();
 	}
 
-	public function behaviors()
-	{
-		return array_merge(
-			parent::behaviors(),
-			[
-				'positionBehavior' => [
-					'class' => PositionBehavior::className(),
-					'positionAttribute' => 'header_position',
-					'groupAttributes' => [
-						'path' // multiple lists varying by 'path'
-					],
-				],
-			]
-		);
-	}
+//	public function behaviors()
+//	{
+//		return array_merge(
+//			parent::behaviors(),
+//			[
+//				'positionBehavior' => [
+//					'class' => PositionBehavior::className(),
+//					'positionAttribute' => 'header_position',
+//					'groupAttributes' => [
+//						'path' // multiple lists varying by 'path'
+//					],
+//				],
+//			]
+//		);
+//	}
 
 	/**
 	 * Returns the main category (first level category) of the current object
