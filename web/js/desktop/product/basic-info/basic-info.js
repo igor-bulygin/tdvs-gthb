@@ -238,6 +238,12 @@
 			}
 		});
 
+		$scope.$watch('editProductCtrl.emptyCategory', function(newValue, oldValue) {
+			if (angular.isUndefined(newValue)) {
+				vm.emptyCategory=false;
+			}
+		});
+
 		$scope.$watch('productBasicInfoCtrl.product.categories', function(newValue, oldValue) {
 			if(angular.isArray(oldValue) && oldValue[0]===null && angular.isArray(newValue) && newValue.length > 0 && vm.product.id) {
 				for(var i = 0; i < newValue.length; i++) {
