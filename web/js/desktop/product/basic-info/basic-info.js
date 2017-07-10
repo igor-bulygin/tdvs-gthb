@@ -14,12 +14,12 @@
 		vm.openCropModal = openCropModal;
 		vm.uploadPhoto = uploadPhoto;
 		vm.deleteImage = deleteImage;
-		vm.tempFiles=[];		
-		vm.stripHTMLTags = UtilService.stripHTMLTags;		
-		vm.description_language = 'en-US';		
-		vm.tags_language = 'en-US';		
-		vm.tags = {};		
-		vm.addTag = addTag;		
+		vm.tempFiles=[];
+		vm.stripHTMLTags = UtilService.stripHTMLTags;
+		vm.description_language = 'en-US';
+		vm.tags_language = 'en-US';
+		vm.tags = {};
+		vm.addTag = addTag;
 		vm.removeTag = removeTag;
 		
 		function init(){
@@ -360,7 +360,7 @@
 			product: '=',
 			categories: '<',
 			languages: '<',
-			emptyCategory:'='
+			emptyCategory: '='
 		}
 	}
 
