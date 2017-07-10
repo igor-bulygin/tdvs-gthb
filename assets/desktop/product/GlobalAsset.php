@@ -20,7 +20,7 @@ class GlobalAsset extends AssetBundle {
 		'js/desktop/product/edit-product.js',
 	];
 	public $depends = [
-		'app\assets\desktop\product\IndexAsset',
 		'app\assets\desktop\GlobalAsset',
+		'app\assets\desktop\product\IndexAsset',
 	];
 }

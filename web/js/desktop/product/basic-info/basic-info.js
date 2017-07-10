@@ -14,12 +14,12 @@
 		vm.openCropModal = openCropModal;
 		vm.uploadPhoto = uploadPhoto;
 		vm.deleteImage = deleteImage;
-		vm.tempFiles=[];		
-		vm.stripHTMLTags = UtilService.stripHTMLTags;		
-		vm.description_language = 'en-US';		
-		vm.tags_language = 'en-US';		
-		vm.tags = {};		
-		vm.addTag = addTag;		
+		vm.tempFiles=[];
+		vm.stripHTMLTags = UtilService.stripHTMLTags;
+		vm.description_language = 'en-US';
+		vm.tags_language = 'en-US';
+		vm.tags = {};
+		vm.addTag = addTag;
 		vm.removeTag = removeTag;
 		
 		function init(){
@@ -231,18 +231,7 @@
 			}
 		}
 
-		//watches
-		$scope.$watch('createProductCtrl.emptyCategory', function(newValue, oldValue) {
-			if (angular.isUndefined(newValue)) {
-				vm.emptyCategory=true;
-			}
-		});
-
-		$scope.$watch('editProductCtrl.emptyCategory', function(newValue, oldValue) {
-			if (angular.isUndefined(newValue)) {
-				vm.emptyCategory=false;
-			}
-		});
+		
 
 		$scope.$watch('productBasicInfoCtrl.product.categories', function(newValue, oldValue) {
 			if(angular.isArray(oldValue) && oldValue[0]===null && angular.isArray(newValue) && newValue.length > 0 && vm.product.id) {
@@ -360,7 +349,7 @@
 			product: '=',
 			categories: '<',
 			languages: '<',
-			emptyCategory:'='
+			emptyCategory: '=?'
 		}
 	}
 
