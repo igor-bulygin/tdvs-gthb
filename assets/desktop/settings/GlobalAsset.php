@@ -14,7 +14,7 @@ class GlobalAsset extends AssetBundle {
 		'js/desktop/settings/shipping/observations/observations.js',
 	];
 	public $depends = [
-		'app\assets\desktop\settings\IndexAsset',
 		'app\assets\desktop\GlobalAsset',
+		'app\assets\desktop\settings\IndexAsset',
 	];
 }
