@@ -1097,18 +1097,14 @@ class Person extends CActiveRecord implements IdentityInterface
 		foreach ($level2Ids as $id => $subIds) {
 			$category = Category::findOne(['short_id' => $id]);
 			if ($category) {
+
 				// assign one product of the deviser, related with this category
 				$category->setDeviserProduct(Product::findOne([
 					"deviser_id" => $this->short_id,
 					"categories" => $category->getShortIds()
 				]));
 				$category->setDeviserSubcategories(Category::find()->where(['short_id' => $subIds])->all());
-				// force more than one subcategory to test
-//				$category->setDeviserSubcategories(
-//					array_merge($category->getDeviserSubcategories(),
-//						[Category::find()->where(['short_id' => "e532z"])->one()]
-//					)
-//				);
+
 				// if there are more than one subcategory, add "all" subcategory
 				if (count($category->getDeviserSubcategories()) > 1) {
 					$subcategoryAll = new Category();
