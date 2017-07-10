@@ -584,7 +584,7 @@ class Product extends CActiveRecord {
 	 * Get a collection of entities serialized, according to serialization configuration
 	 *
 	 * @param array $criteria
-	 * @return array
+	 * @return Product[]
 	 * @throws Exception
 	 */
 	public static function findSerialized($criteria = [])

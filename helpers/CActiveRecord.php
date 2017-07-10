@@ -146,7 +146,7 @@ class CActiveRecord extends ActiveRecord
 		$nameFilter = ['or'];
 		foreach ($fieldNames as $fieldName) {
 			if (in_array($fieldName, static::$translatedAttributes)) {
-				foreach (Lang::getAvailableLanguagesDescriptions() as $key => $name) {
+				foreach (Lang::getAvailableLanguages() as $key => $name) {
 					$field = ($fieldName . "." . $key);
 					$nameFilter[] = [$operator, $field, $value];
 				}

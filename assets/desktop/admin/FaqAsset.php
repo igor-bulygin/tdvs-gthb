@@ -13,10 +13,9 @@ class FaqAsset extends AssetBundle {
 		'js/desktop/admin/faq.js'
 	];
 	public $depends = [
-		'app\assets\api\ApiAsset',
+		'app\assets\desktop\admin\GlobalAsset',
 		'app\assets\libs\ngjstreeAsset',
 		'app\assets\libs\jstreeActionsAsset',
 		'app\assets\libs\angularBootstrapAsset',
-		'app\assets\desktop\admin\GlobalAsset'
 	];
 }

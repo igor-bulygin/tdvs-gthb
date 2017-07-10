@@ -80,6 +80,16 @@ $this->title = 'Todevise / Admin / Categories';
 
 				<br />
 
+				<label class="modal-title funiv fs1 fnormal fc-18">
+					<?= Yii::t("app/admin", "Menu position"); ?>
+				</label>
+				<div class="input-group">
+					<input id="header_position" required="" type="number" min="0" class="form-control funiv fs1" placeholder="<?= Yii::t("app/admin", "Menu position"); ?>" aria-describedby="header_position-addon-header-position" ng-model="create_newCtrl.header_position" name="header_position">
+					<span class="input-group-addon alert-danger funiv fs0-929" id="basic-addon-header_position" ng-show="create_newCtrl.form.$submitted && !create_newCtrl.form.$valid && !create_newCtrl.form['header_position'].$valid">
+					<span ng-show="create_newCtrl.form['header_position'].$error.required"><?= Yii::t("app/admin", "Required!"); ?></span>
+					</span>
+				</div>
+
 				<div class="checkbox">
 					<label>
 						<input type="checkbox" ng-model="create_newCtrl.sizecharts">
@@ -136,6 +146,16 @@ $this->title = 'Todevise / Admin / Categories';
 				</div>
 
 				<br />
+
+				<label class="modal-title funiv fs1 fnormal fc-18">
+					<?= Yii::t("app/admin", "Menu position"); ?>
+				</label>
+				<div class="input-group">
+					<input id="header_position" required="" type="number" min="0" class="form-control funiv fs1" placeholder="<?= Yii::t("app/admin", "Menu position... "); ?>" aria-describedby="basic-addon-header_position" ng-model="editCtrl.data.category.header_position" name="header_position">
+					<span class="input-group-addon alert-danger funiv fs0-929" id="basic-addon-header_position" ng-show="editCtrl.form.$submitted && !editCtrl.form.$valid && !editCtrl.form['header_position'].$valid">
+					<span ng-show="editCtrl.form['header_position'].$error.required"><?= Yii::t("app/admin", "Required!"); ?></span>
+					</span>
+				</div>
 
 				<div class="checkbox">
 					<label>

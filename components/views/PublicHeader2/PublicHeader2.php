@@ -148,19 +148,19 @@ app\components\assets\PublicHeader2Asset::register($this);
 									// Category with 3 levels or more.
 									// Each 2nd level is shown as a column with a styled title
 									// Each column shows 3rd level items
-									$subCategories = $category->getSubCategories();
+									$subCategories = $category->getSubCategoriesHeader();
 									if ($subCategories) {
 										foreach ($subCategories as $subCategory) { ?>
 											<ul class="two-categories">
 												<li>
-													<a class="two-categories-title" href="<?=$subCategory->getMainLink()?>"><?= Utils::l($subCategory->name) ?></a>
+													<a class="two-categories-title" href="<?=$subCategory->getMainLink()?>"><?= $subCategory->name ?></a>
 												</li>
 												<?php
 
 												$subSubCategories = $subCategory->getSubCategoriesHeader();
 												foreach ($subSubCategories as $subSubCategory) { ?>
 													<li>
-														<a href="<?=$subSubCategory->getMainLink()?>"><?= Utils::l($subSubCategory->name) ?></a>
+														<a href="<?=$subSubCategory->getMainLink()?>"><?= $subSubCategory->name ?></a>
 													</li>
 												<?php
 												} ?>
@@ -169,39 +169,29 @@ app\components\assets\PublicHeader2Asset::register($this);
 										}
 									}
 								} else {
-									$subCategories = $category->getSubCategories();
+									$subCategories = $category->getSubCategoriesHeader();
 									if ($subCategories) {
 										if (count($subCategories) > 8) {
-											// Category with 9 or more 2nd level items
-											// Subcategories are shown in columns ?>
-
+											// Category with 9 or more 2nd level items, subcategories are shown in columns ?>
 											<ul class="two-categories">
-
 											<?php
-											$i = 1;
-											foreach ($subCategories as $subCategory) { ?>
-												<li>
-													<a href="<?= $subCategory->getMainLink() ?>"><?= Utils::l($subCategory->name) ?></a>
-												</li>
+										}
+										$i = 1;
+										foreach ($subCategories as $subCategory) { ?>
+											<li>
+												<a href="<?= $subCategory->getMainLink() ?>"><?= $subCategory->name ?></a>
+											</li>
 
-												<?php if ($i == ceil(count($subCategories) / 2)) { ?>
-													</ul>
-													<ul class="two-categories">
-												<?php }
-												$i++;
-											} ?>
-											</ul>
-											<?php
-										} else {
-											// Category with 8 or less 2nd level
-											// All subcategories are shown in one column
-
-											foreach ($subCategories as $subCategory) { ?>
-												<li>
-													<a href="<?= $subCategory->getMainLink() ?>"><?= Utils::l($subCategory->name) ?></a>
-												</li>
+											<?php if (count($subCategories) > 8 && $i == ceil(count($subCategories) / 2)) { ?>
+												</ul>
+												<ul class="two-categories">
 												<?php
 											}
+											$i++;
+										}
+										if (count($subCategories) > 8) { ?>
+											</ul>
+											<?php
 										}
 									}
 								}?>

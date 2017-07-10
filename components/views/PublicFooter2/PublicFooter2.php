@@ -1,6 +1,5 @@
 <?php
 
-use app\helpers\Utils;
 use app\models\Category;
 use yii\helpers\Url;
 
@@ -23,7 +22,7 @@ $footerMode = 'collapsed';
 				<ul class="footer-items split">
 					<?php foreach($categories as $category) { ?>
 						<li>
-							<a href="<?= Url::to(["public/category-b", "slug" => $category->slug, 'category_id' => $category->short_id])?>"><?=Utils::l($category->name)?></a>
+							<a href="<?= Url::to(["public/category-b", "slug" => $category->slug, 'category_id' => $category->short_id])?>"><?=$category->name?></a>
 						</li>
 					<?php } ?>
 				</ul>

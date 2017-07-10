@@ -232,9 +232,15 @@
 		}
 
 		//watches
-		$scope.$watch('productBasicInfoCtrl.product', function(newValue, oldValue) {
-			if(!oldValue && newValue) {
-				//watch product
+		$scope.$watch('createProductCtrl.emptyCategory', function(newValue, oldValue) {
+			if (angular.isUndefined(newValue)) {
+				vm.emptyCategory=true;
+			}
+		});
+
+		$scope.$watch('editProductCtrl.emptyCategory', function(newValue, oldValue) {
+			if (angular.isUndefined(newValue)) {
+				vm.emptyCategory=false;
 			}
 		});
 

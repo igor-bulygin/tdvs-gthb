@@ -254,7 +254,7 @@ class ProductController extends CController
 			// fix name field, must be an array
 			if (!empty($product->name) && !is_array($product->name)) {
 				$name = [];
-				foreach (Lang::getAvailableLanguagesDescriptions() as $key => $langName) {
+				foreach (Lang::getAvailableLanguages() as $key => $langName) {
 					$name[$key] = $product->name;
 				}
 				$product->setAttribute('name', $name);
@@ -263,7 +263,7 @@ class ProductController extends CController
 			// fix description field, must be an array
 			if (!empty($product->description) && !is_array($product->description)) {
 				$description = [];
-				foreach (Lang::getAvailableLanguagesDescriptions() as $key => $langName) {
+				foreach (Lang::getAvailableLanguages() as $key => $langName) {
 					$description[$key] = $product->description;
 				}
 				$product->setAttribute('description', $description);

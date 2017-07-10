@@ -13,8 +13,7 @@ class AdminsAsset extends AssetBundle {
 		'js/desktop/admin/admins.js'
 	];
 	public $depends = [
-		'app\assets\api\ApiAsset',
+		'app\assets\desktop\admin\GlobalAsset',
 		'app\assets\libs\angularBootstrapAsset',
-		'app\assets\desktop\admin\GlobalAsset'
 	];
 }
