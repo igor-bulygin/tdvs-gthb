@@ -13,8 +13,7 @@ class ProductsAsset extends AssetBundle {
 		'js/desktop/admin/products.js'
 	];
 	public $depends = [
-		'app\assets\api\ApiAsset',
+		'app\assets\desktop\admin\GlobalAsset',
 		'app\assets\libs\angularBootstrapAsset',
-		'app\assets\desktop\admin\GlobalAsset'
 	];
 }

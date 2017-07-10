@@ -13,12 +13,11 @@ class SizeChartAsset extends AssetBundle {
 		'js/desktop/admin/sizechart.js'
 	];
 	public $depends = [
-		'app\assets\api\ApiAsset',
+		'app\assets\desktop\admin\GlobalAsset',
 		'app\assets\libs\angularUiValidateAsset',
 		'app\assets\libs\angularMultiSelectAsset',
 		'app\assets\libs\angularUnitConverterAsset',
 		'app\assets\libs\angularBootstrapAsset',
 		'app\assets\libs\angularSortableViewAsset',
-		'app\assets\desktop\admin\GlobalAsset'
 	];
 }

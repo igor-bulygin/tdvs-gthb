@@ -13,9 +13,8 @@ class TagsAsset extends AssetBundle {
 		'js/desktop/admin/tags.js'
 	];
 	public $depends = [
-		'app\assets\api\ApiAsset',
+		'app\assets\desktop\admin\GlobalAsset',
 		'app\assets\libs\angularMultiSelectAsset',
 		'app\assets\libs\angularBootstrapAsset',
-		'app\assets\desktop\admin\GlobalAsset'
 	];
 }
