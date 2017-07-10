@@ -22,8 +22,8 @@ class GlobalAsset extends AssetBundle {
 		'js/desktop/person/person-not-public.js',
 	];
 	public $depends = [
-		'app\assets\desktop\deviser\IndexAsset',
-		'app\assets\desktop\GlobalAsset',
 		'app\assets\libs\macyAsset',
+		'app\assets\desktop\GlobalAsset',
+		'app\assets\desktop\deviser\IndexAsset',
 	];
 }
