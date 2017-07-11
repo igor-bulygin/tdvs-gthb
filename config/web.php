@@ -255,6 +255,7 @@ $config = [
 				'/settings/<slug:[^/.]*?>/<person_id:[^/.]*?>/shipping' => 'settings/shipping',
 				'/settings/<slug:[^/.]*?>/<person_id:[^/.]*?>/connect-stripe' => 'settings/connect-stripe',
 				'/settings/<slug:[^/.]*?>/<person_id:[^/.]*?>/disconnect-stripe' => 'settings/disconnect-stripe',
+				'/settings/<slug:[^/.]*?>/<person_id:[^/.]*?>/open-orders' => 'settings/open-orders',
 
 				//Orders
 				'order/success/<order_id:\w{8}>' => 'order/success',
