@@ -312,6 +312,55 @@ class Category extends CActiveRecord {
 		return $products;
 	}
 
+
+	/**
+	 * Returns an array with the images to use in shop by deparment header.
+	 *
+	 * The images are fixed for a group of categories (files in /imgs/category_{%category_slug%}_{g|s|s1}.jpg
+	 * If the images not exists in filesystem, this method try to get the "header products", and use them as image/link
+	 *
+	 * Array has the next keys:
+	 * - url => Url to the image (relative to base_url)
+	 * - link => (optional) Link when the image is clicked
+	 * - name => (optional) to use as title attribute in the <a> href tag
+	 *
+	 * @return array
+	 */
+	public function getHeaderImages()
+	{
+		$names = [
+			[
+				'url' => "/imgs/category_" . strtolower($this->slug) . "_g.jpg",
+				'link' => null,
+			],
+			[
+				'url' => "/imgs/category_" . strtolower($this->slug) . "_s.jpg",
+				'link' => null,
+			],
+			[
+				'url' => "/imgs/category_" . strtolower($this->slug) . "_s1.jpg",
+				'link' => null,
+			],
+		];
+		foreach ($names as $k => $image) {
+			if (!file_exists(Yii::getAlias('@webroot').$image['url'])) {
+				$names = [];
+				$headerProducts = $this->getHeaderProducts(3);
+				foreach ($headerProducts as $product) {
+					$names[] = [
+						'url' => Utils::url_scheme() . Utils::thumborize($product->getMainImage())->resize(398, 235),
+						'link' => $product->getViewLink(),
+						'name' => $product->name,
+					];
+				}
+
+				return $names;
+			}
+		}
+
+		return $names;
+	}
+
 	/**
 	 * @return Category[]
 	 */
