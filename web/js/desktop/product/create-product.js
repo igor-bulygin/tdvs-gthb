@@ -141,10 +141,10 @@
 				vm.product.id = angular.copy(data.id);
 				if (state === 'product_state_draft') {
 					saved_draft();
+					vm.saving = false;
 				} else if (state === 'product_state_active') {
 					product_published();
 				}
-				vm.saving = false;
 			}
 
 			function onSaveProductError(err) {
