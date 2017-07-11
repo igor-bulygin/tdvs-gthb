@@ -279,7 +279,10 @@ class Category extends CActiveRecord {
 	}
 
 	/**
-	 * Returns the products to show in header menu
+	 * Returns the products to use in shop by deparment header.
+	 *
+	 * This method tries to get products defined in "header_products" property of the category
+	 * If there is no products in this property, the method tries to get $limit random products in the category
 	 *
 	 * @param int $limit
 	 * @return Product[]
