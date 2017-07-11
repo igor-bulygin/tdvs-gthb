@@ -20,7 +20,7 @@ class GlobalAsset extends AssetBundle {
 		'js/desktop/discover/stories/filters/filters.js',
 	];
 	public $depends = [
-		'app\assets\desktop\discover\IndexAsset',
 		'app\assets\desktop\GlobalAsset',
+		'app\assets\desktop\discover\IndexAsset',
 	];
 }
