@@ -1,6 +1,6 @@
 (function() {
 
-	function controller(personDataService, metricDataService, sizechartDataService,
+	function controller($scope,personDataService, metricDataService, sizechartDataService,
 		productDataService, languageDataService, toastr, UtilService, productService,
 		localStorageService, tagDataService, productEvents, $rootScope, $window, $timeout, $anchorScroll) {
 		var vm = this;
@@ -9,7 +9,7 @@
 		vm.isPublicProfile = (person.account_state === "active");
 
 		function init() {
-			vm.product = {};
+			vm.product = {emptyCategory:true};
 			vm.product.slug = {};
 			vm.product.categories = [];
 			vm.product.media = {
@@ -39,12 +39,12 @@
 			getPaperType();
 		}
 
-		init();
+		init();		
 
 		function getCategories() {
 			function onGetCategoriesSuccess(data) {
 				vm.allCategories = data.items;
-				vm.emptyCategory=true;
+				
 			}
 
 			productDataService.getCategories({ scope: 'all' }, onGetCategoriesSuccess, UtilService.onError);
@@ -106,7 +106,9 @@
 		}
 
 		function saved_draft() {
+			var aux=vm.product.emptyCategory;
 			vm.product = productService.parseProductFromService(vm.product);
+			vm.product.emptyCategory=aux;
 			vm.progressSaved = true;
 			$timeout(() => {
 				vm.progressSaved = false;
@@ -139,10 +141,10 @@
 				vm.product.id = angular.copy(data.id);
 				if (state === 'product_state_draft') {
 					saved_draft();
+					vm.saving = false;
 				} else if (state === 'product_state_active') {
 					product_published();
 				}
-				vm.saving = false;
 			}
 
 			function onSaveProductError(err) {
@@ -170,7 +172,7 @@
 
 			if (vm.product.product_state !== 'product_state_draft') {
 				required = productService.validate(vm.product);
-				if (vm.emptyCategory) {
+				if (vm.product.emptyCategory) {
 					required.push("emptyCategory");
 				}
 			} else {
