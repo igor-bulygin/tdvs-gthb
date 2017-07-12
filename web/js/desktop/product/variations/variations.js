@@ -246,7 +246,10 @@
 
 		//events
 		$scope.$on(productEvents.setVariations, function(event, args) {
-			//get tags
+			//get tags						
+			if (!args.isFirstSelection) {
+				vm.product.options = {};
+			}
 			getTagsByCategory(args.categories);
 			categoriesSizecharts(args.categories);
 			deviserSizecharts();

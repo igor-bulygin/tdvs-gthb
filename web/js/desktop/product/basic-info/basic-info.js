@@ -21,6 +21,7 @@
 		vm.tags = {};
 		vm.addTag = addTag;
 		vm.removeTag = removeTag;
+		vm.firstCategorySelection=true;
 		
 		function init(){
 			//init values or functions
@@ -56,9 +57,11 @@
 				//if not
 				vm.product.categories[index_helper] = category;
 				//send event to get tags by category
-				$rootScope.$broadcast(productEvents.setVariations, {categories: vm.product.categories});
+				$rootScope.$broadcast(productEvents.setVariations, {categories: vm.product.categories, isFirstSelection:vm.firstCategorySelection});
 				vm.product.emptyCategory=false;
+				vm.firstCategorySelection=false;
 			}
+			
 		}
 
 		function filterCategory(categories, id) {
