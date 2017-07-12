@@ -153,7 +153,7 @@ class Order extends CActiveRecord {
 					'client_info',
 					'payment_info',
 //					'charges',
-					'products' => 'productsInfo',
+//					'products' => 'productsInfo',
 					'subtotal',
                 ];
                 static::$retrieveExtraFields = [

@@ -383,6 +383,7 @@ $config = [
 				'POST api3/pub/v1/cart/<cartId:[^/.]*?>/receiveToken' => 'api3/pub/v1/cart/receive-token',
 
 				// Order - public
+				'GET api3/pub/v1/order' => 'api3/pub/v1/order/index',
 				'GET api3/pub/v1/order/<orderId:[^/.]*?>' => 'api3/pub/v1/order/view',
 
 				// Person - public
