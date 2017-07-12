@@ -75,7 +75,7 @@ class StripeController extends CController
 //				}
 //
 //				$customer = \Stripe\Customer::create([
-//					'email' => $order->clientInfoMapping->email,
+//					'email' => $order->personInfoMapping->email,
 //					'source' => $token,
 //				]);
 //

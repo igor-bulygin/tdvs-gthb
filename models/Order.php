@@ -20,7 +20,7 @@ use yii\mongodb\ActiveQuery;
  * @property MongoDate updated_at
  *
  * Mappings:
- * @property OrderPersonInfo $clientInfoMapping
+ * @property OrderPersonInfo $personInfoMapping
  * @property OrderProduct[] $productsMapping
  */
 class Order extends CActiveRecord {
@@ -97,7 +97,7 @@ class Order extends CActiveRecord {
 
 	public function setParentOnEmbbedMappings()
 	{
-		$this->clientInfoMapping->setParentObject($this);
+		$this->personInfoMapping->setParentObject($this);
 
 		foreach ($this->productsMapping as $product) {
 			$product->setParentObject($this);
@@ -414,7 +414,7 @@ class Order extends CActiveRecord {
 	public function composeEmailOrderPaid($send) {
 		$email = new PostmanEmail();
 		$email->code_email_content_type = PostmanEmail::EMAIL_CONTENT_TYPE_ORDER_PAID;
-		$email->to_email = $this->clientInfoMapping->email;
+		$email->to_email = $this->personInfoMapping->email;
 		$email->subject = 'Todevise - '.$this->short_id.' - Your purchase is complete';
 
 		// add task only one send task (to allow retries)

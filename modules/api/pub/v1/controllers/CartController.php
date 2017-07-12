@@ -136,7 +136,7 @@ class CartController extends AppPublicController
 	}
 
 
-	public function actionClientInfo($cartId)
+	public function actionPersonInfo($cartId)
 	{
 		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_PUBLIC);
 		$order = Order::findOneSerialized($cartId);
@@ -146,12 +146,12 @@ class CartController extends AppPublicController
 			throw new NotFoundHttpException(sprintf("Cart with id %s does not exists", $cartId));
 		}
 
-		$clientInfo = new OrderPersonInfo();
-		$clientInfo->setParentObject($order);
+		$personInfo = new OrderPersonInfo();
+		$personInfo->setParentObject($order);
 
-		if ($clientInfo->load(Yii::$app->request->post(), '') && $clientInfo->validate()) {
+		if ($personInfo->load(Yii::$app->request->post(), '') && $personInfo->validate()) {
 
-			$order->clientInfoMapping = $clientInfo;
+			$order->personInfoMapping = $personInfo;
 			$order->save();
 
 			Yii::$app->response->setStatusCode(200); // Created
@@ -160,7 +160,7 @@ class CartController extends AppPublicController
 		} else {
 			Yii::$app->response->setStatusCode(400); // Bad Request
 
-			return ["errors" => $clientInfo->errors];
+			return ["errors" => $personInfo->errors];
 		}
 	}
 
@@ -245,7 +245,7 @@ class CartController extends AppPublicController
 
 			// Create a customer in stripe for the received token
 			$customer = \Stripe\Customer::create([
-				'email' => $order->clientInfoMapping->email,
+				'email' => $order->personInfoMapping->email,
 				'source' => $token,
 			]);
 

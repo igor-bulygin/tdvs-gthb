@@ -1,8 +1,8 @@
-### Update client information of the cart - Post
+### Update person information of the cart - Post
 
-Example about how to call to Web Service to update client information of the cart
+Example about how to call to Web Service to update person information of the cart
 
-**URL**: `/api/pub/v1/cart/<:cartId>/clientInfo`
+**URL**: `/api/pub/v1/cart/<:cartId>/personInfo`
 
 **Method**: `POST`
 
