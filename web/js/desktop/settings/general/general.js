@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(personDataService,UtilService,locationDataService,$uibModal, metricDataService,$scope) {
+	function controller(personDataService, UtilService, locationDataService, $uibModal, metricDataService, $scope) {
 		var vm = this;
 		vm.person = {id:person.id, personal_info:angular.copy(person.personal_info), settings:angular.copy(person.settings)};
 		

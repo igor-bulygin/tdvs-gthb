@@ -12,6 +12,7 @@ class GlobalAsset extends AssetBundle {
 		'js/desktop/settings/shipping/types/types.js',
 		'js/desktop/settings/shipping/weights-prices/weights-prices.js',
 		'js/desktop/settings/shipping/observations/observations.js',
+		'js/desktop/settings/order/open-orders.js',
 	];
 	public $depends = [
 		'app\assets\desktop\GlobalAsset',
