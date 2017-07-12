@@ -42,11 +42,11 @@ $this->title = 'Todevise / Your purchase is complete';
 					</tr>
 					<tr>
 						<td class="table-label">Phone</td>
-						<td class="table-item" ng-bind="orderSuccessCtrl.order.client_info.phone1.prefix + ' ' + orderSuccessCtrl.order.client_info.phone1.number"></td>
+						<td class="table-item" ng-bind="orderSuccessCtrl.order.person_info.phone1.prefix + ' ' + orderSuccessCtrl.order.person_info.phone1.number"></td>
 					</tr>
 					<tr>
 						<td class="table-label">Email</td>
-						<td class="table-item" ng-bind="orderSuccessCtrl.order.client_info.email"></td>
+						<td class="table-item" ng-bind="orderSuccessCtrl.order.person_info.email"></td>
 					</tr>
 					<tr>
 						<td></td>

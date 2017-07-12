@@ -36,9 +36,9 @@ $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD
 						</div>
 						<div class="col-md-4">
 							<p>Client info</p>
-							<p ng-bind="order.client_info.first_name + ' ' + order.client_info.last_name"></p>
-							<p ng-bind="order.client_info.address"></p>
-							<p ng-bind="order.client_info.city + ', ' + order.client_info.country"></p>
+							<p ng-bind="order.person_info.first_name + ' ' + order.person_info.last_name"></p>
+							<p ng-bind="order.person_info.address"></p>
+							<p ng-bind="order.person_info.city + ', ' + order.person_info.country"></p>
 						</div>
 						<div class="col-md-4">
 							<p>Shipping</p>

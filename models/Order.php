@@ -10,8 +10,8 @@ use yii\mongodb\ActiveQuery;
 /**
  * @property string short_id
  * @property string order_state
- * @property string client_id
- * @property array client_info
+ * @property string person_id
+ * @property array person_info
  * @property array payment_info
  * @property array charges
  * @property array products
@@ -20,7 +20,7 @@ use yii\mongodb\ActiveQuery;
  * @property MongoDate updated_at
  *
  * Mappings:
- * @property OrderClientInfo $clientInfoMapping
+ * @property OrderPersonInfo $clientInfoMapping
  * @property OrderProduct[] $productsMapping
  */
 class Order extends CActiveRecord {
@@ -52,8 +52,8 @@ class Order extends CActiveRecord {
 			'_id',
 			'short_id',
 			'order_state',
-			'client_id',
-			'client_info',
+			'person_id',
+			'person_info',
 			'payment_info',
 			'charges',
 			'products',
@@ -90,9 +90,9 @@ class Order extends CActiveRecord {
         return $this->mapEmbeddedList('products', OrderProduct::className(), array('unsetSource' => false));
     }
 
-    public function embedClientInfoMapping()
+    public function embedPersonInfoMapping()
     {
-        return $this->mapEmbedded('client_info', OrderClientInfo::className(), array('unsetSource' => false));
+        return $this->mapEmbedded('person_info', OrderPersonInfo::className(), array('unsetSource' => false));
     }
 
 	public function setParentOnEmbbedMappings()
@@ -128,8 +128,8 @@ class Order extends CActiveRecord {
             ],
 		  	[   'products', 'safe'], // to load data posted from WebServices
             [   'productsMapping', 'app\validators\EmbedDocValidator'], // to apply rules
-			[   'client_info', 'safe'], // to load data posted from WebServices
-            [   'clientInfoMapping', 'app\validators\EmbedDocValidator'], // to apply rules
+			[   'person_info', 'safe'], // to load data posted from WebServices
+            [   'personInfoMapping', 'app\validators\EmbedDocValidator'], // to apply rules
         ];
     }
 
@@ -149,16 +149,18 @@ class Order extends CActiveRecord {
                 static::$serializeFields = [
                     'id' => 'short_id',
 					'order_state',
-					'client_id',
-					'client_info',
+					'person_id',
+					'person_info',
 					'payment_info',
 //					'charges',
-//					'products' => 'productsInfo',
+					'products' => 'productsInfo',
 					'subtotal',
+					'created_at',
                 ];
                 static::$retrieveExtraFields = [
 					'products',
                 ];
+
 
                 static::$translateFields = false;
                 break;
@@ -232,21 +234,25 @@ class Order extends CActiveRecord {
             $query->andWhere(["short_id" => $criteria["id"]]);
         }
 
-        // if deviser id is specified
-        if ((array_key_exists("client_id", $criteria)) && (!empty($criteria["client_id"]))) {
-            $query->andWhere(["client_id" => $criteria["client_id"]]);
+        // if person id is specified
+        if ((array_key_exists("person_id", $criteria)) && (!empty($criteria["person_id"]))) {
+            $query->andWhere(["person_id" => $criteria["person_id"]]);
         }
+
+		// if deviser id is specified
+		if ((array_key_exists("deviser_id", $criteria)) && (!empty($criteria["deviser_id"]))) {
+			$query->andWhere(["products.deviser_id" => $criteria["deviser_id"]]);
+		}
+
+		// if deviser id is specified
+		if ((array_key_exists("product_id", $criteria)) && (!empty($criteria["product_id"]))) {
+			$query->andWhere(["products.product_id" => $criteria["product_id"]]);
+		}
 
 		// if order_state is specified
 		if ((array_key_exists("order_state", $criteria)) && (!empty($criteria["order_state"]))) {
 			$query->andWhere(["order_state" => $criteria["order_state"]]);
 		}
-
-        // if text is specified
-        if ((array_key_exists("text", $criteria)) && (!empty($criteria["text"]))) {
-//			// search the word in all available languages
-			$query->andFilterWhere(static::getFilterForText(static::$textFilterAttributes, $criteria["text"]));
-        }
 
         // Count how many items are with those conditions, before limit them for pagination
         static::$countItemsFound = $query->count();

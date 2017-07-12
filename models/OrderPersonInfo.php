@@ -14,16 +14,17 @@ namespace app\models;
  *
  * @method Order getParentObject()
  */
-class OrderClientInfo extends EmbedModel
+class OrderPersonInfo extends EmbedModel
 {
 
 	public function getParentAttribute()
 	{
-		return "client_info";
+		return "person_info";
 	}
 
 	public function attributes() {
 		return [
+			'person_id',
 			'first_name',
 			'last_name',
 			'email',

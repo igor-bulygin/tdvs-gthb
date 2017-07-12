@@ -3,7 +3,7 @@
 namespace app\modules\api\pub\v1\controllers;
 
 use app\models\Order;
-use app\models\OrderClientInfo;
+use app\models\OrderPersonInfo;
 use app\models\OrderProduct;
 use app\models\Person;
 use Stripe\Stripe;
@@ -20,7 +20,7 @@ class CartController extends AppPublicController
 		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_PUBLIC);
 		$order = new Order();
 		if (!Yii::$app->user->isGuest) {
-			$order->client_id = Yii::$app->user->identity->short_id;
+			$order->person_id = Yii::$app->user->identity->short_id;
 		}
 		$order->subtotal = 0;
 		$order->save();
@@ -44,11 +44,11 @@ class CartController extends AppPublicController
 		}
 
 		if (!Yii::$app->user->isGuest) {
-			if ($order->client_id != Yii::$app->user->identity->short_id) {
+			if ($order->person_id != Yii::$app->user->identity->short_id) {
 				throw new ForbiddenHttpException();
 			}
 		} else {
-			if (!empty($order->client_id)) {
+			if (!empty($order->person_id)) {
 				throw new ForbiddenHttpException();
 			}
 		}
@@ -146,7 +146,7 @@ class CartController extends AppPublicController
 			throw new NotFoundHttpException(sprintf("Cart with id %s does not exists", $cartId));
 		}
 
-		$clientInfo = new OrderClientInfo();
+		$clientInfo = new OrderPersonInfo();
 		$clientInfo->setParentObject($order);
 
 		if ($clientInfo->load(Yii::$app->request->post(), '') && $clientInfo->validate()) {

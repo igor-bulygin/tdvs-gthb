@@ -25,11 +25,11 @@ class OrderController extends AppPublicController
 		}
 
 		if (!Yii::$app->user->isGuest) {
-			if ($order->client_id != Yii::$app->user->identity->short_id) {
+			if ($order->person_id != Yii::$app->user->identity->short_id) {
 				throw new ForbiddenHttpException();
 			}
 		} else {
-			if (!empty($order->client_id)) {
+			if (!empty($order->person_id)) {
 				throw new ForbiddenHttpException();
 			}
 		}
@@ -51,6 +51,10 @@ class OrderController extends AppPublicController
 
 		$orders = Order::findSerialized([
 			"id" => Yii::$app->request->get("id"),
+			"person_id" => Yii::$app->request->get("person_id"),
+			"deviser_id" => Yii::$app->request->get("deviser_id"),
+			"product_id" => Yii::$app->request->get("product_id"),
+			"order_state" => Yii::$app->request->get("order_state"),
 			"limit" => $limit,
 			"offset" => $offset,
 		]);

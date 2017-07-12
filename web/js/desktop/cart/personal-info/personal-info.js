@@ -10,9 +10,9 @@
 		init();
 		function init(){
 			getCountries();
-			if(angular.isObject(vm.cart.client_info)) {
-				for(var key in vm.cart.client_info) {
-					vm.user[key] = angular.copy(vm.cart.client_info[key]);
+			if(angular.isObject(vm.cart.person_info)) {
+				for(var key in vm.cart.person_info) {
+					vm.user[key] = angular.copy(vm.cart.person_info[key]);
 				}
 			}
 		}
@@ -27,7 +27,7 @@
 
 		function save(form){
 			function onSaveSuccess(data) {
-				vm.cart.client_info = angular.copy(data.client_info);
+				vm.cart.person_info = angular.copy(data.person_info);
 				vm.state.state = 3;
 			}
 			function onSaveError(err) {
