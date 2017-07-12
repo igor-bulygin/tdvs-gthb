@@ -173,7 +173,7 @@
 			if (angular.isUndefined(value)) {
 				return vm.showInvalid;
 			}
-			return (value.length<1 && vm.showInvalid);
+			return (value && value.length<1 && vm.showInvalid);
 		}
 
 		function existPaswordRequiredError(value) {
