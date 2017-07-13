@@ -83,6 +83,22 @@ class SiteController extends Controller
 		]);
 	}
 
+	public function actionAuthenticationRequired()
+	{
+		$model = new Login();
+		$invalidLogin = false;
+		if ($model->load(Yii::$app->request->post())) {
+			if ($model->login()) {
+				return $this->goBack();
+			}
+			$invalidLogin = true;
+		}
+		$this->layout = '/desktop/public-2.php';
+		return $this->render("authentication-required", [
+			'invalidLogin' => $invalidLogin
+		]);
+	}
+
 	public function actionLogout()
 	{
 		Yii::$app->user->logout();

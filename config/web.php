@@ -265,6 +265,7 @@ $config = [
 
 				//Login
 				'login' => 'site/login',
+				'authentication-required' => 'site/authentication-required',
 
 				//Discover
 				'discover-devisers' => 'discover/devisers',
@@ -453,7 +454,7 @@ $config = [
 			'identityClass' => 'app\models\Person',
 			'enableAutoLogin' => true,
 			'enableSession' => true,
-			'loginUrl' => ['/login'],
+			'loginUrl' => ['/authentication-required'],
 		]
 
 	],
