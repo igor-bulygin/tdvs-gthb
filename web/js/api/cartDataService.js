@@ -10,7 +10,7 @@
 				'method': "PUT"
 			}
 		});
-		var CartClientInfo = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'cart/:id/clientInfo');
+		var CartClientInfo = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'cart/:id/personInfo');
 		var CartReceiveToken = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'cart/:cartId/receiveToken');
 
 		//functions
