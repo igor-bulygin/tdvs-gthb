@@ -8,7 +8,7 @@
 		vm.option_selected = {};
 		vm.has_error = UtilService.has_error;
 		vm.isString = angular.isString;
-		vm.parseOptions = parseOptions;
+		vm.optionsChanged = optionsChanged;
 		vm.changeQuantity = changeQuantity;
 		vm.changeOriginalArtwork = changeOriginalArtwork;
 		vm.selectComparator = selectComparator;
