@@ -5,7 +5,7 @@ PublicCommonAsset::register($this);
 
 /* @var $this yii\web\View */
 
-$this->title = 'Login';
+$this->title = 'Todevise: Login/Sign up';
 
 ?>
 
@@ -21,11 +21,11 @@ $this->title = 'Login';
 				<div class="create-deviser-account-container black-form">
 					<div class="row">
 						<label for="email">Email</label>
-						<input type="email" id="email" name="email" ng-model="authenticationRequiredCtrl.login_user.email" class="form-control grey-input" />
+						<input type="email" id="email" name="email" ng-model="authenticationRequiredCtrl.login_user.email" class="form-control grey-input" required />
 					</div>
 					<div class="row">
 						<label for="password">Password</label>
-						<input type="password" id="password" name="password" ng-model="authenticationRequiredCtrl.login_user.password" class="form-control grey-input" />
+						<input type="password" id="password" name="password" ng-model="authenticationRequiredCtrl.login_user.password" class="form-control grey-input" required />
 					</div>
 					<div class="row">
 						<div class="checkbox checkbox-circle remember-me">
