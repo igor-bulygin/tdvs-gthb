@@ -38,13 +38,13 @@
 				vm.total_stock = getTotalStock(vm.product.price_stock);
 				vm.stock = vm.total_stock;
 				vm.price = vm.minimum_price;
-				//parse options with only one value
 				vm.product.options.forEach(function(option){
+					//parse options with only one value
 					if(option.values.length === 1) {
 						vm.option_selected[option.id] = option.values[0].value;
 						parseOptions(option.id, option.values[0].value);
 					}
-				})
+				});
 			}
 
 			productDataService.getProductPub({
@@ -83,14 +83,19 @@
 			return stock;
 		}
 
+		function optionsChanged(option_id, value) {
+			resetOptions();
+			parseOptions(option_id, value);
+		}
+
 		function parseOptions(option_id, value) {
 			if(option_id === 'size')
 				value = getSizeText(value);
 			vm.reference_id = getReferenceId(vm.option_selected);
-			resetOptions();
 			vm.product.price_stock.forEach(function(element) {
 				if(element.stock === 0 && ((angular.isArray(element.options[option_id]) && element.options[option_id].indexOf(value) > -1) || 
-					(option_id === 'size' && angular.equals(element.options[option_id],value)) ) ) {
+					(angular.isArray(element.options[option_id]) && angular.isArray(value) && angular.equals(element.options[option_id], value)) || 
+					(option_id === 'size' && angular.equals(element.options[option_id], value)) ) ) {
 						for(var key in element.options) {
 							if(key !== option_id) {
 								vm.product.options.forEach(function (option) {
