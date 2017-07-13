@@ -16,15 +16,15 @@ class SiteController extends Controller
 		return [
 			'access' => [
 				'class' => AccessControl::className(),
-				'only' => ['login', 'logout'],
+				'only' => ['login', 'authentication-required', 'logout'],
 				'rules' => [
 						[
-								'actions' => ['login'],
+								'actions' => ['login', 'authentication-required'],
 								'allow' => true,
 								'roles' => ['?'],
 						],
 						[
-								'actions' => ['login'],
+								'actions' => ['login', 'authentication-required'],
 								'allow' => false,
 								'roles' => ['@'],
 								'denyCallback' => function ($rule, $action) {
