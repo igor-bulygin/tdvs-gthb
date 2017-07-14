@@ -11,9 +11,9 @@
 		}
 		vm.notWeightMeasureSelected=false;
 		vm.city ="";
-		if (!angular.isUndefined(vm.person.personal_info.city) && vm.person.personal_info.city.length>0) {
+		if (!angular.isUndefined(vm.person.personal_info.city) && angular.isString(vm.person.personal_info.city)) {
 			vm.city=vm.person.personal_info.city;
-			if (!angular.isUndefined(vm.person.personal_info.country) && vm.person.personal_info.country.length>0) {
+			if (!angular.isUndefined(vm.person.personal_info.country) && angular.isString(vm.person.personal_info.country)) {
 				vm.city =vm.city + ', ' + vm.person.personal_info.country;
 			}
 		}		
