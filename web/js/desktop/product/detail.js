@@ -145,7 +145,7 @@
 			var isRequired;
 			vm.tags.forEach(function(element){
 				if(element.id === key) {
-					isRequired = element.required;
+					isRequired = element.required && element.stock_and_price;
 				}
 			});
 			return isRequired;
