@@ -45,6 +45,7 @@
 						//parseOptions(option.id, option.values[0].value);
 					}
 				});
+				vm.reference_id = getReferenceId(vm.option_selected);
 			}
 
 			productDataService.getProductPub({
