@@ -42,7 +42,7 @@
 					//parse options with only one value
 					if(option.values.length === 1) {
 						vm.option_selected[option.id] = option.values[0].value;
-						parseOptions(option.id, option.values[0].value);
+						//parseOptions(option.id, option.values[0].value);
 					}
 				});
 			}
@@ -103,11 +103,11 @@
 										option.values.forEach(function(unit) {
 												if(key == 'size') {
 													if(unit.text == element.options[key]) {
-														unit.disabled=true;
+														//unit.disabled=true;
 													}
 												} else {
 													if(unit.value == element.options[key][0]) {
-														unit.disabled=true;
+														//unit.disabled=true;
 													}
 												}
 										});
@@ -152,6 +152,8 @@
 		}
 
 		function getReferenceId(options_selected) {
+			vm.stock = 0;
+			var prices = [];
 			var options = angular.copy(options_selected);
 			var reference;
 			if(options['size']) {
@@ -177,8 +179,11 @@
 				}
 				if(isReference) {
 					reference = element.short_id;
+					vm.stock += element.stock;
+					prices.push(element.price);
 				}
 			});
+			vm.price = Math.min(...prices);
 			return reference;
 		}
 
