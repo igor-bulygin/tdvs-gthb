@@ -97,6 +97,9 @@
 			vm.saved=false;
 			vm.invalidPrefix=false;
 			setPrefix();
+			if (angular.isUndefined(vm.person.settings) || vm.person.settings===null) {
+				vm.person.settings={};
+			}
 			if (angular.isUndefined(vm.person.settings.weight_measure) || vm.person.settings.weight_measure === null || vm.person.settings.weight_measure.length<1 ) {
 				vm.notWeightMeasureSelected=true;
 			}
