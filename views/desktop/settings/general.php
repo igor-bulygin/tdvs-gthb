@@ -60,7 +60,7 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 							<div class="col-md-2 text-right">
 								<input type="text" name="last_name" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.last_name" placeholder="Last Name">								
 							</div>
-							<label for="street" class="col-md-2">STREET</label>
+							<label for="street" class="col-md-2">ADDRESS</label>
 							<div class="col-md-4 text-right">
 								<input type="text" name="street" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.street" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.street)}">
 								<span class="purple-text" ng-if="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.street)">Please, fill in this field</span>
@@ -75,10 +75,10 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 								<input type="tel" name="phone" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.phone_number" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.phone_number)}">
 								<span class="purple-text" ng-if="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.phone_number)">Please, fill in this field</span>
 							</div>
-							<label for="number" class="col-md-2">NUMBER</label>
+							<label for="zip" class="col-md-2">ZIP</label>
 							<div class="col-md-4 text-right">
-								<input type="text" name="number" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.number" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.number)}">
-								<span class="purple-text" ng-if="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.number)">Please, fill in this field</span>
+								<input type="text" name="zip" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.zip" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.zip)}">
+								<span class="purple-text" ng-if="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.zip)">Please, fill in this field</span>
 							</div>
 						</div>
 						<div class="form-group">
@@ -89,13 +89,6 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 							<div class="col-md-2">
 								<a href="#" class="red-text" ng-click="generalSettingsCtrl.openModal()"><span class="glyphicon glyphicon-refresh"></span> Change password</a>
 							</div>
-							<label for="zip" class="col-md-2">ZIP</label>
-							<div class="col-md-4 text-right">
-								<input type="text" name="zip" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.zip" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.zip)}">
-								<span class="purple-text" ng-if="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.zip)">Please, fill in this field</span>
-							</div>
-						</div>
-						<div class="form-group">
 							<label for="weight_measure" class="col-md-2">WEIGHT MEASURE</label>
 							<div class="col-md-4" >
 								<ol name="weightMeasure" class="nya-bs-select" ng-model="generalSettingsCtrl.person.settings.weight_measure" ng-class="{'error-input': generalSettingsCtrl.notWeightMeasureSelected}" ng-change="generalSettingsCtrl.notWeightMeasureSelected=false" ng-show="generalSettingsCtrl.weightCharged">
@@ -105,7 +98,9 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 								</ol>
 								<span class="purple-text col-xs-12" ng-if="generalSettingsCtrl.showInvalid && generalSettingsCtrl.notWeightMeasureSelected">Please select a unit of measurement</span>
 							</div>
-							<div class="col-md-6 text-right">
+						</div>
+						<div class="form-group">
+							<div class="col-md-6 col-md-offset-6 text-right">
 								<button class="btn btn-default btn-green col-md-offset-10 col-md-2" ng-click="generalSettingsCtrl.update()" ng-disabled="generalSettingsCtrl.saving">Save</button>
 								<span class="purple-text col-xs-12" ng-if="generalSettingsCtrl.showInvalid">Please, fill in all the required fields</span>
 							</div>

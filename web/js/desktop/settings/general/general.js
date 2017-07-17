@@ -97,6 +97,9 @@
 			vm.saved=false;
 			vm.invalidPrefix=false;
 			setPrefix();
+			if (angular.isUndefined(vm.person.settings) || vm.person.settings===null) {
+				vm.person.settings={};
+			}
 			if (angular.isUndefined(vm.person.settings.weight_measure) || vm.person.settings.weight_measure === null || vm.person.settings.weight_measure.length<1 ) {
 				vm.notWeightMeasureSelected=true;
 			}
@@ -124,7 +127,6 @@
 			return (((vm.isDeviser && !angular.isUndefined(vm.dataForm.brand_name.$viewValue) && vm.dataForm.brand_name.$viewValue.length>0) || !vm.isDeviser) 
 				&& !angular.isUndefined(vm.dataForm.city.$viewValue) && vm.dataForm.city.$viewValue.length>0 && !angular.isUndefined(vm.dataForm.street.$viewValue)  && vm.dataForm.street.$viewValue.length>0 
 				 && !vm.invalidPrefix && !angular.isUndefined(vm.dataForm.phone.$viewValue) && vm.dataForm.phone.$viewValue.length>0  
-				&& !angular.isUndefined(vm.dataForm.number.$viewValue) && vm.dataForm.number.$viewValue.length>0 
 				&& !angular.isUndefined(vm.dataForm.zip.$viewValue) && vm.dataForm.zip.$viewValue.length>0 && !vm.notWeightMeasureSelected)
 		}
 
