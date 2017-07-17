@@ -9,19 +9,22 @@ use yii\mongodb\ActiveQuery;
 
 /**
  * @property string short_id
- * @property string order_state
  * @property string person_id
- * @property array person_info
+ * @property double subtotal
+ * @property string order_state
+ * @property MongoDate order_date
+ * @property array shipping_address
+ * @property array billing_address
+ * @property array packs
  * @property array payment_info
  * @property array charges
- * @property array products
- * @property double subtotal
  * @property MongoDate created_at
  * @property MongoDate updated_at
  *
  * Mappings:
- * @property OrderPersonInfo $personInfoMapping
- * @property OrderProduct[] $productsMapping
+ * @property OrderAddress $shippingAddressMapping
+ * @property OrderAddress $billingAddressMapping
+ * @property OrderPack[] $packsMapping
  */
 class Order extends CActiveRecord {
 
@@ -51,13 +54,17 @@ class Order extends CActiveRecord {
 		return [
 			'_id',
 			'short_id',
-			'order_state',
 			'person_id',
-			'person_info',
+			'subtotal',
+			'order_state',
+			'order_date',
+			'shipping_address',
+			'billing_address',
+			'packs',
+
 			'payment_info',
 			'charges',
-			'products',
-			'subtotal',
+
 			'created_at',
 			'updated_at',
 		];
@@ -82,31 +89,41 @@ class Order extends CActiveRecord {
 		$this->short_id = Utils::shortID(8);
 
 		// initialize attributes
-		$this->products = [];
+//		$this->products = [];
 	}
 
-    public function embedProductsMapping()
+    public function embedShippingAddressMapping()
     {
-        return $this->mapEmbeddedList('products', OrderProduct::className(), array('unsetSource' => false));
+        return $this->mapEmbedded('shipping_address', OrderAddress::className(), array('unsetSource' => false));
     }
 
-    public function embedPersonInfoMapping()
+    public function embedBillingAddressMapping()
     {
-        return $this->mapEmbedded('person_info', OrderPersonInfo::className(), array('unsetSource' => false));
+        return $this->mapEmbedded('billing_address', OrderAddress::className(), array('unsetSource' => false));
+    }
+
+    public function embedPacksMapping()
+    {
+        return $this->mapEmbeddedList('packs', OrderPack::className(), array('unsetSource' => false));
     }
 
 	public function setParentOnEmbbedMappings()
 	{
-		$this->personInfoMapping->setParentObject($this);
+		$this->shippingAddressMapping->setParentObject($this);
+		$this->billingAddressMapping->setParentObject($this);
 
-		foreach ($this->productsMapping as $product) {
-			$product->setParentObject($this);
+		foreach ($this->packsMapping as $item) {
+			$item->setParentObject($this);
 		}
 	}
 
 	public function beforeSave($insert) {
 		if (empty($this->order_state)) {
 			$this->order_state = Order::ORDER_STATE_CART;
+		}
+
+		if (empty($this->order_date)) {
+			$this->order_date = new MongoDate();
 		}
 
 		if (empty($this->created_at)) {
@@ -122,14 +139,11 @@ class Order extends CActiveRecord {
         return [
             [
                 [
-                    'subtotal',
+                    'shipping_address',
+                    'billing_address',
                 ],
-                'required',
+                'safe',
             ],
-		  	[   'products', 'safe'], // to load data posted from WebServices
-            [   'productsMapping', 'app\validators\EmbedDocValidator'], // to apply rules
-			[   'person_info', 'safe'], // to load data posted from WebServices
-            [   'personInfoMapping', 'app\validators\EmbedDocValidator'], // to apply rules
         ];
     }
 
@@ -148,17 +162,18 @@ class Order extends CActiveRecord {
 			case self::SERIALIZE_SCENARIO_ADMIN:
                 static::$serializeFields = [
                     'id' => 'short_id',
-					'order_state',
 					'person_id',
-					'person_info',
-					'payment_info',
-//					'charges',
-					'products' => 'productsInfo',
 					'subtotal',
-					'created_at',
+					'order_state',
+					'order_date',
+					'shipping_address',
+					'billing_address',
+					'packs',
+
+//					'payment_info',
+//					'charges',
                 ];
                 static::$retrieveExtraFields = [
-					'products',
                 ];
 
 
@@ -169,29 +184,6 @@ class Order extends CActiveRecord {
 				static::$serializeFields = [];
 				break;
 		}
-	}
-
-	public function getProductsInfo() {
-		$products = $this->products;
-
-		$result = [];
-		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_PUBLIC);
-		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_PUBLIC);
-		foreach ($products as $p) {
-			$product = Product::findOneSerialized($p['product_id']);
-			$deviser = Person::findOneSerialized($p['deviser_id']);
-			$p['product_name'] = $product->name;
-			$p['product_photo'] = $product->getMainImage();
-			$p['product_slug'] = $product->slug;
-			$p['product_url'] = $product->getViewLink();
-			$p['deviser_name'] = $deviser->name;
-			$p['deviser_photo'] = $deviser->getAvatarImage();
-			$p['deviser_slug'] = $deviser->slug;
-			$p['deviser_url'] = $deviser->getStoreLink();
-			$result[] = $p;
-		}
-
-		return $result;
 	}
 
     /**
@@ -241,12 +233,12 @@ class Order extends CActiveRecord {
 
 		// if deviser id is specified
 		if ((array_key_exists("deviser_id", $criteria)) && (!empty($criteria["deviser_id"]))) {
-			$query->andWhere(["products.deviser_id" => $criteria["deviser_id"]]);
+			$query->andWhere(["packs.deviser_id" => $criteria["deviser_id"]]);
 		}
 
 		// if deviser id is specified
 		if ((array_key_exists("product_id", $criteria)) && (!empty($criteria["product_id"]))) {
-			$query->andWhere(["products.product_id" => $criteria["product_id"]]);
+			$query->andWhere(["packs.products.product_id" => $criteria["product_id"]]);
 		}
 
 		// if order_state is specified
@@ -308,35 +300,30 @@ class Order extends CActiveRecord {
 		if (empty($orderProduct)) {
 			throw new Exception(sprintf("Product with id %s does not exists", $orderProduct->product_id));
 		}
-		$priceStock = $product->getPriceStockItem($orderProduct->price_stock_id);
-		if (empty($priceStock)) {
-			throw new Exception(sprintf("Price stock item with id %s does not exists", $orderProduct->price_stock_id));
-		}
 
-		$products = $this->productsMapping;
-		$quantity = $orderProduct->quantity;
-		$key = null;
-		foreach ($products as $i => $item) {
-			if ($item->price_stock_id == $orderProduct->price_stock_id) {
-				$key = $i;
-				$quantity += $item['quantity'];
+		$packs = $this->packsMapping;
+
+		$found = false;
+		foreach ($packs as $onePack) {
+			if ($onePack->deviser_id == $product->deviser_id) {
+				$onePack->addProduct($orderProduct);
+				$found = true;
 				break;
 			}
 		}
-		$quantity = min($quantity, $priceStock['stock']);
 
-		$orderProduct->deviser_id = $product->deviser_id;
-		$orderProduct->quantity = $quantity;
-		$orderProduct->weight = $priceStock['weight'];
-		$orderProduct->price = $priceStock['price'];
-		$orderProduct->options = $priceStock['options'];
+		if (!$found) {
 
-		if (isset($key)) {
-			$this->productsMapping[$key] = $orderProduct;
-		} else {
-			$this->productsMapping[] = $orderProduct;
+			$deviser = $product->getDeviser();
+			$pack = new OrderPack();
+			$pack->deviser_id = $product->deviser_id;
+			$pack->currency = $deviser->settingsMapping->currency;
+			$pack->weight_measure = $deviser->settingsMapping->weight_measure;
+			$pack->addProduct($orderProduct);
+			$this->packsMapping[] = $pack;
 		}
-		$this->recalculateTotal();
+
+		$this->recalculateTotals();
 	}
 
 	public function updateProduct(OrderProduct $orderProduct) {
@@ -367,44 +354,28 @@ class Order extends CActiveRecord {
 		} else {
 			$this->productsMapping[] = $orderProduct;
 		}
-		$this->recalculateTotal();
+		$this->recalculateTotals();
 	}
 
-	public function deleteProduct(OrderProduct $orderProduct) {
-		$products = $this->productsMapping; /* @var \ArrayObject $products */
-		$key = null;
-		foreach ($products as $i => $item) {
-			if ($item->price_stock_id == $orderProduct->price_stock_id) {
-				$products->offsetUnset($i);
-				break;
-			}
+	public function deleteProduct($priceStockId) {
+
+    	$packs = $this->packsMapping;
+    	foreach ($packs as $pack) {
+    		$pack->deleteProduct($priceStockId);
 		}
-		$this->productsMapping = $products;
-		$this->recalculateTotal();
+
+		$this->packsMapping = $packs;
+		$this->recalculateTotals();
 	}
 
-	public function recalculateTotal() {
-		$products = $this->productsMapping;
+	public function recalculateTotals() {
+		$packs = $this->packsMapping;
 		$subtotal = 0;
-		foreach ($products as $product) {
-			$subtotal += ($product->price * $product->quantity);
+		foreach ($packs as $pack) {
+			$subtotal += ($pack->pack_price);
 		}
 		$this->subtotal = $subtotal;
-	}
-
-	/**
-	 * @param $priceStockId
-	 * @return OrderProduct|null
-	 */
-	public function getPriceStockItem($priceStockId) {
-		$products = $this->productsMapping;
-		foreach ($products as $item) {
-			if ($item->price_stock_id == $priceStockId) {
-				$item->setParentObject($this);
-				return $item;
-			}
-		}
-		return null;
+		$this->save();
 	}
 
 	/**

@@ -14,6 +14,8 @@ namespace app\models;
  */
 class OrderProduct extends EmbedModel
 {
+	private $product;
+
 	public function getParentAttribute()
 	{
 		return "products";
@@ -24,7 +26,6 @@ class OrderProduct extends EmbedModel
 				'product_id',
 				'price_stock_id',
 				'quantity',
-				'deviser_id',
 				'price',
 				'weight',
 				'options',
@@ -36,6 +37,19 @@ class OrderProduct extends EmbedModel
 		return [
 				[$this->attributes(), 'safe']
 		];
+	}
+
+	/**
+	 * @return Product
+	 */
+	public function getProduct()
+	{
+		if (empty($this->product)) {
+			Product::setSerializeScenario(Person::SERIALIZE_SCENARIO_PUBLIC);
+			$this->product = Product::findOneSerialized($this->product_id);
+		}
+		return $this->product;
+
 	}
 
 }
