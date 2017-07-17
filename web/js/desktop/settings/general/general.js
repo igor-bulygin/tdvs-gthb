@@ -113,6 +113,8 @@
 					vm.showInvalid=false;
 					vm.saved=true;
 					vm.dataForm.$dirty=false;
+					vm.person_original=vm.person;
+					UtilService.setLeavingModal(false);
 				}
 				function onUpdateGeneralSettingsError(data) {
 					vm.saving=false;
