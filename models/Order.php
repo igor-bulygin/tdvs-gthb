@@ -88,8 +88,6 @@ class Order extends CActiveRecord {
 
 		$this->short_id = Utils::shortID(8);
 
-		// initialize attributes
-//		$this->products = [];
 	}
 
     public function embedShippingAddressMapping()
@@ -316,6 +314,7 @@ class Order extends CActiveRecord {
 
 			$deviser = $product->getDeviser();
 			$pack = new OrderPack();
+			$pack->setParentObject($this);
 			$pack->deviser_id = $product->deviser_id;
 			$pack->currency = $deviser->settingsMapping->currency;
 			$pack->weight_measure = $deviser->settingsMapping->weight_measure;

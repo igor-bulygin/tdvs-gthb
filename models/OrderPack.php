@@ -38,6 +38,11 @@ class OrderPack extends EmbedModel
 		];
 	}
 
+	public function init()
+	{
+		$this->setAttribute('shipping_info', ['type' => 'standard']);
+	}
+
 	public function rules()
 	{
 		return [
@@ -56,8 +61,7 @@ class OrderPack extends EmbedModel
 	public function getDeviser()
 	{
 		if (empty($this->deviser)) {
-			Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_PUBLIC);
-			$this->deviser = Person::findOneSerialized($this->deviser_id);
+			$this->deviser = Person::findOne(['short_id' => $this->deviser_id]);
 		}
 		return $this->deviser;
 
@@ -68,9 +72,8 @@ class OrderPack extends EmbedModel
 		$products = $this->products;
 
 		$result = [];
-		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_PUBLIC);
 		foreach ($products as $p) {
-			$product = Product::findOneSerialized($p['product_id']);
+			$product = Product::findOne(['short_id' => $p['product_id']]);
 			$p['product_name'] = $product->name;
 			$p['product_photo'] = $product->getMainImage();
 			$p['product_slug'] = $product->slug;
@@ -116,6 +119,9 @@ class OrderPack extends EmbedModel
 	}
 
 	public function recalculateTotals() {
+		$order = $this->getParentObject();
+		$deviser = $this->getDeviser();
+
 		$pack_weight = 0;
 		$pack_price = 0;
 		foreach ($this->productsMapping as $productMapping) {
@@ -127,6 +133,13 @@ class OrderPack extends EmbedModel
 		}
 		$this->pack_weight = $pack_weight;
 		$this->pack_price = $pack_price;
+
+
+		$shipping_info = $this->shipping_info;
+		$price = $deviser->getShippingPrice($pack_weight, $order->shippingAddressMapping->country, $this->shipping_info['type']);
+		$shipping_info['price'] = $price;
+
+		$this->setAttribute('shipping_info',$shipping_info);
 	}
 
 	/**

@@ -3,15 +3,15 @@ namespace app\models;
 
 /**
  *
- * @propery string $first_name
- * @propery string $last_name
- * @propery string $id_number
- * @propery string $email
- * @propery string $phone
- * @propery string $country
- * @propery string $city
- * @propery string $address
- * @propery string $zipcode
+ * @property string $first_name
+ * @property string $last_name
+ * @property string $id_number
+ * @property string $email
+ * @property string $phone
+ * @property string $country
+ * @property string $city
+ * @property string $address
+ * @property string $zipcode
  *
  * @method Order getParentObject()
  */
