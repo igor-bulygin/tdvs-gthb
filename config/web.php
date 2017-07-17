@@ -281,6 +281,7 @@ $config = [
 
 				//Links for a cart listing
 				'cart/' => 'public/cart',
+				'checkout/' => 'public/checkout',
 
 				//links for terms
 				'terms/' => 'public/terms',
