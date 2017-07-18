@@ -28,6 +28,11 @@ use yii\mongodb\ActiveQuery;
  */
 class Order extends CActiveRecord {
 
+	/**
+	 * @var Person
+	 */
+	private $person;
+
     const ORDER_STATE_CART = 'order_state_cart';
     const ORDER_STATE_PAID = 'order_state_paid';
     const ORDER_STATE_UNPAID = 'order_state_unpaid';
@@ -115,6 +120,13 @@ class Order extends CActiveRecord {
 		}
 	}
 
+	public function afterFind()
+	{
+		parent::afterFind();
+
+		$this->setAttribute('packs', $this->packsMapping);
+	}
+
 	public function beforeSave($insert) {
 		if (empty($this->order_state)) {
 			$this->order_state = Order::ORDER_STATE_CART;
@@ -161,6 +173,7 @@ class Order extends CActiveRecord {
                 static::$serializeFields = [
                     'id' => 'short_id',
 					'person_id',
+					'person_info' => 'personInfo',
 					'subtotal',
 					'order_state',
 					'order_date',
@@ -182,9 +195,28 @@ class Order extends CActiveRecord {
 				static::$serializeFields = [];
 				break;
 		}
+		OrderPack::setSerializeScenario($view);
+//		OrderAddress::setSerializeScenario($view);
 	}
 
-    /**
+	/**
+	 * @return Person
+	 */
+	public function getPerson()
+	{
+		if (empty($this->person)) {
+			$this->person = Person::findOne(['short_id' => $this->person_id]);
+		}
+		return $this->person;
+
+	}
+
+	public function getPersonInfo()
+	{
+		return $this->getPerson()->getPreviewSerialized();
+	}
+
+	/**
      * Get one entity serialized
      *
      * @param string $id

@@ -1,6 +1,7 @@
 <?php
 namespace app\models;
 
+use app\helpers\Utils;
 use yii\base\Exception;
 
 /**
@@ -56,6 +57,47 @@ class OrderPack extends EmbedModel
 	}
 
 	/**
+	 * Prepare the ActiveRecord properties to serialize the objects properly, to retrieve an serialize
+	 * only the attributes needed for a query context
+	 *
+	 * @param $view
+	 */
+	public static function setSerializeScenario($view)
+	{
+		switch ($view) {
+			case self::SERIALIZE_SCENARIO_PREVIEW:
+			case self::SERIALIZE_SCENARIO_PUBLIC:
+			case self::SERIALIZE_SCENARIO_OWNER:
+			case self::SERIALIZE_SCENARIO_ADMIN:
+				static::$serializeFields = [
+					'deviser_id',
+					'deviser_info' => 'deviserInfo',
+					'shipping_info',
+					'pack_weight',
+					'pack_price',
+					'pack_percentage_fee',
+					'currency',
+					'weight_measure',
+
+//					'payment_info',
+//					'charges',
+					'products' => 'productsInfo',
+				];
+				static::$retrieveExtraFields = [
+				];
+
+
+				static::$translateFields = false;
+				break;
+			default:
+				// now available for this Model
+				static::$serializeFields = [];
+				break;
+		}
+		Product::setSerializeScenario($view);
+	}
+
+	/**
 	 * @return Person
 	 */
 	public function getDeviser()
@@ -64,7 +106,10 @@ class OrderPack extends EmbedModel
 			$this->deviser = Person::findOne(['short_id' => $this->deviser_id]);
 		}
 		return $this->deviser;
+	}
 
+	public function getDeviserInfo() {
+		return $this->getDeviser()->getPreviewSerialized();
 	}
 
 	public function getProductsInfo() {
@@ -73,13 +118,13 @@ class OrderPack extends EmbedModel
 
 		$result = [];
 		foreach ($products as $p) {
-			$product = Product::findOne(['short_id' => $p['product_id']]);
+			$product = Product::findOneSerialized($p['product_id']);
 			$p['product_name'] = $product->name;
-			$p['product_photo'] = $product->getMainImage();
+			$p['product_photo'] = Utils::url_scheme() . Utils::thumborize($product->getMainImage());
 			$p['product_slug'] = $product->slug;
 			$p['product_url'] = $product->getViewLink();
 			$p['deviser_name'] = $deviser->name;
-			$p['deviser_photo'] = $deviser->getAvatarImage();
+			$p['deviser_photo'] = Utils::url_scheme() . Utils::thumborize($deviser->getAvatarImage());
 			$p['deviser_slug'] = $deviser->slug;
 			$p['deviser_url'] = $deviser->getStoreLink();
 			$result[] = $p;

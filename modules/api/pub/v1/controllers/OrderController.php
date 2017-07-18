@@ -21,7 +21,7 @@ class OrderController extends AppPublicController
 		}
 
 		if ($order->order_state == Order::ORDER_STATE_CART) {
-			throw new BadRequestHttpException();
+			throw new BadRequestHttpException("This order has an invalid state");
 		}
 
 		if (!Yii::$app->user->isGuest) {
