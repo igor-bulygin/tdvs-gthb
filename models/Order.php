@@ -234,7 +234,7 @@ class Order extends CActiveRecord {
 				static::$serializeFields = [];
 				break;
 		}
-		OrderPack::setSerializeScenario($view);
+//		OrderPack::setSerializeScenario($view);
 //		OrderAddress::setSerializeScenario($view);
 	}
 

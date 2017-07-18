@@ -66,7 +66,7 @@ class OrderPack extends EmbedModel
 			case self::SERIALIZE_SCENARIO_PUBLIC:
 			case self::SERIALIZE_SCENARIO_OWNER:
 			case self::SERIALIZE_SCENARIO_ADMIN:
-				static::$serializeFields = [
+				self::$serializeFields = [
 					'deviser_id',
 					'deviser_info' => 'deviserInfo',
 					'shipping_info',
@@ -80,18 +80,18 @@ class OrderPack extends EmbedModel
 //					'charges',
 					'products' => 'productsInfo',
 				];
-				static::$retrieveExtraFields = [
+			self::$retrieveExtraFields = [
 				];
 
 
-				static::$translateFields = false;
+			self::$translateFields = false;
 				break;
 			default:
 				// now available for this Model
-				static::$serializeFields = [];
+				self::$serializeFields = [];
 				break;
 		}
-		Product::setSerializeScenario($view);
+//		Product::setSerializeScenario($view);
 	}
 
 	/**
