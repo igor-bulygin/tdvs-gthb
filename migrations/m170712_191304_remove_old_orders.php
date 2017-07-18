@@ -4,9 +4,9 @@ class m170712_191304_remove_old_orders extends \yii\mongodb\Migration
 {
     public function up()
     {
-    	Yii::$app->mongodb->getCollection('order')->remove([]);
+    	Yii::$app->mongodb->getCollection('order')->remove();
 
-		return false;
+		return true;
 
     }
 
