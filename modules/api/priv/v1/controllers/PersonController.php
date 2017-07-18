@@ -2,6 +2,7 @@
 
 namespace app\modules\api\priv\v1\controllers;
 
+use app\models\Order;
 use app\models\Person;
 use Yii;
 use yii\base\Exception;
@@ -91,6 +92,123 @@ class PersonController extends AppPrivateController
 		Yii::$app->response->setStatusCode(204); // No content
 
 		return null;
+	}
+
+	public function actionOrder($personId, $orderId)
+	{
+		/** @var Person $person */
+		$person = Person::findOne(["short_id" => $personId]);
+		if (empty($person)) {
+			throw new NotFoundHttpException('Person not found');
+		}
+
+		if (!$person->isPersonEditable()) {
+			throw new UnauthorizedHttpException();
+		}
+
+		// show only fields needed in this scenario
+		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_OWNER);
+
+		$order = Order::findOneSerialized($orderId);
+		if (empty($order)) {
+			throw new NotFoundHttpException('Order not found');
+		}
+
+		if ($order->person_id != $person->short_id) {
+			throw new UnauthorizedHttpException();
+		}
+
+		return $order;
+	}
+
+	public function actionOrders($personId)
+	{
+		/** @var Person $person */
+		$person = Person::findOne(["short_id" => $personId]);
+		if (empty($person)) {
+			throw new NotFoundHttpException('Person not found');
+		}
+
+		if (!$person->isPersonEditable()) {
+			throw new UnauthorizedHttpException();
+		}
+
+		// show only fields needed in this scenario
+		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_OWNER);
+
+		// set pagination values
+		$limit = Yii::$app->request->get('limit', 99999);
+		$limit = ($limit < 1) ? 1 : $limit;
+		$page = Yii::$app->request->get('page', 1);
+		$page = ($page < 1) ? 1 : $page;
+		$offset = ($limit * ($page - 1));
+
+		$orders = Order::findSerialized([
+			"person_id" => $person->id,
+			"limit" => $limit,
+			"offset" => $offset,
+		]);
+
+		return [
+			"items" => $orders,
+			"meta" => [
+				"total_count" => Order::$countItemsFound,
+				"current_page" => $page,
+				"per_page" => $limit,
+			]
+		];
+	}
+
+	public function actionPacks($personId)
+	{
+		/** @var Person $person */
+		$person = Person::findOne(["short_id" => $personId]);
+		if (empty($person)) {
+			throw new NotFoundHttpException('Person not found');
+		}
+
+		if (!$person->isDeviser()) {
+			throw new Exception("Invalid person type");
+		}
+
+		if (!$person->isDeviserEditable()) {
+			throw new UnauthorizedHttpException();
+		}
+
+		// show only fields needed in this scenario
+		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_DEVISER_PACK);
+
+		// set pagination values
+		$limit = Yii::$app->request->get('limit', 99999);
+		$limit = ($limit < 1) ? 1 : $limit;
+		$page = Yii::$app->request->get('page', 1);
+		$page = ($page < 1) ? 1 : $page;
+		$offset = ($limit * ($page - 1));
+
+		$orders = Order::findSerialized([
+			"deviser_id" => $person->id,
+			"limit" => $limit,
+			"offset" => $offset,
+		]);
+
+//		foreach ($orders as $order) {
+//			$packs = $order->packs;
+//			foreach ($packs as $i => $pack) {
+//				if ($pack['deviser_id'] != $person->short_id) {
+//					unset($packs[$i]);
+//				}
+//			}
+//			$order->setAttribute('packs', $packs);
+//		}
+
+		return [
+			"items" => $orders,
+			"meta" => [
+				"total_count" => Order::$countItemsFound,
+				"current_page" => $page,
+				"per_page" => $limit,
+			]
+		];
 	}
 
 	/**

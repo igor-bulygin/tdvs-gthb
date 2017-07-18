@@ -21,11 +21,6 @@ use yii\base\Exception;
  */
 class OrderPack extends EmbedModel
 {
-	/**
-	 * @var Person
-	 */
-	private $deviser;
-
 	public function attributes() {
 		return [
 				'deviser_id',
@@ -41,6 +36,8 @@ class OrderPack extends EmbedModel
 
 	public function init()
 	{
+		$this->products = [];
+
 		$this->setAttribute('shipping_info', ['type' => 'standard']);
 	}
 
@@ -102,31 +99,32 @@ class OrderPack extends EmbedModel
 	 */
 	public function getDeviser()
 	{
-		if (empty($this->deviser)) {
-			$this->deviser = Person::findOne(['short_id' => $this->deviser_id]);
-		}
-		return $this->deviser;
+		return Person::findOne(['short_id' => $this->deviser_id]);
 	}
 
 	public function getDeviserInfo() {
-		return $this->getDeviser()->getPreviewSerialized();
+		$deviser = $this->getDeviser();
+
+		return [
+			"slug" => $deviser->slug,
+			"name" => $deviser->personalInfoMapping->getVisibleName(),
+			"url_avatar" => $deviser->getAvatarImage128(),
+			'main_link' => $deviser->getMainLink(),
+		];
 	}
 
 	public function getProductsInfo() {
-		$deviser = $this->getDeviser();
 		$products = $this->products;
 
 		$result = [];
 		foreach ($products as $p) {
 			$product = Product::findOneSerialized($p['product_id']);
-			$p['product_name'] = $product->name;
-			$p['product_photo'] = Utils::url_scheme() . Utils::thumborize($product->getMainImage());
-			$p['product_slug'] = $product->slug;
-			$p['product_url'] = $product->getViewLink();
-			$p['deviser_name'] = $deviser->name;
-			$p['deviser_photo'] = Utils::url_scheme() . Utils::thumborize($deviser->getAvatarImage());
-			$p['deviser_slug'] = $deviser->slug;
-			$p['deviser_url'] = $deviser->getStoreLink();
+			$p['product_info'] = [
+				'product_name' =>$product->name,
+				'product_photo' =>Utils::url_scheme() . Utils::thumborize($product->getMainImage()),
+				'product_slug' =>$product->slug,
+				'product_url' =>$product->getViewLink(),
+			];
 			$result[] = $p;
 		}
 

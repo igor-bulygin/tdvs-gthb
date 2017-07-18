@@ -5,7 +5,6 @@ namespace app\models;
  * @property string $product_id
  * @property string $price_stock_id
  * @property int $quantity
- * @property string $deviser_id
  * @property double $price
  * @property double $weight
  * @property array $options
@@ -14,8 +13,6 @@ namespace app\models;
  */
 class OrderProduct extends EmbedModel
 {
-	private $product;
-
 	public function getParentAttribute()
 	{
 		return "products";
@@ -44,12 +41,7 @@ class OrderProduct extends EmbedModel
 	 */
 	public function getProduct()
 	{
-		if (empty($this->product)) {
-			Product::setSerializeScenario(Person::SERIALIZE_SCENARIO_PUBLIC);
-			$this->product = Product::findOneSerialized($this->product_id);
-		}
-		return $this->product;
-
+		return Product::findOne(['short_id' => $this->product_id]);
 	}
 
 }

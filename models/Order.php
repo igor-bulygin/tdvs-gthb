@@ -28,10 +28,7 @@ use yii\mongodb\ActiveQuery;
  */
 class Order extends CActiveRecord {
 
-	/**
-	 * @var Person
-	 */
-	private $person;
+	const SERIALIZE_SCENARIO_DEVISER_PACK = 'serialize_scenario_deviser_pack';
 
     const ORDER_STATE_CART = 'order_state_cart';
     const ORDER_STATE_PAID = 'order_state_paid';
@@ -167,11 +164,10 @@ class Order extends CActiveRecord {
 	{
 		switch ($view) {
 			case self::SERIALIZE_SCENARIO_PREVIEW:
-            case self::SERIALIZE_SCENARIO_PUBLIC:
-            case self::SERIALIZE_SCENARIO_OWNER:
+			case self::SERIALIZE_SCENARIO_PUBLIC:
 			case self::SERIALIZE_SCENARIO_ADMIN:
-                static::$serializeFields = [
-                    'id' => 'short_id',
+				static::$serializeFields = [
+					'id' => 'short_id',
 					'person_id',
 					'person_info' => 'personInfo',
 					'subtotal',
@@ -183,13 +179,56 @@ class Order extends CActiveRecord {
 
 //					'payment_info',
 //					'charges',
-                ];
-                static::$retrieveExtraFields = [
-                ];
+				];
+				static::$retrieveExtraFields = [
+				];
 
 
-                static::$translateFields = false;
-                break;
+				static::$translateFields = false;
+				break;
+
+			case self::SERIALIZE_SCENARIO_DEVISER_PACK:
+				static::$serializeFields = [
+					'id' => 'short_id',
+					'person_id',
+					'person_info' => 'personInfo',
+//					'subtotal',
+//					'order_state',
+//					'order_date',
+					'shipping_address',
+					'billing_address',
+					'packs',
+
+//					'payment_info',
+//					'charges',
+				];
+				static::$retrieveExtraFields = [
+				];
+
+
+				static::$translateFields = false;
+				break;
+
+			case self::SERIALIZE_SCENARIO_OWNER:
+				static::$serializeFields = [
+					'id' => 'short_id',
+					'person_id',
+					'subtotal',
+					'order_state',
+					'order_date',
+					'shipping_address',
+					'billing_address',
+					'packs',
+
+//					'payment_info',
+//					'charges',
+				];
+				static::$retrieveExtraFields = [
+				];
+
+
+				static::$translateFields = false;
+				break;
 			default:
 				// now available for this Model
 				static::$serializeFields = [];
@@ -204,16 +243,18 @@ class Order extends CActiveRecord {
 	 */
 	public function getPerson()
 	{
-		if (empty($this->person)) {
-			$this->person = Person::findOne(['short_id' => $this->person_id]);
-		}
-		return $this->person;
-
+		return Person::findOne(['short_id' => $this->person_id]);
 	}
 
 	public function getPersonInfo()
 	{
-		return $this->getPerson()->getPreviewSerialized();
+		$person = $this->getPerson();
+		return [
+			"slug" => $person->slug,
+			"name" => $person->personalInfoMapping->getVisibleName(),
+			"url_avatar" => $person->getAvatarImage128(),
+			'main_link' => $person->getMainLink(),
+		];
 	}
 
 	/**
@@ -357,36 +398,36 @@ class Order extends CActiveRecord {
 		$this->recalculateTotals();
 	}
 
-	public function updateProduct(OrderProduct $orderProduct) {
-		$product = Product::findOneSerialized($orderProduct->product_id); /* @var Product $product */
-		if (empty($orderProduct)) {
-			throw new Exception(sprintf("Product with id %s does not exists", $orderProduct->product_id));
-		}
-		$priceStock = $product->getPriceStockItem($orderProduct->price_stock_id);
-		if (empty($priceStock)) {
-			throw new Exception(sprintf("Price stock item with id %s does not exists", $orderProduct->price_stock_id));
-		}
-
-		$products = $this->productsMapping;
-		$key = null;
-		foreach ($products as $i => $item) {
-			if ($item->price_stock_id == $orderProduct->price_stock_id) {
-				$key = $i;
-				break;
-			}
-		}
-		$orderProduct->weight = $priceStock['weight'];
-		$orderProduct->price = $priceStock['price'];
-		$orderProduct->options = $priceStock['options'];
-		$orderProduct->deviser_id = $product->deviser_id;
-
-		if (isset($key)) {
-			$this->productsMapping[$key] = $orderProduct;
-		} else {
-			$this->productsMapping[] = $orderProduct;
-		}
-		$this->recalculateTotals();
-	}
+//	public function updateProduct(OrderProduct $orderProduct) {
+//		$product = Product::findOneSerialized($orderProduct->product_id); /* @var Product $product */
+//		if (empty($orderProduct)) {
+//			throw new Exception(sprintf("Product with id %s does not exists", $orderProduct->product_id));
+//		}
+//		$priceStock = $product->getPriceStockItem($orderProduct->price_stock_id);
+//		if (empty($priceStock)) {
+//			throw new Exception(sprintf("Price stock item with id %s does not exists", $orderProduct->price_stock_id));
+//		}
+//
+//		$products = $this->productsMapping;
+//		$key = null;
+//		foreach ($products as $i => $item) {
+//			if ($item->price_stock_id == $orderProduct->price_stock_id) {
+//				$key = $i;
+//				break;
+//			}
+//		}
+//		$orderProduct->weight = $priceStock['weight'];
+//		$orderProduct->price = $priceStock['price'];
+//		$orderProduct->options = $priceStock['options'];
+//		$orderProduct->deviser_id = $product->deviser_id;
+//
+//		if (isset($key)) {
+//			$this->productsMapping[$key] = $orderProduct;
+//		} else {
+//			$this->productsMapping[] = $orderProduct;
+//		}
+//		$this->recalculateTotals();
+//	}
 
 	public function deleteProduct($priceStockId) {
 
@@ -416,7 +457,7 @@ class Order extends CActiveRecord {
 	public function composeEmailOrderPaid($send) {
 		$email = new PostmanEmail();
 		$email->code_email_content_type = PostmanEmail::EMAIL_CONTENT_TYPE_ORDER_PAID;
-		$email->to_email = $this->personInfoMapping->email;
+		$email->to_email = $this->getPerson()->credentials['email'];
 		$email->subject = 'Todevise - '.$this->short_id.' - Your purchase is complete';
 
 		// add task only one send task (to allow retries)
