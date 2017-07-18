@@ -232,12 +232,18 @@ class OrderPack extends EmbedModel
 
 
 
-	public function deleteProduct($priceStockId) {
+	public function deleteProduct($priceStockId)
+	{
 		$products = $this->productsMapping;
+		$indexes = [];
 		foreach ($products as $i => $item) {
 			if ($item->price_stock_id == $priceStockId) {
-				$item->offsetUnset($i);
+				$indexes[] = $i;
 			}
+		}
+
+		foreach ($indexes as $index) {
+			$products->offsetUnset($index);
 		}
 
 		$this->recalculateTotals();
