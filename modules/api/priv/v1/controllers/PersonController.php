@@ -118,6 +118,10 @@ class PersonController extends AppPrivateController
 			throw new UnauthorizedHttpException();
 		}
 
+		if ($order->order_state == Order::ORDER_STATE_CART) {
+			throw new BadRequestHttpException("This cart has an invalid state");
+		}
+
 		return $order;
 	}
 
@@ -145,6 +149,7 @@ class PersonController extends AppPrivateController
 
 		$orders = Order::findSerialized([
 			"person_id" => $person->id,
+			"order_state" => Order::ORDER_STATE_PAID,
 			"limit" => $limit,
 			"offset" => $offset,
 		]);
