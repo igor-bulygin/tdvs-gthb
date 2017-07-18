@@ -192,6 +192,7 @@ class PersonController extends AppPrivateController
 
 		$orders = Order::findSerialized([
 			"deviser_id" => $person->id,
+			"only_matching_packs" => true,
 			"limit" => $limit,
 			"offset" => $offset,
 		]);

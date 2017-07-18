@@ -194,7 +194,7 @@ class Order extends CActiveRecord {
 					'person_info' => 'personInfo',
 //					'subtotal',
 //					'order_state',
-//					'order_date',
+					'order_date',
 					'shipping_address',
 					'billing_address',
 					'packs',
@@ -339,6 +339,25 @@ class Order extends CActiveRecord {
 		}
 
         $orders = $query->all();
+
+		if ((array_key_exists("only_matching_packs", $criteria)) && (!empty($criteria["only_matching_packs"]))) {
+			// Remove all non matching packs with deviser_id
+			foreach ($orders as $order) {
+				/* @var $order Order */
+				$packs = $order->packs;
+				$indexes = [];
+				foreach ($packs as $i => $pack) {
+					if ($pack->deviser_id != $criteria['deviser_id']) {
+						$indexes[] = $i;
+
+					}
+				}
+				foreach ($indexes as $index) {
+					$packs->offsetUnset($index);
+				}
+				$order->setAttribute('packs', $packs);
+			}
+		}
 
         // if automatic translation is enabled
         if (static::$translateFields) {
