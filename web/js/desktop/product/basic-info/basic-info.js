@@ -253,6 +253,9 @@
 					}
 				}
 			}
+			if(angular.isArray(newValue) && newValue.indexOf(null) === -1) {
+				vm.form.$submitted = false;
+			}
 		}, true);
 
 		//when get categories, set first
@@ -292,12 +295,7 @@
 			}
 		}, true);
 
-		//watch categories errors
-		$scope.$watch('productBasicInfoCtrl.product.categories', function(newValue, oldValue) {
-			if(angular.isArray(newValue) && newValue.indexOf(null) === -1) {
-				vm.form.$submitted = false;
-			}
-		}, true);
+		
 
 		$scope.$watch('productBasicInfoCtrl.product.description', function(newValue, oldValue) {
 			vm.descriptionRequired = false;
