@@ -65,14 +65,14 @@ class Person extends CActiveRecord implements IdentityInterface
 	 *
 	 * @var array
 	 */
-	static protected $serializeFields = [];
+	protected static $serializeFields = [];
 
 	/**
 	 * The attributes that should be serialized
 	 *
 	 * @var array
 	 */
-	static protected $retrieveExtraFields = [];
+	protected static $retrieveExtraFields = [];
 
 
 	//public $accessToken;

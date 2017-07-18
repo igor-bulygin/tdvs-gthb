@@ -39,14 +39,14 @@ class Order extends CActiveRecord {
 	 *
 	 * @var array
 	 */
-	static protected $serializeFields = [];
+	protected static $serializeFields = [];
 
 	/**
 	 * The attributes that should be serialized
 	 *
 	 * @var array
 	 */
-	static protected $retrieveExtraFields = [];
+	protected static $retrieveExtraFields = [];
 
 	public static function collectionName() {
 		return 'order';
@@ -234,7 +234,7 @@ class Order extends CActiveRecord {
 				static::$serializeFields = [];
 				break;
 		}
-//		OrderPack::setSerializeScenario($view);
+		OrderPack::setSerializeScenario($view);
 //		OrderAddress::setSerializeScenario($view);
 	}
 
