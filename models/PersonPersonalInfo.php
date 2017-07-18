@@ -26,6 +26,10 @@ class PersonPersonalInfo extends EmbedModel
 	public $bday;
 	// TODO deprecate
 	public $surnames;
+	// TODO deprecate
+	public $street;
+	// TODO deprecate
+	public $number;
 
 	public function attributes()
 	{
@@ -35,8 +39,7 @@ class PersonPersonalInfo extends EmbedModel
 			'brand_name',
 			'country',
 			'city',
-			'street',
-			'number',
+			'address',
 			'phone_number_prefix',
 			'phone_number',
 			'zip',
