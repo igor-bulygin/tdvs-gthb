@@ -7,6 +7,7 @@ use yii\base\Exception;
 /**
  *
  * @property int $deviser_id
+ * @property string $short_id
  * @property array $shipping_info
  * @property double $pack_weight
  * @property double $pack_price
@@ -24,6 +25,7 @@ class OrderPack extends EmbedModel
 	public function attributes() {
 		return [
 				'deviser_id',
+				'short_id',
 				'shipping_info',
 				'pack_weight',
 				'pack_price',
@@ -36,7 +38,11 @@ class OrderPack extends EmbedModel
 
 	public function init()
 	{
-		$this->products = [];
+		parent::init();
+
+		$this->short_id = Utils::shortID(8);
+
+//		$this->products = [];
 
 		$this->setAttribute('shipping_info', ['type' => 'standard']);
 	}
@@ -81,10 +87,32 @@ class OrderPack extends EmbedModel
 					'products' => 'productsInfo',
 				];
 			self::$retrieveExtraFields = [
+					'products',
 				];
 
 
 			self::$translateFields = false;
+				break;
+			case Order::SERIALIZE_SCENARIO_DEVISER_PACK:
+				self::$serializeFields = [
+					'deviser_id',
+					'shipping_info',
+					'pack_weight',
+					'pack_price',
+					'pack_percentage_fee',
+					'currency',
+					'weight_measure',
+
+//					'payment_info',
+//					'charges',
+					'products' => 'productsInfo',
+				];
+				self::$retrieveExtraFields = [
+					'products',
+				];
+
+
+				self::$translateFields = false;
 				break;
 			default:
 				// now available for this Model
@@ -117,15 +145,17 @@ class OrderPack extends EmbedModel
 		$products = $this->products;
 
 		$result = [];
-		foreach ($products as $p) {
-			$product = Product::findOneSerialized($p['product_id']);
-			$p['product_info'] = [
-				'product_name' =>$product->name,
-				'product_photo' =>Utils::url_scheme() . Utils::thumborize($product->getMainImage()),
-				'product_slug' =>$product->slug,
-				'product_url' =>$product->getViewLink(),
-			];
-			$result[] = $p;
+		if ($products) {
+			foreach ($products as $p) {
+				$product = Product::findOneSerialized($p['product_id']);
+				$p['product_info'] = [
+					'product_name' => $product->name,
+					'product_photo' => Utils::url_scheme() . Utils::thumborize($product->getMainImage()),
+					'product_slug' => $product->slug,
+					'product_url' => $product->getViewLink(),
+				];
+				$result[] = $p;
+			}
 		}
 
 		return $result;
