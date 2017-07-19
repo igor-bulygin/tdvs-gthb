@@ -37,6 +37,7 @@ class PersonPersonalInfo extends EmbedModel
 			'name',
 			'last_name',
 			'brand_name',
+			'id_number',
 			'country',
 			'city',
 			'address',
