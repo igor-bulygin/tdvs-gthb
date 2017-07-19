@@ -60,10 +60,10 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 							<div class="col-md-2 text-right">
 								<input type="text" name="last_name" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.last_name" placeholder="Last Name">								
 							</div>
-							<label for="street" class="col-md-2">ADDRESS</label>
+							<label for="address" class="col-md-2">ADDRESS</label>
 							<div class="col-md-4 text-right">
-								<input type="text" name="street" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.street" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.street)}">
-								<span class="purple-text" ng-if="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.street)">Please, fill in this field</span>
+								<input type="text" name="address" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.address" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.address)}">
+								<span class="purple-text" ng-if="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.address)">Please, fill in this field</span>
 							</div>
 						</div>
 						<div class="form-group">
