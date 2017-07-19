@@ -241,23 +241,6 @@ body {
   background-color: #ffffff;
   min-height: 2000px; }
 
-h2 {
-  font-family: "Univers Ultra Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  text-transform: uppercase;
-  font-size: 70px;
-  line-height: 45px;
-  display: inline-block;
-  padding: 0;
-  margin: 0 0 10px; }
-
-h3 {
-  font-family: "Univers Ultra Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  text-align: center;
-  text-transform: uppercase;
-  color: #bfbfbf;
-  font-size: 50px;
-  letter-spacing: 4px; }
-
 .section-title {
   color: #ffffff;
   font: 18px "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -532,6 +515,9 @@ a, a:hover, a:focus {
 .btn-red {
   background-color: #c91c39;
   color: #ffffff; }
+  .btn-red:focus {
+    color: #ffffff !important;
+    color: #ffffff !important; }
   .btn-red:hover {
     background-color: #F7284B;
     color: #ffffff; }
@@ -663,6 +649,14 @@ a, a:hover, a:focus {
     display: none; }
   .big-btn:hover .big-btn-message {
     display: block; }
+
+.btn-small {
+  width: 149px;
+  height: 40px;
+  font-size: 16px; }
+  .btn-small.disabled {
+    cursor: default;
+    background-color: #bfbfbf; }
 
 .regular-btn {
   height: 62px;
@@ -1602,6 +1596,93 @@ input[type="radio"] .styled:checked + label::after {
 .logo-md {
   width: 180px;
   display: block; }
+
+h1 {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 28px;
+  font-weight: bold;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: #1C1919; }
+
+.title-underlined {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 20px;
+  letter-spacing: 0.6px;
+  color: #1C1919;
+  text-transform: uppercase;
+  border-bottom: 1px solid #939393;
+  width: 100%;
+  display: block;
+  padding: 0 0 15px;
+  margin: 0 0 15px; }
+
+.text-title {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 20px;
+  letter-spacing: 0.6px;
+  margin: 0px 0 5px;
+  display: block; }
+
+.title-product-name {
+  font-family: "Univers Thin Ultra Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  font-size: 48px;
+  letter-spacing: 2.5px;
+  color: #1C1919; }
+
+.category {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  font-weight: bold; }
+
+.question {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.6px;
+  font-weight: bold; }
+
+.big-price {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 40px;
+  letter-spacing: 0.6px;
+  font-weight: bold; }
+
+.small-text {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.6px;
+  font-weight: 300; }
+
+.topbar-item {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 20px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase; }
+
+p {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.6px; }
+
+h2 {
+  font-family: "Univers Ultra Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  font-size: 70px;
+  line-height: 45px;
+  display: inline-block;
+  padding: 0;
+  margin: 0 0 10px; }
+
+h3 {
+  font-family: "Univers Ultra Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-align: center;
+  text-transform: uppercase;
+  color: #bfbfbf;
+  font-size: 50px;
+  letter-spacing: 4px; }
 
 .white-title-lg {
   color: #ffffff;

@@ -4,6 +4,9 @@
 .btn-red{
     background-color:$dark_red;
     color: $white;
+	&:focus{
+		color: $white!important;
+	}
     @extend %btn;   
     &:hover{
         background-color:$red;
@@ -146,7 +149,15 @@
 		}
 	}
 }
-
+.btn-small{
+	width: 149px;
+  	height: 40px;
+	font-size: 16px;
+	&.disabled{
+		cursor: default;
+		background-color: $light_grey;
+	}
+}
 .regular-btn{
 	height: 62px;
   	@include border-radius(5px,5px,5px,5px);

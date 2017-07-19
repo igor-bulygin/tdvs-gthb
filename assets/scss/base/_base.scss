@@ -18,23 +18,6 @@ body{
 	background-color: $white;
 	 min-height: 2000px;
 }
-h2{
-    font-family: $font-family--title;
-    text-transform: uppercase;
-    font-size: 70px;
-    line-height: 45px;
-    display: inline-block;
-    padding: 0;
-    margin: 0 0 10px;
-}
-h3{
-    font-family: $font-family--title;
-    text-align: center;
-    text-transform: uppercase;
-    color: $light_grey;
-    font-size: 50px;
-    letter-spacing: 4px;
-}
 .section-title{
     color: $white;
     font: 18px $font-family--bold;
