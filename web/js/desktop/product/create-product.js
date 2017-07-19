@@ -123,9 +123,9 @@
 			vm.errors = false;
 			vm.saving = true;
 			function onUpdateProductSuccess(data) {
-				vm.saving = false;
 				if (state === 'product_state_draft') {
-					saved_draft();
+					saved_draft();					
+					vm.saving = false;
 				} else if (state === 'product_state_active') {
 					product_published();
 				}
