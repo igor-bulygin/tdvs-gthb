@@ -252,8 +252,8 @@ class Order extends CActiveRecord {
 		return [
 			"slug" => $person->slug,
 			"name" => $person->personalInfoMapping->getVisibleName(),
-			"url_avatar" => $person->getAvatarImage128(),
-			'main_link' => $person->getMainLink(),
+			"photo" => $person->getAvatarImage128(),
+			'url' => $person->getMainLink(),
 		];
 	}
 

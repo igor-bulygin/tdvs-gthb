@@ -136,8 +136,8 @@ class OrderPack extends EmbedModel
 		return [
 			"slug" => $deviser->slug,
 			"name" => $deviser->personalInfoMapping->getVisibleName(),
-			"url_avatar" => $deviser->getAvatarImage128(),
-			'main_link' => $deviser->getMainLink(),
+			"photo" => $deviser->getAvatarImage128(),
+			'url' => $deviser->getMainLink(),
 		];
 	}
 
@@ -149,10 +149,10 @@ class OrderPack extends EmbedModel
 			foreach ($products as $p) {
 				$product = Product::findOneSerialized($p['product_id']);
 				$p['product_info'] = [
-					'product_name' => $product->name,
-					'product_photo' => Utils::url_scheme() . Utils::thumborize($product->getMainImage()),
-					'product_slug' => $product->slug,
-					'product_url' => $product->getViewLink(),
+					'name' => $product->getName(),
+					'photo' => Utils::url_scheme() . Utils::thumborize($product->getMainImage()),
+					'slug' => $product->getSlug(),
+					'url' => $product->getViewLink(),
 				];
 				$result[] = $p;
 			}

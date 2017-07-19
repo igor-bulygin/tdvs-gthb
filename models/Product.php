@@ -755,6 +755,15 @@ class Product extends CActiveRecord {
 		return $slug;
 	}
 
+	public function getName() {
+		if (is_array($this->name)) {
+			$name = Utils::l($this->name);
+		} else {
+			$name = $this->name;
+		}
+		return $name;
+	}
+
 	/**
 	 * Get a resized version of main image, to 128px width
 	 *
