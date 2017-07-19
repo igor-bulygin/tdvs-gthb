@@ -7,6 +7,7 @@ use app\helpers\Utils;
  * @property string $name
  * @property string $last_name
  * @property string $brand_name
+ * @property string $id_number
  * @property string $country
  * @property string $city
  * @property string $street
