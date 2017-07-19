@@ -127,8 +127,8 @@
 		}
 		function isValidForm() {
 			return (((vm.isDeviser && !angular.isUndefined(vm.dataForm.brand_name.$viewValue) && vm.dataForm.brand_name.$viewValue.length>0) || !vm.isDeviser) 
-				&& !angular.isUndefined(vm.dataForm.city.$viewValue) && vm.dataForm.city.$viewValue.length>0 && !angular.isUndefined(vm.dataForm.street.$viewValue)  && vm.dataForm.street.$viewValue.length>0 
-				 && !vm.invalidPrefix && !angular.isUndefined(vm.dataForm.phone.$viewValue) && vm.dataForm.phone.$viewValue.length>0  
+				&& !angular.isUndefined(vm.dataForm.city.$viewValue) && vm.dataForm.city.$viewValue.length>0 && !angular.isUndefined(vm.dataForm.address.$viewValue)  && vm.dataForm.address.$viewValue.length>0 
+				&& vm.dataForm.id_number.$viewValue!=null && !angular.isUndefined(vm.dataForm.id_number.$viewValue) && vm.dataForm.id_number.$viewValue.length>0 && !vm.invalidPrefix && !angular.isUndefined(vm.dataForm.phone.$viewValue) && vm.dataForm.phone.$viewValue.length>0  
 				&& !angular.isUndefined(vm.dataForm.zip.$viewValue) && vm.dataForm.zip.$viewValue.length>0 && !vm.notWeightMeasureSelected)
 		}
 
@@ -174,7 +174,7 @@
 		}
 
 		function existRequiredError(value) {
-			if (angular.isUndefined(value)) {
+			if (!value || angular.isUndefined(value)) {
 				return vm.showInvalid;
 			}
 			return (value && value.length<1 && vm.showInvalid);
