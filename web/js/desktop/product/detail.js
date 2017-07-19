@@ -8,7 +8,7 @@
 		vm.option_selected = {};
 		vm.has_error = UtilService.has_error;
 		vm.isString = angular.isString;
-		vm.parseOptions = parseOptions;
+		vm.optionsChanged = optionsChanged;
 		vm.changeQuantity = changeQuantity;
 		vm.changeOriginalArtwork = changeOriginalArtwork;
 		vm.selectComparator = selectComparator;
@@ -38,13 +38,14 @@
 				vm.total_stock = getTotalStock(vm.product.price_stock);
 				vm.stock = vm.total_stock;
 				vm.price = vm.minimum_price;
-				//parse options with only one value
 				vm.product.options.forEach(function(option){
+					//parse options with only one value
 					if(option.values.length === 1) {
 						vm.option_selected[option.id] = option.values[0].value;
-						parseOptions(option.id, option.values[0].value);
+						//parseOptions(option.id, option.values[0].value);
 					}
-				})
+				});
+				vm.reference_id = getReferenceId(vm.option_selected);
 			}
 
 			productDataService.getProductPub({
@@ -83,14 +84,19 @@
 			return stock;
 		}
 
+		function optionsChanged(option_id, value) {
+			resetOptions();
+			parseOptions(option_id, value);
+		}
+
 		function parseOptions(option_id, value) {
 			if(option_id === 'size')
 				value = getSizeText(value);
 			vm.reference_id = getReferenceId(vm.option_selected);
-			resetOptions();
 			vm.product.price_stock.forEach(function(element) {
 				if(element.stock === 0 && ((angular.isArray(element.options[option_id]) && element.options[option_id].indexOf(value) > -1) || 
-					(option_id === 'size' && angular.equals(element.options[option_id],value)) ) ) {
+					(angular.isArray(element.options[option_id]) && angular.isArray(value) && angular.equals(element.options[option_id], value)) || 
+					(option_id === 'size' && angular.equals(element.options[option_id], value)) ) ) {
 						for(var key in element.options) {
 							if(key !== option_id) {
 								vm.product.options.forEach(function (option) {
@@ -98,11 +104,11 @@
 										option.values.forEach(function(unit) {
 												if(key == 'size') {
 													if(unit.text == element.options[key]) {
-														unit.disabled=true;
+														//unit.disabled=true;
 													}
 												} else {
 													if(unit.value == element.options[key][0]) {
-														unit.disabled=true;
+														//unit.disabled=true;
 													}
 												}
 										});
@@ -140,13 +146,15 @@
 			var isRequired;
 			vm.tags.forEach(function(element){
 				if(element.id === key) {
-					isRequired = element.required;
+					isRequired = element.required && element.stock_and_price;
 				}
 			});
 			return isRequired;
 		}
 
 		function getReferenceId(options_selected) {
+			vm.stock = 0;
+			var prices = [];
 			var options = angular.copy(options_selected);
 			var reference;
 			if(options['size']) {
@@ -172,8 +180,11 @@
 				}
 				if(isReference) {
 					reference = element.short_id;
+					vm.stock += element.stock;
+					prices.push(element.price);
 				}
 			});
+			vm.price = Math.min(...prices);
 			return reference;
 		}
 

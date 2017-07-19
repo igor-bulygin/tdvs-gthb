@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(personDataService,UtilService,locationDataService,$uibModal, metricDataService,$scope) {
+	function controller(personDataService, UtilService, locationDataService, $uibModal, metricDataService, $scope) {
 		var vm = this;
 		vm.person = {id:person.id, personal_info:angular.copy(person.personal_info), settings:angular.copy(person.settings)};
 		
@@ -11,9 +11,9 @@
 		}
 		vm.notWeightMeasureSelected=false;
 		vm.city ="";
-		if (!angular.isUndefined(vm.person.personal_info.city) && vm.person.personal_info.city.length>0) {
+		if (!angular.isUndefined(vm.person.personal_info.city) && angular.isString(vm.person.personal_info.city)) {
 			vm.city=vm.person.personal_info.city;
-			if (!angular.isUndefined(vm.person.personal_info.country) && vm.person.personal_info.country.length>0) {
+			if (!angular.isUndefined(vm.person.personal_info.country) && angular.isString(vm.person.personal_info.country)) {
 				vm.city =vm.city + ', ' + vm.person.personal_info.country;
 			}
 		}		
@@ -97,6 +97,9 @@
 			vm.saved=false;
 			vm.invalidPrefix=false;
 			setPrefix();
+			if (angular.isUndefined(vm.person.settings) || vm.person.settings===null) {
+				vm.person.settings={};
+			}
 			if (angular.isUndefined(vm.person.settings.weight_measure) || vm.person.settings.weight_measure === null || vm.person.settings.weight_measure.length<1 ) {
 				vm.notWeightMeasureSelected=true;
 			}
@@ -110,6 +113,8 @@
 					vm.showInvalid=false;
 					vm.saved=true;
 					vm.dataForm.$dirty=false;
+					vm.person_original=vm.person;
+					UtilService.setLeavingModal(false);
 				}
 				function onUpdateGeneralSettingsError(data) {
 					vm.saving=false;
@@ -122,9 +127,8 @@
 		}
 		function isValidForm() {
 			return (((vm.isDeviser && !angular.isUndefined(vm.dataForm.brand_name.$viewValue) && vm.dataForm.brand_name.$viewValue.length>0) || !vm.isDeviser) 
-				&& !angular.isUndefined(vm.dataForm.city.$viewValue) && vm.dataForm.city.$viewValue.length>0 && !angular.isUndefined(vm.dataForm.street.$viewValue)  && vm.dataForm.street.$viewValue.length>0 
-				 && !vm.invalidPrefix && !angular.isUndefined(vm.dataForm.phone.$viewValue) && vm.dataForm.phone.$viewValue.length>0  
-				&& !angular.isUndefined(vm.dataForm.number.$viewValue) && vm.dataForm.number.$viewValue.length>0 
+				&& !angular.isUndefined(vm.dataForm.city.$viewValue) && vm.dataForm.city.$viewValue.length>0 && !angular.isUndefined(vm.dataForm.address.$viewValue)  && vm.dataForm.address.$viewValue.length>0 
+				&& vm.dataForm.id_number.$viewValue!=null && !angular.isUndefined(vm.dataForm.id_number.$viewValue) && vm.dataForm.id_number.$viewValue.length>0 && !vm.invalidPrefix && !angular.isUndefined(vm.dataForm.phone.$viewValue) && vm.dataForm.phone.$viewValue.length>0  
 				&& !angular.isUndefined(vm.dataForm.zip.$viewValue) && vm.dataForm.zip.$viewValue.length>0 && !vm.notWeightMeasureSelected)
 		}
 
@@ -170,10 +174,10 @@
 		}
 
 		function existRequiredError(value) {
-			if (angular.isUndefined(value)) {
+			if (!value || angular.isUndefined(value)) {
 				return vm.showInvalid;
 			}
-			return (value.length<1 && vm.showInvalid);
+			return (value && value.length<1 && vm.showInvalid);
 		}
 
 		function existPaswordRequiredError(value) {

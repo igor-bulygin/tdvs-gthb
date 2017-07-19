@@ -63,14 +63,14 @@ class Product extends CActiveRecord {
 	 *
 	 * @var array
 	 */
-	static protected $serializeFields = [];
+	protected static $serializeFields = [];
 
 	/**
 	 * The attributes that should be serialized
 	 *
 	 * @var array
 	 */
-	static protected $retrieveExtraFields = [];
+	protected static $retrieveExtraFields = [];
 
 	public static function collectionName() {
 		return 'product';
@@ -753,6 +753,15 @@ class Product extends CActiveRecord {
 			$slug = $this->slug;
 		}
 		return $slug;
+	}
+
+	public function getName() {
+		if (is_array($this->name)) {
+			$name = Utils::l($this->name);
+		} else {
+			$name = $this->name;
+		}
+		return $name;
 	}
 
 	/**

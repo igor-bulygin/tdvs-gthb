@@ -20,8 +20,8 @@ Example about how to call to Web Service to get tthe cart
 {
   "id": "4cf9b192",
   "order_state": "order_state_cart",
-  "client_id": "c2a37cs",
-  "client_info": {
+  "person_id": "c2a37cs",
+  "person_info": {
     "first_name": "Jose",
     "last_name": "Vázquez",
     "email": "jose.vazquez.viader@gmail.com",

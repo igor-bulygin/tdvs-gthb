@@ -17,7 +17,7 @@ class GlobalAsset extends AssetBundle {
 		'js/desktop/order/success.js',
 	];
 	public $depends = [
-		'app\assets\desktop\cart\IndexAsset',
 		'app\assets\desktop\GlobalAsset',
+		'app\assets\desktop\cart\IndexAsset',
 	];
 }

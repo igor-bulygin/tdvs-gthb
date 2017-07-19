@@ -9,21 +9,27 @@ use yii\mongodb\ActiveQuery;
 
 /**
  * @property string short_id
+ * @property string person_id
+ * @property double subtotal
  * @property string order_state
- * @property string client_id
- * @property array client_info
+ * @property MongoDate order_date
+ * @property array shipping_address
+ * @property array billing_address
+ * @property array packs
  * @property array payment_info
  * @property array charges
- * @property array products
- * @property double subtotal
  * @property MongoDate created_at
  * @property MongoDate updated_at
  *
  * Mappings:
- * @property OrderClientInfo $clientInfoMapping
- * @property OrderProduct[] $productsMapping
+ * @property OrderAddress $shippingAddressMapping
+ * @property OrderAddress $billingAddressMapping
+ * @property OrderPack[] $packsMapping
  */
 class Order extends CActiveRecord {
+
+	const SERIALIZE_SCENARIO_CLIENT_ORDER= 'serialize_scenario_client_order';
+	const SERIALIZE_SCENARIO_DEVISER_PACK = 'serialize_scenario_deviser_pack';
 
     const ORDER_STATE_CART = 'order_state_cart';
     const ORDER_STATE_PAID = 'order_state_paid';
@@ -34,14 +40,14 @@ class Order extends CActiveRecord {
 	 *
 	 * @var array
 	 */
-	static protected $serializeFields = [];
+	protected static $serializeFields = [];
 
 	/**
 	 * The attributes that should be serialized
 	 *
 	 * @var array
 	 */
-	static protected $retrieveExtraFields = [];
+	protected static $retrieveExtraFields = [];
 
 	public static function collectionName() {
 		return 'order';
@@ -51,13 +57,17 @@ class Order extends CActiveRecord {
 		return [
 			'_id',
 			'short_id',
+			'person_id',
+			'subtotal',
 			'order_state',
-			'client_id',
-			'client_info',
+			'order_date',
+			'shipping_address',
+			'billing_address',
+			'packs',
+
 			'payment_info',
 			'charges',
-			'products',
-			'subtotal',
+
 			'created_at',
 			'updated_at',
 		];
@@ -81,32 +91,47 @@ class Order extends CActiveRecord {
 
 		$this->short_id = Utils::shortID(8);
 
-		// initialize attributes
-		$this->products = [];
 	}
 
-    public function embedProductsMapping()
+    public function embedShippingAddressMapping()
     {
-        return $this->mapEmbeddedList('products', OrderProduct::className(), array('unsetSource' => false));
+        return $this->mapEmbedded('shipping_address', OrderAddress::className(), array('unsetSource' => false));
     }
 
-    public function embedClientInfoMapping()
+    public function embedBillingAddressMapping()
     {
-        return $this->mapEmbedded('client_info', OrderClientInfo::className(), array('unsetSource' => false));
+        return $this->mapEmbedded('billing_address', OrderAddress::className(), array('unsetSource' => false));
+    }
+
+    public function embedPacksMapping()
+    {
+        return $this->mapEmbeddedList('packs', OrderPack::className(), array('unsetSource' => false));
     }
 
 	public function setParentOnEmbbedMappings()
 	{
-		$this->clientInfoMapping->setParentObject($this);
+		$this->shippingAddressMapping->setParentObject($this);
+		$this->billingAddressMapping->setParentObject($this);
 
-		foreach ($this->productsMapping as $product) {
-			$product->setParentObject($this);
+		foreach ($this->packsMapping as $item) {
+			$item->setParentObject($this);
 		}
+	}
+
+	public function afterFind()
+	{
+		parent::afterFind();
+
+		$this->setAttribute('packs', $this->packsMapping);
 	}
 
 	public function beforeSave($insert) {
 		if (empty($this->order_state)) {
 			$this->order_state = Order::ORDER_STATE_CART;
+		}
+
+		if (empty($this->order_date)) {
+			$this->order_date = new MongoDate();
 		}
 
 		if (empty($this->created_at)) {
@@ -122,14 +147,11 @@ class Order extends CActiveRecord {
         return [
             [
                 [
-                    'subtotal',
+                    'shipping_address',
+                    'billing_address',
                 ],
-                'required',
+                'safe',
             ],
-		  	[   'products', 'safe'], // to load data posted from WebServices
-            [   'productsMapping', 'app\validators\EmbedDocValidator'], // to apply rules
-			[   'client_info', 'safe'], // to load data posted from WebServices
-            [   'clientInfoMapping', 'app\validators\EmbedDocValidator'], // to apply rules
         ];
     }
 
@@ -143,56 +165,122 @@ class Order extends CActiveRecord {
 	{
 		switch ($view) {
 			case self::SERIALIZE_SCENARIO_PREVIEW:
-            case self::SERIALIZE_SCENARIO_PUBLIC:
-            case self::SERIALIZE_SCENARIO_OWNER:
+			case self::SERIALIZE_SCENARIO_PUBLIC:
 			case self::SERIALIZE_SCENARIO_ADMIN:
-                static::$serializeFields = [
-                    'id' => 'short_id',
-					'order_state',
-					'client_id',
-					'client_info',
-					'payment_info',
-//					'charges',
-					'products' => 'productsInfo',
+				static::$serializeFields = [
+					'id' => 'short_id',
+					'person_id',
+					'person_info' => 'personInfo',
 					'subtotal',
-                ];
-                static::$retrieveExtraFields = [
-					'products',
-                ];
+					'order_state',
+					'order_date',
+					'shipping_address',
+					'billing_address',
+					'packs',
 
-                static::$translateFields = false;
-                break;
+//					'payment_info',
+//					'charges',
+				];
+				static::$retrieveExtraFields = [
+				];
+
+
+				static::$translateFields = false;
+				break;
+
+			case self::SERIALIZE_SCENARIO_CLIENT_ORDER:
+				static::$serializeFields = [
+					'id' => 'short_id',
+					'person_id',
+//					'person_info' => 'personInfo',
+					'subtotal',
+					'order_state',
+					'order_date',
+					'shipping_address',
+					'billing_address',
+					'packs',
+
+//					'payment_info',
+//					'charges',
+				];
+				static::$retrieveExtraFields = [
+				];
+
+
+				static::$translateFields = false;
+				break;
+
+			case self::SERIALIZE_SCENARIO_DEVISER_PACK:
+				static::$serializeFields = [
+					'id' => 'short_id',
+					'person_id',
+					'person_info' => 'personInfo',
+//					'subtotal',
+//					'order_state',
+					'order_date',
+					'shipping_address',
+					'billing_address',
+					'packs',
+
+//					'payment_info',
+//					'charges',
+				];
+				static::$retrieveExtraFields = [
+				];
+
+
+				static::$translateFields = false;
+				break;
+
+			case self::SERIALIZE_SCENARIO_OWNER:
+				static::$serializeFields = [
+					'id' => 'short_id',
+					'person_id',
+					'subtotal',
+					'order_state',
+					'order_date',
+					'shipping_address',
+					'billing_address',
+					'packs',
+
+//					'payment_info',
+//					'charges',
+				];
+				static::$retrieveExtraFields = [
+				];
+
+
+				static::$translateFields = false;
+				break;
 			default:
 				// now available for this Model
 				static::$serializeFields = [];
 				break;
 		}
+		OrderPack::setSerializeScenario($view);
+//		OrderAddress::setSerializeScenario($view);
 	}
 
-	public function getProductsInfo() {
-		$products = $this->products;
-
-		$result = [];
-		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_PUBLIC);
-		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_PUBLIC);
-		foreach ($products as $p) {
-			$product = Product::findOneSerialized($p['product_id']);
-			$deviser = Person::findOneSerialized($p['deviser_id']);
-			$p['product_name'] = $product->name;
-			$p['product_photo'] = $product->getMainImage();
-			$p['product_slug'] = $product->slug;
-			$p['product_url'] = $product->getViewLink();
-			$p['deviser_name'] = $deviser->name;
-			$p['deviser_photo'] = $deviser->getAvatarImage();
-			$p['deviser_slug'] = $deviser->slug;
-			$p['deviser_url'] = $deviser->getStoreLink();
-			$result[] = $p;
-		}
-
-		return $result;
+	/**
+	 * @return Person
+	 */
+	public function getPerson()
+	{
+		return Person::findOne(['short_id' => $this->person_id]);
 	}
 
-    /**
+	public function getPersonInfo()
+	{
+		$person = $this->getPerson();
+		return [
+			"slug" => $person->slug,
+			"name" => $person->personalInfoMapping->getVisibleName(),
+			"photo" => $person->getAvatarImage128(),
+			'url' => $person->getMainLink(),
+		];
+	}
+
+	/**
      * Get one entity serialized
      *
      * @param string $id
@@ -232,21 +320,25 @@ class Order extends CActiveRecord {
             $query->andWhere(["short_id" => $criteria["id"]]);
         }
 
-        // if deviser id is specified
-        if ((array_key_exists("client_id", $criteria)) && (!empty($criteria["client_id"]))) {
-            $query->andWhere(["client_id" => $criteria["client_id"]]);
+        // if person id is specified
+        if ((array_key_exists("person_id", $criteria)) && (!empty($criteria["person_id"]))) {
+            $query->andWhere(["person_id" => $criteria["person_id"]]);
         }
+
+		// if deviser id is specified
+		if ((array_key_exists("deviser_id", $criteria)) && (!empty($criteria["deviser_id"]))) {
+			$query->andWhere(["packs.deviser_id" => $criteria["deviser_id"]]);
+		}
+
+		// if deviser id is specified
+		if ((array_key_exists("product_id", $criteria)) && (!empty($criteria["product_id"]))) {
+			$query->andWhere(["packs.products.product_id" => $criteria["product_id"]]);
+		}
 
 		// if order_state is specified
 		if ((array_key_exists("order_state", $criteria)) && (!empty($criteria["order_state"]))) {
 			$query->andWhere(["order_state" => $criteria["order_state"]]);
 		}
-
-        // if text is specified
-        if ((array_key_exists("text", $criteria)) && (!empty($criteria["text"]))) {
-//			// search the word in all available languages
-			$query->andFilterWhere(static::getFilterForText(static::$textFilterAttributes, $criteria["text"]));
-        }
 
         // Count how many items are with those conditions, before limit them for pagination
         static::$countItemsFound = $query->count();
@@ -270,6 +362,25 @@ class Order extends CActiveRecord {
 		}
 
         $orders = $query->all();
+
+		if ((array_key_exists("only_matching_packs", $criteria)) && (!empty($criteria["only_matching_packs"]))) {
+			// Remove all non matching packs with deviser_id
+			foreach ($orders as $order) {
+				/* @var $order Order */
+				$packs = $order->packs;
+				$indexes = [];
+				foreach ($packs as $i => $pack) {
+					if ($pack->deviser_id != $criteria['deviser_id']) {
+						$indexes[] = $i;
+
+					}
+				}
+				foreach ($indexes as $index) {
+					$packs->offsetUnset($index);
+				}
+				$order->setAttribute('packs', $packs);
+			}
+		}
 
         // if automatic translation is enabled
         if (static::$translateFields) {
@@ -302,103 +413,83 @@ class Order extends CActiveRecord {
 		if (empty($orderProduct)) {
 			throw new Exception(sprintf("Product with id %s does not exists", $orderProduct->product_id));
 		}
-		$priceStock = $product->getPriceStockItem($orderProduct->price_stock_id);
-		if (empty($priceStock)) {
-			throw new Exception(sprintf("Price stock item with id %s does not exists", $orderProduct->price_stock_id));
-		}
 
-		$products = $this->productsMapping;
-		$quantity = $orderProduct->quantity;
-		$key = null;
-		foreach ($products as $i => $item) {
-			if ($item->price_stock_id == $orderProduct->price_stock_id) {
-				$key = $i;
-				$quantity += $item['quantity'];
+		$packs = $this->packsMapping;
+
+		$found = false;
+		foreach ($packs as $onePack) {
+			if ($onePack->deviser_id == $product->deviser_id) {
+				$onePack->addProduct($orderProduct);
+				$found = true;
 				break;
 			}
 		}
-		$quantity = min($quantity, $priceStock['stock']);
 
-		$orderProduct->deviser_id = $product->deviser_id;
-		$orderProduct->quantity = $quantity;
-		$orderProduct->weight = $priceStock['weight'];
-		$orderProduct->price = $priceStock['price'];
-		$orderProduct->options = $priceStock['options'];
+		if (!$found) {
 
-		if (isset($key)) {
-			$this->productsMapping[$key] = $orderProduct;
-		} else {
-			$this->productsMapping[] = $orderProduct;
+			$deviser = $product->getDeviser();
+			$pack = new OrderPack();
+			$pack->setParentObject($this);
+			$pack->deviser_id = $product->deviser_id;
+			$pack->currency = $deviser->settingsMapping->currency;
+			$pack->weight_measure = $deviser->settingsMapping->weight_measure;
+			$pack->addProduct($orderProduct);
+			$this->packsMapping[] = $pack;
 		}
-		$this->recalculateTotal();
+
+		$this->recalculateTotals();
 	}
 
-	public function updateProduct(OrderProduct $orderProduct) {
-		$product = Product::findOneSerialized($orderProduct->product_id); /* @var Product $product */
-		if (empty($orderProduct)) {
-			throw new Exception(sprintf("Product with id %s does not exists", $orderProduct->product_id));
-		}
-		$priceStock = $product->getPriceStockItem($orderProduct->price_stock_id);
-		if (empty($priceStock)) {
-			throw new Exception(sprintf("Price stock item with id %s does not exists", $orderProduct->price_stock_id));
+//	public function updateProduct(OrderProduct $orderProduct) {
+//		$product = Product::findOneSerialized($orderProduct->product_id); /* @var Product $product */
+//		if (empty($orderProduct)) {
+//			throw new Exception(sprintf("Product with id %s does not exists", $orderProduct->product_id));
+//		}
+//		$priceStock = $product->getPriceStockItem($orderProduct->price_stock_id);
+//		if (empty($priceStock)) {
+//			throw new Exception(sprintf("Price stock item with id %s does not exists", $orderProduct->price_stock_id));
+//		}
+//
+//		$products = $this->productsMapping;
+//		$key = null;
+//		foreach ($products as $i => $item) {
+//			if ($item->price_stock_id == $orderProduct->price_stock_id) {
+//				$key = $i;
+//				break;
+//			}
+//		}
+//		$orderProduct->weight = $priceStock['weight'];
+//		$orderProduct->price = $priceStock['price'];
+//		$orderProduct->options = $priceStock['options'];
+//		$orderProduct->deviser_id = $product->deviser_id;
+//
+//		if (isset($key)) {
+//			$this->productsMapping[$key] = $orderProduct;
+//		} else {
+//			$this->productsMapping[] = $orderProduct;
+//		}
+//		$this->recalculateTotals();
+//	}
+
+	public function deleteProduct($priceStockId) {
+
+    	$packs = $this->packsMapping;
+    	foreach ($packs as $pack) {
+    		$pack->deleteProduct($priceStockId);
 		}
 
-		$products = $this->productsMapping;
-		$key = null;
-		foreach ($products as $i => $item) {
-			if ($item->price_stock_id == $orderProduct->price_stock_id) {
-				$key = $i;
-				break;
-			}
-		}
-		$orderProduct->weight = $priceStock['weight'];
-		$orderProduct->price = $priceStock['price'];
-		$orderProduct->options = $priceStock['options'];
-		$orderProduct->deviser_id = $product->deviser_id;
-
-		if (isset($key)) {
-			$this->productsMapping[$key] = $orderProduct;
-		} else {
-			$this->productsMapping[] = $orderProduct;
-		}
-		$this->recalculateTotal();
+		$this->packsMapping = $packs;
+		$this->recalculateTotals();
 	}
 
-	public function deleteProduct(OrderProduct $orderProduct) {
-		$products = $this->productsMapping; /* @var \ArrayObject $products */
-		$key = null;
-		foreach ($products as $i => $item) {
-			if ($item->price_stock_id == $orderProduct->price_stock_id) {
-				$products->offsetUnset($i);
-				break;
-			}
-		}
-		$this->productsMapping = $products;
-		$this->recalculateTotal();
-	}
-
-	public function recalculateTotal() {
-		$products = $this->productsMapping;
+	public function recalculateTotals() {
+		$packs = $this->packsMapping;
 		$subtotal = 0;
-		foreach ($products as $product) {
-			$subtotal += ($product->price * $product->quantity);
+		foreach ($packs as $pack) {
+			$subtotal += ($pack->pack_price);
 		}
 		$this->subtotal = $subtotal;
-	}
-
-	/**
-	 * @param $priceStockId
-	 * @return OrderProduct|null
-	 */
-	public function getPriceStockItem($priceStockId) {
-		$products = $this->productsMapping;
-		foreach ($products as $item) {
-			if ($item->price_stock_id == $priceStockId) {
-				$item->setParentObject($this);
-				return $item;
-			}
-		}
-		return null;
+		$this->save();
 	}
 
 	/**
@@ -408,7 +499,7 @@ class Order extends CActiveRecord {
 	public function composeEmailOrderPaid($send) {
 		$email = new PostmanEmail();
 		$email->code_email_content_type = PostmanEmail::EMAIL_CONTENT_TYPE_ORDER_PAID;
-		$email->to_email = $this->clientInfoMapping->email;
+		$email->to_email = $this->getPerson()->credentials['email'];
 		$email->subject = 'Todevise - '.$this->short_id.' - Your purchase is complete';
 
 		// add task only one send task (to allow retries)

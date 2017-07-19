@@ -17,8 +17,8 @@ Example about how to call to Web Service to create a new cart
 {
   "id": "4cf9b192",
   "order_state": "order_state_cart",
-  "client_id": "c2a37cs",
-  "client_info": [],
+  "person_id": "c2a37cs",
+  "person_info": [],
   "products": [],
   "subtotal": 0
 }

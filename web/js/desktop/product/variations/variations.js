@@ -35,6 +35,7 @@
 		vm.bespoke_selected = false;
 		vm.bespoke_language = 'en-US';
 		vm.deviserSizecharts = [];
+		vm.sizecharts=[];
 		vm.countriesAvailable = [];
 		vm.finalColumns = [];
 		vm.finalCountry;
@@ -246,7 +247,10 @@
 
 		//events
 		$scope.$on(productEvents.setVariations, function(event, args) {
-			//get tags
+			//get tags						
+			if (!args.isFirstSelection) {
+				vm.product.options = {};
+			}
 			getTagsByCategory(args.categories);
 			categoriesSizecharts(args.categories);
 			deviserSizecharts();

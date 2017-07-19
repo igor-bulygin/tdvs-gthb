@@ -36,7 +36,7 @@
 			function onCreatePersonError(err) {
 				console.log(err);
 				if(err.status === 409)
-					vm.error_message = "This account already exists."
+					vm.error_message = "This account already exists.";
 			}
 
 			if(form.password_confirm.$error.same)

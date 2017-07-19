@@ -32,6 +32,23 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 									<span class="purple-text" ng-if="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.brand_name)">Please, fill in this field</span>
 								</div>
 							</div>
+							<label for="id_number" class="col-md-2">IDENTIFIER</label>
+							<div class="col-md-4 text-right">
+								<input type="text" name="id_number" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.id_number" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.id_number)}">
+								<span class="purple-text" ng-if="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.id_number)">Please, fill in this field</span>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class=col-xs-2>
+								<label for="representative_name">REPRESENTATIVE NAME</label>
+								<span class="col-xs-12 text-green">OPTIONAL</span>
+							</div>
+							<div class="col-md-2">
+								<input type="text" name="name" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.name" placeholder="First Name">
+							</div>
+							<div class="col-md-2 text-right">
+								<input type="text" name="last_name" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.last_name" placeholder="Last Name">
+							</div>
 							<label for="city" class="col-md-2" ng-class="{'col-md-offset-6': !generalSettingsCtrl.isDeviser}">CITY</label>
 							<div class="col-md-4 text-right">
 								<input type="text" name="city" class="form-control" ng-model="generalSettingsCtrl.city" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.city)}" ng-model-options='{ debounce: 80 }' ng-change="generalSettingsCtrl.searchPlace(generalSettingsCtrl.city)">
@@ -48,24 +65,6 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 								<span class="purple-text" ng-if="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.city)">Please, fill in this field</span>
 							</div>
 						</div>
-
-						<div class="form-group">
-							<div class=col-xs-2>
-								<label for="representative_name">REPRESENTATIVE NAME</label>
-								<span class="col-xs-12 text-green">OPTIONAL</span>
-							</div>
-							<div class="col-md-2">
-								<input type="text" name="name" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.name" placeholder="First Name">
-							</div>
-							<div class="col-md-2 text-right">
-								<input type="text" name="last_name" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.last_name" placeholder="Last Name">								
-							</div>
-							<label for="street" class="col-md-2">STREET</label>
-							<div class="col-md-4 text-right">
-								<input type="text" name="street" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.street" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.street)}">
-								<span class="purple-text" ng-if="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.street)">Please, fill in this field</span>
-							</div>
-						</div>
 						<div class="form-group">
 							<label for="phone" class="col-md-2">PHONE NUMBER</label>
 							<div class="col-md-1 text-right">
@@ -75,10 +74,10 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 								<input type="tel" name="phone" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.phone_number" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.phone_number)}">
 								<span class="purple-text" ng-if="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.phone_number)">Please, fill in this field</span>
 							</div>
-							<label for="number" class="col-md-2">NUMBER</label>
+							<label for="address" class="col-md-2">ADDRESS</label>
 							<div class="col-md-4 text-right">
-								<input type="text" name="number" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.number" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.number)}">
-								<span class="purple-text" ng-if="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.number)">Please, fill in this field</span>
+								<input type="text" name="address" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.address" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.address)}">
+								<span class="purple-text" ng-if="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.address)">Please, fill in this field</span>
 							</div>
 						</div>
 						<div class="form-group">
@@ -96,7 +95,7 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="weight_measure" class="col-md-2">WEIGHT MEASURE</label>
+						<label for="weight_measure" class="col-md-2">WEIGHT MEASURE</label>
 							<div class="col-md-4" >
 								<ol name="weightMeasure" class="nya-bs-select" ng-model="generalSettingsCtrl.person.settings.weight_measure" ng-class="{'error-input': generalSettingsCtrl.notWeightMeasureSelected}" ng-change="generalSettingsCtrl.notWeightMeasureSelected=false" ng-show="generalSettingsCtrl.weightCharged">
 									<li nya-bs-option="weightMeasure in generalSettingsCtrl.weightMeasures">
@@ -112,7 +111,7 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 						</div>
 						<div class="col-xs-12 text-center" ng-if="generalSettingsCtrl.saved&&!generalSettingsCtrl.dataForm.$dirty">
 							<span><i class="ion-checkmark text-green"></i> The changes have been saved!</span>
-						</div>						
+						</div>
 					</div>
 				</form>
 				<div class="text-center" ng-show="generalSettingsCtrl.saving">

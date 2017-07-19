@@ -117,6 +117,34 @@ class SettingsController extends CController
 		]);
 	}
 
+	public function actionOpenOrders($slug, $person_id)
+	{
+		// get the category object
+		$person = Person::findOneSerialized($person_id);
+
+		if (!$person) {
+			throw new NotFoundHttpException();
+		}
+
+		if (!$person->isDeviser()) {
+			throw new NotFoundHttpException();
+		}
+
+		if (!$person->isDeviserEditable()) {
+			throw new UnauthorizedHttpException();
+		}
+
+		if (!$person->isCompletedProfile()) {
+			$this->redirect($person->getCompleteProfileLink());
+		}
+
+		$this->layout = '/desktop/public-2.php';
+
+		return $this->render("open_orders", [
+			'person' => $person,
+		]);
+	}
+
 	public function actionConnectStripe($slug, $person_id) {
 
 		// get the category object
