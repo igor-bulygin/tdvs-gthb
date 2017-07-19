@@ -68,6 +68,7 @@ class OrderPack extends EmbedModel
 	public static function setSerializeScenario($view)
 	{
 		switch ($view) {
+
 			case self::SERIALIZE_SCENARIO_PREVIEW:
 			case self::SERIALIZE_SCENARIO_PUBLIC:
 			case self::SERIALIZE_SCENARIO_OWNER:
@@ -93,6 +94,8 @@ class OrderPack extends EmbedModel
 
 			self::$translateFields = false;
 				break;
+
+			case Order::SERIALIZE_SCENARIO_CLIENT_ORDER:
 			case Order::SERIALIZE_SCENARIO_DEVISER_PACK:
 				self::$serializeFields = [
 					'deviser_id',
@@ -114,6 +117,7 @@ class OrderPack extends EmbedModel
 
 				self::$translateFields = false;
 				break;
+
 			default:
 				// now available for this Model
 				self::$serializeFields = [];

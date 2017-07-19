@@ -17,7 +17,7 @@ class CartController extends AppPublicController
 
 	public function actionCreateCart()
 	{
-		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_PUBLIC);
+		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_CLIENT_ORDER);
 		$cart = new Order();
 		if (!Yii::$app->user->isGuest) {
 			$cart->person_id = Yii::$app->user->identity->short_id;
@@ -32,7 +32,7 @@ class CartController extends AppPublicController
 
 	public function actionView($cartId)
 	{
-		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_PUBLIC);
+		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_CLIENT_ORDER);
 		$cart = Order::findOneSerialized($cartId);
 
 		if (empty($cart)) {
@@ -59,7 +59,7 @@ class CartController extends AppPublicController
 
 	public function actionAddProduct($cartId)
 	{
-		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_PUBLIC);
+		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_CLIENT_ORDER);
 		$cart = Order::findOneSerialized($cartId);
 		/* @var Order $cart */
 
@@ -86,7 +86,7 @@ class CartController extends AppPublicController
 
 	public function actionDeleteProduct($cartId, $priceStockId)
 	{
-		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_PUBLIC);
+		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_CLIENT_ORDER);
 		$cart = Order::findOneSerialized($cartId);
 		/* @var Order $cart */
 		if (empty($cart)) {
@@ -133,7 +133,7 @@ class CartController extends AppPublicController
 
 	public function actionReceiveToken($cartId)
 	{
-		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_PUBLIC);
+		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_CLIENT_ORDER);
 		$cart = Order::findOneSerialized($cartId);
 		/* @var Order $cart */
 

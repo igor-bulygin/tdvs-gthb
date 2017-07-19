@@ -28,6 +28,7 @@ use yii\mongodb\ActiveQuery;
  */
 class Order extends CActiveRecord {
 
+	const SERIALIZE_SCENARIO_CLIENT_ORDER= 'serialize_scenario_client_order';
 	const SERIALIZE_SCENARIO_DEVISER_PACK = 'serialize_scenario_deviser_pack';
 
     const ORDER_STATE_CART = 'order_state_cart';
@@ -170,6 +171,28 @@ class Order extends CActiveRecord {
 					'id' => 'short_id',
 					'person_id',
 					'person_info' => 'personInfo',
+					'subtotal',
+					'order_state',
+					'order_date',
+					'shipping_address',
+					'billing_address',
+					'packs',
+
+//					'payment_info',
+//					'charges',
+				];
+				static::$retrieveExtraFields = [
+				];
+
+
+				static::$translateFields = false;
+				break;
+
+			case self::SERIALIZE_SCENARIO_CLIENT_ORDER:
+				static::$serializeFields = [
+					'id' => 'short_id',
+					'person_id',
+//					'person_info' => 'personInfo',
 					'subtotal',
 					'order_state',
 					'order_date',
