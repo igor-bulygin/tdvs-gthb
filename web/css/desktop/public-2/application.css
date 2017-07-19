@@ -516,7 +516,6 @@ a, a:hover, a:focus {
   background-color: #c91c39;
   color: #ffffff; }
   .btn-red:focus {
-    color: #ffffff !important;
     color: #ffffff !important; }
   .btn-red:hover {
     background-color: #F7284B;
@@ -655,6 +654,23 @@ a, a:hover, a:focus {
   height: 40px;
   font-size: 16px; }
   .btn-small.disabled {
+    cursor: default;
+    background-color: #bfbfbf; }
+
+.btn-medium {
+  width: 280px;
+  height: 40px;
+  font-size: 16px; }
+  .btn-medium.disabled {
+    cursor: default;
+    background-color: #bfbfbf; }
+
+.btn-big {
+  width: 288px;
+  height: 62px;
+  font-size: 16px;
+  padding-top: 15px; }
+  .btn-big.disabled {
     cursor: default;
     background-color: #bfbfbf; }
 

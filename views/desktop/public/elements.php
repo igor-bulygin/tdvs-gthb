@@ -49,13 +49,52 @@ $this->title = 'Todevise / Elements';
 			</div>
 			<div class="col-md-4">
 				<span class="title-underlined">Botón compra</span>
-				<button class="btn btn-small btn-red">
-					<i class="ion-ios-cart cart-icon-btn"></i>
-					<span>Add to the cart</span>
-				</button>
+				<div>
+					<button class="btn btn-medium btn-red">
+						<i class="ion-ios-cart cart-icon-btn"></i>
+						<span>Add to the cart</span>
+					</button>
+				</div>
+				<div class="mt-10">
+					<button class="btn btn-medium btn-red disabled">
+						<i class="ion-ios-cart cart-icon-btn"></i>
+						<span>Add to the cart</span>
+					</button>
+				</div>
 			</div>
 			<div class="col-md-4">
 				<span class="title-underlined">Botón grande</span>
+				<div>
+					<button class="btn btn-red btn-big btn-red">
+						<i class="ion-ios-cart cart-icon-btn"></i>
+						<span>Make profile public</span>
+					</button>
+				</div>
+				<div class="mt-10">
+					<button class="btn btn-red btn-big disabled">
+						<i class="ion-ios-cart cart-icon-btn"></i>
+						<span>Make profile public</span>
+					</button>
+				</div>
+			</div>
+		</div>
+		<div class="row mt-30">
+			<div class="col-md-3">
+				<span class="title-underlined">RRSS</span>
+			</div>
+			<div class="col-md-3">
+				<span class="title-underlined">Love</span>
+			</div>
+			<div class="col-md-3">
+				<span class="title-underlined">Save box</span>
+			</div>
+			<div class="col-md-3">
+				<span class="title-underlined">Desplegar</span>
+			</div>
+		</div>
+		<div class="row mt-30">
+			<div class="col-md-12">
+				<span class="title-underlined">RRSS</span>
 			</div>
 		</div>
 	</div>	

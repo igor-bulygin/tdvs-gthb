@@ -158,6 +158,25 @@
 		background-color: $light_grey;
 	}
 }
+.btn-medium{
+	width: 280px;
+  	height: 40px;
+	font-size: 16px;
+	&.disabled{
+		cursor: default;
+		background-color: $light_grey;
+	}
+}
+.btn-big{
+	width: 288px;
+  	height: 62px;
+	font-size: 16px;
+	padding-top: 15px;
+	&.disabled{
+		cursor: default;
+		background-color: $light_grey;
+	}
+}
 .regular-btn{
 	height: 62px;
   	@include border-radius(5px,5px,5px,5px);
