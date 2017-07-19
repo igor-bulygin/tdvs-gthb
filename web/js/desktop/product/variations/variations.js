@@ -35,6 +35,7 @@
 		vm.bespoke_selected = false;
 		vm.bespoke_language = 'en-US';
 		vm.deviserSizecharts = [];
+		vm.sizecharts=[];
 		vm.countriesAvailable = [];
 		vm.finalColumns = [];
 		vm.finalCountry;
