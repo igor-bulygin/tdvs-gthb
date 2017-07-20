@@ -434,24 +434,24 @@ class Person extends CActiveRecord implements IdentityInterface
 	public function beforeDelete()
 	{
 		if ($this->isDeviser()) {
-			$products = Product::findSerialized(["deviser_id" => $this->id]);
+			$products = $this->getProducts();
 			/* @var Product[] $products */
 			foreach ($products as $item) {
 				$item->delete();
 			}
 		}
 
-		$boxes = Box::findSerialized(["person_id" => $this->id]);
+		$boxes = $this->getBoxes();
 		foreach ($boxes as $item) {
 			$item->delete();
 		}
 
-		$loveds = Loved::findSerialized(["person_id" => $this->id]);
+		$loveds = $this->getLoveds();
 		foreach ($loveds as $item) {
 			$item->delete();
 		}
 
-		$stories = Story::findSerialized(["person_id" => $this->id]);
+		$stories = $this->getStories();
 		foreach ($stories as $item) {
 			$item->delete();
 		}
@@ -459,6 +459,36 @@ class Person extends CActiveRecord implements IdentityInterface
 		$this->deletePhotos();
 
 		return parent::beforeDelete();
+	}
+
+	/**
+	 * @return Product[]
+	 */
+	public function getProducts() {
+		return Product::findSerialized(["deviser_id" => $this->id]);
+	}
+
+	/**
+	 * @return Box[]
+	 */
+	public function getBoxes() {
+		return Box::findSerialized(["person_id" => $this->id]);
+	}
+
+	/**
+	 * @return Loved[]
+	 */
+	public function getLoveds()
+	{
+		return Loved::findSerialized(["person_id" => $this->id]);
+	}
+
+	/**
+	 * @return Story[]
+	 */
+	public function getStories()
+	{
+		return Story::findSerialized(["person_id" => $this->id]);
 	}
 
 	public function deletePhotos() {

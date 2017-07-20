@@ -263,7 +263,7 @@ class Story extends CActiveRecord {
      * Get a collection of entities serialized, according to serialization configuration
      *
      * @param array $criteria
-     * @return array
+     * @return Story[]
      * @throws Exception
      */
     public static function findSerialized($criteria = [])

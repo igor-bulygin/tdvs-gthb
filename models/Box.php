@@ -240,7 +240,7 @@ class Box extends CActiveRecord
 	 *
 	 * @param array $criteria
 	 *
-	 * @return CActiveRecord[]
+	 * @return Box[]
 	 * @throws Exception
 	 */
 	public static function findSerialized($criteria = [])
