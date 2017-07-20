@@ -59,7 +59,6 @@ class CartController extends AppPublicController
 
 	public function actionAddProduct($cartId)
 	{
-		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_CLIENT_ORDER);
 		$cart = Order::findOneSerialized($cartId);
 		/* @var Order $cart */
 
@@ -76,6 +75,7 @@ class CartController extends AppPublicController
 
 			Yii::$app->response->setStatusCode(201); // Created
 
+			Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_CLIENT_ORDER);
 			return $cart;
 		} else {
 			Yii::$app->response->setStatusCode(400); // Bad Request
@@ -86,7 +86,6 @@ class CartController extends AppPublicController
 
 	public function actionDeleteProduct($cartId, $priceStockId)
 	{
-		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_CLIENT_ORDER);
 		$cart = Order::findOneSerialized($cartId);
 		/* @var Order $cart */
 		if (empty($cart)) {
@@ -98,6 +97,7 @@ class CartController extends AppPublicController
 
 		Yii::$app->response->setStatusCode(200); // Ok
 
+		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_CLIENT_ORDER);
 		return $cart;
 	}
 
