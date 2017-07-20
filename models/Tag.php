@@ -131,6 +131,14 @@ class Tag extends CActiveRecord
 	 */
 	protected static $serializeFields = [];
 
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $retrieveExtraFields = [];
+
+
 	/** @var  Product|OldProduct */
 	private $product;
 

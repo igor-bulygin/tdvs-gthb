@@ -18,6 +18,21 @@ use yii\mongodb\ActiveQuery;
  */
 class Category extends CActiveRecord {
 
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $serializeFields = [];
+
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $retrieveExtraFields = [];
+
+
 	/** @var Product */
 	private $deviserProduct;
 

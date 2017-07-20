@@ -35,6 +35,21 @@ class Country extends CActiveRecord
 		Country::WORLD_WIDE => "World Wide"
 	];
 
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $serializeFields = [];
+
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $retrieveExtraFields = [];
+
+
 	function __construct()
 	{
 		parent::__construct();

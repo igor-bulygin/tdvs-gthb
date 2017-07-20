@@ -10,6 +10,21 @@ namespace app\models;
  */
 class ProductDescriptionPhoto extends EmbedModel
 {
+
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $serializeFields = [];
+
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $retrieveExtraFields = [];
+
 	public function getParentAttribute()
 	{
 		return "description_photos";

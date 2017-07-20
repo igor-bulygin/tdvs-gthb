@@ -23,6 +23,21 @@ use app\helpers\Utils;
  */
 class PersonPersonalInfo extends EmbedModel
 {
+
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $serializeFields = [];
+
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $retrieveExtraFields = [];
+
 	// TODO deprecate
 	public $bday;
 	// TODO deprecate

@@ -3,7 +3,6 @@ namespace app\models;
 
 use app\helpers\CActiveRecord;
 use app\helpers\Utils;
-use Yii;
 use yii\mongodb\ActiveQuery;
 
 
@@ -26,6 +25,21 @@ class SizeChart extends CActiveRecord {
 	const DEVISER = 1;
 
 	const SERIALIZE_SCENARIO_PUBLIC = 'serialize_scenario_public';
+
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $serializeFields = [];
+
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $retrieveExtraFields = [];
+
 
 	public static function collectionName() {
 		return 'size_chart';

@@ -17,6 +17,21 @@ namespace app\models;
  */
 class OrderAddress extends EmbedModel
 {
+
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $serializeFields = [];
+
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $retrieveExtraFields = [];
+
 	public function attributes() {
 		return [
 				'first_name',
