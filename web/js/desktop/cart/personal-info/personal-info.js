@@ -3,18 +3,13 @@
 
 	function controller(locationDataService, cartDataService, UtilService) {
 		var vm = this;
-		vm.user = {};
+		vm.person = person;
 		vm.has_error = UtilService.has_error;
 		vm.save = save;
 
 		init();
 		function init(){
 			getCountries();
-			if(angular.isObject(vm.cart.person_info)) {
-				for(var key in vm.cart.person_info) {
-					vm.user[key] = angular.copy(vm.cart.person_info[key]);
-				}
-			}
 		}
 
 		function getCountries(){
@@ -26,6 +21,7 @@
 		}
 
 		function save(form){
+			//now is cart->shipping_address
 			function onSaveSuccess(data) {
 				vm.cart.person_info = angular.copy(data.person_info);
 				vm.state.state = 3;
@@ -36,6 +32,7 @@
 
 			form.$submitted = true;
 			if(form.$valid) {
+
 				cartDataService.saveUserInfo(vm.user, {id: vm.cart.id},
 					onSaveSuccess, onSaveError);
 			}
