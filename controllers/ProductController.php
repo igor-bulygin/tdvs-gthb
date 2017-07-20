@@ -326,10 +326,36 @@ class ProductController extends CController
 		/* @var Product2[] $products */
 		$products = Product2::findSerialized();
 		foreach ($products as $product) {
-			$deviser = Person::findOneSerialized($product->deviser_id);
-			if (empty($deviser) || empty($product->deviser_id)) {
-				echo Utils::l($product->name).' - '.$product->short_id.'<br />';
+			if (empty($product->deviser_id)) {
+
+				echo Utils::l($product->name).' - '.$product->short_id.' => Deleted because empty deviser_id<br />';
 				$product->delete();
+
+			} else {
+				
+				$deviser = Person::findOneSerialized($product->deviser_id);
+
+				if (empty($deviser)) {
+
+					echo Utils::l($product->name) . ' - ' . $product->short_id . ' => Deleted because deviser_id ' . $product->deviser_id . ' does not exists<br />';
+					$product->delete();
+
+				} elseif ($deviser->account_state != Person::ACCOUNT_STATE_ACTIVE) {
+
+					echo Utils::l($product->name) . ' - ' . $product->short_id . ' => Changed state to draft because deviser_id ' . $product->deviser_id . ' is not active<br />';
+					// If deviser is not active, disable the product
+					// Update directly in low level, to avoid no desired behaviors of ActiveRecord
+					/** @var Collection $collection */
+					Yii::$app->mongodb->getCollection('product')->update(
+						[
+							'short_id' => $product->short_id
+						],
+						[
+							'product_state' => Product2::PRODUCT_STATE_DRAFT,
+						]
+					);
+
+				}
 			}
 		}
 	}
