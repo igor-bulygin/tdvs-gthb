@@ -9,6 +9,7 @@ class GlobalAsset extends AssetBundle {
 	public $js = [
 		'https://checkout.stripe.com/checkout.js',
 		'https://js.stripe.com/v2/',
+		'js/desktop/cart/cartOverview.js',
 		'js/desktop/cart/checkout.js',
 		'js/desktop/cart/summary/summary.js',
 		'js/desktop/cart/shopping-cart/shopping-cart.js',

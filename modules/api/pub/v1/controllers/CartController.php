@@ -3,7 +3,6 @@
 namespace app\modules\api\pub\v1\controllers;
 
 use app\models\Order;
-use app\models\OrderPersonInfo;
 use app\models\OrderProduct;
 use app\models\Person;
 use Stripe\Stripe;
@@ -17,7 +16,6 @@ class CartController extends AppPublicController
 
 	public function actionCreateCart()
 	{
-		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_CLIENT_ORDER);
 		$cart = new Order();
 		if (!Yii::$app->user->isGuest) {
 			$cart->person_id = Yii::$app->user->identity->short_id;
@@ -27,6 +25,8 @@ class CartController extends AppPublicController
 
 		Yii::$app->response->setStatusCode(201); // Created
 
+		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_CLIENT_ORDER);
+		$cart = Order::findOneSerialized($cartId);
 		return $cart;
 	}
 
@@ -59,7 +59,6 @@ class CartController extends AppPublicController
 
 	public function actionAddProduct($cartId)
 	{
-		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_CLIENT_ORDER);
 		$cart = Order::findOneSerialized($cartId);
 		/* @var Order $cart */
 
@@ -76,6 +75,8 @@ class CartController extends AppPublicController
 
 			Yii::$app->response->setStatusCode(201); // Created
 
+			Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_CLIENT_ORDER);
+			$cart = Order::findOneSerialized($cartId);
 			return $cart;
 		} else {
 			Yii::$app->response->setStatusCode(400); // Bad Request
@@ -86,7 +87,6 @@ class CartController extends AppPublicController
 
 	public function actionDeleteProduct($cartId, $priceStockId)
 	{
-		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_CLIENT_ORDER);
 		$cart = Order::findOneSerialized($cartId);
 		/* @var Order $cart */
 		if (empty($cart)) {
@@ -98,38 +98,15 @@ class CartController extends AppPublicController
 
 		Yii::$app->response->setStatusCode(200); // Ok
 
+		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_CLIENT_ORDER);
+		$cart = Order::findOneSerialized($cartId);
 		return $cart;
 	}
 
-
-	public function actionPersonInfo($cartId)
+	public function actionUpdate($cartId)
 	{
-		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_PUBLIC);
-		$cart = Order::findOneSerialized($cartId);
-		/* @var Order $cart */
-
-		if (empty($cart)) {
-			throw new NotFoundHttpException(sprintf("Cart with id %s does not exists", $cartId));
-		}
-
-		$personInfo = new OrderPersonInfo();
-		$personInfo->setParentObject($cart);
-
-		if ($personInfo->load(Yii::$app->request->post(), '') && $personInfo->validate()) {
-
-			$cart->personInfoMapping = $personInfo;
-			$cart->save();
-
-			Yii::$app->response->setStatusCode(200); // Created
-
-			return $cart;
-		} else {
-			Yii::$app->response->setStatusCode(400); // Bad Request
-
-			return ["errors" => $personInfo->errors];
-		}
+		throw new \yii\base\Exception("Unimplemented method");
 	}
-
 
 	public function actionReceiveToken($cartId)
 	{

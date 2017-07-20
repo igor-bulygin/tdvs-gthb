@@ -7,11 +7,28 @@ namespace app\models;
  *
  * @method Story getParentObject()
  */
-class StoryMainMedia extends EmbedModel {
+class StoryMainMedia extends EmbedModel
+{
 
 	const STORY_MAIN_MEDIA_TYPE_PHOTO = 1;
 
-	public function attributes() {
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $serializeFields = [];
+
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $retrieveExtraFields = [];
+
+
+	public function attributes()
+	{
 		return [
 			'type',
 			'photo',
@@ -69,10 +86,12 @@ class StoryMainMedia extends EmbedModel {
 	 *
 	 * @return null|string
 	 */
-	public function getPhotoUrl() {
+	public function getPhotoUrl()
+	{
 		if ($this->type == self::STORY_MAIN_MEDIA_TYPE_PHOTO) {
 			$person = $this->getParentObject()->getPerson();
-			return $person->getUrlImagesLocation().$this->photo;
+
+			return $person->getUrlImagesLocation() . $this->photo;
 		}
 
 		return null;

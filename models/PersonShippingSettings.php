@@ -12,6 +12,21 @@ namespace app\models;
  */
 class PersonShippingSettings extends EmbedModel
 {
+
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $serializeFields = [];
+
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $retrieveExtraFields = [];
+
 	//TODO deprecate:
 	public $zones;
 	//TODO deprecate:
@@ -140,5 +155,17 @@ class PersonShippingSettings extends EmbedModel
 
 			$lastWeight = $maxWeight;
 		}
+	}
+
+
+	public function getShippingSettingRange($weight)
+	{
+		foreach ($this->prices as $price) {
+			if ($price['min_weight'] <= $weight && ($price['max_weight'] == null || $price['max_weight'] >= $weight)) {
+				return $price;
+			}
+		}
+
+		return null;
 	}
 }

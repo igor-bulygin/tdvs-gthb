@@ -7,7 +7,7 @@ use app\helpers\Utils;
  * @property string $name
  * @property string $last_name
  * @property string $brand_name
- * @property string $id_number
+ * @property string $vat_id
  * @property string $country
  * @property string $city
  * @property string $street
@@ -23,6 +23,21 @@ use app\helpers\Utils;
  */
 class PersonPersonalInfo extends EmbedModel
 {
+
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $serializeFields = [];
+
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $retrieveExtraFields = [];
+
 	// TODO deprecate
 	public $bday;
 	// TODO deprecate
@@ -38,7 +53,7 @@ class PersonPersonalInfo extends EmbedModel
 			'name',
 			'last_name',
 			'brand_name',
-			'id_number',
+			'vat_id',
 			'country',
 			'city',
 			'address',

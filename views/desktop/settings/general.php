@@ -3,7 +3,6 @@ use app\assets\desktop\settings\GlobalAsset;
 use app\components\SettingsHeader;
 use app\models\Person;
 use yii\helpers\Json;
-use yii\helpers\Url;
 
 GlobalAsset::register($this);
 
@@ -32,10 +31,10 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 									<span class="purple-text" ng-if="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.brand_name)">Please, fill in this field</span>
 								</div>
 							</div>
-							<label for="id_number" class="col-md-2">IDENTIFIER</label>
+							<label for="vat_id" class="col-md-2">IDENTIFIER</label>
 							<div class="col-md-4 text-right">
-								<input type="text" name="id_number" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.id_number" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.id_number)}">
-								<span class="purple-text" ng-if="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.id_number)">Please, fill in this field</span>
+								<input type="text" name="vat_id" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.vat_id" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.vat_id)}">
+								<span class="purple-text" ng-if="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.vat_id)">Please, fill in this field</span>
 							</div>
 						</div>
 						<div class="form-group">

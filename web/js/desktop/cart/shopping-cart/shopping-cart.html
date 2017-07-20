@@ -1,25 +1,25 @@
 <div class="shopping-cart-wrapper">
 	<span class="shopping-cart-title no-mar">Your shopping cart</span>
-	<table class="table checkout-table" ng-repeat="deviser in shoppingCartCtrl.devisers">
+	<table class="table checkout-table" ng-repeat="pack in shoppingCartCtrl.cart.packs">
 		<thead>
 			<tr>
 				<td class="deviser"><span class="title-checkout">Deviser</span></td>
-				<td class="deviser-name"><span class="deviser-name" ng-bind="deviser.deviser_name"></span></td>
+				<td class="deviser-name"><span class="deviser-name" ng-bind="pack.deviser_info.name"></span></td>
 				<td></td>
 				<td class="quantity"><span class="title-checkout deviser">Quantity</span></td>
 				<td class="subtotal"><span class="title-checkout deviser">Subtotal</span></td>
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="product in shoppingCartCtrl.cart.products | filter:{deviser_id: deviser.deviser_id}">
+			<tr ng-repeat="product in pack.products">
 				<td class="deviser"></td>
 				<td class="deviser-name">
 					<div class="img-checkout-wrapper">
-						<img ng-src="{{product.product_photo}}" ng-alt="product.product_name" ng-title="product.product_name">
+						<img ng-src="{{product.product_info.photo}}" ng-alt="product.product_info.name" ng-title="product.product_info.name">
 					</div>
 				</td>
 				<td>
-					<p><a ng-href="{{product.link}}"><span class="product-name" ng-bind="(product.product_name)"></span></a></p>
+					<p><a ng-href="{{product.product_info.url}}"><span class="product-name" ng-bind="(product.product_info.name)"></span></a></p>
 					<div ng-repeat="tag in product.tags">
 						<span class="tag-name" ng-bind="tag.name"></span>&nbsp;
 							<span ng-repeat="value in tag.values track by $index">

@@ -17,6 +17,21 @@ namespace app\models;
  */
 class PersonBankInfo extends EmbedModel
 {
+
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $serializeFields = [];
+
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $retrieveExtraFields = [];
+
 	const ACCOUNT_TYPE_CHECKING = 'checking';
 	const ACCOUNT_TYPE_SAVINGS= 'savings';
 

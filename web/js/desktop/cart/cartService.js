@@ -7,18 +7,20 @@
 
 		function parseDevisersFromProducts(cart) {
 			var devisers = [];
-			cart.products.forEach(function(product) {
-				var isDeviserInArray = false;
-				for(var i = 0; i < devisers.length; i++) {
-					if(devisers[i].deviser_id === product.deviser_id)
-						isDeviserInArray = true;
-				}
-				if(!isDeviserInArray) {
-					devisers.push({
-						deviser_id: product.deviser_id,
-						deviser_name: product.deviser_name
-					});
-				}
+			cart.packs.forEach(function(pack) {
+				pack.products.forEach(function(product) {
+					var isDeviserInArray = false;
+					for(var i = 0; i < devisers.length; i++) {
+						if(devisers[i].deviser_id === product.deviser_id)
+							isDeviserInArray = true;
+					}
+					if(!isDeviserInArray) {
+						devisers.push({
+							deviser_id: product.deviser_id,
+							deviser_name: product.deviser_name
+						});
+					}
+				})
 			})
 			return devisers;
 		}
@@ -26,7 +28,8 @@
 		function parseTags(cart){
 
 			function onGetTagsSuccess(data) {
-					cart.products.forEach(function(product) {
+				cart.packs.forEach(function(pack) {
+					pack.products.forEach(function(product) {
 						product.tags = [];
 						for(var key in product.options) {
 							for(var i = 0; i < data.items.length; i++) {
@@ -58,6 +61,7 @@
 							}
 						}
 					})
+				})
 			}
 
 			tagDataService.getTags(null, onGetTagsSuccess, UtilService.onError);

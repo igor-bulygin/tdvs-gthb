@@ -119,7 +119,7 @@ class PersonController extends AppPrivateController
 		}
 
 		if ($order->order_state == Order::ORDER_STATE_CART) {
-			throw new BadRequestHttpException("This cart has an invalid state");
+			throw new BadRequestHttpException("This order has an invalid state");
 		}
 
 		return $order;

@@ -11,6 +11,21 @@ namespace app\models;
  */
 class PersonSettings extends EmbedModel
 {
+
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $serializeFields = [];
+
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $retrieveExtraFields = [];
+
 	// TODO deprecate
 	public $currency;
 	// TODO deprecate

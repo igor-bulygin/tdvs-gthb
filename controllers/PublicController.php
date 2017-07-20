@@ -190,7 +190,9 @@ class PublicController extends CController
 	public function actionCheckout()
 	{
 		$this->layout = '/desktop/public-2.php';
-		return $this->render("checkout", []);
+		return $this->render("checkout", [
+			'person' => Yii::$app->user->identity,
+		]);
 	}
 
 	public function actionAboutUs()
