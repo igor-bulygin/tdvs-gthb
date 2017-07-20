@@ -50,4 +50,17 @@ class AppPublicController extends Controller
 		return parent::beforeAction($action);
 	}
 
+	public function afterAction($action, $result)
+	{
+		$message =
+			"\nPUBLIC API ACTION".
+			"\n - url => " . Url::current() .
+			"\n - http_authorization => " . (isset($_SERVER["HTTP_AUTHORIZATION"]) ? $_SERVER["HTTP_AUTHORIZATION"] : "") .
+			"\n - body_params => " . \Yii::$app->request->rawBody.
+			"\n - status_code => " . \Yii::$app->response->statusCode;
+		\Yii::info($message, __METHOD__);
+
+		return parent::afterAction($action, $result);
+	}
+
 }
