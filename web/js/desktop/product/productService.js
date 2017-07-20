@@ -111,8 +111,7 @@
 						(UtilService.isZeroOrLess(element.weight) ||
 						UtilService.isZeroOrLess(element.width) ||
 						UtilService.isZeroOrLess(element.length) ||
-						UtilService.isZeroOrLess(element.price) ||
-						UtilService.isZeroOrLess(element.stock))) {
+						UtilService.isZeroOrLess(element.price))) {
 						required.push('price_stock');
 					}
 				});
