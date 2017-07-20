@@ -156,4 +156,16 @@ class PersonShippingSettings extends EmbedModel
 			$lastWeight = $maxWeight;
 		}
 	}
+
+
+	public function getShippingSettingRange($weight)
+	{
+		foreach ($this->prices as $price) {
+			if ($price['min_weight'] <= $weight && ($price['max_weight'] == null || $price['max_weight'] >= $weight)) {
+				return $price;
+			}
+		}
+
+		return null;
+	}
 }

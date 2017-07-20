@@ -111,6 +111,28 @@ class OrderPack extends EmbedModel
 				break;
 
 			case Order::SERIALIZE_SCENARIO_CLIENT_ORDER:
+				self::$serializeFields = [
+					'deviser_id',
+					'deviser_info' => 'deviserInfo',
+					'shipping_info',
+					'pack_weight',
+					'pack_price',
+					'pack_percentage_fee',
+					'currency',
+					'weight_measure',
+
+//					'payment_info',
+//					'charges',
+					'products' => 'productsInfo',
+				];
+				self::$retrieveExtraFields = [
+					'products',
+				];
+
+
+				self::$translateFields = false;
+				break;
+
 			case Order::SERIALIZE_SCENARIO_DEVISER_PACK:
 				self::$serializeFields = [
 					'deviser_id',
@@ -150,14 +172,29 @@ class OrderPack extends EmbedModel
 	}
 
 	public function getDeviserInfo() {
+		$order = $this->getParentObject();
 		$deviser = $this->getDeviser();
 
-		return [
+		$deviser_info = [
 			"slug" => $deviser->slug,
 			"name" => $deviser->personalInfoMapping->getVisibleName(),
 			"photo" => $deviser->getAvatarImage128(),
 			'url' => $deviser->getMainLink(),
 		];
+
+		$shippingSetting = $deviser->getShippingSettingByCountry($order->shippingAddressMapping->country);
+
+		if ($shippingSetting) {
+			$price = $shippingSetting->getShippingSettingRange($this->pack_weight);
+			if ($price) {
+				$deviser_info['shipping_time'] = $shippingSetting->shipping_time;
+				$deviser_info['price'] = $price['price'];
+				$deviser_info['price_express'] = $price['price_express'];
+				$deviser_info['shipping_express_time'] = $shippingSetting->shipping_express_time;
+			}
+		}
+
+		return $deviser_info;
 	}
 
 	public function getProductsInfo() {
@@ -166,7 +203,7 @@ class OrderPack extends EmbedModel
 		$result = [];
 		if ($products) {
 			foreach ($products as $p) {
-				$product = Product::findOneSerialized($p['product_id']);
+				$product = Product::findOne(['short_id' => $p['product_id']]);
 				$p['product_info'] = [
 					'name' => $product->getName(),
 					'photo' => Utils::url_scheme() . Utils::thumborize($product->getMainImage()),
@@ -226,10 +263,26 @@ class OrderPack extends EmbedModel
 		$this->pack_weight = $pack_weight;
 		$this->pack_price = $pack_price;
 
+		$pricePack = null;
+
+		$shippingSetting = $deviser->getShippingSettingByCountry($order->shippingAddressMapping->country);
+
+		if ($shippingSetting) {
+			$price = $shippingSetting->getShippingSettingRange($pack_weight);
+			if ($price) {
+				switch ($this->shipping_info['type']) {
+					case 'standard':
+						$pricePack = $price['price'];
+						break;
+					case 'express':
+						$pricePack = $price['price_express'];
+						break;
+				}
+			}
+		}
 
 		$shipping_info = $this->shipping_info;
-		$price = $deviser->getShippingPrice($pack_weight, $order->shippingAddressMapping->country, $this->shipping_info['type']);
-		$shipping_info['price'] = $price;
+		$shipping_info['price'] = $pricePack;
 
 		$this->setAttribute('shipping_info',$shipping_info);
 	}

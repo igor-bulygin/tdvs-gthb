@@ -312,4 +312,8 @@ class Country extends CActiveRecord
 
 		return $country_codes;
 	}
+
+	public static function getDefaultContryCode() {
+		return "ES";
+	}
 }

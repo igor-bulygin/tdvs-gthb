@@ -1811,4 +1811,39 @@ class Person extends CActiveRecord implements IdentityInterface
 
 		return $price;
 	}
+
+	/**
+	 * @param string|null $country_code
+	 *
+	 * @return PersonShippingSettings|null
+	 */
+	public function getShippingSettingByCountry($country_code = null) {
+		$country_code = $country_code ?: Country::getDefaultContryCode();
+
+		$shippings = $this->shippingSettingsMapping;
+		foreach ($shippings as $shipping) {
+			if ($shipping->country_code == $country_code) {
+				return $shipping;
+			}
+		}
+
+		return null;
+	}
+
+	/**
+	 * @param $weight
+	 * @param string|null $country_code
+	 *
+	 * @return array
+	 */
+	public function getShippinSettingRange($weight, $country_code = null)
+	{
+		$shippingSetting = $this->getShippingSettingByCountry($country_code);
+
+		if ($shippingSetting) {
+			return $shippingSetting->getShippingSettingRange($weight);
+		}
+
+		return null;
+	}
 }
