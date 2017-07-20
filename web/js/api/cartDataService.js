@@ -10,14 +10,12 @@
 				'method': "PUT"
 			}
 		});
-		var CartClientInfo = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'cart/:id/personInfo');
 		var CartReceiveToken = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'cart/:cartId/receiveToken');
 
 		//functions
 		this.createCart = createCart;
 		this.getCart = getCart;
 		this.deleteItem = deleteItem;
-		this.saveUserInfo = saveUserInfo;
 		this.getCartToken = getCartToken;
 		this.addProduct = addProduct;
 
@@ -31,10 +29,6 @@
 
 		function deleteItem(params, onSuccess, onError) {
 			apiMethods.deleteItem(CartProduct, params, onSuccess, onError);
-		}
-
-		function saveUserInfo(data, params, onSuccess, onError) {
-			apiMethods.create(CartClientInfo, data, params, onSuccess, onError);
 		}
 
 		function getCartToken(data, params, onSuccess, onError) {
