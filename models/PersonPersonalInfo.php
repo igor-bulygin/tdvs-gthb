@@ -7,7 +7,7 @@ use app\helpers\Utils;
  * @property string $name
  * @property string $last_name
  * @property string $brand_name
- * @property string $id_number
+ * @property string $vat_id
  * @property string $country
  * @property string $city
  * @property string $street
@@ -53,7 +53,7 @@ class PersonPersonalInfo extends EmbedModel
 			'name',
 			'last_name',
 			'brand_name',
-			'id_number',
+			'vat_id',
 			'country',
 			'city',
 			'address',

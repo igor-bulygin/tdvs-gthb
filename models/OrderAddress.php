@@ -5,7 +5,7 @@ namespace app\models;
  *
  * @property string $first_name
  * @property string $last_name
- * @property string $id_number
+ * @property string $vat_id
  * @property string $email
  * @property string $phone
  * @property string $country
@@ -36,7 +36,7 @@ class OrderAddress extends EmbedModel
 		return [
 				'first_name',
 				'last_name',
-				'id_number',
+				'vat_id',
 				'email',
 				'phone',
 				'country',

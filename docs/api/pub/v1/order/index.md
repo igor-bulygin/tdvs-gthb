@@ -35,7 +35,7 @@ Order
           "shipping_address" : {
         	"first_name": "Michael Joseph",
         	"last_name": "Jackson",
-        	"id_number": "12345678Z",
+        	"vat_id": "12345678Z",
         	"email": "king@pop.com",
         	"phone": {
         	  "prefix": "+34",
@@ -49,7 +49,7 @@ Order
           "billing_address": {
         	"first_name": "Michael Joseph",
         	"last_name": "Jackson",
-        	"id_number": "12345678Z",
+        	"vat_id": "12345678Z",
         	"email": "king@pop.com",
         	"phone": {
         	  "prefix": "+34",
