@@ -485,9 +485,21 @@ class Order extends CActiveRecord {
 	public function recalculateTotals() {
 		$packs = $this->packsMapping;
 		$subtotal = 0;
-		foreach ($packs as $pack) {
-			$subtotal += ($pack->pack_price);
+
+		$indexes = [];
+		foreach ($packs as $i => $pack) {
+			if (empty($pack->productsMapping)) {
+				$indexes[] = $i;
+			} else {
+				$subtotal += ($pack->pack_price);
+			}
 		}
+
+		// Remove empty packs
+		foreach ($indexes as $index) {
+			$packs->offsetUnset($index);
+		}
+
 		$this->subtotal = $subtotal;
 		$this->save();
 	}
