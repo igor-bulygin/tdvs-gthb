@@ -26,7 +26,7 @@ class CartController extends AppPublicController
 		Yii::$app->response->setStatusCode(201); // Created
 
 		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_CLIENT_ORDER);
-		$cart = Order::findOneSerialized($cartId);
+		$cart = Order::findOneSerialized($cart->short_id);
 		return $cart;
 	}
 
