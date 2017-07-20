@@ -9,7 +9,7 @@ GlobalAsset::register($this);
 $this->title = 'Todevise / Cart';
 ?>
 
-<div class="store" ng-controller="checkoutCtrl as checkoutCtrl">
+<div class="store" ng-controller="cartOverviewCtrl as cartOverviewCtrl">
 		<div class="cart-top-bar">
 			<div class="container">
 				<div class="pull-right">
@@ -22,12 +22,12 @@ $this->title = 'Todevise / Cart';
 		</div>
 		<div class="container checkout-sidebar no-pad">
 			<div class="col-md-8 no-pad">
-				<shopping-cart state="checkoutCtrl.cart_state" cart="checkoutCtrl.cart" devisers="checkoutCtrl.devisers" ng-if="checkoutCtrl.cart_state.state===1"></shopping-cart>
-				<personal-info state="checkoutCtrl.cart_state" cart="checkoutCtrl.cart" ng-if="checkoutCtrl.cart_state.state===2"></personal-info>
-				<payment-methods state="checkoutCtrl.cart_state" cart="checkoutCtrl.cart" ng-if="checkoutCtrl.cart_state.state===3"></payment-methods>
+				<shopping-cart state="cartOverviewCtrl.cart_state" cart="cartOverviewCtrl.cart" devisers="cartOverviewCtrl.devisers" ng-if="cartOverviewCtrl.cart_state.state===1"></shopping-cart>
+				<personal-info state="cartOverviewCtrl.cart_state" cart="cartOverviewCtrl.cart" ng-if="cartOverviewCtrl.cart_state.state===2"></personal-info>
+				<payment-methods state="cartOverviewCtrl.cart_state" cart="cartOverviewCtrl.cart" ng-if="cartOverviewCtrl.cart_state.state===3"></payment-methods>
 			</div>
 			<div class="col-md-4 no-pad summary-side bordered-left">
-				<cart-summary state="checkoutCtrl.cart_state" cart="checkoutCtrl.cart" devisers="checkoutCtrl.devisers"></cart-summary>
+				<cart-summary state="cartOverviewCtrl.cart_state" cart="cartOverviewCtrl.cart" devisers="cartOverviewCtrl.devisers"></cart-summary>
 			</div>
 		</div>
 </div>
