@@ -630,6 +630,21 @@ class Product extends CActiveRecord {
 		if ((array_key_exists("product_state", $criteria)) && (!empty($criteria["product_state"]))) {
 			$query->andWhere(["product_state" => $criteria["product_state"]]);
 		}
+		// if only_active_persons are specified
+		if ((array_key_exists("only_active_persons", $criteria)) && (!empty($criteria["only_active_persons"]))) {
+
+			// Get different person_ids available by country
+			$queryPerson= new ActiveQuery(Person::className());
+			$queryPerson->andWhere(["account_state" => Person::ACCOUNT_STATE_ACTIVE]);
+			$idsPerson = $queryPerson->distinct("short_id");
+
+			if ($idsPerson) {
+				$query->andFilterWhere(["in", "deviser_id", $idsPerson]);
+			} else {
+				$query->andFilterWhere(["in", "deviser_id", "dummy_person"]); // Force no results if there are no boxes
+			}
+		}
+
 		// if name is specified
 		if ((array_key_exists("name", $criteria)) && (!empty($criteria["name"]))) {
 //			// search the word in all available languages
