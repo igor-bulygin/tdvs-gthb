@@ -434,42 +434,12 @@ class Order extends CActiveRecord {
 			$pack->currency = $deviser->settingsMapping->currency;
 			$pack->weight_measure = $deviser->settingsMapping->weight_measure;
 			$pack->addProduct($orderProduct);
+
 			$this->packsMapping[] = $pack;
 		}
 
 		$this->recalculateTotals();
 	}
-
-//	public function updateProduct(OrderProduct $orderProduct) {
-//		$product = Product::findOneSerialized($orderProduct->product_id); /* @var Product $product */
-//		if (empty($orderProduct)) {
-//			throw new Exception(sprintf("Product with id %s does not exists", $orderProduct->product_id));
-//		}
-//		$priceStock = $product->getPriceStockItem($orderProduct->price_stock_id);
-//		if (empty($priceStock)) {
-//			throw new Exception(sprintf("Price stock item with id %s does not exists", $orderProduct->price_stock_id));
-//		}
-//
-//		$products = $this->productsMapping;
-//		$key = null;
-//		foreach ($products as $i => $item) {
-//			if ($item->price_stock_id == $orderProduct->price_stock_id) {
-//				$key = $i;
-//				break;
-//			}
-//		}
-//		$orderProduct->weight = $priceStock['weight'];
-//		$orderProduct->price = $priceStock['price'];
-//		$orderProduct->options = $priceStock['options'];
-//		$orderProduct->deviser_id = $product->deviser_id;
-//
-//		if (isset($key)) {
-//			$this->productsMapping[$key] = $orderProduct;
-//		} else {
-//			$this->productsMapping[] = $orderProduct;
-//		}
-//		$this->recalculateTotals();
-//	}
 
 	public function deleteProduct($priceStockId) {
 
@@ -478,26 +448,29 @@ class Order extends CActiveRecord {
     		$pack->deleteProduct($priceStockId);
 		}
 
+    	// Remove empty packs
+		$indexes = [];
+		foreach ($packs as $i => $pack) {
+			if (count($pack->productsMapping) == 0) {
+				$indexes[] = $i;
+			}
+		}
+		foreach ($indexes as $index) {
+			$packs->offsetUnset($index);
+		}
+
 		$this->packsMapping = $packs;
+
 		$this->recalculateTotals();
 	}
 
 	public function recalculateTotals() {
+    	$this->refreshFromEmbedded();
 		$packs = $this->packsMapping;
 		$subtotal = 0;
 
-		$indexes = [];
 		foreach ($packs as $i => $pack) {
-			if (empty($pack->productsMapping)) {
-				$indexes[] = $i;
-			} else {
-				$subtotal += ($pack->pack_price);
-			}
-		}
-
-		// Remove empty packs
-		foreach ($indexes as $index) {
-			$packs->offsetUnset($index);
+			$subtotal += ($pack->pack_price);
 		}
 
 		$this->subtotal = $subtotal;

@@ -248,6 +248,7 @@ class OrderPack extends EmbedModel
 	}
 
 	public function recalculateTotals() {
+		$this->refreshFromEmbedded();
 		$order = $this->getParentObject();
 		$deviser = $this->getDeviser();
 
