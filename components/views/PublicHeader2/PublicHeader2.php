@@ -1,5 +1,4 @@
 <?php
-use app\helpers\Utils;
 use app\models\Category;
 use yii\helpers\Url;
 
@@ -199,21 +198,25 @@ app\components\assets\PublicHeader2Asset::register($this);
 						</div>
 						<div class="images">
 							<?php
-							$products = $category->getHeaderProducts(3);
-							$image = 1;
-							foreach ($products as $product) { ?>
-								<div class="image-<?=$image?>">
-									<a href="<?=$product->getViewLink()?>" title="<?=$product->name?>">
-										<img src="<?=Utils::url_scheme().Utils::thumborize($product->getMainImage())->resize(398, 235)?>">
-									</a>
+							$headerImages = $category->getHeaderImages();
+							$count = 1;
+							foreach ($headerImages as $image) { ?>
+								<div class="image-<?=$count?>">
+									<?php if ($image['link']) { ?>
+										<a href="<?=$image['link']?>" title="<?=$image['name']?>">
+											<img src="<?=$image['url']?>">
+										</a>
+									<?php } else { ?>
+										<img src="<?=$image['url']?>">
+									<?php } ?>
 								</div>
 								<?php
-								if ($image== 1) {
-									$image = 2;?>
+								if ($count== 1) {
+									$count = 2;?>
 									<div class="images-wrapper">
 								<?php }
 							}
-							if (count($products) > 1) { ?>
+							if (count($headerImages) > 1) { ?>
 									</div><!--close image-wrapper-->
 							<?php } ?>
 						</div>

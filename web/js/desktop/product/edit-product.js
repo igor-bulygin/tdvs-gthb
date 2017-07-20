@@ -8,11 +8,10 @@
 		vm.categories_helper = [];
 		vm.save = save;
 		vm.saving = false;
-		vm.emptyCategory=false;
 
 		function init(){
 			vm.from_edit = false;
-			vm.product = {};
+			vm.product = { emptyCategory:false};
 			vm.product.slug = {};
 			vm.product.categories = [];
 			vm.product.media = {
@@ -98,10 +97,12 @@
 
 		function getProduct() {
 			function onGetProductPrivSuccess(data){
+				var aux=vm.product.emptyCategory;
 				vm.product = angular.copy(data);
 				vm.from_edit = true;
 				vm.product_original = angular.copy(data);
-				vm.product = productService.parseProductFromService(vm.product);
+				vm.product = productService.parseProductFromService(vm.product);				
+				vm.product.emptyCategory=aux;
 			}
 			var params = {
 				idProduct: product.short_id
@@ -122,7 +123,9 @@
 		}
 
 		function saved_draft() {
+			var aux=vm.product.emptyCategory;
 			vm.product = productService.parseProductFromService(vm.product);
+			vm.product.emptyCategory=aux;
 			vm.progressSaved = true;
 			$timeout(() => {
 				vm.progressSaved = false;
@@ -168,6 +171,9 @@
 			//validations
 			if(vm.product.product_state !== 'product_state_draft') {
 				required = productService.validate(vm.product);
+				if (vm.product.emptyCategory) {
+					required.push("emptyCategory");
+				}
 			} else {
 				//check for null categories
 				while(vm.product.categories.indexOf(null) > -1) {
@@ -177,9 +183,11 @@
 			}
 
 			if(required.length === 0) {
+				var aux=vm.product.emptyCategory;
 				productDataService.updateProductPriv(vm.product, {
 					idProduct: vm.product.id
 				}, onUpdateProductSuccess, onUpdateProductError);
+				vm.product.emptyCategory=aux;
 			} else {
 				vm.disable_save_buttons=false;
 				vm.errors = true;

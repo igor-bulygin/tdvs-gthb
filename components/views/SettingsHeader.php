@@ -23,20 +23,20 @@ $activeOption = array_key_exists('settings_menu_active_option', $this->params) ?
 		</div>
 	</div>
 	<ul class="nav nav-tabs header-settings-tabs">
-		<li role="presentation">
-			<a class="<?= ($activeOption=='general') ? 'active' : ''?>" href="<?= Url::to(['/settings/general', 'slug' => $person->slug, 'person_id' => $person->short_id])?>">General</a>
+		<li role="presentation" class="<?= ($activeOption=='general') ? 'active' : ''?>">
+			<a href="<?= Url::to(['/settings/general', 'slug' => $person->slug, 'person_id' => $person->short_id])?>">General</a>
 		</li>
-		<li role="presentation">
-			<a class="<?= ($activeOption=='orders') ? 'active' : '' ?>" href="<?= Url::to(['/settings/orders', 'slug' => $person->slug, 'person_id' => $person->short_id])?>">My Orders</a>
+		<li role="presentation" class="<?= ($activeOption=='orders') ? 'active' : '' ?>">
+			<a href="<?= Url::to(['/settings/open-orders', 'slug' => $person->slug, 'person_id' => $person->short_id])?>">My Orders</a>
 		</li>
-		<li role="presentation">
-			<a class="<?= ($activeOption=='stock') ? 'active' : '' ?>" href="<?= Url::to(['/settings/stock', 'slug' => $person->slug, 'person_id' => $person->short_id])?>">Stock & Price</a>
+		<li role="presentation" class="<?= ($activeOption=='stock') ? 'active' : '' ?>">
+			<a href="<?= Url::to(['/settings/stock', 'slug' => $person->slug, 'person_id' => $person->short_id])?>">Stock & Price</a>
 		</li>
-		<li role="presentation">
-			<a class="<?= ($activeOption=='billing') ? 'active' : '' ?>" href="<?= Url::to(['/settings/billing', 'slug' => $person->slug, 'person_id' => $person->short_id])?>">Billing & Payments</a>
+		<li role="presentation" class="<?= ($activeOption=='billing') ? 'active' : '' ?>">
+			<a href="<?= Url::to(['/settings/billing', 'slug' => $person->slug, 'person_id' => $person->short_id])?>">Billing & Payments</a>
 		</li>
-		<li role="presentation">
-			<a class="><?= ($activeOption=='shipping') ? 'active' : '' ?>" href="<?= Url::to(['/settings/shipping', 'slug' => $person->slug, 'person_id' => $person->short_id])?>">Shipping</a>
+		<li role="presentation" class="<?= ($activeOption=='shipping') ? 'active' : '' ?>">
+			<a href="<?= Url::to(['/settings/shipping', 'slug' => $person->slug, 'person_id' => $person->short_id])?>">Shipping</a>
 		</li>
 	</ul>
 

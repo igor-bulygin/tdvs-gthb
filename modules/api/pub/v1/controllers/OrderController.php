@@ -21,19 +21,51 @@ class OrderController extends AppPublicController
 		}
 
 		if ($order->order_state == Order::ORDER_STATE_CART) {
-			throw new BadRequestHttpException();
+			throw new BadRequestHttpException("This order has an invalid state");
 		}
 
 		if (!Yii::$app->user->isGuest) {
-			if ($order->client_id != Yii::$app->user->identity->short_id) {
+			if ($order->person_id != Yii::$app->user->identity->short_id) {
 				throw new ForbiddenHttpException();
 			}
 		} else {
-			if (!empty($order->client_id)) {
+			if (!empty($order->person_id)) {
 				throw new ForbiddenHttpException();
 			}
 		}
 		Yii::$app->response->setStatusCode(200); // Ok
 		return $order;
+	}
+
+	public function actionIndex()
+	{
+		// show only fields needed in this scenario
+		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_PUBLIC);
+
+		// set pagination values
+		$limit = Yii::$app->request->get('limit', 99999);
+		$limit = ($limit < 1) ? 1 : $limit;
+		$page = Yii::$app->request->get('page', 1);
+		$page = ($page < 1) ? 1 : $page;
+		$offset = ($limit * ($page - 1));
+
+		$orders = Order::findSerialized([
+			"id" => Yii::$app->request->get("id"),
+			"person_id" => Yii::$app->request->get("person_id"),
+			"deviser_id" => Yii::$app->request->get("deviser_id"),
+			"product_id" => Yii::$app->request->get("product_id"),
+			"order_state" => Yii::$app->request->get("order_state"),
+			"limit" => $limit,
+			"offset" => $offset,
+		]);
+
+		return [
+			"items" => $orders,
+			"meta" => [
+				"total_count" => Order::$countItemsFound,
+				"current_page" => $page,
+				"per_page" => $limit,
+			]
+		];
 	}
 }

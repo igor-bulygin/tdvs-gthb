@@ -5,6 +5,13 @@ use app\helpers\CActiveRecord;
 
 class EmbedModel extends CActiveRecord
 {
+	public function init()
+	{
+		parent::init();
+
+		static::$serializeFields = [];
+		static::$retrieveExtraFields = [];
+	}
 
 	/** @var  CActiveRecord */
 	protected $parentObject;

@@ -21,12 +21,31 @@ use app\models\Term;
 use Yii;
 use yii\base\DynamicModel;
 use yii\data\ArrayDataProvider;
+use yii\filters\AccessControl;
 use yii\mongodb\ActiveQuery;
 use yii\web\Response;
 
 class PublicController extends CController
 {
 	public $defaultAction = "index";
+
+	public function behaviors()
+	{
+		return [
+			'access' => [
+				'class' => AccessControl::className(),
+				'only' => [
+					'checkout',
+				],
+				'rules' => [
+					[
+						'allow' => true,
+						'roles' => ['@'],
+					],
+				],
+			],
+		];
+	}
 
 	public function actionError()
 	{
@@ -166,6 +185,14 @@ class PublicController extends CController
 	{
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("cart", []);
+	}
+
+	public function actionCheckout()
+	{
+		$this->layout = '/desktop/public-2.php';
+		return $this->render("checkout", [
+			'person' => Yii::$app->user->identity,
+		]);
 	}
 
 	public function actionAboutUs()

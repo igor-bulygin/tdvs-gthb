@@ -7,6 +7,7 @@ use app\helpers\Utils;
  * @property string $name
  * @property string $last_name
  * @property string $brand_name
+ * @property string $id_number
  * @property string $country
  * @property string $city
  * @property string $street
@@ -26,6 +27,10 @@ class PersonPersonalInfo extends EmbedModel
 	public $bday;
 	// TODO deprecate
 	public $surnames;
+	// TODO deprecate
+	public $street;
+	// TODO deprecate
+	public $number;
 
 	public function attributes()
 	{
@@ -33,10 +38,10 @@ class PersonPersonalInfo extends EmbedModel
 			'name',
 			'last_name',
 			'brand_name',
+			'id_number',
 			'country',
 			'city',
-			'street',
-			'number',
+			'address',
 			'phone_number_prefix',
 			'phone_number',
 			'zip',

@@ -5,7 +5,6 @@ namespace app\models;
  * @property string $product_id
  * @property string $price_stock_id
  * @property int $quantity
- * @property string $deviser_id
  * @property double $price
  * @property double $weight
  * @property array $options
@@ -24,7 +23,6 @@ class OrderProduct extends EmbedModel
 				'product_id',
 				'price_stock_id',
 				'quantity',
-				'deviser_id',
 				'price',
 				'weight',
 				'options',
@@ -36,6 +34,14 @@ class OrderProduct extends EmbedModel
 		return [
 				[$this->attributes(), 'safe']
 		];
+	}
+
+	/**
+	 * @return Product
+	 */
+	public function getProduct()
+	{
+		return Product::findOne(['short_id' => $this->product_id]);
 	}
 
 }

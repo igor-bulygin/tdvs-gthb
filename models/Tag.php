@@ -129,7 +129,7 @@ class Tag extends CActiveRecord
 	 *
 	 * @var array
 	 */
-	static protected $serializeFields = [];
+	protected static $serializeFields = [];
 
 	/** @var  Product|OldProduct */
 	private $product;

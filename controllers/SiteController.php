@@ -16,15 +16,15 @@ class SiteController extends Controller
 		return [
 			'access' => [
 				'class' => AccessControl::className(),
-				'only' => ['login', 'logout'],
+				'only' => ['login', 'authentication-required', 'logout'],
 				'rules' => [
 						[
-								'actions' => ['login'],
+								'actions' => ['login', 'authentication-required'],
 								'allow' => true,
 								'roles' => ['?'],
 						],
 						[
-								'actions' => ['login'],
+								'actions' => ['login', 'authentication-required'],
 								'allow' => false,
 								'roles' => ['@'],
 								'denyCallback' => function ($rule, $action) {
@@ -79,6 +79,22 @@ class SiteController extends Controller
 		}
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("login-2", [
+			'invalidLogin' => $invalidLogin
+		]);
+	}
+
+	public function actionAuthenticationRequired()
+	{
+		$model = new Login();
+		$invalidLogin = false;
+		if ($model->load(Yii::$app->request->post())) {
+			if ($model->login()) {
+				return $this->goBack();
+			}
+			$invalidLogin = true;
+		}
+		$this->layout = '/desktop/public-2.php';
+		return $this->render("authentication-required", [
 			'invalidLogin' => $invalidLogin
 		]);
 	}

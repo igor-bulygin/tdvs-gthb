@@ -1,14 +1,14 @@
 .category-menu{
 	background-color: #ffffff;
-	padding: 10px 0;
     float: left;
     width: 100%;
     position: relative;
     z-index: 2;
-	height: 330px;
+	padding: 20px 0;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	.categories{
     	float: left;
-		margin-right: 60px;
+		/*margin-right: 60px;*/
 		ul{
 			li{
 				a{

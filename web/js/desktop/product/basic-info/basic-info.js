@@ -14,13 +14,14 @@
 		vm.openCropModal = openCropModal;
 		vm.uploadPhoto = uploadPhoto;
 		vm.deleteImage = deleteImage;
-		vm.tempFiles=[];		
-		vm.stripHTMLTags = UtilService.stripHTMLTags;		
-		vm.description_language = 'en-US';		
-		vm.tags_language = 'en-US';		
-		vm.tags = {};		
-		vm.addTag = addTag;		
+		vm.tempFiles=[];
+		vm.stripHTMLTags = UtilService.stripHTMLTags;
+		vm.description_language = 'en-US';
+		vm.tags_language = 'en-US';
+		vm.tags = {};
+		vm.addTag = addTag;
 		vm.removeTag = removeTag;
+		vm.firstCategorySelection=true;
 		
 		function init(){
 			//init values or functions
@@ -35,11 +36,11 @@
 				categories: [vm.rootCategories]
 			})
 			vm.product['categories'].push(null);
-			vm.emptyCategory=true;
+			vm.product.emptyCategory=true;
 		}
 
 		function categorySelected(category, index_helper, index) {
-			vm.emptyCategory=true;
+			vm.product.emptyCategory=true;
 			vm.categories_helper[index_helper].categories_selected[index] = category;
 			//if we change an option with "child" selects
 			if(index < vm.categories_helper[index_helper].categories_selected.length-1) {
@@ -56,9 +57,11 @@
 				//if not
 				vm.product.categories[index_helper] = category;
 				//send event to get tags by category
-				$rootScope.$broadcast(productEvents.setVariations, {categories: vm.product.categories});
-				vm.emptyCategory=false;
+				$rootScope.$broadcast(productEvents.setVariations, {categories: vm.product.categories, isFirstSelection:vm.firstCategorySelection});
+				vm.product.emptyCategory=false;
+				vm.firstCategorySelection=false;
 			}
+			
 		}
 
 		function filterCategory(categories, id) {
@@ -231,19 +234,6 @@
 			}
 		}
 
-		//watches
-		$scope.$watch('createProductCtrl.emptyCategory', function(newValue, oldValue) {
-			if (angular.isUndefined(newValue)) {
-				vm.emptyCategory=true;
-			}
-		});
-
-		$scope.$watch('editProductCtrl.emptyCategory', function(newValue, oldValue) {
-			if (angular.isUndefined(newValue)) {
-				vm.emptyCategory=false;
-			}
-		});
-
 		$scope.$watch('productBasicInfoCtrl.product.categories', function(newValue, oldValue) {
 			if(angular.isArray(oldValue) && oldValue[0]===null && angular.isArray(newValue) && newValue.length > 0 && vm.product.id) {
 				for(var i = 0; i < newValue.length; i++) {
@@ -262,6 +252,9 @@
 						})
 					}
 				}
+			}
+			if(angular.isArray(newValue) && newValue.indexOf(null) === -1) {
+				vm.form.$submitted = false;
 			}
 		}, true);
 
@@ -302,12 +295,7 @@
 			}
 		}, true);
 
-		//watch categories errors
-		$scope.$watch('productBasicInfoCtrl.product.categories', function(newValue, oldValue) {
-			if(angular.isArray(newValue) && newValue.indexOf(null) === -1) {
-				vm.form.$submitted = false;
-			}
-		}, true);
+		
 
 		$scope.$watch('productBasicInfoCtrl.product.description', function(newValue, oldValue) {
 			vm.descriptionRequired = false;
@@ -346,6 +334,7 @@
 			if(args.required.indexOf('description') > -1) {
 				vm.descriptionRequired = true;
 			}
+			vm.categorySelectionRequired = false;
 			if(args.required.indexOf('emptyCategory') > -1) {
 				vm.categorySelectionRequired = true;
 			}
@@ -359,8 +348,7 @@
 		bindings: {
 			product: '=',
 			categories: '<',
-			languages: '<',
-			emptyCategory:'='
+			languages: '<'
 		}
 	}
 

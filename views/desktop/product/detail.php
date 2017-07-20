@@ -145,7 +145,7 @@ $videos = $product->getVideos();
 												<div class="col-sm-9" ng-if="option.values.length > 1 && option.change_reference" ng-cloak>
 													<div class="row">
 														<div class="col-sm-8">
-															<ol name="{{option.id}}" class="nya-bs-select btn-group bootstrap-select form-control product-select ng-class:{'error-input': detailProductCtrl.has_error(detailProductCtrl.tagsForm, detailProductCtrl.tagsForm[option.id])}" ng-model="detailProductCtrl.option_selected[option.id]" ng-change="detailProductCtrl.parseOptions(option.id, detailProductCtrl.option_selected[option.id])" required>
+															<ol name="{{option.id}}" class="nya-bs-select btn-group bootstrap-select form-control product-select ng-class:{'error-input': detailProductCtrl.has_error(detailProductCtrl.tagsForm, detailProductCtrl.tagsForm[option.id])}" ng-model="detailProductCtrl.option_selected[option.id]" ng-change="detailProductCtrl.optionsChanged(option.id, detailProductCtrl.option_selected[option.id])" required>
 																<li nya-bs-option="value in option.values" data-value="value.value" ng-class="{'disabled': value.disabled}">
 																	<a href="">
 																		<span ng-bind="value.text"></span>
@@ -219,18 +219,18 @@ $videos = $product->getVideos();
 						</div>-->
 						<div class="product-data no-border">
 							<div class="row-size">
-                                <?php if ($product->isWorkFromCurrentUser()) { ?>
-                                    <a href="<?=$product->getEditLink()?>" class="btn btn-hart btn-grey pull-left">
-                                        <i class="ion-edit"></i>
-                                        <span>Edit work</span>
-                                    </a>
-                                <?php } else { ?>
-                                    <button type="button" class="btn btn-hart pull-left" ng-class="detailProductCtrl.product.isLoved ? 'btn-red' : 'btn-grey'" ng-click="detailProductCtrl.setLoved()">
-                                        <i class="ion-ios-heart"></i>
-                                        <span ng-if="!detailProductCtrl.product.isLoved" ng-cloak>Love work</span>
-                                        <span ng-if="detailProductCtrl.product.isLoved" ng-cloak>You love this work</span>
-                                    </button>
-                                <?php } ?>
+								<?php if ($product->isWorkFromCurrentUser()) { ?>
+									<a href="<?=$product->getEditLink()?>" class="btn btn-hart btn-grey pull-left">
+										<i class="ion-edit"></i>
+										<span>Edit work</span>
+									</a>
+								<?php } else { ?>
+									<button type="button" class="btn btn-hart pull-left" ng-class="detailProductCtrl.product.isLoved ? 'btn-red' : 'btn-grey'" ng-click="detailProductCtrl.setLoved()">
+										<i class="ion-ios-heart"></i>
+										<span ng-if="!detailProductCtrl.product.isLoved" ng-cloak>Love work</span>
+										<span ng-if="detailProductCtrl.product.isLoved" ng-cloak>You love this work</span>
+									</button>
+								<?php } ?>
 								<button type="button" class="btn btn-grey btn-hart pull-right" ng-click="detailProductCtrl.setBox()">
 									<i class="ion-ios-box"></i>
 									<span>Save in a box</span>
@@ -304,19 +304,19 @@ $videos = $product->getVideos();
 							<p class="description">
 								<?= $product->description ?>
 							</p>
-                            <?php if (count($product->mediaMapping->descriptionPhotosInfo) > 0) { ?>
-                                <div class="tb-wrapper">
-                                    <div class="row">
-                                        <?php foreach ($product->mediaMapping->descriptionPhotosInfo as $descriptionPhoto) { ?>
-                                        <div class="col-md-3 work-profile-description-tb">
-                                            <img src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getUrlImagesLocation().$descriptionPhoto->name)->resize(480, 0)?>">
-                                            <span class="tb-title"><?= $descriptionPhoto->title?></span>
-                                            <span class="tb-description"><?= $descriptionPhoto->description?></span>
-                                        </div>
-                                        <?php } ?>
-                                    </div>
-                                </div>
-                            <?php } ?>
+							<?php if (count($product->mediaMapping->descriptionPhotosInfo) > 0) { ?>
+								<div class="tb-wrapper">
+									<div class="row">
+										<?php foreach ($product->mediaMapping->descriptionPhotosInfo as $descriptionPhoto) { ?>
+										<div class="col-md-3 work-profile-description-tb">
+											<img src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getUrlImagesLocation().$descriptionPhoto->name)->resize(480, 0)?>">
+											<span class="tb-title"><?= $descriptionPhoto->title?></span>
+											<span class="tb-description"><?= $descriptionPhoto->description?></span>
+										</div>
+										<?php } ?>
+									</div>
+								</div>
+							<?php } ?>
 						</div>
 						<div class="col-sm-4">
 							<div class="shipping-policies-wrapper">
@@ -324,13 +324,15 @@ $videos = $product->getVideos();
 									<div class="policies-row">
 									<form class="form-horizontal">
 										<div class="form-group">
-											<label class="col-sm-4 control-label shipping-label no-pad-r"><span>Shipping price to</span></label>
+											<label class="col-sm-5 control-label shipping-label no-pad-r"><span>Shipping price to SPAIN</span></label>
+											<!--
 											<div class="col-sm-5 pad-product">
 												<select class="form-control selectpicker shipping-select product-select" title="Choose country">
 													<option>USA</option>
 													<option>SPAIN</option>
 												</select>
 											</div>
+											-->
 											<div class="col-sm-3">
 												is <span class="tax">€4.5</span>
 											</div>
@@ -348,23 +350,23 @@ $videos = $product->getVideos();
 						</div>
 					</div>
 
-                    <?php if (count($product->faqMapping) > 0) { ?>
-                       	<div class="work-profile-description-wrapper faq-wrapper">
-                        <div class="title">WORK FAQs</div>
-                        <?php foreach ($product->faqMapping as $faq) { ?>
-                            <div class="q-a-wrapper">
-                                <p class="question">
-                                    <span>Q:</span>
-                                    <span class="important"><?= $faq->question?></span>
-                                </p>
-                                <p class="question">
-                                    <span>A:</span>
-                                    <span><?= $faq->answer?></span>
-                                </p>
-                            </div>
-                        <?php } ?>
-                        </div>
-                    <?php } ?>
+					<?php if (count($product->faqMapping) > 0) { ?>
+					   	<div class="work-profile-description-wrapper faq-wrapper">
+						<div class="title">WORK FAQs</div>
+						<?php foreach ($product->faqMapping as $faq) { ?>
+							<div class="q-a-wrapper">
+								<p class="question">
+									<span>Q:</span>
+									<span class="important"><?= $faq->question?></span>
+								</p>
+								<p class="question">
+									<span>A:</span>
+									<span><?= $faq->answer?></span>
+								</p>
+							</div>
+						<?php } ?>
+						</div>
+					<?php } ?>
 
 					<div class="reviews-wrapper">
 						<div class="title">User reviews</div>
@@ -552,24 +554,24 @@ $videos = $product->getVideos();
 						<div id="macy-container">
 							<?php foreach ($deviserProducts as $i => $product) { ?>
 								<div class="menu-category list-group">
-                                    <div class="grid">
-                                        <figure class="effect-zoe">
-                                            <image-hover-buttons product-id="{{'<?= $product->short_id ?>'}}" is-loved="{{'<?=$product->isLovedByCurrentUser() ? 1 : 0 ?>'}}" is-mine="{{'<?= $product->isWorkFromCurrentUser() ? 1 : 0 ?>'}}">
-                                                <a href="<?= $product->getViewLink() ?>">
-                                                    <img class="grid-image"
-                                                         src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getMainImage())->resize(400, 0) ?>">
-                                                </a>
-                                            </image-hover-buttons>
-                                            <a href="<?= $product->getViewLink() ?>">
-                                                <figcaption>
-                                                    <p class="instauser">
+									<div class="grid">
+										<figure class="effect-zoe">
+											<image-hover-buttons product-id="{{'<?= $product->short_id ?>'}}" is-loved="{{'<?=$product->isLovedByCurrentUser() ? 1 : 0 ?>'}}" is-mine="{{'<?= $product->isWorkFromCurrentUser() ? 1 : 0 ?>'}}">
+												<a href="<?= $product->getViewLink() ?>">
+													<img class="grid-image"
+														 src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getMainImage())->resize(400, 0) ?>">
+												</a>
+											</image-hover-buttons>
+											<a href="<?= $product->getViewLink() ?>">
+												<figcaption>
+													<p class="instauser">
 														<?= $product->name ?>
-                                                    </p>
-                                                    <p class="price">€ <?= $product->getMinimumPrice() ?></p>
-                                                </figcaption>
-                                            </a>
-                                        </figure>
-                                    </div>
+													</p>
+													<p class="price">€ <?= $product->getMinimumPrice() ?></p>
+												</figcaption>
+											</a>
+										</figure>
+									</div>
 								</div>
 							<?php } ?>
 						</div>
