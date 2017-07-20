@@ -6,6 +6,7 @@ PublicCommonAsset::register($this);
 $this->title = 'Todevise / Elements';
 
 ?>
+<link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 <div class="elements-wrapper">
 	<img class="logo-md auto-center" src="/imgs/logo.svg" data-pin-nopin="true">
 	<p class="text-center">ELEMENTS</p>	
@@ -66,13 +67,11 @@ $this->title = 'Todevise / Elements';
 				<span class="title-underlined">Botón grande</span>
 				<div>
 					<button class="btn btn-red btn-big btn-red">
-						<i class="ion-ios-cart cart-icon-btn"></i>
 						<span>Make profile public</span>
 					</button>
 				</div>
 				<div class="mt-10">
 					<button class="btn btn-red btn-big disabled">
-						<i class="ion-ios-cart cart-icon-btn"></i>
 						<span>Make profile public</span>
 					</button>
 				</div>
@@ -81,12 +80,39 @@ $this->title = 'Todevise / Elements';
 		<div class="row mt-30">
 			<div class="col-md-3">
 				<span class="title-underlined">RRSS</span>
+				<div>
+					<span class="share-btn">
+						<i class="ion-android-share-alt"></i>
+					</span>
+				</div>
 			</div>
 			<div class="col-md-3">
 				<span class="title-underlined">Love</span>
+				<div>
+					<button class="btn btn-love">
+						<i class="ion-heart"></i>
+					</button>	
+				</div>
+				<div class="mt-10">
+					<button class="btn btn-love active">
+						<i class="ion-heart"></i>
+					</button>	
+				</div>
 			</div>
 			<div class="col-md-3">
 				<span class="title-underlined">Save box</span>
+				<div>
+					<button class="btn btn-save-box">
+						<div class="box-icon"></div>
+						<span>Save in a box</span>
+					</button>	
+				</div>
+				<div class="mt-10">
+					<button class="btn btn-save-box active">
+						<div class="box-icon"></div>
+						<span>Save in a box</span>
+					</button>	
+				</div>
 			</div>
 			<div class="col-md-3">
 				<span class="title-underlined">Desplegar</span>

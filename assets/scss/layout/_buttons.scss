@@ -192,3 +192,63 @@
 		background-color: $light_grey!important;
 	}
 }
+.share-btn{
+	cursor: pointer;
+	i{
+		font-size: 21px;
+	}
+}
+.btn-love{
+    @extend %btn;
+    background-color:transparent;
+    border: 1px solid $black;
+    color: $black;
+	width: 70px;
+    height: 40px;
+    padding-top: 6px;
+	i{
+	    font-size: 27px;
+	}
+    &:hover{
+        background-color:$black;
+        color: $white;
+    }
+	&.active{
+		color: $dark_red;
+		&:hover{
+			color: $white;
+		}
+	}
+}
+.btn-save-box{
+    @extend %btn;
+    background-color:transparent;
+    border: 1px solid $black;
+    color: $black;
+	width: 209px;
+    height: 40px;
+    padding-top: 9px;
+	.box-icon{
+	    width: 32px;
+		vertical-align: middle;
+		height: 25px;
+		display: inline-block;
+	}
+    &:hover{
+		background-color:$black;
+        color: $white;
+		.box-icon{
+			background: url('/imgs/box-white.svg') no-repeat;
+		}
+    }
+	&.active{
+		color: $dark_red;
+		.box-icon{
+			background: url('/imgs/box-red.svg') no-repeat;
+		}
+		&:hover{
+			background: url('/imgs/box-white.svg') $white no-repeat;
+			color: $white;
+		}
+	}
+}

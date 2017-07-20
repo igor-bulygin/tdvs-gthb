@@ -488,7 +488,10 @@ a, a:hover, a:focus {
 .no-pad {
   padding: 0 !important; }
 
-.btn-red, .btn-green, .btn-grey, .btn-black, .btn-follow, .btn-white, .btn-transparent, .button-error, .btn-save {
+.box-icon {
+  background: url("/imgs/box-black.svg") no-repeat; }
+
+.btn-red, .btn-green, .btn-grey, .btn-black, .btn-follow, .btn-white, .btn-transparent, .btn-love, .btn-save-box, .button-error, .btn-save {
   text-transform: uppercase;
   font-family: "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
@@ -498,7 +501,7 @@ a, a:hover, a:focus {
   border: none;
   text-align: center;
   cursor: pointer; }
-  .btn-red:hover, .btn-green:hover, .btn-grey:hover, .btn-black:hover, .btn-follow:hover, .btn-white:hover, .btn-transparent:hover, .button-error:hover, .btn-save:hover {
+  .btn-red:hover, .btn-green:hover, .btn-grey:hover, .btn-black:hover, .btn-follow:hover, .btn-white:hover, .btn-transparent:hover, .btn-love:hover, .btn-save-box:hover, .button-error:hover, .btn-save:hover {
     -moz-transition-property: background-color;
     -o-transition-property: background-color;
     -webkit-transition-property: background-color;
@@ -689,6 +692,53 @@ a, a:hover, a:focus {
   margin-top: 80px; }
   .regular-btn.disabled {
     background-color: #bfbfbf !important; }
+
+.share-btn {
+  cursor: pointer; }
+  .share-btn i {
+    font-size: 21px; }
+
+.btn-love {
+  background-color: transparent;
+  border: 1px solid #1C1919;
+  color: #1C1919;
+  width: 70px;
+  height: 40px;
+  padding-top: 6px; }
+  .btn-love i {
+    font-size: 27px; }
+  .btn-love:hover {
+    background-color: #1C1919;
+    color: #ffffff; }
+  .btn-love.active {
+    color: #c91c39; }
+    .btn-love.active:hover {
+      color: #ffffff; }
+
+.btn-save-box {
+  background-color: transparent;
+  border: 1px solid #1C1919;
+  color: #1C1919;
+  width: 209px;
+  height: 40px;
+  padding-top: 9px; }
+  .btn-save-box .box-icon {
+    width: 32px;
+    vertical-align: middle;
+    height: 25px;
+    display: inline-block; }
+  .btn-save-box:hover {
+    background-color: #1C1919;
+    color: #ffffff; }
+    .btn-save-box:hover .box-icon {
+      background: url("/imgs/box-white.svg") no-repeat; }
+  .btn-save-box.active {
+    color: #c91c39; }
+    .btn-save-box.active .box-icon {
+      background: url("/imgs/box-red.svg") no-repeat; }
+    .btn-save-box.active:hover {
+      background: url("/imgs/box-white.svg") #ffffff no-repeat;
+      color: #ffffff; }
 
 .products-menu ul {
   margin: 20px 0 40px;
