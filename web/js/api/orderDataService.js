@@ -11,6 +11,10 @@
 		function getOrder(params, onSuccess, onError) {
 			apiMethods.get(Order, params, onSuccess, onError);
 		}
+
+		function getOrders(params, onSuccess, onError) {
+			apiMethods.get(Order, params, onSuccess, onError);
+		}
 	}
 
 	angular
