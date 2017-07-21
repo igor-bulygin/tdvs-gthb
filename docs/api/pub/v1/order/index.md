@@ -64,13 +64,13 @@ Order
         	{
         	  "deviser_id": "999999",
         	  "shipping_info": {
-        		"type": "standard",
-        		"price": 20,
         		"company": "Seur",
         		"tracking_number": "adslfkj385749",
-        		"ETA": "",
-        		"link": "https://www.seur.es"
+        		"link": "https://www.seur.es",
+        		"ETA": ""
         	  },
+        	  "shipping_type": "standard",
+			  "shipping_price": 20,	
         	  "pack_weigth": 50,
         	  "pack_price": 545,
         	  "pack_percentage_fee": "5",

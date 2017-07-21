@@ -8,7 +8,8 @@ use yii\base\Exception;
  *
  * @property int $deviser_id
  * @property string $short_id
- * @property array $shipping_info
+ * @property string $shipping_type
+ * @property double $shipping_price
  * @property double $pack_weight
  * @property double $pack_price
  * @property double $pack_percentage_fee
@@ -41,7 +42,8 @@ class OrderPack extends EmbedModel
 		return [
 				'deviser_id',
 				'short_id',
-				'shipping_info',
+				'shipping_type',
+				'shipping_price',
 				'pack_weight',
 				'pack_price',
 				'pack_percentage_fee',
@@ -57,9 +59,9 @@ class OrderPack extends EmbedModel
 
 		$this->short_id = Utils::shortID(8);
 
-//		$this->products = [];
-
-		$this->setAttribute('shipping_info', ['type' => 'standard']);
+		if (empty($this->shipping_type)) {
+			$this->shipping_type = 'standard';
+		}
 	}
 
 	public function rules()
@@ -106,7 +108,8 @@ class OrderPack extends EmbedModel
 				self::$serializeFields = [
 					'deviser_id',
 					'deviser_info' => 'deviserInfo',
-					'shipping_info',
+					'shipping_type',
+					'shipping_price',
 					'pack_weight',
 					'pack_price',
 					'pack_percentage_fee',
@@ -129,7 +132,8 @@ class OrderPack extends EmbedModel
 				self::$serializeFields = [
 					'deviser_id',
 					'deviser_info' => 'deviserInfo',
-					'shipping_info',
+					'shipping_type',
+					'shipping_price',
 					'pack_weight',
 					'pack_price',
 					'pack_percentage_fee',
@@ -151,7 +155,8 @@ class OrderPack extends EmbedModel
 			case Order::SERIALIZE_SCENARIO_DEVISER_PACK:
 				self::$serializeFields = [
 					'deviser_id',
-					'shipping_info',
+					'shipping_type',
+					'shipping_price',
 					'pack_weight',
 					'pack_price',
 					'pack_percentage_fee',
@@ -286,7 +291,7 @@ class OrderPack extends EmbedModel
 		if ($shippingSetting) {
 			$price = $shippingSetting->getShippingSettingRange($pack_weight);
 			if ($price) {
-				switch ($this->shipping_info['type']) {
+				switch ($this->shipping_type) {
 					case 'standard':
 						$pricePack = $price['price'];
 						break;
@@ -297,10 +302,7 @@ class OrderPack extends EmbedModel
 			}
 		}
 
-		$shipping_info = $this->shipping_info;
-		$shipping_info['price'] = $pricePack;
-
-		$this->setAttribute('shipping_info',$shipping_info);
+		$this->shipping_price = $pricePack;
 	}
 
 	/**
