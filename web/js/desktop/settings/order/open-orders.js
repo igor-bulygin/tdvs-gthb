@@ -25,6 +25,12 @@
 		}
 
 		function changeDeviserState() {
+			if (vm.deviser.state==='aware') {
+				vm.deviser.state='preparing'
+			}
+			else if (vm.deviser.state==='preparing') {
+				vm.deviser.state='aware'
+			}
 			vm.radioModel = vm.deviser.state;
 		}
 	}

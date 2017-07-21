@@ -68,13 +68,13 @@ $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD
 					<div class="col-md-12">
 						<div class="col-md-12">
 							<div class="btn-group">
-								<label class="btn" ng-model="openOrdersCtrl.radioModel" uib-btn-radio="'aware'" uncheckable>I'M AWARE</label>
-								<label class="btn" ng-model="openOrdersCtrl.radioModel" uib-btn-radio="'preparing'" uncheckable>I'M PREPARING IT</label>
+								<label class="btn" ng-class="{'red-text': openOrdersCtrl.deviser.state==='aware'}" ng-model="openOrdersCtrl.radioModel" uib-btn-radio="'aware'" uncheckable>I'M AWARE</label>
+								<label class="btn" ng-class="{'red-text': openOrdersCtrl.deviser.state==='preparing'}" ng-model="openOrdersCtrl.radioModel" uib-btn-radio="'preparing'" uncheckable>I'M PREPARING IT</label>
 							</div>
 						</div>
 						<p>When you see the order, please click the button below to inform us</p>
 					</div>
-					<button class="btn btn-green" ng-click="openOrdersCtrlchangeDeviserState()" ng-enabled="openOrdersCtrl.deviser.state==='aware'">READY TO CREATE</button>
+					<button class="btn btn-green" ng-click="openOrdersCtrl.changeDeviserState()" ng-enabled="openOrdersCtrl.deviser.state==='aware'">READY TO CREATE</button>
 				</div>
 			</div>
 		</uib-accordion>
