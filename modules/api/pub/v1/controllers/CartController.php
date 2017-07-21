@@ -10,6 +10,7 @@ use Yii;
 use yii\web\BadRequestHttpException;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
+use yii\web\UnauthorizedHttpException;
 
 class CartController extends AppPublicController
 {
@@ -69,8 +70,8 @@ class CartController extends AppPublicController
 			throw new NotFoundHttpException(sprintf("Cart with id %s does not exists", $cartId));
 		}
 
-		if ($cart->order_state != Order::ORDER_STATE_CART) {
-			throw new BadRequestHttpException("This cart has an invalid state");
+		if (!$cart->isCartEditable()) {
+			throw new UnauthorizedHttpException();
 		}
 
 		$product = new OrderProduct();
@@ -101,8 +102,8 @@ class CartController extends AppPublicController
 			throw new NotFoundHttpException(sprintf("Cart with id %s does not exists", $cartId));
 		}
 
-		if ($cart->order_state != Order::ORDER_STATE_CART) {
-			throw new BadRequestHttpException("This cart has an invalid state");
+		if (!$cart->isCartEditable()) {
+			throw new UnauthorizedHttpException();
 		}
 
 		$cart->deleteProduct($priceStockId);
@@ -117,27 +118,28 @@ class CartController extends AppPublicController
 
 	public function actionUpdate($cartId)
 	{
-		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_OWNER);
-
 		$cart = Order::findOneSerialized($cartId);
 		if (!$cart) {
 			throw new BadRequestHttpException('Order not found');
 		}
 
-		if ($cart->order_state != Order::ORDER_STATE_CART) {
-			throw new BadRequestHttpException("This cart has an invalid state");
+		if (!$cart->isCartEditable()) {
+			throw new UnauthorizedHttpException();
 		}
 
 		// only validate received fields (only if we are not changing the state)
+		$cart->setScenario(Order::SCENARIO_CART);
+		
 		$validateFields = array_keys(Yii::$app->request->post());
-
-		$cart->setScenario($this->getScenarioFromRequest($cart));
 
 		if ($cart->load(Yii::$app->request->post(), '') && $cart->validate($validateFields)) {
 
 			$cart->save(false);
 
 			Yii::$app->response->setStatusCode(200); // Ok
+
+			Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_CLIENT_ORDER);
+			$cart = Order::findOneSerialized($cartId);
 			return $cart;
 		} else {
 			Yii::$app->response->setStatusCode(400); // Bad Request

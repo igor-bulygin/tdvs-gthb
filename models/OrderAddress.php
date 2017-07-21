@@ -49,7 +49,11 @@ class OrderAddress extends EmbedModel
 	public function rules()
 	{
 		return [
-				[$this->attributes(), 'safe']
+			[
+				$this->attributes(),
+				'safe',
+				'on' => Order::SCENARIO_CART,
+			],
 		];
 	}
 

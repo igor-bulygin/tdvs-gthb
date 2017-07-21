@@ -67,7 +67,13 @@ class OrderPack extends EmbedModel
 	public function rules()
 	{
 		return [
-				[$this->attributes(), 'safe']
+				[
+					[
+						'shipping_type',
+					],
+					'safe',
+					'on' => Order::SCENARIO_CART
+				]
 		];
 	}
 
