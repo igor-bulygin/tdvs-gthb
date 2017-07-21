@@ -34,7 +34,7 @@
 		controller: controller,
 		controllerAs: 'shippingMethodsCtrl',
 		bindings: {
-			state: '<',
+			state: '=?',
 			cart: '<'
 		}
 	}

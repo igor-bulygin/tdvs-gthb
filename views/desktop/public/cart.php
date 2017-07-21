@@ -21,10 +21,10 @@ $this->title = 'Todevise / Cart';
 		</div>
 		<div class="container checkout-sidebar no-pad">
 			<div class="col-md-8 no-pad">
-				<shopping-cart state="cartOverviewCtrl.cart_state" cart="cartOverviewCtrl.cart" devisers="cartOverviewCtrl.devisers" ng-if="cartOverviewCtrl.cart_state.state===1"></shopping-cart>
+				<shopping-cart cart="cartOverviewCtrl.cart"></shopping-cart>
 			</div>
 			<div class="col-md-4 no-pad summary-side bordered-left">
-				<cart-summary state="cartOverviewCtrl.cart_state" cart="cartOverviewCtrl.cart"></cart-summary>
+				<cart-summary cart="cartOverviewCtrl.cart"></cart-summary>
 			</div>
 		</div>
 </div>

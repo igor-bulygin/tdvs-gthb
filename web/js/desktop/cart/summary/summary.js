@@ -4,11 +4,6 @@
 	function controller(UtilService, cartEvents, $scope, cartService, $window) {
 		var vm = this;
 		vm.isObject = UtilService.isObject;
-		vm.proceedToCheckout = proceedToCheckout;
-
-		function proceedToCheckout() {
-			//vm.state.state = 2;
-		}
 
 		$scope.$on(cartEvents.cartUpdated, function(event, args) {
 			vm.cart = angular.copy(args.cart);
@@ -22,7 +17,7 @@
 		controller: controller,
 		controllerAs: 'summaryCtrl',
 		bindings: {
-			state: '<',
+			state: '=?',
 			cart: '<',
 		}
 	}

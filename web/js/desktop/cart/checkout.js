@@ -4,6 +4,7 @@
 	function controller(UtilService, cartDataService, localStorageUtilService, cartService) {
 		var vm = this;
 		vm.person = person;
+		vm.checkout_state = 1;
 
 		init();
 

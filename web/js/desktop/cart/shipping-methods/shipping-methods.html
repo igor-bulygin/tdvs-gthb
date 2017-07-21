@@ -1,14 +1,14 @@
 <div class="personal-info-wrapper">
 	<span class="shopping-cart-section-header">
 		2 Shipping methods & addresses
-		<div class="pull-right">
+		<div class="pull-right" ng-if="shippingMethodsCtrl.state > 1">
 			<a href="/cart" class="continue-shopping-btn">
 				<i class="ion-arrow-left-b"></i>
 					Return to cart
 			</a>
 		</div>
 	</span>
-	<div><!-- todo: include ng-if with state in this div -->
+	<div ng-if="shippingMethodsCtrl.state > 1">
 		<div ng-repeat="pack in shippingMethodsCtrl.cart.packs">
 			<div class="row">
 				<div class="col-md-1">

@@ -92,7 +92,7 @@
 		controller: controller,
 		controllerAs: 'paymentMethodsCtrl',
 		bindings: {
-			state: '<',
+			state: '=?',
 			cart: '<'
 		}
 	}
