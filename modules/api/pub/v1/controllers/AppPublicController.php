@@ -6,6 +6,7 @@ use yii\filters\AccessControl;
 use yii\filters\auth\HttpBearerAuth;
 use yii\helpers\Url;
 use yii\rest\Controller;
+use yii\web\HttpException;
 
 class AppPublicController extends Controller
 {
@@ -38,10 +39,21 @@ class AppPublicController extends Controller
 		return $behaviors;
 	}
 
+	public function runAction($id, $params = [])
+	{
+		try {
+			return parent::runAction($id, $params);
+		} catch (HttpException $e) {
+			throw $e;
+		} catch (\Exception $e) {
+			throw new HttpException(500, $e->getMessage());
+		}
+	}
+
 	public function beforeAction($action)
 	{
 		$message =
-			"\nPUBLIC API ACTION".
+			"\nPUBLIC API ACTION (before)".
 			"\n - url => " . Url::current() .
 			"\n - http_authorization => " . (isset($_SERVER["HTTP_AUTHORIZATION"]) ? $_SERVER["HTTP_AUTHORIZATION"] : "") .
 			"\n - body_params => " . \Yii::$app->request->rawBody;
@@ -53,7 +65,7 @@ class AppPublicController extends Controller
 	public function afterAction($action, $result)
 	{
 		$message =
-			"\nPUBLIC API ACTION".
+			"\nPUBLIC API ACTION (after)".
 			"\n - url => " . Url::current() .
 			"\n - http_authorization => " . (isset($_SERVER["HTTP_AUTHORIZATION"]) ? $_SERVER["HTTP_AUTHORIZATION"] : "") .
 			"\n - body_params => " . \Yii::$app->request->rawBody.

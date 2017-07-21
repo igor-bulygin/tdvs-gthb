@@ -9,6 +9,7 @@ use yii\filters\auth\HttpBearerAuth;
 use yii\helpers\Url;
 use yii\rest\Controller;
 use yii\web\BadRequestHttpException;
+use yii\web\HttpException;
 
 class AppPrivateController extends Controller
 {
@@ -41,16 +42,40 @@ class AppPrivateController extends Controller
 		return $behaviors;
 	}
 
+	public function runAction($id, $params = [])
+	{
+		try {
+			return parent::runAction($id, $params);
+		} catch (HttpException $e) {
+			throw $e;
+		} catch (\Exception $e) {
+			throw new HttpException(500, $e->getMessage());
+		}
+	}
+
 	public function beforeAction($action)
 	{
 		$message =
-			"\nPRIVATE API ACTION".
+			"\nPRIVATE API ACTION (before)".
 			"\n - url => " . Url::current() .
 			"\n - http_authorization => " . (isset($_SERVER["HTTP_AUTHORIZATION"]) ? $_SERVER["HTTP_AUTHORIZATION"] : "") .
 			"\n - body_params => " . \Yii::$app->request->rawBody;
 		\Yii::info($message, __METHOD__);
 
 		return parent::beforeAction($action);
+	}
+
+	public function afterAction($action, $result)
+	{
+		$message =
+			"\nPRIVATE API ACTION (after)".
+			"\n - url => " . Url::current() .
+			"\n - http_authorization => " . (isset($_SERVER["HTTP_AUTHORIZATION"]) ? $_SERVER["HTTP_AUTHORIZATION"] : "") .
+			"\n - body_params => " . \Yii::$app->request->rawBody.
+			"\n - status_code => " . \Yii::$app->response->statusCode;
+		\Yii::info($message, __METHOD__);
+
+		return parent::afterAction($action, $result);
 	}
 
 	/**
