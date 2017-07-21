@@ -126,6 +126,17 @@ class Order extends CActiveRecord {
 	}
 
 	public function beforeSave($insert) {
+
+		// Reorder array of packs
+		$packs = $this->packsMapping;
+		$newPacks = [];
+		$count = 0;
+		foreach ($packs as $pack) {
+			$newPacks[$count] = $pack;
+			$count++;
+		}
+		$this->packsMapping = $newPacks;
+
 		if (empty($this->order_state)) {
 			$this->order_state = Order::ORDER_STATE_CART;
 		}
@@ -470,9 +481,10 @@ class Order extends CActiveRecord {
 		$subtotal = 0;
 
 		foreach ($packs as $i => $pack) {
-			$subtotal += ($pack->pack_price);
+			$subtotal += ($pack->pack_price);[];
 		}
 
+		$this->packsMapping = $packs;
 		$this->subtotal = $subtotal;
 		$this->save();
 	}

@@ -74,6 +74,21 @@ class OrderPack extends EmbedModel
 		return $this->mapEmbeddedList('products', OrderProduct::className(), array('unsetSource' => false));
 	}
 
+	public function beforeSave($insert)
+	{
+		// Reorder array of products
+		$products = $this->productsMapping;
+		$newProducts = [];
+		$count = 0;
+		foreach ($products as $pack) {
+			$newProducts[$count] = $pack;
+			$count++;
+		}
+		$this->productsMapping = $newProducts;
+
+		return parent::beforeSave($insert);
+	}
+
 	/**
 	 * Prepare the ActiveRecord properties to serialize the objects properly, to retrieve an serialize
 	 * only the attributes needed for a query context
