@@ -44,7 +44,10 @@ class CartController extends AppPublicController
 		}
 
 		if (!Yii::$app->user->isGuest) {
-			if ($cart->person_id != Yii::$app->user->identity->short_id) {
+			if (empty($cart->person_id)) {
+				$cart->person_id = Yii::$app->user->identity->short_id;
+				$cart->save();
+			} elseif ($cart->person_id != Yii::$app->user->identity->short_id) {
 				throw new ForbiddenHttpException();
 			}
 		} else {
@@ -65,6 +68,11 @@ class CartController extends AppPublicController
 		if (empty($cart)) {
 			throw new NotFoundHttpException(sprintf("Cart with id %s does not exists", $cartId));
 		}
+
+		if ($cart->order_state != Order::ORDER_STATE_CART) {
+			throw new BadRequestHttpException("This cart has an invalid state");
+		}
+
 		$product = new OrderProduct();
 		$product->setParentObject($cart);
 
@@ -93,6 +101,10 @@ class CartController extends AppPublicController
 			throw new NotFoundHttpException(sprintf("Cart with id %s does not exists", $cartId));
 		}
 
+		if ($cart->order_state != Order::ORDER_STATE_CART) {
+			throw new BadRequestHttpException("This cart has an invalid state");
+		}
+
 		$cart->deleteProduct($priceStockId);
 		$cart->save();
 
@@ -105,7 +117,32 @@ class CartController extends AppPublicController
 
 	public function actionUpdate($cartId)
 	{
-		throw new \yii\base\Exception("Unimplemented method");
+		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_OWNER);
+
+		$cart = Order::findOneSerialized($cartId);
+		if (!$cart) {
+			throw new BadRequestHttpException('Order not found');
+		}
+
+		if ($cart->order_state != Order::ORDER_STATE_CART) {
+			throw new BadRequestHttpException("This cart has an invalid state");
+		}
+
+		// only validate received fields (only if we are not changing the state)
+		$validateFields = array_keys(Yii::$app->request->post());
+
+		$cart->setScenario($this->getScenarioFromRequest($cart));
+
+		if ($cart->load(Yii::$app->request->post(), '') && $cart->validate($validateFields)) {
+
+			$cart->save(false);
+
+			Yii::$app->response->setStatusCode(200); // Ok
+			return $cart;
+		} else {
+			Yii::$app->response->setStatusCode(400); // Bad Request
+			return ["errors" => $cart->errors];
+		}
 	}
 
 	public function actionReceiveToken($cartId)
