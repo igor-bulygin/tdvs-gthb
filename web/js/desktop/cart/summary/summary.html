@@ -1,16 +1,16 @@
 <span class="shopping-cart-title" ng-if="summaryCtrl.state.state<4">Cart summary</span>
 
 <div ng-if="summaryCtrl.state.state > 1">
-	<div ng-repeat="deviser in summaryCtrl.devisers">
-		<span span class="deviser-name-item summary-cart-wrapper" ng-bind="deviser.deviser_name"></span>
-		<div class="summary-cart-wrapper summary-white-item" ng-repeat="product in summaryCtrl.cart.products | filter: {deviser_id: deviser.deviser_id}">
+	<div ng-repeat="pack in summaryCtrl.cart.packs">
+		<span class="deviser-name-item summary-cart-wrapper" ng-bind="pack.deviser_name"></span>
+		<div class="summary-cart-wrapper summary-white-item" ng-repeat="product in pack.products | filter: {deviser_id: pack.deviser_id}">
 			<div ng-if="summaryCtrl.state.state === 4" class="img-checkout-wrapper col-md-2">
 				<img ng-src="{{product.product_photo}}" ng-alt="product.product_name" ng-title="product.product_name">
 			</div>
 			<div>
 				<div>
-						<span class="bold"><span class="ng-class:{'product-name': summaryCtrl.state.state<4}" ng-bind="product.product_name"></span></span> <!-- TODO: Set bold font class -->
-						<span class="pull-right text-green bold">€&nbsp;<span ng-bind="product.quantity * product.price"></span></span>
+					<span class="bold"><span class="ng-class:{'product-name': summaryCtrl.state.state<4}" ng-bind="product.product_name"></span></span> <!-- TODO: Set bold font class -->
+					<span class="pull-right text-green bold">€&nbsp;<span ng-bind="product.quantity * product.price"></span></span>
 				</div>
 				<div class="ng-class:{'summary-row': summaryCtrl.state.state < 4}">
 					<span>Ud: <span ng-bind="product.quantity"></span></span>

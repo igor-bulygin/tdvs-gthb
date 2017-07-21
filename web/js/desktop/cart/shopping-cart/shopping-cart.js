@@ -10,7 +10,6 @@
 		function deleteItem(price_stock_id) {
 			function onDeleteItemSuccess(data) {
 				vm.cart = angular.copy(data);
-				vm.devisers = cartService.parseDevisersFromProducts(vm.cart);
 				cartService.parseTags(vm.cart);
 				$rootScope.$broadcast(cartEvents.cartUpdated, {cart: vm.cart});
 			}

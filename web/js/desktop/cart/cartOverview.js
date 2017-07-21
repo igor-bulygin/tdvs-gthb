@@ -28,7 +28,6 @@
 			function onGetCartSuccess(data) {
 				vm.cart = angular.copy(data);
 				cartService.parseTags(vm.cart);
-				vm.devisers = cartService.parseDevisersFromProducts(vm.cart);
 			}
 
 			function onGetCartError(err) {

@@ -26,6 +26,8 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 	<div class="container checkout-sidebar no-pad">
 		<div class="col-md-8 no-pad">
 			<personal-info cart="checkoutCtrl.cart"></personal-info>
+			<shipping-methods cart="checkoutCtrl.cart"></shipping-methods>
+			<payment-methods cart="checkoutCtrl.cart"></payment-methods>
 		</div>
 		<div class="col-md-4 no-pad summary-side bordered-left">
 			<cart-summary cart="checkoutCtrl.cart"></cart-summary>

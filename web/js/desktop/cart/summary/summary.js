@@ -13,7 +13,6 @@
 		$scope.$on(cartEvents.cartUpdated, function(event, args) {
 			vm.cart = angular.copy(args.cart);
 			cartService.parseTags(vm.cart);
-			vm.devisers = cartService.parseDevisersFromProducts(vm.cart);
 		});
 
 	}
@@ -25,7 +24,6 @@
 		bindings: {
 			state: '<',
 			cart: '<',
-			devisers: '<'
 		}
 	}
 

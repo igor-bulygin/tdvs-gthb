@@ -2,28 +2,7 @@
 	"use strict";
 
 	function service(tagDataService, UtilService) {
-		this.parseDevisersFromProducts = parseDevisersFromProducts;
 		this.parseTags = parseTags;
-
-		function parseDevisersFromProducts(cart) {
-			var devisers = [];
-			cart.packs.forEach(function(pack) {
-				pack.products.forEach(function(product) {
-					var isDeviserInArray = false;
-					for(var i = 0; i < devisers.length; i++) {
-						if(devisers[i].deviser_id === product.deviser_id)
-							isDeviserInArray = true;
-					}
-					if(!isDeviserInArray) {
-						devisers.push({
-							deviser_id: product.deviser_id,
-							deviser_name: product.deviser_name
-						});
-					}
-				})
-			})
-			return devisers;
-		}
 
 		function parseTags(cart){
 
@@ -37,13 +16,16 @@
 									values: []
 								}
 								if(key === 'size') {
-									obj.name = 'Size'
+									obj.name = 'Size';
+									obj.stock_and_price = true;
 									obj.values.push(product.options[key]);
 									product.tags.push(obj);
 									break;
 								}
 								else if(key === data.items[i].id) {
 									obj.name = data.items[i].name;
+									if(data.items[i].stock_and_price)
+										obj.stock_and_price = data.items[i].stock_and_price;
 									if(data.items[i].name==='Size') {
 										for(var j = 0; j < product.options[key].length; j++){
 											var str = product.options[key][j]['value'] + ' ' + product.options[key][j]['metric_unit'];

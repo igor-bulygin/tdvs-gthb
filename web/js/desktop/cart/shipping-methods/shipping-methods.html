@@ -1,0 +1,60 @@
+<div class="personal-info-wrapper">
+	<span class="shopping-cart-section-header">
+		2 Shipping methods & addresses
+		<div class="pull-right">
+			<a href="/cart" class="continue-shopping-btn">
+				<i class="ion-arrow-left-b"></i>
+					Return to cart
+			</a>
+		</div>
+	</span>
+	<div><!-- todo: include ng-if with state in this div -->
+		<div ng-repeat="pack in shippingMethodsCtrl.cart.packs">
+			<div class="row">
+				<div class="col-md-1">
+					<a ng-src="pack.deviser.url">
+						<img ng-src="{{pack.deviser_info.photo}}" ng-attr-alt="{{pack.deviser_info.name}}" ng-attr-title="{{pack.deviser_info.name}}" style="max-width: 50px;">
+					</a>
+				</div>
+				<div class="col-md-7">
+					<h4 ng-bind="pack.deviser_info.name"></h4>
+				</div>
+				<div class="col-md-2">
+					<div class="radio radio-inline" ng-if="pack.deviser_info.shipping_time">
+						<input type="radio" checked ng-value="'standard'" ng-model="pack.shipping_type" name="standard_shipping" id="standard_shipping" ng-change="shippingMethodsCtrl.setShippingPriceTime(pack)">
+						<label for="standard_shipping">Standard</label>
+					</div>
+					<div class="radio radio-inline" ng-if="pack.deviser_info.shipping_express_time">
+						<input type="radio" ng-value="'express'" ng-model="pack.shipping_type" name="express_shipping" id="express_shipping" ng-change="shippingMethodsCtrl.setShippingPriceTime(pack)">
+						<label for="express_shipping">Express</label>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<p>
+						Delivery within <span ng-bind="pack.delivery_time || pack.deviser_info.shipping_time"></span> days
+						<span ng-if="pack.currency" ng-bind="pack.currency"></span><span ng-bind="pack.delivery_price || pack.deviser_info.price"></span>
+					</p>
+				</div>
+			</div>
+			<div class="row" style="padding-top:10px;">
+				<div ng-repeat="product in pack.products">
+					<div class="col-md-2">
+						<img ng-src="{{product.product_info.photo}}" ng-attr-alt="product.product_info.name" ng-attr-title="product.product_info.name" style="max-width: 100px;">
+					</div>
+					<div class="col-md-2">
+						<p ng-bind="product.product_info.name"></p>
+						<p><span class="bold">Quantity:</span><span ng-bind="product.quantity"></span></p>
+						<p ng-repeat="tag in product.tags">
+							<span class="bold" ng-bind="tag.name"></span>:&nbsp;
+							<span ng-repeat="value in tag.values track by $index">
+								<span ng-if="!shippingMethodsCtrl.isObject(value)">
+									<span ng-if="$index>0">/&nbsp;</span><span ng-bind="(value | capitalize)"></span>
+								</span>
+							</span>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
