@@ -46,6 +46,9 @@ class AppPublicController extends Controller
 		} catch (HttpException $e) {
 			throw $e;
 		} catch (\Exception $e) {
+			if (YII_DEBUG) {
+				throw $e;
+			}
 			throw new HttpException(500, $e->getMessage());
 		}
 	}
