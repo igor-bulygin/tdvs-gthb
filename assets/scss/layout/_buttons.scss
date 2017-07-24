@@ -242,13 +242,16 @@
 		}
     }
 	&.active{
-		color: $dark_red;
+		color: $black;
 		.box-icon{
-			background: url('/imgs/box-red.svg') no-repeat;
+			background: url('/imgs/box-red.svg') transparent no-repeat;
 		}
 		&:hover{
-			background: url('/imgs/box-white.svg') $white no-repeat;
 			color: $white;
+			background-color: $black;
+			.box-icon{
+				background: url('/imgs/box-white.svg') transparent no-repeat;
+			}
 		}
 	}
 }

@@ -733,12 +733,14 @@ a, a:hover, a:focus {
     .btn-save-box:hover .box-icon {
       background: url("/imgs/box-white.svg") no-repeat; }
   .btn-save-box.active {
-    color: #c91c39; }
+    color: #1C1919; }
     .btn-save-box.active .box-icon {
-      background: url("/imgs/box-red.svg") no-repeat; }
+      background: url("/imgs/box-red.svg") transparent no-repeat; }
     .btn-save-box.active:hover {
-      background: url("/imgs/box-white.svg") #ffffff no-repeat;
-      color: #ffffff; }
+      color: #ffffff;
+      background-color: #1C1919; }
+      .btn-save-box.active:hover .box-icon {
+        background: url("/imgs/box-white.svg") transparent no-repeat; }
 
 .products-menu ul {
   margin: 20px 0 40px;
