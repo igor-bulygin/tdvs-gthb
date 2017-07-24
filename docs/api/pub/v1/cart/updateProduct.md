@@ -15,16 +15,13 @@ Example about how to call to Web Service to update a product to the cart
 * `:cartId`: Id of the cart that want to update
 * `:priceStockId`: Id of the price stock item that want to update
 
-
 **Request body**:
 * `product_id`: Product identifier (Required)
 * `price_stock_id`: Price&stock identifier (Required)
 * `quantity`: Quantity of items (Required)
 
-
 **Response body**:
-```
-cart object (view getCart.md)
-```
+
+See the structure of the complete item in view.md 
 
 

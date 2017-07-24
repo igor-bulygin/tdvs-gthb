@@ -19,8 +19,6 @@ Example about how to call to Web Service to add a product to the cart
 * `price_stock_id`: Price&stock identifier (Required)
 * `quantity`: Quantity of items (Required)
 
-
 **Response body**:
-```
-cart object (view getCart.md)
-```
+
+See the structure of the complete item in view.md 
