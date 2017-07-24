@@ -28,6 +28,7 @@ class CartController extends AppPublicController
 		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_CLIENT_ORDER);
 		$cart = Order::findOneSerialized($cart->short_id);
 		$cart->setSubDocumentsForSerialize();
+
 		return $cart;
 	}
 
@@ -59,6 +60,7 @@ class CartController extends AppPublicController
 		Yii::$app->response->setStatusCode(200); // Ok
 
 		$cart->setSubDocumentsForSerialize();
+
 		return $cart;
 	}
 
@@ -91,6 +93,7 @@ class CartController extends AppPublicController
 			Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_CLIENT_ORDER);
 			$cart = Order::findOneSerialized($cartId);
 			$cart->setSubDocumentsForSerialize();
+
 			return $cart;
 		} else {
 			Yii::$app->response->setStatusCode(400); // Bad Request
@@ -122,6 +125,7 @@ class CartController extends AppPublicController
 		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_CLIENT_ORDER);
 		$cart = Order::findOneSerialized($cartId);
 		$cart->setSubDocumentsForSerialize();
+
 		return $cart;
 	}
 
@@ -178,10 +182,12 @@ class CartController extends AppPublicController
 			Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_CLIENT_ORDER);
 			$cart = Order::findOneSerialized($cartId);
 			$cart->setSubDocumentsForSerialize();
+
 			return $cart;
 
 		} else {
 			Yii::$app->response->setStatusCode(400); // Bad Request
+
 			return ["errors" => $cart->errors];
 		}
 	}
@@ -347,6 +353,7 @@ class CartController extends AppPublicController
 			Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_CLIENT_ORDER);
 			$cart = Order::findOneSerialized($cartId);
 			$cart->setSubDocumentsForSerialize();
+
 			return $cart;
 		} catch (\Exception $e) {
 			$message = sprintf("Error in receive-token: " . $e->getMessage());
