@@ -7,7 +7,7 @@ namespace app\models;
  * @property string $last_name
  * @property string $vat_id
  * @property string $email
- * @property string $phone
+ * @property array $phone
  * @property string $country
  * @property string $city
  * @property string $address
@@ -32,17 +32,18 @@ class OrderAddress extends EmbedModel
 	 */
 	protected static $retrieveExtraFields = [];
 
-	public function attributes() {
+	public function attributes()
+	{
 		return [
-				'first_name',
-				'last_name',
-				'vat_id',
-				'email',
-				'phone',
-				'country',
-				'city',
-				'address',
-				'zipcode',
+			'first_name',
+			'last_name',
+			'vat_id',
+			'email',
+			'phone',
+			'country',
+			'city',
+			'address',
+			'zipcode',
 		];
 	}
 
@@ -57,4 +58,33 @@ class OrderAddress extends EmbedModel
 		];
 	}
 
+	/**
+	 * Returns the full name of customer, without spaces
+	 *
+	 * @return string
+	 */
+	public function getFullName()
+	{
+		return trim($this->first_name . ' ' . $this->last_name);
+	}
+
+	/**
+	 * Returns phone formmated
+	 *
+	 * @return string
+	 */
+	public function getPhone()
+	{
+		if (!isset($this->phone['number'])) {
+			return null;
+		}
+
+		$phone1 = '';
+		if (isset($this->phone['prefix'])) {
+			$phone1 .= '+' . $this->phone['prefix'] . ' ';
+		}
+		$phone1 .= $this->phone['number'];
+
+		return $phone1;
+	}
 }

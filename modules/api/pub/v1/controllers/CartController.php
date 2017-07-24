@@ -240,11 +240,25 @@ class CartController extends AppPublicController
 
 			$packs = $cart->getPacks();
 
+			$shippingAddress = $cart->getShippingAddress();
+			$billingAddress = $cart->getBillingAddress();
+
 			// TODO: check if customer already exists in stripe
 
 			// Create a customer in stripe for the received token
 			$customer = \Stripe\Customer::create([
 				'email' => $person->credentials['email'],
+				'business_vat_id' => $billingAddress->vat_id,
+				'shipping' => [
+					'address' => [
+						'line1' => $shippingAddress->address,
+						'city' => $shippingAddress->city,
+						'country' => $shippingAddress->country,
+						'postal_code' => $shippingAddress->zipcode,
+					],
+					'name' => $shippingAddress->getFullName(),
+					'phone' => $shippingAddress->getPhone(),
+				],
 				'source' => $token,
 			]);
 
@@ -300,8 +314,8 @@ class CartController extends AppPublicController
 			}
 
 			// Save charges responses and payment_info in the order
-			$cart->setAttribute('payment_info', $currentPaymentInfo);
-			$cart->setAttribute('charges', $charges);
+//			$cart->setAttribute('payment_info', $currentPaymentInfo);
+//			$cart->setAttribute('charges', $charges);
 			$cart->order_state = Order::ORDER_STATE_PAID;
 			$cart->save();
 

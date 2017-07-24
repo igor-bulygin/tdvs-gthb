@@ -101,6 +101,10 @@ class Order extends CActiveRecord {
 			$this->order_date = new MongoDate();
 		}
 
+		if (empty($this->billing_address)) {
+			$this->billing_address = $this->shipping_address;
+		}
+
 		if (empty($this->created_at)) {
 			$this->created_at = new MongoDate();
 		}
