@@ -27,6 +27,13 @@ $this->title = 'Todevise / Elements';
 				<div class="small-text">Select an option</div>
 				<span class="text-title mt-20">Menu topbar</span>
 				<div class="topbar-item">Boxes</div>
+				<span class="title-underlined mt-20">Link colours</span>
+				<div>
+					<a href="" class="link-red">LINK</a>
+				</div>
+				<div>
+					<a href="" class="link-red">Another link</a>
+				</div>
 			</div>
 		</div>
 		<div class="row mt-40">
@@ -355,6 +362,25 @@ $this->title = 'Todevise / Elements';
 					</i>
 					<i class="ion-android-chat grey-icon"></i>
 					<i class="ion-trash-a grey-icon"></i>					
+				</div>
+			</div>
+		</div>
+		<div class="row mt-30 mb-100">
+			<div class="col-md-12">
+				<span class="title-underlined">PALETA DE COLOR</span>
+				<div>
+					<span class="text-black">Black #1c1919</span>
+					<div class="bg-black" style="margin:0 10px 0 10px;vertical-align:middle;width:60px;height:30px;display:inline-block;"></div>
+					<span class="text-dark-red">Dark Red #c91c39</span>
+					<div class="bg-dark-red" style="margin:0 10px 0 10px;vertical-align:middle;width:60px;height:30px;display:inline-block;"></div>
+					<span class="text-red">Red #F7284B</span>
+					<div class="bg-red" style="margin:0 10px 0 10px;vertical-align:middle;width:60px;height:30px;display:inline-block;"></div>
+					<span class="text-dark-grey">Dark Grey #939393</span>
+					<div class="bg-dark-grey" style="margin:0 10px 0 10px;vertical-align:middle;width:60px;height:30px;display:inline-block;"></div>
+					<span class="text-grey">Grey #bfbfbf</span>
+					<div class="bg-grey" style="margin:0 10px 0 10px;vertical-align:middle;width:60px;height:30px;display:inline-block;"></div>
+					<span class="text-yellow">Yellow #ffd55d</span>
+					<div class="bg-yellow" style="margin:0 10px 0 10px;vertical-align:middle;width:60px;height:30px;display:inline-block;"></div>
 				</div>
 			</div>
 		</div>
