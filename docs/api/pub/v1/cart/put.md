@@ -1,10 +1,10 @@
-### Cart - View - POST
+### Cart - View - PUT
 
 Example about how to call to Web Service to update the cart
 
 **URL**: `/api/pub/v1/cart/<:cartId>`
 
-**Method**: `POST`
+**Method**: `PUT`
 
 **Response codes**:
 * `200`: Success
