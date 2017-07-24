@@ -34,7 +34,6 @@ class SubDocumentValidator extends Validator
 			throw new InvalidConfigException('Owner model must inherit CActiveRecord.');
 		}
 
-		$attribute = $model->buildSubDocumentName($attribute);
 		if (!$model->hasSubdocument($attribute)) {
 			throw new InvalidConfigException('Model ' . get_class($model) . ' does not have defined a subdocument in attribute ' . $attribute);
 		}

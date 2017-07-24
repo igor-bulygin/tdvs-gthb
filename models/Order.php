@@ -121,6 +121,13 @@ class Order extends CActiveRecord {
 				'safe',
 				'on' => self::SCENARIO_CART,
 			],
+			[
+				[
+					'packs',
+				],
+				'app\validators\SubDocumentValidator',
+				'on' => self::SCENARIO_CART,
+			],
 		];
 	}
 
