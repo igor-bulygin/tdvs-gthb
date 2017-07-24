@@ -77,7 +77,6 @@ class EmbedDocValidator extends Validator
             throw new InvalidConfigException('Owner model must implement "yii2tech\embedded\ContainerInterface" interface.');
         }
 
-
         $mapping = $model->getEmbeddedMapping($attribute);
         $embedded = $model->getEmbedded($attribute);
 

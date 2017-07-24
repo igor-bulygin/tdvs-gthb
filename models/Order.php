@@ -20,16 +20,14 @@ use yii\mongodb\ActiveQuery;
  * @property array charges
  * @property MongoDate created_at
  * @property MongoDate updated_at
- *
- * Mappings:
- * @property OrderAddress $shippingAddressMapping
- * @property OrderAddress $billingAddressMapping
- * @property OrderPack[] $packsMapping
  */
 class Order extends CActiveRecord {
 
 	const SERIALIZE_SCENARIO_CLIENT_ORDER= 'serialize_scenario_client_order';
 	const SERIALIZE_SCENARIO_DEVISER_PACK = 'serialize_scenario_deviser_pack';
+
+	const SCENARIO_CART = 'scenario-cart';
+	const SCENARIO_ORDER = 'scenario-order';
 
     const ORDER_STATE_CART = 'order_state_cart';
     const ORDER_STATE_PAID = 'order_state_paid';
@@ -93,50 +91,8 @@ class Order extends CActiveRecord {
 
 	}
 
-    public function embedShippingAddressMapping()
-    {
-        return $this->mapEmbedded('shipping_address', OrderAddress::className(), array('unsetSource' => false));
-    }
-
-    public function embedBillingAddressMapping()
-    {
-        return $this->mapEmbedded('billing_address', OrderAddress::className(), array('unsetSource' => false));
-    }
-
-    public function embedPacksMapping()
-    {
-        return $this->mapEmbeddedList('packs', OrderPack::className(), array('unsetSource' => false));
-    }
-
-	public function setParentOnEmbbedMappings()
+	public function beforeSave($insert)
 	{
-		$this->shippingAddressMapping->setParentObject($this);
-		$this->billingAddressMapping->setParentObject($this);
-
-		foreach ($this->packsMapping as $item) {
-			$item->setParentObject($this);
-		}
-	}
-
-	public function afterFind()
-	{
-		parent::afterFind();
-
-		$this->setAttribute('packs', $this->packsMapping);
-	}
-
-	public function beforeSave($insert) {
-
-		// Reorder array of packs
-		$packs = $this->packsMapping;
-		$newPacks = [];
-		$count = 0;
-		foreach ($packs as $pack) {
-			$newPacks[$count] = $pack;
-			$count++;
-		}
-		$this->packsMapping = $newPacks;
-
 		if (empty($this->order_state)) {
 			$this->order_state = Order::ORDER_STATE_CART;
 		}
@@ -154,17 +110,19 @@ class Order extends CActiveRecord {
 	}
 
     public function rules()
-    {
-        return [
-            [
-                [
-                    'shipping_address',
-                    'billing_address',
-                ],
-                'safe',
-            ],
-        ];
-    }
+	{
+		return [
+			[
+				[
+					'shipping_address',
+					'billing_address',
+					'packs',
+				],
+				'safe',
+				'on' => self::SCENARIO_CART,
+			],
+		];
+	}
 
 	/**
 	 * Prepare the ActiveRecord properties to serialize the objects properly, to retrieve an serialize
@@ -178,10 +136,10 @@ class Order extends CActiveRecord {
 			case self::SERIALIZE_SCENARIO_PREVIEW:
 			case self::SERIALIZE_SCENARIO_PUBLIC:
 			case self::SERIALIZE_SCENARIO_ADMIN:
+			case self::SERIALIZE_SCENARIO_OWNER:
 				static::$serializeFields = [
 					'id' => 'short_id',
 					'person_id',
-					'person_info' => 'personInfo',
 					'subtotal',
 					'order_state',
 					'order_date',
@@ -228,27 +186,6 @@ class Order extends CActiveRecord {
 					'person_info' => 'personInfo',
 //					'subtotal',
 //					'order_state',
-					'order_date',
-					'shipping_address',
-					'billing_address',
-					'packs',
-
-//					'payment_info',
-//					'charges',
-				];
-				static::$retrieveExtraFields = [
-				];
-
-
-				static::$translateFields = false;
-				break;
-
-			case self::SERIALIZE_SCENARIO_OWNER:
-				static::$serializeFields = [
-					'id' => 'short_id',
-					'person_id',
-					'subtotal',
-					'order_state',
 					'order_date',
 					'shipping_address',
 					'billing_address',
@@ -378,18 +315,13 @@ class Order extends CActiveRecord {
 			// Remove all non matching packs with deviser_id
 			foreach ($orders as $order) {
 				/* @var $order Order */
-				$packs = $order->packs;
-				$indexes = [];
+				$packs = $order->getPacks();
 				foreach ($packs as $i => $pack) {
 					if ($pack->deviser_id != $criteria['deviser_id']) {
-						$indexes[] = $i;
-
+						unset($packs[$i]);
 					}
 				}
-				foreach ($indexes as $index) {
-					$packs->offsetUnset($index);
-				}
-				$order->setAttribute('packs', $packs);
+				$order->setPacks($packs);
 			}
 		}
 
@@ -421,11 +353,11 @@ class Order extends CActiveRecord {
 
 	public function addProduct(OrderProduct $orderProduct) {
 		$product = Product::findOneSerialized($orderProduct->product_id); /* @var Product $product */
-		if (empty($orderProduct)) {
+		if (empty($product)) {
 			throw new Exception(sprintf("Product with id %s does not exists", $orderProduct->product_id));
 		}
 
-		$packs = $this->packsMapping;
+		$packs = $this->getPacks();
 
 		$found = false;
 		foreach ($packs as $onePack) {
@@ -445,48 +377,42 @@ class Order extends CActiveRecord {
 			$pack->currency = $deviser->settingsMapping->currency;
 			$pack->weight_measure = $deviser->settingsMapping->weight_measure;
 			$pack->addProduct($orderProduct);
-
-			$this->packsMapping[] = $pack;
+			$packs[] = $pack;
 		}
+		$this->setPacks($packs);
 
 		$this->recalculateTotals();
+		$this->save();
 	}
 
 	public function deleteProduct($priceStockId) {
 
-    	$packs = $this->packsMapping;
+    	$packs = $this->getPacks();
     	foreach ($packs as $pack) {
     		$pack->deleteProduct($priceStockId);
 		}
 
     	// Remove empty packs
-		$indexes = [];
 		foreach ($packs as $i => $pack) {
-			if (count($pack->productsMapping) == 0) {
-				$indexes[] = $i;
+			if (count($pack->getProducts()) == 0) {
+				unset($packs[$i]);
 			}
 		}
-		foreach ($indexes as $index) {
-			$packs->offsetUnset($index);
-		}
-
-		$this->packsMapping = $packs;
+		$this->setPacks($packs);
 
 		$this->recalculateTotals();
+		$this->save();
 	}
 
 	public function recalculateTotals() {
-    	$this->refreshFromEmbedded();
-		$packs = $this->packsMapping;
+		$packs = $this->getPacks();
 		$subtotal = 0;
 
 		foreach ($packs as $i => $pack) {
 			$subtotal += ($pack->pack_price);[];
 		}
 
-		$this->packsMapping = $packs;
 		$this->subtotal = $subtotal;
-		$this->save();
 	}
 
 	/**
@@ -532,6 +458,88 @@ class Order extends CActiveRecord {
 		}
 
 		return '';
+	}
+
+
+
+	/**
+	 * Returns TRUE if the person can be edited by the current user
+	 *
+	 * @return bool
+	 */
+	public function isCartEditable()
+	{
+		if ($this->order_state != Order::ORDER_STATE_CART) {
+			return false;
+		}
+		if (\Yii::$app->user->isGuest) {
+			if (!empty($this->person_id)) {
+				return false;
+			}
+		} elseif (\Yii::$app->user->identity->short_id != $this->person_id) {
+			return false;
+		}
+
+		return true;
+	}
+
+	public function subDocumentsConfig() {
+		return [
+			'packs' => [
+				'class' => OrderPack::className(),
+				'type' => 'list',
+			],
+			'shipping_address' => [
+				'class' => OrderAddress::className(),
+				'type' => 'single',
+			],
+			'billing_address' => [
+				'class' => OrderAddress::className(),
+				'type' => 'single',
+			],
+		];
+	}
+
+	/**
+	 * @return OrderPack[]
+	 */
+	public function getPacks()
+	{
+		$embedded =$this->getSubDocument('packs');
+
+		return $embedded;
+	}
+
+	public function setPacks($value) {
+		$this->setSubDocument('packs', $value);
+	}
+
+	/**
+	 * @return OrderAddress
+	 */
+	public function getShippingAddress()
+	{
+		$embedded = $this->getSubDocument('shipping_address');
+
+		return $embedded;
+	}
+
+	public function setShippingAddress($value) {
+		$this->setSubDocument('shipping_address', $value);
+	}
+
+	/**
+	 * @return OrderAddress
+	 */
+	public function getBillingAddress()
+	{
+		$embedded = $this->getSubDocument('billing_address');
+
+		return $embedded;
+	}
+
+	public function setBillingAddress($value) {
+		$this->setSubDocument('billing_address', $value);
 	}
 
 }

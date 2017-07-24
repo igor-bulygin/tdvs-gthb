@@ -58,6 +58,8 @@ class CartController extends AppPublicController
 		}
 		Yii::$app->response->setStatusCode(200); // Ok
 
+		$cart->setSubDocumentsForSerialize();
+
 		return $cart;
 	}
 
@@ -80,12 +82,13 @@ class CartController extends AppPublicController
 		if ($product->load(Yii::$app->request->post(), '') && $product->validate()) {
 
 			$cart->addProduct($product);
-			$cart->save();
 
 			Yii::$app->response->setStatusCode(201); // Created
 
 			Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_CLIENT_ORDER);
 			$cart = Order::findOneSerialized($cartId);
+			$cart->setSubDocumentsForSerialize();
+
 			return $cart;
 		} else {
 			Yii::$app->response->setStatusCode(400); // Bad Request
@@ -107,7 +110,6 @@ class CartController extends AppPublicController
 		}
 
 		$cart->deleteProduct($priceStockId);
-		$cart->save();
 
 		Yii::$app->response->setStatusCode(200); // Ok
 
@@ -129,10 +131,34 @@ class CartController extends AppPublicController
 
 		// only validate received fields (only if we are not changing the state)
 		$cart->setScenario(Order::SCENARIO_CART);
-		
-		$validateFields = array_keys(Yii::$app->request->post());
 
-		if ($cart->load(Yii::$app->request->post(), '') && $cart->validate($validateFields)) {
+		// In this method, we only update the next properties:
+		// - shipping_address
+		// - billing_address
+		// - packs.shipping_type
+
+		$post = Yii::$app->request->post();
+		if (isset($post['shipping_address'])) {
+			$cart->shipping_address = $post['shipping_address'];
+		}
+		if (isset($post['billing_address'])) {
+			$cart->billing_address = $post['billing_address'];
+		}
+		if (isset($post['packs'])) {
+			$packs = $cart->getPacks();
+			foreach ($post['packs'] as $packPost) {
+				if (isset($packPost['short_id']) && isset($packPost['shipping_type'])) {
+					foreach ($packs as $packActual) {
+						if ($packActual->short_id == $packPost['short_id']) {
+							$packActual->shipping_type = $packPost['shipping_type'];
+						}
+					}
+				}
+			}
+			$cart->setPacks($packs);
+		}
+
+		if ($cart->validate()) {
 
 			$cart->save(false);
 
@@ -140,7 +166,9 @@ class CartController extends AppPublicController
 
 			Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_CLIENT_ORDER);
 			$cart = Order::findOneSerialized($cartId);
+			$cart->setSubDocumentsForSerialize();
 			return $cart;
+
 		} else {
 			Yii::$app->response->setStatusCode(400); // Bad Request
 			return ["errors" => $cart->errors];
@@ -294,6 +322,9 @@ class CartController extends AppPublicController
 
 			Yii::$app->response->setStatusCode(200); // Created
 
+			Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_CLIENT_ORDER);
+			$cart = Order::findOneSerialized($cartId);
+			$cart->setSubDocumentsForSerialize();
 			return $cart;
 		} catch (\Exception $e) {
 			$message = sprintf("Error in receive-token: " . $e->getMessage());

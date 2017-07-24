@@ -2,7 +2,8 @@
 namespace app\models;
 
 use app\helpers\Utils;
-use yii\base\Exception;
+use yii\web\BadRequestHttpException;
+use yii\web\NotFoundHttpException;
 
 /**
  *
@@ -16,8 +17,6 @@ use yii\base\Exception;
  * @property string $currency
  * @property string $weight_measure
  * @property array $products
- *
- * @property OrderProduct[] $productsMapping
  *
  * @method Order getParentObject()
  */
@@ -71,30 +70,11 @@ class OrderPack extends EmbedModel
 					[
 						'shipping_type',
 					],
-					'safe',
+					'in',
+					'range' => ['standard', 'express'],
 					'on' => Order::SCENARIO_CART
 				]
 		];
-	}
-
-	public function embedProductsMapping()
-	{
-		return $this->mapEmbeddedList('products', OrderProduct::className(), array('unsetSource' => false));
-	}
-
-	public function beforeSave($insert)
-	{
-		// Reorder array of products
-		$products = $this->productsMapping;
-		$newProducts = [];
-		$count = 0;
-		foreach ($products as $pack) {
-			$newProducts[$count] = $pack;
-			$count++;
-		}
-		$this->productsMapping = $newProducts;
-
-		return parent::beforeSave($insert);
 	}
 
 	/**
@@ -113,7 +93,6 @@ class OrderPack extends EmbedModel
 			case self::SERIALIZE_SCENARIO_ADMIN:
 				self::$serializeFields = [
 					'deviser_id',
-					'deviser_info' => 'deviserInfo',
 					'shipping_type',
 					'shipping_price',
 					'pack_weight',
@@ -208,7 +187,7 @@ class OrderPack extends EmbedModel
 			'url' => $deviser->getMainLink(),
 		];
 
-		$shippingSetting = $deviser->getShippingSettingByCountry($order->shippingAddressMapping->country);
+		$shippingSetting = $deviser->getShippingSettingByCountry($order->getShippingAddress()->country);
 
 		if ($shippingSetting) {
 			$price = $shippingSetting->getShippingSettingRange($this->pack_weight);
@@ -248,43 +227,48 @@ class OrderPack extends EmbedModel
 		$product = $orderProduct->getProduct();
 		$priceStock = $product->getPriceStockItem($orderProduct->price_stock_id);
 		if (empty($priceStock)) {
-			throw new Exception(sprintf("Price stock item with id %s does not exists", $orderProduct->price_stock_id));
+			throw new NotFoundHttpException(sprintf("Price stock item with id %s does not exists", $orderProduct->price_stock_id));
 		}
 
 		$found = false;
-		foreach ($this->productsMapping as $productMapping) {
-			if ($productMapping->price_stock_id == $orderProduct->price_stock_id) {
-
-				$newQuantity = $productMapping->quantity + $orderProduct->quantity;
+		$products = $this->getProducts();
+		foreach ($products as $item) {
+			if ($item->price_stock_id == $orderProduct->price_stock_id) {
+				$newQuantity = $item->quantity + $orderProduct->quantity;
 				if ($newQuantity > $priceStock['stock']) {
-					throw new Exception(sprintf("Stock %s unavailable. Available stock is %s", $newQuantity, $priceStock['stock']));
+					throw new BadRequestHttpException(sprintf("Stock %s unavailable. Available stock is %s", $newQuantity, $priceStock['stock']));
 				}
-				$productMapping->quantity = $newQuantity;
+				$item->quantity = $newQuantity;
 				$found = true;
 			}
 		}
 		if (!$found) {
+			if ($orderProduct->quantity > $priceStock['stock']) {
+				throw new BadRequestHttpException(sprintf("Stock %s unavailable. Available stock is %s", $orderProduct->quantity, $priceStock['stock']));
+			}
+
 			$orderProduct->price = $priceStock['price'];
 			$orderProduct->weight = $priceStock['weight'];
 			$orderProduct->options = $priceStock['options'];
-			$this->productsMapping[] = $orderProduct;
+			$products[] = $orderProduct;
 		}
+		$this->setProducts($products);
 
 		$this->recalculateTotals();
 	}
 
 	public function recalculateTotals() {
-		$this->refreshFromEmbedded();
 		$order = $this->getParentObject();
 		$deviser = $this->getDeviser();
 
 		$pack_weight = 0;
 		$pack_price = 0;
-		foreach ($this->productsMapping as $productMapping) {
-			$product = $productMapping->getProduct();
-			$priceStock = $product->getPriceStockItem($productMapping->price_stock_id);
+		$products = $this->getProducts();
+		foreach ($products as $item) {
+			$product = $item->getProduct();
+			$priceStock = $product->getPriceStockItem($item->price_stock_id);
 			$pack_weight += $priceStock['weight'];
-			$pack_price += $priceStock['price'] * $productMapping->quantity;
+			$pack_price += $priceStock['price'] * $item->quantity;
 
 		}
 		$this->pack_weight = $pack_weight;
@@ -292,7 +276,7 @@ class OrderPack extends EmbedModel
 
 		$pricePack = null;
 
-		$shippingSetting = $deviser->getShippingSettingByCountry($order->shippingAddressMapping->country);
+		$shippingSetting = $deviser->getShippingSettingByCountry($order->getShippingAddress()->country);
 
 		if ($shippingSetting) {
 			$price = $shippingSetting->getShippingSettingRange($pack_weight);
@@ -316,10 +300,9 @@ class OrderPack extends EmbedModel
 	 * @return OrderProduct|null
 	 */
 	public function getPriceStockItem($priceStockId) {
-		$products = $this->productsMapping;
+		$products = $this->getProducts();
 		foreach ($products as $item) {
 			if ($item->price_stock_id == $priceStockId) {
-				$item->setParentObject($this);
 				return $item;
 			}
 		}
@@ -330,21 +313,38 @@ class OrderPack extends EmbedModel
 
 	public function deleteProduct($priceStockId)
 	{
-		$products = $this->productsMapping;
-		$indexes = [];
+		$products = $this->getProducts();
 		foreach ($products as $i => $item) {
 			if ($item->price_stock_id == $priceStockId) {
-				$indexes[] = $i;
+				unset($products[$i]);
 			}
 		}
-
-		foreach ($indexes as $index) {
-			$products->offsetUnset($index);
-		}
+		$this->setProducts($products);
 
 		$this->recalculateTotals();
 
 		return null;
+	}
+
+	public function subDocumentsConfig() {
+		return [
+			'products' => [
+				'class' => OrderProduct::className(),
+				'type' => 'list',
+			],
+		];
+	}
+
+	/**
+	 * @return OrderProduct[]
+	 */
+	public function getProducts()
+	{
+		return $this->getSubDocument('products');
+	}
+
+	public function setProducts($value) {
+		$this->setSubDocument('products', $value);
 	}
 
 }
