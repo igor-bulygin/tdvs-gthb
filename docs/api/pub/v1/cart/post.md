@@ -19,7 +19,7 @@ Example about how to call to Web Service to update the cart
 **Request body**: 
 * `shipping_address`: Address configured by the customer as shipping_address (see structure above)
 * `billing_address`: Address configured by the customer as billing (see structure above)
-* `packs.shipping_type`: Name or title of the product (Multilanguage field)
+* `packs.shipping_type`: Type of the shipping configured by the customer (standard, express)
 
 **Address object structure**:
 Next example shows the structure of an object that represents an address
