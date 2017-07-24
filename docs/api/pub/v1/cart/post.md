@@ -1,0 +1,45 @@
+### Cart - View - POST
+
+Example about how to call to Web Service to update the cart
+
+**URL**: `/api/pub/v1/cart/<:cartId>`
+
+**Method**: `POST`
+
+**Response codes**:
+* `200`: Success
+* `400`: Bad request
+* `401`: Unauthorized
+* `403`: Forbidden
+* `404`: Not found
+
+**Request parameters**:
+* `:cartId`: Id of the cart that want to get
+  
+**Request body**: 
+* `shipping_address`: Address configured by the customer as shipping_address (see structure above)
+* `billing_address`: Address configured by the customer as billing (see structure above)
+* `packs.shipping_type`: Name or title of the product (Multilanguage field)
+
+**Address object structure**:
+Next example shows the structure of an object that represents an address
+```
+{
+	"first_name": null,
+	"last_name": null,
+	"vat_id": null,
+	"email": null,
+	"phone": {
+		"prefix" : null,
+		"number" : null
+	},
+	"country": null,
+	"city": null,
+	"address": null,
+	"zipcode": null
+}
+```
+
+**Response body**:
+
+See the structure of the complete item in view.md 
