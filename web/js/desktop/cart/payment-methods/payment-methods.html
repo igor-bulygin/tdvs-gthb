@@ -1,88 +1,104 @@
 <div class="row no-mar payment-methods-wrapper">
 	<span class="shopping-cart-section-header">3 Payment info</span>
-	<div class="col-md-10"><!-- todo: include ng-if with state in this div -->
-		<div class="col-md-5">
-			<div>
-				<span class="label-personal">Name</span> <span class="bold" ng-bind="paymentMethodsCtrl.cart.person_info.first_name"></span>&nbsp;<span class="bold" ng-bind="paymentMethodsCtrl.cart.person_info.last_name"></span>
+	<div class="col-md-12" ng-if="paymentMethodsCtrl.state === 3">
+		<div class="row">
+			<div class="col-md-5">
+				<p>Is your billing address the same as the shipping address?</p>
 			</div>
-			<div>
-				<span class="label-personal">Mail</span> <span ng-bind="paymentMethodsCtrl.cart.person_info.email"></span>
-			</div>
-			<div>
-				<span class="label-personal mb-100">Phone</span> <span ng-bind="paymentMethodsCtrl.cart.person_info.phone1.prefix"></span><span ng-bind="paymentMethodsCtrl.cart.person_info.phone1.number"></span>
-			</div>
-		</div>
-		<div class="col-md-7">
-			<div class="row no-mar">
-				<div class="col-md-5">
-				<p><span class="label-personal">Billing information</span><p>
+			<div class="col-md-7">
+				<div class="radio radio-inline">
+					<input type="radio" checked ng-value="true" ng-model="paymentMethodsCtrl.sameBilling" name="same_billing" id="same_billing">
+					<label for="same_billing">Yes</label>
 				</div>
-				<div class="col-md-7">
-					<span ng-bind="paymentMethodsCtrl.cart.person_info.address"></span>
-					<span ng-bind="paymentMethodsCtrl.cart.person_info.city"></span>&nbsp;<span ng-bind="paymentMethodsCtrl.cart.person_info.zipcode"></span>
-					<span class="mb-20" ng-bind="paymentMethodsCtrl.cart.person_info.country"></span>
+				<div class="radio radio-inline">
+					<input type="radio" ng-value="false" ng-model="paymentMethodsCtrl.sameBilling" name="not_same_billing" id="not_same_billing">
+					<label for="not_same_billing">No</label>
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="col-md-2">
-		<a class="link-red pull-right" href="#" ng-click="paymentMethodsCtrl.editPersonalInfo()">Edit</a>
-	</div>
-</div>
-<div class="row no-mar payment-methods-wrapper">
-	<span class="shopping-cart-section-header">Payment methods</span>
-		<!--<form name="paymentMethodsCtrl.paymentForm" class="form-horizontal" >-->
-			<!--<div class="col-md-6">-->
-				<!--<div class="form-group">-->
-					<!--<label for="cardholder" class="col-md-4">Cardholder name</label>-->
-					<!--<div class="col-md-6">-->
-						<!--<input type="text" name="cardholder" ng-model="paymentMethodsCtrl.payment.cardholder" class="form-control ng-class:{'error-input': paymentMethodsCtrl.has_error(paymentMethodsCtrl.paymentForm, paymentMethodsCtrl.paymentForm.cardholder)}" required>-->
-					<!--</div>-->
-				<!--</div>-->
-				<!--<div class="form-group">-->
-					<!--<label for="card_number" class="col-md-4">Card number</label>-->
-					<!--<div class="col-md-6">-->
-						<!--<input type="text" name="card_number" ng-model="paymentMethodsCtrl.payment.card_number" class="form-control ng-class:{'error-input': paymentMethodsCtrl.has_error(paymentMethodsCtrl.paymentForm, paymentMethodsCtrl.paymentForm.card_number)}" required>-->
-					<!--</div>-->
-				<!--</div>-->
-				<!--<div class="form-group">-->
-					<!--<label for="expiration_date" class="col-md-4">Expiration date</label>-->
-					<!--<div class="col-md-4">-->
-						<!--<ol class="nya-bs-select col-md-12" ng-model="paymentMethodsCtrl.payment.month" size="5" title="Month">-->
-							<!--<li nya-bs-option="month in paymentMethodsCtrl.months" data-value="month.month">-->
-								<!--<a href="#"><span ng-bind="month.name"></span></a>-->
-							<!--</li>-->
-						<!--</ol>-->
-					<!--</div>-->
-					<!--<div class="col-md-4">-->
-						<!--<ol class="nya-bs-select col-md-12" ng-model="paymentMethodsCtrl.payment.year" title="Year">-->
-							<!--<li nya-bs-option="year in paymentMethodsCtrl.years">-->
-								<!--<a href="#"><span ng-bind="year"></span></a>-->
-							<!--</li>-->
-						<!--</ol>-->
-					<!--</div>-->
-				<!--</div>-->
-				<!--<div class="form-group">-->
-					<!--<label for="cvv" class="col-md-4">CVV</label>-->
-					<!--<div class="col-md-3">-->
-						<!--<input type="text" name="cvv" ng-model="paymentMethodsCtrl.payment.cvv" class="form-control ng-class:{'error-input': paymentMethodsCtrl.has_error(paymentMethodsCtrl.paymentForm, paymentMethodsCtrl.paymentForm.cvv)}" required ng-pattern="paymentMethodsCtrl.cvvPattern">-->
-					<!--</div>-->
-				<!--</div>-->
-			<!--</div>-->
-			<!--<div class="col-md-12 text-center">-->
-				<!--<button class="btn btn-default btn-green" ng-click="paymentMethodsCtrl.stripejs()">Checkout</button>-->
-			<!--</div>-->
-		<!--</form>-->
-
+		<div class="row">
+			<form class="form-horizontal" name="paymentMethodsCtrl.billingForm" novalidate ng-if="!paymentMethodsCtrl.sameBilling">
+				<div class="col-md-6">
+					<span class="billing-header">Personal details</span>
+					<div class="form-group form-personal-info">
+						<label for="name" class="col-md-3">First name</label>
+						<div class="col-md-9">
+							<input type="text" name="name" ng-model="paymentMethodsCtrl.cart.billing_address.name" class="form-control ng-class:{'error-input': paymentMethodsCtrl.has_error(paymentMethodsCtrl.billingForm, paymentMethodsCtrl.billingForm.name)}" required>
+							<form-errors field="paymentMethodsCtrl.billingForm.name" condition="paymentMethodsCtrl.has_error(paymentMethodsCtrl.billingForm, paymentMethodsCtrl.billingForm.name)"></form-errors>
+						</div>
+					</div>
+					<div class="form-group form-personal-info">
+						<label for="last_name" class="col-md-3">Last name</label>
+						<div class="col-md-9">
+							<input type="text" name="last_name" ng-model="paymentMethodsCtrl.cart.billing_address.last_name" class="form-control ng-class:{'error-input': paymentMethodsCtrl.has_error(paymentMethodsCtrl.billingForm, paymentMethodsCtrl.billingForm.last_name)}" required>
+							<form-errors field="paymentMethodsCtrl.billingForm.last_name" condition="paymentMethodsCtrl.has_error(paymentMethodsCtrl.billingForm, paymentMethodsCtrl.billingForm.last_name)"></form-errors>
+						</div>
+					</div>
+					<div class="form-group form-personal-info">
+						<label for="vat_id" class="col-md-3">VAT number</label>
+						<div class="col-md-9">
+							<input type="text" name="vat_id" ng-model="paymentMethodsCtrl.cart.billing_address.vat_id" class="form-control ng-class:{'error-input': paymentMethodsCtrl.has_error(paymentMethodsCtrl.billingForm, paymentMethodsCtrl.billingForm.vat_id)}" required>
+							<form-errors field="paymentMethodsCtrl.billingForm.vat_id" condition="paymentMethodsCtrl.has_error(paymentMethodsCtrl.billingForm, paymentMethodsCtrl.billingForm.vat_id)"></form-errors>
+						</div>
+					</div>
+					<div class="form-group form-personal-info">
+						<label for="phone" class="col-md-3">Phone</label>
+						<div class="col-md-3">
+							<input type="text" name="phone_number_prefix" ng-model="paymentMethodsCtrl.cart.billing_address.phone_number_prefix" class="form-control ng-class:{'error-input': paymentMethodsCtrl.has_error(paymentMethodsCtrl.billingForm, paymentMethodsCtrl.billingForm.phone_number_prefix)}" required>
+						</div>
+						<div class="col-md-6">
+							<input type="text" name="phone_number" ng-model="paymentMethodsCtrl.cart.billing_address.phone_number" class="form-control ng-class:{'error-input': paymentMethodsCtrl.has_error(paymentMethodsCtrl.billingForm, paymentMethodsCtrl.billingForm.phone_number)}" required>
+							<form-errors field="paymentMethodsCtrl.billingForm.phone_number_prefix" condition="paymentMethodsCtrl.has_error(paymentMethodsCtrl.billingForm, paymentMethodsCtrl.billingForm.phone_number_prefix)" ng-if="!paymentMethodsCtrl.has_error(paymentMethodsCtrl.billingForm, paymentMethodsCtrl.billingForm.phone_number)"></form-errors>
+							<form-errors field="paymentMethodsCtrl.billingForm.phone_number" condition="paymentMethodsCtrl.has_error(paymentMethodsCtrl.billingForm, paymentMethodsCtrl.billingForm.phone_number)"></form-errors>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<span class="billing-header">Billing address</span>
+					<div class="form-group form-personal-info">
+						<label for="country" class="col-md-3">Country</label>
+						<div class="col-md-9">
+							<ol class="nya-bs-select ng-class:{'error-input': paymentMethodsCtrl.has_error(paymentMethodsCtrl.billingForm, paymentMethodsCtrl.billingForm.country)}" ng-model="paymentMethodsCtrl.cart.billing_address.country" size="5" name="country" required>
+								<li nya-bs-option="country in paymentMethodsCtrl.countries | orderBy:'country_name'" data-value="country.id">
+									<a href=""><span ng-bind="country.country_name"></span></a>
+								</li>
+							</ol>
+						<form-errors field="paymentMethodsCtrl.billingForm.country" condition="paymentMethodsCtrl.has_error(paymentMethodsCtrl.billingForm, paymentMethodsCtrl.billingForm.country)"></form-errors>
+						</div>
+					</div>
+					<div class="form-group form-personal-info">
+						<label for="city" class="col-md-3">City</label>
+						<div class="col-md-9">
+							<input type="text" name="city" ng-model="paymentMethodsCtrl.cart.billing_address.city" class="form-control ng-class:{'error-input': paymentMethodsCtrl.has_error(paymentMethodsCtrl.billingForm, paymentMethodsCtrl.billingForm.city)}" required>
+							<form-errors field="paymentMethodsCtrl.billingForm.city" condition="paymentMethodsCtrl.has_error(paymentMethodsCtrl.billingForm, paymentMethodsCtrl.billingForm.city)"></form-errors>
+						</div>
+					</div>
+					<div class="form-group form-personal-info">
+						<label for="address" class="col-md-3">Address</label>
+						<div class="col-md-9">
+							<input type="text" name="address" ng-model="paymentMethodsCtrl.cart.billing_address.address" class="form-control ng-class:{'error-input': paymentMethodsCtrl.has_error(paymentMethodsCtrl.billingForm, paymentMethodsCtrl.billingForm.address)}" required>
+							<form-errors field="paymentMethodsCtrl.billingForm.address" condition="paymentMethodsCtrl.has_error(paymentMethodsCtrl.billingForm, paymentMethodsCtrl.billingForm.address)"></form-errors>
+						</div>
+					</div>
+					<div class="form-group form-personal-info">
+						<label for="zip_code" class="col-md-3">ZIP Code</label>
+						<div class="col-md-4">
+							<input type="text" name="zip" ng-model="paymentMethodsCtrl.cart.billing_address.zip" class="form-control ng-class:{'error-input': paymentMethodsCtrl.has_error(paymentMethodsCtrl.billingForm, paymentMethodsCtrl.billingForm.zip)}" required>
+						</div>
+						<form-errors field="paymentMethodsCtrl.billingForm.zip" condition="paymentMethodsCtrl.has_error(paymentMethodsCtrl.billingForm, paymentMethodsCtrl.billingForm.zip)"></form-errors>
+					</div>
+				</div>
+			</form>
+		</div>
 		<div class="col-md-12 text-center">
-			<p class="text-center mt-20 serif">Securely pay with any type of credit or debit card.</p>
 			<!--<button class="btn btn-default btn-green" ng-click="paymentMethodsCtrl.stripejs()">Pay with Stripe.js</button><br />-->
-			<button class="btn btn-default btn-green mt-20" ng-click="paymentMethodsCtrl.checkout()">Pay with card</button><br />
+			<button class="btn btn-default btn-green mt-20" ng-click="paymentMethodsCtrl.checkout(paymentMethodsCtrl.billingForm)">Pay with card</button><br />
+			<p class="text-center mt-20 serif">Securely pay with any type of credit or debit card.</p>
 			<div class="text-center purple-text" ng-if="paymentMethodsCtrl.errors">
 				<p>There was an issue with the transaction. Your card has not been charged.</p>
 				<p>Please try again, and if the issue persists contact us.</p>
 			</div>
 			<!--<a class="btn btn-default btn-green" ng-href="/stripe/checkout-test/{{paymentMethodsCtrl.cart.id}}">Pay with Stripe (new window)</a><br />-->
 		</div>
-
+	</div>
 </div>

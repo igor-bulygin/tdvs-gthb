@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(UtilService, cartDataService, localStorageUtilService, cartService) {
+	function controller(UtilService, cartDataService, localStorageUtilService, cartService, locationDataService) {
 		var vm = this;
 		vm.person = person;
 		vm.checkout_state = 1;
@@ -9,7 +9,16 @@
 		init();
 
 		function init() {
+			getCountries();
 			getCart();
+		}
+
+		function getCountries() {
+			function onGetCountriesSuccess(data) {
+				vm.countries = angular.copy(data.items);
+			}
+
+			locationDataService.getCountry(null, onGetCountriesSuccess, UtilService.onError);
 		}
 
 		function getCart() {

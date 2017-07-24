@@ -4,7 +4,11 @@
 	function cartDataService($resource, apiConfig, apiMethods) {
 		//resources
 		//pub
-		var Cart = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'cart/:id');
+		var Cart = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'cart/:id', null, {
+			'update': {
+				'method': 'PUT'
+			}
+		});
 		var CartProduct = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'cart/:id/product/:productId', null, {
 			'update': {
 				'method': "PUT"
@@ -18,6 +22,7 @@
 		this.deleteItem = deleteItem;
 		this.getCartToken = getCartToken;
 		this.addProduct = addProduct;
+		this.updateCart = updateCart;
 
 		function createCart(onSuccess, onError) {
 			apiMethods.create(Cart, null, null, onSuccess, onError);
@@ -37,6 +42,10 @@
 
 		function addProduct(data, params, onSuccess, onError) {
 			apiMethods.create(CartProduct, data, params, onSuccess, onError);
+		}
+
+		function updateCart(data, params, onSuccess, onError) {
+			apiMethods.update(Cart, data, params, onSuccess, onError);
 		}
 
 

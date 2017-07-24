@@ -8,6 +8,7 @@
 		vm.checkout = checkout;
 		vm.cvvPattern = new RegExp("[0-9]{3}", "g");
 		var datetime = $locale.DATETIME_FORMATS;
+		vm.sameBilling = true;
 
 
 		init();
@@ -52,13 +53,27 @@
 
 		}
 
-		function checkout() {
-			console.log('checkout!');
-			vm.handler.open({
-				name: '',
-				description: 'Order Nº '+vm.cart.id,
-				amount: vm.cart.subtotal*100
-			});
+		function checkout(form) {
+			function onSaveCartSuccess(data) {
+				console.log(data);
+				vm.handler.open({
+					name: '',
+					description: 'Order Nº ' + data.id,
+					amount: data.subtotal*100
+				});
+			}
+
+			if(form)
+				form.$submitted = true;
+			if(vm.sameBilling)
+				vm.cart.billing_address = Object.assign({}, vm.cart.shipping_address);
+			if((form && form.$valid) || !form) {
+				//POST TO API
+				cartDataService.updateCart(vm.cart, {
+					id: vm.cart.id
+				}, onSaveCartSuccess, UtilService.onError);
+				//
+			}
 		}
 
 		function setMonths() {
@@ -93,7 +108,8 @@
 		controllerAs: 'paymentMethodsCtrl',
 		bindings: {
 			state: '=?',
-			cart: '<'
+			cart: '<',
+			countries: '<'
 		}
 	}
 

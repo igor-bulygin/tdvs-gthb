@@ -5,6 +5,7 @@
 		var vm = this;
 		vm.setShippingPriceTime = setShippingPriceTime;
 		vm.isObject = angular.isObject;
+		vm.save = save;
 
 		init();
 
@@ -26,6 +27,10 @@
 					pack.delivery_price = pack.deviser_info.price;
 					break;
 			}
+		}
+
+		function save() {
+			vm.state = 3;
 		}
 	}
 

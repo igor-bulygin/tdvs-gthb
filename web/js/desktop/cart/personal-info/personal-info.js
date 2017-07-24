@@ -6,25 +6,21 @@
 		vm.person = person;
 		vm.has_error = UtilService.has_error;
 		vm.save = save;
+		vm.editShippingAddress = editShippingAddress;
 
 		init();
-		function init(){
-			getCountries();
-		}
 
-		function getCountries(){
-			function onGetCountrySuccess(data) {
-				vm.countries = angular.copy(data.items);
-			}
-
-			locationDataService.getCountry(null, onGetCountrySuccess, UtilService.onError);
-		}
+		function init(){}
 
 		function save(form){
 			form.$submitted = true;
 			if(form.$valid) {
 				vm.state = 2;
 			}
+		}
+
+		function editShippingAddress() {
+			vm.state = 1;
 		}
 
 	}
@@ -35,7 +31,8 @@
 		controllerAs: 'personalInfoCtrl',
 		bindings: {
 			state: '=?',
-			cart: '<'
+			cart: '<',
+			countries: '<'
 		}
 	}
 
