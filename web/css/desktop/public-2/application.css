@@ -234,7 +234,7 @@ html {
   background-color: #e9e9e9; }
 
 body {
-  font-family: "Univers Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Roboto Condensed", sans-serif;
   background-color: #1C1919; }
 
 .elements-wrapper {
@@ -491,7 +491,24 @@ a, a:hover, a:focus {
 .box-icon {
   background: url("/imgs/box-black.svg") no-repeat; }
 
-.btn-red, .btn-green, .btn-grey, .btn-black, .btn-follow, .btn-white, .btn-transparent, .btn-love, .btn-save-box, .button-error, .btn-save {
+.black-icon {
+  color: #1C1919; }
+
+.red-icon {
+  color: #c91c39; }
+
+.grey-icon {
+  color: #939393; }
+
+.black-icons i {
+  font-size: 30px;
+  margin-right: 20px; }
+  .black-icons i.box svg {
+    width: 40px; }
+.black-icons svg {
+  width: 18px; }
+
+.btn-red, .btn-green, .btn-grey, .btn-black, .btn-follow, .btn-white, .btn-transparent, .big-btn, .btn-love, .btn-save-box, .button-error, .btn-save {
   text-transform: uppercase;
   font-family: "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
@@ -501,7 +518,7 @@ a, a:hover, a:focus {
   border: none;
   text-align: center;
   cursor: pointer; }
-  .btn-red:hover, .btn-green:hover, .btn-grey:hover, .btn-black:hover, .btn-follow:hover, .btn-white:hover, .btn-transparent:hover, .btn-love:hover, .btn-save-box:hover, .button-error:hover, .btn-save:hover {
+  .btn-red:hover, .btn-green:hover, .btn-grey:hover, .btn-black:hover, .btn-follow:hover, .btn-white:hover, .btn-transparent:hover, .big-btn:hover, .btn-love:hover, .btn-save-box:hover, .button-error:hover, .btn-save:hover {
     -moz-transition-property: background-color;
     -o-transition-property: background-color;
     -webkit-transition-property: background-color;
@@ -741,6 +758,46 @@ a, a:hover, a:focus {
       background-color: #1C1919; }
       .btn-save-box.active:hover .box-icon {
         background: url("/imgs/box-white.svg") transparent no-repeat; }
+
+.load-more-btn {
+  color: #c91c39;
+  text-transform: uppercase; }
+  .load-more-btn i {
+    color: #939393;
+    vertical-align: middle;
+    margin-left: 5px;
+    display: inline-block; }
+  .load-more-btn:hover {
+    color: #F7284B; }
+  .load-more-btn:focus {
+    color: #F7284B; }
+  .load-more-btn.active i {
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg); }
+
+.social-items li {
+  float: left;
+  margin: 0 8px 0 0; }
+  .social-items li span {
+    padding: 1px 0 0 0;
+    display: inline-block; }
+  .social-items li a {
+    color: #ffffff;
+    background-color: #939393;
+    width: 22px;
+    height: 22px;
+    display: block;
+    padding: 5px 0 0 7px;
+    border-radius: 28px 28px 28px 28px !important;
+    -webkit-border-radius: 28px 28px 28px 28px !important;
+    -moz-border-radius: 28px 28px 28px 28px !important; }
+    .social-items li a.twitter {
+      padding: 4px 0 0 5px; }
+    .social-items li a.google-plus {
+      font-size: 12px;
+      padding: 5px 0 0 4px; }
 
 .products-menu ul {
   margin: 20px 0 40px;
@@ -5482,30 +5539,6 @@ h3 {
         .product .product-data-wrapper .product-data .row-size .btn-add-to-cart .cart-icon-btn {
           padding: 0 10px 0 0;
           font-size: 16px; }
-      .product .product-data-wrapper .product-data .social-items {
-        float: right;
-        margin: 10px -8px 0 0; }
-        .product .product-data-wrapper .product-data .social-items li {
-          float: left;
-          margin: 0 8px 0 0; }
-          .product .product-data-wrapper .product-data .social-items li span {
-            padding: 1px 0 0 0;
-            display: inline-block; }
-          .product .product-data-wrapper .product-data .social-items li a {
-            color: #e9e9e9;
-            background-color: #6b6b6b;
-            width: 22px;
-            height: 22px;
-            display: block;
-            padding: 2px 0 0 7px;
-            border-radius: 28px 28px 28px 28px !important;
-            -webkit-border-radius: 28px 28px 28px 28px !important;
-            -moz-border-radius: 28px 28px 28px 28px !important; }
-            .product .product-data-wrapper .product-data .social-items li a.twitter {
-              padding: 2px 0 0 6px; }
-            .product .product-data-wrapper .product-data .social-items li a.google-plus {
-              font-size: 12px;
-              padding: 2px 0 0 4px; }
 
 /* GLOBAL */
 .btn-hart {

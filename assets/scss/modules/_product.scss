@@ -151,33 +151,6 @@
                     }
                 }
             }
-            .social-items{
-                float: right;
-				margin: 10px -8px 0 0;
-                li{
-                    float: left;
-                    margin: 0 8px 0 0;
-                    span{
-                        padding: 1px 0 0 0;
-                        display: inline-block;
-                    }
-                    a{
-                        color: $background_grey;
-                        background-color: $darker_grey;
-                        @include size(22px,22px);
-                        display: block;
-                        padding: 2px 0 0 7px;
-                        @include border-radius(28px,28px,28px,28px);
-                        &.twitter{
-                            padding: 2px 0 0 6px;
-                        }
-                        &.google-plus{
-                            font-size: 12px;
-                            padding: 2px 0 0 4px;
-                        }                
-                    }
-                }
-            }
         }
     }
 }
