@@ -244,7 +244,7 @@ class CartController extends AppPublicController
 
 			// Create a customer in stripe for the received token
 			$customer = \Stripe\Customer::create([
-				'email' => $person->email,
+				'email' => $person->credentials['email'],
 				'source' => $token,
 			]);
 
