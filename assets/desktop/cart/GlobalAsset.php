@@ -14,6 +14,7 @@ class GlobalAsset extends AssetBundle {
 		'js/desktop/cart/summary/summary.js',
 		'js/desktop/cart/shopping-cart/shopping-cart.js',
 		'js/desktop/cart/personal-info/personal-info.js',
+		'js/desktop/cart/shipping-methods/shipping-methods.js',
 		'js/desktop/cart/payment-methods/payment-methods.js',
 		'js/desktop/order/success.js',
 	];

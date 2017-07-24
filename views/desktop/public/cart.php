@@ -1,7 +1,6 @@
 <?php
 use app\assets\desktop\cart\GlobalAsset;
 
-
 /* @var $this yii\web\View */
 
 GlobalAsset::register($this);
@@ -22,12 +21,10 @@ $this->title = 'Todevise / Cart';
 		</div>
 		<div class="container checkout-sidebar no-pad">
 			<div class="col-md-8 no-pad">
-				<shopping-cart state="cartOverviewCtrl.cart_state" cart="cartOverviewCtrl.cart" devisers="cartOverviewCtrl.devisers" ng-if="cartOverviewCtrl.cart_state.state===1"></shopping-cart>
-				<personal-info state="cartOverviewCtrl.cart_state" cart="cartOverviewCtrl.cart" ng-if="cartOverviewCtrl.cart_state.state===2"></personal-info>
-				<payment-methods state="cartOverviewCtrl.cart_state" cart="cartOverviewCtrl.cart" ng-if="cartOverviewCtrl.cart_state.state===3"></payment-methods>
+				<shopping-cart cart="cartOverviewCtrl.cart"></shopping-cart>
 			</div>
 			<div class="col-md-4 no-pad summary-side bordered-left">
-				<cart-summary state="cartOverviewCtrl.cart_state" cart="cartOverviewCtrl.cart" devisers="cartOverviewCtrl.devisers"></cart-summary>
+				<cart-summary cart="cartOverviewCtrl.cart"></cart-summary>
 			</div>
 		</div>
 </div>

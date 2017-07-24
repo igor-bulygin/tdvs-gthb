@@ -3,9 +3,6 @@
 
 	function controller(cartDataService, tagDataService, productDataService, UtilService, cartService, localStorageUtilService) {
 		var vm = this;
-		vm.cart_state = {
-			state: 1
-		};
 
 		init();
 
@@ -28,7 +25,6 @@
 			function onGetCartSuccess(data) {
 				vm.cart = angular.copy(data);
 				cartService.parseTags(vm.cart);
-				vm.devisers = cartService.parseDevisersFromProducts(vm.cart);
 			}
 
 			function onGetCartError(err) {
