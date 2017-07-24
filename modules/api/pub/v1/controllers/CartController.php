@@ -28,6 +28,7 @@ class CartController extends AppPublicController
 
 		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_CLIENT_ORDER);
 		$cart = Order::findOneSerialized($cart->short_id);
+		$cart->setSubDocumentsForSerialize();
 		return $cart;
 	}
 
@@ -37,7 +38,7 @@ class CartController extends AppPublicController
 		$cart = Order::findOneSerialized($cartId);
 
 		if (empty($cart)) {
-			throw new NotFoundHttpException();
+			throw new NotFoundHttpException(sprintf("Cart with id %s does not exists", $cartId));
 		}
 
 		if ($cart->order_state != Order::ORDER_STATE_CART) {
@@ -59,7 +60,6 @@ class CartController extends AppPublicController
 		Yii::$app->response->setStatusCode(200); // Ok
 
 		$cart->setSubDocumentsForSerialize();
-
 		return $cart;
 	}
 
@@ -88,7 +88,6 @@ class CartController extends AppPublicController
 			Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_CLIENT_ORDER);
 			$cart = Order::findOneSerialized($cartId);
 			$cart->setSubDocumentsForSerialize();
-
 			return $cart;
 		} else {
 			Yii::$app->response->setStatusCode(400); // Bad Request
@@ -115,6 +114,7 @@ class CartController extends AppPublicController
 
 		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_CLIENT_ORDER);
 		$cart = Order::findOneSerialized($cartId);
+		$cart->setSubDocumentsForSerialize();
 		return $cart;
 	}
 
@@ -122,7 +122,7 @@ class CartController extends AppPublicController
 	{
 		$cart = Order::findOneSerialized($cartId);
 		if (!$cart) {
-			throw new BadRequestHttpException('Order not found');
+			throw new NotFoundHttpException(sprintf("Cart with id %s does not exists", $cartId));
 		}
 
 		if (!$cart->isCartEditable()) {

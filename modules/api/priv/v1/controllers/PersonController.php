@@ -198,15 +198,9 @@ class PersonController extends AppPrivateController
 			"offset" => $offset,
 		]);
 
-//		foreach ($orders as $order) {
-//			$packs = $order->packs;
-//			foreach ($packs as $i => $pack) {
-//				if ($pack['deviser_id'] != $person->short_id) {
-//					unset($packs[$i]);
-//				}
-//			}
-//			$order->setAttribute('packs', $packs);
-//		}
+		foreach ($orders as $order) {
+			$order->setSubDocumentsForSerialize();
+		}
 
 		return [
 			"items" => $orders,
