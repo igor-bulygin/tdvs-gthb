@@ -283,6 +283,11 @@ class Order extends CActiveRecord {
 			$query->andWhere(["packs.products.product_id" => $criteria["product_id"]]);
 		}
 
+		// if deviser id is specified
+		if ((array_key_exists("pack_state", $criteria)) && (!empty($criteria["pack_state"]))) {
+			$query->andWhere(["packs.pack_state" => $criteria["pack_state"]]);
+		}
+
 		// if order_state is specified
 		if ((array_key_exists("order_state", $criteria)) && (!empty($criteria["order_state"]))) {
 			$query->andWhere(["order_state" => $criteria["order_state"]]);

@@ -16,12 +16,15 @@ use yii\web\NotFoundHttpException;
  * @property double $pack_percentage_fee
  * @property string $currency
  * @property string $weight_measure
+ * @property string $pack_state
  * @property array $products
  *
  * @method Order getParentObject()
  */
 class OrderPack extends EmbedModel
 {
+	const PACK_STATE_OPEN = 'open';
+	const PACK_STATE_PAST = 'past';
 
 	/**
 	 * The attributes that should be serialized
@@ -39,16 +42,17 @@ class OrderPack extends EmbedModel
 
 	public function attributes() {
 		return [
-				'deviser_id',
-				'short_id',
-				'shipping_type',
-				'shipping_price',
-				'pack_weight',
-				'pack_price',
-				'pack_percentage_fee',
-				'currency',
-				'weight_measure',
-				'products',
+			'deviser_id',
+			'short_id',
+			'shipping_type',
+			'shipping_price',
+			'pack_weight',
+			'pack_price',
+			'pack_percentage_fee',
+			'currency',
+			'weight_measure',
+			'pack_state',
+			'products',
 		];
 	}
 
@@ -60,6 +64,10 @@ class OrderPack extends EmbedModel
 
 		if (empty($this->shipping_type)) {
 			$this->shipping_type = 'standard';
+		}
+
+		if (empty($this->pack_state)) {
+			$this->pack_state = OrderPack::PACK_STATE_OPEN;
 		}
 	}
 
