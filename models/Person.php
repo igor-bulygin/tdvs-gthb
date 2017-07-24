@@ -1199,6 +1199,16 @@ class Person extends CActiveRecord implements IdentityInterface
 	}
 
 	/**
+	 * Shortcut to get the name
+	 *
+	 * @return string
+	 */
+	public function getEmail()
+	{
+		return $this->credentials['email'];
+	}
+
+	/**
 	 * Get the urls of images to use in "about" deviser page
 	 *
 	 * @return array
