@@ -57,6 +57,7 @@ Example about how to call to Web Service to get the cart
    },
    "packs": [
 	   {
+		   "short_id": "2cc70d4c",
 		   "deviser_id": "f351c59",
 		   "deviser_info": {
 			   "slug": "due",

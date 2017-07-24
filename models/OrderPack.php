@@ -100,6 +100,7 @@ class OrderPack extends EmbedModel
 			case self::SERIALIZE_SCENARIO_OWNER:
 			case self::SERIALIZE_SCENARIO_ADMIN:
 				self::$serializeFields = [
+					'short_id',
 					'deviser_id',
 					'shipping_type',
 					'shipping_price',
@@ -123,6 +124,7 @@ class OrderPack extends EmbedModel
 
 			case Order::SERIALIZE_SCENARIO_CLIENT_ORDER:
 				self::$serializeFields = [
+					'short_id',
 					'deviser_id',
 					'deviser_info' => 'deviserInfo',
 					'shipping_type',
@@ -147,6 +149,7 @@ class OrderPack extends EmbedModel
 
 			case Order::SERIALIZE_SCENARIO_DEVISER_PACK:
 				self::$serializeFields = [
+					'short_id',
 					'deviser_id',
 					'shipping_type',
 					'shipping_price',
