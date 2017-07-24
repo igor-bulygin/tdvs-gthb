@@ -40,8 +40,8 @@ class CartController extends AppPublicController
 			throw new NotFoundHttpException(sprintf("Cart with id %s does not exists", $cartId));
 		}
 
-		if ($cart->order_state != Order::ORDER_STATE_CART) {
-			throw new BadRequestHttpException("This cart has an invalid state");
+		if (!$cart->isCart()) {
+			throw new BadRequestHttpException("This order is in an invalid state");
 		}
 
 		if (!Yii::$app->user->isGuest) {
@@ -69,6 +69,10 @@ class CartController extends AppPublicController
 
 		if (empty($cart)) {
 			throw new NotFoundHttpException(sprintf("Cart with id %s does not exists", $cartId));
+		}
+
+		if (!$cart->isCart()) {
+			throw new BadRequestHttpException("This order is in an invalid state");
 		}
 
 		if (!$cart->isCartEditable()) {
@@ -103,6 +107,10 @@ class CartController extends AppPublicController
 			throw new NotFoundHttpException(sprintf("Cart with id %s does not exists", $cartId));
 		}
 
+		if (!$cart->isCart()) {
+			throw new BadRequestHttpException("This order is in an invalid state");
+		}
+
 		if (!$cart->isCartEditable()) {
 			throw new UnauthorizedHttpException();
 		}
@@ -122,6 +130,10 @@ class CartController extends AppPublicController
 		$cart = Order::findOneSerialized($cartId);
 		if (!$cart) {
 			throw new NotFoundHttpException(sprintf("Cart with id %s does not exists", $cartId));
+		}
+
+		if (!$cart->isCart()) {
+			throw new BadRequestHttpException("This order is in an invalid state");
 		}
 
 		if (!$cart->isCartEditable()) {
@@ -183,6 +195,15 @@ class CartController extends AppPublicController
 		if (empty($cart)) {
 			throw new NotFoundHttpException(sprintf("Cart with id %s does not exists", $cartId));
 		}
+
+		if (!$cart->isCart()) {
+			throw new BadRequestHttpException("This order is in an invalid state");
+		}
+
+		if (!$cart->isCartEditable()) {
+			throw new UnauthorizedHttpException();
+		}
+
 		/*
 		{
 		  "id": "tok_19igOXJt4mveficFYDqFqBcB",
@@ -228,7 +249,7 @@ class CartController extends AppPublicController
 			throw new BadRequestHttpException("No token received from stripe");
 		}
 
-		if ($cart->order_state != Order::ORDER_STATE_CART) {
+		if (!$cart->isCart()) {
 			throw new BadRequestHttpException("This order is in an invalid state");
 		}
 

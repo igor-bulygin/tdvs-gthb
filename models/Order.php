@@ -477,6 +477,20 @@ class Order extends CActiveRecord {
 	}
 
 
+	/**
+	 * Returns TRUE if the person can be edited by the current user
+	 *
+	 * @return bool
+	 */
+	public function isCart()
+	{
+		if ($this->order_state != Order::ORDER_STATE_CART) {
+			return false;
+		}
+
+		return true;
+	}
+
 
 	/**
 	 * Returns TRUE if the person can be edited by the current user
@@ -485,7 +499,7 @@ class Order extends CActiveRecord {
 	 */
 	public function isCartEditable()
 	{
-		if ($this->order_state != Order::ORDER_STATE_CART) {
+		if (!$this->isCart()) {
 			return false;
 		}
 		if (\Yii::$app->user->isGuest) {
