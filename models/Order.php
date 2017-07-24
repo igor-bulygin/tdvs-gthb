@@ -421,7 +421,7 @@ class Order extends CActiveRecord {
 		$subtotal = 0;
 
 		foreach ($packs as $i => $pack) {
-			$subtotal += ($pack->pack_price);[];
+			$subtotal += ($pack->pack_price + $pack->shipping_price);[];
 		}
 
 		$this->subtotal = $subtotal;

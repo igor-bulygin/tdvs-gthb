@@ -4,7 +4,6 @@ namespace app\modules\api\pub\v1\controllers;
 
 use app\models\Order;
 use app\models\OrderProduct;
-use app\models\Person;
 use Stripe\Stripe;
 use Yii;
 use yii\web\BadRequestHttpException;
@@ -237,35 +236,23 @@ class CartController extends AppPublicController
 
 			Stripe::setApiKey(Yii::$app->params['stripe_secret_key']);
 
-			$products = $cart->productsMapping;
+			$person = $cart->getPerson();
 
-			// Create an array of devisers, with amount price for each
-			$devisers = [];
-			foreach ($products as $product) {
-				if (isset($devisers[$product->deviser_id])) {
-					$amount = $devisers[$product->deviser_id]['amount'];
-				} else {
-					$amount = 0;
-				}
-				$devisers[$product->deviser_id] = [
-					'amount' => $amount + ($product->price * $product->quantity),
-					'deviser' => Person::findOneSerialized($product->deviser_id),
-				];
-			}
+			$packs = $cart->getPacks();
+
+			// TODO: check if customer already exists in stripe
 
 			// Create a customer in stripe for the received token
 			$customer = \Stripe\Customer::create([
-				'email' => $cart->personInfoMapping->email,
+				'email' => $person->email,
 				'source' => $token,
 			]);
 
 			$charges = [];
-			foreach ($devisers as $oneDeviser) {
-				$amount = $oneDeviser['amount'];
-				$deviser = $oneDeviser['deviser'];
-				/* @var Person $deviser */
+			foreach ($packs as $pack) {
+				$deviser = $pack->getDeviser();
 
-				$stripeAmount = (int)($amount * 100);
+				$stripeAmount = (int)(($pack->pack_price + $pack->shipping_price) * 100);
 				$todeviseFee = (int)($stripeAmount * Yii::$app->params['default_todevise_fee']);
 
 				if (empty($deviser->settingsMapping->stripeInfoMapping->access_token)) {
@@ -314,7 +301,7 @@ class CartController extends AppPublicController
 
 			// Save charges responses and payment_info in the order
 			$cart->setAttribute('payment_info', $currentPaymentInfo);
-			$cart->setAttribute('charges', json_encode($charges));
+			$cart->setAttribute('charges', $charges);
 			$cart->order_state = Order::ORDER_STATE_PAID;
 			$cart->save();
 
