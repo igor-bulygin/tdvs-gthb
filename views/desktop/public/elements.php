@@ -365,7 +365,7 @@ $this->title = 'Todevise / Elements';
 				</div>
 			</div>
 		</div>
-		<div class="row mt-30 mb-100">
+		<div class="row mt-30">
 			<div class="col-md-12">
 				<span class="title-underlined">PALETA DE COLOR</span>
 				<div>
@@ -382,6 +382,20 @@ $this->title = 'Todevise / Elements';
 					<span class="text-yellow">Yellow #ffd55d</span>
 					<div class="bg-yellow" style="margin:0 10px 0 10px;vertical-align:middle;width:60px;height:30px;display:inline-block;"></div>
 				</div>
+			</div>
+		</div>
+		<div class="row mt-30 mb-100">
+			<div class="col-md-12">
+				<span class="title-underlined">Elementos de formulario</span>
+			</div>
+			<div class="col-md-4">
+				<input type="text" class="form-control" id="exampleInputEmail1" placeholder="Input normal">
+			</div>
+			<div class="col-md-4">
+				<input type="text" class="form-control" id="exampleInputEmail1" placeholder="Input normal">
+			</div>
+			<div class="col-md-4">
+				Oli
 			</div>
 		</div>
 	</div>	
