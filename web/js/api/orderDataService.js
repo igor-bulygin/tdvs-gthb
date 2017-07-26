@@ -8,7 +8,7 @@
 
 		//functions
 		this.getOrder = getOrder;
-		this.getDeviserOrders=getDeviserOrders;
+		this.getDeviserPack=getDeviserPack;
 
 		function getOrder(params, onSuccess, onError) {
 			apiMethods.get(order, params, onSuccess, onError);

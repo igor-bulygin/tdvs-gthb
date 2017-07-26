@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\helpers\CController;
 use app\models\Order;
+use app\models\Person;
 use yii\base\Exception;
 use yii\web\NotFoundHttpException;
 
@@ -24,6 +25,7 @@ class OrderController extends CController
 		$this->layout = '/desktop/public-2.php';
 
 		return $this->render("success", [
+			'person' => $order->getPerson(),
 		]);
 	}
 }
