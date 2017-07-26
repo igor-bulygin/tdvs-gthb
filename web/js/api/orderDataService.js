@@ -2,21 +2,20 @@
 	"use strict";
 
 	function orderDataService($resource, apiConfig, apiMethods) {
-		//pub
-		var Order = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'order/:id');
 		//priv
-		var orderPriv = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'person/:personId/packs');
+		var orderPack = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'person/:personId/packs');
+		var order = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'person/:personId/orders/:orderId');
 
 		//functions
 		this.getOrder = getOrder;
-		this.getDeviserOrders=getDeviserOrders;
+		this.getDeviserPack=getDeviserPack;
 
 		function getOrder(params, onSuccess, onError) {
-			apiMethods.get(Order, params, onSuccess, onError);
+			apiMethods.get(order, params, onSuccess, onError);
 		}
 
-		function getDeviserOrders(params, onSuccess, onError) {
-			apiMethods.get(orderPriv, params, onSuccess, onError);
+		function getDeviserPack(params, onSuccess, onError) {
+			apiMethods.get(orderPack, params, onSuccess, onError);
 		}
 	}
 

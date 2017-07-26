@@ -13,7 +13,7 @@ $this->title = 'Create an account - Todevise';
 			<span class="first-title">welcome</span>
 			<span class="second-title">to</span>
 		</span>
-		<a class="image-create-account" href="#">
+		<a class="image-create-account" href="/">
 			<img src="/imgs/logo.png" data-pin-nopin="true">
 		</a>
 	</div>
