@@ -32,7 +32,7 @@
 					order.total= order.totalPrice + order.totalShippingPrice + order.commission;
 				});
 			}
-			orderDataService.getDeviserOrders({pack_state:"open", personId:vm.deviserId}, onGetOrdersSuccess, UtilService.onError);
+			orderDataService.getDeviserPack({pack_state:"open", personId:vm.deviserId}, onGetOrdersSuccess, UtilService.onError);
 		}
 
 		function changePackState(order,pack) {
