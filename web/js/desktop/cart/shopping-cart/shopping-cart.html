@@ -24,16 +24,16 @@
 						<span class="tag-name" ng-bind="tag.name"></span>&nbsp;
 							<span ng-repeat="value in tag.values track by $index">
 								<span ng-if="!shoppingCartCtrl.isObject(value)">
-									<span ng-if="$index>0">/&nbsp;</span><span ng-bind="(value | capitalize)"></span>&nbsp;</span>
+									<span ng-if="$index>0">/&nbsp;</span><span ng-bind="(value | capitalize)"></span></span>
 								</span>
 					</div>
 				</td>
 				<td class="quantity">
-					<span class="quntity-number" ng-bind="product.quantity"></span>
+					<span ng-click="shoppingCartCtrl.subQuantity(product)" style="cursor:pointer;">-</span>&nbsp;<span class="quantity-number" ng-bind="product.quantity"></span>&nbsp;<span style="cursor:pointer;" ng-click="shoppingCartCtrl.addQuantity(product)">+</span>
 				</td>
 				<td class="subtotal">
 					<span class="subtotal-amount">€<span ng-bind="product.price*product.quantity"></span></span>
-					<span class="subtotal-delete"><a href="#" ng-click="shoppingCartCtrl.deleteItem(product.price_stock_id)">&times; Delete</a></span>
+					<span class="subtotal-delete"><a href="#" ng-click="shoppingCartCtrl.deleteItem(product.price_stock_id)"><i class="ion-trash-a"></i></a></span>
 				</td>
 			</tr>
 		</tbody>
