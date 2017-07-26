@@ -1804,7 +1804,13 @@ class Person extends CActiveRecord implements IdentityInterface
 	 * @return bool
 	 */
 	public function hasShippingSettings() {
-		return count($this->shippingSettingsMapping) > 0;
+		foreach ($this->shippingSettingsMapping as $shippingSettings) {
+			if (count($shippingSettings->prices) > 0) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	/**
