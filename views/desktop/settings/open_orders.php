@@ -30,7 +30,7 @@ $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD
 					</span>
 					<span class="col-md-4 panel">
 						<span class="col-md-12">ORDER DATE</span>
-						<span>{{order.order_date.sec | date:'dd/MM/yy'}}</span>
+						<span>{{order.order_date | date:'dd/MM/yy'}}</span>
 					</span>
 					<span class="col-md-4 panel">
 						<span class="col-md-12">CLIENT NAME</span>
