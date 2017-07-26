@@ -296,7 +296,13 @@ class Order extends CActiveRecord {
 
 		// if deviser id is specified
 		if ((array_key_exists("pack_state", $criteria)) && (!empty($criteria["pack_state"]))) {
-			$query->andWhere(["packs.pack_state" => $criteria["pack_state"]]);
+        	if ($criteria['pack_state'] == 'open') {
+				$query->andWhere(["in", "packs.pack_state", [OrderPack::PACK_STATE_PAID, OrderPack::PACK_STATE_AWARE]]);
+			} elseif ($criteria['pack_state'] == 'past') {
+				$query->andWhere(["in", "packs.pack_state", [OrderPack::PACK_STATE_SHIPPED]]);
+			} else {
+				$query->andWhere(["packs.pack_state" => $criteria["pack_state"]]);
+			}
 		}
 
 		// if order_state is specified
@@ -591,10 +597,10 @@ class Order extends CActiveRecord {
 					$shipping->city = $person->personalInfoMapping->city;
 					$shipping->country = $person->personalInfoMapping->country;
 					$shipping->address = $person->personalInfoMapping->address;
-					$shipping->zipcode = $person->personalInfoMapping->zip;
+					$shipping->zip = $person->personalInfoMapping->zip;
 					$shipping->vat_id = $person->personalInfoMapping->vat_id;
-					$shipping->phone['prefix'] = $person->personalInfoMapping->phone_number_prefix;
-					$shipping->phone['number'] = $person->personalInfoMapping->phone_number;
+					$shipping->phone_number_prefix = $person->personalInfoMapping->phone_number_prefix;
+					$shipping->phone_number = $person->personalInfoMapping->phone_number;
 					$this->setShippingAddress($shipping);
 				}
 

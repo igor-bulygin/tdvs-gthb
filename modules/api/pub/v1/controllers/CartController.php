@@ -176,10 +176,10 @@ class CartController extends AppPublicController
 			$person->personalInfoMapping->city = $shipping->city;
 			$person->personalInfoMapping->country = $shipping->country;
 			$person->personalInfoMapping->address = $shipping->address;
-			$person->personalInfoMapping->zip = $shipping->zipcode;
+			$person->personalInfoMapping->zip = $shipping->zip;
 			$person->personalInfoMapping->vat_id = $shipping->vat_id;
-			$person->personalInfoMapping->phone_number_prefix = $shipping->phone['prefix'];
-			$person->personalInfoMapping->phone_number = $shipping->phone['number'];
+			$person->personalInfoMapping->phone_number_prefix = $shipping->phone_number_prefix;
+			$person->personalInfoMapping->phone_number = $shipping->phone_number;
 
 			$person->setAttributes('personal_info', $person->personalInfoMapping);
 			$person->save();
@@ -288,7 +288,7 @@ class CartController extends AppPublicController
 						'line1' => $shippingAddress->address,
 						'city' => $shippingAddress->city,
 						'country' => $shippingAddress->country,
-						'postal_code' => $shippingAddress->zipcode,
+						'postal_code' => $shippingAddress->zip,
 					],
 					'name' => $shippingAddress->getFullName(),
 					'phone' => $shippingAddress->getPhone(),
@@ -355,7 +355,7 @@ class CartController extends AppPublicController
 			$order->recalculateTotals();
 
 			// Save charges responses and payment_info in the order
-//			$cart->setAttribute('payment_info', $currentPaymentInfo);
+			$cart->setAttribute('payment_info', $currentPaymentInfo);
 //			$cart->setAttribute('charges', $charges);
 			$order->order_state = Order::ORDER_STATE_PAID;
 			$order->save();

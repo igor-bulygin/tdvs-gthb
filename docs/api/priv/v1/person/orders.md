@@ -37,28 +37,24 @@ Example about how to call to Web Service to get a list of orders purchaed by per
                 "last_name": "Jackson",
                 "vat_id": "12345678Z",
                 "email": "jacko@king.of.pop.com",
-                "phone": {
-                    "prefix": "34",
-                    "number": "981981981"
-                },
+				"phone_number_prefix": "34",
+				"phone_number": "981981981"
                 "country": "ES",
                 "city": "Best City",
                 "address": "Best street, 15",
-                "zipcode": "15177"
+                "zip": "15177"
 		   },
 		   "billing_address": {
                 "name": "Michael",
                 "last_name": "Jackson",
                 "vat_id": "12345678Z",
                 "email": "jacko@king.of.pop.com",
-                "phone": {
-                    "prefix": "34",
-                    "number": "981981981"
-                },
-                "country": "ES",
+                "phone_number_prefix": "34",
+				"phone_number": "981981981"
+				"country": "ES",
                 "city": "Best City",
                 "address": "Best street, 15",
-                "zipcode": "15177"
+                "zip": "15177"
 		   },
 		   "packs": [
 			   {

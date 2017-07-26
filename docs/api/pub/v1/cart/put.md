@@ -29,14 +29,12 @@ Next example shows the structure of an object that represents an address
 	"last_name": null,
 	"vat_id": null,
 	"email": null,
-	"phone": {
-		"prefix" : null,
-		"number" : null
-	},
+	"phone_number_prefix": null,
+	"phone_number":null,		
 	"country": null,
 	"city": null,
 	"address": null,
-	"zipcode": null
+	"zip": null
 }
 ```
 

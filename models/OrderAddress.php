@@ -7,11 +7,12 @@ namespace app\models;
  * @property string $last_name
  * @property string $vat_id
  * @property string $email
- * @property array $phone
+ * @property string $phone_number_prefix
+ * @property string $phone_number
  * @property string $country
  * @property string $city
  * @property string $address
- * @property string $zipcode
+ * @property string $zip
  *
  * @method Order getParentObject()
  */
@@ -39,11 +40,12 @@ class OrderAddress extends EmbedModel
 			'last_name',
 			'vat_id',
 			'email',
-			'phone',
+			'phone_number_prefix',
+			'phone_number',
 			'country',
 			'city',
 			'address',
-			'zipcode',
+			'zip',
 		];
 	}
 
@@ -75,15 +77,15 @@ class OrderAddress extends EmbedModel
 	 */
 	public function getPhone()
 	{
-		if (!isset($this->phone['number'])) {
+		if (empty($this->phone_number)) {
 			return null;
 		}
 
 		$phone1 = '';
-		if (isset($this->phone['prefix'])) {
-			$phone1 .= '+' . $this->phone['prefix'] . ' ';
+		if (empty($this->phone_number_prefix)) {
+			$phone1 .= '+' . $this->phone_number_prefix . ' ';
 		}
-		$phone1 .= $this->phone['number'];
+		$phone1 .= $this->phone_number;
 
 		return $phone1;
 	}
