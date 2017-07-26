@@ -6,6 +6,7 @@ use app\helpers\CController;
 use app\models\Order;
 use yii\base\Exception;
 use yii\web\NotFoundHttpException;
+use yii\web\UnauthorizedHttpException;
 
 class OrderController extends CController
 {
@@ -17,8 +18,12 @@ class OrderController extends CController
 			throw new NotFoundHttpException();
 		}
 
-		if ($order->order_state != Order::ORDER_STATE_PAID) {
+		if (!$order->isOrder()) {
 			throw new Exception("This order is in an invalid state");
+		}
+
+		if (!$order->isEditable()) {
+			throw new UnauthorizedHttpException("You have no access to this order");
 		}
 
 		$this->layout = '/desktop/public-2.php';

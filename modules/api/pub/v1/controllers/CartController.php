@@ -67,8 +67,8 @@ class CartController extends AppPublicController
 			throw new BadRequestHttpException("This order is in an invalid state");
 		}
 
-		if (!$cart->isCartEditable()) {
-			throw new UnauthorizedHttpException();
+		if (!$cart->isEditable()) {
+			throw new UnauthorizedHttpException("You have no access to this order");
 		}
 
 		$product = new OrderProduct();
@@ -104,8 +104,8 @@ class CartController extends AppPublicController
 			throw new BadRequestHttpException("This order is in an invalid state");
 		}
 
-		if (!$cart->isCartEditable()) {
-			throw new UnauthorizedHttpException();
+		if (!$cart->isEditable()) {
+			throw new UnauthorizedHttpException("You have no access to this order");
 		}
 
 		$cart->deleteProduct($priceStockId);
@@ -130,8 +130,8 @@ class CartController extends AppPublicController
 			throw new BadRequestHttpException("This order is in an invalid state");
 		}
 
-		if (!$cart->isCartEditable()) {
-			throw new UnauthorizedHttpException();
+		if (!$cart->isEditable()) {
+			throw new UnauthorizedHttpException("You have no access to this order");
 		}
 
 		// only validate received fields (only if we are not changing the state)
@@ -213,8 +213,8 @@ class CartController extends AppPublicController
 			throw new BadRequestHttpException("This order is in an invalid state");
 		}
 
-		if (!$order->isCartEditable()) {
-			throw new UnauthorizedHttpException();
+		if (!$cart->isEditable()) {
+			throw new UnauthorizedHttpException("You have no access to this order");
 		}
 
 		/*
