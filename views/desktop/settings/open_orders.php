@@ -8,7 +8,7 @@ GlobalAsset::register($this);
 
 /** @var Person $person */
 
-$this->title = 'My orders - Open orders - ' . $person->getName() . ' - Todevise';
+$this->title = 'My orders - ' . $person->getName() . ' - Todevise';
 $this->params['person'] = $person;
 $this->params['settings_menu_active_option'] = 'orders';
 $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD, 'person-var-script');
@@ -19,10 +19,28 @@ $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD
 <?= SettingsHeader::widget() ?>
 <?php } ?>
 
-<div ng-controller="openOrdersCtrl as openOrdersCtrl">
+<div ng-controller="ordersCtrl as ordersCtrl">
 	<div class="container">
+		<div class="mb-20 col-md-12">
+			<div class="col-md-6">
+				<span class="col-md-5">State filter</span>
+				<ol class="nya-bs-select col-md-10" ng-model="ordersCtrl.stateFilter" ng-change="ordersCtrl.getOrders()">
+					<li nya-bs-option="state in ordersCtrl.enabledStates">
+						<a href="#"><span ng-bind="state.name"></span></a>
+					</li>
+				</ol>
+			</div>
+			<div class="col-md-6">
+				<span class="col-md-5">Type filter</span>
+				<ol class="nya-bs-select col-md-10" ng-model="ordersCtrl.typeFilter" ng-change="ordersCtrl.getOrders()">
+					<li nya-bs-option="type in ordersCtrl.enabledTypes">
+						<a href="#"><span ng-bind="type.name"></span></a>
+					</li>
+				</ol>
+			</div>
+		</div>
 		<uib-accordion>
-			<div uib-accordion-group ng-cloak ng-repeat="order in openOrdersCtrl.orders">
+			<div uib-accordion-group ng-cloak ng-repeat="order in ordersCtrl.orders">
 				<uib-accordion-heading>
 					<span class="col-md-4 panel">
 						<span class="col-md-12">INVOICE Nº</span>
@@ -100,10 +118,10 @@ $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD
 									</div>
 									<p>When you see the order, please click the button below to inform us</p>
 								</div>
-								<button class="btn btn-green" ng-click="openOrdersCtrl.changePackState(order,pack)" ng-enabled="pack.pack_state==='aware'">READY TO CREATE</button>
+								<button class="btn btn-green" ng-click="ordersCtrl.changePackState(order,pack)" ng-enabled="pack.pack_state==='aware'">READY TO CREATE</button>
 							</div>
 							<div ng-switch-when="preparing">
-								<form name="openOrdersCtrl.shippingForm" class="form-horizontal" >
+								<form name="ordersCtrl.shippingForm" class="form-horizontal" >
 									<div class="form-group col-md-6">
 										<label for="shippingCompany" class="col-md-12">Shipping company</label>
 										<div class="col-md-12">
@@ -128,7 +146,7 @@ $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD
 										When you click this button, the order will be moved to PAST ORDERS
 									</span>
 									<div class="form-group col-md-12">
-										<button class="btn btn-green" ng-click="openOrdersCtrl.changeOrderState(order)" ng-enabled="order.state==='preparing'&& openOrdersCtrl.shippingForm.$valid">PACKAGE WAS SHIPPED</button>
+										<button class="btn btn-green" ng-click="ordersCtrl.changeOrderState(order)" ng-enabled="order.state==='preparing'&& ordersCtrl.shippingForm.$valid">PACKAGE WAS SHIPPED</button>
 									</div>
 
 								</form>

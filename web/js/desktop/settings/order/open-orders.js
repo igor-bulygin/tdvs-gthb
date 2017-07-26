@@ -6,6 +6,11 @@
 		vm.changePackState=changePackState;
 		vm.deviserId=person.id;
 		vm.orders=[];
+		vm.enabledStates=[{value:"all", name : "All orders"},{value:"open", name : "Open orders"},{value:"past", name :"Past orders"}];
+		vm.stateFilter={value:"all", name : "all"};
+		vm.enabledTypes=[{value:"received", name : "Works you sold"},{value:"done", name : "Works you bought"}];
+		vm.typeFilter={value:"received", name : "Works you sold"};
+		vm.getOrders=getOrders;
 		init();
 
 		function init() {
@@ -32,7 +37,7 @@
 					order.total= order.totalPrice + order.totalShippingPrice + order.commission;
 				});
 			}
-			orderDataService.getDeviserPack({pack_state:"open", personId:vm.deviserId}, onGetOrdersSuccess, UtilService.onError);
+			orderDataService.getDeviserPack({pack_state:vm.stateFilter.value, personId:vm.deviserId, pack_type:vm.typeFilter.value}, onGetOrdersSuccess, UtilService.onError);
 		}
 
 		function changePackState(order,pack) {
@@ -53,5 +58,5 @@
 
 	angular
 	.module('settings')
-	.controller('openOrdersCtrl', controller);
+	.controller('ordersCtrl', controller);
 }());
