@@ -213,7 +213,7 @@ class CartController extends AppPublicController
 			throw new BadRequestHttpException("This order is in an invalid state");
 		}
 
-		if (!$cart->isEditable()) {
+		if (!$order->isEditable()) {
 			throw new UnauthorizedHttpException("You have no access to this order");
 		}
 
@@ -355,8 +355,8 @@ class CartController extends AppPublicController
 			$order->recalculateTotals();
 
 			// Save charges responses and payment_info in the order
-			$cart->setAttribute('payment_info', $currentPaymentInfo);
-//			$cart->setAttribute('charges', $charges);
+			$order->setAttribute('payment_info', $currentPaymentInfo);
+//			$order->setAttribute('charges', $charges);
 			$order->order_state = Order::ORDER_STATE_PAID;
 			$order->save();
 
