@@ -1837,27 +1837,21 @@ class Person extends CActiveRecord implements IdentityInterface
 		return !empty($products);
 	}
 
-	public function getShippingPrice($weight, $country_code, $shipping_type = 'standard') {
-		$price = null;
-		$shippings = $this->shippingSettingsMapping;
-		foreach ($shippings as $shipping) {
-			if ($shipping->country_code == $country_code) {
-				foreach ($shipping->prices as $price) {
-					if ($price['min_weight'] <= $weight && ($price['max_weight'] == null || $price['max_weight'] >= $weight)) {
-						switch ($shipping_type) {
-							case 'standard':
-								return $price['price'];
+	public function getShippingPrice($weight, $country_code, $shipping_type = 'standard')
+	{
+		$shippingSettingRange = $this->getShippinSettingRange($weight, $country_code);
+		if ($shippingSettingRange) {
+			switch ($shipping_type) {
+				case 'standard':
+					return $shippingSettingRange['price'];
 
-							case 'express';
-								return $price['price_express'];
+				case 'express';
+					return $shippingSettingRange['price_express'];
 
-						}
-					}
-				}
 			}
 		}
 
-		return $price;
+		return null;
 	}
 
 	/**
