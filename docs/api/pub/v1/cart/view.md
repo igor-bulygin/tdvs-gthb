@@ -95,7 +95,8 @@ Example about how to call to Web Service to get the cart
 					   "name": "Stark - Printed Velvet Dress",
 					   "photo": "http://localhost.thumbor.todevise.com:8000/t90c-IOS5LTcUn-tVJ5GORlhxOo=//uploads/product/ca60b295/2016-11-14-13-17-19-1fe9f.jpg",
 					   "slug": "stark-printed-velvet-dress",
-					   "url": "http://localhost:8080/work/stark-printed-velvet-dress/ca60b295"
+					   "url": "http://localhost:8080/work/stark-printed-velvet-dress/ca60b295",
+					   "stock": 3
 				   }
 			   }
 		   ]

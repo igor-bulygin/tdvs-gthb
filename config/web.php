@@ -387,6 +387,7 @@ $config = [
 				'GET api3/pub/v1/person' => 'api3/pub/v1/person/index',
 				'GET api3/pub/v1/person/<personId:[^/.]*?>' => 'api3/pub/v1/person/view',
 				'POST api3/pub/v1/person' => 'api3/pub/v1/person/create',
+
 				// Person - private
 				'GET api3/priv/v1/person/<personId:[^/.]*?>' => 'api3/priv/v1/person/view',
 				'GET api3/priv/v1/person/<personId:[^/.]*?>/orders' => 'api3/priv/v1/person/orders',

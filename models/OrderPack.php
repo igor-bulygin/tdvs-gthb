@@ -223,13 +223,21 @@ class OrderPack extends EmbedModel
 
 		$result = [];
 		if ($products) {
-			foreach ($products as $p) {
+			foreach ($products as $k => $p) {
 				$product = Product::findOne(['short_id' => $p['product_id']]);
+				if (empty($product)) {
+					unset($products[$k]);
+				}
+				$priceStock = $product->getPriceStockItem($p['price_stock_id']);
+				if (empty($priceStock)) {
+					unset($products[$k]);
+				}
 				$p['product_info'] = [
 					'name' => $product->getName(),
 					'photo' => Utils::url_scheme() . Utils::thumborize($product->getMainImage()),
 					'slug' => $product->getSlug(),
 					'url' => $product->getViewLink(),
+					'stock' => $priceStock['stock'],
 				];
 				$result[] = $p;
 			}
