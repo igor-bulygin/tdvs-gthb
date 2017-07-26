@@ -34,14 +34,14 @@ $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD
 					</span>
 					<span class="col-md-4 panel">
 						<span class="col-md-12">CLIENT NAME</span>
-						<span ng-bind="order.billing_address.first_name + ' ' + order.billing_address.last_name"></span>
+						<span ng-bind="order.billing_address.name + ' ' + order.billing_address.last_name"></span>
 					</span>
 				</uib-accordion-heading>
 				<div class="col-md-6">
 					<h4>Info</h4>
 					<div class="col-md-6">
 						<p>CLIENT</p>
-						<p ng-bind="order.billing_address.first_name + ' ' + order.billing_address.last_name"></p>
+						<p ng-bind="order.billing_address.name + ' ' + order.billing_address.last_name"></p>
 						<p ng-bind="order.billing_address.address"></p>
 						<p ng-bind="order.billing_address.city + ', ' + order.billing_address.country"></p>
 					</div>
@@ -85,51 +85,55 @@ $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD
 						</div>
 					</div>
 				</div>
-				<div class="col-md-6" ng-switch on="order.state">
-					<div ng-switch-when="aware">
-						<div class="col-md-12">
-							<div class="col-md-12" >
-								<div class="col-md-5 col-md-offset-1">
-									<label>I'M AWARE</label>
-								</div>
-								<div class="col-md-3 col-md-offset-2">
-									<span>I'M PREPARING IT</span>
-								</div>
-							</div>
-							<p>When you see the order, please click the button below to inform us</p>
-						</div>
-						<button class="btn btn-green" ng-click="openOrdersCtrl.changeOrderState(order)" ng-enabled="order.state==='aware'">READY TO CREATE</button>
-					</div>
-					<div ng-switch-when="preparing">
-						<form name="openOrdersCtrl.shippingForm" class="form-horizontal" >
-							<div class="form-group col-md-6">
-								<label for="shippingCompany" class="col-md-12">Shipping company</label>
+				<div class="col-md-6">
+					<div ng-repeat="pack in order.packs">
+						<div ng-switch on="pack.pack_state">
+							<div ng-switch-when="aware">
 								<div class="col-md-12">
-									<input type="text" name="shippingCompany" class="form-control">
+									<div class="col-md-12" >
+										<div class="col-md-5 col-md-offset-1">
+											<label>I'M AWARE</label>
+										</div>
+										<div class="col-md-3 col-md-offset-2">
+											<span>I'M PREPARING IT</span>
+										</div>
+									</div>
+									<p>When you see the order, please click the button below to inform us</p>
 								</div>
-								<label for="eta" class="col-md-12">ETA <span>OPTIONAL</span></label>
-								<div class="col-md-12">
-									<input type="text" name="eta" class="form-control" >
-								</div>
+								<button class="btn btn-green" ng-click="openOrdersCtrl.changePackState(order,pack)" ng-enabled="pack.pack_state==='aware'">READY TO CREATE</button>
 							</div>
-							<div class="form-group col-md-6">
-								<label for="trackingNumber" class="col-md-12">Tracking number</label>
-								<div class="col-md-12">
-									<input type="text" name="trackingNumber" class="form-control" >
-								</div>
-								<label for="trackLink" class="col-md-12">Link to track package <span>OPTIONAL</span></label>
-								<div class="col-md-12">
-									<input type="text" name="trackLink" class="form-control">
-								</div>
-							</div>
-							<span class="form-group col-md-12">
-								When you click this button, the order will be moved to PAST ORDERS
-							</span>
-							<div class="form-group col-md-12">
-								<button class="btn btn-green" ng-click="openOrdersCtrl.changeOrderState(order)" ng-enabled="order.state==='preparing'&& openOrdersCtrl.shippingForm.$valid">PACKAGE WAS SHIPPED</button>
-							</div>
+							<div ng-switch-when="preparing">
+								<form name="openOrdersCtrl.shippingForm" class="form-horizontal" >
+									<div class="form-group col-md-6">
+										<label for="shippingCompany" class="col-md-12">Shipping company</label>
+										<div class="col-md-12">
+											<input type="text" name="shippingCompany" class="form-control">
+										</div>
+										<label for="eta" class="col-md-12">ETA <span>OPTIONAL</span></label>
+										<div class="col-md-12">
+											<input type="text" name="eta" class="form-control" >
+										</div>
+									</div>
+									<div class="form-group col-md-6">
+										<label for="trackingNumber" class="col-md-12">Tracking number</label>
+										<div class="col-md-12">
+											<input type="text" name="trackingNumber" class="form-control" >
+										</div>
+										<label for="trackLink" class="col-md-12">Link to track package <span>OPTIONAL</span></label>
+										<div class="col-md-12">
+											<input type="text" name="trackLink" class="form-control">
+										</div>
+									</div>
+									<span class="form-group col-md-12">
+										When you click this button, the order will be moved to PAST ORDERS
+									</span>
+									<div class="form-group col-md-12">
+										<button class="btn btn-green" ng-click="openOrdersCtrl.changeOrderState(order)" ng-enabled="order.state==='preparing'&& openOrdersCtrl.shippingForm.$valid">PACKAGE WAS SHIPPED</button>
+									</div>
 
-						</form>
+								</form>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

@@ -3,7 +3,7 @@
 
 	function controller(UtilService, orderDataService) {
 		var vm = this;
-		vm.changeOrderState=changeOrderState;
+		vm.changePackState=changePackState;
 		vm.deviserId=person.id;
 		vm.orders=[];
 		init();
@@ -35,14 +35,17 @@
 			orderDataService.getDeviserOrders({pack_state:"open", personId:vm.deviserId}, onGetOrdersSuccess, UtilService.onError);
 		}
 
-		function changeOrderState(order) {
-			if (order.state==='aware') {
-				order.state='preparing'
+		function changePackState(order,pack) {
+			if (pack.pack_state==='aware') {
+				pack.pack_state='preparing'
 			}
-			else if (order.state==='preparing') {
-				order.state='shipped';
+			else if (pack.pack_state==='preparing') {
+				pack.pack_state='shipped';
 				//TODO send changed state
-				vm.orders.splice(vm.orders.indexOf(order),1);
+				order.packs.splice(order.packs.indexOf(pack),1);
+				if (order.packs.length<1) {
+					vm.orders.splice(vm.orders.indexOf(order),1);
+				}
 			}
 			
 		}
