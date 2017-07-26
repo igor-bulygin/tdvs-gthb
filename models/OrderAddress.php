@@ -42,6 +42,7 @@ class OrderAddress extends EmbedModel
 			'email',
 			'phone_number_prefix',
 			'phone_number',
+			'country',
 			'city',
 			'address',
 			'zip',
