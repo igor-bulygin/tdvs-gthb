@@ -788,7 +788,7 @@ class Person extends CActiveRecord implements IdentityInterface
 
 				static::$retrieveExtraFields = [
 					'videos',
-//					'personal_info',
+					'personal_info',
 				];
 
 				self::$translateFields = true;
