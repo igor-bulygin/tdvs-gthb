@@ -209,9 +209,9 @@ class OrderPack extends EmbedModel
 			$price = $shippingSetting->getShippingSettingRange($this->pack_weight);
 			if ($price) {
 				$deviser_info['shipping_time'] = $shippingSetting->shipping_time;
-				$deviser_info['price'] = $price['price'];
-				$deviser_info['price_express'] = $price['price_express'];
 				$deviser_info['shipping_express_time'] = $shippingSetting->shipping_express_time;
+				$deviser_info['price'] = $price['price'];
+				$deviser_info['price_express'] = isset($price['price_express']) ? $price['price_express'] : null;
 			}
 		}
 
