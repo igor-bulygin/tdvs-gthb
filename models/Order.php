@@ -591,10 +591,10 @@ class Order extends CActiveRecord {
 					$shipping->city = $person->personalInfoMapping->city;
 					$shipping->country = $person->personalInfoMapping->country;
 					$shipping->address = $person->personalInfoMapping->address;
-					$shipping->zipcode = $person->personalInfoMapping->zip;
+					$shipping->zip = $person->personalInfoMapping->zip;
 					$shipping->vat_id = $person->personalInfoMapping->vat_id;
-					$shipping->phone['prefix'] = $person->personalInfoMapping->phone_number_prefix;
-					$shipping->phone['number'] = $person->personalInfoMapping->phone_number;
+					$shipping->phone_number_prefix = $person->personalInfoMapping->phone_number_prefix;
+					$shipping->phone_number = $person->personalInfoMapping->phone_number;
 					$this->setShippingAddress($shipping);
 				}
 

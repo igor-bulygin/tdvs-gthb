@@ -32,28 +32,24 @@ Example about how to call to Web Service to get the cart
 	   "last_name": "Vázquez",
 	   "vat_id": "12345678Z",
 	   "email": "jose.vazquez@gmail.com",
-	   "phone": {
-		   "prefix": "34",
-		   "number": "657454038"
-	   },
+	   "phone_number_prefix": "34",
+		"phone_number": "981981981"
 	   "country": "ES",
 	   "city": "Lorbé - Oleiros",
 	   "address": "Vila do Couto, 15",
-	   "zipcode": "15177"
+	   "zip": "15177"
    },
    "billing_address": {
 	   "name": "Jose",
 	   "last_name": "Vázquez",
 	   "vat_id": "12345678Z",
 	   "email": "jose.vazquez@gmail.com",
-	   "phone": {
-		   "prefix": "34",
-		   "number": "657454038"
-	   },
+	   "phone_number_prefix": "34",
+		"phone_number": "981981981"
 	   "country": "ES",
 	   "city": "Lorbé - Oleiros",
 	   "address": "Vila do Couto, 15",
-	   "zipcode": "15177"
+	   "zip": "15177"
    },
    "packs": [
 	   {
