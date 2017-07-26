@@ -107,7 +107,7 @@ class PersonController extends AppPrivateController
 		}
 
 		// show only fields needed in this scenario
-		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_OWNER);
+		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_CLIENT_ORDER);
 
 		$order = Order::findOneSerialized($orderId);
 		if (empty($order)) {
@@ -121,6 +121,8 @@ class PersonController extends AppPrivateController
 		if ($order->order_state == Order::ORDER_STATE_CART) {
 			throw new BadRequestHttpException("This order has an invalid state");
 		}
+
+		$order->setSubDocumentsForSerialize();
 
 		return $order;
 	}
@@ -138,7 +140,7 @@ class PersonController extends AppPrivateController
 		}
 
 		// show only fields needed in this scenario
-		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_OWNER);
+		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_CLIENT_ORDER);
 
 		// set pagination values
 		$limit = Yii::$app->request->get('limit', 99999);
@@ -153,6 +155,10 @@ class PersonController extends AppPrivateController
 			"limit" => $limit,
 			"offset" => $offset,
 		]);
+
+		foreach ($orders as $order) {
+			$order->setSubDocumentsForSerialize();
+		}
 
 		return [
 			"items" => $orders,
