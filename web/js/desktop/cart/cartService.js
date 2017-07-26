@@ -3,6 +3,7 @@
 
 	function service(tagDataService, UtilService) {
 		this.parseTags = parseTags;
+		this.setTotalItems = setTotalItems;
 
 		function parseTags(cart){
 
@@ -47,6 +48,21 @@
 			}
 
 			tagDataService.getTags(null, onGetTagsSuccess, UtilService.onError);
+		}
+
+		function setTotalItems(cart) {
+			var total = 0;
+			if(angular.isArray(cart.packs) && cart.packs.length > 0) {
+				cart.packs.forEach(function(pack) {
+					if(angular.isArray(pack.products) && pack.products.length > 0) {
+						pack.products.forEach(function (product) {
+							total += product.quantity;
+						})
+						
+					}
+				})
+			}
+			cart.totalItems = total;
 		}
 	}
 

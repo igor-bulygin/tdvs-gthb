@@ -26,6 +26,7 @@
 			function onAddProductSuccess(data) {
 				vm.cart = angular.copy(data);
 				cartService.parseTags(vm.cart);
+				$rootScope.$broadcast(cartEvents.cartUpdated, {cart: vm.cart});
 			}
 
 			cartDataService.addProduct({

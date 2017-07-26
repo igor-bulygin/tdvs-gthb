@@ -26,11 +26,15 @@ class OrderController extends CController
 		if (!$order->isEditable()) {
 			throw new UnauthorizedHttpException("You have no access to this order");
 		}
+		
+		Person::SetSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
+		$person = Person::findOneSerialized($order->person_id);
 
 		$this->layout = '/desktop/public-2.php';
 
 		return $this->render("success", [
-			'person' => $order->getPerson(),
+			'person' => $person,
+			'order_id' => $order_id
 		]);
 	}
 }

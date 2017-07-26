@@ -27,6 +27,7 @@
 			function onGetCartSuccess(data) {
 				vm.cart = angular.copy(data);
 				cartService.parseTags(vm.cart);
+				cartService.setTotalItems(vm.cart),
 				vm.cart.shipping_address = Object.assign({}, vm.person.personal_info);
 			}
 

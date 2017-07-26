@@ -4,9 +4,8 @@
 	function controller(orderDataService, cartService, $location, UtilService) {
 		var vm = this;
 		vm.person = person;
-		vm.state = {
-			state: 4
-		};
+		vm.order_id = order_id;
+		vm.isObject = angular.isObject;
 
 		init();
 
@@ -19,12 +18,10 @@
 				vm.order = angular.copy(orderData);
 				cartService.parseTags(vm.order);
 			}
-			var url = $location.absUrl();
-			var order_id = url.split('/')[url.split('/').length-1];
 
 			orderDataService.getOrder({
-				personId: vm.person.short_id,
-				orderId:order_id
+				personId: vm.person.id,
+				orderId: vm.order_id
 			}, onGetOrderSuccess, UtilService.onError);
 		}
 	}

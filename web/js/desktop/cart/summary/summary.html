@@ -1,14 +1,11 @@
-<span class="shopping-cart-title" ng-if="summaryCtrl.state<4">Cart summary</span>
+<span class="shopping-cart-title">Cart summary (<span ng-bind="summaryCtrl.cart.totalItems"></span> items)</span>
 <div ng-if="summaryCtrl.state >= 1">
 	<div ng-repeat="pack in summaryCtrl.cart.packs">
 		<span class="deviser-name-item summary-cart-wrapper" ng-bind="pack.deviser_info.name"></span>
 		<div class="summary-cart-wrapper summary-white-item" ng-repeat="product in pack.products">
-			<div ng-if="summaryCtrl.state === 4" class="img-checkout-wrapper col-md-2">
-				<img ng-src="{{product.product_info.photo}}" ng-alt="product.product_info.name" ng-title="product.product_info.name">
-			</div>
 			<div>
 				<div>
-					<span class="bold"><span class="ng-class:{'product-name': summaryCtrl.state<4}" ng-bind="product.product_info.name"></span></span> <!-- TODO: Set bold font class -->
+					<span class="bold"><span class="ng-class:{'product-name': summaryCtrl.state<4}" ng-bind="product.product_info.name"></span></span>
 					<span class="pull-right text-green bold">€&nbsp;<span ng-bind="product.quantity * product.price"></span></span>
 				</div>
 				<div class="ng-class:{'summary-row': summaryCtrl.state < 4}">

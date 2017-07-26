@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(UtilService, $locale, cartDataService, $window) {
+	function controller(UtilService, $locale, cartDataService, $window, localStorageUtilService) {
 		var vm = this;
 		vm.has_error = UtilService.has_error;
 		vm.editPersonalInfo = editPersonalInfo;
@@ -24,6 +24,7 @@
 			Stripe.setPublishableKey('pk_test_p1DPyiicE2IerEV676oj5t89');
 
 			function onReceiveTokenSuccess(data) {
+				localStorageUtilService.removeLocalStorage('cart_id');
 				$window.location.href = currentHost() + '/order/success/' + vm.cart.id;
 			}
 
