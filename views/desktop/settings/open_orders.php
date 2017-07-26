@@ -30,51 +30,107 @@ $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD
 					</span>
 					<span class="col-md-4 panel">
 						<span class="col-md-12">ORDER DATE</span>
-						<span>{{order.date | date}}</span>
+						<span>{{order.order_date.sec | date:'dd/MM/yy'}}</span>
 					</span>
 					<span class="col-md-4 panel">
 						<span class="col-md-12">CLIENT NAME</span>
-						<span ng-bind="order.person_info.first_name + ' ' + order.person_info.last_name"></span>
+						<span ng-bind="order.billing_address.first_name + ' ' + order.billing_address.last_name"></span>
 					</span>
 				</uib-accordion-heading>
 				<div class="col-md-6">
 					<h4>Info</h4>
 					<div class="col-md-6">
 						<p>CLIENT</p>
-						<p ng-bind="order.person_info.first_name + ' ' + order.person_info.last_name"></p>
-						<p ng-bind="order.person_info.address"></p>
-						<p ng-bind="order.person_info.city + ', ' + order.person_info.country"></p>						
+						<p ng-bind="order.billing_address.first_name + ' ' + order.billing_address.last_name"></p>
+						<p ng-bind="order.billing_address.address"></p>
+						<p ng-bind="order.billing_address.city + ', ' + order.billing_address.country"></p>
 					</div>
 					<div class="col-md-6">
 						<div class="col-md-12">
 							<span>YOU RECEIVE</span>
-							<span ng-bind="order.subtotal"></span>
+							<span ng-bind="order.totalPrice"></span>
 						</div>
 						<div class="col-md-12">
 							<span>TODEVISE COMMISSION</span>
 							<span ng-bind="order.commission"></span>
 						</div>
+						<!-- TODO affiliates 
 						<div class="col-md-12">
 							<span>AFFILIATES FOR ALL</span>
 							<span ng-bind="order.affiliates"></span>
-						</div>
+						</div> -->
 						<div class="col-md-12">
 							<span>SHIPPING</span>
-							<span ng-bind="order.shipping"></span>
+							<span ng-bind="order.totalShippingPrice"></span>
+						</div>
+					</div>
+					<div class="col-md-12 text-right">
+						<div class="col-md-12">
+							<span>TOTAL</span>
+							<span ng-bind="order.total"></span>
+						</div>
+					</div>
+					<div ng-repeat="pack in order.packs">
+						<div class="col-md-4" ng-repeat="product in pack.products">
+							<img class="col-md-6" ng-src="{{product.product_info.photo}}">
+							<div class="col-md-6">
+								<label class="col-md-12" ng-bind="product.product_info.name"></label>
+								<span class="col-md-10">Quantity: </span><span class="col-md-2" ng-bind="product.quantity"></span>
+								<span class="col-md-10">Price: </span><span class="col-md-2" ng-bind="product.price"></span>
+								<span class="col-md-10">Size: </span><span class="col-md-2" ng-bind="product.options.size"></span>
+								<!--<div class="col-md-12" ng-repeat="color in product.product_info.options.731ct">
+									<span class="col-md-12" ng-bind="color"></span>
+								</div>-->
+							</div>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-6">
-					<div class="col-md-12">
+				<div class="col-md-6" ng-switch on="order.state">
+					<div ng-switch-when="aware">
 						<div class="col-md-12">
-							<div class="btn-group">
-								<label class="btn" ng-class="{'red-text': openOrdersCtrl.deviser.state==='aware'}" ng-model="openOrdersCtrl.radioModel" uib-btn-radio="'aware'" uncheckable>I'M AWARE</label>
-								<label class="btn" ng-class="{'red-text': openOrdersCtrl.deviser.state==='preparing'}" ng-model="openOrdersCtrl.radioModel" uib-btn-radio="'preparing'" uncheckable>I'M PREPARING IT</label>
+							<div class="col-md-12" >
+								<div class="col-md-5 col-md-offset-1">
+									<label>I'M AWARE</label>
+								</div>
+								<div class="col-md-3 col-md-offset-2">
+									<span>I'M PREPARING IT</span>
+								</div>
 							</div>
+							<p>When you see the order, please click the button below to inform us</p>
 						</div>
-						<p>When you see the order, please click the button below to inform us</p>
+						<button class="btn btn-green" ng-click="openOrdersCtrl.changeOrderState(order)" ng-enabled="order.state==='aware'">READY TO CREATE</button>
 					</div>
-					<button class="btn btn-green" ng-click="openOrdersCtrl.changeDeviserState()" ng-enabled="openOrdersCtrl.deviser.state==='aware'">READY TO CREATE</button>
+					<div ng-switch-when="preparing">
+						<form name="openOrdersCtrl.shippingForm" class="form-horizontal" >
+							<div class="form-group col-md-6">
+								<label for="shippingCompany" class="col-md-12">Shipping company</label>
+								<div class="col-md-12">
+									<input type="text" name="shippingCompany" class="form-control">
+								</div>
+								<label for="eta" class="col-md-12">ETA <span>OPTIONAL</span></label>
+								<div class="col-md-12">
+									<input type="text" name="eta" class="form-control" >
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label for="trackingNumber" class="col-md-12">Tracking number</label>
+								<div class="col-md-12">
+									<input type="text" name="trackingNumber" class="form-control" >
+								</div>
+								<label for="trackLink" class="col-md-12">Link to track package <span>OPTIONAL</span></label>
+								<div class="col-md-12">
+									<input type="text" name="trackLink" class="form-control">
+								</div>
+							</div>
+							<span class="form-group col-md-12">
+								When you click this button, the order will be moved to PAST ORDERS
+							</span>
+							<div class="form-group col-md-12">
+								<button class="btn btn-green" ng-click="openOrdersCtrl.changeOrderState(order)" ng-enabled="order.state==='preparing'&& openOrdersCtrl.shippingForm.$valid">PACKAGE WAS SHIPPED</button>
+							</div>
+
+						</form>
+					</div>
 				</div>
 			</div>
 		</uib-accordion>
