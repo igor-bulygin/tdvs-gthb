@@ -10,8 +10,7 @@ use app\helpers\Utils;
  * @property string $vat_id
  * @property string $country
  * @property string $city
- * @property string $street
- * @property string $number
+ * @property string $address
  * @property string $phone_number_prefix
  * @property string $phone_number
  * @property string $zip
