@@ -33,7 +33,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 								{{personHeaderCtrl.person.name}}
 							</div>
 							<div class="location">
-								{{personHeaderCtrl.person.city}}
+								{{personHeaderCtrl.city}}
 							</div>
 							<div class="description">
 								{{personHeaderCtrl.person.text_short_description[personHeaderCtrl.description_language]}}

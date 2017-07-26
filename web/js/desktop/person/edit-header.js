@@ -64,8 +64,8 @@
 			vm.isProfilePublic = (person.account_state === 'draft' ? false: true);
 			person.text_short_description = UtilService.emptyArrayToObject(person.text_short_description);
 			//set city
-			if(person.personal_info.city && person.personal_info.country)
-				vm.city = person.personal_info.city + ', ' + person.personal_info.country;
+			if(person.city && person.country)
+				vm.city = person.city + ', ' + person.country;
 			//set images
 			if(person.media.header_cropped)
 				vm.header = setHostImage(person.media.header_cropped);
