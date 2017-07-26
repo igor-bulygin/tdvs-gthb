@@ -15,9 +15,20 @@ Example about how to call to Web Service to get a list of packs sold by a person
   
 **Request parameters**:
 * `:person_id`: Id of the person (deviser) you want to get the packs
-* `pack_state`: Filter packs only in a specific state (open, past...)
+* `pack_state`: Filter packs only in a specific state. 
 * `page`: Set the result page that want to be retrieved (default: 1)
 * `limit`: Limit the results returned for page (default: 20)
+
+```
+Available *pack_state* values:
+	- paid
+	- aware
+	- shipped
+	
+Also ther is there is two special available values:
+	- open: includes paid and aware
+	- past: includes shipped
+```
 
 **Response body**:
 
@@ -45,31 +56,31 @@ So, keep in mind that this objects **are not a copy of the data in database**, a
                 "usec": 344000
             },
             "shipping_address": {
-                "first_name": "Jose",
-                "last_name": "Vázquez",
+                "first_name": "Michael",
+                "last_name": "Jackson",
                 "vat_id": "12345678Z",
-                "email": "jose.vazquez@gmail.com",
+                "email": "jacko@king.of.pop.com",
                 "phone": {
                     "prefix": "34",
-                    "number": "657454038"
+                    "number": "981981981"
                 },
                 "country": "ES",
-                "city": "Lorbé - Oleiros",
-                "address": "Vila do Couto, 15",
+                "city": "Best City",
+                "address": "Best street, 15",
                 "zipcode": "15177"
             },
             "billing_address": {
-                "first_name": "Jose",
-                "last_name": "Vázquez",
+                "first_name": "Michael",
+                "last_name": "Jackson",
                 "vat_id": "12345678Z",
-                "email": "jose.vazquez@gmail.com",
+                "email": "jacko@king.of.pop.com",
                 "phone": {
                     "prefix": "34",
-                    "number": "657454038"
+                    "number": "981981981"
                 },
                 "country": "ES",
-                "city": "Lorbé - Oleiros",
-                "address": "Vila do Couto, 15",
+                "city": "Best City",
+                "address": "Best street, 15",
                 "zipcode": "15177"
             },
             "packs": [
@@ -106,7 +117,8 @@ So, keep in mind that this objects **are not a copy of the data in database**, a
                                 "name": "Stark - Printed Velvet Dress",
                                 "photo": "http://localhost.thumbor.todevise.com:8000/t90c-IOS5LTcUn-tVJ5GORlhxOo=//uploads/product/ca60b295/2016-11-14-13-17-19-1fe9f.jpg",
                                 "slug": "stark-printed-velvet-dress",
-                                "url": "http://localhost:8080/work/stark-printed-velvet-dress/ca60b295"
+                                "url": "http://localhost:8080/work/stark-printed-velvet-dress/ca60b295",
+                                "stock": 3
                             }
                         }
                     ]
@@ -127,31 +139,31 @@ So, keep in mind that this objects **are not a copy of the data in database**, a
                 "usec": 505000
             },
             "shipping_address": {
-                "first_name": "Jose",
-                "last_name": "Vázquez",
+                "first_name": "Michael",
+                "last_name": "Jackson",
                 "vat_id": "12345678Z",
-                "email": "jose.vazquez@gmail.com",
+                "email": "jacko@king.of.pop.com",
                 "phone": {
                     "prefix": "34",
-                    "number": "657454038"
+                    "number": "981981981"
                 },
                 "country": "ES",
-                "city": "Lorbé - Oleiros",
-                "address": "Vila do Couto, 15",
+                "city": "Best City",
+                "address": "Best street, 15",
                 "zipcode": "15177"
             },
             "billing_address": {
-                "first_name": "Jose",
-                "last_name": "Vázquez",
+                "first_name": "Michael",
+                "last_name": "Jackson",
                 "vat_id": "12345678Z",
-                "email": "jose.vazquez@gmail.com",
+                "email": "jacko@king.of.pop.com",
                 "phone": {
                     "prefix": "34",
-                    "number": "657454038"
+                    "number": "981981981"
                 },
                 "country": "ES",
-                "city": "Lorbé - Oleiros",
-                "address": "Vila do Couto, 15",
+                "city": "Best City",
+                "address": "Best street, 15",
                 "zipcode": "15177"
             },
             "packs": [
@@ -188,7 +200,8 @@ So, keep in mind that this objects **are not a copy of the data in database**, a
                                 "name": "Stark - Printed Velvet Dress",
                                 "photo": "http://localhost.thumbor.todevise.com:8000/t90c-IOS5LTcUn-tVJ5GORlhxOo=//uploads/product/ca60b295/2016-11-14-13-17-19-1fe9f.jpg",
                                 "slug": "stark-printed-velvet-dress",
-                                "url": "http://localhost:8080/work/stark-printed-velvet-dress/ca60b295"
+                                "url": "http://localhost:8080/work/stark-printed-velvet-dress/ca60b295",
+                                "stock": 3
                             }
                         },
                         {
@@ -213,7 +226,8 @@ So, keep in mind that this objects **are not a copy of the data in database**, a
                                 "name": "Acrylic - Printed Dress",
                                 "photo": "http://localhost.thumbor.todevise.com:8000/2mYu5RL1WeJPFuy-Z1D0ZmiwxpM=//uploads/product/852eb305/2016-11-15-11-04-17-acf14.jpg",
                                 "slug": "acrylic-printed-dress",
-                                "url": "http://localhost:8080/work/acrylic-printed-dress/852eb305"
+                                "url": "http://localhost:8080/work/acrylic-printed-dress/852eb305",
+                                "stock": 3
                             }
                         },
                         {
@@ -238,7 +252,8 @@ So, keep in mind that this objects **are not a copy of the data in database**, a
                                 "name": "Yellowstone - Printed Dress",
                                 "photo": "http://localhost.thumbor.todevise.com:8000/mZwxsziDuXy8Z4-74AK0jwQ-olY=//uploads/product/0f55b159/2016-11-15-11-07-28-2cd14.jpg",
                                 "slug": "yellowstone-printed-dress",
-                                "url": "http://localhost:8080/work/yellowstone-printed-dress/0f55b159"
+                                "url": "http://localhost:8080/work/yellowstone-printed-dress/0f55b159",
+                                "stock": 3
                             }
                         }
                     ]
