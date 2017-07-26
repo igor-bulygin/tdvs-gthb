@@ -25,7 +25,7 @@ Available *pack_state* values:
 	- aware
 	- shipped
 	
-Also ther is there is two special available values:
+Also there is two special available values:
 	- open: includes paid and aware
 	- past: includes shipped
 ```

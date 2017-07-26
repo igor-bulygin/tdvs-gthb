@@ -1,6 +1,6 @@
 ### Person - GET orders
 
-Example about how to call to Web Service to get a list of orders purchaed by person
+Example about how to call to Web Service to get a list of orders bought by person
 
 **URL**: `/api/priv/v1/person/<:person_id>/orders`
 
@@ -15,8 +15,20 @@ Example about how to call to Web Service to get a list of orders purchaed by per
   
 **Request parameters**:
 * `:person_id`: Id of the person (deviser) you want to get the packs
+* `pack_state`: Filter orders only with packs in a specific state. 
 * `page`: Set the result page that want to be retrieved (default: 1)
 * `limit`: Limit the results returned for page (default: 20)
+
+```
+Available *pack_state* values:
+	- paid
+	- aware
+	- shipped
+	
+Also there is two special available values:
+	- open: includes paid and aware
+	- past: includes shipped
+```
 
 **Response body**:
 
