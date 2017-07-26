@@ -6,6 +6,7 @@ use app\helpers\Utils;
 use Exception;
 use MongoDate;
 use yii\mongodb\ActiveQuery;
+use yii\web\ForbiddenHttpException;
 
 /**
  * @property string short_id
@@ -570,6 +571,41 @@ class Order extends CActiveRecord {
 
 	public function setBillingAddress($value) {
 		$this->setSubDocument('billing_address', $value);
+	}
+
+	public function checkOwnerAndTryToAssociate()
+	{
+		if (!\Yii::$app->user->isGuest) {
+			$person = \Yii::$app->user->identity; /* @var Person $person */
+			if (empty($this->person_id)) {
+
+//				if (empty($this->shipping_address)) {
+//					$shipping = $this->getShippingAddress();
+//					$shipping->first_name = $person->personalInfoMapping->firstErrors;
+//					$shipping->last_name = $person->personalInfoMapping->last_name;
+//					$shipping->city = $person->personalInfoMapping->city;
+//					$shipping->country = $person->personalInfoMapping->country;
+//					$shipping->address = $person->personalInfoMapping->address;
+//					$shipping->zipcode = $person->personalInfoMapping->zip;
+//					$shipping->vat_id = $person->personalInfoMapping->vat_id;
+//					$shipping->phone = [
+//						'prefix' => $person->personalInfoMapping->phone_number_prefix,
+//						'number' => $person->personalInfoMapping->phone_number,
+//					];
+//					$this->setShippingAddress($shipping);
+//				}
+
+				$this->person_id = $person->short_id;
+				$this->save();
+
+			} elseif ($this->person_id != $person->short_id) {
+				throw new ForbiddenHttpException();
+			}
+		} else {
+			if (!empty($this->person_id)) {
+				throw new ForbiddenHttpException();
+			}
+		}
 	}
 
 }
