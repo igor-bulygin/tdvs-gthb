@@ -238,6 +238,7 @@
 					order.state='aware';
 					order.totalPrice = 0;
 					order.totalShippingPrice=0;
+					order.order_date= new Date(order.order_date.sec*1000)
 					angular.forEach(order.packs, function(pack, keyPack) {
 						order.totalPrice = order.totalPrice + pack.pack_price;
 						order.totalShippingPrice = order.totalShippingPrice + pack.shipping_price;
