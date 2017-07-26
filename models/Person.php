@@ -764,7 +764,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'collections',
 					'city' => 'city',
 					'country' => 'country',
-					'personal_info',
+//					'personal_info',
 					'media',
 					'press',
 					'videos' => 'videosPreview',
@@ -811,7 +811,8 @@ class Person extends CActiveRecord implements IdentityInterface
 					'shipping_settings',
 					'curriculum',
 					'account_state',
-					'name' => "name",
+					'name' => 'name',
+					'email' => 'email',
 					'url_images' => 'urlImagesLocation',
 					'url_avatar' => "avatarImage128",
 					'main_link' => 'mainLink',
@@ -838,7 +839,8 @@ class Person extends CActiveRecord implements IdentityInterface
 				];
 
 				static::$retrieveExtraFields = [
-					'videos'
+					'credentials',
+					'videos',
 				];
 
 				self::$translateFields = false;
@@ -1205,7 +1207,7 @@ class Person extends CActiveRecord implements IdentityInterface
 	 */
 	public function getEmail()
 	{
-		return $this->credentials['email'];
+		return isset($this->credentials['email']) ? $this->credentials['email'] : null;
 	}
 
 	/**
