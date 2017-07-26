@@ -25,7 +25,7 @@ Example about how to call to Web Service to update the cart
 Next example shows the structure of an object that represents an address
 ```
 {
-	"first_name": null,
+	"name": null,
 	"last_name": null,
 	"vat_id": null,
 	"email": null,

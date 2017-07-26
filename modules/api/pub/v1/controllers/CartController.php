@@ -167,6 +167,23 @@ class CartController extends AppPublicController
 
 			$cart->save(false);
 
+			// If person has no personal_info, we use their shipping_address to fill-in it
+			$person = $cart->getPerson();
+
+			$shipping = $cart->getShippingAddress();
+			$person->personalInfoMapping->name = $shipping->name;
+			$person->personalInfoMapping->last_name = $shipping->last_name;
+			$person->personalInfoMapping->city = $shipping->city;
+			$person->personalInfoMapping->country = $shipping->country;
+			$person->personalInfoMapping->address = $shipping->address;
+			$person->personalInfoMapping->zip = $shipping->zipcode;
+			$person->personalInfoMapping->vat_id = $shipping->vat_id;
+			$person->personalInfoMapping->phone_number_prefix = $shipping->phone['prefix'];
+			$person->personalInfoMapping->phone_number = $shipping->phone['number'];
+
+			$person->setAttributes('personal_info', $person->personalInfoMapping);
+			$person->save();
+
 			Yii::$app->response->setStatusCode(200); // Ok
 
 			Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_CLIENT_ORDER);

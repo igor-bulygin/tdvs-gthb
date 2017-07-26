@@ -56,7 +56,7 @@ So, keep in mind that this objects **are not a copy of the data in database**, a
                 "usec": 344000
             },
             "shipping_address": {
-                "first_name": "Michael",
+                "name": "Michael",
                 "last_name": "Jackson",
                 "vat_id": "12345678Z",
                 "email": "jacko@king.of.pop.com",
@@ -70,7 +70,7 @@ So, keep in mind that this objects **are not a copy of the data in database**, a
                 "zipcode": "15177"
             },
             "billing_address": {
-                "first_name": "Michael",
+                "name": "Michael",
                 "last_name": "Jackson",
                 "vat_id": "12345678Z",
                 "email": "jacko@king.of.pop.com",
@@ -139,7 +139,7 @@ So, keep in mind that this objects **are not a copy of the data in database**, a
                 "usec": 505000
             },
             "shipping_address": {
-                "first_name": "Michael",
+                "name": "Michael",
                 "last_name": "Jackson",
                 "vat_id": "12345678Z",
                 "email": "jacko@king.of.pop.com",
@@ -153,7 +153,7 @@ So, keep in mind that this objects **are not a copy of the data in database**, a
                 "zipcode": "15177"
             },
             "billing_address": {
-                "first_name": "Michael",
+                "name": "Michael",
                 "last_name": "Jackson",
                 "vat_id": "12345678Z",
                 "email": "jacko@king.of.pop.com",

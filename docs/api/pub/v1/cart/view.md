@@ -28,7 +28,7 @@ Example about how to call to Web Service to get the cart
 	   "usec": 344000
    },
    "shipping_address": {
-	   "first_name": "Jose",
+	   "name": "Jose",
 	   "last_name": "Vázquez",
 	   "vat_id": "12345678Z",
 	   "email": "jose.vazquez@gmail.com",
@@ -42,7 +42,7 @@ Example about how to call to Web Service to get the cart
 	   "zipcode": "15177"
    },
    "billing_address": {
-	   "first_name": "Jose",
+	   "name": "Jose",
 	   "last_name": "Vázquez",
 	   "vat_id": "12345678Z",
 	   "email": "jose.vazquez@gmail.com",

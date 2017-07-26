@@ -33,7 +33,7 @@ Example about how to call to Web Service to get a list of orders purchaed by per
 			   "usec": 505000
 		   },
 		   "shipping_address": {
-                "first_name": "Michael",
+                "name": "Michael",
                 "last_name": "Jackson",
                 "vat_id": "12345678Z",
                 "email": "jacko@king.of.pop.com",
@@ -47,7 +47,7 @@ Example about how to call to Web Service to get a list of orders purchaed by per
                 "zipcode": "15177"
 		   },
 		   "billing_address": {
-                "first_name": "Michael",
+                "name": "Michael",
                 "last_name": "Jackson",
                 "vat_id": "12345678Z",
                 "email": "jacko@king.of.pop.com",

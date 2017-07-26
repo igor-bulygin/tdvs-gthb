@@ -3,7 +3,7 @@ namespace app\models;
 
 /**
  *
- * @property string $first_name
+ * @property string $name
  * @property string $last_name
  * @property string $vat_id
  * @property string $email
@@ -35,7 +35,7 @@ class OrderAddress extends EmbedModel
 	public function attributes()
 	{
 		return [
-			'first_name',
+			'name',
 			'last_name',
 			'vat_id',
 			'email',
@@ -65,7 +65,7 @@ class OrderAddress extends EmbedModel
 	 */
 	public function getFullName()
 	{
-		return trim($this->first_name . ' ' . $this->last_name);
+		return trim($this->name . ' ' . $this->last_name);
 	}
 
 	/**
