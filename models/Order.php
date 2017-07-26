@@ -32,7 +32,6 @@ class Order extends CActiveRecord {
 
     const ORDER_STATE_CART = 'order_state_cart';
     const ORDER_STATE_PAID = 'order_state_paid';
-    const ORDER_STATE_UNPAID = 'order_state_unpaid';
 
 	/**
 	 * The attributes that should be serialized
@@ -536,9 +535,7 @@ class Order extends CActiveRecord {
 	 */
 	public function getPacks()
 	{
-		$embedded =$this->getSubDocument('packs');
-
-		return $embedded;
+		return $this->getSubDocument('packs');
 	}
 
 	public function setPacks($value) {
@@ -550,9 +547,7 @@ class Order extends CActiveRecord {
 	 */
 	public function getShippingAddress()
 	{
-		$embedded = $this->getSubDocument('shipping_address');
-
-		return $embedded;
+		return $this->getSubDocument('shipping_address');
 	}
 
 	public function setShippingAddress($value) {
@@ -564,9 +559,7 @@ class Order extends CActiveRecord {
 	 */
 	public function getBillingAddress()
 	{
-		$embedded = $this->getSubDocument('billing_address');
-
-		return $embedded;
+		return $this->getSubDocument('billing_address');
 	}
 
 	public function setBillingAddress($value) {
@@ -579,21 +572,21 @@ class Order extends CActiveRecord {
 			$person = \Yii::$app->user->identity; /* @var Person $person */
 			if (empty($this->person_id)) {
 
-//				if (empty($this->shipping_address)) {
-//					$shipping = $this->getShippingAddress();
-//					$shipping->first_name = $person->personalInfoMapping->firstErrors;
-//					$shipping->last_name = $person->personalInfoMapping->last_name;
-//					$shipping->city = $person->personalInfoMapping->city;
-//					$shipping->country = $person->personalInfoMapping->country;
-//					$shipping->address = $person->personalInfoMapping->address;
-//					$shipping->zipcode = $person->personalInfoMapping->zip;
-//					$shipping->vat_id = $person->personalInfoMapping->vat_id;
-//					$shipping->phone = [
-//						'prefix' => $person->personalInfoMapping->phone_number_prefix,
-//						'number' => $person->personalInfoMapping->phone_number,
-//					];
-//					$this->setShippingAddress($shipping);
-//				}
+				if (empty($this->shipping_address)) {
+					$shipping = $this->getShippingAddress();
+					$shipping->first_name = $person->personalInfoMapping->firstErrors;
+					$shipping->last_name = $person->personalInfoMapping->last_name;
+					$shipping->city = $person->personalInfoMapping->city;
+					$shipping->country = $person->personalInfoMapping->country;
+					$shipping->address = $person->personalInfoMapping->address;
+					$shipping->zipcode = $person->personalInfoMapping->zip;
+					$shipping->vat_id = $person->personalInfoMapping->vat_id;
+					$shipping->phone = [
+						'prefix' => $person->personalInfoMapping->phone_number_prefix,
+						'number' => $person->personalInfoMapping->phone_number,
+					];
+					$this->setShippingAddress($shipping);
+				}
 
 				$this->person_id = $person->short_id;
 				$this->save();

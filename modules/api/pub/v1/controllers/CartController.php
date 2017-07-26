@@ -3,6 +3,7 @@
 namespace app\modules\api\pub\v1\controllers;
 
 use app\models\Order;
+use app\models\OrderPack;
 use app\models\OrderProduct;
 use Stripe\Stripe;
 use Yii;
@@ -329,6 +330,7 @@ class CartController extends AppPublicController
 					);
 				}
 				$pack->pack_percentage_fee = Yii::$app->params['default_todevise_fee'];
+				$pack->pack_state = OrderPack::PACK_STATE_PAID;
 			}
 
 			$order->setPacks($packs);

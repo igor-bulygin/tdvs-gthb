@@ -23,8 +23,10 @@ use yii\web\NotFoundHttpException;
  */
 class OrderPack extends EmbedModel
 {
-	const PACK_STATE_OPEN = 'open';
-	const PACK_STATE_PAST = 'past';
+	const PACK_STATE_CART = 'cart';
+	const PACK_STATE_PAID = 'paid';
+	const PACK_STATE_AWARE = 'aware';
+	const PACK_STATE_SHIPPED = 'shipped';
 
 	/**
 	 * The attributes that should be serialized
@@ -67,7 +69,7 @@ class OrderPack extends EmbedModel
 		}
 
 		if (empty($this->pack_state)) {
-			$this->pack_state = OrderPack::PACK_STATE_OPEN;
+			$this->pack_state = OrderPack::PACK_STATE_CART;
 		}
 	}
 
@@ -109,6 +111,7 @@ class OrderPack extends EmbedModel
 					'pack_percentage_fee',
 					'currency',
 					'weight_measure',
+					'pack_state',
 
 //					'payment_info',
 //					'charges',
@@ -134,6 +137,7 @@ class OrderPack extends EmbedModel
 					'pack_percentage_fee',
 					'currency',
 					'weight_measure',
+					'pack_state',
 
 //					'payment_info',
 //					'charges',
@@ -158,6 +162,7 @@ class OrderPack extends EmbedModel
 					'pack_percentage_fee',
 					'currency',
 					'weight_measure',
+					'pack_state',
 
 //					'payment_info',
 //					'charges',
