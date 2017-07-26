@@ -42,4 +42,4 @@ Next example shows the structure of an object that represents an address
 
 **Response body**:
 
-See the structure of the complete item in view.md 
+Returns the cart modified. See the structure of the complete item in view.md 

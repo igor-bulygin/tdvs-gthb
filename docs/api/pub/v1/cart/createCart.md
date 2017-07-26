@@ -26,5 +26,5 @@ Example about how to call to Web Service to create a new cart
 
 **Response body**:
 
-See the structure of the complete item in view.md 
+Returns the cart modified. See the structure of the complete item in view.md 
 
