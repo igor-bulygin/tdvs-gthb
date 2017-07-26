@@ -179,8 +179,8 @@ class Order extends CActiveRecord {
 					'shipping_address',
 					'billing_address',
 					'packs',
+					'payment_info',
 
-//					'payment_info',
 //					'charges',
 				];
 				static::$retrieveExtraFields = [
