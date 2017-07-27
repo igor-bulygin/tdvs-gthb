@@ -82,12 +82,12 @@ app\components\assets\PublicHeader2Asset::register($this);
 
 									<?php } elseif ($person->isDeviser()) { ?>
 
-										<li><a href="#">Sales</a></li>
+										<li><a href="<?=$person->getSettingsLink('open-orders')?>">Sales</a></li>
 										<li class="separation-line"></li>
 
 									<?php } elseif ($person->isClient()) { ?>
 
-										<li><a href="#">My orders</a></li>
+										<li><a href="<?=$person->getSettingsLink('open-orders')?>">My orders</a></li>
 										<li class="separation-line"></li>
 
 									<?php } elseif ($person->isInfluencer()) { ?>
