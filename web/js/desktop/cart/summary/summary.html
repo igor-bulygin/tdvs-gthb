@@ -13,11 +13,11 @@
 					<span>Tags: <span ng-repeat="tag in product.tags">
 									<span ng-repeat="value in tag.values track by $index">
 										<span ng-if="!summaryCtrl.isObject(value)">
-											<span ng-if="$index>0">/&nbsp;</span><span ng-bind="(value|capitalize)"></span>
+											<span ng-if="$index>0">&nbsp;/&nbsp;</span><span ng-bind="(value|capitalize)"></span>
 										</span>
 									</span>
-									<span ng-if="!$last">,</span>
-								</span>
+									<span ng-if="!$last">,&nbsp;</span>
+								</span><!-- fix blank spaces via css-->
 					</span>
 				</div>
 			</div>
