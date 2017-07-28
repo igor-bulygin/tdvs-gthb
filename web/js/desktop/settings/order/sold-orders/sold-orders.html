@@ -1,6 +1,6 @@
-<div ng-repeat="order in soldOrdersCtrl.orders" ng-cloak class="panel">
+<div class="panel">
 	<uib-accordion>
-		<div uib-accordion-group>
+		<div uib-accordion-group ng-repeat="order in soldOrdersCtrl.orders" ng-cloak >
 			<uib-accordion-heading>
 				<span class="col-md-4">
 					<span class="col-md-12">INVOICE Nº</span>
@@ -51,16 +51,7 @@
 					</div>
 					<div ng-repeat="pack in order.packs">
 						<div class="col-md-4" ng-repeat="product in pack.products">
-							<img class="col-md-6" ng-src="{{product.product_info.photo}}">
-							<div class="col-md-6">
-								<label class="col-md-12" ng-bind="product.product_info.name"></label>
-								<span class="col-md-10">Quantity: </span><span class="col-md-2" ng-bind="product.quantity"></span>
-								<span class="col-md-10">Price: </span><span class="col-md-2" ng-bind="product.price"></span>
-								<span class="col-md-10">Size: </span><span class="col-md-2" ng-bind="product.options.size"></span>
-								<!--<div class="col-md-12" ng-repeat="color in product.product_info.options.731ct">
-									<span class="col-md-12" ng-bind="color"></span>
-								</div>-->
-							</div>
+							<product-card product="product"></product-card>
 						</div>
 					</div>
 				</div>
