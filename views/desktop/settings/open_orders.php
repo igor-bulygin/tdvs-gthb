@@ -30,7 +30,7 @@ $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD
 					</li>
 				</ol>
 			</div>
-			<div class="col-md-6">
+			<div class="col-md-6" ng-if="ordersCtrl.isDeviser" ng-cloak>
 				<span class="col-md-5">Type filter</span>
 				<ol class="nya-bs-select col-md-10" ng-model="ordersCtrl.typeFilter" ng-change="ordersCtrl.getOrders()">
 					<li nya-bs-option="type in ordersCtrl.enabledTypes">
