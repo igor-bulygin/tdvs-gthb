@@ -24,10 +24,12 @@
 		}
 
 		function getOrders() {
+			vm.loading=true;
 			function onGetOrdersSuccess(data) {
 				if(angular.isArray(data.items) && data.items.length > 0) {
 					vm.orders = angular.copy(data.items); 
-				}
+				}				
+				vm.loading=false;
 			}
 			switch (vm.typeFilter.value) {
 				case "done":

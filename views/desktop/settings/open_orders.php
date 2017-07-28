@@ -21,7 +21,7 @@ $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD
 
 <div ng-controller="ordersCtrl as ordersCtrl">
 	<div class="container">
-		<div class="mb-20 col-md-12">
+<div class="col-md-12">
 			<div class="col-md-6">
 				<span class="col-md-5">State filter</span>
 				<ol class="nya-bs-select col-md-10" ng-model="ordersCtrl.stateFilter" ng-change="ordersCtrl.getOrders()">
@@ -38,10 +38,14 @@ $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD
 					</li>
 				</ol>
 			</div>
-		</div>
-		<div ng-switch on="ordersCtrl.typeFilter.value">
+		<div ng-switch on="ordersCtrl.typeFilter.value" class="col-md-12" ng-if="!ordersCtrl.loading" ng-cloak>
 			<sold-orders ng-switch-when="received" orders="ordersCtrl.orders"></sold-orders>
 			<bought-orders ng-switch-when="done" orders="ordersCtrl.orders"></bought-orders>
 		</div>
+		<div class="text-center" ng-if="ordersCtrl.loading" ng-cloak>
+			<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+			<span class="sr-only">Loading...</span>
+		</div>
+	</div>
 	</div>
 </div>
