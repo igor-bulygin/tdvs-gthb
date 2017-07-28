@@ -4,6 +4,7 @@
 	function service(tagDataService, UtilService) {
 		this.parseTags = parseTags;
 		this.setTotalItems = setTotalItems;
+		this.setTotalAmount = setTotalAmount;
 
 		function parseTags(cart){
 
@@ -63,6 +64,14 @@
 				})
 			}
 			cart.totalItems = total;
+		}
+
+		function setTotalAmount(cart) {
+			var total = 0;
+			cart.packs.forEach(function(pack) {
+				total += pack.pack_price + pack.shipping_price;
+			})
+			cart.subtotal = total;
 		}
 	}
 

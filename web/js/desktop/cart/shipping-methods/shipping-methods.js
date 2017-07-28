@@ -1,7 +1,7 @@
 (function () {
 	'use strict';
 
-	function controller() {
+	function controller($rootScope, cartEvents) {
 		var vm = this;
 		vm.setShippingPriceTime = setShippingPriceTime;
 		vm.isObject = angular.isObject;
@@ -15,18 +15,19 @@
 		function setShippingPriceTime(pack) {
 			switch(pack.shipping_type) {
 				case 'standard':
-					pack.delivery_time = pack.deviser_info.shipping_time;
-					pack.delivery_price = pack.deviser_info.price;
+					pack.shipping_time = pack.deviser_info.shipping_time;
+					pack.shipping_price = pack.deviser_info.price;
 					break;
 				case 'express':
-					pack.delivery_time = pack.deviser_info.shipping_express_time;
-					pack.delivery_price = pack.deviser_info.price_express;
+					pack.shipping_time = pack.deviser_info.shipping_express_time;
+					pack.shipping_price = pack.deviser_info.price_express;
 					break;
 				default:
-					pack.delivery_time = pack.deviser_info.shipping_time;
-					pack.delivery_price = pack.deviser_info.price;
+					pack.shipping_time = pack.deviser_info.shipping_time;
+					pack.shipping_price = pack.deviser_info.price;
 					break;
 			}
+			$rootScope.$broadcast(cartEvents.cartUpdated, {cart: vm.cart});
 		}
 
 		function save() {

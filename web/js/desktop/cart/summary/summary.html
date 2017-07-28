@@ -1,7 +1,7 @@
 <span class="shopping-cart-title">Cart summary (<span ng-bind="summaryCtrl.cart.totalItems"></span> items)</span>
 <div ng-if="summaryCtrl.state >= 1">
 	<div ng-repeat="pack in summaryCtrl.cart.packs">
-		<span class="deviser-name-item summary-cart-wrapper" ng-bind="pack.deviser_info.name"></span>
+		<span class="deviser-name-item summary-cart-wrapper" ng-bind="pack.deviser_info.name"></span><span class="pull-right">Shipping price € <span ng-bind="pack.shipping_price"></span></span>
 		<div class="summary-cart-wrapper summary-white-item" ng-repeat="product in pack.products">
 			<div>
 				<div>

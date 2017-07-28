@@ -31,8 +31,8 @@
 				</div>
 				<div class="col-md-2">
 					<p>
-						Delivery within <span ng-bind="pack.delivery_time || pack.deviser_info.shipping_time"></span> days
-						<span ng-if="pack.currency" ng-bind="pack.currency"></span><span ng-bind="pack.delivery_price || pack.deviser_info.price"></span>
+						Delivery within <span ng-bind="pack.shipping_time || pack.deviser_info.shipping_time"></span> days
+						<span ng-if="pack.currency" ng-bind="pack.currency"></span><span ng-bind="pack.shipping_price || pack.deviser_info.price"></span>
 					</p>
 				</div>
 			</div>

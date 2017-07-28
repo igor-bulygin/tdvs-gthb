@@ -9,6 +9,7 @@
 			vm.cart = angular.copy(args.cart);
 			cartService.parseTags(vm.cart);
 			cartService.setTotalItems(vm.cart);
+			cartService.setTotalAmount(vm.cart);
 		});
 
 	}
