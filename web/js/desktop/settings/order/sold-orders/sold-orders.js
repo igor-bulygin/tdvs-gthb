@@ -3,38 +3,42 @@
 
 	function controller(UtilService, orderDataService) {
 		var vm = this;
-		vm.changePackState=changePackState;
+		vm.markPackAware=markPackAware;
+		vm.markPackShipped=markPackShipped;
 
 		init();
 
 		function init() {
 			angular.forEach(vm.orders, function(order, key) {
-					order.totalPrice = 0;
-					order.commission=0;
-					order.totalShippingPrice=0;
-					order.order_date= new Date(order.order_date.sec*1000)
-					angular.forEach(order.packs, function(pack, keyPack) {
-						order.totalPrice = order.totalPrice + pack.pack_price;
-						order.totalShippingPrice = order.totalShippingPrice + pack.shipping_price;
-						order.commision= order.commision + pack.pack_percentage_fee;
-					});
-					order.total= order.totalPrice + order.totalShippingPrice + order.commission;
+				order.totalPrice = 0;
+				order.commission=0;
+				order.totalShippingPrice=0;
+				order.order_date= new Date(order.order_date.sec*1000)
+				angular.forEach(order.packs, function(pack, keyPack) {
+					order.totalPrice = order.totalPrice + pack.pack_price;
+					order.totalShippingPrice = order.totalShippingPrice + pack.shipping_price;
+					order.commision= order.commision + pack.pack_percentage_fee;
 				});
+				order.total= order.totalPrice + order.totalShippingPrice + order.commission;
+			});
 		}
 
-		function changePackState(order,pack) {
-			if (pack.pack_state==='paid') {
-				pack.pack_state='preparing'
+		function markPackAware(order,pack) {
+			function onChangeStateSuccess(data) {
+				order=data;
 			}
-			else if (pack.pack_state==='preparing') {
-				pack.pack_state='shipped';
-				//TODO send changed state
+			orderDataService.changePackState({}, {personId:pack.deviser_id,packId:pack.short_id, newState:'aware' },onChangeStateSuccess, UtilService.onError)
+		}
+
+		function markPackShipped(order,pack) {
+			function onChangeStateSuccess(data) {
+				order=data;
 				order.packs.splice(order.packs.indexOf(pack),1);
 				if (order.packs.length<1) {
 					vm.orders.splice(vm.orders.indexOf(order),1);
 				}
 			}
-			
+			orderDataService.changePackState({ company:vm.shippingCompany, eta: vm.eta, tracking_number:vm.trackingNumber, tracking_link:vm.trackLink }, {personId:pack.deviser_id,packId:pack.short_id, newState:'shipped' },onChangeStateSuccess, UtilService.onError)
 		}
 	}
 
@@ -43,7 +47,7 @@
 		controller: controller,
 		controllerAs: 'soldOrdersCtrl',
 		bindings: {
-			orders: '<'
+			orders: '='
 		}
 	}
 

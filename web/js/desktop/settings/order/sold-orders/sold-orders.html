@@ -77,35 +77,35 @@
 									</div>
 									<p>When you see the order, please click the button below to inform us</p>
 								</div>
-								<button class="btn btn-green" ng-click="soldOrdersCtrl.changePackState(order,pack)" ng-enabled="pack.pack_state==='paid'">READY TO CREATE</button>
+								<button class="btn btn-green" ng-click="soldOrdersCtrl.markPackAware(order,pack)">READY TO CREATE</button>
 							</div>
-							<div ng-switch-when="preparing">
+							<div ng-switch-when="aware">
 								<form name="soldOrdersCtrl.shippingForm" class="form-horizontal" >
 									<div class="form-group col-md-6">
 										<label for="shippingCompany" class="col-md-12">Shipping company</label>
 										<div class="col-md-12">
-											<input type="text" name="shippingCompany" class="form-control">
+											<input type="text" name="shippingCompany" class="form-control" ng-model="soldOrdersCtrl.shippingCompany">
 										</div>
 										<label for="eta" class="col-md-12">ETA <span>OPTIONAL</span></label>
 										<div class="col-md-12">
-											<input type="text" name="eta" class="form-control" >
+											<input type="text" name="eta" class="form-control" ng-model="soldOrdersCtrl.eta">
 										</div>
 									</div>
 									<div class="form-group col-md-6">
 										<label for="trackingNumber" class="col-md-12">Tracking number</label>
 										<div class="col-md-12">
-											<input type="text" name="trackingNumber" class="form-control" >
+											<input type="text" name="trackingNumber" class="form-control" ng-model="soldOrdersCtrl.trackingNumber">
 										</div>
 										<label for="trackLink" class="col-md-12">Link to track package <span>OPTIONAL</span></label>
 										<div class="col-md-12">
-											<input type="text" name="trackLink" class="form-control">
+											<input type="text" name="trackLink" class="form-control" ng-model="soldOrdersCtrl.trackLink">
 										</div>
 									</div>
 									<span class="form-group col-md-12">
 										When you click this button, the order will be moved to PAST ORDERS
 									</span>
 									<div class="form-group col-md-12">
-										<button class="btn btn-green" ng-click="soldOrdersCtrl.changeOrderState(order)" ng-enabled="order.state==='preparing'&& soldOrdersCtrl.shippingForm.$valid">PACKAGE WAS SHIPPED</button>
+										<button class="btn btn-green" ng-click="soldOrdersCtrl.markPackShipped(order,pack)" ng-enabled="soldOrdersCtrl.shippingForm.$valid">PACKAGE WAS SHIPPED</button>
 									</div>
 
 								</form>
