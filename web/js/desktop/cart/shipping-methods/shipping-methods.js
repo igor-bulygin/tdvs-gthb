@@ -1,7 +1,7 @@
 (function () {
 	'use strict';
 
-	function controller($rootScope, cartEvents) {
+	function controller(cartService) {
 		var vm = this;
 		vm.setShippingPriceTime = setShippingPriceTime;
 		vm.isObject = angular.isObject;
@@ -27,7 +27,7 @@
 					pack.shipping_price = pack.deviser_info.price;
 					break;
 			}
-			$rootScope.$broadcast(cartEvents.cartUpdated, {cart: vm.cart});
+			cartService.setTotalAmount(vm.cart);
 		}
 
 		function save() {
