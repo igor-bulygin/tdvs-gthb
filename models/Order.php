@@ -402,8 +402,6 @@ class Order extends CActiveRecord {
 			$packs[] = $pack;
 		}
 		$this->setPacks($packs);
-
-		$this->recalculateTotals();
 		$this->save();
 	}
 
@@ -421,8 +419,6 @@ class Order extends CActiveRecord {
 			}
 		}
 		$this->setPacks($packs);
-
-		$this->recalculateTotals();
 		$this->save();
 	}
 
@@ -558,6 +554,7 @@ class Order extends CActiveRecord {
 
 	public function setPacks($value) {
 		$this->setSubDocument('packs', $value);
+		$this->recalculateTotals();
 	}
 
 	/**
