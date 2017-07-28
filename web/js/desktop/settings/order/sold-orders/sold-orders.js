@@ -5,7 +5,6 @@
 		var vm = this;
 		vm.markPackAware=markPackAware;
 		vm.markPackShipped=markPackShipped;
-
 		init();
 
 		function init() {
@@ -13,11 +12,11 @@
 				order.totalPrice = 0;
 				order.commission=0;
 				order.totalShippingPrice=0;
-				order.order_date= new Date(order.order_date.sec*1000)
+				order.order_date= new Date(order.order_date.sec*1000);
 				angular.forEach(order.packs, function(pack, keyPack) {
 					order.totalPrice = order.totalPrice + pack.pack_price;
 					order.totalShippingPrice = order.totalShippingPrice + pack.shipping_price;
-					order.commision= order.commision + pack.pack_percentage_fee;
+					order.commission= order.commission + ((pack.pack_price*pack.pack_percentage_fee)/100);
 				});
 				order.total= order.totalPrice + order.totalShippingPrice + order.commission;
 			});
@@ -27,7 +26,7 @@
 			function onChangeStateSuccess(data) {
 				order=data;
 			}
-			orderDataService.changePackState({}, {personId:pack.deviser_id,packId:pack.short_id, newState:'aware' },onChangeStateSuccess, UtilService.onError)
+			orderDataService.changePackState({}, {personId:pack.deviser_id,packId:pack.short_id, newState:'aware' },onChangeStateSuccess, UtilService.onError);
 		}
 
 		function markPackShipped(order,pack) {
@@ -47,7 +46,7 @@
 		controller: controller,
 		controllerAs: 'soldOrdersCtrl',
 		bindings: {
-			orders: '='
+			orders: '<'
 		}
 	}
 

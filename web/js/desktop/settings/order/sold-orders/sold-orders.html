@@ -1,19 +1,21 @@
-<uib-accordion>
-			<div uib-accordion-group ng-cloak ng-repeat="order in soldOrdersCtrl.orders">
-				<uib-accordion-heading>
-					<span class="col-md-4 panel">
-						<span class="col-md-12">INVOICE Nº</span>
-						<span ng-bind="order.id"></span>
-					</span>
-					<span class="col-md-4 panel">
-						<span class="col-md-12">ORDER DATE</span>
-						<span>{{order.order_date | date:'dd/MM/yy'}}</span>
-					</span>
-					<span class="col-md-4 panel">
-						<span class="col-md-12">CLIENT NAME</span>
-						<span ng-bind="order.billing_address.name + ' ' + order.billing_address.last_name"></span>
-					</span>
-				</uib-accordion-heading>
+<div ng-repeat="order in soldOrdersCtrl.orders" ng-cloak class="panel">
+	<uib-accordion>
+		<div uib-accordion-group>
+			<uib-accordion-heading>
+				<span class="col-md-4">
+					<span class="col-md-12">INVOICE Nº</span>
+					<span ng-bind="order.id"></span>
+				</span>
+				<span class="col-md-4">
+					<span class="col-md-12">ORDER DATE</span>
+					<span>{{order.order_date | date:'dd/MM/yy'}}</span>
+				</span>
+				<span class="col-md-4">
+					<span class="col-md-12">CLIENT NAME</span>
+					<span ng-bind="order.billing_address.name + ' ' + order.billing_address.last_name"></span>
+				</span>
+			</uib-accordion-heading>
+			<div class="card">
 				<div class="col-md-6">
 					<h4>Info</h4>
 					<div class="col-md-6">
@@ -29,7 +31,7 @@
 						</div>
 						<div class="col-md-12">
 							<span>TODEVISE COMMISSION</span>
-							<span ng-bind="order.commission"></span>
+							<span>{{ order.commission| number:2}}</span>
 						</div>
 						<!-- TODO affiliates 
 						<div class="col-md-12">
@@ -44,7 +46,7 @@
 					<div class="col-md-12 text-right">
 						<div class="col-md-12">
 							<span>TOTAL</span>
-							<span ng-bind="order.total"></span>
+							<span>{{ order.total| number:2}}</span>
 						</div>
 					</div>
 					<div ng-repeat="pack in order.packs">
@@ -110,8 +112,32 @@
 
 								</form>
 							</div>
+							<div ng-switch-when="shipped">
+								<div class="col-md-12 text-right">
+									<button class="btn btn-green">edit</button>
+								</div>
+								<div class="col-md-6">
+									<label class="col-md-12">Shipping company</label>
+									<span class="col-md-12" ng-bing="pack.company"></span>
+								</div>
+								<div class="col-md-6">
+									<label class="col-md-12">ETA</label>
+									<span class="col-md-12" ng-bind="pack.eta"></span>
+								</div>
+								<div class="col-md-6">
+									<label class="col-md-12">Tracking number</label>
+									<span class="col-md-12" ng-bind="pack.tracking_number"></span>
+								</div>
+								<div class="col-md-6">
+									<label class="col-md-12">Link to track package <span>OPTIONAL</span></label>
+									<span class="col-md-12" ng-bind="pack.track_link"></span>
+								</div>
+								
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</uib-accordion>
+		</div>
+	</uib-accordion>
+</div>
