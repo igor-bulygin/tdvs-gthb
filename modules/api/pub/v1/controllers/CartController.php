@@ -156,6 +156,7 @@ class CartController extends AppPublicController
 					foreach ($packs as $packActual) {
 						if ($packActual->short_id == $packPost['short_id']) {
 							$packActual->shipping_type = $packPost['shipping_type'];
+							$packActual->recalculateTotals();
 						}
 					}
 				}
@@ -351,8 +352,6 @@ class CartController extends AppPublicController
 			}
 
 			$order->setPacks($packs);
-
-			$order->recalculateTotals();
 
 			// Save charges responses and payment_info in the order
 			$order->setAttribute('payment_info', $currentPaymentInfo);
