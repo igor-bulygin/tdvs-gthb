@@ -5,6 +5,7 @@
 		this.parseTags = parseTags;
 		this.setTotalItems = setTotalItems;
 		this.setTotalAmount = setTotalAmount;
+		this.setProductsAmount = setProductsAmount;
 
 		function parseTags(cart){
 
@@ -71,6 +72,14 @@
 			cart.packs.forEach(function(pack) {
 				total += pack.pack_price + pack.shipping_price;
 			})
+			cart.subtotal = total;
+		}
+
+		function setProductsAmount(cart) {
+			var total = 0;
+			cart.packs.forEach(function(pack) {
+				total += pack.pack_price;
+			});
 			cart.subtotal = total;
 		}
 	}

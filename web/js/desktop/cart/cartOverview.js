@@ -26,6 +26,7 @@
 				vm.cart = angular.copy(data);
 				cartService.parseTags(vm.cart);
 				cartService.setTotalItems(vm.cart);
+				cartService.setProductsAmount(vm.cart);
 			}
 
 			function onGetCartError(err) {
