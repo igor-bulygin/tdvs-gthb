@@ -390,12 +390,17 @@ $config = [
 
 				// Person - private
 				'GET api3/priv/v1/person/<personId:[^/.]*?>' => 'api3/priv/v1/person/view',
-				'GET api3/priv/v1/person/<personId:[^/.]*?>/orders' => 'api3/priv/v1/person/orders',
-				'GET api3/priv/v1/person/<personId:[^/.]*?>/orders/<orderId:[^/.]*>' => 'api3/priv/v1/person/order',
-				'GET api3/priv/v1/person/<personId:[^/.]*?>/packs' => 'api3/priv/v1/person/packs',
 				'PATCH api3/priv/v1/person/<personId:[^/.]*?>' => 'api3/priv/v1/person/update',
 				'PUT api3/priv/v1/person/<personId:[^/.]*?>' => 'api3/priv/v1/person/update',
 				'PUT api3/priv/v1/person/<personId:[^/.]*?>/update-password' => 'api3/priv/v1/person/update-password',
+
+				// Person - orders and packs
+				'GET api3/priv/v1/person/<personId:[^/.]*?>/orders' => 'api3/priv/v1/person/orders',
+				'GET api3/priv/v1/person/<personId:[^/.]*?>/orders/<orderId:[^/.]*>' => 'api3/priv/v1/person/order',
+				'GET api3/priv/v1/person/<personId:[^/.]*?>/packs' => 'api3/priv/v1/person/packs',
+				'PUT api3/priv/v1/person/<personId:[^/.]*?>/packs/<packId:[^/.]*>/aware' => 'api3/priv/v1/person/pack-aware',
+				'PUT api3/priv/v1/person/<personId:[^/.]*?>/packs/<packId:[^/.]*>/shipped' => 'api3/priv/v1/person/pack-shipped',
+
 
 				// Product - public
 				'GET api3/pub/v1/products/<id:[^/.]*?>' => 'api3/pub/v1/product/view',

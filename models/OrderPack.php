@@ -11,6 +11,7 @@ use yii\web\NotFoundHttpException;
  * @property string $short_id
  * @property string $shipping_type
  * @property double $shipping_price
+ * @property array $shipping_info
  * @property double $pack_weight
  * @property double $pack_price
  * @property double $pack_percentage_fee
@@ -18,6 +19,7 @@ use yii\web\NotFoundHttpException;
  * @property string $weight_measure
  * @property string $pack_state
  * @property array $products
+ * @property array $state_history
  *
  * @method Order getParentObject()
  */
@@ -48,6 +50,7 @@ class OrderPack extends EmbedModel
 			'short_id',
 			'shipping_type',
 			'shipping_price',
+			'shipping_info',
 			'pack_weight',
 			'pack_price',
 			'pack_percentage_fee',
@@ -55,6 +58,7 @@ class OrderPack extends EmbedModel
 			'weight_measure',
 			'pack_state',
 			'products',
+			'state_history',
 		];
 	}
 
@@ -69,7 +73,7 @@ class OrderPack extends EmbedModel
 		}
 
 		if (empty($this->pack_state)) {
-			$this->pack_state = OrderPack::PACK_STATE_CART;
+			$this->setState(OrderPack::PACK_STATE_CART);
 		}
 	}
 
@@ -112,6 +116,7 @@ class OrderPack extends EmbedModel
 					'currency',
 					'weight_measure',
 					'pack_state',
+					'pack_state_name' => 'packStateName',
 
 //					'payment_info',
 //					'charges',
@@ -138,6 +143,7 @@ class OrderPack extends EmbedModel
 					'currency',
 					'weight_measure',
 					'pack_state',
+					'pack_state_name' => 'packStateName',
 
 //					'payment_info',
 //					'charges',
@@ -163,6 +169,7 @@ class OrderPack extends EmbedModel
 					'currency',
 					'weight_measure',
 					'pack_state',
+					'pack_state_name' => 'packStateName',
 
 //					'payment_info',
 //					'charges',
@@ -182,6 +189,17 @@ class OrderPack extends EmbedModel
 				break;
 		}
 //		Product::setSerializeScenario($view);
+	}
+
+	public function getPackStateName()
+	{
+		$pack_states = [
+			self::PACK_STATE_CART => 'Cart',
+			self::PACK_STATE_PAID => 'Paid',
+			self::PACK_STATE_AWARE => 'Deviser aware / in preparation',
+			self::PACK_STATE_SHIPPED => 'Shipped',
+		];
+		return $pack_states[$this->pack_state];
 	}
 
 	/**
@@ -369,6 +387,21 @@ class OrderPack extends EmbedModel
 
 	public function setProducts($value) {
 		$this->setSubDocument('products', $value);
+	}
+
+	public function setState($newState)
+	{
+		if ($this->pack_state == $newState) {
+			return;
+		}
+		$this->pack_state = $newState;
+		$stateHistory = $this->state_history;
+		$stateHistory[] =
+			[
+				'state' => $newState,
+				'date' => new \MongoDate(),
+			];
+		$this->setAttribute('state_history', $stateHistory);
 	}
 
 }

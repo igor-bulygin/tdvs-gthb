@@ -348,7 +348,7 @@ class CartController extends AppPublicController
 					);
 				}
 				$pack->pack_percentage_fee = Yii::$app->params['default_todevise_fee'];
-				$pack->pack_state = OrderPack::PACK_STATE_PAID;
+				$pack->setState(OrderPack::PACK_STATE_PAID);
 			}
 
 			$order->setPacks($packs);
@@ -356,7 +356,7 @@ class CartController extends AppPublicController
 			// Save charges responses and payment_info in the order
 			$order->setAttribute('payment_info', $currentPaymentInfo);
 //			$order->setAttribute('charges', $charges);
-			$order->order_state = Order::ORDER_STATE_PAID;
+			$order->setState(Order::ORDER_STATE_PAID);
 			$order->save();
 
 			$order->composeEmailOrderPaid(true);

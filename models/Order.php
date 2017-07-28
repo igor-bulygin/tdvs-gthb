@@ -7,6 +7,7 @@ use Exception;
 use MongoDate;
 use yii\mongodb\ActiveQuery;
 use yii\web\ForbiddenHttpException;
+use yii\web\NotFoundHttpException;
 
 /**
  * @property string short_id
@@ -18,6 +19,7 @@ use yii\web\ForbiddenHttpException;
  * @property array billing_address
  * @property array packs
  * @property array payment_info
+ * @property array state_history
  * @property array charges
  * @property MongoDate created_at
  * @property MongoDate updated_at
@@ -62,8 +64,9 @@ class Order extends CActiveRecord {
 			'shipping_address',
 			'billing_address',
 			'packs',
-
 			'payment_info',
+			'state_history',
+
 			'charges',
 
 			'created_at',
@@ -94,7 +97,7 @@ class Order extends CActiveRecord {
 	public function beforeSave($insert)
 	{
 		if (empty($this->order_state)) {
-			$this->order_state = Order::ORDER_STATE_CART;
+			$this->setState(Order::ORDER_STATE_CART);
 		}
 
 		if (empty($this->order_date)) {
@@ -206,6 +209,9 @@ class Order extends CActiveRecord {
 //					'charges',
 				];
 				static::$retrieveExtraFields = [
+					'subtotal',
+					'order_state',
+					'payment_info',
 				];
 
 
@@ -303,6 +309,11 @@ class Order extends CActiveRecord {
 			} else {
 				$query->andWhere(["packs.pack_state" => $criteria["pack_state"]]);
 			}
+		}
+
+		// if deviser id is specified
+		if ((array_key_exists("pack_id", $criteria)) && (!empty($criteria["pack_id"]))) {
+			$query->andWhere(["packs.short_id" => $criteria["pack_id"]]);
 		}
 
 		// if order_state is specified
@@ -581,6 +592,49 @@ class Order extends CActiveRecord {
 		$this->setSubDocument('billing_address', $value);
 	}
 
+	public function setPackState($packId, $newState)
+	{
+		$packs = $this->getPacks();
+		$found = false;
+		foreach ($packs as $pack) {
+			if ($pack->short_id == $packId) {
+				$found = true;
+				$pack->setState($newState);
+			}
+		}
+
+		if (!$found) {
+			throw new NotFoundHttpException(sprintf('Pack with id %s not found', $packId));
+		}
+
+		$this->setPacks($packs);
+		$this->save();
+	}
+
+	public function setPackShippingInfo($packId, $data)
+	{
+		$packs = $this->getPacks();
+		$found = false;
+		foreach ($packs as $pack) {
+			if ($pack->short_id == $packId) {
+				$found = true;
+				$shippingInfo = [
+					'company' => isset($data['company']) ? $data['company'] : null,
+					'tracking_number' => isset($data['tracking_number']) ? $data['tracking_number'] : null,
+					'tracking_link' => isset($data['tracking_link']) ? $data['tracking_link'] : null,
+				];
+				$pack->setAttribute('shipping_info', $shippingInfo);
+			}
+		}
+
+		if (!$found) {
+			throw new NotFoundHttpException(sprintf('Pack with id %s not found', $packId));
+		}
+
+		$this->setPacks($packs);
+		$this->save();
+	}
+
 	public function checkOwnerAndTryToAssociate()
 	{
 		if (!\Yii::$app->user->isGuest) {
@@ -612,6 +666,21 @@ class Order extends CActiveRecord {
 				throw new ForbiddenHttpException();
 			}
 		}
+	}
+
+	public function setState($newState)
+	{
+		if ($this->order_state == $newState) {
+			return;
+		}
+		$this->order_state = $newState;
+		$stateHistory = $this->state_history;
+		$stateHistory[] =
+			[
+				'state' => $newState,
+				'date' => new \MongoDate(),
+			];
+		$this->setAttribute('state_history', $stateHistory);
 	}
 
 }
