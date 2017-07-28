@@ -1,16 +1,16 @@
 <div class="panel">
 	<uib-accordion>
 		<div uib-accordion-group ng-repeat="order in soldOrdersCtrl.orders" ng-cloak >
-			<uib-accordion-heading>
-				<span class="col-md-4">
-					<span class="col-md-12">INVOICE Nº</span>
+			<uib-accordion-heading >
+				<span class="col-md-4 text-center">
+					<span  class="col-md-12">INVOICE Nº</span>
 					<span ng-bind="order.id"></span>
 				</span>
-				<span class="col-md-4">
+				<span class="col-md-4 text-center">
 					<span class="col-md-12">ORDER DATE</span>
 					<span>{{order.order_date | date:'dd/MM/yy'}}</span>
 				</span>
-				<span class="col-md-4">
+				<span class="col-md-4 text-center">
 					<span class="col-md-12">CLIENT NAME</span>
 					<span ng-bind="order.billing_address.name + ' ' + order.billing_address.last_name"></span>
 				</span>
