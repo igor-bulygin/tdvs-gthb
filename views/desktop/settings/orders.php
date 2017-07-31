@@ -20,23 +20,22 @@ $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD
 <?php } ?>
 
 <div ng-controller="ordersCtrl as ordersCtrl">
-<div class="col-md-12">
-			<div class="col-md-6">
-				<span class="col-md-5">State filter</span>
-				<ol class="nya-bs-select col-md-10" ng-model="ordersCtrl.stateFilter" ng-change="ordersCtrl.getOrders()">
-					<li nya-bs-option="state in ordersCtrl.enabledStates">
-						<a href="#"><span ng-bind="state.name"></span></a>
-					</li>
-				</ol>
+	<div class="col-md-12 store">
+		<div class="col-md-1" ng-if="ordersCtrl.isDeviser" ng-cloak>
+			<ol class="nya-bs-select col-md-12" ng-model="ordersCtrl.typeFilter" ng-change="ordersCtrl.getOrders()">
+				<li nya-bs-option="type in ordersCtrl.enabledTypes">
+					<a href="#"><span ng-bind="type.name"></span></a>
+				</li>
+			</ol>
+		</div>
+		<div class="col-md-2">
+			<div class="radio radio-inline" ng-repeat="state in ordersCtrl.enabledStates">
+				<input type="radio" name="userdetails" value="{{state.value}}" ng-model="ordersCtrl.stateFilter" ng-change="ordersCtrl.getOrders()"/>
+				<label ng-bind="state.name"></label>
 			</div>
-			<div class="col-md-6" ng-if="ordersCtrl.isDeviser" ng-cloak>
-				<span class="col-md-5">Type filter</span>
-				<ol class="nya-bs-select col-md-10" ng-model="ordersCtrl.typeFilter" ng-change="ordersCtrl.getOrders()">
-					<li nya-bs-option="type in ordersCtrl.enabledTypes">
-						<a href="#"><span ng-bind="type.name"></span></a>
-					</li>
-				</ol>
-			</div>
+		</div>
+	</div>
+	<div class="col-md-10 col-md-offset-1  store">
 		<div ng-switch on="ordersCtrl.typeFilter.value" class="col-md-12" ng-if="!ordersCtrl.loading" ng-cloak>
 			<sold-orders ng-switch-when="received" orders="ordersCtrl.orders"></sold-orders>
 			<bought-orders ng-switch-when="done" orders="ordersCtrl.orders"></bought-orders>
@@ -46,4 +45,5 @@ $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD
 			<span class="sr-only">Loading...</span>
 		</div>
 	</div>
+</div>
 </div>
