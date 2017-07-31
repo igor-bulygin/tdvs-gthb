@@ -1,7 +1,7 @@
-<div class="col-md-2">
-	<img ng-src="{{productCardCtrl.product.product_info.photo}}" ng-attr-alt="productCardCtrl.product.product_info.name" ng-attr-title="productCardCtrl.product.product_info.name" style="max-width: 100px;">
+<div ng-class="productCardCtrl.classes.column1Class">
+	<img ng-src="{{productCardCtrl.product.product_info.photo}}" ng-attr-alt="productCardCtrl.product.product_info.name" ng-attr-title="productCardCtrl.product.product_info.name" class="img-responsive">
 </div>
-<div class="col-md-2">
+<div ng-class="productCardCtrl.classes.column2Class">
 	<p ng-bind="productCardCtrl.product.product_info.name"></p>
 	<p><span class="bold">Quantity:</span><span ng-bind="productCardCtrl.product.quantity"></span></p>
 		<p ng-repeat="tag in productCardCtrl.product.tags">

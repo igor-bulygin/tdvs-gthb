@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(UtilService) {
+	function controller(UtilService, cartService) {
 		var vm = this;
 
 		init();
@@ -14,6 +14,7 @@
 						order.totalPrice = order.totalPrice + pack.pack_price;
 					});
 					order.total= order.totalPrice + order.totalShippingPrice + order.commission;
+					cartService.parseTags(order);
 				});
 		}
 	}

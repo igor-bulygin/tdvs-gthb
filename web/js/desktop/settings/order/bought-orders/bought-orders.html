@@ -1,7 +1,7 @@
 <div class="panel">
 	<uib-accordion>
 		<div uib-accordion-group ng-cloak ng-repeat="order in boughtOrdersCtrl.orders">
-		<uib-accordion-heading>
+			<uib-accordion-heading>
 				<span class="col-md-3 text-center">
 					<span class="col-md-12">INVOICE Nº</span>
 					<span ng-bind="order.id"></span>
@@ -24,33 +24,35 @@
 			<div class="col-md-12" ng-repeat="pack in order.packs">
 				<div class="col-md-2">
 					<span class="col-md-12">ORDER Nº</span>
-					<label ng-bind="pack.short_id"></label>
+					<label class="col-md-12" ng-bind="pack.short_id"></label>
 				</div>
 				<div class="col-md-2">
 					<span class="col-md-12">DEVISER</span>
-					<label ng-bind="pack.deviser_id"></label>
+					<label  class="col-md-12" ng-bind="pack.deviser_id"></label>
 				</div>
 				<div class="col-md-2" ng-if="pack.pack_state==='shipped'">
 					<p class="col-md-12">SHIPPING DATE</p>
-					<label ng-bind="pack.shipping_date"></label>
+					<label class="col-md-12" ng-bind="pack.shipping_date"></label>
 				</div>
 				<div class="col-md-1">
 					<span class="col-md-12">PRICE</span>
-					<label ng-bind="pack.pack_price"></label> <label ng-bind="pack.currency"></label>
+					<label  class="col-md-12" ng-bind="pack.pack_price"></label> <label ng-bind="pack.currency"></label>
 				</div>
 				<div class="col-md-2">
 					<span class="col-md-12">SHIPPING TYPE</span>
-					<label ng-bind="pack.shipping_type"></label>
+					<label class="col-md-12" ng-bind="pack.shipping_type"></label>
 				</div>
 				<div class="col-md-1">
 					<span class="col-md-12">STATUS</span>
-					<label ng-bind="pack.pack_state"></label>
+					<label class="col-md-12" ng-bind="pack.pack_state"></label>
 				</div>
 				<div class="col-md-2 text-right" ng-if="pack.pack_state==='shipped'">
-					<a ng-href="pack.tracking_link">Track package</span>
+					<a ng-href="pack.tracking_link">Track package</a>
 				</div>
-				<div class="col-md-12" ng-repeat="product in pack.products">
-					<product-card product="product"></product-card>
+				<div class="col-md-12">
+					<div class="col-md-2" ng-repeat="product in pack.products">
+						<product-card product="product" classes="{column1Class: 'col-md-6', column2Class: 'col-md-6'}"></product-card>
+					</div>
 				</div>
 			</div>
 		</div>

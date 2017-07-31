@@ -51,7 +51,7 @@
 					</div>
 					<div ng-repeat="pack in order.packs">
 						<div class="col-md-4" ng-repeat="product in pack.products">
-							<product-card product="product"></product-card>
+							<product-card product="product" classes="{column1Class: 'col-md-6', column2Class: 'col-md-6'}" ></product-card>
 						</div>
 					</div>
 				</div>

@@ -21,7 +21,7 @@
 					order.commission= order.commission + ((pack.pack_price*pack.pack_percentage_fee)/100);
 				});
 				order.total= order.totalPrice + order.totalShippingPrice + order.commission;
-cartService.parseTags(order);
+				cartService.parseTags(order);
 			});
 		}
 
