@@ -144,7 +144,7 @@ $config = [
 			// for the mailer to send real emails.
 			'useFileTransport' =>
 				strpos($_SERVER['HTTP_HOST'], 'beta.todevise.com') === false &&
-				strpos($_SERVER['HTTP_HOST'], 'dev.todevise.com') === false &&
+//				strpos($_SERVER['HTTP_HOST'], 'dev.todevise.com') === false &&
 				YII_ENV_DEV
 					? true : false,
 			'transport' => [

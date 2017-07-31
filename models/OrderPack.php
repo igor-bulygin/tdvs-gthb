@@ -107,6 +107,7 @@ class OrderPack extends EmbedModel
 				self::$serializeFields = [
 					'short_id',
 					'deviser_id',
+					'deviser_info' => 'deviserInfo',
 					'shipping_type',
 					'shipping_price',
 					'shipping_info',
