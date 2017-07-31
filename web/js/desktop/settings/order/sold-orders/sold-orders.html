@@ -109,19 +109,19 @@
 								</div>
 								<div class="col-md-6">
 									<label class="col-md-12">Shipping company</label>
-									<span class="col-md-12" ng-bing="pack.company"></span>
+									<span class="col-md-12" ng-bind="pack.shipping_info.company"></span>
 								</div>
 								<div class="col-md-6">
 									<label class="col-md-12">ETA</label>
-									<span class="col-md-12" ng-bind="pack.eta"></span>
+									<span class="col-md-12" ng-bind="pack.shipping_info.eta"></span>
 								</div>
 								<div class="col-md-6">
 									<label class="col-md-12">Tracking number</label>
-									<span class="col-md-12" ng-bind="pack.tracking_number"></span>
+									<span class="col-md-12" ng-bind="pack.shipping_info.tracking_number"></span>
 								</div>
 								<div class="col-md-6">
-									<label class="col-md-12">Link to track package <span>OPTIONAL</span></label>
-									<span class="col-md-12" ng-bind="pack.track_link"></span>
+									<label class="col-md-12">Link to track package</label>
+									<a class="col-md-12" ng-href="pack.shipping_info.tracking_link" target="blank">{{pack.shipping_info.tracking_link}}</span>
 								</div>
 								
 							</div>
