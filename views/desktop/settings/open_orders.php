@@ -20,7 +20,6 @@ $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD
 <?php } ?>
 
 <div ng-controller="ordersCtrl as ordersCtrl">
-	<div class="container">
 <div class="col-md-12">
 			<div class="col-md-6">
 				<span class="col-md-5">State filter</span>
@@ -46,6 +45,5 @@ $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD
 			<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
 			<span class="sr-only">Loading...</span>
 		</div>
-	</div>
 	</div>
 </div>

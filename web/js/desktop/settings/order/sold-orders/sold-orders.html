@@ -84,8 +84,9 @@
 										<div class="form-group col-md-6">
 											<label for="shippingCompany" class="col-md-12">Shipping company</label>
 											<div class="col-md-12">
-												<input type="text" name="shippingCompany" class="form-control" ng-model="soldOrdersCtrl.shippingCompany">
+												<input type="text" name="shippingCompany" class="form-control" ng-class="{'error-input': soldOrdersCtrl.has_error(soldOrdersCtrl.shippingForm, soldOrdersCtrl.shippingForm.shippingCompany)}" ng-model="soldOrdersCtrl.shippingCompany" required>
 											</div>
+											<form-errors class="col-md-12" field="soldOrdersCtrl.shippingForm.shippingCompany" condition="soldOrdersCtrl.has_error(soldOrdersCtrl.shippingForm, soldOrdersCtrl.shippingForm.shippingCompany)"></form-errors>
 											<label for="eta" class="col-md-12">ETA <span>OPTIONAL</span></label>
 											<div class="col-md-12">
 												<input type="text" name="eta" class="form-control" ng-model="soldOrdersCtrl.eta">
@@ -94,8 +95,9 @@
 										<div class="form-group col-md-6">
 											<label for="trackingNumber" class="col-md-12">Tracking number</label>
 											<div class="col-md-12">
-												<input type="text" name="trackingNumber" class="form-control" ng-model="soldOrdersCtrl.trackingNumber">
+												<input type="text" name="trackingNumber" class="form-control" ng-class="{'error-input': soldOrdersCtrl.has_error(soldOrdersCtrl.shippingForm, soldOrdersCtrl.shippingForm.trackingNumber)}" ng-model="soldOrdersCtrl.trackingNumber" required>
 											</div>
+											<form-errors class="col-md-12" field="soldOrdersCtrl.shippingForm.trackingNumber" condition="soldOrdersCtrl.has_error(soldOrdersCtrl.shippingForm, soldOrdersCtrl.shippingForm.trackingNumber)"></form-errors>
 											<label for="trackLink" class="col-md-12">Link to track package <span>OPTIONAL</span></label>
 											<div class="col-md-12">
 												<input type="text" name="trackLink" class="form-control" ng-model="soldOrdersCtrl.trackLink">
@@ -105,7 +107,7 @@
 											When you click this button, the order will be moved to PAST ORDERS
 										</span>
 										<div class="form-group col-md-12">
-											<button class="btn btn-green" ng-click="soldOrdersCtrl.markPackShipped(order,pack)" ng-enabled="soldOrdersCtrl.shippingForm.$valid">
+											<button class="btn btn-green" ng-click="soldOrdersCtrl.markPackShipped(order,pack)" ng-disabled="!soldOrdersCtrl.shippingForm.$valid">
 												<span ng-if="pack.editInfo">SAVE CHANGES</span>
 												<span ng-if="!pack.editInfo">PACKAGE WAS SHIPPED</span>
 											</button>

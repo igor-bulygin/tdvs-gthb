@@ -6,6 +6,7 @@
 		vm.markPackAware=markPackAware;
 		vm.markPackShipped=markPackShipped;
 		vm.editShippingData=editShippingData;
+		vm.has_error = UtilService.has_error;
 		init();
 
 		function init() {
