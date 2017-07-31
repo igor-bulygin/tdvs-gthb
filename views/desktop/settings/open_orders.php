@@ -22,7 +22,7 @@ $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD
 <div ng-controller="ordersCtrl as ordersCtrl">
 	<div class="col-md-12 store">
 		<div class="col-md-1" ng-if="ordersCtrl.isDeviser" ng-cloak>
-			<ol class="nya-bs-select col-md-10" ng-model="ordersCtrl.typeFilter" ng-change="ordersCtrl.getOrders()">
+			<ol class="nya-bs-select col-md-12" ng-model="ordersCtrl.typeFilter" ng-change="ordersCtrl.getOrders()">
 				<li nya-bs-option="type in ordersCtrl.enabledTypes">
 					<a href="#"><span ng-bind="type.name"></span></a>
 				</li>
@@ -31,7 +31,7 @@ $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD
 		<div class="col-md-2">
 			<div class="radio radio-inline" ng-repeat="state in ordersCtrl.enabledStates">
 				<input type="radio" name="userdetails" value="{{state.value}}" ng-model="ordersCtrl.stateFilter" ng-change="ordersCtrl.getOrders()"/>
-				<label ng-cloak>{{state.name}}</label>
+				<label ng-bind="state.name"></label>
 			</div>
 		</div>
 	</div>

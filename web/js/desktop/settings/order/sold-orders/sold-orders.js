@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(UtilService, orderDataService) {
+	function controller(UtilService, orderDataService,cartService) {
 		var vm = this;
 		vm.markPackAware=markPackAware;
 		vm.markPackShipped=markPackShipped;
@@ -21,6 +21,7 @@
 					order.commission= order.commission + ((pack.pack_price*pack.pack_percentage_fee)/100);
 				});
 				order.total= order.totalPrice + order.totalShippingPrice + order.commission;
+cartService.parseTags(order);
 			});
 		}
 
