@@ -189,6 +189,18 @@ class PublicController extends CController
 
 	public function actionCheckout()
 	{
+		$person = Yii::$app->user->identity; /* @var Person $person */
+
+		if (!$person->isCompletedProfile()) {
+			$this->redirect($person->getCompleteProfileLink());
+		} else {
+			if ($person->isDeviser() || $person->isInfluencer()) {
+				if (!$person->isPublic()) {
+					$this->redirect($person->getPersonNotPublicLink());
+				}
+			}
+		}
+
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("checkout", [
 			'person' => Yii::$app->user->identity,

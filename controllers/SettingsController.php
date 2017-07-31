@@ -126,17 +126,7 @@ class SettingsController extends CController
 			throw new NotFoundHttpException();
 		}
 
-		if (!$person->isDeviser()) {
-			throw new NotFoundHttpException();
-		}
-
-		if (!$person->isDeviserEditable()) {
-			throw new UnauthorizedHttpException();
-		}
-
-		if (!$person->isCompletedProfile()) {
-			$this->redirect($person->getCompleteProfileLink());
-		}
+		$this->checkProfileState($person);
 
 		$this->layout = '/desktop/public-2.php';
 
@@ -175,10 +165,11 @@ class SettingsController extends CController
 	{
 		if (!$person->isCompletedProfile()) {
 			$this->redirect($person->getCompleteProfileLink());
-		}
-		if ($person->isDeviser()) {
-			if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE) {
-				$this->redirect($person->getPersonNotPublicLink());
+		} else {
+			if ($person->isDeviser() || $person->isInfluencer()) {
+				if (!$person->isPublic()) {
+					$this->redirect($person->getPersonNotPublicLink());
+				}
 			}
 		}
 	}
