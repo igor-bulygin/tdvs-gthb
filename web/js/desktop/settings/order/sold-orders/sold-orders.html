@@ -59,71 +59,88 @@
 					<div ng-repeat="pack in order.packs">
 						<div ng-switch on="pack.pack_state">
 							<div ng-switch-when="paid">
-								<div class="col-md-12">
-									<div class="col-md-12" >
-										<div class="col-md-5 col-md-offset-1">
-											<label>I'M AWARE</label>
+								<div ng-if="!pack.loading" ng-cloak>
+									<div class="col-md-12">
+										<div class="col-md-12" >
+											<div class="col-md-5 col-md-offset-1">
+												<label>I'M AWARE</label>
+											</div>
+											<div class="col-md-3 col-md-offset-2">
+												<span>I'M PREPARING IT</span>
+											</div>
 										</div>
-										<div class="col-md-3 col-md-offset-2">
-											<span>I'M PREPARING IT</span>
-										</div>
+										<p>When you see the order, please click the button below to inform us</p>
 									</div>
-									<p>When you see the order, please click the button below to inform us</p>
+									<button class="btn btn-green" ng-click="soldOrdersCtrl.markPackAware(order,pack)">READY TO CREATE</button>
 								</div>
-								<button class="btn btn-green" ng-click="soldOrdersCtrl.markPackAware(order,pack)">READY TO CREATE</button>
+								<div class="text-center" ng-if="pack.loading" ng-cloak>
+									<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+									<span class="sr-only">Loading...</span>
+								</div>
 							</div>
 							<div ng-switch-when="aware">
-								<form name="soldOrdersCtrl.shippingForm" class="form-horizontal" >
-									<div class="form-group col-md-6">
-										<label for="shippingCompany" class="col-md-12">Shipping company</label>
-										<div class="col-md-12">
-											<input type="text" name="shippingCompany" class="form-control" ng-model="soldOrdersCtrl.shippingCompany">
+								<div ng-if="!pack.loading" ng-cloak>
+									<form name="soldOrdersCtrl.shippingForm" class="form-horizontal" >
+										<div class="form-group col-md-6">
+											<label for="shippingCompany" class="col-md-12">Shipping company</label>
+											<div class="col-md-12">
+												<input type="text" name="shippingCompany" class="form-control" ng-model="soldOrdersCtrl.shippingCompany">
+											</div>
+											<label for="eta" class="col-md-12">ETA <span>OPTIONAL</span></label>
+											<div class="col-md-12">
+												<input type="text" name="eta" class="form-control" ng-model="soldOrdersCtrl.eta">
+											</div>
 										</div>
-										<label for="eta" class="col-md-12">ETA <span>OPTIONAL</span></label>
-										<div class="col-md-12">
-											<input type="text" name="eta" class="form-control" ng-model="soldOrdersCtrl.eta">
+										<div class="form-group col-md-6">
+											<label for="trackingNumber" class="col-md-12">Tracking number</label>
+											<div class="col-md-12">
+												<input type="text" name="trackingNumber" class="form-control" ng-model="soldOrdersCtrl.trackingNumber">
+											</div>
+											<label for="trackLink" class="col-md-12">Link to track package <span>OPTIONAL</span></label>
+											<div class="col-md-12">
+												<input type="text" name="trackLink" class="form-control" ng-model="soldOrdersCtrl.trackLink">
+											</div>
 										</div>
-									</div>
-									<div class="form-group col-md-6">
-										<label for="trackingNumber" class="col-md-12">Tracking number</label>
-										<div class="col-md-12">
-											<input type="text" name="trackingNumber" class="form-control" ng-model="soldOrdersCtrl.trackingNumber">
+										<span class="form-group col-md-12">
+											When you click this button, the order will be moved to PAST ORDERS
+										</span>
+										<div class="form-group col-md-12">
+											<button class="btn btn-green" ng-click="soldOrdersCtrl.markPackShipped(order,pack)" ng-enabled="soldOrdersCtrl.shippingForm.$valid">
+												<span ng-if="pack.editInfo">SAVE CHANGES</span>
+												<span ng-if="!pack.editInfo">PACKAGE WAS SHIPPED</span>
+											</button>
 										</div>
-										<label for="trackLink" class="col-md-12">Link to track package <span>OPTIONAL</span></label>
-										<div class="col-md-12">
-											<input type="text" name="trackLink" class="form-control" ng-model="soldOrdersCtrl.trackLink">
-										</div>
-									</div>
-									<span class="form-group col-md-12">
-										When you click this button, the order will be moved to PAST ORDERS
-									</span>
-									<div class="form-group col-md-12">
-										<button class="btn btn-green" ng-click="soldOrdersCtrl.markPackShipped(order,pack)" ng-enabled="soldOrdersCtrl.shippingForm.$valid">PACKAGE WAS SHIPPED</button>
-									</div>
-
-								</form>
+									</form>
+								</div>
+								<div class="text-center" ng-if="pack.loading" ng-cloak>
+									<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+									<span class="sr-only">Loading...</span>
+								</div>
 							</div>
 							<div ng-switch-when="shipped">
 								<div class="col-md-12 text-right">
-									<button class="btn btn-green">edit</button>
+									<button class="btn btn-green" ng-click="soldOrdersCtrl.editShippingData(pack)">edit</button>
 								</div>
-								<div class="col-md-6">
-									<label class="col-md-12">Shipping company</label>
-									<span class="col-md-12" ng-bind="pack.shipping_info.company"></span>
+								<div class="col-md-12 text-right">
+									<div class="col-md-6">
+										<label class="col-md-12">Shipping company</label>
+										<span class="col-md-12" ng-bind="pack.shipping_info.company"></span>
+									</div>
+									<div class="col-md-6">
+										<label class="col-md-12">ETA</label>
+										<span class="col-md-12" ng-bind="pack.shipping_info.eta"></span>
+									</div>
 								</div>
-								<div class="col-md-6">
-									<label class="col-md-12">ETA</label>
-									<span class="col-md-12" ng-bind="pack.shipping_info.eta"></span>
+								<div class="col-md-12 text-right">
+									<div class="col-md-6">
+										<label class="col-md-12">Tracking number</label>
+										<span class="col-md-12" ng-bind="pack.shipping_info.tracking_number"></span>
+									</div>
+									<div class="col-md-6">
+										<label class="col-md-12">Link to track package</label>
+										<a class="col-md-12" ng-href="pack.shipping_info.tracking_link" target="blank">{{pack.shipping_info.tracking_link}}</a>
+									</div>
 								</div>
-								<div class="col-md-6">
-									<label class="col-md-12">Tracking number</label>
-									<span class="col-md-12" ng-bind="pack.shipping_info.tracking_number"></span>
-								</div>
-								<div class="col-md-6">
-									<label class="col-md-12">Link to track package</label>
-									<a class="col-md-12" ng-href="pack.shipping_info.tracking_link" target="blank">{{pack.shipping_info.tracking_link}}</span>
-								</div>
-								
 							</div>
 						</div>
 					</div>

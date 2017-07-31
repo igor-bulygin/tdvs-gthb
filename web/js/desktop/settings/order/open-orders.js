@@ -5,7 +5,7 @@
 		var vm = this;
 		vm.deviserId=person.id;		
 		vm.orders=[];
-		vm.enabledStates=[{value:"", name : "All orders"},{value:"open", name : "Open orders"},{value:"past", name :"Past orders"}];
+		vm.enabledStates=[{value:"open", name : "Open orders"},{value:"past", name :"Past orders"},{value:"", name : "All orders"}];
 		vm.stateFilter=vm.enabledStates[0];
 		vm.enabledTypes=[];
 		vm.isDeviser=false;

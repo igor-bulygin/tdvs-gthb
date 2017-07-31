@@ -5,6 +5,7 @@
 		var vm = this;
 		vm.markPackAware=markPackAware;
 		vm.markPackShipped=markPackShipped;
+		vm.editShippingData=editShippingData;
 		init();
 
 		function init() {
@@ -23,21 +24,39 @@
 		}
 
 		function markPackAware(order,pack) {
+			pack.loading=true;
 			function onChangeStateSuccess(data) {
-				order=data;
+				vm.orders[vm.orders.indexOf(order)].packs=data.packs;
 			}
 			orderDataService.changePackState({}, {personId:pack.deviser_id,packId:pack.short_id, newState:'aware' },onChangeStateSuccess, UtilService.onError);
 		}
 
 		function markPackShipped(order,pack) {
+			pack.loading=true;
 			function onChangeStateSuccess(data) {
-				order=data;
-				order.packs.splice(order.packs.indexOf(pack),1);
-				if (order.packs.length<1) {
-					vm.orders.splice(vm.orders.indexOf(order),1);
+				if (!pack.editInfo) {
+					order.packs.splice(order.packs.indexOf(pack),1);
+					if (order.packs.length<1) {
+						vm.orders.splice(vm.orders.indexOf(order),1);
+					}
+					else {
+						vm.orders[vm.orders.indexOf(order)].packs=data.packs;
+					}
+				}
+				else {
+					vm.orders[vm.orders.indexOf(order)].packs=data.packs;
 				}
 			}
 			orderDataService.changePackState({ company:vm.shippingCompany, eta: vm.eta, tracking_number:vm.trackingNumber, tracking_link:vm.trackLink }, {personId:pack.deviser_id,packId:pack.short_id, newState:'shipped' },onChangeStateSuccess, UtilService.onError)
+		}
+
+		function editShippingData(pack) {
+			vm.trackLink=pack.shipping_info.tracking_link;
+			vm.shippingCompany=pack.shipping_info.company;
+			vm.trackingNumber=pack.shipping_info.tracking_number;
+			vm.eta=pack.shipping_info.eta;
+			pack.pack_state='aware';
+			pack.editInfo=true;
 		}
 	}
 
