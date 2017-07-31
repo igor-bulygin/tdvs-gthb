@@ -47,7 +47,6 @@ class StripeHelper
 	}
 
 	public static function validateAuthorizationToken($code) {
-		Yii::info('Stripe validateAuthorizationToken: '.$code, __METHOD__);
 
 		$token_request_body = [
 			'grant_type' => 'authorization_code',
@@ -55,6 +54,8 @@ class StripeHelper
 			'code' => $code,
 			'client_secret' => Yii::$app->params['stripe_secret_key'],
 		];
+
+		Yii::info('Stripe validateAuthorizationToken: '.print_r($token_request_body, true), __METHOD__);
 
 		$req = curl_init('https://connect.stripe.com/oauth/token');
 		curl_setopt($req, CURLOPT_RETURNTRANSFER, true);

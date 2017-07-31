@@ -3,7 +3,6 @@ use app\assets\desktop\settings\GlobalAsset;
 use app\components\SettingsHeader;
 use app\models\Person;
 use yii\helpers\Json;
-use yii\helpers\Url;
 
 GlobalAsset::register($this);
 
@@ -16,10 +15,9 @@ $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD
 
 ?>
 
-<?php if($person->isPublic()) { ?>
+<?php if($person->isCompletedProfile()) { ?>
 	<?= SettingsHeader::widget() ?>
 <?php } ?>
-
 
 <div ng-controller="shippingSettingsCtrl as shippingSettingsCtrl" class="personal-info-wrapper bank-settings-wrapper">
 	<div class="container">

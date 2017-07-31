@@ -15,7 +15,7 @@ $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD
 
 ?>
 
-<?php if($person->isPublic()) { ?>
+<?php if($person->isCompletedProfile()) { ?>
 <?= SettingsHeader::widget() ?>
 <?php } ?>
 

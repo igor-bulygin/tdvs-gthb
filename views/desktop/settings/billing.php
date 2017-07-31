@@ -16,7 +16,9 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 
 ?>
 
-<?= SettingsHeader::widget() ?>
+<?php if($person->isCompletedProfile()) { ?>
+	<?= SettingsHeader::widget() ?>
+<?php } ?>
 
 <div class="personal-info-wrapper bank-settings-wrapper">
 	<div class="container">
