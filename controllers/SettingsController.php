@@ -140,7 +140,7 @@ class SettingsController extends CController
 
 		$this->layout = '/desktop/public-2.php';
 
-		return $this->render("open_orders", [
+		return $this->render("orders", [
 			'person' => $person,
 		]);
 	}
