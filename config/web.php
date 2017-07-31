@@ -122,7 +122,7 @@ $config = [
 					'levels' => ['info'],
 					'categories' => ['app\controllers\Stripe*', 'app\helpers\Stripe*', 'Stripe'],
 					'logFile' => '@app/runtime/logs/todevise_stripe.log',
-					'logVars' => ['_GET', '_POST', '_FILES', '_COOKIE', '_SESSION', '_SERVER'],
+					'logVars' => ['_GET', '_POST'],
 				],
 				[
 					'class' => 'yii\log\EmailTarget',

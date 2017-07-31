@@ -37,9 +37,13 @@ class StripeController extends CController
 			// Validate token
 			$resp = StripeHelper::validateAuthorizationToken($code);
 
-			// Save current connect info
-			$person->settingsMapping->stripe_info = $resp;
-			$person->save();
+			if (!$resp) {
+				Yii::info('Stripe connect back with errors. Validation result: '.$resp, __METHOD__);
+			} else {
+				// Save current connect info
+				$person->settingsMapping->stripe_info = $resp;
+				$person->save();
+			}
 
 			$this->redirect(Url::to(['settings/billing', 'slug' => $person->slug, 'person_id' => $person->short_id]));
 
