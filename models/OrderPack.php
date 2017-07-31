@@ -101,68 +101,15 @@ class OrderPack extends EmbedModel
 	{
 		switch ($view) {
 
-			case self::SERIALIZE_SCENARIO_PREVIEW:
-			case self::SERIALIZE_SCENARIO_PUBLIC:
-			case self::SERIALIZE_SCENARIO_OWNER:
 			case self::SERIALIZE_SCENARIO_ADMIN:
-				self::$serializeFields = [
-					'short_id',
-					'deviser_id',
-					'shipping_type',
-					'shipping_price',
-					'pack_weight',
-					'pack_price',
-					'pack_percentage_fee',
-					'currency',
-					'weight_measure',
-					'pack_state',
-					'pack_state_name' => 'packStateName',
-
-//					'payment_info',
-//					'charges',
-					'products' => 'productsInfo',
-				];
-			self::$retrieveExtraFields = [
-					'products',
-				];
-
-
-			self::$translateFields = false;
-				break;
-
 			case Order::SERIALIZE_SCENARIO_CLIENT_ORDER:
-				self::$serializeFields = [
-					'short_id',
-					'deviser_id',
-					'deviser_info' => 'deviserInfo',
-					'shipping_type',
-					'shipping_price',
-					'pack_weight',
-					'pack_price',
-					'pack_percentage_fee',
-					'currency',
-					'weight_measure',
-					'pack_state',
-					'pack_state_name' => 'packStateName',
-
-//					'payment_info',
-//					'charges',
-					'products' => 'productsInfo',
-				];
-				self::$retrieveExtraFields = [
-					'products',
-				];
-
-
-				self::$translateFields = false;
-				break;
-
 			case Order::SERIALIZE_SCENARIO_DEVISER_PACK:
 				self::$serializeFields = [
 					'short_id',
 					'deviser_id',
 					'shipping_type',
 					'shipping_price',
+					'shipping_info',
 					'pack_weight',
 					'pack_price',
 					'pack_percentage_fee',
@@ -171,8 +118,6 @@ class OrderPack extends EmbedModel
 					'pack_state',
 					'pack_state_name' => 'packStateName',
 
-//					'payment_info',
-//					'charges',
 					'products' => 'productsInfo',
 				];
 				self::$retrieveExtraFields = [

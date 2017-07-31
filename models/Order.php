@@ -147,21 +147,20 @@ class Order extends CActiveRecord {
 	public static function setSerializeScenario($view)
 	{
 		switch ($view) {
-			case self::SERIALIZE_SCENARIO_PREVIEW:
-			case self::SERIALIZE_SCENARIO_PUBLIC:
 			case self::SERIALIZE_SCENARIO_ADMIN:
-			case self::SERIALIZE_SCENARIO_OWNER:
 				static::$serializeFields = [
 					'id' => 'short_id',
 					'person_id',
+					'person_info' => 'personInfo',
 					'subtotal',
 					'order_state',
 					'order_date',
 					'shipping_address',
 					'billing_address',
 					'packs',
+					'payment_info',
+					'state_history',
 
-//					'payment_info',
 //					'charges',
 				];
 				static::$retrieveExtraFields = [
@@ -173,6 +172,7 @@ class Order extends CActiveRecord {
 
 			case self::SERIALIZE_SCENARIO_CLIENT_ORDER:
 				static::$serializeFields = [
+
 					'id' => 'short_id',
 					'person_id',
 //					'person_info' => 'personInfo',
@@ -183,6 +183,7 @@ class Order extends CActiveRecord {
 					'billing_address',
 					'packs',
 					'payment_info',
+					'state_history',
 
 //					'charges',
 				];
@@ -196,6 +197,7 @@ class Order extends CActiveRecord {
 			case self::SERIALIZE_SCENARIO_DEVISER_PACK:
 				static::$serializeFields = [
 					'id' => 'short_id',
+
 					'person_id',
 					'person_info' => 'personInfo',
 //					'subtotal',
@@ -204,8 +206,9 @@ class Order extends CActiveRecord {
 					'shipping_address',
 					'billing_address',
 					'packs',
-
 //					'payment_info',
+					'state_history',
+
 //					'charges',
 				];
 				static::$retrieveExtraFields = [
