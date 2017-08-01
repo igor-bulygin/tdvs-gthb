@@ -31,18 +31,23 @@ Also there is two special available values:
 ```
 
 **Response body**:
-
 ```
 {
   "items": [
 	{
-	  "id": "e0ecbf7c",
-	  "person_id": "1000000",
-	  "subtotal": 564,
+	  "id": "97aff9c9",
+	  "person_id": "53e81ce",
+	  "person_info": {
+		"slug": "jose-vazquez",
+		"name": "Jose Vázquez",
+		"photo": "http://localhost.thumbor.todevise.com:8000/dBZIIZSezTziAGo6HFtsHimLg1M=/128x0//uploads/deviser/53e81ce/person.profile.cropped.59788309ac68f.jpg",
+		"url": "http://localhost:8080/client/jose-vazquez/53e81ce/loved"
+	  },
+	  "subtotal": 565,
 	  "order_state": "order_state_paid",
 	  "order_date": {
-		"sec": 1500630872,
-		"usec": 505000
+		"sec": 1501060836,
+		"usec": 286000
 	  },
 	  "shipping_address": {
 		"name": "Michael",
@@ -70,109 +75,95 @@ Also there is two special available values:
 	  },
 	  "packs": [
 		{
-		  "deviser_id": "f351c59",
-		  "short_id": "2cc70d4c",
+		  "short_id": "a22fd4c3",
+		  "deviser_id": "6e13130",
+		  "deviser_info": {
+			"slug": "rosa-bisbe",
+			"name": "Rosa Bisbe",
+			"photo": "http://localhost.thumbor.todevise.com:8000/l7PE_BbN4yxMh07hRE32ZSBOCr0=/128x0//uploads/deviser/6e13130/profile.57d9197a27a8e.png",
+			"url": "http://localhost:8080/deviser/rosa-bisbe/6e13130/store"
+		  },
 		  "shipping_type": "standard",
 		  "shipping_price": null,
+		  "shipping_info": {
+			"company": "Seur",
+			"tracking_number": "abc1234",
+			"tracking_link": "http://www.seur.com"
+		  },
 		  "pack_weight": 0,
-		  "pack_price": 505,
-		  "pack_percentage_fee": null,
+		  "pack_price": 565,
+		  "pack_percentage_fee": 0.04,
 		  "currency": null,
 		  "weight_measure": null,
-		  "pack_state": "open",
+		  "pack_state": "shipped",
+		  "pack_state_name": "Shipped",
+		  "shipping_date": {
+			"sec": 1501493161,
+			"usec": 352000
+		  },
 		  "products": [
 			{
-			  "product_id": "ca60b295",
-			  "price_stock_id": "ca60b2951d8eff7",
+			  "product_id": "b8c4f6df",
+			  "price_stock_id": "b8c4f6dfeba2e12",
 			  "quantity": 1,
-			  "price": 130,
+			  "price": 565,
 			  "weight": 0,
 			  "options": {
-				"size": "38 (S)",
 				"731ct": [
-				  "green",
-				  "blue",
-				  "pink"
+				  "gold"
 				],
-				"d0e2g": [
-				  "elastene",
-				  "polyester"
-				]
-			  }
-			},
-			{
-			  "product_id": "852eb305",
-			  "price_stock_id": "852eb3055b581fm",
-			  "quantity": 3,
-			  "price": 75,
-			  "weight": 0,
-			  "options": {
-				"size": "42 (L)",
-				"731ct": [
-				  "red",
-				  "yellow",
-				  "blue"
+				"2500m": [
+				  "diamond"
 				],
-				"d0e2g": [
-				  "elastene",
-				  "polyester"
+				"f6b97": [
+				  "silver"
 				]
-			  }
-			},
-			{
-			  "product_id": "0f55b159",
-			  "price_stock_id": "0f55b15913d324s",
-			  "quantity": 2,
-			  "price": 75,
-			  "weight": 0,
-			  "options": {
-				"size": "42 (L)",
-				"731ct": [
-				  "white",
-				  "orange",
-				  "brown"
-				],
-				"d0e2g": [
-				  "elastene",
-				  "polyester"
-				]
-			  }
-			}
-		  ]
-		},
-		{
-		  "deviser_id": "51c0f3s",
-		  "short_id": "3abeef8c",
-		  "shipping_type": "standard",
-		  "shipping_price": null,
-		  "pack_weight": 0,
-		  "pack_price": 59,
-		  "pack_percentage_fee": null,
-		  "currency": null,
-		  "weight_measure": null,
-		  "pack_state": "open",
-		  "products": [
-			{
-			  "product_id": "eb1c85ef",
-			  "price_stock_id": "eb1c85ef5be034w",
-			  "quantity": 1,
-			  "price": 59,
-			  "weight": 0,
-			  "options": {
-				"size": "M",
-				"731ct": [
-				  "black",
-				  "red"
-				],
-				"d0e2g": [
-				  "cotton",
-				  "other"
-				]
+			  },
+			  "product_info": {
+				"name": "SILVER WITH GOLDEN PLAQUE AND BROWN DIAMONDS",
+				"photo": "http://localhost.thumbor.todevise.com:8000/-9bWA9lZT4R28CEfbT5kn48MDVM=//uploads/product/b8c4f6df/2016-07-21-16-34-13-cd85g.jpg",
+				"slug": "silver-with-golden-plaque-and-brown-diamonds",
+				"url": "http://localhost:8080/work/silver-with-golden-plaque-and-brown-diamonds/b8c4f6df",
+				"stock": 1
 			  }
 			}
 		  ]
 		}
-	  ]
+	  ],
+	  "payment_info": {
+		"id": "tok_1AkWnFJt4mveficF8Szt2UKl",
+		"object": "token",
+		"card": {
+		  "id": "card_1AkWnFJt4mveficFnkokiMiC",
+		  "object": "card",
+		  "address_city": null,
+		  "address_country": null,
+		  "address_line1": null,
+		  "address_line1_check": null,
+		  "address_line2": null,
+		  "address_state": null,
+		  "address_zip": "15177",
+		  "address_zip_check": "pass",
+		  "brand": "Visa",
+		  "country": "US",
+		  "cvc_check": "pass",
+		  "dynamic_last4": null,
+		  "exp_month": NumberLong(5),
+		  "exp_year": NumberLong(2020),
+		  "funding": "credit",
+		  "last4": "4242",
+		  "metadata": [],
+		  "name": "jacko@king.of.pop.com",
+		  "tokenization_method": null
+		},
+		"client_ip": "195.76.104.164",
+		"created": NumberLong(1501241889),
+		"email": "jacko@king.of.pop.com",
+		"livemode": false,
+		"type": "card",
+		"used": false
+	  }
+	  "state_history": null
 	}
   ],
   "meta": {
@@ -182,4 +173,5 @@ Also there is two special available values:
   }
 }
 ```
+
 

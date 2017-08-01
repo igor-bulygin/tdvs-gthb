@@ -118,6 +118,7 @@ class OrderPack extends EmbedModel
 					'weight_measure',
 					'pack_state',
 					'pack_state_name' => 'packStateName',
+					'shipping_date' => 'shippingDate',
 
 					'products' => 'productsInfo',
 				];
@@ -134,7 +135,17 @@ class OrderPack extends EmbedModel
 				self::$serializeFields = [];
 				break;
 		}
-//		Product::setSerializeScenario($view);
+	}
+
+	public function getShippingDate()
+	{
+		foreach ($this->state_history as $state) {
+			if ($state['state'] == OrderPack::PACK_STATE_SHIPPED) {
+				return $state['date'];
+			}
+		}
+
+		return null;
 	}
 
 	public function getPackStateName()
