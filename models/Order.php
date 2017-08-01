@@ -175,7 +175,7 @@ class Order extends CActiveRecord {
 
 					'id' => 'short_id',
 					'person_id',
-//					'person_info' => 'personInfo',
+					'person_info' => 'personInfo',
 					'subtotal',
 					'order_state',
 					'order_date',
@@ -183,7 +183,7 @@ class Order extends CActiveRecord {
 					'billing_address',
 					'packs',
 					'payment_info',
-					'state_history',
+//					'state_history',
 
 //					'charges',
 				];
@@ -207,7 +207,7 @@ class Order extends CActiveRecord {
 					'billing_address',
 					'packs',
 //					'payment_info',
-					'state_history',
+//					'state_history',
 
 //					'charges',
 				];
