@@ -8,7 +8,7 @@
 				</span>
 				<span class="col-md-4 text-center">
 					<span style="color: #9D9D9D;font-weight: lighter;" class="col-md-12">ORDER DATE</span>
-					<p>{{order.order_date | date:'dd/MM/yy'}}</p>
+					<p ng-cloak>{{soldOrdersCtrl.parseDate(order.order_date.sec*1000) | date:'dd/MM/yy'}}</p>
 				</span>
 				<span class="col-md-4 text-center">
 					<span style="color: #9D9D9D;font-weight: lighter;" class="col-md-12">CLIENT NAME</span>

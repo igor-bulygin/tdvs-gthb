@@ -14,7 +14,7 @@
 			vm.enabledTypes.push({value:"received", name : "Sales"});
 		}
 		vm.enabledTypes.push({value:"done", name : "My purchase"});
-		vm.typeFilter=vm.enabledTypes[1];
+		vm.typeFilter=vm.enabledTypes[0];
 		vm.getOrders=getOrders;
 		
 		init();

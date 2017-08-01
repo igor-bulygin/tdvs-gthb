@@ -3,6 +3,7 @@
 
 	function controller(UtilService, cartService) {
 		var vm = this;
+		vm.parseDate=UtilService.parseDate;
 
 		init();
 

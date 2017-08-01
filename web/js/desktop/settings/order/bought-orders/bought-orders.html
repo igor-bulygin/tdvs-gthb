@@ -31,11 +31,11 @@
 				</div>
 				<div class="col-md-2">
 					<span class="col-md-12" style="color: #9D9D9D;">DEVISER</span>
-					<label  class="col-md-12" ng-bind="pack.deviser_id"></label>
+					<label  class="col-md-12" ng-bind="pack.deviser_info.name"></label>
 				</div>
 				<div class="col-md-2"  ng-if="pack.pack_state==='shipped'">
 					<span class="col-md-12" style="color: #9D9D9D;">SHIPPING DATE</span>
-					<label class="col-md-12" ng-bind="pack.shipping_date"></label>
+					<label class="col-md-12" ng-cloak>{{boughtOrdersCtrl.parseDate(pack.shipping_date.sec*1000) | date:'dd/MM/yy'}}</label>
 				</div>
 				<div class="col-md-1">
 					<span class="col-md-12" style="color: #9D9D9D;">PRICE</span>
