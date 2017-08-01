@@ -1,22 +1,24 @@
 <div class="panel">
 	<uib-accordion>
-		<div uib-accordion-group ng-repeat="order in soldOrdersCtrl.orders" ng-cloak >
+		<div uib-accordion-group ng-repeat="order in soldOrdersCtrl.orders" ng-class="col-md-12" ng-cloak style="border:0 none !important;">
 			<uib-accordion-heading class="col-md-12" style="font-weight: lighter;">
-				<span class="col-md-4 text-center">
-					<span style="color: #9D9D9D;font-weight: lighter;" class="col-md-12">INVOICE Nº</span>
-					<p ng-bind="order.id"></p>
-				</span>
-				<span class="col-md-4 text-center">
-					<span style="color: #9D9D9D;font-weight: lighter;" class="col-md-12">ORDER DATE</span>
-					<p ng-cloak>{{soldOrdersCtrl.parseDate(order.order_date.sec*1000) | date:'dd/MM/yy'}}</p>
-				</span>
-				<span class="col-md-4 text-center">
-					<span style="color: #9D9D9D;font-weight: lighter;" class="col-md-12">CLIENT NAME</span>
-					<p ng-bind="order.billing_address.name + ' ' + order.billing_address.last_name"></p>
-				</span>
+			<div class="mt-20">
+					<span class="col-md-2 text-left">
+						<span style="color: #9D9D9D;font-weight: lighter;" class="col-md-12">INVOICE Nº</span>
+						<span class="col-md-12" ng-bind="order.id"></span>
+					</span>
+					<span class="col-md-2 text-left">
+						<span style="color: #9D9D9D;font-weight: lighter;" class="col-md-12">ORDER DATE</span>
+						<span class="col-md-12" ng-cloak>{{soldOrdersCtrl.parseDate(order.order_date.sec*1000) | date:'dd/MM/yy'}}</span>
+					</span>
+					<span class="col-md-2 text-left">
+						<span style="color: #9D9D9D;font-weight: lighter;" class="col-md-12">CLIENT NAME</span>
+						<span class="col-md-12" ng-bind="order.billing_address.name + ' ' + order.billing_address.last_name"></span>
+					</span>
+				</div>
 			</uib-accordion-heading>
 			<div class="card mt-30">
-				<div class="col-md-6" style="border-right: 1px solid #e9e9e9">
+				<div class="col-md-7" style="border-right: 1px solid #e9e9e9">
 					<div class="row" style="border-bottom: 1px solid #e9e9e9">
 						<span class="row" style="color: #9D9D9D;">INFO</span>
 						<div class="col-md-6 row mt-20">
@@ -56,7 +58,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-6">
+			<div class="col-md-5">
 				<div ng-repeat="pack in order.packs">
 					<div ng-switch on="pack.pack_state">
 						<div ng-switch-when="paid">
@@ -82,29 +84,29 @@
 						<div ng-switch-when="aware">
 							<div ng-if="!pack.loading" ng-cloak>
 								<form name="soldOrdersCtrl.shippingForm" class="form-horizontal" >
-									<div class="form-group col-md-6">
-										<label for="shippingCompany" class="col-md-12">Shipping company</label>
+									<div class="form-group col-md-5">
+										<span for="shippingCompany" class="col-md-12">Shipping company</span>
 										<div class="col-md-12">
 											<input type="text" name="shippingCompany" class="form-control" ng-class="{'error-input': soldOrdersCtrl.has_error(soldOrdersCtrl.shippingForm, soldOrdersCtrl.shippingForm.shippingCompany)}" ng-model="soldOrdersCtrl.shippingCompany" required>
 										</div>
 										<form-errors class="col-md-12" field="soldOrdersCtrl.shippingForm.shippingCompany" condition="soldOrdersCtrl.has_error(soldOrdersCtrl.shippingForm, soldOrdersCtrl.shippingForm.shippingCompany)"></form-errors>
-										<label for="eta" class="col-md-12">ETA <span>OPTIONAL</span></label>
+										<span for="eta" class="col-md-12 mt-20">ETA <span style="color: #9D9D9D;">OPTIONAL</span></span>
 										<div class="col-md-12">
 											<input type="text" name="eta" class="form-control" ng-model="soldOrdersCtrl.eta">
 										</div>
 									</div>
-									<div class="form-group col-md-6">
-										<label for="trackingNumber" class="col-md-12">Tracking number</label>
+									<div class="form-group col-md-7">
+										<span for="trackingNumber" class="col-md-12">Tracking number</span>
 										<div class="col-md-12">
 											<input type="text" name="trackingNumber" class="form-control" ng-class="{'error-input': soldOrdersCtrl.has_error(soldOrdersCtrl.shippingForm, soldOrdersCtrl.shippingForm.trackingNumber)}" ng-model="soldOrdersCtrl.trackingNumber" required>
 										</div>
 										<form-errors class="col-md-12" field="soldOrdersCtrl.shippingForm.trackingNumber" condition="soldOrdersCtrl.has_error(soldOrdersCtrl.shippingForm, soldOrdersCtrl.shippingForm.trackingNumber)"></form-errors>
-										<label for="trackLink" class="col-md-12">Link to track package <span>OPTIONAL</span></label>
+										<span for="trackLink" class="col-md-12 mt-20">Link to track package <span style="color: #9D9D9D;">OPTIONAL</span></span>
 										<div class="col-md-12">
 											<input type="text" name="trackLink" class="form-control" ng-model="soldOrdersCtrl.trackLink">
 										</div>
 									</div>
-									<span class="form-group col-md-12">
+									<span class="form-group col-md-12 mt-20">
 										When you click this button, the order will be moved to PAST ORDERS
 									</span>
 									<div class="form-group col-md-12">
@@ -124,7 +126,7 @@
 							<div class="col-md-12 text-right">
 								<button class="btn btn-green" ng-click="soldOrdersCtrl.editShippingData(pack)">edit</button>
 							</div>
-							<div class="col-md-12 text-right">
+							<div class="col-md-12 mt-20 text-right">
 								<div class="col-md-6">
 									<label class="col-md-12">Shipping company</label>
 									<span class="col-md-12" ng-bind="pack.shipping_info.company"></span>
