@@ -29,11 +29,10 @@ $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD
 				</li>
 			</ol>
 		</div>
-		<div class="col-md-2">
-			<div class="radio radio-inline" ng-repeat="state in ordersCtrl.enabledStates">
-				<input type="radio" name="typeFilter" value="{{state.value}}" ng-model="ordersCtrl.stateFilter" ng-change="ordersCtrl.getOrders()"/>
-				<label ng-bind="state.name"></label>
-			</div>
+		<div class="btn-group col-md-11 inline">
+			<label class="col-md-1" ng-repeat="state in ordersCtrl.enabledStates" class="col-md-1">
+				<input type="radio" name="stateFilter" ng-model="ordersCtrl.stateFilter" ng-value="state.value" ng-change="ordersCtrl.getOrders()">{{state.name}}
+			</label>
 		</div>
 	</div>
 	<div class="col-md-10 col-md-offset-1  store" style="padding: 20px;">
