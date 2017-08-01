@@ -50,7 +50,7 @@
 					<label class="col-md-12" ng-bind="pack.pack_state"></label>
 				</div>
 				<div class="col-md-2 text-right" ng-if="pack.pack_state==='shipped'">
-					<a class="red-text" ng-href="pack.tracking_link">Track package</a>
+					<a class="red-text" ng-href="{{pack.shipping_info.tracking_link}}" target="blank">Track package</a>
 				</div>
 				</div>
 				<div class="row mt-10 mb-20">

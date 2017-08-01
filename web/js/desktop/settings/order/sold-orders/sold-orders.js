@@ -50,6 +50,7 @@
 					vm.orders[vm.orders.indexOf(order)].packs=data.packs;
 				}
 			}
+			ValidateUrl()
 			orderDataService.changePackState({ company:vm.shippingCompany, eta: vm.eta, tracking_number:vm.trackingNumber, tracking_link:vm.trackLink }, {personId:pack.deviser_id,packId:pack.short_id, newState:'shipped' },onChangeStateSuccess, UtilService.onError)
 		}
 
@@ -60,6 +61,15 @@
 			vm.eta=pack.shipping_info.eta;
 			pack.pack_state='aware';
 			pack.editInfo=true;
+		}
+
+		function ValidateUrl() { 
+			if(vm.trackLink && !/^(https?):\/\//i.test(vm.trackLink) && 'http://'.indexOf(vm.trackLink) !== 0 && 'https://'.indexOf(vm.trackLink) !== 0 ) {
+				vm.trackLink= 'http://' + vm.trackLink;
+			}
+			else {
+				return vm.trackLink;
+			}
 		}
 	}
 
