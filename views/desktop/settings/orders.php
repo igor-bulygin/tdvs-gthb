@@ -21,7 +21,7 @@ $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD
 
 <div ng-controller="ordersCtrl as ordersCtrl">
 	<div class="col-md-12 store" style="padding: 20px;">
-	<h4 class="col-md-7 col-md-offset-5">ORDERS</h4>
+		<h4 class="col-md-7 col-md-offset-5">ORDERS</h4>
 		<div class="col-md-1" ng-if="ordersCtrl.isDeviser" ng-cloak>
 			<ol class="nya-bs-select col-md-12" ng-model="ordersCtrl.typeFilter" ng-change="ordersCtrl.getOrders()">
 				<li nya-bs-option="type in ordersCtrl.enabledTypes">
@@ -36,7 +36,10 @@ $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD
 		</div>
 	</div>
 	<div class="col-md-10 col-md-offset-1  store" style="padding: 20px;">
-		<div ng-switch on="ordersCtrl.typeFilter.value" class="col-md-12" ng-if="!ordersCtrl.loading" ng-cloak>
+		<div class="col-md-12 text-center" ng-if="!ordersCtrl.loading && !ordersCtrl.orders.length>0" ng-cloak>
+			<span>No orders founded</span>
+		</div>
+		<div ng-switch on="ordersCtrl.typeFilter.value" class="col-md-12" ng-if="!ordersCtrl.loading && ordersCtrl.orders.length>0" ng-cloak>
 			<sold-orders ng-switch-when="received" orders="ordersCtrl.orders"></sold-orders>
 			<bought-orders ng-switch-when="done" orders="ordersCtrl.orders"></bought-orders>
 		</div>
