@@ -12,7 +12,7 @@ class GlobalAsset extends AssetBundle {
 		'js/desktop/settings/shipping/types/types.js',
 		'js/desktop/settings/shipping/weights-prices/weights-prices.js',
 		'js/desktop/settings/shipping/observations/observations.js',
-		'js/desktop/settings/order/open-orders.js',
+		'js/desktop/settings/order/orders.js',
 		'js/desktop/settings/order/sold-orders/sold-orders.js',
 		'js/desktop/settings/order/bought-orders/bought-orders.js'
 	];
