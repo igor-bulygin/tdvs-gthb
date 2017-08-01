@@ -5,7 +5,7 @@
 		var vm = this;
 		vm.deviserId=person.id;		
 		vm.orders=[];
-		vm.enabledStates=[{value:"open", name : "Open"},{value:"past", name :"Past"},{value:" ", name : "All"}];
+		vm.enabledStates=[{value:"open", name : "Open"},{value:"past", name :"Past"},{value:"", name : "All"}];
 		vm.stateFilter=vm.enabledStates[0].value;
 		vm.enabledTypes=[];
 		vm.isDeviser=false;
@@ -16,7 +16,7 @@
 		vm.enabledTypes.push({value:"done", name : "My purchase"});
 		vm.typeFilter=vm.enabledTypes[0];
 		vm.getOrders=getOrders;
-		
+
 		init();
 
 		function init() {
