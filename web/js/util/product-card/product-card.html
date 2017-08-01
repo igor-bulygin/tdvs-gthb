@@ -2,9 +2,9 @@
 	<img ng-src="{{productCardCtrl.product.product_info.photo}}" ng-attr-alt="productCardCtrl.product.product_info.name" ng-attr-title="productCardCtrl.product.product_info.name" class="img-responsive">
 </div>
 <div ng-class="productCardCtrl.classes.column2Class">
-	<p ng-bind="productCardCtrl.product.product_info.name"></p>
-	<p><span class="bold">Quantity:</span><span ng-bind="productCardCtrl.product.quantity"></span></p>
-		<p ng-repeat="tag in productCardCtrl.product.tags">
+	<p ng-bind="productCardCtrl.product.product_info.name" style="margin:0;"></p>
+	<p style="margin:0;"><span class="bold">Quantity:</span><span ng-bind="productCardCtrl.product.quantity"></span></p>
+		<p style="margin:0;" ng-repeat="tag in productCardCtrl.product.tags">
 			<span class="bold" ng-bind="tag.name"></span>:&nbsp;
 			<span ng-repeat="value in tag.values track by $index">
 				<span ng-if="!shippingMethodsCtrl.isObject(value)">
@@ -12,5 +12,5 @@
 				</span>
 			</span>
 		</p>
-	<p><span class="bold">€</span><span class="bold" ng-bind="productCardCtrl.product.price"></span></p>
+	<p style="margin:0;"><span class="bold">€</span><span class="bold" ng-bind="productCardCtrl.product.price"></span></p>
 </div>
