@@ -31,7 +31,7 @@ $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD
 		</div>
 		<div class="col-md-2">
 			<div class="radio radio-inline" ng-repeat="state in ordersCtrl.enabledStates">
-				<input type="radio" name="userdetails" value="{{state.value}}" ng-model="ordersCtrl.stateFilter" ng-change="ordersCtrl.getOrders()"/>
+				<input type="radio" name="typeFilter" value="{{state.value}}" ng-model="ordersCtrl.stateFilter" ng-change="ordersCtrl.getOrders()"/>
 				<label ng-bind="state.name"></label>
 			</div>
 		</div>
