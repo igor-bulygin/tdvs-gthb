@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(UtilService, orderDataService,cartService) {
+	function controller(UtilService, orderDataService,cartService,$uibModal) {
 		var vm = this;
 		vm.markPackAware=markPackAware;
 		vm.markPackShipped=markPackShipped;
@@ -41,6 +41,7 @@
 					order.packs.splice(order.packs.indexOf(pack),1);
 					if (order.packs.length<1) {
 						vm.orders.splice(vm.orders.indexOf(order),1);
+						openInfoModal(order.id);
 					}
 					else {
 						vm.orders[vm.orders.indexOf(order)].packs=data.packs;
@@ -70,6 +71,20 @@
 			else {
 				return vm.trackLink;
 			}
+		}
+
+		function openInfoModal(ordernumber) {
+			var modalInstance = $uibModal.open({
+				component: 'modalInfo',
+				resolve: {
+					text: function () {
+						return 'Order ' + ordernumber+ ' was moved to Past orders. For payment information see Billing & Payments';
+					}
+				}
+			});
+			modalInstance.result.then(function(data) {}, function(err) {
+				UtilService.onError(err);
+			});
 		}
 	}
 
