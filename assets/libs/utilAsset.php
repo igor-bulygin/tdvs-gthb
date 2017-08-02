@@ -25,6 +25,7 @@ class utilAsset extends AssetBundle {
 		'js/util/image-hover-buttons/image-hover-buttons.js',
 		'js/util/modal-signup-loved/modal-signup-loved.js',
 		'js/util/onPressEnter.js',
+		'js/util/modal-info/modal-info.js'
 	];
 	
 	public $depends = [

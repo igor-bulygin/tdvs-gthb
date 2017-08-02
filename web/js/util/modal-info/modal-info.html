@@ -1,0 +1,13 @@
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="modalInfoCtrl.dismiss()">
+		<span class="ion-ios-close" aria-hidden="true"></span>
+	</button>
+</div>
+<div class="modal-body">
+	<div class="text-center">
+		<p ng-bind="modalInfoCtrl.resolve.text"></p>
+	</div>
+</div>
+<div class="modal-footer">
+	<button class="btn btn-default btn-green" ng-click="modalInfoCtrl.ok()">Accept</button>
+</div>
