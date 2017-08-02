@@ -34,8 +34,7 @@
 			orderDataService.changePackState({}, {personId:pack.deviser_id,packId:pack.short_id, newState:'aware' },onChangeStateSuccess, UtilService.onError);
 		}
 
-		function markPackShipped(order,pack) {
-			pack.loading=true;
+		function markPackShipped(order,pack) {			
 			function onChangeStateSuccess(data) {
 				if (!pack.editInfo) {
 					order.packs.splice(order.packs.indexOf(pack),1);
@@ -51,8 +50,30 @@
 					vm.orders[vm.orders.indexOf(order)].packs=data.packs;
 				}
 			}
-			ValidateUrl()
-			orderDataService.changePackState({ company:vm.shippingCompany, eta: vm.eta, tracking_number:vm.trackingNumber, tracking_link:vm.trackLink }, {personId:pack.deviser_id,packId:pack.short_id, newState:'shipped' },onChangeStateSuccess, UtilService.onError)
+			if (!pack.editInfo) {
+				var modalInstance = $uibModal.open({
+					component: 'modalAceptReject',
+					resolve: {
+						text: function () {
+							return '<p>You will mark this order as shipped.</p><p><strong>This action can not be undone.</strong></p><p>Do you wish to continue?</p>';
+						}
+					}
+				});
+				modalInstance.result.then(function(data) {
+					if (data) {
+						pack.loading=true;
+						ValidateUrl()
+						orderDataService.changePackState({ company:vm.shippingCompany, eta: vm.eta, tracking_number:vm.trackingNumber, tracking_link:vm.trackLink }, {personId:pack.deviser_id,packId:pack.short_id, newState:'shipped' },onChangeStateSuccess, UtilService.onError)
+					}
+				}, function(err) {
+					UtilService.onError(err);
+				});
+			}
+			else {
+				pack.loading=true;
+				ValidateUrl()
+				orderDataService.changePackState({ company:vm.shippingCompany, eta: vm.eta, tracking_number:vm.trackingNumber, tracking_link:vm.trackLink }, {personId:pack.deviser_id,packId:pack.short_id, newState:'shipped' },onChangeStateSuccess, UtilService.onError)
+			}
 		}
 
 		function editShippingData(pack) {
@@ -82,7 +103,9 @@
 					}
 				}
 			});
-			modalInstance.result.then(function(data) {}, function(err) {
+			modalInstance.result.then(function(data) {
+				return data;
+			}, function(err) {
 				UtilService.onError(err);
 			});
 		}
