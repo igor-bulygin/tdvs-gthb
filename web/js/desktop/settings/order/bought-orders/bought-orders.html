@@ -34,7 +34,7 @@
 							<label class="col-md-12" ng-bind="pack.pack_state"></label>
 						</div>
 						<div class="col-md-2 text-right" ng-if="pack.pack_state==='shipped'">
-							<a class="red-text" ng-href="{{pack.shipping_info.tracking_link}}" target="blank">Track package</a>
+							<span class="a red-text" ng-click="boughtOrdersCtrl.openTrackModal(pack)">Track package</span>
 						</div>
 					</div>
 					<div class="row mt-10 mb-20">
