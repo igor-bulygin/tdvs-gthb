@@ -8,6 +8,7 @@
 		vm.editShippingData=editShippingData;
 		vm.has_error = UtilService.has_error;
 		vm.parseDate=UtilService.parseDate;
+		vm.ordersTotalPrice=0;
 
 		init();
 
@@ -22,6 +23,7 @@
 					order.commission= order.commission + ((pack.pack_price*pack.pack_percentage_fee)/100);
 				});
 				order.total= order.totalPrice + order.totalShippingPrice + order.commission;
+				vm.ordersTotalPrice=vm.ordersTotalPrice + order.totalPrice;
 				cartService.parseTags(order);
 			});
 		}

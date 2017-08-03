@@ -4,6 +4,7 @@
 	function controller(UtilService, cartService) {
 		var vm = this;
 		vm.parseDate=UtilService.parseDate;
+		vm.ordersTotalPrice=0;
 
 		init();
 
@@ -15,6 +16,7 @@
 						order.totalPrice = order.totalPrice + pack.pack_price;
 					});
 					order.total= order.totalPrice + order.totalShippingPrice + order.commission;
+					vm.ordersTotalPrice=vm.ordersTotalPrice + order.totalPrice;
 					cartService.parseTags(order);
 				});
 		}
