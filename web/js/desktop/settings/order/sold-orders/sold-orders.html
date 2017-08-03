@@ -2,7 +2,7 @@
 	<uib-accordion>
 		<div uib-accordion-group ng-repeat="order in soldOrdersCtrl.orders" ng-class="col-md-12" ng-cloak style="border:0 none !important;">
 			<uib-accordion-heading class="row" style="font-weight: lighter;">
-			<div class="mt-20">
+				<div class="mt-20">
 					<span class="col-md-2 text-left">
 						<span style="color: #9D9D9D;font-weight: lighter;" class="col-md-12">INVOICE Nº</span>
 						<span class="col-md-12" ng-bind="order.id"></span>
@@ -17,7 +17,7 @@
 					</span>
 				</div>
 			</uib-accordion-heading>
-			<div class="card mt-30">
+			<div class="card">
 				<div class="col-md-7" style="border-right: 1px solid #e9e9e9">
 					<div class="row" style="border-bottom: 1px solid #e9e9e9">
 						<span class="row" style="color: #9D9D9D;">INFO</span>
@@ -29,7 +29,7 @@
 						<div class="col-md-6 row">
 							<div class="col-md-12">
 								<span style="color: #9D9D9D;">YOU RECEIVE</span>
-								<label ng-bind="order.totalPrice"></label>
+								<label ng-cloak">{{order.totalPrice | currency }}</label>
 							</div>
 							<div class="col-md-12">
 								<span style="color: #9D9D9D;">TODEVISE COMMISSION</span>
@@ -42,7 +42,7 @@
 						</div> -->
 						<div class="col-md-12">
 							<span style="color: #9D9D9D;">SHIPPING</span>
-							<label ng-bind="order.totalShippingPrice"></label>
+							<label ng-cloak">{{order.totalShippingPrice | currency }}</label>
 						</div>
 					</div>
 					<div class="col-md-12 text-right">
@@ -63,18 +63,18 @@
 					<div ng-switch on="pack.pack_state">
 						<div ng-switch-when="paid">
 							<div ng-if="!pack.loading" ng-cloak>
-								<div class="col-md-12">
-									<div class="col-md-12" >
-										<div class="col-md-5 col-md-offset-1">
-											<label>I'M AWARE</label>
-										</div>
-										<div class="col-md-3 col-md-offset-2">
-											<span>I'M PREPARING IT</span>
-										</div>
+								<div class="col-md-12" >
+									<div class="col-md-3 col-md-offset-1">
+										<label>1. I'M AWARE</label>
 									</div>
-									<p>When you see the order, please click the button below to inform us</p>
+									<div class="col-md-6 col-md-offset-2">
+										<label style="color: #9D9D9D;">2. I'M PREPARING IT</label>
+									</div>
 								</div>
-								<button class="btn btn-green" ng-click="soldOrdersCtrl.markPackAware(order,pack)">READY TO CREATE</button>
+								<span class="col-md-12 mt-30 mb-20">When you see the order, please click the button below to inform us</span>
+								<div class="col-md-12 mt-40 mb-10" >
+								<button class="col-md-3 btn btn-green" ng-click="soldOrdersCtrl.markPackAware(order,pack)">READY TO CREATE</button>
+								</div>
 							</div>
 							<div class="text-center" ng-if="pack.loading" ng-cloak>
 								<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
@@ -83,6 +83,14 @@
 						</div>
 						<div ng-switch-when="aware">
 							<div ng-if="!pack.loading" ng-cloak>
+								<div class="col-md-12  mb-20" ng-if="!pack.editInfo" ng-cloak>
+									<div class="col-md-3 col-md-offset-1">
+										<label style="color: #9D9D9D;">1. I'M AWARE <span class="ion-checkmark-circled red-text"></span></label>
+									</div>
+									<div class="col-md-6 col-md-offset-2">
+										<label>2. I'M PREPARING IT</label>
+									</div>
+								</div>
 								<form name="soldOrdersCtrl.shippingForm" class="form-horizontal" >
 									<div class="form-group col-md-5">
 										<span for="shippingCompany" class="col-md-12">Shipping company</span>
