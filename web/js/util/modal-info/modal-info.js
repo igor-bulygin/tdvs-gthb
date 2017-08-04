@@ -7,6 +7,15 @@
 		vm.dismiss = dismiss;
 
 		function init() {
+			if (angular.isUndefined(vm.resolve.text)) {
+				vm.resolve.text="";
+			}
+			if (angular.isUndefined(vm.resolve.showButton)) {
+				vm.resolve.showButton=true;
+			}
+			if (angular.isUndefined(vm.resolve.title)) {
+				vm.resolve.title="";
+			}
 		}
 
 		init();

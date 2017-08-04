@@ -2,12 +2,13 @@
 	<button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="modalInfoCtrl.dismiss()">
 		<span class="ion-ios-close" aria-hidden="true"></span>
 	</button>
+	<h3 class="modal-title" ng-if="modalInfoCtrl.resolve.title.length>0" ng-cloak ng-bind="modalInfoCtrl.resolve.title"> </h3>
 </div>
-<div class="modal-body">
+<div class="modal-body col-md-12">
 	<div class="text-center">
 		<p ng-bind-html="modalInfoCtrl.resolve.text"></p>
 	</div>
 </div>
-<div class="modal-footer">
-	<button class="btn btn-default btn-green" ng-click="modalInfoCtrl.ok()">Accept</button>
+<div class="modal-footer" >
+	<button class="btn btn-default btn-green" ng-click="modalInfoCtrl.ok()" ng-if="modalInfoCtrl.resolve.showButton" ng-cloak>Accept</button>
 </div>
