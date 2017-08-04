@@ -6,18 +6,17 @@
 		vm.parseDate=UtilService.parseDate;
 		vm.ordersTotalPrice=0;
 		vm.openTrackModal=openTrackModal;
+		vm.parseDate=UtilService.parseDate;
 
 		init();
 
 		function init() {
 			angular.forEach(vm.orders, function(order, key) {
-					order.totalPrice = 0;
-					order.order_date= new Date(order.order_date.sec*1000);
+					order.total=0;
 					angular.forEach(order.packs, function(pack, keyPack) {
-						order.totalPrice = order.totalPrice + pack.pack_price;
+						order.total= order.total + pack.pack_price + pack.shipping_price + ((pack.pack_price*pack.pack_percentage_fee)/100);
 					});
-					order.total= order.totalPrice + order.totalShippingPrice + order.commission;
-					vm.ordersTotalPrice=vm.ordersTotalPrice + order.totalPrice;
+					vm.ordersTotalPrice=vm.ordersTotalPrice + order.total;
 					cartService.parseTags(order);
 				});
 		}
