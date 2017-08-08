@@ -1,7 +1,9 @@
 <?php
+
 use app\assets\desktop\product\GlobalAsset;
 use app\assets\desktop\pub\Product2Asset;
 use app\helpers\Utils;
+use app\models\Country;
 use app\models\Person;
 use app\models\PersonVideo;
 
@@ -334,18 +336,26 @@ $videos = $product->getVideos();
 											</div>
 											-->
 											<div class="col-sm-3">
-												is <span class="tax">€4.5</span>
+												is <span class="tax">€<?=$product->getShippingPrice(Country::getDefaultContryCode())?></span>
 											</div>
 										</div>
 									</form>
 								</div>
-								<div class="returns-row mt-30">
-									Returns: <span class="bold">14 days</span>
-								</div>
-								<div class="returns-row">
-									Warranty:
-									<span class="bold"><?= $product->getWarrantyLabel() ?: '12 months'?></span>
-								</div>
+								<?php
+								$returns = $product->getReturnsLabel();
+								$warranty = $product->getWarrantyLabel();
+								?>
+								<?php if ($returns) { ?>
+									<div class="returns-row mt-30">
+										Returns: <span class="bold"><?=$returns?></span>
+									</div>
+								<?php } ?>
+								<?php if ($warranty) { ?>
+									<div class="returns-row">
+										Warranty:
+										<span class="bold"><?=$warranty?></span>
+									</div>
+								<?php } ?>
 							</div>
 						</div>
 					</div>

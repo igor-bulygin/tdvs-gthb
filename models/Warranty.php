@@ -12,10 +12,10 @@ class Warranty {
 	public static function getDescription($code)
 	{
 		$descs = [
-			self::NONE => Yii::t("app/warranties", "None"),
-			self::DAYS => Yii::t("app/warranties", "Days"),
-			self::WEEKS => Yii::t("app/warranties", "Weeks"),
-			self::MONTHS => Yii::t("app/warranties", "Months"),
+			self::NONE => Yii::t("app/todevise", "None"),
+			self::DAYS => Yii::t("app/todevise", "Days"),
+			self::WEEKS => Yii::t("app/todevise", "Weeks"),
+			self::MONTHS => Yii::t("app/todevise", "Months"),
 		];
 		return $descs[$code];
 	}

@@ -1019,6 +1019,24 @@ class Product extends CActiveRecord {
 	}
 
 	/**
+	 * Get label to show returns conditions
+	 *
+	 * @return string
+	 */
+	public function getReturnsLabel()
+	{
+		$label = '';
+		if (!empty($this->returns)) {
+			$warrantyType = $this->returns["type"];
+			if (($warrantyType != Returns::NONE) && (array_key_exists("value", $this->returns))) {
+				$label .= $this->returns["value"] . ' ';
+			}
+			$label .= Returns::getDescription($this->returns["type"]);
+		}
+		return $label;
+	}
+
+	/**
 	 * Get label to show warranty conditions
 	 *
 	 * @return string
@@ -1305,5 +1323,34 @@ class Product extends CActiveRecord {
 	 */
 	public function getBoxes() {
 		return Box::findSerialized(['product_id' => $this->short_id]);
+	}
+
+	/**
+	 * Returns the shipping price of an price stock item to a country
+	 * If no priceStockId is specified, returns shipping price for the first variation available
+	 * If no countryCode is specified, returns shipping price for the default country
+	 * If there is no shipping price defined for the parameters, returns null
+	 *
+	 * @param string $priceStockId
+	 * @param string $countryCode
+	 *
+	 * @return double|null
+	 */
+	public function getShippingPrice($priceStockId = null, $countryCode = null)
+	{
+		if (empty($countryCode)) {
+			$countryCode = Country::getDefaultContryCode();
+		}
+		$deviser = $this->getDeviser();
+		$priceStocks = $this->price_stock;
+		foreach ($priceStocks as $priceStock) {
+			if ($priceStock['available'] && (empty($priceStockId) || $priceStock['short_id'] == $priceStockId)) {
+				$shippingSettingRange = $deviser->getShippinSettingRange($priceStock['weight'], $countryCode);
+
+				return $shippingSettingRange['price'];
+			}
+		}
+
+		return null;
 	}
 }
