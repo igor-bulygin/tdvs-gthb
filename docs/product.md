@@ -97,6 +97,11 @@ This is how a single product looks like:
 		'value': 5
 	},
 
+	warranty: {
+		'type': 1, // Check available types in the Warranty model
+		'value': 365
+	},
+
 	currency: 'USD', // Check available currency codes
 
 	weight_unit: 'g', // Check available units
@@ -125,11 +130,6 @@ This is how a single product looks like:
 
 	madetoorder: { // Does the product require some special preparation?
 
-	},
-
-	warranty: {
-		'type': 1,
-		'value': 365
 	}
 
 ]

@@ -404,6 +404,16 @@ class Product extends CActiveRecord {
 				'app\validators\DimensionUnitValidator',
 				'on' => [self::SCENARIO_PRODUCT_DRAFT, self::SCENARIO_PRODUCT_PUBLIC],
 			],
+			[
+				'returns',
+				'app\validators\ReturnsValidator',
+				'on' => [self::SCENARIO_PRODUCT_DRAFT, self::SCENARIO_PRODUCT_PUBLIC],
+			],
+			[
+				'warranty',
+				'app\validators\WarrantyValidator',
+				'on' => [self::SCENARIO_PRODUCT_DRAFT, self::SCENARIO_PRODUCT_PUBLIC],
+			],
 		];
 	}
 

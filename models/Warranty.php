@@ -19,4 +19,14 @@ class Warranty {
 		];
 		return $descs[$code];
 	}
+
+	public static function getAvailableValues()
+	{
+		return [
+			static::NONE,
+			static::DAYS,
+			static::WEEKS,
+			static::MONTHS,
+		];
+	}
 }
