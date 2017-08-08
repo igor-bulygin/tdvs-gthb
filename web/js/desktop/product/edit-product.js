@@ -11,7 +11,7 @@
 
 		function init(){
 			vm.from_edit = false;
-			vm.product = { emptyCategory:false};
+			vm.product = { emptyCategory:false, warranty: {type: 3},  returns: {type: 1}};
 			vm.product.slug = {};
 			vm.product.categories = [];
 			vm.product.media = {

@@ -9,7 +9,7 @@
 		vm.isPublicProfile = (person.account_state === "active");
 
 		function init() {
-			vm.product = {emptyCategory:true};
+			vm.product = {emptyCategory:true, warranty: {type: 3},  returns: {type: 1}};
 			vm.product.slug = {};
 			vm.product.categories = [];
 			vm.product.media = {
