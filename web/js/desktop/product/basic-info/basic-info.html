@@ -55,21 +55,23 @@
 				</ol>
 			</div>
 			<div class="personal-info-wrapper">
-				<div class="col-md-12" id="warrantieDiv">
-					<label class="col-md-3" for="warrantie">WARRANTIES</label>
-					<div class="col-md-3">
-						<input class="form-control ng-class:{'error-input': productBasicInfoCtrl.warrantieRequired}" type="number" name="warrantie" ng-model="productBasicInfoCtrl.product.warranty.value">
+				<div class="col-md-12" id="warranty">
+					<label class="col-md-3" for="warranty">WARRANTIES</label>
+					<div class="col-md-3" id="warrantyNotNumber">
+						<input class="form-control ng-class:{'error-input': productBasicInfoCtrl.warrantyRequired}" type="text" name="warranty" ng-model="productBasicInfoCtrl.product.warranty.value">
 					</div>
-					<div class="error-text" ng-if="productBasicInfoCtrl.warrantieRequired">You must specify the warranty months</div>
 					<span class="col-md-6">Months</span>
+					<div class="col-md-12 error-text" ng-if="productBasicInfoCtrl.warrantyRequired">You must specify the warranty months</div>
+					<div class="col-md-12 error-text" ng-if="productBasicInfoCtrl.warrantyNumberRequired">The value in this field must be a number</div>
 				</div>
-				<div class="col-md-12 mt-20" id="returnsDiv">
+				<div class="col-md-12 mt-20" id="returns">
 					<label class="col-md-3" for="warrantie">RETURNS</label>
-					<div class="col-md-3">
-						<input class="form-control ng-class:{'error-input': productBasicInfoCtrl.retunrsRequired}" type="number" name="returns" ng-model="productBasicInfoCtrl.product.returns.value">
+					<div class="col-md-3" id="returnsNotNumber">
+						<input class="form-control ng-class:{'error-input': productBasicInfoCtrl.retunrsRequired}" type="text" name="returns" ng-model="productBasicInfoCtrl.product.returns.value">
 					</div>
-					<div class="error-text" ng-if="productBasicInfoCtrl.returnsRequired">You must specify the return days</div>
 					<span class="col-md-6">Days</span>
+					<div class="col-md-12 error-text" ng-if="productBasicInfoCtrl.returnsRequired">You must specify the return days</div>
+					<div class="col-md-12 error-text" ng-if="productBasicInfoCtrl.returnsNumberRequired">The value in this field must be a number</div>
 				</div>
 			</div>
 		</div>
