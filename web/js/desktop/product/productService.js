@@ -116,6 +116,20 @@
 					}
 				});
 			}
+			//warranty
+			if(!angular.isObject(product.warranty) || !product.warranty.value || !product.warranty.type) {
+				required.push('warranty');
+			}
+			else if (isNaN(parseInt(product.warranty.value))) {
+				required.push('warrantyNotNumber');
+			}
+			//returns
+			if(!angular.isObject(product.returns) || !product.returns.value || !product.returns.type) {
+				required.push('returns');
+			}
+			else if (isNaN(parseInt(product.returns.value))) {
+				required.push('returnsNotNumber');
+			}
 			return required;
 		}
 

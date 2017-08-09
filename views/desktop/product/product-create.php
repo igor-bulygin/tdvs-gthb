@@ -45,7 +45,8 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 				</div>
 			</div>
 			<div class="text-center" ng-if="createProductCtrl.saving">
-				<img src="/imgs/loading.gif">
+				<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+				<span class="sr-only">Loading...</span>
 			</div>
 		</div>
 	</div>
