@@ -30,13 +30,13 @@ $this->title = 'Stories - Todevise';
 					<div ng-if="exploreStoriesCtrl.searching" ng-cloak>
 						<p class="text-center">Searching...</p>
 					</div>
-					<div ng-if="exploreBoxesCtrl.results.items.length === 0" ng-cloak>
+					<div ng-if="exploreStoriesCtrl.results.items.length === 0" ng-cloak>
 						<p class="text-center">No stories found with the specified search criteria.</p>
 					</div>
-					<div ng-if="exploreBoxesCtrl.results.items.length != 0" ng-cloak>
+					<div ng-if="exploreStoriesCtrl.results.items.length != 0" ng-cloak>
 						<explore-stories-results results="exploreStoriesCtrl.results" ng-if="exploreStoriesCtrl.results.items.length > 0" ng-cloak></explore-stories-results>
 					</div>
 				</div>
 			</div>
-		</div>
 	</div>
+</div>

@@ -1,0 +1,12 @@
+<div class="filter-wrapper">
+	<form name="exploreProductsFiltersCtrl.form">
+		<span class="filter-title">Filter by theme</span>
+		<div class="checkbox checkbox-red" ng-repeat="category in exploreProductsFiltersCtrl.categories.items | orderBy: 'category.name'" ng-if="$index < exploreProductsFiltersCtrl.show_categories">
+			<input ng-attr-id="{{'checkbox'+($index+10)}}" type="checkbox" name="categories" ng-model="exploreProductsFiltersCtrl.filters.categories[category.id]" class="ng-class:{'checked': exploreProductsFiltersCtrl.filters.categories[category.id]}" ng-disabled="exploreProductsFiltersCtrl.searching">
+			<label ng-attr-for="{{'checkbox'+($index+10)}}">
+				<span ng-bind="category.name"></span>
+			</label>
+		</div>
+		<span class="more-btn" ng-click="exploreProductsFiltersCtrl.seeMore('categories')" ng-if="exploreProductsFiltersCtrl.show_categories < exploreProductsFiltersCtrl.categories.meta.total_count" ng-cloak>see more</span>
+	</form>
+</div>

@@ -1,0 +1,30 @@
+<div infinite-scroll="exploreProductsResultsCtrl.addMoreItems()" infinite-scroll-distance="1">
+	<div ng-repeat="story in exploreProductsResultsCtrl.results_infinite" ng-cloak>
+		<div class="col-lg-6">
+			<a ng-href="{{product.view_link}}">
+				<div class="storie-box-wrapper">
+					<div class="storie-box-text">
+						<h5 ng-bind="story.title"></h5>
+						<p ng-bind-html="story.first_text"></p>
+						<div>
+							<div class="loved-comments-wrapper">
+								<div class="loved-wrapper">
+									<i class="ion-ios-heart"></i>
+									<span>342</span>
+								</div>
+								<div class="comments-wrapper">
+									<i class="ion-chatbox"></i>
+									<span>15</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="storie-box-image" ng-if="product.main_media.type===1">
+						<img ng-src="{{product.main_photo_url}}">
+					</div>
+				</div>
+			</a>
+		</div>
+	</div>
+</div>
+<div style="clear: both;"></div>
