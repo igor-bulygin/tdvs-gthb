@@ -36,6 +36,7 @@ class ProductController extends AppPrivateController
 			"deviser_id" => Yii::$app->request->get("deviser"),
 			"categories" => Yii::$app->request->get("categories"),
 			"product_state" => Yii::$app->request->get("product_state"),
+			"order_type" => Yii::$app->request->get("order_type"),
 			"limit" => $limit,
 			"offset" => $offset,
 		]);

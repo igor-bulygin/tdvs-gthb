@@ -680,8 +680,33 @@ class Product extends CActiveRecord {
 			$query->offset($criteria["offset"]);
 		}
 
-		if ((array_key_exists("order_by", $criteria)) && (!empty($criteria["order_by"]))) {
-			$query->orderBy($criteria["order_by"]);
+		// order
+		if ((array_key_exists("order_type", $criteria)) && (!empty($criteria["order_type"]))) {
+			switch ($criteria['order_type']) {
+				case 'new':
+					$criteria['order_col'] = 'created_at';
+					$criteria['order_dir'] = 'desc';
+					break;
+				case 'old':
+					$criteria['order_col'] = 'created_at';
+					$criteria['order_dir'] = 'asc';
+					break;
+				case 'chepeast':
+					$criteria['order_col'] = 'price_stock.price';
+					$criteria['order_dir'] = 'asc';
+					break;
+				case 'expensive':
+					$criteria['order_col'] = 'price_stock.price';
+					$criteria['order_dir'] = 'desc';
+					break;
+			}
+		}
+
+		if ((array_key_exists("order_col", $criteria)) && (!empty($criteria["order_col"])) &&
+			(array_key_exists("order_dir", $criteria)) && (!empty($criteria["order_dir"]))) {
+			$query->orderBy([
+				$criteria["order_col"] => $criteria["order_dir"] == 'desc' ? SORT_DESC : SORT_ASC,
+			]);
 		} else {
 			$query->orderBy("deviser_id, position");
 		}

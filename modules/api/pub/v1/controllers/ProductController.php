@@ -45,6 +45,7 @@ class ProductController extends AppPublicController {
 			"text" => Yii::$app->request->get("q"), // search in name, description, and more
 			"deviser_id" => Yii::$app->request->get("deviser"),
 			"categories" => Yii::$app->request->get("categories"),
+			"order_type" => Yii::$app->request->get("order_type"),
 			"product_state" => Product::PRODUCT_STATE_ACTIVE,
 			"only_active_persons" => true,
 			"limit" => $limit,
