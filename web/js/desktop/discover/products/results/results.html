@@ -1,30 +1,22 @@
 <div infinite-scroll="exploreProductsResultsCtrl.addMoreItems()" infinite-scroll-distance="1">
-	<div ng-repeat="story in exploreProductsResultsCtrl.results_infinite" ng-cloak>
-		<div class="col-lg-6">
-			<a ng-href="{{product.view_link}}">
-				<div class="storie-box-wrapper">
-					<div class="storie-box-text">
-						<h5 ng-bind="story.title"></h5>
-						<p ng-bind-html="story.first_text"></p>
-						<div>
-							<div class="loved-comments-wrapper">
-								<div class="loved-wrapper">
-									<i class="ion-ios-heart"></i>
-									<span>342</span>
-								</div>
-								<div class="comments-wrapper">
-									<i class="ion-chatbox"></i>
-									<span>15</span>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="storie-box-image" ng-if="product.main_media.type===1">
-						<img ng-src="{{product.main_photo_url}}">
-					</div>
-				</div>
-			</a>
-		</div>
+	<div class="col-md-3" ng-repeat="product in exploreProductsResultsCtrl.results_infinite" ng-cloak>
+		<div class="menu-category list-group" >
+			<div class="grid">
+				<figure class="effect-zoe">
+					<image-hover-buttons product-id="{{product.id}}" is-loved="{{product.isLoved}}" is-mine="{{product.isMine }}">
+						<a ng-href="{{product.link}}">
+							<img class="grid-image" ng-src="{{product.main_photo}}">
+						</a>
+					</image-hover-buttons>
+					<figcaption>
+						<p class="instauser">
+							<a ng-href="{{product.link}}">{{product.name}}</a>
+						</p>
+						<p class="price">€ {{product.min_price}}</p>
+					</figcaption>
+				</figure>
+			</div>
+			</div>
 	</div>
 </div>
 <div style="clear: both;"></div>
