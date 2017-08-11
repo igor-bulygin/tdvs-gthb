@@ -13,12 +13,12 @@ $this->title = 'Works - Todevise';
 	<div class="container">
 		<div class="col-md-2">
 			<div class="our-devisers-body">
-				<explore-products-filters filters="exploreProductsCtrl.filters" searching="exploreProductsCtrl.searching"></explore-products-filters>
+				<explore-products-filters searching="exploreProductsCtrl.searching" results="exploreProductsCtrl.results"></explore-products-filters>
 			</div>
 		</div>
 		<div class="col-md-10">
 					<div class="found-header">
-						<p ng-if="exploreProductsCtrl.search_key" ng-cloak>We found <span ng-bind="exploreProductsCtrl.results.meta.total_count"></span> products with the keywords "<span class="key" ng-bind="exploreProductsCtrl.search_key"></span>"</p>
+						<p ng-if="exploreProductsCtrl.search_key" ng-cloak>We found <span ng-bind="exploreProductsCtrl.results.meta.total_count" ></span> products with the keywords "<span class="key" ng-bind="exploreProductsCtrl.search_key"></span>"</p>
 					</div>
 					<hr />
 					<div ng-if="exploreProductsCtrl.searching" ng-cloak>

@@ -1,8 +1,16 @@
 <div class="filter-wrapper">
+	<span class="filter-title">Order by</span>
+	<div>
+		<ol class="nya-bs-select col-md-12" ng-model="exploreProductsFiltersCtrl.orderFilter" ng-change="exploreProductsFiltersCtrl.search()">
+			<li nya-bs-option="type in exploreProductsFiltersCtrl.orderTypes">
+				<a href="#"><span ng-bind="type.name"></span></a>
+			</li>
+		</ol>
+	</div>
 	<form name="exploreProductsFiltersCtrl.form">
 		<span class="filter-title">Filter by theme</span>
 		<div class="checkbox checkbox-red" ng-repeat="category in exploreProductsFiltersCtrl.categories.items | orderBy: 'category.name'" ng-if="$index < exploreProductsFiltersCtrl.show_categories">
-			<input ng-attr-id="{{'checkbox'+($index+10)}}" type="checkbox" name="categories" ng-model="exploreProductsFiltersCtrl.filters.categories[category.id]" class="ng-class:{'checked': exploreProductsFiltersCtrl.filters.categories[category.id]}" ng-disabled="exploreProductsFiltersCtrl.searching">
+			<input ng-attr-id="{{'checkbox'+($index+10)}}" type="checkbox" name="categories" ng-model="exploreProductsFiltersCtrl.filters.categories[category.id]" class="ng-class:{'checked': exploreProductsFiltersCtrl.filters.categories[category.id]}" ng-disabled="exploreProductsFiltersCtrl.searching" ng-change="exploreProductsFiltersCtrl.search()">
 			<label ng-attr-for="{{'checkbox'+($index+10)}}">
 				<span ng-bind="category.name"></span>
 			</label>
