@@ -14,7 +14,7 @@ $this->title = 'Login';
 		<span class="login-title">Log in to your todevise account</span>
 		<div class="create-deviser-account-container black-form" ng-if="!loginCtrl.loading">
 			<div class="row">
-				<label for="email">Email</label>
+				<label for="email" translate="EMAIL"></label>
 				<input type="email" id="email" name="email" ng-model="loginCtrl.user.email" class="form-control grey-input" />
 			</div>
 			<div class="row">
