@@ -1,7 +1,7 @@
 (function() {
 	"use strict";
 
-	function controller(UtilService, locationDataService, productDataService) {
+	function controller(UtilService, locationDataService, productDataService, $location) {
 		var vm = this;
 		vm.seeMore = seeMore;
 		vm.show_categories = 10;
@@ -40,6 +40,9 @@
 			var params={};
 			if (!angular.isUndefined(vm.orderFilter) && !angular.isUndefined(vm.orderFilter.value)) {
 				params = Object.assign(params, {order_type: vm.orderFilter.value});
+			}
+			if (!angular.isUndefined($location.search().q)) {
+				params.q=$location.search().q;
 			}
 			Object.keys(vm.filters).map(function(filter_type) {
 				var new_filter = []
