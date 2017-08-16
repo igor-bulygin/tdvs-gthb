@@ -28,5 +28,6 @@ class GlobalAsset extends AssetBundle {
 		'app\assets\desktop\discover\IndexAsset',
 		'app\assets\desktop\settings\IndexAsset',
 		'app\assets\desktop\cart\IndexAsset',
+		'app\assets\libs\angularTranslateLoadingFilesAsset'
 	];
 }
