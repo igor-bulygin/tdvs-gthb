@@ -11,6 +11,7 @@ app\components\assets\PublicHeader2Asset::register($this);
 <nav class="navbar navbar-default" ng-controller="publicHeaderCtrl as publicHeaderCtrl">
 	<div class="container">
 		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="row">
 		<div class="navbar-header">
 			<a class="navbar-brand" href="<?= Url::to(["public/index"])?>">
 				<img src="/imgs/logo.png">
@@ -29,23 +30,19 @@ app\components\assets\PublicHeader2Asset::register($this);
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div>
-	
-			<form class="navbar-form navbar-left navbar-searcher" action="<?=Url::to(['/works'])?>" method="get">
-				<div class="input-group searcher-header">
-					<input type="text" class="form-control" name="q" value="<?=$q?>"placeholder="Search">
-					<span class="input-group-btn">
-							<button class="btn btn-default btn-send" type="submit">
-								<span class="ion-search"></span>
-							</button>
-						</span>
-				</div>
-			</form>
+			<div class="searcher-wrapper">
+				<form class="navbar-form navbar-left navbar-searcher" action="<?=Url::to(['/works'])?>" method="get">
+					<div class="input-group searcher-header">
+						<input type="text" class="form-control" name="q" value="<?=$q?>"placeholder="Type something">
+						<span class="input-group-btn">
+								<button class="btn btn-default btn-send" type="submit">
+									<span class="ion-ios-search-strong"></span>
+								</button>
+							</span>
+					</div>
+				</form>
+			</div>
 			<ul class="nav navbar-nav navbar-right cart-login-wrapper">
-				<li class="cart-item">
-					<a href="<?=Url::to(['/cart'])?>">
-						<i class="ion-ios-cart active"></i>
-					</a>
-				</li>
 				<?php if (Yii::$app->user->isGuest) { ?>
 					<li class="log">
 						<a href="<?=Url::to(['/signup'])?>">
@@ -53,10 +50,15 @@ app\components\assets\PublicHeader2Asset::register($this);
 						</a>
 					</li>
 					<li class="log">
-						<span>or</span>
+						<span>/</span>
 					</li>
 					<li class="log">
 						<a href="<?=Url::to('/login')?>">Log in</a>
+					</li>
+					<li class="cart-item">
+						<a href="<?=Url::to(['/cart'])?>">
+							<i class="ion-ios-cart active"></i>
+						</a>
 					</li>
 				<?php } else {
 					$person = Yii::$app->user->identity; /* @var \app\models\Person $person */?>
@@ -102,6 +104,7 @@ app\components\assets\PublicHeader2Asset::register($this);
 				<?php } ?>
 			</ul>
 		</div><!-- /.navbar-collapse -->
+		</div>
 	</div><!-- /.container -->
 </nav>
 <div id="navbar-wrapper">

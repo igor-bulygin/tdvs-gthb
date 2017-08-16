@@ -118,13 +118,14 @@
                     padding: 0 20px;
                 }
         input{
+				font-family: $font-family--regular;
 				margin: 0 0 0 30px;
                 min-width: 600px;
-                color: $white;
-                background-color: $almost_black;
-                @include border-radius(0px,0px,0px,0px);
+                color: $dark_grey;
+				letter-spacing: 0.4px;
+                background-color: $background_grey;
                 @extend %input-border-none;
-                @include border-radius(0px,0px,0px,0px);
+                @include border-radius(6px,6px,6px,6px);
                 &:focus{
                     border-right: 0;
                 }
@@ -136,24 +137,25 @@
                     }
             }
         .btn-send{
-            color: $white;
-            background-color: $almost_black;
+            color: $black;
+            background-color: $background_grey;
             font-size: 23px;
             padding: 0 10px;
             border-left: 0;
-            @include border-radius(0px,0px,0px,0px);
-            border-color:$almost_black;
+            @include border-radius(0px,6px,6px,0px);
+            border-color:$background_grey;
             &:hover, &:active{
-                color: $red;
-                background-color: $almost_black;
+                color: $dark_red;
+                background-color: $background_grey;
                 @include transition-property(color);
                 @include transition-duration(0.3s);
                 @include transition-timing-function(ease-out);
-                border-color:$almost_black;
+                border-color:$background_grey;
             }
             &:focus{
-                background-color: $almost_black;
-                border-color:$almost_black;
+				color: $dark_red;
+                background-color: $background_grey;
+                border-color:$background_grey;
             }
         }
     }
@@ -199,10 +201,12 @@
         padding-top: 14px;
         padding-bottom: 15px;
         display:block; 
+		color: $white;
     }
     a{
         @extend %link-red; 
-        padding: 15px 5px!important;      
+        padding: 15px 5px!important; 
+		font-weight: bold;
     }
 }
 .navbar-searcher{
@@ -409,4 +413,7 @@
 	width: 100%;
 	border-bottom: 1px solid #ccc;
 	margin: 10px 0!important;
+}
+.searcher-wrapper{
+
 }

@@ -6,9 +6,9 @@
     @include border-radius(180px,180px,180px,180px);
 }
 %link-red{
-    color:$red!important;
+    color:$dark_red!important;
     &:hover{
-        color:$dark_red!important;
+        color:$red!important;
         text-decoration: none;
         @include transition-property(color);
         @include transition-duration(0.3s);

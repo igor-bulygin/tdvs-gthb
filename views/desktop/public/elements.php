@@ -199,7 +199,7 @@ $this->title = 'Todevise / Elements';
 					<i class="ion-loop black-icon"></i>
 					<i class="ion-android-refresh black-icon"></i>
 					<i class="ion-android-done black-icon"></i>
-					<i class="ion-android-search black-icon"></i>
+					<i class="ion-ios-search-strong black-icon"></i>
 					<i class="ion-information-circled black-icon"></i>
 					<i class="ion-arrow-expand black-icon"></i>
 					<i class="ion-arrow-move black-icon"></i>
@@ -257,7 +257,7 @@ $this->title = 'Todevise / Elements';
 					<i class="ion-loop red-icon"></i>
 					<i class="ion-android-refresh red-icon"></i>
 					<i class="ion-android-done red-icon"></i>
-					<i class="ion-android-search red-icon"></i>
+					<i class="ion-ios-search-strong red-icon"></i>
 					<i class="ion-information-circled red-icon"></i>
 					<i class="ion-arrow-expand red-icon"></i>
 					<i class="ion-arrow-move red-icon"></i>
@@ -315,7 +315,7 @@ $this->title = 'Todevise / Elements';
 					<i class="ion-loop grey-icon"></i>
 					<i class="ion-android-refresh grey-icon"></i>
 					<i class="ion-android-done grey-icon"></i>
-					<i class="ion-android-search grey-icon"></i>
+					<i class="ion-ios-search-strong grey-icon"></i>
 					<i class="ion-information-circled grey-icon"></i>
 					<i class="ion-arrow-expand grey-icon"></i>
 					<i class="ion-arrow-move grey-icon"></i>
@@ -396,6 +396,15 @@ $this->title = 'Todevise / Elements';
 			</div>
 			<div class="col-md-4">
 				<img class="avatar-default small" src="/imgs/default-avatar-grey.png">
+			</div>
+			<div class="col-md-4">
+				<img class="avatar-default big" src="/imgs/avatar-1.jpg">
+			</div>
+			<div class="col-md-4">
+				<img class="avatar-default medium" src="/imgs/avatar-1.jpg">
+			</div>
+			<div class="col-md-4">
+				<img class="avatar-default small" src="/imgs/avatar-1.jpg">
 			</div>
 		</div>
 		<div class="row mt-30">
