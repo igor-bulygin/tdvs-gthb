@@ -11,6 +11,7 @@ moduleTodevise.config(['$translateProvider', function ($translateProvider) {
 	};  
 	$translateProvider.useStaticFilesLoader(fileNameConvention);
 	$translateProvider.preferredLanguage('es');
+	$translateProvider.useSanitizeValueStrategy('textAngular-sanitize');
 }]);
 
 }());
