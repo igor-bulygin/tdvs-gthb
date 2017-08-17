@@ -44,5 +44,5 @@
     "angular-ui-sortable": "0.17.1",
     "angular-translate": "^2.15.2",
     "angular-translate-loader-static-files":"2.15.2"
-  }
+    }
 }
