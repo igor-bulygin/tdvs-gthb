@@ -24,19 +24,19 @@ $activeOption = array_key_exists('settings_menu_active_option', $this->params) ?
 	</div>
 	<ul class="nav nav-tabs header-settings-tabs">
 		<li role="presentation" class="<?= ($activeOption=='general') ? 'active' : ''?>">
-			<a href="<?= Url::to(['/settings/general', 'slug' => $person->slug, 'person_id' => $person->short_id])?>">General</a>
+			<a href="<?= Url::to(['/settings/general', 'slug' => $person->slug, 'person_id' => $person->short_id])?>" translate="GENERAL"></a>
 		</li>
 		<li role="presentation" class="<?= ($activeOption=='orders') ? 'active' : '' ?>">
-			<a href="<?= Url::to(['/settings/open-orders', 'slug' => $person->slug, 'person_id' => $person->short_id])?>">My Orders</a>
+			<a href="<?= Url::to(['/settings/open-orders', 'slug' => $person->slug, 'person_id' => $person->short_id])?>" translate="MY_ORDERS"></a>
 		</li>
 		<li role="presentation" class="<?= ($activeOption=='stock') ? 'active' : '' ?>">
-			<a href="<?= Url::to(['/settings/stock', 'slug' => $person->slug, 'person_id' => $person->short_id])?>">Stock & Price</a>
+			<a href="<?= Url::to(['/settings/stock', 'slug' => $person->slug, 'person_id' => $person->short_id])?>" translate="STOCK_PRICE"></a>
 		</li>
 		<li role="presentation" class="<?= ($activeOption=='billing') ? 'active' : '' ?>">
-			<a href="<?= Url::to(['/settings/billing', 'slug' => $person->slug, 'person_id' => $person->short_id])?>">Billing & Payments</a>
+			<a href="<?= Url::to(['/settings/billing', 'slug' => $person->slug, 'person_id' => $person->short_id])?>" translate="BILLING_PAYMENTS"></a>
 		</li>
 		<li role="presentation" class="<?= ($activeOption=='shipping') ? 'active' : '' ?>">
-			<a href="<?= Url::to(['/settings/shipping', 'slug' => $person->slug, 'person_id' => $person->short_id])?>">Shipping</a>
+			<a href="<?= Url::to(['/settings/shipping', 'slug' => $person->slug, 'person_id' => $person->short_id])?>" translate="SHIPPING"></a>
 		</li>
 	</ul>
 

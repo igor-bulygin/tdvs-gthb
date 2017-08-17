@@ -37,6 +37,6 @@
 
 
 	angular
-		.module('todevise')
+		.module('settings')
 		.controller('settingsHeaderCtrl', controller);
 }());

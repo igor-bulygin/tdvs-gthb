@@ -30,7 +30,7 @@ $this->registerJs("var type = 3", yii\web\View::POS_HEAD, 'person-type-var-scrip
 		<form name="createAccountCtrl.form" novalidate>
 			<div>
 				<div class="row">
-					<label for="email">Email</label>
+					<label for="email" translate="EMAIL"></label>
 					<div class="input-check-wrapper">
 						<input type="email" id="email" class="form-control grey-input ng-class:{'error-input': createAccountCtrl.has_error(createAccountCtrl.form, createAccountCtrl.form.email)}" name="email" ng-model="createAccountCtrl.person.email" required disabled="true">
 						<i class="ion-checkmark" ng-if="createAccountCtrl.form.email.$valid" ng-cloak></i>
@@ -38,7 +38,7 @@ $this->registerJs("var type = 3", yii\web\View::POS_HEAD, 'person-type-var-scrip
 					<form-errors field="createAccountCtrl.form.email" condition="createAccountCtrl.has_error(createAccountCtrl.form, createAccountCtrl.form.email)"></form-errors>
 				</div>
 				<div class="row">
-					<label>Set your password</label>
+					<label translate="SET_PASSWORD"></label>
 					<div class="input-check-wrapper">
 						<input type="password" id="email" class="form-control grey-input password ng-class:{'error-input':createAccountCtrl.has_error(createAccountCtrl.form, createAccountCtrl.form.password)}" name="password" ng-model="createAccountCtrl.person.password" ng-minlength="6" required>
 						<i class="ion-checkmark" ng-if="createAccountCtrl.form.password.$valid" ng-cloak></i>
@@ -46,7 +46,7 @@ $this->registerJs("var type = 3", yii\web\View::POS_HEAD, 'person-type-var-scrip
 					<form-errors field="createAccountCtrl.form.password" condition="createAccountCtrl.has_error(createAccountCtrl.form, createAccountCtrl.form.password)"></form-errors>
 				</div>
 				<div class="row">
-					<label>Repeat password</label>
+					<label translate="REPEAT_PASSWORD"></label>
 					<div class="input-check-wrapper">
 						<input type="password" id="email" class="form-control grey-input password ng-class:{'error-input': createAccountCtrl.has_error(createAccountCtrl.form, createAccountCtrl.form.password_confirm) && createAccountCtrl.form.password_confirm.$error.same}" name="password_confirm" ng-model="createAccountCtrl.password_confirm" required>
 						<i class="ion-checkmark" ng-if="!createAccountCtrl.form.password_confirm.$pristine && !createAccountCtrl.form.password_confirm.$error.same" ng-cloak></i>
@@ -58,9 +58,7 @@ $this->registerJs("var type = 3", yii\web\View::POS_HEAD, 'person-type-var-scrip
 				<div class="row">
 					<div class="checkbox checkbox-circle remember-me ng-class:{'error-input': createAccountCtrl.has_error(createAccountCtrl.form, createAccountCtrl.form.terms_and_conditions)}">
 						<input id="checkbox7" class="styled" type="checkbox" name="terms_and_conditions" ng-model="createAccountCtrl.terms_and_conditions" required>
-						<label for="checkbox7">
-							I accept the Todevise <a href="#">Terms & Conditions</a>
-						</label>
+						<label for="checkbox7" translate="ACCEPT_TERMS"></label>
 					</div>
 					<form-errors field="createAccountCtrl.form.terms_and_conditions" condition="createAccountCtrl.has_error(createAccountCtrl.form, createAccountCtrl.form.terms_and_conditions)"></form-errors>
 				</div>

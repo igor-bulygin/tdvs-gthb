@@ -308,12 +308,10 @@ $this->title = 'Todevise / Product';
 				?>
 			</div>
 
-			<div role="tabpanel" class="tab-pane fade" id="boxes">
-				boxes
+			<div role="tabpanel" class="tab-pane fade" id="boxes" translate="BOXES">
 			</div>
 
-			<div role="tabpanel" class="tab-pane fade" id="comments">
-				comments
+			<div role="tabpanel" class="tab-pane fade" id="comments" translate="COMMENTS">
 			</div>
 
 		</div>

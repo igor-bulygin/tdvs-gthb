@@ -38,7 +38,7 @@ $lang = Yii::$app->language;
 							<div class="search-header-content fc-fff">
 								<div class="cols-xs12 fs-upper flex flex-align-center flex-column flex-justify-center search-header">
 									<div class="search_holder fs0-857">
-										<input type="text" class="funiv_bold fs1-143 fc-4e" name="search" placeholder="WHAT IS YOUR QUESTION ABOUT?">
+										<input type="text" class="funiv_bold fs1-143 fc-4e" name="search" placeholder="{{ 'QUESTION_ABOUT' | translate }}">
 										<span class="pointer glyphicon-content bc-c7 fc-fff">
 									        <span class="glyphicon glyphicon-search"></span>
 										</span>

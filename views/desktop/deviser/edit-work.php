@@ -201,9 +201,9 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 						</div>
 
 						<div class="row no-gutter tabs" ng-init="tab = 1">
-							<div class="col-xs-4 text-center tab fc-6d funiv_bold fs0-786 fw-bold fs-upper pointer" ng-click="tab = 1" ng-class="{'active' : tab === 1}">description</div>
-							<div class="col-xs-4 text-center tab fc-6d funiv_bold fs0-786 fw-bold fs-upper pointer" ng-click="tab = 2" ng-class="{'active' : tab === 2}">price & stock</div>
-							<div class="col-xs-4 text-center tab fc-6d funiv_bold fs0-786 fw-bold fs-upper pointer" ng-click="tab = 3" ng-class="{'active' : tab === 3}">returns & warranty</div>
+							<div class="col-xs-4 text-center tab fc-6d funiv_bold fs0-786 fw-bold fs-upper pointer" ng-click="tab = 1" ng-class="{'active' : tab === 1}" translate="DESCRIPTION"></div>
+							<div class="col-xs-4 text-center tab fc-6d funiv_bold fs0-786 fw-bold fs-upper pointer" ng-click="tab = 2" ng-class="{'active' : tab === 2}" translate="STOCK_PRICE"></div>
+							<div class="col-xs-4 text-center tab fc-6d funiv_bold fs0-786 fw-bold fs-upper pointer" ng-click="tab = 3" ng-class="{'active' : tab === 3}" translate="RETURNS_WARRANTY"></div>
 						</div>
 
 					</div>
@@ -965,8 +965,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 						<span class="funiv_bold fs-1 fc-3d"><?= Yii::t("app/deviser", "Prints") ?></span>
 					</div>
 
-					<div class="col-xs-12">
-						price & stock single
+					<div class="col-xs-12" translate="STOCK_PRICE_SINGLE">
 					</div>
 				</div>
 

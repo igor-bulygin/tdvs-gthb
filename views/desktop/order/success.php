@@ -19,18 +19,18 @@ $this->title = 'Todevise / Your purchase is complete';
 		<div class="container">
 			<div class="row no-mar">
 				<div class="col-md-8">
-					<span class="green-title">Congratulations!</span>
-					<span class="success-header-message">Your purchase is complete</span>
-					<span class="success-header-tagline">A copy of the order receipt has been sent to your mail.</span>
+					<span class="green-title" translate=="ORDER_SUCCESS_TITLE"></span>
+					<span class="success-header-message" translate="PURCHASE_COMPLETE"></span>
+					<span class="success-header-tagline" translate="RECEIPT_TO_MAIL"></span>
 				</div>
 				<div class="col-md-2">
 					<a href="/">
-						<button class="btn btn-red btn-medium pull-right mt-60">Continue shopping</button>
+						<button class="btn btn-red btn-medium pull-right mt-60" translate="CONTINUE_SHOPPING"></button>
 					</a>
 				</div>
 				<div class="col-md-2">
 					<a href="/">
-						<button class="btn btn-medium btn-white pull-right mt-60">Download receipt</button>
+						<button class="btn btn-medium btn-white pull-right mt-60" translate="DOWNLOAD_RECEIPT"></button>
 					</a>
 				</div>
 			</div>
@@ -45,19 +45,19 @@ $this->title = 'Todevise / Your purchase is complete';
 						<td></td>
 					</tr>
 					<tr>
-						<td class="table-label">Order id</td>
+						<td class="table-label" translate="ORDER_ID"></td>
 						<td class="table-item" ng-bind="orderSuccessCtrl.order.id"></td>
 					</tr>
 					<tr>
-						<td class="table-label">Payment method</td>
+						<td class="table-label" translate="PAYMENT_METHOD"></td>
 						<td class="table-item" ng-bind="orderSuccessCtrl.order.payment_info.card.brand + ' **** ' + orderSuccessCtrl.order.payment_info.card.last4"></td>
 					</tr>
 					<tr>
-						<td class="table-label">Phone</td>
+						<td class="table-label" translate="PHONE"></td>
 						<td class="table-item" ng-bind="orderSuccessCtrl.order.shipping_address.phone_number_prefix + ' ' + orderSuccessCtrl.order.shipping_address.phone_number"></td>
 					</tr>
 					<tr>
-						<td class="table-label">Email</td>
+						<td class="table-label" translate="EMAIL"></td>
 						<td class="table-item" ng-bind="orderSuccessCtrl.person.email"></td>
 					</tr>
 					<tr>
@@ -70,7 +70,7 @@ $this->title = 'Todevise / Your purchase is complete';
 				<div class="order-success-summary-wrapper">
 					<div ng-repeat="pack in orderSuccessCtrl.order.packs" ng-cloak>
 						<span class="deviser-name-item summary-white-item" ng-bind="pack.deviser_info.name"></span>
-						<span class="pull-right">Shipping price <span ng-bind="pack.shipping_price"></span></span>
+						<span class="pull-right" translate="SHIPPING_PRICE"> <span ng-bind="pack.shipping_price"></span></span>
 						<div class="summary-cart-wrapper summary-white-item" ng-repeat="product in pack.products">
 							<div class="img-checkout-wrapper col-md-2">
 								<img ng-src="{{product.product_info.photo}}" ng-attr-alt="{{product.product_info.name}}" ng-attr-title="{{product.product_info.name}}">
@@ -78,7 +78,7 @@ $this->title = 'Todevise / Your purchase is complete';
 							<div>
 								<div>
 									<span class="bold"><span ng-bind="product.product_info.name"></span></span>
-									<span class="pull-right bold">€&nbsp;<span ng-bind="product.quantity*product.price"></span></span>
+									<span class="pull-right bold" translate="CURRENCY">&nbsp;<span ng-bind="product.quantity*product.price"></span></span>
 								</div>
 								<div class="summary-row">
 									<span>Ud: <span ng-bind="product.quantity"></span></span><span>&nbsp;·&nbsp;</span>
@@ -98,7 +98,7 @@ $this->title = 'Todevise / Your purchase is complete';
 					</div>
 					<div class="summary-cart-wrapper" ng-cloak>
 						<span class="subtotal-amount-wrapper">
-							<span class="pull-right bold"><span>Total</span> € <span ng-bind="orderSuccessCtrl.order.subtotal"></span></span>
+							<span class="pull-right bold"><span translate="TOTAL"> </span><span translate="CURRENCY"></span><span ng-bind="orderSuccessCtrl.order.subtotal"></span></span>
 						</span>
 					</div>
 				</div>

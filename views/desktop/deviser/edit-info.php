@@ -158,7 +158,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 			<div class="col-xs-12 flex flex-justify-center">
 				<div class="btn btn-save-profile fc-fff funiv fs-upper fs0-786" ng-click="deviserCtrl.save()"><?= Yii::t("app/deviser", "Save") ?></div>
 				<div style="width: 50px"></div>
-				<div style="background-color: #ccc" class="btn fc-fff funiv fs-upper fs0-786" ng-click="deviserCtrl.new_product()">Create new product</div>
+				<div style="background-color: #ccc" class="btn fc-fff funiv fs-upper fs0-786" ng-click="deviserCtrl.new_product()" translate="NEW_PRODUCT"></div>
 			</div>
 		</div>
 

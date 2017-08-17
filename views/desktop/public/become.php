@@ -133,7 +133,7 @@ $lang = Yii::$app->language;
 							<?php ActiveForm::end(); ?>
 							<?php if ($showCheckEmail) { ?>
 							<div>
-								<span class="fs3-643 funiv_thin fs-upper fc-fff">Email enviado. Revisa tu bandeja de entrada. (prueba)</span>
+								<span class="fs3-643 funiv_thin fs-upper fc-fff" translate="SENDED_EMAIL"></span>
 							</div>
 							<?php } ?>
 				</div>
