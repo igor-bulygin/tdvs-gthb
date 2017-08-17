@@ -57,7 +57,8 @@
                     text-align: center;
                 }
                 .serif{
-                    font: italic 700 35px $font-family--serif;
+                    font: italic 700 37px $font-family--serif;
+					letter-spacing: -1px;
                     text-transform: none;
                     display:block;
                     @media (max-width: 768px){
@@ -72,7 +73,7 @@
                 @extend %sub-banner-text;
                 top: 10px;
                 &.tagline-1{
-                    padding: 25px 18px 0 54px;
+                    padding: 71px 0 0 111px;
                     @media (min-width:986px) and (max-width:1199px){
                         padding: 25px 11px 0 61px;
                     }

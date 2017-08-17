@@ -55,12 +55,10 @@
     bottom: 0;
 }
 %sub-banner-text{
-    font-family: $font-family--serif;
+    font-family: $font-family--regular;
     line-height: 20px;
-    max-width: 250px;
     display: inline; 
-    border:1px solid $dark_grey;
-    @include size(165px,165px);
+    @include size(285px,165px);
     position: absolute;
     left: 0;
     right: 0;
