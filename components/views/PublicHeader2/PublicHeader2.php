@@ -56,46 +56,32 @@ app\components\assets\PublicHeader2Asset::register($this);
 						<span>or</span>
 					</li>
 					<li class="log">
-						<a href="<?=Url::to('/login')?>">Log in</a>
+						<a href="<?=Url::to('/login')?>" translate="LOGIN"></a>
 					</li>
 				<?php } else {
 					$person = Yii::$app->user->identity; /* @var \app\models\Person $person */?>
 						<li class="dropdown log">
-
-							<a class="logued-text" href="#" class="dropdown-toggle log" data-toggle="dropdown" role="button" aria-haspopup="true"
-							   aria-expanded="false"><i class="ion-android-person"></i> My todevise</a>
-
+							<a class="logued-text" href="#" class="dropdown-toggle log" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" translate="MY_TODEVISE"><i class="ion-android-person"></i></a>
 							<div class="dropdown-menu admin-wrapper black-form">
-
 								<ul class="menu-logued">
-
 									<li class="header-item">
 										<a href="<?= $person->getMainLink()?>"> <span><?=$person->getName()?></span></a>
 										<img class="avatar-logued-user" src="<?= $person->getAvatarImage() ?>">
 									</li>
-
 									<?php if ($person->isAdmin()) { ?>
-
-										<li><a href="<?=Url::to('/admin')?>">Administration</a></li>
-										<li><a href="<?=Url::to('/admin/invitations')?>">Invitations</a></li>
+										<li><a href="<?=Url::to('/admin')?>" translate="ADMINISTRATION"></a></li>
+										<li><a href="<?=Url::to('/admin/invitations')?>" translate="INVITATION"></a></li>
 										<li class="separation-line"></li>
-
 									<?php } elseif ($person->isDeviser()) { ?>
-
-										<li><a href="<?=$person->getSettingsLink('open-orders')?>">Sales</a></li>
+										<li><a href="<?=$person->getSettingsLink('open-orders')?>" translate="SALES"></a></li>
 										<li class="separation-line"></li>
-
 									<?php } elseif ($person->isClient()) { ?>
-
-										<li><a href="<?=$person->getSettingsLink('open-orders')?>">My orders</a></li>
+										<li><a href="<?=$person->getSettingsLink('open-orders')?>" translate="MY_ORDERS"></a></li>
 										<li class="separation-line"></li>
-
 									<?php } elseif ($person->isInfluencer()) { ?>
-
 									<?php } ?>
-
-									<li><a href="<?= $person->getSettingsLink()?>">Settings</a></li>
-									<li><a href="#" ng-click="publicHeaderCtrl.logout()">Logout</a></li>
+									<li><a href="<?= $person->getSettingsLink()?>" translate="SETTINGS"></a></li>
+									<li><a href="#" ng-click="publicHeaderCtrl.logout()" translate="LOGOUT">Logou</a></li>
 								</ul>
 							</div>
 						</li>
@@ -111,16 +97,16 @@ app\components\assets\PublicHeader2Asset::register($this);
 					<li>
 						<a href="#" class="menu-title hover-toggle" data-target=".menu-categories" data-group=".category-menu">
 							<i class="fa fa-bars" aria-hidden="true"></i>
-							<span>Shop by departament</span>
+							<span translate="SHOP_BY_DEPARTMENT"></span>
 						</a>
 					</li>
 				</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="<?=Url::to(['/discover/stories'])?>">Stories</a></li>
-				<li><a href="<?=Url::to(['/discover/boxes'])?>">Explore Boxes</a></li>
-				<li><a href="<?=Url::to(['/discover/devisers'])?>">Discover devisers</a></li>
-				<li><a href="<?=Url::to(['/discover/influencers'])?>">Trend-setters</a></li>
-				<li><a href="#">Projects</a></li>
+				<li><a href="<?=Url::to(['/discover/stories'])?>" translate="STORIES"></a></li>
+				<li><a href="<?=Url::to(['/discover/boxes'])?>" translate="EXPLORE_BOXES"></a></li>
+				<li><a href="<?=Url::to(['/discover/devisers'])?>" translate="DISCOVER_DEVISERS"></a></li>
+				<li><a href="<?=Url::to(['/discover/influencers'])?>" translate="TREND_SETTERS"></a></li>
+				<li><a href="#" translate="PROJECTS"></a></li>
 			</ul>
 		</div>
 	</nav>
