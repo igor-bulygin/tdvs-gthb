@@ -7,12 +7,7 @@
 	"LOGIN_TITLE":"Identifícate en tu cuenta todevise",
 	"SET_PASSWORD": "Elija una contraseña",
 	"REPEAT_PASSWORD": "Repita la contraseña",
-	"ACEPT_TERMS": "Acepto los <a href='#'>Términos & Condiciones</a> de Todevise",
-	"GENERAL": "General",
-	"MY_ORDERS": "Mis pedidos",
-	"STOCK_PRICE": "Precio & Stock",
-	"BILLING_PAYMENTS": "Facturas y pagos",
-	"SHIPPING": "Envío",
+	"ACEPT_TERMS": "Acepto los <a href='#'>Términos & Condiciones</a> de Todevise",	
 	"NEW_PRODUCT":"Crear nuevo producto",
 	"DESCRIPTION":"Descripción",
 	"RETURNS_WARRANTY":"Devoluciones y garantía",
@@ -64,9 +59,5 @@
 	"LINK_VIDEO":"Link to video",
 	"OBSERVATIONS":"Observaciones",
 	"SUCCESSFULLY_SENT":"Your message has been sent successfully.",
-	"WILL_CONTACT":"We will contact you shortly.",
-	"PRICE":"Precio",
-	"PRICE":"Precio",
-	"PRICE":"Precio",
-	"PRICE":"Precio"
+	"WILL_CONTACT":"We will contact you shortly."
 }

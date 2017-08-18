@@ -19,5 +19,6 @@ class AppAsset extends AssetBundle {
 		'app\assets\libs\bootstrapAsset',
 		'app\assets\libs\angularAsset',
 		'app\assets\libs\angularBootstrapAsset',
+		'app\assets\libs\angularTranslateLoaderPartialAsset'
 	];
 }

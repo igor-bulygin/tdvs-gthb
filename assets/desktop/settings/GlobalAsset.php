@@ -18,7 +18,6 @@ class GlobalAsset extends AssetBundle {
 	];
 	public $depends = [
 		'app\assets\desktop\GlobalAsset',
-		'app\assets\desktop\settings\IndexAsset',
-		'app\assets\libs\angularTranslateLoadingFilesAsset'
+		'app\assets\desktop\settings\IndexAsset'
 	];
 }
