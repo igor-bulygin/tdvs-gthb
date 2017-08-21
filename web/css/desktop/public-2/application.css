@@ -1846,7 +1846,8 @@ h2 {
   font-family: "Roboto Condensed", sans-serif;
   font-weight: bold;
   text-transform: uppercase;
-  font-size: 77px;
+  font-size: 67px;
+  letter-spacing: 1.8px;
   line-height: 45px;
   display: inline-block;
   padding: 0;
@@ -1986,7 +1987,7 @@ h3 {
   font-family: "Roboto Condensed", sans-serif;
   line-height: 20px;
   display: inline;
-  width: 285px;
+  width: 334px;
   height: 165px;
   position: absolute;
   left: 0;
@@ -2463,7 +2464,7 @@ h3 {
     height: 180px;
     position: relative; }
     .sub-banner .container-sub-baner .title-wrapper.title-3 {
-      padding: 15px 34px 20px; }
+      padding: 28px 34px 20px; }
       @media (min-width: 986px) and (max-width: 1199px) {
         .sub-banner .container-sub-baner .title-wrapper.title-3 {
           padding: 15px 6px 20px; } }
@@ -2493,10 +2494,7 @@ h3 {
         .sub-banner .container-sub-baner .title-wrapper h2.title-1 {
           margin: 0; } }
     .sub-banner .container-sub-baner .title-wrapper h2.title-2 {
-      margin: 0 auto;
-      width: 165px;
-      display: block;
-      text-align: center; }
+      margin: 0 0 0 83px; }
     .sub-banner .container-sub-baner .title-wrapper h2 .serif {
       font: italic 700 37px "Playfair Display", Georgia, serif;
       letter-spacing: -1px;
@@ -2510,18 +2508,70 @@ h3 {
     .sub-banner .container-sub-baner .title-wrapper p {
       top: 10px; }
       .sub-banner .container-sub-baner .title-wrapper p.tagline-1 {
-        padding: 71px 0 0 111px; }
+        padding: 55px 0 0 145px; }
         @media (min-width: 986px) and (max-width: 1199px) {
           .sub-banner .container-sub-baner .title-wrapper p.tagline-1 {
             padding: 25px 11px 0 61px; } }
       .sub-banner .container-sub-baner .title-wrapper p.tagline-2 {
-        text-align: center;
-        padding: 98px 15px 0 15px; }
+        padding: 90px 15px 0 85px; }
       .sub-banner .container-sub-baner .title-wrapper p.tagline-3 {
-        padding: 66px 26px 0; }
+        padding: 41px 26px 0 112px; }
         @media (min-width: 768px) and (max-width: 986px) {
           .sub-banner .container-sub-baner .title-wrapper p.tagline-3 {
             padding: 91px 29px 0; } }
+
+.sub-banner-wrapper {
+  margin: 20px 0;
+  position: relative; }
+
+.center-point {
+  width: 80px;
+  height: 80px;
+  top: -17px;
+  left: 131px;
+  z-index: 0;
+  background-color: #cacaca;
+  position: absolute;
+  border-radius: 90px 90px 90px 90px !important;
+  -webkit-border-radius: 90px 90px 90px 90px !important;
+  -moz-border-radius: 90px 90px 90px 90px !important; }
+
+.left-point {
+  width: 80px;
+  height: 80px;
+  top: 22px;
+  left: 87px;
+  z-index: 0;
+  background-color: #cacaca;
+  position: absolute;
+  border-radius: 90px 90px 90px 90px !important;
+  -webkit-border-radius: 90px 90px 90px 90px !important;
+  -moz-border-radius: 90px 90px 90px 90px !important; }
+
+.right-point {
+  width: 80px;
+  height: 80px;
+  top: -13px;
+  left: 40px;
+  z-index: 0;
+  background-color: #cacaca;
+  position: absolute;
+  border-radius: 90px 90px 90px 90px !important;
+  -webkit-border-radius: 90px 90px 90px 90px !important;
+  -moz-border-radius: 90px 90px 90px 90px !important; }
+
+.sub-banner-text-center {
+  position: absolute;
+  z-index: 1; }
+
+.sub-banner-text-left {
+  position: absolute;
+  z-index: 1;
+  top: -67px; }
+
+.sub-banner-text-right {
+  position: absolute;
+  z-index: 1; }
 
 .grid-wrapper {
   padding: 10px 0 80px;
