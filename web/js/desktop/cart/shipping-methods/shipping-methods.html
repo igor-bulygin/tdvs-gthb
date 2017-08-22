@@ -1,10 +1,10 @@
 <div class="personal-info-wrapper">
 	<span class="shopping-cart-section-header">
-		2 Shipping methods & addresses
+		2 <span translate="SHIPPING_METHODS_TITLE"></span>
 		<div class="pull-right" ng-if="shippingMethodsCtrl.state > 1">
 			<a href="/cart" class="continue-shopping-btn">
 				<i class="ion-arrow-left-b"></i>
-					Return to cart
+					<span translate="RETURN_CART"></span>
 			</a>
 		</div>
 	</span>
@@ -22,7 +22,7 @@
 				<div class="col-md-2" ng-if="shippingMethodsCtrl.state === 2">
 					<div class="radio radio-inline" ng-if="pack.deviser_info.shipping_time">
 						<input type="radio" checked ng-value="'standard'" ng-model="pack.shipping_type" name="standard_shipping" id="standard_shipping" ng-change="shippingMethodsCtrl.setShippingPriceTime(pack)">
-						<label for="standard_shipping">Standard</label>
+						<label for="standard_shipping"><span translate="STANDARD"></span></label>
 					</div>
 					<div class="radio radio-inline" ng-if="pack.deviser_info.shipping_express_time">
 						<input type="radio" ng-value="'express'" ng-model="pack.shipping_type" name="express_shipping" id="express_shipping" ng-change="shippingMethodsCtrl.setShippingPriceTime(pack)">
@@ -31,7 +31,7 @@
 				</div>
 				<div class="col-md-2">
 					<p>
-						Delivery within <span ng-bind="pack.shipping_time || pack.deviser_info.shipping_time"></span> days
+						<span translate="DELIVERY_WITHIN" translate-values="{days: pack.shipping_time || pack.deviser_info.shipping_time}"></span>
 						<span ng-if="pack.currency" ng-bind="pack.currency"></span><span ng-bind="pack.shipping_price || pack.deviser_info.price"></span>
 					</p>
 				</div>
@@ -44,6 +44,6 @@
 		</div>
 	</div>
 	<div class="col-md-12 text-center" ng-if="shippingMethodsCtrl.state===2">
-		<button class="btn btn-green mt-30" ng-click="shippingMethodsCtrl.save()">Continue to payment methods</button>
+		<button class="btn btn-green mt-30" ng-click="shippingMethodsCtrl.save()"><span translate="CONTINUE_PAYMENT"></span></button>
 	</div>
 </div>

@@ -1,7 +1,7 @@
-<span class="shopping-cart-title">Cart summary (<span ng-bind="summaryCtrl.cart.totalItems"></span> items)</span>
+<span class="shopping-cart-title"><span translate="CART_SUMMARY"></span> (<span ng-bind="summaryCtrl.cart.totalItems"></span> items)</span>
 <div ng-if="summaryCtrl.state >= 1">
 	<div ng-repeat="pack in summaryCtrl.cart.packs">
-		<span class="deviser-name-item summary-cart-wrapper" ng-bind="pack.deviser_info.name"></span><span class="pull-right">Shipping price € <span ng-bind="pack.shipping_price"></span></span>
+		<span class="deviser-name-item summary-cart-wrapper" ng-bind="pack.deviser_info.name"></span><span class="pull-right"> <span translate="SHIPPING_PRICE"></span> € <span ng-bind="pack.shipping_price"></span></span>
 		<div class="summary-cart-wrapper summary-white-item" ng-repeat="product in pack.products">
 			<div>
 				<div>
@@ -25,10 +25,10 @@
 	</div>
 </div>
 <div class="summary-cart-wrapper">
-	<span class="subtotal-amount-wrapper"><span class="bold">Subtotal</span><span class="pull-right subtotal-amount">€<span class="subtotal-amount" ng-bind="summaryCtrl.cart.subtotal"></span></span></span>
+	<span class="subtotal-amount-wrapper"><span class="bold" translate="SUBTOTAL"></span><span class="pull-right subtotal-amount">€<span class="subtotal-amount" ng-bind="summaryCtrl.cart.subtotal"></span></span></span>
 </div>
 <div class="summary-cart-wrapper" ng-if="!summaryCtrl.state">
 	<a href="/checkout">
-		<button class="btn btn-green col-md-12 mb-20">Proceed to checkout</button>
+		<button class="btn btn-green col-md-12 mb-20" translate="PROCEED"></button>
 	</a>
 </div>

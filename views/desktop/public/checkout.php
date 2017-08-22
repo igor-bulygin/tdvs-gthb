@@ -18,7 +18,7 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 			<div class="pull-right">
 				<a href="/" class="continue-shopping-btn">
 					<i class="ion-arrow-left-b"></i>
-					Continue shopping
+					<span translate="CONTINUE_SHOPPING"></span>
 				</a>
 			</div>
 		</div>
