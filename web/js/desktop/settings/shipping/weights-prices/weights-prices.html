@@ -1,13 +1,13 @@
 <div class="row">
 	<div class="col-md-3">
-		<p class="serif">Please create the weight ranges for your products. The prices will be set depending on the weights. You can edit, delete and create weight ranges at any time. The weight ranges must be in order, from the lowest weight to the highest.</p>
+		<p class="serif" translate="PLEASE_CREATE_RANGES"></p>
 	</div>
 	<div class="col-md-9">
 		<form name="shippingWeightsPricesCtrl.pricesForm">
 			<div class="range-wrapper" ng-repeat="price in shippingWeightsPricesCtrl.setting.prices">
 					
-					<span class="range-title">Range. {{$index+1}}</span>
-					<span>From</span>
+					<span class="range-title" translate="RANGE"> {{$index+1}}</span>
+					<span translate="FROM"></span>
 					<input type="number" ng-model="price.min_weight" class="form-control input-medium-size ng-class:{'error-input': shippingWeightsPricesCtrl.has_error(shippingWeightsPricesCtrl.pricesForm, shippingWeightsPricesCtrl.pricesForm['min_weight_'+$index])}" name="{{'min_weight_'+$index}}" ng-min="shippingWeightsPricesCtrl.setting.prices[$index-1].max_weight || 0" required min="0">
 					<span class="separator-to">to</span>
 					<div class="unlimited-weight-wrapper">
@@ -16,20 +16,20 @@
 							<div class="form-group">
 								<div class="checkbox">
 									<input id="unlimited_{{$index}}" type="checkbox" ng-model="shippingWeightsPricesCtrl.unlimited_weight" ng-change="shippingWeightsPricesCtrl.setUnlimitedWeight()">
-									<label class="label-small-bold" for="unlimited_{{$index}}">unlimited weight</label>
+									<label class="label-small-bold" for="unlimited_{{$index}}" translate="UNLIMITED_WEIGHT"></label>
 								</div>
 							</div>
 						</div>
 						
 					</div>
 					<span ng-bind="shippingWeightsPricesCtrl.person.settings.weight_measure"></span>
-					<span class="two-lines-label">Standard shipping</span>
+					<span class="two-lines-label" translate="STANDARD_SHIPPING"></span>
 
 					<input type="number" ng-model="price.price" class="input-medium-size form-control ng-class:{'error-input': shippingWeightsPricesCtrl.has_error(shippingWeightsPricesCtrl.pricesForm, shippingWeightsPricesCtrl.pricesForm['price_'+$index])}" name="{{'price_'+$index}}" required min="0">
 					<span ng-bind="shippingWeightsPricesCtrl.currency"></span>
 
 					<span ng-if="shippingWeightsPricesCtrl.setting.shipping_express_time" ng-cloak>
-						<span class="two-lines-label">Express shipping</span>
+						<span class="two-lines-label" translate="EXPRESS_SHIPPING"></span>
 						<input type="number" ng-model="price.price_express" class="input-medium-size form-control ng-class:{'error-input': shippingWeightsPricesCtrl.has_error(shippingWeightsPricesCtrl.pricesForm, shippingWeightsPricesCtrl.pricesForm['price_express_'+$index])}" name="{{'price_express_'+$index}}" ng-required="setting.shipping_express_time" min="0" ng-max="price.price-1">
 						<span ng-bind="shippingWeightsPricesCtrl.currency"></span>
 					</span>
@@ -44,6 +44,6 @@
 			
 			</div>
 		</form>
-		<div><a class="green-link" href="#" ng-click="shippingWeightsPricesCtrl.addPrice()">+ Add Range</a></div>
+		<div><a class="green-link" href="#" ng-click="shippingWeightsPricesCtrl.addPrice()" translate="ADD_RANGE"></a></div>
 	</div>
 </div>
