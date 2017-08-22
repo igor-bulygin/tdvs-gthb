@@ -23,6 +23,7 @@ class IndexStoryAsset extends AssetBundle {
 		'js/desktop/person/stories/move-delete-component/move-delete-component.js',
 	];
 	public $depends = [
+		'app\assets\desktop\GlobalAsset',
 		'app\assets\desktop\deviser\IndexAsset',
 	];
 }
