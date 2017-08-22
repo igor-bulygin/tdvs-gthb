@@ -10,15 +10,15 @@
 				<uib-accordion-heading class="row" style="font-weight: lighter;">
 					<div class="mt-20">
 						<span class="col-md-2 text-left">
-							<span style="color: #9D9D9D;font-weight: lighter;" class="col-md-12">INVOICE Nº</span>
+							<span style="color: #9D9D9D;font-weight: lighter;" class="col-md-12" translate="INVOICE_NUMBER"></span>
 							<span class="col-md-12" ng-bind="order.id"></span>
 						</span>
 						<span class="col-md-2 text-left">
-							<span style="color: #9D9D9D;font-weight: lighter;" class="col-md-12">ORDER DATE</span>
+							<span style="color: #9D9D9D;font-weight: lighter;" class="col-md-12" translate="ORDER_DATE"></span>
 							<span class="col-md-12" ng-cloak>{{soldOrdersCtrl.parseDate(order.order_date.sec*1000) | date:'dd/MM/yy'}}</span>
 						</span>
 						<span class="col-md-2 text-left">
-							<span style="color: #9D9D9D;font-weight: lighter;" class="col-md-12">CLIENT NAME</span>
+							<span style="color: #9D9D9D;font-weight: lighter;" class="col-md-12" translate="CLIENT_NAME"></span>
 							<span class="col-md-12" ng-bind="order.billing_address.name + ' ' + order.billing_address.last_name"></span>
 						</span>
 					</div>
@@ -26,36 +26,36 @@
 				<div class="card">
 					<div class="col-md-7" style="border-right: 1px solid #e9e9e9">
 						<div class="row" style="border-bottom: 1px solid #e9e9e9">
-							<span class="col-md-12 row mb-20" style="color: #9D9D9D;">INFO</span>
+							<span class="col-md-12 row mb-20" style="color: #9D9D9D;" translate="INFO"></span>
 							<div class="col-md-3 row">
-								<span class="col-md-12" style="color: #9D9D9D;">SHIP TO</span>
+								<span class="col-md-12" style="color: #9D9D9D;" translate="SHIP_TO"></span>
 								<label class="col-md-12" ng-bind="order.shipping_address.name + ' ' + order.shipping_address.last_name"></label>
 								<label class="col-md-12" ng-bind="order.shipping_address.address"></label>
 								<label class="col-md-12" ng-bind="order.shipping_address.city + ', ' + order.shipping_address.country"></label>
 							</div>
 							<div class="col-md-3 row">
-								<span class="col-md-12" style="color: #9D9D9D;">BILL TO</span>
+								<span class="col-md-12" style="color: #9D9D9D;" translate="BILL_TO"></span>
 								<label class="col-md-12" ng-bind="order.billing_address.name + ' ' + order.billing_address.last_name"></label>
 								<label class="col-md-12" ng-bind="order.billing_address.address"></label>
 								<label class="col-md-12" ng-bind="order.billing_address.city + ', ' + order.billing_address.country"></label>
 							</div>
 							<div class="col-md-6 row">
 								<div class="col-md-12">
-									<span style="color: #9D9D9D;">YOU RECEIVE</span>
+									<span style="color: #9D9D9D;" translate="YOU_RECEIVE"></span>
 									<label ng-cloak">{{order.totalPrice | currency }}</label>
 								</div>
 								<div class="col-md-12">
-									<span style="color: #9D9D9D;">TODEVISE COMMISSION</span>
+									<span style="color: #9D9D9D;" translate="TODEVISE_COMMISSION"></span>
 									<label>{{ order.commission| number:2}}</label>
 								</div>
 								<div class="col-md-12">
-									<span style="color: #9D9D9D;">SHIPPING</span>
+									<span style="color: #9D9D9D;" translate="SHIPPING"></span>
 									<label ng-cloak">{{order.totalShippingPrice | currency }}</label>
 								</div>
 							</div>
 							<div class="col-md-12 text-right">
 								<div class="col-md-12">
-									<span style="color: #9D9D9D;">TOTAL</span>
+									<span style="color: #9D9D9D;" translate="TOTAL"></span>
 									<label>{{ order.total| number:2}}</label>
 								</div>
 							</div>
@@ -73,92 +73,90 @@
 									<div ng-if="!pack.loading" ng-cloak>
 										<div class="col-md-12" >
 											<div class="col-md-3 col-md-offset-1">
-												<label>1. I'M AWARE</label>
+												<label translate="IM_AWARE"></label>
 											</div>
 											<div class="col-md-6 col-md-offset-2">
-												<label style="color: #9D9D9D;">2. I'M PREPARING IT</label>
+												<label style="color: #9D9D9D;" translate="IM_PREPARING"></label>
 											</div>
 										</div>
-										<span class="col-md-12 mt-30 mb-20">When you see the order, please click the button below to inform us</span>
+										<span class="col-md-12 mt-30 mb-20" translate="CLICK_TO_INFORM"></span>
 										<div class="col-md-12 mt-40 mb-10" >
-											<button class="col-md-3 btn btn-green" ng-click="soldOrdersCtrl.markPackAware(order,pack)">READY TO CREATE</button>
+											<button class="col-md-3 btn btn-green" ng-click="soldOrdersCtrl.markPackAware(order,pack)" translate="READY_TO_CREATE"></button>
 										</div>
 									</div>
 									<div class="text-center" ng-if="pack.loading" ng-cloak>
 										<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-										<span class="sr-only">Loading...</span>
+										<span class="sr-only" translate="LOADING"></span>
 									</div>
 								</div>
 								<div ng-switch-when="aware">
 									<div ng-if="!pack.loading" ng-cloak>
 										<div class="col-md-12  mb-20" ng-if="!pack.editInfo" ng-cloak>
 											<div class="col-md-3 col-md-offset-1">
-												<label style="color: #9D9D9D;">1. I'M AWARE <span class="ion-checkmark-circled red-text"></span></label>
+												<label style="color: #9D9D9D;" translate="IM_AWARE">1. <span class="ion-checkmark-circled red-text"></span></label>
 											</div>
 											<div class="col-md-6 col-md-offset-2">
-												<label>2. I'M PREPARING IT</label>
+												<label translate="IM_PREPARING"></label>
 											</div>
 										</div>
 										<form name="soldOrdersCtrl.shippingForm" class="form-horizontal" >
 											<div class="form-group col-md-5">
-												<span for="shippingCompany" class="col-md-12">Shipping company</span>
+												<span for="shippingCompany" class="col-md-12" translate="SHIPPING_COMPANY"></span>
 												<div class="col-md-12">
 													<input type="text" name="shippingCompany" class="form-control" ng-class="{'error-input': soldOrdersCtrl.has_error(soldOrdersCtrl.shippingForm, soldOrdersCtrl.shippingForm.shippingCompany)}" ng-model="soldOrdersCtrl.shippingCompany" required>
 												</div>
 												<form-errors class="col-md-12" field="soldOrdersCtrl.shippingForm.shippingCompany" condition="soldOrdersCtrl.has_error(soldOrdersCtrl.shippingForm, soldOrdersCtrl.shippingForm.shippingCompany)"></form-errors>
-												<span for="eta" class="col-md-12 mt-20">ETA <span style="color: #9D9D9D;">OPTIONAL</span></span>
+												<span for="eta" class="col-md-12 mt-20" translate="ETA"> <span style="color: #9D9D9D;" translate="OPTIONAL"></span></span>
 												<div class="col-md-12">
 													<input type="text" name="eta" class="form-control" ng-model="soldOrdersCtrl.eta">
 												</div>
 											</div>
 											<div class="form-group col-md-7">
-												<span for="trackingNumber" class="col-md-12">Tracking number</span>
+												<span for="trackingNumber" class="col-md-12" translate="TRACKING_NUMBER"></span>
 												<div class="col-md-12">
 													<input type="text" name="trackingNumber" class="form-control" ng-class="{'error-input': soldOrdersCtrl.has_error(soldOrdersCtrl.shippingForm, soldOrdersCtrl.shippingForm.trackingNumber)}" ng-model="soldOrdersCtrl.trackingNumber" required>
 												</div>
 												<form-errors class="col-md-12" field="soldOrdersCtrl.shippingForm.trackingNumber" condition="soldOrdersCtrl.has_error(soldOrdersCtrl.shippingForm, soldOrdersCtrl.shippingForm.trackingNumber)"></form-errors>
-												<span for="trackLink" class="col-md-12 mt-20">Link to track package <span style="color: #9D9D9D;">OPTIONAL</span></span>
+												<span for="trackLink" class="col-md-12 mt-20" translate="TRACKING_LINK"><span style="color: #9D9D9D;" translate="OPTIONAL"></span></span>
 												<div class="col-md-12">
 													<input type="text" name="trackLink" class="form-control" ng-model="soldOrdersCtrl.trackLink">
 												</div>
 											</div>
-											<span class="form-group col-md-12 mt-20">
-												When you click this button, the order will be moved to PAST ORDERS
-											</span>
+											<span class="form-group col-md-12 mt-20" translate="MOVE_TO_PAST_ORDERS"></span>
 											<div class="form-group col-md-12">
 												<button class="btn btn-green" ng-click="soldOrdersCtrl.markPackShipped(order,pack)" ng-disabled="!soldOrdersCtrl.shippingForm.$valid">
-													<span ng-if="pack.editInfo">SAVE CHANGES</span>
-													<span ng-if="!pack.editInfo">PACKAGE WAS SHIPPED</span>
+													<span ng-if="pack.editInfo" translate="SAVE_CHANGES"></span>
+													<span ng-if="!pack.editInfo" translate="PACKAGE_SHIPPED"></span>
 												</button>
 											</div>
 										</form>
 									</div>
 									<div class="text-center" ng-if="pack.loading" ng-cloak>
 										<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-										<span class="sr-only">Loading...</span>
+										<span class="sr-only" translate="LOADING"></span>
 									</div>
 								</div>
 								<div ng-switch-when="shipped">
 									<div class="col-md-12 text-right">
-										<button class="btn btn-green" ng-click="soldOrdersCtrl.editShippingData(pack)">edit</button>
+										<button class="btn btn-green" ng-click="soldOrdersCtrl.editShippingData(pack)" translate="EDIT"></button>
 									</div>
 									<div class="col-md-12 mt-20 text-right">
 										<div class="col-md-6">
-											<label class="col-md-12">Shipping company</label>
+											<label class="col-md-12" translate="SHIPPING_COMPANY"></label>
 											<span class="col-md-12" ng-bind="pack.shipping_info.company"></span>
 										</div>
 										<div class="col-md-6">
-											<label class="col-md-12">ETA</label>
+											<label class="col-md-12" translate="ETA"></label>
 											<span class="col-md-12" ng-bind="pack.shipping_info.eta"></span>
 										</div>
 									</div>
 									<div class="col-md-12 text-right">
 										<div class="col-md-6">
-											<label class="col-md-12">Tracking number</label>
+											<label class="col-md-12" translate="TRACKING_NUMBER"></label>
 											<span class="col-md-12" ng-bind="pack.shipping_info.tracking_number"></span>
 										</div>
 										<div class="col-md-6">
-											<label class="col-md-12">Link to track package</label>
+											<label class="col-md-12" translate="TRACKING_LINK"></label>
 											<a class="col-md-12" ng-href="{{pack.shipping_info.tracking_link}}" target="blank">{{pack.shipping_info.tracking_link}}</a>
 										</div>
 									</div>

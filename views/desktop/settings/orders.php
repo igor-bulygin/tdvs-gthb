@@ -21,27 +21,27 @@ $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD
 
 <div ng-controller="ordersCtrl as ordersCtrl">
 	<div class="col-md-12 store" style="padding: 20px;">
-		<h4 class="col-md-7 col-md-offset-5">ORDERS</h4>
+		<h4 class="col-md-7 col-md-offset-5" translate="ORDERS"></h4>
 		<div class="col-md-1" ng-if="ordersCtrl.isDeviser" ng-cloak>
 			<ol class="nya-bs-select col-md-12" ng-model="ordersCtrl.typeFilter" ng-change="ordersCtrl.getOrders()">
 				<li nya-bs-option="type in ordersCtrl.enabledTypes">
-					<a href="#"><span ng-bind="type.name"></span></a>
+					<a href="#">{{ type.name | translate }}</a>
 				</li>
 			</ol>
 		</div>
 		<div class="btn-group col-md-11 inline">
 			<label class="col-md-1" ng-repeat="state in ordersCtrl.enabledStates" class="col-md-1">
 				<input type="radio" name="stateFilter" ng-model="ordersCtrl.stateFilter" ng-value="state.value" ng-change="ordersCtrl.getOrders()" />
-				<span ng-cloak>{{state.name}}</span>
+				<span ng-cloak>{{state.name | translate }}</span>
 			</label>
 		</div>
 		<div class="col-md-12 text-center" ng-if="!ordersCtrl.loading && !ordersCtrl.orders.length>0" ng-cloak>
-			<span>No orders founded</span>
+			<span translate="NO_ORDERS_FOUNDED"></span>
 		</div>
 	</div>	
 	<div class="col-md-10 col-md-offset-1 store text-center" ng-if="ordersCtrl.loading" style="padding: 20px;" ng-cloak>
 		<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-		<span class="sr-only">Loading...</span>
+		<span class="sr-only" translate="LOADING"></span>
 	</div>
 	<div ng-switch on="ordersCtrl.typeFilter.value" ng-if="!ordersCtrl.loading && ordersCtrl.orders.length>0" ng-cloak>
 		<sold-orders ng-switch-when="received" orders="ordersCtrl.orders" ordersTotalPrice="ordersCtrl.ordersTotalPrice"></sold-orders>

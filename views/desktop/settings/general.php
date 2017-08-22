@@ -22,7 +22,7 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 <div ng-controller="generalSettingsCtrl as generalSettingsCtrl" class="personal-info-wrapper bank-settings-wrapper">
 	<div class="container">
 		<uib-accordion>
-			<div uib-accordion-group class="panel-default panel-billing" heading="Personal information" is-open="true" ng-cloak>
+			<div uib-accordion-group class="panel-default panel-billing" heading="{{ 'PERSONAL_INFORMATION' | translate }}" is-open="true" ng-cloak>
 				<form name="generalSettingsCtrl.dataForm" class="form-horizontal" >
 					<div ng-hide="generalSettingsCtrl.saving">
 						<div class="form-group">

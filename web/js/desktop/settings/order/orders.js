@@ -5,15 +5,15 @@
 		var vm = this;
 		vm.deviserId=person.id;		
 		vm.orders=[];
-		vm.enabledStates=[{value:"open", name : "Open"},{value:"past", name :"Past"},{value:"", name : "All"}];
+		vm.enabledStates=[{value:"open", name : "OPEN"},{value:"past", name :"PAST"},{value:"", name : "ALL"}];
 		vm.stateFilter=vm.enabledStates[0].value;
 		vm.enabledTypes=[];
 		vm.isDeviser=false;
 		if (person.type[0]==2) {
 			vm.isDeviser=true;
-			vm.enabledTypes.push({value:"received", name : "Sales"});
+			vm.enabledTypes.push({value:"received", name : "SALES"});
 		}
-		vm.enabledTypes.push({value:"done", name : "My purchase"});
+		vm.enabledTypes.push({value:"done", name : "MY_PURCHASE"});
 		vm.typeFilter=vm.enabledTypes[0];
 		vm.getOrders=getOrders;
 
