@@ -89,9 +89,60 @@ $this->title = 'Todevise / Home';
 			</div>
 		</div>
 	</div>
-</section>
-<!-- /SUB-BANNER -->
-
+	</section>
+	<!-- /SUB-BANNER -->
+	<!-- SHOWCASE -->
+	<section class="showcase-wrapper">
+		<div class="container">
+			<h3 class="title-product-name">Discover devisers</h3>
+			<span class="subtitle-home">Artists, designers, creators who shape outstanding works</span>
+			<!-- Controls -->
+			<div class="carusel-container">
+				<?php if ($totalDevisers > 3) { ?>
+					<a class="prev" href="#carousel-devisers" role="button" data-slide="prev">
+						<i class="ion-ios-arrow-left"></i>
+					</a>
+				<?php } ?>
+				<div class="carousel-devisers-container <?= $totalDevisers > 3 ? 'carousel slide' : ''?>" id="carousel-devisers" data-ride="carousel">
+					<div class="<?= $totalDevisers > 3 ? 'carousel-inner' : ''?>" role="listbox">
+						<?php foreach ($devisers as $i => $group) { ?>
+					<div class="item <?= ($i==0) ? 'active' : '' ?>">
+						<?php foreach ($group as $k => $deviser) { ?>
+						<div class="col-md-4 col-sm-4 col-xs-12 pad-showcase">
+								<a href="<?= $deviser->getStoreLink()?>">
+								<figure class="showcase">
+								<img src="<?= Utils::url_scheme() ?><?= Utils::thumborize($deviser->getHeaderBackgroundImage())->resize(350, 344) ?>" class="showcase-image">
+								<figcaption>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="title-product-name sm align-left">
+											<span><?= $deviser->getName() ?></span>
+										</div>
+										<div class="location align-left"><?= $deviser->personalInfoMapping->getCityLabel() ?></div>
+									</div>
+									<div class="col-md-6">
+										<button class="btn btn-icon mt-5"><i class="ion-star"></i><span>Follow</span>
+									</button>
+									</div>
+								</div>
+								</figcaption>
+								</figure>
+								</a>
+							</div>
+						<?php } ?>
+					</div>
+					<?php } ?>
+					</div>
+				</div>
+				<?php if ($totalDevisers > 3) { ?>
+					<a class="next" href="#carousel-devisers" role="button" data-slide="next">
+						<i class="ion-ios-arrow-right"></i>
+					</a>
+				<?php } ?>
+			</div>
+		</div>
+	</section>
+	<!-- /SHOWCASE -->
 <!-- GRID -->
 <section class="grid-wrapper">
 	<div class="container">
@@ -149,54 +200,6 @@ $this->title = 'Todevise / Home';
 </section>
 <!-- /GRID -->
 
-	<!-- SHOWCASE -->
-	<section class="showcase-wrapper">
-		<div class="container">
-			<h3>Artists, designers, creators who<br>
-			shape outstanding works</h3>
-			<div class="section-title">
-				Devisers
-			</div>
-			<!-- Controls -->
-			<div class="prev-next-wrapper">
-				<?php if ($totalDevisers > 5) { ?>
-					<a class="prev" href="#carousel-devisers" role="button" data-slide="prev">
-						<i class="ion-ios-arrow-left"></i>
-						<span>Previous</span>
-					</a>
-					<a class="next" href="#carousel-devisers" role="button" data-slide="next">
-						<span>Next</span>
-						<i class="ion-ios-arrow-right"></i>
-					</a>
-				<?php } ?>
-			</div>
-				<div class="<?= $totalDevisers > 5 ? 'carousel slide' : ''?>" id="carousel-devisers" data-ride="carousel">
-					<div class="<?= $totalDevisers > 5 ? 'carousel-inner' : ''?>" role="listbox">
-						<?php foreach ($devisers as $i => $group) { ?>
-					<div class="item <?= ($i==0) ? 'active' : '' ?>">
-						<?php foreach ($group as $k => $deviser) { ?>
-						<div class="col-md-15 col-sm-15 col-xs-6 pad-showcase">
-								<a href="<?= $deviser->getStoreLink()?>">
-								<figure class="showcase">
-								<button class="btn btn-default btn-follow"><i class="ion-star"></i><span>Follow</span>
-								</button>
-								<img src="<?= Utils::url_scheme() ?><?= Utils::thumborize($deviser->getHeaderBackgroundImage())->resize(350, 344) ?>" class="showcase-image">
-								<figcaption>
-									<img class="showcase-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($deviser->getAvatarImage())->resize(0, 110) ?>">
-									<span class="name"><?= $deviser->getName() ?></span>
-									<span class="location"><?= $deviser->personalInfoMapping->getCityLabel() ?></span>
-								</figcaption>
-								</figure>
-								</a>
-							</div>
-						<?php } ?>
-					</div>
-					<?php } ?>
-					</div>
-				</div>
-		</div>
-	</section>
-	<!-- /SHOWCASE -->
 
 <?php if ($boxes) { ?>
 	<section class="grid-wrapper">

@@ -34,6 +34,21 @@ h1{
     font-size: 48px;
     letter-spacing: 2.5px;
 	color: $black;
+	&.sm{
+		font-size: 26px;
+		letter-spacing: 0.3px;
+		width: 130px;
+		  white-space: nowrap;
+		  overflow: hidden;
+		  text-overflow: ellipsis;
+	}
+}
+.subtitle-home{
+	color: $light_grey;
+	font-size: 27px;
+	display: block;
+	text-align: center;
+	margin: 25px 0;
 }
 .category{
 	font-family: $font-family--regular;
