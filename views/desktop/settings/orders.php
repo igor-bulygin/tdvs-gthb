@@ -23,7 +23,7 @@ $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD
 	<div class="col-md-12 store" style="padding: 20px;">
 		<h4 class="col-md-7 col-md-offset-5" translate="ORDERS"></h4>
 		<div class="col-md-1" ng-if="ordersCtrl.isDeviser" ng-cloak>
-			<ol class="nya-bs-select col-md-12" ng-model="ordersCtrl.typeFilter" ng-change="ordersCtrl.getOrders()">
+			<ol class="nya-bs-select col-md-12" ng-model="ordersCtrl.typeFilter" ng-change="ordersCtrl.getOrders()" ng-if="ordersCtrl.isDeviser" ng-cloak>
 				<li nya-bs-option="type in ordersCtrl.enabledTypes">
 					<a href="#">{{ type.name | translate }}</a>
 				</li>

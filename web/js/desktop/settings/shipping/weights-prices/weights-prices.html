@@ -9,7 +9,7 @@
 					<span class="range-title" translate="RANGE"> {{$index+1}}</span>
 					<span translate="FROM"></span>
 					<input type="number" ng-model="price.min_weight" class="form-control input-medium-size ng-class:{'error-input': shippingWeightsPricesCtrl.has_error(shippingWeightsPricesCtrl.pricesForm, shippingWeightsPricesCtrl.pricesForm['min_weight_'+$index])}" name="{{'min_weight_'+$index}}" ng-min="shippingWeightsPricesCtrl.setting.prices[$index-1].max_weight || 0" required min="0">
-					<span class="separator-to">to</span>
+					<span class="separator-to" translate="TO"></span>
 					<div class="unlimited-weight-wrapper">
 						<input type="number" ng-model="price.max_weight" class="input-medium-size form-control ng-class:{'error-input': shippingWeightsPricesCtrl.has_error(shippingWeightsPricesCtrl.pricesForm, shippingWeightsPricesCtrl.pricesForm['max_weight_'+$index])}" name="{{'max_weight_'+$index}}" ng-disabled="$last && price.max_weight === null && shippingWeightsPricesCtrl.unlimited_weight" ng-min="price.min_weight" ng-required="!shippingWeightsPricesCtrl.unlimited_weight || (shippingWeightsPricesCtrl.unlimited_weight && !$last && shippingWeightsPricesCtrl.setting.prices.length > 1)" min="0">
 						<div ng-if="$last">

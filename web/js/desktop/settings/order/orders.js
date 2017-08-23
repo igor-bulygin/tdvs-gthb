@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(UtilService, orderDataService) {
+	function controller(UtilService, orderDataService, $translate) {
 		var vm = this;
 		vm.deviserId=person.id;		
 		vm.orders=[];

@@ -18,14 +18,14 @@ $this->title = 'Works - Todevise';
 		</div>
 		<div class="col-md-10">
 					<div class="found-header">
-						<p ng-if="exploreProductsCtrl.search_key" ng-cloak>We found <span ng-bind="exploreProductsCtrl.results.meta.total_count" ></span> products with the keywords "<span class="key" ng-bind="exploreProductsCtrl.search_key"></span>"</p>
+						<p ng-if="exploreProductsCtrl.search_key" ng-cloak translate="WE_FOUND_X_RESULTS" translate-values="{ counter: exploreProductsCtrl.results.meta.total_count }">"<span class="key" ng-bind="exploreProductsCtrl.search_key"></span>"</p>
 					</div>
 					<hr />
 					<div ng-if="exploreProductsCtrl.searching" ng-cloak>
-						<p class="text-center">Searching...</p>
+						<p class="text-center" translate="SEARCHING"></p>
 					</div>
 					<div ng-if="exploreProductsCtrl.results.items.length === 0" ng-cloak>
-						<p class="text-center">No products found with the specified search criteria.</p>
+						<p class="text-center" translate="NO_PRODUCTS_FOUND"></p>
 					</div>
 					<div ng-if="exploreProductsCtrl.results.items.length != 0" ng-cloak>
 						<explore-products-results results="exploreProductsCtrl.results" ng-if="exploreProductsCtrl.results.items.length > 0" ng-cloak></explore-products-results>

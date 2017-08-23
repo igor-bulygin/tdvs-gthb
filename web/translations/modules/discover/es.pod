@@ -1,0 +1,22 @@
+{
+	"EXPLORE_BOXES":"Explorar cajas",
+	"DISCOVER_LATEST_TRENDS":"Es el momento de descubrir las últimas tendencias",
+	"SEARCHING":"Buscando...",
+	"NO_BOXES_FOUNDED":"No se han encontrado cajas con el criterio de búsqueda especificado.",
+	"WE_FOUND_X_RESULTS":"Hemos encontrado {{ counter }} resultados con las palabras clave ",
+	"FILTER_BY_COUNTRY":"Filtrar por país",
+	"SEE_MORE":"Ver más",
+	"SEARCH_KEYWORD":"Palabras clave de búsqueda",
+	"DISCOVER_CREATORS":"Descubre talentosos e innovadores creadores por todo el mundo",
+	"NO_DEVISERS_FOUNDED":"No se han encontrado devisers con el criterio de búsqueda especificado.",
+	"FILTER_BY_THEME":"Filtrar por tema",
+	"FOLLOW":"Seguir",
+	"NO_STORIES_FOUNDED":"No se han encontrado historias con el criterio de búsqueda especificado.",
+	"SEE_THE_WORLD":"Mira el mundo con una perspectiva diferente",
+	"DISCOVER_INFLUENCERS":"Descubre talentosos influencers por todo el mundo",
+	"OUR_DEVISERS":"Nuestros devisers",
+	"OUR_INFLUENCERS":"Nuestros influencers",
+	"STORIES":"Historias",
+	"NO_PRODUCTS_FOUND":"No se han encontrado productos con el criterio de búsqueda especificado.",
+	"ORDER_BY":"Ordenar por"
+}

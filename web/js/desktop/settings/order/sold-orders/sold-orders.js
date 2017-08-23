@@ -57,7 +57,7 @@
 					component: 'modalAceptReject',
 					resolve: {
 						text: function () {
-							return '<p>You will mark this order as shipped.</p><p><strong>This action can not be undone.</strong></p><p>Do you wish to continue?</p>';
+							return 'CONTINUE_MARK_SHIPPED';
 						}
 					}
 				});

@@ -77,5 +77,7 @@
 	"PAST":"Pasados",
 	"ALL":"Todos",
 	"SALES":"Ventas",
-	"MY_PURCHASE":"Mis compras"
+	"MY_PURCHASE":"Mis compras",
+	"TO": "hasta",
+	"CONTINUE_MARK_SHIPPED": "Esta acción no se puede deshacer.</p><p><strong>This action can not be undone.</strong></p><p>¿Desea continuar?"
 }
