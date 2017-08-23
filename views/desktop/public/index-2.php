@@ -111,7 +111,7 @@ $this->title = 'Todevise / Home';
 						<div class="col-md-4 col-sm-4 col-xs-12 pad-showcase">
 								<a href="<?= $deviser->getStoreLink()?>">
 								<figure class="showcase">
-								<img src="<?= Utils::url_scheme() ?><?= Utils::thumborize($deviser->getHeaderBackgroundImage())->resize(350, 344) ?>" class="showcase-image">
+									<img src="<?= Utils::url_scheme() ?><?= Utils::thumborize($deviser->getHeaderBackgroundImage())->resize(350, 344) ?>" class="showcase-image">
 								<figcaption>
 								<div class="row">
 									<div class="col-md-6">
@@ -143,7 +143,79 @@ $this->title = 'Todevise / Home';
 		</div>
 	</section>
 	<!-- /SHOWCASE -->
+	<?php if ($totalInfluencers) { ?>
+	<section class="showcase-wrapper">
+		<div class="container">
+			<h3 class="title-product-name">Discover influencers</h3>
+			<span class="subtitle-home">Discover the works they love</span>
+			<!-- Controls -->
+			<div class="carusel-container">
+				<?php if ($totalInfluencers > 3) { ?>
+					<a class="prev" href="#carousel-influencers" role="button" data-slide="prev">
+						<i class="ion-ios-arrow-left"></i>
+						<span>Previous</span>
+					</a>
+				<?php } ?>
+				<div class="carousel-devisers-container <?= $totalInfluencers > 3 ? 'carousel slide' : ''?>" id="carousel-influencers" data-ride="carousel">
+					<div class="<?= $totalInfluencers > 3 ? 'carousel-inner' : ''?>" role="listbox">
+						<?php foreach ($influencers as $i => $group) { ?>
+							<div class="item <?= ($i==0) ? 'active' : '' ?>">
+								<?php foreach ($group as $k => $influencer) { ?>
+									<div class="col-md-4 col-sm-4 col-xs-6 pad-showcase">
+										<a href="<?= $influencer->getLovedLink()?>">
+											<figure class="showcase">
+												<img src="<?= Utils::url_scheme() ?><?= Utils::thumborize($influencer->getHeaderBackgroundImage())->resize(350, 344) ?>" class="showcase-image">
+												<figcaption>
+												<div class="row">
+													<div class="col-md-6">
+														<span class="title-product-name sm align-left"><?= $influencer->getName() ?></span>
+														<span class="location align-left"><?= $influencer->personalInfoMapping->getCityLabel() ?></span>			
+													</div>
+													<div class="col-md-6">
+														<button class="btn btn-icon mt-5"><i class="ion-star"></i><span>Follow</span></button>
+													</div>		
+												</div>
+												</figcaption>
+											</figure>
+										</a>
+									</div>
+								<?php } ?>
+							</div>
+						<?php } ?>
+					</div>
+				</div>
+				<?php if ($totalInfluencers > 3) { ?>
+					<a class="next" href="#carousel-influencers" role="button" data-slide="next">
+						<span>Next</span>
+						<i class="ion-ios-arrow-right"></i>
+					</a>
+				<?php } ?>
+			</div>
+		</div>
+	</section>
+<?php } ?>
 <!-- GRID -->
+<section class="showcase-wrapper">
+		<div class="container">
+			<h3 class="title-product-name">Discover boxes</h3>
+			<div class="boxes-container">
+				<div class="row">
+					<div class="col-md-3">
+						Oli
+					</div>
+					<div class="col-md-3">
+						Oli
+					</div>
+					<div class="col-md-3">
+						Oli
+					</div>
+					<div class="col-md-3">
+						Oli
+					</div>
+				</div>
+			</div>
+		</div>
+</section>
 <section class="grid-wrapper">
 	<div class="container">
 		<div class="section-title">
@@ -285,53 +357,7 @@ $this->title = 'Todevise / Home';
 	</section>
 <?php } ?>
 
-<?php if ($totalInfluencers) { ?>
-	<section class="showcase-wrapper">
-		<div class="container">
-			<h3>Discover the works they love</h3>
-			<div class="section-title">
-				Influencers
-			</div>
-			<!-- Controls -->
-			<div class="prev-next-wrapper">
-				<?php if ($totalInfluencers > 3) { ?>
-					<a class="prev" href="#carousel-influencers" role="button" data-slide="prev">
-						<i class="ion-ios-arrow-left"></i>
-						<span>Previous</span>
-					</a>
-					<a class="next" href="#carousel-influencers" role="button" data-slide="next">
-						<span>Next</span>
-						<i class="ion-ios-arrow-right"></i>
-					</a>
-				<?php } ?>
-			</div>
-			<div class="<?= $totalInfluencers > 3 ? 'carousel slide' : ''?>" id="carousel-influencers" data-ride="carousel">
-				<div class="<?= $totalInfluencers > 3 ? 'carousel-inner' : ''?>" role="listbox">
-					<?php foreach ($influencers as $i => $group) { ?>
-						<div class="item <?= ($i==0) ? 'active' : '' ?>">
-							<?php foreach ($group as $k => $influencer) { ?>
-								<div class="col-md-4 col-sm-4 col-xs-6 pad-showcase">
-									<a href="<?= $influencer->getLovedLink()?>">
-										<figure class="showcase showcase-influencers">
-											<button class="btn btn-default btn-follow"><i class="ion-star"></i><span>Follow</span>
-											</button>
-											<img src="<?= Utils::url_scheme() ?><?= Utils::thumborize($influencer->getHeaderBackgroundImage())->resize(350, 344) ?>" class="showcase-image">
-											<figcaption>
-												<img class="showcase-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($influencer->getAvatarImage())->resize(0, 110) ?>">
-												<span class="name"><?= $influencer->getName() ?></span>
-												<span class="location"><?= $influencer->personalInfoMapping->getCityLabel() ?></span>
-											</figcaption>
-										</figure>
-									</a>
-								</div>
-							<?php } ?>
-						</div>
-					<?php } ?>
-				</div>
-			</div>
-		</div>
-	</section>
-<?php } ?>
+
 
 <!-- GRID -->
 <section class="grid-wrapper">

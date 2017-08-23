@@ -60,6 +60,12 @@
 			color: $black;
 			margin-top: -5px;
 			color: $black;
+			float: left;
+			display: block;
+		}
+		.sm{
+			float: left;
+			display: block;
 		}
     }
 }
@@ -105,4 +111,7 @@
             text-decoration: none;
         }
     }
+}
+.boxes-container{
+	margin-top: 60px;
 }
