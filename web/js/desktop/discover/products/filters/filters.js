@@ -5,8 +5,8 @@
 		var vm = this;
 		vm.seeMore = seeMore;
 		vm.show_categories = 10;
-		vm.orderTypes=[{value:"new", name : "New"},{value:"old", name :"Old"},{value:"chepeast", name : "Price low to high"}, {value:"expensive", name :"Price high to low"}];
-		vm.orderFilter=vm.orderTypes[0];
+		vm.orderTypes=[{value:"new", name : "NEW"},{value:"old", name :"OLD"},{value:"chepeast", name : "PRICE_LOW_TO_HIGH"}, {value:"expensive", name :"PRICE_HIGH_TO_LOW"}];
+		vm.orderFilter={value:"", name : "ORDER_BY"};
 		vm.filters = {};
 		vm.search=search;
 		init();

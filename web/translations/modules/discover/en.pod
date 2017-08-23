@@ -18,5 +18,9 @@
 	"OUR_INFLUENCERS":"Our influencers",
 	"STORIES":"Stories",
 	"NO_PRODUCTS_FOUND":"No products found with the specified search criteria.",
-	"ORDER_BY":"Order by"
+	"ORDER_BY":"Order by",
+	"NEW":"New",
+	"OLD":"Old",
+	"PRICE_LOW_TO_HIGH":"Price low to high",
+	"PRICE_HIGH_TO_LOW":"Price high to low"
 }

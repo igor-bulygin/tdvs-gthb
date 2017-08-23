@@ -9,18 +9,12 @@ $this->title = 'Works - Todevise';
 
 ?>
 
-<div class="grid-wrapper" ng-controller="exploreProductsCtrl as exploreProductsCtrl">
-	<div class="container">
-		<div class="col-md-2">
-			<div class="our-devisers-body">
+<div ng-controller="exploreProductsCtrl as exploreProductsCtrl">
+	<div class="container store">
+		<div>
+			<div>
 				<explore-products-filters searching="exploreProductsCtrl.searching" results="exploreProductsCtrl.results"></explore-products-filters>
-			</div>
-		</div>
-		<div class="col-md-10">
-					<div class="found-header">
-						<p ng-if="exploreProductsCtrl.search_key" ng-cloak translate="WE_FOUND_X_RESULTS" translate-values="{ counter: exploreProductsCtrl.results.meta.total_count }">"<span class="key" ng-bind="exploreProductsCtrl.search_key"></span>"</p>
-					</div>
-					<hr />
+				<div>
 					<div ng-if="exploreProductsCtrl.searching" ng-cloak>
 						<p class="text-center" translate="SEARCHING"></p>
 					</div>
@@ -30,7 +24,10 @@ $this->title = 'Works - Todevise';
 					<div ng-if="exploreProductsCtrl.results.items.length != 0" ng-cloak>
 						<explore-products-results results="exploreProductsCtrl.results" ng-if="exploreProductsCtrl.results.items.length > 0" ng-cloak></explore-products-results>
 					</div>
+				</div>
+			</div>
 		</div>
+		
 	</div>
 </div>
 <!--
