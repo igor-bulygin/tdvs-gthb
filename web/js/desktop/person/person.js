@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function config(nyaBsConfigProvider, $provide, localStorageServiceProvider) {
+	function config(nyaBsConfigProvider, $provide, localStorageServiceProvider, $translatePartialLoaderProvider) {
 		nyaBsConfigProvider.setLocalizedText('en-us', {
 			defaultNoneSelection: 'Choose an option'
 		});
@@ -14,11 +14,14 @@
 
 		localStorageServiceProvider
 			.setPrefix('todevise-');
+
+		$translatePartialLoaderProvider.addPart('person');
 	}
 
 	angular
 		.module('person', ['api', 'util', 'header', 'toastr', 'nya.bootstrap.select',
 			'textAngular', 'ngFileUpload', 'dndLists', 'ui.bootstrap', 
-			'ngYoutubeEmbed', 'uiCropper', 'LocalStorageModule', 'ngTagsInput', 'ui.sortable'])
+			'ngYoutubeEmbed', 'uiCropper', 'LocalStorageModule', 'ngTagsInput', 'ui.sortable',
+			'pascalprecht.translate'])
 		.config(config)
 }());

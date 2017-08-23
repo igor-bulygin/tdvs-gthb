@@ -30,11 +30,11 @@ $this->params['person_links_target'] = 'public_view';
 					<div class="empty-wrapper">
 						<?php if ($person->isConnectedUser()) { ?>
 							<img class="sad-face" src="/imgs/sad-face.svg">
-							<p class="no-video-text">You have no boxes!</p>
+							<p class="no-video-text"><span translate="You have no boxes!"></span></p>
 
-							<button class="btn btn-green btn-add-box" ng-click="viewBoxesCtrl.openCreateBoxModal()">ADD BOX</button>
+							<button class="btn btn-green btn-add-box" ng-click="viewBoxesCtrl.openCreateBoxModal()"><span translate="ADD_BOX"></span></button>
 						<?php } else { ?>
-							<p class="no-video-text"><?=$person->getName()?> has no boxes.</p>
+							<p class="no-video-text"><?=$person->getName()?> <span translate="USER_NO_BOXES"></span></p>
 						<?php } ?>
 					</div>
 
@@ -54,7 +54,7 @@ $this->params['person_links_target'] = 'public_view';
 												<div class="plus-add">
 													<span>+</span>
 												</div>
-												<div class="text">Add box</div>
+												<div class="text"><span translate="ADD_BOX"></span></div>
 											</div>
 										</div>
 									</div>
@@ -65,7 +65,7 @@ $this->params['person_links_target'] = 'public_view';
 										<div class="boxes-wrapper">
 										<?php if (empty($products)) { ?>
 											<div class="empty-box">
-												<span class="empty-title">Empty box</span>
+												<span class="empty-title"><span translate="EMPTY_BOX"></span></span>
 											</div>
 										<?php } else {
 											$count  = 1;

@@ -1,13 +1,13 @@
 <div ng-if="storyMainMediaCtrl.isDropAvailable">
 	<div class="photo-loader-stories" ngf-drag-over-class="drag-over" ngf-drop ngf-select ngf-change="storyMainMediaCtrl.upload($file)" ngf-accept="'image/*'" ngf-drop-available="storyMainMediaCtrl.isDropAvailable">
-		<span class="photo-loader-title">COVER PHOTO</span>
+		<span class="photo-loader-title"><span translate="COVER_PHOTO"></span></span>
 		<div class="plus-add-wrapper">
 			<div class="plus-add">
 				<span>+</span>
 			</div>
-			<div class="text">ADD PHOTOS</div>
+			<div class="text"><span translate="ADD_PHOTOS"></span></div>
 		</div>
-		<span class="photo-loader-warning">Drag your photos here or click the button below.</span>
+		<span class="photo-loader-warning"><span translate="DRAG_PHOTOS"></span></span>
 		<div>
 			<img ng-src="{{storyMainMediaCtrl.image}}" class="cover-photo-stories">
 		</div>

@@ -1,5 +1,5 @@
 {
-	"LOGIN":"Cerrar sesión",
+	"LOGIN":"Login",
 	"MY_TODEVISE":" Mi todevise",
 	"ADMINISTRATION":"Administración",
 	"INVITATION":"Invitaciones",
