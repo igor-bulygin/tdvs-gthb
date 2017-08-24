@@ -1,72 +1,72 @@
 <div ng-messages="field.$error" class="error-text">
 	<div ng-switch on="field.$name">
 		<div ng-switch-when="email">
-			<div ng-message="required">Please enter your email.</div>
+			<div ng-message="required" translate="PLEASE_ENTER_EMAIL"></div>
 		</div>
 		<div ng-switch-when="name">
-			<div ng-message="required">Please enter your name.</div>
+			<div ng-message="required" translate="PLEASE_ENTER_NAME"></div>
 		</div>
 		<div ng-switch-when="first_name">
-			<div ng-message="required">Please enter your first name.</div>
+			<div ng-message="required" translate="PLEASE_ENTER_FIRST_NAME"></div>
 		</div>
 		<div ng-switch-when="last_name">
-			<div ng-message="required">Please enter your last name.</div>
+			<div ng-message="required" translate="PLEASE_ENTER_LAST_NAME"></div>
 		</div>
 		<div ng-switch-when="password">
-			<div ng-message="minlength">The password must be at least 6 characteres long.</div>
-			<div ng-message="required">Please enter the password.</div>
+			<div ng-message="minlength" translate="PASSWORD_MIN_CHARACTERS"></div>
+			<div ng-message="required" translate="PLEASE_ENTER_PASSWORD"></div>
 		</div>
 		<div ng-switch-when="password_confirm">
-			<div ng-message="required">Please repeat the password.</div>
-			<div ng-message="same">The passwords don't match.</div>
+			<div ng-message="required" translate="PLEASE_REPEAT_PASSWORD"></div>
+			<div ng-message="same" translate="PASSWORDS_NOT_MATCH"></div>
 		</div>
 		<div ng-switch-when="terms_and_conditions">
-			<div ng-message="required">You have to accept the Terms & Conditions before proceeding.</div>
+			<div ng-message="required" translate="HAVE_ACCEPT_TERMS"></div>
 		</div>
 		<div ng-switch-when="brand_name">
-			<div ng-message="required">Please enter your brand name.</div>
+			<div ng-message="required" translate="PLEASE_ENTER_BRAND"></div>
 		</div>
 		<div ng-switch-when="city">
-			<div ng-message="required">Please enter a city.</div>
+			<div ng-message="required" translate="PLEASE_ENTER_CITY"></div>
 		</div>
 		<div ng-switch-when="address">
-			<div ng-message="required">Please enter an address.</div>
+			<div ng-message="required" translate="PLEASE_ENTER_ADDRESS"></div>
 		</div>
 		<div ng-switch-when="zip">
-			<div ng-message="required">Please enter a zip code.</div>
+			<div ng-message="required" translate="PLEASE_ENTER_ZIP"></div>
 		</div>
 		<div ng-switch-when="id_number">
-			<div ng-message="required">Please enter an id number.</div>
+			<div ng-message="required" translate="PLEASE_ENTER_ID"></div>
 		</div>
 		<div ng-switch-when="categories">
-			<div ng-message="required">Please select one or more fields of work.</div>
+			<div ng-message="required" translate="PLEASE_SELECT_WORK"></div>
 		</div>
 		<div ng-switch-when="text_short_description">
-			<div ng-message="required">Please enter a short description of your brand.</div>
+			<div ng-message="required" translate="PLEASE_ENTER_SHORT_DESCRIPTION"></div>
 		</div>
 		<div ng-switch-when="text_biography">
-			<div ng-message="required">The about section cannot be blank.</div>
+			<div ng-message="required" translate="ABOUT_CANT_BLANK"></div>
 		</div>
 		<div ng-switch-when="profile_photo">
-			<div ng-message="required">Please upload a profile photo.</div>
+			<div ng-message="required" translate="PLEASE_UPLOAD_PROFILE_PHOTO"></div>
 		</div>
 		<div ng-switch-when="header_photo">
-			<div ng-message="required">Please upload a cover photo.</div>
+			<div ng-message="required" translate="PLEASE_UPLOAD_COVER_PHOTO"></div>
 		</div>
 		<div ng-switch-when="shipping_express_time">
-			<div ng-message="max">The express time must be less than the standard time.</div>
+			<div ng-message="max" translate="EXPRESS_LESS_STANDARD"></div>
 		</div>
 		<div ng-switch-when="box_name">
-			<div ng-message="required">Please enter the name of the box.</div>
+			<div ng-message="required" translate="PLEASE_ENTER_BOX_NAME"></div>
 		</div>
 		<div ng-switch-default>
-			<div ng-message="required">Please fill in this field.</div>
-			<div ng-message="same">The passwords don't match.</div>
-			<div ng-message="email">Please enter a valid email address.</div>
-			<div ng-message="url">Invalid URL.</div>
-			<div ng-message="pattern">Invalid URL.</div>
-			<div ng-message="min">Minimum value not valid.</div>
-			<div ng-message="max">Maximum value not valid.</div>
+			<div ng-message="required" translate="PLEASE_FILL_FIELD"></div>
+			<div ng-message="same" translate="PASSWORDS_NOT_MATCH"></div>
+			<div ng-message="email" translate="PLEASE_ENTER_EMAIL"></div>
+			<div ng-message="url" translate="INVALID_URL"></div>
+			<div ng-message="pattern" translate="INVALID_URL"></div>
+			<div ng-message="min" translate="MIN_VALUE_NOT_VALID"></div>
+			<div ng-message="max" translate="MAX_VALUE_NOT_VALID"></div>
 		</div>
 	</div>
 </div>

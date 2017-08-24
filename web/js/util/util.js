@@ -177,10 +177,11 @@
 
 	}
 
-	function config(localStorageServiceProvider) {
+	function config(localStorageServiceProvider,$translatePartialLoaderProvider) {
 		localStorageServiceProvider
 			.setPrefix('todevise-')
-			.setStorageType('localStorage')
+			.setStorageType('localStorage');
+		$translatePartialLoaderProvider.addPart('util');
 	}
 
 	function capitalize() {
@@ -193,7 +194,7 @@
 		return new Date(date);
 	}
 
-	angular.module('util', ['util.formMessages', 'LocalStorageModule', 'ui.bootstrap', 'infinite-scroll', 'uiCropper'])
+	angular.module('util', ['util.formMessages', 'LocalStorageModule', 'ui.bootstrap', 'infinite-scroll', 'uiCropper','pascalprecht.translate'])
 		.service('UtilService', UtilService)
 		.filter('capitalize', capitalize)
 		.config(config);

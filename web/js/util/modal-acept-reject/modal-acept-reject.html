@@ -5,10 +5,10 @@
 </div>
 <div class="modal-body">
 	<div class="text-center">
-		<p ng-bind-html="modalAceptRejectCtrl.resolve.text"></p>
+		<p ng-bind-html=" modalAceptRejectCtrl.resolve.text | translate "></p>
 	</div>
 </div>
 <div class="modal-footer">
-	<button class="btn btn-danger col-md-2" ng-click="modalAceptRejectCtrl.dismiss()">Cancel</button>
-	<button class="btn btn-default btn-green" ng-click="modalAceptRejectCtrl.ok()">Continue</button>
+	<button class="btn btn-danger col-md-2" ng-click="modalAceptRejectCtrl.dismiss()" translate="CANCEL"></button>
+	<button class="btn btn-default btn-green" ng-click="modalAceptRejectCtrl.ok()" translate="CONTINUE"></button>
 </div>

@@ -16,6 +16,9 @@
 			if (angular.isUndefined(vm.resolve.title)) {
 				vm.resolve.title="";
 			}
+			if (angular.isUndefined(vm.resolve.translationData)) {
+				vm.resolve.translationData="";
+			}
 		}
 
 		init();

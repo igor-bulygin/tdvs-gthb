@@ -6,9 +6,9 @@
 </div>
 <div class="modal-body col-md-12">
 	<div class="text-center">
-		<p ng-bind-html="modalInfoCtrl.resolve.text"></p>
+		<p ng-bind-html=" modalInfoCtrl.resolve.text | translate:{ data: modalInfoCtrl.resolve.translationData } "></p>
 	</div>
 </div>
 <div class="modal-footer" >
-	<button class="btn btn-default btn-green" ng-click="modalInfoCtrl.ok()" ng-if="modalInfoCtrl.resolve.showButton" ng-cloak>Accept</button>
+	<button class="btn btn-default btn-green" ng-click="modalInfoCtrl.ok()" ng-if="modalInfoCtrl.resolve.showButton" ng-cloak translate="ACCEPT"></button>
 </div>
