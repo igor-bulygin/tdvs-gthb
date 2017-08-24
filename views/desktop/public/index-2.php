@@ -224,7 +224,22 @@ $this->title = 'Todevise / Home';
 			<div class="boxes-container">
 				<div class="row">
 					<div class="col-md-3">
-						Oli
+						<a href="<?= $influencer->getLovedLink()?>">
+								<figure class="showcase">
+									<img src="imgs/img-default.jpg" class="showcase-image">
+									<figcaption>
+									<div class="row">
+										<div class="col-md-6">
+											<span class="title-product-name sm align-left"><?= $influencer->getName() ?></span>
+											<span class="location align-left"><?= $influencer->personalInfoMapping->getCityLabel() ?></span>			
+										</div>
+										<div class="col-md-6">
+											<button class="btn btn-icon mt-5"><i class="ion-star"></i><span>Follow</span></button>
+										</div>		
+									</div>
+									</figcaption>
+								</figure>
+							</a>
 					</div>
 					<div class="col-md-3">
 						Oli
