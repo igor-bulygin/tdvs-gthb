@@ -80,5 +80,7 @@
 	"MY_PURCHASE":"Mis compras",
 	"TO": "hasta",
 	"CONTINUE_MARK_SHIPPED": "<p>Va a marcar este pedido como enviado.</p><p><strong>Esta acción no se puede deshacer.</strong></p><p>¿Desea continuar?",
-	"ORDER_MOVED_TO_PAST":"El pedido {{ data }} ha sido movido a pedidos pasados. Para información sobre el pago consulte Facturas & Pagos"
+	"ORDER_MOVED_TO_PAST":"El pedido {{ data }} ha sido movido a pedidos pasados. Para información sobre el pago consulte Facturas & Pagos",
+	"SHIPPING_DATA":"<span class='col-md-12' style='color: #9D9D9D;'>COMPAÑIA DE TRANSPORTE</span><label class='col-md-12'> {{ data }} </label><span class='col-md-12' style='color: #9D9D9D;'>NÚMERO DE SEGUIMIENTO</span><label class='col-md-12'>{{ data2 }}</label>",
+	"SHIPPING_DATA_WITH_LINK":"<span class='col-md-12' style='color: #9D9D9D;'>COMPAÑIA DE TRANSPORTE</span><label class='col-md-12'> {{ data }} </label><span class='col-md-12' style='color: #9D9D9D;'>NÚMERO DE SEGUIMIENTO</span><label class='col-md-12'>{{ data2 }}</label><span class='col-md-12' style='color: #9D9D9D;'>ENLACE DE SEGUIMIENTO</span><a class='col-md-12 red-text' href='{{ data3 }}' target='blank'>{{ data3 }}</a>"
 }

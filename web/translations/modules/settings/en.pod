@@ -80,5 +80,7 @@
 	"MY_PURCHASE":"My purchase",
 	"TO": "to",
 	"CONTINUE_MARK_SHIPPED": "<p>Va a marcar este pedido como enviado.</p><p><strong>Esta acción no se puede deshacer.</strong></p><p>¿Desea continuar?</p>",
-	"ORDER_MOVED_TO_PAST":"Order {{ data }} was moved to Past orders. For payment information see Billing & Payments"
+	"ORDER_MOVED_TO_PAST":"Order {{ data }} was moved to Past orders. For payment information see Billing & Payments",
+	"SHIPPING_DATA":"<span class='col-md-12' style='color: #9D9D9D;'>SHIPPING COMPANY</span><label class='col-md-12'> {{ data }} </label><span class='col-md-12' style='color: #9D9D9D;'>TRACKING NUMBER</span><label class='col-md-12'>{{ data2 }}</label>",
+	"SHIPPING_DATA_WITH_LINK":"<span class='col-md-12' style='color: #9D9D9D;'>SHIPPING COMPANY</span><label class='col-md-12'> {{ data }} </label><span class='col-md-12' style='color: #9D9D9D;'>TRACKING NUMBER</span><label class='col-md-12'>{{ data2 }}</label><span class='col-md-12' style='color: #9D9D9D;'>TRACKING LINK</span><a class='col-md-12 red-text' href=' {{ data3 }}' target='blank'>{{ data3 }}</a>"
 }

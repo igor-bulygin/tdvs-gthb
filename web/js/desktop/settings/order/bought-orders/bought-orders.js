@@ -29,15 +29,27 @@
 						return 'Track package';
 					},
 					text: function () {
-						var bodyText='<span class="col-md-12" style="color: #9D9D9D;">SHIPPING DATE</span><label class="col-md-12">'+ pack.shipping_info.company +
-						 '</label><span class="col-md-12" style="color: #9D9D9D;">TRACKING NUMBER</span><label class="col-md-12">'+ pack.shipping_info.tracking_number + '</label>';
-						if (!angular.isUndefined(pack.shipping_info.tracking_link)) {
-							bodyText=bodyText + '<span class="col-md-12" style="color: #9D9D9D;">TRACKING LINK</span><a class="col-md-12 red-text" ng-href="'+pack.shipping_info.tracking_link+'" target="blank">'+pack.shipping_info.tracking_link+'</a>';
+						if (!angular.isUndefined(pack.shipping_info.tracking_link) && pack.shipping_info.tracking_link != null ) {
+							return "SHIPPING_DATA_WITH_LINK";
 						}
-						return bodyText;
+						return "SHIPPING_DATA";
 					},
 					showButton: function () {
 						return false;
+					},
+					translationData: function () {
+						return pack.shipping_info.company;
+					},
+					translationData2: function () {
+						return pack.shipping_info.tracking_number;
+					},
+					translationData3: function () {
+						if (!angular.isUndefined(pack.shipping_info.tracking_link) && pack.shipping_info.tracking_link != null ) {
+							return pack.shipping_info.tracking_link;
+						}
+						else {
+							return "";
+						}
 					}
 				}
 			});

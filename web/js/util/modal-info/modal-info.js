@@ -19,6 +19,12 @@
 			if (angular.isUndefined(vm.resolve.translationData)) {
 				vm.resolve.translationData="";
 			}
+			if (angular.isUndefined(vm.resolve.translationData2)) {
+				vm.resolve.translationData2="";
+			}
+			if (angular.isUndefined(vm.resolve.translationData3)) {
+				vm.resolve.translationData3="";
+			}
 		}
 
 		init();
