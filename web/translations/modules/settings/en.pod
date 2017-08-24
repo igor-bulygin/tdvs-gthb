@@ -79,5 +79,6 @@
 	"SALES":"Sales",
 	"MY_PURCHASE":"My purchase",
 	"TO": "to",
-	"CONTINUE_MARK_SHIPPED": "<p>Va a marcar este pedido como enviado.</p><p><strong>Esta acción no se puede deshacer.</strong></p><p>¿Desea continuar?</p>"
+	"CONTINUE_MARK_SHIPPED": "<p>Va a marcar este pedido como enviado.</p><p><strong>Esta acción no se puede deshacer.</strong></p><p>¿Desea continuar?</p>",
+	"ORDER_MOVED_TO_PAST":"Order {{ data }} was moved to Past orders. For payment information see Billing & Payments"
 }

@@ -101,7 +101,10 @@
 				component: 'modalInfo',
 				resolve: {
 					text: function () {
-						return 'Order ' + ordernumber+ ' was moved to Past orders. For payment information see Billing & Payments';
+						return 'ORDER_MOVED_TO_PAST';
+					},
+					translationData: function () {
+						return ordernumber;
 					}
 				}
 			});
