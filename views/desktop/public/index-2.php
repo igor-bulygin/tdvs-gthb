@@ -91,6 +91,29 @@ $this->title = 'Todevise / Home';
 	</div>
 	</section>
 	<!-- /SUB-BANNER -->
+	<!-- SEASON BANNERS -->
+	<section class="season-banners">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-4">
+					<a href="#">
+						<img src="/imgs/FALL.jpg" class="responsive-image">
+					</a>
+				</div>
+				<div class="col-sm-4">
+					<a href="#">
+						<img src="/imgs/JEANS.jpg" class="responsive-image">
+					</a>
+				</div>
+				<div class="col-sm-4">
+					<a href="#">
+						<img src="/imgs/BASIC.jpg" class="responsive-image">
+					</a>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /SEASON BANNERS -->
 	<!-- SHOWCASE -->
 	<section class="showcase-wrapper">
 		<div class="container">
