@@ -24,7 +24,7 @@ $this->title = 'Stories - Todevise';
 				<explore-stories-filters filters="exploreStoriesCtrl.filters" searching="exploreStoriesCtrl.searching"></explore-stories-filters></div>
 				<div class="col-md-10">
 					<div class="found-header">
-						<p ng-if="exploreStoriesCtrl.search_key" ng-cloak translate="WE_FOUND_X_RESULTS" translate-values="{ counter: exploreStoriesCtrl.results.meta.total_count }">"<span class="key" ng-bind="exploreStoriesCtrl.search_key"></span>"</p>
+						<p ng-if="exploreStoriesCtrl.search_key && !exploreStoriesCtrl.searching" ng-cloak translate="WE_FOUND_X_RESULTS" translate-values="{ counter: exploreStoriesCtrl.results.meta.total_count }">"<span class="key" ng-bind="exploreStoriesCtrl.search_key"></span>"</p>
 					</div>
 					<hr />
 					<div ng-if="exploreStoriesCtrl.searching" ng-cloak>

@@ -25,7 +25,7 @@ $this->title = 'Explore boxes - Todevise';
 			</div>
 			<div class="col-md-10">
 				<div class="found-header">
-					<p ng-if="exploreBoxesCtrl.search_key" ng-cloak translate="WE_FOUND_X_RESULTS" translate-values="{ counter: exploreBoxesCtrl.results.meta.total_count }">"<span class="key" ng-bind="exploreBoxesCtrl.search_key"></span>"</p>
+					<p ng-if="exploreBoxesCtrl.search_key && !exploreBoxesCtrl.searching" ng-cloak translate="WE_FOUND_X_RESULTS" translate-values="{ counter: exploreBoxesCtrl.results.meta.total_count }">"<span class="key" ng-bind="exploreBoxesCtrl.search_key"></span>"</p>
 				</div>
 				<hr />
 				<div ng-if="exploreBoxesCtrl.searching" ng-cloak>
