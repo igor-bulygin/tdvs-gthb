@@ -25,7 +25,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 						</div>
 						<?php if ($person->isPersonEditable() && $person->isPublic()) {?>
 							<div class="edit-profile-btn">
-								<button class="btn btn-default btn-transparent btn-header ng-class:{'button-error': personHeaderCtrl.required['header_info']}" ng-click="personHeaderCtrl.editHeader()">Edit header</button>
+								<button class="btn btn-default btn-transparent btn-header ng-class:{'button-error': personHeaderCtrl.required['header_info']}" ng-click="personHeaderCtrl.editHeader()"><span translate="EDIT_HEADER"></span></button>
 							</div>
 						<?php } ?>
 						<div class="deviser-data">
@@ -42,15 +42,15 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 					</div>
 				</div>
 				<?php if ($person->isDeviserEditable() && $person->isPublic()) {?>
-					<a class="btn btn-default btn-add-work" ng-class="personHeaderCtrl.required['store'] ? 'button-error' : 'btn-green'" href="<?= $person->getCreateWorkLink()?>">Add Work</a>
+					<a class="btn btn-default btn-add-work" ng-class="personHeaderCtrl.required['store'] ? 'button-error' : 'btn-green'" href="<?= $person->getCreateWorkLink()?>"><span translate="ADD_WORK"></span></a>
 				<?php } ?>
 			</div>
 		</div>
 	</div>
 	<div class="container pad-about edit-header-container" ng-if="personHeaderCtrl.editingHeader" ng-cloak>
-		<span tooltip-placement="top" uib-tooltip="ADD COVER PHOTO" class="button ion-camera edit-cover-icon photo" ngf-select ng-model="personHeaderCtrl.new_header" name="header" ngf-pattern="'image/*'" ngf-accept="'image/*'"></span>
-		<span tooltip-placement="top" uib-tooltip="CROP PHOTO" class="button ion-crop edit-cover-icon crop" ng-click="personHeaderCtrl.openCropModal(personHeaderCtrl.header_original, 'header_cropped')" ng-if="personHeaderCtrl.header" ng-cloak></span>
-		<span class="req-1" ng-if="personHeaderCtrl.required['header'] && !personHeaderCtrl.new_header" ng-cloak>REQUIRED</span>
+		<span tooltip-placement="top" uib-tooltip="{{'ADD_COVER_PHOTO' | translate }}" class="button ion-camera edit-cover-icon photo" ngf-select ng-model="personHeaderCtrl.new_header" name="header" ngf-pattern="'image/*'" ngf-accept="'image/*'"></span>
+		<span tooltip-placement="top" uib-tooltip="{{'CROP_PHOTO' | translate}}" class="button ion-crop edit-cover-icon crop" ng-click="personHeaderCtrl.openCropModal(personHeaderCtrl.header_original, 'header_cropped')" ng-if="personHeaderCtrl.header" ng-cloak></span>
+		<span class="req-1" ng-if="personHeaderCtrl.required['header'] && !personHeaderCtrl.new_header" ng-cloak><span translate="REQUIRED"></span></span>
 		<img class="cover" ngf-thumbnail="personHeaderCtrl.header || '/imgs/default-cover.jpg'" style="height: 411px;">
 		<div class="banner-deviser-content banner-deviser-edit-header-content">
 			<div class="grey-overlay"></div>
@@ -59,15 +59,15 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 					<div class="avatar-buttons-wrapper">
 						<div class="avatar">
 							<img class="cover" ngf-thumbnail="personHeaderCtrl.profile || '/imgs/default-avatar.png'">
-							<span tooltip-placement="top" uib-tooltip="ADD PHOTO" class="button ion-camera edit-avatar-photo-icon ng-class:{'two':personHeaderCtrl.profile_original}" ngf-select ng-model="personHeaderCtrl.new_profile" name="profile" ngf-pattern="'image/*'" ngf-accept="'image/*'"></span>
-							<span tooltip-placement="top" uib-tooltip="CROP PHOTO" class="button ion-crop crop-avatar-photo-icon" ng-if="personHeaderCtrl.profile_original" ng-click="personHeaderCtrl.openCropModal(personHeaderCtrl.profile_original, 'profile_cropped')" ng-cloak></span>
-							<div ng-if="personHeaderCtrl.required['profile'] && !personHeaderCtrl.new_profile" ng-cloak><p class="req-2">REQUIRED</p></div>
+							<span tooltip-placement="top" uib-tooltip="{{'ADD_PHOTO' | translate }}" class="button ion-camera edit-avatar-photo-icon ng-class:{'two':personHeaderCtrl.profile_original}" ngf-select ng-model="personHeaderCtrl.new_profile" name="profile" ngf-pattern="'image/*'" ngf-accept="'image/*'"></span>
+							<span tooltip-placement="top" uib-tooltip="{{'CROP_PHOTO' | translate}}" class="button ion-crop crop-avatar-photo-icon" ng-if="personHeaderCtrl.profile_original" ng-click="personHeaderCtrl.openCropModal(personHeaderCtrl.profile_original, 'profile_cropped')" ng-cloak></span>
+							<div ng-if="personHeaderCtrl.required['profile'] && !personHeaderCtrl.new_profile" ng-cloak><p class="req-2"><span translate="REQUIRED"></span></p></div>
 						</div>
 
 						<!--BUTTONS-->
 						<div class="header-edit-btns">
-							<button class="btn btn-default btn-red btn-header" ng-click="personHeaderCtrl.saveHeader()">Save & exit</button>
-							<button class="btn btn-default btn-grey btn-header" ng-click="personHeaderCtrl.cancelEdit()">Cancel</button>
+							<button class="btn btn-default btn-red btn-header" ng-click="personHeaderCtrl.saveHeader()"><span translate="SAVE_EXIT"></span></button>
+							<button class="btn btn-default btn-grey btn-header" ng-click="personHeaderCtrl.cancelEdit()"><span translate="CANCEL"></span></button>
 						</div>
 					</div>
 				</div>
@@ -75,25 +75,25 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 					<form class="grey-form" name="personHeaderCtrl.form">
 						<!-- names -->
 						<div ng-if="personHeaderCtrl.isDeviser(personHeaderCtrl.person)">
-							<label for="brand_name">Brand name</label>
+							<label for="brand_name"><span translate="BRAND_NAME"></span></label>
 							<input type="text" class="form-control ng-class:{'error-input': personHeaderCtrl.has_error(personHeaderCtrl.form, personHeaderCtrl.form.brand_name)}" ng-model="personHeaderCtrl.person.personal_info.brand_name" placeholder="{{personHeaderCtrl.person.name}}" name="brand_name" required>
 						</div>
 						<div ng-if="personHeaderCtrl.isInfluencer(personHeaderCtrl.person) || personHeaderCtrl.isClient(personHeaderCtrl.person)">
 							<div class="row">
 								<div class="col-md-6">
-								<label for="name">First name</label>
+								<label for="name"><span translate="FIRST_NAME"></span></label>
 								<input type="text" class="form-control ng-class:{'error-input': personHeaderCtrl.has_error(personHeaderCtrl.form, personHeaderCtrl.form.name)}" ng-model="personHeaderCtrl.person.personal_info.name" placeholder="{{personHeaderCtrl.person.name}}" name="name" required>
 								</div>
 								<div class="col-md-6">
-									<label for="last_name">Last name</label>
+									<label for="last_name"><span translate="LAST_NAME"></span></label>
 									<input type="text" class="form-control ng-class:{'error-input': personHeaderCtrl.has_error(personHeaderCtrl.form, personHeaderCtrl.form.last_name)}" ng-model="personHeaderCtrl.person.personal_info.last_name" placeholder="{{personHeaderCtrl.person.last_name}}" name="last_name" required>						
 								</div>
 							</div>
 						</div>
 						<!-- city -->
 						<div>
-							<label for="city">City</label>
-							<input type="text" class="form-control ng-class:{'error-input': personHeaderCtrl.has_error(personHeaderCtrl.form, personHeaderCtrl.form.city)}" ng-model="personHeaderCtrl.city" ng-model-options='{ debounce: 500 }' ng-change="personHeaderCtrl.searchPlace(personHeaderCtrl.city)" placeholder="Your city" name="city" required>
+							<label for="city"><span translate="CITY"></span></label>
+							<input type="text" class="form-control ng-class:{'error-input': personHeaderCtrl.has_error(personHeaderCtrl.form, personHeaderCtrl.form.city)}" ng-model="personHeaderCtrl.city" ng-model-options='{ debounce: 500 }' ng-change="personHeaderCtrl.searchPlace(personHeaderCtrl.city)" translate-attr="{placeholder: 'YOUR_CITY'}" name="city" required>
 						</div>
 						<div ng-if="personHeaderCtrl.showCities" ng-cloak>
 							<ul class="city-selection">
@@ -105,8 +105,8 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 							</ul>
 						</div>
 						<!-- short biography -->
-						<label for="text_short_description">Short description of your brand</label>
-						<span class="small-grey">Translate your description by selecting different languages below</span>
+						<label for="text_short_description"><span translate="SHORT_BRAND_DESCRIPTION"></span></label>
+						<span class="small-grey"><span translate="TRANSLATE_DESCRIPTION"></span></span>
 							<!-- language selector -->
 							<ol class="nya-bs-select about-edit-select header-lang" ng-model="personHeaderCtrl.description_language" ng-cloak>
 								<li nya-bs-option="language in personHeaderCtrl.languages" data-value="language.code" deep-watch="true">
@@ -114,7 +114,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 								</li>
 							</ol>
 						<div class="short-description-input-wrapper">
-							<textarea name="text_short_description" cols="50" rows="10" class="form-control ng-class:{'error-input': personHeaderCtrl.has_error(personHeaderCtrl.form, personHeaderCtrl.form.text_short_description)}" ng-model="personHeaderCtrl.person.text_short_description[personHeaderCtrl.description_language]" placeholder="Please write a short descrpition here." required></textarea>
+							<textarea name="text_short_description" cols="50" rows="10" class="form-control ng-class:{'error-input': personHeaderCtrl.has_error(personHeaderCtrl.form, personHeaderCtrl.form.text_short_description)}" ng-model="personHeaderCtrl.person.text_short_description[personHeaderCtrl.description_language]" translate-attr="{placeholder: 'WRITE_DESCRIPTION_HERE'}" required></textarea>
 						</div>
 						<!-- counter for short biography -->
 						<span class="text-limitation" ng-cloak>

@@ -123,5 +123,15 @@
 	"RESUME_TEXT_DEVISER": "CV o presentación de la marca",
 	"RESUME_TEXT_OTHER": "CV o presentación",
 	"RESUME_SUBTEXT_DEVISER": "¿Tienes más cosas que contar a tus clientes? Añádelo aquí.",
-	"RESUME_SUBTEXT_OTHER": "Más formas de contar tu historia."
+	"RESUME_SUBTEXT_OTHER": "Más formas de contar tu historia.",
+	"EDIT_HEADER": "Editar cabecera",
+	"ADD_WORK": "Añadir trabajo",
+	"REQUIRED": "Obligatorio",
+	"ADD_COVER_PHOTO": "Añadir foto de portada",
+	"CROP_PHOTO": "Cortar foto",
+	"SAVE_EXIT": "Guardar y salir",
+	"SHORT_BRAND_DESCRIPTION": "Descripción breve de tu marca",
+	"TRANSLATE_DESCRIPTION": "Traduce la descripción escogiendo diferentes idiomas",
+	"YOUR_CITY": "Tu ciudad",
+	"WRITE_DESCRIPTION_HERE": "Por favor, escribe una breve descripción"
 }

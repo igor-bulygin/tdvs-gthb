@@ -123,5 +123,15 @@
 	"RESUME_TEXT_DEVISER": "Resume or brand presentation",
 	"RESUME_TEXT_OTHER": "Resume or presentation",
 	"RESUME_SUBTEXT_DEVISER": "Even more things to tell your customers? Upload it here.",
-	"RESUME_SUBTEXT_OTHER": "Even more ways to tell your story"
+	"RESUME_SUBTEXT_OTHER": "Even more ways to tell your story",
+	"EDIT_HEADER": "Edit header",
+	"ADD_WORK": "Add work",
+	"REQUIRED": "Required",
+	"ADD_COVER_PHOTO": "Add cover photo",
+	"CROP_PHOTO": "Crop photo",
+	"SAVE_EXIT": "Save & exit",
+	"SHORT_BRAND_DESCRIPTION": "Short description of your brand",
+	"TRANSLATE_DESCRIPTION": "Translate your description by selecting different languages below",
+	"YOUR_CITY": "Your city",
+	"WRITE_DESCRIPTION_HERE": "Please write a short description here"
 }
