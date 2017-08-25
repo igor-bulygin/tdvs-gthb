@@ -122,3 +122,62 @@
 .responsive-image{
 	width: 100%;
 }
+.images-box{
+	 position: relative;
+	.bottom-top-images{
+		.image-left{
+			width: 49%;
+			float: left;
+			height: 97px;
+			overflow: hidden;
+			position: relative;
+			margin-bottom: 4px;
+			img{
+				position: absolute;
+				left: 0;
+				top: 0;
+				bottom: 0;
+				margin: auto;
+			}
+		}
+		.image-right{
+			width: 49%;
+			float: right;
+			height: 97px;
+			overflow: hidden;
+			position: relative;
+			margin-bottom: 4px;
+			img{
+				position: absolute;
+				left: 0;
+				top: 0;
+				bottom: 0;
+				margin: auto;
+			}
+		}
+	}
+	.bottom-image{
+		width: 100%;
+		float: left;
+		height: 199px;
+		overflow: hidden;
+		position: relative;
+		img{
+			position: absolute;
+			left: 0;
+			top: 0;
+			bottom: 60px;
+			margin: auto;
+		}
+	}
+}
+.boxes-text{
+	font-size: 20px;
+	font-weight: bold;
+	color: $black;
+	display: block;
+	margin-top: 8px;
+}
+.btn-love-box{
+	margin-top: -8px;
+}

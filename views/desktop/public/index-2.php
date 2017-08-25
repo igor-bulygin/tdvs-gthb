@@ -224,34 +224,268 @@ $this->title = 'Todevise / Home';
 			<div class="boxes-container">
 				<div class="row">
 					<div class="col-md-3">
-						<a href="<?= $influencer->getLovedLink()?>">
-								<figure class="showcase">
-									<img src="imgs/img-default.jpg" class="showcase-image">
-									<figcaption>
-									<div class="row">
-										<div class="col-md-6">
-											<span class="title-product-name sm align-left"><?= $influencer->getName() ?></span>
-											<span class="location align-left"><?= $influencer->personalInfoMapping->getCityLabel() ?></span>			
+							<a href="<?= $influencer->getLovedLink()?>">
+									<figure class="showcase">
+										<div class="images-box">
+											<div class="bottom-top-images">
+												<div class="image-left">
+													<img src="imgs/img-default.jpg" class="showcase-image">
+												</div>
+												<div class="image-right">
+													<img src="imgs/img-default.jpg" class="showcase-image">
+												</div>
+											</div>
+											<div class="bottom-image">
+												<img src="imgs/img-default.jpg" class="showcase-image">
+											</div>
 										</div>
-										<div class="col-md-6">
-											<button class="btn btn-icon mt-5"><i class="ion-star"></i><span>Follow</span></button>
-										</div>		
-									</div>
-									</figcaption>
-								</figure>
-							</a>
-					</div>
-					<div class="col-md-3">
-						Oli
-					</div>
-					<div class="col-md-3">
-						Oli
-					</div>
-					<div class="col-md-3">
-						Oli
-					</div>
+										<figcaption>
+										<div class="row">
+											<div class="col-md-6">
+												<span class="boxes-text align-left">Technology</span>			
+											</div>
+											<div class="col-md-6">
+												<button class="btn btn-single-love btn-love-box">
+													<span class="number">18</span>
+													<i class="ion-heart"></i>
+												</button>
+											</div>		
+										</div>
+										</figcaption>
+									</figure>
+								</a>
+						</div>
+						<div class="col-md-3">
+							<a href="<?= $influencer->getLovedLink()?>">
+									<figure class="showcase">
+										<div class="images-box">
+											<div class="bottom-top-images">
+												<div class="image-left">
+													<img src="imgs/product-example.jpg" class="showcase-image">
+												</div>
+												<div class="image-right">
+													<img src="imgs/product-example.jpg" class="showcase-image">
+												</div>
+											</div>
+											<div class="bottom-image">
+												<img src="imgs/product-example.jpg" class="showcase-image">
+											</div>
+										</div>
+										<figcaption>
+										<div class="row">
+											<div class="col-md-6">
+												<span class="boxes-text align-left">Vintage</span>			
+											</div>
+											<div class="col-md-6">
+												<button class="btn btn-single-love btn-love-box">
+													<span class="number">180</span>
+													<i class="ion-heart"></i>
+												</button>
+											</div>		
+										</div>
+										</figcaption>
+									</figure>
+								</a>
+						</div>
+						<div class="col-md-3">
+							<a href="<?= $influencer->getLovedLink()?>">
+									<figure class="showcase">
+										<div class="images-box">
+											<div class="bottom-top-images">
+												<div class="image-left">
+													<img src="imgs/product-example.jpg" class="showcase-image">
+												</div>
+												<div class="image-right">
+													<img src="imgs/product-example.jpg" class="showcase-image">
+												</div>
+											</div>
+											<div class="bottom-image">
+												<img src="imgs/product-example.jpg" class="showcase-image">
+											</div>
+										</div>
+										<figcaption>
+										<div class="row">
+											<div class="col-md-6">
+												<span class="boxes-text align-left">Leather</span>			
+											</div>
+											<div class="col-md-6">
+												<button class="btn btn-single-love btn-love-box">
+													<span class="number">18</span>
+													<i class="ion-heart"></i>
+												</button>
+											</div>		
+										</div>
+										</figcaption>
+									</figure>
+								</a>
+						</div>
+						<div class="col-md-3">
+							<a href="<?= $influencer->getLovedLink()?>">
+									<figure class="showcase">
+										<div class="images-box">
+											<div class="bottom-top-images">
+												<div class="image-left">
+													<img src="imgs/img-default.jpg" class="showcase-image">
+												</div>
+												<div class="image-right">
+													<img src="imgs/product-example.jpg" class="showcase-image">
+												</div>
+											</div>
+											<div class="bottom-image">
+												<img src="imgs/img-default.jpg" class="showcase-image">
+											</div>
+										</div>
+										<figcaption>
+										<div class="row">
+											<div class="col-md-6">
+												<span class="boxes-text align-left">Summer time</span>			
+											</div>
+											<div class="col-md-6">
+												<button class="btn btn-single-love btn-love-box">
+													<span class="number">22</span>
+													<i class="ion-heart"></i>
+												</button>
+											</div>		
+										</div>
+										</figcaption>
+									</figure>
+								</a>
+						</div>
+						<div class="col-md-3">
+							<a href="<?= $influencer->getLovedLink()?>">
+									<figure class="showcase">
+										<div class="images-box">
+											<div class="bottom-top-images">
+												<div class="image-left">
+													<img src="imgs/img-default.jpg" class="showcase-image">
+												</div>
+												<div class="image-right">
+													<img src="imgs/product-example.jpg" class="showcase-image">
+												</div>
+											</div>
+											<div class="bottom-image">
+												<img src="imgs/product-example.jpg" class="showcase-image">
+											</div>
+										</div>
+										<figcaption>
+										<div class="row">
+											<div class="col-md-6">
+												<span class="boxes-text align-left">Summer time</span>			
+											</div>
+											<div class="col-md-6">
+												<button class="btn btn-single-love btn-love-box">
+													<span class="number">22</span>
+													<i class="ion-heart"></i>
+												</button>
+											</div>		
+										</div>
+										</figcaption>
+									</figure>
+								</a>
+						</div>
+						<div class="col-md-3">
+							<a href="<?= $influencer->getLovedLink()?>">
+									<figure class="showcase">
+										<div class="images-box">
+											<div class="bottom-top-images">
+												<div class="image-left">
+													<img src="imgs/img-default.jpg" class="showcase-image">
+												</div>
+												<div class="image-right">
+													<img src="imgs/product-example.jpg" class="showcase-image">
+												</div>
+											</div>
+											<div class="bottom-image">
+												<img src="imgs/product-example.jpg" class="showcase-image">
+											</div>
+										</div>
+										<figcaption>
+										<div class="row">
+											<div class="col-md-6">
+												<span class="boxes-text align-left">Summer time</span>			
+											</div>
+											<div class="col-md-6">
+												<button class="btn btn-single-love btn-love-box">
+													<span class="number">22</span>
+													<i class="ion-heart"></i>
+												</button>
+											</div>		
+										</div>
+										</figcaption>
+									</figure>
+								</a>
+						</div>
+						<div class="col-md-3">
+							<a href="<?= $influencer->getLovedLink()?>">
+									<figure class="showcase">
+										<div class="images-box">
+											<div class="bottom-top-images">
+												<div class="image-left">
+													<img src="imgs/img-default.jpg" class="showcase-image">
+												</div>
+												<div class="image-right">
+													<img src="imgs/product-example.jpg" class="showcase-image">
+												</div>
+											</div>
+											<div class="bottom-image">
+												<img src="imgs/product-example.jpg" class="showcase-image">
+											</div>
+										</div>
+										<figcaption>
+										<div class="row">
+											<div class="col-md-6">
+												<span class="boxes-text align-left">Summer time</span>			
+											</div>
+											<div class="col-md-6">
+												<button class="btn btn-single-love btn-love-box">
+													<span class="number">22</span>
+													<i class="ion-heart"></i>
+												</button>
+											</div>		
+										</div>
+										</figcaption>
+									</figure>
+								</a>
+						</div>
+						<div class="col-md-3">
+							<a href="<?= $influencer->getLovedLink()?>">
+									<figure class="showcase">
+										<div class="images-box">
+											<div class="bottom-top-images">
+												<div class="image-left">
+													<img src="imgs/img-default.jpg" class="showcase-image">
+												</div>
+												<div class="image-right">
+													<img src="imgs/product-example.jpg" class="showcase-image">
+												</div>
+											</div>
+											<div class="bottom-image">
+												<img src="imgs/product-example.jpg" class="showcase-image">
+											</div>
+										</div>
+										<figcaption>
+										<div class="row">
+											<div class="col-md-6">
+												<span class="boxes-text align-left">Summer time</span>			
+											</div>
+											<div class="col-md-6">
+												<button class="btn btn-single-love btn-love-box">
+													<span class="number">22</span>
+													<i class="ion-heart"></i>
+												</button>
+											</div>		
+										</div>
+										</figcaption>
+									</figure>
+								</a>
+						</div>
 				</div>
 			</div>
+		</div>
+</section>
+<section class="showcase-wrapper">
+		<div class="container">
+			<h3 class="title-product-name">Discover what´s next</h3>
 		</div>
 </section>
 <section class="grid-wrapper">

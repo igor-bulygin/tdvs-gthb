@@ -221,6 +221,34 @@
 		}
 	}
 }
+.btn-single-love{
+    @extend %btn;
+    background-color:transparent;
+    color: $black;
+	width: 70px;
+    height: 40px;
+    padding-top: 6px;
+	i{
+	    font-size: 32px;
+		vertical-align: sub;
+		padding: 9px;
+	}
+	.number{
+		color: $black;
+		font-size: 16px;
+		font-weight: normal;
+		letter-spacing: 0.2px;
+	}
+    &:hover{
+        color:$dark_red;
+    }
+	&.active{
+		color: $dark_red;
+		&:hover{
+			color: $dark_red;
+		}
+	}
+}
 .btn-save-box{
     @extend %btn;
     background-color:transparent;
