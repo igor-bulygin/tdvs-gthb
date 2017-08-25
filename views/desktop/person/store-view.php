@@ -40,7 +40,7 @@ $this->params['person_menu_store_categories'] = $categories;
 								<div class="col-md-3 col-sm-3 col-xs-3 pad-cathegory">
 									<a href="<?= $person->getStoreEditLink(['product_state' => \app\models\Product::PRODUCT_STATE_DRAFT])?>">
 										<div class="unpublished-square">
-											<p>Unpublished<br>works</p>
+											<p><span translate="UNPUBLISHED_WORKS_BR"></span></p>
 										</div>
 									</a>
 								</div>
@@ -102,9 +102,8 @@ $this->params['person_menu_store_categories'] = $categories;
 												</p>
 												<p class="price">€ <?= $product->getMinimumPrice() ?></p>
 												<?php if ($person->isPersonEditable()) { ?>
-													<a class="edit-product-icon" href="<?= $product->getEditLink()?>" title="Edit work">
+													<a class="edit-product-icon" href="<?= $product->getEditLink()?>" translate-attr="{title: 'EDIT_WORK'}">
 														<i class="ion-edit"></i>
-
 													</a>
 												<?php } ?>
 											</figcaption>
@@ -125,11 +124,11 @@ $this->params['person_menu_store_categories'] = $categories;
 			<h3 class="modal-title"></h3>
 		</div>
 		<div class="modal-body">
-			<p>Are you sure you want to delete this work?</p>
+			<p><span translate="DELETE_WORK"></span></p>
 		</div>
 		<div class="modal-footer">
-			<button class="btn btn-default btn-green pull-left" ng-click="modalDeleteProductCtrl.close()">Cancel</button>
-			<button class="btn btn-default pull-right" ng-click="modalDeleteProductCtrl.ok()">DELETE</button>
+			<button class="btn btn-default btn-green pull-left" ng-click="modalDeleteProductCtrl.close()"><span translate="CANCEL"></span></button>
+			<button class="btn btn-default pull-right" ng-click="modalDeleteProductCtrl.ok()"><span translate="DELETE"></span></button>
 		</div>
 	</div>
 </script>

@@ -31,15 +31,15 @@ $this->params['person_links_target'] = 'public_view';
 					<div class="empty-wrapper">
 						<?php if ($person->isPersonEditable()) { ?>
 							<div>
-								<a class="red-link-btn stories-exemple-link" href="#" data-toggle="modal" data-target="#exampleModal">See an example</a>
+								<a class="red-link-btn stories-exemple-link" href="#" data-toggle="modal" data-target="#exampleModal"><span translate="SEE_EXAMPLE"></span></a>
 							</div>
 							<img class="newspaper-stories-icon" src="/imgs/no-stories.jpg">
-							<p class="no-story-text">"Stories" is your blog inside Todevise.</p>
-							<p class="no-story-text-bold">Express yourself, start writing your first one now.</p>
-							<a class="btn btn-green btn-create-story" href="<?=$person->getStoryCreateLink()?>">WRITE STORY</a>
+							<p class="no-story-text"><span translate="STORIES_IS"></span></p>
+							<p class="no-story-text-bold"><span translate="STORIES_EXPRESS"></span></p>
+							<a class="btn btn-green btn-create-story" href="<?=$person->getStoryCreateLink()?>"><span translate="WRITE_STORY"></span></a>
 						<?php } else { ?>
 							<img class="sad-face" src="/imgs/no-stories.jpg">
-							<p class="no-video-text"><?=$person->getName()?> hasn't written any stories yet.</p>
+							<p class="no-video-text"><?=$person->getName()?> <span translate="NO_STORIES_YET"></span></p>
 						<?php } ?>
 					</div>
 
@@ -48,7 +48,7 @@ $this->params['person_links_target'] = 'public_view';
 					<div class="content-store">
 						<div class="store-grid">
 							<div class="title-wrapper-stories title-wrapper title-wrapper-boxes">
-								<span class="title">Stories by <?=$person->getName()?></span>
+								<span class="title"><span translate="STORIES_BY"></span> <?=$person->getName()?></span>
 							</div>
 							<div class="row">
 								<?php if ($person->isPersonEditable()) { ?>
@@ -59,7 +59,7 @@ $this->params['person_links_target'] = 'public_view';
 													<div class="plus-add">
 														<span>+</span>
 													</div>
-													<div class="text">Write a story</div>
+													<div class="text"><span translate="WRITE_A_STORY"></span></div>
 												</div>
 											</div>
 										</a>

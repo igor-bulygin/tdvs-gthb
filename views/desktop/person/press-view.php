@@ -29,15 +29,15 @@ $this->params['person_links_target'] = 'public_view';
 				<?php if (count($press) == 0) { ?>
 					<div class="empty-wrapper">
 						<?php if ($person->isPersonEditable()) { ?>
-							<div><a href="<?= $person->getPressEditLink()?>" class="red-link-btn">Add / remove photos</a></div>
+							<div><a href="<?= $person->getPressEditLink()?>" class="red-link-btn"><span translate="ADD_REMOVE_PHOTOS"></span></a></div>
 						<?php } ?>
 						<img class="sad-face" src="/imgs/sad-face.svg">
-						<p class="no-video-text">You don't have any press images!</p>
+						<p class="no-video-text"><span translate="NO_PRESS"></span></p>
 					</div>
 				<?php } else { ?>
 					<div class="empty-wrapper">
 						<?php if ($person->isPersonEditable()) { ?>
-							<div><a href="<?= $person->getPressEditLink()?>" class="red-link-btn">Add / remove photos</a></div>
+							<div><a href="<?= $person->getPressEditLink()?>" class="red-link-btn"><span translate="ADD_REMOVE_PHOTOS"></span></a></div>
 						<?php } ?>
 						<div class="mesonry-row press-3">
 							<?php foreach ($press as $index=>$item) { ?>

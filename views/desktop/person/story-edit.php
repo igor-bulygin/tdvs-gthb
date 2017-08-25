@@ -17,7 +17,7 @@ $this->registerJs("var story = ".Json::encode($story), yii\web\View::POS_HEAD, '
 <div class="store">
 	<div class="container" ng-controller="editStoryCtrl as editStoryCtrl">
 		<div class="stories-wrapper">
-			<h5 class="stories-title">Edit Story</h5>
+			<h5 class="stories-title"><span translate="EDIT_STORY"></span></h5>
 			<story-main-title story="editStoryCtrl.story" languages="editStoryCtrl.languages"></story-main-title>
 			<story-main-media story="editStoryCtrl.story"></story-main-media>
 			<div ui-sortable ng-model="editStoryCtrl.story.components">
@@ -34,7 +34,7 @@ $this->registerJs("var story = ".Json::encode($story), yii\web\View::POS_HEAD, '
 			<story-category-component story="editStoryCtrl.story" categories="editStoryCtrl.categories"></story-category-component>
 			<story-tag-component story="editStoryCtrl.story" languages="editStoryCtrl.languages"></story-tag-component>
 			<div class="text-center" style="display: block; width: 100%; float: left; margin:50px 0 100px;">
-				<button class="btn btn-default btn-green" ng-click="editStoryCtrl.save(editStoryCtrl.story)">Save story</button>
+				<button class="btn btn-default btn-green" ng-click="editStoryCtrl.save(editStoryCtrl.story)"><span translate="SAVE_STORY"></span></button>
 			</div>
 		</div>
 	</div>
