@@ -115,5 +115,13 @@
 	"DELETE_STORY_RECOVER": "You will not be able to recover it.",
 	"PUBLISHED_ON": "Published on",
 	"SAVE_STORY": "Save story",
-	"ADD_REMOVE_VIDEOS": "Add / remove videos"
+	"ADD_REMOVE_VIDEOS": "Add / remove videos",
+	"CHOOSE_FIELD_WORK": "Choose your field(s) of work",
+	"CHOOSE_FIELD_EXPERTISE": "Choose your field(s) of expertise",
+	"BIOGRAPHY_TEXT_DEVISER": "Brand statement / biography",
+	"BIOGRAPHY_TEXT_OTHER": "Tell us more about yourself",
+	"RESUME_TEXT_DEVISER": "Resume or brand presentation",
+	"RESUME_TEXT_OTHER": "Resume or presentation",
+	"RESUME_SUBTEXT_DEVISER": "Even more things to tell your customers? Upload it here.",
+	"RESUME_SUBTEXT_OTHER": "Even more ways to tell your story"
 }

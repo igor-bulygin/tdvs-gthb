@@ -28,16 +28,16 @@
 			function setEditTexts(type) {
 				switch(type) {
 					case 2: 
-						vm.categories_text = "Choose your field(s) of work";
-						vm.biography_text = "Brand statement / biography";
-						vm.resume_text = "Resume or brand presentation";
-						vm.resume_sub_text = "Even more things to tell your customers? Upload it here."
+						vm.categories_text = "CHOOSE_FIELD_WORK";
+						vm.biography_text = "BIOGRAPHY_TEXT_DEVISER";
+						vm.resume_text = "RESUME_TEXT_DEVISER";
+						vm.resume_sub_text = "RESUME_SUBTEXT_DEVISER";
 						break;
 					default:
-						vm.categories_text = "Choose your field(s) of expertise";
-						vm.biography_text = "Tell us more about yourself";
-						vm.resume_text = "Resume or presentation";
-						vm.resume_sub_text = "Even more ways to tell your story."
+						vm.categories_text = "CHOOSE_FIELD_EXPERTISE";
+						vm.biography_text = "BIOGRAPHY_TEXT_OTHER";
+						vm.resume_text = "RESUME_TEXT_OTHER";
+						vm.resume_sub_text = "RESUME_SUBTEXT_OTHER";
 						break;
 				}
 			}
