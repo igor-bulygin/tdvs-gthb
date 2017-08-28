@@ -382,6 +382,8 @@ class Box extends CActiveRecord
 	{
 		$return = [];
 		$products = $this->getProducts();
+
+		/*
 		$sizes = [
 			// one product
 			1 => [
@@ -406,15 +408,16 @@ class Box extends CActiveRecord
 		} else {
 			$sizesSelected = $sizes[1];
 		}
+		*/
 
 		$i = 0;
 		foreach ($products as $product) {
 			$item = $product->getPreviewSerialized();
 
-			if ($i < count($sizesSelected)) {
-				$size = $sizesSelected[$i];
-				$item['box_photo'] = Utils::url_scheme() . Utils::thumborize($product->getMainImage())->resize($size[0], $size[1]);
-			}
+//			if ($i < count($sizesSelected)) {
+//				$size = $sizesSelected[$i];
+				$item['box_photo'] = Utils::url_scheme() . Utils::thumborize($product->getMainImage())->resize(350, 344);
+//			}
 			$return[] = $item;
 			$i++;
 		}

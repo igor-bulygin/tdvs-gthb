@@ -224,6 +224,43 @@ $this->title = Yii::t('app/public', 'Todevise');
 			<h3 class="title-product-name">Discover boxes</h3>
 			<div class="boxes-container">
 				<div class="row">
+					<?php foreach ($boxes as $box) {
+						$products = $box->getProductsPreview(); ?>
+						<div class="col-md-3">
+							<a href="<?= $box->getViewLink()?>">
+								<figure class="showcase">
+									<div class="images-box">
+										<div class="bottom-top-images">
+											<div class="image-left">
+												<img src="<?=isset($products[0]) ? $products[0]['main_photo'] : 'imgs/img-default.jpg'?>" class="showcase-image">
+											</div>
+											<div class="image-right">
+												<img src="<?=isset($products[1]) ? $products[1]['main_photo'] : 'imgs/img-default.jpg'?>" class="showcase-image">
+											</div>
+										</div>
+										<div class="bottom-image">
+											<img src="<?=isset($products[2]) ? $products[2]['main_photo'] : 'imgs/img-default.jpg'?>" class="showcase-image">
+										</div>
+									</div>
+									<figcaption>
+										<div class="row">
+											<div class="col-md-6">
+												<span class="boxes-text align-left"><?=$box->name?></span>
+											</div>
+											<div class="col-md-6">
+												<button class="btn btn-single-love btn-love-box">
+													<span class="number"><?=count($products)?></span>
+													<i class="ion-heart"></i>
+												</button>
+											</div>
+										</div>
+									</figcaption>
+								</figure>
+							</a>
+						</div>
+					<?php } ?>
+
+					<!--
 					<div class="col-md-3">
 							<a href="<?= $influencer->getLovedLink()?>">
 									<figure class="showcase">
@@ -480,6 +517,7 @@ $this->title = Yii::t('app/public', 'Todevise');
 									</figure>
 								</a>
 						</div>
+						-->
 				</div>
 			</div>
 		</div>
