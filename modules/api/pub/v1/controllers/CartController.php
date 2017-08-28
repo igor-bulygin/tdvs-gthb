@@ -312,10 +312,11 @@ class CartController extends AppPublicController
 						'customer' => $customer->id,
 						'currency' => 'eur',
 						'amount' => $stripeAmount,
-						"description" => "Order Nº " . $order->short_id,
+						"description" => "Order Nº " . $order->short_id."/".$pack->short_id,
 						"metadata" => [
 							"order_id" => $order->short_id,
-							"order" => json_encode($order),
+							"pack_id" => $pack->short_id,
+							"person_id" => $person->short_id,
 						],
 					]);
 
@@ -340,6 +341,8 @@ class CartController extends AppPublicController
 							'application_fee' => $todeviseFee,
 							"metadata" => [
 								"order_id" => $order->short_id,
+								"pack_id" => $pack->short_id,
+								"person_id" => $person->short_id,
 							],
 						],
 						[
