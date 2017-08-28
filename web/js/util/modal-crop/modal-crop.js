@@ -90,8 +90,10 @@
 					else {
 						data.type = 'unknown-product-photo';
 					}
+					break;
 				case "story-photos":
 					data.type= "story-photos";
+					break;
 				default:
 					break;
 			}

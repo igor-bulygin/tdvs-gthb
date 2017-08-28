@@ -4,7 +4,7 @@
 	function controller($scope) {
 		var vm = this;
 		vm.addMoreItems = addMoreItems;
-		var show_items = 6;
+		var show_items = 31;
 
 		function addMoreItems() {
 			var last = vm.results_infinite.length;
