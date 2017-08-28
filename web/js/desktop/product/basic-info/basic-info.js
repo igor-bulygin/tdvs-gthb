@@ -5,7 +5,7 @@
 		productEvents, $timeout, dragndropService) {
 		var vm = this;
 		vm.has_error = UtilService.has_error;
-		vm.name_language = 'en-US';
+		vm.name_language = vm.tags_language = vm.description_language = 'es-ES';
 		vm.categories_helper = [];
 		vm.images = [];
 		vm.addCategory = addCategory;
@@ -16,8 +16,6 @@
 		vm.deleteImage = deleteImage;
 		vm.tempFiles=[];
 		vm.stripHTMLTags = UtilService.stripHTMLTags;
-		vm.description_language = 'en-US';
-		vm.tags_language = 'en-US';
 		vm.tags = {};
 		vm.addTag = addTag;
 		vm.removeTag = removeTag;
