@@ -1,17 +1,15 @@
 <?php
-use yii\web\View;
-use app\models\Tag;
-use yii\helpers\Url;
-use app\models\Lang;
-use yii\widgets\Pjax;
-use yii\helpers\Json;
-use app\helpers\Utils;
-use app\models\Returns;
-use app\models\Warranty;
-use app\models\TagOption;
-use yii\widgets\ListView;
-use app\helpers\Currency;
+
 use app\assets\desktop\pub\ProductAsset;
+use app\helpers\Currency;
+use app\models\Returns;
+use app\models\Tag;
+use app\models\TagOption;
+use app\models\Warranty;
+use yii\helpers\Json;
+use yii\web\View;
+use yii\widgets\ListView;
+use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 

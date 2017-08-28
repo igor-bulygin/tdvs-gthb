@@ -1,13 +1,8 @@
 <?php
-use yii\web\View;
-use yii\helpers\Url;
-use app\models\Lang;
-use yii\helpers\Html;
-use yii\helpers\Json;
-use yii\widgets\Pjax;
-use app\helpers\Utils;
-use yii\widgets\ListView;
+
 use app\assets\desktop\pub\TermsAsset;
+use yii\helpers\Json;
+use yii\web\View;
 
 
 /* @var $this yii\web\View */

@@ -1,4 +1,5 @@
 <?php
+
 use app\assets\desktop\pub\PublicCommonAsset;
 use app\models\Invitation;
 use yii\helpers\Json;
@@ -8,7 +9,8 @@ PublicCommonAsset::register($this);
 
 /** @var Invitation $invitation */
 
-$this->title = 'Create a Deviser account - Todevise';
+$this->title = Yii::t('app/public', 'Create a deviser account - Todevise');
+
 $this->registerJs("var invitation = ".Json::encode($invitation), yii\web\View::POS_HEAD, 'invitation-var-script');
 $this->registerJs("var type = 3", yii\web\View::POS_HEAD, 'person-type-var-script');
 
@@ -71,7 +73,7 @@ $this->registerJs("var type = 3", yii\web\View::POS_HEAD, 'person-type-var-scrip
 	<?php } elseif ($invitation->isUsed()) { ?>
 	<div class="invitation-messages">
 		<p>You have created a Deviser account with this invitation. Login to access to your account.</p>
-		<a href="<?= Url::to(["/site/login"]) ?>" class="btn btn-red">Login</a>
+		<a href="<?= Url::to(["/public/login"]) ?>" class="btn btn-red">Login</a>
 	</div>
 	<?php } else { ?>
 	<div class="invitation-messages">

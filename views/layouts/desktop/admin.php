@@ -1,4 +1,5 @@
 <?php
+
 use app\helpers\Utils;
 use app\models\Lang;
 use kartik\sidenav\SideNav;
@@ -403,7 +404,7 @@ use yii\widgets\Breadcrumbs;
 									'options' => ['class' => 'navbar-nav pull-right navopts funiv fs-upper fs0-857'],
 									'items' => [
 										Yii::$app->user->isGuest ?
-											['label' => 'Login', 'url' => ['/site/login']] :
+											['label' => 'Login', 'url' => ['/public/login']] :
 											['label' => 'Logout (' . Yii::$app->user->identity->personal_info["name"] . ')',
 												'url' => ['/global/logout'],
 												'linkOptions' => ['data-method' => 'post']

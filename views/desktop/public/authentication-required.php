@@ -1,4 +1,5 @@
 <?php
+
 use app\assets\desktop\pub\PublicCommonAsset;
 
 PublicCommonAsset::register($this);

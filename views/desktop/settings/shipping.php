@@ -1,4 +1,5 @@
 <?php
+
 use app\assets\desktop\settings\GlobalAsset;
 use app\components\SettingsHeader;
 use app\models\Person;
@@ -8,7 +9,8 @@ GlobalAsset::register($this);
 
 /** @var Person $person */
 
-$this->title = 'Shipping - ' . $person->getName() . ' - Todevise';
+$this->title = Yii::t('app/public', 'Shipping settings - Todevise');
+
 $this->params['person'] = $person;
 $this->params['settings_menu_active_option'] = 'shipping';
 $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD, 'person-var-script');

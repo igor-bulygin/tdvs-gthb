@@ -263,8 +263,8 @@ $config = [
 				'stripe/connect-back' => 'stripe/connect-back',
 
 				//Login
-				'login' => 'site/login',
-				'authentication-required' => 'site/authentication-required',
+				'login' => 'public/login',
+				'authentication-required' => 'public/authentication-required',
 
 				//Discover
 				'discover-devisers' => 'discover/devisers',
