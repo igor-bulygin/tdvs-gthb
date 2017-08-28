@@ -11,7 +11,7 @@ return [
 
 	'sort' => false,
 
-	'removeUnused' => false,
+	'removeUnused' => true,
 
 	'overwrite' => true,
 
