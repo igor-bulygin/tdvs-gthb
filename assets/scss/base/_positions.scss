@@ -3,6 +3,10 @@
 // ==========================================================================
 .auto-center{
 	margin: 0 auto;
+	display: block;
+}
+.text-center{
+	text-align: center;
 }
 .relativize-me{
 	position: relative;

@@ -18,48 +18,43 @@ $footerMode = 'collapsed';
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-3">
-				<div class="title">Categories</div>
-				<ul class="footer-items split">
-					<?php foreach($categories as $category) { ?>
-						<li>
-							<a href="<?= Url::to(["public/category-b", "slug" => $category->slug, 'category_id' => $category->short_id])?>"><?=$category->name?></a>
-						</li>
-					<?php } ?>
-				</ul>
-			</div>
-			<div class="col-sm-3">
 				<div class="title">Help &amp; Contact</div>
-				<ul class="footer-items">
+				<ul class="footer-items mt-10">
+					<li>
+						<span>-</span>
+					</li>
 					<li>
 						<a href="#">Contact us</a>
 					</li>
 					<li>
-						<a href="#">Returns &amp; Warranties</a>
+						<a href="#">FAQs</a>
+					</li>
+					<li>
+						<span>-</span>
 					</li>
 					<li>
 						<a href="<?= Url::to(["public/about-us"]) ?>">About us</a>
 					</li>
 				</ul>
 			</div>
-			<div class="col-sm-3">
-				<div class="title">Join Todevise</div>
-				<a href="<?= Url::to(["public/become-deviser"]) ?>" class="btn btn-red">Become a deviser</a>
+			<div class="col-sm-6">
+				<div class="title text-center">Do you want to become a deviser?</div>
+				<a href="<?= Url::to(["public/become-deviser"]) ?>" class="btn btn-medium btn-red mt-10 auto-center">Become a deviser</a>
+				<div class="title text-center mt-40">Do you want to become an influencer?</div>
+				<a href="#" class="btn btn-medium btn-transparent mt-10 auto-center">Become a influencer</a>
 			</div>
 			<div class="col-sm-3">
-				<div class="title">Stay connected</div>
-				<div class="footer-text">Subscribe to our newsletter</div>
-				<div class="input-group input-newsletter">
-					<input type="text" class="form-control" placeholder="Email">
+				<div class="title">Subscribe to our newsletter</div>
+				<div class="input-group input-newsletter mt-30">
+					<input type="text" class="form-control" placeholder="E-mail">
 					<span class="input-group-btn">
-                                <button class="btn btn-default btn-send" type="button">
-                                    <span class="ion-forward"></span>
-                                </button>
-                            </span>
+						<button class="btn-red send-btn-sm" type="button">
+							<img src="/imgs/plane.svg" data-pin-nopin="true">
+						</button>
+					</span>
 				</div>
-				<div class="footer-text social">
-					Follow us
-				</div>
-				<ul class="social-items">
+				<div class="title mt-40">Stay connected</div>
+				<ul class="social-items mt-10">
 					<li>
 						<a href="#">
 							<i class="fa fa-facebook" aria-hidden="true"></i>
@@ -83,23 +78,23 @@ $footerMode = 'collapsed';
 				</ul>
 			</div>
 		</div>
-		<div class="copyright">
-			<div>Todevise Copyright 2016</div>
+		<div class="copyright mt-40">
 			<div>
 				<ul>
 					<li>
 						<a href="#">Terms &amp; Conditions</a>
 					</li>
-					<li>|</li>
+					<li>·</li>
 					<li>
 						<a href="#">Privacy policy</a>
 					</li>
-					<li>|</li>
+					<li>·</li>
 					<li>
 						<a href="#">Cookies policy</a>
 					</li>
 				</ul>
 			</div>
+			<div>&copy; <span class="hightlighted">2017 Todevise</span> all rights reserved</div>
 		</div>
 	</div>
 </footer>

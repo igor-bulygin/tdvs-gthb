@@ -106,6 +106,27 @@
         font-size: 42px;
     }
 }
+.send-btn-sm{
+    width: 30px;
+    height: 30px;
+    display: block;
+    padding: 5px 0 0 0;
+    @include transform(rotate(90deg));
+    @include border-radius(90px,90px,90px,90px);
+    cursor: pointer;
+	img{
+		-ms-transform: rotate(270deg); /* IE 9 */
+		-webkit-transform: rotate(270deg); /* Chrome, Safari, Opera */
+		transform: rotate(270deg);
+		margin: 0 0 10px;
+		height: 15px;
+    	width: 15px;
+	}
+    i{
+        color: $white;
+        font-size: 42px;
+    }
+}
 .big-btn{
 	@extend %btn; 
 	width: 460px;
@@ -361,4 +382,7 @@
 			}                
 		}
 	}
+}
+.full-size-btn{
+	width:100%!important;
 }

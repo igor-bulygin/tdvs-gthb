@@ -2,20 +2,9 @@
 // Footer
 // ==========================================================================
 footer{
-    @include size(100%,270px);
-    max-height: 400px;
-    background: url('/imgs/footer-bg.png') center $black;
-    @include bg-size(cover);
     color:$white;
-    padding:15px 20px 20px;
-    position: fixed;
-    bottom: -215px;
-    transition: bottom 0.4s ease-in-out;
-    cursor:pointer;
-    z-index: 999999;
-    &:hover{
-        bottom:0;
-    }
+	background-color: $black;
+    padding: 40px 20px;
     &.untoggled{
         bottom: auto;
         max-height: none;
@@ -38,9 +27,9 @@ footer{
     }
     .title{
         text-transform: uppercase;
-        letter-spacing: 0.5px;
-        font-size: 13px;
-        margin:5px 0 20px;
+		letter-spacing: 0.4px;
+		font-size: 16px;
+		font-weight: bold;
         @media (max-width: 768px){
                 text-align:center;
                 margin: 0;
@@ -61,15 +50,16 @@ footer{
             }
         li{
             list-style:none;
-            margin: 0 0 10px;
             @media (max-width: 768px){
                 display: inline-block;
                 margin: 0 5px 10px;
             }
             a{
-                color: $light_grey;
-                font-family: $font-family--secondary;
+                color: #c7c7c7;
                 cursor: pointer;
+				text-transform: uppercase;
+				font-size: 16px;
+    			letter-spacing: 0.4px;
                 &:hover{
                     text-decoration: none;
                     color: $white;
@@ -95,7 +85,6 @@ footer{
         }
     }
     .copyright{
-        font-family: $font-family--secondary;
         text-align: center;
         ul{
             padding: 0;
@@ -105,14 +94,21 @@ footer{
                 display: inline-block;
                 list-style: none;
                 a{    
-                    color: $white;
+                    color: #c7c7c7;
                     text-decoration: none;
+					text-transform: uppercase;
+					font-size: 14px;
+					letter-spacing: 0.4px;
                 }
             }
         }
         div{
             margin: 10px 0;
         }
+		.hightlighted{
+			text-transform: uppercase;
+			font-weight: bold;
+		}
     }
     .social-items{
         padding:0;
@@ -131,18 +127,18 @@ footer{
             a{
                 color: $black;
                 background-color: $white;
-                width: 28px;
-                height: 28px;
-                display: block;
-                padding: 2px 0 0 9px;
+                width: 39px;
+				height: 39px;
+				display: block;
+				padding: 6px 0 0 14px;
                 @include border-radius(28px,28px,28px,28px);
                 font-size: 18px;
                 &.twitter{
-                    padding: 2px 0 0 7px;
+                    padding: 7px 0 0 12px;
                 }
                 &.google-plus{
                     font-size: 16px;
-                    padding: 2px 0 0 5px;
+                    padding: 7px 0 0 10px;
                 }
                 &:hover{
                     background-color: $red;
@@ -156,24 +152,25 @@ footer{
     }
     .input-newsletter{
         input{
-            border-color: $light_grey;
-            color: $dark_grey;
-            background-color: $black;
-            @include border-radius(25px,0,0,25px);
-            &:focus{
-                border-right: 0;
-            }
+            border-color: $white;
+            color: $black;
+            background-color: $white;
+            @include border-radius(6px,6px,6px,6px);
+			height: 40px;
+			max-width: 225px;
+			-webkit-box-shadow: none;
+    		box-shadow: none;
             @media (max-width: 768px){
                 padding:0 10px;
             }
         }
         .btn-send{
-            color: $white;
-            background-color: $black;
+            color: $black;
+            background-color: $white;
             font-size: 23px;
             padding: 0 10px;
             border-left: 0;
-            @include border-radius(0,25px,25px,0);
+            @include border-radius(6px,6px,6px,6px);
             &:hover, &:active{
                 color: $red;
                 border-color: $light_grey;

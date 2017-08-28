@@ -435,7 +435,11 @@ a, a:hover, a:focus {
   background-color: transparent !important; }
 
 .auto-center {
-  margin: 0 auto; }
+  margin: 0 auto;
+  display: block; }
+
+.text-center {
+  text-align: center; }
 
 .relativize-me {
   position: relative; }
@@ -524,7 +528,7 @@ a, a:hover, a:focus {
   font-size: 14px;
   letter-spacing: 0.3px;
   height: 36px;
-  padding: 10px 20px;
+  padding: 8px 20px;
   border: none;
   text-align: center;
   cursor: pointer; }
@@ -636,6 +640,32 @@ a, a:hover, a:focus {
     height: 30px;
     width: 30px; }
   .send-btn i {
+    color: #ffffff;
+    font-size: 42px; }
+
+.send-btn-sm {
+  width: 30px;
+  height: 30px;
+  display: block;
+  padding: 5px 0 0 0;
+  transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  border-radius: 90px 90px 90px 90px !important;
+  -webkit-border-radius: 90px 90px 90px 90px !important;
+  -moz-border-radius: 90px 90px 90px 90px !important;
+  cursor: pointer; }
+  .send-btn-sm img {
+    -ms-transform: rotate(270deg);
+    /* IE 9 */
+    -webkit-transform: rotate(270deg);
+    /* Chrome, Safari, Opera */
+    transform: rotate(270deg);
+    margin: 0 0 10px;
+    height: 15px;
+    width: 15px; }
+  .send-btn-sm i {
     color: #ffffff;
     font-size: 42px; }
 
@@ -854,6 +884,9 @@ a, a:hover, a:focus {
     .social-items li a.google-plus {
       font-size: 12px;
       padding: 5px 0 0 4px; }
+
+.full-size-btn {
+  width: 100% !important; }
 
 .products-menu ul {
   margin: 20px 0 40px;
@@ -7300,24 +7333,9 @@ input:checked + .slider:before {
   font-family: "Univers Condensed Light", "Helvetica Neue", Helvetica, Arial, sans-serif; }
 
 footer {
-  width: 100%;
-  height: 270px;
-  max-height: 400px;
-  background: url("/imgs/footer-bg.png") center #1C1919;
-  -ms-background-size: cover;
-  -o-background-size: cover;
-  -moz-background-size: cover;
-  -webkit-background-size: cover;
-  background-size: cover;
   color: #ffffff;
-  padding: 15px 20px 20px;
-  position: fixed;
-  bottom: -215px;
-  transition: bottom 0.4s ease-in-out;
-  cursor: pointer;
-  z-index: 999999; }
-  footer:hover {
-    bottom: 0; }
+  background-color: #1C1919;
+  padding: 40px 20px; }
   footer.untoggled {
     bottom: auto;
     max-height: none;
@@ -7337,9 +7355,9 @@ footer {
         bottom: auto; } }
   footer .title {
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    font-size: 13px;
-    margin: 5px 0 20px; }
+    letter-spacing: 0.4px;
+    font-size: 16px;
+    font-weight: bold; }
     @media (max-width: 768px) {
       footer .title {
         text-align: center;
@@ -7357,16 +7375,17 @@ footer {
         text-align: center;
         margin: 5px 0 10px 0; } }
     footer .footer-items li {
-      list-style: none;
-      margin: 0 0 10px; }
+      list-style: none; }
       @media (max-width: 768px) {
         footer .footer-items li {
           display: inline-block;
           margin: 0 5px 10px; } }
       footer .footer-items li a {
-        color: #bfbfbf;
-        font-family: "Univers Condensed Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
-        cursor: pointer; }
+        color: #c7c7c7;
+        cursor: pointer;
+        text-transform: uppercase;
+        font-size: 16px;
+        letter-spacing: 0.4px; }
         footer .footer-items li a:hover {
           text-decoration: none;
           color: #ffffff;
@@ -7395,7 +7414,6 @@ footer {
         footer .footer-text.social {
           text-align: center; } }
   footer .copyright {
-    font-family: "Univers Condensed Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
     text-align: center; }
     footer .copyright ul {
       padding: 0;
@@ -7405,10 +7423,16 @@ footer {
         display: inline-block;
         list-style: none; }
         footer .copyright ul li a {
-          color: #ffffff;
-          text-decoration: none; }
+          color: #c7c7c7;
+          text-decoration: none;
+          text-transform: uppercase;
+          font-size: 14px;
+          letter-spacing: 0.4px; }
     footer .copyright div {
       margin: 10px 0; }
+    footer .copyright .hightlighted {
+      text-transform: uppercase;
+      font-weight: bold; }
   footer .social-items {
     padding: 0;
     margin: 0; }
@@ -7426,19 +7450,19 @@ footer {
       footer .social-items li a {
         color: #1C1919;
         background-color: #ffffff;
-        width: 28px;
-        height: 28px;
+        width: 39px;
+        height: 39px;
         display: block;
-        padding: 2px 0 0 9px;
+        padding: 6px 0 0 14px;
         border-radius: 28px 28px 28px 28px !important;
         -webkit-border-radius: 28px 28px 28px 28px !important;
         -moz-border-radius: 28px 28px 28px 28px !important;
         font-size: 18px; }
         footer .social-items li a.twitter {
-          padding: 2px 0 0 7px; }
+          padding: 7px 0 0 12px; }
         footer .social-items li a.google-plus {
           font-size: 16px;
-          padding: 2px 0 0 5px; }
+          padding: 7px 0 0 10px; }
         footer .social-items li a:hover {
           background-color: #F7284B;
           color: #ffffff;
@@ -7455,26 +7479,28 @@ footer {
           -webkit-transition-timing-function: ease-out;
           transition-timing-function: ease-out; }
   footer .input-newsletter input {
-    border-color: #bfbfbf;
-    color: #939393;
-    background-color: #1C1919;
-    border-radius: 25px 0 0 25px !important;
-    -webkit-border-radius: 25px 0 0 25px !important;
-    -moz-border-radius: 25px 0 0 25px !important; }
-    footer .input-newsletter input:focus {
-      border-right: 0; }
+    border-color: #ffffff;
+    color: #1C1919;
+    background-color: #ffffff;
+    border-radius: 6px 6px 6px 6px !important;
+    -webkit-border-radius: 6px 6px 6px 6px !important;
+    -moz-border-radius: 6px 6px 6px 6px !important;
+    height: 40px;
+    max-width: 225px;
+    -webkit-box-shadow: none;
+    box-shadow: none; }
     @media (max-width: 768px) {
       footer .input-newsletter input {
         padding: 0 10px; } }
   footer .input-newsletter .btn-send {
-    color: #ffffff;
-    background-color: #1C1919;
+    color: #1C1919;
+    background-color: #ffffff;
     font-size: 23px;
     padding: 0 10px;
     border-left: 0;
-    border-radius: 0 25px 25px 0 !important;
-    -webkit-border-radius: 0 25px 25px 0 !important;
-    -moz-border-radius: 0 25px 25px 0 !important; }
+    border-radius: 6px 6px 6px 6px !important;
+    -webkit-border-radius: 6px 6px 6px 6px !important;
+    -moz-border-radius: 6px 6px 6px 6px !important; }
     footer .input-newsletter .btn-send:hover, footer .input-newsletter .btn-send:active {
       color: #F7284B;
       border-color: #bfbfbf;
