@@ -1,4 +1,5 @@
 <?php
+
 use app\models\Category;
 use yii\helpers\Url;
 
@@ -55,11 +56,6 @@ app\components\assets\PublicHeader2Asset::register($this);
 					<li class="log">
 						<a href="<?=Url::to('/login')?>" translate="LOGIN"></a>
 					</li>
-					<li class="cart-item">
-						<a href="<?=Url::to(['/cart'])?>">
-							<i class="ion-ios-cart active"></i>
-						</a>
-					</li>
 				<?php } else {
 					$person = Yii::$app->user->identity; /* @var \app\models\Person $person */?>
 						<li class="dropdown log">
@@ -88,6 +84,11 @@ app\components\assets\PublicHeader2Asset::register($this);
 							</div>
 						</li>
 				<?php } ?>
+				<li class="cart-item">
+					<a href="<?=Url::to(['/cart'])?>">
+						<i class="ion-ios-cart active"></i>
+					</a>
+				</li>
 			</ul>
 		</div><!-- /.navbar-collapse -->
 		</div>
