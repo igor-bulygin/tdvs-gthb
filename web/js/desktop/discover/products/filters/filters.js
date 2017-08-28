@@ -9,6 +9,7 @@
 		vm.orderFilter={value:"", name : "ORDER_BY"};
 		vm.filters = {};
 		vm.search=search;
+		vm.searchParam = angular.copy(searchParam);
 		init();
 
 		function init() {
@@ -41,8 +42,8 @@
 			if (!angular.isUndefined(vm.orderFilter) && !angular.isUndefined(vm.orderFilter.value)) {
 				params = Object.assign(params, {order_type: vm.orderFilter.value});
 			}
-			if (!angular.isUndefined($location.search().q)) {
-				params.q=$location.search().q;
+			if (!angular.isUndefined(vm.searchParam)) {
+				params.q=vm.searchParam;
 			}
 			Object.keys(vm.filters).map(function(filter_type) {
 				var new_filter = []
