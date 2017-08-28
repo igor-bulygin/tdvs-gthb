@@ -73,6 +73,7 @@
 		controller: controller,
 		controllerAs: 'exploreProductsFiltersCtrl',
 		bindings: {
+			searching:'=',
 			results: '='
 		}
 	}

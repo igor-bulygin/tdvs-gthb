@@ -22,7 +22,7 @@ $this->registerJs("var searchParam = '".$text."'", yii\web\View::POS_HEAD, 'prod
 	<div class="container store">
 		<div>
 			<div class="col-md-12">
-				<explore-products-filters results="exploreProductsCtrl.results"></explore-products-filters>
+				<explore-products-filters searching="exploreProductsCtrl.searching" results="exploreProductsCtrl.results"></explore-products-filters>
 				<div>
 					<div ng-if="exploreProductsCtrl.searching" ng-cloak>
 						<p class="text-center" translate="SEARCHING"></p>
@@ -31,7 +31,7 @@ $this->registerJs("var searchParam = '".$text."'", yii\web\View::POS_HEAD, 'prod
 						<p class="text-center" translate="NO_PRODUCTS_FOUND"></p>
 					</div>
 					<div>
-						<explore-products-results ng-if="exploreProductsCtrl.results.items.length != 0" ng-cloak results="exploreProductsCtrl.results" ng-if="exploreProductsCtrl.results.items.length > 0" ng-cloak></explore-products-results>
+						<explore-products-results ng-if="exploreProductsCtrl.results.items.length != 0 && !exploreProductsCtrl.searching" ng-cloak results="exploreProductsCtrl.results" ng-if="exploreProductsCtrl.results.items.length > 0" ng-cloak></explore-products-results>
 					</div>
 				</div>
 			</div>
