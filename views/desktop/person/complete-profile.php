@@ -1,11 +1,16 @@
 <?php
 
 /* @var app\models\Person $person */
+
 use app\assets\desktop\deviser\GlobalAsset;
 
 GlobalAsset::register($this);
 
-$this->title = 'Complete your profile - Todevise';
+$this->title = Yii::t('app/public',
+	'Complete your profile! {person_name} - Todevise',
+	['person_name' => $person->getName()]
+);
+
 $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\View::POS_HEAD, 'complete-profile-var-script');
 
 ?>

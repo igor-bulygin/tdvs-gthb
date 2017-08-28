@@ -1,10 +1,10 @@
 <?php
+
 use app\assets\desktop\pub\PublicCommonAsset;
 
 PublicCommonAsset::register($this);
 
-$this->title = 'Create an account - Todevise';
-
+$this->title = Yii::t('app/public', 'Signup - Todevise');
 ?>
 
 <div class="create-deviser-account-wrapper">

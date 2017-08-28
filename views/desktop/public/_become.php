@@ -1,15 +1,8 @@
 <?php
-use yii\web\View;
-use yii\helpers\Url;
-use app\models\Lang;
-use yii\helpers\Html;
-use yii\widgets\Pjax;
-use yii\helpers\Json;
-use app\helpers\Utils;
-use yii\widgets\ListView;
+
 use app\assets\desktop\pub\BecomeAsset;
+use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use kartik\widgets\DepDrop;
 
 /* @var $this yii\web\View */
 
@@ -20,7 +13,8 @@ $this->params['breadcrumbs'][] = [
 
 BecomeAsset::register($this);
 
-$this->title = 'Todevise / Become a Deviser';
+$this->title = Yii::t('app/public', 'Become a deviser - Todevise');
+
 $lang = Yii::$app->language;
 
 ?>
@@ -32,8 +26,8 @@ $lang = Yii::$app->language;
 					<div class="row-one-right flex flex-align-center flex-justify-center">
 						<div class="flex flex-column">
 							<div><img src="/imgs/logo_white.png" alt="Todevise" /></div>
-							<div class="fs4-714 funiv_thin fs-upper fc-fff flex-justify-center">Express</div>
-							<div class="fs4-714 funiv_thin fs-upper fc-fff flex-justify-center">Yourself</div>
+							<div class="fs4-714 funiv_thin fs-upper fc-fff flex-justify-center"><?=Yii::t('app/public', 'Express')?></div>
+							<div class="fs4-714 funiv_thin fs-upper fc-fff flex-justify-center"><?=Yii::t('app/public', 'Yourself')?></div>
 							<?= Html::a(Yii::t("app/public", 'Request invitation'), "#invitationform", [
 						'class' => "btn white funiv_bold fs1 fc-f7284b fs-upper"
 					]); ?>
@@ -48,23 +42,23 @@ $lang = Yii::$app->language;
 				<div class="row-three flex flex-row flex-justify-center">
 					<div class="row-three-left"></div>
 					<div class="row-three-right flex flex-column">
-						<span class="fs3-643 funiv_thin fs-upper fc-fff">Grown your brand</span>
+						<span class="fs3-643 funiv_thin fs-upper fc-fff"><?=Yii::t('app/public', 'Grown your brand')?></span>
 						<div class="grown-text fc-fff fs1 funiv">
-							<div class="par">Reach international customers who understand your philosophy and appreciate your work.</div>
-							<div class="par">Get marketing guidance and SEO/SEM optimization by or team of experts.</div>
-							<div class="par">Potential onsite and social media promotion of your work</div>
+							<div class="par"><?=Yii::t('app/public', 'Reach international customers who understand your philosophy and appreciate your work.')?></div>
+							<div class="par"><?=Yii::t('app/public', 'Get marketing guidance and SEO/SEM optimization by or team of experts.')?></div>
+							<div class="par"><?=Yii::t('app/public', 'Potential onsite and social media promotion of your work')?></div>
 						</div>
 					</div>
 				</div>
 				<div class="row-four flex flex-justify-center flex-align-center">
 					<div class="row-four-right">
-						<div class="text fpf fs1-286 fc-fff"><span>Having your outlet store on Todevise opens your business to a world of opportunities. Reach new customers, upload products with ease, manage and track you sales efficiently.</span></div>
+						<div class="text fpf fs1-286 fc-fff"><span><?=Yii::t('app/public', 'Having your outlet store on Todevise opens your business to a world of opportunities. Reach new customers, upload products with ease, manage and track you sales efficiently.')?></span></div>
 					</div>
 				</div>
 			</div>
 			<div class="row-five flex flex-column flex-justify-center flex-align-center">
-				<span class="fs3-643 funiv_thin fs-upper fc-fff">Request invitation</span>
-				<span class="funiv fs0-857 whyinvitation fc-fff center">We constantly strive for excellence, and for this reason an invitation is needed to register as a deviser</span>
+				<span class="fs3-643 funiv_thin fs-upper fc-fff"><?=Yii::t('app/public', 'Request invitation')?></span>
+				<span class="funiv fs0-857 whyinvitation fc-fff center"><?=Yii::t('app/public', 'We constantly strive for excellence, and for this reason an invitation is needed to register as a deviser')?></span>
 				<div class="formcontent" ng-controller="becomeCtrl as becomeCtrl">
 					<?php $form = ActiveForm::begin([
 						'validateOnChange' => false,

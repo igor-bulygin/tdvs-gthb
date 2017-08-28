@@ -1,4 +1,5 @@
 <?php
+
 use app\assets\desktop\deviser\IndexStoryAsset;
 use app\components\PersonHeader;
 use app\components\PersonMenu;
@@ -9,8 +10,10 @@ IndexStoryAsset::register($this);
 
 /** @var Person $person */
 /** @var \app\models\Story[] $stories */
-
-$this->title = 'Stories by ' . $person->getName() . ' - Todevise';
+$this->title = Yii::t('app/public',
+	'Stories {person_name} - Todevise',
+	['person_name' => $person->getName()]
+);
 $this->params['person'] = $person;
 $this->params['person_menu_active_option'] = 'stories';
 $this->params['person_links_target'] = 'public_view';

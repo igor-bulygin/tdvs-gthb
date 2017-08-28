@@ -937,34 +937,6 @@ class Product extends CActiveRecord {
 	 *
 	 * @return array
 	 */
-	public function getReferences()
-	{
-		$references = [];
-		foreach ($this->price_stock as $stock) {
-			$options = [];
-			foreach ($stock["options"] as $key => $values) {
-				if (isset($values[0])) {
-					// remove the array
-					$options[$key] = $values[0];
-				}
-			}
-			$references[] = [
-				"reference_id" => "temp_random_id_" . uniqid(), // TODO retrieve from database
-				"options" => $options,
-				"stock" => $stock["stock"],
-				"price" => $stock["price"],
-			];
-		}
-		return $references;
-	}
-
-	/**
-	 * Build an structure with all references to be handled by client side.
-	 * By reference, we understand a combination of a product, and each options combinations where
-	 * the product has stock, for example, "t-shirt = X + color = blue + size = xxl"
-	 *
-	 * @return array
-	 */
 	public function getProductOptions()
 	{
 		$options = [];

@@ -1,4 +1,5 @@
 <?php
+
 use app\assets\desktop\deviser\GlobalAsset;
 use app\components\PersonHeader;
 use app\components\PersonMenu;
@@ -14,7 +15,22 @@ GlobalAsset::register($this);
 /** @var Category $category */
 /** @var Category $selectedCategory */
 
-$this->title = $person->getName() . ' - Todevise';
+if ($selectedSubcategory && $selectedSubcategory->short_id) { // check if is a real category
+	$this->title = Yii::t('app/public',
+		'{category_name} works by {person_name} - Todevise',
+		['category_name' => $selectedSubcategory->getName(), 'person_name' => $person->getName()]
+	);
+} elseif ($selectedCategory) {
+	$this->title = Yii::t('app/public',
+		'{category_name} works by {person_name} - Todevise',
+		['category_name' => $selectedCategory->getName(), 'person_name' => $person->getName()]
+	);
+} else {
+	$this->title = Yii::t('app/public',
+		'Works by {person_name} - Todevise',
+		['person_name' => $person->getName()]
+	);
+}
 
 // use params to share data between views :(
 $this->params['person'] = $person;
@@ -69,12 +85,10 @@ $this->params['person_menu_store_categories'] = $categories;
 						</div>
 						<nav class="products-menu">
 							<ul>
-								<?php if (count($selectedCategory->getDeviserSubcategories()) > 1) { ?>
 								<?php foreach ($selectedCategory->getDeviserSubcategories() as $i => $subcategory) { ?>
 									<li>
 										<a href="<?= $person->getStoreLink(['category' => $selectedCategory->short_id, 'subcategory' => $subcategory->short_id])?>" class="<?= ($selectedSubcategory->short_id==$subcategory->short_id) ? 'active' : '' ?>"><?= Utils::l($subcategory["name"]) ?></a>
 									</li>
-								<?php } ?>
 								<?php } ?>
 							</ul>
 						</nav>

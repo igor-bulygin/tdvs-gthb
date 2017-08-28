@@ -88,7 +88,7 @@
 							<div class="col-md-3" ngf-no-file-drop>
 								<input type="file" name="file" ngf-select="productBasicInfoCtrl.uploadPhoto($files, $invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="productBasicInfoCtrl.isDropAvailable" ngf-multiple="true">
 							</div>
-							<ul class="item draggable-list" ui-sortable ng-model="productBasicInfoCtrl.images">
+							<ul class="item draggable-list" ui-sortable ng-model="productBasicInfoCtrl.images" ng-if="productBasicInfoCtrl.images.length > 0">
 								<li class="col-md-3 image-basic-info-edit" ng-repeat="image in productBasicInfoCtrl.images">
 									<img class="grid-image" ng-src="{{image.url}}" draggable="false">
 									<div class="crop ion-android-star-outline" ng-if="!image.filename.main_product_photo" ng-click="productBasicInfoCtrl.openCropModal(image.url, $index)"></div>

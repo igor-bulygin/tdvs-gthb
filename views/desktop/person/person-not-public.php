@@ -1,4 +1,5 @@
 <?php
+
 use app\assets\desktop\deviser\GlobalAsset;
 use app\components\PersonHeader;
 use app\helpers\Utils;
@@ -8,8 +9,10 @@ GlobalAsset::register($this);
 
 /** @var Person $person */
 /** @var \app\models\Product[] $products */
-
-$this->title = 'Almost done! ' . $person->getName() . ' - Todevise';
+$this->title = Yii::t('app/public',
+	'Almost done! {person_name} - Todevise',
+	['person_name' => $person->getName()]
+);
 $this->params['person'] = $person;
 
 $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\View::POS_HEAD, 'person-not-public-var-script');

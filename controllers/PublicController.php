@@ -12,6 +12,7 @@ use app\models\ContactForm;
 use app\models\Country;
 use app\models\Faq;
 use app\models\Invitation;
+use app\models\Login;
 use app\models\OldProduct;
 use app\models\Person;
 use app\models\Product;
@@ -34,11 +35,28 @@ class PublicController extends CController
 		return [
 			'access' => [
 				'class' => AccessControl::className(),
-				'only' => [
-					'checkout',
-				],
+				'only' => ['login', 'authentication-required', 'logout', 'checkout',],
 				'rules' => [
 					[
+						'actions' => ['login', 'authentication-required'],
+						'allow' => true,
+						'roles' => ['?'],
+					],
+					[
+						'actions' => ['login', 'authentication-required'],
+						'allow' => false,
+						'roles' => ['@'],
+						'denyCallback' => function ($rule, $action) {
+							return $this->goHome();
+						}
+					],
+					[
+						'actions' => ['logout'],
+						'allow' => true,
+						'roles' => ['@'],
+					],
+					[
+						'actions' => ['checkout'],
 						'allow' => true,
 						'roles' => ['@'],
 					],
@@ -235,7 +253,7 @@ class PublicController extends CController
 			$oneFaq['title'] = Utils::l($oneFaq['title']);
 		}
 
-		return $this->render("faq", [
+		return $this->render("_faq", [
 			'test' => 'this is a test text for faq',
 			'groupOfFaqs' => $groupOfFaqs
 		]);
@@ -258,7 +276,7 @@ class PublicController extends CController
 			$oneTerm['title'] = Utils::l($oneTerm['title']);
 		}
 
-		return $this->render("terms", [
+		return $this->render("_terms", [
 			'test' => 'this is a test text for term',
 			'groupOfTerms' => $groupOfTerms
 		]);
@@ -292,7 +310,7 @@ class PublicController extends CController
 			//return $res;
 			//return $this->redirect(['view', 'id' => $model->code]);
 		} else {
-			return $this->render("contact", [
+			return $this->render("_contact", [
 				'test' => 'normal',
 				'model' => $model,
 				'dropdown_members' => $dropdown_members,
@@ -346,7 +364,7 @@ class PublicController extends CController
 			//return $this->redirect(['view', 'id' => $model->code]);
 		}
 
-		return $this->render("become", ['model' => $model, "showCheckEmail" => $showCheckEmail]);
+		return $this->render("_become", ['model' => $model, "showCheckEmail" => $showCheckEmail]);
 	}
 
 	/**
@@ -628,7 +646,7 @@ class PublicController extends CController
 			]);
 		}
 
-		return $this->render("index", [
+		return $this->render("_index", [
 				'banners' => $banners,
 				'devisers' => $devisers,
 				'categories' => $categories
@@ -678,7 +696,7 @@ class PublicController extends CController
 				],
 		]);
 
-		return $this->render("category", [
+		return $this->render("_category", [
 				'products' => $products
 		]);
 	}
@@ -767,7 +785,7 @@ class PublicController extends CController
 				->asArray()
 				->all();
 
-		return $this->render("product", [
+		return $this->render("_product", [
 				'product' => $product,
 				'other_works' => $other_works,
 				'deviser' => $deviser,
@@ -818,7 +836,7 @@ class PublicController extends CController
 				],
 		]);
 
-		return $this->render("deviser", [
+		return $this->render("_deviser", [
 				'deviser' => $deviser,
 				'works' => $works
 		]);
@@ -844,7 +862,7 @@ class PublicController extends CController
 		}
 
 		//Show cart view
-		return $this->render("cart-old", [
+		return $this->render("_cart", [
 				'test' => 'this is a test text'
 		]);
 	}
@@ -855,5 +873,44 @@ class PublicController extends CController
 			$country->path = Country::WORLD_WIDE.'/'.$country->continent.'/'.$country->country_code;
 			$country->save(true, ['path']);
 		}
+	}
+
+	public function actionLogin()
+	{
+		$model = new Login();
+		$invalidLogin = false;
+		if ($model->load(Yii::$app->request->post())) {
+			if ($model->login()) {
+				return $this->goBack();
+			}
+			$invalidLogin = true;
+		}
+		$this->layout = '/desktop/public-2.php';
+		return $this->render("login-2", [
+			'invalidLogin' => $invalidLogin
+		]);
+	}
+
+	public function actionAuthenticationRequired()
+	{
+		$model = new Login();
+		$invalidLogin = false;
+		if ($model->load(Yii::$app->request->post())) {
+			if ($model->login()) {
+				return $this->goBack();
+			}
+			$invalidLogin = true;
+		}
+		$this->layout = '/desktop/public-2.php';
+		return $this->render("authentication-required", [
+			'invalidLogin' => $invalidLogin
+		]);
+	}
+
+	public function actionLogout()
+	{
+		Yii::$app->user->logout();
+
+		return $this->goHome();
 	}
 }

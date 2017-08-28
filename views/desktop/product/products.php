@@ -2,7 +2,14 @@
 
 /* @var \app\models\Product[] $products */
 /* @var \app\models\Product[][] $moreWork */
-$this->title = 'Works - Todevise';
+if ($text) {
+	$this->title = Yii::t('app/public',
+		'Works - {search_param} - Todevise',
+		['search_param' => $text]
+	);
+} else {
+	$this->title = Yii::t('app/public', 'Works - Todevise');
+}
 
 /* \app\assets\desktop\pub\ProductsAsset::register($this); */
 \app\assets\desktop\discover\GlobalAsset::register($this);

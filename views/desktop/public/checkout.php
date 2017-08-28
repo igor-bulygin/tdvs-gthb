@@ -1,13 +1,14 @@
 <?php
+
 use app\assets\desktop\cart\GlobalAsset;
 use yii\helpers\Json;
-use app\models\Person;
 
 /* @var $this yii\web\View */
 
 GlobalAsset::register($this);
 
-$this->title = 'Todevise / Checkout';
+$this->title = Yii::t('app/public', 'Checkout - Todevise');
+
 $this->params['person'] = $person;
 $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 'person-var-script');
 ?>

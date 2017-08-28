@@ -72,7 +72,6 @@ $config = [
 					'fileMap' => [
 						'app' => 'app.php',
 						'app/admin' => 'app/admin.php',
-						'app/deviser' => 'app/deviser.php',
 						'app/public' => 'app/public.php'
 					]
 				]
@@ -264,8 +263,8 @@ $config = [
 				'stripe/connect-back' => 'stripe/connect-back',
 
 				//Login
-				'login' => 'site/login',
-				'authentication-required' => 'site/authentication-required',
+				'login' => 'public/login',
+				'authentication-required' => 'public/authentication-required',
 
 				//Discover
 				'discover-devisers' => 'discover/devisers',

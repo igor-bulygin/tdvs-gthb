@@ -1,17 +1,22 @@
 <?php
+
 use app\assets\desktop\cart\GlobalAsset;
 use yii\helpers\Json;
-use app\models\Person;
 
 /* @var $this yii\web\View */
 
 GlobalAsset::register($this);
+
+$this->title = Yii::t('app/public',
+	'Order {order_id} completed - Todevise',
+	['order_id' => $order_id]
+);
+
 $this->params['person'] = $person;
 $this->params['order_id'] = $order_id;
 $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 'person-var-script');
 $this->registerJs("var order_id= ".Json::encode($order_id), yii\web\View::POS_HEAD, 'order-id-var-script');
 
-$this->title = 'Todevise / Your purchase is complete';
 ?>
 
 <div class="store" ng-controller="orderSuccessCtrl as orderSuccessCtrl">

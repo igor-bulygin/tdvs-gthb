@@ -1,8 +1,8 @@
 <?php
 
-$this->title = 'Stories - Todevise';
-
 \app\assets\desktop\discover\GlobalAsset::register($this);
+
+$this->title = Yii::t('app/public','Stories - Todevise');
 
 ?>
 <div class="our-devisers-wrapper" ng-controller="exploreStoriesCtrl as exploreStoriesCtrl">
