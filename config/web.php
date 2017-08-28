@@ -205,18 +205,20 @@ $config = [
 					'suffix' => ''
 				],
 
-				// Public routing
-				'/' => 'public/index',
-				'/index-new' => 'public/index',
-				'/category/<slug:[^/.]*?>/<category_id:[^/.]*?>' => 'public/category-b',
-
 				// temporary routes to fix database problems
 				'/works/fix-products' => 'product/fix-products',
 				'/works/fix-products-with-no-deviser' => 'product/fix-products-with-no-deviser',
 				'/works/more-works' => 'product/more-works',
-				'/person/update-passwords' => 'person/update-passwords',
 
+
+				// Public routing
+				'/' => 'public/index',
+				'/index-new' => 'public/index',
+
+				'/works/<slug:[^/.]*?>/<category_id:[^/.]*?>' => 'public/category-b',
 				'/works' => 'product/index',
+
+				'/person/update-passwords' => 'person/update-passwords',
 
 				//Person
 				'/<person_type:(deviser|influencer)>/<slug:[^/.]*?>/<person_id:[^/.]*?>' => 'person/about',

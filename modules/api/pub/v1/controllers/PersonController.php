@@ -90,15 +90,15 @@ class PersonController extends AppPublicController
 				$invitation = Invitation::findOneSerialized($invitation_id);
 
 				if (!$invitation) {
-					throw new NotFoundHttpException(Yii::t("app/api", "Invitation not found"));
+					throw new NotFoundHttpException("Invitation not found");
 				}
 
 				if (!$invitation->canUse()) {
-					throw new BadRequestHttpException(Yii::t("app/api", "Invalid invitation"));
+					throw new BadRequestHttpException("Invalid invitation");
 				}
 
 				if ($invitation->email != Yii::$app->request->post('email')) {
-					throw new BadRequestHttpException(Yii::t("app/api", "The invitation is for another email account"));
+					throw new BadRequestHttpException("The invitation is for another email account");
 				}
 				$account_state = Person::ACCOUNT_STATE_DRAFT;
 				break;

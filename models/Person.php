@@ -1084,11 +1084,20 @@ class Person extends CActiveRecord implements IdentityInterface
 		$level2Categories = [];
 
 		// TODO could be optimized with an aggregation ??
-		$products = Product::find()->select([
-			'short_id',
-			'categories',
-			'media'
-		])->where(['deviser_id' => $this->short_id])->all();
+		$products = Product::find()
+			->select(
+				[
+					'short_id',
+					'categories',
+					'media'
+				])
+			->where(
+				[
+					'deviser_id' => $this->short_id,
+					'product_state' => Product::PRODUCT_STATE_ACTIVE,
+				])
+			->all();
+
 		$detailCategoriesIds = [];
 		/** @var Product $product */
 		foreach ($products as $product) {
@@ -1096,13 +1105,22 @@ class Person extends CActiveRecord implements IdentityInterface
 		}
 
 		// now, get the models for those categories
-		$detailCategories = Category::find()->select([
-			'short_id',
-			'name',
-			'slug',
-			'path'
-		])->where(['short_id' => $detailCategoriesIds])->all();
+		$detailCategories = Category::find()
+			->select(
+				[
+					'short_id',
+					'name',
+					'slug',
+					'path',
+				])
+			->where(
+				[
+					'short_id' => $detailCategoriesIds,
+				])
+			->all();
+
 		$level2Ids = [];
+
 		/** @var Category $category */
 		foreach ($detailCategories as $category) {
 			// remove first slash, and find id of second level category
@@ -1130,11 +1148,16 @@ class Person extends CActiveRecord implements IdentityInterface
 			$category = Category::findOne(['short_id' => $id]);
 			if ($category) {
 
+				$categoryProduct = Product::findOne([
+					'deviser_id' => $this->short_id,
+					'categories' => $category->getShortIds(),
+					'product_state' => Product::PRODUCT_STATE_ACTIVE,
+				]);
+				if (!$categoryProduct) {
+					throw new \yii\db\Exception("Cannot find a product of ".$this->getName()." in the category ".$category->getName());
+				}
 				// assign one product of the deviser, related with this category
-				$category->setDeviserProduct(Product::findOne([
-					"deviser_id" => $this->short_id,
-					"categories" => $category->getShortIds()
-				]));
+				$category->setDeviserProduct($categoryProduct);
 				$category->setDeviserSubcategories(Category::find()->where(['short_id' => $subIds])->all());
 
 				// if there are more than one subcategory, add "all" subcategory

@@ -1,0 +1,19 @@
+{
+	"CREATE_BOX": "Crear caja",
+	"NAME_BOX": "Nombre de la caja",
+	"DESCRIPTION": "Descripción",
+	"CREATE": "Crear",
+	"DELETE_BOX_PERMANENTLY": "¿Estás seguro de querer borrar permanentemente esta caja?",
+	"NOT_ABLE_RECOVER": "Si la borras no se podrá recuperar.",
+	"DELETE": "Borrar",
+	"CANCEL": "Cancelar",
+	"EDIT_BOX": "Editar caja",
+	"APPLY_CHANGES": "Aplicar cambios",
+	"SAVE_IN_BOX": "Guardar en una caja",
+	"TOTAL_BOX": "({{total}} en total)",
+	"SEARCH": "Buscar",
+	"CREATE_NEW_BOX": "Crear caja nueva",
+	"NO_BOXES_1": "Aún no tienes ninguna caja creada.",
+	"NO_BOXES_2": "Crea una pulsando el botón <span>Crear caja nueva</span>.",
+	"SELECT_BOX": "Seleccionar caja"
+}

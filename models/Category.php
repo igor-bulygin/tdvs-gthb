@@ -395,6 +395,15 @@ class Category extends CActiveRecord {
 			return null;
 		}
 
+		$ancestors = explode('/', rtrim(ltrim($this->path, '/'), '/'));
+		if ($ancestors) {
+			$parentId = $ancestors[count($ancestors) - 1];
+			$parent = static::findOne(['short_id' => $parentId]);
+			if ($parent) {
+				return $parent;
+			}
+		}
+
 		return null;
 	}
 
@@ -404,7 +413,7 @@ class Category extends CActiveRecord {
 			// Escape slashes
 			$path = str_replace('/', '\/', $path);
 			return Category::find()
-				->andWhere(["REGEX", "path", "/$path\w{5}\//"])
+				->andWhere(["REGEX", "path", "/$path/"])
 				->all();
 		}
 
@@ -649,7 +658,7 @@ class Category extends CActiveRecord {
 	public function getSlugForUrl()
 	{
 		$parent = $this->getParentCategory();
-		$prefix = $parent ? $parent->getSlugForUrl().'/' : '';
+		$prefix = $parent ? $parent->getSlugForUrl().'-' : '';
 
 		return $prefix.Slugger::slugify($this->getName());
 	}
