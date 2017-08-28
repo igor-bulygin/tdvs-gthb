@@ -65,9 +65,7 @@ $this->params['person_menu_store_categories'] = $categories;
 								<div class="col-md-3 col-sm-3 col-xs-3 pad-cathegory">
 									<a href="<?= $person->getStoreLink(['category' => $category->short_id])?>">
 										<figure class="cathegory">
-											<?php /*
 											<img class="<?= ($selectedCategory->short_id==$category->short_id) ? 'active' : '' ?>" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($category->getDeviserProduct()->getMainImage())->resize(240, 175) ?>">
-											*/?>
 											<figcaption>
 												<span class="name">
 													<?= Utils::l($category->name) ?>
