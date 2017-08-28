@@ -483,12 +483,7 @@ $this->title = 'Todevise / Home';
 			</div>
 		</div>
 </section>
-<section class="showcase-wrapper">
-		<div class="container">
-			<h3 class="title-product-name">Discover what´s next</h3>
-		</div>
-</section>
-<section class="grid-wrapper">
+<!--<section class="grid-wrapper">
 	<div class="container">
 		<div class="section-title">
 			Highlighted Works
@@ -542,9 +537,10 @@ $this->title = 'Todevise / Home';
 		</div>
 	</div>
 </section>
+-->
 <!-- /GRID -->
 
-
+<!--
 <?php if ($boxes) { ?>
 	<section class="grid-wrapper">
 		<div class="container">
@@ -628,15 +624,13 @@ $this->title = 'Todevise / Home';
 		</div>
 	</section>
 <?php } ?>
-
+-->
 
 
 <!-- GRID -->
 <section class="grid-wrapper">
 	<div class="container">
-		<div class="section-title">
-			Highlighted Works
-		</div>
+		<h3 class="title-product-name">Discover what´s next</h3>
 		<div>
 			<?php foreach ($moreWork as $worksGroup) { ?>
 			<?php foreach ($worksGroup["twelve"] as $i => $work) { ?>
