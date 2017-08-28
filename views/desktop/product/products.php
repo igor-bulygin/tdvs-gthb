@@ -7,6 +7,8 @@ $this->title = 'Works - Todevise';
 /* \app\assets\desktop\pub\ProductsAsset::register($this); */
 \app\assets\desktop\discover\GlobalAsset::register($this);
 
+$this->registerJs("var searchParam = '".$text."'", yii\web\View::POS_HEAD, 'products-search-script');
+
 ?>
 
 <div ng-controller="exploreProductsCtrl as exploreProductsCtrl">
