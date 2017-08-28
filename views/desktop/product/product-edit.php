@@ -1,11 +1,18 @@
 <?php
+
 use app\assets\desktop\product\GlobalAsset;
 use app\assets\desktop\pub\Product2Asset;
 use yii\helpers\Json;
 
 GlobalAsset::register($this);
 
-$this->title = $person->getName() . ' - Todevise';
+/** @var \app\models\Person $person */
+/** @var \app\models\Product $product */
+
+$this->title = Yii::t('app/public',
+	'Edit {product_name} by {person_name} - Todevise',
+	['product_name' => $product->name, 'person_name' => $person->getName()]
+);
 $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD, 'person-var-script');
 $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEAD, 'product-var-script');
 
@@ -40,7 +47,8 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 				</div>
 			</div>
 			<div class="text-center" ng-if="editProductCtrl.saving">
-				<img src="/imgs/loading.gif">
+				<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+				<span class="sr-only">Loading...</span>
 			</div>
 		</div>
 	</div>

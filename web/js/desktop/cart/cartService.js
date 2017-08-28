@@ -2,31 +2,16 @@
 	"use strict";
 
 	function service(tagDataService, UtilService) {
-		this.parseDevisersFromProducts = parseDevisersFromProducts;
 		this.parseTags = parseTags;
-
-		function parseDevisersFromProducts(cart) {
-			var devisers = [];
-			cart.products.forEach(function(product) {
-				var isDeviserInArray = false;
-				for(var i = 0; i < devisers.length; i++) {
-					if(devisers[i].deviser_id === product.deviser_id)
-						isDeviserInArray = true;
-				}
-				if(!isDeviserInArray) {
-					devisers.push({
-						deviser_id: product.deviser_id,
-						deviser_name: product.deviser_name
-					});
-				}
-			})
-			return devisers;
-		}
+		this.setTotalItems = setTotalItems;
+		this.setTotalAmount = setTotalAmount;
+		this.setProductsAmount = setProductsAmount;
 
 		function parseTags(cart){
 
 			function onGetTagsSuccess(data) {
-					cart.products.forEach(function(product) {
+				cart.packs.forEach(function(pack) {
+					pack.products.forEach(function(product) {
 						product.tags = [];
 						for(var key in product.options) {
 							for(var i = 0; i < data.items.length; i++) {
@@ -34,13 +19,16 @@
 									values: []
 								}
 								if(key === 'size') {
-									obj.name = 'Size'
+									obj.name = 'Size';
+									obj.stock_and_price = true;
 									obj.values.push(product.options[key]);
 									product.tags.push(obj);
 									break;
 								}
 								else if(key === data.items[i].id) {
 									obj.name = data.items[i].name;
+									if(data.items[i].stock_and_price)
+										obj.stock_and_price = data.items[i].stock_and_price;
 									if(data.items[i].name==='Size') {
 										for(var j = 0; j < product.options[key].length; j++){
 											var str = product.options[key][j]['value'] + ' ' + product.options[key][j]['metric_unit'];
@@ -58,9 +46,41 @@
 							}
 						}
 					})
+				})
 			}
 
 			tagDataService.getTags(null, onGetTagsSuccess, UtilService.onError);
+		}
+
+		function setTotalItems(cart) {
+			var total = 0;
+			if(angular.isArray(cart.packs) && cart.packs.length > 0) {
+				cart.packs.forEach(function(pack) {
+					if(angular.isArray(pack.products) && pack.products.length > 0) {
+						pack.products.forEach(function (product) {
+							total += product.quantity;
+						})
+						
+					}
+				})
+			}
+			cart.totalItems = total;
+		}
+
+		function setTotalAmount(cart) {
+			var total = 0;
+			cart.packs.forEach(function(pack) {
+				total += pack.pack_price + pack.shipping_price;
+			})
+			cart.subtotal = total;
+		}
+
+		function setProductsAmount(cart) {
+			var total = 0;
+			cart.packs.forEach(function(pack) {
+				total += pack.pack_price;
+			});
+			cart.subtotal = total;
 		}
 	}
 

@@ -3,6 +3,7 @@ namespace app\models;
 
 use app\helpers\CActiveRecord;
 use app\helpers\Utils;
+use EasySlugger\Slugger;
 use Yii;
 use yii\helpers\Url;
 use yii\mongodb\ActiveQuery;
@@ -17,6 +18,21 @@ use yii\mongodb\ActiveQuery;
  * @property array header_products
  */
 class Category extends CActiveRecord {
+
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $serializeFields = [];
+
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $retrieveExtraFields = [];
+
 
 	/** @var Product */
 	private $deviserProduct;
@@ -371,6 +387,17 @@ class Category extends CActiveRecord {
 		return static::findByPath($this->path . $this->short_id . "/", $recursive);
 	}
 
+	/**
+	 * @return Category|null
+	 */
+	public function getParentCategory() {
+		if ($this->path == '/') {
+			return null;
+		}
+
+		return null;
+	}
+
 	public static function findByPath($path, $recursive = false) {
 
 		if ($recursive) {
@@ -443,9 +470,11 @@ class Category extends CActiveRecord {
 			$this["name"] = [];
 		}
 
-		if($this->slug == null) {
-			$this["slug"] = [];
+		$slugs = [];
+		foreach ($this->name as $lang => $text) {
+			$slugs[$lang] = Slugger::slugify($text);
 		}
+		$this->setAttribute("slug", $slugs);
 
 		if (empty($this->header_position)) {
 			$this->header_position = null;
@@ -606,11 +635,30 @@ class Category extends CActiveRecord {
 		return $slug;
 	}
 
+	public function getName()
+	{
+		if (is_array($this->name)) {
+			$name = Utils::l($this->name);
+		} else {
+			$name = $this->name;
+		}
+
+		return $name;
+	}
+
+	public function getSlugForUrl()
+	{
+		$parent = $this->getParentCategory();
+		$prefix = $parent ? $parent->getSlugForUrl().'/' : '';
+
+		return $prefix.Slugger::slugify($this->getName());
+	}
+
 	public function getMainLink()
 	{
 		return Url::to([
 			"public/category-b",
-			"slug" => $this->getSlug(),
+			"slug" => $this->getSlugForUrl(),
 			'category_id' => $this->short_id
 		]);
 	}

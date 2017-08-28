@@ -5,7 +5,7 @@
 		productEvents, $timeout, dragndropService) {
 		var vm = this;
 		vm.has_error = UtilService.has_error;
-		vm.name_language = 'en-US';
+		vm.name_language = vm.tags_language = vm.description_language = 'es-ES';
 		vm.categories_helper = [];
 		vm.images = [];
 		vm.addCategory = addCategory;
@@ -16,8 +16,6 @@
 		vm.deleteImage = deleteImage;
 		vm.tempFiles=[];
 		vm.stripHTMLTags = UtilService.stripHTMLTags;
-		vm.description_language = 'en-US';
-		vm.tags_language = 'en-US';
 		vm.tags = {};
 		vm.addTag = addTag;
 		vm.removeTag = removeTag;
@@ -314,6 +312,10 @@
 
 		//events
 		$scope.$on(productEvents.requiredErrors, function(event, args){
+			vm.warrantyRequired = false;
+			vm.warrantyNumberRequired = false;
+			vm.returnsNumberRequired = false;
+			vm.returnsRequired = false;
 			//set name error
 			if(args.required.indexOf('name') > -1) {
 				vm.nameRequired = true;
@@ -337,6 +339,20 @@
 			vm.categorySelectionRequired = false;
 			if(args.required.indexOf('emptyCategory') > -1) {
 				vm.categorySelectionRequired = true;
+			}
+			//set warranty errors
+			if(args.required.indexOf('warranty') > -1) {
+				vm.warrantyRequired = true;
+			}
+			else if(args.required.indexOf('warrantyNotNumber') > -1) {
+				vm.warrantyNumberRequired = true;
+			}
+			//set returns errors
+			if(args.required.indexOf('returns') > -1) {
+				vm.returnsRequired = true;
+			}
+			else if(args.required.indexOf('returnsNotNumber') > -1) {
+				vm.returnsNumberRequired = true;
 			}
 		})
 	}

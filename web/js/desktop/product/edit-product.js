@@ -11,7 +11,7 @@
 
 		function init(){
 			vm.from_edit = false;
-			vm.product = { emptyCategory:false};
+			vm.product = { emptyCategory:false, warranty: {type: 3},  returns: {type: 1}};
 			vm.product.slug = {};
 			vm.product.categories = [];
 			vm.product.media = {
@@ -184,6 +184,8 @@
 
 			if(required.length === 0) {
 				var aux=vm.product.emptyCategory;
+				vm.product.warranty.value=parseInt(vm.product.warranty.value);
+				vm.product.returns.value=parseInt(vm.product.returns.value);
 				productDataService.updateProductPriv(vm.product, {
 					idProduct: vm.product.id
 				}, onUpdateProductSuccess, onUpdateProductError);

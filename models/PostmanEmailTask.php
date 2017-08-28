@@ -1,17 +1,8 @@
 <?php
 namespace app\models;
 
-use app\helpers\Utils;
-use DateTime;
-use Exception;
-use MongoDate;
-use Ramsey\Uuid\Uuid;
-use Yii;
 use app\helpers\CActiveRecord;
-use yii\base\NotSupportedException;
-use yii\mongodb\ActiveQuery;
-use yii\mongodb\Collection;
-
+use MongoDate;
 
 
 /**
@@ -34,6 +25,21 @@ class PostmanEmailTask extends CActiveRecord
 	const PROCESS_STATE_UNNECESSARY = 'unnecessary';
 	const PROCESS_STATE_CANCELED = 'canceled';
 	const PROCESS_STATE_SENT = 'sent';
+
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $serializeFields = [];
+
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $retrieveExtraFields = [];
+
 
 	public function attributes()
 	{

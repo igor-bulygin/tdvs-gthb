@@ -2,37 +2,63 @@
 namespace app\models;
 
 use app\helpers\Utils;
-use yii\base\Exception;
+use yii\web\BadRequestHttpException;
+use yii\web\NotFoundHttpException;
 
 /**
  *
  * @property int $deviser_id
  * @property string $short_id
+ * @property string $shipping_type
+ * @property double $shipping_price
  * @property array $shipping_info
  * @property double $pack_weight
  * @property double $pack_price
  * @property double $pack_percentage_fee
  * @property string $currency
  * @property string $weight_measure
+ * @property string $pack_state
  * @property array $products
- *
- * @property OrderProduct[] $productsMapping
+ * @property array $state_history
  *
  * @method Order getParentObject()
  */
 class OrderPack extends EmbedModel
 {
+	const PACK_STATE_CART = 'cart';
+	const PACK_STATE_PAID = 'paid';
+	const PACK_STATE_AWARE = 'aware';
+	const PACK_STATE_SHIPPED = 'shipped';
+
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $serializeFields = [];
+
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $retrieveExtraFields = [];
+
 	public function attributes() {
 		return [
-				'deviser_id',
-				'short_id',
-				'shipping_info',
-				'pack_weight',
-				'pack_price',
-				'pack_percentage_fee',
-				'currency',
-				'weight_measure',
-				'products',
+			'deviser_id',
+			'short_id',
+			'shipping_type',
+			'shipping_price',
+			'shipping_info',
+			'pack_weight',
+			'pack_price',
+			'pack_percentage_fee',
+			'currency',
+			'weight_measure',
+			'pack_state',
+			'products',
+			'state_history',
 		];
 	}
 
@@ -42,21 +68,27 @@ class OrderPack extends EmbedModel
 
 		$this->short_id = Utils::shortID(8);
 
-//		$this->products = [];
+		if (empty($this->shipping_type)) {
+			$this->shipping_type = 'standard';
+		}
 
-		$this->setAttribute('shipping_info', ['type' => 'standard']);
+		if (empty($this->pack_state)) {
+			$this->setState(OrderPack::PACK_STATE_CART);
+		}
 	}
 
 	public function rules()
 	{
 		return [
-				[$this->attributes(), 'safe']
+				[
+					[
+						'shipping_type',
+					],
+					'in',
+					'range' => ['standard', 'express'],
+					'on' => Order::SCENARIO_CART
+				]
 		];
-	}
-
-	public function embedProductsMapping()
-	{
-		return $this->mapEmbeddedList('products', OrderProduct::className(), array('unsetSource' => false));
 	}
 
 	/**
@@ -69,45 +101,25 @@ class OrderPack extends EmbedModel
 	{
 		switch ($view) {
 
-			case self::SERIALIZE_SCENARIO_PREVIEW:
-			case self::SERIALIZE_SCENARIO_PUBLIC:
-			case self::SERIALIZE_SCENARIO_OWNER:
 			case self::SERIALIZE_SCENARIO_ADMIN:
-				self::$serializeFields = [
-					'deviser_id',
-					'deviser_info' => 'deviserInfo',
-					'shipping_info',
-					'pack_weight',
-					'pack_price',
-					'pack_percentage_fee',
-					'currency',
-					'weight_measure',
-
-//					'payment_info',
-//					'charges',
-					'products' => 'productsInfo',
-				];
-			self::$retrieveExtraFields = [
-					'products',
-				];
-
-
-			self::$translateFields = false;
-				break;
-
 			case Order::SERIALIZE_SCENARIO_CLIENT_ORDER:
 			case Order::SERIALIZE_SCENARIO_DEVISER_PACK:
 				self::$serializeFields = [
+					'short_id',
 					'deviser_id',
+					'deviser_info' => 'deviserInfo',
+					'shipping_type',
+					'shipping_price',
 					'shipping_info',
 					'pack_weight',
 					'pack_price',
 					'pack_percentage_fee',
 					'currency',
 					'weight_measure',
+					'pack_state',
+					'pack_state_name' => 'packStateName',
+					'shipping_date' => 'shippingDate',
 
-//					'payment_info',
-//					'charges',
 					'products' => 'productsInfo',
 				];
 				self::$retrieveExtraFields = [
@@ -123,7 +135,28 @@ class OrderPack extends EmbedModel
 				self::$serializeFields = [];
 				break;
 		}
-//		Product::setSerializeScenario($view);
+	}
+
+	public function getShippingDate()
+	{
+		foreach ($this->state_history as $state) {
+			if ($state['state'] == OrderPack::PACK_STATE_SHIPPED) {
+				return $state['date'];
+			}
+		}
+
+		return null;
+	}
+
+	public function getPackStateName()
+	{
+		$pack_states = [
+			self::PACK_STATE_CART => 'Cart',
+			self::PACK_STATE_PAID => 'Paid',
+			self::PACK_STATE_AWARE => 'Deviser aware / in preparation',
+			self::PACK_STATE_SHIPPED => 'Shipped',
+		];
+		return $pack_states[$this->pack_state];
 	}
 
 	/**
@@ -135,14 +168,29 @@ class OrderPack extends EmbedModel
 	}
 
 	public function getDeviserInfo() {
+		$order = $this->getParentObject();
 		$deviser = $this->getDeviser();
 
-		return [
+		$deviser_info = [
 			"slug" => $deviser->slug,
 			"name" => $deviser->personalInfoMapping->getVisibleName(),
 			"photo" => $deviser->getAvatarImage128(),
 			'url' => $deviser->getMainLink(),
 		];
+
+		$shippingSetting = $deviser->getShippingSettingByCountry($order->getShippingAddress()->country);
+
+		if ($shippingSetting) {
+			$price = $shippingSetting->getShippingSettingRange($this->pack_weight);
+			if ($price) {
+				$deviser_info['shipping_time'] = $shippingSetting->shipping_time;
+				$deviser_info['shipping_express_time'] = $shippingSetting->shipping_express_time;
+				$deviser_info['price'] = $price['price'];
+				$deviser_info['price_express'] = isset($price['price_express']) ? $price['price_express'] : null;
+			}
+		}
+
+		return $deviser_info;
 	}
 
 	public function getProductsInfo() {
@@ -150,13 +198,21 @@ class OrderPack extends EmbedModel
 
 		$result = [];
 		if ($products) {
-			foreach ($products as $p) {
-				$product = Product::findOneSerialized($p['product_id']);
+			foreach ($products as $k => $p) {
+				$product = Product::findOne(['short_id' => $p['product_id']]);
+				if (empty($product)) {
+					unset($products[$k]);
+				}
+				$priceStock = $product->getPriceStockItem($p['price_stock_id']);
+				if (empty($priceStock)) {
+					unset($products[$k]);
+				}
 				$p['product_info'] = [
 					'name' => $product->getName(),
 					'photo' => Utils::url_scheme() . Utils::thumborize($product->getMainImage()),
 					'slug' => $product->getSlug(),
 					'url' => $product->getViewLink(),
+					'stock' => $priceStock['stock'],
 				];
 				$result[] = $p;
 			}
@@ -170,27 +226,32 @@ class OrderPack extends EmbedModel
 		$product = $orderProduct->getProduct();
 		$priceStock = $product->getPriceStockItem($orderProduct->price_stock_id);
 		if (empty($priceStock)) {
-			throw new Exception(sprintf("Price stock item with id %s does not exists", $orderProduct->price_stock_id));
+			throw new NotFoundHttpException(sprintf("Price stock item with id %s does not exists", $orderProduct->price_stock_id));
 		}
 
 		$found = false;
-		foreach ($this->productsMapping as $productMapping) {
-			if ($productMapping->price_stock_id == $orderProduct->price_stock_id) {
-
-				$newQuantity = $productMapping->quantity + $orderProduct->quantity;
+		$products = $this->getProducts();
+		foreach ($products as $item) {
+			if ($item->price_stock_id == $orderProduct->price_stock_id) {
+				$newQuantity = $item->quantity + $orderProduct->quantity;
 				if ($newQuantity > $priceStock['stock']) {
-					throw new Exception(sprintf("Stock %s unavailable. Available stock is %s", $newQuantity, $priceStock['stock']));
+					throw new BadRequestHttpException(sprintf("Stock %s unavailable. Available stock is %s", $newQuantity, $priceStock['stock']));
 				}
-				$productMapping->quantity = $newQuantity;
+				$item->quantity = $newQuantity;
 				$found = true;
 			}
 		}
 		if (!$found) {
+			if ($orderProduct->quantity > $priceStock['stock']) {
+				throw new BadRequestHttpException(sprintf("Stock %s unavailable. Available stock is %s", $orderProduct->quantity, $priceStock['stock']));
+			}
+
 			$orderProduct->price = $priceStock['price'];
 			$orderProduct->weight = $priceStock['weight'];
 			$orderProduct->options = $priceStock['options'];
-			$this->productsMapping[] = $orderProduct;
+			$products[] = $orderProduct;
 		}
+		$this->setProducts($products);
 
 		$this->recalculateTotals();
 	}
@@ -201,22 +262,36 @@ class OrderPack extends EmbedModel
 
 		$pack_weight = 0;
 		$pack_price = 0;
-		foreach ($this->productsMapping as $productMapping) {
-			$product = $productMapping->getProduct();
-			$priceStock = $product->getPriceStockItem($productMapping->price_stock_id);
+		$products = $this->getProducts();
+		foreach ($products as $item) {
+			$product = $item->getProduct();
+			$priceStock = $product->getPriceStockItem($item->price_stock_id);
 			$pack_weight += $priceStock['weight'];
-			$pack_price += $priceStock['price'] * $productMapping->quantity;
+			$pack_price += $priceStock['price'] * $item->quantity;
 
 		}
 		$this->pack_weight = $pack_weight;
 		$this->pack_price = $pack_price;
 
+		$pricePack = null;
 
-		$shipping_info = $this->shipping_info;
-		$price = $deviser->getShippingPrice($pack_weight, $order->shippingAddressMapping->country, $this->shipping_info['type']);
-		$shipping_info['price'] = $price;
+		$shippingSetting = $deviser->getShippingSettingByCountry($order->getShippingAddress()->country);
 
-		$this->setAttribute('shipping_info',$shipping_info);
+		if ($shippingSetting) {
+			$price = $shippingSetting->getShippingSettingRange($pack_weight);
+			if ($price) {
+				switch ($this->shipping_type) {
+					case 'standard':
+						$pricePack = $price['price'];
+						break;
+					case 'express':
+						$pricePack = $price['price_express'];
+						break;
+				}
+			}
+		}
+
+		$this->shipping_price = $pricePack;
 	}
 
 	/**
@@ -224,10 +299,9 @@ class OrderPack extends EmbedModel
 	 * @return OrderProduct|null
 	 */
 	public function getPriceStockItem($priceStockId) {
-		$products = $this->productsMapping;
+		$products = $this->getProducts();
 		foreach ($products as $item) {
 			if ($item->price_stock_id == $priceStockId) {
-				$item->setParentObject($this);
 				return $item;
 			}
 		}
@@ -238,21 +312,53 @@ class OrderPack extends EmbedModel
 
 	public function deleteProduct($priceStockId)
 	{
-		$products = $this->productsMapping;
-		$indexes = [];
+		$products = $this->getProducts();
 		foreach ($products as $i => $item) {
 			if ($item->price_stock_id == $priceStockId) {
-				$indexes[] = $i;
+				unset($products[$i]);
 			}
 		}
-
-		foreach ($indexes as $index) {
-			$products->offsetUnset($index);
-		}
+		$this->setProducts($products);
 
 		$this->recalculateTotals();
 
 		return null;
+	}
+
+	public function subDocumentsConfig() {
+		return [
+			'products' => [
+				'class' => OrderProduct::className(),
+				'type' => 'list',
+			],
+		];
+	}
+
+	/**
+	 * @return OrderProduct[]
+	 */
+	public function getProducts()
+	{
+		return $this->getSubDocument('products');
+	}
+
+	public function setProducts($value) {
+		$this->setSubDocument('products', $value);
+	}
+
+	public function setState($newState)
+	{
+		if ($this->pack_state == $newState) {
+			return;
+		}
+		$this->pack_state = $newState;
+		$stateHistory = $this->state_history;
+		$stateHistory[] =
+			[
+				'state' => $newState,
+				'date' => new \MongoDate(),
+			];
+		$this->setAttribute('state_history', $stateHistory);
 	}
 
 }

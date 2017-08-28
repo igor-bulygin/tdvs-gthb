@@ -1,15 +1,19 @@
 <?php
+
+use app\assets\desktop\deviser\IndexStoryAsset;
 use app\helpers\Utils;
 use app\models\Person;
 use yii\helpers\Json;
-use app\assets\desktop\deviser\IndexStoryAsset;
 
 IndexStoryAsset::register($this);
 
 /** @var Person $person */
 /** @var \app\models\Story $story */
 
-$this->title = 'Story '.$story->getTitle().' by ' . $person->getName() . ' - Todevise';
+$this->title = Yii::t('app/public',
+	'{story_title} by {person_name} - Todevise',
+	['story_title' => $story->getTitle(), 'person_name' => $person->getName()]
+);
 $this->params['person'] = $person;
 $this->params['person_menu_active_option'] = 'stories';
 $this->params['person_links_target'] = 'public_view';
@@ -37,26 +41,26 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 					*/ ?>
 				
 					<a class="btn btn-default" href="<?=$story->getEditLink()?>">
-						Edit Story
+						<span translate="EDIT_STORY"></span>
 					</a>
 
 					<button class="btn btn-default" type="button" ng-click="detailStoryCtrl.openModal()">
 						<i class="ion-delete"></i>
-						Delete Story
+						<span translate="DELETE_STORY"></span>
 					</button>
 				</div>
 
 
 				<script type="text/ng-template" id="deleteStoryModal.html">
 					<div class="modal-header">
-						<h3 class="modal-title">Are you sure you want to delete this story?</h3>
+						<h3 class="modal-title"><span translate="DELETE_STORY_CONFIRMATION"></span></h3>
 					</div>
 					<div class="modal-body">
-						<p>You will not be able to recover it.</p>
+						<p><span translate="DELETE_STORY_RECOVER"></span></p>
 					</div>
 					<div class="modal-footer">
-						<button class="btn btn-default" ng-click="deleteStoryModalCtrl.ok()">Delete</button>
-						<button class="btn btn-default btn-green" ng-click="deleteStoryModalCtrl.cancel()">Cancel</button>
+						<button class="btn btn-default" ng-click="deleteStoryModalCtrl.ok()"><span translate="DELETE"></span></button>
+						<button class="btn btn-default btn-green" ng-click="deleteStoryModalCtrl.cancel()"><span translate="CANCEL"></span></button>
 					</div>
 				</script>
 			<?php } ?>
@@ -80,7 +84,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 		</div>
 
 		<?php if ($story->published_at) { ?>
-			<div class="published-text">Published on <?=$story->getPublishingDateFormatted()?></div>
+			<div class="published-text"><span translate="PUBLISHED_ON"></span> <?=$story->getPublishingDateFormatted()?></div>
 		<?php } ?>
 		</div>
 		

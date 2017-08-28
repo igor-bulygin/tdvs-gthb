@@ -17,6 +17,21 @@ class PersonStripeInfo extends EmbedModel
 	const ACCOUNT_TYPE_CHECKING = 'checking';
 	const ACCOUNT_TYPE_SAVINGS= 'savings';
 
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $serializeFields = [];
+
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $retrieveExtraFields = [];
+
+
 	public function attributes()
 	{
 //		access_token : "sk_test_ijjOmJLJMIqgCivppzSAtE1P"

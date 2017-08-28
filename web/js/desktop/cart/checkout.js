@@ -1,26 +1,25 @@
 (function () {
 	"use strict";
 
-	function controller(cartDataService, tagDataService, productDataService, UtilService, cartService, localStorageUtilService) {
+	function controller(UtilService, cartDataService, localStorageUtilService, cartService, locationDataService) {
 		var vm = this;
-		vm.cart_state = {
-			state: 1
-		};
+		vm.person = person;
+		vm.checkout_state = 1;
 
 		init();
 
 		function init() {
+			getCountries();
 			getCart();
 		}
 
-		function createCart() {
-			function onCreateCartSuccess(data) {
-				localStorageUtilService.setLocalStorage('cart_id', data.id);
+		function getCountries() {
+			function onGetCountriesSuccess(data) {
+				vm.countries = angular.copy(data.items);
 			}
 
-			cartDataService.createCart(onCreateCartSuccess, UtilService.onError);
+			locationDataService.getCountry(null, onGetCountriesSuccess, UtilService.onError);
 		}
-
 
 		function getCart() {
 			var cart_id = localStorageUtilService.getLocalStorage('cart_id');
@@ -28,26 +27,21 @@
 			function onGetCartSuccess(data) {
 				vm.cart = angular.copy(data);
 				cartService.parseTags(vm.cart);
-				vm.cart.products.forEach(function(product) {
-					product.link = currentHost() + '/work/' + product.product_slug + '/' + product.product_id;
-				});
-				vm.devisers = cartService.parseDevisersFromProducts(vm.cart);
+				cartService.setTotalItems(vm.cart),
+				vm.cart.shipping_address = Object.assign({}, vm.person.personal_info);
 			}
 
 			function onGetCartError(err) {
-				createCart();
 				UtilService.onError(err);
 			}
 
 			if(cart_id) {
 				cartDataService.getCart({id: cart_id}, onGetCartSuccess, onGetCartError);
-			} else {
-				createCart();
 			}
 		}
 	}
 
-	angular.module('cart')
+	angular
+		.module('cart')
 		.controller('checkoutCtrl', controller);
-
 }());

@@ -1,15 +1,26 @@
 <?php
 namespace app\models;
 
-use Yii;
-use app\helpers\Utils;
 use app\helpers\CActiveRecord;
-use yii\web\IdentityInterface;
-use yii\base\NotSupportedException;
 
 //TODO create migration
 
 class StaticText extends CActiveRecord {
+
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $serializeFields = [];
+
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $retrieveExtraFields = [];
+
 	public static function collectionName() {
 		return 'statictext';
 	}

@@ -20,6 +20,21 @@ class StoryComponent extends EmbedModel
 	const STORY_COMPONENT_TYPE_WORKS = 3;
 	const STORY_COMPONENT_TYPE_VIDEOS = 4;
 
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $serializeFields = [];
+
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $retrieveExtraFields = [];
+
+
 	public function attributes()
 	{
 		return [
@@ -55,7 +70,9 @@ class StoryComponent extends EmbedModel
 				]
 			],
 			[
-				'type', 'in', 'range' => [
+				'type',
+				'in',
+				'range' => [
 					self::STORY_COMPONENT_TYPE_TEXT,
 					self::STORY_COMPONENT_TYPE_PHOTOS,
 					self::STORY_COMPONENT_TYPE_VIDEOS,
@@ -91,7 +108,9 @@ class StoryComponent extends EmbedModel
 				}
 			],
 			[
-				'position', 'number', 'min' => 0
+				'position',
+				'number',
+				'min' => 0
 			]
 		];
 	}
@@ -182,7 +201,8 @@ class StoryComponent extends EmbedModel
 	 *
 	 * @return string|null
 	 */
-	public function getText() {
+	public function getText()
+	{
 		return Utils::l($this->items);
 	}
 }

@@ -11,6 +11,21 @@ class MadeToOrder extends EmbedModel {
 	const NONE = 0;
 	const DAYS = 1;
 
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $serializeFields = [];
+
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $retrieveExtraFields = [];
+
+
 	public function attributes() {
 		return [
 			'type',

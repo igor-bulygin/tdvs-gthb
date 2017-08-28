@@ -1,4 +1,5 @@
 <?php
+
 use app\assets\desktop\deviser\GlobalAsset;
 use app\components\PersonHeader;
 use app\components\PersonMenu;
@@ -10,7 +11,10 @@ GlobalAsset::register($this);
 /** @var Person $person */
 /** @var array $press */
 
-$this->title = 'About ' . $person->getName() . ' - Todevise';
+$this->title = Yii::t('app/public',
+	'Press by {person_name} - Todevise',
+	['person_name' => $person->getName()]
+);
 $this->params['person'] = $person;
 $this->params['person_menu_active_option'] = 'press';
 $this->params['person_links_target'] = 'public_view';
@@ -29,15 +33,15 @@ $this->params['person_links_target'] = 'public_view';
 				<?php if (count($press) == 0) { ?>
 					<div class="empty-wrapper">
 						<?php if ($person->isPersonEditable()) { ?>
-							<div><a href="<?= $person->getPressEditLink()?>" class="red-link-btn">Add / remove photos</a></div>
+							<div><a href="<?= $person->getPressEditLink()?>" class="red-link-btn"><span translate="ADD_REMOVE_PHOTOS"></span></a></div>
 						<?php } ?>
 						<img class="sad-face" src="/imgs/sad-face.svg">
-						<p class="no-video-text">You don't have any press images!</p>
+						<p class="no-video-text"><span translate="NO_PRESS"></span></p>
 					</div>
 				<?php } else { ?>
 					<div class="empty-wrapper">
 						<?php if ($person->isPersonEditable()) { ?>
-							<div><a href="<?= $person->getPressEditLink()?>" class="red-link-btn">Add / remove photos</a></div>
+							<div><a href="<?= $person->getPressEditLink()?>" class="red-link-btn"><span translate="ADD_REMOVE_PHOTOS"></span></a></div>
 						<?php } ?>
 						<div class="mesonry-row press-3">
 							<?php foreach ($press as $index=>$item) { ?>

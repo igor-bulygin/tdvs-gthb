@@ -12,6 +12,21 @@ use app\helpers\Utils;
 class PersonVideo extends EmbedModel
 {
 
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $serializeFields = [];
+
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $retrieveExtraFields = [];
+
+
 	public function attributes()
 	{
 		return [

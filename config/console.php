@@ -26,7 +26,6 @@ return [
 					'fileMap' => [
 						'app' => 'app.php',
 						'app/admin' => 'app/admin.php',
-						'app/deviser' => 'app/deviser.php',
 						'app/public' => 'app/public.php'
 					]
 				]

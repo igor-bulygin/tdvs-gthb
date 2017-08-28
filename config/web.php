@@ -72,7 +72,6 @@ $config = [
 					'fileMap' => [
 						'app' => 'app.php',
 						'app/admin' => 'app/admin.php',
-						'app/deviser' => 'app/deviser.php',
 						'app/public' => 'app/public.php'
 					]
 				]
@@ -122,7 +121,7 @@ $config = [
 					'levels' => ['info'],
 					'categories' => ['app\controllers\Stripe*', 'app\helpers\Stripe*', 'Stripe'],
 					'logFile' => '@app/runtime/logs/todevise_stripe.log',
-					'logVars' => ['_GET', '_POST', '_FILES', '_COOKIE', '_SESSION', '_SERVER'],
+					'logVars' => ['_GET', '_POST'],
 				],
 				[
 					'class' => 'yii\log\EmailTarget',
@@ -144,7 +143,7 @@ $config = [
 			// for the mailer to send real emails.
 			'useFileTransport' =>
 				strpos($_SERVER['HTTP_HOST'], 'beta.todevise.com') === false &&
-				strpos($_SERVER['HTTP_HOST'], 'dev.todevise.com') === false &&
+//				strpos($_SERVER['HTTP_HOST'], 'dev.todevise.com') === false &&
 				YII_ENV_DEV
 					? true : false,
 			'transport' => [
@@ -264,8 +263,8 @@ $config = [
 				'stripe/connect-back' => 'stripe/connect-back',
 
 				//Login
-				'login' => 'site/login',
-				'authentication-required' => 'site/authentication-required',
+				'login' => 'public/login',
+				'authentication-required' => 'public/authentication-required',
 
 				//Discover
 				'discover-devisers' => 'discover/devisers',
@@ -378,27 +377,29 @@ $config = [
 				// Cart - public
 				'POST api3/pub/v1/cart' => 'api3/pub/v1/cart/create-cart',
 				'GET api3/pub/v1/cart/<cartId:[^/.]*?>' => 'api3/pub/v1/cart/view',
+				'PUT api3/pub/v1/cart/<cartId:[^/.]*?>' => 'api3/pub/v1/cart/update',
 				'POST api3/pub/v1/cart/<cartId:[^/.]*?>/product' => 'api3/pub/v1/cart/add-product',
 				'DELETE api3/pub/v1/cart/<cartId:[^/.]*?>/product/<priceStockId:[^/.]*?>' => 'api3/pub/v1/cart/delete-product',
-				'POST api3/pub/v1/cart/<cartId:[^/.]*?>/personInfo' => 'api3/pub/v1/cart/person-info',
 				'POST api3/pub/v1/cart/<cartId:[^/.]*?>/receiveToken' => 'api3/pub/v1/cart/receive-token',
-
-				// Order - public
-				'GET api3/pub/v1/order' => 'api3/pub/v1/order/index',
-				'GET api3/pub/v1/order/<orderId:[^/.]*?>' => 'api3/pub/v1/order/view',
 
 				// Person - public
 				'GET api3/pub/v1/person' => 'api3/pub/v1/person/index',
 				'GET api3/pub/v1/person/<personId:[^/.]*?>' => 'api3/pub/v1/person/view',
 				'POST api3/pub/v1/person' => 'api3/pub/v1/person/create',
+
 				// Person - private
 				'GET api3/priv/v1/person/<personId:[^/.]*?>' => 'api3/priv/v1/person/view',
-				'GET api3/priv/v1/person/<personId:[^/.]*?>/orders' => 'api3/priv/v1/person/orders',
-				'GET api3/priv/v1/person/<personId:[^/.]*?>/order/<orderId:[^/.]*>' => 'api3/priv/v1/person/order',
-				'GET api3/priv/v1/person/<personId:[^/.]*?>/packs' => 'api3/priv/v1/person/packs',
 				'PATCH api3/priv/v1/person/<personId:[^/.]*?>' => 'api3/priv/v1/person/update',
 				'PUT api3/priv/v1/person/<personId:[^/.]*?>' => 'api3/priv/v1/person/update',
 				'PUT api3/priv/v1/person/<personId:[^/.]*?>/update-password' => 'api3/priv/v1/person/update-password',
+
+				// Person - orders and packs
+				'GET api3/priv/v1/person/<personId:[^/.]*?>/orders' => 'api3/priv/v1/person/orders',
+				'GET api3/priv/v1/person/<personId:[^/.]*?>/orders/<orderId:[^/.]*>' => 'api3/priv/v1/person/order',
+				'GET api3/priv/v1/person/<personId:[^/.]*?>/packs' => 'api3/priv/v1/person/packs',
+				'PUT api3/priv/v1/person/<personId:[^/.]*?>/packs/<packId:[^/.]*>/aware' => 'api3/priv/v1/person/pack-aware',
+				'PUT api3/priv/v1/person/<personId:[^/.]*?>/packs/<packId:[^/.]*>/shipped' => 'api3/priv/v1/person/pack-shipped',
+
 
 				// Product - public
 				'GET api3/pub/v1/products/<id:[^/.]*?>' => 'api3/pub/v1/product/view',

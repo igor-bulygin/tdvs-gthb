@@ -1,4 +1,5 @@
 <?php
+
 use app\assets\desktop\deviser\GlobalAsset;
 use app\components\PersonHeader;
 use app\components\PersonMenu;
@@ -8,7 +9,11 @@ GlobalAsset::register($this);
 
 /** @var Person $person */
 
-$this->title = 'About ' . $person->getName() . ' - Todevise';
+$this->title = Yii::t('app/public',
+	'About {person_name} - Todevise',
+	['person_name' => $person->getName()]
+);
+
 $this->params['person'] = $person;
 $this->params['person_menu_active_option'] = 'about';
 $this->params['person_links_target'] = 'public_view';
@@ -71,7 +76,7 @@ foreach ($person->getAboutUrlImages() as $key => $urlImage) {
 					<div class="about-wrapper">
 						<div class="about-container">
 							<?php if ($person->isPersonEditable()) { ?>
-								<div><a class="red-link-btn top" href="<?= $person->getAboutEditLink()?>">Edit about</a></div>
+								<div><a class="red-link-btn top" href="<?= $person->getAboutEditLink()?>"><span translate="EDIT_ABOUT"></span></a></div>
 							<?php } ?>
 							<!--<div class="title">Abo<br>ut</div>-->
 							<div class="name-location-wrapper">

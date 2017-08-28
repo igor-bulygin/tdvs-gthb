@@ -122,7 +122,7 @@ class Person extends CActiveRecord implements IdentityInterface
 	 *
 	 * @var array
 	 */
-	public static $textFilterAttributes = ['personal_info.name', 'personal_info.last_name', 'personal_info.brand_name', 'text_short_description'];
+	public static $textFilterAttributes = ['personal_info.name', 'personal_info.last_name', 'personal_info.brand_name', /*'text_short_description'*/];
 
 	/**
 	 * Initialize model attributes
@@ -434,24 +434,24 @@ class Person extends CActiveRecord implements IdentityInterface
 	public function beforeDelete()
 	{
 		if ($this->isDeviser()) {
-			$products = Product::findSerialized(["deviser_id" => $this->id]);
+			$products = $this->getProducts();
 			/* @var Product[] $products */
 			foreach ($products as $item) {
 				$item->delete();
 			}
 		}
 
-		$boxes = Box::findSerialized(["person_id" => $this->id]);
+		$boxes = $this->getBoxes();
 		foreach ($boxes as $item) {
 			$item->delete();
 		}
 
-		$loveds = Loved::findSerialized(["person_id" => $this->id]);
+		$loveds = $this->getLoveds();
 		foreach ($loveds as $item) {
 			$item->delete();
 		}
 
-		$stories = Story::findSerialized(["person_id" => $this->id]);
+		$stories = $this->getStories();
 		foreach ($stories as $item) {
 			$item->delete();
 		}
@@ -459,6 +459,36 @@ class Person extends CActiveRecord implements IdentityInterface
 		$this->deletePhotos();
 
 		return parent::beforeDelete();
+	}
+
+	/**
+	 * @return Product[]
+	 */
+	public function getProducts() {
+		return Product::findSerialized(["deviser_id" => $this->id]);
+	}
+
+	/**
+	 * @return Box[]
+	 */
+	public function getBoxes() {
+		return Box::findSerialized(["person_id" => $this->id]);
+	}
+
+	/**
+	 * @return Loved[]
+	 */
+	public function getLoveds()
+	{
+		return Loved::findSerialized(["person_id" => $this->id]);
+	}
+
+	/**
+	 * @return Story[]
+	 */
+	public function getStories()
+	{
+		return Story::findSerialized(["person_id" => $this->id]);
 	}
 
 	public function deletePhotos() {
@@ -734,7 +764,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'collections',
 					'city' => 'city',
 					'country' => 'country',
-					'personal_info',
+//					'personal_info',
 					'media',
 					'press',
 					'videos' => 'videosPreview',
@@ -758,7 +788,7 @@ class Person extends CActiveRecord implements IdentityInterface
 
 				static::$retrieveExtraFields = [
 					'videos',
-//					'personal_info',
+					'personal_info',
 				];
 
 				self::$translateFields = true;
@@ -781,7 +811,8 @@ class Person extends CActiveRecord implements IdentityInterface
 					'shipping_settings',
 					'curriculum',
 					'account_state',
-					'name' => "name",
+					'name' => 'name',
+					'email' => 'email',
 					'url_images' => 'urlImagesLocation',
 					'url_avatar' => "avatarImage128",
 					'main_link' => 'mainLink',
@@ -808,7 +839,8 @@ class Person extends CActiveRecord implements IdentityInterface
 				];
 
 				static::$retrieveExtraFields = [
-					'videos'
+					'credentials',
+					'videos',
 				];
 
 				self::$translateFields = false;
@@ -1166,6 +1198,16 @@ class Person extends CActiveRecord implements IdentityInterface
 	public function getName()
 	{
 		return $this->personalInfoMapping->getVisibleName();
+	}
+
+	/**
+	 * Shortcut to get the name
+	 *
+	 * @return string
+	 */
+	public function getEmail()
+	{
+		return isset($this->credentials['email']) ? $this->credentials['email'] : null;
 	}
 
 	/**
@@ -1762,7 +1804,13 @@ class Person extends CActiveRecord implements IdentityInterface
 	 * @return bool
 	 */
 	public function hasShippingSettings() {
-		return count($this->shippingSettingsMapping) > 0;
+		foreach ($this->shippingSettingsMapping as $shippingSettings) {
+			if (count($shippingSettings->prices) > 0) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	/**
@@ -1789,26 +1837,55 @@ class Person extends CActiveRecord implements IdentityInterface
 		return !empty($products);
 	}
 
-	public function getShippingPrice($weight, $country_code, $shipping_type = 'standard') {
-		$price = null;
-		$shippings = $this->shippingSettingsMapping;
-		foreach ($shippings as $shipping) {
-			if ($shipping->country_code == $country_code) {
-				foreach ($shipping->prices as $price) {
-					if ($price['min_weight'] <= $weight && ($price['max_weight'] == null || $price['max_weight'] >= $weight)) {
-						switch ($shipping_type) {
-							case 'standard':
-								return $price['price'];
+	public function getShippingPrice($weight, $country_code, $shipping_type = 'standard')
+	{
+		$shippingSettingRange = $this->getShippinSettingRange($weight, $country_code);
+		if ($shippingSettingRange) {
+			switch ($shipping_type) {
+				case 'standard':
+					return $shippingSettingRange['price'];
 
-							case 'express';
-								return $price['price_express'];
+				case 'express';
+					return $shippingSettingRange['price_express'];
 
-						}
-					}
-				}
 			}
 		}
 
-		return $price;
+		return null;
+	}
+
+	/**
+	 * @param string|null $country_code
+	 *
+	 * @return PersonShippingSettings|null
+	 */
+	public function getShippingSettingByCountry($country_code = null) {
+		$country_code = $country_code ?: Country::getDefaultContryCode();
+
+		$shippings = $this->shippingSettingsMapping;
+		foreach ($shippings as $shipping) {
+			if ($shipping->country_code == $country_code) {
+				return $shipping;
+			}
+		}
+
+		return null;
+	}
+
+	/**
+	 * @param $weight
+	 * @param string|null $country_code
+	 *
+	 * @return array
+	 */
+	public function getShippinSettingRange($weight, $country_code = null)
+	{
+		$shippingSetting = $this->getShippingSettingByCountry($country_code);
+
+		if ($shippingSetting) {
+			return $shippingSetting->getShippingSettingRange($weight);
+		}
+
+		return null;
 	}
 }

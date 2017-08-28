@@ -1,0 +1,16 @@
+{
+	"LOGIN":"Log in",
+	"MYTODEVISE":" My todevise",
+	"ADMINISTRATION":"Administration",
+	"INVITATION":"Invitations",
+	"SALES":"Sales",
+	"MY_ORDERS":"My orders",
+	"SETTINGS":"Settings",
+	"LOGOUT":"Logout",
+	"SHOP_BY_DEPARTMENT":"Shop by department",
+	"STORIES":"Stories",
+	"EXPLORE_BOXES":"Explore Boxes",
+	"DISCOVER_DEVISERS":"Discover devisers",
+	"TREND_SETTERS":"Trend-setters",
+	"PROJECTS":"Projects"
+}

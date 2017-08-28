@@ -3,21 +3,19 @@
 namespace app\modules\api\pub\v1\controllers;
 
 use app\models\Order;
-use app\models\OrderPersonInfo;
+use app\models\OrderPack;
 use app\models\OrderProduct;
-use app\models\Person;
 use Stripe\Stripe;
 use Yii;
 use yii\web\BadRequestHttpException;
-use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
+use yii\web\UnauthorizedHttpException;
 
 class CartController extends AppPublicController
 {
 
 	public function actionCreateCart()
 	{
-		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_CLIENT_ORDER);
 		$cart = new Order();
 		if (!Yii::$app->user->isGuest) {
 			$cart->person_id = Yii::$app->user->identity->short_id;
@@ -26,6 +24,10 @@ class CartController extends AppPublicController
 		$cart->save();
 
 		Yii::$app->response->setStatusCode(201); // Created
+
+		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_CLIENT_ORDER);
+		$cart = Order::findOneSerialized($cart->short_id);
+		$cart->setSubDocumentsForSerialize();
 
 		return $cart;
 	}
@@ -36,45 +38,51 @@ class CartController extends AppPublicController
 		$cart = Order::findOneSerialized($cartId);
 
 		if (empty($cart)) {
-			throw new NotFoundHttpException();
+			throw new NotFoundHttpException(sprintf("Cart with id %s does not exists", $cartId));
 		}
 
-		if ($cart->order_state != Order::ORDER_STATE_CART) {
-			throw new BadRequestHttpException("This cart has an invalid state");
+		if (!$cart->isCart()) {
+			throw new BadRequestHttpException("This order is in an invalid state");
 		}
 
-		if (!Yii::$app->user->isGuest) {
-			if ($cart->person_id != Yii::$app->user->identity->short_id) {
-				throw new ForbiddenHttpException();
-			}
-		} else {
-			if (!empty($cart->person_id)) {
-				throw new ForbiddenHttpException();
-			}
-		}
+		$cart->checkOwnerAndTryToAssociate();
+
 		Yii::$app->response->setStatusCode(200); // Ok
+
+		$cart->setSubDocumentsForSerialize();
 
 		return $cart;
 	}
 
 	public function actionAddProduct($cartId)
 	{
-		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_CLIENT_ORDER);
 		$cart = Order::findOneSerialized($cartId);
 		/* @var Order $cart */
 
 		if (empty($cart)) {
 			throw new NotFoundHttpException(sprintf("Cart with id %s does not exists", $cartId));
 		}
+
+		if (!$cart->isCart()) {
+			throw new BadRequestHttpException("This order is in an invalid state");
+		}
+
+		if (!$cart->isEditable()) {
+			throw new UnauthorizedHttpException("You have no access to this order");
+		}
+
 		$product = new OrderProduct();
 		$product->setParentObject($cart);
 
 		if ($product->load(Yii::$app->request->post(), '') && $product->validate()) {
 
 			$cart->addProduct($product);
-			$cart->save();
 
 			Yii::$app->response->setStatusCode(201); // Created
+
+			Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_CLIENT_ORDER);
+			$cart = Order::findOneSerialized($cartId);
+			$cart->setSubDocumentsForSerialize();
 
 			return $cart;
 		} else {
@@ -86,60 +94,130 @@ class CartController extends AppPublicController
 
 	public function actionDeleteProduct($cartId, $priceStockId)
 	{
-		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_CLIENT_ORDER);
 		$cart = Order::findOneSerialized($cartId);
 		/* @var Order $cart */
 		if (empty($cart)) {
 			throw new NotFoundHttpException(sprintf("Cart with id %s does not exists", $cartId));
 		}
 
+		if (!$cart->isCart()) {
+			throw new BadRequestHttpException("This order is in an invalid state");
+		}
+
+		if (!$cart->isEditable()) {
+			throw new UnauthorizedHttpException("You have no access to this order");
+		}
+
 		$cart->deleteProduct($priceStockId);
-		$cart->save();
 
 		Yii::$app->response->setStatusCode(200); // Ok
+
+		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_CLIENT_ORDER);
+		$cart = Order::findOneSerialized($cartId);
+		$cart->setSubDocumentsForSerialize();
 
 		return $cart;
 	}
 
-
-	public function actionPersonInfo($cartId)
+	public function actionUpdate($cartId)
 	{
-		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_PUBLIC);
 		$cart = Order::findOneSerialized($cartId);
-		/* @var Order $cart */
-
-		if (empty($cart)) {
+		if (!$cart) {
 			throw new NotFoundHttpException(sprintf("Cart with id %s does not exists", $cartId));
 		}
 
-		$personInfo = new OrderPersonInfo();
-		$personInfo->setParentObject($cart);
+		if (!$cart->isCart()) {
+			throw new BadRequestHttpException("This order is in an invalid state");
+		}
 
-		if ($personInfo->load(Yii::$app->request->post(), '') && $personInfo->validate()) {
+		if (!$cart->isEditable()) {
+			throw new UnauthorizedHttpException("You have no access to this order");
+		}
 
-			$cart->personInfoMapping = $personInfo;
-			$cart->save();
+		// only validate received fields (only if we are not changing the state)
+		$cart->setScenario(Order::SCENARIO_CART);
 
-			Yii::$app->response->setStatusCode(200); // Created
+		// In this method, we only update the next properties:
+		// - shipping_address
+		// - billing_address
+		// - packs.shipping_type
+
+		$post = Yii::$app->request->post();
+		if (isset($post['shipping_address'])) {
+			$cart->shipping_address = $post['shipping_address'];
+		}
+		if (isset($post['billing_address'])) {
+			$cart->billing_address = $post['billing_address'];
+		}
+		if (isset($post['packs'])) {
+			$packs = $cart->getPacks();
+			foreach ($post['packs'] as $packPost) {
+				if (isset($packPost['short_id']) && isset($packPost['shipping_type'])) {
+					foreach ($packs as $packActual) {
+						if ($packActual->short_id == $packPost['short_id']) {
+							$packActual->shipping_type = $packPost['shipping_type'];
+							$packActual->recalculateTotals();
+						}
+					}
+				}
+			}
+			$cart->setPacks($packs);
+		}
+
+		if ($cart->validate()) {
+
+			$cart->save(false);
+
+			// If person has no personal_info, we use their shipping_address to fill-in it
+			$person = $cart->getPerson();
+
+			$shipping = $cart->getShippingAddress();
+			$person->personalInfoMapping->name = $shipping->name;
+			$person->personalInfoMapping->last_name = $shipping->last_name;
+			$person->personalInfoMapping->city = $shipping->city;
+			$person->personalInfoMapping->country = $shipping->country;
+			$person->personalInfoMapping->address = $shipping->address;
+			$person->personalInfoMapping->zip = $shipping->zip;
+			$person->personalInfoMapping->vat_id = $shipping->vat_id;
+			$person->personalInfoMapping->phone_number_prefix = $shipping->phone_number_prefix;
+			$person->personalInfoMapping->phone_number = $shipping->phone_number;
+
+			$person->setAttributes('personal_info', $person->personalInfoMapping);
+			$person->save();
+
+			Yii::$app->response->setStatusCode(200); // Ok
+
+			Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_CLIENT_ORDER);
+			$cart = Order::findOneSerialized($cartId);
+			$cart->setSubDocumentsForSerialize();
 
 			return $cart;
+
 		} else {
 			Yii::$app->response->setStatusCode(400); // Bad Request
 
-			return ["errors" => $personInfo->errors];
+			return ["errors" => $cart->errors];
 		}
 	}
-
 
 	public function actionReceiveToken($cartId)
 	{
 		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_CLIENT_ORDER);
-		$cart = Order::findOneSerialized($cartId);
-		/* @var Order $cart */
+		$order = Order::findOneSerialized($cartId);
+		/* @var Order $order */
 
-		if (empty($cart)) {
+		if (empty($order)) {
 			throw new NotFoundHttpException(sprintf("Cart with id %s does not exists", $cartId));
 		}
+
+		if (!$order->isCart()) {
+			throw new BadRequestHttpException("This order is in an invalid state");
+		}
+
+		if (!$order->isEditable()) {
+			throw new UnauthorizedHttpException("You have no access to this order");
+		}
+
 		/*
 		{
 		  "id": "tok_19igOXJt4mveficFYDqFqBcB",
@@ -185,7 +263,7 @@ class CartController extends AppPublicController
 			throw new BadRequestHttpException("No token received from stripe");
 		}
 
-		if ($cart->order_state != Order::ORDER_STATE_CART) {
+		if (!$order->isCart()) {
 			throw new BadRequestHttpException("This order is in an invalid state");
 		}
 
@@ -193,35 +271,38 @@ class CartController extends AppPublicController
 
 			Stripe::setApiKey(Yii::$app->params['stripe_secret_key']);
 
-			$products = $cart->productsMapping;
+			$person = $order->getPerson();
 
-			// Create an array of devisers, with amount price for each
-			$devisers = [];
-			foreach ($products as $product) {
-				if (isset($devisers[$product->deviser_id])) {
-					$amount = $devisers[$product->deviser_id]['amount'];
-				} else {
-					$amount = 0;
-				}
-				$devisers[$product->deviser_id] = [
-					'amount' => $amount + ($product->price * $product->quantity),
-					'deviser' => Person::findOneSerialized($product->deviser_id),
-				];
-			}
+			$packs = $order->getPacks();
+
+			$shippingAddress = $order->getShippingAddress();
+			$billingAddress = $order->getBillingAddress();
+
+			// TODO: check if customer already exists in stripe
 
 			// Create a customer in stripe for the received token
 			$customer = \Stripe\Customer::create([
-				'email' => $cart->personInfoMapping->email,
+				'email' => $person->credentials['email'],
+				'business_vat_id' => $billingAddress->vat_id,
+				'shipping' => [
+					'address' => [
+						'line1' => $shippingAddress->address,
+						'city' => $shippingAddress->city,
+						'country' => $shippingAddress->country,
+						'postal_code' => $shippingAddress->zip,
+					],
+					'name' => $shippingAddress->getFullName(),
+					'phone' => $shippingAddress->getPhone(),
+				],
 				'source' => $token,
 			]);
 
 			$charges = [];
-			foreach ($devisers as $oneDeviser) {
-				$amount = $oneDeviser['amount'];
-				$deviser = $oneDeviser['deviser'];
-				/* @var Person $deviser */
+			foreach ($packs as $pack) {
+				$pack->recalculateTotals();
+				$deviser = $pack->getDeviser();
 
-				$stripeAmount = (int)($amount * 100);
+				$stripeAmount = (int)(($pack->pack_price + $pack->shipping_price) * 100);
 				$todeviseFee = (int)($stripeAmount * Yii::$app->params['default_todevise_fee']);
 
 				if (empty($deviser->settingsMapping->stripeInfoMapping->access_token)) {
@@ -231,10 +312,11 @@ class CartController extends AppPublicController
 						'customer' => $customer->id,
 						'currency' => 'eur',
 						'amount' => $stripeAmount,
-						"description" => "Order Nº " . $cart->short_id,
+						"description" => "Order Nº " . $order->short_id."/".$pack->short_id,
 						"metadata" => [
-							"order_id" => $cart->short_id,
-							"order" => json_encode($cart),
+							"order_id" => $order->short_id,
+							"pack_id" => $pack->short_id,
+							"person_id" => $person->short_id,
 						],
 					]);
 
@@ -255,10 +337,12 @@ class CartController extends AppPublicController
 							'source' => $token,
 							'currency' => 'eur',
 							'amount' => $stripeAmount,
-							"description" => "Order Nº " . $cart->short_id,
+							"description" => "Order Nº " . $order->short_id,
 							'application_fee' => $todeviseFee,
 							"metadata" => [
-								"order_id" => $cart->short_id,
+								"order_id" => $order->short_id,
+								"pack_id" => $pack->short_id,
+								"person_id" => $person->short_id,
 							],
 						],
 						[
@@ -266,19 +350,27 @@ class CartController extends AppPublicController
 						]
 					);
 				}
+				$pack->pack_percentage_fee = Yii::$app->params['default_todevise_fee'];
+				$pack->setState(OrderPack::PACK_STATE_PAID);
 			}
 
-			// Save charges responses and payment_info in the order
-			$cart->setAttribute('payment_info', $currentPaymentInfo);
-			$cart->setAttribute('charges', json_encode($charges));
-			$cart->order_state = Order::ORDER_STATE_PAID;
-			$cart->save();
+			$order->setPacks($packs);
 
-			$cart->composeEmailOrderPaid(true);
+			// Save charges responses and payment_info in the order
+			$order->setAttribute('payment_info', $currentPaymentInfo);
+//			$order->setAttribute('charges', $charges);
+			$order->setState(Order::ORDER_STATE_PAID);
+			$order->save();
+
+			$order->composeEmailOrderPaid(true);
 
 			Yii::$app->response->setStatusCode(200); // Created
 
-			return $cart;
+			Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_CLIENT_ORDER);
+			$order = Order::findOneSerialized($cartId);
+			$order->setSubDocumentsForSerialize();
+
+			return $order;
 		} catch (\Exception $e) {
 			$message = sprintf("Error in receive-token: " . $e->getMessage());
 			Yii::info($message, 'Stripe');

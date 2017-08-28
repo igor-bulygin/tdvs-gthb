@@ -4,6 +4,8 @@ namespace app\helpers;
 use app\models\EmbedModel;
 use app\models\Lang;
 use Exception;
+use yii\base\InvalidConfigException;
+use yii\base\Model;
 use yii2tech\embedded\mongodb\ActiveRecord;
 
 /**
@@ -83,6 +85,7 @@ class CActiveRecord extends ActiveRecord
 		if (!empty(static::$serializeFields)) {
 			return static::$serializeFields;
 		}
+
 		return $this->attributes();
 	}
 
@@ -104,6 +107,7 @@ class CActiveRecord extends ActiveRecord
 	 *
 	 * @param string|array|null $mix
 	 * @param string $tags
+	 *
 	 * @return array|null|string
 	 */
 	public static function stripNotAllowedHtmlTags($mix, $tags = "<p>")
@@ -136,6 +140,7 @@ class CActiveRecord extends ActiveRecord
 	 * @param array|string $fieldNames
 	 * @param $value
 	 * @param string $operator
+	 *
 	 * @return array
 	 */
 	public static function getFilterForText($fieldNames, $value, $operator = 'LIKE')
@@ -155,6 +160,7 @@ class CActiveRecord extends ActiveRecord
 
 			}
 		}
+
 		return $nameFilter;
 	}
 
@@ -165,7 +171,9 @@ class CActiveRecord extends ActiveRecord
 	 * TODO: try to implement the logic here using the functions provided by the embbed library
 	 *
 	 */
-	public function setParentOnEmbbedMappings() {}
+	public function setParentOnEmbbedMappings()
+	{
+	}
 
 	/**
 	 * Before validate an object, set the object as parent on embbed objects
@@ -189,6 +197,7 @@ class CActiveRecord extends ActiveRecord
 	 * Returns embedded object or list of objects.
 	 *
 	 * @param string $name embedded name.
+	 *
 	 * @return object|object[]|null embedded value.
 	 */
 	public function getEmbedded($name)
@@ -211,6 +220,118 @@ class CActiveRecord extends ActiveRecord
 		}
 
 		return $embedded;
+	}
+
+	protected $subDocuments = [];
+
+	public function subDocumentsConfig()
+	{
+		return [];
+	}
+
+	public function hasSubdocument($name)
+	{
+		return isset($this->subDocumentsConfig()[$name]);
+	}
+
+	/**
+	 * @param $name
+	 *
+	 * @return Model|Model[]
+	 * @throws Exception
+	 */
+	public function getSubDocument($name)
+	{
+
+		if (!isset($this->subDocuments[$name])) {
+
+			if ($this->hasSubdocument($name)) {
+				if (!$this->hasAttribute($name)) {
+					throw new Exception("Property " . $name . " has defined an embedded object, but it is not defined as property in class " . get_class($this));
+				}
+
+				$config = $this->subDocumentsConfig()[$name];
+
+				$actualValue = $this->{$name} ?: [];
+
+				if (is_object($actualValue)) {
+					if ((!$actualValue instanceof Model)) {
+						throw new InvalidConfigException('Element of type [' . gettype($actualValue) . '], representing attribute '.$name.' must be an instance or descendant of "' . Model::className() . '".');
+					}
+					return $actualValue;
+				}
+
+				if ($config['type'] == 'list') {
+
+					$items = [];
+
+					foreach ($actualValue as $item) {
+						$obj = new $config['class']();
+						foreach ($item as $prop => $value) {
+							if (in_array($prop, $obj->attributes())) {
+								$obj->{$prop} = $value;
+							}
+						}
+						$obj->setParentObject($this);
+						$obj->setScenario($this->scenario);
+						$items[] = $obj;
+					}
+
+					$this->subDocuments[$name] = $items;
+
+				} else {
+
+					$obj = new $config['class']();
+					foreach ($actualValue as $prop => $value) {
+						if (in_array($prop, $obj->attributes())) {
+							$obj->{$prop} = $value;
+						}
+					}
+					$obj->setParentObject($this);
+					$obj->setScenario($this->scenario);
+
+					$this->subDocuments[$name] = $obj;
+				}
+			}
+		}
+
+		return $this->subDocuments[$name];
+	}
+
+	protected function setSubDocument($name, $value) {
+		$this->subDocuments[$name] = $value;
+		$this->refreshProperyFromSubDocument($name);
+	}
+
+	public function setSubDocumentsForSerialize()
+	{
+		$configs = $this->subDocumentsConfig();
+		foreach ($configs as $name => $config) {
+			$this->setAttribute($name, $this->getSubDocument($name));
+		}
+	}
+
+	protected function refreshProperyFromSubDocument($name)
+	{
+		$config = $this->subDocumentsConfig()[$name];
+		$embedded = $this->getSubDocument($name);
+		if ($config['type'] == 'list') {
+			$propertyArray = [];
+			foreach ($embedded as $obj) {
+				$propertyArray[] = $obj->getAttributes();
+			}
+			$this->setAttribute($name, $propertyArray);
+		} else {
+			$this->setAttribute($name, $embedded->getAttributes());
+		}
+	}
+
+	protected function refreshPropertiesFromSubDocuments()
+	{
+		$configs = $this->subDocumentsConfig();
+		foreach ($configs as $name => $config) {
+			$this->refreshProperyFromSubDocument($name);
+		}
 	}
 
 }

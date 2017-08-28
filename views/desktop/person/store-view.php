@@ -1,4 +1,5 @@
 <?php
+
 use app\assets\desktop\deviser\GlobalAsset;
 use app\components\PersonHeader;
 use app\components\PersonMenu;
@@ -14,7 +15,22 @@ GlobalAsset::register($this);
 /** @var Category $category */
 /** @var Category $selectedCategory */
 
-$this->title = $person->getName() . ' - Todevise';
+if ($selectedSubcategory && $selectedSubcategory->short_id) { // check if is a real category
+	$this->title = Yii::t('app/public',
+		'{category_name} works by {person_name} - Todevise',
+		['category_name' => $selectedSubcategory->getName(), 'person_name' => $person->getName()]
+	);
+} elseif ($selectedCategory) {
+	$this->title = Yii::t('app/public',
+		'{category_name} works by {person_name} - Todevise',
+		['category_name' => $selectedCategory->getName(), 'person_name' => $person->getName()]
+	);
+} else {
+	$this->title = Yii::t('app/public',
+		'Works by {person_name} - Todevise',
+		['person_name' => $person->getName()]
+	);
+}
 
 // use params to share data between views :(
 $this->params['person'] = $person;
@@ -40,7 +56,7 @@ $this->params['person_menu_store_categories'] = $categories;
 								<div class="col-md-3 col-sm-3 col-xs-3 pad-cathegory">
 									<a href="<?= $person->getStoreEditLink(['product_state' => \app\models\Product::PRODUCT_STATE_DRAFT])?>">
 										<div class="unpublished-square">
-											<p>Unpublished<br>works</p>
+											<p><span translate="UNPUBLISHED_WORKS_BR"></span></p>
 										</div>
 									</a>
 								</div>
@@ -69,12 +85,10 @@ $this->params['person_menu_store_categories'] = $categories;
 						</div>
 						<nav class="products-menu">
 							<ul>
-								<?php if (count($selectedCategory->getDeviserSubcategories()) > 1) { ?>
 								<?php foreach ($selectedCategory->getDeviserSubcategories() as $i => $subcategory) { ?>
 									<li>
 										<a href="<?= $person->getStoreLink(['category' => $selectedCategory->short_id, 'subcategory' => $subcategory->short_id])?>" class="<?= ($selectedSubcategory->short_id==$subcategory->short_id) ? 'active' : '' ?>"><?= Utils::l($subcategory["name"]) ?></a>
 									</li>
-								<?php } ?>
 								<?php } ?>
 							</ul>
 						</nav>
@@ -102,9 +116,8 @@ $this->params['person_menu_store_categories'] = $categories;
 												</p>
 												<p class="price">€ <?= $product->getMinimumPrice() ?></p>
 												<?php if ($person->isPersonEditable()) { ?>
-													<a class="edit-product-icon" href="<?= $product->getEditLink()?>" title="Edit work">
+													<a class="edit-product-icon" href="<?= $product->getEditLink()?>" translate-attr="{title: 'EDIT_WORK'}">
 														<i class="ion-edit"></i>
-
 													</a>
 												<?php } ?>
 											</figcaption>
@@ -125,11 +138,11 @@ $this->params['person_menu_store_categories'] = $categories;
 			<h3 class="modal-title"></h3>
 		</div>
 		<div class="modal-body">
-			<p>Are you sure you want to delete this work?</p>
+			<p><span translate="DELETE_WORK"></span></p>
 		</div>
 		<div class="modal-footer">
-			<button class="btn btn-default btn-green pull-left" ng-click="modalDeleteProductCtrl.close()">Cancel</button>
-			<button class="btn btn-default pull-right" ng-click="modalDeleteProductCtrl.ok()">DELETE</button>
+			<button class="btn btn-default btn-green pull-left" ng-click="modalDeleteProductCtrl.close()"><span translate="CANCEL"></span></button>
+			<button class="btn btn-default pull-right" ng-click="modalDeleteProductCtrl.ok()"><span translate="DELETE"></span></button>
 		</div>
 	</div>
 </script>

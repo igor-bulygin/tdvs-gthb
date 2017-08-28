@@ -404,6 +404,16 @@ class Product extends CActiveRecord {
 				'app\validators\DimensionUnitValidator',
 				'on' => [self::SCENARIO_PRODUCT_DRAFT, self::SCENARIO_PRODUCT_PUBLIC],
 			],
+			[
+				'returns',
+				'app\validators\ReturnsValidator',
+				'on' => [self::SCENARIO_PRODUCT_DRAFT, self::SCENARIO_PRODUCT_PUBLIC],
+			],
+			[
+				'warranty',
+				'app\validators\WarrantyValidator',
+				'on' => [self::SCENARIO_PRODUCT_DRAFT, self::SCENARIO_PRODUCT_PUBLIC],
+			],
 		];
 	}
 
@@ -630,6 +640,21 @@ class Product extends CActiveRecord {
 		if ((array_key_exists("product_state", $criteria)) && (!empty($criteria["product_state"]))) {
 			$query->andWhere(["product_state" => $criteria["product_state"]]);
 		}
+		// if only_active_persons are specified
+		if ((array_key_exists("only_active_persons", $criteria)) && (!empty($criteria["only_active_persons"]))) {
+
+			// Get different person_ids available by country
+			$queryPerson= new ActiveQuery(Person::className());
+			$queryPerson->andWhere(["account_state" => Person::ACCOUNT_STATE_ACTIVE]);
+			$idsPerson = $queryPerson->distinct("short_id");
+
+			if ($idsPerson) {
+				$query->andFilterWhere(["in", "deviser_id", $idsPerson]);
+			} else {
+				$query->andFilterWhere(["in", "deviser_id", "dummy_person"]); // Force no results if there are no boxes
+			}
+		}
+
 		// if name is specified
 		if ((array_key_exists("name", $criteria)) && (!empty($criteria["name"]))) {
 //			// search the word in all available languages
@@ -655,8 +680,33 @@ class Product extends CActiveRecord {
 			$query->offset($criteria["offset"]);
 		}
 
-		if ((array_key_exists("order_by", $criteria)) && (!empty($criteria["order_by"]))) {
-			$query->orderBy($criteria["order_by"]);
+		// order
+		if ((array_key_exists("order_type", $criteria)) && (!empty($criteria["order_type"]))) {
+			switch ($criteria['order_type']) {
+				case 'new':
+					$criteria['order_col'] = 'created_at';
+					$criteria['order_dir'] = 'desc';
+					break;
+				case 'old':
+					$criteria['order_col'] = 'created_at';
+					$criteria['order_dir'] = 'asc';
+					break;
+				case 'chepeast':
+					$criteria['order_col'] = 'price_stock.price';
+					$criteria['order_dir'] = 'asc';
+					break;
+				case 'expensive':
+					$criteria['order_col'] = 'price_stock.price';
+					$criteria['order_dir'] = 'desc';
+					break;
+			}
+		}
+
+		if ((array_key_exists("order_col", $criteria)) && (!empty($criteria["order_col"])) &&
+			(array_key_exists("order_dir", $criteria)) && (!empty($criteria["order_dir"]))) {
+			$query->orderBy([
+				$criteria["order_col"] => $criteria["order_dir"] == 'desc' ? SORT_DESC : SORT_ASC,
+			]);
 		} else {
 			$query->orderBy("deviser_id, position");
 		}
@@ -887,34 +937,6 @@ class Product extends CActiveRecord {
 	 *
 	 * @return array
 	 */
-	public function getReferences()
-	{
-		$references = [];
-		foreach ($this->price_stock as $stock) {
-			$options = [];
-			foreach ($stock["options"] as $key => $values) {
-				if (isset($values[0])) {
-					// remove the array
-					$options[$key] = $values[0];
-				}
-			}
-			$references[] = [
-				"reference_id" => "temp_random_id_" . uniqid(), // TODO retrieve from database
-				"options" => $options,
-				"stock" => $stock["stock"],
-				"price" => $stock["price"],
-			];
-		}
-		return $references;
-	}
-
-	/**
-	 * Build an structure with all references to be handled by client side.
-	 * By reference, we understand a combination of a product, and each options combinations where
-	 * the product has stock, for example, "t-shirt = X + color = blue + size = xxl"
-	 *
-	 * @return array
-	 */
 	public function getProductOptions()
 	{
 		$options = [];
@@ -991,6 +1013,24 @@ class Product extends CActiveRecord {
 			}
 		}
 		return $values;
+	}
+
+	/**
+	 * Get label to show returns conditions
+	 *
+	 * @return string
+	 */
+	public function getReturnsLabel()
+	{
+		$label = '';
+		if (!empty($this->returns)) {
+			$warrantyType = $this->returns["type"];
+			if (($warrantyType != Returns::NONE) && (array_key_exists("value", $this->returns))) {
+				$label .= $this->returns["value"] . ' ';
+			}
+			$label .= Returns::getDescription($this->returns["type"]);
+		}
+		return $label;
 	}
 
 	/**
@@ -1280,5 +1320,34 @@ class Product extends CActiveRecord {
 	 */
 	public function getBoxes() {
 		return Box::findSerialized(['product_id' => $this->short_id]);
+	}
+
+	/**
+	 * Returns the shipping price of an price stock item to a country
+	 * If no priceStockId is specified, returns shipping price for the first variation available
+	 * If no countryCode is specified, returns shipping price for the default country
+	 * If there is no shipping price defined for the parameters, returns null
+	 *
+	 * @param string $priceStockId
+	 * @param string $countryCode
+	 *
+	 * @return double|null
+	 */
+	public function getShippingPrice($priceStockId = null, $countryCode = null)
+	{
+		if (empty($countryCode)) {
+			$countryCode = Country::getDefaultContryCode();
+		}
+		$deviser = $this->getDeviser();
+		$priceStocks = $this->price_stock;
+		foreach ($priceStocks as $priceStock) {
+			if ($priceStock['available'] && (empty($priceStockId) || $priceStock['short_id'] == $priceStockId)) {
+				$shippingSettingRange = $deviser->getShippinSettingRange($priceStock['weight'], $countryCode);
+
+				return $shippingSettingRange['price'];
+			}
+		}
+
+		return null;
 	}
 }

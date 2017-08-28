@@ -11,12 +11,27 @@ use yii\web\IdentityInterface;
  * @deprecated unused collection
  * @package app\models
  */
-class Become extends CActiveRecord implements IdentityInterface {
+class Become extends CActiveRecord implements IdentityInterface
+{
 
 	const ADMIN = 0;
 	const CLIENT = 1;
 	const DEVISER = 2;
 	const COLLABORATOR = 3;
+
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $serializeFields = [];
+
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $retrieveExtraFields = [];
 
 	//public $accessToken;
 

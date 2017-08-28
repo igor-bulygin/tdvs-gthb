@@ -30,7 +30,7 @@
 		"yii2tech/embedded": "^1.0",
 		"javiereguiluz/easyslugger": "^1.0",
 		"educoder/pest": "1.0.0",
-		"stripe/stripe-php": "^4.4",
+		"stripe/stripe-php": "^5.1",
 		"bazilio/yii2-newrelic": "^0.0.7"
 	},
 	"require-dev": {

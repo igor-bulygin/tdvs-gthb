@@ -12,6 +12,21 @@ class Bespoke extends EmbedModel
 	const NO = 0;
 	const YES = 1;
 
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $serializeFields = [];
+
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $retrieveExtraFields = [];
+
+
 	public function attributes() {
 		return [
 			'type',

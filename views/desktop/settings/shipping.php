@@ -1,25 +1,25 @@
 <?php
+
 use app\assets\desktop\settings\GlobalAsset;
 use app\components\SettingsHeader;
 use app\models\Person;
 use yii\helpers\Json;
-use yii\helpers\Url;
 
 GlobalAsset::register($this);
 
 /** @var Person $person */
 
-$this->title = 'Shipping - ' . $person->getName() . ' - Todevise';
+$this->title = Yii::t('app/public', 'Shipping settings - Todevise');
+
 $this->params['person'] = $person;
 $this->params['settings_menu_active_option'] = 'shipping';
 $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD, 'person-var-script');
 
 ?>
 
-<?php if($person->isPublic()) { ?>
+<?php if($person->isCompletedProfile()) { ?>
 	<?= SettingsHeader::widget() ?>
 <?php } ?>
-
 
 <div ng-controller="shippingSettingsCtrl as shippingSettingsCtrl" class="personal-info-wrapper bank-settings-wrapper">
 	<div class="container">
@@ -30,7 +30,7 @@ $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD
 						<span ng-click="shippingSettingsCtrl.toggleStatus($index)" ng-bind="shippingSettingsCtrl.country_helper[$index].country_name"></span>
 						<span ng-click="shippingSettingsCtrl.toggleStatus($index)" ng-if="!shippingSettingsCtrl.country_helper[$index]['status']">
 							<span class="glyphicon glyphicon-edit pull-right" ng-if="setting.prices && setting.prices.length > 0" ng-cloak></span>
-							<button class="btn btn-default btn-green btn-acordion pull-right" ng-if="!setting.prices || setting.prices.length <= 0" ng-cloak>Add shipping prices</button>
+							<button class="btn btn-default btn-green btn-acordion pull-right" ng-if="!setting.prices || setting.prices.length <= 0" ng-cloak translate="ADD_SHIPPING_PRICES"></button>
 						</span>
 					</div>
 					<shipping-types setting="setting"></shipping-types>
@@ -39,9 +39,9 @@ $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD
 					<hr>
 					<shipping-observations setting="setting" languages="shippingSettingsCtrl.languages"></shipping-observations>
 					<div class="row text-center">
-						<button class="btn btn-default btn-save btn-xl" ng-click="shippingSettingsCtrl.save()">Save</button>
+						<button class="btn btn-default btn-save btn-xl" ng-click="shippingSettingsCtrl.save()" translate="SAVE"></button>
 						<?php if($person->isPublic()) { ?>
-							<button class="btn btn-default btn-xl">Cancel</button>
+							<button class="btn btn-default btn-xl" translate="CANCEL">l</button>
 						<?php } ?>
 					</div>
 				</div>

@@ -1,4 +1,5 @@
 <?php
+
 use app\assets\desktop\deviser\GlobalAsset;
 use app\components\PersonHeader;
 use app\components\PersonMenu;
@@ -8,7 +9,11 @@ GlobalAsset::register($this);
 
 /** @var Person $person */
 
-$this->title = 'About ' . $person->getName() . ' - Todevise';
+$this->title = Yii::t('app/public',
+	'{person_name} faqs - Todevise',
+	['person_name' => $person->getName()]
+);
+
 $this->params['person'] = $person;
 $this->params['person_menu_active_option'] = 'faq';
 $this->params['person_links_target'] = 'public_view';
@@ -27,15 +32,15 @@ $this->params['person_links_target'] = 'public_view';
 					<?php if (count($faq) == 0) { ?>
 						<div class="empty-wrapper">
 							<?php if ($person->isPersonEditable()) { ?>
-								<div><a class="red-link-btn" href="<?= $person->getFaqEditLink()?>">Add / edit questions</a></div>
+								<div><a class="red-link-btn" href="<?= $person->getFaqEditLink()?>"><span translate="ADD_EDIT_QUESTIONS"></span></a></div>
 							<?php } ?>
 							<img class="sad-face" src="/imgs/sad-face.svg">
-							<p class="no-video-text">You don't have any questions!</p>
+							<p class="no-video-text"><span translate="NO_QUESTIONS"></span></p>
 						</div>
 					<?php } else { ?>
 				<div class="faq-wrapper">
 						<?php if ($person->isPersonEditable()) { ?>
-							<div><a class="red-link-btn" href="<?= $person->getFaqEditLink()?>">Add / edit questions</a></div>
+							<div><a class="red-link-btn" href="<?= $person->getFaqEditLink()?>"><span translate="ADD_EDIT_QUESTIONS"></span></a></div>
 						<?php } ?>
 						<div id="accordion" role="tablist" aria-multiselectable="true">
 							<?php foreach ($faq as $key => $item) { ?>

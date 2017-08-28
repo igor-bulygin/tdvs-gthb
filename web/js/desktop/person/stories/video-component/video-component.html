@@ -5,12 +5,12 @@
 			<div class="plus-add">
 				<span>+</span>
 			</div>
-			<div class="text">ADD VIDEOS</div>
+			<div class="text"><span translate="ADD_VIDEOS"></span></div>
 		</div>
-		<p>Paste the YouTube video in the field below.</p>
+		<p><span translate="PASTE_YOUTUBE"></span></p>
 		<form name="storyVideoComponentCtrl.form">
 			<div class="input-group input-group-lg input-video">
-				<span class="input-group-addon" id="sizing-addon1">Video url</span>
+				<span class="input-group-addon" id="sizing-addon1"><span translate="VIDEO_URL"></span></span>
 				<input type="text" name="video" ng-pattern="storyVideoComponentCtrl.youTubeRegEx" class="form-control input-add-video ng-class:{'error-input': storyVideoComponentCtrl.has_error(storyVideoComponentCtrl.form, storyVideoComponentCtrl.form.video)}" placeholder="http://" ng-model="storyVideoComponentCtrl.video_url">
 			</div>
 		</form>

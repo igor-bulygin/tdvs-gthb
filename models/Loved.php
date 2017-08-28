@@ -240,7 +240,7 @@ class Loved extends CActiveRecord
 	 *
 	 * @param array $criteria
 	 *
-	 * @return array
+	 * @return Loved[]
 	 * @throws Exception
 	 */
 	public static function findSerialized($criteria = [])

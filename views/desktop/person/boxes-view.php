@@ -1,4 +1,5 @@
 <?php
+
 use app\assets\desktop\deviser\GlobalAsset;
 use app\components\PersonHeader;
 use app\components\PersonMenu;
@@ -9,7 +10,11 @@ GlobalAsset::register($this);
 /** @var Person $person */
 /** @var \app\models\Box[] $boxes */
 
-$this->title = 'Boxes by ' . $person->getName() . ' - Todevise';
+$this->title = Yii::t('app/public',
+	'Boxes by {person_name} - Todevise',
+	['person_name' => $person->getName()]
+);
+
 $this->params['person'] = $person;
 $this->params['person_menu_active_option'] = 'boxes';
 $this->params['person_links_target'] = 'public_view';
@@ -30,11 +35,11 @@ $this->params['person_links_target'] = 'public_view';
 					<div class="empty-wrapper">
 						<?php if ($person->isConnectedUser()) { ?>
 							<img class="sad-face" src="/imgs/sad-face.svg">
-							<p class="no-video-text">You have no boxes!</p>
+							<p class="no-video-text"><span translate="You have no boxes!"></span></p>
 
-							<button class="btn btn-green btn-add-box" ng-click="viewBoxesCtrl.openCreateBoxModal()">ADD BOX</button>
+							<button class="btn btn-green btn-add-box" ng-click="viewBoxesCtrl.openCreateBoxModal()"><span translate="ADD_BOX"></span></button>
 						<?php } else { ?>
-							<p class="no-video-text"><?=$person->getName()?> has no boxes.</p>
+							<p class="no-video-text"><?=$person->getName()?> <span translate="USER_NO_BOXES"></span></p>
 						<?php } ?>
 					</div>
 
@@ -54,7 +59,7 @@ $this->params['person_links_target'] = 'public_view';
 												<div class="plus-add">
 													<span>+</span>
 												</div>
-												<div class="text">Add box</div>
+												<div class="text"><span translate="ADD_BOX"></span></div>
 											</div>
 										</div>
 									</div>
@@ -65,7 +70,7 @@ $this->params['person_links_target'] = 'public_view';
 										<div class="boxes-wrapper">
 										<?php if (empty($products)) { ?>
 											<div class="empty-box">
-												<span class="empty-title">Empty box</span>
+												<span class="empty-title"><span translate="EMPTY_BOX"></span></span>
 											</div>
 										<?php } else {
 											$count  = 1;

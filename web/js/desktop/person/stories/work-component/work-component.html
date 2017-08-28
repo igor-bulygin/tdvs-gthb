@@ -3,12 +3,12 @@
 		<div class="devisers-works-wrapper mr-15">
 			<div class="devisers-works-header">
 				<span class="title">Deviser</span>
-				<span class="works-link" ng-click="storyWorkComponentCtrl.getDeviserWorks(storyWorkComponentCtrl.person_id)">Your works</span>
+				<span class="works-link" ng-click="storyWorkComponentCtrl.getDeviserWorks(storyWorkComponentCtrl.person_id)"><span translate="YOUR_WORKS"></span></span>
 			</div>
 			<div class="devisers-works-searcher">
 				<i class="fa fa-search icon-magnifier" aria-hidden="true"></i>
 				<form name="storyWorkComponentCtrl.search_deviser_form">
-					<input type="text" ng-model="storyWorkComponentCtrl.search_deviser_key" class="form-control white-rounded-input" placeholder="Search" on-press-enter="storyWorkComponentCtrl.searchDeviser(storyWorkComponentCtrl.search_deviser_form)">
+					<input type="text" ng-model="storyWorkComponentCtrl.search_deviser_key" class="form-control white-rounded-input" translate-attr="{placeholder: 'SEARCH'}" on-press-enter="storyWorkComponentCtrl.searchDeviser(storyWorkComponentCtrl.search_deviser_form)">
 				</form>
 			</div>
 			<div class="deviser-works-list">
@@ -20,7 +20,7 @@
 		</div>
 		<div class="devisers-works-wrapper">
 			<div class="devisers-works-header">
-				<span class="title">Works</span>
+				<span class="title"><span translate="WORKS"></span></span>
 			</div>
 			<div class="deviser-works-list works">
 				<div class="deviser-works-item" ng-repeat="work in storyWorkComponentCtrl.works" ng-click="storyWorkComponentCtrl.setWork(work)">

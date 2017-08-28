@@ -3,6 +3,7 @@
 namespace app\modules\api\priv\v1\controllers;
 
 use app\models\Order;
+use app\models\OrderPack;
 use app\models\Person;
 use Yii;
 use yii\base\Exception;
@@ -107,7 +108,7 @@ class PersonController extends AppPrivateController
 		}
 
 		// show only fields needed in this scenario
-		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_OWNER);
+		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_CLIENT_ORDER);
 
 		$order = Order::findOneSerialized($orderId);
 		if (empty($order)) {
@@ -118,9 +119,11 @@ class PersonController extends AppPrivateController
 			throw new UnauthorizedHttpException();
 		}
 
-		if ($order->order_state == Order::ORDER_STATE_CART) {
-			throw new BadRequestHttpException("This cart has an invalid state");
+		if (!$order->isOrder()) {
+			throw new BadRequestHttpException("This order has an invalid state");
 		}
+
+		$order->setSubDocumentsForSerialize();
 
 		return $order;
 	}
@@ -138,7 +141,7 @@ class PersonController extends AppPrivateController
 		}
 
 		// show only fields needed in this scenario
-		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_OWNER);
+		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_CLIENT_ORDER);
 
 		// set pagination values
 		$limit = Yii::$app->request->get('limit', 99999);
@@ -150,9 +153,14 @@ class PersonController extends AppPrivateController
 		$orders = Order::findSerialized([
 			"person_id" => $person->id,
 			"order_state" => Order::ORDER_STATE_PAID,
+			"pack_state" => Yii::$app->request->get('pack_state'),
 			"limit" => $limit,
 			"offset" => $offset,
 		]);
+
+		foreach ($orders as $order) {
+			$order->setSubDocumentsForSerialize();
+		}
 
 		return [
 			"items" => $orders,
@@ -193,19 +201,14 @@ class PersonController extends AppPrivateController
 		$orders = Order::findSerialized([
 			"deviser_id" => $person->id,
 			"only_matching_packs" => true,
+			"pack_state" => Yii::$app->request->get('pack_state'),
 			"limit" => $limit,
 			"offset" => $offset,
 		]);
 
-//		foreach ($orders as $order) {
-//			$packs = $order->packs;
-//			foreach ($packs as $i => $pack) {
-//				if ($pack['deviser_id'] != $person->short_id) {
-//					unset($packs[$i]);
-//				}
-//			}
-//			$order->setAttribute('packs', $packs);
-//		}
+		foreach ($orders as $order) {
+			$order->setSubDocumentsForSerialize();
+		}
 
 		return [
 			"items" => $orders,
@@ -215,6 +218,87 @@ class PersonController extends AppPrivateController
 				"per_page" => $limit,
 			]
 		];
+	}
+
+	public function actionPackAware($personId, $packId)
+	{
+		/** @var Person $person */
+		$person = Person::findOne(["short_id" => $personId]);
+		if (empty($person)) {
+			throw new NotFoundHttpException('Person not found');
+		}
+
+		if (!$person->isPersonEditable()) {
+			throw new UnauthorizedHttpException();
+		}
+
+		// show only fields needed in this scenario
+		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_DEVISER_PACK);
+		$orders = Order::findSerialized(
+			[
+				'pack_id' => $packId,
+				'deviser_id' => $person->short_id,
+				'only_matching_packs' => true,
+			]
+		);
+		if (count($orders) != 1) {
+			throw new NotFoundHttpException(sprintf('Order for pack_id %s not found', $packId));
+		}
+
+		// We can only get one order by packId...
+		/* @var Order $order */
+		$order = $orders[0];
+
+		if (!$order->isOrder()) {
+			throw new BadRequestHttpException("This order has an invalid state");
+		}
+
+		$order->setPackState($packId, OrderPack::PACK_STATE_AWARE);
+
+		$order->setSubDocumentsForSerialize();
+
+		return $order;
+	}
+
+	public function actionPackShipped($personId, $packId)
+	{
+		/** @var Person $person */
+		$person = Person::findOne(["short_id" => $personId]);
+		if (empty($person)) {
+			throw new NotFoundHttpException('Person not found');
+		}
+
+		if (!$person->isPersonEditable()) {
+			throw new UnauthorizedHttpException();
+		}
+
+		// show only fields needed in this scenario
+		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_DEVISER_PACK);
+		$orders = Order::findSerialized(
+			[
+				'pack_id' => $packId,
+				'deviser_id' => $person->short_id,
+				'only_matching_packs' => true,
+			]
+		);
+		if (count($orders) != 1) {
+			throw new NotFoundHttpException(sprintf('Order for pack_id %s not found', $packId));
+		}
+
+		// We can only get one order by packId...
+		/* @var Order $order */
+		$order = $orders[0];
+
+		if (!$order->isOrder()) {
+			throw new BadRequestHttpException("This order has an invalid state");
+		}
+
+		$order->setPackShippingInfo($packId, Yii::$app->request->post());
+		$order->setPackState($packId, OrderPack::PACK_STATE_SHIPPED);
+
+		$order->setSubDocumentsForSerialize();
+
+		return $order;
 	}
 
 	/**

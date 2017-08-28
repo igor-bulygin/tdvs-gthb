@@ -13,6 +13,21 @@ namespace app\models;
  */
 class OrderProduct extends EmbedModel
 {
+
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $serializeFields = [];
+
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $retrieveExtraFields = [];
+
 	public function getParentAttribute()
 	{
 		return "products";

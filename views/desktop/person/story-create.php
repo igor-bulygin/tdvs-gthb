@@ -1,14 +1,17 @@
 <?php
-use app\models\Person;
+
 use app\assets\desktop\deviser\IndexStoryAsset;
+use app\models\Person;
 use yii\helpers\Json;
 
 IndexStoryAsset::register($this);
 
 /** @var Person $person */
-
+$this->title = Yii::t('app/public',
+	'New story by {person_name} - Todevise',
+	['person_name' => $person->getName()]
+);
 $this->params['person'] = $person;
-$this->title = $person->getName() . ' - Todevise';
 $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD, 'person-var-script');
 
 ?>
@@ -32,7 +35,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 			<story-category-component story="createStoryCtrl.story" categories="createStoryCtrl.categories"></story-category-component>
 			<story-tag-component story="createStoryCtrl.story" languages="createStoryCtrl.languages"></story-tag-component>
 			<div class="text-center" style="display: block; width: 100%; float: left; margin:20px 0 100px;">
-				<button class="btn btn-default btn-green" ng-click="createStoryCtrl.save(createStoryCtrl.story)">Publish story</button>
+				<button class="btn btn-default btn-green" ng-click="createStoryCtrl.save(createStoryCtrl.story)"><span translate="PUBLISH_STORY"></span></button>
 			</div>
 		</div>
 	</div>

@@ -1,4 +1,5 @@
 <?php
+
 use app\assets\desktop\deviser\GlobalAsset;
 use app\components\PersonHeader;
 use app\helpers\Utils;
@@ -8,8 +9,10 @@ GlobalAsset::register($this);
 
 /** @var Person $person */
 /** @var \app\models\Product[] $products */
-
-$this->title = 'Almost done! ' . $person->getName() . ' - Todevise';
+$this->title = Yii::t('app/public',
+	'Almost done! {person_name} - Todevise',
+	['person_name' => $person->getName()]
+);
 $this->params['person'] = $person;
 
 $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\View::POS_HEAD, 'person-not-public-var-script');
@@ -26,26 +29,26 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 				<h3 class="succes-black-title text-center">Almost done!</h3>
 				<?php if ($person->isInfluencer()) {?>
 					<div class="text-center">
-						<p>If you prefer, before making your profile public you can fill it with products you like.</p>
+						<p><span translate="FILL_PROFILE"></span></p>
 						<img class="image-loved" src="/imgs/loved-image.png">
 					</div>
 				<?php } ?>
 				<?php if ($person->isDeviser()) { ?>
-					<p class="success-black-subtitle text-center">Before making your profile public, please complete the following steps:</p>
+					<p class="success-black-subtitle text-center"><span translate="BEFORE_PUBLIC"></span></p>
 				<?php } ?>
 			</div>
 		</div>
 		<?php if ($person->isDeviser()) { ?>
 			<div class="row text-center">
 				<a class="big-btn btn btn-default <?=$person->hasShippingSettings() ? 'done' : ''?>" href="<?=$person->getSettingsLink('shipping')?>">
-					Add shipping prices
+					<span translate="ADD_SHIPPING"></span>
 					<?php if ($person->hasShippingSettings()) { ?><i class="red-check ion-checkmark"></i> <?php } ?>
 				</a>
 			</div>
 			<div class="row text-center">
 				<a class="big-btn btn btn-default <?=$person->hasStripeInfo() ? 'done' : ''?>" href="<?=$person->getSettingsLink('connect-stripe')?>">
-					Add a bank account
-					<p class="big-btn-message">You will be redirected to an external website</p>
+					<span translate="ADD_BANK_ACCOUNT"></span>
+					<p class="big-btn-message"><span translate="WILL_REDIRECTED"></span></p>
 					<?php if ($person->hasStripeInfo()) { ?><i class="red-check ion-checkmark"></i> <?php } ?>
 				</a>
 				
@@ -62,7 +65,6 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 						<div class="col-lg-15">
 							<div class="product-added-item">
 							<?php if ($person->isPersonEditable()) { ?>
-								
 									<a class="edit-product" href="<?= $product->getEditLink()?>" title="Edit work">
 										<i class="ion-edit"></i>
 									</a>
@@ -89,11 +91,11 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 				<h3 class="modal-title"></h3>
 			</div>
 			<div class="modal-body">
-				<p>Are you sure you want to delete this work?</p>
+				<p><span translate="DELETE_WORK"></span></p>
 			</div>
 			<div class="modal-footer">
-				<button class="btn btn-default btn-green pull-left" ng-click="modalDeleteProductCtrl.close()">Cancel</button>
-				<button class="btn btn-default pull-right" ng-click="modalDeleteProductCtrl.ok()">DELETE</button>
+				<button class="btn btn-default btn-green pull-left" ng-click="modalDeleteProductCtrl.close()"><span translate="CANCEL"></span></button>
+				<button class="btn btn-default pull-right" ng-click="modalDeleteProductCtrl.ok()"><span translate="DELETE"></span></button>
 			</div>
 		</div>
 	</script>

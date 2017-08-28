@@ -1,4 +1,5 @@
 <?php
+
 use app\assets\desktop\product\GlobalAsset;
 use app\models\Person;
 use app\models\PersonVideo;
@@ -7,11 +8,14 @@ use yii\helpers\Json;
 
 GlobalAsset::register($this);
 
-/** @var Person $deviser */
+/** @var Person $person */
 /** @var Product $product */
 /** @var PersonVideo $video */
 
-$this->title = $person->getName() . ' - Todevise';
+$this->title = Yii::t('app/public',
+	'Create new work by {person_name} - Todevise',
+	['person_name' => $person->getName()]
+);
 $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD, 'person-var-script');
 
 ?>
@@ -45,7 +49,8 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 				</div>
 			</div>
 			<div class="text-center" ng-if="createProductCtrl.saving">
-				<img src="/imgs/loading.gif">
+				<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+				<span class="sr-only">Loading...</span>
 			</div>
 		</div>
 	</div>

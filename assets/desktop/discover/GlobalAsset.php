@@ -18,6 +18,9 @@ class GlobalAsset extends AssetBundle {
 		'js/desktop/discover/stories/exploreStoriesCtrl.js',
 		'js/desktop/discover/stories/results/results.js',
 		'js/desktop/discover/stories/filters/filters.js',
+		'js/desktop/discover/products/explore-products.js',
+		'js/desktop/discover/products/filters/filters.js',
+		'js/desktop/discover/products/results/results.js',
 	];
 	public $depends = [
 		'app\assets\desktop\GlobalAsset',

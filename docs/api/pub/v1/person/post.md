@@ -16,7 +16,7 @@ Example about how to call to Web Service to create a new Person account
 * `type` : array with only one element, with value 2 (required)
 * `uuid`: uuid of invitation (required)
 * `email`: email of deviser (required)
-* `first_name`: representative first name (required)
+* `name`: representative first name (required)
 * `last_name`: representative last name (required)
 * `brand_name`: brand name (required)
 * `password`: password (required)

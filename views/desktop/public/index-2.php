@@ -1,11 +1,12 @@
 <?php
+
 use app\assets\desktop\pub\PublicCommonAsset;
 use app\helpers\Utils;
 use app\models\Person;
 
 PublicCommonAsset::register($this);
 
-$this->title = 'Todevise / Home';
+$this->title = Yii::t('app/public', 'Todevise');
 
 /** @var Person[][] $devisers */
 /** @var int $totalDevisers */
