@@ -1,4 +1,5 @@
 <?php
+
 use app\assets\desktop\deviser\GlobalAsset;
 use app\helpers\Utils;
 use app\models\Person;
@@ -10,7 +11,11 @@ GlobalAsset::register($this);
 /** @var \app\models\Box $box */
 /** @var \app\models\Box[] $moreBoxes */
 
-$this->title = 'Box '.$box->name.' by ' . $person->getName() . ' - Todevise';
+$this->title = Yii::t('app/public',
+	'{box_name} by {person_name} - Todevise',
+	['box_name' => $box->name, 'person_name' => $person->getName()]
+);
+
 $this->params['person'] = $person;
 $this->params['person_menu_active_option'] = 'boxes';
 $this->params['person_links_target'] = 'public_view';

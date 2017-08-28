@@ -1,15 +1,19 @@
 <?php
+
+use app\assets\desktop\deviser\IndexStoryAsset;
 use app\helpers\Utils;
 use app\models\Person;
 use yii\helpers\Json;
-use app\assets\desktop\deviser\IndexStoryAsset;
 
 IndexStoryAsset::register($this);
 
 /** @var Person $person */
 /** @var \app\models\Story $story */
 
-$this->title = 'Story '.$story->getTitle().' by ' . $person->getName() . ' - Todevise';
+$this->title = Yii::t('app/public',
+	'{story_title} by {person_name} - Todevise',
+	['story_title' => $story->getTitle(), 'person_name' => $person->getName()]
+);
 $this->params['person'] = $person;
 $this->params['person_menu_active_option'] = 'stories';
 $this->params['person_links_target'] = 'public_view';

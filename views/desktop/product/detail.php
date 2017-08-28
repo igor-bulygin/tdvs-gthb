@@ -9,11 +9,14 @@ use app\models\PersonVideo;
 
 GlobalAsset::register($this);
 
-/** @var Person $deviser */
+/** @var Person $person */
 /** @var \app\models\Product $product */
 /** @var PersonVideo $video */
 
-$this->title = $product->name . ' - Todevise';
+$this->title = Yii::t('app/public',
+	'{product_name} by {person_name} - Todevise',
+	['product_name' => $product->getName(), 'person_name' => $person->getName()]
+);
 $productImages = $product->getUrlGalleryImages();
 $videos = $product->getVideos();
 
@@ -106,9 +109,9 @@ $videos = $product->getVideos();
 							<span class="number-score">(20)</span>
 							<div class="avatar-wrapper-side">
 								<div class="avatar">
-									<a href="<?= $deviser->getStoreLink() ?>">
-										<img class="cover" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($deviser->getAvatarImage())->resize(128, 128) ?>" data-pin-nopin="true">
-										<span><?= $deviser->getName() ?></span>
+									<a href="<?= $person->getStoreLink() ?>">
+										<img class="cover" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getAvatarImage())->resize(128, 128) ?>" data-pin-nopin="true">
+										<span><?= $person->getName() ?></span>
 									</a>
 								</div>
 							</div>
@@ -292,7 +295,7 @@ $videos = $product->getVideos();
 				</li>
 				<?php } ?>
 				<li role="presentation">
-					<a href="#works" aria-controls="works" role="tab" data-toggle="tab">More by <?= $deviser->getName() ?></a>
+					<a href="#works" aria-controls="works" role="tab" data-toggle="tab">More by <?= $person->getName() ?></a>
 				</li>
 			</ul>
 		</div>
@@ -562,7 +565,7 @@ $videos = $product->getVideos();
 					</nav>
 					<div class="other-products-wrapper">
 						<div id="macy-container">
-							<?php foreach ($deviserProducts as $i => $product) { ?>
+							<?php foreach ($personProducts as $i => $product) { ?>
 								<div class="menu-category list-group">
 									<div class="grid">
 										<figure class="effect-zoe">

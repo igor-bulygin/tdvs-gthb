@@ -1,4 +1,5 @@
 <?php
+
 use app\assets\desktop\deviser\GlobalAsset;
 use app\components\PersonHeader;
 use app\components\PersonMenu;
@@ -8,7 +9,11 @@ GlobalAsset::register($this);
 
 /** @var Person $person */
 
-$this->title = 'About ' . $person->getName() . ' - Todevise';
+$this->title = Yii::t('app/public',
+	'About {person_name} - Todevise',
+	['person_name' => $person->getName()]
+);
+
 $this->params['person'] = $person;
 $this->params['person_menu_active_option'] = 'about';
 $this->params['person_links_target'] = 'public_view';

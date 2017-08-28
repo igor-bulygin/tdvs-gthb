@@ -1,14 +1,18 @@
 <?php
+
+use app\assets\desktop\deviser\IndexStoryAsset;
 use app\models\Person;
 use yii\helpers\Json;
-use app\assets\desktop\deviser\IndexStoryAsset;
 
 IndexStoryAsset::register($this);
 
 /** @var Person $person */
-
+/** @var \app\models\Story $story */
+$this->title = Yii::t('app/public',
+	'Edit story {story_title} by {person_name} - Todevise',
+	['story_title' => $story->getTitle(), 'person_name' => $person->getName()]
+);
 $this->params['person'] = $person;
-$this->title = $person->getName() . ' - Todevise';
 $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD, 'person-var-script');
 $this->registerJs("var story = ".Json::encode($story), yii\web\View::POS_HEAD, 'story-var-script');
 
