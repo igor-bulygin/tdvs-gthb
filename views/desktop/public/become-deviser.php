@@ -1,4 +1,5 @@
 <?php
+
 use app\assets\desktop\pub\PublicCommonAsset;
 use app\models\Person;
 
@@ -6,7 +7,7 @@ PublicCommonAsset::register($this);
 
 /** @var Person $deviser */
 
-$this->title = 'Become a Deviser - Todevise';
+$this->title = Yii::t('app/public', 'Become a deviser - Todevise');
 
 ?>
 

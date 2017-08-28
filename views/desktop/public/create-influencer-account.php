@@ -1,4 +1,5 @@
 <?php
+
 use app\assets\desktop\pub\PublicCommonAsset;
 use app\models\Invitation;
 use yii\helpers\Url;
@@ -7,7 +8,8 @@ PublicCommonAsset::register($this);
 
 /** @var Invitation $invitation */
 
-$this->title = 'Create an influencer account - Todevise';
+$this->title = Yii::t('app/public', 'Create an influencer account - Todevise');
+
 $this->registerJs("var invitation = ".\yii\helpers\Json::encode($invitation), yii\web\View::POS_HEAD, 'invitation-var-script');
 $this->registerJs("var type = 2", yii\web\View::POS_HEAD, 'person-type-var-script');
 
@@ -77,7 +79,7 @@ $this->registerJs("var type = 2", yii\web\View::POS_HEAD, 'person-type-var-scrip
 	<?php } elseif ($invitation->isUsed()) { ?>
 		<div class="invitation-messages">
 			<p>You have created an Influencer account with this invitation. Login to access to your account.</p>
-			<a href="<?= Url::to(["/site/login"]) ?>" class="btn btn-red">Login</a>
+			<a href="<?= Url::to(["/public/login"]) ?>" class="btn btn-red">Login</a>
 		</div>
 	<?php } else { ?>
 		<div class="invitation-messages">
