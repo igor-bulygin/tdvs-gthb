@@ -4,20 +4,28 @@
 	function controller($scope) {
 		var vm = this;
 		vm.addMoreItems = addMoreItems;
-		var show_items = 31;
+		var show_items = 32;
+		vm.results_infinite = [];
+		vm.searchPage=1;
 
 		function addMoreItems() {
 			var last = vm.results_infinite.length;
-			vm.results_infinite = vm.results_infinite.concat(vm.results.items.slice(last, last+show_items));
+			if ((last+show_items) > (vm.limit * vm.searchPage)) {
+				$scope.$emit("changeNewPage",true); 
+				vm.searchPage= vm.searchPage + 1;
+			}
+			else {
+				vm.results_infinite = vm.results_infinite.concat(vm.results.slice(last, last+show_items));
+			}
 		}
 
+
 		$scope.$watch('exploreProductsResultsCtrl.results', function(newValue, oldValue) {
+			if (newValue===-1) {
+				vm.results_infinite = [];
+			}
 			if(angular.isObject(newValue)) {
-				if(newValue.items.length > 0)
-					vm.results_infinite = newValue.items.slice(0, show_items);
-				else {
-					vm.results_infinite = [];
-				}
+				vm.results_infinite=vm.results_infinite.concat(vm.results.slice(vm.results_infinite.length, vm.results_infinite.length + show_items));
 			}
 		}, true);
 	}
@@ -27,7 +35,8 @@
 		controller: controller,
 		controllerAs: 'exploreProductsResultsCtrl',
 		bindings: {
-			results: '<'
+			results: '<',
+			limit:'<'
 		}
 	}
 
