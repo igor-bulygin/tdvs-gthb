@@ -27,8 +27,8 @@ class Lang {
 	static public function getEnabledLanguages()
 	{
 		return array_merge(
+			self::ES_ES_DESC,
 			self::EN_US_DESC
-//			self::ES_ES_DESC,
 //			self::CA_ES_DESC
 		);
 	}
