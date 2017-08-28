@@ -14,7 +14,6 @@
 
 		function init() {
 			getCategories();
-			search();
 		}
 
 		function seeMore(value) {
@@ -42,7 +41,7 @@
 			if (!angular.isUndefined(vm.orderFilter) && !angular.isUndefined(vm.orderFilter.value)) {
 				params = Object.assign(params, {order_type: vm.orderFilter.value});
 			}
-			if (!angular.isUndefined(vm.searchParam)) {
+			if (!angular.isUndefined(vm.searchParam) && vm.searchParam.length>0) {
 				params.q=vm.searchParam;
 			}
 			Object.keys(vm.filters).map(function(filter_type) {
@@ -74,7 +73,6 @@
 		controller: controller,
 		controllerAs: 'exploreProductsFiltersCtrl',
 		bindings: {
-			searching:'<',
 			results: '='
 		}
 	}
