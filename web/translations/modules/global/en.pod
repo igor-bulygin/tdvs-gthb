@@ -2,6 +2,20 @@
 	"global": {
 		"CANCEL": "Cancel",
 		"DELETE": "Delete",
-		"SEARCH": "Search"
+		"SEARCH": "Search",
+		"YES": "Yes",
+		"NO": "No",
+		"STANDARD": "Standard",
+		"EXPRESS": "Express",
+		"user": {
+			"FIRST_NAME": "First name",
+			"LAST_NAME": "Last name",
+			"VAT_NUMBER": "VAT number",
+			"PHONE": "Phone",
+			"COUNTRY": "Country",
+			"CITY": "City",
+			"ADDRESS": "Address",
+			"ZIP": "ZIP"
+		}
 	}
 }

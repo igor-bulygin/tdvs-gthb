@@ -24,7 +24,7 @@ $this->registerJs("var order_id= ".Json::encode($order_id), yii\web\View::POS_HE
 		<div class="container">
 			<div class="row no-mar">
 				<div class="col-md-8">
-					<span class="green-title" translate=="ORDER_SUCCESS_TITLE"></span>
+					<span class="green-title" translate="ORDER_SUCCESS_TITLE"></span>
 					<span class="success-header-message" translate="PURCHASE_COMPLETE"></span>
 					<span class="success-header-tagline" translate="RECEIPT_TO_MAIL"></span>
 				</div>
