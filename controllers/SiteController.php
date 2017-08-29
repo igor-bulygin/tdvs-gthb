@@ -3,9 +3,7 @@
 namespace app\controllers;
 
 use app\models\ContactForm;
-use app\models\Login;
 use Yii;
-use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 
@@ -14,30 +12,6 @@ class SiteController extends Controller
 	public function behaviors()
 	{
 		return [
-			'access' => [
-				'class' => AccessControl::className(),
-				'only' => ['login', 'logout'],
-				'rules' => [
-						[
-								'actions' => ['login'],
-								'allow' => true,
-								'roles' => ['?'],
-						],
-						[
-								'actions' => ['login'],
-								'allow' => false,
-								'roles' => ['@'],
-								'denyCallback' => function ($rule, $action) {
-									return $this->goHome();
-								}
-						],
-					[
-						'actions' => ['logout'],
-						'allow' => true,
-						'roles' => ['@'],
-					],
-				],
-			],
 			'verbs' => [
 				'class' => VerbFilter::className(),
 				'actions' => [
@@ -62,50 +36,30 @@ class SiteController extends Controller
 		];
 	}
 
+	/**
+	 * @deprecated
+	 * @return string
+	 */
 	public function actionIndex()
 	{
-		return $this->render('index');
+		return $this->render('_index');
 	}
 
-	public function actionLogin()
-	{
-		$model = new Login();
-		$invalidLogin = false;
-		if ($model->load(Yii::$app->request->post())) {
-			if ($model->login()) {
-				return $this->goBack();
-			}
-			$invalidLogin = true;
-		}
-		$this->layout = '/desktop/public-2.php';
-		return $this->render("login-2", [
-			'invalidLogin' => $invalidLogin
-		]);
-	}
-
-	public function actionLogout()
-	{
-		Yii::$app->user->logout();
-
-		return $this->goHome();
-	}
-
+	/**
+	 * @deprecated
+	 * @return string|\yii\web\Response
+	 */
 	public function actionContact()
 	{
 		$model = new ContactForm();
-		if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
+		if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['admin_email'])) {
 			Yii::$app->session->setFlash('contactFormSubmitted');
 
 			return $this->refresh();
 		} else {
-			return $this->render('contact', [
+			return $this->render('_contact', [
 				'model' => $model,
 			]);
 		}
-	}
-
-	public function actionAbout()
-	{
-		return $this->render('about');
 	}
 }

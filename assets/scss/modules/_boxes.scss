@@ -237,6 +237,7 @@
         span{
             display: block;
             margin: -9px 0 0 0;
+			color: $black;
         }
     }
 	.plus-add-wrapper{
@@ -245,6 +246,7 @@
 		.text{
 			font-family: $font-family--serif!important;
 			font-weight: bold;
+			color: $black;
 		}
 	}
 }
@@ -289,6 +291,12 @@
 	margin-bottom: 30px;
 	overflow: hidden;
     max-width: 295px;
+	.small-photo-box{
+		width: 49.2%;
+	}
+	&.home{
+		max-height: 350px;
+	}
 }
 .more-boxes-wrapper{
 	padding: 0 0 100px;

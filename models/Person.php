@@ -19,7 +19,7 @@ use yii\web\IdentityInterface;
  * @property mixed $type
  * @property array $categories
  * @property array $collections
- * @property PersonPreferences $preferencesMapping
+// * @property PersonPreferences $preferencesMapping
  * @property PersonPersonalInfo $personalInfoMapping
  * @property PersonMedia $mediaMapping
  * @property PersonSettings $settingsMapping
@@ -29,6 +29,7 @@ use yii\web\IdentityInterface;
  * @property array $credentials
  * @property array $preferences
  * @property string $curriculum
+ * @property PersonShippingSettings[] $shippingSettingsMapping
  * @property MongoDate $created_at
  * @property MongoDate $updated_at
  */
@@ -64,14 +65,14 @@ class Person extends CActiveRecord implements IdentityInterface
 	 *
 	 * @var array
 	 */
-	static protected $serializeFields = [];
+	protected static $serializeFields = [];
 
 	/**
 	 * The attributes that should be serialized
 	 *
 	 * @var array
 	 */
-	static protected $retrieveExtraFields = [];
+	protected static $retrieveExtraFields = [];
 
 
 	//public $accessToken;
@@ -99,10 +100,11 @@ class Person extends CActiveRecord implements IdentityInterface
 			'media',
 			'settings',
 			'credentials',
-			'preferences',
+//			'preferences',
 			'press',
 			'videos',
 			'faq',
+			'shipping_settings',
 			'created_at',
 			'updated_at',
 		];
@@ -120,7 +122,7 @@ class Person extends CActiveRecord implements IdentityInterface
 	 *
 	 * @var array
 	 */
-	public static $textFilterAttributes = ['personal_info.name', 'personal_info.last_name', 'personal_info.brand_name', 'text_short_description'];
+	public static $textFilterAttributes = ['personal_info.name', 'personal_info.last_name', 'personal_info.brand_name', /*'text_short_description'*/];
 
 	/**
 	 * Initialize model attributes
@@ -140,13 +142,14 @@ class Person extends CActiveRecord implements IdentityInterface
 
 		$this->videos = [];
 		$this->faq = [];
+		$this->shipping_settings = [];
 
 	}
 
-	public function embedPreferencesMapping()
-	{
-		return $this->mapEmbedded('preferences', PersonPreferences::className(), ['unsetSource' => false]);
-	}
+//	public function embedPreferencesMapping()
+//	{
+//		return $this->mapEmbedded('preferences', PersonPreferences::className(), ['unsetSource' => false]);
+//	}
 
 	public function embedPersonalInfoMapping()
 	{
@@ -171,6 +174,11 @@ class Person extends CActiveRecord implements IdentityInterface
 	public function embedFaqMapping()
 	{
 		return $this->mapEmbeddedList('faq', FaqQuestion::className(), ['unsetSource' => false]);
+	}
+
+	public function embedShippingSettingsMapping()
+	{
+		return $this->mapEmbeddedList('shipping_settings', PersonShippingSettings::className(), ['unsetSource' => false]);
 	}
 
 	/**
@@ -343,17 +351,45 @@ class Person extends CActiveRecord implements IdentityInterface
 
 	public function setParentOnEmbbedMappings()
 	{
-		$this->preferencesMapping->setParentObject($this);
+//		$this->preferencesMapping->setParentObject($this);
 		$this->personalInfoMapping->setParentObject($this);
 		$this->mediaMapping->setParentObject($this);
 		$this->settingsMapping->setParentObject($this);
 
-		foreach ($this->videosMapping as $videoMapping) {
-			$videoMapping->setParentObject($this);
+		foreach ($this->videosMapping as $item) {
+			$item->setParentObject($this);
 		}
-		foreach ($this->faqMapping as $faqMapping) {
-			$faqMapping->setParentObject($this);
+		foreach ($this->faqMapping as $item) {
+			$item->setParentObject($this);
 		}
+		foreach ($this->shippingSettingsMapping as $item) {
+			$item->setParentObject($this);
+		}
+	}
+
+	public function validate($attributeNames = null, $clearErrors = true)
+	{
+		if (is_array($attributeNames) && !empty($attributeNames)) {
+			if (in_array('personal_info', $attributeNames)) {
+				$attributeNames[] = 'personalInfoMapping';
+			};
+			if (in_array('media', $attributeNames)) {
+				$attributeNames[] = 'mediaMapping';
+			}
+			if (in_array('settings', $attributeNames)) {
+				$attributeNames[] = 'settingsMapping';
+			}
+			if (in_array('videos', $attributeNames)) {
+				$attributeNames[] = 'videosMapping';
+			}
+			if (in_array('faq', $attributeNames)) {
+				$attributeNames[] = 'faqMapping';
+			}
+			if (in_array('shipping_settings', $attributeNames)) {
+				$attributeNames[] = 'shippingSettingsMapping';
+			}
+		}
+		return parent::validate($attributeNames, $clearErrors);
 	}
 
 	/**
@@ -398,24 +434,24 @@ class Person extends CActiveRecord implements IdentityInterface
 	public function beforeDelete()
 	{
 		if ($this->isDeviser()) {
-			$products = Product2::findSerialized(["deviser_id" => $this->id]);
-			/* @var Product2[] $products */
+			$products = $this->getProducts();
+			/* @var Product[] $products */
 			foreach ($products as $item) {
 				$item->delete();
 			}
 		}
 
-		$boxes = Box::findSerialized(["person_id" => $this->id]);
+		$boxes = $this->getBoxes();
 		foreach ($boxes as $item) {
 			$item->delete();
 		}
 
-		$loveds = Loved::findSerialized(["person_id" => $this->id]);
+		$loveds = $this->getLoveds();
 		foreach ($loveds as $item) {
 			$item->delete();
 		}
 
-		$stories = Story::findSerialized(["person_id" => $this->id]);
+		$stories = $this->getStories();
 		foreach ($stories as $item) {
 			$item->delete();
 		}
@@ -423,6 +459,36 @@ class Person extends CActiveRecord implements IdentityInterface
 		$this->deletePhotos();
 
 		return parent::beforeDelete();
+	}
+
+	/**
+	 * @return Product[]
+	 */
+	public function getProducts() {
+		return Product::findSerialized(["deviser_id" => $this->id]);
+	}
+
+	/**
+	 * @return Box[]
+	 */
+	public function getBoxes() {
+		return Box::findSerialized(["person_id" => $this->id]);
+	}
+
+	/**
+	 * @return Loved[]
+	 */
+	public function getLoveds()
+	{
+		return Loved::findSerialized(["person_id" => $this->id]);
+	}
+
+	/**
+	 * @return Story[]
+	 */
+	public function getStories()
+	{
+		return Story::findSerialized(["person_id" => $this->id]);
 	}
 
 	public function deletePhotos() {
@@ -441,18 +507,15 @@ class Person extends CActiveRecord implements IdentityInterface
 
 	public function setLanguage($lang)
 	{
-		$this->preferencesMapping->lang = $lang;
+//		$this->preferencesMapping->lang = $lang;
+		$this->settingsMapping->lang = $lang;
 	}
 
 	public function rules()
 	{
-		// TODO use core validators: "in", "each" (http://www.yiiframework.com/doc-2.0/guide-tutorial-core-validators.html)
-
 		return [
-			// the name, email, subject and body attributes are required
 			[
 				[
-					'personal_info',
 					'credentials',
 					'type',
 				],
@@ -462,11 +525,18 @@ class Person extends CActiveRecord implements IdentityInterface
 			[
 				[
 					'personal_info',
+				],
+				'required',
+				'on' => [self::SCENARIO_CLIENT_CREATE]
+			],
+			[
+				[
+					'personal_info',
 					'categories',
 					'credentials',
 					'text_short_description',
 					'text_biography',
-					'preferences',
+//					'preferences',
 					'curriculum',
 					'media',
 					'settings',
@@ -485,11 +555,21 @@ class Person extends CActiveRecord implements IdentityInterface
 			],
 			[
 				[
+					'shipping_settings',
+				],
+				'safe',
+				'on' => [
+					self::SCENARIO_DEVISER_UPDATE_DRAFT,
+					self::SCENARIO_DEVISER_UPDATE_PROFILE,
+				]
+			],
+			[
+				[
 					'personal_info',
 					'credentials',
 					'text_short_description',
 					'text_biography',
-					'preferences',
+//					'preferences',
 					'media',
 					'settings',
 					'slug',
@@ -529,11 +609,11 @@ class Person extends CActiveRecord implements IdentityInterface
 				'app\validators\TranslatableValidator',
 				'on' => [self::SCENARIO_DEVISER_UPDATE_PROFILE, self::SCENARIO_INFLUENCER_UPDATE_PROFILE, self::SCENARIO_CLIENT_UPDATE],
 			],
-			[
-				'preferencesMapping',
-				'yii2tech\embedded\Validator',
-				'on' => [self::SCENARIO_DEVISER_CREATE_DRAFT, self::SCENARIO_INFLUENCER_CREATE_DRAFT, self::SCENARIO_CLIENT_UPDATE],
-			],
+//			[
+//				'preferencesMapping',
+//				'yii2tech\embedded\Validator',
+//				'on' => [self::SCENARIO_DEVISER_CREATE_DRAFT, self::SCENARIO_INFLUENCER_CREATE_DRAFT, self::SCENARIO_CLIENT_UPDATE],
+//			],
 			[
 				'personalInfoMapping',
 				'app\validators\EmbedDocValidator',
@@ -576,10 +656,9 @@ class Person extends CActiveRecord implements IdentityInterface
 				'on' => [self::SCENARIO_DEVISER_UPDATE_PROFILE, self::SCENARIO_INFLUENCER_UPDATE_PROFILE],
 			],
 			['press', 'app\validators\PersonPressFilesValidator'],
-			['videos', 'safe'], // to load data posted from WebServices
 			['videosMapping', 'app\validators\EmbedDocValidator'], // to apply rules
-			['faq', 'safe'], // to load data posted from WebServices
 			['faqMapping', 'app\validators\EmbedDocValidator'], // to apply rules
+			['shippingSettingsMapping', 'app\validators\EmbedDocValidator'], // to apply rules
 		];
 	}
 
@@ -591,9 +670,9 @@ class Person extends CActiveRecord implements IdentityInterface
 	 */
 	public function validateAmountProducts($attribute, $params)
 	{
-		$products = Product2::findSerialized([
+		$products = Product::findSerialized([
 			'deviser_id' => $this->id,
-			'product_state' => Product2::PRODUCT_STATE_ACTIVE,
+			'product_state' => Product::PRODUCT_STATE_ACTIVE,
 		]);
 		if (empty($products)) {
 			$this->addError('products', 'Must have at least one work published.');
@@ -671,6 +750,9 @@ class Person extends CActiveRecord implements IdentityInterface
 					'videos_link' => 'videosLink',
 					'faq_link' => 'faqLink',
 				];
+
+				self::$translateFields = true;
+
 				break;
 			case self::SERIALIZE_SCENARIO_PUBLIC:
 				self::$serializeFields = [
@@ -680,7 +762,9 @@ class Person extends CActiveRecord implements IdentityInterface
 					'text_biography',
 					'categories',
 					'collections',
-					'personal_info',
+					'city' => 'city',
+					'country' => 'country',
+//					'personal_info',
 					'media',
 					'press',
 					'videos' => 'videosPreview',
@@ -703,8 +787,11 @@ class Person extends CActiveRecord implements IdentityInterface
 				];
 
 				static::$retrieveExtraFields = [
-					'videos'
+					'videos',
+					'personal_info',
 				];
+
+				self::$translateFields = true;
 
 				break;
 			case self::SERIALIZE_SCENARIO_OWNER:
@@ -721,9 +808,11 @@ class Person extends CActiveRecord implements IdentityInterface
 					'press',
 					'videos',
 					'faq',
+					'shipping_settings',
 					'curriculum',
 					'account_state',
-					'name' => "name",
+					'name' => 'name',
+					'email' => 'email',
 					'url_images' => 'urlImagesLocation',
 					'url_avatar' => "avatarImage128",
 					'main_link' => 'mainLink',
@@ -743,13 +832,18 @@ class Person extends CActiveRecord implements IdentityInterface
 					'press_edit_link' => 'pressEditLink',
 					'videos_edit_link' => 'videosEditLink',
 					'faq_edit_link' => 'faqEditLink',
-					'preferences',
+
 					'settings',
+					'available_countries' => 'availableCountries',
+//					'preferences',
 				];
 
 				static::$retrieveExtraFields = [
-					'videos'
+					'credentials',
+					'videos',
 				];
+
+				self::$translateFields = false;
 
 				break;
 			case self::SERIALIZE_SCENARIO_ADMIN:
@@ -767,22 +861,35 @@ class Person extends CActiveRecord implements IdentityInterface
 					'press',
 					'videos',
 					'faq',
+					'shipping_settings',
 					'curriculum',
 					'account_state',
-					'preferences',
+//					'preferences',
 					'url_images' => 'urlImagesLocation',
 				];
 
-				// field name is "name", its value is defined by a PHP callback
-//            'name' => function () {
-//                return $this->first_name . ' ' . $this->last_name;
-//            },
+				self::$translateFields = false;
+
 				break;
 			default:
 				// now available for this Model
 				static::$serializeFields = [];
 				break;
 		}
+	}
+
+	public function getCity() {
+		return $this->personalInfoMapping->city;
+	}
+
+	public function getCountry() {
+		return $this->personalInfoMapping->country;
+	}
+
+	public function getAvailableCountries() {
+		return array(
+			'ES',
+		);
 	}
 
 	/**
@@ -977,11 +1084,20 @@ class Person extends CActiveRecord implements IdentityInterface
 		$level2Categories = [];
 
 		// TODO could be optimized with an aggregation ??
-		$products = Product::find()->select([
-			'short_id',
-			'categories',
-			'media'
-		])->where(['deviser_id' => $this->short_id])->all();
+		$products = Product::find()
+			->select(
+				[
+					'short_id',
+					'categories',
+					'media'
+				])
+			->where(
+				[
+					'deviser_id' => $this->short_id,
+					'product_state' => Product::PRODUCT_STATE_ACTIVE,
+				])
+			->all();
+
 		$detailCategoriesIds = [];
 		/** @var Product $product */
 		foreach ($products as $product) {
@@ -989,13 +1105,22 @@ class Person extends CActiveRecord implements IdentityInterface
 		}
 
 		// now, get the models for those categories
-		$detailCategories = Category::find()->select([
-			'short_id',
-			'name',
-			'slug',
-			'path'
-		])->where(['short_id' => $detailCategoriesIds])->all();
+		$detailCategories = Category::find()
+			->select(
+				[
+					'short_id',
+					'name',
+					'slug',
+					'path',
+				])
+			->where(
+				[
+					'short_id' => $detailCategoriesIds,
+				])
+			->all();
+
 		$level2Ids = [];
+
 		/** @var Category $category */
 		foreach ($detailCategories as $category) {
 			// remove first slash, and find id of second level category
@@ -1022,18 +1147,19 @@ class Person extends CActiveRecord implements IdentityInterface
 		foreach ($level2Ids as $id => $subIds) {
 			$category = Category::findOne(['short_id' => $id]);
 			if ($category) {
+
+				$categoryProduct = Product::findOne([
+					'deviser_id' => $this->short_id,
+					'categories' => $category->getShortIds(),
+					'product_state' => Product::PRODUCT_STATE_ACTIVE,
+				]);
+				if (!$categoryProduct) {
+					throw new \yii\db\Exception("Cannot find a product of ".$this->getName()." in the category ".$category->getName());
+				}
 				// assign one product of the deviser, related with this category
-				$category->setDeviserProduct(Product::findOne([
-					"deviser_id" => $this->short_id,
-					"categories" => $category->getShortIds()
-				]));
+				$category->setDeviserProduct($categoryProduct);
 				$category->setDeviserSubcategories(Category::find()->where(['short_id' => $subIds])->all());
-				// force more than one subcategory to test
-//				$category->setDeviserSubcategories(
-//					array_merge($category->getDeviserSubcategories(),
-//						[Category::find()->where(['short_id' => "e532z"])->one()]
-//					)
-//				);
+
 				// if there are more than one subcategory, add "all" subcategory
 				if (count($category->getDeviserSubcategories()) > 1) {
 					$subcategoryAll = new Category();
@@ -1098,6 +1224,16 @@ class Person extends CActiveRecord implements IdentityInterface
 	}
 
 	/**
+	 * Shortcut to get the name
+	 *
+	 * @return string
+	 */
+	public function getEmail()
+	{
+		return isset($this->credentials['email']) ? $this->credentials['email'] : null;
+	}
+
+	/**
 	 * Get the urls of images to use in "about" deviser page
 	 *
 	 * @return array
@@ -1131,10 +1267,11 @@ class Person extends CActiveRecord implements IdentityInterface
 	 */
 	public function setScenario($value)
 	{
+		//TODO: delete this method? This behaviour should be controlled by EmbedModel
 		parent::setScenario($value);
 		$this->personalInfoMapping->setScenario($value);
 		$this->mediaMapping->setScenario($value);
-		$this->preferencesMapping->setScenario($value);
+//		$this->preferencesMapping->setScenario($value);
 	}
 
 	/**
@@ -1155,9 +1292,9 @@ class Person extends CActiveRecord implements IdentityInterface
 		if (array_key_exists('media', $data)) {
 			$this->mediaMapping->load($data, 'media');
 		}
-		if (array_key_exists('preferences', $data)) {
-			$this->preferencesMapping->load($data, 'preferences');
-		}
+//		if (array_key_exists('preferences', $data)) {
+//			$this->preferencesMapping->load($data, 'preferences');
+//		}
 		if (array_key_exists('settings', $data)) {
 			$this->settingsMapping->load($data, 'settings');
 		}
@@ -1340,14 +1477,15 @@ class Person extends CActiveRecord implements IdentityInterface
 		} elseif ($this->isClient()) {
 			return $this->getLovedLink();
 		}
-		return '#';
+		return Yii::$app->getHomeUrl();
 	}
 
-	public function getSettingsLink() {
-		if ($this->isDeviser()) {
-			return Url::to(["settings/index", "slug" => $this->getSlug(), 'person_id' => $this->short_id]);
-		}
-		return '#';
+	public function getSettingsLink($action = null) {
+		return Url::to(["settings/".$action, "slug" => $this->getSlug(), 'person_id' => $this->short_id]);
+	}
+
+	public function getSettingsBaseLink($action = 'index') {
+		return Url::to(["settings/", "slug" => $this->getSlug(), 'person_id' => $this->short_id]);
 	}
 
 	public function getStoreLink($params = [])
@@ -1382,6 +1520,16 @@ class Person extends CActiveRecord implements IdentityInterface
 			return Url::to($params, true);
 		}
 		return null;
+	}
+
+	public function getCompleteProfileLink()
+	{
+		return Url::to(["/person/complete-profile", "slug" => $this->getSlug(), 'person_id' => $this->short_id, "person_type" => $this->getPersonTypeForUrl()], true);
+	}
+
+	public function getPersonNotPublicLink()
+	{
+		return Url::to(["/person/person-not-public", "slug" => $this->getSlug(), 'person_id' => $this->short_id, "person_type" => $this->getPersonTypeForUrl()], true);
 	}
 
 	public function getLovedLink()
@@ -1446,7 +1594,7 @@ class Person extends CActiveRecord implements IdentityInterface
 
 	public function getCreateWorkLink()
 	{
-		return Url::to(["/product/create", "slug" => $this->getSlug(), 'deviser_id' => $this->short_id, "person_type" => $this->getPersonTypeForUrl()], true);
+		return Url::to(["/product/create", "slug" => $this->getSlug(), 'person_id' => $this->short_id, "person_type" => $this->getPersonTypeForUrl()], true);
 	}
 
 	public function getSlug()
@@ -1466,7 +1614,7 @@ class Person extends CActiveRecord implements IdentityInterface
 	 * @param int $limit
 	 * @param array $categories
 	 *
-	 * @return Product2[]
+	 * @return Product[]
 	 */
 	public static function getRandomDevisers($limit, $categories = [])
 	{
@@ -1477,7 +1625,7 @@ class Person extends CActiveRecord implements IdentityInterface
 				[
 					'$match' => [
 						"product_state" => [
-							'$eq' => Product2::PRODUCT_STATE_ACTIVE,
+							'$eq' => Product::PRODUCT_STATE_ACTIVE,
 						]
 					]
 				];
@@ -1557,7 +1705,7 @@ class Person extends CActiveRecord implements IdentityInterface
 	 * @param int $limit
 	 * @param array $categories
 	 *
-	 * @return Product2[]
+	 * @return Product[]
 	 */
 	public static function getRandomInfluencers($limit, $categories = [])
 	{
@@ -1612,5 +1760,155 @@ class Person extends CActiveRecord implements IdentityInterface
 		shuffle($persons);
 
 		return $persons;
+	}
+
+	/**
+	 * Returns TRUE if profile is completed: all fields in "step 2" of register are filled
+	 *
+	 * @return bool
+	 */
+	public function isCompletedProfile() {
+
+		if ($this->isPublic()) {
+			return true;
+		}
+
+		if ($this->isDeviser()) {
+			return !(
+				empty($this->getName()) ||
+				empty($this->getCity()) ||
+				empty($this->categories) ||
+				empty($this->text_short_description) ||
+				empty($this->text_biography) ||
+				empty($this->mediaMapping->header) ||
+				empty($this->mediaMapping->profile) ||
+				false
+			);
+		} elseif ($this->isInfluencer()) {
+			return !(
+				empty($this->getName()) ||
+				empty($this->text_short_description) ||
+				empty($this->mediaMapping->header) ||
+				empty($this->mediaMapping->profile) ||
+				false
+			);
+		}
+		return true;
+	}
+
+	/**
+	 * Returns TRUE if profile is public
+	 *
+	 * @return bool
+	 */
+	public function isPublic() {
+		return $this->account_state == Person::ACCOUNT_STATE_ACTIVE;
+	}
+
+	/**
+	 * Returns TRUE if profile can be published
+	 *
+	 * @return bool
+	 */
+	public function canPublishProfile() {
+		if ($this->isDeviser()) {
+			return
+				$this->hasShippingSettings() &&
+				$this->hasStripeInfo() &&
+				$this->hasPublishedProducts();
+		}
+
+		return true;
+	}
+
+	/**
+	 * Returns TRUE if the user (deviser) has any shipping settings
+	 *
+	 * @return bool
+	 */
+	public function hasShippingSettings() {
+		foreach ($this->shippingSettingsMapping as $shippingSettings) {
+			if (count($shippingSettings->prices) > 0) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Returns TRUE if the user (deviser) has any stripe connection
+	 *
+	 * @return bool
+	 */
+	public function hasStripeInfo() {
+		return !empty($this->settingsMapping->stripeInfoMapping->access_token);
+	}
+
+	/**
+	 * Returns TRUE if the user (deviser) has any published product
+	 *
+	 * @return bool
+	 */
+	public function hasPublishedProducts() {
+		$products = Product::findSerialized(
+			[
+				'deviser_id' => $this->short_id,
+				'product_state' => Product::PRODUCT_STATE_ACTIVE,
+			]
+		);
+		return !empty($products);
+	}
+
+	public function getShippingPrice($weight, $country_code, $shipping_type = 'standard')
+	{
+		$shippingSettingRange = $this->getShippinSettingRange($weight, $country_code);
+		if ($shippingSettingRange) {
+			switch ($shipping_type) {
+				case 'standard':
+					return $shippingSettingRange['price'];
+
+				case 'express';
+					return $shippingSettingRange['price_express'];
+
+			}
+		}
+
+		return null;
+	}
+
+	/**
+	 * @param string|null $country_code
+	 *
+	 * @return PersonShippingSettings|null
+	 */
+	public function getShippingSettingByCountry($country_code = null) {
+		$country_code = $country_code ?: Country::getDefaultContryCode();
+
+		$shippings = $this->shippingSettingsMapping;
+		foreach ($shippings as $shipping) {
+			if ($shipping->country_code == $country_code) {
+				return $shipping;
+			}
+		}
+
+		return null;
+	}
+
+	/**
+	 * @param $weight
+	 * @param string|null $country_code
+	 *
+	 * @return array
+	 */
+	public function getShippinSettingRange($weight, $country_code = null)
+	{
+		$shippingSetting = $this->getShippingSettingByCountry($country_code);
+
+		if ($shippingSetting) {
+			return $shippingSetting->getShippingSettingRange($weight);
+		}
+
+		return null;
 	}
 }

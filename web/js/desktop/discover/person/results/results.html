@@ -1,6 +1,18 @@
 <div infinite-scroll="discoverResultsCtrl.addMoreItems()" infinite-scroll-distance="1">
 	<div ng-repeat="person in discoverResultsCtrl.results_infinite">
-		<discover-card person="person"></discover-card>
+		<div class="col-md-4 col-sm-4 col-xs-6 pad-showcase">
+			<a ng-href="{{person.main_link}}">
+			<figure class="showcase influencers">
+				<button class="btn btn-default btn-follow"><i class="ion-star"></i><span translate="FOLLOW"></span></button>
+				<img class="deviser-discover-img" ng-src="{{ person.url_images + person.media.header_cropped }}" class="showcase-image">
+				<figcaption>
+					<img class="showcase-image" ng-src="{{person.url_avatar}}">
+					<span class="name" ng-bind="person.name"></span>
+					<span class="location" ng-bind="person.city"></span>
+				</figcaption>
+			</figure>
+			</a>
+		</div>
 	</div>
 	<div style='clear: both;'></div>
 </div>

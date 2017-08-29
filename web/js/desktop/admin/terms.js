@@ -6,7 +6,7 @@
 		vm.treeData = [];
 		vm.langs = _langs;
 
-		vm.treeConfig = treeService.treeDefaultConfig("todevise_categories_jstree", vm);
+		vm.treeConfig = treeService.treeDefaultConfig("todevise_terms_jstree", vm);
 
 		vm.readyCB = readyCB;
 		vm.get_terms = getTerms;

@@ -1,9 +1,10 @@
 (function () {
 	"use strict";
 
-	function controller(UtilService, Upload, uploadDataService) {
+	function controller(UtilService, Upload, uploadDataService, $uibModal) {
 		var vm = this;
 		vm.upload = upload;
+		vm.person = person;
 
 		init();
 
@@ -14,11 +15,30 @@
 
 		function upload(file) {
 			function onUploadFileSuccess(data) {
-				vm.image = angular.copy(data.data.url);
-				vm.story['main_media'] = {
-					type: 1,
-					photo: data.data.filename
-				};
+				var modalInstance = $uibModal.open({
+					component: 'modalCrop',
+					resolve: {
+						photo: function () {
+							return data.data.url;
+						},
+						type: function() {
+							return 'header_cropped';
+						},
+						person: function() {
+							return vm.person;
+						}
+					}
+				})
+
+				modalInstance.result.then(function (croppedData) {
+					vm.image = angular.copy(croppedData.data.url);
+					vm.story['main_media'] = {
+						type: 1,
+						photo: croppedData.data.filename
+					};
+				}, function () {
+					console.log("dismissed");
+				})
 			}
 
 			var data = {
@@ -47,7 +67,7 @@
 	}
 
 	angular
-		.module('todevise')
+		.module('person')
 		.component('storyMainMedia', component);
 
 }());

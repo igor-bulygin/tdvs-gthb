@@ -1,17 +1,22 @@
 <?php
-use app\assets\desktop\product\ProductDetailAsset;
+
+use app\assets\desktop\product\GlobalAsset;
 use app\assets\desktop\pub\Product2Asset;
 use app\helpers\Utils;
+use app\models\Country;
 use app\models\Person;
 use app\models\PersonVideo;
 
-ProductDetailAsset::register($this);
+GlobalAsset::register($this);
 
-/** @var Person $deviser */
-/** @var \app\models\Product2 $product */
+/** @var Person $person */
+/** @var \app\models\Product $product */
 /** @var PersonVideo $video */
 
-$this->title = $product->name . ' - Todevise';
+$this->title = Yii::t('app/public',
+	'{product_name} by {person_name} - Todevise',
+	['product_name' => $product->getName(), 'person_name' => $person->getName()]
+);
 $productImages = $product->getUrlGalleryImages();
 $videos = $product->getVideos();
 
@@ -26,7 +31,7 @@ $videos = $product->getVideos();
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title" id="myModalLabel">Chart sizes</h4>
+						<h4 class="modal-title" id="myModalLabel" translate="PRODUCT.DETAIL.CHART_SIZES"></h4>
 					</div>
 					<div class="modal-body">
 						<table class="table table-striped">
@@ -104,20 +109,20 @@ $videos = $product->getVideos();
 							<span class="number-score">(20)</span>
 							<div class="avatar-wrapper-side">
 								<div class="avatar">
-									<a href="<?= $deviser->getStoreLink() ?>">
-										<img class="cover" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($deviser->getAvatarImage())->resize(128, 128) ?>" data-pin-nopin="true">
-										<span><?= $deviser->getName() ?></span>
+									<a href="<?= $person->getStoreLink() ?>">
+										<img class="cover" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getAvatarImage())->resize(128, 128) ?>" data-pin-nopin="true">
+										<span><?= $person->getName() ?></span>
 									</a>
 								</div>
 							</div>
 						</div>
 						<div class="product-data">
 							<div class="price-stock pull-left">
-								<div class="stock"><span ng-bind="detailProductCtrl.stock"></span> in stock</div>
+								<div class="stock"><span ng-bind="detailProductCtrl.stock"></span translate="PRODUCT.DETAIL.IN_STOCK"></div>
 								<div class="product-price">€ <span ng-bind="detailProductCtrl.price"></span></div>
 							</div>
 							<div class="quantity-wrapper pull-right">
-								<span class="atr quantity-name">Quantity</span>
+								<span class="atr quantity-name" translate="PRODUCT.DETAIL.QUANTITY"></span>
 								<div class="number" ng-bind="detailProductCtrl.quantity"></div>
 								<button class="btn btn-green btn-summatory" ng-click="detailProductCtrl.changeQuantity(1)">
 									<span>+</span>
@@ -130,10 +135,10 @@ $videos = $product->getVideos();
 						<div class="product-data">
 							<ul class="nav nav-tabs product-detail-tabs" role="tablist" ng-if="detailProductCtrl.original_artwork" ng-cloak>
 								<li role="presentation" class="no-b-r">
-									<a href="#" aria-controls="description" role="tab" data-toggle="tab" ng-click="detailProductCtrl.changeOriginalArtwork(true)">Original</a>
+									<a href="#" translate="PRODUCT.DETAIL.ORIGINAL" aria-controls="description" role="tab" data-toggle="tab" ng-click="detailProductCtrl.changeOriginalArtwork(true)"></a>
 								</li>
 								<li role="presentation" class="active">
-									<a href="#" aria-controls="works" role="tab" data-toggle="tab" ng-click="detailProductCtrl.changeOriginalArtwork(false)">Prints</a>
+									<a href="#" translate="PRODUCT.DETAIL.PRINTS" aria-controls="works" role="tab" data-toggle="tab" ng-click="detailProductCtrl.changeOriginalArtwork(false)"></a>
 								</li>
 							</ul>
 							<div>
@@ -154,7 +159,7 @@ $videos = $product->getVideos();
 															</ol>
 														</div>
 														<div class="col-sm-4 no-pad">
-															<a class="view-chart-size" href="#" href="#" data-toggle="modal" data-target="#chartModal" ng-if="option.id==='size'">View size chart</a>
+															<a class="view-chart-size" href="#" href="#" data-toggle="modal" data-target="#chartModal" ng-if="option.id==='size'" translate="PRODUCT.DETAIL.VIEW_SIZE_CHART"></a>
 														</div>
 													</div>
 												</div>
@@ -184,7 +189,7 @@ $videos = $product->getVideos();
 								</form>
 							</div>-->
 							<div class="row-size">
-								<button type="button" class="btn btn-green btn-add-to-cart" ng-disabled="detailProductCtrl.stock === 0" ng-click="detailProductCtrl.addToCart(detailProductCtrl.tagsForm)"><i class="ion-ios-cart cart-icon-btn"></i> <span>Add to cart</span></button>
+								<button type="button" class="btn btn-green btn-add-to-cart" ng-disabled="detailProductCtrl.stock === 0" ng-click="detailProductCtrl.addToCart(detailProductCtrl.tagsForm)"><i class="ion-ios-cart cart-icon-btn"></i> <span translate="PRODUCT.DETAIL.ADD_TO_CART"></span></button>
 							</div>
 						</div>
 						<!--<div class="product-data">
@@ -222,29 +227,29 @@ $videos = $product->getVideos();
 								<?php if ($product->isWorkFromCurrentUser()) { ?>
 									<a href="<?=$product->getEditLink()?>" class="btn btn-hart btn-grey pull-left">
 										<i class="ion-edit"></i>
-										<span>Edit work</span>
+										<span translate="PRODUCT.DETAIL.EDIT_WORK"></span>
 									</a>
 								<?php } else { ?>
 									<button type="button" class="btn btn-hart pull-left" ng-class="detailProductCtrl.product.isLoved ? 'btn-red' : 'btn-grey'" ng-click="detailProductCtrl.setLoved()">
 										<i class="ion-ios-heart"></i>
-										<span ng-if="!detailProductCtrl.product.isLoved" ng-cloak>Love work</span>
-										<span ng-if="detailProductCtrl.product.isLoved" ng-cloak>You love this work</span>
+										<span ng-if="!detailProductCtrl.product.isLoved" ng-cloak translate="PRODUCT.DETAIL.LOVE_WORK"></span>
+										<span ng-if="detailProductCtrl.product.isLoved" ng-cloak translate="PRODUCT.DETAIL.YOU_LOVE_WORK"></span>
 									</button>
 								<?php } ?>
 								<button type="button" class="btn btn-grey btn-hart pull-right" ng-click="detailProductCtrl.setBox()">
 									<i class="ion-ios-box"></i>
-									<span>Save in a box</span>
+									<span translate="PRODUCT.DETAIL.SAVE_IN_BOX"></span>
 								</button>
 
 							</div>
 							<div class="row-size">
-								<span class="btn-tagline loved pull-left">Loved <span ng-bind="detailProductCtrl.product.loveds"></span> times</span>
-								<span class="btn-tagline saved pull-right">Saved in <span ng-bind="detailProductCtrl.product.boxes"></span> boxes</span>
+								<span class="btn-tagline loved pull-left" translate="PRODUCT.DETAIL.LOVED"><span ng-bind="detailProductCtrl.product.loveds"></span translate="PRODUCT.DETAIL.TIMES"></span>
+								<span class="btn-tagline saved pull-right" translate="PRODUCT.DETAIL.SAVED_IN_X_BOXES" translate-values="{ x:detailProductCtrl.product.boxes}"></span>
 							</div>
 							<div>
 								<ul class="social-items">
 									<li>
-										<span>Share on</span>
+										<span translate="PRODUCT.DETAIL.SHARE_ON"></span>
 									</li>
 									<li>
 										<a href="#">
@@ -281,16 +286,15 @@ $videos = $product->getVideos();
 		<div class="container">
 			<ul class="nav nav-tabs product-tabs" role="tablist">
 				<li role="presentation" class="active no-b-r">
-					<a href="#description" aria-controls="description" role="tab" data-toggle="tab">Description &amp; User
-					reviews</a>
+					<a href="#description" aria-controls="description" role="tab" data-toggle="tab" translate="PRODUCT.DETAIL.DESCRIPTION&REVIEWS"></a>
 				</li>
 				<?php if (count($videos)) { ?>
 				<li role="presentation" class="no-b-r">
-					<a href="#videos" aria-controls="works" role="tab" data-toggle="tab">Videos</a>
+					<a href="#videos" aria-controls="works" role="tab" data-toggle="tab" translate="PRODUCT.DETAIL.VIDEOS"></a>
 				</li>
 				<?php } ?>
 				<li role="presentation">
-					<a href="#works" aria-controls="works" role="tab" data-toggle="tab">More by <?= $deviser->getName() ?></a>
+					<a href="#works" aria-controls="works" role="tab" data-toggle="tab" translate="PRODUCT.DETAIL.MORE_BY"><?= $person->getName() ?></a>
 				</li>
 			</ul>
 		</div>
@@ -300,7 +304,7 @@ $videos = $product->getVideos();
 				<div role="tabpanel" class="tab-pane work-description-wrapper active" id="description">
 					<div class="work-profile-description-wrapper">
 						<div class="col-sm-8 pad-product">
-							<div class="title">Description</div>
+							<div class="title" translate="PRODUCT.DETAIL.DESCRIPTION"></div>
 							<p class="description">
 								<?= $product->description ?>
 							</p>
@@ -320,11 +324,11 @@ $videos = $product->getVideos();
 						</div>
 						<div class="col-sm-4">
 							<div class="shipping-policies-wrapper">
-								<div class="title">Shipping &amp; Policies</div>
+								<div class="title" translate="PRODUCT.DETAIL.SHIPPING&POLICIES"></div>
 									<div class="policies-row">
 									<form class="form-horizontal">
 										<div class="form-group">
-											<label class="col-sm-5 control-label shipping-label no-pad-r"><span>Shipping price to SPAIN</span></label>
+											<label class="col-sm-5 control-label shipping-label no-pad-r"><span translate="PRODUCT.DETAIL.SHIPPING_PRICE_SPAIN"></span></label>
 											<!--
 											<div class="col-sm-5 pad-product">
 												<select class="form-control selectpicker shipping-select product-select" title="Choose country">
@@ -334,33 +338,41 @@ $videos = $product->getVideos();
 											</div>
 											-->
 											<div class="col-sm-3">
-												is <span class="tax">€4.5</span>
+												is <span class="tax">€<?=$product->getShippingPrice(Country::getDefaultContryCode())?></span>
 											</div>
 										</div>
 									</form>
 								</div>
-								<div class="returns-row mt-30">
-									Returns: <span class="bold">14 days</span>
-								</div>
-								<div class="returns-row">
-									Warranty:
-									<span class="bold"><?= $product->getWarrantyLabel() ?: '12 months'?></span>
-								</div>
+								<?php
+								$returns = $product->getReturnsLabel();
+								$warranty = $product->getWarrantyLabel();
+								?>
+								<?php if ($returns) { ?>
+									<div class="returns-row mt-30" translate="PRODUCT.DETAIL.RETURNS">
+										<span class="bold"><?=$returns?></span>
+									</div>
+								<?php } ?>
+								<?php if ($warranty) { ?>
+									<div class="returns-row" translate="PRODUCT.DETAIL.WARRANTY">
+										
+										<span class="bold"><?=$warranty?></span>
+									</div>
+								<?php } ?>
 							</div>
 						</div>
 					</div>
 
 					<?php if (count($product->faqMapping) > 0) { ?>
 					   	<div class="work-profile-description-wrapper faq-wrapper">
-						<div class="title">WORK FAQs</div>
+						<div class="title" translate="PRODUCT.DETAIL.WORK_FAQS"></div>
 						<?php foreach ($product->faqMapping as $faq) { ?>
 							<div class="q-a-wrapper">
 								<p class="question">
-									<span>Q:</span>
+									<span translate="PRODUCT.DETAIL.Q"></span>
 									<span class="important"><?= $faq->question?></span>
 								</p>
 								<p class="question">
-									<span>A:</span>
+									<span translate="PRODUCT.DETAIL.A"></span>
 									<span><?= $faq->answer?></span>
 								</p>
 							</div>
@@ -369,7 +381,7 @@ $videos = $product->getVideos();
 					<?php } ?>
 
 					<div class="reviews-wrapper">
-						<div class="title">User reviews</div>
+						<div class="title" translate="PRODUCT.DETAIL.USER_REVIEWS"></div>
 						<div class="review-rates">
 							<span class="score">
 									<i class="ion-ios-star"></i>
@@ -379,8 +391,8 @@ $videos = $product->getVideos();
 									<i class="ion-ios-star"></i>
 								</span>
 							<span class="number-score">(20)</span>
-							<div class="by-stars"><span>5 stars</span> <span class="number-score">(15)</span></div>
-							<div class="by-stars"><span>4 stars</span> <span class="number-score">(5)</span></div>
+							<div class="by-stars"><span>5 <span translate="PRODUCT.DETAIL.STARS"></span></span><span class="number-score">(15)</span></div>
+							<div class="by-stars"><span>4 <span translate="PRODUCT.DETAIL.STARS"></span></span><span class="number-score">(5)</span></div>
 						</div>
 						<div class="comment-wrapper">
 							<div class="col-sm-1">
@@ -391,7 +403,7 @@ $videos = $product->getVideos();
 							<div class="col-sm-10">
 								<input type="text" class="form-control comment-input" id="exampleInputEmail1" placeholder="Add your comment">
 								<div class="rate-product">
-									<span>Rate this product</span>
+									<span translate="PRODUCT.DETAIL.RATE_PRODUCT"></span>
 									<span class="score">
 											<i class="ion-ios-star"></i>
 											<i class="ion-ios-star"></i>
@@ -414,12 +426,12 @@ $videos = $product->getVideos();
 							<div class="comment">
 								<div class="name-date">
 									<span class="name">Alice Pierce</span>
-									<span class="date">1 day ago</span>
+									<span class="date"><span>1</span><span translate="PRODUCT.DETAIL.DAY_AGO"></span>
 								</div>
 								<div class="comment-text">Vivamus ultricies mauris mi, nec imperdiet quam facilisis eget.
 								</div>
 								<div class="replay">
-									<span>Reply</span>
+									<span translate="PRODUCT.DETAIL.REPLY"></span>
 									<span class="score">
 											<i class="ion-ios-star"></i>
 											<i class="ion-ios-star"></i>
@@ -427,13 +439,13 @@ $videos = $product->getVideos();
 											<i class="ion-ios-star"></i>
 											<i class="ion-ios-star"></i>
 										</span>
-									<span class="useful">300  member found this comment useful</span>
+									<span class="useful"><span>300</span><span translate="PRODUCT.DETAIL.MEMER_COMMENT_USEFUL"></span></span>
 								</div>
 							</div>
 							<div class="helpful">
-								<span>Is this review helpful to you ?</span>
-								<div class="rounded-btn">Yes</div>
-								<div class="rounded-btn">No</div>
+								<span translate="PRODUCT.DETAIL.REVIEW_HELPFUL"></span>
+								<div class="rounded-btn" translate="PRODUCT.YES"></div>
+								<div class="rounded-btn" translate="PRODUCT.NO"></div>
 							</div>
 						</div>
 						<div class="comment-user">
@@ -514,8 +526,8 @@ $videos = $product->getVideos();
 						</div>
 						<div class="load-wrapper">
 							<i class="ion-ios-arrow-down"></i>
-							<span class="green">LOAD MORE</span>
-							<span class="more">24 comments more</span>
+							<span class="green" translate="PRODUCT.DETAIL.LOAD_MORE"></span>
+							<span class="more"><span>24</span><span translate="PRODUCT.DETAIL.COMMENTS_MORE"></span></span>
 						</div>
 					</div>
 				</div>
@@ -552,7 +564,7 @@ $videos = $product->getVideos();
 					</nav>
 					<div class="other-products-wrapper">
 						<div id="macy-container">
-							<?php foreach ($deviserProducts as $i => $product) { ?>
+							<?php foreach ($personProducts as $i => $product) { ?>
 								<div class="menu-category list-group">
 									<div class="grid">
 										<figure class="effect-zoe">

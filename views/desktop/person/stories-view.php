@@ -1,16 +1,19 @@
 <?php
-use app\assets\desktop\deviser\StoriesViewAsset;
+
+use app\assets\desktop\deviser\IndexStoryAsset;
 use app\components\PersonHeader;
 use app\components\PersonMenu;
 use app\models\Person;
 
-StoriesViewAsset::register($this);
+IndexStoryAsset::register($this);
 
 
 /** @var Person $person */
 /** @var \app\models\Story[] $stories */
-
-$this->title = 'Stories by ' . $person->getName() . ' - Todevise';
+$this->title = Yii::t('app/public',
+	'Stories {person_name} - Todevise',
+	['person_name' => $person->getName()]
+);
 $this->params['person'] = $person;
 $this->params['person_menu_active_option'] = 'stories';
 $this->params['person_links_target'] = 'public_view';
@@ -31,15 +34,15 @@ $this->params['person_links_target'] = 'public_view';
 					<div class="empty-wrapper">
 						<?php if ($person->isPersonEditable()) { ?>
 							<div>
-								<a class="red-link-btn pull-right" href="#" data-toggle="modal" data-target="#exampleModal">See an example</a>
+								<a class="red-link-btn stories-exemple-link" href="#" data-toggle="modal" data-target="#exampleModal"><span translate="SEE_EXAMPLE"></span></a>
 							</div>
-							<img class="sad-face" src="/imgs/no-stories.jpg">
-							<p class="no-video-text">"Stories" is your blog inside Todevise.</p>
-							<p class="no-video-text">Express yourself, start writing your first one now.</p>
-							<a class="btn btn-green btn-add-box" href="<?=$person->getStoryCreateLink()?>">WRITE STORY</a>
+							<img class="newspaper-stories-icon" src="/imgs/no-stories.jpg">
+							<p class="no-story-text"><span translate="STORIES_IS"></span></p>
+							<p class="no-story-text-bold"><span translate="STORIES_EXPRESS"></span></p>
+							<a class="btn btn-green btn-create-story" href="<?=$person->getStoryCreateLink()?>"><span translate="WRITE_STORY"></span></a>
 						<?php } else { ?>
 							<img class="sad-face" src="/imgs/no-stories.jpg">
-							<p class="no-video-text"><?=$person->getName()?> hasn't written any stories yet.</p>
+							<p class="no-video-text"><?=$person->getName()?> <span translate="NO_STORIES_YET"></span></p>
 						<?php } ?>
 					</div>
 
@@ -48,7 +51,7 @@ $this->params['person_links_target'] = 'public_view';
 					<div class="content-store">
 						<div class="store-grid">
 							<div class="title-wrapper-stories title-wrapper title-wrapper-boxes">
-								<span class="title">Stories by <?=$person->getName()?></span>
+								<span class="title"><span translate="STORIES_BY"></span> <?=$person->getName()?></span>
 							</div>
 							<div class="row">
 								<?php if ($person->isPersonEditable()) { ?>
@@ -59,7 +62,7 @@ $this->params['person_links_target'] = 'public_view';
 													<div class="plus-add">
 														<span>+</span>
 													</div>
-													<div class="text">Write a story</div>
+													<div class="text"><span translate="WRITE_A_STORY"></span></div>
 												</div>
 											</div>
 										</a>

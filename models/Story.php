@@ -42,14 +42,14 @@ class Story extends CActiveRecord {
 	 *
 	 * @var array
 	 */
-	static protected $serializeFields = [];
+	protected static $serializeFields = [];
 
 	/**
 	 * The attributes that should be serialized
 	 *
 	 * @var array
 	 */
-	static protected $retrieveExtraFields = [];
+	protected static $retrieveExtraFields = [];
 
 	public static function collectionName() {
 		return 'story';
@@ -263,7 +263,7 @@ class Story extends CActiveRecord {
      * Get a collection of entities serialized, according to serialization configuration
      *
      * @param array $criteria
-     * @return array
+     * @return Story[]
      * @throws Exception
      */
     public static function findSerialized($criteria = [])

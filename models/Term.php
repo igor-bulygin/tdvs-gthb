@@ -3,7 +3,6 @@ namespace app\models;
 
 use app\helpers\CActiveRecord;
 use app\helpers\Utils;
-use Yii;
 
 class Term extends CActiveRecord {
 	public static function collectionName() {
@@ -19,7 +18,22 @@ class Term extends CActiveRecord {
 		];
 	}
 
-    /**
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $serializeFields = [];
+
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $retrieveExtraFields = [];
+
+
+	/**
      * The attributes that should be translated
      *
      * @var array

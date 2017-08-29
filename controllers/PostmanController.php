@@ -1,23 +1,9 @@
 <?php
 namespace app\controllers;
 
+use app\helpers\CController;
 use app\models\PostmanEmail;
 use app\models\PostmanEmailAction;
-use Yii;
-use app\models\Tag;
-use app\models\Lang;
-use yii\helpers\Json;
-use app\helpers\Utils;
-use app\models\Person;
-use app\models\Country;
-use app\models\Product;
-use app\models\Category;
-use app\models\SizeChart;
-use app\models\MetricType;
-use yii\filters\VerbFilter;
-use app\helpers\CController;
-use app\helpers\CActiveRecord;
-use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
 
 class PostmanController extends CController {

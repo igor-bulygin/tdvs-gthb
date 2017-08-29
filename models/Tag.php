@@ -129,9 +129,17 @@ class Tag extends CActiveRecord
 	 *
 	 * @var array
 	 */
-	static protected $serializeFields = [];
+	protected static $serializeFields = [];
 
-	/** @var  Product */
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $retrieveExtraFields = [];
+
+
+	/** @var  Product|OldProduct */
 	private $product;
 
 	/** @var  bool */
@@ -446,10 +454,11 @@ class Tag extends CActiveRecord
 	/**
 	 * Set the product to use to filter the list of values to show
 	 *
-	 * @param Product $product
+	 * @param Product|OldProduct $product
+	 *
 	 * @return Tag
 	 */
-	public function setFilterProduct(Product $product)
+	public function setFilterProduct($product)
 	{
 		$this->product = $product;
 		return $this;

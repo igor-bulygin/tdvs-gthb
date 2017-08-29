@@ -5,13 +5,13 @@
 				<li nya-bs-option="language in storyTextComponentCtrl.languages" data-value="language.code" deep-watch="true" ng-init="storyTextComponentCtrl.languageSelected='en-US'" class="ng-class:{'lang-selected': storyTextComponentCtrl.isLanguageOk(language.code)}">
 					<a href="">
 						<span ng-bind="language.name"></span>
-						<span class="glyphicon glyphicon-ok ok-white-icon pull-right" ng-if="storyTextComponentCtrl.isLanguageOk(language.code, storyTextComponentCtrl.component.items)"></span>
+						<span class="glyphicon glyphicon-ok ok-white-icon pull-right" ng-if="storyTextComponentCtrl.isLanguageOk(language.code)"></span>
 					</a>
 				</li>
 			</ol>
 			<div class="faq-row">
 				<div class="col-md-12">
-					<div class="faq-edit-answer" text-angular ng-model="storyTextComponentCtrl.component.items[storyTextComponentCtrl.languageSelected]" ng-cloak ta-toolbar="[]" placeholder="Text" ta-paste="editAboutCtrl.stripHTMLTags($html)"></div>
+					<div class="faq-edit-answer" text-angular ng-model="storyTextComponentCtrl.component.items[storyTextComponentCtrl.languageSelected]" ng-cloak ta-toolbar="[]" translate-attr="{placeholder: 'TEXT'}" ta-paste="storyTextComponentCtrl.stripHTMLTags($html)"></div>
 				</div>
 			</div>
 		</div>

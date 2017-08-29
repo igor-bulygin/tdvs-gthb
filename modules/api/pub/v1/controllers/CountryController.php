@@ -4,8 +4,22 @@ namespace app\modules\api\pub\v1\controllers;
 
 use app\models\Country;
 use Yii;
+use yii\web\NotFoundHttpException;
 
 class CountryController extends AppPublicController {
+
+	public function actionView($countryCode)
+	{
+		Country::setSerializeScenario(Country::SERIALIZE_SCENARIO_PUBLIC);
+
+		/** @var Country $country */
+		$country = Country::findOneSerialized($countryCode);
+		if (empty($country)) {
+			throw new NotFoundHttpException('Country not found');
+		}
+
+		return $country;
+	}
 
     public function actionIndex()
     {
@@ -37,6 +51,32 @@ class CountryController extends AppPublicController {
 		    ]
 	    ];
     }
+
+    public function actionWorldwide() {
+
+		// set the scenario to serialize objects
+		Country::setSerializeScenario(Country::SERIALIZE_SCENARIO_PUBLIC);
+
+    	$continents = [];
+    	foreach (Country::CONTINENTS as $code => $name) {
+    		if ($code != Country::WORLD_WIDE) {
+				$continent = new \stdClass();
+				$continent->code = $code;
+				$continent->name = $name;
+				$continent->path = Country::WORLD_WIDE.'/'.$code;
+				$continent->items = Country::findSerialized(['continent' => $code]);
+				$continents[] = $continent;
+			}
+		}
+
+		$worldwide = new \stdClass();
+		$worldwide->code = Country::WORLD_WIDE;
+		$worldwide->name = Country::CONTINENTS[Country::WORLD_WIDE];
+		$worldwide->path = Country::WORLD_WIDE;
+		$worldwide->items = $continents;
+
+		return $worldwide;
+	}
 
 }
 

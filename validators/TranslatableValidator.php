@@ -1,15 +1,8 @@
 <?php
 namespace app\validators;
 
-use app\helpers\Utils;
 use app\models\Lang;
-use app\models\Person;
-use Yii;
-use yii\base\Model;
-use yii\helpers\Html;
-use yii\validators\UrlValidator;
 use yii\validators\Validator;
-use yii\web\UrlManager;
 
 class TranslatableValidator extends Validator
 {
@@ -29,7 +22,7 @@ class TranslatableValidator extends Validator
 		}
 
 		foreach ($values as $key => $item) {
-			if (!array_key_exists($key, Lang::getAvailableLanguagesDescriptions())) {
+			if (!array_key_exists($key, Lang::getAvailableLanguages())) {
 				$error = sprintf('Language "%s" not available', $key);
 				return false;
 			}
@@ -60,12 +53,14 @@ class TranslatableValidator extends Validator
 			}
 
 			foreach ($values as $key => $item) {
-				if (!array_key_exists($key, Lang::getAvailableLanguagesDescriptions())) {
-					$this->addError($object, $attribute, sprintf('Language %s not available for %s', strtolower(Lang::getLanguageName($key)), $attribute));
+				$languageName = Lang::getLanguageName($key) ?: $key;
+				if (!array_key_exists($key, Lang::getAvailableLanguages())) {
+					$this->addError($object, $attribute, sprintf('Language %s not available for %s', $languageName, $attribute));
 				}
-				if (empty($item)) {
-					$this->addError($object, $attribute, sprintf('Language %s can not be empty for %s', strtolower(Lang::getLanguageName($key)), $attribute));
-				}
+				// Commented because this validator does not validate "required" fields
+//				if (empty($item)) {
+//					$this->addError($object, $attribute, sprintf('Language %s can not be empty for %s', $languageName, $attribute));
+//				}
 			}
 		}
 	}

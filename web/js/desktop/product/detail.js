@@ -328,7 +328,7 @@
 		}
 	}
 
-	angular.module('todevise')
+	angular.module('product')
 		.controller('detailProductCtrl', controller)
 
 }());

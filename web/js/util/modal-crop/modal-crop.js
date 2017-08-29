@@ -32,6 +32,14 @@
 				vm.aspect_ratio = 0.8;
 				vm.size = 'max';
 				break;
+			case "story-photos":
+				vm.area_type = 'rectangle';
+				vm.size = {
+					w: 1280,
+					h:450
+				};
+				vm.aspect_ratio = 2.8;
+				break;
 			default: 
 				vm.area_type = 'rectangle';
 				vm.aspect_ratio = 1;
@@ -82,6 +90,10 @@
 					else {
 						data.type = 'unknown-product-photo';
 					}
+					break;
+				case "story-photos":
+					data.type= "story-photos";
+					break;
 				default:
 					break;
 			}

@@ -1,19 +1,20 @@
 <?php
-use app\assets\desktop\pub\Index2Asset;
+
+use app\assets\desktop\pub\PublicCommonAsset;
 use app\helpers\Utils;
 use app\models\Person;
 
-Index2Asset::register($this);
+PublicCommonAsset::register($this);
 
-$this->title = 'Todevise / Home';
+$this->title = Yii::t('app/public', 'Todevise');
 
 /** @var Person[][] $devisers */
 /** @var int $totalDevisers */
 /** @var Person[][] $influencers */
 /** @var int $totalInfluencers */
-/** @var \app\models\Product2[] $works12 */
-/** @var \app\models\Product2[] $works3 */
-/** @var \app\models\Product2[][] $moreWork */
+/** @var \app\models\Product[] $works12 */
+/** @var \app\models\Product[] $works3 */
+/** @var \app\models\Product[][] $moreWork */
 /** @var \app\models\Box[] $boxes */
 /** @var \app\models\Story[] $stories */
 /** @var array $banners */
@@ -195,11 +196,11 @@ $this->title = 'Todevise / Home';
 					Boxes
 				</div>
 
-				<div>
+				<div class="row no-mar">
 					<?php foreach ($boxes as $box) {
 						$products = $box->getProductsPreview(); ?>
-						<div class="<?=$stories ? 'col-md-6' : 'col-md-4'?> col-xs-6 pad-grid">
-							<div class="boxes-wrapper">
+						<div class="<?=$stories ? 'col-md-4' : 'col-md-4'?> col-xs-6 pad-grid">
+							<div class="boxes-wrapper home">
 								<?php if (empty($products)) { ?>
 									<div class="empty-box">
 										<span class="empty-title">Empty box</span>
@@ -211,7 +212,7 @@ $this->title = 'Todevise / Home';
 											break;
 										} ?>
 										<a href="<?= $box->getViewLink()?>">
-											<img class="grid-image" src="<?=$product['box_photo']?>">
+											<img class="grid-image <?=count($products) >= 3 && $count < 3 ? 'small-photo-box' : ''?>" src="<?=$product['box_photo']?>">
 										</a>
 										<?php
 										$count ++;

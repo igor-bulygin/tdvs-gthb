@@ -52,7 +52,7 @@
 	}
 
 	angular
-		.module('todevise')
+		.module('person')
 		.controller('detailStoryCtrl', controller)
 		.controller('deleteStoryModalCtrl', deleteModalController);
 

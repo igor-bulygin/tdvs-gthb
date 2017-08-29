@@ -1,0 +1,75 @@
+// ==========================================================================
+// Shipping
+// ==========================================================================
+.shipping-title{
+	text-transform: uppercase;
+    font-family: $font-family--bold;
+    font-size: 14px;
+}
+.time-shipping{
+	max-width: 50px;
+    margin: 0 5px;
+}
+.shipping-time-wrapper{
+	margin-left: 0!important;
+	margin-bottom: 0!important;
+	margin-right: 0!important;
+	font-family: $font-family--secondary;
+}
+.days{
+	margin-top: 7px;
+    margin-left: 10px;
+}
+.serif{
+	font-family: $font-family--serif;
+}
+.range-wrapper{
+	border: 1px solid $light_grey;
+	@include border-radius(8px,8px,8px,8px);
+    padding: 15px;
+	margin-bottom: 20px;
+}
+.range-title{
+	font-family: $font-family--secondary;
+	text-transform: uppercase;
+	color: $dark_grey;
+	margin-right: 15px;
+}
+.input-medium-size{
+	width: 60px;
+	display: inline;
+}
+.unlimited-weight-wrapper{
+	display: inline-block;
+	vertical-align: top;
+}
+.close-range{
+	color: $light_grey;
+	float: right;
+    font-size: 22px;
+    cursor: pointer;
+}
+.two-lines-label{
+	font-family: $font-family--secondary;
+	color: $dark_grey;
+	width: 50px;
+    line-height: 15px;
+    margin-left: 20px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.separator-to{
+	margin: 0 10px;
+}
+.label-small-bold{
+	font-weight: bold!important;
+	font-family: $font-family--primary!important;
+}
+.btn-save{
+	@extend %btn; 
+    background-color:$green;
+    color: $black;
+    &:hover{
+        background-color:$dark_green;
+    }
+}

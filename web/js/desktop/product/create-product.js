@@ -1,13 +1,15 @@
-(function () {
+(function() {
 
-	function controller(personDataService, metricDataService, sizechartDataService, 
+	function controller($scope,personDataService, metricDataService, sizechartDataService,
 		productDataService, languageDataService, toastr, UtilService, productService,
-		localStorageService, tagDataService, productEvents, $rootScope, $window, $timeout) {
+		localStorageService, tagDataService, productEvents, $rootScope, $window, $timeout, $anchorScroll) {
 		var vm = this;
 		vm.save = save;
+		vm.saving = false;
+		vm.isPublicProfile = (person.account_state === "active");
 
 		function init() {
-			vm.product = {};
+			vm.product = {emptyCategory:true, warranty: {type: 3},  returns: {type: 1}};
 			vm.product.slug = {};
 			vm.product.categories = [];
 			vm.product.media = {
@@ -37,14 +39,15 @@
 			getPaperType();
 		}
 
-		init();
+		init();		
 
 		function getCategories() {
 			function onGetCategoriesSuccess(data) {
 				vm.allCategories = data.items;
+				
 			}
 
-			productDataService.getCategories({scope: 'all'}, onGetCategoriesSuccess, UtilService.onError);
+			productDataService.getCategories({ scope: 'all' }, onGetCategoriesSuccess, UtilService.onError);
 		}
 
 		function getMetric() {
@@ -52,7 +55,7 @@
 				vm.metric = angular.copy(data);
 			}
 
-			metricDataService.getMetric(onGetMetricSuccess, UtilService.onError);
+			metricDataService.getMetric(null, onGetMetricSuccess, UtilService.onError);
 		}
 
 
@@ -92,8 +95,8 @@
 			function onGetProfileSuccess(data) {
 				vm.deviser = angular.copy(data);
 				vm.link_profile = '/deviser/' + data.slug + '/' + data.id + '/store/edit';
-				if(vm.deviser.media.profile_cropped)
-					vm.profile = currentHost()+vm.deviser.url_images+vm.deviser.media.profile_cropped;
+				if (vm.deviser.media.profile_cropped)
+					vm.profile = currentHost() + vm.deviser.url_images + vm.deviser.media.profile_cropped;
 				vm.product.deviser_id = data.id;
 			}
 
@@ -102,8 +105,10 @@
 			}, onGetProfileSuccess, UtilService.onError);
 		}
 
-		function saved_draft(){
+		function saved_draft() {
+			var aux=vm.product.emptyCategory;
 			vm.product = productService.parseProductFromService(vm.product);
+			vm.product.emptyCategory=aux;
 			vm.progressSaved = true;
 			$timeout(() => {
 				vm.progressSaved = false;
@@ -115,42 +120,41 @@
 		}
 
 		function save(state) {
+			vm.errors = false;
+			vm.saving = true;
 			function onUpdateProductSuccess(data) {
-				vm.disable_save_buttons = false;
-				if(state === 'product_state_draft') {
-					saved_draft();
-				} else if(state === 'product_state_active') {
+				if (state === 'product_state_draft') {
+					saved_draft();					
+					vm.saving = false;
+				} else if (state === 'product_state_active') {
 					product_published();
 				}
 			}
 
 			function onUpdateProductError(err) {
-				vm.disable_save_buttons = false;
-				if(err.data.errors && err.data.errors.required && angular.isArray(err.data.errors.required))
-					$rootScope.$broadcast(productEvents.requiredErrors, {required: err.data.errors.required})
+				vm.saving = false;
+				if (err.data.errors && err.data.errors.required && angular.isArray(err.data.errors.required))
+					$rootScope.$broadcast(productEvents.requiredErrors, { required: err.data.errors.required })
 			}
-			
+
 			function onSaveProductSuccess(data) {
-				vm.disable_save_buttons = false;
 				vm.product.id = angular.copy(data.id);
-				if(state==='product_state_draft') {
+				if (state === 'product_state_draft') {
 					saved_draft();
-				} else if(state === 'product_state_active') {
-					vm.disable_save_buttons = false;
+					vm.saving = false;
+				} else if (state === 'product_state_active') {
 					product_published();
 				}
 			}
-			
-			function onSaveProductError(err) {
-				vm.disable_save_buttons = false;
-				vm.errors = true;
-				//send errors to components
-				if(err.data.errors && err.data.errors.required && angular.isArray(err.data.errors.required))
-					$rootScope.$broadcast(productEvents.requiredErrors, {required: err.data.errors.required})
-			}
 
-			vm.disable_save_buttons = true;
-			var required = [];
+			function onSaveProductError(err) {
+				vm.errors = true;
+				vm.saving = false;
+				//send errors to components
+				if (err.data.errors && err.data.errors.required && angular.isArray(err.data.errors.required))
+					$rootScope.$broadcast(productEvents.requiredErrors, { required: err.data.errors.required })
+			}
+			var required = [];			
 			//set state of the product
 			vm.product.product_state = angular.copy(state);
 
@@ -159,43 +163,49 @@
 			UtilService.parseMultiLanguageEmptyFields(vm.product.description);
 
 			//parse faq
-			if(angular.isArray(vm.product.faq) && vm.product.faq.length > 0) {
+			if (angular.isArray(vm.product.faq) && vm.product.faq.length > 0) {
 				vm.product.faq.forEach(function(element) {
 					UtilService.parseMultiLanguageEmptyFields(element.question);
 					UtilService.parseMultiLanguageEmptyFields(element.answer)
 				});
 			}
 
-			if(vm.product.product_state !== 'product_state_draft') {
+			if (vm.product.product_state !== 'product_state_draft') {
 				required = productService.validate(vm.product);
+				if (vm.product.emptyCategory) {
+					required.push("emptyCategory");
+				}
 			} else {
 				//check for null categories
-				while(vm.product.categories.indexOf(null) > -1){
+				while (vm.product.categories.indexOf(null) > -1) {
 					var pos = vm.product.categories.indexOf(null);
 					vm.product.categories.splice(pos, 1);
 				}
 			}
 
-			if(required.length === 0) {
-				if(vm.product.id) {
+			if (required.length === 0) {
+				vm.product.warranty.value=parseInt(vm.product.warranty.value);
+				vm.product.returns.value=parseInt(vm.product.returns.value);
+				if (vm.product.id) {
 					productDataService.updateProductPriv(vm.product, {
 						idProduct: vm.product.id
 					}, onUpdateProductSuccess, onUpdateProductError);
-				}
-				else {
+				} else {
 					productDataService.postProductPriv(vm.product, null, onSaveProductSuccess, onSaveProductError);
 				}
 			} else {
-				vm.disable_save_buttons = false;
+				vm.saving = false;
 				vm.errors = true;
-				$rootScope.$broadcast(productEvents.requiredErrors, {required: required});
+				$rootScope.$broadcast(productEvents.requiredErrors, { required: required });
+				$anchorScroll(required[0]);
 			}
+
 		}
 
 	}
 
 	angular
-		.module('todevise')
+		.module('product')
 		.controller('createProductCtrl', controller);
 
 }());

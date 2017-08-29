@@ -63,16 +63,8 @@ This is how a single person looks like:
 	},
 
     settings: {
-        bank_info: {
-            location: "US",
-            bank_name : "Name of the bank",
-            institution_number : "123456789",
-            transit_number : "123456789",
-            account_number: "111222333444",
-            swift_bic: "DABAIE2D",
-            account_type: "savings",
-            routing_number: "123"
-        }
+        lang: "ES",
+        weight_measure: "g"
     },
 
     press: [

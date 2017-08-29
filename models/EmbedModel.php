@@ -5,7 +5,6 @@ use app\helpers\CActiveRecord;
 
 class EmbedModel extends CActiveRecord
 {
-
 	/** @var  CActiveRecord */
 	protected $parentObject;
 

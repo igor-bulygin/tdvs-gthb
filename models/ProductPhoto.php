@@ -12,6 +12,21 @@ namespace app\models;
  */
 class ProductPhoto extends EmbedModel
 {
+
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $serializeFields = [];
+
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $retrieveExtraFields = [];
+
 	public function getParentAttribute()
 	{
 		return "photos";
@@ -30,8 +45,8 @@ class ProductPhoto extends EmbedModel
 	public function rules()
     {
         return [
-	        [['name', 'main_product_photo'], 'safe', 'on' => [Product2::SCENARIO_PRODUCT_DRAFT, Product2::SCENARIO_PRODUCT_PUBLIC]],
-            [['name'], 'required', 'on' => Product2::SCENARIO_PRODUCT_PUBLIC],
+	        [['name', 'main_product_photo'], 'safe', 'on' => [Product::SCENARIO_PRODUCT_DRAFT, Product::SCENARIO_PRODUCT_PUBLIC]],
+            [['name'], 'required', 'on' => Product::SCENARIO_PRODUCT_PUBLIC],
             [
             	'name_cropped',
 				'required',
@@ -59,7 +74,7 @@ class ProductPhoto extends EmbedModel
 	 */
 	public function getPhotoUrl()
 	{
-		$product = $this->getParentObject(); /** @var Product2 $product */
+		$product = $this->getParentObject(); /** @var Product $product */
 		return $product->getUrlImagesLocation().$this->name;
 	}
 

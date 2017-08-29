@@ -66,7 +66,7 @@ class LovedController extends AppPrivateController
 		$loved->person_id = Yii::$app->user->identity->short_id;
 		if ($loved->load(Yii::$app->request->post(), '') && $loved->validate()) {
 
-			$loved->save();
+			$loved->save(false);
 
 			Yii::$app->response->setStatusCode(201); // Created
 			return $loved;

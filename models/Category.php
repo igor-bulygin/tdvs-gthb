@@ -3,9 +3,10 @@ namespace app\models;
 
 use app\helpers\CActiveRecord;
 use app\helpers\Utils;
+use EasySlugger\Slugger;
 use Yii;
+use yii\helpers\Url;
 use yii\mongodb\ActiveQuery;
-use yii\mongodb\Query;
 
 /**
  * @property string path
@@ -13,8 +14,25 @@ use yii\mongodb\Query;
  * @property bool prints
  * @property mixed|string name
  * @property string slug
+ * @property int header_position
+ * @property array header_products
  */
 class Category extends CActiveRecord {
+
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $serializeFields = [];
+
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $retrieveExtraFields = [];
+
 
 	/** @var Product */
 	private $deviserProduct;
@@ -36,7 +54,9 @@ class Category extends CActiveRecord {
 			'sizecharts',
 			'prints',
 			'name',
-			'slug'
+			'slug',
+			'header_position',
+			'header_products',
 		];
 	}
 
@@ -54,6 +74,33 @@ class Category extends CActiveRecord {
 	{
 		parent::init();
 		$this->deviserProduct = [];
+	}
+
+	public function rules()
+	{
+		return [
+			[
+				[
+					'short_id',
+					'path',
+					'sizecharts',
+					'prints',
+					'name',
+					'slug',
+					'header_position',
+					'header_products',
+				],
+				'safe',
+			],
+			[
+				'name',
+				'app\validators\TranslatableValidator',
+			],
+			[
+				'header_position',
+				'integer',
+			]
+		];
 	}
 
 
@@ -74,6 +121,8 @@ class Category extends CActiveRecord {
                     'prints',
                     'name',
                     'slug',
+                    'header_position',
+                    'header_products',
                 ];
                 static::$translateFields = true;
                 break;
@@ -85,6 +134,8 @@ class Category extends CActiveRecord {
                     'prints',
                     'name',
                     'slug',
+					'header_position',
+					'header_products',
                 ];
                 static::$translateFields = false;
                 break;
@@ -108,6 +159,11 @@ class Category extends CActiveRecord {
 
 	    // Retrieve only fields that gonna be used
 	    $query->select(self::getSelectFields());
+
+		// if category id is specified
+		if ((array_key_exists("id", $criteria)) && (!empty($criteria["id"]))) {
+			$query->andWhere(["short_id" => $criteria["id"]]);
+		}
 
 	    // only root nodes, or all
 	    if (array_key_exists("scope", $criteria)) {
@@ -135,6 +191,16 @@ class Category extends CActiveRecord {
 		    $query->offset($criteria["offset"]);
 	    }
 
+		if ((array_key_exists("order_col", $criteria)) && (!empty($criteria["order_col"])) &&
+			(array_key_exists("order_dir", $criteria)) && (!empty($criteria["order_dir"]))) {
+			$query->orderBy([
+				$criteria["order_col"] => $criteria["order_dir"] == 'desc' ? SORT_DESC : SORT_ASC,
+			]);
+		} else {
+			$query->orderBy([
+				"created_at" => SORT_DESC,
+			]);
+		}
 	    $items = $query->all();
 
 
@@ -146,21 +212,48 @@ class Category extends CActiveRecord {
     }
 
 	/**
+	 * Get one entity serialized
+	 *
+	 * @param string $id
+	 *
+	 * @return Category|null
+	 */
+	public static function findOneSerialized($id)
+	{
+		/** @var Category $category */
+		$category = Category::find()->select(self::getSelectFields())->where(["short_id" => $id])->one();
+
+		// if automatic translation is enabled
+		if (static::$translateFields) {
+			Utils::translate($category);
+		}
+
+		return $category;
+	}
+
+	/**
 	 * Get list of categories to use in header menu
 	 *
 	 * @return array
 	 */
 	public static function getHeaderCategories()
 	{
-		// TODO Forced for the demo. This must be selected in "admin" panel.
-		$categories = Category::find()->where(["path" => "/"])->all();
-		foreach ($categories as $k => $category) {
-			if ($category->short_id == 'ffeec') { // More must be the last one
-				unset($categories[$k]);
-				$categories[$k] = $category;
-			}
+		$query = Category::find()
+			->andWhere(["path" => "/"])
+			->andWhere([">", "header_position", 0])
+			->orderBy([
+				'header_position' => SORT_ASC,
+			]
+		);
+
+		$items = $query->all();
+
+
+		// if automatic translation is enabled
+		if (static::$translateFields) {
+			Utils::translate($items);
 		}
-		return $categories;
+		return $items;
 	}
 
 	/**
@@ -170,138 +263,176 @@ class Category extends CActiveRecord {
 	 */
 	public static function getFooterCategories()
 	{
-		// TODO Forced for the demo. This must be selected in "admin" panel.
-		$categories = Category::find()->where(["path" => "/"])->all();
-		foreach ($categories as $k => $category) {
-			if ($category->short_id == 'ffeec') { // More must be the last one
-				unset($categories[$k]);
-				$categories[$k] = $category;
+		return static::getHeaderCategories();
+	}
+
+	/**
+	 * Returns subcategories of current category that are configured to be shown in header menu
+	 *
+	 * @return Category[]
+	 */
+	public function getSubCategoriesHeader()
+	{
+		$current_path = $this->path . $this->short_id . "/";
+
+		$query = Category::find()
+			->andWhere(["path" => $current_path])
+			->andWhere([">", "header_position", 0])
+			->orderBy([
+					'header_position' => SORT_ASC,
+				]
+			);
+
+		$items = $query->all();
+
+
+		// if automatic translation is enabled
+		if (static::$translateFields) {
+			Utils::translate($items);
+		}
+
+		return $items;
+	}
+
+	/**
+	 * Returns the products to use in shop by deparment header.
+	 *
+	 * This method tries to get products defined in "header_products" property of the category
+	 * If there is no products in this property, the method tries to get $limit random products in the category
+	 *
+	 * @param int $limit
+	 * @return Product[]
+	 */
+	public function getHeaderProducts($limit = 100)
+	{
+		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_PUBLIC);
+
+		if ($this->header_products) {
+			$products = Product::findSerialized([
+				'id' => $this->header_products,
+			]);
+
+		} else {
+
+			// if there is no hardcoded products, we get randome products of the category
+
+			$products = Product::findSerialized(
+				[
+					'categories' => [$this->short_id],
+					'limit' => $limit,
+				]
+			);
+
+			if (count($products) > 3) {
+				$products = array_slice($products, rand(0, count($products)), 3);
 			}
 		}
-		return $categories;
+
+		return $products;
 	}
 
-	/**
-	 * @return Category[]
-	 */
-	public function getSubCategories() {
-		return Category::find()->where(["path" => $this->path . $this->short_id . "/"])->all();
-	}
 
 	/**
-	 * @return Category[]
+	 * Returns an array with the images to use in shop by deparment header.
+	 *
+	 * The images are fixed for a group of categories (files in /imgs/category_{%category_slug%}_{g|s|s1}.jpg
+	 * If the images not exists in filesystem, this method try to get the "header products", and use them as image/link
+	 *
+	 * Array has the next keys:
+	 * - url => Url to the image (relative to base_url)
+	 * - link => (optional) Link when the image is clicked
+	 * - name => (optional) to use as title attribute in the <a> href tag
+	 *
+	 * @return array
 	 */
-	public function getSubCategoriesHeader() {
-
-		/*
-		FASHION - WOMENSWEAR - Accessories, Coats & Jackets, Dresses, Footwear, Jeans, Knitwear, Tops
-
-		FASHION - MENSWEAR - Accessories, Coats & Jackets, Footwear, Jeans, Shirts, Suits & Blazers, T-shirts
-
-		DECORATION: Carpets, Furniture, Home Accessories, Lighting, Tableware
-
-		ART: Ceramic, Painting, Photography, Printmaking, Sculpture
-
-		JEWELRY: Bracelets, Collars, Earrings, Necklaces, Rings, Watches
-
-		TECNOLOGY: sin subcategorías (si pinchamos en GADGETS nos lleva a la home de GADGETS)
-
-		FOOD & BEVERAGE: sin subcategorías (si pinchamos en FOOD & BEVERAGES nos lleva a la home de FOOD & BEVERAGE)
-
-		MORE que salgan las 3 categorías que hay actualmente si es posible: automotive, living, musical instruments
-
-		*/
-
-		$fixedCategories = [
-			// Womenswear
-			'bf73v',
-			'22ecr',
-			'd9aaa',
-			'e7d15',
-			'4c1d2',
-			'3ac6t',
-			'5d2ek',
-
-			// Menswear
-			'9e5e6',
-			'ada11',
-			'2029g',
-			'ab0a7',
-			'8d1a2',
-			'b5144',
-			'8c303',
-
-			// Decoration
-			'2b11c',
-			'2a10b',
-			'4f2a0',
-			'2237e',
-			'7707g',
-
-			// Art
-			'1b34c',
-			'1h10i',
-			'1i11j',
-			'1j12k',
-			'1k13l',
-
-			// jewelry
-			'ef4ch',
-			'9a7bu',
-			'3abc9',
-			'3klm5',
-			'3145q',
-			'3lva9',
-
-			// more
-			'663d4',
-			'7642n',
-			'76de8',
-
+	public function getHeaderImages()
+	{
+		$names = [
+			[
+				'url' => "/imgs/category_" . strtolower($this->slug) . "_g.jpg",
+				'link' => null,
+			],
+			[
+				'url' => "/imgs/category_" . strtolower($this->slug) . "_s.jpg",
+				'link' => null,
+			],
+			[
+				'url' => "/imgs/category_" . strtolower($this->slug) . "_s1.jpg",
+				'link' => null,
+			],
 		];
-		$current_path =$this->path . $this->short_id . "/";
-		return Category::find()
-				->where(["REGEX", "path", "/^$current_path/"])
-				->andWhere(['in', 'short_id', $fixedCategories])
-				->all();
-	}
+		foreach ($names as $k => $image) {
+			if (!file_exists(Yii::getAlias('@webroot').$image['url'])) {
+				$names = [];
+				$headerProducts = $this->getHeaderProducts(3);
+				foreach ($headerProducts as $product) {
+					$names[] = [
+						'url' => Utils::url_scheme() . Utils::thumborize($product->getMainImage())->resize(398, 235),
+						'link' => $product->getViewLink(),
+						'name' => $product->name,
+					];
+				}
 
-	public function getSubCategoriesOld($current_path = null) {
-		if ($current_path === null) {
-			$current_path = $this->path . $this->short_id . "/";
+				return $names;
+			}
 		}
 
-		/* @var $db \MongoCollection */
-		//$db = Yii::$app->mongodb->getCollection(["todevise", "category"]);
-		//$cursor = $db->find([
-		//	"path" => (new \MongoRegex("/^$current_path/"))
-		//]);
-		//$subcategories = [];
-		//while ($cursor->hasNext()) {
-		//	$subcategories[] = $cursor->getNext();
-		//}
-		//return $subcategories;
+		return $names;
+	}
 
-		return (new Query)->
-			select([])->
-			from('category')->
-			where(["REGEX", "path", "/^$current_path/"])->all();
+	/**
+	 * @return Category[]
+	 */
+	public function getSubCategories($recursive = false) {
+		return static::findByPath($this->path . $this->short_id . "/", $recursive);
+	}
+
+	/**
+	 * @return Category|null
+	 */
+	public function getParentCategory() {
+		if ($this->path == '/') {
+			return null;
+		}
+
+		$ancestors = explode('/', rtrim(ltrim($this->path, '/'), '/'));
+		if ($ancestors) {
+			$parentId = $ancestors[count($ancestors) - 1];
+			$parent = static::findOne(['short_id' => $parentId]);
+			if ($parent) {
+				return $parent;
+			}
+		}
+
+		return null;
+	}
+
+	public static function findByPath($path, $recursive = false) {
+
+		if ($recursive) {
+			// Escape slashes
+			$path = str_replace('/', '\/', $path);
+			return Category::find()
+				->andWhere(["REGEX", "path", "/$path/"])
+				->all();
+		}
+
+		return Category::find()->andWhere(["path" => $path])->all();
 	}
 
 	/**
 	 * Get short_id from current category, and optionally, child categories.
 	 *
-	 * @param null $current_path
 	 * @param bool $includeChild
 	 * @return array
 	 */
-	public function getShortIds($current_path = null, $includeChild = true) {
+	public function getShortIds($includeChild = true) {
 
 		$ids = [$this->short_id];
 		if ($includeChild) {
-			$subs = $this->getSubCategoriesOld($current_path);
+			$subs = $this->getSubCategories(true);
 			foreach ($subs as $sub) {
-				$ids[] = $sub["short_id"];
+				$ids[] = $sub->short_id;
 			}
 		}
 		return $ids;
@@ -340,7 +471,6 @@ class Category extends CActiveRecord {
 		$this->deviserSubcategories = $deviserSubcategories;
 	}
 
-
 	public function beforeSave($insert) {
 		/*
 		 * Create empty data holders if they don't exist
@@ -349,8 +479,14 @@ class Category extends CActiveRecord {
 			$this["name"] = [];
 		}
 
-		if($this->slug == null) {
-			$this["slug"] = [];
+		$slugs = [];
+		foreach ($this->name as $lang => $text) {
+			$slugs[$lang] = Slugger::slugify($text);
+		}
+		$this->setAttribute("slug", $slugs);
+
+		if (empty($this->header_position)) {
+			$this->header_position = null;
 		}
 
 		if($insert) {
@@ -369,7 +505,8 @@ class Category extends CActiveRecord {
 				$current_path = $dirty_values["path"] . $this->short_id . "/";
 				$new_sub_path = $this->path . $this->short_id . "/";
 
-				foreach($this->getSubCategoriesOld($current_path) as $category) {
+				$categories = Category::findByPath($current_path, true);
+				foreach($categories as $category) {
 					//TODO: Optimize with an update instead of find + save?
 					$category = Category::findOne(['short_id' => $category["short_id"]]);
 					$category->path = str_replace($current_path, $new_sub_path, $category->path, $count = 1);
@@ -382,15 +519,50 @@ class Category extends CActiveRecord {
 	}
 
 	public function beforeDelete() {
-		foreach($this->getSubCategoriesOld() as $category) {
-			$category = Category::findOne(["short_id" => $category["short_id"]]);
-			//TODO: Find all products and remove this category from each one
+		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_OWNER);
+
+		// Delete subcategories first
+		$subCategories = $this->getSubCategories(true);
+		foreach($subCategories as $subCategory) {
+			$subCategory->delete();
+		}
+
+		// Find all products and remove this category from each one
+		$products = Product::findSerialized(
+			[
+				'categories' => $this->short_id,
+			]
+		);
+
+		foreach ($products as $product) {
+			$categories = $product->categories;
+			if (($key = array_search($this->short_id, $categories)) !== false) {
+				unset($categories[$key]);
+				$product->categories = $categories;
+				$product->save();
+			}
+
 			//TODO: Notify the product's deviser that this product was removed from the category we're about to delete
-			$category->delete();
 		}
 
 		return parent::beforeDelete();
 	}
+
+//	public function behaviors()
+//	{
+//		return array_merge(
+//			parent::behaviors(),
+//			[
+//				'positionBehavior' => [
+//					'class' => PositionBehavior::className(),
+//					'positionAttribute' => 'header_position',
+//					'groupAttributes' => [
+//						'path' // multiple lists varying by 'path'
+//					],
+//				],
+//			]
+//		);
+//	}
 
 	/**
 	 * Returns the main category (first level category) of the current object
@@ -439,6 +611,64 @@ class Category extends CActiveRecord {
 	 * @return bool
 	 */
 	public function hasGroupsOfCategories() {
-		return $this->short_id == '4a2b4'; // at this moment only fashion has this behaviour
+
+		$current_path = $this->path . $this->short_id . "/";
+
+		// Escape slashes
+		$current_path = str_replace('/', '\/', $current_path);
+
+		// example of regexp for short_id 4a2b4 (note last slash before $, to get only first level childs):
+		//				     /\/4a2b4\/\w{5}\/$/
+
+		$query = Category::find()
+			->andWhere(["REGEX", "path", "/$current_path\w{5}\/$/"])
+			->andWhere([">", "header_position", 0])
+			->orderBy([
+					'header_position' => SORT_ASC,
+				]
+			);
+
+		$items = $query->all();
+
+		return !empty($items);
+	}
+
+	public function getSlug()
+	{
+		if (is_array($this->slug)) {
+			$slug = Utils::l($this->slug);
+		} else {
+			$slug = $this->slug;
+		}
+
+		return $slug;
+	}
+
+	public function getName()
+	{
+		if (is_array($this->name)) {
+			$name = Utils::l($this->name);
+		} else {
+			$name = $this->name;
+		}
+
+		return $name;
+	}
+
+	public function getSlugForUrl()
+	{
+		$parent = $this->getParentCategory();
+		$prefix = $parent ? $parent->getSlugForUrl().'-' : '';
+
+		return $prefix.Slugger::slugify($this->getName());
+	}
+
+	public function getMainLink()
+	{
+		return Url::to([
+			"public/category-b",
+			"slug" => $this->getSlugForUrl(),
+			'category_id' => $this->short_id
+		]);
 	}
 }

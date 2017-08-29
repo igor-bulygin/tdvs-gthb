@@ -7,14 +7,16 @@ Example about how to call to Web Service to create a new Person account
 **Method**: `POST`
 
 **Response codes**: 
-* `201`: Success (without body)
+* `200`: Success
 * `400`: Bad request
+* `404`: Not found (invitation not found)
+* `409`: Conflict (email already in use)
   
 **Request parameters for create a Deviser**:
 * `type` : array with only one element, with value 2 (required)
-* `invitation_id`: uuid of invitation (required)
+* `uuid`: uuid of invitation (required)
 * `email`: email of deviser (required)
-* `first_name`: representative first name (required)
+* `name`: representative first name (required)
 * `last_name`: representative last name (required)
 * `brand_name`: brand name (required)
 * `password`: password (required)
@@ -32,4 +34,7 @@ Example about how to call to Web Service to create a new Person account
 * `email`: email of deviser (required)
 * `name`: representative first name (required)
 * `password`: password (required)
-  
+
+**Response body**:
+
+See the structure of the complete item in view.md  

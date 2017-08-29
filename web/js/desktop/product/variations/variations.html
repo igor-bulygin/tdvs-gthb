@@ -1,194 +1,159 @@
 <div class="card">
-	<span class="title">3/ Variations &amp; Manufacturing</span>
+	<span class="title" translate="PRODUCT.VARIATIONS.TITLE"></span>
 	<form name="productVariationsCtrl.form" novalidate>
-	<div class="row">
-		<div class="col-md-6">
-			<div class="row">
-			<span class="title">Work Options</span>
-			</div>
-			<div ng-repeat="tag in productVariationsCtrl.tags_for_work | orderBy:[productVariationsCtrl.tagComparator]">
-				<div class="row items-row" ng-if="tag.n_options > 0" ng-cloak>
-					<div class="col-md-4">
-						<label data-ng-for="{{tag.name}}" ng-bind="tag.name"></label>
-						<span class="optional-text block-0" ng-if="!tag.required">OPTIONAL</span>
-					</div>
-					<div class="mb-20 col-md-8 ng-class:{'col-md-offset-4': $index > 0}" ng-repeat="(itemIndex,item) in productVariationsCtrl.product.options[tag.id] track by itemIndex">
-						<span>{{itemIndex+1}}:&nbsp;</span>
-						<ol class="nya-bs-select categories-select ng-class:{'purple': productVariationsCtrl.optionValidation(productVariationsCtrl.product.options[tag.id][itemIndex])}" ng-model="productVariationsCtrl.product.options[tag.id][itemIndex]" multiple>
-							<li nya-bs-option="option in tag.options" data-value="option.value" deep-watch="true" class="ng-class:{'disabled': productVariationsCtrl.product.options[tag.id][itemIndex].length >= tag.n_options && productVariationsCtrl.product.options[tag.id][itemIndex].indexOf(option.value) < 0}">
-								<a href="#"><span ng-bind="option.text['en-US']"></span><span class="glyphicon glyphicon-ok check-mark"></span></a>
-							</li>
-						</ol>
-						<span class="glyphicon glyphicon-remove close-row" ng-if="productVariationsCtrl.product.options[tag.id].length > 1" ng-click="productVariationsCtrl.deleteOption(tag.id, $index)"></span>
-					</div>
-					<div class="col-md-8 col-md-offset-4">
-						<span class="add-cathegory" ng-click="productVariationsCtrl.product.options[tag.id].push([])">+ Add another option</span>
+		<div class="row">
+			<div class="col-md-6">
+				<span class="title" translate="PRODUCT.VARIATIONS.WORK_OPTIONS"></span>
+				<div ng-repeat="tag in productVariationsCtrl.tags_for_work | orderBy:[productVariationsCtrl.tagComparator]">
+					<div class="row items-row" ng-if="tag.n_options > 0" ng-cloak>
+						<div class="col-xs-12">
+							<label class="col-xs-12" data-ng-for="{{tag.name}}" ng-bind="tag.name"></label>
+							<span class="optional-text" ng-if="!tag.required" translate="PRODUCT.VARIATIONS.OPTIONAL"></span>
+						</div>
+						<div class="mb-20 col-md-5" ng-repeat="(itemIndex,item) in productVariationsCtrl.product.options[tag.id] track by itemIndex">
+							<span class="col-xs-1">{{itemIndex+1}}&nbsp;</span>
+							<ol class="nya-bs-select categories-select col-xs-10 ng-class:{'error-input': productVariationsCtrl.optionValidation(productVariationsCtrl.product.options[tag.id][itemIndex],tag.required)} " ng-model="productVariationsCtrl.product.options[tag.id][itemIndex]" multiple>
+								<li nya-bs-option="option in tag.options" data-value="option.value" deep-watch="true" class="ng-class:{'disabled': productVariationsCtrl.product.options[tag.id][itemIndex].length >= tag.n_options && productVariationsCtrl.product.options[tag.id][itemIndex].indexOf(option.value) < 0}">
+									<a href="#"><span ng-bind="option.text['en-US']"></span><span class="glyphicon glyphicon-ok check-mark"></span></a>
+								</li>
+							</ol>
+							<span class="glyphicon glyphicon-remove close-row" ng-if="productVariationsCtrl.product.options[tag.id].length > 1" ng-click="productVariationsCtrl.deleteOption(tag.id, $index)"></span>
+						</div>
+						<div class="col-xs-12">
+							<span class="add-cathegory col-xs-12" ng-if="(productVariationsCtrl.product.options[tag.id][productVariationsCtrl.product.options[tag.id].length-1]).length>0" ng-click="productVariationsCtrl.product.options[tag.id].push([])" translate="PRODUCT.VARIATIONS.ADD_OPTION"></span>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="col-md-6">
-			<span class="title">Manufacturing information</span>
-			<div class="form-group">
-				<div class="row">
-					<div class="col-md-4 pad-about">
-						<span>Is this product in pre-order?</span>
-					</div>
-					<div class="col-md-8 pad-about">
-						<div class="radio radio-inline ml-30">
-							<input type="radio" name="preorder_selected" id="preorder_selected" ng-model="productVariationsCtrl.preorder_selected" ng-value="true" ng-change="productVariationsCtrl.setPreorder(productVariationsCtrl.preorder_selected)">
-							<label for="preorder_selected">
-								Yes
-							</label>
+			<div class="col-md-6">
+				<span class="title text-left" translate="PRODUCT.VARIATIONS.MANUFACTURING_INFO"></span>
+				<div class="form-group col-md-12">
+					<div class="row" id="preorder">
+						<div class="col-md-4 pad-about">
+							<span translate="PRODUCT.VARIATIONS.IS_PREORDER"></span>
 						</div>
-						<div class="radio radio-inline">
-							<input type="radio" name="preorder_unselected" id="preorder_unselected" ng-model="productVariationsCtrl.preorder_selected" ng-value="false" checked ng-change="productVariationsCtrl.setPreorder(productVariationsCtrl.preorder_selected)">
-							<label for="preorder_unselected">
-								No
-							</label>
-						</div>
-					</div>
-					<div class="mt-50" ng-if="productVariationsCtrl.preorder_selected">
-						<div class="row mt-20">
-							<div class="col-md-6">
-								<p class="manufacturing-question">When will the pre-order period end?</p>
-								<p class="manufacturing-answer">When the pre-order is over, you will be reminded to update the stock of the product.</p>
+						<div class="col-md-8 pad-about">
+							<div class="radio radio-inline ml-30">
+								<input type="radio" name="preorder_selected" id="preorder_selected" ng-model="productVariationsCtrl.preorder_selected" ng-value="true" ng-change="productVariationsCtrl.setPreorder(productVariationsCtrl.preorder_selected)">
+								<label for="preorder_selected" translate="PRODUCT.YES"></label>
 							</div>
-							<div class="col-md-6">
-								<div class="dropdown" ng-if="!productVariationsCtrl.product.preorder.end">
-									<a href="#" data-target="#" class="calendar-icon dropdown-toggle-preorder ng-class:{'error-input': !productVariationsCtrl.preorder_end_data && productVariationsCtrl.required_preorder}" id="preorderEnd" role="button" data-toggle="dropdown">
-										<i class="fa fa-calendar" aria-hidden="true"></i>
-									</a>
-									<ul class="dropdown-menu" role="menu" aria-labelledby="preorderEnd">
-										<datetimepicker data-ng-model="productVariationsCtrl.preorder_end_data" data-datetimepicker-config="{ dropdownSelector: '.dropdown-toggle-preorder', startView:'day', minView:'day'}" data-on-set-time="productVariationsCtrl.setPreorderEnd(newDate, oldDate)"></datetimepicker>
-									</ul>
+							<div class="radio radio-inline">
+								<input type="radio" name="preorder_unselected" id="preorder_unselected" ng-model="productVariationsCtrl.preorder_selected" ng-value="false" checked ng-change="productVariationsCtrl.setPreorder(productVariationsCtrl.preorder_selected)">
+								<label for="preorder_unselected" translate="PRODUCT.NO"></label>
+							</div>
+						</div>
+						<div class="mt-50" ng-if="productVariationsCtrl.preorder_selected">
+							<div class="row mt-20">
+								<div class="col-md-6">
+									<p class="manufacturing-question" translate="PRODUCT.VARIATIONS.PREORDER_END"></p>
+									<p class="manufacturing-answer" translate="PRODUCT.VARIATIONS.REMINDER_STOCK"></p>
 								</div>
-								<div ng-if="productVariationsCtrl.product.preorder.end">
-									<p class="date-variations" ng-bind="(productVariationsCtrl.product.preorder.end | date: 'MMM dd yyyy')"></p>
-									<div class="dropdown">
-										<a href="#" data-target="#" class="dropdown-toggle-preorder red-text" id="preorderEnd" role="button" data-toggle="dropdown"><span class="glyphicon glyphicon-pencil"></span>&nbsp;<span>Change date</span></a>
+								<div class="col-md-6">
+									<div class="dropdown" ng-if="!productVariationsCtrl.product.preorder.end">
+										<a href="#" data-target="#" class="calendar-icon dropdown-toggle-preorder ng-class:{'error-input': !productVariationsCtrl.preorder_end_data && productVariationsCtrl.required_preorder}" id="preorderEnd" role="button" data-toggle="dropdown">
+											<i class="fa fa-calendar" aria-hidden="true"></i>
+										</a>
 										<ul class="dropdown-menu" role="menu" aria-labelledby="preorderEnd">
-											<datetimepicker data-ng-model="productVariationsCtrl.preorder_data" data-datetimepicker-config="{ dropdownSelector: '.dropdown-toggle-preorder', startView:'day', minView:'day'}" data-on-set-time="productVariationsCtrl.setPreorderEnd(newDate, oldDate)"></datetimepicker>
+											<datetimepicker data-ng-model="productVariationsCtrl.preorder_end_data" data-datetimepicker-config="{ dropdownSelector: '.dropdown-toggle-preorder', startView:'day', minView:'day'}" data-on-set-time="productVariationsCtrl.setPreorderEnd(newDate, oldDate)"></datetimepicker>
 										</ul>
+									</div>
+									<div ng-if="productVariationsCtrl.product.preorder.end">
+										<p class="date-variations" ng-bind="(productVariationsCtrl.product.preorder.end | date: 'MMM dd yyyy')"></p>
+										<div class="dropdown">
+											<a href="#" data-target="#" class="dropdown-toggle-preorder red-text" id="preorderEnd" role="button" data-toggle="dropdown"><span class="glyphicon glyphicon-pencil"></span>&nbsp;<span translate="PRODUCT.VARIATIONS.CHANGE_DATE"></span></a>
+											<ul class="dropdown-menu" role="menu" aria-labelledby="preorderEnd">
+												<datetimepicker data-ng-model="productVariationsCtrl.preorder_data" data-datetimepicker-config="{ dropdownSelector: '.dropdown-toggle-preorder', startView:'day', minView:'day'}" data-on-set-time="productVariationsCtrl.setPreorderEnd(newDate, oldDate)"></datetimepicker>
+											</ul>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-6">
-								<p class="manufacturing-question">When will the product be shipped?</p>
-							</div>
-							<div class="col-md-6">
-								<div class="dropdown" ng-if="!productVariationsCtrl.product.preorder.ship">
-									<a href="#" data-target="#" class="calendar-icon dropdown-toggle-preorder-ship ng-class:{'error-input': !productVariationsCtrl.preorder_ship_data && productVariationsCtrl.required_preorder}" id="preorderShip" role="button" data-toggle="dropdown">
-										<i class="fa fa-calendar" aria-hidden="true"></i>
-									</a>
-									<ul class="dropdown-menu" role="menu" aria-labbeledby="preorderShip">
-										<datetimepicker data-ng-model="productVariationsCtrl.preorder_ship_data" data-datetimepicker-config="{ dropdownSelector: '.dropdown-toggle-preorder-ship', startView: 'day', minView: 'day'}" data-on-set-time="productVariationsCtrl.setPreorderShip(newDate, oldDate)"></datetimepicker>
-									</ul>
+							<div class="row">
+								<div class="col-md-6">
+									<p class="manufacturing-question" translate="PRODUCT.VARIATIONS.WHEN_SHIPPED"></p>
 								</div>
-								<div ng-if="productVariationsCtrl.product.preorder.ship">
-									<p class="date-variations" ng-bind="(productVariationsCtrl.product.preorder.ship | date: 'MMM dd yyyy')"></p>
-									<div class="dropdown">
-										<a href="#" data-target="#" class="dropdown-toggle-preorder-ship red-text" id="preorderShip" role="button" data-toggle="dropdown">
-											<span class="glyphicon glyphicon-pencil"></span>&nbsp;<span>Change date</span>
+								<div class="col-md-6">
+									<div class="dropdown" ng-if="!productVariationsCtrl.product.preorder.ship">
+										<a href="#" data-target="#" class="calendar-icon dropdown-toggle-preorder-ship ng-class:{'error-input': !productVariationsCtrl.preorder_ship_data && productVariationsCtrl.required_preorder}" id="preorderShip" role="button" data-toggle="dropdown">
+											<i class="fa fa-calendar" aria-hidden="true"></i>
 										</a>
-										<ul class="dropdown-menu" role="menu" arialabelledby="preorderShip">
+										<ul class="dropdown-menu" role="menu" aria-labbeledby="preorderShip">
 											<datetimepicker data-ng-model="productVariationsCtrl.preorder_ship_data" data-datetimepicker-config="{ dropdownSelector: '.dropdown-toggle-preorder-ship', startView: 'day', minView: 'day'}" data-on-set-time="productVariationsCtrl.setPreorderShip(newDate, oldDate)"></datetimepicker>
 										</ul>
 									</div>
+									<div ng-if="productVariationsCtrl.product.preorder.ship">
+										<p class="date-variations" ng-bind="(productVariationsCtrl.product.preorder.ship | date: 'MMM dd yyyy')"></p>
+										<div class="dropdown">
+											<a href="#" data-target="#" class="dropdown-toggle-preorder-ship red-text" id="preorderShip" role="button" data-toggle="dropdown">
+												<span class="glyphicon glyphicon-pencil"></span>&nbsp;<span translate="PRODUCT.VARIATIONS.CHANGE_DATE"></span>
+											</a>
+											<ul class="dropdown-menu" role="menu" arialabelledby="preorderShip">
+												<datetimepicker data-ng-model="productVariationsCtrl.preorder_ship_data" data-datetimepicker-config="{ dropdownSelector: '.dropdown-toggle-preorder-ship', startView: 'day', minView: 'day'}" data-on-set-time="productVariationsCtrl.setPreorderShip(newDate, oldDate)"></datetimepicker>
+											</ul>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-4 pad-about">
-					<span>Is this a made-to-order product?</span>
-				</div>
-				<div class="col-md-8 pad-about">
-					<div class="radio radio-inline ml-30">
-						<input type="radio" name="made_to_order_selected" id="made_to_order_selected" ng-model="productVariationsCtrl.made_to_order_selected" ng-value="true" ng-change="productVariationsCtrl.setMadeToOrder(productVariationsCtrl.made_to_order_selected)">
-						<label for="made_to_order_selected">
-							Yes
-						</label>
+				<div class="row col-md-12" id="madetoorder">
+					<div class="col-md-4 pad-about">
+						<span translate="PRODUCT.VARIATIONS.IS_MADE_TO_ORDER"></span>
 					</div>
-					<div class="radio radio-inline">
-						<input type="radio" name="made_to_order_unselected" id="made_to_order_unselected" ng-model="productVariationsCtrl.made_to_order_selected" ng-value="false" checked ng-change="productVariationsCtrl.setMadeToOrder(productVariationsCtrl.made_to_order_selected)">
-						<label for="made_to_order_unselected">
-							No
-						</label>
+					<div class="col-md-8 pad-about">
+						<div class="radio radio-inline ml-30">
+							<input type="radio" name="made_to_order_selected" id="made_to_order_selected" ng-model="productVariationsCtrl.made_to_order_selected" ng-value="true" ng-change="productVariationsCtrl.setMadeToOrder(productVariationsCtrl.made_to_order_selected)">
+							<label for="made_to_order_selected" translate="PRODUCT.YES"></label>
+						</div>
+						<div class="radio radio-inline">
+							<input type="radio" name="made_to_order_unselected" id="made_to_order_unselected" ng-model="productVariationsCtrl.made_to_order_selected" ng-value="false" checked ng-change="productVariationsCtrl.setMadeToOrder(productVariationsCtrl.made_to_order_selected)">
+							<label for="made_to_order_unselected" translate="PRODUCT.NO"></label>
+						</div>
 					</div>
-				</div>
-				<div class="mt-50" ng-if="productVariationsCtrl.made_to_order_selected" ng-cloak>
-					<div class="col-md-2">
-						<input type="number" name="madetoorder" class="form-control rounded-number-input col-md-1 ng-class:{'error-input': !productVariationsCtrl.product['madetoorder'].value && productVariationsCtrl.required_madetoorder}" ng-model="productVariationsCtrl.product['madetoorder'].value" ng-min="0" ng-required="true">
+					<div class="mt-50" ng-if="productVariationsCtrl.made_to_order_selected" ng-cloak>
+						<div class="col-md-2">
+							<input type="number" name="madetoorder" class="form-control rounded-number-input col-md-1 ng-class:{'error-input': !productVariationsCtrl.product['madetoorder'].value && productVariationsCtrl.required_madetoorder}" ng-model="productVariationsCtrl.product['madetoorder'].value" ng-min="0" ng-required="true">							
+						</div>
+						<label class="little-label-number" for="madetoorder" translate="PRODUCT.VARIATIONS.MANUFATURE_DAYS"></label>
 					</div>
-					<label class="little-label-number" for="madetoorder">days needed to manufacture this work</label>
+					<span ng-if="!productVariationsCtrl.product['madetoorder'].value&&productVariationsCtrl.required_madetoorder" class="error-text" translate="PRODUCT.VARIATIONS.DAYS_GREATER_0"></span>
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-4 pad-about">
-					<span>Is this a bespoke product?</span>
-				</div>
-				<div class="col-md-8 pad-about">
-					<div class="radio radio-inline ml-30">
-						<input type="radio" name="bespoke_selected" id="bespoke_selected" value="bespoke_selected" ng-model="productVariationsCtrl.bespoke_selected" ng-value="true" ng-change="productVariationsCtrl.setBespoke(productVariationsCtrl.bespoke_selected)">
-						<label for="bespoke_selected">
-							YES
-						</label>
+				<div class="row col-md-12" id="bespoke">
+					<div class="col-md-4 pad-about">
+						<span translate="PRODUCT.VARIATIONS.IS_BESPOKED"></span>
 					</div>
-					<div class="radio radio-inline">
-						<input type="radio" name="bespoke_unselected" id="bespoke_unselected" value="bespoke_unselected" ng-model="productVariationsCtrl.bespoke_selected" ng-value="false" checked ng-change="productVariationsCtrl.setBespoke(productVariationsCtrl.bespoke_selected)">
-						<label for="bespoke_unselected">
-							NO
-						</label>
+					<div class="col-md-8 pad-about">
+						<div class="radio radio-inline ml-30">
+							<input type="radio" name="bespoke_selected" id="bespoke_selected" value="bespoke_selected" ng-model="productVariationsCtrl.bespoke_selected" ng-value="true" ng-change="productVariationsCtrl.setBespoke(productVariationsCtrl.bespoke_selected)">
+							<label for="bespoke_selected" translate="PRODUCT.YES"></label>
+						</div>
+						<div class="radio radio-inline">
+							<input type="radio" name="bespoke_unselected" id="bespoke_unselected" value="bespoke_unselected" ng-model="productVariationsCtrl.bespoke_selected" ng-value="false" checked ng-change="productVariationsCtrl.setBespoke(productVariationsCtrl.bespoke_selected)">
+							<label for="bespoke_unselected" translate="PRODUCT.NO"></label>
+						</div>
 					</div>
-				</div>
-				<div class="mt-50 bespoke-wraper" ng-if="productVariationsCtrl.bespoke_selected" ng-cloak>
-					<p>What information do you need from the customer before manufacturing this work?</p>
-					<ol class="nya-bs-select about-edit-select title-lang-btn manufacturing-lang" ng-model="productVariationsCtrl.bespoke_language">
-						<li nya-bs-option="language in productVariationsCtrl.languages" data-value="language.code" deep-watch="true">
-							<a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
-						</li>
-					</ol>
-					<textarea name="bespoke_text" id="bespoke_text" cols="30" rows="10" class="form-control manufacturing-textarea ng-class:{'error-input': productVariationsCtrl.textFieldValidation(productVariationsCtrl.product.bespoke.value, productVariationsCtrl.required_bespoke)}" ng-model="productVariationsCtrl.product.bespoke.value[productVariationsCtrl.bespoke_language]"></textarea>
+					<div class="mt-50 bespoke-wraper col-md-12" ng-if="productVariationsCtrl.bespoke_selected" ng-cloak>
+						<p class="col-xs-12" translate="PRODUCT.VARIATIONS.MANUFACTURING_INFO"></p>
+						<textarea name="bespoke_text" id="bespoke_text" cols="30" rows="10" class="form-control manufacturing-textarea col-md-10 ng-class:{'error-input': productVariationsCtrl.textFieldValidation(productVariationsCtrl.product.bespoke.value, productVariationsCtrl.required_bespoke)}" ng-model="productVariationsCtrl.product.bespoke.value[productVariationsCtrl.bespoke_language]"></textarea>
+						<ol class="nya-bs-select about-edit-select title-lang-btn manufacturing-lang col-md-2" ng-model="productVariationsCtrl.bespoke_language">
+							<li nya-bs-option="language in productVariationsCtrl.languages" data-value="language.code" deep-watch="true">
+								<a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
+							</li>
+						</ol>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 	</form>
 	<hr style="height: 2px; color: black">
 	<div class="row items-row">
 		<div class="col-md-12">
-			<div ng-if="productVariationsCtrl.show_sizecharts" ng-cloak>
-					<label>Sizes</label>
-				<div class="row">
-					<div class="col-md-2">
-						<span>Create new size chart</span>
-					</div>
-					<div class="col-md-8 pad-about">
-						<ol class="nya-bs-select categories-select ng-class:{'purple': productVariationsCtrl.form_submitted && !productVariationsCtrl.selected_sizechart}" ng-model="productVariationsCtrl.selected_sizechart" ng-change="productVariationsCtrl.countriesSelect(productVariationsCtrl.selected_sizechart)">
-							<li nya-bs-option="sizechart in productVariationsCtrl.sizechart_helper" data-value="sizechart">
-								<a><span ng-bind="sizechart.name['en-US']"></span></a>
-							</li>
-						</ol>
-						<ol class="nya-bs-select categories-select ng-class:{'purple': productVariationsCtrl.form_submitted && !productVariationsCtrl.selected_sizechart_country}" ng-model="productVariationsCtrl.selected_sizechart_country" ng-if="productVariationsCtrl.countriesAvailable.length > 0" ng-change="productVariationsCtrl.sizesSelect(productVariationsCtrl.selected_sizechart, productVariationsCtrl.selected_sizechart_country)">
-							<li nya-bs-option="country in productVariationsCtrl.countriesAvailable" data-value="country">
-								<a><span ng-bind="country"></span></a>
-							</li>
-						</ol>
-					</div>
-				</div>
-				<div class ="row" >
-					<div class="col-md-4">
-						<span>OR</span>
-					</div>
-				</div>
+			<div ng-if="productVariationsCtrl.show_sizecharts" ng-cloak id="sizechart_values">
+				<label class="col-xs-12 text-center" translate="PRODUCT.VARIATIONS.SIZES"></label>
 				<div class ="row">
 					<div class="col-md-2">
-						<span>Use a saved sizechart</span>
+						<span translate="PRODUCT.VARIATIONS.NEW_SIZECHART"></span>
 					</div>
 					<div class="col-md-8 pad-about">
 						<ol class="nya-bs-select" ng-model="productVariationsCtrl.deviserSizecharts[$index]" ng-change="productVariationsCtrl.sizesSelect(productVariationsCtrl.deviserSizecharts[$index], productVariationsCtrl.deviserSizecharts[$index].countries[0])">
@@ -198,23 +163,41 @@
 						</ol>
 					</div>
 				</div>
-				<div class="row" ng-if="productVariationsCtrl.product.sizechart">
-					<div class="col-md-3">
-						<span>In which sizes is this work available?</span>
-					</div>
+				<div class="row">
 					<div class="col-md-3 pad-about">
-						<ol class="nya-bs-select" ng-model="productVariationsCtrl.size_to_add">
-							<li nya-bs-option="size in productVariationsCtrl.sizechart_empty.values" data-value="$index">
-								<a href="#" ng-if="productVariationsCtrl.sizechart_available_values[$index]"><span ng-bind="size[0]"></span></a>
+						<ol class="nya-bs-select categories-select ng-class:{'error-input': productVariationsCtrl.form_submitted && !productVariationsCtrl.selected_sizechart}" ng-model="productVariationsCtrl.selected_sizechart" ng-change="productVariationsCtrl.countriesSelect(productVariationsCtrl.selected_sizechart)">
+							<li nya-bs-option="sizechart in productVariationsCtrl.sizechart_helper" data-value="sizechart">
+								<a><span ng-bind="sizechart.name['en-US']"></span></a>
 							</li>
 						</ol>
-						<a href="#" ng-click="productVariationsCtrl.addSizeToSizechart(productVariationsCtrl.size_to_add)" class="ion-plus red-plus" ng-disabled="productVariationsCtrl.size_to_add == null"></a>
 					</div>
-					<div class="col-md-3">
-						<span>What scale are your size in?</span>
+					<div class="col-md-3 pad-about">
+						<ol class="nya-bs-select categories-select ng-class:{'error-input': productVariationsCtrl.form_submitted && !productVariationsCtrl.selected_sizechart_country}" ng-model="productVariationsCtrl.selected_sizechart_country" ng-if="productVariationsCtrl.countriesAvailable.length > 0" ng-change="productVariationsCtrl.sizesSelect(productVariationsCtrl.selected_sizechart, productVariationsCtrl.selected_sizechart_country)">
+							<li nya-bs-option="country in productVariationsCtrl.countriesAvailable" data-value="country">
+								<a><span ng-bind="country"></span></a>
+							</li>
+						</ol>
+					</div>
+					<div ng-if="productVariationsCtrl.product.sizechart">
+						<div class="col-md-3">
+							<span translate="PRODUCT.VARIATIONS.AVAILABLE_SIZES"></span>
+						</div>
+						<div class="col-md-3 pad-about">
+							<ol class="nya-bs-select col-md-12" ng-model="productVariationsCtrl.size_to_add">
+								<li nya-bs-option="size in productVariationsCtrl.sizechart_empty.values" data-value="$index">
+									<a href="#" ng-if="productVariationsCtrl.sizechart_available_values[$index]"><span ng-bind="size[0]"></span></a>
+								</li>
+							</ol>
+							<a href="#" ng-click="productVariationsCtrl.addSizeToSizechart(productVariationsCtrl.size_to_add)" class="red-text col-md-12" ng-disabled="productVariationsCtrl.size_to_add == null" translate="PRODUCT.VARIATIONS.ADD_SIZE"></a>
+						</div>
+					</div>
+				</div>
+				<div class="row" ng-if="productVariationsCtrl.product.sizechart">
+					<div class="col-md-1">
+						<span translate="PRODUCT.VARIATIONS.SCALE"></span>
 					</div>
 					<div class="col-md-1 pad-about">
-						<ol class="nya-bs-select categories-select ng-class:{'purple': productVariationsCtrl.form_submitted && !productVariationsCtrl.product.sizechart['metric_unit']}" ng-model="productVariationsCtrl.product.sizechart['metric_unit']">
+						<ol class="nya-bs-select categories-select ng-class:{'error-input': productVariationsCtrl.form_submitted && !productVariationsCtrl.product.sizechart['metric_unit']}" ng-model="productVariationsCtrl.product.sizechart['metric_unit']">
 							<li nya-bs-option="size in productVariationsCtrl.metric.size">
 								<a><span ng-bind="size"></span></a>
 							</li>
@@ -244,24 +227,20 @@
 			</div>
 			<div class="col-md-12" ng-if="productVariationsCtrl.prints" ng-cloak>
 				<div class="row">
-					<span class="title">Prints</span>
+					<span class="title" translate="PRODUCT.VARIATIONS.PRINTS"></span>
 				</div>
 				<div class="row">
 					<div class="col-md-3 pad-about">
-						<span>Do you offer prints of your work?</span>
+						<span translate="PRODUCT.VARIATIONS.OFFER_PRINTS"></span>
 					</div>
 					<div class="col-md-2 pad-about">
 						<div class="radio radio-inline ml-30">
 							<input type="radio" name="prints_selected" id="prints_selected" ng-model="productVariationsCtrl.prints_selected" ng-value="true" ng-change="productVariationsCtrl.setPrintsSelected(productVariationsCtrl.prints_selected)">
-							<label for="prints_selected">
-								Yes
-							</label>
+							<label for="prints_selected" translate="PRODUCT.YES"></label>
 						</div>
 						<div class="radio radio-inline">
 							<input type="radio" name="prints_unselected" id="prints_unselected" ng-model="productVariationsCtrl.prints_selected" ng-value="false"  checked ng-change="productVariationsCtrl.setPrintsSelected(productVariationsCtrl.prints_selected)">
-							<label for="prints_unselected">
-								No
-							</label>
+							<label for="prints_unselected" translate="PRODUCT.NO"></label>
 						</div>
 					</div>
 				</div>
@@ -269,11 +248,11 @@
 					<div class="row items-row">
 						<div class="row">
 							<div class="col-md-2">
-								<label for="paper">Type of paper</label>
+								<label for="paper" translate="PRODUCT.VARIATIONS.PAPER_TYPE"></label>
 							</div>
 							<div class="col-md-10 pad-about ng-class:{'col-md-offset-2': $index > 0}" ng-repeat="type in productVariationsCtrl.product.prints.type track by $index">
 								<span>{{$index+1}}:&nbsp;</span>
-								<ol class="nya-bs-select categories-select col-md-4 ng-class:{'purple': productVariationsCtrl.optionValidation(productVariationsCtrl.product.prints.type[$index])}" ng-model="productVariationsCtrl.product.prints.type[$index]" required>
+								<ol class="nya-bs-select categories-select col-md-4 ng-class:{'error-input': productVariationsCtrl.optionValidation(productVariationsCtrl.product.prints.type[$index])}" ng-model="productVariationsCtrl.product.prints.type[$index]" required>
 									<li nya-bs-option="paperType in productVariationsCtrl.papertypes" data-value="paperType.type">
 										<a href="#">
 											<span ng-bind="paperType.name"></span><span class="glyphicon glyphicon-ok check-mark"></span>
@@ -284,20 +263,20 @@
 						</div>
 						<div class="row">
 							<div class="col-md-3 col-md-offset-2">
-								<span class="add-cathegory" ng-click="productVariationsCtrl.addType()">+ Add another option</span>
+								<span class="add-cathegory" ng-click="productVariationsCtrl.addType()" translate="PRODUCT.VARIATIONS.ADD_OPTION"></span>
 							</div>
 						</div>
 					</div>
 					<div class="row items-row">
 						<div class="row">
 							<div class="mb-20 col-md-2">
-								<label for="size">Print size</label>
+								<label for="size" translate="PRODUCT.VARIATIONS.PRINT_SIZE"></label>
 							</div>
 							<div class="col-md-10 pad-about form-inline ng-class:{'col-md-offset-2': $index > 0}" ng-repeat="size in productVariationsCtrl.product.prints.sizes track by $index">
 								<span class="pull-left">{{$index+1}}:&nbsp;</span>
-								<label for="width" class="col-md-1" style="font-size: 12px;">Width</label><input name="width" type="number" class="form-control col-md-1 ng-class:{'error-input': productVariationsCtrl.sizechartValuesValidation(productVariationsCtrl.product.prints.sizes[$index]['width'])}" ng-model="productVariationsCtrl.product.prints.sizes[$index]['width']" ng-min="0">
-								<label for="length" class="col-md-1" style="font-size: 12px;">Length</label><input name="length" type="number" class="form-control col-md-1 ng-class:{'error-input': productVariationsCtrl.sizechartValuesValidation(productVariationsCtrl.product.prints.sizes[$index]['length'])}" ng-model="productVariationsCtrl.product.prints.sizes[$index]['length']" ng-min="0">
-								<ol class="nya-bs-select categories-select col-md-2 ng-class:{'purple': productVariationsCtrl.form_submitted && !productVariationsCtrl.product.print.sizes[$index]['metric_unit']}" ng-model="productVariationsCtrl.product.prints.sizes[$index]['metric_unit']">
+								<label for="width" class="col-md-1" style="font-size: 12px;" translate="PRODUCT.VARIATIONS.WIDTH"></label><input name="width" type="number" class="form-control col-md-1 ng-class:{'error-input': productVariationsCtrl.sizechartValuesValidation(productVariationsCtrl.product.prints.sizes[$index]['width'])}" ng-model="productVariationsCtrl.product.prints.sizes[$index]['width']" ng-min="0">
+								<label for="length" class="col-md-1" style="font-size: 12px;" translate="PRODUCT.VARIATIONS.LENGTH"></label><input name="length" type="number" class="form-control col-md-1 ng-class:{'error-input': productVariationsCtrl.sizechartValuesValidation(productVariationsCtrl.product.prints.sizes[$index]['length'])}" ng-model="productVariationsCtrl.product.prints.sizes[$index]['length']" ng-min="0">
+								<ol class="nya-bs-select categories-select col-md-2 ng-class:{'error-input': productVariationsCtrl.form_submitted && !productVariationsCtrl.product.print.sizes[$index]['metric_unit']}" ng-model="productVariationsCtrl.product.prints.sizes[$index]['metric_unit']">
 									<li nya-bs-option="unit in productVariationsCtrl.metric.size">
 										<a href="">
 											<span ng-bind="unit"></span>
@@ -309,7 +288,7 @@
 						</div>
 						<div class="row">
 							<div class="col-md-5 col-md-offset-2">
-								<span class="add-cathegory" ng-click="productVariationsCtrl.addSize()">+ Add another option</span>
+								<span class="add-cathegory" ng-click="productVariationsCtrl.addSize()" translate="PRODUCT.VARIATIONS.ADD_OPTION"></span>
 							</div>
 						</div>
 					</div>

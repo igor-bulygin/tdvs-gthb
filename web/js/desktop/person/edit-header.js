@@ -30,13 +30,22 @@
 		function getPerson() {
 			function onGetProfileSuccess(data) {
 				vm.person = angular.copy(data);
-				vm.person_original = angular.copy(data);
 				parsePersonInfo(vm.person);
+				if(!vm.editingHeader)
+					vm.person_original = angular.copy(data);
 			}
 
-			personDataService.getProfilePublic({
-				personId: person.short_id,
-			}, onGetProfileSuccess, UtilService.onError);
+			if(vm.editingHeader) {
+				personDataService.getProfile({
+					personId: person.short_id,
+				}, onGetProfileSuccess, UtilService.onError)
+			} 
+			else {
+				personDataService.getProfilePublic({
+					personId: person.short_id,
+				}, onGetProfileSuccess, UtilService.onError);
+			}
+
 		}
 
 		function getLanguages() {
@@ -55,8 +64,8 @@
 			vm.isProfilePublic = (person.account_state === 'draft' ? false: true);
 			person.text_short_description = UtilService.emptyArrayToObject(person.text_short_description);
 			//set city
-			if(person.personal_info.city && person.personal_info.country)
-				vm.city = person.personal_info.city + ', ' + person.personal_info.country;
+			if(person.city && person.country)
+				vm.city = person.city + ', ' + person.country;
 			//set images
 			if(person.media.header_cropped)
 				vm.header = setHostImage(person.media.header_cropped);
@@ -100,25 +109,31 @@
 
 		function editHeader() {
 			vm.editingHeader = true;
+			getPerson();
 		}
 
 		function saveHeader() {
 			function onSaveHeaderSuccess(data) {
-				vm.person = angular.copy(data);
-				vm.person_original = angular.copy(data);
-				parsePersonInfo(vm.person);
 				vm.editingHeader = false;
-				var newObject = {
-					media: {
-						header: vm.person.media.header || null,
-						header_cropped: vm.person.media.header_cropped || null,
-						profile: vm.person.media.profile || null,
-						profile_cropped: vm.person.media.profile_cropped || null
-					},
-					personal_info: vm.person.personal_info || {},
-					text_short_description: vm.person.text_short_description || {}
-				}
-				$rootScope.$broadcast(deviserEvents.updated_deviser, newObject);
+
+				personDataService.getProfilePublic({
+					personId: person.short_id
+				}, function(data) {
+					vm.person = angular.copy(data);
+					vm.person_original = angular.copy(data);
+					parsePersonInfo(vm.person);
+					var newObject = {
+						media: {
+							header: vm.person.media.header || null,
+							header_cropped: vm.person.media.header_cropped || null,
+							profile: vm.person.media.profile || null,
+							profile_cropped: vm.person.media.profile_cropped || null
+						},
+						personal_info: vm.person.personal_info || {},
+						text_short_description: vm.person.text_short_description || {}
+					}
+					$rootScope.$broadcast(deviserEvents.updated_deviser, newObject);
+				}, UtilService.onError);
 			}
 
 			personDataService.updateProfile(vm.person, {
@@ -225,6 +240,6 @@
 	}
 
 	angular
-		.module('todevise')
-		.controller('personHeaderCtrl', controller)
+		.module('person')
+		.controller('personHeaderCtrl', controller);
 }());

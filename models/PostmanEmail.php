@@ -44,14 +44,14 @@ class PostmanEmail extends CActiveRecord
 	 *
 	 * @var array
 	 */
-	static protected $serializeFields = [];
+	protected static $serializeFields = [];
 
 	/**
 	 * The attributes that should be serialized
 	 *
 	 * @var array
 	 */
-	static protected $retrieveExtraFields = [];
+	protected static $retrieveExtraFields = [];
 
 	public static function collectionName()
 	{
@@ -91,7 +91,7 @@ class PostmanEmail extends CActiveRecord
 	{
 		parent::init();
 
-		$this->from_email = 'info@todevise.com'; // TODO get this from .env file
+		$this->from_email = Yii::$app->params['from_email'];
 		$this->uuid = Uuid::uuid4()->toString();
 		$this->code_charset = 'utf-8';
 

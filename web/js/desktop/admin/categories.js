@@ -6,7 +6,7 @@
 
 		vm.treeData = [];
 
-		vm.treeConfig = treeService.treeDefaultConfig("todevise_faqs_jstree", vm);
+		vm.treeConfig = treeService.treeDefaultConfig("todevise_categories_jstree", vm);
 
 		vm.load_categories = function () {
 			$category.get().then(function (_categories) {
@@ -100,7 +100,7 @@
 			});
 
 			modalInstance.result.then(function (data) {
-				var tmp_node = $category_util.newCategory(path, data.langs, data.slug, data.sizecharts, data.prints);
+				var tmp_node = $category_util.newCategory(path, data.langs, data.slug, data.sizecharts, data.prints, data.header_position);
 
 				$category.modify("POST", tmp_node).then(function (category) {
 					toastr.success("Category created!");
@@ -142,11 +142,13 @@
 					$category.modify("POST", data.category).then(function () {
 						toastr.success("Category modified!");
 
-						var _node = $category_util.categoryToNode(data.category);
-						var _current = _.findWhere(vm.treeData, {
-							id: data.category.short_id
-						});
-						angular.merge(_current, _node);
+						vm.load_categories();
+
+						// var _node = $category_util.categoryToNode(data.category);
+						// var _current = _.findWhere(vm.treeData, {
+						// 	id: data.category.short_id
+						// });
+						// angular.merge(_current, _node);
 					}, function (err) {
 						toastr.error("Couldn't modify category!", err);
 					});
@@ -221,7 +223,8 @@
 				langs: vm.langs,
 				slug: vm.slug,
 				sizecharts: vm.sizecharts,
-				prints: vm.prints
+				prints: vm.prints,
+				header_position: vm.header_position
 			});
 		};
 

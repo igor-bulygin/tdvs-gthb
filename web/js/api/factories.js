@@ -132,7 +132,7 @@
 			return {
 				id: category.short_id,
 				parent: typeof parent_id === "object" ? parent_id[parent_id.length - 2] : parent_id,
-				text: category.name[_lang] || "",
+				text: (category.name[_lang] || "") + (category.header_position ? ' (position: '+category.header_position +')' : ""),
 				icon: "glyphicon glyphicon-menu-hamburger"
 			};
 		};
@@ -157,14 +157,15 @@
 			return deferred.promise;
 		};
 
-		utils.newCategory = function (path, name, slug, sizecharts, prints) {
+		utils.newCategory = function (path, name, slug, sizecharts, prints, header_position) {
 			return {
 				short_id: "new",
 				path: path,
 				slug: slug,
 				name: name,
 				sizecharts: sizecharts,
-				prints: prints
+				prints: prints,
+				header_position: header_position
 			};
 		};
 

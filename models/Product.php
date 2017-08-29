@@ -3,19 +3,28 @@ namespace app\models;
 
 use app\helpers\CActiveRecord;
 use app\helpers\Utils;
+use EasySlugger\Slugger;
 use Exception;
 use MongoDate;
 use Yii;
+use yii\helpers\FileHelper;
+use yii\helpers\Url;
 use yii\mongodb\ActiveQuery;
 use yii2tech\ar\position\PositionBehavior;
 
 /**
  * @property string deviser_id
- * @property array categories
- * @property array collections
  * @property array name
  * @property array slug
  * @property array description
+ * @property array categories
+ * @property ProductMedia $mediaMapping
+ * @property Preorder $preorderMapping
+ * @property MadeToOrder $madeToOrderMapping
+ * @property Bespoke $bespokeMapping
+ * @property FaqQuestion[] $faqMapping
+*
+ * @property array collections
  * @property array media
  * @property array options
  * @property array madetoorder
@@ -26,9 +35,15 @@ use yii2tech\ar\position\PositionBehavior;
  * @property array warranty
  * @property string currency
  * @property string weight_unit
+ * @property string dimension_unit
  * @property array price_stock
+ * @property array tags
  * @property array references
+ * @property string $product_state
  * @property int position
+ * @property int loveds
+ * @property int boxes
+ * @property array prints
  * @property MongoDate created_at
  * @property MongoDate updated_at
  * @property int enabled
@@ -36,22 +51,26 @@ use yii2tech\ar\position\PositionBehavior;
  */
 class Product extends CActiveRecord {
 
+	const PRODUCT_STATE_DRAFT = 'product_state_draft';
+	const PRODUCT_STATE_ACTIVE = 'product_state_active';
+
 	const SCENARIO_PRODUCT_OLD_API = 'scenario-product-old-api';
-	const SCENARIO_PRODUCT_UPDATE_DRAFT = 'scenario-product-update-draft';
+	const SCENARIO_PRODUCT_DRAFT = 'scenario-product-draft';
+	const SCENARIO_PRODUCT_PUBLIC = 'scenario-product-public';
 
 	/**
 	 * The attributes that should be serialized
 	 *
 	 * @var array
 	 */
-	static protected $serializeFields = [];
+	protected static $serializeFields = [];
 
 	/**
 	 * The attributes that should be serialized
 	 *
 	 * @var array
 	 */
-	static protected $retrieveExtraFields = [];
+	protected static $retrieveExtraFields = [];
 
 	public static function collectionName() {
 		return 'product';
@@ -64,6 +83,8 @@ class Product extends CActiveRecord {
 			'deviser_id',
 			'enabled',
 			'categories',
+			'faq',
+			'product_state',
 			'collections',
 			'name',
 			'slug',
@@ -79,8 +100,13 @@ class Product extends CActiveRecord {
 			'warranty',
 			'currency',
 			'weight_unit',
+			'dimension_unit',
 			'price_stock',
+			'tags',
 			'position',
+			'loveds',
+			'boxes',
+			'prints',
 			'created_at',
 			'updated_at',
 		];
@@ -91,7 +117,9 @@ class Product extends CActiveRecord {
 	 *
 	 * @var array
 	 */
-	public static $translatedAttributes = ['name', 'description', 'slug'];
+	public static $translatedAttributes = ['name', 'description', 'slug', 'tags', 'faq.question', 'faq.answer', 'media.description_photos.title', 'media.description_photos.description'];
+
+	public static $textFilterAttributes = ['name', 'description', 'tags'];
 
 	/**
 	 * Initialize model attributes
@@ -100,16 +128,14 @@ class Product extends CActiveRecord {
 	{
 		parent::init();
 
+		$this->short_id = Utils::shortID(7);
+
 		// initialize attributes
 		$this->categories = [];
 		$this->collections = [];
 		$this->name = [];
 		$this->slug = [];
 		$this->description = [];
-		$this->media = [
-			"videos_links" => [],
-			"photos" => []
-		];
 		$this->options = [];
 		$this->madetoorder = [];
 		$this->sizechart = [];
@@ -119,28 +145,134 @@ class Product extends CActiveRecord {
 		$this->warranty = [];
 		$this->currency = "";
 		$this->weight_unit = "";
+		$this->dimension_unit = "";
 		$this->price_stock = [];
+		$this->tags = [];
 		$this->references = [];
 		$this->position = 0;
+		$this->loveds = 0;
+		$this->boxes = 0;
 
-//		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_PUBLIC);
+		$this->faq = [];
 	}
 
+	public function embedMediaMapping()
+	{
+		return $this->mapEmbedded('media', ProductMedia::className(), array('unsetSource' => false));
+	}
 
-	public function beforeSave($insert) {
+	public function embedPreorderMapping()
+	{
+		return $this->mapEmbedded('preorder', Preorder::className(), array('unsetSource' => false));
+	}
+
+	public function embedMadeToOrderMapping()
+	{
+		return $this->mapEmbedded('madetoorder', MadeToOrder::className(), array('unsetSource' => false));
+	}
+
+	public function embedBespokeMapping()
+	{
+		return $this->mapEmbedded('bespoke', Bespoke::className(), array('unsetSource' => false));
+	}
+
+	public function embedFaqMapping()
+	{
+		return $this->mapEmbeddedList('faq', FaqQuestion::className(), array('unsetSource' => false));
+	}
+
+	public function setParentOnEmbbedMappings()
+	{
+		$this->mediaMapping->setParentObject($this);
+		$this->preorderMapping->setParentObject($this);
+		$this->madeToOrderMapping->setParentObject($this);
+		$this->bespokeMapping->setParentObject($this);
+		foreach ($this->faqMapping as $faqMapping) {
+			$faqMapping->setParentObject($this);
+		}
+	}
+
+	public function validate($attributeNames = null, $clearErrors = true)
+	{
+		if (is_array($attributeNames) && !empty($attributeNames)) {
+			if (in_array('media', $attributeNames)) {
+				$attributeNames[] = 'mediaMapping';
+			}
+			if (in_array('faq', $attributeNames)) {
+				$attributeNames[] = 'faqMapping';
+			}
+			if (in_array('preorder', $attributeNames)) {
+				$attributeNames[] = 'preorderMapping';
+			}
+			if (in_array('madetoorder', $attributeNames)) {
+				$attributeNames[] = 'madeToOrderMapping';
+			}
+			if (in_array('bespoke', $attributeNames)) {
+				$attributeNames[] = 'bespokeMapping';
+			}
+		}
+		return parent::validate($attributeNames, $clearErrors);
+	}
+
+	public function afterSave($insert, $changedAttributes) {
+		if ($insert) {
+			$this->moveTempUploadsToProductPath();
+		}
+
+		parent::afterSave($insert, $changedAttributes);
+	}
+
+	public function beforeSave($insert)
+	{
+		// short_id on price_stock
+		$priceStock = $this->price_stock;
+		foreach ($priceStock as $k => $item) {
+			if (!isset($item['short_id'])) {
+				$priceStock[$k]['short_id'] = $this->short_id . Utils::shortID(7);
+			}
+		}
+		$this->setAttribute('price_stock', $priceStock);
+
+		$slugs = [];
+		foreach ($this->name as $lang => $text) {
+			$slugs[$lang] = Slugger::slugify($text);
+		}
+		$this->setAttribute("slug", $slugs);
+
+		if (empty($this->product_state)) {
+			$this->product_state = Product::PRODUCT_STATE_DRAFT;
+		}
+
+		if (!isset($this->loveds)) {
+			$this->loveds = 0;
+		}
+
+		if (!isset($this->boxes)) {
+			$this->boxes = 0;
+		}
 
 		if (empty($this->created_at)) {
 			$this->created_at = new MongoDate();
 		}
 		$this->updated_at = new MongoDate();
 
-//		if (empty($this->slug)) {
-//			$this->slug = [
-//				Lang::EN_US => Slugger::slugify($this->name[Lang::EN_US])
-//			];
-//		}
-
 		return parent::beforeSave($insert);
+	}
+
+	public function beforeDelete() {
+		$this->deletePhotos();
+
+		$loveds = $this->getLoveds();
+		foreach ($loveds as $loved) {
+			$loved->delete();
+		}
+
+		$boxes = $this->getBoxes();
+		foreach ($boxes as $box) {
+			$box->deleteProduct($this->short_id);
+		}
+
+		return parent::beforeDelete();
 	}
 
 	public function behaviors()
@@ -159,17 +291,297 @@ class Product extends CActiveRecord {
 		);
 	}
 
+	public function rules()
+	{
+		return [
+			[
+				[
+					'deviser_id',
+				],
+				'required',
+				'on' => [self::SCENARIO_PRODUCT_DRAFT]
+			],
+			[
+				[
+					'deviser_id',
+					'name',
+					'categories',
+					'description',
+				],
+				'required',
+				'on' => [self::SCENARIO_PRODUCT_PUBLIC],
+			],
+			[
+				[
+					'name',
+					'description',
+				],
+				'app\validators\TranslatableRequiredValidator',
+				'on' => self::SCENARIO_PRODUCT_PUBLIC,
+			],
+			[
+				[
+					'deviser_id',
+					'name',
+					'slug',
+					'description',
+					'categories',
+					'faq',
+					'collections',
+					'options',
+					'madetoorder',
+					'sizechart',
+					'bespoke',
+					'preorder',
+					'returns',
+					'warranty',
+					'currency',
+					'weight_unit',
+					'dimension_unit',
+					'price_stock',
+					'tags',
+					'position',
+					'loveds',
+					'boxes',
+					'prints',
+					'product_state',
+				],
+				'safe',
+				'on' => [self::SCENARIO_PRODUCT_OLD_API, self::SCENARIO_PRODUCT_DRAFT, self::SCENARIO_PRODUCT_PUBLIC]
+			],
+			[
+				'position',
+				'integer',
+				'min' => 0,
+			],
+			[
+				'product_state',
+				'in',
+				'range' => [self::PRODUCT_STATE_DRAFT, self::PRODUCT_STATE_ACTIVE],
+			],
+			[
+				'name',
+				'app\validators\TranslatableValidator',
+				'on' => [self::SCENARIO_PRODUCT_DRAFT, self::SCENARIO_PRODUCT_PUBLIC],
+			],
+			[
+				'description',
+				'app\validators\TranslatableValidator',
+				'on' => [self::SCENARIO_PRODUCT_DRAFT, self::SCENARIO_PRODUCT_PUBLIC],
+			],
+			[
+				'categories',
+				'app\validators\CategoriesValidator',
+				'on' => [self::SCENARIO_PRODUCT_DRAFT, self::SCENARIO_PRODUCT_PUBLIC],
+			],
+			[   'media', 'safe'], // to load data posted from WebServices
+			[   'mediaMapping', 'app\validators\EmbedDocValidator'], // to apply rules
+			[   'faq', 'safe'], // to load data posted from WebServices
+			[   'faqMapping', 'app\validators\EmbedDocValidator'], // to apply rules
+			[   'preorder', 'safe'], // to load data posted from WebServices
+			[   'preorderMapping', 'app\validators\EmbedDocValidator'], // to apply rules
+			[   'madetoorder', 'safe'], // to load data posted from WebServices
+			[   'madeToOrderMapping', 'app\validators\EmbedDocValidator'], // to apply rules
+			[   'bespoke', 'safe'], // to load data posted from WebServices
+			[   'bespokeMapping', 'app\validators\EmbedDocValidator'], // to apply rules
+			[
+				'options',
+				'app\validators\OptionsValidator',
+				'on' => [self::SCENARIO_PRODUCT_DRAFT, self::SCENARIO_PRODUCT_PUBLIC],
+			],
+			[
+				'price_stock',
+				'app\validators\PriceStockValidator',
+				'on' => [self::SCENARIO_PRODUCT_DRAFT, self::SCENARIO_PRODUCT_PUBLIC],
+			],
+			[
+				'weight_unit',
+				'app\validators\WeightUnitValidator',
+				'on' => [self::SCENARIO_PRODUCT_DRAFT, self::SCENARIO_PRODUCT_PUBLIC],
+			],
+			[
+				'dimension_unit',
+				'app\validators\DimensionUnitValidator',
+				'on' => [self::SCENARIO_PRODUCT_DRAFT, self::SCENARIO_PRODUCT_PUBLIC],
+			],
+			[
+				'returns',
+				'app\validators\ReturnsValidator',
+				'on' => [self::SCENARIO_PRODUCT_DRAFT, self::SCENARIO_PRODUCT_PUBLIC],
+			],
+			[
+				'warranty',
+				'app\validators\WarrantyValidator',
+				'on' => [self::SCENARIO_PRODUCT_DRAFT, self::SCENARIO_PRODUCT_PUBLIC],
+			],
+		];
+	}
+
+	/**
+	 * Prepare the ActiveRecord properties to serialize the objects properly, to retrieve an serialize
+	 * only the attributes needed for a query context
+	 *
+	 * @param $view
+	 */
+	public static function setSerializeScenario($view)
+	{
+		switch ($view) {
+			case self::SERIALIZE_SCENARIO_PREVIEW:
+				static::$serializeFields = [
+					'id' => 'short_id',
+					'slug',
+					'name',
+					'media',
+					'deviser' => "deviserPreview",
+					'url_image_preview' => "imagePreview128",
+					'main_photo' => 'mainImage',
+					'url_images' => 'urlImagesLocation',
+					'link' => 'viewLink',
+					'edit_link' => 'editLink',
+					'isLoved' => 'isLoved',
+					'isMine' => 'isMine',
+					'min_price' => 'minimumPrice',
+				];
+				static::$retrieveExtraFields = [
+					'deviser_id',
+				];
+
+				static::$translateFields = true;
+				break;
+			case self::SERIALIZE_SCENARIO_PUBLIC:
+				static::$serializeFields = [
+					'id' => 'short_id',
+					'deviser' => "deviserPreview",
+					'name',
+					'slug',
+					'description',
+					'categories',
+					'media',
+					'faq',
+					'product_state',
+					'enabled',
+					'collections',
+					'madetoorder',
+					'bespoke',
+					'preorder',
+					'returns',
+					'warranty',
+					'currency',
+					'weight_unit',
+					'dimension_unit',
+					'references',
+					'options' => 'productOptions',
+					'url_images' => 'urlImagesLocation',
+					'position',
+					'loveds',
+					'isLoved' => 'isLoved',
+					'isMine' => 'isMine',
+					'boxes',
+					'prints',
+					'sizechart',
+					'price_stock',
+					'tags',
+					'link' => 'viewLink',
+					'edit_link' => 'editLink',
+					'main_photo' => 'mainImage',
+					'min_price' => 'minimumPrice',
+				];
+				static::$retrieveExtraFields = [
+					'deviser_id',
+					'options',
+					'sizechart',
+				];
+
+				static::$translateFields = true;
+				break;
+			case self::SERIALIZE_SCENARIO_OWNER:
+				static::$serializeFields = [
+					'id' => 'short_id',
+					'deviser' => "deviserPreview",
+					'name',
+					'slug',
+					'description',
+					'categories',
+					'media',
+					'faq',
+					'product_state',
+					'enabled',
+					'collections',
+					'madetoorder',
+					'bespoke',
+					'preorder',
+					'returns',
+					'warranty',
+					'currency',
+					'weight_unit',
+					'dimension_unit',
+					'references',
+					'options',
+					'sizechart',
+					'url_images' => 'urlImagesLocation',
+					'position',
+					'loveds',
+					'boxes',
+					'prints',
+					'price_stock',
+					'tags',
+				];
+				static::$retrieveExtraFields = [
+					'deviser_id',
+//
+				];
+
+				static::$translateFields = false;
+				break;
+			case self::SERIALIZE_SCENARIO_ADMIN:
+				static::$serializeFields = [
+					'id' => 'short_id',
+					'_id',
+					'short_id',
+					'deviser_id',
+					'enabled',
+					'categories',
+					'collections',
+					'name',
+					'slug',
+					'description',
+					'media',
+					'options',
+					'madetoorder',
+					'sizechart',
+					'bespoke',
+					'preorder',
+					'returns',
+					'warranty',
+					'currency',
+					'weight_unit',
+					'dimension_unit',
+					'price_stock',
+					'tags',
+					'url_images' => 'urlImagesLocation',
+					'product_state',
+				];
+				static::$translateFields = false;
+				break;
+			default:
+				// now available for this Model
+				static::$serializeFields = [];
+				break;
+		}
+	}
+
 	/**
 	 * Get one entity serialized
 	 *
 	 * @param string $id
+	 *
 	 * @return Product|null
 	 * @throws Exception
 	 */
 	public static function findOneSerialized($id)
 	{
 		/** @var Product $product */
-		$product = Product::find()->select(self::getSelectFields())->where(["short_id" => $id])->one();
+		$product = static::find()->select(self::getSelectFields())->where(["short_id" => $id])->one();
 
 		// if automatic translation is enabled
 		if (static::$translateFields) {
@@ -182,14 +594,14 @@ class Product extends CActiveRecord {
 	 * Get a collection of entities serialized, according to serialization configuration
 	 *
 	 * @param array $criteria
-	 * @return array
+	 * @return Product[]
 	 * @throws Exception
 	 */
 	public static function findSerialized($criteria = [])
 	{
 
 		// Products query
-		$query = new ActiveQuery(Product::className());
+		$query = new ActiveQuery(static::className());
 
 		// Retrieve only fields that gonna be used
 		$query->select(self::getSelectFields());
@@ -199,7 +611,7 @@ class Product extends CActiveRecord {
 			$query->andWhere(["short_id" => $criteria["id"]]);
 		}
 
-			// if deviser id is specified
+		// if deviser id is specified
 		if ((array_key_exists("deviser_id", $criteria)) && (!empty($criteria["deviser_id"]))) {
 			$query->andWhere(["deviser_id" => $criteria["deviser_id"]]);
 		}
@@ -224,17 +636,35 @@ class Product extends CActiveRecord {
 			$query->andWhere(["categories" => $ids]);
 		}
 
+		// if product_state is specified
+		if ((array_key_exists("product_state", $criteria)) && (!empty($criteria["product_state"]))) {
+			$query->andWhere(["product_state" => $criteria["product_state"]]);
+		}
+		// if only_active_persons are specified
+		if ((array_key_exists("only_active_persons", $criteria)) && (!empty($criteria["only_active_persons"]))) {
+
+			// Get different person_ids available by country
+			$queryPerson= new ActiveQuery(Person::className());
+			$queryPerson->andWhere(["account_state" => Person::ACCOUNT_STATE_ACTIVE]);
+			$idsPerson = $queryPerson->distinct("short_id");
+
+			if ($idsPerson) {
+				$query->andFilterWhere(["in", "deviser_id", $idsPerson]);
+			} else {
+				$query->andFilterWhere(["in", "deviser_id", "dummy_person"]); // Force no results if there are no boxes
+			}
+		}
+
 		// if name is specified
 		if ((array_key_exists("name", $criteria)) && (!empty($criteria["name"]))) {
 //			// search the word in all available languages
 			$query->andFilterWhere(Utils::getFilterForTranslatableField("name", $criteria["name"]));
 		}
 
-		// if name is specified
+		// if text is specified
 		if ((array_key_exists("text", $criteria)) && (!empty($criteria["text"]))) {
-			// TODO, find not only in description, in name, and other text attributes to be specified too
 //			// search the word in all available languages
-			$query->andFilterWhere(Utils::getFilterForTranslatableField("description", $criteria["text"]));
+			$query->andFilterWhere(static::getFilterForText(static::$textFilterAttributes, $criteria["text"]));
 		}
 
 		// Count how many items are with those conditions, before limit them for pagination
@@ -250,7 +680,36 @@ class Product extends CActiveRecord {
 			$query->offset($criteria["offset"]);
 		}
 
-		$query->orderBy("deviser_id, position");
+		// order
+		if ((array_key_exists("order_type", $criteria)) && (!empty($criteria["order_type"]))) {
+			switch ($criteria['order_type']) {
+				case 'new':
+					$criteria['order_col'] = 'created_at';
+					$criteria['order_dir'] = 'desc';
+					break;
+				case 'old':
+					$criteria['order_col'] = 'created_at';
+					$criteria['order_dir'] = 'asc';
+					break;
+				case 'chepeast':
+					$criteria['order_col'] = 'price_stock.price';
+					$criteria['order_dir'] = 'asc';
+					break;
+				case 'expensive':
+					$criteria['order_col'] = 'price_stock.price';
+					$criteria['order_dir'] = 'desc';
+					break;
+			}
+		}
+
+		if ((array_key_exists("order_col", $criteria)) && (!empty($criteria["order_col"])) &&
+			(array_key_exists("order_dir", $criteria)) && (!empty($criteria["order_dir"]))) {
+			$query->orderBy([
+				$criteria["order_col"] => $criteria["order_dir"] == 'desc' ? SORT_DESC : SORT_ASC,
+			]);
+		} else {
+			$query->orderBy("deviser_id, position");
+		}
 
 		$products = $query->all();
 
@@ -268,129 +727,91 @@ class Product extends CActiveRecord {
 	}
 
 	/**
-	 * Prepare the ActiveRecord properties to serialize the objects properly, to retrieve an serialize
-	 * only the attributes needed for a query context
-	 *
-	 * @param $view
-	 */
-	public static function setSerializeScenario($view)
-	{
-		switch ($view) {
-			case self::SERIALIZE_SCENARIO_PREVIEW:
-				static::$serializeFields = [
-					'id' => 'short_id',
-					'name',
-					'slug',
-					'deviser' => "deviserPreview",
-					'url_image_preview' => "imagePreview128",
-				];
-				static::$retrieveExtraFields = [
-					'deviser_id',
-				];
-				break;
-			case self::SERIALIZE_SCENARIO_PUBLIC:
-				static::$serializeFields = [
-					'id' => 'short_id',
-					'deviser' => "deviserPreview",
-					'enabled',
-					'categories',
-//					'collections',
-					'name',
-					'slug',
-					'description',
-					'media',
-					'madetoorder',
-					'bespoke',
-					'preorder',
-					'returns',
-					'warranty',
-					'currency',
-//					'weight_unit',
-					'references',
-					'position',
-					'options' => 'productOptions',
-					'url_images' => 'urlImagesLocation',
-					'price_stock',
-				];
-				static::$retrieveExtraFields = [
-					'deviser_id',
-					'options',
-					'sizechart',
-
-				];
-
-				static::$translateFields = true;
-				break;
-			case self::SERIALIZE_SCENARIO_ADMIN:
-				static::$serializeFields = [
-					'id' => 'short_id',
-					'_id',
-					'short_id',
-					'deviser_id',
-					'enabled',
-					'categories',
-					'collections',
-					'name',
-					'slug',
-					'description',
-					'media',
-					'options',
-					'madetoorder',
-					'sizechart',
-					'bespoke',
-					'preorder',
-					'returns',
-					'warranty',
-					'currency',
-					'weight_unit',
-					'price_stock',
-					'url_images' => 'urlImagesLocation',
-				];
-				static::$translateFields = false;
-				break;
-			default:
-				// now available for this Model
-				static::$serializeFields = [];
-				break;
-		}
-	}
-
-	/**
 	 * Get the path to main product image
-	 * 
+	 *
 	 * @return string
 	 */
 	public function getMainImage($urlify = true)
 	{
 		$image = "";
-		$fallback = "product_placeholder.png";
+		$defaultImage = "product_placeholder.png";
 
-		if (isset($this->media) && isset($this->media["photos"])) {
+		if (isset($this->media) && !empty($this->media["photos"])) {
+			// Try to find the "main_product_photo"
 			foreach ($this->media["photos"] as $key => $photo) {
 				if (isset($photo["main_product_photo"]) && $photo["main_product_photo"]) {
-					$image = $photo["name"];
+
+					// Try to get the cropped photo
+					if (isset($photo['name_cropped'])) {
+						$image = $photo["name_cropped"];
+					} else {
+						$image = $photo["name"];
+					}
+
 					break;
 				}
 			}
-		}
 
-		if ($image === "") {
-			if (count($this->media["photos"]) == 0) {
-				$image = $fallback;
-			} else {
+			if (!$image) {
+				// If there is no image... we use the first image
 				$image = $this->media["photos"][0]["name"];
 			}
+
+			if ($image && $this->existMediaFile($image)) {
+				// Only use the image if it exists...
+				if ($urlify) {
+					$image = Yii::getAlias("@product_url") . "/" . $this->short_id . "/" . $image;
+				}
+
+				return $image;
+			}
 		}
 
+		// Default image
+		$image = $defaultImage;
 		if ($urlify === true) {
-			if ($image === $fallback) {
-				$image = Yii::getAlias("@web") . "/imgs/" . $image;
-			} else {
-				$image = Yii::getAlias("@product_url") . "/" . $this->short_id . "/" . $image;
-			}
+			$image = Yii::getAlias("@web") . "/imgs/" . $image;
 		}
 
 		return $image;
+	}
+
+	/**
+	 * Returns the url to view the product
+	 *
+	 * @return string
+	 */
+	public function getViewLink() {
+		return Url::to(["/product/detail", "slug" => $this->getSlug(), 'product_id' => $this->short_id], true);
+	}
+
+	/**
+	 * Returns the url to edit the product
+	 *
+	 * @return string
+	 */
+	public function getEditLink() {
+		$deviser = $this->getDeviser();
+		return Url::to(['/product/edit', 'slug' => $deviser->getSlug(), 'product_id' => $this->short_id, 'person_id' => $this->deviser_id,
+			"person_type" => $deviser->getPersonTypeForUrl()], true);
+	}
+
+	public function getSlug() {
+		if (is_array($this->slug)) {
+			$slug = Utils::l($this->slug);
+		} else {
+			$slug = $this->slug;
+		}
+		return $slug;
+	}
+
+	public function getName() {
+		if (is_array($this->name)) {
+			$name = Utils::l($this->name);
+		} else {
+			$name = $this->name;
+		}
+		return $name;
 	}
 
 	/**
@@ -413,17 +834,22 @@ class Product extends CActiveRecord {
 	 */
 	public function getVideos()
 	{
-		// temporary, return all deviser videos
-		$deviser = Person::findOne(["short_id" => $this->deviser_id]); /** @var Person $deviser */
-		return $deviser->videosMapping;
-
 		$videos = [];
+
 		$persons = Person::find()->where(["videos.products" => $this->short_id])->all();
+		/** @var Person $person */
 		foreach ($persons as $person) {
 			/** @var PersonVideo $video */
 			foreach ($person->findVideosByProductId($this->short_id) as $video) {
-				$videos[] = $video;
+				$videos[$video->url] = $video;
 			}
+		}
+
+		// Add all deviser videos
+		$deviser = Person::findOneSerialized($this->deviser_id);
+		$deviserVideos = $deviser->videosMapping;
+		foreach ($deviserVideos as $oneVideo) {
+			$videos[$oneVideo->url] = $oneVideo;
 		}
 		return $videos;
 	}
@@ -511,38 +937,11 @@ class Product extends CActiveRecord {
 	 *
 	 * @return array
 	 */
-	public function getReferences()
-	{
-		$references = [];
-		foreach ($this->price_stock as $stock) {
-			$options = [];
-			foreach ($stock["options"] as $key => $values) {
-				if (isset($values[0])) {
-					// remove the array
-					$options[$key] = $values[0];
-				}
-			}
-			$references[] = [
-				"reference_id" => "temp_random_id_" . uniqid(), // TODO retrieve from database
-				"options" => $options,
-				"stock" => $stock["stock"],
-				"price" => $stock["price"],
-			];
-		}
-		return $references;
-	}
-	
-	/**
-	 * Build an structure with all references to be handled by client side.
-	 * By reference, we understand a combination of a product, and each options combinations where
-	 * the product has stock, for example, "t-shirt = X + color = blue + size = xxl"
-	 *
-	 * @return array
-	 */
 	public function getProductOptions()
 	{
 		$options = [];
 		foreach ($this->options as $tag_id => $option) {
+
 			/** @var Tag $tag */
 			$tag = Tag::findOne(["short_id" => $tag_id]);
 			if ($tag) {
@@ -568,6 +967,16 @@ class Product extends CActiveRecord {
 	}
 
 	/**
+	 * Returns the deviser owner of the product
+	 *
+	 * @return Person
+	 */
+	public function getDeviser()
+	{
+		return Person::findOneSerialized($this->deviser_id);
+	}
+
+	/**
 	 * Get a preview version of a Deviser
 	 *
 	 * @return array
@@ -575,8 +984,16 @@ class Product extends CActiveRecord {
 	public function getDeviserPreview()
 	{
 		/** @var Person $deviser */
-		$deviser = Person::findOneSerialized($this->deviser_id);
+		$deviser = $this->getDeviser();
 		return $deviser->getPreviewSerialized();
+	}
+
+	public function getIsLoved() {
+		return $this->isLovedByCurrentUser();
+	}
+
+	public function getIsMine() {
+		return $this->isWorkFromCurrentUser();
 	}
 
 	/**
@@ -596,6 +1013,24 @@ class Product extends CActiveRecord {
 			}
 		}
 		return $values;
+	}
+
+	/**
+	 * Get label to show returns conditions
+	 *
+	 * @return string
+	 */
+	public function getReturnsLabel()
+	{
+		$label = '';
+		if (!empty($this->returns)) {
+			$warrantyType = $this->returns["type"];
+			if (($warrantyType != Returns::NONE) && (array_key_exists("value", $this->returns))) {
+				$label .= $this->returns["value"] . ' ';
+			}
+			$label .= Returns::getDescription($this->returns["type"]);
+		}
+		return $label;
 	}
 
 	/**
@@ -626,36 +1061,6 @@ class Product extends CActiveRecord {
 		return Yii::getAlias("@product_url") . "/" . $this->short_id . "/";
 	}
 
-	public function rules()
-	{
-		return [
-			// the name, email, subject and body attributes are required
-			[
-				[
-					'deviser_id',
-					'categories',
-					'collections',
-					'name',
-					'slug',
-					'description',
-					'media',
-					'options',
-					'madetoorder',
-					'sizechart',
-					'bespoke',
-					'preorder',
-					'returns',
-					'warranty',
-					'currency',
-					'weight_unit',
-					'price_stock',
-				],
-				'safe',
-				'on' => [self::SCENARIO_PRODUCT_OLD_API, self::SCENARIO_PRODUCT_UPDATE_DRAFT]
-			],
-		];
-	}
-
 	/**
 	 * Spread data for sub documents
 	 *
@@ -667,9 +1072,20 @@ class Product extends CActiveRecord {
 	{
 		$loaded = parent::load($data, $formName);
 
-		// use position behavior method to move it
-		if (array_key_exists("position", $data)) {
-			$this->moveToPosition($data["position"]);
+		if (array_key_exists('media', $data)) {
+			$this->mediaMapping->load($data, 'media');
+		}
+
+		if (array_key_exists('preorder', $data)) {
+			$this->preorderMapping->load($data, 'preorder');
+		}
+
+		if (array_key_exists('madetoorder', $data)) {
+			$this->madeToOrderMapping->load($data, 'madetoorder');
+		}
+
+		if (array_key_exists('bespoke', $data)) {
+			$this->bespokeMapping->load($data, 'madetoorder');
 		}
 
 		return ($loaded);
@@ -683,14 +1099,255 @@ class Product extends CActiveRecord {
 	public function getPreviewSerialized()
 	{
 		return [
-			"id" => $this->short_id,
-			"slug" => $this->slug,
-			"name" => $this->name,
-			"media" => $this->media,
-			"deviser" => $this->getDeviserPreview(),
+			'id' => $this->short_id,
+			'slug' => $this->slug,
+			'name' => $this->name,
+			'media' => $this->media,
+			'deviser' => $this->getDeviserPreview(),
 			'url_image_preview' => $this->getImagePreview128(),
-			"url_images" => $this->getUrlImagesLocation(),
+			'main_photo' => $this->getMainImage(),
+			'url_images' => $this->getUrlImagesLocation(),
+			'link' => $this->getViewLink(),
+			'edit_link' => $this->getEditLink(),
+			'isLoved' => $this->getIsLoved(),
+			'isMine' => $this->getIsMine(),
+			'min_price' => $this->getMinimumPrice(),
 		];
 	}
 
+	/**
+	 * Add additional error to make easy show labels in client side
+	 */
+	public function afterValidate()
+	{
+		parent::afterValidate();
+		foreach ($this->errors as $attribute => $error) {
+			switch ($attribute) {
+				default:
+					if (Utils::isRequiredError($error)) {
+						$this->addError("required", $attribute);
+					}
+					$this->addError("fields", $attribute);
+					break;
+			}
+		};
+	}
+
+	public function getTempUploadedFilesPath()
+	{
+		return Utils::join_paths(Yii::getAlias("@product"), "temp");
+
+	}
+
+	public function getUploadedFilesPath()
+	{
+		return Utils::join_paths(Yii::getAlias("@product"), $this->short_id);
+	}
+
+	/**
+	 * Check if Deviser media file is exists
+	 *
+	 * @param string $filename
+	 * @return bool
+	 */
+	public function existMediaFile($filename)
+	{
+		if (empty($filename)) {
+			return false;
+		}
+
+		$filePath = Utils::join_paths($this->getUploadedFilesPath(), $filename);
+
+		return file_exists($filePath);
+	}
+
+	/**
+	 * Check if Deviser media file is exists
+	 *
+	 * @param string $filename
+	 * @return bool
+	 */
+	public function existMediaTempFile($filename)
+	{
+		if (empty($filename)) {
+			return false;
+		}
+
+		$filePath = Utils::join_paths($this->getTempUploadedFilesPath(), $filename);
+
+		return file_exists($filePath);
+	}
+
+	/**
+	 * Moves all temporary uploads to definitive product's path
+	 */
+	public function moveTempUploadsToProductPath()
+	{
+		foreach ($this->media['photos'] as $onephoto) {
+			$this->moveTempFileToProductPath($onephoto['name']);
+			if (isset($onephoto['name_cropped'])) {
+				$this->moveTempFileToProductPath($onephoto['name_cropped']);
+			}
+		}
+		foreach ($this->media['description_photos'] as $onephoto) {
+			$this->moveTempFileToProductPath($onephoto['name']);
+			if (isset($onephoto['name_cropped'])) {
+				$this->moveTempFileToProductPath($onephoto['name_cropped']);
+			}
+		}
+	}
+
+	protected function moveTempFileToProductPath($file)
+	{
+		$tempFile = Utils::join_paths($this->getTempUploadedFilesPath(), $file);
+		if (!file_exists($tempFile)) {
+			return;
+		}
+		$path_destination = $this->getUploadedFilesPath();
+		$destination = Utils::join_paths($path_destination, $file);
+
+		if (!file_exists($destination)) {
+			if (!file_exists($path_destination)) {
+				FileHelper::createDirectory($path_destination);
+			}
+			rename($tempFile, $destination);
+		}
+	}
+
+	/**
+	 * Returns a number of random works.
+	 *
+	 * @param int $limit
+	 * @param array $categories
+	 * @return Product[]
+	 */
+	public static function getRandomWorks($limit, $categories = [])
+	{
+		// Exclude drafts
+		$conditions[] =
+				[
+						'$match' => [
+								"product_state" => [
+										'$eq' => Product::PRODUCT_STATE_ACTIVE,
+								]
+						]
+				];
+
+		// Filter by category if present
+		if (!empty($categories)) {
+			$conditions[] =
+					[
+							'$match' => [
+									"categories" => [
+											'$in' => $categories
+									]
+							]
+					];
+		}
+
+		// Randomize
+		$conditions[] =
+				[
+						'$sample' => [
+								'size' => $limit,
+						]
+				];
+
+		$randomWorks = Yii::$app->mongodb->getCollection('product')->aggregate($conditions);
+
+		$worksId = [];
+		foreach ($randomWorks as $work) {
+			$worksId[] = $work['_id'];
+		}
+		$query = new ActiveQuery(Product::className());
+		$query->where(['in', '_id', $worksId]);
+		$works = $query->all();
+		shuffle($works);
+
+		return $works;
+	}
+
+	public function getPriceStockItem($priceStockId) {
+		$priceStock = $this->price_stock;
+		foreach ($priceStock as $item) {
+			if ($item['short_id'] == $priceStockId) {
+				return $item;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Returns TRUE if the product is from the connected user
+	 *
+	 * @return bool
+	 */
+	public function isWorkFromCurrentUser() {
+		if(Yii::$app->user->isGuest) {
+			return false;
+		}
+		$person_id = Yii::$app->user->identity->short_id;
+		return $this->deviser_id == $person_id;
+	}
+
+	/**
+	 * Returns TRUE if the product is loved by the connected user
+	 *
+	 * @return bool
+	 */
+	public function isLovedByCurrentUser() {
+		if (Yii::$app->user->isGuest) {
+			return false;
+		}
+		$person_id = Yii::$app->user->identity->short_id;
+
+		return Utils::productLovedByPerson($this->short_id, $person_id);
+	}
+
+	/**
+	 * Returns Loveds from the product
+	 *
+	 * @return Loved[]
+	 */
+	public function getLoveds() {
+		return Loved::findSerialized(['product_id' => $this->short_id]);
+	}
+
+	/**
+	 * Returns boxes that include this product
+	 *
+	 * @return Box[]
+	 */
+	public function getBoxes() {
+		return Box::findSerialized(['product_id' => $this->short_id]);
+	}
+
+	/**
+	 * Returns the shipping price of an price stock item to a country
+	 * If no priceStockId is specified, returns shipping price for the first variation available
+	 * If no countryCode is specified, returns shipping price for the default country
+	 * If there is no shipping price defined for the parameters, returns null
+	 *
+	 * @param string $priceStockId
+	 * @param string $countryCode
+	 *
+	 * @return double|null
+	 */
+	public function getShippingPrice($priceStockId = null, $countryCode = null)
+	{
+		if (empty($countryCode)) {
+			$countryCode = Country::getDefaultContryCode();
+		}
+		$deviser = $this->getDeviser();
+		$priceStocks = $this->price_stock;
+		foreach ($priceStocks as $priceStock) {
+			if ($priceStock['available'] && (empty($priceStockId) || $priceStock['short_id'] == $priceStockId)) {
+				$shippingSettingRange = $deviser->getShippinSettingRange($priceStock['weight'], $countryCode);
+
+				return $shippingSettingRange['price'];
+			}
+		}
+
+		return null;
+	}
 }

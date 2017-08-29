@@ -7,8 +7,14 @@ use app\helpers\Utils;
  * @property string $name
  * @property string $last_name
  * @property string $brand_name
+ * @property string $vat_id
  * @property string $country
  * @property string $city
+ * @property string $address
+ * @property string $phone_number_prefix
+ * @property string $phone_number
+ * @property string $zip
+ *
  * @property \MongoDate $bday
  * @property string $surnames
  *
@@ -17,16 +23,42 @@ use app\helpers\Utils;
 class PersonPersonalInfo extends EmbedModel
 {
 
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $serializeFields = [];
+
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $retrieveExtraFields = [];
+
+	// TODO deprecate
+	public $bday;
+	// TODO deprecate
+	public $surnames;
+	// TODO deprecate
+	public $street;
+	// TODO deprecate
+	public $number;
+
 	public function attributes()
 	{
 		return [
 			'name',
 			'last_name',
 			'brand_name',
+			'vat_id',
 			'country',
 			'city',
-			'bday',
-			'surnames',
+			'address',
+			'phone_number_prefix',
+			'phone_number',
+			'zip',
 		];
 	}
 

@@ -10,6 +10,7 @@
 		this.has_error = has_error;
 		this.parseImagesUrl = parseImagesUrl;
 		this.isZeroOrLess = isZeroOrLess;
+		this.isStringNotEmpty = isStringNotEmpty;
 		this.returnPathFromCategory = returnPathFromCategory;
 		this.stripHTMLTags = stripHTMLTags;
 		this.onError = onError;
@@ -17,6 +18,10 @@
 		this.isDeviser = isDeviser;
 		this.isInfluencer = isInfluencer;
 		this.isClient = isClient;
+		this.isPublic = isPublic;
+		this.isDraft = isDraft;
+		this.setElementPosition = setElementPosition;
+		this.parseDate=parseDate;
 		//regex from: https://gist.github.com/dperini/729294
 		//added "?" after (?:(?:https?|ftp):\/\/) for urls like www.google.es
 		this.urlRegEx = /^(?:(?:https?|ftp):\/\/)?(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,}))\.?)(?::\d{2,5})?(?:[/?#]\S*)?$/i;
@@ -114,6 +119,10 @@
 			return value <= 0 ? true : false;
 		}
 
+		function isStringNotEmpty(string) {
+			return (typeof string == 'string' && string != '') ? true : false;
+		}
+
 		function returnPathFromCategory(categories, id) {
 			var category = categories.find(function(element) {
 				return element.id === id
@@ -151,12 +160,28 @@
 			return person.type.indexOf(1) >= 0 ? true: false;
 		}
 
+		function isPublic(person) {
+			return person.account_state === 'active' ? true : false;
+		}
+
+		function isDraft(person) {
+			return person.account_state === 'draft' ? true : false;
+		}
+
+		function setElementPosition(array) {
+			return array.map(function(element, index) {
+				element.position = index+1;
+				return element;
+			})
+		}
+
 	}
 
-	function config(localStorageServiceProvider) {
+	function config(localStorageServiceProvider,$translatePartialLoaderProvider) {
 		localStorageServiceProvider
 			.setPrefix('todevise-')
-			.setStorageType('localStorage')
+			.setStorageType('localStorage');
+		$translatePartialLoaderProvider.addPart('util');
 	}
 
 	function capitalize() {
@@ -165,7 +190,11 @@
 		}
 	}
 
-	angular.module('util', ['util.formMessages', 'LocalStorageModule', 'ui.bootstrap', 'infinite-scroll', 'uiCropper'])
+	function parseDate(date) {
+		return new Date(date);
+	}
+
+	angular.module('util', ['util.formMessages', 'LocalStorageModule', 'ui.bootstrap', 'infinite-scroll', 'uiCropper','pascalprecht.translate'])
 		.service('UtilService', UtilService)
 		.filter('capitalize', capitalize)
 		.config(config);

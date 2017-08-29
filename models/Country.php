@@ -11,6 +11,7 @@ use yii\mongodb\ActiveQuery;
  * @property string country_name
  * @property string currency_code
  * @property string continent
+ * @property string path
  */
 class Country extends CActiveRecord
 {
@@ -33,6 +34,21 @@ class Country extends CActiveRecord
 		Country::AUSTRALIA => "Australia",
 		Country::WORLD_WIDE => "World Wide"
 	];
+
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $serializeFields = [];
+
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $retrieveExtraFields = [];
+
 
 	function __construct()
 	{
@@ -61,7 +77,8 @@ class Country extends CActiveRecord
 			'country_code',
 			'country_name',
 			'currency_code',
-			'continent'
+			'continent',
+			'path',
 		];
 	}
 
@@ -107,6 +124,46 @@ class Country extends CActiveRecord
 		}
 	}
 
+	public function rules()
+	{
+		return [
+			[
+				[
+					'country_code',
+					'country_name',
+					'currency_code',
+					'continent',
+					'path',
+				],
+				'safe',
+			],
+			[
+				'country_name',
+				'app\validators\TranslatableValidator',
+			],
+		];
+	}
+
+	/**
+	 * Get one entity serialized
+	 *
+	 * @param string $id
+	 *
+	 * @return Country|null
+	 */
+	public static function findOneSerialized($id)
+	{
+		/** @var Country $country */
+		$country = static::find()->select(self::getSelectFields())->where(["country_code" => $id])->one();
+
+		// if automatic translation is enabled
+		if (static::$translateFields) {
+			Utils::translate($country);
+		}
+
+		return $country;
+	}
+
 	/**
 	 * Get a collection of entities serialized, according to serialization configuration
 	 *
@@ -125,6 +182,11 @@ class Country extends CActiveRecord
 		if ((array_key_exists("name", $criteria)) && (!empty($criteria["name"]))) {
 //			// search the word in all available languages
 			$query->andFilterWhere(Utils::getFilterForTranslatableField("country_name", $criteria["name"]));
+		}
+
+		// if continent is specified
+		if ((array_key_exists("continent", $criteria)) && (!empty($criteria["continent"]))) {
+			$query->andWhere(["continent" => $criteria['continent']]);
 		}
 
 		// if person_type is specified
@@ -214,4 +276,44 @@ class Country extends CActiveRecord
 		return $items;
 	}
 
+	/**
+	 * Returns TRUE if the continentCode is valid.
+	 * If countryCode is present, it checks that continent and country are both valid
+	 *
+	 * @param string $continentCode
+	 * @param string $countryCode
+	 *
+	 * @return bool
+	 */
+	public static function validateContinentCode($continentCode, $countryCode = null) {
+		$continents = static::CONTINENTS;
+		$valid = isset($continents[$continentCode]);
+		if ($countryCode) {
+			$country = static::findOne(['country_code' => $countryCode]);
+			if (empty($country) || $country->continent != $continentCode) {
+				$valid = false;
+			}
+		}
+
+		return $valid;
+	}
+
+	/**
+	 * Returns all available country_codes
+	 *
+	 * @return array
+	 */
+	public static function getCountryCodes() {
+		$countries = Country::findSerialized();
+		$country_codes = [];
+		foreach  ($countries as $country) {
+			$country_codes[] = $country->country_code;
+		}
+
+		return $country_codes;
+	}
+
+	public static function getDefaultContryCode() {
+		return "ES";
+	}
 }

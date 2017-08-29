@@ -7,14 +7,9 @@ class IndexAsset extends AssetBundle {
 	public $basePath = '@webroot';
 	public $baseUrl = '@web';
 	public $js = [
-		'js/desktop/deviser/deviser.js',
-		'js/desktop/deviser/view-store.js'
+		'js/desktop/person/person.js',
 	];
 	public $depends = [
-		'app\assets\desktop\pub\PublicCommonAsset',
-		'app\assets\libs\angularAsset',
-		'app\assets\libs\angularToastrAsset',
-		'app\assets\libs\angularBootstrapAsset',
 		'app\assets\api\ApiAsset',
 		'app\assets\libs\utilAsset',
 		'app\assets\libs\nyaBootstrapSelectAsset',
@@ -26,5 +21,6 @@ class IndexAsset extends AssetBundle {
 		'app\assets\libs\angularMasonryAsset',
 		'app\assets\libs\angularLocalStorageAsset',
 		'app\assets\libs\ngTagsInputAsset',
+		'app\assets\libs\angularUiSortableAsset',
 	];
 }

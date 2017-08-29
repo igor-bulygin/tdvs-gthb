@@ -1,5 +1,6 @@
 <?php
-use app\assets\desktop\deviser\EditStoreAsset;
+
+use app\assets\desktop\deviser\GlobalAsset;
 use app\components\PersonHeader;
 use app\components\PersonMenu;
 use app\helpers\Utils;
@@ -8,14 +9,17 @@ use app\models\Person;
 use app\models\Product;
 use yii\helpers\Json;
 
-EditStoreAsset::register($this);
+GlobalAsset::register($this);
 
 /** @var Person $person */
 /** @var Product $product */
 /** @var Category $category */
 /** @var Category $selectedCategory */
 
-$this->title = $person->getName() . ' - Todevise';
+$this->title = Yii::t('app/public',
+	'Edit works by {person_name} - Todevise',
+	['person_name' => $person->getName()]
+);
 
 // use params to share data between views :(
 $this->params['person'] = $person;
@@ -28,7 +32,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 ?>
 <div ng-controller="editStoreCtrl as editStoreCtrl">
 	<div class="success-bar" ng-if="editStoreCtrl.view_published_topbar" style="background: #b8e986; height: 50px;" ng-cloak>
-		<p class="text-center">Your work has been published successfully.</p>
+		<p class="text-center"><span translate="WORK_PUBLISHED"></span></p>
 		<span ng-click="editStoreCtrl.view_published_topbar=false">
 			<i class="ion-android-close"></i>
 		</span>
@@ -49,9 +53,9 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 								<div class="cathegory-wrapper">
 									<?php if ($unpublishedWorks) { ?>
 										<div class="col-md-3 col-sm-3 col-xs-3 pad-cathegory">
-											<a href="<?= $person->getStoreEditLink(['product_state' => \app\models\Product2::PRODUCT_STATE_DRAFT])?>">
+											<a href="<?= $person->getStoreEditLink(['product_state' => \app\models\Product::PRODUCT_STATE_DRAFT])?>">
 												<div class="unpublished-square" ng-click="editStoreCtrl.show_unpublished_works()">
-													<p>Unpublished<br>works</p>
+													<p><span translate="UNPUBLISHED_WORKS_BR"></span></p>
 												</div>
 											</a>
 										</div>
@@ -76,9 +80,9 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 								<div class="title-wrapper">
 									<div ng-if="editStoreCtrl.view_unpublished_works" ng-cloak>
 										<div class="title-wrapper">
-											<span class="title">Unpublished works</span>
+											<span class="title"><span translate="UNPUBLISHED_WORKS"></span></span>
 										</div>
-										<p class="message-tagline">Only you are able to see your unpublished works.</p>
+										<p class="message-tagline"><span translate="UNPUBLISHED_WORKS_SEE"></span></p>
 										<div class="row m-0">
 											<div class="col-md-3 pad-grid" ng-repeat="product in editStoreCtrl.products | draftProduct">
 												<div class="grid">
@@ -116,12 +120,12 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 										</nav>
 										<div ng-if="editStoreCtrl.products.length === 0" ng-cloak>
 											<div class="text-center">
-											<p>...your profile is starting to look great, but you can make it even greater by adding your first work</p>
-											<a class="btn btn-default btn-green btn-add-work" href="<?=$person->getCreateWorkLink()?>">Add Work</a>
+											<p><span translate="ADD_FIRST_WORK"></span></p>
+											<a class="btn btn-default btn-green btn-add-work" href="<?=$person->getCreateWorkLink()?>"><span translate="ADD_WORK"></span></a>
 											</div>
 										</div>
-										<div class="mesonry-row" dnd-list="editStoreCtrl.products" ng-if="editStoreCtrl.products.length > 0" ng-cloak>
-											<div class="menu-category list-group" ng-repeat="product in editStoreCtrl.products | publishedProduct" ng-if="product.main_photo" dnd-draggable="product" dnd-effect-allowed="move" dnd-moved="editStoreCtrl.update($index, product)">
+										<div class="mesonry-row" ui-sortable="editStoreCtrl.sortableOptions" ng-model="editStoreCtrl.products" ng-if="editStoreCtrl.products.length > 0" ng-cloak>
+											<div class="menu-category list-group" ng-repeat="product in editStoreCtrl.products | publishedProduct" ng-if="product.main_photo">
 												<div class="grid">
 													<figure class="effect-zoe">
 														<span class="close-product-icon" ng-click="editStoreCtrl.open_modal_delete(product.id)">
@@ -153,15 +157,14 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 								<h3 class="modal-title"></h3>
 							</div>
 							<div class="modal-body">
-								<p>Are you sure you want to delete this work?</p>
+								<p><span translate="DELETE_WORK"></span></p>
 							</div>
 							<div class="modal-footer">
-								<button class="btn btn-default btn-green pull-left" ng-click="modalDeleteProductCtrl.close()">Cancel</button>
-								<button class="btn btn-default pull-right" ng-click="modalDeleteProductCtrl.ok()">DELETE</button>
+								<button class="btn btn-default btn-green pull-left" ng-click="modalDeleteProductCtrl.close()"><span translate="CANCEL"></span></button>
+								<button class="btn btn-default pull-right" ng-click="modalDeleteProductCtrl.ok()"><span translate="DELETE"></span></button>
 							</div>
 						</div>
 						</script>
-
 					</div>
 				</div>
 			</div>

@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(Upload, uploadDataService, UtilService) {
+	function controller(Upload, uploadDataService, UtilService, dragndropService) {
 		var vm = this;
 		vm.uploadPhotos = uploadPhotos;
 
@@ -45,7 +45,7 @@
 	}
 
 	angular
-		.module('todevise')
+		.module('person')
 		.component('storyPhotoComponent', component);
 
 }());

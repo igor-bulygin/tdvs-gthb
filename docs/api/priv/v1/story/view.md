@@ -9,8 +9,8 @@ Example about how to call to Web Service to get specific story of the connected 
 **Response codes**: 
 * `200`: Success
 * `400`: Bad request
-* `401`: Unauthorized 
-* `403`: Forbidden
+* `401`: Unauthorized
+* `404`: Not found
   
 **Request parameters**:
 * `:id`: Id of the story that want to get

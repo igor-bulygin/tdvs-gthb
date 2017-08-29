@@ -5,10 +5,6 @@
 		$window, dragndropService) {
 		var vm = this;
 		vm.save = save;
-		vm.dragStart = dragStart;
-		vm.dragOver = dragOver;
-		vm.moved = moved;
-		vm.canceled = canceled;
 		init();
 
 		function init() {
@@ -59,41 +55,15 @@
 
 		function save(story) {
 			function onCreateStorySuccess(data) {
-				//console.log(data);
 				$window.location.href = currentHost() + data.view_link;
 			}
 
 			storyDataService.createStory(story, onCreateStorySuccess, UtilService.onError);
 		}
-
-		function dragStart(index) {
-			dragndropService.dragStart(index, vm.story.components);
-		}
-
-		function dragOver(index) {
-			vm.story.components = dragndropService.dragOver(index, vm.story.components);
-			return true;
-		}
-
-		function moved(index) {
-			vm.story.components = dragndropService.moved(index);
-			parseComponentsPosition();
-		}
-
-		function canceled() {
-			vm.story.components = dragndropService.canceled();
-		}
-
-		function parseComponentsPosition() {
-			vm.story.components = vm.story.components.map(function(element, index) {
-				element.position = index+1;
-				return element;
-			})
-		}
 	}
 
 	angular
-		.module('todevise')
+		.module('person')
 		.controller('createStoryCtrl', controller);
 
 }());

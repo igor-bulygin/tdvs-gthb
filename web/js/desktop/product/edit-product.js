@@ -3,14 +3,15 @@
 	"use strict";
 
 	function controller(productService, personDataService, productDataService, languageDataService, metricDataService,
-		UtilService, tagDataService, $scope, $rootScope, productEvents, sizechartDataService, $window, $timeout) {
+		UtilService, tagDataService, $scope, $rootScope, productEvents, sizechartDataService, $window, $timeout,$anchorScroll) {
 		var vm = this;
 		vm.categories_helper = [];
 		vm.save = save;
+		vm.saving = false;
 
 		function init(){
 			vm.from_edit = false;
-			vm.product = {};
+			vm.product = { emptyCategory:false, warranty: {type: 3},  returns: {type: 1}};
 			vm.product.slug = {};
 			vm.product.categories = [];
 			vm.product.media = {
@@ -64,7 +65,7 @@
 				vm.metric = angular.copy(data);
 			}
 
-			metricDataService.getMetric(onGetMetricSuccess, UtilService.onError);
+			metricDataService.getMetric(null, onGetMetricSuccess, UtilService.onError);
 		}
 
 		function getSizechart() {
@@ -96,10 +97,12 @@
 
 		function getProduct() {
 			function onGetProductPrivSuccess(data){
+				var aux=vm.product.emptyCategory;
 				vm.product = angular.copy(data);
 				vm.from_edit = true;
 				vm.product_original = angular.copy(data);
-				vm.product = productService.parseProductFromService(vm.product);
+				vm.product = productService.parseProductFromService(vm.product);				
+				vm.product.emptyCategory=aux;
 			}
 			var params = {
 				idProduct: product.short_id
@@ -120,7 +123,9 @@
 		}
 
 		function saved_draft() {
+			var aux=vm.product.emptyCategory;
 			vm.product = productService.parseProductFromService(vm.product);
+			vm.product.emptyCategory=aux;
 			vm.progressSaved = true;
 			$timeout(() => {
 				vm.progressSaved = false;
@@ -130,10 +135,12 @@
 
 		//publish is true when publishing the product
 		function save(publish) {
+			vm.saving = true;
 			function onUpdateProductSuccess(data) {
-				vm.disable_save_buttons=false;
 				if(vm.product.product_state === 'product_state_draft' || !publish) {
-					saved_draft();
+					saved_draft();					
+					vm.disable_save_buttons=false;
+					vm.saving = false;
 				} else if (vm.product.product_state === 'product_state_active' && publish) {
 					$window.location.href = currentHost() + vm.link_profile + '?published=true';
 				}
@@ -141,6 +148,7 @@
 			function onUpdateProductError(err) {
 				vm.disable_save_buttons=false;
 				vm.errors = true;
+				vm.saving = false;
 				if(err.data.errors && err.data.errors.required && angular.isArray(err.data.errors.required))
 					$rootScope.$broadcast(productEvents.requiredErrors, {required: err.data.errors.required});
 			}
@@ -160,10 +168,12 @@
 					UtilService.parseMultiLanguageEmptyFields(element.answer);
 				});
 			}
-
 			//validations
 			if(vm.product.product_state !== 'product_state_draft') {
 				required = productService.validate(vm.product);
+				if (vm.product.emptyCategory) {
+					required.push("emptyCategory");
+				}
 			} else {
 				//check for null categories
 				while(vm.product.categories.indexOf(null) > -1) {
@@ -173,20 +183,26 @@
 			}
 
 			if(required.length === 0) {
+				var aux=vm.product.emptyCategory;
+				vm.product.warranty.value=parseInt(vm.product.warranty.value);
+				vm.product.returns.value=parseInt(vm.product.returns.value);
 				productDataService.updateProductPriv(vm.product, {
 					idProduct: vm.product.id
 				}, onUpdateProductSuccess, onUpdateProductError);
+				vm.product.emptyCategory=aux;
 			} else {
 				vm.disable_save_buttons=false;
 				vm.errors = true;
+				vm.saving = false;
 				$rootScope.$broadcast(productEvents.requiredErrors, {required: required});
+				$anchorScroll(required[0]);
 			}
 
 		}
 	}
 
 	angular
-		.module('todevise')
+		.module('product')
 		.controller('editProductCtrl',controller);
 
 }());

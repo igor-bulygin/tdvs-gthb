@@ -306,7 +306,6 @@
 
 .ta-scroll-window > .ta-bind {
     padding: 0!important;
-    min-height: auto!important;
 }
 .short-description-input{
     color: $white;
@@ -516,4 +515,9 @@
 }
 .edit-about-row{
     @extend %block;
+}
+.icon-face{
+	width: 50px;
+    margin: 40px auto;
+    display: block;
 }

@@ -15,10 +15,8 @@ Example about how to call to Web Service to delete a product from the cart
 * `:cartId`: Id of the cart that want to update
 * `:priceStockId`: Id of the price stock item that want to update
 
-
 **Response body**:
-```
-cart object (view getCart.md)
-```
+
+Returns the cart modified. See the structure of the complete item in view.md 
 
 

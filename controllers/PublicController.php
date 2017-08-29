@@ -9,23 +9,61 @@ use app\models\Become;
 use app\models\Box;
 use app\models\Category;
 use app\models\ContactForm;
+use app\models\Country;
 use app\models\Faq;
 use app\models\Invitation;
+use app\models\Login;
+use app\models\OldProduct;
 use app\models\Person;
 use app\models\Product;
-use app\models\Product2;
 use app\models\Story;
 use app\models\Tag;
 use app\models\Term;
 use Yii;
 use yii\base\DynamicModel;
 use yii\data\ArrayDataProvider;
+use yii\filters\AccessControl;
 use yii\mongodb\ActiveQuery;
 use yii\web\Response;
 
 class PublicController extends CController
 {
 	public $defaultAction = "index";
+
+	public function behaviors()
+	{
+		return [
+			'access' => [
+				'class' => AccessControl::className(),
+				'only' => ['login', 'authentication-required', 'logout', 'checkout',],
+				'rules' => [
+					[
+						'actions' => ['login', 'authentication-required'],
+						'allow' => true,
+						'roles' => ['?'],
+					],
+					[
+						'actions' => ['login', 'authentication-required'],
+						'allow' => false,
+						'roles' => ['@'],
+						'denyCallback' => function ($rule, $action) {
+							return $this->goHome();
+						}
+					],
+					[
+						'actions' => ['logout'],
+						'allow' => true,
+						'roles' => ['@'],
+					],
+					[
+						'actions' => ['checkout'],
+						'allow' => true,
+						'roles' => ['@'],
+					],
+				],
+			],
+		];
+	}
 
 	public function actionError()
 	{
@@ -62,7 +100,7 @@ class PublicController extends CController
 		$devisers = Person::getRandomDevisers(20, $categoryShortIds);
 
 		// Works
-		$works = Product2::getRandomWorks(300, $categoryShortIds);
+		$works = Product::getRandomWorks(300, $categoryShortIds);
 
 		// divide then in blocks to be rendered in bottom section
 		$moreWork = [];
@@ -75,16 +113,17 @@ class PublicController extends CController
 		}
 
 		// Boxes
-		$boxes = Box::getRandomBoxes(8, null, true);
+		$boxes = Box::getRandomBoxes(9, null, true);
 
 		// Stories
 		$stories = Story::getRandomStories(3);
-		$stories = [];
 
 		// Influencers
 		$influencers = Person::getRandomInfluencers(12, $categoryShortIds);
 
 		$this->layout = '/desktop/public-2.php';
+		$this->view->params['selectedCategory'] = isset($category) ? $category : null;
+
 		return $this->render("index-2", [
 			'banners' => $banners,
 			'totalDevisers' => count($devisers),
@@ -122,6 +161,13 @@ class PublicController extends CController
 		/** @var Invitation $invitation */
 		$invitation = Invitation::findByEmailAction($actionId);
 
+		if ($invitation->uuid != $invitationId) {
+			$invitation = null;
+		}
+
+		$this->view->params['show_header'] = false;
+		$this->view->params['show_footer'] = false;
+
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("create-deviser-account", ["invitation" => $invitation]);
 	}
@@ -133,12 +179,22 @@ class PublicController extends CController
 		/** @var Invitation $invitation */
 		$invitation = Invitation::findByEmailAction($actionId);
 
+		if ($invitation->uuid != $invitationId) {
+			$invitation = null;
+		}
+
+		$this->view->params['show_header'] = false;
+		$this->view->params['show_footer'] = false;
+
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("create-influencer-account", ["invitation" => $invitation]);
 	}
 
 	public function actionSignup()
 	{
+		$this->view->params['show_header'] = false;
+		$this->view->params['show_footer'] = false;
+
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("signup", []);
 	}
@@ -147,6 +203,26 @@ class PublicController extends CController
 	{
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("cart", []);
+	}
+
+	public function actionCheckout()
+	{
+		$person = Yii::$app->user->identity; /* @var Person $person */
+
+		if (!$person->isCompletedProfile()) {
+			$this->redirect($person->getCompleteProfileLink());
+		} else {
+			if ($person->isDeviser() || $person->isInfluencer()) {
+				if (!$person->isPublic()) {
+					$this->redirect($person->getPersonNotPublicLink());
+				}
+			}
+		}
+
+		$this->layout = '/desktop/public-2.php';
+		return $this->render("checkout", [
+			'person' => Yii::$app->user->identity,
+		]);
 	}
 
 	public function actionAboutUs()
@@ -177,7 +253,7 @@ class PublicController extends CController
 			$oneFaq['title'] = Utils::l($oneFaq['title']);
 		}
 
-		return $this->render("faq", [
+		return $this->render("_faq", [
 			'test' => 'this is a test text for faq',
 			'groupOfFaqs' => $groupOfFaqs
 		]);
@@ -200,7 +276,7 @@ class PublicController extends CController
 			$oneTerm['title'] = Utils::l($oneTerm['title']);
 		}
 
-		return $this->render("terms", [
+		return $this->render("_terms", [
 			'test' => 'this is a test text for term',
 			'groupOfTerms' => $groupOfTerms
 		]);
@@ -234,7 +310,7 @@ class PublicController extends CController
 			//return $res;
 			//return $this->redirect(['view', 'id' => $model->code]);
 		} else {
-			return $this->render("contact", [
+			return $this->render("_contact", [
 				'test' => 'normal',
 				'model' => $model,
 				'dropdown_members' => $dropdown_members,
@@ -288,7 +364,7 @@ class PublicController extends CController
 			//return $this->redirect(['view', 'id' => $model->code]);
 		}
 
-		return $this->render("become", ['model' => $model, "showCheckEmail" => $showCheckEmail]);
+		return $this->render("_become", ['model' => $model, "showCheckEmail" => $showCheckEmail]);
 	}
 
 	/**
@@ -394,7 +470,7 @@ class PublicController extends CController
 		];
 
 		// other random products ids to complete the grid
-		$query = new ActiveQuery(Product::className());
+		$query = new ActiveQuery(OldProduct::className());
 		$query->select(["short_id"]);
 		$query->where(["not in", "short_id", $selectedIds]);
 		// filter products not saved properly, without name, and other attributes
@@ -404,7 +480,7 @@ class PublicController extends CController
 		$products = $query->all();
 		$otherIds = [];
 		foreach ($products as $product) {
-			/** @var Product $product */
+			/** @var OldProduct $product */
 			$otherIds[] = $product->short_id;
 		}
 
@@ -570,7 +646,7 @@ class PublicController extends CController
 			]);
 		}
 
-		return $this->render("index", [
+		return $this->render("_index", [
 				'banners' => $banners,
 				'devisers' => $devisers,
 				'categories' => $categories
@@ -620,7 +696,7 @@ class PublicController extends CController
 				],
 		]);
 
-		return $this->render("category", [
+		return $this->render("_category", [
 				'products' => $products
 		]);
 	}
@@ -637,7 +713,7 @@ class PublicController extends CController
 	public function actionProduct($category_id, $product_id, $slug)
 	{
 
-		$product = Product::find()
+		$product = OldProduct::find()
 				->where([
 						"short_id" => $product_id
 				])
@@ -666,7 +742,7 @@ class PublicController extends CController
 								]
 						]
 				);
-		$tmp = Product::find()->where(['deviser_id' => $product['deviser_id']])->asArray()->all();
+		$tmp = OldProduct::find()->where(['deviser_id' => $product['deviser_id']])->asArray()->all();
 
 		Utils::l_collection($tmp, "name");
 		Utils::l_collection($tmp, "slug");
@@ -709,7 +785,7 @@ class PublicController extends CController
 				->asArray()
 				->all();
 
-		return $this->render("product", [
+		return $this->render("_product", [
 				'product' => $product,
 				'other_works' => $other_works,
 				'deviser' => $deviser,
@@ -743,7 +819,7 @@ class PublicController extends CController
 		$deviser['img'] = ModelUtils::getDeviserAvatar($deviser);
 		$deviser['img_header'] = ModelUtils::getPersonHeader($deviser);
 
-		$tmp = Product::find()->select(["_id" => 0])->where(["deviser_id" => $deviser_id])->asArray()->all();
+		$tmp = OldProduct::find()->select(["_id" => 0])->where(["deviser_id" => $deviser_id])->asArray()->all();
 
 		Utils::l_collection($tmp, "name");
 		Utils::l_collection($tmp, "slug");
@@ -760,7 +836,7 @@ class PublicController extends CController
 				],
 		]);
 
-		return $this->render("deviser", [
+		return $this->render("_deviser", [
 				'deviser' => $deviser,
 				'works' => $works
 		]);
@@ -786,8 +862,55 @@ class PublicController extends CController
 		}
 
 		//Show cart view
-		return $this->render("cart-old", [
+		return $this->render("_cart", [
 				'test' => 'this is a test text'
 		]);
+	}
+
+	public function actionCreateCountryPaths() {
+		$countries = Country::findSerialized(); /* @var $countries Country[] */
+		foreach ($countries as $country) {
+			$country->path = Country::WORLD_WIDE.'/'.$country->continent.'/'.$country->country_code;
+			$country->save(true, ['path']);
+		}
+	}
+
+	public function actionLogin()
+	{
+		$model = new Login();
+		$invalidLogin = false;
+		if ($model->load(Yii::$app->request->post())) {
+			if ($model->login()) {
+				return $this->goBack();
+			}
+			$invalidLogin = true;
+		}
+		$this->layout = '/desktop/public-2.php';
+		return $this->render("login-2", [
+			'invalidLogin' => $invalidLogin
+		]);
+	}
+
+	public function actionAuthenticationRequired()
+	{
+		$model = new Login();
+		$invalidLogin = false;
+		if ($model->load(Yii::$app->request->post())) {
+			if ($model->login()) {
+				return $this->goBack();
+			}
+			$invalidLogin = true;
+		}
+		$this->layout = '/desktop/public-2.php';
+		return $this->render("authentication-required", [
+			'invalidLogin' => $invalidLogin
+		]);
+	}
+
+	public function actionLogout()
+	{
+		Yii::$app->user->logout();
+
+		return $this->goHome();
 	}
 }

@@ -55,7 +55,7 @@
 	}
 
 	angular
-	.module('todevise')
+	.module('discover')
 	.component('exploreStoriesFilters', component);
 
 }());

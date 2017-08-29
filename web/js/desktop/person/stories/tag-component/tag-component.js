@@ -49,7 +49,7 @@
 	}
 
 	angular
-		.module('todevise')
+		.module('person')
 		.component('storyTagComponent', component);
 
 }());

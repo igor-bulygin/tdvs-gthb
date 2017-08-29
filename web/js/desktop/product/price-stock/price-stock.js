@@ -96,28 +96,10 @@
 				var cartesian = objectProduct(object);
 				if(!UtilService.isEmpty(cartesian[0])) {
 					for (var i = 0; i < cartesian.length; i++) {
-						vm.product.price_stock.push({
-							options: cartesian[i],
-							price: 0,
-							stock: 0,
-							weight: 0,
-							width: 0,
-							height: 0,
-							length: 0,
-							available: true
-						});
+						addEmptyPriceStock(cartesian[i])
 					}
 				} else {
-					vm.product.price_stock.push({
-						options: [],
-						price: 0,
-						stock: 0,
-						weight: 0,
-						width: 0,
-						height: 0,
-						length: 0,
-						available: true
-					});
+					addEmptyPriceStock([]);
 				}
 				if(set_original_artwork) {
 					vm.product.price_stock.unshift({
@@ -132,8 +114,23 @@
 						available: true
 					})
 				}
+			} else {
+				addEmptyPriceStock([]);
 			}
 			parseTitles();
+		}
+
+		function addEmptyPriceStock(options) {
+			vm.product.price_stock.push({
+				options: options,
+				price: 0,
+				stock: 0,
+				weight: 0,
+				width: 0,
+				height: 0,
+				length: 0,
+				available: true
+			})
 		}
 
 		function applyToAll(type, value) {
@@ -166,7 +163,7 @@
 
 		$scope.$watch('productPriceStockCtrl.product.options', function(newValue, oldValue) {
 			if(!vm.fromedit) {
-				if(angular.isObject(newValue)) {
+				if(angular.isObject(newValue) && !UtilService.isEmpty(newValue)) {
 					createTable();
 				}
 			}
@@ -203,8 +200,10 @@
 					set_original_artwork = false;
 				}
 			})
-			if(!vm.fromedit)
+			if(!vm.fromedit) {
 				delete vm.product.price_stock;
+				createTable();
+			}
 		});
 
 		$scope.$on(productEvents.requiredErrors, function (event, args) {
@@ -229,6 +228,6 @@
 	}
 
 	angular
-		.module('todevise')
+		.module('product')
 		.component('productPriceStock', component);
 }());

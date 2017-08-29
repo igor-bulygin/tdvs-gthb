@@ -1,0 +1,36 @@
+{ 
+	"boxes": {
+		"NAME_BOX": "Name of the box",
+		"DESCRIPTION": "Description",
+		"CREATE": "Create",
+		"save": {
+			"CREATE": "@:boxes.CREATE",
+			"NAME_BOX": "@:boxes.NAME_BOX",
+			"SAVE_IN_BOX": "Save in a box",
+			"SELECT_BOX": "Select box",
+			"TOTAL_BOX": "({{total}} total)",
+			"SEARCH": "@:global.SEARCH",
+			"CREATE_NEW_BOX": "Create new box",
+			"NO_BOXES_1": "You don't have any boxes yet.",
+			"NO_BOXES_2": "Create one by clicking the <span>create new box</span> button."
+		},
+		"create": {
+			"CREATE": "@:boxes.CREATE",
+			"NAME_BOX": "@:boxes.NAME_BOX",
+			"DESCRIPTION": "@:boxes.DESCRIPTION",
+			"CREATE_BOX": "Create box"
+		},
+		"delete": {
+			"CANCEL": "@:global.CANCEL",
+			"DELETE": "@:global.DELETE",
+			"DELETE_BOX_PERMANENTLY": "Are you sure you want to delete this box permanently?",
+			"NOT_ABLE_RECOVER": "You will not be able to recover it."
+		},
+		"edit": {
+			"NAME_BOX": "@:boxes.NAME_BOX",
+			"DESCRIPTION": "@:boxes.DESCRIPTION",
+			"EDIT_BOX": "Edit box",
+			"APPLY_CHANGES": "Apply changes"
+		}
+	}
+}

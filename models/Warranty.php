@@ -12,11 +12,21 @@ class Warranty {
 	public static function getDescription($code)
 	{
 		$descs = [
-			self::NONE => Yii::t("app/warranties", "None"),
-			self::DAYS => Yii::t("app/warranties", "Days"),
-			self::WEEKS => Yii::t("app/warranties", "Weeks"),
-			self::MONTHS => Yii::t("app/warranties", "Months"),
+			self::NONE => Yii::t("app/public", "None"),
+			self::DAYS => Yii::t("app/public", "Days"),
+			self::WEEKS => Yii::t("app/public", "Weeks"),
+			self::MONTHS => Yii::t("app/public", "Months"),
 		];
 		return $descs[$code];
+	}
+
+	public static function getAvailableValues()
+	{
+		return [
+			static::NONE,
+			static::DAYS,
+			static::WEEKS,
+			static::MONTHS,
+		];
 	}
 }

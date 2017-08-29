@@ -1,17 +1,15 @@
 (function () {
 	"use strict";
 
-	function config($provide) {
+	var settingsModule=angular.module('settings', ['api', 'util', 'header', 'ui.bootstrap', 'nya.bootstrap.select',
+	 'textAngular','pascalprecht.translate']);
 
-		//events
+	settingsModule.config(['$provide','$translatePartialLoaderProvider', function ($provide,$translatePartialLoaderProvider) {
 		$provide.value('settingsEvents', {
 			saveChanges: 'save-changes',
 			changesSaved: 'changes-saved',
 			invalidForm: 'invalid-form'
 		});
-	}
-
-	angular
-		.module('todevise', ['api', 'util', 'header', 'ui.bootstrap', 'nya.bootstrap.select'])
-		.config(config);
+		$translatePartialLoaderProvider.addPart('settings');
+}]);
 }());

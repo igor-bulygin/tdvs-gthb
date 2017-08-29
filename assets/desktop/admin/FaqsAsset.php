@@ -14,11 +14,10 @@ class FaqsAsset extends AssetBundle {
 		'js/api/faqDataService.js'
 	];
 	public $depends = [
-		'app\assets\api\ApiAsset',
+		'app\assets\desktop\admin\GlobalAsset',
 		'app\assets\libs\ngjstreeAsset',
 		'app\assets\libs\jstreeActionsAsset',
 		'app\assets\libs\angularBootstrapAsset',
 		'app\assets\libs\utilAsset',
-		'app\assets\desktop\admin\GlobalAsset'
 	];
 }

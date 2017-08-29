@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function config(nyaBsConfigProvider, $provide, localStorageServiceProvider) {
+	function config(nyaBsConfigProvider, $provide, localStorageServiceProvider,$translatePartialLoaderProvider) {
 		nyaBsConfigProvider.setLocalizedText('en-us', {
 			defaultNoneSelection: 'Select an option'
 		});
@@ -14,12 +14,13 @@
 
 		localStorageServiceProvider
 			.setPrefix('todevise-');
+			$translatePartialLoaderProvider.addPart('product');
 	}
 
 	angular
-		.module('todevise', ['api', 'util', 'header', 'toastr', 'nya.bootstrap.select', 'textAngular', 'ngFileUpload',
+		.module('product', ['api', 'util', 'header', 'toastr', 'nya.bootstrap.select', 'textAngular', 'ngFileUpload',
 			'dndLists', 'ui.bootstrap', 'uiCropper', 'ngTagsInput', 'ui.bootstrap.datetimepicker', 'LocalStorageModule',
-			'xeditable'])
+			'xeditable', 'ui.sortable','pascalprecht.translate'])
 		.config(config)
 		.run(function(editableOptions) {
 			editableOptions.theme = 'bs3';

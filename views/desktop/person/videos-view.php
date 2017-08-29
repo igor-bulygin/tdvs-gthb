@@ -1,15 +1,18 @@
 <?php
-use app\assets\desktop\pub\PublicCommonAsset;
+
+use app\assets\desktop\deviser\GlobalAsset;
 use app\components\PersonHeader;
 use app\components\PersonMenu;
 use app\models\Person;
 use app\models\PersonVideo;
 
-PublicCommonAsset::register($this);
+GlobalAsset::register($this);
 
 /** @var Person $person */
-
-$this->title = 'About ' . $person->getName() . ' - Todevise';
+$this->title = Yii::t('app/public',
+	'Videos by {person_name} - Todevise',
+	['person_name' => $person->getName()]
+);
 $this->params['person'] = $person;
 $this->params['person_menu_active_option'] = 'videos';
 $this->params['person_links_target'] = 'public_view';
@@ -30,7 +33,7 @@ $this->params['person_links_target'] = 'public_view';
 				<?php if (count($videos) == 0) { ?>
 					<div class="empty-wrapper">
 						<?php if ($person->isPersonEditable()) { ?>
-							<div><a class="red-link-btn" href="<?= $person->getVideosEditLink()?>">Add / remove videos</a></div>
+							<div><a class="red-link-btn" href="<?= $person->getVideosEditLink()?>"><span translate="ADD_REMOVE_VIDEOS"></span></a></div>
 						<?php } ?>
 						<img class="sad-face" src="/imgs/sad-face.svg">
 						<p class="no-video-text">You have no videos</p>
@@ -38,7 +41,7 @@ $this->params['person_links_target'] = 'public_view';
 				<?php } else { ?>
 				<div class="video-container">
 					<?php if ($person->isPersonEditable()) { ?>
-						<div><a class="red-link-btn" href="<?= $person->getVideosEditLink()?>">Add / remove videos</a></div>
+						<div><a class="red-link-btn" href="<?= $person->getVideosEditLink()?>"><span translate="ADD_REMOVE_VIDEOS"></span></a></div>
 					<?php } ?>
 					<?php foreach ($videos as $video) { ?>
 					<div class="col-sm-<?= (count($videos)<=3) ? '12' : '6' ?>">

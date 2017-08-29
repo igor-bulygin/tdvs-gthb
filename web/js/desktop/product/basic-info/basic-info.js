@@ -5,7 +5,7 @@
 		productEvents, $timeout, dragndropService) {
 		var vm = this;
 		vm.has_error = UtilService.has_error;
-		vm.name_language = 'en-US';
+		vm.name_language = vm.tags_language = vm.description_language = 'es-ES';
 		vm.categories_helper = [];
 		vm.images = [];
 		vm.addCategory = addCategory;
@@ -14,10 +14,12 @@
 		vm.openCropModal = openCropModal;
 		vm.uploadPhoto = uploadPhoto;
 		vm.deleteImage = deleteImage;
-		vm.dragOver = dragOver;
-		vm.dragStart = dragStart;
-		vm.moved = moved;
-		vm.canceled = canceled;
+		vm.tempFiles=[];
+		vm.stripHTMLTags = UtilService.stripHTMLTags;
+		vm.tags = {};
+		vm.addTag = addTag;
+		vm.removeTag = removeTag;
+		vm.firstCategorySelection=true;
 		
 		function init(){
 			//init values or functions
@@ -32,9 +34,11 @@
 				categories: [vm.rootCategories]
 			})
 			vm.product['categories'].push(null);
+			vm.product.emptyCategory=true;
 		}
 
 		function categorySelected(category, index_helper, index) {
+			vm.product.emptyCategory=true;
 			vm.categories_helper[index_helper].categories_selected[index] = category;
 			//if we change an option with "child" selects
 			if(index < vm.categories_helper[index_helper].categories_selected.length-1) {
@@ -51,8 +55,11 @@
 				//if not
 				vm.product.categories[index_helper] = category;
 				//send event to get tags by category
-				$rootScope.$broadcast(productEvents.setVariations, {categories: vm.product.categories});
+				$rootScope.$broadcast(productEvents.setVariations, {categories: vm.product.categories, isFirstSelection:vm.firstCategorySelection});
+				vm.product.emptyCategory=false;
+				vm.firstCategorySelection=false;
 			}
+			
 		}
 
 		function filterCategory(categories, id) {
@@ -91,13 +98,31 @@
 				vm.product.media.photos.unshift({
 					name: data.data.filename
 				});
+				var index=-1;
+				angular.forEach(vm.tempFiles, function(uploadingFile) {
+					if (uploadingFile.$$hashKey==file.$$hashKey) {
+						index=-vm.tempFiles.indexOf(uploadingFile);
+					}
+				});
+				if (index != -1)
+				{
+					vm.tempFiles.splice(index,1);
+				}
 			}
 
 			function onWhileUploadingPhoto(evt, file) {
-				file.progress = parseInt(100.0 * evt.loaded / evt.total);
+				angular.forEach(vm.tempFiles, function(uploadingFile) {
+					if (uploadingFile.$$hashKey==file.$$hashKey) {
+						uploadingFile.progress = parseInt(100.0 * evt.loaded / evt.total);
+					}
+				});
 			}
 
-			vm.files = images;
+			
+			angular.forEach(images, function(image) {
+				vm.tempFiles.push(image);
+			});
+			vm.files=images
 			vm.errFiles = errImages;
 
 			//upload photos
@@ -185,36 +210,27 @@
 			}
 		}
 
-		/* drag and drop functions */
-		function dragStart(index) {
-			dragndropService.dragStart(index, vm.images);
-		}
-
-		function dragOver(index) {
-			vm.images = dragndropService.dragOver(index, vm.images);
-			return true;
-		}
-
-		function moved(index) {
-			vm.images = dragndropService.moved(vm.images);
-			vm.product.media.photos = vm.images.map(e => Object.assign({}, e.filename));
-		}
-
-		function canceled(){
-			vm.images = dragndropService.canceled();
-		}
-
 		function parseImages() {
 			var url = vm.product.id ? vm.product.id : 'temp';
 			vm.images = UtilService.parseImagesUrl(vm.product.media.photos, '/uploads/product/' + url + '/');
 		}
 
-		//watches
-		$scope.$watch('productBasicInfoCtrl.product', function(newValue, oldValue) {
-			if(!oldValue && newValue) {
-				//watch product
+		function removeTag(tag) {
+			var pos = vm.product.tags[vm.tags_language].indexOf(tag.text);
+			if(pos > -1)
+				vm.product.tags[vm.tags_language].splice(pos, 1);
+			if(vm.product.tags[vm.tags_language].length === 0)
+				delete vm.product.tags[vm.tags_language];
+		}
+
+		function addTag(tag, language) {
+			if(!vm.product.tags[language])
+				vm.product.tags[language]=[tag.text];
+			else {
+				if(vm.product.tags[language].indexOf(tag.text) === -1)
+					vm.product.tags[language].push(tag.text)
 			}
-		});
+		}
 
 		$scope.$watch('productBasicInfoCtrl.product.categories', function(newValue, oldValue) {
 			if(angular.isArray(oldValue) && oldValue[0]===null && angular.isArray(newValue) && newValue.length > 0 && vm.product.id) {
@@ -234,6 +250,9 @@
 						})
 					}
 				}
+			}
+			if(angular.isArray(newValue) && newValue.indexOf(null) === -1) {
+				vm.form.$submitted = false;
 			}
 		}, true);
 
@@ -274,22 +293,29 @@
 			}
 		}, true);
 
-		//watch categories errors
-		$scope.$watch('productBasicInfoCtrl.product.categories', function(newValue, oldValue) {
-			if(angular.isArray(newValue) && newValue.indexOf(null) === -1) {
-				vm.form.$submitted = false;
+		
+
+		$scope.$watch('productBasicInfoCtrl.product.description', function(newValue, oldValue) {
+			vm.descriptionRequired = false;
+		}, true);
+
+		$scope.$watch('productBasicInfoCtrl.product.tags', function(newValue, oldValue) {
+			if(angular.isObject(oldValue) && UtilService.isEmpty(oldValue) && angular.isObject(newValue) && !UtilService.isEmpty(newValue)) {
+				for(var key in newValue) {
+					vm.tags[key] = [];
+					newValue[key].forEach(function(element) {
+						vm.tags[key].push({text: element});
+					});
+				}
 			}
 		}, true);
 
-		//delete files array when done uploading
-		// $scope.$watch('productBasicInfoCtrl.files', function(newValue, oldValue) {
-		// 	console.log(newValue);
-		// 	// if(angular.isArray(newValue) && newValue.length === 1 && angular.isObject(newValue[0]) && UtilService.isEmpty(newValue[0]))
-		// 	// 	delete vm.files;
-		// }, true);
-
 		//events
 		$scope.$on(productEvents.requiredErrors, function(event, args){
+			vm.warrantyRequired = false;
+			vm.warrantyNumberRequired = false;
+			vm.returnsNumberRequired = false;
+			vm.returnsRequired = false;
 			//set name error
 			if(args.required.indexOf('name') > -1) {
 				vm.nameRequired = true;
@@ -306,6 +332,28 @@
 			if(args.required.indexOf('categories') > -1) {
 				vm.form.$setSubmitted();
 			}
+			//set description error
+			if(args.required.indexOf('description') > -1) {
+				vm.descriptionRequired = true;
+			}
+			vm.categorySelectionRequired = false;
+			if(args.required.indexOf('emptyCategory') > -1) {
+				vm.categorySelectionRequired = true;
+			}
+			//set warranty errors
+			if(args.required.indexOf('warranty') > -1) {
+				vm.warrantyRequired = true;
+			}
+			else if(args.required.indexOf('warrantyNotNumber') > -1) {
+				vm.warrantyNumberRequired = true;
+			}
+			//set returns errors
+			if(args.required.indexOf('returns') > -1) {
+				vm.returnsRequired = true;
+			}
+			else if(args.required.indexOf('returnsNotNumber') > -1) {
+				vm.returnsNumberRequired = true;
+			}
 		})
 	}
 
@@ -316,12 +364,12 @@
 		bindings: {
 			product: '=',
 			categories: '<',
-			languages: '<',
+			languages: '<'
 		}
 	}
 
 	angular
-		.module('todevise')
+		.module('product')
 		.component('productBasicInfo', component);
 
 }());

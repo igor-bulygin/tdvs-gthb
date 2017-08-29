@@ -1,16 +1,21 @@
 <?php
-use app\assets\desktop\pub\BoxesViewAsset;
+
+use app\assets\desktop\deviser\GlobalAsset;
 use app\helpers\Utils;
 use app\models\Person;
 use yii\helpers\Json;
 
-BoxesViewAsset::register($this);
+GlobalAsset::register($this);
 
 /** @var Person $person */
 /** @var \app\models\Box $box */
 /** @var \app\models\Box[] $moreBoxes */
 
-$this->title = 'Box '.$box->name.' by ' . $person->getName() . ' - Todevise';
+$this->title = Yii::t('app/public',
+	'{box_name} by {person_name} - Todevise',
+	['box_name' => $box->name, 'person_name' => $person->getName()]
+);
+
 $this->params['person'] = $person;
 $this->params['person_menu_active_option'] = 'boxes';
 $this->params['person_links_target'] = 'public_view';
@@ -37,8 +42,8 @@ $this->registerJs("var box = ".Json::encode($box), yii\web\View::POS_HEAD, 'box-
 			</div>
 			<?php if ($person->isPersonEditable()) { ?>
 				<div class="col-md-4" style="padding-top: 17px;">
-					<button class="btn btn-default pull-right delete-btn" ng-click="boxDetailCtrl.openDeleteBoxModal()">Delete box</button>
-					<button class="btn btn-green pull-right edit-btn" ng-click="boxDetailCtrl.openEditBoxModal()">Edit box</button>
+					<button class="btn btn-default pull-right delete-btn" ng-click="boxDetailCtrl.openDeleteBoxModal()"><span translate="DELETE_BOX"></span></button>
+					<button class="btn btn-green pull-right edit-btn" ng-click="boxDetailCtrl.openEditBoxModal()"><span translate="EDIT_BOX"></span></button>
 				</div>
 			<?php } ?>
 		</div>
@@ -48,34 +53,38 @@ $this->registerJs("var box = ".Json::encode($box), yii\web\View::POS_HEAD, 'box-
 				<p ng-bind="boxDetailCtrl.box.description"></p>
 			</div>
 			<div class="col-md-9 right-box-column">
-				<p class="text-center empty-box-text" ng-if="boxDetailCtrl.box.products.length == 0" ng-cloak>This box is empty</p>
-
-				<div class="col-md-3 col-xs-6 pad-grid" ng-if="boxDetailCtrl.box.products.length > 0" ng-cloak ng-repeat="work in boxDetailCtrl.box.products">
-					<div class="grid">
-						<figure class="effect-zoe">
-							<?php if (!$person->isConnectedUser()) { ?>
-								<image-hover-buttons product-id="{{work.id}}" is-loved="{{work.isLoved ? 1 : 0}}">
-							<?php } else { ?>
-								<span class="close-product-icon" ng-click="boxDetailCtrl.deleteProduct(work.id)">
-									<i class="ion-android-close"></i>
-								</span>
-							<?php } ?>
-								<a ng-href="{{work.link}}">
-										<img class="grid-image" ng-src="{{work.main_photo || '/imgs/product_placeholder.png'}}">
-								</a>
-							<?php if (!$person->isConnectedUser()) { ?>
-								</image-hover-buttons>
-							<?php } ?>
-							<figcaption>
-								<a ng-href="{{work.link}}">
-									<p class="instauser">
-										<span ng-bind="work.name"></span>
-									</p>
-								</a>
-							</figcaption>
-						</figure>
+				<p class="text-center empty-box-text" ng-if="boxDetailCtrl.box.products.length == 0" ng-cloak><span translate="BOX_IS_EMPTY"></span></p>
+				<div class="other-products-wrapper">
+					<div id="macy-container">
+						<div class="menu-category list-group" ng-if="boxDetailCtrl.box.products.length > 0" ng-cloak ng-repeat="work in boxDetailCtrl.box.products">
+							<div class="grid">
+								<figure class="effect-zoe">
+									<?php if (!$person->isConnectedUser()) { ?>
+										<image-hover-buttons product-id="{{work.id}}" is-loved="{{work.isLoved ? 1 : 0}}">
+									<?php } else { ?>
+										<span class="close-product-icon" ng-click="boxDetailCtrl.deleteProduct(work.id)">
+											<i class="ion-android-close"></i>
+										</span>
+									<?php } ?>
+										<a ng-href="{{work.link}}">
+												<img class="grid-image" ng-src="{{work.main_photo || '/imgs/product_placeholder.png'}}">
+										</a>
+									<?php if (!$person->isConnectedUser()) { ?>
+										</image-hover-buttons>
+									<?php } ?>
+									<figcaption>
+										<a ng-href="{{work.link}}">
+											<p class="instauser">
+												<span ng-bind="work.name"></span>
+											</p>
+										</a>
+									</figcaption>
+								</figure>
+							</div>
+						</div>
 					</div>
 				</div>
+				
 			</div>
 		</div>
 		<?php /*
@@ -176,9 +185,9 @@ $this->registerJs("var box = ".Json::encode($box), yii\web\View::POS_HEAD, 'box-
 								</div>
 							</div>
 							<div class="col-sm-10">
-								<input type="text" class="form-control comment-input" id="exampleInputEmail1" placeholder="Add your comment">
+								<input type="text" class="form-control comment-input" id="exampleInputEmail1" translate-attr="{placeholder: 'ADD_COMMENT'}">
 								<div class="rate-product">
-									<span>Rate this product</span>
+									<span><span translate="RATE_PRODUCT"></span></span>
 									<span class="score">
 											<i class="ion-ios-star"></i>
 											<i class="ion-ios-star"></i>
@@ -307,7 +316,7 @@ $this->registerJs("var box = ".Json::encode($box), yii\web\View::POS_HEAD, 'box-
 					</div>
 				</div>
 		<div class="row more-boxes-wrapper">
-			<p class="text-center more-boxes-text">More boxes</p>
+			<p class="text-center more-boxes-text"><span translate="MORE_BOXES"></span></p>
 			<br />
 		<?php foreach ($moreBoxes as $oneBox) {
 			$products = $oneBox->getProducts();
@@ -342,7 +351,7 @@ $this->registerJs("var box = ".Json::encode($box), yii\web\View::POS_HEAD, 'box-
 				}
 				$count = 0;
 				foreach ($products as $product) {
-					if ($product->product_state != \app\models\Product2::PRODUCT_STATE_ACTIVE || $count > 3) {
+					if ($product->product_state != \app\models\Product::PRODUCT_STATE_ACTIVE || $count > 3) {
 						continue;
 					}
 					$count++;

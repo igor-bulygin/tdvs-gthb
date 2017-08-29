@@ -28,7 +28,6 @@ class ApiAsset extends AssetBundle {
 		'js/api/storyDataService.js',
 	];
 	public $depends = [
-		'app\assets\AppAsset',
 		'app\assets\libs\angularAsset',
 		'app\assets\libs\angularResourceAsset',
 		'app\assets\libs\ngFileUploadAsset',

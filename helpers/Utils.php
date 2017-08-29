@@ -479,7 +479,7 @@ class Utils
 	public static function getFilterForTranslatableField($fieldName, $value, $operator = 'LIKE')
 	{
 		$nameFilter = ['or'];
-		foreach (Lang::getAvailableLanguagesDescriptions() as $key => $name) {
+		foreach (Lang::getAvailableLanguages() as $key => $name) {
 			$field = ($fieldName . "." . $key);
 			$nameFilter[] = [$operator, $field, $value];
 		}
@@ -632,48 +632,6 @@ class Utils
 				['img' => '/imgs/banner-2.jpg', 'url' => 'http://dev.todevise.com/deviser/be-headwear/51c0f3s/store', 'alt' => 'Header image', "active" => false],
 				['img' => '/imgs/banner-3.jpg', 'url' => 'http://dev.todevise.com/deviser/nina-monizdamaia/23239c1/store', 'alt' => 'Header image', "active" => true],
 		];
-//		// TODO This is an temp method to use in the demo !!. Will be removed when Banners model are implemented
-//		switch ($category_id) {
-//			case '1a23b': // "Art"
-//				return [
-//					['img' => '/imgs/banner_art.jpg', 'alt' => 'Header image', "active" => true],
-//				];
-//				break;
-//			case '4a2b4': // "Fashion"
-//				return [
-//					['img' => '/imgs/banner_fashion.jpg', 'alt' => 'Header image', "active" => true],
-//				];
-//				break;
-//			case '3f78g': // "Jewelry"
-//				return [
-//					['img' => '/imgs/banner_jewelry.jpg', 'alt' => 'Header image', "active" => true],
-//				];
-//				break;
-//			case '2r67s': // "Decoration"
-//				return [
-//					['img' => '/imgs/banner_decoration.jpg', 'alt' => 'Header image', "active" => true],
-//				];
-//				break;
-//			case 'f0cco': // "Tecnology"
-//				return [
-//						['img' => '/imgs/banner_tecnology.jpg', 'alt' => 'Header image', "active" => true],
-//				];
-//				break;
-//			case '3a54m': // "Architecture"
-//				return [
-//						['img' => '/imgs/banner_architecture.jpg', 'alt' => 'Header image', "active" => true],
-//				];
-//				break;
-//			case 'ffeec': // "More"
-//			default:
-//				return [
-//						['img' => '/imgs/banner-4.jpg', 'url' => 'http://dev.todevise.com/deviser/vaskolg-vaskolg/96a3290/store', 'alt' => 'Header image', "active" => false],
-//						['img' => '/imgs/banner-5.jpg', 'url' => 'http://dev.todevise.com/deviser/charbonize-charbonize/4211c6d/store', 'alt' => 'Header image', "active" => false],
-//						['img' => '/imgs/banner-1.jpg', 'url' => 'http://dev.todevise.com/deviser/serpent-andtheswan/ed833ej/store', 'alt' => 'Header image', "active" => false],
-//						['img' => '/imgs/banner-2.jpg', 'url' => 'http://dev.todevise.com/deviser/be-headwear/51c0f3s/store', 'alt' => 'Header image', "active" => false],
-//						['img' => '/imgs/banner-3.jpg', 'url' => 'http://dev.todevise.com/deviser/nina-monizdamaia/23239c1/store', 'alt' => 'Header image', "active" => true],
-//				];
-//		}
 	}
 
 	/**
@@ -705,33 +663,6 @@ class Utils
 			return $match[1];
 		}
 		return null;
-
-		// Old way:
-//		$urlYoutubeVideo = 'https://www.youtube.com/watch?v=XA6K2gQf95Y';
-//		$urlYoutubeVideo = 'https://youtu.be/01p8XH3sq85';
-		/*
-		$domain = ltrim(ltrim($urlYoutubeVideo, 'http://'), 'https://');
-		$parts = explode('/', $domain);
-		$domain = $parts[0];
-		switch ($domain) {
-			case "www.youtube.com":
-				$strParams = explode('?', $urlYoutubeVideo)[1];
-				$params = explode('&', $strParams);
-				foreach ($params as $param) {
-					$key = explode('=', $param)[0];
-					$value = explode('=', $param)[1];
-					if ($key == 'v') {
-						return $value;
-					}
-				}
-				break;
-			case "youtu.be":
-				return $parts[1];
-				break;
-		}
-
-		return null;
-		*/
 	}
 
 	/**

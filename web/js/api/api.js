@@ -20,6 +20,7 @@
 
 	function methods() {
 		this.get = get;
+		this.query=query;
 		this.deleteItem = deleteItem;
 		this.create = create;
 		this.update = update;
@@ -31,6 +32,10 @@
 
 		function get(resource, params, onSuccess, onError) {
 			resource.get(params).$promise.then(function(returnData) { onSuccess(returnData); }, function(err) { onError(err); });
+		}
+
+		function query(resource, params, onSuccess, onError) {
+			resource.query(params).$promise.then(function(returnData) { onSuccess(returnData); }, function(err) { onError(err); });
 		}
 
 		function deleteItem(resource, params, onSuccess, onError) {

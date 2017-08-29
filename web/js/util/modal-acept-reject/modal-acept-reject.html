@@ -1,0 +1,14 @@
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="modalAceptRejectCtrl.dismiss()">
+		<span class="ion-ios-close" aria-hidden="true"></span>
+	</button>
+</div>
+<div class="modal-body">
+	<div class="text-center">
+		<p ng-bind-html=" modalAceptRejectCtrl.resolve.text | translate "></p>
+	</div>
+</div>
+<div class="modal-footer">
+	<button class="btn btn-danger col-md-2" ng-click="modalAceptRejectCtrl.dismiss()" translate="CANCEL"></button>
+	<button class="btn btn-default btn-green" ng-click="modalAceptRejectCtrl.ok()" translate="CONTINUE"></button>
+</div>

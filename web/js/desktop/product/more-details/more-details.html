@@ -1,37 +1,16 @@
 <div class="card">
-	<span class="title">2/ More details about your work</span>
+	<span class="title" translate="PRODUCT.MORE_DETAILS.TITLE"></span>
 	<form name="productMoreDetailsCtrl.form" novalidate>
 		<div class="row">
-			<div class="col-md-2">
-				<label for="description">Description</label>
-			</div>
-			<div class="col-md-8">
-				<ol class="about-edit-select title-lang-btn nya-bs-select" ng-model="productMoreDetailsCtrl.description_language">
-					<li nya-bs-option="language in productMoreDetailsCtrl.languages" data-value="language.code" deep-watch="true">
-						<a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
-					</li>
-				</ol>
-				<div class="description-input ng-class:{'error-input': productMoreDetailsCtrl.descriptionRequired}" text-angular ng-model="productMoreDetailsCtrl.product.description[productMoreDetailsCtrl.description_language]" ng-cloak ta-toolbar="[]" ta-paste="productMoreDetailsCtrl.stripHTMLTags($html)"></div>
-				<div class="error-text" ng-if="productMoreDetailsCtrl.descriptionRequired">Description in english is mandatory.</div>
-			</div>
-			<div class="col-md-2">
-				<p class="info">Give your customers a detailed overview of your work. And as always, translating this information will open your products to new markets.</p>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-2">
-				<label for="description_photos">Description photos</label>
-				<span class="optional-text block-0">Optional</span>
-			</div>
+			<label class="col-xs-12" translate="PRODUCT.MORE_DETAILS.PHOTOS_DESCRIPTION"></label>
+			<div class="col-md-2 button"  ngf-drop-available="productMoreDetailsCtrl.isDropAvailable" ngf-select="productMoreDetailsCtrl.openCropModal($file)" ngf-accept="'image/*'" translate="PRODUCT.MORE_DETAILS.ADD_PHOTOS"></div>
+			<span class="info col-md-10" translate="PRODUCT.MORE_DETAILS.ENRICH_DESCRIPTION"></span>
 			<div class="col-md-8">
 				<div class="col-md-2 pad-about mr-15">
 					<div ng-if="productMoreDetailsCtrl.isDropAvailable">
 						<div class="description-add-photos" ngf-drop-available="productMoreDetailsCtrl.isDropAvailable" ngf-drag-over-class="drag-over" ngf-drop ngf-select="productMoreDetailsCtrl.openCropModal($file)" ngf-accept="'image/*'">
 							<div class="plus-add-wrapper">
-								<div class="plus-add">
-									<span>+</span>
-								</div>
-								<div class="text">ADD PHOTOS</div>
+								
 							</div>
 						</div>
 					</div>
@@ -52,86 +31,58 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-2">
-				<p class="info">Enrich your work description with photos that showcase its main features. You can upload maximum 4 photos.</p>
-				<p class="info"><a class="black-link" href="">See example</a></p>
-			</div>
+			
 		</div>
-		<div class="row">
-			<div class="col-md-2">
-				<label for="tags">Tags</label>
-				<span class="optional-text block-0">Optional</span>
+		<div class="row" id="faq">
+			<div class="col-md-12">
+				<label for="faqs" translate="PRODUCT.MORE_DETAILS.WORK_FAQS"></label>
 			</div>
-			<div class="col-md-8">
-				<ol class="about-edit-select title-lang-btn nya-bs-select" ng-model="productMoreDetailsCtrl.tags_language">
-					<li nya-bs-option="language in productMoreDetailsCtrl.languages" data-value="language.code" deep-watch="true">
-						<a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
-					</li>
-				</ol>
-				<tags-input class="tags-wrapper" ng-model="productMoreDetailsCtrl.tags[productMoreDetailsCtrl.tags_language]" on-tag-added="productMoreDetailsCtrl.addTag($tag, productMoreDetailsCtrl.tags_language)" on-tag-removed="productMoreDetailsCtrl.removeTag($tag)"></tags-input>
-			</div>
-			<div class="col-md-2">
-				<p class="info">Use as many tags as possible, both broad and specific, to increase the chances to be found when our customers use our search engine. Tags can be translated as well.</p>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-2">
-				<label for="faqs">WORK FAQs</label>
-				<span class="optional-text block-0">Optional</span>
-			</div>
-			<div class="col-md-8">
-				<div class="form-group">
-					<span>Do you want to write FAQ question specific for this product?</span>
-					<div class="radio radio-inline ml-30">
-						  <input type="radio" name="faq_selected" id="faq_selected" value="faq_selected" ng-model="productMoreDetailsCtrl.faq_selected" ng-value="true" ng-change="productMoreDetailsCtrl.showFaq()">
-						  <label for="faq_selected">
-							  YES
-						  </label>
-					  </div>
-					  <div class="radio radio-inline">
-						  <input type="radio" name="faq_unselected" id="faq_unselected" value="faq_unselected" ng-model="productMoreDetailsCtrl.faq_selected" ng-value="false" checked>
-						  <label for="faq_unselected">
-							  NO
-						  </label>
-					  </div>
+			<span class="col-md-12" translate="PRODUCT.MORE_DETAILS.WRITE_FAQ"></span>
+			<div class="col-md-12">
+			<div class="radio radio-inline">
+					<input type="radio" name="faq_selected" id="faq_selected" value="faq_selected" ng-model="productMoreDetailsCtrl.faq_selected" ng-value="true" ng-change="productMoreDetailsCtrl.showFaq()">
+					<label for="faq_selected" translate="PRODUCT.YES">
+					</label>
 				</div>
-				<div ng-if="productMoreDetailsCtrl.faq_selected">
-					<div class="col-md-12 pad-about" ng-repeat="question in productMoreDetailsCtrl.product.faq track by $index" class="delete-options-wrapper">
-						<a href="" class="delete-link pull-right" ng-click="productMoreDetailsCtrl.deleteQuestion($index)">Delete question</a>
-						<div class="edit-faq-panel no-mar">
-							<div class="faq-language-menu">
-								<ol class="nya-bs-select form-control" ng-model="productMoreDetailsCtrl.faq_helper[$index].languageSelected" ng-change="productMoreDetailsCtrl.parseQuestion(question, $index)">
-									<li nya-bs-option="language in productMoreDetailsCtrl.languages" class="ng-class:{'lang-selected': productMoreDetailsCtrl.isLanguageOk(language.code, $parent.$index)}" data-value="language.code" deep-watch="true">
-										<a href="">
-											<span ng-bind="language.name"></span>
-											<span class="glyphicon glyphicon-ok ok-white-icon pull-right" ng-if="productMoreDetailsCtrl.isLanguageOk(language.code, $parent.$index)"></span>
-										</a>
-									</li>
-								</ol>
-								<div class="faq-row">
-									<div class="col-sm-1">
-										<span class="faq-edit-question">Question</span>
-									</div>
-									<div class="col-sm-11">
-										<input type="text" name="{{'faq_question_' + $index}}" class="faq-edit-answer ng-class:{'error-input': productMoreDetailsCtrl.faqRequired && !question.question['en-US']}" placeholder="Question" ng-model="question.question[productMoreDetailsCtrl.faq_helper[$index].languageSelected]" required>
-									</div>
+				<div class="radio radio-inline">
+					<input type="radio" name="faq_unselected" id="faq_unselected" value="faq_unselected" ng-model="productMoreDetailsCtrl.faq_selected" ng-value="false" checked>
+					<label for="faq_unselected"  translate="PRODUCT.NO">
+					</label>
+				</div>
+			</div>
+			<div ng-if="productMoreDetailsCtrl.faq_selected">
+				<div class="col-md-12 pad-about" ng-repeat="question in productMoreDetailsCtrl.product.faq track by $index" class="delete-options-wrapper">
+					<a href="" class="delete-link pull-right" ng-click="productMoreDetailsCtrl.deleteQuestion($index)" translate="PRODUCT.MORE_DETAILS.DELETE_QUESTION"></a>
+					<div class="edit-faq-panel no-mar">
+						<div class="faq-language-menu">
+							<ol class="nya-bs-select form-control" ng-model="productMoreDetailsCtrl.faq_helper[$index].languageSelected" ng-change="productMoreDetailsCtrl.parseQuestion(question, $index)">
+								<li nya-bs-option="language in productMoreDetailsCtrl.languages" class="ng-class:{'lang-selected': productMoreDetailsCtrl.isLanguageOk(language.code, $parent.$index)}" data-value="language.code" deep-watch="true">
+									<a href="">
+										<span ng-bind="language.name"></span>
+										<span class="glyphicon glyphicon-ok ok-white-icon pull-right" ng-if="productMoreDetailsCtrl.isLanguageOk(language.code, $parent.$index)"></span>
+									</a>
+								</li>
+							</ol>
+							<div class="faq-row">
+								<div class="col-sm-1">
+									<span class="faq-edit-question" translate="PRODUCT.MORE_DETAILS.QUESTION"></span>
 								</div>
-								<div class="faq-row">
-									<div class="col-sm-1">
-										<span class="faq-edit-question">Answer</span>
-									</div>
-									<div class="col-sm-11">
-										<div class="faq-edit-answer ng-class:{'error-input': productMoreDetailsCtrl.faqRequired && !question.answer['en-US']}" name="{{'faq_answer_' + $index}}" text-angular ng-model="question.answer[productMoreDetailsCtrl.faq_helper[$index].languageSelected]" ta-toolbar="[]" placeholder="Answer" ta-paste="productMoreDetailsCtrl.stripHTMLTags($html)" required></div>
-									</div>
+								<div class="col-sm-11">
+									<input type="text" name="{{'faq_question_' + $index}}" class="faq-edit-answer ng-class:{'error-input': productMoreDetailsCtrl.faqRequired && !question.question['en-US']}" placeholder="{{ 'PRODUCT.MORE_DETAILS.QUESTION' | translate }}" ng-model="question.question[productMoreDetailsCtrl.faq_helper[$index].languageSelected]" required>
+								</div>
+							</div>
+							<div class="faq-row">
+								<div class="col-sm-1">
+									<span class="faq-edit-question" translate="PRODUCT.MORE_DETAILS.ANSWER"></span>
+								</div>
+								<div class="col-sm-11">
+									<div class="faq-edit-answer ng-class:{'error-input': productMoreDetailsCtrl.faqRequired && !question.answer['en-US']}" name="{{'faq_answer_' + $index}}" text-angular ng-model="question.answer[productMoreDetailsCtrl.faq_helper[$index].languageSelected]" ta-toolbar="[]" placeholder="{{ 'PRODUCT.MORE_DETAILS.ANSWER' | translate }}" ta-paste="productMoreDetailsCtrl.stripHTMLTags($html)" required></div>
 								</div>
 							</div>
 						</div>
 					</div>
-					<a class="add-cathegory" href="" ng-click="productMoreDetailsCtrl.addFaq()">+ Add another question</a>
 				</div>
-			</div>
-			<div class="col-md-2">
-				<p class="info">If you have specific questions or policies for this work, write them here.</p>
+				<a class="add-cathegory" href="" ng-click="productMoreDetailsCtrl.addFaq()" translate="PRODUCT.MORE_DETAILS.ADD_QUESTION"></a>
 			</div>
 		</div>
 	</form>

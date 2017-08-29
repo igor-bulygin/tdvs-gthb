@@ -1,0 +1,49 @@
+<div class="row">
+	<div class="col-md-3">
+		<p class="serif" translate="PLEASE_CREATE_RANGES"></p>
+	</div>
+	<div class="col-md-9">
+		<form name="shippingWeightsPricesCtrl.pricesForm">
+			<div class="range-wrapper" ng-repeat="price in shippingWeightsPricesCtrl.setting.prices">
+					
+					<span class="range-title" translate="RANGE"> {{$index+1}}</span>
+					<span translate="FROM"></span>
+					<input type="number" ng-model="price.min_weight" class="form-control input-medium-size ng-class:{'error-input': shippingWeightsPricesCtrl.has_error(shippingWeightsPricesCtrl.pricesForm, shippingWeightsPricesCtrl.pricesForm['min_weight_'+$index])}" name="{{'min_weight_'+$index}}" ng-min="shippingWeightsPricesCtrl.setting.prices[$index-1].max_weight || 0" required min="0">
+					<span class="separator-to" translate="TO"></span>
+					<div class="unlimited-weight-wrapper">
+						<input type="number" ng-model="price.max_weight" class="input-medium-size form-control ng-class:{'error-input': shippingWeightsPricesCtrl.has_error(shippingWeightsPricesCtrl.pricesForm, shippingWeightsPricesCtrl.pricesForm['max_weight_'+$index])}" name="{{'max_weight_'+$index}}" ng-disabled="$last && price.max_weight === null && shippingWeightsPricesCtrl.unlimited_weight" ng-min="price.min_weight" ng-required="!shippingWeightsPricesCtrl.unlimited_weight || (shippingWeightsPricesCtrl.unlimited_weight && !$last && shippingWeightsPricesCtrl.setting.prices.length > 1)" min="0">
+						<div ng-if="$last">
+							<div class="form-group">
+								<div class="checkbox">
+									<input id="unlimited_{{$index}}" type="checkbox" ng-model="shippingWeightsPricesCtrl.unlimited_weight" ng-change="shippingWeightsPricesCtrl.setUnlimitedWeight()">
+									<label class="label-small-bold" for="unlimited_{{$index}}" translate="UNLIMITED_WEIGHT"></label>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+					<span ng-bind="shippingWeightsPricesCtrl.person.settings.weight_measure"></span>
+					<span class="two-lines-label" translate="STANDARD_SHIPPING"></span>
+
+					<input type="number" ng-model="price.price" class="input-medium-size form-control ng-class:{'error-input': shippingWeightsPricesCtrl.has_error(shippingWeightsPricesCtrl.pricesForm, shippingWeightsPricesCtrl.pricesForm['price_'+$index])}" name="{{'price_'+$index}}" required min="0">
+					<span ng-bind="shippingWeightsPricesCtrl.currency"></span>
+
+					<span ng-if="shippingWeightsPricesCtrl.setting.shipping_express_time" ng-cloak>
+						<span class="two-lines-label" translate="EXPRESS_SHIPPING"></span>
+						<input type="number" ng-model="price.price_express" class="input-medium-size form-control ng-class:{'error-input': shippingWeightsPricesCtrl.has_error(shippingWeightsPricesCtrl.pricesForm, shippingWeightsPricesCtrl.pricesForm['price_express_'+$index])}" name="{{'price_express_'+$index}}" ng-required="setting.shipping_express_time" min="0" ng-max="price.price-1">
+						<span ng-bind="shippingWeightsPricesCtrl.currency"></span>
+					</span>
+
+					<form-errors condition="shippingWeightsPricesCtrl.has_error(shippingWeightsPricesCtrl.pricesForm, shippingWeightsPricesCtrl.pricesForm['min_weight_'+$index])" field="shippingWeightsPricesCtrl.pricesForm['min_weight_'+$index]"></form-errors>
+					<form-errors condition="shippingWeightsPricesCtrl.has_error(shippingWeightsPricesCtrl.pricesForm, shippingWeightsPricesCtrl.pricesForm['max_weight_'+$index])" field="shippingWeightsPricesCtrl.pricesForm['max_weight_'+$index]"></form-errors>
+					<form-errors condition="shippingWeightsPricesCtrl.has_error(shippingWeightsPricesCtrl.pricesForm, shippingWeightsPricesCtrl.pricesForm['price_'+$index])" field="shippingWeightsPricesCtrl.pricesForm['price_'+$index]"></form-errors>
+					<form-errors condition="shippingWeightsPricesCtrl.has_error(shippingWeightsPricesCtrl.pricesForm, shippingWeightsPricesCtrl.pricesForm['price_express_'+$index])" field="shippingWeightsPricesCtrl.pricesForm['price_express_'+$index]" ng-if="shippingWeightsPricesCtrl.setting.shipping_express_time" ng-cloak></form-errors>
+
+				<span class="ion-android-close close-range" ng-click="shippingWeightsPricesCtrl.deletePrice($index)"></span>
+				
+			
+			</div>
+		</form>
+		<div><a class="green-link" href="#" ng-click="shippingWeightsPricesCtrl.addPrice()" translate="ADD_RANGE"></a></div>
+	</div>
+</div>

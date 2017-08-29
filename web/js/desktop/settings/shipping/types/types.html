@@ -1,0 +1,27 @@
+<div class="shipping-title" translate="SHIPPING_TYPE"></div>
+<form name="shippingTypesCtrl.shippingTypeForm" class="form-horizontal">
+	<h5 class="bold" translate="STANDARD_SHIPPING"></h5>
+	<div class="shipping-time-wrapper form-group">
+		<label class="pull-left" for="shipping_time" translate="STANDARD_TIME"></label>
+		<span class="time-shipping pull-left">
+			<input type="number" name="shipping_time" min="1" ng-model="shippingTypesCtrl.setting.shipping_time" class="time-shipping form-control ng-class:{'error-input': shippingTypesCtrl.has_error(shippingTypesCtrl.shippingTypeForm, shippingTypesCtrl.shippingTypeForm.shipping_time)}" ng-required="true">
+		</span>
+		<span class="pull-left days" translate="DAYS"></span>
+		<form-errors condition="shippingTypesCtrl.has_error(shippingTypesCtrl.shippingTypeForm, shippingTypesCtrl.shippingTypeForm.shipping_time)" field="shippingTypesCtrl.shippingTypeForm.shipping_time"></form-errors>
+	</div>
+	<div class="shipping-time-wrapper form-group">
+		<div class="checkbox">
+			<input id="show_express_shipping" type="checkbox" ng-model="shippingTypesCtrl.show_express_shipping" name="show_express_shipping" class="styled" ng-change="shippingTypesCtrl.deleteShippingExpressTime()">
+			<label for="show_express_shipping" translate="ADD_EXPRESS-SHIPPING">
+			</label>
+		</div>
+	</div>
+	<div class="shipping-time-wrapper form-group mt-10" ng-if="shippingTypesCtrl.show_express_shipping" ng-cloak>
+		<label for="express_shipping_time" class="pull-left" translate="EXPRESS_TIME"></label>
+		<span class="time-shipping pull-left">
+			<input type="number" name="shipping_express_time" min="1" ng-model="shippingTypesCtrl.setting.shipping_express_time" class="form-control ng-class:{'error-input': shippingTypesCtrl.has_error(shippingTypesCtrl.shippingTypeForm, shippingTypesCtrl.shippingTypeForm.shipping_express_time)}" ng-required="shippingTypesCtrl.show_express_shipping" ng-max="shippingTypesCtrl.setting.shipping_time - 1">
+		</span>
+		<span class="pull-left days" translate="DAYS"></span>
+		<form-errors condition="shippingTypesCtrl.has_error(shippingTypesCtrl.shippingTypeForm, shippingTypesCtrl.shippingTypeForm.shipping_express_time)" field="shippingTypesCtrl.shippingTypeForm.shipping_express_time"></form-errors>
+	</div>
+</form>

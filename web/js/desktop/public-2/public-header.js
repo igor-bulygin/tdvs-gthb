@@ -16,6 +16,9 @@
 		}
 	}
 
-	angular.module('header', ['api', 'util', 'box'])
-		.controller('publicHeaderCtrl', controller);
+	var headerModule=angular.module('header', ['api', 'util', 'box','pascalprecht.translate'])
+	.controller('publicHeaderCtrl', controller);
+	headerModule.config(['$translatePartialLoaderProvider', function ($translatePartialLoaderProvider) {
+		$translatePartialLoaderProvider.addPart('header');
+	}]);
 }());

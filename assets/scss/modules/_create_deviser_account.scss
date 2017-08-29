@@ -2,16 +2,14 @@
 // Create deviser account
 // ==========================================================================
 .create-deviser-account-wrapper{
-    padding: 80px 200px 200px;
+    padding: 30px 200px 200px;
 	background-color: $black;
     .logo{
         width: 110px;
         margin: 0 auto;
     }
     .create-deviser-account-container{
-        background-color: $almost_black;
-        padding: 20px 40px;
-        max-width: 330px;
+        max-width: 340px;
         margin: 60px auto 0;
         ::-webkit-input-placeholder {
             color: $light_grey;
@@ -38,7 +36,7 @@
     text-align: center;
     color: $white;
     width: 600px;
-    margin: 40px auto;
+    margin: 60px auto 40px;
     p{
         font-size: 17px;
         font-family: $font-family--secondary;
@@ -48,16 +46,19 @@
 .remember-me{
     label{
         text-transform: none;
-        font-family: $font-family--secondary;
         font-size: 14px;
+		a{
+			text-decoration: underline;
+			color: $white;
+		}
     }
 }
 .remember-me label::before{
-    background-color: $dark_grey;
-    border:1px solid $darker_grey;
+    background-color: transparent;
+    border:1px solid $dark_grey;
 }
 .remember-me label::after{
-    color: $background_grey;
+    color: $red;
 }
 .title-create-account{
 	color: $white;

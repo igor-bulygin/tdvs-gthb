@@ -47,7 +47,7 @@
 	}
 
 	angular
-		.module('todevise')
+		.module('discover')
 		.component('exploreBoxesFilters', component);
 
 }());

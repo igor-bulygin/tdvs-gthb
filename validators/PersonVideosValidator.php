@@ -1,12 +1,7 @@
 <?php
 namespace app\validators;
 
-use app\helpers\Utils;
-use app\models\Person;
 use app\models\Product;
-use Yii;
-use yii\base\Model;
-use yii\helpers\Html;
 use yii\validators\UrlValidator;
 use yii\validators\Validator;
 

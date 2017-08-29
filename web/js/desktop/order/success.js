@@ -3,9 +3,9 @@
 
 	function controller(orderDataService, cartService, $location, UtilService) {
 		var vm = this;
-		vm.state = {
-			state: 4
-		};
+		vm.person = person;
+		vm.order_id = order_id;
+		vm.isObject = angular.isObject;
 
 		init();
 
@@ -14,15 +14,15 @@
 		}
 
 		function getOrder() {
-			function onGetOrderSuccess(data) {
+			function onGetOrderSuccess(orderData) {
 				vm.order = angular.copy(orderData);
 				cartService.parseTags(vm.order);
-				vm.devisers = cartService.parseDevisersFromProducts(vm.order);
 			}
-			var url = $location.absUrl();
-			var order_id = url.split('/')[url.split('/').length-1];
 
-			orderDataService.getOrder({id:order_id}, onGetOrderSuccess, UtilService.onError);
+			orderDataService.getOrder({
+				personId: vm.person.id,
+				orderId: vm.order_id
+			}, onGetOrderSuccess, UtilService.onError);
 		}
 	}
  

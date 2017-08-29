@@ -14,6 +14,21 @@ namespace app\models;
 class PersonMedia extends EmbedModel
 {
 
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $serializeFields = [];
+
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $retrieveExtraFields = [];
+
+
 	public function attributes()
 	{
 		return [
@@ -76,7 +91,7 @@ class PersonMedia extends EmbedModel
 				]
 			],
 			[
-				['header', 'header_cropped', 'profile', 'profile_cropped', 'photos'],
+				['header', 'header_cropped', 'profile', 'profile_cropped'],
 				'required',
 				'on' => [
 					Person::SCENARIO_DEVISER_UPDATE_PROFILE,

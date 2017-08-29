@@ -3,7 +3,7 @@ namespace app\modules\api\priv\v1\forms;
 
 use app\helpers\Utils;
 use app\models\Person;
-use app\models\Product2;
+use app\models\Product;
 use Yii;
 use yii\base\Model;
 use yii\web\UploadedFile;
@@ -287,11 +287,11 @@ class UploadForm extends Model {
 	/**
 	 * Get the Product related with the upload
 	 *
-	 * @return Product2
+	 * @return Product
 	 */
 	public function getProduct()
 	{
-		return Product2::findOne(['short_id' => $this->product_id]);
+		return Product::findOne(['short_id' => $this->product_id]);
 	}
 
 	/**

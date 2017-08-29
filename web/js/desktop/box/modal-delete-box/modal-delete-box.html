@@ -2,12 +2,12 @@
 	<button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="modalDeleteBoxCtrl.dismiss()">
 		<span class="ion-ios-close" aria-hidden="true"></span>
 	</button>
-	<h3>Are you sure you want to delete this box permanently?</h3>
+	<h3><span translate="boxes.delete.DELETE_BOX_PERMANENTLY"></span></h3>
 </div>
 <div class="modal-body">
-	<p class="modal-delete-text">You will not be able to recover it.</p>
+	<p class="modal-delete-text"><span translate="boxes.delete.NOT_ABLE_RECOVER"></span></p>
 	<div class="text-center">
-		<button class="btn btn-default btn-cancel" ng-click="modalDeleteBoxCtrl.deleteBox()">Delete</button>
-		<button class="btn btn-green green-modal-btn" ng-click="modalDeleteBoxCtrl.dismiss()">Cancel</button>
+		<button class="btn btn-default btn-cancel" ng-click="modalDeleteBoxCtrl.deleteBox()"><span translate="boxes.delete.DELETE"></span></button>
+		<button class="btn btn-green green-modal-btn" ng-click="modalDeleteBoxCtrl.dismiss()"><span translate="boxes.delete.CANCEL"></span></button>
 	</div>
 </div>

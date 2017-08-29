@@ -1,15 +1,19 @@
 <?php
-use app\assets\desktop\deviser\EditAboutAsset;
+
+use app\assets\desktop\deviser\GlobalAsset;
 use app\components\PersonHeader;
 use app\components\PersonMenu;
 use app\models\Person;
 use yii\helpers\Json;
 
-EditAboutAsset::register($this);
+GlobalAsset::register($this);
 
 /** @var Person $person */
+$this->title = Yii::t('app/public',
+	'Edit about {person_name} - Todevise',
+	['person_name' => $person->getName()]
+);
 
-$this->title = 'About ' . $person->getName() . ' - Todevise';
 $this->params['person'] = $person;
 $this->params['person_menu_active_option'] = 'about';
 $this->params['person_links_target'] = 'edit_view';

@@ -6,8 +6,8 @@
 		<span class="ion-ios-close" aria-hidden="true"></span>
 	</button>
 	<div class="title-subtitle-wrapper">
-		<h3 class="modal-save-title">Save in a box</h3>
-		<p class="modal-save-subtitle">Select box <span class="modal-save-total">(<span ng-bind="modalSaveBoxCtrl.resolve.boxes.meta.total_count"></span> total)</span></p>
+		<h3 class="modal-save-title"><span translate="boxes.save.SAVE_IN_BOX"></span></h3>
+		<p class="modal-save-subtitle"><span translate="boxes.save.SELECT_BOX"></span> <span class="modal-save-total"><span translate="boxes.save.TOTAL_BOX" translate-values="{total: modalSaveBoxCtrl.resolve.boxes.meta.total_count}"></span></span></p>
 	</div>
 </div>
 <div class="modal-body modal-box-pad">
@@ -15,18 +15,19 @@
 		<form class="form-inline form-save-box" name="modalSaveBoxCtrl.search_form">
 			<div class="form-group">
 				<div class="input-group save-box-searcher-wrapper">
-					<input type="text" class="form-control" ng-model="modalSaveBoxCtrl.search_term.name" placeholder="Buscar">
+					<input type="text" class="form-control" ng-model="modalSaveBoxCtrl.search_term.name" translate-attr="{placeholder: 'boxes.save.SEARCH'}">
 					<div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
 				</div>
 			</div>
 		</form>
-		<button class="btn btn-default btn-create-box" ng-click="modalSaveBoxCtrl.showCreateBox()">Create new box</button>
+		<button class="btn btn-default btn-create-box" ng-click="modalSaveBoxCtrl.showCreateBox()"><span translate="boxes.save.CREATE_NEW_BOX"></span></button>
 	</div>
 	<div class="save-modal-row" ng-if="modalSaveBoxCtrl.creatingBox">
-		<form class="form-inline" name="modalSaveBoxCtrl.create_form">
+		<form class="form-inline" name="modalSaveBoxCtrl.create_form" novalidate>
 			<div class="form-group">
-				<input type="text" class="form-control create-box-input" ng-model="modalSaveBoxCtrl.new_box_name" placeholder="Name of the box" required>
-				<button class="btn btn-default btn-green" ng-click="modalSaveBoxCtrl.createBox(modalSaveBoxCtrl.create_form)">Create</button>
+				<input type="text" name="box_name" class="form-control create-box-input ng-class:{'error-input': modalSaveBoxCtrl.has_error(modalSaveBoxCtrl.create_form, modalSaveBoxCtrl.create_form.box_name)}" ng-model="modalSaveBoxCtrl.new_box_name" translate-attr="{placeholder: 'boxes.save.NAME_BOX'}" required>
+				<button class="btn btn-default btn-green" ng-click="modalSaveBoxCtrl.createBox(modalSaveBoxCtrl.create_form)"><span translate="boxes.save.CREATE"></span></button>
+				<form-errors field="modalSaveBoxCtrl.create_form.box_name" condition="modalSaveBoxCtrl.has_error(modalSaveBoxCtrl.create_form, modalSaveBoxCtrl.create_form.box_name)"></form-errors>
 			</div>
 		</form>
 	</div>
@@ -37,7 +38,7 @@
 		</div>
 	</div>
 	<div class="save-modal-text-row" ng-if="modalSaveBoxCtrl.resolve.boxes.items.length === 0">
-		<p>You don't have any boxes yet.</p>
-		<p>Create one by clicking the <span>create new box</span> button.</p>
+		<p><span translate="boxes.save.NO_BOXES_1"></span></p>
+		<p><span translate="boxes.save.NO_BOXES_2"></span></p>
 	</div>
 </div>

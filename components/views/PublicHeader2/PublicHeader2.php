@@ -1,5 +1,4 @@
 <?php
-use app\helpers\Utils;
 use app\models\Category;
 use yii\helpers\Url;
 
@@ -57,46 +56,32 @@ app\components\assets\PublicHeader2Asset::register($this);
 						<span>or</span>
 					</li>
 					<li class="log">
-						<a href="<?=Url::to('/login')?>">Log in</a>
+						<a href="<?=Url::to('/login')?>" translate="LOGIN"></a>
 					</li>
 				<?php } else {
 					$person = Yii::$app->user->identity; /* @var \app\models\Person $person */?>
 						<li class="dropdown log">
-
-							<a class="logued-text" href="#" class="dropdown-toggle log" data-toggle="dropdown" role="button" aria-haspopup="true"
-							   aria-expanded="false"><i class="ion-android-person"></i> My todevise</a>
-
+							<a class="logued-text" href="#" class="dropdown-toggle log" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" translate="MY_TODEVISE"><i class="ion-android-person"></i></a>
 							<div class="dropdown-menu admin-wrapper black-form">
-
 								<ul class="menu-logued">
-
 									<li class="header-item">
 										<a href="<?= $person->getMainLink()?>"> <span><?=$person->getName()?></span></a>
 										<img class="avatar-logued-user" src="<?= $person->getAvatarImage() ?>">
 									</li>
-
 									<?php if ($person->isAdmin()) { ?>
-
-										<li><a href="<?=Url::to('/admin')?>">Administration</a></li>
-										<li><a href="<?=Url::to('/admin/invitations')?>">Invitations</a></li>
+										<li><a href="<?=Url::to('/admin')?>" translate="ADMINISTRATION"></a></li>
+										<li><a href="<?=Url::to('/admin/invitations')?>" translate="INVITATION"></a></li>
 										<li class="separation-line"></li>
-
 									<?php } elseif ($person->isDeviser()) { ?>
-
-										<li><a href="#">Sales</a></li>
+										<li><a href="<?=$person->getSettingsLink('open-orders')?>" translate="SALES"></a></li>
 										<li class="separation-line"></li>
-
 									<?php } elseif ($person->isClient()) { ?>
-
-										<li><a href="#">My orders</a></li>
+										<li><a href="<?=$person->getSettingsLink('open-orders')?>" translate="MY_ORDERS"></a></li>
 										<li class="separation-line"></li>
-
 									<?php } elseif ($person->isInfluencer()) { ?>
-
 									<?php } ?>
-
-									<li><a href="<?= $person->getSettingsLink()?>">Settings</a></li>
-									<li><a href="#" ng-click="publicHeaderCtrl.logout()">Logout</a></li>
+									<li><a href="<?= $person->getSettingsLink()?>" translate="SETTINGS"></a></li>
+									<li><a href="#" ng-click="publicHeaderCtrl.logout()" translate="LOGOUT">Logou</a></li>
 								</ul>
 							</div>
 						</li>
@@ -105,79 +90,125 @@ app\components\assets\PublicHeader2Asset::register($this);
 		</div><!-- /.navbar-collapse -->
 	</div><!-- /.container -->
 </nav>
-<nav class="navbar navbar-default secondary">
-	<div class="container">
-		<ul class="nav navbar-nav">
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle menu-title" data-toggle="dropdown" role="button"
-					   aria-haspopup="true" aria-expanded="false">
-						<i class="fa fa-bars" aria-hidden="true"></i>
-						<span>Shop by departament</span>
-					</a>
-					<div class="dropdowns-wrapper">
-						<div class="dropdown-menu dropdown-shop">
-							<ul class="shop-menu-wrapper">
-								<?php foreach($categories as $category) { ?>
-									<li class="toggle-category" data-target=".category-<?=$category->short_id?>"><a class="ion-chevron-right" href="<?= Url::to(["public/category-b", "slug" => $category->slug, 'category_id' => $category->short_id])?>"><?= Utils::l($category->name)?></a></li>
-									<li role="separator" class="divider"></li>
-								<?php } ?>
-							</ul>
-							<?php
-							$active = 'active';
-							foreach ($categories as $category) {
+<div id="navbar-wrapper">
+	<nav class="navbar navbar-default secondary">
+		<div class="container">
+			<ul class="nav navbar-nav">
+					<li>
+						<a href="#" class="menu-title hover-toggle" data-target=".menu-categories" data-group=".category-menu">
+							<i class="fa fa-bars" aria-hidden="true"></i>
+							<span translate="SHOP_BY_DEPARTMENT"></span>
+						</a>
+					</li>
+				</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="<?=Url::to(['/discover/stories'])?>" translate="STORIES"></a></li>
+				<li><a href="<?=Url::to(['/discover/boxes'])?>" translate="EXPLORE_BOXES"></a></li>
+				<li><a href="<?=Url::to(['/discover/devisers'])?>" translate="DISCOVER_DEVISERS"></a></li>
+				<li><a href="<?=Url::to(['/discover/influencers'])?>" translate="TREND_SETTERS"></a></li>
+				<li><a href="#" translate="PROJECTS"></a></li>
+			</ul>
+		</div>
+	</nav>
+	<div class="menu-categories">
+		<nav class="navbar navbar-default terciary">
+			<div class="container">
+				<ul>
+					<?php foreach($categories as $category) { ?>
+						<li>
+							<a class="hover-toggle <?=$selectedCategory && $selectedCategory->short_id == $category->short_id ? 'selected' : ''?>" data-group=".category-menu" data-target="#category-<?=$category->short_id?>" href="<?= $category->getMainLink()?>"><?= $category->name?></a>
+						</li>
+					<?php } ?>
+				</ul>
+			</div>
+		</nav>
+		<div id="submenu-categories">
+			<?php foreach($categories as $category) { ?>
+				<div class="category-menu" id="category-<?=$category->short_id?>">
+					<div class="container">
+						<div class="categories">
+							<ul>
+								<?php
 								if ($category->hasGroupsOfCategories()) {
-									$subCategories = $category->getSubCategories();
+									// Category with 3 levels or more.
+									// Each 2nd level is shown as a column with a styled title
+									// Each column shows 3rd level items
+									$subCategories = $category->getSubCategoriesHeader();
 									if ($subCategories) {
-										foreach ($subCategories as $subCategory) {
+										foreach ($subCategories as $subCategory) { ?>
+											<ul class="two-categories">
+												<li>
+													<a class="two-categories-title" href="<?=$subCategory->getMainLink()?>"><?= $subCategory->name ?></a>
+												</li>
+												<?php
 
-											$subSubCategories = $subCategory->getSubCategoriesHeader(); ?>
-											<ul class="shop-secondary-menu-wrapper category category-<?=$category->short_id ?> <?=$active?>">
-												<li><?= Utils::l($subCategory->name) ?></li>
-												<?php foreach ($subSubCategories as $subSubCategory) { ?>
+												$subSubCategories = $subCategory->getSubCategoriesHeader();
+												foreach ($subSubCategories as $subSubCategory) { ?>
 													<li>
-														<a href="<?= Url::to(["public/category-b", "slug" => $subSubCategory->slug, 'category_id' => $subSubCategory->short_id]) ?>"><?= Utils::l($subSubCategory->name) ?></a>
+														<a href="<?=$subSubCategory->getMainLink()?>"><?= $subSubCategory->name ?></a>
 													</li>
-												<?php }
-												if (($image = $subCategory->getHeaderImage()) !== null) { ?>
-													<li class="minibanner">
-													<a href="#">
-														<img src="<?= $image ?>">
-													</a>
-													</li><?php
+												<?php
 												} ?>
 											</ul>
-										<?php }
+											<?php
+										}
 									}
 								} else {
 									$subCategories = $category->getSubCategoriesHeader();
-									if ($subCategories) { ?>
-										<ul class="shop-secondary-menu-wrapper category category-<?=$category->short_id ?> <?=$active?>">
-											<?php foreach ($subCategories as $subCategory) { ?>
-												<li>
-													<a href="<?= Url::to(["public/category-b", "slug" => $subCategory->slug, 'category_id' => $subCategory->short_id]) ?>"><?= Utils::l($subCategory->name) ?></a>
-												</li><?php
+									if ($subCategories) {
+										if (count($subCategories) > 8) {
+											// Category with 9 or more 2nd level items, subcategories are shown in columns ?>
+											<ul class="two-categories">
+											<?php
+										}
+										$i = 1;
+										foreach ($subCategories as $subCategory) { ?>
+											<li>
+												<a href="<?= $subCategory->getMainLink() ?>"><?= $subCategory->name ?></a>
+											</li>
+
+											<?php if (count($subCategories) > 8 && $i == ceil(count($subCategories) / 2)) { ?>
+												</ul>
+												<ul class="two-categories">
+												<?php
 											}
-											if (($image = $category->getHeaderImage()) !== null) { ?>
-												<li class="minibanner">
-													<a href="#">
-														<img src="<?= $image ?>">
-													</a>
-												</li><?php
-											} ?>
-										</ul><?php
+											$i++;
+										}
+										if (count($subCategories) > 8) { ?>
+											</ul>
+											<?php
+										}
 									}
-								}
-								$active = '';
-							} ?>
+								}?>
+							</ul>
+						</div>
+						<div class="images">
+							<?php
+							$headerImages = $category->getHeaderImages();
+							$count = 1;
+							foreach ($headerImages as $image) { ?>
+								<div class="image-<?=$count?>">
+									<?php if ($image['link']) { ?>
+										<a href="<?=$image['link']?>" title="<?=$image['name']?>">
+											<img src="<?=$image['url']?>">
+										</a>
+									<?php } else { ?>
+										<img src="<?=$image['url']?>">
+									<?php } ?>
+								</div>
+								<?php
+								if ($count== 1) {
+									$count = 2;?>
+									<div class="images-wrapper">
+								<?php }
+							}
+							if (count($headerImages) > 1) { ?>
+									</div><!--close image-wrapper-->
+							<?php } ?>
 						</div>
 					</div>
-				</li>
-			</ul>
-		<ul class="nav navbar-nav navbar-right">
-			<li><a href="<?=Url::to(['/discover/stories'])?>">Stories</a></li>
-			<li><a href="<?=Url::to(['/discover/boxes'])?>">Explore Boxes</a></li>
-			<li><a href="<?=Url::to(['/discover/devisers'])?>">Discover devisers</a></li>
-			<li><a href="<?=Url::to(['/discover/influencers'])?>">Influencers</a></li>
-		</ul>
+				</div>
+			<?php } ?>
+		</div>
 	</div>
-</nav>
+</div>

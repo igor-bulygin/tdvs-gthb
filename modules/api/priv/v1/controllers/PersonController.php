@@ -2,10 +2,14 @@
 
 namespace app\modules\api\priv\v1\controllers;
 
+use app\models\Order;
+use app\models\OrderPack;
 use app\models\Person;
 use Yii;
 use yii\base\Exception;
 use yii\web\BadRequestHttpException;
+use yii\web\NotFoundHttpException;
+use yii\web\UnauthorizedHttpException;
 
 class PersonController extends AppPrivateController
 {
@@ -15,9 +19,13 @@ class PersonController extends AppPrivateController
 		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
 
 		/** @var Person $person */
-		$person = Person::findOne(["short_id" => $personId]);
+		$person = Person::findOneSerialized($personId);
 		if (empty($person)) {
-			throw new BadRequestHttpException('Person not found');
+			throw new NotFoundHttpException('Person not found');
+		}
+
+		if (!$person->isPersonEditable()) {
+			throw new UnauthorizedHttpException();
 		}
 
 		return $person;
@@ -28,14 +36,24 @@ class PersonController extends AppPrivateController
 		/** @var Person $person */
 		$person = Person::findOne(["short_id" => $personId]);
 		if (empty($person)) {
-			throw new BadRequestHttpException('Person not found');
+			throw new NotFoundHttpException('Person not found');
 		}
 
-		$newAccountState = Yii::$app->request->post('account_state');
+		if (!$person->isPersonEditable()) {
+			throw new UnauthorizedHttpException();
+		}
+
+		$newAccountState = Yii::$app->request->post('account_state', $person->account_state);
 		$this->checkDeviserAccountState($person, $newAccountState); // check for allowed new account state only
 
-		$person->setScenario($this->getScenarioFromRequest($person)); // safe and required attributes are related with scenario
-		if ($person->load(Yii::$app->request->post(), '') && $person->save()) {
+		// only validate received fields (only if we are not changing the state)
+		$validateFields = $person->account_state == $newAccountState ? array_keys(Yii::$app->request->post()) : null;
+
+		$person->setScenario($this->getScenarioFromRequest($person));
+
+		if ($person->load(Yii::$app->request->post(), '') && $person->validate($validateFields)) {
+
+			$person->save(false);
 
 			Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
 			return $person;
@@ -46,6 +64,241 @@ class PersonController extends AppPrivateController
 			];
 		}
 
+	}
+
+	public function actionUpdatePassword($personId)
+	{
+		/** @var Person $person */
+		$person = Person::findOne(["short_id" => $personId]);
+		if (empty($person)) {
+			throw new NotFoundHttpException('Person not found');
+		}
+
+		if (!$person->isPersonEditable()) {
+			throw new UnauthorizedHttpException();
+		}
+
+		$oldPassword = Yii::$app->request->post('oldpassword');
+		$newPassword = Yii::$app->request->post('newpassword');
+
+		if (empty($oldPassword) || !empty($person->credentials['password']) && !$person->validatePassword($oldPassword)) {
+			throw new BadRequestHttpException("Invalid old password");
+		}
+		if (empty($newPassword)) {
+			throw new BadRequestHttpException("Invalid new password");
+		}
+		$person->setPassword($newPassword);
+		$person->save();
+
+		Yii::$app->response->setStatusCode(204); // No content
+
+		return null;
+	}
+
+	public function actionOrder($personId, $orderId)
+	{
+		/** @var Person $person */
+		$person = Person::findOne(["short_id" => $personId]);
+		if (empty($person)) {
+			throw new NotFoundHttpException('Person not found');
+		}
+
+		if (!$person->isPersonEditable()) {
+			throw new UnauthorizedHttpException();
+		}
+
+		// show only fields needed in this scenario
+		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_CLIENT_ORDER);
+
+		$order = Order::findOneSerialized($orderId);
+		if (empty($order)) {
+			throw new NotFoundHttpException('Order not found');
+		}
+
+		if ($order->person_id != $person->short_id) {
+			throw new UnauthorizedHttpException();
+		}
+
+		if (!$order->isOrder()) {
+			throw new BadRequestHttpException("This order has an invalid state");
+		}
+
+		$order->setSubDocumentsForSerialize();
+
+		return $order;
+	}
+
+	public function actionOrders($personId)
+	{
+		/** @var Person $person */
+		$person = Person::findOne(["short_id" => $personId]);
+		if (empty($person)) {
+			throw new NotFoundHttpException('Person not found');
+		}
+
+		if (!$person->isPersonEditable()) {
+			throw new UnauthorizedHttpException();
+		}
+
+		// show only fields needed in this scenario
+		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_CLIENT_ORDER);
+
+		// set pagination values
+		$limit = Yii::$app->request->get('limit', 99999);
+		$limit = ($limit < 1) ? 1 : $limit;
+		$page = Yii::$app->request->get('page', 1);
+		$page = ($page < 1) ? 1 : $page;
+		$offset = ($limit * ($page - 1));
+
+		$orders = Order::findSerialized([
+			"person_id" => $person->id,
+			"order_state" => Order::ORDER_STATE_PAID,
+			"pack_state" => Yii::$app->request->get('pack_state'),
+			"limit" => $limit,
+			"offset" => $offset,
+		]);
+
+		foreach ($orders as $order) {
+			$order->setSubDocumentsForSerialize();
+		}
+
+		return [
+			"items" => $orders,
+			"meta" => [
+				"total_count" => Order::$countItemsFound,
+				"current_page" => $page,
+				"per_page" => $limit,
+			]
+		];
+	}
+
+	public function actionPacks($personId)
+	{
+		/** @var Person $person */
+		$person = Person::findOne(["short_id" => $personId]);
+		if (empty($person)) {
+			throw new NotFoundHttpException('Person not found');
+		}
+
+		if (!$person->isDeviser()) {
+			throw new Exception("Invalid person type");
+		}
+
+		if (!$person->isDeviserEditable()) {
+			throw new UnauthorizedHttpException();
+		}
+
+		// show only fields needed in this scenario
+		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_DEVISER_PACK);
+
+		// set pagination values
+		$limit = Yii::$app->request->get('limit', 99999);
+		$limit = ($limit < 1) ? 1 : $limit;
+		$page = Yii::$app->request->get('page', 1);
+		$page = ($page < 1) ? 1 : $page;
+		$offset = ($limit * ($page - 1));
+
+		$orders = Order::findSerialized([
+			"deviser_id" => $person->id,
+			"only_matching_packs" => true,
+			"pack_state" => Yii::$app->request->get('pack_state'),
+			"limit" => $limit,
+			"offset" => $offset,
+		]);
+
+		foreach ($orders as $order) {
+			$order->setSubDocumentsForSerialize();
+		}
+
+		return [
+			"items" => $orders,
+			"meta" => [
+				"total_count" => Order::$countItemsFound,
+				"current_page" => $page,
+				"per_page" => $limit,
+			]
+		];
+	}
+
+	public function actionPackAware($personId, $packId)
+	{
+		/** @var Person $person */
+		$person = Person::findOne(["short_id" => $personId]);
+		if (empty($person)) {
+			throw new NotFoundHttpException('Person not found');
+		}
+
+		if (!$person->isPersonEditable()) {
+			throw new UnauthorizedHttpException();
+		}
+
+		// show only fields needed in this scenario
+		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_DEVISER_PACK);
+		$orders = Order::findSerialized(
+			[
+				'pack_id' => $packId,
+				'deviser_id' => $person->short_id,
+				'only_matching_packs' => true,
+			]
+		);
+		if (count($orders) != 1) {
+			throw new NotFoundHttpException(sprintf('Order for pack_id %s not found', $packId));
+		}
+
+		// We can only get one order by packId...
+		/* @var Order $order */
+		$order = $orders[0];
+
+		if (!$order->isOrder()) {
+			throw new BadRequestHttpException("This order has an invalid state");
+		}
+
+		$order->setPackState($packId, OrderPack::PACK_STATE_AWARE);
+
+		$order->setSubDocumentsForSerialize();
+
+		return $order;
+	}
+
+	public function actionPackShipped($personId, $packId)
+	{
+		/** @var Person $person */
+		$person = Person::findOne(["short_id" => $personId]);
+		if (empty($person)) {
+			throw new NotFoundHttpException('Person not found');
+		}
+
+		if (!$person->isPersonEditable()) {
+			throw new UnauthorizedHttpException();
+		}
+
+		// show only fields needed in this scenario
+		Order::setSerializeScenario(Order::SERIALIZE_SCENARIO_DEVISER_PACK);
+		$orders = Order::findSerialized(
+			[
+				'pack_id' => $packId,
+				'deviser_id' => $person->short_id,
+				'only_matching_packs' => true,
+			]
+		);
+		if (count($orders) != 1) {
+			throw new NotFoundHttpException(sprintf('Order for pack_id %s not found', $packId));
+		}
+
+		// We can only get one order by packId...
+		/* @var Order $order */
+		$order = $orders[0];
+
+		if (!$order->isOrder()) {
+			throw new BadRequestHttpException("This order has an invalid state");
+		}
+
+		$order->setPackShippingInfo($packId, Yii::$app->request->post());
+		$order->setPackState($packId, OrderPack::PACK_STATE_SHIPPED);
+
+		$order->setSubDocumentsForSerialize();
+
+		return $order;
 	}
 
 	/**
@@ -106,7 +359,7 @@ class PersonController extends AppPrivateController
 					}
 					break;
 				case Person::ACCOUNT_STATE_ACTIVE:
-					if ($accountState != Person::ACCOUNT_STATE_ACTIVE) {
+					if (!in_array($accountState, [Person::ACCOUNT_STATE_ACTIVE])) {
 						throw new BadRequestHttpException('Invalid account state');
 					}
 					break;

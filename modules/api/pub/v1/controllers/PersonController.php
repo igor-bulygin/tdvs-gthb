@@ -5,11 +5,9 @@ namespace app\modules\api\pub\v1\controllers;
 use app\models\Invitation;
 use app\models\Person;
 use Yii;
-use yii\base\Exception;
 use yii\web\BadRequestHttpException;
 use yii\web\ConflictHttpException;
 use yii\web\NotFoundHttpException;
-use yii\web\UnauthorizedHttpException;
 
 class PersonController extends AppPublicController
 {
@@ -19,13 +17,14 @@ class PersonController extends AppPublicController
 		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_PUBLIC);
 
 		/** @var Person $person */
-		$person = Person::findOne(["short_id" => $personId]);
+		$person = Person::findOneSerialized($personId);
 		if (empty($person)) {
-			throw new BadRequestHttpException('Person not found');
+			throw new NotFoundHttpException('Person not found');
 		}
 
 		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE && !$person->isPersonEditable()) {
-			throw new UnauthorizedHttpException();
+			Yii::$app->response->setStatusCode(204); // No content
+			return null;
 		}
 
 		return $person;
@@ -91,20 +90,20 @@ class PersonController extends AppPublicController
 				$invitation = Invitation::findOneSerialized($invitation_id);
 
 				if (!$invitation) {
-					throw new NotFoundHttpException(Yii::t("app/api", "Invitation not found"));
+					throw new NotFoundHttpException("Invitation not found");
 				}
 
 				if (!$invitation->canUse()) {
-					throw new BadRequestHttpException(Yii::t("app/api", "Invalid invitation"));
+					throw new BadRequestHttpException("Invalid invitation");
 				}
 
 				if ($invitation->email != Yii::$app->request->post('email')) {
-					throw new BadRequestHttpException(Yii::t("app/api", "The invitation is for another email account"));
+					throw new BadRequestHttpException("The invitation is for another email account");
 				}
 				$account_state = Person::ACCOUNT_STATE_DRAFT;
 				break;
 			default:
-				throw new Exception("Invalid person type");
+				throw new BadRequestHttpException("Invalid person type");
 		}
 
 		$email = Yii::$app->request->post('email');
@@ -128,7 +127,7 @@ class PersonController extends AppPublicController
 		$person->refreshFromEmbedded();
 
 		if ($person->validate()) {
-			$person->save();
+			$person->save(false);
 
 			if (isset($invitation)) {
 				// relate invitation and new person

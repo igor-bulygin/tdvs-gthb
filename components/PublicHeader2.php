@@ -19,7 +19,12 @@ class PublicHeader2 extends Widget {
 			//
 		}
 
+		$selectedCategory = isset($this->view->params['selectedCategory']) ? $this->view->params['selectedCategory'] : null;
+
+		Category::setSerializeScenario(Category::SERIALIZE_SCENARIO_PUBLIC);
+
 		return $this->render('PublicHeader2', [
+			'selectedCategory' => $selectedCategory,
 			'categories' => Category::getHeaderCategories(),
 			'login_model' => $model,
 			'q' => Yii::$app->request->get('q'),

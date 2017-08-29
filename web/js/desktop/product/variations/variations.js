@@ -35,6 +35,7 @@
 		vm.bespoke_selected = false;
 		vm.bespoke_language = 'en-US';
 		vm.deviserSizecharts = [];
+		vm.sizecharts=[];
 		vm.countriesAvailable = [];
 		vm.finalColumns = [];
 		vm.finalCountry;
@@ -210,8 +211,8 @@
 			return UtilService.isZeroOrLess(value) && vm.form_submitted;
 		}
 
-		function optionValidation(option) {
-			return option.length <= 0 && vm.form_submitted;
+		function optionValidation(option,required) {
+			return option.length <= 0 && vm.form_submitted && required;
 		}
 
 		function textFieldValidation(textField, requiredOption) {
@@ -246,7 +247,10 @@
 
 		//events
 		$scope.$on(productEvents.setVariations, function(event, args) {
-			//get tags
+			//get tags						
+			if (!args.isFirstSelection) {
+				vm.product.options = {};
+			}
 			getTagsByCategory(args.categories);
 			categoriesSizecharts(args.categories);
 			deviserSizecharts();
@@ -333,6 +337,6 @@
 	}
 
 	angular
-		.module('todevise')
+		.module('product')
 		.component('productVariations', component);
 }());

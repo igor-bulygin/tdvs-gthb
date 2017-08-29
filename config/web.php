@@ -19,7 +19,7 @@ $config = [
 				'application/json' => Response::FORMAT_JSON,
 				'application/xml' => Response::FORMAT_XML
 			],
-			'languages' => array_keys(require(__DIR__ . '/langs.php'))
+			'languages' => array_keys(require(__DIR__ . '/langs.php')), // must be an array of language codes
 		],
 		'devicedetect',
 		'languagepicker',
@@ -72,7 +72,6 @@ $config = [
 					'fileMap' => [
 						'app' => 'app.php',
 						'app/admin' => 'app/admin.php',
-						'app/deviser' => 'app/deviser.php',
 						'app/public' => 'app/public.php'
 					]
 				]
@@ -82,7 +81,7 @@ $config = [
 		//Available languages
 		'languagepicker' => [
 			'class' => 'lajax\languagepicker\Component',
-			'languages' => require(__DIR__ . '/langs.php'),
+			'languages' => require(__DIR__ . '/langs.php'),  // must be an key => value array of language code => name
 			'expireDays' => 64,
 			'callback' => function () {
 				if (!\Yii::$app->user->isGuest) {
@@ -100,8 +99,40 @@ $config = [
 			'targets' => [
 				[
 					'class' => 'yii\log\FileTarget',
-					'levels' => YII_DEBUG ? ['error', 'warning', 'info'] : ['error', 'warning']
-				]
+					'levels' => ['error'],
+					'logFile' => '@app/runtime/logs/todevise_errors.log',
+					'logVars' => ['_GET', '_POST', '_FILES', '_COOKIE', '_SESSION', '_SERVER'],
+				],
+				[
+					'class' => 'yii\mongodb\log\MongoDbTarget',
+					'levels' => [],
+					'logCollection' => 'todeviselog',
+					'logVars' => [],
+				],
+				[
+					'class' => 'yii\log\FileTarget',
+					'levels' => ['info'],
+					'categories' => ['app\modules\api\*'],
+					'logFile' => '@app/runtime/logs/todevise_api.log',
+					'logVars' => [],
+				],
+				[
+					'class' => 'yii\log\FileTarget',
+					'levels' => ['info'],
+					'categories' => ['app\controllers\Stripe*', 'app\helpers\Stripe*', 'Stripe'],
+					'logFile' => '@app/runtime/logs/todevise_stripe.log',
+					'logVars' => ['_GET', '_POST'],
+				],
+				[
+					'class' => 'yii\log\EmailTarget',
+					'levels' => ['error'],
+					'categories' => ['yii\db\*'],
+					'message' => [
+						'from' => ['info@todevise.com'],
+						'to' => ['josevazquezviader@gmail.com'],
+						'subject' => 'TODEVISE - Database error',
+					],
+				],
 			]
 		],
 
@@ -112,7 +143,7 @@ $config = [
 			// for the mailer to send real emails.
 			'useFileTransport' =>
 				strpos($_SERVER['HTTP_HOST'], 'beta.todevise.com') === false &&
-				strpos($_SERVER['HTTP_HOST'], 'dev.todevise.com') === false &&
+//				strpos($_SERVER['HTTP_HOST'], 'dev.todevise.com') === false &&
 				YII_ENV_DEV
 					? true : false,
 			'transport' => [
@@ -154,7 +185,10 @@ $config = [
 			'class' => 'bazilio\yii\newrelic\Newrelic',
 			'name' => 'Dev Todevise',
 //			'handler' => 'class/name',
-			'enabled' => true,
+			'enabled' =>
+				// newrelic is only enabled ind real servers
+				strpos($_SERVER['HTTP_HOST'], 'beta.todevise.com') !== false ||
+				strpos($_SERVER['HTTP_HOST'], 'dev.todevise.com') !== false,
 		],
 
 		//URLs
@@ -171,26 +205,33 @@ $config = [
 					'suffix' => ''
 				],
 
-				// Public routing
-				'/' => 'public/index',
-				'/index-new' => 'public/index',
-				'/category/<slug:[^/.]*?>/<category_id:[^/.]*?>' => 'public/category-b',
-
 				// temporary routes to fix database problems
 				'/works/fix-products' => 'product/fix-products',
 				'/works/fix-products-with-no-deviser' => 'product/fix-products-with-no-deviser',
 				'/works/more-works' => 'product/more-works',
-				'/person/update-passwords' => 'person/update-passwords',
 
+
+				// Public routing
+				'/' => 'public/index',
+				'/index-new' => 'public/index',
+
+				'/works/<slug:[^/.]*?>/<category_id:[^/.]*?>' => 'public/category-b',
 				'/works' => 'product/index',
+
+				'/person/update-passwords' => 'person/update-passwords',
 
 				//Person
 				'/<person_type:(deviser|influencer)>/<slug:[^/.]*?>/<person_id:[^/.]*?>' => 'person/about',
+				'/<person_type:(deviser|influencer)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/complete-profile' => 'person/complete-profile',
+				'/<person_type:(deviser|influencer)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/person-not-public' => 'person/person-not-public',
+				'/<person_type:(deviser|influencer)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/about' => 'person/about',
 				'/<person_type:(deviser|influencer)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/press' => 'person/press',
 				'/<person_type:(deviser|influencer)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/video' => 'person/videos',
+
 				'/<person_type:(deviser|influencer|client)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/loved' => 'person/loved',
 				'/<person_type:(deviser|influencer|client)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/boxes' => 'person/boxes',
 				'/<person_type:(deviser|influencer|client)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/box/<box_id:[^/.]*?>' => 'person/box-detail',
+
 				'/<person_type:(deviser|influencer)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/stories' => 'person/stories',
 				'/<person_type:(deviser|influencer)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/stories/create' => 'person/story-create',
 				'/<person_type:(deviser|influencer)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/story/<story_id:[^/.]*?>/edit' => 'person/story-edit',
@@ -203,15 +244,19 @@ $config = [
 				'/<person_type:(deviser)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/store' => 'person/store',
 				'/<person_type:(deviser)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/store/edit' => 'person/store-edit',
 
-				'/<person_type:(deviser)>/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/works/create' => 'product/create',
-				'/<person_type:(deviser)>/<slug:[^/.]*?>/<deviser_id:[^/.]*?>/works/<product_id:[^/.]*?>/edit' => 'product/edit',
+				'/<person_type:(deviser)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/works/create' => 'product/create',
+				'/<person_type:(deviser)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/works/<product_id:[^/.]*?>/edit' => 'product/edit',
+
 				'/work/<slug:[^/.]*?>/<product_id:[^/.]*?>' => 'product/detail',
 
 				//Settings
-				'/settings/<slug:[^/.]*?>/<person_id:[^/.]*?>' => 'settings/index',
+				'/settings/<slug:[^/.]*?>/<person_id:[^/.]*?>' => 'settings',
+				'/settings/<slug:[^/.]*?>/<person_id:[^/.]*?>/general' => 'settings/general',
 				'/settings/<slug:[^/.]*?>/<person_id:[^/.]*?>/billing' => 'settings/billing',
+				'/settings/<slug:[^/.]*?>/<person_id:[^/.]*?>/shipping' => 'settings/shipping',
 				'/settings/<slug:[^/.]*?>/<person_id:[^/.]*?>/connect-stripe' => 'settings/connect-stripe',
 				'/settings/<slug:[^/.]*?>/<person_id:[^/.]*?>/disconnect-stripe' => 'settings/disconnect-stripe',
+				'/settings/<slug:[^/.]*?>/<person_id:[^/.]*?>/open-orders' => 'settings/open-orders',
 
 				//Orders
 				'order/success/<order_id:\w{8}>' => 'order/success',
@@ -219,8 +264,9 @@ $config = [
 				//Stripe
 				'stripe/connect-back' => 'stripe/connect-back',
 
-				//Links for contact
-				'login' => 'site/login',
+				//Login
+				'login' => 'public/login',
+				'authentication-required' => 'public/authentication-required',
 
 				//Discover
 				'discover-devisers' => 'discover/devisers',
@@ -236,6 +282,7 @@ $config = [
 
 				//Links for a cart listing
 				'cart/' => 'public/cart',
+				'checkout/' => 'public/checkout',
 
 				//links for terms
 				'terms/' => 'public/terms',
@@ -321,8 +368,10 @@ $config = [
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/faq'],
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/term'],
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/category'],
-				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/country'],
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/location'],
+				'GET api3/pub/v1/countries' => 'api3/pub/v1/country/index',
+				'GET api3/pub/v1/countries/worldwide' => 'api3/pub/v1/country/worldwide',
+				'GET api3/pub/v1/countries/<countryCode:[^/.]*?>' => 'api3/pub/v1/country/view',
 				'GET api3/pub/v1/invitations/<uuid:[^/.]*?>' => 'api3/pub/v1/invitation/view', // override "view" action to accept alphanumeric ids
 
 				'POST api3/pub/v1/auth/login' => 'api3/pub/v1/auth/login',
@@ -330,23 +379,29 @@ $config = [
 				// Cart - public
 				'POST api3/pub/v1/cart' => 'api3/pub/v1/cart/create-cart',
 				'GET api3/pub/v1/cart/<cartId:[^/.]*?>' => 'api3/pub/v1/cart/view',
+				'PUT api3/pub/v1/cart/<cartId:[^/.]*?>' => 'api3/pub/v1/cart/update',
 				'POST api3/pub/v1/cart/<cartId:[^/.]*?>/product' => 'api3/pub/v1/cart/add-product',
-				'PUT api3/pub/v1/cart/<cartId:[^/.]*?>/product/<priceStockId:[^/.]*?>' => 'api3/pub/v1/cart/update-product',
 				'DELETE api3/pub/v1/cart/<cartId:[^/.]*?>/product/<priceStockId:[^/.]*?>' => 'api3/pub/v1/cart/delete-product',
-				'POST api3/pub/v1/cart/<cartId:[^/.]*?>/clientInfo' => 'api3/pub/v1/cart/client-info',
 				'POST api3/pub/v1/cart/<cartId:[^/.]*?>/receiveToken' => 'api3/pub/v1/cart/receive-token',
-
-				// Order - public
-				'GET api3/pub/v1/order/<orderId:[^/.]*?>' => 'api3/pub/v1/order/view',
 
 				// Person - public
 				'GET api3/pub/v1/person' => 'api3/pub/v1/person/index',
 				'GET api3/pub/v1/person/<personId:[^/.]*?>' => 'api3/pub/v1/person/view',
 				'POST api3/pub/v1/person' => 'api3/pub/v1/person/create',
+
 				// Person - private
 				'GET api3/priv/v1/person/<personId:[^/.]*?>' => 'api3/priv/v1/person/view',
 				'PATCH api3/priv/v1/person/<personId:[^/.]*?>' => 'api3/priv/v1/person/update',
 				'PUT api3/priv/v1/person/<personId:[^/.]*?>' => 'api3/priv/v1/person/update',
+				'PUT api3/priv/v1/person/<personId:[^/.]*?>/update-password' => 'api3/priv/v1/person/update-password',
+
+				// Person - orders and packs
+				'GET api3/priv/v1/person/<personId:[^/.]*?>/orders' => 'api3/priv/v1/person/orders',
+				'GET api3/priv/v1/person/<personId:[^/.]*?>/orders/<orderId:[^/.]*>' => 'api3/priv/v1/person/order',
+				'GET api3/priv/v1/person/<personId:[^/.]*?>/packs' => 'api3/priv/v1/person/packs',
+				'PUT api3/priv/v1/person/<personId:[^/.]*?>/packs/<packId:[^/.]*>/aware' => 'api3/priv/v1/person/pack-aware',
+				'PUT api3/priv/v1/person/<personId:[^/.]*?>/packs/<packId:[^/.]*>/shipped' => 'api3/priv/v1/person/pack-shipped',
+
 
 				// Product - public
 				'GET api3/pub/v1/products/<id:[^/.]*?>' => 'api3/pub/v1/product/view',
@@ -404,7 +459,7 @@ $config = [
 			'identityClass' => 'app\models\Person',
 			'enableAutoLogin' => true,
 			'enableSession' => true,
-			'loginUrl' => ['/login'],
+			'loginUrl' => ['/authentication-required'],
 		]
 
 	],
@@ -424,7 +479,7 @@ if (YII_ENV_DEV) {
 				'class' => 'yii\mongodb\debug\MongoDbPanel'
 			]
 		],
-		'allowedIPs' => ['*']
+		'allowedIPs' => ['*'],
 	];
 
 	$config['bootstrap'][] = 'gii';

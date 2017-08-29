@@ -31,14 +31,46 @@ class SettingsController extends CController
 		];
 	}
 
+	public function beforeAction($action)
+	{
+		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
+
+		return parent::beforeAction($action);
+	}
+
 	public function actionIndex($slug, $person_id) {
-		return $this->actionBilling($slug, $person_id);
+		return $this->actionGeneral($slug, $person_id);
+	}
+
+	public function actionGeneral($slug, $person_id) {
+		// get the category object
+		$person = Person::findOneSerialized($person_id);
+
+		if (!$person) {
+			throw new NotFoundHttpException();
+		}
+
+		if (!$person->isPersonEditable()) {
+			throw new UnauthorizedHttpException();
+		}
+
+		$this->checkProfileState($person);
+
+		$this->layout = '/desktop/public-2.php';
+
+		return $this->render("general", [
+			'person' => $person,
+		]);
 	}
 
 	public function actionBilling($slug, $person_id)
 	{
 		// get the category object
 		$person = Person::findOneSerialized($person_id);
+
+		if (!$person) {
+			throw new NotFoundHttpException();
+		}
 
 		if (!$person->isDeviser()) {
 			throw new NotFoundHttpException();
@@ -48,9 +80,57 @@ class SettingsController extends CController
 			throw new UnauthorizedHttpException();
 		}
 
+		$this->checkProfileState($person);
+
 		$this->layout = '/desktop/public-2.php';
 
 		return $this->render("billing", [
+			'person' => $person,
+		]);
+	}
+
+	public function actionShipping($slug, $person_id)
+	{
+		// get the category object
+		$person = Person::findOneSerialized($person_id);
+
+		if (!$person) {
+			throw new NotFoundHttpException();
+		}
+
+		if (!$person->isDeviser()) {
+			throw new NotFoundHttpException();
+		}
+
+		if (!$person->isDeviserEditable()) {
+			throw new UnauthorizedHttpException();
+		}
+
+		if (!$person->isCompletedProfile()) {
+			$this->redirect($person->getCompleteProfileLink());
+		}
+
+		$this->layout = '/desktop/public-2.php';
+
+		return $this->render("shipping", [
+			'person' => $person,
+		]);
+	}
+
+	public function actionOpenOrders($slug, $person_id)
+	{
+		// get the category object
+		$person = Person::findOneSerialized($person_id);
+
+		if (!$person) {
+			throw new NotFoundHttpException();
+		}
+
+		$this->checkProfileState($person);
+
+		$this->layout = '/desktop/public-2.php';
+
+		return $this->render("orders", [
 			'person' => $person,
 		]);
 	}
@@ -60,6 +140,10 @@ class SettingsController extends CController
 		// get the category object
 		$person = Person::findOneSerialized($person_id);
 
+		if (!$person) {
+			throw new NotFoundHttpException();
+		}
+
 		if (!$person->isDeviser()) {
 			throw new NotFoundHttpException();
 		}
@@ -68,9 +152,26 @@ class SettingsController extends CController
 			throw new UnauthorizedHttpException();
 		}
 
+		if (!$person->isCompletedProfile()) {
+			$this->redirect($person->getCompleteProfileLink());
+		}
+
 		\Yii::$app->session->set('person_id_stripe_connection', $person->short_id);
 
 		$this->redirect(StripeHelper::getAuthorizeUrl());
+	}
+
+	protected function checkProfileState(Person $person)
+	{
+		if (!$person->isCompletedProfile()) {
+			$this->redirect($person->getCompleteProfileLink());
+		} else {
+			if ($person->isDeviser() || $person->isInfluencer()) {
+				if (!$person->isPublic()) {
+					$this->redirect($person->getPersonNotPublicLink());
+				}
+			}
+		}
 	}
 
 	/*

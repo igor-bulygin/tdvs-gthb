@@ -19,20 +19,34 @@ class Lang {
 		Yii::t("app/admin", "Catalan");
 	}
 
+	/**
+	 * Returns a list of enabled languages in the application
+	 *
+	 * @return array
+	 */
+	static public function getEnabledLanguages()
+	{
+		return array_merge(
+			self::ES_ES_DESC,
+			self::EN_US_DESC
+//			self::CA_ES_DESC
+		);
+	}
+
+	/**
+	 * Returns a list of all the availables languages in the application
+	 *
+	 * NOTE that a language can be available, but not enabled
+	 * For example:
+	 * 	- spanish can be available to write product descriptions, but can be "not enabled" to select as interface language
+	 *
+	 * @return array
+	 */
 	static public function getAvailableLanguages()
     {
         return array_merge(
-            self::EN_US,
-            self::ES_ES,
-            self::CA_ES
-        );
-    }
-
-	static public function getAvailableLanguagesDescriptions()
-    {
-        return array_merge(
-            self::EN_US_DESC,
             self::ES_ES_DESC,
+            self::EN_US_DESC,
             self::CA_ES_DESC
         );
     }
@@ -48,7 +62,7 @@ class Lang {
 
     static public function getLanguageName($code)
     {
-    	$langs = Lang::getAvailableLanguagesDescriptions();
+    	$langs = Lang::getAvailableLanguages();
 	    if (array_key_exists($code, $langs)) {
 		    return $langs[$code];
 	    }

@@ -13,6 +13,6 @@ class IndexAsset extends AssetBundle {
 		'js/desktop/admin/index.js'
 	];
 	public $depends = [
-		'app\assets\desktop\admin\GlobalAsset'
+		'app\assets\desktop\admin\GlobalAsset',
 	];
 }

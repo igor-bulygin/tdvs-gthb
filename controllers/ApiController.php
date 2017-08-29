@@ -7,8 +7,8 @@ use app\helpers\Utils;
 use app\models\Category;
 use app\models\Country;
 use app\models\Faq;
+use app\models\OldProduct;
 use app\models\Person;
-use app\models\Product;
 use app\models\SizeChart;
 use app\models\Tag;
 use app\models\Term;
@@ -278,18 +278,18 @@ class ApiController extends CController {
 				//TODO: If not admin, force some fields (enabled only, visible by public only, etc...)
 			}
 
-			$res = empty($filters) ? Product::find() : Product::find()->where($filters);
+			$res = empty($filters) ? OldProduct::find() : OldProduct::find()->where($filters);
 
 			$res = $res->asArray()->all();
 		} else if ($request->isPost) {
 			$_product = $this->getJsonFromRequest("product");
 
 			if ($_product["short_id"] === "new") {
-				$_product["short_id"] = (new Product())->genValidID(8);
+				$_product["short_id"] = (new OldProduct())->genValidID(8);
 			}
 
-			/* @var $product \app\models\Product */
-			$product = Product::findOne(["short_id" => $_product["short_id"]]);
+			/* @var $product \app\models\OldProduct */
+			$product = OldProduct::findOne(["short_id" => $_product["short_id"]]);
 			$product->setAttributes($_product, false);
 			$product->save(false);
 
@@ -297,14 +297,14 @@ class ApiController extends CController {
 		} else if ($request->isDelete) {
 			$product = $this->getJsonFromRequest("product");
 
-			/* @var $product \app\models\Product */
-			$product = Product::findOne(["short_id" => $product["short_id"]]);
+			/* @var $product \app\models\OldProduct */
+			$product = OldProduct::findOne(["short_id" => $product["short_id"]]);
 
 			$product->deletePhotos();
 			$product->delete();
 		}
 
-		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_ADMIN);
+		OldProduct::setSerializeScenario(OldProduct::SERIALIZE_SCENARIO_ADMIN);
 		return $res;
 	}
 

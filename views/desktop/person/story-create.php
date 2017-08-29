@@ -1,14 +1,17 @@
 <?php
+
+use app\assets\desktop\deviser\IndexStoryAsset;
 use app\models\Person;
-use app\assets\desktop\deviser\CreateStoryAsset;
 use yii\helpers\Json;
 
-CreateStoryAsset::register($this);
+IndexStoryAsset::register($this);
 
 /** @var Person $person */
-
+$this->title = Yii::t('app/public',
+	'New story by {person_name} - Todevise',
+	['person_name' => $person->getName()]
+);
 $this->params['person'] = $person;
-$this->title = $person->getName() . ' - Todevise';
 $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD, 'person-var-script');
 
 ?>
@@ -18,8 +21,8 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 			<h5 class="stories-title">New Story</h5>
 			<story-main-title story="createStoryCtrl.story" languages="createStoryCtrl.languages"></story-main-title>
 			<story-main-media story="createStoryCtrl.story"></story-main-media>
-			<div dnd-list="createStoryCtrl.story.components" dnd-dragover="createStoryCtrl.dragOver(index)">
-				<move-delete-component class="story-component-wrapper" array="createStoryCtrl.story.components" position="$index" ng-repeat="component in createStoryCtrl.story.components" dnd-draggable="component" dnd-effect-allowed="move" dnd-dragstart="createStoryCtrl.dragStart($index)" dnd-canceled="createStoryCtrl.canceled()" dnd-moved="createStoryCtrl.moved($index)">
+			<div ui-sortable ng-model="createStoryCtrl.story.components">
+				<move-delete-component class="story-component-wrapper" array="createStoryCtrl.story.components" position="$index" ng-repeat="component in createStoryCtrl.story.components">
 					<div class="story-component-wrapper">
 						<story-text-component component="component" languages="createStoryCtrl.languages" ng-if="component.type === 1"></story-text-component>
 						<story-photo-component component="component" ng-if="component.type === 2"></story-photo-component>
@@ -31,8 +34,8 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 			<story-add-component story="createStoryCtrl.story"></story-add-component>
 			<story-category-component story="createStoryCtrl.story" categories="createStoryCtrl.categories"></story-category-component>
 			<story-tag-component story="createStoryCtrl.story" languages="createStoryCtrl.languages"></story-tag-component>
-			<div class="text-center" style="display: block; width: 100%; float: left; margin:50px 0 100px;">
-				<button class="btn btn-default btn-green" ng-click="createStoryCtrl.save(createStoryCtrl.story)">Publish story</button>
+			<div class="text-center" style="display: block; width: 100%; float: left; margin:20px 0 100px;">
+				<button class="btn btn-default btn-green" ng-click="createStoryCtrl.save(createStoryCtrl.story)"><span translate="PUBLISH_STORY"></span></button>
 			</div>
 		</div>
 	</div>

@@ -1,13 +1,13 @@
 <?php
-use yii\web\View;
-use app\models\Lang;
-use yii\helpers\Url;
+
+use app\assets\desktop\admin\SizeChartsAsset;
+use app\helpers\Utils;
+use app\models\MetricType;
+use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Json;
-use app\helpers\Utils;
-use yii\grid\GridView;
-use app\models\MetricType;
-use app\assets\desktop\admin\SizeChartsAsset;
+use yii\helpers\Url;
+use yii\web\View;
 
 /* @var $this yii\web\View */
 /* @var $categories ArrayObject */
@@ -125,7 +125,7 @@ $this->title = 'Todevise / Admin / Size charts';
 
 			</div>
 			<div class='modal-footer'>
-				<button class='btn btn-light-green fc-18 funiv fs0-786 fs-upper' ng-click='create_newCtrl.form.$submitted = true; create_newCtrl.form.$valid && ok()'>
+				<button class='btn btn-light-green fc-18 funiv fs0-786 fs-upper' ng-click='create_newCtrl.form.$submitted = true; create_newCtrl.form.$valid && create_newCtrl.ok()'>
 					<?= Yii::t("app/admin", "Confirm"); ?>
 				</button>
 				<button class='btn btn-grey fc-fff funiv fs-upper fs0-786' ng-click='create_newCtrl.cancel()' type="submit">

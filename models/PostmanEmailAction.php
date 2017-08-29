@@ -31,6 +31,20 @@ class PostmanEmailAction extends CActiveRecord
 	const EMAIL_ACTION_STATE_CANCELED = 'canceled';
 	const EMAIL_ACTION_STATE_USED = 'sent';
 
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $serializeFields = [];
+
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $retrieveExtraFields = [];
+
 
 	public function attributes()
 	{

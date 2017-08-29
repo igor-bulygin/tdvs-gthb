@@ -19,19 +19,19 @@ Products
 * `q`: Search word/s in name and description (LIKE)
 * `deviser`: Filter in products of a specific deviser only
 * `categories`: Filter products related with any category of the list
+* `order_type`: String optional. Avaiable values: (new, old, chepeast, expensive)
 * `page`: Set the result page that want to be retrieved (default: 1)
 * `limit`: Limit the results returned for page (default: 20)
 
 **Response body**:
+
+See the structure of the complete item in view.md
 
 ```
 {
   "items": [
     {
       "id": "a04c31dc",
-      "name": "test product",
-      "slug": "test-product",
-      "description": "The piece",
       ...
     },
     ... 

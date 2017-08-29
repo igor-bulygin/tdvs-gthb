@@ -1,7 +1,8 @@
 (function () {
 	"use strict";
 
-	function controller(storyDataService, languageDataService, UtilService, personDataService, productDataService, $window) {
+	function controller(storyDataService, languageDataService, UtilService, personDataService, productDataService, 
+		$window, dragndropService) {
 		var vm = this;
 		vm.story = angular.copy(story);
 		vm.save = save;
@@ -47,8 +48,7 @@
 			}
 
 			function onUpdateStorySuccess(data) {
-				console.log(data);
-				//$window.location.href = currentHost() + data.view_link;
+				$window.location.href = currentHost() + data.view_link;
 			}
 
 			storyDataService.updateStory(vm.story, params, onUpdateStorySuccess, UtilService.onError);
@@ -56,7 +56,7 @@
 	}
 
 	angular
-		.module('todevise')
+		.module('person')
 		.controller('editStoryCtrl', controller);
 
 }());

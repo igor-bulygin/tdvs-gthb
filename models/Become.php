@@ -1,17 +1,37 @@
 <?php
 namespace app\models;
 
-use Yii;
 use app\helpers\CActiveRecord;
+use Yii;
 use yii\base\NotSupportedException;
 use yii\web\IdentityInterface;
 
-class Become extends CActiveRecord implements IdentityInterface {
+/**
+ * Class Become
+ * @deprecated unused collection
+ * @package app\models
+ */
+class Become extends CActiveRecord implements IdentityInterface
+{
 
 	const ADMIN = 0;
 	const CLIENT = 1;
 	const DEVISER = 2;
 	const COLLABORATOR = 3;
+
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $serializeFields = [];
+
+	/**
+	 * The attributes that should be serialized
+	 *
+	 * @var array
+	 */
+	protected static $retrieveExtraFields = [];
 
 	//public $accessToken;
 

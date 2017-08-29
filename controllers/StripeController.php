@@ -23,6 +23,8 @@ class StripeController extends CController
 		}
 		Yii::$app->session->remove('person_id_stripe_connection');
 
+		// This action must be done in Owner scenario to get the person object equal to the database object
+		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
 		$person = Person::findOneSerialized($person_id);
 		if (!$person->isDeviser() || !$person->isDeviserEditable()) {
 			throw new NotFoundHttpException();
@@ -35,9 +37,13 @@ class StripeController extends CController
 			// Validate token
 			$resp = StripeHelper::validateAuthorizationToken($code);
 
-			// Save current connect info
-			$person->settingsMapping->stripe_info = $resp;
-			$person->save();
+			if (!$resp) {
+				Yii::info('Stripe connect back with errors. Validation result: '.$resp, __METHOD__);
+			} else {
+				// Save current connect info
+				$person->settingsMapping->stripe_info = $resp;
+				$person->save();
+			}
 
 			$this->redirect(Url::to(['settings/billing', 'slug' => $person->slug, 'person_id' => $person->short_id]));
 
@@ -73,7 +79,7 @@ class StripeController extends CController
 //				}
 //
 //				$customer = \Stripe\Customer::create([
-//					'email' => $order->clientInfoMapping->email,
+//					'email' => $order->personInfoMapping->email,
 //					'source' => $token,
 //				]);
 //

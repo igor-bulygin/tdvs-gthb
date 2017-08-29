@@ -7,14 +7,23 @@ class GlobalAsset extends AssetBundle {
 	public $basePath = '@webroot';
 	public $baseUrl = '@web';
 	public $css = [
-		'css/desktop/deviser/global.css'
 	];
 	public $js = [
-		'js/desktop/deviser/global.js'
+		'js/desktop/person/store-grid.js',
+		'js/desktop/person/complete-profile.js',
+		'js/desktop/person/view-store.js',
+		'js/desktop/person/edit-store.js',
+		'js/desktop/person/edit-header.js',
+		'js/desktop/person/edit-about/edit-about.js',
+		'js/desktop/person/edit-faq.js',
+		'js/desktop/person/edit-press/edit-press.js',
+		'js/desktop/person/edit-videos/edit-videos.js',
+		'js/desktop/person/make-profile-public.js',
+		'js/desktop/person/person-not-public.js',
 	];
 	public $depends = [
-		'app\assets\libs\angularToastrAsset',
-		'app\assets\libs\underscoreAsset',
-		'app\assets\desktop\GlobalAsset'
+		'app\assets\libs\macyAsset',
+		'app\assets\desktop\GlobalAsset',
+		'app\assets\desktop\deviser\IndexAsset',
 	];
 }

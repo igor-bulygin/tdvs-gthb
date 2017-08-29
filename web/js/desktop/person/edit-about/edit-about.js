@@ -1,7 +1,7 @@
 (function() {
 
 	function controller(personDataService, UtilService, languageDataService, productDataService, 
-		Upload, uploadDataService, $timeout, $rootScope, $scope, deviserEvents, $uibModal, dragndropService, $window) {
+		Upload, uploadDataService, $timeout, $rootScope, $scope, deviserEvents, $uibModal, $window) {
 
 		var vm = this;
 		vm.stripHTMLTags = UtilService.stripHTMLTags;
@@ -11,10 +11,6 @@
 		vm.uploadCV = uploadCV;
 		vm.deleteCV = deleteCV;
 		vm.deleteImage = delete_image;
-		vm.dragOver = dragOver;
-		vm.dragStart = dragStart;
-		vm.moved = moved;
-		vm.canceled = canceled;
 		vm.checkPhotos = checkPhotos;
 		vm.biography_language = "en-US";
 		vm.images = [];
@@ -32,16 +28,16 @@
 			function setEditTexts(type) {
 				switch(type) {
 					case 2: 
-						vm.categories_text = "Choose your field(s) of work";
-						vm.biography_text = "Brand statement / biography";
-						vm.resume_text = "Resume or brand presentation";
-						vm.resume_sub_text = "Even more things to tell your customers? Upload it here."
+						vm.categories_text = "CHOOSE_FIELD_WORK";
+						vm.biography_text = "BIOGRAPHY_TEXT_DEVISER";
+						vm.resume_text = "RESUME_TEXT_DEVISER";
+						vm.resume_sub_text = "RESUME_SUBTEXT_DEVISER";
 						break;
 					default:
-						vm.categories_text = "Choose your field(s) of expertise";
-						vm.biography_text = "Tell us more about yourself";
-						vm.resume_text = "Resume or presentation";
-						vm.resume_sub_text = "Even more ways to tell your story."
+						vm.categories_text = "CHOOSE_FIELD_EXPERTISE";
+						vm.biography_text = "BIOGRAPHY_TEXT_OTHER";
+						vm.resume_text = "RESUME_TEXT_OTHER";
+						vm.resume_sub_text = "RESUME_SUBTEXT_OTHER";
 						break;
 				}
 			}
@@ -185,26 +181,6 @@
 			vm.person.curriculum = '';
 		}
 
-		/* drag and drop functions */
-
-		function dragStart(index) {
-			dragndropService.dragStart(index, vm.images);
-		}
-
-		function dragOver(index) {
-			vm.images = dragndropService.dragOver(index, vm.images);
-			return true;
-		}
-
-		function moved(index) {
-			vm.images = dragndropService.moved(vm.images);
-			vm.person.media = parsePhotos();
-		}
-
-		function canceled(){
-			vm.images = dragndropService.canceled();
-		}
-
 		function save() {
 			function parseTags(value) {
 				return value.replace(/<[^\/>][^>]*><\/[^>]+>/gim, "");
@@ -275,7 +251,6 @@
 			}
 		}, true);
 
-
 	}
 
 	var component = {
@@ -284,7 +259,7 @@
 		controllerAs: 'editAboutCtrl',
 	}
 
-	angular.module('todevise')
+	angular.module('person')
 		.component('editAbout', component);
 
 }())

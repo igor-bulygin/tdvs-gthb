@@ -8,7 +8,6 @@ use app\models\Lang;
 use app\models\MadeToOrder;
 use app\models\Person;
 use app\models\Product;
-use app\models\Product2;
 use Yii;
 use yii\filters\AccessControl;
 use yii\mongodb\Collection;
@@ -40,7 +39,7 @@ class ProductController extends CController
 	public function actionIndex()
 	{
 		// show only fields needed in this scenario
-		Product2::setSerializeScenario(Product2::SERIALIZE_SCENARIO_PUBLIC);
+		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_PUBLIC);
 
 		$maxLimit = 120;
 		// set pagination values
@@ -52,17 +51,18 @@ class ProductController extends CController
 		$offset = ($limit * ($page - 1));
 
 		$text = Yii::$app->request->get("q"); // search in name, description, and more
-		$products = Product2::findSerialized([
+		$products = Product::findSerialized([
 				"id" => Yii::$app->request->get("id"),
 				"name" => Yii::$app->request->get("name"), // search only in name attribute
 				"text" => Yii::$app->request->get("q"), // search in name, description, and more
 				"deviser_id" => Yii::$app->request->get("deviser"),
 				"categories" => Yii::$app->request->get("categories"),
-				"product_state" => Product2::PRODUCT_STATE_ACTIVE,
+				"order_type" => Yii::$app->request->get("order_type"),
+				"product_state" => Product::PRODUCT_STATE_ACTIVE,
 				"limit" => $limit,
 				"offset" => $offset,
 		]);
-		$total = Product2::$countItemsFound;
+		$total = Product::$countItemsFound;
 		$more = $total > ($page * $limit) ? 1 : 0;
 
 		$htmlWorks = $this->renderPartial("more-products", [
@@ -84,7 +84,7 @@ class ProductController extends CController
 	public function actionMoreWorks()
 	{
 		// show only fields needed in this scenario
-		Product2::setSerializeScenario(Product2::SERIALIZE_SCENARIO_PUBLIC);
+		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_PUBLIC);
 
 		$maxLimit = 120;
 		// set pagination values
@@ -95,17 +95,17 @@ class ProductController extends CController
 		$page = ($page < 1) ? 1 : $page;
 		$offset = ($limit * ($page - 1));
 
-		$products = Product2::findSerialized([
+		$products = Product::findSerialized([
 				"id" => Yii::$app->request->get("id"),
 				"name" => Yii::$app->request->get("name"), // search only in name attribute
 				"text" => Yii::$app->request->get("q"), // search in name, description, and more
 				"deviser_id" => Yii::$app->request->get("deviser"),
 				"categories" => Yii::$app->request->get("categories"),
-				"product_state" => Product2::PRODUCT_STATE_ACTIVE,
+				"product_state" => Product::PRODUCT_STATE_ACTIVE,
 				"limit" => $limit,
 				"offset" => $offset,
 		]);
-		$total = Product2::$countItemsFound;
+		$total = Product::$countItemsFound;
 		$more = $total > ($page * $limit) ? 1 : 0;
 
 		$this->layout = '/desktop/empty-layout.php';
@@ -124,12 +124,12 @@ class ProductController extends CController
 
 	public function actionDetail($slug, $product_id)
 	{
-		Product2::setSerializeScenario(Product2::SERIALIZE_SCENARIO_PUBLIC);
+		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_PUBLIC);
 
 		// get the product
-		$product = Product2::findOneSerialized($product_id);
+		$product = Product::findOneSerialized($product_id);
 
-		if (empty($product) || $product->product_state != Product2::PRODUCT_STATE_ACTIVE) {
+		if (empty($product) || $product->product_state != Product::PRODUCT_STATE_ACTIVE) {
 			throw new HttpException(404, 'The requested item could not be found.');
 		}
 
@@ -141,48 +141,48 @@ class ProductController extends CController
 		$deviser = Person::findOneSerialized($product->deviser_id);
 
 		// get other products of the deviser
-		$deviserProducts = Product2::findSerialized([
+		$deviserProducts = Product::findSerialized([
 			'deviser_id' => $product->deviser_id,
-			'product_state' => Product2::PRODUCT_STATE_ACTIVE,
+			'product_state' => Product::PRODUCT_STATE_ACTIVE,
 		]);
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("detail", [
 			'product' => $product,
-			'deviser' => $deviser,
-			'deviserProducts' => $deviserProducts,
+			'person' => $deviser,
+			'personProducts' => $deviserProducts,
 		]);
 	}
 
-	public function actionCreate($slug, $deviser_id)
+	public function actionCreate($slug, $person_id)
 	{
-		/** @var Person $deviser */
-		$deviser = Person::findOneSerialized($deviser_id);
+		/** @var Person $person */
+		$person = Person::findOneSerialized($person_id);
 
-		if (!$deviser) {
+		if (!$person) {
 			throw new NotFoundHttpException();
 		}
 
-		if (!$deviser->isDeviserEditable()) {
+		if (!$person->isDeviserEditable()) {
 			throw new UnauthorizedHttpException();
 		}
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("product-create", [
-			'person' => $deviser,
+			'person' => $person,
 		]);
 	}
 
-	public function actionEdit($slug, $deviser_id, $product_id)
+	public function actionEdit($slug, $person_id, $product_id)
 	{
-		/** @var Person $deviser */
-		$deviser = Person::findOneSerialized($deviser_id);
+		/** @var Person $person */
+		$person = Person::findOneSerialized($person_id);
 
-		if (!$deviser) {
+		if (!$person) {
 			throw new NotFoundHttpException();
 		}
 
-		if (!$deviser->isDeviserEditable()) {
+		if (!$person->isDeviserEditable()) {
 			throw new UnauthorizedHttpException();
 		}
 
@@ -194,7 +194,7 @@ class ProductController extends CController
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("product-edit", [
-			'person' => $deviser,
+			'person' => $person,
 			'product' => $product,
 		]);
 	}
@@ -247,15 +247,15 @@ class ProductController extends CController
 		ini_set('memory_limit', '2048M');
 		set_time_limit(-1);
 
-		Product2::setSerializeScenario(Product2::SERIALIZE_SCENARIO_OWNER);
+		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_OWNER);
 
-		/* @var Product2[] $products */
-		$products = Product2::findSerialized();
+		/* @var Product[] $products */
+		$products = Product::findSerialized();
 		foreach ($products as $product) {
 			// fix name field, must be an array
 			if (!empty($product->name) && !is_array($product->name)) {
 				$name = [];
-				foreach (Lang::getAvailableLanguagesDescriptions() as $key => $langName) {
+				foreach (Lang::getAvailableLanguages() as $key => $langName) {
 					$name[$key] = $product->name;
 				}
 				$product->setAttribute('name', $name);
@@ -264,7 +264,7 @@ class ProductController extends CController
 			// fix description field, must be an array
 			if (!empty($product->description) && !is_array($product->description)) {
 				$description = [];
-				foreach (Lang::getAvailableLanguagesDescriptions() as $key => $langName) {
+				foreach (Lang::getAvailableLanguages() as $key => $langName) {
 					$description[$key] = $product->description;
 				}
 				$product->setAttribute('description', $description);
@@ -278,7 +278,7 @@ class ProductController extends CController
 //					$product->product_state = Product2::PRODUCT_STATE_ACTIVE;
 //				}
 				// for the moment all products are public
-				$product->product_state = Product2::PRODUCT_STATE_ACTIVE;
+				$product->product_state = Product::PRODUCT_STATE_ACTIVE;
 			}
 
 			// available on price_stock
@@ -321,10 +321,10 @@ class ProductController extends CController
 		ini_set('memory_limit', '2048M');
 		set_time_limit(-1);
 
-		Product2::setSerializeScenario(Product2::SERIALIZE_SCENARIO_OWNER);
+		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_OWNER);
 
-		/* @var Product2[] $products */
-		$products = Product2::findSerialized();
+		/* @var Product[] $products */
+		$products = Product::findSerialized();
 		foreach ($products as $product) {
 			if (empty($product->deviser_id)) {
 
