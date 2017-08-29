@@ -674,7 +674,8 @@ $this->title = Yii::t('app/public', 'Todevise');
 		<h3 class="title-product-name">Discover what´s next</h3>
 		<div id="macy-container">
 			<?php foreach ($works as $i => $work) { ?>
-				<div class="grid col-md-2">
+			<div class="menu-category list-group">
+				<div class="grid">
 					<figure class="effect-zoe">
 						<image-hover-buttons product-id="{{'<?= $work->short_id ?>'}}" is-loved="{{'<?=$work->isLovedByCurrentUser() ? 1 : 0 ?>'}}" is-mine="{{'<?= $work->isWorkFromCurrentUser() ? 1 : 0 ?>'}}">
 							<a href="<?= $work->getViewLink()?>">
@@ -691,6 +692,7 @@ $this->title = Yii::t('app/public', 'Todevise');
 						</a>
 					</figure>
 				</div>
+			</div>
 			<?php } ?>
 		</div>
 		<?php /*

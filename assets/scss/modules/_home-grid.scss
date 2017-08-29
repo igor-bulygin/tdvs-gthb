@@ -26,7 +26,11 @@
             }
             p{
                 &.instauser{
-                      @include opacity(1);  
+                    @include opacity(1); 
+					position: absolute;
+					bottom: 33px;
+					text-align: center;
+					width: 100%;
                 } 
             }
 			.hover-btns-wrapper{
@@ -35,16 +39,16 @@
         }
         img{
             width:100%;
+			@include border-radius(6px,6px,6px,6px);
         }
         figcaption{
             @extend %absolut-bottom;
-            @include size(100%,inherit);
+            @include size(100%,100%);
             @include backface-visibility(hidden);
             padding: 5px;
-            background: $white;
-            @include opacity(0.85);
+            background: rgba(255, 255, 255, 0.63);
             color: $almost_black;
-            @include transition(transform 0.35s);
+            @include transition(transform 0s);
             @include transform(translate3d(0,100%,0));
             &:before,&:after{
                 pointer-events: none;
@@ -55,13 +59,25 @@
                 text-align: center;
                 &.instauser{
                     @include opacity(0);
-                    @include transition(opacity 1.5s);
+                    @include transition(opacity 0s);
                     @include backface-visibility(hidden);
+					font-family: $font-family--name;
+					color: $black;
+					font-size: 40px!important;
+    				max-width: 90%;
+					line-height: 39px;
+					text-transform: capitalize;
                 }
                 &.price{
                     font-size: 14px!important;
                     font-weight: bold;
                     color: $dark_grey;
+					position: absolute;
+					bottom: 5px;
+					text-align: center;
+					max-width: 90%;
+					color: $black;
+					font-size: 25px!important;
                 }
             }
         }
