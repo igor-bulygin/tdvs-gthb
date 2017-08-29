@@ -1,10 +1,10 @@
 <?php
 
-use app\assets\desktop\pub\PublicCommonAsset;
+use app\assets\desktop\pub\Index2Asset;
 use app\helpers\Utils;
 use app\models\Person;
 
-PublicCommonAsset::register($this);
+Index2Asset::register($this);
 
 $this->title = Yii::t('app/public', 'Todevise');
 
@@ -12,6 +12,7 @@ $this->title = Yii::t('app/public', 'Todevise');
 /** @var int $totalDevisers */
 /** @var Person[][] $influencers */
 /** @var int $totalInfluencers */
+/** @var \app\models\Product[] $works */
 /** @var \app\models\Product[] $works12 */
 /** @var \app\models\Product[] $works3 */
 /** @var \app\models\Product[][] $moreWork */
@@ -260,7 +261,7 @@ $this->title = Yii::t('app/public', 'Todevise');
 						</div>
 					<?php } ?>
 
-					<!--
+					<?php /*
 					<div class="col-md-3">
 							<a href="<?= $influencer->getLovedLink()?>">
 									<figure class="showcase">
@@ -517,12 +518,13 @@ $this->title = Yii::t('app/public', 'Todevise');
 									</figure>
 								</a>
 						</div>
-						-->
+						*/ ?>
 				</div>
 			</div>
 		</div>
 </section>
-<!--<section class="grid-wrapper">
+<?php /*
+<section class="grid-wrapper">
 	<div class="container">
 		<div class="section-title">
 			Highlighted Works
@@ -576,10 +578,10 @@ $this->title = Yii::t('app/public', 'Todevise');
 		</div>
 	</div>
 </section>
--->
+ */ ?>
 <!-- /GRID -->
 
-<!--
+<?php /*
 <?php if ($boxes) { ?>
 	<section class="grid-wrapper">
 		<div class="container">
@@ -663,13 +665,35 @@ $this->title = Yii::t('app/public', 'Todevise');
 		</div>
 	</section>
 <?php } ?>
--->
+*/?>
 
 
 <!-- GRID -->
 <section class="grid-wrapper">
 	<div class="container">
 		<h3 class="title-product-name">Discover what´s next</h3>
+		<div id="macy-container">
+			<?php foreach ($works as $i => $work) { ?>
+				<div class="grid col-md-2">
+					<figure class="effect-zoe">
+						<image-hover-buttons product-id="{{'<?= $work->short_id ?>'}}" is-loved="{{'<?=$work->isLovedByCurrentUser() ? 1 : 0 ?>'}}" is-mine="{{'<?= $work->isWorkFromCurrentUser() ? 1 : 0 ?>'}}">
+							<a href="<?= $work->getViewLink()?>">
+								<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($work->getMainImage())->resize(400, 0) ?>">
+							</a>
+						</image-hover-buttons>
+						<a href="<?= $work->getViewLink()?>">
+							<figcaption>
+								<p class="instauser">
+									<?= Utils::l($work->name) ?>
+								</p>
+								<p class="price">€ <?= $work->getMinimumPrice() ?></p>
+							</figcaption>
+						</a>
+					</figure>
+				</div>
+			<?php } ?>
+		</div>
+		<?php /*
 		<div>
 			<?php foreach ($moreWork as $worksGroup) { ?>
 			<?php foreach ($worksGroup["twelve"] as $i => $work) { ?>
@@ -717,6 +741,7 @@ $this->title = Yii::t('app/public', 'Todevise');
 			<?php } ?>
 			<?php } ?>
 		</div>
+ 		*/ ?>
 	</div>
 </section>
 <!-- /GRID -->
