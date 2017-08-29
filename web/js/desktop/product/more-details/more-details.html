@@ -1,10 +1,10 @@
 <div class="card">
-	<span class="title">More details about your work (optional)</span>
+	<span class="title" translate="PRODUCT.MORE_DETAILS.TITLE"></span>
 	<form name="productMoreDetailsCtrl.form" novalidate>
 		<div class="row">
-			<label class="col-xs-12">Description photos</label>
-			<div class="col-md-2 button"  ngf-drop-available="productMoreDetailsCtrl.isDropAvailable" ngf-select="productMoreDetailsCtrl.openCropModal($file)" ngf-accept="'image/*'">+ Add photos</div>
-			<span class="info col-md-10">Enrich your work description with photos that showcase its main features.</span>
+			<label class="col-xs-12" translate="PRODUCT.MORE_DETAILS.PHOTOS_DESCRIPTION"></label>
+			<div class="col-md-2 button"  ngf-drop-available="productMoreDetailsCtrl.isDropAvailable" ngf-select="productMoreDetailsCtrl.openCropModal($file)" ngf-accept="'image/*'" translate="PRODUCT.MORE_DETAILS.ADD_PHOTOS"></div>
+			<span class="info col-md-10" translate="PRODUCT.MORE_DETAILS.ENRICH_DESCRIPTION"></span>
 			<div class="col-md-8">
 				<div class="col-md-2 pad-about mr-15">
 					<div ng-if="productMoreDetailsCtrl.isDropAvailable">
@@ -35,26 +35,24 @@
 		</div>
 		<div class="row" id="faq">
 			<div class="col-md-12">
-				<label for="faqs">WORK FAQs</label>
+				<label for="faqs" translate="PRODUCT.MORE_DETAILS.WORK_FAQS"></label>
 			</div>
-			<span class="col-md-12">Do you want to write FAQ question specific for this product?</span>
+			<span class="col-md-12" translate="PRODUCT.MORE_DETAILS.WRITE_FAQ"></span>
 			<div class="col-md-12">
 			<div class="radio radio-inline">
 					<input type="radio" name="faq_selected" id="faq_selected" value="faq_selected" ng-model="productMoreDetailsCtrl.faq_selected" ng-value="true" ng-change="productMoreDetailsCtrl.showFaq()">
-					<label for="faq_selected">
-						YES
+					<label for="faq_selected" translate="PRODUCT.YES">
 					</label>
 				</div>
 				<div class="radio radio-inline">
 					<input type="radio" name="faq_unselected" id="faq_unselected" value="faq_unselected" ng-model="productMoreDetailsCtrl.faq_selected" ng-value="false" checked>
-					<label for="faq_unselected">
-						NO
+					<label for="faq_unselected"  translate="PRODUCT.NO">
 					</label>
 				</div>
 			</div>
 			<div ng-if="productMoreDetailsCtrl.faq_selected">
 				<div class="col-md-12 pad-about" ng-repeat="question in productMoreDetailsCtrl.product.faq track by $index" class="delete-options-wrapper">
-					<a href="" class="delete-link pull-right" ng-click="productMoreDetailsCtrl.deleteQuestion($index)">Delete question</a>
+					<a href="" class="delete-link pull-right" ng-click="productMoreDetailsCtrl.deleteQuestion($index)" translate="PRODUCT.MORE_DETAILS.DELETE_QUESTION"></a>
 					<div class="edit-faq-panel no-mar">
 						<div class="faq-language-menu">
 							<ol class="nya-bs-select form-control" ng-model="productMoreDetailsCtrl.faq_helper[$index].languageSelected" ng-change="productMoreDetailsCtrl.parseQuestion(question, $index)">
@@ -67,24 +65,24 @@
 							</ol>
 							<div class="faq-row">
 								<div class="col-sm-1">
-									<span class="faq-edit-question">Question</span>
+									<span class="faq-edit-question" translate="PRODUCT.MORE_DETAILS.QUESTION"></span>
 								</div>
 								<div class="col-sm-11">
-									<input type="text" name="{{'faq_question_' + $index}}" class="faq-edit-answer ng-class:{'error-input': productMoreDetailsCtrl.faqRequired && !question.question['en-US']}" placeholder="Question" ng-model="question.question[productMoreDetailsCtrl.faq_helper[$index].languageSelected]" required>
+									<input type="text" name="{{'faq_question_' + $index}}" class="faq-edit-answer ng-class:{'error-input': productMoreDetailsCtrl.faqRequired && !question.question['en-US']}" placeholder="{{ 'PRODUCT.MORE_DETAILS.QUESTION' | translate }}" ng-model="question.question[productMoreDetailsCtrl.faq_helper[$index].languageSelected]" required>
 								</div>
 							</div>
 							<div class="faq-row">
 								<div class="col-sm-1">
-									<span class="faq-edit-question">Answer</span>
+									<span class="faq-edit-question" translate="PRODUCT.MORE_DETAILS.ANSWER"></span>
 								</div>
 								<div class="col-sm-11">
-									<div class="faq-edit-answer ng-class:{'error-input': productMoreDetailsCtrl.faqRequired && !question.answer['en-US']}" name="{{'faq_answer_' + $index}}" text-angular ng-model="question.answer[productMoreDetailsCtrl.faq_helper[$index].languageSelected]" ta-toolbar="[]" placeholder="Answer" ta-paste="productMoreDetailsCtrl.stripHTMLTags($html)" required></div>
+									<div class="faq-edit-answer ng-class:{'error-input': productMoreDetailsCtrl.faqRequired && !question.answer['en-US']}" name="{{'faq_answer_' + $index}}" text-angular ng-model="question.answer[productMoreDetailsCtrl.faq_helper[$index].languageSelected]" ta-toolbar="[]" placeholder="{{ 'PRODUCT.MORE_DETAILS.ANSWER' | translate }}" ta-paste="productMoreDetailsCtrl.stripHTMLTags($html)" required></div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<a class="add-cathegory" href="" ng-click="productMoreDetailsCtrl.addFaq()">+ Add another question</a>
+				<a class="add-cathegory" href="" ng-click="productMoreDetailsCtrl.addFaq()" translate="PRODUCT.MORE_DETAILS.ADD_QUESTION"></a>
 			</div>
 		</div>
 	</form>
