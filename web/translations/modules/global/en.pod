@@ -1,0 +1,7 @@
+{
+	"global": {
+		"CANCEL": "Cancel",
+		"DELETE": "Delete",
+		"SEARCH": "Search"
+	}
+}

@@ -2,7 +2,6 @@
 	"boxes": {
 		"NAME_BOX": "Nombre de la caja",
 		"DESCRIPTION": "Descripción",
-		"CANCEL": "Cancelar",
 		"CREATE": "Crear",
 		"save": {
 			"CREATE": "@:boxes.CREATE",
@@ -10,7 +9,7 @@
 			"SAVE_IN_BOX": "Guardar en una caja",
 			"SELECT_BOX": "Seleccionar caja",
 			"TOTAL_BOX": "({{total}} en total)",
-			"SEARCH": "Buscar",
+			"SEARCH": "@:global.SEARCH",
 			"CREATE_NEW_BOX": "Crear caja nueva",
 			"NO_BOXES_1": "Aún no tienes ninguna caja creada.",
 			"NO_BOXES_2": "Crea una pulsando el botón <span>Crear caja nueva</span>."
@@ -22,8 +21,8 @@
 			"CREATE_BOX": "Crear caja"
 		},
 		"delete": {
-			"CANCEL": "@:boxes.CANCEL",
-			"DELETE": "Borrar",
+			"CANCEL": "@:global.CANCEL",
+			"DELETE": "@:global.DELETE",
 			"DELETE_BOX_PERMANENTLY": "¿Estás seguro de querer borrar permanentemente esta caja?",
 			"NOT_ABLE_RECOVER": "Si la borras no se podrá recuperar."
 		},

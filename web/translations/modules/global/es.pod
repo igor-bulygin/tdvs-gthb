@@ -1,0 +1,7 @@
+{
+	"global": {
+		"CANCEL": "Cancelar",
+		"DELETE": "Borrar",
+		"SEARCH": "Buscar"
+	}
+}
