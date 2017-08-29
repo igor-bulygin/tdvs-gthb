@@ -243,11 +243,11 @@ $this->title = Yii::t('app/public', 'Todevise');
 										</div>
 									</div>
 									<figcaption>
-										<div class="row">
-											<div class="col-md-6">
+										<div class="row no-mar">
+											<div class="col-md-8">
 												<span class="boxes-text align-left"><?=$box->name?></span>
 											</div>
-											<div class="col-md-6">
+											<div class="col-md-4">
 												<button class="btn btn-single-love btn-love-box">
 													<span class="number"><?=count($products)?></span>
 													<i class="ion-heart"></i>

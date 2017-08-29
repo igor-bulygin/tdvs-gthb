@@ -775,13 +775,10 @@ a, a:hover, a:focus {
 .btn-single-love {
   background-color: transparent;
   color: #1C1919;
-  width: 70px;
-  height: 40px;
   padding-top: 6px; }
   .btn-single-love i {
     font-size: 32px;
-    vertical-align: sub;
-    padding: 9px; }
+    vertical-align: sub; }
   .btn-single-love .number {
     color: #1C1919;
     font-size: 16px;

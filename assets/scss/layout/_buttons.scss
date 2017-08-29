@@ -246,13 +246,10 @@
     @extend %btn;
     background-color:transparent;
     color: $black;
-	width: 70px;
-    height: 40px;
     padding-top: 6px;
 	i{
 	    font-size: 32px;
 		vertical-align: sub;
-		padding: 9px;
 	}
 	.number{
 		color: $black;
