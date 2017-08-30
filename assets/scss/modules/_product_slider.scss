@@ -40,7 +40,6 @@
 }
 #carousel-custom .carousel-outer {
     position: relative;
-	background-color: #eee;
 }
 .product-slide{
     /*max-width: 480px!important;*/
@@ -58,7 +57,7 @@
     @include size(50px,50px);
     color: $black;
     display: block;
-    background-color: $dark_grey;
+    background-color: #e2e2e2;
     @include border-radius(32px,32px,32px,32px);
     text-shadow: none;
     font-size: 34px;

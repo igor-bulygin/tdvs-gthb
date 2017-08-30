@@ -6308,8 +6308,7 @@ h3 {
   filter: alpha(opacity=75); }
 
 #carousel-custom .carousel-outer {
-  position: relative;
-  background-color: #eee; }
+  position: relative; }
 
 .product-slide {
   /*max-width: 480px!important;*/
@@ -6328,7 +6327,7 @@ h3 {
   height: 50px;
   color: #1C1919;
   display: block;
-  background-color: #939393;
+  background-color: #e2e2e2;
   border-radius: 32px 32px 32px 32px !important;
   -webkit-border-radius: 32px 32px 32px 32px !important;
   -moz-border-radius: 32px 32px 32px 32px !important;
