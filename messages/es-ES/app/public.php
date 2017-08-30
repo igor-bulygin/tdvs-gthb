@@ -64,7 +64,7 @@ return [
 	'SELECT_CATEGORY' => 'Selecciona categoría',
 	'SELECT_COUNTRY' => 'Selecciona el país',
 	'SELECT_METRIC_UNIT' => 'Selecciona la unidad métrica',
-	'SETTINGS' => 'Preferencias',
+	'SETTINGS' => 'Ajustes',
 	'SHIPPING_SETTINGS' => 'Preferencias de envío',
 	'SIGNUP' => 'Regístrate',
 	'STORIES' => 'Historias',
