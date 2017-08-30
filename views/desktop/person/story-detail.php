@@ -11,7 +11,7 @@ IndexStoryAsset::register($this);
 /** @var \app\models\Story $story */
 
 $this->title = Yii::t('app/public',
-	'{story_title} by {person_name} - Todevise',
+	'{story_title} by {person_name}',
 	['story_title' => $story->getTitle(), 'person_name' => $person->getName()]
 );
 $this->params['person'] = $person;

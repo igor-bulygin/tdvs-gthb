@@ -10,7 +10,7 @@ GlobalAsset::register($this);
 /** @var \app\models\Product $product */
 
 $this->title = Yii::t('app/public',
-	'Edit {product_name} by {person_name} - Todevise',
+	'Edit {product_name} by {person_name}',
 	['product_name' => $product->name, 'person_name' => $person->getName()]
 );
 $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD, 'person-var-script');

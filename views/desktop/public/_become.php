@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = [
 
 BecomeAsset::register($this);
 
-$this->title = Yii::t('app/old', 'Become a deviser - Todevise');
+$this->title = Yii::t('app/old', 'Become a deviser');
 
 $lang = Yii::$app->language;
 

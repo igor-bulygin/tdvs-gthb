@@ -4,7 +4,7 @@ use app\assets\desktop\pub\PublicCommonAsset;
 
 PublicCommonAsset::register($this);
 
-$this->title = Yii::t('app/public', 'About us - Todevise');
+$this->title = Yii::t('app/public', 'About us');
 
 ?>
 

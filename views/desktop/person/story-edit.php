@@ -9,7 +9,7 @@ IndexStoryAsset::register($this);
 /** @var Person $person */
 /** @var \app\models\Story $story */
 $this->title = Yii::t('app/public',
-	'Edit story {story_title} by {person_name} - Todevise',
+	'Edit story {story_title} by {person_name}',
 	['story_title' => $story->getTitle(), 'person_name' => $person->getName()]
 );
 $this->params['person'] = $person;

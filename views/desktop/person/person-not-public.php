@@ -10,7 +10,7 @@ GlobalAsset::register($this);
 /** @var Person $person */
 /** @var \app\models\Product[] $products */
 $this->title = Yii::t('app/public',
-	'Almost done! {person_name} - Todevise',
+	'Almost done! {person_name}',
 	['person_name' => $person->getName()]
 );
 $this->params['person'] = $person;

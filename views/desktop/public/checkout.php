@@ -7,7 +7,7 @@ use yii\helpers\Json;
 
 GlobalAsset::register($this);
 
-$this->title = Yii::t('app/public', 'Checkout - Todevise');
+$this->title = Yii::t('app/public', 'Checkout');
 
 $this->params['person'] = $person;
 $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 'person-var-script');

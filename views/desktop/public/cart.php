@@ -6,7 +6,7 @@ use app\assets\desktop\cart\GlobalAsset;
 
 GlobalAsset::register($this);
 
-$this->title = Yii::t('app/public', 'Cart - Todevise');
+$this->title = Yii::t('app/public', 'Cart');
 ?>
 
 <div class="store" ng-controller="cartOverviewCtrl as cartOverviewCtrl">

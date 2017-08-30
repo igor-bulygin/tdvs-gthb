@@ -10,7 +10,7 @@ GlobalAsset::register($this);
 
 /** @var Person $person */
 
-$this->title = Yii::t('app/public', 'Billings & Payments - Todevise');
+$this->title = Yii::t('app/public', 'Billings & Payments');
 
 $this->params['person'] = $person;
 $this->params['settings_menu_active_option'] = 'billing';

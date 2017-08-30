@@ -7,7 +7,7 @@ PublicCommonAsset::register($this);
 
 /** @var Person $deviser */
 
-$this->title = Yii::t('app/public', 'Become a deviser - Todevise');
+$this->title = Yii::t('app/public', 'Become a deviser');
 
 ?>
 

@@ -12,7 +12,7 @@ GlobalAsset::register($this);
 /** @var \app\models\Box[] $moreBoxes */
 
 $this->title = Yii::t('app/public',
-	'{box_name} by {person_name} - Todevise',
+	'{box_name} by {person_name}',
 	['box_name' => $box->name, 'person_name' => $person->getName()]
 );
 

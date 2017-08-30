@@ -10,7 +10,7 @@ GlobalAsset::register($this);
 
 /** @var Person $person */
 $this->title = Yii::t('app/public',
-	'Videos by {person_name} - Todevise',
+	'Videos by {person_name}',
 	['person_name' => $person->getName()]
 );
 $this->params['person'] = $person;

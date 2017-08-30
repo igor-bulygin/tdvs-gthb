@@ -14,7 +14,7 @@ GlobalAsset::register($this);
 /** @var PersonVideo $video */
 
 $this->title = Yii::t('app/public',
-	'{product_name} by {person_name} - Todevise',
+	'{product_name} by {person_name}',
 	['product_name' => $product->getName(), 'person_name' => $person->getName()]
 );
 $productImages = $product->getUrlGalleryImages();

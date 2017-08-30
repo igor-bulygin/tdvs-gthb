@@ -11,7 +11,7 @@ GlobalAsset::register($this);
 /** @var \app\models\Box[] $boxes */
 
 $this->title = Yii::t('app/public',
-	'Boxes by {person_name} - Todevise',
+	'Boxes by {person_name}',
 	['person_name' => $person->getName()]
 );
 

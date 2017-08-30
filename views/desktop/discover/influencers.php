@@ -2,7 +2,7 @@
 
 \app\assets\desktop\discover\GlobalAsset::register($this);
 
-$this->title = Yii::t('app/public','Discover influencers - Todevise');
+$this->title = Yii::t('app/public','Discover influencers');
 $this->registerJs("var type = 3", yii\web\View::POS_HEAD, 'person-type-script');
 
 ?>
