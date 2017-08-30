@@ -1,5 +1,8 @@
 {
 	"global": {
+		"DEVISERS": "Devisers",
+		"INFLUENCERS": "Influencers",
+		"LOGIN": "Log in",
 		"CANCEL": "Cancel",
 		"DELETE": "Delete",
 		"SEARCH": "Search",
@@ -7,16 +10,29 @@
 		"NO": "No",
 		"STANDARD": "Standard",
 		"EXPRESS": "Express",
+		"BOXES": "Boxes",
+		"EMPTY_BOX": "Empty box",
 		"STORIES": "Stories",
+		"LOADING": "Loading...",
+		"PRICE": "Price",
+		"OPTIONAL": "Optional",
+		"PREVIOUS": "Previous",
+		"NEXT": "Next",
+		"FOLLOW": "Follow",
 		"user": {
 			"FIRST_NAME": "First name",
 			"LAST_NAME": "Last name",
+			"BRAND_NAME": "Brand name",
 			"VAT_NUMBER": "VAT number",
 			"PHONE": "Phone",
 			"COUNTRY": "Country",
 			"CITY": "City",
 			"ADDRESS": "Address",
-			"ZIP": "ZIP"
+			"ZIP": "ZIP",
+			"EMAIL": "Email",
+			"PASSWORD": "Password",
+			"SET_PASSWORD": "Choose a password",
+			"REPEAT_PASSWORD": "Repeat the password"
 		}
 	}
 }
