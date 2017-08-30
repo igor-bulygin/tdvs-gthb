@@ -21,7 +21,7 @@ return [
     'Add new +' => '',
     'Add to cart' => '',
     'Because of time zones difference an agent can take up to 24 hours to reply to you message.' => '',
-    'Become a deviser - Todevise' => '',
+    'Become a deviser' => '',
     'Boxes' => '',
     'Brand name' => '',
     'Characteristics' => '',
