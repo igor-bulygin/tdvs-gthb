@@ -1,4 +1,5 @@
 <?php
+
 use app\helpers\Utils;
 use app\models\Person;
 use yii\helpers\Url;
@@ -29,15 +30,17 @@ $activeOption = array_key_exists('settings_menu_active_option', $this->params) ?
 		<li role="presentation" class="<?= ($activeOption=='orders') ? 'active' : '' ?>">
 			<a href="<?= Url::to(['/settings/open-orders', 'slug' => $person->slug, 'person_id' => $person->short_id])?>" translate="MY_ORDERS"></a>
 		</li>
-		<li role="presentation" class="<?= ($activeOption=='stock') ? 'active' : '' ?>">
-			<a href="<?= Url::to(['/settings/stock', 'slug' => $person->slug, 'person_id' => $person->short_id])?>" translate="STOCK_PRICE"></a>
-		</li>
-		<li role="presentation" class="<?= ($activeOption=='billing') ? 'active' : '' ?>">
-			<a href="<?= Url::to(['/settings/billing', 'slug' => $person->slug, 'person_id' => $person->short_id])?>" translate="BILLING_PAYMENTS"></a>
-		</li>
-		<li role="presentation" class="<?= ($activeOption=='shipping') ? 'active' : '' ?>">
-			<a href="<?= Url::to(['/settings/shipping', 'slug' => $person->slug, 'person_id' => $person->short_id])?>" translate="SHIPPING"></a>
-		</li>
+		<?php if ($person->isDeviser()) { ?>
+			<li role="presentation" class="<?= ($activeOption=='stock') ? 'active' : '' ?>">
+				<a href="<?= Url::to(['/settings/stock', 'slug' => $person->slug, 'person_id' => $person->short_id])?>" translate="STOCK_PRICE"></a>
+			</li>
+			<li role="presentation" class="<?= ($activeOption=='billing') ? 'active' : '' ?>">
+				<a href="<?= Url::to(['/settings/billing', 'slug' => $person->slug, 'person_id' => $person->short_id])?>" translate="BILLING_PAYMENTS"></a>
+			</li>
+			<li role="presentation" class="<?= ($activeOption=='shipping') ? 'active' : '' ?>">
+				<a href="<?= Url::to(['/settings/shipping', 'slug' => $person->slug, 'person_id' => $person->short_id])?>" translate="SHIPPING"></a>
+			</li>
+		<?php } ?>
 	</ul>
 
 </div>
