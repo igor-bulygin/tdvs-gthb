@@ -100,10 +100,13 @@
 		text-align: center;
 		@include border-radius(90px,90px,90px,90px);
 		&.box{	
-			background: url('/imgs/box.svg') -6px 0 no-repeat transparent;
+			background: url('/imgs/black-box.svg') -6px 0 no-repeat transparent;
 			display: inline-block;
 			width: 55px;
 			margin-left: -2px;
+		}
+		&:hover{
+			color: $dark_red!important;
 		}
 	}
 }

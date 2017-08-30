@@ -2777,10 +2777,12 @@ h3 {
     -webkit-border-radius: 90px 90px 90px 90px !important;
     -moz-border-radius: 90px 90px 90px 90px !important; }
     .hover-btns-wrapper .icons-hover.box {
-      background: url("/imgs/box.svg") -6px 0 no-repeat transparent;
+      background: url("/imgs/black-box.svg") -6px 0 no-repeat transparent;
       display: inline-block;
       width: 55px;
       margin-left: -2px; }
+    .hover-btns-wrapper .icons-hover:hover {
+      color: #c91c39 !important; }
 
 .grey-link {
   color: #939393; }
