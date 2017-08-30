@@ -2,6 +2,20 @@
 	"global": {
 		"CANCEL": "Cancelar",
 		"DELETE": "Borrar",
-		"SEARCH": "Buscar"
+		"SEARCH": "Buscar",
+		"YES": "Sí",
+		"NO": "No",
+		"STANDARD": "Estándar",
+		"EXPRESS": "Exprés",
+		"user": {
+			"FIRST_NAME": "Nombre",
+			"LAST_NAME": "Apellidos",
+			"VAT_NUMBER": "Número VAT",
+			"PHONE": "Teléfono",
+			"COUNTRY": "País",
+			"CITY": "Ciudad",
+			"ADDRESS": "Dirección",
+			"ZIP": "C.P."
+		}
 	}
 }

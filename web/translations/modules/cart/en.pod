@@ -1,36 +1,45 @@
 {
-	"YOUR_SHOPPING_CART": "Your shopping cart",
-	"QUANTITY": "Quantity",
-	"SUBTOTAL": "Subtotal",
-	"PROCEED": "Proceed to checkout",
-	"CART_SUMMARY": "Cart summary",
-	"CONTINUE_SHOPPING": "Continue shopping",
-	"SHIPPING_PRICE": "Shipping price"
-	"PERSONAL_INFO_TITLE": "Personal info & shipping address",
-	"PERSONAL_DETAILS": "Personal details",
-	"SHIPPING_ADDRESS": "Shipping address",
-	"FIRST_NAME": "First name",
-	"LAST_NAME": "Last name",
-	"VAT_NUMBER": "VAT number",
-	"PHONE": "Phone",
-	"COUNTRY": "Country",
-	"CITY": "City",
-	"ADDRESS": "Address",
-	"ZIP": "ZIP",
-	"CONTINUE_SHIPPING": "Continue to shipping methods",
-	"SHIPPING_INFORMATION": "Shipping information",
-	"SHIPPING_METHODS_TITLE": "Shipping methods & addresses",
-	"RETURN_CART": "Return to cart",
-	"STANDARD": "Standard",
-	"DELIVERY_WITHIN": "Delivery within {{days}} days",
-	"CONTINUE_PAYMENT": "Continue to payment methods",
-	"PAYMENT_TITLE": "Payment info",
-	"PAYMENT_SAME": "Is your billing address the same as the shipping address?",
-	"BILLING_ADDRESS": "Billing address",
-	"PAY_CARD": "Pay with card",
-	"PAY_TEXT_1": "Securely pay with any type of credit card or debit card",
-	"PAY_ERROR_1": "There was an issue with the transaction. Your card has not been charged",
-	"PAY_ERROR_2": "Please try again, and if the issue persists contact us",
-	"YES": "Yes",
-	"NO": "No"
+	"cart": {
+		"FIRST_NAME": "@:global.user.FIRST_NAME",
+		"LAST_NAME": "@:global.user.LAST_NAME",
+		"VAT_NUMBER": "@:global.user.VAT_NUMBER",
+		"PHONE": "@:global.user.PHONE",
+		"COUNTRY": "@:global.user.COUNTRY",
+		"CITY": "@:global.user.CITY",
+		"ADDRESS": "@:global.user.ADDRESS",
+		"ZIP": "@:global.user.ZIP",
+		"PERSONAL_DETAILS": "Personal details",
+		"RETURN_CART": "Return to cart",
+		"QUANTITY": "Quantity",
+		"SUBTOTAL": "Subtotal",
+		"CONTINUE_SHOPPING": "Continue shopping",
+		"payment_methods": {
+			"PAYMENT_TITLE": "Payment info",
+			"PAYMENT_SAME": "Is your billing address the same as the shipping address?",
+			"BILLING_ADDRESS": "Billing address",
+			"PAY_CARD": "Pay with card",
+			"PAY_TEXT_1": "Securely pay with any type of credit card or debit card",
+			"PAY_ERROR_1": "There was an issue with the transaction. Your card has not been charged",
+			"PAY_ERROR_2": "Please try again, and if the issue persists contact us"
+		},
+		"personal_info": {
+			"PERSONAL_INFO_TITLE": "Personal info & shipping address",
+			"SHIPPING_ADDRESS": "Shipping address",
+			"CONTINUE_SHIPPING": "Continue to shipping methods",
+			"SHIPPING_INFORMATION": "Shipping information"
+		},
+		"shipping_methods": {
+			"SHIPPING_METHODS_TITLE": "Shipping methods & addresses",
+			"DELIVERY_WITHIN": "Delivery within {{days}} days",
+			"CONTINUE_PAYMENT": "Continue to payment methods"
+		},
+		"shopping_cart": {
+			"YOUR_SHOPPING_CART": "Your shopping cart",
+		},
+		"summary": {
+			"CART_SUMMARY": "Cart summary",
+			"PROCEED": "Proceed to checkout",
+			"SHIPPING_PRICE": "Shipping price"
+		}
+	}
 }
