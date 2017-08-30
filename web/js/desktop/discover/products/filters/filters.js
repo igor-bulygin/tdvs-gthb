@@ -5,8 +5,11 @@
 		var vm = this;
 		vm.seeMore = seeMore;
 		vm.show_categories = 10;
-		vm.orderTypes=[{value:"new", name : "NEW"},{value:"old", name :"OLD"},{value:"chepeast", name : "PRICE_LOW_TO_HIGH"}, {value:"expensive", name :"PRICE_HIGH_TO_LOW"}];
-		vm.orderFilter={value:"", name : "ORDER_BY"};
+		vm.orderTypes=[{value: "new", name: "discover.NEW"},
+					{value: "old", name: "discover.OLD"},
+					{value: "cheapest", name: "discover.PRICE_LOW_TO_HIGH"}, 
+					{value: "expensive", name:"discover.PRICE_HIGH_TO_LOW"}];
+		vm.orderFilter={value:"", name: "discover.ORDER_BY"};
 		vm.filters = {};
 		vm.search=search;
 		if (!angular.isUndefined(searchParam) &&searchParam.length>0) {

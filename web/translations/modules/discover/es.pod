@@ -1,26 +1,36 @@
 {
-	"EXPLORE_BOXES":"Explorar cajas",
-	"DISCOVER_LATEST_TRENDS":"Es el momento de descubrir las últimas tendencias",
-	"SEARCHING":"Buscando...",
-	"NO_BOXES_FOUNDED":"No se han encontrado cajas con el criterio de búsqueda especificado.",
-	"WE_FOUND_X_RESULTS":"Hemos encontrado {{ counter }} resultados con las palabras clave ",
-	"FILTER_BY_COUNTRY":"Filtrar por país",
-	"SEE_MORE":"Ver más",
-	"SEARCH_KEYWORD":"Palabras clave de búsqueda",
-	"DISCOVER_CREATORS":"Descubre talentosos e innovadores creadores por todo el mundo",
-	"NO_DEVISERS_FOUNDED":"No se han encontrado devisers con el criterio de búsqueda especificado.",
-	"FILTER_BY_THEME":"Filtrar por tema",
-	"FOLLOW":"Seguir",
-	"NO_STORIES_FOUNDED":"No se han encontrado historias con el criterio de búsqueda especificado.",
-	"SEE_THE_WORLD":"Mira el mundo con una perspectiva diferente",
-	"DISCOVER_INFLUENCERS":"Descubre talentosos influencers por todo el mundo",
-	"OUR_DEVISERS":"Nuestros devisers",
-	"OUR_INFLUENCERS":"Nuestros influencers",
-	"STORIES":"Historias",
-	"NO_PRODUCTS_FOUND":"No se han encontrado productos con el criterio de búsqueda especificado.",
-	"ORDER_BY":"Ordenar por",
-	"NEW":"Nuevo",
-	"OLD":"Anterior",
-	"PRICE_LOW_TO_HIGH":"Precio de más bajo a alto",
-	"PRICE_HIGH_TO_LOW":"Precio de más alto a bajo"
+	"discover": {
+		"EXPLORE_BOXES": "Explorar cajas",
+		"SEARCH_KEYWORD": "Palabras clave de búsqueda",
+		"SEARCHING": "Buscando...",
+		"WE_FOUND_X_RESULTS": "Hemos encontrado {{ counter }} resultados con las palabras clave ",
+		"FILTER_BY_COUNTRY": "Filtrar por país",
+		"SEE_MORE": "Ver más",
+		"FILTER_BY_THEME": "Filtrar por tema",
+		"FOLLOW": "Seguir",
+		"NO_PRODUCTS_FOUND": "No se han encontrado productos con el criterio de búsqueda especificado.",
+		"ORDER_BY": "Ordenar por",
+		"NEW": "Nuevo",
+		"OLD": "Anterior",
+		"PRICE_LOW_TO_HIGH": "Precio de más bajo a alto",
+		"PRICE_HIGH_TO_LOW": "Precio de más alto a bajo",
+		"boxes": {
+			"DISCOVER_LATEST_TRENDS": "Es el momento de descubrir las últimas tendencias",
+			"NO_BOXES_FOUND": "No se han encontrado cajas con el criterio de búsqueda especificado."
+		},
+		"devisers": {
+			"OUR_DEVISERS": "Nuestros devisers",
+			"DISCOVER_CREATORS": "Descubre talentosos e innovadores creadores por todo el mundo",
+			"NO_DEVISERS_FOUND": "No se han encontrado devisers con el criterio de búsqueda especificado."
+		},
+		"influencers": {
+			"OUR_INFLUENCERS": "Nuestros influencers",
+			"DISCOVER_INFLUENCERS": "Descubre talentosos influencers por todo el mundo"
+		},
+		"stories": {
+			"STORIES": "Historias",
+			"SEE_THE_WORLD": "Mira el mundo con una perspectiva diferente",
+			"NO_STORIES_FOUND": "No se han encontrado historias con el criterio de búsqueda especificado."
+		}
+	}
 }
