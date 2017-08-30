@@ -64,8 +64,8 @@
 						<a href="#" editable-number="product.stock" buttons="no" e-min="0" class="ng-class:{'purple-text': productPriceStockCtrl.priceStockValuesValidation(product.stock, product.available)}" ng-bind="(product.stock || 0)" blur="submit"></a>
 						<span class="apply-to-all-btn" ng-click="productPriceStockCtrl.applyToAll('stock', product.stock)" translate="PRODUCT.PRICE_STOCK.APPLY_ALL"></span>
 					</td>
-					<td xeditable-select translate="PRODUCT.PRICE_STOCK.CURRENCY"><a href="#" editable-number="product.price" buttons="no" e-min="0" e-step="0.01" class="ng-class:{'purple-text': productPriceStockCtrl.priceStockValuesValidation(product.price, product.available)}" ng-bind="(product.price || 0)" blur="submit"></a>
-					<span class="apply-to-all-btn" ng-click="productPriceStockCtrl.applyToAll('price', product.price)" translate="PRODUCT.PRICE_STOCK.APPLY_ALL"></span>
+					<td xeditable-select><a href="#" editable-number="product.price" buttons="no" e-min="0" e-step="0.01" class="ng-class:{'purple-text': productPriceStockCtrl.priceStockValuesValidation(product.price, product.available)}" ng-bind="(product.price || 0)" blur="submit"><span translate="PRODUCT.PRICE_STOCK.CURRENCY"></span></a>
+					<span class="apply-to-all-btn" ng-click="productPriceStockCtrl.applyToAll('price', product.price)"><span translate="PRODUCT.PRICE_STOCK.APPLY_ALL"></span></span>
 					</td>
 				</tr>
 			</tbody>
