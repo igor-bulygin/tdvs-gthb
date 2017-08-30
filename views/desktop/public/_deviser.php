@@ -47,13 +47,13 @@ $this->title = 'Todevise / Deviser';
 						<div class="col-xs-12 no-horizontal-padding">
 							<ul class="flex funiv_bold fs0-857 fs-upper tabs no-horizontal-padding no-vertical-margin">
 								<li class="pointer text-center">
-									<a class="fc-5b block" data-toggle="tab" href="#works"><?= Yii::t("app/public", "Works") ?></a>
+									<a class="fc-5b block" data-toggle="tab" href="#works"><?= Yii::t("app/old", "Works") ?></a>
 								</li>
 								<li class="pointer text-center">
-									<a class="fc-5b block" data-toggle="tab" href="#boxes"><?= Yii::t("app/public", "Boxes") ?></a>
+									<a class="fc-5b block" data-toggle="tab" href="#boxes"><?= Yii::t("app/old", "Boxes") ?></a>
 								</li>
 								<li class="pointer text-center">
-									<a class="fc-5b block" data-toggle="tab" href="#stories"><?= Yii::t("app/public", "Stories") ?></a>
+									<a class="fc-5b block" data-toggle="tab" href="#stories"><?= Yii::t("app/old", "Stories") ?></a>
 								</li>
 							</ul>
 						</div>
