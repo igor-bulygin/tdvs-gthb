@@ -4,12 +4,12 @@ use app\assets\desktop\pub\PublicCommonAsset;
 
 PublicCommonAsset::register($this);
 
-$this->title = Yii::t('app/public', 'About us');
+$this->title = Yii::t('app/public', 'ABOUT_US');
 
 ?>
 
 <div class="row no-gutter">
 	<div class="col-xs-12 no-padding about">
-		<h1><?=Yii::t('app/public', 'About us')?></h1>
+		<h1><?=Yii::t('app/public', 'ABOUT_US')?></h1>
 	</div>
 </div>

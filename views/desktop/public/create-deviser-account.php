@@ -9,7 +9,7 @@ PublicCommonAsset::register($this);
 
 /** @var Invitation $invitation */
 
-$this->title = Yii::t('app/public', 'Create a deviser account');
+$this->title = Yii::t('app/public', 'CREATE_A_DEVISER_ACCOUNT');
 
 $this->registerJs("var invitation = ".Json::encode($invitation), yii\web\View::POS_HEAD, 'invitation-var-script');
 $this->registerJs("var type = 3", yii\web\View::POS_HEAD, 'person-type-var-script');

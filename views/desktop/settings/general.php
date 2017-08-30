@@ -9,7 +9,7 @@ GlobalAsset::register($this);
 
 /** @var Person $person */
 
-$this->title = Yii::t('app/public', 'Settings');
+$this->title = Yii::t('app/public', 'SETTINGS');
 
 $this->params['person'] = $person;
 $this->params['settings_menu_active_option'] = 'general';

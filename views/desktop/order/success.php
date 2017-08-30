@@ -8,7 +8,7 @@ use yii\helpers\Json;
 GlobalAsset::register($this);
 
 $this->title = Yii::t('app/public',
-	'Order {order_id} completed',
+	'ORDER_ID_COMPLETED',
 	['order_id' => $order_id]
 );
 

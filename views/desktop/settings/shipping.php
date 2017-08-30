@@ -9,7 +9,7 @@ GlobalAsset::register($this);
 
 /** @var Person $person */
 
-$this->title = Yii::t('app/public', 'Shipping settings');
+$this->title = Yii::t('app/public', 'SHIPPING_SETTINGS');
 
 $this->params['person'] = $person;
 $this->params['settings_menu_active_option'] = 'shipping';

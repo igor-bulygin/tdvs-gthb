@@ -4,7 +4,7 @@ use app\assets\desktop\pub\PublicCommonAsset;
 
 PublicCommonAsset::register($this);
 
-$this->title = Yii::t('app/public', 'Signup');
+$this->title = Yii::t('app/public', 'SIGNUP');
 ?>
 
 <div class="create-deviser-account-wrapper">

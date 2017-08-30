@@ -1,13 +1,13 @@
 <?php
-use yii\web\View;
+
+use app\components\LeftMenu;
+use app\components\PublicFooter;
+use app\components\PublicHeader;
+use app\helpers\Utils;
 use app\models\Lang;
 use yii\helpers\Html;
 use yii\helpers\Json;
-use app\helpers\Utils;
-use app\components\PublicFooter;
-use app\components\LeftMenu;
-use app\components\PublicHeader;
-use lajax\languagepicker\widgets\LanguagePicker;
+use yii\web\View;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -49,7 +49,7 @@ use lajax\languagepicker\widgets\LanguagePicker;
 								<?= LeftMenu::widget(); ?>
 							</div>
 							<div class="lang">
-								<span class="funiv fs0-857 fc-9a fs-upper"><?= Yii::t('app/public', 'Language') ?></span>
+								<span class="funiv fs0-857 fc-9a fs-upper"><?= Yii::t('app/public', 'LANGUAGE') ?></span>
 								<?= \lajax\languagepicker\widgets\LanguagePicker::widget([
 									'itemTemplate' => '<li><a href="{link}" class="funiv fs0-857 fc-9a fs-upper">{name}</a></li>',
 									'activeItemTemplate' => '<a href="{link}" class="funiv fs0-857 fc-fff fs-upper">{name}</a>',

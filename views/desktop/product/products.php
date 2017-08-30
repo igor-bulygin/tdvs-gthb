@@ -4,12 +4,12 @@
 /* @var \app\models\Product[][] $moreWork */
 if ($text) {
 	$this->title = Yii::t('app/public',
-		'Works - {search_param}',
+		'WORKS_SEARCH_PARAM',
 		['search_param' => $text]
 	);
 	
 } else {
-	$this->title = Yii::t('app/public', 'Works');
+	$this->title = Yii::t('app/public', 'WORKS');
 }
 $this->registerJs("var searchParam = '".$text."'", yii\web\View::POS_HEAD, 'products-search-script');
 /* \app\assets\desktop\pub\ProductsAsset::register($this); */

@@ -2,7 +2,7 @@
 
 \app\assets\desktop\discover\GlobalAsset::register($this);
 
-$this->title = Yii::t('app/public','Explore boxes');
+$this->title = Yii::t('app/public','EXPLORE_BOXES');
 
 ?>
 <div class="our-devisers-wrapper" ng-controller="exploreBoxesCtrl as exploreBoxesCtrl">

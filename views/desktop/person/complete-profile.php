@@ -7,7 +7,7 @@ use app\assets\desktop\deviser\GlobalAsset;
 GlobalAsset::register($this);
 
 $this->title = Yii::t('app/public',
-	'Complete your profile! {person_name}',
+	'COMPLETE_PROFILE_PERSON_NAME',
 	['person_name' => $person->getName()]
 );
 

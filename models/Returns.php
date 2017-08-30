@@ -10,8 +10,8 @@ class Returns {
 	public static function getDescription($code)
 	{
 		$descs = [
-			self::NONE => Yii::t("app/public", "None"),
-			self::DAYS => Yii::t("app/public", "Days"),
+			self::NONE => Yii::t("app/public", 'NONE'),
+			self::DAYS => Yii::t("app/public", 'DAYS'),
 		];
 		return $descs[$code];
 	}

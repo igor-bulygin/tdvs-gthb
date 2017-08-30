@@ -13,7 +13,7 @@ GlobalAsset::register($this);
 /** @var PersonVideo $video */
 
 $this->title = Yii::t('app/public',
-	'Create new work by {person_name}',
+	'CREATE_NEW_WORK_BY_PERSON_NAME',
 	['person_name' => $person->getName()]
 );
 $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD, 'person-var-script');

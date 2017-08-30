@@ -8,7 +8,7 @@ IndexStoryAsset::register($this);
 
 /** @var Person $person */
 $this->title = Yii::t('app/public',
-	'New story by {person_name}',
+	'NEW_STORY_BY_PERSON_NAME',
 	['person_name' => $person->getName()]
 );
 $this->params['person'] = $person;

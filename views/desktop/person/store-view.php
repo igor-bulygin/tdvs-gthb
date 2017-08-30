@@ -17,17 +17,17 @@ GlobalAsset::register($this);
 
 if ($selectedSubcategory && $selectedSubcategory->short_id) { // check if is a real category
 	$this->title = Yii::t('app/public',
-		'{category_name} works by {person_name}',
+		'CATEGORY_WORKS_BY_PERSON_NAME',
 		['category_name' => $selectedSubcategory->getName(), 'person_name' => $person->getName()]
 	);
 } elseif ($selectedCategory) {
 	$this->title = Yii::t('app/public',
-		'{category_name} works by {person_name}',
+		'CATEGORY_WORKS_BY_PERSON_NAME',
 		['category_name' => $selectedCategory->getName(), 'person_name' => $person->getName()]
 	);
 } else {
 	$this->title = Yii::t('app/public',
-		'Works by {person_name}',
+		'WORKS_BY_PERSON_NAME',
 		['person_name' => $person->getName()]
 	);
 }

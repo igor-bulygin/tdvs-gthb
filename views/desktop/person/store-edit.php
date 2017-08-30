@@ -17,7 +17,7 @@ GlobalAsset::register($this);
 /** @var Category $selectedCategory */
 
 $this->title = Yii::t('app/public',
-	'Edit works by {person_name}',
+	'EDIT_WORKS_BY_PERSON_NAME',
 	['person_name' => $person->getName()]
 );
 

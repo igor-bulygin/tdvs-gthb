@@ -12,7 +12,7 @@ GlobalAsset::register($this);
 /** @var \app\models\Loved[] $loveds */
 
 $this->title = Yii::t('app/public',
-	'Loved by {person_name}',
+	'LOVED_BY_PERSON_NAME',
 	['person_name' => $person->getName()]
 );
 
