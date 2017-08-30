@@ -1,5 +1,7 @@
 <?php
+
 use app\models\Category;
+use lajax\languagepicker\widgets\LanguagePicker;
 use yii\helpers\Url;
 
 /** @var Category $category */
@@ -108,6 +110,20 @@ app\components\assets\PublicHeader2Asset::register($this);
 				<li><a href="<?=Url::to(['/discover/influencers'])?>" translate="header.TREND_SETTERS"></a></li>
 				<li><a href="#" translate="header.PROJECTS"></a></li>
 			</ul>
+			<div class="pull-right">
+					<?php
+
+					echo LanguagePicker::widget([
+						'skin' => LanguagePicker::SKIN_BUTTON,
+						'size' => LanguagePicker::SIZE_SMALL,
+						'parentTemplate' => '<div class="language-picker button-list pull-right {size}"><div>{items}</div></div>',
+						'itemTemplate' => '<a href="{link}" title="{name}" class="{language}">{name}</a>',
+						'activeItemTemplate' => '<a href="{link}" title="{name}" class="{language} active">{name}</a>',
+						'languageAsset' => 'lajax\languagepicker\bundles\LanguageLargeIconsAsset',
+						'languagePluginAsset' => 'lajax\languagepicker\bundles\LanguagePluginAsset',
+					]);
+					?>
+			</div>
 		</div>
 	</nav>
 	<div class="menu-categories">
