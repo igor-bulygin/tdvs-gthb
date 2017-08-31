@@ -30,9 +30,9 @@
 					},
 					text: function () {
 						if (!angular.isUndefined(pack.shipping_info.tracking_link) && pack.shipping_info.tracking_link != null ) {
-							return "SHIPPING_DATA_WITH_LINK";
+							return "settings.orders.SHIPPING_DATA_WITH_LINK";
 						}
-						return "SHIPPING_DATA";
+						return "settings.orders.SHIPPING_DATA";
 					},
 					showButton: function () {
 						return false;

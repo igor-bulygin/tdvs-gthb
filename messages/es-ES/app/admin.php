@@ -142,6 +142,7 @@ return [
     'This option has a fixed value' => '',
     'This option is a color/animal print' => '',
     'This tag is required' => '',
+    'Title' => '',
     'Type' => '',
     'Use in price and stock chart' => '',
     'Value' => '',
@@ -168,5 +169,4 @@ return [
     'question' => '',
     'title' => '',
     'yd' => '',
-    'Title' => 'Titulo',
 ];

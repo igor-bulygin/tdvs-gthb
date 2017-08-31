@@ -11,7 +11,7 @@ IndexStoryAsset::register($this);
 /** @var Person $person */
 /** @var \app\models\Story[] $stories */
 $this->title = Yii::t('app/public',
-	'Stories {person_name} - Todevise',
+	'STORY_BY_PERSON_NAME',
 	['person_name' => $person->getName()]
 );
 $this->params['person'] = $person;
@@ -34,15 +34,15 @@ $this->params['person_links_target'] = 'public_view';
 					<div class="empty-wrapper">
 						<?php if ($person->isPersonEditable()) { ?>
 							<div>
-								<a class="red-link-btn stories-exemple-link" href="#" data-toggle="modal" data-target="#exampleModal"><span translate="SEE_EXAMPLE"></span></a>
+								<a class="red-link-btn stories-exemple-link" href="#" data-toggle="modal" data-target="#exampleModal"><span translate="person.stories.SEE_EXAMPLE"></span></a>
 							</div>
 							<img class="newspaper-stories-icon" src="/imgs/no-stories.jpg">
-							<p class="no-story-text"><span translate="STORIES_IS"></span></p>
-							<p class="no-story-text-bold"><span translate="STORIES_EXPRESS"></span></p>
-							<a class="btn btn-green btn-create-story" href="<?=$person->getStoryCreateLink()?>"><span translate="WRITE_STORY"></span></a>
+							<p class="no-story-text"><span translate="person.stories.STORIES_IS"></span></p>
+							<p class="no-story-text-bold"><span translate="person.stories.STORIES_EXPRESS"></span></p>
+							<a class="btn btn-green btn-create-story" href="<?=$person->getStoryCreateLink()?>"><span translate="person.stories.WRITE_STORY"></span></a>
 						<?php } else { ?>
 							<img class="sad-face" src="/imgs/no-stories.jpg">
-							<p class="no-video-text"><?=$person->getName()?> <span translate="NO_STORIES_YET"></span></p>
+							<p class="no-video-text"><?=$person->getName()?> <span translate="person.stories.NO_STORIES_YET"></span></p>
 						<?php } ?>
 					</div>
 
@@ -51,7 +51,7 @@ $this->params['person_links_target'] = 'public_view';
 					<div class="content-store">
 						<div class="store-grid">
 							<div class="title-wrapper-stories title-wrapper title-wrapper-boxes">
-								<span class="title"><span translate="STORIES_BY"></span> <?=$person->getName()?></span>
+								<span class="title"><span translate="person.stories.STORIES_BY"></span> <?=$person->getName()?></span>
 							</div>
 							<div class="row">
 								<?php if ($person->isPersonEditable()) { ?>
@@ -62,7 +62,7 @@ $this->params['person_links_target'] = 'public_view';
 													<div class="plus-add">
 														<span>+</span>
 													</div>
-													<div class="text"><span translate="WRITE_A_STORY"></span></div>
+													<div class="text"><span translate="person.stories.WRITE_A_STORY"></span></div>
 												</div>
 											</div>
 										</a>
@@ -113,7 +113,7 @@ $this->params['person_links_target'] = 'public_view';
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-body">
-				<img src="/imgs/story-example.jpg" alt="Story example" title="Story example" width="100%">
+				<img src="/imgs/story-example.jpg" alt="Story example" translate-attr="{title: 'person.stories.STORY_EXAMPLE'}" width="100%">
 			</div>
 		</div>
 	</div>

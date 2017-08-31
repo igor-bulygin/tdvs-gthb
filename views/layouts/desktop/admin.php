@@ -138,7 +138,7 @@ use yii\widgets\Breadcrumbs;
 										]
 									],
 									[
-										'label' => 'Orders',
+										'label' => 'ORDERS',
 										'options' => [
 											'class' => 'item-menu-left funiv_bold fs0-857 fs-upper',
 										],

@@ -17,7 +17,7 @@ GlobalAsset::register($this);
 /** @var Category $selectedCategory */
 
 $this->title = Yii::t('app/public',
-	'Edit works by {person_name} - Todevise',
+	'EDIT_WORKS_BY_PERSON_NAME',
 	['person_name' => $person->getName()]
 );
 
@@ -32,7 +32,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 ?>
 <div ng-controller="editStoreCtrl as editStoreCtrl">
 	<div class="success-bar" ng-if="editStoreCtrl.view_published_topbar" style="background: #b8e986; height: 50px;" ng-cloak>
-		<p class="text-center"><span translate="WORK_PUBLISHED"></span></p>
+		<p class="text-center"><span translate="person.store.WORK_PUBLISHED"></span></p>
 		<span ng-click="editStoreCtrl.view_published_topbar=false">
 			<i class="ion-android-close"></i>
 		</span>
@@ -55,7 +55,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 										<div class="col-md-3 col-sm-3 col-xs-3 pad-cathegory">
 											<a href="<?= $person->getStoreEditLink(['product_state' => \app\models\Product::PRODUCT_STATE_DRAFT])?>">
 												<div class="unpublished-square" ng-click="editStoreCtrl.show_unpublished_works()">
-													<p><span translate="UNPUBLISHED_WORKS_BR"></span></p>
+													<p><span translate="person.store.UNPUBLISHED_WORKS_BR"></span></p>
 												</div>
 											</a>
 										</div>
@@ -80,9 +80,9 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 								<div class="title-wrapper">
 									<div ng-if="editStoreCtrl.view_unpublished_works" ng-cloak>
 										<div class="title-wrapper">
-											<span class="title"><span translate="UNPUBLISHED_WORKS"></span></span>
+											<span class="title"><span translate="person.store.UNPUBLISHED_WORKS"></span></span>
 										</div>
-										<p class="message-tagline"><span translate="UNPUBLISHED_WORKS_SEE"></span></p>
+										<p class="message-tagline"><span translate="person.store.UNPUBLISHED_WORKS_SEE"></span></p>
 										<div class="row m-0">
 											<div class="col-md-3 pad-grid" ng-repeat="product in editStoreCtrl.products | draftProduct">
 												<div class="grid">
@@ -120,8 +120,8 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 										</nav>
 										<div ng-if="editStoreCtrl.products.length === 0" ng-cloak>
 											<div class="text-center">
-											<p><span translate="ADD_FIRST_WORK"></span></p>
-											<a class="btn btn-default btn-green btn-add-work" href="<?=$person->getCreateWorkLink()?>"><span translate="ADD_WORK"></span></a>
+											<p><span translate="person.store.ADD_FIRST_WORK"></span></p>
+											<a class="btn btn-default btn-green btn-add-work" href="<?=$person->getCreateWorkLink()?>"><span translate="person.ADD_WORK"></span></a>
 											</div>
 										</div>
 										<div class="mesonry-row" ui-sortable="editStoreCtrl.sortableOptions" ng-model="editStoreCtrl.products" ng-if="editStoreCtrl.products.length > 0" ng-cloak>
@@ -157,11 +157,11 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 								<h3 class="modal-title"></h3>
 							</div>
 							<div class="modal-body">
-								<p><span translate="DELETE_WORK"></span></p>
+								<p><span translate="person.DELETE_WORK_QUESTION"></span></p>
 							</div>
 							<div class="modal-footer">
-								<button class="btn btn-default btn-green pull-left" ng-click="modalDeleteProductCtrl.close()"><span translate="CANCEL"></span></button>
-								<button class="btn btn-default pull-right" ng-click="modalDeleteProductCtrl.ok()"><span translate="DELETE"></span></button>
+								<button class="btn btn-default btn-green pull-left" ng-click="modalDeleteProductCtrl.close()"><span translate="global.CANCEL"></span></button>
+								<button class="btn btn-default pull-right" ng-click="modalDeleteProductCtrl.ok()"><span translate="global.DELETE"></span></button>
 							</div>
 						</div>
 						</script>

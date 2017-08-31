@@ -1,4 +1,5 @@
 <?php
+
 use app\assets\desktop\admin\DevisersAsset;
 use app\models\Person;
 use yii\grid\GridView;
@@ -169,7 +170,7 @@ $this->title = 'Todevise / Admin / Devisers';
 
 				checked-property="checked"
 
-				dropdown-label="<[ '<(country_name)>' | outputModelIterator : this : ', ' : '<?= Yii::t('app/public', 'Select country') ?>']>"
+				dropdown-label="<[ '<(country_name)>' | outputModelIterator : this : ', ' : '<?= Yii::t('app/public', 'SELECT_COUNTRY') ?>']>"
 				leaf-label="<[ country_name ]>"
 
 				max-checked-leafs="1"

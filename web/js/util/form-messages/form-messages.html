@@ -1,72 +1,72 @@
 <div ng-messages="field.$error" class="error-text">
 	<div ng-switch on="field.$name">
 		<div ng-switch-when="email">
-			<div ng-message="required" translate="PLEASE_ENTER_EMAIL"></div>
+			<div ng-message="required" translate="util.errors.PLEASE_ENTER_EMAIL"></div>
 		</div>
 		<div ng-switch-when="name">
-			<div ng-message="required" translate="PLEASE_ENTER_NAME"></div>
+			<div ng-message="required" translate="util.errors.PLEASE_ENTER_NAME"></div>
 		</div>
 		<div ng-switch-when="first_name">
-			<div ng-message="required" translate="PLEASE_ENTER_FIRST_NAME"></div>
+			<div ng-message="required" translate="util.errors.PLEASE_ENTER_FIRST_NAME"></div>
 		</div>
 		<div ng-switch-when="last_name">
-			<div ng-message="required" translate="PLEASE_ENTER_LAST_NAME"></div>
+			<div ng-message="required" translate="util.errors.PLEASE_ENTER_LAST_NAME"></div>
 		</div>
 		<div ng-switch-when="password">
-			<div ng-message="minlength" translate="PASSWORD_MIN_CHARACTERS"></div>
-			<div ng-message="required" translate="PLEASE_ENTER_PASSWORD"></div>
+			<div ng-message="minlength" translate="util.errors.PASSWORD_MIN_CHARACTERS"></div>
+			<div ng-message="required" translate="util.errors.PLEASE_ENTER_PASSWORD"></div>
 		</div>
 		<div ng-switch-when="password_confirm">
-			<div ng-message="required" translate="PLEASE_REPEAT_PASSWORD"></div>
-			<div ng-message="same" translate="PASSWORDS_NOT_MATCH"></div>
+			<div ng-message="required" translate="util.errors.PLEASE_REPEAT_PASSWORD"></div>
+			<div ng-message="same" translate="util.errors.PASSWORDS_NOT_MATCH"></div>
 		</div>
 		<div ng-switch-when="terms_and_conditions">
-			<div ng-message="required" translate="HAVE_ACCEPT_TERMS"></div>
+			<div ng-message="required" translate="util.errors.HAVE_ACCEPT_TERMS"></div>
 		</div>
 		<div ng-switch-when="brand_name">
-			<div ng-message="required" translate="PLEASE_ENTER_BRAND"></div>
+			<div ng-message="required" translate="util.errors.PLEASE_ENTER_BRAND"></div>
 		</div>
 		<div ng-switch-when="city">
-			<div ng-message="required" translate="PLEASE_ENTER_CITY"></div>
+			<div ng-message="required" translate="util.errors.PLEASE_ENTER_CITY"></div>
 		</div>
 		<div ng-switch-when="address">
-			<div ng-message="required" translate="PLEASE_ENTER_ADDRESS"></div>
+			<div ng-message="required" translate="util.errors.PLEASE_ENTER_ADDRESS"></div>
 		</div>
 		<div ng-switch-when="zip">
-			<div ng-message="required" translate="PLEASE_ENTER_ZIP"></div>
+			<div ng-message="required" translate="util.errors.PLEASE_ENTER_ZIP"></div>
 		</div>
 		<div ng-switch-when="id_number">
-			<div ng-message="required" translate="PLEASE_ENTER_ID"></div>
+			<div ng-message="required" translate="util.errors.PLEASE_ENTER_ID"></div>
 		</div>
 		<div ng-switch-when="categories">
-			<div ng-message="required" translate="PLEASE_SELECT_WORK"></div>
+			<div ng-message="required" translate="util.errors.PLEASE_SELECT_WORK"></div>
 		</div>
 		<div ng-switch-when="text_short_description">
-			<div ng-message="required" translate="PLEASE_ENTER_SHORT_DESCRIPTION"></div>
+			<div ng-message="required" translate="util.errors.PLEASE_ENTER_SHORT_DESCRIPTION"></div>
 		</div>
 		<div ng-switch-when="text_biography">
-			<div ng-message="required" translate="ABOUT_CANT_BLANK"></div>
+			<div ng-message="required" translate="util.errors.ABOUT_CANT_BLANK"></div>
 		</div>
 		<div ng-switch-when="profile_photo">
-			<div ng-message="required" translate="PLEASE_UPLOAD_PROFILE_PHOTO"></div>
+			<div ng-message="required" translate="util.errors.PLEASE_UPLOAD_PROFILE_PHOTO"></div>
 		</div>
 		<div ng-switch-when="header_photo">
-			<div ng-message="required" translate="PLEASE_UPLOAD_COVER_PHOTO"></div>
+			<div ng-message="required" translate="util.errors.PLEASE_UPLOAD_COVER_PHOTO"></div>
 		</div>
 		<div ng-switch-when="shipping_express_time">
-			<div ng-message="max" translate="EXPRESS_LESS_STANDARD"></div>
+			<div ng-message="max" translate="util.errors.EXPRESS_LESS_STANDARD"></div>
 		</div>
 		<div ng-switch-when="box_name">
-			<div ng-message="required" translate="PLEASE_ENTER_BOX_NAME"></div>
+			<div ng-message="required" translate="util.errors.PLEASE_ENTER_BOX_NAME"></div>
 		</div>
 		<div ng-switch-default>
-			<div ng-message="required" translate="PLEASE_FILL_FIELD"></div>
-			<div ng-message="same" translate="PASSWORDS_NOT_MATCH"></div>
-			<div ng-message="email" translate="PLEASE_ENTER_EMAIL"></div>
-			<div ng-message="url" translate="INVALID_URL"></div>
-			<div ng-message="pattern" translate="INVALID_URL"></div>
-			<div ng-message="min" translate="MIN_VALUE_NOT_VALID"></div>
-			<div ng-message="max" translate="MAX_VALUE_NOT_VALID"></div>
+			<div ng-message="required" translate="util.errors.PLEASE_FILL_FIELD"></div>
+			<div ng-message="same" translate="util.errors.PASSWORDS_NOT_MATCH"></div>
+			<div ng-message="email" translate="util.errors.PLEASE_ENTER_EMAIL"></div>
+			<div ng-message="url" translate="util.errors.INVALID_URL"></div>
+			<div ng-message="pattern" translate="util.errors.INVALID_URL"></div>
+			<div ng-message="min" translate="util.errors.MIN_VALUE_NOT_VALID"></div>
+			<div ng-message="max" translate="util.errors.MAX_VALUE_NOT_VALID"></div>
 		</div>
 	</div>
 </div>

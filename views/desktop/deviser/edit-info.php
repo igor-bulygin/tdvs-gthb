@@ -47,10 +47,10 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 						<div class="pointer drop-box flex flex-justify-center" ngf-drop ngf-select ng-model="deviserCtrl.headerphoto" class="drop-box"
 							ngf-drag-over-class="dragover" ngf-multiple="false" ngf-allow-dir="false"
 							ngf-accept="'image/*'" ngf-drop-available="deviserCtrl.dropAvailable">
-							<div ng-cloak ng-hide="deviserCtrl.dropAvailable"><?= Yii::t("app/public", "File drop not available"); ?></div>
+							<div ng-cloak ng-hide="deviserCtrl.dropAvailable"><?= Yii::t("app/old", "File drop not available"); ?></div>
 							<div ng-cloak ng-show="deviserCtrl.dropAvailable && !deviserCtrl.headerphoto" class="funiv_ultra fs1 fc-3d fs-upper header-photo-txt">
 								<span class="glyphicon glyphicons-up-arrow"></span>
-								<?= Yii::t("app/public", "Upload header photo") ?>
+								<?= Yii::t("app/old", "UPLOAD_HEADER_PHOTO") ?>
 							</div>
 						</div>
 					</div>
@@ -68,10 +68,10 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 							<div class="pointer drop-box flex flex-justify-center flex-align-center" ngf-drop ngf-select ng-model="deviserCtrl.profilephoto" class="drop-box"
 							     ngf-drag-over-class="dragover" ngf-multiple="false" ngf-allow-dir="false"
 							     ngf-accept="'image/*'" ngf-drop-available="deviserCtrl.dropAvailable">
-								<div ng-cloak ng-hide="deviserCtrl.dropAvailable"><?= Yii::t("app/public", "File drop not available"); ?></div>
+								<div ng-cloak ng-hide="deviserCtrl.dropAvailable"><?= Yii::t("app/old", "File drop not available"); ?></div>
 								<div ng-cloak ng-show="deviserCtrl.dropAvailable && !deviserCtrl.profilephoto" class="funiv_ultra fs1 fc-3d fs-upper profile-photo-area">
 									<span class="glyphicon glyphicons-up-arrow"></span><br />
-									<?= Yii::t("app/public", "Upload profile photo") ?>
+									<?= Yii::t("app/old", "UPLOAD_PROFILE_PHOTO") ?>
 								</div>
 							</div>
 						</div>
@@ -79,7 +79,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 				</div>
 
 				<div class="col-xs-12 flex flex-justify-center deviser">
-					<input type="text" placeholder="<?= Yii::t("app/public", "Your name"); ?>" ng-model="deviserCtrl.deviser.personal_info.name" class="input-name funiv_thin fs2-857 fc-9b fs-upper">
+					<input type="text" placeholder="<?= Yii::t("app/old", "Your name"); ?>" ng-model="deviserCtrl.deviser.personal_info.name" class="input-name funiv_thin fs2-857 fc-9b fs-upper">
 				</div>
 			</div>
 		</div>
@@ -88,7 +88,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 		<div class="row no-gutter">
 			<div class="col-xs-12 flex flex-justify-center">
-				<input type="text" placeholder="<?= Yii::t("app/public", "City"); ?>" class="input-city funiv_bold fs0-857 fs-upper fc-6d" ng-model="deviserCtrl.deviser.personal_info.city">
+				<input type="text" placeholder="<?= Yii::t("app/old", "City"); ?>" class="input-city funiv_bold fs0-857 fs-upper fc-6d" ng-model="deviserCtrl.deviser.personal_info.city">
 			</div>
 		</div>
 
@@ -106,7 +106,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 					checked-property="checked"
 
-					dropdown-label="<[ '<( country_name )>' | outputModelIterator : this : ', ' : '<?= Yii::t('app/public', 'Select country') ?>' ]>"
+					dropdown-label="<[ '<( country_name )>' | outputModelIterator : this : ', ' : '<?= Yii::t('app/old', 'SELECT_COUNTRY') ?>' ]>"
 					leaf-label="<[ country_name ]>"
 
 					max-checked-leafs="1"
@@ -132,7 +132,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 					checked-property="check"
 
-					dropdown-label="<[ '<( name )>' | outputModelIterator : this : ', ' : '<?= Yii::t('app/public', 'Select category') ?>' ]>"
+					dropdown-label="<[ '<( name )>' | outputModelIterator : this : ', ' : '<?= Yii::t('app/old', 'SELECT_CATEGORY') ?>' ]>"
 					leaf-label="<[ name ]>"
 
 					preselect="{{ deviserCtrl.deviser.categories | arrpatch : 'short_id' }}"
@@ -147,7 +147,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 		<!-- LAS BIOS TIENEN QUE PODER TRADUCIRSE
 		<div class="row no-gutter">
 			<div class="col-xs-12 flex flex-justify-center">
-				<textarea placeholder="<?= Yii::t("app/public", "Biography"); ?>" ng-model="deviser.personal_info.biography" class="textarea-bio" rows="8"></textarea>
+				<textarea placeholder="<?= Yii::t("app/old", "Biography"); ?>" ng-model="deviser.personal_info.biography" class="textarea-bio" rows="8"></textarea>
 			</div>
 		</div>
 		-->
@@ -156,7 +156,7 @@ $profile_photo_url = isset($deviser["media"]["profile"]) ? $base_path_photos . $
 
 		<div class="row no-gutter">
 			<div class="col-xs-12 flex flex-justify-center">
-				<div class="btn btn-save-profile fc-fff funiv fs-upper fs0-786" ng-click="deviserCtrl.save()"><?= Yii::t("app/public", "Save") ?></div>
+				<div class="btn btn-save-profile fc-fff funiv fs-upper fs0-786" ng-click="deviserCtrl.save()"><?= Yii::t("app/old", 'SAVE') ?></div>
 				<div style="width: 50px"></div>
 				<div style="background-color: #ccc" class="btn fc-fff funiv fs-upper fs0-786" ng-click="deviserCtrl.new_product()" translate="NEW_PRODUCT"></div>
 			</div>

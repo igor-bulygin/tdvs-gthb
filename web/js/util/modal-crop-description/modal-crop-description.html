@@ -2,7 +2,7 @@
 	<button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="modalCropDescriptionCtrl.closeModal()">
 		<span class="ion-ios-close" aria-hidden="true"></span>
 	</button>
-	<h3 class="modal-title" translate="PHOTO_DESCRIPTION"></h3>
+	<h3 class="modal-title" translate="util.modal_crop_description.PHOTO_DESCRIPTION"></h3>
 </div>
 <div class="modal-body crop-modal-large">
 	<div class="row">
@@ -14,8 +14,8 @@
 		<div class="col-sm-6">
 			<div class="row">
 				<div class="col-sm-3">
-					<label for="title" translate="TITLE"></label>
-					<span class="optional-text block-0" translate="OPTIONAL"></span>
+					<label for="title"><span translate="util.modal_crop_description.TITLE"></span></label>
+					<span class="optional-text block-0" translate="global.OPTIONAL"></span>
 				</div>
 				<div class="col-sm-9">
 					<ol class="about-edit-select title-lang-btn nya-bs-select" ng-model="modalCropDescriptionCtrl.title_language">
@@ -28,8 +28,8 @@
 			</div>
 			<div class="row mt-20">
 				<div class="col-sm-3">
-					<label for="description" translate="DESCRIPTION"></label>
-					<span class="optional-text block-0" translate="OPTIONAL"></span>
+					<label for="description"><span translate="util.modal_crop_description.DESCRIPTION"></span></label>
+					<span class="optional-text block-0" translate="global.OPTIONAL"></span>
 				</div>
 				<div class="col-sm-9">
 					<ol class="about-edit-select title-lang-btn nya-bs-select" ng-model="modalCropDescriptionCtrl.description_language">
@@ -44,8 +44,8 @@
 	</div>
 	<div class="row">
 		<div class="text-center">
-			<button class="btn btn-default btn-grey" ng-click="modalCropDescriptionCtrl.closeModal()" translate="CANCEL"></button>
-			<button class="btn btn-default btn-green" ng-click="modalCropDescriptionCtrl.ok()" translate="SAVE"></button>
+			<button class="btn btn-default btn-grey" ng-click="modalCropDescriptionCtrl.closeModal()"><span translate="global.CANCEL"></span></button>
+			<button class="btn btn-default btn-green" ng-click="modalCropDescriptionCtrl.ok()"><span translate="global.SAVE"></span></button>
 		</div>
 	</div>
 </div>

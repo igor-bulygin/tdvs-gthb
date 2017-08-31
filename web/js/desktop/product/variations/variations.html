@@ -1,14 +1,14 @@
 <div class="card">
-	<span class="title" translate="PRODUCT.VARIATIONS.TITLE"></span>
+	<span class="title" translate="product.variations.TITLE"></span>
 	<form name="productVariationsCtrl.form" novalidate>
 		<div class="row">
 			<div class="col-md-6">
-				<span class="title" translate="PRODUCT.VARIATIONS.WORK_OPTIONS"></span>
+				<span class="title" translate="product.variations.WORK_OPTIONS"></span>
 				<div ng-repeat="tag in productVariationsCtrl.tags_for_work | orderBy:[productVariationsCtrl.tagComparator]">
 					<div class="row items-row" ng-if="tag.n_options > 0" ng-cloak>
 						<div class="col-xs-12">
 							<label class="col-xs-12" data-ng-for="{{tag.name}}" ng-bind="tag.name"></label>
-							<span class="optional-text" ng-if="!tag.required" translate="PRODUCT.VARIATIONS.OPTIONAL"></span>
+							<span class="optional-text" ng-if="!tag.required" translate="product.variations.OPTIONAL"></span>
 						</div>
 						<div class="mb-20 col-md-5" ng-repeat="(itemIndex,item) in productVariationsCtrl.product.options[tag.id] track by itemIndex">
 							<span class="col-xs-1">{{itemIndex+1}}&nbsp;</span>
@@ -20,33 +20,33 @@
 							<span class="glyphicon glyphicon-remove close-row" ng-if="productVariationsCtrl.product.options[tag.id].length > 1" ng-click="productVariationsCtrl.deleteOption(tag.id, $index)"></span>
 						</div>
 						<div class="col-xs-12">
-							<span class="add-cathegory col-xs-12" ng-if="(productVariationsCtrl.product.options[tag.id][productVariationsCtrl.product.options[tag.id].length-1]).length>0" ng-click="productVariationsCtrl.product.options[tag.id].push([])" translate="PRODUCT.VARIATIONS.ADD_OPTION"></span>
+							<span class="add-cathegory col-xs-12" ng-if="(productVariationsCtrl.product.options[tag.id][productVariationsCtrl.product.options[tag.id].length-1]).length>0" ng-click="productVariationsCtrl.product.options[tag.id].push([])" translate="product.variations.ADD_OPTION"></span>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-6">
-				<span class="title text-left" translate="PRODUCT.VARIATIONS.MANUFACTURING_INFO"></span>
+				<span class="title text-left" translate="product.variations.MANUFACTURING_INFO"></span>
 				<div class="form-group col-md-12">
 					<div class="row" id="preorder">
 						<div class="col-md-4 pad-about">
-							<span translate="PRODUCT.VARIATIONS.IS_PREORDER"></span>
+							<span translate="product.variations.IS_PREORDER"></span>
 						</div>
 						<div class="col-md-8 pad-about">
 							<div class="radio radio-inline ml-30">
 								<input type="radio" name="preorder_selected" id="preorder_selected" ng-model="productVariationsCtrl.preorder_selected" ng-value="true" ng-change="productVariationsCtrl.setPreorder(productVariationsCtrl.preorder_selected)">
-								<label for="preorder_selected" translate="PRODUCT.YES"></label>
+								<label for="preorder_selected"><span translate="global.YES"></span></label>
 							</div>
 							<div class="radio radio-inline">
 								<input type="radio" name="preorder_unselected" id="preorder_unselected" ng-model="productVariationsCtrl.preorder_selected" ng-value="false" checked ng-change="productVariationsCtrl.setPreorder(productVariationsCtrl.preorder_selected)">
-								<label for="preorder_unselected" translate="PRODUCT.NO"></label>
+								<label for="preorder_unselected"><span translate="global.NO"></span></label>
 							</div>
 						</div>
 						<div class="mt-50" ng-if="productVariationsCtrl.preorder_selected">
 							<div class="row mt-20">
 								<div class="col-md-6">
-									<p class="manufacturing-question" translate="PRODUCT.VARIATIONS.PREORDER_END"></p>
-									<p class="manufacturing-answer" translate="PRODUCT.VARIATIONS.REMINDER_STOCK"></p>
+									<p class="manufacturing-question"><span translate="product.variations.PREORDER_END"></span></p>
+									<p class="manufacturing-answer"><span translate="product.variations.REMINDER_STOCK"></span></p>
 								</div>
 								<div class="col-md-6">
 									<div class="dropdown" ng-if="!productVariationsCtrl.product.preorder.end">
@@ -60,7 +60,7 @@
 									<div ng-if="productVariationsCtrl.product.preorder.end">
 										<p class="date-variations" ng-bind="(productVariationsCtrl.product.preorder.end | date: 'MMM dd yyyy')"></p>
 										<div class="dropdown">
-											<a href="#" data-target="#" class="dropdown-toggle-preorder red-text" id="preorderEnd" role="button" data-toggle="dropdown"><span class="glyphicon glyphicon-pencil"></span>&nbsp;<span translate="PRODUCT.VARIATIONS.CHANGE_DATE"></span></a>
+											<a href="#" data-target="#" class="dropdown-toggle-preorder red-text" id="preorderEnd" role="button" data-toggle="dropdown"><span class="glyphicon glyphicon-pencil"></span>&nbsp;<span translate="product.variations.CHANGE_DATE"></span></a>
 											<ul class="dropdown-menu" role="menu" aria-labelledby="preorderEnd">
 												<datetimepicker data-ng-model="productVariationsCtrl.preorder_data" data-datetimepicker-config="{ dropdownSelector: '.dropdown-toggle-preorder', startView:'day', minView:'day'}" data-on-set-time="productVariationsCtrl.setPreorderEnd(newDate, oldDate)"></datetimepicker>
 											</ul>
@@ -70,7 +70,7 @@
 							</div>
 							<div class="row">
 								<div class="col-md-6">
-									<p class="manufacturing-question" translate="PRODUCT.VARIATIONS.WHEN_SHIPPED"></p>
+									<p class="manufacturing-question"><span translate="product.variations.WHEN_SHIPPED"></span></p>
 								</div>
 								<div class="col-md-6">
 									<div class="dropdown" ng-if="!productVariationsCtrl.product.preorder.ship">
@@ -85,7 +85,7 @@
 										<p class="date-variations" ng-bind="(productVariationsCtrl.product.preorder.ship | date: 'MMM dd yyyy')"></p>
 										<div class="dropdown">
 											<a href="#" data-target="#" class="dropdown-toggle-preorder-ship red-text" id="preorderShip" role="button" data-toggle="dropdown">
-												<span class="glyphicon glyphicon-pencil"></span>&nbsp;<span translate="PRODUCT.VARIATIONS.CHANGE_DATE"></span>
+												<span class="glyphicon glyphicon-pencil"></span>&nbsp;<span translate="product.variations.CHANGE_DATE"></span>
 											</a>
 											<ul class="dropdown-menu" role="menu" arialabelledby="preorderShip">
 												<datetimepicker data-ng-model="productVariationsCtrl.preorder_ship_data" data-datetimepicker-config="{ dropdownSelector: '.dropdown-toggle-preorder-ship', startView: 'day', minView: 'day'}" data-on-set-time="productVariationsCtrl.setPreorderShip(newDate, oldDate)"></datetimepicker>
@@ -99,42 +99,42 @@
 				</div>
 				<div class="row col-md-12" id="madetoorder">
 					<div class="col-md-4 pad-about">
-						<span translate="PRODUCT.VARIATIONS.IS_MADE_TO_ORDER"></span>
+						<span translate="product.variations.IS_MADE_TO_ORDER"></span>
 					</div>
 					<div class="col-md-8 pad-about">
 						<div class="radio radio-inline ml-30">
 							<input type="radio" name="made_to_order_selected" id="made_to_order_selected" ng-model="productVariationsCtrl.made_to_order_selected" ng-value="true" ng-change="productVariationsCtrl.setMadeToOrder(productVariationsCtrl.made_to_order_selected)">
-							<label for="made_to_order_selected" translate="PRODUCT.YES"></label>
+							<label for="made_to_order_selected"><span translate="global.YES"></span></label>
 						</div>
 						<div class="radio radio-inline">
 							<input type="radio" name="made_to_order_unselected" id="made_to_order_unselected" ng-model="productVariationsCtrl.made_to_order_selected" ng-value="false" checked ng-change="productVariationsCtrl.setMadeToOrder(productVariationsCtrl.made_to_order_selected)">
-							<label for="made_to_order_unselected" translate="PRODUCT.NO"></label>
+							<label for="made_to_order_unselected"><span translate="global.NO"></span></label>
 						</div>
 					</div>
 					<div class="mt-50" ng-if="productVariationsCtrl.made_to_order_selected" ng-cloak>
 						<div class="col-md-2">
 							<input type="number" name="madetoorder" class="form-control rounded-number-input col-md-1 ng-class:{'error-input': !productVariationsCtrl.product['madetoorder'].value && productVariationsCtrl.required_madetoorder}" ng-model="productVariationsCtrl.product['madetoorder'].value" ng-min="0" ng-required="true">							
 						</div>
-						<label class="little-label-number" for="madetoorder" translate="PRODUCT.VARIATIONS.MANUFATURE_DAYS"></label>
+						<label class="little-label-number" for="madetoorder"><span translate="product.variations.MANUFATURE_DAYS"></span></label>
 					</div>
-					<span ng-if="!productVariationsCtrl.product['madetoorder'].value&&productVariationsCtrl.required_madetoorder" class="error-text" translate="PRODUCT.VARIATIONS.DAYS_GREATER_0"></span>
+					<span ng-if="!productVariationsCtrl.product['madetoorder'].value&&productVariationsCtrl.required_madetoorder" class="error-text" translate="product.variations.DAYS_GREATER_0"></span>
 				</div>
 				<div class="row col-md-12" id="bespoke">
 					<div class="col-md-4 pad-about">
-						<span translate="PRODUCT.VARIATIONS.IS_BESPOKED"></span>
+						<span translate="product.variations.IS_BESPOKED"></span>
 					</div>
 					<div class="col-md-8 pad-about">
 						<div class="radio radio-inline ml-30">
 							<input type="radio" name="bespoke_selected" id="bespoke_selected" value="bespoke_selected" ng-model="productVariationsCtrl.bespoke_selected" ng-value="true" ng-change="productVariationsCtrl.setBespoke(productVariationsCtrl.bespoke_selected)">
-							<label for="bespoke_selected" translate="PRODUCT.YES"></label>
+							<label for="bespoke_selected"><span translate="global.YES"></span></label>
 						</div>
 						<div class="radio radio-inline">
 							<input type="radio" name="bespoke_unselected" id="bespoke_unselected" value="bespoke_unselected" ng-model="productVariationsCtrl.bespoke_selected" ng-value="false" checked ng-change="productVariationsCtrl.setBespoke(productVariationsCtrl.bespoke_selected)">
-							<label for="bespoke_unselected" translate="PRODUCT.NO"></label>
+							<label for="bespoke_unselected"><span translate="global.NO"></span></label>
 						</div>
 					</div>
 					<div class="mt-50 bespoke-wraper col-md-12" ng-if="productVariationsCtrl.bespoke_selected" ng-cloak>
-						<p class="col-xs-12" translate="PRODUCT.VARIATIONS.MANUFACTURING_INFO"></p>
+						<p class="col-xs-12"><span translate="product.variations.MANUFACTURING_INFO"></span></p>
 						<textarea name="bespoke_text" id="bespoke_text" cols="30" rows="10" class="form-control manufacturing-textarea col-md-10 ng-class:{'error-input': productVariationsCtrl.textFieldValidation(productVariationsCtrl.product.bespoke.value, productVariationsCtrl.required_bespoke)}" ng-model="productVariationsCtrl.product.bespoke.value[productVariationsCtrl.bespoke_language]"></textarea>
 						<ol class="nya-bs-select about-edit-select title-lang-btn manufacturing-lang col-md-2" ng-model="productVariationsCtrl.bespoke_language">
 							<li nya-bs-option="language in productVariationsCtrl.languages" data-value="language.code" deep-watch="true">
@@ -150,10 +150,10 @@
 	<div class="row items-row">
 		<div class="col-md-12">
 			<div ng-if="productVariationsCtrl.show_sizecharts" ng-cloak id="sizechart_values">
-				<label class="col-xs-12 text-center" translate="PRODUCT.VARIATIONS.SIZES"></label>
+				<label class="col-xs-12 text-center"><span translate="product.variations.SIZES"></span></label>
 				<div class ="row">
 					<div class="col-md-2">
-						<span translate="PRODUCT.VARIATIONS.NEW_SIZECHART"></span>
+						<span translate="product.variations.NEW_SIZECHART"></span>
 					</div>
 					<div class="col-md-8 pad-about">
 						<ol class="nya-bs-select" ng-model="productVariationsCtrl.deviserSizecharts[$index]" ng-change="productVariationsCtrl.sizesSelect(productVariationsCtrl.deviserSizecharts[$index], productVariationsCtrl.deviserSizecharts[$index].countries[0])">
@@ -180,7 +180,7 @@
 					</div>
 					<div ng-if="productVariationsCtrl.product.sizechart">
 						<div class="col-md-3">
-							<span translate="PRODUCT.VARIATIONS.AVAILABLE_SIZES"></span>
+							<span translate="product.variations.AVAILABLE_SIZES"></span>
 						</div>
 						<div class="col-md-3 pad-about">
 							<ol class="nya-bs-select col-md-12" ng-model="productVariationsCtrl.size_to_add">
@@ -188,13 +188,13 @@
 									<a href="#" ng-if="productVariationsCtrl.sizechart_available_values[$index]"><span ng-bind="size[0]"></span></a>
 								</li>
 							</ol>
-							<a href="#" ng-click="productVariationsCtrl.addSizeToSizechart(productVariationsCtrl.size_to_add)" class="red-text col-md-12" ng-disabled="productVariationsCtrl.size_to_add == null" translate="PRODUCT.VARIATIONS.ADD_SIZE"></a>
+							<a href="#" ng-click="productVariationsCtrl.addSizeToSizechart(productVariationsCtrl.size_to_add)" class="red-text col-md-12" ng-disabled="productVariationsCtrl.size_to_add == null"><span translate="product.variations.ADD_SIZE"></span></a>
 						</div>
 					</div>
 				</div>
 				<div class="row" ng-if="productVariationsCtrl.product.sizechart">
 					<div class="col-md-1">
-						<span translate="PRODUCT.VARIATIONS.SCALE"></span>
+						<span translate="product.variations.SCALE"></span>
 					</div>
 					<div class="col-md-1 pad-about">
 						<ol class="nya-bs-select categories-select ng-class:{'error-input': productVariationsCtrl.form_submitted && !productVariationsCtrl.product.sizechart['metric_unit']}" ng-model="productVariationsCtrl.product.sizechart['metric_unit']">
@@ -227,20 +227,20 @@
 			</div>
 			<div class="col-md-12" ng-if="productVariationsCtrl.prints" ng-cloak>
 				<div class="row">
-					<span class="title" translate="PRODUCT.VARIATIONS.PRINTS"></span>
+					<span class="title" translate="product.variations.PRINTS"></span>
 				</div>
 				<div class="row">
 					<div class="col-md-3 pad-about">
-						<span translate="PRODUCT.VARIATIONS.OFFER_PRINTS"></span>
+						<span translate="product.variations.OFFER_PRINTS"></span>
 					</div>
 					<div class="col-md-2 pad-about">
 						<div class="radio radio-inline ml-30">
 							<input type="radio" name="prints_selected" id="prints_selected" ng-model="productVariationsCtrl.prints_selected" ng-value="true" ng-change="productVariationsCtrl.setPrintsSelected(productVariationsCtrl.prints_selected)">
-							<label for="prints_selected" translate="PRODUCT.YES"></label>
+							<label for="prints_selected"><span translate="global.YES"></span></label>
 						</div>
 						<div class="radio radio-inline">
 							<input type="radio" name="prints_unselected" id="prints_unselected" ng-model="productVariationsCtrl.prints_selected" ng-value="false"  checked ng-change="productVariationsCtrl.setPrintsSelected(productVariationsCtrl.prints_selected)">
-							<label for="prints_unselected" translate="PRODUCT.NO"></label>
+							<label for="prints_unselected"><span translate="global.NO"></span></label>
 						</div>
 					</div>
 				</div>
@@ -248,7 +248,7 @@
 					<div class="row items-row">
 						<div class="row">
 							<div class="col-md-2">
-								<label for="paper" translate="PRODUCT.VARIATIONS.PAPER_TYPE"></label>
+								<label for="paper"><span translate="product.variations.PAPER_TYPE"></span></label>
 							</div>
 							<div class="col-md-10 pad-about ng-class:{'col-md-offset-2': $index > 0}" ng-repeat="type in productVariationsCtrl.product.prints.type track by $index">
 								<span>{{$index+1}}:&nbsp;</span>
@@ -263,19 +263,19 @@
 						</div>
 						<div class="row">
 							<div class="col-md-3 col-md-offset-2">
-								<span class="add-cathegory" ng-click="productVariationsCtrl.addType()" translate="PRODUCT.VARIATIONS.ADD_OPTION"></span>
+								<span class="add-cathegory" ng-click="productVariationsCtrl.addType()" translate="product.variations.ADD_OPTION"></span>
 							</div>
 						</div>
 					</div>
 					<div class="row items-row">
 						<div class="row">
 							<div class="mb-20 col-md-2">
-								<label for="size" translate="PRODUCT.VARIATIONS.PRINT_SIZE"></label>
+								<label for="size"><span translate="product.variations.PRINT_SIZE"></span></label>
 							</div>
 							<div class="col-md-10 pad-about form-inline ng-class:{'col-md-offset-2': $index > 0}" ng-repeat="size in productVariationsCtrl.product.prints.sizes track by $index">
 								<span class="pull-left">{{$index+1}}:&nbsp;</span>
-								<label for="width" class="col-md-1" style="font-size: 12px;" translate="PRODUCT.VARIATIONS.WIDTH"></label><input name="width" type="number" class="form-control col-md-1 ng-class:{'error-input': productVariationsCtrl.sizechartValuesValidation(productVariationsCtrl.product.prints.sizes[$index]['width'])}" ng-model="productVariationsCtrl.product.prints.sizes[$index]['width']" ng-min="0">
-								<label for="length" class="col-md-1" style="font-size: 12px;" translate="PRODUCT.VARIATIONS.LENGTH"></label><input name="length" type="number" class="form-control col-md-1 ng-class:{'error-input': productVariationsCtrl.sizechartValuesValidation(productVariationsCtrl.product.prints.sizes[$index]['length'])}" ng-model="productVariationsCtrl.product.prints.sizes[$index]['length']" ng-min="0">
+								<label for="width" class="col-md-1" style="font-size: 12px;"><span translate="product.variations.WIDTH"></span></label><input name="width" type="number" class="form-control col-md-1 ng-class:{'error-input': productVariationsCtrl.sizechartValuesValidation(productVariationsCtrl.product.prints.sizes[$index]['width'])}" ng-model="productVariationsCtrl.product.prints.sizes[$index]['width']" ng-min="0">
+								<label for="length" class="col-md-1" style="font-size: 12px;"><span translate="product.variations.LENGTH"></span></label><input name="length" type="number" class="form-control col-md-1 ng-class:{'error-input': productVariationsCtrl.sizechartValuesValidation(productVariationsCtrl.product.prints.sizes[$index]['length'])}" ng-model="productVariationsCtrl.product.prints.sizes[$index]['length']" ng-min="0">
 								<ol class="nya-bs-select categories-select col-md-2 ng-class:{'error-input': productVariationsCtrl.form_submitted && !productVariationsCtrl.product.print.sizes[$index]['metric_unit']}" ng-model="productVariationsCtrl.product.prints.sizes[$index]['metric_unit']">
 									<li nya-bs-option="unit in productVariationsCtrl.metric.size">
 										<a href="">
@@ -288,7 +288,7 @@
 						</div>
 						<div class="row">
 							<div class="col-md-5 col-md-offset-2">
-								<span class="add-cathegory" ng-click="productVariationsCtrl.addSize()" translate="PRODUCT.VARIATIONS.ADD_OPTION"></span>
+								<span class="add-cathegory" ng-click="productVariationsCtrl.addSize()" translate="product.variations.ADD_OPTION"></span>
 							</div>
 						</div>
 					</div>

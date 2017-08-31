@@ -1,8 +1,8 @@
 <?php
-use yii\web\View;
-use app\models\Lang;
-use yii\helpers\Json;
+
 use app\assets\desktop\admin\SizeChartAsset;
+use yii\helpers\Json;
+use yii\web\View;
 
 /* @var $this yii\web\View */
 /* @var $countries ArrayObject */
@@ -59,7 +59,7 @@ $this->title = 'Todevise / Admin / Size chart';
 									<label class="funiv fc-c7 fs0-929 fnormal">
 										<?= Yii::t("app/admin", "Categories"); ?>
 									</label>
-									<div angular-multi-select input-model="sizeChartCtrl.categories" output-model="sizeChartCtrl.sizechart.categories" output-keys="short_id" output-type="values" id-property="short_id" checked-property="check" children-property="sub" dropdown-label="<[ '<(name)>' | outputModelIterator : this : ', ' : '<?= Yii::t('app/public', 'Select category') ?>']>" node-label="<[ name ]>" leaf-label="<[ name ]>" preselect="{{ sizechart.categories | arrpatch : 'short_id' }}" search-field="name" hide-helpers="check_all, check_none, reset"></div>
+									<div angular-multi-select input-model="sizeChartCtrl.categories" output-model="sizeChartCtrl.sizechart.categories" output-keys="short_id" output-type="values" id-property="short_id" checked-property="check" children-property="sub" dropdown-label="<[ '<(name)>' | outputModelIterator : this : ', ' : '<?= Yii::t('app/public', 'SELECT_CATEGORY') ?>']>" node-label="<[ name ]>" leaf-label="<[ name ]>" preselect="{{ sizechart.categories | arrpatch : 'short_id' }}" search-field="name" hide-helpers="check_all, check_none, reset"></div>
 								</div>
 							</div>
 							<div class="col-xs-4 div-bordered size-chart-settings">
@@ -67,7 +67,7 @@ $this->title = 'Todevise / Admin / Size chart';
 									<label class="funiv fc-c7 fs0-929 fnormal">
 										<?= Yii::t("app/admin", "Metric unit"); ?>
 									</label>
-									<div angular-multi-select input-model='<?= Json::encode($mus) ?>' output-model="[]" name="metric_unit" checked-property="checked" children-property="sub" max-checked-leafs="1" dropdown-label="<[ '<(text)>' | outputModelIterator : this : ', ' : '<?= Yii::t('app/public', 'Select metric unit') ?>']>" node-label="<[ text ]>" leaf-label="<[ text ]>" preselect="value, {{ sizeChartCtrl.sizechart.metric_unit }}" hide-helpers="check_all, check_none, reset"></div>
+									<div angular-multi-select input-model='<?= Json::encode($mus) ?>' output-model="[]" name="metric_unit" checked-property="checked" children-property="sub" max-checked-leafs="1" dropdown-label="<[ '<(text)>' | outputModelIterator : this : ', ' : '<?= Yii::t('app/public', 'SELECT_METRIC_UNIT') ?>']>" node-label="<[ text ]>" leaf-label="<[ text ]>" preselect="value, {{ sizeChartCtrl.sizechart.metric_unit }}" hide-helpers="check_all, check_none, reset"></div>
 								</div>
 							</div>
 						</div>
@@ -163,7 +163,7 @@ $this->title = 'Todevise / Admin / Size chart';
 				<label class="modal-title funiv fs1 fnormal fc-18">
 					<?= Yii::t("app/admin", "Select country"); ?>
 				</label>
-				<div angular-multi-select input-model='<?= Json::encode($countries) ?>' output-model="[]" name="country" checked-property="checked" children-property="sub" max-checked-leafs="1" dropdown-label="<[ '<(country_name[&quot;{{ create_new_countryCtrl.lang }}&quot;])>' | outputModelIterator : this : ', ' : '<?= Yii::t('app/public', 'Select country') ?>']>" node-label="<[ country_name['{{ create_new_countryCtrl.lang }}'] ]>" leaf-label="<[ country_name['{{ create_new_countryCtrl.lang }}'] ]>" hide-helpers="check_all, check_none, reset"></div>
+				<div angular-multi-select input-model='<?= Json::encode($countries) ?>' output-model="[]" name="country" checked-property="checked" children-property="sub" max-checked-leafs="1" dropdown-label="<[ '<(country_name[&quot;{{ create_new_countryCtrl.lang }}&quot;])>' | outputModelIterator : this : ', ' : '<?= Yii::t('app/public', 'SELECT_COUNTRY') ?>']>" node-label="<[ country_name['{{ create_new_countryCtrl.lang }}'] ]>" leaf-label="<[ country_name['{{ create_new_countryCtrl.lang }}'] ]>" hide-helpers="check_all, check_none, reset"></div>
 			</div>
 			<div class='modal-footer'>
 				<button class='btn btn-light-green fc-18 funiv fs0-786 fs-upper' ng-click='create_new_countryCtrl.form.$submitted = true; create_new_countryCtrl.form.$valid && create_new_countryCtrl.ok()'>

@@ -29,7 +29,7 @@ $lang = Yii::$app->language;
 				<div class="search-header-content fc-fff">
 					<div class="cols-xs12 fs-upper flex flex-align-center flex-column flex-justify-center search-header">
 						<div class="fs3-857 funiv_thin">
-							<?= Yii::t('app/public', 'Help & Faq') ?>
+							<?= Yii::t('app/old', 'Help & Faq') ?>
 						</div>
 
 						<div class="search_holder fs0-857">
@@ -44,7 +44,7 @@ $lang = Yii::$app->language;
 
 				<div class="col-xs-12 flex">
 					<div class="column-left col-xs-2 funiv_bold fs-upper bc-e9">
-						<div class="column-header fs1-357 fc-fff bc-d8 flex flex-align-center"><span><?= Yii::t('app/public', 'FAQ') ?></span></div>
+						<div class="column-header fs1-357 fc-fff bc-d8 flex flex-align-center"><span><?= Yii::t('app/old', 'FAQ') ?></span></div>
 						<div>
 							<ul class="fs0-857 funiv_bold" ng-repeat="answersAndQuestions in faqCtrl.groupOfFaqs">
 								<li id="" class="menu-entry" ng-click="faqCtrl.showFaqs(answersAndQuestions.short_id)" ng-bind="answersAndQuestions.title"></li>

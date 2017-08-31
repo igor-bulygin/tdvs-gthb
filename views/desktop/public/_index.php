@@ -34,7 +34,7 @@ $this->title = 'Todevise / Home';
 							<div class="carousel-caption flex flex-column">
 								<span class="name funiv_thin fs4-714 fc-1c1919 ls0-01 fs-upper"><?= $banner['caption']['name'] ?></span>
 								<span class="category fpf fc-9b fs0-857"><?= $banner['caption']['category'] ?></span>
-								<a class="pointer works black funiv_bold fs-upper fc-fff fs1-143"><?= Yii::t('app/public', 'View works') ?></a>
+								<a class="pointer works black funiv_bold fs-upper fc-fff fs1-143"><?= Yii::t('app/old', 'View works') ?></a>
 							</div>
 						</div>
 					<?php } ?>
@@ -57,11 +57,11 @@ $this->title = 'Todevise / Home';
 					<div class="row no-gutter">
 						<div class="col-xs-12 no-horizontal-padding">
 							<div class="flex fpf fc-5b fs0-857 fs-upper links">
-								<span class="active pointer"><?= Yii::t('app/public', 'Most popular') ?></span>
-								<span class="pointer"><?= Yii::t('app/public', 'Newest') ?></span>
-								<span class="pointer"><?= Yii::t('app/public', 'More ecological') ?></span>
+								<span class="active pointer"><?= Yii::t('app/old', 'Most popular') ?></span>
+								<span class="pointer"><?= Yii::t('app/old', 'Newest') ?></span>
+								<span class="pointer"><?= Yii::t('app/old', 'More ecological') ?></span>
 								<div class="flex-prop-1"></div>
-								<span class="pointer text-right"><?= Yii::t('app/public', 'View all devisers') ?></span>
+								<span class="pointer text-right"><?= Yii::t('app/old', 'View all devisers') ?></span>
 							</div>
 						</div>
 					</div>
@@ -141,8 +141,8 @@ $this->title = 'Todevise / Home';
 
 					//TODO: Enable when filters are required...
 					/*echo*/ $form->field($category['filter_model'], 'selected')->radioList([
-						'odd' => Yii::t('app/public', 'Odd products'),
-						'even' => Yii::t('app/public', 'Even products')
+						'odd' => Yii::t('app/old', 'Odd products'),
+						'even' => Yii::t('app/old', 'Even products')
 					], [
 						'unselect' => null,
 						'item' => function ($index, $label, $name, $checked, $value) use ($form) {

@@ -11,7 +11,7 @@ GlobalAsset::register($this);
 /** @var Person $person */
 
 $this->title = Yii::t('app/public',
-	'Edit {person_name} faqs - Todevise',
+	'EDIT_PERSON_NAME_FAQS',
 	['person_name' => $person->getName()]
 );
 
@@ -34,17 +34,17 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 				<div class="faq-wrapper faq-edit-list">
 					<!-- <div class="section-title">FAQ</div> -->
 					<div ng-if="editFaqCtrl.person.faq.length>0">
-						<a class="red-link-btn" href="#" ng-click="editFaqCtrl.done()"><span translate="DONE_FAQ"></span></a></div>
+						<a class="red-link-btn" href="#" ng-click="editFaqCtrl.done()"><span translate="person.faq.DONE_FAQ"></span></a></div>
 					<div class="edit-faq-wrapper" ng-cloak ng-if="editFaqCtrl.person.faq.length > 0">
 						<div class="plus-add-wrapper" ng-if="editFaqCtrl.person.faq.length > 0" ng-click="editFaqCtrl.addQuestion()">
 							<div class="plus-add">
 								<span>+</span>
 							</div>
-							<div class="text"><span translate="ADD_QUESTION"></span></div>
+							<div class="text"><span translate="person.faq.ADD_QUESTION"></span></div>
 						</div>
 						<div dnd-list="editFaqCtrl.person.faq" dnd-dragover="editFaqCtrl.dragOver(index)">
 							<div class="delete-options-wrapper" ng-repeat="question in editFaqCtrl.person.faq track by $index" style="cursor:move;" dnd-draggable="question" dnd-effect-allowed="move" dnd-dragstart="editFaqCtrl.dragStart($index)" dnd-canceled="editFaqCtrl.canceled()" dnd-moved="editFaqCtrl.moved($index)">
-								<a class="delete-link pull-right" href="#" ng-click="editFaqCtrl.deleteQuestion($index)"><span translate="DELETE_QUESTION"></span></a>
+								<a class="delete-link pull-right" href="#" ng-click="editFaqCtrl.deleteQuestion($index)"><span translate="person.faq.DELETE_QUESTION"></span></a>
 								<div class="edit-faq-panel">
 									<div class="faq-language-menu">
 										<ol class="nya-bs-select form-control" ng-model="question.languageSelected" ng-change="editFaqCtrl.parseQuestion(question)" ng-init="question.languageSelected='en-US'">
@@ -57,18 +57,18 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 										</ol>
 										<div class="faq-row">
 											<div class="col-sm-1">
-												<span class="faq-edit-question"><span translate="QUESTION"></span></span>
+												<span class="faq-edit-question"><span translate="person.faq.QUESTION"></span></span>
 											</div>
 											<div class="col-sm-11">
-												<input type="text" class="faq-edit-answer" translate-attr="{placeholder: 'QUESTION'}" ng-model="question.question[question.languageSelected]">
+												<input type="text" class="faq-edit-answer" translate-attr="{placeholder: 'person.faq.QUESTION'}" ng-model="question.question[question.languageSelected]">
 											</div>
 										</div>
 										<div class="faq-row">
 											<div class="col-sm-1">
-												<span class="faq-edit-question"><span translate="ANSWER"></span></span>
+												<span class="faq-edit-question"><span translate="person.faq.ANSWER"></span></span>
 											</div>
 											<div class="col-sm-11">
-												<div class="faq-edit-answer" text-angular ng-model="question.answer[question.languageSelected]" ta-toolbar="[]" translate-attr="{placeholder: 'ANSWER'}" ta-paste="editFaqCtrl.stripHTMLTags($html)"></div>
+												<div class="faq-edit-answer" text-angular ng-model="question.answer[question.languageSelected]" ta-toolbar="[]" translate-attr="{placeholder: 'person.faq.ANSWER'}" ta-paste="editFaqCtrl.stripHTMLTags($html)"></div>
 											</div>
 										</div>
 									</div>
@@ -78,9 +78,9 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 					</div>
 					<div class="faq-edit-empty" ng-if="editFaqCtrl.person.faq.length === 0" ng-cloak>
 						<img class="sad-face" src="/imgs/sad-face.svg">
-							<p><span translate="NO_FAQS"></span>
-							<br/> <span translate="START_WRITE_FAQ"></span></p>
-							<a class="btn btn-green edit-faq-btn" href="#" ng-click="editFaqCtrl.addQuestion()"><span translate="ADD_QUESTION"></span></a>
+							<p><span translate="person.faq.NO_FAQS"></span>
+							<br/> <span translate="person.faq.START_WRITE_FAQ"></span></p>
+							<a class="btn btn-green edit-faq-btn" href="#" ng-click="editFaqCtrl.addQuestion()"><span translate="person.faq.ADD_QUESTION"></span></a>
 					</div>
 				</div>
 			</div>

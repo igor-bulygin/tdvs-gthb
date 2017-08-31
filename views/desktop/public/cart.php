@@ -6,7 +6,7 @@ use app\assets\desktop\cart\GlobalAsset;
 
 GlobalAsset::register($this);
 
-$this->title = Yii::t('app/public', 'Cart - Todevise');
+$this->title = Yii::t('app/public', 'CART');
 ?>
 
 <div class="store" ng-controller="cartOverviewCtrl as cartOverviewCtrl">
@@ -15,7 +15,7 @@ $this->title = Yii::t('app/public', 'Cart - Todevise');
 				<div class="pull-right">
 					<a class="continue-shopping-btn" href="/">
 						<i class="ion-arrow-left-b"></i>
-						<span translate="CONTINUE_SHOPPING"></span>
+						<span translate="cart.CONTINUE_SHOPPING"></span>
 					</a>
 				</div>
 			</div>

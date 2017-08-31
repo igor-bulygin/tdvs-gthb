@@ -44,7 +44,7 @@ class Login extends Model {
 			$person = $this->getUser();
 
 			if (!$person || $person->account_state == Person::ACCOUNT_STATE_BLOCKED || !$person->validatePassword($this->password)) {
-				$this->addError($attribute, Yii::t("app/public", "Incorrect username or password."));
+				$this->addError($attribute, Yii::t("app/public", "INCORRECT_USERNAME_OR_PASSWORD"));
 			}
 		}
 	}

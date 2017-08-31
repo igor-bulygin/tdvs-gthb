@@ -6,7 +6,7 @@ use app\models\Person;
 
 PublicCommonAsset::register($this);
 
-$this->title = Yii::t('app/public', 'Todevise');
+$this->title = Yii::t('app/public', 'INDEX_TITLE');
 
 /** @var Person[][] $devisers */
 /** @var int $totalDevisers */
@@ -45,13 +45,13 @@ $this->title = Yii::t('app/public', 'Todevise');
 			<span class="glyphicon glyphicon-chevron-left banner-btn" aria-hidden="true">
 				<i class="ion-ios-arrow-left"></i>
 			</span>
-			<span class="sr-only">Previous</span>
+			<span class="sr-only"><span translate="global.PREVIOUS"></span></span>
 		  </a>
 		  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
 			<span class="glyphicon glyphicon-chevron-right banner-btn" aria-hidden="true">
 				<i class="ion-ios-arrow-right"></i>
 			</span>
-			<span class="sr-only">Next</span>
+			<span class="sr-only"><span translate="global.NEXT"></span></span>
 		  </a>
 	</div>
 </div>
@@ -82,7 +82,7 @@ $this->title = Yii::t('app/public', 'Todevise');
 <section class="grid-wrapper">
 	<div class="container">
 		<div class="section-title">
-			Highlighted Works
+			<span translate="todevise.index.HIGHLIGHTED_WORKS"></span>
 		</div>
 		<div>
 			<?php foreach ($works12 as $i => $work) { ?>
@@ -141,17 +141,17 @@ $this->title = Yii::t('app/public', 'Todevise');
 			<h3>Artists, designers, creators who<br>
 			shape outstanding works</h3>
 			<div class="section-title">
-				Devisers
+				<span translate="global.DEVISERS"></span>
 			</div>
 			<!-- Controls -->
 			<div class="prev-next-wrapper">
 				<?php if ($totalDevisers > 5) { ?>
 					<a class="prev" href="#carousel-devisers" role="button" data-slide="prev">
 						<i class="ion-ios-arrow-left"></i>
-						<span>Previous</span>
+						<span translate="global.PREVIOUS"></span>
 					</a>
 					<a class="next" href="#carousel-devisers" role="button" data-slide="next">
-						<span>Next</span>
+						<span translate="global.NEXT"></span>
 						<i class="ion-ios-arrow-right"></i>
 					</a>
 				<?php } ?>
@@ -164,7 +164,7 @@ $this->title = Yii::t('app/public', 'Todevise');
 						<div class="col-md-15 col-sm-15 col-xs-6 pad-showcase">
 								<a href="<?= $deviser->getStoreLink()?>">
 								<figure class="showcase">
-								<button class="btn btn-default btn-follow"><i class="ion-star"></i><span>Follow</span>
+								<button class="btn btn-default btn-follow"><i class="ion-star"></i><span translate="global.FOLLOW"></span>
 								</button>
 								<img src="<?= Utils::url_scheme() ?><?= Utils::thumborize($deviser->getHeaderBackgroundImage())->resize(350, 344) ?>" class="showcase-image">
 								<figcaption>
@@ -193,7 +193,7 @@ $this->title = Yii::t('app/public', 'Todevise');
 		<?php } ?>
 
 				<div class="section-title">
-					Boxes
+					<span translate="global.BOXES"></span>
 				</div>
 
 				<div class="row no-mar">
@@ -203,7 +203,7 @@ $this->title = Yii::t('app/public', 'Todevise');
 							<div class="boxes-wrapper home">
 								<?php if (empty($products)) { ?>
 									<div class="empty-box">
-										<span class="empty-title">Empty box</span>
+										<span class="empty-title"><span translate="global.EMPTY_BOX"></span></span>
 									</div>
 								<?php } else {
 									$count  = 1;
@@ -231,7 +231,7 @@ $this->title = Yii::t('app/public', 'Todevise');
 
 			<div class="col-lg-4">
 				<div class="section-title">
-					Stories
+					<span translate="global.STORIES"></span>
 				</div>
 				<?php foreach ($stories as $story) { ?>
 					<a href="<?=$story->getViewLink()?>">
@@ -273,17 +273,17 @@ $this->title = Yii::t('app/public', 'Todevise');
 		<div class="container">
 			<h3>Discover the works they love</h3>
 			<div class="section-title">
-				Influencers
+				<span translate="global.INFLUENCERS"></span>
 			</div>
 			<!-- Controls -->
 			<div class="prev-next-wrapper">
 				<?php if ($totalInfluencers > 3) { ?>
 					<a class="prev" href="#carousel-influencers" role="button" data-slide="prev">
 						<i class="ion-ios-arrow-left"></i>
-						<span>Previous</span>
+						<span translate="global.PREVIOUS"></span>
 					</a>
 					<a class="next" href="#carousel-influencers" role="button" data-slide="next">
-						<span>Next</span>
+						<span translate="global.NEXT"></span>
 						<i class="ion-ios-arrow-right"></i>
 					</a>
 				<?php } ?>
@@ -320,7 +320,7 @@ $this->title = Yii::t('app/public', 'Todevise');
 <section class="grid-wrapper">
 	<div class="container">
 		<div class="section-title">
-			Highlighted Works
+			<span translate="todevise.index.HIGHLIGHTED_WORKS"></span>
 		</div>
 		<div>
 			<?php foreach ($moreWork as $worksGroup) { ?>

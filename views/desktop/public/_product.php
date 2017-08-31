@@ -58,7 +58,7 @@ $this->title = 'Todevise / Product';
 					</div>
 
 					<div class="col-xs-3 max-height stock_price_wrapper flex flex-column flex-justify-center text-right">
-						<span ng-cloak class="stock funiv fs0-857 fc-7aaa4a">{{ selected_options_match.stock }} <?= Yii::t('app/public', 'stock') ?></span>
+						<span ng-cloak class="stock funiv fs0-857 fc-7aaa4a">{{ selected_options_match.stock }} <?= Yii::t('app/old', 'stock') ?></span>
 						<span ng-cloak class="price funiv_bold fs1-571 fc-7ab83a">{{ selected_options_match.price }} <?= Currency::getSymbol($product['currency']) ?></span>
 					</div>
 
@@ -95,7 +95,7 @@ $this->title = 'Todevise / Product';
 						<div class="" ng-cloak ng-if="product.sizechart.short_id != undefined">
 							<div class="row no-gutter option-row">
 								<div class="col-lg-2 col-xs-3">
-									<span class="cdefault funiv_bold fc-6d fs0-929 fs-upper"><?= Yii::t('app/public', 'Size') ?></span>
+									<span class="cdefault funiv_bold fc-6d fs0-929 fs-upper"><?= Yii::t('app/old', 'Size') ?></span>
 								</div>
 								<div class="col-lg-10 col-xs-9">
 									<span class="option pointer flex-inline funiv fs0-857 fc-4a bc-4a"
@@ -156,11 +156,11 @@ $this->title = 'Todevise / Product';
 					<div class="buttons flex flex-justify-center flex-prop-1-0 flex-prop funiv_ultra fs-upper fc-3d fs1 lwhite">
 						<span class="savebox pointer">
 							<span class="glyphicon glyphicon-arrow-down"></span>
-							<span class="funiv_bold fs1 fs-upper"><?= Yii::t('app/public', 'Save in a box') ?></span>
+							<span class="funiv_bold fs1 fs-upper"><?= Yii::t('app/old', 'Save in a box') ?></span>
 						</span>
 						<span class="addcart pointer">
 							<span class="glyphicon glyphicon-shopping-cart"></span>
-							<span class="funiv_bold fs1 fs-upper" ng-click="addToCart()"><?= Yii::t('app/public', 'Add to cart') ?></span>
+							<span class="funiv_bold fs1 fs-upper" ng-click="addToCart()"><?= Yii::t('app/old', 'Add to cart') ?></span>
 						</span>
 					</div>
 
@@ -170,7 +170,7 @@ $this->title = 'Todevise / Product';
 							<div class="panel-heading flex flex-prop-0-0" role="tab" id="headingOne">
 								<div class="panel-title description_title funiv_bold fs0-929 fc-6d fs-upper relative max-width">
 									<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-										<?= Yii::t('app/public', 'Description') ?>
+										<?= Yii::t('app/old', 'Description') ?>
 									</a>
 									<span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>
 								</div>
@@ -184,7 +184,7 @@ $this->title = 'Todevise / Product';
 							<div class="panel-heading flex flex-prop-0-0" role="tab" id="headingTwo">
 								<div class="panel-title characteristics_title funiv_bold fs0-929 fc-6d fs-upper relative max-width">
 									<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-										<?= Yii::t('app/public', 'Characteristics') ?>
+										<?= Yii::t('app/old', 'Characteristics') ?>
 									</a>
 									<span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>
 								</div>
@@ -218,7 +218,7 @@ $this->title = 'Todevise / Product';
 							<div class="panel-heading flex flex-prop-0-0" role="tab" id="headingThree">
 								<div class="panel-title policies_title funiv_bold fs0-929 fc-6d fs-upper relative max-width">
 									<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-										<?= Yii::t('app/public', 'Work policies') ?>
+										<?= Yii::t('app/old', 'Work policies') ?>
 									</a>
 									<span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>
 								</div>
@@ -228,14 +228,14 @@ $this->title = 'Todevise / Product';
 									<span>
 										<?php
 										if ($product["returns"]["type"] == Returns::DAYS) {
-											echo Yii::t('app/public', '{days,plural,=0{No returns} =1{Money-back guarantee of # day} other{Money-back guarantee of # days}}.', ['days' => $product["returns"]["value"]]);
+											echo Yii::t('app/old', '{days,plural,=0{No returns} =1{Money-back guarantee of # day} other{Money-back guarantee of # days}}.', ['days' => $product["returns"]["value"]]);
 										}
 										?>
 									</span>
 									<span>
 										<?php
 										if ($product["warranty"]["type"] == Warranty::MONTHS) {
-											echo Yii::t('app/public', '{months,plural,=0{# No warranty} =1{# month warranty} other{# months warranty}}.', ['months' => $product["warranty"]["value"]]);
+											echo Yii::t('app/old', '{months,plural,=0{# No warranty} =1{# month warranty} other{# months warranty}}.', ['months' => $product["warranty"]["value"]]);
 										}
 										?>
 									</span>
@@ -245,7 +245,7 @@ $this->title = 'Todevise / Product';
 					</div>
 
 					<div class="flex flex-justify-end flex-prop-1-0 social_wrapper">
-						<span class="social_title funiv fc-64 fs1"><?= Yii::t('app/public', 'Share on') ?></span>
+						<span class="social_title funiv fc-64 fs1"><?= Yii::t('app/old', 'Share on') ?></span>
 						<div class="ssk-round ssk-grayscale ssk-group ssk-xs">
 							<a href="" class="ssk ssk-facebook"></a>
 							<a href="" class="ssk ssk-twitter"></a>
@@ -262,16 +262,16 @@ $this->title = 'Todevise / Product';
 	<div class="col-xs-12 no-horizontal-padding tabs-wrapper flex flex-prop-0-0">
 		<ul class="flex funiv_bold fs0-857 fs-upper tabs no-horizontal-padding no-vertical-margin">
 			<li class="pointer text-center active">
-				<a class="fc-5b" data-toggle="tab" href="#deviser_works"><?= Yii::t('app/public', 'Works by {name} {surnames}', [
+				<a class="fc-5b" data-toggle="tab" href="#deviser_works"><?= Yii::t('app/old', 'Works by {name} {surnames}', [
 					'name' => $deviser['personal_info']['name'],
 					'surnames' => implode(" ", $deviser['personal_info']['surnames'])
 				]) ?></a>
 			</li>
 			<li class="pointer text-center">
-				<a class="fc-5b" data-toggle="tab" href="#boxes"><?= Yii::t('app/public', 'Boxes') ?></a>
+				<a class="fc-5b" data-toggle="tab" href="#boxes"><?= Yii::t('app/old', 'Boxes') ?></a>
 			</li>
 			<li class="pointer text-center">
-				<a class="fc-5b" data-toggle="tab" href="#comments"><?= Yii::t('app/public', 'Comments') ?></a>
+				<a class="fc-5b" data-toggle="tab" href="#comments"><?= Yii::t('app/old', 'Comments') ?></a>
 			</li>
 		</ul>
 	</div>

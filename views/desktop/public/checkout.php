@@ -7,7 +7,7 @@ use yii\helpers\Json;
 
 GlobalAsset::register($this);
 
-$this->title = Yii::t('app/public', 'Checkout - Todevise');
+$this->title = Yii::t('app/public', 'CHECKOUT');
 
 $this->params['person'] = $person;
 $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 'person-var-script');
@@ -19,7 +19,7 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 			<div class="pull-right">
 				<a href="/" class="continue-shopping-btn">
 					<i class="ion-arrow-left-b"></i>
-					<span translate="CONTINUE_SHOPPING"></span>
+					<span translate="cart.CONTINUE_SHOPPING"></span>
 				</a>
 			</div>
 		</div>

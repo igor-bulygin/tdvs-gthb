@@ -9,7 +9,7 @@ return [
 
 	'translator' => 'Yii::t',
 
-	'sort' => false,
+	'sort' => true,
 
 	'removeUnused' => true,
 

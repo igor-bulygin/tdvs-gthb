@@ -1,26 +1,36 @@
 {
-	"EXPLORE_BOXES":"Explore boxes",
-	"DISCOVER_LATEST_TRENDS":"Its time to discover the latest trends",
-	"SEARCHING":"Searching...",
-	"NO_BOXES_FOUNDED":"No boxes found with the specified search criteria.",
-	"WE_FOUND_X_RESULTS":"We found {{ counter }} results with the keywords ",
-	"FILTER_BY_COUNTRY":"Filter by country",
-	"SEE_MORE":"See more",
-	"SEARCH_KEYWORD":"Search keyword",
-	"DISCOVER_CREATORS":"Discover innovative and talented creators from around the globe",
-	"NO_DEVISERS_FOUNDED":"No devisers found with the specified search criteria.",
-	"FILTER_BY_THEME":"Filter by theme",
-	"FOLLOW":"Follow",
-	"NO_STORIES_FOUNDED":"No stories found with the specified search criteria.",
-	"SEE_THE_WORLD":"See the world from a whole different perspective",
-	"DISCOVER_INFLUENCERS":"Discover talented influencers from around the globe",
-	"OUR_DEVISERS":"Our devisers",
-	"OUR_INFLUENCERS":"Our influencers",
-	"STORIES":"Stories",
-	"NO_PRODUCTS_FOUND":"No products found with the specified search criteria.",
-	"ORDER_BY":"Order by",
-	"NEW":"New",
-	"OLD":"Old",
-	"PRICE_LOW_TO_HIGH":"Price low to high",
-	"PRICE_HIGH_TO_LOW":"Price high to low"
+	"discover": {
+		"EXPLORE_BOXES": "Explore boxes",
+		"SEARCH_KEYWORD": "Search keyword",
+		"SEARCHING": "Searching...",
+		"WE_FOUND_X_RESULTS": "We found {{ counter }} results with the keywords ",
+		"FILTER_BY_COUNTRY": "Filter by country",
+		"SEE_MORE": "See more",
+		"FILTER_BY_THEME": "Filter by theme",
+		"FOLLOW": "Follow",
+		"NO_PRODUCTS_FOUND": "No products found with the specified search criteria.",
+		"ORDER_BY": "Order by",
+		"NEW": "New",
+		"OLD": "Old",
+		"PRICE_LOW_TO_HIGH": "Price low to high",
+		"PRICE_HIGH_TO_LOW": "Price high to low",
+		"boxes": {
+			"DISCOVER_LATEST_TRENDS": "It's time to discover the latest trends",
+			"NO_BOXES_FOUND": "No boxes found with the specified search criteria."
+		},
+		"devisers": {
+			"OUR_DEVISERS": "Our devisers",
+			"DISCOVER_CREATORS": "Discover innovative and talented creators from around the globe",
+			"NO_DEVISERS_FOUND": "No devisers found with the specified search criteria."
+		},
+		"influencers": {
+			"OUR_INFLUENCERS": "Our influencers",
+			"DISCOVER_INFLUENCERS": "Discover talented influencers from around the globe"
+		},
+		"stories": {
+			"STORIES": "Stories",
+			"SEE_THE_WORLD": "See the world from a whole different perspective",
+			"NO_STORIES_FOUND": "No stories found with the specified search criteria."
+		}
+	}
 }
