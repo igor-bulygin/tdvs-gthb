@@ -1,8 +1,6 @@
 <?php
 
-use app\assets\desktop\pub\Index2Asset;
-use app\helpers\Utils;
-use app\models\Person;
+use app\assets\desktop\pub\Index2Asset;use app\helpers\Utils;use app\models\Person;
 
 Index2Asset::register($this);
 
@@ -178,7 +176,6 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 				<?php if ($totalInfluencers > 3) { ?>
 					<a class="prev" href="#carousel-influencers" role="button" data-slide="prev">
 						<i class="ion-ios-arrow-left"></i>
-						<span>Previous</span>
 					</a>
 				<?php } ?>
 				<div class="carousel-devisers-container <?= $totalInfluencers > 3 ? 'carousel slide' : ''?>" id="carousel-influencers" data-ride="carousel">
@@ -211,7 +208,6 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 				</div>
 				<?php if ($totalInfluencers > 3) { ?>
 					<a class="next" href="#carousel-influencers" role="button" data-slide="next">
-						<span>Next</span>
 						<i class="ion-ios-arrow-right"></i>
 					</a>
 				<?php } ?>
@@ -695,7 +691,15 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 					</div>
 				</div>
 			</div>
-			<?php } ?>
+		</div>
+	</section>
+<?php } ?>
+
+<!-- GRID -->
+<section class="grid-wrapper">
+	<div class="container">
+		<div class="section-title">
+			Highlighted Works
 		</div>
 		<?php /*
 		<div>
