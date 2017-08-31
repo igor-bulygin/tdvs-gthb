@@ -23,21 +23,21 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 	<div id="newProductHeader" class="new-product-header ng-class:{'purple': createProductCtrl.errors}" data-spy="affix" data-offset-top="120" ng-if="createProductCtrl.isPublicProfile">
 		<div class="container relative">
 			<div class="pull-left">
-				<a class="back-link" ng-href="{{createProductCtrl.link_profile}}" translate="PRODUCT.CREATION_EDITION.BACK_TO_PROFILE"></a>
+				<a class="back-link" ng-href="{{createProductCtrl.link_profile}}"><span translate="product.creation_edition.BACK_TO_PROFILE"></span></a>
 			</div>
 			<div class="avatar">
 				<img ng-src="{{createProductCtrl.profile || '/imgs/default-avatar.png'}}">
 			</div>
-			<div class="text-center" ng-if="!createProductCtrl.errors"><h4 class="title" translate="PRODUCT.CREATION_EDITION.NEW_WORK"></h4></div>
-			<div class="text-center" ng-if="createProductCtrl.errors" ng-cloak><p translate="PRODUCT.CREATION_EDITION.COMPLETE_REQUIRED_FIELDS"></p></div>
+			<div class="text-center" ng-if="!createProductCtrl.errors"><h4 class="title"><span translate="product.creation_edition.NEW_WORK"></span></h4></div>
+			<div class="text-center" ng-if="createProductCtrl.errors" ng-cloak><p><span translate="product.creation_edition.COMPLETE_REQUIRED_FIELDS"></span></p></div>
 			<div class="btns-group">
-				<button class="btn btn-transparent" ng-click="createProductCtrl.save('product_state_draft')" ng-disabled="createProductCtrl.saving" translate="PRODUCT.CREATION_EDITION.SAVE_PROGRESS"></button>
-				<button class="btn btn-default btn-green" ng-click="createProductCtrl.save('product_state_active')" ng-disabled="createProductCtrl.saving" translate="PRODUCT.CREATION_EDITION.PUBLISH_WORK"></button>
+				<button class="btn btn-transparent" ng-click="createProductCtrl.save('product_state_draft')" ng-disabled="createProductCtrl.saving"><span translate="product.creation_edition.SAVE_PROGRESS"></span></button>
+				<button class="btn btn-default btn-green" ng-click="createProductCtrl.save('product_state_active')" ng-disabled="createProductCtrl.saving"><span translate="product.creation_edition.PUBLISH_WORK"></span></button>
 			</div>
 		</div>
 	</div>
 	<div class="create-work-wrapper" >
-		<div id="productSaved" class="success-message-120" ng-if="createProductCtrl.progressSaved" ng-cloak><p class="text-center" translate="PRODUCT.CREATION_EDITION.PRODUCT_SAVED"></p></div>
+		<div id="productSaved" class="success-message-120" ng-if="createProductCtrl.progressSaved" ng-cloak><p class="text-center"><span translate="product.creation_edition.PRODUCT_SAVED"></span></p></div>
 		<div class="container" >
 			<div ng-show="!createProductCtrl.saving">
 				<product-basic-info product="createProductCtrl.product" categories="createProductCtrl.allCategories" languages="createProductCtrl.languages"></product-basic-info>
@@ -45,12 +45,12 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 				<product-price-stock product="createProductCtrl.product" categories="createProductCtrl.allCategories" tags="createProductCtrl.tags" papertypes="createProductCtrl.papertypes" metric="createProductCtrl.metric"></product-price-stock>
 				<product-more-details product="createProductCtrl.product" languages="createProductCtrl.languages"></product-more-details>
 				<div class="text-center">
-					<button class="btn btn-default btn-green" ng-click="createProductCtrl.save('product_state_active')" ng-disabled="createProductCtrl.saving" translate="PRODUCT.CREATION_EDITION.PUBLISH_WORK"></button>
+					<button class="btn btn-default btn-green" ng-click="createProductCtrl.save('product_state_active')" ng-disabled="createProductCtrl.saving"><span translate="product.creation_edition.PUBLISH_WORK"></span></button>
 				</div>
 			</div>
 			<div class="text-center" ng-if="createProductCtrl.saving">
 				<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-				<span class="sr-only" translate="PRODUCT.CREATION_EDITION.LOADING"></span>
+				<span class="sr-only" translate="product.creation_edition.LOADING"></span>
 			</div>
 		</div>
 	</div>
