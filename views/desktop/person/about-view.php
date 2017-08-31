@@ -76,7 +76,7 @@ foreach ($person->getAboutUrlImages() as $key => $urlImage) {
 					<div class="about-wrapper">
 						<div class="about-container">
 							<?php if ($person->isPersonEditable()) { ?>
-								<div><a class="red-link-btn top" href="<?= $person->getAboutEditLink()?>"><span translate="EDIT_ABOUT"></span></a></div>
+								<div><a class="red-link-btn top" href="<?= $person->getAboutEditLink()?>"><span translate="person.about.EDIT_ABOUT"></span></a></div>
 							<?php } ?>
 							<!--<div class="title">Abo<br>ut</div>-->
 							<div class="name-location-wrapper">
@@ -91,7 +91,7 @@ foreach ($person->getAboutUrlImages() as $key => $urlImage) {
 								<?= $person->getCategoriesLabel() ?>
 							</div>
 							<?php if ($person->hasResumeFile()) { ?>
-							<div class="resume-header"><a href="<?= $person->getUrlResumeFile() ?>">See resume</a></div>
+							<div class="resume-header"><a href="<?= $person->getUrlResumeFile() ?>"><span translate="person.about.SEE_RESUME"></span></a></div>
 							<?php } ?>
 							<div class="deviser-biography">
 							    <p><?= $person->text_biography ?></p>

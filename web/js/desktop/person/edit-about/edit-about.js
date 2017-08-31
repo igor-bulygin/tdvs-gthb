@@ -28,16 +28,16 @@
 			function setEditTexts(type) {
 				switch(type) {
 					case 2: 
-						vm.categories_text = "CHOOSE_FIELD_WORK";
-						vm.biography_text = "BIOGRAPHY_TEXT_DEVISER";
-						vm.resume_text = "RESUME_TEXT_DEVISER";
-						vm.resume_sub_text = "RESUME_SUBTEXT_DEVISER";
+						vm.categories_text = "person.about.CHOOSE_FIELD_WORK";
+						vm.biography_text = "person.about.BIOGRAPHY_TEXT_DEVISER";
+						vm.resume_text = "person.about.RESUME_TEXT_DEVISER";
+						vm.resume_sub_text = "person.about.RESUME_SUBTEXT_DEVISER";
 						break;
 					default:
-						vm.categories_text = "CHOOSE_FIELD_EXPERTISE";
-						vm.biography_text = "BIOGRAPHY_TEXT_OTHER";
-						vm.resume_text = "RESUME_TEXT_OTHER";
-						vm.resume_sub_text = "RESUME_SUBTEXT_OTHER";
+						vm.categories_text = "person.about.CHOOSE_FIELD_EXPERTISE";
+						vm.biography_text = "person.about.BIOGRAPHY_TEXT_OTHER";
+						vm.resume_text = "person.about.RESUME_TEXT_OTHER";
+						vm.resume_sub_text = "person.about.RESUME_SUBTEXT_OTHER";
 						break;
 				}
 			}

@@ -35,11 +35,11 @@ $this->params['person_links_target'] = 'public_view';
 					<div class="empty-wrapper">
 						<?php if ($person->isConnectedUser()) { ?>
 							<img class="sad-face" src="/imgs/sad-face.svg">
-							<p class="no-video-text"><span translate="You have no boxes!"></span></p>
+							<p class="no-video-text"><span translate="person.boxes.NO_BOXES"></span></p>
 
-							<button class="btn btn-green btn-add-box" ng-click="viewBoxesCtrl.openCreateBoxModal()"><span translate="ADD_BOX"></span></button>
+							<button class="btn btn-green btn-add-box" ng-click="viewBoxesCtrl.openCreateBoxModal()"><span translate="person.boxes.ADD_BOX"></span></button>
 						<?php } else { ?>
-							<p class="no-video-text"><?=$person->getName()?> <span translate="USER_NO_BOXES"></span></p>
+							<p class="no-video-text"><?=$person->getName()?> <span translate="person.boxes.USER_NO_BOXES"></span></p>
 						<?php } ?>
 					</div>
 
@@ -48,7 +48,7 @@ $this->params['person_links_target'] = 'public_view';
 					<div class="content-store">
 						<div class="store-grid">
 							<div class="title-wrapper-boxes title-wrapper">
-								<span class="title">Boxes by <?=$person->getName()?></span>
+								<span class="title"><span translate="person.boxes.BOXES_BY"></span> <?=$person->getName()?></span>
 							</div>
 							<div class="row">
 								<?php if ($person->isPersonEditable()) { ?>
@@ -59,7 +59,7 @@ $this->params['person_links_target'] = 'public_view';
 												<div class="plus-add">
 													<span>+</span>
 												</div>
-												<div class="text"><span translate="ADD_BOX"></span></div>
+												<div class="text"><span translate="person.boxes.ADD_BOX"></span></div>
 											</div>
 										</div>
 									</div>
@@ -70,7 +70,7 @@ $this->params['person_links_target'] = 'public_view';
 										<div class="boxes-wrapper">
 										<?php if (empty($products)) { ?>
 											<div class="empty-box">
-												<span class="empty-title"><span translate="EMPTY_BOX"></span></span>
+												<span class="empty-title"><span translate="person.boxes.EMPTY_BOX"></span></span>
 											</div>
 										<?php } else {
 											$count  = 1;

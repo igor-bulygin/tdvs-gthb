@@ -1,8 +1,6 @@
 {
-	"PRODUCT": {
-		"YES":"Yes",
-		"NO":"No",
-		"DETAIL": {
+	"product": {
+		"detail": {
 			"CHART_SIZES":"Chart sizes",
 			"IN_STOCK":" in stock",
 			"QUANTITY":"Quantity",
@@ -38,7 +36,7 @@
 			"MORE_BY":" More by ",
 			"RETURNS":"Returns: "
 		},
-		"CREATION_EDITION": {
+		"creation_edition": {
 			"BACK_TO_PROFILE":" &lt go back to your profile",
 			"NEW_WORK":"New work",
 			"COMPLETE_REQUIRED_FIELDS":"Please complete all the required fields before publishing your work.",
@@ -48,7 +46,7 @@
 			"LOADING":"Loading...",
 			"EDIT_WORK":"Edit work"
 		},
-		"BASIC_INFO": {
+		"basic_info": {
 			"BASIC_INFO":"Basic work information",
 			"TITLE":"Title",
 			"TITLE_MANDATORY":"Title in english is mandatory.",
@@ -69,9 +67,10 @@
 			"MARK_AS_MAIN":"Mark one of the photos as 'main photo' by clicking the star icon.",
 			"MARKED_AS_MAIN":"Marked as main photo",
 			"UPLOAD_1_PHOTO":"Please upload at least 1 photo.",
-			"TAGS":"Tags"
+			"TAGS":"Tags",
+			"PLS_TRANSLATE": "Please translate each field into Spanish and English"
 		},
-		"MORE_DETAILS": {
+		"more_details": {
 			"TITLE":"More details about your work (optional)",
 			"PHOTOS_DESCRIPTION":"Description photos",
 			"ENRICH_DESCRIPTION":"Enrich your work description with photos that showcase its main features.",
@@ -83,7 +82,7 @@
 			"ANSWER":"Answer",
 			"ADD_QUESTION":"+ Add another question"
 		},
-		"PRICE_STOCK": {
+		"price_stock": {
 			"TITLE":"Price & Stock",
 			"WARNING":"WARNING!",
 			"CHANGES_AFFECT_VALUES":" If you change any of the options above (color, material, etc.), the values you already entered in the price and stock table (weight, stock, price) will be set to 0.",
@@ -99,7 +98,7 @@
 			"APPLY_ALL":"Apply to all",
 			"CURRENCY":"$ "
 		},
-		"VARIATIONS": {
+		"variations": {
 			"TITLE":"Variations & Manufacturing",
 			"WORK_OPTIONS":"Work Options",
 			"OPTIONAL":"OPTIONAL",

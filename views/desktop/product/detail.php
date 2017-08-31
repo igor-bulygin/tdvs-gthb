@@ -31,7 +31,7 @@ $videos = $product->getVideos();
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title" id="myModalLabel" translate="PRODUCT.DETAIL.CHART_SIZES"></h4>
+						<h4 class="modal-title" id="myModalLabel"><span translate="product.detail.CHART_SIZES"></span></h4>
 					</div>
 					<div class="modal-body">
 						<table class="table table-striped">
@@ -118,11 +118,11 @@ $videos = $product->getVideos();
 						</div>
 						<div class="product-data">
 							<div class="price-stock pull-left">
-								<div class="stock"><span ng-bind="detailProductCtrl.stock"></span translate="PRODUCT.DETAIL.IN_STOCK"></div>
+								<div class="stock"><span ng-bind="detailProductCtrl.stock"></span><span translate="product.detail.IN_STOCK"></span></div>
 								<div class="product-price">€ <span ng-bind="detailProductCtrl.price"></span></div>
 							</div>
 							<div class="quantity-wrapper pull-right">
-								<span class="atr quantity-name" translate="PRODUCT.DETAIL.QUANTITY"></span>
+								<span class="atr quantity-name" translate="product.detail.QUANTITY"></span>
 								<div class="number" ng-bind="detailProductCtrl.quantity"></div>
 								<button class="btn btn-green btn-summatory" ng-click="detailProductCtrl.changeQuantity(1)">
 									<span>+</span>
@@ -135,10 +135,10 @@ $videos = $product->getVideos();
 						<div class="product-data">
 							<ul class="nav nav-tabs product-detail-tabs" role="tablist" ng-if="detailProductCtrl.original_artwork" ng-cloak>
 								<li role="presentation" class="no-b-r">
-									<a href="#" translate="PRODUCT.DETAIL.ORIGINAL" aria-controls="description" role="tab" data-toggle="tab" ng-click="detailProductCtrl.changeOriginalArtwork(true)"></a>
+									<a href="#" aria-controls="description" role="tab" data-toggle="tab" ng-click="detailProductCtrl.changeOriginalArtwork(true)"><span translate="product.detail.ORIGINAL"></span></a>
 								</li>
 								<li role="presentation" class="active">
-									<a href="#" translate="PRODUCT.DETAIL.PRINTS" aria-controls="works" role="tab" data-toggle="tab" ng-click="detailProductCtrl.changeOriginalArtwork(false)"></a>
+									<a href="#" aria-controls="works" role="tab" data-toggle="tab" ng-click="detailProductCtrl.changeOriginalArtwork(false)"><span translate="product.detail.PRINTS"></span></a>
 								</li>
 							</ul>
 							<div>
@@ -159,7 +159,7 @@ $videos = $product->getVideos();
 															</ol>
 														</div>
 														<div class="col-sm-4 no-pad">
-															<a class="view-chart-size" href="#" href="#" data-toggle="modal" data-target="#chartModal" ng-if="option.id==='size'" translate="PRODUCT.DETAIL.VIEW_SIZE_CHART"></a>
+															<a class="view-chart-size" href="#" href="#" data-toggle="modal" data-target="#chartModal" ng-if="option.id==='size'"><span translate="product.detail.VIEW_SIZE_CHART"></span></a>
 														</div>
 													</div>
 												</div>
@@ -189,7 +189,7 @@ $videos = $product->getVideos();
 								</form>
 							</div>-->
 							<div class="row-size">
-								<button type="button" class="btn btn-green btn-add-to-cart" ng-disabled="detailProductCtrl.stock === 0" ng-click="detailProductCtrl.addToCart(detailProductCtrl.tagsForm)"><i class="ion-ios-cart cart-icon-btn"></i> <span translate="PRODUCT.DETAIL.ADD_TO_CART"></span></button>
+								<button type="button" class="btn btn-green btn-add-to-cart" ng-disabled="detailProductCtrl.stock === 0" ng-click="detailProductCtrl.addToCart(detailProductCtrl.tagsForm)"><i class="ion-ios-cart cart-icon-btn"></i> <span translate="product.detail.ADD_TO_CART"></span></button>
 							</div>
 						</div>
 						<!--<div class="product-data">
@@ -227,29 +227,30 @@ $videos = $product->getVideos();
 								<?php if ($product->isWorkFromCurrentUser()) { ?>
 									<a href="<?=$product->getEditLink()?>" class="btn btn-hart btn-grey pull-left">
 										<i class="ion-edit"></i>
-										<span translate="PRODUCT.DETAIL.EDIT_WORK"></span>
+										<span translate="product.detail.EDIT_WORK"></span>
 									</a>
 								<?php } else { ?>
 									<button type="button" class="btn btn-hart pull-left" ng-class="detailProductCtrl.product.isLoved ? 'btn-red' : 'btn-grey'" ng-click="detailProductCtrl.setLoved()">
 										<i class="ion-ios-heart"></i>
-										<span ng-if="!detailProductCtrl.product.isLoved" ng-cloak translate="PRODUCT.DETAIL.LOVE_WORK"></span>
-										<span ng-if="detailProductCtrl.product.isLoved" ng-cloak translate="PRODUCT.DETAIL.YOU_LOVE_WORK"></span>
+										<span ng-if="!detailProductCtrl.product.isLoved" ng-cloak translate="product.detail.LOVE_WORK"></span>
+										<span ng-if="detailProductCtrl.product.isLoved" ng-cloak translate="product.detail.YOU_LOVE_WORK"></span>
 									</button>
 								<?php } ?>
 								<button type="button" class="btn btn-grey btn-hart pull-right" ng-click="detailProductCtrl.setBox()">
 									<i class="ion-ios-box"></i>
-									<span translate="PRODUCT.DETAIL.SAVE_IN_BOX"></span>
+									<span translate="product.detail.SAVE_IN_BOX"></span>
 								</button>
 
 							</div>
 							<div class="row-size">
-								<span class="btn-tagline loved pull-left" translate="PRODUCT.DETAIL.LOVED"><span ng-bind="detailProductCtrl.product.loveds"></span translate="PRODUCT.DETAIL.TIMES"></span>
-								<span class="btn-tagline saved pull-right" translate="PRODUCT.DETAIL.SAVED_IN_X_BOXES" translate-values="{ x:detailProductCtrl.product.boxes}"></span>
+								<span class="btn-tagline loved pull-left" translate="product.detail.LOVED"></span>
+								<span ng-bind="detailProductCtrl.product.loveds"></span><span translate="product.detail.TIMES"></span>
+								<span class="btn-tagline saved pull-right" translate="product.detail.SAVED_IN_X_BOXES" translate-values="{ x:detailProductCtrl.product.boxes}"></span>
 							</div>
 							<div>
 								<ul class="social-items">
 									<li>
-										<span translate="PRODUCT.DETAIL.SHARE_ON"></span>
+										<span translate="product.detail.SHARE_ON"></span>
 									</li>
 									<li>
 										<a href="#">
@@ -286,15 +287,15 @@ $videos = $product->getVideos();
 		<div class="container">
 			<ul class="nav nav-tabs product-tabs" role="tablist">
 				<li role="presentation" class="active no-b-r">
-					<a href="#description" aria-controls="description" role="tab" data-toggle="tab" translate="PRODUCT.DETAIL.DESCRIPTION&REVIEWS"></a>
+					<a href="#description" aria-controls="description" role="tab" data-toggle="tab"><span translate="product.detail.DESCRIPTION&REVIEWS"></span></a>
 				</li>
 				<?php if (count($videos)) { ?>
 				<li role="presentation" class="no-b-r">
-					<a href="#videos" aria-controls="works" role="tab" data-toggle="tab" translate="PRODUCT.DETAIL.VIDEOS"></a>
+					<a href="#videos" aria-controls="works" role="tab" data-toggle="tab"><span translate="product.detail.VIDEOS"></span></a>
 				</li>
 				<?php } ?>
 				<li role="presentation">
-					<a href="#works" aria-controls="works" role="tab" data-toggle="tab" translate="PRODUCT.DETAIL.MORE_BY"><?= $person->getName() ?></a>
+					<a href="#works" aria-controls="works" role="tab" data-toggle="tab"><span translate="product.detail.MORE_BY"></span><?= $person->getName() ?></a>
 				</li>
 			</ul>
 		</div>
@@ -304,7 +305,7 @@ $videos = $product->getVideos();
 				<div role="tabpanel" class="tab-pane work-description-wrapper active" id="description">
 					<div class="work-profile-description-wrapper">
 						<div class="col-sm-8 pad-product">
-							<div class="title" translate="PRODUCT.DETAIL.DESCRIPTION"></div>
+							<div class="title"><span translate="product.detail.DESCRIPTION"></span></div>
 							<p class="description">
 								<?= $product->description ?>
 							</p>
@@ -324,11 +325,11 @@ $videos = $product->getVideos();
 						</div>
 						<div class="col-sm-4">
 							<div class="shipping-policies-wrapper">
-								<div class="title" translate="PRODUCT.DETAIL.SHIPPING&POLICIES"></div>
+								<div class="title"><span translate="product.detail.SHIPPING&POLICIES"></span></div>
 									<div class="policies-row">
 									<form class="form-horizontal">
 										<div class="form-group">
-											<label class="col-sm-5 control-label shipping-label no-pad-r"><span translate="PRODUCT.DETAIL.SHIPPING_PRICE_SPAIN"></span></label>
+											<label class="col-sm-5 control-label shipping-label no-pad-r"><span translate="product.detail.SHIPPING_PRICE_SPAIN"></span></label>
 											<!--
 											<div class="col-sm-5 pad-product">
 												<select class="form-control selectpicker shipping-select product-select" title="Choose country">
@@ -348,13 +349,14 @@ $videos = $product->getVideos();
 								$warranty = $product->getWarrantyLabel();
 								?>
 								<?php if ($returns) { ?>
-									<div class="returns-row mt-30" translate="PRODUCT.DETAIL.RETURNS">
+									<div class="returns-row mt-30">
+										<span translate="product.detail.RETURNS"></span>
 										<span class="bold"><?=$returns?></span>
 									</div>
 								<?php } ?>
 								<?php if ($warranty) { ?>
-									<div class="returns-row" translate="PRODUCT.DETAIL.WARRANTY">
-										
+									<div class="returns-row">
+										<span translate="product.detail.WARRANTY"></span>
 										<span class="bold"><?=$warranty?></span>
 									</div>
 								<?php } ?>
@@ -364,15 +366,15 @@ $videos = $product->getVideos();
 
 					<?php if (count($product->faqMapping) > 0) { ?>
 					   	<div class="work-profile-description-wrapper faq-wrapper">
-						<div class="title" translate="PRODUCT.DETAIL.WORK_FAQS"></div>
+						<div class="title"><span translate="product.detail.WORK_FAQS"></span></div>
 						<?php foreach ($product->faqMapping as $faq) { ?>
 							<div class="q-a-wrapper">
 								<p class="question">
-									<span translate="PRODUCT.DETAIL.Q"></span>
+									<span translate="product.detail.Q"></span>
 									<span class="important"><?= $faq->question?></span>
 								</p>
 								<p class="question">
-									<span translate="PRODUCT.DETAIL.A"></span>
+									<span translate="product.detail.A"></span>
 									<span><?= $faq->answer?></span>
 								</p>
 							</div>
@@ -381,7 +383,7 @@ $videos = $product->getVideos();
 					<?php } ?>
 
 					<div class="reviews-wrapper">
-						<div class="title" translate="PRODUCT.DETAIL.USER_REVIEWS"></div>
+						<div class="title"><span translate="product.detail.USER_REVIEWS"></span></div>
 						<div class="review-rates">
 							<span class="score">
 									<i class="ion-ios-star"></i>
@@ -391,8 +393,8 @@ $videos = $product->getVideos();
 									<i class="ion-ios-star"></i>
 								</span>
 							<span class="number-score">(20)</span>
-							<div class="by-stars"><span>5 <span translate="PRODUCT.DETAIL.STARS"></span></span><span class="number-score">(15)</span></div>
-							<div class="by-stars"><span>4 <span translate="PRODUCT.DETAIL.STARS"></span></span><span class="number-score">(5)</span></div>
+							<div class="by-stars"><span>5 <span translate="product.detail.STARS"></span></span><span class="number-score">(15)</span></div>
+							<div class="by-stars"><span>4 <span translate="product.detail.STARS"></span></span><span class="number-score">(5)</span></div>
 						</div>
 						<div class="comment-wrapper">
 							<div class="col-sm-1">
@@ -403,7 +405,7 @@ $videos = $product->getVideos();
 							<div class="col-sm-10">
 								<input type="text" class="form-control comment-input" id="exampleInputEmail1" placeholder="Add your comment">
 								<div class="rate-product">
-									<span translate="PRODUCT.DETAIL.RATE_PRODUCT"></span>
+									<span translate="product.detail.RATE_PRODUCT"></span>
 									<span class="score">
 											<i class="ion-ios-star"></i>
 											<i class="ion-ios-star"></i>
@@ -426,12 +428,12 @@ $videos = $product->getVideos();
 							<div class="comment">
 								<div class="name-date">
 									<span class="name">Alice Pierce</span>
-									<span class="date"><span>1</span><span translate="PRODUCT.DETAIL.DAY_AGO"></span>
+									<span class="date"><span>1</span><span translate="product.detail.DAY_AGO"></span>
 								</div>
 								<div class="comment-text">Vivamus ultricies mauris mi, nec imperdiet quam facilisis eget.
 								</div>
 								<div class="replay">
-									<span translate="PRODUCT.DETAIL.REPLY"></span>
+									<span translate="product.detail.REPLY"></span>
 									<span class="score">
 											<i class="ion-ios-star"></i>
 											<i class="ion-ios-star"></i>
@@ -439,13 +441,13 @@ $videos = $product->getVideos();
 											<i class="ion-ios-star"></i>
 											<i class="ion-ios-star"></i>
 										</span>
-									<span class="useful"><span>300</span><span translate="PRODUCT.DETAIL.MEMER_COMMENT_USEFUL"></span></span>
+									<span class="useful"><span>300</span><span translate="product.detail.MEMER_COMMENT_USEFUL"></span></span>
 								</div>
 							</div>
 							<div class="helpful">
-								<span translate="PRODUCT.DETAIL.REVIEW_HELPFUL"></span>
-								<div class="rounded-btn" translate="PRODUCT.YES"></div>
-								<div class="rounded-btn" translate="PRODUCT.NO"></div>
+								<span translate="product.detail.REVIEW_HELPFUL"></span>
+								<div class="rounded-btn"><span translate="global.YES"></span></div>
+								<div class="rounded-btn"><span translate="global.NO"></span></div>
 							</div>
 						</div>
 						<div class="comment-user">
@@ -472,7 +474,7 @@ $videos = $product->getVideos();
 								</div>
 							</div>
 							<div class="helpful">
-								<span>Is this review helpful to you ?</span>
+								<span>Is this review helpful to you?</span>
 								<div class="rounded-btn">Yes</div>
 								<div class="rounded-btn">No</div>
 							</div>
@@ -526,8 +528,8 @@ $videos = $product->getVideos();
 						</div>
 						<div class="load-wrapper">
 							<i class="ion-ios-arrow-down"></i>
-							<span class="green" translate="PRODUCT.DETAIL.LOAD_MORE"></span>
-							<span class="more"><span>24</span><span translate="PRODUCT.DETAIL.COMMENTS_MORE"></span></span>
+							<span class="green" translate="product.detail.LOAD_MORE"></span>
+							<span class="more"><span>24</span><span translate="product.detail.COMMENTS_MORE"></span></span>
 						</div>
 					</div>
 				</div>

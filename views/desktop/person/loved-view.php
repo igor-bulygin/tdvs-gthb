@@ -34,10 +34,10 @@ $this->params['person_links_target'] = 'public_view';
 				<?php if (empty($loveds)) { ?>
 					<div class="empty-wrapper">
 						<?php if ($person->isConnectedUser()) { ?>
-							<p class="no-video-text"><span translate="NO_LOVED"></span></p>
-							<p><span translate="START_LOVED"></span></p>
+							<p class="no-video-text"><span translate="person.loved.NO_LOVED"></span></p>
+							<p><span translate="person.loved.START_LOVED"></span></p>
 						<?php } else { ?>
-							<p class="no-video-text"><?=$person->getName()?> <span translate="NO_LOVED_YET"></span></p>
+							<p class="no-video-text"><?=$person->getName()?> <span translate="person.loved.NO_LOVED_YET"></span></p>
 						<?php } ?>
 						
 						<img class="image-loved" src="/imgs/loved-image.png">
@@ -47,7 +47,7 @@ $this->params['person_links_target'] = 'public_view';
 					<div class="content-store">
 						<div class="store-grid">
 							<div class="title-wrapper title-loved">
-								<span class="title"><span translate="LOVED_BY"></span> <?=$person->getName()?></span>
+								<span class="title"><span translate="person.loved.LOVED_BY"></span> <?=$person->getName()?></span>
 							</div>
 							<div id="macy-container">
 								<?php foreach ($loveds as $loved) {
