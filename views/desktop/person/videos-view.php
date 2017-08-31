@@ -33,15 +33,15 @@ $this->params['person_links_target'] = 'public_view';
 				<?php if (count($videos) == 0) { ?>
 					<div class="empty-wrapper">
 						<?php if ($person->isPersonEditable()) { ?>
-							<div><a class="red-link-btn" href="<?= $person->getVideosEditLink()?>"><span translate="ADD_REMOVE_VIDEOS"></span></a></div>
+							<div><a class="red-link-btn" href="<?= $person->getVideosEditLink()?>"><span translate="person.videos.ADD_REMOVE_VIDEOS"></span></a></div>
 						<?php } ?>
 						<img class="sad-face" src="/imgs/sad-face.svg">
-						<p class="no-video-text">You have no videos</p>
+						<p class="no-video-text"><span translate="person.videos.NO_VIDEOS"></span></p>
 					</div>
 				<?php } else { ?>
 				<div class="video-container">
 					<?php if ($person->isPersonEditable()) { ?>
-						<div><a class="red-link-btn" href="<?= $person->getVideosEditLink()?>"><span translate="ADD_REMOVE_VIDEOS"></span></a></div>
+						<div><a class="red-link-btn" href="<?= $person->getVideosEditLink()?>"><span translate="person.videos.ADD_REMOVE_VIDEOS"></span></a></div>
 					<?php } ?>
 					<?php foreach ($videos as $video) { ?>
 					<div class="col-sm-<?= (count($videos)<=3) ? '12' : '6' ?>">

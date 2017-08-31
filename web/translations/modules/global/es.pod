@@ -19,6 +19,12 @@
 		"PREVIOUS": "Anterior",
 		"NEXT": "Siguiente",
 		"FOLLOW": "Follow",
+		"ADD_COMMENT": "Añade un comentario",
+		"RATE_PRODUCT": "Puntúa este producto",
+		"FIELD": "Categoría",
+		"UPLOAD_FILE": "Añadir archivo",
+		"UPLOADING": "Añadiendo archivo:",
+		"REQUIRED": "Obligatorio",
 		"user": {
 			"FIRST_NAME": "Nombre",
 			"LAST_NAME": "Apellidos",

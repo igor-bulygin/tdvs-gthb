@@ -1,16 +1,16 @@
 <div class="add-videos-wrapper">
-	<p>Video</p>
+	<p><span translate="person.stories.VIDEO"></span></p>
 	<div ng-if="storyVideoComponentCtrl.component.items.length === 0">
 		<div class="plus-add-wrapper" ng-click="storyVideoComponentCtrl.addVideo(storyVideoComponentCtrl.form)">
 			<div class="plus-add">
 				<span>+</span>
 			</div>
-			<div class="text"><span translate="ADD_VIDEOS"></span></div>
+			<div class="text"><span translate="person.stories.ADD_VIDEOS"></span></div>
 		</div>
-		<p><span translate="PASTE_YOUTUBE"></span></p>
+		<p><span translate="person.stories.PASTE_YOUTUBE"></span></p>
 		<form name="storyVideoComponentCtrl.form">
 			<div class="input-group input-group-lg input-video">
-				<span class="input-group-addon" id="sizing-addon1"><span translate="VIDEO_URL"></span></span>
+				<span class="input-group-addon" id="sizing-addon1"><span translate="person.stories.VIDEO_URL"></span></span>
 				<input type="text" name="video" ng-pattern="storyVideoComponentCtrl.youTubeRegEx" class="form-control input-add-video ng-class:{'error-input': storyVideoComponentCtrl.has_error(storyVideoComponentCtrl.form, storyVideoComponentCtrl.form.video)}" placeholder="http://" ng-model="storyVideoComponentCtrl.video_url">
 			</div>
 		</form>
