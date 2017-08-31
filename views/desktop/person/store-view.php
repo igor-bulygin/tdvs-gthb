@@ -20,7 +20,7 @@ if ($selectedSubcategory && $selectedSubcategory->short_id) { // check if is a r
 		'CATEGORY_WORKS_BY_PERSON_NAME',
 		['category_name' => $selectedSubcategory->getName(), 'person_name' => $person->getName()]
 	);
-} elseif ($selectedCategory) {
+} elseif ($selectedCategory && $selectedCategory->short_id) {
 	$this->title = Yii::t('app/public',
 		'CATEGORY_WORKS_BY_PERSON_NAME',
 		['category_name' => $selectedCategory->getName(), 'person_name' => $person->getName()]
