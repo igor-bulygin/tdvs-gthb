@@ -46,6 +46,80 @@
 				//Cancel
 			});
 		};
+
+		vm.block = function (client_id) {
+			var modalInstance = $uibModal.open({
+				templateUrl: 'template/modal/confirm.html',
+				controller: 'confirmCtrl',
+				resolve: {
+					data: function () {
+						return {
+							title: "Are you sure?",
+							text: "You are about to block a client! The client will no longer have access to the web"
+						};
+					}
+				}
+			});
+
+			modalInstance.result.then(function () {
+				$person.get({
+					short_id: client_id
+				}).then(function (clients) {
+					if (clients.length !== 1) return;
+					var client = clients[0];
+					client.account_state = 'blocked';
+					console.log(client);
+
+					$person.modify('POST', client).then(function (data) {
+						toastr.success("client blocked!");
+						vm.renderPartial();
+					}, function (err) {
+						toastr.error("Couldn't block client!", err);
+					});
+				}, function (err) {
+					toastr.error("Couldn't find client!", err);
+				});
+			}, function () {
+				//Cancel
+			});
+		};
+
+		vm.draft = function (client_id) {
+			var modalInstance = $uibModal.open({
+				templateUrl: 'template/modal/confirm.html',
+				controller: 'confirmCtrl',
+				resolve: {
+					data: function () {
+						return {
+							title: "Are you sure?",
+							text: "You are about to set a client as active! The client will have access to the web"
+						};
+					}
+				}
+			});
+
+			modalInstance.result.then(function () {
+				$person.get({
+					short_id: client_id
+				}).then(function (clients) {
+					if (clients.length !== 1) return;
+					var client = clients[0];
+					client.account_state = 'active';
+					console.log(client);
+
+					$person.modify('POST', client).then(function (data) {
+						toastr.success("Client actived!");
+						vm.renderPartial();
+					}, function (err) {
+						toastr.error("Couldn't activate client!", err);
+					});
+				}, function (err) {
+					toastr.error("Couldn't find client!", err);
+				});
+			}, function () {
+				//Cancel
+			});
+		};
 	}
 
 	angular.module('todevise', ['ngAnimate', 'ui.bootstrap', 'angular-multi-select', 'global-admin', 'global-desktop', 'api'])

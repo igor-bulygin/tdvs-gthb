@@ -249,7 +249,10 @@ class ApiController extends CController {
 
 			/* @var $deviser \app\models\Person */
 			$deviser = Person::findOne(["short_id" => $_deviser["short_id"]]);
-			$deviser->setAttributes($_deviser, false);
+			if (array_key_exists('account_state', $_deviser)) {
+				$deviser->account_state = $_deviser['account_state'];
+			}
+			$deviser->setAttributes($_deviser, true);
 			$deviser->personalInfoMapping->load($_deviser, "personal_info");
 			$deviser->save(false);
 
