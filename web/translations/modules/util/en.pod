@@ -1,48 +1,55 @@
 {
-	"PLEASE_ENTER_EMAIL":"Please enter a valid email address.",
-	"PLEASE_ENTER_NAME":"Please enter your name.",
-	"PLEASE_ENTER_FIRST_NAME":"Please enter your first name.",
-	"PLEASE_ENTER_LAST_NAME":"Please enter your last name.",
-	"PASSWORD_MIN_CHARACTERS":"The password must be at least 6 characteres long.",
-	"PLEASE_ENTER_PASSWORD":"Please enter the password.",
-	"PLEASE_REPEAT_PASSWORD":"Please repeat the password.",
-	"PASSWORDS_NOT_MATCH":"The passwords don't match.",
-	"HAVE_ACCEPT_TERMS":"You have to accept the Terms & Conditions before proceeding.",
-	"PLEASE_ENTER_BRAND":"Please enter your brand name.",
-	"PLEASE_ENTER_CITY":"Please enter a city.",
-	"PLEASE_ENTER_ADDRESS":"Please enter an address.",
-	"PLEASE_ENTER_ZIP":"Please enter a zip code.",
-	"PLEASE_ENTER_ID":"Please enter an id number.",
-	"PLEASE_SELECT_WORK":"Please select one or more fields of work.",
-	"PLEASE_ENTER_SHORT_DESCRIPTION":"Please enter a short description of your brand.",
-	"ABOUT_CANT_BLANK":"The about section cannot be blank.",
-	"PLEASE_UPLOAD_PROFILE_PHOTO":"Please upload a profile photo.",
-	"PLEASE_UPLOAD_COVER_PHOTO":"Please upload a cover photo.",
-	"EXPRESS_LESS_STANDARD":"The express time must be less than the standard time.",
-	"PLEASE_ENTER_BOX_NAME":"Please enter the name of the box.",
-	"PLEASE_FILL_FIELD":"Please fill in this field.",
-	"INVALID_URL":"Invalid URL.",
-	"MIN_VALUE_NOT_VALID":"Minimum value not valid.",
-	"MAX_VALUE_NOT_VALID":"Maximum value not valid.",
-	"CANCEL":"Cancel",
-	"CONTINUE":"Continue",
-	"CHANGES_NOT_SAVED":"You haven't saved your changes",
-	"IF_LEAVE_LOOSE_CHANGES":"If you leave without saving, you will lose the latest changes you made.",
-	"LEAVE_WITHOUT_SAVE":"Leave without saving",
-	"SAVE_AND_LEAVE":"Save changes & leave",
-	"CROP_PHOTO":"Crop photo",
-	"APPLY":"Apply",
-	"PHOTO_DESCRIPTION":"Photo &amp; description",
-	"TITLE":"Title",
-	"OPTIONAL":"Optional",
-	"DESCRIPTION":"Description",
-	"SAVE":"Save",
-	"ACCEPT":"Accept",
-	"MUST_BE_A_MEMBER":"You must be a Todevise member to ",
-	"A_PRODUCT":" a product.",
-	"ALREADY_MEMBER":"Already a member",
-	"BECOME_MEMBER":"Become a Todevise member (it's 100% free)",
-	"LOGIN":"Log in",
-	"SIGN_UP":"Sign Up",
-	"QUANTITY":"Quantity:"
+	"util": {
+		"errors": {
+			"PLEASE_ENTER_EMAIL":"Please enter a valid email address.",
+			"PLEASE_ENTER_NAME":"Please enter your name.",
+			"PLEASE_ENTER_FIRST_NAME":"Please enter your first name.",
+			"PLEASE_ENTER_LAST_NAME":"Please enter your last name.",
+			"PASSWORD_MIN_CHARACTERS":"The password must be at least 6 characteres long.",
+			"PLEASE_ENTER_PASSWORD":"Please enter the password.",
+			"PLEASE_REPEAT_PASSWORD":"Please repeat the password.",
+			"PASSWORDS_NOT_MATCH":"The passwords don't match.",
+			"HAVE_ACCEPT_TERMS":"You have to accept the Terms & Conditions before proceeding.",
+			"PLEASE_ENTER_BRAND":"Please enter your brand name.",
+			"PLEASE_ENTER_CITY":"Please enter a city.",
+			"PLEASE_ENTER_ADDRESS":"Please enter an address.",
+			"PLEASE_ENTER_ZIP":"Please enter a zip code.",
+			"PLEASE_ENTER_ID":"Please enter an id number.",
+			"PLEASE_SELECT_WORK":"Please select one or more fields of work.",
+			"PLEASE_ENTER_SHORT_DESCRIPTION":"Please enter a short description of your brand.",
+			"ABOUT_CANT_BLANK":"The about section cannot be blank.",
+			"PLEASE_UPLOAD_PROFILE_PHOTO":"Please upload a profile photo.",
+			"PLEASE_UPLOAD_COVER_PHOTO":"Please upload a cover photo.",
+			"EXPRESS_LESS_STANDARD":"The express time must be less than the standard time.",
+			"PLEASE_ENTER_BOX_NAME":"Please enter the name of the box.",
+			"PLEASE_FILL_FIELD":"Please fill in this field.",
+			"INVALID_URL":"Invalid URL.",
+			"MIN_VALUE_NOT_VALID":"Minimum value not valid.",
+			"MAX_VALUE_NOT_VALID":"Maximum value not valid."
+		},
+		"modal_confirm_leave": {
+			"CHANGES_NOT_SAVED":"You haven't saved your changes",
+			"IF_LEAVE_LOOSE_CHANGES":"If you leave without saving, you will lose the latest changes you made.",
+			"LEAVE_WITHOUT_SAVE":"Leave without saving",
+			"SAVE_AND_LEAVE":"Save changes & leave"
+		},
+		"modal_crop": {
+			"CROP_PHOTO":"Crop photo"
+		},
+		"modal_crop_description": {
+			"PHOTO_DESCRIPTION":"Photo &amp; description",
+			"TITLE":"Title",
+			"DESCRIPTION":"Description"
+		},
+		"modal_signup_loved": {
+			"MUST_BE_A_MEMBER":"You must be a Todevise member to ",
+			"A_PRODUCT":" a product.",
+			"ALREADY_MEMBER":"Already a member",
+			"BECOME_MEMBER":"Become a Todevise member (it's 100% free)"
+			"SIGN_UP":"Sign Up"
+		},
+		"product_card": {
+			"QUANTITY":"Quantity:"
+		}
+	}
 }
