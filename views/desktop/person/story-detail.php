@@ -11,7 +11,7 @@ IndexStoryAsset::register($this);
 /** @var \app\models\Story $story */
 
 $this->title = Yii::t('app/public',
-	'{story_title} by {person_name} - Todevise',
+	'STORY_BY_PERSON_NAME',
 	['story_title' => $story->getTitle(), 'person_name' => $person->getName()]
 );
 $this->params['person'] = $person;
@@ -41,26 +41,26 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 					*/ ?>
 				
 					<a class="btn btn-default" href="<?=$story->getEditLink()?>">
-						<span translate="EDIT_STORY"></span>
+						<span translate="person.stories.EDIT_STORY"></span>
 					</a>
 
 					<button class="btn btn-default" type="button" ng-click="detailStoryCtrl.openModal()">
 						<i class="ion-delete"></i>
-						<span translate="DELETE_STORY"></span>
+						<span translate="person.stories.DELETE_STORY"></span>
 					</button>
 				</div>
 
 
 				<script type="text/ng-template" id="deleteStoryModal.html">
 					<div class="modal-header">
-						<h3 class="modal-title"><span translate="DELETE_STORY_CONFIRMATION"></span></h3>
+						<h3 class="modal-title"><span translate="person.stories.DELETE_STORY_CONFIRMATION"></span></h3>
 					</div>
 					<div class="modal-body">
-						<p><span translate="DELETE_STORY_RECOVER"></span></p>
+						<p><span translate="person.stories.DELETE_STORY_RECOVER"></span></p>
 					</div>
 					<div class="modal-footer">
-						<button class="btn btn-default" ng-click="deleteStoryModalCtrl.ok()"><span translate="DELETE"></span></button>
-						<button class="btn btn-default btn-green" ng-click="deleteStoryModalCtrl.cancel()"><span translate="CANCEL"></span></button>
+						<button class="btn btn-default" ng-click="deleteStoryModalCtrl.ok()"><span translate="global.DELETE"></span></button>
+						<button class="btn btn-default btn-green" ng-click="deleteStoryModalCtrl.cancel()"><span translate="global.CANCEL"></span></button>
 					</div>
 				</script>
 			<?php } ?>
@@ -84,7 +84,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 		</div>
 
 		<?php if ($story->published_at) { ?>
-			<div class="published-text"><span translate="PUBLISHED_ON"></span> <?=$story->getPublishingDateFormatted()?></div>
+			<div class="published-text"><span translate="person.stories.PUBLISHED_ON"></span> <?=$story->getPublishingDateFormatted()?></div>
 		<?php } ?>
 		</div>
 		

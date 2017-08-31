@@ -45,8 +45,8 @@ class Lang {
 	static public function getAvailableLanguages()
     {
         return array_merge(
-            self::EN_US_DESC,
             self::ES_ES_DESC,
+            self::EN_US_DESC,
             self::CA_ES_DESC
         );
     }

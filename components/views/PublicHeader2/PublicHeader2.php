@@ -1,6 +1,7 @@
 <?php
 
 use app\models\Category;
+use lajax\languagepicker\widgets\LanguagePicker;
 use yii\helpers\Url;
 
 /** @var Category $category */
@@ -20,7 +21,7 @@ app\components\assets\PublicHeader2Asset::register($this);
 		</div>
 		<form class="navbar-form navbar-left navbar-searcher mobile" action="<?=Url::to(["/works"])?>" method="get">
 			<div class="input-group searcher-header">
-				<input type="text" name="q" value="<?=$q?>" class="form-control" placeholder="Search">
+				<input type="text" name="q" value="<?=$q?>" class="form-control" translate-attr="{placeholder: 'global.SEARCH'}">
 				<span class="input-group-btn">
 					<button class="btn btn-default btn-send" type="submit">
 						<span class="ion-search"></span>
@@ -34,7 +35,7 @@ app\components\assets\PublicHeader2Asset::register($this);
 			<div class="searcher-wrapper">
 				<form class="navbar-form navbar-left navbar-searcher" action="<?=Url::to(['/works'])?>" method="get">
 					<div class="input-group searcher-header">
-						<input type="text" class="form-control" name="q" value="<?=$q?>"placeholder="Type something">
+						<input type="text" class="form-control" name="q" value="<?=$q?>" translate-attr="{placeholder: 'global.SEARCH'}">
 						<span class="input-group-btn">
 								<button class="btn btn-default btn-send" type="submit">
 									<span class="ion-ios-search-strong"></span>
@@ -54,12 +55,12 @@ app\components\assets\PublicHeader2Asset::register($this);
 						<span>/</span>
 					</li>
 					<li class="log">
-						<a href="<?=Url::to('/login')?>" translate="LOGIN"></a>
+						<a href="<?=Url::to('/login')?>" translate="header.LOGIN"></a>
 					</li>
 				<?php } else {
 					$person = Yii::$app->user->identity; /* @var \app\models\Person $person */?>
 						<li class="dropdown log">
-							<a class="logued-text" href="#" class="dropdown-toggle log" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" translate="MY_TODEVISE"><i class="ion-android-person"></i></a>
+							<a class="logued-text" href="#" class="dropdown-toggle log" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" translate="header.MY_TODEVISE"><i class="ion-android-person"></i></a>
 							<div class="dropdown-menu admin-wrapper black-form">
 								<ul class="menu-logued">
 									<li class="header-item">
@@ -67,19 +68,19 @@ app\components\assets\PublicHeader2Asset::register($this);
 										<img class="avatar-logued-user" src="<?= $person->getAvatarImage() ?>">
 									</li>
 									<?php if ($person->isAdmin()) { ?>
-										<li><a href="<?=Url::to('/admin')?>" translate="ADMINISTRATION"></a></li>
-										<li><a href="<?=Url::to('/admin/invitations')?>" translate="INVITATION"></a></li>
+										<li><a href="<?=Url::to('/admin')?>" translate="header.ADMINISTRATION"></a></li>
+										<li><a href="<?=Url::to('/admin/invitations')?>" translate="header.INVITATION"></a></li>
 										<li class="separation-line"></li>
 									<?php } elseif ($person->isDeviser()) { ?>
-										<li><a href="<?=$person->getSettingsLink('open-orders')?>" translate="SALES"></a></li>
+										<li><a href="<?=$person->getSettingsLink('open-orders')?>" translate="header.SALES"></a></li>
 										<li class="separation-line"></li>
 									<?php } elseif ($person->isClient()) { ?>
-										<li><a href="<?=$person->getSettingsLink('open-orders')?>" translate="MY_ORDERS"></a></li>
+										<li><a href="<?=$person->getSettingsLink('open-orders')?>" translate="header.MY_ORDERS"></a></li>
 										<li class="separation-line"></li>
 									<?php } elseif ($person->isInfluencer()) { ?>
 									<?php } ?>
-									<li><a href="<?= $person->getSettingsLink()?>" translate="SETTINGS"></a></li>
-									<li><a href="#" ng-click="publicHeaderCtrl.logout()" translate="LOGOUT">Logou</a></li>
+									<li><a href="<?= $person->getSettingsLink()?>" translate="header.SETTINGS"></a></li>
+									<li><a href="#" ng-click="publicHeaderCtrl.logout()" translate="header.LOGOUT"></a></li>
 								</ul>
 							</div>
 						</li>
@@ -101,17 +102,31 @@ app\components\assets\PublicHeader2Asset::register($this);
 					<li>
 						<a href="#" class="menu-title hover-toggle" data-target=".menu-categories" data-group=".category-menu">
 							<i class="fa fa-bars" aria-hidden="true"></i>
-							<span translate="SHOP_BY_DEPARTMENT"></span>
+							<span translate="header.SHOP_BY_DEPARTMENT"></span>
 						</a>
 					</li>
 				</ul>
 			<ul class="nav navbar-nav center-navbar">
-				<li><a href="<?=Url::to(['/discover/stories'])?>" translate="STORIES"></a></li>
-				<li><a href="<?=Url::to(['/discover/boxes'])?>" translate="EXPLORE_BOXES"></a></li>
-				<li><a href="<?=Url::to(['/discover/devisers'])?>" translate="DISCOVER_DEVISERS"></a></li>
-				<li><a href="<?=Url::to(['/discover/influencers'])?>" translate="TREND_SETTERS"></a></li>
-				<li><a href="#" translate="PROJECTS"></a></li>
+				<li><a href="<?=Url::to(['/discover/stories'])?>" translate="header.STORIES"></a></li>
+				<li><a href="<?=Url::to(['/discover/boxes'])?>" translate="header.EXPLORE_BOXES"></a></li>
+				<li><a href="<?=Url::to(['/discover/devisers'])?>" translate="header.DISCOVER_DEVISERS"></a></li>
+				<li><a href="<?=Url::to(['/discover/influencers'])?>" translate="header.TREND_SETTERS"></a></li>
+				<li><a href="#" translate="header.PROJECTS"></a></li>
 			</ul>
+			<div class="pull-right">
+					<?php
+
+					echo LanguagePicker::widget([
+						'skin' => LanguagePicker::SKIN_BUTTON,
+						'size' => LanguagePicker::SIZE_SMALL,
+						'parentTemplate' => '<div class="language-picker button-list pull-right {size}"><div>{items}</div></div>',
+						'itemTemplate' => '<a href="{link}" title="{name}" class="{language}">{name}</a>',
+						'activeItemTemplate' => '<a href="{link}" title="{name}" class="{language} active">{name}</a>',
+						'languageAsset' => 'lajax\languagepicker\bundles\LanguageLargeIconsAsset',
+						'languagePluginAsset' => 'lajax\languagepicker\bundles\LanguagePluginAsset',
+					]);
+					?>
+			</div>
 		</div>
 	</nav>
 	<div class="menu-categories">

@@ -22,8 +22,8 @@ $config = [
 			'languages' => array_keys(require(__DIR__ . '/langs.php')), // must be an array of language codes
 		],
 		'devicedetect',
-		'languagepicker',
 		'app\components\Aliases',
+		'languagepicker',
 		'newrelic',
 	],
 
@@ -72,10 +72,11 @@ $config = [
 					'fileMap' => [
 						'app' => 'app.php',
 						'app/admin' => 'app/admin.php',
-						'app/public' => 'app/public.php'
-					]
+						'app/public' => 'app/public.php',
+					],
+					'forceTranslation' => true,
 				]
-			]
+			],
 		],
 
 		//Available languages

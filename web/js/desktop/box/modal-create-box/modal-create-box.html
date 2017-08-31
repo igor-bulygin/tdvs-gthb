@@ -2,16 +2,16 @@
 	<button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="modalCreateBoxCtrl.dismiss()">
 		<span class="ion-ios-close" aria-hidden="true"></span>
 	</button>
-	<h3><span translate="CREATE_BOX"></span></h3>
+	<h3><span translate="boxes.create.CREATE_BOX"></span></h3>
 </div>
 <div class="modal-body">
 	<form name="modalCreateBoxCtrl.form" novalidate>
-		<input type="text" name="box_name" translate-attr="{placeholder: 'NAME_BOX'}" ng-model="modalCreateBoxCtrl.box.name" class="form-control white-rounded-input ng-class:{'error-input': modalCreateBoxCtrl.has_error(modalCreateBoxCtrl.form, modalCreateBoxCtrl.form.box_name)}" required>
+		<input type="text" name="box_name" translate-attr="{placeholder: 'boxes.create.NAME_BOX'}" ng-model="modalCreateBoxCtrl.box.name" class="form-control white-rounded-input ng-class:{'error-input': modalCreateBoxCtrl.has_error(modalCreateBoxCtrl.form, modalCreateBoxCtrl.form.box_name)}" required>
 		<form-errors field="modalCreateBoxCtrl.form.box_name" condition="modalCreateBoxCtrl.has_error(modalCreateBoxCtrl.form, modalCreateBoxCtrl.form.box_name)"></form-errors>
-		<textarea name="box_description" cols="30" rows="10" translate-attr="{placeholder: 'DESCRIPTION'}" ng-model="modalCreateBoxCtrl.box.description" class="form-control white-rounded-textbox ng-class:{'error-input': modalCreateBoxCtrl.has_error(modalCreateBoxCtrl.form, modalCreateBoxCtrl.form.box_description)}"></textarea>
+		<textarea name="box_description" cols="30" rows="10" translate-attr="{placeholder: 'boxes.create.DESCRIPTION'}" ng-model="modalCreateBoxCtrl.box.description" class="form-control white-rounded-textbox ng-class:{'error-input': modalCreateBoxCtrl.has_error(modalCreateBoxCtrl.form, modalCreateBoxCtrl.form.box_description)}"></textarea>
 		<form-errors field="modalCreateBoxCtrl.form.box_description" condition="modalCreateBoxCtrl.has_error(modalCreateBoxCtrl.form, modalCreateBoxCtrl.form.box_description)"></form-errors>
 		<div class="text-center">
-			<button class="btn btn-green green-modal-btn" ng-click="modalCreateBoxCtrl.createBox(modalCreateBoxCtrl.form)"><span translate="CREATE"></span></button>
+			<button class="btn btn-green green-modal-btn" ng-click="modalCreateBoxCtrl.createBox(modalCreateBoxCtrl.form)"><span translate="boxes.create.CREATE"></span></button>
 		</div>
 	</form>
 </div>

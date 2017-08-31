@@ -1,7 +1,8 @@
 <?php
-use yii\helpers\Html;
-use app\components\PublicMyAccount;
+
 use app\components\assets\publicHeaderAsset;
+use app\components\PublicMyAccount;
+use yii\helpers\Html;
 
 publicHeaderAsset::register($this);
 
@@ -12,23 +13,23 @@ publicHeaderAsset::register($this);
 		<div class="navbar-collapse no-horizontal-padding">
 			<ul id="w1" class="flex menutop funiv_ultra fs0-857 no-padding no-margin">
 				<li class="item-menutop border fs-upper flex-prop-1-0">
-					<?= Html::a(Yii::t("app/public", 'Explore boxes'), "site/index", [
+					<?= Html::a(Yii::t("app/old", 'Explore boxes'), "site/index", [
 						'class' => "hdr_btn funiv_bold fc-4a flex flex-align-center flex-justify-center"
 					]); ?>
 				</li>
 				<li class="item-menutop border fs-upper flex-prop-1-0">
-					<?= Html::a(Yii::t("app/public", 'Discover stories'), "site/about", [
+					<?= Html::a(Yii::t("app/old", 'Discover stories'), "site/about", [
 						'class' => "hdr_btn funiv_bold fc-4a flex flex-align-center flex-justify-center"
 					]); ?>
 				</li>
 				<li class="item-menutop border fs-upper flex-prop-1-0">
-					<?= Html::a(Yii::t("app/public", 'Our devisers'), "site/about", [
+					<?= Html::a(Yii::t("app/old", 'Our devisers'), "site/about", [
 						'class' => "hdr_btn funiv_bold fc-4a flex flex-align-center flex-justify-center"
 					]); ?>
 				</li>
 				<li class="item-menutop fs-upper flex-prop-1-0">
 					<div class="search_box flex flex-justify-start white">
-						<input type="text" class="funiv fs1-286 fc-4e flex-prop-1-0" name="name" value="" placeholder="<?= Yii::t("app/public", "Search") ?>">
+						<input type="text" class="funiv fs1-286 fc-4e flex-prop-1-0" name="name" value="" placeholder="<?= Yii::t("app/old", "Search") ?>">
 						<!--
 						<select class="white" name="">
 							<option>Foo</option>
@@ -47,7 +48,7 @@ publicHeaderAsset::register($this);
 				<li class="item-menutop fs-upper funiv_bold fc-fff pointer">
 					<div class="my_account black flex flex-justify-center flex-align-center relative">
 						<span class="glyphicon glyphicon-user fs1-214"></span>
-						<div class="access"><?= Yii::t("app/public", "My todevise") ?>
+						<div class="access"><?= Yii::t("app/old", "My todevise") ?>
 
 						</div>
 

@@ -10,7 +10,7 @@ GlobalAsset::register($this);
 /** @var Person $person */
 
 $this->title = Yii::t('app/public',
-	'{person_name} faqs - Todevise',
+	'PERSON_NAME_FAQS',
 	['person_name' => $person->getName()]
 );
 
@@ -32,23 +32,22 @@ $this->params['person_links_target'] = 'public_view';
 					<?php if (count($faq) == 0) { ?>
 						<div class="empty-wrapper">
 							<?php if ($person->isPersonEditable()) { ?>
-								<div><a class="red-link-btn" href="<?= $person->getFaqEditLink()?>"><span translate="ADD_EDIT_QUESTIONS"></span></a></div>
+								<div><a class="red-link-btn" href="<?= $person->getFaqEditLink()?>"><span translate="person.faq.ADD_EDIT_QUESTIONS"></span></a></div>
 							<?php } ?>
 							<img class="sad-face" src="/imgs/sad-face.svg">
-							<p class="no-video-text"><span translate="NO_QUESTIONS"></span></p>
+							<p class="no-video-text"><span translate="person.faq.NO_QUESTIONS"></span></p>
 						</div>
 					<?php } else { ?>
 				<div class="faq-wrapper">
 						<?php if ($person->isPersonEditable()) { ?>
-							<div><a class="red-link-btn" href="<?= $person->getFaqEditLink()?>"><span translate="ADD_EDIT_QUESTIONS"></span></a></div>
+							<div><a class="red-link-btn" href="<?= $person->getFaqEditLink()?>"><span translate="person.faq.ADD_EDIT_QUESTIONS"></span></a></div>
 						<?php } ?>
 						<div id="accordion" role="tablist" aria-multiselectable="true">
 							<?php foreach ($faq as $key => $item) { ?>
 							<div class="panel faq-panel">
 								<div class="panel-heading panel-heading-faq" role="tab" id="heading-faq-<?= $key ?>">
 									<h4 class="panel-title">
-										<a class="faq-title <?= ($key!=0) ? 'collapsed' : '' ?>" role="button" data-toggle="collapse" data-parent="#accordion"
-										   href="#collapse-faq-<?= $key ?>" aria-expanded="<?= ($key==0) ? 'true' : 'false' ?>" aria-controls="collapse-faq-<?= $key ?>">
+										<a class="faq-title <?= ($key!=0) ? 'collapsed' : '' ?>" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-faq-<?= $key ?>" aria-expanded="<?= ($key==0) ? 'true' : 'false' ?>" aria-controls="collapse-faq-<?= $key ?>">
 											<?= $item["question"] ?>
 										</a>
 									</h4>

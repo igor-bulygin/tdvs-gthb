@@ -1,9 +1,9 @@
 <div>
 	<div class="col-md-12 mb-20 mt-10">
-		<div class="found-header col-md-5" ng-if="!exploreProductsFiltersCtrl.searching" ng-cloak translate="WE_FOUND_X_RESULTS" translate-values="{ counter: exploreProductsFiltersCtrl.results.meta.total_count }">"<span class="key" ng-bind="exploreProductsCtrl.search_key"></span>"
+		<div class="found-header col-md-5" ng-if="!exploreProductsFiltersCtrl.searching" ng-cloak translate="discover.WE_FOUND_X_RESULTS" translate-values="{ counter: exploreProductsFiltersCtrl.resultsCounter }">"<span class="key" ng-bind="exploreProductsCtrl.search_key"></span>"
 		</div>
 		<div class="col-md-7">
-			<ol class="nya-bs-select col-md-4" ng-model="exploreProductsFiltersCtrl.orderFilter" ng-change="exploreProductsFiltersCtrl.search()">
+			<ol class="nya-bs-select col-md-4" ng-model="exploreProductsFiltersCtrl.orderFilter" ng-change="exploreProductsFiltersCtrl.search(true)">
 				<li nya-bs-option="type in exploreProductsFiltersCtrl.orderTypes">
 					<a href="#"><span>{{ type.name | translate }}</span></a>
 				</li>
@@ -12,14 +12,14 @@
 	</div>
 	<div class="col-md-2">
 		<form name="exploreProductsFiltersCtrl.form">
-			<span class="filter-title" translate="FILTER_BY_THEME"></span>
+			<span class="filter-title" translate="discover.FILTER_BY_THEME"></span>
 			<div class="checkbox checkbox-red" ng-repeat="category in exploreProductsFiltersCtrl.categories.items | orderBy: 'category.name'" ng-if="$index < exploreProductsFiltersCtrl.show_categories">
-				<input ng-attr-id="{{'checkbox'+($index+10)}}" type="checkbox" name="categories" ng-model="exploreProductsFiltersCtrl.filters.categories[category.id]" class="ng-class:{'checked': exploreProductsFiltersCtrl.filters.categories[category.id]}" ng-disabled="exploreProductsFiltersCtrl.searching" ng-change="exploreProductsFiltersCtrl.search()">
+				<input ng-attr-id="{{'checkbox'+($index+10)}}" type="checkbox" name="categories" ng-model="exploreProductsFiltersCtrl.filters.categories[category.id]" class="ng-class:{'checked': exploreProductsFiltersCtrl.filters.categories[category.id]}" ng-disabled="exploreProductsFiltersCtrl.searching" ng-change="exploreProductsFiltersCtrl.search(true)">
 				<label ng-attr-for="{{'checkbox'+($index+10)}}">
 					<span ng-bind="category.name"></span>
 				</label>
 			</div>
-			<span class="more-btn" ng-click="exploreProductsFiltersCtrl.seeMore('categories')" ng-if="exploreProductsFiltersCtrl.show_categories < exploreProductsFiltersCtrl.categories.meta.total_count" ng-cloak translate="SEE_MORE"></span>
+			<span class="more-btn" ng-click="exploreProductsFiltersCtrl.seeMore('categories')" ng-if="exploreProductsFiltersCtrl.show_categories < exploreProductsFiltersCtrl.categories.meta.total_count" ng-cloak translate="discover.SEE_MORE"></span>
 		</form>
 	</div>
 </div>

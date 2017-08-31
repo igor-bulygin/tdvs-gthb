@@ -15,7 +15,7 @@
 		function renderPartial() {
 			vm.listener();
 
-			$http.get(aus.syncToUrl()).success(function (data, status) {
+			$http.get(aus.syncToURL()).success(function (data, status) {
 				angular.element('.body-content').html($compile(data)($scope));
 			}).error(function (data, status) {
 				toastr.error("Failed to refresh content!");

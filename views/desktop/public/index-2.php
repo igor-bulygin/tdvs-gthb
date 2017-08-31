@@ -6,7 +6,7 @@ use app\models\Person;
 
 Index2Asset::register($this);
 
-$this->title = Yii::t('app/public', 'Todevise');
+$this->title = Yii::t('app/public', 'INDEX_TITLE');
 
 /** @var Person[][] $devisers */
 /** @var int $totalDevisers */
@@ -46,13 +46,13 @@ $this->title = Yii::t('app/public', 'Todevise');
 			<span class="glyphicon glyphicon-chevron-left banner-btn" aria-hidden="true">
 				<i class="ion-ios-arrow-left"></i>
 			</span>
-			<span class="sr-only">Previous</span>
+			<span class="sr-only"><span translate="global.PREVIOUS"></span></span>
 		  </a>
 		  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
 			<span class="glyphicon glyphicon-chevron-right banner-btn" aria-hidden="true">
 				<i class="ion-ios-arrow-right"></i>
 			</span>
-			<span class="sr-only">Next</span>
+			<span class="sr-only"><span translate="global.NEXT"></span></span>
 		  </a>
 	</div>
 </div>
@@ -67,7 +67,7 @@ $this->title = Yii::t('app/public', 'Todevise');
 					<div class="sub-banner-text-left">
 						<h2 class="title-1"><span class="serif">The</span>store</h2>
 						<p class="tagline-1">Find product that will make you<br>be part of the future</p>
-					</div>		
+					</div>
 					<div class="left-point"></div>
 				</div>
 			</div>
@@ -194,11 +194,11 @@ $this->title = Yii::t('app/public', 'Todevise');
 												<div class="row">
 													<div class="col-md-6">
 														<span class="title-product-name sm align-left"><?= $influencer->getName() ?></span>
-														<span class="location align-left"><?= $influencer->personalInfoMapping->getCityLabel() ?></span>			
+														<span class="location align-left"><?= $influencer->personalInfoMapping->getCityLabel() ?></span>
 													</div>
 													<div class="col-md-6">
 														<button class="btn btn-icon mt-5"><i class="ion-star"></i><span>Follow</span></button>
-													</div>		
+													</div>
 												</div>
 												</figcaption>
 											</figure>
@@ -281,14 +281,14 @@ $this->title = Yii::t('app/public', 'Todevise');
 										<figcaption>
 										<div class="row">
 											<div class="col-md-6">
-												<span class="boxes-text align-left">Technology</span>			
+												<span class="boxes-text align-left">Technology</span>
 											</div>
 											<div class="col-md-6">
 												<button class="btn btn-single-love btn-love-box">
 													<span class="number">18</span>
 													<i class="ion-heart"></i>
 												</button>
-											</div>		
+											</div>
 										</div>
 										</figcaption>
 									</figure>
@@ -313,14 +313,14 @@ $this->title = Yii::t('app/public', 'Todevise');
 										<figcaption>
 										<div class="row">
 											<div class="col-md-6">
-												<span class="boxes-text align-left">Vintage</span>			
+												<span class="boxes-text align-left">Vintage</span>
 											</div>
 											<div class="col-md-6">
 												<button class="btn btn-single-love btn-love-box">
 													<span class="number">180</span>
 													<i class="ion-heart"></i>
 												</button>
-											</div>		
+											</div>
 										</div>
 										</figcaption>
 									</figure>
@@ -345,14 +345,14 @@ $this->title = Yii::t('app/public', 'Todevise');
 										<figcaption>
 										<div class="row">
 											<div class="col-md-6">
-												<span class="boxes-text align-left">Leather</span>			
+												<span class="boxes-text align-left">Leather</span>
 											</div>
 											<div class="col-md-6">
 												<button class="btn btn-single-love btn-love-box">
 													<span class="number">18</span>
 													<i class="ion-heart"></i>
 												</button>
-											</div>		
+											</div>
 										</div>
 										</figcaption>
 									</figure>
@@ -377,14 +377,14 @@ $this->title = Yii::t('app/public', 'Todevise');
 										<figcaption>
 										<div class="row">
 											<div class="col-md-6">
-												<span class="boxes-text align-left">Summer time</span>			
+												<span class="boxes-text align-left">Summer time</span>
 											</div>
 											<div class="col-md-6">
 												<button class="btn btn-single-love btn-love-box">
 													<span class="number">22</span>
 													<i class="ion-heart"></i>
 												</button>
-											</div>		
+											</div>
 										</div>
 										</figcaption>
 									</figure>
@@ -409,14 +409,14 @@ $this->title = Yii::t('app/public', 'Todevise');
 										<figcaption>
 										<div class="row">
 											<div class="col-md-6">
-												<span class="boxes-text align-left">Summer time</span>			
+												<span class="boxes-text align-left">Summer time</span>
 											</div>
 											<div class="col-md-6">
 												<button class="btn btn-single-love btn-love-box">
 													<span class="number">22</span>
 													<i class="ion-heart"></i>
 												</button>
-											</div>		
+											</div>
 										</div>
 										</figcaption>
 									</figure>
@@ -441,14 +441,14 @@ $this->title = Yii::t('app/public', 'Todevise');
 										<figcaption>
 										<div class="row">
 											<div class="col-md-6">
-												<span class="boxes-text align-left">Summer time</span>			
+												<span class="boxes-text align-left">Summer time</span>
 											</div>
 											<div class="col-md-6">
 												<button class="btn btn-single-love btn-love-box">
 													<span class="number">22</span>
 													<i class="ion-heart"></i>
 												</button>
-											</div>		
+											</div>
 										</div>
 										</figcaption>
 									</figure>
@@ -473,14 +473,14 @@ $this->title = Yii::t('app/public', 'Todevise');
 										<figcaption>
 										<div class="row">
 											<div class="col-md-6">
-												<span class="boxes-text align-left">Summer time</span>			
+												<span class="boxes-text align-left">Summer time</span>
 											</div>
 											<div class="col-md-6">
 												<button class="btn btn-single-love btn-love-box">
 													<span class="number">22</span>
 													<i class="ion-heart"></i>
 												</button>
-											</div>		
+											</div>
 										</div>
 										</figcaption>
 									</figure>
@@ -505,14 +505,14 @@ $this->title = Yii::t('app/public', 'Todevise');
 										<figcaption>
 										<div class="row">
 											<div class="col-md-6">
-												<span class="boxes-text align-left">Summer time</span>			
+												<span class="boxes-text align-left">Summer time</span>
 											</div>
 											<div class="col-md-6">
 												<button class="btn btn-single-love btn-love-box">
 													<span class="number">22</span>
 													<i class="ion-heart"></i>
 												</button>
-											</div>		
+											</div>
 										</div>
 										</figcaption>
 									</figure>
@@ -527,7 +527,7 @@ $this->title = Yii::t('app/public', 'Todevise');
 <section class="grid-wrapper">
 	<div class="container">
 		<div class="section-title">
-			Highlighted Works
+			<span translate="todevise.index.HIGHLIGHTED_WORKS"></span>
 		</div>
 		<div>
 			<?php foreach ($works12 as $i => $work) { ?>
@@ -591,7 +591,7 @@ $this->title = Yii::t('app/public', 'Todevise');
 		<?php } ?>
 
 				<div class="section-title">
-					Boxes
+					<span translate="global.BOXES"></span>
 				</div>
 
 				<div class="row no-mar">
@@ -601,7 +601,7 @@ $this->title = Yii::t('app/public', 'Todevise');
 							<div class="boxes-wrapper home">
 								<?php if (empty($products)) { ?>
 									<div class="empty-box">
-										<span class="empty-title">Empty box</span>
+										<span class="empty-title"><span translate="global.EMPTY_BOX"></span></span>
 									</div>
 								<?php } else {
 									$count  = 1;
@@ -629,7 +629,7 @@ $this->title = Yii::t('app/public', 'Todevise');
 
 			<div class="col-lg-4">
 				<div class="section-title">
-					Stories
+					<span translate="global.STORIES"></span>
 				</div>
 				<?php foreach ($stories as $story) { ?>
 					<a href="<?=$story->getViewLink()?>">

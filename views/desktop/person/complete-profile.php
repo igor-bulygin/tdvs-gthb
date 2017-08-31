@@ -7,7 +7,7 @@ use app\assets\desktop\deviser\GlobalAsset;
 GlobalAsset::register($this);
 
 $this->title = Yii::t('app/public',
-	'Complete your profile! {person_name} - Todevise',
+	'COMPLETE_PROFILE_PERSON_NAME',
 	['person_name' => $person->getName()]
 );
 
@@ -22,32 +22,32 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 		</a>
 	</div>
 	<div class="invitation-messages">
-		<p><span translate="NEED_INFO"></span></p>
+		<p><span translate="person.complete_profile.NEED_INFO"></span></p>
 	</div>
 	<div class="create-deviser-account-container black-form">
 		<form name="completeProfileCtrl.form">
 		<?php if($person->isInfluencer()) {?>
 			<div class="row">
-				<label for="first_name"><span translate="FIRST_NAME"></span></label>
+				<label for="first_name"><span translate="global.user.FIRST_NAME"></span></label>
 				<input type="text" name="first_name" class="form-control grey-input ng-class:{'error-input': completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.name)}" ng-model="completeProfileCtrl.person.personal_info.name" required>
 				<form-errors field="completeProfileCtrl.form.first_name" condition="completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.first_name)"></form-errors>
 			</div>
 			<div class="row">
-				<label for="last_name"><span translate="LAST_NAME"></span></label>
+				<label for="last_name"><span translate="global.user.LAST_NAME"></span></label>
 				<input type="text" name="last_name" class="form-control grey-input ng-class:{'error-input': completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.last_name)}" ng-model="completeProfileCtrl.person.personal_info.last_name" required>
 				<form-errors field="completeProfileCtrl.form.last_name" condition="completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.last_name)"></form-errors>
 			</div>
 			<?php } ?>
 			<?php if($person->isDeviser()) {?>
 				<div class="row">
-					<label for="brand_name"><span translate="BRAND_NAME"></span></label>
+					<label for="brand_name"><span translate="global.user.BRAND_NAME"></span></label>
 					<input type="text" name="brand_name" class="form-control grey-input ng-class:{'error-input': completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.brand_name)}" ng-model="completeProfileCtrl.person.personal_info.brand_name" required>
 					<form-errors field="completeProfileCtrl.form.brand_name" condition="completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.brand_name)"></form-errors>
 				</div>
 			<?php } ?>
 			<?php if($person->isDeviser() || $person->isInfluencer()) {?>
 				<div class="row">
-					<label for="city"><span translate="CITY"></span></label>
+					<label for="city"><span translate="global.user.CITY"></span></label>
 					<input type="text" name="city" class="form-control grey-input ng-class:{'error-input': completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.city)}" ng-model="completeProfileCtrl.city" ng-model-options="{debounce: 500}" ng-change="completeProfileCtrl.searchPlace(completeProfileCtrl.city)" required>
 					<form-errors field="completeProfileCtrl.form.city" condition="completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.city)"></form-errors>
 					<div class="relativize-me" ng-if="completeProfileCtrl.showCities" ng-cloak>
@@ -60,7 +60,7 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 			<?php } ?>
 			<?php if($person->isDeviser()) {?>
 				<div class="row">
-					<label for="categories"><span translate="FIELD"></span></label>
+					<label for="categories"><span translate="global.FIELD"></span></label>
 					<div class="ng-class:{'error-input': completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.categories)}">
 						<ol class="black-form-select work-field nya-bs-select" ng-model="completeProfileCtrl.person.categories" selected-text-format="count>4" ng-cloak ng-if="completeProfileCtrl.categories" name="categories" required multiple>
 							<li nya-bs-option="category in completeProfileCtrl.categories" data-value="category.id" multiple deep-watch="true">
@@ -74,10 +74,10 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 			<?php } ?>
 			<div class="row">
 				<?php if($person->isDeviser()) {?>
-				<label class="mt-30" for="text_short_description"><span translate="Short description"></span></label>
+				<label class="mt-30" for="text_short_description"><span translate="person.complete_profile.SHORT_DESCRIPTION"></span></label>
 				<?php } ?>
 				<?php if($person->isInfluencer()) {?>
-				<label for="text_short_description"><span translate="SHORT_BIO"></span></label>
+				<label for="text_short_description"><span translate="person.complete_profile.SHORT_BIO"></span></label>
 				<?php } ?>
 				<div class="black-area-wrappers">
 				<textarea name="text_short_description" cols="50" rows="10" class="grey-textarea form-control grey-input ng-class:{'error-input': completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.text_short_description)}" ng-model="completeProfileCtrl.person.text_short_description[completeProfileCtrl.description_language]" required></textarea>
@@ -91,20 +91,20 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 				<! -- Characters left -->
 				<div class="black-char-left">
 					<span class="number" ng-bind="completeProfileCtrl.limit_text_short_description - completeProfileCtrl.person.text_short_description[completeProfileCtrl.description_language].length"></span>
-					<span class="text">span[translate="CHARACTERS_LEFT"]</span>
+					<span class="text"><span translate="person.complete_profile.CHARACTERS_LEFT"></span></span>
 				</div>
 				<!-- tooltip -->
 				<?php if($person->isDeviser()) {?>
-					<i class="info-black-areas ion-information-circled" aria-hidden="true" translate-attr="{uib-popover: 'DESCRIBE_BRAND'}"></i>
+					<i class="info-black-areas ion-information-circled" aria-hidden="true" translate-attr="{uib-popover: 'person.complete_profile.DESCRIBE_BRAND'}"></i>
 				<?php } ?>
 				<?php if($person->isInfluencer()) {?>
-					<i class="info-black-areas ion-information-circled" aria-hidden="true" translate-attr="{uib-popover: 'DESCRIBE_BIO'}"></i>
+					<i class="info-black-areas ion-information-circled" aria-hidden="true" translate-attr="{uib-popover: 'person.complete_profile.DESCRIBE_BIO'}"></i>
 				<?php } ?>
 				</div>
 			</div>
 			<?php if($person->isDeviser()) {?>
 			<div class="row">
-				<label for="text_biography"><span translate="ABOUT"></span></label>
+				<label for="text_biography"><span translate="person.complete_profile.ABOUT"></span></label>
 				<div class="black-area-wrappers">
 				<div name="text_biography" text-angular ta-toolbar="[]" ta-paste="completeProfileCtrl.stripHTMLTags($html)" ng-model="completeProfileCtrl.person.text_biography[completeProfileCtrl.biography_language]" ng-cloak required class="text-angular-black ng-class:{'error-input': completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.text_biography)}"></div>
 				<form-errors field="completeProfileCtrl.form.text_biography" condition="completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.text_biography)"></form-errors>
@@ -124,13 +124,13 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 				<div class="upload-photo-wrapper">
 					<h4>
 						<i class="fa fa-camera"></i>
-						<span><span translate="UPLOAD_PROFILE_PHOTO"></span></span>
+						<span><span translate="person.complete_profile.UPLOAD_PROFILE_PHOTO"></span></span>
 					</h4>
 				</div>
 				<div class="outter-border ng-class:{'error-input': completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.profile_photo)}" ng-if="!completeProfileCtrl.profile" ng-cloak>
 					<div class="inner-square">
 						<div class="inner-circle">
-							<span translate="PLS_UPLOAD_PROFILE"></span>
+							<span translate="person.complete_profile.PLS_UPLOAD_PROFILE"></span>
 						</div>
 					</div>
 				</div>
@@ -147,13 +147,13 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 				<div class="upload-photo-wrapper">
 					<h4>
 						<i class="fa fa-camera"></i>
-						<span translate="UPLOAD_COVER_PHOTO"></span>
+						<span translate="person.complete_profile.UPLOAD_COVER_PHOTO"></span>
 					</h4>
 				</div>
 				<div class="outter-border ng-class:{'error-input': completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.header_photo)}" ng-if="!completeProfileCtrl.header" ng-cloak>
 					<div class="inner-square">
 						<div class="inner-rectangle">
-							<span translate="PLS_UPLOAD_COVER"></span>
+							<span translate="person.complete_profile.PLS_UPLOAD_COVER"></span>
 						</div>
 					</div>
 				</div>

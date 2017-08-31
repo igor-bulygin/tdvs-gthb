@@ -57,7 +57,7 @@
 					component: 'modalAceptReject',
 					resolve: {
 						text: function () {
-							return 'CONTINUE_MARK_SHIPPED';
+							return 'settings.orders.CONTINUE_MARK_SHIPPED';
 						}
 					}
 				});
@@ -101,7 +101,7 @@
 				component: 'modalInfo',
 				resolve: {
 					text: function () {
-						return 'ORDER_MOVED_TO_PAST';
+						return 'settings.orders.ORDER_MOVED_TO_PAST';
 					},
 					translationData: function () {
 						return ordernumber;

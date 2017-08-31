@@ -34,7 +34,7 @@ $lang = Yii::$app->language;
 							<div class="search-header-content fc-fff">
 								<div class="cols-xs12 fs-upper flex flex-align-center flex-column flex-justify-center search-header">
 									<div class="search_holder fs0-857">
-										<input type="text" class="funiv_bold fs1-143 fc-4e" name="search" placeholder="{{ 'QUESTION_ABOUT' | translate }}">
+										<input type="text" class="funiv_bold fs1-143 fc-4e" name="search" placeholder="{{ 'todevise.contact.QUESTION_ABOUT' | translate }}">
 										<span class="pointer glyphicon-content bc-c7 fc-fff">
 									        <span class="glyphicon glyphicon-search"></span>
 										</span>
@@ -52,7 +52,7 @@ $lang = Yii::$app->language;
 									</div>
 									<div class="answer fpf fs1" ng-if="faq.showAnswer"><span ng-bind="faq.answer"></span></div>
 								</div>
-								<?= Html::a(Yii::t("app/public", 'See our full FAQ'), Url::to(['public/faq']), [
+								<?= Html::a(Yii::t("app/old", 'See our full FAQ'), Url::to(['public/faq']), [
 							'class' => "link_btn funiv_bold fs1 fc-6b fs-upper"
 						]); ?>
 							</div>
@@ -60,7 +60,7 @@ $lang = Yii::$app->language;
 					</div>
 					<div class="contact-right flex flex-align-center flex-column flex-justify-center">
 						<div class="fs3-857 funiv_thin fs-upper fc-6d">
-							<?= Yii::t('app/public', 'Contact via Message') ?>
+							<?= Yii::t('app/old', 'Contact via Message') ?>
 						</div>
 						<div class="funiv_bold fs0-857">
 							<?php $form = ActiveForm::begin([
@@ -94,41 +94,41 @@ $lang = Yii::$app->language;
 				<div class="contact-down flex flex-row">
 					<div class="contact-down-left red flex flex-align-center flex-column flex-justify-center">
 						<div class="fs3-000 funiv_thin fs-upper fc-fff">
-							<?= Yii::t('app/public', 'Contact via Whatsapp') ?>
+							<?= Yii::t('app/old', 'Contact via Whatsapp') ?>
 						</div>
 						<div class="fpf_bold fs0-857 fc-fff">
-							<?= Yii::t('app/public', 'Just add this number to your phone´s contact list and start a conversation with us!') ?>
+							<?= Yii::t('app/old', 'Just add this number to your phone´s contact list and start a conversation with us!') ?>
 						</div>
 						<div class="funiv_bold fs1 fs1-587 fc-fff">
-							<?= Yii::t('app/public', '+0034 645 234 234') ?>
+							<?= Yii::t('app/old', '+0034 645 234 234') ?>
 						</div>
 						<div class="fpf_bold fs0-857 fc-fff">
-							<?= Yii::t('app/public', 'Because of time zones difference an agent can take up to 24 hours to reply to you message.') ?>
+							<?= Yii::t('app/old', 'Because of time zones difference an agent can take up to 24 hours to reply to you message.') ?>
 						</div>
 					</div>
 					<div class="contact-down-center grey-soft flex flex-align-center flex-column flex-justify-center">
 						<div class="fs3-000 funiv_thin fs-upper fc-1c1919">
-							<?= Yii::t('app/public', 'Contact via Facebook') ?>
+							<?= Yii::t('app/old', 'Contact via Facebook') ?>
 						</div>
 						<div class="fpf_bold fs0-857 fc-1c1919">
-							<?= Yii::t('app/public', 'You can message us via Facebook. Our social media team will reply in less than 24 hours.') ?>
+							<?= Yii::t('app/old', 'You can message us via Facebook. Our social media team will reply in less than 24 hours.') ?>
 						</div>
 						<div class="fpf_bold fs0-857 fc-1c1919">
-							<?= Yii::t('app/public', 'Click the button below to go to our profile') ?>
+							<?= Yii::t('app/old', 'Click the button below to go to our profile') ?>
 						</div>
-						<?= Html::a(Yii::t("app/public", 'Contact via Facebook'), Url::to('https://www.facebook.com/todevise'), [
+						<?= Html::a(Yii::t("app/old", 'Contact via Facebook'), Url::to('https://www.facebook.com/todevise'), [
 					'class' => "link_btn_white funiv_bold fs1-143 red fc-fff"
 				]); ?>
 					</div>
 					<div class="contact-down-right grey-hard flex flex-align-center flex-column flex-justify-center">
 						<div class="fs3-000 funiv_thin fs-upper fc-fff">
-							<?= Yii::t('app/public', 'Contact via Phone') ?>
+							<?= Yii::t('app/old', 'Contact via Phone') ?>
 						</div>
 						<div class="fpf_bold fs0-857 fc-fff">
-							<?= Yii::t('app/public', 'Contact us via phone, our customer service representative are here to help you.') ?>
+							<?= Yii::t('app/old', 'Contact us via phone, our customer service representative are here to help you.') ?>
 						</div>
 						<div class="funiv_bold fs1 fs1-587 fc-fff">
-							<?= Yii::t('app/public', '+0034 645 234 234') ?>
+							<?= Yii::t('app/old', '+0034 645 234 234') ?>
 						</div>
 					</div>
 				</div>

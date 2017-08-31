@@ -574,7 +574,7 @@ class PublicController extends CController
 
 		array_unshift($categories, [
 				'short_id' => 'all',
-				'name' => Yii::t("app/public", 'All categories')
+				'name' => Yii::t("app/public", 'ALL_CATEGORIES')
 		]);
 
 		$session = Yii::$app->session;

@@ -1,19 +1,19 @@
 <div class="card">
-	<span class="title">Price &amp; Stock</span>
+	<span class="title" translate="product.price_stock.TITLE"></span>
 	<div class="row bg-warning">
-		<label>WARNING!</label>
-		<p> If you change any of the options above (color, material, etc.), the values you already entered in the price and stock table (weight, stock, price) will be set to 0.</p>
+		<label><span translate="product.price_stock.WARNING"></span></label>
+		<p><span translate="product.price_stock.CHANGES_AFFECT_VALUES"></span></p>
 	</div>
 	<form name="productPriceStockCtrl.form" novalidate>
 		<div class="row items-row">
-				<label class="p-s-label ml-0" for="weight" id="weight_unit">Weight</label>
+				<label class="p-s-label ml-0" for="weight" id="weight_unit"><span translate="product.price_stock.WEIGHT"></span></label>
 				<ol class="nya-bs-select categories-select ng-class:{'error-input': productPriceStockCtrl.has_error(productPriceStockCtrl.form, productPriceStockCtrl.form.weight_unit)}" ng-model="productPriceStockCtrl.product.weight_unit" name="weight_unit" required>
 					<li nya-bs-option="unit in productPriceStockCtrl.metric.weight">
 						<a href="#"><span ng-bind="unit"></span></a>
 					</li>
 				</ol>
 
-				<label class="p-s-label" class="ml-15" for="dimension" id="dimension_unit">Dimension</label>
+				<label class="p-s-label" class="ml-15" for="dimension" id="dimension_unit"><span translate="product.price_stock.DIMENSION"></span></label>
 				<ol class="nya-bs-select categories-select ng-class:{'error-input': productPriceStockCtrl.has_error(productPriceStockCtrl.form, productPriceStockCtrl.form.dimension_unit)}" ng-model="productPriceStockCtrl.product.dimension_unit" name="dimension_unit" required>
 					<li nya-bs-option="unit in productPriceStockCtrl.metric.size">
 						<a href="#"><span ng-bind="unit"></span></a>
@@ -24,13 +24,13 @@
 		<table id="price_stock" class="table product-table" ng-if="productPriceStockCtrl.product.price_stock.length > 0">
 			<thead>
 				<tr>
-					<th>Variation availability</th>
+					<th><span translate="product.price_stock.VARIATION"></span></th>
 					<th></th>
-					<th>SKU (Optional)</th>
-					<th>Weight</th>
-					<th>Package dimensions <p>Length Width Height</p></th>
-					<th>Stock</th>
-					<th>Price</th>
+					<th><span translate="product.price_stock.SKU"></span><span translate="product.price_stock.OPTIONAL"></span></th>
+					<th><span translate="product.price_stock.WEIGHT"></span></th>
+					<th><span translate="product.price_stock.PACKAGE_DIMENSIONS"></span><p translate="product.price_stock.LENGTH_WIDTH_WEIGHT"></p></th>
+					<th><span translate="product.price_stock.STOCK"></span></th>
+					<th><span translate="product.price_stock.PRICE"></span></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -48,7 +48,7 @@
 						<a href="#" editable-number="product.weight" buttons="no" e-min="0" e-step="0.01" class="ng-class:{'purple-text': productPriceStockCtrl.priceStockValuesValidation(product.weight, product.available)}" ng-bind="(product.weight || 0)" blur="submit">
 						</a>&nbsp;
 						<span ng-if="productPriceStockCtrl.product.weight_unit" ng-bind="productPriceStockCtrl.product.weight_unit"></span>
-						<span class="apply-to-all-btn" ng-click="productPriceStockCtrl.applyToAll('weight', product.weight)">Apply to all</span>
+						<span class="apply-to-all-btn" ng-click="productPriceStockCtrl.applyToAll('weight', product.weight)"><span translate="product.price_stock.APPLY_ALL"></span></span>
 					</td>
 					<td xeditable-select>
 						<a href="#" editable-number="product.length" buttons="no" e-min="0" e-step="0.01" class="ng-class:{'purple-text': productPriceStockCtrl.priceStockValuesValidation(product.length, product.available)}" ng-bind="(product.length || 0)" blur="submit"></a>&nbsp;
@@ -58,14 +58,14 @@
 						<span ng-if="productPriceStockCtrl.product.dimension_unit" ng-bind="productPriceStockCtrl.product.dimension_unit"></span>&nbsp;x&nbsp;
 						<a href="#" editable-number="product.height" buttons="no" e-min="0 e-step="0.01"" class="ng-class:{'purple-text': productPriceStockCtrl.priceStockValuesValidation(product.height, product.available)}" ng-bind="(product.height || 0)" blur="submit"></a>&nbsp;
 						<span ng-if="productPriceStockCtrl.product.dimension_unit" ng-bind="productPriceStockCtrl.product.dimension_unit"></span>
-						<span class="apply-to-all-btn" ng-click="productPriceStockCtrl.applyToAll('dimensions', {length: product.length, width: product.width, height: product.height})">Apply to all</span>
+						<span class="apply-to-all-btn" ng-click="productPriceStockCtrl.applyToAll('dimensions', {length: product.length, width: product.width, height: product.height})"><span translate="product.price_stock.APPLY_ALL"></span></span>
 					</td>
 					<td xeditable-select>
 						<a href="#" editable-number="product.stock" buttons="no" e-min="0" class="ng-class:{'purple-text': productPriceStockCtrl.priceStockValuesValidation(product.stock, product.available)}" ng-bind="(product.stock || 0)" blur="submit"></a>
-						<span class="apply-to-all-btn" ng-click="productPriceStockCtrl.applyToAll('stock', product.stock)">Apply to all</span>
+						<span class="apply-to-all-btn" ng-click="productPriceStockCtrl.applyToAll('stock', product.stock)"><span translate="product.price_stock.APPLY_ALL"></span></span>
 					</td>
-					<td xeditable-select>€ <a href="#" editable-number="product.price" buttons="no" e-min="0" e-step="0.01" class="ng-class:{'purple-text': productPriceStockCtrl.priceStockValuesValidation(product.price, product.available)}" ng-bind="(product.price || 0)" blur="submit"></a>
-					<span class="apply-to-all-btn" ng-click="productPriceStockCtrl.applyToAll('price', product.price)">Apply to all</span>
+					<td xeditable-select><a href="#" editable-number="product.price" buttons="no" e-min="0" e-step="0.01" class="ng-class:{'purple-text': productPriceStockCtrl.priceStockValuesValidation(product.price, product.available)}" ng-bind="(product.price || 0)" blur="submit"><span translate="product.price_stock.CURRENCY"></span></a>
+					<span class="apply-to-all-btn" ng-click="productPriceStockCtrl.applyToAll('price', product.price)"><span translate="product.price_stock.APPLY_ALL"></span></span>
 					</td>
 				</tr>
 			</tbody>

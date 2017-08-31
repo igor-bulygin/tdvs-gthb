@@ -1,16 +1,16 @@
 <div class="col-md-10">
 	<div class="video-container">
-		<div ng-if="editVideosCtrl.person.videos.length > 0"><a href="#" class="red-link-btn" ng-click="editVideosCtrl.done()"><span translate="DONE_VIDEOS"></span></a></div>
+		<div ng-if="editVideosCtrl.person.videos.length > 0"><a href="#" class="red-link-btn" ng-click="editVideosCtrl.done()"><span translate="person.videos.DONE_VIDEOS"></span></a></div>
 		<div class="add-videos-wrapper" ng-if="editVideosCtrl.addVideosClicked || editVideosCtrl.person.videos.length > 0" ng-cloak>
 			<div class="plus-add-wrapper" ng-click="editVideosCtrl.addVideo()" ng-disabled="editVideosCtrl.form.$invalid">
 				<div class="plus-add">
 					<span>+</span>
 				</div>
-				<div class="text"><span translate="ADD_VIDEOS"></span></div>
+				<div class="text"><span translate="person.videos.ADD_VIDEOS"></span></div>
 			</div>
 			<form name="editVideosCtrl.form" novalidate>
 				<div class="input-group input-group-lg input-video">
-					<span class="input-group-addon" id="sizing-addon1">Video url</span>
+					<span class="input-group-addon" id="sizing-addon1"><span translate="person.videos.VIDEO_URL"></span></span>
 					<input type="text" class="form-control input-add-video" placeholder="http://" ng-model="editVideosCtrl.url" name="url" ng-required="true" ng-pattern="editVideosCtrl.YoutubeRegex">
 								<!--<span class="input-group-btn">
 									<button class="btn btn-default btn-add-video" type="button" ng-click="editVideosCtrl.addVideo()" ng-disabled="editVideosCtrl.form.$invalid">+</button>
@@ -20,8 +20,8 @@
 		</div>
 		<div ng-if="editVideosCtrl.person.videos.length === 0" class="text-center" ng-cloak>
 			<img class="sad-face" src="/imgs/sad-face.svg">
-			<p class="no-video-text"><span translate="ANY_VIDEOS"></span></p>
-			<button class="btn btn-default btn-green" ng-click="editVideosCtrl.showAddVideo()" ng-if="!editVideosCtrl.addVideosClicked"><span translate="ADD_VIDEOS"></span></button>
+			<p class="no-video-text"><span translate="person.videos.ANY_VIDEOS"></span></p>
+			<button class="btn btn-default btn-green" ng-click="editVideosCtrl.showAddVideo()" ng-if="!editVideosCtrl.addVideosClicked"><span translate="person.videos.ADD_VIDEOS"></span></button>
 		</div>
 		<div class="video-edit-list" ng-cloak ui-sortable ng-model="editVideosCtrl.person.videos">
 			<div class="row video-row" ng-repeat="video in editVideosCtrl.person.videos">
@@ -29,7 +29,7 @@
 					<ng-youtube-embed url="video.url" autoplay="false" color="white" disablekb="true" width="100%"></ng-youtube-embed>
 				</div>
 				<div class="col-md-6 dragg-video-wrapper">
-					<span class="title"><span translate="WHICH_WORK_VIDEO"></span></span>
+					<span class="title"><span translate="person.videos.WHICH_WORK_VIDEO"></span></span>
 						<div class="open-drag-icons">
 							<span class="ion-arrow-move move"></span> <span class="ion-android-close x-close" ng-click="editVideosCtrl.deleteVideo($index)"></span>
 						</div>
@@ -38,10 +38,10 @@
 								<span class="input-group-addon" id="basic-addon1">
 									<span class="ion-search"></span>
 								</span>
-								<input type="text" translate-attr="{placeholder: 'TYPE_WORK'}" ng-model="editVideosCtrl.searchTerm[$index]" name="searchTerm" ng-change="editVideosCtrl.findProducts(editVideosCtrl.searchTerm[$index], $index)" ng-model-options="{debounce:{'default': 500}}" class="form-control edit-video-input">
+								<input type="text" translate-attr="{placeholder: 'person.videos.TYPE_WORK'}" ng-model="editVideosCtrl.searchTerm[$index]" name="searchTerm" ng-change="editVideosCtrl.findProducts(editVideosCtrl.searchTerm[$index], $index)" ng-model-options="{debounce:{'default': 500}}" class="form-control edit-video-input">
 							</div>
-							<span ng-if="editVideosCtrl.noProducts"><span translate="NO_PRODUCTS"></span></span>
-							<span ng-if="editVideosCtrl.product_min_length"><span translate="PRODUCT_CHARACTERS_REQUIRED"></span></span>
+							<span ng-if="editVideosCtrl.noProducts"><span translate="person.videos.NO_PRODUCTS"></span></span>
+							<span ng-if="editVideosCtrl.product_min_length"><span translate="person.videos.PRODUCT_CHARACTERS_REQUIRED"></span></span>
 							<div ng-cloak class="add-tag-video-wrapper" ng-if="editVideosCtrl.searchTerm[$index].length > 0 && editVideosCtrl.works[$index] && editVideosCtrl.works[$index].length > 0">
 								<div ng-repeat="work in editVideosCtrl.works[$parent.$index]" style="cursor:pointer;" ng-click="editVideosCtrl.selectProduct($parent.$index, work)">
 									<div class="tag-select-row row">
@@ -49,7 +49,7 @@
 											<img ng-src="{{work.url_image_preview}}" style="width: 100%; max-height: 50px;">
 										</div>
 										<div class="col-md-8">
-											<p><span ng-bind="work.name"></span> <span translate="WORK_BY"></span> <span ng-bind="work.deviser.name"></span></p>
+											<p><span ng-bind="work.name"></span> <span translate="person.videos.WORK_BY"></span> <span ng-bind="work.deviser.name"></span></p>
 										</div>
 										<div class="col-md-2">
 											<span class="glyphicon glyphicon-plus green-add" style="cursor:pointer;"></span>
@@ -59,10 +59,10 @@
 							</div>
 						</form>
 						<div class="tagged-works">
-							<span class="title"><span translate="TAGGED_WORKS"></span></span>
+							<span class="title"><span translate="person.videos.TAGGED_WORKS"></span></span>
 							<div ng-if="video.products.length === 0">
-								<p class="no-tags-title"><span translate="NO_TAGGED_WORKS"></span></p>
-								<p class="no-tags-text"><span translate="TAG_WORKS"></span></p>
+								<p class="no-tags-title"><span translate="person.videos.NO_TAGGED_WORKS"></span></p>
+								<p class="no-tags-text"><span translate="person.videos.TAG_WORKS"></span></p>
 							</div>
 							<div class="produts-tags-wrapper">
 								<div class="col-md-6" ng-repeat="product in video.products track by $index" ng-if="video.products.length > 0">
