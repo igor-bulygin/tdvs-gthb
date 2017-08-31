@@ -1,7 +1,10 @@
 {
 	"global": {
 		"DEVISERS": "Devisers",
+		"DEVISER": "Deviser",
 		"INFLUENCERS": "Influencers",
+		"INFLUENCER": "Influencer",
+		"INFO": "Info",
 		"LOGIN": "Log in",
 		"CANCEL": "Cancelar",
 		"DELETE": "Borrar",
@@ -25,6 +28,8 @@
 		"UPLOAD_FILE": "Añadir archivo",
 		"UPLOADING": "Añadiendo archivo:",
 		"REQUIRED": "Obligatorio",
+		"SAVE": "Guardar",
+		"CHANGE": "Cambiar",
 		"user": {
 			"FIRST_NAME": "Nombre",
 			"LAST_NAME": "Apellidos",

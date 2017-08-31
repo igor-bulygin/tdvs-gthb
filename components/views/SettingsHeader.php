@@ -25,20 +25,20 @@ $activeOption = array_key_exists('settings_menu_active_option', $this->params) ?
 	</div>
 	<ul class="nav nav-tabs header-settings-tabs">
 		<li role="presentation" class="<?= ($activeOption=='general') ? 'active' : ''?>">
-			<a href="<?= Url::to(['/settings/general', 'slug' => $person->slug, 'person_id' => $person->short_id])?>" translate="GENERAL"></a>
+			<a href="<?= Url::to(['/settings/general', 'slug' => $person->slug, 'person_id' => $person->short_id])?>" translate="settings.header.GENERAL"></a>
 		</li>
 		<li role="presentation" class="<?= ($activeOption=='orders') ? 'active' : '' ?>">
-			<a href="<?= Url::to(['/settings/open-orders', 'slug' => $person->slug, 'person_id' => $person->short_id])?>" translate="MY_ORDERS"></a>
+			<a href="<?= Url::to(['/settings/open-orders', 'slug' => $person->slug, 'person_id' => $person->short_id])?>" translate="settings.header.MY_ORDERS"></a>
 		</li>
 		<?php if ($person->isDeviser()) { ?>
 			<li role="presentation" class="<?= ($activeOption=='stock') ? 'active' : '' ?>">
-				<a href="<?= Url::to(['/settings/stock', 'slug' => $person->slug, 'person_id' => $person->short_id])?>" translate="STOCK_PRICE"></a>
+				<a href="<?= Url::to(['/settings/stock', 'slug' => $person->slug, 'person_id' => $person->short_id])?>" translate="settings.header.STOCK_PRICE"></a>
 			</li>
 			<li role="presentation" class="<?= ($activeOption=='billing') ? 'active' : '' ?>">
-				<a href="<?= Url::to(['/settings/billing', 'slug' => $person->slug, 'person_id' => $person->short_id])?>" translate="BILLING_PAYMENTS"></a>
+				<a href="<?= Url::to(['/settings/billing', 'slug' => $person->slug, 'person_id' => $person->short_id])?>" translate="settings.header.BILLING_PAYMENTS"></a>
 			</li>
 			<li role="presentation" class="<?= ($activeOption=='shipping') ? 'active' : '' ?>">
-				<a href="<?= Url::to(['/settings/shipping', 'slug' => $person->slug, 'person_id' => $person->short_id])?>" translate="SHIPPING"></a>
+				<a href="<?= Url::to(['/settings/shipping', 'slug' => $person->slug, 'person_id' => $person->short_id])?>" translate="settings.header.SHIPPING"></a>
 			</li>
 		<?php } ?>
 	</ul>
@@ -47,13 +47,13 @@ $activeOption = array_key_exists('settings_menu_active_option', $this->params) ?
 
 <script type="text/ng-template" id="changesSaved.html">
 	<div class="modal-body">
-		<span>Changes saved successfully</span>
+		<span translate="CHANGES_SAVED"></span>
 		<span class="pull-right" ng-click="$dismiss()">&times;</span>
 	</div>
 </script>
 <script type="text/ng-template" id="invalidForm.html">
 	<div class="modal-body">
-		<span class="purple-text">Please correct the errors below and try saving again</span>
+		<span class="purple-text"><span translate="settings.header.PLS_CORRECT"></span></span>
 		<span class="pull-right" ng-click="$dismiss()">&times;</span>
 	</div>
 </script>
