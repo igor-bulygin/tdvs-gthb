@@ -9,8 +9,9 @@ moduleTodevise.config(['$translateProvider','$translatePartialLoaderProvider', f
 	$translatePartialLoaderProvider.addPart('todevise');
 	$translateProvider.useLoader('$translatePartialLoader', {
 		urlTemplate: '/translations/modules/{part}/{lang}.pod'
-	});	
-	$translateProvider.preferredLanguage('es');
+	});
+	var language= _lang.split('-')[0].trim();
+	$translateProvider.preferredLanguage(language);
 	$translateProvider.useSanitizeValueStrategy('sanitize');
 	$translateProvider.useLoaderCache(true);
 }]);

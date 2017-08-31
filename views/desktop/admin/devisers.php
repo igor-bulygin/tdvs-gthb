@@ -55,7 +55,7 @@ $this->title = 'Todevise / Admin / Devisers';
 				'columns' => [
 					[
 						'class' => 'yii\grid\ActionColumn',
-						'template' => "{products} {view} {update} {delete}",
+						'template' => "{products} {view} {update} {states} {delete} ",
 						'buttons' => [
 							'products' => function($url, $model, $key) {
 								$url = $model->getStoreLink();
@@ -70,6 +70,22 @@ $this->title = 'Todevise / Admin / Devisers';
 							'update' => function($url, $model, $key) {
 								$url = $model->getAboutEditLink();
 								return Html::a('<span class="glyphicon glyphicon-edit fc-fff fs1"></span>', $url);
+							},
+
+							'states' => function($url, $model, $key) {
+								if ($model->account_state == Person::ACCOUNT_STATE_BLOCKED) {
+									return Html::tag("span", "", [
+										"class" => "pointer glyphicon glyphicon-ok-circle fc-fff fs1",
+										"title" => "Activate deviser (draft)",
+										"ng-click" => "devisersCtrl.draft('$model->short_id')"
+									]);
+								} else {
+									return Html::tag("span", "", [
+										"class" => "pointer glyphicon glyphicon-remove-circle fc-fff fs1",
+										"title" => "Block deviser",
+										"ng-click" => "devisersCtrl.block('$model->short_id')"
+									]);
+								}
 							},
 
 							'delete' => function($url, $model, $key) {

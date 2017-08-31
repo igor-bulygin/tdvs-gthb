@@ -1,4 +1,5 @@
 <?php
+
 use app\assets\desktop\admin\InfluencersAsset;
 use app\models\Person;
 use yii\grid\GridView;
@@ -56,7 +57,7 @@ $this->title = 'Todevise / Admin / Influencers';
 				'columns' => [
 					[
 						'class' => 'yii\grid\ActionColumn',
-						'template' => "{view} {update} {delete}",
+						'template' => "{view} {update} {states} {delete}",
 						'buttons' => [
 							'view' => function($url, $model, $key) {
 								$url = $model->getAboutLink();
@@ -66,6 +67,22 @@ $this->title = 'Todevise / Admin / Influencers';
 							'update' => function($url, $model, $key) {
 			                    $url = $model->getAboutEditLink();
 								return Html::a('<span class="glyphicon glyphicon-edit fc-fff fs1"></span>', $url);
+							},
+
+							'states' => function($url, $model, $key) {
+								if ($model->account_state == Person::ACCOUNT_STATE_BLOCKED) {
+									return Html::tag("span", "", [
+										"class" => "pointer glyphicon glyphicon-ok-circle fc-fff fs1",
+										"title" => "Activate influencer (draft)",
+										"ng-click" => "influencersCtrl.draft('$model->short_id')"
+									]);
+								} else {
+									return Html::tag("span", "", [
+										"class" => "pointer glyphicon glyphicon-remove-circle fc-fff fs1",
+										"title" => "Block influencer",
+										"ng-click" => "influencersCtrl.block('$model->short_id')"
+									]);
+								}
 							},
 
 							'delete' => function($url, $model, $key) {

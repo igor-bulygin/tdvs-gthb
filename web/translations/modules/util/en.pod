@@ -45,7 +45,7 @@
 			"MUST_BE_A_MEMBER":"You must be a Todevise member to ",
 			"A_PRODUCT":" a product.",
 			"ALREADY_MEMBER":"Already a member",
-			"BECOME_MEMBER":"Become a Todevise member (it's 100% free)"
+			"BECOME_MEMBER":"Become a Todevise member (it's 100% free)",
 			"SIGN_UP":"Sign Up"
 		},
 		"product_card": {

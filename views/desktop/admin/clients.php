@@ -1,4 +1,5 @@
 <?php
+
 use app\assets\desktop\admin\ClientsAsset;
 use app\models\Person;
 use yii\grid\GridView;
@@ -56,11 +57,27 @@ $this->title = 'Todevise / Admin / Clients';
 				'columns' => [
 					[
 						'class' => 'yii\grid\ActionColumn',
-						'template' => "{view} {delete}",
+						'template' => "{view} {states} {delete}",
 						'buttons' => [
 							'view' => function($url, $model, $key) {
 								$url = $model->getAboutLink();
 								return Html::a('<span class="glyphicon glyphicon-user fc-fff fs1"></span>', $url);
+							},
+
+							'states' => function($url, $model, $key) {
+								if ($model->account_state == Person::ACCOUNT_STATE_BLOCKED) {
+									return Html::tag("span", "", [
+										"class" => "pointer glyphicon glyphicon-ok-circle fc-fff fs1",
+										"title" => "Activate client",
+										"ng-click" => "clientsCtrl.draft('$model->short_id')"
+									]);
+								} else {
+									return Html::tag("span", "", [
+										"class" => "pointer glyphicon glyphicon-remove-circle fc-fff fs1",
+										"title" => "Block client",
+										"ng-click" => "clientsCtrl.block('$model->short_id')"
+									]);
+								}
 							},
 
 							'delete' => function($url, $model, $key) {
