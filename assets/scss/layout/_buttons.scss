@@ -25,6 +25,14 @@
         background-color:$dark_green;
     }
 }
+.btn-none{
+    @extend %btn; 
+    background-color:transparent;
+    color: $black;
+    &:hover{
+        color:$almost_black;
+    }
+}
 .btn-grey{
     @extend %btn;
     background-color:$white;
