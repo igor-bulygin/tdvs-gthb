@@ -107,28 +107,19 @@ $videos = $product->getVideos();
 								<i class="ion-ios-star"></i>
 							</span>
 							<span class="number-score">(20)</span>
-							<div class="avatar-wrapper-side">
-								<div class="avatar">
-									<a href="<?= $person->getStoreLink() ?>">
-										<img class="cover" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getAvatarImage())->resize(128, 128) ?>" data-pin-nopin="true">
-										<span><?= $person->getName() ?></span>
-									</a>
-								</div>
-							</div>
 						</div>
-						<div class="product-data">
+						<div class="product-data no-border">
 							<div class="price-stock pull-left">
 								<div class="stock"><span ng-bind="detailProductCtrl.stock"></span><span translate="product.detail.IN_STOCK"></span></div>
 								<div class="product-price">€ <span ng-bind="detailProductCtrl.price"></span></div>
 							</div>
 							<div class="quantity-wrapper pull-right">
-								<span class="atr quantity-name" translate="product.detail.QUANTITY"></span>
-								<div class="number" ng-bind="detailProductCtrl.quantity"></div>
-								<button class="btn btn-green btn-summatory" ng-click="detailProductCtrl.changeQuantity(1)">
-									<span>+</span>
-								</button>
-								<button class="btn btn-green btn-summatory" ng-click="detailProductCtrl.changeQuantity(-1)">
+								<button class="btn btn-none btn-summatory" ng-click="detailProductCtrl.changeQuantity(-1)">
 									<span>-</span>
+								</button>
+								<div class="number" ng-bind="detailProductCtrl.quantity"></div>
+								<button class="btn btn-none btn-summatory" ng-click="detailProductCtrl.changeQuantity(1)">
+									<span>+</span>
 								</button>
 							</div>
 						</div>
@@ -274,6 +265,42 @@ $videos = $product->getVideos();
 									</li>
 								</ul>
 							</div>
+							<div class="shipping-policies-wrapper">
+								<div class="policies-row">
+									<form class="form-horizontal">
+										<div class="form-group">
+											<label class="col-sm-5 control-label shipping-label no-pad-r"><span>Shipping price to SPAIN</span></label>
+											<!--
+											<div class="col-sm-5 pad-product">
+												<select class="form-control selectpicker shipping-select product-select" title="Choose country">
+													<option>USA</option>
+													<option>SPAIN</option>
+												</select>
+											</div>
+											-->
+											<div class="col-sm-3">
+												is <span class="tax">€<?=$product->getShippingPrice(Country::getDefaultContryCode())?></span>
+											</div>
+										</div>
+									</form>
+								</div>
+								<?php
+								$returns = $product->getReturnsLabel();
+								$warranty = $product->getWarrantyLabel();
+								?>
+								<?php if ($returns) { ?>
+									<div class="returns-row mt-30">
+										<span translate="product.detail.RETURNS"></span>
+										<span class="bold"><?=$returns?></span>
+									</div>
+								<?php } ?>
+								<?php if ($warranty) { ?>
+									<div class="returns-row">
+										<span translate="product.detail.WARRANTY"></span>
+										<span class="bold"><?=$warranty?></span>
+									</div>
+								<?php } ?>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -324,43 +351,14 @@ $videos = $product->getVideos();
 							<?php } ?>
 						</div>
 						<div class="col-sm-4">
-							<div class="shipping-policies-wrapper">
-								<div class="title"><span translate="product.detail.SHIPPING&POLICIES"></span></div>
-									<div class="policies-row">
-									<form class="form-horizontal">
-										<div class="form-group">
-											<label class="col-sm-5 control-label shipping-label no-pad-r"><span translate="product.detail.SHIPPING_PRICE_SPAIN"></span></label>
-											<!--
-											<div class="col-sm-5 pad-product">
-												<select class="form-control selectpicker shipping-select product-select" title="Choose country">
-													<option>USA</option>
-													<option>SPAIN</option>
-												</select>
-											</div>
-											-->
-											<div class="col-sm-3">
-												is <span class="tax">€<?=$product->getShippingPrice(Country::getDefaultContryCode())?></span>
-											</div>
-										</div>
-									</form>
+							<div class="avatar-wrapper-side">
+									<div class="avatar">
+										<a href="<?= $person->getStoreLink() ?>">
+											<img class="cover" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getAvatarImage())->resize(128, 128) ?>" data-pin-nopin="true">
+											<span><?= $person->getName() ?></span>
+										</a>
+									</div>
 								</div>
-								<?php
-								$returns = $product->getReturnsLabel();
-								$warranty = $product->getWarrantyLabel();
-								?>
-								<?php if ($returns) { ?>
-									<div class="returns-row mt-30">
-										<span translate="product.detail.RETURNS"></span>
-										<span class="bold"><?=$returns?></span>
-									</div>
-								<?php } ?>
-								<?php if ($warranty) { ?>
-									<div class="returns-row">
-										<span translate="product.detail.WARRANTY"></span>
-										<span class="bold"><?=$warranty?></span>
-									</div>
-								<?php } ?>
-							</div>
 						</div>
 					</div>
 
