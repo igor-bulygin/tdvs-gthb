@@ -31,13 +31,86 @@
 					short_id: deviser_id
 				}).then(function (deviser) {
 					if (deviser.length !== 1) return;
-					deviser = deviser.shift();
 
 					$person.delete(deviser).then(function (data) {
 						toastr.success("Deviser deleted!");
 						vm.renderPartial();
 					}, function (err) {
 						toastr.error("Couldn't delete deviser!", err);
+					});
+				}, function (err) {
+					toastr.error("Couldn't find deviser!", err);
+				});
+			}, function () {
+				//Cancel
+			});
+		};
+
+		vm.block = function (deviser_id) {
+			var modalInstance = $uibModal.open({
+				templateUrl: 'template/modal/confirm.html',
+				controller: 'confirmCtrl',
+				resolve: {
+					data: function () {
+						return {
+							title: "Are you sure?",
+							text: "You are about to block a deviser! The deviser will no longer have access to the web"
+						};
+					}
+				}
+			});
+
+			modalInstance.result.then(function () {
+				$person.get({
+					short_id: deviser_id
+				}).then(function (devisers) {
+					if (devisers.length !== 1) return;
+					var deviser = devisers[0];
+					deviser.account_state = 'blocked';
+					console.log(deviser);
+
+					$person.modify('POST', deviser).then(function (data) {
+						toastr.success("Deviser blocked!");
+						vm.renderPartial();
+					}, function (err) {
+						toastr.error("Couldn't block deviser!", err);
+					});
+				}, function (err) {
+					toastr.error("Couldn't find deviser!", err);
+				});
+			}, function () {
+				//Cancel
+			});
+		};
+
+		vm.draft = function (deviser_id) {
+			var modalInstance = $uibModal.open({
+				templateUrl: 'template/modal/confirm.html',
+				controller: 'confirmCtrl',
+				resolve: {
+					data: function () {
+						return {
+							title: "Are you sure?",
+							text: "You are about to set a deviser as draft! The deviser will have access to the web, but his profile will be marked as draft"
+						};
+					}
+				}
+			});
+
+			modalInstance.result.then(function () {
+				$person.get({
+					short_id: deviser_id
+				}).then(function (devisers) {
+					if (devisers.length !== 1) return;
+					var deviser = devisers[0];
+					deviser.account_state = 'draft';
+					console.log(deviser);
+
+					$person.modify('POST', deviser).then(function (data) {
+						toastr.success("Deviser actived as draft!");
+						vm.renderPartial();
+					}, function (err) {
+						toastr.error("Couldn't activate deviser!", err);
 					});
 				}, function (err) {
 					toastr.error("Couldn't find deviser!", err);

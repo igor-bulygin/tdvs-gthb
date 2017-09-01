@@ -46,6 +46,80 @@
 				//Cancel
 			});
 		};
+
+		vm.block = function (influencer_id) {
+			var modalInstance = $uibModal.open({
+				templateUrl: 'template/modal/confirm.html',
+				controller: 'confirmCtrl',
+				resolve: {
+					data: function () {
+						return {
+							title: "Are you sure?",
+							text: "You are about to block a influencer! The influencer will no longer have access to the web"
+						};
+					}
+				}
+			});
+
+			modalInstance.result.then(function () {
+				$person.get({
+					short_id: influencer_id
+				}).then(function (influencers) {
+					if (influencers.length !== 1) return;
+					var influencer = influencers[0];
+					influencer.account_state = 'blocked';
+					console.log(influencer);
+
+					$person.modify('POST', influencer).then(function (data) {
+						toastr.success("influencer blocked!");
+						vm.renderPartial();
+					}, function (err) {
+						toastr.error("Couldn't block influencer!", err);
+					});
+				}, function (err) {
+					toastr.error("Couldn't find influencer!", err);
+				});
+			}, function () {
+				//Cancel
+			});
+		};
+
+		vm.draft = function (influencer_id) {
+			var modalInstance = $uibModal.open({
+				templateUrl: 'template/modal/confirm.html',
+				controller: 'confirmCtrl',
+				resolve: {
+					data: function () {
+						return {
+							title: "Are you sure?",
+							text: "You are about to set a influencer as draft! The influencer will have access to the web, but his profile will be marked as draft"
+						};
+					}
+				}
+			});
+
+			modalInstance.result.then(function () {
+				$person.get({
+					short_id: influencer_id
+				}).then(function (influencers) {
+					if (influencers.length !== 1) return;
+					var influencer = influencers[0];
+					influencer.account_state = 'draft';
+					console.log(influencer);
+
+					$person.modify('POST', influencer).then(function (data) {
+						toastr.success("influencer actived as draft!");
+						vm.renderPartial();
+					}, function (err) {
+						toastr.error("Couldn't activate influencer!", err);
+					});
+				}, function (err) {
+					toastr.error("Couldn't find influencer!", err);
+				});
+			}, function () {
+				//Cancel
+			});
+		};
 	}
 
 	angular.module('todevise', ['ngAnimate', 'ui.bootstrap', 'angular-multi-select', 'global-admin', 'global-desktop', 'api'])
