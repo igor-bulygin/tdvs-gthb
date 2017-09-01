@@ -98,34 +98,36 @@ app\components\assets\PublicHeader2Asset::register($this);
 <div id="navbar-wrapper">
 	<nav class="navbar navbar-default secondary">
 		<div class="container">
-			<ul class="nav navbar-nav">
-					<li>
-						<a href="#" class="menu-title hover-toggle" data-target=".menu-categories" data-group=".category-menu">
-							<i class="fa fa-bars" aria-hidden="true"></i>
-							<span translate="header.SHOP_BY_DEPARTMENT"></span>
-						</a>
-					</li>
+			<div class="navbar-elements">
+				<ul class="nav navbar-nav">
+						<li>
+							<a href="#" class="menu-title hover-toggle" data-target=".menu-categories" data-group=".category-menu">
+								<i class="fa fa-bars" aria-hidden="true"></i>
+								<span translate="header.SHOP_BY_DEPARTMENT"></span>
+							</a>
+						</li>
+					</ul>
+				<ul class="nav navbar-nav center-navbar">
+					<li><a href="<?=Url::to(['/discover/stories'])?>" translate="header.STORIES"></a></li>
+					<li><a href="<?=Url::to(['/discover/boxes'])?>" translate="header.EXPLORE_BOXES"></a></li>
+					<li><a href="<?=Url::to(['/discover/devisers'])?>" translate="header.DISCOVER_DEVISERS"></a></li>
+					<li><a href="<?=Url::to(['/discover/influencers'])?>" translate="header.TREND_SETTERS"></a></li>
+					<li><a href="#" translate="header.PROJECTS"></a></li>
 				</ul>
-			<ul class="nav navbar-nav center-navbar">
-				<li><a href="<?=Url::to(['/discover/stories'])?>" translate="header.STORIES"></a></li>
-				<li><a href="<?=Url::to(['/discover/boxes'])?>" translate="header.EXPLORE_BOXES"></a></li>
-				<li><a href="<?=Url::to(['/discover/devisers'])?>" translate="header.DISCOVER_DEVISERS"></a></li>
-				<li><a href="<?=Url::to(['/discover/influencers'])?>" translate="header.TREND_SETTERS"></a></li>
-				<li><a href="#" translate="header.PROJECTS"></a></li>
-			</ul>
-			<div class="pull-right">
-					<?php
+				<div class="language-picker-wrapper">
+						<?php
 
-					echo LanguagePicker::widget([
-						'skin' => LanguagePicker::SKIN_BUTTON,
-						'size' => LanguagePicker::SIZE_SMALL,
-						'parentTemplate' => '<div class="language-picker button-list pull-right {size}"><div>{items}</div></div>',
-						'itemTemplate' => '<a href="{link}" title="{name}" class="{language}">{name}</a>',
-						'activeItemTemplate' => '<a href="{link}" title="{name}" class="{language} active">{name}</a>',
-						'languageAsset' => 'lajax\languagepicker\bundles\LanguageLargeIconsAsset',
-						'languagePluginAsset' => 'lajax\languagepicker\bundles\LanguagePluginAsset',
-					]);
-					?>
+						echo LanguagePicker::widget([
+							'skin' => LanguagePicker::SKIN_BUTTON,
+							'size' => LanguagePicker::SIZE_SMALL,
+							'parentTemplate' => '<div class="language-picker button-list pull-right {size}"><div>{items}</div></div>',
+							'itemTemplate' => '<a href="{link}" title="{name}" class="{language}">{name}</a>',
+							'activeItemTemplate' => '<a href="{link}" title="{name}" class="{language} active">{name}</a>',
+							'languageAsset' => 'lajax\languagepicker\bundles\LanguageLargeIconsAsset',
+							'languagePluginAsset' => 'lajax\languagepicker\bundles\LanguagePluginAsset',
+						]);
+						?>
+				</div>
 			</div>
 		</div>
 	</nav>

@@ -5,7 +5,7 @@
 .bootstrap-select>.dropdown-toggle.bs-placeholder, .bootstrap-select>.dropdown-toggle.bs-placeholder:active, .bootstrap-select>.dropdown-toggle.bs-placeholder:focus, .bootstrap-select>.dropdown-toggle.bs-placeholder:hover {
     color: $black;
     background-color:$background_grey;
-    padding: 2px 12px;
+    padding: 0 12px;
     max-width: 175px;
 }
 .product-data{
@@ -108,4 +108,8 @@
 }
 .nya-bs-select.btn-group:not(.input-group-btn), .nya-bs-select.btn-group[class*="col-"]{
 	background-color: transparent!important;
+}
+.bootstrap-select.btn-group .dropdown-toggle .filter-option {
+    border-right: 1px solid!important;
+    height: 100%!important;
 }

@@ -9,6 +9,9 @@
     height: 70px;
     padding: 10px 0;
     z-index:1000;
+	.navbar-elements{
+		position: relative;
+	}
 	.center-navbar{
 		width: 600px;
 		margin: 0 auto;
@@ -421,6 +424,12 @@
 	border-bottom: 1px solid #ccc;
 	margin: 10px 0!important;
 }
-.searcher-wrapper{
-
+.language-picker-wrapper{
+	 position: absolute;
+    right: 64px;
+    top: 12px;
+	a{
+		color:$black;
+		text-transform: uppercase;
+	}
 }
