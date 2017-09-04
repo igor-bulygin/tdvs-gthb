@@ -212,15 +212,15 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr ng-repeat="line in productVariationsCtrl.product.sizechart.values track by $index">
+						<tr ng-repeat="line in productVariationsCtrl.product.sizechart.values track by $index" >
 							<td ng-repeat="value in line track by $index">
 								<span ng-if="$first" ng-bind="value" class="editable-fix"></span>
 								<span ng-if="!$first" xeditable-select>
 									<a href="#" editable-number="line[$index]" buttons="no" e-min="0" blur="submit" class="ng-class:{'purple-text': productVariationsCtrl.sizechartValuesValidation(value)}">{{line[$index]}}</a>
 									&nbsp;<span ng-if="productVariationsCtrl.product.sizechart.metric_unit" ng-bind="productVariationsCtrl.product.sizechart.metric_unit"></span>
 								</span>
-								<span ng-if="$last" class="glyphicon glyphicon-remove close-row-sizes" ng-click="productVariationsCtrl.deleteSizeFromSizechart($index)"></span>
 							</td>
+							<td><span class="glyphicon glyphicon-remove close-row-sizes" ng-click="productVariationsCtrl.deleteSizeFromSizechart($index)"></span></td>
 						</tr>
 					</tbody>
 				</table>
