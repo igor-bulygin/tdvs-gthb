@@ -67,7 +67,7 @@ $this->title = 'Todevise / Admin / Size chart';
 									<label class="funiv fc-c7 fs0-929 fnormal">
 										<?= Yii::t("app/admin", "Metric unit"); ?>
 									</label>
-									<div angular-multi-select input-model='<?= Json::encode($mus) ?>' output-model="[]" name="metric_unit" checked-property="checked" children-property="sub" max-checked-leafs="1" dropdown-label="<[ '<(text)>' | outputModelIterator : this : ', ' : '<?= Yii::t('app/public', 'SELECT_METRIC_UNIT') ?>']>" node-label="<[ text ]>" leaf-label="<[ text ]>" preselect="value, {{ sizeChartCtrl.sizechart.metric_unit }}" hide-helpers="check_all, check_none, reset"></div>
+									<div angular-multi-select input-model='<?= Json::encode($mus) ?>' output-model="sizeChartCtrl.sizechart.metric_unit" output-keys="value" name="metric_unit" checked-property="checked" children-property="sub" max-checked-leafs="1" dropdown-label="<[ '<(text)>' | outputModelIterator : this : ', ' : '<?= Yii::t('app/public', 'SELECT_METRIC_UNIT') ?>']>" node-label="<[ text ]>" leaf-label="<[ text ]>" preselect="value, {{ sizeChartCtrl.sizechart.metric_unit }}" hide-helpers="check_all, check_none, reset"></div>
 								</div>
 							</div>
 						</div>
