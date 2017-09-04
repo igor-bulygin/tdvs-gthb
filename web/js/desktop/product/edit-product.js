@@ -101,7 +101,7 @@
 				vm.product = angular.copy(data);
 				vm.from_edit = true;
 				vm.product_original = angular.copy(data);
-				vm.product = productService.parseProductFromService(vm.product);				
+				vm.product = productService.parseProductFromService(vm.product);
 				vm.product.emptyCategory=aux;
 			}
 			var params = {
@@ -138,7 +138,7 @@
 			vm.saving = true;
 			function onUpdateProductSuccess(data) {
 				if(vm.product.product_state === 'product_state_draft' || !publish) {
-					saved_draft();					
+					saved_draft();
 					vm.disable_save_buttons=false;
 					vm.saving = false;
 				} else if (vm.product.product_state === 'product_state_active' && publish) {
