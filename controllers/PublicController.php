@@ -85,7 +85,7 @@ class PublicController extends CController
 
 		if ($category_id) {
 
-			$category = Category::findOne(["short_id" => $category_id]); /* @var Category $category */
+			$category = Category::findOneSerialized($category_id); /* @var Category $category */
 			$categoryShortIds = $category->getShortIds();
 
 			$banners = Utils::getBannerImages($category->getMainCategory());

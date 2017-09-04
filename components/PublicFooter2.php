@@ -2,10 +2,10 @@
 
 namespace app\components;
 
+use app\helpers\Utils;
 use app\models\Category;
 use Yii;
 use yii\base\Widget;
-use app\helpers\Utils;
 
 class PublicFooter2 extends Widget {
 
@@ -16,6 +16,9 @@ class PublicFooter2 extends Widget {
 	}
 
 	public function getViewPath() {
+		if (Yii::getAlias('@device') != 'desktop') {
+			return Utils::join_paths('@app', 'components', 'views', 'PublicFooter2', Yii::getAlias('@device'));
+		}
 		return Utils::join_paths('@app', 'components', 'views', 'PublicFooter2');
 	}
 }

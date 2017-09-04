@@ -1,6 +1,7 @@
 <?php
 namespace app\validators;
 
+use app\models\Product;
 use app\models\Warranty;
 use yii\validators\Validator;
 
@@ -43,17 +44,20 @@ class WarrantyValidator extends Validator
 			return;
 		}
 
-		if (!isset($warranty['value'])) {
-			$this->addError($object, $attribute, 'Warranty value must have a value property');
+		if ($object->getScenario() != Product::SCENARIO_PRODUCT_DRAFT) {
+			// Only validate value in "no draft" mode
+			if (!isset($warranty['value'])) {
+				$this->addError($object, $attribute, 'Warranty value must have a value property');
 
-			return;
-		}
+				return;
+			}
 
-		if (!is_int($warranty['value']) || $warranty['value'] < 0) {
-			$this->addError($object, $attribute,
-				sprintf('Value %s not valid for warranty value. Must be an integer >= 0', $warranty['value']));
+			if (!is_int($warranty['value']) || $warranty['value'] < 0) {
+				$this->addError($object, $attribute,
+					sprintf('Value %s not valid for warranty value. Must be an integer >= 0', $warranty['value']));
 
-			return;
+				return;
+			}
 		}
 	}
 }

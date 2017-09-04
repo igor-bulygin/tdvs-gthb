@@ -150,7 +150,7 @@ class Category extends CActiveRecord {
      * Get a collection of entities serialized, according to serialization configuration
      *
      * @param array $criteria
-     * @return array
+     * @return Category[]
      */
     public static function findSerialized($criteria = [])
     {
@@ -349,15 +349,15 @@ class Category extends CActiveRecord {
 	{
 		$names = [
 			[
-				'url' => "/imgs/category_" . strtolower($this->slug) . "_g.jpg",
+				'url' => "/imgs/category_" . strtolower($this->getSlug()) . "_g.jpg",
 				'link' => null,
 			],
 			[
-				'url' => "/imgs/category_" . strtolower($this->slug) . "_s.jpg",
+				'url' => "/imgs/category_" . strtolower($this->getSlug()) . "_s.jpg",
 				'link' => null,
 			],
 			[
-				'url' => "/imgs/category_" . strtolower($this->slug) . "_s1.jpg",
+				'url' => "/imgs/category_" . strtolower($this->getSlug()) . "_s1.jpg",
 				'link' => null,
 			],
 		];
@@ -480,8 +480,12 @@ class Category extends CActiveRecord {
 		}
 
 		$slugs = [];
-		foreach ($this->name as $lang => $text) {
-			$slugs[$lang] = Slugger::slugify($text);
+		foreach (Lang::getAvailableLanguages() as $lang => $name) {
+			if (isset($this->name[$lang])) {
+				$slugs[$lang] = Slugger::slugify($this->name[$lang]);
+			} else {
+				$slugs[$lang] = Slugger::slugify($this->name[Lang::EN_US]);
+			}
 		}
 		$this->setAttribute("slug", $slugs);
 
@@ -585,7 +589,7 @@ class Category extends CActiveRecord {
 	 */
 	public function getBannerImage()
 	{
-		$fileName = "/imgs/banner-" . strtolower($this->slug) . ".jpg";
+		$fileName = "/imgs/banner-" . strtolower($this->getSlug()) . ".jpg";
 		if (file_exists(Yii::getAlias('@webroot') . $fileName)) {
 			return $fileName;
 		}
@@ -598,7 +602,7 @@ class Category extends CActiveRecord {
 	 */
 	public function getHeaderImage()
 	{
-		$fileName = "/imgs/mini-banner-" . strtolower($this->slug) . ".jpg";
+		$fileName = "/imgs/mini-banner-" . strtolower($this->getSlug()) . ".jpg";
 		if (file_exists(Yii::getAlias('@webroot') . $fileName)) {
 			return $fileName;
 		}

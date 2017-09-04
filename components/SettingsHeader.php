@@ -16,6 +16,9 @@ class SettingsHeader extends Widget {
 	}
 
 	public function getViewPath() {
-		return Utils::join_paths('@app', 'components', 'views');
+		if (Yii::getAlias('@device') != 'desktop') {
+			return Utils::join_paths('@app', 'components', 'views', 'SettingsHeader', Yii::getAlias('@device'));
+		}
+		return Utils::join_paths('@app', 'components', 'views', 'SettingsHeader');
 	}
 }

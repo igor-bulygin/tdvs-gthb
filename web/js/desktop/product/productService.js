@@ -134,7 +134,7 @@
 		}
 
 		function parseProductFromService(product) {
-			var options_to_convert = ['name', 'description', 'slug', 'sizechart', 'preorder', 'returns', 'warranty', 'tags'];
+			var options_to_convert = ['name', 'description', 'slug', 'sizechart', 'preorder', 'returns', 'warranty', 'tags', 'options'];
 			for(var i = 0; i < options_to_convert.length; i++) {
 				product[options_to_convert[i]] = UtilService.emptyArrayToObject(product[options_to_convert[i]]);
 			}
