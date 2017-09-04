@@ -688,12 +688,14 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 								</figcaption>
 							</a>
 						</figure>
-					</div>
+					</div>	
 				</div>
 			</div>
+			<?php } ?>
 		</div>
-	</section>
-<?php } ?>
+	</div>
+</section>
+
 
 <!-- GRID -->
 <section class="grid-wrapper">

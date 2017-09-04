@@ -2540,7 +2540,11 @@ h3 {
   top: 12px; }
   .language-picker-wrapper a {
     color: #1C1919;
-    text-transform: uppercase; }
+    font-size: 11px;
+    text-transform: uppercase;
+    width: 12px;
+    overflow: hidden;
+    white-space: nowrap; }
 
 .carousel-indicators li {
   margin: 1px 5px;

@@ -121,8 +121,8 @@ app\components\assets\PublicHeader2Asset::register($this);
 							'skin' => LanguagePicker::SKIN_BUTTON,
 							'size' => LanguagePicker::SIZE_SMALL,
 							'parentTemplate' => '<div class="language-picker button-list pull-right {size}"><div>{items}</div></div>',
-							'itemTemplate' => '<a href="{link}" title="{name}" class="{language}">{name}</a>',
-							'activeItemTemplate' => '<a href="{link}" title="{name}" class="{language} active">{name}</a>',
+							'itemTemplate' => '<a href="{link}" title="{name}" class="{language}">{language}</a>',
+							'activeItemTemplate' => '<a href="{link}" title="{name}" class="{language} active">{language}</a>',
 							'languageAsset' => 'lajax\languagepicker\bundles\LanguageLargeIconsAsset',
 							'languagePluginAsset' => 'lajax\languagepicker\bundles\LanguagePluginAsset',
 						]);
