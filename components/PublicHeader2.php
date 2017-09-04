@@ -32,6 +32,9 @@ class PublicHeader2 extends Widget {
 	}
 
 	public function getViewPath() {
+		if (Yii::getAlias('@device') != 'desktop') {
+			return Utils::join_paths('@app', 'components', 'views', 'PublicHeader2', Yii::getAlias('@device'));
+		}
 		return Utils::join_paths('@app', 'components', 'views', 'PublicHeader2');
 	}
 }

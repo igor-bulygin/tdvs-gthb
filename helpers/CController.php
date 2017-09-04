@@ -1,10 +1,9 @@
 <?php
 namespace app\helpers;
 
-use Yii;
 use app\models\Lang;
+use Yii;
 use yii\helpers\Json;
-use app\helpers\Utils;
 use yii\web\Controller;
 
 class CController extends Controller {
@@ -29,17 +28,17 @@ class CController extends Controller {
 		 * /views/<device type>/<controller name>
 		 */
 		if (\Yii::$app->params['devicedetect']['isMobile']) {
-			$this->layout = '/mobile/' . $this->id;
-//			$this->_viewPath = '@app/views/mobile/' . $this->id;
-			$this->_viewPath = '@app/views/desktop/' . $this->id;
+			Yii::setAlias('@device', 'mobile');
 		} else if(\Yii::$app->params['devicedetect']['isTablet']) {
-			$this->layout = '/tablet/' . $this->id;
-//			$this->_viewPath = '@app/views/tablet/' . $this->id;
-			$this->_viewPath = '@app/views/desktop/' . $this->id;
+			Yii::setAlias('@device', 'desktop');
 		} else {
-			$this->layout = '/desktop/' . $this->id;
-			$this->_viewPath = '@app/views/desktop/' . $this->id;
+			Yii::setAlias('@device', 'desktop');
 		}
+		// ¿Force device?
+		Yii::setAlias('@device', 'desktop');
+
+		$this->layout = '/'.Yii::getAlias('@device').'/' . $this->id;
+		$this->_viewPath = '@app/views/'.Yii::getAlias('@device').'/' . $this->id;
 
 		$this->lang = Yii::$app->language;
 		$this->lang_en = array_keys(Lang::EN_US_DESC)[0];
