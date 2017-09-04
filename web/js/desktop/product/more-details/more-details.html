@@ -3,14 +3,14 @@
 	<form name="productMoreDetailsCtrl.form" novalidate>
 		<div class="row">
 			<label class="col-xs-12"><span translate="product.more_details.PHOTOS_DESCRIPTION"></span></label>
-			<div class="col-md-2 button"  ngf-drop-available="productMoreDetailsCtrl.isDropAvailable" ngf-select="productMoreDetailsCtrl.openCropModal($file)" ngf-accept="'image/*'"><span translate="product.more_details.ADD_PHOTOS"></span></div>
+			<div class="col-md-2 button"  ngf-drop-available="productMoreDetailsCtrl.isDropAvailable" ngf-select="productMoreDetailsCtrl.openCropModal($file)" ngf-accept="'image/*'"><a style="cursor:pointer;" translate="product.more_details.ADD_PHOTOS"></a></div>
 			<span class="info col-md-10" translate="product.more_details.ENRICH_DESCRIPTION"></span>
 			<div class="col-md-8">
 				<div class="col-md-2 pad-about mr-15">
 					<div ng-if="productMoreDetailsCtrl.isDropAvailable">
 						<div class="description-add-photos" ngf-drop-available="productMoreDetailsCtrl.isDropAvailable" ngf-drag-over-class="drag-over" ngf-drop ngf-select="productMoreDetailsCtrl.openCropModal($file)" ngf-accept="'image/*'">
 							<div class="plus-add-wrapper">
-								
+								<br/><br/><br/>
 							</div>
 						</div>
 					</div>
