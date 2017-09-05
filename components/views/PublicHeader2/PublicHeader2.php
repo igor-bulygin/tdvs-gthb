@@ -109,7 +109,6 @@ app\components\assets\PublicHeader2Asset::register($this);
 				<li><a href="<?=Url::to(['/discover/influencers'])?>" translate="header.TREND_SETTERS"></a></li>
 				<li><a href="#" translate="header.PROJECTS"></a></li>
 			</ul>
-			<?php /*
 			<div class="pull-right">
 					<?php
 
@@ -124,7 +123,6 @@ app\components\assets\PublicHeader2Asset::register($this);
 					]);
 					?>
 			</div>
- 			*/ ?>
 		</div>
 	</nav>
 	<div class="menu-categories">
