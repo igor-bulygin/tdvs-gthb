@@ -188,7 +188,8 @@
 							}
 							//if new product has more options than old one then maybe user added one more option. 
 							//Example: "color": ["black", "red"] goes to ["black", "red", "white"]
-							if(newPriceStock.options[key].length > oldPriceStock.options[key].length) { 
+							if(angular.isArray(newPriceStock.options[key]) && angular.isArray(oldPriceStock.options[key])
+							&& newPriceStock.options[key].length > oldPriceStock.options[key].length) { 
 								var count_same_options = 0;
 								newPriceStock.options[key].forEach(function (option) {
 									var option_exists_previously = oldPriceStock.options[key].find(function(element) {
