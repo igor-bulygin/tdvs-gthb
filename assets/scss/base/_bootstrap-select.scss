@@ -65,7 +65,7 @@
 }
 .bootstrap-select{
     .btn{
-        padding: 2px 12px;
+        padding: 0 12px;
         max-width: 175px;
     }
     .dropdown-menu{
@@ -110,6 +110,6 @@
 	background-color: transparent!important;
 }
 .bootstrap-select.btn-group .dropdown-toggle .filter-option {
-    border-right: 1px solid!important;
+    border-right: 1px solid #b7bcc0!important;
     height: 100%!important;
 }
