@@ -123,7 +123,7 @@ $videos = $product->getVideos();
 								</button>
 							</div>
 						</div>
-						<div class="product-data">
+						<div class="product-data no-border">
 							<ul class="nav nav-tabs product-detail-tabs" role="tablist" ng-if="detailProductCtrl.original_artwork" ng-cloak>
 								<li role="presentation" class="no-b-r">
 									<a href="#" aria-controls="description" role="tab" data-toggle="tab" ng-click="detailProductCtrl.changeOriginalArtwork(true)"><span translate="product.detail.ORIGINAL"></span></a>
@@ -214,22 +214,23 @@ $videos = $product->getVideos();
 							</div>
 						</div>-->
 						<div class="product-data no-border">
-							<div class="full-width">
-								<?php if ($product->isWorkFromCurrentUser()) { ?>
-									<a href="<?=$product->getEditLink()?>" class="btn btn-hart pull-left">
-										<i class="ion-edit"></i>
-										<span translate="product.detail.EDIT_WORK"></span>
-									</a>
-								<?php } else { ?>
-									<button type="button" class="btn btn-love pull-left" ng-class="detailProductCtrl.product.isLoved ? 'btn-love' : 'btn-love'" ng-click="detailProductCtrl.setLoved()">
-										<i class="ion-ios-heart"></i>
+							<div class="full-width mb-20">
+								<div class="btns-product-wrapper">
+									<?php if ($product->isWorkFromCurrentUser()) { ?>
+										<a href="<?=$product->getEditLink()?>" class="btn btn-hart pull-left">
+											<i class="ion-edit"></i>
+											<span translate="product.detail.EDIT_WORK"></span>
+										</a>
+									<?php } else { ?>
+										<button type="button" class="btn btn-love pull-left" ng-class="detailProductCtrl.product.isLoved ? 'btn-love' : 'btn-love'" ng-click="detailProductCtrl.setLoved()">
+											<i class="ion-heart"></i>
+										</button>
+									<?php } ?>
+									<button type="button" class="btn btn-save-box pull-right" ng-click="detailProductCtrl.setBox()">
+										<div class="box-icon"></div>
+										<span translate="product.detail.SAVE_IN_BOX"></span>
 									</button>
-								<?php } ?>
-								<button type="button" class="btn btn-save-box pull-right" ng-click="detailProductCtrl.setBox()">
-									<div class="box-icon"></div>
-									<span translate="product.detail.SAVE_IN_BOX"></span>
-								</button>
-
+								</div>
 							</div>
 							<!--<div class="row-size">
 								<span class="btn-tagline loved pull-left" translate="product.detail.LOVED"></span>

@@ -794,7 +794,8 @@ a, a:hover, a:focus {
   height: 40px;
   padding-top: 6px; }
   .btn-love i {
-    font-size: 27px; }
+    font-size: 27px;
+    line-height: 10px; }
   .btn-love:hover {
     background-color: #1C1919;
     color: #ffffff; }
@@ -5958,6 +5959,10 @@ h3 {
       border-radius: 8px 8px 8px 8px !important;
       -webkit-border-radius: 8px 8px 8px 8px !important;
       -moz-border-radius: 8px 8px 8px 8px !important; }
+
+.btns-product-wrapper {
+  width: 285px;
+  margin: 0 auto; }
 
 .product-description {
   background-color: #ffffff; }
