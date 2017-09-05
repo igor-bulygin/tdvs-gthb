@@ -82,7 +82,10 @@ $config = [
 		//Available languages
 		'languagepicker' => [
 			'class' => 'lajax\languagepicker\Component',
-			'languages' => require(__DIR__ . '/langs.php'),  // must be an key => value array of language code => name
+			'languages' => [ // must be an key => value array of language code => name
+				'es-ES' => 'ES',
+				'en-US' => 'EN',
+			],
 			'expireDays' => 64,
 			'callback' => function () {
 				if (!\Yii::$app->user->isGuest) {
