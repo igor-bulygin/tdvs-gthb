@@ -136,8 +136,8 @@ $this->title = 'Todevise / Admin / Size chart';
 								<tbody>
 									<tr ng-cloak ng-repeat="row in sizeChartCtrl.sizechart.values track by $index">
 										<td ng-repeat="cell in sizeChartCtrl.sizechart.values[$index] track by $index">
-											<input ng-if="$index < sizeChartCtrl.sizechart.countries.length" ng-model="sizechart.values[$parent.$parent.$index][$index]" />
-											<input ng-if="$index >= sizeChartCtrl.sizechart.countries.length" ng-model="sizechart.values[$parent.$parent.$index][$index]" placeholder="0" angular-unit-converter convert-from="{{ sizeChartCtrl.convertFrom }}" convert-to="{{ sizeChartCtrl.convertTo }}" />
+											<input ng-if="$index < sizeChartCtrl.sizechart.countries.length" ng-model="sizeChartCtrl.sizechart.values[$parent.$parent.$index][$index]" />
+											<input ng-if="$index >= sizeChartCtrl.sizechart.countries.length" ng-model="sizeChartCtrl.sizechart.values[$parent.$parent.$index][$index]" placeholder="0" angular-unit-converter convert-from="{{ sizeChartCtrl.convertFrom }}" convert-to="{{ sizeChartCtrl.convertTo }}" />
 										</td>
 									</tr>
 								</tbody>
