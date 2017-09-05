@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller($faq, $category_util, $location, toastr, $uibModal) {
+	function controller($faqs, $category_util, $location, toastr, $uibModal) {
 		var vm = this;
 
 		vm.treeData = [];
@@ -17,6 +17,7 @@
 		vm.load = load;
 		vm.save = save;
 		vm.create_sub = create_sub;
+		vm.close = close;
 
 		vm.groups = [
 			{
@@ -38,7 +39,7 @@
 		vm.load();
 
 		function load() {
-			$faq.get({
+			$faqs.get({
 				"short_id": vm.faq_id
 			}).then(function (_faq) {
 				if (_faq.length !== 1) {
@@ -66,8 +67,10 @@
 		function save() {
 			vm.faq.faqs[vm.faq_subid] = vm.subfaq;
 
-			$faq.modify("POST", vm.faq).then(function () {
+			$faqs.modify("POST", vm.faq).then(function () {
 				toastr.success("Faq modified!");
+
+				close();
 
 				//var _node = $category_util.categoryToNode(data.category);
 				//var _current = _.findWhere(vm.treeData, {id: data.category.short_id});
@@ -78,13 +81,17 @@
 			});
 		}
 
+		function close() {
+			document.location.href = currentHost() + "/admin/faqs";
+		}
+
 		function create_sub(node_id, node, action_id, action_el) {
 			var path = "/";
 			if (node !== undefined) {
 				path += vm.treeInstance.jstree(true).get_path(node, "/", true) + "/";
 			}
 
-			$faq.modify("POST", tmp_node).then(function (faqs_group) {
+			$faqs.modify("POST", tmp_node).then(function (faqs_group) {
 				toastr.success("Category created!");
 				console.log("debug id:");
 				console.log(faqs_group);

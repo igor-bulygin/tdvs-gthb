@@ -129,6 +129,9 @@
 		}
 
 		function save() {
+			if (!angular.isUndefined(vm.sizechart.metric_unit) && vm.sizechart.metric_unit.length>0) {
+				vm.sizechart.metric_unit=vm.sizechart.metric_unit[0].value;
+			}
 			$sizechart.modify("POST", vm.sizechart).then(function () {
 				toastr.success("Size chart saved successfully!");
 			}, function (err) {

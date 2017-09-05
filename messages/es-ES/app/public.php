@@ -33,6 +33,7 @@ return [
 	'CONFIRM' => 'Confirmar',
 	'CONNECT_WITH_DIFFERENT_STRIPE_ACCOUNT' => 'Conéctate con una cuenta de Stripe diferente',
 	'CONNECT_WITH_STRIPE' => 'Conéctate con Stripe',
+	'CONTACT_TITLE' => 'Contacta con nosotros',
 	'CREATE_AN_INFLUENCER_ACCOUNT' => 'Crea una cuenta de influencer',
 	'CREATE_A_DEVISER_ACCOUNT' => 'Crea una cuenta de deviser',
 	'CREATE_NEW_WORK_BY_PERSON_NAME' => 'Crear nuevo trabajo de {person_name}',

@@ -513,19 +513,36 @@ class ApiController extends CController {
 				$node["short_id"] = (new Faq())->genValidID(5);
 			}
 
-			/* @var $category \app\models\Category */
-			$category = Faq::findOne(["short_id" => $node["short_id"]]);
-			$category->setAttributes($node, false);
-			$category->title = array_replace_recursive($category->title, $node["title"]);
-			$category->save(false);
+			/* @var $faq \app\models\Category */
+			$faq = Faq::findOne(["short_id" => $node["short_id"]]);
+			$faq->setAttributes($node, false);
+			$faq->title = array_replace_recursive($faq->title, $node["title"]);
+			$faq->save(false);
 
-			$res = $category;
+			$res = $faq;
 		} else if ($request->isDelete) {
 			$node = $this->getJsonFromRequest("category");
 
-			/* @var $category \app\models\Category */
-			$category = Faq::findOne(["short_id" => $node["short_id"]]);
-			$category->delete();
+			if ($node['path'] != '/') {
+				$parts = explode('_', $node['short_id']);
+				$faq_id = $parts[0];
+				$faq_subid = $parts[1];
+
+				/* @var $faq \app\models\Faq */
+				$faq = Faq::findOne(["short_id"  => $faq_id]);
+				if (isset($faq->faqs[$faq_subid])) {
+					// Remove item
+					$faqs = $faq->faqs;
+					unset($faqs[$faq_subid]);
+					$faq->setAttribute('faqs', $faqs);
+				}
+				$faq->save(false);
+			} else {
+
+				/* @var $faq \app\models\Faq */
+				$faq = Faq::findOne(["short_id" => $node["short_id"]]);
+				$faq->delete();
+			}
 		}
 
 		Faq::setSerializeScenario(Faq::SERIALIZE_SCENARIO_ADMIN);
