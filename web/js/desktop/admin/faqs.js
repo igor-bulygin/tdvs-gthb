@@ -154,7 +154,7 @@
 		function edit_faq(node_id, node, action_id, action_el) {
 			//vm.viewtoggle = !vm.viewtoggle;
 			//TODO: Get this url from Yii url generator
-			document.location.href = "/admin/faq" + node.id + "/";
+			document.location.href = currentHost() + "/admin/faq/" + node.id;
 		};
 
 		function create_sub(node_id, node, action_id, action_el) {
@@ -180,7 +180,8 @@
 
 		function edit_sub(node_id, node, action_id, action_el) {
 			var res = node.id.split("_");
-			document.location.href = "/admin/faq/" + res[0] + "/" + res[1] + "/";
+			//TODO: Get this url from Yii url generator
+			document.location.href = currentHost() + "/admin/faq/" + res[0] + "/" + res[1];
 		}
 
 		function rename(node_id, node, action_id, action_el) {
@@ -213,16 +214,16 @@
 				});
 
 				modalInstance.result.then(function (data) {
-					$faqs.modify("POST", data.category).then(function () {
+					$faqs.modify("POST", data.faq).then(function () {
 						toastr.success("Faq modified!");
 
-						var _node = $category_util.categoryToNode(data.category);
+						var _node = $category_util.categoryToNode(data.faq);
 						var _current = _.findWhere(vm.treeData, {
-							id: data.category.short_id
+							id: data.faq.short_id
 						});
 						angular.merge(_current, _node);
 					}, function (err) {
-						toastr.error("Couldn't modify category!", err);
+						toastr.error("Couldn't modify faq!", err);
 					});
 				}, function () {
 					//Cancel
@@ -235,7 +236,7 @@
 		function move(e, node) {
 			node.node.original.parent = node.node.parent;
 			var tmp_node = $category_util.nodeToCategory(node.node.original, vm);
-			$faqs.modify("POST", tmp_node).then(function (category) {
+			$faqs.modify("POST", tmp_node).then(function (faq) {
 				getFaqs();
 				toastr.success("Category moved!");
 			}, function (err) {
@@ -244,8 +245,8 @@
 		};
 
 		function remove(node_id, node, action_id, action_el) {
-			var category = vm.treeInstance.jstree(true).get_node(node.id);
-			category = $category_util.nodeToCategory(category.original, vm);
+			var faq = vm.treeInstance.jstree(true).get_node(node.id);
+			faq = $category_util.nodeToCategory(faq.original, vm);
 
 			//Check for sub-categories that depend on this one so we can remove those too
 			//$category_util.subCategories(category).then(function(subcategories) {})
@@ -263,7 +264,7 @@
 			});
 
 			modalInstance.result.then(function () {
-				$faqs.modify("delete", category).then(function (category) {
+				$faqs.modify("delete", faq).then(function (faq) {
 					getFaqs();
 					toastr.success("Category deleted!");
 				}, function (err) {
@@ -309,7 +310,7 @@
 
 		vm.ok = function () {
 			$uibModalInstance.close({
-				category: vm.data.category
+				faq: vm.data.faq
 			});
 		};
 

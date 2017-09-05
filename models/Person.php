@@ -1811,6 +1811,12 @@ class Person extends CActiveRecord implements IdentityInterface
 	 * @return bool
 	 */
 	public function canPublishProfile() {
+
+		if (!Yii::$app->user->isGuest && Yii::$app->user->identity->isAdmin()) {
+			//Admin user always can publish profiles
+			return true;
+		}
+
 		if ($this->isDeviser()) {
 			return
 				$this->hasShippingSettings() &&

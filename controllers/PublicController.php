@@ -232,6 +232,46 @@ class PublicController extends CController
 	}
 
 	/**
+	 * @return string
+	 */
+	public function actionContact()
+	{
+//		$dropdown_members = ['a' => 'ORDERS'];
+
+		$groupOfFaqs = Faq::find()
+			->asArray()->all();
+
+		$faq = $groupOfFaqs[0]; //select first group
+
+		Utils::l_collection($faq['faqs'], "question");
+		Utils::l_collection($faq['faqs'], "answer");
+		$faq['title'] = Utils::l($faq['title']);
+
+		$model = new ContactForm();
+		if ($model->load(Yii::$app->request->post())) {
+
+			// send email
+			if ($model->contact(Yii::$app->params['admin_email'])) {
+				$email = 'ok';
+			} else {
+				$email = 'error';
+			}
+		} else {
+			$email = false;
+		}
+
+		$this->layout = '/desktop/public-2.php';
+		return $this->render("contact", [
+			'test' => $model->hasErrors(),
+			'model' => $model,
+//			'dropdown_members' => $dropdown_members,
+			'faqs' => $faq['faqs'],
+			'email' => $email,
+		]);
+
+	}
+
+	/**
 	 * @deprecated
 	 * @return string
 	 */
@@ -280,44 +320,6 @@ class PublicController extends CController
 			'test' => 'this is a test text for term',
 			'groupOfTerms' => $groupOfTerms
 		]);
-	}
-
-	/**
-	 * @deprecated
-	 * @return string
-	 */
-	public function actionContact()
-	{
-		$dropdown_members = ['a' => 'ORDERS'];
-		$model = new ContactForm();
-
-		$groupOfFaqs = Faq::find()
-			->asArray()->all();
-
-		$faq = $groupOfFaqs[0]; //select first group
-
-		Utils::l_collection($faq['faqs'], "question");
-		Utils::l_collection($faq['faqs'], "answer");
-		$faq['title'] = Utils::l($faq['title']);
-
-		if ($model->load(Yii::$app->request->post())) {
-			return $this->render("contact", [
-				'test' => $model->hasErrors(),
-				'model' => $model,
-				'dropdown_members' => $dropdown_members,
-				'faqs' => $faq['faqs']
-			]);
-			//return $res;
-			//return $this->redirect(['view', 'id' => $model->code]);
-		} else {
-			return $this->render("_contact", [
-				'test' => 'normal',
-				'model' => $model,
-				'dropdown_members' => $dropdown_members,
-				'faqs' => $faq['faqs']
-			]);
-
-		}
 	}
 
 	/**
