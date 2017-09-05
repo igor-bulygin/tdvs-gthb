@@ -14,6 +14,7 @@
 		vm.delete_column = delete_column;
 		vm.move_column = move_column;
 		vm.new_row = new_row;
+		vm.removeRow = removeRow;
 		vm.cancel = cancel;
 		vm.save = save;
 
@@ -123,6 +124,10 @@
 			var _len = vm.table_header.length;
 			var _data = Array.apply(null, Array(_len)).map(Number.prototype.valueOf, 0);
 			vm.sizechart.values.push(_data);
+		}
+
+		function removeRow(index) {
+			vm.sizechart.values.splice(index, 1);
 		}
 
 		function cancel() {
