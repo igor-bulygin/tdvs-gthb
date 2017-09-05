@@ -2,6 +2,7 @@
 
 use app\models\Category;
 use yii\helpers\Url;
+use lajax\languagepicker\widgets\LanguagePicker;
 
 /** @var Category $category */
 
