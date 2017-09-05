@@ -180,7 +180,7 @@ $videos = $product->getVideos();
 								</form>
 							</div>-->
 							<div class="row-size">
-								<button type="button" class="btn btn-medium btn-red" ng-disabled="detailProductCtrl.stock === 0" ng-click="detailProductCtrl.addToCart(detailProductCtrl.tagsForm)"><i class="ion-android-cart cart-icon-btn"></i> <span translate="product.detail.ADD_TO_CART"></span></button>
+								<button type="button" class="btn btn-medium btn-red auto-center" ng-disabled="detailProductCtrl.stock === 0" ng-click="detailProductCtrl.addToCart(detailProductCtrl.tagsForm)"><i class="ion-android-cart cart-icon-btn"></i> <span translate="product.detail.ADD_TO_CART"></span></button>
 							</div>
 						</div>
 						<!--<div class="product-data">
@@ -214,31 +214,29 @@ $videos = $product->getVideos();
 							</div>
 						</div>-->
 						<div class="product-data no-border">
-							<div class="row-size">
+							<div class="full-width">
 								<?php if ($product->isWorkFromCurrentUser()) { ?>
-									<a href="<?=$product->getEditLink()?>" class="btn btn-hart btn-grey pull-left">
+									<a href="<?=$product->getEditLink()?>" class="btn btn-hart pull-left">
 										<i class="ion-edit"></i>
 										<span translate="product.detail.EDIT_WORK"></span>
 									</a>
 								<?php } else { ?>
-									<button type="button" class="btn btn-hart pull-left" ng-class="detailProductCtrl.product.isLoved ? 'btn-red' : 'btn-grey'" ng-click="detailProductCtrl.setLoved()">
+									<button type="button" class="btn btn-love pull-left" ng-class="detailProductCtrl.product.isLoved ? 'btn-love' : 'btn-love'" ng-click="detailProductCtrl.setLoved()">
 										<i class="ion-ios-heart"></i>
-										<span ng-if="!detailProductCtrl.product.isLoved" ng-cloak translate="product.detail.LOVE_WORK"></span>
-										<span ng-if="detailProductCtrl.product.isLoved" ng-cloak translate="product.detail.YOU_LOVE_WORK"></span>
 									</button>
 								<?php } ?>
-								<button type="button" class="btn btn-grey btn-hart pull-right" ng-click="detailProductCtrl.setBox()">
-									<i class="ion-ios-box"></i>
+								<button type="button" class="btn btn-save-box pull-right" ng-click="detailProductCtrl.setBox()">
+									<div class="box-icon"></div>
 									<span translate="product.detail.SAVE_IN_BOX"></span>
 								</button>
 
 							</div>
-							<div class="row-size">
+							<!--<div class="row-size">
 								<span class="btn-tagline loved pull-left" translate="product.detail.LOVED"></span>
 								<span ng-bind="detailProductCtrl.product.loveds"></span><span translate="product.detail.TIMES"></span>
 								<span class="btn-tagline saved pull-right" translate="product.detail.SAVED_IN_X_BOXES" translate-values="{ x:detailProductCtrl.product.boxes}"></span>
-							</div>
-							<div>
+							</div>-->
+							<div class="full-width row">
 								<ul class="social-items">
 									<li>
 										<span translate="product.detail.SHARE_ON"></span>
