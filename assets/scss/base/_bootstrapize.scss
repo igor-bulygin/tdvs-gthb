@@ -29,3 +29,9 @@
 .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
     border: none!important;
 }
+
+.container {
+	@media (min-width: 1200px){
+		width: 1280px!important;
+	}
+}

@@ -430,6 +430,10 @@
     top: 12px;
 	a{
 		color:$black;
+		font-size: 11px;
 		text-transform: uppercase;
+		width: 12px;
+		overflow: hidden;
+    	white-space: nowrap;
 	}
 }

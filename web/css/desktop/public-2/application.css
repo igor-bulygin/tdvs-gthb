@@ -339,6 +339,10 @@ a, a:hover, a:focus {
 .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
   border: none !important; }
 
+@media (min-width: 1200px) {
+  .container {
+    width: 1280px !important; } }
+
 /* BOOTSTRAP SELECT TUNNING */
 .bootstrap-select > .dropdown-toggle.bs-placeholder, .bootstrap-select > .dropdown-toggle.bs-placeholder:active, .bootstrap-select > .dropdown-toggle.bs-placeholder:focus, .bootstrap-select > .dropdown-toggle.bs-placeholder:hover {
   color: #1C1919;
@@ -393,7 +397,7 @@ a, a:hover, a:focus {
   outline: 0px auto -webkit-focus-ring-color !important; }
 
 .bootstrap-select .btn {
-  padding: 2px 12px;
+  padding: 0 12px;
   max-width: 175px; }
 .bootstrap-select .dropdown-menu {
   border-radius: 0px 0px 0px 0px !important;
@@ -435,8 +439,11 @@ a, a:hover, a:focus {
   background-color: transparent !important; }
 
 .bootstrap-select.btn-group .dropdown-toggle .filter-option {
-  border-right: 1px solid !important;
+  border-right: 1px solid #b7bcc0 !important;
   height: 100% !important; }
+
+.bootstrap-select.btn-group .dropdown-toggle .caret {
+  color: #c91c39 !important; }
 
 .auto-center {
   margin: 0 auto;
@@ -2540,7 +2547,11 @@ h3 {
   top: 12px; }
   .language-picker-wrapper a {
     color: #1C1919;
-    text-transform: uppercase; }
+    font-size: 11px;
+    text-transform: uppercase;
+    width: 12px;
+    overflow: hidden;
+    white-space: nowrap; }
 
 .carousel-indicators li {
   margin: 1px 5px;
@@ -5888,6 +5899,7 @@ h3 {
 
 .product-data .bootstrap-select .btn {
   max-width: 175px;
+  border-color: #b7bcc0;
   border-radius: 6px 6px 6px 6px !important;
   -webkit-border-radius: 6px 6px 6px 6px !important;
   -moz-border-radius: 6px 6px 6px 6px !important; }
