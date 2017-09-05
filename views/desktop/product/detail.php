@@ -180,7 +180,7 @@ $videos = $product->getVideos();
 								</form>
 							</div>-->
 							<div class="row-size">
-								<button type="button" class="btn btn-green btn-add-to-cart" ng-disabled="detailProductCtrl.stock === 0" ng-click="detailProductCtrl.addToCart(detailProductCtrl.tagsForm)"><i class="ion-ios-cart cart-icon-btn"></i> <span translate="product.detail.ADD_TO_CART"></span></button>
+								<button type="button" class="btn btn-medium btn-red" ng-disabled="detailProductCtrl.stock === 0" ng-click="detailProductCtrl.addToCart(detailProductCtrl.tagsForm)"><i class="ion-android-cart cart-icon-btn"></i> <span translate="product.detail.ADD_TO_CART"></span></button>
 							</div>
 						</div>
 						<!--<div class="product-data">

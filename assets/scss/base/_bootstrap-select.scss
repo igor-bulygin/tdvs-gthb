@@ -115,4 +115,18 @@
 }
 .bootstrap-select.btn-group .dropdown-toggle .caret {
     color: $dark_red!important;
+	height: 10px;
+    width: 10px;
+    border-bottom: 1px solid $dark_red;
+    border-right: 1px solid $dark_red;
+	border-left: 0!important;
+	border-top: 0!important;
+    -ms-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+	right: 8px!important;
+    margin-top: -7px!important;
+}
+.bootstrap-select.btn-group .dropdown-toggle .filter-option {
+    padding-top: 5px!important;
 }
