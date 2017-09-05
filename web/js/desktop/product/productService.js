@@ -181,29 +181,34 @@
 					var compare_count = 0;
 					if(newPriceStock.options.hasOwnProperty(key)) { //if new price options have old property
 						if(newPriceStock.options[key].length > 0) { //and it is not empty
-							if(oldPriceStock.options[key].length === newPriceStock.options[key].length) { //if option have same length than the old one
-								if(!angular.equals(oldPriceStock.options[key], newPriceStock.options[key])) { //if its not equal to old one its not the same element
+							//and they are really an array and not a string
+							if(angular.isArray(newPriceStock.options[key]) && angular.isArray(oldPriceStock.options[key])) {
+								if(oldPriceStock.options[key].length === newPriceStock.options[key].length) { //if option have same length than the old one
+									if(!angular.equals(oldPriceStock.options[key], newPriceStock.options[key])) { //if its not equal to old one its not the same element
+										return false;
+									}
+								}
+								//if new product has more options than old one then maybe user added one more option. 
+								//Example: "color": ["black", "red"] goes to ["black", "red", "white"]
+								if(newPriceStock.options[key].length > oldPriceStock.options[key].length) { 
+									var count_same_options = 0;
+									newPriceStock.options[key].forEach(function (option) {
+										var option_exists_previously = oldPriceStock.options[key].find(function(element) {
+											return angular.equals(option, element);
+										})
+										if(option_exists_previously)
+											count_same_options++;
+									})
+									if(count_same_options !== newPriceStock.options[key].length)
+										return false;
+								}
+								//if there is a new option that has less values than the old one, then the options are not the same
+								if(newPriceStock.options[key].length < oldPriceStock.options[key].length) {
 									return false;
 								}
-							}
-							//if new product has more options than old one then maybe user added one more option. 
-							//Example: "color": ["black", "red"] goes to ["black", "red", "white"]
-							if(angular.isArray(newPriceStock.options[key]) && angular.isArray(oldPriceStock.options[key])
-							&& newPriceStock.options[key].length > oldPriceStock.options[key].length) { 
-								var count_same_options = 0;
-								newPriceStock.options[key].forEach(function (option) {
-									var option_exists_previously = oldPriceStock.options[key].find(function(element) {
-										return angular.equals(option, element);
-									})
-									if(option_exists_previously)
-										count_same_options++;
-								})
-								if(count_same_options !== newPriceStock.options[key].length)
-									return false;
-							}
-							//if there is a new option that has less values than the old one, then the options are not the same
-							if(newPriceStock.options[key].length < oldPriceStock.options[key].length)
+							} else if(key === 'size' && !angular.equals(oldPriceStock.options[key], newPriceStock.options[key])) {
 								return false;
+							}
 						//if options satisfy previous conditions, then we add it to compare_count
 						compare_count++;
 						}
