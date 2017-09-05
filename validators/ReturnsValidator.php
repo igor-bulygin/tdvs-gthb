@@ -1,6 +1,7 @@
 <?php
 namespace app\validators;
 
+use app\models\Product;
 use app\models\Returns;
 use yii\validators\Validator;
 
@@ -42,17 +43,21 @@ class ReturnsValidator extends Validator
 			return;
 		}
 
-		if (!isset($returns['value'])) {
-			$this->addError($object, $attribute, 'Returns value must have a value property');
 
-			return;
-		}
+		if ($object->getScenario() != Product::SCENARIO_PRODUCT_DRAFT) {
+			// Only validate value in "no draft" mode
+			if (!isset($returns['value'])) {
+				$this->addError($object, $attribute, 'Returns value must have a value property');
 
-		if (!is_int($returns['value']) || $returns['value'] < 0) {
-			$this->addError($object, $attribute,
-				sprintf('Value %s not valid for returns value. Must be an integer >= 0', $returns['value']));
+				return;
+			}
 
-			return;
+			if (!is_int($returns['value']) || $returns['value'] < 0) {
+				$this->addError($object, $attribute,
+					sprintf('Value %s not valid for returns value. Must be an integer >= 0', $returns['value']));
+
+				return;
+			}
 		}
 	}
 }

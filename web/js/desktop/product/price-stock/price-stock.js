@@ -162,7 +162,7 @@
 		}, true);
 
 		$scope.$watch('productPriceStockCtrl.product.options', function(newValue, oldValue) {
-			if(!vm.fromedit) {
+			if(!vm.fromedit || (vm.fromedit && vm.product.price_stock.length === 0)) {
 				if(angular.isObject(newValue) && !UtilService.isEmpty(newValue)) {
 					createTable();
 				}
@@ -178,8 +178,8 @@
 		}, true);
 
 		$scope.$watch('productPriceStockCtrl.product.price_stock', function(newValue, oldValue) {
+			parseTitles();
 			if(vm.fromedit) {
-				parseTitles();
 				delete vm.fromedit;
 			} 
 		}, true);

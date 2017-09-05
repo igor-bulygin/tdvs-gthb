@@ -1,4 +1,5 @@
 <?php
+
 use app\assets\desktop\admin\FaqAsset;
 use yii\web\View;
 
@@ -47,7 +48,7 @@ $this->title = 'Todevise / Admin / Faqs';
 
 										<div class="flex flex-row field">
 											<div class="fs-upper fc-c7 title-label">
-												<?= Yii::t("app/admin", "question"); ?>
+												<?= Yii::t("app/admin", "question"); ?> {{lang_v}}
 											</div>
 											<div class="width-100">
 												<input required="" type="text" class="form-control fc-fff funiv fs1 ng-pristine ng-valid ng-not-empty ng-touched" placeholder="" aria-describedby="basic-addon-{{ $index }}" ng-model="faqCtrl.subfaq.question[lang_k]" name="{{ lang_k }}">

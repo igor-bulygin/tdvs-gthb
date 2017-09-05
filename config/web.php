@@ -292,6 +292,7 @@ $config = [
 				'faq/' => 'public/faq',
 
 				//Links for contact
+				'contact' => 'public/contact',
 				'about-us' => 'public/about-us',
 
 				// Postman (temp urls)

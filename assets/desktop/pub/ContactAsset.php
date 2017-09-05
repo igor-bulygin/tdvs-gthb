@@ -11,9 +11,9 @@ class ContactAsset extends AssetBundle {
 		'css/desktop/pub/contact.css'
 	];
 	public $js = [
-		'js/desktop/pub/contact.js'
+		'js/desktop/public-2/contact.js'
 	];
 	public $depends = [
-		'app\assets\desktop\pub\GlobalAsset',
+		'app\assets\desktop\GlobalAsset',
 	];
 }

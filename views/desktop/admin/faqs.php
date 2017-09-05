@@ -1,4 +1,5 @@
 <?php
+
 use app\assets\desktop\admin\FaqsAsset;
 
 /* @var $this yii\web\View */
@@ -88,7 +89,7 @@ $this->title = 'Todevise / Admin / Faqs';
 				</label>
 				<div class="input-group" ng-repeat="(lang_k, lang_v) in editCtrl.data.langs">
 					<span class="input-group-addon funiv_bold fs1 fs-upper" id="basic-addon-{{ $index }}">{{ lang_v }}</span>
-					<input required="" type="text" class="form-control funiv fs1" placeholder="<?= Yii::t("app/admin", "Category name... "); ?>" aria-describedby="basic-addon-{{ $index }}" ng-model="editCtrl.data.category.name[lang_k]" name="{{ lang_k }}">
+					<input required="" type="text" class="form-control funiv fs1" placeholder="<?= Yii::t("app/admin", "Category name... "); ?>" aria-describedby="basic-addon-{{ $index }}" ng-model="editCtrl.data.faq.title[lang_k]" name="{{ lang_k }}">
 					<span class="input-group-addon alert-danger funiv fs0-929" ng-show="editCtrl.form.$submitted && !editCtrl.form.$valid && !editCtrl.form['{{lang_k}}'].$valid">
 					<span ng-show="editCtrl.form['{{lang_k}}'].$error.required"><?= Yii::t("app/admin", "Required!"); ?></span>
 					</span>
