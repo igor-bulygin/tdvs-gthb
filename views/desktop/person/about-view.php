@@ -3,6 +3,7 @@
 use app\assets\desktop\deviser\GlobalAsset;
 use app\components\PersonHeader;
 use app\components\PersonMenu;
+use app\helpers\Utils;
 use app\models\Person;
 
 GlobalAsset::register($this);
@@ -94,7 +95,7 @@ foreach ($person->getAboutUrlImages() as $key => $urlImage) {
 							<div class="resume-header"><a href="<?= $person->getUrlResumeFile() ?>"><span translate="person.about.SEE_RESUME"></span></a></div>
 							<?php } ?>
 							<div class="deviser-biography">
-							    <p><?= $person->text_biography ?></p>
+							    <p><?= Utils::l($person->text_biography) ?></p>
 							</div>
 						</div>
 					</div>
