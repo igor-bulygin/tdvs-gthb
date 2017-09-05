@@ -113,7 +113,7 @@ app\components\assets\PublicHeader2Asset::register($this);
 					echo LanguagePicker::widget([
 						'skin' => LanguagePicker::SKIN_BUTTON,
 						'size' => LanguagePicker::SIZE_SMALL,
-						'parentTemplate' => '',
+						'parentTemplate' => '{items}',
 						'itemTemplate' => '<li><a href="{link}" title="{name}" class="{language}">{name}</a></li>',
 						'activeItemTemplate' => '<li><a href="{link}" title="{name}" class="{language} active">{name}</a></li>',
 						'languageAsset' => 'lajax\languagepicker\bundles\LanguageLargeIconsAsset',
