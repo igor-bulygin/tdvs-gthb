@@ -418,12 +418,13 @@ class ApiController extends CController {
 		} else if ($request->isPost) {
 			$node = $this->getJsonFromRequest("category");
 
-			if ($node["short_id"] === "new") {
-				$node["short_id"] = (new Category())->genValidID(5);
+			if ($node["short_id"] !== "new") {
+				$category = Category::findOne(["short_id" => $node["short_id"]]);
+			} else {
+				$category = new Category();
 			}
 
 			/* @var $category \app\models\Category */
-			$category = Category::findOne(["short_id" => $node["short_id"]]);
 			$category->setAttributes($node, false);
 			$category->name = array_replace_recursive($category->name, $node["name"]);
 			$category->save(false);
