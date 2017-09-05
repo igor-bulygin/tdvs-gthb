@@ -72,6 +72,7 @@
 		}
 
 		function createTable() {
+			var old_price_stock = angular.copy(vm.product.price_stock);
 			vm.product.price_stock = [];
 			var object = {};
 			if(!UtilService.isEmpty(vm.product.options)) {
@@ -117,6 +118,7 @@
 			} else {
 				addEmptyPriceStock([]);
 			}
+			productService.setOldPriceStockPrices(old_price_stock, vm.product.price_stock);
 			parseTitles();
 		}
 

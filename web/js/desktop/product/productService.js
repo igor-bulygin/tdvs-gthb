@@ -6,6 +6,7 @@
 		this.validate = validate;
 		this.parseProductFromService = parseProductFromService;
 		this.tagChangesStockAndPrice = tagChangesStockAndPrice;
+		this.setOldPriceStockPrices = setOldPriceStockPrices;
 		
 		function searchPrintSizechartsOnCategory(categories, id) {
 			for(var i=0; i < categories.length; i++) {
@@ -147,6 +148,91 @@
 					return tags[i].stock_and_price ? true : false;
 				}
 			}
+		}
+
+		function setOldPriceStockPrices(oldPriceStock, newPriceStock) {
+			if(angular.isArray(oldPriceStock) && angular.isArray(newPriceStock) && 
+				oldPriceStock.length > 0 && newPriceStock.length > 0) {
+				newPriceStock.forEach(function (price_stock_element) {
+					//original_artwork_case
+					if(price_stock_element.original_artwork) {
+						var original_artwork_element = oldPriceStock.find(function(element) {
+							return element.original_artwork;
+						})
+						if(original_artwork_element)
+							copyProductProperties(original_artwork_element, price_stock_element);
+					}
+					//all_other_cases
+					oldPriceStock.forEach(function (old_price_stock_element) {
+						if(compareTwoPriceStockOptions(old_price_stock_element, price_stock_element))
+							copyProductProperties(old_price_stock_element, price_stock_element);
+					})
+				})
+			}
+		}
+
+		//returns true if parameters are same elements (or similar enough)
+		function compareTwoPriceStockOptions(oldPriceStock, newPriceStock) {
+			var old_properties_count = Object.keys(oldPriceStock.options).length;
+			var new_properties_count = Object.keys(newPriceStock.options).length;
+			if(!UtilService.isEmpty(oldPriceStock.options) && !UtilService.isEmpty(newPriceStock.options)) {
+				//iterate in old options keys and look for each key in new options
+				for (var key in oldPriceStock.options) {
+					var compare_count = 0;
+					if(newPriceStock.options.hasOwnProperty(key)) { //if new price options have old property
+						if(newPriceStock.options[key].length > 0) { //and it is not empty
+							//and they are really an array and not a string
+							if(angular.isArray(newPriceStock.options[key]) && angular.isArray(oldPriceStock.options[key])) {
+								if(oldPriceStock.options[key].length === newPriceStock.options[key].length) { //if option have same length than the old one
+									if(!angular.equals(oldPriceStock.options[key], newPriceStock.options[key])) { //if its not equal to old one its not the same element
+										return false;
+									}
+								}
+								//if new product has more options than old one then maybe user added one more option. 
+								//Example: "color": ["black", "red"] goes to ["black", "red", "white"]
+								if(newPriceStock.options[key].length > oldPriceStock.options[key].length) { 
+									var count_same_options = 0;
+									newPriceStock.options[key].forEach(function (option) {
+										var option_exists_previously = oldPriceStock.options[key].find(function(element) {
+											return angular.equals(option, element);
+										})
+										if(option_exists_previously)
+											count_same_options++;
+									})
+									if(count_same_options !== newPriceStock.options[key].length)
+										return false;
+								}
+								//if there is a new option that has less values than the old one, then the options are not the same
+								if(newPriceStock.options[key].length < oldPriceStock.options[key].length) {
+									return false;
+								}
+							} else if(key === 'size' && !angular.equals(oldPriceStock.options[key], newPriceStock.options[key])) {
+								return false;
+							}
+						//if options satisfy previous conditions, then we add it to compare_count
+						compare_count++;
+						}
+					}
+					else {
+						return false;
+					}
+				}
+				if(compare_count >= new_properties_count-1) {
+					return true;
+				}
+				return false;
+			}
+		}
+
+		function copyProductProperties(oldProduct, newProduct) {
+			Object.assign(newProduct, {
+				height: oldProduct.height,
+				width: oldProduct.width,
+				length: oldProduct.length,
+				weight: oldProduct.weight,
+				price: oldProduct.price,
+				stock: oldProduct.stock
+			});
 		}
 	}
 

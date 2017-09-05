@@ -180,12 +180,14 @@
 				pos = 0;
 				length = 1;
 			}
-			if(pos > -1){
-				for(var i = 0; i < sizechart.values.length; i++) {
-					vm.sizechart_empty.values.push([sizechart.values[i][pos]]);
-					vm.sizechart_available_values[i] = true;
-					for(var j = length; j < sizechart.values[i].length; j++) {
-						vm.sizechart_empty.values[i].push(sizechart.values[i][j]);
+			if (!angular.isUndefined(sizechart) && !angular.isUndefined(sizechart.values)) {
+				if(pos > -1){
+					for(var i = 0; i < sizechart.values.length; i++) {
+						vm.sizechart_empty.values.push([sizechart.values[i][pos]]);
+						vm.sizechart_available_values[i] = true;
+						for(var j = length; j < sizechart.values[i].length; j++) {
+							vm.sizechart_empty.values[i].push(sizechart.values[i][j]);
+						}
 					}
 				}
 			}
@@ -199,9 +201,11 @@
 
 		function deleteSizeFromSizechart(pos) {
 			if(angular.isArray(vm.product.sizechart.values[pos]) && vm.product.sizechart.values.length > 0) {
-				for(var i = 0; i < vm.sizechart_empty.values.length; i++) {
-					if(vm.sizechart_empty.values[i][0] == vm.product.sizechart.values[pos][0])
-						vm.sizechart_available_values[i] = true;
+				if (!angular.isUndefined(vm.sizechart_empty)) {
+					for(var i = 0; i < vm.sizechart_empty.values.length; i++) {
+						if(vm.sizechart_empty.values[i][0] == vm.product.sizechart.values[pos][0])
+							vm.sizechart_available_values[i] = true;
+					}
 				}
 			}
 			vm.product.sizechart.values.splice(pos, 1);
@@ -247,7 +251,7 @@
 
 		//events
 		$scope.$on(productEvents.setVariations, function(event, args) {
-			//get tags						
+			//get tags
 			if (!args.isFirstSelection) {
 				vm.product.options = {};
 			}
@@ -275,6 +279,9 @@
 					else if(vm.product.sizechart && vm.fromedit) {
 						delete vm.fromedit;
 						var original_sizechart = angular.copy(vm.product.sizechart);
+						if (angular.isUndefined(vm.selected_sizechart)) {
+							vm.selected_sizechart={};
+						}
 						for(var i = 0; i < vm.sizecharts.length; i++) {
 							if(vm.product.sizechart.short_id === vm.sizecharts[i].id) {
 								vm.selected_sizechart = vm.sizecharts[i];
