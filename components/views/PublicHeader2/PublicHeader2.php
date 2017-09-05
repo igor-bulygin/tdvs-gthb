@@ -108,22 +108,19 @@ app\components\assets\PublicHeader2Asset::register($this);
 				<li><a href="<?=Url::to(['/discover/boxes'])?>" translate="header.EXPLORE_BOXES"></a></li>
 				<li><a href="<?=Url::to(['/discover/devisers'])?>" translate="header.DISCOVER_DEVISERS"></a></li>
 				<li><a href="<?=Url::to(['/discover/influencers'])?>" translate="header.TREND_SETTERS"></a></li>
-				<li><a href="#" translate="header.PROJECTS"></a></li>
-			</ul>
-			<div class="pull-right">
-					<?php
-
+				<?php /*<li><a href="#" translate="header.PROJECTS"></a></li>*/?>
+				<?php
 					echo LanguagePicker::widget([
 						'skin' => LanguagePicker::SKIN_BUTTON,
 						'size' => LanguagePicker::SIZE_SMALL,
-						'parentTemplate' => '<div class="language-picker button-list pull-right {size}"><div>{items}</div></div>',
-						'itemTemplate' => '<a href="{link}" title="{name}" class="{language}">{name}</a>',
-						'activeItemTemplate' => '<a href="{link}" title="{name}" class="{language} active">{name}</a>',
+						'parentTemplate' => '',
+						'itemTemplate' => '<li><a href="{link}" title="{name}" class="{language}">{name}</a></li>',
+						'activeItemTemplate' => '<li><a href="{link}" title="{name}" class="{language} active">{name}</a></li>',
 						'languageAsset' => 'lajax\languagepicker\bundles\LanguageLargeIconsAsset',
 						'languagePluginAsset' => 'lajax\languagepicker\bundles\LanguagePluginAsset',
 					]);
-					?>
-			</div>
+				?>
+			</ul>
 		</div>
 	</nav>
 	<div class="menu-categories">
