@@ -77,7 +77,9 @@
 			"NAME": "Nombre"
 		},
 		"contact": {
-			"QUESTION_ABOUT": "¿Cual es tu pregunta?"
+			"QUESTION_ABOUT": "¿Cual es tu pregunta?",
+			"EMAIL_OK": "Mensaje enviado correctamente",
+			"EMAIL_ERROR": "Ha ocurrido un error al enviar tu mensaje. Por favor, prueba de nuevo más tarde"
 		},
 		"ACCEPT_TERMS": "Acepto los <a href='#'>Términos & Condiciones</a> de Todevise",
 		"NEW_PRODUCT": "Crear nuevo producto",

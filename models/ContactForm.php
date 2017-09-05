@@ -25,11 +25,11 @@ class ContactForm extends Model
     {
         return [
             // name, email, subject and body are required
-            [['name', 'email', 'about', 'subject', 'body'], 'required'],
+            [['name', 'email', /*'about', 'subject',*/ 'body'], 'required'],
             // email has to be a valid email address
             ['email', 'email'],
             // verifyCode needs to be entered correctly
-            ['verifyCode', 'captcha'],
+//            ['verifyCode', 'captcha'],
 			['about', 'default']
         ];
     }
@@ -46,21 +46,40 @@ class ContactForm extends Model
 
     /**
      * Sends an email to the specified email address using the information collected by this model.
-     * @param  string  $email the target email address
+     * @param  string  $emailAddress the target email address
      * @return boolean whether the model passes validation
      */
-    public function contact($email)
-    {
-        if ($this->validate()) {
-            Yii::$app->mailer->compose()
-                ->setTo($email)
-                ->setFrom([$this->email => $this->name])
-                ->setSubject($this->subject)
-                ->setTextBody($this->body)
-                ->send();
-            return true;
-        } else {
-            return false;
-        }
-    }
+    public function contact($emailAddress)
+	{
+		if ($this->validate()) {
+
+			// handle success
+			$email = new PostmanEmail();
+			$email->code_email_content_type = PostmanEmail::EMAIL_CONTENT_TYPE_CONTACT_MESSAGE;
+			$email->to_email = $emailAddress;
+			$email->subject = 'New contact';
+
+			// add task only one send task (to allow retries)
+			$task = new PostmanEmailTask();
+			$task->date_send_scheduled = new \MongoDate();
+			$email->addTask($task);
+
+			$email->body_html = Yii::$app->view->render(
+				'@app/mail/contact',
+				[
+					"form" => $this,
+				],
+				$this
+			);
+			$email->save();
+
+			if ($email->send($task->id)) {
+				$email->save();
+
+				return true;
+			};
+		}
+
+		return false;
+	}
 }
