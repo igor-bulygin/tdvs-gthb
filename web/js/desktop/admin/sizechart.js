@@ -19,6 +19,11 @@
 
 		//Sort by path length
 		_categories = $category_util.sort(_categories);
+		angular.forEach(_categories, function (category) {
+				if (vm.sizechart.categories.includes(category.short_id)) {
+					category.check=true;
+				}
+		});
 		vm.categories = $category_util.create_tree(_categories);
 		vm._shadow = JSON.parse(JSON.stringify(vm.sizechart));
 
