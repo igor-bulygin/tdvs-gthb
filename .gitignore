@@ -51,3 +51,4 @@ test_rest
 
 #backups created by mongo sync script
 db_backup
+db_backup*
