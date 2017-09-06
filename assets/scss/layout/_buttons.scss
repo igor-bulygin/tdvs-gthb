@@ -374,18 +374,17 @@
 		}
 		a{
 			color: $white;
-			background-color: $dark_grey;
-			@include size(22px,22px);
+			border: 1px solid $black;
+			@include size(34px,34px);
 			display: block;
 			padding: 5px 0 0 7px;
 			@include border-radius(28px,28px,28px,28px);
 			&.twitter{
 				padding: 4px 0 0 5px;
 			}
-			&.google-plus{
-				font-size: 12px;
-				padding: 5px 0 0 4px;
-			}                
+			&:hover{
+				border: 1px solid $dark_red;
+			}
 		}
 	}
 }

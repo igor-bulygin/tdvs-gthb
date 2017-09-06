@@ -237,32 +237,26 @@ $videos = $product->getVideos();
 								<span ng-bind="detailProductCtrl.product.loveds"></span><span translate="product.detail.TIMES"></span>
 								<span class="btn-tagline saved pull-right" translate="product.detail.SAVED_IN_X_BOXES" translate-values="{ x:detailProductCtrl.product.boxes}"></span>
 							</div>-->
-							<div class="full-width row">
-								<ul class="social-items">
-									<li>
-										<span translate="product.detail.SHARE_ON"></span>
-									</li>
-									<li>
-										<a href="#">
-											<i class="fa fa-facebook" aria-hidden="true"></i>
-										</a>
-									</li>
-									<li>
-										<a class="twitter" href="#">
-											<i class="fa fa-twitter" aria-hidden="true"></i>
-										</a>
-									</li>
-									<li>
-										<a class="google-plus" href="#">
-											<i class="fa fa-google-plus" aria-hidden="true"></i>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<i class="fa fa-pinterest-p" aria-hidden="true"></i>
-										</a>
-									</li>
-								</ul>
+							<div class="full-width mb-20">
+								<div class="btns-product-wrapper">
+									<ul class="social-items">
+										<li>
+											<a href="#">
+												<i class="fa fa-facebook" aria-hidden="true"></i>
+											</a>
+										</li>
+										<li>
+											<a class="twitter" href="#">
+												<i class="fa fa-twitter" aria-hidden="true"></i>
+											</a>
+										</li>
+										<li>
+											<a href="#">
+												<i class="fa fa-pinterest-p" aria-hidden="true"></i>
+											</a>
+										</li>
+									</ul>
+								</div>
 							</div>
 							<div class="shipping-policies-wrapper">
 								<div class="policies-row">
