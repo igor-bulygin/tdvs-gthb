@@ -195,12 +195,13 @@
 									newPriceStock.options[key].forEach(function (option) {
 										var option_exists_previously = oldPriceStock.options[key].find(function(element) {
 											return angular.equals(option, element);
-										})
+										});
 										if(option_exists_previously)
 											count_same_options++;
 									})
-									if(count_same_options !== newPriceStock.options[key].length)
+									if(count_same_options === 0 || count_same_options < newPriceStock.options[key].length-1) {
 										return false;
+									}
 								}
 								//if there is a new option that has less values than the old one, then the options are not the same
 								if(newPriceStock.options[key].length < oldPriceStock.options[key].length) {
