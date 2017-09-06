@@ -74,8 +74,6 @@ class Category extends CActiveRecord {
 	{
 		parent::init();
 		$this->deviserProduct = [];
-
-		$this->short_id = Utils::shortID(5);
 	}
 
 	public function rules()
@@ -474,6 +472,11 @@ class Category extends CActiveRecord {
 	}
 
 	public function beforeSave($insert) {
+
+		if (empty($this->short_id)) {
+			$this->short_id = Utils::shortID(5);
+		}
+
 		/*
 		 * Create empty data holders if they don't exist
 		 */
