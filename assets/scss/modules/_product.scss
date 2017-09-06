@@ -80,10 +80,9 @@
                     padding-top: 3px;
                 }
                 .atribute-selected{
-                    border: solid 1px $background_grey;
+					color: $dark_grey;
                     padding: 2px 12px;
                     display: inline-block;
-                    @include border-radius(45px,45px,45px,45px);
                 }
                 .size-box{
                     float: left;

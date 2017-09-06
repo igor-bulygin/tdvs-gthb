@@ -115,11 +115,11 @@ $videos = $product->getVideos();
 							</div>
 							<div class="quantity-wrapper pull-right">
 								<button class="btn btn-none btn-summatory" ng-click="detailProductCtrl.changeQuantity(-1)">
-									<span>-</span>
+									<i class="ion-minus"></i>
 								</button>
 								<div class="number" ng-bind="detailProductCtrl.quantity"></div>
 								<button class="btn btn-none btn-summatory" ng-click="detailProductCtrl.changeQuantity(1)">
-									<span>+</span>
+									<i class="ion-plus"></i>
 								</button>
 							</div>
 						</div>

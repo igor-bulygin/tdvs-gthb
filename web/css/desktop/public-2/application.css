@@ -5820,12 +5820,9 @@ h3 {
         text-align: left;
         padding-top: 3px; }
       .product .product-data-wrapper .product-data .row-size .atribute-selected {
-        border: solid 1px #e9e9e9;
+        color: #939393;
         padding: 2px 12px;
-        display: inline-block;
-        border-radius: 45px 45px 45px 45px !important;
-        -webkit-border-radius: 45px 45px 45px 45px !important;
-        -moz-border-radius: 45px 45px 45px 45px !important; }
+        display: inline-block; }
       .product .product-data-wrapper .product-data .row-size .size-box {
         float: left;
         margin: 0 5px 6px 0;
