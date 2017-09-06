@@ -28,10 +28,16 @@ class PriceStockValidator extends Validator
 
 			foreach ($priceStock as $item) {
 				if (!isset($item['original_artwork']) || !$item['original_artwork']) {
-					if (!isset($item['options']) || empty($item['options'])) {
-						$this->addError($object, $attribute,
-							'Pricestock options must be an array and must be no empty');
+
+					if (!isset($item['options'])) {
+						$this->addError($object, $attribute, 'Pricestock options must be an array');
+						continue;
 					}
+
+					if ($object->scenario == Product::SCENARIO_PRODUCT_PUBLIC && empty($item['options'])) {
+						$this->addError($object, $attribute, 'Pricestock options must be no empty');
+					}
+
 					foreach ($item['options'] as $optionId => $values) {
 						$optionId = (string)$optionId; // force cast to string (short_id are allways strings)
 						$tag = Tag::findOne(["short_id" => $optionId]);
@@ -65,7 +71,7 @@ class PriceStockValidator extends Validator
 				}
 				if ($item['available'] && $object->scenario == Product::SCENARIO_PRODUCT_PUBLIC) {
 					foreach ($positiveFields as $field) {
-						if (!isset($item[$field]) || !is_numeric($item[$field]) || $item[$field] <= 0) {
+						if (!isset($item[$field]) || !is_numeric($item[$field]) || $item[$field] < 0) {
 							$this->addError($object, $attribute, sprintf('%s must be a positive value', $field));
 						}
 					}

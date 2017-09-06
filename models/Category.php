@@ -74,6 +74,8 @@ class Category extends CActiveRecord {
 	{
 		parent::init();
 		$this->deviserProduct = [];
+
+		$this->short_id = Utils::shortID(5);
 	}
 
 	public function rules()

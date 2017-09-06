@@ -114,6 +114,7 @@ class PersonController extends CController
 
 	public function actionStore($slug, $person_id)
 	{
+		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
 		$person = Person::findOneSerialized($person_id);
 
 		if (!$person) {
@@ -145,6 +146,7 @@ class PersonController extends CController
 		}
 
 		// their products, for selected category
+		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_PUBLIC);
 		$products = Product::findSerialized([
 			"deviser_id" => $person_id,
 			"categories" => (empty($selectedSubcategory->short_id)) ? $selectedCategory->getShortIds() : $selectedSubcategory->getShortIds(),
@@ -164,7 +166,7 @@ class PersonController extends CController
 
 	public function actionStoreEdit($slug, $person_id)
 	{
-		// get the category object
+		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
 		$person = Person::findOneSerialized($person_id);
 
 		if (!$person) {
@@ -207,6 +209,7 @@ class PersonController extends CController
 
 	public function actionAbout($slug, $person_id)
 	{
+		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
 		$person = Person::findOneSerialized($person_id);
 
 		if (!$person) {
@@ -227,6 +230,7 @@ class PersonController extends CController
 
 	public function actionAboutEdit($slug, $person_id)
 	{
+		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
 		$person = Person::findOneSerialized($person_id);
 
 		if (!$person) {
@@ -247,6 +251,7 @@ class PersonController extends CController
 
 	public function actionPress($slug, $person_id)
 	{
+		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
 		$person = Person::findOneSerialized($person_id);
 
 		if (!$person) {
@@ -268,7 +273,7 @@ class PersonController extends CController
 
 	public function actionPressEdit($slug, $person_id)
 	{
-		// get the category object
+		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
 		$person = Person::findOneSerialized($person_id);
 
 		if (!$person) {
@@ -289,6 +294,7 @@ class PersonController extends CController
 
 	public function actionVideos($slug, $person_id)
 	{
+		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
 		$person = Person::findOneSerialized($person_id);
 
 		if (!$person) {
@@ -310,7 +316,7 @@ class PersonController extends CController
 
 	public function actionVideosEdit($slug, $person_id)
 	{
-		// get the category object
+		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
 		$person = Person::findOneSerialized($person_id);
 
 		if (!$person) {
@@ -331,6 +337,7 @@ class PersonController extends CController
 
 	public function actionFaq($slug, $person_id)
 	{
+		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
 		$person = Person::findOneSerialized($person_id);
 
 		if (!$person) {
@@ -352,7 +359,7 @@ class PersonController extends CController
 
 	public function actionFaqEdit($slug, $person_id)
 	{
-		// get the category object
+		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
 		$person = Person::findOneSerialized($person_id);
 
 		if (!$person) {
@@ -373,6 +380,7 @@ class PersonController extends CController
 
 	public function actionLoved($slug, $person_id)
 	{
+		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
 		$person = Person::findOneSerialized($person_id);
 
 		if (!$person) {
@@ -395,6 +403,7 @@ class PersonController extends CController
 
 	public function actionBoxes($slug, $person_id)
 	{
+		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
 		$person = Person::findOneSerialized($person_id);
 
 		if (!$person) {
@@ -417,6 +426,7 @@ class PersonController extends CController
 
 	public function actionBoxDetail($slug, $person_id, $box_id)
 	{
+		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
 		$person = Person::findOneSerialized($person_id);
 
 		if (!$person) {
@@ -451,6 +461,7 @@ class PersonController extends CController
 
 	public function actionStories($slug, $person_id)
 	{
+		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
 		$person = Person::findOneSerialized($person_id);
 
 		if (!$person) {
@@ -482,6 +493,7 @@ class PersonController extends CController
 
 	public function actionStoryCreate($slug, $person_id)
 	{
+		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
 		$person = Person::findOneSerialized($person_id);
 
 		if (!$person) {
@@ -502,6 +514,7 @@ class PersonController extends CController
 
 	public function actionStoryEdit($slug, $person_id, $story_id)
 	{
+		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
 		$person = Person::findOneSerialized($person_id);
 
 		if (!$person) {
@@ -533,6 +546,7 @@ class PersonController extends CController
 
 	public function actionStoryDetail($slug, $person_id, $story_id)
 	{
+		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
 		$person = Person::findOneSerialized($person_id);
 
 		if (!$person) {
