@@ -237,28 +237,36 @@ $videos = $product->getVideos();
 								<span ng-bind="detailProductCtrl.product.loveds"></span><span translate="product.detail.TIMES"></span>
 								<span class="btn-tagline saved pull-right" translate="product.detail.SAVED_IN_X_BOXES" translate-values="{ x:detailProductCtrl.product.boxes}"></span>
 							</div>-->
-							<div class="full-width mb-20">
-								<div class="btns-product-wrapper">
-									<ul class="social-items">
-										<li>
-											<a href="#">
-												<i class="fa fa-facebook" aria-hidden="true"></i>
-											</a>
-										</li>
-										<li>
-											<a class="twitter" href="#">
-												<i class="fa fa-twitter" aria-hidden="true"></i>
-											</a>
-										</li>
-										<li>
-											<a href="#">
-												<i class="fa fa-pinterest-p" aria-hidden="true"></i>
-											</a>
-										</li>
-									</ul>
+							<div class="product-data">
+								<div class="full-width mb-20">
+									<div class="btns-product-wrapper">
+										<ul class="social-items">
+											<li>
+												<a href="#">
+													<i class="fa fa-facebook" aria-hidden="true"></i>
+												</a>
+											</li>
+											<li>
+												<a class="twitter" href="#">
+													<i class="fa fa-twitter" aria-hidden="true"></i>
+												</a>
+											</li>
+											<li>
+												<a href="#">
+													<i class="fa fa-pinterest-p" aria-hidden="true"></i>
+												</a>
+											</li>
+										</ul>
+									</div>
 								</div>
 							</div>
-							<div class="shipping-policies-wrapper">
+							<div class="full-width mt-20">	
+								<div class="bs-example">
+									<p>
+										<a href="#collapseExample" class="btn btn-primary collapsed" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample"> SHIPPING & POLICIES + </a>
+									</p>
+									<div class="collapse" id="collapseExample" aria-expanded="false" style="height: 0px;">
+										<div class="shipping-policies-wrapper">
 								<div class="policies-row">
 									<form class="form-horizontal">
 										<div class="form-group">
@@ -294,6 +302,9 @@ $videos = $product->getVideos();
 									</div>
 								<?php } ?>
 							</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -305,9 +316,45 @@ $videos = $product->getVideos();
 	<div class="product-description">
 		<!-- Nav tabs -->
 		<div class="container">
+			<div class="work-profile-description-wrapper">
+						<div class="col-sm-8 pad-product">
+							<div class="title"><span class="title-product-name" translate="product.detail.DESCRIPTION"></span></div>
+							<p class="description">
+								<?= $product->description ?>
+							</p>
+							<?php if (count($product->mediaMapping->descriptionPhotosInfo) > 0) { ?>
+								<div class="tb-wrapper">
+									<div class="row">
+										<?php foreach ($product->mediaMapping->descriptionPhotosInfo as $descriptionPhoto) { ?>
+										<div class="col-md-3 work-profile-description-tb">
+											<img src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getUrlImagesLocation().$descriptionPhoto->name)->resize(480, 0)?>">
+											<span class="tb-title"><?= $descriptionPhoto->title?></span>
+											<span class="tb-description"><?= $descriptionPhoto->description?></span>
+										</div>
+										<?php } ?>
+									</div>
+								</div>
+							<?php } ?>
+						</div>
+						<div class="col-sm-4">
+							<div class="avatar-wrapper-side">
+									<div class="avatar">
+										<a href="<?= $person->getStoreLink() ?>">
+											<img class="cover" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getAvatarImage())->resize(128, 128) ?>" data-pin-nopin="true">
+											<span><?= $person->getName() ?></span>
+										</a>
+									</div>
+								</div>
+						</div>
+					</div>
+		</div>
+		<div class="container mt-20 mb-20">
+			<span class="title-product-name">works by <?= $person->getName() ?></span>
+		</div>
+		<div class="container">
 			<ul class="nav nav-tabs product-tabs" role="tablist">
 				<li role="presentation" class="active no-b-r">
-					<a href="#description" aria-controls="description" role="tab" data-toggle="tab"><span translate="product.detail.DESCRIPTION&REVIEWS"></span></a>
+					<a href="#description" aria-controls="description" role="tab" data-toggle="tab"><span>Boxes</span></a>
 				</li>
 				<?php if (count($videos)) { ?>
 				<li role="presentation" class="no-b-r">
@@ -315,7 +362,7 @@ $videos = $product->getVideos();
 				</li>
 				<?php } ?>
 				<li role="presentation">
-					<a href="#works" aria-controls="works" role="tab" data-toggle="tab"><span translate="product.detail.MORE_BY"></span><?= $person->getName() ?></a>
+					<a href="#works" aria-controls="works" role="tab" data-toggle="tab"><span>WORK FAQs</span></a>
 				</li>
 			</ul>
 		</div>
@@ -373,7 +420,7 @@ $videos = $product->getVideos();
 						</div>
 					<?php } ?>
 
-					<div class="reviews-wrapper">
+					<!--<div class="reviews-wrapper">
 						<div class="title"><span translate="product.detail.USER_REVIEWS"></span></div>
 						<div class="review-rates">
 							<span class="score">
@@ -522,7 +569,7 @@ $videos = $product->getVideos();
 							<span class="green" translate="product.detail.LOAD_MORE"></span>
 							<span class="more"><span>24</span><span translate="product.detail.COMMENTS_MORE"></span></span>
 						</div>
-					</div>
+					</div>-->
 				</div>
 				<?php if (count($videos)) { ?>
 					<div role="tabpanel" class="tab-pane work-description-wrapper" id="videos">
