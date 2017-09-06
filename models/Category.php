@@ -116,6 +116,7 @@ class Category extends CActiveRecord {
             case self::SERIALIZE_SCENARIO_PUBLIC:
                 static::$serializeFields = [
                     'id' => 'short_id',
+					'short_id',
                     'path',
                     'sizecharts',
                     'prints',
@@ -129,6 +130,7 @@ class Category extends CActiveRecord {
             case self::SERIALIZE_SCENARIO_ADMIN:
                 static::$serializeFields = [
                     'id' => 'short_id',
+					'short_id',
                     'path',
                     'sizecharts',
                     'prints',
