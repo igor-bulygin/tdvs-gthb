@@ -382,6 +382,9 @@
 			&.twitter{
 				padding: 8px 0 0 7px;
 			}
+			&.pinterest{
+				padding: 8px 0 0 10px;
+			}
 			&:hover{
 				border: 1px solid $dark_red;
 				i.facebook{
@@ -392,6 +395,13 @@
 					}
 				}
 				i.twitter{
+					svg{
+						.st0{
+								stroke:$dark_red;
+							}
+					}
+				}
+				i.pinterest{
 					svg{
 						.st0{
 								stroke:$dark_red;
@@ -419,9 +429,34 @@
 					}
 				}
 			}
+			i.pinterest{
+				svg{
+					height: 16px;
+					.st0{
+						stroke:$black;
+						fill:none;
+						stroke-width:2;
+					}
+				}
+			}
 		}
 	}
 }
 .full-size-btn{
 	width:100%!important;
+}
+.accordion-btn{
+	@extend %btn;
+    background-color:transparent;
+    color: $black;
+	padding: 0;
+    width: 100%;
+    text-align: left;
+	span{
+		float: left;
+	}
+	i{
+		float: right;
+		margin-right: 10px;
+	}
 }

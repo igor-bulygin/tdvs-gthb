@@ -5,17 +5,22 @@
     background-color: $white;
     @extend %block;
     .product-tabs{
+		margin: 0 auto;
+    	width: 650px;
+		border: none!important;
         li{
-            width: 33.33%;
-            border:solid 1px $light_grey;
+			margin: 0 10px;
             &.active{
                 a{
-                    background-color: #DAD8D8;
+					border: none!important;
+                    border-bottom:2px solid $dark_red!important;
+					span{
+						color:$dark_red!important;
+					}
                 }
             }
             a{
                 text-transform: uppercase;
-                font-weight: bold;
                 text-align: center; 
                 font-size: 12px;
                 padding: 8px;
@@ -190,7 +195,6 @@
     }
 }
 .work-profile-description-wrapper{
-	border-bottom: solid 1px #9a9a9a;
     padding: 0 0 40px;
     margin: 0 0 40px;
     @extend %block;

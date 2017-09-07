@@ -273,8 +273,19 @@ $videos = $product->getVideos();
 												</a>
 											</li>
 											<li>
-												<a href="#">
-													<i class="fa fa-pinterest-p" aria-hidden="true"></i>
+												<a class="pinterest" href="#">
+													<i class="pinterest" aria-hidden="true">
+														<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 32 42" style="enable-background:new 0 0 32 42;" xml:space="preserve">
+														<g id="Page-1">
+															<path id="Path" class="st0" d="M1,15.4c0,4,1.4,7.5,4.4,8.8c0.5,0.2,0.9,0,1.1-0.6c0.1-0.4,0.3-1.4,0.4-1.8
+																c0.1-0.6,0.1-0.8-0.3-1.3c-0.9-1.1-1.4-2.5-1.4-4.5c0-5.8,4.1-11,10.7-11c5.8,0,9,3.8,9,8.8c0,6.6-2.8,12.2-6.9,12.2
+																c-2.3,0-4-2-3.4-4.4c0.7-2.9,1.9-6.1,1.9-8.2c0-1.9-1-3.4-2.9-3.4c-2.3,0-4.2,2.5-4.2,5.9c0,2.2,0.7,3.6,0.7,3.6S7.8,30.2,7.3,32
+																c-0.8,3.7-0.1,8.3-0.1,8.7c0,0.3,0.4,0.3,0.5,0.1c0.2-0.3,3-3.9,3.9-7.5c0.3-1,1.5-6.3,1.5-6.3c0.8,1.5,3,2.9,5.3,2.9
+																c7,0,11.7-6.7,11.7-15.7C30.2,7.3,24.8,1,16.5,1C6.2,1,1,8.8,1,15.4z"/>
+														</g>
+														</svg>
+													</i>
 												</a>
 											</li>
 										</ul>
@@ -284,7 +295,7 @@ $videos = $product->getVideos();
 							<div class="full-width mt-20">	
 								<div class="bs-example">
 									<p>
-										<a href="#collapseExample" class="btn btn-primary collapsed" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample"> SHIPPING & POLICIES + </a>
+										<a href="#collapseExample" class="btn collapsed accordion-btn" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample"> <span>SHIPPING &amp; POLICIES</span> <i class="ion-plus"></i> </a>
 									</p>
 									<div class="collapse" id="collapseExample" aria-expanded="false" style="height: 0px;">
 										<div class="shipping-policies-wrapper">
@@ -338,9 +349,9 @@ $videos = $product->getVideos();
 		<!-- Nav tabs -->
 		<div class="container">
 			<div class="work-profile-description-wrapper">
+						<div class="title mb-40"><span class="title-product-name" translate="product.detail.DESCRIPTION"></span></div>
 						<div class="col-sm-8 pad-product">
-							<div class="title"><span class="title-product-name" translate="product.detail.DESCRIPTION"></span></div>
-							<p class="description">
+							<p>
 								<?= $product->description ?>
 							</p>
 							<?php if (count($product->mediaMapping->descriptionPhotosInfo) > 0) { ?>
@@ -369,77 +380,36 @@ $videos = $product->getVideos();
 						</div>
 					</div>
 		</div>
-		<div class="container mt-20 mb-20">
-			<span class="title-product-name">works by <?= $person->getName() ?></span>
-		</div>
 		<div class="container">
 			<ul class="nav nav-tabs product-tabs" role="tablist">
-				<li role="presentation" class="active no-b-r">
-					<a href="#description" aria-controls="description" role="tab" data-toggle="tab"><span>Boxes</span></a>
+				<li role="presentation" class="no-b-r">
+					<a href="#works" aria-controls="description" role="tab" data-toggle="tab"><span class="title-product-name">works by <?= $person->getName() ?></span></a>
+				</li>
+				<li role="presentation" class="no-b-r">
+					<a href="#boxes" aria-controls="description" role="tab" data-toggle="tab"><span class="title-product-name">Boxes</span></a>
 				</li>
 				<?php if (count($videos)) { ?>
 				<li role="presentation" class="no-b-r">
-					<a href="#videos" aria-controls="works" role="tab" data-toggle="tab"><span translate="product.detail.VIDEOS"></span></a>
+					<a href="#videos" aria-controls="works" role="tab" data-toggle="tab"><span translate="product.detail.VIDEOS" class="title-product-name"></span></a>
 				</li>
 				<?php } ?>
-				<li role="presentation">
-					<a href="#works" aria-controls="works" role="tab" data-toggle="tab"><span>WORK FAQs</span></a>
+				<li role="presentation" class="active ">
+					<a href="#faqs" aria-controls="works" role="tab" data-toggle="tab"><span class="title-product-name">FAQs</span></a>
 				</li>
 			</ul>
 		</div>
 		<div class="container">
 			<!-- Tab panes -->
 			<div class="tab-content product-description-content">
-				<div role="tabpanel" class="tab-pane work-description-wrapper active" id="description">
-					<div class="work-profile-description-wrapper">
-						<div class="col-sm-8 pad-product">
-							<div class="title"><span translate="product.detail.DESCRIPTION"></span></div>
-							<p class="description">
-								<?= $product->description ?>
-							</p>
-							<?php if (count($product->mediaMapping->descriptionPhotosInfo) > 0) { ?>
-								<div class="tb-wrapper">
-									<div class="row">
-										<?php foreach ($product->mediaMapping->descriptionPhotosInfo as $descriptionPhoto) { ?>
-										<div class="col-md-3 work-profile-description-tb">
-											<img src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getUrlImagesLocation().$descriptionPhoto->name)->resize(480, 0)?>">
-											<span class="tb-title"><?= $descriptionPhoto->title?></span>
-											<span class="tb-description"><?= $descriptionPhoto->description?></span>
-										</div>
-										<?php } ?>
-									</div>
-								</div>
-							<?php } ?>
-						</div>
-						<div class="col-sm-4">
-							<div class="avatar-wrapper-side">
-									<div class="avatar">
-										<a href="<?= $person->getStoreLink() ?>">
-											<img class="cover" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getAvatarImage())->resize(128, 128) ?>" data-pin-nopin="true">
-											<span><?= $person->getName() ?></span>
-										</a>
-									</div>
-								</div>
-						</div>
+				<div role="tabpanel" class="tab-pane work-description-wrapper active" id="faqs">
+					<div class="container mt-20 mb-20">
+						<span class="title-product-name">Faqs</span>
 					</div>
-
-					<?php if (count($product->faqMapping) > 0) { ?>
-					   	<div class="work-profile-description-wrapper faq-wrapper">
-						<div class="title"><span translate="product.detail.WORK_FAQS"></span></div>
-						<?php foreach ($product->faqMapping as $faq) { ?>
-							<div class="q-a-wrapper">
-								<p class="question">
-									<span translate="product.detail.Q"></span>
-									<span class="important"><?= $faq->question?></span>
-								</p>
-								<p class="question">
-									<span translate="product.detail.A"></span>
-									<span><?= $faq->answer?></span>
-								</p>
-							</div>
-						<?php } ?>
-						</div>
-					<?php } ?>
+				</div>
+				<div role="tabpanel" class="tab-pane work-description-wrapper" id="boxes">
+					<div class="container mt-20 mb-20">
+						<span class="title-product-name">BOXES</span>
+					</div>
 
 					<!--<div class="reviews-wrapper">
 						<div class="title"><span translate="product.detail.USER_REVIEWS"></span></div>
