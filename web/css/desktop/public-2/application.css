@@ -900,14 +900,30 @@ a, a:hover, a:focus {
     width: 34px;
     height: 34px;
     display: block;
-    padding: 5px 0 0 7px;
+    padding: 8px 0 0 12px;
     border-radius: 28px 28px 28px 28px !important;
     -webkit-border-radius: 28px 28px 28px 28px !important;
     -moz-border-radius: 28px 28px 28px 28px !important; }
     .social-items li a.twitter {
-      padding: 4px 0 0 5px; }
+      padding: 8px 0 0 7px; }
     .social-items li a:hover {
       border: 1px solid #c91c39; }
+      .social-items li a:hover i.facebook svg .st0 {
+        stroke: #c91c39; }
+      .social-items li a:hover i.twitter svg .st0 {
+        stroke: #c91c39; }
+    .social-items li a i.facebook svg {
+      height: 16px; }
+      .social-items li a i.facebook svg .st0 {
+        stroke: #1C1919;
+        fill: none;
+        stroke-width: 2; }
+    .social-items li a i.twitter svg {
+      height: 16px; }
+      .social-items li a i.twitter svg .st0 {
+        stroke: #1C1919;
+        fill: none;
+        stroke-width: 2; }
 
 .full-size-btn {
   width: 100% !important; }

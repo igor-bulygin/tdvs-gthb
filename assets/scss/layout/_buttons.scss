@@ -377,13 +377,47 @@
 			border: 1px solid $black;
 			@include size(34px,34px);
 			display: block;
-			padding: 5px 0 0 7px;
+			padding: 8px 0 0 12px;
 			@include border-radius(28px,28px,28px,28px);
 			&.twitter{
-				padding: 4px 0 0 5px;
+				padding: 8px 0 0 7px;
 			}
 			&:hover{
 				border: 1px solid $dark_red;
+				i.facebook{
+					svg{
+						.st0{
+								stroke:$dark_red;
+							}
+					}
+				}
+				i.twitter{
+					svg{
+						.st0{
+								stroke:$dark_red;
+							}
+					}
+				}
+			}
+			i.facebook{
+				svg{
+					height: 16px;
+					.st0{
+						stroke:$black;
+						fill:none;
+						stroke-width:2;
+					}
+				}
+			}
+			i.twitter{
+				svg{
+					height: 16px;
+					.st0{
+						stroke:$black;
+						fill:none;
+						stroke-width:2;
+					}
+				}
 			}
 		}
 	}
