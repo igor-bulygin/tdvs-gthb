@@ -17,6 +17,7 @@
 		vm.removeRow = removeRow;
 		vm.cancel = cancel;
 		vm.save = save;
+		vm.validateValue=validateValue;
 
 		//Sort by path length
 		_categories = $category_util.sort(_categories);
@@ -139,6 +140,11 @@
 		}
 
 		function save() {
+			angular.forEach(vm.sizechart.values, function (row) {
+				for (var i = 0, len = row.length; i < len; i++) {
+					row[i]=validateValue(row[i]);
+				}
+			});
 			if (!angular.isUndefined(vm.sizechart.metric_unit) && vm.sizechart.metric_unit.length>0) {
 				vm.sizechart.metric_unit=vm.sizechart.metric_unit[0].value;
 			}
@@ -147,6 +153,15 @@
 			}, function (err) {
 				toastr.error("Failed saving size chart!", err);
 			});
+		}
+
+		function validateValue(value) {
+			if (value !=null) {
+				 if (value != " " && value.length>0) {
+					return value;
+				}
+			}
+			return 0;
 		}
 
 	}
