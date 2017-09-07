@@ -354,7 +354,6 @@ class PersonController extends CController
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("@app/views/desktop/person/faq-view", [
 			'person' => $person,
-			'faq' => $person->faq,
 		]);
 	}
 
