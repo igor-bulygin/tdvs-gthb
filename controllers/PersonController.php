@@ -2,6 +2,7 @@
 namespace app\controllers;
 
 use app\helpers\CController;
+use app\helpers\InstagramHelper;
 use app\models\Box;
 use app\models\Category;
 use app\models\Loved;
@@ -457,6 +458,62 @@ class PersonController extends CController
 			'box' => $box,
 			'moreBoxes' => $boxes,
 		]);
+	}
+
+	public function actionSocial($slug, $person_id)
+	{
+		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
+		$person = Person::findOneSerialized($person_id);
+
+		if (!$person) {
+			throw new NotFoundHttpException();
+		}
+
+		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE && !$person->isPersonEditable()) {
+			throw new UnauthorizedHttpException();
+		}
+
+		$this->checkProfileState($person);
+
+		if (!empty($person->settingsMapping->instagram_info) && !empty($person->settingsMapping->instagram_info['access_token'])) {
+			$accessToken = $person->settingsMapping->instagram_info['access_token'];
+			$photos = InstagramHelper::getUserSelfMedia($accessToken);
+		} else {
+			$photos = [];
+		}
+
+		$this->layout = '/desktop/public-2.php';
+
+		return $this->render("@app/views/desktop/person/social-view", [
+			'person' => $person,
+			'photos' => $photos,
+		]);
+	}
+
+	public function actionConnectInstagram($slug, $person_id) {
+
+		// get the category object
+		$person = Person::findOneSerialized($person_id);
+
+		if (!$person) {
+			throw new NotFoundHttpException();
+		}
+
+		if (!$person->isInfluencer()) {
+			throw new NotFoundHttpException();
+		}
+
+		if (!$person->isInfluencerEditable()) {
+			throw new UnauthorizedHttpException();
+		}
+
+		if (!$person->isCompletedProfile()) {
+			$this->redirect($person->getCompleteProfileLink());
+		}
+
+		\Yii::$app->session->set('person_id_instagram_connection', $person->short_id);
+
+		$this->redirect(InstagramHelper::getAuthorizeUrl());
 	}
 
 	public function actionStories($slug, $person_id)

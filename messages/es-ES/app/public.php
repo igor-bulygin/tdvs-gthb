@@ -80,6 +80,7 @@ return [
 	'SETTINGS' => 'Ajustes',
 	'SHIPPING_SETTINGS' => 'Preferencias de envío',
 	'SIGNUP' => 'Regístrate',
+	'SOCIAL_FEED_BY_PERSON_NAME' => 'Social feed by {person_name}',
 	'STORIES' => 'Historias',
 	'STORY_BY_PERSON_NAME' => 'Historias',
 	'VIDEOS_BY_PERSON_NAME' => 'Videos de {person_name}',
