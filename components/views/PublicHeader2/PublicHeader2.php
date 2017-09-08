@@ -16,7 +16,7 @@ app\components\assets\PublicHeader2Asset::register($this);
 		<div class="row">
 		<div class="navbar-header">
 			<a class="navbar-brand" href="<?= Url::to(["public/index"])?>">
-				<img src="/imgs/logo.png">
+				<img src="/imgs/logo.png" id="header_logo">
 			</a>
 		</div>
 		<form class="navbar-form navbar-left navbar-searcher mobile" action="<?=Url::to(["/works"])?>" method="get">
@@ -97,7 +97,7 @@ app\components\assets\PublicHeader2Asset::register($this);
 </nav>
 <div id="navbar-wrapper">
 	<nav class="navbar navbar-default secondary">
-		<div class="container">
+		<div class="container" id="main_menu">
 			<div class="navbar-elements">
 				<ul class="nav navbar-nav">
 						<li>

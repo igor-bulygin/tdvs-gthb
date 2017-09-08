@@ -100,16 +100,23 @@
 		text-align: center;
 		@include border-radius(90px,90px,90px,90px);
 		&.box{	
-			background: url('/imgs/black-box.svg') -6px 0 no-repeat transparent;
+			background: url('/imgs/black-box.svg') 0 0 no-repeat transparent;
 			display: inline-block;
-			width: 55px;
-			margin-left: -2px;
+			//width: 55px;
+			//margin-left: -2px;
+            @include border-radius(0,0,0,0);
 		}
 		&:hover{
 			color: $dark_red!important;
 		}
+        &.box:hover {
+            background: url('/imgs/red-box.svg') 0 0 no-repeat transparent;
+        }
 	}
 }
 .grey-link{
 	color: $dark_grey;
+}
+.grid-margin {
+    margin-top: 30px;
 }

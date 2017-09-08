@@ -121,12 +121,12 @@ $this->title = 'Todevise / Elements';
 				<span class="title-underlined">Love</span>
 				<div>
 					<button class="btn btn-love">
-						<i class="ion-heart"></i>
+						<i class="ion-ios-heart-outline"></i>
 					</button>	
 				</div>
 				<div class="mt-10">
 					<button class="btn btn-love active">
-						<i class="ion-heart"></i>
+						<i class="ion-ios-heart-outline"></i>
 					</button>	
 				</div>
 			</div>

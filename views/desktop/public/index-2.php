@@ -247,7 +247,7 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 											<div class="col-md-4">
 												<button class="btn btn-single-love btn-love-box">
 													<span class="number"><?=count($products)?></span>
-													<i class="ion-heart"></i>
+													<i class="ion-ios-heart-outline"></i>
 												</button>
 											</div>
 										</div>
@@ -668,7 +668,7 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 <section class="grid-wrapper">
 	<div class="container">
 		<h3 class="title-product-name">Discover what´s next</h3>
-		<div id="macy-container">
+		<div id="macy-container" class="grid-margin">
 			<?php foreach ($works as $i => $work) { ?>
 			<div class="col-md-2">
 				<div class="menu-category list-group">

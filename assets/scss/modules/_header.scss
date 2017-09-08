@@ -432,8 +432,15 @@
 		color:$black;
 		font-size: 11px;
 		text-transform: uppercase;
-		width: 12px;
+		width: auto; /*12px;*/
 		overflow: hidden;
     	white-space: nowrap;
 	}
+}
+#main_menu {
+    padding-left: 0;
+    padding-right: 0;
+}
+#header_logo {
+    width: 110px;
 }
