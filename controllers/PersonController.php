@@ -477,7 +477,12 @@ class PersonController extends CController
 		if (!empty($person->settingsMapping->instagram_info) && !empty($person->settingsMapping->instagram_info['access_token'])) {
 			$connected = true;
 			$accessToken = $person->settingsMapping->instagram_info['access_token'];
-			$photos = InstagramHelper::getUserSelfMedia($accessToken);
+
+			$photos = Yii::$app->cache->get('instagram_'.$accessToken);
+			if ($photos === false) {
+				$photos = InstagramHelper::getUserSelfMedia($accessToken);
+				Yii::$app->cache->set('instagram_'.$accessToken, $photos, 60);
+			}
 			if (isset($photos['meta']['code']) && $photos['meta']['code'] == 400) {
 				$connected = false;
 			}
