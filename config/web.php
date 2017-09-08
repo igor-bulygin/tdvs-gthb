@@ -40,12 +40,15 @@ $config = [
 		//Assets
 		'assetManager' => [
 			'appendTimestamp' => true,
+			/*
 			'bundles' => [
 				'yii\bootstrap\BootstrapAsset' => [
 					//'sourcePath' => '',
 					'css' => []
 				],
 			],
+			*/
+			'bundles' => (require __DIR__ . '/assets_compressed.php')
 		],
 
 		//Cache
