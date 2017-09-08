@@ -2,6 +2,7 @@
 namespace app\controllers;
 
 use app\helpers\CController;
+use app\helpers\InstagramHelper;
 use app\models\Box;
 use app\models\Category;
 use app\models\Loved;
@@ -353,7 +354,6 @@ class PersonController extends CController
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("@app/views/desktop/person/faq-view", [
 			'person' => $person,
-			'faq' => $person->faq,
 		]);
 	}
 
@@ -457,6 +457,73 @@ class PersonController extends CController
 			'box' => $box,
 			'moreBoxes' => $boxes,
 		]);
+	}
+
+	public function actionSocial($slug, $person_id)
+	{
+		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
+		$person = Person::findOneSerialized($person_id);
+
+		if (!$person) {
+			throw new NotFoundHttpException();
+		}
+
+		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE && !$person->isPersonEditable()) {
+			throw new UnauthorizedHttpException();
+		}
+
+		$this->checkProfileState($person);
+
+		if (!empty($person->settingsMapping->instagram_info) && !empty($person->settingsMapping->instagram_info['access_token'])) {
+			$connected = true;
+			$accessToken = $person->settingsMapping->instagram_info['access_token'];
+
+			$photos = Yii::$app->cache->get('instagram_'.$accessToken);
+			if ($photos === false) {
+				$photos = InstagramHelper::getUserSelfMedia($accessToken);
+				Yii::$app->cache->set('instagram_'.$accessToken, $photos, 60);
+			}
+			if (isset($photos['meta']['code']) && $photos['meta']['code'] == 400) {
+				$connected = false;
+			}
+		} else {
+			$connected = false;
+			$photos = [];
+		}
+
+		$this->layout = '/desktop/public-2.php';
+
+		return $this->render("@app/views/desktop/person/social-view", [
+			'person' => $person,
+			'photos' => $photos,
+			'connected' => $connected,
+		]);
+	}
+
+	public function actionConnectInstagram($slug, $person_id) {
+
+		// get the category object
+		$person = Person::findOneSerialized($person_id);
+
+		if (!$person) {
+			throw new NotFoundHttpException();
+		}
+
+		if (!$person->isInfluencer()) {
+			throw new NotFoundHttpException();
+		}
+
+		if (!$person->isInfluencerEditable()) {
+			throw new UnauthorizedHttpException();
+		}
+
+		if (!$person->isCompletedProfile()) {
+			$this->redirect($person->getCompleteProfileLink());
+		}
+
+		\Yii::$app->session->set('person_id_instagram_connection', $person->short_id);
+
+		$this->redirect(InstagramHelper::getAuthorizeUrl());
 	}
 
 	public function actionStories($slug, $person_id)

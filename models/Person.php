@@ -745,6 +745,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'loved_link' => 'lovedLink',
 					'boxes_link' => 'boxesLink',
 					'stories_link' => 'storiesLink',
+					'social_link' => 'socialLink',
 					'about_link' => 'aboutLink',
 					'press_link' => 'pressLink',
 					'videos_link' => 'videosLink',
@@ -1206,6 +1207,7 @@ class Person extends CActiveRecord implements IdentityInterface
 			'loved_link' => $this->getLovedLink(),
 			'boxes_link' => $this->getBoxesLink(),
 			'stories_link' => $this->getStoriesLink(),
+			'social_link' => $this->getSocialLink(),
 			'about_link' => $this->getAboutLink(),
 			'press_link' => $this->getPressLink(),
 			'videos_link' => $this->getVideosLink(),
@@ -1547,6 +1549,11 @@ class Person extends CActiveRecord implements IdentityInterface
 		return Url::to(["/person/stories", "slug" => $this->getSlug(), 'person_id' => $this->short_id, "person_type" => $this->getPersonTypeForUrl()], true);
 	}
 
+	public function getSocialLink()
+	{
+		return Url::to(["/person/social", "slug" => $this->getSlug(), 'person_id' => $this->short_id, "person_type" => $this->getPersonTypeForUrl()], true);
+	}
+
 	public function getStoryCreateLink()
 	{
 		return Url::to(["/person/story-create", "slug" => $this->getSlug(), 'person_id' => $this->short_id, "person_type" => $this->getPersonTypeForUrl()], true);
@@ -1595,6 +1602,11 @@ class Person extends CActiveRecord implements IdentityInterface
 	public function getCreateWorkLink()
 	{
 		return Url::to(["/product/create", "slug" => $this->getSlug(), 'person_id' => $this->short_id, "person_type" => $this->getPersonTypeForUrl()], true);
+	}
+
+	public function getConnectWithInstagramLink()
+	{
+		return Url::to(["/person/connect-instagram", "slug" => $this->getSlug(), 'person_id' => $this->short_id, "person_type" => $this->getPersonTypeForUrl()], true);
 	}
 
 	public function getSlug()

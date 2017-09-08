@@ -84,6 +84,11 @@
 			"SIZE_PUBLIC_PHOTOS": "Las fotos se mostrarán en todo su tamaño para el resto.",
 			"ADD_PHOTOS": "Añadir fotos"
 		},
+		"social" : {
+			"CONNECT_YOUR_PROFILE": "Conecta tu perfil en Todevise con tu cuenta en Instagram",
+			"CONNECT_WITH_INSTAGRAM": "Conectar con Instagram",
+			"NO_CONTENT_YET": "todavía no ha compartido ningún contenido"
+		},
 		"store": {
 			"WORK_PUBLISHED": "Tu trabajo se ha publicado correctamente.",
 			"UNPUBLISHED_WORKS": "Trabajos en borrador",

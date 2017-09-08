@@ -83,6 +83,11 @@
 			"SIZE_PUBLIC_PHOTOS": "In public mode, the photos will be shown in their full size.",
 			"ADD_PHOTOS": "Add photos"
 		},
+		"social" : {
+			"CONNECT_YOUR_PROFILE": "Connect your Todevise profile with your Instagram",
+			"CONNECT_WITH_INSTAGRAM": "Connect with Instagram",
+			"NO_CONTENT_YET": "hasn't shared any content yet"
+		},
 		"store": {
 			"WORK_PUBLISHED": "Your work has been published successfully.",
 			"UNPUBLISHED_WORKS_BR": "Unpublished<br>works",

@@ -3,6 +3,7 @@
 use app\assets\desktop\deviser\GlobalAsset;
 use app\components\PersonHeader;
 use app\components\PersonMenu;
+use app\helpers\Utils;
 use app\models\Person;
 
 GlobalAsset::register($this);
@@ -29,7 +30,7 @@ $this->params['person_links_target'] = 'public_view';
 				<?= PersonMenu::widget() ?>
 			</div>
 			<div class="col-md-10">
-					<?php if (count($faq) == 0) { ?>
+					<?php if (count($person->faqMapping) == 0) { ?>
 						<div class="empty-wrapper">
 							<?php if ($person->isPersonEditable()) { ?>
 								<div><a class="red-link-btn" href="<?= $person->getFaqEditLink()?>"><span translate="person.faq.ADD_EDIT_QUESTIONS"></span></a></div>
@@ -43,19 +44,19 @@ $this->params['person_links_target'] = 'public_view';
 							<div><a class="red-link-btn" href="<?= $person->getFaqEditLink()?>"><span translate="person.faq.ADD_EDIT_QUESTIONS"></span></a></div>
 						<?php } ?>
 						<div id="accordion" role="tablist" aria-multiselectable="true">
-							<?php foreach ($faq as $key => $item) { ?>
+							<?php foreach ($person->faqMapping as $key => $item) { ?>
 							<div class="panel faq-panel">
 								<div class="panel-heading panel-heading-faq" role="tab" id="heading-faq-<?= $key ?>">
 									<h4 class="panel-title">
 										<a class="faq-title <?= ($key!=0) ? 'collapsed' : '' ?>" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-faq-<?= $key ?>" aria-expanded="<?= ($key==0) ? 'true' : 'false' ?>" aria-controls="collapse-faq-<?= $key ?>">
-											<?= $item["question"] ?>
+											<?= Utils::l($item["question"]) ?>
 										</a>
 									</h4>
 								</div>
 								<div id="collapse-faq-<?= $key ?>" class="panel-collapse collapse <?= ($key==0) ? 'in' : '' ?>" role="tabpanel"
 									 aria-labelledby="heading-faq-<?= $key ?>">
 									<div class="panel-body faq-answer">
-										<?= $item["answer"] ?>
+										<?= Utils::l($item["answer"]) ?>
 									</div>
 								</div>
 							</div>

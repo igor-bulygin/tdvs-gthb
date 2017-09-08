@@ -1,8 +1,7 @@
 #!/bin/bash
 
-folder="db_backup"
-remote_host="dev.todevise.com"
-remote_port="1021"
+remote_host="beta.todevise.com"
+remote_port="22"
 remote_user="todeviseapp"
 remote_folder="/var/www/todevise/web/current/web/uploads/"
 
