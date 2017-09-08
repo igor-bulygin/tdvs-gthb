@@ -74,8 +74,6 @@ class Category extends CActiveRecord {
 	{
 		parent::init();
 		$this->deviserProduct = [];
-
-		$this->short_id = Utils::shortID(5);
 	}
 
 	public function rules()
@@ -118,6 +116,7 @@ class Category extends CActiveRecord {
             case self::SERIALIZE_SCENARIO_PUBLIC:
                 static::$serializeFields = [
                     'id' => 'short_id',
+					'short_id',
                     'path',
                     'sizecharts',
                     'prints',
@@ -131,6 +130,7 @@ class Category extends CActiveRecord {
             case self::SERIALIZE_SCENARIO_ADMIN:
                 static::$serializeFields = [
                     'id' => 'short_id',
+					'short_id',
                     'path',
                     'sizecharts',
                     'prints',
@@ -474,6 +474,11 @@ class Category extends CActiveRecord {
 	}
 
 	public function beforeSave($insert) {
+
+		if (empty($this->short_id)) {
+			$this->short_id = Utils::shortID(5);
+		}
+
 		/*
 		 * Create empty data holders if they don't exist
 		 */
