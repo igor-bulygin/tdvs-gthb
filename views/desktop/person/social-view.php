@@ -29,7 +29,8 @@ $this->params['person_links_target'] = 'public_view';
 				<?= PersonMenu::widget() ?>
 			</div>
 			<div class="col-md-10">
-				 <?php if (empty($photos)) { ?>
+				<div class="content-store">
+				 <?php if (!$connected) { ?>
 
 					<div class="empty-wrapper">
 						<?php if ($person->isPersonEditable()) { ?>
@@ -42,11 +43,25 @@ $this->params['person_links_target'] = 'public_view';
 
 				<?php } else { ?>
 
-					 <?php foreach ($photos as $photo) { ?>
+					<div class="store-grid">
 
-						 (grid photos)
+						<div class="mesonry-row">
 
-					 <?php } ?>
+							<?php foreach ($photos['data'] as $item) { ?>
+								<div class="menu-category list-group">
+									<div class="grid">
+										<figure class="effect-zoe">
+											<a href="<?=$item['link']?>" target="_blank">
+												<img src="<?=$item['images']['standard_resolution']['url']?>" />
+											</a>
+										</figure>
+									</div>
+								</div>
+
+							 <?php } ?>
+
+						</div>
+					</div>
 
 				<?php } ?>
 			</div>
