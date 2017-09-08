@@ -698,11 +698,13 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 
 
 <!-- GRID -->
+<?php /*
 <section class="grid-wrapper">
 	<div class="container">
 		<div class="section-title">
 			Highlighted Works
 		</div>
+*/?>
 		<?php /*
 		<div>
 			<?php foreach ($moreWork as $worksGroup) { ?>
@@ -752,6 +754,8 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 			<?php } ?>
 		</div>
  		*/ ?>
+<?php /*
 	</div>
 </section>
+*/ ?>
 <!-- /GRID -->

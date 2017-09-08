@@ -130,7 +130,7 @@
         input{
 				font-family: $font-family--regular;
 				margin: 0 0 0 30px;
-                min-width: 600px;
+                min-width: 750px;//600px;
                 color: $dark_grey;
 				letter-spacing: 0.4px;
                 background-color: $background_grey;
@@ -143,7 +143,7 @@
                     min-width: 0;
                 }
                 @media (min-width: 992px) and (max-width: 1200px) { 
-                        min-width:380px;
+                        min-width: 550px;//380px;
                     }
             }
         .btn-send{
@@ -203,7 +203,7 @@
     }
 }
 .log{
-    text-transform: uppercase;
+    //text-transform: uppercase;
     color: $dark_grey;
     font-size: 16px;
     letter-spacing: 0.5px;

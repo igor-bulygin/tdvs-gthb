@@ -52,7 +52,7 @@ app\components\assets\PublicHeader2Asset::register($this);
 						</a>
 					</li>
 					<li class="log">
-						<span>/</span>
+						<span> or </span>
 					</li>
 					<li class="log">
 						<a href="<?=Url::to('/login')?>" translate="header.LOGIN"></a>

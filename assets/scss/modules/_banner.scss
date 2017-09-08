@@ -32,6 +32,6 @@
     padding-top: 8px;
 	@include border-radius(45px,45px,45px,45px);
 }
-.bs-example, .carousel-control {
+.bs-example, .carousel-control, #carousel-example-generic{
     max-height: 400px;
 }
