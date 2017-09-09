@@ -67,8 +67,16 @@ class PublicController extends CController
 
 	public function actionError()
 	{
-		//error_log("Error public", 4);
-		//die();
+		$exception = Yii::$app->errorHandler->exception;
+
+		if ($exception !== null) {
+
+			$this->layout = '/desktop/public-2.php';
+			return $this->render("error", [
+				'name' => '',
+				'message' => $exception->getMessage(),
+			]);
+		}
 	}
 
 	public function actionIndex()
