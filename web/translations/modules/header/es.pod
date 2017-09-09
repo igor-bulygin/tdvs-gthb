@@ -3,7 +3,7 @@
 		"STORIES": "@:global.STORIES",
                 "SIGNUP": "Registro",
                 "OR": " o ",
-		"LOGIN": "Loginee",
+		"LOGIN": "Login",
 		"MY_TODEVISE": "Mi todevise",
 		"ADMINISTRATION": "Administración",
 		"INVITATION": "Invitaciones",
