@@ -107,12 +107,12 @@ $config = [
 					'logFile' => '@app/runtime/logs/todevise_errors.log',
 					'logVars' => ['_GET', '_POST', '_FILES', '_COOKIE', '_SESSION', '_SERVER'],
 				],
-				[
-					'class' => 'yii\mongodb\log\MongoDbTarget',
-					'levels' => [],
-					'logCollection' => 'todeviselog',
-					'logVars' => [],
-				],
+//				[
+//					'class' => 'yii\mongodb\log\MongoDbTarget',
+//					'levels' => [],
+//					'logCollection' => 'todeviselog',
+//					'logVars' => [],
+//				],
 				[
 					'class' => 'yii\log\FileTarget',
 					'levels' => ['info'],
