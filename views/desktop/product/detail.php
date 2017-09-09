@@ -223,7 +223,8 @@ $videos = $product->getVideos();
 										</a>
 									<?php } else { ?>
 										<button type="button" class="btn btn-love pull-left" ng-class="detailProductCtrl.product.isLoved ? 'btn-love' : 'btn-love'" ng-click="detailProductCtrl.setLoved()">
-											<i class="ion-ios-heart-outline"></i>
+											<div class="heart-icon"></div>
+											<!--i class="ion-ios-heart-outline"></i-->
 										</button>
 									<?php } ?>
 									<button type="button" class="btn btn-save-box pull-right" ng-click="detailProductCtrl.setBox()">

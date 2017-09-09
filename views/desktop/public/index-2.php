@@ -63,7 +63,7 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 				<div class="sub-banner-wrapper">
 					<div class="sub-banner-text-left">
 						<h2 class="title-1"><span class="serif">The</span>store</h2>
-						<p class="tagline-1" style="letter-spacing:0.5px;">Find product that will make<br>you be part of the future</p>
+						<p class="tagline-1">Find product that will make<br>you be part of the future</p>
 					</div>
 					<div class="left-point"></div>
 				</div>
@@ -72,7 +72,7 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 				<div class="sub-banner-wrapper">
 					<div class="sub-banner-text-center">
 						<h2 class="title-2">Social<br/><span class="serif">experience</span></h2>
-						<p class="tagline-2" style="letter-spacing:0.5px;">Show the world what you like and build<br>a community around yourself</p>
+						<p class="tagline-2">Show the world what you like and build<br>a community around yourself</p>
 					</div>
 					<div class="center-point"></div>
 				</div>
@@ -81,7 +81,7 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 				<div class="sub-banner-wrapper">
 					<div class="sub-banner-text-right">
 						<h2>Affiliate<br/><span class="serif">for all</span></h2>
-						<p class="tagline-3" style="letter-spacing:0.5px">Love a product. People buy it.<br>You earn money.</p>
+						<p class="tagline-3">Love a product. People buy it.<br>You earn money.</p>
 					</div>
 					<div class="right-point"></div>
 				</div>
@@ -243,10 +243,10 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 											<div class="col-md-8">
 												<span class="boxes-text align-left"><?=$box->name?></span>
 											</div>
-											<div class="col-md-4">
+											<div class="col-md-4 no-padding">
 												<button class="btn btn-single-love btn-love-box">
 													<span class="number"><?=count($products)?></span>
-													<i class="ion-ios-heart-outline"></i>
+													<span class="heart-icon"></span>
 												</button>
 											</div>
 										</div>

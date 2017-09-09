@@ -67,6 +67,9 @@
 			float: left;
 			display: block;
 		}
+		.no-mar {
+			margin-top: 8px !important;
+		}
     }
 }
 .pad-showcase{
@@ -172,12 +175,13 @@
 	}
 }
 .boxes-text{
-	font-size: 20px;
+	font-size: 16px;//20px;
+	//line-height: 0.96;
 	font-weight: bold;
 	color: $black;
 	display: block;
 	margin-top: 8px;
 }
 .btn-love-box{
-	margin-top: -8px;
+	margin-top: -2px;//-8px;
 }

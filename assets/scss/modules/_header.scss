@@ -430,12 +430,16 @@
     top: 12px;
 	a{
 		color:$black;
+        opacity: 1 !important;
 		font-size: 11px;
 		text-transform: uppercase;
 		width: auto; /*12px;*/
 		overflow: hidden;
     	white-space: nowrap;
 	}
+    a.active {
+        color:$dark_red;
+    }
 }
 #main_menu {
     padding-left: 0;

@@ -71,15 +71,18 @@
                 top: 10px;
                 &.tagline-1{
                     padding: 55px 0 0 145px;
+                    letter-spacing: 0.5px;
                     @media (min-width:986px) and (max-width:1199px){
                         padding: 25px 11px 0 61px;
                     }
                 }
                 &.tagline-2{
                     padding: 90px 15px 0 85px;
+                    letter-spacing: 0.5px;
                 }
                 &.tagline-3{
                     padding: 41px 26px 0 112px;
+                    letter-spacing: 0.5px;
                     @media (min-width:768px) and (max-width:986px){
                         padding: 91px 29px 0;
                     }

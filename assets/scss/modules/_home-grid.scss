@@ -106,11 +106,19 @@
 			//margin-left: -2px;
             @include border-radius(0,0,0,0);
 		}
+        &.heart-icon{  
+            background: url('/imgs/black-heart.svg') 0 0 no-repeat transparent;
+            display: inline-block;
+            @include border-radius(0,0,0,0);
+        }
 		&:hover{
 			color: $dark_red!important;
 		}
         &.box:hover {
             background: url('/imgs/red-box.svg') 0 0 no-repeat transparent;
+        }
+        &.heart-icon:hover{  
+            background: url('/imgs/red-heart.svg') 0 0 no-repeat transparent;
         }
 	}
 }
