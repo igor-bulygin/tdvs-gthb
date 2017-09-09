@@ -5,6 +5,7 @@
 		this.isObject = isObject;
 		this.isEmpty = isEmpty;
 		this.diff = diff;
+		this.arrayDiff = arrayDiff;
 		this.emptyArrayToObject = emptyArrayToObject;
 		this.parseMultiLanguageEmptyFields = parseMultiLanguageEmptyFields;
 		this.has_error = has_error;
@@ -66,6 +67,25 @@
 				}
 				return newObject;
 			}
+		}
+
+		function arrayDiff(array1, array2) {
+			var newArray = [];
+			array1.forEach(function(first_element) {
+				if(!array2.find(function(second_element) {
+					return first_element == second_element;
+				})) {
+					newArray.push(first_element)
+				}
+			})
+			array2.forEach(function(first_element) {
+				if(!array1.find(function(second_element) {
+					return first_element == second_element;
+				})) {
+					newArray.push(first_element)
+				}
+			})
+			return newArray;
 		}
 
 		function has_error(form, field) {

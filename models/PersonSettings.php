@@ -6,6 +6,7 @@ namespace app\models;
  * @property string lang
  * @property PersonBankInfo $bankInfoMapping
  * @property PersonStripeInfo $stripeInfoMapping
+ * @property array $instagram_info
  *
  * @method Person getParentObject()
  */
@@ -38,6 +39,7 @@ class PersonSettings extends EmbedModel
 			'lang',
 //			'bank_info',
 			'stripe_info',
+			'instagram_info',
 		];
 	}
 
