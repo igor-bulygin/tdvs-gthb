@@ -1,8 +1,8 @@
 <?php
 
 use app\models\Category;
-use yii\helpers\Url;
 use lajax\languagepicker\widgets\LanguagePicker;
+use yii\helpers\Url;
 
 /** @var Category $category */
 
@@ -215,7 +215,7 @@ app\components\assets\PublicHeader2Asset::register($this);
 									<div class="images-wrapper">
 								<?php }
 							}
-							if (count($headerImages) > 1) { ?>
+							if (count($headerImages)) { ?>
 									</div><!--close image-wrapper-->
 							<?php } ?>
 						</div>
