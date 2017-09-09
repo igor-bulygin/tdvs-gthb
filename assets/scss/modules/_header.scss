@@ -41,7 +41,7 @@
     				letter-spacing: 0.5px;
 					padding: 8px 20px 0;
 					&:hover{
-						color:$dark_grey!important;
+						color: $dark_red!important;//$dark_grey!important;
 						text-decoration: none;
 						@include transition-property(color);
 						@include transition-duration(0.3s);
@@ -130,7 +130,7 @@
         input{
 				font-family: $font-family--regular;
 				margin: 0 0 0 30px;
-                min-width: 750px;//600px;
+                min-width: 780px;//600px;
                 color: $dark_grey;
 				letter-spacing: 0.4px;
                 background-color: $background_grey;
@@ -143,7 +143,7 @@
                     min-width: 0;
                 }
                 @media (min-width: 992px) and (max-width: 1200px) { 
-                        min-width: 550px;//380px;
+                        min-width: 580px;//380px;
                     }
             }
         .btn-send{

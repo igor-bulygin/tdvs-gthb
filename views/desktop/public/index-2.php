@@ -36,7 +36,6 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 							<img src="<?= $banner["img"] ?>" alt="<?= $banner["alt"] ?>" title="">
 						</a>
 					</div>
-				
 			<?php } ?>
 		</div>
 		<!-- Controls -->
@@ -64,7 +63,7 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 				<div class="sub-banner-wrapper">
 					<div class="sub-banner-text-left">
 						<h2 class="title-1"><span class="serif">The</span>store</h2>
-						<p class="tagline-1">Find product that will make you<br>be part of the future</p>
+						<p class="tagline-1" style="letter-spacing:0.5px;">Find product that will make<br>you be part of the future</p>
 					</div>
 					<div class="left-point"></div>
 				</div>
@@ -73,7 +72,7 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 				<div class="sub-banner-wrapper">
 					<div class="sub-banner-text-center">
 						<h2 class="title-2">Social<br/><span class="serif">experience</span></h2>
-						<p class="tagline-2">Show the world what you like and build<br>a community around yourself</p>
+						<p class="tagline-2" style="letter-spacing:0.5px;">Show the world what you like and build<br>a community around yourself</p>
 					</div>
 					<div class="center-point"></div>
 				</div>
@@ -82,7 +81,7 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 				<div class="sub-banner-wrapper">
 					<div class="sub-banner-text-right">
 						<h2>Affiliate<br/><span class="serif">for all</span></h2>
-						<p class="tagline-3">Love a product. People buy it.<br>You earn money.</p>
+						<p class="tagline-3" style="letter-spacing:0.5px">Love a product. People buy it.<br>You earn money.</p>
 					</div>
 					<div class="right-point"></div>
 				</div>
@@ -126,7 +125,7 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 						<i class="ion-ios-arrow-left"></i>
 					</a>
 				<?php } ?>
-				<div class="carousel-devisers-container <?= $totalDevisers > 3 ? 'carousel slide' : ''?>" id="carousel-devisers" data-ride="carousel">
+				<div class="carousel-devisers-container <?= $totalDevisers > 3 ? 'carousel slide' : ''?>" id="carousel-devisers" data-ride="carousel" data-interval="false">
 					<div class="<?= $totalDevisers > 3 ? 'carousel-inner' : ''?>" role="listbox">
 						<?php foreach ($devisers as $i => $group) { ?>
 					<div class="item <?= ($i==0) ? 'active' : '' ?>">
@@ -178,7 +177,7 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 						<i class="ion-ios-arrow-left"></i>
 					</a>
 				<?php } ?>
-				<div class="carousel-devisers-container <?= $totalInfluencers > 3 ? 'carousel slide' : ''?>" id="carousel-influencers" data-ride="carousel">
+				<div class="carousel-devisers-container <?= $totalInfluencers > 3 ? 'carousel slide' : ''?>" id="carousel-influencers" data-ride="carousel" data-interval="false">
 					<div class="<?= $totalInfluencers > 3 ? 'carousel-inner' : ''?>" role="listbox">
 						<?php foreach ($influencers as $i => $group) { ?>
 							<div class="item <?= ($i==0) ? 'active' : '' ?>">

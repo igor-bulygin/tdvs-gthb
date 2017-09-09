@@ -2238,7 +2238,7 @@ h3 {
       letter-spacing: 0.5px;
       padding: 8px 20px 0; }
       .navbar.secondary ul li a:hover {
-        color: #939393 !important;
+        color: #c91c39 !important;
         text-decoration: none;
         -moz-transition-property: color;
         -o-transition-property: color;
@@ -2324,7 +2324,7 @@ h3 {
   .navbar .searcher-header input {
     font-family: "Roboto Condensed", sans-serif;
     margin: 0 0 0 30px;
-    min-width: 750px;
+    min-width: 780px;
     color: #939393;
     letter-spacing: 0.4px;
     background-color: #e9e9e9;
@@ -2338,7 +2338,7 @@ h3 {
         min-width: 0; } }
     @media (min-width: 992px) and (max-width: 1200px) {
       .navbar .searcher-header input {
-        min-width: 550px; } }
+        min-width: 580px; } }
   .navbar .searcher-header .btn-send {
     color: #1C1919;
     background-color: #e9e9e9;
@@ -2881,7 +2881,7 @@ h3 {
   color: #939393; }
 
 .grid-margin {
-  margin-top: 30px; }
+  margin-top: 45px; }
 
 .showcase-wrapper {
   opacity: #e9e9e9;
@@ -2968,14 +2968,14 @@ h3 {
     color: #1C1919;
     left: 80px; }
     .carusel-container a.prev i {
-      font-size: 56px; }
+      font-size: 46px; }
   .carusel-container a.next {
     position: absolute;
     top: 120px;
     color: #1C1919;
     right: 80px; }
     .carusel-container a.next i {
-      font-size: 56px; }
+      font-size: 46px; }
   .carusel-container a:focus {
     color: #1C1919;
     text-decoration: none; }
@@ -7392,7 +7392,7 @@ input:checked + .slider:before {
       font-family: "Univers Condensed Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-size: 16px;
       color: #1C1919;
-      text-transform: uppercase;
+      text-transform: lowercase;
       display: block;
       margin: 10px 0; }
       .category-menu .categories ul li a:hover {
