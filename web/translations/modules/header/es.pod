@@ -1,7 +1,9 @@
 {
 	"header": {
 		"STORIES": "@:global.STORIES",
-		"LOGIN": "Login",
+                "SIGNUP": "Registro",
+                "OR": " o ",
+		"LOGIN": "Loginee",
 		"MY_TODEVISE": "Mi todevise",
 		"ADMINISTRATION": "Administración",
 		"INVITATION": "Invitaciones",

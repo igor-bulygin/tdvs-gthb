@@ -47,9 +47,7 @@ app\components\assets\PublicHeader2Asset::register($this);
 			<ul class="nav navbar-nav navbar-right cart-login-wrapper">
 				<?php if (Yii::$app->user->isGuest) { ?>
 					<li class="log">
-						<a href="<?=Url::to(['/signup'])?>">
-							Sign up
-						</a>
+						<a href="<?=Url::to(['/signup'])?>">Sign up</a>
 					</li>
 					<li class="log">
 						<span> or </span>
