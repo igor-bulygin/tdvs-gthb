@@ -3,9 +3,8 @@
 // ==========================================================================
 .about-wrapper{
     width: 100%;
-    padding: 40px 60px;
+    padding: 10px;
     .about-container{
-        max-width: 300px;
         margin: 0 auto;
         .title{
             font-size: 115px;
@@ -18,25 +17,21 @@
             display: inline-block;
         }
         .name{
-            @extend %ultra-condensed-white-title;
             @extend %block;
             font-size: 54px;
         }
         .location{
-            @extend %white-text;
             text-align: right;
             margin: -15px 0 0 0;
         }
         .subtitle{
-            @extend %white-text;
             font-style: italic;
             margin: 40px 0 50px;
             font-size: 16px;
         }
         .resume-header{
-            @extend %white-text;
-            border-top: 1px solid $white;
-            border-bottom: 1px solid $white;
+            border-top: 1px solid $black;
+            border-bottom: 1px solid $black;
             padding: 20px 0;
             margin: 0 0 60px;
             font-size: 16px;
@@ -44,17 +39,12 @@
         .deviser-biography{
             height: 1049px;
             overflow: scroll;
-            p{
-                @extend %white-text;          
+            p{         
                 padding: 10px 20px 10px 0;
                 font-size:14px;
             }
         }
     }
-}
-.about-bg{
-    background-color: $black;
-    padding: 0;
 }
 .about-grid{
     background-color: #404040;
@@ -85,7 +75,7 @@
         z-index: 1;
         top: 10px;
         font-size: 18px;
-        color: $white;
+        color: $black;
         @include size(30px,30px);
         text-align: center;
         padding-top: 3px;

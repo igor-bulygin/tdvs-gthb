@@ -984,24 +984,20 @@ a, a:hover, a:focus {
 .menu-store {
   padding: 40px 0; }
   .menu-store ul.menu-deviser-bottom {
-    border-top: 1px solid #9a9a9a; }
+    margin-top: 30px; }
   .menu-store ul li {
     margin: 5px 0; }
     .menu-store ul li a {
-      color: #6b6b6b;
-      text-transform: uppercase;
-      font: bold 16px "Univers Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      color: #1C1919;
+      font-family: "Roboto Condensed", sans-serif;
+      text-transform: lowercase;
       padding: 3px 0 3px 15px;
       display: block;
-      border: 1px solid transparent; }
+      padding: 0px 0 0px 15px; }
       .menu-store ul li a.active {
-        color: #1C1919;
-        background-color: #bfbfbf;
-        border: 1px solid transparent; }
+        font-weight: bold; }
       .menu-store ul li a:hover {
-        border: 1px solid #bfbfbf; }
-      .menu-store ul li a.active {
-        color: #F7284B; }
+        color: #c91c39; }
     .menu-store ul li ul.submenu-store {
       margin: 10px 30px 0 15px; }
       .menu-store ul li ul.submenu-store li {
@@ -2145,13 +2141,12 @@ h3 {
   -moz-box-shadow: 0px 0px 0px transparent;
   -ms-box-shadow: 0px 0px 0px transparent; }
 
-.banner-deviser-content .deviser-profile .deviser-data .location, .banner-deviser-content .deviser-profile .deviser-data .description, .about-wrapper .about-container .location, .about-wrapper .about-container .subtitle, .about-wrapper .about-container .resume-header, .about-wrapper .about-container .deviser-biography p {
-  font-family: "Playfair Display", Georgia, serif;
+.banner-deviser-content .deviser-profile .deviser-data .location, .banner-deviser-content .deviser-profile .deviser-data .description {
   color: #ffffff;
   font-size: 16px;
   letter-spacing: 0.7px; }
 
-.banner-deviser-content .deviser-profile .deviser-data .name, .about-wrapper .about-container .name {
+.banner-deviser-content .deviser-profile .deviser-data .name {
   font-family: "Univers Thin Ultra Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #ffffff;
   text-transform: uppercase;
@@ -4547,9 +4542,8 @@ h3 {
 
 .about-wrapper {
   width: 100%;
-  padding: 40px 60px; }
+  padding: 10px; }
   .about-wrapper .about-container {
-    max-width: 300px;
     margin: 0 auto; }
     .about-wrapper .about-container .title {
       font-size: 115px;
@@ -4569,8 +4563,8 @@ h3 {
       margin: 40px 0 50px;
       font-size: 16px; }
     .about-wrapper .about-container .resume-header {
-      border-top: 1px solid #ffffff;
-      border-bottom: 1px solid #ffffff;
+      border-top: 1px solid #1C1919;
+      border-bottom: 1px solid #1C1919;
       padding: 20px 0;
       margin: 0 0 60px;
       font-size: 16px; }
@@ -4580,10 +4574,6 @@ h3 {
       .about-wrapper .about-container .deviser-biography p {
         padding: 10px 20px 10px 0;
         font-size: 14px; }
-
-.about-bg {
-  background-color: #1C1919;
-  padding: 0; }
 
 .about-grid {
   background-color: #404040;
@@ -4615,7 +4605,7 @@ h3 {
     z-index: 1;
     top: 10px;
     font-size: 18px;
-    color: #ffffff;
+    color: #1C1919;
     width: 30px;
     height: 30px;
     text-align: center;

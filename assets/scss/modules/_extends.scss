@@ -31,13 +31,11 @@
     @include box-shadow(0px,0px,0px,transparent) 
 }
 %white-text{
-    font-family: $font-family--serif;
     color: $white;
     font-size: 16px;
     letter-spacing: 0.7px;
 }
 %grey-text{
-    font-family: $font-family--serif;
     color: $dark-grey;
     font-size: 16px;
     letter-spacing: 0.7px;
