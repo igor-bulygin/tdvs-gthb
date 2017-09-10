@@ -352,7 +352,7 @@ $videos = $product->getVideos();
 			<div class="work-profile-description-wrapper">
 						<div class="title mb-40"><span class="title-product-name" translate="product.detail.DESCRIPTION"></span></div>
 						<div class="col-sm-8 pad-product">
-							<p>
+							<p class="description-parraf">
 								<?= $product->description ?>
 							</p>
 							<?php if (count($product->mediaMapping->descriptionPhotosInfo) > 0) { ?>
@@ -373,8 +373,9 @@ $videos = $product->getVideos();
 							<div class="avatar-wrapper-side">
 									<div class="avatar">
 										<a href="<?= $person->getStoreLink() ?>">
-											<img class="cover" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getAvatarImage())->resize(128, 128) ?>" data-pin-nopin="true">
-											<span><?= $person->getName() ?></span>
+											<span>Created by</span>
+											<img class="avatar-default medium" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getAvatarImage())->resize(128, 128) ?>" data-pin-nopin="true">
+											<!--<span><?= $person->getName() ?></span>-->
 										</a>
 									</div>
 								</div>

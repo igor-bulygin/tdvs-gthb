@@ -5970,24 +5970,17 @@ h3 {
 .product-select {
   height: 26px; }
 
-.avatar-wrapper-side {
-  margin: 10px 0 0 0; }
-  .avatar-wrapper-side .avatar img {
-    width: 46px;
-    height: 46px;
-    border: 1px solid #9a9a9a;
-    float: left;
-    display: block;
-    border-radius: 90px 90px 90px 90px;
-    -webkit-border-radius: 90px 90px 90px 90px;
-    -moz-border-radius: 90px 90px 90px 90px; }
-  .avatar-wrapper-side .avatar span {
-    color: #484848;
-    font-size: 21px;
-    font-weight: bold;
-    margin: 8px;
-    float: left;
-    display: block; }
+.avatar-wrapper-side .avatar img {
+  margin: 0 auto; }
+.avatar-wrapper-side .avatar span {
+  color: #1C1919;
+  font-size: 16px;
+  text-transform: uppercase;
+  float: left;
+  width: 100%;
+  text-align: center;
+  display: block;
+  margin: 0 0 10px; }
 
 .product-data .bootstrap-select .btn {
   max-width: 175px;
@@ -6044,6 +6037,11 @@ h3 {
 .work-profile-description-wrapper .title {
   width: 100%;
   text-align: center; }
+
+.description-parraf {
+  border-right: 1px solid #979797;
+  height: 141px;
+  padding: 0 60px; }
 
 .product-description {
   background-color: #ffffff; }
