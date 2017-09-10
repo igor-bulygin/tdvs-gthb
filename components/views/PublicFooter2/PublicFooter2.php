@@ -33,7 +33,7 @@ $footerMode = 'collapsed';
 						<span>-</span>
 					</li>
 					<li>
-						<a href="<?= Url::to(["public/about-us"]) ?>">ABOUT_US</a>
+						<a href="<?= Url::to(["public/about-us"]) ?>">ABOUT US</a>
 					</li>
 				</ul>
 			</div>
