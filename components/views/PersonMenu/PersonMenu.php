@@ -14,7 +14,7 @@ $person = $this->params['person'];
 
 ?>
 
-<nav class="menu-store" data-spy="affix" data-offset-top="450" ng-controller="personMenuCtrl as personMenuCtrl">
+<nav class="menu-store" ng-controller="personMenuCtrl as personMenuCtrl">
 	<ul class="mt-0">
 		<?php if ($person->isDeviser()) { ?>
 			<li>
