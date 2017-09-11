@@ -110,7 +110,6 @@ app\components\assets\PublicHeader2Asset::register($this);
 					<li><a href="<?=Url::to(['/discover/boxes'])?>" translate="header.EXPLORE_BOXES"></a></li>
 					<li><a href="<?=Url::to(['/discover/devisers'])?>" translate="header.DISCOVER_DEVISERS"></a></li>
 					<li><a href="<?=Url::to(['/discover/influencers'])?>" translate="header.TREND_SETTERS"></a></li>
-					<li><a href="#" translate="header.PROJECTS"></a></li>
 				</ul>
 				<div class="language-picker-wrapper">
 						<?php
