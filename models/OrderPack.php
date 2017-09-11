@@ -3,7 +3,6 @@ namespace app\models;
 
 use app\helpers\Utils;
 use yii\web\BadRequestHttpException;
-use yii\web\NotFoundHttpException;
 
 /**
  *
@@ -226,10 +225,10 @@ class OrderPack extends EmbedModel
 		$product = $orderProduct->getProduct();
 		$priceStock = $product->getPriceStockItem($orderProduct->price_stock_id);
 		if (empty($priceStock)) {
-			throw new NotFoundHttpException(sprintf("Price stock item with id %s does not exists", $orderProduct->price_stock_id));
+			throw new BadRequestHttpException(sprintf("Price stock item with id %s does not exists", $orderProduct->price_stock_id));
 		}
 		if (!isset($priceStock['available']) || !$priceStock['available']) {
-			throw new NotFoundHttpException(sprintf("Price stock item with id %s is not available", $orderProduct->price_stock_id));
+			throw new BadRequestHttpException(sprintf("Price stock item with id %s is not available", $orderProduct->price_stock_id));
 		}
 
 		$found = false;

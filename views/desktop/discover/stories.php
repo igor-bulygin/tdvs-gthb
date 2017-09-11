@@ -31,7 +31,7 @@ $this->title = Yii::t('app/public','STORIES');
 						<p class="text-center" translate="discover.SEARCHING"></p>
 					</div>
 					<div ng-if="exploreStoriesCtrl.results.items.length === 0" ng-cloak>
-						<p class="text-center" translate="NO_STORIES_FOUND"></p>
+						<p class="text-center" translate="discover.stories.NO_STORIES_FOUND"></p>
 					</div>
 					<div ng-if="exploreStoriesCtrl.results.items.length != 0" ng-cloak>
 						<explore-stories-results results="exploreStoriesCtrl.results" ng-if="exploreStoriesCtrl.results.items.length > 0" ng-cloak></explore-stories-results>
