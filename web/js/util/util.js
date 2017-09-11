@@ -71,20 +71,22 @@
 
 		function arrayDiff(array1, array2) {
 			var newArray = [];
-			array1.forEach(function(first_element) {
-				if(!array2.find(function(second_element) {
-					return first_element == second_element;
-				})) {
-					newArray.push(first_element)
-				}
-			})
-			array2.forEach(function(first_element) {
-				if(!array1.find(function(second_element) {
-					return first_element == second_element;
-				})) {
-					newArray.push(first_element)
-				}
-			})
+			if(angular.isArray(array1) && angular.isArray(array2)) {
+				array1.forEach(function(first_element) {
+					if(!array2.find(function(second_element) {
+						return first_element == second_element;
+					})) {
+						newArray.push(first_element)
+					}
+				})
+				array2.forEach(function(first_element) {
+					if(!array1.find(function(second_element) {
+						return first_element == second_element;
+					})) {
+						newArray.push(first_element)
+					}
+				})
+			}
 			return newArray;
 		}
 

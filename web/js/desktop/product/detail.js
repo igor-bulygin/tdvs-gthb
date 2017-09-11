@@ -178,13 +178,17 @@
 					if(!angular.equals(valueToCompare, element.options[key]))
 						isReference = false;
 				}
-				if(isReference) {
+				if(isReference && element.available) {
 					reference = element.short_id;
 					vm.stock += element.stock;
 					prices.push(element.price);
 				}
 			});
-			vm.price = Math.min(...prices);
+			if(angular.isArray(prices) && prices.length > 0)
+				vm.price = Math.min(...prices);
+			else {
+				vm.price = '-';
+			}
 			return reference;
 		}
 
@@ -302,7 +306,6 @@
 				});
 
 				modalInstance.result.then(function () {
-					console.log("Here!");
 					getProduct();
 				});
 			}
