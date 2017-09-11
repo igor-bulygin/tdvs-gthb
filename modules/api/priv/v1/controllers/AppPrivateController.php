@@ -61,7 +61,7 @@ class AppPrivateController extends Controller
 	{
 		$message =
 			"\nPRIVATE API ACTION ".$this->requestIdentifier.": ".
-			"\n - url => " . Url::current() .
+			"\n - url => " . \Yii::$app->request->method." ". Url::current() .
 			"\n - http_authorization => " . (isset($_SERVER["HTTP_AUTHORIZATION"]) ? $_SERVER["HTTP_AUTHORIZATION"] : "") .
 			"\n - body_params => " . \Yii::$app->request->rawBody.
 			"\n";
