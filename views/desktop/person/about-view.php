@@ -72,22 +72,13 @@ foreach ($person->getAboutUrlImages() as $key => $urlImage) {
 			<div class="col-md-2">
 				<?= PersonMenu::widget() ?>
 			</div>
-			<div class="col-md-10 about-bg">
+			<div class="col-md-10 about-bg no-pad">
 				<div class="col-md-5 pad-about">
 					<div class="about-wrapper">
 						<div class="about-container">
 							<?php if ($person->isPersonEditable()) { ?>
 								<div><a class="red-link-btn top" href="<?= $person->getAboutEditLink()?>"><span translate="person.about.EDIT_ABOUT"></span></a></div>
 							<?php } ?>
-							<!--<div class="title">Abo<br>ut</div>-->
-							<div class="name-location-wrapper">
-								<div class="name">
-									<?= $person->getName() ?>
-								</div>
-								<div class="location">
-									<?= $person->personalInfoMapping->getLocationLabel() ?>
-								</div>
-							</div>
 							<div class="subtitle">
 								<?= $person->getCategoriesLabel() ?>
 							</div>

@@ -54,9 +54,7 @@
                         text-transform: capitalize;
                         font: normal 14px $font-family--secondary;
                         &:hover{
-                            color: $red;
-                            background-color: transparent;
-                            border: 1px solid transparent;
+                            color: $dark_red;
                         }
                     }
                 }

@@ -1,5 +1,12 @@
 <?php
 
+use app\assets\desktop\product\GlobalAsset;
+use app\assets\desktop\pub\Product2Asset;
+use app\helpers\Utils;
+use app\models\Country;
+use app\models\Person;
+use app\models\PersonVideo;
+
 \app\assets\desktop\GlobalAsset::register($this);
 
 $this->title = 'Todevise / Elements';
@@ -426,17 +433,18 @@ $this->title = 'Todevise / Elements';
 				<span class="title-underlined">Dropdown</span>
 			</div>
 			<div class="col-md-4">
-				<ol class="black-form-select work-field nya-bs-select" name="categories" required multiple>
-									<li nya-bs-option="category in completeProfileCtrl.categories" multiple deep-watch="true">
-										<a href="#"><span ng-bind="category.name">Oli</span> <span class="check-mark glyphicon glyphicon-ok"></span></a>
-									</li>
-									<li nya-bs-option="category in completeProfileCtrl.categories" multiple deep-watch="true">
-										<a href="#"><span ng-bind="category.name">Oli</span> <span class="check-mark glyphicon glyphicon-ok"></span></a>
-									</li>
-					<li nya-bs-option="category in completeProfileCtrl.categories" multiple deep-watch="true">
-										<a href="#"><span ng-bind="category.name">Oli</span> <span class="check-mark glyphicon glyphicon-ok"></span></a>
-									</li>
-								</ol>
+				<ol class="nya-bs-select btn-group bootstrap-select form-control product-select">
+					<li>
+						<a href="">
+							<span>Opción 1</span>
+						</a>
+					</li>
+					<li>
+						<a href="">
+							<span>Opción 2</span>
+						</a>
+					</li>
+				</ol>
 			</div>
 			<div class="col-md-4">
 				
