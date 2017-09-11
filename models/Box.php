@@ -586,10 +586,14 @@ class Box extends CActiveRecord
 		foreach ($randomBoxes as $work) {
 			$boxId[] = $work['_id'];
 		}
-		$query = new ActiveQuery(Box::className());
-		$query->where(['in', '_id', $boxId]);
-		$boxes = $query->all();
-		shuffle($boxes);
+		if ($boxId) {
+			$query = new ActiveQuery(Box::className());
+			$query->where(['in', '_id', $boxId]);
+			$boxes = $query->all();
+			shuffle($boxes);
+		} else {
+			$boxes= [];
+		}
 
 		return $boxes;
 	}
