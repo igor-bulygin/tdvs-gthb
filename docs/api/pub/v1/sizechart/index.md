@@ -1,4 +1,4 @@
-### Tags - Index (GET list)
+### Sizechart - Index (GET list)
 
 Example about how to call to Web Service to get a public list of
 SizeChart

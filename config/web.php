@@ -466,6 +466,13 @@ $config = [
 				'PATCH api3/priv/v1/story/<storyId:[^/.]*?>' => 'api3/priv/v1/story/update',
 				'DELETE api3/priv/v1/story/<storyId:[^/.]*?>' => 'api3/priv/v1/story/delete',
 
+				// Sizechart - public
+				'GET api3/pub/v1/sizechart' => 'api3/pub/v1/sizechart/index',
+				// Sizechart - private
+				'GET api3/priv/v1/sizechart' => 'api3/priv/v1/sizechart/index',
+				'POST api3/priv/v1/sizechart' => 'api3/priv/v1/sizechart/create',
+				'PATCH api3/priv/v1/sizechart/<sizechartId:[^/.]*?>' => 'api3/priv/v1/sizechart/update',
+
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/priv/v1/upload'],
 
 				// API routing (admin)
