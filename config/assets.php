@@ -20,11 +20,11 @@ return [
 
 	// The list of asset bundles to compress:
     'bundles' => [
-//         'app\assets\AppAsset',
+//    	'app\assets\AppAsset',
+//    	'app\assets\desktop\GlobalAsset',
 		'app\assets\desktop\pub\PublicCommonAsset',
-
-//         'yii\web\YiiAsset',
-        // 'yii\web\JqueryAsset',
+//		'yii\web\YiiAsset',
+//		'yii\web\JqueryAsset',
     ],
 
 	// Asset bundle for compression output:
