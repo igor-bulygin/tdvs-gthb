@@ -3,6 +3,7 @@ namespace app\models;
 
 use app\helpers\CActiveRecord;
 use app\helpers\Utils;
+use yii\base\Exception;
 use yii\mongodb\ActiveQuery;
 
 
@@ -58,14 +59,15 @@ class SizeChart extends CActiveRecord {
 			'countries',
 			'columns',
 			'values',
-			// country is a fake attribute, is need for manage a bad property inserted by a migration for a "deviser sizechart"
-			// that uses country single value instead of countries array values
-			// remove uses of this property if that migration is fixed
-			'country',
 		];
 	}
 
 	public function beforeSave($insert) {
+
+		if (empty($this->short_id)) {
+			$this->short_id = Utils::shortID(5);
+		}
+
 		/*
 		 * Create empty data holders if they don't exist
 		 */
@@ -97,6 +99,10 @@ class SizeChart extends CActiveRecord {
 			$this["metric_unit"] = "";
 		}
 
+		if ($this->type == self::TODEVISE) {
+			$this->deviser_id = null;
+		}
+
 		return parent::beforeSave($insert);
 	}
 
@@ -110,6 +116,8 @@ class SizeChart extends CActiveRecord {
 	{
 		switch ($view) {
 			case self::SERIALIZE_SCENARIO_PUBLIC:
+			case self::SERIALIZE_SCENARIO_OWNER:
+			case self::SERIALIZE_SCENARIO_ADMIN:
 				static::$serializeFields = [
 					'id' => 'short_id',
 					'name',
@@ -207,6 +215,40 @@ class SizeChart extends CActiveRecord {
 			Utils::translate($items);
 		}
 		return $items;
+	}
+
+	/**
+	 * Get one entity serialized
+	 *
+	 * @param string $id
+	 *
+	 * @return SizeChart|null
+	 * @throws Exception
+	 */
+	public static function findOneSerialized($id)
+	{
+		/** @var SizeChart $sizeChart */
+		$sizeChart = static::find()->select(self::getSelectFields())->where(["short_id" => $id])->one();
+
+		// if automatic translation is enabled
+		if (static::$translateFields) {
+			Utils::translate($sizeChart);
+		}
+		return $sizeChart;
+	}
+
+	public function rules()
+	{
+		return [
+			[$this->attributes(), 'safe'],
+			[
+				'deviser_id',
+				'required',
+				'when' => function($model) {
+					return $model->type == 1;
+				}
+			],
+		];
 	}
 
 }

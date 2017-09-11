@@ -49,16 +49,11 @@ class InstagramHelper
 
 	public static function getUserSelfMedia($accessToken)
 	{
-		$token_request_body = [
-			'access_token' => $accessToken,
-		];
+		$url = 'https://api.instagram.com/v1/users/self/media/recent/?access_token='.$accessToken;
+		Yii::info('Instagram getUserSelfMedia: '.print_r($url, true), __METHOD__);
 
-		Yii::info('Instagram getUserSelfMedia: '.print_r($token_request_body, true), __METHOD__);
-
-		$req = curl_init('https://api.instagram.com/v1/users/self/media/recent/');
+		$req = curl_init($url);
 		curl_setopt($req, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($req, CURLOPT_POST, true);
-		curl_setopt($req, CURLOPT_POSTFIELDS, http_build_query($token_request_body));
 
 		// TODO: Additional error handling
 		$respCode = curl_getinfo($req, CURLINFO_HTTP_CODE);

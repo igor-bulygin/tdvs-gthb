@@ -71,11 +71,35 @@
 			});
 		}
 
+		function getCartesian(options, prints, sizechart) {
+			var object = {};
+			for (var key in options) {
+				if(productService.tagChangesStockAndPrice(vm.tags, key)){
+					if(options[key].length > 0 && options[key][0].length > 0)
+						object[key] = options[key];
+				}
+			}
+			if(angular.isObject(prints) && !UtilService.isEmpty(prints)) {
+				object['type'] = prints.type;
+				object['size'] = prints.sizes;
+			}
+			if(angular.isObject(sizechart) && !UtilService.isEmpty(sizechart)) {
+				if(angular.isArray(sizechart.values) && sizechart.values.length > 0) {
+					object['size'] = [];
+					sizechart.values.forEach(function (element) {
+						object['size'].push(element[0]);
+					});
+				}
+			}
+			return objectProduct(object);
+		}
+
 		function createTable() {
 			var old_price_stock = angular.copy(vm.product.price_stock);
 			vm.product.price_stock = [];
 			var object = {};
 			if(!UtilService.isEmpty(vm.product.options)) {
+				/*
 				for (var key in vm.product.options) {
 					if(productService.tagChangesStockAndPrice(vm.tags, key)){
 						if(vm.product.options[key].length > 0 && vm.product.options[key][0].length > 0)
@@ -95,6 +119,8 @@
 					}
 				}
 				var cartesian = objectProduct(object);
+				*/
+				var cartesian = getCartesian(vm.product.options, vm.product.prints, vm.product.sizechart)
 				if(!UtilService.isEmpty(cartesian[0])) {
 					for (var i = 0; i < cartesian.length; i++) {
 						addEmptyPriceStock(cartesian[i])
@@ -118,7 +144,7 @@
 			} else {
 				addEmptyPriceStock([]);
 			}
-			productService.setOldPriceStockPrices(old_price_stock, vm.product.price_stock);
+			productService.setOldPriceStockPrices(old_price_stock, vm.product.price_stock, cartesian, vm.old_cartesian);
 			parseTitles();
 		}
 
@@ -158,6 +184,7 @@
 		$scope.$watch('productPriceStockCtrl.product.prints', function(newValue, oldValue) {
 			if(!vm.fromedit) {
 				if(angular.isObject(newValue) || (!newValue && angular.isObject(oldValue))) {
+					vm.old_cartesian = getCartesian(vm.product.options, oldValue, vm.product.sizechart);
 					createTable();
 				}
 			}
@@ -166,6 +193,7 @@
 		$scope.$watch('productPriceStockCtrl.product.options', function(newValue, oldValue) {
 			if(!vm.fromedit || (vm.fromedit && vm.product.price_stock.length === 0)) {
 				if(angular.isObject(newValue) && !UtilService.isEmpty(newValue)) {
+					vm.old_cartesian = getCartesian(oldValue, vm.product.prints, vm.product.sizechart);
 					createTable();
 				}
 			}
@@ -174,6 +202,7 @@
 		$scope.$watch('productPriceStockCtrl.product.sizechart', function(newValue, oldValue) {
 			if(!vm.fromedit) {
 				if(angular.isObject(newValue)) {
+					vm.old_cartesian = getCartesian(vm.product.options, vm.product.prints, oldValue);
 					createTable();
 				}
 			}
@@ -192,6 +221,7 @@
 				var values = productService.searchPrintSizechartsOnCategory(vm.categories, element);
 				if(!values[0] && !values[1]) {
 					if(!vm.fromedit) {
+						vm.old_cartesian = getCartesian(vm.product.options, vm.product.prints, vm.product.sizechart);
 						createTable();
 					}
 				}
@@ -204,6 +234,7 @@
 			})
 			if(!vm.fromedit) {
 				delete vm.product.price_stock;
+				vm.old_cartesian = getCartesian(vm.product.options, vm.product.prints, vm.product.sizechart);
 				createTable();
 			}
 		});

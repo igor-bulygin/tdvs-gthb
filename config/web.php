@@ -63,9 +63,9 @@ $config = [
 		],
 
 		//Errors
-//		'errorHandler' => [
-//			'errorAction' => 'public/error'
-//		],
+		'errorHandler' => [
+			'errorAction' => 'public/error'
+		],
 
 		//i18n
 		'i18n' => [
@@ -102,45 +102,59 @@ $config = [
 
 		//Log
 		'log' => [
-			'traceLevel' => YII_DEBUG ? 3 : 0,
+			'flushInterval' => 100,
+			'traceLevel' => YII_DEBUG ? 0 : 0,
 			'targets' => [
-				[
-					'class' => 'yii\log\FileTarget',
-					'levels' => ['error'],
-					'logFile' => '@app/runtime/logs/todevise_errors.log',
-					'logVars' => ['_GET', '_POST', '_FILES', '_COOKIE', '_SESSION', '_SERVER'],
-				],
-				[
-					'class' => 'yii\mongodb\log\MongoDbTarget',
-					'levels' => [],
-					'logCollection' => 'todeviselog',
-					'logVars' => [],
-				],
-				[
-					'class' => 'yii\log\FileTarget',
-					'levels' => ['info'],
-					'categories' => ['app\modules\api\*'],
-					'logFile' => '@app/runtime/logs/todevise_api.log',
-					'logVars' => [],
-				],
-				[
-					'class' => 'yii\log\FileTarget',
-					'levels' => ['info'],
-					'categories' => ['app\controllers\Stripe*', 'app\helpers\Stripe*', 'Stripe'],
-					'logFile' => '@app/runtime/logs/todevise_stripe.log',
-					'logVars' => ['_GET', '_POST'],
-				],
-				[
+				'todevise_db_error' =>[
 					'class' => 'yii\log\EmailTarget',
-					'levels' => ['error'],
-					'categories' => ['yii\db\*'],
+					'levels' => ['error', 'warning'],
+					'categories' => ['yii\db\*', 'yii\mongodb\*'],
 					'message' => [
 						'from' => ['info@todevise.com'],
 						'to' => ['josevazquezviader@gmail.com'],
 						'subject' => 'TODEVISE - Database error',
 					],
 				],
-			]
+				'todevise_log' => [
+					'class' => 'yii\mongodb\log\MongoDbTarget',
+					'levels' => ['error', 'warning'],
+					'logCollection' => 'todeviselog',
+					'logVars' => [],
+				],
+				'todevise_errors' =>[
+					'class' => 'yii\log\FileTarget',
+					'levels' => ['error', 'warning'],
+					'logFile' => '@app/runtime/logs/todevise_errors.log',
+					'logVars' => [],
+				],
+				'todevise_errors_detail' =>[
+					'class' => 'yii\log\FileTarget',
+					'levels' => ['error', 'warning'],
+					'logFile' => '@app/runtime/logs/todevise_errors_detail.log',
+					'logVars' => ['_GET', '_POST', '_FILES', '_COOKIE', '_SESSION', '_SERVER'],
+				],
+				'todevise_api' => [
+					'class' => 'yii\log\FileTarget',
+					'levels' => ['info'],
+					'categories' => ['app\modules\api\*'],
+					'logFile' => '@app/runtime/logs/todevise_api.log',
+					'logVars' => [],
+				],
+				'todevise_api_errors' => [
+					'class' => 'yii\log\FileTarget',
+					'levels' => ['error', 'warning'],
+					'categories' => ['app\modules\api\*'],
+					'logFile' => '@app/runtime/logs/todevise_api_errors.log',
+					'logVars' => [],
+				],
+				'todevise_stripe' => [
+					'class' => 'yii\log\FileTarget',
+					'levels' => ['info'],
+					'categories' => ['app\controllers\Stripe*', 'app\helpers\Stripe*', 'Stripe'],
+					'logFile' => '@app/runtime/logs/todevise_stripe.log',
+					'logVars' => ['_GET', '_POST'],
+				],
+			],
 		],
 
 		'mailer' => [
@@ -454,6 +468,13 @@ $config = [
 				'POST api3/priv/v1/story' => 'api3/priv/v1/story/create',
 				'PATCH api3/priv/v1/story/<storyId:[^/.]*?>' => 'api3/priv/v1/story/update',
 				'DELETE api3/priv/v1/story/<storyId:[^/.]*?>' => 'api3/priv/v1/story/delete',
+
+				// Sizechart - public
+				'GET api3/pub/v1/sizechart' => 'api3/pub/v1/sizechart/index',
+				// Sizechart - private
+				'GET api3/priv/v1/sizechart' => 'api3/priv/v1/sizechart/index',
+				'POST api3/priv/v1/sizechart' => 'api3/priv/v1/sizechart/create',
+				'PATCH api3/priv/v1/sizechart/<sizechartId:[^/.]*?>' => 'api3/priv/v1/sizechart/update',
 
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/priv/v1/upload'],
 

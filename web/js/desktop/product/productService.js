@@ -150,79 +150,163 @@
 			}
 		}
 
-		function setOldPriceStockPrices(oldPriceStock, newPriceStock) {
+		function setOldPriceStockPrices(oldPriceStock, newPriceStock, cartesian, old_cartesian) {
 			if(angular.isArray(oldPriceStock) && angular.isArray(newPriceStock) && 
 				oldPriceStock.length > 0 && newPriceStock.length > 0) {
-				newPriceStock.forEach(function (price_stock_element) {
+
+				newPriceStock.forEach(function (new_price_stock_element) {
 					//original_artwork_case
-					if(price_stock_element.original_artwork) {
+					if(new_price_stock_element.original_artwork) {
 						var original_artwork_element = oldPriceStock.find(function(element) {
 							return element.original_artwork;
-						})
+						});
 						if(original_artwork_element)
-							copyProductProperties(original_artwork_element, price_stock_element);
-					}
-					//all_other_cases
-					oldPriceStock.forEach(function (old_price_stock_element) {
-						if(compareTwoPriceStockOptions(old_price_stock_element, price_stock_element))
-							copyProductProperties(old_price_stock_element, price_stock_element);
-					})
-				})
-			}
+							copyProductProperties(original_artwork_element, new_price_stock_element);
+					} else //all_other_cases
+					{
+						oldPriceStock.forEach(function(old_price_stock_element) {
+							var old_properties_count = Object.keys(old_price_stock_element.options).length;
+							var new_properties_count = Object.keys(new_price_stock_element.options).length;
+							var diff = new_properties_count - old_properties_count;
+							var option_obj;
+							switch(diff) {
+								//less options than before
+								case -1:
+									//option was in oldPriceStock, but is not present in newPriceStock
+									//which option and value was erased?
+									option_obj = getDiffOptionAndValue(old_price_stock_element, new_price_stock_element);
+									//recreate new_options and compare
+									var new_options = Object.assign(angular.copy(new_price_stock_element.options), option_obj);
+									if(angular.equals(new_options, old_price_stock_element.options))
+										copyProductProperties(old_price_stock_element, new_price_stock_element);
+									break;
+								//same number of options
+								case 0:
+									//2 cases:
+										//when cartesian has more or less options
+										if(cartesian.length != old_cartesian.length) {
+										//which value in which option was added or deleted?
+											var old_element = findOptionInPriceStock(new_price_stock_element.options, oldPriceStock);
+											if(UtilService.isObject(old_element) && !UtilService.isEmpty(old_element)) {
+												copyProductProperties(old_element, new_price_stock_element);
+											}
+										}
+										else {
+											//when an option was added inside an option i.e.: color: ["red"] -> ["red, blue"]
+											//when an option was deleted inside an option i.e.: color: ["red, blue"] -> ["red"]
+											//first, find other elements with same options
+											var old_element = findOptionInPriceStock(new_price_stock_element.options, oldPriceStock);
+											if(UtilService.isObject(old_element) && !UtilService.isEmpty(old_element)) {
+												copyProductProperties(old_element, new_price_stock_element);
+											}
+											//When the element was not found, find what option was modified
+											else {
+												//get the cartesians difference
+												var diff_option = getDiffCartesians(cartesian, old_cartesian);
+												var key = diff_option['key'];
+												var value;
+												if(UtilService.isObject(diff_option) && angular.isArray(diff_option['value']) && diff_option['value'].length > 0)
+													value = diff_option['value'][0];
+												if(value) {
+													//find position of the element added/deleted
+													var pos = new_price_stock_element.options[key].indexOf(value);
+													var element_to_find = angular.copy(new_price_stock_element);
+													//when option was deleted
+													if(pos < 0) {
+														//add option to new_price_stock_element.options[diff_option[key]]
+														element_to_find.options[key].push(value);
+													}
+													//when option was added
+													else {
+														//substract option in new_price_stock_element.options[diff_option[key]] knowning that pos has the position
+														element_to_find.options[key].splice(pos, 1);
+													}
+													//find in oldPriceStock such option
+													var old_element = findOptionInPriceStock(element_to_find.options, oldPriceStock);
+													//copy values
+													if(UtilService.isObject(old_element) && !UtilService.isEmpty(old_element)) {
+														copyProductProperties(old_element, new_price_stock_element);
+													}
+												}
+											}
+										}
+
+									break;
+								//more options than before
+								case 1:
+									//option wasnt in oldPriceStock, but is now in newPriceStock
+									//which option and value was added?
+									option_obj = getDiffOptionAndValue(new_price_stock_element, old_price_stock_element);
+									//recreate old options and compare
+									var old_options = Object.assign(angular.copy(old_price_stock_element.options), option_obj);
+									if(angular.equals(old_options, new_price_stock_element.options))
+										copyProductProperties(old_price_stock_element, new_price_stock_element);
+									break;
+							} //end switch
+						}) //end iteration oldPriceStock
+					} //end else
+				}) //end newPriceStock iteration
+			} //end if
 		}
 
-		//returns true if parameters are same elements (or similar enough)
-		function compareTwoPriceStockOptions(oldPriceStock, newPriceStock) {
-			var old_properties_count = Object.keys(oldPriceStock.options).length;
-			var new_properties_count = Object.keys(newPriceStock.options).length;
-			if(!UtilService.isEmpty(oldPriceStock.options) && !UtilService.isEmpty(newPriceStock.options)) {
-				//iterate in old options keys and look for each key in new options
-				for (var key in oldPriceStock.options) {
-					var compare_count = 0;
-					if(newPriceStock.options.hasOwnProperty(key)) { //if new price options have old property
-						if(newPriceStock.options[key].length > 0) { //and it is not empty
-							//and they are really an array and not a string
-							if(angular.isArray(newPriceStock.options[key]) && angular.isArray(oldPriceStock.options[key])) {
-								if(oldPriceStock.options[key].length === newPriceStock.options[key].length) { //if option have same length than the old one
-									if(!angular.equals(oldPriceStock.options[key], newPriceStock.options[key])) { //if its not equal to old one its not the same element
-										return false;
-									}
-								}
-								//if new product has more options than old one then maybe user added one more option. 
-								//Example: "color": ["black", "red"] goes to ["black", "red", "white"]
-								if(newPriceStock.options[key].length > oldPriceStock.options[key].length) { 
-									var count_same_options = 0;
-									newPriceStock.options[key].forEach(function (option) {
-										var option_exists_previously = oldPriceStock.options[key].find(function(element) {
-											return angular.equals(option, element);
-										});
-										if(option_exists_previously)
-											count_same_options++;
-									})
-									if(count_same_options === 0 || count_same_options < newPriceStock.options[key].length-1) {
-										return false;
-									}
-								}
-								//if there is a new option that has less values than the old one, then the options are not the same
-								if(newPriceStock.options[key].length < oldPriceStock.options[key].length) {
-									return false;
-								}
-							} else if(key === 'size' && !angular.equals(oldPriceStock.options[key], newPriceStock.options[key])) {
-								return false;
-							}
-						//if options satisfy previous conditions, then we add it to compare_count
-						compare_count++;
-						}
-					}
-					else {
-						return false;
-					}
+		//compares two options objects and returns diff key and value
+		function getDiffOptionAndValue(firstElement, secondElement) {
+			var new_object = {};
+			for(var key in firstElement.options) {
+				if(!secondElement.options[key]) {
+					new_object[key] = angular.copy(firstElement.options[key]);
+					return new_object;
 				}
-				if(compare_count >= new_properties_count-1) {
-					return true;
-				}
-				return false;
 			}
+			return undefined;
+		}
+
+		//get which option and value was added or deleted
+		function getDiffCartesians(firstCartesian, secondCartesian) {
+			var old_cartesian_option, new_cartesian_option;
+			firstCartesian.forEach(function(first_element_cartesian) {
+				var second_element_cartesian = secondCartesian.find(function(element) {
+					return angular.equals(first_element_cartesian, element);
+				});
+				if(!second_element_cartesian)
+					old_cartesian_option = angular.copy(first_element_cartesian);
+			})
+			secondCartesian.forEach(function(second_element_cartesian) {
+				var first_element_cartesian = firstCartesian.find(function(element) {
+					return angular.equals(second_element_cartesian, element);
+				});
+				if(!first_element_cartesian)
+					new_cartesian_option = angular.copy(second_element_cartesian);
+			})
+			var object = {};
+			for(var key in old_cartesian_option) {
+				if(!angular.equals(old_cartesian_option[key], new_cartesian_option[key])) {
+					object = {
+						key: key,
+						value: UtilService.arrayDiff(old_cartesian_option[key], new_cartesian_option[key])
+					}
+				}
+
+			}
+			return object;
+		}
+
+		function findOptionInPriceStock(options, priceStock) {
+			//we have to sort the arrays, Kate
+			var sorted_options = angular.copy(options);
+			for(var key in sorted_options) {
+				if(angular.isArray(sorted_options[key]))
+					sorted_options[key].sort();
+			}
+			var priceStockElement = priceStock.find(function (element) {
+				var sorted_element = angular.copy(element);
+				for(var key in sorted_element.options) {
+					if(angular.isArray(sorted_element.options[key]))
+						sorted_element.options[key].sort();
+				}
+				return angular.equals(sorted_element.options, sorted_options);
+			});
+			return priceStockElement;
 		}
 
 		function copyProductProperties(oldProduct, newProduct) {
