@@ -157,6 +157,7 @@
 
 		function getReferenceId(options_selected) {
 			vm.stock = 0;
+			vm.quantity = 1;
 			var prices = [];
 			var options = angular.copy(options_selected);
 			var reference;
