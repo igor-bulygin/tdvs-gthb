@@ -18,16 +18,10 @@
 		var select_order = ['size', 'color', 'select']
 
 		function init() {
-			getProductId();
 			getTags();
 		}
 
 		init();
-
-		function getProductId() {
-			var url = $location.absUrl().split("#")[0].split("/");
-			vm.product_id = url[url.length - 1];
-		}
 
 		function getProduct() {
 			function onGetProductSuccess(data) {
@@ -52,7 +46,7 @@
 			}
 
 			productDataService.getProductPub({
-				idProduct: vm.product_id
+				idProduct: product.id
 			}, onGetProductSuccess, UtilService.onError);
 		}
 
@@ -264,8 +258,12 @@
 				$window.location.href = currentHost() + '/cart';
 			}
 			function onSaveProductError(err) {
+				//if cart doesn't exist
 				if(err.status === 404) {
 					cartDataService.createCart(onCreateCartSuccess, onCreateCartError);
+				}
+				else {
+					console.log(err);
 				}
 			}
 			cartDataService.addProduct({
