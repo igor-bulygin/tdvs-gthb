@@ -6,6 +6,7 @@ use app\helpers\Utils;
 use app\models\Country;
 use app\models\Person;
 use app\models\PersonVideo;
+use yii\helpers\Json;
 
 GlobalAsset::register($this);
 
@@ -19,6 +20,8 @@ $this->title = Yii::t('app/public',
 );
 $productImages = $product->getUrlGalleryImages();
 $videos = $product->getVideos();
+
+$this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEAD, 'product-var-script');
 
 ?>
 

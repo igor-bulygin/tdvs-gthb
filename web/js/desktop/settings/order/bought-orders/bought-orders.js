@@ -17,7 +17,7 @@
 						order.total= order.total + pack.pack_price + pack.shipping_price + ((pack.pack_price*pack.pack_percentage_fee)/100);
 					});
 					vm.ordersTotalPrice=vm.ordersTotalPrice + order.total;
-					cartService.parseTags(order);
+					cartService.parseTags(order, vm.tags);
 				});
 		}
 
@@ -66,7 +66,8 @@
 		controller: controller,
 		controllerAs: 'boughtOrdersCtrl',
 		bindings: {
-			orders: '<'
+			orders: '<',
+			tags: '<'
 		}
 	}
 
