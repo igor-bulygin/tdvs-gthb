@@ -170,6 +170,9 @@
         }
     }
     .cart-item{
+        a {
+            padding-right: 5px;
+        }
         i{
             color:$white;
             font-size: 20px;
@@ -447,4 +450,16 @@
 }
 #header_logo {
     width: 110px;
+}
+.cart-icon{  
+    background: url('/imgs/white-cart.svg') 0 0 no-repeat transparent;
+    display: block;
+    width: 23px;
+    height: 23px;
+    padding-top: 14px;
+    padding-bottom: 15px;
+    @include border-radius(0,0,0,0);
+}
+.cart-icon:hover{  
+    background: url('/imgs/red-cart.svg') 0 0 no-repeat transparent;
 }

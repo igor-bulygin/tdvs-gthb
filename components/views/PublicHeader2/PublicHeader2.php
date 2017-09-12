@@ -47,10 +47,10 @@ app\components\assets\PublicHeader2Asset::register($this);
 			<ul class="nav navbar-nav navbar-right cart-login-wrapper">
 				<?php if (Yii::$app->user->isGuest) { ?>
 					<li class="log">
-						<a href="<?=Url::to(['/signup'])?>">Sign up</a>
+						<a href="<?=Url::to(['/signup'])?>" translate="header.SIGNUP"></a>
 					</li>
 					<li class="log">
-						<span> or </span>
+						<span translate="header.OR"></span>
 					</li>
 					<li class="log">
 						<a href="<?=Url::to('/login')?>" translate="header.LOGIN"></a>
@@ -85,7 +85,8 @@ app\components\assets\PublicHeader2Asset::register($this);
 				<?php } ?>
 				<li class="cart-item">
 					<a href="<?=Url::to(['/cart'])?>">
-						<i class="ion-ios-cart active"></i>
+						<!--i class="ion-ios-cart active"></i-->
+						<span class="icons-hover cart-icon"></span>
 					</a>
 				</li>
 			</ul>

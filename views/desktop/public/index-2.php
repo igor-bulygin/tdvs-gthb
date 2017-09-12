@@ -682,7 +682,7 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 							<a href="<?= $work->getViewLink()?>">
 								<figcaption>
 									<p class="instauser">
-										<?= \yii\helpers\StringHelper::truncate(Utils::l($work->name), 34, '…') ?>
+										<?= \yii\helpers\StringHelper::truncate(Utils::l($work->name), 15, '…') ?>
 									</p>
 									<p class="price">€ <?= $work->getMinimumPrice() ?></p>
 								</figcaption>
