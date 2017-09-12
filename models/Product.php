@@ -1255,14 +1255,19 @@ class Product extends CActiveRecord {
 
 		$randomWorks = Yii::$app->mongodb->getCollection('product')->aggregate($conditions);
 
-		$worksId = [];
+		$workIds = [];
 		foreach ($randomWorks as $work) {
-			$worksId[] = $work['_id'];
+			$workIds[] = $work['_id'];
 		}
-		$query = new ActiveQuery(Product::className());
-		$query->where(['in', '_id', $worksId]);
-		$works = $query->all();
-		shuffle($works);
+
+		if ($workIds) {
+			$query = new ActiveQuery(Product::className());
+			$query->where(['in', '_id', $workIds]);
+			$works = $query->all();
+			shuffle($works);
+		} else {
+			$works = [];
+		}
 
 		return $works;
 	}

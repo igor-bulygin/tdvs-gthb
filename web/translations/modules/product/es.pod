@@ -1,6 +1,7 @@
 {
 	"product": {
 		"detail": {
+			"PRINT_SIZE": "Tamaño de impresión",
 			"CHART_SIZES": "Tallas disponibles",
 			"IN_STOCK": " En stock",
 			"QUANTITY": "Cantidad",

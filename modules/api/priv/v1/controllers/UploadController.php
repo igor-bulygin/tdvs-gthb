@@ -20,7 +20,6 @@ class UploadController extends AppPrivateController
 	 */
 	public function actionCreate()
 	{
-		Yii::warning("\n\n\n uploadController->actionCreate init");
 		/** @var Person $person */
 		$person = $this->getPerson();
 
@@ -34,7 +33,6 @@ class UploadController extends AppPrivateController
 		if ($uploadForm->upload()) {
 			// file is uploaded successfully
 			// return information needed to client side
-			Yii::warning("uploadController-> end\n\n\n");
 			return $uploadForm;
 		} else {
 			Yii::$app->response->setStatusCode(400); // Bad Request

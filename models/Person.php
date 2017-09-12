@@ -1703,10 +1703,14 @@ class Person extends CActiveRecord implements IdentityInterface
 		}
 
 
-		$query = new ActiveQuery(Person::className());
-		$query->where(['in', 'short_id', $personIds]);
-		$persons = $query->all();
-		shuffle($persons);
+		if ($personIds) {
+			$query = new ActiveQuery(Person::className());
+			$query->where(['in', 'short_id', $personIds]);
+			$persons = $query->all();
+			shuffle($persons);
+		} else {
+			$persons = [];
+		}
 
 		return $persons;
 	}
@@ -1765,11 +1769,14 @@ class Person extends CActiveRecord implements IdentityInterface
 			$personIds[] = $influencer['short_id'];
 		}
 
-
-		$query = new ActiveQuery(Person::className());
-		$query->where(['in', 'short_id', $personIds]);
-		$persons = $query->all();
-		shuffle($persons);
+		if ($personIds) {
+			$query = new ActiveQuery(Person::className());
+			$query->where(['in', 'short_id', $personIds]);
+			$persons = $query->all();
+			shuffle($persons);
+		} else {
+			$persons = [];
+		}
 
 		return $persons;
 	}

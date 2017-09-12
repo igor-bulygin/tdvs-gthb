@@ -32,8 +32,11 @@
 		function getProduct() {
 			function onGetProductSuccess(data) {
 				vm.product = angular.copy(data);
+				vm.view_sizechart = true;
+				vm.require_options = true;
 				//checks
 				setOriginalArtwork(vm.product);
+				setPrints(vm.product);
 				vm.minimum_price = getMinimumPrice(vm.product.price_stock);
 				vm.total_stock = getTotalStock(vm.product.price_stock);
 				vm.stock = vm.total_stock;
@@ -157,7 +160,7 @@
 			var prices = [];
 			var options = angular.copy(options_selected);
 			var reference;
-			if(options['size']) {
+			if(options['size'] && !UtilService.isObject(options['size'])) {
 				options['size'] = getSizeText(options['size']);
 			}
 			for (var key in options) {
@@ -178,13 +181,17 @@
 					if(!angular.equals(valueToCompare, element.options[key]))
 						isReference = false;
 				}
-				if(isReference) {
+				if(isReference && element.available) {
 					reference = element.short_id;
 					vm.stock += element.stock;
 					prices.push(element.price);
 				}
 			});
-			vm.price = Math.min(...prices);
+			if(angular.isArray(prices) && prices.length > 0)
+				vm.price = Math.min(...prices);
+			else {
+				vm.price = '-';
+			}
 			return reference;
 		}
 
@@ -196,6 +203,32 @@
 				}
 				else if(vm.quantity < vm.stock) {
 					vm.quantity += value;
+				}
+			}
+		}
+
+		function setPrints(product) {
+			if(UtilService.isObject(product.prints)) {
+				vm.view_sizechart = false;
+				if(angular.isArray(product.prints.sizes) && product.prints.sizes.length > 0) {
+					var object = {
+						name: 'product.detail.PRINT_SIZE',
+						id: 'size',
+						change_reference: true,
+						required: true};
+					object['values'] = product.prints.sizes.map(function(element) {
+						var object = {};
+						if(element.width && element.length && element.metric_unit) {
+							object.text = element.width + 'x' + element.length + element.metric_unit;
+							object.value = {
+								width: element.width,
+								length: element.length,
+								metric_unit: element.metric_unit
+							}
+						}
+						return object;
+					});
+					vm.product.options.push(object);
 				}
 			}
 		}
@@ -213,9 +246,11 @@
 			if(value == true) {
 				vm.stock = vm.product.price_stock[vm.original_pos].stock;
 				vm.price = vm.product.price_stock[vm.original_pos].price;
+				vm.require_options = false;
 			} else {
 				vm.stock = vm.total_stock;
 				vm.price = vm.minimum_price;
+				vm.require_options = true;
 			}
 		}
 
@@ -302,7 +337,6 @@
 				});
 
 				modalInstance.result.then(function () {
-					console.log("Here!");
 					getProduct();
 				});
 			}

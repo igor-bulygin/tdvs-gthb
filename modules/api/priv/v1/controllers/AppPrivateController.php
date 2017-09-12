@@ -13,9 +13,13 @@ use yii\web\HttpException;
 
 class AppPrivateController extends Controller
 {
+	protected $requestIdentifier = null;
+
 	public function init()
 	{
 		parent::init();
+
+		$this->requestIdentifier = \Yii::$app->security->generateRandomString();
 
 		\Yii::$app->user->enableSession = false; // restfull must be stateless => no session
 		\Yii::$app->user->loginUrl = null; 		 // force 403 response
@@ -56,10 +60,11 @@ class AppPrivateController extends Controller
 	public function beforeAction($action)
 	{
 		$message =
-			"\nPRIVATE API ACTION (before)".
-			"\n - url => " . Url::current() .
+			"\nPRIVATE API ACTION ".$this->requestIdentifier.": ".
+			"\n - url => " . \Yii::$app->request->method." ". Url::current() .
 			"\n - http_authorization => " . (isset($_SERVER["HTTP_AUTHORIZATION"]) ? $_SERVER["HTTP_AUTHORIZATION"] : "") .
-			"\n - body_params => " . \Yii::$app->request->rawBody;
+			"\n - body_params => " . \Yii::$app->request->rawBody.
+			"\n";
 		\Yii::info($message, __METHOD__);
 
 		return parent::beforeAction($action);
@@ -68,11 +73,9 @@ class AppPrivateController extends Controller
 	public function afterAction($action, $result)
 	{
 		$message =
-			"\nPRIVATE API ACTION (after)".
-			"\n - url => " . Url::current() .
-			"\n - http_authorization => " . (isset($_SERVER["HTTP_AUTHORIZATION"]) ? $_SERVER["HTTP_AUTHORIZATION"] : "") .
-			"\n - body_params => " . \Yii::$app->request->rawBody.
-			"\n - status_code => " . \Yii::$app->response->statusCode;
+			"\nPRIVATE API ACTION ".$this->requestIdentifier.": ".
+			"\n - status_code => " . \Yii::$app->response->statusCode.
+			"\n";
 		\Yii::info($message, __METHOD__);
 
 		return parent::afterAction($action, $result);

@@ -137,11 +137,11 @@ $videos = $product->getVideos();
 									<div class="form-horizontal">
 										<div class="form-group">
 											<div class="row-size expand" ng-repeat="option in detailProductCtrl.product.options | orderBy:[detailProductCtrl.selectComparator]">
-												<label class="col-sm-3 control-label product-label"><span class="atr" ng-bind="option.name"></span></label>
+												<label class="col-sm-3 control-label product-label"><span class="atr" ng-bind="option.name | translate"></span></label>
 												<div class="col-sm-9" ng-if="option.values.length > 1 && option.change_reference" ng-cloak>
 													<div class="row">
 														<div class="col-sm-8">
-															<ol name="{{option.id}}" class="nya-bs-select btn-group bootstrap-select form-control product-select ng-class:{'error-input': detailProductCtrl.has_error(detailProductCtrl.tagsForm, detailProductCtrl.tagsForm[option.id])}" ng-model="detailProductCtrl.option_selected[option.id]" ng-change="detailProductCtrl.optionsChanged(option.id, detailProductCtrl.option_selected[option.id])" required>
+															<ol name="{{option.id}}" class="nya-bs-select btn-group bootstrap-select form-control product-select ng-class:{'error-input': detailProductCtrl.has_error(detailProductCtrl.tagsForm, detailProductCtrl.tagsForm[option.id])}" ng-model="detailProductCtrl.option_selected[option.id]" ng-change="detailProductCtrl.optionsChanged(option.id, detailProductCtrl.option_selected[option.id])" ng-required="detailProductCtrl.require_options" ng-cloak>
 																<li nya-bs-option="value in option.values" data-value="value.value" ng-class="{'disabled': value.disabled}">
 																	<a href="">
 																		<span ng-bind="value.text"></span>
@@ -150,7 +150,7 @@ $videos = $product->getVideos();
 															</ol>
 														</div>
 														<div class="col-sm-4 no-pad">
-															<a class="view-chart-size" href="#" href="#" data-toggle="modal" data-target="#chartModal" ng-if="option.id==='size'"><span translate="product.detail.VIEW_SIZE_CHART"></span></a>
+															<a class="view-chart-size" href="#" href="#" data-toggle="modal" data-target="#chartModal" ng-if="option.id==='size' && detailProductCtrl.view_sizechart"><span translate="product.detail.VIEW_SIZE_CHART"></span></a>
 														</div>
 													</div>
 												</div>

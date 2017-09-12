@@ -422,7 +422,7 @@ class ApiController extends CController {
 				$category = Category::findOne(["short_id" => $node["short_id"]]);
 			} else {
 				$category = new Category();
-				$node["short_id"] = $category->short_id;
+				$node["short_id"] = null;
 			}
 
 			/* @var $category \app\models\Category */

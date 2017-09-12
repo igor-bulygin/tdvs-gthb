@@ -74,8 +74,6 @@ class Category extends CActiveRecord {
 	{
 		parent::init();
 		$this->deviserProduct = [];
-
-		$this->short_id = Utils::shortID(5);
 	}
 
 	public function rules()
@@ -118,6 +116,7 @@ class Category extends CActiveRecord {
             case self::SERIALIZE_SCENARIO_PUBLIC:
                 static::$serializeFields = [
                     'id' => 'short_id',
+					'short_id',
                     'path',
                     'sizecharts',
                     'prints',
@@ -131,6 +130,7 @@ class Category extends CActiveRecord {
             case self::SERIALIZE_SCENARIO_ADMIN:
                 static::$serializeFields = [
                     'id' => 'short_id',
+					'short_id',
                     'path',
                     'sizecharts',
                     'prints',
@@ -312,15 +312,18 @@ class Category extends CActiveRecord {
 		if ($this->header_products) {
 			$products = Product::findSerialized([
 				'id' => $this->header_products,
+				'product_state' => Product::PRODUCT_STATE_ACTIVE,
 			]);
+		}
 
-		} else {
+		if (empty($products)) {
 
-			// if there is no hardcoded products, we get randome products of the category
+			// if there is no hardcoded products, we get some random products of the category
 
 			$products = Product::findSerialized(
 				[
 					'categories' => [$this->short_id],
+					'product_state' => Product::PRODUCT_STATE_ACTIVE,
 					'limit' => $limit,
 				]
 			);
@@ -351,15 +354,15 @@ class Category extends CActiveRecord {
 	{
 		$names = [
 			[
-				'url' => "/imgs/category_" . strtolower($this->getSlug()) . "_g.jpg",
+				'url' => "/imgs/category_" . strtolower($this->getFileName()) . "_g.jpg",
 				'link' => null,
 			],
 			[
-				'url' => "/imgs/category_" . strtolower($this->getSlug()) . "_s.jpg",
+				'url' => "/imgs/category_" . strtolower($this->getFileName()) . "_s.jpg",
 				'link' => null,
 			],
 			[
-				'url' => "/imgs/category_" . strtolower($this->getSlug()) . "_s1.jpg",
+				'url' => "/imgs/category_" . strtolower($this->getFileName()) . "_s1.jpg",
 				'link' => null,
 			],
 		];
@@ -474,6 +477,11 @@ class Category extends CActiveRecord {
 	}
 
 	public function beforeSave($insert) {
+
+		if (empty($this->short_id)) {
+			$this->short_id = Utils::shortID(5);
+		}
+
 		/*
 		 * Create empty data holders if they don't exist
 		 */
@@ -591,7 +599,7 @@ class Category extends CActiveRecord {
 	 */
 	public function getBannerImage()
 	{
-		$fileName = "/imgs/banner-" . strtolower($this->getSlug()) . ".jpg";
+		$fileName = "/imgs/banner-" . strtolower($this->getFileName()) . ".jpg";
 		if (file_exists(Yii::getAlias('@webroot') . $fileName)) {
 			return $fileName;
 		}
@@ -604,7 +612,7 @@ class Category extends CActiveRecord {
 	 */
 	public function getHeaderImage()
 	{
-		$fileName = "/imgs/mini-banner-" . strtolower($this->getSlug()) . ".jpg";
+		$fileName = "/imgs/mini-banner-" . strtolower($this->getFileName()) . ".jpg";
 		if (file_exists(Yii::getAlias('@webroot') . $fileName)) {
 			return $fileName;
 		}
@@ -649,6 +657,20 @@ class Category extends CActiveRecord {
 
 		return $slug;
 	}
+
+	public function getFileName()
+	{
+		if (is_array($this->slug)) {
+			// if we have a "no translated" object, we get US translation
+			return $this->slug[Lang::EN_US];
+		}
+
+		// otherwise, we need to find the object again
+		$category = static::findOne(['short_id' => $this->short_id]);
+
+		return $category->slug[Lang::EN_US];
+	}
+
 
 	public function getName()
 	{

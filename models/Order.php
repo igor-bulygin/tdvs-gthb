@@ -6,6 +6,7 @@ use app\helpers\Utils;
 use Exception;
 use MongoDate;
 use yii\mongodb\ActiveQuery;
+use yii\web\BadRequestHttpException;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 
@@ -390,7 +391,7 @@ class Order extends CActiveRecord {
 	public function addProduct(OrderProduct $orderProduct) {
 		$product = Product::findOneSerialized($orderProduct->product_id); /* @var Product $product */
 		if (empty($product)) {
-			throw new Exception(sprintf("Product with id %s does not exists", $orderProduct->product_id));
+			throw new BadRequestHttpException(sprintf("Product with id %s does not exists", $orderProduct->product_id));
 		}
 
 		$packs = $this->getPacks();

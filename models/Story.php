@@ -28,10 +28,11 @@ use yii\mongodb\ActiveQuery;
  * @property StoryComponent[] $componentsMapping
  * @property StoryMainMedia $mainMediaMapping
  */
-class Story extends CActiveRecord {
+class Story extends CActiveRecord
+{
 
-    const STORY_STATE_DRAFT = 'story_state_draft';
-    const STORY_STATE_ACTIVE = 'story_state_active';
+	const STORY_STATE_DRAFT = 'story_state_draft';
+	const STORY_STATE_ACTIVE = 'story_state_active';
 
 	const SCENARIO_STORY_CREATE_DRAFT = 'story-create-draft';
 	const SCENARIO_STORY_UPDATE_DRAFT = 'story-update-draft';
@@ -51,11 +52,13 @@ class Story extends CActiveRecord {
 	 */
 	protected static $retrieveExtraFields = [];
 
-	public static function collectionName() {
+	public static function collectionName()
+	{
 		return 'story';
 	}
 
-	public function attributes() {
+	public function attributes()
+	{
 		return [
 			'_id',
 			'short_id',
@@ -99,15 +102,15 @@ class Story extends CActiveRecord {
 		$this->components = [];
 	}
 
-    public function embedComponentsMapping()
-    {
-        return $this->mapEmbeddedList('components', StoryComponent::className(), array('unsetSource' => false));
-    }
+	public function embedComponentsMapping()
+	{
+		return $this->mapEmbeddedList('components', StoryComponent::className(), ['unsetSource' => false]);
+	}
 
-    public function embedMainMediaMapping()
-    {
-        return $this->mapEmbedded('main_media', StoryMainMedia::className(), array('unsetSource' => false));
-    }
+	public function embedMainMediaMapping()
+	{
+		return $this->mapEmbedded('main_media', StoryMainMedia::className(), ['unsetSource' => false]);
+	}
 
 	public function setParentOnEmbbedMappings()
 	{
@@ -117,7 +120,8 @@ class Story extends CActiveRecord {
 		$this->mainMediaMapping->setParentObject($this);
 	}
 
-	public function beforeSave($insert) {
+	public function beforeSave($insert)
+	{
 		if (empty($this->story_state)) {
 			$this->story_state = Story::STORY_STATE_ACTIVE;
 		}
@@ -140,7 +144,7 @@ class Story extends CActiveRecord {
 		return parent::beforeSave($insert);
 	}
 
-    public function rules()
+	public function rules()
 	{
 		return [
 			['short_id', 'unique'],
@@ -190,7 +194,7 @@ class Story extends CActiveRecord {
 	{
 		switch ($view) {
 			case self::SERIALIZE_SCENARIO_PREVIEW:
-            case self::SERIALIZE_SCENARIO_PUBLIC:
+			case self::SERIALIZE_SCENARIO_PUBLIC:
 				static::$serializeFields = [
 					'id' => 'short_id',
 					'story_state',
@@ -231,8 +235,8 @@ class Story extends CActiveRecord {
 				static::$retrieveExtraFields = [
 				];
 
-                static::$translateFields = false;
-                break;
+				static::$translateFields = false;
+				break;
 			default:
 				// now available for this Model
 				static::$serializeFields = [];
@@ -240,50 +244,53 @@ class Story extends CActiveRecord {
 		}
 	}
 
-    /**
-     * Get one entity serialized
-     *
-     * @param string $id
-     * @return Story|null
-     * @throws Exception
-     */
-    public static function findOneSerialized($id)
-    {
-        /** @var Story $story */
-        $story = static::find()->select(self::getSelectFields())->where(["short_id" => $id])->one();
+	/**
+	 * Get one entity serialized
+	 *
+	 * @param string $id
+	 *
+	 * @return Story|null
+	 * @throws Exception
+	 */
+	public static function findOneSerialized($id)
+	{
+		/** @var Story $story */
+		$story = static::find()->select(self::getSelectFields())->where(["short_id" => $id])->one();
 
-        // if automatic translation is enabled
-        if (static::$translateFields) {
-            Utils::translate($story);
-        }
-        return $story;
-    }
+		// if automatic translation is enabled
+		if (static::$translateFields) {
+			Utils::translate($story);
+		}
 
-    /**
-     * Get a collection of entities serialized, according to serialization configuration
-     *
-     * @param array $criteria
-     * @return Story[]
-     * @throws Exception
-     */
-    public static function findSerialized($criteria = [])
-    {
+		return $story;
+	}
 
-        // Order query
-        $query = new ActiveQuery(static::className());
+	/**
+	 * Get a collection of entities serialized, according to serialization configuration
+	 *
+	 * @param array $criteria
+	 *
+	 * @return Story[]
+	 * @throws Exception
+	 */
+	public static function findSerialized($criteria = [])
+	{
 
-        // Retrieve only fields that gonna be used
-        $query->select(self::getSelectFields());
+		// Order query
+		$query = new ActiveQuery(static::className());
 
-        // if id is specified
-        if ((array_key_exists("id", $criteria)) && (!empty($criteria["id"]))) {
-            $query->andWhere(["short_id" => $criteria["id"]]);
-        }
+		// Retrieve only fields that gonna be used
+		$query->select(self::getSelectFields());
 
-        // if deviser id is specified
-        if ((array_key_exists("person_id", $criteria)) && (!empty($criteria["person_id"]))) {
-            $query->andWhere(["person_id" => $criteria["person_id"]]);
-        }
+		// if id is specified
+		if ((array_key_exists("id", $criteria)) && (!empty($criteria["id"]))) {
+			$query->andWhere(["short_id" => $criteria["id"]]);
+		}
+
+		// if deviser id is specified
+		if ((array_key_exists("person_id", $criteria)) && (!empty($criteria["person_id"]))) {
+			$query->andWhere(["person_id" => $criteria["person_id"]]);
+		}
 
 		// if story_state is specified
 		if ((array_key_exists("story_state", $criteria)) && (!empty($criteria["story_state"]))) {
@@ -314,7 +321,7 @@ class Story extends CActiveRecord {
 		if ((array_key_exists("countries", $criteria)) && (!empty($criteria["countries"]))) {
 
 			// Get different person_ids available by country
-			$queryPerson= new ActiveQuery(Person::className());
+			$queryPerson = new ActiveQuery(Person::className());
 			$queryPerson->andWhere(["in", "personal_info.country", $criteria["countries"]]);
 			$idsPerson = $queryPerson->distinct("short_id");
 
@@ -329,7 +336,7 @@ class Story extends CActiveRecord {
 		if ((array_key_exists("only_active_persons", $criteria)) && (!empty($criteria["only_active_persons"]))) {
 
 			// Get different person_ids available by country
-			$queryPerson= new ActiveQuery(Person::className());
+			$queryPerson = new ActiveQuery(Person::className());
 			$queryPerson->andWhere(["account_state" => Person::ACCOUNT_STATE_ACTIVE]);
 			$idsPerson = $queryPerson->distinct("short_id");
 
@@ -340,24 +347,24 @@ class Story extends CActiveRecord {
 			}
 		}
 
-        // if text is specified
-        if ((array_key_exists("text", $criteria)) && (!empty($criteria["text"]))) {
+		// if text is specified
+		if ((array_key_exists("text", $criteria)) && (!empty($criteria["text"]))) {
 //			// search the word in all available languages
 			$query->andFilterWhere(static::getFilterForText(static::$textFilterAttributes, $criteria["text"]));
-        }
+		}
 
-        // Count how many items are with those conditions, before limit them for pagination
-        static::$countItemsFound = $query->count();
+		// Count how many items are with those conditions, before limit them for pagination
+		static::$countItemsFound = $query->count();
 
-        // limit
-        if ((array_key_exists("limit", $criteria)) && (!empty($criteria["limit"]))) {
-            $query->limit($criteria["limit"]);
-        }
+		// limit
+		if ((array_key_exists("limit", $criteria)) && (!empty($criteria["limit"]))) {
+			$query->limit($criteria["limit"]);
+		}
 
-        // offset for pagination
-        if ((array_key_exists("offset", $criteria)) && (!empty($criteria["offset"]))) {
-            $query->offset($criteria["offset"]);
-        }
+		// offset for pagination
+		if ((array_key_exists("offset", $criteria)) && (!empty($criteria["offset"]))) {
+			$query->offset($criteria["offset"]);
+		}
 
 		if ((array_key_exists("order_by", $criteria)) && (!empty($criteria["order_by"]))) {
 			$query->orderBy($criteria["order_by"]);
@@ -367,40 +374,42 @@ class Story extends CActiveRecord {
 			]);
 		}
 
-        $stories = $query->all();
+		$stories = $query->all();
 
-        // if automatic translation is enabled
-        if (static::$translateFields) {
-            Utils::translate($stories);
-        }
-        return $stories;
-    }
+		// if automatic translation is enabled
+		if (static::$translateFields) {
+			Utils::translate($stories);
+		}
+
+		return $stories;
+	}
 
 
-    /**
-     * Add additional error to make easy show labels in client side
-     */
-    public function afterValidate()
-    {
-        parent::afterValidate();
-        foreach ($this->errors as $attribute => $error) {
-            switch ($attribute) {
-                default:
+	/**
+	 * Add additional error to make easy show labels in client side
+	 */
+	public function afterValidate()
+	{
+		parent::afterValidate();
+		foreach ($this->errors as $attribute => $error) {
+			switch ($attribute) {
+				default:
 					if (Utils::isRequiredError($error)) {
 						$this->addError("required", $attribute);
 					}
 					$this->addError("fields", $attribute);
-                    break;
-            }
-        };
-    }
+					break;
+			}
+		};
+	}
 
 	/**
 	 * Returns the translated title of the story
 	 *
 	 * @return array|mixed
 	 */
-    public function getTitle() {
+	public function getTitle()
+	{
 
 		if (is_array($this->title)) {
 			$title = Utils::l($this->title);
@@ -411,7 +420,8 @@ class Story extends CActiveRecord {
 		return $title;
 	}
 
-	public function getPerson() {
+	public function getPerson()
+	{
 		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_PUBLIC);
 
 		$person = Person::findOneSerialized($this->person_id);
@@ -419,7 +429,8 @@ class Story extends CActiveRecord {
 		return $person;
 	}
 
-	public function getPersonPreview() {
+	public function getPersonPreview()
+	{
 		$person = $this->getPerson();
 
 		return $person->getPreviewSerialized();
@@ -450,7 +461,8 @@ class Story extends CActiveRecord {
 	 *
 	 * @return StoryComponent|null
 	 */
-	public function getFirstTextComponent() {
+	public function getFirstTextComponent()
+	{
 		return $this->getFirstComponentByType(StoryComponent::STORY_COMPONENT_TYPE_TEXT);
 	}
 
@@ -459,7 +471,8 @@ class Story extends CActiveRecord {
 	 *
 	 * @return null|string
 	 */
-	public function getFirstText() {
+	public function getFirstText()
+	{
 		$firstTextComponent = $this->getFirstTextComponent();
 		if ($firstTextComponent) {
 			return strip_tags($firstTextComponent->getText());
@@ -473,17 +486,20 @@ class Story extends CActiveRecord {
 	 *
 	 * @return null|string
 	 */
-	public function getMainPhotoUrl() {
+	public function getMainPhotoUrl()
+	{
 		return $this->mainMediaMapping->getPhotoUrl();
 	}
 
 	/**
 	 * Returns the first component of the specified type
+	 *
 	 * @param $componentType
 	 *
 	 * @return StoryComponent|null
 	 */
-	protected function getFirstComponentByType($componentType) {
+	protected function getFirstComponentByType($componentType)
+	{
 		$components = $this->componentsMapping;
 
 		$sortedComponents = [];
@@ -537,12 +553,14 @@ class Story extends CActiveRecord {
 		]);
 	}
 
-	public function getSlug() {
+	public function getSlug()
+	{
 		if (is_array($this->slug)) {
 			$slug = Utils::l($this->slug);
 		} else {
 			$slug = $this->slug;
 		}
+
 		return $slug;
 	}
 
@@ -551,11 +569,13 @@ class Story extends CActiveRecord {
 	 *
 	 * @return null|string
 	 */
-	public function getPublishingDateFormatted() {
+	public function getPublishingDateFormatted()
+	{
 		if ($this->published_at) {
-			$dateTime  = $this->published_at->toDateTime();
+			$dateTime = $this->published_at->toDateTime();
 			if ($dateTime) {
 				$format = '%h %e %G';
+
 				return strftime($format, $dateTime->getTimestamp());
 			}
 		}
@@ -567,6 +587,7 @@ class Story extends CActiveRecord {
 	 * Returns a number of random stories
 	 *
 	 * @param int $limit
+	 *
 	 * @return Story[]
 	 */
 	public static function getRandomStories($limit)
@@ -609,12 +630,16 @@ class Story extends CActiveRecord {
 
 		$randomStories = Yii::$app->mongodb->getCollection('story')->aggregate($conditions);
 
-		$storyId = [];
+		$storyIds = [];
 		foreach ($randomStories as $work) {
-			$storyId[] = $work['short_id'];
+			$storyIds[] = $work['short_id'];
 		}
-		$stories = self::findSerialized(['id' => $storyId]);
-		shuffle($stories);
+		if ($storyIds) {
+			$stories = self::findSerialized(['id' => $storyIds]);
+			shuffle($stories);
+		} else {
+			$stories = [];
+		}
 
 		return $stories;
 	}
