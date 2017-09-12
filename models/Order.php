@@ -241,12 +241,15 @@ class Order extends CActiveRecord {
 	public function getPersonInfo()
 	{
 		$person = $this->getPerson();
-		return [
-			"slug" => $person->slug,
-			"name" => $person->personalInfoMapping->getVisibleName(),
-			"photo" => $person->getAvatarImage128(),
-			'url' => $person->getMainLink(),
-		];
+		if ($person) {
+			return [
+				"slug" => $person->slug,
+				"name" => $person->personalInfoMapping->getVisibleName(),
+				"photo" => $person->getAvatarImage128(),
+				'url' => $person->getMainLink(),
+			];
+		}
+		return [];
 	}
 
 	/**
