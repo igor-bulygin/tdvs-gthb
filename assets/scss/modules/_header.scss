@@ -100,12 +100,22 @@
     }
     .dropdown{
         height: 50px;
+        &:hover{
+            .dropdown-shop{
+                display: block;        
+            }
+        }
     }
-    .dropdown:hover .dropdown-shop {
+    /*.dropdown:hover .dropdown-shop {
         display: block;
     }
     .dropdown-shop:hover{
         display: block;
+    }*/
+    .dropdown-shop{
+        &:hover{
+            display: block;     
+        }
     }
     .menu-title{
         color: $white!important;
@@ -236,7 +246,7 @@
     }
 }
 .dropdown-shop{
-	@include border-radius(0px,0px,0px,0px);
+    @include border-radius(0px,0px,0px,0px);
     @media (max-width: 768px){
         top: 10px;
         min-width:100%;

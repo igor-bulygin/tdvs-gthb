@@ -283,12 +283,9 @@
     background: url(/imgs/black-heart.svg) 0 0 no-repeat transparent;
     display: inline-block;
     vertical-align: middle;
-}
-.heart-icon:hover {
-    background: url(/imgs/red-heart.svg) 0 0 no-repeat transparent;
-}
-.no-padding {
-	padding: 0;
+	&:hover{
+		background: url(/imgs/red-heart.svg) 0 0 no-repeat transparent;
+	}
 }
 .btn-save-box{
     @extend %btn;
@@ -324,6 +321,9 @@
 			}
 		}
 	}
+}
+.no-padding {
+	padding: 0;
 }
 .btn-icon{
     @extend %btn;
@@ -473,5 +473,17 @@
 	i{
 		float: right;
 		margin-right: 10px;
+	}
+}
+.btn-filled{
+	.heart-icon{
+		&:hover{
+
+		}
+	}
+	.box-icon{
+		&:hover{
+
+		}	
 	}
 }

@@ -825,12 +825,8 @@ a, a:hover, a:focus {
   background: url(/imgs/black-heart.svg) 0 0 no-repeat transparent;
   display: inline-block;
   vertical-align: middle; }
-
-.heart-icon:hover {
-  background: url(/imgs/red-heart.svg) 0 0 no-repeat transparent; }
-
-.no-padding {
-  padding: 0; }
+  .heart-icon:hover {
+    background: url(/imgs/red-heart.svg) 0 0 no-repeat transparent; }
 
 .btn-save-box {
   background-color: transparent;
@@ -858,6 +854,9 @@ a, a:hover, a:focus {
       background-color: #1C1919; }
       .btn-save-box.active:hover .box-icon {
         background: url("/imgs/box-white.svg") transparent no-repeat; }
+
+.no-padding {
+  padding: 0; }
 
 .btn-icon {
   background-color: transparent;
@@ -2218,7 +2217,13 @@ h3 {
   margin: 0;
   height: 70px;
   padding: 10px 0;
-  z-index: 1000; }
+  z-index: 1000;
+  /*.dropdown:hover .dropdown-shop {
+      display: block;
+  }
+  .dropdown-shop:hover{
+      display: block;
+  }*/ }
   .navbar .navbar-elements {
     position: relative; }
   .navbar .center-navbar {
@@ -2309,8 +2314,8 @@ h3 {
     padding: 10px 15px; }
   .navbar .dropdown {
     height: 50px; }
-  .navbar .dropdown:hover .dropdown-shop {
-    display: block; }
+    .navbar .dropdown:hover .dropdown-shop {
+      display: block; }
   .navbar .dropdown-shop:hover {
     display: block; }
   .navbar .menu-title {

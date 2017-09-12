@@ -664,7 +664,7 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 
 
 <!-- GRID -->
-<section class="grid-wrapper">
+<section class="grid-wrapper" id="grid-product-home">
 	<div class="container">
 		<h3 class="title-product-name">Discover what´s next</h3>
 		<div id="macy-container" class="grid-margin">
@@ -682,7 +682,7 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 							<a href="<?= $work->getViewLink()?>">
 								<figcaption>
 									<p class="instauser">
-										<?= \yii\helpers\StringHelper::truncate(Utils::l($work->name), 15, '…') ?>
+										<?= \yii\helpers\StringHelper::truncate(Utils::l($work->name), 18, '…') ?>
 									</p>
 									<p class="price">€ <?= $work->getMinimumPrice() ?></p>
 								</figcaption>
