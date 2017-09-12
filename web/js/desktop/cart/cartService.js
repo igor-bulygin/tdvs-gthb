@@ -19,7 +19,13 @@
 							if(key === 'size') {
 								obj.name = 'Size';
 								obj.stock_and_price = true;
-								obj.values.push(product.options[key]);
+								if(UtilService.isObject(product.options[key])) {
+									if(product.options[key].width && product.options[key].length && product.options[key].metric_unit) {
+										obj.values.push(product.options[key].width + 'x' + product.options[key].length + product.options[key].metric_unit);
+									}
+								} else {
+									obj.values.push(product.options[key]);
+								}
 								product.tags.push(obj);
 								break;
 							}
