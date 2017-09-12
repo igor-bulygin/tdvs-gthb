@@ -130,7 +130,10 @@
 			"SZ_NAME":"Nombre",
 			"SZ_METRIC_UNIT":"Unidad métrica",
 			"SZ_COUNTRIES":"Países",
-			"SAVE_NEW_SIZECHART":"Guardar nueva tabla de tallas"
+			"SAVE_NEW_SIZECHART":"Guardar nueva tabla de tallas",
+			"SZ_COLUMNS":"Columnas",
+			"ADD_NEW_COLUMN":"Añadir columna",
+			"SZ_ROWS":"Filas"
 		}
 	}
 }

@@ -24,6 +24,12 @@
 		vm.textFieldValidation = textFieldValidation;
 		vm.saveDeviserSizechart=saveDeviserSizechart;
 		vm.showNewSizechartForm = showNewSizechartForm;
+		vm.new_column=new_column;
+		vm.delete_column=delete_column;
+		vm.move_column=move_column;
+		vm.new_row=new_row;
+		vm.removeRow=removeRow;		
+		vm.addTableValues=addTableValues;
 
 		//vars
 		vm.tag_order = ['Color', 'Material', 'Size', 'Style'];
@@ -151,15 +157,15 @@
 
 		function deviserSizecharts() {
 			vm.sizecharts.forEach(function(element) {
-					if(element.type === 1 && element.deviser_id === person.short_id)
-						vm.deviserSizecharts.push(element);
-				});
+				if(element.type === 1 && element.deviser_id === person.short_id)
+					vm.deviserSizecharts.push(element);
+			});
 		}
 
 		// create new sizechart begins
 
 		function showNewSizechartForm() {
-			vm.newSizechart= {name:{}, countries:[], type:1, deviser_id:person.short_id};
+			vm.newSizechart= {name:{}, countries:[], columns:[], values:[], type:1, deviser_id:person.short_id};
 			vm.name_language=_lang;
 			vm.showNewSizechart=true;
 		}
@@ -172,6 +178,50 @@
 				vm.savingSizechart=false;
 			}
 			sizechartDataService.postDeviserSizechart(vm.newSizechart, onSaveSizechartSuccess, UtilService.onError);
+		}
+
+		function new_column(column) {
+			vm.newSizechart.columns.push(column);
+			angular.forEach(vm.newSizechart.values, function (row) {
+				row.push(0);
+			});
+			vm.addingColumn=false;
+			addTableValues();
+		}
+
+		function delete_column(index) {
+			vm.newSizechart.columns.splice(index, 1);
+			angular.forEach(vm.newSizechart.values, function (row) {
+				row.splice(index, 1);
+			});
+		}
+
+		function move_column(from, to) {
+			vm.newSizechart.columns.splice(index, 1);
+			angular.forEach(vm.newSizechart.values, function (row) {
+				row.splice(index, 1);
+			});
+		}
+
+		function new_row() {
+			var _len = vm.table_header.length;
+			var _data = Array.apply(null, Array(_len)).map(Number.prototype.valueOf, 0);
+			vm.newSizechart.values.push(_data);
+		}
+
+		function removeRow(index) {
+			vm.newSizechart.values.splice(index, 1);
+		}
+
+
+		function addTableValues() {
+			vm.table_header = [];
+			angular.forEach(vm.newSizechart.countries, function (country) {
+				vm.table_header.push(country);
+			});
+			angular.forEach(vm.newSizechart.columns, function (column) {
+				vm.table_header.push(column[_lang]);
+			});
 		}
 
 		// create new sizechart ends
@@ -367,6 +417,6 @@
 	}
 
 	angular
-		.module('product')
-		.component('productVariations', component);
+	.module('product')
+	.component('productVariations', component);
 }());

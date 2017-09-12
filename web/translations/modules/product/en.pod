@@ -129,7 +129,10 @@
 			"SZ_NAME":"Name",
 			"SZ_METRIC_UNIT":"Metric unit",
 			"SZ_COUNTRIES":"Countries",
-			"SAVE_NEW_SIZECHART":"Save new size chart"
+			"SAVE_NEW_SIZECHART":"Save new size chart",
+			"SZ_COLUMNS":"Columns",
+			"ADD_NEW_COLUMN":"Add column",
+			"SZ_ROWS":"Rows"
 		}
 	}
 }
