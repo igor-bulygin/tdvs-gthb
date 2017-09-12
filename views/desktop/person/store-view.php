@@ -78,9 +78,6 @@ $this->params['person_menu_store_categories'] = $categories;
 						</div>
 					<?php } ?>
 					<div class="store-grid">
-						<div class="title-wrapper">
-							<span class="title"><?= Utils::l($selectedCategory->name) ?></span>
-						</div>
 						<nav class="products-menu">
 							<ul>
 								<?php foreach ($selectedCategory->getDeviserSubcategories() as $i => $subcategory) { ?>

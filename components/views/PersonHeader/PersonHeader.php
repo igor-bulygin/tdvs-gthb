@@ -21,7 +21,13 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 				<div class="deviser-profile">
 					<div class="avatar-btn-profile">
 						<div class="avatar">
+							<div class="icon-deviser">
+								<img src="/imgs/deviser.svg">
+							</div>
 							<img class="cover" ng-src="{{personHeaderCtrl.profile || '/imgs/default-avatar.png'}}">
+						</div>
+						<div class="type-of-user">
+							Deviser
 						</div>
 						<?php if ($person->isPersonEditable() && $person->isPublic()) {?>
 							<div class="edit-profile-btn">

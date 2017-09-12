@@ -157,3 +157,21 @@
 	margin: 0 auto;
     display: block;
 }
+.type-of-user{
+	color: $white;
+	font-family: $font-family--name;
+	text-transform: lowercase;
+	letter-spacing: 2px;
+	font-size: 41px;
+	position: absolute;
+    top: 43px;
+    left: 55px;
+}
+.icon-deviser{
+	img{
+		border: none!important;
+		width: 23px!important;
+		position: absolute;
+		top: -62px;
+	}
+}

@@ -973,12 +973,12 @@ a, a:hover, a:focus {
     .products-menu ul li a {
       color: #484848;
       text-transform: uppercase;
-      font: 14px "Playfair Display", Georgia, serif;
+      font-size: 14px;
       letter-spacing: 0.3px;
       padding-bottom: 5px; }
       .products-menu ul li a:hover, .products-menu ul li a.active {
-        color: #F7284B;
-        border-bottom: 1px solid #F7284B; }
+        color: #c91c39;
+        border-bottom: 1px solid #c91c39; }
 
 .menu-store {
   padding: 40px 0; }
@@ -4441,6 +4441,22 @@ h3 {
   margin: 0 auto;
   display: block; }
 
+.type-of-user {
+  color: #ffffff;
+  font-family: "Univers Thin Ultra Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-transform: lowercase;
+  letter-spacing: 2px;
+  font-size: 41px;
+  position: absolute;
+  top: 43px;
+  left: 55px; }
+
+.icon-deviser img {
+  border: none !important;
+  width: 23px !important;
+  position: absolute;
+  top: -62px; }
+
 .store {
   background-color: #ffffff; }
   .store .content-store {
@@ -4469,7 +4485,6 @@ h3 {
           padding: 8px;
           text-align: center; }
     .store .content-store .store-grid {
-      border-top: 1px solid #939393;
       margin-bottom: 80px; }
       .store .content-store .store-grid .title-wrapper {
         text-align: center;

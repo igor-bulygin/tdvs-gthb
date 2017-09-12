@@ -12,12 +12,12 @@
             a{
                 color: $almost_black;
                 text-transform: uppercase;
-                font: 14px $font-family--serif;
+                font-size: 14px;
                 letter-spacing: 0.3px;
                 padding-bottom: 5px;
                 &:hover, &.active{
-                    color: $red;
-                    border-bottom: 1px solid $red;
+                    color: $dark_red;
+                    border-bottom: 1px solid $dark_red;
                 }
             }
         }
