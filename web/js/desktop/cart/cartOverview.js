@@ -7,7 +7,16 @@
 		init();
 
 		function init() {
-			getCart();
+			getTags();
+		}
+
+		function getTags() {
+			function onGetTagsSuccess(data) {
+				vm.tags = angular.copy(data);
+				getCart();
+			}
+
+			tagDataService.getTags(null, onGetTagsSuccess, UtilService.onError);
 		}
 
 		function createCart() {
@@ -24,7 +33,7 @@
 
 			function onGetCartSuccess(data) {
 				vm.cart = angular.copy(data);
-				cartService.parseTags(vm.cart);
+				cartService.parseTags(vm.cart, vm.tags);
 				cartService.setTotalItems(vm.cart);
 				cartService.setProductsAmount(vm.cart);
 			}

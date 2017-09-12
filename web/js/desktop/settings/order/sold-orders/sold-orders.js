@@ -24,7 +24,7 @@
 				});
 				order.total= order.totalPrice + order.totalShippingPrice + order.commission;
 				vm.ordersTotalPrice=vm.ordersTotalPrice + order.totalPrice;
-				cartService.parseTags(order);
+				cartService.parseTags(order, vm.tags);
 			});
 		}
 
@@ -121,7 +121,8 @@
 		controller: controller,
 		controllerAs: 'soldOrdersCtrl',
 		bindings: {
-			orders: '<'
+			orders: '<',
+			tags: '<'
 		}
 	}
 
