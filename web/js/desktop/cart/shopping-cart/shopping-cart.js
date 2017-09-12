@@ -25,7 +25,7 @@
 		function addProduct(product, quantity) {
 			function onAddProductSuccess(data) {
 				vm.cart = angular.copy(data);
-				cartService.parseTags(vm.cart);
+				cartService.parseTags(vm.cart, vm.tags);
 				$rootScope.$broadcast(cartEvents.cartUpdated, {cart: vm.cart});
 			}
 
@@ -41,7 +41,7 @@
 		function deleteItem(price_stock_id) {
 			function onDeleteItemSuccess(data) {
 				vm.cart = angular.copy(data);
-				cartService.parseTags(vm.cart);
+				cartService.parseTags(vm.cart, vm.tags);
 				$rootScope.$broadcast(cartEvents.cartUpdated, {cart: vm.cart});
 			}
 
@@ -59,7 +59,8 @@
 		bindings: {
 			state: '<',
 			cart: '<',
-			devisers: '<'
+			devisers: '<',
+			tags: '<'
 		}
 	}
 

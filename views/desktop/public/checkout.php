@@ -31,7 +31,7 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 			<payment-methods cart="checkoutCtrl.cart" state="checkoutCtrl.checkout_state" countries="checkoutCtrl.countries"></payment-methods>
 		</div>
 		<div class="col-md-4 no-pad summary-side bordered-left">
-			<cart-summary cart="checkoutCtrl.cart" state="checkoutCtrl.checkout_state"></cart-summary>
+			<cart-summary cart="checkoutCtrl.cart" state="checkoutCtrl.checkout_state" tags="checkoutCtrl.tags"></cart-summary>
 		</div>
 	</div>
 </div>
