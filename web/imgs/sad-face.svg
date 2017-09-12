@@ -3,12 +3,11 @@
 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 51 41" style="enable-background:new 0 0 51 41;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill:#7C7C7C;}
-	.st1{fill:none;stroke:#979797;stroke-width:2;}
+	.st0{fill:none;stroke:#000000;stroke-width:2;}
 </style>
 <title>Group 3</title>
 <desc>Created with Sketch.</desc>
-<ellipse id="Oval-108" class="st0" cx="10.7" cy="5.3" rx="5.3" ry="5.3"/>
-<ellipse id="Oval-108-Copy" class="st0" cx="40" cy="5.3" rx="5.3" ry="5.3"/>
-<path id="Path-527" class="st1" d="M1.2,39.6c0,0,24.6-16.8,48.6,0"/>
+<ellipse id="Oval-108" cx="10.7" cy="5.3" rx="5.3" ry="5.3"/>
+<ellipse id="Oval-108-Copy" cx="40" cy="5.3" rx="5.3" ry="5.3"/>
+<path id="Path-527" class="st0" d="M1.2,39.6c0,0,24.6-16.8,48.6,0"/>
 </svg>
