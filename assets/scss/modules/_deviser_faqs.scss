@@ -226,13 +226,14 @@
     }
 }
 .red-link-btn{
-    color: $red;
-    text-align: left;
+    color: $dark_red;
+    text-align: center;
     margin-bottom: 10px;
     display: block;
+	text-decoration: underline;
     text-transform: uppercase;
     font-weight: bold;
-    font-family:$font-family--bold;
+    font-size: 16px;
     &:hover{
         color: $dark_red;
     }
