@@ -28,7 +28,7 @@
                 &.instauser{
                     @include opacity(1); 
 					position: absolute;
-					bottom: 50px;
+					bottom: 42px;//50px;
 					text-align: center;
 					width: 100%;
                 } 
@@ -54,30 +54,39 @@
                 pointer-events: none;
             }
             p{
-                margin: 0;
                 font-size: 13px !important;
                 text-align: center;
+                left: 0;
+                right: 0;
+                margin: 0;
+                padding: 0 10px !important;
                 &.instauser{
                     @include opacity(0);
                     @include transition(opacity 0s);
                     @include backface-visibility(hidden);
-					font-family: $font-family--name;
-					color: $black;
-					font-size: 40px!important;
-    				max-width: 90%;
-					line-height: 39px;
-					text-transform: capitalize;
+                    color: $black;
+                    font-family: $font-family--regular;//$font-family--name;
+                    font-size: 16px !important;//40px!important;
+                    text-transform: lowercase;//capitalize;
+                    width: 100%;
+                    max-width: 100%;//90%;
+                    line-height: 1;//39px;
+                    max-height: 32px;//48px;
+                    overflow: hidden;
+                    &:first-letter {
+                        text-transform: uppercase;
+                    }
                 }
                 &.price{
-                    font-size: 14px!important;
+                    //color: $dark_grey;
+                    font-size: 20px !important;//14px!important;
                     font-weight: bold;
-                    color: $dark_grey;
-					position: absolute;
-					bottom: 25px;
-					text-align: center;
-					width: 90%;
-					color: $black;
-					font-size: 25px!important;
+                    position: absolute;
+                    bottom: 15px;//25px;
+                    //text-align: center;
+                    width: 100%;//90%;
+                    color: $black;
+                    //font-size: 25px!important;
                 }
             }
         }
@@ -85,35 +94,37 @@
 }
 .hover-btns-wrapper{
 	position: absolute;
-    top: 5px;
+    top: 5px;//5px;
     right: 5px;
     z-index: 9;
-	width: 38px;
+	width: 80px;//38px;
 	display: none;
 	.icons-hover{
-		float: left;
+		//float: left;
 		width:30px;
 		height:30px;
-		font-size: 32px;
-		margin: 0 0 20px 0;
-		padding: 3px 0 0 0;
-		text-align: center;
+		//font-size: 32px;
+		margin: auto 0;//margin: 0 0 20px 0;
+        padding: 0;//padding: 3px 0 0 0;
+        //text-align: center;
 		@include border-radius(90px,90px,90px,90px);
 		&.box{	
 			background: url('/imgs/black-box.svg') 0 0 no-repeat transparent;
 			display: inline-block;
 			//width: 55px;
 			//margin-left: -2px;
+            float: right;
             @include border-radius(0,0,0,0);
 		}
         &.heart-icon{  
             background: url('/imgs/black-heart.svg') 0 0 no-repeat transparent;
+            float: left;
             display: inline-block;
             @include border-radius(0,0,0,0);
         }
-		&:hover{
+		/*&:hover{
 			color: $dark_red!important;
-		}
+		}*/
         &.box:hover {
             background: url('/imgs/red-box.svg') 0 0 no-repeat transparent;
         }
@@ -127,4 +138,24 @@
 }
 .grid-margin {
     margin-top: 45px;
+}
+#grid-product-home{
+    .col-md-2 {
+        padding: 0 6px !important;
+    }
+    .menu-category {
+        padding: 0 !important;
+    }
+}
+.img-bgveil{
+    background: $dark_grey;
+    bottom: 0;
+    display: block;
+    left: 0;
+    opacity: 0.05;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1;
+    @include border-radius(6px,6px,6px,6px);
 }

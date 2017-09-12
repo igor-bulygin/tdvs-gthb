@@ -62,7 +62,7 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 			<div class="col-sm-4 col-xs-6 title-wrapper title-1 righty">
 				<div class="sub-banner-wrapper">
 					<div class="sub-banner-text-left">
-						<h2 class="title-1"><span class="serif">The</span>store</h2>
+						<h2 class="title-1"><span class="serif" style="margin-bottom:8px;">The</span>store</h2>
 						<p class="tagline-1">Find product that will make<br>you be part of the future</p>
 					</div>
 					<div class="left-point"></div>
@@ -241,7 +241,7 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 									<figcaption>
 										<div class="row no-mar">
 											<div class="col-md-8">
-												<span class="boxes-text align-left"><?=$box->name?></span>
+												<span class="boxes-text align-left"><?= \yii\helpers\StringHelper::truncate($box->name, 18, '…') ?></span>
 											</div>
 											<div class="col-md-4 no-padding">
 												<button class="btn btn-single-love btn-love-box">
@@ -676,12 +676,13 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 							<image-hover-buttons product-id="{{'<?= $work->short_id ?>'}}" is-loved="{{'<?=$work->isLovedByCurrentUser() ? 1 : 0 ?>'}}" is-mine="{{'<?= $work->isWorkFromCurrentUser() ? 1 : 0 ?>'}}">
 								<a href="<?= $work->getViewLink()?>">
 									<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($work->getMainImage())->resize(400, 0) ?>">
+									<span class="img-bgveil"></span>
 								</a>
 							</image-hover-buttons>
 							<a href="<?= $work->getViewLink()?>">
 								<figcaption>
 									<p class="instauser">
-										<?= Utils::l($work->name) ?>
+										<?= \yii\helpers\StringHelper::truncate(Utils::l($work->name), 34, '…') ?>
 									</p>
 									<p class="price">€ <?= $work->getMinimumPrice() ?></p>
 								</figcaption>

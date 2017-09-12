@@ -43,6 +43,11 @@ h1{
 		  text-overflow: ellipsis;
 	}
 }
+#carousel-influencers{
+	.title-product-name {
+    	text-transform: capitalize;
+    }
+}
 .subtitle-home{
 	color: $light_grey;
 	font-size: 27px;
