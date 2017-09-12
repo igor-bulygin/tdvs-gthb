@@ -2,7 +2,7 @@
 // Deviser FAQs
 // ==========================================================================
 .faq-wrapper{
-    margin: 40px 0 120px;
+    margin: 80px 0 120px;
     .section-title{
         color: $dark_grey;
         border: 0;
@@ -19,22 +19,20 @@
             border-top-left-radius: 0;
             border-top-right-radius: 0;
             .faq-title{
-                color: $almost_black;
+                color: $black;
                 text-transform: uppercase;
-                font: 16px $font-family--bold;
-                border-bottom: 1px solid $almost_black;
+                font-weight: bold;
                 padding: 0 10px 5px 0;
                 &:before{
                     font: 14px $font-family--glyphicons;
-                    content: "\e083";
-                    color: $almost_black;
-                    vertical-align: top;
-                    padding: 0 5px 7px 0;
-                    border-bottom: 1px solid $background_grey;
+                    content: "\2212";
+                    color: $black;
+                    vertical-align: middle;
+    				padding: 0 10px 0 0;
                 }
                 &.collapsed:before{
-                    content: "\e081";
-                    color: $light_grey;
+                    content: "\002b";
+                    color: $black;
                 }
                 &.collapsed{
                     border-bottom: 0;
@@ -44,8 +42,8 @@
         .faq-answer{
             padding: 5px 15px 30px;
             p{
-                color: $almost_black;
-                font: 16px $font-family--serif;
+                color: $black;
+                font-size: 14px;
                 margin: 0 23px 20px;
             }
         }

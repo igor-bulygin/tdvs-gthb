@@ -33,10 +33,10 @@
         li{
             margin: 5px 0;
             a{
+				font-size: 16px;
 				color: $black;
 				font-family: $font-family--regular;
 				text-transform: lowercase;
-				padding: 3px 0 3px 15px;
 				display: block;
 				padding: 0px 0 0px 15px;
                 &.active{
