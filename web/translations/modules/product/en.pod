@@ -125,7 +125,11 @@
 			"ADD_OPTION":"+ Add another option",
 			"PRINT_SIZE":"Print size",
 			"WIDTH":"Width",
-			"LENGTH":"Length"
+			"LENGTH":"Length",
+			"SZ_NAME":"Name",
+			"SZ_METRIC_UNIT":"Metric unit",
+			"SZ_COUNTRIES":"Countries",
+			"SAVE_NEW_SIZECHART":"Save new size chart"
 		}
 	}
 }

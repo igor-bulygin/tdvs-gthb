@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller($scope, productEvents, productDataService, productService, UtilService) {
+	function controller($scope, productEvents, productService, UtilService, sizechartDataService, metricDataService,$uibModal) {
 		var vm = this;
 		//functions
 		vm.setPrintsSelected = setPrintsSelected;
@@ -22,6 +22,8 @@
 		vm.sizechartValuesValidation = sizechartValuesValidation;
 		vm.optionValidation = optionValidation;
 		vm.textFieldValidation = textFieldValidation;
+		vm.saveDeviserSizechart=saveDeviserSizechart;
+		vm.showNewSizechartForm = showNewSizechartForm;
 
 		//vars
 		vm.tag_order = ['Color', 'Material', 'Size', 'Style'];
@@ -39,6 +41,7 @@
 		vm.countriesAvailable = [];
 		vm.finalColumns = [];
 		vm.finalCountry;
+		vm.showNewSizechart=false;
 
 		function init(){
 		}
@@ -146,13 +149,32 @@
 			});
 		}
 
-		//If you choose a personal Sizechart you need to search how many do you have. You can have none.
 		function deviserSizecharts() {
 			vm.sizecharts.forEach(function(element) {
 					if(element.type === 1 && element.deviser_id === person.short_id)
 						vm.deviserSizecharts.push(element);
 				});
 		}
+
+		// create new sizechart begins
+
+		function showNewSizechartForm() {
+			vm.newSizechart= {name:{}, countries:[], type:1, deviser_id:person.short_id};
+			vm.name_language=_lang;
+			vm.showNewSizechart=true;
+		}
+
+		function saveDeviserSizechart() {
+			vm.savingSizechart=true;
+			function onSaveSizechartSuccess(data) {
+				vm.deviserSizecharts.push(data);
+				vm.showNewSizechart=false;
+				vm.savingSizechart=false;
+			}
+			sizechartDataService.postDeviserSizechart(vm.newSizechart, onSaveSizechartSuccess, UtilService.onError);
+		}
+
+		// create new sizechart ends
 
 		function countriesSelect(sizechart) {
 			vm.countriesAvailable = angular.copy(sizechart.countries);
@@ -193,6 +215,7 @@
 			}
 		}
 
+		
 		function addSizeToSizechart(pos) {
 			vm.product.sizechart.values.push(vm.sizechart_empty.values[pos]);
 			vm.sizechart_available_values[pos] = false;

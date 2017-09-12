@@ -126,7 +126,11 @@
 			"ADD_OPTION": "+ Añadir otra opción",
 			"PRINT_SIZE": "Tamaño de impresión",
 			"WIDTH": "Ancho",
-			"LENGTH": "Largo"
+			"LENGTH": "Largo",
+			"SZ_NAME":"Nombre",
+			"SZ_METRIC_UNIT":"Unidad métrica",
+			"SZ_COUNTRIES":"Países",
+			"SAVE_NEW_SIZECHART":"Guardar nueva tabla de tallas"
 		}
 	}
 }
