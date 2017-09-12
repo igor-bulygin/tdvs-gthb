@@ -132,7 +132,12 @@
 			"SAVE_NEW_SIZECHART":"Save new size chart",
 			"SZ_COLUMNS":"Columns",
 			"ADD_NEW_COLUMN":"Add column",
-			"SZ_ROWS":"Rows"
+			"SZ_ROWS":"Rows",
+			"ADD_NEW":"+ Add new",
+			"SIZECHART_NAME_MANDATORY": "Name in spanish and english is mandatory.",
+			"SZ_ONE_COUNTRY_MANDATORY": "One country is the minimum required.",
+			"SZ_ONE_COLUMN_MANDATORY": "One column is the minimum required.",
+			"SZ_ONE_ROW_MANDATORY": "One row is the minimum required."
 		}
 	}
 }

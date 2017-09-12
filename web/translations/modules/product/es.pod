@@ -133,7 +133,12 @@
 			"SAVE_NEW_SIZECHART":"Guardar nueva tabla de tallas",
 			"SZ_COLUMNS":"Columnas",
 			"ADD_NEW_COLUMN":"Añadir columna",
-			"SZ_ROWS":"Filas"
+			"SZ_ROWS":"Filas",
+			"ADD_NEW":"+ Añadir",
+			"SIZECHART_NAME_MANDATORY": "El nombre en inglés y español es obligatorio.",
+			"SZ_ONE_COUNTRY_MANDATORY": "Un país es el mínimo requerido.",
+			"SZ_ONE_COLUMN_MANDATORY": "Una columna es el mínimo requerido.",
+			"SZ_ONE_ROW_MANDATORY": "Una fila es el mínimo requerido."
 		}
 	}
 }

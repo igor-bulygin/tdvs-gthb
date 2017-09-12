@@ -48,6 +48,7 @@
 		vm.finalColumns = [];
 		vm.finalCountry;
 		vm.showNewSizechart=false;
+		vm.invalidNewSizechart=false;
 
 		function init(){
 		}
@@ -171,13 +172,37 @@
 		}
 
 		function saveDeviserSizechart() {
-			vm.savingSizechart=true;
-			function onSaveSizechartSuccess(data) {
-				vm.deviserSizecharts.push(data);
-				vm.showNewSizechart=false;
-				vm.savingSizechart=false;
+			vm.invalidNewSizechart=false;
+			vm.invalidSizechartCountries=false;
+			vm.invalidSizechartValues=false;
+			vm.invalidSizechartColumns=false;
+			vm.invalidSizechartName=false;
+			
+			if (vm.newSizechart.countries.length<1) {
+				vm.invalidNewSizechart=true;
+				vm.invalidSizechartCountries=true;
 			}
-			sizechartDataService.postDeviserSizechart(vm.newSizechart, onSaveSizechartSuccess, UtilService.onError);
+			if (vm.newSizechart.columns.length<1) {
+				vm.invalidNewSizechart=true;
+				vm.invalidSizechartColumns=true;
+			}
+			if (vm.newSizechart.values.length<1) {
+				vm.invalidNewSizechart=true;
+				vm.invalidSizechartValues=true;
+			}
+			if (angular.isUndefined(vm.newSizechart.name['es-ES']) || vm.newSizechart.name['es-ES'].length<1 || angular.isUndefined(vm.newSizechart.name['en-US']) || vm.newSizechart.name['en-US'].length<1) {
+				vm.invalidNewSizechart=true;
+				vm.invalidSizechartName=true;
+			}
+			if (!vm.invalidNewSizechart) {
+				vm.savingSizechart=true;
+				function onSaveSizechartSuccess(data) {
+					vm.deviserSizecharts.push(data);
+					vm.showNewSizechart=false;
+					vm.savingSizechart=false;
+				}
+				sizechartDataService.postDeviserSizechart(vm.newSizechart, onSaveSizechartSuccess, UtilService.onError);
+			}
 		}
 
 		function new_column(column) {
@@ -187,6 +212,7 @@
 			});
 			vm.addingColumn=false;
 			addTableValues();
+			vm.invalidSizechartColumns=false;
 		}
 
 		function delete_column(index) {
@@ -207,6 +233,7 @@
 			var _len = vm.table_header.length;
 			var _data = Array.apply(null, Array(_len)).map(Number.prototype.valueOf, 0);
 			vm.newSizechart.values.push(_data);
+			vm.invalidSizechartValues=false;
 		}
 
 		function removeRow(index) {
