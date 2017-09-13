@@ -49,6 +49,8 @@
 		vm.finalCountry;
 		vm.showNewSizechart=false;
 		vm.invalidNewSizechart=false;
+		vm.selected_language=_lang;
+		vm.name_language=vm.selected_language;
 
 		function init(){
 		}
@@ -144,16 +146,26 @@
 
 		//Get sizecharts by categories.
 		function categoriesSizecharts(categories) {
-			vm.sizechart_helper = [];
-			vm.sizechart_helper_id = [];
-			vm.sizecharts.forEach(function(sizechart) {
-				for(var i = 0; i < categories.length; i++) {
-					if(sizechart.categories.indexOf(categories[i]) > -1 && vm.sizechart_helper_id.indexOf(sizechart.id) === -1) {
-						vm.sizechart_helper_id.push(sizechart.id)
-						vm.sizechart_helper.push(sizechart);
+			vm.savingSizechart=true;
+			function onGetSizechartSuccess(data) {
+				vm.selected_sizechart=null;
+				vm.selected_sizechart_country=null;
+				vm.sizecharts = data.items;
+				vm.sizechart_helper = [];
+				vm.sizechart_helper_id = [];
+				vm.sizecharts.forEach(function(sizechart) {
+					for(var i = 0; i < categories.length; i++) {
+						if(sizechart.categories.indexOf(categories[i]) > -1 && vm.sizechart_helper_id.indexOf(sizechart.id) === -1) {
+							vm.sizechart_helper_id.push(sizechart.id)
+							vm.sizechart_helper.push(sizechart);
+						}
 					}
-				}
-			});
+				});
+				vm.savingSizechart=false;
+			}
+			sizechartDataService.getSizechart({
+				scope: 'all'
+			}, onGetSizechartSuccess, UtilService.onError);
 		}
 
 		function deviserSizecharts() {
@@ -166,8 +178,7 @@
 		// create new sizechart begins
 
 		function showNewSizechartForm() {
-			vm.newSizechart= {name:{}, countries:[], columns:[], values:[], type:1, deviser_id:person.short_id};
-			vm.name_language=_lang;
+			vm.newSizechart= {name:{},categories:[], countries:[], columns:[], values:[], type:1, deviser_id:person.short_id};
 			vm.showNewSizechart=true;
 		}
 
@@ -177,7 +188,7 @@
 			vm.invalidSizechartValues=false;
 			vm.invalidSizechartColumns=false;
 			vm.invalidSizechartName=false;
-			
+
 			if (vm.newSizechart.countries.length<1) {
 				vm.invalidNewSizechart=true;
 				vm.invalidSizechartCountries=true;
@@ -196,8 +207,11 @@
 			}
 			if (!vm.invalidNewSizechart) {
 				vm.savingSizechart=true;
+				angular.forEach(vm.selected_categories, function (category) {
+					vm.newSizechart.categories.push(category);
+				});				
 				function onSaveSizechartSuccess(data) {
-					vm.deviserSizecharts.push(data);
+					vm.sizechart_helper.push(data);
 					vm.showNewSizechart=false;
 					vm.savingSizechart=false;
 				}
@@ -255,6 +269,8 @@
 
 		function countriesSelect(sizechart) {
 			vm.countriesAvailable = angular.copy(sizechart.countries);
+			vm.selected_sizechart_country=null;
+			//sizesSelect(vm.selected_sizechart, vm.countriesAvailable[0]);
 		}
 
 		//creates both a new empty sizechart and a new empty helper sizechart
@@ -294,9 +310,11 @@
 
 		
 		function addSizeToSizechart(pos) {
-			vm.product.sizechart.values.push(vm.sizechart_empty.values[pos]);
-			vm.sizechart_available_values[pos] = false;
-			vm.size_to_add=null;
+			if (pos!=null) {
+				vm.product.sizechart.values.push(vm.sizechart_empty.values[pos]);
+				vm.sizechart_available_values[pos] = false;
+				vm.size_to_add=null;
+			}
 		}
 
 		function deleteSizeFromSizechart(pos) {
@@ -355,6 +373,7 @@
 			if (!args.isFirstSelection) {
 				vm.product.options = {};
 			}
+			vm.selected_categories=args.categories;
 			getTagsByCategory(args.categories);
 			categoriesSizecharts(args.categories);
 			deviserSizecharts();

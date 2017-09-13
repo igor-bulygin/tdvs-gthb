@@ -147,9 +147,12 @@
 		</div>
 	</form>
 	<hr style="height: 2px; color: black">
-	<div class="row items-row">
+	<div class="text-center" ng-if="productVariationsCtrl.savingSizechart">
+				<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+			</div>
+	<div class="row items-row" ng-if="!productVariationsCtrl.savingSizechart">
 		<div class="col-md-12 mb-20" id="newSizechart" ng-if="productVariationsCtrl.showNewSizechart" ng-cloak>
-			<form class="mb-20" name="productVariationsCtrl.newSizechartForm" ng-if="!productVariationsCtrl.savingSizechart">
+			<form class="mb-20" name="productVariationsCtrl.newSizechartForm">
 				<label class="col-xs-12 text-center mb-20"><span translate="product.variations.NEW_SIZECHART"></span></label>
 				<div class="col-md-12 mb-20">
 					<label class="col-md-2" for="sizechartName"><span translate="product.variations.SZ_NAME"></span></label>
@@ -242,7 +245,7 @@
 									<td><span class="glyphicon glyphicon-remove close-row-sizes" ng-click="productVariationsCtrl.removeRow($index)"></span></td>
 									<td ng-repeat="cell in productVariationsCtrl.newSizechart.values[$index] track by $index">
 										<input ng-if="$index < productVariationsCtrl.newSizechart.countries.length" ng-model="productVariationsCtrl.newSizechart.values[$parent.$parent.$index][$index]" placeholder="0"/>
-										<input ng-if="$index >= productVariationsCtrl.newSizechart.countries.length" ng-model="productVariationsCtrl.newSizechart.values[$parent.$parent.$index][$index]" placeholder="0"  />
+										<input ng-if="$index >= productVariationsCtrl.newSizechart.countries.length" ng-model="productVariationsCtrl.newSizechart.values[$parent.$parent.$index][$index]" placeholder="0" type="number"/>
 									</td>
 								</tr>
 							</tbody>
@@ -253,9 +256,6 @@
 					<button class="btn btn-default btn-green " type="submit" ng-click="productVariationsCtrl.saveDeviserSizechart()"><span translate="product.variations.SAVE_NEW_SIZECHART"></span></button>
 				</div>
 			</form>
-			<div class="text-center" ng-if="productVariationsCtrl.savingSizechart">
-				<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-			</div>
 			<hr style="height: 2px; color: black">
 		</div>
 		<div class="col-md-12">
@@ -263,32 +263,25 @@
 				<label class="col-xs-12 text-center"><span translate="product.variations.SIZES"></span></label>
 				<div class ="row">
 					<div class="col-md-2">
-						<span class="a" translate="product.variations.NEW_SIZECHART" ng-click="productVariationsCtrl.showNewSizechartForm()"></span>
-					</div>
-					<div class="col-md-8 pad-about">
-						<ol class="nya-bs-select" ng-model="productVariationsCtrl.deviserSizecharts[$index]" ng-change="productVariationsCtrl.sizesSelect(productVariationsCtrl.deviserSizecharts[$index], productVariationsCtrl.deviserSizecharts[$index].countries[0])">
-							<li nya-bs-option="sizecharts in productVariationsCtrl.deviserSizecharts" data-value="sizecharts">
-								<a><span ng-bind="sizecharts.name['en-US']"></span></a>
-							</li>
-						</ol>
+						<a style="cursor:pointer;"><span translate="product.variations.NEW_SIZECHART" ng-click="productVariationsCtrl.showNewSizechartForm()"></span></a>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-3 pad-about">
 						<ol class="nya-bs-select categories-select ng-class:{'error-input': productVariationsCtrl.form_submitted && !productVariationsCtrl.selected_sizechart}" ng-model="productVariationsCtrl.selected_sizechart" ng-change="productVariationsCtrl.countriesSelect(productVariationsCtrl.selected_sizechart)">
 							<li nya-bs-option="sizechart in productVariationsCtrl.sizechart_helper" data-value="sizechart">
-								<a><span ng-bind="sizechart.name['en-US']"></span></a>
+								<a><span ng-bind="sizechart.name[productVariationsCtrl.selected_language]"></span></a>
 							</li>
 						</ol>
 					</div>
 					<div class="col-md-3 pad-about">
-						<ol class="nya-bs-select categories-select ng-class:{'error-input': productVariationsCtrl.form_submitted && !productVariationsCtrl.selected_sizechart_country}" ng-model="productVariationsCtrl.selected_sizechart_country" ng-if="productVariationsCtrl.countriesAvailable.length > 0" ng-change="productVariationsCtrl.sizesSelect(productVariationsCtrl.selected_sizechart, productVariationsCtrl.selected_sizechart_country)">
+						<ol class="nya-bs-select categories-select ng-class:{'error-input': productVariationsCtrl.form_submitted && !productVariationsCtrl.selected_sizechart_country}" ng-model="productVariationsCtrl.selected_sizechart_country" ng-if="productVariationsCtrl.countriesAvailable.length > 0 && productVariationsCtrl.selected_sizechart" ng-change="productVariationsCtrl.sizesSelect(productVariationsCtrl.selected_sizechart, productVariationsCtrl.selected_sizechart_country)">
 							<li nya-bs-option="country in productVariationsCtrl.countriesAvailable" data-value="country">
 								<a><span ng-bind="country"></span></a>
 							</li>
 						</ol>
 					</div>
-					<div ng-if="productVariationsCtrl.product.sizechart">
+					<div ng-if="productVariationsCtrl.selected_sizechart_country">
 						<div class="col-md-3">
 							<span translate="product.variations.AVAILABLE_SIZES"></span>
 						</div>
@@ -298,7 +291,7 @@
 									<a href="#" ng-if="productVariationsCtrl.sizechart_available_values[$index]"><span ng-bind="size[0]"></span></a>
 								</li>
 							</ol>
-							<a href="#" ng-click="productVariationsCtrl.addSizeToSizechart(productVariationsCtrl.size_to_add)" class="red-text col-md-12" ng-disabled="productVariationsCtrl.size_to_add == null"><span translate="product.variations.ADD_SIZE"></span></a>
+							<a href="#" ng-if="productVariationsCtrl.size_to_add!=null" ng-cloak ng-click="productVariationsCtrl.addSizeToSizechart(productVariationsCtrl.size_to_add)" class="red-text col-md-12" ng-disabled="productVariationsCtrl.size_to_add == null"><span translate="product.variations.ADD_SIZE"></span></a>
 						</div>
 					</div>
 				</div>
