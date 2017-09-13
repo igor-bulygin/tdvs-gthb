@@ -51,6 +51,7 @@
 		vm.invalidNewSizechart=false;
 		vm.selected_language=_lang;
 		vm.name_language=vm.selected_language;
+		vm.mandatory_langs={langs:['es-ES','en-US']};
 
 		function init(){
 		}
@@ -201,10 +202,12 @@
 				vm.invalidNewSizechart=true;
 				vm.invalidSizechartValues=true;
 			}
-			if (angular.isUndefined(vm.newSizechart.name['es-ES']) || vm.newSizechart.name['es-ES'].length<1 || angular.isUndefined(vm.newSizechart.name['en-US']) || vm.newSizechart.name['en-US'].length<1) {
-				vm.invalidNewSizechart=true;
-				vm.invalidSizechartName=true;
-			}
+			angular.forEach(vm.mandatory_langs.langs, function (lang) {
+				if (angular.isUndefined(vm.newSizechart.name[lang]) || vm.newSizechart.name[lang].length<1) {
+					vm.invalidNewSizechart=true;
+					vm.invalidSizechartName=true;
+				}
+			});
 			if (!vm.invalidNewSizechart) {
 				vm.savingSizechart=true;
 				angular.forEach(vm.selected_categories, function (category) {
@@ -220,13 +223,26 @@
 		}
 
 		function new_column(column) {
-			vm.newSizechart.columns.push(column);
-			angular.forEach(vm.newSizechart.values, function (row) {
-				row.push(0);
+			vm.invalidColumnName=false;
+			if (angular.isUndefined(column)) {
+				vm.invalidColumnName=true;
+				return;
+			}
+			angular.forEach(vm.mandatory_langs.langs, function (lang) {
+				if (angular.isUndefined(column[lang]) || column[lang].length<1) {
+					vm.invalidColumnName=true;
+				}
 			});
-			vm.addingColumn=false;
-			addTableValues();
-			vm.invalidSizechartColumns=false;
+			if (!vm.invalidColumnName) {
+				vm.newSizechart.columns.push(column);
+				angular.forEach(vm.newSizechart.values, function (row) {
+					row.push(0);
+				});
+				vm.addingColumn=false;
+				addTableValues();
+				vm.invalidSizechartColumns=false;
+				vm.newColumn={};
+			}
 		}
 
 		function delete_column(index) {
@@ -366,6 +382,7 @@
 			}
 		}, true)
 		//watch product
+
 
 		//events
 		$scope.$on(productEvents.setVariations, function(event, args) {

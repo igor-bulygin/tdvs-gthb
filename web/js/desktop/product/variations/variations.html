@@ -151,7 +151,7 @@
 				<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
 			</div>
 	<div class="row items-row" ng-if="!productVariationsCtrl.savingSizechart">
-		<div class="col-md-12 mb-20" id="newSizechart" ng-if="productVariationsCtrl.showNewSizechart" ng-cloak>
+		<div class="col-md-10 col-md-offset-1 mb-20" id="newSizechart" ng-if="productVariationsCtrl.showNewSizechart" ng-cloak>
 			<form class="mb-20" name="productVariationsCtrl.newSizechartForm">
 				<label class="col-xs-12 text-center mb-20"><span translate="product.variations.NEW_SIZECHART"></span></label>
 				<div class="col-md-12 mb-20">
@@ -186,19 +186,23 @@
 					<div class="col-md-10 col-md-offset-2 error-text text-right" ng-if="productVariationsCtrl.invalidSizechartCountries"><span translate="product.variations.SZ_ONE_COUNTRY_MANDATORY"></span></div>
 				</div>
 				<div>
-					<div class="col-md-12 mb-20" ng-if="productVariationsCtrl.addingColumn">
-						<label class="col-md-2"><span translate="product.variations.SZ_NAME"></span></label>
-						<div class="col-md-8">
-							<input class="mb-10 form-control" type="text" ng-model="productVariationsCtrl.newColumn[productVariationsCtrl.name_language]">
+					<div class="col-md-6 col-md-offset-3 mb-20" ng-if="productVariationsCtrl.addingColumn">
+						<label class="col-xs-12 text-center mb-20"><span translate="product.variations.NEW_COLUMN"></span></label>
+						<div class="col-md-12 mb-20">
+							<label class="col-md-3"><span translate="product.variations.SZ_COLUMN_NAME"></span></label>
+							<div class="col-md-6">
+								<input class="mb-10 form-control" type="text" ng-model="productVariationsCtrl.newColumn[productVariationsCtrl.name_language]">
+							</div>
+							<div class="col-md-3">
+								<ol class="col-md-12 about-edit-select title-lang-btn nya-bs-select" ng-model="productVariationsCtrl.name_language">
+									<li nya-bs-option="language in productVariationsCtrl.languages" data-value="language.code" deep-watch="true">
+										<a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
+									</li>
+								</ol>
+							</div>
+							<div class="col-md-12 error-text text-right mb-10" ng-if="productVariationsCtrl.invalidColumnName"><span translate="product.variations.SIZECHART_COLUMNNAME_MANDATORY"></span></div>
 						</div>
-						<ol class="col-md-2 about-edit-select title-lang-btn nya-bs-select" ng-model="productVariationsCtrl.name_language">
-							<li nya-bs-option="language in productVariationsCtrl.languages" data-value="language.code" deep-watch="true">
-								<a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
-							</li>
-						</ol>
-						<div class="col-md-2 mb-20">
-							<button class="btn btn-default btn-green " ng-click="productVariationsCtrl.new_column(productVariationsCtrl.newColumn)"><span translate="product.variations.ADD_NEW_COLUMN"></span></button>
-						</div>
+						<button class="col-md-3 col-md-offset-9 mb-20 btn btn-default btn-green " ng-click="productVariationsCtrl.new_column(productVariationsCtrl.newColumn)"><span translate="product.variations.ADD_NEW_COLUMN"></span></button>
 					</div>
 					<div class="col-md-12 mb-20" ng-if="!productVariationsCtrl.addingColumn">
 						<div class="col-md-2">
