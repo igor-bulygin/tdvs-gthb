@@ -8,7 +8,7 @@
 					<div class="row items-row" ng-if="tag.n_options > 0" ng-cloak>
 						<div class="col-xs-12">
 							<label class="col-xs-12" data-ng-for="{{tag.name}}" ng-bind="tag.name"></label>
-							<span class="optional-text" ng-if="!tag.required" translate="product.variations.OPTIONAL"></span>
+							<span class="optional-text" ng-if="!tag.required" translate="product.variations.OPTIONAL" ng-cloak></span>
 						</div>
 						<div class="mb-20 col-md-5" ng-repeat="(itemIndex,item) in productVariationsCtrl.product.options[tag.id] track by itemIndex">
 							<span class="col-xs-1">{{itemIndex+1}}&nbsp;</span>
@@ -17,10 +17,10 @@
 									<a href="#"><span ng-bind="option.text['en-US']"></span><span class="glyphicon glyphicon-ok check-mark"></span></a>
 								</li>
 							</ol>
-							<span class="glyphicon glyphicon-remove close-row" ng-if="productVariationsCtrl.product.options[tag.id].length > 1" ng-click="productVariationsCtrl.deleteOption(tag.id, $index)"></span>
+							<span class="glyphicon glyphicon-remove close-row" ng-if="productVariationsCtrl.product.options[tag.id].length > 1" ng-click="productVariationsCtrl.deleteOption(tag.id, $index)" ng-cloak></span>
 						</div>
 						<div class="col-xs-12">
-							<span class="add-cathegory col-xs-12" ng-if="(productVariationsCtrl.product.options[tag.id][productVariationsCtrl.product.options[tag.id].length-1]).length>0" ng-click="productVariationsCtrl.product.options[tag.id].push([])" translate="product.variations.ADD_OPTION"></span>
+							<span class="add-cathegory col-xs-12" ng-if="(productVariationsCtrl.product.options[tag.id][productVariationsCtrl.product.options[tag.id].length-1]).length>0" ng-click="productVariationsCtrl.product.options[tag.id].push([])" translate="product.variations.ADD_OPTION" ng-cloak></span>
 						</div>
 					</div>
 				</div>
@@ -42,14 +42,14 @@
 								<label for="preorder_unselected"><span translate="global.NO"></span></label>
 							</div>
 						</div>
-						<div class="mt-50" ng-if="productVariationsCtrl.preorder_selected">
+						<div class="mt-50" ng-if="productVariationsCtrl.preorder_selected" ng-cloak>
 							<div class="row mt-20">
 								<div class="col-md-6">
 									<p class="manufacturing-question"><span translate="product.variations.PREORDER_END"></span></p>
 									<p class="manufacturing-answer"><span translate="product.variations.REMINDER_STOCK"></span></p>
 								</div>
 								<div class="col-md-6">
-									<div class="dropdown" ng-if="!productVariationsCtrl.product.preorder.end">
+									<div class="dropdown" ng-if="!productVariationsCtrl.product.preorder.end" ng-cloak>
 										<a href="#" data-target="#" class="calendar-icon dropdown-toggle-preorder ng-class:{'error-input': !productVariationsCtrl.preorder_end_data && productVariationsCtrl.required_preorder}" id="preorderEnd" role="button" data-toggle="dropdown">
 											<i class="fa fa-calendar" aria-hidden="true"></i>
 										</a>
@@ -57,7 +57,7 @@
 											<datetimepicker data-ng-model="productVariationsCtrl.preorder_end_data" data-datetimepicker-config="{ dropdownSelector: '.dropdown-toggle-preorder', startView:'day', minView:'day'}" data-on-set-time="productVariationsCtrl.setPreorderEnd(newDate, oldDate)"></datetimepicker>
 										</ul>
 									</div>
-									<div ng-if="productVariationsCtrl.product.preorder.end">
+									<div ng-if="productVariationsCtrl.product.preorder.end" ng-cloak>
 										<p class="date-variations" ng-bind="(productVariationsCtrl.product.preorder.end | date: 'MMM dd yyyy')"></p>
 										<div class="dropdown">
 											<a href="#" data-target="#" class="dropdown-toggle-preorder red-text" id="preorderEnd" role="button" data-toggle="dropdown"><span class="glyphicon glyphicon-pencil"></span>&nbsp;<span translate="product.variations.CHANGE_DATE"></span></a>
@@ -73,7 +73,7 @@
 									<p class="manufacturing-question"><span translate="product.variations.WHEN_SHIPPED"></span></p>
 								</div>
 								<div class="col-md-6">
-									<div class="dropdown" ng-if="!productVariationsCtrl.product.preorder.ship">
+									<div class="dropdown" ng-if="!productVariationsCtrl.product.preorder.ship" ng-cloak>
 										<a href="#" data-target="#" class="calendar-icon dropdown-toggle-preorder-ship ng-class:{'error-input': !productVariationsCtrl.preorder_ship_data && productVariationsCtrl.required_preorder}" id="preorderShip" role="button" data-toggle="dropdown">
 											<i class="fa fa-calendar" aria-hidden="true"></i>
 										</a>
@@ -81,7 +81,7 @@
 											<datetimepicker data-ng-model="productVariationsCtrl.preorder_ship_data" data-datetimepicker-config="{ dropdownSelector: '.dropdown-toggle-preorder-ship', startView: 'day', minView: 'day'}" data-on-set-time="productVariationsCtrl.setPreorderShip(newDate, oldDate)"></datetimepicker>
 										</ul>
 									</div>
-									<div ng-if="productVariationsCtrl.product.preorder.ship">
+									<div ng-if="productVariationsCtrl.product.preorder.ship" ng-cloak>
 										<p class="date-variations" ng-bind="(productVariationsCtrl.product.preorder.ship | date: 'MMM dd yyyy')"></p>
 										<div class="dropdown">
 											<a href="#" data-target="#" class="dropdown-toggle-preorder-ship red-text" id="preorderShip" role="button" data-toggle="dropdown">
@@ -117,7 +117,7 @@
 						</div>
 						<label class="little-label-number" for="madetoorder"><span translate="product.variations.MANUFATURE_DAYS"></span></label>
 					</div>
-					<span ng-if="!productVariationsCtrl.product['madetoorder'].value&&productVariationsCtrl.required_madetoorder" class="error-text" translate="product.variations.DAYS_GREATER_0"></span>
+					<span ng-if="!productVariationsCtrl.product['madetoorder'].value&&productVariationsCtrl.required_madetoorder" class="error-text" translate="product.variations.DAYS_GREATER_0" ng-cloak></span>
 				</div>
 				<div class="row col-md-12" id="bespoke">
 					<div class="col-md-4 pad-about">
@@ -147,10 +147,10 @@
 		</div>
 	</form>
 	<hr style="height: 2px; color: black">
-	<div class="text-center" ng-if="productVariationsCtrl.savingSizechart">
+	<div class="text-center" ng-if="productVariationsCtrl.savingSizechart" ng-cloak>
 		<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
 	</div>
-	<div class="row items-row" ng-if="!productVariationsCtrl.savingSizechart">
+	<div class="row items-row" ng-if="!productVariationsCtrl.savingSizechart" ng-cloak>
 		<div class="col-md-10 col-md-offset-1 mb-20" id="newSizechart" ng-if="productVariationsCtrl.showNewSizechart" ng-cloak>
 			<form class="mb-20" name="productVariationsCtrl.newSizechartForm">
 				<label class="col-xs-12 text-center mb-20"><span translate="product.variations.NEW_SIZECHART"></span></label>
@@ -164,7 +164,7 @@
 							<a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
 						</li>
 					</ol>
-					<div class="col-md-12 error-text text-right mb-10" ng-if="productVariationsCtrl.invalidSizechartName"><span translate="product.variations.SIZECHART_NAME_MANDATORY"></span></div>
+					<div class="col-md-12 error-text text-right mb-10" ng-if="productVariationsCtrl.invalidSizechartName" ng-cloak><span translate="product.variations.SIZECHART_NAME_MANDATORY"></span></div>
 				</div>
 				<div class="col-md-12 mb-20">
 					<label class="col-md-2" for="sizechartMetricUnit"><span translate="product.variations.SZ_METRIC_UNIT"></span></label>
@@ -183,10 +183,10 @@
 							<a href="#" ng-click="productVariationsCtrl.addTableValues();productVariationsCtrl.invalidSizechartCountries=false"><span ng-bind="country.country_name"></span><span class="glyphicon glyphicon-ok check-mark"></span></a>
 						</li>
 					</ol>
-					<div class="col-md-10 col-md-offset-2 error-text text-right" ng-if="productVariationsCtrl.invalidSizechartCountries"><span translate="product.variations.SZ_ONE_COUNTRY_MANDATORY"></span></div>
+					<div class="col-md-10 col-md-offset-2 error-text text-right" ng-if="productVariationsCtrl.invalidSizechartCountries" ng-cloak><span translate="product.variations.SZ_ONE_COUNTRY_MANDATORY"></span></div>
 				</div>
 				<div>
-					<div class="col-md-6 col-md-offset-3 mb-20" ng-if="productVariationsCtrl.addingColumn">
+					<div class="col-md-6 col-md-offset-3 mb-20" ng-if="productVariationsCtrl.addingColumn" ng-cloak>
 						<label class="col-xs-12 text-center mb-20"><span translate="product.variations.NEW_COLUMN"></span></label>
 						<div class="col-md-12 mb-20">
 							<label class="col-md-3"><span translate="product.variations.SZ_COLUMN_NAME"></span></label>
@@ -200,11 +200,11 @@
 									</li>
 								</ol>
 							</div>
-							<div class="col-md-12 error-text text-right mb-10" ng-if="productVariationsCtrl.invalidColumnName"><span translate="product.variations.SIZECHART_COLUMNNAME_MANDATORY"></span></div>
+							<div class="col-md-12 error-text text-right mb-10" ng-if="productVariationsCtrl.invalidColumnName" ng-cloak><span translate="product.variations.SIZECHART_COLUMNNAME_MANDATORY"></span></div>
 						</div>
 						<button class="col-md-3 col-md-offset-9 mb-20 btn btn-default btn-green " ng-click="productVariationsCtrl.new_column(productVariationsCtrl.newColumn)"><span translate="product.variations.ADD_NEW_COLUMN"></span></button>
 					</div>
-					<div class="col-md-12 mb-20" ng-if="!productVariationsCtrl.addingColumn">
+					<div class="col-md-12 mb-20" ng-if="!productVariationsCtrl.addingColumn" ng-cloak>
 						<div class="col-md-2">
 							<label><span translate="product.variations.SZ_COLUMNS"></span></label>
 							<div class="col-md-12">
@@ -223,7 +223,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="error-text  text-right" ng-if="productVariationsCtrl.invalidSizechartColumns"><span translate="product.variations.SZ_ONE_COLUMN_MANDATORY"></span></div>
+							<div class="error-text  text-right" ng-if="productVariationsCtrl.invalidSizechartColumns" ng-cloak><span translate="product.variations.SZ_ONE_COLUMN_MANDATORY"></span></div>
 						</div>
 					</div>
 				</div>
@@ -235,7 +235,7 @@
 						</a>
 					</div>
 				</div>
-				<div class="col-md-12 error-text  text-right" ng-if="productVariationsCtrl.invalidSizechartValues"><span translate="product.variations.SZ_ONE_ROW_MANDATORY"></span></div>
+				<div class="col-md-12 error-text  text-right" ng-if="productVariationsCtrl.invalidSizechartValues" ng-cloak><span translate="product.variations.SZ_ONE_ROW_MANDATORY"></span></div>
 				<div class="col-md-12 mb-20">
 					<div class="row-same-height no-gutter" ng-show="productVariationsCtrl.newSizechart.values.length > 0">
 						<table class="fs1-071 fnormal table-size-generated">
@@ -249,8 +249,8 @@
 								<tr ng-cloak ng-repeat="row in productVariationsCtrl.newSizechart.values track by $index">
 									<td><span class="glyphicon glyphicon-remove close-row-sizes" ng-click="productVariationsCtrl.removeRow($index)"></span></td>
 									<td ng-repeat="cell in productVariationsCtrl.newSizechart.values[$index] track by $index">
-										<input ng-if="$index < productVariationsCtrl.newSizechart.countries.length" ng-model="productVariationsCtrl.newSizechart.values[$parent.$parent.$index][$index]" placeholder="0"/>
-										<input ng-if="$index >= productVariationsCtrl.newSizechart.countries.length" ng-model="productVariationsCtrl.newSizechart.values[$parent.$parent.$index][$index]" placeholder="0" type="number"/>
+										<input ng-if="$index < productVariationsCtrl.newSizechart.countries.length" ng-model="productVariationsCtrl.newSizechart.values[$parent.$parent.$index][$index]" placeholder="0" ng-cloak/>
+										<input ng-if="$index >= productVariationsCtrl.newSizechart.countries.length" ng-model="productVariationsCtrl.newSizechart.values[$parent.$parent.$index][$index]" placeholder="0" type="number" ng-cloak/>
 									</td>
 								</tr>
 							</tbody>
@@ -280,27 +280,27 @@
 						</ol>
 					</div>
 					<div class="col-md-3 pad-about">
-						<ol class="nya-bs-select categories-select ng-class:{'error-input': productVariationsCtrl.form_submitted && !productVariationsCtrl.selected_sizechart_country}" ng-model="productVariationsCtrl.selected_sizechart_country" ng-if="productVariationsCtrl.countriesAvailable.length > 0 && productVariationsCtrl.selected_sizechart" ng-change="productVariationsCtrl.sizesSelect(productVariationsCtrl.selected_sizechart, productVariationsCtrl.selected_sizechart_country)">
+						<ol class="nya-bs-select categories-select ng-class:{'error-input': productVariationsCtrl.form_submitted && !productVariationsCtrl.selected_sizechart_country}" ng-model="productVariationsCtrl.selected_sizechart_country" ng-if="productVariationsCtrl.countriesAvailable.length > 0 && productVariationsCtrl.selected_sizechart" ng-change="productVariationsCtrl.sizesSelect(productVariationsCtrl.selected_sizechart, productVariationsCtrl.selected_sizechart_country)" ng-cloak>
 							<li nya-bs-option="country in productVariationsCtrl.countriesAvailable" data-value="country">
 								<a><span ng-bind="country"></span></a>
 							</li>
 						</ol>
 					</div>
-					<div ng-if="productVariationsCtrl.selected_sizechart_country">
+					<div ng-if="productVariationsCtrl.selected_sizechart_country" ng-cloak>
 						<div class="col-md-3">
 							<span translate="product.variations.AVAILABLE_SIZES"></span>
 						</div>
 						<div class="col-md-3 pad-about">
 							<ol class="nya-bs-select col-md-12" ng-model="productVariationsCtrl.size_to_add">
 								<li nya-bs-option="size in productVariationsCtrl.sizechart_empty.values" data-value="$index">
-									<a href="#" ng-if="productVariationsCtrl.sizechart_available_values[$index]"><span ng-bind="size[0]"></span></a>
+									<a href="#" ng-if="productVariationsCtrl.sizechart_available_values[$index]" ng-cloak><span ng-bind="size[0]"></span></a>
 								</li>
 							</ol>
 							<a href="#" ng-if="productVariationsCtrl.size_to_add!=null" ng-cloak ng-click="productVariationsCtrl.addSizeToSizechart(productVariationsCtrl.size_to_add)" class="red-text col-md-12" ng-disabled="productVariationsCtrl.size_to_add == null"><span translate="product.variations.ADD_SIZE"></span></a>
 						</div>
 					</div>
 				</div>
-				<div class="row" ng-if="productVariationsCtrl.product.sizechart">
+				<div class="row" ng-if="productVariationsCtrl.product.sizechart" ng-cloak>
 					<div class="col-md-1">
 						<span translate="product.variations.SCALE"></span>
 					</div>
@@ -322,10 +322,10 @@
 					<tbody>
 						<tr ng-repeat="line in productVariationsCtrl.product.sizechart.values track by $index" >
 							<td ng-repeat="value in line track by $index">
-								<span ng-if="$first" ng-bind="value" class="editable-fix"></span>
-								<span ng-if="!$first" xeditable-select>
+								<span ng-if="$first" ng-bind="value" class="editable-fix" ng-cloak></span>
+								<span ng-if="!$first" xeditable-select ng-cloak>
 									<a href="#" editable-number="line[$index]" buttons="no" e-min="0" blur="submit" class="ng-class:{'purple-text': productVariationsCtrl.sizechartValuesValidation(value)}">{{line[$index]}}</a>
-									&nbsp;<span ng-if="productVariationsCtrl.product.sizechart.metric_unit" ng-bind="productVariationsCtrl.product.sizechart.metric_unit"></span>
+									&nbsp;<span ng-if="productVariationsCtrl.product.sizechart.metric_unit" ng-bind="productVariationsCtrl.product.sizechart.metric_unit" ng-cloak></span>
 								</span>
 							</td>
 							<td class="col-md-1">
@@ -354,7 +354,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="row" ng-if="productVariationsCtrl.prints_selected">
+				<div class="row" ng-if="productVariationsCtrl.prints_selected" ng-cloak>
 					<div class="row items-row">
 						<div class="row">
 							<div class="col-md-2">
@@ -393,7 +393,7 @@
 										</a>
 									</li>
 								</ol>
-								<span class="glyphicon glyphicon-remove close-row" ng-if="productVariationsCtrl.product.prints.sizes.length > 1" ng-click="productVariationsCtrl.deleteSize($index)"></span>
+								<span class="glyphicon glyphicon-remove close-row" ng-if="productVariationsCtrl.product.prints.sizes.length > 1" ng-click="productVariationsCtrl.deleteSize($index)" ng-cloak></span>
 							</div>
 						</div>
 						<div class="row">
