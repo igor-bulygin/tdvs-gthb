@@ -32,6 +32,7 @@ $show_footer = isset($this->params['show_footer']) ? $this->params['show_footer'
 		<?php $this->registerJs("var _lang = " . Json::encode(Yii::$app->language) . ";", View::POS_HEAD) ?>
 		<?php $this->registerJs("var _lang_en = " . Json::encode(array_keys(Lang::EN_US_DESC)[0]) . ";", View::POS_HEAD) ?>
 		<?php $this->registerJs("var _langs = " . Json::encode(Utils::availableLangs()) . ";", View::POS_HEAD) ?>
+		<?php $this->registerJs("var _langs_required = " . Json::encode(Lang::getRequiredLanguages()) . ";", View::POS_HEAD) ?>
 		<!-- CSS -->
 		<!--    <link href="/css/desktop/public-2/bootstrap.min.css" rel="stylesheet" type="text/css" media="all"/>-->
 		<!--    <link href="/css/desktop/public-2/application.css" rel="stylesheet" type="text/css" media="all"/>-->
