@@ -40,7 +40,7 @@ $show_footer = isset($this->params['show_footer']) ? $this->params['show_footer'
 		      rel='stylesheet' type='text/css'>
 		<!-- ICONS -->
 		<!-- IONIC ICONS -->
-		<link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+		<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 		<!-- FONTAWESOME ICONS -->
 		<script src="https://use.fontawesome.com/9a31e47575.js"></script>
 	</head>
