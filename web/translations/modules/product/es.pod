@@ -116,7 +116,7 @@
 			"IS_BESPOKED": "¿Es un producto hecho a medida?",
 			"MANUFACTURING_INFO": "¿Que información del cliente necesitas antes de fabricar este producto?",
 			"SIZES": "Tallas",
-			"NEW_SIZECHART": "Nuevo tabla de tallas",
+			"NEW_SIZECHART": "Crear tabla de tallas",
 			"AVAILABLE_SIZES": "¿En que tallas está disponible?",
 			"ADD_SIZE": "añadir talla a la tabla",
 			"SCALE": "Escala",
@@ -126,7 +126,22 @@
 			"ADD_OPTION": "+ Añadir otra opción",
 			"PRINT_SIZE": "Tamaño de impresión",
 			"WIDTH": "Ancho",
-			"LENGTH": "Largo"
+			"LENGTH": "Largo",
+			"SZ_NAME":"Nombre",
+			"SZ_METRIC_UNIT":"Unidad métrica",
+			"SZ_COUNTRIES":"Países",
+			"SAVE_NEW_SIZECHART":"Guardar nueva tabla de tallas",
+			"SZ_COLUMNS":"Columnas",
+			"ADD_NEW_COLUMN":"Añadir columna",
+			"SZ_ROWS":"Filas",
+			"ADD_NEW":"+ Añadir",
+			"SIZECHART_NAME_MANDATORY": "El nombre en inglés y español es obligatorio.",
+			"SZ_ONE_COUNTRY_MANDATORY": "Un país es el mínimo requerido.",
+			"SZ_ONE_COLUMN_MANDATORY": "Una columna es el mínimo requerido.",
+			"SZ_ONE_ROW_MANDATORY": "Una fila es el mínimo requerido.",
+			"SIZECHART_COLUMNNAME_MANDATORY": "El nombre en inglés y español es obligatorio.",
+			"NEW_COLUMN":"Nueva columna",
+			"SZ_COLUMN_NAME":"Nombre columna"
 		}
 	}
 }
