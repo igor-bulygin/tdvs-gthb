@@ -148,10 +148,7 @@
 		//Get sizecharts by categories.
 		function categoriesSizecharts(categories) {
 			vm.savingSizechart=true;
-			function onGetSizechartSuccess(data) {
-				vm.selected_sizechart=null;
-				vm.selected_sizechart_country=null;
-				vm.sizecharts = data.items;
+			function onGetSizechartSuccess(data) {vm.sizecharts = data.items;
 				vm.sizechart_helper = [];
 				vm.sizechart_helper_id = [];
 				vm.sizecharts.forEach(function(sizechart) {
@@ -160,6 +157,9 @@
 							vm.sizechart_helper_id.push(sizechart.id)
 							vm.sizechart_helper.push(sizechart);
 						}
+					}
+					if(vm.product.sizechart && vm.fromedit) {
+						setSizechartFromProduct();
 					}
 				});
 				vm.savingSizechart=false;
@@ -357,6 +357,30 @@
 			return requiredOption && (!angular.isObject(textField) || !textField['en-US'] || textField['en-US'] == '' || textField['en-US'] == undefined);
 		}
 
+		function setSizechartFromProduct() {
+			var original_sizechart = angular.copy(vm.product.sizechart);
+			if (angular.isUndefined(vm.selected_sizechart) || vm.selected_sizechart==null) {
+				vm.selected_sizechart={};
+			}
+			for(var i = 0; i < vm.sizecharts.length; i++) {
+				if(vm.product.sizechart.short_id === vm.sizecharts[i].id) {
+					vm.selected_sizechart = vm.sizecharts[i];
+				}
+			}
+			countriesSelect(vm.selected_sizechart);
+			vm.selected_sizechart_country = vm.product.sizechart.country;
+			sizesSelect(vm.selected_sizechart, vm.product.sizechart.country)
+			vm.product.sizechart.values = angular.copy(original_sizechart.values)
+			if(original_sizechart.metric_unit)
+				vm.product.sizechart['metric_unit'] = angular.copy(original_sizechart.metric_unit);
+			for(var i = 0; i < vm.sizechart_empty.values.length; i++) {
+				vm.product.sizechart.values.forEach(function (element) {
+					if(angular.isArray(element) && element.length > 0 && element[0] == vm.sizechart_empty.values[i][0])
+						vm.sizechart_available_values[i] = false;
+				})
+			}
+		}
+
 		//watches
 		$scope.$watch('productVariationsCtrl.product.bespoke', function(newValue, oldValue) {
 			if(angular.isObject(oldValue) && oldValue.type === 0 && angular.isObject(newValue) && newValue.type === 1) {
@@ -414,27 +438,7 @@
 						delete vm.product.sizechart;
 					else if(vm.product.sizechart && vm.fromedit) {
 						delete vm.fromedit;
-						var original_sizechart = angular.copy(vm.product.sizechart);
-						if (angular.isUndefined(vm.selected_sizechart)) {
-							vm.selected_sizechart={};
-						}
-						for(var i = 0; i < vm.sizecharts.length; i++) {
-							if(vm.product.sizechart.short_id === vm.sizecharts[i].id) {
-								vm.selected_sizechart = vm.sizecharts[i];
-							}
-						}
-						countriesSelect(vm.selected_sizechart);
-						vm.selected_sizechart_country = vm.product.sizechart.country;
-						sizesSelect(vm.selected_sizechart, vm.product.sizechart.country)
-						vm.product.sizechart.values = angular.copy(original_sizechart.values)
-						if(original_sizechart.metric_unit)
-							vm.product.sizechart['metric_unit'] = angular.copy(original_sizechart.metric_unit);
-						for(var i = 0; i < vm.sizechart_empty.values.length; i++) {
-							vm.product.sizechart.values.forEach(function (element) {
-								if(angular.isArray(element) && element.length > 0 && element[0] == vm.sizechart_empty.values[i][0])
-									vm.sizechart_available_values[i] = false;
-							})
-						}
+						setSizechartFromProduct();
 					}
 				}
 			});
