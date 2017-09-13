@@ -451,6 +451,10 @@ a, a:hover, a:focus {
 .bootstrap-select.btn-group .dropdown-toggle .filter-option {
   padding-top: 5px !important; }
 
+.select-full .btn {
+  max-width: 100% !important;
+  width: 100% !important; }
+
 .auto-center {
   margin: 0 auto;
   display: block; }
@@ -4958,11 +4962,11 @@ h3 {
     color: #939393; }
 
 .deviser-data-about-edit {
-  background-color: #e9e9e9;
+  border: 1px solid #cccccc;
   padding: 10px 20px 20px;
   width: 328px;
   position: absolute;
-  top: 260px;
+  top: 50px;
   left: 40px;
   border-radius: 6px 6px 6px 6px !important;
   -webkit-border-radius: 6px 6px 6px 6px !important;
@@ -5016,7 +5020,7 @@ h3 {
   width: 265px !important; }
 
 .optional-text {
-  color: #7AB83A;
+  color: #7c7c7c;
   font-size: 11px;
   margin-top: 15px;
   margin-left: 10px;
