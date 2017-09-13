@@ -363,7 +363,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 		<div class="container">
 			<div class="work-profile-description-wrapper">
 						<div class="title mb-40"><span class="title-product-name" translate="product.detail.DESCRIPTION"></span></div>
-						<div class="col-sm-8 pad-product">
+						<div class="col-sm-9 pad-product">
 							<div class="description-parraf">
 								<?= $product->description ?>
 							</div>
@@ -381,7 +381,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 								</div>
 							<?php } ?>
 						</div>
-						<div class="col-sm-4">
+						<div class="col-sm-3">
 							<div class="avatar-wrapper-side">
 									<div class="avatar">
 										<a href="<?= $person->getStoreLink() ?>">

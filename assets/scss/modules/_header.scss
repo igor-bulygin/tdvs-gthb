@@ -462,7 +462,7 @@
     width: 110px;
 }
 .cart-icon{  
-    background: url('/imgs/white-cart.svg') 0 0 no-repeat transparent;
+    background: url('/imgs/cart-white.svg') 0 0 no-repeat transparent;
     display: block;
     width: 23px;
     height: 23px;
@@ -471,5 +471,5 @@
     @include border-radius(0,0,0,0);
 }
 .cart-icon:hover{  
-    background: url('/imgs/red-cart.svg') 0 0 no-repeat transparent;
+    background: url('/imgs/cart-red.svg') 0 0 no-repeat transparent;
 }
