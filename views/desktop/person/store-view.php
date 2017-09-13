@@ -50,33 +50,7 @@ $this->params['person_menu_store_categories'] = $categories;
 			</div>
 			<div class="col-md-10">
 				<div class="content-store">
-					<?php if ($unpublishedWorks || count($categories) > 1) { ?>
-						<div class="cathegory-wrapper">
-							<?php if ($unpublishedWorks && $person->isDeviserEditable()) { ?>
-								<div class="col-md-3 col-sm-3 col-xs-3 pad-cathegory">
-									<a href="<?= $person->getStoreEditLink(['product_state' => \app\models\Product::PRODUCT_STATE_DRAFT])?>">
-										<div class="unpublished-square">
-											<p><span translate="person.store.UNPUBLISHED_WORKS_BR"></span></p>
-										</div>
-									</a>
-								</div>
-							<?php } ?>
-							<?php foreach ($categories as $i => $category) { ?>
-								<div class="col-md-3 col-sm-3 col-xs-3 pad-cathegory">
-									<a href="<?= $person->getStoreLink(['category' => $category->short_id])?>">
-										<figure class="cathegory">
-											<img class="<?= ($selectedCategory->short_id==$category->short_id) ? 'active' : '' ?>" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($category->getDeviserProduct()->getMainImage())->resize(240, 175) ?>">
-											<figcaption>
-												<span class="name">
-													<?= Utils::l($category->name) ?>
-												</span>
-											</figcaption>
-										</figure>
-									</a>
-								</div>
-							<?php } ?>
-						</div>
-					<?php } ?>
+					
 					<div class="store-grid">
 						<nav class="products-menu">
 							<ul>
