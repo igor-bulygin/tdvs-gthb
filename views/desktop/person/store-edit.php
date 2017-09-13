@@ -104,9 +104,6 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 										</div>
 									</div>
 									<div ng-if="!editStoreCtrl.view_unpublished_works">
-										<div class="mt-20">
-											<span class="title"><?= Utils::l($selectedCategory->name) ?></span>
-										</div>
 										<nav class="products-menu">
 											<ul>
 												<?php if (count($selectedCategory->getDeviserSubcategories()) > 1) { ?>
