@@ -158,11 +158,18 @@
 							vm.sizechart_helper.push(sizechart);
 						}
 					}
-					if(vm.product.sizechart && vm.fromedit) {
-						setSizechartFromProduct();
-					}
 				});
+				if(vm.product.sizechart && vm.fromedit) {
+					setSizechartFromProduct();
+				}
+				if (!vm.fromedit && !angular.isUndefined(vm.selected_sizechart) && !angular.isUndefined(vm.selected_sizechart.id) && vm.sizechart_helper_id.indexOf(vm.selected_sizechart.id) === -1) {
+					vm.selected_sizechart=vm.sizechart_helper[0];
+					vm.product.sizechart=null;
+				}
 				vm.savingSizechart=false;
+				if (vm.sizechart_helper.length>0) {
+					vm.show_sizecharts = true;
+				}
 			}
 			sizechartDataService.getSizechart({
 				scope: 'all'
@@ -181,6 +188,13 @@
 		function showNewSizechartForm() {
 			vm.newSizechart= {name:{},categories:[], countries:[], columns:[], values:[], type:1, deviser_id:person.short_id};
 			vm.showNewSizechart=true;
+			function onGetCountriesSuccess(data) {
+				vm.newSizechartAvailableCountries=data.items;
+				
+			}
+			sizechartDataService.getCountries({}, onGetCountriesSuccess, UtilService.onError);
+			
+			
 		}
 
 		function saveDeviserSizechart() {

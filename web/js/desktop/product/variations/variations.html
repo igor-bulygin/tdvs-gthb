@@ -148,8 +148,8 @@
 	</form>
 	<hr style="height: 2px; color: black">
 	<div class="text-center" ng-if="productVariationsCtrl.savingSizechart">
-				<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-			</div>
+		<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+	</div>
 	<div class="row items-row" ng-if="!productVariationsCtrl.savingSizechart">
 		<div class="col-md-10 col-md-offset-1 mb-20" id="newSizechart" ng-if="productVariationsCtrl.showNewSizechart" ng-cloak>
 			<form class="mb-20" name="productVariationsCtrl.newSizechartForm">
@@ -176,11 +176,11 @@
 						</ol>
 					</div>
 				</div>
-				<div class="col-md-12 mb-20">
+				<div class="col-md-12 mb-20" ng-if="productVariationsCtrl.newSizechartAvailableCountries" ngt-cloak>
 					<label class="col-md-2" for="sizechartCountries"><span translate="product.variations.SZ_COUNTRIES"></span></label>
 					<ol class="nya-bs-select categories-select col-md-10" ng-model="productVariationsCtrl.newSizechart.countries" multiple>
-						<li nya-bs-option="country in productVariationsCtrl.countriesAvailable" data-value="country" deep-watch="true" class="">
-							<a href="#" ng-click="productVariationsCtrl.addTableValues();productVariationsCtrl.invalidSizechartCountries=false"><span ng-bind="country"></span><span class="glyphicon glyphicon-ok check-mark"></span></a>
+						<li nya-bs-option="country in productVariationsCtrl.newSizechartAvailableCountries" data-value="country.id" deep-watch="true" class="">
+							<a href="#" ng-click="productVariationsCtrl.addTableValues();productVariationsCtrl.invalidSizechartCountries=false"><span ng-bind="country.country_name"></span><span class="glyphicon glyphicon-ok check-mark"></span></a>
 						</li>
 					</ol>
 					<div class="col-md-10 col-md-offset-2 error-text text-right" ng-if="productVariationsCtrl.invalidSizechartCountries"><span translate="product.variations.SZ_ONE_COUNTRY_MANDATORY"></span></div>
@@ -216,7 +216,8 @@
 						<div class="col-md-10">
 							<div class="no-gutter sortable-container" sv-root sv-part="productVariationsCtrl.newSizechart.columns" sv-on-sort="productVariationsCtrl.move_column($indexFrom, $indexTo)">
 								<div ng-cloak class="col-xs-2 country pull-left funiv fs1" sv-element ng-repeat="column in productVariationsCtrl.newSizechart.columns track by $index">
-									<span class="glyphicon glyphicon-menu-hamburger pointer fc-68" sv-handle></span> {{ column[productVariationsCtrl.name_language] }}
+									<!-- todo:sorting columns <span class="glyphicon glyphicon-menu-hamburger pointer fc-68" sv-handle></span> -->
+									<span ng-bind="column[productVariationsCtrl.name_language]"></span>
 									<div class="pull-right">
 										<span class="glyphicon glyphicon-trash pointer fc-68" ng-click="productVariationsCtrl.delete_column($index)"></span>
 									</div>
