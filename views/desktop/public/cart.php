@@ -22,10 +22,10 @@ $this->title = Yii::t('app/public', 'CART');
 		</div>
 		<div class="container checkout-sidebar no-pad">
 			<div class="col-md-8 no-pad">
-				<shopping-cart cart="cartOverviewCtrl.cart"></shopping-cart>
+				<shopping-cart cart="cartOverviewCtrl.cart" tags="cartOverviewCtrl.tags"></shopping-cart>
 			</div>
 			<div class="col-md-4 no-pad summary-side bordered-left">
-				<cart-summary cart="cartOverviewCtrl.cart"></cart-summary>
+				<cart-summary cart="cartOverviewCtrl.cart" tags="cartOverviewCtrl.tags"></cart-summary>
 			</div>
 		</div>
 </div>

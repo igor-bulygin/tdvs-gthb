@@ -321,6 +321,12 @@ class Product extends CActiveRecord {
 			],
 			[
 				[
+					'name',
+				],
+				'app\validators\SpacesFilterValidator',
+			],
+			[
+				[
 					'deviser_id',
 					'name',
 					'slug',

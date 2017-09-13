@@ -7,7 +7,7 @@
 		
 		$scope.$on(cartEvents.cartUpdated, function(event, args) {
 			vm.cart = angular.copy(args.cart);
-			cartService.parseTags(vm.cart);
+			cartService.parseTags(vm.cart, vm.tags);
 			cartService.setTotalItems(vm.cart);
 			cartService.setTotalAmount(vm.cart);
 		});
@@ -21,6 +21,7 @@
 		bindings: {
 			state: '=?',
 			cart: '<',
+			tags: '<'
 		}
 	}
 
