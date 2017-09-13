@@ -5,3 +5,7 @@ function currentHost() {
 function currentURL() {
 	return currentHost() + window.location.pathname;
 }
+
+function getStripeApiKey() {
+	return '';
+}
