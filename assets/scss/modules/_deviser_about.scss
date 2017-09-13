@@ -401,11 +401,11 @@
     }
 }
 .deviser-data-about-edit{
-    background-color: $background_grey;
+    border: 1px solid #cccccc;
     padding:10px 20px 20px;
     width: 328px;
     position: absolute;
-    top: 260px;
+    top: 50px;
     left: 40px;
     @include border-radius(6px,6px,6px,6px);
     label {
@@ -462,7 +462,7 @@
     width: 265px!important;
 }
 .optional-text{
-    color: $dark_green;
+    color: #7c7c7c;
     font-size: 11px;
     margin-top: 15px;
     margin-left: 10px;

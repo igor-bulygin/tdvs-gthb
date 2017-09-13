@@ -28,16 +28,18 @@ $this->registerJs("var order_id= ".Json::encode($order_id), yii\web\View::POS_HE
 					<span class="success-header-message" translate="todevise.order.PURCHASE_COMPLETE"></span>
 					<span class="success-header-tagline" translate="todevise.order.RECEIPT_TO_MAIL"></span>
 				</div>
-				<div class="col-md-2">
+				<div class="col-md-4">
 					<a href="/">
 						<button class="btn btn-red btn-medium pull-right mt-60" translate="todevise.order.CONTINUE_SHOPPING"></button>
 					</a>
 				</div>
+				<?php /*
 				<div class="col-md-2">
 					<a href="/">
 						<button class="btn btn-medium btn-white pull-right mt-60" translate="todevise.order.DOWNLOAD_RECEIPT"></button>
 					</a>
 				</div>
+ */ ?>
 			</div>
 		</div>
 	</div>

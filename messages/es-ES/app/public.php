@@ -68,7 +68,7 @@ return [
 	'NEW_STORY_BY_PERSON_NAME' => 'Nueva historia de {person_name}',
 	'NONE' => 'Ninguno',
 	'ORDERS' => 'Órdenes',
-	'ORDER_ID_COMPLETED' => 'Orden {orden_id} completada',
+	'ORDER_ID_COMPLETED' => 'Orden {order_id} completada',
 	'PAYMENTS_MADE_TROUGH_STRIPE' => 'Todos los pagos de Todevise se realizan a través de Stripe, una plataforma de procesamiento de pagos. Usamos Stripe porque es muy seguro, rápido y fácil de usar. La comisión de Stripe es de 1,40% + 0,25€ de cada transacción. El dinero será transferido a su cuenta de Stripe inmediatamente después de cada compra. <br /><br/>Para empezar a vender en Todevise, debes abrir una cuenta de Stripe (es 100% gratis) y conectarla a tu perfil Todevise. Para ello, pulse el botón de abajo. Cuando termine de crear su cuenta de Stripe, será redirigido a esta página.',
 	'PERSON_NAME_FAQS' => 'Faqs',
 	'PRESS_BY_PERSON_NAME' => 'Prensa de {person_name}',

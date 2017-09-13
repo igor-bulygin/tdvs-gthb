@@ -21,7 +21,7 @@
 		}
 
 		function configureStripe() {
-			Stripe.setPublishableKey('pk_test_p1DPyiicE2IerEV676oj5t89');
+			// Stripe.setPublishableKey(getStripeApiKey());
 
 			function onReceiveTokenSuccess(data) {
 				localStorageUtilService.removeLocalStorage('cart_id');
@@ -35,9 +35,9 @@
 			}
 
 			vm.handler = StripeCheckout.configure({
-				key: 'pk_test_p1DPyiicE2IerEV676oj5t89',
+				key: getStripeApiKey(),
 				image: '/imgs/logo_stripe.png',
-				locale: 'auto',
+				locale: _lang,
 				zipCode: true,
 				currency: 'eur',
 				token: function(token) {
