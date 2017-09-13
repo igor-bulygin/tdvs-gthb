@@ -62,7 +62,16 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 						<div id='carousel-custom' class='carousel slide' data-ride='carousel'>
 							<!-- Indicators -->
 							<div class="row">
-								<div class="col-sm-12">
+								<div class="col-sm-2">
+									<ul class='carousel-indicators thumbs mCustomScrollbar'>
+										<?php foreach ($productImages as $key => $imageUrl) { ?>
+											<li class="col-sm-2" data-target='#carousel-custom' data-slide-to='<?= $key ?>' class='active'>
+												<img src='<?= Utils::url_scheme() ?><?= Utils::thumborize($imageUrl)->resize(410, 0) ?>' alt='' />
+											</li>
+											<?php } ?>
+									</ul>
+								</div>
+								<div class="col-sm-10">
 									<div class='carousel-outer'>
 										<!-- Wrapper for slides -->
 										<div class='carousel-inner'>
@@ -85,7 +94,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 										<?php } ?>
 									</div>
 								</div>
-								<div class="col-sm-12">
+								<!--div class="col-sm-12">
 									<ol class='carousel-indicators thumbs mCustomScrollbar'>
 										<?php foreach ($productImages as $key => $imageUrl) { ?>
 											<li class="col-sm-1" data-target='#carousel-custom' data-slide-to='<?= $key ?>' class='active'>
@@ -93,7 +102,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 											</li>
 											<?php } ?>
 									</ol>
-								</div>
+								</div-->
 							</div>
 						</div>
 					</div>
@@ -299,14 +308,14 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 							<div class="full-width mt-20">	
 								<div class="bs-example">
 									<p>
-										<a href="#collapseExample" class="btn collapsed accordion-btn" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample"> <span>SHIPPING &amp; POLICIES</span> <i class="ion-plus"></i> </a>
+										<a href="#collapseExample" class="btn collapsed accordion-btn" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample"> <span translate="product.detail.SHIPPING&POLICIES"></span> <i class="ion-plus"></i> </a>
 									</p>
 									<div class="collapse" id="collapseExample" aria-expanded="false" style="height: 0px;">
 										<div class="shipping-policies-wrapper">
 								<div class="policies-row">
 									<form class="form-horizontal">
 										<div class="form-group">
-											<label class="col-sm-5 control-label shipping-label no-pad-r"><span>Shipping price to SPAIN</span></label>
+											<label class="col-sm-5 control-label shipping-label no-pad-r"><span translate="product.detail.SHIPPING_PRICE_SPAIN"></span></label>
 											<!--
 											<div class="col-sm-5 pad-product">
 												<select class="form-control selectpicker shipping-select product-select" title="Choose country">
@@ -316,7 +325,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 											</div>
 											-->
 											<div class="col-sm-3">
-												is <span class="tax">€<?=$product->getShippingPrice(Country::getDefaultContryCode())?></span>
+												<span translate="product.detail.IS"></span> <span class="tax">€<?=$product->getShippingPrice(Country::getDefaultContryCode())?></span>
 											</div>
 										</div>
 									</form>
@@ -355,9 +364,9 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 			<div class="work-profile-description-wrapper">
 						<div class="title mb-40"><span class="title-product-name" translate="product.detail.DESCRIPTION"></span></div>
 						<div class="col-sm-8 pad-product">
-							<p class="description-parraf">
+							<div class="description-parraf">
 								<?= $product->description ?>
-							</p>
+							</div>
 							<?php if (count($product->mediaMapping->descriptionPhotosInfo) > 0) { ?>
 								<div class="tb-wrapper">
 									<div class="row">
@@ -376,7 +385,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 							<div class="avatar-wrapper-side">
 									<div class="avatar">
 										<a href="<?= $person->getStoreLink() ?>">
-											<span>Created by</span>
+											<span translate="product.detail.CREATED_BY"></span>
 											<img class="avatar-default medium" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getAvatarImage())->resize(128, 128) ?>" data-pin-nopin="true">
 											<!--<span><?= $person->getName() ?></span>-->
 										</a>
@@ -387,19 +396,19 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 		</div>
 		<div class="container">
 			<ul class="nav nav-tabs product-tabs" role="tablist">
-				<li role="presentation" class="no-b-r">
-					<a href="#works" aria-controls="description" role="tab" data-toggle="tab"><span class="title-product-name">works by <?= $person->getName() ?></span></a>
+				<li role="presentation" class="active">
+					<a href="#works" aria-controls="works" role="tab" data-toggle="tab"><span class="title-product-name">works by <?= $person->getName() ?></span></a>
 				</li>
 				<li role="presentation" class="no-b-r">
-					<a href="#boxes" aria-controls="description" role="tab" data-toggle="tab"><span class="title-product-name">Boxes</span></a>
+					<a href="#boxes" aria-controls="boxes" role="tab" data-toggle="tab"><span class="title-product-name">Boxes</span></a>
 				</li>
-				<?php if (count($videos)) { ?>
+				<? /*php if (count($videos)) {*/ ?>
 				<li role="presentation" class="no-b-r">
-					<a href="#videos" aria-controls="works" role="tab" data-toggle="tab"><span translate="product.detail.VIDEOS" class="title-product-name"></span></a>
+					<a href="#videos" aria-controls="videos" role="tab" data-toggle="tab"><span translate="product.detail.VIDEOS" class="title-product-name"></span></a>
 				</li>
-				<?php } ?>
-				<li role="presentation" class="active ">
-					<a href="#faqs" aria-controls="works" role="tab" data-toggle="tab"><span class="title-product-name">FAQs</span></a>
+				<?php /*}*/ ?>
+				<li role="presentation" class="no-b-r">
+					<a href="#faqs" aria-controls="faqs" role="tab" data-toggle="tab"><span class="title-product-name">FAQs</span></a>
 				</li>
 			</ul>
 		</div>
@@ -567,7 +576,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 						</div>
 					</div>-->
 				</div>
-				<?php if (count($videos)) { ?>
+				<?php /*if (count($videos)) { */?>
 					<div role="tabpanel" class="tab-pane work-description-wrapper" id="videos">
 						<div class="other-products-wrapper">
 							<div style="height:500px;">
@@ -583,7 +592,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 							</div>
 						</div>
 					</div>
-				<?php } ?>
+				<?php /*} */?>
 				<div role="tabpanel" class="tab-pane" id="works">
 					<nav class="products-menu">
 						<ul>
