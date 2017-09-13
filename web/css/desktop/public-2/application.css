@@ -822,11 +822,11 @@ a, a:hover, a:focus {
 .heart-icon {
   width: 30px;
   height: 30px;
-  background: url(/imgs/black-heart.svg) 0 0 no-repeat transparent;
+  background: url(/imgs/heart-black.svg) 0 0 no-repeat transparent;
   display: inline-block;
   vertical-align: middle; }
   .heart-icon:hover {
-    background: url(/imgs/red-heart.svg) 0 0 no-repeat transparent; }
+    background: url(/imgs/heart-red.svg) 0 0 no-repeat transparent; }
 
 .btn-save-box {
   background-color: transparent;
@@ -962,6 +962,15 @@ a, a:hover, a:focus {
   .accordion-btn i {
     float: right;
     margin-right: 10px; }
+
+.btn-love.pull-left:hover .heart-icon {
+  background: url(/imgs/heart-white.svg) 0 0 no-repeat transparent; }
+.btn-love .heart-icon:hover {
+  background: url(/imgs/heart-white.svg) 0 0 no-repeat transparent; }
+.btn-love.pull-right:hover .box-icon {
+  background: url(/imgs/box-white.svg) 0 0 no-repeat transparent; }
+.btn-love .box-icon:hover {
+  background: url(/imgs/box-white.svg) 0 0 no-repeat transparent; }
 
 .products-menu ul {
   margin: 20px 0 40px;
@@ -2628,7 +2637,7 @@ h3 {
   width: 110px; }
 
 .cart-icon {
-  background: url("/imgs/white-cart.svg") 0 0 no-repeat transparent;
+  background: url("/imgs/cart-white.svg") 0 0 no-repeat transparent;
   display: block;
   width: 23px;
   height: 23px;
@@ -2639,7 +2648,7 @@ h3 {
   -moz-border-radius: 0 0 0 0 !important; }
 
 .cart-icon:hover {
-  background: url("/imgs/red-cart.svg") 0 0 no-repeat transparent; }
+  background: url("/imgs/cart-red.svg") 0 0 no-repeat transparent; }
 
 .carousel-indicators li {
   margin: 1px 5px;
@@ -2907,23 +2916,23 @@ h3 {
     	color: $dark_red!important;
     }*/ }
     .hover-btns-wrapper .icons-hover.box {
-      background: url("/imgs/black-box.svg") 0 0 no-repeat transparent;
+      background: url("/imgs/box-black.svg") 0 0 no-repeat transparent;
       display: inline-block;
       float: right;
       border-radius: 0 0 0 0 !important;
       -webkit-border-radius: 0 0 0 0 !important;
       -moz-border-radius: 0 0 0 0 !important; }
     .hover-btns-wrapper .icons-hover.heart-icon {
-      background: url("/imgs/black-heart.svg") 0 0 no-repeat transparent;
+      background: url("/imgs/heart-black.svg") 0 0 no-repeat transparent;
       float: left;
       display: inline-block;
       border-radius: 0 0 0 0 !important;
       -webkit-border-radius: 0 0 0 0 !important;
       -moz-border-radius: 0 0 0 0 !important; }
     .hover-btns-wrapper .icons-hover.box:hover {
-      background: url("/imgs/red-box.svg") 0 0 no-repeat transparent; }
+      background: url("/imgs/box-red.svg") 0 0 no-repeat transparent; }
     .hover-btns-wrapper .icons-hover.heart-icon:hover {
-      background: url("/imgs/red-heart.svg") 0 0 no-repeat transparent; }
+      background: url("/imgs/heart-red.svg") 0 0 no-repeat transparent; }
 
 .grey-link {
   color: #939393; }
@@ -5908,6 +5917,8 @@ h3 {
 
 .product {
   background-color: #ffffff; }
+  .product .container {
+    margin-top: 70px; }
   .product .product-data-wrapper {
     padding: 0 15px;
     margin: 15px 0; }
@@ -5922,7 +5933,7 @@ h3 {
         letter-spacing: 1.5px;
         display: block;
         line-height: 39px;
-        margin-bottom: 40px; }
+        margin-bottom: 22px; }
       .product .product-data-wrapper .product-data .score i {
         color: #F7284B; }
       .product .product-data-wrapper .product-data .number-score {
@@ -6048,10 +6059,10 @@ h3 {
 .view-chart-size {
   text-transform: uppercase;
   font-size: 12px;
-  color: #939393; }
+  color: #c91c39;
+  font-weight: bold; }
   .view-chart-size:hover {
-    color: #1C1919;
-    font-weight: bold; }
+    color: #1C1919; }
 
 .product-select button {
   color: #1C1919;
@@ -6096,7 +6107,7 @@ h3 {
 
 .description-parraf {
   border-right: 1px solid #979797;
-  height: 141px;
+  min-height: 141px;
   padding: 0 60px; }
 
 .results-wrapper {
@@ -6105,11 +6116,12 @@ h3 {
 .product-description {
   background-color: #ffffff; }
   .product-description .product-tabs {
-    margin: 0 auto;
-    width: 650px;
+    text-align: center;
     border: none !important; }
     .product-description .product-tabs li {
-      margin: 0 10px; }
+      margin: 0 10px;
+      display: inline-block;
+      float: none !important; }
       .product-description .product-tabs li.active a {
         border: none !important;
         border-bottom: 2px solid #c91c39 !important; }

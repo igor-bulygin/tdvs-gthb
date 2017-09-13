@@ -5,11 +5,14 @@
     background-color: $white;
     @extend %block;
     .product-tabs{
-		margin: 0 auto;
-    	width: 650px;
+		//margin: 0 auto;
+    	//width: 650px;
+        text-align: center;
 		border: none!important;
         li{
 			margin: 0 10px;
+            display: inline-block; 
+            float: none !important;
             &.active{
                 a{
 					border: none!important;
