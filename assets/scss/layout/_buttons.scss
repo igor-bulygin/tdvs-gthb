@@ -294,12 +294,15 @@
     color: $black;
 	width: 209px;
     height: 40px;
-    padding-top: 9px;
+    //padding-top: 9px;
+    padding:0;
+    margin: auto;
 	.box-icon{
 	    width: 32px;
 		vertical-align: middle;
 		height: 25px;
 		display: inline-block;
+		margin-right: 10px;
 	}
     &:hover{
 		background-color:$black;
