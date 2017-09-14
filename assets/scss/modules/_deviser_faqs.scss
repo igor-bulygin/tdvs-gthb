@@ -56,7 +56,7 @@
 }
 .faq-edit-empty{
     p{
-        font: 16px $font-family--serif;
+        font-size:16px;
         text-align: center;
         margin: 20px 0;
     }
@@ -92,7 +92,6 @@
     margin: 0 0 50px;
 }
 .delete-link{
-    font-family: $font-family--bold;
     color: $dark_grey;
     margin: 0 0 5px 15px;
     &:hover{
@@ -105,7 +104,6 @@
         border-bottom: 1px solid #fff!important;
         @include border-radius(0px,0px,0px,0px);
         button{
-            font-family: $font-family--bold;
             color: $black!important;
             border-top: 1px solid transparent!important;
             border-left: 1px solid transparent!important;
@@ -141,7 +139,6 @@
 }
 .add-lang{
     float: left;
-    font-family: $font-family--bold;
     display: block;
     margin: 11px 0 0 10px;
     @extend %link-red;
@@ -155,14 +152,12 @@
     margin: 10px 0;
 }
 .faq-edit-question{
-    font-family: $font-family--secondary;
     font-size: 16px;
     
     display: block;
     margin: 12px 0 0 0;
 }
 .faq-edit-answer{
-    font-family: $font-family--secondary;
     font-size: 16px;
     background-color: $white;
     border: 1px solid $light_grey;
@@ -250,4 +245,8 @@
 				max-width: 286px;
 			}
 	}
+}
+.edit-faq-panel-wrapper{
+	width: 100%;
+	float: left;
 }

@@ -4186,7 +4186,7 @@ h3 {
   display: block; }
 
 .faq-edit-empty p {
-  font: 16px "Playfair Display", Georgia, serif;
+  font-size: 16px;
   text-align: center;
   margin: 20px 0; }
 
@@ -4230,7 +4230,6 @@ h3 {
   margin: 0 0 50px; }
 
 .delete-link {
-  font-family: "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #939393;
   margin: 0 0 5px 15px; }
   .delete-link:hover {
@@ -4243,7 +4242,6 @@ h3 {
   -webkit-border-radius: 0px 0px 0px 0px !important;
   -moz-border-radius: 0px 0px 0px 0px !important; }
   .faq-language-menu ol button {
-    font-family: "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #1C1919 !important;
     border-top: 1px solid transparent !important;
     border-left: 1px solid transparent !important;
@@ -4273,7 +4271,6 @@ h3 {
 
 .add-lang {
   float: left;
-  font-family: "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
   display: block;
   margin: 11px 0 0 10px; }
 
@@ -4284,13 +4281,11 @@ h3 {
   margin: 10px 0; }
 
 .faq-edit-question {
-  font-family: "Univers Condensed Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 16px;
   display: block;
   margin: 12px 0 0 0; }
 
 .faq-edit-answer {
-  font-family: "Univers Condensed Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 16px;
   background-color: #ffffff;
   border: 1px solid #bfbfbf;
@@ -4366,6 +4361,10 @@ h3 {
   min-height: 250px; }
   .showcase.influencers img {
     max-width: 286px; }
+
+.edit-faq-panel-wrapper {
+  width: 100%;
+  float: left; }
 
 .banner-deviser {
   position: relative;
