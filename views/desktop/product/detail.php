@@ -262,8 +262,9 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 											<li>
 												<a href="#">
 													<i class="facebook">
-														<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 23 42" style="enable-background:new 0 0 23 42;" xml:space="preserve">
+														<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+															 x="0px" y="0px"
+															 viewBox="0 0 23 42" style="enable-background:new 0 0 23 42;" xml:space="preserve">
 														<g id="Page-1">
 															<path id="Path" class="st0" d="M14.3,41V21h5.9l0.8-6.9h-6.7l0-3.4c0-1.8,0.2-2.8,3-2.8H21V1H15c-7.1,0-9.6,3.3-9.6,9v4.1H1V21h4.4
 																v20H14.3L14.3,41L14.3,41L14.3,41z"/>
@@ -275,8 +276,9 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 											<li>
 												<a class="twitter" href="#">
 													<i class="twitter">
-														<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 49 42" style="enable-background:new 0 0 49 42;" xml:space="preserve">
+														<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+															 x="0px" y="0px"
+															 viewBox="0 0 49 42" style="enable-background:new 0 0 49 42;" xml:space="preserve">
 														<g id="Page-1">
 															<path id="Path" class="st0" d="M23.5,11.6l0.1,1.7l-1.7-0.2C15.8,12.3,10.5,9.6,6,5L3.8,2.7L3.2,4.4C2,8.1,2.8,12.1,5.3,14.8
 																c1.3,1.5,1,1.7-1.3,0.8c-0.8-0.3-1.5-0.5-1.6-0.4C2.2,15.5,3,18.7,3.6,20c0.9,1.8,2.6,3.5,4.6,4.5l1.6,0.8l-1.9,0
@@ -293,8 +295,9 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 											<li>
 												<a class="pinterest" href="#">
 													<i class="pinterest" aria-hidden="true">
-														<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 32 42" style="enable-background:new 0 0 32 42;" xml:space="preserve">
+														<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+															 x="0px" y="0px"
+															 viewBox="0 0 32 42" style="enable-background:new 0 0 32 42;" xml:space="preserve">
 														<g id="Page-1">
 															<path id="Path" class="st0" d="M1,15.4c0,4,1.4,7.5,4.4,8.8c0.5,0.2,0.9,0,1.1-0.6c0.1-0.4,0.3-1.4,0.4-1.8
 																c0.1-0.6,0.1-0.8-0.3-1.3c-0.9-1.1-1.4-2.5-1.4-4.5c0-5.8,4.1-11,10.7-11c5.8,0,9,3.8,9,8.8c0,6.6-2.8,12.2-6.9,12.2
@@ -645,7 +648,4 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 		</div>
 	</div>
 
-	<script>
-		$('#productTabs a[href="#works"]').tab('show');
-	</script>
 	<!-- /PRODUCT DESCRIPTION -->
