@@ -16,14 +16,14 @@
 							<div class="form-group">
 								<div class="checkbox">
 									<input id="unlimited_{{$index}}" type="checkbox" ng-model="shippingWeightsPricesCtrl.unlimited_weight" ng-change="shippingWeightsPricesCtrl.setUnlimitedWeight()">
-									<label class="label-small-bold" for="unlimited_{{$index}}"><span translate="UNLIMITED_WEIGHT"></span></label>
+									<label class="label-small-bold" for="unlimited_{{$index}}"><span translate="settings.shipping.UNLIMITED_WEIGHT"></span></label>
 								</div>
 							</div>
 						</div>
 						
 					</div>
 					<span ng-bind="shippingWeightsPricesCtrl.person.settings.weight_measure"></span>
-					<span class="two-lines-label" translate="STANDARD_SHIPPING"></span>
+					<span class="two-lines-label" translate="settings.shipping.STANDARD_SHIPPING"></span>
 
 					<input type="number" ng-model="price.price" class="input-medium-size form-control ng-class:{'error-input': shippingWeightsPricesCtrl.has_error(shippingWeightsPricesCtrl.pricesForm, shippingWeightsPricesCtrl.pricesForm['price_'+$index])}" name="{{'price_'+$index}}" required min="0">
 					<span ng-bind="shippingWeightsPricesCtrl.currency"></span>
@@ -41,6 +41,6 @@
 				<span class="ion-android-close close-range" ng-click="shippingWeightsPricesCtrl.deletePrice($index)"></span>
 			</div>
 		</form>
-		<div><a class="green-link" href="#" ng-click="shippingWeightsPricesCtrl.addPrice()"><span translate="ADD_RANGE"></span></a></div>
+		<div><a class="green-link" href="#" ng-click="shippingWeightsPricesCtrl.addPrice()"><span translate="settings.shipping.ADD_RANGE"></span></a></div>
 	</div>
 </div>

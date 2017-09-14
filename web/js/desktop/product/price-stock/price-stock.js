@@ -99,27 +99,6 @@
 			vm.product.price_stock = [];
 			var object = {};
 			if(!UtilService.isEmpty(vm.product.options)) {
-				/*
-				for (var key in vm.product.options) {
-					if(productService.tagChangesStockAndPrice(vm.tags, key)){
-						if(vm.product.options[key].length > 0 && vm.product.options[key][0].length > 0)
-							object[key] = vm.product.options[key];
-					}
-				}
-				if(angular.isObject(vm.product.prints) && !UtilService.isEmpty(vm.product.prints)) {
-					object['type'] = vm.product.prints.type;
-					object['size'] = vm.product.prints.sizes;
-				}
-				if(angular.isObject(vm.product.sizechart) && !UtilService.isEmpty(vm.product.sizechart)) {
-					if(angular.isArray(vm.product.sizechart.values) && vm.product.sizechart.values.length > 0) {
-						object['size'] = [];
-						vm.product.sizechart.values.forEach(function (element) {
-							object['size'].push(element[0]);
-						});
-					}
-				}
-				var cartesian = objectProduct(object);
-				*/
 				var cartesian = getCartesian(vm.product.options, vm.product.prints, vm.product.sizechart)
 				if(!UtilService.isEmpty(cartesian[0])) {
 					for (var i = 0; i < cartesian.length; i++) {
