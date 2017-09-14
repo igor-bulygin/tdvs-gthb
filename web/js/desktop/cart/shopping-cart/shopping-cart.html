@@ -4,7 +4,7 @@
 		<thead>
 			<tr>
 				<td class="deviser"><span class="title-checkout">Deviser</span></td>
-				<td class="deviser-name"><span class="deviser-name" ng-bind="pack.deviser_info.name"></span></td>
+				<td class="deviser-name"><a ng-href="{{pack.deviser_info.url}}" ng-attr-title="{{pack.deviser_info.name}}"><span class="deviser-name" ng-bind="pack.deviser_info.name"></span></a></td>
 				<td></td>
 				<td class="quantity"><span class="title-checkout deviser" translate="cart.QUANTITY"></span></td>
 				<td class="subtotal"><span class="title-checkout deviser" translate="cart.SUBTOTAL"></span></td>
