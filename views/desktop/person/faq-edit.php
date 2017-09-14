@@ -37,40 +37,42 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 						<a class="red-link-btn" href="#" ng-click="editFaqCtrl.done()"><span translate="person.faq.DONE_FAQ"></span></a></div>
 					<div class="edit-faq-wrapper" ng-cloak ng-if="editFaqCtrl.person.faq.length > 0">
 						<div>
-							<button class="btn btn-red btn-big btn-red auto-center" ng-if="editFaqCtrl.person.faq.length > 0" ng-click="editFaqCtrl.addQuestion()"><span translate="person.faq.ADD_QUESTION"></span></button>
+							<button class="btn btn-red btn-big btn-red auto-center mb-40" ng-if="editFaqCtrl.person.faq.length > 0" ng-click="editFaqCtrl.addQuestion()"><span translate="person.faq.ADD_QUESTION"></span></button>
 						</div>
 						<div dnd-list="editFaqCtrl.person.faq" dnd-dragover="editFaqCtrl.dragOver(index)">
 							<div class="delete-options-wrapper" ng-repeat="question in editFaqCtrl.person.faq track by $index" style="cursor:move;" dnd-draggable="question" dnd-effect-allowed="move" dnd-dragstart="editFaqCtrl.dragStart($index)" dnd-canceled="editFaqCtrl.canceled()" dnd-moved="editFaqCtrl.moved($index)">
-								<a class="delete-link pull-right" href="#" ng-click="editFaqCtrl.deleteQuestion($index)"><span translate="person.faq.DELETE_QUESTION"></span></a>
+								<div class="delete-links-wrapper">
+									<a class="delete-link pull-right" href="#" ng-click="editFaqCtrl.deleteQuestion($index)"><span translate="person.faq.DELETE_QUESTION"></span></a>
+								</div>
 								<div class="edit-faq-panel-wrapper">
 									<div class="edit-faq-panel">
 										<div class="faq-language-menu">
-											<ol class="nya-bs-select form-control" ng-model="question.languageSelected" ng-change="editFaqCtrl.parseQuestion(question)" ng-init="question.languageSelected='en-US'">
-												<li nya-bs-option="language in editFaqCtrl.languages" class="ng-class:{'lang-selected': editFaqCtrl.isLanguageOk(language.code, question)}" data-value="language.code" deep-watch="true">
-													<a href="">
-														<span ng-bind="language.name"></span>
-														<span class="glyphicon glyphicon-ok ok-white-icon pull-right" ng-if="editFaqCtrl.isLanguageOk(language.code,question)"></span>
-													</a>
-												</li>
-											</ol>
 											<div class="faq-row">
-												<div class="col-sm-1">
+												<div class="col-sm-2">
 													<span class="faq-edit-question"><span translate="person.faq.QUESTION"></span></span>
 												</div>
-												<div class="col-sm-11">
+												<div class="col-sm-10">
 													<input type="text" class="faq-edit-answer" translate-attr="{placeholder: 'person.faq.QUESTION'}" ng-model="question.question[question.languageSelected]">
 												</div>
 											</div>
 											<div class="faq-row">
-												<div class="col-sm-1">
+												<div class="col-sm-2">
 													<span class="faq-edit-question"><span translate="person.faq.ANSWER"></span></span>
 												</div>
-												<div class="col-sm-11">
+												<div class="col-sm-10">
 													<div class="faq-edit-answer" text-angular ng-model="question.answer[question.languageSelected]" ta-toolbar="[]" translate-attr="{placeholder: 'person.faq.ANSWER'}" ta-paste="editFaqCtrl.stripHTMLTags($html)"></div>
 												</div>
 											</div>
 										</div>
 									</div>
+									<ol class="faq-lang nya-bs-select form-control" ng-model="question.languageSelected" ng-change="editFaqCtrl.parseQuestion(question)" ng-init="question.languageSelected='en-US'">
+										<li nya-bs-option="language in editFaqCtrl.languages" class="ng-class:{'lang-selected': editFaqCtrl.isLanguageOk(language.code, question)}" data-value="language.code" deep-watch="true">
+											<a href="">
+												<span ng-bind="language.name"></span>
+												<span class="glyphicon glyphicon-ok ok-white-icon pull-right" ng-if="editFaqCtrl.isLanguageOk(language.code,question)"></span>
+											</a>
+										</li>
+									</ol>
 								</div>
 							</div>
 						</div>

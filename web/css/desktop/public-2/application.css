@@ -507,7 +507,7 @@ a, a:hover, a:focus {
   margin-bottom: 20px; }
 
 .mb-40 {
-  margin-bottom: 40px; }
+  margin-bottom: 40px !important; }
 
 .mr-15 {
   margin-right: 15px; }
@@ -4222,6 +4222,7 @@ h3 {
       transition-timing-function: ease-out; }
 
 .edit-faq-panel {
+  width: 80%;
   background-color: #f3f3f3;
   padding: 5px;
   border-radius: 6px 6px 6px 6px !important;
@@ -4364,7 +4365,17 @@ h3 {
 
 .edit-faq-panel-wrapper {
   width: 100%;
-  float: left; }
+  float: left;
+  position: relative; }
+
+.delete-linfs-wrapper {
+  width: 80%; }
+
+.faq-lang {
+  position: absolute;
+  width: 170px !important;
+  right: 0;
+  top: 20px; }
 
 .banner-deviser {
   position: relative;

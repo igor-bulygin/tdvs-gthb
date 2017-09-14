@@ -85,6 +85,7 @@
     }
 }
 .edit-faq-panel{
+	width: 80%;
     @extend %block;
     background-color: $pale_white;
     padding: 5px;
@@ -249,4 +250,14 @@
 .edit-faq-panel-wrapper{
 	width: 100%;
 	float: left;
+	position: relative;
+}
+.delete-linfs-wrapper{
+	width: 80%;
+}
+.faq-lang{
+	position: absolute;
+    width: 170px!important;
+    right: 0;
+    top: 20px;
 }
