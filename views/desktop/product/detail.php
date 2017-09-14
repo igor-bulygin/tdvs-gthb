@@ -148,7 +148,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 								<form name="detailProductCtrl.tagsForm">
 									<div class="form-horizontal">
 										<div class="form-group">
-											<div class="row-size expand" ng-repeat="option in detailProductCtrl.product.options | orderBy:[detailProductCtrl.selectComparator]">
+											<div class="row-size expand" ng-repeat="option in detailProductCtrl.product.options | orderBy:[detailProductCtrl.selectComparator]" ng-if="option.values.length >= 1" ng-cloak>
 												<label class="col-sm-3 control-label product-label"><span class="atr" ng-bind="option.name | translate"></span></label>
 												<div class="col-sm-9" ng-if="option.values.length > 1 && option.change_reference" ng-cloak>
 													<div class="row">

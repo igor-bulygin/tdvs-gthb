@@ -494,6 +494,7 @@ class Category extends CActiveRecord {
 			if (isset($this->name[$lang])) {
 				$slugs[$lang] = Slugger::slugify($this->name[$lang]);
 			} else {
+				// By default english
 				$slugs[$lang] = Slugger::slugify($this->name[Lang::EN_US]);
 			}
 		}

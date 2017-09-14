@@ -234,8 +234,13 @@ class Product extends CActiveRecord {
 		$this->setAttribute('price_stock', $priceStock);
 
 		$slugs = [];
-		foreach ($this->name as $lang => $text) {
-			$slugs[$lang] = Slugger::slugify($text);
+		foreach (Lang::getAvailableLanguages() as $lang => $name) {
+			if (isset($this->name[$lang])) {
+				$slugs[$lang] = Slugger::slugify($this->name[$lang]);
+			} else {
+				 // By default english
+				$slugs[$lang] = Slugger::slugify($this->name[Lang::EN_US]);
+			}
 		}
 		$this->setAttribute("slug", $slugs);
 
