@@ -42,7 +42,7 @@
 			<div class="form-group form-personal-info">
 				<label for="country" class="col-md-3"><span translate="cart.COUNTRY"></span></label>
 				<div class="col-md-9">
-					<ol class="nya-bs-select ng-class:{'error-input': personalInfoCtrl.has_error(personalInfoCtrl.form, personalInfoCtrl.form.country)}" ng-model="personalInfoCtrl.cart.shipping_address.country" size="5" name="country" required>
+					<ol class="nya-bs-select ng-class:{'error-input': personalInfoCtrl.has_error(personalInfoCtrl.form, personalInfoCtrl.form.country)}" ng-model="personalInfoCtrl.cart.shipping_address.country" size="5" name="country" required live-search="true">
 						<li nya-bs-option="country in personalInfoCtrl.countries | orderBy:'country_name'" data-value="country.id">
 							<a href=""><span ng-bind="country.country_name"></span></a>
 						</li>
