@@ -63,6 +63,9 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 							<!-- Indicators -->
 							<div class="row">
 								<div class="col-sm-2">
+									<div id="arrow-up">
+										<span class="ion-ios-arrow-up" style="display: block;"></span>
+									</div>
 									<ul class='carousel-indicators thumbs mCustomScrollbar'>
 										<?php foreach ($productImages as $key => $imageUrl) { ?>
 											<li class="col-sm-2" data-target='#carousel-custom' data-slide-to='<?= $key ?>' class='active'>
@@ -70,6 +73,9 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 											</li>
 											<?php } ?>
 									</ul>
+									<div id="arrow-down">
+										<span class="ion-ios-arrow-down" style="display: block;"></span>
+									</div>
 								</div>
 								<div class="col-sm-10">
 									<div class='carousel-outer'>
@@ -396,7 +402,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 		<div class="container">
 			<ul class="nav nav-tabs product-tabs" role="tablist" id="productTabs">
 				<li role="presentation" class="active">
-					<a href="#works" aria-controls="works" role="tab" data-toggle="tab"><span class="title-product-name">works by <?= $person->getName() ?></span></a>
+					<a href="#works" aria-controls="works" role="tab" data-toggle="tab"><span class="title-product-name">works by <?= \yii\helpers\StringHelper::truncate($person->getName(), 40, '…') ?></span></a>
 				</li>
 				<li role="presentation" class="no-b-r">
 					<a href="#boxes" aria-controls="boxes" role="tab" data-toggle="tab"><span class="title-product-name">Boxes</span></a>
