@@ -15,8 +15,11 @@
 		</div>
 		<div class="row press-3" ng-if="editPressCtrl.images.length > 0" ng-cloak>
 			<form name="editPressCtrl.form" ng-cloak>
-				<div class="col-sm-6 h250" ng-if="editPressCtrl.isDropAvailable">
-					<div class="photo-loader-press" class="menu-category list-group" ngf-drop ngf-select ngf-change="editPressCtrl.upload($files, $invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="editPressCtrl.isDropAvailable" ngf-multiple="true">
+				<div class="col-sm-6" ng-if="editPressCtrl.isDropAvailable">
+					<button class="btn btn-red btn-big btn-red" ngf-drop ngf-select ngf-change="editPressCtrl.upload($files, $invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="editPressCtrl.isDropAvailable" ngf-multiple="true">
+						<span>Add photo</span>
+					</button>
+					<!--<div class="photo-loader-press" class="menu-category list-group" ngf-drop ngf-select ngf-change="editPressCtrl.upload($files, $invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="editPressCtrl.isDropAvailable" ngf-multiple="true">
 						<span class="photo-loader-title"><span translate="person.press.SHOW_PRESS"></span></span>
 						<div class="plus-add-wrapper">
 							<div class="plus-add">
@@ -25,7 +28,7 @@
 							<div class="text"><span translate="person.press.ADD_PHOTOS"></span></div>
 						</div>
 						<span class="photo-loader-warning"><span translate="person.press.SIZE_PUBLIC_PHOTOS"></span></span>
-					</div>
+					</div>-->
 				</div>
 				<div ngf-no-file-drop>
 					<input type="file" name="file" ngf-select="editPressCtrl.upload($files, $invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="editPressCtrl.isDropAvailable" ngf-multiple="true">

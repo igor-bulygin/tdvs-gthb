@@ -63,7 +63,7 @@
     }
 }
 .loader-about{
-	@include size(527px,250px);
+	@include size(100%,250px);
     background-color: $background_grey;
     margin: 20px;
     @include border-radius(20px,20px,20px,20px);
@@ -402,8 +402,9 @@
 }
 .deviser-data-about-edit{
     border: 1px solid #cccccc;
+	background-color: $white;
     padding:10px 20px 20px;
-    width: 328px;
+    width: 90%;
     position: absolute;
     top: 50px;
     left: 40px;
@@ -482,7 +483,7 @@
     background-color: $white;
     padding: 20px;
     width: 130px;
-    margin: 22px auto;
+    margin: 0 auto;
     cursor: pointer;
     @include border-radius(20px,20px,20px,20px);
     .text{

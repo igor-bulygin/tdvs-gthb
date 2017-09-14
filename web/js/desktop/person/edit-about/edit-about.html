@@ -1,5 +1,6 @@
 <div class="col-md-10 about-bg">
-	<div class="col-md-5 pad-about">
+	<div class="row">
+	<div class="col-md-6">
 		<div class="about-wrapper">
 			<div><a class="red-link-btn top" href="#" ng-click="editAboutCtrl.save()" ng-if="!editAboutCtrl.isDraft" ng-cloak><span translate="person.about.SAVE_EXIT"></span></a></div>
 			<div><a class="red-link-btn top" href="#" ng-click="editAboutCtrl.save()" ng-if="editAboutCtrl.isDraft" ng-cloak><span translate="person.about.SAVE_CHANGES"></span></a></div>
@@ -36,7 +37,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-md-7 pad-about about-grid">
+	<div class="col-md-6 about-grid">
 		<div ng-if="editAboutCtrl.isDropAvailable">
 			<div class="photo-loader loader-about ng-class:{'error-text': editAboutCtrl.setPhotosRequired}" ngf-drag-over-class="drag-over" ngf-drop ngf-select ngf-change="editAboutCtrl.uploadPhoto($files, $invalidFiles, null, true)" ngf-accept="'image/*'" ngf-drop-available="editAboutCtrl.isDropAvailable" ng-if="editAboutCtrl.images.length < 5">
 				<span class="photo-loader-title"><span translate="person.about.ENRICH_SECTION"></span></span>
@@ -77,5 +78,6 @@
 				<img ng-src="{{image.url}}" class="grid-image draggable-img" draggable="false">
 			</div>
 		</div>
+	</div>
 	</div>
 </div>
