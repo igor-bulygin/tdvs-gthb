@@ -2,8 +2,8 @@ $(document).ready(function() {
 
 	var options = {
 		container: '#macy-container',
-		trueOrder: false,
-		waitForImages: false,
+		trueOrder: true,
+		waitForImages: true,
 		margin: 2,
 		columns: 6,
 		breakAt: {
