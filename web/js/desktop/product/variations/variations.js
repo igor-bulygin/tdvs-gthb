@@ -224,6 +224,11 @@
 			});
 			if (!vm.invalidNewSizechart) {
 				vm.savingSizechart=true;
+				angular.forEach(vm.newSizechart.values, function (row) {
+				for (var i = 0, len = row.length; i < len; i++) {
+					row[i]=validateValue(row[i]);
+				}
+			});
 				angular.forEach(vm.selected_categories, function (category) {
 					vm.newSizechart.categories.push(category);
 				});				
@@ -234,6 +239,15 @@
 				}
 				sizechartDataService.postDeviserSizechart(vm.newSizechart, onSaveSizechartSuccess, UtilService.onError);
 			}
+		}
+
+		function validateValue(value) {
+			if (value !=null) {
+				 if (value != " " && value.length>0) {
+					return value;
+				}
+			}
+			return 0;
 		}
 
 		function new_column(column) {
