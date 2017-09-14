@@ -278,8 +278,6 @@ class CartController extends AppPublicController
 			$shippingAddress = $order->getShippingAddress();
 			$billingAddress = $order->getBillingAddress();
 
-			// TODO: check if customer already exists in stripe
-
 			// Create a customer in stripe for the received token
 			$customer = \Stripe\Customer::create([
 				'email' => $person->credentials['email'],
@@ -308,11 +306,11 @@ class CartController extends AppPublicController
 				if (empty($deviser->settingsMapping->stripeInfoMapping->access_token)) {
 
 					// If the deviser has no a connected stripe account, we charge directly to todevise account
-					$charges[] = \Stripe\Charge::create([
+					$charge = \Stripe\Charge::create([
 						'customer' => $customer->id,
 						'currency' => 'eur',
 						'amount' => $stripeAmount,
-						"description" => "Order Nº " . $order->short_id."/".$pack->short_id,
+						"description" => "Order Nº " . $order->short_id . "/" . $pack->short_id,
 						"metadata" => [
 							"order_id" => $order->short_id,
 							"pack_id" => $pack->short_id,
@@ -322,22 +320,25 @@ class CartController extends AppPublicController
 
 				} else {
 
-					// Create a Token from the existing customer on the deviser stripe account
+					// Create a Token for the customer on the connected deviser account
 					$token = \Stripe\Token::create(
 						[
 							"customer" => $customer->id,
 							"card" => $currentPaymentInfo['card']['id'],
 						],
-						["stripe_account" => $deviser->settingsMapping->stripeInfoMapping->stripe_user_id] // id of the connected account
+						[
+							// id of the connected account
+							"stripe_account" => $deviser->settingsMapping->stripeInfoMapping->stripe_user_id,
+						]
 					);
 
-					// Create a charge for this deviser
-					$charges[] = \Stripe\Charge::create(
+					// Create a charge for this customer in the connected deviser account
+					$charge = \Stripe\Charge::create(
 						[
 							'source' => $token,
 							'currency' => 'eur',
 							'amount' => $stripeAmount,
-							"description" => "Order Nº " . $order->short_id,
+							"description" => "Order Nº " . $order->short_id . "/" . $pack->short_id,
 							'application_fee' => $todeviseFee,
 							"metadata" => [
 								"order_id" => $order->short_id,
@@ -346,12 +347,32 @@ class CartController extends AppPublicController
 							],
 						],
 						[
+							// id of the connected account
 							'stripe_account' => $deviser->settingsMapping->stripeInfoMapping->stripe_user_id,
 						]
 					);
 				}
+				$pack->charge_info = [
+					'id' => $charge->id,
+					'object' => $charge->object,
+					'amount' => $charge->amount,
+					'amount_refunded' => $charge->amount_refunded,
+					'application' => $charge->application,
+					'application_fee' => $charge->application_fee,
+					'balance_transaction' => $charge->balance_transaction,
+					'captured' => $charge->captured,
+					'created' => $charge->created,
+					'currency' => $charge->currency,
+					'customer' => $charge->customer,
+					'description' => $charge->description,
+					'destinatation' => $charge->destinatation,
+					'receipt_email' => $charge->receipt_email,
+					'status' => $charge->status,
+				];
 				$pack->pack_percentage_fee = Yii::$app->params['default_todevise_fee'];
 				$pack->setState(OrderPack::PACK_STATE_PAID);
+
+				$charges[] = $charge;
 			}
 
 			$order->setPacks($packs);

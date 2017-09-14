@@ -21,10 +21,26 @@ class Lang {
 
 	/**
 	 * Returns a list of enabled languages in the application
+	 * An enabled language is a language that can be selected as interface language
 	 *
 	 * @return array
 	 */
 	static public function getEnabledLanguages()
+	{
+		return array_merge(
+			self::ES_ES_DESC,
+			self::EN_US_DESC
+//			self::CA_ES_DESC
+		);
+	}
+
+	/**
+	 * Returns a list of all the required languages in the application
+	 * A required language is a language that must have value in all multilanguage fields
+	 *
+	 * @return array
+	 */
+	static public function getRequiredLanguages()
 	{
 		return array_merge(
 			self::ES_ES_DESC,

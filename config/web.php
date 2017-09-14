@@ -3,6 +3,11 @@
 use yii\filters\ContentNegotiator;
 use yii\web\Response;
 
+
+define('TODEVISE_DEV', strpos($_SERVER['HTTP_HOST'], 'dev.todevise.com') !== false);
+define('TODEVISE_BETA', strpos($_SERVER['HTTP_HOST'], 'beta.todevise.com') !== false);
+define('TODEVISE_PROD', strpos($_SERVER['HTTP_HOST'], 'www.todevise.com') !== false);
+
 $config = [
 	'id' => 'basic',
 
@@ -160,10 +165,7 @@ $config = [
 			// 'useFileTransport' to false and configure a transport
 			// for the mailer to send real emails.
 			'useFileTransport' =>
-				strpos($_SERVER['HTTP_HOST'], 'beta.todevise.com') === false &&
-//				strpos($_SERVER['HTTP_HOST'], 'dev.todevise.com') === false &&
-				YII_ENV_DEV
-					? true : false,
+				!TODEVISE_BETA && YII_ENV_DEV ? true : false,
 			'transport' => [
 				'class' => 'Swift_SmtpTransport',
 				'host' => 'localhost',

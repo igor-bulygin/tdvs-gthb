@@ -1,4 +1,5 @@
 <?php
+
 use app\components\assets\PersonMenuAsset;
 use app\helpers\Utils;
 use app\models\Person;
@@ -30,17 +31,17 @@ $person = $this->params['person'];
 				<?php } ?>
 			</li>
 		<?php } ?>
+		<?php if ($person->isInfluencer() || $person->isDeviser()) { ?>
+			<li>
+				<a class=" <?= ($activeOption=='social') ? 'active' : '' ?>" href="<?= $person->getSocialLink()?>">Social feed</a>
+			</li>
+		<?php } ?>
 		<li>
 			<a class=" <?= ($activeOption=='loved') ? 'active' : '' ?>" href="<?= $person->getLovedLink()?>">Loved</a>
 		</li>
 		<li>
 			<a class=" <?= ($activeOption=='boxes') ? 'active' : '' ?>" href="<?= $person->getBoxesLink()?>">Boxes</a>
 		</li>
-		<?php if ($person->isInfluencer()) { ?>
-			<li>
-				<a class=" <?= ($activeOption=='social') ? 'active' : '' ?>" href="<?= $person->getSocialLink()?>">Social feed</a>
-			</li>
-		<?php } ?>
 		<?php if ($person->isDeviser() || $person->isInfluencer()) { ?>
 			<!--<li>
 				<a class=" <?= ($activeOption=='stories') ? 'active' : '' ?>" href="<?= $person->getStoriesLink()?>">Stories</a>

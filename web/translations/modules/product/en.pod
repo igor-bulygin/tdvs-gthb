@@ -118,7 +118,7 @@
 			"IS_BESPOKED":"Is this a bespoke product?",
 			"MANUFACTURING_INFO":"What information do you need from the customer before manufacturing this work?",
 			"SIZES":"Sizes",
-			"NEW_SIZECHART":"New size chart",
+			"NEW_SIZECHART":"Create size chart",
 			"AVAILABLE_SIZES":"In which sizes is this work available?",
 			"ADD_SIZE":"Add size to chart",
 			"SCALE":"Scale",
@@ -128,7 +128,22 @@
 			"ADD_OPTION":"+ Add another option",
 			"PRINT_SIZE":"Print size",
 			"WIDTH":"Width",
-			"LENGTH":"Length"
+			"LENGTH":"Length",
+			"SZ_NAME":"Name",
+			"SZ_METRIC_UNIT":"Metric unit",
+			"SZ_COUNTRIES":"Countries",
+			"SAVE_NEW_SIZECHART":"Save new size chart",
+			"SZ_COLUMNS":"Columns",
+			"ADD_NEW_COLUMN":"Add column",
+			"SZ_ROWS":"Rows",
+			"ADD_NEW":"+ Add new",
+			"SIZECHART_NAME_MANDATORY": "Name in spanish and english is mandatory.",
+			"SZ_ONE_COUNTRY_MANDATORY": "One country is the minimum required.",
+			"SZ_ONE_COLUMN_MANDATORY": "One column is the minimum required.",
+			"SZ_ONE_ROW_MANDATORY": "One row is the minimum required.",
+			"SIZECHART_COLUMNNAME_MANDATORY": "Column name in spanish and english is mandatory.",
+			"NEW_COLUMN":"New column",
+			"SZ_COLUMN_NAME":"Column name"
 		}
 	}
 }

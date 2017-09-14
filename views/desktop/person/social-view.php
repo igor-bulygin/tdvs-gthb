@@ -1,9 +1,6 @@
 <?php
 
-use app\assets\desktop\deviser\IndexStoryAsset;
-use app\components\PersonHeader;
-use app\components\PersonMenu;
-use app\models\Person;
+use app\assets\desktop\deviser\IndexStoryAsset;use app\components\PersonHeader;use app\components\PersonMenu;use app\models\Person;
 
 IndexStoryAsset::register($this);
 
@@ -47,11 +44,11 @@ $this->params['person_links_target'] = 'public_view';
 
 						<div class="mesonry-row">
 
-							<?php foreach ($photos['data'] as $item) { ?>
+							<?php foreach ($photos['data'] as $index => $item) { ?>
 								<div class="menu-category list-group">
 									<div class="grid">
 										<figure class="effect-zoe">
-											<a href="<?=$item['link']?>" target="_blank">
+											<a href="#socialGallery" data-slide-to="<?= $index ?>" data-toggle="modal" data-target="#carouselModal">
 												<img src="<?=$item['images']['standard_resolution']['url']?>" />
 											</a>
 										</figure>
@@ -68,3 +65,30 @@ $this->params['person_links_target'] = 'public_view';
 		</div>
 	</div>
 </div>
+
+<?php if ($photos && isset($photos['data'])) { ?>
+	<div class="modal full-modal fade" id="carouselModal">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-body">
+					<button type="button" class="close" data-dismiss="modal" title="Close"><span class="ion-ios-close-empty"></span></button>
+					<div id="socialGallery" class="carousel slide" data-interval="false">
+						<div class="carousel-inner">
+							<?php
+							$active = true;
+							foreach ($photos['data'] as $index => $item) { ?>
+								<div class="item <?=$active ? 'active' : ''?>">
+									<img src="<?=$item['images']['standard_resolution']['url']?>">
+								</div>
+								<?php
+								$active = false;
+							} ?>
+						</div>
+					</div>
+					<a href="#socialGallery" class="left carousel-control" role="button" data-slide="prev"><i class="ion-ios-arrow-left"></i></a>
+					<a href="#socialGallery" class="right carousel-control" role="button" data-slide="next"><i class="ion-ios-arrow-right"></i></a>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php } ?>

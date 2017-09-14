@@ -7,5 +7,5 @@ function currentURL() {
 }
 
 function getStripeApiKey() {
-	return '';
+	return 'pk_live_gzc7Ew2CBNsTw0bdeZhvSpj7';
 }

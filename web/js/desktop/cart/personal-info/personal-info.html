@@ -21,7 +21,7 @@
 				<div class="form-group form-personal-info">
 					<label for="vat_id" class="col-md-3"><span translate="cart.VAT_NUMBER"></span></label>
 					<div class="col-md-9">
-						<input type="text" name="vat_id" ng-model="personalInfoCtrl.cart.shipping_address.vat_id" class="form-control ng-class:{'error-input': personalInfoCtrl.has_error(personalInfoCtrl.form, personalInfoCtrl.form.vat_id)}" required>
+						<input type="text" name="vat_id" ng-model="personalInfoCtrl.cart.shipping_address.vat_id" class="form-control ng-class:{'error-input': personalInfoCtrl.has_error(personalInfoCtrl.form, personalInfoCtrl.form.vat_id)}">
 						<form-errors field="personalInfoCtrl.form.vat_id" condition="personalInfoCtrl.has_error(personalInfoCtrl.form, personalInfoCtrl.form.vat_id)"></form-errors>
 					</div>
 				</div>
@@ -42,7 +42,7 @@
 			<div class="form-group form-personal-info">
 				<label for="country" class="col-md-3"><span translate="cart.COUNTRY"></span></label>
 				<div class="col-md-9">
-					<ol class="nya-bs-select ng-class:{'error-input': personalInfoCtrl.has_error(personalInfoCtrl.form, personalInfoCtrl.form.country)}" ng-model="personalInfoCtrl.cart.shipping_address.country" size="5" name="country" required>
+					<ol class="nya-bs-select ng-class:{'error-input': personalInfoCtrl.has_error(personalInfoCtrl.form, personalInfoCtrl.form.country)}" ng-model="personalInfoCtrl.cart.shipping_address.country" size="5" name="country" required live-search="true">
 						<li nya-bs-option="country in personalInfoCtrl.countries | orderBy:'country_name'" data-value="country.id">
 							<a href=""><span ng-bind="country.country_name"></span></a>
 						</li>
@@ -80,7 +80,7 @@
 	<div ng-if="personalInfoCtrl.state>1">
 		<div class="col-md-3">
 			<p><span translate="cart.FIRST_NAME"></span>&nbsp;<span class="bold" ng-bind="personalInfoCtrl.cart.shipping_address.name + ' ' + personalInfoCtrl.cart.shipping_address.last_name"></span></p>
-			<p><span translate="cart.VAT_NUMBER"></span>&nbsp;<span ng-bind="personalInfoCtrl.cart.shipping_address.vat_id"></span></p>
+			<p ng-if="personalInfoCtrl.cart.shipping_address.vat_id" ng-cloak><span translate="cart.VAT_NUMBER"></span>&nbsp;<span ng-bind="personalInfoCtrl.cart.shipping_address.vat_id"></span></p>
 			<p><span translate="cart.PHONE"></span>&nbsp;<span ng-bind="personalInfoCtrl.cart.shipping_address.phone_number_prefix + ' ' + personalInfoCtrl.cart.shipping_address.phone_number"></span></p>
 		</div>
 		<div class="col-md-3">

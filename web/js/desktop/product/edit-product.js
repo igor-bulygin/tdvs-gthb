@@ -3,7 +3,7 @@
 	"use strict";
 
 	function controller(productService, personDataService, productDataService, languageDataService, metricDataService,
-		UtilService, tagDataService, $scope, $rootScope, productEvents, sizechartDataService, $window, $timeout,$anchorScroll) {
+		UtilService, tagDataService, $rootScope, productEvents, sizechartDataService, $window, $timeout,$anchorScroll) {
 		var vm = this;
 		vm.categories_helper = [];
 		vm.save = save;
@@ -199,6 +199,7 @@
 			}
 
 		}
+
 	}
 
 	angular
