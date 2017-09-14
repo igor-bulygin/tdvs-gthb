@@ -687,6 +687,12 @@ $billingAddress = $order->getBillingAddress();
 													<p style="text-align: left;"><span style="font-size:14px"><strong><?=Yii::t('app/public', 'ORDER_EMAIL_HELLO', ['person_name' => $order->getPerson()->getName()])?></strong></span></p>
 
 													<p style="text-align: left;"><span style="font-size:14px"><?=Yii::t('app/public', 'ORDER_EMAIL_MAIN_TEXT')?></span></p>
+
+												</td>
+											</tr>
+											</tbody></table>
+										<!--[if mso]>
+										</td>
 										<![endif]-->
 
 										<!--[if mso]>
@@ -753,21 +759,21 @@ $billingAddress = $order->getBillingAddress();
 							<?php foreach ($order->getPacks() as $pack) { ?>
 
 								<table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock" style="min-width:100%;">
-									<tbody class="mcnTextBlockOuter">
-									<tr>
-										<td valign="top" class="mcnTextBlockInner" style="padding-top:9px;">
-											<!--[if mso]>
-											<table align="left" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100%;">
-												<tr>
-											<![endif]-->
+								<tbody class="mcnTextBlockOuter">
+								<tr>
+									<td valign="top" class="mcnTextBlockInner" style="padding-top:9px;">
+										<!--[if mso]>
+										<table align="left" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100%;">
+											<tr>
+										<![endif]-->
 
-											<!--[if mso]>
-											<td valign="top" width="600" style="width:600px;">
-											<![endif]-->
-											<table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:100%; min-width:100%;" width="100%" class="mcnTextContentContainer">
-												<tbody><tr>
+										<!--[if mso]>
+										<td valign="top" width="600" style="width:600px;">
+										<![endif]-->
+										<table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:100%; min-width:100%;" width="100%" class="mcnTextContentContainer">
+											<tbody><tr>
 
-													<td valign="top" class="mcnTextContent" style="padding: 0px 18px 9px; line-height: 100%;">
+												<td valign="top" class="mcnTextContent" style="padding: 0px 18px 9px; line-height: 100%;">
 
 														<div style="text-align: left;"><span style="font-size:16px"><strong><?=$pack->getDeviser()->getName()?></strong></span><br>
 															<?php foreach ($pack->getProducts() as $packProduct) {
@@ -775,44 +781,44 @@ $billingAddress = $order->getBillingAddress();
 																if (!$product) {
 																	continue;
 																}?>
-																<br>
+														<br>
 																<img height="90" src="<?= Utils::url_scheme() ?><?=Utils::thumborize($product->getMainImage())->resize(60, 60)?>" style="border: 0px  ; width: 120px; height: 90px; margin: 0px;" width="120">&nbsp; &nbsp; <?=StringHelper::truncate($product->getName(), 30, '...')?>: <strong style="text-align: right"><?=$packProduct->price * $packProduct->quantity?> Euros</strong><br>
 															<?php } ?>
 														</div>
 
-													</td>
-												</tr>
-												</tbody></table>
-											<!--[if mso]>
-											</td>
-											<![endif]-->
-
-											<!--[if mso]>
+												</td>
 											</tr>
-											</table>
-											<![endif]-->
+											</tbody></table>
+										<!--[if mso]>
 										</td>
-									</tr>
-									</tbody>
-								</table><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnDividerBlock" style="min-width:100%;">
-									<tbody class="mcnDividerBlockOuter">
-									<tr>
-										<td class="mcnDividerBlockInner" style="min-width:100%; padding:18px;">
-											<table class="mcnDividerContent" border="0" cellpadding="0" cellspacing="0" width="100%" style="min-width: 100%;border-top: 2px solid #EAEAEA;">
-												<tbody><tr>
-													<td>
-														<span></span>
-													</td>
-												</tr>
-												</tbody></table>
-											<!--
-															<td class="mcnDividerBlockInner" style="padding: 18px;">
-															<hr class="mcnDividerContent" style="border-bottom-color:none; border-left-color:none; border-right-color:none; border-bottom-width:0; border-left-width:0; border-right-width:0; margin-top:0; margin-right:0; margin-bottom:0; margin-left:0;" />
-											-->
-										</td>
-									</tr>
-									</tbody>
-								</table>
+										<![endif]-->
+
+										<!--[if mso]>
+										</tr>
+										</table>
+										<![endif]-->
+									</td>
+								</tr>
+								</tbody>
+							</table><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnDividerBlock" style="min-width:100%;">
+								<tbody class="mcnDividerBlockOuter">
+								<tr>
+									<td class="mcnDividerBlockInner" style="min-width:100%; padding:18px;">
+										<table class="mcnDividerContent" border="0" cellpadding="0" cellspacing="0" width="100%" style="min-width: 100%;border-top: 2px solid #EAEAEA;">
+											<tbody><tr>
+												<td>
+													<span></span>
+												</td>
+											</tr>
+											</tbody></table>
+										<!--
+														<td class="mcnDividerBlockInner" style="padding: 18px;">
+														<hr class="mcnDividerContent" style="border-bottom-color:none; border-left-color:none; border-right-color:none; border-bottom-width:0; border-left-width:0; border-right-width:0; margin-top:0; margin-right:0; margin-bottom:0; margin-left:0;" />
+										-->
+									</td>
+								</tr>
+								</tbody>
+							</table>
 							<?php } ?>
 
 
