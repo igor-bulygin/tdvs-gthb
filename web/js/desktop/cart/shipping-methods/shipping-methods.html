@@ -21,12 +21,13 @@
 				</div>
 				<div class="col-md-2" ng-if="shippingMethodsCtrl.state === 2">
 					<div class="radio radio-inline" ng-if="pack.deviser_info.shipping_time">
-						<input type="radio" checked ng-value="'standard'" ng-model="pack.shipping_type" name="standard_shipping" id="standard_shipping" ng-change="shippingMethodsCtrl.setShippingPriceTime(pack)">
-						<label for="standard_shipping"><span translate="global.STANDARD"></span></label>
+						<input type="radio" checked value="{{'standard'}}" ng-model="pack.shipping_type" name="{{'radio_shipping_'+$index}}" id="{{'standard_shipping_'+$index}}" ng-change="shippingMethodsCtrl.setShippingPriceTime(pack)">
+						<label for="{{'standard_shipping_'+$index}}"><span translate="global.STANDARD"></span></label>
 					</div>
+					<br>
 					<div class="radio radio-inline" ng-if="pack.deviser_info.shipping_express_time">
-						<input type="radio" ng-value="'express'" ng-model="pack.shipping_type" name="express_shipping" id="express_shipping" ng-change="shippingMethodsCtrl.setShippingPriceTime(pack)">
-						<label for="express_shipping"><span translate="global.EXPRESS"></span></label>
+						<input type="radio" value="{{'express'}}" ng-model="pack.shipping_type" name="{{'radio_shipping_'+$index}}" id="{{'express_shipping_'+$index}}" ng-change="shippingMethodsCtrl.setShippingPriceTime(pack)">
+						<label for="{{'express_shipping_'+index}}"><span translate="global.EXPRESS"></span></label>
 					</div>
 				</div>
 				<div class="col-md-2">
