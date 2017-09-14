@@ -2,8 +2,8 @@ $(document).ready(function() {
 
 	var options = {
 		container: '#macy-container',
-		trueOrder: true,
-		waitForImages: true,
+		trueOrder: false,
+		waitForImages: false,
 		margin: 2,
 		columns: 6,
 		breakAt: {
@@ -14,6 +14,10 @@ $(document).ready(function() {
 		}
 	};
 	Macy.init(options);
+
+	setTimeout(function () {
+		Macy.recalculate();
+	});
 
 	$('a[data-toggle="tab"]').on('click', function(e) {
 		setTimeout(function () {
