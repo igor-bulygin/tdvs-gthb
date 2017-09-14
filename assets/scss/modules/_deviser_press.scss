@@ -89,7 +89,7 @@
     text-align: center;
     margin: 0 2px 7px;
     padding: 20px;
-    height: 250px;
+    height: 200px;
     border: 1px solid #1C1919;
     cursor: pointer;
     display: inline-block;
@@ -124,7 +124,7 @@
     background-color: $light_grey;
     @include border-radius(14px,14px,14px,14px);
     cursor:move;
-    height: 250px;
+    height: 200px;
     position: relative;
     margin-top: 10px;
     span{
@@ -146,7 +146,7 @@
         @include border-radius(7px,7px,7px,7px)
     }
     img{
-        max-height: 250px;
+        max-height: 200px;
         width: auto;
         max-width: 214px;
         position: absolute;
@@ -157,6 +157,3 @@
         margin: auto;
     }
 } 
-.h250{
-    height: 250px;
-}

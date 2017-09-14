@@ -201,7 +201,7 @@
 	width: 288px;
   	height: 62px;
 	font-size: 16px;
-	padding-top: 15px;
+	padding-top: 8px;
 	&.disabled{
 		cursor: default;
 		background-color: $light_grey;
@@ -280,11 +280,11 @@
 .heart-icon {
 	width: 30px;
     height: 30px;
-    background: url(/imgs/black-heart.svg) 0 0 no-repeat transparent;
+    background: url(/imgs/heart-black.svg) 0 0 no-repeat transparent;
     display: inline-block;
     vertical-align: middle;
 	&:hover{
-		background: url(/imgs/red-heart.svg) 0 0 no-repeat transparent;
+		background: url(/imgs/heart-red.svg) 0 0 no-repeat transparent;
 	}
 }
 .btn-save-box{
@@ -294,12 +294,15 @@
     color: $black;
 	width: 209px;
     height: 40px;
-    padding-top: 9px;
+    //padding-top: 9px;
+    padding:0;
+    margin: auto;
 	.box-icon{
 	    width: 32px;
 		vertical-align: middle;
 		height: 25px;
 		display: inline-block;
+		margin-right: 10px;
 	}
     &:hover{
 		background-color:$black;
@@ -475,15 +478,30 @@
 		margin-right: 10px;
 	}
 }
-.btn-filled{
-	.heart-icon{
+//.btn-filled{
+.btn-love{
+	&.pull-left{
 		&:hover{
-
+			.heart-icon{
+				background: url(/imgs/heart-white.svg) 0 0 no-repeat transparent;
+			}
+		}
+	}
+    .heart-icon{
+        &:hover{
+            background: url(/imgs/heart-white.svg) 0 0 no-repeat transparent;
+        }
+    }
+	&.pull-right{
+		&:hover{
+			.box-icon{
+				background: url(/imgs/box-white.svg) 0 0 no-repeat transparent;
+			}
 		}
 	}
 	.box-icon{
-		&:hover{
-
-		}	
-	}
+        &:hover{
+            background: url(/imgs/box-white.svg) 0 0 no-repeat transparent;
+        }   
+    }
 }

@@ -63,6 +63,9 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 							<!-- Indicators -->
 							<div class="row">
 								<div class="col-sm-2">
+									<div id="arrow-up">
+										<span class="ion-ios-arrow-up" style="display: block;"></span>
+									</div>
 									<ul class='carousel-indicators thumbs mCustomScrollbar'>
 										<?php foreach ($productImages as $key => $imageUrl) { ?>
 											<li class="col-sm-2" data-target='#carousel-custom' data-slide-to='<?= $key ?>' class='active'>
@@ -70,6 +73,9 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 											</li>
 											<?php } ?>
 									</ul>
+									<div id="arrow-down">
+										<span class="ion-ios-arrow-down" style="display: block;"></span>
+									</div>
 								</div>
 								<div class="col-sm-10">
 									<div class='carousel-outer'>
@@ -192,7 +198,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 								</form>
 							</div>-->
 							<div class="row-size">
-								<button type="button" class="btn btn-medium btn-red auto-center" ng-disabled="detailProductCtrl.stock === 0" ng-click="detailProductCtrl.addToCart(detailProductCtrl.tagsForm)"><i class="ion-android-cart cart-icon-btn"></i> <span translate="product.detail.ADD_TO_CART"></span></button>
+								<button type="button" class="btn btn-medium btn-red auto-center" ng-disabled="detailProductCtrl.stock === 0" ng-click="detailProductCtrl.addToCart(detailProductCtrl.tagsForm)"><span class="cart-icon"></span> <span translate="product.detail.ADD_TO_CART"></span></button>
 							</div>
 						</div>
 						<!--<div class="product-data">
@@ -220,7 +226,6 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 									</div>
 									<div class="returns-row">
 										Warranty:
-										
 									</div>
 								</div>
 							</div>
@@ -363,7 +368,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 		<div class="container">
 			<div class="work-profile-description-wrapper">
 						<div class="title mb-40"><span class="title-product-name" translate="product.detail.DESCRIPTION"></span></div>
-						<div class="col-sm-8 pad-product">
+						<div class="col-sm-9 pad-product">
 							<div class="description-parraf">
 								<?= $product->description ?>
 							</div>
@@ -381,7 +386,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 								</div>
 							<?php } ?>
 						</div>
-						<div class="col-sm-4">
+						<div class="col-sm-3">
 							<div class="avatar-wrapper-side">
 									<div class="avatar">
 										<a href="<?= $person->getStoreLink() ?>">
@@ -395,9 +400,9 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 					</div>
 		</div>
 		<div class="container">
-			<ul class="nav nav-tabs product-tabs" role="tablist">
+			<ul class="nav nav-tabs product-tabs" role="tablist" id="productTabs">
 				<li role="presentation" class="active">
-					<a href="#works" aria-controls="works" role="tab" data-toggle="tab"><span class="title-product-name">works by <?= $person->getName() ?></span></a>
+					<a href="#works" aria-controls="works" role="tab" data-toggle="tab"><span class="title-product-name">works by <?= \yii\helpers\StringHelper::truncate($person->getName(), 40, '…') ?></span></a>
 				</li>
 				<li role="presentation" class="no-b-r">
 					<a href="#boxes" aria-controls="boxes" role="tab" data-toggle="tab"><span class="title-product-name">Boxes</span></a>
@@ -415,7 +420,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 		<div class="container">
 			<!-- Tab panes -->
 			<div class="tab-content product-description-content">
-				<div role="tabpanel" class="tab-pane work-description-wrapper active" id="faqs">
+				<div role="tabpanel" class="tab-pane work-description-wrapper" id="faqs">
 					<div class="container mt-20 mb-20">
 						<span class="title-product-name">Faqs</span>
 					</div>
@@ -593,7 +598,8 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 						</div>
 					</div>
 				<?php /*} */?>
-				<div role="tabpanel" class="tab-pane" id="works">
+				<div role="tabpanel" class="tab-pane work-description-wrapper active" id="works">
+					<div class="container mt-20 mb-20" style="min-height:350px;">
 					<nav class="products-menu">
 						<ul>
 							<!--						<li>-->
@@ -633,8 +639,13 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 							<?php } ?>
 						</div>
 					</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+
+	<script>
+		$('#productTabs a[href="#works"]').tab('show');
+	</script>
 	<!-- /PRODUCT DESCRIPTION -->
