@@ -6,9 +6,10 @@ return [
 	'php_fmt_datatime' => "Y-m-d H:i:s",
 
 	// Stripe
-	'stripe_client_id' => !YII_ENV_PROD ? 'ca_9z47cPhqGcOPdRgTMEOXnF3hc7Cwf59g' : 'ca_9z47mImRRJvWUMSbMpJGpQzh7aUCyjgd',
-	'stripe_publishable_key' => !YII_ENV_PROD  ? 'pk_test_p1DPyiicE2IerEV676oj5t89' : 'pk_live_gzc7Ew2CBNsTw0bdeZhvSpj7',
-	'stripe_secret_key' => !YII_ENV_PROD  ? 'sk_test_eLdJxVmKSGQxGPhX2bqpoRk4' : 'sk_live_1iZUiFADhvbdRitBZQTFSsCG',
+	// stripe in live mode in production and beta
+	'stripe_client_id' => !YII_ENV_PROD && !TODEVISE_BETA ? 'ca_9z47cPhqGcOPdRgTMEOXnF3hc7Cwf59g' : 'ca_9z47mImRRJvWUMSbMpJGpQzh7aUCyjgd',
+	'stripe_publishable_key' => !YII_ENV_PROD  && !TODEVISE_BETA ? 'pk_test_p1DPyiicE2IerEV676oj5t89' : 'pk_live_gzc7Ew2CBNsTw0bdeZhvSpj7',
+	'stripe_secret_key' => !YII_ENV_PROD  && !TODEVISE_BETA ? 'sk_test_eLdJxVmKSGQxGPhX2bqpoRk4' : 'sk_live_1iZUiFADhvbdRitBZQTFSsCG',
 
 	// Instagram
 	'instagram_client_id' => '7cdaa91e4b27429a867e9e142d114b65',
