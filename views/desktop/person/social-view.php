@@ -1,9 +1,6 @@
 <?php
 
-use app\assets\desktop\deviser\IndexStoryAsset;
-use app\components\PersonHeader;
-use app\components\PersonMenu;
-use app\models\Person;
+use app\assets\desktop\deviser\IndexStoryAsset;use app\components\PersonHeader;use app\components\PersonMenu;use app\models\Person;
 
 IndexStoryAsset::register($this);
 
@@ -48,7 +45,7 @@ $this->params['person_links_target'] = 'public_view';
 						<div class="mesonry-row">
 
 							<?php foreach ($photos['data'] as $index => $item) { ?>
-								<div class="menu-category list-group"
+								<div class="menu-category list-group">
 									<div class="grid">
 										<figure class="effect-zoe">
 											<a href="#socialGallery" data-slide-to="<?= $index ?>" data-toggle="modal" data-target="#carouselModal">
