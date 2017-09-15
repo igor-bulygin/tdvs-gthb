@@ -104,13 +104,12 @@
 		color:$white;
 		position: absolute;
     	top: 5px;
-		background-color: $light_grey;
-		font-size: 11px;
+		background-color: $black;
+		font-size: 16px;
 		width: 22px;
 		height: 22px;
 		@include border-radius(90px,90px,90px,90px);
 		text-align: center;
-		padding-top: 6px;
 		cursor: pointer;
 		&:hover{
 			background-color: $dark_grey;
@@ -140,9 +139,9 @@
 	}
 }
 .add-cathegory{
-	margin:-15px 0 0 0;
+	margin:-10px 0 0 0;
 	display: block;
-	color:$dark_green;
+	color:$dark_red;
 	cursor: pointer;
 	&:hover{
 		@include transition-property(color);
@@ -626,4 +625,7 @@ input:checked + .slider:before {
 	margin-right: 5px;
    	width: 146px;
     margin-bottom: 10px;
+}
+.mw-200{
+	max-width: 200px;
 }

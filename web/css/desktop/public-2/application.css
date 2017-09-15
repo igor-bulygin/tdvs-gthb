@@ -1498,13 +1498,13 @@ textarea {
   display: inline-block;
   position: absolute;
   content: " ";
-  width: 11px;
-  height: 11px;
-  left: 3px;
-  top: 3px;
+  width: 9px;
+  height: 9px;
+  left: 4px;
+  top: 4px;
   margin-left: -20px;
   border-radius: 50%;
-  background-color: #555555;
+  background-color: #c91c39;
   -webkit-transform: scale(0, 0);
   -ms-transform: scale(0, 0);
   -o-transform: scale(0, 0);
@@ -6679,15 +6679,14 @@ h3 {
     color: #ffffff;
     position: absolute;
     top: 5px;
-    background-color: #bfbfbf;
-    font-size: 11px;
+    background-color: #1C1919;
+    font-size: 16px;
     width: 22px;
     height: 22px;
     border-radius: 90px 90px 90px 90px !important;
     -webkit-border-radius: 90px 90px 90px 90px !important;
     -moz-border-radius: 90px 90px 90px 90px !important;
     text-align: center;
-    padding-top: 6px;
     cursor: pointer; }
     .items-row .close-row:hover {
       background-color: #939393;
@@ -6733,9 +6732,9 @@ h3 {
       transition-timing-function: ease-out; }
 
 .add-cathegory {
-  margin: -15px 0 0 0;
+  margin: -10px 0 0 0;
   display: block;
-  color: #7AB83A;
+  color: #c91c39;
   cursor: pointer; }
   .add-cathegory:hover {
     -moz-transition-property: color;
@@ -7220,6 +7219,9 @@ input:checked + .slider:before {
   margin-right: 5px;
   width: 146px;
   margin-bottom: 10px; }
+
+.mw-200 {
+  max-width: 200px; }
 
 .cart-top-bar {
   background-color: #bfbfbf;
