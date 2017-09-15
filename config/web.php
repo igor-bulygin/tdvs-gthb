@@ -60,9 +60,9 @@ $config = [
 		],
 
 		//Errors
-		'errorHandler' => [
-			'errorAction' => 'public/error'
-		],
+//		'errorHandler' => [
+//			'errorAction' => 'public/error'
+//		],
 
 		//i18n
 		'i18n' => [
