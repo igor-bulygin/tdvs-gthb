@@ -308,14 +308,14 @@
 			//if is not loved
 			if(!vm.product.isLoved) {
 				lovedDataService.setLoved({
-					product_id: vm.product_id
+					product_id: product.id
 				}, setLovedSuccess, setLovedError);
 				
 			}
 			//(if it's loved, delete it)
 			if(vm.product.isLoved) {
 				lovedDataService.deleteLoved({
-					productId: vm.product_id
+					productId: product.id
 				}, setLovedSuccess, setLovedError)
 			}
 		}
@@ -327,7 +327,7 @@
 					size: 'sm',
 					resolve: {
 						productId: function() {
-							return vm.product_id;
+							return product.id;
 						},
 						boxes: function() {
 							return data;
