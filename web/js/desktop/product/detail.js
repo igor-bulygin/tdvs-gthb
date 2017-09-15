@@ -29,20 +29,26 @@
 				vm.view_sizechart = true;
 				vm.require_options = true;
 				//checks
-				setOriginalArtwork(vm.product);
+				var original_artwork = getOriginalArtwork(vm.product);
 				setPrints(vm.product);
-				vm.minimum_price = getMinimumPrice(vm.product.price_stock);
 				vm.total_stock = getTotalStock(vm.product.price_stock);
-				vm.stock = vm.total_stock;
-				vm.price = vm.minimum_price;
-				vm.product.options.forEach(function(option){
-					//parse options with only one value
-					if(option.values.length === 1) {
-						vm.option_selected[option.id] = option.values[0].value;
-						//parseOptions(option.id, option.values[0].value);
-					}
-				});
-				vm.reference_id = getReferenceId(vm.option_selected);
+				vm.minimum_price = getMinimumPrice(vm.product.price_stock);
+				if(!UtilService.isObject(original_artwork)) {
+					vm.stock = vm.total_stock;
+					vm.price = vm.minimum_price;
+					vm.product.options.forEach(function(option){
+						//parse options with only one value
+						if(option.values.length === 1) {
+							vm.option_selected[option.id] = option.values[0].value;
+							//parseOptions(option.id, option.values[0].value);
+						}
+					});
+					vm.reference_id = getReferenceId(vm.option_selected);
+				} else {
+					vm.stock = original_artwork.stock;
+					vm.price = original_artwork.price;
+					vm.require_options = false;
+				}
 			}
 
 			productDataService.getProductPub({
@@ -228,19 +234,21 @@
 			}
 		}
 
-		function setOriginalArtwork(product) {
-			for(var i = 0; i < product.price_stock.length; i++) {
-				if(product.price_stock[i].original_artwork && product.price_stock[i].available) {
-					vm.original_pos = i;
-					vm.original_artwork = true;
-				}
+		function getOriginalArtwork(product) {
+			var original_artwork = product.price_stock.find(function(element) {
+				return element.original_artwork && element.available;
+			})
+			if(original_artwork) {
+				vm.original_artwork = true;
 			}
+			return original_artwork;
 		}
 
 		function changeOriginalArtwork(value) {
-			if(value == true) {
-				vm.stock = vm.product.price_stock[vm.original_pos].stock;
-				vm.price = vm.product.price_stock[vm.original_pos].price;
+			var original_artwork = getOriginalArtwork(vm.product);
+			if(value == true && UtilService.isObject(original_artwork)) {
+				vm.stock = original_artwork.stock;
+				vm.price = original_artwork.price;
 				vm.require_options = false;
 			} else {
 				vm.stock = vm.total_stock;
