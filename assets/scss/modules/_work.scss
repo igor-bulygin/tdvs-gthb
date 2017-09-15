@@ -75,8 +75,7 @@
 			}
 			.description-input{
 				.ta-editor.ta-html, .ta-scroll-window.form-control{
-					margin-top:-20px;
-					padding: 50px 20px 0;
+					padding: 20px;
 					min-height: 175px;
 					@include border-radius(6px,6px,6px,6px);
 				}
@@ -384,13 +383,15 @@ tags-input .tags .tag-item {
     float: left;
     height: 26px;
     line-height: 25px;
-    border: 1px solid $green!important;
-    @include border-radius(25px,25px,25px,25px);
-    background: $green!important;
+    border: 1px solid #cccccc!important;
+    @include border-radius(6px,6px,6px,6px);
+    background: $white!important;
 	color: $black!important;
 }
 tags-input .tags .tag-item .remove-button {
-    color: $black!important;
+    color: $dark_red!important;
+	margin: 5px 5px 0 0px;
+	float: left;
 	&:hover{
 		color: $black!important;
 	}
@@ -623,6 +624,6 @@ input:checked + .slider:before {
 	display: block;
 	float: left;
 	margin-right: 5px;
-   	width: 140px;
-}
+   	width: 146px;
+    margin-bottom: 10px;
 }
