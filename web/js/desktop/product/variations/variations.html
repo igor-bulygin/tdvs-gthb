@@ -14,7 +14,7 @@
 							<span class="col-xs-1">{{itemIndex+1}}&nbsp;</span>
 							<ol class="nya-bs-select categories-select col-xs-10 ng-class:{'error-input': productVariationsCtrl.optionValidation(productVariationsCtrl.product.options[tag.id][itemIndex],tag.required)} " ng-model="productVariationsCtrl.product.options[tag.id][itemIndex]" multiple>
 								<li nya-bs-option="option in tag.options" data-value="option.value" deep-watch="true" class="ng-class:{'disabled': productVariationsCtrl.product.options[tag.id][itemIndex].length >= tag.n_options && productVariationsCtrl.product.options[tag.id][itemIndex].indexOf(option.value) < 0}">
-									<a href="#"><span ng-bind="option.text['en-US']"></span><span class="glyphicon glyphicon-ok check-mark"></span></a>
+									<a href="#"><span ng-bind="option.text[productVariationsCtrl.name_language]"></span><span class="glyphicon glyphicon-ok check-mark"></span></a>
 								</li>
 							</ol>
 							<span class="glyphicon glyphicon-remove close-row" ng-if="productVariationsCtrl.product.options[tag.id].length > 1" ng-click="productVariationsCtrl.deleteOption(tag.id, $index)" ng-cloak></span>
@@ -316,7 +316,7 @@
 					<thead>
 						<tr>
 							<th><span ng-bind="productVariationsCtrl.product.sizechart.country"></span></th>
-							<th ng-repeat="column in productVariationsCtrl.product.sizechart.columns"><span ng-bind="column['en-US']"></span></th>
+							<th ng-repeat="column in productVariationsCtrl.product.sizechart.columns"><span ng-bind="column[productVariationsCtrl.name_language]"></span></th>
 						</tr>
 					</thead>
 					<tbody>
