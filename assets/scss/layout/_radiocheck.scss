@@ -191,13 +191,13 @@
   display: inline-block;
   position: absolute;
   content: " ";
-  width: 11px;
-  height: 11px;
-  left: 3px;
-  top: 3px;
+  width: 9px;
+	height: 9px;
+	left: 4px;
+	top: 4px;
   margin-left: -20px;
   border-radius: 50%;
-  background-color: #555555;
+  background-color: $dark_red;
   -webkit-transform: scale(0, 0);
   -ms-transform: scale(0, 0);
   -o-transform: scale(0, 0);

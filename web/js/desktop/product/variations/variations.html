@@ -10,14 +10,14 @@
 							<label class="col-xs-12" data-ng-for="{{tag.name}}" ng-bind="tag.name"></label>
 							<span class="optional-text" ng-if="!tag.required" translate="product.variations.OPTIONAL" ng-cloak></span>
 						</div>
-						<div class="mb-20 col-md-5" ng-repeat="(itemIndex,item) in productVariationsCtrl.product.options[tag.id] track by itemIndex">
+						<div class="mb-20 col-md-6" ng-repeat="(itemIndex,item) in productVariationsCtrl.product.options[tag.id] track by itemIndex">
 							<span class="col-xs-1">{{itemIndex+1}}&nbsp;</span>
-							<ol class="nya-bs-select categories-select col-xs-10 ng-class:{'error-input': productVariationsCtrl.optionValidation(productVariationsCtrl.product.options[tag.id][itemIndex],tag.required)} " ng-model="productVariationsCtrl.product.options[tag.id][itemIndex]" multiple>
+							<ol class="nya-bs-select mw-200 btn-group bootstrap-select form-control product-select col-xs-10 ng-class:{'error-input': productVariationsCtrl.optionValidation(productVariationsCtrl.product.options[tag.id][itemIndex],tag.required)} " ng-model="productVariationsCtrl.product.options[tag.id][itemIndex]" multiple>
 								<li nya-bs-option="option in tag.options" data-value="option.value" deep-watch="true" class="ng-class:{'disabled': productVariationsCtrl.product.options[tag.id][itemIndex].length >= tag.n_options && productVariationsCtrl.product.options[tag.id][itemIndex].indexOf(option.value) < 0}">
 									<a href="#"><span ng-bind="option.text['en-US']"></span><span class="glyphicon glyphicon-ok check-mark"></span></a>
 								</li>
 							</ol>
-							<span class="glyphicon glyphicon-remove close-row" ng-if="productVariationsCtrl.product.options[tag.id].length > 1" ng-click="productVariationsCtrl.deleteOption(tag.id, $index)" ng-cloak></span>
+							<span class="ion-android-close close-row" ng-if="productVariationsCtrl.product.options[tag.id].length > 1" ng-click="productVariationsCtrl.deleteOption(tag.id, $index)" ng-cloak></span>
 						</div>
 						<div class="col-xs-12">
 							<span class="add-cathegory col-xs-12" ng-if="(productVariationsCtrl.product.options[tag.id][productVariationsCtrl.product.options[tag.id].length-1]).length>0" ng-click="productVariationsCtrl.product.options[tag.id].push([])" translate="product.variations.ADD_OPTION" ng-cloak></span>
@@ -136,7 +136,7 @@
 					<div class="mt-50 bespoke-wraper col-md-12" ng-if="productVariationsCtrl.bespoke_selected" ng-cloak>
 						<p class="col-xs-12"><span translate="product.variations.MANUFACTURING_INFO"></span></p>
 						<textarea name="bespoke_text" id="bespoke_text" cols="30" rows="10" class="form-control manufacturing-textarea col-md-10 ng-class:{'error-input': productVariationsCtrl.textFieldValidation(productVariationsCtrl.product.bespoke.value, productVariationsCtrl.required_bespoke)}" ng-model="productVariationsCtrl.product.bespoke.value[productVariationsCtrl.bespoke_language]"></textarea>
-						<ol class="nya-bs-select about-edit-select title-lang-btn manufacturing-lang col-md-2" ng-model="productVariationsCtrl.bespoke_language">
+						<ol class="nya-bs-select btn-group bootstrap-select form-control product-select about-edit-select title-lang-btn manufacturing-lang col-md-2" ng-model="productVariationsCtrl.bespoke_language">
 							<li nya-bs-option="language in productVariationsCtrl.languages" data-value="language.code" deep-watch="true">
 								<a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
 							</li>
@@ -157,9 +157,9 @@
 				<div class="col-md-12 mb-20">
 					<label class="col-md-2" for="sizechartName"><span translate="product.variations.SZ_NAME"></span></label>
 					<div class="col-md-8">
-						<input class="mb-10 form-control ng-class:{'error-input': productVariationsCtrl.invalidSizechartName}"" type="text" ng-model="productVariationsCtrl.newSizechart.name[productVariationsCtrl.name_language]">
+						<input class="mb-10 form-control ng-class:{'error-input': productVariationsCtrl.invalidSizechartName}" type="text" ng-model="productVariationsCtrl.newSizechart.name[productVariationsCtrl.name_language]">
 					</div>
-					<ol class="col-md-2 about-edit-select title-lang-btn nya-bs-select mb-10" ng-model="productVariationsCtrl.name_language">
+					<ol class="col-md-2 about-edit-select title-lang-btn nya-bs-select btn-group bootstrap-select form-control product-select mb-10" ng-model="productVariationsCtrl.name_language">
 						<li nya-bs-option="language in productVariationsCtrl.languages" data-value="language.code" deep-watch="true">
 							<a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
 						</li>
@@ -169,7 +169,7 @@
 				<div class="col-md-12 mb-20">
 					<label class="col-md-2" for="sizechartMetricUnit"><span translate="product.variations.SZ_METRIC_UNIT"></span></label>
 					<div class="col-md-8">
-						<ol class="nya-bs-select categories-select ng-class:{'error-input': !productVariationsCtrl.newSizechart.metric_unit&& productVariationsCtrl.invalidNewSizechart}" ng-model="productVariationsCtrl.newSizechart.metric_unit">
+						<ol class="nya-bs-select btn-group bootstrap-select form-control categories-select ng-class:{'error-input': !productVariationsCtrl.newSizechart.metric_unit&& productVariationsCtrl.invalidNewSizechart}" ng-model="productVariationsCtrl.newSizechart.metric_unit">
 							<li nya-bs-option="size in productVariationsCtrl.metric.size">
 								<a><span ng-bind="size"></span></a>
 							</li>
@@ -178,7 +178,7 @@
 				</div>
 				<div class="col-md-12 mb-20" ng-if="productVariationsCtrl.newSizechartAvailableCountries" ngt-cloak>
 					<label class="col-md-2" for="sizechartCountries"><span translate="product.variations.SZ_COUNTRIES"></span></label>
-					<ol class="nya-bs-select categories-select col-md-10" ng-model="productVariationsCtrl.newSizechart.countries" multiple>
+					<ol class="nya-bs-select btn-group bootstrap-select form-control categories-select col-md-10" ng-model="productVariationsCtrl.newSizechart.countries" multiple>
 						<li nya-bs-option="country in productVariationsCtrl.newSizechartAvailableCountries" data-value="country.id" deep-watch="true" class="">
 							<a href="#" ng-click="productVariationsCtrl.addTableValues();productVariationsCtrl.invalidSizechartCountries=false"><span ng-bind="country.country_name"></span><span class="glyphicon glyphicon-ok check-mark"></span></a>
 						</li>
@@ -247,7 +247,7 @@
 							</thead>
 							<tbody>
 								<tr ng-cloak ng-repeat="row in productVariationsCtrl.newSizechart.values track by $index">
-									<td><span class="glyphicon glyphicon-remove close-row-sizes" ng-click="productVariationsCtrl.removeRow($index)"></span></td>
+									<td><span class="ion-android-close close-row-sizes" ng-click="productVariationsCtrl.removeRow($index)"></span></td>
 									<td ng-repeat="cell in productVariationsCtrl.newSizechart.values[$index] track by $index">
 										<input ng-if="$index < productVariationsCtrl.newSizechart.countries.length" ng-model="productVariationsCtrl.newSizechart.values[$parent.$parent.$index][$index]" placeholder="0" ng-cloak/>
 										<input ng-if="$index >= productVariationsCtrl.newSizechart.countries.length" ng-model="productVariationsCtrl.newSizechart.values[$parent.$parent.$index][$index]" placeholder="0" type="number" ng-cloak/>
@@ -268,19 +268,19 @@
 				<label class="col-xs-12 text-center"><span translate="product.variations.SIZES"></span></label>
 				<div class ="row">
 					<div class="col-md-2">
-						<a style="cursor:pointer;"><span translate="product.variations.NEW_SIZECHART" ng-click="productVariationsCtrl.showNewSizechartForm()"></span></a>
+						<a class="link-red" style="cursor:pointer;"><span translate="product.variations.NEW_SIZECHART" ng-click="productVariationsCtrl.showNewSizechartForm()"></span></a>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-3 pad-about">
-						<ol class="nya-bs-select categories-select ng-class:{'error-input': productVariationsCtrl.form_submitted && !productVariationsCtrl.selected_sizechart}" ng-model="productVariationsCtrl.selected_sizechart" ng-change="productVariationsCtrl.countriesSelect(productVariationsCtrl.selected_sizechart)">
+					<div class="col-md-3">
+						<ol class="nya-bs-select btn-group bootstrap-select form-control categories-select ng-class:{'error-input': productVariationsCtrl.form_submitted && !productVariationsCtrl.selected_sizechart}" ng-model="productVariationsCtrl.selected_sizechart" ng-change="productVariationsCtrl.countriesSelect(productVariationsCtrl.selected_sizechart)">
 							<li nya-bs-option="sizechart in productVariationsCtrl.sizechart_helper" data-value="sizechart">
 								<a><span ng-bind="sizechart.name[productVariationsCtrl.selected_language]"></span></a>
 							</li>
 						</ol>
 					</div>
 					<div class="col-md-3 pad-about">
-						<ol class="nya-bs-select categories-select ng-class:{'error-input': productVariationsCtrl.form_submitted && !productVariationsCtrl.selected_sizechart_country}" ng-model="productVariationsCtrl.selected_sizechart_country" ng-if="productVariationsCtrl.countriesAvailable.length > 0 && productVariationsCtrl.selected_sizechart" ng-change="productVariationsCtrl.sizesSelect(productVariationsCtrl.selected_sizechart, productVariationsCtrl.selected_sizechart_country)" ng-cloak>
+						<ol class="nya-bs-select btn-group bootstrap-select form-control categories-select ng-class:{'error-input': productVariationsCtrl.form_submitted && !productVariationsCtrl.selected_sizechart_country}" ng-model="productVariationsCtrl.selected_sizechart_country" ng-if="productVariationsCtrl.countriesAvailable.length > 0 && productVariationsCtrl.selected_sizechart" ng-change="productVariationsCtrl.sizesSelect(productVariationsCtrl.selected_sizechart, productVariationsCtrl.selected_sizechart_country)" ng-cloak>
 							<li nya-bs-option="country in productVariationsCtrl.countriesAvailable" data-value="country">
 								<a><span ng-bind="country"></span></a>
 							</li>
@@ -291,7 +291,7 @@
 							<span translate="product.variations.AVAILABLE_SIZES"></span>
 						</div>
 						<div class="col-md-3 pad-about">
-							<ol class="nya-bs-select col-md-12" ng-model="productVariationsCtrl.size_to_add">
+							<ol class="nya-bs-select btn-group bootstrap-select form-control product-select col-md-12" ng-model="productVariationsCtrl.size_to_add">
 								<li nya-bs-option="size in productVariationsCtrl.sizechart_empty.values" data-value="$index">
 									<a href="#" ng-if="productVariationsCtrl.sizechart_available_values[$index]" ng-cloak><span ng-bind="size[0]"></span></a>
 								</li>
@@ -305,7 +305,7 @@
 						<span translate="product.variations.SCALE"></span>
 					</div>
 					<div class="col-md-1 pad-about">
-						<ol class="nya-bs-select categories-select ng-class:{'error-input': productVariationsCtrl.form_submitted && !productVariationsCtrl.product.sizechart['metric_unit']}" ng-model="productVariationsCtrl.product.sizechart['metric_unit']">
+						<ol class="nya-bs-select btn-group bootstrap-select form-control categories-select ng-class:{'error-input': productVariationsCtrl.form_submitted && !productVariationsCtrl.product.sizechart['metric_unit']}" ng-model="productVariationsCtrl.product.sizechart['metric_unit']">
 							<li nya-bs-option="size in productVariationsCtrl.metric.size">
 								<a><span ng-bind="size"></span></a>
 							</li>
@@ -329,7 +329,7 @@
 								</span>
 							</td>
 							<td class="col-md-1">
-								<span class="glyphicon glyphicon-remove close-row-sizes" ng-click="productVariationsCtrl.deleteSizeFromSizechart($index)"></span>
+								<span class="ion-android-close close-row-sizes" ng-click="productVariationsCtrl.deleteSizeFromSizechart($index)"></span>
 							</td>
 						</tr>
 					</tbody>
@@ -362,7 +362,7 @@
 							</div>
 							<div class="col-md-10 pad-about ng-class:{'col-md-offset-2': $index > 0}" ng-repeat="type in productVariationsCtrl.product.prints.type track by $index">
 								<span>{{$index+1}}:&nbsp;</span>
-								<ol class="nya-bs-select categories-select col-md-4 ng-class:{'error-input': productVariationsCtrl.optionValidation(productVariationsCtrl.product.prints.type[$index])}" ng-model="productVariationsCtrl.product.prints.type[$index]" required>
+								<ol class="nya-bs-select btn-group bootstrap-select form-control categories-select col-md-4 ng-class:{'error-input': productVariationsCtrl.optionValidation(productVariationsCtrl.product.prints.type[$index])}" ng-model="productVariationsCtrl.product.prints.type[$index]" required>
 									<li nya-bs-option="paperType in productVariationsCtrl.papertypes" data-value="paperType.type">
 										<a href="#">
 											<span ng-bind="paperType.name"></span><span class="glyphicon glyphicon-ok check-mark"></span>
@@ -386,14 +386,14 @@
 								<span class="pull-left">{{$index+1}}:&nbsp;</span>
 								<label for="width" class="col-md-1" style="font-size: 12px;"><span translate="product.variations.WIDTH"></span></label><input name="width" type="number" class="form-control col-md-1 ng-class:{'error-input': productVariationsCtrl.sizechartValuesValidation(productVariationsCtrl.product.prints.sizes[$index]['width'])}" ng-model="productVariationsCtrl.product.prints.sizes[$index]['width']" ng-min="0">
 								<label for="length" class="col-md-1" style="font-size: 12px;"><span translate="product.variations.LENGTH"></span></label><input name="length" type="number" class="form-control col-md-1 ng-class:{'error-input': productVariationsCtrl.sizechartValuesValidation(productVariationsCtrl.product.prints.sizes[$index]['length'])}" ng-model="productVariationsCtrl.product.prints.sizes[$index]['length']" ng-min="0">
-								<ol class="nya-bs-select categories-select col-md-2 ng-class:{'error-input': productVariationsCtrl.form_submitted && !productVariationsCtrl.product.print.sizes[$index]['metric_unit']}" ng-model="productVariationsCtrl.product.prints.sizes[$index]['metric_unit']">
+								<ol class="nya-bs-select btn-group bootstrap-select form-control categories-select col-md-2 ng-class:{'error-input': productVariationsCtrl.form_submitted && !productVariationsCtrl.product.print.sizes[$index]['metric_unit']}" ng-model="productVariationsCtrl.product.prints.sizes[$index]['metric_unit']">
 									<li nya-bs-option="unit in productVariationsCtrl.metric.size">
 										<a href="">
 											<span ng-bind="unit"></span>
 										</a>
 									</li>
 								</ol>
-								<span class="glyphicon glyphicon-remove close-row" ng-if="productVariationsCtrl.product.prints.sizes.length > 1" ng-click="productVariationsCtrl.deleteSize($index)" ng-cloak></span>
+								<span class="ion-android-close close-row" ng-if="productVariationsCtrl.product.prints.sizes.length > 1" ng-click="productVariationsCtrl.deleteSize($index)" ng-cloak></span>
 							</div>
 						</div>
 						<div class="row">

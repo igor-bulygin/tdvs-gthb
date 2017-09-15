@@ -4,6 +4,7 @@ namespace app\controllers;
 use app\helpers\CController;
 use app\helpers\Utils;
 use app\models\Bespoke;
+use app\models\Box;
 use app\models\Lang;
 use app\models\MadeToOrder;
 use app\models\Person;
@@ -146,11 +147,16 @@ class ProductController extends CController
 			'product_state' => Product::PRODUCT_STATE_ACTIVE,
 		]);
 
+		$boxes = Box::findSerialized([
+			'product_id' => $product->short_id,
+		]);
+
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("detail", [
 			'product' => $product,
 			'person' => $deviser,
 			'personProducts' => $deviserProducts,
+			'boxes' => $boxes,
 		]);
 	}
 

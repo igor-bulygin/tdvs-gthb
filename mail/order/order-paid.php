@@ -2,7 +2,6 @@
 <?php
 
 use app\helpers\Utils;
-use yii\helpers\StringHelper;
 
 /** @var $this \yii\web\View view component instance */
 /** @var \app\models\Order $order*/
@@ -781,8 +780,12 @@ $billingAddress = $order->getBillingAddress();
 																if (!$product) {
 																	continue;
 																}?>
-														<br>
-																<img height="90" src="<?= Utils::url_scheme() ?><?=Utils::thumborize($product->getMainImage())->resize(60, 60)?>" style="border: 0px  ; width: 120px; height: 90px; margin: 0px;" width="120">&nbsp; &nbsp; <?=StringHelper::truncate($product->getName(), 30, '...')?>: <strong style="text-align: right"><?=$packProduct->price * $packProduct->quantity?> Euros</strong><br>
+
+															<br>
+															<img height="90" src="<?= Utils::url_scheme() ?><?=Utils::thumborize($product->getMainImage())->resize(90, 90)?>" style="border: 0px  ; width: 120px; height: 90px; margin: 0px;" width="120">&nbsp; &nbsp;&nbsp;<br>
+															<a href="<?=$product->getViewLink()?>" target="_blank" style="color: black;"><span style="font-size:14px"><?=$product->getName()?></span></a><br>
+															<span style="font-size:14px"><strong><?=$packProduct->price * $packProduct->quantity?> Euros</strong></span><br>
+
 															<?php } ?>
 														</div>
 
