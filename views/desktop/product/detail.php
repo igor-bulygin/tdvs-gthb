@@ -27,7 +27,8 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 
 	<!-- PRODUCT CARD -->
 	
-	<div class="product" ng-controller="detailProductCtrl as detailProductCtrl">
+<div ng-controller="detailProductCtrl as detailProductCtrl">
+	<div class="product">
 		<!-- Modal -->
 		<div class="modal fade" id="chartModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 			<div class="modal-dialog" role="document">
@@ -415,9 +416,11 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 					<a href="#videos" aria-controls="videos" role="tab" data-toggle="tab"><span translate="product.detail.VIDEOS" class="title-product-name"></span></a>
 				</li>
 				<?php /*}*/ ?>
+				<?php if (count($product->faqMapping) > 0) { ?>
 				<li role="presentation" class="no-b-r">
 					<a href="#faqs" aria-controls="faqs" role="tab" data-toggle="tab"><span class="title-product-name">FAQs</span></a>
 				</li>
+				<?php }?>
 			</ul>
 		</div>
 		<div class="container">
@@ -425,12 +428,71 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 			<div class="tab-content product-description-content">
 				<div role="tabpanel" class="tab-pane work-description-wrapper" id="faqs">
 					<div class="container mt-20 mb-20">
-						<span class="title-product-name">Faqs</span>
+						<!--<span class="title-product-name">Faqs</span>-->
+
+						<?php if (count($product->faqMapping) > 0) { ?>
+							<div class="work-profile-description-wrapper faq-wrapper">
+								<div class="title"><span translate="product.detail.WORK_FAQS"></span></div>
+								<?php foreach ($product->faqMapping as $faq) { ?>
+									<div class="q-a-wrapper">
+										<p class="question">
+											<span translate="product.detail.Q"></span>
+											<span class="important"><?= $faq->question?></span>
+										</p>
+										<p class="question">
+											<span translate="product.detail.A"></span>
+											<span><?= $faq->answer?></span>
+										</p>
+									</div>
+								<?php } ?>
+							</div>
+						<?php } ?>
+
 					</div>
 				</div>
 				<div role="tabpanel" class="tab-pane work-description-wrapper" id="boxes">
 					<div class="container mt-20 mb-20">
-						<span class="title-product-name">BOXES</span>
+						<?php if ($boxes) { ?>
+							<?php foreach ($boxes as $box) {
+								$products = $box->getProductsPreview(); ?>
+								<div class="col-lg-4">
+									<a href="<?= $box->getViewLink()?>">
+										<figure class="showcase">
+											<div class="images-box">
+												<div class="bottom-top-images">
+													<div class="image-left">
+														<img src="<?=isset($products[0]) ? $products[0]['main_photo'] : 'imgs/img-default.jpg'?>" class="showcase-image">
+													</div>
+													<div class="image-right">
+														<img src="<?=isset($products[1]) ? $products[1]['main_photo'] : 'imgs/img-default.jpg'?>" class="showcase-image">
+													</div>
+												</div>
+												<div class="bottom-image">
+													<img src="<?=isset($products[2]) ? $products[2]['main_photo'] : 'imgs/img-default.jpg'?>" class="showcase-image">
+												</div>
+											</div>
+											<figcaption>
+												<div class="row no-mar">
+													<div class="col-md-8">
+														<span class="boxes-text align-left"><?=$box->name?></span>
+													</div>
+													<div class="col-md-4 no-padding">
+														<button class="btn btn-single-love btn-love-box">
+															<span class="number"><?=count($products)?></span>
+															<span class="heart-icon"></span>
+														</button>
+													</div>
+												</div>
+											</figcaption>
+										</figure>
+									</a>
+								</div>
+							<?php } ?>
+						<?php } else { ?>
+							<button type="button" class="btn btn-red btn-hart" ng-click="detailProductCtrl.setBox()">
+								<span translate="product.detail.SAVE_IN_BOX"></span>
+							</button>
+						<?php } ?>
 					</div>
 
 					<!--<div class="reviews-wrapper">
@@ -647,5 +709,5 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 			</div>
 		</div>
 	</div>
-
+</div>
 	<!-- /PRODUCT DESCRIPTION -->
