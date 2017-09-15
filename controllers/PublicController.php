@@ -924,8 +924,7 @@ class PublicController extends CController
 		return $this->goHome();
 	}
 
-	/*
-	public function actionTest()
+	public function actionTestComposeEmailOrder()
 	{
 		$short_id = '3654fd24';
 		$order = \app\models\Order::findOneSerialized($short_id);
@@ -933,5 +932,4 @@ class PublicController extends CController
 			$order->composeEmailOrderPaid(false);
 		}
 	}
-	*/
 }

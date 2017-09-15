@@ -782,9 +782,9 @@ $billingAddress = $order->getBillingAddress();
 																}?>
 
 															<br>
+															<img height="90" src="<?= Utils::url_scheme() ?><?=Utils::thumborize($product->getMainImage())->resize(90, 90)?>" style="border: 0px  ; width: 120px; height: 90px; margin: 0px;" width="120">&nbsp; &nbsp;&nbsp;<br>
 															<a href="<?=$product->getViewLink()?>" target="_blank" style="color: black;"><span style="font-size:14px"><?=$product->getName()?></span></a><br>
-															<img data-file-id="5186009" height="90" src="<?= Utils::url_scheme() ?><?=Utils::thumborize($product->getMainImage())->resize(60, 60)?>" style="border: 0px  ; width: 120px; height: 90px; margin: 0px;" width="120">
-															&nbsp; &nbsp;&nbsp;<span style="font-size:14px"><?=Yii::t('app/public', 'ORDER_EMAIL_PRICE')?>:&nbsp;<strong><?=$packProduct->price * $packProduct->quantity?> Euros</strong></span><br>
+															<span style="font-size:14px"><strong><?=$packProduct->price * $packProduct->quantity?> Euros</strong></span><br>
 
 															<?php } ?>
 														</div>

@@ -73,7 +73,6 @@ return [
 	'ORDER_EMAIL_TITLE' => 'CONFIRMACIÓN DE COMPRA',
 	'ORDER_EMAIL_HELLO' => 'Hola {person_name},',
 	'ORDER_EMAIL_MAIN_TEXT' => 'Te informamos que tu compra ha sido realizada&nbsp;con éxito y se encuentra&nbsp;en proceso de envío. Para devoluciones o modificaciones visita tu perfil en <a href="http://beta.todevise.com" target="_blank">todevise.com</a>',
-	'ORDER_EMAIL_PRICE' => 'Precio',
 	'ORDER_EMAIL_SUBTITLE' => 'Información de compra',
 	'ORDER_EMAIL_TOTAL_AMOUNT' => 'IMPORTE TOTAL DE LA COMPRA: <strong>{amount}</strong>',
 	'ORDER_EMAIL_FOOTER' => '<em>To learn more about Todevise, click on this link</em>&nbsp;<a href="http://www.todevise.com/about-us">http://www.todevise.com/about-us</a><br><em>Copyright @ 2017 Todevise, All rights reserved.</em><br>',
