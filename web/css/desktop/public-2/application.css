@@ -6707,14 +6707,13 @@ h3 {
     color: #ffffff;
     top: 5px;
     background-color: #bfbfbf;
-    font-size: 11px;
+    font-size: 16px;
     width: 22px;
     height: 22px;
     border-radius: 90px 90px 90px 90px !important;
     -webkit-border-radius: 90px 90px 90px 90px !important;
     -moz-border-radius: 90px 90px 90px 90px !important;
     text-align: center;
-    padding-top: 6px;
     cursor: pointer; }
     .items-row .close-row-sizes:hover {
       background-color: #939393;
@@ -6853,7 +6852,8 @@ h3 {
 .description-add-photos .plus-add-wrapper {
   border: 1px solid #1C1919;
   margin: 0;
-  width: 119px !important; }
+  width: 150px !important;
+  height: 150px; }
 .description-add-photos:hover .plus-add {
   background-color: #7AB83A;
   -moz-transition-property: background-color;
@@ -6888,11 +6888,11 @@ h3 {
 
 .image-description-edit {
   background-color: #bfbfbf;
-  border-radius: 14px 14px 14px 14px !important;
-  -webkit-border-radius: 14px 14px 14px 14px !important;
-  -moz-border-radius: 14px 14px 14px 14px !important;
+  border-radius: 6px 6px 6px 6px !important;
+  -webkit-border-radius: 6px 6px 6px 6px !important;
+  -moz-border-radius: 6px 6px 6px 6px !important;
   cursor: move;
-  height: 127px;
+  height: 150px;
   position: relative;
   margin: 0 15px 15px 0; }
   .image-description-edit img {
@@ -7143,10 +7143,10 @@ a.editable-click.purple-text:hover {
   transition: .4s; }
 
 input:checked + .slider {
-  background-color: #7AB83A; }
+  background-color: #c91c39; }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #7AB83A; }
+  box-shadow: 0 0 1px #c91c39; }
 
 input:checked + .slider:before {
   -webkit-transform: translateX(14px);
@@ -7207,7 +7207,7 @@ input:checked + .slider:before {
 
 .apply-to-all-btn {
   cursor: pointer;
-  color: #7AB83A; }
+  color: #c91c39; }
 
 .editable-fix {
   display: block;

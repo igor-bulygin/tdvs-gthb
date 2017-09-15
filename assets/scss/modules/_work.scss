@@ -123,12 +123,11 @@
 		color:$white;
     	top: 5px;
 		background-color: $light_grey;
-		font-size: 11px;
+		font-size: 16px;
 		width: 22px;
 		height: 22px;
 		@include border-radius(90px,90px,90px,90px);
 		text-align: center;
-		padding-top: 6px;
 		cursor: pointer;
 		&:hover{
 			background-color: $dark_grey;
@@ -255,7 +254,8 @@
 	.plus-add-wrapper{
 		border: 1px solid $black;
 		margin: 0;
-		width: 119px!important;
+		width: 150px!important;
+		height: 150px;
 	}
     &:hover{
         .plus-add{
@@ -286,9 +286,9 @@
 }
 .image-description-edit{
 		background-color: $light_grey;
-		@include border-radius(14px,14px,14px,14px);
+		@include border-radius(6px,6px,6px,6px);
 		cursor: move;
-		height: 127px;
+		height: 150px;
 		position: relative;
 		margin: 0 15px 15px 0;
 	img{
@@ -539,11 +539,11 @@ a.editable-click.purple-text:hover {
 }
 
 input:checked + .slider {
-  background-color: $dark_green;
+  background-color: $dark_red;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px $dark_green;
+  box-shadow: 0 0 1px $dark_red;
 }
 
 input:checked + .slider:before {
@@ -613,7 +613,7 @@ input:checked + .slider:before {
 }
 .apply-to-all-btn{
 	cursor: pointer;
-	color: $dark_green;
+	color: $dark_red;
 }
 .editable-fix{
 	display: block;
