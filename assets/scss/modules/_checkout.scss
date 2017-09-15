@@ -114,7 +114,7 @@
 	background-color: $white;
 	padding: 0 0 120px 0;
 	input, button{
-		@include border-radius(90px,90px,90px,90px); 
+		@include border-radius(6px,6px,6px,6px); 
 		&.btn-green{
 			@include border-radius(4px,4px,4px,4px); 
 			margin-top: 10px;
