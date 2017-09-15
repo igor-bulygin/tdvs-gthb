@@ -928,7 +928,7 @@ class PublicController extends CController
 	public function actionTest()
 	{
 		$short_id = '3654fd24';
-		$order = Order::findOneSerialized($short_id);
+		$order = \app\models\Order::findOneSerialized($short_id);
 		if ($order) {
 			$order->composeEmailOrderPaid(false);
 		}
