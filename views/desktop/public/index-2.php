@@ -143,7 +143,7 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 										<div class="location align-left"><?= $deviser->personalInfoMapping->getCityLabel() ?></div>
 									</div>
 									<div class="col-md-6">
-										<button class="btn btn-icon mt-5"><i class="ion-star"></i><span>Follow</span>
+										<button class="btn btn-icon mt-5"><i class="ion-ios-star-outline"></i><span>Follow</span>
 									</button>
 									</div>
 								</div>
@@ -193,7 +193,7 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 														<span class="location align-left"><?= $influencer->personalInfoMapping->getCityLabel() ?></span>
 													</div>
 													<div class="col-md-6">
-														<button class="btn btn-icon mt-5"><i class="ion-star"></i><span>Follow</span></button>
+														<button class="btn btn-icon mt-5"><i class="ion-ios-star-outline"></i><span>Follow</span></button>
 													</div>
 												</div>
 												</figcaption>

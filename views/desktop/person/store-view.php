@@ -75,21 +75,20 @@ $this->params['person_menu_store_categories'] = $categories;
 												<a href="<?= $product->getViewLink() ?>">
 													<img class="grid-image"
 														 src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getMainImage())->resize(400, 0) ?>">
+													<span class="img-bgveil"></span>
 												</a>
 											</image-hover-buttons>
-											<figcaption>
-												<p class="instauser">
-												<a href="<?= $product->getViewLink()?>">
-													<?= $product->name ?>
-												</a>
-												</p>
-												<p class="price">€ <?= $product->getMinimumPrice() ?></p>
-												<?php if ($person->isPersonEditable()) { ?>
-													<a class="edit-product-icon" href="<?= $product->getEditLink()?>" translate-attr="{title: 'person.EDIT_WORK'}">
-														<i class="ion-edit"></i>
-													</a>
-												<?php } ?>
-											</figcaption>
+											<a href="<?= $product->getViewLink()?>">
+												<figcaption>
+													<p class="instauser"><?= \yii\helpers\StringHelper::truncate($product->getName(), 18, '…') ?></p>
+													<p class="price">€ <?= $product->getMinimumPrice() ?></p>
+													<?php if ($person->isPersonEditable()) { ?>
+														<a class="edit-product-icon" href="<?= $product->getEditLink()?>" translate-attr="{title: 'person.EDIT_WORK'}">
+															<i class="ion-edit"></i>
+														</a>
+													<?php } ?>
+												</figcaption>
+											</a>
 										</figure>
 									</div>
 								</div>

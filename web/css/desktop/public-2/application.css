@@ -4662,7 +4662,7 @@ h3 {
       font-size: 16px; }
     .about-wrapper .about-container .deviser-biography {
       height: 1049px;
-      overflow: scroll; }
+      overflow: hidden; }
       .about-wrapper .about-container .deviser-biography p {
         padding: 10px 20px 10px 0;
         font-size: 14px; }
@@ -4678,6 +4678,15 @@ h3 {
     .about-grid .item img:hover {
       opacity: 1;
       filter: alpha(opacity=100); }
+
+.pad-about.about-grid .item:nth-child(n+2) {
+  padding-top: 10px; }
+.pad-about.about-grid .item:nth-child(n+4) {
+  display: none; }
+.pad-about.about-grid .item:nth-child(2) {
+  padding-right: 5px; }
+.pad-about.about-grid .item:nth-child(3) {
+  padding-left: 5px; }
 
 .loader-about {
   width: 100%;
