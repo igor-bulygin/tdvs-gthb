@@ -160,7 +160,8 @@
 		}
 		border: 1px solid $black;
 		margin: 0;
-		width: 123px!important;
+		height: 150px;
+		width: 150px!important;
 	}
     &:hover{
         .plus-add{
@@ -191,9 +192,10 @@
 }
 .image-basic-info-edit{
 		background-color: $light_grey;
-		@include border-radius(14px,14px,14px,14px);
+		@include border-radius(6px,6px,6px,6px);
 		cursor: move;
-		height: 127px;
+		height: 150px;
+		width: 150px;
 		position: relative;
 		margin: 0 15px 15px 0;
 		&:hover{
@@ -205,9 +207,8 @@
 			}
 		}
 	img{
-		max-height: 114px;
 		width: auto;
-		max-width: 122px;
+		max-width: 150px;
 		position: absolute;
 		left: 0;
 		right: 0;
@@ -216,33 +217,33 @@
 		margin: auto;
 	}
 	.crop{
-		background-color: $dark_grey;
 		color: $white;
 		cursor: pointer;
 		position: absolute;
-		right: 35px;
-    	top: 5px;
-		width: 25px;
-		height: 25px;
-		font-size: 16px;
+		right: 0;
+		left: 0;
+		margin-left: auto;
+		margin-right: auto;
+		top: 50px;
+		width: 50px;
+		height: 50px;
+		font-size: 30px;
+		font-size: 30px;
 		text-align: center;
 		padding: 1px 0 0 0;
-		@include border-radius(7px,7px,7px,7px);
+		border: 1px solid $white;
+		@include border-radius(90px,90px,90px,90px);
 		display: none;
 	}
 	.delete{
-		background-color: $dark_grey;
-		color: $white;
 		cursor: pointer;
 		position: absolute;
 		right: 5px;
-    	top: 5px;
+    	bottom: 20px;
 		width: 25px;
 		height: 25px;
-		font-size: 16px;
+		font-size: 32px;
 		text-align: center;
-		padding: 1px 0 0 0;
-		@include border-radius(7px,7px,7px,7px);
 		display: none;
 	}
 	.main-marked{
@@ -617,4 +618,11 @@ input:checked + .slider:before {
 .editable-fix{
 	display: block;
 	margin: 7px 0 7px 0;
+}
+.category-select{
+	display: block;
+	float: left;
+	margin-right: 5px;
+   	width: 140px;
+}
 }
