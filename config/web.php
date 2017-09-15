@@ -3,11 +3,6 @@
 use yii\filters\ContentNegotiator;
 use yii\web\Response;
 
-
-define('TODEVISE_DEV', strpos($_SERVER['HTTP_HOST'], 'dev.todevise.com') !== false);
-define('TODEVISE_BETA', strpos($_SERVER['HTTP_HOST'], 'beta.todevise.com') !== false);
-define('TODEVISE_PROD', strpos($_SERVER['HTTP_HOST'], 'www.todevise.com') !== false);
-
 $config = [
 	'id' => 'basic',
 
