@@ -30,10 +30,10 @@ function moreWorks() {
 }
 
 function initMacyProducts() {
-	Macy.init({
+	var options = {
 		container: '#macy-container',
-		trueOrder: false,
-		waitForImages: false,
+		trueOrder: true,
+		waitForImages: true,
 		margin: 2,
 		columns: 6,
 		breakAt: {
@@ -42,6 +42,11 @@ function initMacyProducts() {
 			520: 2,
 			400: 1
 		}
+	};
+	Macy.init(options);
+
+	setTimeout(function () {
+		Macy.recalculate();
 	});
 
 	Macy.onImageLoad(null, function () {
