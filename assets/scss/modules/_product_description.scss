@@ -38,6 +38,7 @@
         }
     }
     .product-description-content{
+        min-height: 500px;
         .work-description-wrapper{
             padding: 40px 0;
             .title{
@@ -193,6 +194,15 @@
                     float: right;
                     color: $dark_grey;
                 }
+            }
+        }
+        #videos{
+            float: left;
+            margin-bottom: 80px;
+        }
+        #boxes{
+            button{
+                margin-top: 35px;
             }
         }
     }
@@ -450,4 +460,9 @@
 			color: $dark_grey;
 		}
 	}
+}
+.happyface-black {
+    width: 49px;
+    margin: 30px auto;
+    display: block;
 }

@@ -428,8 +428,6 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 			<div class="tab-content product-description-content">
 				<div role="tabpanel" class="tab-pane work-description-wrapper" id="faqs">
 					<div class="container mt-20 mb-20">
-						<!--<span class="title-product-name">Faqs</span>-->
-
 						<?php if (count($product->faqMapping) > 0) { ?>
 							<div class="work-profile-description-wrapper faq-wrapper">
 								<div class="title"><span translate="product.detail.WORK_FAQS"></span></div>
@@ -445,6 +443,11 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 										</p>
 									</div>
 								<?php } ?>
+							</div>
+						<?php } else { ?>
+							<div class="col-lg-12 centered-col">
+								<img class="happyface-black" src="/imgs/happy-face-black.svg" />
+								<span translate="product.detail.MORECONTENTCOMINGSOON"></span>
 							</div>
 						<?php } ?>
 
@@ -489,9 +492,11 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 								</div>
 							<?php } ?>
 						<?php } else { ?>
-							<button type="button" class="btn btn-red btn-hart" ng-click="detailProductCtrl.setBox()">
-								<span translate="product.detail.SAVE_IN_BOX"></span>
-							</button>
+							<div class="col-lg-12 centered-col">
+								<button type="button" class="btn btn-red btn-hart" ng-click="detailProductCtrl.setBox()">
+									<span translate="product.detail.SAVE_IN_BOX"></span>
+								</button>
+							</div>
 						<?php } ?>
 					</div>
 
@@ -648,9 +653,9 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 				</div>
 				<?php /*if (count($videos)) { */?>
 					<div role="tabpanel" class="tab-pane work-description-wrapper" id="videos">
-						<div class="other-products-wrapper">
-							<div style="height:500px;">
-								<div class="video-container">
+						<div class="container mt-20 mb-20">
+							<?php if (count($videos)) { ?>
+								<div class="video-container centered-col">
 									<?php foreach ($videos as $video) { ?>
 										<div class="col-sm-6">
 											<div class="video-wrapper">
@@ -659,7 +664,12 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 										</div>
 									<?php }  ?>
 								</div>
-							</div>
+							<?php } else {?>
+								<div class="col-lg-12 centered-col">
+									<img class="happyface-black" src="/imgs/happy-face-black.svg" />
+									<span translate="product.detail.MORECONTENTCOMINGSOON"></span>
+								</div>
+							<?php }?>
 						</div>
 					</div>
 				<?php /*} */?>
