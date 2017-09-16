@@ -416,11 +416,11 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 					<a href="#videos" aria-controls="videos" role="tab" data-toggle="tab"><span translate="product.detail.VIDEOS" class="title-product-name"></span></a>
 				</li>
 				<?php /*}*/ ?>
-				<?php if (count($product->faqMapping) > 0) { ?>
+				<?php /*if (count($product->faqMapping) > 0) {*/ ?>
 				<li role="presentation" class="no-b-r">
 					<a href="#faqs" aria-controls="faqs" role="tab" data-toggle="tab"><span class="title-product-name">FAQs</span></a>
 				</li>
-				<?php }?>
+				<?php /*}*/?>
 			</ul>
 		</div>
 		<div class="container">
@@ -693,7 +693,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 											<a href="<?= $product->getViewLink() ?>">
 												<figcaption>
 													<p class="instauser">
-														<?= $product->name ?>
+														<?= \yii\helpers\StringHelper::truncate(Utils::l($product->getName()), 18, '…') ?>
 													</p>
 													<p class="price">€ <?= $product->getMinimumPrice() ?></p>
 												</figcaption>

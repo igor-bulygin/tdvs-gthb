@@ -4660,15 +4660,35 @@ h3 {
       padding: 20px 0;
       margin: 0 0 60px;
       font-size: 16px; }
-    .about-wrapper .about-container .deviser-biography {
-      height: 1049px;
-      overflow: scroll; }
-      .about-wrapper .about-container .deviser-biography p {
-        padding: 10px 20px 10px 0;
-        font-size: 14px; }
+    .about-wrapper .about-container .deviser-biography p {
+      padding: 10px 20px 10px 0;
+      font-size: 14px; }
+
+.read-more-trigger {
+  color: #c91c39;
+  cursor: pointer;
+  margin-top: 20px;
+  display: none; }
+
+#read-more {
+  display: none; }
+  #read-more:checked + div {
+    height: auto !important; }
+
+.about-wrapper .about-container #deviser-biography-box {
+  height: 750px;
+  overflow: hidden; }
+.about-wrapper .about-container .deviser-biography {
+  height: auto; }
+
+.read-more-state ~ .read-more-trigger:before {
+  content: '+ info'; }
+
+.read-more-state:checked ~ .read-more-trigger:before {
+  content: '- info'; }
 
 .about-grid {
-  min-height: 900px; }
+  min-height: 890px; }
   .about-grid .item img {
     height: 100%;
     width: 100%;
@@ -4678,6 +4698,15 @@ h3 {
     .about-grid .item img:hover {
       opacity: 1;
       filter: alpha(opacity=100); }
+
+.pad-about.about-grid .item:nth-child(n+2) {
+  padding-top: 10px; }
+.pad-about.about-grid .item:nth-child(n+4) {
+  display: none; }
+.pad-about.about-grid .item:nth-child(2) {
+  padding-right: 5px; }
+.pad-about.about-grid .item:nth-child(3) {
+  padding-left: 5px; }
 
 .loader-about {
   width: 100%;
