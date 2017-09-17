@@ -31,7 +31,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 						</div>
 						<?php if ($person->isPersonEditable() && $person->isPublic()) {?>
 							<div class="edit-profile-btn">
-								<button class="btn btn-default btn-transparent btn-header ng-class:{'button-error': personHeaderCtrl.required['header_info']}" ng-click="personHeaderCtrl.editHeader()"><span translate="person.header.EDIT_HEADER"></span></button>
+								<button class="btn btn-default all-caps btn-header ng-class:{'button-error': personHeaderCtrl.required['header_info']}" ng-click="personHeaderCtrl.editHeader()"><span translate="person.header.EDIT_HEADER"></span></button>
 							</div>
 						<?php } ?>
 						<div class="deviser-data">
@@ -48,7 +48,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 					</div>
 				</div>
 				<?php if ($person->isDeviserEditable() && $person->isPublic()) {?>
-					<a class="btn btn-default btn-add-work" ng-class="personHeaderCtrl.required['store'] ? 'button-error' : 'btn-green'" href="<?= $person->getCreateWorkLink()?>"><span translate="person.header.ADD_WORK"></span></a>
+					<a class="btn btn-default all-caps btn-add-work" ng-class="personHeaderCtrl.required['store'] ? 'button-error' : 'btn-red'" href="<?= $person->getCreateWorkLink()?>"><span translate="person.header.ADD_WORK"></span></a>
 				<?php } ?>
 			</div>
 		</div>
@@ -57,7 +57,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 		<span tooltip-placement="top" uib-tooltip="{{'person.header.ADD_COVER_PHOTO' | translate }}" class="button ion-camera edit-cover-icon photo" ngf-select ng-model="personHeaderCtrl.new_header" name="header" ngf-pattern="'image/*'" ngf-accept="'image/*'"></span>
 		<span tooltip-placement="top" uib-tooltip="{{'person.header.CROP_PHOTO' | translate}}" class="button ion-crop edit-cover-icon crop" ng-click="personHeaderCtrl.openCropModal(personHeaderCtrl.header_original, 'header_cropped')" ng-if="personHeaderCtrl.header" ng-cloak></span>
 		<span class="req-1" ng-if="personHeaderCtrl.required['header'] && !personHeaderCtrl.new_header" ng-cloak><span translate="global.REQUIRED"></span></span>
-		<img class="cover" ngf-thumbnail="personHeaderCtrl.header || '/imgs/default-cover.jpg'" style="height: 411px;">
+		<img class="cover" ngf-thumbnail="personHeaderCtrl.header || '/imgs/default-cover.jpg'" style="height: 388.5px;">
 		<div class="banner-deviser-content banner-deviser-edit-header-content">
 			<div class="grey-overlay"></div>
 			<div class="container deviser-header-edit-wrapper">

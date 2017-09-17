@@ -57,31 +57,31 @@ app\components\assets\PublicHeader2Asset::register($this);
 					</li>
 				<?php } else {
 					$person = Yii::$app->user->identity; /* @var \app\models\Person $person */?>
-						<li class="dropdown log">
-							<a class="logued-text" href="#" class="dropdown-toggle log" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" translate="header.MY_TODEVISE"><i class="ion-android-person"></i></a>
-							<div class="dropdown-menu admin-wrapper black-form">
-								<ul class="menu-logued">
-									<li class="header-item">
-										<a href="<?= $person->getMainLink()?>"> <span><?=$person->getName()?></span></a>
-										<img class="avatar-logued-user" src="<?= $person->getAvatarImage() ?>">
-									</li>
-									<?php if ($person->isAdmin()) { ?>
-										<li><a href="<?=Url::to('/admin')?>" translate="header.ADMINISTRATION"></a></li>
-										<li><a href="<?=Url::to('/admin/invitations')?>" translate="header.INVITATION"></a></li>
-										<li class="separation-line"></li>
-									<?php } elseif ($person->isDeviser()) { ?>
-										<li><a href="<?=$person->getSettingsLink('open-orders')?>" translate="header.SALES"></a></li>
-										<li class="separation-line"></li>
-									<?php } elseif ($person->isClient()) { ?>
-										<li><a href="<?=$person->getSettingsLink('open-orders')?>" translate="header.MY_ORDERS"></a></li>
-										<li class="separation-line"></li>
-									<?php } elseif ($person->isInfluencer()) { ?>
-									<?php } ?>
-									<li><a href="<?= $person->getSettingsLink()?>" translate="header.SETTINGS"></a></li>
-									<li><a href="#" ng-click="publicHeaderCtrl.logout()" translate="header.LOGOUT"></a></li>
-								</ul>
-							</div>
-						</li>
+					<li class="dropdown log">
+						<a class="logued-text" href="#" class="dropdown-toggle log" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><!--span translate="header.MY_TODEVISE"></span--><img class="avatar-logued-user" src="<?= $person->getAvatarImage() ?>"></a>
+						<div class="dropdown-menu admin-wrapper black-form">
+							<ul class="menu-logued">
+								<li class="header-item">
+									<a href="<?= $person->getMainLink()?>"><span><?=$person->getName()?></span></a>
+									<!--img class="avatar-logued-user" src="<?= $person->getAvatarImage() ?>"-->
+								</li>
+								<?php if ($person->isAdmin()) { ?>
+									<li><a href="<?=Url::to('/admin')?>" translate="header.ADMINISTRATION"></a></li>
+									<li><a href="<?=Url::to('/admin/invitations')?>" translate="header.INVITATION"></a></li>
+									<li class="separation-line"></li>
+								<?php } elseif ($person->isDeviser()) { ?>
+									<li><a href="<?=$person->getSettingsLink('open-orders')?>" translate="header.SALES"></a></li>
+									<li class="separation-line"></li>
+								<?php } elseif ($person->isClient()) { ?>
+									<li><a href="<?=$person->getSettingsLink('open-orders')?>" translate="header.MY_ORDERS"></a></li>
+									<li class="separation-line"></li>
+								<?php } elseif ($person->isInfluencer()) { ?>
+								<?php } ?>
+								<li><a href="<?= $person->getSettingsLink()?>" translate="header.SETTINGS"></a></li>
+								<li><a href="#" ng-click="publicHeaderCtrl.logout()" translate="header.LOGOUT"></a></li>
+							</ul>
+						</div>
+					</li>
 				<?php } ?>
 				<li class="cart-item">
 					<a href="<?=Url::to(['/cart'])?>">

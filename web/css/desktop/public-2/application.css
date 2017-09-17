@@ -287,6 +287,9 @@ ul {
 a, a:hover, a:focus {
   text-decoration: none; }
 
+.all-caps {
+  text-transform: uppercase; }
+
 @font-face {
   font-family: "Univers Condensed";
   src: url("/fonts/UniversLT-Condensed.eot");
@@ -4496,7 +4499,8 @@ h3 {
   width: 100%; }
 
 .btn-header {
-  width: 140px; }
+  width: 140px;
+  font-weight: bold; }
 
 .btn.disabled, .btn[disabled], fieldset[disabled] .btn {
   cursor: not-allowed;
@@ -4510,7 +4514,7 @@ h3 {
 
 .edit-header-container {
   position: relative;
-  height: 411px; }
+  height: 388.5px; }
 
 .edit-profile-btn {
   position: absolute;

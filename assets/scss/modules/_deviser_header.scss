@@ -131,6 +131,7 @@
 }
 .btn-header{
     width: 140px;
+    font-weight: bold;
 }
 .btn.disabled, .btn[disabled], fieldset[disabled] .btn {
     cursor: not-allowed;
@@ -145,7 +146,7 @@
 }
 .edit-header-container{
 	position: relative;
-	height:411px;
+	height:388.5px//411px;
 }
 .edit-profile-btn{
     position: absolute;
