@@ -32,7 +32,7 @@ $this->params['person_links_target'] = 'public_view';
 					<div class="empty-wrapper">
 						<?php if ($person->isPersonEditable()) { ?>
 							<p class="no-story-text"><span translate="person.social.CONNECT_YOUR_PROFILE"></span></p>
-							<a class="btn btn-green btn-create-story" href="<?=$person->getConnectWithInstagramLink()?>"><span translate="person.social.CONNECT_WITH_INSTAGRAM"></span></a>
+							<a class="btn btn-red btn-create-story" href="<?=$person->getConnectWithInstagramLink()?>"><span translate="person.social.CONNECT_WITH_INSTAGRAM"></span></a>
 						<?php } else { ?>
 							<p class="no-video-text"><?=$person->getName()?> <span translate="person.social.NO_CONTENT_YET"></span></p>
 						<?php } ?>

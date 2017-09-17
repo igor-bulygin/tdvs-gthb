@@ -28,7 +28,7 @@
 		<div ng-if="editVideosCtrl.person.videos.length === 0" class="text-center" ng-cloak>
 			<img class="sad-face" src="/imgs/sad-face.svg">
 			<p class="no-video-text"><span translate="person.videos.ANY_VIDEOS"></span></p>
-			<button class="btn btn-default btn-green" ng-click="editVideosCtrl.showAddVideo()" ng-if="!editVideosCtrl.addVideosClicked"><span translate="person.videos.ADD_VIDEOS"></span></button>
+			<button class="btn btn-default btn-red" ng-click="editVideosCtrl.showAddVideo()" ng-if="!editVideosCtrl.addVideosClicked"><span translate="person.videos.ADD_VIDEOS"></span></button>
 		</div>
 		<div class="video-edit-list" ng-cloak ui-sortable ng-model="editVideosCtrl.person.videos">
 			<div class="video-row" ng-repeat="video in editVideosCtrl.person.videos">

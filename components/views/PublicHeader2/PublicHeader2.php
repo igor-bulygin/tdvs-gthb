@@ -63,7 +63,7 @@ app\components\assets\PublicHeader2Asset::register($this);
 							<ul class="menu-logued">
 								<li class="header-item">
 									<a href="<?= $person->getMainLink()?>"><span><?=$person->getName()?></span></a>
-									<!--img class="avatar-logued-user" src="<?= $person->getAvatarImage() ?>"-->
+									<img class="avatar-logued-user" src="<?= $person->getAvatarImage() ?>">
 								</li>
 								<?php if ($person->isAdmin()) { ?>
 									<li><a href="<?=Url::to('/admin')?>" translate="header.ADMINISTRATION"></a></li>

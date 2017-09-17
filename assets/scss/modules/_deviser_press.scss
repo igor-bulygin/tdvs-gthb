@@ -12,14 +12,14 @@
     display: inline-block;
     &:hover{
         .plus-add{
-            background-color: $dark_green;
+            background-color:$dark_red;//$dark_green;
             @include transition-property(background-color);
             @include transition-duration(0.3s);
             @include transition-timing-function(ease-out);
         }
     }
     .plus-add{
-        background-color: $green;
+        background-color: $red;//$green;
         border: 1px solid $black;
         margin: 0 auto;
         font-size: 43px;
@@ -97,14 +97,14 @@
     margin: 10px 2px 0;
     &:hover{
         .plus-add{
-            background-color: $dark_green;
+            background-color: $dark_red;//$dark_green;
             @include transition-property(background-color);
             @include transition-duration(0.3s);
             @include transition-timing-function(ease-out);
         }
     }
     .plus-add{
-        background-color: $green;
+        background-color: $red;//$green;
         border: 1px solid $black;
         margin: 0 auto;
         font-size: 43px;

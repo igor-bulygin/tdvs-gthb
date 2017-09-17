@@ -31,7 +31,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 						</div>
 						<?php if ($person->isPersonEditable() && $person->isPublic()) {?>
 							<div class="edit-profile-btn">
-								<button class="btn btn-default all-caps btn-header ng-class:{'button-error': personHeaderCtrl.required['header_info']}" ng-click="personHeaderCtrl.editHeader()"><span translate="person.header.EDIT_HEADER"></span></button>
+								<button class="btn btn-default all-caps btn-black-on-white btn-header ng-class:{'button-error': personHeaderCtrl.required['header_info']}" ng-click="personHeaderCtrl.editHeader()"><span translate="person.header.EDIT_HEADER"></span></button>
 							</div>
 						<?php } ?>
 						<div class="deviser-data">
@@ -73,7 +73,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 						<!--BUTTONS-->
 						<div class="header-edit-btns">
 							<button class="btn btn-default btn-red btn-header" ng-click="personHeaderCtrl.saveHeader()"><span translate="person.header.SAVE_EXIT"></span></button>
-							<button class="btn btn-default btn-grey btn-header" ng-click="personHeaderCtrl.cancelEdit()"><span translate="global.CANCEL"></span></button>
+							<button class="btn btn-default btn-black-on-white btn-header" ng-click="personHeaderCtrl.cancelEdit()"><span translate="global.CANCEL"></span></button>
 						</div>
 					</div>
 				</div>

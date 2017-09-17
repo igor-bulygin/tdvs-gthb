@@ -109,7 +109,7 @@ $this->params['person_menu_store_categories'] = $categories;
 			<p><span translate="person.DELETE_WORK_QUESTION"></span></p>
 		</div>
 		<div class="modal-footer">
-			<button class="btn btn-default btn-green pull-left" ng-click="modalDeleteProductCtrl.close()"><span translate="global.CANCEL"></span></button>
+			<button class="btn btn-default btn-red pull-left" ng-click="modalDeleteProductCtrl.close()"><span translate="global.CANCEL"></span></button>
 			<button class="btn btn-default pull-right" ng-click="modalDeleteProductCtrl.ok()"><span translate="global.DELETE"></span></button>
 		</div>
 	</div>

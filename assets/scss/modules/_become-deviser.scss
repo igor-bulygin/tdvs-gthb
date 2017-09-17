@@ -189,7 +189,7 @@
     text-align: center;
     color: $white;
     .ok-icon-rounded{
-        background-color: $dark_green;
+        background-color: $dark_red;//$dark_green;
         @include border-radius(90px,90px,90px,90px);
         height: 50px;
         width: 50px;

@@ -39,7 +39,7 @@ $this->params['person_links_target'] = 'public_view';
 							<img class="newspaper-stories-icon" src="/imgs/no-stories.jpg">
 							<p class="no-story-text"><span translate="person.stories.STORIES_IS"></span></p>
 							<p class="no-story-text-bold"><span translate="person.stories.STORIES_EXPRESS"></span></p>
-							<a class="btn btn-green btn-create-story" href="<?=$person->getStoryCreateLink()?>"><span translate="person.stories.WRITE_STORY"></span></a>
+							<a class="btn btn-red btn-create-story" href="<?=$person->getStoryCreateLink()?>"><span translate="person.stories.WRITE_STORY"></span></a>
 						<?php } else { ?>
 							<img class="sad-face" src="/imgs/no-stories.jpg">
 							<p class="no-video-text"><?=$person->getName()?> <span translate="person.stories.NO_STORIES_YET"></span></p>
