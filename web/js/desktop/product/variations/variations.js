@@ -255,7 +255,7 @@
 
 		function validateValue(value) {
 			if (value !=null) {
-				 if (value != " " && value.length>0) {
+				 if (value != " " && value.toString().length>0) {
 					return value;
 				}
 			}
