@@ -18,6 +18,7 @@
 		vm.cancel = cancel;
 		vm.save = save;
 		vm.validateValue=validateValue;
+		vm.checkColumnName=checkColumnName;
 
 		//Sort by path length
 		_categories = $category_util.sort(_categories);
@@ -164,6 +165,12 @@
 			return 0;
 		}
 
+		function checkColumnName(value) {
+			if (value.length<1) {
+				return 'name is mandatory';
+			}
+		}
+
 	}
 
 	function create_new_countryCtrl($scope, $uibModalInstance, data) {
@@ -208,7 +215,7 @@
 
 	}
 
-	angular.module('todevise', ['ngAnimate', 'ui.bootstrap', 'angular-multi-select', 'angular-unit-converter', 'global-admin', 'global-desktop', 'api', 'angular-sortable-view', 'ui.validate'])
+	angular.module('todevise', ['ngAnimate', 'ui.bootstrap', 'angular-multi-select', 'angular-unit-converter', 'global-admin', 'global-desktop', 'api', 'angular-sortable-view', 'ui.validate','xeditable'])
 		.controller('sizeChartCtrl', controller)
 		.controller('create_new_countryCtrl', create_new_countryCtrl)
 		.controller('create_new_columnCtrl', create_new_columnCtrl);

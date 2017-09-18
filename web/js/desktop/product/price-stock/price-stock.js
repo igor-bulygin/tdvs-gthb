@@ -99,14 +99,7 @@
 			vm.product.price_stock = [];
 			var object = {};
 			if(!UtilService.isEmpty(vm.product.options)) {
-				var cartesian = getCartesian(vm.product.options, vm.product.prints, vm.product.sizechart)
-				if(!UtilService.isEmpty(cartesian[0])) {
-					for (var i = 0; i < cartesian.length; i++) {
-						addEmptyPriceStock(cartesian[i])
-					}
-				} else {
-					addEmptyPriceStock([]);
-				}
+				var cartesian = getCartesian(vm.product.options, vm.product.prints, vm.product.sizechart);
 				if(set_original_artwork) {
 					vm.product.price_stock.unshift({
 						options: [],
@@ -118,7 +111,16 @@
 						height: 0,
 						length: 0,
 						available: true
-					})
+					});
+				}
+				if((set_original_artwork && !UtilService.isEmpty(vm.product.prints)) || (!set_original_artwork)) {
+					if(!UtilService.isEmpty(cartesian[0])) {
+						for (var i = 0; i < cartesian.length; i++) {
+							addEmptyPriceStock(cartesian[i])
+						}
+					} else {
+						addEmptyPriceStock([]);
+					}
 				}
 			} else {
 				addEmptyPriceStock([]);

@@ -47,8 +47,8 @@ $this->params['person_links_target'] = 'public_view';
 							<?php foreach ($photos['data'] as $index => $item) { ?>
 								<div class="menu-category list-group">
 									<div class="grid">
-										<figure class="effect-zoe">
-											<a href="#socialGallery" data-slide-to="<?= $index ?>" data-toggle="modal" data-target="#carouselModal">
+										<figure class="effect-zoe" data-toggle="modal" data-target="#carouselModal">
+											<a href="#socialGallery" data-slide-to="<?= $index ?>">
 												<img src="<?=$item['images']['standard_resolution']['url']?>" />
 											</a>
 										</figure>

@@ -509,11 +509,11 @@ class PersonController extends CController
 			throw new NotFoundHttpException();
 		}
 
-		if (!$person->isInfluencer()) {
+		if (!$person->isInfluencer() && !$person->isDeviser()) {
 			throw new NotFoundHttpException();
 		}
 
-		if (!$person->isInfluencerEditable()) {
+		if (!$person->isPersonEditable()) {
 			throw new UnauthorizedHttpException();
 		}
 

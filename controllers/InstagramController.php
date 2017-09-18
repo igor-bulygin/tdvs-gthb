@@ -6,7 +6,6 @@ use app\helpers\CController;
 use app\helpers\InstagramHelper;
 use app\models\Person;
 use Yii;
-use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
 
 
@@ -26,7 +25,7 @@ class InstagramController extends CController
 		// This action must be done in Owner scenario to get the person object equal to the database object
 		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
 		$person = Person::findOneSerialized($person_id);
-		if (!$person->isInfluencer() || !$person->isInfluencerEditable()) {
+		if (!$person->isPersonEditable()) {
 			throw new NotFoundHttpException();
 		}
 

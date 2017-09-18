@@ -144,10 +144,10 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 						</div>
 						<div class="product-data no-border">
 							<ul class="nav nav-tabs product-detail-tabs" role="tablist" ng-if="detailProductCtrl.original_artwork" ng-cloak>
-								<li role="presentation" class="no-b-r">
+								<li role="presentation" class="active">
 									<a href="#" aria-controls="description" role="tab" data-toggle="tab" ng-click="detailProductCtrl.changeOriginalArtwork(true)"><span translate="product.detail.ORIGINAL"></span></a>
 								</li>
-								<li role="presentation" class="active">
+								<li role="presentation">
 									<a href="#" aria-controls="works" role="tab" data-toggle="tab" ng-click="detailProductCtrl.changeOriginalArtwork(false)"><span translate="product.detail.PRINTS"></span></a>
 								</li>
 							</ul>
