@@ -51,7 +51,7 @@
 		vm.invalidNewSizechart=false;
 		vm.selected_language=_lang;
 		vm.name_language=vm.selected_language;
-		vm.mandatory_langs={langs:['es-ES','en-US']};
+		vm.mandatory_langs=Object.keys(_langs_required);
 
 		function init(){
 		}
@@ -216,7 +216,7 @@
 				vm.invalidNewSizechart=true;
 				vm.invalidSizechartValues=true;
 			}
-			angular.forEach(vm.mandatory_langs.langs, function (lang) {
+			angular.forEach(vm.mandatory_langs, function (lang) {
 				if (angular.isUndefined(vm.newSizechart.name[lang]) || vm.newSizechart.name[lang].length<1) {
 					vm.invalidNewSizechart=true;
 					vm.invalidSizechartName=true;
@@ -256,7 +256,7 @@
 				vm.invalidColumnName=true;
 				return;
 			}
-			angular.forEach(vm.mandatory_langs.langs, function (lang) {
+			angular.forEach(vm.mandatory_langs, function (lang) {
 				if (angular.isUndefined(column[lang]) || column[lang].length<1) {
 					vm.invalidColumnName=true;
 				}
