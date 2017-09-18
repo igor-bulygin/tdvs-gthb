@@ -59,6 +59,9 @@ return [
 	'EDIT_STORY_BY_PERSON_NAME' => 'Editar la historia {story_title} by {person_name}',
 	'EDIT_VIDEOS_BY_PERSON_NAME' => 'Editar videos de {person_name}',
 	'EDIT_WORKS_BY_PERSON_NAME' => 'Editar trabajos de {person_name}',
+	'ERROR_PAGE_TITLE' => 'Oops! Something went wrong',
+	'ERROR_PAGE_MESSAGE_1' => 'Even the best relationships  go through  a rough patch sometimes, but this doesn’t mean that  we don’t love each other anymore',
+	'ERROR_PAGE_MESSAGE_2' => 'PD: Go back home babe, we are taking care os it',
 	'EXPLORE_BOXES' => 'Explora las cajas',
 	'INCORRECT_USERNAME_OR_PASSWORD' => 'Nombre de usuario o contraseña incorrectos',
 	'INDEX_TITLE' => 'Todevise',

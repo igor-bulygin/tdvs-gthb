@@ -18,6 +18,7 @@ use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+use yii\mongodb\Collection;
 
 class AdminController extends CController {
 	public $defaultAction = "index";
@@ -317,5 +318,37 @@ class AdminController extends CController {
 		];
 
 		return Yii::$app->request->isAjax ? $this->renderPartial("products", $data) : $this->render("products", $data);
+	}
+
+	/**
+	 * Updates ALL PASSWORDS to todevise1234
+	 *
+	 * @deprecated
+	 * @throws \yii\mongodb\Exception
+	 */
+	public function actionResetPassword($person_id)
+	{
+		ini_set('memory_limit', '2048M');
+		set_time_limit(-1);
+
+		/* @var Person[] $persons */
+		$person = Person::findOne(['short_id' => $person_id]);
+		if ($person) {
+			$person->setPassword('todevise1234');
+
+			// Update directly in low level, to avoid no desired behaviors of ActiveRecord
+			/** @var Collection $collection */
+			$collection = Yii::$app->mongodb->getCollection('person');
+			$collection->update(
+				[
+					'short_id' => $person->short_id
+				],
+				[
+					'credentials' => $person->credentials
+				]
+			);
+
+			echo '<pre>'.print_r($person->credentials, true).'</pre>';
+		}
 	}
 }

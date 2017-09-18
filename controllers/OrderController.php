@@ -5,7 +5,7 @@ namespace app\controllers;
 use app\helpers\CController;
 use app\models\Order;
 use app\models\Person;
-use yii\base\Exception;
+use yii\web\BadRequestHttpException;
 use yii\web\NotFoundHttpException;
 use yii\web\UnauthorizedHttpException;
 
@@ -20,7 +20,7 @@ class OrderController extends CController
 		}
 
 		if (!$order->isOrder()) {
-			throw new Exception("This order is in an invalid state");
+			throw new BadRequestHttpException(	"This order is in an invalid state");
 		}
 
 		if (!$order->isEditable()) {

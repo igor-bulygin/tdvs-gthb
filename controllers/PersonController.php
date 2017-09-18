@@ -11,7 +11,6 @@ use app\models\Product;
 use app\models\Story;
 use Yii;
 use yii\filters\AccessControl;
-use yii\mongodb\Collection;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\web\UnauthorizedHttpException;
@@ -695,36 +694,6 @@ class PersonController extends CController
 					$this->redirect($person->getPersonNotPublicLink());
 				}
 			}
-		}
-	}
-
-	/**
-	 * Updates ALL PASSWORDS to todevise1234
-	 *
-	 * @deprecated
-	 * @throws \yii\mongodb\Exception
-	 */
-	public function actionUpdatePasswords()
-	{
-		ini_set('memory_limit', '2048M');
-		set_time_limit(-1);
-
-		/* @var Person[] $persons */
-		$persons = Person::find()->all();
-		foreach ($persons as $person) {
-			$person->setPassword('todevise1234');
-
-			// Update directly in low level, to avoid no desired behaviors of ActiveRecord
-			/** @var Collection $collection */
-			$collection = Yii::$app->mongodb->getCollection('person');
-			$collection->update(
-					[
-							'short_id' => $person->short_id
-					],
-					[
-							'credentials' => $person->credentials
-					]
-			);
 		}
 	}
 
