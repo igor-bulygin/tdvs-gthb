@@ -214,7 +214,10 @@
 				}
 			})
 			if(!vm.fromedit) {
+				//reset options
 				delete vm.product.price_stock;
+				delete vm.product.prints;
+				delete vm.product.sizechart;
 				vm.old_cartesian = getCartesian(vm.product.options, vm.product.prints, vm.product.sizechart);
 				createTable();
 			}

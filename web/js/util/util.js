@@ -154,7 +154,7 @@
 		}
 
 		function stripHTMLTags(value) {
-			return value.replace(/<(?:.|\n)*?>/gm, '');
+			return $(value).text();
 		}
 
 		function onError(err){

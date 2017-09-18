@@ -493,7 +493,7 @@ class Category extends CActiveRecord {
 		foreach (Lang::getAvailableLanguages() as $lang => $name) {
 			if (isset($this->name[$lang])) {
 				$slugs[$lang] = Slugger::slugify($this->name[$lang]);
-			} else {
+			} elseif (isset($this->name[Lang::EN_US])) {
 				// By default english
 				$slugs[$lang] = Slugger::slugify($this->name[Lang::EN_US]);
 			}
