@@ -38,7 +38,7 @@ $this->registerJs("var story = ".Json::encode($story), yii\web\View::POS_HEAD, '
 			<story-category-component story="editStoryCtrl.story" categories="editStoryCtrl.categories"></story-category-component>
 			<story-tag-component story="editStoryCtrl.story" languages="editStoryCtrl.languages"></story-tag-component>
 			<div class="text-center" style="display: block; width: 100%; float: left; margin:50px 0 100px;">
-				<button class="btn btn-default btn-green" ng-click="editStoryCtrl.save(editStoryCtrl.story)"><span translate="person.stories.SAVE_STORY"></span></button>
+				<button class="btn btn-default btn-red" ng-click="editStoryCtrl.save(editStoryCtrl.story)"><span translate="person.stories.SAVE_STORY"></span></button>
 			</div>
 		</div>
 	</div>

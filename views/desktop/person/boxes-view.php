@@ -37,7 +37,7 @@ $this->params['person_links_target'] = 'public_view';
 							<img class="sad-face" src="/imgs/sad-face.svg">
 							<p class="no-video-text"><span translate="person.boxes.NO_BOXES"></span></p>
 
-							<button class="btn btn-green btn-add-box" ng-click="viewBoxesCtrl.openCreateBoxModal()"><span translate="person.boxes.ADD_BOX"></span></button>
+							<button class="btn btn-red btn-add-box" ng-click="viewBoxesCtrl.openCreateBoxModal()"><span translate="person.boxes.ADD_BOX"></span></button>
 						<?php } else { ?>
 							<p class="no-video-text"><?=$person->getName()?> <span translate="person.boxes.USER_NO_BOXES"></span></p>
 						<?php } ?>

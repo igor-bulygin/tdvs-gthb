@@ -85,9 +85,25 @@ foreach ($person->getAboutUrlImages() as $key => $urlImage) {
 							<?php if ($person->hasResumeFile()) { ?>
 							<div class="resume-header"><a href="<?= $person->getUrlResumeFile() ?>"><span translate="person.about.SEE_RESUME"></span></a></div>
 							<?php } ?>
-							<div class="deviser-biography">
-							    <p><?= Utils::l($person->text_biography) ?></p>
+<!-- SHOW MORE LESS BUTTON - part 1 -->
+							<input id="read-more" type="checkbox" class="read-more-state" />
+							<div id="deviser-biography-box">
+								<div id="deviser-biography" class="deviser-biography">
+<!-- // SHOW MORE LESS BUTTON - part 1 -->
+								    <p><?= Utils::l($person->text_biography) ?></p>
+								</div>
+<!-- SHOW MORE LESS BUTTON - part 2 -->
 							</div>
+							<label id="read-more-btn" for="read-more" class="read-more-trigger"></label>
+							<script>
+		    					function ShowHideButton(){
+		    						if (document.getElementById('deviser-biography').clientHeight > 750){
+		            					document.getElementById('read-more-btn').style.display='inherit';
+		    						}
+								}
+								document.getElementsByTagName('body')[0].onload = ShowHideButton;
+							</script>
+<!-- // SHOW MORE LESS BUTTON - part 2 -->
 						</div>
 					</div>
 				</div>

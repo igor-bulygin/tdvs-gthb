@@ -38,7 +38,8 @@
 			"COMMENTS_MORE": " comentarios más",
 			"MORE_BY": " Más de ",
 			"RETURNS": "Devoluciones: ",
-			"CREATED_BY": "Creado por"
+			"CREATED_BY": "Creado por",
+			"MORECONTENTCOMINGSOON": "¡ Más contenido en camino !"
 		},
 		"creation_edition": {
 			"BACK_TO_PROFILE": " &lt volver al perfil",

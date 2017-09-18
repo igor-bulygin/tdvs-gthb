@@ -43,7 +43,7 @@ $this->registerJs("var box = ".Json::encode($box), yii\web\View::POS_HEAD, 'box-
 			<?php if ($person->isPersonEditable()) { ?>
 				<div class="col-md-4" style="padding-top: 17px;">
 					<button class="btn btn-default pull-right delete-btn" ng-click="boxDetailCtrl.openDeleteBoxModal()"><span translate="person.boxes.DELETE_BOX"></span></button>
-					<button class="btn btn-green pull-right edit-btn" ng-click="boxDetailCtrl.openEditBoxModal()"><span translate="person.boxes.EDIT_BOX"></span></button>
+					<button class="btn btn-red pull-right edit-btn" ng-click="boxDetailCtrl.openEditBoxModal()"><span translate="person.boxes.EDIT_BOX"></span></button>
 				</div>
 			<?php } ?>
 		</div>

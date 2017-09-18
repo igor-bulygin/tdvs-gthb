@@ -81,7 +81,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 						<img class="sad-face" src="/imgs/sad-face.svg">
 							<p><span translate="person.faq.NO_FAQS"></span>
 							<br/> <span translate="person.faq.START_WRITE_FAQ"></span></p>
-							<a class="btn btn-green edit-faq-btn" href="#" ng-click="editFaqCtrl.addQuestion()"><span translate="person.faq.ADD_QUESTION"></span></a>
+							<a class="btn btn-red edit-faq-btn" href="#" ng-click="editFaqCtrl.addQuestion()"><span translate="person.faq.ADD_QUESTION"></span></a>
 					</div>
 				</div>
 			</div>

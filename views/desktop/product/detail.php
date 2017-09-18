@@ -144,10 +144,10 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 						</div>
 						<div class="product-data no-border">
 							<ul class="nav nav-tabs product-detail-tabs" role="tablist" ng-if="detailProductCtrl.original_artwork" ng-cloak>
-								<li role="presentation" class="no-b-r">
+								<li role="presentation" class="active">
 									<a href="#" aria-controls="description" role="tab" data-toggle="tab" ng-click="detailProductCtrl.changeOriginalArtwork(true)"><span translate="product.detail.ORIGINAL"></span></a>
 								</li>
-								<li role="presentation" class="active">
+								<li role="presentation">
 									<a href="#" aria-controls="works" role="tab" data-toggle="tab" ng-click="detailProductCtrl.changeOriginalArtwork(false)"><span translate="product.detail.PRINTS"></span></a>
 								</li>
 							</ul>
@@ -416,11 +416,11 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 					<a href="#videos" aria-controls="videos" role="tab" data-toggle="tab"><span translate="product.detail.VIDEOS" class="title-product-name"></span></a>
 				</li>
 				<?php /*}*/ ?>
-				<?php if (count($product->faqMapping) > 0) { ?>
+				<?php /*if (count($product->faqMapping) > 0) {*/ ?>
 				<li role="presentation" class="no-b-r">
 					<a href="#faqs" aria-controls="faqs" role="tab" data-toggle="tab"><span class="title-product-name">FAQs</span></a>
 				</li>
-				<?php }?>
+				<?php /*}*/?>
 			</ul>
 		</div>
 		<div class="container">
@@ -428,8 +428,6 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 			<div class="tab-content product-description-content">
 				<div role="tabpanel" class="tab-pane work-description-wrapper" id="faqs">
 					<div class="container mt-20 mb-20">
-						<!--<span class="title-product-name">Faqs</span>-->
-
 						<?php if (count($product->faqMapping) > 0) { ?>
 							<div class="work-profile-description-wrapper faq-wrapper">
 								<div class="title"><span translate="product.detail.WORK_FAQS"></span></div>
@@ -445,6 +443,11 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 										</p>
 									</div>
 								<?php } ?>
+							</div>
+						<?php } else { ?>
+							<div class="col-lg-12 centered-col">
+								<img class="happyface-black" src="/imgs/happy-face-black.svg" />
+								<span translate="product.detail.MORECONTENTCOMINGSOON"></span>
 							</div>
 						<?php } ?>
 
@@ -489,9 +492,11 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 								</div>
 							<?php } ?>
 						<?php } else { ?>
-							<button type="button" class="btn btn-red btn-hart" ng-click="detailProductCtrl.setBox()">
-								<span translate="product.detail.SAVE_IN_BOX"></span>
-							</button>
+							<div class="col-lg-12 centered-col">
+								<button type="button" class="btn btn-red btn-hart" ng-click="detailProductCtrl.setBox()">
+									<span translate="product.detail.SAVE_IN_BOX"></span>
+								</button>
+							</div>
 						<?php } ?>
 					</div>
 
@@ -648,9 +653,9 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 				</div>
 				<?php /*if (count($videos)) { */?>
 					<div role="tabpanel" class="tab-pane work-description-wrapper" id="videos">
-						<div class="other-products-wrapper">
-							<div style="height:500px;">
-								<div class="video-container">
+						<div class="container mt-20 mb-20">
+							<?php if (count($videos)) { ?>
+								<div class="video-container centered-col">
 									<?php foreach ($videos as $video) { ?>
 										<div class="col-sm-6">
 											<div class="video-wrapper">
@@ -659,7 +664,12 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 										</div>
 									<?php }  ?>
 								</div>
-							</div>
+							<?php } else {?>
+								<div class="col-lg-12 centered-col">
+									<img class="happyface-black" src="/imgs/happy-face-black.svg" />
+									<span translate="product.detail.MORECONTENTCOMINGSOON"></span>
+								</div>
+							<?php }?>
 						</div>
 					</div>
 				<?php /*} */?>
@@ -693,7 +703,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 											<a href="<?= $product->getViewLink() ?>">
 												<figcaption>
 													<p class="instauser">
-														<?= $product->name ?>
+														<?= \yii\helpers\StringHelper::truncate(Utils::l($product->getName()), 18, '…') ?>
 													</p>
 													<p class="price">€ <?= $product->getMinimumPrice() ?></p>
 												</figcaption>

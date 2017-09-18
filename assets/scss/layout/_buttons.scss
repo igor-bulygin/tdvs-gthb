@@ -72,6 +72,15 @@
         color: $red;
     }
 }
+.btn-black-on-white{
+	@extend %btn;
+    background-color:$white;
+    border: 1px solid $black;
+    color: $black;
+    &:hover{
+    	background-color:$background_grey;
+	}
+}
 .btn-transparent{
     @extend %btn;
     background-color:transparent;

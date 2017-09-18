@@ -41,10 +41,10 @@ ul{
     }
 }
 .disabled-link{
-       color: $light_grey;
-       pointer-events: none;
-       cursor: default;
-       border: none;
+  color: $light_grey;
+  pointer-events: none;
+  cursor: default;
+  border: none;
 }
 .bold{
 	font-family:$font-family--bold;
@@ -55,11 +55,19 @@ ul{
 .relative{
 	position: relative;
 }
+.centered-col{
+  margin: 0 auto;
+  text-align: center;
+}
 /* Dont display dropable zone on dragg and drop */
 .dndDraggingSource {
     display: none;
 }
 a, a:hover, a:focus{text-decoration: none;}
+
+.all-caps{
+  text-transform: uppercase;
+}
 
 //Include Fonts
 @include font-face('Univers Condensed', UniversLT-Condensed);

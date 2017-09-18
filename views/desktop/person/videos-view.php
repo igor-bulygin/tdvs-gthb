@@ -44,7 +44,7 @@ $this->params['person_links_target'] = 'public_view';
 						<div><a class="red-link-btn" href="<?= $person->getVideosEditLink()?>"><span translate="person.videos.ADD_REMOVE_VIDEOS"></span></a></div>
 					<?php } ?>
 					<?php foreach ($videos as $video) { ?>
-					<div class="col-sm-<?= (count($videos)<=3) ? '12' : '6' ?>">
+					<div class="col-sm-<?= (count($videos)<=3) ? '12' : '12' //was 12 and 6, changed just to avoid eliminating code...?>">
 						<div class="video-wrapper">
 							<iframe width="560" height="315" src="<?= $video->getUrlEmbeddedYoutubePlayer() ?>" frameborder="0" allowfullscreen></iframe>
 						</div>

@@ -146,7 +146,7 @@
 		@include transition-property(color);
 		@include transition-duration(0.3s);
 		@include transition-timing-function(ease-out);
-		color:$green;
+		color:$red;//$green;
 	}
 }
 .basic-info-add-photos{
@@ -162,14 +162,14 @@
 	}
     &:hover{
         .plus-add{
-            background-color: $dark_green;
+            background-color: $dark_red;//$dark_green;
             @include transition-property(background-color);
             @include transition-duration(0.3s);
             @include transition-timing-function(ease-out);
         }
     }
     .plus-add{
-        background-color: $green;
+        background-color: $red;//$green;
         border: 1px solid $black;
         margin: 0 auto;
         font-size: 43px;
@@ -259,14 +259,14 @@
 	}
     &:hover{
         .plus-add{
-            background-color: $dark_green;
+            background-color: $dark_red;//$dark_green;
             @include transition-property(background-color);
             @include transition-duration(0.3s);
             @include transition-timing-function(ease-out);
         }
     }
     .plus-add{
-        background-color: $green;
+        background-color: $red;//$green;
         border: 1px solid $black;
         margin: 0 auto;
         font-size: 43px;

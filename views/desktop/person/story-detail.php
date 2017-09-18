@@ -60,7 +60,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 					</div>
 					<div class="modal-footer">
 						<button class="btn btn-default" ng-click="deleteStoryModalCtrl.ok()"><span translate="global.DELETE"></span></button>
-						<button class="btn btn-default btn-green" ng-click="deleteStoryModalCtrl.cancel()"><span translate="global.CANCEL"></span></button>
+						<button class="btn btn-default btn-red" ng-click="deleteStoryModalCtrl.cancel()"><span translate="global.CANCEL"></span></button>
 					</div>
 				</script>
 			<?php } ?>

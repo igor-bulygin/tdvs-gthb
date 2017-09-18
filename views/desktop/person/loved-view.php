@@ -39,9 +39,7 @@ $this->params['person_links_target'] = 'public_view';
 						<?php } else { ?>
 							<p class="no-video-text"><?=$person->getName()?> <span translate="person.loved.NO_LOVED_YET"></span></p>
 						<?php } ?>
-						
-						<img class="image-loved" src="/imgs/loved-image.png">
-						
+
 					</div>
 				<?php } else { ?>
 					<div class="content-store">

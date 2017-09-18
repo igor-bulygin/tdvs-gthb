@@ -39,8 +39,8 @@
             font-size: 16px;
         }
         .deviser-biography{
-            height: 1049px;
-            overflow: hidden;//scroll;
+            //height: 1049px;
+            //overflow: hidden;//scroll;
             p{         
                 padding: 10px 20px 10px 0;
                 font-size:14px;
@@ -48,8 +48,37 @@
         }
     }
 }
+.read-more-trigger{
+    color: $dark_red;
+    cursor: pointer;
+    margin-top: 20px;
+    display: none;
+}
+#read-more{
+    display: none;
+    &:checked + div {
+        height: auto !important;
+    }
+}
+.about-wrapper{
+    .about-container{
+        #deviser-biography-box {
+            height: 750px;
+            overflow: hidden;
+        }
+        .deviser-biography{
+            height: auto;
+        }
+    }
+}
+.read-more-state ~ .read-more-trigger:before {
+  content: '+ info';
+}
+.read-more-state:checked ~ .read-more-trigger:before {
+  content: '- info';
+}
 .about-grid{
-    min-height: 900px;
+    min-height: 890px;//900px;
     .item{
         img{
             height: 100%;

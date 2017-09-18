@@ -65,7 +65,7 @@
     @extend %block;
     margin: 15px 0;
     .plus-add{
-        background-color: $green;
+        background-color: $red;//$green;
         border: 1px solid $black;
         margin: 0 auto;
         font-size: 43px;
@@ -77,7 +77,7 @@
             margin: -9px 0 0 0;
         }
         &:hover{
-            background-color: $dark_green;
+            background-color: $dark_red;//$dark_green;
             @include transition-property(background-color);
             @include transition-duration(0.3s);
             @include transition-timing-function(ease-out);

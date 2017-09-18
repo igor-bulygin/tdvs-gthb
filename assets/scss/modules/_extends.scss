@@ -2,9 +2,11 @@
 // Extends
 // ==========================================================================
 %avatar-border{
-    border:1px solid $dark_grey;
+    border:1px solid $white;//$dark_grey;
     @include border-radius(180px,180px,180px,180px);
 }
+//.banner-deviser-content .deviser-profile .avatar img
+// es el que tenemos que poner en blanco
 %link-red{
     color:$dark_red!important;
     &:hover{
