@@ -23,8 +23,8 @@ return [
 	// The list of asset bundles to compress:
     'bundles' => [
 //    	'app\assets\AppAsset',
-    	'app\assets\desktop\GlobalAsset',
-//		'app\assets\desktop\pub\PublicCommonAsset',
+//    	'app\assets\desktop\GlobalAsset',
+		'app\assets\desktop\pub\PublicCommonAsset',
 //		'yii\web\YiiAsset',
 //		'yii\web\JqueryAsset',
     ],
@@ -35,8 +35,8 @@ return [
             'class' => 'yii\web\AssetBundle',
             'basePath' => '@webroot/assets',
             'baseUrl' => '@web/assets',
-            'js' => 'all-{hash}.js',
-            'css' => 'all-{hash}.css',
+            'js' => 'all.js',
+            'css' => 'all.css',
         ],
     ],
 

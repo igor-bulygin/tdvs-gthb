@@ -1,6 +1,7 @@
 var gulp = require('gulp');
-var uglify = require('gulp-uglify');
 var cssMin = require('gulp-css');
+var ngAnnotate = require('gulp-ng-annotate');
+var babelMinify = require("gulp-babel-minify");
 
 
 // Need because of `yii console`
@@ -10,11 +11,23 @@ var options = minimist(process.argv.slice(2), { string: 'src', string: 'dist' })
 var destDir = options.dist.substring(0, options.dist.lastIndexOf("/"));
 var destFile = options.dist.replace(/^.*[\\\/]/, '');
 
-
 // Use `compress-js` task for JavaScript files
 gulp.task('compress-js', function() {
 	gulp.src(options.src)
-		.pipe(uglify())
+
+		// .pipe(uglify())
+
+		// .pipe(ngAnnotate())
+
+		.pipe(ngAnnotate({add: true}))
+
+		.pipe(babelMinify({
+			mangle: {
+				keepClassName: true
+			}
+		}))
+
+		// .pipe(minifyjs())
 
 		.pipe(rename(destFile))
 		.pipe(gulp.dest(destDir))

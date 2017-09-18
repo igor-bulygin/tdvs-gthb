@@ -3,15 +3,16 @@
   "version": "1.0.0",
   "description": "Yii2 Gulp",
   "keywords": [
-	"tools"
+    "tools"
   ],
   "author": "Darko Lukic",
   "license": "ISC",
   "dependencies": {
-	"gulp": "*",
-	"gulp-uglify": "*",
-	"minimist": "*",
-	"gulp-rename": "*",
-	"gulp-css": "*"
+    "gulp": "*",
+    "gulp-css": "*",
+    "gulp-ng-annotate": "^2.0.0",
+    "gulp-babel-minify": "^0.2.0",
+    "gulp-rename": "*",
+    "minimist": "*"
   }
 }
