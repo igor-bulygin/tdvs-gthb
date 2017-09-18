@@ -146,13 +146,13 @@
 		}
 
 		function isOptionRequired(key) {
-			var isRequired;
-			vm.tags.forEach(function(element){
-				if(element.id === key) {
-					isRequired = element.required && element.stock_and_price;
-				}
+			var tag = vm.tags.find(function(element) {
+				return angular.equals(element.id, key);
 			});
-			return isRequired;
+			if(tag) {
+				return (tag.required || tag.stock_and_price);
+			}
+			return null;
 		}
 
 		function getReferenceId(options_selected) {
