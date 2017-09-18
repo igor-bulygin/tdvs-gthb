@@ -28,8 +28,6 @@ end
 task :linkdev do
     transaction do
       run "ln -nfs #{shared_path}/public/images/uploads #{releases_path}/#{release_name}/web/uploads"
-      run "ln -nfs #{shared_path}/public/thumbor_resized #{releases_path}/#{release_name}/web/thumbor_resized"
-      run "ln -nfs #{shared_path}/public/thumbor_cache #{releases_path}/#{release_name}/web/thumbor_cache"
     end
 end
 task :symlink do

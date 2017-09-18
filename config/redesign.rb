@@ -3,7 +3,7 @@ task :redesign do
         set :user, "todeviseapp"
         server "dev.todevise.com:1021", :app, :web, :primary => true
         set :deploy_to, "/var/www/redesign/web"
-        after "deploy", "linkred","composered", "npmred", "symlink","restartphp"
+        after "deploy", "linkred","composered", "npmred", "assetsred", "symlink","restartphp"
 end
 task :composered do
     transaction do
@@ -19,11 +19,15 @@ task :npmred do
       run "cd #{releases_path}/#{release_name} ; npm install"
     end
 end
+task :assetsred do
+    transaction do
+      run "cd #{releases_path}/#{release_name}/tools/gulp ; npm install"
+      run "cd #{releases_path}/#{release_name} ; ./yii asset tools/gulp/assets.php config/assets_compressed.php"
+    end
+end
 task :linkred do
     transaction do
       run "ln -nfs /var/www/todevise/web/shared/public/images/uploads #{releases_path}/#{release_name}/web/uploads"
-      run "ln -nfs /var/www/todevise/web/shared/public/thumbor_resized #{releases_path}/#{release_name}/web/thumbor_resized"
-      run "ln -nfs /var/www/todevise/web/shared/public/thumbor_cache #{releases_path}/#{release_name}/web/thumbor_cache"
     end
 end
 task :symlink do

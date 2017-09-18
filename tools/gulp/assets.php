@@ -35,8 +35,8 @@ return [
             'class' => 'yii\web\AssetBundle',
             'basePath' => '@webroot/assets',
             'baseUrl' => '@web/assets',
-            'js' => 'all.js',
-            'css' => 'all.css',
+			'js' => 'all-{hash}.js',
+			'css' => 'all-{hash}.css',
         ],
     ],
 

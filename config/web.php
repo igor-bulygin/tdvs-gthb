@@ -41,7 +41,7 @@ $config = [
 		'assetManager' => [
 			'appendTimestamp' => true,
 			'bundles' =>
-				YII_ENV_DEV ?
+				YII_ENV_DEV && !TODEVISE_BETA ?
 					[
 						'yii\bootstrap\BootstrapAsset' => [
 							//'sourcePath' => '',

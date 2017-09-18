@@ -55,3 +55,5 @@ db_backup*
 
 #node_modules from gulp
 tools/gulp/node_modules
+
+config/assets_compressed.php
