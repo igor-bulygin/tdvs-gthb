@@ -3,8 +3,8 @@
  */
 $(function () {
 	$('.hover-toggle').each(function() {
-		let group = $(this).data('group');
-		let target = $(this).data('target');
+		var group = $(this).data('group');
+		var target = $(this).data('target');
 		$(this).on('mouseover', function() {
 			$(group).removeClass('active');
 			$(target).addClass('active');
