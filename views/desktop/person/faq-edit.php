@@ -74,13 +74,13 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 							</div>
 						</div>
 					</div>
-					<div ng-if="editFaqCtrl.person.faq.length>0">
+					<div id="link-faq-done" ng-if="editFaqCtrl.person.faq.length>0">
 						<a class="red-link-btn" href="#" ng-click="editFaqCtrl.done()">
 							<span translate="person.faq.DONE_FAQ"></span>
 						</a>
 					</div>
-					<div>
-						<button class="btn btn-red btn-big btn-red auto-center mb-40" ng-if="editFaqCtrl.person.faq.length > 0" ng-click="editFaqCtrl.addQuestion()"><span translate="person.faq.ADD_QUESTION"></span></button>
+					<div id="btn-faq-add-question">
+						<button class="btn btn-red btn-default auto-center mb-40" ng-if="editFaqCtrl.person.faq.length > 0" ng-click="editFaqCtrl.addQuestion()"><span translate="person.faq.ADD_QUESTION"></span></button>
 					</div>
 					<div class="faq-edit-empty" ng-if="editFaqCtrl.person.faq.length === 0" ng-cloak>
 						<img class="sad-face" src="/imgs/sad-face.svg">

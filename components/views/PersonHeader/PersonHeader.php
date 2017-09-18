@@ -48,7 +48,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 					</div>
 				</div>
 				<?php if ($person->isDeviserEditable() && $person->isPublic()) {?>
-					<a class="btn btn-default all-caps btn-add-work" ng-class="personHeaderCtrl.required['store'] ? 'button-error' : 'btn-red'" href="<?= $person->getCreateWorkLink()?>"><span translate="person.header.ADD_WORK"></span></a>
+					<a class="btn btn-default all-caps btn-header btn-add-work" ng-class="personHeaderCtrl.required['store'] ? 'button-error' : 'btn-red'" href="<?= $person->getCreateWorkLink()?>"><span translate="person.header.ADD_WORK"></span></a>
 				<?php } ?>
 			</div>
 		</div>

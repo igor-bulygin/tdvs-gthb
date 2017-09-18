@@ -122,7 +122,7 @@
 }
 .image-press-edit{
     background-color: $light_grey;
-    @include border-radius(14px,14px,14px,14px);
+    @include border-radius(6px,6px,6px,6px);//(14px,14px,14px,14px);
     cursor:move;
     height: 200px;
     position: relative;
@@ -130,20 +130,22 @@
     span{
         position: absolute;
         z-index: 1;
-        top: 10px;
-        right: 20px;
-        background-color: #9a9a9a!important;
+        //top: 10px;
+        bottom:10px;
+        right: 15px;//20px;
+        //background-color: #9a9a9a!important;
         cursor: pointer;
-        font-size: 18px;
-        color: #ffffff;
-        width: 30px;
-        height: 30px;
+        //font-size: 18px;
+        //color: #ffffff;
+        width: 15px;//30px;
+        height: 20px;//30px;
         display: block;
-        float: left;
-        text-align: center;
-        padding-top: 3px;
-        margin-left: 6px;
-        @include border-radius(7px,7px,7px,7px)
+        //float: left;
+        //text-align: center;
+        //padding-top: 3px;
+        //margin-left: 6px;
+        //@include border-radius(7px,7px,7px,7px);
+        background: url('/imgs/delete-red.svg') 0 0 no-repeat transparent;
     }
     img{
         max-height: 200px;
