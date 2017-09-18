@@ -348,7 +348,7 @@ class AdminController extends CController {
 				]
 			);
 
-			echo '<pre>'.print_r($person->credentials).'</pre>';
+			echo '<pre>'.print_r($person->credentials, true).'</pre>';
 		}
 	}
 }
