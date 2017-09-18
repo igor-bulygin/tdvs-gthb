@@ -5,14 +5,14 @@
 		var vm = this;
 
 		if (angular.isUndefined(vm.classes)) {
-			vm.classes={column1Class: 'col-md-2',column2Class: 'col-md-2'};
+			vm.classes={column1Class: 'col-md-3',column2Class: 'col-md-3'};
 		}
 		else {
 			if (angular.isUndefined(vm.classescolumn1Class)) {
-				vm.classes.column1Class= 'col-md-2';
+				vm.classes.column1Class= 'col-md-3';
 			}
 			if (angular.isUndefined(vm.classescolumn2Class)) {
-				vm.classes.column2Class= 'col-md-2';
+				vm.classes.column2Class= 'col-md-3';
 			}
 		}
 	}
