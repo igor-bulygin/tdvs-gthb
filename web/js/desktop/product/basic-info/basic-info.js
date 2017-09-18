@@ -2,7 +2,7 @@
 	"use strict";
 
 	function controller(productDataService, toastr, Upload, uploadDataService, $scope, UtilService, $uibModal, $rootScope, 
-		productEvents, $timeout, dragndropService) {
+		productEvents, $timeout, dragndropService,$translate) {
 		var vm = this;
 		vm.has_error = UtilService.has_error;
 		vm.name_language = vm.tags_language = vm.description_language = 'es-ES';
@@ -20,12 +20,26 @@
 		vm.addTag = addTag;
 		vm.removeTag = removeTag;
 		vm.firstCategorySelection=true;
+		vm.mandatory_langs_names="";
+		
 		
 		function init(){
-			//init values or functions
+			setMandatoryLanguajesNames();
 		}
 
 		init();
+
+		function setMandatoryLanguajesNames() {
+			angular.forEach(Object.keys(_langs_required), function (lang) {
+				var translationLang="product.".concat(_langs_required[lang].toUpperCase());
+				$translate(translationLang).then(function (tr) {
+					if (vm.mandatory_langs_names.length>0) {
+						vm.mandatory_langs_names=vm.mandatory_langs_names.concat(', ');
+					}
+					vm.mandatory_langs_names=vm.mandatory_langs_names.concat(tr);
+				});
+			});
+		}
 
 		//categories
 		function addCategory() {

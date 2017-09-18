@@ -1,5 +1,7 @@
 {
 	"product": {
+		"SPANISH":"español",
+		"ENGLISH":"inglés",
 		"detail": {
 			"PRINT_SIZE": "Tamaño de impresión",
 			"CHART_SIZES": "Tallas disponibles",
@@ -51,12 +53,12 @@
 		"basic_info": {
 			"BASIC_INFO": "Información básica de producto",
 			"TITLE": "Título",
-			"TITLE_MANDATORY": "Título in inglés es obligatorio.",
+			"TITLE_MANDATORY": "Título en {{languajeList}} es obligatorio.",
 			"CATEGORIES": "Categorías",
 			"ADD_CATEGORY": "+ Añadir otra categoría",
 			"SELECT_CATEGORY": "Seleccionar categoría entera",
 			"DESCRIPTION": "Descripción",
-			"DESCRIPTION_IS_MANDATORY": "Descripción en inglés es obligatoria.",
+			"DESCRIPTION_IS_MANDATORY": "Descripción en {{languajeList}} es obligatoria.",
 			"WARRANTIES": "GARANTÍA",
 			"MONTHS": "Meses",
 			"SPECIFY_WARRANTY_MONTHS": "Debe especificar los emses de garantía",
