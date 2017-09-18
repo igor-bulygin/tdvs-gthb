@@ -142,7 +142,7 @@
 							</li>
 						</ol>
 					</div>
-					<div class="col-md-10 text-right error-text" ng-if="productVariationsCtrl.required_bespoke"><span translate="product.variations.FIELD_LANGS_MANDATORY" translate-values='{ languajeList: productVariationsCtrl.mandatory_langs_names}'></span></div>
+					<div class="col-md-10 text-right error-text" ng-if="productVariationsCtrl.required_bespoke"><span translate="product.variations.FIELD_LANGS_MANDATORY" translate-values='{ languageList: productVariationsCtrl.mandatory_langs_names}'></span></div>
 				</div>
 			</div>
 		</div>
@@ -165,7 +165,7 @@
 							<a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
 						</li>
 					</ol>
-					<div class="col-md-12 error-text text-right mb-10" ng-if="productVariationsCtrl.invalidSizechartName" ng-cloak><span translate="product.variations.SIZECHART_NAME_MANDATORY" translate-values='{ languajeList: productVariationsCtrl.mandatory_langs_names}'></span></div>
+					<div class="col-md-12 error-text text-right mb-10" ng-if="productVariationsCtrl.invalidSizechartName" ng-cloak><span translate="product.variations.SIZECHART_NAME_MANDATORY" translate-values='{ languageList: productVariationsCtrl.mandatory_langs_names}'></span></div>
 				</div>
 				<div class="col-md-12 mb-20">
 					<label class="col-md-2" for="sizechartMetricUnit"><span translate="product.variations.SZ_METRIC_UNIT"></span></label>
@@ -201,7 +201,7 @@
 									</li>
 								</ol>
 							</div>
-							<div class="col-md-12 error-text text-right mb-10" ng-if="productVariationsCtrl.invalidColumnName" ng-cloak><span translate="product.variations.SIZECHART_COLUMNNAME_MANDATORY" translate-values='{ languajeList: productVariationsCtrl.mandatory_langs_names}'></span></div>
+							<div class="col-md-12 error-text text-right mb-10" ng-if="productVariationsCtrl.invalidColumnName" ng-cloak><span translate="product.variations.SIZECHART_COLUMNNAME_MANDATORY" translate-values='{ languageList: productVariationsCtrl.mandatory_langs_names}'></span></div>
 						</div>
 						<button class="col-md-3 col-md-offset-9 mb-20 btn btn-default btn-green " ng-click="productVariationsCtrl.new_column(productVariationsCtrl.newColumn)"><span translate="product.variations.ADD_NEW_COLUMN"></span></button>
 					</div>

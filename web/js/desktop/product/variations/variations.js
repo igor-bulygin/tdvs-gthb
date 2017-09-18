@@ -55,13 +55,13 @@
 		vm.mandatory_langs_names="";
 
 		function init(){
-			setMandatoryLanguajesNames();
+			setMandatoryLanguagesNames();
 		}
 
 		init();
 
 		//	TODO unify this (repeated function on basicInfo.js) as a component field from creation/edition when files free
-		function setMandatoryLanguajesNames() {
+		function setMandatoryLanguagesNames() {
 			angular.forEach(Object.keys(_langs_required), function (lang) {
 				var translationLang="product.".concat(_langs_required[lang].toUpperCase());
 				$translate(translationLang).then(function (tr) {
