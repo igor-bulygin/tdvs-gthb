@@ -21,8 +21,9 @@
 		vm.removeTag = removeTag;
 		vm.firstCategorySelection=true;
 		vm.mandatory_langs_names="";
-		
-		
+		//we need this counter to know how many categories we have in order to broadcast right vars in setVariations event
+		vm.category_counter = 0;
+
 		function init(){
 			setMandatoryLanguajesNames();
 		}
@@ -71,8 +72,10 @@
 				vm.product.categories[index_helper] = category;
 				//send event to get tags by category
 				$rootScope.$broadcast(productEvents.setVariations, {categories: vm.product.categories, isFirstSelection:vm.firstCategorySelection});
+				vm.category_counter += 1;
 				vm.product.emptyCategory=false;
-				vm.firstCategorySelection=false;
+				if(vm.category_counter === vm.product.categories.length)
+					vm.firstCategorySelection=false;
 			}
 			
 		}
