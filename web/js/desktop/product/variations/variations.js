@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller($scope, productEvents, productService, UtilService, sizechartDataService, metricDataService,$uibModal) {
+	function controller($scope, productEvents, productService, UtilService, sizechartDataService, metricDataService,$uibModal, $translate) {
 		var vm = this;
 		//functions
 		vm.setPrintsSelected = setPrintsSelected;
@@ -52,11 +52,26 @@
 		vm.selected_language=_lang;
 		vm.name_language=vm.selected_language;
 		vm.mandatory_langs=Object.keys(_langs_required);
+		vm.mandatory_langs_names="";
 
 		function init(){
+			setMandatoryLanguajesNames();
 		}
 
 		init();
+
+		//	TODO unify this (repeated function on basicInfo.js) as a component field from creation/edition when files free
+		function setMandatoryLanguajesNames() {
+			angular.forEach(Object.keys(_langs_required), function (lang) {
+				var translationLang="product.".concat(_langs_required[lang].toUpperCase());
+				$translate(translationLang).then(function (tr) {
+					if (vm.mandatory_langs_names.length>0) {
+						vm.mandatory_langs_names=vm.mandatory_langs_names.concat(', ');
+					}
+					vm.mandatory_langs_names=vm.mandatory_langs_names.concat(tr);
+				});
+			});
+		}
 
 		function setPrintsSelected(value) {
 			if(value) {

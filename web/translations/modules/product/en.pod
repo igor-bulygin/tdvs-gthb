@@ -136,13 +136,14 @@
 			"ADD_NEW_COLUMN":"Add column",
 			"SZ_ROWS":"Rows",
 			"ADD_NEW":"+ Add new",
-			"SIZECHART_NAME_MANDATORY": "Name in spanish and english is mandatory.",
+			"SIZECHART_NAME_MANDATORY": "Name in {{languajeList}} is mandatory.",
 			"SZ_ONE_COUNTRY_MANDATORY": "One country is the minimum required.",
 			"SZ_ONE_COLUMN_MANDATORY": "One column is the minimum required.",
 			"SZ_ONE_ROW_MANDATORY": "One row is the minimum required.",
-			"SIZECHART_COLUMNNAME_MANDATORY": "Column name in spanish and english is mandatory.",
+			"SIZECHART_COLUMNNAME_MANDATORY": "Column name in {{languajeList}} is mandatory.",
 			"NEW_COLUMN":"New column",
-			"SZ_COLUMN_NAME":"Column name"
+			"SZ_COLUMN_NAME":"Column name",
+			"FIELD_LANGS_MANDATORY": "This field is mandatory in {{languajeList}}."
 		}
 	}
 }
