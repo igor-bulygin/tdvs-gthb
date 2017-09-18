@@ -473,3 +473,12 @@
         background: url('/imgs/cart-red.svg') 0 0 no-repeat transparent;
     }
 }
+.cart-icon-black{  
+    background: url('/imgs/cart-black.svg') 0 0 no-repeat transparent;
+    display: block;
+    width: 23px;
+    height: 23px;
+    padding-top: 14px;
+    padding-bottom: 15px;
+    @include border-radius(0,0,0,0);
+}

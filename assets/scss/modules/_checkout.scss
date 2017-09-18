@@ -15,7 +15,6 @@
 	margin: 4px 0 0 0;
     padding: 5px 0 0 0;
     text-align: center;
-	font-family: $font-family--bold ;
 	&:hover{
 		background-color: $pale_white;
 		color: $almost_black;
@@ -29,12 +28,9 @@
 }
 .shopping-cart-title{
 	text-transform: uppercase;
-	font-family: $font-family--bold;
 	font-size: 14px;
-	border-bottom: 1px solid $dark_grey;
 	padding: 15px 0;
     margin: 0 15px 15px;
-    display: block;
 }
 .summary-cart-wrapper{
 	padding: 0 15px;
@@ -53,21 +49,18 @@
 }
 .checkout-table{
 	td{
-		padding: 10px 0!important;
+		padding: 10px 0;
 		&.deviser{
 			    width: 60px;
 		}
 		&.deviser-name{
-			width: 120px;
+			width: 150px;
 		}
 		&.quantity{
 			width: 80px;
 		}
 		&.subtotal{
 			width: 60px;
-		}
-		.product-name{
-			font-family: $font-family--bold;
 		}
 		.quntity-number{
 			text-align: center;
@@ -76,7 +69,6 @@
 		}
 		.subtotal-delete{
 			display: block;
-			font-family: $font-family--secondary;
 			text-transform: uppercase;
 			font-size: 10px;
 			a{
@@ -85,13 +77,17 @@
 		}
 	}
 	.title-checkout{
-		font-family: $font-family--secondary;
-		color: $dark_grey;
+		color: $grey;
+		font-weight: bold;
 		text-transform: uppercase;
 	}
 	.deviser-name{
 		text-align: left;
-		font-family: $font-family--bold;
+		color: $black;
+		font-weight: bold;
+		font-size: 16px;
+		margin-left: 8px;
+		vertical-align: middle;
 	}
 	.tag-name{
 		color: $dark_grey;
@@ -123,7 +119,6 @@
 }
 .shopping-cart-section-header{
 	text-transform: uppercase;
-	font-family: $font-family--bold;
 	font-size: 14px;
 	padding: 15px 0;
     margin: 0 0 15px;
@@ -135,7 +130,6 @@
 }
 .deviser-name-item{
 	text-align: left;
-	font-family: $font-family--bold;
 	margin: 15px 0;
     display: block;
     width: 100%;
@@ -146,7 +140,6 @@
 	label{
 		margin-top: 9px;
 		color: $darker_grey;
-		font-family: $font-family--secondary;
 	}
 }
 .billing-header{
@@ -165,7 +158,6 @@
 		float: left;
 		display: block;
 		color:$darker_grey;
-		font-family: $font-family--bold;
 	}
 }
 .bordered-left{
@@ -182,9 +174,6 @@
 .summary-side{
 	background-color: $background_grey;
 }
-.serif{
-	font-family: $font-family--serif;
-}
 .label-personal{
 	color: $dark-grey;
 	min-width: 57px;
@@ -192,7 +181,6 @@
     float: left;
 }
 .payment-methods-wrapper{
-	font-family: $font-family--secondary;
 }
 .success-header{
 	background-color: $almost_black;
@@ -200,7 +188,6 @@
 	margin: 0px 0 50px;
 }
 .green-title{
-	font-family: $font-family--serif;
 	color: $green;
 	display: block;
 	font-style: italic;
@@ -220,7 +207,6 @@
 	font-size: 14px;
 	display: block;
 	margin: -25px 0 10px 0;
-	font-family: $font-family--secondary;
 }
 .table-order-success{
 	border-top: 1px solid $dark_grey;
@@ -231,10 +217,6 @@
 				border:0;
 				&.table-label{
 					color: $darker_grey;
-					font-family: $font-family--secondary;
-				}
-				&.table-item{
-					font-family: $font-family--bold;
 				}
 			}
 		}
@@ -260,8 +242,20 @@
 			height: 38px;
 			margin: 0 15px;
 		}
-		.product-name{
-			font-family: $font-family--bold ;
-		}
+	}
+}
+.checkout-title{
+	display:block;
+	width: 100%;
+	float: left;
+	.cart-icon-black{
+		display: inline;
+		float: left;
+		margin: 15px 10px 0 0;
+	}
+	.shopping-cart-title{
+		float: left;
+		font-size: 18px;
+    	font-weight: bold;
 	}
 }
