@@ -7,6 +7,7 @@
 		this.parseProductFromService = parseProductFromService;
 		this.tagChangesStockAndPrice = tagChangesStockAndPrice;
 		this.setOldPriceStockPrices = setOldPriceStockPrices;
+		var mandatory_langs=Object.keys(_langs_required);
 		
 		function searchPrintSizechartsOnCategory(categories, id) {
 			for(var i=0; i < categories.length; i++) {
@@ -17,7 +18,18 @@
 			return false;
 		}
 
-		function validate(product) {
+		function tagIsRequired(tags, key) {
+			var tag = tags.find(function(element) {
+				return angular.equals(element.id, key);
+			})
+			if(UtilService.isObject(tag))
+				return tag.required;
+			else {
+				return null;
+			}
+		}
+
+		function validate(product, tags) {
 			var required = [];
 			var main_photo = false;
 			if(angular.isArray(product.media.photos) && product.media.photos.length > 0) {
@@ -27,8 +39,15 @@
 				});
 			}
 			//name
-			if(!angular.isObject(product.name) || product.name['en-US'] === undefined || product.name['en-US'] === "") {
+			if(!angular.isObject(product.name)) {
 				required.push('name');
+			}
+			else {
+				angular.forEach(mandatory_langs, function (lang) {
+					if (angular.isUndefined(product.name[lang]) || product.name[lang].length<1) {
+						required.push('name');
+					}
+				});
 			}
 			//categories
 			if(angular.isArray(product.categories) && product.categories.length === 0) {
@@ -45,20 +64,33 @@
 			}
 
 			//description
-			if(!product.description || !product.description['en-US']) {
+			if(!product.description) {
 				required.push('description');
 			}
-
+			else {
+				angular.forEach(mandatory_langs, function (lang) {
+					if (angular.isUndefined(product.description[lang]) || product.description[lang].length<1) {
+						required.push('description');
+					}
+				});
+			}
 			//faqs
 			if(angular.isArray(product.faq) && product.faq.length > 0) {
 				product.faq.forEach(function(element) {
-					if(!element.question['en-US'] || 
-						element.question['en-US'] === "" || 
-						!element.answer['en-US'] ||
-						element.answer['en-US'] === "") {
+					angular.forEach(mandatory_langs, function (lang) {
+						if (angular.isUndefined(element.question[lang]) || element.question[lang].length<1
+							|| angular.isUndefined(element.answer[lang]) || element.answer[lang].length<1) {
 							required.push('faq');
-					}
+						}
+					});					
 				});
+			}
+			//options
+			for(var key in product.options) {
+				if(tagIsRequired(tags, key)) {
+					if(angular.isArray(product.options[key]) && product.options[key].length === 1 && product.options[key][0].length === 0)
+						required.push('options');
+				}
 			}
 
 			//manufacturing options
@@ -68,21 +100,25 @@
 					required.push('madetoorder');
 				}
 			}
-
 			//preorder
 			if(angular.isObject(product.preorder) && product.preorder.type==1) {
 				if(!product.preorder.ship || !product.preorder.end) {
 					required.push('preorder')
 				}
 			}
-
 			//bespoke
 			if(angular.isObject(product.bespoke) && product.bespoke.type == 1) {
-				if(!product.bespoke.value || !product.bespoke.value['en-US'] || product.bespoke.value['en-US'] == "") {
+				if (angular.isUndefined(product.bespoke.value)) {
 					required.push('bespoke');
 				}
+				else {
+						angular.forEach(mandatory_langs, function (lang) {
+						if (angular.isUndefined(product.bespoke.value) || angular.isUndefined(product.bespoke.value[lang]) || product.bespoke.value[lang].length<1) {
+							required.push('bespoke');
+						}
+					});
+				}
 			}
-
 			//sizecharts
 			if(angular.isObject(product.sizechart) && !UtilService.isEmpty(product.sizechart) && !UtilService.isEmpty(product.sizechart.values)) {
 				if(!product.sizechart.metric_unit)
