@@ -1,8 +1,6 @@
 <?php
 
-if (!defined('STRIPE_LIVE_MODE')) {
-	define('STRIPE_LIVE_MODE', false);
-}
+defined('STRIPE_LIVE_MODE') or define('STRIPE_LIVE_MODE', false);
 
 return [
 	'angular_datepicker' => "yyyy-MM-dd",
