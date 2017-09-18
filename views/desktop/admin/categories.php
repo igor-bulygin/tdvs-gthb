@@ -1,4 +1,5 @@
 <?php
+
 use app\assets\desktop\admin\CategoriesAsset;
 
 /* @var $this yii\web\View */
@@ -138,10 +139,11 @@ $this->title = 'Todevise / Admin / Categories';
 				<label class="modal-title funiv fs1 fnormal fc-18">
 					<?= Yii::t("app/admin", "Slug"); ?>
 				</label>
-				<div class="input-group">
-					<input id="slug" required="" type="text" class="form-control funiv fs1" placeholder="<?= Yii::t("app/admin", "Slug... "); ?>" aria-describedby="basic-addon-slug" ng-model="editCtrl.data.category.slug" name="slug">
-					<span class="input-group-addon alert-danger funiv fs0-929" id="basic-addon-slug" ng-show="editCtrl.form.$submitted && !editCtrl.form.$valid && !editCtrl.form['slug'].$valid">
-					<span ng-show="editCtrl.form['slug'].$error.required"><?= Yii::t("app/admin", "Required!"); ?></span>
+				<div class="input-group" ng-repeat="(lang_k, lang_v) in editCtrl.data.langs">
+					<span class="input-group-addon funiv_bold fs1 fs-upper" id="basic-addon-{{ $index }}">{{ lang_v }}</span>
+					<input required="" type="text" class="form-control funiv fs1" placeholder="<?= Yii::t("app/admin", "Slug... "); ?>" aria-describedby="basic-addon-{{ $index }}" ng-model="editCtrl.data.category.slug[lang_k]" name="{{ lang_k }}">
+					<span class="input-group-addon alert-danger funiv fs0-929" ng-show="editCtrl.form.$submitted && !editCtrl.form.$valid && !editCtrl.form['{{lang_k}}'].$valid">
+					<span ng-show="editCtrl.form['{{lang_k}}'].$error.required"><?= Yii::t("app/admin", "Required!"); ?></span>
 					</span>
 				</div>
 

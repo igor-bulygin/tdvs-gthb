@@ -1,5 +1,7 @@
 <?php
 
+defined('STRIPE_LIVE_MODE') or define('STRIPE_LIVE_MODE', false);
+
 return [
 	'angular_datepicker' => "yyyy-MM-dd",
 	'php_fmt_date' => "Y-m-d",

@@ -135,13 +135,14 @@
 					</div>
 					<div class="mt-50 bespoke-wraper col-md-12" ng-if="productVariationsCtrl.bespoke_selected" ng-cloak>
 						<p class="col-xs-12"><span translate="product.variations.MANUFACTURING_INFO"></span></p>
-						<textarea name="bespoke_text" id="bespoke_text" cols="30" rows="10" class="form-control manufacturing-textarea col-md-10 ng-class:{'error-input': productVariationsCtrl.textFieldValidation(productVariationsCtrl.product.bespoke.value, productVariationsCtrl.required_bespoke)}" ng-model="productVariationsCtrl.product.bespoke.value[productVariationsCtrl.bespoke_language]"></textarea>
+						<textarea name="bespoke_text" id="bespoke_text" cols="30" rows="10" class="form-control manufacturing-textarea col-md-10 ng-class:{'error-input': productVariationsCtrl.required_bespoke}" ng-model="productVariationsCtrl.product.bespoke.value[productVariationsCtrl.bespoke_language]"></textarea>
 						<ol class="nya-bs-select btn-group bootstrap-select form-control product-select about-edit-select title-lang-btn manufacturing-lang col-md-2" ng-model="productVariationsCtrl.bespoke_language">
 							<li nya-bs-option="language in productVariationsCtrl.languages" data-value="language.code" deep-watch="true">
 								<a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
 							</li>
 						</ol>
 					</div>
+					<div class="col-md-10 text-right error-text" ng-if="productVariationsCtrl.required_bespoke"><span translate="product.variations.FIELD_LANGS_MANDATORY" translate-values='{ languageList: productVariationsCtrl.mandatory_langs_names}'></span></div>
 				</div>
 			</div>
 		</div>
@@ -164,7 +165,7 @@
 							<a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
 						</li>
 					</ol>
-					<div class="col-md-12 error-text text-right mb-10" ng-if="productVariationsCtrl.invalidSizechartName" ng-cloak><span translate="product.variations.SIZECHART_NAME_MANDATORY"></span></div>
+					<div class="col-md-12 error-text text-right mb-10" ng-if="productVariationsCtrl.invalidSizechartName" ng-cloak><span translate="product.variations.SIZECHART_NAME_MANDATORY" translate-values='{ languageList: productVariationsCtrl.mandatory_langs_names}'></span></div>
 				</div>
 				<div class="col-md-12 mb-20">
 					<label class="col-md-2" for="sizechartMetricUnit"><span translate="product.variations.SZ_METRIC_UNIT"></span></label>
@@ -200,7 +201,7 @@
 									</li>
 								</ol>
 							</div>
-							<div class="col-md-12 error-text text-right mb-10" ng-if="productVariationsCtrl.invalidColumnName" ng-cloak><span translate="product.variations.SIZECHART_COLUMNNAME_MANDATORY"></span></div>
+							<div class="col-md-12 error-text text-right mb-10" ng-if="productVariationsCtrl.invalidColumnName" ng-cloak><span translate="product.variations.SIZECHART_COLUMNNAME_MANDATORY" translate-values='{ languageList: productVariationsCtrl.mandatory_langs_names}'></span></div>
 						</div>
 						<button class="col-md-3 col-md-offset-9 mb-20 btn btn-default btn-green " ng-click="productVariationsCtrl.new_column(productVariationsCtrl.newColumn)"><span translate="product.variations.ADD_NEW_COLUMN"></span></button>
 					</div>
