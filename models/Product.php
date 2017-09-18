@@ -234,8 +234,13 @@ class Product extends CActiveRecord {
 		$this->setAttribute('price_stock', $priceStock);
 
 		$slugs = [];
-		foreach ($this->name as $lang => $text) {
-			$slugs[$lang] = Slugger::slugify($text);
+		foreach (Lang::getAvailableLanguages() as $lang => $name) {
+			if (isset($this->name[$lang])) {
+				$slugs[$lang] = Slugger::slugify($this->name[$lang]);
+			} else {
+				 // By default english
+				$slugs[$lang] = Slugger::slugify($this->name[Lang::EN_US]);
+			}
 		}
 		$this->setAttribute("slug", $slugs);
 
@@ -805,6 +810,9 @@ class Product extends CActiveRecord {
 	public function getSlug() {
 		if (is_array($this->slug)) {
 			$slug = Utils::l($this->slug);
+			if (empty($slug) && isset($this->slug[Lang::EN_US])) {
+				$slug = $this->slug[Lang::EN_US];
+			}
 		} else {
 			$slug = $this->slug;
 		}
@@ -814,6 +822,9 @@ class Product extends CActiveRecord {
 	public function getName() {
 		if (is_array($this->name)) {
 			$name = Utils::l($this->name);
+			if (empty($name) && isset($this->name[Lang::EN_US])) {
+				$name = $this->name[Lang::EN_US];
+			}
 		} else {
 			$name = $this->name;
 		}

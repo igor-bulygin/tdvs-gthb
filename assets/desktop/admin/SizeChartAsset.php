@@ -19,5 +19,6 @@ class SizeChartAsset extends AssetBundle {
 		'app\assets\libs\angularUnitConverterAsset',
 		'app\assets\libs\angularBootstrapAsset',
 		'app\assets\libs\angularSortableViewAsset',
+		'app\assets\libs\angularXEditableAsset'
 	];
 }

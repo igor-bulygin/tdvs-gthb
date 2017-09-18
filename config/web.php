@@ -64,9 +64,9 @@ $config = [
 		],
 
 		//Errors
-		'errorHandler' => [
-			'errorAction' => 'public/error'
-		],
+//		'errorHandler' => [
+//			'errorAction' => 'public/error'
+//		],
 
 		//i18n
 		'i18n' => [
@@ -164,10 +164,7 @@ $config = [
 			// 'useFileTransport' to false and configure a transport
 			// for the mailer to send real emails.
 			'useFileTransport' =>
-				strpos($_SERVER['HTTP_HOST'], 'beta.todevise.com') === false &&
-//				strpos($_SERVER['HTTP_HOST'], 'dev.todevise.com') === false &&
-				YII_ENV_DEV
-					? true : false,
+				!TODEVISE_BETA && YII_ENV_DEV ? true : false,
 			'transport' => [
 				'class' => 'Swift_SmtpTransport',
 				'host' => 'localhost',

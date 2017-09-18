@@ -86,7 +86,7 @@
 		},
 		"social" : {
 			"CONNECT_YOUR_PROFILE": "Conecta tu perfil en Todevise con tu cuenta en Instagram",
-			"CONNECT_WITH_INSTAGRAM": "Conectar con Instagram",
+			"CONNECT_WITH_INSTAGRAM": "Conectar Instagram",
 			"NO_CONTENT_YET": "todavía no ha compartido ningún contenido"
 		},
 		"store": {

@@ -32,6 +32,7 @@ $show_footer = isset($this->params['show_footer']) ? $this->params['show_footer'
 		<?php $this->registerJs("var _lang = " . Json::encode(Yii::$app->language) . ";", View::POS_HEAD) ?>
 		<?php $this->registerJs("var _lang_en = " . Json::encode(array_keys(Lang::EN_US_DESC)[0]) . ";", View::POS_HEAD) ?>
 		<?php $this->registerJs("var _langs = " . Json::encode(Utils::availableLangs()) . ";", View::POS_HEAD) ?>
+		<?php $this->registerJs("var _langs_required = " . Json::encode(Lang::getRequiredLanguages()) . ";", View::POS_HEAD) ?>
 		<!-- CSS -->
 		<!--    <link href="/css/desktop/public-2/bootstrap.min.css" rel="stylesheet" type="text/css" media="all"/>-->
 		<!--    <link href="/css/desktop/public-2/application.css" rel="stylesheet" type="text/css" media="all"/>-->
@@ -40,7 +41,7 @@ $show_footer = isset($this->params['show_footer']) ? $this->params['show_footer'
 		      rel='stylesheet' type='text/css'>
 		<!-- ICONS -->
 		<!-- IONIC ICONS -->
-		<link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+		<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 		<!-- FONTAWESOME ICONS -->
 		<script src="https://use.fontawesome.com/9a31e47575.js"></script>
 	</head>
@@ -62,6 +63,16 @@ $show_footer = isset($this->params['show_footer']) ? $this->params['show_footer'
 	<script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<?php $this->endBody() ?>
 	</body>
+
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-38667411-1', 'auto');
+		ga('send', 'pageview');
+	</script>
 
 	</html>
 <?php $this->endPage() ?>

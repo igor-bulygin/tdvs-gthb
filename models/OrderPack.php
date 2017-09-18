@@ -17,6 +17,7 @@ use yii\web\BadRequestHttpException;
  * @property string $currency
  * @property string $weight_measure
  * @property string $pack_state
+ * @property array $charge_info
  * @property array $products
  * @property array $state_history
  *
@@ -56,6 +57,7 @@ class OrderPack extends EmbedModel
 			'currency',
 			'weight_measure',
 			'pack_state',
+			'charge_info',
 			'products',
 			'state_history',
 		];

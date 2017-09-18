@@ -15,6 +15,10 @@ $(document).ready(function() {
 	};
 	Macy.init(options);
 
+	setTimeout(function () {
+		Macy.recalculate();
+	});
+
 	$('a[data-toggle="tab"]').on('click', function(e) {
 		setTimeout(function () {
 			Macy.recalculate();

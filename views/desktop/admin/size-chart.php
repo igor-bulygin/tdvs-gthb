@@ -108,13 +108,15 @@ $this->title = 'Todevise / Admin / Size chart';
 							</div>
 							<div class="col-xs-11 col-height col-middle">
 								<div class="row no-gutter sortable-container" sv-root sv-part="sizeChartCtrl.sizechart.columns" sv-on-sort="sizeChartCtrl.move_column($indexFrom, $indexTo)">
-									<div ng-cloak class="col-xs-2 country pull-left funiv fc-fff fs1" sv-element ng-repeat="column in sizeChartCtrl.sizechart.columns track by $index">
-										<span class="glyphicon glyphicon-menu-hamburger pointer fc-68" sv-handle></span> {{ column[sizeChartCtrl.lang] }}
-										<div class="pull-right">
-											<span class="glyphicon glyphicon-trash pointer fc-68" ng-click="sizeChartCtrl.delete_column($index)"></span>
+									<div ng-repeat="column in sizeChartCtrl.sizechart.columns track by $index">
+										<div ng-cloak class="col-xs-2 country pull-left funiv" sv-element >
+											<span class="col-xs-3 glyphicon glyphicon-menu-hamburger pointer fc-68" sv-handle></span>
+											<div class="col-xs-6" editable-text="column[sizeChartCtrl.lang]" e-placeholder="Enter name" ng-bind="column[sizeChartCtrl.lang]" style="color:#ffffff;border-bottom: dashed 1px #ffffff;cursor:pointer;" onbeforesave="sizeChartCtrl.checkColumnName($data)"></div>
+											<div class="col-xs-3 pull-right text-right">
+												<span class="glyphicon glyphicon-trash pointer fc-68" ng-click="sizeChartCtrl.delete_column($index)" ></span>
+											</div>
 										</div>
 									</div>
-
 									<div class="col-xs-1 add-new">
 										<a class="pointer fs-upper funiv fc-fff fs0-786" ng-click="sizeChartCtrl.new_column('Test')">
 											<?= Yii::t("app/admin", "Add new +"); ?>

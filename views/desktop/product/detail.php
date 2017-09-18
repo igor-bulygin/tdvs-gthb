@@ -137,10 +137,10 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 						</div>
 						<div class="product-data">
 							<ul class="nav nav-tabs product-detail-tabs" role="tablist" ng-if="detailProductCtrl.original_artwork" ng-cloak>
-								<li role="presentation" class="no-b-r">
+								<li role="presentation" class="active">
 									<a href="#" aria-controls="description" role="tab" data-toggle="tab" ng-click="detailProductCtrl.changeOriginalArtwork(true)"><span translate="product.detail.ORIGINAL"></span></a>
 								</li>
-								<li role="presentation" class="active">
+								<li role="presentation">
 									<a href="#" aria-controls="works" role="tab" data-toggle="tab" ng-click="detailProductCtrl.changeOriginalArtwork(false)"><span translate="product.detail.PRINTS"></span></a>
 								</li>
 							</ul>
@@ -148,7 +148,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 								<form name="detailProductCtrl.tagsForm">
 									<div class="form-horizontal">
 										<div class="form-group">
-											<div class="row-size expand" ng-repeat="option in detailProductCtrl.product.options | orderBy:[detailProductCtrl.selectComparator]">
+											<div class="row-size expand" ng-repeat="option in detailProductCtrl.product.options | orderBy:[detailProductCtrl.selectComparator]" ng-if="option.values.length >= 1" ng-cloak>
 												<label class="col-sm-3 control-label product-label"><span class="atr" ng-bind="option.name | translate"></span></label>
 												<div class="col-sm-9" ng-if="option.values.length > 1 && option.change_reference" ng-cloak>
 													<div class="row">
