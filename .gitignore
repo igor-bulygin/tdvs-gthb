@@ -52,3 +52,6 @@ test_rest
 #backups created by mongo sync script
 db_backup
 db_backup*
+
+#node_modules from gulp
+tools/gulp/node_modules
