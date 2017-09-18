@@ -514,3 +514,15 @@
         }   
     }
 }
+.btn-edit{
+	i{
+		font-size: 21px;
+		margin: 0;
+		padding: 0;
+		height: 32px;
+	}
+	&:hover{
+		background-color: transparent;
+		color: $red;
+	}
+}

@@ -1,11 +1,11 @@
 <div class="row no-mar payment-methods-wrapper">
 	<span class="shopping-cart-section-header">3 <span translate="cart.payment_methods.PAYMENT_TITLE"></span></span>
-	<div class="col-md-12" ng-if="paymentMethodsCtrl.state === 3">
+	<div class="col-md-12 payment-methods-wrapper" ng-if="paymentMethodsCtrl.state === 3">
 		<div class="row">
-			<div class="col-md-5">
+			<div class="col-md-6">
 				<p translate="cart.payment_methods.PAYMENT_SAME"></p>
 			</div>
-			<div class="col-md-7">
+			<div class="col-md-6">
 				<div class="radio radio-inline">
 					<input type="radio" checked ng-value="true" ng-model="paymentMethodsCtrl.sameBilling" name="same_billing" id="same_billing">
 					<label for="same_billing"><span translate="global.YES"></span></label>
@@ -92,8 +92,8 @@
 		</div>
 		<div class="col-md-12 text-center">
 			<!--<button class="btn btn-default btn-green" ng-click="paymentMethodsCtrl.stripejs()">Pay with Stripe.js</button><br />-->
-			<button class="btn btn-default btn-green mt-20" ng-click="paymentMethodsCtrl.checkout(paymentMethodsCtrl.billingForm)"><span translate="cart.payment_methods.PAY_CARD"></span></button><br />
-			<p class="text-center mt-20 serif" translate="cart.payment_methods.PAY_TEXT_1"></p>
+			<button class="btn btn-default btn-red mt-20" ng-click="paymentMethodsCtrl.checkout(paymentMethodsCtrl.billingForm)"><span translate="cart.payment_methods.PAY_CARD"></span></button><br />
+			<p class="text-center mt-20 grey-text" translate="cart.payment_methods.PAY_TEXT_1"></p>
 			<div class="text-center purple-text" ng-if="paymentMethodsCtrl.errors">
 				<p translate="cart.payment_methods.PAY_ERROR_1"></p>
 				<p translate="cart.payment_methods.PAY_ERROR_2"></p>

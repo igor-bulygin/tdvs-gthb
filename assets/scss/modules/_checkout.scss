@@ -28,9 +28,11 @@
 }
 .shopping-cart-title{
 	text-transform: uppercase;
-	font-size: 14px;
-	padding: 15px 0;
-    margin: 0 15px 15px;
+	font-size: 16px;
+    font-weight: bold;
+    padding: 0 0 8px 0;
+    display: block;
+    margin: 0 10px 0px;
 }
 .summary-cart-wrapper{
 	padding: 0 15px;
@@ -44,10 +46,14 @@
 .subtotal-amount{
 	letter-spacing: 0.5px;
 	font-weight: bold;
-	color: $dark_green;
-	padding: 0 0 0 3px;
+	color: $black;
+	font-size: 16px;
+	padding: 0 0 0 10px;
 }
 .checkout-table{
+	tr{
+		border-bottom: 1px solid #e9e9e9;
+	}
 	td{
 		padding: 10px 0;
 		&.deviser{
@@ -57,10 +63,11 @@
 			width: 150px;
 		}
 		&.quantity{
-			width: 80px;
+			width: 100px;
 		}
 		&.subtotal{
-			width: 60px;
+			width: 80px;
+			position: relative;
 		}
 		.quntity-number{
 			text-align: center;
@@ -72,7 +79,11 @@
 			text-transform: uppercase;
 			font-size: 10px;
 			a{
-				color: $dark_grey!important;
+				color: $black!important;
+				font-size: 25px;
+				position: absolute;
+				bottom: 10px;
+				right: 25px;
 			}
 		}
 	}
@@ -94,12 +105,12 @@
 	}
 }
 .img-checkout-wrapper{
-	width:82px; 
-	height:70px;
+	width: 130px;
+    height: 111px;
 	overflow: hidden;
 	border: solid 1px #d7d7d7;
 	img{
-		max-height: 70px;
+		max-height: 109px;
 		margin: 0 auto;
     	display: block;
 	}
@@ -120,8 +131,10 @@
 .shopping-cart-section-header{
 	text-transform: uppercase;
 	font-size: 14px;
-	padding: 15px 0;
-    margin: 0 0 15px;
+	padding: 15px;
+    font-weight: bold;
+	float: left;
+	width: 100%;
     display: block;
 	background-color: #e9e9e9;
 }
@@ -132,8 +145,8 @@
 	text-align: left;
 	margin: 15px 0;
     display: block;
-    width: 100%;
     float: left;
+	font-weight: bold;
 }
 .form-personal-info{
 	margin: 10px 0px!important;
@@ -168,19 +181,15 @@
 }
 .subtotal-amount-wrapper{
 	float: left;
-	width:100%;
-	margin: 15px 0;
-}
-.summary-side{
-	background-color: $background_grey;
+    width: 100%;
+    margin: 15px 0;
+	text-transform: uppercase;
 }
 .label-personal{
 	color: $dark-grey;
 	min-width: 57px;
     display: block;
     float: left;
-}
-.payment-methods-wrapper{
 }
 .success-header{
 	background-color: $almost_black;
@@ -195,9 +204,7 @@
 	margin: 0 0 10px;
 }
 .success-header-message{
-	font-family: $font-family--name;
-	text-transform: uppercase;
-	font-size: 57px;
+	font-size: 26px;
 	display: block;
 	color: $white;
 	letter-spacing: 0.7px;
@@ -206,7 +213,6 @@
 	color: $white;
 	font-size: 14px;
 	display: block;
-	margin: -25px 0 10px 0;
 }
 .table-order-success{
 	border-top: 1px solid $dark_grey;
@@ -240,7 +246,8 @@
 		.img-checkout-wrapper{
 			width: 38px;
 			height: 38px;
-			margin: 0 15px;
+			margin: 0 15px 15px 0;
+			    padding: 0;
 		}
 	}
 }
@@ -258,4 +265,76 @@
 		font-size: 18px;
     	font-weight: bold;
 	}
+}
+.product-name-card{
+	color: $black;
+	text-transform: uppercase;
+	font-size: 14px;
+	font-weight: bold;
+}
+.shopping-cart-quantity-number{
+	font-size: 20px;
+	padding: 0 10px;
+}
+.summary-side{
+	padding-top: 20px!important;
+}
+.summary-cart-wrapper-full{
+	padding: 0 15px;
+    background-color: #da929e;
+    width: 100%;
+    float: left;
+}
+.deviser-shipping-wrapper{
+	background-color: #da929e;
+	width: 100%;
+    float: left;
+}
+.shipping-text{
+	float: right;
+	margin: 15px 15px 0 0;
+	text-transform: uppercase;
+}
+.price-bold{
+	font-weight: bold;
+}
+.grey-text{
+	font-size: 14px;
+	color: $grey;
+}
+.personal-info-wrapper{
+	width: 100%;
+	float: left;
+	margin: 0;
+    padding: 30px 0;
+}
+.deviser-title-wrapper{
+	width:100%;
+	float: left;
+	padding: 30px 0;
+}
+.deviser-product-wrapper{
+	width: 100%;
+    float: left;
+    padding: 30px 0;
+    border-bottom: 1px solid #b7bcc0;
+}
+.title-deviser-shipping{
+	font-weight: bold;
+    margin-top: 15px;
+    display: block;
+}
+.payment-methods-wrapper{
+	background-color: $white;
+	padding: 30px 0;
+}
+.grey-text{
+	color: #b7bcc0;
+}
+.success-text{
+	font-family: $font-family--name;
+	color: $dark_red;
+	font-size: 48px;
+    letter-spacing: 8px;
+    text-transform: uppercase;
 }
