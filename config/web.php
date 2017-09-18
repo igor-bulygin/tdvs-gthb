@@ -60,9 +60,9 @@ $config = [
 		],
 
 		//Errors
-//		'errorHandler' => [
-//			'errorAction' => 'public/error'
-//		],
+		'errorHandler' => [
+			'errorAction' => YII_ENV_PROD ? 'public/error' : null,
+		],
 
 		//i18n
 		'i18n' => [

@@ -71,6 +71,9 @@ class PublicController extends CController
 
 		if ($exception !== null) {
 
+			$this->view->params['show_header'] = false;
+			$this->view->params['show_footer'] = false;
+
 			$this->layout = '/desktop/public-2.php';
 			return $this->render("error", [
 				'name' => '',
