@@ -18,7 +18,18 @@
 			return false;
 		}
 
-		function validate(product) {
+		function tagIsRequired(tags, key) {
+			var tag = tags.find(function(element) {
+				return angular.equals(element.id, key);
+			})
+			if(UtilService.isObject(tag))
+				return tag.required;
+			else {
+				return null;
+			}
+		}
+
+		function validate(product, tags) {
 			var required = [];
 			var main_photo = false;
 			if(angular.isArray(product.media.photos) && product.media.photos.length > 0) {
@@ -74,6 +85,14 @@
 					});					
 				});
 			}
+			//options
+			for(var key in product.options) {
+				if(tagIsRequired(tags, key)) {
+					if(angular.isArray(product.options[key]) && product.options[key].length === 1 && product.options[key][0].length === 0)
+						required.push('options');
+				}
+			}
+
 			//manufacturing options
 			//madetoorder
 			if(angular.isObject(product.madetoorder) && product.madetoorder.type == 1) {

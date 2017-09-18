@@ -138,6 +138,7 @@
 			vm.product.warranty.type=3;
 			vm.product.returns.type=1;
 			vm.saving = true;
+
 			function onUpdateProductSuccess(data) {
 				if(vm.product.product_state === 'product_state_draft' || !publish) {
 					saved_draft();
@@ -147,12 +148,14 @@
 					$window.location.href = currentHost() + vm.link_profile + '?published=true';
 				}
 			}
+
 			function onUpdateProductError(err) {
 				vm.disable_save_buttons=false;
 				vm.errors = true;
 				vm.saving = false;
-				if(err.data.errors && err.data.errors.required && angular.isArray(err.data.errors.required))
+				if(err.data.errors && err.data.errors.required && angular.isArray(err.data.errors.required)) {
 					$rootScope.$broadcast(productEvents.requiredErrors, {required: err.data.errors.required});
+				}
 			}
 
 			vm.disable_save_buttons = true;
@@ -172,7 +175,7 @@
 			}
 			//validations
 			if(vm.product.product_state !== 'product_state_draft') {
-				required = productService.validate(vm.product);
+				required = productService.validate(vm.product, vm.tags);
 				if (vm.product.emptyCategory) {
 					required.push("emptyCategory");
 				}

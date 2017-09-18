@@ -190,11 +190,8 @@
 			vm.showNewSizechart=true;
 			function onGetCountriesSuccess(data) {
 				vm.newSizechartAvailableCountries=data.items;
-				
 			}
 			sizechartDataService.getCountries({}, onGetCountriesSuccess, UtilService.onError);
-			
-			
 		}
 
 		function saveDeviserSizechart() {
@@ -377,7 +374,7 @@
 			return UtilService.isZeroOrLess(value) && vm.form_submitted;
 		}
 
-		function optionValidation(option,required) {
+		function optionValidation(option, required) {
 			return option.length <= 0 && vm.form_submitted && required;
 		}
 
@@ -433,8 +430,6 @@
 				vm.prints_selected = true;
 			}
 		}, true)
-		//watch product
-
 
 		//events
 		$scope.$on(productEvents.setVariations, function(event, args) {
@@ -442,6 +437,8 @@
 			if (!args.isFirstSelection) {
 				vm.product.options = {};
 			}
+			vm.newSizechartForm.$setUntouched();
+			vm.newSizechartForm.$setPristine();
 			vm.selected_categories=args.categories;
 			getTagsByCategory(args.categories);
 			categoriesSizecharts(args.categories);
