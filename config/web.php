@@ -233,7 +233,7 @@ $config = [
 				'/works/<slug:[^/.]*?>/<category_id:[^/.]*?>' => 'public/category-b',
 				'/works' => 'product/index',
 
-				'/person/update-passwords' => 'person/update-passwords',
+				'/admin/reset-password/<person_id:[^/.]*?>' => 'admin/reset-password',
 
 				//Person
 				'/<person_type:(deviser|influencer)>/<slug:[^/.]*?>/<person_id:[^/.]*?>' => 'person/about',
