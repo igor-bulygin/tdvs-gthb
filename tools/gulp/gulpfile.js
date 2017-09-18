@@ -19,13 +19,13 @@ gulp.task('compress-js', function() {
 
 		// .pipe(ngAnnotate())
 
-		.pipe(ngAnnotate({add: true}))
-
-		.pipe(babelMinify({
-			mangle: {
-				keepClassName: true
-			}
-		}))
+		// .pipe(ngAnnotate({add: true}))
+		//
+		// .pipe(babelMinify({
+		// 	mangle: {
+		// 		keepClassName: true
+		// 	}
+		// }))
 
 		// .pipe(minifyjs())
 

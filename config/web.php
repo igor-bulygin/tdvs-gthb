@@ -41,15 +41,15 @@ $config = [
 		'assetManager' => [
 			'appendTimestamp' => true,
 			'bundles' =>
-				YII_ENV_DEV && !TODEVISE_BETA ?
+				YII_ENV_PROD || TODEVISE_BETA ?
+					(require __DIR__ . '/assets_compressed.php')
+				:
 					[
 						'yii\bootstrap\BootstrapAsset' => [
 							//'sourcePath' => '',
 							'css' => []
 						],
 					]
-				:
-					(require __DIR__ . '/assets_compressed.php')
 		],
 
 		//Cache
@@ -65,7 +65,7 @@ $config = [
 
 		//Errors
 		'errorHandler' => [
-			'errorAction' => YII_ENV_PROD ? 'public/error' : null,
+			'errorAction' => YII_ENV_PROD || TODEVISE_BETA ? 'public/error' : null,
 		],
 
 		//i18n
@@ -164,7 +164,7 @@ $config = [
 			// 'useFileTransport' to false and configure a transport
 			// for the mailer to send real emails.
 			'useFileTransport' =>
-				!TODEVISE_BETA && YII_ENV_DEV ? true : false,
+				YII_ENV_PROD || TODEVISE_BETA ? false : true,
 			'transport' => [
 				'class' => 'Swift_SmtpTransport',
 				'host' => 'localhost',
