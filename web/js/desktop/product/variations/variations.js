@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller($scope, productEvents, productService, UtilService, sizechartDataService, metricDataService,$uibModal) {
+	function controller($scope, productEvents, productService, UtilService, sizechartDataService, metricDataService,$uibModal, $translate) {
 		var vm = this;
 		//functions
 		vm.setPrintsSelected = setPrintsSelected;
@@ -51,12 +51,27 @@
 		vm.invalidNewSizechart=false;
 		vm.selected_language=_lang;
 		vm.name_language=vm.selected_language;
-		vm.mandatory_langs={langs:['es-ES','en-US']};
+		vm.mandatory_langs=Object.keys(_langs_required);
+		vm.mandatory_langs_names="";
 
 		function init(){
+			setMandatoryLanguagesNames();
 		}
 
 		init();
+
+		//	TODO unify this (repeated function on basicInfo.js) as a component field from creation/edition when files free
+		function setMandatoryLanguagesNames() {
+			angular.forEach(Object.keys(_langs_required), function (lang) {
+				var translationLang="product.".concat(_langs_required[lang].toUpperCase());
+				$translate(translationLang).then(function (tr) {
+					if (vm.mandatory_langs_names.length>0) {
+						vm.mandatory_langs_names=vm.mandatory_langs_names.concat(', ');
+					}
+					vm.mandatory_langs_names=vm.mandatory_langs_names.concat(tr);
+				});
+			});
+		}
 
 		function setPrintsSelected(value) {
 			if(value) {
@@ -190,11 +205,8 @@
 			vm.showNewSizechart=true;
 			function onGetCountriesSuccess(data) {
 				vm.newSizechartAvailableCountries=data.items;
-				
 			}
 			sizechartDataService.getCountries({}, onGetCountriesSuccess, UtilService.onError);
-			
-			
 		}
 
 		function saveDeviserSizechart() {
@@ -216,7 +228,7 @@
 				vm.invalidNewSizechart=true;
 				vm.invalidSizechartValues=true;
 			}
-			angular.forEach(vm.mandatory_langs.langs, function (lang) {
+			angular.forEach(vm.mandatory_langs, function (lang) {
 				if (angular.isUndefined(vm.newSizechart.name[lang]) || vm.newSizechart.name[lang].length<1) {
 					vm.invalidNewSizechart=true;
 					vm.invalidSizechartName=true;
@@ -243,7 +255,7 @@
 
 		function validateValue(value) {
 			if (value !=null) {
-				 if (value != " " && value.length>0) {
+				 if (value != " " && value.toString().length>0) {
 					return value;
 				}
 			}
@@ -256,7 +268,7 @@
 				vm.invalidColumnName=true;
 				return;
 			}
-			angular.forEach(vm.mandatory_langs.langs, function (lang) {
+			angular.forEach(vm.mandatory_langs, function (lang) {
 				if (angular.isUndefined(column[lang]) || column[lang].length<1) {
 					vm.invalidColumnName=true;
 				}
@@ -377,7 +389,7 @@
 			return UtilService.isZeroOrLess(value) && vm.form_submitted;
 		}
 
-		function optionValidation(option,required) {
+		function optionValidation(option, required) {
 			return option.length <= 0 && vm.form_submitted && required;
 		}
 
@@ -433,8 +445,6 @@
 				vm.prints_selected = true;
 			}
 		}, true)
-		//watch product
-
 
 		//events
 		$scope.$on(productEvents.setVariations, function(event, args) {
@@ -442,6 +452,8 @@
 			if (!args.isFirstSelection) {
 				vm.product.options = {};
 			}
+			vm.newSizechartForm.$setUntouched();
+			vm.newSizechartForm.$setPristine();
 			vm.selected_categories=args.categories;
 			getTagsByCategory(args.categories);
 			categoriesSizecharts(args.categories);

@@ -1,5 +1,7 @@
 {
 	"product": {
+		"SPANISH":"spanish",
+		"ENGLISH":"english",
 		"detail": {
 			"PRINT_SIZE":"Print size",
 			"CHART_SIZES":"Chart sizes",
@@ -50,12 +52,12 @@
 		"basic_info": {
 			"BASIC_INFO":"Basic work information",
 			"TITLE":"Title",
-			"TITLE_MANDATORY":"Title in english is mandatory.",
+			"TITLE_MANDATORY":"Title in {{languageList}} is mandatory.",
 			"CATEGORIES":"Categories",
 			"ADD_CATEGORY":"+ Add another category",
 			"SELECT_CATEGORY":"Select entire category",
 			"DESCRIPTION":"Description",
-			"DESCRIPTION_IS_MANDATORY":"Description in english is mandatory.",
+			"DESCRIPTION_IS_MANDATORY":"Description in {{languageList}} is mandatory.",
 			"WARRANTIES":"WARRANTIES",
 			"MONTHS":"Months",
 			"SPECIFY_WARRANTY_MONTHS":"You must specify the warranty months",
@@ -134,13 +136,14 @@
 			"ADD_NEW_COLUMN":"Add column",
 			"SZ_ROWS":"Rows",
 			"ADD_NEW":"+ Add new",
-			"SIZECHART_NAME_MANDATORY": "Name in spanish and english is mandatory.",
+			"SIZECHART_NAME_MANDATORY": "Name in {{languageList}} is mandatory.",
 			"SZ_ONE_COUNTRY_MANDATORY": "One country is the minimum required.",
 			"SZ_ONE_COLUMN_MANDATORY": "One column is the minimum required.",
 			"SZ_ONE_ROW_MANDATORY": "One row is the minimum required.",
-			"SIZECHART_COLUMNNAME_MANDATORY": "Column name in spanish and english is mandatory.",
+			"SIZECHART_COLUMNNAME_MANDATORY": "Column name in {{languageList}} is mandatory.",
 			"NEW_COLUMN":"New column",
-			"SZ_COLUMN_NAME":"Column name"
+			"SZ_COLUMN_NAME":"Column name",
+			"FIELD_LANGS_MANDATORY": "This field is mandatory in {{languageList}}."
 		}
 	}
 }

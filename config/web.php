@@ -64,9 +64,9 @@ $config = [
 		],
 
 		//Errors
-//		'errorHandler' => [
-//			'errorAction' => 'public/error'
-//		],
+		'errorHandler' => [
+			'errorAction' => YII_ENV_PROD ? 'public/error' : null,
+		],
 
 		//i18n
 		'i18n' => [
@@ -237,7 +237,7 @@ $config = [
 				'/works/<slug:[^/.]*?>/<category_id:[^/.]*?>' => 'public/category-b',
 				'/works' => 'product/index',
 
-				'/person/update-passwords' => 'person/update-passwords',
+				'/admin/reset-password/<person_id:[^/.]*?>' => 'admin/reset-password',
 
 				//Person
 				'/<person_type:(deviser|influencer)>/<slug:[^/.]*?>/<person_id:[^/.]*?>' => 'person/about',
