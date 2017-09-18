@@ -108,7 +108,7 @@
 			}
 			//bespoke
 			if(angular.isObject(product.bespoke) && product.bespoke.type == 1) {
-				if (angular.isUndefined(product.bespoke.value)) {
+				if (angular.isUndefined(product.bespoke.value) || product.bespoke.value == null) {
 					required.push('bespoke');
 				}
 				else {
