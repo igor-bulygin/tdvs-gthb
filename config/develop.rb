@@ -3,7 +3,7 @@ task :develop do
         set :user, "todeviseapp"
         server "dev.todevise.com:1021", :app, :web, :primary => true
         set :deploy_to, "/var/www/todevise/web"
-        after "deploy", "linkdev","composerdev", "npmdev", "assetsdev" "symlink","restartphp"
+        after "deploy", "linkdev","composerdev", "npmdev", "assetsdev", "symlink","restartphp"
 end
 task :composerdev do
     transaction do
