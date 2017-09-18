@@ -204,9 +204,7 @@
 	margin: 0 0 10px;
 }
 .success-header-message{
-	font-family: $font-family--name;
-	text-transform: uppercase;
-	font-size: 57px;
+	font-size: 26px;
 	display: block;
 	color: $white;
 	letter-spacing: 0.7px;
@@ -215,7 +213,6 @@
 	color: $white;
 	font-size: 14px;
 	display: block;
-	margin: -25px 0 10px 0;
 }
 .table-order-success{
 	border-top: 1px solid $dark_grey;
@@ -249,7 +246,8 @@
 		.img-checkout-wrapper{
 			width: 38px;
 			height: 38px;
-			margin: 0 15px;
+			margin: 0 15px 15px 0;
+			    padding: 0;
 		}
 	}
 }
@@ -332,4 +330,11 @@
 }
 .grey-text{
 	color: #b7bcc0;
+}
+.success-text{
+	font-family: $font-family--name;
+	color: $dark_red;
+	font-size: 48px;
+    letter-spacing: 8px;
+    text-transform: uppercase;
 }
