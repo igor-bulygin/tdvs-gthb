@@ -3,7 +3,7 @@ task :beta do
         set :user, "todeviseapp"
         server "beta.todevise.com", :app, :web, :primary => true
         set :deploy_to, "/var/www/todevise/web"
-        after "deploy", "linkbeta","composerbeta", "npmbeta", "symlink","restartphp"
+        after "deploy", "linkbeta","composerbeta", "npmbeta", "assetsbeta", "symlink","restartphp"
 end
 task :composerbeta do
     transaction do
@@ -19,11 +19,15 @@ task :npmbeta do
       run "cd #{releases_path}/#{release_name} ; npm install"
     end
 end
+task :assetsbeta do
+    transaction do
+      run "cd #{releases_path}/#{release_name}/tools/gulp ; npm install"
+      run "cd #{releases_path}/#{release_name} ; ./yii asset tools/gulp/assets.php config/assets_compressed.php"
+    end
+end
 task :linkbeta do
     transaction do
       run "ln -nfs #{shared_path}/public/images #{releases_path}/#{release_name}/web/uploads"
-      #run "ln -nfs /images_resized/ #{releases_path}/#{release_name}/web/thumbor_resized"
-      #run "ln -nfs /images_cache/ #{releases_path}/#{release_name}/web/thumbor_cache"
     end
 end
 task :symlink do

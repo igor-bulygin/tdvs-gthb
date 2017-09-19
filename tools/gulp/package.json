@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "gulp": "*",
+    "gulp-css": "*",
+    "gulp-ng-annotate": "^2.0.0",
+    "gulp-babel-minify": "^0.2.0",
+    "gulp-rename": "*",
+    "minimist": "*"
+  }
+}
