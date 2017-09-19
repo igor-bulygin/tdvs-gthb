@@ -47,7 +47,6 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 						<?= PersonMenu::widget() ?>
 					</div>
 					<div class="col-md-10">
-						
 						<div class="content-store">
 							<?php if ($unpublishedWorks || count($categories) > 1) { ?>
 								<div class="cathegory-wrapper">
@@ -87,7 +86,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 											<div class="col-md-3 pad-grid" ng-repeat="product in editStoreCtrl.products | draftProduct">
 												<div class="grid">
 													<figure class="effect-zoe">
-														<span class="close-product-icon" ng-click="editStoreCtrl.open_modal_delete(product.id)">
+														<span class="close-product-icon-left" ng-click="editStoreCtrl.open_modal_delete(product.id)">
 															<i class="ion-android-close"></i>
 														</span>
 														<img class="grid-image" ng-src="{{product.main_photo || '/imgs/product_placeholder.png'}}">
@@ -125,11 +124,12 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 											<div class="menu-category list-group" ng-repeat="product in editStoreCtrl.products | publishedProduct" ng-if="product.main_photo">
 												<div class="grid">
 													<figure class="effect-zoe">
-														<span class="close-product-icon" ng-click="editStoreCtrl.open_modal_delete(product.id)">
+														<span class="close-product-icon-left" ng-click="editStoreCtrl.open_modal_delete(product.id)">
 															<i class="ion-android-close"></i>
 														</span>
 														<a ng-href="{{product.link}}">
 															<img class="grid-image" ng-src="{{product.main_photo}}">
+															<span class="img-bgveil"></span>
 														</a>
 														<figcaption>
 															<a ng-href="{{product.link}}">
