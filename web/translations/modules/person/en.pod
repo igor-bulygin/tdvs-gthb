@@ -15,9 +15,9 @@
 			"WRITE_STATEMENT": "Write your brand statement / mission / biography.",
 			"ENRICH_SECTION": "Enrich your about section with photos",
 			"ADD_PHOTOS": "Add photos",
-			"MIN_MAX_PHOTOS": "Please upload a minimum of 3 and a maximum of 5 photos.",
+			"MIN_MAX_PHOTOS": "You need to upload 3 photos.",
 			"MIN_PHOTOS": "You need to have at least 3 photos to be able to SAVE CHANGES to your profile.",
-			"MAX_PHOTOS": "You can upload a maximum of 5 photos. Please delete 1 or more photos if you want to upload new ones.",
+			"MAX_PHOTOS": "You can upload a maximum of 3 photos. Please delete 1 or more photos if you want to upload new ones.",
 			"SAVE_EXIT": "Save & exit",
 			"SAVE_CHANGES": "Save changes"
 		},
