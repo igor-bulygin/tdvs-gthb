@@ -179,11 +179,13 @@
 		}
 
 		function tagChangesStockAndPrice(tags, key) {
-			for(i = 0; i < tags.length; i++) {
-				if(tags[i].id === key) {
-					return tags[i].stock_and_price ? true : false;
-				}
+			var tag = tags.find(function(element) {
+				return angular.equals(element.id, key)
+			});
+			if(tag) {
+				return tag.stock_and_price;
 			}
+			return false;
 		}
 
 		function setOldPriceStockPrices(oldPriceStock, newPriceStock, cartesian, old_cartesian) {
