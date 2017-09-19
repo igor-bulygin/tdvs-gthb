@@ -41,7 +41,8 @@ $config = [
 		'assetManager' => [
 			'appendTimestamp' => true,
 			'bundles' =>
-				YII_ENV_PROD || TODEVISE_BETA ?
+				false //YII_ENV_PROD || TODEVISE_BETA
+				?
 					(require __DIR__ . '/assets_compressed.php')
 				:
 					[
