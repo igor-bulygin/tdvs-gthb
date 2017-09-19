@@ -6,12 +6,30 @@ use app\helpers\CController;
 use app\helpers\StripeHelper;
 use app\models\Person;
 use Yii;
+use yii\filters\AccessControl;
 use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
 
 
 class StripeController extends CController
 {
+	public function behaviors()
+	{
+		return [
+			'access' => [
+				'class' => AccessControl::className(),
+				'only' => [
+					'connect-back',
+				],
+				'rules' => [
+					[
+						'allow' => true,
+						'roles' => ['@'],
+					],
+				],
+			],
+		];
+	}
 
 	public function actionConnectBack()
 	{
@@ -19,6 +37,12 @@ class StripeController extends CController
 
 		$person_id = Yii::$app->session->get('person_id_stripe_connection');
 		if (empty($person_id)) {
+			Yii::info('Stripe connect back with errors. Missing person_id_stripe_connection in session', __METHOD__);
+			$person = Yii::$app->user->identity; /* @var Person $person */
+			if ($person && $person->isDeviserEditable()) {
+				$this->redirect(Url::to(['settings/billing', 'slug' => $person->slug, 'person_id' => $person->short_id, 'error' => 1]));
+				return;
+			}
 			throw new \Exception("Missing required person identifier");
 		}
 		Yii::$app->session->remove('person_id_stripe_connection');
