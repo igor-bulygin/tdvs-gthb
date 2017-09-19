@@ -113,9 +113,18 @@
 }
 .loader-about{
 	@include size(100%,250px);
-    background-color: $background_grey;
-    margin: 20px;
-    @include border-radius(20px,20px,20px,20px);
+    //background-color: $background_grey;
+    margin: 20px 0;//20px;
+    @include border-radius(6px,6px,6px,6px);//border-radius(20px,20px,20px,20px);
+    background: $background_grey url("/imgs/product_placeholder_ico.svg") no-repeat center center;
+    border: none;
+    height: 500px;
+    padding-top: 340px;
+}
+.new-add {
+    background: $background_grey url('/imgs/product_placeholder_ico.svg') no-repeat center center;
+    width: 100%;
+    height: 30px;
 }
 .image-about-edit{
     max-height: 284px;
@@ -140,6 +149,12 @@
 			@include border-radius(20px,20px,20px,20px);
         }
     }
+    &:nth-child(2n+1){
+        padding-right: 10px;
+    }
+    &:nth-child(2n+2){
+        padding-left: 10px;
+    }
 }
 .about-edit-list{
     li{
@@ -152,42 +167,40 @@
         margin-bottom: 20px;
     }
     span{
-        text-transform: uppercase;
+        text-transform: capitalize;//uppercase;
         font-size: 12px;
         font-weight: bold;
+        color: $dark_grey;
     }
     button{
-        background-color: transparent!important;
-        color: #939393!important;
-        padding-left: 0;
+        color: $dark_grey !important;
+        background-color: transparent !important;
 		border: 1px solid transparent;
+        padding-left: 0;
 		text-transform: capitalize;
         @include border-radius(0,0,0,0);
-        &:hover{
-            background-color: transparent;
-            color: #939393;
-			border: 1px solid transparent;
-        }
-        &:active{
-            background-color:transparent;
-            color: #939393;
-            border: 1px solid transparent;
-        }
+        &:hover,
+        &:active,
         &:focus{
+            color: $dark_grey;
             background-color: transparent;
-            color: #939393;
 			border: 1px solid transparent;
+        }
+        &.btn.btn-default.dropdown-toggle {
+            background-color: transparent !important;
+            padding-left: 10px;
+            border: none;
         }
     }
     .caret{
-        color: #939393;
+        color: $dark_grey;
     }
     .dropdown-menu{
         width: 100%;
         ul{
             li{
                 &.selected{
-                    background-color: $green;
+                    background-color: $white;//$green;
                 }
                 &:focus{
                     background-color: transparent;
@@ -195,20 +208,52 @@
                 a{
                     font-family: $font-family--secondary;
                     font-style: normal;
+                    background-color: transparent;
                     &:hover{
-                        background-color: $green;
+                        background-color: transparent;//$green;
                     }
                 }
                 span.check-mark{
-                    color: $white;
+                    color: $dark_red;//$white;
                 }
             }
+        }
+        &.inner {
+            background-color: $background_grey;
+            border: solid 1px $background_grey;
         }
     }
     .dropdown-menu > li > a:focus, .dropdown-menu > li > a:hover {
         color: $black;
         text-decoration: none;
         background-color: transparent;
+    }
+}
+.nya-bs-select{
+    &.btn-group{
+        .dropdown-menu {
+            background-color: $background_grey;
+            box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.19);
+            border: solid 1px $background_grey;
+            margin-top: 0;
+        }
+    }
+    > .btn{
+        .filter-option{
+            width: auto;        
+        }
+        .caret{
+            position: relative;        
+        }
+    }
+    .nya-bs-select {
+        right: 0;
+        left: inherit;
+        border-right: 0;
+        min-width: 120px !important;
+        width: 25% !important;
+        border: none;
+        top: 180px;
     }
 }
 .pencil-edit{
@@ -296,7 +341,7 @@
     }
     button{
 		float: right;
-		border: 1px solid #ffffff;
+		border: 1px solid $white;
 		font-size: 12px;
 		position: relative;
 		margin: -47px 61px 0 0;
@@ -364,7 +409,7 @@
     font-family: $font-family--serif;
 }
 .location-edit{
-    color: #ffffff;
+    color: $white;
     background-color: transparent;
     border: none;
     padding-left: 0;
@@ -373,7 +418,7 @@
 }
 .editable-name{
     font-family: $font-family--name;
-    color: #ffffff;
+    color: $white;
     text-transform: uppercase;
     letter-spacing: 4.9px;
     line-height: 50px;
@@ -448,25 +493,25 @@
 .deviser-data-about-edit{
     border: 1px solid #cccccc;
 	background-color: $white;
-    padding:10px 20px 20px;
+    padding:0 30px 20px 30px;//10px 20px 20px;
     width: 90%;
     position: absolute;
     top: 50px;
     left: 40px;
     @include border-radius(6px,6px,6px,6px);
+    box-shadow: 1px -1px 5px rgba(0, 0, 0, 0.19);
     label {
-        margin-left: 10px !important;
+        margin-left: 0 !important;//10px !important;
+        margin-top: 25px;
+        margin-bottom: 10px !important;
     }
     .small-grey{
         margin-left: 10px;
-            width: 100%;
-    float: left;
-    }
-}
-.textarea-edit-about{
-    .ta-text{
-        padding: 45px 10px 10px 10px!important;
-        @include border-radius(20px,20px,20px,20px);
+        width: 100%;
+        float: left;
+        margin-bottom: 20px;
+        font-size: 14px;    
+        margin-left: 0;
     }
 }
 .ta-root.focussed > .ta-scroll-window.form-control {
@@ -480,9 +525,15 @@
     overflow: scroll;
 }
 .textarea-edit-about  {
+    width: 75%;
+    .ta-text{
+        padding: 45px 10px 10px 10px!important;
+        @include border-radius(20px,20px,20px,20px);
+    }
     .ta-editor.ta-html, .ta-scroll-window.form-control {
         min-height: 300px;
         height: 300px;
+        padding-top: 10px !important;
     }
     .ta-editor.ta-html, .ta-scroll-window.form-control:before {
       content: " ";
@@ -497,15 +548,20 @@
 }
 .text-profile-lang{
     position: absolute;
-    top: 146px;
-    left: 32px;
+    top: 180px;//146px;
+    left: inherit;//32px;
+    right: 0;
     content: " ";
     z-index: 5;
-    background-color: #ffffff;
-    border-bottom: 5px solid #ffffff;
-    border-right: 70px solid #ffffff;
-    border-left: 1px solid #ffffff;
-    width: 265px!important;
+    background-color: $white !important;
+    border: none;
+    //border-bottom: 5px solid $white;
+    //border-right: 70px solid $white;
+    //border-left: 1px solid $white;
+    width: 25% !important;//265px!important;
+}
+.about-wrapper .nya-bs-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn){
+    min-width: 120px !important;
 }
 .optional-text{
     color: #7c7c7c;
@@ -514,12 +570,18 @@
     margin-left: 10px;
 	text-transform: uppercase;
 }
+span.optional-text.pull-left {
+    margin-top: 28px;
+}
 .btn-upload-file{
     margin-left: 10px;
 }
 .photo-loader-title{
     font-family: $font-family--bold!important;
-    text-transform: uppercase;
+    text-transform: lowercase;//uppercase;
+    &:first-letter {
+        text-transform: capitalize;
+    }
 }
 .photo-loader-warning{
     font-family: $font-family--secondary!important;
