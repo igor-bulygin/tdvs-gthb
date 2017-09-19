@@ -1,10 +1,11 @@
 (function () {
 	"use strict";
 
-	function controller($scope) {
+	function controller($scope, UtilService) {
 		var vm = this;
-		vm.addMoreItems = addMoreItems;
 		var show_items = 32;
+		vm.truncateString = UtilService.truncateString;
+		vm.addMoreItems = addMoreItems;
 		vm.results_infinite = [];
 		vm.searchPage=1;
 
