@@ -51,13 +51,10 @@ $this->params['person_links_target'] = 'public_view';
 								<?php if ($person->isPersonEditable()) { ?>
 									<div class="col-lg-4">
 										<!--<button class="btn btn-default" ng-click="viewBoxesCtrl.openCreateBoxModal()">Add boxxxx</button>-->
-										<div class="box-loader-wrapper" ng-click="viewBoxesCtrl.openCreateBoxModal()">
-											<div class="plus-add-wrapper">
-												<div class="plus-add">
-													<span>+</span>
-												</div>
-												<div class="text"><span translate="person.boxes.ADD_BOX"></span></div>
-											</div>
+										<div class="box-loader-wrapper">								
+											<button class="btn btn-red btn-big btn-red" ng-click="viewBoxesCtrl.openCreateBoxModal()">
+												<span translate="person.boxes.ADD_BOX"></span>
+											</button>
 										</div>
 									</div>
 								<?php } ?>

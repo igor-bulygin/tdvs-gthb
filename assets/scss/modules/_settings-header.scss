@@ -28,7 +28,6 @@
 .header-settings-tabs{
 	li{
 		width: 20%;
-    	border: solid 1px #bfbfbf;
 		a{
 			background-color: #DAD8D8;
 			text-transform: uppercase;
@@ -36,7 +35,6 @@
 			text-align: center;
 			font-size: 12px;
 			padding: 8px;
-			border: 0;
 			color: #1C1919;
 			margin-right: 0;
 			@include border-radius(0px,0px,0px,0px);
