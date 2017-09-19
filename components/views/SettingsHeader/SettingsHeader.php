@@ -31,9 +31,11 @@ $activeOption = array_key_exists('settings_menu_active_option', $this->params) ?
 			<a href="<?= Url::to(['/settings/open-orders', 'slug' => $person->slug, 'person_id' => $person->short_id])?>" translate="settings.header.MY_ORDERS"></a>
 		</li>
 		<?php if ($person->isDeviser()) { ?>
+			<?php /* ?>
 			<li role="presentation" class="<?= ($activeOption=='stock') ? 'active' : '' ?>">
 				<a href="<?= Url::to(['/settings/stock', 'slug' => $person->slug, 'person_id' => $person->short_id])?>" translate="settings.header.STOCK_PRICE"></a>
 			</li>
+ 			*/ ?>
 			<li role="presentation" class="<?= ($activeOption=='billing') ? 'active' : '' ?>">
 				<a href="<?= Url::to(['/settings/billing', 'slug' => $person->slug, 'person_id' => $person->short_id])?>" translate="settings.header.BILLING_PAYMENTS"></a>
 			</li>
