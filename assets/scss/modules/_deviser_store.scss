@@ -58,8 +58,8 @@
 }
 .edit-product-icon{
 	position: absolute;
-    top: 13px;
-    right: 15px;
+    top: 11px;//13px;
+    right: 45px;//15px;
 	i{
 		color:$darker_grey;
 		font-size: 16px;
@@ -80,6 +80,7 @@
 		color:$darker_grey;
 		font-size: 16px;
 	}
+    z-index: 100;
 }
 .unpublished-square{
 	border: 1px solid $dark_grey;
