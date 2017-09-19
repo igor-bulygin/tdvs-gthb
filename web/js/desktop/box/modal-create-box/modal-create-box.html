@@ -1,6 +1,6 @@
 <div class="modal-header">
 	<button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="modalCreateBoxCtrl.dismiss()">
-		<span class="ion-ios-close" aria-hidden="true"></span>
+		<span class="ion-android-close" aria-hidden="true"></span>
 	</button>
 	<h3><span translate="boxes.create.CREATE_BOX"></span></h3>
 </div>
@@ -11,7 +11,7 @@
 		<textarea name="box_description" cols="30" rows="10" translate-attr="{placeholder: 'boxes.create.DESCRIPTION'}" ng-model="modalCreateBoxCtrl.box.description" class="form-control white-rounded-textbox ng-class:{'error-input': modalCreateBoxCtrl.has_error(modalCreateBoxCtrl.form, modalCreateBoxCtrl.form.box_description)}"></textarea>
 		<form-errors field="modalCreateBoxCtrl.form.box_description" condition="modalCreateBoxCtrl.has_error(modalCreateBoxCtrl.form, modalCreateBoxCtrl.form.box_description)"></form-errors>
 		<div class="text-center">
-			<button class="btn btn-green green-modal-btn" ng-click="modalCreateBoxCtrl.createBox(modalCreateBoxCtrl.form)"><span translate="boxes.create.CREATE"></span></button>
+			<button class="btn btn-red" ng-click="modalCreateBoxCtrl.createBox(modalCreateBoxCtrl.form)"><span translate="boxes.create.CREATE"></span></button>
 		</div>
 	</form>
 </div>

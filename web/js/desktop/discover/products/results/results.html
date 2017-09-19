@@ -13,7 +13,7 @@
 					<figcaption>
 						<a ng-href="{{product.link}}">
 							<p class="instauser">
-								{{product.name}}
+								<span ng-bind="exploreProductsResultsCtrl.truncateString(product.name, 18, '…')"></span>
 							</p>
 						</a>
 						<p class="price">€ {{product.min_price}}</p>

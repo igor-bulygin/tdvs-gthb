@@ -54,7 +54,7 @@
 	background-color: $white;
 	border: 1px solid #d7d7d7;
 	font-family: $font-family--secondary;
-	@include border-radius(25px,25px,25px,25px);
+	@include border-radius(6px,6px,6px,6px);
 }
 .white-rounded-textbox{
 	margin-bottom: 15px;
@@ -65,7 +65,7 @@
 	background-color: $white;
 	border: 1px solid #d7d7d7;
 	font-family: $font-family--secondary;
-	@include border-radius(25px,25px,25px,25px);
+	@include border-radius(6px,6px,6px,6px);
 }
 .regular-select{
 	button{

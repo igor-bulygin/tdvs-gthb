@@ -71,13 +71,11 @@ $this->params['person_menu_store_categories'] = $categories;
 												<i class="ion-android-close"></i>
 											</span>
 											<?php } ?>
-											<image-hover-buttons product-id="{{'<?= $product->short_id ?>'}}" is-loved="{{'<?=$product->isLovedByCurrentUser() ? 1 : 0 ?>'}}" is-mine="{{'<?= $product->isWorkFromCurrentUser() ? 1 : 0 ?>'}}">
-												<a href="<?= $product->getViewLink() ?>">
-													<img class="grid-image"
-														 src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getMainImage())->resize(400, 0) ?>">
-													<span class="img-bgveil"></span>
-												</a>
-											</image-hover-buttons>
+											<a href="<?= $product->getViewLink() ?>">
+												<img class="grid-image"
+													 src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getMainImage())->resize(400, 0) ?>">
+												<span class="img-bgveil"></span>
+											</a>
 											<a href="<?= $product->getViewLink()?>">
 												<figcaption>
 													<p class="instauser"><?= \yii\helpers\StringHelper::truncate($product->getName(), 18, '…') ?></p>

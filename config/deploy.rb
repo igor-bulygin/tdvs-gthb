@@ -14,7 +14,7 @@ namespace :deploy do
   task :update do
     transaction do
       update_code
-      cleanup
+      # cleanup
     end
   end
   task :finalize_update do
