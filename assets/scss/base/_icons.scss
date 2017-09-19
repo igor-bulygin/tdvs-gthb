@@ -1,0 +1,29 @@
+// ==========================================================================
+// Icons
+// ==========================================================================
+.box-icon{
+	background: url('/imgs/box-black.svg') no-repeat;
+}
+.black-icon{
+	color: $black;
+}
+.red-icon{
+	color: $dark_red;
+}
+.grey-icon{
+	color: $dark_grey;
+}
+.black-icons{
+	i{
+		font-size: 30px;
+		margin-right: 20px;
+		&.box{
+			svg{
+				width: 40px;
+			}
+		}
+	}
+	svg{
+		width: 18px;
+	}
+}

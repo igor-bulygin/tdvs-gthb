@@ -104,9 +104,6 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 										</div>
 									</div>
 									<div ng-if="!editStoreCtrl.view_unpublished_works">
-										<div class="mt-20">
-											<span class="title"><?= Utils::l($selectedCategory->name) ?></span>
-										</div>
 										<nav class="products-menu">
 											<ul>
 												<?php if (count($selectedCategory->getDeviserSubcategories()) > 1) { ?>
@@ -121,7 +118,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 										<div ng-if="editStoreCtrl.products.length === 0" ng-cloak>
 											<div class="text-center">
 											<p><span translate="person.store.ADD_FIRST_WORK"></span></p>
-											<a class="btn btn-default btn-green btn-add-work" href="<?=$person->getCreateWorkLink()?>"><span translate="person.ADD_WORK"></span></a>
+											<a class="btn btn-default btn-red btn-add-work" href="<?=$person->getCreateWorkLink()?>"><span translate="person.ADD_WORK"></span></a>
 											</div>
 										</div>
 										<div class="mesonry-row" ui-sortable="editStoreCtrl.sortableOptions" ng-model="editStoreCtrl.products" ng-if="editStoreCtrl.products.length > 0" ng-cloak>
@@ -160,7 +157,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 								<p><span translate="person.DELETE_WORK_QUESTION"></span></p>
 							</div>
 							<div class="modal-footer">
-								<button class="btn btn-default btn-green pull-left" ng-click="modalDeleteProductCtrl.close()"><span translate="global.CANCEL"></span></button>
+								<button class="btn btn-default btn-red pull-left" ng-click="modalDeleteProductCtrl.close()"><span translate="global.CANCEL"></span></button>
 								<button class="btn btn-default pull-right" ng-click="modalDeleteProductCtrl.ok()"><span translate="global.DELETE"></span></button>
 							</div>
 						</div>

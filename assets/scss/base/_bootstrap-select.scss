@@ -5,10 +5,12 @@
 .bootstrap-select>.dropdown-toggle.bs-placeholder, .bootstrap-select>.dropdown-toggle.bs-placeholder:active, .bootstrap-select>.dropdown-toggle.bs-placeholder:focus, .bootstrap-select>.dropdown-toggle.bs-placeholder:hover {
     color: $black;
     background-color:$background_grey;
-    padding: 2px 12px;
+    padding: 0 12px;
     max-width: 175px;
 }
 .product-data{
+    // drgnzt ini 
+    /*
     .bootstrap-select .dropdown-toggle:focus {
         border-color:$violet!important;
     }
@@ -24,6 +26,8 @@
     .bootstrap-select>.dropdown-toggle.bs-placeholder:hover{
         border-color:$violet!important;
     }
+    */
+   // drgnzt fin
     .bootstrap-select .dropdown-menu {
         background-color: $background_grey;
         @include border-radius(4px,4px,4px,4px);
@@ -65,7 +69,7 @@
 }
 .bootstrap-select{
     .btn{
-        padding: 2px 12px;
+        padding: 0 12px;
         max-width: 175px;
     }
     .dropdown-menu{
@@ -108,4 +112,31 @@
 }
 .nya-bs-select.btn-group:not(.input-group-btn), .nya-bs-select.btn-group[class*="col-"]{
 	background-color: transparent!important;
+}
+.bootstrap-select.btn-group .dropdown-toggle .filter-option {
+    border-right: 1px solid #b7bcc0!important;
+    height: 100%!important;
+}
+.bootstrap-select.btn-group .dropdown-toggle .caret {
+    color: $dark_red!important;
+	height: 10px;
+    width: 10px;
+    border-bottom: 1px solid $dark_red;
+    border-right: 1px solid $dark_red;
+	border-left: 0!important;
+	border-top: 0!important;
+    -ms-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+	right: 8px!important;
+    margin-top: -7px!important;
+}
+.bootstrap-select.btn-group .dropdown-toggle .filter-option {
+    padding-top: 5px!important;
+}
+.select-full{
+	.btn{
+		max-width: 100%!important;
+		width: 100%!important;
+	}
 }

@@ -3,9 +3,22 @@
 // ==========================================================================
 .auto-center{
 	margin: 0 auto;
+	display: block;
+}
+.text-center{
+	text-align: center;
 }
 .relativize-me{
 	position: relative;
+}
+.align-left{
+	text-align: left;
+}
+.align-right{
+	text-align: right;
+}
+.mt-5{
+	margin-top: 5px!important;
 }
 .mt-10{
 	margin-top: 10px!important;
@@ -31,6 +44,9 @@
 .mb-20{
 	margin-bottom: 20px;
 }
+.mb-40{
+	margin-bottom: 40px!important;
+}
 .mr-15{
 	margin-right: 15px;
 }
@@ -45,6 +61,12 @@
 }
 .pt-0{
 	padding-top:0!important;
+}
+.pt-15{
+	padding-top:15px!important;
+}
+.pt-40{
+	padding-top:40px!important;
 }
 .no-pad-r{
 	padding-right: 0!important;

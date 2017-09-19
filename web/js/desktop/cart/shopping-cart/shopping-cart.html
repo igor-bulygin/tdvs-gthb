@@ -1,13 +1,16 @@
 <div class="shopping-cart-wrapper">
-	<span class="shopping-cart-title no-mar" translate="cart.shopping_cart.YOUR_SHOPPING_CART"></span>
+	<span class="checkout-title">
+		<span class="cart-icon-black pull-left"></span>
+		<span class="shopping-cart-title no-mar" translate="cart.shopping_cart.YOUR_SHOPPING_CART"></span>
+	</span>
 	<table class="table checkout-table" ng-repeat="pack in shoppingCartCtrl.cart.packs">
 		<thead>
 			<tr>
-				<td class="deviser"><span class="title-checkout">Deviser</span></td>
+				<td class="deviser"><img class="avatar-default small" src="/imgs/avatar-1.jpg"></td>
 				<td class="deviser-name"><a ng-href="{{pack.deviser_info.url}}" ng-attr-title="{{pack.deviser_info.name}}"><span class="deviser-name" ng-bind="pack.deviser_info.name"></span></a></td>
 				<td></td>
-				<td class="quantity"><span class="title-checkout deviser" translate="cart.QUANTITY"></span></td>
-				<td class="subtotal"><span class="title-checkout deviser" translate="cart.SUBTOTAL"></span></td>
+				<td class="quantity pt-40"><span class="title-checkout deviser" translate="cart.QUANTITY"></span></td>
+				<td class="subtotal pt-40"><span class="title-checkout deviser" translate="cart.SUBTOTAL"></span></td>
 			</tr>
 		</thead>
 		<tbody>
@@ -19,7 +22,7 @@
 					</div>
 				</td>
 				<td>
-					<p><a ng-href="{{product.product_info.url}}"><span class="product-name" ng-bind="(product.product_info.name)"></span></a></p>
+					<p><a ng-href="{{product.product_info.url}}"><span class="product-name-card" ng-bind="(product.product_info.name)"></span></a></p>
 					<div ng-repeat="tag in product.tags">
 						<span class="tag-name" ng-bind="tag.name"></span>&nbsp;
 							<span ng-repeat="value in tag.values track by $index">
@@ -29,9 +32,9 @@
 					</div>
 				</td>
 				<td class="quantity">
-					<span ng-click="shoppingCartCtrl.subQuantity(product)" style="cursor:pointer;">-</span>&nbsp;<span class="quantity-number" ng-bind="product.quantity"></span>&nbsp;<span style="cursor:pointer;" ng-click="shoppingCartCtrl.addQuantity(product)">+</span>
+					<span ng-click="shoppingCartCtrl.subQuantity(product)" style="cursor:pointer;"><i class="ion-minus"></i></span>&nbsp;<span class="shopping-cart-quantity-number" ng-bind="product.quantity"></span>&nbsp;<span style="cursor:pointer;" ng-click="shoppingCartCtrl.addQuantity(product)"><i class="ion-plus"></i></span>
 				</td>
-				<td class="subtotal">
+				<td class="subtotal pt-15">
 					<span class="subtotal-amount">€<span ng-bind="product.price*product.quantity"></span></span>
 					<span class="subtotal-delete"><a href="#" ng-click="shoppingCartCtrl.deleteItem(product.price_stock_id)"><i class="ion-trash-a"></i></a></span>
 				</td>

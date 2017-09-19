@@ -15,7 +15,7 @@ $person = $this->params['person'];
 
 ?>
 
-<nav class="menu-store" data-spy="affix" data-offset-top="450" ng-controller="personMenuCtrl as personMenuCtrl">
+<nav class="menu-store" ng-controller="personMenuCtrl as personMenuCtrl">
 	<ul class="mt-0">
 		<?php if ($person->isDeviser()) { ?>
 			<li>
@@ -43,9 +43,9 @@ $person = $this->params['person'];
 			<a class=" <?= ($activeOption=='boxes') ? 'active' : '' ?>" href="<?= $person->getBoxesLink()?>">Boxes</a>
 		</li>
 		<?php if ($person->isDeviser() || $person->isInfluencer()) { ?>
-			<li>
+			<!--<li>
 				<a class=" <?= ($activeOption=='stories') ? 'active' : '' ?>" href="<?= $person->getStoriesLink()?>">Stories</a>
-			</li>
+			</li>-->
 		<?php } ?>
 	</ul>
 	<ul class="menu-deviser-bottom">

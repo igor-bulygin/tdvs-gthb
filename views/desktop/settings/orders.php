@@ -24,14 +24,14 @@ $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD
 <div ng-controller="ordersCtrl as ordersCtrl">
 	<div class="col-md-12 store" style="padding: 20px;">
 		<h4 class="col-md-7 col-md-offset-5"><span translate="settings.orders.ORDERS"></span></h4>
-		<div class="col-md-1" ng-if="ordersCtrl.isDeviser" ng-cloak>
-			<ol class="nya-bs-select col-md-12" ng-model="ordersCtrl.typeFilter" ng-change="ordersCtrl.getOrders()" ng-if="ordersCtrl.isDeviser" ng-cloak>
+		<div class="col-md-4" ng-if="ordersCtrl.isDeviser" ng-cloak>
+			<ol class="nya-bs-select btn-group bootstrap-select form-control product-select col-md-12" ng-model="ordersCtrl.typeFilter" ng-change="ordersCtrl.getOrders()" ng-if="ordersCtrl.isDeviser" ng-cloak>
 				<li nya-bs-option="type in ordersCtrl.enabledTypes">
 					<a href="#"><span translate="{{type.name}}"></span></a>
 				</li>
 			</ol>
 		</div>
-		<div class="btn-group col-md-11 inline">
+		<div class="btn-group col-md-8 inline">
 			<label class="col-md-1" ng-repeat="state in ordersCtrl.enabledStates" class="col-md-1">
 				<input type="radio" name="stateFilter" ng-model="ordersCtrl.stateFilter" ng-value="state.value" ng-change="ordersCtrl.getOrders()" />
 				<span translate="{{state.name}}"></span>

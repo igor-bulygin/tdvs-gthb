@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="22px" height="25px" viewBox="0 0 22 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>Group</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="REDISEÑO" transform="translate(-2028.000000, -242.000000)" stroke="#1C1919" stroke-width="0.8">
+            <g id="Group" transform="translate(2029.000000, 243.000000)">
+                <path d="M9.96666667,22.7422969 C15.4711047,22.7422969 19.9333333,20.6238047 19.9333333,16.4607843 C19.9333333,12.297764 15.4711047,7.66666667 9.96666667,7.66666667 C4.46222866,7.66666667 0,12.297764 0,16.4607843 C0,20.6238047 4.46222866,22.7422969 9.96666667,22.7422969 Z" id="Oval-30"></path>
+                <ellipse id="Oval-29" fill="#FFFFFF" cx="9.96666667" cy="6.57142857" rx="6.64444444" ry="6.57142857"></ellipse>
+            </g>
+        </g>
+    </g>
+</svg>

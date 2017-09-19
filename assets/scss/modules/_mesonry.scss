@@ -53,6 +53,7 @@
             width:  100%; 
             img{
                 width:  100%; 
+				@include border-radius(6px,6px,6px,6px);
             }
         }
     }

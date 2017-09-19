@@ -7,6 +7,10 @@
     .input-video{
         width: 80%;
         margin: 0 auto 40px;
+		input{
+			@include border-radius(6px,6px,6px,6px);
+			width: 98%;
+		}
         .input-group-addon{
             @include border-radius(30px,0,0,30px);
             background-color: $light_grey;
@@ -43,7 +47,8 @@
         height: 100%;
     }
     .video-row{
-        background-color: $light_grey;
+        background-color: #e9e9e9;
+		@include border-radius(6px,6px,6px,6px);
         margin-bottom: 30px;
         padding: 25px 10px 20px;
         cursor: move;
@@ -52,31 +57,19 @@
 }
 .dragg-video-wrapper{
     position: relative;
-    .title{
-        font: 16px $font-family--bold;
-        text-align: center;
-        display: block;
-        margin: 0 0 20px;
-        text-transform: uppercase;
-    }
     .open-drag-icons{
         position: absolute;
-        top: -15px;
+        top: -25px;
         right: 0;
         span{
-            background-color: $dark_grey;
-            font-size: 18px;
-            color: $white;
+            font-size: 48px;
+            color: $black;
             @include size(30px,30px);
             display: block;
             float: left;
             text-align: center;
-            padding-top: 3px;
+            padding-top: -10px;
             margin-left: 6px;
-            @include border-radius(7px,7px,7px,7px);
-            &.move{
-                cursor: move;
-            }
             &.x-close{
                 cursor:pointer;
             }
@@ -84,9 +77,12 @@
     }
 }
 .edit-video-wrapper{
+    padding-bottom: 15px;
+    margin-right: 85px;
     .input-group-addon{
-        @include border-radius(30px,0,0,30px);
+        @include border-radius(6px,0,0,6px);
         background-color: $white;
+        border: 1px solid $dark_grey;
         border-right: 0;
         span{
             font-size: 19px;
@@ -94,22 +90,24 @@
         }
     }
     .edit-video-input{
-        @include border-radius(0,30px,30px,0); 
+        @include border-radius(0,6px,6px,0); 
+        border: 1px solid $dark_grey;
         border-left: 0;
     }
 }
 .tagged-works{
     @extend %block;
-    margin-top: 20px;
     background-color: $background_grey;
-    border: 1px solid $white;
     cursor: auto;
     .produts-tags-wrapper{
         @extend %block;
-        padding: 20px 10px;
+        padding:5px 70px 5px 0;//20px 10px;
+        > div {
+            padding: 0;
+        }
     }
     .title{
-        font: 16px $font-family--bold;
+        font-size: 16px;
         text-transform: uppercase;
         display: block;
         border-bottom: 1px solid $white;
@@ -124,19 +122,20 @@
     }
 }
 .no-tags-title{
-    font: 16px $font-family--secondary;
+    font-size: 16px;
     color: $almost_black;
     text-align: center;
     margin: 20px 0;
 }
 .no-tags-text{
-    font: 16px $font-family--secondary;
+    font-size: 16px;
     color: $dark_grey;
     text-align: center;
     margin: 20px 80px;
 }
 .no-video-text{
-        font: 16px $font-family--serif;
+        font-size: 16px;
+		color: $black;
     }
 .empty-wrapper{
     padding: 40px 0;
@@ -203,24 +202,23 @@
     margin:0 auto;
 }
 .add-videos-wrapper{
-    width: 80%;
-    @include border-radius(20px,20px,20px,20px);
+    @include border-radius(6px,6px,6px,6px);
     text-align: center;
     margin: 0 auto 20px;
     padding: 20px 20px 0;
-    border: 1px solid $dark_grey;
+    border: 1px solid transparent;
     cursor: pointer;
     background-color: #e9e9e9;
     &:hover{
         .plus-add{
-            background-color: $dark_green;
+            background-color: $dark_red;//$dark_green;
             @include transition-property(background-color);
             @include transition-duration(0.3s);
             @include transition-timing-function(ease-out);
         }
     }
     .plus-add{
-        background-color: $green;
+        background-color: $red;//$green;
         border: 1px solid $black;
         margin: 0 auto;
         font-size: 43px;
@@ -236,11 +234,11 @@
 .video-tag-wrapper{
     background-color: $white;
     border: 1px solid $light_grey;
-    @include border-radius(30px,30px,30px,30px);
+    @include border-radius(6px,6px,6px,6px);
     overflow: hidden;
     height: 26px;
     padding: 2px 10px;
-    margin: 5px 0;
+    margin: 5px 10px 5px 0;//5px 0;
 }
 .red-cross{
     float: left;
@@ -250,4 +248,11 @@
     height: 24px;
     padding: 2px 0 0 0;
 }
-
+.title-videos{
+	font-size: 16px;
+	text-align: left;//center;
+	display: block;
+	margin: 0 0 10px;//0 0 20px;
+	//text-transform: uppercase;
+	font-weight: bold;
+}

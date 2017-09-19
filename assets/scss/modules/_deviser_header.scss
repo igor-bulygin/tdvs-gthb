@@ -15,7 +15,7 @@
 	min-height: 200px;
     .grey-overlay{
         @extend %absolut-bottom;
-        @include size(100%,240px);
+        @include size(100%,200px);
         background-color: $almost_black;
         @include opacity(0.45)
     }
@@ -29,7 +29,7 @@
                 @include size(155px,155px);
                 @extend %avatar-border;
                 border-width: 3px;
-                margin-top: -50px;
+                margin-top: -108px;
             }
         }
         .deviser-data{
@@ -131,6 +131,7 @@
 }
 .btn-header{
     width: 140px;
+    font-weight: bold;
 }
 .btn.disabled, .btn[disabled], fieldset[disabled] .btn {
     cursor: not-allowed;
@@ -145,7 +146,7 @@
 }
 .edit-header-container{
 	position: relative;
-	height:411px;
+	height:388.5px//411px;
 }
 .edit-profile-btn{
     position: absolute;
@@ -156,4 +157,22 @@
 	width:100px;
 	margin: 0 auto;
     display: block;
+}
+.type-of-user{
+	color: $white;
+	font-family: $font-family--name;
+	text-transform: lowercase;
+	letter-spacing: 2px;
+	font-size: 41px;
+	position: absolute;
+    top: 43px;
+    left: 55px;
+}
+.icon-deviser{
+	img{
+		border: none!important;
+		width: 23px!important;
+		position: absolute;
+		top: -62px;
+	}
 }

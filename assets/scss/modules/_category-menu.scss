@@ -9,13 +9,18 @@
 	.categories{
     	float: left;
 		/*margin-right: 60px;*/
+		ul:first-child {
+            li{
+                margin-right: 60px;
+            }
+        }
 		ul{
 			li{
 				a{
 					font-family: $font-family--secondary;
 					font-size: 16px;
 					color: $black;
-					text-transform: uppercase;
+					text-transform: lowercase;//uppercase;
 					display: block;
 					margin: 10px 0;
 					&:hover{
@@ -29,9 +34,11 @@
 				.two-categories-title{
 					font-weight: bold;
 				}
+				li {
+					margin-right: 0;
+				}
 			}
-		}
-		
+		}		
 	}
 	.images{
 		float: left;

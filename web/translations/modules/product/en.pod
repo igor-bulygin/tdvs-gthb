@@ -24,6 +24,7 @@
 			"DESCRIPTION":"Description",
 			"SHIPPING&POLICIES":"Shipping & Policies",
 			"SHIPPING_PRICE_SPAIN":"Shipping price to SPAIN",
+			"IS": "is",
 			"WARRANTY":"Warranty:",
 			"WORK_FAQS":"WORK FAQs",
 			"Q":"Q:",
@@ -36,8 +37,11 @@
 			"MEMER_COMMENT_USEFUL":"  member found this comment useful",
 			"REVIEW_HELPFUL":"Is this review helpful to you ?",
 			"LOAD_MORE":"LOAD MORE",
+			"COMMENTS_MORE": " comments more",
 			"MORE_BY":" More by ",
-			"RETURNS":"Returns: "
+			"RETURNS":"Returns: ",
+			"CREATED_BY": "Created by",
+			"MORECONTENTCOMINGSOON": "More content coming soon !"
 		},
 		"creation_edition": {
 			"BACK_TO_PROFILE":" &lt go back to your profile",

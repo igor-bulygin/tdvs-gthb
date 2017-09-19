@@ -74,20 +74,26 @@
 		</div>
 		</form>
 		<div class="col-md-12 text-center">
-			<button class="btn btn-green mt-30" ng-click="personalInfoCtrl.save(personalInfoCtrl.form)"><span translate="cart.personal_info.CONTINUE_SHIPPING"></span></button>
+			<button class="btn btn-red mt-30" ng-click="personalInfoCtrl.save(personalInfoCtrl.form)"><span translate="cart.personal_info.CONTINUE_SHIPPING"></span></button>
 		</div>
 	</div>
 	<div ng-if="personalInfoCtrl.state>1">
-		<div class="col-md-3">
-			<p><span translate="cart.FIRST_NAME"></span>&nbsp;<span class="bold" ng-bind="personalInfoCtrl.cart.shipping_address.name + ' ' + personalInfoCtrl.cart.shipping_address.last_name"></span></p>
-			<p ng-if="personalInfoCtrl.cart.shipping_address.vat_id" ng-cloak><span translate="cart.VAT_NUMBER"></span>&nbsp;<span ng-bind="personalInfoCtrl.cart.shipping_address.vat_id"></span></p>
-			<p><span translate="cart.PHONE"></span>&nbsp;<span ng-bind="personalInfoCtrl.cart.shipping_address.phone_number_prefix + ' ' + personalInfoCtrl.cart.shipping_address.phone_number"></span></p>
+		<div class="personal-info-wrapper">
+		<div class="col-md-4">
+			<p><span class="grey-text" translate="cart.FIRST_NAME"></span>&nbsp;<span class="bold" ng-bind="personalInfoCtrl.cart.shipping_address.name + ' ' + personalInfoCtrl.cart.shipping_address.last_name"></span></p>
+			<p ng-if="personalInfoCtrl.cart.shipping_address.vat_id" ng-cloak><span class="grey-text" translate="cart.VAT_NUMBER"></span>&nbsp;<span ng-bind="personalInfoCtrl.cart.shipping_address.vat_id"></span></p>
+			<p><span class="grey-text" translate="cart.PHONE"></span>&nbsp;<span ng-bind="personalInfoCtrl.cart.shipping_address.phone_number_prefix + ' ' + personalInfoCtrl.cart.shipping_address.phone_number"></span></p>
 		</div>
-		<div class="col-md-3">
-			<p><span translate="cart.personal_info.SHIPPING_INFORMATION"></span>&nbsp;<span ng-bind="personalInfoCtrl.cart.shipping_address.address"></span></p>
-			<p><span ng-bind="personalInfoCtrl.cart.shipping_address.city"></span>&nbsp;<span ng-bind="personalInfoCtrl.cart.shipping_address.zip"></span></p>
+		<div class="col-md-4">
+			<p>
+				<span class="grey-text" translate="cart.personal_info.SHIPPING_INFORMATION"></span>&nbsp;
+				<span ng-bind="personalInfoCtrl.cart.shipping_address.address"></span></p>
+			<p>
+				<span ng-bind="personalInfoCtrl.cart.shipping_address.city"></span>&nbsp;
+				<span ng-bind="personalInfoCtrl.cart.shipping_address.zip"></span></p>
 			<p><span ng-bind="personalInfoCtrl.cart.shipping_address.country"></span></p>
 		</div>
-		<div class="col-md-1"><button><i class="ion-edit" ng-click="personalInfoCtrl.editShippingAddress()"></i></button></div>
+		<div class="col-md-4"><button class="btn btn-transparent btn-edit pull-right"><i class="ion-edit red-icon" ng-click="personalInfoCtrl.editShippingAddress()"></i></button>			</div>
+		</div>
 	</div>
 </div>

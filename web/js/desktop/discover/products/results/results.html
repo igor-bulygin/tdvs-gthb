@@ -7,12 +7,15 @@
 					<image-hover-buttons product-id="{{product.id}}" is-loved="{{product.isLoved}}" is-mine="{{product.isMine }}">
 						<a ng-href="{{product.link}}">
 							<img class="grid-image" ng-src="{{product.main_photo}}">
+							<span class="img-bgveil"></span>
 						</a>
 					</image-hover-buttons>
 					<figcaption>
-						<p class="instauser">
-							<a ng-href="{{product.link}}">{{product.name}}</a>
-						</p>
+						<a ng-href="{{product.link}}">
+							<p class="instauser">
+								<span ng-bind="exploreProductsResultsCtrl.truncateString(product.name, 18, '…')"></span>
+							</p>
+						</a>
 						<p class="price">€ {{product.min_price}}</p>
 					</figcaption>
 				</figure>

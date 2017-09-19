@@ -113,6 +113,7 @@ class PublicController extends CController
 		// Works
 		$works = Product::getRandomWorks(300, $categoryShortIds);
 
+		//TODO if redesign does not need this blocks anymore, delete it to optimize memory usage
 		// divide then in blocks to be rendered in bottom section
 		$moreWork = [];
 		for ($i = 1; $i <= 19; $i++) {
@@ -124,7 +125,7 @@ class PublicController extends CController
 		}
 
 		// Boxes
-		$boxes = Box::getRandomBoxes(9, null, true);
+		$boxes = Box::getRandomBoxes(8, null, true);
 
 		// Stories
 		$stories = Story::getRandomStories(3);
@@ -139,11 +140,12 @@ class PublicController extends CController
 			'banners' => $banners,
 			'totalDevisers' => count($devisers),
 			'devisers' => [
-				array_slice($devisers, 0, 5),
-				array_slice($devisers, 5, 5),
-				array_slice($devisers, 10, 5),
-				array_slice($devisers, 15, 5),
+				array_slice($devisers, 0, 3),
+				array_slice($devisers, 3, 3),
+				array_slice($devisers, 6, 3),
+				array_slice($devisers, 9, 3),
 			],
+			'works' => $works,
 			'works12' => array_slice($works, 0, 12),
 			'works3' => array_slice($works, 12, 3),
 			'moreWork' => $moreWork,
@@ -240,6 +242,12 @@ class PublicController extends CController
 	{
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("about-us");
+	}
+
+	public function actionElements()
+	{
+		$this->layout = '/desktop/empty-layout.php';
+		return $this->render("elements");
 	}
 
 	/**

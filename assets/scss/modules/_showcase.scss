@@ -28,6 +28,7 @@
     }
 }
 .showcase{
+	@include border-radius(8px,8px,8px,8px);
     position: relative;
     float: left;
     overflow: hidden;
@@ -36,28 +37,15 @@
     cursor: pointer;
     margin: 1em 0;
     @include box-shadow(2px,2px,4px,$light_grey);
-    &:hover{
-        .btn-follow{
-            visibility: visible;
-            @include opacity(1);
-        }
-    }
-    .btn-follow{
-        @include opacity(0);
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        transition: visibility 0s, opacity 0.3s linear;
-    }
     img{
-        max-width: 260px;
         width:100%;
     }
     figcaption{
         @extend %absolut-bottom;
-        background: rgba(255,255,255,0.65);
+        background: $white;
         width: 100%;
         padding: 8px;
+		height: 66px;
         img{
             @include opacity(1);
             @include size(50px,50px);
@@ -68,44 +56,20 @@
                 @include size(50px,50px);
             }
         }
-        span{
-            @include opacity(1);
-            color: $black;
-            display:block;
-            white-space: nowrap;
-            &.name{
-                font: 16px $font-family--bold;
-            }
-            &.location{
-                font: 12px $font-family--serif;
-                color: $almost_black;
-            }
-        }
-    }
-}
-.prev-next-wrapper{
-    float:right;
-    margin: 20px 15px 0 0;
-    a{
-        &.prev{
-            margin: 0 20px 0 0;
-            i{
-                margin: 0 5px 0 0;
-            }
-        }
-        &.next{
-            i{
-                margin: 0 0 0 5px;
-            }
-        }
-        &:focus{
-            color: $dark_grey;
-            text-decoration: none;
-        }
-        &:hover{
-            color:$red!important;
-            text-decoration: none;
-        }
+        .location{
+			color: $black;
+			margin-top: -5px;
+			color: $black;
+			float: left;
+			display: block;
+		}
+		.sm{
+			float: left;
+			display: block;
+		}
+		.no-mar {
+			margin-top: 8px !important;
+		}
     }
 }
 .pad-showcase{
@@ -115,4 +79,109 @@
 	img{
 		 max-width: 360px;
 	}
+}
+.carousel-devisers-container{
+	max-width: 900px;
+    margin: 0 auto;
+}
+.carusel-container{
+	position: relative;
+	a{
+        &.prev{
+            position: absolute;
+    		top: 120px;
+			color: $black;
+			left: 80px;
+            i{
+                font-size: 46px;
+            }
+        }
+        &.next{
+			position: absolute;
+    		top: 120px;
+			color: $black;
+			right: 80px;
+            i{
+                font-size: 46px;
+            }
+        }
+        &:focus{
+            color: $black;
+            text-decoration: none;
+        }
+        &:hover{
+            color:$dark_grey!important;
+            text-decoration: none;
+        }
+    }
+}
+.boxes-container{
+	margin-top: 60px;
+}
+.season-banners{
+	padding: 40px 0 20px;
+	background-color: $white;
+}
+.responsive-image{
+	width: 100%;
+}
+.images-box{
+	 position: relative;
+	.bottom-top-images{
+		.image-left{
+			width: 49%;
+			float: left;
+			height: 97px;
+			overflow: hidden;
+			position: relative;
+			margin-bottom: 4px;
+			img{
+				position: absolute;
+				left: 0;
+				top: 0;
+				bottom: 0;
+				margin: auto;
+			}
+		}
+		.image-right{
+			width: 49%;
+			float: right;
+			height: 97px;
+			overflow: hidden;
+			position: relative;
+			margin-bottom: 4px;
+			img{
+				position: absolute;
+				left: 0;
+				top: 0;
+				bottom: 0;
+				margin: auto;
+			}
+		}
+	}
+	.bottom-image{
+		width: 100%;
+		float: left;
+		height: 199px;
+		overflow: hidden;
+		position: relative;
+		img{
+			position: absolute;
+			left: 0;
+			top: 0;
+			bottom: 60px;
+			margin: auto;
+		}
+	}
+}
+.boxes-text{
+	font-size: 16px;//20px;
+	//line-height: 0.96;
+	font-weight: bold;
+	color: $black;
+	display: block;
+	margin-top: 8px;
+}
+.btn-love-box{
+	margin-top: -2px;//-8px;
 }

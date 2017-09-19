@@ -10,14 +10,14 @@
 	</span>
 	<div ng-if="shippingMethodsCtrl.state > 1">
 		<div ng-repeat="pack in shippingMethodsCtrl.cart.packs">
-			<div class="row">
+			<div class="row deviser-title-wrapper">
 				<div class="col-md-1">
 					<a ng-src="pack.deviser.url">
-						<img ng-src="{{pack.deviser_info.photo}}" ng-attr-alt="{{pack.deviser_info.name}}" ng-attr-title="{{pack.deviser_info.name}}" style="max-width: 50px;">
+						<img class="avatar-default small" ng-src="{{pack.deviser_info.photo}}" ng-attr-alt="{{pack.deviser_info.name}}" ng-attr-title="{{pack.deviser_info.name}}" style="max-width: 50px;">
 					</a>
 				</div>
 				<div class="col-md-7">
-					<h4 ng-bind="pack.deviser_info.name"></h4>
+					<span class="title-deviser-shipping" ng-bind="pack.deviser_info.name"></span>
 				</div>
 				<div class="col-md-2" ng-if="shippingMethodsCtrl.state === 2">
 					<div class="radio radio-inline" ng-if="pack.deviser_info.shipping_time" ng-cloak>
@@ -36,7 +36,7 @@
 					</p>
 				</div>
 			</div>
-			<div class="row" style="padding-top:10px;">
+			<div class="row row deviser-product-wrapper">
 				<div ng-repeat="product in pack.products">
 					<product-card product="product"></product-card>
 				</div>
@@ -44,6 +44,6 @@
 		</div>
 	</div>
 	<div class="col-md-12 text-center" ng-if="shippingMethodsCtrl.state===2">
-		<button class="btn btn-green mt-30" ng-click="shippingMethodsCtrl.save()"><span translate="cart.shipping_methods.CONTINUE_PAYMENT"></span></button>
+		<button class="btn btn-red mt-30" ng-click="shippingMethodsCtrl.save()"><span translate="cart.shipping_methods.CONTINUE_PAYMENT"></span></button>
 	</div>
 </div>

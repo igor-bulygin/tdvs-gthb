@@ -19,7 +19,7 @@ $this->registerJs("var searchParam = '".$text."'", yii\web\View::POS_HEAD, 'prod
 
 ?>
 
-<div ng-controller="exploreProductsCtrl as exploreProductsCtrl">
+<div ng-controller="exploreProductsCtrl as exploreProductsCtrl" class="results-wrapper">
 	<div class="container store">
 		<div>
 			<div class="col-md-12">

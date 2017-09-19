@@ -2,36 +2,43 @@
 	<div class="video-container">
 		<div ng-if="editVideosCtrl.person.videos.length > 0"><a href="#" class="red-link-btn" ng-click="editVideosCtrl.done()"><span translate="person.videos.DONE_VIDEOS"></span></a></div>
 		<div class="add-videos-wrapper" ng-if="editVideosCtrl.addVideosClicked || editVideosCtrl.person.videos.length > 0" ng-cloak>
-			<div class="plus-add-wrapper" ng-click="editVideosCtrl.addVideo()" ng-disabled="editVideosCtrl.form.$invalid">
+			<!--<div class="plus-add-wrapper" ng-click="editVideosCtrl.addVideo()" ng-disabled="editVideosCtrl.form.$invalid">
 				<div class="plus-add">
 					<span>+</span>
 				</div>
 				<div class="text"><span translate="person.videos.ADD_VIDEOS"></span></div>
-			</div>
+			</div>-->
+			<div>
+				<span class="title-videos"><span translate="person.videos.ADD_VIDEOS"></span></span>
+			</div>	
 			<form name="editVideosCtrl.form" novalidate>
-				<div class="input-group input-group-lg input-video">
-					<span class="input-group-addon" id="sizing-addon1"><span translate="person.videos.VIDEO_URL"></span></span>
-					<input type="text" class="form-control input-add-video" placeholder="http://" ng-model="editVideosCtrl.url" name="url" ng-required="true" ng-pattern="editVideosCtrl.YoutubeRegex">
+				<div class="input-group input-video">
+					<input type="text" class="form-control" placeholder="http://" ng-model="editVideosCtrl.url" name="url" ng-required="true" ng-pattern="editVideosCtrl.YoutubeRegex">
 								<!--<span class="input-group-btn">
 									<button class="btn btn-default btn-add-video" type="button" ng-click="editVideosCtrl.addVideo()" ng-disabled="editVideosCtrl.form.$invalid">+</button>
-								</span>-->
+								</span>-->		
+					<span class="input-group-btn">
+						<button class="btn-red send-btn-sm" type="button" ng-click="editVideosCtrl.addVideo()" ng-disabled="editVideosCtrl.form.$invalid">
+							<img src="/imgs/plane.svg" data-pin-nopin="true">
+						</button>
+					</span>
 				</div>
 			</form>
 		</div>
 		<div ng-if="editVideosCtrl.person.videos.length === 0" class="text-center" ng-cloak>
 			<img class="sad-face" src="/imgs/sad-face.svg">
 			<p class="no-video-text"><span translate="person.videos.ANY_VIDEOS"></span></p>
-			<button class="btn btn-default btn-green" ng-click="editVideosCtrl.showAddVideo()" ng-if="!editVideosCtrl.addVideosClicked"><span translate="person.videos.ADD_VIDEOS"></span></button>
+			<button class="btn btn-default btn-red" ng-click="editVideosCtrl.showAddVideo()" ng-if="!editVideosCtrl.addVideosClicked"><span translate="person.videos.ADD_VIDEOS"></span></button>
 		</div>
 		<div class="video-edit-list" ng-cloak ui-sortable ng-model="editVideosCtrl.person.videos">
-			<div class="row video-row" ng-repeat="video in editVideosCtrl.person.videos">
+			<div class="video-row" ng-repeat="video in editVideosCtrl.person.videos">
 				<div class="col-md-6">
 					<ng-youtube-embed url="video.url" autoplay="false" color="white" disablekb="true" width="100%"></ng-youtube-embed>
 				</div>
 				<div class="col-md-6 dragg-video-wrapper">
-					<span class="title"><span translate="person.videos.WHICH_WORK_VIDEO"></span></span>
+					<span class="title-videos"><span translate="person.videos.WHICH_WORK_VIDEO"></span></span>
 						<div class="open-drag-icons">
-							<span class="ion-arrow-move move"></span> <span class="ion-android-close x-close" ng-click="editVideosCtrl.deleteVideo($index)"></span>
+							<span class="ion-android-close black-icon x-close" ng-click="editVideosCtrl.deleteVideo($index)"></span>
 						</div>
 						<form name="editVideosCtrl.searchForm" novalidate>
 							<div class="input-group edit-video-wrapper">
@@ -59,7 +66,6 @@
 							</div>
 						</form>
 						<div class="tagged-works">
-							<span class="title"><span translate="person.videos.TAGGED_WORKS"></span></span>
 							<div ng-if="video.products.length === 0">
 								<p class="no-tags-title"><span translate="person.videos.NO_TAGGED_WORKS"></span></p>
 								<p class="no-tags-text"><span translate="person.videos.TAG_WORKS"></span></p>

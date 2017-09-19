@@ -1,10 +1,8 @@
 <?php
 
-use app\assets\desktop\pub\PublicCommonAsset;
-use app\helpers\Utils;
-use app\models\Person;
+use app\assets\desktop\pub\Index2Asset;use app\helpers\Utils;use app\models\Person;
 
-PublicCommonAsset::register($this);
+Index2Asset::register($this);
 
 $this->title = Yii::t('app/public', 'INDEX_TITLE');
 
@@ -12,6 +10,7 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 /** @var int $totalDevisers */
 /** @var Person[][] $influencers */
 /** @var int $totalInfluencers */
+/** @var \app\models\Product[] $works */
 /** @var \app\models\Product[] $works12 */
 /** @var \app\models\Product[] $works3 */
 /** @var \app\models\Product[][] $moreWork */
@@ -37,7 +36,6 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 							<img src="<?= $banner["img"] ?>" alt="<?= $banner["alt"] ?>" title="">
 						</a>
 					</div>
-				
 			<?php } ?>
 		</div>
 		<!-- Controls -->
@@ -62,23 +60,465 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 	<div class="container container-sub-baner">
 		<div class="row">
 			<div class="col-sm-4 col-xs-6 title-wrapper title-1 righty">
-				<h2 class="title-1"><span class="serif">The</span>store</h2>
-				<p class="tagline-1">Find products that will make you part of the future</p>
+				<div class="sub-banner-wrapper">
+					<div class="sub-banner-text-left">
+						<h2 class="title-1"><span class="serif" style="margin-bottom:8px;">The</span>store</h2>
+						<p class="tagline-1">Find product that will make<br>you be part of the future</p>
+					</div>
+					<div class="left-point"></div>
+				</div>
 			</div>
 			<div class="col-sm-4 col-xs-6 title-wrapper">
-				<h2 class="title-2">Social<br/><span class="serif">experience</span></h2>
-				<p class="tagline-2">Show the world what you like &amp; build a community</p>
+				<div class="sub-banner-wrapper">
+					<div class="sub-banner-text-center">
+						<h2 class="title-2">Social<br/><span class="serif">experience</span></h2>
+						<p class="tagline-2">Show the world what you like and build<br>a community around yourself</p>
+					</div>
+					<div class="center-point"></div>
+				</div>
 			</div>
 			<div class="col-sm-4 title-wrapper title-3">
-				<h2>Affiliate<br/><span class="serif">for all</span></h2>
-				<p class="tagline-3">Love a product. People buy it. You earn money.</p>
+				<div class="sub-banner-wrapper">
+					<div class="sub-banner-text-right">
+						<h2>Affiliate<br/><span class="serif">for all</span></h2>
+						<p class="tagline-3">Love a product. People buy it.<br>You earn money.</p>
+					</div>
+					<div class="right-point"></div>
+				</div>
 			</div>
 		</div>
 	</div>
-</section>
-<!-- /SUB-BANNER -->
-
+	</section>
+	<!-- /SUB-BANNER -->
+	<!-- SEASON BANNERS -->
+	<section class="season-banners">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-4">
+					<a href="#">
+						<img src="/imgs/FALL.jpg" class="responsive-image">
+					</a>
+				</div>
+				<div class="col-sm-4">
+					<a href="#">
+						<img src="/imgs/JEANS.jpg" class="responsive-image">
+					</a>
+				</div>
+				<div class="col-sm-4">
+					<a href="#">
+						<img src="/imgs/BASIC.jpg" class="responsive-image">
+					</a>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /SEASON BANNERS -->
+	<!-- SHOWCASE -->
+	<section class="showcase-wrapper">
+		<div class="container">
+			<h3 class="title-product-name">Discover devisers</h3>
+			<span class="subtitle-home">Artists, designers, creators who shape outstanding works</span>
+			<!-- Controls -->
+			<div class="carusel-container">
+				<?php if ($totalDevisers > 3) { ?>
+					<a class="prev" href="#carousel-devisers" role="button" data-slide="prev">
+						<i class="ion-ios-arrow-left"></i>
+					</a>
+				<?php } ?>
+				<div class="carousel-devisers-container <?= $totalDevisers > 3 ? 'carousel slide' : ''?>" id="carousel-devisers" data-ride="carousel" data-interval="false">
+					<div class="<?= $totalDevisers > 3 ? 'carousel-inner' : ''?>" role="listbox">
+						<?php foreach ($devisers as $i => $group) { ?>
+					<div class="item <?= ($i==0) ? 'active' : '' ?>">
+						<?php foreach ($group as $k => $deviser) { ?>
+						<div class="col-md-4 col-sm-4 col-xs-12 pad-showcase">
+								<a href="<?= $deviser->getStoreLink()?>">
+								<figure class="showcase">
+									<img src="<?= Utils::url_scheme() ?><?= Utils::thumborize($deviser->getHeaderBackgroundImage())->resize(350, 344) ?>" class="showcase-image">
+								<figcaption>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="title-product-name sm align-left">
+											<span><?= $deviser->getName() ?></span>
+										</div>
+										<div class="location align-left"><?= $deviser->personalInfoMapping->getCityLabel() ?></div>
+									</div>
+									<div class="col-md-6">
+										<button class="btn btn-icon mt-5"><i class="ion-ios-star-outline"></i><span>Follow</span>
+									</button>
+									</div>
+								</div>
+								</figcaption>
+								</figure>
+								</a>
+							</div>
+						<?php } ?>
+					</div>
+					<?php } ?>
+					</div>
+				</div>
+				<?php if ($totalDevisers > 3) { ?>
+					<a class="next" href="#carousel-devisers" role="button" data-slide="next">
+						<i class="ion-ios-arrow-right"></i>
+					</a>
+				<?php } ?>
+			</div>
+		</div>
+	</section>
+	<!-- /SHOWCASE -->
+	<?php if ($totalInfluencers) { ?>
+	<section class="showcase-wrapper">
+		<div class="container">
+			<h3 class="title-product-name">Discover influencers</h3>
+			<span class="subtitle-home">Discover the works they love</span>
+			<!-- Controls -->
+			<div class="carusel-container">
+				<?php if ($totalInfluencers > 3) { ?>
+					<a class="prev" href="#carousel-influencers" role="button" data-slide="prev">
+						<i class="ion-ios-arrow-left"></i>
+					</a>
+				<?php } ?>
+				<div class="carousel-devisers-container <?= $totalInfluencers > 3 ? 'carousel slide' : ''?>" id="carousel-influencers" data-ride="carousel" data-interval="false">
+					<div class="<?= $totalInfluencers > 3 ? 'carousel-inner' : ''?>" role="listbox">
+						<?php foreach ($influencers as $i => $group) { ?>
+							<div class="item <?= ($i==0) ? 'active' : '' ?>">
+								<?php foreach ($group as $k => $influencer) { ?>
+									<div class="col-md-4 col-sm-4 col-xs-6 pad-showcase">
+										<a href="<?= $influencer->getLovedLink()?>">
+											<figure class="showcase">
+												<img src="<?= Utils::url_scheme() ?><?= Utils::thumborize($influencer->getHeaderBackgroundImage())->resize(350, 344) ?>" class="showcase-image">
+												<figcaption>
+												<div class="row">
+													<div class="col-md-6">
+														<span class="title-product-name sm align-left"><?= $influencer->getName() ?></span>
+														<span class="location align-left"><?= $influencer->personalInfoMapping->getCityLabel() ?></span>
+													</div>
+													<div class="col-md-6">
+														<button class="btn btn-icon mt-5"><i class="ion-ios-star-outline"></i><span>Follow</span></button>
+													</div>
+												</div>
+												</figcaption>
+											</figure>
+										</a>
+									</div>
+								<?php } ?>
+							</div>
+						<?php } ?>
+					</div>
+				</div>
+				<?php if ($totalInfluencers > 3) { ?>
+					<a class="next" href="#carousel-influencers" role="button" data-slide="next">
+						<i class="ion-ios-arrow-right"></i>
+					</a>
+				<?php } ?>
+			</div>
+		</div>
+	</section>
+<?php } ?>
 <!-- GRID -->
+<section class="showcase-wrapper">
+		<div class="container">
+			<h3 class="title-product-name">Discover boxes</h3>
+			<div class="boxes-container">
+				<div class="row">
+					<?php foreach ($boxes as $box) {
+						$products = $box->getProductsPreview(); ?>
+						<div class="col-md-3">
+							<a href="<?= $box->getViewLink()?>">
+								<figure class="showcase">
+									<div class="images-box">
+										<div class="bottom-top-images">
+											<div class="image-left">
+												<img src="<?=isset($products[0]) ? $products[0]['main_photo'] : 'imgs/img-default.jpg'?>" class="showcase-image">
+											</div>
+											<div class="image-right">
+												<img src="<?=isset($products[1]) ? $products[1]['main_photo'] : 'imgs/img-default.jpg'?>" class="showcase-image">
+											</div>
+										</div>
+										<div class="bottom-image">
+											<img src="<?=isset($products[2]) ? $products[2]['main_photo'] : 'imgs/img-default.jpg'?>" class="showcase-image">
+										</div>
+									</div>
+									<figcaption>
+										<div class="row no-mar">
+											<div class="col-md-8">
+												<span class="boxes-text align-left"><?= \yii\helpers\StringHelper::truncate($box->name, 18, '…') ?></span>
+											</div>
+											<div class="col-md-4 no-padding">
+												<button class="btn btn-single-love btn-love-box">
+													<span class="number"><?=count($products)?></span>
+													<span class="heart-icon"></span>
+												</button>
+											</div>
+										</div>
+									</figcaption>
+								</figure>
+							</a>
+						</div>
+					<?php } ?>
+
+					<?php /*
+					<div class="col-md-3">
+							<a href="<?= $influencer->getLovedLink()?>">
+									<figure class="showcase">
+										<div class="images-box">
+											<div class="bottom-top-images">
+												<div class="image-left">
+													<img src="imgs/img-default.jpg" class="showcase-image">
+												</div>
+												<div class="image-right">
+													<img src="imgs/img-default.jpg" class="showcase-image">
+												</div>
+											</div>
+											<div class="bottom-image">
+												<img src="imgs/img-default.jpg" class="showcase-image">
+											</div>
+										</div>
+										<figcaption>
+										<div class="row">
+											<div class="col-md-6">
+												<span class="boxes-text align-left">Technology</span>
+											</div>
+											<div class="col-md-6">
+												<button class="btn btn-single-love btn-love-box">
+													<span class="number">18</span>
+													<i class="ion-heart"></i>
+												</button>
+											</div>
+										</div>
+										</figcaption>
+									</figure>
+								</a>
+						</div>
+						<div class="col-md-3">
+							<a href="<?= $influencer->getLovedLink()?>">
+									<figure class="showcase">
+										<div class="images-box">
+											<div class="bottom-top-images">
+												<div class="image-left">
+													<img src="imgs/product-example.jpg" class="showcase-image">
+												</div>
+												<div class="image-right">
+													<img src="imgs/product-example.jpg" class="showcase-image">
+												</div>
+											</div>
+											<div class="bottom-image">
+												<img src="imgs/product-example.jpg" class="showcase-image">
+											</div>
+										</div>
+										<figcaption>
+										<div class="row">
+											<div class="col-md-6">
+												<span class="boxes-text align-left">Vintage</span>
+											</div>
+											<div class="col-md-6">
+												<button class="btn btn-single-love btn-love-box">
+													<span class="number">180</span>
+													<i class="ion-heart"></i>
+												</button>
+											</div>
+										</div>
+										</figcaption>
+									</figure>
+								</a>
+						</div>
+						<div class="col-md-3">
+							<a href="<?= $influencer->getLovedLink()?>">
+									<figure class="showcase">
+										<div class="images-box">
+											<div class="bottom-top-images">
+												<div class="image-left">
+													<img src="imgs/product-example.jpg" class="showcase-image">
+												</div>
+												<div class="image-right">
+													<img src="imgs/product-example.jpg" class="showcase-image">
+												</div>
+											</div>
+											<div class="bottom-image">
+												<img src="imgs/product-example.jpg" class="showcase-image">
+											</div>
+										</div>
+										<figcaption>
+										<div class="row">
+											<div class="col-md-6">
+												<span class="boxes-text align-left">Leather</span>
+											</div>
+											<div class="col-md-6">
+												<button class="btn btn-single-love btn-love-box">
+													<span class="number">18</span>
+													<i class="ion-heart"></i>
+												</button>
+											</div>
+										</div>
+										</figcaption>
+									</figure>
+								</a>
+						</div>
+						<div class="col-md-3">
+							<a href="<?= $influencer->getLovedLink()?>">
+									<figure class="showcase">
+										<div class="images-box">
+											<div class="bottom-top-images">
+												<div class="image-left">
+													<img src="imgs/img-default.jpg" class="showcase-image">
+												</div>
+												<div class="image-right">
+													<img src="imgs/product-example.jpg" class="showcase-image">
+												</div>
+											</div>
+											<div class="bottom-image">
+												<img src="imgs/img-default.jpg" class="showcase-image">
+											</div>
+										</div>
+										<figcaption>
+										<div class="row">
+											<div class="col-md-6">
+												<span class="boxes-text align-left">Summer time</span>
+											</div>
+											<div class="col-md-6">
+												<button class="btn btn-single-love btn-love-box">
+													<span class="number">22</span>
+													<i class="ion-heart"></i>
+												</button>
+											</div>
+										</div>
+										</figcaption>
+									</figure>
+								</a>
+						</div>
+						<div class="col-md-3">
+							<a href="<?= $influencer->getLovedLink()?>">
+									<figure class="showcase">
+										<div class="images-box">
+											<div class="bottom-top-images">
+												<div class="image-left">
+													<img src="imgs/img-default.jpg" class="showcase-image">
+												</div>
+												<div class="image-right">
+													<img src="imgs/product-example.jpg" class="showcase-image">
+												</div>
+											</div>
+											<div class="bottom-image">
+												<img src="imgs/product-example.jpg" class="showcase-image">
+											</div>
+										</div>
+										<figcaption>
+										<div class="row">
+											<div class="col-md-6">
+												<span class="boxes-text align-left">Summer time</span>
+											</div>
+											<div class="col-md-6">
+												<button class="btn btn-single-love btn-love-box">
+													<span class="number">22</span>
+													<i class="ion-heart"></i>
+												</button>
+											</div>
+										</div>
+										</figcaption>
+									</figure>
+								</a>
+						</div>
+						<div class="col-md-3">
+							<a href="<?= $influencer->getLovedLink()?>">
+									<figure class="showcase">
+										<div class="images-box">
+											<div class="bottom-top-images">
+												<div class="image-left">
+													<img src="imgs/img-default.jpg" class="showcase-image">
+												</div>
+												<div class="image-right">
+													<img src="imgs/product-example.jpg" class="showcase-image">
+												</div>
+											</div>
+											<div class="bottom-image">
+												<img src="imgs/product-example.jpg" class="showcase-image">
+											</div>
+										</div>
+										<figcaption>
+										<div class="row">
+											<div class="col-md-6">
+												<span class="boxes-text align-left">Summer time</span>
+											</div>
+											<div class="col-md-6">
+												<button class="btn btn-single-love btn-love-box">
+													<span class="number">22</span>
+													<i class="ion-heart"></i>
+												</button>
+											</div>
+										</div>
+										</figcaption>
+									</figure>
+								</a>
+						</div>
+						<div class="col-md-3">
+							<a href="<?= $influencer->getLovedLink()?>">
+									<figure class="showcase">
+										<div class="images-box">
+											<div class="bottom-top-images">
+												<div class="image-left">
+													<img src="imgs/img-default.jpg" class="showcase-image">
+												</div>
+												<div class="image-right">
+													<img src="imgs/product-example.jpg" class="showcase-image">
+												</div>
+											</div>
+											<div class="bottom-image">
+												<img src="imgs/product-example.jpg" class="showcase-image">
+											</div>
+										</div>
+										<figcaption>
+										<div class="row">
+											<div class="col-md-6">
+												<span class="boxes-text align-left">Summer time</span>
+											</div>
+											<div class="col-md-6">
+												<button class="btn btn-single-love btn-love-box">
+													<span class="number">22</span>
+													<i class="ion-heart"></i>
+												</button>
+											</div>
+										</div>
+										</figcaption>
+									</figure>
+								</a>
+						</div>
+						<div class="col-md-3">
+							<a href="<?= $influencer->getLovedLink()?>">
+									<figure class="showcase">
+										<div class="images-box">
+											<div class="bottom-top-images">
+												<div class="image-left">
+													<img src="imgs/img-default.jpg" class="showcase-image">
+												</div>
+												<div class="image-right">
+													<img src="imgs/product-example.jpg" class="showcase-image">
+												</div>
+											</div>
+											<div class="bottom-image">
+												<img src="imgs/product-example.jpg" class="showcase-image">
+											</div>
+										</div>
+										<figcaption>
+										<div class="row">
+											<div class="col-md-6">
+												<span class="boxes-text align-left">Summer time</span>
+											</div>
+											<div class="col-md-6">
+												<button class="btn btn-single-love btn-love-box">
+													<span class="number">22</span>
+													<i class="ion-heart"></i>
+												</button>
+											</div>
+										</div>
+										</figcaption>
+									</figure>
+								</a>
+						</div>
+						*/ ?>
+				</div>
+			</div>
+		</div>
+</section>
+<?php /*
 <section class="grid-wrapper">
 	<div class="container">
 		<div class="section-title">
@@ -133,57 +573,10 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 		</div>
 	</div>
 </section>
+ */ ?>
 <!-- /GRID -->
 
-	<!-- SHOWCASE -->
-	<section class="showcase-wrapper">
-		<div class="container">
-			<h3>Artists, designers, creators who<br>
-			shape outstanding works</h3>
-			<div class="section-title">
-				<span translate="global.DEVISERS"></span>
-			</div>
-			<!-- Controls -->
-			<div class="prev-next-wrapper">
-				<?php if ($totalDevisers > 5) { ?>
-					<a class="prev" href="#carousel-devisers" role="button" data-slide="prev">
-						<i class="ion-ios-arrow-left"></i>
-						<span translate="global.PREVIOUS"></span>
-					</a>
-					<a class="next" href="#carousel-devisers" role="button" data-slide="next">
-						<span translate="global.NEXT"></span>
-						<i class="ion-ios-arrow-right"></i>
-					</a>
-				<?php } ?>
-			</div>
-				<div class="<?= $totalDevisers > 5 ? 'carousel slide' : ''?>" id="carousel-devisers" data-ride="carousel">
-					<div class="<?= $totalDevisers > 5 ? 'carousel-inner' : ''?>" role="listbox">
-						<?php foreach ($devisers as $i => $group) { ?>
-					<div class="item <?= ($i==0) ? 'active' : '' ?>">
-						<?php foreach ($group as $k => $deviser) { ?>
-						<div class="col-md-15 col-sm-15 col-xs-6 pad-showcase">
-								<a href="<?= $deviser->getStoreLink()?>">
-								<figure class="showcase">
-								<button class="btn btn-default btn-follow"><i class="ion-star"></i><span translate="global.FOLLOW"></span>
-								</button>
-								<img src="<?= Utils::url_scheme() ?><?= Utils::thumborize($deviser->getHeaderBackgroundImage())->resize(350, 344) ?>" class="showcase-image">
-								<figcaption>
-									<img class="showcase-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($deviser->getAvatarImage())->resize(0, 110) ?>">
-									<span class="name"><?= $deviser->getName() ?></span>
-									<span class="location"><?= $deviser->personalInfoMapping->getCityLabel() ?></span>
-								</figcaption>
-								</figure>
-								</a>
-							</div>
-						<?php } ?>
-					</div>
-					<?php } ?>
-					</div>
-				</div>
-		</div>
-	</section>
-	<!-- /SHOWCASE -->
-
+<?php /*
 <?php if ($boxes) { ?>
 	<section class="grid-wrapper">
 		<div class="container">
@@ -267,61 +660,52 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 		</div>
 	</section>
 <?php } ?>
+*/?>
 
-<?php if ($totalInfluencers) { ?>
-	<section class="showcase-wrapper">
-		<div class="container">
-			<h3>Discover the works they love</h3>
-			<div class="section-title">
-				<span translate="global.INFLUENCERS"></span>
-			</div>
-			<!-- Controls -->
-			<div class="prev-next-wrapper">
-				<?php if ($totalInfluencers > 3) { ?>
-					<a class="prev" href="#carousel-influencers" role="button" data-slide="prev">
-						<i class="ion-ios-arrow-left"></i>
-						<span translate="global.PREVIOUS"></span>
-					</a>
-					<a class="next" href="#carousel-influencers" role="button" data-slide="next">
-						<span translate="global.NEXT"></span>
-						<i class="ion-ios-arrow-right"></i>
-					</a>
-				<?php } ?>
-			</div>
-			<div class="<?= $totalInfluencers > 3 ? 'carousel slide' : ''?>" id="carousel-influencers" data-ride="carousel">
-				<div class="<?= $totalInfluencers > 3 ? 'carousel-inner' : ''?>" role="listbox">
-					<?php foreach ($influencers as $i => $group) { ?>
-						<div class="item <?= ($i==0) ? 'active' : '' ?>">
-							<?php foreach ($group as $k => $influencer) { ?>
-								<div class="col-md-4 col-sm-4 col-xs-6 pad-showcase">
-									<a href="<?= $influencer->getLovedLink()?>">
-										<figure class="showcase showcase-influencers">
-											<button class="btn btn-default btn-follow"><i class="ion-star"></i><span>Follow</span>
-											</button>
-											<img src="<?= Utils::url_scheme() ?><?= Utils::thumborize($influencer->getHeaderBackgroundImage())->resize(350, 344) ?>" class="showcase-image">
-											<figcaption>
-												<img class="showcase-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($influencer->getAvatarImage())->resize(0, 110) ?>">
-												<span class="name"><?= $influencer->getName() ?></span>
-												<span class="location"><?= $influencer->personalInfoMapping->getCityLabel() ?></span>
-											</figcaption>
-										</figure>
-									</a>
-								</div>
-							<?php } ?>
-						</div>
-					<?php } ?>
-				</div>
-			</div>
-		</div>
-	</section>
-<?php } ?>
 
 <!-- GRID -->
+<section class="grid-wrapper" id="grid-product-home">
+	<div class="container">
+		<h3 class="title-product-name">Discover what´s next</h3>
+		<div id="macy-container" class="grid-margin">
+			<?php foreach ($works as $i => $work) { ?>
+			<div class="col-md-2">
+				<div class="menu-category list-group">
+					<div class="grid">
+						<figure class="effect-zoe">
+							<image-hover-buttons product-id="{{'<?= $work->short_id ?>'}}" is-loved="{{'<?=$work->isLovedByCurrentUser() ? 1 : 0 ?>'}}" is-mine="{{'<?= $work->isWorkFromCurrentUser() ? 1 : 0 ?>'}}">
+								<a href="<?= $work->getViewLink()?>">
+									<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($work->getMainImage())->resize(400, 0) ?>">
+									<span class="img-bgveil"></span>
+								</a>
+							</image-hover-buttons>
+							<a href="<?= $work->getViewLink()?>">
+								<figcaption>
+									<p class="instauser">
+										<?= \yii\helpers\StringHelper::truncate(Utils::l($work->name), 18, '…') ?>
+									</p>
+									<p class="price">€ <?= $work->getMinimumPrice() ?></p>
+								</figcaption>
+							</a>
+						</figure>
+					</div>	
+				</div>
+			</div>
+			<?php } ?>
+		</div>
+	</div>
+</section>
+
+
+<!-- GRID -->
+<?php /*
 <section class="grid-wrapper">
 	<div class="container">
 		<div class="section-title">
-			<span translate="todevise.index.HIGHLIGHTED_WORKS"></span>
+			Highlighted Works
 		</div>
+*/?>
+		<?php /*
 		<div>
 			<?php foreach ($moreWork as $worksGroup) { ?>
 			<?php foreach ($worksGroup["twelve"] as $i => $work) { ?>
@@ -369,6 +753,9 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 			<?php } ?>
 			<?php } ?>
 		</div>
+ 		*/ ?>
+<?php /*
 	</div>
 </section>
+*/ ?>
 <!-- /GRID -->

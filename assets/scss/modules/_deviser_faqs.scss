@@ -2,7 +2,7 @@
 // Deviser FAQs
 // ==========================================================================
 .faq-wrapper{
-    margin: 40px 0 120px;
+    margin: 117px 0 70px;//80px 0 120px;
     .section-title{
         color: $dark_grey;
         border: 0;
@@ -19,22 +19,20 @@
             border-top-left-radius: 0;
             border-top-right-radius: 0;
             .faq-title{
-                color: $almost_black;
+                color: $black;
                 text-transform: uppercase;
-                font: 16px $font-family--bold;
-                border-bottom: 1px solid $almost_black;
+                font-weight: bold;
                 padding: 0 10px 5px 0;
                 &:before{
                     font: 14px $font-family--glyphicons;
-                    content: "\e083";
-                    color: $almost_black;
-                    vertical-align: top;
-                    padding: 0 5px 7px 0;
-                    border-bottom: 1px solid $background_grey;
+                    content: "\2212";
+                    color: $black;
+                    vertical-align: middle;
+    				padding: 0 10px 0 0;
                 }
                 &.collapsed:before{
-                    content: "\e081";
-                    color: $light_grey;
+                    content: "\002b";
+                    color: $black;
                 }
                 &.collapsed{
                     border-bottom: 0;
@@ -44,8 +42,8 @@
         .faq-answer{
             padding: 5px 15px 30px;
             p{
-                color: $almost_black;
-                font: 16px $font-family--serif;
+                color: $black;
+                font-size: 14px;
                 margin: 0 23px 20px;
             }
         }
@@ -58,16 +56,16 @@
 }
 .faq-edit-empty{
     p{
-        font: 16px $font-family--serif;
+        font-size:16px;
         text-align: center;
         margin: 20px 0;
     }
 }
 .edit-faq-wrapper{
     @extend %block;
-    margin: 15px 0;
+    margin: 0;//15px 0;
     .plus-add{
-        background-color: $green;
+        background-color: $red;//$green;
         border: 1px solid $black;
         margin: 0 auto;
         font-size: 43px;
@@ -79,7 +77,7 @@
             margin: -9px 0 0 0;
         }
         &:hover{
-            background-color: $dark_green;
+            background-color: $dark_red;//$dark_green;
             @include transition-property(background-color);
             @include transition-duration(0.3s);
             @include transition-timing-function(ease-out);
@@ -87,6 +85,7 @@
     }
 }
 .edit-faq-panel{
+	width: 80%;
     @extend %block;
     background-color: $pale_white;
     padding: 5px;
@@ -94,7 +93,6 @@
     margin: 0 0 50px;
 }
 .delete-link{
-    font-family: $font-family--bold;
     color: $dark_grey;
     margin: 0 0 5px 15px;
     &:hover{
@@ -107,7 +105,6 @@
         border-bottom: 1px solid #fff!important;
         @include border-radius(0px,0px,0px,0px);
         button{
-            font-family: $font-family--bold;
             color: $black!important;
             border-top: 1px solid transparent!important;
             border-left: 1px solid transparent!important;
@@ -143,7 +140,6 @@
 }
 .add-lang{
     float: left;
-    font-family: $font-family--bold;
     display: block;
     margin: 11px 0 0 10px;
     @extend %link-red;
@@ -157,17 +153,16 @@
     margin: 10px 0;
 }
 .faq-edit-question{
-    font-family: $font-family--secondary;
     font-size: 16px;
-    
     display: block;
-    margin: 12px 0 0 0;
+    margin: 9px 0 0;//12px 0 0 0;
+    color: $new_grey;
 }
 .faq-edit-answer{
-    font-family: $font-family--secondary;
     font-size: 16px;
     background-color: $white;
-    border: 1px solid $light_grey;
+    border: none;//1px solid $light_grey;
+    color: $new_grey;
     padding: 10px;
 	height: auto;
     width:100%;
@@ -228,13 +223,17 @@
     }
 }
 .red-link-btn{
-    color: $red;
-    text-align: left;
+    color: $dark_red;
+    text-align: center;
     margin-bottom: 10px;
     display: block;
-    text-transform: uppercase;
+	//text-decoration: underline;
+    text-transform: lowercase;//uppercase;
     font-weight: bold;
-    font-family:$font-family--bold;
+    font-size: 16px;
+    &:first-letter {
+        text-transform: capitalize;
+    }
     &:hover{
         color: $dark_red;
     }
@@ -251,4 +250,40 @@
 				max-width: 286px;
 			}
 	}
+}
+.edit-faq-panel-wrapper{
+	width: 100%;
+	float: left;
+	position: relative;
+    button {
+        border: none;
+        color: $dark_grey;
+    }
+}
+/*.delete-linfs-wrapper{
+	width: 80%;
+}*/
+.delete-links-wrapper {
+    margin-right: 200px;
+}
+.faq-lang{
+	position: absolute;
+    width: 170px!important;
+    right: 0;
+    top: 20px;
+}
+.faq-row .col-sm-2 {
+    padding-right: 0;
+}
+.faq-wrapper.faq-edit-list{
+    #link-faq-done{
+        display: block;
+        margin-top: -30px;
+        position: relative;
+        float: left;
+    }
+    #btn-faq-add-question{
+        display: block;
+        width: 66.66666667%;
+    }
 }

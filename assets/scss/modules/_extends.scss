@@ -2,13 +2,15 @@
 // Extends
 // ==========================================================================
 %avatar-border{
-    border:1px solid $dark_grey;
+    border:1px solid $white;//$dark_grey;
     @include border-radius(180px,180px,180px,180px);
 }
+//.banner-deviser-content .deviser-profile .avatar img
+// es el que tenemos que poner en blanco
 %link-red{
-    color:$red!important;
+    color:$dark_red!important;
     &:hover{
-        color:$dark_red!important;
+        color:$red!important;
         text-decoration: none;
         @include transition-property(color);
         @include transition-duration(0.3s);
@@ -31,13 +33,11 @@
     @include box-shadow(0px,0px,0px,transparent) 
 }
 %white-text{
-    font-family: $font-family--serif;
     color: $white;
     font-size: 16px;
     letter-spacing: 0.7px;
 }
 %grey-text{
-    font-family: $font-family--serif;
     color: $dark-grey;
     font-size: 16px;
     letter-spacing: 0.7px;
@@ -55,12 +55,10 @@
     bottom: 0;
 }
 %sub-banner-text{
-    font-family: $font-family--serif;
+    font-family: $font-family--regular;
     line-height: 20px;
-    max-width: 250px;
     display: inline; 
-    border:1px solid $dark_grey;
-    @include size(165px,165px);
+    @include size(334px,165px);
     position: absolute;
     left: 0;
     right: 0;

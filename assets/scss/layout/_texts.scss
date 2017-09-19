@@ -1,6 +1,115 @@
 // ==========================================================================
 // Texts
 // ==========================================================================
+h1{
+	font-family: $font-family--regular;
+	font-size: 28px;
+	font-weight: bold;
+	letter-spacing: 1.2px;
+	text-transform: uppercase;
+	color: $black;
+}
+.title-underlined{
+	font-family: $font-family--regular;
+  	font-size: 20px;
+  	letter-spacing: 0.6px;
+  	color: $black;
+	text-transform: uppercase;
+	border-bottom: 1px solid $dark_grey;
+	width: 100%;
+	display: block;
+	padding: 0 0 15px;
+    margin: 0 0 15px;
+}
+.text-title{
+	font-family: $font-family--regular;
+  	font-size: 20px;
+	letter-spacing: 0.6px;
+	margin: 0px 0 5px;
+    display: block;
+}
+.title-product-name{
+	font-family: $font-family--name;
+	text-transform: uppercase;
+    font-size: 48px;
+    letter-spacing: 2.5px;
+	color: $black;
+	&.sm{
+		font-size: 26px;
+		letter-spacing: 0.3px;
+		width: 130px;
+		  white-space: nowrap;
+		  overflow: hidden;
+		  text-overflow: ellipsis;
+	}
+}
+#carousel-influencers{
+	.title-product-name {
+    	text-transform: capitalize;
+    }
+}
+.subtitle-home{
+	color: $light_grey;
+	font-size: 27px;
+	display: block;
+	text-align: center;
+	margin: 25px 0;
+}
+.category{
+	font-family: $font-family--regular;
+  	font-size: 16px;
+	letter-spacing: 0.6px;
+	text-transform: uppercase;
+	font-weight: bold;
+}
+.question{
+	font-family: $font-family--regular;
+  	font-size: 16px;
+	letter-spacing: 0.6px;
+	font-weight: bold;
+}
+.big-price{
+	font-family: $font-family--regular;
+  	font-size: 40px;
+	letter-spacing: 0.6px;
+	font-weight: bold;
+}
+.small-text{
+	font-family: $font-family--regular;
+  	font-size: 12px;
+	letter-spacing: 0.6px;
+	font-weight:300;
+}
+.topbar-item{
+	font-family: $font-family--regular;
+  	font-size: 20px;
+	letter-spacing: 0.6px;
+	text-transform: uppercase;
+}
+p{
+	font-family: $font-family--regular;
+  	font-size: 14px;
+	letter-spacing: 0.6px;
+}
+h2{
+    font-family: $font-family--regular;
+	font-weight: bold;
+    text-transform: uppercase;
+    font-size: 67px;
+    letter-spacing: 1.8px;
+    line-height: 45px;
+    display: inline-block;
+    padding: 0;
+    margin: 0 0 10px;
+}
+h3{
+    font-family: $font-family--title;
+    text-align: center;
+    text-transform: uppercase;
+    color: $light_grey;
+    font-size: 50px;
+    letter-spacing: 4px;
+}
 .white-title-lg{
 	color: $white;
 	font-size: 73px;

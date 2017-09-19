@@ -100,7 +100,7 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 						<div class="form-group">
 						<label for="weight_measure" class="col-md-2"><span translate="settings.general.WEIGHT_MEASURE"></span></label>
 							<div class="col-md-4" >
-								<ol name="weightMeasure" class="nya-bs-select" ng-model="generalSettingsCtrl.person.settings.weight_measure" ng-class="{'error-input': generalSettingsCtrl.notWeightMeasureSelected}" ng-change="generalSettingsCtrl.notWeightMeasureSelected=false" ng-show="generalSettingsCtrl.weightCharged">
+								<ol name="weightMeasure" class="nya-bs-select btn-group bootstrap-select form-control product-select" ng-model="generalSettingsCtrl.person.settings.weight_measure" ng-class="{'error-input': generalSettingsCtrl.notWeightMeasureSelected}" ng-change="generalSettingsCtrl.notWeightMeasureSelected=false" ng-show="generalSettingsCtrl.weightCharged">
 									<li nya-bs-option="weightMeasure in generalSettingsCtrl.weightMeasures">
 										<a href="#"><span ng-bind="weightMeasure"></span></a>
 									</li>

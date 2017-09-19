@@ -14,7 +14,7 @@
             height: 180px;
             position:relative;
             &.title-3{
-                padding:15px 34px 20px;
+                padding: 28px 34px 20px;
                 @media (min-width:986px) and (max-width:1199px){
                    padding:15px 6px 20px;
                 }
@@ -51,13 +51,11 @@
                     }
                 }
                 &.title-2{
-                    margin: 0 auto;
-                    width: 165px;
-                    display: block;
-                    text-align: center;
+                     margin: 0 0 0 83px;
                 }
                 .serif{
-                    font: italic 700 35px $font-family--serif;
+                    font: italic 700 37px $font-family--serif;
+					letter-spacing: -1px;
                     text-transform: none;
                     display:block;
                     @media (max-width: 768px){
@@ -72,17 +70,19 @@
                 @extend %sub-banner-text;
                 top: 10px;
                 &.tagline-1{
-                    padding: 25px 18px 0 54px;
+                    padding: 55px 0 0 145px;
+                    letter-spacing: 0.5px;
                     @media (min-width:986px) and (max-width:1199px){
                         padding: 25px 11px 0 61px;
                     }
                 }
                 &.tagline-2{
-                    text-align: center;
-                    padding: 98px 15px 0 15px;
+                    padding: 90px 15px 0 85px;
+                    letter-spacing: 0.5px;
                 }
                 &.tagline-3{
-                    padding: 66px 26px 0;
+                    padding: 41px 26px 0 112px;
+                    letter-spacing: 0.5px;
                     @media (min-width:768px) and (max-width:986px){
                         padding: 91px 29px 0;
                     }
@@ -90,4 +90,51 @@
             }
         }
     }
+}
+.sub-banner-wrapper{
+	margin: 20px 0;
+	position: relative;
+}
+.center-point{
+	width: 80px;
+    height: 80px;
+    top: -17px;
+    left: 131px;
+    z-index: 0;
+	background-color: #cacaca;
+	position: absolute;
+	@include border-radius(90px,90px,90px,90px);
+}
+.left-point{
+	width: 80px;
+    height: 80px;
+    top: 22px;
+    left: 87px;
+    z-index: 0;
+	background-color: #cacaca;
+	position: absolute;
+	@include border-radius(90px,90px,90px,90px);
+}
+.right-point{
+	width: 80px;
+    height: 80px;
+    top: -13px;
+    left: 40px;
+    z-index: 0;
+	background-color: #cacaca;
+	position: absolute;
+	@include border-radius(90px,90px,90px,90px);
+}
+.sub-banner-text-center{
+	position: absolute;
+	z-index: 1;
+}
+.sub-banner-text-left{
+	position: absolute;
+	z-index: 1;
+	top: -67px;
+}
+.sub-banner-text-right{
+	position: absolute;
+	z-index: 1;
 }

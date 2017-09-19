@@ -50,37 +50,8 @@ $this->params['person_menu_store_categories'] = $categories;
 			</div>
 			<div class="col-md-10">
 				<div class="content-store">
-					<?php if ($unpublishedWorks || count($categories) > 1) { ?>
-						<div class="cathegory-wrapper">
-							<?php if ($unpublishedWorks && $person->isDeviserEditable()) { ?>
-								<div class="col-md-3 col-sm-3 col-xs-3 pad-cathegory">
-									<a href="<?= $person->getStoreEditLink(['product_state' => \app\models\Product::PRODUCT_STATE_DRAFT])?>">
-										<div class="unpublished-square">
-											<p><span translate="person.store.UNPUBLISHED_WORKS_BR"></span></p>
-										</div>
-									</a>
-								</div>
-							<?php } ?>
-							<?php foreach ($categories as $i => $category) { ?>
-								<div class="col-md-3 col-sm-3 col-xs-3 pad-cathegory">
-									<a href="<?= $person->getStoreLink(['category' => $category->short_id])?>">
-										<figure class="cathegory">
-											<img class="<?= ($selectedCategory->short_id==$category->short_id) ? 'active' : '' ?>" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($category->getDeviserProduct()->getMainImage())->resize(240, 175) ?>">
-											<figcaption>
-												<span class="name">
-													<?= Utils::l($category->name) ?>
-												</span>
-											</figcaption>
-										</figure>
-									</a>
-								</div>
-							<?php } ?>
-						</div>
-					<?php } ?>
+					
 					<div class="store-grid">
-						<div class="title-wrapper">
-							<span class="title"><?= Utils::l($selectedCategory->name) ?></span>
-						</div>
 						<nav class="products-menu">
 							<ul>
 								<?php foreach ($selectedCategory->getDeviserSubcategories() as $i => $subcategory) { ?>
@@ -100,25 +71,22 @@ $this->params['person_menu_store_categories'] = $categories;
 												<i class="ion-android-close"></i>
 											</span>
 											<?php } ?>
-											<image-hover-buttons product-id="{{'<?= $product->short_id ?>'}}" is-loved="{{'<?=$product->isLovedByCurrentUser() ? 1 : 0 ?>'}}" is-mine="{{'<?= $product->isWorkFromCurrentUser() ? 1 : 0 ?>'}}">
-												<a href="<?= $product->getViewLink() ?>">
-													<img class="grid-image"
-														 src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getMainImage())->resize(400, 0) ?>">
-												</a>
-											</image-hover-buttons>
-											<figcaption>
-												<p class="instauser">
-												<a href="<?= $product->getViewLink()?>">
-													<?= $product->name ?>
-												</a>
-												</p>
-												<p class="price">€ <?= $product->getMinimumPrice() ?></p>
-												<?php if ($person->isPersonEditable()) { ?>
-													<a class="edit-product-icon" href="<?= $product->getEditLink()?>" translate-attr="{title: 'person.EDIT_WORK'}">
-														<i class="ion-edit"></i>
-													</a>
-												<?php } ?>
-											</figcaption>
+											<a href="<?= $product->getViewLink() ?>">
+												<img class="grid-image"
+													 src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getMainImage())->resize(400, 0) ?>">
+												<span class="img-bgveil"></span>
+											</a>
+											<a href="<?= $product->getViewLink()?>">
+												<figcaption>
+													<p class="instauser"><?= \yii\helpers\StringHelper::truncate($product->getName(), 18, '…') ?></p>
+													<p class="price">€ <?= $product->getMinimumPrice() ?></p>
+													<?php if ($person->isPersonEditable()) { ?>
+														<a class="edit-product-icon" href="<?= $product->getEditLink()?>" translate-attr="{title: 'person.EDIT_WORK'}">
+															<i class="ion-edit"></i>
+														</a>
+													<?php } ?>
+												</figcaption>
+											</a>
 										</figure>
 									</div>
 								</div>
@@ -139,7 +107,7 @@ $this->params['person_menu_store_categories'] = $categories;
 			<p><span translate="person.DELETE_WORK_QUESTION"></span></p>
 		</div>
 		<div class="modal-footer">
-			<button class="btn btn-default btn-green pull-left" ng-click="modalDeleteProductCtrl.close()"><span translate="global.CANCEL"></span></button>
+			<button class="btn btn-default btn-red pull-left" ng-click="modalDeleteProductCtrl.close()"><span translate="global.CANCEL"></span></button>
 			<button class="btn btn-default pull-right" ng-click="modalDeleteProductCtrl.ok()"><span translate="global.DELETE"></span></button>
 		</div>
 	</div>
