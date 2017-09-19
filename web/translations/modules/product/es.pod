@@ -1,5 +1,7 @@
 {
 	"product": {
+		"SPANISH":"español",
+		"ENGLISH":"inglés",
 		"detail": {
 			"PRINT_SIZE": "Tamaño de impresión",
 			"CHART_SIZES": "Tallas disponibles",
@@ -54,12 +56,12 @@
 		"basic_info": {
 			"BASIC_INFO": "Información básica de producto",
 			"TITLE": "Título",
-			"TITLE_MANDATORY": "Título in inglés es obligatorio.",
+			"TITLE_MANDATORY": "Título en {{languageList}} es obligatorio.",
 			"CATEGORIES": "Categorías",
 			"ADD_CATEGORY": "+ Añadir otra categoría",
 			"SELECT_CATEGORY": "Seleccionar categoría entera",
 			"DESCRIPTION": "Descripción",
-			"DESCRIPTION_IS_MANDATORY": "Descripción en inglés es obligatoria.",
+			"DESCRIPTION_IS_MANDATORY": "Descripción en {{languageList}} es obligatoria.",
 			"WARRANTIES": "GARANTÍA",
 			"MONTHS": "Meses",
 			"SPECIFY_WARRANTY_MONTHS": "Debe especificar los emses de garantía",
@@ -138,13 +140,14 @@
 			"ADD_NEW_COLUMN":"Añadir columna",
 			"SZ_ROWS":"Filas",
 			"ADD_NEW":"+ Añadir",
-			"SIZECHART_NAME_MANDATORY": "El nombre en inglés y español es obligatorio.",
+			"SIZECHART_NAME_MANDATORY": "El nombre en {{languageList}} es obligatorio.",
 			"SZ_ONE_COUNTRY_MANDATORY": "Un país es el mínimo requerido.",
 			"SZ_ONE_COLUMN_MANDATORY": "Una columna es el mínimo requerido.",
 			"SZ_ONE_ROW_MANDATORY": "Una fila es el mínimo requerido.",
-			"SIZECHART_COLUMNNAME_MANDATORY": "El nombre en inglés y español es obligatorio.",
+			"SIZECHART_COLUMNNAME_MANDATORY": "El nombre en {{languageList}} es obligatorio.",
 			"NEW_COLUMN":"Nueva columna",
-			"SZ_COLUMN_NAME":"Nombre columna"
+			"SZ_COLUMN_NAME":"Nombre columna",
+			"FIELD_LANGS_MANDATORY": "El campo en {{languageList}} es obligatorio."
 		}
 	}
 }

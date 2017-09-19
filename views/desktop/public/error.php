@@ -1,7 +1,7 @@
 <?php
 
 use app\assets\desktop\pub\PublicCommonAsset;
-use yii\helpers\Html;
+use yii\helpers\Url;
 
 PublicCommonAsset::register($this);
 
@@ -12,19 +12,15 @@ PublicCommonAsset::register($this);
 
 $this->title = $name;
 ?>
-<div class="site-error">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="site-error" style="color: white; text-align: center">
 
-    <div class="alert alert-danger">
-        <?= nl2br(Html::encode($message)) ?>
-    </div>
+    <p><?= Yii::t('app/public', 'ERROR_PAGE_TITLE')?></p>
 
-    <p>
-        The above error occurred while the Web server was processing your request.
-    </p>
-    <p>
-        Please contact us if you think this is a server error. Thank you.
-    </p>
+	<p><?=Yii::t('app/public', 'ERROR_PAGE_MESSAGE_1')?></p>
+
+	<p><?=Yii::t('app/public', 'ERROR_PAGE_MESSAGE_2')?></p>
+
+	<a href="<?=Url::to('/')?>"><img src="/imgs/logo.png"></a>
 
 </div>

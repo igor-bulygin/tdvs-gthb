@@ -33,15 +33,12 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 			<div class="col-md-10" ng-controller="editFaqCtrl as editFaqCtrl">
 				<div class="faq-wrapper faq-edit-list">
 					<!-- <div class="section-title">FAQ</div> -->
-					<div ng-if="editFaqCtrl.person.faq.length>0">
-						<a class="red-link-btn" href="#" ng-click="editFaqCtrl.done()"><span translate="person.faq.DONE_FAQ"></span></a></div>
 					<div class="edit-faq-wrapper" ng-cloak ng-if="editFaqCtrl.person.faq.length > 0">
-						<div>
-							<button class="btn btn-red btn-big btn-red auto-center mb-40" ng-if="editFaqCtrl.person.faq.length > 0" ng-click="editFaqCtrl.addQuestion()"><span translate="person.faq.ADD_QUESTION"></span></button>
-						</div>
+
 						<div dnd-list="editFaqCtrl.person.faq" dnd-dragover="editFaqCtrl.dragOver(index)">
 							<div class="delete-options-wrapper" ng-repeat="question in editFaqCtrl.person.faq track by $index" style="cursor:move;" dnd-draggable="question" dnd-effect-allowed="move" dnd-dragstart="editFaqCtrl.dragStart($index)" dnd-canceled="editFaqCtrl.canceled()" dnd-moved="editFaqCtrl.moved($index)">
 								<div class="delete-links-wrapper">
+									<a class="delete-link pull-right" href="#" ng-click="editFaqCtrl.deleteQuestion($index)"><span translate="person.faq.DELETE_QUESTION"></span></a>
 									<a class="delete-link pull-right" href="#" ng-click="editFaqCtrl.deleteQuestion($index)"><span translate="person.faq.DELETE_QUESTION"></span></a>
 								</div>
 								<div class="edit-faq-panel-wrapper">
@@ -76,6 +73,14 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 								</div>
 							</div>
 						</div>
+					</div>
+					<div id="link-faq-done" ng-if="editFaqCtrl.person.faq.length>0">
+						<a class="red-link-btn" href="#" ng-click="editFaqCtrl.done()">
+							<span translate="person.faq.DONE_FAQ"></span>
+						</a>
+					</div>
+					<div id="btn-faq-add-question">
+						<button class="btn btn-red btn-default auto-center mb-40" ng-if="editFaqCtrl.person.faq.length > 0" ng-click="editFaqCtrl.addQuestion()"><span translate="person.faq.ADD_QUESTION"></span></button>
 					</div>
 					<div class="faq-edit-empty" ng-if="editFaqCtrl.person.faq.length === 0" ng-cloak>
 						<img class="sad-face" src="/imgs/sad-face.svg">

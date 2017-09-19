@@ -2,7 +2,7 @@
 	"use strict";
 
 	function controller(productDataService, toastr, Upload, uploadDataService, $scope, UtilService, $uibModal, $rootScope, 
-		productEvents, $timeout, dragndropService) {
+		productEvents, $timeout, dragndropService,$translate) {
 		var vm = this;
 		vm.has_error = UtilService.has_error;
 		vm.name_language = vm.tags_language = vm.description_language = 'es-ES';
@@ -20,12 +20,28 @@
 		vm.addTag = addTag;
 		vm.removeTag = removeTag;
 		vm.firstCategorySelection=true;
-		
+		vm.mandatory_langs_names="";
+		//we need this counter to know how many categories we have in order to broadcast right vars in setVariations event
+		vm.category_counter = 0;
+
 		function init(){
-			//init values or functions
+			setMandatoryLanguagesNames();
 		}
 
 		init();
+
+		//	TODO unify this (repeated function on variations.js) as a component field from creation/edition when files free
+		function setMandatoryLanguagesNames() {
+			angular.forEach(Object.keys(_langs_required), function (lang) {
+				var translationLang="product.".concat(_langs_required[lang].toUpperCase());
+				$translate(translationLang).then(function (tr) {
+					if (vm.mandatory_langs_names.length>0) {
+						vm.mandatory_langs_names=vm.mandatory_langs_names.concat(', ');
+					}
+					vm.mandatory_langs_names=vm.mandatory_langs_names.concat(tr);
+				});
+			});
+		}
 
 		//categories
 		function addCategory() {
@@ -56,8 +72,10 @@
 				vm.product.categories[index_helper] = category;
 				//send event to get tags by category
 				$rootScope.$broadcast(productEvents.setVariations, {categories: vm.product.categories, isFirstSelection:vm.firstCategorySelection});
+				vm.category_counter += 1;
 				vm.product.emptyCategory=false;
-				vm.firstCategorySelection=false;
+				if(vm.category_counter === vm.product.categories.length)
+					vm.firstCategorySelection=false;
 			}
 			
 		}

@@ -58,12 +58,11 @@ app\components\assets\PublicHeader2Asset::register($this);
 				<?php } else {
 					$person = Yii::$app->user->identity; /* @var \app\models\Person $person */?>
 					<li class="dropdown log">
-						<a class="logued-text" href="#" class="dropdown-toggle log" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><!--span translate="header.MY_TODEVISE"></span--><img class="avatar-logued-user" src="<?= $person->getAvatarImage() ?>"></a>
+						<a class="logued-text" href="#" class="dropdown-toggle log" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></span--><img class="avatar-logued-user" src="<?= $person->getAvatarImage() ?>"></a>
 						<div class="dropdown-menu admin-wrapper black-form">
 							<ul class="menu-logued">
 								<li class="header-item">
 									<a href="<?= $person->getMainLink()?>"><span><?=$person->getName()?></span></a>
-									<img class="avatar-logued-user" src="<?= $person->getAvatarImage() ?>">
 								</li>
 								<?php if ($person->isAdmin()) { ?>
 									<li><a href="<?=Url::to('/admin')?>" translate="header.ADMINISTRATION"></a></li>

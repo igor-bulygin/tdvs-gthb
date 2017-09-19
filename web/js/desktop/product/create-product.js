@@ -171,7 +171,7 @@
 			}
 
 			if (vm.product.product_state !== 'product_state_draft') {
-				required = productService.validate(vm.product);
+				required = productService.validate(vm.product, vm.tags);
 				if (vm.product.emptyCategory) {
 					required.push("emptyCategory");
 				}

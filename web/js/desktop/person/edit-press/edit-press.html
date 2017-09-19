@@ -11,12 +11,12 @@
 		<div ng-if="editPressCtrl.images.length === 0" class="faq-edit-empty" ng-cloak>
 			<img class="sad-face" src="/imgs/sad-face.svg">
 			<p><span translate="person.press.ANY_PRESS"></span></p>
-			<button class="btn btn-default btn-green" ngf-select="editPressCtrl.upload($files, $invalidFiles)" ngf-accept="'image/*'" ngf-multiple="true"><span translate="person.press.ADD_PRESS"></span></button>
+			<button class="btn btn-default btn-red" ngf-select="editPressCtrl.upload($files, $invalidFiles)" ngf-accept="'image/*'" ngf-multiple="true"><span translate="person.press.ADD_PRESS"></span></button>
 		</div>
 		<div class="row press-3" ng-if="editPressCtrl.images.length > 0" ng-cloak>
 			<form name="editPressCtrl.form" ng-cloak>
 				<div class="col-sm-6" ng-if="editPressCtrl.isDropAvailable">
-					<button class="btn btn-red btn-big btn-red" ngf-drop ngf-select ngf-change="editPressCtrl.upload($files, $invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="editPressCtrl.isDropAvailable" ngf-multiple="true">
+					<button class="btn btn-red btn-default btn-header" ngf-drop ngf-select ngf-change="editPressCtrl.upload($files, $invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="editPressCtrl.isDropAvailable" ngf-multiple="true">
 						<span>Add photo</span>
 					</button>
 					<!--<div class="photo-loader-press" class="menu-category list-group" ngf-drop ngf-select ngf-change="editPressCtrl.upload($files, $invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="editPressCtrl.isDropAvailable" ngf-multiple="true">
@@ -38,7 +38,7 @@
 				<div ui-sortable ng-model="editPressCtrl.images" ng-cloak>
 					<div class="col-sm-3" ng-repeat="item in editPressCtrl.images">
 						<div class="image-press-edit">
-							<span class="ion-android-close x-close" style="background-color: black" ng-click="editPressCtrl.deleteImage($index)"></span>
+							<span ng-click="editPressCtrl.deleteImage($index)"></span>
 							<img class="grid-image draggable-img" ng-src="{{item.url}}" draggable="false">
 						</div>
 					</div>
