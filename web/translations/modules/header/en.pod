@@ -14,7 +14,7 @@
 		"SHOP_BY_DEPARTMENT": "Shop by department",
 		"EXPLORE_BOXES": "Explore Boxes",
 		"DISCOVER_DEVISERS": "Discover devisers",
-		"TREND_SETTERS": "Trend-setters",
+		"TREND_SETTERS": "Influencers",
 		"PROJECTS": "Projects"
 	}
 }
