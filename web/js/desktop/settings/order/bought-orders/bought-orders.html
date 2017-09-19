@@ -1,23 +1,23 @@
-<div class="col-md-12 store text-right">
+<div class="col-md-12 text-right">
 	<div class="col-md-2 col-md-offset-9">
 		<span style="color: #9D9D9D;" ng-cloak><span translate="settings.orders.TOTAL"></span>: </span> <label> {{boughtOrdersCtrl.ordersTotalPrice | currency }}</label>
 	</div>
 </div>
-<div class="col-md-10 col-md-offset-1  store" style="padding: 20px;">
+<div class="col-md-10 col-md-offset-1" style="padding: 20px;">
 	<div class="panel">
 		<uib-accordion>
 			<div uib-accordion-group ng-repeat="order in boughtOrdersCtrl.orders" ng-class="col-md-12" style="border:0 none !important;">
 				<uib-accordion-heading class="row" style="font-weight: lighter;">
 					<div class="row">
-						<span class="col-md-2">
+						<span class="col-md-3">
 							<span class="col-md-12" style="color: #9D9D9D;" translate="settings.orders.INVOICE_NUMBER"></span>
 							<span class="col-md-12" ng-bind="order.id"></span>
 						</span>
-						<span class="col-md-2">
+						<span class="col-md-3">
 							<span class="col-md-12" style="color: #9D9D9D;" translate="settings.orders.TOTAL_PRICE"></span>
 							<span class="col-md-12" ng-cloak>{{ order.total| number:2}}</span>
 						</span>
-						<span class="col-md-2">
+						<span class="col-md-3">
 							<span class="col-md-12"  style="color: #9D9D9D;" translate="settings.orders.PURCHASE_DATE"></span>
 							<span class="col-md-12">{{boughtOrdersCtrl.parseDate(order.order_date.sec*1000) | date:'dd/MM/yy'}}</span>
 						</span>

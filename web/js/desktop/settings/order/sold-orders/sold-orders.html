@@ -1,9 +1,9 @@
-<div class="col-md-12 store text-right">
+<div class="col-md-12 text-right">
 	<div class="col-md-2 col-md-offset-9">
 		<span style="color: #9D9D9D;" ng-cloak><span translate="settings.orders.TOTAL"></span>: </span> <label> {{soldOrdersCtrl.ordersTotalPrice | currency }}</label>
 	</div>
 </div>
-<div class="col-md-10 col-md-offset-1 store" style="padding: 20px;">
+<div class="col-md-10 col-md-offset-1" style="padding: 20px;">
 	<div class="panel">
 		<uib-accordion close-others="false">
 			<div uib-accordion-group ng-repeat="order in soldOrdersCtrl.orders" ng-class="col-md-12" ng-cloak style="border:0 none !important;">
@@ -42,7 +42,7 @@
 							<div class="col-md-6 row">
 								<div class="col-md-12">
 									<span style="color: #9D9D9D;" translate="settings.orders.YOU_RECEIVE"></span>
-									<label ng-cloak">{{order.totalPrice | currency }}</label>
+									<label ng-cloak>{{order.totalPrice | currency }}</label>
 								</div>
 								<div class="col-md-12">
 									<span style="color: #9D9D9D;" translate="settings.orders.TODEVISE_COMMISSION"></span>
@@ -50,7 +50,7 @@
 								</div>
 								<div class="col-md-12">
 									<span style="color: #9D9D9D;" translate="settings.orders.SHIPPING"></span>
-									<label ng-cloak">{{order.totalShippingPrice | currency }}</label>
+									<label ng-cloak>{{order.totalShippingPrice | currency }}</label>
 								</div>
 							</div>
 							<div class="col-md-12 text-right">
