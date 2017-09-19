@@ -15,9 +15,9 @@
 			"WRITE_STATEMENT": "Escribe el statement / misión / biografía de tu marca.",
 			"ENRICH_SECTION": "Enriquece tu perfil con fotos",
 			"ADD_PHOTOS": "Añadir fotos",
-			"MIN_MAX_PHOTOS": "Por favor, añade un mínimo de 3 y un máximo de 5 fotos.",
+			"MIN_MAX_PHOTOS": "Necesitas añadir 3 fotos.",
 			"MIN_PHOTOS": "Necesitas al menos 3 fotos para guardar cambios en tu perfil.",
-			"MAX_PHOTOS": "Puedes añadir un máximo de 5 fotos. Por favor, elimina una o más fotos si quieres añadir más.",
+			"MAX_PHOTOS": "Puedes añadir un máximo de 3 fotos. Por favor, elimina una o más fotos si quieres añadir más.",
 			"SAVE_EXIT": "Guardar cambios y salir",
 			"SAVE_CHANGES": "Guardar cambios"
 		},
