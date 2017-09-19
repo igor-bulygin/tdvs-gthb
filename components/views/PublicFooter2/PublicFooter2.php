@@ -41,7 +41,7 @@ $footerMode = 'collapsed';
 				<div class="title text-center">Do you want to become a deviser?</div>
 				<a href="<?= Url::to(["public/become-deviser"]) ?>" class="btn btn-medium btn-red mt-10 auto-center">Become a deviser</a>
 				<div class="title text-center mt-40">Do you want to become an influencer?</div>
-				<a href="#" class="btn btn-medium btn-transparent mt-10 auto-center">Become a influencer</a>
+				<a href="<?= Url::to(["public/become-influencer"]) ?>" class="btn btn-medium btn-transparent mt-10 auto-center">Become a influencer</a>
 			</div>
 			<div class="col-sm-3">
 				<div class="title">Subscribe to our newsletter</div>

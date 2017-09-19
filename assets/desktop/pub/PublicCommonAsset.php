@@ -11,6 +11,7 @@ class PublicCommonAsset extends AssetBundle {
 	];
 	public $js = [
 		'js/desktop/public-2/become-deviser.js',
+		'js/desktop/public-2/become-influencer.js',
 		'js/desktop/public-2/create-account.js',
 		'js/desktop/public-2/login.js',
 		'js/desktop/public-2/authentication-required.js',
