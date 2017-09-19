@@ -110,10 +110,10 @@
 					delete file.progress;
 				}, 1000);
 				//parse images
-				vm.images.unshift({
+				vm.images.push({
 					url: currentHost() + '/' + data.data.url
 				});
-				vm.product.media.photos.unshift({
+				vm.product.media.photos.push({
 					name: data.data.filename
 				});
 				var index=-1;
