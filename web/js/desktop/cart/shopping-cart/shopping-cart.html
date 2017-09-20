@@ -6,7 +6,7 @@
 	<table class="table checkout-table" ng-repeat="pack in shoppingCartCtrl.cart.packs">
 		<thead>
 			<tr>
-				<td class="deviser"><img class="avatar-default small" src="/imgs/avatar-1.jpg"></td>
+				<td class="deviser"><img class="avatar-default small" ng-src="{{pack.deviser_info.photo}}"></td>
 				<td class="deviser-name"><a ng-href="{{pack.deviser_info.url}}" ng-attr-title="{{pack.deviser_info.name}}"><span class="deviser-name" ng-bind="pack.deviser_info.name"></span></a></td>
 				<td></td>
 				<td class="quantity pt-40"><span class="title-checkout deviser" translate="cart.QUANTITY"></span></td>
