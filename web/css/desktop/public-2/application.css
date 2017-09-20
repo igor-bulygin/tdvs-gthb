@@ -5956,7 +5956,9 @@ h3 {
 
 .create-deviser-account-wrapper {
   padding: 30px 200px 200px;
-  background-color: #1C1919; }
+  background-color: #1C1919;
+  float: left;
+  width: 100%; }
   .create-deviser-account-wrapper .logo {
     width: 110px;
     margin: 0 auto; }
