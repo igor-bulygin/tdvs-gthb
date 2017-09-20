@@ -118,6 +118,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 					<div class="product-data-wrapper">
 						<div class="product-data">
 							<span class="title" ng-bind="detailProductCtrl.product.name"></span>
+							<?php /*
 							<span class="score">
 								<i class="ion-ios-star"></i>
 								<i class="ion-ios-star"></i>
@@ -126,6 +127,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 								<i class="ion-ios-star"></i>
 							</span>
 							<span class="number-score">(20)</span>
+							*/ ?>
 						</div>
 						<div class="product-data no-border">
 							<div class="price-stock pull-left">
