@@ -14,7 +14,7 @@
 		vm.biography_language = _lang;
 		vm.loading=true;
 		vm.images = [];
-		vm.maxImages=5;
+		vm.maxImages=3;
 		vm.minImages=3;
 		vm.mandatory_langs=Object.keys(_langs_required);
 		vm.mandatory_langs_names="";
