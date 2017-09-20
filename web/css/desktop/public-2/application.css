@@ -2149,8 +2149,7 @@ h3 {
 
 .error-404-text {
   text-align: left;
-  font-size: 30px;
-  line-height: 32px; }
+  font-size: 30px; }
 
 .error-404-pd {
   font-size: 30px;
@@ -7885,6 +7884,30 @@ input:checked + .slider:before {
 .bank-settings-wrapper label {
   margin-top: 7px;
   color: #6b6b6b; }
+
+.about-slide-1 {
+  background-image: url(/imgs/aboutus1.png);
+  width: 100%;
+  float: left;
+  min-height: 603px; }
+
+.about-slide-2 {
+  background-image: url(/imgs/aboutus2.png);
+  width: 100%;
+  float: left;
+  min-height: 603px; }
+
+.about-slide-3 {
+  background-image: url(/imgs/aboutus3.png);
+  width: 100%;
+  float: left;
+  min-height: 603px; }
+
+.about-slide-4 {
+  background-image: url(/imgs/aboutus4.png);
+  width: 100%;
+  float: left;
+  min-height: 603px; }
 
 footer {
   color: #e9e9e9;
