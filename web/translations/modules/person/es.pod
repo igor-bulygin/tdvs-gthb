@@ -1,5 +1,7 @@
 {	
 	"person": {
+		"SPANISH":"español",
+		"ENGLISH":"inglés",
 		"about": {
 			"EDIT_ABOUT": "Editar perfil",
 			"SEE_RESUME": "Ver CV",

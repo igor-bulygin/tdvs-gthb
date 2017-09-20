@@ -1,5 +1,7 @@
 {
 	"person": {
+		"SPANISH":"spanish",
+		"ENGLISH":"english",
 		"about": {
 			"EDIT_ABOUT": "Edit about",
 			"SEE_RESUME": "See resume",
