@@ -23,11 +23,13 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 <!-- BANNER-->
 <div class="bs-example" data-example-id="simple-carousel">
 	<div class="carousel slide" id="carousel-example-generic" data-ride="carousel">
+		<?php if(count($banners) > 1) { ?>
 		<ol class="carousel-indicators">
 			<?php foreach ($banners as $i => $banner) { ?>
 				<li data-target="#carousel-example-generic" data-slide-to="<?= $i ?>" class="<?= ($banner["active"]) ? 'active' : '' ?>"></li>
 			<?php } ?>
 		</ol>
+		<?php } ?>
 		<div class="carousel-inner home-carousel" role="listbox">
 			<?php foreach ($banners as $i => $banner) { ?>
 
@@ -39,18 +41,20 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 			<?php } ?>
 		</div>
 		<!-- Controls -->
-		  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+		<?php if(count($banners) > 1) { ?>
+		<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
 			<span class="glyphicon glyphicon-chevron-left banner-btn" aria-hidden="true">
 				<i class="ion-ios-arrow-left"></i>
 			</span>
 			<span class="sr-only"><span translate="global.PREVIOUS"></span></span>
-		  </a>
-		  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+		</a>
+		<a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
 			<span class="glyphicon glyphicon-chevron-right banner-btn" aria-hidden="true">
 				<i class="ion-ios-arrow-right"></i>
 			</span>
 			<span class="sr-only"><span translate="global.NEXT"></span></span>
-		  </a>
+		</a>
+		<?php } ?>
 	</div>
 </div>
 <!-- /BANNER -->

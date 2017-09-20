@@ -703,7 +703,8 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 											<a href="<?= $product->getViewLink() ?>">
 												<figcaption>
 													<p class="instauser">
-														<?= \yii\helpers\StringHelper::truncate(Utils::l($product->getName()), 18, '…') ?>
+														<?= \yii\helpers\StringHelper::truncate($product->getName(), 18, '…') ?>
+														<!--<?= \yii\helpers\StringHelper::truncate(Utils::l($product->getName()), 18, '…') ?>-->
 													</p>
 													<p class="price">€ <?= $product->getMinimumPrice() ?></p>
 												</figcaption>

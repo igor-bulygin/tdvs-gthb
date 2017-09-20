@@ -36,6 +36,7 @@ class PostmanEmail extends CActiveRecord
 
 	const EMAIL_CONTENT_TYPE_DEVISER_REQUEST_INVITATION = 'deviser-request-invitation';
 	const EMAIL_CONTENT_TYPE_DEVISER_INVITATION = 'deviser-invitation';
+	const EMAIL_CONTENT_TYPE_INFLUENCER_REQUEST_INVITATION = 'influencer-request-invitation';
 	const EMAIL_CONTENT_TYPE_INFLUENCER_INVITATION = 'influencer-invitation';
 	const EMAIL_CONTENT_TYPE_ORDER_PAID = 'order-paid';
 	const EMAIL_CONTENT_TYPE_CONTACT_MESSAGE = 'contact-message';

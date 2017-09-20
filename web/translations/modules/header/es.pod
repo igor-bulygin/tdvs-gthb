@@ -12,9 +12,9 @@
 		"SETTINGS": "Ajustes",
 		"LOGOUT": "Logout",
 		"SHOP_BY_DEPARTMENT": "Comprar por departamento",
-		"EXPLORE_BOXES": "Explorar Cajas",
+		"EXPLORE_BOXES": "Explorar Boxes",
 		"DISCOVER_DEVISERS": "Descubrir devisers",
-		"TREND_SETTERS": "Tendencias",
+		"TREND_SETTERS": "Influencers",
 		"PROJECTS": "Proyectos"
 	}
 }
