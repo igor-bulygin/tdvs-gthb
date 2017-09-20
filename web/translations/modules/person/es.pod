@@ -45,7 +45,8 @@
 			"UPLOAD_PROFILE_PHOTO": "Añadir foto de perfil",
 			"PLS_UPLOAD_PROFILE": "Por favor añade<br/>una foto de perfil",
 			"UPLOAD_COVER_PHOTO": "Añadir foto de portada",
-			"PLS_UPLOAD_COVER": "Por favor añade<br/>una foto de portada"
+			"PLS_UPLOAD_COVER": "Por favor añade<br/>una foto de portada",
+			"MAX_CHARACTERS_REACHED":"Número máximo de caracteres alcanzado"
 		},
 		"faq": {
 			"DONE_FAQ": "He acabado de editar mis FAQ's",

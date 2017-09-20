@@ -45,7 +45,8 @@
 			"UPLOAD_PROFILE_PHOTO": "Upload profile photo",
 			"PLS_UPLOAD_PROFILE": "Please upload a<br/>profile photo",
 			"UPLOAD_COVER_PHOTO": "Upload cover photo",
-			"PLS_UPLOAD_COVER": "Please upload a<br/>cover photo"
+			"PLS_UPLOAD_COVER": "Please upload a<br/>cover photo",
+			"MAX_CHARACTERS_REACHED":"Maximum characters number reached"
 		},
 		"faq": {
 			"DONE_FAQ": "I'm done editing FAQ's",
