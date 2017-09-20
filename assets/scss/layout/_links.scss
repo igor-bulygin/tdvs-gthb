@@ -5,12 +5,12 @@
 	@extend %link-red;
 }
 .green-link{
-	color: $dark_green;
+	color: $dark_red;
 	text-transform: uppercase;
 	&:hover{
-		color: $green;
+		color: $red;
 	}
 	&:focus{
-		color: $green;
+		color: $red;
 	}
 }
