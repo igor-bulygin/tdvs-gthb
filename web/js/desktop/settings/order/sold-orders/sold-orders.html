@@ -91,22 +91,24 @@
 								</div>
 								<div ng-switch-when="aware">
 									<div ng-if="!pack.loading" ng-cloak>
-										<div class="col-md-12  mb-20" ng-if="!pack.editInfo" ng-cloak>
-											<div class="col-md-3 col-md-offset-1">
+										<div class="col-md-12 mt-20 no-pad mb-20" ng-if="!pack.editInfo" ng-cloak>
+											<div class="col-md-6 no-pad">
 												<label style="color: #9D9D9D;">1. <span translate="settings.orders.IM_AWARE"></span><span class="ion-checkmark-circled red-text"></span></label>
 											</div>
-											<div class="col-md-6 col-md-offset-2">
+											<div class="col-md-6 no-pad">
 												<label><span translate="settings.orders.IM_PREPARING"></span></label>
 											</div>
 										</div>
+										
 										<form name="soldOrdersCtrl.shippingForm" class="form-horizontal" >
-											<div class="form-group col-md-5">
+										<div class="col-md-12 no-pad">
+											<div class="form-group col-md-5 no-pad">
 												<span for="shippingCompany" class="col-md-12" translate="settings.orders.SHIPPING_COMPANY"></span>
 												<div class="col-md-12">
 													<input type="text" name="shippingCompany" class="form-control" ng-class="{'error-input': soldOrdersCtrl.has_error(soldOrdersCtrl.shippingForm, soldOrdersCtrl.shippingForm.shippingCompany)}" ng-model="soldOrdersCtrl.shippingCompany" required>
 												</div>
 												<form-errors class="col-md-12" field="soldOrdersCtrl.shippingForm.shippingCompany" condition="soldOrdersCtrl.has_error(soldOrdersCtrl.shippingForm, soldOrdersCtrl.shippingForm.shippingCompany)"></form-errors>
-												<span for="eta" class="col-md-12 mt-20" translate="settings.orders.ETA"></span> <span style="color: #9D9D9D;" translate="global.OPTIONAL"></span>
+												<span for="eta" class="col-md-12 mt-20" translate="settings.orders.ETA"></span> <span class="col-md-12" style="color: #9D9D9D;" translate="global.OPTIONAL"></span>
 												<div class="col-md-12">
 													<input type="text" name="eta" class="form-control" ng-model="soldOrdersCtrl.eta">
 												</div>
@@ -122,6 +124,7 @@
 													<input type="text" name="trackLink" class="form-control" ng-model="soldOrdersCtrl.trackLink">
 												</div>
 											</div>
+										</div>
 											<span class="form-group col-md-12 mt-20" translate="settings.orders.MOVE_TO_PAST_ORDERS"></span>
 											<div class="form-group col-md-12">
 												<button class="btn btn-green" ng-click="soldOrdersCtrl.markPackShipped(order,pack)" ng-disabled="!soldOrdersCtrl.shippingForm.$valid">
@@ -138,7 +141,7 @@
 								</div>
 								<div ng-switch-when="shipped">
 									<div class="col-md-12 text-right">
-										<button class="btn btn-green" ng-click="soldOrdersCtrl.editShippingData(pack)"><span translate="global.EDIT"></span></button>
+										<button class="btn btn-small btn-red mt-20" ng-click="soldOrdersCtrl.editShippingData(pack)"><span translate="global.EDIT"></span></button>
 									</div>
 									<div class="col-md-12 mt-20 text-right">
 										<div class="col-md-6">

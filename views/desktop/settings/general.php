@@ -108,7 +108,7 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 								<span class="purple-text col-xs-12" ng-if="generalSettingsCtrl.showInvalid && generalSettingsCtrl.notWeightMeasureSelected" translate="settings.general.SELECT_MEASUREMENT"></span>
 							</div>
 							<div class="col-md-6 text-right">
-								<button class="btn btn-default btn-green col-md-offset-10 col-md-2" ng-click="generalSettingsCtrl.update()" ng-disabled="generalSettingsCtrl.saving" translate="global.SAVE"></button>
+								<button class="btn btn-small btn-red pull-right" ng-click="generalSettingsCtrl.update()" ng-disabled="generalSettingsCtrl.saving" translate="global.SAVE"></button>
 								<span class="purple-text col-xs-12" ng-if="generalSettingsCtrl.showInvalid" translate="settings.FILL_ALL_FIELDS"></span>
 							</div>
 						</div>
