@@ -3,7 +3,7 @@
 		"EXPLORE_BOXES": "Explore boxes",
 		"SEARCH_KEYWORD": "Search keyword",
 		"SEARCHING": "Searching...",
-		"WE_FOUND_X_RESULTS": "We found {{ counter }} results with the keywords ",
+		"WE_FOUND_X_RESULTS": "We found {{ counter }} results with the keywords \"<span class='key'>{{keys}}</span>\"",
 		"FILTER_BY_COUNTRY": "Filter by location",
 		"SEE_MORE": "See more",
 		"FILTER_BY_THEME": "Filter by category",
