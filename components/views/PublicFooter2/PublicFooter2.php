@@ -14,7 +14,7 @@ $footerMode = 'collapsed';
 ?>
 
 <!-- FOOTER -->
-<footer class="<?= ($footerMode=='expanded') ? 'untoggled' : '' ?>">
+<footer class="<?= ($footerMode=='expanded') ? 'untoggled' : '' ?>" id="main_footer">
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-3">
