@@ -341,6 +341,7 @@ $config = [
 
 				/********************************** @deprecated routes ************************************************/
 
+				/*
 				// Public routing
 				'/index-old' => 'public/index-old',
 
@@ -377,6 +378,7 @@ $config = [
 				//Link for deviser work photo upload
 				'<slug:[0-9a-z-A-Z\-]*?>/upload-product-photo/<short_id:\w{8}>/' => 'deviser/upload-product-photo',
 
+				*/
 				/******************************************************************************************************/
 
 
