@@ -4,11 +4,11 @@
 			<a ng-href="{{person.main_link}}">
 			<figure class="showcase influencers">
 				<button class="btn btn-default btn-follow"><i class="ion-star"></i><span translate="discover.FOLLOW"></span></button>
-				<img class="deviser-discover-img" ng-src="{{ person.url_images + person.media.header_cropped }}" class="showcase-image">
+				<img class="deviser-discover-img" ng-src="{{ person.header_image }}" class="showcase-image">
 				<figcaption>
 					<!--img class="showcase-image" ng-src="{{person.url_avatar}}"-->
 					<span class="name" ng-bind="person.name"></span>
-					<span class="location" ng-bind="person.city"></span>
+					<span class="location ng-class:{'allcaps': person.type.indexOf(2)>=0}" ng-bind="person.city"></span>
 				</figcaption>
 			</figure>
 			</a>

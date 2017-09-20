@@ -3,7 +3,7 @@
 		"EXPLORE_BOXES": "Explorar cajas",
 		"SEARCH_KEYWORD": "Palabras clave de búsqueda",
 		"SEARCHING": "Buscando...",
-		"WE_FOUND_X_RESULTS": "Hemos encontrado {{ counter }} resultados con las palabras clave ",
+		"WE_FOUND_X_RESULTS": "Hemos encontrado {{ counter }} resultados con las palabras clave \"<span class='key'>{{keys}}</span>\"",
 		"FILTER_BY_COUNTRY": "Filtrar por ubicación",
 		"SEE_MORE": "Ver más",
 		"FILTER_BY_THEME": "Filtrar por categoría",

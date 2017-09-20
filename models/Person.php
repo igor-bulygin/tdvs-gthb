@@ -739,7 +739,9 @@ class Person extends CActiveRecord implements IdentityInterface
 					'id' => 'short_id',
 					'slug',
 					'name' => "name",
-					'url_avatar' => "avatarImage128",
+					'url_avatar' => "profileImage",
+					"header_image" => 'headerImage',
+					"profile_image" => 'profileImage',
 					'main_link' => 'mainLink',
 					'store_link' => 'storeLink',
 					'loved_link' => 'lovedLink',
@@ -774,7 +776,9 @@ class Person extends CActiveRecord implements IdentityInterface
 					'account_state',
 					'name' => "name",
 					'url_images' => 'urlImagesLocation',
-					'url_avatar' => "avatarImage128",
+					'url_avatar' => "profileImage",
+					"header_image" => 'headerImage',
+					"profile_image" => 'profileImage',
 					'main_link' => 'mainLink',
 					'store_link' => 'storeLink',
 					'loved_link' => 'lovedLink',
@@ -815,7 +819,9 @@ class Person extends CActiveRecord implements IdentityInterface
 					'name' => 'name',
 					'email' => 'email',
 					'url_images' => 'urlImagesLocation',
-					'url_avatar' => "avatarImage128",
+					'url_avatar' => "profileImage",
+					"header_image" => 'headerImage',
+					"profile_image" => 'profileImage',
 					'main_link' => 'mainLink',
 					'store_link' => 'storeLink',
 					'loved_link' => 'lovedLink',
@@ -980,15 +986,44 @@ class Person extends CActiveRecord implements IdentityInterface
 	}
 
 	/**
-	 * Get a resized version of avatar image, to 128px width
+	 * Get a resized version of header image, to 1170px width
 	 *
 	 * @return string
 	 */
-	public function getAvatarImage128()
+	public function getHeaderImage($width = 1170, $height = 0)
 	{
-		$image = $this->getAvatarImage();
-		// force max width
-		$url = Utils::url_scheme() . Utils::thumborize($image)->resize(128, 0);
+		$url = null;
+
+		$image = null;
+		if (Person::existMediaFile($this->mediaMapping->header_cropped)) {
+			$image = Person::getUrlImagesLocation() . $this->mediaMapping->header_cropped;
+		} elseif (Person::existMediaFile($this->mediaMapping->header)) {
+			$image = Person::getUrlImagesLocation() . $this->mediaMapping->header;
+		}
+		if ($image) {
+			$url = Utils::url_scheme() . Utils::thumborize($image)->resize($width, $height);
+		}
+
+		return $url;
+	}
+	/**
+	 * Get a resized version of profile image, to 155x155
+	 *
+	 * @return string
+	 */
+	public function getProfileImage($width = 155, $height = 155)
+	{
+		$url = 'imgs/default-avatar.png';
+
+		$image = null;
+		if (Person::existMediaFile($this->mediaMapping->profile_cropped)) {
+			$image = Person::getUrlImagesLocation() . $this->mediaMapping->profile_cropped;
+		} elseif (Person::existMediaFile($this->mediaMapping->profile)) {
+			$image = Person::getUrlImagesLocation() . $this->mediaMapping->profile;
+		}
+		if ($image) {
+			$url = Utils::url_scheme() . Utils::thumborize($image)->resize($width, $height);
+		}
 
 		return $url;
 	}
@@ -1201,7 +1236,9 @@ class Person extends CActiveRecord implements IdentityInterface
 			"id" => $this->short_id,
 			"slug" => $this->slug,
 			"name" => $this->personalInfoMapping->getVisibleName(),
-			"url_avatar" => $this->getAvatarImage128(),
+			"url_avatar" => $this->getProfileImage(),
+			"header_image" => $this->getHeaderImage(),
+			"profile_image" => $this->getProfileImage(),
 			'main_link' => $this->getMainLink(),
 			'store_link' => $this->getStoreLink(),
 			'loved_link' => $this->getLovedLink(),

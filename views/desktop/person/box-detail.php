@@ -1,7 +1,6 @@
 <?php
 
 use app\assets\desktop\deviser\GlobalAsset;
-use app\helpers\Utils;
 use app\models\Person;
 use yii\helpers\Json;
 
@@ -30,7 +29,7 @@ $this->registerJs("var box = ".Json::encode($box), yii\web\View::POS_HEAD, 'box-
 			<div class="container">
 			<div class="col-md-8 avatar-boxes-wrapper">
 				<i class="ion-ios-arrow-left"></i>
-				<img class="avatar-header-boxes" src="<?=$person->getAvatarImage128()?>">
+				<img class="avatar-header-boxes" src="<?=$person->getProfileImage()?>">
 				<?php if ($person->isConnectedUser()) { ?>
 					<a href="<?=$person->getBoxesLink()?>">
 						<span>My profile</span>

@@ -14,7 +14,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 
 <div class="banner-deviser" ng-controller="personHeaderCtrl as personHeaderCtrl">
 	<div class="container pad-about" ng-if="!personHeaderCtrl.editingHeader" ng-cloak>
-		<img class="cover" ng-src="{{personHeaderCtrl.header}}">
+		<img class="cover" ng-src="{{personHeaderCtrl.person.header_image}}">
 		<div class="banner-deviser-content">
 			<div class="grey-overlay"></div>
 			<div class="container">
@@ -24,7 +24,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 							<div class="icon-deviser">
 								<img src="/imgs/deviser.svg">
 							</div>
-							<img class="cover" ng-src="{{personHeaderCtrl.profile || '/imgs/default-avatar.png'}}">
+							<img class="cover" ng-src="{{personHeaderCtrl.person.profile_image}}">
 						</div>
 						<div class="type-of-user">
 							Deviser

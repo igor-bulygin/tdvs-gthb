@@ -133,7 +133,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 														</a>
 														<figcaption>
 															<a ng-href="{{product.link}}">
-																<p class="instauser">{{product.name}}</p>
+																<p class="instauser" ng-bind="editStoreCtrl.truncateString(product.name, 18, '…')"></p>
 																<p class="price">€{{product.min_price}}</p>
 															</a>
 															<a href="" class="edit-product-icon" ng-href="{{product.edit_link}}" title="Edit work">
