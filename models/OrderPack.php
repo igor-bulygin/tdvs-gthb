@@ -175,7 +175,7 @@ class OrderPack extends EmbedModel
 		$deviser_info = [
 			"slug" => $deviser->slug,
 			"name" => $deviser->personalInfoMapping->getVisibleName(),
-			"photo" => $deviser->getAvatarImage128(),
+			"photo" => $deviser->getProfileImage(),
 			'url' => $deviser->getMainLink(),
 		];
 
