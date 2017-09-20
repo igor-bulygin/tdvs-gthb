@@ -142,7 +142,7 @@
         top: 10px;
         font-size: 18px;
         color: $black;
-        @include size(30px,30px);
+        @include size(20px,20px);//30
         text-align: center;
         padding-top: 3px;
 		cursor:pointer;
