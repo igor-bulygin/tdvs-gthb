@@ -1,7 +1,7 @@
 (function() {
 
 	function controller(personDataService, UtilService, languageDataService, productDataService, 
-		Upload, uploadDataService, $timeout, $rootScope, $scope, deviserEvents, $uibModal, $window) {
+		Upload, uploadDataService, $timeout, $rootScope, $scope, deviserEvents, $uibModal, $window, $translate) {
 
 		var vm = this;
 		vm.stripHTMLTags = UtilService.stripHTMLTags;
@@ -11,12 +11,13 @@
 		vm.uploadCV = uploadCV;
 		vm.deleteCV = deleteCV;
 		vm.deleteImage = delete_image;
-		vm.checkPhotos = checkPhotos;
-		vm.biography_language = "en-US";
+		vm.biography_language = _lang;
 		vm.loading=true;
 		vm.images = [];
 		vm.maxImages=5;
 		vm.minImages=3;
+		vm.mandatory_langs=Object.keys(_langs_required);
+		vm.mandatory_langs_names="";
 
 		init();
 
@@ -24,6 +25,7 @@
 			getPerson();
 			getLanguages();
 			getCategories();
+			setMandatoryLanguagesNames();
 		}
 
 		/*Initial functions*/
@@ -157,15 +159,6 @@
 				checkPhotos();
 		}
 
-		function checkPhotos(){
-			if(vm.images.length >= vm.maxImages) {
-				vm.showMaxPhotosLimit = true;
-			}
-			else {
-				vm.showMaxPhotosLimit = false;
-			}
-		}
-
 		/* cv functions */
 		function uploadCV(file) {
 			function onUploadCVSuccess(data) {
@@ -183,6 +176,18 @@
 
 		function deleteCV() {
 			vm.person.curriculum = '';
+		}
+
+		function setMandatoryLanguagesNames() {
+			angular.forEach(Object.keys(_langs_required), function (lang) {
+				var translationLang="person.about".concat(_langs_required[lang].toUpperCase());
+				$translate(translationLang).then(function (tr) {
+					if (vm.mandatory_langs_names.length>0) {
+						vm.mandatory_langs_names=vm.mandatory_langs_names.concat(', ');
+					}
+					vm.mandatory_langs_names=vm.mandatory_langs_names.concat(tr);
+				});
+			});
 		}
 
 		function save() {
@@ -203,7 +208,7 @@
 				$rootScope.$broadcast(deviserEvents.updated_deviser, newObject);
 				$window.location.href = vm.person.about_link;
 			}
-
+			
 			var data = {}
 			for(var key in vm.person) {
 				if(key !== 'account_state')
@@ -229,8 +234,10 @@
 		})
 
 		$scope.$on(deviserEvents.make_profile_public_errors, function(event, args) {
+			debugger;
 			//set form submitted
 			vm.form.$setSubmitted();
+			vm.setBiographyRequired=false;
 			//set fields
 			if(args.required_fields && args.required_fields.length > 0) {
 				args.required_fields.forEach(function(element) {
@@ -242,6 +249,7 @@
 						vm.setCategoriesRequired = true;
 				});
 			}
+			vm.setBiographyRequired=false;
 		});
 
 		//watches
