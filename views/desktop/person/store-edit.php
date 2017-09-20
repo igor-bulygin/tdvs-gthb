@@ -86,16 +86,14 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 											<div class="col-md-3 pad-grid" ng-repeat="product in editStoreCtrl.products | draftProduct">
 												<div class="grid">
 													<figure class="effect-zoe">
-														<span class="close-product-icon-left" ng-click="editStoreCtrl.open_modal_delete(product.id)">
-															<i class="ion-android-close"></i>
-														</span>
+														<span class="close-product-icon-left" ng-click="editStoreCtrl.open_modal_delete(product.id)"></span>
+														<a class="edit-product-icon" ng-href="{{product.edit_link}}" title="Edit work">
+															<i class="ion-edit"></i>
+														</a>
 														<img class="grid-image" ng-src="{{product.main_photo || '/imgs/product_placeholder.png'}}">
 														<figcaption>
 															<p class="instauser">{{product.name || "Untitled"}}</p>
 															<p class="price">€{{product.min_price || '-'}}</p>
-															<a class="edit-product-icon" ng-href="{{product.edit_link}}" title="Edit work">
-																<i class="ion-edit"></i>
-															</a>
 														</figcaption>
 													</figure>
 												</div>
@@ -124,9 +122,10 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 											<div class="menu-category list-group" ng-repeat="product in editStoreCtrl.products | publishedProduct" ng-if="product.main_photo">
 												<div class="grid">
 													<figure class="effect-zoe">
-														<span class="close-product-icon-left" ng-click="editStoreCtrl.open_modal_delete(product.id)">
-															<i class="ion-android-close"></i>
-														</span>
+														<span class="close-product-icon-left" ng-click="editStoreCtrl.open_modal_delete(product.id)"></span>
+															<a href="" class="edit-product-icon" ng-href="{{product.edit_link}}" title="Edit work">
+																<i class="ion-edit"></i>
+															</a>
 														<a ng-href="{{product.link}}">
 															<img class="grid-image" ng-src="{{product.main_photo}}">
 															<span class="img-bgveil"></span>
@@ -135,9 +134,6 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 															<a ng-href="{{product.link}}">
 																<p class="instauser" ng-bind="editStoreCtrl.truncateString(product.name, 18, '…')"></p>
 																<p class="price">€{{product.min_price}}</p>
-															</a>
-															<a href="" class="edit-product-icon" ng-href="{{product.edit_link}}" title="Edit work">
-																<i class="ion-edit"></i>
 															</a>
 														</figcaption>
 													</figure>

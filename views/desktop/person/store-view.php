@@ -67,9 +67,10 @@ $this->params['person_menu_store_categories'] = $categories;
 									<div class="grid">
 										<figure class="effect-zoe">
 											<?php if ($person->isPersonEditable()) { ?>
-											<span class="close-product-icon-left" ng-click="viewStoreCtrl.open_modal_delete('<?=$product->short_id?>')">
-												<i class="ion-android-close"></i>
-											</span>
+											<span class="close-product-icon-left" ng-click="viewStoreCtrl.open_modal_delete('<?=$product->short_id?>')"></span>
+											<a class="edit-product-icon" href="<?= $product->getEditLink()?>" translate-attr="{title: 'person.EDIT_WORK'}">
+												<i class="ion-edit"></i>
+											</a>
 											<?php } ?>
 											<?php if(!$person->isPersonEditable()) { ?>
 												<image-hover-buttons product-id="{{'<?= $product->short_id ?>'}}" is-loved="{{'<?=$product->isLovedByCurrentUser() ? 1 : 0 ?>'}}" is-mine="{{'<?= $product->isWorkFromCurrentUser() ? 1 : 0 ?>'}}"> 
@@ -87,9 +88,7 @@ $this->params['person_menu_store_categories'] = $categories;
 													<p class="instauser"><?= \yii\helpers\StringHelper::truncate($product->getName(), 18, '…') ?></p>
 													<p class="price">€ <?= $product->getMinimumPrice() ?></p>
 													<?php if ($person->isPersonEditable()) { ?>
-														<a class="edit-product-icon" href="<?= $product->getEditLink()?>" translate-attr="{title: 'person.EDIT_WORK'}">
-															<i class="ion-edit"></i>
-														</a>
+														<!-- /* old position of a.edit-product-icon */ -->
 													<?php } ?>
 												</figcaption>
 											</a>
