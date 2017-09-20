@@ -147,11 +147,11 @@
 		}
 
 		function isOptionRequired(key) {
-			var tag = vm.tags.find(function(element) {
+			var tag = vm.product.options.find(function(element) {
 				return angular.equals(element.id, key);
 			});
 			if(tag) {
-				return (tag.required || tag.stock_and_price);
+				return (tag.change_reference);
 			}
 			return null;
 		}
