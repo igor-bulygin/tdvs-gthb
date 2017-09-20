@@ -47,6 +47,7 @@
 				} else {
 					vm.stock = original_artwork.stock;
 					vm.price = original_artwork.price;
+					vm.reference_id = original_artwork.short_id;
 					vm.require_options = false;
 				}
 			}
@@ -146,11 +147,11 @@
 		}
 
 		function isOptionRequired(key) {
-			var tag = vm.tags.find(function(element) {
+			var tag = vm.product.options.find(function(element) {
 				return angular.equals(element.id, key);
 			});
 			if(tag) {
-				return (tag.required || tag.stock_and_price);
+				return (tag.change_reference);
 			}
 			return null;
 		}
@@ -182,7 +183,7 @@
 					if(!angular.equals(valueToCompare, element.options[key]))
 						isReference = false;
 				}
-				if(isReference && element.available) {
+				if(isReference && element.available && !element.original_artwork) {
 					reference = element.short_id;
 					vm.stock += element.stock;
 					prices.push(element.price);
@@ -249,11 +250,13 @@
 			if(value == true && UtilService.isObject(original_artwork)) {
 				vm.stock = original_artwork.stock;
 				vm.price = original_artwork.price;
+				vm.reference_id = original_artwork.short_id;
 				vm.require_options = false;
 			} else {
 				vm.stock = vm.total_stock;
 				vm.price = vm.minimum_price;
 				vm.require_options = true;
+				vm.reference_id = getReferenceId(vm.option_selected);
 			}
 		}
 
