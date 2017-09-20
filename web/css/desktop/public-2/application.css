@@ -3174,6 +3174,32 @@ h3 {
 .btn-love-box {
   margin-top: -2px; }
 
+.contact-right {
+  width: 100% !important;
+  padding: 20px 0; }
+
+.dropdown button, .form-group input, .form-group select {
+  border-radius: 6px 6px 6px 6px !important;
+  -webkit-border-radius: 6px 6px 6px 6px !important;
+  -moz-border-radius: 6px 6px 6px 6px !important; }
+
+.funiv_bold {
+  font-family: "Roboto Condensed", sans-serif !important;
+  font-weight: bold !important;
+  font-size: 16px; }
+
+.form-group textarea {
+  border-radius: 6px 6px 6px 6px !important;
+  -webkit-border-radius: 6px 6px 6px 6px !important;
+  -moz-border-radius: 6px 6px 6px 6px !important;
+  font-family: "Roboto Condensed", sans-serif !important;
+  font-size: 16px; }
+
+.fpf_bold {
+  font-family: "Roboto Condensed", sans-serif !important;
+  font-weight: bold !important;
+  font-size: 16px; }
+
 .our-devisers-wrapper {
   background-color: #e9e9e9;
   float: left;
