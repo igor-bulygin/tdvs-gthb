@@ -8,7 +8,7 @@
 				<figcaption>
 					<!--img class="showcase-image" ng-src="{{person.url_avatar}}"-->
 					<span class="name" ng-bind="person.name"></span>
-					<span class="location" ng-bind="person.city"></span>
+					<span class="location ng-class:{'allcaps': person.type.indexOf(2)>=0}" ng-bind="person.city"></span>
 				</figcaption>
 			</figure>
 			</a>
