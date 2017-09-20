@@ -451,6 +451,7 @@ class Product extends CActiveRecord {
 					'edit_link' => 'editLink',
 					'isLoved' => 'isLoved',
 					'isMine' => 'isMine',
+					'isInMyBoxes' => 'isInMyBoxes',
 					'min_price' => 'minimumPrice',
 				];
 				static::$retrieveExtraFields = [
@@ -487,6 +488,7 @@ class Product extends CActiveRecord {
 					'loveds',
 					'isLoved' => 'isLoved',
 					'isMine' => 'isMine',
+					'isInMyBoxes' => 'isInMyBoxes',
 					'boxes',
 					'prints',
 					'sizechart',
@@ -1013,6 +1015,10 @@ class Product extends CActiveRecord {
 		return $this->isWorkFromCurrentUser();
 	}
 
+	public function getIsInMyBoxes() {
+		return $this->isInBoxOfCurrentUser();
+	}
+
 	/**
 	 * @deprecated
 	 * @param $tag_id
@@ -1324,6 +1330,27 @@ class Product extends CActiveRecord {
 		$person_id = Yii::$app->user->identity->short_id;
 
 		return Utils::productLovedByPerson($this->short_id, $person_id);
+	}
+
+	/**
+	 * Returns TRUE if the product is in a box of the connected user
+	 *
+	 * @return bool
+	 */
+	public function isInBoxOfCurrentUser() {
+		if (Yii::$app->user->isGuest) {
+			return false;
+		}
+		$person_id = Yii::$app->user->identity->short_id;
+
+		$boxes = Box::findSerialized(
+			[
+				'person_id' => $person_id,
+				'product_id' => $this->short_id,
+			]
+		);
+
+		return !empty($boxes);
 	}
 
 	/**
