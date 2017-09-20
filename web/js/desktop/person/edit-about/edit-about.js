@@ -13,7 +13,10 @@
 		vm.deleteImage = delete_image;
 		vm.checkPhotos = checkPhotos;
 		vm.biography_language = "en-US";
+		vm.loading=true;
 		vm.images = [];
+		vm.maxImages=5;
+		vm.minImages=3;
 
 		init();
 
@@ -48,7 +51,8 @@
 				vm.isDraft = (vm.person.account_state === 'draft') ? true : false;
 				vm.images = UtilService.parseImagesUrl(vm.person.media.photos, vm.person.url_images);
 				vm.curriculum = currentHost() + vm.person.url_images + vm.person.curriculum;
-				setEditTexts(data.type[0])
+				setEditTexts(data.type[0]);
+				vm.loading=false;
 			}
 
 			personDataService.getProfile({
@@ -154,7 +158,7 @@
 		}
 
 		function checkPhotos(){
-			if(vm.images.length >= 5) {
+			if(vm.images.length >= vm.maxImages) {
 				vm.showMaxPhotosLimit = true;
 			}
 			else {

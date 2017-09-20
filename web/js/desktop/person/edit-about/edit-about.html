@@ -1,81 +1,90 @@
 <div class="col-md-10 about-bg">
-	<div class="row">
-	<div class="col-md-6">
-		<div class="about-wrapper">
-			<div><a class="red-link-btn top" href="#" ng-click="editAboutCtrl.save()" ng-if="!editAboutCtrl.isDraft" ng-cloak><span translate="person.about.SAVE_EXIT"></span></a></div>
-			<div><a class="red-link-btn top" href="#" ng-click="editAboutCtrl.save()" ng-if="editAboutCtrl.isDraft" ng-cloak><span translate="person.about.SAVE_CHANGES"></span></a></div>
-			<div class="about-container">
-				<div class="deviser-data-about-edit">
-					<form class="grey-form" name="editAboutCtrl.form">
-						<label for="fields"><span translate="{{editAboutCtrl.categories_text}}"></span></label>
-						<ol class="nya-bs-select btn-group select-full bootstrap-select form-control product-select ng-class:{'error-input': editAboutCtrl.setCategoriesRequired}" ng-model="editAboutCtrl.person.categories" selected-text-format="count>4" multiple ng-cloak ng-if="editAboutCtrl.categories">
-							<li nya-bs-option="category in editAboutCtrl.categories" data-value="category.id" deep-watch="true">
-								<a href=""><span ng-bind="category.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
-							</li>
-						</ol>
-						<label for="text_biography"><span translate="{{editAboutCtrl.biography_text}}"></span></label>
-						<span class="small-grey"><span translate="person.about.TRANSLATE_TEXT"></span></span>
-						<ol class="about-edit-select text-profile-lang nya-bs-select" ng-model="editAboutCtrl.biography_language" ng-cloak>
-							<li nya-bs-option="language in editAboutCtrl.languages" data-value="language.code" deep-watch="true">
-								<a href="">
-									<span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span>
-								</a>
-							</li>
-						</ol>
-						<div class="textarea-edit-about ng-class:{'error-input': editAboutCtrl.setBiographyRequired}" text-angular ng-model="editAboutCtrl.person.text_biography[editAboutCtrl.biography_language]" ng-cloak ta-toolbar="[]" ta-paste="editAboutCtrl.stripHTMLTags($html)" translate-attr="{placeholder: 'person.about.WRITE_STATEMENT'}"></div>
-						<label class="pull-left" for="resume"><span translate="{{editAboutCtrl.resume_text}}"></span></label>
-						<span class="optional-text pull-left"><span translate="global.OPTIONAL"></span></span>
-						<span class="small-grey"><span translate="{{editAboutCtrl.resume_sub_text}}"></span></span>
-						<div class="edit-about-row">
-							<button class="btn btn-small btn-red" ngf-select="editAboutCtrl.uploadCV($file)" ngf-accept="'application/pdf,image/*'"><span translate="global.UPLOAD_FILE"></span></button>
-							<span class="cv" ng-if="editAboutCtrl.person.curriculum" ng-cloak>
-							<span class="pull-left cv-file" ng-bind="editAboutCtrl.person.curriculum"></span> 
-							<span class="remove-cv ion-ios-close-empty pull-left" ng-click="editAboutCtrl.deleteCV()"></span></span>
+	<div class="row" ng-if="!editAboutCtrl.loading" ng-cloak>
+		<div class="col-md-6">
+			<div class="about-wrapper">
+				<div><a class="red-link-btn top" href="#" ng-click="editAboutCtrl.save()" ng-if="!editAboutCtrl.isDraft" ng-cloak><span translate="person.about.SAVE_EXIT"></span></a></div>
+				<div><a class="red-link-btn top" href="#" ng-click="editAboutCtrl.save()" ng-if="editAboutCtrl.isDraft" ng-cloak><span translate="person.about.SAVE_CHANGES"></span></a></div>
+				<div class="about-container">
+					<div class="deviser-data-about-edit">
+						<form class="grey-form" name="editAboutCtrl.form">
+							<label for="fields"><span translate="{{editAboutCtrl.categories_text}}"></span></label>
+							<ol class="nya-bs-select btn-group select-full bootstrap-select form-control product-select ng-class:{'error-input': editAboutCtrl.setCategoriesRequired}" ng-model="editAboutCtrl.person.categories" selected-text-format="count>4" multiple ng-cloak ng-if="editAboutCtrl.categories">
+								<li nya-bs-option="category in editAboutCtrl.categories" data-value="category.id" deep-watch="true">
+									<a href=""><span ng-bind="category.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
+								</li>
+							</ol>
+							<label for="text_biography"><span translate="{{editAboutCtrl.biography_text}}"></span></label>
+							<span class="small-grey"><span translate="person.about.TRANSLATE_TEXT"></span></span>
+							<ol class="about-edit-select text-profile-lang nya-bs-select" ng-model="editAboutCtrl.biography_language" ng-cloak>
+								<li nya-bs-option="language in editAboutCtrl.languages" data-value="language.code" deep-watch="true">
+									<a href="">
+										<span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span>
+									</a>
+								</li>
+							</ol>
+							<div class="textarea-edit-about ng-class:{'error-input': editAboutCtrl.setBiographyRequired}" text-angular ng-model="editAboutCtrl.person.text_biography[editAboutCtrl.biography_language]" ng-cloak ta-toolbar="[]" ta-paste="editAboutCtrl.stripHTMLTags($html)" translate-attr="{placeholder: 'person.about.WRITE_STATEMENT'}"></div>
+							<label class="pull-left" for="resume"><span translate="{{editAboutCtrl.resume_text}}"></span></label>
+							<span class="optional-text pull-left"><span translate="global.OPTIONAL"></span></span>
+							<span class="small-grey"><span translate="{{editAboutCtrl.resume_sub_text}}"></span></span>
+							<div class="edit-about-row">
+								<button class="btn btn-small btn-red" ngf-select="editAboutCtrl.uploadCV($file)" ngf-accept="'application/pdf,image/*'"><span translate="global.UPLOAD_FILE"></span></button>
+								<span class="cv" ng-if="editAboutCtrl.person.curriculum" ng-cloak>
+									<span class="pull-left cv-file" ng-bind="editAboutCtrl.person.curriculum"></span> 
+									<span class="remove-cv ion-ios-close-empty pull-left" ng-click="editAboutCtrl.deleteCV()"></span></span>
+								</div>
+							</form>
 						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="col-md-6 about-grid">
-		<div ng-if="editAboutCtrl.isDropAvailable">
-			<div class="photo-loader loader-about ng-class:{'error-text': editAboutCtrl.setPhotosRequired}" ngf-drag-over-class="drag-over" ngf-drop ngf-select ngf-change="editAboutCtrl.uploadPhoto($files, $invalidFiles, null, true)" ngf-accept="'image/*'" ngf-drop-available="editAboutCtrl.isDropAvailable" ng-if="editAboutCtrl.images.length < 5">
-				<span class="photo-loader-title"><span translate="person.about.ENRICH_SECTION"></span></span>
-				<div class="plus-add-wrapper">
-					<div class="plus-add">
-						<span>+</span>
 					</div>
-					<div class="text"><span translate="person.about.ADD_PHOTOS"></span></div>
 				</div>
-				<span class="photo-loader-warning ng-class:{'error-text': editAboutCtrl.setPhotosRequired}" ng-if="editAboutCtrl.images.length < 3 && editAboutCtrl.person.account_state==='draft'" ng-cloak><span translate="person.about.MIN_MAX_PHOTOS"></span></span>
-				<span class="photo-loader-warning error-text" ng-if="editAboutCtrl.images.length < 3 && editAboutCtrl.person.account_state==='active'" ng-cloak><span translate="person.about.MIN_PHOTOS"></span></span>
 			</div>
-			<div class="photo-loader loader-about" ng-if="editAboutCtrl.images.length >= 5" ng-click="editAboutCtrl.checkPhotos()" ng-cloak>
-				<span class="photo-loader-title"><span translate="person.about.ENRICH_SECTION"></span></span>
-				<div class="new-add-wrapper">
-					<div class="new-add"></div>
-					<div class="text"><span translate="person.about.ADD_PHOTOS"></span></div>
+			<div class="col-md-6 about-grid">
+				<div ng-if="editAboutCtrl.isDropAvailable" ng-cloak>
+					<div class="photo-loader loader-about ng-class:{'error-text': editAboutCtrl.setPhotosRequired}" ngf-drag-over-class="drag-over" ngf-drop ngf-select ngf-change="editAboutCtrl.uploadPhoto($files, $invalidFiles, null, true)" ngf-accept="'image/*'" ngf-drop-available="editAboutCtrl.isDropAvailable" ng-if="editAboutCtrl.images.length < editAboutCtrl.maxImages" ng-cloak>
+						<span class="photo-loader-title"><span translate="person.about.ENRICH_SECTION"></span></span>
+						<div class="plus-add-wrapper">
+							<div class="plus-add">
+								<span>+</span>
+							</div>
+							<div class="text"><span translate="person.about.ADD_PHOTOS"></span></div>
+						</div>
+						<span class="photo-loader-warning ng-class:{'error-text': editAboutCtrl.setPhotosRequired}" ng-if="editAboutCtrl.images.length < editAboutCtrl.minImages && editAboutCtrl.person.account_state==='draft'" ng-cloak>
+							<span translate="person.about.MIN_MAX_PHOTOS" translate-values="{ min: editAboutCtrl.minImages }"></span>
+						</span>
+						<span class="photo-loader-warning error-text" ng-if="editAboutCtrl.images.length < editAboutCtrl.minImages && editAboutCtrl.person.account_state==='active'" ng-cloak>
+							<span translate="person.about.MIN_PHOTOS" translate-values="{ max: editAboutCtrl.minImages }" ng-cloak></span>
+						</span>
+					</div>
+					<div class="photo-loader loader-about" ng-if="editAboutCtrl.images.length >= editAboutCtrl.maxImages" ng-cloak>
+						<span class="photo-loader-title"><span translate="person.about.ENRICH_SECTION"></span></span>
+						<div class="plus-add-wrapper">
+							<div class="plus-add" style="background-color:#939393;">
+								<span>+</span>
+							</div>
+							<div class="text"><span translate="person.about.ADD_PHOTOS"></span></div>
+						</div>
+						<span class="photo-loader-warning col-md-12 mt-30" ng-cloak><span translate="person.about.MAX_PHOTOS" translate-values="{ max: editAboutCtrl.maxImages }">
+					</div>
 				</div>
-				<span class="photo-loader-warning" ng-if="editAboutCtrl.showMaxPhotosLimit"><span translate="person.about.MAX_PHOTOS"></span></span>
-			</div>
-		</div>
-		<div ng-if="editAboutCtrl.files.length > 0" ng-repeat="item in editAboutCtrl.files" style="max-height:200px; max-width:300px;">
-			<div ng-if="item.progress <=100">
-				<img ngf-thumbnail="item" style="max-height:200px; opacity:0.5;">
-				<p><span translate="global.UPLOADING"></span> <span ng-bind="item.name"></span></p>
-				<uib-progressbar value="item.progress" class="progress-striped active">{{item.progress}}</uib-progressbar>
-			</div>
-		</div>
-		<div ngf-no-file-drop>
-			<input type="file" name="file" ngf-select="editAboutCtrl.uploadPhoto($files, $invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="editAboutCtrl.isDropAvailable" ngf-multiple="true">
-		</div>
-		<div class="item draggable-list about-edit-list" ng-if="editAboutCtrl.images.length > 0" ui-sortable ng-model="editAboutCtrl.images" ng-cloak>
-			<div class="col-sm-6 pad-about image-about-edit" ng-repeat="image in editAboutCtrl.images track by $index">
-				<span class="button ion-crop crop-avatar-photo-icon" ng-click="editAboutCtrl.openCropModal(image.url, $index)"></span>
-				<span class="ion-android-close x-close" ng-click="editAboutCtrl.deleteImage($index)"></span>
-				<img ng-src="{{image.url}}" class="grid-image draggable-img" draggable="false">
+				<div ng-if="editAboutCtrl.files.length > 0" ng-repeat="item in editAboutCtrl.files" style="max-height:200px; max-width:300px;">
+					<div ng-if="item.progress <=100">
+						<img ngf-thumbnail="item" style="max-height:200px; opacity:0.5;">
+						<p><span translate="global.UPLOADING"></span> <span ng-bind="item.name"></span></p>
+						<uib-progressbar value="item.progress" class="progress-striped active">{{item.progress}}</uib-progressbar>
+					</div>
+				</div>
+				<div ngf-no-file-drop>
+					<input type="file" name="file" ngf-select="editAboutCtrl.uploadPhoto($files, $invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="editAboutCtrl.isDropAvailable" ngf-multiple="true">
+				</div>
+				<div class="item draggable-list about-edit-list" ng-if="editAboutCtrl.images.length > 0" ui-sortable ng-model="editAboutCtrl.images" ng-cloak>
+					<div class="col-sm-6 pad-about image-about-edit" ng-repeat="image in editAboutCtrl.images track by $index">
+						<span class="button ion-crop crop-avatar-photo-icon" ng-click="editAboutCtrl.openCropModal(image.url, $index)"></span>
+						<span class="ion-android-close x-close" ng-click="editAboutCtrl.deleteImage($index)"></span>
+						<img ng-src="{{image.url}}" class="grid-image draggable-img" draggable="false">
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
+	<div class="row text-center mt-50" ng-if="editAboutCtrl.loading" ng-cloak>
+		<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
 	</div>
-</div>
