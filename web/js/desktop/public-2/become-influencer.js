@@ -38,7 +38,7 @@
 
 			form.$setSubmitted();
 			if (form.$valid) {
-				invitationDataService.createInvitationRequestDeviser(vm.invitation, null, onCreateInvitationRequestSuccess, UtilService.onError)
+				invitationDataService.createInvitationRequestInfluencer(vm.invitation, null, onCreateInvitationRequestSuccess, UtilService.onError)
 			}
 		}
 
@@ -76,6 +76,6 @@
 
 
 	angular.module('todevise')
-		.controller('becomeDeviserCtrl', controller);
+		.controller('becomeInfluencerCtrl', controller);
 
 }());

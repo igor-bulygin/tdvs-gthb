@@ -62,14 +62,14 @@
     //right: 15px;
     left: 45px;
 	i{
-		color:$darker_grey;
+		color:$dark_red;//$darker_grey;
 		font-size: 16px;
 	}
+    z-index: 100;
 }
 .close-product-icon{
 	background-color: $background_grey;
 	display: block;
-    @include border-radius(90px,90px,90px,90px);
     position: absolute;
     text-align: center;
     top: 8px;
@@ -77,16 +77,12 @@
     width: 25px;
     height: 25px;
     padding-top: 2px;
-	i{
-		color:$darker_grey;
-		font-size: 16px;
-	}
+    background: url('/imgs/delete-red.svg') 0 0 no-repeat transparent;
     z-index: 100;
 }
 .close-product-icon-left {
     background-color: $background_grey;
     display: block;
-    @include border-radius(90px,90px,90px,90px);
     position: absolute;
     text-align: center;
     top: 8px;
@@ -94,10 +90,7 @@
     width: 25px;
     height: 25px;
     padding-top: 2px;
-    i{
-        color:$darker_grey;
-        font-size: 16px;
-    }
+    background: url('/imgs/delete-red.svg') 0 0 no-repeat transparent;
     z-index: 100;
 }
 .unpublished-square{

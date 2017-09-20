@@ -30,7 +30,10 @@
 			case "work_photo":
 				vm.area_type = 'rectangle';
 				vm.aspect_ratio = 0.8;
-				vm.size = 'max';
+				vm.size = {
+					w: 614,
+					h: 768
+				}
 				break;
 			case "story-photos":
 				vm.area_type = 'rectangle';
@@ -69,7 +72,7 @@
 			if(vm.resolve.index && vm.resolve.index >= 0)
 				data.index = angular.copy(index);
 
-			data.file = Upload.dataUrltoBlob(vm.photoCropped, "temp.jpg");
+			data.file = Upload.dataUrltoBlob(vm.photoCropped, "temp.png");
 
 			switch (vm.resolve.type) {
 				case "header_cropped":

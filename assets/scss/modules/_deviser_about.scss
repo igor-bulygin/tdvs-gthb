@@ -122,9 +122,16 @@
     padding-top: 340px;
 }
 .new-add {
-    background: $background_grey url('/imgs/product_placeholder_ico.svg') no-repeat center center;
+    //background: $background_grey url('/imgs/product_placeholder_ico.svg') no-repeat center center;
     width: 100%;
     height: 30px;
+    font-size: 30px;
+}
+.new-add-wrapper{
+    .text {
+        padding: 10px;
+        color: $dark_grey;
+    }
 }
 .image-about-edit{
     max-height: 284px;
@@ -578,10 +585,10 @@ span.optional-text.pull-left {
 }
 .photo-loader-title{
     font-family: $font-family--bold!important;
-    text-transform: lowercase;//uppercase;
-    &:first-letter {
+    //text-transform: lowercase;//uppercase;
+    /*&:first-letter {
         text-transform: capitalize;
-    }
+    }*/
 }
 .photo-loader-warning{
     font-family: $font-family--secondary!important;

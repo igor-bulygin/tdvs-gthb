@@ -3,7 +3,6 @@
 // ==========================================================================
 .shipping-title{
 	text-transform: uppercase;
-    font-family: $font-family--bold;
     font-size: 14px;
 }
 .time-shipping{
@@ -14,14 +13,10 @@
 	margin-left: 0!important;
 	margin-bottom: 0!important;
 	margin-right: 0!important;
-	font-family: $font-family--secondary;
 }
 .days{
 	margin-top: 7px;
     margin-left: 10px;
-}
-.serif{
-	font-family: $font-family--serif;
 }
 .range-wrapper{
 	border: 1px solid $light_grey;
@@ -30,7 +25,6 @@
 	margin-bottom: 20px;
 }
 .range-title{
-	font-family: $font-family--secondary;
 	text-transform: uppercase;
 	color: $dark_grey;
 	margin-right: 15px;
@@ -50,7 +44,6 @@
     cursor: pointer;
 }
 .two-lines-label{
-	font-family: $font-family--secondary;
 	color: $dark_grey;
 	width: 50px;
     line-height: 15px;
@@ -63,13 +56,13 @@
 }
 .label-small-bold{
 	font-weight: bold!important;
-	font-family: $font-family--primary!important;
 }
 .btn-save{
 	@extend %btn; 
-    background-color:$green;
-    color: $black;
+    background-color:$dark_red;
+    color: $white;
     &:hover{
-        background-color:$dark_green;
+        background-color:$red;
+		color: $white;
     }
 }

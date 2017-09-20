@@ -29,7 +29,7 @@ $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD
 					<div uib-accordion-heading>
 						<span ng-click="shippingSettingsCtrl.toggleStatus($index)" ng-bind="shippingSettingsCtrl.country_helper[$index].country_name"></span>
 						<span ng-click="shippingSettingsCtrl.toggleStatus($index)" ng-if="!shippingSettingsCtrl.country_helper[$index]['status']">
-							<span class="glyphicon glyphicon-edit pull-right" ng-if="setting.prices && setting.prices.length > 0" ng-cloak></span>
+							<span class="ion-edit red-icon pull-right" ng-if="setting.prices && setting.prices.length > 0" ng-cloak></span>
 							<button class="btn btn-default btn-green btn-acordion pull-right" ng-if="!setting.prices || setting.prices.length <= 0" ng-cloak ><span translate="settings.shipping.ADD_SHIPPING_PRICES"></span></button>
 						</span>
 					</div>

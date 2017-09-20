@@ -6,19 +6,25 @@
 		var InvitationAdmin = $resource(apiConfig.baseUrl + 'admin/' + apiConfig.version + 'invitations');
 		//pub
 		var Invitation = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'invitations/:idInvitation');
-		var InvitationRequest = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'invitation/request-become-deviser');
+		var InvitationRequestDeviser = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'invitation/request-become-deviser');
+		var InvitationRequestInfluencer = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'invitation/request-become-influencer');
 
 		//methods
 		this.getInvitation = getInvitation;
-		this.createInvitationRequest = createInvitationRequest;
+		this.createInvitationRequestDeviser = createInvitationRequestDeviser;
+		this.createInvitationRequestInfluencer = createInvitationRequestInfluencer;
 		this.createInvitationAdmin = createInvitationAdmin;
 
 		function getInvitation(params, onSuccess, onError) {
 			apiMethods.get(Invitation, params, onSuccess, onError);
 		}
 
-		function createInvitationRequest(data, params, onSuccess, onError) {
-			apiMethods.create(InvitationRequest, data, params, onSuccess, onError);
+		function createInvitationRequestDeviser(data, params, onSuccess, onError) {
+			apiMethods.create(InvitationRequestDeviser, data, params, onSuccess, onError);
+		}
+
+		function createInvitationRequestInfluencer(data, params, onSuccess, onError) {
+			apiMethods.create(InvitationRequestInfluencer, data, params, onSuccess, onError);
 		}
 
 		function createInvitationAdmin(data, params, onSuccess, onError) {
