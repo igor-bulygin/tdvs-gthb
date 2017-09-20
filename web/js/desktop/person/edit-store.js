@@ -3,6 +3,7 @@
 
 	function controller(productDataService, personDataService, UtilService, $location, $uibModal, $timeout) {
 		var vm = this;
+		vm.truncateString = UtilService.truncateString;
 		vm.sortableOptions = {
 			update: function(e, ui) {
 				update(ui.item.sortable.dropindex, ui.item.sortable.model);

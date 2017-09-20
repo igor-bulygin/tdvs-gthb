@@ -1,11 +1,8 @@
 <?php
 
 use app\assets\desktop\pub\PublicCommonAsset;
-use app\models\Person;
 
 PublicCommonAsset::register($this);
-
-/** @var Person $deviser */
 
 $this->title = Yii::t('app/public', 'BECOME_A_DEVISER');
 

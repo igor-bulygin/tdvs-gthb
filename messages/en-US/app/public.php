@@ -22,6 +22,7 @@ return [
     'ALL_CATEGORIES' => 'All categories',
     'ALMOST_DONE_PERSON_NAME' => 'Almost done! {person_name}',
     'BECOME_A_DEVISER' => 'Become a deviser',
+    'BECOME_AN_INFLUENCER' => 'Become an influencer',
     'BILLINGS_AND_PAYMENTS' => 'Billings & Payments',
     'BOXES_BY_PERSON_NAME' => 'Boxes by {person_name}',
     'BOX_NAME_BY_PERSON_NAME' => '{box_name} by {person_name}',

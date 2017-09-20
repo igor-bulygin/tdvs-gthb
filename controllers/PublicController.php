@@ -185,6 +185,12 @@ class PublicController extends CController
 		return $this->render("create-deviser-account", ["invitation" => $invitation]);
 	}
 
+	public function actionBecomeInfluencer()
+	{
+		$this->layout = '/desktop/public-2.php';
+		return $this->render("become-influencer");
+	}
+
 	public function actionCreateInfluencerAccount()
 	{
 		$invitationId = Yii::$app->request->get("uuid");

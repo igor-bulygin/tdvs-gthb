@@ -300,7 +300,11 @@ $config = [
 				// Request become a Deviser
 				'/become-a-deviser' => 'public/become-deviser',
 				'/create-deviser-account' => 'public/create-deviser-account',
+
+				// Request become an Influencer
+				'/become-an-influencer' => 'public/become-influencer',
 				'/create-influencer-account' => 'public/create-influencer-account',
+
 				'/signup' => 'public/signup',
 
 				//Links for a cart listing
@@ -387,6 +391,7 @@ $config = [
 
 				// API routing (public)
 				'POST api3/pub/v1/invitation/request-become-deviser' => 'api3/pub/v1/invitation/request-become-deviser',
+				'POST api3/pub/v1/invitation/request-become-influencer' => 'api3/pub/v1/invitation/request-become-influencer',
 
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/product'],
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/faq'],
