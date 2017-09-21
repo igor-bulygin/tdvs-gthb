@@ -249,7 +249,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 											<!--i class="ion-ios-heart-outline"></i-->
 										</button>
 									<?php } ?>
-									<button type="button" class="btn btn-save-box pull-right ng-class:{'btn-red': detailProductCtrl.product.isInMyBoxes}" ng-click="detailProductCtrl.setBox()">
+									<button type="button" class="btn btn-save-box pull-right" ng-click="detailProductCtrl.setBox()">
 										<div class="box-icon"></div>
 										<span translate="product.detail.SAVE_IN_BOX"></span>
 									</button>
