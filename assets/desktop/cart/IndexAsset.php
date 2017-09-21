@@ -23,7 +23,6 @@ class IndexAsset extends AssetBundle {
 		'app\assets\libs\angularLocalStorageAsset',
 		'app\assets\libs\angularBootstrapDatetimePickerAsset',
 		'app\assets\libs\angularXEditableAsset',
-		'app\assets\libs\macyAsset',
 		'app\assets\libs\angularUiSortableAsset',
 		'app\assets\libs\angularLocaleAsset',
 	];

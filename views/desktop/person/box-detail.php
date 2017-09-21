@@ -57,7 +57,7 @@ $this->registerJs("var box = ".Json::encode($box), yii\web\View::POS_HEAD, 'box-
 			<div class="col-md-9 right-box-column">
 				<p class="text-center empty-box-text" ng-if="boxDetailCtrl.box.products.length == 0" ng-cloak><span translate="person.boxes.BOX_IS_EMPTY"></span></p>
 				<div class="other-products-wrapper">
-					<div id="macy-container">
+					<div id="boxes-container" class="macy-container" data-columns="6">
 						<div class="menu-category list-group" ng-if="boxDetailCtrl.box.products.length > 0" ng-cloak ng-repeat="work in boxDetailCtrl.box.products">
 							<div class="grid">
 								<figure class="effect-zoe">

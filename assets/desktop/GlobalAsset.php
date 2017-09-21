@@ -15,11 +15,13 @@ class GlobalAsset extends AssetBundle {
 		'js/desktop/global.js',
 		'js/desktop/todevise.module.js',
 		'js/desktop/public-2/bootstrap-select.min.js',
+		'js/desktop/public-2/macy.js',
 	];
 	public $depends = [
 		'app\assets\AppAsset',
 		'app\components\assets\PublicHeader2Asset',
 		'app\assets\api\ApiAsset',
+		'app\assets\libs\macyAsset',
 		'app\assets\libs\utilAsset',
 		'app\assets\desktop\box\IndexAsset',
 		'app\assets\libs\angularToastrAsset',

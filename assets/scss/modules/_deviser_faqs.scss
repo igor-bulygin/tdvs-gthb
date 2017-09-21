@@ -186,15 +186,15 @@
     margin-top: 10px;
 }
 .lang-selected{
-    background-color: $green!important;
+    background-color: $dark_red;//$green!important;
     a{
-        background-color: $green!important;
+        background-color: $dark_red;//$green!important;
     }
     a:hover{
-        background-color: $green!important;   
+        background-color: $dark_red;//$green!important;   
     }
     a:focus{
-        background-color: $green!important;   
+        background-color: $dark_red;//$green!important;   
     }
 }
 .ok-white-icon{

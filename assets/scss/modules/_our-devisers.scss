@@ -130,15 +130,16 @@
 		display: inline-block;
     	margin-top: 30px;
 		color: $darker_grey;
-		font-family: $font-family--secondary;
+		font-family: $font-family--regular;//$font-family--secondary;
+		font-size: 14px;
 		.key{
 			font-family:$font-family--bold;
 		}
 	}
 }
 .filter-title{
-	color: #6b6b6b;
-    text-transform: uppercase;
+	color: $darker_grey;
+    //text-transform: uppercase;
 	font-weight: bold;
     font-size: 16px;
 }
@@ -147,10 +148,13 @@
 }
 .more-btn{
 	cursor: pointer;
-	font-family: $font-family--bold;
-	border-bottom: 1px solid #ccc;
+	font-family: $font-family--regular; //$font-family--bold;
+	font-size: 14px;
+	//border-bottom: 1px solid #ccc;
     display: block;
     padding: 15px 0;
+    text-transform: lowercase;
+    color: $darker_grey;
 }
 .deviser-discover-img{
 	position: absolute;
