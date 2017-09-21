@@ -1861,19 +1861,20 @@ input[type="radio"] .styled:checked + label::after {
   margin-top: 20px;
   background: transparent; }
 
-.error-input .btn-default {
-  border-color: #FFD55D; }
-.error-input label::before {
-  border: 1px solid #FFD55D !important; }
+.error-input {
+  border-color: #FFD55D !important; }
+  .error-input .btn-default {
+    border-color: #FFD55D; }
+  .error-input label::before {
+    border: 1px solid #FFD55D !important; }
+  .error-input button {
+    border-color: #FFD55D !important; }
 
 .error-input .ta-editor {
   border-color: #FFD55D; }
 
 .calendar-icon.error-input {
   border: 1px solid #FFD55D; }
-
-.error-input {
-  border-color: #FFD55D !important; }
 
 .error-text {
   color: #FFD55D !important; }
@@ -4598,7 +4599,7 @@ h3 {
     color: #F7284B; }
 
 .header-edit-btns button {
-  margin: 8px 0 0px 10px; }
+  margin: auto; }
 
 .banner-deviser-edit-header-content {
   padding: 30px 0 20px; }
@@ -4983,9 +4984,8 @@ h3 {
   font-size: 14px; }
 
 .edit-cover-icon {
-  color: #ffffff;
-  width: 60px;
-  height: 60px;
+  width: 40px;
+  height: 40px;
   position: absolute;
   display: block;
   border-radius: 90px 90px 90px 90px !important;
@@ -4994,21 +4994,21 @@ h3 {
   cursor: pointer;
   z-index: 999;
   text-align: center;
-  top: 0;
-  bottom: 0;
-  margin: auto; }
+  top: 20px;
+  right: 10px; }
   .edit-cover-icon.photo {
-    font-size: 40px;
+    font-size: 30px;
     text-align: center;
-    background-color: #1C1919;
+    background-color: #ffffff;
     padding-top: 1px;
-    left: 0;
-    right: 0; }
+    color: #1C1919; }
   .edit-cover-icon.crop {
+    top: 75px;
     background-color: #F7284B;
-    font-size: 33px;
-    left: 625px;
-    padding-top: 6px; }
+    font-size: 24px;
+    right: 10px;
+    padding-top: 4px;
+    color: #ffffff; }
   .edit-cover-icon.centered {
     left: 0;
     right: 0;
