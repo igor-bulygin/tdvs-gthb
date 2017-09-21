@@ -24,7 +24,7 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 	<div class="invitation-messages">
 		<p><span translate="person.complete_profile.NEED_INFO"></span></p>
 	</div>
-	<div class="create-deviser-account-container black-form">
+	<div class="create-deviser-account-container black-form" ng-if="!completeProfileCtrl.sendingForm">
 		<form name="completeProfileCtrl.form">
 		<?php if($person->isInfluencer()) {?>
 			<div class="row">
@@ -173,5 +173,9 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 			</button>
 			</div>
 		</form>
+	</div>
+	<div class="text-center mt-50" ng-if="completeProfileCtrl.sendingForm">
+			<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+		<span class="sr-only" translate="global.LOADING"></span>
 	</div>
 </div>
