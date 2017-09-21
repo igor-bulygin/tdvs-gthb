@@ -171,7 +171,9 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 															</ol>
 														</div>
 														<div class="col-sm-4 no-pad">
+															<?php /*
 															<a class="view-chart-size" href="#" href="#" data-toggle="modal" data-target="#chartModal" ng-if="option.id==='size' && detailProductCtrl.view_sizechart"><span translate="product.detail.VIEW_SIZE_CHART"></span></a>
+															*/?>
 														</div>
 													</div>
 												</div>
