@@ -1,13 +1,13 @@
 <div class="modal-header">
 	<div class="image-save-wrapper">
-		<img ng-src="{{modalSaveBoxCtrl.product_main_photo}}" width="50" class="pull-left" ng-cloak>
+		<img ng-src="{{modalSaveBoxCtrl.product.main_photo}}" width="50" class="pull-left" ng-cloak>
 	</div>
 	<button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="modalSaveBoxCtrl.dismiss()">
 		<span class="ion-android-close" aria-hidden="true"></span>
 	</button>
 	<div class="title-subtitle-wrapper">
 		<h3 class="modal-save-title"><span translate="boxes.save.SAVE_IN_BOX"></span></h3>
-		<p class="modal-save-subtitle"><span translate="boxes.save.SELECT_BOX"></span> <span class="modal-save-total"><span translate="boxes.save.TOTAL_BOX" translate-values="{total: modalSaveBoxCtrl.resolve.boxes.meta.total_count}"></span></span></p>
+		<p class="modal-save-subtitle"><span translate="boxes.save.SELECT_BOX"></span> <span class="modal-save-total"><span translate="boxes.save.TOTAL_BOX" translate-values="{total: modalSaveBoxCtrl.boxes.meta.total_count}"></span></span></p>
 	</div>
 </div>
 <div class="modal-body modal-box-pad">
@@ -22,7 +22,7 @@
 		</form>
 		<button class="btn btn-default btn-create-box" ng-click="modalSaveBoxCtrl.showCreateBox()"><span translate="boxes.save.CREATE_NEW_BOX"></span></button>
 	</div>
-	<div class="save-modal-row" ng-if="modalSaveBoxCtrl.creatingBox">
+	<div class="save-modal-row" ng-if="modalSaveBoxCtrl.creatingBox" ng-cloak>
 		<form class="form-inline" name="modalSaveBoxCtrl.create_form" novalidate>
 			<div class="form-group">
 				<input type="text" name="box_name" class="form-control create-box-input ng-class:{'error-input': modalSaveBoxCtrl.has_error(modalSaveBoxCtrl.create_form, modalSaveBoxCtrl.create_form.box_name)}" ng-model="modalSaveBoxCtrl.new_box_name" translate-attr="{placeholder: 'boxes.save.NAME_BOX'}" required>
@@ -32,12 +32,13 @@
 		</form>
 	</div>
 	<div class="boxes-items-wrapper">
-		<div class="save-modal-row-box" ng-repeat="box in modalSaveBoxCtrl.resolve.boxes.items | filter:modalSaveBoxCtrl.search_term" ng-if="modalSaveBoxCtrl.resolve.boxes.items.length > 0">
+		<div class="save-modal-row-box" ng-repeat="box in modalSaveBoxCtrl.boxes.items | filter:modalSaveBoxCtrl.search_term" ng-if="modalSaveBoxCtrl.boxes.items.length > 0">
 			<span class="box-name" ng-bind="box.name"></span>
-			<span class="pull-right ion-arrow-down-a save-box-btn" ng-click="modalSaveBoxCtrl.addProductToBox(modalSaveBoxCtrl.product.id, box.id)"></span>
+			<span class="pull-right ion-arrow-down-a save-box-btn" ng-click="modalSaveBoxCtrl.addProductToBox(modalSaveBoxCtrl.product.id, box.id)" ng-if="!box.haveProduct"></span>
+			<span class="pull-right ion-checkmark-round" ng-if="box.haveProduct"></span>
 		</div>
 	</div>
-	<div class="save-modal-text-row" ng-if="modalSaveBoxCtrl.resolve.boxes.items.length === 0">
+	<div class="save-modal-text-row" ng-if="modalSaveBoxCtrl.boxes.items.length === 0" ng-cloak>
 		<p><span translate="boxes.save.NO_BOXES_1"></span></p>
 		<p><span translate="boxes.save.NO_BOXES_2"></span></p>
 	</div>
