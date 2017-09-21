@@ -48,6 +48,7 @@
 			"NEW_WORK": "Nuevo producto",
 			"COMPLETE_REQUIRED_FIELDS": "Por favor completa todos los campos obligatorios antes de publicar tu producto.",
 			"SAVE_PROGRESS": "Guardar progreso",
+			"SAVE_DRAFT": "Guardar borrador",
 			"PUBLISH_WORK": "Publicar producto",
 			"PRODUCT_SAVED": "Producto guardado",
 			"LOADING": "Cargando...",
