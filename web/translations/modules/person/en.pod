@@ -79,7 +79,7 @@
 		},
 		"press": {
 			"ADD_REMOVE_PHOTOS": "Add / remove photos",
-			"NO_PRESS": "You don't have any press images!",
+			"NO_PRESS": "There is no content yet",
 			"DONE_PRESS": "I'm done editing press",
 			"ANY_PRESS": "You don't have any press images!",
 			"ADD_PRESS": "Add press",
@@ -139,7 +139,7 @@
 		},
 		"videos": {
 			"ADD_REMOVE_VIDEOS": "Add / remove videos",
-			"NO_VIDEOS": "You have no videos",
+			"NO_VIDEOS": "No videos have been uploaded yet",
 			"DONE_VIDEOS": "I'm done editing videos",
 			"ADD_VIDEOS": "Add videos",
 			"ANY_VIDEOS": "You have no videos",

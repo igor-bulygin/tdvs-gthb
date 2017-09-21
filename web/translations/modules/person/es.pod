@@ -80,7 +80,7 @@
 		},
 		"press": {
 			"ADD_REMOVE_PHOTOS": "Añadir / eliminar fotos",
-			"NO_PRESS": "¡No tienes ningún recorte de prensa!",
+			"NO_PRESS": "No hay contenido todavía",
 			"DONE_PRESS": "He acabado de editar mis recortes de prensa",
 			"ANY_PRESS": "¡No tienes recortes de prensa!",
 			"ADD_PRESS": "Añadir recorte de prensa",
@@ -140,7 +140,7 @@
 		},
 		"videos": {
 			"ADD_REMOVE_VIDEOS": "Añadir / eliminar vídeos",
-			"NO_VIDEOS": "No tienes vídeos",
+			"NO_VIDEOS": "No ha subido ningún vídeo todavía",
 			"DONE_VIDEOS": "He acabado de editar mis vídeos",
 			"ADD_VIDEOS": "Añadir vídeos",
 			"ANY_VIDEOS": "No tienes vídeos",
