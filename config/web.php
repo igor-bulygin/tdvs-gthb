@@ -395,6 +395,8 @@ $config = [
 				'POST api3/pub/v1/invitation/request-become-deviser' => 'api3/pub/v1/invitation/request-become-deviser',
 				'POST api3/pub/v1/invitation/request-become-influencer' => 'api3/pub/v1/invitation/request-become-influencer',
 
+				'POST api3/pub/v1/newsletter' => 'api3/pub/v1/newsletter/create',
+
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/product'],
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/faq'],
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/term'],
