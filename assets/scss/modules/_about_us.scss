@@ -6,22 +6,89 @@
 	width: 100%;
     float: left;
     min-height: 603px;
+	.logo{
+		width: 130px;
+		margin: 230px auto 40px;
+		display: block;
+	}
+	p{
+		width: 640px;
+		text-align: center;
+		margin: 0 auto;
+		color: $white;
+		font-size: 16px;
+		margin-bottom: 20px;
+		&.bold{
+			font-weight: bold;
+		}
+	}
 }
 .about-slide-2{
 	background-image:url(/imgs/aboutus2.png);
 	width: 100%;
     float: left;
     min-height: 603px;
+	.title{
+		font-family: $font-family--name;
+		font-size: 86px;
+		text-align: center;
+		letter-spacing: 2.4px;
+    	padding: 330px 0 20px 0;
+	}
+	p{
+		width: 640px;
+		text-align: center;
+		margin: 0 auto;
+		color: $black;
+		font-size: 16px;
+	}
 }
 .about-slide-3{
 	background-image:url(/imgs/aboutus3.png);
 	width: 100%;
     float: left;
     min-height: 603px;
+	.side-text{
+		background-color:rgba(255,255,255,0.3);
+		width: 463px;
+		height: 617px;
+		margin: 0 0 0 590px;
+		padding: 40px;
+		.title{
+			font-family: $font-family--name;
+			font-size: 86px;
+			letter-spacing: 2.4px;
+			text-align: right;
+		}
+		p{
+			text-align: right;
+			color: $black;
+			font-size: 16px;
+			&.bold{
+				font-weight: bold;
+			}
+		}
+	}
 }
 .about-slide-4{
 	background-image:url(/imgs/aboutus4.png);
 	width: 100%;
     float: left;
-    min-height: 603px;
+    min-height: 597px;
+    padding: 80px 0 0 80px;
+	.title{
+		font-family: $font-family--name;
+		font-size: 86px;
+		letter-spacing: 2.4px;
+		text-align: left;
+	}
+	p{
+		width: 559px;
+		text-align: left;
+		color: $black;
+		font-size: 16px;
+		&.bold{
+			font-weight: bold;
+		}
+	}
 }
