@@ -72,8 +72,8 @@
 	display: block;
     position: absolute;
     text-align: center;
-    top: 8px;
-    right: 7px;
+    top: 11px !important;//8px;
+    right: 12px;//7px;
     @include size(20px,20px);//25
     padding-top: 2px;
     background: url('/imgs/delete-red.svg') 0 0 no-repeat transparent;

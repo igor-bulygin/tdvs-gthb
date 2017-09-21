@@ -42,21 +42,21 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 			<div class="row text-center">
 				<a class="big-btn btn btn-default <?=$person->hasShippingSettings() ? 'done' : ''?>" href="<?=$person->getSettingsLink('shipping')?>">
 					<span translate="person.not_public.ADD_SHIPPING"></span>
-					<?php if ($person->hasShippingSettings()) { ?><i class="red-check ion-checkmark"></i> <?php } ?>
+					<?php if ($person->hasShippingSettings()) { ?><i class="red-check ion-checkmark 1"></i> <?php } ?>
 				</a>
 			</div>
 			<div class="row text-center">
 				<a class="big-btn btn btn-default <?=$person->hasStripeInfo() ? 'done' : ''?>" href="<?=$person->getSettingsLink('connect-stripe')?>">
 					<span translate="person.not_public.ADD_BANK_ACCOUNT"></span>
 					<p class="big-btn-message"><span translate="person.not_public.WILL_REDIRECTED"></span></p>
-					<?php if ($person->hasStripeInfo()) { ?><i class="red-check ion-checkmark"></i> <?php } ?>
+					<?php if ($person->hasStripeInfo()) { ?><i class="red-check ion-checkmark 2"></i> <?php } ?>
 				</a>
 				
 			</div>
 			<div class="row text-center">
 				<a class="big-btn btn btn-default <?=$person->hasPublishedProducts() ? 'done' : ''?>" href="<?=$person->getCreateWorkLink()?>">
 					<span translate="person.not_public.ADD_PRODUCT"></span>
-					<?php if ($person->hasPublishedProducts()) { ?><i class="red-check ion-checkmark"></i> <?php } ?>
+					<?php if ($person->hasPublishedProducts()) { ?><i class="red-check ion-checkmark 3"></i> <?php } ?>
 				</a>
 			</div>
 			<div class="products-added-wrapper mt-30">
