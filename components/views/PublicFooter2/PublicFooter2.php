@@ -63,22 +63,22 @@ $footerMode = 'collapsed';
 				<div class="title mt-40"><span translate="footer.STAY_CONNECTED"></span></div>
 				<ul class="social-items mt-10">
 					<li>
-						<a href="#">
+						<a href="https://www.facebook.com/todevise" target="_blank">
 							<i class="fa fa-facebook" aria-hidden="true"></i>
 						</a>
 					</li>
 					<li>
-						<a class="twitter" href="#">
+						<a class="twitter" href="#" target="_blank">
 							<i class="fa fa-twitter" aria-hidden="true"></i>
 						</a>
 					</li>
 					<li>
-						<a class="google-plus" href="#">
+						<a class="google-plus" href="#" target="_blank">
 							<i class="fa fa-google-plus" aria-hidden="true"></i>
 						</a>
 					</li>
 					<li>
-						<a href="#">
+						<a href="#" target="_blank">
 							<i class="fa fa-pinterest-p" aria-hidden="true"></i>
 						</a>
 					</li>
@@ -89,15 +89,15 @@ $footerMode = 'collapsed';
 			<div>
 				<ul>
 					<li>
-						<a href="#"><span translate="footer.TERMS_CONDITIONS"></span></a>
+						<a href="<?=Url::to(['/public/terms'])?>"><span translate="footer.TERMS_CONDITIONS"></span></a>
 					</li>
 					<li>·</li>
 					<li>
-						<a href="#"><span translate="footer.PRIVACY"></span></a>
+						<a href="<?=Url::to(['/public/privacy'])?>"><span translate="footer.PRIVACY"></span></a>
 					</li>
 					<li>·</li>
 					<li>
-						<a href="#"><span translate="footer.COOKIES"></span></a>
+						<a href="<?=Url::to(['/public/cookies'])?>"><span translate="footer.COOKIES"></span></a>
 					</li>
 				</ul>
 			</div>
