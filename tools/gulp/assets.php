@@ -23,21 +23,42 @@ return [
 	// The list of asset bundles to compress:
     'bundles' => [
 //    	'app\assets\AppAsset',
-//    	'app\assets\desktop\GlobalAsset',
 		'app\assets\desktop\pub\PublicCommonAsset',
-//		'yii\web\YiiAsset',
-//		'yii\web\JqueryAsset',
+		'app\assets\desktop\admin\GlobalAsset',
     ],
 
 	// Asset bundle for compression output:
     'targets' => [
-        'all' => [
-            'class' => 'yii\web\AssetBundle',
-            'basePath' => '@webroot/assets',
-            'baseUrl' => '@web/assets',
-			'js' => 'all-{hash}.js',
-			'css' => 'all-{hash}.css',
-        ],
+		'app' => [
+			'class' => 'yii\web\AssetBundle',
+			'basePath' => '@webroot/assets',
+			'baseUrl' => '@web/assets',
+			'js' => 'app.js',
+			'css' => 'app.css',
+			'depends' => [
+				'app\assets\AppAsset',
+			],
+		],
+		'public' => [
+			'class' => 'yii\web\AssetBundle',
+			'basePath' => '@webroot/assets',
+			'baseUrl' => '@web/assets',
+			'js' => 'public.js',
+			'css' => 'public.css',
+			'depends' => [
+				'app\assets\desktop\pub\PublicCommonAsset',
+			],
+		],
+		'admin' => [
+			'class' => 'yii\web\AssetBundle',
+			'basePath' => '@webroot/assets',
+			'baseUrl' => '@web/assets',
+			'js' => 'admin.js',
+			'css' => 'admin.css',
+			'depends' => [
+//				'app\assets\desktop\admin\GlobalAsset',
+			],
+		],
     ],
 
 	// Asset manager configuration:
