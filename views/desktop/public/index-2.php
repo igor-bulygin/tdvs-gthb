@@ -102,17 +102,17 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 			<div class="row">
 				<div class="col-sm-4">
 					<a href="#">
-						<img src="/imgs/FALL.jpg" class="responsive-image">
+						<img src="/imgs/home_square_1.jpg" class="responsive-image">
 					</a>
 				</div>
 				<div class="col-sm-4">
 					<a href="#">
-						<img src="/imgs/JEANS.jpg" class="responsive-image">
+						<img src="/imgs/home_square_2.jpg" class="responsive-image">
 					</a>
 				</div>
 				<div class="col-sm-4">
 					<a href="#">
-						<img src="/imgs/BASIC.jpg" class="responsive-image">
+						<img src="/imgs/home_square_3.jpg" class="responsive-image">
 					</a>
 				</div>
 			</div>
