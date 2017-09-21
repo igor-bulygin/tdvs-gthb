@@ -15,7 +15,7 @@ $this->registerJs("var type = 2", yii\web\View::POS_HEAD, 'person-type-script');
 				<form name="discoverCtrl.form">
 					<div class="devisers-searcher">
 						<input type="text" class="form-control white-rounded-input" name="key" ng-model="discoverCtrl.key" on-press-enter="discoverCtrl.search(discoverCtrl.form)" placeholder="{{ 'discover.SEARCH_KEYWORD' | translate }}" ng-cloak>
-						<span class="ion-search"></span>
+						<span class="ion-search" ng-click="discoverCtrl.search(discoverCtrl.form)"></span>
 					</div>
 				</form>
 			</div>

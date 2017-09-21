@@ -60,8 +60,8 @@ return [
 	'EDIT_VIDEOS_BY_PERSON_NAME' => 'Editar videos de {person_name}',
 	'EDIT_WORKS_BY_PERSON_NAME' => 'Editar trabajos de {person_name}',
 	'ERROR_PAGE_TITLE' => 'Oops! Something went wrong',
-	'ERROR_PAGE_MESSAGE_1' => 'Even the best relationships  go through  a rough patch sometimes, but this doesn’t mean that  we don’t love each other anymore',
-	'ERROR_PAGE_MESSAGE_2' => 'PD: Go back home babe, we are taking care os it',
+	'ERROR_PAGE_MESSAGE_1' => 'Incluso las mejores amistades pasan por momentos difíciles, pero no significa que ya no nos queramos',
+	'ERROR_PAGE_MESSAGE_2' => 'PD: Vuelve a casa puerks, nos estamos ocupando de ello!',
 	'EXPLORE_BOXES' => 'Explora las cajas',
 	'INCORRECT_USERNAME_OR_PASSWORD' => 'Nombre de usuario o contraseña incorrectos',
 	'INDEX_TITLE' => 'Todevise',

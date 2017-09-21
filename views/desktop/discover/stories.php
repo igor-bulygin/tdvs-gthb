@@ -14,7 +14,7 @@ $this->title = Yii::t('app/public','STORIES');
 				<form name="exploreStoriesCtrl.form">
 					<div class="devisers-searcher">
 						<input type="text" class="form-control white-rounded-input" name="key" ng-model="exploreStoriesCtrl.key" on-press-enter="exploreStoriesCtrl.search(exploreStoriesCtrl.form)" placeholder="{{ 'discover.SEARCH_KEYWORD' | translate }}" ng-cloak>
-						<span class="ion-search"></span>
+						<span class="ion-search" ng-click="exploreStoriesCtrl.search(exploreStoriesCtrl.form)"></span>
 					</div>
 				</form>
 			</div>
@@ -24,7 +24,7 @@ $this->title = Yii::t('app/public','STORIES');
 				<explore-stories-filters filters="exploreStoriesCtrl.filters" searching="exploreStoriesCtrl.searching"></explore-stories-filters></div>
 				<div class="col-md-10">
 					<div class="found-header">
-						<p ng-if="exploreStoriesCtrl.search_key && !exploreStoriesCtrl.searching" ng-cloak translate="discover.WE_FOUND_X_RESULTS" translate-values="{ counter: exploreStoriesCtrl.results.meta.total_count }">"<span class="key" ng-bind="exploreStoriesCtrl.search_key"></span>"</p>
+						<p ng-if="exploreStoriesCtrl.search_key && !exploreStoriesCtrl.searching" ng-cloak translate="discover.WE_FOUND_X_RESULTS" translate-values="{ counter: exploreStoriesCtrl.results.meta.total_count, keys: exploreStoriesCtrl.search_key}"></p>
 					</div>
 					<hr />
 					<div ng-if="exploreStoriesCtrl.searching" ng-cloak>

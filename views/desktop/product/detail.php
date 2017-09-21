@@ -91,17 +91,16 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 										<?php if (count($productImages)>1) { ?>
 										<!-- Controls -->
 										<a class='left carousel-control' href='#carousel-custom' data-slide='prev'>
-											<span class='ion-ios-arrow-left arrow'>
-													</span>
+											<span class='ion-ios-arrow-left arrow'></span>
 										</a>
 										<a class='right carousel-control' href='#carousel-custom' data-slide='next'>
-											<span class='ion-ios-arrow-right arrow'>
-													</span>
+											<span class='ion-ios-arrow-right arrow'></span>
 										</a>
 										<?php } ?>
 									</div>
 								</div>
-								<!--div class="col-sm-12">
+								<?php /*
+								<div class="col-sm-12">
 									<ol class='carousel-indicators thumbs mCustomScrollbar'>
 										<?php foreach ($productImages as $key => $imageUrl) { ?>
 											<li class="col-sm-1" data-target='#carousel-custom' data-slide-to='<?= $key ?>' class='active'>
@@ -109,7 +108,8 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 											</li>
 											<?php } ?>
 									</ol>
-								</div-->
+								</div>
+								*/?>
 							</div>
 						</div>
 					</div>
@@ -247,7 +247,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 											<!--i class="ion-ios-heart-outline"></i-->
 										</button>
 									<?php } ?>
-									<button type="button" class="btn btn-save-box pull-right" ng-click="detailProductCtrl.setBox()">
+									<button type="button" class="btn btn-save-box pull-right ng-class:{'btn-red': detailProductCtrl.product.isInMyBoxes}" ng-click="detailProductCtrl.setBox()">
 										<div class="box-icon"></div>
 										<span translate="product.detail.SAVE_IN_BOX"></span>
 									</button>
@@ -691,7 +691,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 						</ul>
 					</nav>
 					<div class="other-products-wrapper">
-						<div id="macy-container">
+						<div id="works-container" class="macy-container" data-columns="6">
 							<?php foreach ($personProducts as $i => $product) { ?>
 								<div class="menu-category list-group">
 									<div class="grid">

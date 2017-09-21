@@ -37,7 +37,7 @@ $this->title = 'Login';
 				</button>
 			</div>
 		</div>
-		<div class="text-center" ng-if="loginCtrl.loading">
+		<div class="text-center mt-30" ng-if="loginCtrl.loading">
 			<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
 			<span class="sr-only" translate="global.LOADING"></span>
 		</div>

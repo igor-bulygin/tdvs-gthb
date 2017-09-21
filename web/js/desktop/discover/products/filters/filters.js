@@ -12,14 +12,14 @@
 		vm.orderFilter={value:"", name: "discover.ORDER_BY"};
 		vm.filters = {};
 		vm.search=search;
-		if (!angular.isUndefined(searchParam) &&searchParam.length>0) {
-			vm.searchParam = angular.copy(searchParam);
-		}
 		vm.searchPage=1;
 		vm.resultsCounter=0;
 		init();
 
 		function init() {
+			if (!angular.isUndefined(searchParam) &&searchParam.length>0) {
+				vm.searchParam = angular.copy(searchParam);
+			}
 			getCategories();
 		}
 

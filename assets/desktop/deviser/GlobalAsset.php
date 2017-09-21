@@ -9,7 +9,6 @@ class GlobalAsset extends AssetBundle {
 	public $css = [
 	];
 	public $js = [
-		'js/desktop/person/store-grid.js',
 		'js/desktop/person/complete-profile.js',
 		'js/desktop/person/view-store.js',
 		'js/desktop/person/edit-store.js',
@@ -22,7 +21,6 @@ class GlobalAsset extends AssetBundle {
 		'js/desktop/person/person-not-public.js',
 	];
 	public $depends = [
-		'app\assets\libs\macyAsset',
 		'app\assets\desktop\GlobalAsset',
 		'app\assets\desktop\deviser\IndexAsset',
 	];

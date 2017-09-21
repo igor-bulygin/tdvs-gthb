@@ -341,6 +341,7 @@ $config = [
 
 				/********************************** @deprecated routes ************************************************/
 
+				/*
 				// Public routing
 				'/index-old' => 'public/index-old',
 
@@ -377,6 +378,7 @@ $config = [
 				//Link for deviser work photo upload
 				'<slug:[0-9a-z-A-Z\-]*?>/upload-product-photo/<short_id:\w{8}>/' => 'deviser/upload-product-photo',
 
+				*/
 				/******************************************************************************************************/
 
 
@@ -392,6 +394,8 @@ $config = [
 				// API routing (public)
 				'POST api3/pub/v1/invitation/request-become-deviser' => 'api3/pub/v1/invitation/request-become-deviser',
 				'POST api3/pub/v1/invitation/request-become-influencer' => 'api3/pub/v1/invitation/request-become-influencer',
+
+				'POST api3/pub/v1/newsletter' => 'api3/pub/v1/newsletter/create',
 
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/product'],
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/pub/v1/faq'],

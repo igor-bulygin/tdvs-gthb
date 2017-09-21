@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(personDataService, toastr, UtilService, languageDataService, $window, dragndropService) {
+	function controller(personDataService, toastr, UtilService, languageDataService, $window, dragndropService,$translate) {
 		var vm = this;
 		vm.stripHTMLTags = UtilService.stripHTMLTags;
 		vm.addQuestion = addQuestion;
@@ -13,12 +13,29 @@
 		vm.moved = moved;
 		vm.canceled = canceled;
 		vm.done = done;
+		vm.selected_language=_lang;
+		vm.mandatory_langs=Object.keys(_langs_required);
+		vm.mandatory_langs_names="";
+		vm.saving=true;
 
 		function init() {
 			getPerson();
+			setMandatoryLanguagesNames();
 		}
 
 		init();
+
+		function setMandatoryLanguagesNames() {
+			angular.forEach(Object.keys(_langs_required), function (lang) {
+				var translationLang="product.".concat(_langs_required[lang].toUpperCase());
+				$translate(translationLang).then(function (tr) {
+					if (vm.mandatory_langs_names.length>0) {
+						vm.mandatory_langs_names=vm.mandatory_langs_names.concat(', ');
+					}
+					vm.mandatory_langs_names=vm.mandatory_langs_names.concat(tr);
+				});
+			});
+		}
 
 		function getPerson() {
 			function onGetLanguagesSuccess(data) {
@@ -30,6 +47,7 @@
 						parseQuestion(element);
 					})
 				}
+				vm.saving=false;
 			}
 
 			function onGetProfileSuccess(data) {
@@ -51,7 +69,7 @@
 				question: {},
 				answer: {},
 				completedLanguages: [],
-				languageSelected: 'en-US'
+				languageSelected: vm.selected_language
 			});
 		}
 
@@ -77,6 +95,26 @@
 		}
 
 		function update() {
+			vm.saving=true;
+			var hasError=false;
+			angular.forEach(vm.person.faq, function (faq) {
+				faq.required_question=false;
+				faq.required_answer=false;
+				angular.forEach(vm.mandatory_langs, function (lang) {
+					if (angular.isUndefined(faq.question[lang]) || faq.question[lang].length<1) {
+						faq.required_question=true;
+						hasError=true;
+					}
+					if (angular.isUndefined(faq.answer[lang]) || faq.answer[lang].length<1) {
+						faq.required_answer=true;
+						hasError=true;
+					}
+				});
+			});
+			if (hasError) {
+				vm.saving=false;
+				return;
+			}
 			var data = {
 				scenario: 'deviser-update-profile',
 				faq: [],
