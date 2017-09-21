@@ -47,7 +47,7 @@ $this->params['person_links_target'] = 'public_view';
 							<div class="title-wrapper title-loved">
 								<span class="title"><span translate="person.loved.LOVED_BY"></span> <?=$person->getName()?></span>
 							</div>
-							<div id="macy-container">
+							<div id="loved-container" class="macy-container" data-columns="6">
 								<?php foreach ($loveds as $loved) {
 									$product = $loved->getProduct();
 									if ($product->product_state != \app\models\Product::PRODUCT_STATE_ACTIVE) {

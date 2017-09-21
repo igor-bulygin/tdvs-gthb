@@ -61,7 +61,7 @@ $this->params['person_menu_store_categories'] = $categories;
 								<?php } ?>
 							</ul>
 						</nav>
-						<div id="macy-container" ng-controller="viewStoreCtrl as viewStoreCtrl">
+						<div id="boxes-container" class="macy-container" data-columns="5" ng-controller="viewStoreCtrl as viewStoreCtrl">
 							<?php foreach ($products as $i => $product) { ?>
 								<div class="menu-category list-group">
 									<div class="grid">

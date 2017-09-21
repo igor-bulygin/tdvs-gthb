@@ -1,8 +1,10 @@
 <?php
 
-use app\assets\desktop\pub\Index2Asset;use app\helpers\Utils;use app\models\Person;
+use app\assets\desktop\pub\PublicCommonAsset;
+use app\helpers\Utils;
+use app\models\Person;
 
-Index2Asset::register($this);
+PublicCommonAsset::register($this);
 
 $this->title = Yii::t('app/public', 'INDEX_TITLE');
 
@@ -676,7 +678,7 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 <section class="grid-wrapper" id="grid-product-home">
 	<div class="container">
 		<h3 class="title-product-name">Discover what´s next</h3>
-		<div id="macy-container" class="grid-margin">
+		<div id="works-container" class="macy-container grid-margin" data-trueorder="true" data-waitforimages="true" data-columns="6">
 			<?php foreach ($works as $i => $work) { ?>
 			<div class="col-md-2">
 				<div class="menu-category list-group">
