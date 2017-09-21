@@ -31,7 +31,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 				<?= PersonMenu::widget() ?>
 			</div>
 			<div class="col-md-10" ng-controller="editFaqCtrl as editFaqCtrl">
-				<div class="faq-wrapper faq-edit-list">
+				<div class="faq-wrapper faq-edit-list" ng-if="!editFaqCtrl.saving" ng-cloak>
 					<!-- <div class="section-title">FAQ</div> -->
 					<div class="edit-faq-wrapper" ng-cloak ng-if="editFaqCtrl.person.faq.length > 0">
 
@@ -51,6 +51,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 												<div class="col-sm-10">
 													<input type="text" class="faq-edit-answer" translate-attr="{placeholder: 'person.faq.QUESTION'}" ng-model="question.question[question.languageSelected]">
 												</div>
+												<div class="col-md-10 text-right error-text" ng-if="question.required_question"><span translate="person.faq.FIELD_LANGS_MANDATORY" translate-values='{ languageList: editFaqCtrl.mandatory_langs_names}'></span></div>
 											</div>
 											<div class="faq-row">
 												<div class="col-sm-2">
@@ -59,10 +60,11 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 												<div class="col-sm-10">
 													<div class="faq-edit-answer" text-angular ng-model="question.answer[question.languageSelected]" ta-toolbar="[]" translate-attr="{placeholder: 'person.faq.ANSWER'}" ta-paste="editFaqCtrl.stripHTMLTags($html)"></div>
 												</div>
+												<div class="col-md-10 text-right error-text" ng-if="question.required_answer"><span translate="person.faq.FIELD_LANGS_MANDATORY" translate-values='{ languageList: editFaqCtrl.mandatory_langs_names}'></span></div>
 											</div>
 										</div>
 									</div>
-									<ol class="faq-lang nya-bs-select form-control" ng-model="question.languageSelected" ng-change="editFaqCtrl.parseQuestion(question)" ng-init="question.languageSelected='en-US'">
+									<ol class="faq-lang nya-bs-select form-control" ng-model="question.languageSelected" ng-change="editFaqCtrl.parseQuestion(question)" ng-init="question.languageSelected=editFaqCtrl.selected_language">
 										<li nya-bs-option="language in editFaqCtrl.languages" class="ng-class:{'lang-selected': editFaqCtrl.isLanguageOk(language.code, question)}" data-value="language.code" deep-watch="true">
 											<a href="">
 												<span ng-bind="language.name"></span>
@@ -88,6 +90,9 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 							<br/> <span translate="person.faq.START_WRITE_FAQ"></span></p>
 							<a class="btn btn-red edit-faq-btn" href="#" ng-click="editFaqCtrl.addQuestion()"><span translate="person.faq.ADD_QUESTION"></span></a>
 					</div>
+				</div>
+				<div class="text-center mt-50" ng-if="editFaqCtrl.saving" ng-cloak>
+					<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
 				</div>
 			</div>
 		</div>

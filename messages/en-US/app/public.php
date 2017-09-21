@@ -62,7 +62,7 @@ return [
     'EDIT_WORKS_BY_PERSON_NAME' => 'Edit works by {person_name}',
 	'ERROR_PAGE_TITLE' => 'Oops! Something went wrong',
 	'ERROR_PAGE_MESSAGE_1' => 'Even the best relationships  go through  a rough patch sometimes, but this doesn’t mean that  we don’t love each other anymore',
-	'ERROR_PAGE_MESSAGE_2' => 'PD: Go back home babe, we are taking care os it',
+	'ERROR_PAGE_MESSAGE_2' => 'PD: Go back home babe, we are taking care of it!',
     'EXPLORE_BOXES' => 'Explore boxes',
     'INCORRECT_USERNAME_OR_PASSWORD' => 'Incorrect username or password',
     'INDEX_TITLE' => 'Todevise',

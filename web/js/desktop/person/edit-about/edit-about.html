@@ -27,7 +27,7 @@
 							<span class="optional-text pull-left"><span translate="global.OPTIONAL"></span></span>
 							<span class="small-grey"><span translate="{{editAboutCtrl.resume_sub_text}}"></span></span>
 							<div class="edit-about-row">
-								<button class="btn btn-small btn-red" ngf-select="editAboutCtrl.uploadCV($file)" ngf-accept="'application/pdf,image/*'"><span translate="global.UPLOAD_FILE"></span></button>
+								<button class="btn btn-xl btn-red" ngf-select="editAboutCtrl.uploadCV($file)" ngf-accept="'application/pdf,image/*'"><span translate="global.UPLOAD_FILE"></span></button>
 								<span class="cv" ng-if="editAboutCtrl.person.curriculum" ng-cloak>
 									<span class="pull-left cv-file" ng-bind="editAboutCtrl.person.curriculum"></span> 
 									<span class="remove-cv ion-ios-close-empty pull-left" ng-click="editAboutCtrl.deleteCV()"></span></span>
@@ -55,7 +55,8 @@
 					<div class="photo-loader loader-about" ng-if="editAboutCtrl.images.length >= editAboutCtrl.maxImages" ng-cloak>
 						<span class="photo-loader-title"><span translate="person.about.ENRICH_SECTION"></span></span>
 						<div class="new-add-wrapper">
-							<div class="new-add ion-camera"></div>
+							<div class="new-add">
+							</div>
 							<div class="text"><span translate="person.about.ADD_PHOTOS"></span></div>
 						</div>
 						<span class="photo-loader-warning col-md-12 mt-30" ng-cloak><span translate="person.about.MAX_PHOTOS" translate-values="{ max: editAboutCtrl.maxImages }">

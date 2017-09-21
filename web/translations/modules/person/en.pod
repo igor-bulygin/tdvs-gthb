@@ -1,5 +1,7 @@
 {
 	"person": {
+		"SPANISH":"spanish",
+		"ENGLISH":"english",
 		"about": {
 			"EDIT_ABOUT": "Edit about",
 			"SEE_RESUME": "See resume",
@@ -43,7 +45,8 @@
 			"UPLOAD_PROFILE_PHOTO": "Upload profile photo",
 			"PLS_UPLOAD_PROFILE": "Please upload a<br/>profile photo",
 			"UPLOAD_COVER_PHOTO": "Upload cover photo",
-			"PLS_UPLOAD_COVER": "Please upload a<br/>cover photo"
+			"PLS_UPLOAD_COVER": "Please upload a<br/>cover photo",
+			"MAX_CHARACTERS_REACHED":"Maximum characters number reached"
 		},
 		"faq": {
 			"DONE_FAQ": "I'm done editing FAQ's",
@@ -54,7 +57,8 @@
 			"NO_FAQS": "You haven't written any FAQs.",
 			"START_WRITE_FAQ": "Start now by clicking the <b>ADD QUESTION</b> button.",
 			"ADD_EDIT_QUESTIONS": "Add / edit questions",
-			"NO_QUESTIONS": "You don't have any questions!"
+			"NO_QUESTIONS": "You don't have any questions!",
+			"FIELD_LANGS_MANDATORY": "This field is mandatory in {{languageList}}."
 		},
 		"loved": {
 			"NO_LOVED": "You haven't loved any works yet.",

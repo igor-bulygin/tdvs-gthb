@@ -1,15 +1,8 @@
 <?php
 namespace app\validators;
 
-use app\helpers\Utils;
 use app\models\Lang;
-use app\models\Person;
-use Yii;
-use yii\base\Model;
-use yii\helpers\Html;
-use yii\validators\UrlValidator;
 use yii\validators\Validator;
-use yii\web\UrlManager;
 
 class TranslatableRequiredValidator extends Validator
 {
@@ -28,9 +21,13 @@ class TranslatableRequiredValidator extends Validator
 			return false;
 		}
 
-		if (!isset($values[Lang::EN_US])) {
-			$error = 'English translation is required';
-			return false;
+		$requiredLangs = Lang::getRequiredLanguages();
+		foreach ($requiredLangs as $langCode => $langDesc) {
+			if (!isset($values[$langCode])) {
+				$error = $langDesc.' translation is required';
+
+				return false;
+			}
 		}
 
 		return true;
@@ -54,8 +51,11 @@ class TranslatableRequiredValidator extends Validator
 				$this->addError($object, $attribute, 'Can not be empty');
 			}
 
-			if (!isset($values[Lang::EN_US])) {
-				$this->addError($object, $attribute, 'English translation is required');
+			$requiredLangs = Lang::getRequiredLanguages();
+			foreach ($requiredLangs as $langCode => $langDesc) {
+				if (!isset($values[$langCode]) || empty($values[$langCode])) {
+					$this->addError($object, $attribute, $langDesc.' translation is required');
+				}
 			}
 		}
 	}

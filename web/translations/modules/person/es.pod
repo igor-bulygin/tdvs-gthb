@@ -1,5 +1,7 @@
 {	
 	"person": {
+		"SPANISH":"español",
+		"ENGLISH":"inglés",
 		"about": {
 			"EDIT_ABOUT": "Editar perfil",
 			"SEE_RESUME": "Ver CV",
@@ -43,7 +45,8 @@
 			"UPLOAD_PROFILE_PHOTO": "Añadir foto de perfil",
 			"PLS_UPLOAD_PROFILE": "Por favor añade<br/>una foto de perfil",
 			"UPLOAD_COVER_PHOTO": "Añadir foto de portada",
-			"PLS_UPLOAD_COVER": "Por favor añade<br/>una foto de portada"
+			"PLS_UPLOAD_COVER": "Por favor añade<br/>una foto de portada",
+			"MAX_CHARACTERS_REACHED":"Número máximo de caracteres alcanzado"
 		},
 		"faq": {
 			"DONE_FAQ": "He acabado de editar mis FAQ's",
@@ -54,7 +57,8 @@
 			"NO_FAQS": "No has escrito ningún FAQs.",
 			"START_WRITE_FAQ": "Empieza ahora pulsando el botón de <b>Añadir pregunta</b>.",
 			"ADD_EDIT_QUESTIONS": "Añadir / editar preguntas",
-			"NO_QUESTIONS": "¡No has creado ninguna pregunta!"
+			"NO_QUESTIONS": "¡No has creado ninguna pregunta!",
+			"FIELD_LANGS_MANDATORY": "El campo en {{languageList}} es obligatorio."
 		},
 		"loved": {
 			"NO_LOVED": "Aún no has añadido ningún trabajo a tus preferidos.",
