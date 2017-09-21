@@ -21,13 +21,19 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 				<div class="deviser-profile">
 					<div class="avatar-btn-profile">
 						<div class="avatar">
-							<div class="icon-deviser">
+							<div class="icon-deviser" ng-if="personHeaderCtrl.person.type.indexOf(2)>=0" ng-cloak>
 								<img src="/imgs/deviser.svg">
+							</div>
+							<div class="icon-deviser" ng-if="personHeaderCtrl.person.type.indexOf(3)>=0" ng-cloak>
+								<img src="/imgs/estrella.svg">
 							</div>
 							<img class="cover" ng-src="{{personHeaderCtrl.person.profile_image}}">
 						</div>
-						<div class="type-of-user">
-							Deviser
+						<div class="type-of-user" ng-if="personHeaderCtrl.person.type.indexOf(2)>=0" ng-cloak>
+							<span translate="global.DEVISER"></span>
+						</div>
+						<div class="type-of-user" ng-if="personHeaderCtrl.person.type.indexOf(3)>=0" ng-cloak>
+							<span translate="global.INFLUENCER"></span>
 						</div>
 						<?php if ($person->isPersonEditable() && $person->isPublic()) {?>
 							<div class="edit-profile-btn">
@@ -99,7 +105,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 						<!-- city -->
 						<div>
 							<label for="city"><span translate="global.user.CITY"></span></label>
-							<input type="text" class="form-control ng-class:{'error-input': personHeaderCtrl.has_error(personHeaderCtrl.form, personHeaderCtrl.form.city)}" ng-model="personHeaderCtrl.city" ng-model-options='{ debounce: 500 }' ng-change="personHeaderCtrl.searchPlace(personHeaderCtrl.city)" translate-attr="{placeholder: 'person.header.YOUR_CITY'}" name="city" required>
+							<input type="text" class="form-control ng-class:{'error-input': personHeaderCtrl.has_error(personHeaderCtrl.form, personHeaderCtrl.form.city)}" ng-model="personHeaderCtrl.city" ng-model-options='{ debounce: 500 }' ng-change="personHeaderCtrl.searchPlace(personHeaderCtrl.city)" translate-attr="{placeholder: 'person.header.YOUR_CITY'}" name="city" required autocomplete="off">
 						</div>
 						<div ng-if="personHeaderCtrl.showCities" ng-cloak>
 							<ul class="city-selection">

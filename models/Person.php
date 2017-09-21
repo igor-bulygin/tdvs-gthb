@@ -1830,23 +1830,26 @@ class Person extends CActiveRecord implements IdentityInterface
 		}
 
 		if ($this->isDeviser()) {
-			return !(
-				empty($this->getName()) ||
-				empty($this->getCity()) ||
-				empty($this->categories) ||
-				empty($this->text_short_description) ||
-				empty($this->text_biography) ||
-				empty($this->mediaMapping->header) ||
-				empty($this->mediaMapping->profile) ||
-				false
+			return (
+				!empty($this->personalInfoMapping->name) &&
+				!empty($this->personalInfoMapping->brand_name) &&
+				!empty($this->getCity()) &&
+				!empty($this->categories) &&
+				!empty($this->text_short_description) &&
+				!empty($this->text_biography) &&
+				!empty($this->mediaMapping->header) &&
+				!empty($this->mediaMapping->profile) &&
+				true
 			);
 		} elseif ($this->isInfluencer()) {
-			return !(
-				empty($this->getName()) ||
-				empty($this->text_short_description) ||
-				empty($this->mediaMapping->header) ||
-				empty($this->mediaMapping->profile) ||
-				false
+			return (
+				!empty($this->personalInfoMapping->name) &&
+				!empty($this->personalInfoMapping->last_name) &&
+				!empty($this->getCity()) &&
+				!empty($this->text_short_description) &&
+				!empty($this->mediaMapping->header) &&
+				!empty($this->mediaMapping->profile) &&
+				true
 			);
 		}
 		return true;

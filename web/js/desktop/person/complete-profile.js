@@ -124,7 +124,7 @@
 				var fileData = {
 					person_id: vm.person.short_id,
 					type: 'deviser-media-header-cropped',
-					file: Upload.dataUrltoBlob(vm.header_cropped, "temp.jpg")
+					file: Upload.dataUrltoBlob(vm.header_cropped, "temp.png")
 				}
 
 				uploadDataService.UploadFile(fileData, onUploadHeaderCroppedSuccess, onError, console.log);
@@ -149,7 +149,7 @@
 				var fileData = {
 					person_id: vm.person.short_id,
 					type: 'deviser-media-profile-cropped',
-					file: Upload.dataUrltoBlob(vm.profile_cropped, "temp.jpg")
+					file: Upload.dataUrltoBlob(vm.profile_cropped, "temp.png")
 				}
 				
 				uploadDataService.UploadFile(fileData, onUploadProfileCroppedSuccess, onError, console.log);

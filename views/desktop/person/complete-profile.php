@@ -48,7 +48,7 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 			<?php if($person->isDeviser() || $person->isInfluencer()) {?>
 				<div class="row">
 					<label for="city"><span translate="global.user.CITY"></span></label>
-					<input type="text" name="city" class="form-control grey-input ng-class:{'error-input': completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.city)}" ng-model="completeProfileCtrl.city" ng-model-options="{debounce: 500}" ng-change="completeProfileCtrl.searchPlace(completeProfileCtrl.city)" required>
+					<input type="text" name="city" class="form-control grey-input ng-class:{'error-input': completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.city)}" ng-model="completeProfileCtrl.city" ng-model-options="{debounce: 500}" ng-change="completeProfileCtrl.searchPlace(completeProfileCtrl.city)" required autocomplete="off">
 					<form-errors field="completeProfileCtrl.form.city" condition="completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.city)"></form-errors>
 					<div class="relativize-me" ng-if="completeProfileCtrl.showCities" ng-cloak>
 						<ul class="city-selection-center">
@@ -140,7 +140,7 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 			<div class="row upload-photo-section">
 				<div class="upload-photo-wrapper">
 					<div class="crop-modal" ng-if="completeProfileCtrl.profile" ng-cloak>
-						<ui-cropper image="completeProfileCtrl.profile_crop" area-type="{{completeProfileCtrl.crop_options.profile.area_type}}" chargement="'Loading'" aspect-ratio="completeProfileCtrl.crop_options.profile.aspect_ratio" init-max-area="true" result-image="completeProfileCtrl.profile_cropped" result-image-format="'image/jpeg'" area-min-size="20" result-image-quality="0.5"></ui-cropper>
+						<ui-cropper image="completeProfileCtrl.profile_crop" area-type="{{completeProfileCtrl.crop_options.profile.area_type}}" chargement="'Loading'" aspect-ratio="completeProfileCtrl.crop_options.profile.aspect_ratio" init-max-area="true" result-image="completeProfileCtrl.profile_cropped" result-image-format="'image/png'" area-min-size="20" result-image-quality="1.0"></ui-cropper>
 					</div>
 				</div>
 			</div>
@@ -163,7 +163,7 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 			<div class="row upload-photo-section">
 				<div class="upload-photo-wrapper">
 					<div class="crop-modal" ng-if="completeProfileCtrl.header" ng-cloak>
-						<ui-cropper image="completeProfileCtrl.header_crop" area-type="{{completeProfileCtrl.crop_options.header.area_type}}" chargement="'Loading'" aspect-ratio="completeProfileCtrl.crop_options.header.aspect_ratio" init-max-area="true" result-image="completeProfileCtrl.header_cropped" result-image-size="completeProfileCtrl.crop_options.header.size" result-image-format="'image/jpeg'" area-min-size="20" result-image-quality="0.5"></ui-cropper>
+						<ui-cropper image="completeProfileCtrl.header_crop" area-type="{{completeProfileCtrl.crop_options.header.area_type}}" chargement="'Loading'" aspect-ratio="completeProfileCtrl.crop_options.header.aspect_ratio" init-max-area="true" result-image="completeProfileCtrl.header_cropped" result-image-size="completeProfileCtrl.crop_options.header.size" result-image-format="'image/png'" area-min-size="20" result-image-quality="1.0"></ui-cropper>
 					</div>
 				</div>
 			</div>

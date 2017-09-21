@@ -14,7 +14,7 @@ $footerMode = 'collapsed';
 ?>
 
 <!-- FOOTER -->
-<footer class="<?= ($footerMode=='expanded') ? 'untoggled' : '' ?>" id="main_footer">
+<footer class="<?= ($footerMode=='expanded') ? 'untoggled' : '' ?>" id="main_footer" ng-controller="footerCtrl as footerCtrl">
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-3">
@@ -24,36 +24,41 @@ $footerMode = 'collapsed';
 						<span>-</span>
 					</li>
 					<li>
-						<a href="<?= Url::to(["public/contact"]) ?>">Contact us</a>
+						<a href="<?= Url::to(["public/contact"]) ?>"><span translate="footer.CONTACT_US"></span></a>
 					</li>
 					<li>
-						<a href="#">FAQs</a>
+						<a href="#"><span translate="footer.FAQS"></span></a>
 					</li>
 					<li>
 						<span>-</span>
 					</li>
 					<li>
-						<a href="<?= Url::to(["public/about-us"]) ?>">ABOUT US</a>
+						<a href="<?= Url::to(["public/about-us"]) ?>"><span translate="footer.ABOUT_US"></span></a>
 					</li>
 				</ul>
 			</div>
 			<div class="col-sm-6">
-				<div class="title text-center">Do you want to become a deviser?</div>
-				<a href="<?= Url::to(["public/become-deviser"]) ?>" class="btn btn-medium btn-red mt-10 auto-center">Become a deviser</a>
-				<div class="title text-center mt-40">Do you want to become an influencer?</div>
-				<a href="<?= Url::to(["public/become-influencer"]) ?>" class="btn btn-medium btn-transparent mt-10 auto-center">Become a influencer</a>
+				<div class="title text-center"><span translate="footer.BECOME_DEVISER_QUESTION"></span></div>
+				<a href="<?= Url::to(["public/become-deviser"]) ?>" class="btn btn-medium btn-red mt-10 auto-center"><span translate="footer.BECOME_DEVISER"></span></a>
+				<div class="title text-center mt-40"><span translate="footer.BECOME_INFLUENCER_QUESTION"></span></div>
+				<a href="<?= Url::to(["public/become-influencer"]) ?>" class="btn btn-medium btn-transparent mt-10 auto-center"><span translate="footer.BECOME_INFLUENCER"></span></a>
 			</div>
 			<div class="col-sm-3">
-				<div class="title">Subscribe to our newsletter</div>
-				<div class="input-group input-newsletter mt-30">
-					<input type="text" class="form-control" placeholder="E-mail">
-					<span class="input-group-btn">
-						<button class="btn-red send-btn-sm" type="button">
-							<img src="/imgs/plane.svg" data-pin-nopin="true">
-						</button>
-					</span>
+				<div class="title"><span translate="footer.SUBSCRIBE_NEWSLETTER"></span></div>
+				<form name="footerCtrl.newsletterForm" ng-if="!footerCtrl.subscribed" ng-cloak>
+					<div class="input-group input-newsletter mt-30">
+						<input type="email" class="form-control" name="email" ng-model="footerCtrl.newsletterEmail" placeholder="E-mail">
+						<span class="input-group-btn">
+							<button class="btn-red send-btn-sm" type="button" ng-click="footerCtrl.sendNewsletter(footerCtrl.newsletterForm)">
+								<img src="/imgs/plane.svg" data-pin-nopin="true">
+							</button>
+						</span>
+					</div>
+				</form>
+				<div ng-if="footerCtrl.subscribed" ng-cloak>
+					<p>Subscribed!</p>
 				</div>
-				<div class="title mt-40">Stay connected</div>
+				<div class="title mt-40"><span translate="footer.STAY_CONNECTED"></span></div>
 				<ul class="social-items mt-10">
 					<li>
 						<a href="#">
@@ -82,15 +87,15 @@ $footerMode = 'collapsed';
 			<div>
 				<ul>
 					<li>
-						<a href="#">Terms &amp; Conditions</a>
+						<a href="#"><span translate="footer.TERMS_CONDITIONS"></span></a>
 					</li>
 					<li>·</li>
 					<li>
-						<a href="#">Privacy policy</a>
+						<a href="#"><span translate="footer.PRIVACY"></span></a>
 					</li>
 					<li>·</li>
 					<li>
-						<a href="#">Cookies policy</a>
+						<a href="#"><span translate="footer.COOKIES"></span></a>
 					</li>
 				</ul>
 			</div>

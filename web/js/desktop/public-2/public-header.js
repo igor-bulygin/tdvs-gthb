@@ -1,6 +1,10 @@
 (function () {
 	"use strict";
 
+	function config($translatePartialLoaderProvider) {
+		$translatePartialLoaderProvider.addPart('header');
+	}
+
 	function controller(personDataService, $window, UtilService, localStorageUtilService) {
 		var vm = this;
 		vm.logout = logout;
@@ -16,9 +20,7 @@
 		}
 	}
 
-	var headerModule=angular.module('header', ['api', 'util', 'box','pascalprecht.translate'])
-	.controller('publicHeaderCtrl', controller);
-	headerModule.config(['$translatePartialLoaderProvider', function ($translatePartialLoaderProvider) {
-		$translatePartialLoaderProvider.addPart('header');
-	}]);
+	angular.module('header', ['api', 'util', 'box', 'pascalprecht.translate'])
+		.config(config)
+		.controller('publicHeaderCtrl', controller);
 }());

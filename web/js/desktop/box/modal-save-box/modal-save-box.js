@@ -13,6 +13,8 @@
 		function init(){
 			vm.creatingBox = false;
 			vm.master_create_box_form = angular.copy(vm.create_form);
+			vm.boxes = angular.copy(vm.resolve.boxes)
+			vm.boxes.items = findProductOnBoxes(vm.resolve.boxes.items, vm.resolve.productId);
 			getProduct(vm.resolve.productId);
 		}
 
@@ -30,7 +32,8 @@
 
 		function getBoxes() {
 			function onGetBoxSuccess(data) {
-				vm.resolve.boxes = angular.copy(data);
+				vm.boxes = angular.copy(data);
+				vm.boxes.items = findProductOnBoxes(vm.boxes.items, vm.resolve.productId);
 			}
 			boxDataService.getBoxPriv(null, onGetBoxSuccess, UtilService.onError)
 		}
@@ -68,6 +71,16 @@
 			}
 
 			boxDataService.addProduct(data, params, onAddProductSuccess, UtilService.onError);
+		}
+
+		function findProductOnBoxes(boxes, id) {
+			return boxes.map(function(element) {
+				var found = element.products.find(function(product) {
+					return angular.equals(product.id, id);
+				});
+				element.haveProduct = found ? true : false;
+				return element;
+			})
 		}
 
 
