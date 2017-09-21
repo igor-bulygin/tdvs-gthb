@@ -26,9 +26,11 @@ $footerMode = 'collapsed';
 					<li>
 						<a href="<?= Url::to(["public/contact"]) ?>"><span translate="footer.CONTACT_US"></span></a>
 					</li>
+					<?php /*
 					<li>
 						<a href="#"><span translate="footer.FAQS"></span></a>
 					</li>
+ 					*/ ?>
 					<li>
 						<span>-</span>
 					</li>
