@@ -69,7 +69,7 @@
 				question: {},
 				answer: {},
 				completedLanguages: [],
-				languageSelected: 'en-US'
+				languageSelected: vm.selected_language
 			});
 		}
 
@@ -96,18 +96,25 @@
 
 		function update() {
 			vm.saving=true;
+			var hasError=false;
 			angular.forEach(vm.person.faq, function (faq) {
 				faq.required_question=false;
 				faq.required_answer=false;
 				angular.forEach(vm.mandatory_langs, function (lang) {
 					if (angular.isUndefined(faq.question[lang]) || faq.question[lang].length<1) {
 						faq.required_question=true;
+						hasError=true;
 					}
 					if (angular.isUndefined(faq.answer[lang]) || faq.answer[lang].length<1) {
 						faq.required_answer=true;
+						hasError=true;
 					}
 				});
 			});
+			if (hasError) {
+				vm.saving=false;
+				return;
+			}
 			var data = {
 				scenario: 'deviser-update-profile',
 				faq: [],
