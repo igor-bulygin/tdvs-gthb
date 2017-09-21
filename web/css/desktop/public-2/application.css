@@ -7891,6 +7891,9 @@ input:checked + .slider:before {
   margin-top: 7px;
   color: #6b6b6b; }
 
+.about-us-wrapper {
+  background-color: #ffffff; }
+
 .about-slide-1 {
   background-image: url(/imgs/aboutus1.png);
   width: 100%;
