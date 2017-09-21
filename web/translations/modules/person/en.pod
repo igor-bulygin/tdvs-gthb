@@ -57,7 +57,8 @@
 			"NO_FAQS": "You haven't written any FAQs.",
 			"START_WRITE_FAQ": "Start now by clicking the <b>ADD QUESTION</b> button.",
 			"ADD_EDIT_QUESTIONS": "Add / edit questions",
-			"NO_QUESTIONS": "You don't have any questions!"
+			"NO_QUESTIONS": "You don't have any questions!",
+			"FIELD_LANGS_MANDATORY": "This field is mandatory in {{languageList}}."
 		},
 		"loved": {
 			"NO_LOVED": "You haven't loved any works yet.",
