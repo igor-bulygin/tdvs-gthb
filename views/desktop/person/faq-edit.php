@@ -31,7 +31,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 				<?= PersonMenu::widget() ?>
 			</div>
 			<div class="col-md-10" ng-controller="editFaqCtrl as editFaqCtrl">
-				<div class="faq-wrapper faq-edit-list">
+				<div class="faq-wrapper faq-edit-list" ng-if="!editFaqCtrl.saving" ng-cloak>
 					<!-- <div class="section-title">FAQ</div> -->
 					<div class="edit-faq-wrapper" ng-cloak ng-if="editFaqCtrl.person.faq.length > 0">
 
@@ -90,6 +90,9 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 							<br/> <span translate="person.faq.START_WRITE_FAQ"></span></p>
 							<a class="btn btn-red edit-faq-btn" href="#" ng-click="editFaqCtrl.addQuestion()"><span translate="person.faq.ADD_QUESTION"></span></a>
 					</div>
+				</div>
+				<div class="text-center mt-50" ng-if="editFaqCtrl.saving" ng-cloak>
+					<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
 				</div>
 			</div>
 		</div>

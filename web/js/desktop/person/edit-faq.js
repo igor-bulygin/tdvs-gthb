@@ -16,6 +16,7 @@
 		vm.selected_language=_lang;
 		vm.mandatory_langs=Object.keys(_langs_required);
 		vm.mandatory_langs_names="";
+		vm.saving=true;
 
 		function init() {
 			getPerson();
@@ -46,6 +47,7 @@
 						parseQuestion(element);
 					})
 				}
+				vm.saving=false;
 			}
 
 			function onGetProfileSuccess(data) {
@@ -93,6 +95,7 @@
 		}
 
 		function update() {
+			vm.saving=true;
 			angular.forEach(vm.person.faq, function (faq) {
 				faq.required_question=false;
 				faq.required_answer=false;
