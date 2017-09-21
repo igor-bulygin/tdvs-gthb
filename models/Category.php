@@ -600,7 +600,7 @@ class Category extends CActiveRecord {
 	 */
 	public function getBannerImage()
 	{
-		$fileName = "/imgs/banner-" . strtolower($this->getFileName()) . ".jpg";
+		$fileName = "/imgs/banner-" . strtolower($this->getFileName()) . "-".Yii::$app->language.".jpg";
 		if (file_exists(Yii::getAlias('@webroot') . $fileName)) {
 			return $fileName;
 		}
@@ -609,6 +609,8 @@ class Category extends CActiveRecord {
 
 	/**
 	 * Returns the path to de image to be shown on the "shop by deparment" section of the header
+	 *
+	 * @deprecated
 	 * @return string
 	 */
 	public function getHeaderImage()
