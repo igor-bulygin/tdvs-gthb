@@ -10,7 +10,7 @@ class GlobalAsset extends AssetBundle {
 	];
 	public $js = [
 		'js/desktop/product/detail.js',
-		'js/desktop/product/products-grid.js',
+		'js/desktop/product/detail-grid.js',
 		'js/desktop/product/create-product.js',
 		'js/desktop/product/basic-info/basic-info.js',
 		'js/desktop/product/more-details/more-details.js',

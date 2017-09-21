@@ -691,7 +691,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 						</ul>
 					</nav>
 					<div class="other-products-wrapper">
-						<div id="macy-container">
+						<div id="works-container" class="macy-container" data-columns="6">
 							<?php foreach ($personProducts as $i => $product) { ?>
 								<div class="menu-category list-group">
 									<div class="grid">

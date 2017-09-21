@@ -7,18 +7,27 @@
     width: 100%;
 }
 .our-devisers-header{
-    padding: 50px 0 42px;
+	margin: -20px 0 0 0;
+    padding: 0;//50px 0 42px;
     background: url(/imgs/devisers-cover.jpg) center #000000 no-repeat;
     background-size: 1150px 267px;
-	float: left;
-    width: 100%;
+	height: 270px;
+	//float: left;
+    //width: 100%;
 	h3{
 		font-family: $font-family--name;
 		color: $white;
+		font-size: 140px;
+		padding: 40px 0 0;
+		margin-bottom: 0;
+		line-height: 0.8em;
 	}
 	h5{
-		font-family: $font-family--serif;
-		font-style: italic;
+		margin: 0;
+		padding: 5px 0 20px;
+		font-family: $font-family--regular;//$font-family--serif;
+		font-style: normal;//italic;
+		font-stretch: condensed;
 		color: $white;
 	}
 	.devisers-searcher{
@@ -31,21 +40,32 @@
 			right: 12px;
 			top: 4px;
 			font-size: 21px;
+		}
+		input{
+			margin-bottom: 25px;
 		}
 	}
 }
 .our-influencers-header{
 	margin: -20px 0 0 0;
-    padding: 50px 0 42px;
+    padding: 0;//50px 0 42px;
     background: url(/imgs/influencers-cover.jpg) center #000000 no-repeat;
     background-size: 1150px 267px;
+    height: 270px;
 	h3{
 		font-family: $font-family--name;
 		color: $white;
+		font-size: 140px;
+		padding: 40px 0 0;
+		margin-bottom: 0;
+		line-height: 0.8em;
 	}
 	h5{
-		font-family: $font-family--serif;
-		font-style: italic;
+		margin: 0;
+		padding: 5px 0 20px;
+		font-family: $font-family--regular;//$font-family--serif;
+		font-style: normal;//italic;
+		font-stretch: condensed;
 		color: $white;
 	}
 	.devisers-searcher{
@@ -59,20 +79,31 @@
 			top: 4px;
 			font-size: 21px;
 		}
+		input{
+			margin-bottom: 25px;
+		}
 	}
 }
 .our-boxes-header{
 	margin: -20px 0 0 0;
-    padding: 50px 0 42px;
+    padding: 0;//50px 0 42px;
     background: url(/imgs/boxes-cover.jpg) center #000000 no-repeat;
     background-size: 1150px 267px;
+    height: 270px;
 	h3{
 		font-family: $font-family--name;
 		color: $white;
+		font-size: 140px;
+		padding: 40px 0 0;
+		margin-bottom: 0;
+		line-height: 0.8em;
 	}
 	h5{
-		font-family: $font-family--serif;
-		font-style: italic;
+		margin: 0;
+		padding: 5px 0 20px;
+		font-family: $font-family--regular;//$font-family--serif;
+		font-style: normal;//italic;
+		font-stretch: condensed;
 		color: $white;
 	}
 	.devisers-searcher{
@@ -85,6 +116,9 @@
 			right: 12px;
 			top: 4px;
 			font-size: 21px;
+		}
+		input{
+			margin-bottom: 25px;
 		}
 	}
 }
@@ -116,7 +150,7 @@
 	}
 }
 .our-devisers-body{
-	background-color: $background_grey;
+	background-color: $white;//$background_grey;
 	float: left;
     width: 100%;
 	margin-bottom: 100px;
@@ -130,15 +164,16 @@
 		display: inline-block;
     	margin-top: 30px;
 		color: $darker_grey;
-		font-family: $font-family--secondary;
+		font-family: $font-family--regular;//$font-family--secondary;
+		font-size: 14px;
 		.key{
 			font-family:$font-family--bold;
 		}
 	}
 }
 .filter-title{
-	color: #6b6b6b;
-    text-transform: uppercase;
+	color: $darker_grey;
+    //text-transform: uppercase;
 	font-weight: bold;
     font-size: 16px;
 }
@@ -147,10 +182,13 @@
 }
 .more-btn{
 	cursor: pointer;
-	font-family: $font-family--bold;
-	border-bottom: 1px solid #ccc;
+	font-family: $font-family--regular; //$font-family--bold;
+	font-size: 14px;
+	//border-bottom: 1px solid #ccc;
     display: block;
     padding: 15px 0;
+    text-transform: lowercase;
+    color: $darker_grey;
 }
 .deviser-discover-img{
 	position: absolute;

@@ -59,9 +59,12 @@
         .location{
 			color: $black;
 			margin-top: -5px;
-			color: $black;
 			float: left;
 			display: block;
+			text-transform: capitalize;
+    		white-space: nowrap;
+			overflow: hidden;
+    		text-overflow: ellipsis;
 		}
 		.sm{
 			float: left;
