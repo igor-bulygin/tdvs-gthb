@@ -78,7 +78,7 @@ return [
 					</tr>
 					<tr>
 						<td>Teléfono</td>
-						<td></td>
+						<td>+34 697 408 766</td>
 					</tr>
 					<tr>
 						<td>Correo electrónico</td>

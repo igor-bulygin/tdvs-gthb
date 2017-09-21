@@ -79,7 +79,7 @@ return [
 		
 		<br />
 		<b>Envío de productos</b>
-		<p>Los Devisers envían los pedidos directamente a los Usuarios a …………………………………………………. a través de diferentes empresas de transporte. El precio de envío se calcula automáticamente en el momento de realizar un pedido y se calcula en base al peso de la orden y destino. Los plazos de entrega varían entre ……… - ……… días en función de la cantidad pedida, stock y la destinación, y los gastos de envío aproximados son de ……………€.</p>
+		<p>Los Devisers envían los pedidos directamente a los Usuarios a través de diferentes empresas de transporte. El precio de envío se calcula automáticamente en el momento de realizar un pedido y se calcula en base al peso de la orden y destino. Los plazos de entrega varían entre en función de la cantidad pedida, stock y destinación.</p>
 		<p>En cualquier caso, los Devisers informarán de todas las características de sus envíos en las fichas de los productos ofertados en la Plataforma y en todo caso entregarán los productos a la dirección de envío indicada por el Usuario en el menor tiempo posible en cualquier caso, siempre dentro de los treinta (30) días naturales a partir de la fecha en que se realizó el pedido.</p>
 		<p>Los pagos a los Devisers por la compra de productos conllevarán la emisión de una factura a nombre del Usuario según los datos facilitados durante la pasarela de compra. En caso de que el Usuario desee recibir la factura de la compra realizada, deberá solicitarla directamente al Deviser mediante la información de contacto facilitada por el Deviser a través de la Plataforma.</p>
 		
