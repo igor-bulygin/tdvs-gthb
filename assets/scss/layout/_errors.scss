@@ -2,12 +2,16 @@
 // Errors
 // ==========================================================================
 .error-input{
+    border-color:$violet!important;
 	.btn-default {
 		border-color: $violet;
 	}
 	label::before{
 		border:1px solid $violet!important;
 	}
+    button {
+        border-color:$violet!important;
+    }
 }
 .error-input .ta-editor{
 	border-color:$violet;
@@ -16,9 +20,6 @@
 	&.error-input{
 		border: 1px solid $violet;
 	}
-}
-.error-input{
-    border-color:$violet!important;
 }
 .error-text{
      color: $violet!important;

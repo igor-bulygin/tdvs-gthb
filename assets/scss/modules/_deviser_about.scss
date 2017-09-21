@@ -268,30 +268,35 @@
     font-size:14px;
 }
 .edit-cover-icon{
-	color: $white;
-	@include size(60px,60px);
+    //color: $white;
+	@include size(40px,40px);//60
 	position: absolute;
 	display: block;
 	@include border-radius(90px,90px,90px,90px);
 	cursor: pointer;
 	z-index: 999;
 	text-align: center;
-    top: 0;
-    bottom: 0;
-    margin: auto;
+    top: 20px;//0;
+    //bottom: 0;
+    //margin: auto;
+    right: 10px;
 	&.photo{
-		font-size: 40px;
+		font-size: 30px;//40px;
 		text-align: center;
-		background-color: $black;
+		background-color: $white;//$black;
 		padding-top: 1px;
-		left: 0;
-		right: 0;
+		//left: 0;
+		//right: 0;
+        color: $black;
 	}
 	&.crop{
+        top:75px;
 		background-color: $red;
-		font-size: 33px;
-		left: 625px;
-		padding-top: 6px;
+		font-size: 24px;//33px;
+		//left: 625px;
+        right: 10px;
+		padding-top: 4px;//6px;
+        color:$white;
 	}
 	&.centered{
         left: 0; 
