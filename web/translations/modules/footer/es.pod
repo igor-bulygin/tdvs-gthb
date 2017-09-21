@@ -1,0 +1,16 @@
+{
+	"footer": {
+		"CONTACT_US": "Contact us",
+		"FAQS": "FAQs",
+		"ABOUT_US": "About us",
+		"BECOME_DEVISER_QUESTION": "Do you want to become a deviser?",
+		"BECOME_DEVISER": "Become a deviser",
+		"BECOME_INFLUENCER_QUESTION": "Do you want to become an influencer?",
+		"BECOME_INFLUENCER": "Become a influencer",
+		"SUBSCRIBE_NEWSLETTER": "Subscribe to our newsletter",
+		"STAY_CONNECTED": "Stay connected",
+		"TERMS_CONDITIONS": "Terms &amp; Conditions",
+		"PRIVACY": "Privacy policy",
+		"COOKIES": "Cookies policy"
+	}
+}

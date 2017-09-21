@@ -20,6 +20,7 @@ class GlobalAsset extends AssetBundle {
 	public $depends = [
 		'app\assets\AppAsset',
 		'app\components\assets\PublicHeader2Asset',
+		'app\components\assets\PublicFooter2Asset',
 		'app\assets\api\ApiAsset',
 		'app\assets\libs\macyAsset',
 		'app\assets\libs\utilAsset',
