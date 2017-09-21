@@ -1864,11 +1864,9 @@ input[type="radio"] .styled:checked + label::after {
 .error-input {
   border-color: #FFD55D !important; }
   .error-input .btn-default {
-    border-color: #FFD55D; }
+    border-color: #FFD55D !important; }
   .error-input label::before {
     border: 1px solid #FFD55D !important; }
-  .error-input button {
-    border-color: #FFD55D !important; }
 
 .error-input .ta-editor {
   border-color: #FFD55D; }
@@ -2625,7 +2623,8 @@ h3 {
   width: 30px;
   border-radius: 90px 90px 90px 90px !important;
   -webkit-border-radius: 90px 90px 90px 90px !important;
-  -moz-border-radius: 90px 90px 90px 90px !important; }
+  -moz-border-radius: 90px 90px 90px 90px !important;
+  border: solid 1px #ffffff; }
 
 .logued-text {
   float: left;
