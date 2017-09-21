@@ -68,8 +68,8 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 			<div class="col-sm-4 col-xs-6 title-wrapper title-1 righty">
 				<div class="sub-banner-wrapper">
 					<div class="sub-banner-text-left">
-						<h2 class="title-1"><span class="serif" style="margin-bottom:8px;">The</span>store</h2>
-						<p class="tagline-1">Find product that will make<br>you be part of the future</p>
+						<h2 class="title-1"><?=Yii::t('app/public', 'HOME_BLOCK_1_TEXT_1')?></h2>
+						<p class="tagline-1"><?=Yii::t('app/public', 'HOME_BLOCK_1_TEXT_2')?></p>
 					</div>
 					<div class="left-point"></div>
 				</div>
@@ -77,8 +77,8 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 			<div class="col-sm-4 col-xs-6 title-wrapper">
 				<div class="sub-banner-wrapper">
 					<div class="sub-banner-text-center">
-						<h2 class="title-2">Social<br/><span class="serif">experience</span></h2>
-						<p class="tagline-2">Show the world what you like and build<br>a community around yourself</p>
+						<h2 class="title-2"><?=Yii::t('app/public', 'HOME_BLOCK_2_TEXT_1')?></h2>
+						<p class="tagline-2"><?=Yii::t('app/public', 'HOME_BLOCK_2_TEXT_2')?></p>
 					</div>
 					<div class="center-point"></div>
 				</div>
@@ -86,8 +86,8 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 			<div class="col-sm-4 title-wrapper title-3">
 				<div class="sub-banner-wrapper">
 					<div class="sub-banner-text-right">
-						<h2>Affiliate<br/><span class="serif">for all</span></h2>
-						<p class="tagline-3">Love a product. People buy it.<br>You earn money.</p>
+						<h2><?=Yii::t('app/public', 'HOME_BLOCK_3_TEXT_1')?></h2>
+						<p class="tagline-3"><?=Yii::t('app/public', 'HOME_BLOCK_3_TEXT_2')?></p>
 					</div>
 					<div class="right-point"></div>
 				</div>
@@ -122,8 +122,8 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 	<!-- SHOWCASE -->
 	<section class="showcase-wrapper">
 		<div class="container">
-			<h3 class="title-product-name">Discover devisers</h3>
-			<span class="subtitle-home">Artists, designers, creators who shape outstanding works</span>
+			<h3 class="title-product-name"><?=Yii::t('app/public', 'HOME_DEVISERS')?></h3>
+			<span class="subtitle-home"><?=Yii::t('app/public', 'HOME_DEVISERS_TEXT')?></span>
 			<!-- Controls -->
 			<div class="carusel-container">
 				<?php if ($totalDevisers > 3) { ?>
@@ -177,8 +177,8 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 	<?php if ($totalInfluencers) { ?>
 	<section class="showcase-wrapper">
 		<div class="container">
-			<h3 class="title-product-name">Discover influencers</h3>
-			<span class="subtitle-home">Discover the works they love</span>
+			<h3 class="title-product-name"><?=Yii::t('app/public', 'HOME_INFLUENCERS')?></h3>
+			<span class="subtitle-home"><?=Yii::t('app/public', 'HOME_INFLUENCERS_TEXT')?></span>
 			<!-- Controls -->
 			<div class="carusel-container">
 				<?php if ($totalInfluencers > 3) { ?>
@@ -228,7 +228,7 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 <!-- GRID -->
 <section class="showcase-wrapper">
 		<div class="container">
-			<h3 class="title-product-name">Discover boxes</h3>
+			<h3 class="title-product-name"><?=Yii::t('app/public', 'HOME_BOXES')?></h3>
 			<div class="boxes-container">
 				<div class="row">
 					<?php foreach ($boxes as $box) {
@@ -677,7 +677,7 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 <!-- GRID -->
 <section class="grid-wrapper" id="grid-product-home">
 	<div class="container">
-		<h3 class="title-product-name">Discover what´s next</h3>
+		<h3 class="title-product-name"><?=Yii::t('app/public', 'HOME_WORKS')?></h3>
 		<div id="works-container" class="macy-container grid-margin" data-trueorder="true" data-waitforimages="true" data-columns="6">
 			<?php foreach ($works as $i => $work) { ?>
 			<div class="col-md-2">
