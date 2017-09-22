@@ -49,7 +49,7 @@
 							<span translate="person.about.MIN_MAX_PHOTOS" translate-values="{ min: editAboutCtrl.minImages }"></span>
 						</span>
 						<span class="photo-loader-warning error-text" ng-if="editAboutCtrl.images.length < editAboutCtrl.minImages && editAboutCtrl.person.account_state==='active'" ng-cloak>
-							<span translate="person.about.MIN_PHOTOS" translate-values="{ max: editAboutCtrl.minImages }" ng-cloak></span>
+							<span translate="person.about.MIN_PHOTOS" translate-values="{ min: editAboutCtrl.minImages }" ng-cloak></span>
 						</span>
 					</div>
 					<div class="photo-loader loader-about" ng-if="editAboutCtrl.images.length >= editAboutCtrl.maxImages" ng-cloak>

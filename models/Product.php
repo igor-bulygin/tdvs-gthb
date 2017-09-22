@@ -446,6 +446,7 @@ class Product extends CActiveRecord {
 					'deviser' => "deviserPreview",
 					'main_photo' => 'mainImage',
 					'main_photo_256' => "imagePreview256",
+					'main_photo_512' => "imagePreview512",
 					'url_image_preview' => "imagePreview128",
 					'url_images' => 'urlImagesLocation',
 					'link' => 'viewLink',
@@ -497,6 +498,7 @@ class Product extends CActiveRecord {
 					'edit_link' => 'editLink',
 					'main_photo' => 'mainImage',
 					'main_photo_256' => "imagePreview256",
+					'main_photo_512' => "imagePreview512",
 					'url_image_preview' => "imagePreview128",
 					'min_price' => 'minimumPrice',
 				];
@@ -705,7 +707,7 @@ class Product extends CActiveRecord {
 					$criteria['order_col'] = 'created_at';
 					$criteria['order_dir'] = 'asc';
 					break;
-				case 'chepeast':
+				case 'cheapest':
 					$criteria['order_col'] = 'price_stock.price';
 					$criteria['order_dir'] = 'asc';
 					break;
@@ -839,7 +841,7 @@ class Product extends CActiveRecord {
 	 *
 	 * @return string
 	 */
-	public function getImagePreview($width = 128, $height = 0)
+	public function getImagePreview($width, $height)
 	{
 		$image = $this->getMainImage();
 		// force max widht
@@ -865,6 +867,16 @@ class Product extends CActiveRecord {
 	public function getImagePreview256()
 	{
 		return $this->getImagePreview(256, 0);
+	}
+
+	/**
+	 * Wrapper to serialize fields
+	 *
+	 * @return string
+	 */
+	public function getImagePreview512()
+	{
+		return $this->getImagePreview(512, 0);
 	}
 
 	/**
@@ -1157,6 +1169,7 @@ class Product extends CActiveRecord {
 			'url_image_preview' => $this->getImagePreview(128, 0),
 			'main_photo' => $this->getMainImage(),
 			'main_photo_256' => $this->getImagePreview(256, 0),
+			'main_photo_512' => $this->getImagePreview(512, 0),
 			'url_images' => $this->getUrlImagesLocation(),
 			'link' => $this->getViewLink(),
 			'edit_link' => $this->getEditLink(),

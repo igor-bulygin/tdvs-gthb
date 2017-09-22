@@ -264,7 +264,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 									<div class="btns-product-wrapper">
 										<ul class="social-items">
 											<li>
-												<a href="#">
+												<a href="https://facebook.com/todevise">
 													<i class="facebook">
 														<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
 															 x="0px" y="0px"
@@ -277,8 +277,9 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 													</i>
 												</a>
 											</li>
+											
 											<li>
-												<a class="twitter" href="#">
+												<a class="twitter" href="https://twitter.com/todevise">
 													<i class="twitter">
 														<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
 															 x="0px" y="0px"
@@ -296,7 +297,30 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 													</i>
 												</a>
 											</li>
+
 											<li>
+												<a class="instagram" href="https://www.instagram.com/todevise.official">
+													<i class="instagram">
+														<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+															 x="0px" y="0px"
+															 viewBox="0 0 49 42" style="enable-background:new 0 0 49 42;" xml:space="preserve">
+															<g>
+																<path id="Path" class="st0" d="M27.5,40.5h-16c-7.2,0-13-5.8-13-13v-16c0-7.2,5.8-13,13-13h16c7.2,0,13,5.8,13,13v16
+																	C40.5,34.7,34.7,40.5,27.5,40.5z M11.5,0.5c-6.1,0-11,4.9-11,11v16c0,6.1,4.9,11,11,11h16c6.1,0,11-4.9,11-11v-16
+																	c0-6.1-4.9-11-11-11H11.5z"/>
+															</g>
+															<g>
+																<path id="Path" class="st0" d="M19.5,29.6c-5.6,0-10.1-4.5-10.1-10.1c0-5.6,4.5-10.1,10.1-10.1c5.6,0,10.1,4.5,10.1,10.1
+																	C29.6,25.1,25.1,29.6,19.5,29.6z M19.5,11.4c-4.5,0-8.1,3.6-8.1,8.1s3.6,8.1,8.1,8.1s8.1-3.6,8.1-8.1S24,11.4,19.5,11.4z"/>
+															</g>
+															<g>
+																<circle id="Path" class="st0" cx="30.5" cy="10" r="1.6"/>
+															</g>
+														</svg>
+													</i>
+												</a>
+											</li>
+											<!--li>
 												<a class="pinterest" href="#">
 													<i class="pinterest" aria-hidden="true">
 														<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
@@ -312,7 +336,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 														</svg>
 													</i>
 												</a>
-											</li>
+											</li-->
 										</ul>
 									</div>
 								</div>
@@ -700,7 +724,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 											<image-hover-buttons product-id="{{'<?= $product->short_id ?>'}}" is-loved="{{'<?=$product->isLovedByCurrentUser() ? 1 : 0 ?>'}}" is-mine="{{'<?= $product->isWorkFromCurrentUser() ? 1 : 0 ?>'}}">
 												<a href="<?= $product->getViewLink() ?>">
 													<img class="grid-image"
-														 src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getMainImage())->resize(400, 0) ?>">
+														 src="<?= $product->getImagePreview(400, 0) ?>">
 												</a>
 											</image-hover-buttons>
 											<a href="<?= $product->getViewLink() ?>">

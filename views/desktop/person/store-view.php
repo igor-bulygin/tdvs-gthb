@@ -77,7 +77,7 @@ $this->params['person_menu_store_categories'] = $categories;
 											<?php } ?>
 												<a href="<?= $product->getViewLink() ?>">
 													<img class="grid-image"
-														 src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getMainImage())->resize(400, 0) ?>">
+														 src="<?= $product->getImagePreview(400, 0) ?>">
 													<span class="img-bgveil"></span>
 												</a>
 											<?php if(!$person->isPersonEditable()) { ?>

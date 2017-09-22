@@ -21,8 +21,6 @@
 		function getProduct(id) {
 			function onGetProductSuccess(data) {
 				vm.product = angular.copy(data);
-				var product_main_photo = vm.product.media.photos.find((photo) => {return photo.main_product_photo});
-				vm.product_main_photo = currentHost() + vm.product.url_images + product_main_photo.name;
 			}
 
 			productDataService.getProductPub({

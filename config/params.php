@@ -1,6 +1,6 @@
 <?php
 
-defined('STRIPE_LIVE_MODE') or define('STRIPE_LIVE_MODE', false);
+define('STRIPE_LIVE_MODE', YII_ENV_PROD);
 
 return [
 	'angular_datepicker' => "yyyy-MM-dd",

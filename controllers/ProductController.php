@@ -140,6 +140,9 @@ class ProductController extends CController
 
 		// get the deviser
 		$deviser = Person::findOneSerialized($product->deviser_id);
+		if (empty($deviser) || $deviser->account_state != Person::ACCOUNT_STATE_ACTIVE) {
+			throw new HttpException(404, 'The requested item could not be found.');
+		}
 
 		// get other products of the deviser
 		$deviserProducts = Product::findSerialized([

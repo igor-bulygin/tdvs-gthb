@@ -292,6 +292,14 @@ a, a:hover, a:focus {
   text-transform: uppercase; }
 
 @font-face {
+  font-family: "Roboto Condensed";
+  src: url("/fonts/Roboto-Condensed.eot");
+  src: url("/fonts/Roboto-Condensed.eot?#iefix") format("embedded-opentype"), url("/fonts/Roboto-Condensed.woff") format("woff"), url("/fonts/Roboto-Condensed.ttf") format("truetype"); }
+@font-face {
+  font-family: "Univers Thin Ultra Condensed";
+  src: url("/fonts/UniversLT-Thin-Ultracondensed.eot");
+  src: url("/fonts/UniversLT-Thin-Ultracondensed.eot?#iefix") format("embedded-opentype"), url("/fonts/UniversLT-Thin-Ultracondensed.woff") format("woff"), url("/fonts/UniversLT-Thin-Ultracondensed.ttf") format("truetype"); }
+@font-face {
   font-family: "Univers Condensed";
   src: url("/fonts/UniversLT-Condensed.eot");
   src: url("/fonts/UniversLT-Condensed.eot?#iefix") format("embedded-opentype"), url("/fonts/UniversLT-Condensed.woff") format("woff"), url("/fonts/UniversLT-Condensed.ttf") format("truetype"); }
@@ -304,21 +312,21 @@ a, a:hover, a:focus {
   src: url("/fonts/UniversLT-Ultra-Condensed.eot");
   src: url("/fonts/UniversLT-Ultra-Condensed.eot?#iefix") format("embedded-opentype"), url("/fonts/UniversLT-Ultra-Condensed.woff") format("woff"), url("/fonts/UniversLT-Ultra-Condensed.ttf") format("truetype"); }
 @font-face {
-  font-family: "Univers Light Ultra Condensed";
-  src: url("/fonts/UniversLT-Light-Ultracondensed.eot");
-  src: url("/fonts/UniversLT-Light-Ultracondensed.eot?#iefix") format("embedded-opentype"), url("/fonts/UniversLT-Light-Ultracondensed.woff") format("woff"), url("/fonts/UniversLT-Light-Ultracondensed.ttf") format("truetype"); }
-@font-face {
-  font-family: "Univers Thin Ultra Condensed";
-  src: url("/fonts/UniversLT-Thin-Ultracondensed.eot");
-  src: url("/fonts/UniversLT-Thin-Ultracondensed.eot?#iefix") format("embedded-opentype"), url("/fonts/UniversLT-Thin-Ultracondensed.woff") format("woff"), url("/fonts/UniversLT-Thin-Ultracondensed.ttf") format("truetype"); }
-@font-face {
   font-family: "Univers Bold Condensed";
   src: url("/fonts/UniversLT-Bold-Condensed.eot");
   src: url("/fonts/UniversLT-Bold-Condensed.eot?#iefix") format("embedded-opentype"), url("/fonts/UniversLT-Bold-Condensed.woff") format("woff"), url("/fonts/UniversLT-Bold-Condensed.ttf") format("truetype"); }
 @font-face {
+  font-family: "Univers Light Ultra Condensed";
+  src: url("/fonts/UniversLT-Light-Ultracondensed.eot");
+  src: url("/fonts/UniversLT-Light-Ultracondensed.eot?#iefix") format("embedded-opentype"), url("/fonts/UniversLT-Light-Ultracondensed.woff") format("woff"), url("/fonts/UniversLT-Light-Ultracondensed.ttf") format("truetype"); }
+@font-face {
   font-family: "Glyphicons Halflings Regular";
   src: url("/fonts/glyphicons-halflings-regular.eot");
   src: url("/fonts/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("/fonts/glyphicons-halflings-regular.woff") format("woff"), url("/fonts/glyphicons-halflings-regular.ttf") format("truetype"); }
+@font-face {
+  font-family: "Playfair Display";
+  src: url("/fonts/Playfair-Display.eot");
+  src: url("/fonts/Playfair-Display.eot?#iefix") format("embedded-opentype"), url("/fonts/Playfair-Display.woff") format("woff"), url("/fonts/Playfair-Display.ttf") format("truetype"); }
 .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:focus, .navbar-default .navbar-nav > .open > a:hover {
   background-color: #1C1919; }
 
@@ -513,6 +521,9 @@ a, a:hover, a:focus {
 
 .mb-100 {
   margin-bottom: 100px; }
+
+.mb-10 {
+  margin-bottom: 10px; }
 
 .mb-20 {
   margin-bottom: 20px; }
@@ -779,6 +790,7 @@ a.btn span {
 .btn-small {
   width: 149px;
   height: 40px;
+  line-height: 40px;
   font-size: 16px; }
   .btn-small.disabled {
     cursor: default;
@@ -787,10 +799,14 @@ a.btn span {
 .btn-medium {
   width: 285px;
   height: 40px;
+  line-height: 40px;
   font-size: 16px; }
   .btn-medium.disabled {
     cursor: default;
     background-color: #bfbfbf; }
+  .btn-medium span {
+    height: 40px !important;
+    line-height: 40px !important; }
 
 .btn-big {
   width: 288px;
@@ -962,6 +978,8 @@ a.btn span {
       padding: 8px 0 0 7px; }
     .social-items li a.pinterest {
       padding: 8px 0 0 10px; }
+    .social-items li a.instagram {
+      padding: 8px 0 0 10px; }
     .social-items li a:hover {
       border: 1px solid #c91c39; }
       .social-items li a:hover i.facebook svg .st0 {
@@ -969,6 +987,8 @@ a.btn span {
       .social-items li a:hover i.twitter svg .st0 {
         stroke: #c91c39; }
       .social-items li a:hover i.pinterest svg .st0 {
+        stroke: #c91c39; }
+      .social-items li a:hover i.instagram svg .st0 {
         stroke: #c91c39; }
     .social-items li a i.facebook svg {
       height: 16px; }
@@ -988,6 +1008,23 @@ a.btn span {
         stroke: #1C1919;
         fill: none;
         stroke-width: 2; }
+    .social-items li a i.instagram svg {
+      height: 16px; }
+      .social-items li a i.instagram svg .st0 {
+        stroke: #1C1919;
+        fill: none;
+        stroke-width: 2; }
+
+footer .social-items li a {
+  border: none; }
+  footer .social-items li a:hover i.facebook svg .st0 {
+    stroke: #ffffff; }
+  footer .social-items li a:hover i.twitter svg .st0 {
+    stroke: #ffffff; }
+  footer .social-items li a:hover i.pinterest svg .st0 {
+    stroke: #ffffff; }
+  footer .social-items li a:hover i.instagram svg .st0 {
+    stroke: #ffffff; }
 
 .full-size-btn {
   width: 100% !important; }
@@ -1025,6 +1062,29 @@ a.btn span {
 #btn_create_box, #btn_create_box_popup, .btn-minpad {
   padding-left: 20px !important;
   padding-right: 20px !important; }
+
+/*hay que arreglar lo de los botones*/
+#newProductHeader button {
+  padding: 8px 20px !important; }
+
+#go_to_footer {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  display: none;
+  border: none;
+  z-index: 999;
+  text-decoration: none;
+  text-align: center;
+  position: fixed;
+  bottom: 80px;
+  right: 40px;
+  background: transparent;
+  margin: 0;
+  padding: 0; }
+  #go_to_footer i {
+    margin: 0;
+    line-height: 55px; }
 
 .products-menu ul {
   margin: 20px 0 40px;
@@ -1877,9 +1937,11 @@ input[type="radio"] .styled:checked + label::after {
 .error-input {
   border-color: #FFD55D !important; }
   .error-input .btn-default {
-    border-color: #FFD55D !important; }
+    border-color: #FFD55D; }
   .error-input label::before {
     border: 1px solid #FFD55D !important; }
+  .error-input button {
+    border-color: #FFD55D !important; }
 
 .error-input .ta-editor {
   border-color: #FFD55D; }
@@ -1910,7 +1972,8 @@ input[type="radio"] .styled:checked + label::after {
 
 .shipping-title {
   text-transform: uppercase;
-  font-size: 14px; }
+  font-size: 16px;
+  font-weight: bold; }
 
 .time-shipping {
   max-width: 50px;
@@ -2393,7 +2456,14 @@ h3 {
     .navbar {
       height: auto; } }
   .navbar .navbar-brand {
-    padding: 10px 15px; }
+    padding: 10px 15px;
+    width: 142px; }
+    .navbar .navbar-brand svg .img_logo {
+      display: block; }
+      .navbar .navbar-brand svg .img_logo#p1 {
+        fill: #c91c39; }
+      .navbar .navbar-brand svg .img_logo#p2 {
+        fill: #ffffff; }
   .navbar .dropdown {
     height: 50px; }
     .navbar .dropdown:hover .dropdown-shop {
@@ -2637,7 +2707,7 @@ h3 {
   border-radius: 90px 90px 90px 90px !important;
   -webkit-border-radius: 90px 90px 90px 90px !important;
   -moz-border-radius: 90px 90px 90px 90px !important;
-  border: solid 1px #ffffff; }
+  border: double 1px #ffffff; }
 
 .logued-text {
   float: left;
@@ -6266,7 +6336,7 @@ span.optional-text.pull-left {
         .product .product-data-wrapper .product-data .row-size .dropdown-menu li {
           width: 100% !important; }
       .product .product-data-wrapper .product-data .row-size .cart-icon {
-        background: url("/imgs/cart-white.svg") 0 0 no-repeat transparent !important;
+        background: url("/imgs/cart-white.svg") 0 4px no-repeat transparent !important;
         display: inline-block;
         padding: 0;
         margin: auto;
@@ -6876,12 +6946,13 @@ span.optional-text.pull-left {
     padding: 35px 35px 10px;
     margin: 0 0 40px; }
     .create-work-wrapper .card .title {
-      font-size: 24px;
+      font-size: 30px;
       text-align: center;
       text-transform: uppercase;
       font-family: "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
       display: block;
-      margin: 0 0 30px; }
+      margin: 0 0 30px;
+      color: #bfbfbf; }
     .create-work-wrapper .card .row {
       margin-bottom: 20px; }
       .create-work-wrapper .card .row label {

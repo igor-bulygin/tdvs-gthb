@@ -41,7 +41,7 @@ $config = [
 		'assetManager' => [
 			'appendTimestamp' => true,
 			'bundles' =>
-				false //YII_ENV_PROD || TODEVISE_BETA
+				false //YII_ENV_PROD
 				?
 					(require __DIR__ . '/assets_compressed.php')
 				:
@@ -66,7 +66,7 @@ $config = [
 
 		//Errors
 		'errorHandler' => [
-			'errorAction' => YII_ENV_PROD || TODEVISE_BETA ? 'public/error' : null,
+			'errorAction' => YII_ENV_PROD ? 'public/error' : null,
 		],
 
 		//i18n
@@ -164,8 +164,7 @@ $config = [
 			// send all mails to a file by default. You have to set
 			// 'useFileTransport' to false and configure a transport
 			// for the mailer to send real emails.
-			'useFileTransport' =>
-				YII_ENV_PROD || TODEVISE_BETA ? false : true,
+			'useFileTransport' => YII_ENV_PROD ? false : true,
 			'transport' => [
 				'class' => 'Swift_SmtpTransport',
 				'host' => 'localhost',
@@ -241,7 +240,7 @@ $config = [
 				'/admin/reset-password/<person_id:[^/.]*?>' => 'admin/reset-password',
 
 				//Person
-				'/<person_type:(deviser|influencer)>/<slug:[^/.]*?>/<person_id:[^/.]*?>' => 'person/about',
+				'/<person_type:(deviser|influencer|client)>/<slug:[^/.]*?>/<person_id:[^/.]*?>' => 'person/index',
 				'/<person_type:(deviser|influencer)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/complete-profile' => 'person/complete-profile',
 				'/<person_type:(deviser|influencer)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/person-not-public' => 'person/person-not-public',
 				'/<person_type:(deviser|influencer)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/about' => 'person/about',

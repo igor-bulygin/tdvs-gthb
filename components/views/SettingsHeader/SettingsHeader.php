@@ -23,7 +23,7 @@ $activeOption = array_key_exists('settings_menu_active_option', $this->params) ?
 			<?php /*<button class="btn btn-green pull-right" ng-click="settingsHeaderCtrl.saveChanges()">Save changes</button>*/ ?>
 		</div>
 	</div>
-	<ul class="nav nav-tabs header-settings-tabs">
+	<ul class="nav nav-tabs header-settings-tabs" style="justify-content: center; display: flex;">
 		<li role="presentation" class="<?= ($activeOption=='general') ? 'active' : ''?>">
 			<a href="<?= Url::to(['/settings/general', 'slug' => $person->slug, 'person_id' => $person->short_id])?>" translate="settings.header.GENERAL"></a>
 		</li>
@@ -35,7 +35,7 @@ $activeOption = array_key_exists('settings_menu_active_option', $this->params) ?
 			<li role="presentation" class="<?= ($activeOption=='stock') ? 'active' : '' ?>">
 				<a href="<?= Url::to(['/settings/stock', 'slug' => $person->slug, 'person_id' => $person->short_id])?>" translate="settings.header.STOCK_PRICE"></a>
 			</li>
- 			*/ ?>
+			*/ ?>
 			<li role="presentation" class="<?= ($activeOption=='billing') ? 'active' : '' ?>">
 				<a href="<?= Url::to(['/settings/billing', 'slug' => $person->slug, 'person_id' => $person->short_id])?>" translate="settings.header.BILLING_PAYMENTS"></a>
 			</li>
