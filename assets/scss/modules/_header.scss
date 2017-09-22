@@ -94,9 +94,21 @@
 	}
     @media (max-width: 768px){
                 height: auto;
-            }
+    }
     .navbar-brand{
         padding: 10px 15px;
+        width: 142px;
+        svg{
+            .img_logo{
+                &#p1{
+                    fill: $dark_red;
+                }
+                &#p2{
+                    fill: $white;
+                }
+                display: block;
+            }
+        }
     }
     .dropdown{
         height: 50px;
