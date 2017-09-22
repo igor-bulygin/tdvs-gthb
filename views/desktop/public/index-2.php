@@ -679,7 +679,11 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 	<div class="container">
 		<h3 class="title-product-name"><?=Yii::t('app/public', 'HOME_WORKS')?></h3>
 		<div id="works-container" class="macy-container grid-margin" data-trueorder="true" data-waitforimages="true" data-columns="6">
-			<?php foreach ($works as $i => $work) { ?>
+			<?php foreach ($works as $i => $work) {
+				$deviser = $work->getDeviser();
+				if (empty($deviser) || $deviser->account_state != Person::ACCOUNT_STATE_ACTIVE) {
+					continue; // do not show products of disabled devisers
+				}?>
 			<div class="col-md-2">
 				<div class="menu-category list-group">
 					<div class="grid">
