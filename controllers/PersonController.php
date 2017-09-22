@@ -47,9 +47,15 @@ class PersonController extends CController
 		];
 	}
 
-	public function actionIndex()
+	public function actionIndex($slug, $person_id)
 	{
-		return $this->render("index");
+		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
+		$person = Person::findOneSerialized($person_id);
+
+		if (!$person) {
+			throw new NotFoundHttpException();
+		}
+		$this->redirect($person->getMainLink());
 	}
 
 	public function actionCompleteProfile($slug, $person_id)
