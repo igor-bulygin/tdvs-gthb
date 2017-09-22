@@ -59,20 +59,38 @@ class Lang {
 	 * @return array
 	 */
 	static public function getAvailableLanguages()
-    {
-        return array_merge(
-            self::ES_ES_DESC,
-            self::EN_US_DESC,
-            self::CA_ES_DESC
-        );
-    }
+	{
+		return array_merge(
+			self::ES_ES_DESC
+			, self::EN_US_DESC
+//			, self::CA_ES_DESC
+		);
+	}
+
+	/**
+	 * Returns a list of all the valid languages in the application
+	 *
+	 * NOTE that a language can be valid, but not enabled or available
+	 * For example:
+	 * 	- catalan can be valid, but be "not available"
+	 *
+	 * @return array
+	 */
+	static public function getValidLanguages()
+	{
+		return array_merge(
+			self::ES_ES_DESC
+			, self::EN_US_DESC
+			, self::CA_ES_DESC
+		);
+	}
 
 	static public function findSerialized()
     {
         return [
         	["code" => self::EN_US, "name" => self::EN_US_DESC[self::EN_US]],
         	["code" => self::ES_ES, "name" => self::ES_ES_DESC[self::ES_ES]],
-        	["code" => self::CA_ES, "name" => self::CA_ES_DESC[self::CA_ES]],
+//        	["code" => self::CA_ES, "name" => self::CA_ES_DESC[self::CA_ES]],
         ];
     }
 
