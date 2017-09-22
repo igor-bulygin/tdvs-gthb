@@ -61,7 +61,6 @@ $this->registerJs("var box = ".Json::encode($box), yii\web\View::POS_HEAD, 'box-
 						<div class="menu-category list-group" ng-if="boxDetailCtrl.box.products.length > 0" ng-cloak ng-repeat="work in boxDetailCtrl.box.products">
 							<div class="grid">
 								<figure class="effect-zoe">
-									<a ng-href="{{work.link}}">
 									<?php if (!$person->isConnectedUser()) { ?>
 										<image-hover-buttons product-id="{{work.id}}" is-loved="{{work.isLoved ? 1 : 0}}">
 									<?php } else { ?>
@@ -71,13 +70,12 @@ $this->registerJs("var box = ".Json::encode($box), yii\web\View::POS_HEAD, 'box-
 									<?php if (!$person->isConnectedUser()) { ?>
 										</image-hover-buttons>
 									<?php } ?>
+									<a ng-href="{{work.link}}">
+										<figcaption>
+												<p class="instauser"><span ng-bind="work.name"></span></p>
+												<p class="price">€<span ng-bind="work.min_price"></span></p>
+										</figcaption>
 									</a>
-									<figcaption>
-										<a ng-href="{{work.link}}">
-											<p class="instauser"><span ng-bind="work.name"></span></p>
-											<p class="price"><span ng-bind="work.min_price"></span></p>
-										</a>
-									</figcaption>
 								</figure>
 							</div>
 						</div>
