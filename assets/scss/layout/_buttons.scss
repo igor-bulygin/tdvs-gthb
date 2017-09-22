@@ -209,10 +209,15 @@ a{
 .btn-medium{
 	width: 285px;//280px;
   	height: 40px;
+  	line-height: 40px;
 	font-size: 16px;
 	&.disabled{
 		cursor: default;
 		background-color: $light_grey;
+	}
+	span{
+		height: 40px !important;
+		line-height: 40px !important;
 	}
 }
 .btn-big{
@@ -538,4 +543,23 @@ a{
 #btn_create_box, #btn_create_box_popup, .btn-minpad {
 	padding-left: 20px !important;
 	padding-right: 20px !important;
+}
+#go_to_footer{
+	@include size(50px,50px);
+    cursor: pointer; 
+	display: none;
+	border: none;
+	z-index: 999; 
+	text-decoration: none; 
+	text-align: center; 
+	position: fixed; 
+	bottom: 80px; 
+	right: 40px; 
+    background: transparent;
+    margin: 0;
+    padding: 0;
+	i{
+		margin: 0;
+	    line-height: 55px;
+	}
 }

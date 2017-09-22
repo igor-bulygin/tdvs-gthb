@@ -14,29 +14,7 @@ $footerMode = 'collapsed';
 ?>
 
 <!--GO-TO_FOOTER LINK-->
-<button onclick="GoToFooter()" id="go_to_footer"><span id="scrollcnt" style="font-size: 10px;"></span><i class="ion-ios-arrow-down"></i></button>
-<style>
-	#go_to_footer {
-		cursor: pointer; 
-		text-decoration: none; 
-		position: fixed; 
-		bottom: 80px; 
-		right: 40px; 
-		display: none; 
-		height: 40px; 
-		width: 40px; 
-		border-radius: 20px; 
-		background-color: #999; 
-		font-size: 30px; 
-		color: black; 
-		z-index: 999; 
-		text-align: center; 
-		border: none;
-	}
-	#go_to_footer:hover{
-		background-color: #ccc;
-	}
-</style>
+<button onclick="GoToFooter()" id="go_to_footer"><i class="ion-ios-arrow-down arrow"></i></button>
 <script>
 	window.onscroll = function() {scrollFunction()};
 

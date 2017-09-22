@@ -292,6 +292,14 @@ a, a:hover, a:focus {
   text-transform: uppercase; }
 
 @font-face {
+  font-family: "Roboto Condensed";
+  src: url("/fonts/Roboto-Condensed.eot");
+  src: url("/fonts/Roboto-Condensed.eot?#iefix") format("embedded-opentype"), url("/fonts/Roboto-Condensed.woff") format("woff"), url("/fonts/Roboto-Condensed.ttf") format("truetype"); }
+@font-face {
+  font-family: "Univers Thin Ultra Condensed";
+  src: url("/fonts/UniversLT-Thin-Ultracondensed.eot");
+  src: url("/fonts/UniversLT-Thin-Ultracondensed.eot?#iefix") format("embedded-opentype"), url("/fonts/UniversLT-Thin-Ultracondensed.woff") format("woff"), url("/fonts/UniversLT-Thin-Ultracondensed.ttf") format("truetype"); }
+@font-face {
   font-family: "Univers Condensed";
   src: url("/fonts/UniversLT-Condensed.eot");
   src: url("/fonts/UniversLT-Condensed.eot?#iefix") format("embedded-opentype"), url("/fonts/UniversLT-Condensed.woff") format("woff"), url("/fonts/UniversLT-Condensed.ttf") format("truetype"); }
@@ -304,21 +312,21 @@ a, a:hover, a:focus {
   src: url("/fonts/UniversLT-Ultra-Condensed.eot");
   src: url("/fonts/UniversLT-Ultra-Condensed.eot?#iefix") format("embedded-opentype"), url("/fonts/UniversLT-Ultra-Condensed.woff") format("woff"), url("/fonts/UniversLT-Ultra-Condensed.ttf") format("truetype"); }
 @font-face {
-  font-family: "Univers Light Ultra Condensed";
-  src: url("/fonts/UniversLT-Light-Ultracondensed.eot");
-  src: url("/fonts/UniversLT-Light-Ultracondensed.eot?#iefix") format("embedded-opentype"), url("/fonts/UniversLT-Light-Ultracondensed.woff") format("woff"), url("/fonts/UniversLT-Light-Ultracondensed.ttf") format("truetype"); }
-@font-face {
-  font-family: "Univers Thin Ultra Condensed";
-  src: url("/fonts/UniversLT-Thin-Ultracondensed.eot");
-  src: url("/fonts/UniversLT-Thin-Ultracondensed.eot?#iefix") format("embedded-opentype"), url("/fonts/UniversLT-Thin-Ultracondensed.woff") format("woff"), url("/fonts/UniversLT-Thin-Ultracondensed.ttf") format("truetype"); }
-@font-face {
   font-family: "Univers Bold Condensed";
   src: url("/fonts/UniversLT-Bold-Condensed.eot");
   src: url("/fonts/UniversLT-Bold-Condensed.eot?#iefix") format("embedded-opentype"), url("/fonts/UniversLT-Bold-Condensed.woff") format("woff"), url("/fonts/UniversLT-Bold-Condensed.ttf") format("truetype"); }
 @font-face {
+  font-family: "Univers Light Ultra Condensed";
+  src: url("/fonts/UniversLT-Light-Ultracondensed.eot");
+  src: url("/fonts/UniversLT-Light-Ultracondensed.eot?#iefix") format("embedded-opentype"), url("/fonts/UniversLT-Light-Ultracondensed.woff") format("woff"), url("/fonts/UniversLT-Light-Ultracondensed.ttf") format("truetype"); }
+@font-face {
   font-family: "Glyphicons Halflings Regular";
   src: url("/fonts/glyphicons-halflings-regular.eot");
   src: url("/fonts/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("/fonts/glyphicons-halflings-regular.woff") format("woff"), url("/fonts/glyphicons-halflings-regular.ttf") format("truetype"); }
+@font-face {
+  font-family: "Playfair Display";
+  src: url("/fonts/Playfair-Display.eot");
+  src: url("/fonts/Playfair-Display.eot?#iefix") format("embedded-opentype"), url("/fonts/Playfair-Display.woff") format("woff"), url("/fonts/Playfair-Display.ttf") format("truetype"); }
 .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:focus, .navbar-default .navbar-nav > .open > a:hover {
   background-color: #1C1919; }
 
@@ -787,10 +795,14 @@ a.btn span {
 .btn-medium {
   width: 285px;
   height: 40px;
+  line-height: 40px;
   font-size: 16px; }
   .btn-medium.disabled {
     cursor: default;
     background-color: #bfbfbf; }
+  .btn-medium span {
+    height: 40px !important;
+    line-height: 40px !important; }
 
 .btn-big {
   width: 288px;
@@ -1025,6 +1037,25 @@ a.btn span {
 #btn_create_box, #btn_create_box_popup, .btn-minpad {
   padding-left: 20px !important;
   padding-right: 20px !important; }
+
+#go_to_footer {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  display: none;
+  border: none;
+  z-index: 999;
+  text-decoration: none;
+  text-align: center;
+  position: fixed;
+  bottom: 80px;
+  right: 40px;
+  background: transparent;
+  margin: 0;
+  padding: 0; }
+  #go_to_footer i {
+    margin: 0;
+    line-height: 55px; }
 
 .products-menu ul {
   margin: 20px 0 40px;

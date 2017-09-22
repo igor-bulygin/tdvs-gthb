@@ -12,7 +12,8 @@
 			"CURRENT_PASSWORD": "CONTRASEÑA ACTUAL",
 			"NEW_PASSWORD": "CONTRASEÑA NUEVA",
 			"CONFIRM_NEW_PASSWORD": "COMFIRMAR CONTRASEÑA NUEVA",
-			"PASSWORD_NOT_MATCH": "Las contraseñas no coinciden"
+			"PASSWORD_NOT_MATCH": "Las contraseñas no coinciden",
+			"SELECT_AN_OPTION": "Elija una opción"
 		},
 		"orders": {
 			"ORDERS": "PEDIDOS",
