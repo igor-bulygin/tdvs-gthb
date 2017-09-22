@@ -63,8 +63,10 @@ $footerMode = 'collapsed';
 			<div class="col-sm-6">
 				<div class="title text-center mb-20"><span translate="footer.BECOME_DEVISER_QUESTION"></span></div>
 				<a href="<?= Url::to(["public/become-deviser"]) ?>" class="btn btn-medium btn-red auto-center"><span translate="footer.BECOME_DEVISER"></span></a>
-				<!--div class="title text-center mt-40 mb-20"><span translate="footer.BECOME_INFLUENCER_QUESTION"></span></div>
-				<a href="<?= Url::to(["public/become-influencer"]) ?>" class="btn btn-medium btn-transparent auto-center"><span translate="footer.BECOME_INFLUENCER"></span></a-->
+				<?php /*
+ 				<div class="title text-center mt-40 mb-20"><span translate="footer.BECOME_INFLUENCER_QUESTION"></span></div>
+				<a href="<?= Url::to(["public/become-influencer"]) ?>" class="btn btn-medium btn-transparent auto-center"><span translate="footer.BECOME_INFLUENCER"></span></a>
+ 				*/ ?>
 			</div>
 			<div class="col-sm-3">
 				<div class="title"><span translate="footer.SUBSCRIBE_NEWSLETTER"></span></div>
@@ -89,10 +91,11 @@ $footerMode = 'collapsed';
 						</a>
 					</li>
 					<li>
-						<a class="twitter" href="#" target="_blank">
+						<a class="twitter" href="https://twitter.com/todevise" target="_blank">
 							<i class="fa fa-twitter" aria-hidden="true"></i>
 						</a>
 					</li>
+					<?php /*
 					<li>
 						<a class="google-plus" href="#" target="_blank">
 							<i class="fa fa-google-plus" aria-hidden="true"></i>
@@ -103,6 +106,7 @@ $footerMode = 'collapsed';
 							<i class="fa fa-pinterest-p" aria-hidden="true"></i>
 						</a>
 					</li>
+ 					*/ ?>
 				</ul>
 			</div>
 		</div>
