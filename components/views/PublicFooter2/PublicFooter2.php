@@ -61,10 +61,10 @@ $footerMode = 'collapsed';
 				</ul>
 			</div>
 			<div class="col-sm-6">
-				<div class="title text-center"><span translate="footer.BECOME_DEVISER_QUESTION"></span></div>
-				<a href="<?= Url::to(["public/become-deviser"]) ?>" class="btn btn-medium btn-red mt-10 auto-center"><span translate="footer.BECOME_DEVISER"></span></a>
-				<div class="title text-center mt-40"><span translate="footer.BECOME_INFLUENCER_QUESTION"></span></div>
-				<a href="<?= Url::to(["public/become-influencer"]) ?>" class="btn btn-medium btn-transparent mt-10 auto-center"><span translate="footer.BECOME_INFLUENCER"></span></a>
+				<div class="title text-center mb-20"><span translate="footer.BECOME_DEVISER_QUESTION"></span></div>
+				<a href="<?= Url::to(["public/become-deviser"]) ?>" class="btn btn-medium btn-red auto-center"><span translate="footer.BECOME_DEVISER"></span></a>
+				<div class="title text-center mt-40 mb-20"><span translate="footer.BECOME_INFLUENCER_QUESTION"></span></div>
+				<a href="<?= Url::to(["public/become-influencer"]) ?>" class="btn btn-medium btn-transparent auto-center"><span translate="footer.BECOME_INFLUENCER"></span></a>
 			</div>
 			<div class="col-sm-3">
 				<div class="title"><span translate="footer.SUBSCRIBE_NEWSLETTER"></span></div>

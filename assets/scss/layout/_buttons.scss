@@ -544,6 +544,12 @@ a{
 	padding-left: 20px !important;
 	padding-right: 20px !important;
 }
+/*hay que arreglar lo de los botones*/
+#newProductHeader{
+	button{
+		padding: 8px 20px !important;
+	}
+}
 #go_to_footer{
 	@include size(50px,50px);
     cursor: pointer; 

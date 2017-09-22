@@ -386,7 +386,7 @@
 	display: block;
 	width: 30px;
 	@include border-radius(90px,90px,90px,90px);
-    border: solid 1px $white;
+    border: double 1px $white;//solid 1px $white;
 }
 .logued-text{
 	float: left;

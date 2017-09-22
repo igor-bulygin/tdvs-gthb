@@ -72,7 +72,10 @@
 			"TO": "hasta",
 			"UNLIMITED_WEIGHT": "Peso ilimitado",
 			"ADD_RANGE": "+ Añadir Rango",
-			"EXPRESS_SHIPPING": "Envío exprés"
+			"EXPRESS_SHIPPING": "Envío exprés",
+			"WEIGHTS_PRICES": "PESOS & PRECIOS",
+			"OBSERVATIONS": "OBSERVACIONES"
+
 		},
 		"header": {
 			"GENERAL": "General",

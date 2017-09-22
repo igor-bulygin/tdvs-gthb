@@ -147,7 +147,7 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 						<span class="purple-text" ng-if="generalSettingsCtrl.distinctPasswords" translate="settings.general.PASSWORD_NOT_MATCH"></span>
 					</div>
 					<div class="text-center">
-						<button class="btn btn-default btn-red btn-minpad btn-chgPass" style="margin-top: 20px !important;" ng-click="generalSettingsCtrl.updatePassword()" ng-disabled="generalSettingsCtrl.savingPassword" translate="global.CHANGE"></button>
+						<button class="btn btn-default btn-red btn-minpad btn-chgPass mt-20" ng-click="generalSettingsCtrl.updatePassword()" ng-disabled="generalSettingsCtrl.savingPassword" translate="global.CHANGE"></button>
 						<span class="purple-text col-xs-12" ng-bind="generalSettingsCtrl.errorMsg"></span>
 					</div>
 				</div>
