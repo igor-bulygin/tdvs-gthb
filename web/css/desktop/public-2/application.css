@@ -522,6 +522,9 @@ a, a:hover, a:focus {
 .mb-100 {
   margin-bottom: 100px; }
 
+.mb-10 {
+  margin-bottom: 10px; }
+
 .mb-20 {
   margin-bottom: 20px; }
 
@@ -787,6 +790,7 @@ a.btn span {
 .btn-small {
   width: 149px;
   height: 40px;
+  line-height: 40px;
   font-size: 16px; }
   .btn-small.disabled {
     cursor: default;
@@ -1037,6 +1041,10 @@ a.btn span {
 #btn_create_box, #btn_create_box_popup, .btn-minpad {
   padding-left: 20px !important;
   padding-right: 20px !important; }
+
+/*hay que arreglar lo de los botones*/
+#newProductHeader button {
+  padding: 8px 20px !important; }
 
 #go_to_footer {
   width: 50px;
@@ -1908,9 +1916,11 @@ input[type="radio"] .styled:checked + label::after {
 .error-input {
   border-color: #FFD55D !important; }
   .error-input .btn-default {
-    border-color: #FFD55D !important; }
+    border-color: #FFD55D; }
   .error-input label::before {
     border: 1px solid #FFD55D !important; }
+  .error-input button {
+    border-color: #FFD55D !important; }
 
 .error-input .ta-editor {
   border-color: #FFD55D; }
@@ -2668,7 +2678,7 @@ h3 {
   border-radius: 90px 90px 90px 90px !important;
   -webkit-border-radius: 90px 90px 90px 90px !important;
   -moz-border-radius: 90px 90px 90px 90px !important;
-  border: solid 1px #ffffff; }
+  border: double 1px #ffffff; }
 
 .logued-text {
   float: left;

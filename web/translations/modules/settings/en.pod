@@ -72,7 +72,9 @@
 			"TO": "to",
 			"UNLIMITED_WEIGHT": "unlimited weight",
 			"ADD_RANGE": "+ Add Range",
-			"EXPRESS_SHIPPING": "Express shipping"
+			"EXPRESS_SHIPPING": "Express shipping",
+			"WEIGHTS_PRICES": "WHEIGHTS & PRICES",
+			"OBSERVATIONS": "OBSERVATIONS"
 		},
 		"header": {
 			"GENERAL": "General",

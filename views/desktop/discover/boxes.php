@@ -27,7 +27,7 @@ $this->title = Yii::t('app/public','EXPLORE_BOXES');
 				<div class="found-header">
 					<p ng-if="exploreBoxesCtrl.search_key && !exploreBoxesCtrl.searching" ng-cloak translate="discover.WE_FOUND_X_RESULTS" translate-values="{ counter: exploreBoxesCtrl.results.meta.total_count, keys:exploreBoxesCtrl.search_key }"></p>
 				</div>
-				<hr />
+				<!--hr /-->
 				<div ng-if="exploreBoxesCtrl.searching" ng-cloak>
 					<p class="text-center" translate="discover.SEARCHING"></p>
 				</div>
