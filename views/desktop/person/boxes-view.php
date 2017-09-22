@@ -66,14 +66,14 @@ $this->params['person_links_target'] = 'public_view';
 									<div class="images-box">
 										<div class="bottom-top-images">
 											<div class="image-left">
-												<img src="<?=isset($products[0]) ? $products[0]['main_photo'] : 'imgs/img-default.jpg'?>" class="showcase-image">
+												<img src="<?=isset($products[0]) ? $products[0]['main_photo_512'] : 'imgs/img-default.jpg'?>" class="showcase-image">
 											</div>
 											<div class="image-right">
-												<img src="<?=isset($products[1]) ? $products[1]['main_photo'] : 'imgs/img-default.jpg'?>" class="showcase-image">
+												<img src="<?=isset($products[1]) ? $products[1]['main_photo_512'] : 'imgs/img-default.jpg'?>" class="showcase-image">
 											</div>
 										</div>
 										<div class="bottom-image">
-											<img src="<?=isset($products[2]) ? $products[2]['main_photo'] : 'imgs/img-default.jpg'?>" class="showcase-image">
+											<img src="<?=isset($products[2]) ? $products[2]['main_photo_512'] : 'imgs/img-default.jpg'?>" class="showcase-image">
 										</div>
 									</div>
 									<figcaption>
