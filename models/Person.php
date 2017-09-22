@@ -1712,17 +1712,10 @@ class Person extends CActiveRecord implements IdentityInterface
 					'$match' => [
 						"categories" => [
 							'$in' => $categories,
-						]
-					]
-				];
-
-			// Filter by person
-			$conditions[] =
-				[
-					'$match' => [
+						],
 						"person_id" => [
 							'$in' => $personIds,
-						]
+						],
 					]
 				];
 
