@@ -5,6 +5,7 @@
 		var vm = this;
 		vm.search = search;
 		vm.filters = {};
+		vm.maxResults= 100;
 
 		init();
 
@@ -16,7 +17,8 @@
 			delete vm.results;
 			vm.searching = true;
 			var params = {
-				ignore_empty_boxes: true
+				ignore_empty_boxes: true,
+				limit: vm.maxResults
 			}
 			if(vm.key)
 				params = Object.assign(params, {q: vm.key});

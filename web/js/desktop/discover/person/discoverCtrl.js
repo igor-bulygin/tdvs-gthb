@@ -5,6 +5,7 @@
 		var vm = this;
 		vm.search = search;
 		vm.filters = {};
+		vm.maxPeople=100;
 
 		init();
 
@@ -17,7 +18,8 @@
 			vm.searching = true;
 			var params = {
 				type: type,
-				rand: true
+				rand: true,
+				limit: vm.maxPeople
 			}
 			function onGetPeopleSuccess(data) {
 				vm.searching = false;
@@ -29,7 +31,6 @@
 				UtilService.onError(err);
 				vm.searching = false;
 			}
-
 			if(vm.key)
 				params = Object.assign(params, {q: vm.key});
 
@@ -41,8 +42,7 @@
 				})
 				if(new_filter.length > 0)
 					params[filter_type+'[]'] = new_filter;
-			})
-
+			});
 			personDataService.getPeople(params, onGetPeopleSuccess, UtilService.onError);
 		}
 
