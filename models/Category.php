@@ -392,7 +392,7 @@ class Category extends CActiveRecord {
 				$headerProducts = $this->getHeaderProducts(3);
 				foreach ($headerProducts as $product) {
 					$names[] = [
-						'url' => $product->getImagePreview(395, 235);
+						'url' => $product->getImagePreview(395, 235),
 						'link' => $product->getViewLink(),
 						'name' => $product->name,
 					];
