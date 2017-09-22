@@ -229,6 +229,7 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 <section class="showcase-wrapper">
 		<div class="container">
 			<h3 class="title-product-name"><?=Yii::t('app/public', 'HOME_BOXES')?></h3>
+			<span class="subtitle-home"><?=Yii::t('app/public', 'HOME_BOXES_TEXT')?></span>
 			<div class="boxes-container">
 				<div class="row">
 					<?php foreach ($boxes as $box) {
