@@ -210,7 +210,7 @@ class OrderPack extends EmbedModel
 				}
 				$p['product_info'] = [
 					'name' => $product->getName(),
-					'photo' => Utils::url_scheme() . Utils::thumborize($product->getMainImage()),
+					'photo' => $product->getImagePreview(0, 0);
 					'slug' => $product->getSlug(),
 					'url' => $product->getViewLink(),
 					'stock' => $priceStock['stock'],

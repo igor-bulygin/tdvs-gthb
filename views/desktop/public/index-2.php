@@ -239,14 +239,14 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 									<div class="images-box">
 										<div class="bottom-top-images">
 											<div class="image-left">
-												<img src="<?=isset($products[0]) ? $products[0]['main_photo'] : 'imgs/img-default.jpg'?>" class="showcase-image">
+												<img src="<?=isset($products[0]) ? $products[0]['main_photo_512'] : 'imgs/img-default.jpg'?>" class="showcase-image">
 											</div>
 											<div class="image-right">
-												<img src="<?=isset($products[1]) ? $products[1]['main_photo'] : 'imgs/img-default.jpg'?>" class="showcase-image">
+												<img src="<?=isset($products[1]) ? $products[1]['main_photo_512'] : 'imgs/img-default.jpg'?>" class="showcase-image">
 											</div>
 										</div>
 										<div class="bottom-image">
-											<img src="<?=isset($products[2]) ? $products[2]['main_photo'] : 'imgs/img-default.jpg'?>" class="showcase-image">
+											<img src="<?=isset($products[2]) ? $products[2]['main_photo_512'] : 'imgs/img-default.jpg'?>" class="showcase-image">
 										</div>
 									</div>
 									<figcaption>
@@ -686,7 +686,7 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 						<figure class="effect-zoe">
 							<image-hover-buttons product-id="{{'<?= $work->short_id ?>'}}" is-loved="{{'<?=$work->isLovedByCurrentUser() ? 1 : 0 ?>'}}" is-mine="{{'<?= $work->isWorkFromCurrentUser() ? 1 : 0 ?>'}}">
 								<a href="<?= $work->getViewLink()?>">
-									<img class="grid-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($work->getMainImage())->resize(400, 0) ?>">
+									<img class="grid-image" src="<?= $work->getImagePreview(400, 0) ?>">
 									<span class="img-bgveil"></span>
 								</a>
 							</image-hover-buttons>

@@ -416,7 +416,7 @@ class Box extends CActiveRecord
 
 //			if ($i < count($sizesSelected)) {
 //				$size = $sizesSelected[$i];
-				$item['box_photo'] = Utils::url_scheme() . Utils::thumborize($product->getMainImage())->resize(350, 344);
+				$item['box_photo'] = $product->getImagePreview(350, 344);
 //			}
 			$return[] = $item;
 			$i++;

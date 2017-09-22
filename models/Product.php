@@ -444,8 +444,10 @@ class Product extends CActiveRecord {
 					'name',
 					'media',
 					'deviser' => "deviserPreview",
-					'url_image_preview' => "imagePreview128",
 					'main_photo' => 'mainImage',
+					'main_photo_256' => "imagePreview256",
+					'main_photo_512' => "imagePreview512",
+					'url_image_preview' => "imagePreview128",
 					'url_images' => 'urlImagesLocation',
 					'link' => 'viewLink',
 					'edit_link' => 'editLink',
@@ -495,6 +497,8 @@ class Product extends CActiveRecord {
 					'link' => 'viewLink',
 					'edit_link' => 'editLink',
 					'main_photo' => 'mainImage',
+					'main_photo_256' => "imagePreview256",
+					'main_photo_512' => "imagePreview512",
 					'url_image_preview' => "imagePreview128",
 					'min_price' => 'minimumPrice',
 				];
@@ -837,12 +841,42 @@ class Product extends CActiveRecord {
 	 *
 	 * @return string
 	 */
-	public function getImagePreview128()
+	public function getImagePreview($width, $height)
 	{
 		$image = $this->getMainImage();
 		// force max widht
-		$url = Utils::url_scheme() . Utils::thumborize($image)->resize(128, 0);
+		$url = Utils::url_scheme() . Utils::thumborize($image)->resize($width, $height);
 		return $url;
+	}
+
+	/**
+	 * Wrapper to serialize fields
+	 *
+	 * @return string
+	 */
+	public function getImagePreview128()
+	{
+		return $this->getImagePreview(128, 0);
+	}
+
+	/**
+	 * Wrapper to serialize fields
+	 *
+	 * @return string
+	 */
+	public function getImagePreview256()
+	{
+		return $this->getImagePreview(256, 0);
+	}
+
+	/**
+	 * Wrapper to serialize fields
+	 *
+	 * @return string
+	 */
+	public function getImagePreview512()
+	{
+		return $this->getImagePreview(512, 0);
 	}
 
 	/**
@@ -1132,8 +1166,10 @@ class Product extends CActiveRecord {
 			'name' => $this->name,
 			'media' => $this->media,
 			'deviser' => $this->getDeviserPreview(),
-			'url_image_preview' => $this->getImagePreview128(),
+			'url_image_preview' => $this->getImagePreview(128, 0),
 			'main_photo' => $this->getMainImage(),
+			'main_photo_256' => $this->getImagePreview(256, 0),
+			'main_photo_512' => $this->getImagePreview(512, 0),
 			'url_images' => $this->getUrlImagesLocation(),
 			'link' => $this->getViewLink(),
 			'edit_link' => $this->getEditLink(),
