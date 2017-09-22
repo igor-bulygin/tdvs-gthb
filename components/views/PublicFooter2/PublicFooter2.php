@@ -93,6 +93,7 @@ $footerMode = 'collapsed';
 							<i class="fa fa-twitter" aria-hidden="true"></i>
 						</a>
 					</li>
+					<?php /*
 					<li>
 						<a class="google-plus" href="#" target="_blank">
 							<i class="fa fa-google-plus" aria-hidden="true"></i>
@@ -103,6 +104,7 @@ $footerMode = 'collapsed';
 							<i class="fa fa-pinterest-p" aria-hidden="true"></i>
 						</a>
 					</li>
+ 					*/ ?>
 				</ul>
 			</div>
 		</div>
