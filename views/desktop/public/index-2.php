@@ -229,6 +229,7 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 <section class="showcase-wrapper">
 		<div class="container">
 			<h3 class="title-product-name"><?=Yii::t('app/public', 'HOME_BOXES')?></h3>
+			<span class="subtitle-home"><?=Yii::t('app/public', 'HOME_BOXES_TEXT')?></span>
 			<div class="boxes-container">
 				<div class="row">
 					<?php foreach ($boxes as $box) {
@@ -679,7 +680,11 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 	<div class="container">
 		<h3 class="title-product-name"><?=Yii::t('app/public', 'HOME_WORKS')?></h3>
 		<div id="works-container" class="macy-container grid-margin" data-trueorder="true" data-waitforimages="true" data-columns="6">
-			<?php foreach ($works as $i => $work) { ?>
+			<?php foreach ($works as $i => $work) {
+				$deviser = $work->getDeviser();
+				if (empty($deviser) || $deviser->account_state != Person::ACCOUNT_STATE_ACTIVE) {
+					continue; // do not show products of disabled devisers
+				}?>
 			<div class="col-md-2">
 				<div class="menu-category list-group">
 					<div class="grid">

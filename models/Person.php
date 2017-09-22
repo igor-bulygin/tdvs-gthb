@@ -1669,6 +1669,33 @@ class Person extends CActiveRecord implements IdentityInterface
 	{
 		if (!empty($categories)) {
 
+			// Filter by deviser and exclude unpublished profiles
+			$conditions[] =
+				[
+					'$match' => [
+						"type" => [
+							'$in' => [
+								Person::DEVISER,
+							]
+						],
+						"account_state" => [
+							'$nin' => [
+								Person::ACCOUNT_STATE_BLOCKED,
+								Person::ACCOUNT_STATE_DRAFT,
+							]
+						],
+					],
+				];
+
+			// Here, we have all devisers active
+			$activeDevisers = Yii::$app->mongodb->getCollection('person')->aggregate($conditions);
+			$personIds = [];
+			foreach ($activeDevisers as $person) {
+				$personIds[] = $person['short_id'];
+			}
+
+			// Now, we find products in the category for this devisers
+
 			// Exclude drafts
 			$conditions[] =
 				[
@@ -1684,8 +1711,11 @@ class Person extends CActiveRecord implements IdentityInterface
 				[
 					'$match' => [
 						"categories" => [
-							'$in' => $categories
-						]
+							'$in' => $categories,
+						],
+						"person_id" => [
+							'$in' => $personIds,
+						],
 					]
 				];
 
