@@ -978,6 +978,8 @@ a.btn span {
       padding: 8px 0 0 7px; }
     .social-items li a.pinterest {
       padding: 8px 0 0 10px; }
+    .social-items li a.instagram {
+      padding: 8px 0 0 10px; }
     .social-items li a:hover {
       border: 1px solid #c91c39; }
       .social-items li a:hover i.facebook svg .st0 {
@@ -985,6 +987,8 @@ a.btn span {
       .social-items li a:hover i.twitter svg .st0 {
         stroke: #c91c39; }
       .social-items li a:hover i.pinterest svg .st0 {
+        stroke: #c91c39; }
+      .social-items li a:hover i.instagram svg .st0 {
         stroke: #c91c39; }
     .social-items li a i.facebook svg {
       height: 16px; }
@@ -1004,6 +1008,23 @@ a.btn span {
         stroke: #1C1919;
         fill: none;
         stroke-width: 2; }
+    .social-items li a i.instagram svg {
+      height: 16px; }
+      .social-items li a i.instagram svg .st0 {
+        stroke: #1C1919;
+        fill: none;
+        stroke-width: 2; }
+
+footer .social-items li a {
+  border: none; }
+  footer .social-items li a:hover i.facebook svg .st0 {
+    stroke: #ffffff; }
+  footer .social-items li a:hover i.twitter svg .st0 {
+    stroke: #ffffff; }
+  footer .social-items li a:hover i.pinterest svg .st0 {
+    stroke: #ffffff; }
+  footer .social-items li a:hover i.instagram svg .st0 {
+    stroke: #ffffff; }
 
 .full-size-btn {
   width: 100% !important; }
@@ -1951,7 +1972,8 @@ input[type="radio"] .styled:checked + label::after {
 
 .shipping-title {
   text-transform: uppercase;
-  font-size: 14px; }
+  font-size: 16px;
+  font-weight: bold; }
 
 .time-shipping {
   max-width: 50px;
@@ -2434,7 +2456,14 @@ h3 {
     .navbar {
       height: auto; } }
   .navbar .navbar-brand {
-    padding: 10px 15px; }
+    padding: 10px 15px;
+    width: 142px; }
+    .navbar .navbar-brand svg .img_logo {
+      display: block; }
+      .navbar .navbar-brand svg .img_logo#p1 {
+        fill: #c91c39; }
+      .navbar .navbar-brand svg .img_logo#p2 {
+        fill: #ffffff; }
   .navbar .dropdown {
     height: 50px; }
     .navbar .dropdown:hover .dropdown-shop {
@@ -6917,12 +6946,13 @@ span.optional-text.pull-left {
     padding: 35px 35px 10px;
     margin: 0 0 40px; }
     .create-work-wrapper .card .title {
-      font-size: 24px;
+      font-size: 30px;
       text-align: center;
       text-transform: uppercase;
       font-family: "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
       display: block;
-      margin: 0 0 30px; }
+      margin: 0 0 30px;
+      color: #bfbfbf; }
     .create-work-wrapper .card .row {
       margin-bottom: 20px; }
       .create-work-wrapper .card .row label {

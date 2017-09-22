@@ -427,6 +427,9 @@ a{
 			&.pinterest{
 				padding: 8px 0 0 10px;
 			}
+			&.instagram{
+				padding: 8px 0 0 10px;
+			}
 			&:hover{
 				border: 1px solid $dark_red;
 				i.facebook{
@@ -444,6 +447,13 @@ a{
 					}
 				}
 				i.pinterest{
+					svg{
+						.st0{
+								stroke:$dark_red;
+							}
+					}
+				}
+				i.instagram{
 					svg{
 						.st0{
 								stroke:$dark_red;
@@ -478,6 +488,53 @@ a{
 						stroke:$black;
 						fill:none;
 						stroke-width:2;
+					}
+				}
+			}
+			i.instagram{
+				svg{
+					height: 16px;
+					.st0{
+						stroke:$black;
+						fill:none;
+						stroke-width:2;
+					}
+				}
+			}
+		}
+	}
+}
+footer .social-items{
+	li{
+		a{
+			border: none;
+			&:hover{
+				i.facebook{
+					svg{
+						.st0{
+								stroke:$white;
+							}
+					}
+				}
+				i.twitter{
+					svg{
+						.st0{
+								stroke:$white;
+							}
+					}
+				}
+				i.pinterest{
+					svg{
+						.st0{
+								stroke:$white;
+							}
+					}
+				}
+				i.instagram{
+					svg{
+						.st0{
+								stroke:$white;
+							}
 					}
 				}
 			}
