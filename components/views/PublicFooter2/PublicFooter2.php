@@ -89,7 +89,7 @@ $footerMode = 'collapsed';
 						</a>
 					</li>
 					<li>
-						<a class="twitter" href="#" target="_blank">
+						<a class="twitter" href="https://twitter.com/todevise" target="_blank">
 							<i class="fa fa-twitter" aria-hidden="true"></i>
 						</a>
 					</li>
