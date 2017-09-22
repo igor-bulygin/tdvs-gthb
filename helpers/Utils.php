@@ -626,11 +626,11 @@ class Utils
 			];
 		}
 		return [
-				['img' => '/imgs/banner-4.jpg', 'url' => Yii::$app->getUrlManager()->getHostInfo().'/deviser/les-chausseurs/64ce615/store', 'alt' => 'Les Chausseurs image', "active" => false],
-				['img' => '/imgs/banner-5.jpg', 'url' => Yii::$app->getUrlManager()->getHostInfo().'/deviser/closca/4764a66/store', 'alt' => 'Closca', "active" => false],
-				['img' => '/imgs/banner-1.jpg', 'url' => Yii::$app->getUrlManager()->getHostInfo().'/deviser/naaktime/f802e9i/store', 'alt' => 'Naaktiem', "active" => false],
-				['img' => '/imgs/banner-2.jpg', 'url' => Yii::$app->getUrlManager()->getHostInfo().'/deviser/natura-siberica/6810289/store', 'alt' => 'Natura Siberica', "active" => false],
-				['img' => '/imgs/banner-3.jpg', 'url' => Yii::$app->getUrlManager()->getHostInfo().'/deviser/nobis/aeb317a/store', 'alt' => 'Nobis', "active" => true],
+				['img' => '/imgs/banner-1.jpg', 'url' => Yii::$app->getUrlManager()->getHostInfo().'/deviser/les-chausseurs/64ce615/store', 'alt' => 'Les Chausseurs image', "active" => false],
+				['img' => '/imgs/banner-2.jpg', 'url' => Yii::$app->getUrlManager()->getHostInfo().'/deviser/closca/4764a66/store', 'alt' => 'Closca', "active" => false],
+				['img' => '/imgs/banner-3.jpg', 'url' => Yii::$app->getUrlManager()->getHostInfo().'/deviser/naaktime/f802e9i/store', 'alt' => 'Naaktiem', "active" => false],
+				['img' => '/imgs/banner-4.jpg', 'url' => Yii::$app->getUrlManager()->getHostInfo().'/deviser/natura-siberica/6810289/store', 'alt' => 'Natura Siberica', "active" => false],
+				['img' => '/imgs/banner-5.jpg', 'url' => Yii::$app->getUrlManager()->getHostInfo().'/deviser/nobis/aeb317a/store', 'alt' => 'Nobis', "active" => true],
 		];
 	}
 
