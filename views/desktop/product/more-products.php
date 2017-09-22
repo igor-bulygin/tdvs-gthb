@@ -13,7 +13,7 @@ use app\helpers\Utils;
 				<image-hover-buttons product-id="{{'<?= $work->short_id ?>'}}" is-loved="{{'<?=$work->isLovedByCurrentUser() ? 1 : 0 ?>'}}" is-mine="{{'<?= $work->isWorkFromCurrentUser() ? 1 : 0 ?>'}}">
 					<a href="<?= $work->getViewLink()?>">
 						<img class="grid-image"
-							 src="<?= Utils::url_scheme() ?><?= Utils::thumborize($work->getMainImage())->resize(362, 450) ?>">
+							 src="<?= $work->getImagePreview(362, 450)?>">
 					</a>
 				</image-hover-buttons>
 				<a href="<?= $work->getViewLink()?>">

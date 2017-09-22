@@ -72,7 +72,7 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 								
 							<?php } ?>
 							<a href="<?= $product->getViewLink() ?>">
-								<img class="product-image" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getMainImage())->resize(112, 112) ?>">
+								<img class="product-image" src="<?= $product->getImagePreview(112, 112)?>">
 							</a>
 							</div>
 						</div>

@@ -44,7 +44,7 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 						<div class="form-group">
 							<div class=col-xs-2>
 								<label for="representative_name" translate="settings.general.REPRESENTATIVE_NAME"></label>
-								<span class="col-xs-12 text-green" translate="global.OPTIONAL"></span>
+								<span class="col-xs-12 text-red" translate="global.OPTIONAL"></span>
 							</div>
 							<div class="col-md-2">
 								<input type="text" name="name" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.name" placeholder="{{ 'global.user.FIRST_NAME' | translate }}">
@@ -113,7 +113,7 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 							</div>
 						</div>
 						<div class="col-xs-12 text-center" ng-if="generalSettingsCtrl.saved&&!generalSettingsCtrl.dataForm.$dirty">
-							<span translate="settings.general.CHANGES_SAVED"><i class="ion-checkmark text-green"></i></span>
+							<span translate="settings.general.CHANGES_SAVED"><i class="ion-checkmark text-red"></i></span>
 						</div>
 					</div>
 				</form>
@@ -147,7 +147,7 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 						<span class="purple-text" ng-if="generalSettingsCtrl.distinctPasswords" translate="settings.general.PASSWORD_NOT_MATCH"></span>
 					</div>
 					<div class="text-center">
-						<button class="btn btn-default btn-green" ng-click="generalSettingsCtrl.updatePassword()" ng-disabled="generalSettingsCtrl.savingPassword" translate="global.CHANGE"></button>
+						<button class="btn btn-default btn-red btn-minpad btn-chgPass" style="margin-top: 20px !important;" ng-click="generalSettingsCtrl.updatePassword()" ng-disabled="generalSettingsCtrl.savingPassword" translate="global.CHANGE"></button>
 						<span class="purple-text col-xs-12" ng-bind="generalSettingsCtrl.errorMsg"></span>
 					</div>
 				</div>
