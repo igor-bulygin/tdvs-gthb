@@ -6336,7 +6336,7 @@ span.optional-text.pull-left {
         .product .product-data-wrapper .product-data .row-size .dropdown-menu li {
           width: 100% !important; }
       .product .product-data-wrapper .product-data .row-size .cart-icon {
-        background: url("/imgs/cart-white.svg") 0 0 no-repeat transparent !important;
+        background: url("/imgs/cart-white.svg") 0 4px no-repeat transparent !important;
         display: inline-block;
         padding: 0;
         margin: auto;
