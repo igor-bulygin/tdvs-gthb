@@ -103,8 +103,10 @@
 	&:hover{
 		background-color: $red;//$green;
 		height: 61px;
+		color: $white;
 		.save-box-btn{
 			display: inline-block;
+			border-color: $white !important;
 		}
 	}
 	.box-name{

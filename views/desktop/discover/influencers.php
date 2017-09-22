@@ -26,7 +26,7 @@ $this->registerJs("var type = 3", yii\web\View::POS_HEAD, 'person-type-script');
 			</div>
 			<div class="col-md-10">
 				<div class="found-header">
-					<p ng-if="discoverCtrl.search_key && !discoverCtrl.searching" ng-cloak><span translate="discover.WE_FOUND_X_RESULTS" translate-values="{ counter: discoverCtrl.results.meta.total_count, keys: discoverCtrl.search_key }"></span></p>
+					<p ng-if="discoverCtrl.search_key && !discoverCtrl.searching" ng-cloak><span translate="discover.WE_FOUND_X_RESULTS" translate-values="{ counter: discoverCtrl.results.meta.total_count, keys: discoverCtrl.search_key}"></span></p>
 				</div>
 				<!--hr /-->
 				<div ng-if="discoverCtrl.searching" ng-cloak>

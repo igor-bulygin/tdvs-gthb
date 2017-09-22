@@ -22,7 +22,7 @@ $this->title = Yii::t('app/public', 'BECOME_A_DEVISER');
 								</div>
 								<div class="tagline" translate="todevise.become_deviser.EXPRESS"></div>
 								<div class="tagline" translate="todevise.become_deviser.YOURSELF"></div>
-								<button class="btn btn-white btn-request" ng-click="becomeDeviserCtrl.scrollToForm()" translate="todevise.become_deviser.REQUEST_INVITATION"></button>
+								<button class="btn btn-white btn-request btn-minpad" ng-click="becomeDeviserCtrl.scrollToForm()" translate="todevise.become_deviser.REQUEST_INVITATION"></button>
 							</div>
 						</div>
 					</div>

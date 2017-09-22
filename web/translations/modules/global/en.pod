@@ -34,6 +34,7 @@
 		"SAVE": "Save",
 		"CHANGE": "Change",
 		"SELECT_OPTION": "Select an option",
+		"EDIT_BOX": "Edit box",
 		"user": {
 			"FIRST_NAME": "First name",
 			"LAST_NAME": "Last name",

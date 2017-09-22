@@ -34,6 +34,7 @@
 		"SAVE": "Guardar",
 		"CHANGE": "Cambiar",
 		"SELECT_OPTION": "Escoja una opción",
+		"EDIT_BOX": "Editar caja",
 		"user": {
 			"FIRST_NAME": "Nombre",
 			"LAST_NAME": "Apellidos",

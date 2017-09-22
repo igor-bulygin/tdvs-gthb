@@ -52,7 +52,7 @@ $this->params['person_links_target'] = 'public_view';
 									<div class="col-lg-4">
 										<!--<button class="btn btn-default" ng-click="viewBoxesCtrl.openCreateBoxModal()">Add boxxxx</button>-->
 										<div class="box-loader-wrapper">								
-											<button class="btn btn-red btn-default btn-red" ng-click="viewBoxesCtrl.openCreateBoxModal()">
+											<button id="btn_create_box" class="btn btn-red btn-default" ng-click="viewBoxesCtrl.openCreateBoxModal()">
 												<span translate="person.boxes.ADD_BOX"></span>
 											</button>
 										</div>

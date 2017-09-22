@@ -11,7 +11,7 @@
 		<textarea name="box_description" cols="30" rows="10" translate-attr="{placeholder: 'boxes.create.DESCRIPTION'}" ng-model="modalCreateBoxCtrl.box.description" class="form-control white-rounded-textbox ng-class:{'error-input': modalCreateBoxCtrl.has_error(modalCreateBoxCtrl.form, modalCreateBoxCtrl.form.box_description)}"></textarea>
 		<form-errors field="modalCreateBoxCtrl.form.box_description" condition="modalCreateBoxCtrl.has_error(modalCreateBoxCtrl.form, modalCreateBoxCtrl.form.box_description)"></form-errors>
 		<div class="text-center">
-			<button class="btn btn-red" ng-click="modalCreateBoxCtrl.createBox(modalCreateBoxCtrl.form)"><span translate="boxes.create.CREATE"></span></button>
+			<button id="btn_create_box_popup" class="btn btn-red" ng-click="modalCreateBoxCtrl.createBox(modalCreateBoxCtrl.form)"><span translate="boxes.create.CREATE"></span></button>
 		</div>
 	</form>
 </div>

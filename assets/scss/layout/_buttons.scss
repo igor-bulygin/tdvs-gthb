@@ -1,6 +1,14 @@
 // ==========================================================================
 // Buttons
 // ==========================================================================
+a{
+	&.btn{
+		span{
+    		line-height: 36px;
+    		height: 36px;
+		}
+	}
+}
 .btn-red{
     background-color:$dark_red;
     color: $white;
@@ -135,7 +143,7 @@
 		-ms-transform: rotate(270deg); /* IE 9 */
 		-webkit-transform: rotate(270deg); /* Chrome, Safari, Opera */
 		transform: rotate(270deg);
-		margin: 0 0 10px;
+		margin: auto;//0 0 10px;
 		height: 15px;
     	width: 15px;
 	}
@@ -199,7 +207,7 @@
 	}
 }
 .btn-medium{
-	width: 280px;
+	width: 285px;//280px;
   	height: 40px;
 	font-size: 16px;
 	&.disabled{
@@ -305,8 +313,8 @@
 	width: 209px;
     height: 40px;
     //padding-top: 9px;
-    padding:0;
-    margin: auto;
+    //padding:0;
+    //margin: auto;
 	.box-icon{
 	    width: 32px;
 		vertical-align: middle;
@@ -526,4 +534,8 @@
 		background-color: transparent;
 		color: $red;
 	}
+}
+#btn_create_box, #btn_create_box_popup, .btn-minpad {
+	padding-left: 20px !important;
+	padding-right: 20px !important;
 }

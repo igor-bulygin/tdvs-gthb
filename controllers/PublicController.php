@@ -111,7 +111,7 @@ class PublicController extends CController
 		$devisers = Person::getRandomDevisers(20, $categoryShortIds);
 
 		// Works
-		$works = Product::getRandomWorks(300, $categoryShortIds);
+		$works = Product::getRandomWorks(200, $categoryShortIds);
 
 		//TODO if redesign does not need this blocks anymore, delete it to optimize memory usage
 		// divide then in blocks to be rendered in bottom section

@@ -140,6 +140,7 @@
 }
 .checkout-sidebar{
 	background-color: #f4f4f4;
+	margin: 20px auto;
 }
 .deviser-name-item{
 	text-align: left;
@@ -257,8 +258,8 @@
 	float: left;
 	.cart-icon-black{
 		display: inline;
-		float: left;
-		margin: 15px 10px 0 0;
+		//float: left;
+		margin: 0 10px 0;//15px 10px 0 0;
 	}
 	.shopping-cart-title{
 		float: left;
