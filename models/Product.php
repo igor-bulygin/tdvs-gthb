@@ -841,7 +841,7 @@ class Product extends CActiveRecord {
 	 *
 	 * @return string
 	 */
-	public function getImagePreview($width = 128, $height = 0)
+	public function getImagePreview($width, $height)
 	{
 		$image = $this->getMainImage();
 		// force max widht
