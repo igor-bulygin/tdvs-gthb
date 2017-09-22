@@ -86,7 +86,7 @@ return [
 	'HOME_DEVISERS' => 'Our Devisers',
 	'HOME_DEVISERS_TEXT' => 'Artists, designers, creators who shape outstanding works',
 	'HOME_INFLUENCERS' => 'Our Influencers',
-	'HOME_INFLUENCERS_TEXT' => 'Discover the works they love',
+	'HOME_INFLUENCERS_TEXT' => 'Discover what’s trending through the products they love',
 	'HOME_BOXES' => 'Boxes',
 	'HOME_BOXES_TEXT' => 'Find inspiration in boxes filled with ideas',
 	'HOME_WORKS' => 'Highlighted products',
