@@ -88,6 +88,7 @@ return [
 	'HOME_INFLUENCERS' => 'Our Influencers',
 	'HOME_INFLUENCERS_TEXT' => 'Discover the works they love',
 	'HOME_BOXES' => 'Boxes',
+	'HOME_BOXES_TEXT' => 'Find inspiration in boxes filled with ideas',
 	'HOME_WORKS' => 'Highlighted products',
     'LANGUAGE' => 'Language',
     'LOVED_BY_PERSON_NAME' => 'Loved by {person_name}',
