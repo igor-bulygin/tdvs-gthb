@@ -311,15 +311,12 @@ $config = [
 				'cart/' => 'public/cart',
 				'checkout/' => 'public/checkout',
 
-				//links for terms
-				'terms/' => 'public/terms',
-
-				//Links for faq
-				'faq/' => 'public/faq',
-
 				//Links for contact
 				'contact' => 'public/contact',
 				'about-us' => 'public/about-us',
+				'cookies-policy' => 'public/cookies',
+				'privacy-policy' => 'public/privacy',
+				'terms-and-conditions' => 'public/terms',
 
 				// Postman (temp urls)
 //				'/postman/emails' => 'postman/index',
@@ -344,6 +341,12 @@ $config = [
 				/*
 				// Public routing
 				'/index-old' => 'public/index-old',
+
+				//links for terms
+				'terms/' => 'public/terms-old',
+
+				//Links for faq
+				'faq/' => 'public/faq',
 
 				//Links for a category listing
 				'<category_id:\w{5}>/<slug:[^/.]*?$>/' => 'public/category',

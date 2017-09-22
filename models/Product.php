@@ -451,7 +451,6 @@ class Product extends CActiveRecord {
 					'edit_link' => 'editLink',
 					'isLoved' => 'isLoved',
 					'isMine' => 'isMine',
-					'isInMyBoxes' => 'isInMyBoxes',
 					'min_price' => 'minimumPrice',
 				];
 				static::$retrieveExtraFields = [
@@ -488,7 +487,6 @@ class Product extends CActiveRecord {
 					'loveds',
 					'isLoved' => 'isLoved',
 					'isMine' => 'isMine',
-					'isInMyBoxes' => 'isInMyBoxes',
 					'boxes',
 					'prints',
 					'sizechart',
@@ -497,6 +495,7 @@ class Product extends CActiveRecord {
 					'link' => 'viewLink',
 					'edit_link' => 'editLink',
 					'main_photo' => 'mainImage',
+					'url_image_preview' => "imagePreview128",
 					'min_price' => 'minimumPrice',
 				];
 				static::$retrieveExtraFields = [
@@ -1007,16 +1006,22 @@ class Product extends CActiveRecord {
 		return $deviser->getPreviewSerialized();
 	}
 
+	/**
+	 * Wrapper of isLovedByCurrentUser to use in serialized fields
+	 *
+	 * @return bool
+	 */
 	public function getIsLoved() {
 		return $this->isLovedByCurrentUser();
 	}
 
+	/**
+	 * Wrapper of isWorkFromCurrentUser to use in serialized fields
+	 *
+	 * @return bool
+	 */
 	public function getIsMine() {
 		return $this->isWorkFromCurrentUser();
-	}
-
-	public function getIsInMyBoxes() {
-		return $this->isInBoxOfCurrentUser();
 	}
 
 	/**

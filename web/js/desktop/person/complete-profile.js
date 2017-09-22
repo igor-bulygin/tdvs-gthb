@@ -12,6 +12,7 @@
 		vm.searchPlace = searchPlace;
 		vm.selectCity = selectCity;
 		vm.save = save;
+		vm.sendingForm = true;
 		vm.crop_options = {
 			profile: {
 				area_type: 'circle',
@@ -41,6 +42,7 @@
 			//essential data get accidentally deleted.
 			setCity();
 			setImages();
+			vm.sendingForm = false;
 		}
 
 		function getCategories() {

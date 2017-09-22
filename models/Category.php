@@ -309,11 +309,17 @@ class Category extends CActiveRecord {
 	{
 		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_PUBLIC);
 
+		$products = [];
 		if ($this->header_products) {
-			$products = Product::findSerialized([
-				'id' => $this->header_products,
-				'product_state' => Product::PRODUCT_STATE_ACTIVE,
-			]);
+			foreach ($this->header_products as $short_id) {
+				// we make queries one to one to force the order of the products to be the same as database
+				$products = array_merge($products, Product::findSerialized(
+					[
+						'id' => $short_id,
+						'product_state' => Product::PRODUCT_STATE_ACTIVE,
+					]
+				));
+			}
 		}
 
 		if (empty($products)) {
@@ -352,18 +358,32 @@ class Category extends CActiveRecord {
 	 */
 	public function getHeaderImages()
 	{
+		$links = [];
+		$headerProducts = $this->getHeaderProducts(3);
+		$i = 0;
+		foreach ($headerProducts as $product) {
+			$links[$i] = [
+				'link' => $product->getViewLink(),
+				'name' => $product->getName(),
+			];
+			$i++;
+		}
+
 		$names = [
 			[
 				'url' => "/imgs/category_" . strtolower($this->getFileName()) . "_g.jpg",
-				'link' => null,
+				'link' => isset($links[0]['link']) ? $links[0]['link'] : null,
+				'name' => isset($links[0]['name']) ? $links[0]['name'] : null,
 			],
 			[
 				'url' => "/imgs/category_" . strtolower($this->getFileName()) . "_s.jpg",
-				'link' => null,
+				'link' => isset($links[1]['link']) ? $links[1]['link'] : null,
+				'name' => isset($links[1]['name']) ? $links[1]['name'] : null,
 			],
 			[
 				'url' => "/imgs/category_" . strtolower($this->getFileName()) . "_s1.jpg",
-				'link' => null,
+				'link' => isset($links[2]['link']) ? $links[2]['link'] : null,
+				'name' => isset($links[2]['name']) ? $links[2]['name'] : null,
 			],
 		];
 		foreach ($names as $k => $image) {
@@ -600,7 +620,7 @@ class Category extends CActiveRecord {
 	 */
 	public function getBannerImage()
 	{
-		$fileName = "/imgs/banner-" . strtolower($this->getFileName()) . ".jpg";
+		$fileName = "/imgs/banner-" . strtolower($this->getFileName()) . "-".Yii::$app->language.".jpg";
 		if (file_exists(Yii::getAlias('@webroot') . $fileName)) {
 			return $fileName;
 		}
@@ -609,6 +629,8 @@ class Category extends CActiveRecord {
 
 	/**
 	 * Returns the path to de image to be shown on the "shop by deparment" section of the header
+	 *
+	 * @deprecated
 	 * @return string
 	 */
 	public function getHeaderImage()

@@ -31,8 +31,8 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 			<div class="text-center" ng-if="!createProductCtrl.errors"><h4 class="title"><span translate="product.creation_edition.NEW_WORK"></span></h4></div>
 			<div class="text-center" ng-if="createProductCtrl.errors" ng-cloak><p><span translate="product.creation_edition.COMPLETE_REQUIRED_FIELDS"></span></p></div>
 			<div class="btns-group">
-				<button class="btn btn-transparent" ng-click="createProductCtrl.save('product_state_draft')" ng-disabled="createProductCtrl.saving"><span translate="product.creation_edition.SAVE_PROGRESS"></span></button>
-				<button class="btn btn-default btn-green" ng-click="createProductCtrl.save('product_state_active')" ng-disabled="createProductCtrl.saving"><span translate="product.creation_edition.PUBLISH_WORK"></span></button>
+				<button class="btn btn-transparent" ng-click="createProductCtrl.save('product_state_draft')" ng-disabled="createProductCtrl.saving"><span translate="product.creation_edition.SAVE_DRAFT"></span></button>
+				<button class="btn btn-default btn-red" ng-click="createProductCtrl.save('product_state_active')" ng-disabled="createProductCtrl.saving"><span translate="product.creation_edition.PUBLISH_WORK"></span></button>
 			</div>
 		</div>
 	</div>

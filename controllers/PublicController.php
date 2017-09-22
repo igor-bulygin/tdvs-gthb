@@ -250,6 +250,33 @@ class PublicController extends CController
 		return $this->render("about-us");
 	}
 
+	public function actionCookies()
+	{
+		$this->layout = '/desktop/public-2.php';
+		return $this->render("legal-page", [
+			'title' => Yii::t('app/cookies', 'TITLE'),
+			'text' => Yii::t('app/cookies', 'TEXT'),
+		]);
+	}
+
+	public function actionTerms()
+	{
+		$this->layout = '/desktop/public-2.php';
+		return $this->render("legal-page", [
+			'title' => Yii::t('app/terms', 'TITLE'),
+			'text' => Yii::t('app/terms', 'TEXT'),
+		]);
+	}
+
+	public function actionPrivacy()
+	{
+		$this->layout = '/desktop/public-2.php';
+		return $this->render("legal-page", [
+			'title' => Yii::t('app/privacy', 'TITLE'),
+			'text' => Yii::t('app/privacy', 'TEXT'),
+		]);
+	}
+
 	public function actionElements()
 	{
 		$this->layout = '/desktop/empty-layout.php';
@@ -328,7 +355,7 @@ class PublicController extends CController
 	 * @deprecated
 	 * @return string
 	 */
-	public function actionTerms()
+	public function actionTermsOld()
 	{
 		$lang = Yii::$app->language;
 

@@ -48,6 +48,7 @@
 			"NEW_WORK":"New work",
 			"COMPLETE_REQUIRED_FIELDS":"Please complete all the required fields before publishing your work.",
 			"SAVE_PROGRESS":"Save progress",
+			"SAVE_DRAFT": "Save draft",
 			"PUBLISH_WORK":"Publish work",
 			"PRODUCT_SAVED":"Product saved",
 			"LOADING":"Loading...",
