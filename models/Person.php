@@ -1713,7 +1713,7 @@ class Person extends CActiveRecord implements IdentityInterface
 						"categories" => [
 							'$in' => $categories,
 						],
-						"person_id" => [
+						"deviser_id" => [
 							'$in' => $personIds,
 						],
 					]
