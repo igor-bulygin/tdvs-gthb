@@ -32,9 +32,9 @@ $this->registerJs("var type = 2", yii\web\View::POS_HEAD, 'person-type-script');
 				<div ng-if="discoverCtrl.searching" ng-cloak>
 					<p class="text-center" translate="discover.SEARCHING"></p>
 				</div>
-				<div ng-if="discoverCtrl.results.items.length == 0" ng-cloak>
+				<!--div ng-if="discoverCtrl.results.items.length == 0" ng-cloak>
 					<p class="text-center" translate="discover.devisers.NO_DEVISERS_FOUND"></p>
-				</div>
+				</div-->
 				<discover-results results="discoverCtrl.results" ng-if="discoverCtrl.results && discoverCtrl.results.items.length > 0" ng-cloak></discover-results>
 			</div>
 		</div>

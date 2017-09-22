@@ -4,12 +4,12 @@
 #carousel-custom {
     margin: 20px auto;
     #arrow-up, #arrow-down{
-        height: auto;
+        height: 48px;//auto;        /*POR AHORA volver a auto cuando tenga funcionalidad*/
         display: block;
         text-align: center;
         font-size: 34px;
         span {
-            display: block;
+            display: none;//block;  /*POR AHORA volver a block cuando tenga funcionalidad*/
         }
     }
     .carousel-indicators {

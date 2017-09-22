@@ -65,7 +65,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 							<div class="row">
 								<div class="col-sm-2">
 									<div id="arrow-up">
-										<span class="ion-ios-arrow-up" style="display: block;"></span>
+										<span class="ion-ios-arrow-up"></span>
 									</div>
 									<ul class='carousel-indicators thumbs mCustomScrollbar'>
 										<?php foreach ($productImages as $key => $imageUrl) { ?>
@@ -75,7 +75,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 											<?php } ?>
 									</ul>
 									<div id="arrow-down">
-										<span class="ion-ios-arrow-down" style="display: block;"></span>
+										<span class="ion-ios-arrow-down"></span>
 									</div>
 								</div>
 								<div class="col-sm-10">

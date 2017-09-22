@@ -8,6 +8,7 @@
 		"BECOME_INFLUENCER_QUESTION": "Do you want to become an influencer?",
 		"BECOME_INFLUENCER": "Become a influencer",
 		"SUBSCRIBE_NEWSLETTER": "Subscribe to our newsletter",
+		"SUBSCRIBED_MESSAGE": "Gracias por suscribirte a nuestra newsletter. Te mandaremos emails extraordinarios.",
 		"STAY_CONNECTED": "Stay connected",
 		"TERMS_CONDITIONS": "Terms &amp; Conditions",
 		"PRIVACY": "Privacy policy",
