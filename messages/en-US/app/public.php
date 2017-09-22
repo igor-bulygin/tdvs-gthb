@@ -81,7 +81,7 @@ return [
 	'HOME_BLOCK_1_TEXT_2' => 'Find product that will make<br>you be part of the future',
 	'HOME_BLOCK_2_TEXT_1' => 'Social<br/><span class="serif">experience</span>',
 	'HOME_BLOCK_2_TEXT_2' => 'Show the world what you like and build<br>a community around yourself',
-	'HOME_BLOCK_3_TEXT_1' => 'The boxes<br/><span class="serif">to love</span>',
+	'HOME_BLOCK_3_TEXT_1' => 'boxes<br/><span class="serif">to love</span>',
 	'HOME_BLOCK_3_TEXT_2' => 'Save the products you love in <br>boxes and share them with<br>your friends.',
 	'HOME_DEVISERS' => 'Our Devisers',
 	'HOME_DEVISERS_TEXT' => 'Artists, designers, creators who shape outstanding works',
