@@ -214,6 +214,10 @@ a{
 		cursor: default;
 		background-color: $light_grey;
 	}
+	span{
+		height: 40px !important;
+		line-height: 40px !important;
+	}
 }
 .btn-big{
 	width: 288px;
