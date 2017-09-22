@@ -1695,6 +1695,7 @@ class Person extends CActiveRecord implements IdentityInterface
 			}
 
 			// Now, we find products in the category for this devisers
+			$conditions = [];
 
 			// Exclude drafts
 			$conditions[] =
@@ -1702,14 +1703,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'$match' => [
 						"product_state" => [
 							'$eq' => Product::PRODUCT_STATE_ACTIVE,
-						]
-					]
-				];
-
-			// Filter by category
-			$conditions[] =
-				[
-					'$match' => [
+						],
 						"categories" => [
 							'$in' => $categories,
 						],
