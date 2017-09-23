@@ -707,7 +707,7 @@ class Product extends CActiveRecord {
 					$criteria['order_col'] = 'created_at';
 					$criteria['order_dir'] = 'asc';
 					break;
-				case 'chepeast':
+				case 'cheapest':
 					$criteria['order_col'] = 'price_stock.price';
 					$criteria['order_dir'] = 'asc';
 					break;

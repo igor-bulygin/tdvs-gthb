@@ -42,7 +42,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 							<thead>
 								<tr>
 									<td><span ng-bind="detailProductCtrl.product.sizechart.country"></span></td>
-									<td ng-repeat="column in detailProductCtrl.product.sizechart.columns"><span ng-bind="column['en-US']"></span></td>
+									<td ng-repeat="column in detailProductCtrl.product.sizechart.columns"><span ng-bind="column[detailProductCtrl.lang]"></span></td>
 								</tr>
 							</thead>
 							<tbody>

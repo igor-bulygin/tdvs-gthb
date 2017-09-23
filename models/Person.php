@@ -1013,7 +1013,7 @@ class Person extends CActiveRecord implements IdentityInterface
 	 */
 	public function getProfileImage($width = 155, $height = 155)
 	{
-		$url = 'imgs/default-avatar.png';
+		$url = '/imgs/default-avatar.png';
 
 		$image = null;
 		if (Person::existMediaFile($this->mediaMapping->profile_cropped)) {
@@ -1695,6 +1695,7 @@ class Person extends CActiveRecord implements IdentityInterface
 			}
 
 			// Now, we find products in the category for this devisers
+			$conditions = [];
 
 			// Exclude drafts
 			$conditions[] =
@@ -1702,18 +1703,11 @@ class Person extends CActiveRecord implements IdentityInterface
 					'$match' => [
 						"product_state" => [
 							'$eq' => Product::PRODUCT_STATE_ACTIVE,
-						]
-					]
-				];
-
-			// Filter by category
-			$conditions[] =
-				[
-					'$match' => [
+						],
 						"categories" => [
 							'$in' => $categories,
 						],
-						"person_id" => [
+						"deviser_id" => [
 							'$in' => $personIds,
 						],
 					]

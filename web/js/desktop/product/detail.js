@@ -15,7 +15,9 @@
 		vm.addToCart = addToCart;
 		vm.setLoved = setLoved;
 		vm.setBox = setBox;
-		var select_order = ['size', 'color', 'select']
+		vm.selected_language=_lang;
+		var select_order = ['size', 'color', 'select'];
+
 
 		function init() {
 			getTags();

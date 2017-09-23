@@ -41,7 +41,7 @@ $show_footer = isset($this->params['show_footer']) ? $this->params['show_footer'
 		      rel='stylesheet' type='text/css'>
 		<link href='https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed' rel='stylesheet' type='text/css'>
 		<!-- ICONS -->
-		<link rel="icon" href="imgs/favicon.png" type="image/x-icon" />
+		<link rel="icon" href="/imgs/favicon.png" type="image/x-icon" />
 		<!-- IONIC ICONS -->
 		<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 		<!-- FONTAWESOME ICONS -->
