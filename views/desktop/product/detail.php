@@ -244,7 +244,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 											<span translate="product.detail.EDIT_WORK"></span>
 										</a>
 									<?php } else { ?>
-										<button type="button" class="btn btn-love pull-left" ng-class="detailProductCtrl.product.isLoved ? 'btn-love' : 'btn-love'" ng-click="detailProductCtrl.setLoved()">
+										<button type="button" class="btn btn-love pull-left" ng-class="detailProductCtrl.product.isLoved ? 'heart-red-icon-btn' : 'btn-love'" ng-click="detailProductCtrl.setLoved()">
 											<div class="heart-icon"></div>
 											<!--i class="ion-ios-heart-outline"></i-->
 										</button>

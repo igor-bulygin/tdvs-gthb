@@ -5,6 +5,15 @@
     border:1px solid $white;//$dark_grey;
     @include border-radius(180px,180px,180px,180px);
 }
+%heart-black-icon{
+    background: url('/imgs/heart-black.svg') 0 0 no-repeat transparent !important;
+}
+%heart-white-icon{
+    background: url('/imgs/heart-white.svg') 0 0 no-repeat transparent !important;
+}
+%heart-red-icon{
+    background: url('/imgs/heart-red.svg') 0 0 no-repeat transparent !important;
+}
 //.banner-deviser-content .deviser-profile .avatar img
 // es el que tenemos que poner en blanco
 %link-red{
