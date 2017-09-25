@@ -47,6 +47,9 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 						<?= PersonMenu::widget() ?>
 					</div>
 					<div class="col-md-10">
+						<div>
+							<a ng-href="{{editStoreCtrl.deviser.main_link}}" class="red-link-btn"><span translate="person.store.DONE_STORE"></span></a>
+						</div>
 						<div class="content-store">
 							<?php if ($unpublishedWorks || count($categories) > 1) { ?>
 								<div class="cathegory-wrapper">
