@@ -1667,27 +1667,6 @@ class Person extends CActiveRecord implements IdentityInterface
 	 */
 	public static function getRandomDevisers($limit, $categories = [])
 	{
-		$forcedIds = [
-			'5c7020p',
-			'4764a66',
-			'64ce615',
-			'54c30b0',
-			'74fdc2v',
-			'aeb317a',
-			'0f6c308',
-			'5e87525',
-			'8252f39',
-			'353e447',
-			'b818a0w',
-			'8216520',
-			'8dd81bi',
-			'c951bfk',
-			'329504s',
-			'e23e0bv',
-			'9d5b9a9',
-			'722044p',
-		];
-
 		if (!empty($categories)) {
 
 			// Filter by deviser and exclude unpublished profiles
@@ -1704,9 +1683,6 @@ class Person extends CActiveRecord implements IdentityInterface
 								Person::ACCOUNT_STATE_BLOCKED,
 								Person::ACCOUNT_STATE_DRAFT,
 							]
-						],
-						"short_id" => [
-							'$in' => $forcedIds,
 						],
 					],
 				];
@@ -1754,6 +1730,29 @@ class Person extends CActiveRecord implements IdentityInterface
 			}
 
 		} else {
+
+			// Index
+
+			$forcedIds = [
+				'5c7020p',
+				'4764a66',
+				'64ce615',
+				'54c30b0',
+				'74fdc2v',
+				'aeb317a',
+				'0f6c308',
+				'5e87525',
+				'8252f39',
+				'353e447',
+				'b818a0w',
+				'8216520',
+				'8dd81bi',
+				'c951bfk',
+				'329504s',
+				'e23e0bv',
+				'9d5b9a9',
+				'722044p',
+			];
 
 			// Filter by deviser and exclude unpublished profiles
 			$conditions[] =
