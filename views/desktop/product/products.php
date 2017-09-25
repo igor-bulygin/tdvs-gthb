@@ -19,6 +19,12 @@ $this->registerJs("var searchParam = '".$text."'", yii\web\View::POS_HEAD, 'prod
 
 ?>
 
+<style>
+	#product-results { width: 930px; margin: 0 auto; column-count: 5; column-gap: 10px; -webkit-column-count: 5; -webkit-column-gap: 10px; -moz-column-count: 5; -moz-column-gap: 10px; }
+	.product-result-item { display: inline-block; margin-bottom: 0px; width: 100%; padding: 0 !important; }
+	.product-result-item figure, .product-result-item figcaption { padding: 0 !important; }
+</style>
+
 <div ng-controller="exploreProductsCtrl as exploreProductsCtrl" class="results-wrapper">
 	<div class="container store">
 		<div>
@@ -28,7 +34,7 @@ $this->registerJs("var searchParam = '".$text."'", yii\web\View::POS_HEAD, 'prod
 					<div ng-if="exploreProductsCtrl.results.items.length === 0 && !exploreProductsCtrl.searching" ng-cloak>
 						<p class="text-center" translate="NO_PRODUCTS_FOUND"></p>
 					</div>
-					<div>
+					<div class="col-md-10">
 						<explore-products-results ng-if="exploreProductsCtrl.results.length != 0" results="exploreProductsCtrl.results"  limit="exploreProductsCtrl.limit" ></explore-products-results>
 					</div>
 					<div ng-if="exploreProductsCtrl.searching" ng-cloak>
