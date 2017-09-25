@@ -10,7 +10,7 @@
 		var cart_id = localStorageUtilService.getLocalStorage('cart_id');
 
 		function addQuantity(product) {
-			if(product.quantity < product.product_info.stock)
+			if((product.quantity < product.product_info.stock) || (product.product_info.stock === null))
 				addProduct(product, 1);
 		}
 

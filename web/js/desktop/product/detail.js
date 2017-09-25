@@ -82,7 +82,7 @@
 		}
 
 		function getTotalStock(references) {
-			var stock = 0;
+			var stock = null;
 			for(var i = 0; i < references.length; i++) {
 				if(references[i].available && !references[i].original_artwork)
 					stock += references[i].stock;
@@ -159,7 +159,7 @@
 		}
 
 		function getReferenceId(options_selected) {
-			vm.stock = 0;
+			vm.stock = null;
 			vm.quantity = 1;
 			var prices = [];
 			var options = angular.copy(options_selected);
@@ -187,7 +187,11 @@
 				}
 				if(isReference && element.available && !element.original_artwork) {
 					reference = element.short_id;
-					vm.stock += element.stock;
+					if(element.stock !== null)
+						vm.stock += element.stock;
+					else {
+						vm.stock = angular.copy(vm.stock, element.stock)
+					}
 					prices.push(element.price);
 				}
 			});
@@ -200,12 +204,12 @@
 		}
 
 		function changeQuantity(value){
-			if(vm.quantity <= vm.stock) {
+			if((vm.quantity <= vm.stock) || (vm.stock === null)) {
 				if(value < 0) {
 					if(vm.quantity > 1)
 						vm.quantity += value;
 				}
-				else if(vm.quantity < vm.stock) {
+				else if((vm.quantity < vm.stock) || (vm.stock === null)) {
 					vm.quantity += value;
 				}
 			}

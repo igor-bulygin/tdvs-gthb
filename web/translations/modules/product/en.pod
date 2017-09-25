@@ -104,7 +104,8 @@
 			"STOCK":"Stock",
 			"PRICE":"Price",
 			"APPLY_ALL":"Apply to all",
-			"CURRENCY":"$ "
+			"CURRENCY":"$ ",
+			"UNLIMITED_STOCK": "Unlimited stock"
 		},
 		"variations": {
 			"TITLE":"Variations & Manufacturing",
