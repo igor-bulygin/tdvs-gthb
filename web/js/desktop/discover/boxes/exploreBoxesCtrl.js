@@ -63,7 +63,7 @@
 		$scope.$watch('exploreBoxesCtrl.filters', function(newValue, oldValue) {
 			vm.results={items: [] };
 			vm.page=1;
-			search(vm.form)
+			search();
 		}, true);
 
 	}
