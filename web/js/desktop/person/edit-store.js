@@ -106,18 +106,14 @@
 		}
 
 		function setMinimumPrice(product) {
-			var min_price;
-			if(angular.isArray(product.price_stock) &&
-				product.price_stock.length > 0) {
-				min_price = product.price_stock[0].price;
-				for(var i = 0; i < product.price_stock.length; i++) {
-					if(product.price_stock[i].price < min_price) {
-						min_price = product.price_stock[i].price;
-					}
-				}
-				product.min_price = min_price;
-			}else{
-				product.min_price = '-';
+			if(angular.isArray(product.price_stock) && product.price_stock.length > 0) {
+				var array_available = product.price_stock.map(function(element) {
+					if(element.available)
+						return element.price;
+				});
+				product.min_price = array_available.reduce((prev, value) => prev < value ? prev : value);
+			} else {
+				product.min_price = '-'
 			}
 		}
 
