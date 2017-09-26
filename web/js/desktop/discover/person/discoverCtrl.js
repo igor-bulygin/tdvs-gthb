@@ -4,27 +4,39 @@
 	function controller(personDataService, UtilService, $scope) {
 		var vm = this;
 		vm.search = search;
+		vm.searchMore = searchMore;
 		vm.filters = {};
-		vm.maxPeople=100;
+		vm.maxResults=2;
+		vm.page=1;
+		vm.results={items: [] };
 
 		init();
 
 		function init() {
-			search(vm.form);
 		}
 
-		function search(form) {
-			delete vm.results;
+		function searchMore() {
+			vm.page=vm.page + 1;
+			search();
+		}
+
+		function search() {
 			vm.searching = true;
+			if (vm.search_key != vm.key) {
+				vm.results={items: [] };
+				vm.page=1;
+			}
 			var params = {
 				type: type,
 				rand: true,
-				limit: vm.maxPeople
+				limit: vm.maxResults,
+				page: vm.page
 			}
 			function onGetPeopleSuccess(data) {
-				vm.searching = false;
+				vm.results.items=vm.results.items.concat(angular.copy(data.items));
 				vm.search_key = angular.copy(vm.key);
-				vm.results = angular.copy(data);
+				vm.results_found=data.meta.total_count;
+				vm.searching = false;
 			}
 
 			function onGetPeopleError(err) {
@@ -48,7 +60,9 @@
 
 		//watches
 		$scope.$watch('discoverCtrl.filters', function (newValue, oldValue) {
-			search(vm.form)
+			vm.results={items: [] };
+			vm.page=1;
+			search();
 		}, true);
 
 	}
