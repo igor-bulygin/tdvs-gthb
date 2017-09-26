@@ -19,21 +19,24 @@ $this->title = Yii::t('app/public','EXPLORE_BOXES');
 				</form>
 			</div>
 		</div>
-		<div class="our-devisers-body">
+		<div class="our-devisers-body" style="padding-bottom:100px;">
 			<div class="col-md-2">
 				<explore-boxes-filters filters="exploreBoxesCtrl.filters" searching="exploreBoxesCtrl.searching"></explore-boxes-filters>
 			</div>
 			<div class="col-md-10">
 				<div class="found-header">
-					<p ng-if="exploreBoxesCtrl.search_key && !exploreBoxesCtrl.searching" ng-cloak translate="discover.WE_FOUND_X_RESULTS_WITH_KEY" translate-values="{ counter: exploreBoxesCtrl.results_founded, keys:exploreBoxesCtrl.search_key }"></p>
-					<p ng-if="!exploreBoxesCtrl.search_key && !exploreBoxesCtrl.searching" ng-cloak translate="discover.WE_FOUND_X_RESULTS" translate-values="{ counter: exploreBoxesCtrl.results_founded }"></p>
+					<p ng-if="exploreBoxesCtrl.search_key && !exploreBoxesCtrl.searching" ng-cloak translate="discover.WE_FOUND_X_RESULTS_WITH_KEY" translate-values="{ counter: exploreBoxesCtrl.results_found, keys:exploreBoxesCtrl.search_key }"></p>
+					<p ng-if="!exploreBoxesCtrl.search_key && !exploreBoxesCtrl.searching" ng-cloak translate="discover.WE_FOUND_X_RESULTS" translate-values="{ counter: exploreBoxesCtrl.results_found }"></p>
 				</div>
 				<explore-boxes-results results="exploreBoxesCtrl.results" ng-if="exploreBoxesCtrl.results && exploreBoxesCtrl.results.items.length > 0" ng-cloak></explore-boxes-results>
-				<div class="mt-30 col-md-12 col-md-offset-4" ng-if="exploreBoxesCtrl.searching" ng-cloak>
+				<div class="mt-30 col-md-12 col-md-offset-4" ng-if="exploreBoxesCtrl.searching && exploreBoxesCtrl.results.items.length == 0" ng-cloak>
 					<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
 				</div>
-				<div class="text-center col-md-12 mt-30" ng-if="exploreBoxesCtrl.results_founded > exploreBoxesCtrl.results.items.length && !exploreBoxesCtrl.searching" ng-cloak>
-					<button class="btn btn-medium btn-red" ng-click="exploreBoxesCtrl.searchMore()" ><span translate="discover.SEE_MORE"></span></button>
+				<div class="text-center col-md-12 mt-30" ng-if="exploreBoxesCtrl.results_found > exploreBoxesCtrl.results.items.length && (!exploreBoxesCtrl.searching || exploreBoxesCtrl.results.items.length > 0)" ng-cloak >
+					<button class="big-btn btn btn-default" ng-click="exploreBoxesCtrl.searchMore()" ng-disabled="exploreBoxesCtrl.searching">
+						<span translate="discover.SEE_MORE" ng-if="!exploreBoxesCtrl.searching"></span>
+						<i class="fa fa-spinner fa-pulse fa-3x fa-fw small" ng-if="exploreBoxesCtrl.searching"></i>
+					</button>
 				</div>
 			</div>
 		</div>
