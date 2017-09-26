@@ -42,7 +42,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 							<thead>
 								<tr>
 									<td><span ng-bind="detailProductCtrl.product.sizechart.country"></span></td>
-									<td ng-repeat="column in detailProductCtrl.product.sizechart.columns"><span ng-bind="column['en-US']"></span></td>
+									<td ng-repeat="column in detailProductCtrl.product.sizechart.columns"><span ng-bind="column[detailProductCtrl.lang]"></span></td>
 								</tr>
 							</thead>
 							<tbody>
@@ -244,7 +244,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 											<span translate="product.detail.EDIT_WORK"></span>
 										</a>
 									<?php } else { ?>
-										<button type="button" class="btn btn-love pull-left" ng-class="detailProductCtrl.product.isLoved ? 'btn-love' : 'btn-love'" ng-click="detailProductCtrl.setLoved()">
+										<button type="button" class="btn btn-love pull-left" ng-class="detailProductCtrl.product.isLoved ? 'heart-red-icon-btn' : 'btn-love'" ng-click="detailProductCtrl.setLoved()">
 											<div class="heart-icon"></div>
 											<!--i class="ion-ios-heart-outline"></i-->
 										</button>
@@ -362,7 +362,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 											</div>
 											-->
 											<div class="col-sm-3">
-												<span translate="product.detail.IS"></span> <span class="tax">€<?=$product->getShippingPrice(Country::getDefaultContryCode())?></span>
+												<span translate="product.detail.IS"></span> <span class="tax">€<?=$product->getShippingPrice(null, Country::getDefaultContryCode())?></span>
 											</div>
 										</div>
 									</form>

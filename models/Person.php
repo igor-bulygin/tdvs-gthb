@@ -1013,7 +1013,7 @@ class Person extends CActiveRecord implements IdentityInterface
 	 */
 	public function getProfileImage($width = 155, $height = 155)
 	{
-		$url = 'imgs/default-avatar.png';
+		$url = '/imgs/default-avatar.png';
 
 		$image = null;
 		if (Person::existMediaFile($this->mediaMapping->profile_cropped)) {
@@ -1695,6 +1695,7 @@ class Person extends CActiveRecord implements IdentityInterface
 			}
 
 			// Now, we find products in the category for this devisers
+			$conditions = [];
 
 			// Exclude drafts
 			$conditions[] =
@@ -1702,18 +1703,11 @@ class Person extends CActiveRecord implements IdentityInterface
 					'$match' => [
 						"product_state" => [
 							'$eq' => Product::PRODUCT_STATE_ACTIVE,
-						]
-					]
-				];
-
-			// Filter by category
-			$conditions[] =
-				[
-					'$match' => [
+						],
 						"categories" => [
 							'$in' => $categories,
 						],
-						"person_id" => [
+						"deviser_id" => [
 							'$in' => $personIds,
 						],
 					]
@@ -1729,12 +1723,36 @@ class Person extends CActiveRecord implements IdentityInterface
 
 			$randomWorks = Yii::$app->mongodb->getCollection('product')->aggregate($conditions);
 
+			// And now we get deviser ids of this works
 			$personIds = [];
 			foreach ($randomWorks as $work) {
 				$personIds[] = $work['deviser_id'];
 			}
 
 		} else {
+
+			// Index
+
+			$forcedIds = [
+				'5c7020p',
+				'4764a66',
+				'64ce615',
+				'54c30b0',
+				'74fdc2v',
+				'aeb317a',
+				'0f6c308',
+				'5e87525',
+				'8252f39',
+				'353e447',
+				'b818a0w',
+				'8216520',
+				'8dd81bi',
+				'c951bfk',
+				'329504s',
+				'e23e0bv',
+				'9d5b9a9',
+				'722044p',
+			];
 
 			// Filter by deviser and exclude unpublished profiles
 			$conditions[] =
@@ -1750,6 +1768,9 @@ class Person extends CActiveRecord implements IdentityInterface
 								Person::ACCOUNT_STATE_BLOCKED,
 								Person::ACCOUNT_STATE_DRAFT,
 							]
+						],
+						"short_id" => [
+							'$in' => $forcedIds,
 						],
 					],
 				];

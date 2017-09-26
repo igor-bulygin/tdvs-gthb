@@ -130,7 +130,7 @@
 
 		function parseMultiLanguageEmptyFields(obj) {
 			for(var key in obj) {
-				if(obj[key] && obj[key].length === 0) {
+				if(angular.isString(obj[key]) && obj[key].length === 0) {
 					delete obj[key];
 				}
 			}

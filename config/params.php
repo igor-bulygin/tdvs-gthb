@@ -1,6 +1,6 @@
 <?php
 
-defined('STRIPE_LIVE_MODE') or define('STRIPE_LIVE_MODE', false);
+define('STRIPE_LIVE_MODE', YII_ENV_PROD);
 
 return [
 	'angular_datepicker' => "yyyy-MM-dd",
@@ -17,7 +17,7 @@ return [
 	'instagram_client_id' => '7cdaa91e4b27429a867e9e142d114b65',
 	'instagram_secret_key' => !YII_ENV_PROD  ? 'f25dcb37b4594b61a5c50de7c42c3906' : 'secret_prod',
 
-	'default_todevise_fee' => 0.045,
+	'default_todevise_fee' => 0.145,
 	'admin_email' => 'info@todevise.com',
 	'from_email' => 'info@todevise.com',
 ];

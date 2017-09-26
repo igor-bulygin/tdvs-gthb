@@ -50,7 +50,9 @@ $this->params['person_menu_store_categories'] = $categories;
 			</div>
 			<div class="col-md-10">
 				<div class="content-store">
-					
+					<?php if ($person->isPersonEditable()) { ?>
+						<div><a href="<?= $person->getStoreEditLink()?>" class="red-link-btn"><span translate="person.store.EDIT_DELETE_WORKS"></span></a></div>
+					<?php } ?>
 					<div class="store-grid">
 						<nav class="products-menu">
 							<ul>
@@ -66,23 +68,13 @@ $this->params['person_menu_store_categories'] = $categories;
 								<div class="menu-category list-group">
 									<div class="grid">
 										<figure class="effect-zoe">
-											<?php if ($person->isPersonEditable()) { ?>
-											<span class="close-product-icon-left" ng-click="viewStoreCtrl.open_modal_delete('<?=$product->short_id?>')"></span>
-											<a class="edit-product-icon" href="<?= $product->getEditLink()?>" translate-attr="{title: 'person.EDIT_WORK'}">
-												<i class="ion-edit"></i>
+											<image-hover-buttons product-id="{{'<?= $product->short_id ?>'}}" is-loved="{{'<?=$product->isLovedByCurrentUser() ? 1 : 0 ?>'}}" is-mine="{{'<?= $product->isWorkFromCurrentUser() ? 1 : 0 ?>'}}"> 
+											<a href="<?= $product->getViewLink() ?>">
+												<img class="grid-image"
+													 src="<?= $product->getImagePreview(400, 0) ?>">
+												<span class="img-bgveil"></span>
 											</a>
-											<?php } ?>
-											<?php if(!$person->isPersonEditable()) { ?>
-												<image-hover-buttons product-id="{{'<?= $product->short_id ?>'}}" is-loved="{{'<?=$product->isLovedByCurrentUser() ? 1 : 0 ?>'}}" is-mine="{{'<?= $product->isWorkFromCurrentUser() ? 1 : 0 ?>'}}"> 
-											<?php } ?>
-												<a href="<?= $product->getViewLink() ?>">
-													<img class="grid-image"
-														 src="<?= $product->getImagePreview(400, 0) ?>">
-													<span class="img-bgveil"></span>
-												</a>
-											<?php if(!$person->isPersonEditable()) { ?>
-												</image-hover-buttons>
-											<?php } ?>
+											</image-hover-buttons>
 											<a href="<?= $product->getViewLink()?>">
 												<figcaption>
 													<p class="instauser"><?= \yii\helpers\StringHelper::truncate($product->getName(), 18, '…') ?></p>

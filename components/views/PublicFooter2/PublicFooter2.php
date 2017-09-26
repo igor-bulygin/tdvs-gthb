@@ -101,7 +101,6 @@ $footerMode = 'collapsed';
 					</li>
 					
 					<li>
-<<<<<<< HEAD
 						<a class="twitter" href="https://twitter.com/todevise">
 							<i class="twitter">
 								<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
@@ -143,37 +142,6 @@ $footerMode = 'collapsed';
 							</i>
 						</a>
 					</li>
-					<!--li>
-						<a href="https://www.facebook.com/todevise" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-					</li>
-					<li>
-						<a class="twitter" href="https://twitter.com/todevise" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-					</li>
-=======
-						<a class="twitter" href="https://twitter.com/todevise" target="_blank">
-							<i class="fa fa-twitter" aria-hidden="true"></i>
-						</a>
-					</li>
-					<?php /*
->>>>>>> 395f86ccfba30445560f23294c39fdce872f18a5
-					<li>
-						<a class="instagram" href="https://www.instagram.com/todevise.official" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-					</li-->
-					<!--li>
-						<a class="google-plus" href="#" target="_blank">
-							<i class="fa fa-google-plus" aria-hidden="true"></i>
-						</a>
-					</li>
-					<li>
-						<a href="#" target="_blank">
-							<i class="fa fa-pinterest-p" aria-hidden="true"></i>
-						</a>
-<<<<<<< HEAD
-					</li-->
-=======
-					</li>
- 					*/ ?>
->>>>>>> 395f86ccfba30445560f23294c39fdce872f18a5
 				</ul>
 			</div>
 		</div>

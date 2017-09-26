@@ -707,7 +707,7 @@ class Product extends CActiveRecord {
 					$criteria['order_col'] = 'created_at';
 					$criteria['order_dir'] = 'asc';
 					break;
-				case 'chepeast':
+				case 'cheapest':
 					$criteria['order_col'] = 'price_stock.price';
 					$criteria['order_dir'] = 'asc';
 					break;
@@ -930,6 +930,7 @@ class Product extends CActiveRecord {
 
 	/**
 	 * Get the URLs of images to use in a gallery
+	 * Note that "main_product_photo" is returned in the first position of the array
 	 *
 	 * @return array
 	 */
@@ -938,8 +939,15 @@ class Product extends CActiveRecord {
 		$images = [];
 		if (array_key_exists("photos", $this->media)) {
 			foreach ($this->media["photos"] as $imageData) {
-				$images[] = Yii::getAlias('@product_url') .'/'.  $this->short_id .'/'. $imageData['name'];
+				if (isset($imageData['main_product_photo']) && $imageData['main_product_photo']) {
+					$mainPhoto = Yii::getAlias('@product_url') . '/' . $this->short_id . '/' . $imageData['name'];
+				} else {
+					$images[] = Yii::getAlias('@product_url') . '/' . $this->short_id . '/' . $imageData['name'];
+				}
 			}
+		}
+		if (isset($mainPhoto)) {
+			array_unshift($images, $mainPhoto);
 		}
 
 		return $images;

@@ -210,7 +210,7 @@ class OrderPack extends EmbedModel
 				}
 				$p['product_info'] = [
 					'name' => $product->getName(),
-					'photo' => $product->getImagePreview(0, 0);
+					'photo' => $product->getImagePreview(0, 0),
 					'slug' => $product->getSlug(),
 					'url' => $product->getViewLink(),
 					'stock' => $priceStock['stock'],
@@ -238,7 +238,7 @@ class OrderPack extends EmbedModel
 		foreach ($products as $item) {
 			if ($item->price_stock_id == $orderProduct->price_stock_id) {
 				$newQuantity = $item->quantity + $orderProduct->quantity;
-				if ($newQuantity > $priceStock['stock']) {
+				if ($priceStock['stock'] !== null && $newQuantity > $priceStock['stock']) {
 					throw new BadRequestHttpException(sprintf("Stock %s unavailable. Available stock is %s", $newQuantity, $priceStock['stock']));
 				}
 				$item->quantity = $newQuantity;
@@ -246,7 +246,7 @@ class OrderPack extends EmbedModel
 			}
 		}
 		if (!$found) {
-			if ($orderProduct->quantity > $priceStock['stock']) {
+			if ($priceStock['stock'] !== null && $orderProduct->quantity > $priceStock['stock']) {
 				throw new BadRequestHttpException(sprintf("Stock %s unavailable. Available stock is %s", $orderProduct->quantity, $priceStock['stock']));
 			}
 

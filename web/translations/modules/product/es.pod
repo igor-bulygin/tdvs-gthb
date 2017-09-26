@@ -104,7 +104,8 @@
 			"STOCK": "Stock",
 			"PRICE": "Precio",
 			"APPLY_ALL": "Aplicar a todo",
-			"CURRENCY": "€ "
+			"CURRENCY": "€ ",
+			"UNLIMITED_STOCK": "Stock ilimitado"
 		},
 		"variations": {
 			"TITLE": "Variaciones & Manufactura",

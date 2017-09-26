@@ -304,12 +304,29 @@ a{
 .heart-icon {
 	width: 30px;
     height: 30px;
-    background: url(/imgs/heart-black.svg) 0 0 no-repeat transparent;
+    //background: url(/imgs/heart-black.svg) 0 0 no-repeat transparent;
     display: inline-block;
     vertical-align: middle;
+    @extend %heart-black-icon;
 	&:hover{
-		background: url(/imgs/heart-red.svg) 0 0 no-repeat transparent;
+		//background: url(/imgs/heart-red.svg) 0 0 no-repeat transparent;
+		@extend %heart-red-icon;
 	}
+}
+.heart-red-icon{
+	@extend %heart-red-icon;
+}
+.heart-red-icon-btn{
+	@extend %btn;
+	background-color: $red;
+	@include size(70px, 40px);
+    padding-top: 6px;
+	div{
+		@extend %heart-white-icon;
+	}
+}
+.heart-black-icon{
+	@extend %heart-black-icon;
 }
 .btn-save-box{
     @extend %btn;
