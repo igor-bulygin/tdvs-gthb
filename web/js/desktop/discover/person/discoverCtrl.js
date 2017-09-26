@@ -6,7 +6,7 @@
 		vm.search = search;
 		vm.searchMore = searchMore;
 		vm.filters = {};
-		vm.maxResults=2;
+		vm.maxResults=100;
 		vm.page=1;
 		vm.results={items: [] };
 
