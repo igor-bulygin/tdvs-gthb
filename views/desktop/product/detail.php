@@ -362,7 +362,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 											</div>
 											-->
 											<div class="col-sm-3">
-												<span translate="product.detail.IS"></span> <span class="tax">€<?=$product->getShippingPrice(Country::getDefaultContryCode())?></span>
+												<span translate="product.detail.IS"></span> <span class="tax">€<?=$product->getShippingPrice(null, Country::getDefaultContryCode())?></span>
 											</div>
 										</div>
 									</form>
