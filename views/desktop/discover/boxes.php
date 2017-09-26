@@ -25,8 +25,8 @@ $this->title = Yii::t('app/public','EXPLORE_BOXES');
 			</div>
 			<div class="col-md-10">
 				<div class="found-header">
-					<p ng-if="exploreBoxesCtrl.search_key && !exploreBoxesCtrl.searching" ng-cloak translate="discover.WE_FOUND_X_RESULTS_WITH_KEY" translate-values="{ counter: exploreBoxesCtrl.results_found, keys:exploreBoxesCtrl.search_key }"></p>
-					<p ng-if="!exploreBoxesCtrl.search_key && !exploreBoxesCtrl.searching" ng-cloak translate="discover.WE_FOUND_X_RESULTS" translate-values="{ counter: exploreBoxesCtrl.results_found }"></p>
+					<p ng-if="exploreBoxesCtrl.search_key && (!exploreBoxesCtrl.searching || exploreBoxesCtrl.results.items.length > 0)" ng-cloak translate="discover.WE_FOUND_X_RESULTS_WITH_KEY" translate-values="{ counter: exploreBoxesCtrl.results_found, keys:exploreBoxesCtrl.search_key }"></p>
+					<p ng-if="!exploreBoxesCtrl.search_key && (!exploreBoxesCtrl.searching || exploreBoxesCtrl.results.items.length > 0)" ng-cloak translate="discover.WE_FOUND_X_RESULTS" translate-values="{ counter: exploreBoxesCtrl.results_found }"></p>
 				</div>
 				<explore-boxes-results results="exploreBoxesCtrl.results" ng-if="exploreBoxesCtrl.results && exploreBoxesCtrl.results.items.length > 0" ng-cloak></explore-boxes-results>
 				<div class="mt-30 col-md-12 col-md-offset-4" ng-if="exploreBoxesCtrl.searching && exploreBoxesCtrl.results.items.length == 0" ng-cloak>
