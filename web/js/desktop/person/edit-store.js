@@ -12,7 +12,8 @@
 		vm.update = update;
 		vm.open_modal_delete = open_modal_delete;
 		vm.show_unpublished_works = show_unpublished_works;
-		vm.language = 'en-US';
+		vm.selected_language=_lang;
+		vm.language = vm.selected_language;
 
 		function init() {
 			parseCategories();

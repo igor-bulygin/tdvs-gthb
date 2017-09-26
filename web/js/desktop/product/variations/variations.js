@@ -21,7 +21,6 @@
 		vm.deleteSizeFromSizechart = deleteSizeFromSizechart;
 		vm.sizechartValuesValidation = sizechartValuesValidation;
 		vm.optionValidation = optionValidation;
-		vm.textFieldValidation = textFieldValidation;
 		vm.saveDeviserSizechart=saveDeviserSizechart;
 		vm.showNewSizechartForm = showNewSizechartForm;
 		vm.new_column=new_column;
@@ -41,7 +40,6 @@
 		vm.preorder_selected = false;
 		vm.made_to_order_selected = false;
 		vm.bespoke_selected = false;
-		vm.bespoke_language = 'en-US';
 		vm.deviserSizecharts = [];
 		vm.sizecharts=[];
 		vm.countriesAvailable = [];
@@ -50,6 +48,7 @@
 		vm.showNewSizechart=false;
 		vm.invalidNewSizechart=false;
 		vm.selected_language=_lang;
+		vm.bespoke_language = vm.selected_language;
 		vm.name_language=vm.selected_language;
 		vm.mandatory_langs=Object.keys(_langs_required);
 		vm.mandatory_langs_names="";
@@ -391,10 +390,6 @@
 
 		function optionValidation(option, required) {
 			return option.length <= 0 && vm.form_submitted && required;
-		}
-
-		function textFieldValidation(textField, requiredOption) {
-			return requiredOption && (!angular.isObject(textField) || !textField['en-US'] || textField['en-US'] == '' || textField['en-US'] == undefined);
 		}
 
 		function setSizechartFromProduct() {

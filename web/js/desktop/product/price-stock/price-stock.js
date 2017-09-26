@@ -6,6 +6,7 @@
 		vm.has_error = UtilService.has_error;
 		vm.priceStockValuesValidation = priceStockValuesValidation;
 		vm.applyToAll = applyToAll;
+		vm.selected_language=_lang;
 
 		var set_original_artwork = false;
 
@@ -38,7 +39,7 @@
 							//look for tag.options.values and compare them to each element.options[key]
 							vm.tags[i].options.forEach(function (option) {
 								if(element.options[key].indexOf(option.value) > -1) {
-									title.push(option.text['en-US']);
+									title.push(option.text[vm.selected_language]);
 								}
 							})
 						}

@@ -7,7 +7,8 @@
 		vm.has_error = UtilService.has_error;
 		vm.stripHTMLTags = UtilService.stripHTMLTags;
 		vm.person = person;
-		vm.description_language = vm.biography_language = 'en-US';
+		vm.selected_language=_lang;
+		vm.description_language = vm.biography_language = vm.selected_language;
 		vm.limit_text_short_description = 140;
 		vm.searchPlace = searchPlace;
 		vm.selectCity = selectCity;

@@ -291,11 +291,12 @@
 
 		//watch name error
 		$scope.$watch('productBasicInfoCtrl.product.name', function(newValue, oldValue) {
-			if(newValue && newValue['en-US'] && newValue['en-US'].length > 0) {
-				vm.nameRequired = false;
-			} else if(oldValue && oldValue['en-US'] && newValue['en-US'].length === 0) {
-				vm.nameRequired = true;
-			}
+			vm.nameRequired = false;
+			angular.forEach(vm.mandatory_langs, function (lang) {
+				if (angular.isUndefined(newValue) || angular.isUndefined(newValue[lang]) || newValue[lang].length<1) {
+					vm.nameRequired = true;
+				}
+			});
 		}, true);
 
 		//watch photos and main photo errors

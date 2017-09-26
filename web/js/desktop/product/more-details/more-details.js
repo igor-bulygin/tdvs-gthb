@@ -21,6 +21,7 @@
 		vm.dragStart = dragStart;
 		vm.moved = moved;
 		vm.canceled = canceled;
+		vm.selected_language=_lang;
 
 		function init(){
 			//init functions
@@ -36,13 +37,11 @@
 		function addFaq() {
 			vm.faq_helper.push({
 				completedLanguages: [],
-				languageSelected: 'en-US'
+				languageSelected: vm.selected_language
 			});
 			vm.product.faq.push({
 				question: {},
-				answer: {},
-				//completedLanguages: [],
-				//languageSelected: 'en-US'
+				answer: {}
 			});
 		}
 
@@ -175,7 +174,7 @@
 				for(var i = 0; i < newValue.length; i++) {
 					vm.faq_helper.unshift({
 						completedLanguages: [],
-						languageSelected: 'en-US'
+						languageSelected: vm.selected_language
 					})
 					parseQuestion(newValue[i], i);
 				}
