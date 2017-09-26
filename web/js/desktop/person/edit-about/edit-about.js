@@ -211,22 +211,46 @@
 			
 			//get updated photos object
 			vm.person.media = parsePhotos();
-			//create object
-			var data = {
-				categories: vm.person.categories,
-				media: vm.person.media,
-				curriculum: vm.person.curriculum,
-				text_biography: {}
-			}
 			//parse biography
 			UtilService.parseMultiLanguageEmptyFields(vm.person.text_biography);
-			for (var language in vm.person.text_biography) {
-				data.text_biography[language] = parseTags(vm.person.text_biography[language])
+
+			//prevalidations
+			vm.setBiographyRequired = false;
+			vm.mandatory_langs.forEach(function(language) {
+				if(!vm.person.text_biography[language]) {
+					vm.setBiographyRequired = true;
+				}
+			});
+			if(vm.person.media.photos !== 3)
+				vm.setPhotosRequired = true;
+			else {
+				vm.setPhotosRequired = false;
+			}
+			if(vm.person.categories.length < 1)
+				vm.setCategoriesRequired = true;
+			else {
+				vm.setCategoriesRequired = false;
 			}
 
-			personDataService.updateProfile(data, {
-				personId: person.short_id
-			}, onUpdateProfileSuccess, UtilService.onError);
+			if(!vm.setBiographyRequired && !vm.setPhotosRequired && !vm.setCategoriesRequired) {
+				//create object
+				var data = {
+					categories: vm.person.categories,
+					media: vm.person.media,
+					curriculum: vm.person.curriculum,
+					text_biography: {}
+				}
+
+				//parse biography
+				for (var language in vm.person.text_biography) {
+					data.text_biography[language] = parseTags(vm.person.text_biography[language])
+				}
+
+				//update
+				personDataService.updateProfile(data, {
+					personId: person.short_id
+				}, onUpdateProfileSuccess, UtilService.onError);
+			}
 		}
 
 		//events
