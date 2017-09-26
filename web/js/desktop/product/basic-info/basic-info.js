@@ -24,11 +24,11 @@
 		//we need this counter to know how many categories we have in order to broadcast right vars in setVariations event
 		vm.category_counter = 0;
 
+		init();
+		
 		function init(){
 			setMandatoryLanguagesNames();
 		}
-
-		init();
 
 		//	TODO unify this (repeated function on variations.js) as a component field from creation/edition when files free
 		function setMandatoryLanguagesNames() {
