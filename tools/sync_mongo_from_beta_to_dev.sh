@@ -7,7 +7,7 @@ remote_user="todeviseapp"
 remote_database_host="ddbb.todevise.com"
 remote_database_port="27017"
 remote_database_name="todevise"
-localhost_host="localhost"
+localhost_host="ddbb.todevise.com"
 localhost_port="27017"
 localhost_name="todevise"
 
