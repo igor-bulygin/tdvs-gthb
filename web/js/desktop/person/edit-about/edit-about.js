@@ -209,16 +209,19 @@
 				$window.location.href = vm.person.about_link;
 			}
 			
-			var data = {}
-			for(var key in vm.person) {
-				if(key !== 'account_state')
-					data[key] = angular.copy(vm.person[key]);
-				if(key === 'text_biography') {
-					data[key] = {}
-					for(var language in vm.person[key]) {
-						data[key][language] = parseTags(vm.person[key][language]);
-					}
-				}
+			//get updated photos object
+			vm.person.media = parsePhotos();
+			//create object
+			var data = {
+				categories: vm.person.categories,
+				media: vm.person.media,
+				curriculum: vm.person.curriculum,
+				text_biography: {}
+			}
+			//parse biography
+			UtilService.parseMultiLanguageEmptyFields(vm.person.text_biography);
+			for (var language in vm.person.text_biography) {
+				data.text_biography[language] = parseTags(vm.person.text_biography[language])
 			}
 
 			personDataService.updateProfile(data, {
@@ -234,7 +237,6 @@
 		})
 
 		$scope.$on(deviserEvents.make_profile_public_errors, function(event, args) {
-			debugger;
 			//set form submitted
 			vm.form.$setSubmitted();
 			vm.setBiographyRequired=false;
