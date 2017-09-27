@@ -4,7 +4,7 @@
 	function controller(UtilService, productDataService,$scope) {
 		var vm = this;
 		vm.results={items:[]};
-		vm.limit=5;
+		vm.limit=100;
 		vm.searchMore=searchMore;
 		vm.page=1;
 
