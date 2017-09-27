@@ -3,7 +3,7 @@
 
 	function controller($scope, UtilService) {
 		var vm = this;
-		var show_items = 32;
+		var show_items = 3;
 		vm.truncateString = UtilService.truncateString;
 		vm.addMoreItems = addMoreItems;
 		vm.results_infinite = [];
@@ -11,22 +11,16 @@
 
 		function addMoreItems() {
 			var last = vm.results_infinite.length;
-			if ((last+show_items) > (vm.limit * vm.searchPage)) {
-				$scope.$emit("changeNewPage",true); 
-				vm.searchPage= vm.searchPage + 1;
-			}
-			else {
-				vm.results_infinite = vm.results_infinite.concat(vm.results.slice(last, last+show_items));
-			}
+			vm.results_infinite = vm.results_infinite.concat(vm.results.items.slice(last, last+show_items));
 		}
 
-
 		$scope.$watch('exploreProductsResultsCtrl.results', function(newValue, oldValue) {
-			if (newValue===-1) {
-				vm.results_infinite = [];
-			}
 			if(angular.isObject(newValue)) {
-				vm.results_infinite=vm.results_infinite.concat(vm.results.slice(vm.results_infinite.length, vm.results_infinite.length + show_items));
+				if(newValue.length > 0)
+					vm.results_infinite = newValue.slice(0, show_items);
+				else {
+					vm.results_infinite = [];
+				}
 			}
 		}, true);
 	}
