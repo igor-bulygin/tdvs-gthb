@@ -365,7 +365,7 @@ class CartController extends AppPublicController
 					'currency' => $charge->currency,
 					'customer' => $charge->customer,
 					'description' => $charge->description,
-					'destinatation' => $charge->destinatation,
+					'destination' => $charge->destination,
 					'receipt_email' => $charge->receipt_email,
 					'status' => $charge->status,
 				];

@@ -77,7 +77,7 @@ $this->registerJs("var order_id= ".Json::encode($order_id), yii\web\View::POS_HE
 				<div class="order-success-summary-wrapper">
 					<div ng-repeat="pack in orderSuccessCtrl.order.packs" ng-cloak>
 						<span class="deviser-name-item summary-white-item" ng-bind="pack.deviser_info.name"></span>
-						<span class="pull-right" translate="todevise.order.SHIPPING_PRICE"> <span ng-bind="pack.shipping_price"></span></span>
+						<span class="pull-right"><span translate="todevise.order.SHIPPING_PRICE"></span>&nbsp;<span ng-bind="pack.shipping_price"></span><span translate="todevise.order.CURRENCY"></span></span>
 						<div class="summary-cart-wrapper summary-white-item" ng-repeat="product in pack.products">
 							<div class="img-checkout-wrapper col-md-2">
 								<img ng-src="{{product.product_info.photo}}" ng-attr-alt="{{product.product_info.name}}" ng-attr-title="{{product.product_info.name}}">
@@ -85,7 +85,7 @@ $this->registerJs("var order_id= ".Json::encode($order_id), yii\web\View::POS_HE
 							<div>
 								<div>
 									<span class="bold"><span ng-bind="product.product_info.name"></span></span>
-									<span class="pull-right bold" translate="todevise.order.CURRENCY">&nbsp;<span ng-bind="product.quantity*product.price"></span></span>
+									<span class="pull-right bold"><span translate="todevise.order.CURRENCY"></span>&nbsp;<span ng-bind="product.quantity*product.price"></span></span>
 								</div>
 								<div class="summary-row">
 									<span>Ud: <span ng-bind="product.quantity"></span></span><span>&nbsp;·&nbsp;</span>
@@ -105,7 +105,7 @@ $this->registerJs("var order_id= ".Json::encode($order_id), yii\web\View::POS_HE
 					</div>
 					<div class="summary-cart-wrapper" ng-cloak>
 						<span class="subtotal-amount-wrapper">
-							<span class="pull-right bold"><span translate="todevise.order.TOTAL"> </span><span translate="todevise.order.CURRENCY"></span><span ng-bind="orderSuccessCtrl.order.subtotal"></span></span>
+							<span class="pull-right bold"><span translate="todevise.order.TOTAL"></span> <span translate="todevise.order.CURRENCY"></span><span ng-bind="orderSuccessCtrl.order.subtotal"></span></span>
 						</span>
 					</div>
 				</div>
