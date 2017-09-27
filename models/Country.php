@@ -194,6 +194,7 @@ class Country extends CActiveRecord
 			// Get different countries available by person type
 			$queryPerson= new ActiveQuery(Person::className());
 			$queryPerson->andWhere(["type" => (int)$criteria["person_type"]]);
+			$queryPerson->andWhere(["account_state" => Person::ACCOUNT_STATE_ACTIVE]);
 			$countries = $queryPerson->distinct("personal_info.country");
 
 			$query->andFilterWhere(["in", "country_code", $countries]);
