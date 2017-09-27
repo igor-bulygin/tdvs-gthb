@@ -592,6 +592,11 @@ class Utils
 		}
 	}
 
+	/**
+	 * @param $img_path
+	 *
+	 * @return Builder
+	 */
 	public static function thumborize($img_path)
 	{
 		// TODO obtain this from .env file
