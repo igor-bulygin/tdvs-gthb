@@ -13,17 +13,15 @@
 		init();
 
 		function init() {
-			angular.forEach(vm.orders, function(order, key) {
-				order.totalPrice = 0;
-				order.commission=0;
-				order.totalShippingPrice=0;
-				angular.forEach(order.packs, function(pack, keyPack) {
-					order.totalPrice = order.totalPrice + pack.pack_price;
-					order.totalShippingPrice = order.totalShippingPrice + pack.shipping_price;
-					order.commission= order.commission + ((pack.pack_price*pack.pack_percentage_fee)/100);
+			vm.orders.forEach(function(order) {
+				order.totalPrice = order.totalShippingPrice = order.commission = 0;
+				order.packs.forEach(function(pack) {
+					order.totalPrice += pack.pack_price;
+					order.totalShippingPrice += pack.shipping_price;
+					order.commission += ((pack.pack_price+pack.shipping_price)*pack.pack_percentage_fee);
 				});
 				order.total= order.totalPrice + order.totalShippingPrice + order.commission;
-				vm.ordersTotalPrice=vm.ordersTotalPrice + order.totalPrice;
+				vm.ordersTotalPrice += order.totalPrice;
 				cartService.parseTags(order, vm.tags);
 			});
 		}
@@ -36,7 +34,7 @@
 			orderDataService.changePackState({}, {personId:pack.deviser_id,packId:pack.short_id, newState:'aware' },onChangeStateSuccess, UtilService.onError);
 		}
 
-		function markPackShipped(order,pack) {			
+		function markPackShipped(order,pack) {
 			function onChangeStateSuccess(data) {
 				if (!pack.editInfo) {
 					order.packs.splice(order.packs.indexOf(pack),1);
