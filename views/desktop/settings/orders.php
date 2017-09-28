@@ -32,11 +32,9 @@ $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD
 			</ol>
 		</div>
 		<div class="btn-group col-md-8 inline">
-			<div class="radio">
-			<label class="col-md-2" ng-repeat="state in ordersCtrl.enabledStates" class="col-md-1">
-				<input type="radio" name="stateFilter" ng-model="ordersCtrl.stateFilter" ng-value="state.value" ng-change="ordersCtrl.getOrders()" />
-				<span translate="{{state.name}}"></span>
-			</label>
+			<div class="radio radio-inline" ng-repeat="state in ordersCtrl.enabledStates" class="col-md-1">
+				<input type="radio" name="{{'stateFilter_'+$index}}" ng-attr-id="{{'stateFilter_'+$index}}" ng-model="ordersCtrl.stateFilter" ng-value="state.value" ng-change="ordersCtrl.getOrders()" />
+				<label class="col-md-2" for="{{'stateFilter_'+$index}}"><span translate="{{state.name}}"></span></label>
 			</div>
 		</div>
 		<div class="col-md-12 text-center mt-40" ng-if="!ordersCtrl.loading && !ordersCtrl.orders.length>0" ng-cloak>
