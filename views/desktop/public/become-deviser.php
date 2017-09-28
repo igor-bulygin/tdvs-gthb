@@ -12,7 +12,8 @@ $this->title = Yii::t('app/public', 'BECOME_A_DEVISER');
 		<div>
 			<div class="container-fluid become-deviser-container">
 				<div class="become-deviser-cover">
-				<div class="row">
+				<div class="container">
+				<div class="header row">
 					<div class="col-sm-6"></div>
 					<div class="col-sm-6 col-xs-12">
 						<div class="call-to-action-wrapper">
@@ -22,7 +23,7 @@ $this->title = Yii::t('app/public', 'BECOME_A_DEVISER');
 								</div>
 								<div class="tagline" translate="todevise.become_deviser.EXPRESS"></div>
 								<div class="tagline" translate="todevise.become_deviser.YOURSELF"></div>
-								<button class="btn btn-white btn-request btn-minpad" ng-click="becomeDeviserCtrl.scrollToForm()" translate="todevise.become_deviser.REQUEST_INVITATION"></button>
+								<button class="btn btn-red btn-big btn-red" ng-click="becomeDeviserCtrl.scrollToForm()" translate="todevise.become_deviser.REQUEST_INVITATION"></button>
 							</div>
 						</div>
 					</div>
@@ -79,6 +80,7 @@ $this->title = Yii::t('app/public', 'BECOME_A_DEVISER');
 					<div class="col-sm-12">
 						<div class="quotation" translate="todevise.become_deviser.OUTLET_STORE"></div>
 					</div>
+				</div>
 				</div>
 				</div>
 			</div>

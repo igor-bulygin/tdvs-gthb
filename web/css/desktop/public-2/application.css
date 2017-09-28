@@ -5963,9 +5963,8 @@ span.optional-text.pull-left {
 .more-boxes-text {
   text-transform: uppercase; }
 
-.become-deviser-wrapper .become-deviser-cover {
-  background: url("/imgs/become_a_deviser_background.png") no-repeat;
-  background-size: cover; }
+.become-deviser-wrapper .header {
+  background: url("/imgs/become-a-deviser-header.jpg") no-repeat; }
 .become-deviser-wrapper .call-to-action-wrapper {
   position: relative;
   height: 525px; }

@@ -2,10 +2,9 @@
 // Become a deviser
 // ==========================================================================
 .become-deviser-wrapper{
-    .become-deviser-cover{
-        background: url('/imgs/become_a_deviser_background.png') no-repeat;
-        background-size: cover;
-    }
+	.header{
+		background: url('/imgs/become-a-deviser-header.jpg') no-repeat;
+	}
     .call-to-action-wrapper{
         position: relative;
         @extend %block;
