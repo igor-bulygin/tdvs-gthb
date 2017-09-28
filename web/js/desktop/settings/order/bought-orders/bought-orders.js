@@ -11,14 +11,14 @@
 		init();
 
 		function init() {
-			angular.forEach(vm.orders, function(order, key) {
-					order.total=0;
-					angular.forEach(order.packs, function(pack, keyPack) {
-						order.total= order.total + pack.pack_price + pack.shipping_price + ((pack.pack_price*pack.pack_percentage_fee)/100);
-					});
-					vm.ordersTotalPrice=vm.ordersTotalPrice + order.total;
-					cartService.parseTags(order, vm.tags);
-				});
+			vm.orders.forEach(function(order) {
+				order.total = 0;
+				order.packs.forEach(function(pack) {
+					order.total += pack.pack_price + pack.shipping_price;
+				})
+				vm.ordersTotalPrice=vm.ordersTotalPrice + order.total;
+				cartService.parseTags(order, vm.tags);
+			})
 		}
 
 		function openTrackModal(pack) {
