@@ -101,8 +101,8 @@
 			"NOT_VALID": "Email o constraseña incorrectos"
 		},
 		"signup": {
-			"WELCOME": "bienvenido",
-			"TO": "a",
+			"WELCOME": "Bienvenido a Todevise",
+			"TO": "Puedes empezar a crear tu perfil",
 			"NAME": "Nombre"
 		},
 		"contact": {

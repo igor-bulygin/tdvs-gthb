@@ -7,7 +7,7 @@
 	float: left;
     width: 100%;
     .logo{
-        width: 110px;
+        width: 100%;//110px;
         margin: 0 auto;
     }
     .create-deviser-account-container{
@@ -63,19 +63,21 @@
     color: $red;
 }
 .title-create-account{
-	color: $white;
-	.first-title{
-		font-size: 24px;
-		text-align: center;
-		display: block;
-		width: 110px;
-		text-transform: uppercase;
-		font-family: $font-family--bold;
-	}
+    color: $background_grey;//$white;
+    .first-title{
+        width: 100%;
+        font-size: 72px;//24px;
+        text-align: center;
+        display: block;
+        width: 100%;//110px;
+        text-transform: uppercase;
+        font-family: $font-family--name;//$font-family--bold;
+        letter-spacing: 4px;
+    }
 	.second-title{
-		font-family: $font-family--serif;
-		font-size: 18px;
-		width: 110px;
+		font-family: $font-family--regular;//$font-family--serif;
+		font-size: 24px;//18px;
+		width: 100%;//110px;
 		display: block;
 		text-align: center;
 		margin: -5px 0 5px;
@@ -83,8 +85,8 @@
 }
 .image-create-account{
 	img{
-		width: 95px;
-		margin: 0 auto;
+		width: 150px;//95px;
+		margin: 65px auto;//0 auto;
 		display: block;
 	}
 }

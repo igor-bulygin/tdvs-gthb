@@ -9,13 +9,13 @@ $this->title = Yii::t('app/public', 'SIGNUP');
 
 <div class="create-deviser-account-wrapper">
 	<div class="logo">
+		<a class="image-create-account" href="/">
+			<img src="/imgs/logo.svg" data-pin-nopin="true">
+		</a>
 		<span class="title-create-account">
 			<span class="first-title"><span translate="todevise.signup.WELCOME"></span></span>
 			<span class="second-title"><span translate="todevise.signup.TO"></span></span>
 		</span>
-		<a class="image-create-account" href="/">
-			<img src="/imgs/logo.png" data-pin-nopin="true">
-		</a>
 	</div>
 	<div class="create-deviser-account-container black-form" ng-controller="createAccountCtrl as createAccountCtrl">
 		<form name="createAccountCtrl.form" novalidate>

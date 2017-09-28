@@ -27,7 +27,7 @@
         &.password{
             letter-spacing: 5px;
         }
-        @include border-radius(20px,20px,20px,20px);
+        //@include border-radius(20px,20px,20px,20px);
         &::-webkit-input-placeholder {color:$white;text-transform: uppercase;}
         &:-moz-placeholder           {color:$white;text-transform: uppercase;}
         &::-moz-placeholder          {color:$white;text-transform: uppercase;}

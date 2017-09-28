@@ -101,8 +101,8 @@
 			"NOT_VALID": "Email or password are invalid"
 		},
 		"signup": {
-			"WELCOME": "welcome",
-			"TO": "to",
+			"WELCOME": "Welcome to Todevise",
+			"TO": "You can now start creating your profile",
 			"NAME": "Name"
 		},
 		"contact": {
