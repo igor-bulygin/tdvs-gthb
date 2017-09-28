@@ -64,9 +64,16 @@ class StripeController extends CController
 			if (!$resp) {
 				Yii::info('Stripe connect back with errors. Validation result: '.$resp, __METHOD__);
 			} else {
+
 				// Save current connect info
 				$person->settingsMapping->stripe_info = $resp;
 				$person->save();
+
+				$log = array(
+					'person_id' => $person_id,
+					'stripe_user_id' => $resp['stripe_user_id'],
+				);
+				Yii::info('Stripe account connection succesfully: \n'.print_r($log, true), __METHOD__);
 			}
 
 			$this->redirect(Url::to(['settings/billing', 'slug' => $person->slug, 'person_id' => $person->short_id]));
