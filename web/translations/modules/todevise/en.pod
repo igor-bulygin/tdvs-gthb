@@ -34,7 +34,7 @@
 			"ENJOY_FEATURES": "Having a profile on Todevise is free (and there is no limit to the amount of products you can upload). Pay 14.5% only when you sell (affiliates costs included).",
 			"GROW_BRAND": "Grow your brand",
 			"INTERNATIONAL_CUSTOMERS": "Reach international customers who understand your philosophy and appreciate your work. Get marketing guidance and SEO/SEM optimization by our team of experts. Potential onsite and social media promotion of your work.",
-			"OUTLET_STORE": "Having your outlet store on Todevise opens your business to a world of opportunities. Reach new customers, upload products with ease, manage and track your sales efficiently.",
+			"OUTLET_STORE": "Having your store on Todevise opens your business to a world of opportunities. Reach new customers, upload products with ease, manage and track your sales efficiently.",
 			"STRIVE_EXCELLENCE": "We constantly strive for excellence, and for this reason an invitation is needed to register a deviser.",
 			"PERSONAL_INFO": "Personal info",
 			"NAME": "Name",

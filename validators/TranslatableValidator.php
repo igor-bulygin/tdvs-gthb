@@ -23,11 +23,12 @@ class TranslatableValidator extends Validator
 
 		foreach ($values as $key => $item) {
 			if (!array_key_exists($key, Lang::getValidLanguages())) {
-				$error = sprintf('Language "%s" not valid', $key);
+				$error = sprintf('Language "%s" is not valid', $key);
 				return false;
 			}
-			if (empty($item)) {
-				$error = sprintf('Language "%s" can not be empty', $key);
+
+			if (!empty($item) && !is_string($item)) {
+				$error = sprintf('Language "%s" translation must be a string', $key);
 				return false;
 			}
 		}
@@ -55,12 +56,12 @@ class TranslatableValidator extends Validator
 			foreach ($values as $key => $item) {
 				$languageName = Lang::getLanguageName($key) ?: $key;
 				if (!array_key_exists($key, Lang::getValidLanguages())) {
-					$this->addError($object, $attribute, sprintf('Language %s not valid for %s', $languageName, $attribute));
+					$this->addError($object, $attribute,
+						sprintf('Language %s not valid for %s', $languageName, $attribute));
+				} elseif (!empty($item) && !is_string($item)) {
+					$this->addError($object, $attribute,
+						sprintf('%s translation must be a string for %s', $languageName, $attribute));
 				}
-				// Commented because this validator does not validate "required" fields
-//				if (empty($item)) {
-//					$this->addError($object, $attribute, sprintf('Language %s can not be empty for %s', $languageName, $attribute));
-//				}
 			}
 		}
 	}

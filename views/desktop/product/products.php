@@ -20,9 +20,9 @@ $this->registerJs("var searchParam = '".$text."'", yii\web\View::POS_HEAD, 'prod
 ?>
 
 <style>
-	#product-results { width: 930px; margin: 0 auto; column-count: 5; column-gap: 10px; -webkit-column-count: 5; -webkit-column-gap: 10px; -moz-column-count: 5; -moz-column-gap: 10px; }
-	.product-result-item { display: inline-block; margin-bottom: 0px; width: 100%; padding: 0 !important; }
-	.product-result-item figure, .product-result-item figcaption { padding: 0 !important; }
+#product-results { width: 930px; margin: 0 auto; column-count: 5; column-gap: 10px; -webkit-column-count: 5; -webkit-column-gap: 10px; -moz-column-count: 5; -moz-column-gap: 10px; }
+.product-result-item { display: inline-block; margin-bottom: 0px; width: 100%; padding: 0 !important; }
+.product-result-item figure, .product-result-item figcaption { padding: 0 !important; }
 </style>
 
 <div ng-controller="exploreProductsCtrl as exploreProductsCtrl" class="results-wrapper">
@@ -37,12 +37,17 @@ $this->registerJs("var searchParam = '".$text."'", yii\web\View::POS_HEAD, 'prod
 					<div class="col-md-10">
 						<explore-products-results ng-if="exploreProductsCtrl.results.length != 0" results="exploreProductsCtrl.results"  limit="exploreProductsCtrl.limit" ></explore-products-results>
 					</div>
-					<div ng-if="exploreProductsCtrl.searching" ng-cloak>
-						<p class="text-center" translate="SEARCHING"></p>
+					<div class="mt-30 col-md-12 col-md-offset-4" ng-if="exploreProductsCtrl.searching && exploreProductsCtrl.results.items.length == 0" ng-cloak>
+						<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+					</div>
+					<div class="text-center col-md-12 mt-30" style="padding-bottom:100px;" ng-if="exploreProductsCtrl.results.counter > exploreProductsCtrl.results.items.length "  ng-cloak >
+						<button class="big-btn btn btn-default" ng-click="exploreProductsCtrl.searchMore()" ng-disabled="exploreProductsCtrl.searching">
+							<span translate="discover.SEE_MORE" ng-if="!exploreProductsCtrl.searching"></span>
+							<i class="fa fa-spinner fa-pulse fa-3x fa-fw small" ng-if="exploreProductsCtrl.searching"></i>
+						</button>
 					</div>
 				</div>
 			</div>
 		</div>
-		
 	</div>
 </div>

@@ -601,13 +601,13 @@ class Person extends CActiveRecord implements IdentityInterface
 			],
 			[
 				'text_short_description',
-				'app\validators\TranslatableValidator',
-				'on' => [self::SCENARIO_DEVISER_UPDATE_PROFILE, self::SCENARIO_INFLUENCER_UPDATE_PROFILE, self::SCENARIO_CLIENT_UPDATE],
+				'app\validators\TranslatableRequiredValidator',
+//				'on' => [self::SCENARIO_DEVISER_UPDATE_PROFILE, self::SCENARIO_INFLUENCER_UPDATE_PROFILE, self::SCENARIO_CLIENT_UPDATE],
 			],
 			[
 				'text_biography',
-				'app\validators\TranslatableValidator',
-				'on' => [self::SCENARIO_DEVISER_UPDATE_PROFILE, self::SCENARIO_INFLUENCER_UPDATE_PROFILE, self::SCENARIO_CLIENT_UPDATE],
+				'app\validators\TranslatableRequiredValidator',
+//				'on' => [self::SCENARIO_DEVISER_UPDATE_PROFILE, self::SCENARIO_INFLUENCER_UPDATE_PROFILE, self::SCENARIO_CLIENT_UPDATE],
 			],
 //			[
 //				'preferencesMapping',

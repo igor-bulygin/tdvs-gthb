@@ -209,21 +209,48 @@
 				$window.location.href = vm.person.about_link;
 			}
 			
-			var data = {}
-			for(var key in vm.person) {
-				if(key !== 'account_state')
-					data[key] = angular.copy(vm.person[key]);
-				if(key === 'text_biography') {
-					data[key] = {}
-					for(var language in vm.person[key]) {
-						data[key][language] = parseTags(vm.person[key][language]);
-					}
+			//get updated photos object
+			vm.person.media = parsePhotos();
+			//parse biography
+			UtilService.parseMultiLanguageEmptyFields(vm.person.text_biography);
+
+			//prevalidations
+			vm.setBiographyRequired = false;
+			vm.mandatory_langs.forEach(function(language) {
+				if(!vm.person.text_biography[language]) {
+					vm.setBiographyRequired = true;
 				}
+			});
+			if(vm.person.media.photos !== 3)
+				vm.setPhotosRequired = true;
+			else {
+				vm.setPhotosRequired = false;
+			}
+			if(vm.person.categories.length < 1)
+				vm.setCategoriesRequired = true;
+			else {
+				vm.setCategoriesRequired = false;
 			}
 
-			personDataService.updateProfile(data, {
-				personId: person.short_id
-			}, onUpdateProfileSuccess, UtilService.onError);
+			if(!vm.setBiographyRequired && !vm.setPhotosRequired && !vm.setCategoriesRequired) {
+				//create object
+				var data = {
+					categories: vm.person.categories,
+					media: vm.person.media,
+					curriculum: vm.person.curriculum,
+					text_biography: {}
+				}
+
+				//parse biography
+				for (var language in vm.person.text_biography) {
+					data.text_biography[language] = parseTags(vm.person.text_biography[language])
+				}
+
+				//update
+				personDataService.updateProfile(data, {
+					personId: person.short_id
+				}, onUpdateProfileSuccess, UtilService.onError);
+			}
 		}
 
 		//events
@@ -234,7 +261,6 @@
 		})
 
 		$scope.$on(deviserEvents.make_profile_public_errors, function(event, args) {
-			debugger;
 			//set form submitted
 			vm.form.$setSubmitted();
 			vm.setBiographyRequired=false;

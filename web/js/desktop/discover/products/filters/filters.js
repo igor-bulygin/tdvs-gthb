@@ -12,8 +12,8 @@
 		vm.orderFilter={value:"", name: "discover.ORDER_BY"};
 		vm.filters = {};
 		vm.search=search;
-		vm.searchPage=1;
-		vm.resultsCounter=0;
+		vm.page=1;
+
 		init();
 
 		function init() {
@@ -26,11 +26,11 @@
 		function seeMore(value) {
 			switch (value) {
 				case 'categories':
-				if (vm.show_categories < vm.categories.meta.total_count)
-					vm.show_categories += 10;
-				break;
+					if (vm.show_categories < vm.categories.meta.total_count)
+						vm.show_categories += 10;
+					break;
 				default:
-				break;
+					break;
 			}
 		}
 
@@ -42,15 +42,16 @@
 		}
 
 		function search(resetPage) {
-			if (resetPage) {
-				vm.searchPage=1;
-				vm.results=-1;
-				vm.results = [];
-			}
 			vm.searching = true;
-			var params={};
-			params.limit=vm.limit;
-			params.page=vm.searchPage;
+			if (vm.search_key != vm.key || resetPage) {
+				vm.results={items:[], counter:0};
+				vm.page=1;
+				$scope.$emit("resetPage"); 
+			}
+			var params = {
+				limit: vm.limit,
+				page: vm.page
+			}
 			if (!angular.isUndefined(vm.orderFilter) && !angular.isUndefined(vm.orderFilter.value)) {
 				params = Object.assign(params, {order_type: vm.orderFilter.value});
 			}
@@ -69,8 +70,8 @@
 
 			function onGetProductsSuccess(data) {
 				vm.search_key = angular.copy(vm.key);
-				vm.results = vm.results.concat(angular.copy(data.items));
-				vm.resultsCounter=data.meta.total_count;
+				vm.results.items = vm.results.items.concat(angular.copy(data.items));
+				vm.results.counter=angular.copy(data.meta.total_count);
 				vm.searching = false;
 			}
 
@@ -82,15 +83,8 @@
 		}
 
 		$scope.$on("changePage", function(evt,data){ 
-			if (data) {
-				vm.searchPage=vm.searchPage+1;
-				if (vm.searchPage>1) {
-					search(false);
-				}
-				else {
-					vm.results=[];
-				}
-			}
+				vm.page=data;
+				search(false);
 		}, true);
 	}
 
@@ -103,7 +97,7 @@
 		bindings: {
 			searching:'=',
 			results: '=',
-			limit:'<',
+			limit:'<'
 		}
 	}
 

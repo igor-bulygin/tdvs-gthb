@@ -4,21 +4,32 @@
 	function controller(UtilService, boxDataService, $scope) {
 		var vm = this;
 		vm.search = search;
+		vm.searchMore = searchMore;
 		vm.filters = {};
 		vm.maxResults= 100;
+		vm.page=1;
+		vm.results={items: [] };
 
 		init();
 
 		function init() {
+		}
+
+		function searchMore() {
+			vm.page=vm.page + 1;
 			search();
 		}
 
-		function search(form) {
-			delete vm.results;
+		function search() {
+			if (vm.search_key != vm.key) {
+				vm.results={items: [] };
+				vm.page=1;
+			}
 			vm.searching = true;
 			var params = {
 				ignore_empty_boxes: true,
-				limit: vm.maxResults
+				limit: vm.maxResults,
+				page: vm.page
 			}
 			if(vm.key)
 				params = Object.assign(params, {q: vm.key});
@@ -34,9 +45,10 @@
 			})
 
 			function onGetBoxesSuccess(data) {
-				vm.searching= false;
+				vm.results_found=data.meta.total_count;
 				vm.search_key = angular.copy(vm.key);
-				vm.results = angular.copy(data);
+				vm.results.items=vm.results.items.concat(angular.copy(data.items));
+				vm.searching= false;
 			}
 
 			function onGetBoxesError(err) {
@@ -49,7 +61,9 @@
 
 		//watches
 		$scope.$watch('exploreBoxesCtrl.filters', function(newValue, oldValue) {
-			search(vm.form)
+			vm.results={items: [] };
+			vm.page=1;
+			search();
 		}, true);
 
 	}

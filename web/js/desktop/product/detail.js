@@ -217,6 +217,7 @@
 
 		function setPrints(product) {
 			if(UtilService.isObject(product.prints)) {
+				vm.has_prints = true;
 				vm.view_sizechart = false;
 				if(angular.isArray(product.prints.sizes) && product.prints.sizes.length > 0) {
 					var object = {
@@ -238,6 +239,8 @@
 					});
 					vm.product.options.push(object);
 				}
+			} else {
+				vm.has_prints = false;
 			}
 		}
 

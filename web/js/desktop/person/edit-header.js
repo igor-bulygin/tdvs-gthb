@@ -6,7 +6,8 @@
 		var vm = this;
 		vm.showCities = false;
 		vm.limit_text_biography = 140;
-		vm.description_language = 'en-US';
+		vm.selected_language=_lang;
+		vm.description_language = vm.selected_language;
 		vm.required = {};
 		vm.openCropModal = openCropModal;
 		vm.selectCity = selectCity;

@@ -145,7 +145,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 							</div>
 						</div>
 						<div class="product-data no-border">
-							<ul class="nav nav-tabs product-detail-tabs" role="tablist" ng-if="detailProductCtrl.original_artwork" ng-cloak>
+							<ul class="nav nav-tabs product-detail-tabs" role="tablist" ng-if="detailProductCtrl.original_artwork && detailProductCtrl.has_prints" ng-cloak>
 								<li role="presentation" class="active">
 									<a href="#" aria-controls="description" role="tab" data-toggle="tab" ng-click="detailProductCtrl.changeOriginalArtwork(true)"><span translate="product.detail.ORIGINAL"></span></a>
 								</li>
@@ -362,7 +362,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 											</div>
 											-->
 											<div class="col-sm-3">
-												<span translate="product.detail.IS"></span> <span class="tax">€<?=$product->getShippingPrice(Country::getDefaultContryCode())?></span>
+												<span translate="product.detail.IS"></span> <span class="tax">€<?=$product->getShippingPrice(null, Country::getDefaultContryCode())?></span>
 											</div>
 										</div>
 									</form>

@@ -6,6 +6,7 @@
 		vm.parseTitle = parseTitle;
 		vm.isLanguageOk = isLanguageOk;
 		vm.completedLanguages = [];
+		vm.selected_language=_lang;
 
 		function parseTitle(title) {
 			vm.completedLanguages = [];
