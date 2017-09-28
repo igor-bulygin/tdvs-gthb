@@ -27,7 +27,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 		<div class="container relative">
 			<div class="avatar-wrapper">
 				<a href="<?= $person->getMainLink()?>">
-					<img class="avatar-logued-user" src="<?= $person->getAvatarImage() ?>">
+					<img class="avatar-logued-user" src="<?= $person->getProfileImage(0, 0) ?>">
 					<span class="person-name"><?=$person->getName()?></span>
 				</a>
 			</div>

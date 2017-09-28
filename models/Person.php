@@ -932,67 +932,13 @@ class Person extends CActiveRecord implements IdentityInterface
 	}
 
 	/**
-	 * Get the path to header background image
-	 *
-	 * @return string
-	 */
-	public function getHeaderBackgroundImage($urlify = true, $minHeight = null, $minWidth = null)
-	{
-		$image = "/imgs/default-cover.jpg";
-		if (Person::existMediaFile($this->mediaMapping->header_cropped)) {
-			$image = Person::getUrlImagesLocation() . $this->mediaMapping->header_cropped;
-		} elseif (Person::existMediaFile($this->mediaMapping->header)) {
-			$image = Person::getUrlImagesLocation() . $this->mediaMapping->header;
-		}
-
-		if ((!empty($minHeight)) || (!empty($minWidth))) {
-			// force resize
-			$image = Utils::url_scheme() . Utils::thumborize($image)->resize(
-					($minWidth) ? $minWidth : 0,
-					($minHeight) ? $minHeight : 0
-				);
-		}
-
-		return $image;
-	}
-
-	/**
-	 * Get the path to avatar image
-	 *
-	 * @param bool $urlify
-	 * @param int $minHeight
-	 * @param int $minWidth
-	 *
-	 * @return string
-	 */
-	public function getAvatarImage($urlify = true, $minHeight = null, $minWidth = null)
-	{
-		$image = "/imgs/default-avatar.png";
-		if (Person::existMediaFile($this->mediaMapping->profile_cropped)) {
-			$image = Person::getUrlImagesLocation() . $this->mediaMapping->profile_cropped;
-		} elseif (Person::existMediaFile($this->mediaMapping->profile)) {
-			$image = Person::getUrlImagesLocation() . $this->mediaMapping->profile;
-		}
-
-		if ((!empty($minHeight)) || (!empty($minWidth))) {
-			// force resize
-			$image = Utils::url_scheme() . Utils::thumborize($image)->resize(
-					($minWidth) ? $minWidth : 0,
-					($minHeight) ? $minHeight : 0
-				);
-		}
-
-		return $image;
-	}
-
-	/**
 	 * Get a resized version of header image, to 1170px width
 	 *
 	 * @return string
 	 */
 	public function getHeaderImage($width = 1170, $height = 0)
 	{
-		$url = null;
+		$url = "/imgs/default-cover.jpg";
 
 		$image = null;
 		if (Person::existMediaFile($this->mediaMapping->header_cropped)) {

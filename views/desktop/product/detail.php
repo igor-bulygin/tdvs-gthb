@@ -423,7 +423,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 									<div class="avatar">
 										<a href="<?= $person->getStoreLink() ?>">
 											<span translate="product.detail.CREATED_BY"></span>
-											<img class="avatar-default medium" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getAvatarImage())->resize(128, 128) ?>" data-pin-nopin="true">
+											<img class="avatar-default medium" src="<?= $person->getProfileImage(128, 128) ?>" data-pin-nopin="true">
 											<!--<span><?= $person->getName() ?></span>-->
 										</a>
 									</div>

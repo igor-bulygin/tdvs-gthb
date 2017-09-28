@@ -1,6 +1,5 @@
 <?php
 
-use app\helpers\Utils;
 use app\models\Person;
 use yii\helpers\Url;
 
@@ -18,7 +17,7 @@ $activeOption = array_key_exists('settings_menu_active_option', $this->params) ?
 <div ng-controller="settingsHeaderCtrl as settingsHeaderCtrl">
 	<div class="upper-setting-header">
 		<div class="container">
-			<a href="<?=$person->getAboutLink()?>"><img class="avatar" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getAvatarImage())->resize(50, 50) ?>"></a>
+			<a href="<?=$person->getAboutLink()?>"><img class="avatar" src="<?= $person->getProfileImage(50, 50) ?>"></a>
 			<a href="<?=$person->getAboutLink()?>"><span class="deviser-name"><?=$person->getName()?></span></a>
 			<?php /*<button class="btn btn-green pull-right" ng-click="settingsHeaderCtrl.saveChanges()">Save changes</button>*/ ?>
 		</div>
