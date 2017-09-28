@@ -71,7 +71,7 @@ class StripeController extends CController
 
 				$log = array(
 					'person_id' => $person_id,
-					'stripe_user_id' => $resp['stripe_user_id'],
+					'resp' => $resp,
 				);
 				Yii::info('Stripe account connection succesfully: \n'.print_r($log, true), __METHOD__);
 			}
