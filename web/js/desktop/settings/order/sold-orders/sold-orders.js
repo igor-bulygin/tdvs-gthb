@@ -14,13 +14,13 @@
 
 		function init() {
 			vm.orders.forEach(function(order) {
-				order.totalPrice = order.totalShippingPrice = order.commission = 0;
+				order.totalPrice = order.totalShippingPrice = order.commission = order.to_receive = 0;
 				order.packs.forEach(function(pack) {
-					order.totalPrice += pack.pack_price;
+					order.to_receive += (pack.pack_price + pack.shipping_price) * (1 - pack.pack_percentage_fee);
+					order.commission += (pack.pack_price+pack.shipping_price)*pack.pack_percentage_fee;
 					order.totalShippingPrice += pack.shipping_price;
-					order.commission += ((pack.pack_price+pack.shipping_price)*pack.pack_percentage_fee);
+					order.totalPrice += pack.pack_price + pack.shipping_price;
 				});
-				order.total= order.totalPrice + order.totalShippingPrice + order.commission;
 				vm.ordersTotalPrice += order.totalPrice;
 				cartService.parseTags(order, vm.tags);
 			});

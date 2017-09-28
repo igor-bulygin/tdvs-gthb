@@ -42,7 +42,7 @@
 							<div class="col-md-4 row">
 								<div class="col-md-12">
 									<span class="total-title" translate="settings.orders.YOU_RECEIVE"></span>
-									<label ng-cloak>{{order.totalPrice | currency:'€':2}}</label>
+									<label ng-cloak>{{order.to_receive | currency:'€':2}}</label>
 								</div>
 								<div class="col-md-12">
 									<span class="total-title" translate="settings.orders.TODEVISE_COMMISSION"></span>
@@ -56,7 +56,7 @@
 							<div class="col-md-12 text-right mt-20">
 								<div class="col-md-12">
 									<span class="total-title" translate="settings.orders.TOTAL"></span>
-									<label>{{order.total | currency:'€':2}}</label>
+									<label>{{order.totalPrice | currency:'€':2}}</label>
 								</div>
 							</div>
 						</div>
