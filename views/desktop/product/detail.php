@@ -203,7 +203,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 								</form>
 							</div>-->
 							<div class="row-size">
-								<button type="button" class="btn btn-medium btn-red auto-center" ng-disabled="detailProductCtrl.stock === 0" ng-click="detailProductCtrl.addToCart(detailProductCtrl.tagsForm)"><span class="cart-icon"></span> <span translate="product.detail.ADD_TO_CART"></span></button>
+								<button type="button" class="btn btn-medium btn-red auto-center" ng-disabled="detailProductCtrl.stock === 0" ng-click="detailProductCtrl.addToCart(detailProductCtrl.tagsForm)"><span class="cart-icon"></span> <span translate="{{detailProductCtrl.stock === 0 ? 'product.detail.OUT_OF_STOCK' : 'product.detail.ADD_TO_CART'}}"></span></button>
 							</div>
 						</div>
 						<!--<div class="product-data">
