@@ -1,7 +1,6 @@
 <?php
 
 use app\models\Person;
-use yii\helpers\Url;
 
 app\components\assets\SettingsHeaderAsset::register($this);
 
@@ -24,22 +23,22 @@ $activeOption = array_key_exists('settings_menu_active_option', $this->params) ?
 	</div>
 	<ul class="nav nav-tabs header-settings-tabs" style="justify-content: center; display: flex;">
 		<li role="presentation" class="<?= ($activeOption=='general') ? 'active' : ''?>">
-			<a href="<?= Url::to(['/settings/general', 'slug' => $person->slug, 'person_id' => $person->short_id])?>" translate="settings.header.GENERAL"></a>
+			<a href="<?= $person->getSettingsLink('general')?>" translate="settings.header.GENERAL"></a>
 		</li>
 		<li role="presentation" class="<?= ($activeOption=='orders') ? 'active' : '' ?>">
-			<a href="<?= Url::to(['/settings/open-orders', 'slug' => $person->slug, 'person_id' => $person->short_id])?>" translate="settings.header.MY_ORDERS"></a>
+			<a href="<?= $person->getSettingsLink('open-orders')?>" translate="settings.header.MY_ORDERS"></a>
 		</li>
 		<?php if ($person->isDeviser()) { ?>
 			<?php /* ?>
 			<li role="presentation" class="<?= ($activeOption=='stock') ? 'active' : '' ?>">
-				<a href="<?= Url::to(['/settings/stock', 'slug' => $person->slug, 'person_id' => $person->short_id])?>" translate="settings.header.STOCK_PRICE"></a>
+				<a href="<?= $person->getSettingsLink('stock')" translate="settings.header.STOCK_PRICE"></a>
 			</li>
 			*/ ?>
 			<li role="presentation" class="<?= ($activeOption=='billing') ? 'active' : '' ?>">
-				<a href="<?= Url::to(['/settings/billing', 'slug' => $person->slug, 'person_id' => $person->short_id])?>" translate="settings.header.BILLING_PAYMENTS"></a>
+				<a href="<?= $person->getSettingsLink('billing')?>" translate="settings.header.BILLING_PAYMENTS"></a>
 			</li>
 			<li role="presentation" class="<?= ($activeOption=='shipping') ? 'active' : '' ?>">
-				<a href="<?= Url::to(['/settings/shipping', 'slug' => $person->slug, 'person_id' => $person->short_id])?>" translate="settings.header.SHIPPING"></a>
+				<a href="<?= $person->getSettingsLink('shipping')?>" translate="settings.header.SHIPPING"></a>
 			</li>
 		<?php } ?>
 	</ul>

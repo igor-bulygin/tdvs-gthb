@@ -134,7 +134,7 @@ class ProductController extends CController
 			throw new HttpException(404, 'The requested item could not be found.');
 		}
 
-		if ($product->slug != $slug) {
+		if ($slug != $product->getSlug()) {
 			return $this->redirect($product->getViewLink(), 301);
 		}
 
