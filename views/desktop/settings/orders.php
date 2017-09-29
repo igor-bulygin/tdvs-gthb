@@ -46,8 +46,8 @@ $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD
 		<span class="sr-only" translate="global.LOADING"></span>
 	</div>
 	<div ng-switch on="ordersCtrl.typeFilter.value" ng-if="!ordersCtrl.loading && ordersCtrl.orders.length>0" ng-cloak class="orders-wrapper">
-		<sold-orders ng-switch-when="received" orders="ordersCtrl.orders" ordersTotalPrice="ordersCtrl.ordersTotalPrice" tags="ordersCtrl.tags"></sold-orders>
-		<bought-orders ng-switch-when="done" orders="ordersCtrl.orders" ordersTotalPrice="ordersCtrl.ordersTotalPrice" tags="ordersCtrl.tags"></bought-orders>
+		<sold-orders ng-switch-when="received" orders="ordersCtrl.orders" tags="ordersCtrl.tags"></sold-orders>
+		<bought-orders ng-switch-when="done" orders="ordersCtrl.orders" tags="ordersCtrl.tags"></bought-orders>
 	</div>
 	
 </div>

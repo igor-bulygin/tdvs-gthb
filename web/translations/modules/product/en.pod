@@ -11,6 +11,7 @@
 			"PRINTS":"Prints",
 			"VIEW_SIZE_CHART":"View size chart",
 			"ADD_TO_CART":"Add to cart",
+			"OUT_OF_STOCK": "Out of stock",
 			"EDIT_WORK":"Edit work",
 			"LOVE_WORK":"Love work",
 			"YOU_LOVE_WORK":"You love this work",

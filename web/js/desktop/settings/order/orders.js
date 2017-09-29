@@ -5,11 +5,23 @@
 		var vm = this;
 		vm.deviserId=person.id;
 		vm.orders=[];
-		vm.enabledStates=[{value:"open", name : "settings.orders.OPEN"},{value:"past", name :"settings.orders.PAST"},{value:"", name : "settings.orders.ALL"}];
+		vm.enabledStates=[
+			{
+				value:"open",
+				name: "settings.orders.OPEN"
+			},
+			{
+				value:"past",
+				name :"settings.orders.PAST"
+			},
+			{
+				value:"",
+				name: "settings.orders.ALL"
+			}];
 		vm.stateFilter=vm.enabledStates[0].value;
 		vm.enabledTypes=[];
 		vm.isDeviser=false;
-		if (person.type[0]==2) {
+		if (person.type.indexOf(2)>-1) {
 			vm.isDeviser=true;
 			vm.enabledTypes.push({value:"received", name: "settings.orders.SALES"});
 		}
@@ -39,7 +51,10 @@
 			}
 			switch (vm.typeFilter.value) {
 				case "done":
-					orderDataService.getOrder({pack_state:vm.stateFilter, personId:vm.deviserId}, onGetOrdersSuccess, UtilService.onError);
+					orderDataService.getOrder({
+						pack_state: vm.stateFilter, 
+						personId: vm.deviserId
+					}, onGetOrdersSuccess, UtilService.onError);
 					break;
 				case "received":
 					orderDataService.getDeviserPack({pack_state:vm.stateFilter, personId:vm.deviserId}, onGetOrdersSuccess, UtilService.onError);

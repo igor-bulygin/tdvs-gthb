@@ -11,6 +11,7 @@
 			"PRINTS": "Estampados",
 			"VIEW_SIZE_CHART": "Ver tallas disponibles",
 			"ADD_TO_CART": "Añadir a la cesta",
+			"OUT_OF_STOCK": "Sin stock",
 			"EDIT_WORK": "Editar producto",
 			"LOVE_WORK": "Me encanta",
 			"YOU_LOVE_WORK": "Te encanta este producto",
