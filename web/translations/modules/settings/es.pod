@@ -18,7 +18,8 @@
 		"orders": {
 			"ORDERS": "PEDIDOS",
 			"NO_ORDERS_FOUND": "No se han encontrado pedidos",
-			"OPEN": "Abiertos",
+			"OPEN": "En curso",
+			"TO_SEND": "A enviar",
 			"PAST": "Pasados",
 			"ALL": "Todos",
 			"SALES": "Ventas",

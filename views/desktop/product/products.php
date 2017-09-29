@@ -32,7 +32,7 @@ $this->registerJs("var searchParam = '".$text."'", yii\web\View::POS_HEAD, 'prod
 				<explore-products-filters searching="exploreProductsCtrl.searching" results="exploreProductsCtrl.results" limit="exploreProductsCtrl.limit" ></explore-products-filters>
 				<div>
 					<div ng-if="exploreProductsCtrl.results.items.length === 0 && !exploreProductsCtrl.searching" ng-cloak>
-						<p class="text-center" translate="NO_PRODUCTS_FOUND"></p>
+						<p class="text-center" translate="discover.NO_PRODUCTS_FOUND"></p>
 					</div>
 					<div class="col-md-10">
 						<explore-products-results ng-if="exploreProductsCtrl.results.length != 0" results="exploreProductsCtrl.results"  limit="exploreProductsCtrl.limit" ></explore-products-results>
