@@ -5,6 +5,7 @@ namespace app\modules\api\priv\v1\controllers;
 use app\models\Product;
 use Yii;
 use yii\web\BadRequestHttpException;
+use yii\web\MethodNotAllowedHttpException;
 
 class ProductController extends AppPrivateController
 {
@@ -105,6 +106,11 @@ class ProductController extends AppPrivateController
 		if (!$product) {
 			throw new BadRequestHttpException('Product not found');
 		}
+
+		if ($product->hasOrders()) {
+			throw new MethodNotAllowedHttpException('You cannot delete a product with orders');
+		}
+
 		$product->delete();
 		Yii::$app->response->setStatusCode(204); // No content
 

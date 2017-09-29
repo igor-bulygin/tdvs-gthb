@@ -266,11 +266,8 @@ class Product extends CActiveRecord {
 
 	public function beforeDelete() {
 
-		$orders = $this->getOrders();
-		foreach ($orders as $order) {
-			if ($order->isOrder()) {
-				throw new Exception("This product has paid orders. It cannot be deleted!!");
-			}
+		if ($this->hasOrders()) {
+			throw new Exception("You cannot delete a product with orders");
 		}
 
 		$this->deletePhotos();
@@ -1435,6 +1432,22 @@ class Product extends CActiveRecord {
 	 */
 	public function getOrders() {
 		return Order::findSerialized(['product_id' => $this->short_id]);
+	}
+
+	/**
+	 * Returns TRUE if the product has any order (order paid, ignoring carts)
+	 *
+	 * @return bool
+	 */
+	public function hasOrders() {
+		$orders = $this->getOrders();
+		foreach ($orders as $order) {
+			if ($order->isOrder()) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	/**
