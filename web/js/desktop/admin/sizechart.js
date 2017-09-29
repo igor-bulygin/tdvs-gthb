@@ -20,6 +20,11 @@
 		vm.validateValue=validateValue;
 		vm.checkColumnName=checkColumnName;
 
+		if (angular.isUndefined(vm.sizechart.name[vm.lang]) || vm.sizechart.name[vm.lang].length<1) {
+			//TODO remove it when all mandatory languages was checked on creations
+			vm.sizechart.name[vm.lang]=vm.sizechart.name['en-US'];
+		}
+
 		//Sort by path length
 		_categories = $category_util.sort(_categories);
 		angular.forEach(_categories, function (category) {
