@@ -127,12 +127,14 @@ $config = [
 				'todevise_errors' =>[
 					'class' => 'yii\log\FileTarget',
 					'levels' => ['error', 'warning'],
+					'except' => ['yii\web\HttpException:401', 'yii\web\HttpException:404'],
 					'logFile' => '@app/runtime/logs/todevise_errors.log',
 					'logVars' => [],
 				],
 				'todevise_errors_detail' =>[
 					'class' => 'yii\log\FileTarget',
 					'levels' => ['error', 'warning'],
+					'except' => ['yii\web\HttpException:401', 'yii\web\HttpException:404'],
 					'logFile' => '@app/runtime/logs/todevise_errors_detail.log',
 					'logVars' => ['_GET', '_POST', '_FILES', '_COOKIE', '_SESSION', '_SERVER'],
 				],
