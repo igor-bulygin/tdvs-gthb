@@ -3618,6 +3618,10 @@ h3 {
     float: left;
     margin: 3px 0 0 5px; }
 
+.small-order-text {
+  color: #3d3d3d;
+  font-size: 12px; }
+
 .storie-box-wrapper {
   background-color: #ffffff;
   float: left;
