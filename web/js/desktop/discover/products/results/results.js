@@ -8,6 +8,7 @@
 		vm.addMoreItems = addMoreItems;
 		vm.results_infinite = [];
 		vm.searchPage=1;
+		addMoreItems();
 
 		function addMoreItems() {
 			var last = vm.results_infinite.length;
