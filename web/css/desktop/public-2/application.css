@@ -3610,6 +3610,14 @@ h3 {
 .product-card-name {
   font-weight: bold; }
 
+.text-icon {
+  display: block;
+  padding-right: 6px;
+  float: left; }
+  .text-icon.red-text {
+    float: left;
+    margin: 3px 0 0 5px; }
+
 .storie-box-wrapper {
   background-color: #ffffff;
   float: left;

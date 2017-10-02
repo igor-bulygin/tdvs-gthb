@@ -93,18 +93,18 @@
 								</div>
 								<div ng-switch-when="aware">
 									<div ng-if="!pack.loading" ng-cloak>
-										<div class="col-md-12 mt-20 no-pad mb-20" ng-if="!pack.editInfo" ng-cloak>
-											<div class="col-md-6 no-pad">
-												<label style="color: #9D9D9D;">1. <span translate="settings.orders.IM_AWARE"></span><span class="ion-checkmark-circled red-text"></span></label>
+										<div class="col-md-12 mt-20 mb-20" ng-if="!pack.editInfo" ng-cloak>
+											<div class="col-md-5 no-pad">
+												<label style="color: #9D9D9D;"><span class="text-icon" translate="settings.orders.IM_AWARE"></span><span class="ion-checkmark-circled red-text"></span></label>
 											</div>
-											<div class="col-md-6 no-pad">
+											<div class="col-md-7">
 												<label><span translate="settings.orders.IM_PREPARING"></span></label>
 											</div>
 										</div>
 										
 										<form name="soldOrdersCtrl.shippingForm" class="form-horizontal" >
 										<div class="col-md-12 no-pad">
-											<div class="form-group col-md-5 no-pad">
+											<div class="col-md-5 no-pad">
 												<span for="shippingCompany" class="col-md-12" translate="settings.orders.SHIPPING_COMPANY"></span>
 												<div class="col-md-12">
 													<input type="text" name="shippingCompany" class="form-control" ng-class="{'error-input': soldOrdersCtrl.has_error(soldOrdersCtrl.shippingForm, soldOrdersCtrl.shippingForm.shippingCompany)}" ng-model="soldOrdersCtrl.shippingCompany" required>
@@ -115,7 +115,7 @@
 													<input type="text" name="eta" class="form-control" ng-model="soldOrdersCtrl.eta">
 												</div>
 											</div>
-											<div class="form-group col-md-7">
+											<div class="col-md-7 no-pad">
 												<span for="trackingNumber" class="col-md-12" translate="settings.orders.TRACKING_NUMBER"></span>
 												<div class="col-md-12">
 													<input type="text" name="trackingNumber" class="form-control" ng-class="{'error-input': soldOrdersCtrl.has_error(soldOrdersCtrl.shippingForm, soldOrdersCtrl.shippingForm.trackingNumber)}" ng-model="soldOrdersCtrl.trackingNumber" required>
@@ -127,9 +127,9 @@
 												</div>
 											</div>
 										</div>
-											<span class="form-group col-md-12 mt-20" translate="settings.orders.MOVE_TO_PAST_ORDERS"></span>
-											<div class="form-group col-md-12">
-												<button class="btn btn-green" ng-click="soldOrdersCtrl.markPackShipped(order,pack)" ng-disabled="!soldOrdersCtrl.shippingForm.$valid">
+											<span class="col-md-12 mt-20" translate="settings.orders.MOVE_TO_PAST_ORDERS"></span>
+											<div class="col-md-12 mt-20">
+												<button class="btn btn-medium btn-red" ng-click="soldOrdersCtrl.markPackShipped(order,pack)" ng-disabled="!soldOrdersCtrl.shippingForm.$valid">
 													<span ng-if="pack.editInfo" translate="settings.orders.SAVE_CHANGES"></span>
 													<span ng-if="!pack.editInfo" translate="settings.orders.PACKAGE_SHIPPED"></span>
 												</button>

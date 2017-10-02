@@ -44,3 +44,12 @@
 .product-card-name{
 	font-weight: bold;
 }
+.text-icon{
+	display: block;
+    padding-right: 6px;
+    float: left;
+	&.red-text{
+		float: left;
+    	margin: 3px 0 0 5px;
+	}
+}
