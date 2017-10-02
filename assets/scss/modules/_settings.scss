@@ -1,0 +1,46 @@
+// ==========================================================================
+// Settings
+// ==========================================================================
+.panel-accordion{
+	h4.panel-title{
+		a{
+			float: left;
+			width: 100%;
+			display: block;
+			margin: -15px 0 0 0;
+		}
+	}
+	.panel-heading{
+		    padding: 30px 15px;
+	}
+	.panel-body{
+		padding-top: 0;
+	}
+}
+.panel{
+		border: none!important;
+	}
+.total-title{
+	color: #9D9D9D;
+	text-transform: uppercase;
+}
+.info-text{
+	color: #9b9b9b;
+	text-transform: uppercase;
+	font-weight: bold;
+}
+.send-to-text{
+	color: #9b9b9b;
+	text-transform: lowercase;
+}
+.adress-text{
+	font-weight: normal;
+}
+.adress-wrapper{
+	width: 100%;
+	float: left;
+	display: block;
+}
+.product-card-name{
+	font-weight: bold;
+}

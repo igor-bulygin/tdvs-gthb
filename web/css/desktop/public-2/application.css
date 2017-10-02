@@ -3573,6 +3573,43 @@ h3 {
     .mesonry-row.press-1 .menu-category img {
       width: 100%; }
 
+.panel-accordion h4.panel-title a {
+  float: left;
+  width: 100%;
+  display: block;
+  margin: -15px 0 0 0; }
+.panel-accordion .panel-heading {
+  padding: 30px 15px; }
+.panel-accordion .panel-body {
+  padding-top: 0; }
+
+.panel {
+  border: none !important; }
+
+.total-title {
+  color: #9D9D9D;
+  text-transform: uppercase; }
+
+.info-text {
+  color: #9b9b9b;
+  text-transform: uppercase;
+  font-weight: bold; }
+
+.send-to-text {
+  color: #9b9b9b;
+  text-transform: lowercase; }
+
+.adress-text {
+  font-weight: normal; }
+
+.adress-wrapper {
+  width: 100%;
+  float: left;
+  display: block; }
+
+.product-card-name {
+  font-weight: bold; }
+
 .storie-box-wrapper {
   background-color: #ffffff;
   float: left;
@@ -6064,7 +6101,6 @@ span.optional-text.pull-left {
   text-align: center; }
 
 .request-invitation-wrapper {
-  background-color: #484848;
   padding: 40px;
   margin: 0; }
   .request-invitation-wrapper .title {
@@ -6082,30 +6118,6 @@ span.optional-text.pull-left {
   .request-invitation-wrapper .request-invitation-container {
     max-width: 600px;
     margin: 10px auto 40px; }
-    .request-invitation-wrapper .request-invitation-container .title {
-      font-family: "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
-      font-size: 12px;
-      color: #ffffff;
-      text-transform: uppercase;
-      text-align: left;
-      position: relative;
-      z-index: 1;
-      margin-top: 30px;
-      margin-bottom: 10px; }
-      .request-invitation-wrapper .request-invitation-container .title:before {
-        border-top: 1px solid #1C1919;
-        content: "";
-        margin: 0 auto;
-        position: absolute;
-        top: 40%;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        width: 100%;
-        z-index: -1; }
-      .request-invitation-wrapper .request-invitation-container .title span {
-        background-color: #484848;
-        padding: 0 15px 0 0; }
     .request-invitation-wrapper .request-invitation-container .add-new {
       margin: -5px 0 10px 15px;
       display: block;
@@ -7904,26 +7916,18 @@ input:checked + .slider:before {
   background-color: white;
   float: left; }
 
-.panel-accordion h4.panel-title a {
-  float: left;
-  width: 100%;
-  display: block;
-  margin: -15px 0 0 0; }
-.panel-accordion .panel-heading {
-  padding: 30px 15px; }
-.panel-accordion .panel-body {
-  padding-top: 0; }
-
-.panel {
-  border: none !important; }
-
-.total-title {
-  color: #9D9D9D;
-  text-transform: uppercase; }
-
-.info-text {
-  color: #9D9D9D;
-  text-transform: uppercase; }
+.accordion-header-item {
+  margin: 0 15px; }
+  .accordion-header-item .accordion-header-title {
+    color: #9D9D9D;
+    font-weight: lighter;
+    font-size: 13px; }
+  .accordion-header-item .accordion-header-subtitle {
+    font-size: 13px;
+    margin-top: 5px;
+    font-weight: normal; }
+    .accordion-header-item .accordion-header-subtitle.bold {
+      font-weight: bold; }
 
 .category-menu {
   background-color: #ffffff;

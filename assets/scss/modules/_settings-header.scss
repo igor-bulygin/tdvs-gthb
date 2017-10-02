@@ -55,30 +55,20 @@
     background-color: white;
     float: left;
 }
-.panel-accordion{
-	h4.panel-title{
-		a{
-			float: left;
-			width: 100%;
-			display: block;
-			margin: -15px 0 0 0;
+.accordion-header-item{
+	margin: 0 15px;
+	.accordion-header-title{
+		color: #9D9D9D;
+		font-weight: lighter;
+		font-size: 13px;
+	}
+	.accordion-header-subtitle{
+		font-size: 13px;
+    	margin-top: 5px;
+		font-weight: normal;
+		&.bold{
+			font-weight: bold;
 		}
 	}
-	.panel-heading{
-		    padding: 30px 15px;
-	}
-	.panel-body{
-		padding-top: 0;
-	}
-}
-.panel{
-		border: none!important;
-	}
-.total-title{
-	color: #9D9D9D;
-	text-transform: uppercase;
-}
-.info-text{
-	color: #9D9D9D;
-	text-transform: uppercase;
+	
 }

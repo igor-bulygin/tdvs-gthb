@@ -117,7 +117,6 @@
     text-align: center;
 }
 .request-invitation-wrapper{
-    background-color: $almost_black;
     padding: 40px;
     margin: 0;
     @extend %block;
@@ -139,27 +138,8 @@
         max-width: 600px;
         margin: 10px auto 40px;
         .title{
-            font-family: $font-family--bold;
-            font-size: 12px;
-            color: $white;
-            text-transform: uppercase;
-            text-align: left;
-            position: relative;
-            z-index: 1;
-            margin-top: 30px;
-            margin-bottom: 10px;
-            &:before {
-                border-top: 1px solid $black;
-                content:"";
-                margin: 0 auto;
-                position: absolute;
-                top: 40%; left: 0; right: 0; bottom: 0;
-                width: 100%;
-                z-index: -1;
-            }
+          
             span { 
-                background-color: $almost_black; 
-                padding: 0 15px 0 0; 
             }
         }
         .add-new{
