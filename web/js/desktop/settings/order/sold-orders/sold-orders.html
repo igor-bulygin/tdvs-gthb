@@ -127,7 +127,7 @@
 										</div>
 											<span class="form-group col-md-12 mt-20" translate="settings.orders.MOVE_TO_PAST_ORDERS"></span>
 											<div class="form-group col-md-12">
-												<button class="btn btn-green" ng-click="soldOrdersCtrl.markPackShipped(order,pack)" ng-disabled="!soldOrdersCtrl.shippingForm.$valid">
+												<button class="btn btn-red" ng-click="soldOrdersCtrl.markPackShipped(order,pack)" ng-disabled="!soldOrdersCtrl.shippingForm.$valid">
 													<span ng-if="pack.editInfo" translate="settings.orders.SAVE_CHANGES"></span>
 													<span ng-if="!pack.editInfo" translate="settings.orders.PACKAGE_SHIPPED"></span>
 												</button>
