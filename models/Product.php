@@ -265,6 +265,11 @@ class Product extends CActiveRecord {
 	}
 
 	public function beforeDelete() {
+
+		if ($this->hasOrders()) {
+			throw new Exception("You cannot delete a product with orders");
+		}
+
 		$this->deletePhotos();
 
 		$loveds = $this->getLoveds();
@@ -930,6 +935,7 @@ class Product extends CActiveRecord {
 
 	/**
 	 * Get the URLs of images to use in a gallery
+	 * Note that "main_product_photo" is returned in the first position of the array
 	 *
 	 * @return array
 	 */
@@ -938,8 +944,15 @@ class Product extends CActiveRecord {
 		$images = [];
 		if (array_key_exists("photos", $this->media)) {
 			foreach ($this->media["photos"] as $imageData) {
-				$images[] = Yii::getAlias('@product_url') .'/'.  $this->short_id .'/'. $imageData['name'];
+				if (isset($imageData['main_product_photo']) && $imageData['main_product_photo']) {
+					$mainPhoto = Yii::getAlias('@product_url') . '/' . $this->short_id . '/' . $imageData['name'];
+				} else {
+					$images[] = Yii::getAlias('@product_url') . '/' . $this->short_id . '/' . $imageData['name'];
+				}
 			}
+		}
+		if (isset($mainPhoto)) {
+			array_unshift($images, $mainPhoto);
 		}
 
 		return $images;
@@ -1410,6 +1423,31 @@ class Product extends CActiveRecord {
 	 */
 	public function getBoxes() {
 		return Box::findSerialized(['product_id' => $this->short_id]);
+	}
+
+	/**
+	 * Returns orders with this product
+	 *
+	 * @return Order[]
+	 */
+	public function getOrders() {
+		return Order::findSerialized(['product_id' => $this->short_id]);
+	}
+
+	/**
+	 * Returns TRUE if the product has any order (order paid, ignoring carts)
+	 *
+	 * @return bool
+	 */
+	public function hasOrders() {
+		$orders = $this->getOrders();
+		foreach ($orders as $order) {
+			if ($order->isOrder()) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	/**

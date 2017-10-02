@@ -137,6 +137,9 @@ class CartController extends AppPublicController
 		// only validate received fields (only if we are not changing the state)
 		$cart->setScenario(Order::SCENARIO_CART);
 
+		// Get person associated with the cart
+		$person = $cart->getPerson();
+
 		// In this method, we only update the next properties:
 		// - shipping_address
 		// - billing_address
@@ -145,6 +148,9 @@ class CartController extends AppPublicController
 		$post = Yii::$app->request->post();
 		if (isset($post['shipping_address'])) {
 			$cart->shipping_address = $post['shipping_address'];
+			if (!isset($cart->shipping_address['email'])) {
+				$cart->shipping_address['email'] = $person->credentials['emails']; // force email field
+			}
 		}
 		if (isset($post['billing_address'])) {
 			$cart->billing_address = $post['billing_address'];
@@ -168,9 +174,6 @@ class CartController extends AppPublicController
 
 			$cart->save(false);
 
-			// If person has no personal_info, we use their shipping_address to fill-in it
-			$person = $cart->getPerson();
-
 			$shipping = $cart->getShippingAddress();
 			$person->personalInfoMapping->name = $shipping->name;
 			$person->personalInfoMapping->last_name = $shipping->last_name;
@@ -182,7 +185,7 @@ class CartController extends AppPublicController
 			$person->personalInfoMapping->phone_number_prefix = $shipping->phone_number_prefix;
 			$person->personalInfoMapping->phone_number = $shipping->phone_number;
 
-			$person->setAttributes('personal_info', $person->personalInfoMapping);
+			$person->setAttribute('personal_info', $person->personalInfoMapping);
 			$person->save();
 
 			Yii::$app->response->setStatusCode(200); // Ok
@@ -300,8 +303,14 @@ class CartController extends AppPublicController
 				$pack->recalculateTotals();
 				$deviser = $pack->getDeviser();
 
+				if ($deviser->personalInfoMapping->country == 'ES') {
+					$fee_to_apply = Yii::$app->params['default_todevise_fee_spain'];
+				} else {
+					$fee_to_apply = Yii::$app->params['default_todevise_fee'];
+				}
+
 				$stripeAmount = (int)(($pack->pack_price + $pack->shipping_price) * 100);
-				$todeviseFee = (int)($stripeAmount * Yii::$app->params['default_todevise_fee']);
+				$todeviseFee = (int)($stripeAmount * $fee_to_apply);
 
 				if (empty($deviser->settingsMapping->stripeInfoMapping->access_token)) {
 
@@ -365,11 +374,11 @@ class CartController extends AppPublicController
 					'currency' => $charge->currency,
 					'customer' => $charge->customer,
 					'description' => $charge->description,
-					'destinatation' => $charge->destinatation,
+					'destination' => $charge->destination,
 					'receipt_email' => $charge->receipt_email,
 					'status' => $charge->status,
 				];
-				$pack->pack_percentage_fee = Yii::$app->params['default_todevise_fee'];
+				$pack->pack_percentage_fee = $fee_to_apply;
 				$pack->setState(OrderPack::PACK_STATE_PAID);
 
 				$charges[] = $charge;

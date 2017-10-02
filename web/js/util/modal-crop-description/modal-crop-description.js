@@ -5,8 +5,9 @@
 		var vm = this;
 		vm.ok = ok;
 		vm.closeModal = closeModal;
-		vm.title_language = 'en-US';
-		vm.description_language = 'en-US';
+		vm.selected_language=_lang;
+		vm.title_language = vm.selected_language;
+		vm.description_language = vm.selected_language;
 		vm.imageData = {};
 
 		function ok() {

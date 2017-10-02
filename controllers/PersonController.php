@@ -127,6 +127,10 @@ class PersonController extends CController
 			throw new NotFoundHttpException();
 		}
 
+		if ($slug != $person->getSlug()) {
+			$this->redirect($person->getStoreLink(), 301);
+		}
+
 		$this->checkProfileState($person);
 
 		// categories of all products
@@ -179,6 +183,10 @@ class PersonController extends CController
 			throw new NotFoundHttpException();
 		}
 
+		if ($slug != $person->getSlug()) {
+			$this->redirect($person->getStoreEditLink(), 301);
+		}
+
 		if (!$person->isPersonEditable()) {
 			throw new UnauthorizedHttpException();
 		}
@@ -222,6 +230,10 @@ class PersonController extends CController
 			throw new NotFoundHttpException();
 		}
 
+		if ($slug != $person->getSlug()) {
+			$this->redirect($person->getAboutLink(), 301);
+		}
+
 		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE && !$person->isPersonEditable()) {
 			throw new NotFoundHttpException();
 		}
@@ -243,6 +255,10 @@ class PersonController extends CController
 			throw new NotFoundHttpException();
 		}
 
+		if ($slug != $person->getSlug()) {
+			$this->redirect($person->getAboutEditLink(), 301);
+		}
+
 		if (!$person->isPersonEditable()) {
 			throw new UnauthorizedHttpException();
 		}
@@ -262,6 +278,10 @@ class PersonController extends CController
 
 		if (!$person) {
 			throw new NotFoundHttpException();
+		}
+
+		if ($slug != $person->getSlug()) {
+			$this->redirect($person->getPressLink(), 301);
 		}
 
 		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE && !$person->isPersonEditable()) {
@@ -286,6 +306,10 @@ class PersonController extends CController
 			throw new NotFoundHttpException();
 		}
 
+		if ($slug != $person->getSlug()) {
+			$this->redirect($person->getPressEditLink(), 301);
+		}
+
 		if (!$person->isPersonEditable()) {
 			throw new UnauthorizedHttpException();
 		}
@@ -305,6 +329,10 @@ class PersonController extends CController
 
 		if (!$person) {
 			throw new NotFoundHttpException();
+		}
+
+		if ($slug != $person->getSlug()) {
+			$this->redirect($person->getVideosLink(), 301);
 		}
 
 		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE && !$person->isPersonEditable()) {
@@ -329,6 +357,10 @@ class PersonController extends CController
 			throw new NotFoundHttpException();
 		}
 
+		if ($slug != $person->getSlug()) {
+			$this->redirect($person->getVideosEditLink(), 301);
+		}
+
 		if (!$person->isPersonEditable()) {
 			throw new UnauthorizedHttpException();
 		}
@@ -348,6 +380,10 @@ class PersonController extends CController
 
 		if (!$person) {
 			throw new NotFoundHttpException();
+		}
+
+		if ($slug != $person->getSlug()) {
+			$this->redirect($person->getFaqLink(), 301);
 		}
 
 		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE && !$person->isPersonEditable()) {
@@ -371,6 +407,10 @@ class PersonController extends CController
 			throw new NotFoundHttpException();
 		}
 
+		if ($slug != $person->getSlug()) {
+			$this->redirect($person->getFaqEditLink(), 301);
+		}
+
 		if (!$person->isPersonEditable()) {
 			throw new UnauthorizedHttpException();
 		}
@@ -390,6 +430,10 @@ class PersonController extends CController
 
 		if (!$person) {
 			throw new NotFoundHttpException();
+		}
+
+		if ($slug != $person->getSlug()) {
+			$this->redirect($person->getLovedLink(), 301);
 		}
 
 		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE && !$person->isPersonEditable()) {
@@ -413,6 +457,10 @@ class PersonController extends CController
 
 		if (!$person) {
 			throw new NotFoundHttpException();
+		}
+
+		if ($slug != $person->getSlug()) {
+			$this->redirect($person->getBoxesLink(), 301);
 		}
 
 		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE && !$person->isPersonEditable()) {
@@ -450,6 +498,10 @@ class PersonController extends CController
 			throw new NotFoundHttpException();
 		}
 
+		if ($slug != $person->getSlug()) {
+			$this->redirect($box->getViewLink(), 301);
+		}
+
 		if ($box->person_id != $person->short_id) {
 			throw new ForbiddenHttpException();
 		}
@@ -471,6 +523,10 @@ class PersonController extends CController
 
 		if (!$person) {
 			throw new NotFoundHttpException();
+		}
+
+		if ($slug != $person->getSlug()) {
+			$this->redirect($person->getSocialLink(), 301);
 		}
 
 		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE && !$person->isPersonEditable()) {
@@ -540,6 +596,10 @@ class PersonController extends CController
 			throw new NotFoundHttpException();
 		}
 
+		if ($slug != $person->getSlug()) {
+			$this->redirect($person->getStoriesLink(), 301);
+		}
+
 		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE && !$person->isPersonEditable()) {
 			throw new UnauthorizedHttpException();
 		}
@@ -570,6 +630,10 @@ class PersonController extends CController
 
 		if (!$person) {
 			throw new NotFoundHttpException();
+		}
+
+		if ($slug != $person->getSlug()) {
+			$this->redirect($person->getStoryCreateLink(), 301);
 		}
 
 		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE && !$person->isPersonEditable()) {
@@ -605,6 +669,10 @@ class PersonController extends CController
 			throw new NotFoundHttpException();
 		}
 
+		if ($slug != $person->getSlug()) {
+			$this->redirect($story->getEditLink(), 301);
+		}
+
 		if ($story->person_id != $person->short_id) {
 			throw new ForbiddenHttpException();
 		}
@@ -635,6 +703,10 @@ class PersonController extends CController
 		$story = Story::findOneSerialized($story_id);
 		if (!$story) {
 			throw new NotFoundHttpException();
+		}
+
+		if ($slug != $person->getSlug()) {
+			$this->redirect($story->getViewLink(), 301);
 		}
 
 		if ($story->person_id != $person->short_id) {

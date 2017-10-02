@@ -26,7 +26,8 @@ class utilAsset extends AssetBundle {
 		'js/util/modal-signup-loved/modal-signup-loved.js',
 		'js/util/onPressEnter.js',
 		'js/util/modal-info/modal-info.js',
-		'js/util/modal-acept-reject/modal-acept-reject.js'
+		'js/util/modal-acept-reject/modal-acept-reject.js',
+		'js/util/modal-delete-product/modal-delete-product.js'
 	];
 	
 	public $depends = [

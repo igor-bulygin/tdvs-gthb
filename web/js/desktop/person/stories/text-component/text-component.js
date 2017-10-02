@@ -7,6 +7,7 @@
 		vm.parseText = parseText;
 		vm.isLanguageOk = isLanguageOk;
 		vm.completedLanguages = [];
+		vm.selected_language=_lang;
 
 		function parseText(text) {
 			vm.completedLanguages = [];

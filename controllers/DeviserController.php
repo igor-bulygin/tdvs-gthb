@@ -71,7 +71,7 @@ class DeviserController extends CController
 			->all();
 		Utils::l_collection($categories, "name");
 
-		return $this->render("edit-info", [
+		return $this->render("_edit-info", [
 			"deviser" => $person,
 			"slug" => $slug,
 			'categories' => $categories,
@@ -160,7 +160,7 @@ class DeviserController extends CController
 			]
 		];
 
-		return $this->render("edit-work", [
+		return $this->render("_edit-work", [
 			"deviser" => $person,
 			"product" => $product[0],
 			"tags" => $tags,

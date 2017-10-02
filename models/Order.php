@@ -659,6 +659,7 @@ class Order extends CActiveRecord {
 					$shipping->vat_id = $person->personalInfoMapping->vat_id;
 					$shipping->phone_number_prefix = $person->personalInfoMapping->phone_number_prefix;
 					$shipping->phone_number = $person->personalInfoMapping->phone_number;
+					$shipping->email = $person->credentials['emails'];
 					$this->setShippingAddress($shipping);
 				}
 

@@ -3,7 +3,8 @@
 		"EXPLORE_BOXES": "Explore boxes",
 		"SEARCH_KEYWORD": "Search keyword",
 		"SEARCHING": "Searching...",
-		"WE_FOUND_X_RESULTS": "We found {{ counter }} results with the keywords \"<span class='key'>{{keys}}</span>\"",
+		"WE_FOUND_X_RESULTS": "We found {{ counter }} results ",
+		"WE_FOUND_X_RESULTS_WITH_KEY": "We found {{ counter }} results with the keywords \"<span class='key'>{{keys}}</span>\"",
 		"FILTER_BY_COUNTRY": "Filter by location",
 		"SEE_MORE": "See more",
 		"FILTER_BY_THEME": "Filter by category",
@@ -14,6 +15,7 @@
 		"OLD": "Old",
 		"PRICE_LOW_TO_HIGH": "Price low to high",
 		"PRICE_HIGH_TO_LOW": "Price high to low",
+		"SEE_MORE": "See more",
 		"boxes": {
 			"DISCOVER_LATEST_TRENDS": "It's time to discover the latest trends",
 			"NO_BOXES_FOUND": "No boxes found with the specified search criteria."

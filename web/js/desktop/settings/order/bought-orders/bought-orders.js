@@ -4,21 +4,17 @@
 	function controller(UtilService, cartService,$uibModal) {
 		var vm = this;
 		vm.parseDate=UtilService.parseDate;
-		vm.ordersTotalPrice=0;
 		vm.openTrackModal=openTrackModal;
 		vm.parseDate=UtilService.parseDate;
 
 		init();
 
 		function init() {
-			angular.forEach(vm.orders, function(order, key) {
-					order.total=0;
-					angular.forEach(order.packs, function(pack, keyPack) {
-						order.total= order.total + pack.pack_price + pack.shipping_price + ((pack.pack_price*pack.pack_percentage_fee)/100);
-					});
-					vm.ordersTotalPrice=vm.ordersTotalPrice + order.total;
-					cartService.parseTags(order, vm.tags);
-				});
+			vm.ordersTotalPrice = 0;
+			vm.orders.forEach(function(order) {
+				cartService.parseTags(order, vm.tags);
+				vm.ordersTotalPrice += order.subtotal;
+			})
 		}
 
 		function openTrackModal(pack) {

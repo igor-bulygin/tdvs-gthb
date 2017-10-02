@@ -19,7 +19,7 @@ class PriceStockValidator extends Validator
 	 */
 	public function validateAttribute($object, $attribute)
 	{
-		$positiveFields = ['price', 'stock', 'weight', 'width', 'height', 'length'];
+		$positiveFields = ['price', 'weight', 'width', 'height', 'length'];
 
 		$priceStock = $object->{$attribute};
 		if (!is_array($priceStock)) {
@@ -69,10 +69,26 @@ class PriceStockValidator extends Validator
 						}
 					}
 				}
+
+				// Validatios when an item is available and we are publishing the product
 				if ($item['available'] && $object->scenario == Product::SCENARIO_PRODUCT_PUBLIC) {
+
+					// Validate positive fields
 					foreach ($positiveFields as $field) {
 						if (!isset($item[$field]) || !is_numeric($item[$field]) || $item[$field] < 0) {
 							$this->addError($object, $attribute, sprintf('%s must be a positive value', $field));
+						}
+					}
+
+					// validate stock field (can be null)
+					if (!array_key_exists('stock', $item)) {
+						$this->addError($object, $attribute, 'Stock is required');
+					} else {
+						$value = $item['stock'];
+						if ($value !== null) {
+							if (!is_numeric($value) || !is_int($value) || $value < 0) {
+								$this->addError($object, $attribute, 'Stock must be a positive integer value');
+							}
 						}
 					}
 				}
