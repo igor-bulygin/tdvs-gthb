@@ -138,6 +138,10 @@ class SettingsController extends CController
 			throw new NotFoundHttpException();
 		}
 
+		if (!$person->isPersonEditable()) {
+			throw new UnauthorizedHttpException();
+		}
+
 		if ($slug != $person->getSlug()) {
 			$this->redirect($person->getSettingsLink('open-orders'), 301);
 		}
