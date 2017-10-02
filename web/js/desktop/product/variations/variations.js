@@ -179,6 +179,7 @@
 				if (!vm.fromedit && !angular.isUndefined(vm.selected_sizechart) && !angular.isUndefined(vm.selected_sizechart.id) && vm.sizechart_helper_id.indexOf(vm.selected_sizechart.id) === -1) {
 					vm.selected_sizechart=vm.sizechart_helper[0];
 					vm.product.sizechart=null;
+					countriesSelect(vm.selected_sizechart);
 				}
 				vm.savingSizechart=false;
 				if (vm.sizechart_helper.length>0) {
@@ -189,6 +190,7 @@
 				scope: 'all',
 				deviser_id : person.short_id
 			}, onGetSizechartSuccess, UtilService.onError);
+
 		}
 
 		function deviserSizecharts() {
@@ -367,6 +369,12 @@
 		
 		function addSizeToSizechart(pos) {
 			if (pos!=null) {
+				if (angular.isUndefined(vm.product.sizechart) || (vm.product.sizechart == null)) {
+					vm.product.sizechart=[];
+				}
+				if (angular.isUndefined(vm.product.sizechart.values) || (vm.product.sizechart.values == null)) {
+					vm.product.sizechart.values=[];
+				}
 				vm.product.sizechart.values.push(vm.sizechart_empty.values[pos]);
 				vm.sizechart_available_values[pos] = false;
 				vm.size_to_add=null;
@@ -448,8 +456,10 @@
 			if (!args.isFirstSelection) {
 				vm.product.options = {};
 			}
-			vm.newSizechartForm.$setUntouched();
-			vm.newSizechartForm.$setPristine();
+			if (!angular.isUndefined(vm.newSizechartForm) && vm.newSizechartForm != null) {
+				vm.newSizechartForm.$setUntouched();
+				vm.newSizechartForm.$setPristine();
+			}
 			vm.selected_categories=args.categories;
 			getTagsByCategory(args.categories);
 			categoriesSizecharts(args.categories);
