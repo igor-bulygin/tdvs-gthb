@@ -98,7 +98,7 @@
 		"login": {
 			"LOGIN_TITLE": "Identifícate en tu cuenta todevise",
 			"REMEMBER": "Recuérdame",
-			"NOT_VALID": "Email o constraseña incorrectos"
+			"NOT_VALID": "Email o contraseña incorrectos"
 		},
 		"signup": {
 			"WELCOME": "Bienvenido a Todevise",

@@ -50,6 +50,9 @@
 		},
 		"product_card": {
 			"QUANTITY":"Cantidad:"
+		},
+		"modal_delete_product": {
+			"PRODUCT_WITH_ORDERS": "No puede borrar un producto con pedidos"
 		}
 	}
 }

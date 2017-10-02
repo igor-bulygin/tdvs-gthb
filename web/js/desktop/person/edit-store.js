@@ -118,26 +118,18 @@
 		}
 
 		function open_modal_delete(id) {
-			vm.id_to_delete = id;
 			var modalInstance = $uibModal.open({
-				templateUrl: 'modalDeleteProduct.html',
-				controller: 'modalDeleteProductCtrl',
-				controllerAs: 'modalDeleteProductCtrl'
-			})
-
-			modalInstance.result.then(function () {
-				deleteProduct(vm.id_to_delete);
+				component: 'modalDeleteProduct',
+				resolve: {
+					productId: function() {
+						return id;
+					}
+				}
 			});
-		}
 
-		function deleteProduct(id) {
-			function onDeleteProductPrivSuccess(data) {
+			modalInstance.result.then(function(data) {
 				getProducts();
-			}
-			
-			productDataService.deleteProductPriv({
-				idProduct: id
-			}, onDeleteProductPrivSuccess, UtilService.onError)
+			});
 		}
 
 		function show_unpublished_works(){
@@ -168,24 +160,9 @@
 		}
 	}
 
-	function modalController($uibModalInstance) {
-		var vm = this;
-		vm.close = close;
-		vm.ok = ok;
-
-		function close() {
-			$uibModalInstance.dismiss('cancel');
-		}
-
-		function ok() {
-			$uibModalInstance.close();
-		}
-	}
-
 	angular
 		.module('person')
 		.controller('editStoreCtrl', controller)
-		.controller('modalDeleteProductCtrl', modalController)
 		.filter('draftProduct',draftProduct)
 		.filter('publishedProduct', publishedProduct);
 

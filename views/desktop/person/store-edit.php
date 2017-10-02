@@ -147,20 +147,6 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 								</div>
 							</div>
 						</div>
-						<script type="text/ng-template" id="modalDeleteProduct.html">
-						<div class="modal-delete">
-							<div class="modal-header">
-								<h3 class="modal-title"></h3>
-							</div>
-							<div class="modal-body">
-								<p><span translate="person.DELETE_WORK_QUESTION"></span></p>
-							</div>
-							<div class="modal-footer">
-								<button class="btn btn-default btn-red pull-left" ng-click="modalDeleteProductCtrl.close()"><span translate="global.CANCEL"></span></button>
-								<button class="btn btn-default pull-right" ng-click="modalDeleteProductCtrl.ok()"><span translate="global.DELETE"></span></button>
-							</div>
-						</div>
-						</script>
 					</div>
 				</div>
 			</div>
