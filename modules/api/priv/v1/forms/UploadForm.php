@@ -12,6 +12,7 @@ class UploadForm extends Model {
 
 	const UPLOAD_TYPE_PERSON_MEDIA_HEADER_ORIGINAL = 'deviser-media-header-original';
 	const UPLOAD_TYPE_PERSON_MEDIA_HEADER_CROPPED = 'deviser-media-header-cropped';
+	const UPLOAD_TYPE_PERSON_MEDIA_HEADER_CROPPED_SMALL = 'deviser-media-header-cropped-small';
 	const UPLOAD_TYPE_PERSON_MEDIA_PROFILE_ORIGINAL = 'deviser-media-profile-original';
 	const UPLOAD_TYPE_PERSON_MEDIA_PROFILE_CROPPED = 'deviser-media-profile-cropped';
 	const UPLOAD_TYPE_PERSON_MEDIA_PHOTOS = 'deviser-media-photos';
@@ -115,6 +116,7 @@ class UploadForm extends Model {
 		switch ($this->type) {
 			case UploadForm::UPLOAD_TYPE_PERSON_MEDIA_HEADER_ORIGINAL:
 			case UploadForm::UPLOAD_TYPE_PERSON_MEDIA_HEADER_CROPPED:
+			case UploadForm::UPLOAD_TYPE_PERSON_MEDIA_HEADER_CROPPED_SMALL:
 			case UploadForm::UPLOAD_TYPE_PERSON_MEDIA_PROFILE_ORIGINAL:
 			case UploadForm::UPLOAD_TYPE_PERSON_MEDIA_PROFILE_CROPPED:
 			case UploadForm::UPLOAD_TYPE_PERSON_MEDIA_PHOTOS:
@@ -146,6 +148,7 @@ class UploadForm extends Model {
 		$prefixes = [
 			UploadForm::UPLOAD_TYPE_PERSON_MEDIA_HEADER_ORIGINAL => 'person.header.original.',
 			UploadForm::UPLOAD_TYPE_PERSON_MEDIA_HEADER_CROPPED => 'person.header.cropped.',
+			UploadForm::UPLOAD_TYPE_PERSON_MEDIA_HEADER_CROPPED_SMALL => 'person.header.cropped.small.',
 			UploadForm::UPLOAD_TYPE_PERSON_MEDIA_PROFILE_ORIGINAL => 'person.profile.original.',
 			UploadForm::UPLOAD_TYPE_PERSON_MEDIA_PROFILE_CROPPED => 'person.profile.cropped.',
 			UploadForm::UPLOAD_TYPE_PERSON_MEDIA_PHOTOS => 'person.photo.',
@@ -172,6 +175,7 @@ class UploadForm extends Model {
 		switch ($this->$attribute) {
 			case UploadForm::UPLOAD_TYPE_PERSON_MEDIA_HEADER_ORIGINAL:
 			case UploadForm::UPLOAD_TYPE_PERSON_MEDIA_HEADER_CROPPED:
+			case UploadForm::UPLOAD_TYPE_PERSON_MEDIA_HEADER_CROPPED_SMALL:
 			case UploadForm::UPLOAD_TYPE_PERSON_MEDIA_PROFILE_ORIGINAL:
 			case UploadForm::UPLOAD_TYPE_PERSON_MEDIA_PROFILE_CROPPED:
 			case UploadForm::UPLOAD_TYPE_PERSON_MEDIA_PHOTOS:
@@ -179,10 +183,10 @@ class UploadForm extends Model {
 			case UploadForm::UPLOAD_TYPE_PERSON_CURRICULUM:
 			case UploadForm::UPLOAD_TYPE_PERSON_STORY_PHOTOS:
 				if (empty($this->person_id)) {
-					$this->addError($attribute, 'Deviser id must be specified');
+					$this->addError($attribute, 'Person id must be specified');
 				}
-				if (empty($this->getDeviser())) {
-					$this->addError($attribute, 'Deviser not found');
+				if (empty($this->getPerson())) {
+					$this->addError($attribute, 'Person not found');
 				}
 				break;
 			case UploadForm::UPLOAD_TYPE_KNOWN_PRODUCT_PHOTO:
@@ -211,6 +215,7 @@ class UploadForm extends Model {
 		switch ($this->type) {
 			case UploadForm::UPLOAD_TYPE_PERSON_MEDIA_HEADER_ORIGINAL:
 			case UploadForm::UPLOAD_TYPE_PERSON_MEDIA_HEADER_CROPPED:
+			case UploadForm::UPLOAD_TYPE_PERSON_MEDIA_HEADER_CROPPED_SMALL:
 			case UploadForm::UPLOAD_TYPE_PERSON_MEDIA_PROFILE_ORIGINAL:
 			case UploadForm::UPLOAD_TYPE_PERSON_MEDIA_PROFILE_CROPPED:
 			case UploadForm::UPLOAD_TYPE_PERSON_MEDIA_PHOTOS:
@@ -242,6 +247,7 @@ class UploadForm extends Model {
 		switch ($this->type) {
 			case UploadForm::UPLOAD_TYPE_PERSON_MEDIA_HEADER_ORIGINAL:
 			case UploadForm::UPLOAD_TYPE_PERSON_MEDIA_HEADER_CROPPED:
+			case UploadForm::UPLOAD_TYPE_PERSON_MEDIA_HEADER_CROPPED_SMALL:
 			case UploadForm::UPLOAD_TYPE_PERSON_MEDIA_PROFILE_ORIGINAL:
 			case UploadForm::UPLOAD_TYPE_PERSON_MEDIA_PROFILE_CROPPED:
 			case UploadForm::UPLOAD_TYPE_PERSON_MEDIA_PHOTOS:
@@ -265,11 +271,11 @@ class UploadForm extends Model {
 	}
 
 	/**
-	 * Get the Deviser related with the upload
+	 * Get the Person related with the upload
 	 *
 	 * @return Person
 	 */
-	public function getDeviser()
+	public function getPerson()
 	{
 		return Person::findOne(['short_id' => $this->person_id]);
 	}

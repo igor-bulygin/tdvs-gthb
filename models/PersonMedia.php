@@ -4,6 +4,7 @@ namespace app\models;
 /**
  * @property string $header
  * @property string $header_cropped
+ * @property string $header_cropped_small
  * @property string $profile
  * @property string $profile_cropped
  * @property array $photos
@@ -34,6 +35,7 @@ class PersonMedia extends EmbedModel
 		return [
 			'header',
 			'header_cropped',
+			'header_cropped_small',
 			'profile',
 			'profile_cropped',
 			'photos',
@@ -70,6 +72,10 @@ class PersonMedia extends EmbedModel
 			$this->header_cropped = $this->header;
 		}
 
+		if (empty($this->header_cropped_small)) {
+			$this->header_cropped_small = $this->header;
+		}
+
 		if (empty($this->profile_cropped)) {
 			$this->profile_cropped = $this->profile;
 		}
@@ -82,7 +88,7 @@ class PersonMedia extends EmbedModel
 	{
 		return [
 			[
-				['header', 'header_cropped', 'profile', 'profile_cropped', 'photos'],
+				['header', 'header_cropped', 'header_cropped_small', 'profile', 'profile_cropped', 'photos'],
 				'safe',
 				'on' => [
 					Person::SCENARIO_DEVISER_UPDATE_DRAFT,
@@ -91,7 +97,7 @@ class PersonMedia extends EmbedModel
 				]
 			],
 			[
-				['header', 'header_cropped', 'profile', 'profile_cropped'],
+				['header', 'header_cropped', 'header_cropped_small', 'profile', 'profile_cropped'],
 				'required',
 				'on' => [
 					Person::SCENARIO_DEVISER_UPDATE_PROFILE,
@@ -99,7 +105,7 @@ class PersonMedia extends EmbedModel
 				],
 			],
 			[
-				['header', 'header_cropped', 'profile', 'profile_cropped'],
+				['header', 'header_cropped', 'header_cropped_small', 'profile', 'profile_cropped'],
 				'validatePersonPhotoItemExists',
 				'on' => [
 					Person::SCENARIO_DEVISER_UPDATE_DRAFT,

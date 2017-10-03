@@ -741,6 +741,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'name' => "name",
 					'url_avatar' => "profileImage",
 					"header_image" => 'headerImage',
+					"header_small_image" => 'headerSmallImage',
 					"profile_image" => 'profileImage',
 					'main_link' => 'mainLink',
 					'store_link' => 'storeLink',
@@ -778,6 +779,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'url_images' => 'urlImagesLocation',
 					'url_avatar' => "profileImage",
 					"header_image" => 'headerImage',
+					"header_small_image" => 'headerSmallImage',
 					"profile_image" => 'profileImage',
 					'main_link' => 'mainLink',
 					'store_link' => 'storeLink',
@@ -821,6 +823,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'url_images' => 'urlImagesLocation',
 					'url_avatar' => "profileImage",
 					"header_image" => 'headerImage',
+					"header_small_image" => 'headerSmallImage',
 					"profile_image" => 'profileImage',
 					'main_link' => 'mainLink',
 					'store_link' => 'storeLink',
@@ -952,6 +955,38 @@ class Person extends CActiveRecord implements IdentityInterface
 
 		return $url;
 	}
+
+	/**
+	 * Get a resized version of header image
+	 * This method tries to get the "header_cropped_small" image
+	 *
+	 * @return string
+	 */
+	public function getHeaderSmallImage($width = 290, $height = 185)
+	{
+		$url = "/imgs/default-cover.jpg";
+
+		$fit = true;
+		$image = null;
+		if (Person::existMediaFile($this->mediaMapping->header_cropped_small)) {
+			$fit = false;
+			$image = Person::getUrlImagesLocation() . $this->mediaMapping->header_cropped_small;
+		} elseif (Person::existMediaFile($this->mediaMapping->header_cropped)) {
+			$image = Person::getUrlImagesLocation() . $this->mediaMapping->header_cropped;
+		} elseif (Person::existMediaFile($this->mediaMapping->header)) {
+			$image = Person::getUrlImagesLocation() . $this->mediaMapping->header;
+		}
+		if ($image) {
+			if ($fit) {
+				$url = Utils::url_scheme() . Utils::thumborize($image)->fitIn($width, $height)->addFilter('fill','auto');
+			} else {
+				$url = Utils::url_scheme() . Utils::thumborize($image)->resize($width, $height);
+			}
+		}
+
+		return $url;
+	}
+
 	/**
 	 * Get a resized version of profile image, to 155x155
 	 *
@@ -1184,6 +1219,7 @@ class Person extends CActiveRecord implements IdentityInterface
 			"name" => $this->personalInfoMapping->getVisibleName(),
 			"url_avatar" => $this->getProfileImage(),
 			"header_image" => $this->getHeaderImage(),
+			"header_small_image" => $this->getHeaderSmallImage(),
 			"profile_image" => $this->getProfileImage(),
 			'main_link' => $this->getMainLink(),
 			'store_link' => $this->getStoreLink(),
