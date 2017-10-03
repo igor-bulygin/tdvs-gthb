@@ -97,7 +97,9 @@
 			"UNPUBLISHED_WORKS_BR": "Unpublished<br>works",
 			"UNPUBLISHED_WORKS": "Unpublished works",
 			"UNPUBLISHED_WORKS_SEE": "Only you are able to see your unpublished works.",
-			"ADD_FIRST_WORK": "...your profile is starting to look great, but you can make it even greater by adding your first work"
+			"ADD_FIRST_WORK": "...your profile is starting to look great, but you can make it even greater by adding your first work",
+			"EDIT_DELETE_WORKS": "Edit / delete works",
+			"DONE_STORE": "I'm done editing works"
 		},
 		"stories": {
 			"SEE_EXAMPLE": "See an example",

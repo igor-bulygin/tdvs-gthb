@@ -24,7 +24,7 @@ $config = [
 		'devicedetect',
 		'app\components\Aliases',
 		'languagepicker',
-		'newrelic',
+//		'newrelic',
 	],
 
 
@@ -120,18 +120,21 @@ $config = [
 				'todevise_log' => [
 					'class' => 'yii\mongodb\log\MongoDbTarget',
 					'levels' => ['error', 'warning'],
+					'except' => ['yii\web\HttpException:401', 'yii\web\HttpException:404'],
 					'logCollection' => 'todeviselog',
 					'logVars' => [],
 				],
 				'todevise_errors' =>[
 					'class' => 'yii\log\FileTarget',
 					'levels' => ['error', 'warning'],
+					'except' => ['yii\web\HttpException:401', 'yii\web\HttpException:404'],
 					'logFile' => '@app/runtime/logs/todevise_errors.log',
 					'logVars' => [],
 				],
 				'todevise_errors_detail' =>[
 					'class' => 'yii\log\FileTarget',
 					'levels' => ['error', 'warning'],
+					'except' => ['yii\web\HttpException:401', 'yii\web\HttpException:404'],
 					'logFile' => '@app/runtime/logs/todevise_errors_detail.log',
 					'logVars' => ['_GET', '_POST', '_FILES', '_COOKIE', '_SESSION', '_SERVER'],
 				],
@@ -200,15 +203,15 @@ $config = [
 		],
 
 		// new relic
-		'newrelic' => [
-			'class' => 'bazilio\yii\newrelic\Newrelic',
-			'name' => 'Dev Todevise',
-//			'handler' => 'class/name',
-			'enabled' =>
-				// newrelic is only enabled ind real servers
-				strpos($_SERVER['HTTP_HOST'], 'beta.todevise.com') !== false ||
-				strpos($_SERVER['HTTP_HOST'], 'dev.todevise.com') !== false,
-		],
+//		'newrelic' => [
+//			'class' => 'bazilio\yii\newrelic\Newrelic',
+//			'name' => 'Dev Todevise',
+////			'handler' => 'class/name',
+//			'enabled' =>
+//				// newrelic is only enabled ind real servers
+//				strpos($_SERVER['HTTP_HOST'], 'beta.todevise.com') !== false ||
+//				strpos($_SERVER['HTTP_HOST'], 'dev.todevise.com') !== false,
+//		],
 
 		//URLs
 		'urlManager' => [

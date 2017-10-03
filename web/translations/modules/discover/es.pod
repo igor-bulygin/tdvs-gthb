@@ -3,7 +3,8 @@
 		"EXPLORE_BOXES": "Explorar cajas",
 		"SEARCH_KEYWORD": "Palabras clave de búsqueda",
 		"SEARCHING": "Buscando...",
-		"WE_FOUND_X_RESULTS": "Hemos encontrado {{ counter }} resultados con las palabras clave \"<span class='key'>{{keys}}</span>\"",
+		"WE_FOUND_X_RESULTS_WITH_KEY": "Hemos encontrado {{ counter }} resultados con las palabras clave \"<span class='key'>{{keys}}</span>\"",
+		"WE_FOUND_X_RESULTS": "Hemos encontrado {{ counter }} resultados",
 		"FILTER_BY_COUNTRY": "Filtrar por ubicación",
 		"SEE_MORE": "Ver más",
 		"FILTER_BY_THEME": "Filtrar por categoría",
@@ -14,6 +15,7 @@
 		"OLD": "Anterior",
 		"PRICE_LOW_TO_HIGH": "Precio de más bajo a alto",
 		"PRICE_HIGH_TO_LOW": "Precio de más alto a bajo",
+		"SEE_MORE": "Ver más",
 		"boxes": {
 			"DISCOVER_LATEST_TRENDS": "Es el momento de descubrir las últimas tendencias",
 			"NO_BOXES_FOUND": "No se han encontrado cajas con el criterio de búsqueda especificado."

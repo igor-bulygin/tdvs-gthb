@@ -1,7 +1,8 @@
 <div>
 	<div class="col-md-12 mb-20 mt-10">
-		<div class="found-header col-md-5" ng-if="!exploreProductsFiltersCtrl.searching && exploreProductsFiltersCtrl.searchParam" ng-cloak>
-			<span translate="discover.WE_FOUND_X_RESULTS" translate-values="{ counter: exploreProductsFiltersCtrl.resultsCounter, keys: exploreProductsFiltersCtrl.searchParam }"></span>
+		<div class="found-header col-md-5" ng-if="!exploreProductsFiltersCtrl.searching" ng-cloak>
+			<span ng-if="exploreProductsFiltersCtrl.searchParam" translate="discover.WE_FOUND_X_RESULTS_WITH_KEY" translate-values="{ counter: exploreProductsFiltersCtrl.results.counter, keys: exploreProductsFiltersCtrl.searchParam }"></span>
+			<span ng-if="!exploreProductsFiltersCtrl.searchParam" translate="discover.WE_FOUND_X_RESULTS" translate-values="{ counter: exploreProductsFiltersCtrl.results.counter }"></span>
 		</div>
 		<div class="col-md-7">
 			<ol class="nya-bs-select col-md-4" ng-model="exploreProductsFiltersCtrl.orderFilter" ng-change="exploreProductsFiltersCtrl.search(true)">

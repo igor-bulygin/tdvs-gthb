@@ -1,6 +1,6 @@
 <!--<div class="col-md-12 text-right">
 	<div class="col-md-2 col-md-offset-9">
-		<span style="color: #9D9D9D;" ng-cloak><span translate="settings.orders.TOTAL"></span>: </span> <label> {{soldOrdersCtrl.ordersTotalPrice | currency }}</label>
+		<span style="color: #9D9D9D;" ng-cloak><span translate="settings.orders.TOTAL"></span>: </span> <label> {{soldOrdersCtrl.ordersTotalPrice | currency:'€':2}}</label>
 	</div>
 </div>-->
 <div class="col-md-10 col-md-offset-1" style="padding: 20px;">
@@ -44,21 +44,21 @@
 							<div class="col-md-5 row">
 								<div class="col-md-12">
 									<span class="total-title" translate="settings.orders.YOU_RECEIVE"></span>
-									<label class="pull-right" ng-cloak>{{order.totalPrice | currency }}</label>
+									<label class="pull-right" ng-cloak>{{order.to_receive | currency:'€':2}}</label>
 								</div>
 								<div class="col-md-12">
 									<span class="total-title" translate="settings.orders.TODEVISE_COMMISSION"></span>
-									<label class="pull-right">{{ order.commission| number:2}}</label>
+									<label class="pull-right">{{ order.commission | currency:'€':2}}</label>
 								</div>
 								<div class="col-md-12">
 									<span class="total-title" translate="settings.orders.SHIPPING"></span>
-									<label class="pull-right" ng-cloak>{{order.totalShippingPrice | currency }}</label>
+									<label class="pull-right" ng-cloak>{{order.totalShippingPrice | currency:'€':2}}</label>
 								</div>
 							</div>
 							<div class="col-md-12 text-right mt-20">
 								<div class="col-md-12">
 									<span class="total-title" translate="settings.orders.TOTAL"></span>
-									<label>{{ order.total | number:2}}</label>
+									<label>{{order.totalPrice | currency:'€':2}}</label>
 								</div>
 							</div>
 						</div>
@@ -83,7 +83,7 @@
 										</div>
 										<span class="col-md-12 mt-30 mb-20" translate="settings.orders.CLICK_TO_INFORM"></span>
 										<div class="col-md-12 mt-40 mb-10" >
-											<button class="btn btn-medium btn-red" ng-click="soldOrdersCtrl.markPackAware(order,pack)"><span translate="READY_TO_CREATE"></span></button>
+											<button class="btn btn-medium btn-red" ng-click="soldOrdersCtrl.markPackAware(order,pack)"><span translate="settings.orders.READY_TO_CREATE"></span></button>
 										</div>
 									</div>
 									<div class="text-center" ng-if="pack.loading" ng-cloak>

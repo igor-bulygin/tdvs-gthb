@@ -74,8 +74,9 @@
 				getProduct();
 			}
 
-			sizechartDataService.getSizechart({
-				scope: 'all'
+			sizechartDataService.getDeviserSizechart({
+				scope: 'all',
+				deviser_id : person.short_id
 			}, onGetSizechartSuccess, UtilService.onError);
 		}
 

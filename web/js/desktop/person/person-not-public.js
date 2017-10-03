@@ -22,47 +22,25 @@
 			}, onUpdateProfileSuccess, UtilService.onError);
 		}
 
-		function deleteProduct(id) {
-			function onDeleteProductPrivSuccess(data) {
-				$window.location.reload();
-			}
-			
-			productDataService.deleteProductPriv({
-				idProduct: id
-			}, onDeleteProductPrivSuccess, UtilService.onError)
-		}
-
 		function open_modal_delete(id) {
-			vm.id_to_delete = id;
 			var modalInstance = $uibModal.open({
-				templateUrl: 'modalDeleteProduct.html',
-				controller: 'modalDeleteProductCtrl',
-				controllerAs: 'modalDeleteProductCtrl'
-			})
+				component: 'modalDeleteProduct',
+				resolve: {
+					productId: function() {
+						return id;
+					}
+				}
+			});
 
-			modalInstance.result.then(function () {
-				deleteProduct(vm.id_to_delete);
+			modalInstance.result.then(function(data) {
+				$window.location.reload();
 			});
 		}
-	}
 
-	function modalController($uibModalInstance) {
-		var vm = this;
-		vm.close = close;
-		vm.ok = ok;
-
-		function close() {
-			$uibModalInstance.dismiss('cancel');
-		}
-
-		function ok() {
-			$uibModalInstance.close();
-		}
 	}
 
 	angular
 		.module('person')
 		.controller('personNotPublicCtrl', controller)
-		.controller('modalDeleteProductCtrl', modalController);
 
 }());

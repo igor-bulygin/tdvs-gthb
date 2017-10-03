@@ -4,21 +4,34 @@
 	function controller(UtilService, orderDataService, $translate, tagDataService) {
 		var vm = this;
 		vm.deviserId=person.id;
-		vm.orders=[];
-		vm.enabledStates=[{value:"open", name : "settings.orders.OPEN"},{value:"past", name :"settings.orders.PAST"},{value:"", name : "settings.orders.ALL"}];
-		vm.stateFilter=vm.enabledStates[0].value;
-		vm.enabledTypes=[];
-		vm.isDeviser=false;
-		if (person.type[0]==2) {
-			vm.isDeviser=true;
-			vm.enabledTypes.push({value:"received", name: "settings.orders.SALES"});
-		}
-		vm.enabledTypes.push({value:"done", name: "settings.orders.MY_PURCHASE"});
-		vm.typeFilter=vm.enabledTypes[0];
 		vm.getOrders=getOrders;
+
 		init();
 
 		function init() {
+			vm.isDeviser=false;
+			var open_orders_translation;
+			vm.orders=[];
+			vm.enabledTypes=[];
+			if (person.type.indexOf(2)>-1) {
+				vm.isDeviser=true;
+				vm.enabledTypes.push({value:"received", name: "settings.orders.SALES"});
+				open_orders_translation = 'settings.orders.TO_SEND';
+			} else {
+				open_orders_translation = 'settings.orders.OPEN';
+			}
+			vm.enabledTypes.push({value:"done", name: "settings.orders.MY_PURCHASE"});
+			vm.typeFilter=vm.enabledTypes[0];
+			vm.enabledStates=[
+				{
+					value: "",
+					name: "settings.orders.ALL"
+				},
+				{
+					value:"open",
+					name: open_orders_translation
+				}];
+			vm.stateFilter=vm.enabledStates[0].value;
 			getTags();
 		}
 
@@ -39,7 +52,10 @@
 			}
 			switch (vm.typeFilter.value) {
 				case "done":
-					orderDataService.getOrder({pack_state:vm.stateFilter, personId:vm.deviserId}, onGetOrdersSuccess, UtilService.onError);
+					orderDataService.getOrder({
+						pack_state: vm.stateFilter, 
+						personId: vm.deviserId
+					}, onGetOrdersSuccess, UtilService.onError);
 					break;
 				case "received":
 					orderDataService.getDeviserPack({pack_state:vm.stateFilter, personId:vm.deviserId}, onGetOrdersSuccess, UtilService.onError);

@@ -139,7 +139,7 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 						<div class="col-md-4 col-sm-4 col-xs-12 pad-showcase">
 								<a href="<?= $deviser->getStoreLink()?>">
 								<figure class="showcase">
-									<img src="<?= Utils::url_scheme() ?><?= Utils::thumborize($deviser->getHeaderBackgroundImage())->resize(350, 344) ?>" class="showcase-image">
+									<img src="<?= $deviser->getHeaderImage(350, 344) ?>" class="showcase-image">
 								<figcaption>
 								<div class="row">
 									<div class="col-md-6">
@@ -194,7 +194,7 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 									<div class="col-md-4 col-sm-4 col-xs-6 pad-showcase">
 										<a href="<?= $influencer->getLovedLink()?>">
 											<figure class="showcase">
-												<img src="<?= Utils::url_scheme() ?><?= Utils::thumborize($influencer->getHeaderBackgroundImage())->resize(350, 344) ?>" class="showcase-image">
+												<img src="<?= $influencer->getHeaderImage(350, 344) ?>" class="showcase-image">
 												<figcaption>
 												<div class="row">
 													<div class="col-md-6">

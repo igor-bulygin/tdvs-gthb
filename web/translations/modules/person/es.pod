@@ -98,7 +98,9 @@
 			"UNPUBLISHED_WORKS": "Trabajos en borrador",
 			"UNPUBLISHED_WORKS_BR": "Trabajos en<br>borrador",
 			"UNPUBLISHED_WORKS_SEE": "Solo tú puedes ver los trabajos en borrador.",
-			"ADD_FIRST_WORK": "...tu perfil empieza a estar muy bien, pero puedes hacerlo incluso mejor añadiendo tu primer trabajo"
+			"ADD_FIRST_WORK": "...tu perfil empieza a estar muy bien, pero puedes hacerlo incluso mejor añadiendo tu primer trabajo",
+			"EDIT_DELETE_WORKS": "Editar / borrar trabajos",
+			"DONE_STORE": "He acabado de editar mis trabajos"
 		},
 		"stories": {
 			"SEE_EXAMPLE": "Mira un ejemplo",

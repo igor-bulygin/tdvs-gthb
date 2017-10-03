@@ -13,18 +13,26 @@ class TranslatableRequiredValidator extends Validator
 	{
 		if (!is_array($values)) {
 			$error = 'Must be an array';
+
 			return false;
 		}
 
 		if (count($values) == 0) {
 			$error = 'Can not be empty';
+
 			return false;
 		}
 
 		$requiredLangs = Lang::getRequiredLanguages();
 		foreach ($requiredLangs as $langCode => $langDesc) {
-			if (!isset($values[$langCode])) {
-				$error = $langDesc.' translation is required';
+			if (!isset($values[$langCode]) || empty($values[$langCode])) {
+				$error = sprintf('%s translation is required', $langDesc);
+
+				return false;
+			}
+
+			if (!is_string($values[$langCode])) {
+				$error = sprintf('%s translation must be a string', $langDesc);
 
 				return false;
 			}
@@ -54,7 +62,12 @@ class TranslatableRequiredValidator extends Validator
 			$requiredLangs = Lang::getRequiredLanguages();
 			foreach ($requiredLangs as $langCode => $langDesc) {
 				if (!isset($values[$langCode]) || empty($values[$langCode])) {
-					$this->addError($object, $attribute, $langDesc.' translation is required');
+					$this->addError($object, $attribute,
+						sprintf('%s translation is required for %s', $langDesc, $attribute));
+				} elseif (!is_string($values[$langCode])) {
+					$this->addError($object, $attribute,
+						sprintf('%s translation must be a string for %s', $langDesc, $attribute));
+
 				}
 			}
 		}

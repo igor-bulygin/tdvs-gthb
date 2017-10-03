@@ -19,6 +19,7 @@
 			"ORDERS": "ORDERS",
 			"NO_ORDERS_FOUND": "No orders found",
 			"OPEN": "Open",
+			"TO_SEND": "To send",
 			"PAST": "Past",
 			"ALL": "All",
 			"SALES": "Sales",

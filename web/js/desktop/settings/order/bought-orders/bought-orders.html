@@ -1,6 +1,6 @@
 <div class="col-md-12 text-right">
 	<div class="col-md-2 col-md-offset-9">
-		<span style="color: #9D9D9D;" ng-cloak><span translate="settings.orders.TOTAL"></span>: </span> <label> {{boughtOrdersCtrl.ordersTotalPrice | currency }}</label>
+		<span style="color: #9D9D9D;" ng-cloak><span translate="settings.orders.TOTAL"></span>: </span> <label> {{boughtOrdersCtrl.ordersTotalPrice | currency:'€':2}}</label>
 	</div>
 </div>
 <div class="col-md-10 col-md-offset-1" style="padding: 20px;">
@@ -15,7 +15,7 @@
 						</span>
 						<span class="col-md-3">
 							<span class="col-md-12 total-title" translate="settings.orders.TOTAL_PRICE"></span>
-							<span class="col-md-12" ng-cloak>{{ order.total| number:2}}</span>
+							<span class="col-md-12" ng-cloak>{{order.subtotal | currency:'€':2}}</span>
 						</span>
 						<span class="col-md-3">
 							<span class="col-md-12"  style="color: #9D9D9D;" translate="settings.orders.PURCHASE_DATE"></span>
@@ -47,15 +47,15 @@
 								</div>
 								<div class="col-md-1">
 									<span class="col-md-12" style="color: #9D9D9D;" translate="global.PRICE"></span>
-									<label  class="col-md-12" ng-cloak>{{ pack.pack_price| currency}}</label>
+									<label  class="col-md-12" ng-cloak>{{pack.pack_price | currency:'€':2}}</label>
 								</div>
 								<div class="col-md-2">
 									<span class="col-md-12" style="color: #9D9D9D;" translate="settings.orders.SHIPPING_TYPE"></span>
-									<label ng-bind="pack.shipping_type"></label><label> - </label><label ng-cloak>{{ pack.shipping_price| currency}}</label>
+									<label ng-bind="pack.shipping_type | capitalize"></label><label>&nbsp;-&nbsp;</label><label ng-cloak>{{pack.shipping_price | currency:'€':2}}</label>
 								</div>
 								<div class="col-md-1">
 									<span class="col-md-12" style="color: #9D9D9D;" translate="settings.orders.STATUS"></span>
-									<label class="col-md-12" ng-bind="pack.pack_state"></label>
+									<label class="col-md-12" ng-bind="pack.pack_state | capitalize"></label>
 								</div>
 								<div class="col-md-2 text-right" ng-if="pack.pack_state==='shipped'">
 									<span class="a red-text" ng-click="boughtOrdersCtrl.openTrackModal(pack)" translate="settings.orders.TRACK_PACKAGE"></span>

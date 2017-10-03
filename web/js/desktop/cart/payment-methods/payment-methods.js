@@ -56,7 +56,6 @@
 
 		function checkout(form) {
 			function onSaveCartSuccess(data) {
-				console.log(data);
 				vm.handler.open({
 					name: '',
 					description: 'Order Nº ' + data.id,

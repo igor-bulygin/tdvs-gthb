@@ -2,7 +2,7 @@
 	<div class="edit-faq-panel">
 		<div class="faq-language-menu">
 			<ol class="nya-bs-select form-control" ng-model="storyTextComponentCtrl.languageSelected" ng-change="storyTextComponentCtrl.parseText(storyTextComponentCtrl.component.items)">
-				<li nya-bs-option="language in storyTextComponentCtrl.languages" data-value="language.code" deep-watch="true" ng-init="storyTextComponentCtrl.languageSelected='en-US'" class="ng-class:{'lang-selected': storyTextComponentCtrl.isLanguageOk(language.code)}">
+				<li nya-bs-option="language in storyTextComponentCtrl.languages" data-value="language.code" deep-watch="true" ng-init="storyTextComponentCtrl.languageSelected=storyTextComponentCtrl.selected_language" class="ng-class:{'lang-selected': storyTextComponentCtrl.isLanguageOk(language.code)}">
 					<a href="">
 						<span ng-bind="language.name"></span>
 						<span class="glyphicon glyphicon-ok ok-white-icon pull-right" ng-if="storyTextComponentCtrl.isLanguageOk(language.code)"></span>

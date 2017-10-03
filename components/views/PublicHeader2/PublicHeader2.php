@@ -16,8 +16,8 @@ app\components\assets\PublicHeader2Asset::register($this);
 		<div class="row">
 		<div class="navbar-header">
 			<a class="navbar-brand" href="<?= Url::to(["public/index"])?>">
-				<svg version="1.1" id="todevise_logo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 39.9 12.2" style="enable-background:new 0 0 39.9 12.2;" xml:space="preserve">
+				<svg version="1.1" id="todevise_logo" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+					 viewBox="0 0 39.9 12.2" style="enable-background:new 0 0 39.9 12.2;" xml:space="preserve">
 <path class="img_logo" id="p1" d="M34.1,7.3c-0.3,0.2-0.6,0.4-0.8,0.5c-0.6,0.4-1.2,0.7-1.9,0.9c-0.9,0.2-1.8,0.2-2.7,0c-0.5-0.1-0.9-0.4-1.2-0.8
 	c-0.3-0.4-0.4-0.8-0.3-1.3c0.1-0.4,0.2-0.8,0.2-1.2c0-0.2,0-0.4,0-0.6c-0.1-0.3-0.3-0.3-0.5-0.2c-0.2,0.1-0.3,0.2-0.4,0.4
 	c-0.4,0.8-0.9,1.6-1.3,2.4c-0.2,0.3-0.4,0.7-0.5,1c-0.1,0.3-0.3,0.5-0.6,0.5c-0.3,0.1-0.6,0.1-0.9,0c-0.2-0.1-0.3-0.2-0.4-0.4
@@ -116,7 +116,7 @@ app\components\assets\PublicHeader2Asset::register($this);
 				<?php } else {
 					$person = Yii::$app->user->identity; /* @var \app\models\Person $person */?>
 					<li class="dropdown log">
-						<a class="logued-text" href="#" class="dropdown-toggle log" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></span--><img class="avatar-logued-user" src="<?= $person->getAvatarImage() ?>"></a>
+						<a class="logued-text" href="#" class="dropdown-toggle log" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></span--><img class="avatar-logued-user" src="<?= $person->getProfileImage(0, 0) ?>"></a>
 						<div class="dropdown-menu admin-wrapper black-form">
 							<ul class="menu-logued">
 								<li class="header-item">

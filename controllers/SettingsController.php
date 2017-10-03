@@ -50,6 +50,10 @@ class SettingsController extends CController
 			throw new NotFoundHttpException();
 		}
 
+		if ($slug != $person->getSlug()) {
+			$this->redirect($person->getSettingsLink('general'), 301);
+		}
+
 		if (!$person->isPersonEditable()) {
 			throw new UnauthorizedHttpException();
 		}
@@ -70,6 +74,10 @@ class SettingsController extends CController
 
 		if (!$person) {
 			throw new NotFoundHttpException();
+		}
+
+		if ($slug != $person->getSlug()) {
+			$this->redirect($person->getSettingsLink('billing'), 301);
 		}
 
 		if (!$person->isDeviser()) {
@@ -98,6 +106,10 @@ class SettingsController extends CController
 			throw new NotFoundHttpException();
 		}
 
+		if ($slug != $person->getSlug()) {
+			$this->redirect($person->getSettingsLink('shipping'), 301);
+		}
+
 		if (!$person->isDeviser()) {
 			throw new NotFoundHttpException();
 		}
@@ -124,6 +136,14 @@ class SettingsController extends CController
 
 		if (!$person) {
 			throw new NotFoundHttpException();
+		}
+
+		if (!$person->isPersonEditable()) {
+			throw new UnauthorizedHttpException();
+		}
+
+		if ($slug != $person->getSlug()) {
+			$this->redirect($person->getSettingsLink('open-orders'), 301);
 		}
 
 		$this->checkProfileState($person);

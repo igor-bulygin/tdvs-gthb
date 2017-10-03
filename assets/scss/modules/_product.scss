@@ -291,3 +291,22 @@
 .results-wrapper{
 	background-color: $white;
 }
+ #product-results{
+    widht:930px;
+    margin: 0 auto;
+    column-count: 5;
+    column-gap: 10px;
+    -webkit-column-count: 5;
+    -webkit-column-gap: 10px;
+    -moz-column-count: 5;
+    -moz-column-gap: 10px;
+}
+.product-result-item{
+    display: inline-block;
+    margin-bottom: 0px;
+    width:100%;
+    padding: 0 !important;
+    figure, figcaption{
+        padding: 0 !important;
+    }
+}

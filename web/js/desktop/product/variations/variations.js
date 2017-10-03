@@ -21,7 +21,6 @@
 		vm.deleteSizeFromSizechart = deleteSizeFromSizechart;
 		vm.sizechartValuesValidation = sizechartValuesValidation;
 		vm.optionValidation = optionValidation;
-		vm.textFieldValidation = textFieldValidation;
 		vm.saveDeviserSizechart=saveDeviserSizechart;
 		vm.showNewSizechartForm = showNewSizechartForm;
 		vm.new_column=new_column;
@@ -41,7 +40,6 @@
 		vm.preorder_selected = false;
 		vm.made_to_order_selected = false;
 		vm.bespoke_selected = false;
-		vm.bespoke_language = 'en-US';
 		vm.deviserSizecharts = [];
 		vm.sizecharts=[];
 		vm.countriesAvailable = [];
@@ -50,6 +48,7 @@
 		vm.showNewSizechart=false;
 		vm.invalidNewSizechart=false;
 		vm.selected_language=_lang;
+		vm.bespoke_language = vm.selected_language;
 		vm.name_language=vm.selected_language;
 		vm.mandatory_langs=Object.keys(_langs_required);
 		vm.mandatory_langs_names="";
@@ -180,15 +179,18 @@
 				if (!vm.fromedit && !angular.isUndefined(vm.selected_sizechart) && !angular.isUndefined(vm.selected_sizechart.id) && vm.sizechart_helper_id.indexOf(vm.selected_sizechart.id) === -1) {
 					vm.selected_sizechart=vm.sizechart_helper[0];
 					vm.product.sizechart=null;
+					countriesSelect(vm.selected_sizechart);
 				}
 				vm.savingSizechart=false;
 				if (vm.sizechart_helper.length>0) {
 					vm.show_sizecharts = true;
 				}
 			}
-			sizechartDataService.getSizechart({
-				scope: 'all'
+			sizechartDataService.getDeviserSizechart({
+				scope: 'all',
+				deviser_id : person.short_id
 			}, onGetSizechartSuccess, UtilService.onError);
+
 		}
 
 		function deviserSizecharts() {
@@ -367,6 +369,12 @@
 		
 		function addSizeToSizechart(pos) {
 			if (pos!=null) {
+				if (angular.isUndefined(vm.product.sizechart) || (vm.product.sizechart == null)) {
+					vm.product.sizechart=[];
+				}
+				if (angular.isUndefined(vm.product.sizechart.values) || (vm.product.sizechart.values == null)) {
+					vm.product.sizechart.values=[];
+				}
 				vm.product.sizechart.values.push(vm.sizechart_empty.values[pos]);
 				vm.sizechart_available_values[pos] = false;
 				vm.size_to_add=null;
@@ -391,10 +399,6 @@
 
 		function optionValidation(option, required) {
 			return option.length <= 0 && vm.form_submitted && required;
-		}
-
-		function textFieldValidation(textField, requiredOption) {
-			return requiredOption && (!angular.isObject(textField) || !textField['en-US'] || textField['en-US'] == '' || textField['en-US'] == undefined);
 		}
 
 		function setSizechartFromProduct() {
@@ -452,8 +456,10 @@
 			if (!args.isFirstSelection) {
 				vm.product.options = {};
 			}
-			vm.newSizechartForm.$setUntouched();
-			vm.newSizechartForm.$setPristine();
+			if (!angular.isUndefined(vm.newSizechartForm) && vm.newSizechartForm != null) {
+				vm.newSizechartForm.$setUntouched();
+				vm.newSizechartForm.$setPristine();
+			}
 			vm.selected_categories=args.categories;
 			getTagsByCategory(args.categories);
 			categoriesSizecharts(args.categories);

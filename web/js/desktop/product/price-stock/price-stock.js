@@ -5,7 +5,9 @@
 		var vm = this;
 		vm.has_error = UtilService.has_error;
 		vm.priceStockValuesValidation = priceStockValuesValidation;
+		vm.setUnlimitedStock = setUnlimitedStock;
 		vm.applyToAll = applyToAll;
+		vm.selected_language=_lang;
 
 		var set_original_artwork = false;
 
@@ -38,7 +40,7 @@
 							//look for tag.options.values and compare them to each element.options[key]
 							vm.tags[i].options.forEach(function (option) {
 								if(element.options[key].indexOf(option.value) > -1) {
-									title.push(option.text['en-US']);
+									title.push(option.text[vm.selected_language]);
 								}
 							})
 						}
@@ -149,11 +151,23 @@
 						Object.assign(element, value);
 					});
 					break;
+				case 'stock':
+					if(value === null) {
+						vm.product.price_stock.map((element) => element.unlimited_stock = true);
+					} else {
+						vm.product.price_stock.map((element) => element.unlimited_stock = false);
+					}
+					vm.product.price_stock.map((element) => element[type] = value);
+					break;
 				default:
-					vm.product.price_stock.map((element) => element[type] = value)
+					vm.product.price_stock.map((element) => element[type] = value);
 					break;
 			}
 
+		}
+
+		function setUnlimitedStock(product) {
+			product.stock = product.unlimited_stock ? null : 0;
 		}
 
 		//show validation error only if value <= 0, if product is available and the form has been submitted
@@ -191,6 +205,10 @@
 
 		$scope.$watch('productPriceStockCtrl.product.price_stock', function(newValue, oldValue) {
 			parseTitles();
+			if(newValue.length > 0)
+				newValue.forEach(function(element) {
+					element.unlimited_stock = element.stock === null ? true : false;
+				});
 			if(vm.fromedit) {
 				delete vm.fromedit;
 			} 

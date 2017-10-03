@@ -145,7 +145,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 							</div>
 						</div>
 						<div class="product-data no-border">
-							<ul class="nav nav-tabs product-detail-tabs" role="tablist" ng-if="detailProductCtrl.original_artwork" ng-cloak>
+							<ul class="nav nav-tabs product-detail-tabs" role="tablist" ng-if="detailProductCtrl.original_artwork && detailProductCtrl.has_prints" ng-cloak>
 								<li role="presentation" class="active">
 									<a href="#" aria-controls="description" role="tab" data-toggle="tab" ng-click="detailProductCtrl.changeOriginalArtwork(true)"><span translate="product.detail.ORIGINAL"></span></a>
 								</li>
@@ -203,7 +203,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 								</form>
 							</div>-->
 							<div class="row-size">
-								<button type="button" class="btn btn-medium btn-red auto-center" ng-disabled="detailProductCtrl.stock === 0" ng-click="detailProductCtrl.addToCart(detailProductCtrl.tagsForm)"><span class="cart-icon"></span> <span translate="product.detail.ADD_TO_CART"></span></button>
+								<button type="button" class="btn btn-medium btn-red auto-center" ng-disabled="detailProductCtrl.stock === 0" ng-click="detailProductCtrl.addToCart(detailProductCtrl.tagsForm)"><span class="cart-icon"></span> <span translate="{{detailProductCtrl.stock === 0 ? 'product.detail.OUT_OF_STOCK' : 'product.detail.ADD_TO_CART'}}"></span></button>
 							</div>
 						</div>
 						<!--<div class="product-data">
@@ -244,8 +244,9 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 											<span translate="product.detail.EDIT_WORK"></span>
 										</a>
 									<?php } else { ?>
-										<button type="button" class="btn btn-love pull-left" ng-class="detailProductCtrl.product.isLoved ? 'btn-love active' : 'btn-love'" ng-click="detailProductCtrl.setLoved()">
-											<i class="ion-ios-heart-outline"></i>
+										<button type="button" class="btn btn-love pull-left" ng-class="detailProductCtrl.product.isLoved ? 'heart-red-icon-btn' : 'btn-love'" ng-click="detailProductCtrl.setLoved()">
+											<div class="heart-icon"></div>
+											<!--i class="ion-ios-heart-outline"></i-->
 										</button>
 									<?php } ?>
 									<button type="button" class="btn btn-save-box pull-right" ng-click="detailProductCtrl.setBox()">
@@ -361,7 +362,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 											</div>
 											-->
 											<div class="col-sm-3">
-												<span translate="product.detail.IS"></span> <span class="tax">€<?=$product->getShippingPrice(Country::getDefaultContryCode())?></span>
+												<span translate="product.detail.IS"></span> <span class="tax">€<?=$product->getShippingPrice(null, Country::getDefaultContryCode())?></span>
 											</div>
 										</div>
 									</form>
@@ -422,7 +423,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 									<div class="avatar">
 										<a href="<?= $person->getStoreLink() ?>">
 											<span translate="product.detail.CREATED_BY"></span>
-											<img class="avatar-default medium" src="<?= Utils::url_scheme() ?><?= Utils::thumborize($person->getAvatarImage())->resize(128, 128) ?>" data-pin-nopin="true">
+											<img class="avatar-default medium" src="<?= $person->getProfileImage(128, 128) ?>" data-pin-nopin="true">
 											<!--<span><?= $person->getName() ?></span>-->
 										</a>
 									</div>

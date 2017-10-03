@@ -50,6 +50,9 @@
 		},
 		"product_card": {
 			"QUANTITY":"Cantidad:"
+		},
+		"modal_delete_product": {
+			"PRODUCT_WITH_ORDERS": "No puedes eliminar este producto porque forma parte de uno de tus pedidos abiertos."
 		}
 	}
 }

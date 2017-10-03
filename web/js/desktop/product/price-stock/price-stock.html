@@ -61,8 +61,16 @@
 						<span class="apply-to-all-btn" ng-click="productPriceStockCtrl.applyToAll('dimensions', {length: product.length, width: product.width, height: product.height})"><span translate="product.price_stock.APPLY_ALL"></span></span>
 					</td>
 					<td xeditable-select>
-						<a href="#" editable-number="product.stock" buttons="no" e-min="0" class="ng-class:{'purple-text': productPriceStockCtrl.priceStockValuesValidation(product.stock, product.available)}" ng-bind="(product.stock || 0)" blur="submit"></a>
+						<div>
+						<a href="#" editable-number="product.stock" buttons="no" e-min="0" class="ng-class:{'purple-text': productPriceStockCtrl.priceStockValuesValidation(product.stock, product.available)}" ng-bind="product.stock" blur="submit" ng-if="!product.unlimited_stock" ng-cloak></a>
 						<span class="apply-to-all-btn" ng-click="productPriceStockCtrl.applyToAll('stock', product.stock)"><span translate="product.price_stock.APPLY_ALL"></span></span>
+						</div>
+						<div class="form-group">
+							<div class="checkbox">
+								<input type="checkbox" id="unlimited_stock_{{$index}}" ng-model="product.unlimited_stock" ng-change="productPriceStockCtrl.setUnlimitedStock(product)">
+								<label class="label-small-bold" for="unlimited_stock_{{$index}}"><span translate="product.price_stock.UNLIMITED_STOCK"></span></label>
+							</div>
+						</div>
 					</td>
 					<td xeditable-select><a href="#" editable-number="product.price" buttons="no" e-min="0" e-step="0.01" class="ng-class:{'purple-text': productPriceStockCtrl.priceStockValuesValidation(product.price, product.available)}" ng-bind="(product.price || 0)" blur="submit"><span translate="product.price_stock.CURRENCY"></span></a>
 					<span class="apply-to-all-btn" ng-click="productPriceStockCtrl.applyToAll('price', product.price)"><span translate="product.price_stock.APPLY_ALL"></span></span>

@@ -24,11 +24,11 @@
 		//we need this counter to know how many categories we have in order to broadcast right vars in setVariations event
 		vm.category_counter = 0;
 
+		init();
+		
 		function init(){
 			setMandatoryLanguagesNames();
 		}
-
-		init();
 
 		//	TODO unify this (repeated function on variations.js) as a component field from creation/edition when files free
 		function setMandatoryLanguagesNames() {
@@ -291,11 +291,12 @@
 
 		//watch name error
 		$scope.$watch('productBasicInfoCtrl.product.name', function(newValue, oldValue) {
-			if(newValue && newValue['en-US'] && newValue['en-US'].length > 0) {
-				vm.nameRequired = false;
-			} else if(oldValue && oldValue['en-US'] && newValue['en-US'].length === 0) {
-				vm.nameRequired = true;
-			}
+			vm.nameRequired = false;
+			angular.forEach(vm.mandatory_langs, function (lang) {
+				if (angular.isUndefined(newValue) || angular.isUndefined(newValue[lang]) || newValue[lang].length<1) {
+					vm.nameRequired = true;
+				}
+			});
 		}, true);
 
 		//watch photos and main photo errors

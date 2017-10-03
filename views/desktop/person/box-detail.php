@@ -28,17 +28,15 @@ $this->registerJs("var box = ".Json::encode($box), yii\web\View::POS_HEAD, 'box-
 		<div class="header-boxes">
 			<div class="container">
 			<div class="col-md-8 avatar-boxes-wrapper">
-				<i class="ion-ios-arrow-left"></i>
-				<img class="avatar-header-boxes" src="<?=$person->getProfileImage()?>">
-				<?php if ($person->isConnectedUser()) { ?>
-					<a href="<?=$person->getBoxesLink()?>">
+				<a href="<?=$person->getBoxesLink()?>">
+					<i class="ion-ios-arrow-left"></i>
+					<img class="avatar-header-boxes" src="<?=$person->getProfileImage()?>">
+					<?php if ($person->isConnectedUser()) { ?>
 						<span>My profile</span>
-					</a>
-				<?php } else  { ?>
-					<a href="<?=$person->getBoxesLink()?>">
+					<?php } else  { ?>
 						<span><?=$person->getName()?></span>
-					</a>
-				<?php } ?>
+					<?php } ?>
+				</a>
 			</div>
 			<?php if ($person->isPersonEditable()) { ?>
 				<div class="col-md-4" style="padding-top: 17px;">

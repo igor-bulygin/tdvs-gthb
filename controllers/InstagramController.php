@@ -42,6 +42,12 @@ class InstagramController extends CController
 				// Save current connect info
 				$person->settingsMapping->instagram_info = $resp;
 				$person->save();
+
+				$log = array(
+					'person_id' => $person_id,
+					'resp' => $resp,
+				);
+				Yii::info('Instagram account connection succesfully: \n'.print_r($log, true), __METHOD__);
 			}
 
 			$this->redirect($person->getSocialLink());

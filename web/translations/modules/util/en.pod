@@ -50,6 +50,9 @@
 		},
 		"product_card": {
 			"QUANTITY":"Quantity:"
+		},
+		"modal_delete_product": {
+			"PRODUCT_WITH_ORDERS": "You can’t delete this product because it is part of one of your orders."
 		}
 	}
 }
