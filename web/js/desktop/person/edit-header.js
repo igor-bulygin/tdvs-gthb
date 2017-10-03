@@ -127,6 +127,7 @@
 						media: {
 							header: vm.person.media.header || null,
 							header_cropped: vm.person.media.header_cropped || null,
+							header_cropped_small: vm.person.media.header_cropped_small || null,
 							profile: vm.person.media.profile || null,
 							profile_cropped: vm.person.media.profile_cropped || null
 						},
@@ -168,6 +169,9 @@
 			modalInstance.result.then(function (data) {
 				vm.person.media[type] = data.data.filename;
 				parsePersonInfo(vm.person);
+				if(type==='header_cropped') {
+					openCropModal(photo, 'header_cropped_small');
+				}
 			}, function () {
 				console.log("dismissed");
 			});

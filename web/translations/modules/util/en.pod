@@ -34,7 +34,11 @@
 			"SAVE_AND_LEAVE":"Save changes & leave"
 		},
 		"modal_crop": {
-			"CROP_PHOTO":"Crop photo"
+			"CROP_PHOTO":"Crop photo",
+			"CROP_HEADER_PHOTO": "1º Crop for your profile",
+			"CROP_HEADER_PHOTO_DESCRIPTION": "This is how the photo will be displayed inside your profile.",
+			"CROP_HEADER_SMALL_PHOTO": "2º Crop for the rest of the site",
+			"CROP_HEADER_SMALL_PHOTO_DESCRIPTION": "This is how the photo will be displayed on the homepage, search engines, etc."
 		},
 		"modal_crop_description": {
 			"PHOTO_DESCRIPTION":"Photo &amp; description",

@@ -2,9 +2,10 @@
 	<button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="modalCropCtrl.dismiss()">
 		<span class="ion-ios-close" aria-hidden="true"></span>
 	</button>
-	<h3 class="modal-title" translate="util.modal_crop.CROP_PHOTO"></h3>
+	<h3 class="modal-title"><span translate="{{modalCropCtrl.title}}"></span></h3>
 </div>
 <div class="modal-body">
+	<p ng-if="modalCropCtrl.description" ng-cloak><span translate="{{modalCropCtrl.description}}"></span></p>
 	<div class="crop-modal">
 		<ui-cropper image="modalCropCtrl.resolve.photo" area-type="{{modalCropCtrl.area_type}}" chargement="'Loading'" aspect-ratio="modalCropCtrl.aspect_ratio" result-image="modalCropCtrl.photoCropped" init-max-area="true" area-min-size="20" result-image-size="modalCropCtrl.size" result-image-quality="1.0" result-image-format="'image/png'"></ui-cropper>
 	</div>
