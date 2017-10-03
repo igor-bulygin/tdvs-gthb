@@ -5,52 +5,66 @@
 		var vm = this;
 		vm.ok = ok;
 		vm.dismiss = dismiss;
+		vm.title = 'util.modal_crop.CROP_PHOTO';
+
 		var data = {
 			person_id: vm.resolve.person.id || vm.resolve.person.short_id
 		};
 
 		function init() {
 			switch (vm.resolve.type) {
-			case "header_cropped":
-				vm.area_type = 'rectangle';
-				vm.size = {
-					w: 1280,
-					h: 450
-				};
-				vm.aspect_ratio = 2.8;
-				break;
-			case "profile_cropped":
-				vm.area_type = 'circle';
-				vm.size = {
-					w: 340,
-					h: 340
-				};
-				vm.aspect_ratio = 1;
-				break;
-			case "work_photo":
-				vm.area_type = 'rectangle';
-				vm.aspect_ratio = 0.8;
-				vm.size = {
-					w: 614,
-					h: 768
-				}
-				break;
-			case "story-photos":
-				vm.area_type = 'rectangle';
-				vm.size = {
-					w: 1280,
-					h:450
-				};
-				vm.aspect_ratio = 2.8;
-				break;
-			default: 
-				vm.area_type = 'rectangle';
-				vm.aspect_ratio = 1;
-				vm.size = {
-					w: 500,
-					h: 500
-				};
-				break;
+				case "header_cropped":
+					vm.area_type = 'rectangle';
+					vm.size = {
+						w: 1280,
+						h: 450
+					};
+					vm.aspect_ratio = 2.8;
+					vm.title = 'util.modal_crop.CROP_HEADER_PHOTO';
+					vm.description = 'util.modal_crop.CROP_HEADER_PHOTO_DESCRIPTION';
+					break;
+				case "header_cropped_small":
+					vm.area_type = 'rectangle';
+					vm.size = {
+						w: 290,
+						h: 185
+					}
+					vm.aspect_ratio = 1.56;
+					vm.title = 'util.modal_crop.CROP_HEADER_SMALL_PHOTO';
+					vm.description = 'util.modal_crop.CROP_HEADER_SMALL_PHOTO_DESCRIPTION';
+					break;
+				case "profile_cropped":
+					vm.area_type = 'circle';
+					vm.size = {
+						w: 340,
+						h: 340
+					};
+					vm.aspect_ratio = 1;
+					break;
+				case "work_photo":
+					vm.area_type = 'rectangle';
+					vm.aspect_ratio = 0.8;
+					vm.size = {
+						w: 614,
+						h: 768
+					}
+					break;
+				case "story-photos":
+					vm.area_type = 'rectangle';
+					vm.size = {
+						w: 1280,
+						h:450
+					};
+					vm.aspect_ratio = 2.8;
+					break;
+				default: 
+					vm.area_type = 'rectangle';
+					vm.aspect_ratio = 1;
+					vm.size = {
+						w: 500,
+						h: 500
+					};
+					break;
 			}
 		}
 
@@ -77,6 +91,9 @@
 			switch (vm.resolve.type) {
 				case "header_cropped":
 					data.type = "deviser-media-header-cropped";
+					break;
+				case "header_cropped_small":
+					data.type = "deviser-media-header-cropped-small";
 					break;
 				case "profile_cropped":
 					data.type = "deviser-media-profile-cropped";
