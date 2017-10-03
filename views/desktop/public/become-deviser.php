@@ -19,11 +19,12 @@ $this->title = Yii::t('app/public', 'BECOME_A_DEVISER');
 						<div class="call-to-action-wrapper">
 							<div class="call-to-action">
 								<div class="logo">
-									<img src="imgs/logo_white.png">
+									<img src="imgs/logo-white.svg">
 								</div>
-								<div class="tagline" translate="todevise.become_deviser.EXPRESS"></div>
-								<div class="tagline" translate="todevise.become_deviser.YOURSELF"></div>
-								<button class="btn btn-red btn-big btn-red" ng-click="becomeDeviserCtrl.scrollToForm()" translate="todevise.become_deviser.REQUEST_INVITATION"></button>
+								<div class="express-yourself">
+									<img src="imgs/EXPRESS_YOURSELF.svg">
+								</div>
+								<button class="btn btn-red btn-big btn-red auto-center" ng-click="becomeDeviserCtrl.scrollToForm()" translate="todevise.become_deviser.REQUEST_INVITATION"></button>
 							</div>
 						</div>
 					</div>

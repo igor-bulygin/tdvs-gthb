@@ -18,12 +18,13 @@
     }
 }
 .call-to-action{
-    position: absolute;
-    top: 85px;
-    left: 100px;
+	padding: 20px 0 0 0;
     .logo{
-        width: 93px;
-        margin: 0 auto;
+		img{
+			display: block;
+			width: 140px;
+        	margin: 0 auto;
+		}
     }
     .tagline{
         color: $white;
@@ -196,4 +197,11 @@
     position: absolute;
     right: -32px;
     top: 6px;
+}
+.express-yourself{
+	img{
+		width: 388px;
+    	margin: 0 auto;
+		display: block;
+	}
 }

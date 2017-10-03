@@ -483,7 +483,7 @@ a, a:hover, a:focus {
   width: 100% !important; }
 
 .auto-center {
-  margin: 0 auto;
+  margin: 0 auto !important;
   display: block; }
 
 .text-center {
@@ -608,7 +608,6 @@ a, a:hover, a:focus {
     transition-timing-function: ease-out; }
 
 a.btn span {
-  line-height: 36px;
   height: 36px; }
 
 .btn-red {
@@ -797,16 +796,16 @@ a.btn span {
     background-color: #bfbfbf; }
 
 .btn-medium {
-  width: 285px;
+  min-width: 285px;
+  max-width: 380px;
   height: 40px;
-  line-height: 40px;
+  padding: 9px 20px !important;
   font-size: 16px; }
   .btn-medium.disabled {
     cursor: default;
     background-color: #bfbfbf; }
   .btn-medium span {
-    height: 40px !important;
-    line-height: 40px !important; }
+    height: 40px !important; }
 
 .btn-big {
   width: 288px;
@@ -2213,8 +2212,10 @@ h3 {
   padding: 20px 0; }
 .bank-settings-wrapper label {
   margin-top: 7px;
-  color: #6b6b6b;
-  font-family: "Univers Condensed Light", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  color: #1C1919;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase; }
 
 .site-error {
   background-color: #ffffff; }
@@ -6024,11 +6025,10 @@ span.optional-text.pull-left {
   overflow: hidden; }
 
 .call-to-action {
-  position: absolute;
-  top: 85px;
-  left: 100px; }
-  .call-to-action .logo {
-    width: 93px;
+  padding: 20px 0 0 0; }
+  .call-to-action .logo img {
+    display: block;
+    width: 140px;
     margin: 0 auto; }
   .call-to-action .tagline {
     color: #ffffff;
@@ -6182,6 +6182,11 @@ span.optional-text.pull-left {
   position: absolute;
   right: -32px;
   top: 6px; }
+
+.express-yourself img {
+  width: 388px;
+  margin: 0 auto;
+  display: block; }
 
 .create-deviser-account-wrapper {
   padding: 30px 200px 200px;
@@ -8019,8 +8024,7 @@ input:checked + .slider:before {
   margin: 0 25px;
   padding: 20px 0; }
 .bank-settings-wrapper label {
-  margin-top: 7px;
-  color: #6b6b6b; }
+  margin-top: 7px; }
 
 .about-us-wrapper {
   background-color: #ffffff; }

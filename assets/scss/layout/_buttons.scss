@@ -4,7 +4,6 @@
 a{
 	&.btn{
 		span{
-    		line-height: 36px;
     		height: 36px;
 		}
 	}
@@ -208,9 +207,10 @@ a{
 	}
 }
 .btn-medium{
-	width: 285px;//280px;
-  	height: 40px;
-  	line-height: 40px;
+	min-width: 285px;
+    max-width: 380px;
+    height: 40px;
+    padding: 9px 20px !important;
 	font-size: 16px;
 	&.disabled{
 		cursor: default;
@@ -218,7 +218,6 @@ a{
 	}
 	span{
 		height: 40px !important;
-		line-height: 40px !important;
 	}
 }
 .btn-big{
