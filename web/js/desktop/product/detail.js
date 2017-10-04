@@ -275,15 +275,15 @@
 
 		function saveProduct(cart_id) {
 			function onSaveProductSuccess(data) {
-				$window.location.href = currentHost() + '/cart';
+				//$window.location.href = currentHost() + '/cart';
+				vm.cart = angular.copy(data);
+				vm.addingToCart=false;
+				vm.showCartPanel=true;
 			}
 			function onSaveProductError(err) {
 				//if cart doesn't exist
 				if(err.status === 404) {
 					cartDataService.createCart(onCreateCartSuccess, onCreateCartError);
-				}
-				else {
-					console.log(err);
 				}
 			}
 			cartDataService.addProduct({
@@ -306,6 +306,7 @@
 		}
 
 		function addToCart(form) {
+			vm.addingToCart=true;
 			form.$setSubmitted();
 			if(form.$valid && vm.reference_id) {
 				var cart_id = localStorageUtilService.getLocalStorage('cart_id');
@@ -378,6 +379,28 @@
 					}
 				}
 			});
+		}
+
+		function getCart() {
+			var cart_id = localStorageUtilService.getLocalStorage('cart_id');
+
+			function onGetCartSuccess(data) {
+				vm.cart = angular.copy(data);
+				cartService.parseTags(vm.cart, vm.tags);
+				cartService.setTotalItems(vm.cart);
+				cartService.setProductsAmount(vm.cart);
+			}
+
+			function onGetCartError(err) {
+				createCart();
+				UtilService.onError(err);
+			}
+
+			if(cart_id) {
+				cartDataService.getCart({id: cart_id}, onGetCartSuccess, onGetCartError);
+			} else {
+				createCart();
+			}
 		}
 	}
 
