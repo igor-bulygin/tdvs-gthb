@@ -34,7 +34,11 @@
 			"SAVE_AND_LEAVE":"Guardar cambios & salir"
 		},
 		"modal_crop": {
-			"CROP_PHOTO":"Recortar foto"
+			"CROP_PHOTO":"Recortar foto",
+			"CROP_HEADER_PHOTO": "1º Para tu perfil",
+			"CROP_HEADER_PHOTO_DESCRIPTION": "Así se verá la foto en tu perfil.",
+			"CROP_HEADER_SMALL_PHOTO": "2º Para el resto de la página",
+			"CROP_HEADER_SMALL_PHOTO_DESCRIPTION": "Así se verá la foto en la home, nuestros buscadores, etc."
 		},
 		"modal_crop_description": {
 			"PHOTO_DESCRIPTION":"Foto &amp; descripción",
