@@ -1,6 +1,5 @@
 <div class="col-md-4 pull-right" style="z-index:99999;position:absolute;right:0">
-		<uib-accordion>
-			<div uib-accordion-group is-open="cartPanelCtrl.isOpen">
+			<div uib-collapse="!cartPanelCtrl.isOpen">
 				<div ng-repeat="pack in cartPanelCtrl.packs">
 					<ul>
 						<li class="col-md-12" ng-repeat="product in pack.products">
@@ -30,5 +29,4 @@
 					<a class="btn btn-medium btn-red" href="/cart"><span translate="cart.cart_panel.GO_TO_CART"></span></a>
 				</div>
 			</div>
-		</uib-accordion>
 </div>

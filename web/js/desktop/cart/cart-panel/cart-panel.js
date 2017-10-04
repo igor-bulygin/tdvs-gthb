@@ -3,7 +3,13 @@
 
 	function controller($timeout) {
 		var vm = this;
-		vm.isOpen=true;
+		vm.isOpen=false;
+		init();
+
+		function init() {
+			$timeout(function() { vm.isOpen=true; }, 1000);
+			
+		}
 
 	}
 
