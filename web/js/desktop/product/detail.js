@@ -307,6 +307,7 @@
 
 		function addToCart(form) {
 			vm.addingToCart=true;
+			vm.showCartPanel=false;
 			form.$setSubmitted();
 			if(form.$valid && vm.reference_id) {
 				var cart_id = localStorageUtilService.getLocalStorage('cart_id');
