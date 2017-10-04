@@ -2,13 +2,15 @@
 // Become a deviser
 // ==========================================================================
 .become-deviser-wrapper{
+	width: 100%;
+    float: left;
+    background-color: $white;
 	.header{
 		background: url('/imgs/become-a-deviser-header.jpg') no-repeat;
 	}
     .call-to-action-wrapper{
         position: relative;
         @extend %block;
-        height: 525px;
     }
     .become-deviser-container{
         margin-left: 0;
@@ -18,7 +20,7 @@
     }
 }
 .call-to-action{
-	padding: 20px 0 0 0;
+	padding: 40px 0;
     .logo{
 		img{
 			display: block;
@@ -41,51 +43,62 @@
     padding: 11px 30px;
 }
 .bca-row{
-    margin: 0;
-    padding: 0 50px;
+    padding: 40px;
+    background-color: #f9f9f9;
     &.second{
         padding: 0 220px;
         margin: 55px 0;
     }
 }
+.grow-row{
+    padding: 80px 0;
+    background-color: $white;
+	.mega-title{
+		text-align: right;
+		.first{
+			display: block;
+			font-size: 189px;
+  			font-weight: bold;
+			color: $black;
+			line-height: 170px;
+		}
+		.second{
+			display: block;
+			font-size: 63px;
+  			font-weight: bold;
+			color: $black;
+		}
+	}
+}
 .bca-content{
-    text-align: center;
-    border-right: 1px solid rgba(192,192,192,0.2);
-    padding: 0 30px;
-    min-height: 200px;
     img{
         width: 100px;
         margin: 0 auto 30px;
         display: block;
         &.clock{
-            width: 58px;
-            height:58px;
+            width: 43px;
+    		height: 43px;
         }
+		 &.community{
+		 	width: 97px;
+		 }
     }
     .title{
-        font-family: $font-family--bold;
-        color: $white;
-        text-transform: uppercase;
-        margin-bottom: 5px;
+       	font-weight: bold;
+		font-size: 26px;
+		text-transform: uppercase;
+		margin-bottom: 5px;
+		margin: 0 auto;
+		width: 300px;
+		text-align: center;
     }
     p{
-        font-family: $font-family--secondary;
-        color: $white;
-        margin-top:20px;
-        position: relative;
-        max-width: 270px;
-        margin: 20px auto 0;
-        &:before{
-            content: "";
-            position: absolute;
-            width: 10px;
-            margin: 0 auto;
-            height: 1px;
-            top: -11px;
-            left: 0;
-            right: 0;
-            border-bottom: 1px solid $white;
-        }
+        text-align: center;
+		font-size: 17px;
+		margin-top: 20px;
+		position: relative;
+		max-width: 300px;
+		margin: 20px auto 0;
     }
 }
 .big-euro{
@@ -96,17 +109,10 @@
     font-size: 41px;
 }
 .third-block-text{
-    color: $white;
-    width:300px;
+    color: $black;
+    width: 365px;
+    font-size: 17px;
     margin: 10px auto 120px;
-    .title{
-        font-family: $font-family--name;
-        font-size: 70px;
-        text-transform: uppercase;
-    }
-    p{
-        font-family: $font-family--secondary;
-    }
 }
 .quotation{
     font-family: $font-family--serif;
@@ -118,34 +124,23 @@
     text-align: center;
 }
 .request-invitation-wrapper{
-    padding: 40px;
+    padding: 20px;
     margin: 0;
     @extend %block;
-    .title{
-        color: $white;
-        font-family: $font-family--name;
-        font-size: 46px;
-        text-transform: uppercase;
-        text-align: center;
-    }
-    .tagline{
-        font-family: $font-family--secondary;
-        color: $white;
-        width: 280px;
-        margin: 0 auto;
-        text-align: center;
-    }
     .request-invitation-container{
         max-width: 600px;
         margin: 10px auto 40px;
         .title{
-          
             span { 
+				color:$black;
+				font-size: 12px;
+				text-transform: uppercase;
+				font-weight: 300;
             }
         }
         .add-new{
             @extend %link-red;
-            margin: -5px 0 10px 15px;
+            margin: 5px 0 10px 15px;
             display: block;
             float: left;
         }
@@ -156,12 +151,10 @@
     padding: 0;
 }
 .optional-input{
-    color: #418400;
+   color: #9a9a9a;
     text-transform: uppercase;
     font-size: 10px;
-    position: absolute;
-    top: 44px;
-    right: 22px;
+	margin-left: 10px;
 }
 .ok-sent-mesg-wrapper{
     max-width: 300px;
@@ -204,4 +197,23 @@
     	margin: 0 auto;
 		display: block;
 	}
+}
+.request-invitation-header{
+	padding: 50px 0 40px;
+	background: url('/imgs/request-invitation.png') no-repeat;
+	.title{
+        color: $white;
+        font-family: $font-family--name;
+		font-size: 85px;
+		letter-spacing: 4.8px;
+		line-height: 70px;
+        text-transform: uppercase;
+        text-align: center;
+    }
+	.tagline{
+        color: $white;
+        width: 405px;
+		font-size: 18px;
+        margin: 0 auto;
+    }
 }

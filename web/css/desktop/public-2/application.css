@@ -745,8 +745,8 @@ a.btn span {
 .big-btn {
   width: 460px;
   height: 60px;
-  margin: 20px 0;
-  padding: 15px 0 0 0;
+  margin: 20px 0 !important;
+  padding: 15px 0 0 0 !important;
   border-radius: 20px 20px 20px 20px !important;
   -webkit-border-radius: 20px 20px 20px 20px !important;
   -moz-border-radius: 20px 20px 20px 20px !important;
@@ -1397,6 +1397,9 @@ input:-webkit-autofill:focus {
 
 textarea {
   resize: none; }
+
+label {
+  font-weight: normal !important; }
 
 /* Awesome Bootstrap Checkbox*/
 .checkbox {
@@ -6018,19 +6021,22 @@ span.optional-text.pull-left {
 .more-boxes-text {
   text-transform: uppercase; }
 
-.become-deviser-wrapper .header {
-  background: url("/imgs/become-a-deviser-header.jpg") no-repeat; }
-.become-deviser-wrapper .call-to-action-wrapper {
-  position: relative;
-  height: 525px; }
-.become-deviser-wrapper .become-deviser-container {
-  margin-left: 0;
-  margin-right: 0;
-  padding: 0;
-  overflow: hidden; }
+.become-deviser-wrapper {
+  width: 100%;
+  float: left;
+  background-color: #ffffff; }
+  .become-deviser-wrapper .header {
+    background: url("/imgs/become-a-deviser-header.jpg") no-repeat; }
+  .become-deviser-wrapper .call-to-action-wrapper {
+    position: relative; }
+  .become-deviser-wrapper .become-deviser-container {
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0;
+    overflow: hidden; }
 
 .call-to-action {
-  padding: 20px 0 0 0; }
+  padding: 40px 0; }
   .call-to-action .logo img {
     display: block;
     width: 140px;
@@ -6049,46 +6055,53 @@ span.optional-text.pull-left {
   padding: 11px 30px; }
 
 .bca-row {
-  margin: 0;
-  padding: 0 50px; }
+  padding: 40px;
+  background-color: #f9f9f9; }
   .bca-row.second {
     padding: 0 220px;
     margin: 55px 0; }
 
-.bca-content {
+.grow-row {
+  padding: 80px 0;
+  background-color: #ffffff; }
+  .grow-row .mega-title {
+    text-align: right; }
+    .grow-row .mega-title .first {
+      display: block;
+      font-size: 189px;
+      font-weight: bold;
+      color: #1C1919;
+      line-height: 170px; }
+    .grow-row .mega-title .second {
+      display: block;
+      font-size: 63px;
+      font-weight: bold;
+      color: #1C1919; }
+
+.bca-content img {
+  width: 100px;
+  margin: 0 auto 30px;
+  display: block; }
+  .bca-content img.clock {
+    width: 43px;
+    height: 43px; }
+  .bca-content img.community {
+    width: 97px; }
+.bca-content .title {
+  font-weight: bold;
+  font-size: 26px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  margin: 0 auto;
+  width: 300px;
+  text-align: center; }
+.bca-content p {
   text-align: center;
-  border-right: 1px solid rgba(192, 192, 192, 0.2);
-  padding: 0 30px;
-  min-height: 200px; }
-  .bca-content img {
-    width: 100px;
-    margin: 0 auto 30px;
-    display: block; }
-    .bca-content img.clock {
-      width: 58px;
-      height: 58px; }
-  .bca-content .title {
-    font-family: "Univers Bold Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    color: #ffffff;
-    text-transform: uppercase;
-    margin-bottom: 5px; }
-  .bca-content p {
-    font-family: "Univers Condensed Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    color: #ffffff;
-    margin-top: 20px;
-    position: relative;
-    max-width: 270px;
-    margin: 20px auto 0; }
-    .bca-content p:before {
-      content: "";
-      position: absolute;
-      width: 10px;
-      margin: 0 auto;
-      height: 1px;
-      top: -11px;
-      left: 0;
-      right: 0;
-      border-bottom: 1px solid #ffffff; }
+  font-size: 17px;
+  margin-top: 20px;
+  position: relative;
+  max-width: 300px;
+  margin: 20px auto 0; }
 
 .big-euro {
   color: #ffffff;
@@ -6098,15 +6111,10 @@ span.optional-text.pull-left {
   font-size: 41px; }
 
 .third-block-text {
-  color: #ffffff;
-  width: 300px;
+  color: #1C1919;
+  width: 365px;
+  font-size: 17px;
   margin: 10px auto 120px; }
-  .third-block-text .title {
-    font-family: "Univers Thin Ultra Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 70px;
-    text-transform: uppercase; }
-  .third-block-text p {
-    font-family: "Univers Condensed Light", "Helvetica Neue", Helvetica, Arial, sans-serif; }
 
 .quotation {
   font-family: "Playfair Display", Georgia, serif;
@@ -6118,25 +6126,18 @@ span.optional-text.pull-left {
   text-align: center; }
 
 .request-invitation-wrapper {
-  padding: 40px;
+  padding: 20px;
   margin: 0; }
-  .request-invitation-wrapper .title {
-    color: #ffffff;
-    font-family: "Univers Thin Ultra Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 46px;
-    text-transform: uppercase;
-    text-align: center; }
-  .request-invitation-wrapper .tagline {
-    font-family: "Univers Condensed Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    color: #ffffff;
-    width: 280px;
-    margin: 0 auto;
-    text-align: center; }
   .request-invitation-wrapper .request-invitation-container {
     max-width: 600px;
     margin: 10px auto 40px; }
+    .request-invitation-wrapper .request-invitation-container .title span {
+      color: #1C1919;
+      font-size: 12px;
+      text-transform: uppercase;
+      font-weight: 300; }
     .request-invitation-wrapper .request-invitation-container .add-new {
-      margin: -5px 0 10px 15px;
+      margin: 5px 0 10px 15px;
       display: block;
       float: left; }
 
@@ -6144,12 +6145,10 @@ span.optional-text.pull-left {
   padding: 0; }
 
 .optional-input {
-  color: #418400;
+  color: #9a9a9a;
   text-transform: uppercase;
   font-size: 10px;
-  position: absolute;
-  top: 44px;
-  right: 22px; }
+  margin-left: 10px; }
 
 .ok-sent-mesg-wrapper {
   max-width: 300px;
@@ -6192,6 +6191,23 @@ span.optional-text.pull-left {
   width: 388px;
   margin: 0 auto;
   display: block; }
+
+.request-invitation-header {
+  padding: 50px 0 40px;
+  background: url("/imgs/request-invitation.png") no-repeat; }
+  .request-invitation-header .title {
+    color: #ffffff;
+    font-family: "Univers Thin Ultra Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 85px;
+    letter-spacing: 4.8px;
+    line-height: 70px;
+    text-transform: uppercase;
+    text-align: center; }
+  .request-invitation-header .tagline {
+    color: #ffffff;
+    width: 405px;
+    font-size: 18px;
+    margin: 0 auto; }
 
 .create-deviser-account-wrapper {
   padding: 30px 200px 200px;
