@@ -26,8 +26,8 @@
 				case "header_cropped_small":
 					vm.area_type = 'rectangle';
 					vm.size = {
-						w: 290,
-						h: 185
+						w: 702,
+						h: 450
 					}
 					vm.aspect_ratio = 1.56;
 					vm.title = 'util.modal_crop.CROP_HEADER_SMALL_PHOTO';
