@@ -3,7 +3,7 @@
 
 	function controller($scope, UtilService) {
 		var vm = this;
-		var show_items = 6;
+		var show_items = 20;
 		vm.truncateString = UtilService.truncateString;
 		vm.addMoreItems = addMoreItems;
 		vm.results_infinite = [];
@@ -32,7 +32,7 @@
 		controllerAs: 'exploreProductsResultsCtrl',
 		bindings: {
 			results: '<',
-			limit:'<'
+			limit:'<',
 		}
 	}
 

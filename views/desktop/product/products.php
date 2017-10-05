@@ -35,12 +35,12 @@ $this->registerJs("var searchParam = '".$text."'", yii\web\View::POS_HEAD, 'prod
 						<p class="text-center" translate="discover.NO_PRODUCTS_FOUND"></p>
 					</div>
 					<div class="col-md-10">
-						<explore-products-results ng-if="exploreProductsCtrl.results.length != 0" results="exploreProductsCtrl.results"  limit="exploreProductsCtrl.limit" ></explore-products-results>
+						<explore-products-results ng-if="exploreProductsCtrl.results.items.length > 0" results="exploreProductsCtrl.results"  limit="exploreProductsCtrl.limit"></explore-products-results>
 					</div>
 					<div class="mt-30 col-md-12 col-md-offset-4" ng-if="exploreProductsCtrl.searching && exploreProductsCtrl.results.items.length == 0" ng-cloak>
 						<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
 					</div>
-					<div class="text-center col-md-12 mt-30" style="padding-bottom:100px;" ng-if="exploreProductsCtrl.results.counter > exploreProductsCtrl.results.items.length "  ng-cloak >
+					<div class="text-center col-md-12 mt-30" style="padding-bottom:100px;" ng-if="exploreProductsCtrl.results.counter > exploreProductsCtrl.results.items.length" ng-cloak >
 						<button class="big-btn btn btn-default" ng-click="exploreProductsCtrl.searchMore()" ng-disabled="exploreProductsCtrl.searching">
 							<span translate="discover.SEE_MORE" ng-if="!exploreProductsCtrl.searching"></span>
 							<i class="fa fa-spinner fa-pulse fa-3x fa-fw small" ng-if="exploreProductsCtrl.searching"></i>
