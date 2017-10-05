@@ -303,11 +303,15 @@ class CartController extends AppPublicController
 				$pack->recalculateTotals();
 				$deviser = $pack->getDeviser();
 
+				/*
 				if ($deviser->personalInfoMapping->country == 'ES') {
+					//TODO: If deviser is from Spain, we need to charge 14.5% fee, plus a 21% of that 14.5%
 					$fee_to_apply = Yii::$app->params['default_todevise_fee_spain'];
 				} else {
 					$fee_to_apply = Yii::$app->params['default_todevise_fee'];
 				}
+				*/
+				$fee_to_apply = Yii::$app->params['default_todevise_fee'];
 
 				$stripeAmount = (int)(($pack->pack_price + $pack->shipping_price) * 100);
 				$todeviseFee = (int)($stripeAmount * $fee_to_apply);
