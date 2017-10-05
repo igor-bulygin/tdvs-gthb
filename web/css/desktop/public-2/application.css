@@ -978,7 +978,7 @@ a.btn span {
     .social-items li a.pinterest {
       padding: 8px 0 0 10px; }
     .social-items li a.instagram {
-      padding: 8px 0 0 10px; }
+      padding: 9px 0 0 8px; }
     .social-items li a:hover {
       border: 1px solid #c91c39; }
       .social-items li a:hover i.facebook svg .st0 {
@@ -1008,7 +1008,7 @@ a.btn span {
         fill: none;
         stroke-width: 2; }
     .social-items li a i.instagram svg {
-      height: 16px; }
+      height: 18px; }
       .social-items li a i.instagram svg .st0 {
         stroke: #1C1919;
         fill: none;
