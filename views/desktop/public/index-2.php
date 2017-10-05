@@ -234,7 +234,7 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 				<div class="row">
 					<?php foreach ($boxes as $box) {
 						$products = $box->getProductsPreview(); ?>
-						<div class="col-md-3">
+						<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
 							<a href="<?= $box->getViewLink()?>">
 								<figure class="showcase">
 									<div class="images-box">

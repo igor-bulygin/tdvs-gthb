@@ -6208,7 +6208,7 @@ span.optional-text.pull-left {
   .create-deviser-account-wrapper.inverse {
     background-color: #ffffff; }
     .create-deviser-account-wrapper.inverse .logo img {
-      margin: 30px auto; }
+      margin-bottom: 0; }
     .create-deviser-account-wrapper.inverse > div:nth-child(2) > div:nth-child(1) form {
       float: right;
       margin-right: 100px; }
