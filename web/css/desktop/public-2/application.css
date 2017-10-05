@@ -6055,7 +6055,7 @@ span.optional-text.pull-left {
   padding: 11px 30px; }
 
 .bca-row {
-  padding: 40px;
+  padding: 0 40px 40px;
   background-color: #f9f9f9; }
   .bca-row.second {
     padding: 0 220px;
@@ -6066,42 +6066,53 @@ span.optional-text.pull-left {
   background-color: #ffffff; }
   .grow-row .mega-title {
     text-align: right; }
+    @media (max-width: 991px) {
+      .grow-row .mega-title {
+        text-align: center; } }
     .grow-row .mega-title .first {
       display: block;
       font-size: 189px;
       font-weight: bold;
       color: #1C1919;
       line-height: 170px; }
+      @media (max-width: 991px) {
+        .grow-row .mega-title .first {
+          font-size: 124px;
+          line-height: 112px; } }
     .grow-row .mega-title .second {
       display: block;
       font-size: 63px;
       font-weight: bold;
       color: #1C1919; }
+      @media (max-width: 991px) {
+        .grow-row .mega-title .second {
+          font-size: 55px; } }
 
-.bca-content img {
-  width: 100px;
-  margin: 0 auto 30px;
-  display: block; }
-  .bca-content img.clock {
-    width: 43px;
-    height: 43px; }
-  .bca-content img.community {
-    width: 97px; }
-.bca-content .title {
-  font-weight: bold;
-  font-size: 26px;
-  text-transform: uppercase;
-  margin-bottom: 5px;
-  margin: 0 auto;
-  width: 300px;
-  text-align: center; }
-.bca-content p {
-  text-align: center;
-  font-size: 17px;
-  margin-top: 20px;
-  position: relative;
-  max-width: 300px;
-  margin: 20px auto 0; }
+.bca-content {
+  margin-top: 40px; }
+  .bca-content img {
+    width: 100px;
+    margin: 0 auto 30px;
+    display: block; }
+    .bca-content img.clock {
+      width: 43px;
+      height: 43px; }
+    .bca-content img.community {
+      width: 97px; }
+  .bca-content .title {
+    font-weight: bold;
+    font-size: 26px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    margin: 0 auto;
+    text-align: center; }
+  .bca-content p {
+    text-align: center;
+    font-size: 17px;
+    margin-top: 20px;
+    position: relative;
+    max-width: 300px;
+    margin: 20px auto 0; }
 
 .big-euro {
   color: #ffffff;
@@ -6191,6 +6202,10 @@ span.optional-text.pull-left {
   width: 388px;
   margin: 0 auto;
   display: block; }
+  @media (max-width: 991px) {
+    .express-yourself img {
+      width: 300px;
+      margin: 0 auto 20px; } }
 
 .request-invitation-header {
   padding: 50px 0 40px;
@@ -6203,11 +6218,17 @@ span.optional-text.pull-left {
     line-height: 70px;
     text-transform: uppercase;
     text-align: center; }
+    @media (max-width: 768px) {
+      .request-invitation-header .title {
+        font-size: 60px;
+        letter-spacing: 2px;
+        line-height: 50px; } }
   .request-invitation-header .tagline {
     color: #ffffff;
-    width: 405px;
+    max-width: 444px;
     font-size: 18px;
-    margin: 0 auto; }
+    margin: 0 auto;
+    padding: 0 20px; }
 
 .create-deviser-account-wrapper {
   padding: 30px 200px 200px;

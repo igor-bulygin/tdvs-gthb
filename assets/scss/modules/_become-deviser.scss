@@ -43,7 +43,7 @@
     padding: 11px 30px;
 }
 .bca-row{
-    padding: 40px;
+    padding: 0 40px 40px;
     background-color: #f9f9f9;
     &.second{
         padding: 0 220px;
@@ -55,22 +55,33 @@
     background-color: $white;
 	.mega-title{
 		text-align: right;
+		@media (max-width: 991px){
+			text-align: center;
+		}
 		.first{
 			display: block;
 			font-size: 189px;
   			font-weight: bold;
 			color: $black;
 			line-height: 170px;
+			@media (max-width: 991px){
+				font-size: 124px;
+				line-height: 112px;
+			}
 		}
 		.second{
 			display: block;
 			font-size: 63px;
   			font-weight: bold;
 			color: $black;
+			@media (max-width: 991px){
+				font-size: 55px;
+			}
 		}
 	}
 }
 .bca-content{
+	margin-top: 40px;
     img{
         width: 100px;
         margin: 0 auto 30px;
@@ -89,7 +100,6 @@
 		text-transform: uppercase;
 		margin-bottom: 5px;
 		margin: 0 auto;
-		width: 300px;
 		text-align: center;
     }
     p{
@@ -196,6 +206,10 @@
 		width: 388px;
     	margin: 0 auto;
 		display: block;
+		@media (max-width: 991px){
+			width: 300px;
+    		margin: 0 auto 20px;
+		}
 	}
 }
 .request-invitation-header{
@@ -209,11 +223,17 @@
 		line-height: 70px;
         text-transform: uppercase;
         text-align: center;
+		@media (max-width: 768px){
+			font-size: 60px;
+			letter-spacing: 2px;
+			line-height: 50px;
+		}
     }
 	.tagline{
         color: $white;
-        width: 405px;
+        max-width: 444px;
 		font-size: 18px;
-        margin: 0 auto;
+		margin: 0 auto;
+		padding: 0 20px;
     }
 }
