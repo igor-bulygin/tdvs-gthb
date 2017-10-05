@@ -74,7 +74,7 @@ $this->title = Yii::t('app/public', 'SIGNUP');
 			</div>
 			<div ng-if="createAccountCtrl.error_message" class="text-center error-text" ng-cloak><p ng-bind="createAccountCtrl.error_message"></p></div>
 			<button class="btn-red send-btn" ng-click="createAccountCtrl.submitForm(createAccountCtrl.form)">
-				<i class="ion-android-navigate"></i>
+				<img src="/imgs/plane.svg" data-pin-nopin="true">
 			</button>
 		</form>
 	</div>

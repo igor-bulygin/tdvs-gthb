@@ -12,6 +12,7 @@
 		"RETURN_CART": "Return to cart",
 		"QUANTITY": "Quantity",
 		"SUBTOTAL": "Subtotal",
+		"TOTAL": "Total",
 		"CONTINUE_SHOPPING": "Continue shopping",
 		"payment_methods": {
 			"PAYMENT_TITLE": "Payment info",
@@ -40,6 +41,9 @@
 			"CART_SUMMARY": "Cart summary",
 			"PROCEED": "Proceed to checkout",
 			"SHIPPING_PRICE": "Shipping price"
+		},
+		"cart_panel": {
+			"GO_TO_CART": "go to cart"
 		}
 	}
 }

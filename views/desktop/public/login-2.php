@@ -26,14 +26,14 @@ $this->title = 'Login';
 				<div class="checkbox checkbox-circle remember-me">
 					<input id="checkbox7" name="remember" ng-model="loginCtrl.user.rememberMe" class="styled" type="checkbox" value="1">
 					<label for="checkbox7" translate="todevise.login.REMEMBER">
-						
+
 					</label>
 				</div>
-			</div>		
+			</div>
 			<div class="alert alert-danger" ng-if="loginCtrl.errors" ng-cloak translate="todevise.login.NOT_VALID"></div>
 			<div class="row">
 				<button type="submit" class="btn-red send-btn" ng-click="loginCtrl.login()">
-					<i class="ion-android-navigate"></i>
+					<img src="/imgs/plane.svg" data-pin-nopin="true">
 				</button>
 			</div>
 		</div>

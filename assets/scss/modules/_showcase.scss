@@ -97,9 +97,13 @@
     		top: 120px;
 			color: $black;
 			left: 80px;
+			z-index: 10;
             i{
                 font-size: 46px;
             }
+			@media (min-width:576px) and (max-width:1199px){
+				left: 0;
+			}
         }
         &.next{
 			position: absolute;
@@ -109,6 +113,9 @@
             i{
                 font-size: 46px;
             }
+			@media (min-width:576px) and (max-width:1199px){
+				right: 0;
+			}
         }
         &:focus{
             color: $black;

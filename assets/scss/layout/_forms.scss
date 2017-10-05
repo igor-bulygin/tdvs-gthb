@@ -1,17 +1,30 @@
 // ==========================================================================
 // Forms
 // ==========================================================================
+label{
+	font-family: $font-family--regular;
+    font-size: 18px;
+	font-weight: normal;
+    text-transform: lowercase;
+    margin: 15px 0 5px 0;
+    &:first-letter{
+    	text-transform: uppercase;
+    }
+}
 .black-form{
     label{
         font-family: $font-family--regular;
         font-size: 18px;
-    	font-weight: 400;
+    	font-weight: normal;//400;
         color: $background_grey;
-        text-transform: uppercase;
-        margin: 15px 0 5px 15px;
+        text-transform: lowercase;//uppercase;
+        margin: 15px 0 5px 0;//15px 0 5px 15px;
         i{
             padding: 0 5px;
             cursor: pointer;
+        }
+        &:first-letter{
+        	text-transform: uppercase;
         }
     }
     .grey-input{
@@ -19,7 +32,7 @@
 		font-weight: bold;
     	color: $background_grey;
     	font-size: 18px;
-    	padding: 0 0 0 30px;
+    	padding: 0 0 0 5px;//0 0 0 30px;
         background-color: rgba(147, 147, 147, 0.5);
         border: 1px solid #585656;
 		height: 48px;
@@ -39,13 +52,20 @@
     }
 }
 .login-title{
-	margin-top: 20px;
-	font-size: 18px;
-	display: block;
-  	font-weight: bold;
+	margin-top: 80px;//20px;
+	font-family: $font-family--name;
+  	font-weight: normal !important;//bold;
+	font-size: 42px !important;//18px;
+	color: $white !important;//$light_grey;
+	letter-spacing: 1.6px;
 	text-transform: uppercase;
-	color: $light_grey;
 	text-align: center;
+	display: block;
+}
+.inverse{
+	.login-title{
+		color:$black !important;
+	}
 }
 .white-rounded-input{
 	margin-bottom: 15px;
@@ -99,8 +119,7 @@ input:-webkit-autofill {
 input:-webkit-autofill:focus {
     -webkit-box-shadow: 0 0 0 50px grey inset;
     -webkit-text-fill-color: white;
-} 
-
+}
 .black-form-select{
 	    width: 100%!important;
 		.btn{
@@ -233,7 +252,4 @@ input:-webkit-autofill:focus {
 }
 textarea{
 	resize: none;
-}
-label{
-    font-weight: normal!important;
 }

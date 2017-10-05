@@ -48,7 +48,9 @@
 			"EMAIL": "Email",
 			"PASSWORD": "Contraseña",
 			"SET_PASSWORD": "Elija una contraseña",
-			"REPEAT_PASSWORD": "Repita la contraseña"
+			"REPEAT_PASSWORD": "Repita la contraseña",
+			"SIGN_IN": "Entrar",
+			"CREATE_AN_ACCOUNT": "Crear una cuenta"
 		}
 	}
 }

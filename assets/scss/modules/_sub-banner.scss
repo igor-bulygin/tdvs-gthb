@@ -8,6 +8,9 @@
         padding-top:40px;
         height: auto;
     }
+    @media (max-width: 576px){
+        display: none;
+    }
     .container-sub-baner{
         .title-wrapper{
             padding:15px 20px 20px;
@@ -43,15 +46,18 @@
                 }
                 &.title-1{
                     margin: 61px 0 0 80px;
-                    @media (min-width:769px) and (max-width:986px){
-                            margin: 61px 0 0 12px;
-                    }
                     @media (max-width: 768px){
                             margin:0;
+                    }
+                    @media (min-width:769px) and (max-width:986px){
+                            margin: 61px 0 0 12px;
                     }
                 }
                 &.title-2{
                      margin: 0 0 0 83px;
+                     @media (min-width:576px) and (max-width:1199px){
+                        margin-left: 50px;
+                    }
                 }
                 .serif{
                     font: italic 700 37px $font-family--serif;
@@ -73,12 +79,15 @@
                     padding: 55px 0 0 145px;
                     letter-spacing: 0.5px;
                     @media (min-width:986px) and (max-width:1199px){
-                        padding: 25px 11px 0 61px;
+                        //padding: 25px 11px 0 61px;
                     }
                 }
                 &.tagline-2{
                     padding: 90px 15px 0 85px;
                     letter-spacing: 0.5px;
+                    @media (min-width:576px) and (max-width:1199px){
+                        padding-left: 50px;
+                    }
                 }
                 &.tagline-3{
                     padding: 41px 26px 0 112px;
