@@ -310,7 +310,7 @@
     font-size: 30px;//24px;
     position: absolute;
     cursor: pointer;
-    top: 11px;
+    top: 0;
     left: 58px;
     background-color: $white;//$black;
     @include size(40px, 40px);
@@ -329,7 +329,7 @@
     position: absolute;
     text-align: center;
     cursor: pointer;
-    top: 12px;
+    top: 0;
     width: 40px;
     border-radius: 24px;
     background-color: $red;

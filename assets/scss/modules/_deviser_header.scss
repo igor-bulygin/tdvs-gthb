@@ -133,6 +133,11 @@
     width: 140px;
     font-weight: bold;
 }
+.header-edit-btns{
+	.btn-header{
+		margin-top: 20px!important;
+	}
+}
 .btn.disabled, .btn[disabled], fieldset[disabled] .btn {
     cursor: not-allowed;
     filter: alpha(opacity=1);
