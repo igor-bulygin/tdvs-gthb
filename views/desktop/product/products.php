@@ -20,9 +20,9 @@ $this->registerJs("var searchParam = '".$text."'", yii\web\View::POS_HEAD, 'prod
 ?>
 
 <style>
-#product-results { width: 930px; margin: 0 auto; column-count: 5; column-gap: 10px; -webkit-column-count: 5; -webkit-column-gap: 10px; -moz-column-count: 5; -moz-column-gap: 10px; }
-.product-result-item { display: inline-block; margin-bottom: 0px; width: 100%; padding: 0 !important; }
-.product-result-item figure, .product-result-item figcaption { padding: 0 !important; }
+#product-results_A { width: 930px; margin: 0 auto; __column-count: 5; __column-gap: 10px; __-webkit-column-count: 5; __-webkit-column-gap: 10px; __-moz-column-count: 5; __-moz-column-gap: 10px; }
+.product-result-item_A { display: inline-block; margin-bottom: 0px; __width: 100%; padding: 0 !important; }
+.product-result-item_A figure, .product-result-item figcaption { padding: 0 !important; }
 </style>
 
 <div ng-controller="exploreProductsCtrl as exploreProductsCtrl" class="results-wrapper">

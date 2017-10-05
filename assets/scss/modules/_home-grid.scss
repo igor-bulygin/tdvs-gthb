@@ -24,6 +24,9 @@
             figcaption{
                 @include transform(translate3d(0,0,0));
                 z-index: 1;
+                @media (min-width:576px) and (max-width:1199px){
+                    display: none;
+                }
             }
             p{
                 &.instauser{
@@ -36,6 +39,9 @@
             }
 			.hover-btns-wrapper{
 				display: block;
+                @media (min-width:576px) and (max-width:1199px){
+                    display: none;
+                }
 			}
         }
         img{
