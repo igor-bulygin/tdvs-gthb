@@ -10,7 +10,12 @@ $this->title = 'Todevise: Login/Sign up';
 
 ?>
 
-<div class="create-deviser-account-wrapper pt-0" ng-controller="authenticationRequiredCtrl as authenticationRequiredCtrl">
+<div class="create-deviser-account-wrapper inverse pt-0" ng-controller="authenticationRequiredCtrl as authenticationRequiredCtrl">
+	<div class="logo">
+		<a class="image-create-account" href="/">
+			<img src="/imgs/logo.svg" data-pin-nopin="true">
+		</a>
+	</div>
 	<div class="text-center" ng-if="authenticationRequiredCtrl.loading" ng-cloak>
 		<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
 		<span class="sr-only" translate="global.LOADING"></span>
@@ -19,7 +24,7 @@ $this->title = 'Todevise: Login/Sign up';
 		<div class="col-md-6">
 			<form name="authenticationRequiredCtrl.loginForm">
 				<span class="login-title" translate="todevise.authentication_required.ALREADY_USER"></span>
-				<div class="create-deviser-account-container black-form">
+				<div class="create-deviser-account-container">
 					<div class="row">
 						<label for="email" translate="global.user.EMAIL"></label>
 						<input type="email" id="email" name="email" ng-model="authenticationRequiredCtrl.login_user.email" class="form-control grey-input" required />
@@ -36,8 +41,8 @@ $this->title = 'Todevise: Login/Sign up';
 					</div>		
 					<div class="alert alert-danger" ng-if="authenticationRequiredCtrl.errors" ng-cloak translate="todevise.authentication_required.NOT_VALID" ></div>
 					<div class="row">
-						<button type="submit" class="btn-red send-btn" ng-click="authenticationRequiredCtrl.login(authenticationRequiredCtrl.loginForm)">
-							<i class="ion-android-navigate"></i>
+						<button type="submit" class="btn full-size-btn btn-red" ng-click="authenticationRequiredCtrl.login(authenticationRequiredCtrl.loginForm)">
+							<span translate="global.user.SIGN_IN"></span>
 						</button>
 					</div>
 				</div>
@@ -46,7 +51,7 @@ $this->title = 'Todevise: Login/Sign up';
 		<div class="col-md-6">
 			<form name="authenticationRequiredCtrl.signForm">
 				<span class="login-title" translate="todevise.authentication_required.NEW_SIGN"></span>
-				<div class="create-deviser-account-container black-form">
+				<div class="create-deviser-account-container">
 					<div class="row">
 						<label for="name" translate="global.user.FIRST_NAME"></label>
 						<input type="text" name="name" ng-model="authenticationRequiredCtrl.user.name" class="form-control grey-input ng-class:{'error-input': authenticationRequiredCtrl.has_error(authenticationRequiredCtrl.signForm, authenticationRequiredCtrl.signForm.name)}" required>
@@ -75,8 +80,8 @@ $this->title = 'Todevise: Login/Sign up';
 						</div>
 					</div>
 					<div class="row">
-						<button type="submit" class="btn-red send-btn" ng-click="authenticationRequiredCtrl.signUp(authenticationRequiredCtrl.signForm)">
-							<i class="ion-android-navigate"></i>
+						<button type="submit" class="btn full-size-btn btn-red" ng-click="authenticationRequiredCtrl.signUp(authenticationRequiredCtrl.signForm)">
+							<span translate="global.user.CREATE_AN_ACCOUNT"></span>
 						</button>
 					</div>
 				</div>

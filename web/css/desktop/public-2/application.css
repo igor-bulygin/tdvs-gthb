@@ -6207,6 +6207,8 @@ span.optional-text.pull-left {
   width: 100%; }
   .create-deviser-account-wrapper.inverse {
     background-color: #ffffff; }
+    .create-deviser-account-wrapper.inverse .logo img {
+      margin: 30px auto; }
     .create-deviser-account-wrapper.inverse > div:nth-child(2) > div:nth-child(1) form {
       float: right;
       margin-right: 100px; }
@@ -6223,10 +6225,7 @@ span.optional-text.pull-left {
     margin: 0 auto; }
   .create-deviser-account-wrapper .create-deviser-account-container {
     max-width: 340px;
-    margin: 60px auto 0;
-    /*.send-btn{
-        margin-top: 40px !important;
-    }*/ }
+    margin: 60px auto 0; }
     .create-deviser-account-wrapper .create-deviser-account-container ::-webkit-input-placeholder {
       color: #bfbfbf;
       font-size: 12px; }
@@ -6241,6 +6240,8 @@ span.optional-text.pull-left {
     .create-deviser-account-wrapper .create-deviser-account-container :-ms-input-placeholder {
       color: #bfbfbf;
       font-size: 12px; }
+    .create-deviser-account-wrapper .create-deviser-account-container .send-btn {
+      margin-top: 40px !important; }
     .create-deviser-account-wrapper .create-deviser-account-container .full-size-btn {
       margin-top: 40px !important; }
 

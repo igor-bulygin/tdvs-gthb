@@ -8,6 +8,11 @@
     width: 100%;
     &.inverse{
         background-color: $white;
+        .logo {
+            img{
+                margin: 30px auto;
+            }
+        }
         //div:first-child {
         > div:nth-child(2) {
             > div:nth-child(1){
@@ -55,9 +60,9 @@
             color: $light_grey;  
             font-size: 12px;
         }
-        /*.send-btn{
+        .send-btn{
             margin-top: 40px !important;
-        }*/
+        }
         .full-size-btn{
             margin-top: 40px !important;   
         }
