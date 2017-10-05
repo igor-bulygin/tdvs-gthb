@@ -41,6 +41,7 @@
 			"CHARACTERS_LEFT": "caracteres restantes",
 			"DESCRIBE_BRAND": "Describe tu marca en 140 caracteres",
 			"DESCRIBE_BIO": "Describe tu biografía en 140 caracteres",
+			"DESCRIBE_ABOUT": "Cuéntales a tus clientes más sobre tu marca y su filosofía.",
 			"ABOUT": "About",
 			"UPLOAD_PROFILE_PHOTO": "Añadir foto de perfil",
 			"PLS_UPLOAD_PROFILE": "Por favor añade<br/>una foto de perfil",
