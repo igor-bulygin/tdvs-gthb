@@ -96,10 +96,10 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 				</div>
 				<!-- tooltip -->
 				<?php if($person->isDeviser()) {?>
-					<i class="info-black-areas ion-information-circled" aria-hidden="true" translate-attr="{'uib-popover': 'person.complete_profile.DESCRIBE_BRAND'}"></i>
+					<i class="info-black-areas ion-information-circled" aria-hidden="true" uib-popover="{{'person.complete_profile.DESCRIBE_BRAND' | translate}}"></i>
 				<?php } ?>
 				<?php if($person->isInfluencer()) {?>
-					<i class="info-black-areas ion-information-circled" aria-hidden="true" translate-attr="{'uib-popover': 'person.complete_profile.DESCRIBE_BIO'}"></i>
+					<i class="info-black-areas ion-information-circled" aria-hidden="true" uib-popover="{{'person.complete_profile.DESCRIBE_BIO' | translate}}"></i>
 				<?php } ?>
 				</div>
 			</div>
@@ -116,7 +116,7 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 					</li>
 				</ol>
 				<!-- tooltip -->
-				<i class="info-black-areas ion-information-circled" aria-hidden="true" uib-popover="Tell your customers more about your brand and its philosophy."></i>
+				<i class="info-black-areas ion-information-circled" aria-hidden="true" uib-popover="{{'person.complete_profile.DESCRIBE_ABOUT' | translate}}"></i>
 				</div>
 			</div>
 			<?php } ?>

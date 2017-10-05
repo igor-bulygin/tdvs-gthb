@@ -41,6 +41,7 @@
 			"CHARACTERS_LEFT": "Characters left",
 			"DESCRIBE_BRAND": "Describe your brand in 140 characters",
 			"DESCRIBE_BIO": "Describe your bio in 140 characters",
+			"DESCRIBE_ABOUT": "Tell your customers more about your brand and its philosophy.",
 			"ABOUT": "About",
 			"UPLOAD_PROFILE_PHOTO": "Upload profile photo",
 			"PLS_UPLOAD_PROFILE": "Please upload a<br/>profile photo",
