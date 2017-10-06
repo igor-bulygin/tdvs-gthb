@@ -644,3 +644,19 @@ footer .social-items{
 	    line-height: 55px;
 	}
 }
+.btn-change-password{
+	background-color: transparent;
+    border: 1px solid $black;
+    color: $black;
+	text-transform: uppercase;
+    padding: 0px 10px 0 10px;
+    height: 34px;
+    margin-top: 32px;
+	&:hover{
+		background-color:$black;
+        color: $white;
+		.box-icon{
+			background: url('/imgs/box-white.svg') no-repeat;
+		}
+    }
+}

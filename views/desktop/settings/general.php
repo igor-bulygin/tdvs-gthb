@@ -26,91 +26,122 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 		<uib-accordion>
 			<div uib-accordion-group class="panel-default panel-billing" heading="{{ 'settings.general.PERSONAL_INFORMATION' | translate }}" is-open="true" ng-cloak>
 				<form name="generalSettingsCtrl.dataForm" class="form-horizontal" >
-					<div ng-hide="generalSettingsCtrl.saving">
-						<div class="form-group">
+					<div class="col-md-12 no-pad">
+						<div class="col-md-6 no-pad">
 							<div ng-if="generalSettingsCtrl.isDeviser">
-								<label for="brand_name" class="col-md-2" translate="settings.general.BRAND"></label>
-								<div class="col-md-4 text-right">
+								<div>
+									<label for="brand_name" translate="settings.general.BRAND"></label>
 									<input type="text" name="brand_name" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.brand_name" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.brand_name)}"><!--only devisers -->
 									<span class="purple-text" ng-if="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.brand_name)" translate="settings.FILL_FIELD"></span>
 								</div>
 							</div>
-							<label for="vat_id" class="col-md-2" translate="settings.general.IDENTIFIER"></label>
-							<div class="col-md-4 text-right">
-								<input type="text" name="vat_id" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.vat_id" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.vat_id)}">
-								<span class="purple-text" ng-if="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.vat_id)" translate="settings.FILL_FIELD"></span>
-							</div>
-						</div>
-						<div class="form-group">
-							<div class=col-xs-2>
-								<label for="representative_name" translate="settings.general.REPRESENTATIVE_NAME"></label>
-								<span class="col-xs-12 text-red" translate="global.OPTIONAL"></span>
-							</div>
-							<div class="col-md-2">
-								<input type="text" name="name" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.name" placeholder="{{ 'global.user.FIRST_NAME' | translate }}">
-							</div>
-							<div class="col-md-2 text-right">
-								<input type="text" name="last_name" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.last_name" placeholder="{{ 'global.user.LAST_NAME' | translate }}">
-							</div>
-							<label for="city" class="col-md-2" ng-class="{'col-md-offset-6': !generalSettingsCtrl.isDeviser}"><span translate="global.user.CITY"></span></label>
-							<div class="col-md-4 text-right">
-								<input type="text" name="city" class="form-control" ng-model="generalSettingsCtrl.city" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.city)}" ng-model-options='{ debounce: 80 }' ng-change="generalSettingsCtrl.searchPlace(generalSettingsCtrl.city)">
-								<div ng-if="generalSettingsCtrl.showCities" ng-cloak>
-									<ul class="city-selection">
-										<li ng-repeat="city in generalSettingsCtrl.cities">
-											<span ng-click="generalSettingsCtrl.selectCity(city)" style="cursor:pointer;">{{city.city}} - {{city.country_name}}</span>
-										</li>
-										<li>
-											<img class="powered-google" src="/imgs/powered_by_google_on_white_hdpi.png">
-										</li>
-									</ul>
+							<div class="mt-20">
+								<div class="col-md-8 no-pad">
+									<div class="col-md-12 no-pad">
+										<label for="representative_name" translate="settings.general.REPRESENTATIVE_NAME"></label>
+										<span class="optional-input" translate="global.OPTIONAL"></span>
+									</div>
+									<div>
+										<div class="col-xs-6 no-pad">
+											<input class="form-control"  type="text" name="name" ng-model="generalSettingsCtrl.person.personal_info.name" placeholder="{{ 'global.user.FIRST_NAME' | translate }}">
+										</div>
+										<div class="col-xs-6 responsive-pad-right-0">
+											<input class="form-control" type="text" name="last_name" ng-model="generalSettingsCtrl.person.personal_info.last_name" placeholder="{{ 'global.user.LAST_NAME' | translate }}">
+										</div>
+									</div>
 								</div>
-								<span class="purple-text" ng-if="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.city)" translate="settings.FILL_FIELD"></span>
+								<div class="col-md-4 identifier-pad">
+									<label for="vat_id" translate="settings.general.IDENTIFIER"></label>
+									<input type="text" name="vat_id" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.vat_id" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.vat_id)}">
+									<span class="purple-text" ng-if="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.vat_id)" translate="settings.FILL_FIELD"></span>
+								</div>
+							</div>
+							
+							<div class="blockify mt-20">
+								<div class="col-md-6 no-pad">
+									<div class="col-md-12 no-pad">
+										<label for="phone"><span translate="global.user.PHONE"></span></label>
+									</div>
+									<div class="col-md-12 no-pad">
+										<div class="col-xs-4 no-pad">
+											<input type="tel" name="phone_prefix" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.phone_number_prefix" ng-class="{'error-input': generalSettingsCtrl.invalidPrefix }" ng-change="generalSettingsCtrl.setPrefix()">
+										</div>
+										<div class="col-xs-8 text-right responsive-pad-right-0">
+											<input type="tel" name="phone" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.phone_number" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.phone_number)}">
+											<span class="purple-text" ng-if="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.phone_number)" translate="settings.FILL_FIELD"></span>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-6 no-pad">
+									<div>
+										<label for="address"><span translate="global.user.ADDRESS"></span></label>
+										<input type="text" name="address" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.address" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.address)}">
+										<span class="purple-text" ng-if="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.address)" translate="settings.FILL_FIELD"></span>
+									</div>
+								</div>
+							</div>
+							<div class="blockify mt-20">
+								<div class="col-md-6 no-pad-left responsive-pad-right-0">
+									<div>
+										<label for="city" ng-class="{'col-md-offset-6': !generalSettingsCtrl.isDeviser}"><span translate="global.user.CITY"></span></label>
+										<input type="text" name="city" class="form-control" ng-model="generalSettingsCtrl.city" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.city)}" ng-model-options='{ debounce: 80 }' ng-change="generalSettingsCtrl.searchPlace(generalSettingsCtrl.city)">
+										<div ng-if="generalSettingsCtrl.showCities" ng-cloak>
+											<ul class="city-selection">
+												<li ng-repeat="city in generalSettingsCtrl.cities">
+													<span ng-click="generalSettingsCtrl.selectCity(city)" style="cursor:pointer;">{{city.city}} - {{city.country_name}}</span>
+												</li>
+												<li>
+													<img class="powered-google" src="/imgs/powered_by_google_on_white_hdpi.png">
+												</li>
+											</ul>
+										</div>
+										<span class="purple-text" ng-if="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.city)" translate="settings.FILL_FIELD"></span>
+									</div>
+								</div>
+								<div class="col-md-6 no-pad">
+									<div>
+										<label for="zip"><span translate="global.user.ZIP"></span></label>
+										<input type="text" name="zip" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.zip" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.zip)}">
+										<span class="purple-text" ng-if="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.zip)" translate="settings.FILL_FIELD"></span>
+									</div>
+								</div>
 							</div>
 						</div>
-						<div class="form-group">
-							<label for="phone" class="col-md-2"><span translate="global.user.PHONE"></span></label>
-							<div class="col-md-1 text-right">
-								<input type="tel" name="phone_prefix" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.phone_number_prefix" ng-class="{'error-input': generalSettingsCtrl.invalidPrefix }" ng-change="generalSettingsCtrl.setPrefix()">
+						<div class="col-md-6 settings-right-side">
+							<div class="col-md-12 no-pad">
+								<div class="col-xs-6 no-pad">
+									<div>
+										<label for="password"><span translate="global.user.PASSWORD"></span></label>
+										<input type="password" name="password" class="form-control" placeholder="*********" disabled>
+									</div>
+								</div>
+								<div class="col-xs-6">
+									<div>
+										<a href="#" class="btn btn-change-password" ng-click="generalSettingsCtrl.openModal()"><span translate="settings.general.CHANGE_PASSWORD"></span></a>
+									</div>
+								</div>
 							</div>
-							<div class="col-md-3 text-right">
-								<input type="tel" name="phone" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.phone_number" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.phone_number)}">
-								<span class="purple-text" ng-if="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.phone_number)" translate="settings.FILL_FIELD"></span>
-							</div>
-							<label for="address" class="col-md-2"><span translate="global.user.ADDRESS"></span></label>
-							<div class="col-md-4 text-right">
-								<input type="text" name="address" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.address" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.address)}">
-								<span class="purple-text" ng-if="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.address)" translate="settings.FILL_FIELD"></span>
+							<div class="col-md-12 no-pad blockify mt-20">
+								<div class="col-md-6 no-pad">
+									<div>
+										<label for="weight_measure"><span translate="settings.general.WEIGHT_MEASURE"></span></label>
+										<ol name="weightMeasure" class="nya-bs-select btn-group bootstrap-select form-control product-select" ng-model="generalSettingsCtrl.person.settings.weight_measure" ng-class="{'error-input': generalSettingsCtrl.notWeightMeasureSelected}" ng-change="generalSettingsCtrl.notWeightMeasureSelected=false" ng-show="generalSettingsCtrl.weightCharged">
+											<li nya-bs-option="weightMeasure in generalSettingsCtrl.weightMeasures">
+												<a href="#"><span ng-bind="weightMeasure"></span></a>
+											</li>
+										</ol>
+										<span class="purple-text col-xs-12" ng-if="generalSettingsCtrl.showInvalid && generalSettingsCtrl.notWeightMeasureSelected" translate="settings.general.SELECT_MEASUREMENT"></span>
+									</div>
+								</div>
+								<div class="col-md-6">
+								</div>
 							</div>
 						</div>
-						<div class="form-group">
-							<label for="password" class="col-md-2"><span translate="global.user.PASSWORD"></span></label>
-							<div class="col-md-2 text-right">
-								<input type="password" name="password" class="form-control" placeholder="*********" disabled>
-							</div>
-							<div class="col-md-2">
-								<a href="#" class="red-text" ng-click="generalSettingsCtrl.openModal()"><span translate="settings.general.CHANGE_PASSWORD"></span><span class="glyphicon glyphicon-refresh"></span></a>
-							</div>
-							<label for="zip" class="col-md-2"><span translate="global.user.ZIP"></span></label>
-							<div class="col-md-4 text-right">
-								<input type="text" name="zip" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.zip" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.zip)}">
-								<span class="purple-text" ng-if="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.zip)" translate="settings.FILL_FIELD"></span>
-							</div>
-						</div>
-						<div class="form-group">
-						<label for="weight_measure" class="col-md-2"><span translate="settings.general.WEIGHT_MEASURE"></span></label>
-							<div class="col-md-4" >
-								<ol name="weightMeasure" class="nya-bs-select btn-group bootstrap-select form-control product-select" ng-model="generalSettingsCtrl.person.settings.weight_measure" ng-class="{'error-input': generalSettingsCtrl.notWeightMeasureSelected}" ng-change="generalSettingsCtrl.notWeightMeasureSelected=false" ng-show="generalSettingsCtrl.weightCharged">
-									<li nya-bs-option="weightMeasure in generalSettingsCtrl.weightMeasures">
-										<a href="#"><span ng-bind="weightMeasure"></span></a>
-									</li>
-								</ol>
-								<span class="purple-text col-xs-12" ng-if="generalSettingsCtrl.showInvalid && generalSettingsCtrl.notWeightMeasureSelected" translate="settings.general.SELECT_MEASUREMENT"></span>
-							</div>
-							<div class="col-md-6 text-right">
-								<button class="btn btn-small btn-red pull-right" ng-click="generalSettingsCtrl.update()" ng-disabled="generalSettingsCtrl.saving" translate="global.SAVE"></button>
-								<span class="purple-text col-xs-12" ng-if="generalSettingsCtrl.showInvalid" translate="settings.FILL_ALL_FIELDS"></span>
-							</div>
+					</div>
+					<div ng-hide="generalSettingsCtrl.saving">
+						<div class="col-md-12 mt-40">
+							<button class="btn btn-small btn-red auto-center" ng-click="generalSettingsCtrl.update()" ng-disabled="generalSettingsCtrl.saving" translate="global.SAVE"></button>
+							<span class="purple-text col-xs-12" ng-if="generalSettingsCtrl.showInvalid" translate="settings.FILL_ALL_FIELDS"></span>
 						</div>
 						<div class="col-xs-12 text-center" ng-if="generalSettingsCtrl.saved&&!generalSettingsCtrl.dataForm.$dirty">
 							<span translate="settings.general.CHANGES_SAVED"><i class="ion-checkmark text-red"></i></span>

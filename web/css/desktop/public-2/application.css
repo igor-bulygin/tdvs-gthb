@@ -485,6 +485,10 @@ a, a:hover, a:focus {
 .text-center {
   text-align: center; }
 
+.blockify {
+  width: 100%;
+  float: left; }
+
 .relativize-me {
   position: relative; }
 
@@ -556,6 +560,9 @@ a, a:hover, a:focus {
 
 .no-pad {
   padding: 0 !important; }
+
+.no-pad-left {
+  padding-left: 0 !important; }
 
 .box-icon {
   background: url("/imgs/box-black.svg") no-repeat; }
@@ -1084,6 +1091,20 @@ footer .social-items li a {
   #go_to_footer i {
     margin: 0;
     line-height: 55px; }
+
+.btn-change-password {
+  background-color: transparent;
+  border: 1px solid #1C1919;
+  color: #1C1919;
+  text-transform: uppercase;
+  padding: 0px 10px 0 10px;
+  height: 34px;
+  margin-top: 32px; }
+  .btn-change-password:hover {
+    background-color: #1C1919;
+    color: #ffffff; }
+    .btn-change-password:hover .box-icon {
+      background: url("/imgs/box-white.svg") no-repeat; }
 
 .products-menu ul {
   margin: 20px 0 40px;
@@ -2226,9 +2247,26 @@ h3 {
 .bank-settings-wrapper label {
   margin-top: 7px;
   color: #1C1919;
-  font-size: 12px;
-  font-weight: bold;
-  text-transform: uppercase; }
+  font-size: 14px; }
+
+.identifier-pad {
+  padding: 0 0 0 40px; }
+  @media (max-width: 991px) {
+    .identifier-pad {
+      padding: 0; } }
+
+.settings-right-side {
+  padding: 170px 0 0 60px !important; }
+  @media (max-width: 991px) {
+    .settings-right-side {
+      display: block;
+      padding: 0 0 40px 0 !important;
+      width: 100%;
+      float: left; } }
+
+@media (max-width: 991px) {
+  .responsive-pad-right-0 {
+    padding-right: 0 !important; } }
 
 .site-error {
   background-color: #ffffff; }
