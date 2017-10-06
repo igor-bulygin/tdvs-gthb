@@ -12,7 +12,6 @@ use app\models\Product;
 use Yii;
 use yii\filters\AccessControl;
 use yii\mongodb\Collection;
-use yii\web\BadRequestHttpException;
 use yii\web\HttpException;
 use yii\web\NotFoundHttpException;
 use yii\web\UnauthorizedHttpException;
@@ -198,7 +197,7 @@ class ProductController extends CController
 		$product = Product::findOneSerialized($product_id);
 
 		if (!$product) {
-			throw new BadRequestHttpException("Not found");
+			throw new NotFoundHttpException();
 		}
 
 		$this->layout = '/desktop/public-2.php';

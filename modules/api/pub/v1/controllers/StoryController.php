@@ -21,7 +21,7 @@ class StoryController extends AppPublicController
 		}
 
 		if ($story->story_state != Story::STORY_STATE_ACTIVE) {
-			throw new BadRequestHttpException();
+			throw new BadRequestHttpException("The story is no active");
 		}
 
 		Yii::$app->response->setStatusCode(200); // Ok
