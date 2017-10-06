@@ -72,6 +72,8 @@ class CartController extends AppPublicController
 			throw new ConflictHttpException("This order is in an invalid state");
 		}
 
+		$cart->checkOwnerAndTryToAssociate();
+
 		if (!$cart->isEditable()) {
 			throw new UnauthorizedHttpException("You have no access to this order");
 		}
@@ -109,6 +111,8 @@ class CartController extends AppPublicController
 			throw new ConflictHttpException("This order is in an invalid state");
 		}
 
+		$cart->checkOwnerAndTryToAssociate();
+
 		if (!$cart->isEditable()) {
 			throw new UnauthorizedHttpException("You have no access to this order");
 		}
@@ -134,6 +138,8 @@ class CartController extends AppPublicController
 		if (!$cart->isCart()) {
 			throw new ConflictHttpException("This order is in an invalid state");
 		}
+
+		$cart->checkOwnerAndTryToAssociate();
 
 		if (!$cart->isEditable()) {
 			throw new UnauthorizedHttpException("You have no access to this order");
