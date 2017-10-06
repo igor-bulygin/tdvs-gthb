@@ -2009,4 +2009,23 @@ class Person extends CActiveRecord implements IdentityInterface
 
 		return null;
 	}
+
+	/**
+	 * Returns the application fee to be charged to the user in his sales.
+	 * Its a double number in 100base, for example returns 0.145 to represent a 14.5% percentaje
+	 *
+	 * @return double
+	 */
+	public function getSalesApplicationFee()
+	{
+		$todeviseFee = Yii::$app->params['default_todevise_fee'];
+
+		if ($this->personalInfoMapping->country == 'ES') {
+			$fee = $todeviseFee * (1 + Yii::$app->params['default_spain_vat']);
+		} else {
+			$fee = $todeviseFee;
+		}
+
+		return $fee;
+	}
 }
