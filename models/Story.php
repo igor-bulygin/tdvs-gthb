@@ -136,7 +136,7 @@ class Story extends CActiveRecord
 		}
 		$this->setAttribute("slug", $slugs);
 
-		if (empty($this->created_at)) {
+		if ($insert) {
 			$this->created_at = new MongoDate();
 		}
 		$this->updated_at = new MongoDate();

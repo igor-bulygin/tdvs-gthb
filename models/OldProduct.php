@@ -129,7 +129,7 @@ class OldProduct extends CActiveRecord {
 
 	public function beforeSave($insert) {
 
-		if (empty($this->created_at)) {
+		if ($insert) {
 			$this->created_at = new MongoDate();
 		}
 		$this->updated_at = new MongoDate();

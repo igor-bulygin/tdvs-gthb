@@ -225,11 +225,10 @@ class PostmanEmail extends CActiveRecord
 	 */
 	public function beforeSave($insert)
 	{
-		$now = new MongoDate();
-		if (empty($this->created_at)) {
-			$this->created_at = $now;
+		if ($insert) {
+			$this->created_at = new MongoDate();
 		}
-		$this->updated_at = $now;
+		$this->updated_at = new MongoDate();
 
 		return parent::beforeSave($insert);
 	}

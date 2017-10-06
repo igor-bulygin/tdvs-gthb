@@ -238,7 +238,7 @@ class Product extends CActiveRecord {
 			if (isset($this->name[$lang])) {
 				$slugs[$lang] = Slugger::slugify($this->name[$lang]);
 			} elseif (isset($this->name[Lang::EN_US])) {
-				 // By default english
+				// By default english
 				$slugs[$lang] = Slugger::slugify($this->name[Lang::EN_US]);
 			}
 		}
@@ -256,7 +256,7 @@ class Product extends CActiveRecord {
 			$this->boxes = 0;
 		}
 
-		if (empty($this->created_at)) {
+		if ($insert) {
 			$this->created_at = new MongoDate();
 		}
 		$this->updated_at = new MongoDate();
