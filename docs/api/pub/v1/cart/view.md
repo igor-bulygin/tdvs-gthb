@@ -8,8 +8,10 @@ Example about how to call to Web Service to get the cart
 
 **Response codes**:
 * `200`: Success
-* `400`: Bad request
+* `400`: Bad request: syntax or validation error
+* `401`: Unauthorized: trying to access to a cart of other user
 * `404`: Not found
+* `409`: Conflict: order is in an invalid state
 
 **Request parameters**:
 * `:cartId`: Id of the cart that want to get

@@ -8,6 +8,7 @@ use app\models\OrderProduct;
 use Stripe\Stripe;
 use Yii;
 use yii\web\BadRequestHttpException;
+use yii\web\ConflictHttpException;
 use yii\web\NotFoundHttpException;
 use yii\web\UnauthorizedHttpException;
 
@@ -42,7 +43,11 @@ class CartController extends AppPublicController
 		}
 
 		if (!$cart->isCart()) {
-			throw new BadRequestHttpException("This order is in an invalid state");
+			throw new ConflictHttpException("This order is in an invalid state");
+		}
+
+		if (!$cart->isEditable()) {
+			throw new UnauthorizedHttpException("You have no access to this order");
 		}
 
 		$cart->checkOwnerAndTryToAssociate();
@@ -64,7 +69,7 @@ class CartController extends AppPublicController
 		}
 
 		if (!$cart->isCart()) {
-			throw new BadRequestHttpException("This order is in an invalid state");
+			throw new ConflictHttpException("This order is in an invalid state");
 		}
 
 		if (!$cart->isEditable()) {
@@ -101,7 +106,7 @@ class CartController extends AppPublicController
 		}
 
 		if (!$cart->isCart()) {
-			throw new BadRequestHttpException("This order is in an invalid state");
+			throw new ConflictHttpException("This order is in an invalid state");
 		}
 
 		if (!$cart->isEditable()) {
@@ -127,7 +132,7 @@ class CartController extends AppPublicController
 		}
 
 		if (!$cart->isCart()) {
-			throw new BadRequestHttpException("This order is in an invalid state");
+			throw new ConflictHttpException("This order is in an invalid state");
 		}
 
 		if (!$cart->isEditable()) {
@@ -214,7 +219,7 @@ class CartController extends AppPublicController
 		}
 
 		if (!$order->isCart()) {
-			throw new BadRequestHttpException("This order is in an invalid state");
+			throw new ConflictHttpException("This order is in an invalid state");
 		}
 
 		if (!$order->isEditable()) {
@@ -267,7 +272,7 @@ class CartController extends AppPublicController
 		}
 
 		if (!$order->isCart()) {
-			throw new BadRequestHttpException("This order is in an invalid state");
+			throw new ConflictHttpException("This order is in an invalid state");
 		}
 
 		try {

@@ -8,8 +8,6 @@ Example about how to call to Web Service to create a new cart
 
 **Response codes**:
 * `201`: Created
-* `400`: Bad request
-* `403`: Not allowed
 
 **Request body**:
 
