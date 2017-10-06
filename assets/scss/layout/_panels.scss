@@ -19,8 +19,12 @@
 	label{
 		margin-top: 7px;
 		color: $black;
-		font-size: 12px;
-		font-weight: bold;
-		text-transform: uppercase;
+		font-size: 14px;
 	}
+}
+.identifier-pad{
+	padding:0 0 0 40px;
+}
+.settings-right-side{
+	padding: 170px 0 0 60px!important;
 }

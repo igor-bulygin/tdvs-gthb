@@ -8,6 +8,10 @@
 .text-center{
 	text-align: center;
 }
+.blockify{
+	width: 100%;
+	float: left;
+}
 .relativize-me{
 	position: relative;
 }
@@ -79,4 +83,7 @@
 }
 .no-pad{
 	padding:0!important;
+}
+.no-pad-left{
+	padding-left:0!important;
 }
