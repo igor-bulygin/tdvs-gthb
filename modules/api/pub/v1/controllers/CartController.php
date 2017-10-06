@@ -194,7 +194,7 @@ class CartController extends AppPublicController
 			$person->personalInfoMapping->phone_number = $shipping->phone_number;
 
 			$person->setAttribute('personal_info', $person->personalInfoMapping);
-			$person->save();
+			$person->save(true, ['personal_info']);
 
 			Yii::$app->response->setStatusCode(200); // Ok
 

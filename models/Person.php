@@ -423,7 +423,7 @@ class Person extends CActiveRecord implements IdentityInterface
 			$this->account_state = Person::ACCOUNT_STATE_DRAFT;
 		}
 
-		if (empty($this->created_at)) {
+		if ($insert) {
 			$this->created_at = new MongoDate();
 		}
 		$this->updated_at = new MongoDate();
