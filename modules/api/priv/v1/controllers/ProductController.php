@@ -6,6 +6,7 @@ use app\models\Product;
 use Yii;
 use yii\web\BadRequestHttpException;
 use yii\web\MethodNotAllowedHttpException;
+use yii\web\NotFoundHttpException;
 
 class ProductController extends AppPrivateController
 {
@@ -76,7 +77,7 @@ class ProductController extends AppPrivateController
 		/** @var Product $product */
 		$product = Product::findOneSerialized($id);
 		if (!$product) {
-			throw new BadRequestHttpException('Product not found');
+			throw new NotFoundHttpException('Product not found');
 		}
 
 		$newProductState = Yii::$app->request->post('product_state', $product->product_state);
@@ -104,7 +105,7 @@ class ProductController extends AppPrivateController
 		/** @var Product $product */
 		$product = Product::findOneSerialized($id);
 		if (!$product) {
-			throw new BadRequestHttpException('Product not found');
+			throw new NotFoundHttpException('Product not found');
 		}
 
 		if ($product->hasOrders()) {

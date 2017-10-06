@@ -5,7 +5,6 @@ namespace app\modules\api\pub\v1\controllers;
 use app\models\Order;
 use app\models\Story;
 use Yii;
-use yii\web\BadRequestHttpException;
 use yii\web\NotFoundHttpException;
 
 class StoryController extends AppPublicController
@@ -21,7 +20,7 @@ class StoryController extends AppPublicController
 		}
 
 		if ($story->story_state != Story::STORY_STATE_ACTIVE) {
-			throw new BadRequestHttpException();
+			throw new NotFoundHttpException("The story is no active");
 		}
 
 		Yii::$app->response->setStatusCode(200); // Ok

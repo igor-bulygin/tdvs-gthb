@@ -15,7 +15,7 @@ return [
 	'instagram_secret_key' => !YII_ENV_PROD  ? 'f25dcb37b4594b61a5c50de7c42c3906' : 'secret_prod',
 
 	'default_todevise_fee' => 0.145,
-	'default_todevise_fee_spain' => 0.355,
+	'default_spain_vat' => 0.21,
 	'admin_email' => 'info@todevise.com',
 	'from_email' => 'info@todevise.com',
 ];

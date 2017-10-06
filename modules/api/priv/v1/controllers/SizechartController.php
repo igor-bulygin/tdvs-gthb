@@ -5,7 +5,7 @@ namespace app\modules\api\priv\v1\controllers;
 use app\models\Person;
 use app\models\SizeChart;
 use Yii;
-use yii\web\BadRequestHttpException;
+use yii\web\NotFoundHttpException;
 use yii\web\UnauthorizedHttpException;
 
 
@@ -73,7 +73,7 @@ class SizechartController extends AppPrivateController {
 		/** @var SizeChart $sizeChart */
 		$sizeChart = SizeChart::findOneSerialized($sizechartId);
 		if (!$sizeChart) {
-			throw new BadRequestHttpException('SizeChart not found');
+			throw new NotFoundHttpException('SizeChart not found');
 		}
 
 		if ($sizeChart->load(Yii::$app->request->post(), '') && $sizeChart->validate()) {

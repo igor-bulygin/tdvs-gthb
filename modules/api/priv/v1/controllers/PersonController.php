@@ -8,6 +8,7 @@ use app\models\Person;
 use Yii;
 use yii\base\Exception;
 use yii\web\BadRequestHttpException;
+use yii\web\ConflictHttpException;
 use yii\web\NotFoundHttpException;
 use yii\web\UnauthorizedHttpException;
 
@@ -120,7 +121,7 @@ class PersonController extends AppPrivateController
 		}
 
 		if (!$order->isOrder()) {
-			throw new BadRequestHttpException("This order has an invalid state");
+			throw new ConflictHttpException("This order has an invalid state");
 		}
 
 		$order->setSubDocumentsForSerialize();
@@ -250,7 +251,7 @@ class PersonController extends AppPrivateController
 		$order = $orders[0];
 
 		if (!$order->isOrder()) {
-			throw new BadRequestHttpException("This order has an invalid state");
+			throw new ConflictHttpException("This order has an invalid state");
 		}
 
 		$order->setPackState($packId, OrderPack::PACK_STATE_AWARE);
@@ -290,7 +291,7 @@ class PersonController extends AppPrivateController
 		$order = $orders[0];
 
 		if (!$order->isOrder()) {
-			throw new BadRequestHttpException("This order has an invalid state");
+			throw new ConflictHttpException("This order has an invalid state");
 		}
 
 		$order->setPackShippingInfo($packId, Yii::$app->request->post());

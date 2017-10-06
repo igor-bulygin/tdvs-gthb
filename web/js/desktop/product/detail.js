@@ -281,9 +281,18 @@
 				vm.showCartPanel=true;
 			}
 			function onSaveProductError(err) {
-				//if cart doesn't exist
-				if(err.status === 404) {
-					cartDataService.createCart(onCreateCartSuccess, onCreateCartError);
+				switch (err.status) {
+					//not my cart
+					case 401:
+					//cart doesn't exist
+					case 404:
+					//cart not valid
+					case 409:
+						cartDataService.createCart(onCreateCartSuccess, onCreateCartError);
+						break;
+					default:
+						console.log(err);
+						break;
 				}
 			}
 			cartDataService.addProduct({
