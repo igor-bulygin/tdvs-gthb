@@ -7,8 +7,8 @@ use Exception;
 use MongoDate;
 use yii\mongodb\ActiveQuery;
 use yii\web\BadRequestHttpException;
-use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
+use yii\web\UnauthorizedHttpException;
 
 /**
  * @property string short_id
@@ -667,11 +667,11 @@ class Order extends CActiveRecord {
 				$this->save();
 
 			} elseif ($this->person_id != $person->short_id) {
-				throw new ForbiddenHttpException();
+				throw new UnauthorizedHttpException();
 			}
 		} else {
 			if (!empty($this->person_id)) {
-				throw new ForbiddenHttpException();
+				throw new UnauthorizedHttpException();
 			}
 		}
 	}
