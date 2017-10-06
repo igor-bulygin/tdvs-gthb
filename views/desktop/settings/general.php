@@ -42,10 +42,10 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 										<span class="optional-input" translate="global.OPTIONAL"></span>
 									</div>
 									<div>
-										<div class="col-md-6 no-pad">
+										<div class="col-xs-6 no-pad">
 											<input class="form-control"  type="text" name="name" ng-model="generalSettingsCtrl.person.personal_info.name" placeholder="{{ 'global.user.FIRST_NAME' | translate }}">
 										</div>
-										<div class="col-md-6">
+										<div class="col-xs-6 responsive-pad-right-0">
 											<input class="form-control" type="text" name="last_name" ng-model="generalSettingsCtrl.person.personal_info.last_name" placeholder="{{ 'global.user.LAST_NAME' | translate }}">
 										</div>
 									</div>
@@ -63,10 +63,10 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 										<label for="phone"><span translate="global.user.PHONE"></span></label>
 									</div>
 									<div class="col-md-12 no-pad">
-										<div class="col-md-4 no-pad">
+										<div class="col-xs-4 no-pad">
 											<input type="tel" name="phone_prefix" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.phone_number_prefix" ng-class="{'error-input': generalSettingsCtrl.invalidPrefix }" ng-change="generalSettingsCtrl.setPrefix()">
 										</div>
-										<div class="col-md-8 text-right">
+										<div class="col-xs-8 text-right responsive-pad-right-0">
 											<input type="tel" name="phone" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.phone_number" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.phone_number)}">
 											<span class="purple-text" ng-if="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.phone_number)" translate="settings.FILL_FIELD"></span>
 										</div>
@@ -81,7 +81,7 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 								</div>
 							</div>
 							<div class="blockify mt-20">
-								<div class="col-md-6 no-pad-left">
+								<div class="col-md-6 no-pad-left responsive-pad-right-0">
 									<div>
 										<label for="city" ng-class="{'col-md-offset-6': !generalSettingsCtrl.isDeviser}"><span translate="global.user.CITY"></span></label>
 										<input type="text" name="city" class="form-control" ng-model="generalSettingsCtrl.city" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.city)}" ng-model-options='{ debounce: 80 }' ng-change="generalSettingsCtrl.searchPlace(generalSettingsCtrl.city)">
@@ -108,21 +108,21 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 							</div>
 						</div>
 						<div class="col-md-6 settings-right-side">
-							<div class="col-md-12">
-								<div class="col-md-6">
+							<div class="col-md-12 no-pad">
+								<div class="col-xs-6 no-pad">
 									<div>
 										<label for="password"><span translate="global.user.PASSWORD"></span></label>
 										<input type="password" name="password" class="form-control" placeholder="*********" disabled>
 									</div>
 								</div>
-								<div class="col-md-6">
+								<div class="col-xs-6">
 									<div>
 										<a href="#" class="btn btn-change-password" ng-click="generalSettingsCtrl.openModal()"><span translate="settings.general.CHANGE_PASSWORD"></span></a>
 									</div>
 								</div>
 							</div>
-							<div class="col-md-12 blockify mt-20">
-								<div class="col-md-6">
+							<div class="col-md-12 no-pad blockify mt-20">
+								<div class="col-md-6 no-pad">
 									<div>
 										<label for="weight_measure"><span translate="settings.general.WEIGHT_MEASURE"></span></label>
 										<ol name="weightMeasure" class="nya-bs-select btn-group bootstrap-select form-control product-select" ng-model="generalSettingsCtrl.person.settings.weight_measure" ng-class="{'error-input': generalSettingsCtrl.notWeightMeasureSelected}" ng-change="generalSettingsCtrl.notWeightMeasureSelected=false" ng-show="generalSettingsCtrl.weightCharged">

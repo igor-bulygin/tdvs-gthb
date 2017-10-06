@@ -2251,9 +2251,22 @@ h3 {
 
 .identifier-pad {
   padding: 0 0 0 40px; }
+  @media (max-width: 991px) {
+    .identifier-pad {
+      padding: 0; } }
 
 .settings-right-side {
   padding: 170px 0 0 60px !important; }
+  @media (max-width: 991px) {
+    .settings-right-side {
+      display: block;
+      padding: 0 0 40px 0 !important;
+      width: 100%;
+      float: left; } }
+
+@media (max-width: 991px) {
+  .responsive-pad-right-0 {
+    padding-right: 0 !important; } }
 
 .site-error {
   background-color: #ffffff; }
