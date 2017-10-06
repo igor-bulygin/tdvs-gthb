@@ -21,8 +21,8 @@ task :npmred do
 end
 task :assetsred do
     transaction do
-      run "cd #{releases_path}/#{release_name}/tools/gulp ; npm install"
-      run "cd #{releases_path}/#{release_name} ; ./yii asset tools/gulp/assets.php config/assets_compressed.php"
+      # run "cd #{releases_path}/#{release_name}/tools/gulp ; npm install"
+      # run "cd #{releases_path}/#{release_name} ; ./yii asset tools/gulp/assets.php config/assets_compressed.php"
     end
 end
 task :linkred do
