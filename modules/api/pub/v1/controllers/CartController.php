@@ -153,9 +153,6 @@ class CartController extends AppPublicController
 		$post = Yii::$app->request->post();
 		if (isset($post['shipping_address'])) {
 			$cart->shipping_address = $post['shipping_address'];
-			if (!isset($cart->shipping_address['email'])) {
-				$cart->shipping_address['email'] = $person->credentials['emails']; // force email field
-			}
 		}
 		if (isset($post['billing_address'])) {
 			$cart->billing_address = $post['billing_address'];
