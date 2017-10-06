@@ -3,7 +3,7 @@ task :mobile do
         set :user, "todeviseapp"
         server "dev.todevise.com:1021", :app, :web, :primary => true
         set :deploy_to, "/var/www/mobile.todevise/web"
-        after "deploy", "linkmobile","composermobile", "npmmobile", "symlink","restartphp"
+        after "deploy", "linkmobile","composermobile", "npmmobile", "assetsmobile", "symlink","restartphp"
 end
 task :composermobile do
     transaction do
@@ -17,6 +17,12 @@ task :npmmobile do
     transaction do
       run "ln -nfs #{shared_path}/system/node_modules #{releases_path}/#{release_name}/node_modules"
       run "cd #{releases_path}/#{release_name} ; npm install"
+    end
+end
+task :assetsmobile do
+    transaction do
+      # run "cd #{releases_path}/#{release_name}/tools/gulp ; npm install"
+      # run "cd #{releases_path}/#{release_name} ; ./yii asset tools/gulp/assets.php config/assets_compressed.php"
     end
 end
 task :linkmobile do
