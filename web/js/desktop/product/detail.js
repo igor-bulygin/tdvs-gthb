@@ -315,10 +315,10 @@
 		}
 
 		function addToCart(form) {
-			vm.addingToCart=true;
-			vm.showCartPanel=false;
 			form.$setSubmitted();
 			if(form.$valid && vm.reference_id) {
+				vm.addingToCart=true;
+				vm.showCartPanel=false;
 				var cart_id = localStorageUtilService.getLocalStorage('cart_id');
 				if(cart_id) {
 					saveProduct(cart_id);
