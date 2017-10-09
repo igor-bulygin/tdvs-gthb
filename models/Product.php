@@ -450,9 +450,10 @@ class Product extends CActiveRecord {
 					'media',
 					'deviser' => "deviserPreview",
 					'main_photo' => 'mainImage',
+					'main_photo_128' => "imagePreview128",
 					'main_photo_256' => "imagePreview256",
 					'main_photo_512' => "imagePreview512",
-					'url_image_preview' => "imagePreview128",
+					'main_photo_256_fill' => "imagePreview256Fill",
 					'url_images' => 'urlImagesLocation',
 					'link' => 'viewLink',
 					'edit_link' => 'editLink',
@@ -502,9 +503,10 @@ class Product extends CActiveRecord {
 					'link' => 'viewLink',
 					'edit_link' => 'editLink',
 					'main_photo' => 'mainImage',
+					'main_photo_128' => "imagePreview128",
 					'main_photo_256' => "imagePreview256",
 					'main_photo_512' => "imagePreview512",
-					'url_image_preview' => "imagePreview128",
+					'main_photo_256_fill' => "imagePreview256Fill",
 					'min_price' => 'minimumPrice',
 				];
 				static::$retrieveExtraFields = [
@@ -846,11 +848,16 @@ class Product extends CActiveRecord {
 	 *
 	 * @return string
 	 */
-	public function getImagePreview($width, $height)
+	public function getImagePreview($width, $height, $fill = null)
 	{
 		$image = $this->getMainImage();
-		// force max widht
-		$url = Utils::url_scheme() . Utils::thumborize($image)->resize($width, $height);
+
+		if ($fill) {
+			$url = Utils::url_scheme() . Utils::thumborize($image)->fitIn($width, $height)->addFilter('fill', $fill);
+		} else {
+			$url = Utils::url_scheme() . Utils::thumborize($image)->resize($width, $height);
+		}
+
 		return $url;
 	}
 
@@ -882,6 +889,16 @@ class Product extends CActiveRecord {
 	public function getImagePreview512()
 	{
 		return $this->getImagePreview(512, 0);
+	}
+
+	/**
+	 * Wrapper to serialize fields
+	 *
+	 * @return string
+	 */
+	public function getImagePreview256Fill()
+	{
+		return $this->getImagePreview(256, 256, 'white');
 	}
 
 	/**
@@ -1179,10 +1196,11 @@ class Product extends CActiveRecord {
 			'name' => $this->name,
 			'media' => $this->media,
 			'deviser' => $this->getDeviserPreview(),
-			'url_image_preview' => $this->getImagePreview(128, 0),
 			'main_photo' => $this->getMainImage(),
-			'main_photo_256' => $this->getImagePreview(256, 0),
-			'main_photo_512' => $this->getImagePreview(512, 0),
+			'main_photo_128' => $this->getImagePreview128(),
+			'main_photo_256' => $this->getImagePreview256(),
+			'main_photo_512' => $this->getImagePreview512(),
+			'main_photo_256_fill' => $this->getImagePreview256Fill(),
 			'url_images' => $this->getUrlImagesLocation(),
 			'link' => $this->getViewLink(),
 			'edit_link' => $this->getEditLink(),

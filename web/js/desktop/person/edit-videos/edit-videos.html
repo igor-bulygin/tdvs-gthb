@@ -53,7 +53,7 @@
 								<div ng-repeat="work in editVideosCtrl.works[$parent.$index]" style="cursor:pointer;" ng-click="editVideosCtrl.selectProduct($parent.$index, work)">
 									<div class="tag-select-row row">
 										<div class="col-md-2">
-											<img ng-src="{{work.url_image_preview}}" style="width: 100%; max-height: 50px;">
+											<img ng-src="{{work.main_photo_128}}" style="width: 100%; max-height: 50px;">
 										</div>
 										<div class="col-md-8">
 											<p><span ng-bind="work.name"></span> <span translate="person.videos.WORK_BY"></span> <span ng-bind="work.deviser.name"></span></p>
@@ -78,7 +78,7 @@
 										<span>by </span><span ng-bind="product.deviser.name"></span>
 									</div>
 									<!--<div class="col-md-2">
-										<img ng-src="{{product.url_image_preview}}" style="width: 100%; max-height: 50px;">
+										<img ng-src="{{product.main_photo_128}}" style="width: 100%; max-height: 50px;">
 									</div>
 									<div class="col-md-8">
 										<div ng-bind="product.name"></div>

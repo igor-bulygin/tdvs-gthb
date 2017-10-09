@@ -87,9 +87,6 @@
 				if(data.items.length === 0)
 					vm.noProducts = true;
 				vm.works[index] = data.items;
-				vm.works[index].forEach(function(element) {
-					element.url_image_preview = element.url_images + element.media.photos[0].name;
-				})
 			}
 
 			vm.noProducts = false;

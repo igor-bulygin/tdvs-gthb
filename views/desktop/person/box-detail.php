@@ -64,7 +64,7 @@ $this->registerJs("var box = ".Json::encode($box), yii\web\View::POS_HEAD, 'box-
 									<?php } else { ?>
 										<span class="close-product-icon" ng-click="boxDetailCtrl.deleteProduct(work.id)"></span>
 									<?php } ?>
-												<img class="grid-image" ng-src="{{work.main_photo || '/imgs/product_placeholder.png'}}">
+									<img class="grid-image" ng-src="{{work.main_photo_512 || '/imgs/product_placeholder.png'}}">
 									<?php if (!$person->isConnectedUser()) { ?>
 										</image-hover-buttons>
 									<?php } ?>

@@ -67,7 +67,7 @@ Box
             "name": "Carat23",
             "url_avatar": "http://thumbor.todevise.com:8000/mKK3sADnrYXxAZtd6CE2mi0QUQM=/128x0//uploads/deviser/5572aal/profile.57d7f2f6bcc9e.png"
           },
-          "url_image_preview": "http://thumbor.todevise.com:8000/gAjLs54Xw2Qe5-lPAQ4HYiTEePA=/128x0//uploads/product/9a1a42cd/2016-06-23-15-15-28-4922z.jpg",
+          "main_photo_128": "http://thumbor.todevise.com:8000/gAjLs54Xw2Qe5-lPAQ4HYiTEePA=/128x0//uploads/product/9a1a42cd/2016-06-23-15-15-28-4922z.jpg",
           "url_images": "/uploads/product/9a1a42cd/"
         },
         {
@@ -98,7 +98,7 @@ Box
             "name": "Carat23",
             "url_avatar": "http://thumbor.todevise.com:8000/mKK3sADnrYXxAZtd6CE2mi0QUQM=/128x0//uploads/deviser/5572aal/profile.57d7f2f6bcc9e.png"
           },
-          "url_image_preview": "http://thumbor.todevise.com:8000/-5eVaqRnIlfKtOaLFoSBNYRSghQ=/128x0//uploads/product/d4d6a1de/2016-08-24-10-10-41-adb41.jpg",
+          "main_photo_128": "http://thumbor.todevise.com:8000/-5eVaqRnIlfKtOaLFoSBNYRSghQ=/128x0//uploads/product/d4d6a1de/2016-08-24-10-10-41-adb41.jpg",
           "url_images": "/uploads/product/d4d6a1de/"
         }
       ]

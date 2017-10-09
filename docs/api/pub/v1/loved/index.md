@@ -55,7 +55,7 @@ Loveds
                 "name": "Dechoker",
                 "url_avatar": "http://thumbor.todevise.com:8000/wJMhiMnMQFGMKk4CCw4IfdGKsRE=/128x0//uploads/deviser/bf2583c/profile.5880afabc0b15.png"
             },
-            "url_image_preview": "http://thumbor.todevise.com:8000/N8H7t1etecbDDVmcVrl4ZIUMpuw=/128x0//uploads/product/62b95e5/product.photo.5891e4794580d.png",
+            "main_photo_128": "http://thumbor.todevise.com:8000/N8H7t1etecbDDVmcVrl4ZIUMpuw=/128x0//uploads/product/62b95e5/product.photo.5891e4794580d.png",
             "url_images": "/uploads/product/62b95e5/"
             }
         },
@@ -91,7 +91,7 @@ Loveds
                 "name": "Dechoker",
                 "url_avatar": "http://thumbor.todevise.com:8000/wJMhiMnMQFGMKk4CCw4IfdGKsRE=/128x0//uploads/deviser/bf2583c/profile.5880afabc0b15.png"
             },
-            "url_image_preview": "http://thumbor.todevise.com:8000/oRgCokROrcVuQTlc64UOmVJXoSg=/128x0//uploads/product/2df4379/product.photo.5891e58c64b32.png",
+            "main_photo_128": "http://thumbor.todevise.com:8000/oRgCokROrcVuQTlc64UOmVJXoSg=/128x0//uploads/product/2df4379/product.photo.5891e58c64b32.png",
             "url_images": "/uploads/product/2df4379/"
         }
     ... 
