@@ -25,7 +25,7 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 	<div class="container">
 		<uib-accordion>
 			<div uib-accordion-group class="panel-default panel-billing" heading="{{ 'settings.general.PERSONAL_INFORMATION' | translate }}" is-open="true" ng-cloak>
-				<form name="generalSettingsCtrl.dataForm" class="form-horizontal" >
+				<form name="generalSettingsCtrl.dataForm" class="form-horizontal" ng-show="!generalSettingsCtrl.saving">
 					<div class="col-md-12 no-pad">
 						<div class="col-md-6 no-pad">
 							<div ng-if="generalSettingsCtrl.isDeviser">
@@ -138,9 +138,9 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 							</div>
 						</div>
 					</div>
-					<div ng-hide="generalSettingsCtrl.saving">
+					<div>
 						<div class="col-md-12 mt-40">
-							<button class="btn btn-small btn-red auto-center" ng-click="generalSettingsCtrl.update()" ng-disabled="generalSettingsCtrl.saving" translate="global.SAVE"></button>
+							<button class="btn btn-small btn-red auto-center" ng-click="generalSettingsCtrl.update()" translate="global.SAVE"></button>
 							<span class="purple-text col-xs-12" ng-if="generalSettingsCtrl.showInvalid" translate="settings.FILL_ALL_FIELDS"></span>
 						</div>
 						<div class="col-xs-12 text-center" ng-if="generalSettingsCtrl.saved&&!generalSettingsCtrl.dataForm.$dirty">
@@ -149,7 +149,7 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 					</div>
 				</form>
 				<div class="text-center" ng-show="generalSettingsCtrl.saving">
-					<img src="/imgs/loading.gif">
+					<i class="fa fa-spinner fa-pulse fa-3x fa-fw small"></i>
 				</div>
 			</div>
 		</uib-accordion>
@@ -164,16 +164,16 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 		<div class="modal-body personal-info-wrapper">
 			<form name="generalSettingsCtrl.passwordForm" class="form-horizontal col-xs-12">
 				<div ng-hide="generalSettingsCtrl.savingPassword">
-					<div class="col-xs-10 col-xs-offset-1">
-						<input type="password" name="currentPassword" class="form-control" ng-class="{'error-input': generalSettingsCtrl.existPasswordRequiredError(generalSettingsCtrl.currentPassword)}" ng-model="generalSettingsCtrl.currentPassword" placeholder="{{'settings.general.CURRENT_PASSWORD' | translate }}">
+					<div class="col-xs-10 col-xs-offset-1 ">
+						<input type="password" name="currentPassword" class="form-control mb-20 " ng-class="{'error-input': generalSettingsCtrl.existPasswordRequiredError(generalSettingsCtrl.currentPassword)}" ng-model="generalSettingsCtrl.currentPassword" placeholder="{{'settings.general.CURRENT_PASSWORD' | translate }}">
 						<span class="purple-text" ng-if="generalSettingsCtrl.existPasswordRequiredError(generalSettingsCtrl.currentPassword)" translate="settings.FILL_FIELD"></span>
 					</div>
 					<div class="col-xs-10 col-xs-offset-1">
-						<input type="password" name="newPassword" class="form-control" ng-class="{'error-input': generalSettingsCtrl.existPasswordRequiredError(generalSettingsCtrl.newPassword)}" ng-model="generalSettingsCtrl.newPassword" placeholder="{{'settings.general.NEW_PASSWORD' | translate }}">
+						<input type="password" name="newPassword" class="form-control mb-20 " ng-class="{'error-input': generalSettingsCtrl.existPasswordRequiredError(generalSettingsCtrl.newPassword)}" ng-model="generalSettingsCtrl.newPassword" placeholder="{{'settings.general.NEW_PASSWORD' | translate }}">
 						<span class="purple-text" ng-if="generalSettingsCtrl.existPasswordRequiredError(generalSettingsCtrl.newPassword)" translate="settings.FILL_FIELD"></span>
 					</div>
 					<div class="col-xs-10 col-xs-offset-1">
-						<input type="password" name="newPasswordBis" class="form-control" ng-class="{'error-input': generalSettingsCtrl.existPasswordRequiredError(generalSettingsCtrl.newPasswordBis)}" ng-model="generalSettingsCtrl.newPasswordBis" placeholder="{{'settings.general.CONFIRM_NEW_PASSWORD' | translate }}">
+						<input type="password" name="newPasswordBis" class="form-control mb-20 " ng-class="{'error-input': generalSettingsCtrl.existPasswordRequiredError(generalSettingsCtrl.newPasswordBis)}" ng-model="generalSettingsCtrl.newPasswordBis" placeholder="{{'settings.general.CONFIRM_NEW_PASSWORD' | translate }}">
 						<span class="purple-text" ng-if="generalSettingsCtrl.existPasswordRequiredError(generalSettingsCtrl.newPasswordBis)" translate="settings.FILL_FIELD"></span>
 						<span class="purple-text" ng-if="generalSettingsCtrl.distinctPasswords" translate="settings.general.PASSWORD_NOT_MATCH"></span>
 					</div>
@@ -184,7 +184,7 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 				</div>
 			</form>
 			<div class="text-center" ng-show="generalSettingsCtrl.savingPassword">
-				<img src="/imgs/loading.gif">
+				<i class="fa fa-spinner fa-pulse fa-3x fa-fw small"></i>
 			</div>
 		</div>
 		<div class="modal-footer">
