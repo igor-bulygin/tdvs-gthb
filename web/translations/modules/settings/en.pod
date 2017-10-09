@@ -3,7 +3,7 @@
 		"general": {
 			"PERSONAL_INFORMATION": "Personal information",
 			"BRAND": "BRAND / ARTIST NAME",
-			"IDENTIFIER": "IDENTIFIER",
+			"IDENTIFIER": "VAT Number",
 			"REPRESENTATIVE_NAME": "REPRESENTATIVE NAME",
 			"CHANGE_PASSWORD": "Change password",
 			"WEIGHT_MEASURE": "WEIGHT MEASURE",
