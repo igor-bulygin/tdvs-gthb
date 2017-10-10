@@ -1,6 +1,6 @@
 <?php
+
 use app\assets\desktop\deviser\GlobalAsset;
-use app\components\MakeProfilePublic;
 use app\models\Person;
 use yii\helpers\Json;
 
@@ -48,7 +48,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 								{{personHeaderCtrl.city}}
 							</div>
 							<div class="description">
-								{{personHeaderCtrl.person.text_short_description[personHeaderCtrl.description_language]}}
+								{{personHeaderCtrl.person.text_short_description}}
 							</div>
 						</div>
 					</div>
