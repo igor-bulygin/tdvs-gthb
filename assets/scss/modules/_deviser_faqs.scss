@@ -241,8 +241,8 @@
 		z-index: 99;
 		cursor: pointer;
 		position: relative;
-		text-align: left;
-		margin-top: 35px;
+		text-align: center;
+		margin: 35px 0 -20px;
 	}
 }
 .showcase{
@@ -282,7 +282,6 @@
         display: block;
         margin-top: -30px;
         position: relative;
-        float: left;
     }
     #btn-faq-add-question{
         display: block;

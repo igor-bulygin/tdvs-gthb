@@ -1,9 +1,9 @@
 <div class="col-md-10 about-bg">
 	<div class="row" ng-if="!editAboutCtrl.loading" ng-cloak>
+		<div><a class="red-link-btn top" href="#" ng-click="editAboutCtrl.save()" ng-if="!editAboutCtrl.isDraft" ng-cloak><span translate="person.about.SAVE_EXIT"></span></a></div>
+				<div><a class="red-link-btn top" href="#" ng-click="editAboutCtrl.save()" ng-if="editAboutCtrl.isDraft" ng-cloak><span translate="person.about.SAVE_CHANGES"></span></a></div>
 		<div class="col-md-6">
 			<div class="about-wrapper">
-				<div><a class="red-link-btn top" href="#" ng-click="editAboutCtrl.save()" ng-if="!editAboutCtrl.isDraft" ng-cloak><span translate="person.about.SAVE_EXIT"></span></a></div>
-				<div><a class="red-link-btn top" href="#" ng-click="editAboutCtrl.save()" ng-if="editAboutCtrl.isDraft" ng-cloak><span translate="person.about.SAVE_CHANGES"></span></a></div>
 				<div class="about-container">
 					<div class="deviser-data-about-edit">
 						<form class="grey-form" name="editAboutCtrl.form">

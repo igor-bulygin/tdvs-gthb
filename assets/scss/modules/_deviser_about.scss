@@ -114,7 +114,7 @@
 .loader-about{
 	@include size(100%,250px);
     //background-color: $background_grey;
-    margin: 89px 0 20px;
+    margin: 40px 0 20px;
     @include border-radius(6px,6px,6px,6px);//border-radius(20px,20px,20px,20px);
     background: $background_grey url("/imgs/product_placeholder_ico.svg") no-repeat center center;
     border: none;
@@ -511,7 +511,7 @@
     padding:0 30px 20px 30px;//10px 20px 20px;
     width: 90%;
     position: absolute;
-    top: 50px;
+    top: 0;
     left: 40px;
     @include border-radius(6px,6px,6px,6px);
     box-shadow: 1px -1px 5px rgba(0, 0, 0, 0.19);
