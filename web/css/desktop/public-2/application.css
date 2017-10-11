@@ -4681,7 +4681,9 @@ h3 {
   .red-link-btn.top {
     z-index: 99;
     cursor: pointer;
-    position: relative; }
+    position: relative;
+    text-align: left;
+    margin-top: 35px; }
 
 .showcase.influencers {
   min-height: 250px; }
@@ -5076,7 +5078,7 @@ h3 {
 .loader-about {
   width: 100%;
   height: 250px;
-  margin: 20px 0;
+  margin: 89px 0 20px;
   border-radius: 6px 6px 6px 6px !important;
   -webkit-border-radius: 6px 6px 6px 6px !important;
   -moz-border-radius: 6px 6px 6px 6px !important;
@@ -5411,6 +5413,7 @@ h3 {
     color: #939393; }
 
 .deviser-data-about-edit {
+  margin: 40px 0 0 -15px;
   border: 1px solid #cccccc;
   background-color: #ffffff;
   padding: 0 30px 20px 30px;
@@ -7982,6 +7985,7 @@ input:checked + .slider:before {
 
 .summary-cart-wrapper-full {
   padding: 0 15px;
+  margin: 89px 0 20px;
   background-color: #da929e;
   width: 100%;
   float: left; }
