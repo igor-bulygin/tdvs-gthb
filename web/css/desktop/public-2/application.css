@@ -1119,8 +1119,7 @@ footer .social-items li a {
       letter-spacing: 0.3px;
       padding-bottom: 5px; }
       .products-menu ul li a:hover, .products-menu ul li a.active {
-        color: #c91c39;
-        border-bottom: 1px solid #c91c39; }
+        color: #c91c39; }
 
 .menu-store {
   padding: 40px 0; }
