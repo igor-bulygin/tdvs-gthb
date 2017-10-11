@@ -6453,7 +6453,8 @@ span.optional-text.pull-left {
         text-transform: uppercase; }
       .product .product-data-wrapper .product-data .row-size .product-label {
         text-align: left;
-        padding-top: 3px; }
+        padding-top: 0;
+        margin-top: 0; }
       .product .product-data-wrapper .product-data .row-size .atribute-selected {
         color: #939393;
         padding: 2px 12px;
@@ -6808,7 +6809,8 @@ span.optional-text.pull-left {
 .shipping-policies-wrapper {
   font-family: "Univers Condensed Light", "Helvetica Neue", Helvetica, Arial, sans-serif; }
   .shipping-policies-wrapper .policies-row .shipping-label {
-    padding-top: 3px;
+    padding-top: 0;
+    margin-top: 0;
     text-align: left;
     font-weight: normal !important; }
   .shipping-policies-wrapper .policies-row .tax {
@@ -7755,9 +7757,9 @@ input:checked + .slider:before {
   text-transform: uppercase;
   font-size: 16px;
   font-weight: bold;
-  padding: 0 0 8px 0;
+  padding: 0 0 0 10px;
   display: block;
-  margin: 0 10px 0px; }
+  margin: 0; }
 
 .summary-cart-wrapper {
   padding: 0 15px; }
@@ -7772,7 +7774,7 @@ input:checked + .slider:before {
   font-weight: bold;
   color: #1C1919;
   font-size: 16px;
-  padding: 0 0 0 10px; }
+  padding: 0; }
 
 .checkout-table tr {
   border-bottom: 1px solid #e9e9e9; }
@@ -7966,6 +7968,7 @@ input:checked + .slider:before {
     font-weight: bold; }
 
 .product-name-card {
+  display: block;
   color: #1C1919;
   text-transform: uppercase;
   font-size: 14px;
@@ -8036,6 +8039,20 @@ input:checked + .slider:before {
   font-size: 48px;
   letter-spacing: 8px;
   text-transform: uppercase; }
+
+cart-panel {
+  display: block; }
+
+cart-panel > .container {
+  position: relative; }
+
+cart-panel .cart-panel-div {
+  box-shadow: 0 2px 4px 0 #9a9a9a;
+  padding: 0 0 1em; }
+
+.px-2 {
+  padding-right: 0.5rem;
+  padding-left: 0.5rem; }
 
 .upper-setting-header {
   height: 76px;
