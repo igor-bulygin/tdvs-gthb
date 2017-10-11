@@ -357,8 +357,9 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 											<div class="shipping-policies-wrapper">
 									<div class="policies-row">
 										<form class="form-horizontal">
-											<div class="form-group">
-												<label class="col-sm-5 control-label shipping-label no-pad-r"><span translate="product.detail.SHIPPING_PRICE_SPAIN"></span></label>
+											<div class="form-group ">
+												<label class="col-xs-11 offset-sx-1 control-label shipping-label no-pad-r"><span translate="product.detail.SHIPPING_PRICE_SPAIN"></span> <span translate="product.detail.IS"></span> <span class="tax">€<?=$product->getShippingPrice(null, Country::getDefaultContryCode())?></span></label>
+												
 												<!--
 												<div class="col-sm-5 pad-product">
 													<select class="form-control selectpicker shipping-select product-select" title="Choose country">
@@ -367,9 +368,6 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 													</select>
 												</div>
 												-->
-												<div class="col-sm-3">
-													<span translate="product.detail.IS"></span> <span class="tax">€<?=$product->getShippingPrice(null, Country::getDefaultContryCode())?></span>
-												</div>
 											</div>
 										</form>
 									</div>
@@ -378,7 +376,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 									$warranty = $product->getWarrantyLabel();
 									?>
 									<?php if ($returns) { ?>
-										<div class="returns-row mt-30">
+										<div class="returns-row">
 											<span translate="product.detail.RETURNS"></span>
 											<span class="bold"><?=$returns?></span>
 										</div>

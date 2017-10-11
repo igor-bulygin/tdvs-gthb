@@ -226,7 +226,8 @@
     font-family: $font-family--secondary;
     .policies-row{
         .shipping-label{
-            padding-top: 3px;
+            padding-top: 0;//3px;
+            margin-top: 0;
             text-align: left;
 			font-weight: normal!important;
         }
