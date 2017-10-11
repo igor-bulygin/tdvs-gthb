@@ -2,7 +2,7 @@
 
 Example about how to call to Web Service to get specific Loved
 
-**URL**: `/api/pub/v1/loved/<:id>`
+**URL**: `/api3/pub/v1/loved/<:id>`
 
 **Method**: `GET`
 

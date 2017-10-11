@@ -2,7 +2,7 @@
 
 Example about how to call to Web Service to get a public list of all available shipping Countries
 
-**URL**: `/api/pub/v1/countries/shipping`
+**URL**: `/api3/pub/v1/countries/shipping`
 
 **Method**: `GET`
 

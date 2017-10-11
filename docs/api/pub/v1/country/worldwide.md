@@ -2,7 +2,7 @@
 
 Example about how to call to Web Service to get a public list of all Continents and Countries
 
-**URL**: `/api/pub/v1/countries/worldwide`
+**URL**: `/api3/pub/v1/countries/worldwide`
 
 **Method**: `GET`
 

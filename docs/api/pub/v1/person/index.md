@@ -5,7 +5,7 @@ Persons
 
 **Note**: This method only returns active accounts
 
-**URL**: `/api/pub/v1/person`
+**URL**: `/api3/pub/v1/person`
 
 **Method**: `GET`
 

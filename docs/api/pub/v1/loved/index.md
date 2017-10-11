@@ -3,7 +3,7 @@
 Example about how to call to Web Service to get a public list of 
 Loveds
 
-**URL**: `/api/pub/v1/loved`
+**URL**: `/api3/pub/v1/loved`
 
 **Method**: `GET`
 

@@ -2,7 +2,7 @@
 
 Example about how to call to Web Service to logout a todevise account
 
-**URL**: `/api/pub/v1/auth/logout`
+**URL**: `/api3/pub/v1/auth/logout`
 
 **Method**: `POST`
 

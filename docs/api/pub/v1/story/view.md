@@ -2,7 +2,7 @@
 
 Example about how to call to Web Service to get specific story
 
-**URL**: `/api/pub/v1/story/<:storyId>`
+**URL**: `/api3/pub/v1/story/<:storyId>`
 
 **Method**: `GET`
 

@@ -3,7 +3,7 @@
 Example about how to call to Web Service to get a public list of 
 Story
 
-**URL**: `/api/pub/v1/story`
+**URL**: `/api3/pub/v1/story`
 
 **Method**: `GET`
 
