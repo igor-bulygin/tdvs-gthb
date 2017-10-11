@@ -202,6 +202,7 @@ class PersonController extends AppPrivateController
 		$orders = Order::findSerialized([
 			"deviser_id" => $person->id,
 			"only_matching_packs" => true,
+			"order_state" => Order::ORDER_STATE_PAID,
 			"pack_state" => Yii::$app->request->get('pack_state'),
 			"limit" => $limit,
 			"offset" => $offset,
