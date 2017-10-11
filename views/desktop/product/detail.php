@@ -6,6 +6,7 @@ use app\helpers\Utils;
 use app\models\Country;
 use app\models\Person;
 use app\models\PersonVideo;
+use bigpaulie\social\share\Share;
 use yii\helpers\Json;
 
 GlobalAsset::register($this);
@@ -26,7 +27,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 ?>
 
 	<!-- PRODUCT CARD -->
-	
+
 <div ng-controller="detailProductCtrl as detailProductCtrl">
 	<cart-panel packs="detailProductCtrl.cart.packs" total="detailProductCtrl.cart.subtotal" ng-if="detailProductCtrl.showCartPanel" ng-cloak>
 	</cart-panel>
@@ -269,6 +270,24 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 								<div class="product-data">
 									<div class="full-width mb-20">
 										<div class="btns-product-wrapper">
+											<?= Share::widget(
+												[
+													'include' => [
+														'facebook',
+														'twitter',
+														'pinterest',
+													],
+													'template' => '<li title="Share on {network}">{button}</li>',
+													'title' => $product->name,
+													'description' => $product->description,
+													'image' => $product->getImagePreview(1200, 1200),
+													'htmlOptions' => [
+														'class' => 'social-items',
+													],
+													'type' => Share::TYPE_SMALL,
+												]
+											); ?>
+											<?php /*
 											<ul class="social-items">
 												<li>
 													<a href="https://facebook.com/todevise">
@@ -345,6 +364,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 													</a>
 												</li-->
 											</ul>
+											*/?>
 										</div>
 									</div>
 								</div>

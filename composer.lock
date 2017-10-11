@@ -4,8 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "bbcfbf0f135a9688a15df10a078044e5",
-    "content-hash": "3562b8926fdc132c2b5186d61e6771d1",
+    "content-hash": "00b6f0e8593d743c14db3f0faffab827",
     "packages": [
         {
             "name": "99designs/phumbor",
@@ -48,7 +47,7 @@
                 "php",
                 "thumbor"
             ],
-            "time": "2016-08-24 00:05:40"
+            "time": "2016-08-24T00:05:40+00:00"
         },
         {
             "name": "alexandernst/yii2-device-detect",
@@ -96,7 +95,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-03-30 18:31:52"
+            "time": "2016-03-30T18:31:52+00:00"
         },
         {
             "name": "alexandernst/yii2-scrypt",
@@ -142,7 +141,7 @@
                 "scrypt",
                 "yii2"
             ],
-            "time": "2015-04-04 15:17:53"
+            "time": "2015-04-04T15:17:53+00:00"
         },
         {
             "name": "bazilio/yii2-newrelic",
@@ -186,7 +185,52 @@
                 "newrelic",
                 "yii2"
             ],
-            "time": "2016-07-10 18:12:02"
+            "time": "2016-07-10T18:12:02+00:00"
+        },
+        {
+            "name": "bigpaulie/yii2-social-share",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bigpaulie/yii2-social-share.git",
+                "reference": "81e253e45a70a7353a71c68ba744c130de79af66"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bigpaulie/yii2-social-share/zipball/81e253e45a70a7353a71c68ba744c130de79af66",
+                "reference": "81e253e45a70a7353a71c68ba744c130de79af66",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/bootstrap-social": "~4.0",
+                "php": ">= 5.4",
+                "yiisoft/yii2": "2.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "bigpaulie\\social\\share\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Paul P",
+                    "email": "bigpaulie25ro@yahoo.com",
+                    "homepage": "http://www.paul-resume.com"
+                }
+            ],
+            "description": "Yii2 Social Link Sharer Extension",
+            "keywords": [
+                "share",
+                "social",
+                "widget",
+                "yii2"
+            ],
+            "time": "2017-03-21T07:25:49+00:00"
         },
         {
             "name": "bower-asset/bootstrap",
@@ -236,6 +280,78 @@
                 "responsive",
                 "web"
             ]
+        },
+        {
+            "name": "bower-asset/bootstrap-social",
+            "version": "4.12.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lipis/bootstrap-social.git",
+                "reference": "94cfded5ede73b5e60dcdafbb7a455a6246ab337"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lipis/bootstrap-social/zipball/94cfded5ede73b5e60dcdafbb7a455a6246ab337",
+                "reference": "94cfded5ede73b5e60dcdafbb7a455a6246ab337",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/bootstrap": "~3",
+                "bower-asset/font-awesome": "~4.5"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "bootstrap-social.css",
+                    "bootstrap-social.less",
+                    "bootstrap-social.scss"
+                ],
+                "bower-asset-ignore": [
+                    "assets",
+                    "index.html",
+                    "LICENCE"
+                ]
+            },
+            "license": [
+                "MIT"
+            ]
+        },
+        {
+            "name": "bower-asset/font-awesome",
+            "version": "v4.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FortAwesome/Font-Awesome.git",
+                "reference": "a8386aae19e200ddb0f6845b5feeee5eb7013687"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FortAwesome/Font-Awesome/zipball/a8386aae19e200ddb0f6845b5feeee5eb7013687",
+                "reference": "a8386aae19e200ddb0f6845b5feeee5eb7013687",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "less/font-awesome.less",
+                    "scss/font-awesome.scss"
+                ],
+                "bower-asset-ignore": [
+                    "*/.*",
+                    "*.json",
+                    "src",
+                    "*.yml",
+                    "Gemfile",
+                    "Gemfile.lock",
+                    "*.md"
+                ]
+            },
+            "license": [
+                "OFL-1.1",
+                "MIT",
+                "CC-BY-3.0"
+            ],
+            "description": "Font Awesome"
         },
         {
             "name": "bower-asset/jquery",
@@ -434,7 +550,7 @@
                 "markdown",
                 "markdown-extra"
             ],
-            "time": "2016-09-14 20:40:20"
+            "time": "2016-09-14T20:40:20+00:00"
         },
         {
             "name": "educoder/pest",
@@ -476,7 +592,7 @@
             ],
             "description": "A proper REST client for PHP.",
             "homepage": "https://github.com/educoder/pest",
-            "time": "2013-11-17 12:58:01"
+            "time": "2013-11-17T12:58:01+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -520,7 +636,7 @@
             "keywords": [
                 "html"
             ],
-            "time": "2013-11-30 08:25:19"
+            "time": "2013-11-30T08:25:19+00:00"
         },
         {
             "name": "javiereguiluz/easyslugger",
@@ -550,7 +666,7 @@
                 "MIT"
             ],
             "description": "A fast and easy to use slugger with full UTF-8 support.",
-            "time": "2015-04-12 19:57:10"
+            "time": "2015-04-12T19:57:10+00:00"
         },
         {
             "name": "kartik-v/bootstrap-fileinput",
@@ -603,7 +719,7 @@
                 "progress",
                 "upload"
             ],
-            "time": "2016-09-20 05:47:41"
+            "time": "2016-09-20T05:47:41+00:00"
         },
         {
             "name": "kartik-v/bootstrap-star-rating",
@@ -647,7 +763,7 @@
                 "star",
                 "svg"
             ],
-            "time": "2016-02-28 16:13:18"
+            "time": "2016-02-28T16:13:18+00:00"
         },
         {
             "name": "kartik-v/dependent-dropdown",
@@ -689,7 +805,7 @@
                 "option",
                 "select"
             ],
-            "time": "2015-12-16 18:15:01"
+            "time": "2015-12-16T18:15:01+00:00"
         },
         {
             "name": "kartik-v/yii2-krajee-base",
@@ -740,7 +856,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-09-04 09:25:29"
+            "time": "2016-09-04T09:25:29+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-activeform",
@@ -792,7 +908,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-04-27 18:38:05"
+            "time": "2016-04-27T18:38:05+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-affix",
@@ -841,7 +957,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2014-11-09 04:56:27"
+            "time": "2014-11-09T04:56:27+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-alert",
@@ -891,7 +1007,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2014-11-19 06:44:12"
+            "time": "2014-11-19T06:44:12+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-colorinput",
@@ -945,7 +1061,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-01-14 11:15:49"
+            "time": "2016-01-14T11:15:49+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-datepicker",
@@ -999,7 +1115,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-09-04 10:52:50"
+            "time": "2016-09-04T10:52:50+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-datetimepicker",
@@ -1048,7 +1164,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-01-10 12:18:38"
+            "time": "2016-01-10T12:18:38+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-depdrop",
@@ -1097,7 +1213,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-01-10 17:30:48"
+            "time": "2016-01-10T17:30:48+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-fileinput",
@@ -1152,7 +1268,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-06-16 06:53:01"
+            "time": "2016-06-16T06:53:01+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-growl",
@@ -1201,7 +1317,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2015-05-03 08:23:04"
+            "time": "2015-05-03T08:23:04+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-rangeinput",
@@ -1250,7 +1366,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2015-11-22 06:52:44"
+            "time": "2015-11-22T06:52:44+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-rating",
@@ -1306,7 +1422,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-02-17 19:13:26"
+            "time": "2016-02-17T19:13:26+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-select2",
@@ -1359,7 +1475,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-02-17 11:49:30"
+            "time": "2016-02-17T11:49:30+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-sidenav",
@@ -1408,7 +1524,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2014-11-09 08:07:23"
+            "time": "2014-11-09T08:07:23+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-spinner",
@@ -1456,7 +1572,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2014-11-09 05:02:05"
+            "time": "2014-11-09T05:02:05+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-switchinput",
@@ -1506,7 +1622,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-01-10 16:47:35"
+            "time": "2016-01-10T16:47:35+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-timepicker",
@@ -1555,7 +1671,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-01-12 09:50:39"
+            "time": "2016-01-12T09:50:39+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-touchspin",
@@ -1605,7 +1721,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-01-10 17:10:39"
+            "time": "2016-01-10T17:10:39+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-typeahead",
@@ -1653,7 +1769,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2015-06-28 18:05:41"
+            "time": "2015-06-28T18:05:41+00:00"
         },
         {
             "name": "kartik-v/yii2-widgets",
@@ -1715,7 +1831,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2014-11-09 19:54:17"
+            "time": "2014-11-09T19:54:17+00:00"
         },
         {
             "name": "lajax/yii2-language-picker",
@@ -1761,7 +1877,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2015-09-01 16:53:13"
+            "time": "2015-09-01T16:53:13+00:00"
         },
         {
             "name": "mobiledetect/mobiledetectlib",
@@ -1815,7 +1931,7 @@
                 "mobile detector",
                 "php mobile detect"
             ],
-            "time": "2016-04-24 09:47:16"
+            "time": "2016-04-24T09:47:16+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -1863,7 +1979,7 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2016-04-03 06:00:07"
+            "time": "2016-04-03T06:00:07+00:00"
         },
         {
             "name": "phpspec/php-diff",
@@ -1901,7 +2017,7 @@
                 }
             ],
             "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
-            "time": "2016-04-07 12:29:16"
+            "time": "2016-04-07T12:29:16+00:00"
         },
         {
             "name": "ramsey/uuid",
@@ -1981,7 +2097,7 @@
                 "identifier",
                 "uuid"
             ],
-            "time": "2016-10-02 15:51:17"
+            "time": "2016-10-02T15:51:17+00:00"
         },
         {
             "name": "sobanvuex/php-newrelic",
@@ -2028,7 +2144,7 @@
                 "monitoring",
                 "newrelic"
             ],
-            "time": "2014-09-14 20:32:12"
+            "time": "2014-09-14T20:32:12+00:00"
         },
         {
             "name": "stripe/stripe-php",
@@ -2083,7 +2199,7 @@
                 "payment processing",
                 "stripe"
             ],
-            "time": "2017-07-03 17:51:56"
+            "time": "2017-07-03T17:51:56+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -2136,7 +2252,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2016-07-08 11:51:25"
+            "time": "2016-07-08T11:51:25+00:00"
         },
         {
             "name": "yii2tech/ar-position",
@@ -2185,7 +2301,7 @@
                 "sort",
                 "yii2"
             ],
-            "time": "2015-12-26 12:05:01"
+            "time": "2015-12-26T12:05:01+00:00"
         },
         {
             "name": "yii2tech/ar-softdelete",
@@ -2234,7 +2350,7 @@
                 "soft",
                 "yii2"
             ],
-            "time": "2015-12-26 12:09:06"
+            "time": "2015-12-26T12:09:06+00:00"
         },
         {
             "name": "yii2tech/embedded",
@@ -2285,7 +2401,7 @@
                 "nested",
                 "yii2"
             ],
-            "time": "2015-12-26 11:35:51"
+            "time": "2015-12-26T11:35:51+00:00"
         },
         {
             "name": "yiisoft/yii2",
@@ -2379,7 +2495,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2016-10-20 12:02:50"
+            "time": "2016-10-20T12:02:50+00:00"
         },
         {
             "name": "yiisoft/yii2-bootstrap",
@@ -2429,7 +2545,7 @@
                 "bootstrap",
                 "yii2"
             ],
-            "time": "2016-03-17 03:29:28"
+            "time": "2016-03-17T03:29:28+00:00"
         },
         {
             "name": "yiisoft/yii2-composer",
@@ -2476,7 +2592,7 @@
                 "extension installer",
                 "yii2"
             ],
-            "time": "2016-02-06 00:49:24"
+            "time": "2016-02-06T00:49:24+00:00"
         },
         {
             "name": "yiisoft/yii2-mongodb",
@@ -2524,7 +2640,7 @@
                 "mongodb",
                 "yii2"
             ],
-            "time": "2016-05-09 10:57:48"
+            "time": "2016-05-09T10:57:48+00:00"
         },
         {
             "name": "yiisoft/yii2-redis",
@@ -2572,7 +2688,7 @@
                 "session",
                 "yii2"
             ],
-            "time": "2016-03-17 04:11:03"
+            "time": "2016-03-17T04:11:03+00:00"
         },
         {
             "name": "yiisoft/yii2-swiftmailer",
@@ -2622,7 +2738,7 @@
                 "swiftmailer",
                 "yii2"
             ],
-            "time": "2016-03-17 03:58:49"
+            "time": "2016-03-17T03:58:49+00:00"
         }
     ],
     "packages-dev": [
@@ -2699,7 +2815,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2016-04-29 12:21:54"
+            "time": "2016-04-29T12:21:54+00:00"
         },
         {
             "name": "yiisoft/yii2-codeception",
@@ -2745,7 +2861,7 @@
                 "yii2"
             ],
             "abandoned": "codeception/codeception",
-            "time": "2016-03-17 03:41:26"
+            "time": "2016-03-17T03:41:26+00:00"
         },
         {
             "name": "yiisoft/yii2-debug",
@@ -2792,7 +2908,7 @@
                 "debugger",
                 "yii2"
             ],
-            "time": "2016-03-17 03:50:19"
+            "time": "2016-03-17T03:50:19+00:00"
         },
         {
             "name": "yiisoft/yii2-faker",
@@ -2839,7 +2955,7 @@
                 "faker",
                 "yii2"
             ],
-            "time": "2015-03-01 06:22:44"
+            "time": "2015-03-01T06:22:44+00:00"
         },
         {
             "name": "yiisoft/yii2-gii",
@@ -2892,12 +3008,14 @@
                 "gii",
                 "yii2"
             ],
-            "time": "2016-03-18 14:09:46"
+            "time": "2016-03-18T14:09:46+00:00"
         }
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "bigpaulie/yii2-social-share": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
