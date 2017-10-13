@@ -32,7 +32,8 @@
 		"educoder/pest": "1.0.0",
 		"stripe/stripe-php": "^5.1",
 		"bazilio/yii2-newrelic": "^0.0.7",
-		"bigpaulie/yii2-social-share": "dev-master"
+		"bigpaulie/yii2-social-share": "dev-master",
+		"dragonjet/yii2-opengraph": "dev-master"
 	},
 	"require-dev": {
 		"yiisoft/yii2-codeception": "2.0.5",

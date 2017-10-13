@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "00b6f0e8593d743c14db3f0faffab827",
+    "content-hash": "db6802754753937eb48a5084988f6734",
     "packages": [
         {
             "name": "99designs/phumbor",
@@ -551,6 +551,50 @@
                 "markdown-extra"
             ],
             "time": "2016-09-14T20:40:20+00:00"
+        },
+        {
+            "name": "dragonjet/yii2-opengraph",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dragonjet/yii2-opengraph.git",
+                "reference": "beaf784d105473a09924fb4667686b7b799049ba"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dragonjet/yii2-opengraph/zipball/beaf784d105473a09924fb4667686b7b799049ba",
+                "reference": "beaf784d105473a09924fb4667686b7b799049ba",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "@dev"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "dragonjet\\opengraph\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "dragonjet",
+                    "email": "jetriconew@gmail.com",
+                    "homepage": "http://jetri.co"
+                }
+            ],
+            "description": "Open Graph implementation for Yii 2",
+            "homepage": "https://github.com/dragonjet/yii2-opengraph",
+            "keywords": [
+                "extension",
+                "facebook",
+                "open-graph",
+                "yii2"
+            ],
+            "time": "2015-02-19T11:44:06+00:00"
         },
         {
             "name": "educoder/pest",
@@ -3014,7 +3058,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "bigpaulie/yii2-social-share": 20
+        "bigpaulie/yii2-social-share": 20,
+        "dragonjet/yii2-opengraph": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

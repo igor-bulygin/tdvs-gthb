@@ -5,6 +5,7 @@ use yii\web\Response;
 
 $config = [
 	'id' => 'basic',
+	'name' => 'Todevise',
 
 	'basePath' => dirname(__DIR__),
 
@@ -180,6 +181,16 @@ $config = [
 
 		//Database
 		'mongodb' => require(__DIR__ . '/db.php'),
+
+		//OpenGraph
+		'opengraph' => [
+			'class' => 'dragonjet\opengraph\OpenGraph',
+			'title' => 'Todevise',
+			'site_name' => 'Todevise',
+			'description' => 'Todevise is a new concept of store where you can browse and purchase from a diverse portfolio of curated high-quality, exclusive products.',
+			'type' => 'website',
+			'image' => 'https://todevise.com/logo.png',
+		],
 
 		//Redis
 		'redis' => require(__DIR__ . '/redis.php'),
