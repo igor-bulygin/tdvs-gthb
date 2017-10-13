@@ -1,7 +1,6 @@
 <?php
 
 use app\assets\desktop\product\GlobalAsset;
-use app\assets\desktop\pub\Product2Asset;
 use app\helpers\Utils;
 use app\models\Country;
 use app\models\Person;
@@ -19,6 +18,12 @@ $this->title = Yii::t('app/public',
 	'PRODUCT_BY_PERSON_NAME',
 	['product_name' => $product->getName(), 'person_name' => $person->getName()]
 );
+Yii::$app->opengraph->title = $this->title;
+Yii::$app->opengraph->description = strip_tags($product->description);
+Yii::$app->opengraph->image = $product->getImagePreview(1200, 0);
+Yii::$app->opengraph->twitter->card = 'summary';
+Yii::$app->opengraph->twitter->site = 'Todevise';
+
 $productImages = $product->getUrlGalleryImages();
 $videos = $product->getVideos();
 

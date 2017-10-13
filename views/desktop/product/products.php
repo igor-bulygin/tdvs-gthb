@@ -11,6 +11,8 @@ if ($text) {
 } else {
 	$this->title = Yii::t('app/public', 'WORKS');
 }
+Yii::$app->opengraph->title = $this->title;
+
 $this->registerJs("var searchParam = '".$text."'", yii\web\View::POS_HEAD, 'products-search-script');
 /* \app\assets\desktop\pub\ProductsAsset::register($this); */
 \app\assets\desktop\discover\GlobalAsset::register($this);

@@ -5,6 +5,8 @@ use app\assets\desktop\pub\PublicCommonAsset;
 PublicCommonAsset::register($this);
 
 $this->title = Yii::t('app/public', 'SIGNUP');
+Yii::$app->opengraph->title = $this->title;
+
 ?>
 
 <div class="create-deviser-account-wrapper">
