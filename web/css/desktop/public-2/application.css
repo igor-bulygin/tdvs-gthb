@@ -6173,7 +6173,8 @@ span.optional-text.pull-left {
       width: 43px;
       height: 43px; }
     .bca-content img.community {
-      width: 97px; }
+      width: 97px;
+      margin: 0 auto 17px; }
   .bca-content .title {
     font-weight: bold;
     font-size: 26px;
