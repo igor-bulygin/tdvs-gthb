@@ -27,7 +27,8 @@
 			"PERSONAL_INFO_TITLE": "Información personal y dirección de envío",
 			"SHIPPING_ADDRESS": "Dirección de envío",
 			"CONTINUE_SHIPPING": "Continuar a métodos de envío",
-			"SHIPPING_INFORMATION": "Información de envío"
+			"SHIPPING_INFORMATION": "Información de envío",
+			"NOT_VALID_COUNTRY":"Lo sentimos, actualmente el país seleccionado en tu dirección no está disponible para envíos. Por favor selecciona uno diferente"
 		},
 		"shipping_methods": {
 			"SHIPPING_METHODS_TITLE": "Métodos de envío y direcciones",

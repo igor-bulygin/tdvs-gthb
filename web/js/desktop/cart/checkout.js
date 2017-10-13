@@ -24,7 +24,7 @@
 
 		function getCountries() {
 			function onGetCountriesSuccess(data) {
-				vm.countries = angular.copy(data.items);
+				vm.countries = angular.copy(data);
 			}
 
 			locationDataService.getShippingCountries(null, onGetCountriesSuccess, UtilService.onError);
