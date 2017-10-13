@@ -1,8 +1,6 @@
 
 <?php
 
-use app\helpers\Utils;
-
 /** @var $this \yii\web\View view component instance */
 /** @var \app\models\Order $order*/
 $person = $order->getPerson();
@@ -782,7 +780,7 @@ $billingAddress = $order->getBillingAddress();
 																}?>
 
 															<br>
-															<img height="90" src="<?= Utils::url_scheme() ?><?=Utils::thumborize($product->getMainImage())->resize(90, 90)?>" style="border: 0px  ; width: 120px; height: 90px; margin: 0px;" width="120">&nbsp; &nbsp;&nbsp;<br>
+															<img height="90" src="<?= $product->getImagePreview(90, 90)?>" style="border: 0px  ; width: 120px; height: 90px; margin: 0px;" width="120">&nbsp; &nbsp;&nbsp;<br>
 															<a href="<?=$product->getViewLink()?>" target="_blank" style="color: black;"><span style="font-size:14px"><?=$product->getName()?></span></a><br>
 															<span style="font-size:14px"><strong><?=$packProduct->price * $packProduct->quantity?> Euros</strong></span><br>
 
