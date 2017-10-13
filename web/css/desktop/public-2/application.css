@@ -1019,7 +1019,7 @@ a.btn span {
       .social-items li a i.instagram svg .st0 {
         stroke: #1C1919;
         fill: none;
-        stroke-width: 2; }
+        stroke-width: 0.8; }
 
 footer .social-items li a {
   border: none; }
