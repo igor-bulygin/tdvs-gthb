@@ -754,7 +754,7 @@ class Product extends CActiveRecord {
 	 *
 	 * @return string
 	 */
-	public function getMainImage($urlify = true)
+	public function getMainImage()
 	{
 		$image = "";
 		$defaultImage = "product_placeholder.png";
@@ -781,10 +781,9 @@ class Product extends CActiveRecord {
 			}
 
 			if ($image && $this->existMediaFile($image)) {
+
 				// Only use the image if it exists...
-				if ($urlify) {
-					$image = Yii::getAlias("@product_url") . "/" . $this->short_id . "/" . $image;
-				}
+				$image = Yii::getAlias("@product_url") . "/" . $this->short_id . "/" . $image;
 
 				return $image;
 			}
@@ -792,9 +791,7 @@ class Product extends CActiveRecord {
 
 		// Default image
 		$image = $defaultImage;
-		if ($urlify === true) {
-			$image = Yii::getAlias("@web") . "/imgs/" . $image;
-		}
+		$image = Yii::getAlias("@web") . "/imgs/" . $image;
 
 		return $image;
 	}
