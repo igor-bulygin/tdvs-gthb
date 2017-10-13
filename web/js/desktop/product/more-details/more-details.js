@@ -106,10 +106,10 @@
 
 						if(angular.isObject(imageData) && (imageData.photoCropped || imageData.title || imageData.description)) {
 								//upload cropped photo
-								vm.file = angular.copy(Upload.dataUrltoBlob(imageData.photoCropped, "temp.jpg"));
+								vm.file = angular.copy(Upload.dataUrltoBlob(imageData.photoCropped, "temp.png"));
 								var data = {
 									deviser_id: person.short_id,
-									file: Upload.dataUrltoBlob(imageData.photoCropped, "temp.jpg")
+									file: Upload.dataUrltoBlob(imageData.photoCropped, "temp.png")
 								};
 								if(vm.product.id) {
 									data['type'] = "known-product-photo";
