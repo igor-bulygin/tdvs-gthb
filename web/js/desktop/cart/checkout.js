@@ -27,7 +27,7 @@
 				vm.countries = angular.copy(data.items);
 			}
 
-			locationDataService.getCountry(null, onGetCountriesSuccess, UtilService.onError);
+			locationDataService.getShippingCountries(null, onGetCountriesSuccess, UtilService.onError);
 		}
 
 		function getCart() {
