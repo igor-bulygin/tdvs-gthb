@@ -2,7 +2,7 @@
 
 Example about how to call to Web Service to get the cart
 
-**URL**: `/api/pub/v1/cart/<:cartId>`
+**URL**: `/api3/pub/v1/cart/<:cartId>`
 
 **Method**: `GET`
 

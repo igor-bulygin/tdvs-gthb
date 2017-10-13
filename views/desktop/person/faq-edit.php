@@ -33,6 +33,11 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 			<div class="col-md-10" ng-controller="editFaqCtrl as editFaqCtrl">
 				<div class="faq-wrapper faq-edit-list" ng-if="!editFaqCtrl.saving" ng-cloak>
 					<!-- <div class="section-title">FAQ</div> -->
+					<div id="link-faq-done" ng-if="editFaqCtrl.person.faq.length>0">
+						<a class="red-link-btn" href="#" ng-click="editFaqCtrl.done()">
+							<span translate="person.faq.DONE_FAQ"></span>
+						</a>
+					</div>
 					<div class="edit-faq-wrapper" ng-cloak ng-if="editFaqCtrl.person.faq.length > 0">
 
 						<div dnd-list="editFaqCtrl.person.faq" dnd-dragover="editFaqCtrl.dragOver(index)">
@@ -75,11 +80,6 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 								</div>
 							</div>
 						</div>
-					</div>
-					<div id="link-faq-done" ng-if="editFaqCtrl.person.faq.length>0">
-						<a class="red-link-btn" href="#" ng-click="editFaqCtrl.done()">
-							<span translate="person.faq.DONE_FAQ"></span>
-						</a>
 					</div>
 					<div id="btn-faq-add-question">
 						<button class="btn btn-red btn-default auto-center mb-40" ng-if="editFaqCtrl.person.faq.length > 0" ng-click="editFaqCtrl.addQuestion()"><span translate="person.faq.ADD_QUESTION"></span></button>

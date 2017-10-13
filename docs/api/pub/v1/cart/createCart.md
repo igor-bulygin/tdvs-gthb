@@ -2,7 +2,7 @@
 
 Example about how to call to Web Service to create a new cart
 
-**URL**: `/api/pub/v1/cart`
+**URL**: `/api3/pub/v1/cart`
 
 **Method**: `POST`
 

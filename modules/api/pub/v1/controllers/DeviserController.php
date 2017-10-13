@@ -15,7 +15,7 @@ class DeviserController extends AppPublicController
 	 */
 	public function actionCreate()
 	{
-		throw new NotFoundHttpException("This method was moved to POST /api/pub/v1/person");
+		throw new NotFoundHttpException("This method was moved to POST /api3/pub/v1/person");
 	}
 
 	/**
@@ -24,7 +24,7 @@ class DeviserController extends AppPublicController
 	 */
 	public function actionInvitationRequestsPost()
 	{
-		throw new NotFoundHttpException("This method was moved to POST /api/pub/v1/invitation/request-become-deviser");
+		throw new NotFoundHttpException("This method was moved to POST /api3/pub/v1/invitation/request-become-deviser");
 	}
 
 }

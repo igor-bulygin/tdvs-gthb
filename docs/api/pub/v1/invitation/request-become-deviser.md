@@ -3,7 +3,7 @@
 Example about how to call to Web Service to request an invitation
 to become a Deviser
 
-**URL**: `/api/pub/v1/invitation/request-become-deviser`
+**URL**: `/api3/pub/v1/invitation/request-become-deviser`
 
 **Method**: `POST`
 

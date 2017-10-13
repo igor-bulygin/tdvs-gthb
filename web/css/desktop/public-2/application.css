@@ -1019,7 +1019,7 @@ a.btn span {
       .social-items li a i.instagram svg .st0 {
         stroke: #1C1919;
         fill: none;
-        stroke-width: 2; }
+        stroke-width: 0.8; }
 
 footer .social-items li a {
   border: none; }
@@ -4681,7 +4681,9 @@ h3 {
   .red-link-btn.top {
     z-index: 99;
     cursor: pointer;
-    position: relative; }
+    position: relative;
+    text-align: center;
+    margin: 35px 0 -20px; }
 
 .showcase.influencers {
   min-height: 250px; }
@@ -4714,8 +4716,7 @@ h3 {
 .faq-wrapper.faq-edit-list #link-faq-done {
   display: block;
   margin-top: -30px;
-  position: relative;
-  float: left; }
+  position: relative; }
 .faq-wrapper.faq-edit-list #btn-faq-add-question {
   display: block;
   width: 66.66666667%; }
@@ -5076,7 +5077,7 @@ h3 {
 .loader-about {
   width: 100%;
   height: 250px;
-  margin: 20px 0;
+  margin: 40px 0 20px;
   border-radius: 6px 6px 6px 6px !important;
   -webkit-border-radius: 6px 6px 6px 6px !important;
   -moz-border-radius: 6px 6px 6px 6px !important;
@@ -5411,12 +5412,13 @@ h3 {
     color: #939393; }
 
 .deviser-data-about-edit {
+  margin: 40px 0 0 -15px;
   border: 1px solid #cccccc;
   background-color: #ffffff;
   padding: 0 30px 20px 30px;
   width: 90%;
   position: absolute;
-  top: 50px;
+  top: 0;
   left: 40px;
   border-radius: 6px 6px 6px 6px !important;
   -webkit-border-radius: 6px 6px 6px 6px !important;
@@ -6171,7 +6173,8 @@ span.optional-text.pull-left {
       width: 43px;
       height: 43px; }
     .bca-content img.community {
-      width: 97px; }
+      width: 97px;
+      margin: 0 auto 17px; }
   .bca-content .title {
     font-weight: bold;
     font-size: 26px;
@@ -7724,7 +7727,7 @@ input:checked + .slider:before {
   max-width: 200px; }
 
 .cart-top-bar {
-  background-color: #bfbfbf;
+  background-color: #1C1919;
   height: 31px; }
 
 .continue-shopping-btn {
@@ -7853,7 +7856,7 @@ input:checked + .slider:before {
 
 .checkout-sidebar {
   background-color: #f4f4f4;
-  margin: 20px auto; }
+  margin: 0 auto; }
 
 .deviser-name-item {
   text-align: left;
@@ -7982,12 +7985,13 @@ input:checked + .slider:before {
 
 .summary-cart-wrapper-full {
   padding: 0 15px;
-  background-color: #da929e;
+  margin: 89px 0 20px;
+  background-color: #eccacf;
   width: 100%;
   float: left; }
 
 .deviser-shipping-wrapper {
-  background-color: #da929e;
+  background-color: #eccacf;
   width: 100%;
   float: left; }
 
@@ -8007,7 +8011,7 @@ input:checked + .slider:before {
   width: 100%;
   float: left;
   margin: 0;
-  padding: 30px 0; }
+  padding: 0 0 20px; }
 
 .deviser-title-wrapper {
   width: 100%;
@@ -8052,6 +8056,9 @@ cart-panel .cart-panel-div {
 .px-2 {
   padding-right: 0.5rem;
   padding-left: 0.5rem; }
+
+.price-bigger {
+  font-size: 21px; }
 
 .upper-setting-header {
   height: 76px;

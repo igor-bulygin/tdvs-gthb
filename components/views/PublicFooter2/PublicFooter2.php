@@ -127,9 +127,9 @@ $footerMode = 'collapsed';
 									<g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
 										<g id="REDISEÑO" transform="translate(-2102.000000, -244.000000)">
 											<g id="Group-24" transform="translate(2102.000000, 244.000000)">
-												<rect id="Rectangle-3" stroke="#1C1919" stroke-width="0.8" x="0.4" y="0.4" width="22.2" height="23.2" rx="6"></rect>
-												<circle id="Oval-8" stroke="#1C1919" stroke-width="0.8" cx="11.5" cy="12.5" r="5.5"></circle>
-												<path d="M19,5 C19,5.55228943 18.5521628,6 17.9997173,6 C17.4478372,6 17,5.55228943 17,5 C17,4.44771057 17.4478372,4 17.9997173,4 C18.5521628,4 19,4.44771057 19,5" id="Fill-6" fill="#1C1919"></path>
+												<rect class="st0" id="Rectangle-3" stroke-width="0.8" x="0.4" y="0.4" width="22.2" height="23.2" rx="6"></rect>
+												<circle class="st0" id="Oval-8" stroke-width="0.8" cx="11.5" cy="12.5" r="5.5"></circle>
+												<path class="st0" d="M19,5 C19,5.55228943 18.5521628,6 17.9997173,6 C17.4478372,6 17,5.55228943 17,5 C17,4.44771057 17.4478372,4 17.9997173,4 C18.5521628,4 19,4.44771057 19,5" id="Fill-6" fill="#1C1919"></path>
 											</g>
 										</g>
 									</g>

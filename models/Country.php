@@ -189,6 +189,11 @@ class Country extends CActiveRecord
 			$query->andWhere(["continent" => $criteria['continent']]);
 		}
 
+		// if country_code is specified
+		if ((array_key_exists("country_code", $criteria)) && (!empty($criteria["country_code"]))) {
+			$query->andWhere(["country_code" => $criteria['country_code']]);
+		}
+
 		// if person_type is specified
 		if ((array_key_exists("person_type", $criteria)) && (!empty($criteria["person_type"]))) {
 			// Get different countries available by person type
@@ -314,7 +319,61 @@ class Country extends CActiveRecord
 		return $country_codes;
 	}
 
+	/**
+	 * Returns the code of the default country
+	 *
+	 * @return string
+	 */
 	public static function getDefaultContryCode() {
 		return "ES";
+	}
+
+	/**
+	 * Returns a list of available country codes for shipping
+	 *
+	 * @return array
+	 */
+	public static function getShippingAvailableCountryCodes() {
+		return [
+			'ES', 'US',
+		];
+	}
+
+	/**
+	 * Returns the list of available countries for shipping
+	 * @return Country[]
+	 */
+	public static function getShippingCountries() {
+		return static::findSerialized([
+			'country_code' => static::getShippingAvailableCountryCodes(),
+		]);
+	}
+
+	/**
+	 * Returns an special object containing all the continents and the countries
+	 *
+	 * @return \stdClass
+	 */
+	public static function getWorldwide() {
+
+		$continents = [];
+		foreach (Country::CONTINENTS as $code => $name) {
+			if ($code != Country::WORLD_WIDE) {
+				$continent = new \stdClass();
+				$continent->code = $code;
+				$continent->name = $name;
+				$continent->path = Country::WORLD_WIDE.'/'.$code;
+				$continent->items = Country::findSerialized(['continent' => $code]);
+				$continents[] = $continent;
+			}
+		}
+
+		$worldwide = new \stdClass();
+		$worldwide->code = Country::WORLD_WIDE;
+		$worldwide->name = Country::CONTINENTS[Country::WORLD_WIDE];
+		$worldwide->path = Country::WORLD_WIDE;
+		$worldwide->items = $continents;
+
+		return $worldwide;
 	}
 }
