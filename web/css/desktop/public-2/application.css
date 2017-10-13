@@ -1019,7 +1019,7 @@ a.btn span {
       .social-items li a i.instagram svg .st0 {
         stroke: #1C1919;
         fill: none;
-        stroke-width: 2; }
+        stroke-width: 0.8; }
 
 footer .social-items li a {
   border: none; }
@@ -1847,8 +1847,8 @@ input[type="radio"] .styled:checked + label::after {
   margin: 0 2px; }
 
 .grey-box {
-  background: url(/imgs/box.svg) 0 5px no-repeat #ffffff;
-  width: 31px;
+  background: url(/imgs/box-black.svg) 0 5px no-repeat #ffffff;
+  width: 23px;
   height: 23px;
   display: inline-block; }
 
@@ -6173,7 +6173,8 @@ span.optional-text.pull-left {
       width: 43px;
       height: 43px; }
     .bca-content img.community {
-      width: 97px; }
+      width: 97px;
+      margin: 0 auto 17px; }
   .bca-content .title {
     font-weight: bold;
     font-size: 26px;

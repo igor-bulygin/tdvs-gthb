@@ -24,12 +24,12 @@
 					vm.description = 'util.modal_crop.CROP_HEADER_PHOTO_DESCRIPTION';
 					break;
 				case "header_cropped_small":
-					vm.area_type = 'rectangle';
+					vm.area_type = 'square';
 					vm.size = {
-						w: 702,
-						h: 450
+						w: 312,
+						h: 312
 					}
-					vm.aspect_ratio = 1.56;
+					vm.aspect_ratio = 1;
 					vm.title = 'util.modal_crop.CROP_HEADER_SMALL_PHOTO';
 					vm.description = 'util.modal_crop.CROP_HEADER_SMALL_PHOTO_DESCRIPTION';
 					break;
