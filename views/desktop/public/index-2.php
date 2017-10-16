@@ -139,7 +139,7 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 						<div class="col-md-4 col-sm-4 col-xs-12 pad-showcase">
 								<a href="<?= $deviser->getStoreLink()?>">
 								<figure class="showcase">
-									<img src="<?= $deviser->getHeaderSmallImage(350, 344) ?>" class="showcase-image">
+									<img class="deviser-discover-img showcase-image" src="<?= $deviser->getHeaderSmallImage(350, 344) ?>" class="showcase-image">
 								<figcaption>
 								<div class="row">
 									<div class="col-md-6">
