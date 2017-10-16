@@ -966,10 +966,8 @@ class Person extends CActiveRecord implements IdentityInterface
 	{
 		$url = "/imgs/default-cover.jpg";
 
-		$fit = true;
 		$image = null;
 		if (Person::existMediaFile($this->mediaMapping->header_cropped_small)) {
-			$fit = false;
 			$image = Person::getUrlImagesLocation() . $this->mediaMapping->header_cropped_small;
 		} elseif (Person::existMediaFile($this->mediaMapping->header_cropped)) {
 			$image = Person::getUrlImagesLocation() . $this->mediaMapping->header_cropped;
@@ -977,11 +975,7 @@ class Person extends CActiveRecord implements IdentityInterface
 			$image = Person::getUrlImagesLocation() . $this->mediaMapping->header;
 		}
 		if ($image) {
-			if ($fit) {
-				$url = Utils::url_scheme() . Utils::thumborize($image)->fitIn($width, $height)->addFilter('fill','auto');
-			} else {
-				$url = Utils::url_scheme() . Utils::thumborize($image)->resize($width, $height);
-			}
+			$url = Utils::url_scheme() . Utils::thumborize($image)->resize($width, $height);
 		}
 
 		return $url;
