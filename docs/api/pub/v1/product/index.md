@@ -5,7 +5,7 @@ Products
 
 **Note**: This method only returns published (product_state_active) products
 
-**URL**: `/api/pub/v1/products`
+**URL**: `/api3/pub/v1/products`
 
 **Method**: `GET`
 

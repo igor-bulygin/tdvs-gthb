@@ -2,7 +2,7 @@
 
 Example about how to call to Web Service to get specific Invitation
 
-**URL**: `/api/pub/v1/invitations/<:uuid>`
+**URL**: `/api3/pub/v1/invitations/<:uuid>`
 
 **Method**: `GET`
 

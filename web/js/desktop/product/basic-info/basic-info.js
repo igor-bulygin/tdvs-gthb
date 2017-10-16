@@ -250,6 +250,19 @@
 			}
 		}
 
+		function orderProductPhotos() {
+			var aux=new Array(vm.images.length);
+			angular.forEach(vm.images, function (image) {
+				angular.forEach(vm.product.media.photos, function (photo) {
+					if (photo.name === image.filename.name) {
+						aux[vm.images.indexOf(image)]=photo;
+					}
+				});
+				
+			});
+			vm.product.media.photos = angular.copy(aux);
+		}
+
 		$scope.$watch('productBasicInfoCtrl.product.categories', function(newValue, oldValue) {
 			if(angular.isArray(oldValue) && oldValue[0]===null && angular.isArray(newValue) && newValue.length > 0 && vm.product.id) {
 				for(var i = 0; i < newValue.length; i++) {
@@ -327,6 +340,11 @@
 					});
 				}
 			}
+		}, true);
+
+		//watch name error
+		$scope.$watch('productBasicInfoCtrl.images', function(newValue, oldValue) {
+			orderProductPhotos();
 		}, true);
 
 		//events

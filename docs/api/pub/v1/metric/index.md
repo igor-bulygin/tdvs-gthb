@@ -3,7 +3,7 @@
 Example about how to call to Web Service to get a public list of 
 Metric
 
-**URL**: `/api/pub/v1/metric`
+**URL**: `/api3/pub/v1/metric`
 
 **Method**: `GET`
 

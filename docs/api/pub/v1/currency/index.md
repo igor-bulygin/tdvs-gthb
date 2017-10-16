@@ -3,7 +3,7 @@
 Example about how to call to Web Service to get a public list of 
 Currency
 
-**URL**: `/api/pub/v1/currency`
+**URL**: `/api3/pub/v1/currency`
 
 **Method**: `GET`
 

@@ -3,7 +3,7 @@
 Example about how to call to Web Service to get a public list of 
 Box
 
-**URL**: `/api/pub/v1/box`
+**URL**: `/api3/pub/v1/box`
 
 **Method**: `GET`
 

@@ -3,7 +3,7 @@
 Example about how to call to Web Service to get a public list of 
 PaperType
 
-**URL**: `/api/pub/v1/paper-type`
+**URL**: `/api3/pub/v1/paper-type`
 
 **Method**: `GET`
 

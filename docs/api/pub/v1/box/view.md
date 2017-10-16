@@ -2,7 +2,7 @@
 
 Example about how to call to Web Service to get specific box
 
-**URL**: `/api/pub/v1/box/<:id>`
+**URL**: `/api3/pub/v1/box/<:id>`
 
 **Method**: `GET`
 
