@@ -962,7 +962,7 @@ class Person extends CActiveRecord implements IdentityInterface
 	 *
 	 * @return string
 	 */
-	public function getHeaderSmallImage($width = 290, $height = 185)
+	public function getHeaderSmallImage($width = 702, $height = 450)
 	{
 		$url = "/imgs/default-cover.jpg";
 

@@ -3604,13 +3604,13 @@ h3 {
   color: #6b6b6b; }
 
 .deviser-discover-img {
-  position: absolute;
+  /*position: absolute;*/
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   margin: auto;
-  width: 138% !important;
+  /*width: 138% !important;*/
   max-width: none !important; }
 
 /*.col-xs-15,
