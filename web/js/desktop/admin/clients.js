@@ -29,9 +29,9 @@
 			modalInstance.result.then(function () {
 				$person.get({
 					short_id: client_id
-				}).then(function (client) {
-					if (client.length !== 1) return;
-					client = client.shift();
+				}).then(function (clients) {
+					if (clients.length !== 1) return;
+					var client = clients[0];
 
 					$person.delete(client).then(function (data) {
 						toastr.success("Influencer deleted!");
@@ -68,7 +68,6 @@
 					if (clients.length !== 1) return;
 					var client = clients[0];
 					client.account_state = 'blocked';
-					console.log(client);
 
 					$person.modify('POST', client).then(function (data) {
 						toastr.success("client blocked!");
@@ -105,7 +104,6 @@
 					if (clients.length !== 1) return;
 					var client = clients[0];
 					client.account_state = 'active';
-					console.log(client);
 
 					$person.modify('POST', client).then(function (data) {
 						toastr.success("Client actived!");
