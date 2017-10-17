@@ -2255,7 +2255,7 @@ h3 {
       padding: 0; } }
 
 .settings-right-side {
-  padding: 170px 0 0 60px !important; }
+  padding: 172px 0 0 60px !important; }
   @media (max-width: 991px) {
     .settings-right-side {
       display: block;
@@ -3602,14 +3602,6 @@ h3 {
   padding: 15px 0;
   text-transform: lowercase;
   color: #6b6b6b; }
-
-.deviser-discover-img {
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-  max-width: none !important; }
 
 /*.col-xs-15,
 .col-sm-15,
