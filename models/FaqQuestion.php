@@ -74,7 +74,7 @@ class FaqQuestion extends EmbedModel
 			],
 			[
 				['question', 'answer'],
-				'app\validators\TranslatableRequiredValidator',
+				'app\validators\TranslatableValidator',
 				'on' => [
 					Person::SCENARIO_DEVISER_UPDATE_DRAFT,
 					Person::SCENARIO_DEVISER_UPDATE_PROFILE,
