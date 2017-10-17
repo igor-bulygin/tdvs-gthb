@@ -2,7 +2,7 @@
 	"use strict";
 
 	function controller(productDataService, tagDataService, cartDataService, lovedDataService, boxDataService, 
-		$location, toastr, UtilService, $window, $uibModal, localStorageUtilService) {
+		$location, toastr, UtilService, $window, $uibModal, localStorageUtilService, $timeout) {
 		var vm = this;
 		vm.quantity = 1;
 		vm.option_selected = {};
@@ -281,9 +281,15 @@
 				vm.cart = angular.copy(data);
 				vm.addingToCart=false;
 				vm.showCartPanel=true;
+				$timeout(function() { vm.showCartPanel=false; }, 10000);
 			}
 			function onSaveProductError(err) {
 				switch (err.status) {
+					case 400://bad request
+						if (err.data.message && err.data.message.toUpperCase().includes('STOCK')) {
+								vm.stock=0;
+						}
+						break;
 					//not my cart
 					case 401:
 					//cart doesn't exist
@@ -296,6 +302,7 @@
 						console.log(err);
 						break;
 				}
+				vm.addingToCart=false;
 			}
 			cartDataService.addProduct({
 				product_id: vm.product.id,
