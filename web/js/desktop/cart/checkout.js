@@ -24,10 +24,10 @@
 
 		function getCountries() {
 			function onGetCountriesSuccess(data) {
-				vm.countries = angular.copy(data.items);
+				vm.countries = angular.copy(data);
 			}
 
-			locationDataService.getCountry(null, onGetCountriesSuccess, UtilService.onError);
+			locationDataService.getShippingCountries(null, onGetCountriesSuccess, UtilService.onError);
 		}
 
 		function getCart() {

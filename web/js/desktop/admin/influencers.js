@@ -29,9 +29,9 @@
 			modalInstance.result.then(function () {
 				$person.get({
 					short_id: influencer_id
-				}).then(function (influencer) {
-					if (influencer.length !== 1) return;
-					influencer = influencer.shift();
+				}).then(function (influencers) {
+					if (influencers.length !== 1) return;
+					var influencer = influencers[0];
 
 					$person.delete(influencer).then(function (data) {
 						toastr.success("Influencer deleted!");
@@ -68,7 +68,6 @@
 					if (influencers.length !== 1) return;
 					var influencer = influencers[0];
 					influencer.account_state = 'blocked';
-					console.log(influencer);
 
 					$person.modify('POST', influencer).then(function (data) {
 						toastr.success("influencer blocked!");
@@ -105,7 +104,6 @@
 					if (influencers.length !== 1) return;
 					var influencer = influencers[0];
 					influencer.account_state = 'draft';
-					console.log(influencer);
 
 					$person.modify('POST', influencer).then(function (data) {
 						toastr.success("influencer actived as draft!");
