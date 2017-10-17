@@ -48,7 +48,6 @@
 			font-size: 30px;//24px;
 			text-align: center;
 			text-transform: uppercase;
-			font-family: $font-family--bold;
 			display: block;
     		margin: 0 0 30px;
     		color: $light_grey;
@@ -56,12 +55,10 @@
 		.row{
 			margin-bottom: 20px;
 			label{
-				font-family: $font-family--bold;
 				text-transform: uppercase;
 			}
 			.info{
 				color: $darker_grey;
-				font-family: $font-family--secondary;
 			}
 			.title-lang-btn{
 				button{
@@ -290,12 +287,13 @@
 		@include border-radius(6px,6px,6px,6px);
 		cursor: move;
 		height: 150px;
+		width: 150px;
 		position: relative;
 		margin: 0 15px 15px 0;
 	img{
-		max-height: 110px;
+		max-height: 140px;
 		width: auto;
-		max-width: 110px;
+		max-width: 140px;
 		position: absolute;
 		left: 0;
 		right: 0;
@@ -318,18 +316,14 @@
 		@include border-radius(7px,7px,7px,7px);
 	}
 	.delete{
-		background-color: $dark_grey;
-		color: $white;
 		cursor: pointer;
 		position: absolute;
 		right: 5px;
-    	top: 5px;
+		bottom: 20px;
 		width: 25px;
 		height: 25px;
-		font-size: 16px;
+		font-size: 32px;
 		text-align: center;
-		padding: 1px 0 0 0;
-		@include border-radius(7px,7px,7px,7px);
 	}
 }
 tags-input .tags{

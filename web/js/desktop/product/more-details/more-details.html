@@ -2,15 +2,20 @@
 	<span class="title" translate="product.more_details.TITLE"></span>
 	<form name="productMoreDetailsCtrl.form" novalidate>
 		<div class="row">
-			<label class="col-xs-12"><span translate="product.more_details.PHOTOS_DESCRIPTION"></span></label>
-			<div class="col-md-2 button"  ngf-drop-available="productMoreDetailsCtrl.isDropAvailable" ngf-select="productMoreDetailsCtrl.openCropModal($file)" ngf-accept="'image/*'"><a class="link-red mb-30" style="cursor:pointer;" translate="product.more_details.ADD_PHOTOS"></a></div>
-			<span class="info col-md-10" translate="product.more_details.ENRICH_DESCRIPTION"></span>
+			<label class="col-xs-12">
+				<span translate="product.more_details.PHOTOS_DESCRIPTION"></span>
+			</label>
+			<div class="col-md-12"  ngf-drop-available="productMoreDetailsCtrl.isDropAvailable" ngf-select="productMoreDetailsCtrl.openCropModal($file)" ngf-accept="'image/*'">
+				<a class="btn btn-small btn-red mb-30" style="cursor:pointer;" translate="product.more_details.ADD_PHOTOS"></a>
+			</div>
+			
+			<span class="info col-md-10 mt-20 mb-20" translate="product.more_details.ENRICH_DESCRIPTION"></span>
 			<div class="col-md-8">
 				<div class="col-md-3 pad-about mr-15">
 					<div ng-if="productMoreDetailsCtrl.isDropAvailable">
 						<div class="description-add-photos" ngf-drop-available="productMoreDetailsCtrl.isDropAvailable" ngf-drag-over-class="drag-over" ngf-drop ngf-select="productMoreDetailsCtrl.openCropModal($file)" ngf-accept="'image/*'">
 							<div class="plus-add-wrapper">
-								<br/><br/><br/>
+
 							</div>
 						</div>
 					</div>
@@ -21,7 +26,9 @@
 				<div class="item draggable-list" dnd-list="productMoreDetailsCtrl.images" dnd-dragover="productMoreDetailsCtrl.dragOver(index)">
 					<div class="col-md-3 image-description-edit" ng-repeat="image in productMoreDetailsCtrl.images" dnd-draggable="image" dnd-effect-allowed="move" dnd-dragstart="productMoreDetailsCtrl.dragStart($index)" dnd-canceled="productMoreDetailsCtrl.canceled()" dnd-moved="productMoreDetailsCtrl.moved($index)">
 						<img class="grid-image" ng-src="{{image.url}}" alt="">
-						<span class="delete ion-android-close" ng-click="productMoreDetailsCtrl.deleteImage($index)"></span>
+						
+						<span class="ion-trash-a red-icon delete" ng-click="productMoreDetailsCtrl.deleteImage($index)"></span>
+						
 					</div>
 				</div>
 				<div class="col-md-3 image-description-edit" ng-if="productMoreDetailsCtrl.file.progress">
