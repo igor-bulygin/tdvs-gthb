@@ -255,17 +255,19 @@
 		}
 
 		function changeOriginalArtwork(value) {
-			var original_artwork = getOriginalArtwork(vm.product);
-			if(value == true && UtilService.isObject(original_artwork)) {
-				vm.stock = original_artwork.stock;
-				vm.price = original_artwork.price;
-				vm.reference_id = original_artwork.short_id;
-				vm.require_options = false;
-			} else {
-				vm.stock = vm.total_stock;
-				vm.price = vm.minimum_price;
-				vm.require_options = true;
-				vm.reference_id = getReferenceId(vm.option_selected);
+			if (!vm.addingToCart) {
+				var original_artwork = getOriginalArtwork(vm.product);
+				if(value == true && UtilService.isObject(original_artwork)) {
+					vm.stock = original_artwork.stock;
+					vm.price = original_artwork.price;
+					vm.reference_id = original_artwork.short_id;
+					vm.require_options = false;
+				} else {
+					vm.stock = vm.total_stock;
+					vm.price = vm.minimum_price;
+					vm.require_options = true;
+					vm.reference_id = getReferenceId(vm.option_selected);
+				}
 			}
 		}
 
