@@ -26,7 +26,7 @@
 				<div class="item draggable-list" dnd-list="productMoreDetailsCtrl.images" dnd-dragover="productMoreDetailsCtrl.dragOver(index)">
 					<div class="col-md-3 image-description-edit" ng-repeat="image in productMoreDetailsCtrl.images" dnd-draggable="image" dnd-effect-allowed="move" dnd-dragstart="productMoreDetailsCtrl.dragStart($index)" dnd-canceled="productMoreDetailsCtrl.canceled()" dnd-moved="productMoreDetailsCtrl.moved($index)">
 						<img class="grid-image" ng-src="{{image.url}}" alt="">
-						
+						<span class="ion-edit red-icon edit"></span>
 						<span class="ion-trash-a red-icon delete" ng-click="productMoreDetailsCtrl.deleteImage($index)"></span>
 						
 					</div>
