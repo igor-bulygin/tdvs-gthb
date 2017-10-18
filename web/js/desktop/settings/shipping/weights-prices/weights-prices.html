@@ -31,7 +31,7 @@
 
 					<span ng-if="shippingWeightsPricesCtrl.setting.shipping_express_time" ng-cloak>
 						<span class="two-lines-label" translate="settings.shipping.EXPRESS_SHIPPING"></span>
-						<input type="number" ng-model="price.price_express" class="input-medium-size form-control ng-class:{'error-input': shippingWeightsPricesCtrl.has_error(shippingWeightsPricesCtrl.pricesForm, shippingWeightsPricesCtrl.pricesForm['price_express_'+$index])}" name="{{'price_express_'+$index}}" ng-required="setting.shipping_express_time" min="0" ng-max="price.price-1">
+						<input type="number" ng-model="price.price_express" class="input-medium-size form-control ng-class:{'error-input': shippingWeightsPricesCtrl.has_error(shippingWeightsPricesCtrl.pricesForm, shippingWeightsPricesCtrl.pricesForm['price_express_'+$index])}" name="{{'price_express_'+$index}}" ng-required="setting.shipping_express_time" ng-min="price.price">
 						<span ng-bind="shippingWeightsPricesCtrl.currency"></span>
 					</span>
 
