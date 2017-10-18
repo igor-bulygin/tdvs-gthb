@@ -321,6 +321,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 														</i>
 													</a>
 												</li>
+												<?php /*
 												<li>
 													<a class="pinterest" href="http://pinterest.com/pin/create/button/?url=<?=$sharerUrl?>&media=<?=$sharerImage?>&description=<?=$sharerTitle?>" target="_blank">
 														<i class="pinterest" aria-hidden="true">
@@ -338,6 +339,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 														</i>
 													</a>
 												</li>
+												*/ ?>
 											</ul>
 
 										<?php /*
