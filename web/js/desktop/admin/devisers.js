@@ -29,8 +29,9 @@
 			modalInstance.result.then(function () {
 				$person.get({
 					short_id: deviser_id
-				}).then(function (deviser) {
-					if (deviser.length !== 1) return;
+				}).then(function (devisers) {
+					if (devisers.length !== 1) return;
+					var deviser = devisers[0];
 
 					$person.delete(deviser).then(function (data) {
 						toastr.success("Deviser deleted!");
@@ -67,7 +68,6 @@
 					if (devisers.length !== 1) return;
 					var deviser = devisers[0];
 					deviser.account_state = 'blocked';
-					console.log(deviser);
 
 					$person.modify('POST', deviser).then(function (data) {
 						toastr.success("Deviser blocked!");
@@ -104,7 +104,6 @@
 					if (devisers.length !== 1) return;
 					var deviser = devisers[0];
 					deviser.account_state = 'draft';
-					console.log(deviser);
 
 					$person.modify('POST', deviser).then(function (data) {
 						toastr.success("Deviser actived as draft!");

@@ -27,7 +27,8 @@
 			"PERSONAL_INFO_TITLE": "Personal info & shipping address",
 			"SHIPPING_ADDRESS": "Shipping address",
 			"CONTINUE_SHIPPING": "Continue to shipping methods",
-			"SHIPPING_INFORMATION": "Shipping information"
+			"SHIPPING_INFORMATION": "Shipping information",
+			"NOT_VALID_COUNTRY":"Sorry, actually the country into your address is not available to ship. Please, select a new one"
 		},
 		"shipping_methods": {
 			"SHIPPING_METHODS_TITLE": "Shipping methods & addresses",

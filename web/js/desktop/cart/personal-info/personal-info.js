@@ -7,10 +7,21 @@
 		vm.has_error = UtilService.has_error;
 		vm.save = save;
 		vm.editShippingAddress = editShippingAddress;
-
+		vm.adressValidToShip=true;
 		init();
 
-		function init(){}
+		function init(){
+			if (!angular.isUndefined(vm.cart.shipping_address) && vm.cart.shipping_address!=null && !angular.isUndefined(vm.cart.shipping_address.country)) {
+				var actualCountry=vm.cart.shipping_address.country;
+				var isValid=false;
+				vm.countries.forEach(function(country) {
+					if (country.id === actualCountry) {
+						isValid = true;
+					}
+				});
+				vm.adressValidToShip=isValid;
+			}
+		}
 
 		function save(form){
 			form.$submitted = true;

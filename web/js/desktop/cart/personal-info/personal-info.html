@@ -1,6 +1,7 @@
 <div class="personal-info-wrapper">
 	<span class="shopping-cart-section-header">1 <span translate="cart.personal_info.PERSONAL_INFO_TITLE"></span></span>
 	<div ng-if="personalInfoCtrl.state===1">
+		<span class="col-md-12" ng-if="!personalInfoCtrl.adressValidToShip" ng-cloak><span class="error-input" translate="cart.personal_info.NOT_VALID_COUNTRY"></span></span>
 		<form class="form-horizontal" name="personalInfoCtrl.form" novalidate>
 		<div class="col-md-6">
 				<span class="billing-header"><span translate="cart.PERSONAL_DETAILS"></span></span>
@@ -38,7 +39,7 @@
 				</div>
 		</div>
 		<div class="col-md-6">
-			<span class="billing-header"><span translate="cart.personal_info.SHIPPING_ADDRESS"></span></span>
+			<span class="billing-header"><span translate="cart.personal_info.SHIPPING_ADDRESS"></span></span>			
 			<div class="form-group form-personal-info">
 				<label for="country" class="col-md-3"><span translate="cart.COUNTRY"></span></label>
 				<div class="col-md-9">

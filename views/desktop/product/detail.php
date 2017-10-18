@@ -31,8 +31,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 
 ?>
 
-	<!-- PRODUCT CARD -->
-
+<!-- PRODUCT CARD -->
 <div ng-controller="detailProductCtrl as detailProductCtrl">
 	<cart-panel packs="detailProductCtrl.cart.packs" total="detailProductCtrl.cart.subtotal" ng-if="detailProductCtrl.showCartPanel" ng-cloak>
 	</cart-panel>
@@ -77,10 +76,10 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 									</div>
 									<ul class='carousel-indicators thumbs mCustomScrollbar'>
 										<?php foreach ($productImages as $key => $imageUrl) { ?>
-											<li class="col-sm-2" data-target='#carousel-custom' data-slide-to='<?= $key ?>' class='active'>
-												<img src='<?= Utils::url_scheme() ?><?= Utils::thumborize($imageUrl)->resize(410, 0) ?>' alt='' />
-											</li>
-											<?php } ?>
+										<li class="col-sm-2" data-target='#carousel-custom' data-slide-to='<?= $key ?>' class='active'>
+											<img src='<?= Utils::url_scheme() ?><?= Utils::thumborize($imageUrl)->resize(410, 0) ?>' alt='' />
+										</li>
+										<?php } ?>
 									</ul>
 									<div id="arrow-down">
 										<span class="ion-ios-arrow-down"></span>
@@ -91,10 +90,10 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 										<!-- Wrapper for slides -->
 										<div class='carousel-inner'>
 											<?php foreach ($productImages as $key => $imageUrl) { ?>
-												<div class='item <?= ($key==0) ? ' active ' : ' ' ?>'>
-													<img class="product-slide" src='<?= Utils::url_scheme() ?><?= Utils::thumborize($imageUrl)->resize(410, 0) ?>' alt='' />
-												</div>
-												<?php } ?>
+											<div class='item <?= ($key==0) ? ' active ' : ' ' ?>'>
+												<img class="product-slide" src='<?= Utils::url_scheme() ?><?= Utils::thumborize($imageUrl)->resize(410, 0) ?>' alt='' />
+											</div>
+											<?php } ?>
 										</div>
 										<?php if (count($productImages)>1) { ?>
 										<!-- Controls -->
@@ -137,26 +136,23 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 							<span class="number-score">(20)</span>
 							*/ ?>
 						</div>
-						<div class="product-data-wrapper text-center" ng-if="detailProductCtrl.addingToCart" ng-cloak>
-							<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-						</div>
-						<div ng-if="!detailProductCtrl.addingToCart" ng-cloak>
+						<div ng-cloak>
 							<div class="product-data no-border">
 								<div class="price-stock pull-left">
 									<div class="stock"><span ng-bind="detailProductCtrl.stock"></span><span translate="product.detail.IN_STOCK"></span></div>
 									<div class="product-price">€ <span ng-bind="detailProductCtrl.price"></span></div>
 								</div>
 								<div class="quantity-wrapper pull-right">
-									<button class="btn btn-none btn-summatory" ng-click="detailProductCtrl.changeQuantity(-1)">
+									<button class="btn btn-none btn-summatory" ng-click="detailProductCtrl.changeQuantity(-1)" ng-disabled="detailProductCtrl.addingToCart">
 										<i class="ion-minus"></i>
 									</button>
 									<div class="number" ng-bind="detailProductCtrl.quantity"></div>
-									<button class="btn btn-none btn-summatory" ng-click="detailProductCtrl.changeQuantity(1)">
+									<button class="btn btn-none btn-summatory" ng-click="detailProductCtrl.changeQuantity(1)" ng-disabled="detailProductCtrl.addingToCart">
 										<i class="ion-plus"></i>
 									</button>
 								</div>
 							</div>
-							  <div class="product-data no-border">
+							<div class="product-data no-border">
 								<ul class="nav nav-tabs product-detail-tabs" role="tablist" ng-if="detailProductCtrl.original_artwork && detailProductCtrl.has_prints" ng-cloak>
 									<li role="presentation" class="active">
 										<a href="#" aria-controls="description" role="tab" data-toggle="tab" ng-click="detailProductCtrl.changeOriginalArtwork(true)"><span translate="product.detail.ORIGINAL"></span></a>
@@ -215,7 +211,18 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 									</form>
 								</div>-->
 								<div class="row-size">
-									<button type="button" class="btn btn-medium btn-red auto-center" ng-disabled="detailProductCtrl.stock === 0" ng-click="detailProductCtrl.addToCart(detailProductCtrl.tagsForm)"><span class="cart-icon"></span> <span translate="{{detailProductCtrl.stock === 0 ? 'product.detail.OUT_OF_STOCK' : 'product.detail.ADD_TO_CART'}}"></span></button>
+									<button type="button" class="btn btn-medium btn-red auto-center" ng-disabled="detailProductCtrl.stock === 0 || detailProductCtrl.addingToCart" ng-click="detailProductCtrl.addToCart(detailProductCtrl.tagsForm)">
+										<span class="col-md-12">
+											<span class="col-md-10">
+												<span class="cart-icon"></span> <span translate="{{detailProductCtrl.stock === 0 ? 'product.detail.OUT_OF_STOCK' : 'product.detail.ADD_TO_CART'}}"></span>
+											</span>
+											<span class="text-right col-md-2">
+												<span ng-if="detailProductCtrl.addingToCart" ng-cloak>
+													<i class="fa fa-spinner fa-pulse fa-fw"></i>
+												</span>
+											</span>
+										</span>
+									</button>
 								</div>
 							</div>
 							<!--<div class="product-data">
@@ -251,15 +258,15 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 								<div class="full-width mb-20">
 									<div class="btns-product-wrapper">
 										<?php if ($product->isWorkFromCurrentUser()) { ?>
-											<a href="<?=$product->getEditLink()?>" class="btn btn-hart pull-left">
-												<i class="ion-edit"></i>
-												<span translate="product.detail.EDIT_WORK"></span>
-											</a>
+										<a href="<?=$product->getEditLink()?>" class="btn btn-hart pull-left">
+											<i class="ion-edit"></i>
+											<span translate="product.detail.EDIT_WORK"></span>
+										</a>
 										<?php } else { ?>
-											<button type="button" class="btn btn-love pull-left" ng-class="detailProductCtrl.product.isLoved ? 'heart-red-icon-btn' : 'btn-love'" ng-click="detailProductCtrl.setLoved()">
-												<div class="heart-icon"></div>
-												<!--i class="ion-ios-heart-outline"></i-->
-											</button>
+										<button type="button" class="btn btn-love pull-left" ng-class="detailProductCtrl.product.isLoved ? 'heart-red-icon-btn' : 'btn-love'" ng-click="detailProductCtrl.setLoved()">
+											<div class="heart-icon"></div>
+											<!--i class="ion-ios-heart-outline"></i-->
+										</button>
 										<?php } ?>
 										<button type="button" class="btn btn-save-box pull-right" ng-click="detailProductCtrl.setBox()">
 											<div class="box-icon"></div>
@@ -298,59 +305,59 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 													<a href="https://facebook.com/todevise">
 														<i class="facebook">
 															<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
-																 x="0px" y="0px"
-																 viewBox="0 0 23 42" style="enable-background:new 0 0 23 42;" xml:space="preserve">
+															x="0px" y="0px"
+															viewBox="0 0 23 42" style="enable-background:new 0 0 23 42;" xml:space="preserve">
 															<g id="Page-1">
 																<path id="Path" class="st0" d="M14.3,41V21h5.9l0.8-6.9h-6.7l0-3.4c0-1.8,0.2-2.8,3-2.8H21V1H15c-7.1,0-9.6,3.3-9.6,9v4.1H1V21h4.4
-																	v20H14.3L14.3,41L14.3,41L14.3,41z"/>
+																v20H14.3L14.3,41L14.3,41L14.3,41z"/>
 															</g>
-															</svg>
-														</i>
-													</a>
-												</li>
-												
-												<li>
-													<a class="twitter" href="https://twitter.com/todevise">
-														<i class="twitter">
-															<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
-																 x="0px" y="0px"
-																 viewBox="0 0 49 42" style="enable-background:new 0 0 49 42;" xml:space="preserve">
-															<g id="Page-1">
-																<path id="Path" class="st0" d="M23.5,11.6l0.1,1.7l-1.7-0.2C15.8,12.3,10.5,9.6,6,5L3.8,2.7L3.2,4.4C2,8.1,2.8,12.1,5.3,14.8
-																	c1.3,1.5,1,1.7-1.3,0.8c-0.8-0.3-1.5-0.5-1.6-0.4C2.2,15.5,3,18.7,3.6,20c0.9,1.8,2.6,3.5,4.6,4.5l1.6,0.8l-1.9,0
-																	c-1.9,0-1.9,0-1.7,0.8c0.7,2.3,3.3,4.7,6.3,5.8l2.1,0.7l-1.8,1.1c-2.7,1.6-5.8,2.5-9,2.6c-1.5,0-2.7,0.2-2.7,0.3
-																	C1,37,5.1,39,7.5,39.8c7.1,2.3,15.6,1.3,22-2.6c4.5-2.8,9-8.3,11.1-13.7c1.1-2.9,2.3-8.1,2.3-10.6c0-1.6,0.1-1.8,2-3.8
-																	c1.1-1.1,2.1-2.4,2.3-2.7c0.3-0.7,0.3-0.7-1.4-0.1c-2.8,1.1-3.2,0.9-1.8-0.7c1-1.1,2.3-3.2,2.3-3.8c0-0.1-0.5,0.1-1.1,0.4
-																	c-0.6,0.4-1.9,0.9-2.9,1.2L40.4,4l-1.6-1.2c-0.9-0.6-2.2-1.3-2.8-1.6c-1.7-0.5-4.3-0.4-5.9,0.1C25.8,3.1,23.2,7.2,23.5,11.6
-																	C23.5,11.6,23.2,7.2,23.5,11.6L23.5,11.6L23.5,11.6z"/>
-															</g>
-															</svg>
-														</i>
-													</a>
-												</li>
+														</svg>
+													</i>
+												</a>
+											</li>
 
-												<li>
-													<a class="instagram" href="https://www.instagram.com/todevise.official">
-														<i class="instagram">
-															<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
-																 x="0px" y="0px"
-																 viewBox="0 0 49 42" style="enable-background:new 0 0 49 42;" xml:space="preserve">
-																<g>
-																	<path id="Path" class="st0" d="M27.5,40.5h-16c-7.2,0-13-5.8-13-13v-16c0-7.2,5.8-13,13-13h16c7.2,0,13,5.8,13,13v16
-																		C40.5,34.7,34.7,40.5,27.5,40.5z M11.5,0.5c-6.1,0-11,4.9-11,11v16c0,6.1,4.9,11,11,11h16c6.1,0,11-4.9,11-11v-16
-																		c0-6.1-4.9-11-11-11H11.5z"/>
-																</g>
-																<g>
-																	<path id="Path" class="st0" d="M19.5,29.6c-5.6,0-10.1-4.5-10.1-10.1c0-5.6,4.5-10.1,10.1-10.1c5.6,0,10.1,4.5,10.1,10.1
-																		C29.6,25.1,25.1,29.6,19.5,29.6z M19.5,11.4c-4.5,0-8.1,3.6-8.1,8.1s3.6,8.1,8.1,8.1s8.1-3.6,8.1-8.1S24,11.4,19.5,11.4z"/>
-																</g>
-																<g>
-																	<circle id="Path" class="st0" cx="30.5" cy="10" r="1.6"/>
-																</g>
-															</svg>
-														</i>
-													</a>
-												</li>
+											<li>
+												<a class="twitter" href="https://twitter.com/todevise">
+													<i class="twitter">
+														<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+														x="0px" y="0px"
+														viewBox="0 0 49 42" style="enable-background:new 0 0 49 42;" xml:space="preserve">
+														<g id="Page-1">
+															<path id="Path" class="st0" d="M23.5,11.6l0.1,1.7l-1.7-0.2C15.8,12.3,10.5,9.6,6,5L3.8,2.7L3.2,4.4C2,8.1,2.8,12.1,5.3,14.8
+															c1.3,1.5,1,1.7-1.3,0.8c-0.8-0.3-1.5-0.5-1.6-0.4C2.2,15.5,3,18.7,3.6,20c0.9,1.8,2.6,3.5,4.6,4.5l1.6,0.8l-1.9,0
+															c-1.9,0-1.9,0-1.7,0.8c0.7,2.3,3.3,4.7,6.3,5.8l2.1,0.7l-1.8,1.1c-2.7,1.6-5.8,2.5-9,2.6c-1.5,0-2.7,0.2-2.7,0.3
+															C1,37,5.1,39,7.5,39.8c7.1,2.3,15.6,1.3,22-2.6c4.5-2.8,9-8.3,11.1-13.7c1.1-2.9,2.3-8.1,2.3-10.6c0-1.6,0.1-1.8,2-3.8
+															c1.1-1.1,2.1-2.4,2.3-2.7c0.3-0.7,0.3-0.7-1.4-0.1c-2.8,1.1-3.2,0.9-1.8-0.7c1-1.1,2.3-3.2,2.3-3.8c0-0.1-0.5,0.1-1.1,0.4
+															c-0.6,0.4-1.9,0.9-2.9,1.2L40.4,4l-1.6-1.2c-0.9-0.6-2.2-1.3-2.8-1.6c-1.7-0.5-4.3-0.4-5.9,0.1C25.8,3.1,23.2,7.2,23.5,11.6
+															C23.5,11.6,23.2,7.2,23.5,11.6L23.5,11.6L23.5,11.6z"/>
+														</g>
+													</svg>
+												</i>
+											</a>
+										</li>
+
+										<li>
+											<a class="instagram" href="https://www.instagram.com/todevise.official">
+												<i class="instagram">
+													<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+													x="0px" y="0px"
+													viewBox="0 0 49 42" style="enable-background:new 0 0 49 42;" xml:space="preserve">
+													<g>
+														<path id="Path" class="st0" d="M27.5,40.5h-16c-7.2,0-13-5.8-13-13v-16c0-7.2,5.8-13,13-13h16c7.2,0,13,5.8,13,13v16
+														C40.5,34.7,34.7,40.5,27.5,40.5z M11.5,0.5c-6.1,0-11,4.9-11,11v16c0,6.1,4.9,11,11,11h16c6.1,0,11-4.9,11-11v-16
+														c0-6.1-4.9-11-11-11H11.5z"/>
+													</g>
+													<g>
+														<path id="Path" class="st0" d="M19.5,29.6c-5.6,0-10.1-4.5-10.1-10.1c0-5.6,4.5-10.1,10.1-10.1c5.6,0,10.1,4.5,10.1,10.1
+														C29.6,25.1,25.1,29.6,19.5,29.6z M19.5,11.4c-4.5,0-8.1,3.6-8.1,8.1s3.6,8.1,8.1,8.1s8.1-3.6,8.1-8.1S24,11.4,19.5,11.4z"/>
+													</g>
+													<g>
+														<circle id="Path" class="st0" cx="30.5" cy="10" r="1.6"/>
+													</g>
+												</svg>
+											</i>
+										</a>
+									</li>
 												<!--li>
 													<a class="pinterest" href="#">
 														<i class="pinterest" aria-hidden="true">
@@ -380,11 +387,11 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 										</p>
 										<div class="collapse" id="collapseExample" aria-expanded="false" style="height: 0px;">
 											<div class="shipping-policies-wrapper">
-									<div class="policies-row">
-										<form class="form-horizontal">
-											<div class="form-group ">
-												<label class="col-xs-11 offset-sx-1 control-label shipping-label no-pad-r"><span translate="product.detail.SHIPPING_PRICE_SPAIN"></span> <span translate="product.detail.IS"></span> <span class="tax">€<?=$product->getShippingPrice(null, Country::getDefaultContryCode())?></span></label>
-												
+												<div class="policies-row">
+													<form class="form-horizontal">
+														<div class="form-group ">
+															<label class="col-xs-11 offset-sx-1 control-label shipping-label no-pad-r"><span translate="product.detail.SHIPPING_PRICE_SPAIN"></span> <span translate="product.detail.IS"></span> <span class="tax">€<?=$product->getShippingPrice(null, Country::getDefaultContryCode())?></span></label>
+
 												<!--
 												<div class="col-sm-5 pad-product">
 													<select class="form-control selectpicker shipping-select product-select" title="Choose country">
@@ -392,74 +399,74 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 														<option>SPAIN</option>
 													</select>
 												</div>
-												-->
-											</div>
-										</form>
-									</div>
-									<?php
-									$returns = $product->getReturnsLabel();
-									$warranty = $product->getWarrantyLabel();
-									?>
-									<?php if ($returns) { ?>
-										<div class="returns-row">
-											<span translate="product.detail.RETURNS"></span>
-											<span class="bold"><?=$returns?></span>
+											-->
 										</div>
-									<?php } ?>
-									<?php if ($warranty) { ?>
-										<div class="returns-row">
-											<span translate="product.detail.WARRANTY"></span>
-											<span class="bold"><?=$warranty?></span>
-										</div>
-									<?php } ?>
+									</form>
 								</div>
-										</div>
-									</div>
+								<?php
+								$returns = $product->getReturnsLabel();
+								$warranty = $product->getWarrantyLabel();
+								?>
+								<?php if ($returns) { ?>
+								<div class="returns-row">
+									<span translate="product.detail.RETURNS"></span>
+									<span class="bold"><?=$returns?></span>
 								</div>
+								<?php } ?>
+								<?php if ($warranty) { ?>
+								<div class="returns-row">
+									<span translate="product.detail.WARRANTY"></span>
+									<span class="bold"><?=$warranty?></span>
+								</div>
+								<?php } ?>
 							</div>
+						</div>
 					</div>
+				</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- /PRODUCT CARD -->
-	<!-- PRODUCT DESCRIPTION -->
+<!-- /PRODUCT CARD -->
+<!-- PRODUCT DESCRIPTION -->
 	<div class="product-description">
-		<!-- Nav tabs -->
+	<!-- Nav tabs -->
 		<div class="container">
 			<div class="work-profile-description-wrapper">
-						<div class="title mb-40"><span class="title-product-name" translate="product.detail.DESCRIPTION"></span></div>
-						<div class="col-sm-9 pad-product">
-							<div class="description-parraf">
-								<?= $product->description ?>
+				<div class="title mb-40"><span class="title-product-name" translate="product.detail.DESCRIPTION"></span></div>
+				<div class="col-sm-9 pad-product">
+					<div class="description-parraf">
+						<?= $product->description ?>
+					</div>
+					<?php if (count($product->mediaMapping->descriptionPhotosInfo) > 0) { ?>
+					<div class="tb-wrapper">
+						<div class="row">
+							<?php foreach ($product->mediaMapping->descriptionPhotosInfo as $descriptionPhoto) { ?>
+							<div class="col-md-3 work-profile-description-tb">
+								<img src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getUrlImagesLocation().$descriptionPhoto->name)->resize(480, 0)?>">
+								<span class="tb-title"><?= $descriptionPhoto->title?></span>
+								<span class="tb-description"><?= $descriptionPhoto->description?></span>
 							</div>
-							<?php if (count($product->mediaMapping->descriptionPhotosInfo) > 0) { ?>
-								<div class="tb-wrapper">
-									<div class="row">
-										<?php foreach ($product->mediaMapping->descriptionPhotosInfo as $descriptionPhoto) { ?>
-										<div class="col-md-3 work-profile-description-tb">
-											<img src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getUrlImagesLocation().$descriptionPhoto->name)->resize(480, 0)?>">
-											<span class="tb-title"><?= $descriptionPhoto->title?></span>
-											<span class="tb-description"><?= $descriptionPhoto->description?></span>
-										</div>
-										<?php } ?>
-									</div>
-								</div>
 							<?php } ?>
 						</div>
-						<div class="col-sm-3">
-							<div class="avatar-wrapper-side">
-									<div class="avatar">
-										<a href="<?= $person->getStoreLink() ?>">
-											<span translate="product.detail.CREATED_BY"></span>
-											<img class="avatar-default medium" src="<?= $person->getProfileImage(128, 128) ?>" data-pin-nopin="true">
-											<!--<span><?= $person->getName() ?></span>-->
-										</a>
-									</div>
-								</div>
+					</div>
+					<?php } ?>
+				</div>
+				<div class="col-sm-3">
+					<div class="avatar-wrapper-side">
+						<div class="avatar">
+							<a href="<?= $person->getStoreLink() ?>">
+								<span translate="product.detail.CREATED_BY"></span>
+								<img class="avatar-default medium" src="<?= $person->getProfileImage(128, 128) ?>" data-pin-nopin="true">
+								<!--<span><?= $person->getName() ?></span>-->
+							</a>
 						</div>
 					</div>
+				</div>
+			</div>
 		</div>
 		<div class="container">
 			<ul class="nav nav-tabs product-tabs" role="tablist" id="productTabs">
@@ -482,31 +489,31 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 			</ul>
 		</div>
 		<div class="container">
-			<!-- Tab panes -->
+		<!-- Tab panes -->
 			<div class="tab-content product-description-content">
 				<div role="tabpanel" class="tab-pane work-description-wrapper" id="faqs">
 					<div class="container mt-20 mb-20">
 						<?php if (count($product->faqMapping) > 0) { ?>
-							<div class="work-profile-description-wrapper faq-wrapper">
-								<div class="title"><span translate="product.detail.WORK_FAQS"></span></div>
-								<?php foreach ($product->faqMapping as $faq) { ?>
-									<div class="q-a-wrapper">
-										<p class="question">
-											<span translate="product.detail.Q"></span>
-											<span class="important"><?= $faq->question?></span>
-										</p>
-										<p class="question">
-											<span translate="product.detail.A"></span>
-											<span><?= $faq->answer?></span>
-										</p>
-									</div>
-								<?php } ?>
+						<div class="work-profile-description-wrapper faq-wrapper">
+							<div class="title"><span translate="product.detail.WORK_FAQS"></span></div>
+							<?php foreach ($product->faqMapping as $faq) { ?>
+							<div class="q-a-wrapper">
+								<p class="question">
+									<span translate="product.detail.Q"></span>
+									<span class="important"><?= $faq->question?></span>
+								</p>
+								<p class="question">
+									<span translate="product.detail.A"></span>
+									<span><?= $faq->answer?></span>
+								</p>
 							</div>
+							<?php } ?>
+						</div>
 						<?php } else { ?>
-							<div class="col-lg-12 centered-col">
-								<img class="happyface-black" src="/imgs/happy-face-black.svg" />
-								<span translate="product.detail.MORECONTENTCOMINGSOON"></span>
-							</div>
+						<div class="col-lg-12 centered-col">
+							<img class="happyface-black" src="/imgs/happy-face-black.svg" />
+							<span translate="product.detail.MORECONTENTCOMINGSOON"></span>
+						</div>
 						<?php } ?>
 
 					</div>
@@ -514,269 +521,269 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 				<div role="tabpanel" class="tab-pane work-description-wrapper" id="boxes">
 					<div class="container mt-20 mb-20">
 						<?php if ($boxes) { ?>
-							<?php foreach ($boxes as $box) {
-								$products = $box->getProductsPreview(); ?>
-								<div class="col-lg-4">
-									<a href="<?= $box->getViewLink()?>">
-										<figure class="showcase">
-											<div class="images-box">
-												<div class="bottom-top-images">
-													<div class="image-left">
-														<img src="<?=isset($products[0]) ? $products[0]['main_photo'] : 'imgs/img-default.jpg'?>" class="showcase-image">
-													</div>
-													<div class="image-right">
-														<img src="<?=isset($products[1]) ? $products[1]['main_photo'] : 'imgs/img-default.jpg'?>" class="showcase-image">
-													</div>
+						<?php foreach ($boxes as $box) {
+							$products = $box->getProductsPreview(); ?>
+							<div class="col-lg-4">
+								<a href="<?= $box->getViewLink()?>">
+									<figure class="showcase">
+										<div class="images-box">
+											<div class="bottom-top-images">
+												<div class="image-left">
+													<img src="<?=isset($products[0]) ? $products[0]['main_photo'] : 'imgs/img-default.jpg'?>" class="showcase-image">
 												</div>
-												<div class="bottom-image">
-													<img src="<?=isset($products[2]) ? $products[2]['main_photo'] : 'imgs/img-default.jpg'?>" class="showcase-image">
+												<div class="image-right">
+													<img src="<?=isset($products[1]) ? $products[1]['main_photo'] : 'imgs/img-default.jpg'?>" class="showcase-image">
 												</div>
 											</div>
-											<figcaption>
-												<div class="row no-mar">
-													<div class="col-md-8">
-														<span class="boxes-text align-left"><?=$box->name?></span>
-													</div>
-													<div class="col-md-4 no-padding">
-														<button class="btn btn-single-love btn-love-box">
-															<span class="number"><?=count($products)?></span>
-															<span class="heart-icon"></span>
-														</button>
-													</div>
+											<div class="bottom-image">
+												<img src="<?=isset($products[2]) ? $products[2]['main_photo'] : 'imgs/img-default.jpg'?>" class="showcase-image">
+											</div>
+										</div>
+										<figcaption>
+											<div class="row no-mar">
+												<div class="col-md-8">
+													<span class="boxes-text align-left"><?=$box->name?></span>
 												</div>
-											</figcaption>
-										</figure>
-									</a>
-								</div>
+												<div class="col-md-4 no-padding">
+													<button class="btn btn-single-love btn-love-box">
+														<span class="number"><?=count($products)?></span>
+														<span class="heart-icon"></span>
+													</button>
+												</div>
+											</div>
+										</figcaption>
+									</figure>
+								</a>
+							</div>
 							<?php } ?>
-						<?php } else { ?>
+							<?php } else { ?>
 							<div class="col-lg-12 centered-col">
 								<button type="button" class="btn btn-red btn-hart" ng-click="detailProductCtrl.setBox()">
 									<span translate="product.detail.SAVE_IN_BOX"></span>
 								</button>
 							</div>
-						<?php } ?>
+							<?php } ?>
 					</div>
 
-					<!--<div class="reviews-wrapper">
-						<div class="title"><span translate="product.detail.USER_REVIEWS"></span></div>
-						<div class="review-rates">
-							<span class="score">
-									<i class="ion-ios-star"></i>
-									<i class="ion-ios-star"></i>
-									<i class="ion-ios-star"></i>
-									<i class="ion-ios-star"></i>
-									<i class="ion-ios-star"></i>
-								</span>
-							<span class="number-score">(20)</span>
-							<div class="by-stars"><span>5 <span translate="product.detail.STARS"></span></span><span class="number-score">(15)</span></div>
-							<div class="by-stars"><span>4 <span translate="product.detail.STARS"></span></span><span class="number-score">(5)</span></div>
-						</div>
-						<div class="comment-wrapper">
-							<div class="col-sm-1">
+						<!--<div class="reviews-wrapper">
+							<div class="title"><span translate="product.detail.USER_REVIEWS"></span></div>
+							<div class="review-rates">
+								<span class="score">
+										<i class="ion-ios-star"></i>
+										<i class="ion-ios-star"></i>
+										<i class="ion-ios-star"></i>
+										<i class="ion-ios-star"></i>
+										<i class="ion-ios-star"></i>
+									</span>
+								<span class="number-score">(20)</span>
+								<div class="by-stars"><span>5 <span translate="product.detail.STARS"></span></span><span class="number-score">(15)</span></div>
+								<div class="by-stars"><span>4 <span translate="product.detail.STARS"></span></span><span class="number-score">(5)</span></div>
+							</div>
+							<div class="comment-wrapper">
+								<div class="col-sm-1">
+									<div class="avatar">
+										<img class="cover" src="/imgs/avatar-deviser.jpg">
+									</div>
+								</div>
+								<div class="col-sm-10">
+									<input type="text" class="form-control comment-input" id="exampleInputEmail1" placeholder="Add your comment">
+									<div class="rate-product">
+										<span translate="product.detail.RATE_PRODUCT"></span>
+										<span class="score">
+												<i class="ion-ios-star"></i>
+												<i class="ion-ios-star"></i>
+												<i class="ion-ios-star"></i>
+												<i class="ion-ios-star"></i>
+												<i class="ion-ios-star"></i>
+											</span>
+									</div>
+								</div>
+								<div class="col-sm-1">
+									<div class="arrow-btn">
+										<i class="ion-android-navigate"></i>
+									</div>
+								</div>
+							</div>
+							<div class="comment-user">
 								<div class="avatar">
 									<img class="cover" src="/imgs/avatar-deviser.jpg">
 								</div>
-							</div>
-							<div class="col-sm-10">
-								<input type="text" class="form-control comment-input" id="exampleInputEmail1" placeholder="Add your comment">
-								<div class="rate-product">
-									<span translate="product.detail.RATE_PRODUCT"></span>
-									<span class="score">
-											<i class="ion-ios-star"></i>
-											<i class="ion-ios-star"></i>
-											<i class="ion-ios-star"></i>
-											<i class="ion-ios-star"></i>
-											<i class="ion-ios-star"></i>
-										</span>
-								</div>
-							</div>
-							<div class="col-sm-1">
-								<div class="arrow-btn">
-									<i class="ion-android-navigate"></i>
-								</div>
-							</div>
-						</div>
-						<div class="comment-user">
-							<div class="avatar">
-								<img class="cover" src="/imgs/avatar-deviser.jpg">
-							</div>
-							<div class="comment">
-								<div class="name-date">
-									<span class="name">Alice Pierce</span>
-									<span class="date"><span>1</span><span translate="product.detail.DAY_AGO"></span>
-								</div>
-								<div class="comment-text">Vivamus ultricies mauris mi, nec imperdiet quam facilisis eget.
-								</div>
-								<div class="replay">
-									<span translate="product.detail.REPLY"></span>
-									<span class="score">
-											<i class="ion-ios-star"></i>
-											<i class="ion-ios-star"></i>
-											<i class="ion-ios-star"></i>
-											<i class="ion-ios-star"></i>
-											<i class="ion-ios-star"></i>
-										</span>
-									<span class="useful"><span>300</span><span translate="product.detail.MEMER_COMMENT_USEFUL"></span></span>
-								</div>
-							</div>
-							<div class="helpful">
-								<span translate="product.detail.REVIEW_HELPFUL"></span>
-								<div class="rounded-btn"><span translate="global.YES"></span></div>
-								<div class="rounded-btn"><span translate="global.NO"></span></div>
-							</div>
-						</div>
-						<div class="comment-user">
-							<div class="avatar">
-								<img class="cover" src="/imgs/avatar-deviser.jpg">
-							</div>
-							<div class="comment">
-								<div class="name-date">
-									<span class="name">Alice Pierce</span>
-									<span class="date">1 day ago</span>
-								</div>
-								<div class="comment-text">Vivamus ultricies mauris mi, nec imperdiet quam facilisis eget.
-								</div>
-								<div class="replay">
-									<span>Reply</span>
-									<span class="score">
-											<i class="ion-ios-star"></i>
-											<i class="ion-ios-star"></i>
-											<i class="ion-ios-star"></i>
-											<i class="ion-ios-star"></i>
-											<i class="ion-ios-star"></i>
-										</span>
-									<span class="useful">300  member found this comment useful</span>
-								</div>
-							</div>
-							<div class="helpful">
-								<span>Is this review helpful to you?</span>
-								<div class="rounded-btn">Yes</div>
-								<div class="rounded-btn">No</div>
-							</div>
-						</div>
-						<div class="comment-user response">
-							<div class="avatar">
-								<img class="cover" src="/imgs/avatar-deviser.jpg">
-							</div>
-							<div class="comment">
-								<div class="name-date">
-									<span class="name">Alice Pierce</span>
-									<span class="date">1 day ago</span>
-								</div>
-								<div class="comment-text">Vivamus ultricies mauris mi, nec imperdiet quam facilisis eget ultricies mauris mi, nec imperdiet quam facilisis eget ultricies mauris mi, nec imperdiet quam facilisis eget ultricies mauris mi, nec imperdiet quam facilisis eget ultricies mauris mi, nec imperdiet quam facilisis eget ultricies mauris mi, nec imperdiet quam facilisis eget.
-								</div>
-							</div>
-							<div class="helpful">
-								<span>Is this review helpful to you ?</span>
-								<div class="rounded-btn">Yes</div>
-								<div class="rounded-btn">No</div>
-							</div>
-						</div>
-						<div class="comment-user">
-							<div class="avatar">
-								<img class="cover" src="/imgs/avatar-deviser.jpg">
-							</div>
-							<div class="comment">
-								<div class="name-date">
-									<span class="name">Alice Pierce</span>
-									<span class="date">1 day ago</span>
-								</div>
-								<div class="comment-text">Vivamus ultricies mauris mi, nec imperdiet quam facilisis eget.
-								</div>
-								<div class="replay">
-									<span>Reply</span>
-									<span class="score">
-											<i class="ion-ios-star"></i>
-											<i class="ion-ios-star"></i>
-											<i class="ion-ios-star"></i>
-											<i class="ion-ios-star"></i>
-											<i class="ion-ios-star"></i>
-										</span>
-									<span class="useful">300  member found this comment useful</span>
-								</div>
-							</div>
-							<div class="helpful">
-								<span>Is this review helpful to you ?</span>
-								<div class="rounded-btn">Yes</div>
-								<div class="rounded-btn">No</div>
-							</div>
-						</div>
-						<div class="load-wrapper">
-							<i class="ion-ios-arrow-down"></i>
-							<span class="green" translate="product.detail.LOAD_MORE"></span>
-							<span class="more"><span>24</span><span translate="product.detail.COMMENTS_MORE"></span></span>
-						</div>
-					</div>-->
-				</div>
-				<?php /*if (count($videos)) { */?>
-					<div role="tabpanel" class="tab-pane work-description-wrapper" id="videos">
-						<div class="container mt-20 mb-20">
-							<?php if (count($videos)) { ?>
-								<div class="video-container centered-col">
-									<?php foreach ($videos as $video) { ?>
-										<div class="col-sm-6">
-											<div class="video-wrapper">
-												<iframe width="560" height="315" src="<?= $video->getUrlEmbeddedYoutubePlayer() ?>" frameborder="0" allowfullscreen></iframe>
-											</div>
-										</div>
-									<?php }  ?>
-								</div>
-							<?php } else {?>
-								<div class="col-lg-12 centered-col">
-									<img class="happyface-black" src="/imgs/happy-face-black.svg" />
-									<span translate="product.detail.MORECONTENTCOMINGSOON"></span>
-								</div>
-							<?php }?>
-						</div>
-					</div>
-				<?php /*} */?>
-				<div role="tabpanel" class="tab-pane work-description-wrapper active" id="works">
-					<div class="container mt-20 mb-20" style="min-height:350px;">
-					<nav class="products-menu">
-						<ul>
-							<!--						<li>-->
-							<!--							<a class="active" href="#">Pants</a>-->
-							<!--						</li>-->
-							<!--						<li>-->
-							<!--							<a href="#">Socks</a>-->
-							<!--						</li>-->
-							<!--						<li>-->
-							<!--							<a href="#">Belts</a>-->
-							<!--						</li>-->
-						</ul>
-					</nav>
-					<div class="other-products-wrapper">
-						<div id="works-container" class="macy-container" data-columns="6">
-							<?php foreach ($personProducts as $i => $product) { ?>
-								<div class="menu-category list-group">
-									<div class="grid">
-										<figure class="effect-zoe">
-											<image-hover-buttons product-id="{{'<?= $product->short_id ?>'}}" is-loved="{{'<?=$product->isLovedByCurrentUser() ? 1 : 0 ?>'}}" is-mine="{{'<?= $product->isWorkFromCurrentUser() ? 1 : 0 ?>'}}">
-												<a href="<?= $product->getViewLink() ?>">
-													<img class="grid-image"
-														 src="<?= $product->getImagePreview(400, 0) ?>">
-												</a>
-											</image-hover-buttons>
-											<a href="<?= $product->getViewLink() ?>">
-												<figcaption>
-													<p class="instauser">
-														<?= \yii\helpers\StringHelper::truncate($product->getName(), 18, '…') ?>
-														<!--<?= \yii\helpers\StringHelper::truncate(Utils::l($product->getName()), 18, '…') ?>-->
-													</p>
-													<p class="price">€ <?= $product->getMinimumPrice() ?></p>
-												</figcaption>
-											</a>
-										</figure>
+								<div class="comment">
+									<div class="name-date">
+										<span class="name">Alice Pierce</span>
+										<span class="date"><span>1</span><span translate="product.detail.DAY_AGO"></span>
+									</div>
+									<div class="comment-text">Vivamus ultricies mauris mi, nec imperdiet quam facilisis eget.
+									</div>
+									<div class="replay">
+										<span translate="product.detail.REPLY"></span>
+										<span class="score">
+												<i class="ion-ios-star"></i>
+												<i class="ion-ios-star"></i>
+												<i class="ion-ios-star"></i>
+												<i class="ion-ios-star"></i>
+												<i class="ion-ios-star"></i>
+											</span>
+										<span class="useful"><span>300</span><span translate="product.detail.MEMER_COMMENT_USEFUL"></span></span>
 									</div>
 								</div>
-							<?php } ?>
+								<div class="helpful">
+									<span translate="product.detail.REVIEW_HELPFUL"></span>
+									<div class="rounded-btn"><span translate="global.YES"></span></div>
+									<div class="rounded-btn"><span translate="global.NO"></span></div>
+								</div>
+							</div>
+							<div class="comment-user">
+								<div class="avatar">
+									<img class="cover" src="/imgs/avatar-deviser.jpg">
+								</div>
+								<div class="comment">
+									<div class="name-date">
+										<span class="name">Alice Pierce</span>
+										<span class="date">1 day ago</span>
+									</div>
+									<div class="comment-text">Vivamus ultricies mauris mi, nec imperdiet quam facilisis eget.
+									</div>
+									<div class="replay">
+										<span>Reply</span>
+										<span class="score">
+												<i class="ion-ios-star"></i>
+												<i class="ion-ios-star"></i>
+												<i class="ion-ios-star"></i>
+												<i class="ion-ios-star"></i>
+												<i class="ion-ios-star"></i>
+											</span>
+										<span class="useful">300  member found this comment useful</span>
+									</div>
+								</div>
+								<div class="helpful">
+									<span>Is this review helpful to you?</span>
+									<div class="rounded-btn">Yes</div>
+									<div class="rounded-btn">No</div>
+								</div>
+							</div>
+							<div class="comment-user response">
+								<div class="avatar">
+									<img class="cover" src="/imgs/avatar-deviser.jpg">
+								</div>
+								<div class="comment">
+									<div class="name-date">
+										<span class="name">Alice Pierce</span>
+										<span class="date">1 day ago</span>
+									</div>
+									<div class="comment-text">Vivamus ultricies mauris mi, nec imperdiet quam facilisis eget ultricies mauris mi, nec imperdiet quam facilisis eget ultricies mauris mi, nec imperdiet quam facilisis eget ultricies mauris mi, nec imperdiet quam facilisis eget ultricies mauris mi, nec imperdiet quam facilisis eget ultricies mauris mi, nec imperdiet quam facilisis eget.
+									</div>
+								</div>
+								<div class="helpful">
+									<span>Is this review helpful to you ?</span>
+									<div class="rounded-btn">Yes</div>
+									<div class="rounded-btn">No</div>
+								</div>
+							</div>
+							<div class="comment-user">
+								<div class="avatar">
+									<img class="cover" src="/imgs/avatar-deviser.jpg">
+								</div>
+								<div class="comment">
+									<div class="name-date">
+										<span class="name">Alice Pierce</span>
+										<span class="date">1 day ago</span>
+									</div>
+									<div class="comment-text">Vivamus ultricies mauris mi, nec imperdiet quam facilisis eget.
+									</div>
+									<div class="replay">
+										<span>Reply</span>
+										<span class="score">
+												<i class="ion-ios-star"></i>
+												<i class="ion-ios-star"></i>
+												<i class="ion-ios-star"></i>
+												<i class="ion-ios-star"></i>
+												<i class="ion-ios-star"></i>
+											</span>
+										<span class="useful">300  member found this comment useful</span>
+									</div>
+								</div>
+								<div class="helpful">
+									<span>Is this review helpful to you ?</span>
+									<div class="rounded-btn">Yes</div>
+									<div class="rounded-btn">No</div>
+								</div>
+							</div>
+							<div class="load-wrapper">
+								<i class="ion-ios-arrow-down"></i>
+								<span class="green" translate="product.detail.LOAD_MORE"></span>
+								<span class="more"><span>24</span><span translate="product.detail.COMMENTS_MORE"></span></span>
+							</div>
+						</div>-->
+				</div>
+					<?php /*if (count($videos)) { */?>
+				<div role="tabpanel" class="tab-pane work-description-wrapper" id="videos">
+						<div class="container mt-20 mb-20">
+							<?php if (count($videos)) { ?>
+							<div class="video-container centered-col">
+								<?php foreach ($videos as $video) { ?>
+								<div class="col-sm-6">
+									<div class="video-wrapper">
+										<iframe width="560" height="315" src="<?= $video->getUrlEmbeddedYoutubePlayer() ?>" frameborder="0" allowfullscreen></iframe>
+									</div>
+								</div>
+								<?php }  ?>
+							</div>
+							<?php } else {?>
+							<div class="col-lg-12 centered-col">
+								<img class="happyface-black" src="/imgs/happy-face-black.svg" />
+								<span translate="product.detail.MORECONTENTCOMINGSOON"></span>
+							</div>
+							<?php }?>
 						</div>
-					</div>
-					</div>
+				</div>
+					<?php /*} */?>
+				<div role="tabpanel" class="tab-pane work-description-wrapper active" id="works">
+						<div class="container mt-20 mb-20" style="min-height:350px;">
+							<nav class="products-menu">
+								<ul>
+									<!--						<li>-->
+										<!--							<a class="active" href="#">Pants</a>-->
+										<!--						</li>-->
+										<!--						<li>-->
+											<!--							<a href="#">Socks</a>-->
+											<!--						</li>-->
+											<!--						<li>-->
+												<!--							<a href="#">Belts</a>-->
+												<!--						</li>-->
+											</ul>
+										</nav>
+										<div class="other-products-wrapper">
+											<div id="works-container" class="macy-container" data-columns="6">
+												<?php foreach ($personProducts as $i => $product) { ?>
+												<div class="menu-category list-group">
+													<div class="grid">
+														<figure class="effect-zoe">
+															<image-hover-buttons product-id="{{'<?= $product->short_id ?>'}}" is-loved="{{'<?=$product->isLovedByCurrentUser() ? 1 : 0 ?>'}}" is-mine="{{'<?= $product->isWorkFromCurrentUser() ? 1 : 0 ?>'}}">
+																<a href="<?= $product->getViewLink() ?>">
+																	<img class="grid-image"
+																	src="<?= $product->getImagePreview(400, 0) ?>">
+																</a>
+															</image-hover-buttons>
+															<a href="<?= $product->getViewLink() ?>">
+																<figcaption>
+																	<p class="instauser">
+																		<?= \yii\helpers\StringHelper::truncate($product->getName(), 18, '…') ?>
+																		<!--<?= \yii\helpers\StringHelper::truncate(Utils::l($product->getName()), 18, '…') ?>-->
+																	</p>
+																	<p class="price">€ <?= $product->getMinimumPrice() ?></p>
+																</figcaption>
+															</a>
+														</figure>
+													</div>
+												</div>
+												<?php } ?>
+											</div>
+										</div>
+									</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-	<!-- /PRODUCT DESCRIPTION -->
+			<!-- /PRODUCT DESCRIPTION -->

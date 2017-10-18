@@ -335,7 +335,7 @@ class Country extends CActiveRecord
 	 */
 	public static function getShippingAvailableCountryCodes() {
 		return [
-			'ES', 'US',
+			'ES',
 		];
 	}
 
