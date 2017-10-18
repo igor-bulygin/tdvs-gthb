@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "db6802754753937eb48a5084988f6734",
+    "content-hash": "b9700f0b11d1efa5049f38873b734c78",
     "packages": [
         {
             "name": "99designs/phumbor",
@@ -188,51 +188,6 @@
             "time": "2016-07-10T18:12:02+00:00"
         },
         {
-            "name": "bigpaulie/yii2-social-share",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/bigpaulie/yii2-social-share.git",
-                "reference": "81e253e45a70a7353a71c68ba744c130de79af66"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/bigpaulie/yii2-social-share/zipball/81e253e45a70a7353a71c68ba744c130de79af66",
-                "reference": "81e253e45a70a7353a71c68ba744c130de79af66",
-                "shasum": ""
-            },
-            "require": {
-                "bower-asset/bootstrap-social": "~4.0",
-                "php": ">= 5.4",
-                "yiisoft/yii2": "2.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "bigpaulie\\social\\share\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Paul P",
-                    "email": "bigpaulie25ro@yahoo.com",
-                    "homepage": "http://www.paul-resume.com"
-                }
-            ],
-            "description": "Yii2 Social Link Sharer Extension",
-            "keywords": [
-                "share",
-                "social",
-                "widget",
-                "yii2"
-            ],
-            "time": "2017-03-21T07:25:49+00:00"
-        },
-        {
             "name": "bower-asset/bootstrap",
             "version": "v3.3.7",
             "source": {
@@ -280,78 +235,6 @@
                 "responsive",
                 "web"
             ]
-        },
-        {
-            "name": "bower-asset/bootstrap-social",
-            "version": "4.12.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/lipis/bootstrap-social.git",
-                "reference": "94cfded5ede73b5e60dcdafbb7a455a6246ab337"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/lipis/bootstrap-social/zipball/94cfded5ede73b5e60dcdafbb7a455a6246ab337",
-                "reference": "94cfded5ede73b5e60dcdafbb7a455a6246ab337",
-                "shasum": ""
-            },
-            "require": {
-                "bower-asset/bootstrap": "~3",
-                "bower-asset/font-awesome": "~4.5"
-            },
-            "type": "bower-asset-library",
-            "extra": {
-                "bower-asset-main": [
-                    "bootstrap-social.css",
-                    "bootstrap-social.less",
-                    "bootstrap-social.scss"
-                ],
-                "bower-asset-ignore": [
-                    "assets",
-                    "index.html",
-                    "LICENCE"
-                ]
-            },
-            "license": [
-                "MIT"
-            ]
-        },
-        {
-            "name": "bower-asset/font-awesome",
-            "version": "v4.7.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/FortAwesome/Font-Awesome.git",
-                "reference": "a8386aae19e200ddb0f6845b5feeee5eb7013687"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/FortAwesome/Font-Awesome/zipball/a8386aae19e200ddb0f6845b5feeee5eb7013687",
-                "reference": "a8386aae19e200ddb0f6845b5feeee5eb7013687",
-                "shasum": ""
-            },
-            "type": "bower-asset-library",
-            "extra": {
-                "bower-asset-main": [
-                    "less/font-awesome.less",
-                    "scss/font-awesome.scss"
-                ],
-                "bower-asset-ignore": [
-                    "*/.*",
-                    "*.json",
-                    "src",
-                    "*.yml",
-                    "Gemfile",
-                    "Gemfile.lock",
-                    "*.md"
-                ]
-            },
-            "license": [
-                "OFL-1.1",
-                "MIT",
-                "CC-BY-3.0"
-            ],
-            "description": "Font Awesome"
         },
         {
             "name": "bower-asset/jquery",
@@ -2787,6 +2670,78 @@
     ],
     "packages-dev": [
         {
+            "name": "bower-asset/bootstrap-social",
+            "version": "4.12.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lipis/bootstrap-social.git",
+                "reference": "94cfded5ede73b5e60dcdafbb7a455a6246ab337"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lipis/bootstrap-social/zipball/94cfded5ede73b5e60dcdafbb7a455a6246ab337",
+                "reference": "94cfded5ede73b5e60dcdafbb7a455a6246ab337",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/bootstrap": "~3",
+                "bower-asset/font-awesome": "~4.5"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "bootstrap-social.css",
+                    "bootstrap-social.less",
+                    "bootstrap-social.scss"
+                ],
+                "bower-asset-ignore": [
+                    "assets",
+                    "index.html",
+                    "LICENCE"
+                ]
+            },
+            "license": [
+                "MIT"
+            ]
+        },
+        {
+            "name": "bower-asset/font-awesome",
+            "version": "v4.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FortAwesome/Font-Awesome.git",
+                "reference": "a8386aae19e200ddb0f6845b5feeee5eb7013687"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FortAwesome/Font-Awesome/zipball/a8386aae19e200ddb0f6845b5feeee5eb7013687",
+                "reference": "a8386aae19e200ddb0f6845b5feeee5eb7013687",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "less/font-awesome.less",
+                    "scss/font-awesome.scss"
+                ],
+                "bower-asset-ignore": [
+                    "*/.*",
+                    "*.json",
+                    "src",
+                    "*.yml",
+                    "Gemfile",
+                    "Gemfile.lock",
+                    "*.md"
+                ]
+            },
+            "license": [
+                "OFL-1.1",
+                "MIT",
+                "CC-BY-3.0"
+            ],
+            "description": "Font Awesome"
+        },
+        {
             "name": "bower-asset/typeahead.js",
             "version": "v0.11.1",
             "source": {
@@ -3058,7 +3013,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "bigpaulie/yii2-social-share": 20,
         "dragonjet/yii2-opengraph": 20
     },
     "prefer-stable": false,
