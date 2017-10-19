@@ -12,7 +12,7 @@ return [
 
 	// Instagram
 	'instagram_client_id' => '7cdaa91e4b27429a867e9e142d114b65',
-	'instagram_secret_key' => !YII_ENV_PROD  ? 'f25dcb37b4594b61a5c50de7c42c3906' : 'secret_prod',
+	'instagram_secret_key' => !YII_ENV_PROD  ? 'f25dcb37b4594b61a5c50de7c42c3906' : 'f25dcb37b4594b61a5c50de7c42c3906',
 
 	'default_todevise_fee' => 0.145,
 	'default_spain_vat' => 0.21,
