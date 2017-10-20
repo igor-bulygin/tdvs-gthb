@@ -39,15 +39,18 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 								<div class="col-md-8 no-pad">
 									<div class="col-md-12 no-pad">
 										<label for="representative_name" translate="settings.general.REPRESENTATIVE_NAME"></label>
-										<span class="optional-input" translate="global.OPTIONAL"></span>
 									</div>
 									<div>
 										<div class="col-xs-6 no-pad">
-											<input class="form-control"  type="text" name="name" ng-model="generalSettingsCtrl.person.personal_info.name" placeholder="{{ 'global.user.FIRST_NAME' | translate }}">
+											<input class="form-control"  type="text" name="name" ng-model="generalSettingsCtrl.person.personal_info.name" placeholder="{{ 'global.user.FIRST_NAME' | translate }}" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.name)}">
+											<span class="purple-text col-xs-12 no-pad" ng-if="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.name)" translate="settings.FILL_FIELD"></span>
 										</div>
+										
 										<div class="col-xs-6 responsive-pad-right-0">
-											<input class="form-control" type="text" name="last_name" ng-model="generalSettingsCtrl.person.personal_info.last_name" placeholder="{{ 'global.user.LAST_NAME' | translate }}">
+											<input class="form-control" type="text" name="last_name" ng-model="generalSettingsCtrl.person.personal_info.last_name" placeholder="{{ 'global.user.LAST_NAME' | translate }}" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.last_name)}">
+											<span class="purple-text col-xs-12 responsive-pad-right-0" ng-if="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.last_name)" translate="settings.FILL_FIELD"></span>
 										</div>
+										
 									</div>
 								</div>
 								<div class="col-md-4 identifier-pad">
