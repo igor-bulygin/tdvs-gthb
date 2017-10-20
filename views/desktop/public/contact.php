@@ -17,6 +17,8 @@ $this->params['breadcrumbs'][] = [
 ContactAsset::register($this);
 
 $this->title = Yii::t('app/public', 'CONTACT_TITLE');
+Yii::$app->opengraph->title = $this->title;
+
 $lang = Yii::$app->language;
 
 ?>

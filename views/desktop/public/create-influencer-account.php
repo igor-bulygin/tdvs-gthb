@@ -9,6 +9,7 @@ PublicCommonAsset::register($this);
 /** @var Invitation $invitation */
 
 $this->title = Yii::t('app/public', 'CREATE_AN_INFLUENCER_ACCOUNT');
+Yii::$app->opengraph->title = $this->title;
 
 $this->registerJs("var invitation = ".\yii\helpers\Json::encode($invitation), yii\web\View::POS_HEAD, 'invitation-var-script');
 $this->registerJs("var type = 2", yii\web\View::POS_HEAD, 'person-type-var-script');

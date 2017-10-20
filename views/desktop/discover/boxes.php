@@ -3,6 +3,7 @@
 \app\assets\desktop\discover\GlobalAsset::register($this);
 
 $this->title = Yii::t('app/public','EXPLORE_BOXES');
+Yii::$app->opengraph->title = $this->title;
 
 ?>
 <div class="our-devisers-wrapper" ng-controller="exploreBoxesCtrl as exploreBoxesCtrl">

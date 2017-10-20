@@ -11,6 +11,8 @@ $this->title = Yii::t('app/public',
 	'SOCIAL_FEED_BY_PERSON_NAME',
 	['person_name' => $person->getName()]
 );
+Yii::$app->opengraph->title = $this->title;
+
 $this->params['person'] = $person;
 $this->params['person_menu_active_option'] = 'social';
 $this->params['person_links_target'] = 'public_view';

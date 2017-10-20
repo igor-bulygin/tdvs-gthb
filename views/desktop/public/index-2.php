@@ -7,6 +7,7 @@ use app\models\Person;
 PublicCommonAsset::register($this);
 
 $this->title = Yii::t('app/public', 'INDEX_TITLE');
+Yii::$app->opengraph->title = $this->title;
 
 /** @var Person[][] $devisers */
 /** @var int $totalDevisers */

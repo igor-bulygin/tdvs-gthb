@@ -5,6 +5,7 @@ use app\assets\desktop\pub\PublicCommonAsset;
 PublicCommonAsset::register($this);
 
 $this->title = $title;
+Yii::$app->opengraph->title = $this->title;
 
 ?>
 

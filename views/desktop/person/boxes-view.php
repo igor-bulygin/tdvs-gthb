@@ -14,6 +14,7 @@ $this->title = Yii::t('app/public',
 	'BOXES_BY_PERSON_NAME',
 	['person_name' => $person->getName()]
 );
+Yii::$app->opengraph->title = $this->title;
 
 $this->params['person'] = $person;
 $this->params['person_menu_active_option'] = 'boxes';

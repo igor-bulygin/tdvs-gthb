@@ -31,6 +31,7 @@ if ($selectedSubcategory && $selectedSubcategory->short_id) { // check if is a r
 		['person_name' => $person->getName()]
 	);
 }
+Yii::$app->opengraph->title = $this->title;
 
 // use params to share data between views :(
 $this->params['person'] = $person;

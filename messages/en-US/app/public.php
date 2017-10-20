@@ -76,7 +76,7 @@ return [
 	'ERROR_PAGE_MESSAGE_2' => 'PD: Go back home babe, we are taking care of it!',
     'EXPLORE_BOXES' => 'Explore boxes',
     'INCORRECT_USERNAME_OR_PASSWORD' => 'Incorrect username or password',
-    'INDEX_TITLE' => 'Todevise',
+    'INDEX_TITLE' => 'Home',
 	'HOME_BLOCK_1_TEXT_1' => '<span class="serif" style="margin-bottom:8px;">The</span>store',
 	'HOME_BLOCK_1_TEXT_2' => 'Find product that will make<br>you be part of the future',
 	'HOME_BLOCK_2_TEXT_1' => 'Social<br/><span class="serif">experience</span>',

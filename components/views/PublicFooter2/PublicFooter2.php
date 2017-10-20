@@ -86,7 +86,7 @@ $footerMode = 'collapsed';
 				<div class="title mt-40"><span translate="footer.STAY_CONNECTED"></span></div>
 				<ul class="social-items mt-10 home">
 					<li>
-						<a href="https://facebook.com/todevise">
+						<a href="https://facebook.com/todevise" target="_blank">
 							<i class="facebook">
 								<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
 									 x="0px" y="0px"
@@ -101,7 +101,7 @@ $footerMode = 'collapsed';
 					</li>
 					
 					<li>
-						<a class="twitter" href="https://twitter.com/todevise">
+						<a class="twitter" href="https://twitter.com/todevise" target="_blank">
 							<i class="twitter">
 								<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
 									 x="0px" y="0px"
@@ -121,9 +121,10 @@ $footerMode = 'collapsed';
 					</li>
 
 					<li>
-						<a class="instagram" href="https://www.instagram.com/todevise.official">
+						<a class="instagram" href="https://www.instagram.com/todevise.official" target="_blank">
 							<i class="instagram">
-								<svg width="23px" height="24px" viewBox="0 0 23 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+								<svg width="23px" height="24px" viewBox="0 0 23 24" version="1.1"
+									 xmlns="http://www.w3.org/2000/svg">
 									<g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
 										<g id="REDISEÑO" transform="translate(-2102.000000, -244.000000)">
 											<g id="Group-24" transform="translate(2102.000000, 244.000000)">

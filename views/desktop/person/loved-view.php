@@ -3,7 +3,6 @@
 use app\assets\desktop\deviser\GlobalAsset;
 use app\components\PersonHeader;
 use app\components\PersonMenu;
-use app\helpers\Utils;
 use app\models\Person;
 
 GlobalAsset::register($this);
@@ -15,6 +14,7 @@ $this->title = Yii::t('app/public',
 	'LOVED_BY_PERSON_NAME',
 	['person_name' => $person->getName()]
 );
+Yii::$app->opengraph->title = $this->title;
 
 $this->params['person'] = $person;
 $this->params['person_menu_active_option'] = 'loved';

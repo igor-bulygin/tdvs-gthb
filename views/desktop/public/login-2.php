@@ -7,6 +7,7 @@ PublicCommonAsset::register($this);
 /* @var $this yii\web\View */
 
 $this->title = 'Login';
+Yii::$app->opengraph->title = $this->title;
 
 ?>
 

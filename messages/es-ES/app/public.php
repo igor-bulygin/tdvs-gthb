@@ -76,7 +76,7 @@ return [
 	'ERROR_PAGE_MESSAGE_2' => 'PD: Vuelve a casa puerks, nos estamos ocupando de ello!',
 	'EXPLORE_BOXES' => 'Explora las cajas',
 	'INCORRECT_USERNAME_OR_PASSWORD' => 'Nombre de usuario o contraseña incorrectos',
-	'INDEX_TITLE' => 'Todevise',
+	'INDEX_TITLE' => 'Inicio',
 	'HOME_BLOCK_1_TEXT_1' => '<span class="serif" style="margin-bottom:8px;">The</span>store',
 	'HOME_BLOCK_1_TEXT_2' => 'Encuentra los productos que te harán ser parte del futuro',
 	'HOME_BLOCK_2_TEXT_1' => 'Social<br/><span class="serif">experience</span>',
