@@ -89,4 +89,17 @@ class OrderAddress extends EmbedModel
 
 		return $phone1;
 	}
+
+	public function copyValuesFromPerson(Person $person) {
+		$this->name = $person->personalInfoMapping->name;
+		$this->last_name = $person->personalInfoMapping->last_name;
+		$this->city = $person->personalInfoMapping->city;
+		$this->country = $person->personalInfoMapping->country;
+		$this->address = $person->personalInfoMapping->address;
+		$this->zip = $person->personalInfoMapping->zip;
+		$this->vat_id = $person->personalInfoMapping->vat_id;
+		$this->phone_number_prefix = $person->personalInfoMapping->phone_number_prefix;
+		$this->phone_number = $person->personalInfoMapping->phone_number;
+		$this->email = $person->credentials['emails'];
+	}
 }

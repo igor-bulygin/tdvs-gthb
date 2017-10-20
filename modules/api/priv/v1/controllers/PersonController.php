@@ -255,8 +255,15 @@ class PersonController extends AppPrivateController
 			throw new ConflictHttpException("This order has an invalid state");
 		}
 
-		$order->setPackState($packId, OrderPack::PACK_STATE_AWARE);
+		// Change values in the pack
+		$pack = $order->getPack($packId);
+		if (!$pack) {
+			throw new NotFoundHttpException(sprintf('Pack with id %s not found', $packId));
+		}
+		$pack->setState(OrderPack::PACK_STATE_AWARE);
 
+		// Set pack in the order and save
+		$order->setPack($packId, $pack);
 		$order->setSubDocumentsForSerialize();
 
 		return $order;
@@ -295,9 +302,17 @@ class PersonController extends AppPrivateController
 			throw new ConflictHttpException("This order has an invalid state");
 		}
 
-		$order->setPackShippingInfo($packId, Yii::$app->request->post());
-		$order->setPackState($packId, OrderPack::PACK_STATE_SHIPPED);
+		// Change values in the pack
+		$pack = $order->getPack($packId);
+		if (!$pack) {
+			throw new NotFoundHttpException(sprintf('Pack with id %s not found', $packId));
+		}
+		$pack->setPackShippingInfo(Yii::$app->request->post());
+		$pack->setInvoiceInfo(Yii::$app->request->post());
+		$pack->setState(OrderPack::PACK_STATE_SHIPPED);
 
+		// Set pack in the order and save
+		$order->setPack($packId, $pack);
 		$order->setSubDocumentsForSerialize();
 
 		return $order;

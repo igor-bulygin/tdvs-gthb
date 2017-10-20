@@ -20,6 +20,7 @@ use yii\web\BadRequestHttpException;
  * @property array $charge_info
  * @property array $products
  * @property array $state_history
+ * @property string $invoice_url
  *
  * @method Order getParentObject()
  */
@@ -60,6 +61,7 @@ class OrderPack extends EmbedModel
 			'charge_info',
 			'products',
 			'state_history',
+			'invoice_url',
 		];
 	}
 
@@ -81,16 +83,41 @@ class OrderPack extends EmbedModel
 	public function rules()
 	{
 		return [
+			[
 				[
-					[
-						'shipping_type',
-					],
-					'in',
-					'range' => ['standard', 'express'],
-					'on' => Order::SCENARIO_CART
-				]
+					'shipping_type',
+				],
+				'in',
+				'range' => ['standard', 'express'],
+				'on' => [ORDER::SCENARIO_CART, ORDER::SCENARIO_ORDER],
+			],
+			[
+				[
+					'invoice_url',
+				],
+				'validateInvoiceUrl',
+				'skipOnEmpty' => false,
+				'when' => function($model) {
+					return $model->pack_state == OrderPack::PACK_STATE_SHIPPED;
+				},
+				'on' => [ORDER::SCENARIO_CART, ORDER::SCENARIO_ORDER],
+			],
 		];
 	}
+
+	/**
+	 * @param $attribute
+	 * @param $params
+	 */
+	public function validateInvoiceUrl($attribute, $params)
+	{
+		if (empty($this->invoice_url)) {
+			$this->addError('invoice_url', 'Invoice url is required to set this pack as shipped.');
+		} elseif (!$this->getDeviser()->existMediaFile($this->invoice_url)) {
+			$this->addError('invoice_url', sprintf('File %s does not exists.', $this->invoice_url));
+		}
+	}
+
 
 	/**
 	 * Prepare the ActiveRecord properties to serialize the objects properly, to retrieve an serialize
@@ -120,6 +147,7 @@ class OrderPack extends EmbedModel
 					'pack_state',
 					'pack_state_name' => 'packStateName',
 					'shipping_date' => 'shippingDate',
+					'invoice_link' => 'invoiceLink',
 
 					'products' => 'productsInfo',
 				];
@@ -144,6 +172,15 @@ class OrderPack extends EmbedModel
 			if ($state['state'] == OrderPack::PACK_STATE_SHIPPED) {
 				return $state['date'];
 			}
+		}
+
+		return null;
+	}
+
+	public function getInvoiceLink()
+	{
+		if ($this->invoice_url) {
+			return $this->getDeviser()->getDownloadFileUrl($this->invoice_url);
 		}
 
 		return null;
@@ -363,6 +400,26 @@ class OrderPack extends EmbedModel
 				'date' => new \MongoDate(),
 			];
 		$this->setAttribute('state_history', $stateHistory);
+	}
+
+	public function setInvoice($invoiceUrl)
+	{
+		$this->invoice_url = $invoiceUrl;
+	}
+
+	public function setPackShippingInfo($data)
+	{
+		$shippingInfo = [
+			'company' => isset($data['company']) ? $data['company'] : null,
+			'tracking_number' => isset($data['tracking_number']) ? $data['tracking_number'] : null,
+			'tracking_link' => isset($data['tracking_link']) ? $data['tracking_link'] : null,
+		];
+		$this->setAttribute('shipping_info', $shippingInfo);
+	}
+
+	public function setInvoiceInfo($data)
+	{
+		$this->invoice_url = isset($data['invoice_url']) ? $data['invoice_url'] : null;
 	}
 
 }

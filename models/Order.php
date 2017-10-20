@@ -127,14 +127,14 @@ class Order extends CActiveRecord {
 					'packs',
 				],
 				'safe',
-				'on' => self::SCENARIO_CART,
+				'on' => [self::SCENARIO_CART, self::SCENARIO_ORDER],
 			],
 			[
 				[
 					'packs',
 				],
 				'app\validators\SubDocumentValidator',
-				'on' => self::SCENARIO_CART,
+				'on' => [self::SCENARIO_CART, self::SCENARIO_ORDER],
 			],
 		];
 	}
@@ -373,7 +373,20 @@ class Order extends CActiveRecord {
     }
 
 
-    /**
+    public function beforeValidate()
+	{
+		if ($this->scenario == 'default') {
+			if ($this->isOrder()) {
+				$this->setScenario(Order::SCENARIO_ORDER);
+			} else {
+				$this->setScenario(Order::SCENARIO_CART);
+			}
+		}
+
+		return parent::beforeValidate();
+	}
+
+	/**
      * Add additional error to make easy show labels in client side
      */
     public function afterValidate()
@@ -599,38 +612,25 @@ class Order extends CActiveRecord {
 		$this->setSubDocument('billing_address', $value);
 	}
 
-	public function setPackState($packId, $newState)
-	{
+	public function getPack($packId) {
 		$packs = $this->getPacks();
-		$found = false;
 		foreach ($packs as $pack) {
 			if ($pack->short_id == $packId) {
-				$found = true;
-				$pack->setState($newState);
+				return $pack;
 			}
 		}
 
-		if (!$found) {
-			throw new NotFoundHttpException(sprintf('Pack with id %s not found', $packId));
-		}
-
-		$this->setPacks($packs);
-		$this->save();
+		return null;
 	}
 
-	public function setPackShippingInfo($packId, $data)
+	public function setPack($packId, $pack)
 	{
 		$packs = $this->getPacks();
 		$found = false;
-		foreach ($packs as $pack) {
-			if ($pack->short_id == $packId) {
+		foreach ($packs as $k => $onePack) {
+			if ($onePack->short_id == $packId) {
 				$found = true;
-				$shippingInfo = [
-					'company' => isset($data['company']) ? $data['company'] : null,
-					'tracking_number' => isset($data['tracking_number']) ? $data['tracking_number'] : null,
-					'tracking_link' => isset($data['tracking_link']) ? $data['tracking_link'] : null,
-				];
-				$pack->setAttribute('shipping_info', $shippingInfo);
+				$packs[$k] = $pack;
 			}
 		}
 
@@ -650,16 +650,7 @@ class Order extends CActiveRecord {
 
 				if (empty($this->shipping_address)) {
 					$shipping = $this->getShippingAddress();
-					$shipping->name = $person->personalInfoMapping->name;
-					$shipping->last_name = $person->personalInfoMapping->last_name;
-					$shipping->city = $person->personalInfoMapping->city;
-					$shipping->country = $person->personalInfoMapping->country;
-					$shipping->address = $person->personalInfoMapping->address;
-					$shipping->zip = $person->personalInfoMapping->zip;
-					$shipping->vat_id = $person->personalInfoMapping->vat_id;
-					$shipping->phone_number_prefix = $person->personalInfoMapping->phone_number_prefix;
-					$shipping->phone_number = $person->personalInfoMapping->phone_number;
-					$shipping->email = $person->credentials['emails'];
+					$shipping->copyValuesFromPerson($person);
 					$this->setShippingAddress($shipping);
 				}
 
