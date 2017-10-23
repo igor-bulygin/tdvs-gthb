@@ -1,5 +1,5 @@
 <div class="modal-header">
-	<button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="modalCropDescriptionCtrl.closeModal()">
+	<button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="modalCropDescriptionCtrl.dismissModal()">
 		<span class="ion-ios-close" aria-hidden="true"></span>
 	</button>
 	<h3 class="modal-title" translate="util.modal_crop_description.PHOTO_DESCRIPTION"></h3>
@@ -8,7 +8,7 @@
 	<div class="row">
 		<div class="col-sm-6">
 			<div class="crop-modal">
-				<ui-cropper image="modalCropDescriptionCtrl.resolve.photo" area-type="rectangle" aspect-ratio="1" chargement="'Loading'" result-image="modalCropDescriptionCtrl.resolve.imageData['photoCropped']" init-max-area="true" result-image-size="'max'" result-image-quality="1.0" result-image-format="'image/png'"></ui-cropper>
+				<ui-cropper image="modalCropDescriptionCtrl.resolve.photo" area-type="rectangle" aspect-ratio="1" chargement="'Loading'" result-image="modalCropDescriptionCtrl.resolve.imageData['photoCropped']" init-max-area="true" result-image-size="'max'" result-image-quality="1.0" result-image-format="'image/png'" on-change="modalCropDescriptionCtrl.onChangeCrop($dataURI)"></ui-cropper>
 			</div>
 		</div>
 		<div class="col-sm-6">
@@ -44,7 +44,7 @@
 	</div>
 	<div class="row">
 		<div class="text-center">
-			<button class="btn btn-default btn-grey" ng-click="modalCropDescriptionCtrl.closeModal()"><span translate="global.CANCEL"></span></button>
+			<button class="btn btn-default btn-grey" ng-click="modalCropDescriptionCtrl.dismissModal()"><span translate="global.CANCEL"></span></button>
 			<button class="btn btn-small btn-red" ng-click="modalCropDescriptionCtrl.ok()"><span translate="global.SAVE"></span></button>
 		</div>
 	</div>

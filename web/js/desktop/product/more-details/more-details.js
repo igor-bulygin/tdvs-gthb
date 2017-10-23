@@ -93,26 +93,30 @@
 							},
 							imageData: function() {
 								return imageData;
+							},
+							index: function() {
+								return index;
 							}
 						},
 						size: 'lg'
 					});
 
 					modalInstance.result.then(function (imageData) {
-						var imageObject = {
-							url: imageData.url
-						}
-						var description_photo_object = {
-							name: imageData.name,
+						var imageObject = {}
+						var descriptionPhotoObject = {
 							title: imageData.title,
 							description: imageData.description
 						};
+						if(imageData.url)
+							imageObject.url = imageData.url;
+						if(imageData.name)
+							descriptionPhotoObject.name
 						if(index <= -1) {
 							vm.images.unshift(imageObject);
-							vm.product.media.description_photos.unshift(description_photo_object);
+							vm.product.media.description_photos.unshift(descriptionPhotoObject);
 						} else {
-							vm.images[index] = imageObject;
-							vm.product.media.description_photos[index] = description_photo_object;
+							vm.images[index] = Object.assign(vm.images[index], imageObject);
+							vm.product.media.description_photos[index] = Object.assign(vm.product.media.description_photos[index], descriptionPhotoObject);
 						}
 					}, function (err) {
 						UtilService.onError(err);
@@ -142,7 +146,6 @@
 
 		function moved(index) {
 			vm.images = dragndropService.moved(vm.images);
-			console.log(vm.images);
 			vm.product.media.description_photos = vm.images.map(e => Object.assign({}, e.filename));
 		}
 
