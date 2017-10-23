@@ -8,15 +8,14 @@
 		vm.selected_language=_lang;
 		vm.title_language = vm.selected_language;
 		vm.description_language = vm.selected_language;
-		vm.imageData = {};
 
 		function ok() {
 
 			function onUploadPhotoSuccess(data) {
-				vm.imageData.url = currentHost() + data.data.url;
-				vm.imageData.name = data.data.filename;
+				vm.resolve.imageData.url = currentHost() + data.data.url;
+				vm.resolve.imageData.name = data.data.filename;
 				vm.close({
-					$value: vm.imageData
+					$value: vm.resolve.imageData
 				});
 			}
 
@@ -24,8 +23,8 @@
 				//vm.file.progress = parseInt(100.0 * evt.loaded/evt.total)
 			}
 
-			if(angular.isObject(vm.imageData) && (vm.imageData.photoCropped || vm.imageData.title || vm.imageData.description)) {
-				vm.file = Upload.dataUrltoBlob(vm.imageData.photoCropped, 'temp.png')
+			if(angular.isObject(vm.resolve.imageData) && (vm.resolve.imageData.photoCropped || vm.resolve.imageData.title || vm.resolve.imageData.description)) {
+				vm.file = Upload.dataUrltoBlob(vm.resolve.imageData.photoCropped, 'temp.png')
 				var data = {
 					deviser_id: person.short_id,
 					file: vm.file

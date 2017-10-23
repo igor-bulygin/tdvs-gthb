@@ -5,7 +5,7 @@
 			<label class="col-xs-12">
 				<span translate="product.more_details.PHOTOS_DESCRIPTION"></span>
 			</label>
-			<div class="col-md-12"  ngf-drop-available="productMoreDetailsCtrl.isDropAvailable" ngf-select="productMoreDetailsCtrl.openCropModal($file)" ngf-accept="'image/*'">
+			<div class="col-md-12"  ngf-drop-available="productMoreDetailsCtrl.isDropAvailable" ngf-select="productMoreDetailsCtrl.newCropModal($file)" ngf-accept="'image/*'">
 				<a class="btn btn-small btn-red mb-30" style="cursor:pointer;" translate="product.more_details.ADD_PHOTOS"></a>
 			</div>
 			
@@ -13,20 +13,20 @@
 			<div class="col-md-8">
 				<div class="col-md-3 pad-about mr-15">
 					<div ng-if="productMoreDetailsCtrl.isDropAvailable">
-						<div class="description-add-photos" ngf-drop-available="productMoreDetailsCtrl.isDropAvailable" ngf-drag-over-class="drag-over" ngf-drop ngf-select="productMoreDetailsCtrl.openCropModal($file)" ngf-accept="'image/*'">
+						<div class="description-add-photos" ngf-drop-available="productMoreDetailsCtrl.isDropAvailable" ngf-drag-over-class="drag-over" ngf-drop ngf-select="productMoreDetailsCtrl.newCropModal($file)" ngf-accept="'image/*'">
 							<div class="plus-add-wrapper">
 
 							</div>
 						</div>
 					</div>
 					<div ngf-no-file-drop>
-						<input type="file" name="file" ngf-select="productMoreDetailsCtrl.openCropModal($file)" ngf-accept="'image/*'" ngf-drop-available="productMoreDetailsCtrl.isDropAvailable" ngf-multiple="true">
+						<input type="file" name="file" ngf-select="productMoreDetailsCtrl.newCropModal($file)" ngf-accept="'image/*'" ngf-drop-available="productMoreDetailsCtrl.isDropAvailable" ngf-multiple="true">
 					</div>
 				</div>
 				<ul class="item draggable-list" dnd-list="productMoreDetailsCtrl.images" dnd-dragover="productMoreDetailsCtrl.dragOver(index)">
 					<li class="col-md-3 image-description-edit" ng-repeat="image in productMoreDetailsCtrl.images" dnd-draggable="image" dnd-effect-allowed="move" dnd-dragstart="productMoreDetailsCtrl.dragStart($index)" dnd-canceled="productMoreDetailsCtrl.canceled()" dnd-moved="productMoreDetailsCtrl.moved($index)">
 						<img class="grid-image" ng-src="{{image.url}}" draggable="false">
-						<span class="ion-edit red-icon edit"></span>
+						<span class="ion-edit red-icon edit" ng-click="productMoreDetailsCtrl.editCropModal($index)"></span>
 						<span class="ion-trash-a red-icon delete" ng-click="productMoreDetailsCtrl.deleteImage($index)"></span>
 					</li>
 				</ul>

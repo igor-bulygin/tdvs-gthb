@@ -14,7 +14,8 @@
 		vm.deleteQuestion = deleteQuestion;
 		vm.parseQuestion = parseQuestion;
 		vm.isLanguageOk = isLanguageOk;
-		vm.openCropModal = openCropModal;
+		vm.newCropModal = newCropModal;
+		vm.editCropModal = editCropModal;
 		vm.deleteImage = deleteImage;
 		vm.dragOver = dragOver;
 		vm.dragStart = dragStart;
@@ -66,8 +67,16 @@
 		function isLanguageOk(code, index) {
 			return vm.faq_helper[index].completedLanguages.indexOf(code) > -1 ? true : false;
 		}
+
+		function newCropModal(photo) {
+			openCropModal(photo, {}, -1);
+		}
+
+		function editCropModal(index) {
+			openCropModal(vm.images[index].url, vm.product.media.description_photos[index], index);
+		}
 		
-		function openCropModal(photo) {
+		function openCropModal(photo, imageData, index) {
 			if(vm.images.length < 4) {
 				if(photo) {
 					var modalInstance = $uibModal.open({
@@ -81,21 +90,30 @@
 							},
 							product: function() {
 								return vm.product;
+							},
+							imageData: function() {
+								return imageData;
 							}
 						},
 						size: 'lg'
 					});
 
 					modalInstance.result.then(function (imageData) {
-						vm.images.unshift({
+						var imageObject = {
 							url: imageData.url
-						});
-						vm.product.media.description_photos.unshift({
+						}
+						var description_photo_object = {
 							name: imageData.name,
 							title: imageData.title,
 							description: imageData.description
-						});
-
+						};
+						if(index <= -1) {
+							vm.images.unshift(imageObject);
+							vm.product.media.description_photos.unshift(description_photo_object);
+						} else {
+							vm.images[index] = imageObject;
+							vm.product.media.description_photos[index] = description_photo_object;
+						}
 					}, function (err) {
 						UtilService.onError(err);
 					});
