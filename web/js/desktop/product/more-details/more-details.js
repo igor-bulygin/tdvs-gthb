@@ -1,8 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller($scope, $timeout, $uibModal, Upload, uploadDataService, productDataService, 
-		UtilService, productEvents, dragndropService){
+	function controller($scope, $timeout, $uibModal, productDataService, UtilService, productEvents, dragndropService) {
 		var vm = this;
 		vm.has_error = UtilService.has_error;
 		vm.faq_selected = false;
@@ -79,52 +78,24 @@
 							},
 							languages: function() {
 								return vm.languages;
+							},
+							product: function() {
+								return vm.product;
 							}
 						},
 						size: 'lg'
 					});
 
 					modalInstance.result.then(function (imageData) {
-						function onUploadPhotoSuccess(data, imageData) {
-							$timeout(function() {
-								delete vm.file;
-							}, 1000);
-							//save photo
-							vm.images.unshift({
-								url: currentHost() + data.data.url
-							})
-							vm.product.media.description_photos.unshift({
-								name: data.data.filename,
-								title: imageData.title,
-								description: imageData.description
-							});
-						}
+						vm.images.unshift({
+							url: imageData.url
+						});
+						vm.product.media.description_photos.unshift({
+							name: imageData.name,
+							title: imageData.title,
+							description: imageData.description
+						});
 
-						function onWhileUploadingPhoto(evt) {
-							vm.file.progress = parseInt(100.0 * evt.loaded/evt.total);
-						}
-
-						if(angular.isObject(imageData) && (imageData.photoCropped || imageData.title || imageData.description)) {
-								//upload cropped photo
-								vm.file = angular.copy(Upload.dataUrltoBlob(imageData.photoCropped, "temp.png"));
-								var data = {
-									deviser_id: person.short_id,
-									file: Upload.dataUrltoBlob(imageData.photoCropped, "temp.png")
-								};
-								if(vm.product.id) {
-									data['type'] = "known-product-photo";
-									data['product_id'] = vm.product.id;
-								} else {
-									data['type'] = "unknown-product-photo";
-								}
-
-								uploadDataService.UploadFile(data, 
-									function(data) {
-										return onUploadPhotoSuccess(data, imageData);
-									}, UtilService.onError, function(evt) {
-										return onWhileUploadingPhoto(evt);
-									});
-						}
 					}, function (err) {
 						UtilService.onError(err);
 					});
