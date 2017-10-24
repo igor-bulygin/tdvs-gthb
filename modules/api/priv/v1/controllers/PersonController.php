@@ -308,7 +308,12 @@ class PersonController extends AppPrivateController
 			throw new NotFoundHttpException(sprintf('Pack with id %s not found', $packId));
 		}
 		$pack->setPackShippingInfo(Yii::$app->request->post());
-		$pack->setInvoiceInfo(Yii::$app->request->post());
+
+		$invoiceUrl = Yii::$app->request->post('invoice_url');
+		if ($invoiceUrl) {
+			$pack->setInvoiceInfo($invoiceUrl);
+		}
+
 		$pack->setState(OrderPack::PACK_STATE_SHIPPED);
 
 		// Set pack in the order and save

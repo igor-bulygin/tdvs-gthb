@@ -418,9 +418,9 @@ class OrderPack extends EmbedModel
 		$this->setAttribute('shipping_info', $shippingInfo);
 	}
 
-	public function setInvoiceInfo($data)
+	public function setInvoiceInfo($invoiceUrl)
 	{
-		$this->invoice_url = isset($data['invoice_url']) ? $data['invoice_url'] : null;
+		$this->invoice_url = $invoiceUrl;
 	}
 
 }
