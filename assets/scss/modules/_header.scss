@@ -1,6 +1,15 @@
 // ==========================================================================
 // Header
 // ==========================================================================
+#main_header{
+    .container{
+        padding: 0;        
+    }
+    .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12{
+        padding-right:0;
+        padding-left:0;
+    }
+}
 .navbar{
     background-color: $black;
     @include border-radius(0px,0px,0px,0px);
@@ -17,7 +26,7 @@
 		margin: 0 auto;
 		display: block;
 		float: none;
-        @media(max-width:768){
+        @media(max-width:768px){
             display: none;
         }
 	}
@@ -131,6 +140,14 @@
             }
         }
     }
+    .navbar-form{
+        background-color: transparent;
+        .input-group{
+            .form-control{
+                width: calc(100% - 34px) !important;
+            }
+        }
+    }
     .dropdown{
         height: 50px;
         &:hover{
@@ -166,17 +183,23 @@
             vertical-align: middle;
             @media (max-width: 768px){
                 margin-left:10px;
+                padding-left: 20px;
             }
         }
     }
+    form{
+        width: 100%;
+    }
     .searcher-header{
+        display: block;
         @media (max-width: 768px){
                     padding: 0 20px;
                 }
         input{
 				font-family: $font-family--regular;
-				margin: 0 0 0 30px;
-                min-width: 780px;//600px;
+				margin: 0;//0 0 0 30px;
+                //min-width: 780px;//600px;
+                //max-width: 794px;
                 color: $dark_grey;
 				letter-spacing: 0.4px;
                 background-color: $background_grey;
@@ -185,12 +208,13 @@
                 &:focus{
                     border-right: 0;
                 }
-                    @media (max-width: 1200px){
+                @media (max-width: 1200px){
                     min-width: 0;
                 }
                 @media (min-width: 992px) and (max-width: 1200px) { 
-                        min-width: 580px;//380px;
-                    }
+                    //min-width: 580px;//380px;
+                    //max-width: 570px
+                }
             }
         .btn-send{
             color: $black;
@@ -198,6 +222,7 @@
             font-size: 23px;
             padding: 0 10px;
             border-left: 0;
+            margin-left: -5px;
             @include border-radius(0px,6px,6px,0px);
             border-color:$background_grey;
             &:hover, &:active{
@@ -499,6 +524,9 @@
     }
 }
 #main_menu {
+    vertical-align: middle;
+    display: inline-block;
+    height: fit-content;
     padding-left: 0;
     padding-right: 0;
 }
@@ -529,11 +557,14 @@
 .navbar-header {
     @media(max-width: 768px){
         padding: 0 !important;
-        a{
+    }
+    a{
+        @media(max-width: 768px){
             padding: 10px 15px 10px 10px;
             width: 125px;
         }
     }
+
 }
 .col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12 {
    @media(max-width: 768px){
@@ -554,7 +585,14 @@
 }
 .category-menu{
    @media(max-width: 768px){
-        box-shadow: none;
-        background-color: transparent;
+        padding-top: 5px !important;
+        width: 50% !important;
+        box-shadow: none !important;
+        background-color: transparent !important;
+    }
+    .container{
+        @media(max-width: 768px){
+            padding: 0 !important;
+        }
     }
 }

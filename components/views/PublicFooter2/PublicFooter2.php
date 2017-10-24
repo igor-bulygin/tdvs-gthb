@@ -38,7 +38,7 @@ $footerMode = 'collapsed';
 <footer class="<?= ($footerMode=='expanded') ? 'untoggled' : '' ?>" id="main_footer" name="main_footer" ng-controller="footerCtrl as footerCtrl">
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-3">
+			<div class="col-md-3 hidden-xs hidden-md">
 				<div class="title">Help &amp; Contact</div>
 				<ul class="footer-items mt-10">
 					<li>
@@ -60,7 +60,7 @@ $footerMode = 'collapsed';
 					</li>
 				</ul>
 			</div>
-			<div class="col-sm-6">
+			<div class="col-md-6 col-xs-12 col-md-12">
 				<div class="title text-center mb-20"><span translate="footer.BECOME_DEVISER_QUESTION"></span></div>
 				<a href="<?= Url::to(["public/become-deviser"]) ?>" class="btn btn-medium btn-red auto-center"><span translate="footer.BECOME_DEVISER"></span></a>
 				<?php /*
@@ -68,7 +68,7 @@ $footerMode = 'collapsed';
 				<a href="<?= Url::to(["public/become-influencer"]) ?>" class="btn btn-medium btn-transparent auto-center"><span translate="footer.BECOME_INFLUENCER"></span></a>
  				*/ ?>
 			</div>
-			<div class="col-sm-3">
+			<div class="col-md-3 col-xs-12 col-md-12">
 				<div class="title"><span translate="footer.SUBSCRIBE_NEWSLETTER"></span></div>
 				<form name="footerCtrl.newsletterForm" ng-if="!footerCtrl.subscribed" ng-cloak>
 					<div class="input-group input-newsletter mt-30">
@@ -84,8 +84,8 @@ $footerMode = 'collapsed';
 					<p><span translate="footer.SUBSCRIBED_MESSAGE"></span></p>
 				</div>
 				<div class="title mt-40"><span translate="footer.STAY_CONNECTED"></span></div>
-				<ul class="social-items mt-10 home">
-					<li>
+				<ul class="social-items mt-10 home col-md-12">
+					<li class="col-md-4">
 						<a href="https://facebook.com/todevise" target="_blank">
 							<i class="facebook">
 								<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
@@ -100,7 +100,7 @@ $footerMode = 'collapsed';
 						</a>
 					</li>
 					
-					<li>
+					<li class="col-md-4">
 						<a class="twitter" href="https://twitter.com/todevise" target="_blank">
 							<i class="twitter">
 								<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
@@ -120,7 +120,7 @@ $footerMode = 'collapsed';
 						</a>
 					</li>
 
-					<li>
+					<li class="col-md-4">
 						<a class="instagram" href="https://www.instagram.com/todevise.official" target="_blank">
 							<i class="instagram">
 								<svg width="23px" height="24px" viewBox="0 0 23 24" version="1.1"
@@ -141,18 +141,34 @@ $footerMode = 'collapsed';
 				</ul>
 			</div>
 		</div>
+		<div class="hidden-xg hidden-md mt-4">
+			<div class="title">Help &amp; Contact</div>
+			<ul class="footer-items mt-10">
+				<li class="col-md-6">
+					<a href="<?= Url::to(["public/contact"]) ?>"><span translate="footer.CONTACT_US"></span></a>
+				</li>
+				<?php /*
+				<li>
+					<a href="#"><span translate="footer.FAQS"></span></a>
+				</li>
+				*/ ?>
+				<li class="col-md-6">
+					<a href="<?= Url::to(["public/about-us"]) ?>"><span translate="footer.ABOUT_US"></span></a>
+				</li>
+			</ul>
+		</div>
 		<div class="copyright mt-40">
 			<div>
 				<ul>
-					<li>
+					<li class="col-md-12">
 						<a href="<?=Url::to(['/public/terms'])?>"><span translate="footer.TERMS_CONDITIONS"></span></a>
 					</li>
-					<li>·</li>
-					<li>
+					<li class="hidden-xs hidden-md">·</li>
+					<li class="col-md-12">
 						<a href="<?=Url::to(['/public/privacy'])?>"><span translate="footer.PRIVACY"></span></a>
 					</li>
-					<li>·</li>
-					<li>
+					<li class="hidden-xs hidden-md">·</li>
+					<li class="col-sm-12">
 						<a href="<?=Url::to(['/public/cookies'])?>"><span translate="footer.COOKIES"></span></a>
 					</li>
 				</ul>
