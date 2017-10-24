@@ -118,8 +118,8 @@
 			vm.actualPack=pack;
 			function onUploadInvoiceSuccess(data, file, pack) {
 					delete file.progress;
-					vm.host=$location.host();
-					pack.invoice_url=  data.data.url;
+					pack.invoice_url=  data.data.filename;
+					pack.invoice_link=  currentHost() + data.data.url;
 			}
 			function onWhileUploadingInvoice(evt, file) {
 				file.progress = parseInt(100.0 * evt.loaded / evt.total);
