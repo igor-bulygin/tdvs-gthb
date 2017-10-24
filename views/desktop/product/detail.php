@@ -89,8 +89,10 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 										<!-- Wrapper for slides -->
 										<div class='carousel-inner'>
 											<?php foreach ($productImages as $key => $imageUrl) { ?>
-											<div class='item <?= ($key==0) ? ' active ' : ' ' ?>'>
-												<img class="product-slide" src='<?= Utils::url_scheme() ?><?= Utils::thumborize($imageUrl)->resize(410, 0) ?>' alt='' />
+											<div class='item <?= ($key==0) ? ' active ' : ' ' ?>' data-toggle="modal" data-target="#carouselModal">
+												<a href="#productGallery" data-slide-to="<?= $key ?>">
+													<img class="product-slide" src='<?= Utils::url_scheme() ?><?= Utils::thumborize($imageUrl)->resize(410, 0) ?>' />
+												</a>
 											</div>
 											<?php } ?>
 										</div>
@@ -472,7 +474,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 							<a href="<?= $person->getStoreLink() ?>">
 								<span translate="product.detail.CREATED_BY"></span>
 								<img class="avatar-default medium" src="<?= $person->getProfileImage(128, 128) ?>" data-pin-nopin="true">
-								<!--<span><?= $person->getName() ?></span>-->
+								<?php /* <span><?= $person->getName() ?></span> */ ?>
 							</a>
 						</div>
 					</div>
@@ -801,3 +803,28 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 	</div>
 </div>
 <!-- /PRODUCT DESCRIPTION -->
+
+<div class="modal full-modal fade" id="carouselModal">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-body">
+				<button type="button" class="close" data-dismiss="modal" title="Close"><span class="ion-ios-close-empty"></span></button>
+				<div id="productGallery" class="carousel slide" data-interval="false">
+					<div class="carousel-inner">
+						<?php
+						$active = true;
+						foreach($productImages as $key => $imageUrl) { ?>
+							<div class="item <?=$active ? 'active' : '' ?>">
+								<img src="<?= Utils::url_scheme() ?><?= Utils::thumborize($imageUrl)->resize(0, 0) ?>">
+							</div>
+							<?php
+								$active = false;
+							} ?>
+					</div>
+				</div>
+				<a href="#productGallery" class="left carousel-control" role="button" data-slide="prev"><i class="ion-ios-arrow-left"></i></a>
+				<a href="#productGallery" class="right carousel-control" role="button" data-slide="next"><i class="ion-ios-arrow-right"></i></a>
+			</div>
+		</div>
+	</div>
+</div>
