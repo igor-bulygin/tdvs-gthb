@@ -1,8 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller($scope, $timeout, $uibModal, Upload, uploadDataService, productDataService, 
-		UtilService, productEvents, dragndropService){
+	function controller($scope, $timeout, $uibModal, productDataService, UtilService, productEvents, dragndropService) {
 		var vm = this;
 		vm.has_error = UtilService.has_error;
 		vm.faq_selected = false;
@@ -15,7 +14,8 @@
 		vm.deleteQuestion = deleteQuestion;
 		vm.parseQuestion = parseQuestion;
 		vm.isLanguageOk = isLanguageOk;
-		vm.openCropModal = openCropModal;
+		vm.newCropModal = newCropModal;
+		vm.editCropModal = editCropModal;
 		vm.deleteImage = deleteImage;
 		vm.dragOver = dragOver;
 		vm.dragStart = dragStart;
@@ -67,8 +67,16 @@
 		function isLanguageOk(code, index) {
 			return vm.faq_helper[index].completedLanguages.indexOf(code) > -1 ? true : false;
 		}
+
+		function newCropModal(photo) {
+			openCropModal(photo, {}, -1);
+		}
+
+		function editCropModal(index) {
+			openCropModal(vm.images[index].url, vm.product.media.description_photos[index], index);
+		}
 		
-		function openCropModal(photo) {
+		function openCropModal(photo, imageData, index) {
 			if(vm.images.length < 4) {
 				if(photo) {
 					var modalInstance = $uibModal.open({
@@ -79,51 +87,36 @@
 							},
 							languages: function() {
 								return vm.languages;
+							},
+							product: function() {
+								return vm.product;
+							},
+							imageData: function() {
+								return imageData;
+							},
+							index: function() {
+								return index;
 							}
 						},
 						size: 'lg'
 					});
 
 					modalInstance.result.then(function (imageData) {
-						function onUploadPhotoSuccess(data, imageData) {
-							$timeout(function() {
-								delete vm.file;
-							}, 1000);
-							//save photo
-							vm.images.unshift({
-								url: currentHost() + data.data.url
-							})
-							vm.product.media.description_photos.unshift({
-								name: data.data.filename,
-								title: imageData.title,
-								description: imageData.description
-							});
-						}
-
-						function onWhileUploadingPhoto(evt) {
-							vm.file.progress = parseInt(100.0 * evt.loaded/evt.total);
-						}
-
-						if(angular.isObject(imageData) && (imageData.photoCropped || imageData.title || imageData.description)) {
-								//upload cropped photo
-								vm.file = angular.copy(Upload.dataUrltoBlob(imageData.photoCropped, "temp.jpg"));
-								var data = {
-									deviser_id: person.short_id,
-									file: Upload.dataUrltoBlob(imageData.photoCropped, "temp.jpg")
-								};
-								if(vm.product.id) {
-									data['type'] = "known-product-photo";
-									data['product_id'] = vm.product.id;
-								} else {
-									data['type'] = "unknown-product-photo";
-								}
-
-								uploadDataService.UploadFile(data, 
-									function(data) {
-										return onUploadPhotoSuccess(data, imageData);
-									}, UtilService.onError, function(evt) {
-										return onWhileUploadingPhoto(evt);
-									});
+						var imageObject = {}
+						var descriptionPhotoObject = {
+							title: imageData.title,
+							description: imageData.description
+						};
+						if(imageData.url)
+							imageObject.url = imageData.url;
+						if(imageData.name)
+							descriptionPhotoObject.name
+						if(index <= -1) {
+							vm.images.unshift(imageObject);
+							vm.product.media.description_photos.unshift(descriptionPhotoObject);
+						} else {
+							vm.images[index] = Object.assign(vm.images[index], imageObject);
+							vm.product.media.description_photos[index] = Object.assign(vm.product.media.description_photos[index], descriptionPhotoObject);
 						}
 					}, function (err) {
 						UtilService.onError(err);
@@ -153,7 +146,6 @@
 
 		function moved(index) {
 			vm.images = dragndropService.moved(vm.images);
-			console.log(vm.images);
 			vm.product.media.description_photos = vm.images.map(e => Object.assign({}, e.filename));
 		}
 
