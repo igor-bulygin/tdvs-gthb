@@ -55,7 +55,9 @@
 			"PACKAGE_SHIPPED": "EL PAQUETE HA SIDO ENVIADO",
 			"TOTAL": "Total",
 			"CONTINUE_MARK_SHIPPED": "<p>Va a marcar este pedido como enviado.</p><p><strong>Esta acción no se puede deshacer.</strong></p><p>¿Desea continuar?",
-			"ORDER_MOVED_TO_PAST": "El pedido {{ data }} ha sido movido a pedidos pasados. Para información sobre el pago consulte @:settings.header.BILLING_PAYMENTS"
+			"ORDER_MOVED_TO_PAST": "El pedido {{ data }} ha sido movido a pedidos pasados. Para información sobre el pago consulte @:settings.header.BILLING_PAYMENTS",
+			"UPLOAD_INVOICE":"Subir FACTURA EN PDF",
+			"SEE_INVOICE":"Ver factura"
 		},
 		"shipping": {
 			"TOTAL": "Total",

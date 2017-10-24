@@ -1,13 +1,14 @@
 (function () {
 	"use strict";
 
-	function controller(UtilService, orderDataService,cartService,$uibModal) {
+	function controller(UtilService, orderDataService,cartService,$uibModal, uploadDataService, $location) {
 		var vm = this;
 		vm.markPackAware=markPackAware;
 		vm.markPackShipped=markPackShipped;
 		vm.editShippingData=editShippingData;
 		vm.has_error = UtilService.has_error;
 		vm.parseDate=UtilService.parseDate;
+		vm.uploadInvoice = uploadInvoice;
 		vm.ordersTotalPrice=0;
 
 		init();
@@ -63,7 +64,7 @@
 					if (data) {
 						pack.loading=true;
 						ValidateUrl()
-						orderDataService.changePackState({ company:vm.shippingCompany, eta: vm.eta, tracking_number:vm.trackingNumber, tracking_link:vm.trackLink }, {personId:pack.deviser_id,packId:pack.short_id, newState:'shipped' },onChangeStateSuccess, UtilService.onError)
+						orderDataService.changePackState({ company:vm.shippingCompany, eta: vm.eta, tracking_number:vm.trackingNumber, tracking_link:vm.trackLink, invoice_url:pack.invoice_url }, {personId:pack.deviser_id,packId:pack.short_id, newState:'shipped' },onChangeStateSuccess, UtilService.onError)
 					}
 				}, function(err) {
 					UtilService.onError(err);
@@ -72,7 +73,7 @@
 			else {
 				pack.loading=true;
 				ValidateUrl()
-				orderDataService.changePackState({ company:vm.shippingCompany, eta: vm.eta, tracking_number:vm.trackingNumber, tracking_link:vm.trackLink }, {personId:pack.deviser_id,packId:pack.short_id, newState:'shipped' },onChangeStateSuccess, UtilService.onError)
+				orderDataService.changePackState({ company:vm.shippingCompany, eta: vm.eta, tracking_number:vm.trackingNumber, tracking_link:vm.trackLink, invoice_url:pack.invoice_url  }, {personId:pack.deviser_id,packId:pack.short_id, newState:'shipped' },onChangeStateSuccess, UtilService.onError)
 			}
 		}
 
@@ -111,6 +112,34 @@
 			}, function(err) {
 				UtilService.onError(err);
 			});
+		}
+
+		function uploadInvoice(invoice, errInvoice,pack) {
+			vm.actualPack=pack;
+			function onUploadInvoiceSuccess(data, file, pack) {
+					delete file.progress;
+					vm.host=$location.host();
+					pack.invoice_url=  data.data.url;
+			}
+			function onWhileUploadingInvoice(evt, file) {
+				file.progress = parseInt(100.0 * evt.loaded / evt.total);
+			}
+			vm.invoice=invoice;
+			vm.errFiles = errInvoice;
+			//upload invoice
+			var data = {
+				person_id: person.short_id,
+				pack_id: pack.short_id,
+				type: 'person-pack-invoice',
+				file: vm.invoice
+			};
+			uploadDataService.UploadFile(data,
+				function(data) {
+					return onUploadInvoiceSuccess(data, vm.invoice,pack);
+				}, UtilService.onError,
+				function(evt) {
+					return onWhileUploadingInvoice(evt, vm.invoice);
+				});
 		}
 	}
 

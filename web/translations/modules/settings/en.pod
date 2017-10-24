@@ -55,7 +55,9 @@
 			"PACKAGE_SHIPPED": "PACKAGE WAS SHIPPED",
 			"TOTAL": "Total",
 			"CONTINUE_MARK_SHIPPED": "<p>You are marking this order as shipped.</p><p><strong>This action cannot be undone.</strong></p><p>Do you want to continue?</p>",
-			"ORDER_MOVED_TO_PAST": "Order {{ data }} was moved to Past orders. For payment information see Billing & Payments"
+			"ORDER_MOVED_TO_PAST": "Order {{ data }} was moved to Past orders. For payment information see Billing & Payments",
+			"UPLOAD_INVOICE":"Upload PDF INVOICE",
+			"SEE_INVOICE":"See PDF INVOICE"
 		},
 		"shipping": {
 			"ADD_SHIPPING_PRICES": "Add shipping prices",
