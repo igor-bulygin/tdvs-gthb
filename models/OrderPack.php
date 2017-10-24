@@ -153,6 +153,7 @@ class OrderPack extends EmbedModel
 				];
 				self::$retrieveExtraFields = [
 					'products',
+					'invoice_url',
 				];
 
 
