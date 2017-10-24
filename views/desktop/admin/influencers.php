@@ -114,6 +114,13 @@ $this->title = 'Todevise / Admin / Influencers';
 						},
 						'label' => Yii::t("app/admin", "Email")
 					],
+					[
+						'value' => function($model) {
+							/** @var Person $model */
+							return $model->account_state;
+						},
+						'header' => Html::tag("div", Yii::t("app/admin", "Status")),
+					],
 				]
 			]);
 		?>

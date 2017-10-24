@@ -30,6 +30,7 @@ use yii\web\IdentityInterface;
  * @property array $preferences
  * @property string $curriculum
  * @property PersonShippingSettings[] $shippingSettingsMapping
+ * @property double $application_fee
  * @property MongoDate $created_at
  * @property MongoDate $updated_at
  */
@@ -57,6 +58,8 @@ class Person extends CActiveRecord implements IdentityInterface
 
 	const SCENARIO_CLIENT_CREATE = 'client-create';
 	const SCENARIO_CLIENT_UPDATE= 'client-update';
+
+	const SCENARIO_ADMIN = 'scenario-admin';
 
 	const SCENARIO_TREND_SETTER_PROFILE_UPDATE = 'trend-setter-profile-update';
 
@@ -105,6 +108,7 @@ class Person extends CActiveRecord implements IdentityInterface
 			'videos',
 			'faq',
 			'shipping_settings',
+			'application_fee',
 			'created_at',
 			'updated_at',
 		];
@@ -528,6 +532,14 @@ class Person extends CActiveRecord implements IdentityInterface
 				],
 				'required',
 				'on' => [self::SCENARIO_CLIENT_CREATE]
+			],
+			[
+				[
+					'account_state',
+					'application_fee',
+				],
+				'safe',
+				'on' => [self::SCENARIO_ADMIN]
 			],
 			[
 				[
@@ -2012,7 +2024,11 @@ class Person extends CActiveRecord implements IdentityInterface
 	 */
 	public function getSalesApplicationFee()
 	{
-		$todeviseFee = Yii::$app->params['default_todevise_fee'];
+		if ($this->application_fee && is_double($this->application_fee)) {
+			$todeviseFee = $this->application_fee;
+		} else {
+			$todeviseFee = Yii::$app->params['default_todevise_fee'];
+		}
 
 		if ($this->personalInfoMapping->country == 'ES') {
 			$fee = $todeviseFee * (1 + Yii::$app->params['default_spain_vat']);

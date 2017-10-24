@@ -118,9 +118,83 @@
 				//Cancel
 			});
 		};
+
+		vm.fee = function (deviser_id) {
+			$person.get({
+				short_id: deviser_id
+			}).then(function (devisers) {
+				if (devisers.length !== 1) {
+					toastr.error("Unexpected deviser details!");
+					return;
+				}
+				var deviser = devisers[0];
+
+				var modalInstance = $uibModal.open({
+					templateUrl: 'template/modal/deviser/fee.html',
+					controller: deviserFeeCtrl,
+					controllerAs: 'deviserFeeCtrl',
+					resolve: {
+						data: function () {
+							return {
+								application_fee: parseFloat(deviser.application_fee)
+							}
+						}
+					}
+				});
+
+				modalInstance.result.then(function (data) {
+					console.log('result then');
+					if (isNaN(parseFloat(data.application_fee))) {
+						toastr.error("You must specify a number. Example: set 0.145 for 14.5%, or leave empty to use default setting");
+						return;
+					}
+					deviser.application_fee = data.application_fee;
+
+					$person.modify('POST', deviser).then(function (data) {
+						if (deviser.application_fee) {
+							toastr.success("Deviser fee set to "+parseFloat(deviser.application_fee*100).toFixed(2)+" %");
+						} else {
+							toastr.success("Deviser fee set to default");
+						}
+						vm.renderPartial();
+					}, function (err) {
+						toastr.error("Couldn't modify deviser!", err);
+					});
+
+				}, function () {
+					console.log('cancel');
+					//Cancel
+				});
+			});
+
+		};
+	}
+
+	function deviserFeeCtrl($uibModalInstance, data) {
+		var vm = this;
+
+		console.log(data);
+		console.log(data.application_fee);
+		vm.data = data;
+
+		vm.ok = ok;
+		vm.cancel = cancel;
+
+		function ok() {
+			console.log('ok en controller');
+			$uibModalInstance.close({
+				application_fee: vm.data.application_fee
+			});
+		};
+
+		function cancel() {
+			console.log('cancel en controller');
+			$uibModalInstance.dismiss();
+		};
 	}
 
 	angular.module('todevise', ['ngAnimate', 'ui.bootstrap', 'angular-multi-select', 'global-admin', 'global-desktop', 'api'])
 		.controller('devisersCtrl', devisersCtrl)
+		.controller('deviserFeeCtrl', deviserFeeCtrl)
 
 }());
