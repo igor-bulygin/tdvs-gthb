@@ -2018,7 +2018,7 @@ class Person extends CActiveRecord implements IdentityInterface
 
 	/**
 	 * Returns the application fee to be charged to the user in his sales.
-	 * Its a double number in 100base, for example returns 0.145 to represent a 14.5% percentaje
+	 * Its a double number in 100base, for example returns 0.145 to represent a 14.5% percentage
 	 *
 	 * @return double
 	 */
