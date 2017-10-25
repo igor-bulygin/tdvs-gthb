@@ -58,7 +58,15 @@
 									<label class="col-md-12" ng-bind="pack.pack_state | capitalize"></label>
 								</div>
 								<div class="col-md-2 text-right" ng-if="pack.pack_state==='shipped'">
-									<span class="a red-text" ng-click="boughtOrdersCtrl.openTrackModal(pack)" translate="settings.orders.TRACK_PACKAGE"></span>
+									<a class="col-md-12 red-text" href="" ng-click="boughtOrdersCtrl.openTrackModal(pack)" ><span translate="settings.orders.TRACK_PACKAGE"></span></a>
+									<a class="col-md-12 red-text" ng-href="{{pack.invoice_link}}" target="blank">
+										<span  class="col-md-12 red-text">
+											<strong>
+												<i class="ion-arrow-down-a"></i>
+												<span translate="settings.orders.DOWNLOAD_INVOICE"></span>
+											</strong>
+										</span>
+									</a>
 								</div>
 							</div>
 							<div class="row mt-10 mb-20">

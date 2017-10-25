@@ -59,7 +59,8 @@
 			"ORDER_MOVED_TO_PAST": "Order {{ data }} was marked as shipped orders. For payment information see Billing & Payments",
 			"UPLOAD_INVOICE":"Upload PDF INVOICE",
 			"SEE_INVOICE":"invoice.pdf",
-			"REPLACE_INVOICE":"Replace PDF INVOICE"
+			"REPLACE_INVOICE":"Replace PDF INVOICE",
+			"DOWNLOAD_INVOICE":"Download PDF INVOICE"
 		},
 		"shipping": {
 			"ADD_SHIPPING_PRICES": "Add shipping prices",

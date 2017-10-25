@@ -59,7 +59,8 @@
 			"ORDER_MOVED_TO_PAST": "El pedido {{ data }} ha sido marcado como enviado. Para información sobre el pago consulte el apartado FACTURAS Y PAGOS",
 			"UPLOAD_INVOICE":"Subir FACTURA EN PDF",
 			"SEE_INVOICE":"factura.pdf",
-			"REPLACE_INVOICE":"Reemplazar FACTURA EN PDF"
+			"REPLACE_INVOICE":"Reemplazar FACTURA EN PDF",
+			"DOWNLOAD_INVOICE":"Descargar FACTURA"
 		},
 		"shipping": {
 			"TOTAL": "Total",
