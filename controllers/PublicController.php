@@ -110,9 +110,6 @@ class PublicController extends CController
 		// Devisers
 		$devisers = Person::getRandomDevisers(20, $categoryShortIds);
 
-		// Works
-		$works = Product::getRandomWorks(48, $categoryShortIds);
-
 		// Boxes
 		$boxes = Box::getRandomBoxes(8, null, true);
 
@@ -121,6 +118,13 @@ class PublicController extends CController
 
 		// Influencers
 		$influencers = Person::getRandomInfluencers(12, $categoryShortIds);
+
+		// Works
+		$works = Product::getRandomWorks(48, $categoryShortIds);
+		$htmlWorks = $this->renderPartial('more-works', [
+			'total' => 48,
+			'works' => $works,
+ 		]);
 
 		$this->layout = '/desktop/public-2.php';
 		$this->view->params['selectedCategory'] = isset($category) ? $category : null;
@@ -135,6 +139,8 @@ class PublicController extends CController
 				array_slice($devisers, 9, 3),
 			],
 			'works' => $works,
+			'htmlWorks' => $htmlWorks,
+			"category_id" => $category_id,
 			'boxes' => $boxes,
 			'stories' => $stories,
 			'influencers' => [
@@ -152,33 +158,26 @@ class PublicController extends CController
 		// show only fields needed in this scenario
 		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_PUBLIC);
 
-		$maxLimit = 48;
-		// set pagination values
-		$limit = Yii::$app->request->get('limit', $maxLimit);
-		$limit = max(1, $limit);
-		$limit = min($limit, $maxLimit);
-		$page = Yii::$app->request->get('page', 1);
-		$page = ($page < 1) ? 1 : $page;
-		$offset = ($limit * ($page - 1));
+		$category_id = Yii::$app->request->get('category_id', null);
 
+		if ($category_id) {
+			$category = Category::findOneSerialized($category_id); /* @var Category $category */
+			$categoryShortIds = $category->getShortIds();
+		} else {
+			$categoryShortIds = [];
+		}
 
-		$categoryShortIds = [];
-		$works = Product::getRandomWorks($limit, $categoryShortIds);
-
-		$total = Product::$countItemsFound;
-		$more = $total > ($page * $limit) ? 1 : 0;
+		$works = Product::getRandomWorks(48, $categoryShortIds);
 
 		$this->layout = '/desktop/empty-layout.php';
 
 		$html = $this->renderPartial("more-works", [
-			'total' => $total,
 			'works' => $works,
 		]);
 
-		return $html;
 		return json_encode([
 			'html' => $html,
-			"page" => $more ? $page + 1 : null,
+			"category_id" => $category_id,
 		]);
 	}
 

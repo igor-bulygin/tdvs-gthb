@@ -1,13 +1,15 @@
 $(function() {
-	console.log('pasando');
-	$('#btnMoreWorks').click(function() {
-		console.log('click');
-		var url = currentHost()+'/public/more-works';
-		console.log(url);
-		$.get(url, function( data ) {
-			console.log('loaded');
-			$('#works-container').append(data);
-			// $('#works-container').append(data.html);
-		});
+	$('#btnMoreWorks').click(function () {
+		var data = $('#formPagination').serialize();
+		$.get(currentHost() + '/public/more-works', data)
+			.done(function (r) {
+				var data = JSON.parse(r);
+				$('#works-container').append(data.html);
+				$('#category_id').val(data.category_id);
+			})
+
+			.fail(function () {
+				location.reload();
+			});
 	});
 });
