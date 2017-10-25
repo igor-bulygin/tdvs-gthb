@@ -247,6 +247,7 @@ $config = [
 				// Public routing
 				'/' => 'public/index',
 				'/index-new' => 'public/index',
+				'/public/more-works' => 'public/more-works',
 
 				'/works/<slug:[^/.]*?>/<category_id:[^/.]*?>' => 'public/category-b',
 				'/works' => 'product/index',

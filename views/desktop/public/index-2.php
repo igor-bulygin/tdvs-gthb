@@ -1,10 +1,10 @@
 <?php
 
-use app\assets\desktop\pub\PublicCommonAsset;
+use app\assets\desktop\pub\Index2Asset;
 use app\helpers\Utils;
 use app\models\Person;
 
-PublicCommonAsset::register($this);
+Index2Asset::register($this);
 
 $this->title = Yii::t('app/public', 'INDEX_TITLE');
 Yii::$app->opengraph->title = $this->title;
@@ -275,15 +275,15 @@ Yii::$app->opengraph->title = $this->title;
 <section class="grid-wrapper" id="grid-product-home">
 	<div class="container">
 		<h3 class="title-product-name"><?=Yii::t('app/public', 'HOME_WORKS')?></h3>
-		<div id="works-container" class="macy-container grid-margin" data-trueorder="true" data-waitforimages="true" data-columns="6">
+		<div id="works-container" class="grid-margin" data-trueorder="true" data-waitforimages="true" data-columns="6">
 			<?php foreach ($works as $i => $work) { ?>
-			<div class="col-md-2">
+			<div class="col-sm-4 col-md-2">
 				<div class="menu-category list-group">
 					<div class="grid">
 						<figure class="effect-zoe">
 							<image-hover-buttons product-id="{{'<?= $work->short_id ?>'}}" is-loved="{{'<?=$work->isLovedByCurrentUser() ? 1 : 0 ?>'}}" is-mine="{{'<?= $work->isWorkFromCurrentUser() ? 1 : 0 ?>'}}">
 								<a href="<?= $work->getViewLink()?>">
-									<img class="grid-image" src="<?= $work->getImagePreview(400, 0) ?>">
+									<img class="grid-image" src="<?= $work->getImagePreview(400, 500) ?>">
 									<span class="img-bgveil"></span>
 								</a>
 							</image-hover-buttons>
@@ -301,5 +301,8 @@ Yii::$app->opengraph->title = $this->title;
 			</div>
 			<?php } ?>
 		</div>
+	</div>
+	<div class="text-center">
+		<button class="btn btn-red" type="button" id="btnMoreWorks">See more</button>
 	</div>
 </section>

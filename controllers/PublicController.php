@@ -147,6 +147,41 @@ class PublicController extends CController
 		]);
 	}
 
+	public function actionMoreWorks()
+	{
+		// show only fields needed in this scenario
+		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_PUBLIC);
+
+		$maxLimit = 48;
+		// set pagination values
+		$limit = Yii::$app->request->get('limit', $maxLimit);
+		$limit = max(1, $limit);
+		$limit = min($limit, $maxLimit);
+		$page = Yii::$app->request->get('page', 1);
+		$page = ($page < 1) ? 1 : $page;
+		$offset = ($limit * ($page - 1));
+
+
+		$categoryShortIds = [];
+		$works = Product::getRandomWorks($limit, $categoryShortIds);
+
+		$total = Product::$countItemsFound;
+		$more = $total > ($page * $limit) ? 1 : 0;
+
+		$this->layout = '/desktop/empty-layout.php';
+
+		$html = $this->renderPartial("more-works", [
+			'total' => $total,
+			'works' => $works,
+		]);
+
+		return $html;
+		return json_encode([
+			'html' => $html,
+			"page" => $more ? $page + 1 : null,
+		]);
+	}
+
 	public function actionBecomeDeviser()
 	{
 		$this->layout = '/desktop/public-2.php';
