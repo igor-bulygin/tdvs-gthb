@@ -143,7 +143,6 @@
 				});
 
 				modalInstance.result.then(function (data) {
-					console.log('result then');
 					if (isNaN(parseFloat(data.application_fee))) {
 						toastr.error("You must specify a number. Example: set 0.145 for 14.5%, or leave empty to use default setting");
 						return;
@@ -162,7 +161,6 @@
 					});
 
 				}, function () {
-					console.log('cancel');
 					//Cancel
 				});
 			});
@@ -173,22 +171,18 @@
 	function deviserFeeCtrl($uibModalInstance, data) {
 		var vm = this;
 
-		console.log(data);
-		console.log(data.application_fee);
 		vm.data = data;
 
 		vm.ok = ok;
 		vm.cancel = cancel;
 
 		function ok() {
-			console.log('ok en controller');
 			$uibModalInstance.close({
 				application_fee: vm.data.application_fee
 			});
 		};
 
 		function cancel() {
-			console.log('cancel en controller');
 			$uibModalInstance.dismiss();
 		};
 	}
