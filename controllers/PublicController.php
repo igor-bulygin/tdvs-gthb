@@ -111,18 +111,7 @@ class PublicController extends CController
 		$devisers = Person::getRandomDevisers(20, $categoryShortIds);
 
 		// Works
-		$works = Product::getRandomWorks(200, $categoryShortIds);
-
-		//TODO if redesign does not need this blocks anymore, delete it to optimize memory usage
-		// divide then in blocks to be rendered in bottom section
-		$moreWork = [];
-		for ($i = 1; $i <= 19; $i++) {
-			$start = $i * 15;
-			$moreWork[] =  [
-				"twelve" => array_slice($works, $start, 12),
-				"three" => array_slice($works, ($start + 12), 3),
-			];
-		}
+		$works = Product::getRandomWorks(48, $categoryShortIds);
 
 		// Boxes
 		$boxes = Box::getRandomBoxes(8, null, true);
@@ -146,9 +135,6 @@ class PublicController extends CController
 				array_slice($devisers, 9, 3),
 			],
 			'works' => $works,
-			'works12' => array_slice($works, 0, 12),
-			'works3' => array_slice($works, 12, 3),
-			'moreWork' => $moreWork,
 			'boxes' => $boxes,
 			'stories' => $stories,
 			'influencers' => [
