@@ -6,8 +6,10 @@ $(function() {
 
 			.done(function (r) {
 				var data = JSON.parse(r);
-				$('#works-container').append(data.html);
-				$('#category_id').val(data.category_id);
+				angular.element('#works-container').injector().invoke(function($rootScope, $compile) {
+					$('#works-container').append($compile(data.html)($rootScope));
+					$('#category_id').val(data.category_id);
+				})
 			})
 
 			.fail(function () {
