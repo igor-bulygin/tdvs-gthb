@@ -1,5 +1,6 @@
 {
 	"settings": {
+		"REQUIRED": "Required",
 		"general": {
 			"PERSONAL_INFORMATION": "Personal information",
 			"BRAND": "BRAND / ARTIST NAME",
@@ -50,14 +51,15 @@
 			"ETA": "ETA",
 			"TRACKING_NUMBER": "Tracking number",
 			"TRACKING_LINK": "Link to track package ",
-			"MOVE_TO_PAST_ORDERS": "When you click this button, the order will be moved to PAST ORDERS",
+			"MOVE_TO_PAST_ORDERS": "When you click this button, the order will be marked as shipped",
 			"SAVE_CHANGES": "SAVE CHANGES",
 			"PACKAGE_SHIPPED": "PACKAGE WAS SHIPPED",
 			"TOTAL": "Total",
-			"CONTINUE_MARK_SHIPPED": "<p>You are marking this order as shipped.</p><p><strong>This action cannot be undone.</strong></p><p>Do you want to continue?</p>",
-			"ORDER_MOVED_TO_PAST": "Order {{ data }} was moved to Past orders. For payment information see Billing & Payments",
+			"CONTINUE_MARK_SHIPPED": "<p>You are marking this order as shipped.</p><p><strong>This action cannot be undone.</strong></p><p><strong>Once sent, THE INVOICE CAN NOT BE MODIFIED</strong></p><p>Do you want to continue?</p>",
+			"ORDER_MOVED_TO_PAST": "Order {{ data }} was marked as shipped orders. For payment information see Billing & Payments",
 			"UPLOAD_INVOICE":"Upload PDF INVOICE",
-			"SEE_INVOICE":"See PDF INVOICE"
+			"SEE_INVOICE":"invoice.pdf",
+			"REPLACE_INVOICE":"Replace PDF INVOICE"
 		},
 		"shipping": {
 			"ADD_SHIPPING_PRICES": "Add shipping prices",
