@@ -89,8 +89,10 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 										<!-- Wrapper for slides -->
 										<div class='carousel-inner'>
 											<?php foreach ($productImages as $key => $imageUrl) { ?>
-											<div class='item <?= ($key==0) ? ' active ' : ' ' ?>'>
-												<img class="product-slide" src='<?= Utils::url_scheme() ?><?= Utils::thumborize($imageUrl)->resize(410, 0) ?>' alt='' />
+											<div class='item <?= ($key==0) ? ' active ' : ' ' ?>' data-toggle="modal" data-target="#carouselModal">
+												<a href="#productGallery" data-slide-to="<?= $key ?>">
+													<img class="product-slide" src='<?= Utils::url_scheme() ?><?= Utils::thumborize($imageUrl)->resize(410, 0) ?>' />
+												</a>
 											</div>
 											<?php } ?>
 										</div>
@@ -200,7 +202,8 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 										</div>
 									</form>
 								</div>
-								<!--<div class="row-size">
+								<?php /* 
+								<div class="row-size">
 									<form class="form-horizontal" name="detailProductCtrl.selectorForm">
 										<div class="form-group" ng-repeat="option in detailProductCtrl.product.options | orderBy:[detailProductCtrl.selectComparator]">
 											<tdv-size-selector option="option" options-selected="detailProductCtrl.optionsSelected" get-references="detailProductCtrl.getReferencesFromOptions(options)" ng-if="option.widget_type==='size'"></tdv-size-selector>
@@ -208,7 +211,8 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 											<tdv-select-selector option="option" options-selected="detailProductCtrl.optionsSelected" get-references="detailProductCtrl.getReferencesFromOptions(options)" ng-if="option.widget_type==='select'"></tdv-select-selector>
 										</div>
 									</form>
-								</div>-->
+								</div>
+								*/ ?>
 								<div class="row-size">
 									<button type="button" class="btn btn-medium btn-red auto-center" ng-disabled="detailProductCtrl.stock === 0 || detailProductCtrl.addingToCart" ng-click="detailProductCtrl.addToCart(detailProductCtrl.tagsForm)">
 										<span class="col-md-12">
@@ -224,6 +228,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 									</button>
 								</div>
 							</div>
+							<?php /* 
 							<!--<div class="product-data">
 								<div class="row-size">
 									<div class="shipping-policies-wrapper">
@@ -252,7 +257,8 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 										</div>
 									</div>
 								</div>
-							</div>-->
+							</div>
+							*/ ?>
 							<div class="product-data no-border">
 								<div class="full-width mb-20">
 									<div class="btns-product-wrapper">
@@ -264,7 +270,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 										<?php } else { ?>
 										<button type="button" class="btn btn-love pull-left" ng-class="detailProductCtrl.product.isLoved ? 'heart-red-icon-btn' : 'btn-love'" ng-click="detailProductCtrl.setLoved()">
 											<div class="heart-icon"></div>
-											<!--i class="ion-ios-heart-outline"></i-->
+											<?php /* <i class="ion-ios-heart-outline"></i>*/ ?>
 										</button>
 										<?php } ?>
 										<button type="button" class="btn btn-save-box pull-right" ng-click="detailProductCtrl.setBox()">
@@ -273,11 +279,13 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 										</button>
 									</div>
 								</div>
-								<!--<div class="row-size">
+								<?php /*
+								<div class="row-size">
 									<span class="btn-tagline loved pull-left" translate="product.detail.LOVED"></span>
 									<span ng-bind="detailProductCtrl.product.loveds"></span><span translate="product.detail.TIMES"></span>
 									<span class="btn-tagline saved pull-right" translate="product.detail.SAVED_IN_X_BOXES" translate-values="{ x:detailProductCtrl.product.boxes}"></span>
-								</div>-->
+								</div>
+								*/ ?>
 								<div class="product-data">
 									<div class="full-width mb-20">
 										<div class="btns-product-wrapper">
@@ -341,7 +349,6 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 												</li>
 												*/ ?>
 											</ul>
-
 										<?php /*
 											<li>
 												<a class="instagram" href="https://www.instagram.com/todevise.official">
@@ -383,7 +390,6 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 												</a>
 											</li>
 											*/?>
-
 										</div>
 									</div>
 								</div>
@@ -399,14 +405,14 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 														<div class="form-group ">
 															<label class="col-xs-11 offset-sx-1 control-label shipping-label no-pad-r"><span translate="product.detail.SHIPPING_PRICE_SPAIN"></span> <span translate="product.detail.IS"></span> <span class="tax">€<?=$product->getShippingPrice(null, Country::getDefaultContryCode())?></span></label>
 
-												<!--
+												<?php /*
 												<div class="col-sm-5 pad-product">
 													<select class="form-control selectpicker shipping-select product-select" title="Choose country">
 														<option>USA</option>
 														<option>SPAIN</option>
 													</select>
 												</div>
-											-->
+												*/ ?>
 										</div>
 									</form>
 								</div>
@@ -468,7 +474,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 							<a href="<?= $person->getStoreLink() ?>">
 								<span translate="product.detail.CREATED_BY"></span>
 								<img class="avatar-default medium" src="<?= $person->getProfileImage(128, 128) ?>" data-pin-nopin="true">
-								<!--<span><?= $person->getName() ?></span>-->
+								<?php /* <span><?= $person->getName() ?></span> */ ?>
 							</a>
 						</div>
 					</div>
@@ -571,8 +577,8 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 							</div>
 							<?php } ?>
 					</div>
-
-						<!--<div class="reviews-wrapper">
+						<?php /* 
+						<div class="reviews-wrapper">
 							<div class="title"><span translate="product.detail.USER_REVIEWS"></span></div>
 							<div class="review-rates">
 								<span class="score">
@@ -721,7 +727,8 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 								<span class="green" translate="product.detail.LOAD_MORE"></span>
 								<span class="more"><span>24</span><span translate="product.detail.COMMENTS_MORE"></span></span>
 							</div>
-						</div>-->
+						</div>
+						*/ ?>
 				</div>
 					<?php /*if (count($videos)) { */?>
 				<div role="tabpanel" class="tab-pane work-description-wrapper" id="videos">
@@ -749,15 +756,17 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 						<div class="container mt-20 mb-20" style="min-height:350px;">
 							<nav class="products-menu">
 								<ul>
-									<!--						<li>-->
-										<!--							<a class="active" href="#">Pants</a>-->
-										<!--						</li>-->
-										<!--						<li>-->
-											<!--							<a href="#">Socks</a>-->
-											<!--						</li>-->
-											<!--						<li>-->
-												<!--							<a href="#">Belts</a>-->
-												<!--						</li>-->
+									<?php /* 
+									<li>
+										<a class="active" href="#">Pants</a>
+									</li>
+									<li>
+										<a href="#">Socks</a>
+									</li>
+									<li>
+										<a href="#">Belts</a>
+									</li>
+									*/ ?>
 											</ul>
 										</nav>
 										<div class="other-products-wrapper">
@@ -793,4 +802,29 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 		</div>
 	</div>
 </div>
-			<!-- /PRODUCT DESCRIPTION -->
+<!-- /PRODUCT DESCRIPTION -->
+
+<div class="modal full-modal fade" id="carouselModal">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-body">
+				<button type="button" class="close" data-dismiss="modal" title="Close"><span class="ion-ios-close-empty"></span></button>
+				<div id="productGallery" class="carousel slide" data-interval="false">
+					<div class="carousel-inner">
+						<?php
+						$active = true;
+						foreach($productImages as $key => $imageUrl) { ?>
+							<div class="item <?=$active ? 'active' : '' ?>">
+								<img src="<?= Utils::url_scheme() ?><?= Utils::thumborize($imageUrl)->resize(0, 0) ?>">
+							</div>
+							<?php
+								$active = false;
+							} ?>
+					</div>
+				</div>
+				<a href="#productGallery" class="left carousel-control" role="button" data-slide="prev"><i class="ion-ios-arrow-left"></i></a>
+				<a href="#productGallery" class="right carousel-control" role="button" data-slide="next"><i class="ion-ios-arrow-right"></i></a>
+			</div>
+		</div>
+	</div>
+</div>

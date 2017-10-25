@@ -22,11 +22,11 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 		</a>
 	</div>
 	<div class="invitation-messages">
-		<p><span translate="person.complete_profile.NEED_INFO"></span></p>
+		<p><span translate="person.complete_profile.NEED_INFO" ng-if="!completeProfileCtrl.sendingForm"></span></p>
 	</div>
 	<div class="create-deviser-account-container black-form" ng-if="!completeProfileCtrl.sendingForm">
 		<form name="completeProfileCtrl.form">
-		<?php if($person->isInfluencer()) {?>
+		<?php if($person->isInfluencer() || $person->isDeviser()) {?>
 			<div class="row">
 				<label for="first_name"><span translate="global.user.FIRST_NAME"></span></label>
 				<input type="text" name="first_name" class="form-control grey-input ng-class:{'error-input': completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.name)}" ng-model="completeProfileCtrl.person.personal_info.name" required>
