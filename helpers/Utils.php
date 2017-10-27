@@ -630,13 +630,7 @@ class Utils
 					['img' => $banner, 'alt' => Utils::l($category->name), "active" => true],
 			];
 		}
-		return [
-				['img' => '/imgs/banner-1.jpg', 'url' => Yii::$app->getUrlManager()->getHostInfo().'/deviser/isabel-de-pedro/80226c0/store', 'alt' => 'Isabel De Pedro', "active" => true],
-				['img' => '/imgs/banner-2.jpg', 'url' => Yii::$app->getUrlManager()->getHostInfo().'/deviser/closca/4764a66/store', 'alt' => 'Closca', "active" => false],
-				['img' => '/imgs/banner-3.jpg', 'url' => Yii::$app->getUrlManager()->getHostInfo().'/deviser/naaktime/f802e9i/store', 'alt' => 'Naaktiem', "active" => false],
-				['img' => '/imgs/banner-4.jpg', 'url' => Yii::$app->getUrlManager()->getHostInfo().'/deviser/ellis-faas/48b468z/store', 'alt' => 'Ellis Faas Siberica', "active" => false],
-				['img' => '/imgs/banner-5.jpg', 'url' => Yii::$app->getUrlManager()->getHostInfo().'/deviser/vols-and-original/e23e0bv/store', 'alt' => 'Vols And Original', "active" => false],
-		];
+		return Yii::$app->params['index_banners'];
 	}
 
 	/**

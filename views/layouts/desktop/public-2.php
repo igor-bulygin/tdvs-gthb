@@ -11,7 +11,11 @@ use yii\web\View;
 /* @var $this \yii\web\View */
 /* @var $content string */
 $show_header = isset($this->params['show_header']) ? $this->params['show_header']: true; 
-$show_footer = isset($this->params['show_footer']) ? $this->params['show_footer']: true; 
+$show_footer = isset($this->params['show_footer']) ? $this->params['show_footer']: true;
+
+if (empty(Yii::$app->opengraph->description)) {
+	Yii::$app->opengraph->description = Yii::t('app/public', 'TODEVISE_META_DESCRIPTION');
+}
 
 ?>
 

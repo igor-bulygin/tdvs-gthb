@@ -18,4 +18,12 @@ return [
 	'default_spain_vat' => 0.21,
 	'admin_email' => 'info@todevise.com',
 	'from_email' => 'info@todevise.com',
+
+	'index_banners' => [
+		['img' => '/imgs/banner-1.jpg', 'url' => '/deviser/isabel-de-pedro/80226c0/store', 'alt' => 'Isabel De Pedro', 'active' => true],
+		['img' => '/imgs/banner-2.jpg', 'url' => '/deviser/vontrueba/329504s/store', 'alt' => 'Vontrueba', 'active' => false],
+		['img' => '/imgs/banner-3.jpg', 'url' => '/deviser/retrospective-jewellery/facd773/store', 'alt' => 'Retrospective Jewellery', 'active' => false],
+		['img' => '/imgs/banner-4.jpg', 'url' => '/deviser/acurrator/5c7020p/store', 'alt' => 'Acurrator', 'active' => false],
+		['img' => '/imgs/banner-5.jpg', 'url' => '/deviser/vols-and-original/e23e0bv/store', 'alt' => 'Vols And Original', 'active' => false],
+	],
 ];

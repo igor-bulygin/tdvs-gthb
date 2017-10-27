@@ -361,6 +361,7 @@ class Order extends CActiveRecord {
 						unset($packs[$i]);
 					}
 				}
+				$packs = array_values($packs); // reorder indexes
 				$order->setPacks($packs);
 			}
 		}

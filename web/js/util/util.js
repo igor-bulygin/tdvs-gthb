@@ -154,7 +154,7 @@
 		}
 
 		function stripHTMLTags(value) {
-			return $(value).text();
+			return $($.parseHTML((value))).text();
 		}
 
 		function onError(err){
