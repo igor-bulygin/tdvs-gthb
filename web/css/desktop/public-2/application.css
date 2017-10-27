@@ -353,19 +353,28 @@ a, a:hover, a:focus {
 .mt-4 {
   margin-top: 1.5rem; }
 
-@media (max-width: 767px) {
-  .hidden-xs {
-    display: none !important; } }
-@media (min-width: 768px) and (max-width: 991px) {
-  .hidden-sm {
-    display: none !important; } }
-@media (min-width: 992px) and (max-width: 1199px) {
-  .hidden-md {
-    display: none !important; } }
-@media (min-width: 1200px) {
-  .hidden-lg {
-    display: none !important; } }
 /*
+@media (max-width:767px){
+    .hidden-xs{
+        display:none!important;
+    }
+}
+@media (min-width:768px) and (max-width:991px){
+    .hidden-sm{
+        display:none!important;
+    }
+}
+@media (min-width:992px) and (max-width:1199px){
+    .hidden-md{
+        display:none!important;
+    }
+}
+@media (min-width:1200px){
+    .hidden-lg{
+        display:none!important;
+    }
+}
+
 @media (min-width: 768px) {
   .col-sm {
     -ms-flex-preferred-size: 0;
@@ -2473,10 +2482,20 @@ h3 {
   padding: 0 2px; }
 
 #main_header .container {
-  padding: 0; }
+  position: relative; }
+#main_header .row {
+  display: flex; }
+  @media (max-width: 991px) {
+    #main_header .row {
+      margin: 0; } }
 #main_header .col-xs-1, #main_header .col-sm-1, #main_header .col-md-1, #main_header .col-lg-1, #main_header .col-xs-2, #main_header .col-sm-2, #main_header .col-md-2, #main_header .col-lg-2, #main_header .col-xs-3, #main_header .col-sm-3, #main_header .col-md-3, #main_header .col-lg-3, #main_header .col-xs-4, #main_header .col-sm-4, #main_header .col-md-4, #main_header .col-lg-4, #main_header .col-xs-5, #main_header .col-sm-5, #main_header .col-md-5, #main_header .col-lg-5, #main_header .col-xs-6, #main_header .col-sm-6, #main_header .col-md-6, #main_header .col-lg-6, #main_header .col-xs-7, #main_header .col-sm-7, #main_header .col-md-7, #main_header .col-lg-7, #main_header .col-xs-8, #main_header .col-sm-8, #main_header .col-md-8, #main_header .col-lg-8, #main_header .col-xs-9, #main_header .col-sm-9, #main_header .col-md-9, #main_header .col-lg-9, #main_header .col-xs-10, #main_header .col-sm-10, #main_header .col-md-10, #main_header .col-lg-10, #main_header .col-xs-11, #main_header .col-sm-11, #main_header .col-md-11, #main_header .col-lg-11, #main_header .col-xs-12, #main_header .col-sm-12, #main_header .col-md-12, #main_header .col-lg-12 {
   padding-right: 0;
   padding-left: 0; }
+#main_header .align-items-center {
+  -webkit-box-align: center !important;
+  -webkit-align-items: center !important;
+  -ms-flex-align: center !important;
+  align-items: center !important; }
 
 .navbar {
   background-color: #1C1919;
@@ -2600,7 +2619,8 @@ h3 {
         border-bottom: none; } }
   @media (max-width: 768px) {
     .navbar {
-      height: auto; } }
+      height: auto;
+      padding: 15px 0; } }
   .navbar .navbar-brand {
     padding: 10px 15px;
     width: 142px; }
@@ -2610,6 +2630,17 @@ h3 {
         fill: #c91c39; }
       .navbar .navbar-brand svg .img_logo#p2 {
         fill: #ffffff; }
+    @media (max-width: 768px) {
+      .navbar .navbar-brand {
+        padding: 0;
+        width: calc(100% - 20px) !important;
+        max-width: 142px;
+        margin: 0 !important;
+        height: auto; } }
+    @media (max-width: 575px) {
+      .navbar .navbar-brand {
+        margin: 0;
+        padding: 10px 0 0 10px; } }
   .navbar .navbar-form {
     background-color: transparent; }
     .navbar .navbar-form .input-group .form-control {
@@ -2643,7 +2674,7 @@ h3 {
     display: block; }
     @media (max-width: 768px) {
       .navbar .searcher-header {
-        padding: 0 20px; } }
+        padding: 0; } }
     .navbar .searcher-header input {
       font-family: "Roboto Condensed", sans-serif;
       margin: 0;
@@ -2743,7 +2774,10 @@ h3 {
     display: none; }
     @media (max-width: 768px) {
       .navbar-searcher.mobile {
-        display: block; } }
+        display: block;
+        vertical-align: middle;
+        position: relative;
+        margin: auto; } }
 
 .dropdown-shop {
   border-radius: 0px 0px 0px 0px !important;
@@ -2935,10 +2969,11 @@ h3 {
 
 #main_menu {
   vertical-align: middle;
-  display: inline-block;
+  display: block;
   height: fit-content;
   padding-left: 0;
-  padding-right: 0; }
+  padding-right: 0;
+  margin: auto; }
 
 #header_logo {
   width: 110px; }

@@ -14,6 +14,7 @@ app\components\assets\PublicHeader2Asset::register($this);
 <header>
 	<nav class="navbar navbar-default" id="main_header" ng-controller="publicHeaderCtrl as publicHeaderCtrl">
 		<div class="container">
+			<div class="row align-items-center">
 			<div class="col-xs-4 col-sm-2 col-md-2 col-lg-1-5">
 				<a class="navbar-brand" href="<?= Url::to(["public/index"])?>">
 					<svg version="1.1" id="todevise_logo" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
@@ -76,7 +77,7 @@ app\components\assets\PublicHeader2Asset::register($this);
 					</svg>
 				</a>
 			</div>
-			<div class="col-xs-7-5 col-sm-10 col-md-7-5 col-lg-8-5">
+			<div class="col-xs-8 col-sm-10 col-md-7-5 col-lg-8-5">
 				<form class="navbar-form navbar-left navbar-searcher mobile" action="<?=Url::to(["/works"])?>" method="get">
 					<div class="input-group searcher-header">
 						<input type="text" name="q" value="<?=$q?>" class="form-control" translate-attr="{placeholder: 'global.SEARCH'}">
@@ -98,7 +99,7 @@ app\components\assets\PublicHeader2Asset::register($this);
 					</div>
 				</form>
 			</div>
-			<div class="hidden-xs hidden-sm">
+			<div class="hidden-xs hidden-sm col-md-2-5 col-lg-2">
 				<ul class="nav navbar-nav navbar-right cart-login-wrapper">
 					<?php if (Yii::$app->user->isGuest) { ?>
 						<li class="log">
@@ -144,6 +145,7 @@ app\components\assets\PublicHeader2Asset::register($this);
 						</a>
 					</li>
 				</ul>
+			</div>
 			</div>
 		</div>
 	</nav>

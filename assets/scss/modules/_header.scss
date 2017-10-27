@@ -3,11 +3,24 @@
 // ==========================================================================
 #main_header{
     .container{
-        padding: 0;        
+        position: relative;
+        //padding:0;
+    }
+    .row {
+        display: flex;
+        @media(max-width: 991px){
+            margin: 0;
+        }
     }
     .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12{
         padding-right:0;
         padding-left:0;
+    }
+    .align-items-center{
+        -webkit-box-align: center!important;
+        -webkit-align-items: center!important;
+        -ms-flex-align: center!important;
+        align-items: center!important;
     }
 }
 .navbar{
@@ -123,7 +136,8 @@
         }
 	}
     @media (max-width: 768px){
-                height: auto;
+        height: auto;
+        padding: 15px 0;
     }
     .navbar-brand{
         padding: 10px 15px;
@@ -138,6 +152,17 @@
                 }
                 display: block;
             }
+        }
+        @media (max-width: 768px){
+            padding: 0;
+            width: calc(100% - 20px) !important;
+            max-width: 142px;
+            margin: 0 !important;
+            height: auto;
+        }
+        @media (max-width: 575px){
+            margin: 0;
+            padding: 10px 0 0 10px;
         }
     }
     .navbar-form{
@@ -193,7 +218,7 @@
     .searcher-header{
         display: block;
         @media (max-width: 768px){
-                    padding: 0 20px;
+                    padding: 0;//0 20px;
                 }
         input{
 				font-family: $font-family--regular;
@@ -299,14 +324,17 @@
 .navbar-searcher{
     padding:0;
     @media (max-width: 768px){
-                display: none;
-            }
+        display: none;
+    }
     &.mobile{
         display: none;
         @extend %input-border-none;
         @media (max-width: 768px){
                 display: block;
-            }
+                vertical-align: middle;
+                position: relative;
+                margin: auto;
+        }
     }
 }
 .dropdown-shop{
@@ -525,10 +553,11 @@
 }
 #main_menu {
     vertical-align: middle;
-    display: inline-block;
+    display: block;//inline-block;
     height: fit-content;
     padding-left: 0;
     padding-right: 0;
+    margin: auto;
 }
 #header_logo {
     width: 110px;
