@@ -34,7 +34,7 @@ Yii::$app->opengraph->title = $this->title;
 					<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
 				</div>
 				<div class="text-center col-md-12 mt-30" ng-if="exploreBoxesCtrl.results_found > exploreBoxesCtrl.results.items.length && (!exploreBoxesCtrl.searching || exploreBoxesCtrl.results.items.length > 0)" ng-cloak >
-					<button class="big-btn btn btn-default" ng-click="exploreBoxesCtrl.searchMore()" ng-disabled="exploreBoxesCtrl.searching">
+					<button class="btn btn-small btn-black-line" ng-click="exploreBoxesCtrl.searchMore()" ng-disabled="exploreBoxesCtrl.searching">
 						<span translate="discover.SEE_MORE" ng-if="!exploreBoxesCtrl.searching"></span>
 						<i class="fa fa-spinner fa-pulse fa-3x fa-fw small" ng-if="exploreBoxesCtrl.searching"></i>
 					</button>
