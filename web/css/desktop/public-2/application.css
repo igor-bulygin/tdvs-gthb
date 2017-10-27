@@ -8204,6 +8204,10 @@ cart-panel .cart-panel-div {
   margin: -7px 0 0 20px;
   float: left; }
 
+.title-label {
+  text-transform: uppercase;
+  font-weight: bold; }
+
 .category-menu {
   background-color: #ffffff;
   float: left;
