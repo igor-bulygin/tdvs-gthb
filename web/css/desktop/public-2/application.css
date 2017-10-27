@@ -3721,10 +3721,13 @@ h3 {
 
 .send-to-text {
   color: #9b9b9b;
-  text-transform: lowercase; }
+  text-transform: lowercase;
+  margin-bottom: 20px; }
 
 .adress-text {
-  font-weight: normal; }
+  font-weight: normal;
+  font-size: 14px;
+  margin: 0; }
 
 .adress-wrapper {
   width: 100%;
@@ -3754,6 +3757,14 @@ h3 {
   padding-bottom: 5px;
   display: inline-block;
   margin: 0 0 20px 20%; }
+
+.total-text {
+  font-size: 14px;
+  margin: 0;
+  font-weight: bold; }
+
+.comision-line {
+  margin-bottom: 10px; }
 
 .storie-box-wrapper {
   background-color: #ffffff;
@@ -8161,6 +8172,10 @@ cart-panel .cart-panel-div {
   float: left;
   width: 100%;
   background-color: #bfbfbf; }
+  .orders-wrapper label {
+    font-size: 14px; }
+  .orders-wrapper .bold {
+    font-weight: bold; }
 
 .settings-header {
   padding: 0 20px 20px;

@@ -49,6 +49,12 @@
 	float: left;
     width: 100%;
     background-color: $grey;
+	label{
+		font-size: 14px;
+	}
+	.bold{
+		font-weight: bold;
+	}
 }
 .settings-header{
 	padding: 0 20px 20px;

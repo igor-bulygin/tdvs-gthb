@@ -41,24 +41,24 @@
 									<label class="col-md-12 adress-text" ng-bind="order.billing_address.city + ', ' + order.billing_address.country"></label>
 								</div>
 							</div>
-							<div class="col-md-5 row">
-								<div class="col-md-12">
+							<div class="col-md-6 row">
+								<div class="col-md-12 comision-line">
 									<span class="total-title" translate="settings.orders.YOU_RECEIVE"></span>
-									<label class="pull-right" ng-cloak>{{order.to_receive | currency:'€':2}}</label>
+									<label class="total-text pull-right" ng-cloak>{{order.to_receive | currency:'€':2}}</label>
 								</div>
-								<div class="col-md-12">
+								<div class="col-md-12 comision-line">
 									<span class="total-title" translate="settings.orders.TODEVISE_COMMISSION"></span>
-									<label class="pull-right">{{ order.commission | currency:'€':2}}</label>
+									<label class="total-text pull-right">{{ order.commission | currency:'€':2}}</label>
 								</div>
-								<div class="col-md-12">
+								<div class="col-md-12 comision-line">
 									<span class="total-title" translate="settings.orders.SHIPPING"></span>
-									<label class="pull-right" ng-cloak>{{order.totalShippingPrice | currency:'€':2}}</label>
+									<label class="total-text pull-right" ng-cloak>{{order.totalShippingPrice | currency:'€':2}}</label>
 								</div>
 							</div>
 							<div class="col-md-12 text-right mt-20">
 								<div class="col-md-12">
 									<span class="total-title" translate="settings.orders.TOTAL"></span>
-									<label>{{order.totalPrice | currency:'€':2}}</label>
+									<label class="bold">{{order.totalPrice | currency:'€':2}}</label>
 								</div>
 							</div>
 						</div>
