@@ -37,19 +37,7 @@
 
 		function markPackShipped(order,pack) {
 			function onChangeStateSuccess(data) {
-				if (!pack.editInfo) {
-					order.packs.splice(order.packs.indexOf(pack),1);
-					if (order.packs.length<1) {
-						vm.orders.splice(vm.orders.indexOf(order),1);
-						openInfoModal(order.id);
-					}
-					else {
-						vm.orders[vm.orders.indexOf(order)].packs=data.packs;
-					}
-				}
-				else {
-					vm.orders[vm.orders.indexOf(order)].packs=data.packs;
-				}
+				vm.orders[vm.orders.indexOf(order)].packs=data.packs;
 			}
 			if (!pack.editInfo) {
 				var modalInstance = $uibModal.open({
