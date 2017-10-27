@@ -24,17 +24,17 @@ $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD
 <div ng-controller="ordersCtrl as ordersCtrl">
 	<div class="col-md-12 settings-header">
 		<h4 class="col-md-12"><span class="orders-subtitle" translate="settings.orders.ORDERS"></span></h4>
-		<div class="col-md-4" ng-if="ordersCtrl.isDeviser" ng-cloak>
+		<div class="select-settings-wrapper" ng-if="ordersCtrl.isDeviser" ng-cloak>
 			<ol class="nya-bs-select btn-group bootstrap-select form-control product-select col-md-12" ng-model="ordersCtrl.typeFilter" ng-change="ordersCtrl.getOrders()" ng-if="ordersCtrl.isDeviser" ng-cloak>
 				<li nya-bs-option="type in ordersCtrl.enabledTypes">
 					<a href="#"><span translate="{{type.name}}"></span></a>
 				</li>
 			</ol>
 		</div>
-		<div class="btn-group col-md-8 inline">
-			<div class="radio radio-inline" ng-repeat="state in ordersCtrl.enabledStates" class="col-md-1">
+		<div class="btn-group radio-btn-settings inline">
+			<div class="radio radio-inline" ng-repeat="state in ordersCtrl.enabledStates">
 				<input type="radio" name="{{'stateFilter_'+$index}}" ng-attr-id="{{'stateFilter_'+$index}}" ng-model="ordersCtrl.stateFilter" ng-value="state.value" ng-change="ordersCtrl.getOrders()" />
-				<label class="col-md-2" for="{{'stateFilter_'+$index}}"><span translate="{{state.name}}"></span></label>
+				<label for="{{'stateFilter_'+$index}}"><span translate="{{state.name}}"></span></label>
 			</div>
 		</div>
 		<div class="col-md-12 text-center mt-40" ng-if="!ordersCtrl.loading && !ordersCtrl.orders.length>0" ng-cloak>
