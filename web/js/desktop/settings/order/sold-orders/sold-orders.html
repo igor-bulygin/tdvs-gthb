@@ -110,7 +110,9 @@
 													<input type="text" name="shippingCompany" class="form-control" ng-class="{'error-input': soldOrdersCtrl.has_error(soldOrdersCtrl.shippingForm, soldOrdersCtrl.shippingForm.shippingCompany)}" ng-model="soldOrdersCtrl.shippingCompany" required>
 												</div>
 												<form-errors class="col-md-12" field="soldOrdersCtrl.shippingForm.shippingCompany" condition="soldOrdersCtrl.has_error(soldOrdersCtrl.shippingForm, soldOrdersCtrl.shippingForm.shippingCompany)"></form-errors>
-												<span for="eta" class="col-md-12 mt-20" translate="settings.orders.ETA"></span> <span class="col-md-12" style="color: #9D9D9D;" translate="global.OPTIONAL"></span>
+												<div class="col-md-12 mt-20">
+												<span for="eta" translate="settings.orders.ETA"></span> <span style="color: #9D9D9D;" translate="global.OPTIONAL"></span>
+												</div>
 												<div class="col-md-12">
 													<input type="text" name="eta" class="form-control" ng-model="soldOrdersCtrl.eta">
 												</div>
@@ -142,8 +144,8 @@
 									</div>
 								</div>
 								<div ng-switch-when="shipped">
-									<div class="col-md-12 text-right">
-										<button class="btn btn-small btn-red mt-20" ng-click="soldOrdersCtrl.editShippingData(pack)"><span translate="global.EDIT"></span></button>
+									<div class="col-md-12 text-right mt-20">
+										<button class="btn btn-small btn-red" ng-click="soldOrdersCtrl.editShippingData(pack)"><span translate="global.EDIT"></span></button>
 									</div>
 									<div class="col-md-12 mt-20 text-right">
 										<div class="col-md-6">
