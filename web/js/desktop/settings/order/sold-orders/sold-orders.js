@@ -52,7 +52,11 @@
 					if (data) {
 						pack.loading=true;
 						validateUrl();
-						orderDataService.changePackState({ company:vm.shippingCompany, eta: vm.eta, tracking_number:vm.trackingNumber, tracking_link:vm.trackLink, invoice_url:pack.invoice_url }, {personId:pack.deviser_id,packId:pack.short_id, newState:'shipped' },onChangeStateSuccess, UtilService.onError)
+						orderDataService.changePackState({ company:vm.shippingCompany, eta: vm.eta, tracking_number:vm.trackingNumber, tracking_link:vm.trackLink, invoice_url:pack.invoice_url }, {personId:pack.deviser_id,packId:pack.short_id, newState:'shipped' },onChangeStateSuccess, UtilService.onError);
+						vm.shippingCompany=null;
+						vm.eta=null;
+						vm.trackingNumber=null;
+						vm.trackLink=null;
 					}
 				}, function(err) {
 					UtilService.onError(err);
@@ -106,6 +110,8 @@
 						delete file.progress;
 						pack.invoice_url=  data.data.filename;
 						pack.invoice_link=  currentHost() + data.data.url;
+						vm.invoice=invoice;
+						vm.errFiles = errInvoice;
 				}
 				function onWhileUploadingInvoice(evt, file) {
 					if (file) {
