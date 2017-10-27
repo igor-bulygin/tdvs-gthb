@@ -884,6 +884,8 @@ a.btn span {
   height: 30px;
   display: inline-block;
   vertical-align: middle; }
+  .heart-icon:hover {
+    background: url(/imgs/heart-red.svg) 0 0 no-repeat transparent !important; }
 
 .heart-red-icon-btn {
   background-color: #F7284B;
@@ -1047,6 +1049,8 @@ footer .social-items li a {
     float: right;
     margin-right: 10px; }
 
+.btn-love:hover .heart-icon {
+  background: url(/imgs/heart-red.svg) 0 0 no-repeat transparent !important; }
 .btn-love.pull-left:hover .heart-icon {
   background: url(/imgs/heart-white.svg) 0 0 no-repeat transparent; }
 .btn-love .heart-icon:hover {
@@ -2295,9 +2299,9 @@ h3 {
   background: url("/imgs/heart-black.svg") 0 0 no-repeat transparent !important; }
 
 .heart-red-icon-btn div {
-  background: url("/imgs/heart-white.svg") 0 0 no-repeat transparent !important; }
+  background: url("/imgs/heart-white.svg") 0 0 no-repeat transparent; }
 
-.heart-icon:hover, .heart-red-icon {
+.heart-red-icon {
   background: url("/imgs/heart-red.svg") 0 0 no-repeat transparent !important; }
 
 .link-red, .log a, .add-lang, .request-invitation-wrapper .request-invitation-container .add-new, .red-text {
