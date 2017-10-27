@@ -1,5 +1,6 @@
 {
 	"settings": {
+		"EDIT": "Editar",
 		"REQUIRED": "Obligatorio",
 		"general": {
 			"PERSONAL_INFORMATION": "Información personal",

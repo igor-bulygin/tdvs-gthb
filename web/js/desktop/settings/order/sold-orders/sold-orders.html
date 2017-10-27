@@ -86,7 +86,7 @@
 											<button class="btn btn-medium btn-red" ng-click="soldOrdersCtrl.markPackAware(order,pack)"><span translate="settings.orders.READY_TO_CREATE"></span></button>
 										</div>
 									</div>
-									<div class="text-center" ng-if="pack.loading" ng-cloak>
+									<div class="text-center mt-20" ng-if="pack.loading" ng-cloak>
 										<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
 										<span class="sr-only" translate="global.LOADING"></span>
 									</div>
@@ -95,18 +95,21 @@
 									<div ng-if="!pack.loading" ng-cloak>
 										<div class="col-md-12 mt-20 mb-20" ng-if="!pack.editInfo" ng-cloak>
 											<div class="col-md-5 no-pad">
-												<label style="color: #9D9D9D;"><span class="text-icon" translate="settings.orders.IM_AWARE"></span><span class="ion-checkmark-circled red-text"></span></label>
+												<label style="color: #9D9D9D;">
+													<span class="text-icon" translate="settings.orders.IM_AWARE"></span>
+													<span class="ion-checkmark-circled red-text"></span>
+												</label>
 											</div>
 											<div class="col-md-7">
 												<label><span translate="settings.orders.IM_PREPARING"></span></label>
 											</div>
 										</div>
-										<form name="soldOrdersCtrl.shippingForm" class="form-horizontal" >
+										<form name="soldOrdersCtrl.shippingForm" class="form-horizontal">
 											<div class="col-md-12 no-pad">
 												<div class="col-md-5 no-pad">
 													<span for="shippingCompany" class="col-md-12" translate="settings.orders.SHIPPING_COMPANY"></span>
 													<div class="col-md-12">
-														<input type="text" name="shippingCompany" class="form-control" ng-class="{'error-input': soldOrdersCtrl.has_error(soldOrdersCtrl.shippingForm, soldOrdersCtrl.shippingForm.shippingCompany)}" ng-model="soldOrdersCtrl.shippingCompany" required>
+														<input type="text" name="shippingCompany" class="form-control" ng-class="{'error-input': soldOrdersCtrl.has_error(soldOrdersCtrl.shippingForm, soldOrdersCtrl.shippingForm.shippingCompany)}" ng-model="soldOrdersCtrl.shippingCompany" required >
 													</div>
 													<form-errors class="col-md-12" field="soldOrdersCtrl.shippingForm.shippingCompany" condition="soldOrdersCtrl.has_error(soldOrdersCtrl.shippingForm, soldOrdersCtrl.shippingForm.shippingCompany)"></form-errors>
 													<span for="eta" class="col-md-12 mt-20" translate="settings.orders.ETA"></span> <span class="col-md-12" style="color: #9D9D9D;" translate="global.OPTIONAL"></span>
@@ -117,10 +120,13 @@
 												<div class="col-md-7 no-pad">
 													<span for="trackingNumber" class="col-md-12" translate="settings.orders.TRACKING_NUMBER"></span>
 													<div class="col-md-12">
-														<input type="text" name="trackingNumber" class="form-control" ng-class="{'error-input': soldOrdersCtrl.has_error(soldOrdersCtrl.shippingForm, soldOrdersCtrl.shippingForm.trackingNumber)}" ng-model="soldOrdersCtrl.trackingNumber" required>
+														<input type="text" name="trackingNumber" class="form-control" ng-class="{'error-input': soldOrdersCtrl.has_error(soldOrdersCtrl.shippingForm, soldOrdersCtrl.shippingForm.trackingNumber)}" ng-model="soldOrdersCtrl.trackingNumber" required >
 													</div>
 													<form-errors class="col-md-12" field="soldOrdersCtrl.shippingForm.trackingNumber" condition="soldOrdersCtrl.has_error(soldOrdersCtrl.shippingForm, soldOrdersCtrl.shippingForm.trackingNumber)"></form-errors>
-													<span for="trackLink" class="col-md-12 mt-20"><span translate="settings.orders.TRACKING_LINK"></span><span style="color: #9D9D9D;" translate="global.OPTIONAL"></span></span>
+													<span for="trackLink" class="col-md-12 mt-20">
+														<span translate="settings.orders.TRACKING_LINK"></span>
+														<span style="color: #9D9D9D;" translate="global.OPTIONAL"></span>
+													</span>
 													<div class="col-md-12">
 														<input type="text" name="trackLink" class="form-control" ng-model="soldOrdersCtrl.trackLink">
 													</div>
@@ -143,7 +149,6 @@
 													</a>
 													<span ng-if="!pack.invoice_link" translate="settings.REQUIRED"></span>
 											</div>
-											</div>
 											<span class="small-order-text col-md-12 mt-40" translate="settings.orders.MOVE_TO_PAST_ORDERS"></span>
 											<div class="col-md-12 mt-20">
 												<button class="btn btn-medium btn-red" ng-click="soldOrdersCtrl.markPackShipped(order,pack)" ng-disabled="!soldOrdersCtrl.shippingForm.$valid || !pack.invoice_link">
@@ -153,14 +158,15 @@
 											</div>
 										</form>
 									</div>
-									<div class="text-center" ng-if="pack.loading" ng-cloak>
+									<div class="text-center mt-20" ng-if="pack.loading" ng-cloak>
 										<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-										<span class="sr-only" translate="global.LOADING"></span>
 									</div>
 								</div>
 								<div ng-switch-when="shipped">
-									<div class="col-md-12 text-right">
-										<button class="btn btn-small btn-red mt-20" ng-click="soldOrdersCtrl.editShippingData(pack)"><span translate="global.EDIT"></span></button>
+									<div class="col-md-12 text-right mt-20">
+										<button class="btn btn-small btn-red mt-20" ng-click="soldOrdersCtrl.editShippingData(pack)">
+											<span translate="settings.EDIT"></span>
+										</button>
 									</div>
 									<div class="col-md-12 mt-20 text-right">
 										<div class="col-md-6">
