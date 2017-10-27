@@ -109,6 +109,7 @@ return [
 	'PRESS_BY_PERSON_NAME' => 'Prensa de {person_name}',
 	'PRODUCT_BY_PERSON_NAME' => '{product_name} de {person_name}',
 	'PROFILE_AND_STRIPE_LINKED_INFO' => 'Tu perfil Todevise y tu cuenta de Stripe están ahora enlazados. ¿Desea conectar su perfil a una cuenta Stripe diferente? Presione el botón de abajo.',
+	'SEE_MORE' => 'Cargar más',
 	'SELECT_CATEGORY' => 'Selecciona categoría',
 	'SELECT_COUNTRY' => 'Selecciona el país',
 	'SELECT_METRIC_UNIT' => 'Selecciona la unidad métrica',

@@ -281,7 +281,7 @@ Yii::$app->opengraph->title = $this->title;
 			<?=$htmlWorks?>
 		</div>
 	</div>
-	<div class="text-center">
-		<button class="btn btn-red" type="button" id="btnMoreWorks">See more</button>
+	<div class="text-center mt-30">
+		<button class="btn btn-small btn-red" type="button" id="btnMoreWorks"><?=Yii::t('app/public', 'SEE_MORE')?></button>
 	</div>
 </section>
