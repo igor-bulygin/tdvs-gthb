@@ -187,7 +187,6 @@ $config = [
 			'class' => 'dragonjet\opengraph\OpenGraph',
 			'title' => 'Todevise',
 			'site_name' => 'Todevise',
-			'description' => 'Todevise is a new concept of store where you can browse and purchase from a diverse portfolio of curated high-quality, exclusive products.',
 			'type' => 'website',
 			'image' => 'https://todevise.com/logo.png',
 		],

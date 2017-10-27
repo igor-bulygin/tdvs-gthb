@@ -14,6 +14,7 @@ use app\models\Tag;
 use app\models\Term;
 use Yii;
 use yii\base\ActionFilter;
+use yii\base\Exception;
 use yii\filters\ContentNegotiator;
 use yii\filters\VerbFilter;
 use yii\web\Response;
@@ -244,19 +245,21 @@ class ApiController extends CController {
 			$_deviser = $this->getJsonFromRequest("person");
 
 			if ($_deviser["short_id"] === "new") {
-				$_deviser["short_id"] = (new Person())->genValidID(7);
+				$deviser = new Person();
+			} else {
+				$deviser = Person::findOne(["short_id" => $_deviser["short_id"]]);
 			}
 
-			/* @var $deviser \app\models\Person */
-			$deviser = Person::findOne(["short_id" => $_deviser["short_id"]]);
-			if (array_key_exists('account_state', $_deviser)) {
-				$deviser->account_state = $_deviser['account_state'];
+			if (!$deviser) {
+				throw new Exception("Cannot create/update person");
 			}
+
+			$deviser->setScenario(Person::SCENARIO_ADMIN);
 			$deviser->setAttributes($_deviser, true);
-			$deviser->personalInfoMapping->load($_deviser, "personal_info");
 			$deviser->save(false);
 
 			$res = $deviser;
+
 		} else if ($request->isDelete) {
 			$deviser = $this->getJsonFromRequest("person");
 

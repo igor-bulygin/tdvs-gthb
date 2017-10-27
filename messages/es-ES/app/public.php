@@ -118,6 +118,7 @@ return [
 	'SOCIAL_FEED_BY_PERSON_NAME' => 'Social feed de {person_name}',
 	'STORIES' => 'Historias',
 	'STORY_BY_PERSON_NAME' => 'Historias',
+	'TODEVISE_META_DESCRIPTION' => 'Todevise es la combinación entre una red social y e-commerce que cambiará tu manera de inspirarte, descubrir productos y comprar online. ',
 	'VIDEOS_BY_PERSON_NAME' => 'Videos de {person_name}',
 	'WEEKS' => 'Semanas',
 	'WORKS' => 'Trabajos',
