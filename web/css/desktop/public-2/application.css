@@ -3766,6 +3766,13 @@ h3 {
 .comision-line {
   margin-bottom: 10px; }
 
+.tracking-link {
+  overflow: hidden;
+  text-decoration: underline; }
+
+.grey-link-set {
+  color: #9b9b9b; }
+
 .storie-box-wrapper {
   background-color: #ffffff;
   float: left;

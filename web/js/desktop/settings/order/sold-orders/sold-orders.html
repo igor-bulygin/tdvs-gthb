@@ -144,27 +144,27 @@
 									</div>
 								</div>
 								<div ng-switch-when="shipped">
-									<div class="col-md-12 text-right mt-20">
+									<div class="col-md-12 mt-20">
 										<button class="btn btn-small btn-red" ng-click="soldOrdersCtrl.editShippingData(pack)"><span translate="global.EDIT"></span></button>
 									</div>
-									<div class="col-md-12 mt-20 text-right">
-										<div class="col-md-6">
-											<label class="col-md-12"><span translate="settings.orders.SHIPPING_COMPANY"></span></label>
-											<span class="col-md-12" ng-bind="pack.shipping_info.company"></span>
+									<div class="col-md-12 mt-20">
+										<div class="col-md-6 no-pad">
+											<label class="col-md-12 no-pad"><span translate="settings.orders.SHIPPING_COMPANY"></span></label>
+											<span class="col-md-12 no-pad grey-link-set" ng-bind="pack.shipping_info.company"></span>
 										</div>
-										<div class="col-md-6">
-											<label class="col-md-12"><span translate="settings.orders.ETA"></span></label>
-											<span class="col-md-12" ng-bind="pack.shipping_info.eta"></span>
+										<div class="col-md-6 no-pad">
+											<label class="col-md-12 no-pad"><span translate="settings.orders.ETA"></span></label>
+											<span class="col-md-12 no-pad grey-link-set" ng-bind="pack.shipping_info.eta"></span>
 										</div>
 									</div>
-									<div class="col-md-12 text-right">
-										<div class="col-md-6">
-											<label class="col-md-12"><span translate="settings.orders.TRACKING_NUMBER"></span></label>
-											<span class="col-md-12" ng-bind="pack.shipping_info.tracking_number"></span>
+									<div class="col-md-12">
+										<div class="col-md-6 no-pad">
+											<label class="col-md-12 no-pad"><span translate="settings.orders.TRACKING_NUMBER"></span></label>
+											<span class="col-md-12 no-pad grey-link-set" ng-bind="pack.shipping_info.tracking_number"></span>
 										</div>
-										<div class="col-md-6">
-											<label class="col-md-12"><span translate="TRACKING_LINK"></span></label>
-											<a class="col-md-12" ng-href="{{pack.shipping_info.tracking_link}}" target="blank">{{pack.shipping_info.tracking_link}}</a>
+										<div class="col-md-6 no-pad">
+											<label class="col-md-12 no-pad"><span translate="TRACKING_LINK"></span></label>
+											<a class="col-md-12 no-pad tracking-link grey-link-set" ng-href="{{pack.shipping_info.tracking_link}}" target="blank">{{pack.shipping_info.tracking_link}}</a>
 										</div>
 									</div>
 								</div>
