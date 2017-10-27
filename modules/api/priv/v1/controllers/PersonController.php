@@ -240,7 +240,6 @@ class PersonController extends AppPrivateController
 			[
 				'pack_id' => $packId,
 				'deviser_id' => $person->short_id,
-				'only_matching_packs' => true,
 			]
 		);
 		if (count($orders) != 1) {
@@ -264,6 +263,22 @@ class PersonController extends AppPrivateController
 
 		// Set pack in the order and save
 		$order->setPack($packId, $pack);
+
+		// We get the order another time, but with "only_matching_packs" to prevent other packs to apear in the response
+		$orders = Order::findSerialized(
+			[
+				'pack_id' => $packId,
+				'deviser_id' => $person->short_id,
+				'only_matching_packs' => true,
+			]
+		);
+		if (count($orders) != 1) {
+			throw new NotFoundHttpException(sprintf('Order for pack_id %s not found', $packId));
+		}
+
+		// We can only get one order by packId...
+		/* @var Order $order */
+		$order = $orders[0];
 		$order->setSubDocumentsForSerialize();
 
 		return $order;
@@ -287,7 +302,6 @@ class PersonController extends AppPrivateController
 			[
 				'pack_id' => $packId,
 				'deviser_id' => $person->short_id,
-				'only_matching_packs' => true,
 			]
 		);
 		if (count($orders) != 1) {
@@ -318,6 +332,22 @@ class PersonController extends AppPrivateController
 
 		// Set pack in the order and save
 		$order->setPack($packId, $pack);
+
+		// We get the order another time, but with "only_matching_packs" to prevent other packs to apear in the response
+		$orders = Order::findSerialized(
+			[
+				'pack_id' => $packId,
+				'deviser_id' => $person->short_id,
+				'only_matching_packs' => true,
+			]
+		);
+		if (count($orders) != 1) {
+			throw new NotFoundHttpException(sprintf('Order for pack_id %s not found', $packId));
+		}
+
+		// We can only get one order by packId...
+		/* @var Order $order */
+		$order = $orders[0];
 		$order->setSubDocumentsForSerialize();
 
 		return $order;
