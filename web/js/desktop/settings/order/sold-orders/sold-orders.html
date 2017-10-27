@@ -126,15 +126,27 @@
 													</div>
 												</div>
 											</div>
-											<div class="col-md-6">
-												<a class="red-text" type="file" ngf-select="soldOrdersCtrl.uploadInvoice($file, $invalidFiles,pack)" accept=".pdf" ngf-max-height="1000" ngf-max-size="1MB"> <span translate="settings.orders.UPLOAD_INVOICE"></span></a>
+											<div class="col-md-12 mt-10">
+												<a class="red-text" type="file" ngf-select="soldOrdersCtrl.uploadInvoice($file, $invalidFiles,pack)" accept=".pdf" ngf-max-height="1000" ngf-max-size="1MB" href=""> 
+													<span  class="red-text">
+														<strong>
+															<i class="ion-arrow-up-a"></i>
+															<span ng-if="!pack.invoice_link" translate="settings.orders.UPLOAD_INVOICE" ng-cloak></span>
+															<span ng-if="pack.invoice_link" translate="settings.orders.REPLACE_INVOICE" ng-cloak></span>
+														</strong>
+													</span>
+												</a>
 											</div>
-											<div class="col-md-6">
-												<a class="red-text" ng-if="pack.invoice_link" ng-href="{{pack.invoice_link}}" target="blank"><span translate="settings.orders.SEE_INVOICE"></span></a>
+											<div class="col-md-12">
+													<a ng-if="pack.invoice_link" ng-href="{{pack.invoice_link}}" target="blank" ng-cloak>
+														<span translate="settings.orders.SEE_INVOICE"></span>
+													</a>
+													<span ng-if="!pack.invoice_link" translate="settings.REQUIRED"></span>
+											</div>
 											</div>
 											<span class="small-order-text col-md-12 mt-40" translate="settings.orders.MOVE_TO_PAST_ORDERS"></span>
 											<div class="col-md-12 mt-20">
-												<button class="btn btn-medium btn-red" ng-click="soldOrdersCtrl.markPackShipped(order,pack)" ng-disabled="!soldOrdersCtrl.shippingForm.$valid">
+												<button class="btn btn-medium btn-red" ng-click="soldOrdersCtrl.markPackShipped(order,pack)" ng-disabled="!soldOrdersCtrl.shippingForm.$valid || !pack.invoice_link">
 													<span ng-if="pack.editInfo" translate="settings.orders.SAVE_CHANGES"></span>
 													<span ng-if="!pack.editInfo" translate="settings.orders.PACKAGE_SHIPPED"></span>
 												</button>
