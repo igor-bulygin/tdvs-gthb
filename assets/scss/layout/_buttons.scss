@@ -100,6 +100,17 @@ a{
         border: 1px solid $white;
     }
 }
+.btn-black-line{
+   @extend %btn;
+    background-color:transparent;
+    border: 1px solid $black;
+    color: $black;
+    &:hover{
+        background-color:$black;
+        color: $white;
+        border: 1px solid $white;
+    }
+}
 .btn-acordion{
 	margin-top: -10px!important;
     height: 28px;
@@ -309,8 +320,7 @@ a{
     vertical-align: middle;
     @extend %heart-black-icon;
 	&:hover{
-		//background: url(/imgs/heart-red.svg) 0 0 no-repeat transparent;
-		@extend %heart-red-icon;
+		background: url(/imgs/heart-red.svg) 0 0 no-repeat transparent!important;
 	}
 }
 .heart-red-icon{
@@ -578,6 +588,11 @@ footer .social-items{
 }
 //.btn-filled{
 .btn-love{
+	&:hover{
+		.heart-icon{
+			background: url(/imgs/heart-red.svg) 0 0 no-repeat transparent!important;
+		}
+	}
 	&.pull-left{
 		&:hover{
 			.heart-icon{

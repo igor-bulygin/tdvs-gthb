@@ -35,7 +35,7 @@ $this->registerJs("var type = 3", yii\web\View::POS_HEAD, 'person-type-script');
 				</div>
 				<discover-results results="discoverCtrl.results" ng-if="discoverCtrl.results && discoverCtrl.results.items.length > 0" ng-cloak></discover-results>
 				<div class="text-center col-md-12 mt-30" ng-if="discoverCtrl.results_found > discoverCtrl.results.items.length && (!discoverCtrl.searching || discoverCtrl.results.items.length > 0)" ng-cloak >
-					<button class="big-btn btn btn-default" ng-click="discoverCtrl.searchMore()" ng-disabled="discoverCtrl.searching">
+					<button class="btn btn-small btn-black-line" ng-click="discoverCtrl.searchMore()" ng-disabled="discoverCtrl.searching">
 						<span translate="discover.SEE_MORE" ng-if="!discoverCtrl.searching"></span>
 						<i class="fa fa-spinner fa-pulse fa-3x fa-fw small" ng-if="discoverCtrl.searching"></i>
 					</button>

@@ -109,6 +109,7 @@ return [
     'PRESS_BY_PERSON_NAME' => 'Press by {person_name}',
     'PRODUCT_BY_PERSON_NAME' => '{product_name} by {person_name}',
     'PROFILE_AND_STRIPE_LINKED_INFO' => 'Your Todevise profile and Stripe account are now linked. Do you want to connect your profile to a different Stripe account? Press the button below.',
+    'SEE_MORE' => 'See more',
     'SELECT_CATEGORY' => 'Select category',
     'SELECT_COUNTRY' => 'Select country',
     'SELECT_METRIC_UNIT' => 'Select metric unit',
