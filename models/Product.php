@@ -1337,6 +1337,22 @@ class Product extends CActiveRecord {
 					];
 		}
 
+
+		// Of active persons
+		$activePersons = Person::findSerialized(['account_state' => Person::ACCOUNT_STATE_ACTIVE]);
+		$idsActivePersons = [];
+		foreach ($activePersons as $activePerson) {
+			$idsActivePersons[] = $activePerson->short_id;
+		}
+		$conditions[] =
+			[
+				'$match' => [
+					'deviser_id' => [
+						'$in' => $idsActivePersons,
+					],
+				]
+			];
+
 		// Randomize
 		$conditions[] =
 				[
