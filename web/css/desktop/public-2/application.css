@@ -5870,20 +5870,20 @@ span.optional-text.pull-left {
 
 .left-box-column {
   background-color: #ffffff;
-  min-height: 325px;
-  padding: 20px 0 0 0; }
+  min-height: 90px;
+  padding: 35px 0 0 0; }
   .left-box-column .title {
     color: #1C1919;
-    font-size: 20px;
+    font-size: 24px;
     font-weight: bold;
-    margin: 0 0 20px;
+    margin: 0 0 15px;
     display: block; }
   .left-box-column p {
     color: #1C1919;
     font-size: 16px; }
 
 .right-box-column {
-  padding: 20px;
+  padding: 0;
   background-color: #ffffff;
   min-height: 350px; }
   .right-box-column .grid figure .close-product-icon {
