@@ -188,6 +188,7 @@
 .image-basic-info-edit{
 		background-color: $light_grey;
 		@include border-radius(6px,6px,6px,6px);
+	    overflow: hidden;
 		cursor: move;
 		height: 150px;
 		width: 150px;
