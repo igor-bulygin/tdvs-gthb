@@ -100,6 +100,17 @@ a{
         border: 1px solid $white;
     }
 }
+.btn-black-line{
+   @extend %btn;
+    background-color:transparent;
+    border: 1px solid $black;
+    color: $black;
+    &:hover{
+        background-color:$black;
+        color: $white;
+        border: 1px solid $white;
+    }
+}
 .btn-acordion{
 	margin-top: -10px!important;
     height: 28px;
