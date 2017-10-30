@@ -8,9 +8,9 @@ Index2Asset::register($this);
 $this->title = Yii::t('app/public', 'INDEX_TITLE');
 Yii::$app->opengraph->title = $this->title;
 
-/** @var Person[][] $devisers */
+/** @var Person[] $devisers */
 /** @var int $totalDevisers */
-/** @var Person[][] $influencers */
+/** @var Person[] $influencers */
 /** @var int $totalInfluencers */
 /** @var \app\models\Product[] $works */
 /** @var \app\models\Box[] $boxes */
@@ -130,36 +130,38 @@ Yii::$app->opengraph->title = $this->title;
 				<?php } ?>
 				<div class="carousel-devisers-container <?= $totalDevisers > 3 ? 'carousel slide' : ''?>" id="carousel-devisers" data-ride="carousel" data-interval="false">
 					<div class="<?= $totalDevisers > 3 ? 'carousel-inner' : ''?>" role="listbox">
-						<?php foreach ($devisers as $i => $group) { ?>
-					<div class="item <?= ($i==0) ? 'active' : '' ?>">
-						<?php foreach ($group as $k => $deviser) { ?>
-						<div class="col-md-4 col-sm-4 col-xs-12 pad-showcase">
-								<a href="<?= $deviser->getStoreLink()?>">
-								<figure class="showcase influencers">
-									<img class="deviser-discover-img showcase-image" src="<?= $deviser->getHeaderSmallImage() ?>">
-								<figcaption>
-								<div class="row">
-									<div class="col-md-6">
-										<div class="title-product-name sm align-left">
-											<span><?= $deviser->getName() ?></span>
+						<?php foreach ($devisers as $i => $deviser) { ?>
+							<?php if ($i % 3 === 0) { ?>
+								<div class="item <?= ($i==0) ? 'active' : '' ?>">
+							<?php } ?>
+								<div class="col-md-4 col-sm-4 col-xs-12 pad-showcase">
+									<a href="<?= $deviser->getStoreLink()?>">
+									<figure class="showcase influencers">
+										<img class="deviser-discover-img showcase-image" src="<?= $deviser->getHeaderSmallImage() ?>">
+									<figcaption>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="title-product-name sm align-left">
+												<span><?= $deviser->getName() ?></span>
+											</div>
+											<div class="location align-left"><?= $deviser->personalInfoMapping->getCityLabel() ?></div>
 										</div>
-										<div class="location align-left"><?= $deviser->personalInfoMapping->getCityLabel() ?></div>
-									</div>
-									<?php /*
-									<div class="col-md-6">
-										<button class="btn btn-icon mt-5"><i class="ion-ios-star-outline"></i><span>Follow</span>
-									</button>
-									</div>
-									*/?>
+										<?php /*
+										<div class="col-md-6">
+											<button class="btn btn-icon mt-5"><i class="ion-ios-star-outline"></i><span>Follow</span>
+										</button>
+										</div>
+										*/?>
 
+									</div>
+									</figcaption>
+									</figure>
+									</a>
 								</div>
-								</figcaption>
-								</figure>
-								</a>
-							</div>
+							<?php if (($i+1) % 3 === 0) { ?>
+								</div>
+							<?php } ?>
 						<?php } ?>
-					</div>
-					<?php } ?>
 					</div>
 				</div>
 				<?php if ($totalDevisers > 3) { ?>
@@ -185,31 +187,33 @@ Yii::$app->opengraph->title = $this->title;
 				<?php } ?>
 				<div class="carousel-devisers-container <?= $totalInfluencers > 3 ? 'carousel slide' : ''?>" id="carousel-influencers" data-ride="carousel" data-interval="false">
 					<div class="<?= $totalInfluencers > 3 ? 'carousel-inner' : ''?>" role="listbox">
-						<?php foreach ($influencers as $i => $group) { ?>
-							<div class="item <?= ($i==0) ? 'active' : '' ?>">
-								<?php foreach ($group as $k => $influencer) { ?>
-									<div class="col-md-4 col-sm-4 col-xs-6 pad-showcase">
-										<a href="<?= $influencer->getLovedLink()?>">
-											<figure class="showcase influencers">
-												<img class="deviser-discover-img showcase-image" src="<?= $influencer->getHeaderSmallImage() ?>">
-												<figcaption>
-												<div class="row">
-													<div class="col-md-6">
-														<span class="title-product-name sm align-left"><?= $influencer->getName() ?></span>
-														<span class="location align-left"><?= $influencer->personalInfoMapping->getCityLabel() ?></span>
-													</div>
-													<?php /*
-													<div class="col-md-6">
-														<button class="btn btn-icon mt-5"><i class="ion-ios-star-outline"></i><span>Follow</span></button>
-													</div>
-													*/ ?>
+						<?php foreach ($influencers as $i => $influencer) { ?>
+							<?php if ($i % 3 === 0) { ?>
+								<div class="item <?= ($i==0) ? 'active' : '' ?>">
+							<?php } ?>
+								<div class="col-md-4 col-sm-4 col-xs-6 pad-showcase">
+									<a href="<?= $influencer->getLovedLink()?>">
+										<figure class="showcase influencers">
+											<img class="deviser-discover-img showcase-image" src="<?= $influencer->getHeaderSmallImage() ?>">
+											<figcaption>
+											<div class="row">
+												<div class="col-md-6">
+													<span class="title-product-name sm align-left"><?= $influencer->getName() ?></span>
+													<span class="location align-left"><?= $influencer->personalInfoMapping->getCityLabel() ?></span>
 												</div>
-												</figcaption>
-											</figure>
-										</a>
-									</div>
-								<?php } ?>
-							</div>
+												<?php /*
+												<div class="col-md-6">
+													<button class="btn btn-icon mt-5"><i class="ion-ios-star-outline"></i><span>Follow</span></button>
+												</div>
+												*/ ?>
+											</div>
+											</figcaption>
+										</figure>
+									</a>
+								</div>
+							<?php if (($i+1) % 3 === 0) { ?>
+								</div>
+							<?php } ?>
 						<?php } ?>
 					</div>
 				</div>
