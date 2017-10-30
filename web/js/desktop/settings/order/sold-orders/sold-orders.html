@@ -163,7 +163,12 @@
 									</div>
 								</div>
 								<div ng-switch-when="shipped">
-									<div class="col-md-12 text-right mt-20">
+									<div class="col-md-6  mt-20">
+											<a ng-if="pack.invoice_link" ng-href="{{pack.invoice_link}}" target="blank" ng-cloak>
+												<span translate="settings.orders.SEE_INVOICE"></span>
+											</a>
+									</div>
+									<div class="col-md-6 text-right mt-20">
 										<button class="btn btn-small btn-red mt-20" ng-click="soldOrdersCtrl.editShippingData(pack)">
 											<span translate="settings.EDIT"></span>
 										</button>
