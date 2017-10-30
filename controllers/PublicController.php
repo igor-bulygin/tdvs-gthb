@@ -110,20 +110,6 @@ class PublicController extends CController
 		// Devisers
 		$devisers = Person::getRandomDevisers(20, $categoryShortIds);
 
-		// Works
-		$works = Product::getRandomWorks(200, $categoryShortIds);
-
-		//TODO if redesign does not need this blocks anymore, delete it to optimize memory usage
-		// divide then in blocks to be rendered in bottom section
-		$moreWork = [];
-		for ($i = 1; $i <= 19; $i++) {
-			$start = $i * 15;
-			$moreWork[] =  [
-				"twelve" => array_slice($works, $start, 12),
-				"three" => array_slice($works, ($start + 12), 3),
-			];
-		}
-
 		// Boxes
 		$boxes = Box::getRandomBoxes(8, null, true);
 
@@ -132,6 +118,13 @@ class PublicController extends CController
 
 		// Influencers
 		$influencers = Person::getRandomInfluencers(12, $categoryShortIds);
+
+		// Works
+		$works = Product::getRandomWorks(48, $categoryShortIds);
+		$htmlWorks = $this->renderPartial('more-works', [
+			'total' => 48,
+			'works' => $works,
+ 		]);
 
 		$this->layout = '/desktop/public-2.php';
 		$this->view->params['selectedCategory'] = isset($category) ? $category : null;
@@ -146,9 +139,8 @@ class PublicController extends CController
 				array_slice($devisers, 9, 3),
 			],
 			'works' => $works,
-			'works12' => array_slice($works, 0, 12),
-			'works3' => array_slice($works, 12, 3),
-			'moreWork' => $moreWork,
+			'htmlWorks' => $htmlWorks,
+			"category_id" => $category_id,
 			'boxes' => $boxes,
 			'stories' => $stories,
 			'influencers' => [
@@ -158,6 +150,34 @@ class PublicController extends CController
 				array_slice($influencers, 9, 3),
 			],
 			'totalInfluencers' => count($influencers),
+		]);
+	}
+
+	public function actionMoreWorks()
+	{
+		// show only fields needed in this scenario
+		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_PUBLIC);
+
+		$category_id = Yii::$app->request->get('category_id', null);
+
+		if ($category_id) {
+			$category = Category::findOneSerialized($category_id); /* @var Category $category */
+			$categoryShortIds = $category->getShortIds();
+		} else {
+			$categoryShortIds = [];
+		}
+
+		$works = Product::getRandomWorks(48, $categoryShortIds);
+
+		$this->layout = '/desktop/empty-layout.php';
+
+		$html = $this->renderPartial("more-works", [
+			'works' => $works,
+		]);
+
+		return json_encode([
+			'html' => $html,
+			"category_id" => $category_id,
 		]);
 	}
 

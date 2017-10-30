@@ -27,7 +27,7 @@
 
 .header-settings-tabs{
 	li{
-		width: 20%;
+		width: 100%;
 		a{
 			background-color: #DAD8D8;
 			text-transform: uppercase;
@@ -49,9 +49,15 @@
 	float: left;
     width: 100%;
     background-color: $grey;
+	label{
+		font-size: 14px;
+	}
+	.bold{
+		font-weight: bold;
+	}
 }
 .settings-header{
-	padding: 20px;
+	padding: 0 20px 20px;
     background-color: white;
     float: left;
 }
@@ -66,9 +72,22 @@
 		font-size: 13px;
     	margin-top: 5px;
 		font-weight: normal;
+		text-transform: initial;
 		&.bold{
 			font-weight: bold;
 		}
 	}
 	
+}
+.select-settings-wrapper{
+	width: 175px;
+    float: left;
+}
+.radio-btn-settings{
+	margin: -7px 0 0 20px;
+    float: left;
+}
+.title-label{
+	text-transform: uppercase;
+    font-weight: bold;
 }
