@@ -59,7 +59,7 @@ Yii::$app->opengraph->title = $this->title;
 <!-- /BANNER -->
 
 <!-- SUB-BANNER -->
-<section class="sub-banner">
+<section class="sub-banner hidden-xs hidden-sm">
 	<div class="container container-sub-baner">
 		<div class="row">
 			<div class="col-sm-4 col-xs-6 title-wrapper title-1 righty">
@@ -177,7 +177,7 @@ Yii::$app->opengraph->title = $this->title;
 			<h3 class="title-product-name"><?=Yii::t('app/public', 'HOME_INFLUENCERS')?></h3>
 			<span class="subtitle-home"><?=Yii::t('app/public', 'HOME_INFLUENCERS_TEXT')?></span>
 			<!-- Controls -->
-			<div class="carusel-container">
+			<div class="hidden-xs hidden-sm carusel-container">
 				<?php if ($totalInfluencers > 3) { ?>
 					<a class="prev" href="#carousel-influencers" role="button" data-slide="prev">
 						<i class="ion-ios-arrow-left"></i>

@@ -159,13 +159,20 @@ app\components\assets\PublicHeader2Asset::register($this);
 		<div class="container" id="main_menu">
 			<div class="navbar-elements">
 				<ul class="nav navbar-nav">
-						<li>
-							<a href="#" class="menu-title hover-toggle" data-target=".menu-categories" data-group=".category-menu">
-								<i class="fa fa-bars" aria-hidden="true"></i>
-								<span translate="header.SHOP_BY_DEPARTMENT"></span>
-							</a>
-						</li>
-					</ul>
+					<li class="col-xs-6 col-sm-6 col-md-12 col-lg-12">
+						<a href="#" class="menu-title hover-toggle" data-target=".menu-categories" data-group=".category-menu">
+							<i class="fa fa-bars" aria-hidden="true"></i>
+							<span translate="header.SHOP_BY_DEPARTMENT"></span>
+						</a>
+					</li>
+					<li id="mobile-iconset" class="hidden-md hidden-lg col-xs-6 col-sm-6">
+						<span id="mobIcons_center"></span>
+						<a href="<?=Url::to(['/discover/boxes'])?>"><img src="/imgs/box-red.svg" /></a>
+						<a href="<?=Url::to(['/discover/devisers'])?>"><img src="/imgs/discover-red.svg" /></a>
+						<a href="<?=Url::to('/login')?>"><img src="/imgs/login-red.svg" /></a>
+						<a href="<?=Url::to(['/cart'])?>"><img src="/imgs/cart-red.svg" /></a>
+					</li>
+				</ul>
 				<ul class="nav navbar-nav center-navbar">
 					<?php /*<li><a href="<?=Url::to(['/discover/stories'])?>" translate="header.STORIES"></a></li>*/?>
 					<li><a href="<?=Url::to(['/discover/boxes'])?>" translate="header.EXPLORE_BOXES"></a></li>
@@ -191,11 +198,22 @@ app\components\assets\PublicHeader2Asset::register($this);
 	</nav>
 	<div class="menu-categories">
 		<nav class="navbar navbar-default terciary">
-			<div class="container">
+			<div class="hidden-xs hidden-sm container"><!--DESKTOP-->
 				<ul>
 					<?php foreach($categories as $category) { ?>
 						<li>
 							<a class="hover-toggle <?=$selectedCategory && $selectedCategory->short_id == $category->short_id ? 'selected' : ''?>" data-group=".category-menu" data-target="#category-<?=$category->short_id?>" href="<?= $category->getMainLink()?>"><?= $category->name?></a>
+							<span class="hidden-md hidden-lg glyphicon glyphicon-plus" aria-hidden="true"></span>
+						</li>
+					<?php } ?>
+				</ul>
+			</div>
+			<div class="hidden-md hidden-lg container"><!--MOBILE / TABLET-->
+				<ul>
+					<?php foreach($categories as $category) { ?>
+						<li>
+							<a href="<?= $category->getMainLink()?>"><?= $category->name?></a>
+							<a href="#" class="hover-toggle <?=$selectedCategory && $selectedCategory->short_id == $category->short_id ? 'selected' : ''?>" data-group=".category-menu" data-target="#category-<?=$category->short_id?>" aria-hidden="true"><span class="glyphicon glyphicon-plus"></span></a>
 						</li>
 					<?php } ?>
 				</ul>
