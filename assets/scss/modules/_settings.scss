@@ -32,9 +32,12 @@
 .send-to-text{
 	color: #9b9b9b;
 	text-transform: lowercase;
+	margin-bottom: 20px;
 }
 .adress-text{
 	font-weight: normal;
+    font-size: 14px;
+	margin: 0;
 }
 .adress-wrapper{
 	width: 100%;
@@ -56,4 +59,28 @@
 .small-order-text{
 	color: #3d3d3d;
     font-size: 12px;
+}
+.orders-subtitle{
+	color:$dark_red;
+	font-size: 16px;
+    font-weight: bold;
+    border-bottom: 2px solid;
+    padding-bottom: 5px;
+    display: inline-block;
+    margin: 0 0 20px 20%;
+}
+.total-text{
+	font-size: 14px;
+	margin: 0;
+    font-weight: bold;
+}
+.comision-line{
+	margin-bottom: 10px;
+}
+.tracking-link{
+	overflow: hidden;
+	text-decoration: underline;
+}
+.grey-link-set{
+	color: #9b9b9b;
 }
