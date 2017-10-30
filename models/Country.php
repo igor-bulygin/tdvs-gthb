@@ -340,6 +340,44 @@ class Country extends CActiveRecord
 	}
 
 	/**
+	 * Returns a list of countries in the UE
+	 *
+	 * @return array
+	 */
+	public static function getUECountryCodes() {
+		return [
+			'BE',
+			'BG',
+			'Croatia',
+			'CZ',
+			'DK',
+			'DE',
+			'EE',
+			'IE',
+			'EL',
+			'ES',
+			'FR',
+			'IT',
+			'CY',
+			'LV',
+			'LT',
+			'LU',
+			'HU',
+			'MT',
+			'NL',
+			'AT',
+			'PL',
+			'PT',
+			'RO',
+			'SI',
+			'SK',
+			'FI',
+			'SE',
+			'UK',
+		];
+	}
+
+	/**
 	 * Returns the list of available countries for shipping
 	 * @return Country[]
 	 */
@@ -375,5 +413,16 @@ class Country extends CActiveRecord
 		$worldwide->items = $continents;
 
 		return $worldwide;
+	}
+
+	/**
+	 * Returns an special object containing all the continents and the countries
+	 *
+	 * @return \stdClass
+	 */
+	public static function getUECountries() {
+		return static::findSerialized([
+			'country_code' => static::getUECountryCodes(),
+		]);
 	}
 }
