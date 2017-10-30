@@ -230,12 +230,6 @@ $config = [
 //            'enableStrictParsing' => true,
 			'suffix' => '',
 			'rules' => [
-				// Test routing
-				[
-					'route' => 'public/test',
-					'pattern' => 'test/<id:[^/.]*?>',
-					'suffix' => ''
-				],
 
 				// temporary routes to fix database problems
 				'/works/fix-products' => 'product/fix-products',

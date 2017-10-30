@@ -75,6 +75,7 @@ class PublicController extends CController
 			$this->view->params['show_footer'] = false;
 
 			$this->layout = '/desktop/public-2.php';
+
 			return $this->render("error", [
 				'name' => '',
 				'message' => $exception->getMessage(),
@@ -92,11 +93,13 @@ class PublicController extends CController
 		return $this->mainPage($slug, $category_id);
 	}
 
-	protected function mainPage($slug = null, $category_id = null) {
+	protected function mainPage($slug = null, $category_id = null)
+	{
 
 		if ($category_id) {
 
-			$category = Category::findOneSerialized($category_id); /* @var Category $category */
+			$category = Category::findOneSerialized($category_id);
+			/* @var Category $category */
 			$categoryShortIds = $category->getShortIds();
 
 			$banners = Utils::getBannerImages($category->getMainCategory());
@@ -124,7 +127,7 @@ class PublicController extends CController
 		$htmlWorks = $this->renderPartial('more-works', [
 			'total' => 48,
 			'works' => $works,
- 		]);
+		]);
 
 		$this->layout = '/desktop/public-2.php';
 		$this->view->params['selectedCategory'] = isset($category) ? $category : null;
@@ -161,7 +164,8 @@ class PublicController extends CController
 		$category_id = Yii::$app->request->get('category_id', null);
 
 		if ($category_id) {
-			$category = Category::findOneSerialized($category_id); /* @var Category $category */
+			$category = Category::findOneSerialized($category_id);
+			/* @var Category $category */
 			$categoryShortIds = $category->getShortIds();
 		} else {
 			$categoryShortIds = [];
@@ -184,6 +188,7 @@ class PublicController extends CController
 	public function actionBecomeDeviser()
 	{
 		$this->layout = '/desktop/public-2.php';
+
 		return $this->render("become-deviser");
 	}
 
@@ -202,12 +207,14 @@ class PublicController extends CController
 		$this->view->params['show_footer'] = false;
 
 		$this->layout = '/desktop/public-2.php';
+
 		return $this->render("create-deviser-account", ["invitation" => $invitation]);
 	}
 
 	public function actionBecomeInfluencer()
 	{
 		$this->layout = '/desktop/public-2.php';
+
 		return $this->render("become-influencer");
 	}
 
@@ -226,6 +233,7 @@ class PublicController extends CController
 		$this->view->params['show_footer'] = false;
 
 		$this->layout = '/desktop/public-2.php';
+
 		return $this->render("create-influencer-account", ["invitation" => $invitation]);
 	}
 
@@ -235,18 +243,21 @@ class PublicController extends CController
 		$this->view->params['show_footer'] = false;
 
 		$this->layout = '/desktop/public-2.php';
+
 		return $this->render("signup", []);
 	}
 
 	public function actionCart()
 	{
 		$this->layout = '/desktop/public-2.php';
+
 		return $this->render("cart", []);
 	}
 
 	public function actionCheckout()
 	{
-		$person = Yii::$app->user->identity; /* @var Person $person */
+		$person = Yii::$app->user->identity;
+		/* @var Person $person */
 
 		if (!$person->isCompletedProfile()) {
 			$this->redirect($person->getCompleteProfileLink());
@@ -259,6 +270,7 @@ class PublicController extends CController
 		}
 
 		$this->layout = '/desktop/public-2.php';
+
 		return $this->render("checkout", [
 			'person' => Yii::$app->user->identity,
 		]);
@@ -267,12 +279,14 @@ class PublicController extends CController
 	public function actionAboutUs()
 	{
 		$this->layout = '/desktop/public-2.php';
+
 		return $this->render("about-us");
 	}
 
 	public function actionCookies()
 	{
 		$this->layout = '/desktop/public-2.php';
+
 		return $this->render("legal-page", [
 			'title' => Yii::t('app/cookies', 'TITLE'),
 			'text' => Yii::t('app/cookies', 'TEXT'),
@@ -282,6 +296,7 @@ class PublicController extends CController
 	public function actionTerms()
 	{
 		$this->layout = '/desktop/public-2.php';
+
 		return $this->render("legal-page", [
 			'title' => Yii::t('app/terms', 'TITLE'),
 			'text' => Yii::t('app/terms', 'TEXT'),
@@ -291,6 +306,7 @@ class PublicController extends CController
 	public function actionPrivacy()
 	{
 		$this->layout = '/desktop/public-2.php';
+
 		return $this->render("legal-page", [
 			'title' => Yii::t('app/privacy', 'TITLE'),
 			'text' => Yii::t('app/privacy', 'TEXT'),
@@ -300,6 +316,7 @@ class PublicController extends CController
 	public function actionElements()
 	{
 		$this->layout = '/desktop/empty-layout.php';
+
 		return $this->render("elements");
 	}
 
@@ -333,6 +350,7 @@ class PublicController extends CController
 		}
 
 		$this->layout = '/desktop/public-2.php';
+
 		return $this->render("contact", [
 			'test' => $model->hasErrors(),
 			'model' => $model,
@@ -573,51 +591,55 @@ class PublicController extends CController
 		$banners = [];
 		for ($i = 0; $i < 15; $i++) {
 			$banners[] = [
-					'img' => 'https://unsplash.it/1200/600/?random&t=' . $i,
-					'caption' => [
-							'name' => 'Foo bar ' . $i,
-							'category' => 'Foo bar ' . $i
-					]
+				'img' => 'https://unsplash.it/1200/600/?random&t=' . $i,
+				'caption' => [
+					'name' => 'Foo bar ' . $i,
+					'category' => 'Foo bar ' . $i
+				]
 			];
 		}
 
 		$devisers = Yii::$app->mongodb->getCollection('person')
-				->aggregate(
-						[
-								'$match' => [
-										"type" => [
-												'$in' => [
-														Person::DEVISER
-												]
-										]
-								]
-						],
-						[
-								'$sample' => [
-										'size' => 20
-								]
+			->aggregate(
+				[
+					'$match' => [
+						"type" => [
+							'$in' => [
+								Person::DEVISER
+							]
 						]
-				);
+					]
+				],
+				[
+					'$sample' => [
+						'size' => 20
+					]
+				]
+			);
 
 		foreach ($devisers as $key => &$deviser) {
 			$works = Yii::$app->mongodb->getCollection('product')
-					->aggregate(
-							[
-									'$project' => [
-											"short_id" => 1, "media" => 1, "slug" => 1, "deviser_id" => 1, "categories" => 1
-									]
-							],
-							[
-									'$match' => [
-											"deviser_id" => $deviser["short_id"]
-									]
-							],
-							[
-									'$sample' => [
-											'size' => 4
-									]
-							]
-					);
+				->aggregate(
+					[
+						'$project' => [
+							"short_id" => 1,
+							"media" => 1,
+							"slug" => 1,
+							"deviser_id" => 1,
+							"categories" => 1
+						]
+					],
+					[
+						'$match' => [
+							"deviser_id" => $deviser["short_id"]
+						]
+					],
+					[
+						'$sample' => [
+							'size' => 4
+						]
+					]
+				);
 
 			foreach ($works as $key => &$work) {
 				$work['img'] = ModelUtils::getProductMainPhoto($work);
@@ -631,22 +653,22 @@ class PublicController extends CController
 		}
 
 		$categories = Category::find()
-				->where(["path" => "/"])
-				->orderBy(['name.' . $lang => SORT_ASC])
-				->asArray()
-				->all();
+			->where(["path" => "/"])
+			->orderBy(['name.' . $lang => SORT_ASC])
+			->asArray()
+			->all();
 
 		Utils::l_collection($categories, "name");
 
 		array_unshift($categories, [
-				'short_id' => 'all',
-				'name' => Yii::t("app/public", 'ALL_CATEGORIES')
+			'short_id' => 'all',
+			'name' => Yii::t("app/public", 'ALL_CATEGORIES')
 		]);
 
 		$session = Yii::$app->session;
 		foreach ($categories as &$category) {
 			$model = new DynamicModel([
-					'selected' => null
+				'selected' => null
 			]);
 			$model->addRule('selected', 'string');
 
@@ -677,33 +699,38 @@ class PublicController extends CController
 
 			if (ModelUtils::getCategory($category['short_id']) !== null) {
 				$match = [
-						'categories' => [
-								'$in' => array_map(function ($category) {
-									return $category['short_id'];
-								}, ModelUtils::getSubCategories($category['short_id']))
-						]
+					'categories' => [
+						'$in' => array_map(function ($category) {
+							return $category['short_id'];
+						}, ModelUtils::getSubCategories($category['short_id']))
+					]
 				];
 			} else {
 				$match = [
-						'short_id' => ['$gt' => ''] // We get here only with the 'all' (special) category, that's why we use a dummy filter to match everything.
+					'short_id' => ['$gt' => '']
+					// We get here only with the 'all' (special) category, that's why we use a dummy filter to match everything.
 				];
 			}
 			$tmp = Yii::$app->mongodb->getCollection('product')
-					->aggregate(
-							[
-									'$project' => [
-											"short_id" => 1, "slug" => 1, "categories" => 1, "name" => 1, "media" => 1
-									]
-							],
-							[
-									'$match' => $match
-							],
-							[
-									'$sample' => [
-											'size' => 400
-									]
-							]
-					);
+				->aggregate(
+					[
+						'$project' => [
+							"short_id" => 1,
+							"slug" => 1,
+							"categories" => 1,
+							"name" => 1,
+							"media" => 1
+						]
+					],
+					[
+						'$match' => $match
+					],
+					[
+						'$sample' => [
+							'size' => 400
+						]
+					]
+				);
 
 			foreach ($tmp as $key => &$product) {
 				$product["name"] = @Utils::l($product["name"]) ?: " ";
@@ -713,17 +740,17 @@ class PublicController extends CController
 			}
 
 			$category['products'] = new ArrayDataProvider([
-					'allModels' => $tmp,
-					'pagination' => [
-							'pagesize' => 40,
-					],
+				'allModels' => $tmp,
+				'pagination' => [
+					'pagesize' => 40,
+				],
 			]);
 		}
 
 		return $this->render("_index", [
-				'banners' => $banners,
-				'devisers' => $devisers,
-				'categories' => $categories
+			'banners' => $banners,
+			'devisers' => $devisers,
+			'categories' => $categories
 		]);
 	}
 
@@ -739,22 +766,26 @@ class PublicController extends CController
 	{
 
 		$tmp = Yii::$app->mongodb->getCollection('product')
-				->aggregate(
-						[
-								'$project' => [
-										"short_id" => 1, "slug" => 1, "categories" => 1, "name" => 1, "media" => 1
-								]
-						],
-						[
-								'$match' => [
-										'categories' => [
-												'$in' => array_map(function ($category) {
-													return $category['short_id'];
-												}, ModelUtils::getSubCategories($category_id))
-										]
-								]
+			->aggregate(
+				[
+					'$project' => [
+						"short_id" => 1,
+						"slug" => 1,
+						"categories" => 1,
+						"name" => 1,
+						"media" => 1
+					]
+				],
+				[
+					'$match' => [
+						'categories' => [
+							'$in' => array_map(function ($category) {
+								return $category['short_id'];
+							}, ModelUtils::getSubCategories($category_id))
 						]
-				);
+					]
+				]
+			);
 
 		foreach ($tmp as $key => &$product) {
 			$product["name"] = @Utils::l($product["name"]) ?: " ";
@@ -764,14 +795,14 @@ class PublicController extends CController
 		}
 
 		$products = new ArrayDataProvider([
-				'allModels' => $tmp,
-				'pagination' => [
-						'pagesize' => 40,
-				],
+			'allModels' => $tmp,
+			'pagination' => [
+				'pagesize' => 40,
+			],
 		]);
 
 		return $this->render("_category", [
-				'products' => $products
+			'products' => $products
 		]);
 	}
 
@@ -788,34 +819,38 @@ class PublicController extends CController
 	{
 
 		$product = OldProduct::find()
-				->where([
-						"short_id" => $product_id
-				])
-				->asArray()
-				->one();
+			->where([
+				"short_id" => $product_id
+			])
+			->asArray()
+			->one();
 
 		$product['name'] = Utils::l($product['name']);
 		$product['description'] = Utils::l($product['description']);
 		$product['category'] = ModelUtils::getProductCategoriesNames($product)[0];
 
 		$tmp = Yii::$app->mongodb->getCollection('product')
-				->aggregate(
-						[
-								'$project' => [
-										"short_id" => 1, "slug" => 1, "categories" => 1, "name" => 1, "media" => 1
-								]
-						],
-						[
-								'$match' => [
-										'deviser_id' => $product['deviser_id']
-								]
-						],
-						[
-								'$sample' => [
-										'size' => 400
-								]
-						]
-				);
+			->aggregate(
+				[
+					'$project' => [
+						"short_id" => 1,
+						"slug" => 1,
+						"categories" => 1,
+						"name" => 1,
+						"media" => 1
+					]
+				],
+				[
+					'$match' => [
+						'deviser_id' => $product['deviser_id']
+					]
+				],
+				[
+					'$sample' => [
+						'size' => 400
+					]
+				]
+			);
 		$tmp = OldProduct::find()->where(['deviser_id' => $product['deviser_id']])->asArray()->all();
 
 		Utils::l_collection($tmp, "name");
@@ -827,10 +862,10 @@ class PublicController extends CController
 		}
 
 		$other_works = new ArrayDataProvider([
-				'allModels' => $tmp,
-				'pagination' => [
-						'pagesize' => 40,
-				],
+			'allModels' => $tmp,
+			'pagination' => [
+				'pagesize' => 40,
+			],
 		]);
 
 		//404 if $product == null
@@ -838,35 +873,35 @@ class PublicController extends CController
 		//$this->view->params["product_path"] = $product['categories'];
 
 		$deviser = Person::find()
-				->where([
-						"short_id" => $product['deviser_id'],
-						"type" => Person::DEVISER
-				])
-				->asArray()
-				->one();
+			->where([
+				"short_id" => $product['deviser_id'],
+				"type" => Person::DEVISER
+			])
+			->asArray()
+			->one();
 
 		$deviser['img'] = ModelUtils::getDeviserAvatar($deviser);
 		$deviser['fullname'] = ModelUtils::getDeviserFullName($deviser);
 
 		$tags = Tag::find()
-				->where([
-						"short_id" => [
-								'$in' => array_map(function ($v) {
-									return '' . $v;
-								}, array_keys($product['options']))
-						]
-				])
-				->asArray()
-				->all();
+			->where([
+				"short_id" => [
+					'$in' => array_map(function ($v) {
+						return '' . $v;
+					}, array_keys($product['options']))
+				]
+			])
+			->asArray()
+			->all();
 
 		return $this->render("_product", [
-				'product' => $product,
-				'other_works' => $other_works,
-				'deviser' => $deviser,
-				'tags' => $tags,
-				'category_id' => $category_id,
-				'product_id' => $product_id,
-				'slug' => $slug
+			'product' => $product,
+			'other_works' => $other_works,
+			'deviser' => $deviser,
+			'tags' => $tags,
+			'category_id' => $category_id,
+			'product_id' => $product_id,
+			'slug' => $slug
 		]);
 	}
 
@@ -881,12 +916,12 @@ class PublicController extends CController
 	public function actionDeviser($deviser_id, $slug)
 	{
 		$deviser = Person::find()
-				->where([
-						"short_id" => $deviser_id,
-						"type" => Person::DEVISER
-				])
-				->asArray()
-				->one();
+			->where([
+				"short_id" => $deviser_id,
+				"type" => Person::DEVISER
+			])
+			->asArray()
+			->one();
 
 		$deviser['name'] = ModelUtils::getDeviserFullName($deviser);
 		$deviser['category'] = ModelUtils::getDeviserCategoriesNames($deviser)[0];
@@ -904,15 +939,15 @@ class PublicController extends CController
 		}
 
 		$works = new ArrayDataProvider([
-				'allModels' => $tmp,
-				'pagination' => [
-						'pagesize' => 40,
-				],
+			'allModels' => $tmp,
+			'pagination' => [
+				'pagesize' => 40,
+			],
 		]);
 
 		return $this->render("_deviser", [
-				'deviser' => $deviser,
-				'works' => $works
+			'deviser' => $deviser,
+			'works' => $works
 		]);
 	}
 
@@ -927,24 +962,26 @@ class PublicController extends CController
 		if (Yii::$app->request->isAjax) {
 			Yii::$app->response->format = Response::FORMAT_JSON;
 
-			$res = array(
-					'body' => date('Y-m-d H:i:s'),
-					'success' => true,
-			);
+			$res = [
+				'body' => date('Y-m-d H:i:s'),
+				'success' => true,
+			];
 
 			return $res;
 		}
 
 		//Show cart view
 		return $this->render("_cart", [
-				'test' => 'this is a test text'
+			'test' => 'this is a test text'
 		]);
 	}
 
-	public function actionCreateCountryPaths() {
-		$countries = Country::findSerialized(); /* @var $countries Country[] */
+	public function actionCreateCountryPaths()
+	{
+		$countries = Country::findSerialized();
+		/* @var $countries Country[] */
 		foreach ($countries as $country) {
-			$country->path = Country::WORLD_WIDE.'/'.$country->continent.'/'.$country->country_code;
+			$country->path = Country::WORLD_WIDE . '/' . $country->continent . '/' . $country->country_code;
 			$country->save(true, ['path']);
 		}
 	}
@@ -960,6 +997,7 @@ class PublicController extends CController
 			$invalidLogin = true;
 		}
 		$this->layout = '/desktop/public-2.php';
+
 		return $this->render("login-2", [
 			'invalidLogin' => $invalidLogin
 		]);
@@ -976,6 +1014,7 @@ class PublicController extends CController
 			$invalidLogin = true;
 		}
 		$this->layout = '/desktop/public-2.php';
+
 		return $this->render("authentication-required", [
 			'invalidLogin' => $invalidLogin
 		]);
@@ -986,14 +1025,5 @@ class PublicController extends CController
 		Yii::$app->user->logout();
 
 		return $this->goHome();
-	}
-
-	public function actionTestComposeEmailOrder()
-	{
-		$short_id = '3654fd24';
-		$order = \app\models\Order::findOneSerialized($short_id);
-		if ($order) {
-			$order->composeEmailOrderPaid(false);
-		}
 	}
 }
