@@ -1,5 +1,7 @@
 {
 	"settings": {
+		"EDIT": "Editar",
+		"REQUIRED": "Obligatorio",
 		"general": {
 			"PERSONAL_INFORMATION": "Información personal",
 			"BRAND": "MARCA / NOMBRE ARTÍSTICO",
@@ -50,12 +52,16 @@
 			"ETA": "ETA",
 			"TRACKING_NUMBER": "Número de seguimiento",
 			"TRACKING_LINK": "Enlace al seguimiento del paquete ",
-			"MOVE_TO_PAST_ORDERS": "Al hacer clic en este botón, el epdido será movido a PEDIDOS PASADOS",
+			"MOVE_TO_PAST_ORDERS": "Al hacer clic en este botón, el pedido será marcado como enviado",
 			"SAVE_CHANGES": "GUARDAR CAMBIOS",
 			"PACKAGE_SHIPPED": "EL PAQUETE HA SIDO ENVIADO",
 			"TOTAL": "Total",
-			"CONTINUE_MARK_SHIPPED": "<p>Va a marcar este pedido como enviado.</p><p><strong>Esta acción no se puede deshacer.</strong></p><p>¿Desea continuar?",
-			"ORDER_MOVED_TO_PAST": "El pedido {{ data }} ha sido movido a pedidos pasados. Para información sobre el pago consulte @:settings.header.BILLING_PAYMENTS"
+			"CONTINUE_MARK_SHIPPED": "<p>Va a marcar este pedido como enviado.</p><p><strong>Esta acción no se puede deshacer.</strong></p><p><strong>Una vez enviado LA FACTURA NO PODRÁ MODIFICARSE</strong></p><p>¿Desea continuar?",
+			"ORDER_MOVED_TO_PAST": "El pedido {{ data }} ha sido marcado como enviado. Para información sobre el pago consulte el apartado FACTURAS Y PAGOS",
+			"UPLOAD_INVOICE":"Subir FACTURA EN PDF",
+			"SEE_INVOICE":"factura.pdf",
+			"REPLACE_INVOICE":"Reemplazar FACTURA EN PDF",
+			"DOWNLOAD_INVOICE":"Descargar FACTURA"
 		},
 		"shipping": {
 			"TOTAL": "Total",

@@ -2,6 +2,7 @@
 namespace app\modules\api\priv\v1\forms;
 
 use app\helpers\Utils;
+use app\models\Order;
 use app\models\Person;
 use app\models\Product;
 use Yii;
@@ -21,11 +22,14 @@ class UploadForm extends Model {
 
 	const UPLOAD_TYPE_PERSON_STORY_PHOTOS = 'story-photos';
 
+	const UPLOAD_TYPE_PERSON_PACK_INVOICE = 'person-pack-invoice';
+
 	const UPLOAD_TYPE_KNOWN_PRODUCT_PHOTO = 'known-product-photo';
 	const UPLOAD_TYPE_UNKNOWN_PRODUCT_PHOTO = 'unknown-product-photo';
 
 	const SCENARIO_UPLOAD_DEVISER_IMAGE = 'scenario-upload-deviser-image';
 	const SCENARIO_UPLOAD_DEVISER_CURRICULUM = 'scenario-upload-deviser-curriculum';
+	const SCENARIO_UPLOAD_DEVISER_INVOICE = 'scenario-upload-deviser-invoice';
 	const SCENARIO_UPLOAD_PRODUCT_IMAGE = 'scenario-upload-product-image';
 
 
@@ -43,6 +47,11 @@ class UploadForm extends Model {
 	 * @var string
 	 */
 	public $product_id;
+
+	/**
+	 * @var string
+	 */
+	public $pack_id;
 
 	/**
 	 * @var UploadedFile
@@ -68,8 +77,9 @@ class UploadForm extends Model {
 	{
 		return [
 			[['type'], 'validateType'],
-			[['person_id', 'product_id'], 'safe'],
+			[['person_id', 'product_id', 'pack_id'], 'safe'],
 			[['file'], 'file', 'skipOnEmpty' => false, 'extensions' => ['png', 'jpg', 'jpeg'], 'on' => [self::SCENARIO_UPLOAD_DEVISER_IMAGE, self::SCENARIO_UPLOAD_PRODUCT_IMAGE]],
+			[['file'], 'file', 'skipOnEmpty' => false, 'extensions' => ['pdf'], 'on' => [self::SCENARIO_UPLOAD_DEVISER_INVOICE]],
 			[['file'], 'file', 'skipOnEmpty' => false, 'extensions' => ['png', 'jpg', 'jpeg', 'pdf'], 'on' => self::SCENARIO_UPLOAD_DEVISER_CURRICULUM],
 		];
 	}
@@ -123,6 +133,7 @@ class UploadForm extends Model {
 			case UploadForm::UPLOAD_TYPE_PERSON_PRESS_IMAGES:
 			case UploadForm::UPLOAD_TYPE_PERSON_CURRICULUM:
 			case UploadForm::UPLOAD_TYPE_PERSON_STORY_PHOTOS:
+			case UploadForm::UPLOAD_TYPE_PERSON_PACK_INVOICE:
 				$path = Utils::join_paths(Yii::getAlias("@deviser"), $this->person_id);
 				break;
 			case UploadForm::UPLOAD_TYPE_KNOWN_PRODUCT_PHOTO:
@@ -155,7 +166,7 @@ class UploadForm extends Model {
 			UploadForm::UPLOAD_TYPE_PERSON_PRESS_IMAGES => 'person.press.',
 			UploadForm::UPLOAD_TYPE_PERSON_CURRICULUM => 'person.cv.',
 			UploadForm::UPLOAD_TYPE_PERSON_STORY_PHOTOS => 'person.story.',
-
+			UploadForm::UPLOAD_TYPE_PERSON_PACK_INVOICE => 'person.pack.invoice.',
 			UploadForm::UPLOAD_TYPE_KNOWN_PRODUCT_PHOTO => 'product.photo.',
 			UploadForm::UPLOAD_TYPE_UNKNOWN_PRODUCT_PHOTO => 'product.photo.',
 
@@ -187,6 +198,22 @@ class UploadForm extends Model {
 				}
 				if (empty($this->getPerson())) {
 					$this->addError($attribute, 'Person not found');
+				}
+				break;
+			case UploadForm::UPLOAD_TYPE_PERSON_PACK_INVOICE:
+				if (empty($this->person_id)) {
+					$this->addError($attribute, 'Person id must be specified');
+				}
+				if (empty($this->pack_id)) {
+					$this->addError($attribute, 'Pack id must be specified');
+				} else {
+					$pack = $this->getPack();
+					if (empty($pack)) {
+						$this->addError($attribute, 'Pack not found');
+					}
+					if ($pack['packs'][0]['deviser_id'] != $this->person_id) {
+						$this->addError($attribute, 'This pack does not belongs to the specified person');
+					}
 				}
 				break;
 			case UploadForm::UPLOAD_TYPE_KNOWN_PRODUCT_PHOTO:
@@ -222,6 +249,7 @@ class UploadForm extends Model {
 			case UploadForm::UPLOAD_TYPE_PERSON_PRESS_IMAGES:
 			case UploadForm::UPLOAD_TYPE_PERSON_CURRICULUM:
 			case UploadForm::UPLOAD_TYPE_PERSON_STORY_PHOTOS:
+			case UploadForm::UPLOAD_TYPE_PERSON_PACK_INVOICE:
 				$url = (Yii::getAlias("@deviser_url") . "/" . $this->person_id . "/" . $this->filename);
 				break;
 			case UploadForm::UPLOAD_TYPE_KNOWN_PRODUCT_PHOTO:
@@ -254,6 +282,9 @@ class UploadForm extends Model {
 			case UploadForm::UPLOAD_TYPE_PERSON_PRESS_IMAGES:
 			case UploadForm::UPLOAD_TYPE_PERSON_STORY_PHOTOS:
 				$this->setScenario(UploadForm::SCENARIO_UPLOAD_DEVISER_IMAGE);
+				break;
+			case UploadForm::UPLOAD_TYPE_PERSON_PACK_INVOICE:
+				$this->setScenario(UploadForm::SCENARIO_UPLOAD_DEVISER_INVOICE);
 				break;
 			case UploadForm::UPLOAD_TYPE_PERSON_CURRICULUM:
 				$this->setScenario(UploadForm::SCENARIO_UPLOAD_DEVISER_CURRICULUM);
@@ -288,6 +319,27 @@ class UploadForm extends Model {
 	public function getProduct()
 	{
 		return Product::findOne(['short_id' => $this->product_id]);
+	}
+
+	/**
+	 * Get the Order related with the upload
+	 *
+	 * @return Order
+	 */
+	public function getPack()
+	{
+		$orders = Order::findSerialized([
+			"deviser_id" => $this->person_id,
+			"pack_id" => $this->pack_id,
+			"only_matching_packs" => true,
+			"order_state" => Order::ORDER_STATE_PAID,
+			"limit" => 1,
+		]);
+		if ($orders && isset($orders[0]['packs'])) {
+			return $orders[0];
+		}
+
+		return null;
 	}
 
 	/**

@@ -43,7 +43,7 @@ $this->registerJs("var searchParam = '".$text."'", yii\web\View::POS_HEAD, 'prod
 						<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
 					</div>
 					<div class="text-center col-md-12 mt-30" style="padding-bottom:100px;" ng-if="exploreProductsCtrl.results.counter > exploreProductsCtrl.results.items.length" ng-cloak >
-						<button class="big-btn btn btn-default" ng-click="exploreProductsCtrl.searchMore()" ng-disabled="exploreProductsCtrl.searching">
+						<button class="btn btn-small btn-black-line" ng-click="exploreProductsCtrl.searchMore()" ng-disabled="exploreProductsCtrl.searching">
 							<span translate="discover.SEE_MORE" ng-if="!exploreProductsCtrl.searching"></span>
 							<i class="fa fa-spinner fa-pulse fa-3x fa-fw small" ng-if="exploreProductsCtrl.searching"></i>
 						</button>

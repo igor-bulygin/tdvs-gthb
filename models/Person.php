@@ -915,6 +915,18 @@ class Person extends CActiveRecord implements IdentityInterface
 	}
 
 	/**
+	 * Get the url to download any file of the Person
+	 *
+	 * @param string $file
+	 *
+	 * @return string
+	 */
+	public function getDownloadFileUrl($file)
+	{
+		return Yii::getAlias("@deviser_url") . "/" . $this->short_id . "/" . $file;
+	}
+
+	/**
 	 * Get the url to get the images of a Deviser
 	 *
 	 * @return string
@@ -931,7 +943,7 @@ class Person extends CActiveRecord implements IdentityInterface
 	 */
 	public function getUrlResumeFile()
 	{
-		return Yii::getAlias("@deviser_url") . "/" . $this->short_id . "/" . $this->curriculum;
+		return $this->getDownloadFileUrl($this->curriculum);
 	}
 
 	/**

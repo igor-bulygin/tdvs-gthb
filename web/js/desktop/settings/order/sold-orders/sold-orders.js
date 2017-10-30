@@ -1,13 +1,14 @@
 (function () {
 	"use strict";
 
-	function controller(UtilService, orderDataService,cartService,$uibModal) {
+	function controller(UtilService, orderDataService,cartService,$uibModal, uploadDataService, $location) {
 		var vm = this;
 		vm.markPackAware=markPackAware;
 		vm.markPackShipped=markPackShipped;
 		vm.editShippingData=editShippingData;
 		vm.has_error = UtilService.has_error;
 		vm.parseDate=UtilService.parseDate;
+		vm.uploadInvoice = uploadInvoice;
 		vm.ordersTotalPrice=0;
 
 		init();
@@ -36,19 +37,7 @@
 
 		function markPackShipped(order,pack) {
 			function onChangeStateSuccess(data) {
-				if (!pack.editInfo) {
-					order.packs.splice(order.packs.indexOf(pack),1);
-					if (order.packs.length<1) {
-						vm.orders.splice(vm.orders.indexOf(order),1);
-						openInfoModal(order.id);
-					}
-					else {
-						vm.orders[vm.orders.indexOf(order)].packs=data.packs;
-					}
-				}
-				else {
-					vm.orders[vm.orders.indexOf(order)].packs=data.packs;
-				}
+				vm.orders[vm.orders.indexOf(order)].packs=data.packs;
 			}
 			if (!pack.editInfo) {
 				var modalInstance = $uibModal.open({
@@ -62,8 +51,12 @@
 				modalInstance.result.then(function(data) {
 					if (data) {
 						pack.loading=true;
-						ValidateUrl()
-						orderDataService.changePackState({ company:vm.shippingCompany, eta: vm.eta, tracking_number:vm.trackingNumber, tracking_link:vm.trackLink }, {personId:pack.deviser_id,packId:pack.short_id, newState:'shipped' },onChangeStateSuccess, UtilService.onError)
+						validateUrl();
+						orderDataService.changePackState({ company:vm.shippingCompany, eta: vm.eta, tracking_number:vm.trackingNumber, tracking_link:vm.trackLink, invoice_url:pack.invoice_url }, {personId:pack.deviser_id,packId:pack.short_id, newState:'shipped' },onChangeStateSuccess, UtilService.onError);
+						vm.shippingCompany=null;
+						vm.eta=null;
+						vm.trackingNumber=null;
+						vm.trackLink=null;
 					}
 				}, function(err) {
 					UtilService.onError(err);
@@ -71,8 +64,8 @@
 			}
 			else {
 				pack.loading=true;
-				ValidateUrl()
-				orderDataService.changePackState({ company:vm.shippingCompany, eta: vm.eta, tracking_number:vm.trackingNumber, tracking_link:vm.trackLink }, {personId:pack.deviser_id,packId:pack.short_id, newState:'shipped' },onChangeStateSuccess, UtilService.onError)
+				validateUrl();
+				orderDataService.changePackState({ company:vm.shippingCompany, eta: vm.eta, tracking_number:vm.trackingNumber, tracking_link:vm.trackLink, invoice_url:pack.invoice_url  }, {personId:pack.deviser_id,packId:pack.short_id, newState:'shipped' },onChangeStateSuccess, UtilService.onError)
 			}
 		}
 
@@ -85,12 +78,9 @@
 			pack.editInfo=true;
 		}
 
-		function ValidateUrl() { 
+		function validateUrl() { 
 			if(vm.trackLink && !/^(https?):\/\//i.test(vm.trackLink) && 'http://'.indexOf(vm.trackLink) !== 0 && 'https://'.indexOf(vm.trackLink) !== 0 ) {
 				vm.trackLink= 'http://' + vm.trackLink;
-			}
-			else {
-				return vm.trackLink;
 			}
 		}
 
@@ -111,6 +101,40 @@
 			}, function(err) {
 				UtilService.onError(err);
 			});
+		}
+
+		function uploadInvoice(invoice, errInvoice,pack) {
+			if (invoice && !pack.editInfo) {
+				vm.actualPack=pack;
+				function onUploadInvoiceSuccess(data, file, pack) {
+						delete file.progress;
+						pack.invoice_url=  data.data.filename;
+						pack.invoice_link=  currentHost() + data.data.url;
+						vm.invoice=invoice;
+						vm.errFiles = errInvoice;
+				}
+				function onWhileUploadingInvoice(evt, file) {
+					if (file) {
+						file.progress = parseInt(100.0 * evt.loaded / evt.total);
+					}
+				}
+				vm.invoice=invoice;
+				vm.errFiles = errInvoice;
+				//upload invoice
+				var data = {
+					person_id: person.short_id,
+					pack_id: pack.short_id,
+					type: 'person-pack-invoice',
+					file: vm.invoice
+				};
+				uploadDataService.UploadFile(data,
+					function(data) {
+						return onUploadInvoiceSuccess(data, vm.invoice,pack);
+					}, UtilService.onError,
+					function(evt) {
+						return onWhileUploadingInvoice(evt, vm.invoice);
+					});
+			}
 		}
 	}
 

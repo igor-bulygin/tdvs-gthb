@@ -240,7 +240,6 @@ class PersonController extends AppPrivateController
 			[
 				'pack_id' => $packId,
 				'deviser_id' => $person->short_id,
-				'only_matching_packs' => true,
 			]
 		);
 		if (count($orders) != 1) {
@@ -255,8 +254,31 @@ class PersonController extends AppPrivateController
 			throw new ConflictHttpException("This order has an invalid state");
 		}
 
-		$order->setPackState($packId, OrderPack::PACK_STATE_AWARE);
+		// Change values in the pack
+		$pack = $order->getPack($packId);
+		if (!$pack) {
+			throw new NotFoundHttpException(sprintf('Pack with id %s not found', $packId));
+		}
+		$pack->setState(OrderPack::PACK_STATE_AWARE);
 
+		// Set pack in the order and save
+		$order->setPack($packId, $pack);
+
+		// We get the order another time, but with "only_matching_packs" to prevent other packs to apear in the response
+		$orders = Order::findSerialized(
+			[
+				'pack_id' => $packId,
+				'deviser_id' => $person->short_id,
+				'only_matching_packs' => true,
+			]
+		);
+		if (count($orders) != 1) {
+			throw new NotFoundHttpException(sprintf('Order for pack_id %s not found', $packId));
+		}
+
+		// We can only get one order by packId...
+		/* @var Order $order */
+		$order = $orders[0];
 		$order->setSubDocumentsForSerialize();
 
 		return $order;
@@ -280,7 +302,6 @@ class PersonController extends AppPrivateController
 			[
 				'pack_id' => $packId,
 				'deviser_id' => $person->short_id,
-				'only_matching_packs' => true,
 			]
 		);
 		if (count($orders) != 1) {
@@ -295,9 +316,38 @@ class PersonController extends AppPrivateController
 			throw new ConflictHttpException("This order has an invalid state");
 		}
 
-		$order->setPackShippingInfo($packId, Yii::$app->request->post());
-		$order->setPackState($packId, OrderPack::PACK_STATE_SHIPPED);
+		// Change values in the pack
+		$pack = $order->getPack($packId);
+		if (!$pack) {
+			throw new NotFoundHttpException(sprintf('Pack with id %s not found', $packId));
+		}
+		$pack->setPackShippingInfo(Yii::$app->request->post());
 
+		$invoiceUrl = Yii::$app->request->post('invoice_url');
+		if ($invoiceUrl) {
+			$pack->setInvoiceInfo($invoiceUrl);
+		}
+
+		$pack->setState(OrderPack::PACK_STATE_SHIPPED);
+
+		// Set pack in the order and save
+		$order->setPack($packId, $pack);
+
+		// We get the order another time, but with "only_matching_packs" to prevent other packs to apear in the response
+		$orders = Order::findSerialized(
+			[
+				'pack_id' => $packId,
+				'deviser_id' => $person->short_id,
+				'only_matching_packs' => true,
+			]
+		);
+		if (count($orders) != 1) {
+			throw new NotFoundHttpException(sprintf('Order for pack_id %s not found', $packId));
+		}
+
+		// We can only get one order by packId...
+		/* @var Order $order */
+		$order = $orders[0];
 		$order->setSubDocumentsForSerialize();
 
 		return $order;
