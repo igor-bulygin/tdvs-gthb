@@ -7,25 +7,14 @@
 		$translatePartialLoaderProvider.addPart('header');
 	}
 
-	function controller(personDataService, $window, UtilService, localStorageUtilService, cartDataService, cartService) {
+	function controller(personDataService, $window, UtilService, localStorageUtilService, cartDataService, cartService,$scope, cartEvents) {
 		var vm = this;
 		vm.logout = logout;
 		vm.cartQuantity=0;
 		init();
 
 		function init() {
-			var cart_id = localStorageUtilService.getLocalStorage('cart_id');
-			function onGetCartSuccess(data) {
-				vm.cart = angular.copy(data);
-				cartService.setTotalItems(vm.cart);
-				vm.cartQuantity=vm.cart.totalItems;
-			}
-			function onGetCartError(err) {
-				UtilService.onError(err);
-			}
-			if(cart_id) {
-				cartDataService.getCart({id: cart_id}, onGetCartSuccess, onGetCartError);
-			}
+			getCartQuantity();
 		}
 
 		function logout(){
@@ -37,6 +26,29 @@
 
 			personDataService.logout(vm.session_logout, null, onLogoutSuccess, UtilService.onError);
 		}
+
+		function updateCart(cart){
+			vm.cart = angular.copy(cart);
+			cartService.setTotalItems(vm.cart);
+			vm.cartQuantity=vm.cart.totalItems;
+		}
+
+		function getCartQuantity() {
+			var cart_id = localStorageUtilService.getLocalStorage('cart_id');
+			function onGetCartSuccess(data) {
+				updateCart(data);
+			}
+			function onGetCartError(err) {
+				UtilService.onError(err);
+			}
+			if(cart_id) {
+				cartDataService.getCart({id: cart_id}, onGetCartSuccess, onGetCartError);
+			}
+		}
+
+		$scope.$on(cartEvents.cartUpdated, function(evt,data){ 
+			updateCart(data.cart);
+		}, true);
 	}
 
 	angular.module('header', ['api', 'util', 'box', 'pascalprecht.translate'])
