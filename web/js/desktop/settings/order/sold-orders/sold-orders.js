@@ -104,7 +104,7 @@
 		}
 
 		function uploadInvoice(invoice, errInvoice,pack) {
-			if (invoice) {
+			if (invoice && !pack.editInfo) {
 				vm.actualPack=pack;
 				function onUploadInvoiceSuccess(data, file, pack) {
 						delete file.progress;

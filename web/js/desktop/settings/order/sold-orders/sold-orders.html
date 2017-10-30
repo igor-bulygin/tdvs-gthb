@@ -132,7 +132,7 @@
 													</div>
 												</div>
 											</div>
-											<div class="col-md-12 mt-10">
+											<div class="col-md-12 mt-10" ng-if="!pack.editInfo" ng-cloak>
 												<a class="red-text" type="file" ngf-select="soldOrdersCtrl.uploadInvoice($file, $invalidFiles,pack)" accept=".pdf" ngf-max-height="1000" ngf-max-size="1MB" href=""> 
 													<span  class="red-text">
 														<strong>
