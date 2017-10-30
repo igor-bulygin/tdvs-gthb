@@ -68,12 +68,12 @@ class CountryController extends AppPublicController {
 		return Country::getWorldwide();
 	}
 
-    public function actionUeCountries() {
+    public function actionEuCountries() {
 
 		// set the scenario to serialize objects
 		Country::setSerializeScenario(Country::SERIALIZE_SCENARIO_PUBLIC);
 
-		return Country::getUECountries();
+		return Country::getEUCountries();
 	}
 
 }

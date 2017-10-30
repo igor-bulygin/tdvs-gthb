@@ -340,15 +340,15 @@ class Country extends CActiveRecord
 	}
 
 	/**
-	 * Returns a list of countries in the UE
+	 * Returns a list of countries in the European Union
 	 *
 	 * @return array
 	 */
-	public static function getUECountryCodes() {
+	public static function getEUCountryCodes() {
 		return [
 			'BE',
 			'BG',
-			'Croatia',
+			'HR',
 			'CZ',
 			'DK',
 			'DE',
@@ -379,6 +379,7 @@ class Country extends CActiveRecord
 
 	/**
 	 * Returns the list of available countries for shipping
+	 *
 	 * @return Country[]
 	 */
 	public static function getShippingCountries() {
@@ -416,13 +417,13 @@ class Country extends CActiveRecord
 	}
 
 	/**
-	 * Returns an special object containing all the continents and the countries
+	 * Returns the list of countries in the European Union
 	 *
-	 * @return \stdClass
+	 * @return Country[]
 	 */
-	public static function getUECountries() {
+	public static function getEUCountries() {
 		return static::findSerialized([
-			'country_code' => static::getUECountryCodes(),
+			'country_code' => static::getEUCountryCodes(),
 		]);
 	}
 }
