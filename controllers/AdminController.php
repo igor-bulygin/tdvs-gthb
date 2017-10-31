@@ -384,24 +384,19 @@ class AdminController extends CController {
 		foreach ($orders as $order) {
 			$packs = $order->getPacks();
 			foreach ($packs as $pack) {
-				$feeAmount = $pack->getFeeAmount();
+				$feeAmount = $pack->pack_total_fee;
 				if ($feeAmount) {
 					$i++;
 					$deviser = $pack->getDeviser();
-					if (strtoupper($deviser->personalInfoMapping->country) == 'ES') {
-						$feeWithoutVat = $feeAmount / 1.21;
-					} else {
-						$feeWithoutVat = $feeAmount;
-					}
 					$csv[] = [
 						$order->short_id . '/' . $pack->short_id,
 						$order->order_date->toDateTime()->format('d/m/Y'),
 						$deviser->getName(),
 //						$deviser->getEmail(),
 						$deviser->getCompleteAddress(),
-						sprintf('%.2f', $feeWithoutVat),
-						sprintf('%.2f', $feeAmount - $feeWithoutVat),
-						sprintf('%.2f', $feeAmount),
+						$pack->pack_total_fee - $pack->pack_total_fee_vat,
+						$pack->pack_total_fee_vat,
+						$pack->pack_total_fee,
 //						($pack->pack_percentage_fee * 100) . '%',
 					];
 				}
