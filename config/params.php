@@ -16,7 +16,7 @@ return [
 
 	// Mailchimp & Mandrill
 	'mailchimp_api_key' => 'e0c28ae6c8351fc0736d0c352aad5a3f-us9',
-	'mandrill_api_key' => 'L2ETh5H39FL7Is_cvLmV1A',
+	'mandrill_api_key' => !YII_ENV_PROD ? 'mbo3FMDEVLDbxXYpZomrng' : 'L2ETh5H39FL7Is_cvLmV1A',
 
 	'default_todevise_fee' => 0.145,
 	'default_spain_vat' => 0.21,
