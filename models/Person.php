@@ -2050,4 +2050,16 @@ class Person extends CActiveRecord implements IdentityInterface
 
 		return $fee;
 	}
+
+	/**
+	 * Returns TRUE if the user is registered in a Country in the European Union
+	 * @return bool
+	 */
+	public function isFromEU() {
+		if (!empty($this->personalInfoMapping->country)) {
+			return Country::isEUCountry($this->personalInfoMapping->country);
+		}
+
+		return false;
+	}
 }
