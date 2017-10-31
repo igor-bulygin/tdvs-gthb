@@ -581,7 +581,7 @@ a, a:hover, a:focus {
 .black-icons svg {
   width: 18px; }
 
-.btn-red, .btn-green, .btn-none, .btn-grey, .btn-black, .btn-follow, .btn-white, .btn-black-on-white, .btn-transparent, .btn-black-line, .big-btn, .btn-love, .btn-single-love, .heart-red-icon-btn, .btn-save-box, .btn-icon, .accordion-btn, .button-error, .btn-save {
+.btn-red, .btn-green, .btn-none, .btn-grey, .btn-black, .btn-follow, .btn-white, .btn-black-on-white, .btn-transparent, .big-btn, .btn-love, .btn-single-love, .heart-red-icon-btn, .btn-save-box, .btn-icon, .accordion-btn, .button-error, .btn-save {
   text-transform: uppercase;
   font-family: "Roboto Condensed", sans-serif;
   font-weight: bold;
@@ -593,7 +593,7 @@ a, a:hover, a:focus {
   border: none;
   text-align: center;
   cursor: pointer; }
-  .btn-red:hover, .btn-green:hover, .btn-none:hover, .btn-grey:hover, .btn-black:hover, .btn-follow:hover, .btn-white:hover, .btn-black-on-white:hover, .btn-transparent:hover, .btn-black-line:hover, .big-btn:hover, .btn-love:hover, .btn-single-love:hover, .heart-red-icon-btn:hover, .btn-save-box:hover, .btn-icon:hover, .accordion-btn:hover, .button-error:hover, .btn-save:hover {
+  .btn-red:hover, .btn-green:hover, .btn-none:hover, .btn-grey:hover, .btn-black:hover, .btn-follow:hover, .btn-white:hover, .btn-black-on-white:hover, .btn-transparent:hover, .big-btn:hover, .btn-love:hover, .btn-single-love:hover, .heart-red-icon-btn:hover, .btn-save-box:hover, .btn-icon:hover, .accordion-btn:hover, .button-error:hover, .btn-save:hover {
     -moz-transition-property: background-color;
     -o-transition-property: background-color;
     -webkit-transition-property: background-color;
@@ -680,15 +680,6 @@ a.btn span {
   color: #ffffff; }
   .btn-transparent:hover {
     background-color: #bfbfbf;
-    color: #ffffff;
-    border: 1px solid #ffffff; }
-
-.btn-black-line {
-  background-color: transparent;
-  border: 1px solid #1C1919;
-  color: #1C1919; }
-  .btn-black-line:hover {
-    background-color: #1C1919;
     color: #ffffff;
     border: 1px solid #ffffff; }
 
@@ -5265,8 +5256,6 @@ h3 {
   margin-top: 0; }
 .nya-bs-select > .btn .filter-option {
   width: auto; }
-.nya-bs-select > .btn .caret {
-  position: relative; }
 .nya-bs-select .nya-bs-select {
   right: 0;
   left: inherit;
@@ -5909,20 +5898,20 @@ span.optional-text.pull-left {
 
 .left-box-column {
   background-color: #ffffff;
-  min-height: 325px;
-  padding: 20px 0 0 0; }
+  min-height: 90px;
+  padding: 35px 0 0 0; }
   .left-box-column .title {
     color: #1C1919;
-    font-size: 20px;
+    font-size: 24px;
     font-weight: bold;
-    margin: 0 0 20px;
+    margin: 0 0 15px;
     display: block; }
   .left-box-column p {
     color: #1C1919;
     font-size: 16px; }
 
 .right-box-column {
-  padding: 20px;
+  padding: 0;
   background-color: #ffffff;
   min-height: 350px; }
   .right-box-column .grid figure .close-product-icon {
@@ -7376,6 +7365,7 @@ span.optional-text.pull-left {
   border-radius: 6px 6px 6px 6px !important;
   -webkit-border-radius: 6px 6px 6px 6px !important;
   -moz-border-radius: 6px 6px 6px 6px !important;
+  overflow: hidden;
   cursor: move;
   height: 150px;
   width: 150px;
