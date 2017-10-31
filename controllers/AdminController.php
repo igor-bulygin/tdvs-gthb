@@ -10,6 +10,7 @@ use app\models\Country;
 use app\models\Invitation;
 use app\models\MetricType;
 use app\models\OldProduct;
+use app\models\Order;
 use app\models\Person;
 use app\models\PostmanEmail;
 use app\models\SizeChart;
@@ -350,5 +351,56 @@ class AdminController extends CController {
 
 			echo '<pre>'.print_r($person->credentials, true).'</pre>';
 		}
+	}
+
+	public function actionInvoicesExcel()
+	{
+		$orders = Order::findSerialized([
+			'order_state' => Order::ORDER_STATE_PAID,
+			'order_by' => [
+				'order_date' => SORT_ASC
+			]
+		]);
+		$csv[] = [
+			'Invoice number',
+			'Date of transaction',
+			'Name of deviser',
+			'Adress of deviser',
+//			'Fee without VAT',
+//			'VAT (if applicable)',
+			'Fee including VAT',
+			'Fee percentage',
+		];
+		$i = 0;
+		foreach ($orders as $order) {
+			$packs = $order->getPacks();
+			foreach ($packs as $pack) {
+				$feeAmount = $pack->getFeeAmount();
+				$vatAmount = 0;
+				if ($feeAmount) {
+					$i++;
+					$deviser = $pack->getDeviser();
+					$csv[] = [
+						$order->short_id.'/'.$pack->short_id,
+						$order->order_date->toDateTime()->format('d/m/Y'),
+						$deviser->getName(),
+						$deviser->getCompleteAddress(),
+//						$feeAmount - $vatAmount,
+//						$vatAmount,
+						$feeAmount,
+						$pack->pack_percentage_fee * 100,
+					];
+				}
+			}
+		}
+
+		$result = '';
+		foreach ($csv as $fila) {
+			foreach ($fila as $valor) {
+				$result .= '"'.$valor.'";';
+			}
+			$result .= "\n";
+		}
+		echo $result;
 	}
 }
