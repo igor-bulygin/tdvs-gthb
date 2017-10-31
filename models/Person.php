@@ -1263,6 +1263,16 @@ class Person extends CActiveRecord implements IdentityInterface
 	}
 
 	/**
+	 * Shortcut to get the complete address
+	 *
+	 * @return string
+	 */
+	public function getCompleteAddress()
+	{
+		return $this->personalInfoMapping->getCompleteAddress();
+	}
+
+	/**
 	 * Shortcut to get the name
 	 *
 	 * @return string

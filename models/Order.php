@@ -275,7 +275,7 @@ class Order extends CActiveRecord {
      * Get a collection of entities serialized, according to serialization configuration
      *
      * @param array $criteria
-     * @return array
+     * @return Order[]
      * @throws Exception
      */
     public static function findSerialized($criteria = [])
@@ -672,6 +672,9 @@ class Order extends CActiveRecord {
 	{
 		if ($this->order_state == $newState) {
 			return;
+		}
+		if ($newState == Order::ORDER_STATE_PAID) {
+			$this->order_date = new MongoDate();
 		}
 		$this->order_state = $newState;
 		$stateHistory = $this->state_history;

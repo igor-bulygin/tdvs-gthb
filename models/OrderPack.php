@@ -350,6 +350,19 @@ class OrderPack extends EmbedModel
 		return null;
 	}
 
+	public function getTotalAmount()
+	{
+		return $this->pack_price + $this->shipping_price;
+	}
+
+	public function getFeeAmount()
+	{
+		$value = $this->getTotalAmount() * $this->pack_percentage_fee;
+
+		// Truncate 2 decimals
+		$value = floor($value *  100) / 100;
+		return $value;
+	}
 
 
 	public function deleteProduct($priceStockId)

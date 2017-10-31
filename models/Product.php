@@ -1462,7 +1462,10 @@ class Product extends CActiveRecord {
 	 * @return Order[]
 	 */
 	public function getOrders() {
-		return Order::findSerialized(['product_id' => $this->short_id]);
+		return Order::findSerialized([
+			'product_id' => $this->short_id,
+			'order_state' => Order::ORDER_STATE_PAID,
+		]);
 	}
 
 	/**

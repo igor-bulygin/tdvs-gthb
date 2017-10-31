@@ -311,10 +311,7 @@ class CartController extends AppPublicController
 				$pack->recalculateTotals();
 				$deviser = $pack->getDeviser();
 
-				$feePercentaje = $deviser->getSalesApplicationFee();
-
 				$stripeAmount = (int)(($pack->pack_price + $pack->shipping_price) * 100);
-				$todeviseFee = (int)($stripeAmount * $feePercentaje);
 
 				if (empty($deviser->settingsMapping->stripeInfoMapping->access_token)) {
 
@@ -344,6 +341,10 @@ class CartController extends AppPublicController
 							"stripe_account" => $deviser->settingsMapping->stripeInfoMapping->stripe_user_id,
 						]
 					);
+
+					$feePercentage = $deviser->getSalesApplicationFee();
+					$todeviseFee = round($stripeAmount * $feePercentage, 0);
+					$pack->pack_percentage_fee = $feePercentage;
 
 					// Create a charge for this customer in the connected deviser account
 					$charge = \Stripe\Charge::create(
@@ -382,7 +383,6 @@ class CartController extends AppPublicController
 					'receipt_email' => $charge->receipt_email,
 					'status' => $charge->status,
 				];
-				$pack->pack_percentage_fee = $feePercentaje;
 				$pack->setState(OrderPack::PACK_STATE_PAID);
 
 				$charges[] = $charge;
