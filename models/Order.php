@@ -35,6 +35,7 @@ class Order extends CActiveRecord {
 
     const ORDER_STATE_CART = 'order_state_cart';
     const ORDER_STATE_PAID = 'order_state_paid';
+    const ORDER_STATE_FAILED = 'order_state_failed';
 
 	/**
 	 * The attributes that should be serialized
@@ -328,7 +329,15 @@ class Order extends CActiveRecord {
 			$query->andWhere(["order_state" => $criteria["order_state"]]);
 		}
 
-        // Count how many items are with those conditions, before limit them for pagination
+		if ((array_key_exists("order_date_from", $criteria)) && (!empty($criteria["order_date_from"]))) {
+			$query->andWhere([">", "order_date", $criteria["order_date_from"]]);
+		}
+
+		if ((array_key_exists("order_date_to", $criteria)) && (!empty($criteria["order_date_to"]))) {
+			$query->andWhere(["<", "order_date", $criteria["order_date_to"]]);
+		}
+
+		// Count how many items are with those conditions, before limit them for pagination
         static::$countItemsFound = $query->count();
 
         // limit
@@ -534,6 +543,21 @@ class Order extends CActiveRecord {
 	public function isOrder()
 	{
 		if ($this->order_state != Order::ORDER_STATE_PAID) {
+			return false;
+		}
+
+		return true;
+	}
+
+
+	/**
+	 * Returns TRUE if the order is in state "failed"
+	 *
+	 * @return bool
+	 */
+	public function isFailed()
+	{
+		if ($this->order_state != Order::ORDER_STATE_FAILED) {
 			return false;
 		}
 

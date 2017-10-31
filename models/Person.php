@@ -2052,7 +2052,7 @@ class Person extends CActiveRecord implements IdentityInterface
 			$todeviseFee = Yii::$app->params['default_todevise_fee'];
 		}
 
-		if ($this->personalInfoMapping->country == 'ES') {
+		if (strtoupper($this->personalInfoMapping->country) == 'ES') {
 			$fee = $todeviseFee * (1 + Yii::$app->params['default_spain_vat']);
 		} else {
 			$fee = $todeviseFee;

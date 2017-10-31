@@ -16,6 +16,7 @@ use app\models\PostmanEmail;
 use app\models\SizeChart;
 use app\models\Tag;
 use Yii;
+use yii\base\Exception;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -353,10 +354,17 @@ class AdminController extends CController {
 		}
 	}
 
-	public function actionInvoicesExcel()
+	public function actionInvoicesExcel($date_from, $date_to)
 	{
+		$date_from_formatted = strtotime($date_from);
+		$date_to_formatted = strtotime($date_to);
+		if (!$date_to || !$date_from) {
+			throw new Exception("Invalid date");
+		}
 		$orders = Order::findSerialized([
 			'order_state' => Order::ORDER_STATE_PAID,
+			'order_date_from' => new \MongoDate($date_from_formatted),
+			'order_date_to' => new \MongoDate($date_to_formatted),
 			'order_by' => [
 				'order_date' => SORT_ASC
 			]
@@ -365,34 +373,43 @@ class AdminController extends CController {
 			'Invoice number',
 			'Date of transaction',
 			'Name of deviser',
-			'Adress of deviser',
-//			'Fee without VAT',
-//			'VAT (if applicable)',
+//			'Email of deviser',
+			'Address of deviser',
+			'Fee without VAT',
+			'VAT (if applicable)',
 			'Fee including VAT',
-			'Fee percentage',
+//			'Fee percentage',
 		];
 		$i = 0;
 		foreach ($orders as $order) {
 			$packs = $order->getPacks();
 			foreach ($packs as $pack) {
 				$feeAmount = $pack->getFeeAmount();
-				$vatAmount = 0;
 				if ($feeAmount) {
 					$i++;
 					$deviser = $pack->getDeviser();
+					if (strtoupper($deviser->personalInfoMapping->country) == 'ES') {
+						$feeWithoutVat = $feeAmount / 1.21;
+					} else {
+						$feeWithoutVat = $feeAmount;
+					}
 					$csv[] = [
-						$order->short_id.'/'.$pack->short_id,
+						$order->short_id . '/' . $pack->short_id,
 						$order->order_date->toDateTime()->format('d/m/Y'),
 						$deviser->getName(),
+//						$deviser->getEmail(),
 						$deviser->getCompleteAddress(),
-//						$feeAmount - $vatAmount,
-//						$vatAmount,
-						$feeAmount,
-						$pack->pack_percentage_fee * 100,
+						sprintf('%.2f', $feeWithoutVat),
+						sprintf('%.2f', $feeAmount - $feeWithoutVat),
+						sprintf('%.2f', $feeAmount),
+//						($pack->pack_percentage_fee * 100) . '%',
 					];
 				}
 			}
 		}
+
+//		var_dump($csv);
+//		die;
 
 		$result = '';
 		foreach ($csv as $fila) {
@@ -401,6 +418,12 @@ class AdminController extends CController {
 			}
 			$result .= "\n";
 		}
+
+		header("Content-type: text/txt");
+		header("Content-Disposition: attachment; filename=invoices-".$date_from."-".$date_to.".csv");
+		header("Pragma: no-cache");
+		header("Expires: 0");
+
 		echo $result;
 	}
 }

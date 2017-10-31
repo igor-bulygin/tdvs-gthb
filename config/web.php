@@ -252,6 +252,7 @@ $config = [
 				'/works' => 'product/index',
 
 				'/admin/reset-password/<person_id:[^/.]*?>' => 'admin/reset-password',
+				'/admin/invoices-excel/<date_from:[^/.]*?>/<date_to:[^/.]*?>' => 'admin/invoices-excel',
 
 				//Person
 				'/<person_type:(deviser|influencer|client)>/<slug:[^/.]*?>/<person_id:[^/.]*?>' => 'person/index',
