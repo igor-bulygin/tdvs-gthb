@@ -280,6 +280,9 @@ class CartController extends AppPublicController
 
 		try {
 
+			$order->setState(Order::ORDER_STATE_PAID);
+			$order->save();
+
 			Stripe::setApiKey(Yii::$app->params['stripe_secret_key']);
 
 			$person = $order->getPerson();
@@ -311,10 +314,7 @@ class CartController extends AppPublicController
 				$pack->recalculateTotals();
 				$deviser = $pack->getDeviser();
 
-				$feePercentaje = $deviser->getSalesApplicationFee();
-
 				$stripeAmount = (int)(($pack->pack_price + $pack->shipping_price) * 100);
-				$todeviseFee = (int)($stripeAmount * $feePercentaje);
 
 				if (empty($deviser->settingsMapping->stripeInfoMapping->access_token)) {
 
@@ -331,6 +331,11 @@ class CartController extends AppPublicController
 						],
 					]);
 
+					// No fees
+					$pack->pack_percentage_fee = 0;
+					$pack->pack_percentage_fee_todevise = 0;
+					$pack->pack_percentage_fee_vat = 0;
+
 				} else {
 
 					// Create a Token for the customer on the connected deviser account
@@ -345,6 +350,17 @@ class CartController extends AppPublicController
 						]
 					);
 
+					$todeviseFeePercentage = $deviser->getTodeviseFee();
+					$vatOverFeePercentage = $deviser->getVatOverFee();
+					$totalFeePercentage = $deviser->getSalesApplicationFee();
+
+					// Set fees
+					$pack->pack_percentage_fee = $totalFeePercentage;
+					$pack->pack_percentage_fee_todevise = $todeviseFeePercentage;
+					$pack->pack_percentage_fee_vat = $vatOverFeePercentage;
+
+					$applicationFeeAmount = round($stripeAmount * $totalFeePercentage, 0);
+
 					// Create a charge for this customer in the connected deviser account
 					$charge = \Stripe\Charge::create(
 						[
@@ -352,7 +368,7 @@ class CartController extends AppPublicController
 							'currency' => 'eur',
 							'amount' => $stripeAmount,
 							"description" => "Order Nº " . $order->short_id . "/" . $pack->short_id,
-							'application_fee' => $todeviseFee,
+							'application_fee' => $applicationFeeAmount,
 							"metadata" => [
 								"order_id" => $order->short_id,
 								"pack_id" => $pack->short_id,
@@ -365,6 +381,13 @@ class CartController extends AppPublicController
 						]
 					);
 				}
+
+				// Recalculate totals
+				$pack->pack_total_price = $pack->pack_price + $pack->shipping_price;
+				$pack->pack_total_fee_todevise = round($pack->pack_total_price * $pack->pack_percentage_fee_todevise, 2);
+				$pack->pack_total_fee_vat = round($pack->pack_total_fee_todevise * $pack->pack_percentage_fee_vat, 2);
+				$pack->pack_total_fee = $pack->pack_total_fee_todevise + $pack->pack_total_fee_vat;
+
 				$pack->charge_info = [
 					'id' => $charge->id,
 					'object' => $charge->object,
@@ -382,7 +405,6 @@ class CartController extends AppPublicController
 					'receipt_email' => $charge->receipt_email,
 					'status' => $charge->status,
 				];
-				$pack->pack_percentage_fee = $feePercentaje;
 				$pack->setState(OrderPack::PACK_STATE_PAID);
 
 				$charges[] = $charge;
@@ -392,8 +414,6 @@ class CartController extends AppPublicController
 
 			// Save charges responses and payment_info in the order
 			$order->setAttribute('payment_info', $currentPaymentInfo);
-//			$order->setAttribute('charges', $charges);
-			$order->setState(Order::ORDER_STATE_PAID);
 			$order->save();
 
 			$order->composeEmailOrderPaid(true);
@@ -408,6 +428,10 @@ class CartController extends AppPublicController
 		} catch (\Exception $e) {
 			$message = sprintf("Error in receive-token: " . $e->getMessage());
 			Yii::info($message, 'Stripe');
+
+			$order->setState(Order::ORDER_STATE_FAILED);
+			$order->save();
+
 
 			throw $e;
 		}

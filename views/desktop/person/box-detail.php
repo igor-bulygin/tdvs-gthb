@@ -53,10 +53,10 @@ $this->registerJs("var box = ".Json::encode($box), yii\web\View::POS_HEAD, 'box-
 				<span class="title" ng-bind="boxDetailCtrl.box.name"></span>
 				<p ng-bind="boxDetailCtrl.box.description"></p>
 			</div>
-			<div class="col-md-9 right-box-column">
+			<div class="col-md-12 right-box-column">
 				<p class="text-center empty-box-text" ng-if="boxDetailCtrl.box.products.length == 0" ng-cloak><span translate="person.boxes.BOX_IS_EMPTY"></span></p>
 				<div class="other-products-wrapper">
-					<div id="boxes-container" class="macy-container" data-columns="6">
+					<div id="works-container" class="macy-container grid-margin" data-columns="6">
 						<div class="menu-category list-group" ng-if="boxDetailCtrl.box.products.length > 0" ng-cloak ng-repeat="work in boxDetailCtrl.box.products">
 							<div class="grid">
 								<figure class="effect-zoe">
@@ -66,6 +66,7 @@ $this->registerJs("var box = ".Json::encode($box), yii\web\View::POS_HEAD, 'box-
 										<span class="close-product-icon" ng-click="boxDetailCtrl.deleteProduct(work.id)"></span>
 									<?php } ?>
 									<img class="grid-image" ng-src="{{work.main_photo_512 || '/imgs/product_placeholder.png'}}">
+									<span class="img-bgveil"></span>
 									<?php if (!$person->isConnectedUser()) { ?>
 										</image-hover-buttons>
 									<?php } ?>

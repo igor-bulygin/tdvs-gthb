@@ -221,7 +221,7 @@
 					vm.setBiographyRequired = true;
 				}
 			});
-			if(vm.person.media.photos !== 3)
+			if(vm.person.media.photos.length !== 3)
 				vm.setPhotosRequired = true;
 			else {
 				vm.setPhotosRequired = false;
