@@ -25,6 +25,7 @@
 			"DESCRIPTION":"Description",
 			"SHIPPING&POLICIES":"Shipping & Policies",
 			"SHIPPING_PRICE_SPAIN":"Shipping price to SPAIN",
+			"WARNING_CUSTOM_TAXES":"Custom taxes may apply",
 			"IS": "is",
 			"WARRANTY":"Warranty:",
 			"WORK_FAQS":"WORK FAQs",

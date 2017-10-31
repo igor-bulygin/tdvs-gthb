@@ -426,4 +426,15 @@ class Country extends CActiveRecord
 			'country_code' => static::getEUCountryCodes(),
 		]);
 	}
+
+	/**
+	 * Returns TRUE if the country code is one of the EU countries
+	 *
+	 * @param string $countryCode
+	 *
+	 * @return bool
+	 */
+	public static function isEUCountry($countryCode) {
+		return in_array($countryCode, static::getEUCountryCodes());
+	}
 }
