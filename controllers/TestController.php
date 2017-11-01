@@ -19,7 +19,7 @@ class TestController extends CController
 
 	public function actionTestComposeEmailOrder()
 	{
-		$short_id = '3654fd24';
+		$short_id = '976966c0';
 		$order = \app\models\Order::findOneSerialized($short_id);
 		if ($order) {
 			$order->composeEmailOrderPaid(false);
@@ -28,10 +28,22 @@ class TestController extends CController
 
 	public function actionMandrill()
 	{
-		$short_id = '5cf87f65';
+//		$scheduleds = EmailsHelper::listScheduled();
+//
+//		foreach ($scheduleds as $scheduled) {
+//			EmailsHelper::cancelScheduled($scheduled['_id']);
+//		}
+//
+		$scheduleds = EmailsHelper::listScheduled();
+		var_dump($scheduleds);
+		die;
+
+		$short_id = '976966c0';
 		$order = \app\models\Order::findOneSerialized($short_id);
 		if ($order) {
-			EmailsHelper::setOrderPaidNotifications($order);
+			$order->scheduleEmailsNewOrder();
+		} else {
+			throw new Exception('Order ' . $short_id . ' not found');
 		}
 	}
 }
