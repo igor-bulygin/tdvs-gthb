@@ -253,10 +253,10 @@ Yii::$app->opengraph->title = $this->title;
 									</div>
 									<figcaption>
 										<div class="row no-mar">
-											<div class="col-md-8">
+											<div class="col-xs-7 col-sm-7 col-md-8">
 												<span class="boxes-text align-left"><?= \yii\helpers\StringHelper::truncate($box->name, 18, '…') ?></span>
 											</div>
-											<div class="col-md-4 no-padding">
+											<div class="col-xs-5 col-sm-5 col-md-4 no-padding">
 												<button class="btn btn-single-love btn-love-box">
 													<span class="number"><?=count($products)?></span>
 													<span class="heart-icon"></span>
