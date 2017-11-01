@@ -247,6 +247,7 @@ $config = [
 
 				'/admin/reset-password/<person_id:[^/.]*?>' => 'admin/reset-password',
 				'/admin/invoices-excel/<date_from:[^/.]*?>/<date_to:[^/.]*?>' => 'admin/invoices-excel',
+				'/admin/mandrill-content/<message_id:[^/.]*?>' => 'admin/mandrill-content',
 
 				//Person
 				'/<person_type:(deviser|influencer|client)>/<slug:[^/.]*?>/<person_id:[^/.]*?>' => 'person/index',

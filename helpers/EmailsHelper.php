@@ -332,6 +332,48 @@ class EmailsHelper
 		}
 	}
 
+	public static function content($messageId)
+	{
+		try {
+
+			$apiKey = \Yii::$app->params['mandrill_api_key'];
+			$mandrill = new \Mandrill($apiKey);
+
+			$result = $mandrill->messages->content($messageId);
+
+			return $result;
+
+		} catch (\Mandrill_Unknown_Message $e) {
+
+			return null;
+
+		} catch (\Mandrill_Error $e) {
+			// Mandrill errors are thrown as exceptions
+			echo 'A mandrill error occurred: ' . get_class($e) . ' - ' . $e->getMessage();
+			// A mandrill error occurred: Mandrill_Unknown_Subaccount - No subaccount exists with the id 'customer-123'
+			throw $e;
+		}
+	}
+
+	public static function listSent($dateFrom, $dateTo)
+	{
+		try {
+
+			$apiKey = \Yii::$app->params['mandrill_api_key'];
+			$mandrill = new \Mandrill($apiKey);
+
+			$result = $mandrill->messages->search('*', $dateFrom, $dateTo);
+
+			return $result;
+
+		} catch (\Mandrill_Error $e) {
+			// Mandrill errors are thrown as exceptions
+			echo 'A mandrill error occurred: ' . get_class($e) . ' - ' . $e->getMessage();
+			// A mandrill error occurred: Mandrill_Unknown_Subaccount - No subaccount exists with the id 'customer-123'
+			throw $e;
+		}
+	}
+
 	protected static function getOrderCommonVars(Order $order)
 	{
 		$packs = $order->getPacks();
