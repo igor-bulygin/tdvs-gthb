@@ -33,6 +33,9 @@
 				</td>
 				<td class="quantity">
 					<span ng-click="shoppingCartCtrl.subQuantity(product)" style="cursor:pointer;"><i class="ion-minus"></i></span>&nbsp;<span class="shopping-cart-quantity-number" ng-bind="product.quantity"></span>&nbsp;<span style="cursor:pointer;" ng-click="shoppingCartCtrl.addQuantity(product)"><i class="ion-plus"></i></span>
+					<span class="row" ng-if="shoppingCartCtrl.EUCountries" ng-cloak>
+						<span class="col-md-12" ng-if="shoppingCartCtrl.isDeviserOutsideEU(pack)" ng-cloak translate="cart.shopping_cart.CUSTOM_TAXES"></span>
+					</span>
 				</td>
 				<td class="subtotal pt-15">
 					<span class="subtotal-amount">€<span ng-bind="product.price*product.quantity"></span></span>

@@ -8,18 +8,25 @@ use yii\web\BadRequestHttpException;
  *
  * @property int $deviser_id
  * @property string $short_id
- * @property string $shipping_type
- * @property double $shipping_price
- * @property array $shipping_info
  * @property double $pack_weight
+ * @property string $shipping_type
+ * @property array $shipping_info
+ * @property double $shipping_price
  * @property double $pack_price
+ * @property double $pack_total_price
+ * @property double $pack_percentage_fee_todevise
+ * @property double $pack_percentage_fee_vat
  * @property double $pack_percentage_fee
+ * @property double $pack_total_fee_todevise
+ * @property double $pack_total_fee_vat
+ * @property double $pack_total_fee
  * @property string $currency
  * @property string $weight_measure
  * @property string $pack_state
  * @property array $charge_info
  * @property array $products
  * @property array $state_history
+ * @property string $invoice_url
  *
  * @method Order getParentObject()
  */
@@ -48,18 +55,25 @@ class OrderPack extends EmbedModel
 		return [
 			'deviser_id',
 			'short_id',
-			'shipping_type',
-			'shipping_price',
-			'shipping_info',
 			'pack_weight',
+			'shipping_type',
+			'shipping_info',
+			'shipping_price',
 			'pack_price',
+			'pack_total_price',
+			'pack_percentage_fee_todevise',
+			'pack_percentage_fee_vat',
 			'pack_percentage_fee',
+			'pack_total_fee_todevise',
+			'pack_total_fee_vat',
+			'pack_total_fee',
 			'currency',
 			'weight_measure',
 			'pack_state',
 			'charge_info',
 			'products',
 			'state_history',
+			'invoice_url',
 		];
 	}
 
@@ -81,16 +95,41 @@ class OrderPack extends EmbedModel
 	public function rules()
 	{
 		return [
+			[
 				[
-					[
-						'shipping_type',
-					],
-					'in',
-					'range' => ['standard', 'express'],
-					'on' => Order::SCENARIO_CART
-				]
+					'shipping_type',
+				],
+				'in',
+				'range' => ['standard', 'express'],
+				'on' => [ORDER::SCENARIO_CART, ORDER::SCENARIO_ORDER],
+			],
+			[
+				[
+					'invoice_url',
+				],
+				'validateInvoiceUrl',
+				'skipOnEmpty' => false,
+				'when' => function($model) {
+					return $model->pack_state == OrderPack::PACK_STATE_SHIPPED;
+				},
+				'on' => [ORDER::SCENARIO_CART, ORDER::SCENARIO_ORDER],
+			],
 		];
 	}
+
+	/**
+	 * @param $attribute
+	 * @param $params
+	 */
+	public function validateInvoiceUrl($attribute, $params)
+	{
+		if (empty($this->invoice_url)) {
+			$this->addError('invoice_url', 'Invoice url is required to set this pack as shipped.');
+		} elseif (!$this->getDeviser()->existMediaFile($this->invoice_url)) {
+			$this->addError('invoice_url', sprintf('File %s does not exists.', $this->invoice_url));
+		}
+	}
+
 
 	/**
 	 * Prepare the ActiveRecord properties to serialize the objects properly, to retrieve an serialize
@@ -102,9 +141,7 @@ class OrderPack extends EmbedModel
 	{
 		switch ($view) {
 
-			case self::SERIALIZE_SCENARIO_ADMIN:
 			case Order::SERIALIZE_SCENARIO_CLIENT_ORDER:
-			case Order::SERIALIZE_SCENARIO_DEVISER_PACK:
 				self::$serializeFields = [
 					'short_id',
 					'deviser_id',
@@ -114,17 +151,57 @@ class OrderPack extends EmbedModel
 					'shipping_info',
 					'pack_weight',
 					'pack_price',
-					'pack_percentage_fee',
 					'currency',
 					'weight_measure',
 					'pack_state',
 					'pack_state_name' => 'packStateName',
 					'shipping_date' => 'shippingDate',
+					'invoice_link' => 'invoiceLink',
 
 					'products' => 'productsInfo',
 				];
 				self::$retrieveExtraFields = [
 					'products',
+					'invoice_url',
+				];
+
+
+				self::$translateFields = false;
+				break;
+
+			case self::SERIALIZE_SCENARIO_ADMIN:
+			case Order::SERIALIZE_SCENARIO_DEVISER_PACK:
+				self::$serializeFields = [
+					'short_id',
+					'deviser_id',
+					'deviser_info' => 'deviserInfo',
+					'pack_weight',
+					'shipping_type',
+					'shipping_info',
+					'shipping_price',
+					'pack_price',
+					'pack_total_price',
+					'pack_percentage_fee_todevise',
+					'pack_percentage_fee_vat',
+					'pack_percentage_fee',
+					'pack_total_fee_todevise',
+					'pack_total_fee_vat',
+					'pack_total_fee',
+					'currency',
+					'weight_measure',
+					'pack_state',
+					'pack_state_name' => 'packStateName',
+					'shipping_date' => 'shippingDate',
+					'invoice_link' => 'invoiceLink',
+					'charge_info',
+					'products',
+					'state_history',
+					'invoice_url',
+					'products' => 'productsInfo',
+				];
+				self::$retrieveExtraFields = [
+					'products',
+					'invoice_url',
 				];
 
 
@@ -144,6 +221,15 @@ class OrderPack extends EmbedModel
 			if ($state['state'] == OrderPack::PACK_STATE_SHIPPED) {
 				return $state['date'];
 			}
+		}
+
+		return null;
+	}
+
+	public function getInvoiceLink()
+	{
+		if ($this->invoice_url) {
+			return $this->getDeviser()->getDownloadFileUrl($this->invoice_url);
 		}
 
 		return null;
@@ -312,8 +398,6 @@ class OrderPack extends EmbedModel
 		return null;
 	}
 
-
-
 	public function deleteProduct($priceStockId)
 	{
 		$products = $this->getProducts();
@@ -363,6 +447,26 @@ class OrderPack extends EmbedModel
 				'date' => new \MongoDate(),
 			];
 		$this->setAttribute('state_history', $stateHistory);
+	}
+
+	public function setInvoice($invoiceUrl)
+	{
+		$this->invoice_url = $invoiceUrl;
+	}
+
+	public function setPackShippingInfo($data)
+	{
+		$shippingInfo = [
+			'company' => isset($data['company']) ? $data['company'] : null,
+			'tracking_number' => isset($data['tracking_number']) ? $data['tracking_number'] : null,
+			'tracking_link' => isset($data['tracking_link']) ? $data['tracking_link'] : null,
+		];
+		$this->setAttribute('shipping_info', $shippingInfo);
+	}
+
+	public function setInvoiceInfo($invoiceUrl)
+	{
+		$this->invoice_url = $invoiceUrl;
 	}
 
 }

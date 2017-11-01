@@ -340,7 +340,46 @@ class Country extends CActiveRecord
 	}
 
 	/**
+	 * Returns a list of countries in the European Union
+	 *
+	 * @return array
+	 */
+	public static function getEUCountryCodes() {
+		return [
+			'BE',
+			'BG',
+			'HR',
+			'CZ',
+			'DK',
+			'DE',
+			'EE',
+			'IE',
+			'EL',
+			'ES',
+			'FR',
+			'IT',
+			'CY',
+			'LV',
+			'LT',
+			'LU',
+			'HU',
+			'MT',
+			'NL',
+			'AT',
+			'PL',
+			'PT',
+			'RO',
+			'SI',
+			'SK',
+			'FI',
+			'SE',
+			'UK',
+		];
+	}
+
+	/**
 	 * Returns the list of available countries for shipping
+	 *
 	 * @return Country[]
 	 */
 	public static function getShippingCountries() {
@@ -375,5 +414,27 @@ class Country extends CActiveRecord
 		$worldwide->items = $continents;
 
 		return $worldwide;
+	}
+
+	/**
+	 * Returns the list of countries in the European Union
+	 *
+	 * @return Country[]
+	 */
+	public static function getEUCountries() {
+		return static::findSerialized([
+			'country_code' => static::getEUCountryCodes(),
+		]);
+	}
+
+	/**
+	 * Returns TRUE if the country code is one of the EU countries
+	 *
+	 * @param string $countryCode
+	 *
+	 * @return bool
+	 */
+	public static function isEUCountry($countryCode) {
+		return in_array($countryCode, static::getEUCountryCodes());
 	}
 }

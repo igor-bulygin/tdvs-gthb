@@ -1,13 +1,20 @@
 (function () {
 	"use strict";
 
-	function controller(cartDataService, UtilService, cartService, cartEvents, $rootScope, localStorageUtilService) {
+	function controller(cartDataService, UtilService, cartService, cartEvents, $rootScope, localStorageUtilService, locationDataService, personDataService) {
 		var vm = this;
 		vm.deleteItem = deleteItem;
 		vm.addQuantity = addQuantity;
 		vm.subQuantity = subQuantity;
 		vm.isObject = UtilService.isObject;
 		var cart_id = localStorageUtilService.getLocalStorage('cart_id');
+		vm.isDeviserOutsideEU = isDeviserOutsideEU;
+
+		init();
+
+		function init() {
+			getEUCountries();
+		}
 
 		function addQuantity(product) {
 			if((product.quantity < product.product_info.stock) || (product.product_info.stock === null))
@@ -49,6 +56,36 @@
 				id: cart_id,
 				productId: price_stock_id,
 			}, onDeleteItemSuccess, UtilService.onError);
+		}
+
+		function getEUCountries() {
+			function onGetEUCountriesSuccess(data) {
+				if (data) {
+					vm.EUCountries=data.map(c => c.id);
+				}
+			}
+			locationDataService.getEUCountries(null, onGetEUCountriesSuccess, UtilService.onError);
+		}
+
+		function isDeviserOutsideEU(pack) {
+			if (!pack.updatingInfo) {
+				pack.updatingInfo = true;
+				if (!angular.isUndefined(pack.isOutsideEU)) {
+					return pack.isOutsideEU;
+				}
+				function onGetPeopleSuccess(data) {
+					if (data && vm.EUCountries) {
+						pack.updatingInfo = false;
+						pack.isOutsideEU= vm.EUCountries.indexOf(data.country)==-1;
+						return pack.isOutsideEU;
+					}
+					return true;
+				}
+				personDataService.getPeople({personId: pack.deviser_id}, onGetPeopleSuccess, UtilService.onError);
+			}
+			else {
+				return pack.isOutsideEU;
+			}
 		}
 	}
 

@@ -252,6 +252,7 @@ $config = [
 				'/works' => 'product/index',
 
 				'/admin/reset-password/<person_id:[^/.]*?>' => 'admin/reset-password',
+				'/admin/invoices-excel/<date_from:[^/.]*?>/<date_to:[^/.]*?>' => 'admin/invoices-excel',
 
 				//Person
 				'/<person_type:(deviser|influencer|client)>/<slug:[^/.]*?>/<person_id:[^/.]*?>' => 'person/index',
@@ -421,6 +422,7 @@ $config = [
 				'GET api3/pub/v1/countries' => 'api3/pub/v1/country/index',
 				'GET api3/pub/v1/countries/worldwide' => 'api3/pub/v1/country/worldwide',
 				'GET api3/pub/v1/countries/shipping' => 'api3/pub/v1/country/shipping',
+				'GET api3/pub/v1/countries/eu-countries' => 'api3/pub/v1/country/eu-countries',
 				'GET api3/pub/v1/countries/<countryCode:[^/.]*?>' => 'api3/pub/v1/country/view',
 				'GET api3/pub/v1/invitations/<uuid:[^/.]*?>' => 'api3/pub/v1/invitation/view', // override "view" action to accept alphanumeric ids
 

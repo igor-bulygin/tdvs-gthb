@@ -98,17 +98,17 @@ Yii::$app->opengraph->title = $this->title;
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-4">
-					<a href="<?=Yii::$app->getUrlManager()->getHostInfo()?>/deviser/tanti/86794b6/store">
+					<a href="<?=Yii::$app->getUrlManager()->getHostInfo()?>/deviser/musa-bajo-el-arbol/0ca469a/store">
 						<img src="/imgs/home_square_1.jpg" class="responsive-image">
 					</a>
 				</div>
 				<div class="col-sm-4">
-					<a href="<?=Yii::$app->getUrlManager()->getHostInfo()?>/deviser/iconeta/c951bfk/store">
+					<a href="<?=Yii::$app->getUrlManager()->getHostInfo()?>/deviser/coast-cycles/b818a0w/store">
 						<img src="/imgs/home_square_2.jpg" class="responsive-image">
 					</a>
 				</div>
 				<div class="col-sm-4">
-					<a href="<?=Yii::$app->getUrlManager()->getHostInfo()?>/deviser/alison-fern-jewellery/72dbe4v/store">
+					<a href="<?=Yii::$app->getUrlManager()->getHostInfo()?>/deviser/pilar-del-campo/aa1e7c8/store">
 						<img src="/imgs/home_square_3.jpg" class="responsive-image">
 					</a>
 				</div>

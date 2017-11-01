@@ -35,6 +35,7 @@ class Order extends CActiveRecord {
 
     const ORDER_STATE_CART = 'order_state_cart';
     const ORDER_STATE_PAID = 'order_state_paid';
+    const ORDER_STATE_FAILED = 'order_state_failed';
 
 	/**
 	 * The attributes that should be serialized
@@ -127,14 +128,14 @@ class Order extends CActiveRecord {
 					'packs',
 				],
 				'safe',
-				'on' => self::SCENARIO_CART,
+				'on' => [self::SCENARIO_CART, self::SCENARIO_ORDER],
 			],
 			[
 				[
 					'packs',
 				],
 				'app\validators\SubDocumentValidator',
-				'on' => self::SCENARIO_CART,
+				'on' => [self::SCENARIO_CART, self::SCENARIO_ORDER],
 			],
 		];
 	}
@@ -275,7 +276,7 @@ class Order extends CActiveRecord {
      * Get a collection of entities serialized, according to serialization configuration
      *
      * @param array $criteria
-     * @return array
+     * @return Order[]
      * @throws Exception
      */
     public static function findSerialized($criteria = [])
@@ -328,7 +329,15 @@ class Order extends CActiveRecord {
 			$query->andWhere(["order_state" => $criteria["order_state"]]);
 		}
 
-        // Count how many items are with those conditions, before limit them for pagination
+		if ((array_key_exists("order_date_from", $criteria)) && (!empty($criteria["order_date_from"]))) {
+			$query->andWhere([">", "order_date", $criteria["order_date_from"]]);
+		}
+
+		if ((array_key_exists("order_date_to", $criteria)) && (!empty($criteria["order_date_to"]))) {
+			$query->andWhere(["<", "order_date", $criteria["order_date_to"]]);
+		}
+
+		// Count how many items are with those conditions, before limit them for pagination
         static::$countItemsFound = $query->count();
 
         // limit
@@ -374,7 +383,20 @@ class Order extends CActiveRecord {
     }
 
 
-    /**
+    public function beforeValidate()
+	{
+		if ($this->scenario == 'default') {
+			if ($this->isOrder()) {
+				$this->setScenario(Order::SCENARIO_ORDER);
+			} else {
+				$this->setScenario(Order::SCENARIO_CART);
+			}
+		}
+
+		return parent::beforeValidate();
+	}
+
+	/**
      * Add additional error to make easy show labels in client side
      */
     public function afterValidate()
@@ -529,6 +551,21 @@ class Order extends CActiveRecord {
 
 
 	/**
+	 * Returns TRUE if the order is in state "failed"
+	 *
+	 * @return bool
+	 */
+	public function isFailed()
+	{
+		if ($this->order_state != Order::ORDER_STATE_FAILED) {
+			return false;
+		}
+
+		return true;
+	}
+
+
+	/**
 	 * Returns TRUE if the order can be edited by the current user
 	 *
 	 * @return bool
@@ -600,38 +637,25 @@ class Order extends CActiveRecord {
 		$this->setSubDocument('billing_address', $value);
 	}
 
-	public function setPackState($packId, $newState)
-	{
+	public function getPack($packId) {
 		$packs = $this->getPacks();
-		$found = false;
 		foreach ($packs as $pack) {
 			if ($pack->short_id == $packId) {
-				$found = true;
-				$pack->setState($newState);
+				return $pack;
 			}
 		}
 
-		if (!$found) {
-			throw new NotFoundHttpException(sprintf('Pack with id %s not found', $packId));
-		}
-
-		$this->setPacks($packs);
-		$this->save();
+		return null;
 	}
 
-	public function setPackShippingInfo($packId, $data)
+	public function setPack($packId, $pack)
 	{
 		$packs = $this->getPacks();
 		$found = false;
-		foreach ($packs as $pack) {
-			if ($pack->short_id == $packId) {
+		foreach ($packs as $k => $onePack) {
+			if ($onePack->short_id == $packId) {
 				$found = true;
-				$shippingInfo = [
-					'company' => isset($data['company']) ? $data['company'] : null,
-					'tracking_number' => isset($data['tracking_number']) ? $data['tracking_number'] : null,
-					'tracking_link' => isset($data['tracking_link']) ? $data['tracking_link'] : null,
-				];
-				$pack->setAttribute('shipping_info', $shippingInfo);
+				$packs[$k] = $pack;
 			}
 		}
 
@@ -651,16 +675,7 @@ class Order extends CActiveRecord {
 
 				if (empty($this->shipping_address)) {
 					$shipping = $this->getShippingAddress();
-					$shipping->name = $person->personalInfoMapping->name;
-					$shipping->last_name = $person->personalInfoMapping->last_name;
-					$shipping->city = $person->personalInfoMapping->city;
-					$shipping->country = $person->personalInfoMapping->country;
-					$shipping->address = $person->personalInfoMapping->address;
-					$shipping->zip = $person->personalInfoMapping->zip;
-					$shipping->vat_id = $person->personalInfoMapping->vat_id;
-					$shipping->phone_number_prefix = $person->personalInfoMapping->phone_number_prefix;
-					$shipping->phone_number = $person->personalInfoMapping->phone_number;
-					$shipping->email = $person->credentials['emails'];
+					$shipping->copyValuesFromPerson($person);
 					$this->setShippingAddress($shipping);
 				}
 
@@ -681,6 +696,9 @@ class Order extends CActiveRecord {
 	{
 		if ($this->order_state == $newState) {
 			return;
+		}
+		if ($newState == Order::ORDER_STATE_PAID) {
+			$this->order_date = new MongoDate();
 		}
 		$this->order_state = $newState;
 		$stateHistory = $this->state_history;

@@ -5,6 +5,7 @@
 		var vm = this;
 		vm.deviserId=person.id;
 		vm.getOrders=getOrders;
+		vm.loading=true;
 
 		init();
 

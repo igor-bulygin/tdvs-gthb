@@ -2,7 +2,7 @@
 	"use strict";
 
 	function controller(productDataService, tagDataService, cartDataService, lovedDataService, boxDataService, 
-		$location, toastr, UtilService, $window, $uibModal, localStorageUtilService, $timeout) {
+		$location, toastr, UtilService, $window, $uibModal, localStorageUtilService, $timeout, $rootScope, cartEvents) {
 		var vm = this;
 		vm.quantity = 1;
 		vm.option_selected = {};
@@ -281,6 +281,7 @@
 				vm.cart = angular.copy(data);
 				vm.addingToCart=false;
 				vm.showCartPanel=true;
+				$rootScope.$broadcast(cartEvents.cartUpdated, {cart: vm.cart});
 				$timeout(function() { vm.showCartPanel=false; }, 10000);
 			}
 			function onSaveProductError(err) {
