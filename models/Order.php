@@ -2,6 +2,7 @@
 namespace app\models;
 
 use app\helpers\CActiveRecord;
+use app\helpers\EmailsHelper;
 use app\helpers\Utils;
 use Exception;
 use MongoDate;
@@ -699,6 +700,7 @@ class Order extends CActiveRecord {
 		}
 		if ($newState == Order::ORDER_STATE_PAID) {
 			$this->order_date = new MongoDate();
+			$this->scheduleEmailsNewOrder();
 		}
 		$this->order_state = $newState;
 		$stateHistory = $this->state_history;
@@ -710,4 +712,23 @@ class Order extends CActiveRecord {
 		$this->setAttribute('state_history', $stateHistory);
 	}
 
+	public function scheduleEmailsNewOrder()
+	{
+		EmailsHelper::clientNewOrder($this);
+
+		$packs = $this->getPacks();
+		foreach ($packs as $pack) {
+
+			$scheduledEmails = $pack->scheduled_emails;
+			$scheduledEmails['deviser_new_order'][] = EmailsHelper::deviserNewOrder($this, $pack->short_id);
+			$scheduledEmails['deviser_new_order'][] = EmailsHelper::deviserNewOrderReminder24($this, $pack->short_id);
+			$scheduledEmails['deviser_new_order'][] = EmailsHelper::deviserNewOrderReminder48($this, $pack->short_id);
+
+			$scheduledEmails['todevise_new_order'][] = EmailsHelper::todeviseNewOrderReminder72($this, $pack->short_id);
+
+			$pack->setAttribute('scheduled_emails', $scheduledEmails);
+		}
+		$this->setPacks($packs);
+		$this->save();
+	}
 }
