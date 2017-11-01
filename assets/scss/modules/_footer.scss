@@ -17,7 +17,7 @@ footer{
             bottom:auto;
         }
     }
-    @media (max-width: 768px){
+    @media (max-width: 991px){
         bottom: auto;
         max-height: none;
         position: relative;
@@ -27,8 +27,14 @@ footer{
         &:hover{
             bottom:auto;
         }
-        form{
+    }
+    form{
+        @media(max-width:768px){
             margin: 0 25px;
+        }
+        @media(min-width:768px) and (max-width:991px){
+            margin: auto;
+            width: 50%;
         }
     }
     .title{
@@ -36,7 +42,7 @@ footer{
 		letter-spacing: 0.4px;
 		font-size: 16px;
 		font-weight: bold;
-        @media (max-width: 768px){
+        @media (max-width: 991px){
             text-align:center;
             margin: 30px 0 12px;
             &.text-center.mb-20{
@@ -53,13 +59,13 @@ footer{
 			-moz-columns: 2;
 			width: 210px;
 		}
-        @media (max-width: 768px){
+        @media (max-width: 991px){
                 text-align:center;             
                 margin: 5px 0 10px 0;
             }
         li{
             list-style:none;
-            @media (max-width: 768px){
+            @media (max-width: 991px){
                 display: inline-block;
                 margin: 0 5px 10px;
             }
@@ -83,19 +89,19 @@ footer{
         font-family: $font-family--secondary;
         margin:0 0 10px;
         color: $dark_grey;
-        @media (max-width: 768px){
+        @media (max-width: 991px){
                 text-align:center;
             }
         &.social{
             margin-top:20px;
-            @media (max-width: 768px){
+            @media (max-width: 991px){
                 text-align:center;
             }
         }
     }
     .copyright{
         text-align: center;
-        @media(max-width: 768px){
+        @media(max-width: 991px){
             border-top: 1px solid #fff;
             margin-top: 0;
         }
@@ -106,7 +112,7 @@ footer{
                 padding: 0 4px;
                 display: inline-block;
                 list-style: none;
-                @media (max-width: 768px){
+                @media (max-width: 991px){
                     margin: 0.25em auto;
                 }
                 a{    
@@ -120,7 +126,7 @@ footer{
         }
         div{
             margin: 10px 0;
-            @media(max-width:768px){
+            @media(max-width:991px){
                 margin: 20px 0 0;
             }
         }
@@ -132,16 +138,21 @@ footer{
     .social-items{
         padding:0;
         margin:0;
-        @media (max-width: 768px){
-                margin: 0 auto;
+        @media (max-width: 768){
                 //width: 145px;
                 width: 100%;
-            }
+        }
+        @media (min-width:769px) and (max-width: 991px){
+                width: 50%;
+                float: initial;
+                margin: 0 auto;
+        }
         li{
             list-style: none;
             float: left;
             margin: 0 8px 0 0;
-            @media (max-width: 768px){
+            padding: 0;
+            @media (max-width: 991px){
                 //margin: 0 4px;
                 margin: 0 auto;
             }
@@ -168,7 +179,7 @@ footer{
                     @include transition-duration(0.3s);
                     @include transition-timing-function(ease-out);
                 }
-                @media (max-width: 768px){
+                @media (max-width: 991px){
                     margin: 0 auto;
                 }
             }
@@ -184,7 +195,7 @@ footer{
 			max-width: 225px;
 			-webkit-box-shadow: none;
     		box-shadow: none;
-            @media (max-width: 768px){
+            @media (max-width: 991px){
                 padding:0 10px;
                 max-width: 95%;
             }
@@ -211,7 +222,7 @@ footer{
         }
     }
     .input-group{
-        @media(max-width: 768px){
+        @media(max-width: 991px){
             margin-top: 10px !important;
         }
     }
