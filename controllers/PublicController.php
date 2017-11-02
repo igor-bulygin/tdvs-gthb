@@ -135,23 +135,13 @@ class PublicController extends CController
 		return $this->render("index-2", [
 			'banners' => $banners,
 			'totalDevisers' => count($devisers),
-			'devisers' => [
-				array_slice($devisers, 0, 3),
-				array_slice($devisers, 3, 3),
-				array_slice($devisers, 6, 3),
-				array_slice($devisers, 9, 3),
-			],
+			'devisers' => $devisers,
 			'works' => $works,
 			'htmlWorks' => $htmlWorks,
 			"category_id" => $category_id,
 			'boxes' => $boxes,
 			'stories' => $stories,
-			'influencers' => [
-				array_slice($influencers, 0, 3),
-				array_slice($influencers, 3, 3),
-				array_slice($influencers, 6, 3),
-				array_slice($influencers, 9, 3),
-			],
+			'influencers' => $influencers,
 			'totalInfluencers' => count($influencers),
 		]);
 	}

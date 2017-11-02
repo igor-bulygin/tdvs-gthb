@@ -7,7 +7,7 @@ use app\helpers\Utils;
 ?>
 
 <?php foreach ($works as $i => $work) { ?>
-	<div class="col-sm-4 col-md-2">
+	<div class="col-xs-6 col-sm-4 col-md-2">
 		<div class="menu-category list-group">
 			<div class="grid">
 				<figure class="effect-zoe">
