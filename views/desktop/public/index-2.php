@@ -122,7 +122,8 @@ Yii::$app->opengraph->title = $this->title;
 			<h3 class="title-product-name"><?=Yii::t('app/public', 'HOME_DEVISERS')?></h3>
 			<span class="subtitle-home"><?=Yii::t('app/public', 'HOME_DEVISERS_TEXT')?></span>
 			<!-- Controls -->
-			<div class="carusel-container">
+			<!-- carousel md lg -->
+			<div class="hidden-xs hidden-sm carusel-container">
 				<?php if ($totalDevisers > 3) { ?>
 					<a class="prev" href="#carousel-devisers" role="button" data-slide="prev">
 						<i class="ion-ios-arrow-left"></i>
@@ -133,32 +134,31 @@ Yii::$app->opengraph->title = $this->title;
 						<?php foreach ($devisers as $i => $deviser) { ?>
 							<?php if ($i % 3 === 0) { ?>
 								<div class="item <?= ($i==0) ? 'active' : '' ?>">
-							<?php } ?>
-								<div class="col-md-4 col-sm-4 col-xs-12 pad-showcase">
-									<a href="<?= $deviser->getStoreLink()?>">
-									<figure class="showcase influencers">
-										<img class="deviser-discover-img showcase-image" src="<?= $deviser->getHeaderSmallImage() ?>">
-									<figcaption>
-									<div class="row">
-										<div class="col-md-6">
-											<div class="title-product-name sm align-left">
-												<span><?= $deviser->getName() ?></span>
-											</div>
-											<div class="location align-left"><?= $deviser->personalInfoMapping->getCityLabel() ?></div>
+									<?php } ?>
+										<div class="col-md-4 col-sm-4 col-xs-12 pad-showcase">
+											<a href="<?= $deviser->getStoreLink()?>">
+												<figure class="showcase influencers">
+													<img class="deviser-discover-img showcase-image" src="<?= $deviser->getHeaderSmallImage() ?>">
+													<figcaption>
+														<div class="row">
+															<div class="col-md-6">
+																<div class="title-product-name sm align-left">
+																	<span><?= $deviser->getName() ?></span>
+																</div>
+																<div class="location align-left"><?= $deviser->personalInfoMapping->getCityLabel() ?></div>
+															</div>
+															<?php /*
+															<div class="col-md-6">
+																<button class="btn btn-icon mt-5"><i class="ion-ios-star-outline"></i><span>Follow</span>
+															</button>
+															</div>
+															*/?>
+														</div>
+													</figcaption>
+												</figure>
+											</a>
 										</div>
-										<?php /*
-										<div class="col-md-6">
-											<button class="btn btn-icon mt-5"><i class="ion-ios-star-outline"></i><span>Follow</span>
-										</button>
-										</div>
-										*/?>
-
-									</div>
-									</figcaption>
-									</figure>
-									</a>
-								</div>
-							<?php if (($i+1) % 3 === 0) { ?>
+									<?php if (($i+1) % 3 === 0) { ?>
 								</div>
 							<?php } ?>
 						<?php } ?>
@@ -166,6 +166,102 @@ Yii::$app->opengraph->title = $this->title;
 				</div>
 				<?php if ($totalDevisers > 3) { ?>
 					<a class="next" href="#carousel-devisers" role="button" data-slide="next">
+						<i class="ion-ios-arrow-right"></i>
+					</a>
+				<?php } ?>
+			</div>
+			<!-- carousel sm -->
+			<div class="hidden-xs hidden-md hidden-lg carusel-container">
+				<?php if ($totalDevisers > 2) { ?>
+					<a class="col-xs-0-5 prev" href="#carousel-devisers-sm" role="button" data-slide="prev">
+						<i class="ion-ios-arrow-left"></i>
+					</a>
+				<?php } ?>
+					<div class="col-xs-11 carousel-devisers-container <?= $totalDevisers > 2 ? 'carousel slide' : ''?>" id="carousel-devisers-sm" data-ride="carousel" data-interval="false">
+						<div class="<?= $totalDevisers > 2 ? 'carousel-inner' : ''?>" role="listbox">
+							<?php foreach ($devisers as $i => $deviser) { ?>
+								<?php if ($i % 2 === 0) { ?>
+									<div class="item <?= ($i==0) ? 'active' : '' ?>">
+										<?php } ?>
+											<div class="col-sm-6 col-xs-12 pad-showcase">
+												<a href="<?= $deviser->getStoreLink()?>">
+													<figure class="showcase influencers">
+														<img class="deviser-discover-img showcase-image" src="<?= $deviser->getHeaderSmallImage() ?>">
+														<figcaption>
+															<div class="row">
+																<div class="col-md-6">
+																	<div class="title-product-name sm align-left">
+																		<span><?= $deviser->getName() ?></span>
+																	</div>
+																	<div class="location align-left"><?= $deviser->personalInfoMapping->getCityLabel() ?></div>
+																</div>
+																<?php /*
+																<div class="col-md-6">
+																	<button class="btn btn-icon mt-5"><i class="ion-ios-star-outline"></i><span>Follow</span>
+																</button>
+																</div>
+																*/?>
+															</div>
+														</figcaption>
+													</figure>
+												</a>
+											</div>
+										<?php if (($i+1) % 2 === 0) { ?>
+									</div>
+								<?php } ?>
+							<?php } ?>
+						</div>
+					</div>
+				<?php if ($totalDevisers > 2) { ?>
+					<a class="col-xs-0-5 next" href="#carousel-devisers-sm" role="button" data-slide="next">
+						<i class="ion-ios-arrow-right"></i>
+					</a>
+				<?php } ?>
+			</div>
+			<!-- carousel xs -->
+			<div class="hidden-sm hidden-md hidden-lg carusel-container">
+				<?php if ($totalDevisers > 1) { ?>
+					<a class="col-xs-0-5 prev" href="#carousel-devisers-xs" role="button" data-slide="prev">
+						<i class="ion-ios-arrow-left"></i>
+					</a>
+				<?php } ?>
+					<div class="col-xs-11 carousel-devisers-container <?= $totalDevisers > 1 ? 'carousel slide' : ''?>" id="carousel-devisers-xs" data-ride="carousel" data-interval="false">
+						<div class="<?= $totalDevisers > 1 ? 'carousel-inner' : ''?>" role="listbox">
+							<?php foreach ($devisers as $i => $deviser) { ?>
+								<?php if ($i % 1 === 0) { ?>
+									<div class="item <?= ($i==0) ? 'active' : '' ?>">
+										<?php } ?>
+											<div class="col-sm-6 col-xs-12 pad-showcase">
+												<a href="<?= $deviser->getStoreLink()?>">
+													<figure class="showcase influencers">
+														<img class="deviser-discover-img showcase-image" src="<?= $deviser->getHeaderSmallImage() ?>">
+														<figcaption>
+															<div class="row">
+																<div class="col-md-6">
+																	<div class="title-product-name sm align-left">
+																		<span><?= $deviser->getName() ?></span>
+																	</div>
+																	<div class="location align-left"><?= $deviser->personalInfoMapping->getCityLabel() ?></div>
+																</div>
+																<?php /*
+																<div class="col-md-6">
+																	<button class="btn btn-icon mt-5"><i class="ion-ios-star-outline"></i><span>Follow</span>
+																</button>
+																</div>
+																*/?>
+															</div>
+														</figcaption>
+													</figure>
+												</a>
+											</div>
+										<?php if (($i+1) % 1 === 0) { ?>
+									</div>
+								<?php } ?>
+							<?php } ?>
+						</div>
+					</div>
+				<?php if ($totalDevisers > 1) { ?>
+					<a class="col-xs-0-5 next" href="#carousel-devisers-xs" role="button" data-slide="next">
 						<i class="ion-ios-arrow-right"></i>
 					</a>
 				<?php } ?>
@@ -179,6 +275,7 @@ Yii::$app->opengraph->title = $this->title;
 			<h3 class="title-product-name"><?=Yii::t('app/public', 'HOME_INFLUENCERS')?></h3>
 			<span class="subtitle-home"><?=Yii::t('app/public', 'HOME_INFLUENCERS_TEXT')?></span>
 			<!-- Controls -->
+			<!--carousel md lg-->
 			<div class="hidden-xs hidden-sm carusel-container">
 				<?php if ($totalInfluencers > 3) { ?>
 					<a class="prev" href="#carousel-influencers" role="button" data-slide="prev">
@@ -223,6 +320,96 @@ Yii::$app->opengraph->title = $this->title;
 					</a>
 				<?php } ?>
 			</div>
+			<!--carousel sm-->
+			<div class="hidden-xs hidden-md hidden-lg carusel-container">
+				<?php if ($totalInfluencers > 2) { ?>
+					<a class="prev col-xs-0-5" href="#carousel-influencers-sm" role="button" data-slide="prev">
+						<i class="ion-ios-arrow-left"></i>
+					</a>
+				<?php } ?>
+					<div class="col-xs-11 carousel-devisers-container <?= $totalInfluencers > 2 ? 'carousel slide' : ''?>" id="carousel-influencers-sm" data-ride="carousel" data-interval="false">
+						<div class="<?= $totalInfluencers > 2 ? 'carousel-inner' : ''?>" role="listbox">
+							<?php foreach ($influencers as $i => $influencer) { ?>
+								<?php if ($i % 2 === 0) { ?>
+									<div class="item <?= ($i==0) ? 'active' : '' ?>">
+								<?php } ?>
+									<div class="col-xs-12 col-sm-6 pad-showcase">
+										<a href="<?= $influencer->getLovedLink()?>">
+											<figure class="showcase influencers">
+												<img class="deviser-discover-img showcase-image" src="<?= $influencer->getHeaderSmallImage() ?>">
+												<figcaption>
+												<div class="row">
+													<div class="col-md-6">
+														<span class="title-product-name sm align-left"><?= $influencer->getName() ?></span>
+														<span class="location align-left"><?= $influencer->personalInfoMapping->getCityLabel() ?></span>
+													</div>
+													<?php /*
+													<div class="col-md-6">
+														<button class="btn btn-icon mt-5"><i class="ion-ios-star-outline"></i><span>Follow</span></button>
+													</div>
+													*/ ?>
+												</div>
+												</figcaption>
+											</figure>
+										</a>
+									</div>
+								<?php if (($i+1) % 2 === 0) { ?>
+									</div>
+								<?php } ?>
+							<?php } ?>
+						</div>
+					</div>
+				<?php if ($totalInfluencers > 2) { ?>
+					<a class="next col-xs-0-5" href="#carousel-influencers-sm" role="button" data-slide="next">
+						<i class="ion-ios-arrow-right"></i>
+					</a>
+				<?php } ?>
+			</div>
+			<!--carousel xs-->
+			<div class="hidden-sm hidden-md hidden-lg carusel-container">
+				<?php if ($totalInfluencers > 1) { ?>
+					<a class="prev col-xs-0-5" href="#carousel-influencers-xs" role="button" data-slide="prev">
+						<i class="ion-ios-arrow-left"></i>
+					</a>
+				<?php } ?>
+				<div class="col-xs-11 carousel-devisers-container <?= $totalInfluencers > 1 ? 'carousel slide' : ''?>" id="carousel-influencers-xs" data-ride="carousel" data-interval="false">
+					<div class="<?= $totalInfluencers > 1 ? 'carousel-inner' : ''?>" role="listbox">
+						<?php foreach ($influencers as $i => $influencer) { ?>
+							<?php if ($i % 1 === 0) { ?>
+								<div class="item <?= ($i==0) ? 'active' : '' ?>">
+							<?php } ?>
+								<div class="col-xs-12 col-sm-6 pad-showcase">
+									<a href="<?= $influencer->getLovedLink()?>">
+										<figure class="showcase influencers">
+											<img class="deviser-discover-img showcase-image" src="<?= $influencer->getHeaderSmallImage() ?>">
+											<figcaption>
+											<div class="row">
+												<div class="col-md-6">
+													<span class="title-product-name sm align-left"><?= $influencer->getName() ?></span>
+													<span class="location align-left"><?= $influencer->personalInfoMapping->getCityLabel() ?></span>
+												</div>
+												<?php /*
+												<div class="col-md-6">
+													<button class="btn btn-icon mt-5"><i class="ion-ios-star-outline"></i><span>Follow</span></button>
+												</div>
+												*/ ?>
+											</div>
+											</figcaption>
+										</figure>
+									</a>
+								</div>
+							<?php if (($i+1) % 1 === 0) { ?>
+								</div>
+							<?php } ?>
+						<?php } ?>
+					</div>
+				</div>
+				<?php if ($totalInfluencers > 1) { ?>
+					<a class="next col-xs-0-5" href="#carousel-influencers-xs" role="button" data-slide="next">
+						<i class="ion-ios-arrow-right"></i>
+					</a>
+				<?php } ?>
+			</div>
 		</div>
 	</section>
 <?php } ?>
@@ -235,7 +422,7 @@ Yii::$app->opengraph->title = $this->title;
 				<div class="row">
 					<?php foreach ($boxes as $box) {
 						$products = $box->getProductsPreview(); ?>
-						<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+						<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 pad-showcase">
 							<a href="<?= $box->getViewLink()?>">
 								<figure class="showcase">
 									<div class="images-box">

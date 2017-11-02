@@ -3495,6 +3495,9 @@ h3 {
 .carousel-devisers-container {
   max-width: 900px;
   margin: 0 auto; }
+  @media (max-width: 768px) {
+    .carousel-devisers-container {
+      float: initial; } }
 
 .carusel-container {
   position: relative; }
@@ -3506,7 +3509,12 @@ h3 {
     z-index: 10; }
     .carusel-container a.prev i {
       font-size: 46px; }
-    @media (min-width: 576px) and (max-width: 1199px) {
+    @media (max-width: 768px) {
+      .carusel-container a.prev {
+        float: initial;
+        padding: 0;
+        margin: auto; } }
+    @media (max-width: 1199px) {
       .carusel-container a.prev {
         left: 0; } }
   .carusel-container a.next {
@@ -3516,7 +3524,12 @@ h3 {
     right: 80px; }
     .carusel-container a.next i {
       font-size: 46px; }
-    @media (min-width: 576px) and (max-width: 1199px) {
+    @media (max-width: 768px) {
+      .carusel-container a.next {
+        float: initial;
+        padding: 0;
+        margin: auto; } }
+    @media (max-width: 1199px) {
       .carusel-container a.next {
         right: 0; } }
   .carusel-container a:focus {

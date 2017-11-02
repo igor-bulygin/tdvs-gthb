@@ -104,6 +104,9 @@
 .carousel-devisers-container{
 	max-width: 900px;
     margin: 0 auto;
+    @media(max-width:768px){
+    	float: initial;
+    }
 }
 .carusel-container{
 	position: relative;
@@ -117,7 +120,13 @@
             i{
                 font-size: 46px;
             }
-			@media (min-width:576px) and (max-width:1199px){
+            @media(max-width:768px){
+            	float: initial;
+			    padding: 0;
+			    margin: auto;
+            }
+			//@media (min-width:769px) and (max-width:1199px){
+			@media (max-width:1199px){
 				left: 0;
 			}
         }
@@ -129,7 +138,13 @@
             i{
                 font-size: 46px;
             }
-			@media (min-width:576px) and (max-width:1199px){
+            @media(max-width:768px){
+            	float: initial;
+			    padding: 0;
+			    margin: auto;
+            }
+			//@media (min-width:769px) and (max-width:1199px){
+			@media (max-width:1199px){
 				right: 0;
 			}
         }
