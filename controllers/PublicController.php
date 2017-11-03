@@ -111,16 +111,16 @@ class PublicController extends CController
 		}
 
 		// Devisers
-		$devisers = Person::getRandomDevisers(20, $categoryShortIds);
+		$devisers = Person::getRandomDevisers(21, $categoryShortIds);
+
+		// Influencers
+		$influencers = Person::getRandomInfluencers(21, $categoryShortIds);
 
 		// Boxes
 		$boxes = Box::getRandomBoxes(8, null, true);
 
 		// Stories
 		$stories = Story::getRandomStories(3);
-
-		// Influencers
-		$influencers = Person::getRandomInfluencers(12, $categoryShortIds);
 
 		// Works
 		$works = Product::getRandomWorks(48, $categoryShortIds);
@@ -129,20 +129,28 @@ class PublicController extends CController
 			'works' => $works,
 		]);
 
+		$devisersCarousel = $this->renderPartial('profiles-carousel', [
+			'persons' => $devisers,
+			'id' => 'devisers',
+		]);
+
+		$influencersCarousel = $this->renderPartial('profiles-carousel', [
+			'persons' => $influencers,
+			'id' => 'influencers',
+		]);
+
 		$this->layout = '/desktop/public-2.php';
 		$this->view->params['selectedCategory'] = isset($category) ? $category : null;
 
 		return $this->render("index-2", [
 			'banners' => $banners,
-			'totalDevisers' => count($devisers),
-			'devisers' => $devisers,
+			'devisersCarousel' => $devisersCarousel,
+			'influencersCarousel' => $influencersCarousel,
 			'works' => $works,
 			'htmlWorks' => $htmlWorks,
 			"category_id" => $category_id,
 			'boxes' => $boxes,
 			'stories' => $stories,
-			'influencers' => $influencers,
-			'totalInfluencers' => count($influencers),
 		]);
 	}
 
