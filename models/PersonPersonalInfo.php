@@ -111,7 +111,7 @@ class PersonPersonalInfo extends EmbedModel
 
 	public function getCompleteAddress()
 	{
-		return trim($this->address.' '.$this->number.' '.$this->zip.' '.$this->getLocationLabel());
+		return trim($this->vat_id.' '.$this->address.' '.$this->number.' '.$this->zip.' '.$this->getLocationLabel());
 	}
 
 	/**
