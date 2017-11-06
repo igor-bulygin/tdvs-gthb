@@ -36,7 +36,8 @@
 			"CONTINUE_PAYMENT": "Continue to payment methods"
 		},
 		"shopping_cart": {
-			"YOUR_SHOPPING_CART": "Your shopping cart"
+			"YOUR_SHOPPING_CART": "Your shopping cart",
+			"CUSTOM_TAXES": "Custom taxes may apply"
 		},
 		"summary": {
 			"CART_SUMMARY": "Cart summary",

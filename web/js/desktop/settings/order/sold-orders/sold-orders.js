@@ -17,10 +17,10 @@
 			vm.orders.forEach(function(order) {
 				order.totalPrice = order.totalShippingPrice = order.commission = order.to_receive = 0;
 				order.packs.forEach(function(pack) {
-					order.to_receive += (pack.pack_price + pack.shipping_price) * (1 - pack.pack_percentage_fee);
-					order.commission += (pack.pack_price+pack.shipping_price)*pack.pack_percentage_fee;
+					order.to_receive += pack.pack_total_price - pack.pack_total_fee;
+					order.commission += pack.pack_total_fee;
 					order.totalShippingPrice += pack.shipping_price;
-					order.totalPrice += pack.pack_price + pack.shipping_price;
+					order.totalPrice += pack.pack_total_price;
 				});
 				vm.ordersTotalPrice += order.totalPrice;
 				cartService.parseTags(order, vm.tags);

@@ -5,7 +5,7 @@
 		"general": {
 			"PERSONAL_INFORMATION": "Información personal",
 			"BRAND": "MARCA / NOMBRE ARTÍSTICO",
-			"IDENTIFIER": "CIF / NIF",
+			"IDENTIFIER": "CIF Empresa",
 			"REPRESENTATIVE_NAME": "NOMBRE REPRESENTATIVO",
 			"CHANGE_PASSWORD": " Cambiar contraseña",
 			"WEIGHT_MEASURE": "MEDIDA DE PESO",

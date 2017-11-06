@@ -2,6 +2,7 @@
 namespace app\models;
 
 use app\helpers\CActiveRecord;
+use app\helpers\EmailsHelper;
 use app\helpers\Utils;
 use Exception;
 use MongoDate;
@@ -35,6 +36,7 @@ class Order extends CActiveRecord {
 
     const ORDER_STATE_CART = 'order_state_cart';
     const ORDER_STATE_PAID = 'order_state_paid';
+    const ORDER_STATE_FAILED = 'order_state_failed';
 
 	/**
 	 * The attributes that should be serialized
@@ -275,7 +277,7 @@ class Order extends CActiveRecord {
      * Get a collection of entities serialized, according to serialization configuration
      *
      * @param array $criteria
-     * @return array
+     * @return Order[]
      * @throws Exception
      */
     public static function findSerialized($criteria = [])
@@ -328,7 +330,15 @@ class Order extends CActiveRecord {
 			$query->andWhere(["order_state" => $criteria["order_state"]]);
 		}
 
-        // Count how many items are with those conditions, before limit them for pagination
+		if ((array_key_exists("order_date_from", $criteria)) && (!empty($criteria["order_date_from"]))) {
+			$query->andWhere([">", "order_date", $criteria["order_date_from"]]);
+		}
+
+		if ((array_key_exists("order_date_to", $criteria)) && (!empty($criteria["order_date_to"]))) {
+			$query->andWhere(["<", "order_date", $criteria["order_date_to"]]);
+		}
+
+		// Count how many items are with those conditions, before limit them for pagination
         static::$countItemsFound = $query->count();
 
         // limit
@@ -542,6 +552,21 @@ class Order extends CActiveRecord {
 
 
 	/**
+	 * Returns TRUE if the order is in state "failed"
+	 *
+	 * @return bool
+	 */
+	public function isFailed()
+	{
+		if ($this->order_state != Order::ORDER_STATE_FAILED) {
+			return false;
+		}
+
+		return true;
+	}
+
+
+	/**
 	 * Returns TRUE if the order can be edited by the current user
 	 *
 	 * @return bool
@@ -673,6 +698,10 @@ class Order extends CActiveRecord {
 		if ($this->order_state == $newState) {
 			return;
 		}
+		if ($newState == Order::ORDER_STATE_PAID) {
+			$this->order_date = new MongoDate();
+			$this->scheduleEmailsNewOrder();
+		}
 		$this->order_state = $newState;
 		$stateHistory = $this->state_history;
 		$stateHistory[] =
@@ -683,4 +712,23 @@ class Order extends CActiveRecord {
 		$this->setAttribute('state_history', $stateHistory);
 	}
 
+	public function scheduleEmailsNewOrder()
+	{
+		EmailsHelper::clientNewOrder($this);
+
+		$packs = $this->getPacks();
+		foreach ($packs as $pack) {
+
+			$scheduledEmails = $pack->scheduled_emails;
+			$scheduledEmails['deviser_new_order'][] = EmailsHelper::deviserNewOrder($this, $pack->short_id);
+			$scheduledEmails['deviser_new_order'][] = EmailsHelper::deviserNewOrderReminder24($this, $pack->short_id);
+			$scheduledEmails['deviser_new_order'][] = EmailsHelper::deviserNewOrderReminder48($this, $pack->short_id);
+
+			$scheduledEmails['todevise_new_order'][] = EmailsHelper::todeviseNewOrderReminder72($this, $pack->short_id);
+
+			$pack->setAttribute('scheduled_emails', $scheduledEmails);
+		}
+		$this->setPacks($packs);
+		$this->save();
+	}
 }

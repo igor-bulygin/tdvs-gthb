@@ -33,17 +33,15 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 			<div class="col-md-10" ng-controller="editFaqCtrl as editFaqCtrl">
 				<div class="faq-wrapper faq-edit-list" ng-if="!editFaqCtrl.saving" ng-cloak>
 					<!-- <div class="section-title">FAQ</div> -->
-					<div id="link-faq-done" ng-if="editFaqCtrl.person.faq.length>0">
+					<div id="link-faq-done">
 						<a class="red-link-btn" href="#" ng-click="editFaqCtrl.done()">
 							<span translate="person.faq.DONE_FAQ"></span>
 						</a>
 					</div>
 					<div class="edit-faq-wrapper" ng-cloak ng-if="editFaqCtrl.person.faq.length > 0">
-
 						<div dnd-list="editFaqCtrl.person.faq" dnd-dragover="editFaqCtrl.dragOver(index)">
 							<div class="delete-options-wrapper" ng-repeat="question in editFaqCtrl.person.faq track by $index" style="cursor:move;" dnd-draggable="question" dnd-effect-allowed="move" dnd-dragstart="editFaqCtrl.dragStart($index)" dnd-canceled="editFaqCtrl.canceled()" dnd-moved="editFaqCtrl.moved($index)">
 								<div class="delete-links-wrapper">
-									<!--a class="delete-link pull-right" href="#" ng-click="editFaqCtrl.deleteQuestion($index)"><span translate="person.faq.DELETE_QUESTION"></span></a-->
 									<a class="delete-link pull-right" href="#" ng-click="editFaqCtrl.deleteQuestion($index)"><span translate="person.faq.DELETE_QUESTION"></span></a>
 								</div>
 								<div class="edit-faq-panel-wrapper">

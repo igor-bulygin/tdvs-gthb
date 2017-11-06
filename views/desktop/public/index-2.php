@@ -8,9 +8,9 @@ Index2Asset::register($this);
 $this->title = Yii::t('app/public', 'INDEX_TITLE');
 Yii::$app->opengraph->title = $this->title;
 
-/** @var Person[][] $devisers */
+/** @var Person[] $devisers */
 /** @var int $totalDevisers */
-/** @var Person[][] $influencers */
+/** @var Person[] $influencers */
 /** @var int $totalInfluencers */
 /** @var \app\models\Product[] $works */
 /** @var \app\models\Box[] $boxes */
@@ -59,7 +59,7 @@ Yii::$app->opengraph->title = $this->title;
 <!-- /BANNER -->
 
 <!-- SUB-BANNER -->
-<section class="sub-banner">
+<section class="sub-banner hidden-xs hidden-sm">
 	<div class="container container-sub-baner">
 		<div class="row">
 			<div class="col-sm-4 col-xs-6 title-wrapper title-1 righty">
@@ -91,186 +91,102 @@ Yii::$app->opengraph->title = $this->title;
 			</div>
 		</div>
 	</div>
-	</section>
-	<!-- /SUB-BANNER -->
-	<!-- SEASON BANNERS -->
-	<section class="season-banners">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-4">
-					<a href="<?=Yii::$app->getUrlManager()->getHostInfo()?>/deviser/tanti/86794b6/store">
-						<img src="/imgs/home_square_1.jpg" class="responsive-image">
-					</a>
-				</div>
-				<div class="col-sm-4">
-					<a href="<?=Yii::$app->getUrlManager()->getHostInfo()?>/deviser/iconeta/c951bfk/store">
-						<img src="/imgs/home_square_2.jpg" class="responsive-image">
-					</a>
-				</div>
-				<div class="col-sm-4">
-					<a href="<?=Yii::$app->getUrlManager()->getHostInfo()?>/deviser/alison-fern-jewellery/72dbe4v/store">
-						<img src="/imgs/home_square_3.jpg" class="responsive-image">
-					</a>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- /SEASON BANNERS -->
-	<!-- SHOWCASE -->
-	<section class="showcase-wrapper">
-		<div class="container">
-			<h3 class="title-product-name"><?=Yii::t('app/public', 'HOME_DEVISERS')?></h3>
-			<span class="subtitle-home"><?=Yii::t('app/public', 'HOME_DEVISERS_TEXT')?></span>
-			<!-- Controls -->
-			<div class="carusel-container">
-				<?php if ($totalDevisers > 3) { ?>
-					<a class="prev" href="#carousel-devisers" role="button" data-slide="prev">
-						<i class="ion-ios-arrow-left"></i>
-					</a>
-				<?php } ?>
-				<div class="carousel-devisers-container <?= $totalDevisers > 3 ? 'carousel slide' : ''?>" id="carousel-devisers" data-ride="carousel" data-interval="false">
-					<div class="<?= $totalDevisers > 3 ? 'carousel-inner' : ''?>" role="listbox">
-						<?php foreach ($devisers as $i => $group) { ?>
-					<div class="item <?= ($i==0) ? 'active' : '' ?>">
-						<?php foreach ($group as $k => $deviser) { ?>
-						<div class="col-md-4 col-sm-4 col-xs-12 pad-showcase">
-								<a href="<?= $deviser->getStoreLink()?>">
-								<figure class="showcase influencers">
-									<img class="deviser-discover-img showcase-image" src="<?= $deviser->getHeaderSmallImage() ?>">
-								<figcaption>
-								<div class="row">
-									<div class="col-md-6">
-										<div class="title-product-name sm align-left">
-											<span><?= $deviser->getName() ?></span>
-										</div>
-										<div class="location align-left"><?= $deviser->personalInfoMapping->getCityLabel() ?></div>
-									</div>
-									<?php /*
-									<div class="col-md-6">
-										<button class="btn btn-icon mt-5"><i class="ion-ios-star-outline"></i><span>Follow</span>
-									</button>
-									</div>
-									*/?>
+</section>
+<!-- /SUB-BANNER -->
 
-								</div>
-								</figcaption>
-								</figure>
-								</a>
-							</div>
-						<?php } ?>
-					</div>
-					<?php } ?>
-					</div>
-				</div>
-				<?php if ($totalDevisers > 3) { ?>
-					<a class="next" href="#carousel-devisers" role="button" data-slide="next">
-						<i class="ion-ios-arrow-right"></i>
-					</a>
-				<?php } ?>
+<!-- SEASON BANNERS -->
+<section class="season-banners">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4">
+				<a href="<?=Yii::$app->getUrlManager()->getHostInfo()?>/deviser/musa-bajo-el-arbol/0ca469a/store">
+					<img src="/imgs/home_square_1.jpg" class="responsive-image">
+				</a>
+			</div>
+			<div class="col-sm-4">
+				<a href="<?=Yii::$app->getUrlManager()->getHostInfo()?>/deviser/coast-cycles/b818a0w/store">
+					<img src="/imgs/home_square_2.jpg" class="responsive-image">
+				</a>
+			</div>
+			<div class="col-sm-4">
+				<a href="<?=Yii::$app->getUrlManager()->getHostInfo()?>/deviser/pilar-del-campo/aa1e7c8/store">
+					<img src="/imgs/home_square_3.jpg" class="responsive-image">
+				</a>
 			</div>
 		</div>
-	</section>
-	<!-- /SHOWCASE -->
-	<?php if ($totalInfluencers) { ?>
-	<section class="showcase-wrapper">
-		<div class="container">
-			<h3 class="title-product-name"><?=Yii::t('app/public', 'HOME_INFLUENCERS')?></h3>
-			<span class="subtitle-home"><?=Yii::t('app/public', 'HOME_INFLUENCERS_TEXT')?></span>
-			<!-- Controls -->
-			<div class="carusel-container">
-				<?php if ($totalInfluencers > 3) { ?>
-					<a class="prev" href="#carousel-influencers" role="button" data-slide="prev">
-						<i class="ion-ios-arrow-left"></i>
-					</a>
-				<?php } ?>
-				<div class="carousel-devisers-container <?= $totalInfluencers > 3 ? 'carousel slide' : ''?>" id="carousel-influencers" data-ride="carousel" data-interval="false">
-					<div class="<?= $totalInfluencers > 3 ? 'carousel-inner' : ''?>" role="listbox">
-						<?php foreach ($influencers as $i => $group) { ?>
-							<div class="item <?= ($i==0) ? 'active' : '' ?>">
-								<?php foreach ($group as $k => $influencer) { ?>
-									<div class="col-md-4 col-sm-4 col-xs-6 pad-showcase">
-										<a href="<?= $influencer->getLovedLink()?>">
-											<figure class="showcase influencers">
-												<img class="deviser-discover-img showcase-image" src="<?= $influencer->getHeaderSmallImage() ?>">
-												<figcaption>
-												<div class="row">
-													<div class="col-md-6">
-														<span class="title-product-name sm align-left"><?= $influencer->getName() ?></span>
-														<span class="location align-left"><?= $influencer->personalInfoMapping->getCityLabel() ?></span>
-													</div>
-													<?php /*
-													<div class="col-md-6">
-														<button class="btn btn-icon mt-5"><i class="ion-ios-star-outline"></i><span>Follow</span></button>
-													</div>
-													*/ ?>
-												</div>
-												</figcaption>
-											</figure>
-										</a>
-									</div>
-								<?php } ?>
-							</div>
-						<?php } ?>
-					</div>
-				</div>
-				<?php if ($totalInfluencers > 3) { ?>
-					<a class="next" href="#carousel-influencers" role="button" data-slide="next">
-						<i class="ion-ios-arrow-right"></i>
-					</a>
-				<?php } ?>
-			</div>
-		</div>
-	</section>
-<?php } ?>
-<!-- GRID -->
+	</div>
+</section>
+<!-- /SEASON BANNERS -->
+
+<!-- SHOWCASE -->
 <section class="showcase-wrapper">
-		<div class="container">
-			<h3 class="title-product-name"><?=Yii::t('app/public', 'HOME_BOXES')?></h3>
-			<span class="subtitle-home"><?=Yii::t('app/public', 'HOME_BOXES_TEXT')?></span>
-			<div class="boxes-container">
-				<div class="row">
-					<?php foreach ($boxes as $box) {
-						$products = $box->getProductsPreview(); ?>
-						<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-							<a href="<?= $box->getViewLink()?>">
-								<figure class="showcase">
-									<div class="images-box">
-										<div class="bottom-top-images">
-											<div class="image-left">
-												<img src="<?=isset($products[0]) ? $products[0]['main_photo_512'] : 'imgs/img-default.jpg'?>" class="showcase-image">
-											</div>
-											<div class="image-right">
-												<img src="<?=isset($products[1]) ? $products[1]['main_photo_512'] : 'imgs/img-default.jpg'?>" class="showcase-image">
-											</div>
+	<div class="container">
+		<h3 class="title-product-name"><?=Yii::t('app/public', 'HOME_DEVISERS')?></h3>
+		<span class="subtitle-home"><?=Yii::t('app/public', 'HOME_DEVISERS_TEXT')?></span>
+		<!-- Controls -->
+		<?=$devisersCarousel?>
+	</div>
+</section>
+
+<!-- /SHOWCASE -->
+<section class="showcase-wrapper">
+	<div class="container">
+		<h3 class="title-product-name"><?=Yii::t('app/public', 'HOME_INFLUENCERS')?></h3>
+		<span class="subtitle-home"><?=Yii::t('app/public', 'HOME_INFLUENCERS_TEXT')?></span>
+		<!-- Controls -->
+		<?=$influencersCarousel?>
+	</div>
+</section>
+
+<!-- GRID BOXES -->
+<section class="showcase-wrapper">
+	<div class="container">
+		<h3 class="title-product-name"><?=Yii::t('app/public', 'HOME_BOXES')?></h3>
+		<span class="subtitle-home"><?=Yii::t('app/public', 'HOME_BOXES_TEXT')?></span>
+		<div class="boxes-container">
+			<div class="row">
+				<?php foreach ($boxes as $box) {
+					$products = $box->getProductsPreview(); ?>
+					<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 pad-showcase">
+						<a href="<?= $box->getViewLink()?>">
+							<figure class="showcase">
+								<div class="images-box">
+									<div class="bottom-top-images">
+										<div class="image-left">
+											<img src="<?=isset($products[0]) ? $products[0]['main_photo_512'] : 'imgs/img-default.jpg'?>" class="showcase-image">
 										</div>
-										<div class="bottom-image">
-											<img src="<?=isset($products[2]) ? $products[2]['main_photo_512'] : 'imgs/img-default.jpg'?>" class="showcase-image">
+										<div class="image-right">
+											<img src="<?=isset($products[1]) ? $products[1]['main_photo_512'] : 'imgs/img-default.jpg'?>" class="showcase-image">
 										</div>
 									</div>
-									<figcaption>
-										<div class="row no-mar">
-											<div class="col-md-8">
-												<span class="boxes-text align-left"><?= \yii\helpers\StringHelper::truncate($box->name, 18, '…') ?></span>
-											</div>
-											<div class="col-md-4 no-padding">
-												<button class="btn btn-single-love btn-love-box">
-													<span class="number"><?=count($products)?></span>
-													<span class="heart-icon"></span>
-												</button>
-											</div>
+									<div class="bottom-image">
+										<img src="<?=isset($products[2]) ? $products[2]['main_photo_512'] : 'imgs/img-default.jpg'?>" class="showcase-image">
+									</div>
+								</div>
+								<figcaption>
+									<div class="row no-mar">
+										<div class="col-xs-7 col-sm-7 col-md-8">
+											<span class="boxes-text align-left"><?= \yii\helpers\StringHelper::truncate($box->name, 18, '…') ?></span>
 										</div>
-									</figcaption>
-								</figure>
-							</a>
-						</div>
-					<?php } ?>
-				</div>
+										<div class="col-xs-5 col-sm-5 col-md-4 no-padding">
+											<button class="btn btn-single-love btn-love-box">
+												<span class="number"><?=count($products)?></span>
+												<span class="heart-icon"></span>
+											</button>
+										</div>
+									</div>
+								</figcaption>
+							</figure>
+						</a>
+					</div>
+				<?php } ?>
 			</div>
 		</div>
+	</div>
 </section>
 <!-- /GRID -->
 
-<!-- GRID -->
+<!-- GRID WORKS -->
 <section class="grid-wrapper" id="grid-product-home">
 	<div class="container">
 		<h3 class="title-product-name"><?=Yii::t('app/public', 'HOME_WORKS')?></h3>

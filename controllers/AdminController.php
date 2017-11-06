@@ -4,21 +4,26 @@ namespace app\controllers;
 
 use app\helpers\CAccessRule;
 use app\helpers\CController;
+use app\helpers\EmailsHelper;
 use app\helpers\Utils;
 use app\models\Category;
 use app\models\Country;
 use app\models\Invitation;
 use app\models\MetricType;
 use app\models\OldProduct;
+use app\models\Order;
 use app\models\Person;
 use app\models\PostmanEmail;
 use app\models\SizeChart;
 use app\models\Tag;
 use Yii;
+use yii\base\Exception;
 use yii\data\ActiveDataProvider;
+use yii\data\ArrayDataProvider;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\mongodb\Collection;
+use yii\web\NotFoundHttpException;
 
 class AdminController extends CController {
 	public $defaultAction = "index";
@@ -172,6 +177,50 @@ class AdminController extends CController {
 		];
 
 		return Yii::$app->request->isAjax ? $this->renderPartial("postman-emails", $data) : $this->render("postman-emails", $data);
+	}
+
+	public function actionMandrillSent($filters = null) {
+
+		$emails = EmailsHelper::listSent(null, null);
+
+		$provider = new ArrayDataProvider([
+			'allModels' => $emails,
+			'pagination' => ['pageSize' => 100]
+		]);
+
+		$data = [
+			'emails' => $provider,
+		];
+
+		return Yii::$app->request->isAjax ? $this->renderPartial("mandrill-sent", $data) : $this->render("mandrill-sent", $data);
+	}
+
+	public function actionMandrillScheduled($filters = null) {
+
+		$emails = EmailsHelper::listScheduled();
+
+		$provider = new ArrayDataProvider([
+			'allModels' => $emails,
+			'pagination' => ['pageSize' => 100]
+		]);
+
+		$data = [
+			'emails' => $provider,
+		];
+
+		return Yii::$app->request->isAjax ? $this->renderPartial("mandrill-scheduled", $data) : $this->render("mandrill-scheduled", $data);
+	}
+
+	public function actionMandrillContent($message_id) {
+
+		$message = EmailsHelper::content($message_id);
+
+		if (!$message) {
+			throw new NotFoundHttpException("Message not found");
+		}
+		$this->layout = '/desktop/empty-layout.php';
+
+		return $this->renderContent($message['html']);
 	}
 
 	public function actionTags($filters = null) {
@@ -350,5 +399,73 @@ class AdminController extends CController {
 
 			echo '<pre>'.print_r($person->credentials, true).'</pre>';
 		}
+	}
+
+	public function actionInvoicesExcel($date_from, $date_to)
+	{
+		$date_from_formatted = strtotime($date_from);
+		$date_to_formatted = strtotime($date_to);
+		if (!$date_to || !$date_from) {
+			throw new Exception("Invalid date");
+		}
+		$orders = Order::findSerialized([
+			'order_state' => Order::ORDER_STATE_PAID,
+			'order_date_from' => new \MongoDate($date_from_formatted),
+			'order_date_to' => new \MongoDate($date_to_formatted),
+			'order_by' => [
+				'order_date' => SORT_ASC
+			]
+		]);
+		$csv[] = [
+			'Invoice number',
+			'Date of transaction',
+			'Name of deviser',
+//			'Email of deviser',
+			'Address of deviser',
+			'Fee without VAT',
+			'VAT (if applicable)',
+			'Fee including VAT',
+//			'Fee percentage',
+		];
+		$i = 0;
+		foreach ($orders as $order) {
+			$packs = $order->getPacks();
+			foreach ($packs as $pack) {
+				$feeAmount = $pack->pack_total_fee;
+				if ($feeAmount) {
+					$i++;
+					$deviser = $pack->getDeviser();
+					$csv[] = [
+						$order->short_id . '/' . $pack->short_id,
+						$order->order_date->toDateTime()->format('d/m/Y'),
+						$deviser->getName(),
+//						$deviser->getEmail(),
+						$deviser->getCompleteAddress(),
+						$pack->pack_total_fee - $pack->pack_total_fee_vat,
+						$pack->pack_total_fee_vat,
+						$pack->pack_total_fee,
+//						($pack->pack_percentage_fee * 100) . '%',
+					];
+				}
+			}
+		}
+
+//		var_dump($csv);
+//		die;
+
+		$result = '';
+		foreach ($csv as $fila) {
+			foreach ($fila as $valor) {
+				$result .= '"'.$valor.'";';
+			}
+			$result .= "\n";
+		}
+
+		header("Content-type: text/txt");
+		header("Content-Disposition: attachment; filename=invoices-".$date_from."-".$date_to.".csv");
+		header("Pragma: no-cache");
+		header("Expires: 0");
+
+		echo $result;
 	}
 }

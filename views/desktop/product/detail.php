@@ -421,16 +421,21 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 								$warranty = $product->getWarrantyLabel();
 								?>
 								<?php if ($returns) { ?>
-								<div class="returns-row">
-									<span translate="product.detail.RETURNS"></span>
-									<span class="bold"><?=$returns?></span>
-								</div>
+									<div class="returns-row">
+										<span translate="product.detail.RETURNS"></span>
+										<span class="bold"><?=$returns?></span>
+									</div>
 								<?php } ?>
 								<?php if ($warranty) { ?>
-								<div class="returns-row">
-									<span translate="product.detail.WARRANTY"></span>
-									<span class="bold"><?=$warranty?></span>
-								</div>
+									<div class="returns-row">
+										<span translate="product.detail.WARRANTY"></span>
+										<span class="bold"><?=$warranty?></span>
+									</div>
+								<?php } ?>
+								<?php if (!$person->isFromEU()) { ?>
+									<div class="returns-row mt-20">
+										<span translate="product.detail.WARNING_CUSTOM_TAXES"></span>
+									</div>
 								<?php } ?>
 							</div>
 						</div>

@@ -11,11 +11,18 @@
 				isArray: true
 			}
 		});
+		var EUCountry = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'countries/eu-countries', {}, {
+			'get': {
+				method: 'GET',
+				isArray: true
+			}
+		});
 
 		this.getCountry = getCountry;
 		this.getLocation = getLocation;
 		this.getWorldWide = getWorldWide;
 		this.getShippingCountries= getShippingCountries;
+		this.getEUCountries=getEUCountries;
 
 		function getCountry(params, onSuccess, onError) {
 			apiMethods.get(Country, params, onSuccess, onError);
@@ -31,6 +38,10 @@
 
 		function getShippingCountries(params, onSuccess, onError) {
 			apiMethods.get(ShippingCountry, params, onSuccess, onError);
+		}
+
+		function getEUCountries(params, onSuccess, onError) {
+			apiMethods.get(EUCountry, params, onSuccess, onError);
 		}
 	}
 

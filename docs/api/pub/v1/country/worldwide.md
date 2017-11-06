@@ -1,4 +1,4 @@
-### Countries - Index (GET list)
+### Countries - Worldwide (GET list)
 
 Example about how to call to Web Service to get a public list of all Continents and Countries
 

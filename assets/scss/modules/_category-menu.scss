@@ -72,6 +72,9 @@
 	&.active{
 		display: block;
 	}
+	@media(max-width:991px){
+		height: 100%;
+	}
 }
 .menu-categories #submenu-categories{
   display: none;
