@@ -353,6 +353,7 @@ class Country extends CActiveRecord
 			'DK',
 			'DE',
 			'EE',
+			'GB',
 			'IE',
 			'EL',
 			'ES',
@@ -373,7 +374,6 @@ class Country extends CActiveRecord
 			'SK',
 			'FI',
 			'SE',
-			'UK',
 		];
 	}
 
