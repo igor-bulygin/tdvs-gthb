@@ -230,12 +230,6 @@ $config = [
 //            'enableStrictParsing' => true,
 			'suffix' => '',
 			'rules' => [
-				// Test routing
-				[
-					'route' => 'public/test',
-					'pattern' => 'test/<id:[^/.]*?>',
-					'suffix' => ''
-				],
 
 				// temporary routes to fix database problems
 				'/works/fix-products' => 'product/fix-products',
@@ -252,6 +246,8 @@ $config = [
 				'/works' => 'product/index',
 
 				'/admin/reset-password/<person_id:[^/.]*?>' => 'admin/reset-password',
+				'/admin/invoices-excel/<date_from:[^/.]*?>/<date_to:[^/.]*?>' => 'admin/invoices-excel',
+				'/admin/mandrill-content/<message_id:[^/.]*?>' => 'admin/mandrill-content',
 
 				//Person
 				'/<person_type:(deviser|influencer|client)>/<slug:[^/.]*?>/<person_id:[^/.]*?>' => 'person/index',

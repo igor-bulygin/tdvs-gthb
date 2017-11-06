@@ -1263,6 +1263,16 @@ class Person extends CActiveRecord implements IdentityInterface
 	}
 
 	/**
+	 * Shortcut to get the complete address
+	 *
+	 * @return string
+	 */
+	public function getCompleteAddress()
+	{
+		return $this->personalInfoMapping->getCompleteAddress();
+	}
+
+	/**
 	 * Shortcut to get the name
 	 *
 	 * @return string
@@ -2036,19 +2046,45 @@ class Person extends CActiveRecord implements IdentityInterface
 	 */
 	public function getSalesApplicationFee()
 	{
+		$todeviseFee = $this->getTodeviseFee();
+
+		$fee = $todeviseFee * (1 + $this->getVatOverFee());
+
+		return $fee;
+	}
+
+	/**
+	 * Returs the "todevise" fee to apply in the orders of the deviser.
+	 * It can be de default value, or a custom value set in the deviser.
+	 * Its a double number in 100base, for example returns 0.145 to represent a 14.5% percentage
+	 *
+	 * @return double
+	 */
+	public function getTodeviseFee()
+	{
 		if ($this->application_fee && is_double($this->application_fee)) {
 			$todeviseFee = $this->application_fee;
 		} else {
 			$todeviseFee = Yii::$app->params['default_todevise_fee'];
 		}
 
-		if ($this->personalInfoMapping->country == 'ES') {
-			$fee = $todeviseFee * (1 + Yii::$app->params['default_spain_vat']);
-		} else {
-			$fee = $todeviseFee;
+		return $todeviseFee;
+	}
+
+	/**
+	 * Returns the percentage to apply VAT over the fee in the orders of the deviser, if needed
+	 * Its a double number in 100base, for example returns 0.145 to represent a 14.5% percentage
+	 *
+	 * @return double
+	 */
+	public function getVatOverFee()
+	{
+		// At this moment, only Spain devisers apply spain default VAT (21%);
+		if (strtoupper($this->personalInfoMapping->country) == 'ES') {
+			return Yii::$app->params['default_spain_vat'];
 		}
 
-		return $fee;
+		return 0;
 	}
 
 	/**

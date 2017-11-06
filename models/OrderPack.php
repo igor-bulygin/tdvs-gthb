@@ -1,6 +1,7 @@
 <?php
 namespace app\models;
 
+use app\helpers\EmailsHelper;
 use app\helpers\Utils;
 use yii\web\BadRequestHttpException;
 
@@ -8,12 +9,18 @@ use yii\web\BadRequestHttpException;
  *
  * @property int $deviser_id
  * @property string $short_id
- * @property string $shipping_type
- * @property double $shipping_price
- * @property array $shipping_info
  * @property double $pack_weight
+ * @property string $shipping_type
+ * @property array $shipping_info
+ * @property double $shipping_price
  * @property double $pack_price
+ * @property double $pack_total_price
+ * @property double $pack_percentage_fee_todevise
+ * @property double $pack_percentage_fee_vat
  * @property double $pack_percentage_fee
+ * @property double $pack_total_fee_todevise
+ * @property double $pack_total_fee_vat
+ * @property double $pack_total_fee
  * @property string $currency
  * @property string $weight_measure
  * @property string $pack_state
@@ -21,6 +28,7 @@ use yii\web\BadRequestHttpException;
  * @property array $products
  * @property array $state_history
  * @property string $invoice_url
+ * @property array $scheduled_emails
  *
  * @method Order getParentObject()
  */
@@ -49,12 +57,18 @@ class OrderPack extends EmbedModel
 		return [
 			'deviser_id',
 			'short_id',
-			'shipping_type',
-			'shipping_price',
-			'shipping_info',
 			'pack_weight',
+			'shipping_type',
+			'shipping_info',
+			'shipping_price',
 			'pack_price',
+			'pack_total_price',
+			'pack_percentage_fee_todevise',
+			'pack_percentage_fee_vat',
 			'pack_percentage_fee',
+			'pack_total_fee_todevise',
+			'pack_total_fee_vat',
+			'pack_total_fee',
 			'currency',
 			'weight_measure',
 			'pack_state',
@@ -62,6 +76,7 @@ class OrderPack extends EmbedModel
 			'products',
 			'state_history',
 			'invoice_url',
+			'scheduled_emails',
 		];
 	}
 
@@ -129,9 +144,7 @@ class OrderPack extends EmbedModel
 	{
 		switch ($view) {
 
-			case self::SERIALIZE_SCENARIO_ADMIN:
 			case Order::SERIALIZE_SCENARIO_CLIENT_ORDER:
-			case Order::SERIALIZE_SCENARIO_DEVISER_PACK:
 				self::$serializeFields = [
 					'short_id',
 					'deviser_id',
@@ -141,7 +154,6 @@ class OrderPack extends EmbedModel
 					'shipping_info',
 					'pack_weight',
 					'pack_price',
-					'pack_percentage_fee',
 					'currency',
 					'weight_measure',
 					'pack_state',
@@ -149,6 +161,45 @@ class OrderPack extends EmbedModel
 					'shipping_date' => 'shippingDate',
 					'invoice_link' => 'invoiceLink',
 
+					'products' => 'productsInfo',
+				];
+				self::$retrieveExtraFields = [
+					'products',
+					'invoice_url',
+				];
+
+
+				self::$translateFields = false;
+				break;
+
+			case self::SERIALIZE_SCENARIO_ADMIN:
+			case Order::SERIALIZE_SCENARIO_DEVISER_PACK:
+				self::$serializeFields = [
+					'short_id',
+					'deviser_id',
+					'deviser_info' => 'deviserInfo',
+					'pack_weight',
+					'shipping_type',
+					'shipping_info',
+					'shipping_price',
+					'pack_price',
+					'pack_total_price',
+					'pack_percentage_fee_todevise',
+					'pack_percentage_fee_vat',
+					'pack_percentage_fee',
+					'pack_total_fee_todevise',
+					'pack_total_fee_vat',
+					'pack_total_fee',
+					'currency',
+					'weight_measure',
+					'pack_state',
+					'pack_state_name' => 'packStateName',
+					'shipping_date' => 'shippingDate',
+					'invoice_link' => 'invoiceLink',
+					'charge_info',
+					'products',
+					'state_history',
+					'invoice_url',
 					'products' => 'productsInfo',
 				];
 				self::$retrieveExtraFields = [
@@ -350,8 +401,6 @@ class OrderPack extends EmbedModel
 		return null;
 	}
 
-
-
 	public function deleteProduct($priceStockId)
 	{
 		$products = $this->getProducts();
@@ -390,9 +439,19 @@ class OrderPack extends EmbedModel
 
 	public function setState($newState)
 	{
-		if ($this->pack_state == $newState) {
-			return;
+//		if ($this->pack_state == $newState) {
+//			return;
+//		}
+
+		if ($newState == OrderPack::PACK_STATE_AWARE) {
+			$this->cancelEmailsNewOrder();
+			$this->scheduleEmailsNoShipped();
 		}
+		if ($newState == OrderPack::PACK_STATE_SHIPPED) {
+			$this->cancelEmailsNoShipped();
+			EmailsHelper::clientOrderShipped($this->getParentObject(), $this->short_id);
+		}
+
 		$this->pack_state = $newState;
 		$stateHistory = $this->state_history;
 		$stateHistory[] =
@@ -401,6 +460,47 @@ class OrderPack extends EmbedModel
 				'date' => new \MongoDate(),
 			];
 		$this->setAttribute('state_history', $stateHistory);
+	}
+
+	public function scheduleEmailsNoShipped()
+	{
+		$order = $this->getParentObject();
+		$scheduledEmails['deviser_no_shipped'][] = EmailsHelper::deviserOrderNoShippedReminder24($order, $this->short_id);
+		$scheduledEmails['deviser_no_shipped'][] = EmailsHelper::deviserOrderNoShippedReminder48($order, $this->short_id);
+		$scheduledEmails['deviser_no_shipped'][] = EmailsHelper::deviserOrderNoShippedReminder72($order, $this->short_id);
+		$scheduledEmails['todevise_no_shipped'][] = EmailsHelper::todeviseOrderNoShippedReminder96($order, $this->short_id);
+		$this->setAttribute('scheduled_emails', $scheduledEmails);
+	}
+
+
+	public function cancelEmailsNewOrder()
+	{
+		$scheduledEmails = $this->scheduled_emails;
+		if (isset($scheduledEmails['deviser_new_order'])) {
+			foreach ($scheduledEmails['deviser_new_order'] as $email) {
+				EmailsHelper::cancelScheduled($email['_id']);
+			}
+		}
+		if (isset($scheduledEmails['todevise_new_order'])) {
+			foreach ($scheduledEmails['todevise_new_order'] as $email) {
+				EmailsHelper::cancelScheduled($email['_id']);
+			}
+		}
+	}
+
+	public function cancelEmailsNoShipped()
+	{
+		$scheduledEmails = $this->scheduled_emails;
+		if (isset($scheduledEmails['deviser_no_shipped'])) {
+			foreach ($scheduledEmails['deviser_no_shipped'] as $email) {
+				EmailsHelper::cancelScheduled($email['_id']);
+			}
+		}
+		if (isset($scheduledEmails['todevise_no_shipped'])) {
+			foreach ($scheduledEmails['todevise_no_shipped'] as $email) {
+				EmailsHelper::cancelScheduled($email['_id']);
+			}
+		}
 	}
 
 	public function setInvoice($invoiceUrl)
@@ -422,5 +522,4 @@ class OrderPack extends EmbedModel
 	{
 		$this->invoice_url = $invoiceUrl;
 	}
-
 }

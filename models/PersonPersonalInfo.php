@@ -87,16 +87,6 @@ class PersonPersonalInfo extends EmbedModel
 	}
 
 	/**
-	 * Get the visible name of the person
-	 *
-	 * @return string
-	 */
-	public function getVisibleName()
-	{
-		return $this->brand_name ?: trim($this->name . ' '.$this->last_name);
-	}
-
-	/**
 	 * Get the location from Person (city and country).
 	 *
 	 * @return string
@@ -117,6 +107,21 @@ class PersonPersonalInfo extends EmbedModel
 		}
 
 		return implode(", ", $location);
+	}
+
+	public function getCompleteAddress()
+	{
+		return trim($this->name.' '.$this->last_name.' '.$this->vat_id.' '.$this->address.' '.$this->number.' '.$this->zip.' '.$this->getLocationLabel());
+	}
+
+	/**
+	 * Get the visible name of the person
+	 *
+	 * @return string
+	 */
+	public function getVisibleName()
+	{
+		return $this->brand_name ?: trim($this->name . ' '.$this->last_name);
 	}
 
 	public function load($data, $formName = null)

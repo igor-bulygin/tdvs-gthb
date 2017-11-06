@@ -20,7 +20,9 @@ $footerMode = 'collapsed';
 
 	function scrollFunction(){
 		if (document.body.scrollTop > 30 || document.documentElement.scrollTop > 30) {
-			document.getElementById("go_to_footer").style.display = "block";
+			if (document.body.scrollTop < document.body.scrollHeight-100 || document.documentElement.scrollTop < document.documentElement.scrollHeight-100) {
+				document.getElementById("go_to_footer").style.display = "block";
+			}
 		} else {
 			document.getElementById("go_to_footer").style.display = "none";
 		}
@@ -38,7 +40,7 @@ $footerMode = 'collapsed';
 <footer class="<?= ($footerMode=='expanded') ? 'untoggled' : '' ?>" id="main_footer" name="main_footer" ng-controller="footerCtrl as footerCtrl">
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-3">
+			<div class="hidden-xs hidden-sm col-md-2 col-lg-3">
 				<div class="title">Help &amp; Contact</div>
 				<ul class="footer-items mt-10">
 					<li>
@@ -60,7 +62,7 @@ $footerMode = 'collapsed';
 					</li>
 				</ul>
 			</div>
-			<div class="col-sm-6">
+			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 				<div class="title text-center mb-20"><span translate="footer.BECOME_DEVISER_QUESTION"></span></div>
 				<a href="<?= Url::to(["public/become-deviser"]) ?>" class="btn btn-medium btn-red auto-center"><span translate="footer.BECOME_DEVISER"></span></a>
 				<?php /*
@@ -68,7 +70,7 @@ $footerMode = 'collapsed';
 				<a href="<?= Url::to(["public/become-influencer"]) ?>" class="btn btn-medium btn-transparent auto-center"><span translate="footer.BECOME_INFLUENCER"></span></a>
  				*/ ?>
 			</div>
-			<div class="col-sm-3">
+			<div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
 				<div class="title"><span translate="footer.SUBSCRIBE_NEWSLETTER"></span></div>
 				<form name="footerCtrl.newsletterForm" ng-if="!footerCtrl.subscribed" ng-cloak>
 					<div class="input-group input-newsletter mt-30">
@@ -84,8 +86,8 @@ $footerMode = 'collapsed';
 					<p><span translate="footer.SUBSCRIBED_MESSAGE"></span></p>
 				</div>
 				<div class="title mt-40"><span translate="footer.STAY_CONNECTED"></span></div>
-				<ul class="social-items mt-10 home">
-					<li>
+				<ul class="social-items mt-10 home col-xs-12 col-sm-12 col-md-12">
+					<li class="col-xs-4 col-md-2">
 						<a href="https://facebook.com/todevise" target="_blank">
 							<i class="facebook">
 								<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
@@ -100,7 +102,7 @@ $footerMode = 'collapsed';
 						</a>
 					</li>
 					
-					<li>
+					<li class="col-xs-4 col-md-2">
 						<a class="twitter" href="https://twitter.com/todevise" target="_blank">
 							<i class="twitter">
 								<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
@@ -120,7 +122,7 @@ $footerMode = 'collapsed';
 						</a>
 					</li>
 
-					<li>
+					<li class="col-xs-4 col-md-2">
 						<a class="instagram" href="https://www.instagram.com/todevise.official" target="_blank">
 							<i class="instagram">
 								<svg width="23px" height="24px" viewBox="0 0 23 24" version="1.1"
@@ -141,23 +143,41 @@ $footerMode = 'collapsed';
 				</ul>
 			</div>
 		</div>
+		<div class="hidden-md hidden-lg mt-4">
+			<div class="title">Help &amp; Contact</div>
+			<ul class="footer-items mt-10">
+				<li class="col-md-6">
+					<a href="<?= Url::to(["public/contact"]) ?>"><span translate="footer.CONTACT_US"></span></a>
+				</li>
+				<?php /*
+				<li>
+					<a href="#"><span translate="footer.FAQS"></span></a>
+				</li>
+				*/ ?>
+				<li class="col-md-6">
+					<a href="<?= Url::to(["public/about-us"]) ?>"><span translate="footer.ABOUT_US"></span></a>
+				</li>
+			</ul>
+		</div>
 		<div class="copyright mt-40">
-			<div>
+			<div class="row">
 				<ul>
-					<li>
+					<li class="hidden-xs hidden-sm col-md-2-5"></li>
+					<li class="col-xs-12 col-sm-12 col-md-2">
 						<a href="<?=Url::to(['/public/terms'])?>"><span translate="footer.TERMS_CONDITIONS"></span></a>
 					</li>
-					<li>·</li>
-					<li>
+					<li class="hidden-xs hidden-sm col-0-5">·</li>
+					<li class="col-xs-12 col-sm-12 col-md-2">
 						<a href="<?=Url::to(['/public/privacy'])?>"><span translate="footer.PRIVACY"></span></a>
 					</li>
-					<li>·</li>
-					<li>
+					<li class="hidden-xs hidden-sm col-0-5">·</li>
+					<li class="col-xs-12 col-sm-12 col-md-2">
 						<a href="<?=Url::to(['/public/cookies'])?>"><span translate="footer.COOKIES"></span></a>
 					</li>
+					<li class="hidden-xs hidden-sm col-md-2-5"></li>
 				</ul>
 			</div>
-			<div>&copy; <span class="hightlighted">2017 Todevise</span> all rights reserved</div>
+			<div class="row">&copy; <span class="hightlighted">2017 Todevise</span> all rights reserved</div>
 		</div>
 	</div>
 </footer>

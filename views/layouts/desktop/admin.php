@@ -15,6 +15,24 @@ use yii\widgets\Breadcrumbs;
 /* @var $this \yii\web\View */
 /* @var $content string */
 
+// Create invoices link, one per month
+$date = DateTime::createFromFormat('Y-m-d H:i:s', '2017-09-01 00:00:00');
+$now = date('Y-m-d');
+$itemsInvoices = [];
+while ($date->format('Y-m-d') < $now) {
+	$oneMonth = DateInterval::createFromDateString('1 month');
+	$next = clone $date;
+	$next = $next->add($oneMonth);
+	$itemsInvoices[] = [
+		'options' => [
+			'class' => 'item-submenu funiv fs0-929',
+		],
+		'label' => $date->format('M Y'),
+		'url' => Url::toRoute(['admin/invoices-excel']) . '/' . $date->format('Y-m-d') . '/' . $next->format('Y-m-d'),
+	];
+	$date = $next;
+}
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -338,10 +356,37 @@ use yii\widgets\Breadcrumbs;
 												'label' => 'Emails',
 												'url'=> Url::toRoute(['admin/postman-emails']),
 												'active' => (
-													Utils::compareURL('admin/postman-emails')
+												Utils::compareURL('admin/postman-emails')
+												)
+											],
+											[
+												'options' => [
+													'class' => 'item-submenu funiv fs0-929',
+												],
+												'label' => 'Mandrill (sent)',
+												'url'=> Url::toRoute(['admin/mandrill-sent']),
+												'active' => (
+												Utils::compareURL('admin/mandrill-sent')
+												)
+											],
+											[
+												'options' => [
+													'class' => 'item-submenu funiv fs0-929',
+												],
+												'label' => 'Mandrill (scheduled)',
+												'url'=> Url::toRoute(['admin/mandrill-scheduled']),
+												'active' => (
+												Utils::compareURL('admin/mandrill-scheduled')
 												)
 											],
 										],
+									],
+									[
+										'label' => 'Invoices',
+										'options' => [
+											'class' => 'item-menu-left funiv_bold fs0-857 fs-upper',
+										],
+										'items' => $itemsInvoices,
 									]
 								],
 							]);
