@@ -55,7 +55,7 @@ $this->title = 'Todevise / Admin / Devisers';
 				'columns' => [
 					[
 						'class' => 'yii\grid\ActionColumn',
-						'template' => "{products} {view} {update} {states} {fee} {delete} ",
+						'template' => "{products} {view} {update} {settings} {states} {fee} {delete} ",
 						'buttons' => [
 							'products' => function($url, $model, $key) {
 								$url = $model->getStoreLink();
@@ -70,6 +70,11 @@ $this->title = 'Todevise / Admin / Devisers';
 							'update' => function($url, $model, $key) {
 								$url = $model->getAboutEditLink();
 								return Html::a('<span class="glyphicon glyphicon-edit fc-fff fs1"></span>', $url);
+							},
+
+							'settings' => function($url, $model, $key) {
+								$url = $model->getSettingsLink();
+								return Html::a('<span class="glyphicon glyphicon-cog fc-fff fs1"></span>', $url);
 							},
 
 							'states' => function($url, $model, $key) {
