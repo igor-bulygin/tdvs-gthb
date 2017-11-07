@@ -640,19 +640,21 @@ a, a:hover, a:focus {
 .black-icons svg {
   width: 18px; }
 
-.btn-red, .btn-green, .btn-none, .btn-grey, .btn-black, .btn-follow, .btn-white, .btn-black-on-white, .btn-transparent, .btn-black-line, .big-btn, .btn-love, .btn-single-love, .heart-red-icon-btn, .btn-save-box, .btn-icon, .accordion-btn, .button-error, .btn-save {
-  text-transform: uppercase;
+.btn, .button-error, .btn-save {
   font-family: "Roboto Condensed", sans-serif;
   font-weight: bold;
-  font-size: 14px;
-  letter-spacing: 0.3px;
-  height: 36px;
-  padding: 0 !important;
-  margin: auto !important;
-  border: none;
+  font-size: 1.15em;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
   text-align: center;
+  border-radius: 0.25em 0.25em 0.25em 0.25em !important;
+  -webkit-border-radius: 0.25em 0.25em 0.25em 0.25em !important;
+  -moz-border-radius: 0.25em 0.25em 0.25em 0.25em !important;
+  margin: auto !important;
+  padding: 0.5em 0 !important;
+  border: none;
   cursor: pointer; }
-  .btn-red:hover, .btn-green:hover, .btn-none:hover, .btn-grey:hover, .btn-black:hover, .btn-follow:hover, .btn-white:hover, .btn-black-on-white:hover, .btn-transparent:hover, .btn-black-line:hover, .big-btn:hover, .btn-love:hover, .btn-single-love:hover, .heart-red-icon-btn:hover, .btn-save-box:hover, .btn-icon:hover, .accordion-btn:hover, .button-error:hover, .btn-save:hover {
+  .btn:hover, .button-error:hover, .btn-save:hover {
     -moz-transition-property: background-color;
     -o-transition-property: background-color;
     -webkit-transition-property: background-color;
@@ -667,33 +669,19 @@ a, a:hover, a:focus {
     transition-timing-function: ease-out; }
 
 a.btn span {
-  line-height: 36px;
-  height: 36px; }
+  padding: 0.5em 0; }
 
+/*colores*/
 .btn-red {
   background-color: #c91c39;
   color: #ffffff; }
-  .btn-red:focus {
+  .btn-red:focus, .btn-red:hover {
     color: #ffffff !important; }
   .btn-red:hover {
-    background-color: #F7284B;
-    color: #ffffff; }
-  @media (max-width: 768px) {
-    .btn-red {
-      margin: 5px auto 20px;
-      display: block; } }
-
-.btn-green {
-  background-color: #B8E986;
-  color: #1C1919; }
-  .btn-green:hover {
-    background-color: #7AB83A; }
-
-.btn-none {
-  background-color: transparent;
-  color: #1C1919; }
-  .btn-none:hover {
-    color: #484848; }
+    background-color: #F7284B; }
+  .btn-red.disabled {
+    cursor: default;
+    background-color: #bfbfbf; }
 
 .btn-grey {
   background-color: #ffffff;
@@ -702,72 +690,34 @@ a.btn span {
   .btn-grey:hover {
     background-color: #bfbfbf; }
 
-.btn-black {
-  background-color: #1C1919;
-  color: #ffffff;
-  width: 100%; }
-  .btn-black:hover {
-    background-color: #939393;
+.btn-light-grey {
+  background-color: #e9e9e9; }
+  .btn-light-grey .red-check {
+    background-color: #c91c39;
     color: #ffffff; }
 
-.btn-follow {
-  background-color: #e9e9e9;
-  color: #1C1919;
-  padding: 5px 20px;
-  letter-spacing: 0.5px;
-  z-index: 12; }
-  .btn-follow i {
-    padding-right: 5px; }
+/*botones rectangulares*/
+.full-size-btn {
+  width: 100% !important; }
 
-.btn-white {
-  background-color: #ffffff;
-  color: #F7284B; }
-  .btn-white:hover {
-    background-color: #e9e9e9;
-    color: #F7284B; }
+.btn-medium {
+  width: 285px; }
 
-.btn-black-on-white {
-  background-color: #ffffff;
-  border: 1px solid #1C1919;
-  color: #1C1919; }
-  .btn-black-on-white:hover {
-    background-color: #e9e9e9; }
+.big-btn {
+  font-size: 20px;
+  border-radius: 0.4em 0.4em 0.4em 0.4em !important;
+  -webkit-border-radius: 0.4em 0.4em 0.4em 0.4em !important;
+  -moz-border-radius: 0.4em 0.4em 0.4em 0.4em !important;
+  width: 460px;
+  position: relative;
+  padding: 1em 0 !important; }
 
-.btn-transparent {
-  background-color: transparent;
-  border: 1px solid #ffffff;
-  color: #ffffff; }
-  .btn-transparent:hover {
-    background-color: #bfbfbf;
-    color: #ffffff;
-    border: 1px solid #ffffff; }
-
-.btn-black-line {
-  background-color: transparent;
-  border: 1px solid #1C1919;
-  color: #1C1919; }
-  .btn-black-line:hover {
-    background-color: #1C1919;
-    color: #ffffff;
-    border: 1px solid #ffffff; }
-
-.btn-acordion {
-  margin-top: -10px !important;
-  height: 28px;
-  padding-top: 6px; }
-
-.btn-xl {
-  min-width: 200px;
-  border-radius: 8px 8px 8px 8px !important;
-  -webkit-border-radius: 8px 8px 8px 8px !important;
-  -moz-border-radius: 8px 8px 8px 8px !important; }
-
+/*botones redondos*/
 .send-btn {
+  display: block;
   width: 69px;
   height: 69px;
-  margin: 40px auto;
-  display: block;
-  padding: 5px 0 0 0;
+  margin: 40px auto !important;
   transform: rotate(90deg);
   -webkit-transform: rotate(90deg);
   -moz-transform: rotate(90deg);
@@ -814,366 +764,6 @@ a.btn span {
   .send-btn-sm i {
     color: #ffffff;
     font-size: 42px; }
-
-.big-btn {
-  width: 460px;
-  height: 60px;
-  margin: 20px 0 !important;
-  padding: 12px 0 0 0 !important;
-  border-radius: 20px 20px 20px 20px !important;
-  -webkit-border-radius: 20px 20px 20px 20px !important;
-  -moz-border-radius: 20px 20px 20px 20px !important;
-  background-color: #e9e9e9;
-  font-size: 20px;
-  font-weight: bold;
-  font-family: "Roboto Condensed", sans-serif;
-  text-transform: uppercase;
-  border: none;
-  position: relative; }
-  .big-btn .red-check {
-    background-color: #c91c39;
-    color: #ffffff;
-    width: 52px;
-    height: 52px;
-    display: block;
-    position: absolute;
-    right: -62px;
-    top: 4px;
-    border-radius: 32px !important;
-    padding-top: 0px;
-    font-size: 36px; }
-  .big-btn .big-btn-message {
-    position: absolute;
-    font-family: "Roboto Condensed", sans-serif;
-    text-align: center;
-    text-transform: none;
-    font-weight: 300;
-    font-size: 14px;
-    top: 60px;
-    width: 100%;
-    display: none; }
-  .big-btn:hover .big-btn-message {
-    display: block; }
-
-.btn-small {
-  width: 149px;
-  height: 40px;
-  line-height: 40px;
-  font-size: 16px; }
-  .btn-small.disabled {
-    cursor: default;
-    background-color: #bfbfbf; }
-
-.btn-medium {
-  width: 285px;
-  height: 40px;
-  line-height: 40px;
-  font-size: 16px; }
-  .btn-medium.disabled {
-    cursor: default;
-    background-color: #bfbfbf; }
-  .btn-medium span {
-    height: 40px !important;
-    line-height: 40px !important; }
-
-.btn-big {
-  width: 288px;
-  height: 62px;
-  font-size: 16px;
-  padding-top: 8px; }
-  .btn-big.disabled {
-    cursor: default;
-    background-color: #bfbfbf; }
-
-.regular-btn {
-  height: 62px;
-  border-radius: 5px 5px 5px 5px !important;
-  -webkit-border-radius: 5px 5px 5px 5px !important;
-  -moz-border-radius: 5px 5px 5px 5px !important;
-  background-color: #c91c39 !important;
-  color: #ffffff !important;
-  border: none;
-  text-transform: uppercase;
-  font-weight: bold;
-  min-width: 288px;
-  font-size: 16px;
-  margin-top: 80px; }
-  .regular-btn.disabled {
-    background-color: #bfbfbf !important; }
-
-.share-btn {
-  cursor: pointer; }
-  .share-btn i {
-    font-size: 21px; }
-
-.btn-love {
-  background-color: transparent;
-  border: 1px solid #1C1919;
-  color: #1C1919;
-  width: 70px;
-  height: 40px;
-  padding-top: 6px; }
-  .btn-love i {
-    font-size: 27px;
-    line-height: 10px; }
-  .btn-love:hover {
-    background-color: #1C1919;
-    color: #ffffff; }
-  .btn-love.active {
-    color: #c91c39; }
-    .btn-love.active:hover {
-      color: #ffffff; }
-
-.btn-single-love {
-  background-color: transparent;
-  color: #1C1919;
-  padding-top: 6px; }
-  .btn-single-love i {
-    font-size: 32px;
-    vertical-align: middle; }
-  .btn-single-love .number {
-    color: #1C1919;
-    font-size: 16px;
-    font-weight: normal;
-    letter-spacing: 0.2px;
-    padding-right: 8px; }
-  .btn-single-love:hover {
-    color: #c91c39; }
-  .btn-single-love.active {
-    color: #c91c39; }
-    .btn-single-love.active:hover {
-      color: #c91c39; }
-
-.heart-icon {
-  width: 30px;
-  height: 30px;
-  display: inline-block;
-  vertical-align: middle; }
-  .heart-icon:hover {
-    background: url(/imgs/heart-red.svg) 0 0 no-repeat transparent !important; }
-
-.heart-red-icon-btn {
-  background-color: #F7284B;
-  width: 70px;
-  height: 40px;
-  padding-top: 6px; }
-
-.btn-save-box {
-  background-color: transparent;
-  border: 1px solid #1C1919;
-  color: #1C1919;
-  width: 209px;
-  height: 40px; }
-  .btn-save-box .box-icon {
-    width: 32px;
-    vertical-align: middle;
-    height: 25px;
-    display: inline-block;
-    margin-right: 10px; }
-  .btn-save-box:hover {
-    background-color: #1C1919;
-    color: #ffffff; }
-    .btn-save-box:hover .box-icon {
-      background: url("/imgs/box-white.svg") no-repeat; }
-  .btn-save-box.active {
-    color: #1C1919; }
-    .btn-save-box.active .box-icon {
-      background: url("/imgs/box-red.svg") transparent no-repeat; }
-    .btn-save-box.active:hover {
-      color: #ffffff;
-      background-color: #1C1919; }
-      .btn-save-box.active:hover .box-icon {
-        background: url("/imgs/box-white.svg") transparent no-repeat; }
-
-.no-padding {
-  padding: 0; }
-
-.btn-icon {
-  background-color: transparent;
-  border: 1px solid #1C1919;
-  color: #1C1919;
-  width: 100%;
-  height: 40px;
-  padding-top: 9px; }
-  .btn-icon i {
-    margin-right: 10px;
-    margin-left: -5px; }
-  .btn-icon:hover {
-    background-color: #1C1919;
-    color: #ffffff; }
-    .btn-icon:hover .box-icon {
-      background: url("/imgs/box-white.svg") no-repeat; }
-  .btn-icon.active {
-    color: #1C1919; }
-    .btn-icon.active .box-icon {
-      background: url("/imgs/box-red.svg") transparent no-repeat; }
-    .btn-icon.active:hover {
-      color: #ffffff;
-      background-color: #1C1919; }
-      .btn-icon.active:hover .box-icon {
-        background: url("/imgs/box-white.svg") transparent no-repeat; }
-
-.load-more-btn {
-  color: #c91c39;
-  text-transform: uppercase; }
-  .load-more-btn i {
-    color: #939393;
-    vertical-align: middle;
-    margin-left: 5px;
-    display: inline-block; }
-  .load-more-btn:hover {
-    color: #F7284B; }
-  .load-more-btn:focus {
-    color: #F7284B; }
-  .load-more-btn.active i {
-    transform: rotate(180deg);
-    -webkit-transform: rotate(180deg);
-    -moz-transform: rotate(180deg);
-    -ms-transform: rotate(180deg); }
-
-.social-items li {
-  float: left;
-  margin: 0 8px 0 0; }
-  .social-items li span {
-    padding: 1px 0 0 0;
-    display: inline-block; }
-  .social-items li a {
-    color: #ffffff;
-    border: 1px solid #1C1919;
-    width: 34px;
-    height: 34px;
-    display: block;
-    padding: 8px 0 0 12px;
-    border-radius: 28px 28px 28px 28px !important;
-    -webkit-border-radius: 28px 28px 28px 28px !important;
-    -moz-border-radius: 28px 28px 28px 28px !important; }
-    .social-items li a.twitter {
-      padding: 8px 0 0 7px; }
-    .social-items li a.pinterest {
-      padding: 8px 0 0 10px; }
-    .social-items li a.instagram {
-      padding: 9px 0 0 8px; }
-    .social-items li a:hover {
-      border: 1px solid #c91c39; }
-      .social-items li a:hover i.facebook svg .st0 {
-        stroke: #c91c39; }
-      .social-items li a:hover i.twitter svg .st0 {
-        stroke: #c91c39; }
-      .social-items li a:hover i.pinterest svg .st0 {
-        stroke: #c91c39; }
-      .social-items li a:hover i.instagram svg .st0 {
-        stroke: #c91c39; }
-    .social-items li a i.facebook svg {
-      height: 16px; }
-      .social-items li a i.facebook svg .st0 {
-        stroke: #1C1919;
-        fill: none;
-        stroke-width: 2; }
-    .social-items li a i.twitter svg {
-      height: 16px; }
-      .social-items li a i.twitter svg .st0 {
-        stroke: #1C1919;
-        fill: none;
-        stroke-width: 2; }
-    .social-items li a i.pinterest svg {
-      height: 16px; }
-      .social-items li a i.pinterest svg .st0 {
-        stroke: #1C1919;
-        fill: none;
-        stroke-width: 2; }
-    .social-items li a i.instagram svg {
-      height: 18px; }
-      .social-items li a i.instagram svg .st0 {
-        stroke: #1C1919;
-        fill: none;
-        stroke-width: 0.8; }
-
-footer .social-items li a {
-  border: none; }
-  footer .social-items li a:hover i.facebook svg .st0 {
-    stroke: #ffffff; }
-  footer .social-items li a:hover i.twitter svg .st0 {
-    stroke: #ffffff; }
-  footer .social-items li a:hover i.pinterest svg .st0 {
-    stroke: #ffffff; }
-  footer .social-items li a:hover i.instagram svg .st0 {
-    stroke: #ffffff; }
-
-.full-size-btn {
-  width: 100% !important; }
-
-.accordion-btn {
-  background-color: transparent;
-  color: #1C1919;
-  padding: 0;
-  width: 100%;
-  text-align: left; }
-  .accordion-btn span {
-    float: left; }
-  .accordion-btn i {
-    float: right;
-    margin-right: 10px; }
-
-.btn-love:hover .heart-icon {
-  background: url(/imgs/heart-red.svg) 0 0 no-repeat transparent !important; }
-.btn-love.pull-left:hover .heart-icon {
-  background: url(/imgs/heart-white.svg) 0 0 no-repeat transparent; }
-.btn-love .heart-icon:hover {
-  background: url(/imgs/heart-white.svg) 0 0 no-repeat transparent; }
-.btn-love.pull-right:hover .box-icon {
-  background: url(/imgs/box-white.svg) 0 0 no-repeat transparent; }
-.btn-love .box-icon:hover {
-  background: url(/imgs/box-white.svg) 0 0 no-repeat transparent; }
-
-.btn-edit i {
-  font-size: 21px;
-  margin: 0;
-  padding: 0;
-  height: 32px; }
-.btn-edit:hover {
-  background-color: transparent;
-  color: #F7284B; }
-
-#btn_create_box, #btn_create_box_popup, .btn-minpad {
-  padding-left: 20px !important;
-  padding-right: 20px !important; }
-
-/*hay que arreglar lo de los botones*/
-#newProductHeader button {
-  padding: 8px 20px !important; }
-
-#go_to_footer {
-  width: 50px;
-  height: 50px;
-  cursor: pointer;
-  display: none;
-  border: none;
-  z-index: 999;
-  text-decoration: none;
-  text-align: center;
-  position: fixed;
-  bottom: 80px;
-  right: 40px;
-  background: transparent;
-  margin: 0;
-  padding: 0; }
-  #go_to_footer i {
-    margin: 0;
-    line-height: 55px; }
-
-.btn-change-password {
-  background-color: transparent;
-  border: 1px solid #1C1919;
-  color: #1C1919;
-  text-transform: uppercase;
-  padding: 0px 10px 0 10px;
-  height: 34px;
-  margin-top: 32px; }
-  .btn-change-password:hover {
-    background-color: #1C1919;
-    color: #ffffff; }
-    .btn-change-password:hover .box-icon {
-      background: url("/imgs/box-white.svg") no-repeat; }
 
 .products-menu ul {
   margin: 20px 0 40px;
@@ -2361,15 +1951,6 @@ h3 {
   border-radius: 180px 180px 180px 180px !important;
   -webkit-border-radius: 180px 180px 180px 180px !important;
   -moz-border-radius: 180px 180px 180px 180px !important; }
-
-.heart-icon, .heart-black-icon {
-  background: url("/imgs/heart-black.svg") 0 0 no-repeat transparent !important; }
-
-.heart-red-icon-btn div {
-  background: url("/imgs/heart-white.svg") 0 0 no-repeat transparent; }
-
-.heart-red-icon {
-  background: url("/imgs/heart-red.svg") 0 0 no-repeat transparent !important; }
 
 .link-red, .log a, .add-lang, .request-invitation-wrapper .request-invitation-container .add-new, .red-text {
   color: #c91c39 !important; }
