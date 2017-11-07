@@ -122,6 +122,7 @@ Yii::$app->opengraph->title = $this->title;
 <!-- /SEASON BANNERS -->
 <?php } ?>
 
+<?php if ($devisersCarousel) { ?>
 <!-- SHOWCASE -->
 <section class="showcase-wrapper">
 	<div class="container">
@@ -131,7 +132,9 @@ Yii::$app->opengraph->title = $this->title;
 		<?=$devisersCarousel?>
 	</div>
 </section>
+<?php } ?>
 
+<?php if ($influencersCarousel) { ?>
 <!-- /SHOWCASE -->
 <section class="showcase-wrapper">
 	<div class="container">
@@ -141,6 +144,7 @@ Yii::$app->opengraph->title = $this->title;
 		<?=$influencersCarousel?>
 	</div>
 </section>
+<?php } ?>
 
 <!-- GRID BOXES -->
 <section class="showcase-wrapper">

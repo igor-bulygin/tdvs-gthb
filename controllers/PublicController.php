@@ -129,15 +129,23 @@ class PublicController extends CController
 			'works' => $works,
 		]);
 
-		$devisersCarousel = $this->renderPartial('profiles-carousel', [
-			'persons' => $devisers,
-			'id' => 'devisers',
-		]);
+		if ($devisers) {
+			$devisersCarousel = $this->renderPartial('profiles-carousel', [
+				'persons' => $devisers,
+				'id' => 'devisers',
+			]);
+		} else {
+			$devisersCarousel = null;
+		}
 
-		$influencersCarousel = $this->renderPartial('profiles-carousel', [
-			'persons' => $influencers,
-			'id' => 'influencers',
-		]);
+		if ($influencers) {
+			$influencersCarousel = $this->renderPartial('profiles-carousel', [
+				'persons' => $influencers,
+				'id' => 'influencers',
+			]);
+		} else {
+			$influencersCarousel = null;
+		}
 
 		$this->layout = '/desktop/public-2.php';
 		$this->view->params['selectedCategory'] = isset($category) ? $category : null;
