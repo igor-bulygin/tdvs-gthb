@@ -82,7 +82,7 @@ class EmailsHelper
 				'header' => 'DID YOU SHIP THE PACKAGE?',
 				'hello' => 'Hello {{deviser_name}}',
 				'text' => '{{client_name}} bought the following products:',
-				'text_2' => 'You let us know that you saw this sale. Were you able to ship the package? If so, please fill in the shipping information by going to SETTINGS - MY ORDERS, and clicking the PACKAGE WAS SHIPPED button.',
+				'text_2' => 'Please let us know that you saw this sale. Were you able to ship the package? If so, please fill in the shipping information by going to SETTINGS - MY ORDERS, and clicking the PACKAGE WAS SHIPPED button.',
 				'button_text' => 'GO TO MY PROFILE',
 				'button_link' => '{{deviser_link_profile}}',
 			]
@@ -166,7 +166,7 @@ class EmailsHelper
 			[
 				'header' => 'Your products have been shipped!',
 				'hello' => 'Hello {{client_name}}',
-				'text' => 'The following products from {{deviser_name}} where shipped:',
+				'text' => 'The following products from {{deviser_name}} were shipped:',
 				'text_2' => '
 					<p>The shipping information is the following:</p>
 					<p> - Shipping company: {{company}}</p>
@@ -183,14 +183,14 @@ class EmailsHelper
 
 	public static function todeviseNewOrderReminder72(Order $order, $packId)
 	{
-		$subject = 'Order no aware after 72 hours!';
+		$subject = 'Order not attended after 72 hours!';
 
 		$send_at = (new \DateTime())->add(\DateInterval::createFromDateString('72 hours'))->format('Y-m-d H:i:s');
 
 		$params = static::mergeCustomWithCommonVars(
 			static::getOrderPackCommonVars($order, $packId),
 			[
-				'header' => 'Order no aware after 72 hours!',
+				'header' => 'Order not attended after 72 hours!',
 				'hello' => 'Hello Todevise',
 				'text' => 'The deviser {{deviser_name}} did not click the button I’M AWARE for the order #{{order_number}}, with this products:',
 				'text_2' => '',
