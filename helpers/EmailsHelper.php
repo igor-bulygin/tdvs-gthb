@@ -166,7 +166,7 @@ class EmailsHelper
 			[
 				'header' => 'Your products have been shipped!',
 				'hello' => 'Hello {{client_name}}',
-				'text' => 'The following products from {{deviser_name}} where shipped:',
+				'text' => 'The following products from {{deviser_name}} were shipped:',
 				'text_2' => '
 					<p>The shipping information is the following:</p>
 					<p> - Shipping company: {{company}}</p>
@@ -183,14 +183,14 @@ class EmailsHelper
 
 	public static function todeviseNewOrderReminder72(Order $order, $packId)
 	{
-		$subject = 'Order no aware after 72 hours!';
+		$subject = 'Order not attended after 72 hours!';
 
 		$send_at = (new \DateTime())->add(\DateInterval::createFromDateString('72 hours'))->format('Y-m-d H:i:s');
 
 		$params = static::mergeCustomWithCommonVars(
 			static::getOrderPackCommonVars($order, $packId),
 			[
-				'header' => 'Order no aware after 72 hours!',
+				'header' => 'Order not attended after 72 hours!',
 				'hello' => 'Hello Todevise',
 				'text' => 'The deviser {{deviser_name}} did not click the button I’M AWARE for the order #{{order_number}}, with this products:',
 				'text_2' => '',
