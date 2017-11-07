@@ -82,7 +82,7 @@ class EmailsHelper
 				'header' => 'DID YOU SHIP THE PACKAGE?',
 				'hello' => 'Hello {{deviser_name}}',
 				'text' => '{{client_name}} bought the following products:',
-				'text_2' => 'You let us know that you saw this sale. Were you able to ship the package? If so, please fill in the shipping information by going to SETTINGS - MY ORDERS, and clicking the PACKAGE WAS SHIPPED button.',
+				'text_2' => 'Please let us know that you saw this sale. Were you able to ship the package? If so, please fill in the shipping information by going to SETTINGS - MY ORDERS, and clicking the PACKAGE WAS SHIPPED button.',
 				'button_text' => 'GO TO MY PROFILE',
 				'button_link' => '{{deviser_link_profile}}',
 			]
