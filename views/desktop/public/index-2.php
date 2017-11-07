@@ -58,6 +58,7 @@ Yii::$app->opengraph->title = $this->title;
 </div>
 <!-- /BANNER -->
 
+<?php if (empty($category_id)) { ?>
 <!-- SUB-BANNER -->
 <section class="sub-banner hidden-xs hidden-sm">
 	<div class="container container-sub-baner">
@@ -93,7 +94,9 @@ Yii::$app->opengraph->title = $this->title;
 	</div>
 </section>
 <!-- /SUB-BANNER -->
+<?php } ?>
 
+<?php if (empty($category_id)) { ?>
 <!-- SEASON BANNERS -->
 <section class="season-banners">
 	<div class="container">
@@ -117,6 +120,7 @@ Yii::$app->opengraph->title = $this->title;
 	</div>
 </section>
 <!-- /SEASON BANNERS -->
+<?php } ?>
 
 <!-- SHOWCASE -->
 <section class="showcase-wrapper">
