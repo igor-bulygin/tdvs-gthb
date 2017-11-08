@@ -31,11 +31,13 @@ $person = $this->params['person'];
 				<?php } ?>
 			</li>
 		<?php } ?>
+		<?php /*
 		<?php if ($person->isInfluencer() || $person->isDeviser()) { ?>
 			<li>
 				<a class=" <?= ($activeOption=='social') ? 'active' : '' ?>" href="<?= $person->getSocialLink()?>">Social feed</a>
 			</li>
 		<?php } ?>
+		*/ ?>
 		<li>
 			<a class=" <?= ($activeOption=='loved') ? 'active' : '' ?>" href="<?= $person->getLovedLink()?>">Loved</a>
 		</li>

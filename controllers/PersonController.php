@@ -518,6 +518,7 @@ class PersonController extends CController
 
 	public function actionSocial($slug, $person_id)
 	{
+		throw new NotFoundHttpException();
 		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
 		$person = Person::findOneSerialized($person_id);
 

@@ -192,7 +192,6 @@ app\components\assets\PublicHeader2Asset::register($this);
 							'languagePluginAsset' => 'lajax\languagepicker\bundles\LanguagePluginAsset',
 						]);
 						?>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -211,17 +210,17 @@ app\components\assets\PublicHeader2Asset::register($this);
 			</div>
 			<div class="hidden-md hidden-lg container"><!--MOBILE / TABLET-->
 				<ul>
-					<?php foreach($categories as $category) { ?>
-						<li>
-							<a href="<?= $category->getMainLink()?>"><?= $category->name?></a>
-							<a href="#" class="hover-toggle <?=$selectedCategory && $selectedCategory->short_id == $category->short_id ? 'selected' : ''?>" data-group=".category-menu" data-target="#category-<?=$category->short_id?>" aria-hidden="true"><span class="glyphicon glyphicon-plus"></span></a>
-						</li>
-						<?php } ?>
-					</ul>
-				</div>
-			</nav>
-			<div id="submenu-categories">
 				<?php foreach($categories as $category) { ?>
+					<li>
+						<a href="<?= $category->getMainLink()?>"><?= $category->name?></a>
+						<a href="#" class="hover-toggle <?=$selectedCategory && $selectedCategory->short_id == $category->short_id ? 'selected' : ''?>" data-group=".category-menu" data-target="#category-<?=$category->short_id?>" aria-hidden="true"><span class="glyphicon glyphicon-plus"></span></a>
+					</li>
+					<?php } ?>
+				</ul>
+			</div>
+		</nav>
+		<div id="submenu-categories">
+			<?php foreach($categories as $category) { ?>
 				<div class="category-menu" id="category-<?=$category->short_id?>">
 					<div class="container">
 						<div class="categories">
@@ -234,80 +233,81 @@ app\components\assets\PublicHeader2Asset::register($this);
 									$subCategories = $category->getSubCategoriesHeader();
 									if ($subCategories) {
 										foreach ($subCategories as $subCategory) { ?>
-										<ul class="two-categories">
-											<li>
-												<a class="two-categories-title" href="<?=$subCategory->getMainLink()?>"><?= $subCategory->name ?></a>
-											</li>
-											<?php
+											<ul class="two-categories">
+												<li>
+													<a class="two-categories-title"
+													   href="<?= $subCategory->getMainLink() ?>"><?= $subCategory->name ?></a>
+												</li>
+												<?php
 
-											$subSubCategories = $subCategory->getSubCategoriesHeader();
-											foreach ($subSubCategories as $subSubCategory) { ?>
-											<li>
-												<a href="<?=$subSubCategory->getMainLink()?>"><?= $subSubCategory->name ?></a>
-											</li>
+												$subSubCategories = $subCategory->getSubCategoriesHeader();
+												foreach ($subSubCategories as $subSubCategory) { ?>
+													<li>
+														<a href="<?= $subSubCategory->getMainLink() ?>"><?= $subSubCategory->name ?></a>
+													</li>
+													<?php
+												} ?>
+											</ul>
 											<?php
-										} ?>
-									</ul>
-									<?php
-								}
-							}
-						} else {
-							$subCategories = $category->getSubCategoriesHeader();
-							if ($subCategories) {
-								if (count($subCategories) > 8) {
+										}
+									}
+								} else {
+									$subCategories = $category->getSubCategoriesHeader();
+									if ($subCategories) {
+										if (count($subCategories) > 8) {
 											// Category with 9 or more 2nd level items, subcategories are shown in columns ?>
 											<ul class="two-categories">
-												<?php
-											}
-											$i = 1;
-											foreach ($subCategories as $subCategory) { ?>
+											<?php
+										}
+										$i = 1;
+										foreach ($subCategories as $subCategory) { ?>
 											<li>
 												<a href="<?= $subCategory->getMainLink() ?>"><?= $subCategory->name ?></a>
 											</li>
 
 											<?php if (count($subCategories) > 8 && $i == ceil(count($subCategories) / 2)) { ?>
-										</ul>
-										<ul class="two-categories">
+												</ul>
+												<ul class="two-categories">
+												<?php
+											}
+											$i++;
+										}
+										if (count($subCategories) > 8) { ?>
+											</ul>
 											<?php
 										}
-										$i++;
 									}
-									if (count($subCategories) > 8) { ?>
-								</ul>
-								<?php
-							}
-						}
-					}?>
-				</ul>
-			</div>
-			<div class="images">
-				<?php
-				$headerImages = $category->getHeaderImages();
-				$count = 1;
-				foreach ($headerImages as $image) { ?>
-				<div class="image-<?=$count?>">
-					<?php if ($image['link']) { ?>
-					<a href="<?=$image['link']?>" title="<?=$image['name']?>">
-						<img src="<?=$image['url']?>">
-					</a>
-					<?php } else { ?>
-					<img src="<?=$image['url']?>">
-					<?php } ?>
+								} ?>
+							</ul>
+						</div>
+						<div class="images">
+							<?php
+							$headerImages = $category->getHeaderImages();
+							$count = 1;
+							foreach ($headerImages as $image) { ?>
+							<div class="image-<?=$count?>">
+								<?php if ($image['link']) { ?>
+								<a href="<?=$image['link']?>" title="<?=$image['name']?>">
+									<img src="<?=$image['url']?>">
+								</a>
+								<?php } else { ?>
+								<img src="<?=$image['url']?>">
+								<?php } ?>
+							</div>
+							<?php
+							if ($count== 1) {
+								$count = 2;?>
+								<div class="images-wrapper">
+									<?php }
+								}
+								if (count($headerImages)) { ?>
+							</div><!--close image-wrapper-->
+							<?php } ?>
+						</div>
+					</div>
 				</div>
-				<?php
-				if ($count== 1) {
-					$count = 2;?>
-					<div class="images-wrapper">
-						<?php }
-					}
-					if (count($headerImages)) { ?>
-				</div><!--close image-wrapper-->
-				<?php } ?>
-			</div>
+			<?php } ?>
 		</div>
 	</div>
-	<?php } ?>
-</div>
-</div>
 </div>
 
