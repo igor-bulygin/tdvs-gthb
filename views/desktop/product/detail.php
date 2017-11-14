@@ -63,13 +63,16 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 		</div>
 		<div>
 			<div class="container">
+				<div class="row"> 
+							<span class="title-mobile visible-xs-block" ng-bind="detailProductCtrl.product.name"></span>
+						</div>
 				<div class="col-md-8 pad-product">
 					<div class="product-photos-wrapper">
 						<!-- CAROUSEL-->
 						<div id='carousel-custom' class='carousel slide' data-ride='carousel'>
 							<!-- Indicators -->
 							<div class="row">
-								<div class="col-sm-2">
+								<div class="col-sm-2 hidden-xs">
 									<div id="arrow-up">
 										<span class="ion-ios-arrow-up"></span>
 									</div>
@@ -124,7 +127,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 				</div>
 				<div class="col-md-4 pad-product">
 					<div class="product-data-wrapper" >
-						<div class="product-data">
+						<div class="product-data hidden-xs">
 							<span class="title" ng-bind="detailProductCtrl.product.name"></span>
 							<?php /*
 							<span class="score">
@@ -214,7 +217,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 								</div>
 								*/ ?>
 								<div class="row-size">
-									<button type="button" class="btn btn-medium btn-red auto-center" ng-disabled="detailProductCtrl.stock === 0 || detailProductCtrl.addingToCart" ng-click="detailProductCtrl.addToCart(detailProductCtrl.tagsForm)">
+									<button type="button" class="btn btn-medium btn-red btn-enlarged-mb auto-center" ng-disabled="detailProductCtrl.stock === 0 || detailProductCtrl.addingToCart" ng-click="detailProductCtrl.addToCart(detailProductCtrl.tagsForm)">
 										<span class="col-md-12">
 											<span class="col-md-10">
 												<span class="cart-icon"></span> <span translate="{{detailProductCtrl.stock === 0 ? 'product.detail.OUT_OF_STOCK' : 'product.detail.ADD_TO_CART'}}"></span>
@@ -403,7 +406,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 												<div class="policies-row">
 													<form class="form-horizontal">
 														<div class="form-group ">
-															<label class="col-xs-11 offset-sx-1 control-label shipping-label no-pad-r"><span translate="product.detail.SHIPPING_PRICE_SPAIN"></span> <span translate="product.detail.IS"></span> <span class="tax">€<?=$product->getShippingPrice(null, Country::getDefaultContryCode())?></span></label>
+															<label class="col-xs-11 offset-xs-1 control-label shipping-label no-pad-r"><span translate="product.detail.SHIPPING_PRICE_SPAIN"></span> <span translate="product.detail.IS"></span> <span class="tax">€<?=$product->getShippingPrice(null, Country::getDefaultContryCode())?></span></label>
 
 												<?php /*
 												<div class="col-sm-5 pad-product">
