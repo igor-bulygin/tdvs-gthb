@@ -26,7 +26,8 @@
 			//if is new crop or it has been modified, upload the foto
 			if(vm.resolve.index === -1 || vm.modified) {
 				if(angular.isObject(vm.resolve.imageData) && (vm.resolve.imageData.photoCropped || vm.resolve.imageData.title || vm.resolve.imageData.description)) {
-					vm.file = Upload.dataUrltoBlob(vm.resolve.imageData.photoCropped, 'temp.png')
+					vm.file = Upload.dataUrltoBlob(vm.resolve.imageData.photoCropped, 'temp.png');
+					vm.file.photoCropped = undefined;
 					var data = {
 						deviser_id: person.short_id,
 						file: vm.file

@@ -110,7 +110,7 @@
 						if(imageData.url)
 							imageObject.url = imageData.url;
 						if(imageData.name)
-							descriptionPhotoObject.name
+							descriptionPhotoObject.name = imageData.name;
 						if(index <= -1) {
 							vm.images.unshift(imageObject);
 							vm.product.media.description_photos.unshift(descriptionPhotoObject);
