@@ -111,6 +111,8 @@ class PublicController extends CController
 				]
 			);
 
+			$homeBanners = [];
+
 		} else {
 
 			$categoryShortIds = [];
@@ -118,6 +120,13 @@ class PublicController extends CController
 			$banners = Banner::findSerialized(
 				[
 					'type' => Banner::BANNER_TYPE_CAROUSEL,
+					'category_id' => null,
+				]
+			);
+
+			$homeBanners = Banner::findSerialized(
+				[
+					'type' => Banner::BANNER_TYPE_HOME_BANNER,
 					'category_id' => null,
 				]
 			);
@@ -165,6 +174,7 @@ class PublicController extends CController
 
 		return $this->render("index-2", [
 			'banners' => $banners,
+			'homeBanners' => $homeBanners,
 			'devisersCarousel' => $devisersCarousel,
 			'influencersCarousel' => $influencersCarousel,
 			'works' => $works,

@@ -10,6 +10,7 @@ $this->title = Yii::t('app/public', 'INDEX_TITLE');
 Yii::$app->opengraph->title = $this->title;
 
 /** @var Banner[] $banners */
+/** @var Banner[] $homeBanners */
 /** @var Person[] $devisers */
 /** @var int $totalDevisers */
 /** @var Person[] $influencers */
@@ -102,21 +103,13 @@ Yii::$app->opengraph->title = $this->title;
 <section class="season-banners">
 	<div class="container">
 		<div class="row">
+			<?php foreach ($homeBanners as $banner) { ?>
 			<div class="col-sm-4">
-				<a href="<?=Yii::$app->getUrlManager()->getHostInfo()?>/deviser/musa-bajo-el-arbol/0ca469a/store">
-					<img src="/imgs/home_square_1.jpg" class="responsive-image">
+				<a href="<?= !empty($banner->link) ? $banner->link : '#'?>">
+					<img src="<?= $banner->getImageLinkTranslated() ?>" alt="<?= $banner->alt_text ?>" title="" class="responsive-image">
 				</a>
 			</div>
-			<div class="col-sm-4">
-				<a href="<?=Yii::$app->getUrlManager()->getHostInfo()?>/deviser/coast-cycles/b818a0w/store">
-					<img src="/imgs/home_square_2.jpg" class="responsive-image">
-				</a>
-			</div>
-			<div class="col-sm-4">
-				<a href="<?=Yii::$app->getUrlManager()->getHostInfo()?>/deviser/pilar-del-campo/aa1e7c8/store">
-					<img src="/imgs/home_square_3.jpg" class="responsive-image">
-				</a>
-			</div>
+			<?php } ?>
 		</div>
 	</div>
 </section>
