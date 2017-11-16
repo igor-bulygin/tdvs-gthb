@@ -9,14 +9,14 @@
 							<span class="img-bgveil"></span>
 						</a>
 					</image-hover-buttons>
-					<figcaption>
-						<a ng-href="{{product.link}}">
-							<p class="instauser">
-								<span ng-bind="exploreProductsResultsCtrl.truncateString(product.name, 18, '…')"></span>
-							</p>
-							<p class="price">€ {{product.min_price}}</p>
-						</a>
-					</figcaption>
+					<a ng-href="{{product.link}}">
+						<figcaption>						
+								<p class="instauser">
+									<span ng-bind="exploreProductsResultsCtrl.truncateString(product.name, 18, '…')"></span>
+								</p>
+								<p class="price">€ {{product.min_price}}</p>
+						</figcaption>
+					</a>
 				</figure>
 			</div>
 		</div>

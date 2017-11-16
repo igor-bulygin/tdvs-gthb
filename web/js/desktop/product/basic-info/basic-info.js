@@ -111,7 +111,8 @@
 				}, 1000);
 				//parse images
 				vm.images.push({
-					url: currentHost() + '/' + data.data.url
+					url: currentHost() + '/' + data.data.url,
+					name: data.data.filename
 				});
 				vm.product.media.photos.push({
 					name: data.data.filename
@@ -251,16 +252,20 @@
 		}
 
 		function orderProductPhotos() {
-			var aux=new Array(vm.images.length);
-			angular.forEach(vm.images, function (image) {
-				angular.forEach(vm.product.media.photos, function (photo) {
-					if (photo.name === image.filename.name) {
-						aux[vm.images.indexOf(image)]=photo;
-					}
+			if (vm.images) {
+				var aux=[];
+				angular.forEach(vm.images, function (image) {
+					angular.forEach(vm.product.media.photos, function (photo) {
+						if (photo.name === image.name) {
+							aux[vm.images.indexOf(image)]=photo;
+						}
+					});
+					
 				});
-				
-			});
-			vm.product.media.photos = angular.copy(aux);
+				if (aux.length>0) {
+					vm.product.media.photos = angular.copy(aux);
+				}
+			}
 		}
 
 		$scope.$watch('productBasicInfoCtrl.product.categories', function(newValue, oldValue) {

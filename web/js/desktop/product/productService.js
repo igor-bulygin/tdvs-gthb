@@ -34,7 +34,7 @@
 			var main_photo = false;
 			if(angular.isArray(product.media.photos) && product.media.photos.length > 0) {
 				product.media.photos.forEach(function(element) {
-					if(element.main_product_photo)
+					if(element && element.main_product_photo)
 						main_photo = true;
 				});
 			}
