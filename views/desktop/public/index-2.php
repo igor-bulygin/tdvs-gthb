@@ -1,6 +1,7 @@
 <?php
 
 use app\assets\desktop\pub\Index2Asset;
+use app\models\Banner;
 use app\models\Person;
 
 Index2Asset::register($this);
@@ -8,6 +9,7 @@ Index2Asset::register($this);
 $this->title = Yii::t('app/public', 'INDEX_TITLE');
 Yii::$app->opengraph->title = $this->title;
 
+/** @var Banner[] $banners */
 /** @var Person[] $devisers */
 /** @var int $totalDevisers */
 /** @var Person[] $influencers */
@@ -15,7 +17,6 @@ Yii::$app->opengraph->title = $this->title;
 /** @var \app\models\Product[] $works */
 /** @var \app\models\Box[] $boxes */
 /** @var \app\models\Story[] $stories */
-/** @var array $banners */
 
 ?>
 
@@ -25,16 +26,16 @@ Yii::$app->opengraph->title = $this->title;
 		<?php if(count($banners) > 1) { ?>
 		<ol class="carousel-indicators">
 			<?php foreach ($banners as $i => $banner) { ?>
-				<li data-target="#carousel-example-generic" data-slide-to="<?= $i ?>" class="<?= ($banner["active"]) ? 'active' : '' ?>"></li>
+				<li data-target="#carousel-example-generic" data-slide-to="<?= $i ?>" class="<?= $i == 0 ? 'active' : '' ?>"></li>
 			<?php } ?>
 		</ol>
 		<?php } ?>
 		<div class="carousel-inner home-carousel" role="listbox">
 			<?php foreach ($banners as $i => $banner) { ?>
 
-					<div class="item <?= ($banner["active"]) ? 'active' : '' ?>">
-					 	<a href="<?= isset($banner['url']) ? $banner['url'] : '#'?>">
-							<img src="<?= $banner["img"] ?>" alt="<?= $banner["alt"] ?>" title="">
+					<div class="item <?= $i == 0 ? 'active' : '' ?>">
+					 	<a href="<?= !empty($banner->link) ? $banner->link : '#'?>">
+							<img src="<?= $banner->getImageLinkTranslated() ?>" alt="<?= $banner->alt_text ?>" title="">
 						</a>
 					</div>
 			<?php } ?>

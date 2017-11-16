@@ -246,7 +246,8 @@ class Banner extends CActiveRecord
 			$query->orderBy($criteria["order_by"]);
 		} else {
 			$query->orderBy([
-				"created_at" => SORT_DESC,
+				"position" => SORT_ASC,
+				"category_id" => SORT_ASC,
 			]);
 		}
 

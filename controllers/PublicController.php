@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\helpers\CController;
 use app\helpers\ModelUtils;
 use app\helpers\Utils;
+use app\models\Banner;
 use app\models\Become;
 use app\models\Box;
 use app\models\Category;
@@ -95,6 +96,7 @@ class PublicController extends CController
 
 	protected function mainPage($slug = null, $category_id = null)
 	{
+		Banner::setSerializeScenario(Banner::SERIALIZE_SCENARIO_PUBLIC);
 
 		if ($category_id) {
 
@@ -102,12 +104,23 @@ class PublicController extends CController
 			/* @var Category $category */
 			$categoryShortIds = $category->getShortIds();
 
-			$banners = Utils::getBannerImages($category->getMainCategory());
+			$banners = Banner::findSerialized(
+				[
+					'type' => Banner::BANNER_TYPE_CAROUSEL,
+					'category_id' => $category_id,
+				]
+			);
 
 		} else {
 
 			$categoryShortIds = [];
-			$banners = Utils::getBannerImages();
+
+			$banners = Banner::findSerialized(
+				[
+					'type' => Banner::BANNER_TYPE_CAROUSEL,
+					'category_id' => null,
+				]
+			);
 		}
 
 		// Devisers
