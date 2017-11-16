@@ -468,4 +468,11 @@ class AdminController extends CController {
 
 		echo $result;
 	}
+
+	public function actionBanners($filters = null) {
+
+		$data = [];
+
+		return Yii::$app->request->isAjax ? $this->renderPartial("banners", $data) : $this->render("banners", $data);
+	}
 }

@@ -24,6 +24,8 @@ class UploadForm extends Model {
 
 	const UPLOAD_TYPE_PERSON_PACK_INVOICE = 'person-pack-invoice';
 
+	const UPLOAD_TYPE_BANNER_IMAGE = 'banner-image';
+
 	const UPLOAD_TYPE_KNOWN_PRODUCT_PHOTO = 'known-product-photo';
 	const UPLOAD_TYPE_UNKNOWN_PRODUCT_PHOTO = 'unknown-product-photo';
 
@@ -31,6 +33,7 @@ class UploadForm extends Model {
 	const SCENARIO_UPLOAD_DEVISER_CURRICULUM = 'scenario-upload-deviser-curriculum';
 	const SCENARIO_UPLOAD_DEVISER_INVOICE = 'scenario-upload-deviser-invoice';
 	const SCENARIO_UPLOAD_PRODUCT_IMAGE = 'scenario-upload-product-image';
+	const SCENARIO_UPLOAD_BANNER_IMAGE = 'scenario-upload-banner-image';
 
 
 	/**
@@ -81,6 +84,7 @@ class UploadForm extends Model {
 			[['file'], 'file', 'skipOnEmpty' => false, 'extensions' => ['png', 'jpg', 'jpeg'], 'on' => [self::SCENARIO_UPLOAD_DEVISER_IMAGE, self::SCENARIO_UPLOAD_PRODUCT_IMAGE]],
 			[['file'], 'file', 'skipOnEmpty' => false, 'extensions' => ['pdf'], 'on' => [self::SCENARIO_UPLOAD_DEVISER_INVOICE]],
 			[['file'], 'file', 'skipOnEmpty' => false, 'extensions' => ['png', 'jpg', 'jpeg', 'pdf'], 'on' => self::SCENARIO_UPLOAD_DEVISER_CURRICULUM],
+			[['file'], 'file', 'skipOnEmpty' => false, 'extensions' => ['png', 'jpg', 'jpeg'], 'on' => [self::SCENARIO_UPLOAD_BANNER_IMAGE]],
 		];
 	}
 
@@ -142,6 +146,9 @@ class UploadForm extends Model {
 			case UploadForm::UPLOAD_TYPE_UNKNOWN_PRODUCT_PHOTO:
 				$path = Utils::join_paths(Yii::getAlias("@product"), "temp");
 				break;
+			case UploadForm::UPLOAD_TYPE_BANNER_IMAGE:
+				$path = Utils::join_paths(Yii::getAlias("@banner"), "");
+				break;
 			default:
 				$path = Yii::getAlias("@uploads");
 				break;
@@ -169,6 +176,7 @@ class UploadForm extends Model {
 			UploadForm::UPLOAD_TYPE_PERSON_PACK_INVOICE => 'person.pack.invoice.',
 			UploadForm::UPLOAD_TYPE_KNOWN_PRODUCT_PHOTO => 'product.photo.',
 			UploadForm::UPLOAD_TYPE_UNKNOWN_PRODUCT_PHOTO => 'product.photo.',
+			UploadForm::UPLOAD_TYPE_BANNER_IMAGE => 'banner.image.',
 
 		];
 
@@ -226,6 +234,8 @@ class UploadForm extends Model {
 				break;
 			case UploadForm::UPLOAD_TYPE_UNKNOWN_PRODUCT_PHOTO:
 				break;
+			case UploadForm::UPLOAD_TYPE_BANNER_IMAGE:
+				break;
 			default:
 				$this->addError($attribute, 'Invalid type');
 				break;
@@ -257,6 +267,9 @@ class UploadForm extends Model {
 				break;
 			case UploadForm::UPLOAD_TYPE_UNKNOWN_PRODUCT_PHOTO:
 				$url = (Yii::getAlias("@product_url") . "/temp/" . $this->filename);
+				break;
+			case UploadForm::UPLOAD_TYPE_BANNER_IMAGE:
+				$url = (Yii::getAlias("@banner_url") . "/" . $this->filename);
 				break;
 			default:
 				$url = null;
@@ -292,6 +305,9 @@ class UploadForm extends Model {
 			case UploadForm::UPLOAD_TYPE_KNOWN_PRODUCT_PHOTO:
 			case UploadForm::UPLOAD_TYPE_UNKNOWN_PRODUCT_PHOTO:
 				$this->setScenario(UploadForm::SCENARIO_UPLOAD_PRODUCT_IMAGE);
+				break;
+			case UploadForm::UPLOAD_TYPE_BANNER_IMAGE:
+				$this->setScenario(UploadForm::SCENARIO_UPLOAD_BANNER_IMAGE);
 				break;
 			default:
 				$url = null;
