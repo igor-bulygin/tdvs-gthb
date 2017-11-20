@@ -5,7 +5,11 @@ use app\models\Person;
 
 Index2Asset::register($this);
 
-$this->title = Yii::t('app/public', 'INDEX_TITLE');
+if ($category) {
+	$this->title = $category->getName();
+} else {
+	$this->title = Yii::t('app/public', 'INDEX_TITLE');
+}
 Yii::$app->opengraph->title = $this->title;
 
 /** @var Person[] $devisers */

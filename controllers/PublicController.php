@@ -106,8 +106,10 @@ class PublicController extends CController
 
 		} else {
 
+			$category = null;
 			$categoryShortIds = [];
 			$banners = Utils::getBannerImages();
+
 		}
 
 		// Devisers
@@ -156,6 +158,7 @@ class PublicController extends CController
 			'influencersCarousel' => $influencersCarousel,
 			'works' => $works,
 			'htmlWorks' => $htmlWorks,
+			"category" => $category,
 			"category_id" => $category_id,
 			'boxes' => $boxes,
 			'stories' => $stories,
