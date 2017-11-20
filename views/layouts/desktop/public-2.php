@@ -29,6 +29,8 @@ if (empty(Yii::$app->opengraph->description)) {
 		<!-- METAS -->
 		<meta charset="<?= Yii::$app->charset ?>">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="<?=Yii::$app->opengraph->description?>"/>
+
 
 		<?php $this->head() ?>
 		<?php $this->registerJs("var _lang = " . Json::encode(Yii::$app->language) . ";", View::POS_HEAD) ?>
