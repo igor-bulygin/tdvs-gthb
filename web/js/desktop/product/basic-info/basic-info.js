@@ -136,7 +136,6 @@
 					}
 				});
 			}
-
 			
 			angular.forEach(images, function(image) {
 				vm.tempFiles.push(image);
