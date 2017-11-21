@@ -92,6 +92,9 @@ class AppPrivateController extends Controller
 			// If person_id is not specified, we try to find a deviser_id
 			$person_id = Yii::$app->request->isGet ? Yii::$app->request->get("deviser_id") : Yii::$app->request->post("deviser_id");
 		}
+		if (empty($person_id) && !Yii::$app->user->isGuest) {
+			$person_id = Yii::$app->user->identity->short_id;
+		}
 		if (empty($person_id)) {
 			throw new BadRequestHttpException('Person id not specified');
 		}
