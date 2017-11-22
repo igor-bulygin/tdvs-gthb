@@ -21,6 +21,9 @@
 		vm.categorySelected = categorySelected;
 		vm.selectedCategory= null;
 		vm.getBanners = getBanners;
+		vm.editBanner = editBanner;
+		vm.cancelEdition = cancelEdition;
+		vm.deleteBanner = deleteBanner;
 
 		function init() {
 			getLanguages();
@@ -50,7 +53,6 @@
 					vm.name_language = vm.languages[0];
 				}
 			}
-
 			languageDataService.getLanguages(onGetLanguagesSuccess, UtilService.onError);
 		}
 
@@ -74,7 +76,14 @@
 			}
 		}
 
-		function showNewBanner() {
+		function editBanner(banner) {
+			vm.isEdition = true;
+			vm.newBanner = banner;
+			vm.newImage = vm.newBanner.image_link;
+			vm.viewNewBanner=true;
+		}
+
+		function showNewBanner(isEdition) {
 			var position=0;
 			if (vm.banners.length>0) {
 				Math.max.apply(Math,vm.banners.map(function(o){return o.position;}));
@@ -105,7 +114,7 @@
 					vm.newBanner.image= {};
 				}
 				vm.newBanner.image[vm.name_language]= data.data.filename;
-				vm.newImage[vm.name_language]= { url: currentHost() + '/' + data.data.url };
+				vm.newImage[vm.name_language]= data.data.url;
 				var index=-1;
 				angular.forEach(vm.tempFiles, function(uploadingFile) {
 					if (uploadingFile.$$hashKey==file.$$hashKey) {
@@ -146,6 +155,12 @@
 			});
 		}
 
+		function cancelEdition() {
+			vm.isEdition = false;
+			vm.viewNewBanner=false;
+			vm.newBanner = {};
+			vm.newImage = {};
+		}
 
 		function saveBanner() {
 			vm.textRequired=false;
@@ -161,12 +176,26 @@
 			if (!vm.textRequired && !vm.imageRequired) {
 				function onSaveBannersSuccess(data) {
 					getBanners();
+					vm.isEdition = false;
 					vm.viewNewBanner=false;
 				}
-				vm.newBanner.category_id= vm.selectedCategory;
-				vm.newBanner.type= vm.selectedType;
-				bannerDataService.createBanner(vm.newBanner, onSaveBannersSuccess, UtilService.onError);
+				if (vm.isEdition) {
+					bannerDataService.updateBanner(vm.newBanner, {id:vm.newBanner.id}, onSaveBannersSuccess, UtilService.onError);
+				}
+				else {
+					vm.newBanner.category_id= vm.selectedCategory;
+					vm.newBanner.type= vm.selectedType;
+					bannerDataService.createBanner(vm.newBanner, onSaveBannersSuccess, UtilService.onError);
+				}
 			}
+		}
+
+		function deleteBanner(banner) {
+			vm.loading = true;
+			function onDeleteBannerSuccess(data) {
+				getBanners();
+			}
+			bannerDataService.deleteBanner({id:banner.id }, onDeleteBannerSuccess, UtilService.onError);
 		}
 
 		function getCategories() {
