@@ -5,7 +5,9 @@
 		var vm = this;
 		vm.bannerOptions = [{name:"Home", value:-1},{name:"Categories", value:2}];
 		vm.selectedBannerOption= vm.bannerOptions[0];
-		vm.selectBannerOption=selectBannerOption;
+		vm.bannerTypes = [{name:"Carousel", value:'carousel'},{name:"Banner", value:'home_banner'}];
+		vm.selectedType=vm.bannerTypes[0].value;
+		vm.selectBannerOption = selectBannerOption;
 		vm.banners = [];
 		vm.uploadPhoto=uploadPhoto;
 		vm.tempFiles=[];
@@ -18,6 +20,7 @@
 		vm.selectedCategories =  [];
 		vm.categorySelected = categorySelected;
 		vm.selectedCategory= null;
+		vm.getBanners = getBanners;
 
 		function init() {
 			getLanguages();
@@ -53,9 +56,14 @@
 
 		function selectBannerOption() {
 			vm.showCategorySelection=false;
+			vm.showHomeSelection = false;
 			vm.selectedCategory= null;
+			vm.selectedType=vm.bannerTypes[0].value;
 			switch (vm.selectedBannerOption) {
 				case -1:
+					vm.showHomeSelection = true;
+					vm.categories_helper = [];
+					vm.selectedCategories =  [];
 					getBanners();
 					break;
 				default:
@@ -67,18 +75,11 @@
 		}
 
 		function showNewBanner() {
-			var type;
-			if (vm.selectedBannerOption === -1) {
-				type="home_banner";
-			}
-			else {
-				type="carousel";
-			}
 			var position=0;
 			if (vm.banners.length>0) {
 				Math.max.apply(Math,vm.banners.map(function(o){return o.position;}));
 			}
-			vm.newBanner = { type: type, category_id: vm.selectedCategory, position: position};
+			vm.newBanner = { category_id: vm.selectedCategory, position: position};
 			vm.newImage = {}; 
 			vm.viewNewBanner=true;
 		}
@@ -92,7 +93,7 @@
 				}
 				vm.loading=false;
 			}
-			bannerDataService.getBanners({category_id: vm.selectedCategory}, onGetBannersSuccess, UtilService.onError);
+			bannerDataService.getBanners({category_id: vm.selectedCategory, type:vm.selectedType }, onGetBannersSuccess, UtilService.onError);
 		}
 
 		function uploadPhoto(images, errImages) {
@@ -161,9 +162,9 @@
 				function onSaveBannersSuccess(data) {
 					getBanners();
 					vm.viewNewBanner=false;
-
 				}
 				vm.newBanner.category_id= vm.selectedCategory;
+				vm.newBanner.type= vm.selectedType;
 				bannerDataService.createBanner(vm.newBanner, onSaveBannersSuccess, UtilService.onError);
 			}
 		}

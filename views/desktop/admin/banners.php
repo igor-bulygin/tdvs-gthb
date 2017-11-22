@@ -29,6 +29,17 @@ $this->title = 'Todevise / Admin / Banners';
 				</span>
 			</div>
 		</div>
+		<div class="col-md-2" ng-if="bannerCtrl.showHomeSelection" ng-cloak>
+			<div class="items-row">
+				<span class="category-select">
+					<ol class="col-md-12 about-edit-select title-lang-btn nya-bs-select" ng-model="bannerCtrl.selectedType" ng-change="bannerCtrl.getBanners()">
+						<li nya-bs-option="option in bannerCtrl.bannerTypes" data-value="option.value" deep-watch="true">
+							<a href=""><span ng-bind="option.name"></span></a>
+						</li>
+					</ol>
+				</span>
+			</div>
+		</div>
 		<div class="col-md-10" ng-repeat="item in bannerCtrl.categories_helper track by $index" ng-if="bannerCtrl.showCategorySelection" ng-cloak>
 			<div class="items-row">
 				<span class="category-select" ng-repeat="category in bannerCtrl.categories_helper[$index].categories_selected">
