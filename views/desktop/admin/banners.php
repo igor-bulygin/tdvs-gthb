@@ -16,32 +16,39 @@ BannersAsset::register($this);
 $this->title = 'Todevise / Admin / Banners';
 ?>
 
-<div class="store">
-	<div class="container" ng-controller="bannerCtrl as bannerCtrl">
-		<div ng-if="!bannerCtrl.loading" ng-cloak>
-			<div class="row">
-				<div class="select-settings-wrapper">
-					<ol class="col-md-2 about-edit-select title-lang-btn nya-bs-select" ng-model="bannerCtrl.selectedBannerOption" ng-change="bannerCtrl.selectBannerOption()">
+<div class="store" ng-controller="bannerCtrl as bannerCtrl">
+	<div class="col-md-12">
+		<div class="col-md-2">
+			<div class="items-row">
+				<span class="category-select">
+					<ol class="col-md-12 about-edit-select title-lang-btn nya-bs-select" ng-model="bannerCtrl.selectedBannerOption" ng-change="bannerCtrl.selectBannerOption()">
 						<li nya-bs-option="option in bannerCtrl.bannerOptions" data-value="option.value" deep-watch="true">
 							<a href=""><span ng-bind="option.name"></span></a>
 						</li>
 					</ol>
-				</div>
-				<div class="col-md-12" ng-repeat="item in bannerCtrl.categories_helper track by $index" ng-if="bannerCtrl.showCategorySelection" ng-cloak>
-					<div class="items-row">
-						<span class="category-select" ng-repeat="category in bannerCtrl.categories_helper[$index].categories_selected">
-							<ol name="{{'categories_' + $parent.$index + '_' + $index}}" class="col-sm-2 col-md-2 nya-bs-select btn-group bootstrap-select form-control product-select" ng-model="bannerCtrl.categories_helper[$parent.$index].categories_selected[$index]" ng-change="bannerCtrl.categorySelected(bannerCtrl.categories_helper[$parent.$index].categories_selected[$index], $parent.$index, $index)">
-								<li nya-bs-option="subcategory in bannerCtrl.categories_helper[$parent.$index].categories[$index]" data-value="subcategory.id" deep-watch="true">
-									<a href="">
-										<span ng-bind="subcategory.name"></span>
-									</a>
-								</li>
-							</ol>
-						</span>
-						<span class="ion-android-close close-row" ng-if="bannerCtrl.product.categories.length > 1" ng-click="bannerCtrl.deleteCategory($index)"></span>
-					</div>
-				</div>
+				</span>
 			</div>
+		</div>
+		<div class="col-md-10" ng-repeat="item in bannerCtrl.categories_helper track by $index" ng-if="bannerCtrl.showCategorySelection" ng-cloak>
+			<div class="items-row">
+				<span class="category-select" ng-repeat="category in bannerCtrl.categories_helper[$index].categories_selected">
+					<ol name="{{'categories_' + $parent.$index + '_' + $index}}" class="col-sm-2 col-md-2 nya-bs-select btn-group bootstrap-select form-control product-select" ng-model="bannerCtrl.categories_helper[$parent.$index].categories_selected[$index]" ng-change="bannerCtrl.categorySelected(bannerCtrl.categories_helper[$parent.$index].categories_selected[$index], $parent.$index, $index)">
+						<li nya-bs-option="subcategory in bannerCtrl.categories_helper[$parent.$index].categories[$index]" data-value="subcategory.id" deep-watch="true">
+							<a href="">
+								<span ng-bind="subcategory.name"></span>
+							</a>
+						</li>
+					</ol>
+				</span>
+				<span class="ion-android-close close-row" ng-if="bannerCtrl.product.categories.length > 1" ng-click="bannerCtrl.deleteCategory($index)"></span>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="text-center" ng-if="bannerCtrl.loading" ng-cloak>
+			<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+		</div>
+		<div ng-if="!bannerCtrl.loading" ng-cloak>
 			<div class="row" >
 				<div class="col-md-10 col-md-offset-1">
 					<form class="row" name="bannerCtrl.newBannerForm" novalidate ng-if="bannerCtrl.viewNewBanner"  ng-cloak>
@@ -111,14 +118,11 @@ $this->title = 'Todevise / Admin / Banners';
 						<p><span>
 							No banners founded
 						</span>
-						<br/> <span></span></p>
-						<a class="btn btn-red edit-faq-btn" href="#" ng-click="bannerCtrl.showNewBanner()"><span>add banner</span></a>
+						<br/></p>
 					</div>
+					<a ng-if="!bannerCtrl.viewNewBanner" class="btn btn-red edit-faq-btn" href="#" ng-click="bannerCtrl.showNewBanner()"><span>add banner</span></a>
 				</div>
 			</div>
-		</div>
-		<div class="text-center mt-50" ng-if="bannerCtrl.loading" ng-cloak>
-			<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
 		</div>
 	</div>
 </div>

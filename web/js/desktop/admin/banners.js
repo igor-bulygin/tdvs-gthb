@@ -5,9 +5,7 @@
 		var vm = this;
 		vm.bannerOptions = [{name:"Home", value:-1},{name:"Categories", value:2}];
 		vm.selectedBannerOption= vm.bannerOptions[0];
-		vm.loading=true;
 		vm.selectBannerOption=selectBannerOption;
-		vm.selectedCategory=1;
 		vm.banners = [];
 		vm.uploadPhoto=uploadPhoto;
 		vm.tempFiles=[];
@@ -19,9 +17,9 @@
 		vm.categories_helper = [];
 		vm.selectedCategories =  [];
 		vm.categorySelected = categorySelected;
+		vm.selectedCategory= null;
 
 		function init() {
-			getBanners();
 			getLanguages();
 			setMandatoryLanguagesNames();
 		}
@@ -55,11 +53,13 @@
 
 		function selectBannerOption() {
 			vm.showCategorySelection=false;
+			vm.selectedCategory= null;
 			switch (vm.selectedBannerOption) {
 				case -1:
 					getBanners();
 					break;
 				default:
+					vm.banners = [];
 					getCategories();
 					vm.showCategorySelection=true;
 					break;
@@ -68,19 +68,17 @@
 
 		function showNewBanner() {
 			var type;
-			var category_id = null;
 			if (vm.selectedBannerOption === -1) {
 				type="home_banner";
 			}
 			else {
 				type="carousel";
-				category_id = vm.selectedCategory;
 			}
 			var position=0;
 			if (vm.banners.length>0) {
 				Math.max.apply(Math,vm.banners.map(function(o){return o.position;}));
 			}
-			vm.newBanner = { type: type, category_id:category_id, position: position};
+			vm.newBanner = { type: type, category_id: vm.selectedCategory, position: position};
 			vm.newImage = {}; 
 			vm.viewNewBanner=true;
 		}
@@ -91,10 +89,10 @@
 			function onGetBannersSuccess(data) {
 				if (data && data.items && data.items.length>0) {
 					vm.banners = angular.copy(data.items); 
-					vm.loading=false;
 				}
+				vm.loading=false;
 			}
-			bannerDataService.getBanners({}, onGetBannersSuccess, UtilService.onError);
+			bannerDataService.getBanners({category_id: vm.selectedCategory}, onGetBannersSuccess, UtilService.onError);
 		}
 
 		function uploadPhoto(images, errImages) {
@@ -165,14 +163,16 @@
 					vm.viewNewBanner=false;
 
 				}
+				vm.newBanner.category_id= vm.selectedCategory;
 				bannerDataService.createBanner(vm.newBanner, onSaveBannersSuccess, UtilService.onError);
 			}
 		}
 
 		function getCategories() {
+			vm.loading = true;
 			function onGetCategoriesSuccess(data) {
 				vm.categories = data.items;
-				
+				vm.loading = false;
 			}
 
 			productDataService.getCategories({ scope: 'all' }, onGetCategoriesSuccess, UtilService.onError);
@@ -188,6 +188,7 @@
 		}
 
 		function categorySelected(category, index_helper, index) {
+			vm.selectedCategory= category;
 			vm.emptyCategory=true;
 			vm.categories_helper[index_helper].categories_selected[index] = category;
 			//if we change an option with "child" selects
@@ -204,10 +205,9 @@
 			} else {
 				//if not
 				vm.selectedCategories[index_helper] = category;
-				vm.selectedCategory= vm.selectedCategories[vm.selectedCategories.length -1];
 				vm.emptyCategory=false;
 			}
-			
+			getBanners();
 		}
 
 		function filterCategory(categories, id) {
@@ -230,8 +230,11 @@
 
 		function deleteCategory(index) {
 			if(index >= 0) {
+				vm.selectedCategory= null;
 				vm.selectedCategories.splice(index, 1);
-				vm.selectedCategory= vm.selectedCategories[vm.selectedCategories.length -1];
+				if (vm.selectedCategories.length>0) {
+					vm.selectedCategory= vm.selectedCategories[vm.selectedCategories.length -1];
+				}
 				vm.categories_helper.splice(index, 1);
 			}
 		}
