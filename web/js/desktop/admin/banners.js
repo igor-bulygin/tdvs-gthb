@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller($translate, bannerDataService, UtilService, languageDataService, uploadDataService, $timeout, $scope, productDataService) {
+	function controller($translate, bannerDataService, UtilService, languageDataService, uploadDataService, $timeout, $scope, productDataService, dragndropService) {
 		var vm = this;
 		vm.bannerOptions = [{name:"Home", value:-1},{name:"Categories", value:2}];
 		vm.selectedBannerOption= vm.bannerOptions[0];
@@ -63,16 +63,16 @@
 			vm.selectedType=vm.bannerTypes[0].value;
 			switch (vm.selectedBannerOption) {
 				case -1:
-					vm.showHomeSelection = true;
-					vm.categories_helper = [];
-					vm.selectedCategories =  [];
-					getBanners();
-					break;
+				vm.showHomeSelection = true;
+				vm.categories_helper = [];
+				vm.selectedCategories =  [];
+				getBanners();
+				break;
 				default:
-					vm.banners = [];
-					getCategories();
-					vm.showCategorySelection=true;
-					break;
+				vm.banners = [];
+				getCategories();
+				vm.showCategorySelection=true;
+				break;
 			}
 		}
 
@@ -84,9 +84,9 @@
 		}
 
 		function showNewBanner(isEdition) {
-			var position=0;
+			var position=1;
 			if (vm.banners.length>0) {
-				Math.max.apply(Math,vm.banners.map(function(o){return o.position;}));
+				position = vm.banners.length +1;
 			}
 			vm.newBanner = { category_id: vm.selectedCategory, position: position};
 			vm.newImage = {}; 
@@ -226,7 +226,7 @@
 				while(vm.categories_helper[index_helper].categories_selected.length-1 > index) {
 					vm.categories_helper[index_helper].categories_selected.splice(vm.categories_helper[index_helper].categories_selected.length-1, 1);
 					vm.categories_helper[index_helper].categories.splice(vm.categories_helper[index_helper].categories.length-1, 1);
-					}
+				}
 			}
 			//if there are child categories
 			if(filterCategory(vm.categories,category).length > 0) {
@@ -269,6 +269,24 @@
 			}
 		}
 
+
+		vm.sortableOptions = {
+			stop: function(e, ui) { 
+				updateOorderBanners();
+			}
+		};
+
+		function updateOorderBanners() {
+			function onUpdateBannersSuccess(data) {
+			}
+			var i=1;
+			angular.forEach(vm.banners, function(banner) {
+				banner.position = i;
+				i= i+1;
+				bannerDataService.updateBanner(banner, {id:banner.id}, onUpdateBannersSuccess, UtilService.onError);
+			});
+		}
+
 		$scope.$watch('bannerCtrl.selectedCategories', function(newValue, oldValue) {
 			if(angular.isArray(oldValue) && oldValue[0]===null && angular.isArray(newValue) && newValue.length > 0) {
 				for(var i = 0; i < newValue.length; i++) {
@@ -300,7 +318,7 @@
 
 	}
 
-	angular.module('todevise', ['global-admin','pascalprecht.translate','api','nya.bootstrap.select'])
+	angular.module('todevise', ['global-admin','pascalprecht.translate','api','nya.bootstrap.select', 'ui.sortable'])
 	.controller('bannerCtrl', controller);
 
 }());

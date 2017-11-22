@@ -17,8 +17,8 @@ $this->title = 'Todevise / Admin / Banners';
 ?>
 
 <div class="store" ng-controller="bannerCtrl as bannerCtrl">
-	<div class="col-md-10">
-		<div class="col-md-10">
+	<div class="col-md-12">
+		<div class="col-md-9 col-md-offset-1">
 			<div class="col-md-2">
 				<div class="items-row">
 					<span class="category-select">
@@ -56,7 +56,7 @@ $this->title = 'Todevise / Admin / Banners';
 				</div>
 			</div>
 		</div>
-		<div class="col-md-2">
+		<div class="col-md-2 text-right mt-10">
 			<a ng-if="!bannerCtrl.viewNewBanner" class="btn btn-red edit-faq-btn" href="#" ng-click="bannerCtrl.showNewBanner()"><span>add banner</span></a>
 		</div>
 	</div>
@@ -104,11 +104,15 @@ $this->title = 'Todevise / Admin / Banners';
 						</div>
 					</form>
 					<div class="panel faq-panel col-md-12" ng-if="bannerCtrl.banners.length > 0 && !bannerCtrl.viewNewBanner" ng-cloak>
-						<uib-accordion>
-							<div  uib-accordion-group ng-repeat="banner in bannerCtrl.banners">
-								<uib-accordion-heading class="panel-heading panel-heading-faq" >
-									<h4 class="panel-title col-md-12 mt-10" style="border-top:black 1px solid;">
+						<ul class="list-group" ui-sortable="bannerCtrl.sortableOptions" ng-model="bannerCtrl.banners">
+							<li class="list-group-item row"  ng-repeat="banner in bannerCtrl.banners" >
+								<div class="panel-heading panel-heading-faq col-md-12" >
+									<h4 class="panel-title col-md-12 mt-10">
 										<span class="col-md-4 mt-10" ng-bind="banner.alt_text[bannerCtrl.lang]"></span>
+										<div ng-if="banner.link[bannerCtrl.lang]" ng-cloak>
+											<label class="col-md-12">Link</label>
+											<span class="col-md-12" ng-bind="banner.link[bannerCtrl.lang]"></span>
+										</div>
 										<div class="col-md-1 mt-10">
 											<img class="img-responsive" ng-src="{{bannerCtrl.baseUrl}}{{banner.image_link[bannerCtrl.lang]}}">
 										</div>
@@ -117,28 +121,11 @@ $this->title = 'Todevise / Admin / Banners';
 											<a href="" ng-click="bannerCtrl.deleteBanner(banner)"><i class="glyphicon glyphicon-trash black-icon"></i></a>
 										</div>
 									</h4>
-								</uib-accordion-heading>
-								<div class="panel">
-									<div class="panel-body faq-answer">
-										<div class="col-md-6">
-											<label class="col-md-12">Alt Text</label>
-											<span class="col-md-12" ng-bind="banner.alt_text[bannerCtrl.lang]"></span>
-											<div ng-if="banner.link[bannerCtrl.lang]" ng-cloak>
-												<label class="col-md-12">Link</label>
-												<span class="col-md-12" ng-bind="banner.link[bannerCtrl.lang]"></span>
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="col-md-10">
-												<img class="grid-image" ng-src="{{bannerCtrl.baseUrl}}{{banner.image_link[bannerCtrl.lang]}}">
-											</div>
-										</div>
-									</div>
 								</div>
-							</div>
-
-						</uib-accordion>
+							</li>
+						</ul>
 					</div>
+					
 					<div class="faq-edit-empty" ng-if="bannerCtrl.banners.length === 0 && !bannerCtrl.viewNewBanner" ng-cloak>
 						<img class="sad-face" src="/imgs/sad-face.svg">
 						<p><span>

@@ -16,6 +16,7 @@ class BannersAsset extends AssetBundle {
 	];
 	public $depends = [
 		'app\assets\desktop\admin\GlobalAsset',
-		'app\assets\libs\nyaBootstrapSelectAsset'
+		'app\assets\libs\nyaBootstrapSelectAsset',
+		'app\assets\libs\angularUiSortableAsset'
 	];
 }
