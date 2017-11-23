@@ -78,7 +78,7 @@
 
 		function editBanner(banner) {
 			vm.isEdition = true;
-			if(angular.isArray(array) && array.length === 0) {
+			if(angular.isArray(banner.link) && banner.link.length === 0) {
 				banner.link = UtilService.emptyArrayToObject(banner.link);
 			}
 			vm.newBanner = banner;
