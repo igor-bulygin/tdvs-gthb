@@ -64,8 +64,9 @@ $this->title = 'Todevise / Admin / Banners';
 		<span>Max banner number reached for this selection</span>
 	</div>
 	<div class="container">
-		<div class="text-center" ng-if="bannerCtrl.loading" ng-cloak>
-			<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+		<div class="row col-md-12 text-center mt-50" ng-if="bannerCtrl.loading" ng-cloak>
+			<i class="glyphicon glyphicon-repeat gly-spin"></i>
+			<span>LOADING</span>
 		</div>
 		<div ng-if="!bannerCtrl.loading" ng-cloak>
 			<div class="row" >
