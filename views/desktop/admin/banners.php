@@ -80,7 +80,7 @@ $this->title = 'Todevise / Admin / Banners';
 							<label class="col-md-2 mb-20" for="name">Alt Text</label>
 							<input class="col-md-10 mb-20 title-input form-control ng-class:{'error-input': bannerCtrl.textRequired}" type="text" name="alt_tet" ng-model="bannerCtrl.newBanner.alt_text[bannerCtrl.name_language]">
 							<div class="col-md-10 error-text" ng-if="bannerCtrl.textRequired" ng-cloak>
-								<span>Text is mandatory on the languages {{bannerCtrl.mandatory_langs_names}}</span>
+								<span>Text is required on the mandatory languages {{bannerCtrl.mandatory_langs_names}}</span>
 							</div>
 						</div>
 						<div class="col-md-10">
@@ -97,7 +97,7 @@ $this->title = 'Todevise / Admin / Banners';
 							</div>
 						</div>
 						<div class="col-md-10 error-text" ng-if="bannerCtrl.imageRequired" ng-cloak>
-							<span><span>Image is mandatory on the languages {{bannerCtrl.mandatory_langs_names}}</span></span>
+							<span><span>Image is required on the mandatory languages {{bannerCtrl.mandatory_langs_names}}</span></span>
 						</div>
 						<div class="col-md-6 mt-20">
 							<button class="btn btn-red btn-small" ng-click="bannerCtrl.saveBanner()"><span>Save</span></button>
