@@ -101,7 +101,6 @@ class PublicController extends CController
 		if ($category_id) {
 
 			$category = Category::findOneSerialized($category_id);
-			/* @var Category $category */
 			$categoryShortIds = $category->getShortIds();
 
 			$banners = Banner::findSerialized(
@@ -110,6 +109,17 @@ class PublicController extends CController
 					'category_id' => $category_id,
 				]
 			);
+
+			if (empty($banners)) {
+				// If there is no banners for the current category, we find in the parent categories
+
+				$banners = Banner::findSerialized(
+					[
+						'type' => Banner::BANNER_TYPE_CAROUSEL,
+						'category_id' => $category->getAncestorIds(),
+					]
+				);
+			}
 
 			$homeBanners = [];
 

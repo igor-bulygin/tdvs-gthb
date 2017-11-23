@@ -116,7 +116,7 @@ class Banner extends CActiveRecord
 
 			['image', 'app\validators\TranslatableRequiredValidator'],
 			['alt_text', 'app\validators\TranslatableRequiredValidator'],
-			['link', 'app\validators\TranslatableRequiredValidator'],
+			['link', 'app\validators\TranslatableValidator'],
 		];
 	}
 
