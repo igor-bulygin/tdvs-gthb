@@ -125,6 +125,7 @@ class PublicController extends CController
 
 		} else {
 
+			$category = null;
 			$categoryShortIds = [];
 
 			$banners = Banner::findSerialized(
@@ -189,6 +190,7 @@ class PublicController extends CController
 			'influencersCarousel' => $influencersCarousel,
 			'works' => $works,
 			'htmlWorks' => $htmlWorks,
+			"category" => $category,
 			"category_id" => $category_id,
 			'boxes' => $boxes,
 			'stories' => $stories,
