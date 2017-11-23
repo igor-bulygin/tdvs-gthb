@@ -214,7 +214,7 @@ class Banner extends CActiveRecord
 		}
 
 		// if deviser id is specified
-		if ((array_key_exists("category_id", $criteria)) && (!empty($criteria["category_id"]))) {
+		if ((array_key_exists("category_id", $criteria))) {
 			$query->andWhere(["category_id" => $criteria["category_id"]]);
 		}
 
