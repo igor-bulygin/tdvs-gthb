@@ -84,13 +84,19 @@
 		}
 
 		function showNewBanner(isEdition) {
-			var position=1;
-			if (vm.banners.length>0) {
-				position = vm.banners.length +1;
+			vm.showMaxNumberReached=false;
+			if (vm.selectedType === 'home_banner' && vm.banners.length>2) {
+				vm.showMaxNumberReached=true;
 			}
-			vm.newBanner = { category_id: vm.selectedCategory, position: position};
-			vm.newImage = {}; 
-			vm.viewNewBanner=true;
+			else {
+				var position=1;
+				if (vm.banners.length>0) {
+					position = vm.banners.length +1;
+				}
+				vm.newBanner = { category_id: vm.selectedCategory, position: position};
+				vm.newImage = {}; 
+				vm.viewNewBanner=true;
+			}
 		}
 
 		function getBanners() {
@@ -193,6 +199,7 @@
 		function deleteBanner(banner) {
 			vm.loading = true;
 			function onDeleteBannerSuccess(data) {
+				vm.showMaxNumberReached=false;
 				getBanners();
 			}
 			bannerDataService.deleteBanner({id:banner.id }, onDeleteBannerSuccess, UtilService.onError);
@@ -272,11 +279,11 @@
 
 		vm.sortableOptions = {
 			stop: function(e, ui) { 
-				updateOorderBanners();
+				updateOrderBanners();
 			}
 		};
 
-		function updateOorderBanners() {
+		function updateOrderBanners() {
 			function onUpdateBannersSuccess(data) {
 			}
 			var i=1;

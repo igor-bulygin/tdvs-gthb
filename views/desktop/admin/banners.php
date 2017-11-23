@@ -57,8 +57,11 @@ $this->title = 'Todevise / Admin / Banners';
 			</div>
 		</div>
 		<div class="col-md-2 text-right mt-10">
-			<a ng-if="!bannerCtrl.viewNewBanner" class="btn btn-red edit-faq-btn" href="#" ng-click="bannerCtrl.showNewBanner()"><span>add banner</span></a>
+			<a ng-if="!bannerCtrl.viewNewBanner" class="btn btn-red edit-faq-btn" href="#" ng-click="bannerCtrl.showNewBanner(false)"><span>add banner</span></a>
 		</div>
+	</div>
+	<div class="col-md-12 text-right error-text" ng-if="bannerCtrl.showMaxNumberReached" ng-cloak>
+		<span>Max banner number reached for this selection</span>
 	</div>
 	<div class="container">
 		<div class="text-center" ng-if="bannerCtrl.loading" ng-cloak>
@@ -81,8 +84,8 @@ $this->title = 'Todevise / Admin / Banners';
 							</div>
 						</div>
 						<div class="col-md-10">
-							<label class="col-md-2 mb-20" for="link">Link (opt)</label>
-							<input class="col-md-10 mb-20 title-input form-control" type="text" name="link" ng-model="bannerCtrl.newBanner.link[bannerCtrl.name_language]">
+							<label class="col-md-2 mb-20" >Link (opt)</label>
+							<input class="col-md-10 mb-20 title-input form-control" type="text" ng-model="bannerCtrl.newBanner.link[bannerCtrl.name_language]">
 						</div>
 						<div class="col-md-10">
 							<label class="col-md-12" for="file"><span>photo</span></label>
@@ -97,7 +100,7 @@ $this->title = 'Todevise / Admin / Banners';
 							<span translate="product.basic_info.TITLE_MANDATORY" translate-values='{ languageList: bannerCtrl.mandatory_langs_names}'></span>
 						</div>
 						<div class="col-md-6 mt-20">
-							<button class="btn btn-red btn-small" ng-click="bannerCtrl.saveBanner()"><span>Save</span></button>
+							<button class="btn btn-red btn-small" ng-click="bannerCtrl.saveBanner()"><span translate="ADMIN.BANNER.SAVE"></span></button>
 						</div>
 						<div class="col-md-6 mt-20">
 							<button class="btn btn-red btn-small" ng-click="bannerCtrl.cancelEdition()"><span>Cancel</span></button>
@@ -108,15 +111,20 @@ $this->title = 'Todevise / Admin / Banners';
 							<li class="list-group-item row"  ng-repeat="banner in bannerCtrl.banners" >
 								<div class="panel-heading panel-heading-faq col-md-12" >
 									<h4 class="panel-title col-md-12 mt-10">
-										<span class="col-md-4 mt-10" ng-bind="banner.alt_text[bannerCtrl.lang]"></span>
-										<div ng-if="banner.link[bannerCtrl.lang]" ng-cloak>
-											<label class="col-md-12">Link</label>
-											<span class="col-md-12" ng-bind="banner.link[bannerCtrl.lang]"></span>
+										<div class="col-md-6">
+											<div class="col-md-12">
+												<label class="col-md-2" style="margin:0">Text:</label>
+												<span class="col-md-10 strong" ng-bind="banner.alt_text[bannerCtrl.lang]"></span>
+											</div>
+											<div class="col-md-12" ng-if="banner.link[bannerCtrl.lang]" ng-cloak>
+												<label class="col-md-2" style="margin:0">Link:</label>
+												<span class="col-md-10" ng-bind="banner.link[bannerCtrl.lang]"></span>
+											</div>
 										</div>
 										<div class="col-md-1 mt-10">
 											<img class="img-responsive" ng-src="{{bannerCtrl.baseUrl}}{{banner.image_link[bannerCtrl.lang]}}">
 										</div>
-										<div class="col-md-7 text-right mt-10">
+										<div class="col-md-5 text-right mt-10">
 											<a href="" ng-click="bannerCtrl.editBanner(banner)"><i class="glyphicon glyphicon-pencil black-icon"></i></a>
 											<a href="" ng-click="bannerCtrl.deleteBanner(banner)"><i class="glyphicon glyphicon-trash black-icon"></i></a>
 										</div>
