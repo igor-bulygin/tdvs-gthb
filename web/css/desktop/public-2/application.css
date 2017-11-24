@@ -1328,6 +1328,9 @@ label {
   text-transform: uppercase;
   text-align: center;
   display: block; }
+  @media (max-width: 768px) {
+    .login-title {
+      font-size: 34px !important; } }
 
 .inverse .login-title {
   color: #1C1919 !important; }
