@@ -6567,6 +6567,7 @@ span.optional-text.pull-left {
     padding: 0 20px; }
 
 .create-deviser-account-wrapper {
+  padding: 20px;
   background-color: #1C1919;
   float: left;
   width: 100%; }
@@ -6645,6 +6646,9 @@ span.optional-text.pull-left {
     text-transform: uppercase;
     font-family: "Univers Thin Ultra Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
     letter-spacing: 4px; }
+    @media (max-width: 768px) {
+      .title-create-account .first-title {
+        font-size: 48px; } }
   .title-create-account .second-title {
     font-family: "Roboto Condensed", sans-serif;
     font-size: 24px;
@@ -6652,6 +6656,9 @@ span.optional-text.pull-left {
     display: block;
     text-align: center;
     margin: -5px 0 5px; }
+    @media (max-width: 768px) {
+      .title-create-account .second-title {
+        font-size: 16px; } }
 
 .image-create-account img {
   width: 150px;
