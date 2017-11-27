@@ -25,6 +25,7 @@ class PostmanEmailAction extends CActiveRecord
 
 	const EMAIL_ACTION_TYPE_DEVISER_INVITATION_ACCEPT = 'deviser-invitation-accept';
 	const EMAIL_ACTION_TYPE_INFLUENCER_INVITATION_ACCEPT = 'influencer-invitation-accept';
+	const EMAIL_ACTION_TYPE_PERSON_FORGOT_PASSWORD= 'person-forgot-password';
 
 	const EMAIL_ACTION_STATE_PENDING = 'pending';
 	const EMAIL_ACTION_STATE_UNNECESSARY = 'unnecessary';

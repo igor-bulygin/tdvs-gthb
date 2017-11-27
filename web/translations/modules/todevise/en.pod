@@ -92,11 +92,21 @@
 			"INVITATION_USED": "You have created a Influencer account with this invitation. Login to access to your account.",
 			"INVITATION_NOT_AVAILABLE": "This invitation is not longer available. You can ask for a new one in \"@:todevise.create_influencer.BECOME\"."
 		},
+		"forgot_password": {
+			"TEXT_INFO" : "Enter the email you used to create your profile. We will send you a link to reset your password."
+			"TITLE": "Email to reset password",
+		},
+		"reset_password": {
+			"INVALID": "You used an invalid link to access this page",
+			"TITLE": "Change password",
+			"TEXT_INFO" : "When you click the arrow button your password will be changed and you will be logged in."
+		},
 		"index": {
 			"HIGHLIGHTED_WORKS": "Highlighted works"
 		},
 		"login": {
 			"LOGIN_TITLE": "Login in to your todevise account",
+			"FORGOT_PASSWORD": "Forgot your password?",
 			"REMEMBER": "Remember me",
 			"NOT_VALID": "Email or password are invalid"
 		},

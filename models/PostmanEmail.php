@@ -40,6 +40,7 @@ class PostmanEmail extends CActiveRecord
 	const EMAIL_CONTENT_TYPE_INFLUENCER_INVITATION = 'influencer-invitation';
 	const EMAIL_CONTENT_TYPE_ORDER_PAID = 'order-paid';
 	const EMAIL_CONTENT_TYPE_CONTACT_MESSAGE = 'contact-message';
+	const EMAIL_CONTENT_TYPE_PERSON_FORGOT_PASSWORD= 'person-forgot-password';
 
 	/**
 	 * The attributes that should be serialized

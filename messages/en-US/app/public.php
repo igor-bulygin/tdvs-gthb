@@ -75,6 +75,7 @@ return [
 	'ERROR_PAGE_MESSAGE_1' => 'Even the best relationships  go through  a rough patch sometimes, but this doesn’t mean that  we don’t love each other anymore',
 	'ERROR_PAGE_MESSAGE_2' => 'PD: Go back home babe, we are taking care of it!',
     'EXPLORE_BOXES' => 'Explore boxes',
+	'FORGOT_PASSWORD' => 'Forgot your password?',
     'INCORRECT_USERNAME_OR_PASSWORD' => 'Incorrect username or password',
     'INDEX_TITLE' => 'Home',
 	'HOME_BLOCK_1_TEXT_1' => '<span class="serif" style="margin-bottom:8px;">The</span>store',
@@ -109,6 +110,7 @@ return [
     'PRESS_BY_PERSON_NAME' => 'Press by {person_name}',
     'PRODUCT_BY_PERSON_NAME' => '{product_name} by {person_name}',
     'PROFILE_AND_STRIPE_LINKED_INFO' => 'Your Todevise profile and Stripe account are now linked. Do you want to connect your profile to a different Stripe account? Press the button below.',
+	'RESET_PASSWORD' => 'Password change',
     'SEE_MORE' => 'See more',
     'SELECT_CATEGORY' => 'Select category',
     'SELECT_COUNTRY' => 'Select country',

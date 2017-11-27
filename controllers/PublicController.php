@@ -1047,6 +1047,31 @@ class PublicController extends CController
 		]);
 	}
 
+	public function actionForgotPassword()
+	{
+		$this->layout = '/desktop/public-2.php';
+
+		return $this->render("forgot-password", [
+		]);
+	}
+
+	public function actionResetPassword()
+	{
+		$person_id = Yii::$app->request->get("person_id");
+		$action_id = Yii::$app->request->get("action_id");
+
+		$person = Person::findOne(['short_id' => $person_id]);
+
+		$valid = $person && $person->checkResetPasswordAction($action_id);
+
+		$this->layout = '/desktop/public-2.php';
+
+		return $this->render("reset-password", [
+			'person' => $person,
+			'valid' => $valid,
+		]);
+	}
+
 	public function actionAuthenticationRequired()
 	{
 		$model = new Login();

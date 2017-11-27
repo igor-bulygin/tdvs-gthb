@@ -92,11 +92,21 @@
 			"INVITATION_USED": "Ya has creado una cuenta de influencer con esta invitación. Haz log in para acceder.",
 			"INVITATION_NOT_AVAILABLE": "Esta invitación ya no está disponible. Puedes pedir otra en \"@:todevise.create_influencer.BECOME\"."
 		},
+		"forgot_password": {
+			"TITLE": "Email para restablecer la contraseña",
+			"TEXT_INFO" : "Introduce el email que usaste para crear tu perfil. Te enviaremos un email para restablecer tu contraseña."
+		},
+		"reset_password": {
+			"INVALID": "Has usado un enlace inválido para acceder a esta página",
+			"TITLE": "Cambio de contraseña",
+			"TEXT_INFO" : "Cuando pulses en el botón, tu contraseña será restablecida e iniciarás sesión."
+		},
 		"index": {
 			"HIGHLIGHTED_WORKS": "Productos destacados"
 		},
 		"login": {
 			"LOGIN_TITLE": "Identifícate en tu cuenta todevise",
+			"FORGOT_PASSWORD": "¿Olvidaste tu contraseña?",
 			"REMEMBER": "Recuérdame",
 			"NOT_VALID": "Email o contraseña incorrectos"
 		},

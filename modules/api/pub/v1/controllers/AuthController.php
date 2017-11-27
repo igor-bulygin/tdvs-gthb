@@ -4,8 +4,11 @@ namespace app\modules\api\pub\v1\controllers;
 
 use app\models\Login;
 use app\models\Person;
+use app\modules\api\pub\v1\forms\ResetPasswordForm;
 use Yii;
 use yii\helpers\Url;
+use yii\web\BadRequestHttpException;
+use yii\web\NotFoundHttpException;
 
 class AuthController extends AppPublicController
 {
@@ -55,5 +58,41 @@ class AuthController extends AppPublicController
 		Yii::$app->response->setStatusCode(204); // No content
 
 		return null;
+	}
+
+	public function actionForgotPassword()
+	{
+		$email = Yii::$app->request->post('email');
+		if (!$email) {
+			throw new BadRequestHttpException("Email param is required");
+		}
+		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
+		$person = Person::findByEmail($email);
+		if (!$person) {
+			throw new NotFoundHttpException(sprintf("Email %s not found", $email));
+		}
+		$person->sendForgotPasswordEmail();
+		Yii::$app->response->setStatusCode(204); // No content
+
+		return;
+	}
+
+	public function actionResetPassword()
+	{
+		$form = new ResetPasswordForm();
+		if ($form->load(Yii::$app->request->post(), '') && $form->validate()) {
+
+			$form->changePassword();
+
+			Yii::$app->response->setStatusCode(201); // Updated
+
+			return;
+
+		} else {
+
+			Yii::$app->response->setStatusCode(400); // Bad Request
+
+			return ["errors" => $form->errors];
+		}
 	}
 }

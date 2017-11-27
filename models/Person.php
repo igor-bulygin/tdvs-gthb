@@ -2098,4 +2098,48 @@ class Person extends CActiveRecord implements IdentityInterface
 
 		return false;
 	}
+
+	public function sendForgotPasswordEmail()
+	{
+		// handle success
+		$email = new PostmanEmail();
+		$email->code_email_content_type = PostmanEmail::EMAIL_CONTENT_TYPE_PERSON_FORGOT_PASSWORD;
+		$email->to_email = $this->getEmail();
+		$email->subject = Yii::t('app/public', 'FORGOT_PASSWORD');
+
+		// add task only one send task (to allow retries)
+		$task = new PostmanEmailTask();
+		$task->date_send_scheduled = new \MongoDate();
+		$email->addTask($task);
+
+		// register the attached action: invitation link
+		$action = new PostmanEmailAction();
+		$action->code_email_action_type = PostmanEmailAction::EMAIL_ACTION_TYPE_PERSON_FORGOT_PASSWORD;
+		$email->addAction($action);
+
+		$actionUrl = Url::to(["/public/reset-password", "action_id" => $action->uuid, "person_id"  => $this->short_id], true);
+		$email->body_html = Yii::$app->view->render(
+			'@app/mail/person/forgot-password',
+			[
+				"form" => $this,
+				"actionUrl" =>  $actionUrl,
+			],
+			$this
+		);
+		$email->save();
+
+		if ($email->send($task->id)) {
+			$email->save();
+
+			return true;
+		};
+
+		return false;
+	}
+
+	public function checkResetPasswordAction($actionId)
+	{
+		return true;
+	}
+
 }

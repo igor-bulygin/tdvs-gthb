@@ -298,6 +298,8 @@ $config = [
 
 				//Login
 				'login' => 'public/login',
+				'forgot-password' => 'public/forgot-password',
+				'reset-password' => 'public/reset-password',
 				'authentication-required' => 'public/authentication-required',
 
 				//Discover
@@ -422,6 +424,8 @@ $config = [
 				'GET api3/pub/v1/invitations/<uuid:[^/.]*?>' => 'api3/pub/v1/invitation/view', // override "view" action to accept alphanumeric ids
 
 				'POST api3/pub/v1/auth/login' => 'api3/pub/v1/auth/login',
+				'POST api3/pub/v1/auth/forgot-password' => 'api3/pub/v1/auth/forgot-password',
+				'POST api3/pub/v1/auth/reset-password' => 'api3/pub/v1/auth/reset-password',
 
 				// Cart - public
 				'POST api3/pub/v1/cart' => 'api3/pub/v1/cart/create-cart',
