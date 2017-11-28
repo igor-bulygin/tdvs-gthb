@@ -93,8 +93,8 @@
 			"INVITATION_NOT_AVAILABLE": "This invitation is not longer available. You can ask for a new one in \"@:todevise.create_influencer.BECOME\"."
 		},
 		"forgot_password": {
-			"TEXT_INFO" : "Enter the email you used to create your profile. We will send you a link to reset your password."
 			"TITLE": "Email to reset password",
+			"TEXT_INFO" : "Enter the email you used to create your profile. We will send you a link to reset your password."
 		},
 		"reset_password": {
 			"INVALID": "You used an invalid link to access this page",
