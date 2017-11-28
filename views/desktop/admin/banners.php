@@ -138,7 +138,7 @@ $this->title = 'Todevise / Admin / Banners';
 					<div class="faq-edit-empty" ng-if="bannerCtrl.banners.length === 0 && !bannerCtrl.viewNewBanner" ng-cloak>
 						<img class="sad-face" src="/imgs/sad-face.svg">
 						<p><span>
-							No banners founded
+							No banners found
 						</span>
 						<br/></p>
 					</div>
