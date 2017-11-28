@@ -38,7 +38,7 @@
 			<div class="col-md-12" id="description">
 				<label class="col-md-12 mb-20" for="description"><span translate="product.basic_info.DESCRIPTION"></span></label>
 				<div class="col-md-10">
-					<div class="mb-20 description-input ng-class:{'error-input': productBasicInfoCtrl.descriptionRequired}" text-angular ng-model="productBasicInfoCtrl.product.description[productBasicInfoCtrl.description_language]" ng-cloak ta-toolbar="[]" ta-paste="productBasicInfoCtrl.stripHTMLTags($html)"></div>
+					<div class="mb-20 description-input ng-class:{'error-input': productBasicInfoCtrl.descriptionRequired}" text-angular ng-model="productBasicInfoCtrl.product.description[productBasicInfoCtrl.description_language]" ng-cloak ta-toolbar="[]"></div>
 					<div class="error-text" ng-if="productBasicInfoCtrl.descriptionRequired"><span translate="product.basic_info.DESCRIPTION_IS_MANDATORY" translate-values='{ languageList: productBasicInfoCtrl.mandatory_langs_names}'></span></div>
 				</div>
 				<ol class="col-md-2 about-edit-select title-lang-btn nya-bs-select" ng-model="productBasicInfoCtrl.description_language">
