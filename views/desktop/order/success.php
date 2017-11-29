@@ -80,7 +80,7 @@ $this->registerJs("var order_id= ".Json::encode($order_id), yii\web\View::POS_HE
 						<span class="pull-right"><span translate="todevise.order.SHIPPING_PRICE"></span>&nbsp;<span ng-bind="pack.shipping_price"></span><span translate="todevise.order.CURRENCY"></span></span>
 						<div class="summary-cart-wrapper summary-white-item" ng-repeat="product in pack.products">
 							<div class="img-checkout-wrapper col-md-2">
-								<img ng-src="{{product.product_info.photo}}" ng-attr-alt="{{product.product_info.name}}" ng-attr-title="{{product.product_info.name}}">
+								<img ng-src="{{product.product_info.photo}}" class="img-responsive" ng-attr-alt="{{product.product_info.name}}" ng-attr-title="{{product.product_info.name}}">
 							</div>
 							<div>
 								<div>
