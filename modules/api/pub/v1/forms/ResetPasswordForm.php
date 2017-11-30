@@ -59,7 +59,7 @@ class ResetPasswordForm extends Model {
 			$this->addError('person_id', 'Person not found.');
 			return;
 		}
-		if (!$person->checkResetPasswordAction($this->action_id) || $person->getEmail() != $this->email) {
+		if (!$person->checkPersonByEmailActionUuid($this->action_id) || $person->getEmail() != $this->email) {
 			$this->addError('action_id', 'Invalid action_id.');
 			return;
 		}

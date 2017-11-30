@@ -2115,6 +2115,7 @@ class Person extends CActiveRecord implements IdentityInterface
 		// register the attached action: invitation link
 		$action = new PostmanEmailAction();
 		$action->code_email_action_type = PostmanEmailAction::EMAIL_ACTION_TYPE_PERSON_FORGOT_PASSWORD;
+		$action->person_id = $this->short_id;
 		$email->addAction($action);
 
 		$actionUrl = Url::to(["/public/reset-password", "action_id" => $action->uuid, "person_id"  => $this->short_id], true);
@@ -2137,9 +2138,21 @@ class Person extends CActiveRecord implements IdentityInterface
 		return false;
 	}
 
-	public function checkResetPasswordAction($actionId)
+	/**
+	 * Checks if a PostmanEmailAction defined by an uuid, is associated with the current person object
+	 *
+	 * @param string $actionUuid
+	 *
+	 * @return bool
+	 */
+	public function checkPersonByEmailActionUuid($actionUuid)
 	{
-		return true;
+		$action = PostmanEmailAction::findByUuid($actionUuid);
+		if ($action && $action['person_id'] == $this->short_id) {
+			return true;
+		}
+
+		return false;
 	}
 
 }

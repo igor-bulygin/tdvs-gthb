@@ -16,7 +16,7 @@ Yii::$app->opengraph->title = $this->title;
 	<form name="loginCtrl.form">
 		<span class="login-title" translate="todevise.reset_password.TITLE" ng-if="!loginCtrl.loading" ng-cloak></span>
 
-		<?php if (!$person) { ?>
+		<?php if (!$person || !$valid) { ?>
 			<div class="invitation-messages">
 				<p><span translate="todevise.reset_password.INVALID"></span></p>
 			</div>

@@ -108,7 +108,7 @@ class PostmanEmail extends CActiveRecord
 	 * Get a collection of entities serialized, according to serialization configuration
 	 *
 	 * @param array $criteria
-	 * @return array
+	 * @return PostmanEmail[]
 	 * @throws Exception
 	 */
 	public static function findSerialized($criteria = [])
@@ -123,6 +123,11 @@ class PostmanEmail extends CActiveRecord
 
 		// Count how many items are with those conditions, before limit them for pagination
 		static::$countItemsFound = $query->count();
+
+		// limit
+		if ((array_key_exists("action_uuid", $criteria)) && (!empty($criteria["action_uuid"]))) {
+			$query->andWhere(["actions.uuid" => $criteria["action_uuid"]]);
+		}
 
 		// limit
 		if ((array_key_exists("limit", $criteria)) && (!empty($criteria["limit"]))) {

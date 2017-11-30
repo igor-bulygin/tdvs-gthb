@@ -16,6 +16,7 @@ use Ramsey\Uuid\Uuid;
  * @property MongoDate $date_first_use
  * @property MongoDate $date_last_use
  * @property integer $amount_uses
+ * @property string $person_id
  * @property MongoDate $created_at
  * @property MongoDate $updated_at
  * @property MongoDate $deleted_at
@@ -59,6 +60,7 @@ class PostmanEmailAction extends CActiveRecord
 			'date_first_use',
 			'date_last_use',
 			'amount_uses',
+			'person_id',
 			'created_at',
 			'updated_at',
 			'deleted_at',
@@ -78,4 +80,26 @@ class PostmanEmailAction extends CActiveRecord
 		$this->created_at = new MongoDate();
 	}
 
+	/**
+	 * @param $uuid
+	 *
+	 * @return null|array
+	 */
+	public static function findByUuid($uuid)
+	{
+		$emails = PostmanEmail::findSerialized([
+			'action_uuid' => $uuid,
+		]);
+
+		if ($emails) {
+			$email = reset($emails); // get first
+			foreach ($email->actions as $action) {
+				if ($action['uuid'] == $uuid) {
+					return $action;
+				}
+			}
+		}
+
+		return null;
+	}
 }

@@ -1062,7 +1062,7 @@ class PublicController extends CController
 
 		$person = Person::findOne(['short_id' => $person_id]);
 
-		$valid = $person && $person->checkResetPasswordAction($action_id);
+		$valid = $person && $person->checkPersonByEmailActionUuid($action_id);
 
 		$this->layout = '/desktop/public-2.php';
 
