@@ -587,22 +587,15 @@ use yii\helpers\Url;
 												<td valign="top" class="mcnTextContent"
 												    style="padding: 0px 18px 9px;font-family: 'Helvetica Neue', Helvetica, Arial, Verdana, sans-serif;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;word-break: break-word;color: #202020;font-size: 16px;line-height: 150%;text-align: left;">
 
-													<h1 style="text-align: center;display: block;margin: 0;padding: 0;color: #202020;font-family: Helvetica;font-size: 26px;font-style: normal;font-weight: bold;line-height: 125%;letter-spacing: normal;">
-														WELCOME TO TODEVISE</h1>
+													<h1 style="text-align: center;display: block;margin: 0;padding: 0;color: #202020;font-family: Helvetica;font-size: 26px;font-style: normal;font-weight: bold;line-height: 125%;letter-spacing: normal;"><?=Yii::t('app/public', 'FORGOT_PASSWORD_EMAIL_TITLE')?></h1>
 
-													<p style="text-align: center;font-family: 'Helvetica Neue', Helvetica, Arial, Verdana, sans-serif;margin: 10px 0;padding: 0;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #202020;font-size: 16px;line-height: 150%;">
-														&nbsp;</p>
+													<p style="text-align: center;font-family: 'Helvetica Neue', Helvetica, Arial, Verdana, sans-serif;margin: 10px 0;padding: 0;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #202020;font-size: 16px;line-height: 150%;">&nbsp;</p>
+
 													<p style="font-family: 'Helvetica Neue';, Helvetica, Arial, Verdana, sans-serif;margin: 10px 0;padding: 0;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #202020;font-size: 16px;line-height: 150%;text-align: left;">
-														<strong>Todevise is a new concept of online store where
-															passionate innovators, talented entrepreneurs
-															and nonconformists who always push the limits of creation
-															converge.&nbsp;</strong><br>
+														<strong><?=Yii::t('app/public', 'FORGOT_PASSWORD_EMAIL_MAIN_TEXT')?></strong><br>
 														<br>
-														We have been impressed by your work and we are glad to welcome
-														you to Todevise's community.<br>
-														<br>
-														This invitation offers you the opportunity to become a member
-														(called 'deviser') and start selling your creations.&nbsp;</p>
+														<?=Yii::t('app/public', 'FORGOT_PASSWORD_EMAIL_SUB_TEXT')?>
+													</p>
 
 												</td>
 											</tr>
@@ -657,7 +650,7 @@ use yii\helpers\Url;
 													<a class="mcnButton " title="JOIN TODEVISE" href="<?= $actionUrl ?>"
 													   target="_blank"
 													   style="font-weight: normal;letter-spacing: normal;line-height: 100%;text-align: center;text-decoration: none;color: #FFFFFF;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;display: block;">
-														JOIN TODEVISE</a>
+														<?=Yii::t('app/public', 'FORGOT_PASSWORD_BUTTON_TEXT')?></a>
 												</td>
 											</tr>
 											</tbody>
@@ -693,12 +686,7 @@ use yii\helpers\Url;
 											<tr>
 												<td valign="top" class="mcnTextContent"
 												    style="padding-top: 0;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;word-break: break-word;color: #656565;font-family: Helvetica;font-size: 12px;line-height: 150%;text-align: center;">
-													<br>
-													<br>
-													Note: This invitation is linked to your email and will expire when
-													you create your profile. Therefore, you can only use this email to
-													sign up as a Todevise member.&nbsp;<br>
-													<br>
+													<?=Yii::t('app/public', 'FORGOT_PASSWORD_EMAIL_FOOTER')?>
 													<em>To learn more about Todevise, click on this link</em> <a
 														href="<?= Url::to('about-us', true); ?>"
 														style="line-height: 1.6;mso-line-height-rule:exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #656565;font-weight: normal;text-decoration: underline;"><?= Url::to('about-us', true); ?></a><br>
