@@ -94,7 +94,10 @@
 		},
 		"forgot_password": {
 			"TITLE": "Email para restablecer la contraseña",
-			"TEXT_INFO" : "Introduce el email que usaste para crear tu perfil. Te enviaremos un email para restablecer tu contraseña."
+			"TEXT_INFO" : "Introduce el email que usaste para crear tu perfil. Te enviaremos un email para restablecer tu contraseña.",
+			"TEXT_SUCCESS" : "Tu solicitud ha sido enviada. Si el email está registrado en Todevise, recibirás un enlace para restablecer tu contraseña.",
+			"EMAIL_REQUIRED" : "Debes introducir tu email",
+			"EMAIL_fORMAT_ERROR": "Debes introducir un email válido"
 		},
 		"reset_password": {
 			"INVALID": "Has usado un enlace inválido para acceder a esta página",

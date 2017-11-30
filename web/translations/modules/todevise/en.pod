@@ -94,7 +94,10 @@
 		},
 		"forgot_password": {
 			"TITLE": "Email to reset password",
-			"TEXT_INFO" : "Enter the email you used to create your profile. We will send you a link to reset your password."
+			"TEXT_INFO" : "Enter the email you used to create your profile. We will send you a link to reset your password.",
+			"TEXT_SUCCESS" : "Email successfuly sended. If the email is registered in Todevise, you will receive a link to reset your password.",
+			"EMAIL_REQUIRED" : "You must enter your email",
+			"EMAIL_fORMAT_ERROR": "You must enter a valid email"
 		},
 		"reset_password": {
 			"INVALID": "You used an invalid link to access this page",
