@@ -67,7 +67,7 @@ class AuthController extends AppPublicController
 		}
 		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
 		$person = Person::findByEmail($email);
-		if ($person) {
+		if ($person && $person->account_state != Person::ACCOUNT_STATE_BLOCKED) {
 			$person->sendForgotPasswordEmail();
 		}
 
