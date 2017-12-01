@@ -22,7 +22,7 @@ Yii::$app->opengraph->title = $this->title;
 					<div class="error-text" ng-if="loginCtrl.resetPasswordEmailRequired"><span translate="todevise.forgot_password.EMAIL_REQUIRED" ></span></div>
 					<div class="error-text" ng-if="loginCtrl.passwordEmailWrongFormat"><span translate="todevise.forgot_password.EMAIL_fORMAT_ERROR" ></span></div>
 				</div>
-				<span style="color: white;" translate="todevise.forgot_password.TEXT_INFO"></span>
+				<label translate="todevise.forgot_password.TEXT_INFO"></label>
 				<div class="row no-mar">
 					<button type="submit" class="btn-red send-btn" ng-click="loginCtrl.askForResetPassword()">
 						<img src="/imgs/plane.svg" data-pin-nopin="true">

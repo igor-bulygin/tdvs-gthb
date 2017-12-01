@@ -35,7 +35,7 @@ Yii::$app->opengraph->title = $this->title;
 					<input type="text" id="repeat_password" name="repeat_password" class="form-control grey-input" />
 				</div>
 				<div class="alert alert-danger" ng-if="loginCtrl.errors" ng-cloak translate="todevise.login.NOT_VALID"></div>
-				<span style="color: white;" translate="todevise.reset_password.TEXT_INFO"></span>
+				<label translate="todevise.reset_password.TEXT_INFO"></label>
 				<div class="row no-mar">
 					<button type="submit" class="btn-red send-btn" ng-click="loginCtrl.login()">
 						<img src="/imgs/plane.svg" data-pin-nopin="true">
