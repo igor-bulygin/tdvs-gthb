@@ -51,6 +51,9 @@
 		}
 
 		function resetPassword() {
+			vm.resetEmail = resetEmail;
+			vm.person_id = person_id;
+			vm.action_id = action_id;
 			vm.newPasswordSended = false;
 			vm.newPasswordRequired=false;
 			vm.newRepeatedPasswordRequired=false;
@@ -66,22 +69,42 @@
 			}
 			else {
 				vm.loading=true;
-				function resetPasswordSuccess(data) {
-					vm.newPasswordSended = true;
-					vm.loading=false;
+				function onResetPasswordSuccess(data) {
+					// vm.newPasswordSended = true;
+					// vm.loading = false;
+
+					function onLoginSuccess(data) {
+						if (data.access_token) {
+							localStorageUtilService.setLocalStorage('access_token', data.access_token);
+						}
+						if (data.return_url)
+							$window.location.href = data.return_url;
+					}
+
+					function onLoginError(err) {
+						vm.loading = false;
+						console.log(err);
+					}
+
+					var loginData = {
+						email: vm.resetEmail,
+						password: vm.newPassword
+					};
+					personDataService.login(loginData, null, onLoginSuccess, onLoginError);
 				}
-				function resetPasswordError(err) {
+
+				function onResetPasswordError(err) {
 					UtilService.onError(err);
 					vm.loading=false;
 				}
-				debugger;
+
 				var data = {
-					email: vm.resetEmail, 
-					new_password:vm.newPassword,
-					repeated_password: vm.newRepeatedPassword,
-					person_id: $routeParams.person_id,
-					action_id: $routeParams.action_id
-					}
+					email: vm.resetEmail,
+					new_password: vm.newPassword,
+					repeat_password: vm.newRepeatedPassword,
+					person_id: vm.person_id,
+					action_id: vm.action_id
+				}
 				personDataService.resetPassword(data, onResetPasswordSuccess, onResetPasswordError);
 			}
 		}

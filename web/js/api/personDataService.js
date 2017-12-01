@@ -32,6 +32,7 @@
 		this.updateProfile = updateProfile;
 		this.updatePassword = updatePassword;
 		this.askForResetPassword = askForResetPassword;
+		this.resetPassword = resetPassword;
 
 		function getPeople(params, onSuccess, onError) {
 			apiMethods.get(Person, params, onSuccess, onError);
@@ -81,7 +82,6 @@
 		}
 
 		function resetPassword(data, onSuccess, onError) {
-			debugger;
 			apiMethods.create(PassReset, data, {}, onSuccess, onError);
 		}
 	}

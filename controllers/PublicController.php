@@ -1067,6 +1067,8 @@ class PublicController extends CController
 		$this->layout = '/desktop/public-2.php';
 
 		return $this->render("reset-password", [
+			'person_id' => $person_id,
+			'action_id' => $action_id,
 			'person' => $person,
 			'valid' => $valid,
 		]);

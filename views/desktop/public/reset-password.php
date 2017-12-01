@@ -1,7 +1,7 @@
 <?php
 
 use app\assets\desktop\pub\PublicCommonAsset;
-use yii\helpers\Json;
+
 PublicCommonAsset::register($this);
 
 /* @var $this yii\web\View */
@@ -9,7 +9,9 @@ PublicCommonAsset::register($this);
 
 $this->title = Yii::t('app/public', 'RESET_PASSWORD');
 Yii::$app->opengraph->title = $this->title;
-$this->registerJs("var resetEmail = ".Json::encode($person->getEmail()), yii\web\View::POS_HEAD, 'invitation-var-script');
+$this->registerJs("var person_id = '".$person_id."';", yii\web\View::POS_HEAD);
+$this->registerJs("var action_id = '".$action_id."';", yii\web\View::POS_HEAD);
+$this->registerJs("var resetEmail = '".$person->getEmail()."';", yii\web\View::POS_HEAD);
 
 ?>
 
@@ -26,20 +28,20 @@ $this->registerJs("var resetEmail = ".Json::encode($person->getEmail()), yii\web
 					<div ng-if="!loginCtrl.newPasswordSended">
 						<div class="row no-mar">
 							<label for="resetEmail" translate="global.user.EMAIL"></label>
-							<input type="email" id="resetEmail" name="resetEmail" class="form-control grey-input" ng-value="<?=$person->getEmail()?>" readonly disabled ng-model="loginCtrl.resetEmail"/>
+							<input type="email" id="resetEmail" name="resetEmail" class="form-control grey-input" value="<?=$person->getEmail()?>" readonly disabled />
 						</div>
 						<div class="row no-mar">
 							<label for="password" translate="global.user.NEW_PASSWORD"></label>
-							<input type="text" id="password" name="password" class="form-control grey-input" ng-model="loginCtrl.newPassword"/>
+							<input type="password" id="password" name="password" class="form-control grey-input" ng-model="loginCtrl.newPassword"/>
 							<div class="error-text" ng-if="loginCtrl.newPasswordRequired"><span translate="todevise.forgot_password.NEW_PASSWORD_REQUIRED" ></span></div>
 						</div>
 						<div class="row no-mar">
 							<label for="repeat_password" translate="global.user.REPEAT_PASSWORD"></label>
-							<input type="text" id="repeat_password" name="repeat_password" class="form-control grey-input" ng-model="loginCtrl.newRepeatedPassword" />
+							<input type="password" id="repeat_password" name="repeat_password" class="form-control grey-input" ng-model="loginCtrl.newRepeatedPassword" />
 							<div class="error-text" ng-if="loginCtrl.newRepeatedPasswordRequired"><span translate="todevise.forgot_password.NEW_REPEATED_PASSWORD_REQUIRED" ></span></div>
 							<div class="error-text" ng-if="loginCtrl.distinctPasswords"><span translate="todevise.forgot_password.DISTINCT_PASSWORDS" ></span></div>
 						</div>
-						<span style="color: white;" translate="todevise.reset_password.TEXT_INFO"></span>
+						<label translate="todevise.reset_password.TEXT_INFO"></label>
 						<div class="row no-mar">
 							<button type="submit" class="btn-red send-btn" ng-click="loginCtrl.resetPassword()">
 								<img src="/imgs/plane.svg" data-pin-nopin="true">
@@ -47,7 +49,7 @@ $this->registerJs("var resetEmail = ".Json::encode($person->getEmail()), yii\web
 						</div>
 					</div>
 					<div ng-if="loginCtrl.newPasswordSended">
-						<span style="color: white;" translate="todevise.reset_password.SUCESSFULLY_RESET"></span>
+						<label translate="todevise.reset_password.SUCESSFULLY_RESET"></label>
 					</div>
 				</div>
 				<div class="text-center mt-30" ng-if="loginCtrl.loading">
