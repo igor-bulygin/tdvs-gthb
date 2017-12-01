@@ -33,10 +33,10 @@
 		function init(){
 			setMandatoryLanguagesNames();
 			if (vm.product) {
-				if (vm.product.warranty && vm.product.warranty.type && vm.product.warranty.type === 0) {
+				if (vm.product.warranty && angular.isDefined(vm.product.warranty.type) && vm.product.warranty.type === 0) {
 					vm.noWarranty = true;
 				}
-				if (vm.product.returns && vm.product.returns.type && vm.product.returns.type === 0) {
+				if (vm.product.returns && angular.isDefined(vm.product.returns.type) && vm.product.returns.type === 0) {
 					vm.noReturns = true;
 				}
 			}
