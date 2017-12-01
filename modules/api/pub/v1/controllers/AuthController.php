@@ -8,7 +8,6 @@ use app\modules\api\pub\v1\forms\ResetPasswordForm;
 use Yii;
 use yii\helpers\Url;
 use yii\web\BadRequestHttpException;
-use yii\web\NotFoundHttpException;
 
 class AuthController extends AppPublicController
 {
@@ -68,10 +67,10 @@ class AuthController extends AppPublicController
 		}
 		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
 		$person = Person::findByEmail($email);
-		if (!$person) {
-			throw new NotFoundHttpException(sprintf("Email %s not found", $email));
+		if ($person) {
+			$person->sendForgotPasswordEmail();
 		}
-		$person->sendForgotPasswordEmail();
+
 		Yii::$app->response->setStatusCode(204); // No content
 
 		return;
