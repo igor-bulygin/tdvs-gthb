@@ -8,6 +8,7 @@
 		vm.loading=false;
 		vm.resetPasswordEmail="";
 		vm.askForResetPassword = askForResetPassword;
+		vm.resetPassword = resetPassword;
 
 		function login() {
 			vm.loading=true;
@@ -46,6 +47,42 @@
 			}
 			else {
 				vm.passwordEmailWrongFormat=true;
+			}
+		}
+
+		function resetPassword() {
+			vm.newPasswordSended = false;
+			vm.newPasswordRequired=false;
+			vm.newRepeatedPasswordRequired=false;
+			vm.distinctPasswords=false;
+			if (!vm.newPassword || !vm.newPassword.length>0) {
+				vm.newPasswordRequired=true;
+			}
+			else if (!vm.newRepeatedPassword || !vm.newRepeatedPassword.length>0) {
+				vm.newRepeatedPasswordRequired=true;
+			}
+			else if (!(vm.newPasswordRequired === vm.newRepeatedPasswordRequired)) {
+				vm.distinctPasswords=true;
+			}
+			else {
+				vm.loading=true;
+				function resetPasswordSuccess(data) {
+					vm.newPasswordSended = true;
+					vm.loading=false;
+				}
+				function resetPasswordError(err) {
+					UtilService.onError(err);
+					vm.loading=false;
+				}
+				debugger;
+				var data = {
+					email: vm.resetEmail, 
+					new_password:vm.newPassword,
+					repeated_password: vm.newRepeatedPassword,
+					person_id: $routeParams.person_id,
+					action_id: $routeParams.action_id
+					}
+				personDataService.resetPassword(data, onResetPasswordSuccess, onResetPasswordError);
 			}
 		}
 	}
