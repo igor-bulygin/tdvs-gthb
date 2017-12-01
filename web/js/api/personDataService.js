@@ -81,6 +81,7 @@
 		}
 
 		function resetPassword(data, onSuccess, onError) {
+			debugger;
 			apiMethods.create(PassReset, data, {}, onSuccess, onError);
 		}
 	}

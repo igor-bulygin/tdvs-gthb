@@ -96,8 +96,12 @@
 			"TITLE": "Email para restablecer la contraseña",
 			"TEXT_INFO" : "Introduce el email que usaste para crear tu perfil. Te enviaremos un email para restablecer tu contraseña.",
 			"TEXT_SUCCESS" : "Tu solicitud ha sido enviada. Si el email está registrado en Todevise, recibirás un enlace para restablecer tu contraseña.",
-			"EMAIL_REQUIRED" : "Debes introducir tu email",
-			"EMAIL_fORMAT_ERROR": "Debes introducir un email válido"
+			"EMAIL_REQUIRED" : "Debe introducir su email",
+			"EMAIL_fORMAT_ERROR": "Debe introducir un email válido",
+			"NEW_PASSWORD_REQUIRED": "Introduzca una nueva contraseña",
+			"NEW_REPEATED_PASSWORD_REQUIRED": "Repita la contraseña",
+			"DISTINCT_PASSWORDS": "Las contraseñas no coinciden",
+			"SUCESSFULLY_RESET": "Contraseña restablecida"
 		},
 		"reset_password": {
 			"INVALID": "Has usado un enlace inválido para acceder a esta página",
