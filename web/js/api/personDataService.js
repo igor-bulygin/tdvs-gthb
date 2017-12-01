@@ -6,7 +6,8 @@
 		var Person = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'person/:personId');
 		var Login = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'auth/login');
 		var Logout = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'auth/logout');
-		var PassReset = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'auth/forgot-password');
+		var PassResetRequest = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'auth/forgot-password');
+		var PassReset = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'auth/reset-password');
 		
 		//priv
 		var Profile = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'person/:personId', {}, {
@@ -75,8 +76,12 @@
 			apiMethods.update(Password, data, params, onSuccess, onError);
 		}
 
-		function askForResetPassword(params, onSuccess, onError) {
-			apiMethods.create(PassReset, null, params, onSuccess, onError);
+		function askForResetPassword(data, onSuccess, onError) {
+			apiMethods.create(PassResetRequest, data, null, onSuccess, onError);
+		}
+
+		function resetPassword(data, onSuccess, onError) {
+			apiMethods.create(PassReset, data, {}, onSuccess, onError);
 		}
 	}
 
