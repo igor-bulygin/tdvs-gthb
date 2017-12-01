@@ -21,6 +21,7 @@ Yii::$app->opengraph->title = $this->title;
 			</div>
 			<div class="row no-mar">
 				<label for="password" translate="global.user.PASSWORD"></label>
+				<a class="link-red" href="<?=\yii\helpers\Url::to('/public/forgot-password')?>"><span translate="todevise.login.FORGOT_PASSWORD"></span></a>
 				<input type="password" id="password" name="password" ng-model="loginCtrl.user.password" class="form-control grey-input" />
 			</div>
 			<div class="row no-mar">

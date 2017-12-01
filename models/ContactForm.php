@@ -57,7 +57,7 @@ class ContactForm extends Model
 			$email = new PostmanEmail();
 			$email->code_email_content_type = PostmanEmail::EMAIL_CONTENT_TYPE_CONTACT_MESSAGE;
 			$email->to_email = $emailAddress;
-			$email->subject = 'New contact';
+			$email->subject = 'TODEVISE - New contact';
 
 			// add task only one send task (to allow retries)
 			$task = new PostmanEmailTask();

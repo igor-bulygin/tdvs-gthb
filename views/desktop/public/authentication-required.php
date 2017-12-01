@@ -31,6 +31,7 @@ $this->title = 'Todevise: Login/Sign up';
 					</div>
 					<div class="row">
 						<label for="password" translate="global.user.PASSWORD"></label>
+						<a class="link-red" href="<?=\yii\helpers\Url::to('/public/forgot-password')?>"><span translate="todevise.login.FORGOT_PASSWORD"></span></a>
 						<input type="password" id="password" name="password" ng-model="authenticationRequiredCtrl.login_user.password" class="form-control grey-input" required />
 					</div>
 					<div class="row">

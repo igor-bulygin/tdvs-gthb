@@ -483,7 +483,7 @@ class Order extends CActiveRecord {
 		$email = new PostmanEmail();
 		$email->code_email_content_type = PostmanEmail::EMAIL_CONTENT_TYPE_ORDER_PAID;
 		$email->to_email = $this->getPerson()->credentials['email'];
-		$email->subject = 'Todevise - '.$this->short_id.' - Your purchase is complete';
+		$email->subject = 'TODEVISE - '.$this->short_id.' - Your purchase is complete';
 
 		// add task only one send task (to allow retries)
 		$task = new PostmanEmailTask();

@@ -6,6 +6,8 @@
 		var Person = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'person/:personId');
 		var Login = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'auth/login');
 		var Logout = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'auth/logout');
+		var PassResetRequest = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'auth/forgot-password');
+		var PassReset = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'auth/reset-password');
 		
 		//priv
 		var Profile = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'person/:personId', {}, {
@@ -29,6 +31,8 @@
 		this.getProfilePublic = getProfilePublic;
 		this.updateProfile = updateProfile;
 		this.updatePassword = updatePassword;
+		this.askForResetPassword = askForResetPassword;
+		this.resetPassword = resetPassword;
 
 		function getPeople(params, onSuccess, onError) {
 			apiMethods.get(Person, params, onSuccess, onError);
@@ -71,6 +75,14 @@
 
 		function updatePassword(data, params, onSuccess, onError) {
 			apiMethods.update(Password, data, params, onSuccess, onError);
+		}
+
+		function askForResetPassword(data, onSuccess, onError) {
+			apiMethods.create(PassResetRequest, data, null, onSuccess, onError);
+		}
+
+		function resetPassword(data, onSuccess, onError) {
+			apiMethods.create(PassReset, data, {}, onSuccess, onError);
 		}
 	}
 
