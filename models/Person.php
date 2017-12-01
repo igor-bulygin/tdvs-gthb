@@ -2105,7 +2105,7 @@ class Person extends CActiveRecord implements IdentityInterface
 		$email = new PostmanEmail();
 		$email->code_email_content_type = PostmanEmail::EMAIL_CONTENT_TYPE_PERSON_FORGOT_PASSWORD;
 		$email->to_email = $this->getEmail();
-		$email->subject = Yii::t('app/public', 'FORGOT_PASSWORD');
+		$email->subject = 'TODEVISE - '.Yii::t('app/public', 'FORGOT_PASSWORD');
 
 		// add task only one send task (to allow retries)
 		$task = new PostmanEmailTask();
