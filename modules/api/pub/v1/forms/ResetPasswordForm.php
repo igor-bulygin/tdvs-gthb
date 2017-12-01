@@ -73,6 +73,7 @@ class ResetPasswordForm extends Model {
 			throw new NotFoundHttpException(sprintf("Email %s not found", $this->email));
 		}
 		$person->setPassword($this->new_password);
+		$person->save();
 	}
 
 }
