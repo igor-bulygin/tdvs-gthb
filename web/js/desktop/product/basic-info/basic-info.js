@@ -23,11 +23,23 @@
 		vm.mandatory_langs_names="";
 		//we need this counter to know how many categories we have in order to broadcast right vars in setVariations event
 		vm.category_counter = 0;
+		vm.setNoWarranty = setNoWarranty;
+		vm.setNoReturns = setNoReturns;
+		vm.noWarranty = false;
+		vm.noReturns = false;
 
 		init();
 		
 		function init(){
 			setMandatoryLanguagesNames();
+			if (vm.product) {
+				if (vm.product.warranty && vm.product.warranty.type && vm.product.warranty.type === 0) {
+					vm.noWarranty = true;
+				}
+				if (vm.product.returns && vm.product.returns.type && vm.product.returns.type === 0) {
+					vm.noReturns = true;
+				}
+			}
 		}
 
 		//	TODO unify this (repeated function on variations.js) as a component field from creation/edition when files free
@@ -264,6 +276,24 @@
 				if (aux.length>0) {
 					vm.product.media.photos = angular.copy(aux);
 				}
+			}
+		}
+
+		function setNoWarranty() {
+			if (vm.noWarranty) {
+				vm.product.warranty.type = 0;
+			}
+			else {
+				vm.product.warranty.type = 3;
+			}
+		}
+
+		function setNoReturns() {
+			if (vm.noReturns) {
+				vm.product.returns.type = 0;
+			}
+			else {
+				vm.product.returns.type = 1;
 			}
 		}
 

@@ -60,18 +60,26 @@
 				<div class="col-md-12" id="warranty">
 					<label class="col-md-3" for="warranty"><span translate="product.basic_info.WARRANTIES"></span></label>
 					<div class="col-md-3" id="warrantyNotNumber">
-						<input class="form-control ng-class:{'error-input': productBasicInfoCtrl.warrantyRequired}" type="text" name="warranty" ng-model="productBasicInfoCtrl.product.warranty.value">
+						<input class="form-control ng-class:{'error-input': productBasicInfoCtrl.warrantyRequired}" type="text" name="warranty" ng-model="productBasicInfoCtrl.product.warranty.value" ng-disabled="productBasicInfoCtrl.noWarranty">
 					</div>
-					<span class="col-md-6" translate="product.basic_info.MONTHS"></span>
+					<span class="col-md-2" translate="product.basic_info.MONTHS"></span>
+					<div class="col-md-12">
+						<span translate="product.basic_info.NO_WARRANTY"></span>
+						<input type="checkbox" name="noWarrantie" ng-model="productBasicInfoCtrl.noWarranty" ng-change="productBasicInfoCtrl.setNoWarranty()">
+					</div>
 					<div class="col-md-12 error-text" ng-if="productBasicInfoCtrl.warrantyRequired"><span translate="product.basic_info.SPECIFY_WARRANTY_MONTHS"></span></div>
 					<div class="col-md-12 error-text" ng-if="productBasicInfoCtrl.warrantyNumberRequired"><span translate="product.basic_info.VALUE_MUST_NUMBER"></span></div>
 				</div>
 				<div class="col-md-12 mt-20" id="returns">
-					<label class="col-md-3" for="warrantie"><span translate="product.basic_info.RETURNS"></span></label>
+					<label class="col-md-3" for="returns"><span translate="product.basic_info.RETURNS"></span></label>
 					<div class="col-md-3" id="returnsNotNumber">
-						<input class="form-control ng-class:{'error-input': productBasicInfoCtrl.retunrsRequired}" type="text" name="returns" ng-model="productBasicInfoCtrl.product.returns.value">
+						<input class="form-control ng-class:{'error-input': productBasicInfoCtrl.retunrsRequired}" type="text" name="returns" ng-model="productBasicInfoCtrl.product.returns.value" ng-disabled="productBasicInfoCtrl.noReturns">
 					</div>
-					<span class="col-md-6" translate="product.basic_info.DAYS"></span>
+					<span class="col-md-2" translate="product.basic_info.DAYS"></span>
+					<div class="col-md-12">
+						<span translate="product.basic_info.NO_RETURNS"></span>
+						<input type="checkbox" name="noReturns" ng-model="productBasicInfoCtrl.noReturns"  ng-change="productBasicInfoCtrl.setNoReturns()">
+					</div>
 					<div class="col-md-12 error-text" ng-if="productBasicInfoCtrl.returnsRequired"><span translate="product.basic_info.SPECIFY_RETURNS_DAYS"></span></div>
 					<div class="col-md-12 error-text" ng-if="productBasicInfoCtrl.returnsNumberRequired"><span translate="product.basic_info.VALUE_MUST_NUMBER"></span></div>
 				</div>

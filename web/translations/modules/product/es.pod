@@ -78,7 +78,9 @@
 			"MARKED_AS_MAIN": "Marcar como foto principal",
 			"UPLOAD_1_PHOTO": "Por favor suba al menos 1 foto.",
 			"TAGS": "Etiquetas",
-			"PLS_TRANSLATE": "Por favor, traduce cada campo a español y a inglés"
+			"PLS_TRANSLATE": "Por favor, traduce cada campo a español y a inglés",
+			"NO_WARRANTY": "No tiene garantía",
+			"NO_RETURNS": "No se admiten devoluciones"
 		},
 		"more_details": {
 			"TITLE": "Más detalles sobre su trabajo (opcional)",

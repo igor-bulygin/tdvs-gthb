@@ -154,14 +154,14 @@
 				});
 			}
 			//warranty
-			if(!angular.isObject(product.warranty) || !product.warranty.value || !product.warranty.type) {
+			if(!angular.isObject(product.warranty) || !product.warranty.value || angular.isUndefined(product.warranty.type) || product.warranty.type===null ) {
 				required.push('warranty');
 			}
 			else if (isNaN(parseInt(product.warranty.value))) {
 				required.push('warrantyNotNumber');
 			}
 			//returns
-			if(!angular.isObject(product.returns) || !product.returns.value || !product.returns.type) {
+			if(!angular.isObject(product.returns) || !product.returns.value || angular.isUndefined(product.returns.type) || product.returns.type===null ) {
 				required.push('returns');
 			}
 			else if (isNaN(parseInt(product.returns.value))) {

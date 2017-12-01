@@ -136,8 +136,6 @@
 
 		//publish is true when publishing the product
 		function save(publish) {
-			vm.product.warranty.type=3;
-			vm.product.returns.type=1;
 			vm.saving = true;
 
 			function onUpdateProductSuccess(data) {
