@@ -281,19 +281,19 @@
 
 		function setNoWarranty() {
 			if (vm.noWarranty) {
-				vm.product.warranty.type = 0;
+				vm.product.warranty= { type : 0 };
 			}
 			else {
-				vm.product.warranty.type = 3;
+				vm.product.warranty= { type : 3 };
 			}
 		}
 
 		function setNoReturns() {
 			if (vm.noReturns) {
-				vm.product.returns.type = 0;
+				vm.product.returns = { type : 0 };
 			}
 			else {
-				vm.product.returns.type = 1;
+				vm.product.returns = { type : 1 };
 			}
 		}
 
