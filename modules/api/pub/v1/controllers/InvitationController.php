@@ -46,7 +46,7 @@ class InvitationController extends AppPublicController {
 			$email = new PostmanEmail();
 			$email->code_email_content_type = PostmanEmail::EMAIL_CONTENT_TYPE_DEVISER_REQUEST_INVITATION;
 			$email->to_email = 'info@todevise.com';
-			$email->subject = 'New deviser invitation request';
+			$email->subject = 'TODEVISE - New deviser invitation request';
 
 			// add task only one send task (to allow retries)
 			$task = new PostmanEmailTask();
@@ -93,7 +93,7 @@ class InvitationController extends AppPublicController {
 			$email = new PostmanEmail();
 			$email->code_email_content_type = PostmanEmail::EMAIL_CONTENT_TYPE_INFLUENCER_REQUEST_INVITATION;
 			$email->to_email = 'info@todevise.com';
-			$email->subject = 'New influencer invitation request';
+			$email->subject = 'TODEVISE - New influencer invitation request';
 
 			// add task only one send task (to allow retries)
 			$task = new PostmanEmailTask();
