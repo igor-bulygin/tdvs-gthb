@@ -2,6 +2,7 @@
 namespace app\modules\api\pub\v1\forms;
 
 use app\models\Person;
+use app\models\PostmanEmailAction;
 use yii\base\Model;
 use yii\web\NotFoundHttpException;
 
@@ -74,6 +75,8 @@ class ResetPasswordForm extends Model {
 		}
 		$person->setPassword($this->new_password);
 		$person->save();
+		$action = PostmanEmailAction::findOneByUuid($this->action_id);
+		$action->markAsUsed();
 	}
 
 }

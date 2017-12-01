@@ -83,9 +83,9 @@ class PostmanEmailAction extends CActiveRecord
 	/**
 	 * @param $uuid
 	 *
-	 * @return null|array
+	 * @return null|PostmanEmailAction
 	 */
-	public static function findByUuid($uuid)
+	public static function findOneByUuid($uuid)
 	{
 		$emails = PostmanEmail::findSerialized([
 			'action_uuid' => $uuid,
@@ -95,11 +95,51 @@ class PostmanEmailAction extends CActiveRecord
 			$email = reset($emails); // get first
 			foreach ($email->actions as $action) {
 				if ($action['uuid'] == $uuid) {
-					return $action;
+					$actionObject = new PostmanEmailAction();
+					$actionObject->setAttributes($action, false);
+					return $actionObject;
 				}
 			}
 		}
 
 		return null;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function canUse()
+	{
+		return
+			($this->amount_uses === null || $this->amount_uses > 0) &&
+			(empty($this->date_end_available) || $this->date_end_available > new MongoDate())
+		;
+	}
+
+	/**
+	 * Mark the action as used
+	 */
+	public function markAsUsed()
+	{
+		$email = PostmanEmail::findOne([
+			'actions.uuid' => $this->uuid,
+		]);
+
+		if ($email) {
+			$actions = $email->actions;
+			foreach ($actions as $i => $action) {
+				if ($action['uuid'] == $this->uuid) {
+					$action['date_first_use'] = new MongoDate();
+					$action['date_last_use'] = new MongoDate();
+					if (isset($action['amount_uses'])) {
+						$action['amount_uses'] = $action['amount_uses'] - 1;
+					}
+					$action['updated_at'] = new MongoDate();
+					$actions[$i] = $action;
+				}
+			}
+			$email->setAttribute('actions', $actions);
+			$email->save();
+		}
 	}
 }

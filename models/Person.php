@@ -2116,6 +2116,9 @@ class Person extends CActiveRecord implements IdentityInterface
 		$action = new PostmanEmailAction();
 		$action->code_email_action_type = PostmanEmailAction::EMAIL_ACTION_TYPE_PERSON_FORGOT_PASSWORD;
 		$action->person_id = $this->short_id;
+		$dateEndAvailable = (new \DateTime('now'))->modify('+48 hours')->getTimestamp();
+		$action->date_end_available = new MongoDate($dateEndAvailable);
+		$action->amount_uses = 1;
 		$email->addAction($action);
 
 		$actionUrl = Url::to(["/public/reset-password", "action_id" => $action->uuid, "person_id"  => $this->short_id], true);
@@ -2147,8 +2150,8 @@ class Person extends CActiveRecord implements IdentityInterface
 	 */
 	public function checkPersonByEmailActionUuid($actionUuid)
 	{
-		$action = PostmanEmailAction::findByUuid($actionUuid);
-		if ($action && $action['person_id'] == $this->short_id) {
+		$action = PostmanEmailAction::findOneByUuid($actionUuid);
+		if ($action && $action->person_id == $this->short_id && $action->canUse()) {
 			return true;
 		}
 
