@@ -101,6 +101,8 @@ return [
 	'MONTHS' => 'Meses',
 	'NEW_STORY_BY_PERSON_NAME' => 'Nueva historia de {person_name}',
 	'NONE' => 'Ninguno',
+	'NO_RETURNS' => 'No se admiten devoluciones',
+	'NO_WARRANTY' => 'No tiene garantía',
 	'ORDERS' => 'Pedidos',
 	'ORDER_ID_COMPLETED' => 'Pedido {order_id} completado',
 	'ORDER_EMAIL_ORDER_NUMBER' => 'Pedido nº {order_id}',

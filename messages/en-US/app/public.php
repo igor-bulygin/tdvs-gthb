@@ -101,6 +101,8 @@ return [
     'MONTHS' => 'Months',
     'NEW_STORY_BY_PERSON_NAME' => 'New story by {person_name}',
     'NONE' => 'None',
+	'NO_RETURNS' => 'No returns',
+	'NO_WARRANTY' => 'No warranty',
     'ORDERS' => 'Orders',
     'ORDER_ID_COMPLETED' => 'Order {order_id} completed',
 	'ORDER_EMAIL_ORDER_NUMBER' => 'Order # {order_id}',
