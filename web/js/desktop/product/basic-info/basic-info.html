@@ -64,8 +64,10 @@
 					</div>
 					<span class="col-md-2" translate="product.basic_info.MONTHS"></span>
 					<div class="col-md-12">
-						<span translate="product.basic_info.NO_WARRANTY"></span>
-						<input type="checkbox" name="noWarrantie" ng-model="productBasicInfoCtrl.noWarranty" ng-change="productBasicInfoCtrl.setNoWarranty()">
+						<div class="checkbox checkbox-circle remember-me">
+							<input id="checkboxNoWarranty" type="checkbox" name="noWarrantie" ng-model="productBasicInfoCtrl.noWarranty" ng-change="productBasicInfoCtrl.setNoWarranty()">
+							<label for="checkboxNoWarranty" translate="product.basic_info.NO_WARRANTY"></label>
+						</div>
 					</div>
 					<div class="col-md-12 error-text" ng-if="productBasicInfoCtrl.warrantyRequired"><span translate="product.basic_info.SPECIFY_WARRANTY_MONTHS"></span></div>
 					<div class="col-md-12 error-text" ng-if="productBasicInfoCtrl.warrantyNumberRequired"><span translate="product.basic_info.VALUE_MUST_NUMBER"></span></div>
@@ -77,8 +79,10 @@
 					</div>
 					<span class="col-md-2" translate="product.basic_info.DAYS"></span>
 					<div class="col-md-12">
-						<span translate="product.basic_info.NO_RETURNS"></span>
-						<input type="checkbox" name="noReturns" ng-model="productBasicInfoCtrl.noReturns"  ng-change="productBasicInfoCtrl.setNoReturns()">
+						<div class="checkbox checkbox-circle remember-me">
+							<input id="checkboxNoReturns" type="checkbox" name="noReturns" ng-model="productBasicInfoCtrl.noReturns"  ng-change="productBasicInfoCtrl.setNoReturns()">
+							<label for="checkboxNoReturns" translate="product.basic_info.NO_RETURNS"></label>
+						</div>
 					</div>
 					<div class="col-md-12 error-text" ng-if="productBasicInfoCtrl.returnsRequired"><span translate="product.basic_info.SPECIFY_RETURNS_DAYS"></span></div>
 					<div class="col-md-12 error-text" ng-if="productBasicInfoCtrl.returnsNumberRequired"><span translate="product.basic_info.VALUE_MUST_NUMBER"></span></div>
