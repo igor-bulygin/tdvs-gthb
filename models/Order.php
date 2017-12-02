@@ -438,7 +438,7 @@ class Order extends CActiveRecord {
 			$pack = new OrderPack();
 			$pack->setParentObject($this);
 			$pack->deviser_id = $product->deviser_id;
-			$pack->currency = $deviser->settingsMapping->currency;
+			$pack->currency = $deviser->settingsMapping->currency ?: Currency::getDefaultCurrency();
 			$pack->weight_measure = $deviser->settingsMapping->weight_measure;
 			$pack->addProduct($orderProduct);
 			$packs[] = $pack;
@@ -473,6 +473,16 @@ class Order extends CActiveRecord {
 		}
 
 		$this->subtotal = $subtotal;
+	}
+
+	public function recalculateAll()
+	{
+		$packs = $this->getPacks();
+		foreach ($packs as $pack) {
+			$pack->recalculateTotals();
+		}
+		$this->setPacks($packs);
+		$this->recalculateTotals();
 	}
 
 	/**

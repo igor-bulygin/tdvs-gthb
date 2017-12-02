@@ -32,7 +32,12 @@
 				<div class="col-md-2">
 					<p>
 						<span translate="cart.shipping_methods.DELIVERY_WITHIN" translate-values="{days: pack.shipping_time || pack.deviser_info.shipping_time}"></span>
-						<span ng-if="pack.currency" ng-bind="pack.currency"></span><span ng-bind="pack.shipping_price || pack.deviser_info.price"></span>
+						<span ng-if="pack.shipping_price" ng-cloak>
+							<span class="price-bold">€</span> <span ng-bind="pack.shipping_price"></span>
+						</span>
+						<span ng-if="!pack.shipping_price" ng-cloak>
+							<span translate="cart.summary.FREE_SHIPPING"></span>
+						</span>
 					</p>
 				</div>
 			</div>

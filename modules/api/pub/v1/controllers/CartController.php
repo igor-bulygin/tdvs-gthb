@@ -52,6 +52,9 @@ class CartController extends AppPublicController
 			throw new UnauthorizedHttpException("You have no access to this order");
 		}
 
+		$cart->recalculateAll();
+		$cart->save();
+
 		Yii::$app->response->setStatusCode(200); // Ok
 
 		$cart->setSubDocumentsForSerialize();
