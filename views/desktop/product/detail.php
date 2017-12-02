@@ -32,7 +32,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 
 <!-- PRODUCT CARD -->
 <div ng-controller="detailProductCtrl as detailProductCtrl">
-	<cart-panel packs="detailProductCtrl.cart.packs" total="detailProductCtrl.cart.subtotal" ng-if="detailProductCtrl.showCartPanel" ng-cloak>
+	<cart-panel packs="detailProductCtrl.cart.packs" ng-if="detailProductCtrl.showCartPanel" ng-cloak>
 	</cart-panel>
 	<div class="product">
 		<!-- Modal -->
