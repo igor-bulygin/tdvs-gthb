@@ -31,14 +31,16 @@
 								<div class="adress-wrapper mb-20">
 									<span class="col-md-12 send-to-text" translate="settings.orders.SHIP_TO"></span>
 									<label class="col-md-12 adress-text" ng-bind="order.shipping_address.name + ' ' + order.shipping_address.last_name"></label>
-									<label class="col-md-12 adress-text" ng-bind="order.shipping_address.address"></label>
+									<label class="col-md-12 adress-text" ng-bind="order.shipping_address.address + ', ' + order.shipping_address.zip"></label>
 									<label class="col-md-12 adress-text" ng-bind="order.shipping_address.city + ', ' + order.shipping_address.country"></label>
+									<label class="col-md-12 adress-text" ng-bind="'+' + order.shipping_address.phone_number_prefix + ' ' + order.shipping_address.phone_number"></label>
 								</div>
 								<div class="adress-wrapper">
 									<span class="col-md-12 send-to-text" translate="settings.orders.BILL_TO"></span>
 									<label class="col-md-12 adress-text" ng-bind="order.billing_address.name + ' ' + order.billing_address.last_name"></label>
-									<label class="col-md-12 adress-text" ng-bind="order.billing_address.address"></label>
+									<label class="col-md-12 adress-text" ng-bind="order.billing_address.address + ', ' + order.billing_address.zip"></label>
 									<label class="col-md-12 adress-text" ng-bind="order.billing_address.city + ', ' + order.billing_address.country"></label>
+									<label class="col-md-12 adress-text" ng-bind="'+' + order.billing_address.phone_number_prefix + ' ' + order.billing_address.phone_number"></label>
 								</div>
 							</div>
 							<div class="col-md-6 row">
