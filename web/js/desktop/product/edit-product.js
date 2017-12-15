@@ -88,7 +88,7 @@
 					vm.product.slug = {};
 				}
 				if (!vm.product.categories) {
-					vm.product.categories = {};
+					vm.product.categories = [];
 				}
 				if (!vm.product.media) {
 					vm.product.media = {

@@ -31,6 +31,10 @@
 		init();
 		
 		function init(){
+			vm.rootCategories = filterCategory(vm.categories, '');
+			addCategory();
+			setProductCategories();
+			setProductPhotos();
 			setMandatoryLanguagesNames();
 			if (vm.product) {
 				if (vm.product.warranty && angular.isDefined(vm.product.warranty.type) && vm.product.warranty.type === 0) {
@@ -39,6 +43,34 @@
 				if (vm.product.returns && angular.isDefined(vm.product.returns.type) && vm.product.returns.type === 0) {
 					vm.noReturns = true;
 				}
+			}
+		}
+
+		function setProductCategories() {
+			if(angular.isArray(vm.product.categories) && vm.product.categories.length > 0 && vm.product.id) {
+				for(var i = 0; i < vm.product.categories.length; i++) {
+					var path = UtilService.returnPathFromCategory(vm.categories, vm.product.categories[i]);
+					var path_array = path.split('/');
+					path_array.splice(0, 1)
+					path_array.splice(path_array.length-1,1);
+					path_array.push(vm.product.categories[i]);
+					for(var j = 0; j < path_array.length; j++) {
+						categorySelected(path_array[j], i, j);
+					}
+					if(i < vm.product.categories.length - 1) {
+						vm.categories_helper.push({
+							categories_selected: [null],
+							categories: [vm.rootCategories]
+						})
+					}
+				}
+			}
+		}
+
+		function setProductPhotos() {
+			if(vm.product.id) {
+				if(angular.isArray(vm.product.media.photos) && vm.product.media.photos.length > 0)
+					parseImages();
 			}
 		}
 
@@ -61,8 +93,8 @@
 				categories_selected: [null],
 				categories: [vm.rootCategories]
 			})
-			vm.product['categories'].push(null);
-			vm.product.emptyCategory=true;
+			//vm.product['categories'].push(null);
+			//vm.product.emptyCategory=true;
 		}
 
 		function categorySelected(category, index_helper, index) {
