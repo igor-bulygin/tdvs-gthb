@@ -35,6 +35,7 @@
 			addCategory();
 			setProductCategories();
 			setProductPhotos();
+			setTags();
 			setMandatoryLanguagesNames();
 			if (vm.product) {
 				if (vm.product.warranty && angular.isDefined(vm.product.warranty.type) && vm.product.warranty.type === 0) {
@@ -71,6 +72,17 @@
 			if(vm.product.id) {
 				if(angular.isArray(vm.product.media.photos) && vm.product.media.photos.length > 0)
 					parseImages();
+			}
+		}
+
+		function setTags() {
+			if(angular.isObject(vm.product.tags) && !UtilService.isEmpty(vm.product.tags)) {
+				for(var key in vm.product.tags) {
+					vm.tags[key] = [];
+					vm.product.tags[key].forEach(function(element) {
+						vm.tags[key].push({text: element});
+					});
+				}
 			}
 		}
 
@@ -329,6 +341,7 @@
 			}
 		}
 
+		/* TODO: study possible deletion of this watch (It was initially builded to component iniciation with undefined product) */
 		$scope.$watch('productBasicInfoCtrl.product.categories', function(newValue, oldValue) {
 			if(angular.isArray(oldValue) && oldValue[0]===null && angular.isArray(newValue) && newValue.length > 0 && vm.product.id) {
 				for(var i = 0; i < newValue.length; i++) {
@@ -354,6 +367,7 @@
 		}, true);
 
 		//when get categories, set first
+		/* TODO: study possible deletion of this watch (It was initially builded to component iniciation with undefined categories) */
 		$scope.$watch('productBasicInfoCtrl.categories', function(newValue, oldValue) {
 			if(!oldValue && newValue) {
 				vm.rootCategories = filterCategory(newValue, '');
@@ -361,6 +375,7 @@
 			}
 		});
 
+		/* TODO: study possible deletion of this watch (It was initially builded to component iniciation with undefined product) */
 		$scope.$watch('productBasicInfoCtrl.product.id', function(newValue, oldValue) {
 			if(!oldValue && newValue) {
 				if(angular.isArray(vm.product.media.photos) && vm.product.media.photos.length > 0)
@@ -397,6 +412,7 @@
 			vm.descriptionRequired = false;
 		}, true);
 
+		/* TODO: study possible deletion of this watch (It was initially builded to component iniciation with undefined product) */
 		$scope.$watch('productBasicInfoCtrl.product.tags', function(newValue, oldValue) {
 			if(angular.isObject(oldValue) && UtilService.isEmpty(oldValue) && angular.isObject(newValue) && !UtilService.isEmpty(newValue)) {
 				for(var key in newValue) {
