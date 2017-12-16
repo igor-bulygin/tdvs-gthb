@@ -40,7 +40,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 			<div ng-show="!editProductCtrl.saving" ng-if ="editProductCtrl.product" ng-cloak>
 				<product-basic-info ng-if="editProductCtrl.product.variationsLoaded" product="editProductCtrl.product" categories="editProductCtrl.allCategories" languages="editProductCtrl.languages"></product-basic-info>
 				<product-variations  product="editProductCtrl.product" categories="editProductCtrl.allCategories" languages="editProductCtrl.languages" tags="editProductCtrl.tags" sizecharts="editProductCtrl.sizecharts" metric="editProductCtrl.metric" deviser="editProductCtrl.deviser" papertypes="editProductCtrl.papertypes" fromedit="editProductCtrl.from_edit"></product-variations>
-				<product-price-stock product="editProductCtrl.product" categories="editProductCtrl.allCategories" tags="editProductCtrl.tags" papertypes="editProductCtrl.papertypes" metric="editProductCtrl.metric" fromedit="editProductCtrl.from_edit"></product-price-stock>
+				<product-price-stock ng-if="editProductCtrl.product.variationsLoaded" product="editProductCtrl.product" categories="editProductCtrl.allCategories" tags="editProductCtrl.tags" papertypes="editProductCtrl.papertypes" metric="editProductCtrl.metric" fromedit="editProductCtrl.from_edit"></product-price-stock>
 				<product-more-details product="editProductCtrl.product" languages="editProductCtrl.languages"></product-more-details>
 				<div class="text-center">
 					<button class="btn btn-default btn-red" ng-click="editProductCtrl.save('true')" ng-disabled="createProductCtrl.saving"><span translate="product.creation_edition.PUBLISH_WORK"></span></button>
