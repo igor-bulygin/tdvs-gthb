@@ -1,13 +1,13 @@
 <?php
 
 $this->params['breadcrumbs'][] = [
-	'label' => 'Basic stats',
-	'url' => ['/admin/basic-stats']
+	'label' => 'Sales',
+	'url' => ['/admin/sales-history']
 ];
 
 \app\assets\desktop\admin\AdminsAsset::register($this);
 
-$this->title = 'Todevise / Admin / Basic stats';
+$this->title = 'Todevise / Admin / Sales';
 ?>
 
 <div class="row no-gutter">

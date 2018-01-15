@@ -135,6 +135,7 @@ while ($date > $limit) {
 											],
 										]
 									],
+									/*
 									[
 										'label' => 'ORDERS',
 										'options' => [
@@ -176,6 +177,7 @@ while ($date > $limit) {
 											]
 										],
 									],
+									*/
 									[
 										'label' => 'Settings',
 										'options' => [
@@ -354,20 +356,20 @@ while ($date > $limit) {
 												'options' => [
 													'class' => 'item-submenu funiv fs0-929',
 												],
-												'label' => 'Basic stats',
-												'url'=> Url::toRoute(['admin/basic-stats']),
+												'label' => 'Sales',
+												'url'=> Url::toRoute(['admin/sales-history']),
 												'active' => (
-												Utils::compareURL('admin/basic-stats')
+												Utils::compareURL('admin/sales-history')
 												)
 											],
 											[
 												'options' => [
 													'class' => 'item-submenu funiv fs0-929',
 												],
-												'label' => 'Sales history',
-												'url'=> Url::toRoute(['admin/sales-history']),
+												'label' => 'Basic stats',
+												'url'=> Url::toRoute(['admin/basic-stats']),
 												'active' => (
-												Utils::compareURL('admin/sales-history')
+												Utils::compareURL('admin/basic-stats')
 												)
 											],
 										],
