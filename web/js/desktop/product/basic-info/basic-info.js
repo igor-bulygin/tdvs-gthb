@@ -168,7 +168,9 @@
 				//parse images
 				vm.images.push({
 					url: currentHost() + '/' + data.data.url,
-					name: data.data.filename
+					filename: {
+						name: data.data.filename,
+					}
 				});
 				vm.product.media.photos.push({
 					name: data.data.filename
