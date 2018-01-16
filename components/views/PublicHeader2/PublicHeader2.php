@@ -10,6 +10,10 @@ app\components\assets\PublicHeader2Asset::register($this);
 
 ?>
 
+<style>
+	.navbar.terciary ul {margin: 12px 0 0 0;}
+</style>
+
 <header>
 	<nav class="navbar navbar-default" id="main_header" ng-controller="publicHeaderCtrl as publicHeaderCtrl">
 		<div class="container">

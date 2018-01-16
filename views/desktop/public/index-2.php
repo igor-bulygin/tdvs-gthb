@@ -98,7 +98,7 @@ Yii::$app->opengraph->title = $this->title;
 
 <?php if (empty($category_id)) { ?>
 <!-- SEASON BANNERS -->
-<section class="season-banners">
+<section class="hidden-xs visible-sm visible-md visible-lg season-banners">
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-4">

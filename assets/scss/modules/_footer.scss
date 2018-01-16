@@ -135,56 +135,6 @@ footer{
 			font-weight: bold;
 		}
     }
-    .social-items{
-        padding:0;
-        margin:0;
-        @media (max-width: 768){
-                //width: 145px;
-                width: 100%;
-        }
-        @media (min-width:769px) and (max-width: 991px){
-                width: 50%;
-                float: initial;
-                margin: 0 auto;
-        }
-        li{
-            list-style: none;
-            float: left;
-            margin: 0 8px 0 0;
-            padding: 0;
-            @media (max-width: 991px){
-                //margin: 0 4px;
-                margin: 0 auto;
-            }
-            a{
-                color: $black;
-                background-color: $white;
-                width: 39px;
-				height: 39px;
-				display: block;
-				padding: 6px 0 0 14px;
-                @include border-radius(28px,28px,28px,28px);
-                font-size: 18px;
-                &.twitter{
-                    padding: 7px 0 0 12px;
-                }
-                &.google-plus{
-                    font-size: 16px;
-                    padding: 7px 0 0 10px;
-                }
-                &:hover{
-                    background-color: $red;
-                    color: $white;
-                    @include transition-property(background-color);
-                    @include transition-duration(0.3s);
-                    @include transition-timing-function(ease-out);
-                }
-                @media (max-width: 991px){
-                    margin: 0 auto;
-                }
-            }
-        }
-    }
     .input-newsletter{
         input{
             border-color: $white;
