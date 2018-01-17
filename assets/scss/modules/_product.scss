@@ -2,11 +2,17 @@
 // Product
 // ==========================================================================
 .product{
+	.title-mobile{
+		font: 36px $font-family--name;
+		text-transform: uppercase;
+		letter-spacing: 1.5px;
+		display: block;
+		line-height: 39px;
+		text-align: center;
+		margin-top: 22px;//40px;
+	}
     background-color: $white;
     @extend %block;
-    .container{
-        margin-top: 70px;
-    }
     .product-data-wrapper{
         @extend %block;
         padding: 0 15px;
@@ -39,6 +45,9 @@
                 .product-price{
                     font: bold 40px $font-family--regular;
 					letter-spacing: 0.5px;
+					@media (max-width: 768px){
+						font: bold 28px $font-family--regular;
+					}
                 }
                 .stock{
 					color: $dark_grey;
@@ -87,6 +96,9 @@
 					color: $dark_grey;
                     padding: 2px 12px;
                     display: inline-block;
+					@media (max-width: 768px){
+						padding: 2px 0;
+					}	
                 }
                 .size-box{
                     float: left;
@@ -277,11 +289,19 @@
 .btns-product-wrapper{
 	width: 285px;
     margin: 0 auto;
+	@media (max-width: 768px){
+		width: 100%;
+	}
 }
 .work-profile-description-wrapper{
 	.title{
 		width: 100%;
 		text-align: center;
+	}
+}
+.btn-enlarged-mb{
+	@media (max-width: 768px){
+		width: 100%!important;
 	}
 }
 .description-parraf{

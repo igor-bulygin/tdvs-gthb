@@ -7,6 +7,10 @@
 		init();
 
 		function init() {
+			vm.total = 0;
+			vm.packs.forEach(function(pack){
+				vm.total += pack.pack_price;
+			});
 			$timeout(function() { vm.isOpen=true; }, 1000);
 			
 		}
@@ -18,8 +22,7 @@
 		controller: controller,
 		controllerAs: 'cartPanelCtrl',
 		bindings: {
-			packs: '<',
-			total:'<'
+			packs: '<'
 		}
 	}
 

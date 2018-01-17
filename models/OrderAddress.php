@@ -100,6 +100,6 @@ class OrderAddress extends EmbedModel
 		$this->vat_id = $person->personalInfoMapping->vat_id;
 		$this->phone_number_prefix = $person->personalInfoMapping->phone_number_prefix;
 		$this->phone_number = $person->personalInfoMapping->phone_number;
-		$this->email = $person->credentials['emails'];
+//		$this->email = $person->getEmail();
 	}
 }

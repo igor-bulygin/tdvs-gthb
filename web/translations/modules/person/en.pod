@@ -164,6 +164,7 @@
 			"ADD_PHOTO": "Add photo",
 			"YOUR_CITY": "Your city",
 			"SHORT_BRAND_DESCRIPTION": "Short description of your brand",
+			"SHORT_YOUR_DESCRIPTION": "Short description of yourself",
 			"TRANSLATE_DESCRIPTION": "Translate your description by selecting different languages below",
 			"WRITE_DESCRIPTION_HERE": "Please write a short description here",
 			"SAVE_EXIT": "Save & exit"

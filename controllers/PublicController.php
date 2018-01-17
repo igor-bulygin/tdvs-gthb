@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\helpers\CController;
 use app\helpers\ModelUtils;
 use app\helpers\Utils;
+use app\models\Banner;
 use app\models\Become;
 use app\models\Box;
 use app\models\Category;
@@ -12,6 +13,7 @@ use app\models\ContactForm;
 use app\models\Country;
 use app\models\Faq;
 use app\models\Invitation;
+use app\models\Lang;
 use app\models\Login;
 use app\models\OldProduct;
 use app\models\Person;
@@ -23,6 +25,8 @@ use Yii;
 use yii\base\DynamicModel;
 use yii\data\ArrayDataProvider;
 use yii\filters\AccessControl;
+use yii\helpers\FileHelper;
+use yii\helpers\Url;
 use yii\mongodb\ActiveQuery;
 use yii\web\Response;
 
@@ -75,6 +79,7 @@ class PublicController extends CController
 			$this->view->params['show_footer'] = false;
 
 			$this->layout = '/desktop/public-2.php';
+
 			return $this->render("error", [
 				'name' => '',
 				'message' => $exception->getMessage(),
@@ -92,19 +97,53 @@ class PublicController extends CController
 		return $this->mainPage($slug, $category_id);
 	}
 
-	protected function mainPage($slug = null, $category_id = null) {
+	protected function mainPage($slug = null, $category_id = null)
+	{
+		Banner::setSerializeScenario(Banner::SERIALIZE_SCENARIO_PUBLIC);
 
 		if ($category_id) {
 
-			$category = Category::findOneSerialized($category_id); /* @var Category $category */
+			$category = Category::findOneSerialized($category_id);
 			$categoryShortIds = $category->getShortIds();
 
-			$banners = Utils::getBannerImages($category->getMainCategory());
+			$banners = Banner::findSerialized(
+				[
+					'type' => Banner::BANNER_TYPE_CAROUSEL,
+					'category_id' => $category_id,
+				]
+			);
+
+			if (empty($banners)) {
+				// If there is no banners for the current category, we find in the parent categories
+
+				$banners = Banner::findSerialized(
+					[
+						'type' => Banner::BANNER_TYPE_CAROUSEL,
+						'category_id' => $category->getAncestorIds(),
+					]
+				);
+			}
+
+			$homeBanners = [];
 
 		} else {
 
+			$category = null;
 			$categoryShortIds = [];
-			$banners = Utils::getBannerImages();
+
+			$banners = Banner::findSerialized(
+				[
+					'type' => Banner::BANNER_TYPE_CAROUSEL,
+					'category_id' => null,
+				]
+			);
+
+			$homeBanners = Banner::findSerialized(
+				[
+					'type' => Banner::BANNER_TYPE_HOME_BANNER,
+					'category_id' => null,
+				]
+			);
 		}
 
 		// Devisers
@@ -124,27 +163,37 @@ class PublicController extends CController
 		$htmlWorks = $this->renderPartial('more-works', [
 			'total' => 48,
 			'works' => $works,
- 		]);
-
-		$devisersCarousel = $this->renderPartial('profiles-carousel', [
-			'persons' => $devisers,
-			'id' => 'devisers',
 		]);
 
-		$influencersCarousel = $this->renderPartial('profiles-carousel', [
-			'persons' => $influencers,
-			'id' => 'influencers',
-		]);
+		if ($devisers) {
+			$devisersCarousel = $this->renderPartial('profiles-carousel', [
+				'persons' => $devisers,
+				'id' => 'devisers',
+			]);
+		} else {
+			$devisersCarousel = null;
+		}
+
+		if ($influencers) {
+			$influencersCarousel = $this->renderPartial('profiles-carousel', [
+				'persons' => $influencers,
+				'id' => 'influencers',
+			]);
+		} else {
+			$influencersCarousel = null;
+		}
 
 		$this->layout = '/desktop/public-2.php';
 		$this->view->params['selectedCategory'] = isset($category) ? $category : null;
 
 		return $this->render("index-2", [
 			'banners' => $banners,
+			'homeBanners' => $homeBanners,
 			'devisersCarousel' => $devisersCarousel,
 			'influencersCarousel' => $influencersCarousel,
 			'works' => $works,
 			'htmlWorks' => $htmlWorks,
+			"category" => $category,
 			"category_id" => $category_id,
 			'boxes' => $boxes,
 			'stories' => $stories,
@@ -159,7 +208,8 @@ class PublicController extends CController
 		$category_id = Yii::$app->request->get('category_id', null);
 
 		if ($category_id) {
-			$category = Category::findOneSerialized($category_id); /* @var Category $category */
+			$category = Category::findOneSerialized($category_id);
+			/* @var Category $category */
 			$categoryShortIds = $category->getShortIds();
 		} else {
 			$categoryShortIds = [];
@@ -182,6 +232,7 @@ class PublicController extends CController
 	public function actionBecomeDeviser()
 	{
 		$this->layout = '/desktop/public-2.php';
+
 		return $this->render("become-deviser");
 	}
 
@@ -200,12 +251,14 @@ class PublicController extends CController
 		$this->view->params['show_footer'] = false;
 
 		$this->layout = '/desktop/public-2.php';
+
 		return $this->render("create-deviser-account", ["invitation" => $invitation]);
 	}
 
 	public function actionBecomeInfluencer()
 	{
 		$this->layout = '/desktop/public-2.php';
+
 		return $this->render("become-influencer");
 	}
 
@@ -224,6 +277,7 @@ class PublicController extends CController
 		$this->view->params['show_footer'] = false;
 
 		$this->layout = '/desktop/public-2.php';
+
 		return $this->render("create-influencer-account", ["invitation" => $invitation]);
 	}
 
@@ -233,18 +287,21 @@ class PublicController extends CController
 		$this->view->params['show_footer'] = false;
 
 		$this->layout = '/desktop/public-2.php';
+
 		return $this->render("signup", []);
 	}
 
 	public function actionCart()
 	{
 		$this->layout = '/desktop/public-2.php';
+
 		return $this->render("cart", []);
 	}
 
 	public function actionCheckout()
 	{
-		$person = Yii::$app->user->identity; /* @var Person $person */
+		$person = Yii::$app->user->identity;
+		/* @var Person $person */
 
 		if (!$person->isCompletedProfile()) {
 			$this->redirect($person->getCompleteProfileLink());
@@ -257,6 +314,7 @@ class PublicController extends CController
 		}
 
 		$this->layout = '/desktop/public-2.php';
+
 		return $this->render("checkout", [
 			'person' => Yii::$app->user->identity,
 		]);
@@ -265,12 +323,14 @@ class PublicController extends CController
 	public function actionAboutUs()
 	{
 		$this->layout = '/desktop/public-2.php';
+
 		return $this->render("about-us");
 	}
 
 	public function actionCookies()
 	{
 		$this->layout = '/desktop/public-2.php';
+
 		return $this->render("legal-page", [
 			'title' => Yii::t('app/cookies', 'TITLE'),
 			'text' => Yii::t('app/cookies', 'TEXT'),
@@ -280,6 +340,7 @@ class PublicController extends CController
 	public function actionTerms()
 	{
 		$this->layout = '/desktop/public-2.php';
+
 		return $this->render("legal-page", [
 			'title' => Yii::t('app/terms', 'TITLE'),
 			'text' => Yii::t('app/terms', 'TEXT'),
@@ -289,6 +350,7 @@ class PublicController extends CController
 	public function actionPrivacy()
 	{
 		$this->layout = '/desktop/public-2.php';
+
 		return $this->render("legal-page", [
 			'title' => Yii::t('app/privacy', 'TITLE'),
 			'text' => Yii::t('app/privacy', 'TEXT'),
@@ -298,6 +360,7 @@ class PublicController extends CController
 	public function actionElements()
 	{
 		$this->layout = '/desktop/empty-layout.php';
+
 		return $this->render("elements");
 	}
 
@@ -331,6 +394,7 @@ class PublicController extends CController
 		}
 
 		$this->layout = '/desktop/public-2.php';
+
 		return $this->render("contact", [
 			'test' => $model->hasErrors(),
 			'model' => $model,
@@ -571,51 +635,55 @@ class PublicController extends CController
 		$banners = [];
 		for ($i = 0; $i < 15; $i++) {
 			$banners[] = [
-					'img' => 'https://unsplash.it/1200/600/?random&t=' . $i,
-					'caption' => [
-							'name' => 'Foo bar ' . $i,
-							'category' => 'Foo bar ' . $i
-					]
+				'img' => 'https://unsplash.it/1200/600/?random&t=' . $i,
+				'caption' => [
+					'name' => 'Foo bar ' . $i,
+					'category' => 'Foo bar ' . $i
+				]
 			];
 		}
 
 		$devisers = Yii::$app->mongodb->getCollection('person')
-				->aggregate(
-						[
-								'$match' => [
-										"type" => [
-												'$in' => [
-														Person::DEVISER
-												]
-										]
-								]
-						],
-						[
-								'$sample' => [
-										'size' => 20
-								]
+			->aggregate(
+				[
+					'$match' => [
+						"type" => [
+							'$in' => [
+								Person::DEVISER
+							]
 						]
-				);
+					]
+				],
+				[
+					'$sample' => [
+						'size' => 20
+					]
+				]
+			);
 
 		foreach ($devisers as $key => &$deviser) {
 			$works = Yii::$app->mongodb->getCollection('product')
-					->aggregate(
-							[
-									'$project' => [
-											"short_id" => 1, "media" => 1, "slug" => 1, "deviser_id" => 1, "categories" => 1
-									]
-							],
-							[
-									'$match' => [
-											"deviser_id" => $deviser["short_id"]
-									]
-							],
-							[
-									'$sample' => [
-											'size' => 4
-									]
-							]
-					);
+				->aggregate(
+					[
+						'$project' => [
+							"short_id" => 1,
+							"media" => 1,
+							"slug" => 1,
+							"deviser_id" => 1,
+							"categories" => 1
+						]
+					],
+					[
+						'$match' => [
+							"deviser_id" => $deviser["short_id"]
+						]
+					],
+					[
+						'$sample' => [
+							'size' => 4
+						]
+					]
+				);
 
 			foreach ($works as $key => &$work) {
 				$work['img'] = ModelUtils::getProductMainPhoto($work);
@@ -629,22 +697,22 @@ class PublicController extends CController
 		}
 
 		$categories = Category::find()
-				->where(["path" => "/"])
-				->orderBy(['name.' . $lang => SORT_ASC])
-				->asArray()
-				->all();
+			->where(["path" => "/"])
+			->orderBy(['name.' . $lang => SORT_ASC])
+			->asArray()
+			->all();
 
 		Utils::l_collection($categories, "name");
 
 		array_unshift($categories, [
-				'short_id' => 'all',
-				'name' => Yii::t("app/public", 'ALL_CATEGORIES')
+			'short_id' => 'all',
+			'name' => Yii::t("app/public", 'ALL_CATEGORIES')
 		]);
 
 		$session = Yii::$app->session;
 		foreach ($categories as &$category) {
 			$model = new DynamicModel([
-					'selected' => null
+				'selected' => null
 			]);
 			$model->addRule('selected', 'string');
 
@@ -675,33 +743,38 @@ class PublicController extends CController
 
 			if (ModelUtils::getCategory($category['short_id']) !== null) {
 				$match = [
-						'categories' => [
-								'$in' => array_map(function ($category) {
-									return $category['short_id'];
-								}, ModelUtils::getSubCategories($category['short_id']))
-						]
+					'categories' => [
+						'$in' => array_map(function ($category) {
+							return $category['short_id'];
+						}, ModelUtils::getSubCategories($category['short_id']))
+					]
 				];
 			} else {
 				$match = [
-						'short_id' => ['$gt' => ''] // We get here only with the 'all' (special) category, that's why we use a dummy filter to match everything.
+					'short_id' => ['$gt' => '']
+					// We get here only with the 'all' (special) category, that's why we use a dummy filter to match everything.
 				];
 			}
 			$tmp = Yii::$app->mongodb->getCollection('product')
-					->aggregate(
-							[
-									'$project' => [
-											"short_id" => 1, "slug" => 1, "categories" => 1, "name" => 1, "media" => 1
-									]
-							],
-							[
-									'$match' => $match
-							],
-							[
-									'$sample' => [
-											'size' => 400
-									]
-							]
-					);
+				->aggregate(
+					[
+						'$project' => [
+							"short_id" => 1,
+							"slug" => 1,
+							"categories" => 1,
+							"name" => 1,
+							"media" => 1
+						]
+					],
+					[
+						'$match' => $match
+					],
+					[
+						'$sample' => [
+							'size' => 400
+						]
+					]
+				);
 
 			foreach ($tmp as $key => &$product) {
 				$product["name"] = @Utils::l($product["name"]) ?: " ";
@@ -711,17 +784,17 @@ class PublicController extends CController
 			}
 
 			$category['products'] = new ArrayDataProvider([
-					'allModels' => $tmp,
-					'pagination' => [
-							'pagesize' => 40,
-					],
+				'allModels' => $tmp,
+				'pagination' => [
+					'pagesize' => 40,
+				],
 			]);
 		}
 
 		return $this->render("_index", [
-				'banners' => $banners,
-				'devisers' => $devisers,
-				'categories' => $categories
+			'banners' => $banners,
+			'devisers' => $devisers,
+			'categories' => $categories
 		]);
 	}
 
@@ -737,22 +810,26 @@ class PublicController extends CController
 	{
 
 		$tmp = Yii::$app->mongodb->getCollection('product')
-				->aggregate(
-						[
-								'$project' => [
-										"short_id" => 1, "slug" => 1, "categories" => 1, "name" => 1, "media" => 1
-								]
-						],
-						[
-								'$match' => [
-										'categories' => [
-												'$in' => array_map(function ($category) {
-													return $category['short_id'];
-												}, ModelUtils::getSubCategories($category_id))
-										]
-								]
+			->aggregate(
+				[
+					'$project' => [
+						"short_id" => 1,
+						"slug" => 1,
+						"categories" => 1,
+						"name" => 1,
+						"media" => 1
+					]
+				],
+				[
+					'$match' => [
+						'categories' => [
+							'$in' => array_map(function ($category) {
+								return $category['short_id'];
+							}, ModelUtils::getSubCategories($category_id))
 						]
-				);
+					]
+				]
+			);
 
 		foreach ($tmp as $key => &$product) {
 			$product["name"] = @Utils::l($product["name"]) ?: " ";
@@ -762,14 +839,14 @@ class PublicController extends CController
 		}
 
 		$products = new ArrayDataProvider([
-				'allModels' => $tmp,
-				'pagination' => [
-						'pagesize' => 40,
-				],
+			'allModels' => $tmp,
+			'pagination' => [
+				'pagesize' => 40,
+			],
 		]);
 
 		return $this->render("_category", [
-				'products' => $products
+			'products' => $products
 		]);
 	}
 
@@ -786,34 +863,38 @@ class PublicController extends CController
 	{
 
 		$product = OldProduct::find()
-				->where([
-						"short_id" => $product_id
-				])
-				->asArray()
-				->one();
+			->where([
+				"short_id" => $product_id
+			])
+			->asArray()
+			->one();
 
 		$product['name'] = Utils::l($product['name']);
 		$product['description'] = Utils::l($product['description']);
 		$product['category'] = ModelUtils::getProductCategoriesNames($product)[0];
 
 		$tmp = Yii::$app->mongodb->getCollection('product')
-				->aggregate(
-						[
-								'$project' => [
-										"short_id" => 1, "slug" => 1, "categories" => 1, "name" => 1, "media" => 1
-								]
-						],
-						[
-								'$match' => [
-										'deviser_id' => $product['deviser_id']
-								]
-						],
-						[
-								'$sample' => [
-										'size' => 400
-								]
-						]
-				);
+			->aggregate(
+				[
+					'$project' => [
+						"short_id" => 1,
+						"slug" => 1,
+						"categories" => 1,
+						"name" => 1,
+						"media" => 1
+					]
+				],
+				[
+					'$match' => [
+						'deviser_id' => $product['deviser_id']
+					]
+				],
+				[
+					'$sample' => [
+						'size' => 400
+					]
+				]
+			);
 		$tmp = OldProduct::find()->where(['deviser_id' => $product['deviser_id']])->asArray()->all();
 
 		Utils::l_collection($tmp, "name");
@@ -825,10 +906,10 @@ class PublicController extends CController
 		}
 
 		$other_works = new ArrayDataProvider([
-				'allModels' => $tmp,
-				'pagination' => [
-						'pagesize' => 40,
-				],
+			'allModels' => $tmp,
+			'pagination' => [
+				'pagesize' => 40,
+			],
 		]);
 
 		//404 if $product == null
@@ -836,35 +917,35 @@ class PublicController extends CController
 		//$this->view->params["product_path"] = $product['categories'];
 
 		$deviser = Person::find()
-				->where([
-						"short_id" => $product['deviser_id'],
-						"type" => Person::DEVISER
-				])
-				->asArray()
-				->one();
+			->where([
+				"short_id" => $product['deviser_id'],
+				"type" => Person::DEVISER
+			])
+			->asArray()
+			->one();
 
 		$deviser['img'] = ModelUtils::getDeviserAvatar($deviser);
 		$deviser['fullname'] = ModelUtils::getDeviserFullName($deviser);
 
 		$tags = Tag::find()
-				->where([
-						"short_id" => [
-								'$in' => array_map(function ($v) {
-									return '' . $v;
-								}, array_keys($product['options']))
-						]
-				])
-				->asArray()
-				->all();
+			->where([
+				"short_id" => [
+					'$in' => array_map(function ($v) {
+						return '' . $v;
+					}, array_keys($product['options']))
+				]
+			])
+			->asArray()
+			->all();
 
 		return $this->render("_product", [
-				'product' => $product,
-				'other_works' => $other_works,
-				'deviser' => $deviser,
-				'tags' => $tags,
-				'category_id' => $category_id,
-				'product_id' => $product_id,
-				'slug' => $slug
+			'product' => $product,
+			'other_works' => $other_works,
+			'deviser' => $deviser,
+			'tags' => $tags,
+			'category_id' => $category_id,
+			'product_id' => $product_id,
+			'slug' => $slug
 		]);
 	}
 
@@ -879,12 +960,12 @@ class PublicController extends CController
 	public function actionDeviser($deviser_id, $slug)
 	{
 		$deviser = Person::find()
-				->where([
-						"short_id" => $deviser_id,
-						"type" => Person::DEVISER
-				])
-				->asArray()
-				->one();
+			->where([
+				"short_id" => $deviser_id,
+				"type" => Person::DEVISER
+			])
+			->asArray()
+			->one();
 
 		$deviser['name'] = ModelUtils::getDeviserFullName($deviser);
 		$deviser['category'] = ModelUtils::getDeviserCategoriesNames($deviser)[0];
@@ -902,15 +983,15 @@ class PublicController extends CController
 		}
 
 		$works = new ArrayDataProvider([
-				'allModels' => $tmp,
-				'pagination' => [
-						'pagesize' => 40,
-				],
+			'allModels' => $tmp,
+			'pagination' => [
+				'pagesize' => 40,
+			],
 		]);
 
 		return $this->render("_deviser", [
-				'deviser' => $deviser,
-				'works' => $works
+			'deviser' => $deviser,
+			'works' => $works
 		]);
 	}
 
@@ -925,24 +1006,26 @@ class PublicController extends CController
 		if (Yii::$app->request->isAjax) {
 			Yii::$app->response->format = Response::FORMAT_JSON;
 
-			$res = array(
-					'body' => date('Y-m-d H:i:s'),
-					'success' => true,
-			);
+			$res = [
+				'body' => date('Y-m-d H:i:s'),
+				'success' => true,
+			];
 
 			return $res;
 		}
 
 		//Show cart view
 		return $this->render("_cart", [
-				'test' => 'this is a test text'
+			'test' => 'this is a test text'
 		]);
 	}
 
-	public function actionCreateCountryPaths() {
-		$countries = Country::findSerialized(); /* @var $countries Country[] */
+	public function actionCreateCountryPaths()
+	{
+		$countries = Country::findSerialized();
+		/* @var $countries Country[] */
 		foreach ($countries as $country) {
-			$country->path = Country::WORLD_WIDE.'/'.$country->continent.'/'.$country->country_code;
+			$country->path = Country::WORLD_WIDE . '/' . $country->continent . '/' . $country->country_code;
 			$country->save(true, ['path']);
 		}
 	}
@@ -958,8 +1041,36 @@ class PublicController extends CController
 			$invalidLogin = true;
 		}
 		$this->layout = '/desktop/public-2.php';
+
 		return $this->render("login-2", [
 			'invalidLogin' => $invalidLogin
+		]);
+	}
+
+	public function actionForgotPassword()
+	{
+		$this->layout = '/desktop/public-2.php';
+
+		return $this->render("forgot-password", [
+		]);
+	}
+
+	public function actionResetPassword()
+	{
+		$person_id = Yii::$app->request->get("person_id");
+		$action_id = Yii::$app->request->get("action_id");
+
+		$person = Person::findOne(['short_id' => $person_id]);
+
+		$valid = $person && $person->checkPersonByEmailActionUuid($action_id);
+
+		$this->layout = '/desktop/public-2.php';
+
+		return $this->render("reset-password", [
+			'person_id' => $person_id,
+			'action_id' => $action_id,
+			'person' => $person,
+			'valid' => $valid,
 		]);
 	}
 
@@ -974,6 +1085,7 @@ class PublicController extends CController
 			$invalidLogin = true;
 		}
 		$this->layout = '/desktop/public-2.php';
+
 		return $this->render("authentication-required", [
 			'invalidLogin' => $invalidLogin
 		]);
@@ -986,12 +1098,119 @@ class PublicController extends CController
 		return $this->goHome();
 	}
 
-	public function actionTestComposeEmailOrder()
+	public function actionConfigureBanners()
 	{
-		$short_id = '3654fd24';
-		$order = \app\models\Order::findOneSerialized($short_id);
-		if ($order) {
-			$order->composeEmailOrderPaid(false);
+		$homeCarousel = [
+			['img' => 'banner-1.jpg', 'url' => '/deviser/isabel-de-pedro/80226c0/store', 'alt' => 'Isabel De Pedro', 'type' => Banner::BANNER_TYPE_CAROUSEL, 'position' => 1],
+			['img' => 'banner-2.jpg', 'url' => '/deviser/vontrueba/329504s/store', 'alt' => 'Vontrueba', 'type' => Banner::BANNER_TYPE_CAROUSEL, 'position' => 2],
+			['img' => 'banner-3.jpg', 'url' => '/deviser/retrospective-jewellery/facd773/store', 'alt' => 'Retrospective Jewellery', 'type' => Banner::BANNER_TYPE_CAROUSEL, 'position' => 3],
+			['img' => 'banner-4.jpg', 'url' => '/deviser/acurrator/5c7020p/store', 'alt' => 'Acurrator', 'type' => Banner::BANNER_TYPE_CAROUSEL, 'position' => 4],
+			['img' => 'banner-5.jpg', 'url' => '/deviser/vols-and-original/e23e0bv/store', 'alt' => 'Vols And Original', 'type' => Banner::BANNER_TYPE_CAROUSEL, 'position' => 5],
+
+			['img' => 'home_square_1.jpg', 'url' => '/deviser/musa-bajo-el-arbol/0ca469a/store',  'alt' => 'Handbags', 'type' => Banner::BANNER_TYPE_HOME_BANNER, 'position' => 1],
+			['img' => 'home_square_2.jpg', 'url' => '/deviser/coast-cycles/b818a0w/store', 'alt' => 'Sports', 'type' => Banner::BANNER_TYPE_HOME_BANNER, 'position' => 2],
+			['img' => 'home_square_3.jpg', 'url' => '/deviser/pilar-del-campo/aa1e7c8/store', 'alt' => 'Fashion Collection', 'type' => Banner::BANNER_TYPE_HOME_BANNER, 'position' => 3],
+		];
+
+		Banner::deleteAll();
+		foreach ($homeCarousel as $item) {
+			$originalPath = Utils::join_paths(Yii::getAlias('@webroot'), 'imgs', $item['img']);
+
+			if (!file_exists($originalPath)) {
+				echo $originalPath.' does not exists';
+				continue;
+			}
+
+			$pathDestination = Utils::join_paths(Yii::getAlias("@banner"), "");
+			if (!file_exists($pathDestination)) {
+				FileHelper::createDirectory($pathDestination);
+			}
+
+			$newFileNameEn = 'banner.image.' . uniqid() . '.jpg';
+			$newFileNameEs = 'banner.image.' . uniqid() . '.jpg';
+			copy($originalPath, Utils::join_paths($pathDestination,$newFileNameEn));
+			copy($originalPath, Utils::join_paths($pathDestination, $newFileNameEs));
+
+			$banner = new \app\models\Banner();
+			$banner->image = [
+				Lang::EN_US => $newFileNameEn,
+				Lang::ES_ES => $newFileNameEs,
+			];
+			$banner->alt_text = [
+				Lang::EN_US => $item['alt'],
+				Lang::ES_ES => $item['alt'],
+			];
+			$banner->link = [
+				Lang::EN_US => Url::to($item['url'], true),
+				Lang::ES_ES => Url::to($item['url'], true),
+			];
+			$banner->category_id = null;
+			$banner->type = $item['type'];
+			$banner->position = $item['position'];
+			$banner->save();
+
+		}
+
+		$categories = [
+			['img' => 'banner-art', 'category_id' => '1a23b', 'type' => Banner::BANNER_TYPE_CAROUSEL, 'position' => 1],
+			['img' => 'banner-fashion', 'category_id' => '4a2b4', 'type' => Banner::BANNER_TYPE_CAROUSEL, 'position' => 1],
+			['img' => 'banner-sports', 'category_id' => 'ca82k', 'type' => Banner::BANNER_TYPE_CAROUSEL, 'position' => 1],
+			['img' => 'banner-jewelry', 'category_id' => '3f78g', 'type' => Banner::BANNER_TYPE_CAROUSEL, 'position' => 1],
+			['img' => 'banner-decoration', 'category_id' => '2r67s', 'type' => Banner::BANNER_TYPE_CAROUSEL, 'position' => 1],
+			['img' => 'banner-beauty', 'category_id' => 'cc29g', 'type' => Banner::BANNER_TYPE_CAROUSEL, 'position' => 1],
+		];
+
+		Category::setSerializeScenario(Category::SERIALIZE_SCENARIO_ADMIN);
+		foreach ($categories as $item) {
+			$category = Category::findSerialized(['id' => $item['category_id']]); /* @var \app\models\Category $category */
+			if (empty($category)) {
+				echo $item['category_id'].' does not exists';
+				continue;
+			}
+			$category = $category[0];
+
+			$imageEs = $item['img'].'-es-ES.jpg';
+			$imageEn = $item['img'].'-en-US.jpg';
+			$originalPathEs = Utils::join_paths(Yii::getAlias('@webroot'), 'imgs', $imageEs);
+			$originalPathEn = Utils::join_paths(Yii::getAlias('@webroot'), 'imgs', $imageEn);
+
+			if (!file_exists($originalPathEs)) {
+				echo $originalPathEs.' does not exists';
+				continue;
+			}
+			if (!file_exists($originalPathEn)) {
+				echo $originalPathEn.' does not exists';
+				continue;
+			}
+
+			$pathDestination = Utils::join_paths(Yii::getAlias("@banner"), "");
+			if (!file_exists($pathDestination)) {
+				FileHelper::createDirectory($pathDestination);
+			}
+
+			$newFileNameEn = 'banner.image.' . uniqid() . '.jpg';
+			$newFileNameEs = 'banner.image.' . uniqid() . '.jpg';
+			copy($originalPathEn, Utils::join_paths($pathDestination,$newFileNameEn));
+			copy($originalPathEs, Utils::join_paths($pathDestination, $newFileNameEs));
+
+			$banner = new \app\models\Banner();
+			$banner->image = [
+				Lang::EN_US => $newFileNameEn,
+				Lang::ES_ES => $newFileNameEs,
+			];
+			$banner->alt_text = [
+				Lang::EN_US => $category->name[Lang::EN_US],
+				Lang::ES_ES => $category->name[Lang::ES_ES],
+			];
+			$banner->link = [
+				Lang::EN_US => $category->getMainLink(),
+				Lang::ES_ES => $category->getMainLink(),
+			];
+			$banner->category_id = $category->short_id;
+			$banner->type = $item['type'];
+			$banner->position = $item['position'];
+			$banner->save();
+
 		}
 	}
 }

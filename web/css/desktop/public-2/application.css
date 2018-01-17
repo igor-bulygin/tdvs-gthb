@@ -1175,6 +1175,12 @@ footer .social-items li a {
     .btn-change-password:hover .box-icon {
       background: url("/imgs/box-white.svg") no-repeat; }
 
+#btn-faq-add-question button {
+  padding: 0 20px !important; }
+
+.checkout-sidebar button {
+  padding: 0 20px !important; }
+
 .products-menu ul {
   margin: 20px 0 40px;
   text-align: center; }
@@ -1322,6 +1328,9 @@ label {
   text-transform: uppercase;
   text-align: center;
   display: block; }
+  @media (max-width: 768px) {
+    .login-title {
+      font-size: 34px !important; } }
 
 .inverse .login-title {
   color: #1C1919 !important; }
@@ -6561,7 +6570,7 @@ span.optional-text.pull-left {
     padding: 0 20px; }
 
 .create-deviser-account-wrapper {
-  padding: 30px 200px 200px;
+  padding: 20px;
   background-color: #1C1919;
   float: left;
   width: 100%; }
@@ -6640,6 +6649,9 @@ span.optional-text.pull-left {
     text-transform: uppercase;
     font-family: "Univers Thin Ultra Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
     letter-spacing: 4px; }
+    @media (max-width: 768px) {
+      .title-create-account .first-title {
+        font-size: 48px; } }
   .title-create-account .second-title {
     font-family: "Roboto Condensed", sans-serif;
     font-size: 24px;
@@ -6647,6 +6659,9 @@ span.optional-text.pull-left {
     display: block;
     text-align: center;
     margin: -5px 0 5px; }
+    @media (max-width: 768px) {
+      .title-create-account .second-title {
+        font-size: 16px; } }
 
 .image-create-account img {
   width: 150px;
@@ -6655,8 +6670,14 @@ span.optional-text.pull-left {
 
 .product {
   background-color: #ffffff; }
-  .product .container {
-    margin-top: 70px; }
+  .product .title-mobile {
+    font: 36px "Univers Thin Ultra Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    display: block;
+    line-height: 39px;
+    text-align: center;
+    margin-top: 22px; }
   .product .product-data-wrapper {
     padding: 0 15px;
     margin: 15px 0; }
@@ -6680,6 +6701,9 @@ span.optional-text.pull-left {
       .product .product-data-wrapper .product-data .price-stock .product-price {
         font: bold 40px "Roboto Condensed", sans-serif;
         letter-spacing: 0.5px; }
+        @media (max-width: 768px) {
+          .product .product-data-wrapper .product-data .price-stock .product-price {
+            font: bold 28px "Roboto Condensed", sans-serif; } }
       .product .product-data-wrapper .product-data .price-stock .stock {
         color: #939393;
         font-family: "Roboto Condensed", sans-serif; }
@@ -6714,6 +6738,9 @@ span.optional-text.pull-left {
         color: #939393;
         padding: 2px 12px;
         display: inline-block; }
+        @media (max-width: 768px) {
+          .product .product-data-wrapper .product-data .row-size .atribute-selected {
+            padding: 2px 0; } }
       .product .product-data-wrapper .product-data .row-size .size-box {
         float: left;
         margin: 0 5px 6px 0;
@@ -6858,10 +6885,17 @@ span.optional-text.pull-left {
 .btns-product-wrapper {
   width: 285px;
   margin: 0 auto; }
+  @media (max-width: 768px) {
+    .btns-product-wrapper {
+      width: 100%; } }
 
 .work-profile-description-wrapper .title {
   width: 100%;
   text-align: center; }
+
+@media (max-width: 768px) {
+  .btn-enlarged-mb {
+    width: 100% !important; } }
 
 .description-parraf {
   border-right: 1px solid #979797;
@@ -6891,6 +6925,9 @@ span.optional-text.pull-left {
 
 .product-description {
   background-color: #ffffff; }
+  @media (max-width: 768px) {
+    .product-description .title-product-name {
+      font-size: 24px !important; } }
   .product-description .product-tabs {
     text-align: center;
     border: none !important; }
@@ -6898,6 +6935,13 @@ span.optional-text.pull-left {
       margin: 0 10px;
       display: inline-block;
       float: none !important; }
+      @media (max-width: 768px) {
+        .product-description .product-tabs li {
+          margin: 0 8px;
+          max-width: 100px;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis; } }
       .product-description .product-tabs li.active a {
         border: none !important;
         border-bottom: 2px solid #c91c39 !important; }
@@ -6914,6 +6958,9 @@ span.optional-text.pull-left {
         border-radius: 0 0 0 0 !important;
         -webkit-border-radius: 0 0 0 0 !important;
         -moz-border-radius: 0 0 0 0 !important; }
+        @media (max-width: 768px) {
+          .product-description .product-tabs li a {
+            padding: 0; } }
         .product-description .product-tabs li a:hover {
           color: #1C1919; }
   .product-description .product-description-content {

@@ -356,7 +356,27 @@ while ($date->format('Y-m-d') < $now) {
 												'label' => 'Emails',
 												'url'=> Url::toRoute(['admin/postman-emails']),
 												'active' => (
-													Utils::compareURL('admin/postman-emails')
+												Utils::compareURL('admin/postman-emails')
+												)
+											],
+											[
+												'options' => [
+													'class' => 'item-submenu funiv fs0-929',
+												],
+												'label' => 'Mandrill (sent)',
+												'url'=> Url::toRoute(['admin/mandrill-sent']),
+												'active' => (
+												Utils::compareURL('admin/mandrill-sent')
+												)
+											],
+											[
+												'options' => [
+													'class' => 'item-submenu funiv fs0-929',
+												],
+												'label' => 'Mandrill (scheduled)',
+												'url'=> Url::toRoute(['admin/mandrill-scheduled']),
+												'active' => (
+												Utils::compareURL('admin/mandrill-scheduled')
 												)
 											],
 										],

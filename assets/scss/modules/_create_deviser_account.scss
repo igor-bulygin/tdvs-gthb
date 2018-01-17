@@ -2,7 +2,7 @@
 // Create deviser account
 // ==========================================================================
 .create-deviser-account-wrapper{
-    padding: 30px 200px 200px;
+	padding: 20px;
 	background-color: $black;
 	float: left;
     width: 100%;
@@ -107,6 +107,9 @@
         text-transform: uppercase;
         font-family: $font-family--name;//$font-family--bold;
         letter-spacing: 4px;
+		@media (max-width: 768px){
+			font-size: 48px;
+		}
     }
 	.second-title{
 		font-family: $font-family--regular;//$font-family--serif;
@@ -115,6 +118,9 @@
 		display: block;
 		text-align: center;
 		margin: -5px 0 5px;
+		@media (max-width: 768px){
+			font-size: 16px;
+		}
 	}
 }
 .image-create-account{

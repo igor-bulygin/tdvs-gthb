@@ -117,7 +117,10 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 							</ul>
 						</div>
 						<!-- short biography -->
-						<label for="text_short_description"><span translate="person.header.SHORT_BRAND_DESCRIPTION"></span></label>
+						<label for="text_short_description">
+							<span ng-if="personHeaderCtrl.isDeviser" ng-cloak translate="person.header.SHORT_BRAND_DESCRIPTION"></span>
+							<span ng-if="!personHeaderCtrl.isDeviser" ng-cloak translate="person.header.SHORT_YOUR_DESCRIPTION"></span>
+						</label>
 						<span class="small-grey"><span translate="person.header.TRANSLATE_DESCRIPTION"></span></span>
 							<!-- language selector -->
 							<ol class="nya-bs-select about-edit-select header-lang" ng-model="personHeaderCtrl.description_language" ng-cloak>

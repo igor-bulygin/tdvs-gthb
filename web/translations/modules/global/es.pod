@@ -47,6 +47,7 @@
 			"ZIP": "C.P.",
 			"EMAIL": "Email",
 			"PASSWORD": "Contraseña",
+			"NEW_PASSWORD": "Nueva contraseña",
 			"SET_PASSWORD": "Elija una contraseña",
 			"REPEAT_PASSWORD": "Repita la contraseña",
 			"SIGN_IN": "Entrar",

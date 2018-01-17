@@ -78,7 +78,9 @@
 			"MARKED_AS_MAIN":"Marked as main photo",
 			"UPLOAD_1_PHOTO":"Please upload at least 1 photo.",
 			"TAGS":"Tags",
-			"PLS_TRANSLATE": "Please translate each field into Spanish and English"
+			"PLS_TRANSLATE": "Please translate each field into Spanish and English",
+			"NO_WARRANTY": "No warranty",
+			"NO_RETURNS": "No returns"
 		},
 		"more_details": {
 			"TITLE":"More details about your work (optional)",

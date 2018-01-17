@@ -4,6 +4,7 @@
 	function config($translateProvider, $translatePartialLoaderProvider) {
 		$translatePartialLoaderProvider.addPart('global');
 		$translatePartialLoaderProvider.addPart('todevise');
+		$translatePartialLoaderProvider.addPart('admin');
 		$translateProvider.useLoader('$translatePartialLoader', {
 			urlTemplate: '/translations/modules/{part}/{lang}.pod'
 		});

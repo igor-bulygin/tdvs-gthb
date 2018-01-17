@@ -57,7 +57,7 @@ $this->title = 'Todevise / Admin / Influencers';
 				'columns' => [
 					[
 						'class' => 'yii\grid\ActionColumn',
-						'template' => "{view} {update} {states} {delete}",
+						'template' => "{view} {update} {settings} {states}  {delete}",
 						'buttons' => [
 							'view' => function($url, $model, $key) {
 								$url = $model->getAboutLink();
@@ -65,8 +65,13 @@ $this->title = 'Todevise / Admin / Influencers';
 							},
 
 							'update' => function($url, $model, $key) {
-			                    $url = $model->getAboutEditLink();
+								$url = $model->getAboutEditLink();
 								return Html::a('<span class="glyphicon glyphicon-edit fc-fff fs1"></span>', $url);
+							},
+
+							'settings' => function($url, $model, $key) {
+								$url = $model->getSettingsLink();
+								return Html::a('<span class="glyphicon glyphicon-cog fc-fff fs1"></span>', $url);
 							},
 
 							'states' => function($url, $model, $key) {

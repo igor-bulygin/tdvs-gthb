@@ -1,6 +1,7 @@
 <?php
 namespace app\models;
 
+use app\helpers\EmailsHelper;
 use app\helpers\Utils;
 use yii\web\BadRequestHttpException;
 
@@ -27,6 +28,7 @@ use yii\web\BadRequestHttpException;
  * @property array $products
  * @property array $state_history
  * @property string $invoice_url
+ * @property array $scheduled_emails
  *
  * @method Order getParentObject()
  */
@@ -74,6 +76,7 @@ class OrderPack extends EmbedModel
 			'products',
 			'state_history',
 			'invoice_url',
+			'scheduled_emails',
 		];
 	}
 
@@ -436,9 +439,19 @@ class OrderPack extends EmbedModel
 
 	public function setState($newState)
 	{
-		if ($this->pack_state == $newState) {
-			return;
+//		if ($this->pack_state == $newState) {
+//			return;
+//		}
+
+		if ($newState == OrderPack::PACK_STATE_AWARE) {
+			$this->cancelEmailsNewOrder();
+			$this->scheduleEmailsNoShipped();
 		}
+		if ($newState == OrderPack::PACK_STATE_SHIPPED) {
+			$this->cancelEmailsNoShipped();
+			EmailsHelper::clientOrderShipped($this->getParentObject(), $this->short_id);
+		}
+
 		$this->pack_state = $newState;
 		$stateHistory = $this->state_history;
 		$stateHistory[] =
@@ -447,6 +460,47 @@ class OrderPack extends EmbedModel
 				'date' => new \MongoDate(),
 			];
 		$this->setAttribute('state_history', $stateHistory);
+	}
+
+	public function scheduleEmailsNoShipped()
+	{
+		$order = $this->getParentObject();
+		$scheduledEmails['deviser_no_shipped'][] = EmailsHelper::deviserOrderNoShippedReminder24($order, $this->short_id);
+		$scheduledEmails['deviser_no_shipped'][] = EmailsHelper::deviserOrderNoShippedReminder48($order, $this->short_id);
+		$scheduledEmails['deviser_no_shipped'][] = EmailsHelper::deviserOrderNoShippedReminder72($order, $this->short_id);
+		$scheduledEmails['todevise_no_shipped'][] = EmailsHelper::todeviseOrderNoShippedReminder96($order, $this->short_id);
+		$this->setAttribute('scheduled_emails', $scheduledEmails);
+	}
+
+
+	public function cancelEmailsNewOrder()
+	{
+		$scheduledEmails = $this->scheduled_emails;
+		if (isset($scheduledEmails['deviser_new_order'])) {
+			foreach ($scheduledEmails['deviser_new_order'] as $email) {
+				EmailsHelper::cancelScheduled($email['_id']);
+			}
+		}
+		if (isset($scheduledEmails['todevise_new_order'])) {
+			foreach ($scheduledEmails['todevise_new_order'] as $email) {
+				EmailsHelper::cancelScheduled($email['_id']);
+			}
+		}
+	}
+
+	public function cancelEmailsNoShipped()
+	{
+		$scheduledEmails = $this->scheduled_emails;
+		if (isset($scheduledEmails['deviser_no_shipped'])) {
+			foreach ($scheduledEmails['deviser_no_shipped'] as $email) {
+				EmailsHelper::cancelScheduled($email['_id']);
+			}
+		}
+		if (isset($scheduledEmails['todevise_no_shipped'])) {
+			foreach ($scheduledEmails['todevise_no_shipped'] as $email) {
+				EmailsHelper::cancelScheduled($email['_id']);
+			}
+		}
 	}
 
 	public function setInvoice($invoiceUrl)
@@ -468,5 +522,4 @@ class OrderPack extends EmbedModel
 	{
 		$this->invoice_url = $invoiceUrl;
 	}
-
 }

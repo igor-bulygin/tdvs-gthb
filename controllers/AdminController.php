@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\helpers\CAccessRule;
 use app\helpers\CController;
+use app\helpers\EmailsHelper;
 use app\helpers\Utils;
 use app\models\Category;
 use app\models\Country;
@@ -18,9 +19,11 @@ use app\models\Tag;
 use Yii;
 use yii\base\Exception;
 use yii\data\ActiveDataProvider;
+use yii\data\ArrayDataProvider;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\mongodb\Collection;
+use yii\web\NotFoundHttpException;
 
 class AdminController extends CController {
 	public $defaultAction = "index";
@@ -174,6 +177,50 @@ class AdminController extends CController {
 		];
 
 		return Yii::$app->request->isAjax ? $this->renderPartial("postman-emails", $data) : $this->render("postman-emails", $data);
+	}
+
+	public function actionMandrillSent($filters = null) {
+
+		$emails = EmailsHelper::listSent(null, null);
+
+		$provider = new ArrayDataProvider([
+			'allModels' => $emails,
+			'pagination' => ['pageSize' => 100]
+		]);
+
+		$data = [
+			'emails' => $provider,
+		];
+
+		return Yii::$app->request->isAjax ? $this->renderPartial("mandrill-sent", $data) : $this->render("mandrill-sent", $data);
+	}
+
+	public function actionMandrillScheduled($filters = null) {
+
+		$emails = EmailsHelper::listScheduled();
+
+		$provider = new ArrayDataProvider([
+			'allModels' => $emails,
+			'pagination' => ['pageSize' => 100]
+		]);
+
+		$data = [
+			'emails' => $provider,
+		];
+
+		return Yii::$app->request->isAjax ? $this->renderPartial("mandrill-scheduled", $data) : $this->render("mandrill-scheduled", $data);
+	}
+
+	public function actionMandrillContent($message_id) {
+
+		$message = EmailsHelper::content($message_id);
+
+		if (!$message) {
+			throw new NotFoundHttpException("Message not found");
+		}
+		$this->layout = '/desktop/empty-layout.php';
+
+		return $this->renderContent($message['html']);
 	}
 
 	public function actionTags($filters = null) {
@@ -420,5 +467,12 @@ class AdminController extends CController {
 		header("Expires: 0");
 
 		echo $result;
+	}
+
+	public function actionBanners($filters = null) {
+
+		$data = [];
+
+		return Yii::$app->request->isAjax ? $this->renderPartial("banners", $data) : $this->render("banners", $data);
 	}
 }

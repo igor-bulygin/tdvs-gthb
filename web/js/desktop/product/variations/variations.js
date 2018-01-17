@@ -55,6 +55,19 @@
 
 		function init(){
 			setMandatoryLanguagesNames();
+			if(angular.isObject(vm.product.bespoke) && vm.product.bespoke.type === 1) {
+				vm.bespoke_selected = true;
+			}
+			if(angular.isObject(vm.product.preorder) && vm.product.preorder.type === 1) {
+				vm.preorder_selected = true;
+			}
+			if(angular.isObject(vm.product.madetoorder) && vm.product.madetoorder.type === 1) {
+				vm.made_to_order_selected = true;
+			}
+			if(angular.isObject(vm.product.prints)) {
+				vm.prints_selected = true;
+			}
+			vm.product.variationsLoaded = true;
 		}
 
 		init();
@@ -517,7 +530,7 @@
 		controller: controller,
 		controllerAs: 'productVariationsCtrl',
 		bindings: {
-			product: '<',
+			product: '=',
 			languages: '<',
 			tags: '<',
 			categories: '<',
@@ -525,7 +538,7 @@
 			sizecharts: '<',
 			deviser: '<',
 			papertypes: '<',
-			fromedit: '<'
+			fromedit: '<',
 		}
 	}
 

@@ -1,0 +1,7 @@
+{
+	"ADMIN": {
+		"BANNER": {
+			"DELETE": "Delete"
+		}
+	}
+}
