@@ -40,6 +40,7 @@ class PersonShippingSettings extends EmbedModel
 			'country_code',
 			'shipping_time',
 			'shipping_express_time',
+			'free_shipping_from',
 			'prices',
 			'observations',
 		];
@@ -71,7 +72,7 @@ class PersonShippingSettings extends EmbedModel
 				]
 			],
 			[
-				['shipping_time', 'shipping_express_time'],
+				['shipping_time', 'shipping_express_time', 'free_shipping_from'],
 				'integer',
 				'min' => 1,
 				'on' => [

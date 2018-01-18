@@ -4,13 +4,14 @@
 	function controller(locationDataService, UtilService) {
 		var vm = this;
 		vm.deleteShippingExpressTime = deleteShippingExpressTime;
+		vm.deleteFreeShippingFrom = deleteFreeShippingFrom;
 		vm.has_error = UtilService.has_error;
 
 		init();
 
 		function init() {
-			if(vm.setting.shipping_express_time)
-				vm.show_express_shipping = true;
+			vm.show_express_shipping = !!vm.setting.shipping_express_time;
+			vm.show_free_shipping = !!vm.setting.free_shipping_from;
 		}
 
 		function deleteShippingExpressTime() {
@@ -22,6 +23,10 @@
 			});
 		}
 
+		function deleteFreeShippingFrom() {
+			delete vm.setting.free_shipping_from;
+		}
+
 	}
 
 	var component = {
@@ -29,7 +34,8 @@
 		controller: controller,
 		controllerAs: "shippingTypesCtrl",
 		bindings: {
-			setting: '<'
+			setting: '<',
+			currency: '<'
 		}
 	}
 

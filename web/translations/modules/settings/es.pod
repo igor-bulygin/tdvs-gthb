@@ -78,6 +78,9 @@
 			"DAYS": "Días",
 			"ADD_EXPRESS_SHIPPING": "Añadir envío exprés",
 			"EXPRESS_TIME": "Tiempo de envío exprés",
+			"ADD_FREE_SHIPPING": "Añadir envío gratuíto",
+			"FREE_SHIPPING_FROM": "Envío gratuíto desde",
+			"EUR": "EUR",
 			"PLEASE_CREATE_RANGES": "Por favor, cree los rangos de peso para sus productos. Los precios se fijarán en función de los pesos. Puede editar, eliminar y crear intervalos de peso en cualquier momento. Los rangos de peso deben estar en orden, desde el peso más bajo hasta el más alto.",
 			"RANGE": "Rango",
 			"FROM": "Desde",
@@ -87,7 +90,6 @@
 			"EXPRESS_SHIPPING": "Envío exprés",
 			"WEIGHTS_PRICES": "PESOS & PRECIOS",
 			"OBSERVATIONS": "OBSERVACIONES"
-
 		},
 		"header": {
 			"GENERAL": "General",
