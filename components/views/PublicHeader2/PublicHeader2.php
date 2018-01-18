@@ -142,6 +142,7 @@ app\components\assets\PublicHeader2Asset::register($this);
 					<li class="cart-item">
 						<a href="<?=Url::to(['/cart'])?>">
 							<!--i class="ion-ios-cart active"></i-->
+							<span class="badge badge-notify bg-red" ng-if="publicHeaderCtrl.cartQuantity>0" ng-cloak ng-bind="publicHeaderCtrl.cartQuantity" style="margin-left: 10px;z-index: 999999;position: absolute;top:7px;"></span>
 							<span class="icons-hover cart-icon"></span>
 						</a>
 					</li>
