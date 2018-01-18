@@ -16,13 +16,14 @@ use yii\widgets\Breadcrumbs;
 /* @var $content string */
 
 // Create invoices link, one per month
-$date = DateTime::createFromFormat('Y-m-d H:i:s', '2017-09-01 00:00:00');
-$now = date('Y-m-d');
+$date = new DateTime();
+$limit = DateTime::createFromFormat('Y-m-d H:i:s', '2017-09-01 00:00:00');
+$oneMonth = DateInterval::createFromDateString('1 month');
+
 $itemsInvoices = [];
-while ($date->format('Y-m-d') < $now) {
-	$oneMonth = DateInterval::createFromDateString('1 month');
+while ($date > $limit) {
 	$next = clone $date;
-	$next = $next->add($oneMonth);
+	$next = $next->sub($oneMonth);
 	$itemsInvoices[] = [
 		'options' => [
 			'class' => 'item-submenu funiv fs0-929',
@@ -134,6 +135,7 @@ while ($date->format('Y-m-d') < $now) {
 											],
 										]
 									],
+									/*
 									[
 										'label' => 'ORDERS',
 										'options' => [
@@ -175,6 +177,7 @@ while ($date->format('Y-m-d') < $now) {
 											]
 										],
 									],
+									*/
 									[
 										'label' => 'Settings',
 										'options' => [
@@ -339,6 +342,34 @@ while ($date->format('Y-m-d') < $now) {
 												'url'=> Url::toRoute(['admin/terms']),
 												'active' => (
 													Utils::compareURL('admin/terms')
+												)
+											],
+										],
+									],
+									[
+										'label' => 'Stats	',
+										'options' => [
+											'class' => 'item-menu-left funiv_bold fs0-857 fs-upper',
+										],
+										'items' => [
+											[
+												'options' => [
+													'class' => 'item-submenu funiv fs0-929',
+												],
+												'label' => 'Sales',
+												'url'=> Url::toRoute(['admin/sales-history']),
+												'active' => (
+												Utils::compareURL('admin/sales-history')
+												)
+											],
+											[
+												'options' => [
+													'class' => 'item-submenu funiv fs0-929',
+												],
+												'label' => 'Basic stats',
+												'url'=> Url::toRoute(['admin/basic-stats']),
+												'active' => (
+												Utils::compareURL('admin/basic-stats')
 												)
 											],
 										],
