@@ -32,7 +32,10 @@ $this->title = 'Todevise / Admin / Sales';
 					<tr>
 						<th>Date</th>
 						<th>Order id</th>
-						<th>Amount</th>
+						<th>Gross amount</th>
+						<th>Net amount</th>
+						<th>Fee (without VAT)</th>
+						<th>VAT (if applicable)</th>
 						<th>Client</th>
 						<th>Devisers</th>
 						<th>Nª products</th>
@@ -45,6 +48,9 @@ $this->title = 'Todevise / Admin / Sales';
 							<td><?=$item['date']?></td>
 							<td><?=$item['order_id']?></td>
 							<td><?=$item['amount']?></td>
+							<td><?=$item['netAmount']?></td>
+							<td><?=$item['feeWithoutVAT']?></td>
+							<td><?=$item['vat']?></td>
 							<td><?=$item['client']?></td>
 							<td><?=$item['devisers']?></td>
 							<td><?=$item['nProducts']?></td>

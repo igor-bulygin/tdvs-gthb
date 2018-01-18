@@ -207,31 +207,12 @@ class AdminController extends CController {
 
 		$amount = 0;
 		$todeviseFees = 0;
-		$salesHistory = [];
 		foreach ($orders as $order) {
 			$amount += $order->subtotal;
 			$packs = $order->getPacks();
-
-			$date = $order->order_date->toDateTime()->format('Y-m-d H:i:s');
-			$historyItem = '<p data-toggle="collapse" data-target=".order'.$order->short_id.'" role="button">' .
-				$date.' - '.$order->short_id.': '.$order->getPerson()->getName().' made a purchase of '.$order->subtotal.
-				'</p>';
-
 			foreach ($packs as $pack) {
 				$todeviseFees += $pack->pack_total_fee_todevise;
-				$historyItem .= '<p class="collapse order'.$order->short_id.'"> - '.
-					$pack->pack_total_price.$pack->currency.' from '.$pack->getDeviser()->getName().
-					'</p>';
-				$products = $pack->getProducts();
-				foreach ($products as $orderProduct) {
-					$product = $orderProduct->getProduct();
-					$historyItem .= '<p class="collapse order'.$order->short_id.'"> --- '.
-						$orderProduct->quantity.'x '.$product->getName().
-						'</p>';
-				}
 			}
-
-			$salesHistory[] = $historyItem;
 
 		}
 
@@ -285,8 +266,13 @@ class AdminController extends CController {
 			$detail .= '<hr />';
 
 			$nProducts = 0;
+			$feeWithoutVAT = 0;
+			$vat = 0;
 			$devisers = [];
 			foreach ($packs as $pack) {
+
+				$feeWithoutVAT += $pack->pack_total_fee - $pack->pack_total_fee_vat;
+				$vat += $pack->pack_total_fee_vat;
 
 				$deviser = $pack->getDeviser();
 				$deviserName = $deviser->getName();
@@ -358,6 +344,9 @@ class AdminController extends CController {
 				'date' => $date,
 				'order_id' => $order->short_id,
 				'amount' => $order->subtotal.$orderCurrency,
+				'netAmount' => ($order->subtotal-$feeWithoutVAT-$vat).$orderCurrency,
+				'feeWithoutVAT' => $feeWithoutVAT.$orderCurrency,
+				'vat' => $vat.$orderCurrency,
 				'client' => $order->getPerson()->getName(),
 				'devisers' => $devisers,
 				'nProducts' => $nProducts,
