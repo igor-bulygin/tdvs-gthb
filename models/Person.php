@@ -1990,23 +1990,6 @@ class Person extends CActiveRecord implements IdentityInterface
 		return !empty($products);
 	}
 
-	public function getShippingPrice($weight, $country_code, $shipping_type = 'standard')
-	{
-		$shippingSettingRange = $this->getShippinSettingRange($weight, $country_code);
-		if ($shippingSettingRange) {
-			switch ($shipping_type) {
-				case 'standard':
-					return $shippingSettingRange['price'];
-
-				case 'express';
-					return $shippingSettingRange['price_express'];
-
-			}
-		}
-
-		return null;
-	}
-
 	/**
 	 * @param string|null $country_code
 	 *
@@ -2031,12 +2014,12 @@ class Person extends CActiveRecord implements IdentityInterface
 	 *
 	 * @return array
 	 */
-	public function getShippinSettingRange($weight, $country_code = null)
+	public function getShippingSettingRange($amount, $weight, $country_code = null)
 	{
 		$shippingSetting = $this->getShippingSettingByCountry($country_code);
 
 		if ($shippingSetting) {
-			return $shippingSetting->getShippingSettingRange($weight);
+			return $shippingSetting->getShippingSettingRange($amount, $weight);
 		}
 
 		return null;
