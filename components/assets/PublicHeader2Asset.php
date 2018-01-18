@@ -8,7 +8,7 @@ class PublicHeader2Asset extends AssetBundle {
 	public $baseUrl = '@web';
 	public $css = [];
 	public $js = [
-		'js/components/header-2.js',
+//		'js/components/header-2.js',
 		'js/desktop/public-2/public-header.js',
 	];
 	public $depends = [
