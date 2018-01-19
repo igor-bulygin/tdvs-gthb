@@ -133,6 +133,8 @@ class PersonController extends CController
 
 		$this->checkProfileState($person);
 
+		$person->addVisit();
+
 		// categories of all products
 		$categories = $person->getCategoriesOfProducts();
 		/** @var Category $selectedCategory */
@@ -239,6 +241,8 @@ class PersonController extends CController
 		}
 
 		$this->checkProfileState($person);
+
+		$person->addVisit();
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("@app/views/desktop/person/about-view", [

@@ -15,7 +15,12 @@
 			"NEW_PASSWORD": "NEW PASSWORD",
 			"CONFIRM_NEW_PASSWORD": "CONFIRM NEW PASSWORD",
 			"PASSWORD_NOT_MATCH": "Password don't match",
-			"SELECT_AN_OPTION": "Select an option"
+			"SELECT_AN_OPTION": "Select an option",
+			"TODEVISE_STATS": "Todevise stats",
+			"TOTAL_SALES": "Total number of sales",
+            "GROSS_AMOUNT": "Gross amount from sales",
+            "NET_AMOUNT": "Net amount from sales (after commissions)",
+            "PROFILE_VIEWS": "Profile views"
 		},
 		"orders": {
 			"ORDERS": "ORDERS",
