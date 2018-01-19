@@ -16,15 +16,15 @@
 			switch(pack.shipping_type) {
 				case 'standard':
 					pack.shipping_time = pack.deviser_info.shipping_time;
-					pack.shipping_price = pack.deviser_info.price;
+					pack.shipping_price = pack.deviser_info.price ? pack.deviser_info.price : 0;
 					break;
 				case 'express':
 					pack.shipping_time = pack.deviser_info.shipping_express_time;
-					pack.shipping_price = pack.deviser_info.price_express;
+					pack.shipping_price = pack.deviser_info.price_express ? pack.deviser_info.price_express : 0;
 					break;
 				default:
 					pack.shipping_time = pack.deviser_info.shipping_time;
-					pack.shipping_price = pack.deviser_info.price;
+					pack.shipping_price = pack.deviser_info.price ? pack.deviser_info.price : 0;
 					break;
 			}
 			cartService.setTotalAmount(vm.cart);

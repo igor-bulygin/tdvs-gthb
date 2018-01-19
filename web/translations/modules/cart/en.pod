@@ -33,6 +33,7 @@
 		"shipping_methods": {
 			"SHIPPING_METHODS_TITLE": "Shipping methods & addresses",
 			"DELIVERY_WITHIN": "Delivery within {{days}} days",
+			"NOT_SETTED_DELIVERY": "Not info about shipping time",
 			"CONTINUE_PAYMENT": "Continue to payment methods"
 		},
 		"shopping_cart": {
