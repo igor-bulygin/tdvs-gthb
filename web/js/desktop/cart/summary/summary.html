@@ -3,7 +3,15 @@
 	<div ng-repeat="pack in summaryCtrl.cart.packs">
 		<div class="deviser-shipping-wrapper">
 			<span class="deviser-name-item summary-cart-wrapper" ng-bind="pack.deviser_info.name"></span>
-			<span class="shipping-text"> <span translate="cart.summary.SHIPPING_PRICE"></span> <span class="price-bold">€</span> <span ng-bind="pack.shipping_price"></span></span>
+			<span class="shipping-text">
+				<span translate="cart.summary.SHIPPING_PRICE"></span>:
+				<span ng-if="pack.shipping_price" ng-cloak>
+					<span class="price-bold">€</span> <span ng-bind="pack.shipping_price"></span>
+				</span>
+				<span ng-if="!pack.shipping_price" ng-cloak>
+					<span translate="cart.summary.FREE_SHIPPING"></span>
+				</span>
+			</span>
 		</div>
 		<div class="summary-cart-wrapper summary-white-item" ng-repeat="product in pack.products">
 			<div>

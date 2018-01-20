@@ -438,7 +438,7 @@ class Order extends CActiveRecord {
 			$pack = new OrderPack();
 			$pack->setParentObject($this);
 			$pack->deviser_id = $product->deviser_id;
-			$pack->currency = $deviser->settingsMapping->currency;
+			$pack->currency = $deviser->settingsMapping->currency ?: Currency::getDefaultCurrency();
 			$pack->weight_measure = $deviser->settingsMapping->weight_measure;
 			$pack->addProduct($orderProduct);
 			$packs[] = $pack;
@@ -475,6 +475,16 @@ class Order extends CActiveRecord {
 		$this->subtotal = $subtotal;
 	}
 
+	public function recalculateAll()
+	{
+		$packs = $this->getPacks();
+		foreach ($packs as $pack) {
+			$pack->recalculateTotals();
+		}
+		$this->setPacks($packs);
+		$this->recalculateTotals();
+	}
+
 	/**
 	 * @param bool $send Sends the email
 	 * @return PostmanEmail
@@ -483,7 +493,7 @@ class Order extends CActiveRecord {
 		$email = new PostmanEmail();
 		$email->code_email_content_type = PostmanEmail::EMAIL_CONTENT_TYPE_ORDER_PAID;
 		$email->to_email = $this->getPerson()->credentials['email'];
-		$email->subject = 'Todevise - '.$this->short_id.' - Your purchase is complete';
+		$email->subject = 'TODEVISE - '.$this->short_id.' - Your purchase is complete';
 
 		// add task only one send task (to allow retries)
 		$task = new PostmanEmailTask();

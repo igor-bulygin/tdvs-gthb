@@ -8,6 +8,7 @@ use app\helpers\EmailsHelper;
 use app\helpers\Utils;
 use app\models\Category;
 use app\models\Country;
+use app\models\Currency;
 use app\models\Invitation;
 use app\models\MetricType;
 use app\models\OldProduct;
@@ -178,6 +179,190 @@ class AdminController extends CController {
 
 		return Yii::$app->request->isAjax ? $this->renderPartial("postman-emails", $data) : $this->render("postman-emails", $data);
 	}
+
+
+	public function actionBasicStats($filters = null) {
+
+		$devisers = Person::findSerialized([
+			'type' => Person::DEVISER,
+			'account_state' => Person::ACCOUNT_STATE_ACTIVE,
+		]);
+
+		$influencers = Person::findSerialized([
+			'type' => Person::INFLUENCER,
+			'account_state' => Person::ACCOUNT_STATE_ACTIVE,
+		]);
+
+		$clients = Person::findSerialized([
+			'type' => Person::CLIENT,
+			'account_state' => Person::ACCOUNT_STATE_ACTIVE,
+		]);
+
+		$orders = Order::findSerialized([
+			'order_state' => Order::ORDER_STATE_PAID,
+			'order_by' => [
+				'order_date' => SORT_DESC,
+			]
+		]);
+
+		$amount = 0;
+		$todeviseFees = 0;
+		foreach ($orders as $order) {
+			$amount += $order->subtotal;
+			$packs = $order->getPacks();
+			foreach ($packs as $pack) {
+				$todeviseFees += $pack->pack_total_fee_todevise;
+			}
+
+		}
+
+		$stats = array(
+			'Total number of published devisers' => count($devisers),
+			'Total number of published influencers' => count($influencers),
+			'Total number of registered users' => count($clients),
+			'Total number of sales' => count($orders),
+			'Gross amount from the sales, in EUROS' => $amount,
+			'Total amount in Todevise commission' => $todeviseFees,
+		);
+
+		$data = [
+			'stats' => $stats,
+		];
+
+		return Yii::$app->request->isAjax ? $this->renderPartial("basic-stats", $data) : $this->render("basic-stats", $data);
+	}
+
+
+	public function actionSalesHistory($filters = null) {
+
+		$orders = Order::findSerialized([
+			'order_state' => Order::ORDER_STATE_PAID,
+			'order_by' => [
+				'order_date' => SORT_DESC,
+			]
+		]);
+
+		$salesHistory = [];
+		foreach ($orders as $order) {
+
+			$orderCurrency = Currency::getDefaultCurrency();
+
+			$date = $order->order_date->toDateTime()->format('Y-m-d H:i:s');
+
+			$client = $order->getPerson();
+			$clientName = $client->getName();
+			$clientLink =  '<a href="'.$client->getMainLink().'" target="_blank">'.$clientName.'</a>';
+			$packs = $order->getPacks();
+
+			$historyItem = '<p data-toggle="modal" data-target=".order'.$order->short_id.'" role="button">Expand</p>';
+
+
+			$detail = '';
+			$detail .= '
+				<h4>Date: '.$date.'<span class="pull-right">Amount: '.$order->subtotal.$orderCurrency.'</span></h4>
+				<h4>Client: '.$clientLink.'<span class="pull-right">Order id: '.$order->short_id .'</span></h4>
+			';
+			
+			$detail .= '<hr />';
+
+			$nProducts = 0;
+			$feeWithoutVAT = 0;
+			$vat = 0;
+			$devisers = [];
+			foreach ($packs as $pack) {
+
+				$feeWithoutVAT += $pack->pack_total_fee - $pack->pack_total_fee_vat;
+				$vat += $pack->pack_total_fee_vat;
+
+				$deviser = $pack->getDeviser();
+				$deviserName = $deviser->getName();
+				$deviserLink = '<a href="'.$deviser->getMainLink().'" target="_blank">'.$deviserName.'</a>';
+				$devisers [] = $deviserName;
+
+				$products = $pack->getProducts();
+
+				$detail .= '<h5>Pack '.$pack->short_id.': '.$deviserLink.' <span class="pull-right">'.$pack->pack_total_price.$pack->currency.'</span></h5>';
+
+				$detail .= '<br />';
+				$detail .= '<table class="table">';
+
+				$detail .= '<tr>';
+				$detail .= '<td>Product</td>';
+				$detail .= '<td class="text-right">Quantity</td>';
+				$detail .= '<td class="text-right">Unit price</td>';
+				$detail .= '<td class="text-right">Total price</td>';
+				$detail .= '</tr>';
+
+				foreach ($products as $orderProduct) {
+					$product = $orderProduct->getProduct();
+					$productName = $product->getName();
+					$productLink = '<a href="'.$product->getViewLink().'" target="_blank">'.$productName.'</a>';
+
+					$detail .= '<tr>';
+					$detail .= '<td>'.$productLink.'</td>';
+					$detail .= '<td class="text-right">'.$orderProduct->quantity.'</td>';
+					$detail .= '<td class="text-right">'.$orderProduct->price.$pack->currency.'</td>';
+					$detail .= '<td class="text-right">'.$orderProduct->quantity * $orderProduct->price.$pack->currency.'</td>';
+					$detail .= '</tr>';
+
+					$nProducts += $orderProduct->quantity;
+				}
+
+
+
+				$detail .= '<tr>';
+				$detail .= '<td>Shipping ('.$pack->shipping_type.')</td>';
+				$detail .= '<td class="text-right">1</td>';
+				$detail .= '<td class="text-right">'.$pack->shipping_price.$pack->currency.'</td>';
+				$detail .= '<td class="text-right">'.$pack->shipping_price.$pack->currency.'</td>';
+				$detail .= '</tr>';
+
+				$detail .= '</table>';
+
+
+
+				$historyItem .=
+					'<div class="modal full-modal fade fc-000 order'.$order->short_id.'" id="order'.$order->short_id.'">
+						<div class="modal-dialog modal-lg">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Order '.$order->short_id.'</h4>
+								</div>
+								<div class="modal-body">'.
+									$detail . '
+								</div>
+							</div>
+						</div>
+					</div>';
+
+			}
+
+			$devisers = implode(',' , $devisers);
+
+			$salesHistory[] = [
+				'date' => $date,
+				'order_id' => $order->short_id,
+				'amount' => $order->subtotal.$orderCurrency,
+				'netAmount' => ($order->subtotal-$feeWithoutVAT-$vat).$orderCurrency,
+				'feeWithoutVAT' => $feeWithoutVAT.$orderCurrency,
+				'vat' => $vat.$orderCurrency,
+				'client' => $order->getPerson()->getName(),
+				'devisers' => $devisers,
+				'nProducts' => $nProducts,
+				'detail' => $historyItem,
+
+			];
+
+		}
+
+		$data = [
+			'salesHistory' => $salesHistory,
+		];
+
+		return Yii::$app->request->isAjax ? $this->renderPartial("sales-history", $data) : $this->render("sales-history", $data);
+	}
+
 
 	public function actionMandrillSent($filters = null) {
 
@@ -467,5 +652,12 @@ class AdminController extends CController {
 		header("Expires: 0");
 
 		echo $result;
+	}
+
+	public function actionBanners($filters = null) {
+
+		$data = [];
+
+		return Yii::$app->request->isAjax ? $this->renderPartial("banners", $data) : $this->render("banners", $data);
 	}
 }

@@ -47,6 +47,7 @@
 			"ZIP": "ZIP",
 			"EMAIL": "Email",
 			"PASSWORD": "Password",
+			"NEW_PASSWORD": "New password",
 			"SET_PASSWORD": "Choose a password",
 			"REPEAT_PASSWORD": "Repeat the password",
 			"SIGN_IN": "Sign in",

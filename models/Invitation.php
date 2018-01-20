@@ -302,7 +302,7 @@ class Invitation extends CActiveRecord
 	 */
 	private function getEmailSubject()
 	{
-		return 'Invitation to todevise.com';
+		return 'TODEVISE - Invitation to todevise.com';
 	}
 
 	/**

@@ -41,6 +41,7 @@
 		},
 		"summary": {
 			"CART_SUMMARY": "Cart summary",
+			"FREE_SHIPPING": "Free",
 			"PROCEED": "Proceed to checkout",
 			"SHIPPING_PRICE": "Shipping price"
 		},

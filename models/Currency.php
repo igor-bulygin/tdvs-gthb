@@ -188,4 +188,13 @@ class Currency {
 		return $codes;
 
 	}
+
+	/**
+	 * Returns the default currency code
+	 *
+	 * @return string
+	 */
+	public static function getDefaultCurrency() {
+		return C::_EUR;
+	}
 }

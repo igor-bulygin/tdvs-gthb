@@ -11,26 +11,7 @@
 
 		function init(){
 			vm.from_edit = false;
-			vm.product = { emptyCategory:false, warranty: {type: 3},  returns: {type: 1}};
-			vm.product.slug = {};
-			vm.product.categories = [];
-			vm.product.media = {
-				photos: [],
-				description_photos: []
-			};
-			vm.product.faq = [];
-			vm.product.options = {};
-			vm.product.madetoorder = {
-				type: 0
-			};
-			vm.product.preorder = {
-				type: 0
-			};
-			vm.product.bespoke = {
-				type: 0
-			};
-			vm.product.tags = {};
-			vm.product.price_stock = [];
+			
 
 			getLanguages();
 			getTags();
@@ -98,12 +79,58 @@
 
 		function getProduct() {
 			function onGetProductPrivSuccess(data){
-				var aux=vm.product.emptyCategory;
+				//TODO refactorize
 				vm.product = angular.copy(data);
+				if (!vm.product.emptyCategory) {
+					vm.product.emptyCategory = false;
+				}
+				if (!vm.product.slug) {
+					vm.product.slug = {};
+				}
+				if (!vm.product.categories) {
+					vm.product.categories = [];
+				}
+				if (!vm.product.media) {
+					vm.product.media = {
+						photos: [],
+						description_photos: []
+					};
+				}
+				if (!vm.product.faq) {
+					vm.product.faq = [];
+				}
+				if (!vm.product.options) {
+					vm.product.options = {};
+				}
+				if (!vm.product.madetoorder) {
+					vm.product.madetoorder = {
+						type: 0
+					};
+				}
+				if (!vm.product.preorder) {
+					vm.product.preorder = {
+						type: 0
+					};
+				}
+				if (!vm.product.bespoke) {
+					vm.product.bespoke = {
+						type: 0
+					};
+				}
+				if (!vm.product.tags) {
+					vm.product.tags = {};
+				}
+				if (!vm.product.price_stock) {
+					vm.product.price_stock = [];
+				}
+				if (!vm.product.warranty || angular.isUndefined(vm.product.warranty.type) || vm.product.warranty.type == null) {
+					vm.product.warranty = {type: 3};
+				}
+				if (!vm.product.returns || angular.isUndefined(vm.product.returns.type) || vm.product.returns.type == null) {
+					vm.product.returns = {type: 1};
+				}
 				vm.from_edit = true;
-				vm.product_original = angular.copy(data);
 				vm.product = productService.parseProductFromService(vm.product);
-				vm.product.emptyCategory=aux;
 			}
 			var params = {
 				idProduct: product.short_id
@@ -136,8 +163,6 @@
 
 		//publish is true when publishing the product
 		function save(publish) {
-			vm.product.warranty.type=3;
-			vm.product.returns.type=1;
 			vm.saving = true;
 
 			function onUpdateProductSuccess(data) {

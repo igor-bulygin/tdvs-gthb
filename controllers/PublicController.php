@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\helpers\CController;
 use app\helpers\ModelUtils;
 use app\helpers\Utils;
+use app\models\Banner;
 use app\models\Become;
 use app\models\Box;
 use app\models\Category;
@@ -12,6 +13,7 @@ use app\models\ContactForm;
 use app\models\Country;
 use app\models\Faq;
 use app\models\Invitation;
+use app\models\Lang;
 use app\models\Login;
 use app\models\OldProduct;
 use app\models\Person;
@@ -23,6 +25,8 @@ use Yii;
 use yii\base\DynamicModel;
 use yii\data\ArrayDataProvider;
 use yii\filters\AccessControl;
+use yii\helpers\FileHelper;
+use yii\helpers\Url;
 use yii\mongodb\ActiveQuery;
 use yii\web\Response;
 
@@ -95,19 +99,51 @@ class PublicController extends CController
 
 	protected function mainPage($slug = null, $category_id = null)
 	{
+		Banner::setSerializeScenario(Banner::SERIALIZE_SCENARIO_PUBLIC);
 
 		if ($category_id) {
 
 			$category = Category::findOneSerialized($category_id);
-			/* @var Category $category */
 			$categoryShortIds = $category->getShortIds();
 
-			$banners = Utils::getBannerImages($category->getMainCategory());
+			$banners = Banner::findSerialized(
+				[
+					'type' => Banner::BANNER_TYPE_CAROUSEL,
+					'category_id' => $category_id,
+				]
+			);
+
+			if (empty($banners)) {
+				// If there is no banners for the current category, we find in the parent categories
+
+				$banners = Banner::findSerialized(
+					[
+						'type' => Banner::BANNER_TYPE_CAROUSEL,
+						'category_id' => $category->getAncestorIds(),
+					]
+				);
+			}
+
+			$homeBanners = [];
 
 		} else {
 
+			$category = null;
 			$categoryShortIds = [];
-			$banners = Utils::getBannerImages();
+
+			$banners = Banner::findSerialized(
+				[
+					'type' => Banner::BANNER_TYPE_CAROUSEL,
+					'category_id' => null,
+				]
+			);
+
+			$homeBanners = Banner::findSerialized(
+				[
+					'type' => Banner::BANNER_TYPE_HOME_BANNER,
+					'category_id' => null,
+				]
+			);
 		}
 
 		// Devisers
@@ -152,10 +188,12 @@ class PublicController extends CController
 
 		return $this->render("index-2", [
 			'banners' => $banners,
+			'homeBanners' => $homeBanners,
 			'devisersCarousel' => $devisersCarousel,
 			'influencersCarousel' => $influencersCarousel,
 			'works' => $works,
 			'htmlWorks' => $htmlWorks,
+			"category" => $category,
 			"category_id" => $category_id,
 			'boxes' => $boxes,
 			'stories' => $stories,
@@ -1009,6 +1047,33 @@ class PublicController extends CController
 		]);
 	}
 
+	public function actionForgotPassword()
+	{
+		$this->layout = '/desktop/public-2.php';
+
+		return $this->render("forgot-password", [
+		]);
+	}
+
+	public function actionResetPassword()
+	{
+		$person_id = Yii::$app->request->get("person_id");
+		$action_id = Yii::$app->request->get("action_id");
+
+		$person = Person::findOne(['short_id' => $person_id]);
+
+		$valid = $person && $person->checkPersonByEmailActionUuid($action_id);
+
+		$this->layout = '/desktop/public-2.php';
+
+		return $this->render("reset-password", [
+			'person_id' => $person_id,
+			'action_id' => $action_id,
+			'person' => $person,
+			'valid' => $valid,
+		]);
+	}
+
 	public function actionAuthenticationRequired()
 	{
 		$model = new Login();
@@ -1031,5 +1096,121 @@ class PublicController extends CController
 		Yii::$app->user->logout();
 
 		return $this->goHome();
+	}
+
+	public function actionConfigureBanners()
+	{
+		$homeCarousel = [
+			['img' => 'banner-1.jpg', 'url' => '/deviser/isabel-de-pedro/80226c0/store', 'alt' => 'Isabel De Pedro', 'type' => Banner::BANNER_TYPE_CAROUSEL, 'position' => 1],
+			['img' => 'banner-2.jpg', 'url' => '/deviser/vontrueba/329504s/store', 'alt' => 'Vontrueba', 'type' => Banner::BANNER_TYPE_CAROUSEL, 'position' => 2],
+			['img' => 'banner-3.jpg', 'url' => '/deviser/retrospective-jewellery/facd773/store', 'alt' => 'Retrospective Jewellery', 'type' => Banner::BANNER_TYPE_CAROUSEL, 'position' => 3],
+			['img' => 'banner-4.jpg', 'url' => '/deviser/acurrator/5c7020p/store', 'alt' => 'Acurrator', 'type' => Banner::BANNER_TYPE_CAROUSEL, 'position' => 4],
+			['img' => 'banner-5.jpg', 'url' => '/deviser/vols-and-original/e23e0bv/store', 'alt' => 'Vols And Original', 'type' => Banner::BANNER_TYPE_CAROUSEL, 'position' => 5],
+
+			['img' => 'home_square_1.jpg', 'url' => '/deviser/musa-bajo-el-arbol/0ca469a/store',  'alt' => 'Handbags', 'type' => Banner::BANNER_TYPE_HOME_BANNER, 'position' => 1],
+			['img' => 'home_square_2.jpg', 'url' => '/deviser/coast-cycles/b818a0w/store', 'alt' => 'Sports', 'type' => Banner::BANNER_TYPE_HOME_BANNER, 'position' => 2],
+			['img' => 'home_square_3.jpg', 'url' => '/deviser/pilar-del-campo/aa1e7c8/store', 'alt' => 'Fashion Collection', 'type' => Banner::BANNER_TYPE_HOME_BANNER, 'position' => 3],
+		];
+
+		Banner::deleteAll();
+		foreach ($homeCarousel as $item) {
+			$originalPath = Utils::join_paths(Yii::getAlias('@webroot'), 'imgs', $item['img']);
+
+			if (!file_exists($originalPath)) {
+				echo $originalPath.' does not exists';
+				continue;
+			}
+
+			$pathDestination = Utils::join_paths(Yii::getAlias("@banner"), "");
+			if (!file_exists($pathDestination)) {
+				FileHelper::createDirectory($pathDestination);
+			}
+
+			$newFileNameEn = 'banner.image.' . uniqid() . '.jpg';
+			$newFileNameEs = 'banner.image.' . uniqid() . '.jpg';
+			copy($originalPath, Utils::join_paths($pathDestination,$newFileNameEn));
+			copy($originalPath, Utils::join_paths($pathDestination, $newFileNameEs));
+
+			$banner = new \app\models\Banner();
+			$banner->image = [
+				Lang::EN_US => $newFileNameEn,
+				Lang::ES_ES => $newFileNameEs,
+			];
+			$banner->alt_text = [
+				Lang::EN_US => $item['alt'],
+				Lang::ES_ES => $item['alt'],
+			];
+			$banner->link = [
+				Lang::EN_US => Url::to($item['url'], true),
+				Lang::ES_ES => Url::to($item['url'], true),
+			];
+			$banner->category_id = null;
+			$banner->type = $item['type'];
+			$banner->position = $item['position'];
+			$banner->save();
+
+		}
+
+		$categories = [
+			['img' => 'banner-art', 'category_id' => '1a23b', 'type' => Banner::BANNER_TYPE_CAROUSEL, 'position' => 1],
+			['img' => 'banner-fashion', 'category_id' => '4a2b4', 'type' => Banner::BANNER_TYPE_CAROUSEL, 'position' => 1],
+			['img' => 'banner-sports', 'category_id' => 'ca82k', 'type' => Banner::BANNER_TYPE_CAROUSEL, 'position' => 1],
+			['img' => 'banner-jewelry', 'category_id' => '3f78g', 'type' => Banner::BANNER_TYPE_CAROUSEL, 'position' => 1],
+			['img' => 'banner-decoration', 'category_id' => '2r67s', 'type' => Banner::BANNER_TYPE_CAROUSEL, 'position' => 1],
+			['img' => 'banner-beauty', 'category_id' => 'cc29g', 'type' => Banner::BANNER_TYPE_CAROUSEL, 'position' => 1],
+		];
+
+		Category::setSerializeScenario(Category::SERIALIZE_SCENARIO_ADMIN);
+		foreach ($categories as $item) {
+			$category = Category::findSerialized(['id' => $item['category_id']]); /* @var \app\models\Category $category */
+			if (empty($category)) {
+				echo $item['category_id'].' does not exists';
+				continue;
+			}
+			$category = $category[0];
+
+			$imageEs = $item['img'].'-es-ES.jpg';
+			$imageEn = $item['img'].'-en-US.jpg';
+			$originalPathEs = Utils::join_paths(Yii::getAlias('@webroot'), 'imgs', $imageEs);
+			$originalPathEn = Utils::join_paths(Yii::getAlias('@webroot'), 'imgs', $imageEn);
+
+			if (!file_exists($originalPathEs)) {
+				echo $originalPathEs.' does not exists';
+				continue;
+			}
+			if (!file_exists($originalPathEn)) {
+				echo $originalPathEn.' does not exists';
+				continue;
+			}
+
+			$pathDestination = Utils::join_paths(Yii::getAlias("@banner"), "");
+			if (!file_exists($pathDestination)) {
+				FileHelper::createDirectory($pathDestination);
+			}
+
+			$newFileNameEn = 'banner.image.' . uniqid() . '.jpg';
+			$newFileNameEs = 'banner.image.' . uniqid() . '.jpg';
+			copy($originalPathEn, Utils::join_paths($pathDestination,$newFileNameEn));
+			copy($originalPathEs, Utils::join_paths($pathDestination, $newFileNameEs));
+
+			$banner = new \app\models\Banner();
+			$banner->image = [
+				Lang::EN_US => $newFileNameEn,
+				Lang::ES_ES => $newFileNameEs,
+			];
+			$banner->alt_text = [
+				Lang::EN_US => $category->name[Lang::EN_US],
+				Lang::ES_ES => $category->name[Lang::ES_ES],
+			];
+			$banner->link = [
+				Lang::EN_US => $category->getMainLink(),
+				Lang::ES_ES => $category->getMainLink(),
+			];
+			$banner->category_id = $category->short_id;
+			$banner->type = $item['type'];
+			$banner->position = $item['position'];
+			$banner->save();
+
+		}
 	}
 }

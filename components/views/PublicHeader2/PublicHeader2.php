@@ -14,6 +14,8 @@ app\components\assets\PublicHeader2Asset::register($this);
 	.navbar.terciary ul {margin: 12px 0 0 0;}
 </style>
 
+<?php $this->registerJs("var _selectedCategoryId = '" . $categoryId."';", \yii\web\View::POS_HEAD); ?>
+
 <header>
 	<nav class="navbar navbar-default" id="main_header" ng-controller="publicHeaderCtrl as publicHeaderCtrl">
 		<div class="container">
@@ -144,6 +146,7 @@ app\components\assets\PublicHeader2Asset::register($this);
 					<li class="cart-item">
 						<a href="<?=Url::to(['/cart'])?>">
 							<!--i class="ion-ios-cart active"></i-->
+							<span class="badge badge-notify bg-red" ng-if="publicHeaderCtrl.cartQuantity>0" ng-cloak ng-bind="publicHeaderCtrl.cartQuantity" style="margin-left: 10px;z-index: 999999;position: absolute;top:7px;"></span>
 							<span class="icons-hover cart-icon"></span>
 						</a>
 					</li>
@@ -157,18 +160,18 @@ app\components\assets\PublicHeader2Asset::register($this);
 </header>
 
 
-<div id="navbar-wrapper">
+<div id="navbar-wrapper" ng-mouseleave="publicHeaderCtrl.openMenu = false">
 	<nav class="navbar navbar-default secondary">
 		<div class="container" id="main_menu">
 			<div class="navbar-elements">
 				<ul class="nav navbar-nav">
 					<li class="col-xs-5 col-sm-6 col-md-12 col-lg-12">
-						<a href="#" class="menu-title hover-toggle" data-target=".menu-categories" data-group=".category-menu">
-							<i class="fa fa-bars" aria-hidden="true"></i>
+						<a href="#" class="menu-title" ng-mouseover="publicHeaderCtrl.openMenu = true" ng-click="publicHeaderCtrl.openMenu=!publicHeaderCtrl.openMenu">
+							<i class="fa" ng-class="publicHeaderCtrl.openMenu ? 'ion-android-close black-icon' : 'fa-bars'" aria-hidden="true"></i>
 							<span translate="header.SHOP_BY_DEPARTMENT"></span>
 						</a>
 					</li>
-					<li id="mobile-iconset" class="hidden-md hidden-lg col-xs-7 col-sm-6">
+					<li id="mobile-iconset" class="hidden-md hidden-lg col-xs-7 col-sm-6" >
 						<div id="mobIcons_center">
 							<a href="<?=Url::to(['/discover/boxes'])?>"><img src="/imgs/box-red.svg" /></a>
 							<a href="<?=Url::to(['/discover/devisers'])?>"><img src="/imgs/discover-red.svg" /></a>
@@ -200,13 +203,15 @@ app\components\assets\PublicHeader2Asset::register($this);
 			</div>
 		</div>
 	</nav>
-	<div class="menu-categories">
+	<div class="menu-categories" ng-class="publicHeaderCtrl.openMenu ? 'active' : ''">
 		<nav class="navbar navbar-default terciary">
 			<div class="hidden-xs hidden-sm container"><!--DESKTOP-->
 				<ul>
 					<?php foreach($categories as $category) { ?>
 						<li>
-							<a class="hover-toggle <?=$selectedCategory && $selectedCategory->short_id == $category->short_id ? 'selected' : ''?>" data-group=".category-menu" data-target="#category-<?=$category->short_id?>" href="<?= $category->getMainLink()?>"><?= $category->name?></a>
+							<a href="<?=$category->getMainLink()?>" ng-mouseover="publicHeaderCtrl.selectedCategory = '<?=$category->short_id?>'" ng-class="publicHeaderCtrl.selectedCategory == '<?=$category->short_id?>' ?  'selected' : ''">
+								<?= $category->name?>
+							</a>
 							<span class="hidden-md hidden-lg glyphicon glyphicon-plus" aria-hidden="true"></span>
 						</li>
 					<?php } ?>
@@ -217,7 +222,9 @@ app\components\assets\PublicHeader2Asset::register($this);
 				<?php foreach($categories as $category) { ?>
 					<li>
 						<a href="<?= $category->getMainLink()?>"><?= $category->name?></a>
-						<a href="#" class="hover-toggle <?=$selectedCategory && $selectedCategory->short_id == $category->short_id ? 'selected' : ''?>" data-group=".category-menu" data-target="#category-<?=$category->short_id?>" aria-hidden="true"><span class="glyphicon glyphicon-plus"></span></a>
+						<a href="#" ng-click="publicHeaderCtrl.selectedCategory = '<?=$category->short_id?>'" ng-class="publicHeaderCtrl.selectedCategory == '<?=$category->short_id?>' ?  'selected' : ''" aria-hidden="true">
+							<span class="glyphicon glyphicon-plus"></span>
+						</a>
 					</li>
 					<?php } ?>
 				</ul>
@@ -225,7 +232,7 @@ app\components\assets\PublicHeader2Asset::register($this);
 		</nav>
 		<div id="submenu-categories">
 			<?php foreach($categories as $category) { ?>
-				<div class="category-menu" id="category-<?=$category->short_id?>">
+				<div class="category-menu" ng-class="publicHeaderCtrl.selectedCategory == '<?=$category->short_id?>' ? 'active' : ''">
 					<div class="container">
 						<div class="categories">
 							<ul>

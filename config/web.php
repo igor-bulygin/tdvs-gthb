@@ -298,6 +298,8 @@ $config = [
 
 				//Login
 				'login' => 'public/login',
+				'forgot-password' => 'public/forgot-password',
+				'reset-password' => 'public/reset-password',
 				'authentication-required' => 'public/authentication-required',
 
 				//Discover
@@ -422,6 +424,8 @@ $config = [
 				'GET api3/pub/v1/invitations/<uuid:[^/.]*?>' => 'api3/pub/v1/invitation/view', // override "view" action to accept alphanumeric ids
 
 				'POST api3/pub/v1/auth/login' => 'api3/pub/v1/auth/login',
+				'POST api3/pub/v1/auth/forgot-password' => 'api3/pub/v1/auth/forgot-password',
+				'POST api3/pub/v1/auth/reset-password' => 'api3/pub/v1/auth/reset-password',
 
 				// Cart - public
 				'POST api3/pub/v1/cart' => 'api3/pub/v1/cart/create-cart',
@@ -491,6 +495,13 @@ $config = [
 				'PATCH api3/priv/v1/story/<storyId:[^/.]*?>' => 'api3/priv/v1/story/update',
 				'DELETE api3/priv/v1/story/<storyId:[^/.]*?>' => 'api3/priv/v1/story/delete',
 
+				// Banner - private
+				'GET api3/priv/v1/banner' => 'api3/priv/v1/banner/index',
+				'GET api3/priv/v1/banner/<bannerId:[^/.]*?>' => 'api3/priv/v1/banner/view',
+				'POST api3/priv/v1/banner' => 'api3/priv/v1/banner/create',
+				'PATCH api3/priv/v1/banner/<bannerId:[^/.]*?>' => 'api3/priv/v1/banner/update',
+				'DELETE api3/priv/v1/banner/<bannerId:[^/.]*?>' => 'api3/priv/v1/banner/delete',
+
 				// Sizechart - public
 				'GET api3/pub/v1/sizechart' => 'api3/pub/v1/sizechart/index',
 				// Sizechart - private
@@ -498,13 +509,14 @@ $config = [
 				'POST api3/priv/v1/sizechart' => 'api3/priv/v1/sizechart/create',
 				'PATCH api3/priv/v1/sizechart/<sizechartId:[^/.]*?>' => 'api3/priv/v1/sizechart/update',
 
+				'GET api3/pub/v1/languages' => 'api3/pub/v1/language/index',
+
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/priv/v1/upload'],
 
 				// API routing (admin)
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/admin/v1/invitation'],
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/admin/v1/faq'],
 				['class' => 'yii\rest\UrlRule', 'controller' => 'api3/admin/v1/term'],
-				'GET api3/pub/v1/languages' => 'api3/pub/v1/language/index',
 
 			]
 		],

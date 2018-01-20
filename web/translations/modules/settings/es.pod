@@ -15,7 +15,12 @@
 			"NEW_PASSWORD": "CONTRASEÑA NUEVA",
 			"CONFIRM_NEW_PASSWORD": "COMFIRMAR CONTRASEÑA NUEVA",
 			"PASSWORD_NOT_MATCH": "Las contraseñas no coinciden",
-			"SELECT_AN_OPTION": "Elija una opción"
+			"SELECT_AN_OPTION": "Elija una opción",
+			"TODEVISE_STATS": "Estadísticas Todevise",
+			"TOTAL_SALES": "Número total de ventas",
+            "GROSS_AMOUNT": "Importe bruto en ventas",
+            "NET_AMOUNT": "Importe neto en ventas (tras comisiones)",
+            "PROFILE_VIEWS": "Visitas al perfil"
 		},
 		"orders": {
 			"ORDERS": "PEDIDOS",

@@ -464,6 +464,23 @@ class Category extends CActiveRecord {
 	}
 
 	/**
+	 * Get short_id from current category, and optionally, child categories.
+	 *
+	 * @param bool $includeChild
+	 * @return array
+	 */
+	public function getAncestorIds() {
+
+		$ids = [$this->short_id];
+		$parent = $this->getParentCategory();
+		if ($parent) {
+			$ids = array_merge($ids, $parent->getAncestorIds());
+		}
+
+		return $ids;
+	}
+
+	/**
 	 * @return Product
 	 */
 	public function getDeviserProduct()

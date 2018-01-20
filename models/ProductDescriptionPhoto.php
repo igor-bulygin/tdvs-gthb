@@ -44,7 +44,7 @@ class ProductDescriptionPhoto extends EmbedModel
 	        [['name'], 'safe', 'on' => [Product::SCENARIO_PRODUCT_DRAFT, Product::SCENARIO_PRODUCT_PUBLIC]],
             [['name'], 'required', 'on' => Product::SCENARIO_PRODUCT_PUBLIC],
 			[['title', 'description'], 'app\validators\TranslatableValidator'],
-			[['title', 'description'], 'app\validators\TranslatableRequiredValidator', 'on' => Product::SCENARIO_PRODUCT_PUBLIC],
+//			[['title', 'description'], 'app\validators\TranslatableRequiredValidator', 'on' => Product::SCENARIO_PRODUCT_PUBLIC],
         ];
     }
 

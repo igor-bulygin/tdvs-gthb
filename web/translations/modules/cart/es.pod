@@ -41,6 +41,7 @@
 		},
 		"summary": {
 			"CART_SUMMARY": "Sumario",
+			"FREE_SHIPPING": "Gratuito",
 			"PROCEED": "Ir al checkout",
 			"SHIPPING_PRICE": "Gastos de envío"
 		},

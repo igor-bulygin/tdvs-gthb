@@ -61,6 +61,9 @@ label{
 	text-transform: uppercase;
 	text-align: center;
 	display: block;
+	@media (max-width: 768px){
+			font-size: 34px!important;
+		}
 }
 .inverse{
 	.login-title{

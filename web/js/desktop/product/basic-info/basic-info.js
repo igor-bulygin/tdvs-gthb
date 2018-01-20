@@ -23,11 +23,67 @@
 		vm.mandatory_langs_names="";
 		//we need this counter to know how many categories we have in order to broadcast right vars in setVariations event
 		vm.category_counter = 0;
+		vm.setNoWarranty = setNoWarranty;
+		vm.setNoReturns = setNoReturns;
+		vm.noWarranty = false;
+		vm.noReturns = false;
 
 		init();
 		
 		function init(){
+			vm.rootCategories = filterCategory(vm.categories, '');
+			addCategory();
+			setProductCategories();
+			setProductPhotos();
+			setTags();
 			setMandatoryLanguagesNames();
+			if (vm.product) {
+				if (vm.product.warranty && angular.isDefined(vm.product.warranty.type) && vm.product.warranty.type === 0) {
+					vm.noWarranty = true;
+				}
+				if (vm.product.returns && angular.isDefined(vm.product.returns.type) && vm.product.returns.type === 0) {
+					vm.noReturns = true;
+				}
+			}
+		}
+
+		function setProductCategories() {
+			if(angular.isArray(vm.product.categories) && vm.product.categories.length > 0 && vm.product.id) {
+				for(var i = 0; i < vm.product.categories.length; i++) {
+					var path = UtilService.returnPathFromCategory(vm.categories, vm.product.categories[i]);
+					var path_array = path.split('/');
+					path_array.splice(0, 1)
+					path_array.splice(path_array.length-1,1);
+					path_array.push(vm.product.categories[i]);
+					for(var j = 0; j < path_array.length; j++) {
+						categorySelected(path_array[j], i, j);
+					}
+					if(i < vm.product.categories.length - 1) {
+						vm.categories_helper.push({
+							categories_selected: [null],
+							categories: [vm.rootCategories]
+						})
+					}
+				}
+			}
+		}
+
+		function setProductPhotos() {
+			if(vm.product.id) {
+				if(angular.isArray(vm.product.media.photos) && vm.product.media.photos.length > 0)
+					parseImages();
+			}
+		}
+
+		function setTags() {
+			if(angular.isObject(vm.product.tags) && !UtilService.isEmpty(vm.product.tags)) {
+				for(var key in vm.product.tags) {
+					vm.tags[key] = [];
+					vm.product.tags[key].forEach(function(element) {
+						vm.tags[key].push({text: element});
+					});
+				}
+			}
 		}
 
 		//	TODO unify this (repeated function on variations.js) as a component field from creation/edition when files free
@@ -49,8 +105,8 @@
 				categories_selected: [null],
 				categories: [vm.rootCategories]
 			})
-			vm.product['categories'].push(null);
-			vm.product.emptyCategory=true;
+			//vm.product['categories'].push(null);
+			//vm.product.emptyCategory=true;
 		}
 
 		function categorySelected(category, index_helper, index) {
@@ -111,7 +167,8 @@
 				}, 1000);
 				//parse images
 				vm.images.push({
-					url: currentHost() + '/' + data.data.url
+					url: currentHost() + '/' + data.data.url,
+					name: data.data.filename
 				});
 				vm.product.media.photos.push({
 					name: data.data.filename
@@ -135,7 +192,6 @@
 					}
 				});
 			}
-
 			
 			angular.forEach(images, function(image) {
 				vm.tempFiles.push(image);
@@ -251,18 +307,41 @@
 		}
 
 		function orderProductPhotos() {
-			var aux=new Array(vm.images.length);
-			angular.forEach(vm.images, function (image) {
-				angular.forEach(vm.product.media.photos, function (photo) {
-					if (photo.name === image.filename.name) {
-						aux[vm.images.indexOf(image)]=photo;
-					}
+			if (vm.images) {
+				var aux=[];
+				angular.forEach(vm.images, function (image) {
+					angular.forEach(vm.product.media.photos, function (photo) {
+						if (photo.name === image.name) {
+							aux[vm.images.indexOf(image)]=photo;
+						}
+					});
+					
 				});
-				
-			});
-			vm.product.media.photos = angular.copy(aux);
+				if (aux.length>0) {
+					vm.product.media.photos = angular.copy(aux);
+				}
+			}
 		}
 
+		function setNoWarranty() {
+			if (vm.noWarranty) {
+				vm.product.warranty= { type : 0 };
+			}
+			else {
+				vm.product.warranty= { type : 3 };
+			}
+		}
+
+		function setNoReturns() {
+			if (vm.noReturns) {
+				vm.product.returns = { type : 0 };
+			}
+			else {
+				vm.product.returns = { type : 1 };
+			}
+		}
+
+		/* TODO: study possible deletion of this watch (It was initially builded to component iniciation with undefined product) */
 		$scope.$watch('productBasicInfoCtrl.product.categories', function(newValue, oldValue) {
 			if(angular.isArray(oldValue) && oldValue[0]===null && angular.isArray(newValue) && newValue.length > 0 && vm.product.id) {
 				for(var i = 0; i < newValue.length; i++) {
@@ -288,6 +367,7 @@
 		}, true);
 
 		//when get categories, set first
+		/* TODO: study possible deletion of this watch (It was initially builded to component iniciation with undefined categories) */
 		$scope.$watch('productBasicInfoCtrl.categories', function(newValue, oldValue) {
 			if(!oldValue && newValue) {
 				vm.rootCategories = filterCategory(newValue, '');
@@ -295,6 +375,7 @@
 			}
 		});
 
+		/* TODO: study possible deletion of this watch (It was initially builded to component iniciation with undefined product) */
 		$scope.$watch('productBasicInfoCtrl.product.id', function(newValue, oldValue) {
 			if(!oldValue && newValue) {
 				if(angular.isArray(vm.product.media.photos) && vm.product.media.photos.length > 0)
@@ -331,6 +412,7 @@
 			vm.descriptionRequired = false;
 		}, true);
 
+		/* TODO: study possible deletion of this watch (It was initially builded to component iniciation with undefined product) */
 		$scope.$watch('productBasicInfoCtrl.product.tags', function(newValue, oldValue) {
 			if(angular.isObject(oldValue) && UtilService.isEmpty(oldValue) && angular.isObject(newValue) && !UtilService.isEmpty(newValue)) {
 				for(var key in newValue) {

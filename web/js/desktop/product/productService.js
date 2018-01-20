@@ -34,7 +34,7 @@
 			var main_photo = false;
 			if(angular.isArray(product.media.photos) && product.media.photos.length > 0) {
 				product.media.photos.forEach(function(element) {
-					if(element.main_product_photo)
+					if(element && element.main_product_photo)
 						main_photo = true;
 				});
 			}
@@ -154,17 +154,17 @@
 				});
 			}
 			//warranty
-			if(!angular.isObject(product.warranty) || !product.warranty.value || !product.warranty.type) {
+			if(!angular.isObject(product.warranty) || angular.isUndefined(product.warranty.type) || product.warranty.type===null || (!product.warranty.value && product.warranty.type !=0) ) {
 				required.push('warranty');
 			}
-			else if (isNaN(parseInt(product.warranty.value))) {
+			else if (product.warranty.type !=0 && isNaN(parseInt(product.warranty.value))) {
 				required.push('warrantyNotNumber');
 			}
 			//returns
-			if(!angular.isObject(product.returns) || !product.returns.value || !product.returns.type) {
+			if(!angular.isObject(product.returns) || angular.isUndefined(product.returns.type) || product.returns.type===null || (!product.returns.value && product.returns.type !=0) ) {
 				required.push('returns');
 			}
-			else if (isNaN(parseInt(product.returns.value))) {
+			else if (product.returns.type !=0 && isNaN(parseInt(product.returns.value))) {
 				required.push('returnsNotNumber');
 			}
 			return required;

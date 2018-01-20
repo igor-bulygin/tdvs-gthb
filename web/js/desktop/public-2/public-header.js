@@ -11,6 +11,8 @@
 		var vm = this;
 		vm.logout = logout;
 		vm.cartQuantity=0;
+		vm.openMenu=false;
+		vm.selectedCategory = _selectedCategoryId;
 		init();
 
 		function init() {

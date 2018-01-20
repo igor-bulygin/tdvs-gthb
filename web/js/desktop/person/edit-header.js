@@ -15,9 +15,9 @@
 		vm.editHeader = editHeader;
 		vm.saveHeader = saveHeader;
 		vm.cancelEdit = cancelEdit;
-		vm.isDeviser = UtilService.isDeviser(person);
-		vm.isInfluencer = UtilService.isInfluencer(person);
-		vm.isClient = UtilService.isClient(person);
+		vm.isDeviser = UtilService.isDeviser;
+		vm.isInfluencer = UtilService.isInfluencer;
+		vm.isClient = UtilService.isClient;
 		vm.has_error = UtilService.has_error;
 
 		init();

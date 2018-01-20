@@ -4,6 +4,8 @@ namespace app\controllers;
 use app\helpers\CAccessRule;
 use app\helpers\CController;
 use app\helpers\StripeHelper;
+use app\models\Currency;
+use app\models\Order;
 use app\models\Person;
 use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
@@ -42,8 +44,10 @@ class SettingsController extends CController
 		return $this->actionGeneral($slug, $person_id);
 	}
 
-	public function actionGeneral($slug, $person_id) {
+	public function actionGeneral($slug, $person_id)
+	{
 		// get the category object
+		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
 		$person = Person::findOneSerialized($person_id);
 
 		if (!$person) {
@@ -60,10 +64,36 @@ class SettingsController extends CController
 
 		$this->checkProfileState($person);
 
+		$orders = Order::findSerialized([
+			'deviser_id' => $person->id,
+			'order_state' => Order::ORDER_STATE_PAID,
+			'only_matching_packs' => true,
+		]);
+		$salesNumber = 0;
+		$grossAmount = 0;
+		$netAmount = 0;
+		foreach ($orders as $order) {
+			$packs = $order->getPacks();
+			foreach ($packs as $pack) {
+				$salesNumber += 1;
+				$grossAmount += $pack->pack_total_price;
+				$netAmount += $pack->pack_total_price - $pack->pack_total_fee;
+			}
+
+		}
+		$profileViews = $person->profile_views ?: 0;
+
+		$currency = Currency::getDefaultCurrency();
+
 		$this->layout = '/desktop/public-2.php';
 
 		return $this->render("general", [
 			'person' => $person,
+			'salesNumber' => $salesNumber,
+			'grossAmount' => $grossAmount,
+			'netAmount' => $netAmount,
+			'profileViews' => $profileViews,
+			'currency' => $currency,
 		]);
 	}
 
