@@ -162,12 +162,14 @@ class PersonShippingSettings extends EmbedModel
 
 	public function getShippingSettingRange($amount, $weight)
 	{
-		if (!empty($this->free_shipping_from) && $this->free_shipping_from < $amount) {
-			return 0;
-		}
-
 		foreach ($this->prices as $price) {
 			if ($price['min_weight'] <= $weight && ($price['max_weight'] == null || $price['max_weight'] >= $weight)) {
+
+				// check free shipping
+				if (!empty($this->free_shipping_from) && $this->free_shipping_from < $amount) {
+					$price['price'] = 0;
+				}
+
 				return $price;
 			}
 		}
