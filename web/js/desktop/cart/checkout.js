@@ -5,6 +5,7 @@
 		var vm = this;
 		vm.person = person;
 		vm.checkout_state = 1;
+		vm.saving = false;
 
 		init();
 

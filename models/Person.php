@@ -9,6 +9,7 @@ use MongoDate;
 use Yii;
 use yii\helpers\Url;
 use yii\mongodb\ActiveQuery;
+use yii\mongodb\Collection;
 use yii\web\IdentityInterface;
 
 /**
@@ -31,6 +32,7 @@ use yii\web\IdentityInterface;
  * @property string $curriculum
  * @property PersonShippingSettings[] $shippingSettingsMapping
  * @property double $application_fee
+ * @property int $profile_views
  * @property MongoDate $created_at
  * @property MongoDate $updated_at
  */
@@ -109,6 +111,7 @@ class Person extends CActiveRecord implements IdentityInterface
 			'faq',
 			'shipping_settings',
 			'application_fee',
+			'profile_views',
 			'created_at',
 			'updated_at',
 		];
@@ -847,6 +850,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'videos_link' => 'videosLink',
 					'faq_link' => 'faqLink',
 					'type',
+					'profile_views',
 
 					// only availables in owner scenario:
 					'store_edit_link' => 'storeEditLink',
@@ -1986,23 +1990,6 @@ class Person extends CActiveRecord implements IdentityInterface
 		return !empty($products);
 	}
 
-	public function getShippingPrice($weight, $country_code, $shipping_type = 'standard')
-	{
-		$shippingSettingRange = $this->getShippinSettingRange($weight, $country_code);
-		if ($shippingSettingRange) {
-			switch ($shipping_type) {
-				case 'standard':
-					return $shippingSettingRange['price'];
-
-				case 'express';
-					return $shippingSettingRange['price_express'];
-
-			}
-		}
-
-		return null;
-	}
-
 	/**
 	 * @param string|null $country_code
 	 *
@@ -2027,12 +2014,12 @@ class Person extends CActiveRecord implements IdentityInterface
 	 *
 	 * @return array
 	 */
-	public function getShippinSettingRange($weight, $country_code = null)
+	public function getShippingSettingRange($amount, $weight, $country_code = null)
 	{
 		$shippingSetting = $this->getShippingSettingByCountry($country_code);
 
 		if ($shippingSetting) {
-			return $shippingSetting->getShippingSettingRange($weight);
+			return $shippingSetting->getShippingSettingRange($amount, $weight);
 		}
 
 		return null;
@@ -2156,6 +2143,23 @@ class Person extends CActiveRecord implements IdentityInterface
 		}
 
 		return false;
+	}
+
+	public function addVisit()
+	{
+		$this->profile_views++;
+		
+		// Update directly in low level, to avoid no desired behaviors of ActiveRecord
+		/** @var Collection $collection */
+		$collection = Yii::$app->mongodb->getCollection('person');
+		$collection->update(
+			[
+				'short_id' => $this->short_id
+			],
+			[
+				'profile_views' => $this->profile_views,
+			]
+		);
 	}
 
 }

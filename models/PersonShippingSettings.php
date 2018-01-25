@@ -5,6 +5,7 @@ namespace app\models;
  * @property string country_code
  * @property int shipping_time
  * @property int shipping_express_time
+ * @property int free_shipping_from
  * @property array prices
  * @property array observations
  *
@@ -40,6 +41,7 @@ class PersonShippingSettings extends EmbedModel
 			'country_code',
 			'shipping_time',
 			'shipping_express_time',
+			'free_shipping_from',
 			'prices',
 			'observations',
 		];
@@ -71,7 +73,7 @@ class PersonShippingSettings extends EmbedModel
 				]
 			],
 			[
-				['shipping_time', 'shipping_express_time'],
+				['shipping_time', 'shipping_express_time', 'free_shipping_from'],
 				'integer',
 				'min' => 1,
 				'on' => [
@@ -158,10 +160,16 @@ class PersonShippingSettings extends EmbedModel
 	}
 
 
-	public function getShippingSettingRange($weight)
+	public function getShippingSettingRange($amount, $weight)
 	{
 		foreach ($this->prices as $price) {
 			if ($price['min_weight'] <= $weight && ($price['max_weight'] == null || $price['max_weight'] >= $weight)) {
+
+				// check free shipping
+				if (!empty($this->free_shipping_from) && $this->free_shipping_from < $amount) {
+					$price['price'] = 0;
+				}
+
 				return $price;
 			}
 		}

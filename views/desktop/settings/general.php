@@ -193,4 +193,19 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 		<div class="modal-footer">
 		</div>
 	</script>
+
+<?php if ($person->isDeviser()) { ?>
+	<div class="container">
+		<uib-accordion>
+			<div uib-accordion-group class="panel-default panel-billing" heading="{{ 'settings.general.TODEVISE_STATS' | translate }}" is-open="true" ng-cloak>
+				<p><span translate="{{ 'settings.general.TOTAL_SALES' | translate }}"></span>: <?=$salesNumber?></p>
+				<p><span translate="{{ 'settings.general.GROSS_AMOUNT' | translate }}"></span>: <?=$grossAmount.$currency?></p>
+				<p><span translate="{{ 'settings.general.NET_AMOUNT' | translate }}"></span>: <?=$netAmount.$currency?></p>
+				<p><span translate="{{ 'settings.general.PROFILE_VIEWS' | translate }}"></span>: <?=$profileViews?></p>
+			</div>
+		</uib-accordion>
+	</div>
+<?php } ?>
+
+
 </div>

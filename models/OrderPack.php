@@ -271,7 +271,7 @@ class OrderPack extends EmbedModel
 		$shippingSetting = $deviser->getShippingSettingByCountry($order->getShippingAddress()->country);
 
 		if ($shippingSetting) {
-			$price = $shippingSetting->getShippingSettingRange($this->pack_weight);
+			$price = $shippingSetting->getShippingSettingRange($this->pack_price, $this->pack_weight);
 			if ($price) {
 				$deviser_info['shipping_time'] = $shippingSetting->shipping_time;
 				$deviser_info['shipping_express_time'] = $shippingSetting->shipping_express_time;
@@ -371,7 +371,7 @@ class OrderPack extends EmbedModel
 		$shippingSetting = $deviser->getShippingSettingByCountry($order->getShippingAddress()->country);
 
 		if ($shippingSetting) {
-			$price = $shippingSetting->getShippingSettingRange($pack_weight);
+			$price = $shippingSetting->getShippingSettingRange($this->pack_price, $this->pack_weight);
 			if ($price) {
 				switch ($this->shipping_type) {
 					case 'standard':
