@@ -20,17 +20,21 @@
 					<span class="title-deviser-shipping" ng-bind="pack.deviser_info.name"></span>
 				</div>
 				<div class="col-md-2" ng-if="shippingMethodsCtrl.state === 2">
-					<div class="radio radio-inline" ng-if="pack.deviser_info.shipping_time" ng-cloak>
-						<input type="radio" ng-value="'standard'" ng-model="pack.shipping_type" name="{{'standard_shipping_'+$index}}" ng-attr-id="{{'standard_shipping'+$index}}" ng-change="shippingMethodsCtrl.setShippingPriceTime(pack)">
-						<label for="{{'standard_shipping'+$index}}"><span translate="global.STANDARD"></span></label>
+					<div class="row">
+						<div class="radio radio-inline" ng-if="pack.deviser_info.shipping_time" ng-cloak>
+							<input type="radio" ng-value="'standard'" ng-model="pack.shipping_type" name="{{'standard_shipping_'+$index}}" ng-attr-id="{{'standard_shipping'+$index}}" ng-change="shippingMethodsCtrl.setShippingPriceTime(pack)">
+							<label for="{{'standard_shipping'+$index}}"><span translate="global.STANDARD"></span></label>
+						</div>
 					</div>
-					<div class="radio radio-inline" ng-if="pack.deviser_info.shipping_express_time" ng-cloak>
-						<input type="radio" ng-value="'express'" ng-model="pack.shipping_type" name="{{'express_shipping_'+$index}}" ng-attr-id="{{'express_shipping'+$index}}" ng-change="shippingMethodsCtrl.setShippingPriceTime(pack)">
-						<label for="{{'express_shipping'+$index}}"><span translate="global.EXPRESS"></span></label>
+					<div class="row">
+						<div class="radio radio-inline" ng-if="pack.deviser_info.shipping_express_time" ng-cloak>
+							<input type="radio" ng-value="'express'" ng-model="pack.shipping_type" name="{{'express_shipping_'+$index}}" ng-attr-id="{{'express_shipping'+$index}}" ng-change="shippingMethodsCtrl.setShippingPriceTime(pack)">
+							<label for="{{'express_shipping'+$index}}"><span translate="global.EXPRESS"></span></label>
+						</div>
 					</div>
 				</div>
 				<div class="col-md-2">
-					<p>
+					<p style="margin-top: 15px;">
 						<span translate="cart.shipping_methods.DELIVERY_WITHIN" translate-values="{days: pack.shipping_time || pack.deviser_info.shipping_time}"></span>
 						<span ng-if="pack.shipping_price" ng-cloak>
 							<span class="price-bold">€</span> <span ng-bind="pack.shipping_price"></span>
