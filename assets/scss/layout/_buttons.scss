@@ -718,8 +718,13 @@ footer{
     button {
         padding: 0 20px !important;
     }
-    .btn-red{
+    .btn-red {
         margin-top: 30px !important;
         padding: 0.5em 0.75em !important;
+    }
+}
+.summary-side {
+    .btn-red {
+        margin-top: 0 !important;
     }
 }
