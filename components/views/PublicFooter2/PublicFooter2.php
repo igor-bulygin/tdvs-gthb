@@ -27,7 +27,7 @@ $footerMode = 'collapsed';
 			document.getElementById("go_to_footer").style.display = "none";
 		}
 	}
-	
+
 	function GoToFooter(){
 		document.getElementById("go_to_footer").style.display = "none";
 		document.body.scrollTop = document.body.scrollHeight;

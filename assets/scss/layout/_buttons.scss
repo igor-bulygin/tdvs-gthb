@@ -714,6 +714,12 @@ footer{
 #btn-faq-add-question button {
     padding: 0 20px !important;
 }
-.checkout-sidebar button {
-    padding: 0 20px !important;
+.checkout-sidebar {
+    button {
+        padding: 0 20px !important;
+    }
+    .btn-red{
+        margin-top: 30px !important;
+        padding: 0.5em 0.75em !important;
+    }
 }
