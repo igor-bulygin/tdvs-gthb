@@ -48,6 +48,7 @@
 		},
 		"cart_panel": {
 			"GO_TO_CART": "ver cesta"
-		}
+		},
+		"PAYMENT_IN_PROGRESS": "Estamos procesando tu pago, por favor no salgas ni refresques la página"
 	}
 }
