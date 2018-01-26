@@ -41,6 +41,7 @@
 				zipCode: true,
 				currency: 'eur',
 				token: function(token) {
+					setSaving(true);
 					cartDataService.getCartToken(
 						{
 							token: angular.copy(token)
@@ -54,6 +55,10 @@
 
 		}
 
+		function setSaving(value) {
+			vm.saving = value;
+		}
+
 		function checkout(form) {
 			function onSaveCartSuccess(data) {
 				vm.handler.open({
@@ -61,6 +66,7 @@
 					description: 'Order Nº ' + data.id,
 					amount: data.subtotal*100
 				});
+				setSaving(true);
 			}
 
 			if(form)
@@ -107,6 +113,7 @@
 		controller: controller,
 		controllerAs: 'paymentMethodsCtrl',
 		bindings: {
+			saving: '=',
 			state: '=?',
 			cart: '<',
 			countries: '<'

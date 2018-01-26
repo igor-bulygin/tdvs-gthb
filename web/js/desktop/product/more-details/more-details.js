@@ -25,6 +25,7 @@
 
 		function init(){
 			//init functions
+			parseImages();
 		}
 
 		init();

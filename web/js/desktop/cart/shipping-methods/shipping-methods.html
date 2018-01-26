@@ -34,11 +34,12 @@
 					</div>
 					<div class="col-xs-8 col-sm-8 col-md-8">
 						<p style="margin-top: 15px;">
-							<span translate="cart.shipping_methods.DELIVERY_WITHIN" translate-values="{days: pack.shipping_time || pack.deviser_info.shipping_time}"></span>
-							<span ng-if="pack.shipping_price" ng-cloak>
-								<span class="price-bold">€</span> <span ng-bind="pack.shipping_price"></span>
+							<span ng-if="pack.shipping_time || pack.deviser_info.shipping_time" translate="cart.shipping_methods.DELIVERY_WITHIN" translate-values="{days: pack.shipping_time || pack.deviser_info.shipping_time}"></span>
+							<span ng-if="!pack.shipping_time && !pack.deviser_info.shipping_time" translate="cart.shipping_methods.NOT_SETTED_DELIVERY"></span>
+						<span ng-if="pack.shipping_price && pack.shipping_price > 0" ng-cloak>
+								<span class="price-bold"> - </span><span ng-bind="pack.shipping_price"></span><span class="price-bold"> €</span>
 							</span>
-							<span ng-if="!pack.shipping_price" ng-cloak>
+							<span ng-if="(!pack.shipping_price) || (pack.shipping_price && pack.shipping_price < 1)" ng-cloak>
 								<span translate="cart.summary.FREE_SHIPPING"></span>
 							</span>
 						</p>

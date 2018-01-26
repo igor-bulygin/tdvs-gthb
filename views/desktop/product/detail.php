@@ -406,7 +406,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 												<div class="policies-row">
 													<form class="form-horizontal">
 														<div class="form-group ">
-															<label class="col-xs-11 offset-xs-1 control-label shipping-label no-pad-r"><span translate="product.detail.SHIPPING_PRICE_SPAIN"></span> <span translate="product.detail.IS"></span> <span class="tax">€<?=$product->getShippingPrice(null, Country::getDefaultContryCode())?></span></label>
+															<label class="col-xs-11 offset-xs-1 control-label shipping-label no-pad-r"><span translate="product.detail.SHIPPING_PRICE_SPAIN"></span> <span translate="product.detail.IS"></span> <span class="tax">€<?=(double)$product->getShippingPrice(null, Country::getDefaultContryCode())?></span></label>
 
 												<?php /*
 												<div class="col-sm-5 pad-product">

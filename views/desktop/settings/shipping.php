@@ -33,7 +33,7 @@ $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD
 							<button class="btn btn-default btn-red btn-minpad btn-acordion pull-right" ng-if="!setting.prices || setting.prices.length <= 0" ng-cloak ><span translate="settings.shipping.ADD_SHIPPING_PRICES"></span></button>
 						</span>
 					</div>
-					<shipping-types setting="setting"></shipping-types>
+					<shipping-types setting="setting" currency="shippingSettingsCtrl.country_helper[$index].currency"></shipping-types>
 					<hr>
 					<shipping-weights-prices setting="setting" person="shippingSettingsCtrl.person" currency="shippingSettingsCtrl.country_helper[$index].currency"></shipping-weights-prices>
 					<hr>

@@ -33,6 +33,7 @@
 		"shipping_methods": {
 			"SHIPPING_METHODS_TITLE": "Shipping methods & addresses",
 			"DELIVERY_WITHIN": "Delivery within {{days}} days",
+			"NOT_SETTED_DELIVERY": "Not info about shipping time",
 			"CONTINUE_PAYMENT": "Continue to payment methods"
 		},
 		"shopping_cart": {
@@ -48,5 +49,6 @@
 		"cart_panel": {
 			"GO_TO_CART": "go to cart"
 		}
+		"PAYMENT_IN_PROGRESS": "We are processing your payment, please do not leave or refresh this page"
 	}
 }

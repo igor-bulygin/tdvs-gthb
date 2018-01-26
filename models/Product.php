@@ -1504,7 +1504,7 @@ class Product extends CActiveRecord {
 		$priceStocks = $this->price_stock;
 		foreach ($priceStocks as $priceStock) {
 			if ($priceStock['available'] && (empty($priceStockId) || $priceStock['short_id'] == $priceStockId)) {
-				$shippingSettingRange = $deviser->getShippinSettingRange($priceStock['weight'], $countryCode);
+				$shippingSettingRange = $deviser->getShippingSettingRange($priceStock['price'], $priceStock['weight'], $countryCode);
 
 				return $shippingSettingRange['price'];
 			}
