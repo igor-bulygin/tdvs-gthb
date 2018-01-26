@@ -174,7 +174,7 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 			</div>
 		</form>
 	</div>
-	<div class="text-center mt-50" ng-if="completeProfileCtrl.sendingForm">
+	<div class="mt-50 tdvs-loading" ng-if="completeProfileCtrl.sendingForm">
 			<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
 		<span class="sr-only" translate="global.LOADING"></span>
 	</div>

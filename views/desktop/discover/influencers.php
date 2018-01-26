@@ -30,7 +30,7 @@ $this->registerJs("var type = 3", yii\web\View::POS_HEAD, 'person-type-script');
 					<p ng-if="discoverCtrl.search_key && (!discoverCtrl.searching || discoverCtrl.results.items.length > 0)" ng-cloak><span translate="discover.WE_FOUND_X_RESULTS_WITH_KEY" translate-values="{ counter: discoverCtrl.results_found, keys: discoverCtrl.search_key}"></span></p>
 					<p ng-if="!discoverCtrl.search_key && (!discoverCtrl.searching || discoverCtrl.results.items.length > 0)" ng-cloak><span translate="discover.WE_FOUND_X_RESULTS" translate-values="{ counter: discoverCtrl.results_found}"></span></p>
 				</div>
-				<div class="mt-30 col-md-12 col-md-offset-4" ng-if="discoverCtrl.searching && discoverCtrl.results.items.length == 0" ng-cloak>
+				<div class="mt-20 tdvs-loading" ng-if="discoverCtrl.searching && discoverCtrl.results.items.length == 0" ng-cloak>
 					<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
 				</div>
 				<discover-results results="discoverCtrl.results" ng-if="discoverCtrl.results && discoverCtrl.results.items.length > 0" ng-cloak></discover-results>

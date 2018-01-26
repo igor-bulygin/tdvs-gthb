@@ -10,39 +10,39 @@
 	</span>
 	<div ng-if="shippingMethodsCtrl.state > 1">
 		<div ng-repeat="pack in shippingMethodsCtrl.cart.packs">
-			<div class="row deviser-title-wrapper">
-				<div class="col-md-1">
-					<a ng-src="pack.deviser.url">
-						<img class="avatar-default small" ng-src="{{pack.deviser_info.photo}}" ng-attr-alt="{{pack.deviser_info.name}}" ng-attr-title="{{pack.deviser_info.name}}" style="max-width: 50px;">
-					</a>
+			<div class="deviser-title-wrapper">
+				<div class="col-xs-12 col-sm-12 col-md-6">
+					<div class="col-xs-2 col-md-2">
+						<a ng-src="pack.deviser.url">
+							<img class="avatar-default small" ng-src="{{pack.deviser_info.photo}}" ng-attr-alt="{{pack.deviser_info.name}}" ng-attr-title="{{pack.deviser_info.name}}" style="max-width: 50px;">
+						</a>
+					</div>
+					<div class="col-xs-10 col-md-10">
+						<span class="title-deviser-shipping" ng-bind="pack.deviser_info.name"></span>
+					</div>
 				</div>
-				<div class="col-md-7">
-					<span class="title-deviser-shipping" ng-bind="pack.deviser_info.name"></span>
-				</div>
-				<div class="col-md-2" ng-if="shippingMethodsCtrl.state === 2">
-					<div class="row">
-						<div class="radio radio-inline" ng-if="pack.deviser_info.shipping_time" ng-cloak>
+				<div class="col-xs-12 col-sm-12 col-md-6">
+					<div class="col-xs-4 col-sm-4 col-md-4" ng-if="shippingMethodsCtrl.state === 2">
+						<div class="radio radio-inline" style="display: block !important; margin-left: 0;" ng-if="pack.deviser_info.shipping_time" ng-cloak>
 							<input type="radio" ng-value="'standard'" ng-model="pack.shipping_type" name="{{'standard_shipping_'+$index}}" ng-attr-id="{{'standard_shipping'+$index}}" ng-change="shippingMethodsCtrl.setShippingPriceTime(pack)">
 							<label for="{{'standard_shipping'+$index}}"><span translate="global.STANDARD"></span></label>
 						</div>
-					</div>
-					<div class="row">
-						<div class="radio radio-inline" ng-if="pack.deviser_info.shipping_express_time" ng-cloak>
+						<div class="radio radio-inline" style="display: block !important; margin-left: 0;" ng-if="pack.deviser_info.shipping_express_time" ng-cloak>
 							<input type="radio" ng-value="'express'" ng-model="pack.shipping_type" name="{{'express_shipping_'+$index}}" ng-attr-id="{{'express_shipping'+$index}}" ng-change="shippingMethodsCtrl.setShippingPriceTime(pack)">
 							<label for="{{'express_shipping'+$index}}"><span translate="global.EXPRESS"></span></label>
 						</div>
 					</div>
-				</div>
-				<div class="col-md-2">
-					<p style="margin-top: 15px;">
-						<span translate="cart.shipping_methods.DELIVERY_WITHIN" translate-values="{days: pack.shipping_time || pack.deviser_info.shipping_time}"></span>
-						<span ng-if="pack.shipping_price" ng-cloak>
-							<span class="price-bold">€</span> <span ng-bind="pack.shipping_price"></span>
-						</span>
-						<span ng-if="!pack.shipping_price" ng-cloak>
-							<span translate="cart.summary.FREE_SHIPPING"></span>
-						</span>
-					</p>
+					<div class="col-xs-8 col-sm-8 col-md-8">
+						<p style="margin-top: 15px;">
+							<span translate="cart.shipping_methods.DELIVERY_WITHIN" translate-values="{days: pack.shipping_time || pack.deviser_info.shipping_time}"></span>
+							<span ng-if="pack.shipping_price" ng-cloak>
+								<span class="price-bold">€</span> <span ng-bind="pack.shipping_price"></span>
+							</span>
+							<span ng-if="!pack.shipping_price" ng-cloak>
+								<span translate="cart.summary.FREE_SHIPPING"></span>
+							</span>
+						</p>
+					</div>
 				</div>
 			</div>
 			<div class="row row deviser-product-wrapper">

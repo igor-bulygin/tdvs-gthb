@@ -89,7 +89,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 							<a class="btn btn-red edit-faq-btn" href="#" ng-click="editFaqCtrl.addQuestion()"><span translate="person.faq.ADD_QUESTION"></span></a>
 					</div>
 				</div>
-				<div class="text-center mt-50" ng-if="editFaqCtrl.saving" ng-cloak>
+				<div class="mt-50 tsvs-loading" ng-if="editFaqCtrl.saving" ng-cloak>
 					<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
 				</div>
 			</div>

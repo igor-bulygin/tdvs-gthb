@@ -16,7 +16,7 @@ $this->title = 'Todevise: Login/Sign up';
 			<img src="/imgs/logo.svg" data-pin-nopin="true">
 		</a>
 	</div>
-	<div class="text-center" ng-if="authenticationRequiredCtrl.loading" ng-cloak>
+	<div class="mt-20 tdvs-loading" ng-if="authenticationRequiredCtrl.loading" ng-cloak>
 		<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
 		<span class="sr-only" translate="global.LOADING"></span>
 	</div>

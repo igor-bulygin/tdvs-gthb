@@ -228,6 +228,11 @@
 .filter-wrapper{
 	margin: 30px 0 150px 0;
 }
+discover-filters {
+	.filter-wrapper {
+    	margin-bottom: 10px;
+	}
+}
 .more-btn{
 	cursor: pointer;
 	font-family: $font-family--regular; //$font-family--bold;

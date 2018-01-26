@@ -39,7 +39,7 @@ $this->registerJs("var searchParam = '".$text."'", yii\web\View::POS_HEAD, 'prod
 					<div class="col-md-10">
 						<explore-products-results ng-if="exploreProductsCtrl.results.items.length > 0" results="exploreProductsCtrl.results"  limit="exploreProductsCtrl.limit"></explore-products-results>
 					</div>
-					<div class="mt-30 __col-md-12" style="vertical-align: middle; text-align: center; position: absolute; margin-top: -9em; margin-left: -15em; width: 30em; height: 18em; top: 50%; left: 50%;" ng-if="exploreProductsCtrl.searching && exploreProductsCtrl.results.items.length == 0" ng-cloak>
+					<div class="mt-20 tdvs-loading"  ng-if="exploreProductsCtrl.searching && exploreProductsCtrl.results.items.length == 0" ng-cloak>
 						<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
 					</div>
 					<div class="text-center col-md-12 mt-30" style="padding-bottom:100px;" ng-if="exploreProductsCtrl.results.counter > exploreProductsCtrl.results.items.length" ng-cloak >
