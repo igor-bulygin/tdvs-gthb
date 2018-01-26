@@ -4,8 +4,8 @@
 	</div>
 </div>-->
 <div class="col-md-10 col-md-offset-1" style="padding: 20px;">
-	<div class="panel panel-accordion">
-		<uib-accordion close-others="false">
+	<div class="panel-accordion">
+		<uib-accordion>
 			<div uib-accordion-group ng-repeat="order in soldOrdersCtrl.orders" ng-class="col-md-12" ng-cloak style="border:0 none !important;">
 				<uib-accordion-heading style="font-weight: lighter;" ng-click="soldOrdersCtrl.actualPack=order.packs[0]">
 					<div>

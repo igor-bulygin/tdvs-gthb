@@ -4,29 +4,29 @@
 	</div>
 </div>
 <div class="col-md-10 col-md-offset-1" style="padding: 20px;">
-	<div class="panel">
+	<div class="panel-accordion">
 		<uib-accordion>
-			<div uib-accordion-group ng-repeat="order in boughtOrdersCtrl.orders" ng-class="col-md-12" style="border:0 none !important;">
+			<div uib-accordion-group ng-repeat="order in boughtOrdersCtrl.orders" ng-class="col-md-12" style="border:0 none !important;padding-bottom:30px;">
 				<uib-accordion-heading class="row" style="font-weight: lighter;">
 					<div class="row">
-						<span class="col-md-3">
-							<span class="col-md-12" style="color: #9D9D9D;" translate="settings.orders.INVOICE_NUMBER"></span>
-							<span class="col-md-12" ng-bind="order.id"></span>
-						</span>
-						<span class="col-md-3">
-							<span class="col-md-12 total-title" translate="settings.orders.TOTAL_PRICE"></span>
-							<span class="col-md-12" ng-cloak>{{order.subtotal | currency:'€':2}}</span>
-						</span>
-						<span class="col-md-3">
-							<span class="col-md-12"  style="color: #9D9D9D;" translate="settings.orders.PURCHASE_DATE"></span>
-							<span class="col-md-12">{{boughtOrdersCtrl.parseDate(order.order_date.sec*1000) | date:'dd/MM/yy'}}</span>
-						</span>
-						<span class="col-md-3">
-							<span class="col-md-12" style="color: #9D9D9D;" translate="settings.orders.SHIPPED_TO"></span>
-							<span class="col-md-12" ng-bind="order.shipping_address.name + ' ' + order.shipping_address.last_name"></span>
-							<span class="col-md-12" ng-bind="order.shipping_address.address"></span>
-							<span class="col-md-12" ng-bind="order.shipping_address.city + ', ' + order.shipping_address.country"></span>
-						</span>
+						<div class="pull-left text-left accordion-header-item">
+							<div class="accordion-header-title" style="color: #9D9D9D;" translate="settings.orders.INVOICE_NUMBER"></div>
+							<div class="accordion-header-subtitle" ng-bind="order.id"></div>
+						</div>
+						<div class="pull-left text-left accordion-header-item">
+							<div class="accordion-header-title total-title" translate="settings.orders.TOTAL_PRICE"></div>
+							<div class="accordion-header-subtitle" ng-cloak>{{order.subtotal | currency:'€':2}}</div>
+						</div>
+						<div class="pull-left text-left accordion-header-item">
+							<div class="accordion-header-title"  style="color: #9D9D9D;" translate="settings.orders.PURCHASE_DATE"></div>
+							<div class="accordion-header-subtitle">{{boughtOrdersCtrl.parseDate(order.order_date.sec*1000) | date:'dd/MM/yy'}}</div>
+						</div>
+						<div class="pull-left text-left accordion-header-item">
+							<div class="accordion-header-title" style="color: #9D9D9D;" translate="settings.orders.SHIPPED_TO"></div>
+							<div class="accordion-header-subtitle" ng-bind="order.shipping_address.name + ' ' + order.shipping_address.last_name"></div>
+							<div class="accordion-header-subtitle" ng-bind="order.shipping_address.address"></div>
+							<div class="accordion-header-subtitle" ng-bind="order.shipping_address.city + ', ' + order.shipping_address.country"></div>
+						</div>
 					</div>
 				</uib-accordion-heading>
 				<div class="card">
