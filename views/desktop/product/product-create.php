@@ -48,7 +48,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 					<button class="btn btn-red btn-big btn-red" ng-click="createProductCtrl.save('product_state_active')" ng-disabled="createProductCtrl.saving"><span translate="product.creation_edition.PUBLISH_WORK"></span></button>
 				</div>
 			</div>
-			<div class="text-center" ng-if="createProductCtrl.saving">
+			<div class="mt-20 tdvs-loading" ng-if="createProductCtrl.saving">
 				<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
 				<span class="sr-only" translate="product.creation_edition.LOADING"></span>
 			</div>

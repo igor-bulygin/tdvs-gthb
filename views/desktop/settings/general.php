@@ -151,7 +151,7 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 						</div>
 					</div>
 				</form>
-				<div class="text-center" ng-show="generalSettingsCtrl.saving">
+				<div class="mt-20 tdvs-loading" ng-show="generalSettingsCtrl.saving">
 					<i class="fa fa-spinner fa-pulse fa-3x fa-fw small"></i>
 				</div>
 			</div>
@@ -186,7 +186,7 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 					</div>
 				</div>
 			</form>
-			<div class="text-center" ng-show="generalSettingsCtrl.savingPassword">
+			<div class="mt-20 tdvs-loading" ng-show="generalSettingsCtrl.savingPassword">
 				<i class="fa fa-spinner fa-pulse fa-3x fa-fw small"></i>
 			</div>
 		</div>

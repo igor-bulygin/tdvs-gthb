@@ -39,7 +39,7 @@ Yii::$app->opengraph->title = $this->title;
 				</button>
 			</div>
 		</div>
-		<div class="text-center mt-30" ng-if="loginCtrl.loading">
+		<div class="mt-30 tdvs-loading" ng-if="loginCtrl.loading">
 			<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
 			<span class="sr-only" translate="global.LOADING"></span>
 		</div>

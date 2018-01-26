@@ -10,6 +10,10 @@ app\components\assets\PublicHeader2Asset::register($this);
 
 ?>
 
+<style>
+	.navbar.terciary ul {margin: 12px 0 0 0;}
+</style>
+
 <?php $this->registerJs("var _selectedCategoryId = '" . $categoryId."';", \yii\web\View::POS_HEAD); ?>
 
 <header>

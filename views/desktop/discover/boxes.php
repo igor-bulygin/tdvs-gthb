@@ -21,16 +21,16 @@ Yii::$app->opengraph->title = $this->title;
 			</div>
 		</div>
 		<div class="our-devisers-body" style="padding-bottom:100px;">
-			<div class="col-md-2">
+			<div class="col-xs-12 col-sm-4 col-md-2">
 				<explore-boxes-filters filters="exploreBoxesCtrl.filters" searching="exploreBoxesCtrl.searching"></explore-boxes-filters>
 			</div>
-			<div class="col-md-10">
+			<div class="col-xs-12 col-sm-8 col-md-10">
 				<div class="found-header">
 					<p ng-if="exploreBoxesCtrl.search_key && (!exploreBoxesCtrl.searching || exploreBoxesCtrl.results.items.length > 0)" ng-cloak translate="discover.WE_FOUND_X_RESULTS_WITH_KEY" translate-values="{ counter: exploreBoxesCtrl.results_found, keys:exploreBoxesCtrl.search_key }"></p>
 					<p ng-if="!exploreBoxesCtrl.search_key && (!exploreBoxesCtrl.searching || exploreBoxesCtrl.results.items.length > 0)" ng-cloak translate="discover.WE_FOUND_X_RESULTS" translate-values="{ counter: exploreBoxesCtrl.results_found }"></p>
 				</div>
 				<explore-boxes-results results="exploreBoxesCtrl.results" ng-if="exploreBoxesCtrl.results && exploreBoxesCtrl.results.items.length > 0" ng-cloak></explore-boxes-results>
-				<div class="mt-30 col-md-12 col-md-offset-4" ng-if="exploreBoxesCtrl.searching && exploreBoxesCtrl.results.items.length == 0" ng-cloak>
+				<div class="mt-20 tdvs-loading" ng-if="exploreBoxesCtrl.searching && exploreBoxesCtrl.results.items.length == 0" ng-cloak>
 					<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
 				</div>
 				<div class="text-center col-md-12 mt-30" ng-if="exploreBoxesCtrl.results_found > exploreBoxesCtrl.results.items.length && (!exploreBoxesCtrl.searching || exploreBoxesCtrl.results.items.length > 0)" ng-cloak >

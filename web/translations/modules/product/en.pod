@@ -104,7 +104,7 @@
 			"SKU":"SKU",
 			"OPTIONAL":" (Optional)",
 			"PACKAGE_DIMENSIONS":"Package dimensions ",
-			"LENGTH_WIDTH_WEIGHT":"Length Width Height",
+			"LENGTH_WIDTH_WEIGHT":"Length x Width x Height",
 			"STOCK":"Stock",
 			"PRICE":"Price",
 			"APPLY_ALL":"Apply to all",

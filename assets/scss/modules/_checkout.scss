@@ -321,11 +321,16 @@
     float: left;
     padding: 30px 0;
     border-bottom: 1px solid #b7bcc0;
+    margin-left: 0;
+    margin-right: 0;
 }
 .title-deviser-shipping{
 	font-weight: bold;
     margin-top: 15px;
     display: block;
+}
+.checkout-sidebar .payment-methods-wrapper label {
+    margin-top: 0 !important;
 }
 .payment-methods-wrapper{
 	background-color: $white;

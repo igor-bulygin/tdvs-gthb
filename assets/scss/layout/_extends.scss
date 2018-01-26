@@ -2,20 +2,64 @@
 // Extends
 // ==========================================================================
 %btn{
-    text-transform: uppercase;
+    cursor: pointer;
     font-family: $font-family--regular;
-	font-weight: bold;
-    font-size: 14px;
-    letter-spacing: 0.3px;
-    height: 36px;
-    padding: 0 !important;//8px 20px;
+    font-weight: bold;
+    font-size: 1.15em;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 0.02em;
+    padding: 0.5em 0 !important;
     margin: auto !important;
     border: none;
-    text-align: center;
-    cursor: pointer;
+    @include border-radius(0.25em, 0.25em, 0.25em, 0.25em);
     &:hover{
         @include transition-property(background-color);
         @include transition-duration(0.3s);
         @include transition-timing-function(ease-out);
+    }
+}
+%person_header{
+    margin: -20px 0 0 0;
+    padding: 0;
+    background-size: 1150px 267px;
+    height: 270px;
+}
+%person_header_h3{
+    font-family: $font-family--name;
+    font-size: 10em;
+    line-height: 0.8em;
+    color: $white;
+    padding: 40px 0 0;
+    margin-bottom: 0;
+    @media (max-width: 575px){
+        font-size: 5em;
+        letter-spacing: 0.02em;//0.0571428em;
+    }
+}
+%person_header_h5{
+    font-family: $font-family--regular;
+    font-stretch: condensed;
+    font-style: normal;
+    color: $white;
+    padding: 5px 0 20px;
+    margin: 0;
+}
+%person_searcher{
+    width: 300px;
+    position: relative;
+    margin: 10px auto 0;
+    @media (max-width: 575px){
+        width: 80%;
+    }
+    span{
+        color: $red;
+        position: absolute;
+        right: 12px;
+        top: 4px;
+        font-size: 21px;
+    }
+    input{
+        margin-bottom: 25px;
     }
 }

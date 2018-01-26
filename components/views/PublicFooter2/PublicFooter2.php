@@ -27,7 +27,7 @@ $footerMode = 'collapsed';
 			document.getElementById("go_to_footer").style.display = "none";
 		}
 	}
-	
+
 	function GoToFooter(){
 		document.getElementById("go_to_footer").style.display = "none";
 		document.body.scrollTop = document.body.scrollHeight;
@@ -76,7 +76,7 @@ $footerMode = 'collapsed';
 					<div class="input-group input-newsletter mt-30">
 						<input type="email" class="form-control" name="email" ng-model="footerCtrl.newsletterEmail" placeholder="E-mail">
 						<span class="input-group-btn">
-							<button class="btn-red send-btn-sm" type="button" ng-click="footerCtrl.sendNewsletter(footerCtrl.newsletterForm)">
+							<button class="btn btn-red send-btn-sm" type="button" ng-click="footerCtrl.sendNewsletter(footerCtrl.newsletterForm)" style="padding: 0;">
 								<img src="/imgs/plane.svg" data-pin-nopin="true">
 							</button>
 						</span>
@@ -162,7 +162,7 @@ $footerMode = 'collapsed';
 		<div class="copyright mt-40">
 			<div class="row">
 				<ul>
-					<li class="hidden-xs hidden-sm col-md-2-5"></li>
+					<li class="hidden-xs hidden-sm col-md-2-5 col-lg-2-5"></li>
 					<li class="col-xs-12 col-sm-12 col-md-2">
 						<a href="<?=Url::to(['/public/terms'])?>"><span translate="footer.TERMS_CONDITIONS"></span></a>
 					</li>
@@ -174,7 +174,7 @@ $footerMode = 'collapsed';
 					<li class="col-xs-12 col-sm-12 col-md-2">
 						<a href="<?=Url::to(['/public/cookies'])?>"><span translate="footer.COOKIES"></span></a>
 					</li>
-					<li class="hidden-xs hidden-sm col-md-2-5"></li>
+					<li class="hidden-xs hidden-sm col-md-2-5 col-lg-2-5"></li>
 				</ul>
 			</div>
 			<div class="row">&copy; <span class="hightlighted">2017 Todevise</span> all rights reserved</div>

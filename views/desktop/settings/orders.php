@@ -40,8 +40,8 @@ $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD
 		<div class="col-md-12 text-center mt-40" ng-if="!ordersCtrl.loading && !ordersCtrl.orders.length>0" ng-cloak>
 			<span translate="settings.orders.NO_ORDERS_FOUND"></span>
 		</div>
-	</div>	
-	<div class="orders-wrapper text-center mt-40" ng-if="ordersCtrl.loading" style="padding: 20px;" ng-cloak>
+	</div>
+	<div class="orders-wrapper mt-40 tdvs-loading" ng-if="ordersCtrl.loading" style="padding: 20px;" ng-cloak>
 		<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
 		<span class="sr-only" translate="global.LOADING"></span>
 	</div>
@@ -49,5 +49,5 @@ $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD
 		<sold-orders ng-switch-when="received" orders="ordersCtrl.orders" tags="ordersCtrl.tags"></sold-orders>
 		<bought-orders ng-switch-when="done" orders="ordersCtrl.orders" tags="ordersCtrl.tags"></bought-orders>
 	</div>
-	
+
 </div>

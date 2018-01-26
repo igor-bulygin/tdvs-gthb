@@ -1,6 +1,6 @@
 <div infinite-scroll="discoverResultsCtrl.addMoreItems()" infinite-scroll-distance="1">
 	<div ng-repeat="person in discoverResultsCtrl.results_infinite">
-		<div class="col-md-4 col-sm-4 col-xs-12 pad-showcase">
+		<div class="col-md-4 col-sm-6 col-xs-12 pad-showcase">
 			<a ng-href="{{person.main_link}}">
 			<figure class="showcase influencers">
 				<img class="deviser-discover-img showcase-image" ng-src="{{ person.header_small_image }}">
@@ -9,9 +9,9 @@
 						<div class="col-md-6">
 							<!--img class="showcase-image" ng-src="{{person.url_avatar}}"-->
 							<div class="title-product-name sm align-left">
-								<span class="name ng-class:{'all-caps': person.type.indexOf(2)>=0}" ng-bind="person.name"></span>
+								<span class="name align-left ng-class:{'all-caps': person.type.indexOf(2)>=0}" ng-bind="person.name"></span>
 							</div>
-							<span class="location" ng-bind="(person.city | capitalize)"></span>
+							<span class="location align-left" ng-bind="(person.city | capitalize)"></span>
 						</div>
 						<!--div class="col-md-6">
 							<button class="btn btn-icon mt-5"><i class="ion-ios-star-outline"></i><span translate="discover.FOLLOW"></span></button>

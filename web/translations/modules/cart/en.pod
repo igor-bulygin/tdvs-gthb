@@ -48,7 +48,7 @@
 		},
 		"cart_panel": {
 			"GO_TO_CART": "go to cart"
-		}
+		},
 		"PAYMENT_IN_PROGRESS": "We are processing your payment, please do not leave or refresh this page"
 	}
 }

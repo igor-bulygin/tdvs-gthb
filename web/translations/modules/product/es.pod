@@ -104,7 +104,7 @@
 			"SKU": "SKU",
 			"OPTIONAL": " (Opcional)",
 			"PACKAGE_DIMENSIONS": "Dimensiones del paquete",
-			"LENGTH_WIDTH_WEIGHT": "Largo Ancho Alto",
+			"LENGTH_WIDTH_WEIGHT": "Largo x Ancho x Alto",
 			"STOCK": "Stock",
 			"PRICE": "Precio",
 			"APPLY_ALL": "Aplicar a todo",
