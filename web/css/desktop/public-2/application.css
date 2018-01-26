@@ -4081,7 +4081,7 @@ discover-filters .filter-wrapper {
   border-bottom: 2px solid;
   padding-bottom: 5px;
   display: inline-block;
-  margin: 0 0 20px 20%; }
+  margin: 0 0 20px 0; }
 
 .total-text {
   font-size: 14px;
