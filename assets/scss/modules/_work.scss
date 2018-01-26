@@ -620,6 +620,7 @@ input:checked + .slider:before {
 .apply-to-all-btn{
 	cursor: pointer;
 	color: $dark_red;
+	display: block;
 }
 .editable-fix{
 	display: block;

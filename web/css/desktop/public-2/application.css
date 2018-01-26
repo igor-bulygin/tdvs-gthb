@@ -1593,7 +1593,7 @@ textarea {
   padding-left: 20px; }
 
 .checkbox label {
-  font-size: 16px;
+  font-size: 15px;
   margin: 0;
   display: inline-block;
   vertical-align: middle;
@@ -8131,7 +8131,8 @@ input:checked + .slider:before {
 
 .apply-to-all-btn {
   cursor: pointer;
-  color: #c91c39; }
+  color: #c91c39;
+  display: block; }
 
 .editable-fix {
   display: block;
