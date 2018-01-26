@@ -20,8 +20,10 @@ $footerMode = 'collapsed';
 
 	function scrollFunction(){
 		if (document.body.scrollTop > 30 || document.documentElement.scrollTop > 30) {
-			if (document.body.scrollTop < document.body.scrollHeight-100 || document.documentElement.scrollTop < document.documentElement.scrollHeight-100) {
+			if (document.body.scrollTop < document.body.scrollHeight - window.innerHeight - 100 || document.documentElement.scrollTop < document.documentElement.scrollHeight - window.innerHeight - 100) {
 				document.getElementById("go_to_footer").style.display = "block";
+			} else {
+				document.getElementById("go_to_footer").style.display = "none";
 			}
 		} else {
 			document.getElementById("go_to_footer").style.display = "none";
