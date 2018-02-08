@@ -308,6 +308,10 @@ $config = [
 				'explore-boxes' => 'discover/boxes',
 				'stories' => 'discover/stories',
 
+				//Chat / messages
+				'messages' => 'messages/index',
+				'messages/<slug:[^/.]*?>/<person_id:[^/.]*?>' => 'messages/chat',
+
 				// Request become a Deviser
 				'/become-a-deviser' => 'public/become-deviser',
 				'/create-deviser-account' => 'public/create-deviser-account',
