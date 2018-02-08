@@ -30,13 +30,13 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 					<div><?=Yii::t('app/public', 'PAYMENTS_MADE_TROUGH_STRIPE')?></div>
 					<br />
 					<div class="col-md-12 text-center">
-						<a class="btn btn-red" href="<?=Url::to(['settings/connect-stripe', 'slug' => $person->slug, 'person_id' => $person->short_id])?>"><?=Yii::t('app/public', 'CONNECT_WITH_STRIPE')?></a>
+						<a class="btn btn-red btn-small" href="<?=Url::to(['settings/connect-stripe', 'slug' => $person->slug, 'person_id' => $person->short_id])?>"><?=Yii::t('app/public', 'CONNECT_WITH_STRIPE')?></a>
 					</div>
 				<?php } else { ?>
 					<div><?=Yii::t('app/public', 'PROFILE_AND_STRIPE_LINKED_INFO')?></div>
 					<br />
 					<div class="col-md-12 text-center">
-						<a class="btn btn-red" href="<?=Url::to(['settings/connect-stripe', 'slug' => $person->slug, 'person_id' => $person->short_id])?>"><?=Yii::t('app/public', 'CONNECT_WITH_DIFFERENT_STRIPE_ACCOUNT')?></a>
+						<a class="btn btn-red btn-small" href="<?=Url::to(['settings/connect-stripe', 'slug' => $person->slug, 'person_id' => $person->short_id])?>"><?=Yii::t('app/public', 'CONNECT_WITH_DIFFERENT_STRIPE_ACCOUNT')?></a>
 					</div>
 				<?php } ?>
 			</div>

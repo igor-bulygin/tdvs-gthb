@@ -6,7 +6,7 @@
 		"save": {
 			"CREATE": "@:boxes.CREATE",
 			"NAME_BOX": "@:boxes.NAME_BOX",
-			"SAVE_IN_BOX": "Guardar en una caja",
+			"SAVE_IN_BOX": "Guardar en caja",
 			"SELECT_BOX": "Seleccionar caja",
 			"TOTAL_BOX": "({{total}} en total)",
 			"SEARCH": "@:global.SEARCH",

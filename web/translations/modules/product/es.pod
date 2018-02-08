@@ -15,7 +15,7 @@
 			"EDIT_WORK": "Editar producto",
 			"LOVE_WORK": "Me encanta",
 			"YOU_LOVE_WORK": "Te encanta este producto",
-			"SAVE_IN_BOX": "Guardar en una caja",
+			"SAVE_IN_BOX": "Guardar en caja",
 			"TIMES": " veces",
 			"LOVED": "Te encanta ",
 			"SAVED_IN_X_BOXES": "Guardado en {{x}} cajas",

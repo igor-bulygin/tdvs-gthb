@@ -4031,6 +4031,10 @@ discover-filters .filter-wrapper {
   padding: 30px 15px; }
 .panel-accordion .panel-body {
   padding-top: 0; }
+.panel-accordion .bought-orders-accordion {
+  border: 0 none !important;
+  padding-bottom: 30px;
+  margin-bottom: 15px; }
 
 .panel {
   border: none !important; }
