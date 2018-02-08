@@ -740,7 +740,7 @@ class Category extends CActiveRecord {
 	public function getMainLink()
 	{
 		return Url::to([
-			"public/category-b",
+			"/public/category-b",
 			"slug" => $this->getSlugForUrl(),
 			'category_id' => $this->short_id
 		]);

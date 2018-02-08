@@ -36,7 +36,7 @@
 	</div>
 </div>
 <div class="summary-cart-wrapper-full">
-	<span class="subtotal-amount-wrapper"><span class="bold" translate="cart.SUBTOTAL"></span><span class="pull-right subtotal-amount">€<span class="subtotal-amount" ng-bind="summaryCtrl.cart.subtotal"></span></span></span>
+	<span class="subtotal-amount-wrapper"><span class="bold" translate="cart.SUBTOTAL"></span><span class="pull-right subtotal-amount">€<span class="subtotal-amount" ng-bind="summaryCtrl.cart.subtotal | number : 2"></span></span></span>
 </div>
 <div class="summary-cart-wrapper" ng-if="!summaryCtrl.state">
 	<a href="/checkout">

@@ -1534,11 +1534,11 @@ class Person extends CActiveRecord implements IdentityInterface
 	}
 
 	public function getSettingsLink($action = null) {
-		return Url::to(["settings/".$action, "slug" => $this->getSlug(), 'person_id' => $this->short_id]);
+		return Url::to(["/settings/".$action, "slug" => $this->getSlug(), 'person_id' => $this->short_id]);
 	}
 
 	public function getSettingsBaseLink($action = 'index') {
-		return Url::to(["settings/", "slug" => $this->getSlug(), 'person_id' => $this->short_id]);
+		return Url::to(["/settings/", "slug" => $this->getSlug(), 'person_id' => $this->short_id]);
 	}
 
 	public function getStoreLink($params = [])
