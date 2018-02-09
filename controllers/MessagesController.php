@@ -34,11 +34,6 @@ class MessagesController extends CController
 		];
 	}
 
-	public function actionIndex()
-	{
-		$this->actionMessages();
-	}
-
 	public function actionMessages()
 	{
 		$person = Yii::$app->user->identity; /* @var $person Person */

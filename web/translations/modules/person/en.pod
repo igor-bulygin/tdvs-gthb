@@ -158,6 +158,7 @@
 		},
 		"header": {
 			"EDIT_HEADER": "Edit header",
+			"CHAT": "Chat",
 			"ADD_WORK": "Add work",
 			"ADD_COVER_PHOTO": "Add cover photo",
 			"CROP_PHOTO": "Crop photo",

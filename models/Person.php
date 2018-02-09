@@ -768,6 +768,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'press_link' => 'pressLink',
 					'videos_link' => 'videosLink',
 					'faq_link' => 'faqLink',
+					'chat_link' => 'chatLink',
 				];
 
 				self::$translateFields = true;
@@ -805,6 +806,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'press_link' => 'pressLink',
 					'videos_link' => 'videosLink',
 					'faq_link' => 'faqLink',
+					'chat_link' => 'chatLink',
 					'type',
 				];
 
@@ -849,6 +851,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'press_link' => 'pressLink',
 					'videos_link' => 'videosLink',
 					'faq_link' => 'faqLink',
+					'chat_link' => 'chatLink',
 					'type',
 					'profile_views',
 
@@ -1253,6 +1256,7 @@ class Person extends CActiveRecord implements IdentityInterface
 			'press_link' => $this->getPressLink(),
 			'videos_link' => $this->getVideosLink(),
 			'faq_link' => $this->getFaqLink(),
+			'chat_link' => $this->getChatLink(),
 		];
 	}
 
@@ -1658,6 +1662,11 @@ class Person extends CActiveRecord implements IdentityInterface
 	public function getConnectWithInstagramLink()
 	{
 		return Url::to(["/person/connect-instagram", "slug" => $this->getSlug(), 'person_id' => $this->short_id, "person_type" => $this->getPersonTypeForUrl()], true);
+	}
+
+	public function getChatLink()
+	{
+		return Url::to(["/messages/chat", "slug" => $this->getSlug(), 'person_id' => $this->short_id], true);
 	}
 
 	public function getSlug()

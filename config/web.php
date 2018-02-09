@@ -309,7 +309,7 @@ $config = [
 				'stories' => 'discover/stories',
 
 				//Chat / messages
-				'messages' => 'messages/index',
+				'messages' => 'messages/messages',
 				'messages/<slug:[^/.]*?>/<person_id:[^/.]*?>' => 'messages/chat',
 
 				// Request become a Deviser
