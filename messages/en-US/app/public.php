@@ -40,6 +40,8 @@ return [
     'CANCEL' => 'Cancel',
     'CART' => 'Cart',
     'CATEGORY_WORKS_BY_PERSON_NAME' => '{category_name} works by {person_name}',
+	'CHAT_TITLE' => 'Chat',
+	'CHAT_WITH_TITLE' => 'Chat with {person_name}',
     'CHECKOUT' => 'Checkout',
     'COMPLETE_PROFILE_PERSON_NAME' => 'Complete your profile! {person_name}',
     'CONFIRM' => 'Confirm',

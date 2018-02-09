@@ -8,7 +8,7 @@ GlobalAsset::register($this);
 
 /** @var Person $person */
 
-$this->title = Yii::t('app/public', 'CHAT');
+$this->title = Yii::t('app/public', 'CHAT_TITLE');
 
 $this->params['person'] = $person;
 $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD);
