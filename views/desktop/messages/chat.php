@@ -7,6 +7,7 @@ use yii\helpers\Json;
 GlobalAsset::register($this);
 
 /** @var Person $person */
+/** @var Person $personToChat */
 
 $this->title = Yii::t('app/public', 'CHAT_WITH_TITLE', ['person_name' => $personToChat->getName()]);
 
