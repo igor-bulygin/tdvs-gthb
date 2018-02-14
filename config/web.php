@@ -309,8 +309,8 @@ $config = [
 				'stories' => 'discover/stories',
 
 				//Chat / messages
-				'messages' => 'messages/messages',
-				'messages/<slug:[^/.]*?>/<person_id:[^/.]*?>' => 'messages/chat',
+				'messages' => 'chat/chat',
+				'messages/<slug:[^/.]*?>/<person_id:[^/.]*?>' => 'chat/conversation',
 
 				// Request become a Deviser
 				'/become-a-deviser' => 'public/become-deviser',
@@ -505,6 +505,13 @@ $config = [
 				'POST api3/priv/v1/banner' => 'api3/priv/v1/banner/create',
 				'PATCH api3/priv/v1/banner/<bannerId:[^/.]*?>' => 'api3/priv/v1/banner/update',
 				'DELETE api3/priv/v1/banner/<bannerId:[^/.]*?>' => 'api3/priv/v1/banner/delete',
+
+				// Chat - private
+				'GET api3/priv/v1/chat' => 'api3/priv/v1/chat/index',
+				'GET api3/priv/v1/chat/<chatId:[^/.]*?>' => 'api3/priv/v1/chat/view',
+				'POST api3/priv/v1/chat/send-message/<personId:[^/.]*?>' => 'api3/priv/v1/chat/send-message',
+				'PATCH api3/priv/v1/chat/mark-as-read/<chatId:[^/.]*?>' => 'api3/priv/v1/chat/mark-as-read',
+				'PATCH api3/priv/v1/chat/mark-as-unread/<chatId:[^/.]*?>' => 'api3/priv/v1/chat/mark-as-unread',
 
 				// Sizechart - public
 				'GET api3/pub/v1/sizechart' => 'api3/pub/v1/sizechart/index',

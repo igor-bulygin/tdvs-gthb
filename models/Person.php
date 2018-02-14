@@ -1666,7 +1666,7 @@ class Person extends CActiveRecord implements IdentityInterface
 
 	public function getChatLink()
 	{
-		return Url::to(["/messages/chat", "slug" => $this->getSlug(), 'person_id' => $this->short_id], true);
+		return Url::to(["/chat/conversation", "slug" => $this->getSlug(), 'person_id' => $this->short_id], true);
 	}
 
 	public function getSlug()

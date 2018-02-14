@@ -41,7 +41,7 @@ return [
 	'CART' => 'Carrito',
 	'CATEGORY_WORKS_BY_PERSON_NAME' => 'Trabajos de {category_name} de {person_name}',
 	'CHAT_TITLE' => 'Chat',
-	'CHAT_WITH_TITLE' => 'Chatear con {person_name}',
+	'CHAT_CONVERSATION_TITLE' => 'Chatear con {person_name}',
 	'CHECKOUT' => 'Checkout',
 	'COMPLETE_PROFILE_PERSON_NAME' => '¡Completa tu perfil! {person_name}',
 	'CONFIRM' => 'Confirmar',
