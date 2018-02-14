@@ -31,31 +31,33 @@ In the `preview` property, we have:
 
 ```
 {
-    "items": [
-        {
-            "id": "78f2fa4e",
-            "preview": {
-                "title": "Hawkins and Brimble",
-                "text": "Last message",
-                "unread": false,
-                "messages": 2
-            }
-        },
-        {
-            "id": "6e14b115",
-            "preview": {
-                "title": "Sweet Matitos",
-                "text": "Last message",
-                "unread": true,
-                "messages": 11
-            }
-        }
-    ],
-    "meta": {
-        "total_count": 2,
-        "current_page": 1,
-        "per_page": 99999
-    }
+   "items": [
+	   {
+		   "id": "78f2fa4e",
+		   "preview": {
+			   "title": "Hawkins and Brimble",
+			   "text": "Last message",
+			   "unread": false,
+			   "messages": 2,
+			   "url": "http://localhost:8080/messages/hawkins-and-brimble/d4ac1a8"
+		   }
+	   },
+	   {
+		   "id": "6e14b115",
+		   "preview": {
+			   "title": "Sweet Matitos",
+			   "text": "Last message",
+			   "unread": true,
+			   "messages": 11,
+			   "url": "http://localhost:8080/messages/sweet-matitos/9d5b9a9"
+		   }
+	   }
+   ],
+   "meta": {
+	   "total_count": 2,
+	   "current_page": 1,
+	   "per_page": 99999
+   }
 }
 ```
 

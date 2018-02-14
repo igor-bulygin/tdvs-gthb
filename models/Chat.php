@@ -355,6 +355,7 @@ class Chat extends CActiveRecord
 			'text' => $messages ? $messages[0]->text : null,
 			'unread' => $this->isUnreadByConnectedUser(),
 			'messages' => count($messages),
+			'url' => $this->getUrl(),
 		];
 	}
 
@@ -450,6 +451,26 @@ class Chat extends CActiveRecord
 		$title = implode(', ', $title);
 
 		return $title;
+	}
+
+	/**
+	 * Returns the "url" of the conversation. At this moment, the url is the link to chat with the member different of the current user
+	 *
+	 * @return string
+	 */
+	public function getUrl()
+	{
+		$connectedPerson = \Yii::$app->user->identity; /* @var Person $connectedPerson */
+
+		$members = $this->getMembers();
+
+		foreach ($members as $member) {
+			if ($member->person_id != $connectedPerson->short_id) {
+				return $member->getPerson()->getChatLink();
+			}
+		}
+
+		return null;
 	}
 
 	/**
