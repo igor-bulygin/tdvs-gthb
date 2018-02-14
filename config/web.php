@@ -507,7 +507,7 @@ $config = [
 				'DELETE api3/priv/v1/banner/<bannerId:[^/.]*?>' => 'api3/priv/v1/banner/delete',
 
 				// Chat - private
-				'GET api3/priv/v1/chat' => 'api3/priv/v1/chat/index',
+				'GET api3/priv/v1/chats' => 'api3/priv/v1/chat/index',
 				'GET api3/priv/v1/chat/<chatId:[^/.]*?>' => 'api3/priv/v1/chat/view',
 				'POST api3/priv/v1/chat/send-message/<personId:[^/.]*?>' => 'api3/priv/v1/chat/send-message',
 				'PATCH api3/priv/v1/chat/mark-as-read/<chatId:[^/.]*?>' => 'api3/priv/v1/chat/mark-as-read',
