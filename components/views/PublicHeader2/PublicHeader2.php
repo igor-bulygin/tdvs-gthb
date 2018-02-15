@@ -165,16 +165,17 @@ app\components\assets\PublicHeader2Asset::register($this);
 		<div class="container" id="main_menu">
 			<div class="navbar-elements">
 				<ul class="nav navbar-nav">
-					<li class="col-xs-5 col-sm-6 col-md-12 col-lg-12">
+					<li class="col-xs-2 col-sm-2 col-md-12 col-lg-12">
 						<a href="#" class="menu-title" ng-mouseover="publicHeaderCtrl.openMenu = true" ng-click="publicHeaderCtrl.openMenu=!publicHeaderCtrl.openMenu">
 							<i class="fa" ng-class="publicHeaderCtrl.openMenu ? 'ion-android-close black-icon' : 'fa-bars'" aria-hidden="true"></i>
 							<span translate="header.SHOP_BY_DEPARTMENT"></span>
 						</a>
 					</li>
-					<li id="mobile-iconset" class="hidden-md hidden-lg col-xs-7 col-sm-6" >
+					<li id="mobile-iconset" class="hidden-md hidden-lg col-xs-10 col-sm-10" >
 						<div id="mobIcons_center">
 							<a href="<?=Url::to(['/discover/boxes'])?>"><img src="/imgs/box-red.svg" /></a>
 							<a href="<?=Url::to(['/discover/devisers'])?>"><img src="/imgs/discover-red.svg" /></a>
+							<a href="<?=Url::to(['/discover/influencers'])?>"><img src="/imgs/estrella-red.svg" /></a>
 							<a href="<?=Url::to('/login')?>"><img src="/imgs/login-red.svg" /></a>
 							<a href="<?=Url::to(['/cart'])?>"><img src="/imgs/cart-red.svg" /></a>
 						</div>

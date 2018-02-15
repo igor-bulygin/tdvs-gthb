@@ -78,7 +78,7 @@ foreach ($person->getAboutUrlImages() as $key => $urlImage) {
 					<div class="about-wrapper">
 						<div class="about-container">
 							<?php if ($person->isPersonEditable()) { ?>
-								<div><a class="red-link-btn top" href="<?= $person->getAboutEditLink()?>"><span translate="person.about.EDIT_ABOUT"></span></a></div>
+								<div class="hidden-xs hidden-sm"><a class="red-link-btn top" href="<?= $person->getAboutEditLink()?>"><span translate="person.about.EDIT_ABOUT"></span></a></div>
 							<?php } ?>
 							<div class="subtitle">
 								<?= $person->getCategoriesLabel() ?>
