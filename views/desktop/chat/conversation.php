@@ -1,6 +1,6 @@
 <?php
 
-use app\assets\desktop\settings\GlobalAsset;
+use app\assets\desktop\chat\GlobalAsset;
 use app\models\Person;
 use yii\helpers\Json;
 
@@ -19,11 +19,34 @@ $this->registerJs('var chat_id = ' .Json::encode($chatId), yii\web\View::POS_HEA
 
 ?>
 
-<div class="row">
-	<div class="col-lg-4">
-		List of chats
+<div class="row" ng-controller="chatCtrl as chatCtrl">
+	<div class="col-lg-4" style="border-right:1px #D8D8D8 solid;">
+		<uib-tabset active="active">
+			<uib-tab index="$index" ng-repeat="tab in chatCtrl.tabs" heading="{{tab.title}}">
+				<div ng-if="chatCtrl.chats.length<1" class="text-center" style="padding:50px;">
+					<h4 class="row" translate="chat.NO_CHATS"></h2>
+					<p class="row" translate="chat.CLICK_MSG"></p>
+				</div>
+				<div ng-repeat="chat in chatCtrl.chats">
+					<span class="row" ng-bind="chat.preview.title"></span>
+					<span class="row" ng-bind="chat.preview.text"></span>
+				</div>
+			</uib-tab>
+		</uib-tabset>
 	</div>
 	<div class="col-lg-8">
-		Current chat
+		<div ng-if="!chatCtrl.currentChat" class="text-center" style="padding:50px;">
+			<span translate="chat.SELECT_CHAT"></span>
+		</div>
+		<div ng-if="chatCtrl.currentChat" >
+			<div ng-repeat="msg in chatCtrl.currentChat.messages | orderBy:'date' : reverse">
+					<span class="row" ng-bind="msg.person_info.name"></span>
+					<span class="row" ng-bind="msg.text"></span>
+			</div>
+			<div class="col-xs-12">
+				<input class="col-xs-8"  type="text" ng-model="chatCtrl.newMsg">
+				<button class="btn btn-small btn-red" ng-click="chatCtrl.sendMsg()" translate="chat.SEND"></button>
+			</div>
+		</div>
 	</div>
 </div>

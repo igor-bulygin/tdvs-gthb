@@ -20,13 +20,17 @@ $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD
 		<uib-tabset active="active">
 			<uib-tab index="$index" ng-repeat="tab in chatCtrl.tabs" heading="{{tab.title}}">
 				<div ng-if="chatCtrl.chats.length<1" class="text-center" style="padding:50px;">
-					<h4 class="row">No available chats</h2>
-					<p class="row">Go to any user’s profile and click the MESSAGE button to initiate a conversation</p>
+					<h4 class="row" translate="chat.NO_CHATS"></h2>
+					<p class="row" translate="chat.CLICK_MSG"></p>
+				</div>
+				<div ng-repeat="chat in chatCtrl.chats">
+					<span class="row" ng-bind="chat.preview.title"></span>
+					<span class="row" ng-bind="chat.preview.text"></span>
 				</div>
 			</uib-tab>
 		</uib-tabset>
 	</div>
 	<div class="col-lg-8">
-		Please select a chat on left
+		<span translate="chat.SELECT_CHAT"></span>
 	</div>
 </div>
