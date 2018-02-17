@@ -28,7 +28,7 @@ $this->registerJs('var chat_id = ' .Json::encode($chatId), yii\web\View::POS_HEA
 					<p class="row" translate="chat.CLICK_MSG"></p>
 				</div>
 				<div ng-repeat="chat in chatCtrl.chats">
-					<span class="row" ng-bind="chat.preview.title"></span>
+					<span class="row red-text" ng-bind="chat.preview.title"></span>
 					<span class="row" ng-bind="chat.preview.text"></span>
 				</div>
 			</uib-tab>
@@ -39,9 +39,16 @@ $this->registerJs('var chat_id = ' .Json::encode($chatId), yii\web\View::POS_HEA
 			<span translate="chat.SELECT_CHAT"></span>
 		</div>
 		<div ng-if="chatCtrl.currentChat" >
-			<div ng-repeat="msg in chatCtrl.currentChat.messages | orderBy:'date' : reverse">
-					<span class="row" ng-bind="msg.person_info.name"></span>
+			<div class="col-xs-12" ng-repeat="msg in chatCtrl.currentChat.messages | orderBy:'date' : reverse">
+				<div class="col-sm-2">
+					<a ng-href="{{msg.person_info.url}}">
+						<img class="avatar-logued-user" ng-src="{{ msg.person_info.photo}}">
+					</a>
+				</div>
+				<div class="col-sm-10">
+					<span class="row red-text" ng-bind="msg.person_info.name"></span>
 					<span class="row" ng-bind="msg.text"></span>
+				</div>
 			</div>
 			<div class="col-xs-12">
 				<input class="col-xs-8"  type="text" ng-model="chatCtrl.newMsg">
