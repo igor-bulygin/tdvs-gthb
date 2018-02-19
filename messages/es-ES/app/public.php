@@ -75,7 +75,7 @@ return [
 	'EDIT_WORKS_BY_PERSON_NAME' => 'Editar trabajos de {person_name}',
 	'ERROR_PAGE_TITLE' => 'Ups! Algo no va bien',
 	'ERROR_PAGE_MESSAGE_1' => 'Incluso las mejores amistades pasan por momentos difíciles, pero no significa que ya no nos queramos',
-	'ERROR_PAGE_MESSAGE_2' => 'PD: Vuelve a casa puerks, nos estamos ocupando de ello!',
+	'ERROR_PAGE_MESSAGE_2' => 'PD: Vuelve a la página principal, ¡nos estamos ocupando de ello!',
 	'EXPLORE_BOXES' => 'Explora las cajas',
 	'FORGOT_PASSWORD' => '¿Olvidaste tu contraseña?',
 	'FORGOT_PASSWORD_EMAIL_TITLE' => 'Recordatorio de contraseña',
