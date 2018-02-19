@@ -39,7 +39,7 @@ $this->registerJs('var chat_id = ' .Json::encode($chatId), yii\web\View::POS_HEA
 			<span translate="chat.SELECT_CHAT"></span>
 		</div>
 		<div ng-if="chatCtrl.currentChat" >
-			<div class="col-xs-12" ng-repeat="msg in chatCtrl.currentChat.messages | orderBy:'date' : reverse">
+			<div class="col-xs-12" ng-repeat="msg in chatCtrl.currentChat.messages | orderBy: (chatCtrl.parseDate(msg.date.sec*1000)): true">
 				<div class="col-sm-2">
 					<a ng-href="{{msg.person_info.url}}">
 						<img class="avatar-logued-user" ng-src="{{ msg.person_info.photo}}">
