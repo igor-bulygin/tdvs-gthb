@@ -15,7 +15,7 @@
 			vm.personToChat = {id:person_to_chat.id, personal_info:angular.copy(person_to_chat.personal_info)};
 		}
 		vm.chatId = chat_id;
-		vm.personToChat = {id:'3783das', personal_info:{name:"Natural Heritage"}};
+		//vm.personToChat = {id:'3783das', personal_info:{name:"Natural Heritage"}};
 
 		vm.tabs = [{title:"All", id : 0 }, {title:"Devisers", id : 2 }, {title:"Customers", id : 1 }, {title:"Influencers", id : 3 }];
 		vm.chats=[];
