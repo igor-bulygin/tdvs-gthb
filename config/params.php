@@ -18,6 +18,9 @@ return [
 	'mailchimp_api_key' => 'e0c28ae6c8351fc0736d0c352aad5a3f-us9',
 	'mandrill_api_key' => YII_ENV_PROD ? 'L2ETh5H39FL7Is_cvLmV1A' : 'mbo3FMDEVLDbxXYpZomrng',
 
+	'twilio_account_id' => YII_ENV_PROD ? 'AC443685ea3c5e8da5850bb5897a594eb0' : 'AC5be27b099c822bc81ba3038ce9607431',
+	'twilio_auth_token' => YII_ENV_PROD ? '466596c5f9179820df37f74d5cfef7ba' : '5408c39bc6693a2b2a1d59fcf6f3b09a',
+
 	'default_todevise_fee' => 0.145,
 	'default_spain_vat' => 0.21,
 	'admin_email' => 'info@todevise.com',
