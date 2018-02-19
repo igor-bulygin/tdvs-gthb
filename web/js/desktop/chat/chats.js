@@ -1,10 +1,11 @@
 (function () {
 	"use strict";
 
-	function controller(UtilService, chatDataService) {
+	function controller(UtilService, chatDataService, $window) {
 		var vm = this;
 		vm.getChats=getChats;
 		vm.sendMsg= sendMsg;
+		vm.changeChatFilter = changeChatFilter;
 		vm.parseDate=UtilService.parseDate;
 		vm.loading=true;
 		if (person) {
@@ -25,16 +26,24 @@
 			getChats();
 		}
 
-		function getChats() {
+		function getChats(filtering) {
 			vm.loading=true;
 			function onGetChatsSuccess(data) {
 				vm.chats = angular.copy(data.items); 
-				if (vm.personToChat) {
-				getChat(vm.chatId);
-			}
+				if (vm.personToChat && !filtering && !vm.currentChat) {
+					getChat(vm.chatId);
+				}
+				else if (filtering && vm.chats && vm.chats.length>0) {
+					if ((vm.currentChat && vm.currentChat.id != vm.chats[0].id) || !vm.currentChat ) {
+						$window.open(vm.chats[0].preview.url, "_self");
+					}
+				}
+				else if (filtering) {
+					vm.currentChat = null;
+				}
 				vm.loading=false;
 			}
-			chatDataService.getChats({}, onGetChatsSuccess, UtilService.onError);
+			chatDataService.getChats({person_type: vm.filterId}, onGetChatsSuccess, UtilService.onError);
 		}
 
 		function getChat(id) {
@@ -64,6 +73,11 @@
 				}
 				chatDataService.sendMsg({text:vm.newMsg },{personId: vm.personToChat.id}, onSendMsgSuccess, UtilService.onError);
 			}
+		}
+
+		function changeChatFilter(filterId) {
+			vm.filterId=filterId;
+			getChats(true);
 		}
 	}
 
