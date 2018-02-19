@@ -7,10 +7,10 @@
 		vm.sendMsg= sendMsg;
 		vm.loading=true;
 		if (person) {
-			vm.person = {id:person.id, personal_info:angular.copy(person.personal_info)};
+			vm.person = {id:person.id, name:angular.copy(person.name)};
 		}
 		if (person_to_chat) {
-			vm.personToChat = {id:person_to_chat.id, personal_info:angular.copy(person_to_chat.personal_info)};
+			vm.personToChat = {id:person_to_chat.id, name:angular.copy(person_to_chat.name)};
 		}
 		vm.chatId = chat_id;
 		// vm.personToChat = {id:'3783das', personal_info:{name:"Natural Heritage"}};
@@ -51,8 +51,8 @@
 		}
 
 		function createChat() {
-			vm.currentChat =  {"preview": {"title": vm.personToChat.personal_info.name}, messages:[]};
-			vm.chats.push(vm.currentChat);
+			vm.currentChat =  {"preview": {"title": vm.personToChat.name}, messages:[]};
+			vm.chats.unshift(vm.currentChat);
 		}
 
 		function sendMsg() {
@@ -60,6 +60,7 @@
 				function onSendMsgSuccess(data) {
 					vm.currentChat.messages.push(data.messages[0]); 
 					vm.newMsg = '';
+					getChats(); // update chats after sending new message
 				}
 				chatDataService.sendMsg({text:vm.newMsg },{personId: vm.personToChat.id}, onSendMsgSuccess, UtilService.onError);
 			}
