@@ -7,15 +7,17 @@
 		$translatePartialLoaderProvider.addPart('header');
 	}
 
-	function controller(personDataService, $window, UtilService, localStorageUtilService, cartDataService, cartService,$scope, cartEvents) {
+	function controller(personDataService, $window, UtilService, localStorageUtilService, cartDataService, cartService,$scope, cartEvents, chatDataService) {
 		var vm = this;
 		vm.logout = logout;
 		vm.cartQuantity=0;
+		vm.msgQuantity=0;
 		vm.openMenu=false;
 		vm.selectedCategory = _selectedCategoryId;
 		init();
 
 		function init() {
+			getMsgQuantity();
 			getCartQuantity();
 		}
 
@@ -46,6 +48,18 @@
 			if(cart_id) {
 				cartDataService.getCart({id: cart_id}, onGetCartSuccess, onGetCartError);
 			}
+		}
+
+		function getMsgQuantity() {
+			vm.msgQuantity = 0;
+			function onGetChatsSuccess(data) {
+				angular.forEach(data.items, function(chat){
+					if (chat.preview.unread) {
+						vm.msgQuantity++;
+					}
+				}); 
+			}
+			chatDataService.getChats({}, onGetChatsSuccess, UtilService.onError);
 		}
 
 		$scope.$on(cartEvents.cartUpdated, function(evt,data){ 

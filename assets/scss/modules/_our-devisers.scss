@@ -4,19 +4,19 @@
 .our-devisers-wrapper{
 	background-color: $white;
 	float: left;
-    width: 100%;
+	width: 100%;
 }
 .our-devisers-header{
-    @extend %person_header;
-    background: url(/imgs/devisers-cover.jpg) center #000000 no-repeat;
-    /*
+	@extend %person_header;
+	background: url(/imgs/devisers-cover.jpg) center #000000 no-repeat;
+	/*
 	margin: -20px 0 0 0;
-    padding: 0;//50px 0 42px;
-    background-size: 1150px 267px;
+	padding: 0;//50px 0 42px;
+	background-size: 1150px 267px;
 	height: 270px;
 	*/
 	//float: left;
-    //width: 100%;
+	//width: 100%;
 	h3{
 		@extend %person_header_h3;
 		/*
@@ -44,7 +44,7 @@
 		/*
 		width: 300px;
 		position: relative;
-    	margin: 10px auto 0;
+		margin: 10px auto 0;
 		span{
 			color: $red;
 			position: absolute;
@@ -60,11 +60,11 @@
 }
 .our-influencers-header{
 	@extend %person_header;
-    background: url(/imgs/influencers-cover.jpg) center #000000 no-repeat;
-    /*
+	background: url(/imgs/influencers-cover.jpg) center #000000 no-repeat;
+	/*
 	margin: -20px 0 0 0;
-    padding: 0;//50px 0 42px;
-    background-size: 1150px 267px;
+	padding: 0;//50px 0 42px;
+	background-size: 1150px 267px;
 	height: 270px;
 	*/
 	h3{
@@ -94,7 +94,7 @@
 		/*
 		width: 300px;
 		position: relative;
-    	margin: 10px auto 0;
+		margin: 10px auto 0;
 		span{
 			color: $red;
 			position: absolute;
@@ -109,12 +109,12 @@
 	}
 }
 .our-boxes-header{
-    @extend %person_header;
-    background: url(/imgs/boxes-cover.jpg) center #000000 no-repeat;
-    /*
+	@extend %person_header;
+	background: url(/imgs/boxes-cover.jpg) center #000000 no-repeat;
+	/*
 	margin: -20px 0 0 0;
-    padding: 0;//50px 0 42px;
-    background-size: 1150px 267px;
+	padding: 0;//50px 0 42px;
+	background-size: 1150px 267px;
 	height: 270px;
 	*/
 	h3{
@@ -144,7 +144,7 @@
 		/*
 		width: 300px;
 		position: relative;
-    	margin: 10px auto 0;
+		margin: 10px auto 0;
 		span{
 			color: $red;
 			position: absolute;
@@ -159,13 +159,13 @@
 	}
 }
 .our-stories-header{
-    background: url(/imgs/stories-cover.jpg) center #000000 no-repeat;
+	background: url(/imgs/stories-cover.jpg) center #000000 no-repeat;
 	@extend %person_header;
-    /*
+	/*
 	margin: -20px 0 0 0;
-    padding: 50px 0 42px;
-    background-size: 1150px 267px;
-    */
+	padding: 50px 0 42px;
+	background-size: 1150px 267px;
+	*/
 	h3{
 		font-family: $font-family--name;
 		color: $white;
@@ -180,7 +180,7 @@
 		/*
 		width: 300px;
 		position: relative;
-    	margin: 10px auto 0;
+		margin: 10px auto 0;
 		span{
 			color: $red;
 			position: absolute;
@@ -197,8 +197,15 @@
 .our-devisers-body{
 	background-color: $white;//$background_grey;
 	float: left;
-    width: 100%;
+	width: 100%;
 	margin-bottom: 100px;
+	a{
+		@media (max-width: 575px){
+			display: block;
+			margin: auto;
+			width: max-content;
+		}
+	}
 	hr{
 		border-top: 1px solid $dark_grey;
 	}
@@ -209,8 +216,8 @@
 .found-header{
 	height: 40px;
 	p{
-		display: inline-block;
-    	margin-top: 30px;
+		display: block;//inline-block;
+		margin-top: 30px;
 		color: $darker_grey;
 		font-family: $font-family--regular;//$font-family--secondary;
 		font-size: 14px;
@@ -221,16 +228,16 @@
 }
 .filter-title{
 	color: $darker_grey;
-    //text-transform: uppercase;
+	//text-transform: uppercase;
 	font-weight: bold;
-    font-size: 16px;
+	font-size: 16px;
 }
 .filter-wrapper{
 	margin: 30px 0 150px 0;
 }
 discover-filters {
 	.filter-wrapper {
-    	margin-bottom: 10px;
+		margin-bottom: 10px;
 	}
 }
 .more-btn{
@@ -238,8 +245,8 @@ discover-filters {
 	font-family: $font-family--regular; //$font-family--bold;
 	font-size: 14px;
 	//border-bottom: 1px solid #ccc;
-    display: block;
-    padding: 15px 0;
-    text-transform: lowercase;
-    color: $darker_grey;
+	display: block;
+	padding: 15px 0;
+	text-transform: lowercase;
+	color: $darker_grey;
 }

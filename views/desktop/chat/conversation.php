@@ -22,17 +22,19 @@ $this->registerJs('var chat_id = ' .Json::encode($chatId), yii\web\View::POS_HEA
 <div class="row" ng-controller="chatCtrl as chatCtrl">
 	<div class="col-lg-4" style="border-right:1px #D8D8D8 solid;">
 		<uib-tabset active="active">
-			<uib-tab index="$index" ng-repeat="tab in chatCtrl.tabs" heading="{{tab.title}}">
+			<uib-tab index="$index" ng-repeat="tab in chatCtrl.tabs" heading="{{tab.title}}" ng-click="chatCtrl.changeChatFilter(tab.id)">
 				<div ng-if="chatCtrl.chats.length<1" class="text-center" style="padding:50px;">
 					<h4 class="row" translate="chat.NO_CHATS"></h4>
 					<p class="row" translate="chat.CLICK_MSG"></p>
 				</div>
-				<div ng-repeat="chat in chatCtrl.chats">
-					<a ng-href="{{chat.preview.url}}">
-						<span class="row red-text" ng-bind="chat.preview.title"></span>
-						<span class="row" ng-bind="chat.preview.text"></span>
-					</a>
-				</div>
+				<ul>
+					<li ng-repeat="chat in chatCtrl.chats">
+						<a ng-href="{{chat.preview.url}}">
+							<span class="col-xs-12 red-text" ng-bind="chat.preview.title"></span>
+							<span class="col-xs-12" ng-bind="chat.preview.text"></span>
+						</a>
+					</li>
+				</ul>
 			</uib-tab>
 		</uib-tabset>
 	</div>
@@ -41,7 +43,7 @@ $this->registerJs('var chat_id = ' .Json::encode($chatId), yii\web\View::POS_HEA
 			<span translate="chat.SELECT_CHAT"></span>
 		</div>
 		<div ng-if="chatCtrl.currentChat" >
-			<div class="col-xs-12" ng-repeat="msg in chatCtrl.currentChat.messages | orderBy:'date' : reverse">
+			<div class="col-xs-12" ng-repeat="msg in chatCtrl.currentChat.messages | orderBy: (chatCtrl.parseDate(msg.date.sec*1000)): true">
 				<div class="col-sm-2">
 					<a ng-href="{{msg.person_info.url}}">
 						<img class="avatar-logued-user" ng-src="{{ msg.person_info.photo}}">

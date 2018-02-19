@@ -20,7 +20,7 @@ $footerMode = 'collapsed';
 
 	function scrollFunction(){
 		if (document.body.scrollTop > 30 || document.documentElement.scrollTop > 30) {
-			if (document.body.scrollTop < document.body.scrollHeight - window.innerHeight - 100 || document.documentElement.scrollTop < document.documentElement.scrollHeight - window.innerHeight - 100) {
+			if (document.body.scrollTop < document.body.scrollHeight - window.innerHeight - 100 && document.documentElement.scrollTop < document.documentElement.scrollHeight - window.innerHeight - 100) {
 				document.getElementById("go_to_footer").style.display = "block";
 			} else {
 				document.getElementById("go_to_footer").style.display = "none";
@@ -31,9 +31,11 @@ $footerMode = 'collapsed';
 	}
 
 	function GoToFooter(){
-		document.getElementById("go_to_footer").style.display = "none";
 		document.body.scrollTop = document.body.scrollHeight;
 		document.documentElement.scrollTop = document.documentElement.scrollHeight;
+		document.getElementById("go_to_footer").style.display = "none";
+		//alert('document.body.scrollTop = ' + document.body.scrollTop + '\ndocument.body.scrollHeight = '+ document.body.scrollHeight + '\nwindow.innerHeight = ' + window.innerHeight + '\n scrollHeight - window.innerHeight - 100 = ' + (document.body.scrollHeight - window.innerHeight - 100) + (document.body.scrollTop < document.body.scrollHeight - window.innerHeight - 100));
+                //alert('document.documentElement.scrollTop = ' + document.documentElement.scrollTop + '\ndocument.documentElement.scrollHeight = '+ document.documentElement.scrollHeight + '\nwindow.innerHeight = ' + window.innerHeight + '\n scrollHeight - window.innerHeight - 100 = ' + (document.documentElement.scrollHeight - window.innerHeight - 100) + (document.documentElement.scrollTop < document.documentElement.scrollHeight - window.innerHeight - 100));
 	}
 </script>
 <!--/GO_TO_FOOTER LINK-->
