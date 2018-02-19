@@ -3,6 +3,7 @@ namespace app\models;
 
 use app\helpers\CActiveRecord;
 use app\helpers\EmailsHelper;
+use app\helpers\SmsHelper;
 use app\helpers\Utils;
 use Exception;
 use MongoDate;
@@ -735,6 +736,23 @@ class Order extends CActiveRecord {
 			$scheduledEmails['deviser_new_order'][] = EmailsHelper::deviserNewOrderReminder48($this, $pack->short_id);
 
 			$scheduledEmails['todevise_new_order'][] = EmailsHelper::todeviseNewOrderReminder72($this, $pack->short_id);
+
+			$pack->setAttribute('scheduled_emails', $scheduledEmails);
+		}
+		$this->setPacks($packs);
+		$this->save();
+	}
+
+	public function scheduleSmsNewOrder()
+	{
+		EmailsHelper::clientNewOrder($this);
+
+		$packs = $this->getPacks();
+		foreach ($packs as $pack) {
+
+			$scheduledEmails = $pack->scheduled_emails;
+			$scheduledEmails['deviser_new_order'][] = SmsHelper::deviserNewOrder($this, $pack->short_id);
+			$scheduledEmails['deviser_new_order'][] = SmsHelper::deviserNewOrderReminder72($this, $pack->short_id);
 
 			$pack->setAttribute('scheduled_emails', $scheduledEmails);
 		}

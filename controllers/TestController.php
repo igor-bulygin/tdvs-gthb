@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\helpers\CController;
 use app\helpers\EmailsHelper;
+use app\helpers\SmsHelper;
 use yii\base\Exception;
 
 class TestController extends CController
@@ -45,5 +46,17 @@ class TestController extends CController
 		} else {
 			throw new Exception('Order ' . $short_id . ' not found');
 		}
+	}
+
+	public function actionSms()
+	{
+		SmsHelper::test();
+		die;
+		$short_id = '976966c0';
+		$order = \app\models\Order::findOneSerialized($short_id);
+		$order->scheduleSmsNewOrder();
+
+		var_dump($order->getAttributes());
+
 	}
 }
