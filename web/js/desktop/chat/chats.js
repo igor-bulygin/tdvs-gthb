@@ -68,7 +68,7 @@
 		function sendMsg() {
 			if (vm.newMsg && vm.newMsg.length>0) {
 				function onSendMsgSuccess(data) {
-					vm.currentChat.messages.push(data.messages[0]); 
+					vm.currentChat.messages.push(data.messages[data.messages.length-1]);
 					vm.newMsg = '';
 					getChats(); // update chats after sending new message
 				}
