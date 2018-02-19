@@ -331,7 +331,7 @@ class Chat extends CActiveRecord
 
 		// Set the message in the subdocument
 		$messages = $this->getMessages();
-		array_unshift($messages, $chatMessage);
+		$messages[] = $chatMessage;
 		$this->setMessages($messages);
 
 		// Set as unread for all the members (except sender)
@@ -352,7 +352,7 @@ class Chat extends CActiveRecord
 
 		return [
 			'title' => $this->getTitle(),
-			'text' => $messages ? $messages[0]->text : null,
+			'text' => $messages ? $messages[count($messages) - 1]->text : null,
 			'unread' => $this->isUnreadByConnectedUser(),
 			'messages' => count($messages),
 			'url' => $this->getUrl(),
