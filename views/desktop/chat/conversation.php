@@ -24,12 +24,14 @@ $this->registerJs('var chat_id = ' .Json::encode($chatId), yii\web\View::POS_HEA
 		<uib-tabset active="active">
 			<uib-tab index="$index" ng-repeat="tab in chatCtrl.tabs" heading="{{tab.title}}">
 				<div ng-if="chatCtrl.chats.length<1" class="text-center" style="padding:50px;">
-					<h4 class="row" translate="chat.NO_CHATS"></h2>
+					<h4 class="row" translate="chat.NO_CHATS"></h4>
 					<p class="row" translate="chat.CLICK_MSG"></p>
 				</div>
 				<div ng-repeat="chat in chatCtrl.chats">
-					<span class="row red-text" ng-bind="chat.preview.title"></span>
-					<span class="row" ng-bind="chat.preview.text"></span>
+					<a ng-href="{{chat.preview.url}}">
+						<span class="row red-text" ng-bind="chat.preview.title"></span>
+						<span class="row" ng-bind="chat.preview.text"></span>
+					</a>
 				</div>
 			</uib-tab>
 		</uib-tabset>

@@ -12,6 +12,8 @@ $this->title = Yii::t('app/public', 'CHAT_TITLE');
 
 $this->params['person'] = $person;
 $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD);
+$this->registerJs('var person_to_chat = null;', yii\web\View::POS_HEAD);
+$this->registerJs('var chat_id = null;', yii\web\View::POS_HEAD);
 
 ?>
 
@@ -20,12 +22,14 @@ $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD
 		<uib-tabset active="active">
 			<uib-tab index="$index" ng-repeat="tab in chatCtrl.tabs" heading="{{tab.title}}">
 				<div ng-if="chatCtrl.chats.length<1" class="text-center" style="padding:50px;">
-					<h4 class="row" translate="chat.NO_CHATS"></h2>
+					<h4 class="row" translate="chat.NO_CHATS"></h4>
 					<p class="row" translate="chat.CLICK_MSG"></p>
 				</div>
 				<div ng-repeat="chat in chatCtrl.chats">
-					<span class="row" ng-bind="chat.preview.title"></span>
-					<span class="row" ng-bind="chat.preview.text"></span>
+					<a ng-href="{{chat.preview.url}}">
+						<span class="row" ng-bind="chat.preview.title"></span>
+						<span class="row" ng-bind="chat.preview.text"></span>
+					</a>
 				</div>
 			</uib-tab>
 		</uib-tabset>
