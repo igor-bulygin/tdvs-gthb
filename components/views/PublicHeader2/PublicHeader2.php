@@ -145,6 +145,7 @@ app\components\assets\PublicHeader2Asset::register($this);
 					<?php } ?>
 					<li class="cart-item">
 						<a href="<?=Url::to(['/messages'])?>">
+							<span class="badge badge-notify bg-red" ng-if="publicHeaderCtrl.msgQuantity>0" ng-cloak ng-bind="publicHeaderCtrl.msgQuantity" style="margin-left: 10px;z-index: 999999;position: absolute;top:7px;"></span>
 							<span class="icons-hover fa fa-comments-o"></span>
 						</a>
 					</li>
