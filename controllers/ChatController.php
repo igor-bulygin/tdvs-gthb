@@ -62,7 +62,13 @@ class ChatController extends CController
 			"limit" => 1,
 		]);
 
-		$chatId = $chats ? $chats[0]->short_id : null;
+		if ($chats) {
+			$chat = $chats[0];
+			$chat->markAsReadByPerson($person);
+			$chatId = $chat->short_id;
+		} else {
+			$chatId = null;
+		}
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("@app/views/desktop/chat/conversation", [

@@ -342,6 +342,10 @@ class Chat extends CActiveRecord
 				$unread_by[] = $member->person_id;
 			}
 		}
+		if (in_array($person_id, $unread_by)) {
+			unset($unread_by[array_search($person_id, $unread_by)]);
+		}
+
 		$this->setAttribute('unread_by', $unread_by);
 		$this->save();
 	}
