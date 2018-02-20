@@ -9,6 +9,7 @@
 		vm.selectChat=selectChat;
 		vm.parseDate=UtilService.parseDate;
 		vm.parseImage = parseImage;
+		vm.submitMsg = submitMsg;
 		vm.loading=true;
 		if (person) {
 			vm.person = {id:person.id, name:angular.copy(person.name), profile_image : person.profile_image};
@@ -115,6 +116,13 @@
 
 		function parseImage(image) {
 			return currentHost() + '/' + image;
+		}
+
+		function submitMsg($event){
+			var keyCode = $event.which || $event.keyCode;
+			if (keyCode === 13) {
+				sendMsg()
+			}
 		}
 	}
 

@@ -66,8 +66,8 @@ $this->registerJs('var chat_id = ' .Json::encode($chatId), yii\web\View::POS_HEA
 					</div>
 				</div>
 				<div class="col-xs-12">
-					<input class="col-xs-8"  type="text" ng-model="chatCtrl.newMsg">
-					<button class="col-xs-4 btn btn-small btn-red" ng-click="chatCtrl.sendMsg()" translate="chat.SEND"></button>
+					<input class="col-xs-8" type="text" ng-model="chatCtrl.newMsg" on-keypress="chatCtrl.submitMsg($event)">
+					<button class="col-xs-4 btn btn-small btn-red" ng-click="chatCtrl.sendMsg()" translate="chat.SEND" ></button>
 				</div>
 			</div>
 		</div>
