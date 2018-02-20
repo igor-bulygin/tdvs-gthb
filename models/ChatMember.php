@@ -97,12 +97,7 @@ class ChatMember extends EmbedModel
 	{
 		$person = $this->getPerson();
 		if ($person) {
-			return [
-				"slug" => $person->slug,
-				"name" => $person->personalInfoMapping->getVisibleName(),
-				"photo" => $person->getProfileImage(),
-				'url' => $person->getMainLink(),
-			];
+			return $person->getPreviewSerialized();
 		}
 
 		return [];
