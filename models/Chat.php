@@ -356,6 +356,7 @@ class Chat extends CActiveRecord
 
 		return [
 			'title' => $this->getTitle(),
+			'image' => $this->getImage(),
 			'text' => $messages ? $messages[count($messages) - 1]->text : null,
 			'unread' => $this->isUnreadByConnectedUser(),
 			'messages' => count($messages),
@@ -455,6 +456,26 @@ class Chat extends CActiveRecord
 		$title = implode(', ', $title);
 
 		return $title;
+	}
+
+	/**
+	 * Returns the "image" of the conversation. At this moment, the image is the profile image of the first member different of the connected user
+	 *
+	 * @return string
+	 */
+	public function getImage()
+	{
+		$connectedPerson = \Yii::$app->user->identity; /* @var Person $connectedPerson */
+
+		$members = $this->getMembers();
+
+		foreach ($members as $member) {
+			if ($member->person_id != $connectedPerson->short_id) {
+				return $member->getPerson()->getProfileImage();
+			}
+		}
+
+		return null;
 	}
 
 	/**

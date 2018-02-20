@@ -25,6 +25,7 @@ This method returns a preview version of each conversation. It does not include 
 
 In the `preview` property, we have:
 * `title`: Represented by the names of the members in the chat. Currently only one member by chat
+* `image`: Main image of the chat. Currently is the profile image of the first member different of the connected user
 * `text`: Last message in the chat
 * `unread`: If the chat is marked as unread by the current user
 * `messages`: Total number of messages in the chat
@@ -36,6 +37,7 @@ In the `preview` property, we have:
 		   "id": "78f2fa4e",
 		   "preview": {
 			   "title": "Hawkins and Brimble",
+			   "image" : "http://localhost.thumbor.todevise.com:8000/RmgE9t0SWCjD59pQb2DkPMoDZno=/155x155//uploads/deviser/d4ac1a8/person.profile.cropped.5a044d7950916.png",
 			   "text": "Last message",
 			   "unread": false,
 			   "messages": 2,
@@ -46,6 +48,7 @@ In the `preview` property, we have:
 		   "id": "6e14b115",
 		   "preview": {
 			   "title": "Sweet Matitos",
+               "image": "http://localhost.thumbor.todevise.com:8000/Mme2jM2BzQC3C98Ip9edxX0-3A4=/155x155//uploads/deviser/9d5b9a9/person.profile.cropped.59a8668b95237.jpg",
 			   "text": "Last message",
 			   "unread": true,
 			   "messages": 11,
