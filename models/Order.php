@@ -712,6 +712,7 @@ class Order extends CActiveRecord {
 		if ($newState == Order::ORDER_STATE_PAID) {
 			$this->order_date = new MongoDate();
 			$this->scheduleEmailsNewOrder();
+			$this->sendSmsNewOrder();
 		}
 		$this->order_state = $newState;
 		$stateHistory = $this->state_history;
@@ -743,18 +744,53 @@ class Order extends CActiveRecord {
 		$this->save();
 	}
 
-	public function scheduleSmsNewOrder()
+	public function sendSmsNewOrder()
 	{
-		EmailsHelper::clientNewOrder($this);
-
 		$packs = $this->getPacks();
 		foreach ($packs as $pack) {
 
-			$scheduledEmails = $pack->scheduled_emails;
-			$scheduledEmails['deviser_new_order'][] = SmsHelper::deviserNewOrder($this, $pack->short_id);
-			$scheduledEmails['deviser_new_order'][] = SmsHelper::deviserNewOrderReminder72($this, $pack->short_id);
+			try {
+				SmsHelper::deviserNewOrder($this, $pack->short_id); /* @var $result \Twilio\Rest\Api\V2010\Account\MessageInstance */
+				$message = 'Sent to '.$pack->getDeviser()->personalInfoMapping->getPhoneNumber();
+				$result = 'sent';
+			} catch (Exception $e) {
+				$result = 'error';
+				$message = $e->getMessage();
+			}
 
-			$pack->setAttribute('scheduled_emails', $scheduledEmails);
+			$sms_sent = $pack->sms_sent;
+			$sms_sent['deviser_new_order'][date('Y-m-d H:i:s')] = [
+				'result' => $result,
+				'message' => $message,
+			];
+
+			$pack->setAttribute('sms_sent', $sms_sent);
+		}
+		$this->setPacks($packs);
+		$this->save();
+	}
+
+	public function sendSmsNewOrderReminder72()
+	{
+		$packs = $this->getPacks();
+		foreach ($packs as $pack) {
+
+			try {
+				SmsHelper::deviserNewOrderReminder72($this, $pack->short_id);
+				$message = 'Sent to '.$pack->getDeviser()->personalInfoMapping->getPhoneNumber();
+				$result = 'sent';
+			} catch (Exception $e) {
+				$result = 'error';
+				$message = $e->getMessage();
+			}
+
+			$sms_sent = $pack->sms_sent;
+			$sms_sent['deviser_new_order_reminder_72'][date('Y-m-d H:i:s')] = [
+				'result' => $result,
+				'message' => $message,
+			];
+
+			$pack->setAttribute('sms_sent', $sms_sent);
 		}
 		$this->setPacks($packs);
 		$this->save();

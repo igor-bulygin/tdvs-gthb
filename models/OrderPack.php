@@ -29,6 +29,7 @@ use yii\web\BadRequestHttpException;
  * @property array $state_history
  * @property string $invoice_url
  * @property array $scheduled_emails
+ * @property array $sms_sent
  *
  * @method Order getParentObject()
  */
@@ -77,6 +78,7 @@ class OrderPack extends EmbedModel
 			'state_history',
 			'invoice_url',
 			'scheduled_emails',
+			'sms_sent',
 		];
 	}
 
