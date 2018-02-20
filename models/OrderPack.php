@@ -2,6 +2,7 @@
 namespace app\models;
 
 use app\helpers\EmailsHelper;
+use app\helpers\SmsHelper;
 use app\helpers\Utils;
 use yii\web\BadRequestHttpException;
 
@@ -523,5 +524,49 @@ class OrderPack extends EmbedModel
 	public function setInvoiceInfo($invoiceUrl)
 	{
 		$this->invoice_url = $invoiceUrl;
+	}
+
+
+	public function sendSmsNewOrder()
+	{
+		try {
+			$order = $this->getParentObject();
+			$result = SmsHelper::deviserNewOrder($order, $this->short_id);
+			$message = '"'.$result['body'].'" sent to ' . $result['to'];
+			$result = 'sent';
+		} catch (\Exception $e) {
+			$result = 'error';
+			$message = $e->getMessage();
+		}
+
+		$sms_sent = $this->sms_sent;
+		$sms_sent['deviser_new_order'][date('Y-m-d H:i:s')] = [
+			'result' => $result,
+			'message' => $message,
+		];
+
+		$this->setAttribute('sms_sent', $sms_sent);
+	}
+
+	public function sendSmsNewOrderReminder72()
+	{
+		try {
+			$order = $this->getParentObject();
+
+			$result = SmsHelper::deviserNewOrderReminder72($order, $this->short_id);
+			$message = '"'.$result['body'].'" sent to ' . $result['to'];
+			$result = 'sent';
+		} catch (\Exception $e) {
+			$result = 'error';
+			$message = $e->getMessage();
+		}
+
+		$sms_sent = $this->sms_sent;
+		$sms_sent['deviser_new_order_reminder_72'][date('Y-m-d H:i:s')] = [
+			'result' => $result,
+			'message' => $message,
+		];
+
+		$this->setAttribute('sms_sent', $sms_sent);
 	}
 }

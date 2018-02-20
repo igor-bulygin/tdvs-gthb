@@ -3,7 +3,6 @@ namespace app\models;
 
 use app\helpers\CActiveRecord;
 use app\helpers\EmailsHelper;
-use app\helpers\SmsHelper;
 use app\helpers\Utils;
 use Exception;
 use MongoDate;
@@ -748,23 +747,7 @@ class Order extends CActiveRecord {
 	{
 		$packs = $this->getPacks();
 		foreach ($packs as $pack) {
-
-			try {
-				SmsHelper::deviserNewOrder($this, $pack->short_id); /* @var $result \Twilio\Rest\Api\V2010\Account\MessageInstance */
-				$message = 'Sent to '.$pack->getDeviser()->personalInfoMapping->getPhoneNumber();
-				$result = 'sent';
-			} catch (Exception $e) {
-				$result = 'error';
-				$message = $e->getMessage();
-			}
-
-			$sms_sent = $pack->sms_sent;
-			$sms_sent['deviser_new_order'][date('Y-m-d H:i:s')] = [
-				'result' => $result,
-				'message' => $message,
-			];
-
-			$pack->setAttribute('sms_sent', $sms_sent);
+			$pack->sendSmsNewOrder();
 		}
 		$this->setPacks($packs);
 		$this->save();
@@ -774,23 +757,7 @@ class Order extends CActiveRecord {
 	{
 		$packs = $this->getPacks();
 		foreach ($packs as $pack) {
-
-			try {
-				SmsHelper::deviserNewOrderReminder72($this, $pack->short_id);
-				$message = 'Sent to '.$pack->getDeviser()->personalInfoMapping->getPhoneNumber();
-				$result = 'sent';
-			} catch (Exception $e) {
-				$result = 'error';
-				$message = $e->getMessage();
-			}
-
-			$sms_sent = $pack->sms_sent;
-			$sms_sent['deviser_new_order_reminder_72'][date('Y-m-d H:i:s')] = [
-				'result' => $result,
-				'message' => $message,
-			];
-
-			$pack->setAttribute('sms_sent', $sms_sent);
+			$pack->sendSmsNewOrderReminder72();
 		}
 		$this->setPacks($packs);
 		$this->save();

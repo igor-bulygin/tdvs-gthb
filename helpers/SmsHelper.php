@@ -29,7 +29,12 @@ class SmsHelper
 
 		$body = str_replace(array_keys($params), $params, $body);
 
-		return static::sendSms($to, $body);
+		static::sendSms($to, $body);
+
+		return [
+			'to' => $to,
+			'body' => $body,
+		];
 	}
 
 	public static function deviserNewOrderReminder72(Order $order, $packId)
@@ -52,7 +57,12 @@ class SmsHelper
 
 		$body = str_replace(array_keys($params), $params, $body);
 
-		return static::sendSms($to, $body);
+		static::sendSms($to, $body);
+
+		return [
+			'to' => $to,
+			'body' => $body,
+		];
 	}
 
 	protected static function sendSms($to, $body)
