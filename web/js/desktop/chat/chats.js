@@ -1,11 +1,12 @@
 (function () {
 	"use strict";
 
-	function controller(UtilService, chatDataService, $window) {
+	function controller(UtilService, chatDataService, $window, $location) {
 		var vm = this;
 		vm.getChats=getChats;
 		vm.sendMsg= sendMsg;
 		vm.changeChatFilter = changeChatFilter;
+		vm.selectChat=selectChat;
 		vm.parseDate=UtilService.parseDate;
 		vm.loading=true;
 		if (person) {
@@ -15,33 +16,52 @@
 			vm.personToChat = {id:person_to_chat.id, name:angular.copy(person_to_chat.name)};
 		}
 		vm.chatId = chat_id;
-		//vm.personToChat = {id:'3783das', personal_info:{name:"Natural Heritage"}};
 
-		vm.tabs = [{title:"All", id : 0 }, {title:"Devisers", id : 2 }, {title:"Customers", id : 1 }, {title:"Influencers", id : 3 }];
+		vm.tabs = [{title:"All", id : '0' }, {title:"Devisers", id : '2' }, {title:"Customers", id : '1' }, {title:"Influencers", id : '3' }];
+		vm.active = 0;
 		vm.chats=[];
 
 		init();
 
 		function init() {
-			getChats();
+			vm.firstCharge = true;
+			var filtering = false;
+			var paramName = 'filterId=';
+			var indexParam = $location.absUrl().search(paramName);
+			if ( indexParam != -1) {
+				indexParam = indexParam + paramName.length;
+				vm.filterId = $location.absUrl().slice(indexParam, $location.absUrl().length);
+				if (vm.filterId && vm.filterId != 0) {
+					filtering = true;
+					angular.forEach(vm.tabs, function(value, index){
+						if(value.id ==  vm.filterId) {
+							vm.active = index;
+						}
+					});
+					
+				}
+			}
+			getChats(filtering);
 		}
 
 		function getChats(filtering) {
 			vm.loading=true;
 			function onGetChatsSuccess(data) {
 				vm.chats = angular.copy(data.items); 
-				if (vm.personToChat && !filtering && !vm.currentChat) {
+				if (vm.personToChat && (vm.firstCharge || !filtering) && !vm.currentChat) {
 					getChat(vm.chatId);
 				}
-				else if (filtering && vm.chats && vm.chats.length>0) {
+				else if (!vm.firstCharge && filtering && vm.chats && vm.chats.length>0) {
 					if ((vm.currentChat && vm.currentChat.id != vm.chats[0].id) || !vm.currentChat ) {
-						$window.open(vm.chats[0].preview.url, "_self");
+						var newUrl = vm.chats[0].preview.url + '?filterId='+vm.filterId;
+						$window.open(newUrl, "_self");
 					}
 				}
 				else if (filtering) {
 					vm.currentChat = null;
 				}
 				vm.loading=false;
+				vm.firstCharge = false;
 			}
 			chatDataService.getChats({person_type: vm.filterId}, onGetChatsSuccess, UtilService.onError);
 		}
@@ -79,6 +99,14 @@
 		function changeChatFilter(filterId) {
 			vm.filterId=filterId;
 			getChats(true);
+		}
+
+		function selectChat(chat) {
+			var newUrl = chat.preview.url;
+			if (vm.filterId && vm.filterId!=0) {
+				newUrl = newUrl + '?filterId='+vm.filterId;
+			}
+			$window.open(newUrl, "_self");
 		}
 	}
 
