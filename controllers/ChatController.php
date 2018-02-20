@@ -38,6 +38,8 @@ class ChatController extends CController
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("@app/views/desktop/chat/chat", [
 			'person' => $person,
+			'personToChat' => null,
+			'chatId' => null,
 		]);
 	}
 
@@ -71,7 +73,7 @@ class ChatController extends CController
 		}
 
 		$this->layout = '/desktop/public-2.php';
-		return $this->render("@app/views/desktop/chat/conversation", [
+		return $this->render("@app/views/desktop/chat/chat", [
 			'person' => $person,
 			'personToChat' => $personToChat,
 			'chatId' => $chatId,
