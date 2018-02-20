@@ -1257,6 +1257,11 @@ class Person extends CActiveRecord implements IdentityInterface
 			'videos_link' => $this->getVideosLink(),
 			'faq_link' => $this->getFaqLink(),
 			'chat_link' => $this->getChatLink(),
+
+			// TODO: delete this two fields
+			"photo" => $this->getProfileImage(),
+			'url' => $this->getMainLink(),
+
 		];
 	}
 
