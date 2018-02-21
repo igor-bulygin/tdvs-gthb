@@ -69,9 +69,7 @@ class SmsHelper
 	{
 		try {
 
-			$from = '+15005550006';
-
-			// Your Account SID and Auth Token from twilio.com/console
+			$from = \Yii::$app->params['twilio_from_number'];
 			$sid = \Yii::$app->params['twilio_account_id'];
 			$token = \Yii::$app->params['twilio_auth_token'];
 			$client = new Client($sid, $token);
