@@ -56,7 +56,7 @@ return [
 
 		//URLs
 		'urlManager' => [
-			'hostInfo' => YII_ENV_PROD ? 'https://todevise.com' : 'http://localhost:8080',
+			'hostInfo' => YII_ENV_PROD ? 'https://todevise.com' : 'http://dev.todevise.com',
 			'baseUrl' => '',
 			'enablePrettyUrl' => true,
 			'showScriptName' => false,
