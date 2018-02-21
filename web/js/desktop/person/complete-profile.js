@@ -13,6 +13,7 @@
 		vm.searchPlace = searchPlace;
 		vm.selectCity = selectCity;
 		vm.save = save;
+		vm.setPrefix=setPrefix;
 		vm.sendingForm = true;
 		vm.crop_options = {
 			profile: {
@@ -43,6 +44,8 @@
 			//essential data get accidentally deleted.
 			setCity();
 			setImages();
+
+			setPrefix();
 			vm.sendingForm = false;
 		}
 
@@ -74,6 +77,25 @@
 					})
 				}
 			} 
+		}
+
+		function setPrefix() {
+			if (vm.person.personal_info.phone_number_prefix==null || angular.isUndefined(vm.person.personal_info.phone_number_prefix) || vm.person.personal_info.phone_number_prefix.length<1) {
+				vm.person.personal_info.phone_number_prefix="+";
+			}
+			if (vm.person.personal_info.phone_number_prefix.indexOf('+') == -1) {
+				vm.person.personal_info.phone_number_prefix='+' + vm.person.personal_info.phone_number_prefix;
+				validatePrefix();
+			}
+		}
+
+		function validatePrefix() {
+			if (vm.person.personal_info.phone_number_prefix.length<2) {
+				vm.validPrefix = true;
+			} else {
+				vm.validPrefix = false;
+			}
+			return vm.validPrefix;
 		}
 
 		function setImages() {
@@ -115,6 +137,7 @@
 		}
 
 		function save(form) {
+
 			vm.sendingForm = true;
 
 			function onError(error) {
@@ -147,7 +170,7 @@
 
 			form.$setSubmitted();
 
-			if(form.$valid) {
+			if(form.$valid && (!form.phone_prefix || validatePrefix())) {
 				//callback hell
 				var fileData = {
 					person_id: vm.person.short_id,
