@@ -36,19 +36,20 @@ class SmsTaskController extends Controller
     		$packs = $order->getPacks();
     		foreach ($packs as $pack) {
     			if ($pack->pack_state == OrderPack::PACK_STATE_PAID) {
-					$send = true;
-    				if (is_array($pack->sms_sent) && isset($pack->sms_sent['deviser_new_order_reminder_72'])) {
-						foreach ($pack->sms_sent['deviser_new_order_reminder_72'] as $item) {
-							if (isset($item['result']) && $item['result'] == 'sent') {
-								$send = false;
-								break;
-							}
-						}
+
+					if (!$pack->getDeviser()->personalInfoMapping->getPhoneNumber()) {
+						echo "Deviser ".$pack->getDeviser()->getName()." (pack ".$pack->short_id.", order ".$order->short_id.") does not have a phone number\n";
+						continue; // Deviser does not have a phone number
 					}
-					if (!$send) {
-    					continue;
+
+    				if ($pack->hasSentSmsNewOrderReminder72()) {
+						echo "Message (pack ".$pack->short_id.", order ".$order->short_id.") already sent\n";
+						continue; // Already sent
 					}
-    				$pack->sendSmsNewOrderReminder72();
+
+					echo "sending message for order ".$order->short_id." pack ".$pack->short_id."\n";
+
+					$pack->sendSmsNewOrderReminder72();
 					// Set pack in the order and save
 					$order->setPack($pack->short_id, $pack);
 					$order->save();

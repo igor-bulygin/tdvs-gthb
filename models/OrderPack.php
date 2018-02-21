@@ -569,4 +569,30 @@ class OrderPack extends EmbedModel
 
 		$this->setAttribute('sms_sent', $sms_sent);
 	}
+
+	public function hasSentSmsNewOrder()
+	{
+		if (is_array($this->sms_sent) && isset($this->sms_sent['deviser_new_order'])) {
+			foreach ($this->sms_sent['deviser_new_order'] as $item) {
+				if (isset($item['result']) && $item['result'] == 'sent') {
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
+
+	public function hasSentSmsNewOrderReminder72()
+	{
+		if (is_array($this->sms_sent) && isset($this->sms_sent['deviser_new_order_reminder_72'])) {
+			foreach ($this->sms_sent['deviser_new_order_reminder_72'] as $item) {
+				if (isset($item['result']) && $item['result'] == 'sent') {
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
 }

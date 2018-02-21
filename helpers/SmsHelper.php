@@ -1,6 +1,7 @@
 <?php
 namespace app\helpers;
 
+use app\models\Lang;
 use app\models\Order;
 use Twilio\Exceptions\RestException;
 use Twilio\Rest\Client;
@@ -23,7 +24,7 @@ class SmsHelper
 			throw new Exception("Deviser " . $deviser->getName() . " has no phone number");
 		}
 
-		$body = 'New sale {{order_number}}. Please go to SETTINGS-MY ORDERS and let us know that you are aware {{deviser_link_profile}}';
+		$body = Yii::t('app/public', 'SMS_DEVISER_NEW_SALE_REMINDER_72', [], $deviser->settingsMapping->lang ?: Lang::EN_US);
 
 		$params = static::mergeCustomWithCommonVars(static::getOrderPackCommonVars($order, $packId), []);
 
@@ -51,7 +52,7 @@ class SmsHelper
 			throw new Exception("Deviser " . $deviser->getName() . " has no phone number");
 		}
 
-		$body = 'REMINDER: YOU HAVE A NEW SALE. Please let us know that you saw the sale {{order_number}} {{deviser_link_profile}}';
+		$body = Yii::t('app/public', 'SMS_DEVISER_NEW_SALE_REMINDER_72', [], $deviser->settingsMapping->lang ?: Lang::EN_US);
 
 		$params = static::mergeCustomWithCommonVars(static::getOrderPackCommonVars($order, $packId), []);
 
@@ -194,18 +195,18 @@ class SmsHelper
 		}
 
 		$merge_vars = [
-			'{{client_name}}' => $clientName,
-			'{{client_email}}' => $clientEmail,
-			'{{client_link_profile}}' => $clientProfileLink,
-			'{{deviser_name}}' => $deviserName,
-			'{{deviser_email}}' => $deviserEmail,
-			'{{deviser_link_profile}}' => $deviserProfileLink,
-//			'{{products}}' => $productsVars,
-			'{{number_products}}' => $totalProducts,
-			'{{order_number}}' => $order->short_id.'/'.$pack->short_id,
-			'{{company}}' => isset($pack->shipping_info['company']) ? $pack->shipping_info['company'] : '-',
-			'{{tracking_number}}' => isset($pack->shipping_info['tracking_number']) ? $pack->shipping_info['tracking_number'] : '-',
-			'{{tracking_link}}' => isset($pack->shipping_info['tracking_link']) ? '<a href="'.$pack->shipping_info['tracking_link'].'">'.$pack->shipping_info['tracking_link'].'</a>' : '-',
+			'[[client_name]]' => $clientName,
+			'[[client_email]]' => $clientEmail,
+			'[[client_link_profile]]' => $clientProfileLink,
+			'[[deviser_name]]' => $deviserName,
+			'[[deviser_email]]' => $deviserEmail,
+			'[[deviser_link_profile]]' => $deviserProfileLink,
+//			'[[products]]' => $productsVars,
+			'[[number_products]]' => $totalProducts,
+			'[[order_number]]' => $order->short_id.'/'.$pack->short_id,
+			'[[company]]' => isset($pack->shipping_info['company']) ? $pack->shipping_info['company'] : '-',
+			'[[tracking_number]]' => isset($pack->shipping_info['tracking_number']) ? $pack->shipping_info['tracking_number'] : '-',
+			'[[tracking_link]]' => isset($pack->shipping_info['tracking_link']) ? '<a href="'.$pack->shipping_info['tracking_link'].'">'.$pack->shipping_info['tracking_link'].'</a>' : '-',
 		];
 
 		return $merge_vars;
@@ -216,7 +217,7 @@ class SmsHelper
 		foreach ($commonVars as $commonName => $commonContent) {
 			foreach ($customVars as $name => $content) {
 				if (is_string($commonContent)) {
-					$customVars[$name] = str_replace('{{' . $commonName . '}}', $commonContent, $content);
+					$customVars[$name] = str_replace('[[' . $commonName . ']]', $commonContent, $content);
 				}
 			}
 		}

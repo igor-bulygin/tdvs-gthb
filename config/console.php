@@ -33,7 +33,8 @@ return [
 						'app' => 'app.php',
 						'app/admin' => 'app/admin.php',
 						'app/public' => 'app/public.php'
-					]
+					],
+					'forceTranslation' => true,
 				]
 			]
 		],
