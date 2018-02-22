@@ -5,6 +5,9 @@
     background-color: $white;
     .content-store{
         padding: 40px 0;
+        @media(max-width: 991px){
+            padding: 0;
+        }
         .cathegory-wrapper{
             margin: -10px 0 40px;
             @extend %block;

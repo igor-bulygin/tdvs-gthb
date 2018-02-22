@@ -5,6 +5,7 @@
     border:1px solid $white;//$dark_grey;
     @include border-radius(180px,180px,180px,180px);
 }
+/*heart*/
 %heart-black-icon{
     background: url('/imgs/heart-black.svg') 0 0 no-repeat transparent !important;
 }
@@ -14,6 +15,36 @@
 %heart-red-icon{
     background: url('/imgs/heart-red.svg') 0 0 no-repeat transparent !important;
 }
+/*header-icon*/
+%header-icon {
+    display: block;
+    width: 23px;
+    height: 23px;
+    padding-top: 14px;
+    padding-bottom: 15px;
+    @include border-radius(0,0,0,0);
+}
+/*cart*/
+%cart-black-icon{
+    background: url('/imgs/cart-black.svg') 0 0 no-repeat transparent;
+}
+%cart-white-icon{
+    background: url('/imgs/cart-white.svg') 0 0 no-repeat transparent;
+}
+%cart-red-icon{
+    background: url('/imgs/cart-red.svg') 0 0 no-repeat transparent;
+}
+/*chat*/
+%chat-black-icon{
+    background: url('/imgs/chat-black.svg') 0 0 no-repeat transparent;
+}
+%chat-white-icon{
+    background: url('/imgs/chat-white.svg') 0 0 no-repeat transparent;
+}
+%chat-red-icon{
+    background: url('/imgs/chat-red.svg') 0 0 no-repeat transparent;
+}
+
 //.banner-deviser-content .deviser-profile .avatar img
 // es el que tenemos que poner en blanco
 %link-red{

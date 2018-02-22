@@ -200,6 +200,9 @@
 	width: 100%;
 	margin-bottom: 100px;
 	a{
+		@media (max-width: 320px){
+			width: 100%;
+		}
 		@media (max-width: 575px){
 			display: block;
 			margin: auto;

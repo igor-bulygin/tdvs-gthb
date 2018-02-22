@@ -1286,7 +1286,8 @@ footer .social-items {
   padding: 40px 0; }
   @media (max-width: 575px) {
     .menu-store {
-      margin-top: 3em; } }
+      padding: 0;
+      margin-top: 0.5em; } }
   @media (max-width: 575px) {
     .menu-store ul {
       display: table;
@@ -2503,6 +2504,7 @@ h3 {
   -webkit-border-radius: 180px 180px 180px 180px !important;
   -moz-border-radius: 180px 180px 180px 180px !important; }
 
+/*heart*/
 .heart-icon, .heart-black-icon {
   background: url("/imgs/heart-black.svg") 0 0 no-repeat transparent !important; }
 
@@ -2511,6 +2513,37 @@ h3 {
 
 .heart-icon:hover, .heart-red-icon {
   background: url("/imgs/heart-red.svg") 0 0 no-repeat transparent !important; }
+
+/*header-icon*/
+.cart-icon, .cart-icon-black, .chat-icon, .chat-icon-black {
+  display: block;
+  width: 23px;
+  height: 23px;
+  padding-top: 14px;
+  padding-bottom: 15px;
+  border-radius: 0 0 0 0 !important;
+  -webkit-border-radius: 0 0 0 0 !important;
+  -moz-border-radius: 0 0 0 0 !important; }
+
+/*cart*/
+.cart-icon-black {
+  background: url("/imgs/cart-black.svg") 0 0 no-repeat transparent; }
+
+.cart-icon, .product .product-data-wrapper .product-data .row-size .cart-icon {
+  background: url("/imgs/cart-white.svg") 0 0 no-repeat transparent; }
+
+.cart-icon:hover {
+  background: url("/imgs/cart-red.svg") 0 0 no-repeat transparent; }
+
+/*chat*/
+.chat-icon-black {
+  background: url("/imgs/chat-black.svg") 0 0 no-repeat transparent; }
+
+.chat-icon {
+  background: url("/imgs/chat-white.svg") 0 0 no-repeat transparent; }
+
+.chat-icon:hover {
+  background: url("/imgs/chat-red.svg") 0 0 no-repeat transparent; }
 
 .link-red, .log a, .add-lang, .request-invitation-wrapper .request-invitation-container .add-new, .red-text {
   color: #c91c39 !important; }
@@ -2712,6 +2745,9 @@ h3 {
       padding: 0 10px 0; }
     .navbar.secondary #mobile-iconset img {
       height: 25px; }
+      @media (max-width: 575px) {
+        .navbar.secondary #mobile-iconset img {
+          height: 20px; } }
     .navbar.secondary #mobile-iconset div {
       float: right; }
   .navbar.terciary {
@@ -3144,30 +3180,6 @@ h3 {
 
 #header_logo {
   width: 110px; }
-
-.cart-icon {
-  background: url("/imgs/cart-white.svg") 0 0 no-repeat transparent;
-  display: block;
-  width: 23px;
-  height: 23px;
-  padding-top: 14px;
-  padding-bottom: 15px;
-  border-radius: 0 0 0 0 !important;
-  -webkit-border-radius: 0 0 0 0 !important;
-  -moz-border-radius: 0 0 0 0 !important; }
-  .cart-icon:hover {
-    background: url("/imgs/cart-red.svg") 0 0 no-repeat transparent; }
-
-.cart-icon-black {
-  background: url("/imgs/cart-black.svg") 0 0 no-repeat transparent;
-  display: block;
-  width: 23px;
-  height: 23px;
-  padding-top: 14px;
-  padding-bottom: 15px;
-  border-radius: 0 0 0 0 !important;
-  -webkit-border-radius: 0 0 0 0 !important;
-  -moz-border-radius: 0 0 0 0 !important; }
 
 @media (max-width: 991px) {
   .navbar-header {
@@ -3634,6 +3646,9 @@ h3 {
 
 .showcase-influencers img {
   max-width: 360px; }
+  @media (max-width: 320px) {
+    .showcase-influencers img {
+      max-width: 260px; } }
 
 .carousel-devisers-container {
   max-width: 900px;
@@ -3938,6 +3953,9 @@ h3 {
   float: left;
   width: 100%;
   margin-bottom: 100px; }
+  @media (max-width: 320px) {
+    .our-devisers-body a {
+      width: 100%; } }
   @media (max-width: 575px) {
     .our-devisers-body a {
       display: block;
@@ -5138,6 +5156,9 @@ discover-filters .filter-wrapper {
   min-height: 250px; }
   .showcase.influencers img {
     max-width: 286px; }
+    @media (max-width: 320px) {
+      .showcase.influencers img {
+        max-width: 240px; } }
 
 .edit-faq-panel-wrapper {
   width: 100%;
@@ -5173,18 +5194,26 @@ discover-filters .filter-wrapper {
 .banner-deviser {
   position: relative;
   background-color: #e9e9e9;
-  min-height: 388px; }
+  min-height: 388px;
+  overflow-x: hidden;
+  margin: auto; }
   @media (max-width: 575px) {
     .banner-deviser {
-      min-height: fit-content;
-      background-color: transparent; } }
+      background-color: transparent;
+      min-height: 250px; } }
   .banner-deviser .cover {
-    width: 100%; }
+    width: 100%;
+    height: max-content;
+    margin: auto; }
     @media (max-width: 575px) {
       .banner-deviser .cover {
         max-height: 180px;
+        position: absolute; } }
+    @media (max-width: 991px) {
+      .banner-deviser .cover {
         width: auto;
-        margin: 0; } }
+        left: 50%;
+        margin-left: -256.203px; } }
 
 @media (max-width: 575px) {
   .avatar-btn-profile {
@@ -5226,13 +5255,18 @@ discover-filters .filter-wrapper {
         height: 155px;
         border-width: 3px;
         margin-top: -108px; }
+        @media (max-width: 991px) {
+          .banner-deviser-content .deviser-profile .avatar img {
+            margin-left: 0; } }
         @media (max-width: 575px) {
           .banner-deviser-content .deviser-profile .avatar img {
             max-height: 100px;
             width: auto;
             margin: auto;
             vertical-align: middle;
-            display: block; } }
+            display: block;
+            left: 50%;
+            margin-left: -50px; } }
     .banner-deviser-content .deviser-profile .deviser-data {
       float: left;
       margin: 0 30px; }
@@ -5390,6 +5424,9 @@ discover-filters .filter-wrapper {
   background-color: #ffffff; }
   .store .content-store {
     padding: 40px 0; }
+    @media (max-width: 991px) {
+      .store .content-store {
+        padding: 0; } }
     .store .content-store .cathegory-wrapper {
       margin: -10px 0 40px; }
       .store .content-store .cathegory-wrapper .cathegory {
@@ -7025,7 +7062,7 @@ span.optional-text.pull-left {
         .product .product-data-wrapper .product-data .row-size .dropdown-menu li {
           width: 100% !important; }
       .product .product-data-wrapper .product-data .row-size .cart-icon {
-        background: url("/imgs/cart-white.svg") 0 4px no-repeat transparent !important;
+        background-position-x: 4px !important;
         display: inline-block;
         padding: 0;
         margin: auto;

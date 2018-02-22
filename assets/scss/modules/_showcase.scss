@@ -99,6 +99,9 @@
 .showcase-influencers{
 	img{
 		 max-width: 360px;
+		 @media (max-width: 320px){
+		 	max-width: 260px;
+		 }
 	}
 }
 .carousel-devisers-container{
