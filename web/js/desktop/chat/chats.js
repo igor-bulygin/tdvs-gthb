@@ -8,9 +8,11 @@
 		vm.changeChatFilter = changeChatFilter;
 		vm.selectChat=selectChat;
 		vm.parseDate=UtilService.parseDate;
+		vm.parseImage = parseImage;
+		vm.submitMsg = submitMsg;
 		vm.loading=true;
 		if (person) {
-			vm.person = {id:person.id, name:angular.copy(person.name)};
+			vm.person = {id:person.id, name:angular.copy(person.name), profile_image : person.profile_image};
 		}
 		if (person_to_chat) {
 			vm.personToChat = {id:person_to_chat.id, name:angular.copy(person_to_chat.name)};
@@ -24,6 +26,7 @@
 		init();
 
 		function init() {
+			vm.loading=true;
 			vm.firstCharge = true;
 			var filtering = false;
 			var paramName = 'filterId=';
@@ -45,7 +48,6 @@
 		}
 
 		function getChats(filtering) {
-			vm.loading=true;
 			function onGetChatsSuccess(data) {
 				vm.chats = angular.copy(data.items); 
 				if (vm.personToChat && (vm.firstCharge || !filtering) && !vm.currentChat) {
@@ -67,10 +69,10 @@
 		}
 
 		function getChat(id) {
-			vm.loading=true;
+			vm.loadingChat=true;
 			function onGetChatSuccess(data) {
 				vm.currentChat = angular.copy(data); 
-				vm.loading=false;
+				vm.loadingChat=false;
 			}
 			if (id) {
 				chatDataService.getChat({id:id}, onGetChatSuccess, UtilService.onError);
@@ -88,7 +90,9 @@
 		function sendMsg() {
 			if (vm.newMsg && vm.newMsg.length>0) {
 				function onSendMsgSuccess(data) {
-					vm.currentChat.messages.push(data.messages[data.messages.length-1]);
+					var addedMsg = data.messages[data.messages.length-1];
+					addedMsg.person_info = { name : vm.person.name, profile_image:vm.person.profile_image };
+					vm.currentChat.messages.push(addedMsg);
 					vm.newMsg = '';
 					getChats(); // update chats after sending new message
 				}
@@ -98,6 +102,7 @@
 
 		function changeChatFilter(filterId) {
 			vm.filterId=filterId;
+			vm.loading = true;
 			getChats(true);
 		}
 
@@ -107,6 +112,17 @@
 				newUrl = newUrl + '?filterId='+vm.filterId;
 			}
 			$window.open(newUrl, "_self");
+		}
+
+		function parseImage(image) {
+			return currentHost() + '/' + image;
+		}
+
+		function submitMsg($event){
+			var keyCode = $event.which || $event.keyCode;
+			if (keyCode === 13) {
+				sendMsg()
+			}
 		}
 	}
 
