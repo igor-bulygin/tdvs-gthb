@@ -10,6 +10,7 @@
 		vm.parseDate=UtilService.parseDate;
 		vm.parseImage = parseImage;
 		vm.submitMsg = submitMsg;
+		vm.activeChat = activeChat;
 		vm.loading=true;
 		if (person) {
 			vm.person = {id:person.id, name:angular.copy(person.name), profile_image : person.profile_image};
@@ -115,7 +116,11 @@
 		}
 
 		function parseImage(image) {
-			return currentHost() + '/' + image;
+			var res= image;
+			if (image.indexOf('http') == -1) {
+				res = currentHost() + image;
+			}
+			return res;
 		}
 
 		function submitMsg($event){
@@ -123,6 +128,13 @@
 			if (keyCode === 13) {
 				sendMsg()
 			}
+		}
+
+		function activeChat(chat){
+			if (chat.id === vm.currentChat.id) {
+				return 'activeChat';
+			}
+			return '';
 		}
 	}
 

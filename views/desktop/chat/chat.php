@@ -34,10 +34,10 @@ $this->registerJs('var chat_id = ' .Json::encode($chatId), yii\web\View::POS_HEA
 							<p class="row" translate="chat.CLICK_MSG"></p>
 						</div>
 						<ul>
-							<li ng-repeat="chat in chatCtrl.chats">
+							<li ng-repeat="chat in chatCtrl.chats" ng-class="chatCtrl.activeChat(chat)">
 								<a ng-click="chatCtrl.selectChat(chat)" class="col-xs-12">
 									<span class="col-xs-12">
-										<img class="img-fluid col-xs-1" ng-src="{{ chatCtrl.parseImage(chat.preview.image)}}">
+										<img class="img-fluid col-xs-2" ng-src="{{ chatCtrl.parseImage(chat.preview.image)}}">
 										<span class="col-xs-9 red-text" ng-bind="chat.preview.title"></span>
 									</span>
 									<span class="col-xs-12" ng-bind="chat.preview.text"></span>
