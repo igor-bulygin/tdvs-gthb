@@ -8807,7 +8807,8 @@ cart-panel .cart-panel-div {
     border-left: 1px solid #bfbfbf; }
     .chat-body #chat-messages:nth-child(2) > div:nth-child(2) > div:nth-child(2) {
       padding: 30px 0;
-      background-color: #e9e9e9; }
+      background-color: #e9e9e9;
+      opacity: 0.5; }
       .chat-body #chat-messages:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) {
         padding: 0 1em 0 2em; }
       .chat-body #chat-messages:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) {
@@ -8816,7 +8817,9 @@ cart-panel .cart-panel-div {
       border-radius: 6px 6px 6px 6px !important;
       -webkit-border-radius: 6px 6px 6px 6px !important;
       -moz-border-radius: 6px 6px 6px 6px !important;
-      padding: 0.5em 0; }
+      padding: 0.55em 0;
+      border: none;
+      line-height: 1.5; }
   .chat-body li {
     border-left: 1px solid #bfbfbf;
     background-color: #e9e9e9; }
