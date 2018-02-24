@@ -237,6 +237,9 @@ html {
 body {
   font-family: "Roboto Condensed", sans-serif; }
 
+.container {
+  overflow: hidden; }
+
 .elements-wrapper {
   background-color: #ffffff;
   min-height: 2000px; }
@@ -8801,17 +8804,31 @@ cart-panel .cart-panel-div {
   border-right: 1px solid #bfbfbf;
   margin-bottom: 0;
   padding-bottom: 0; }
+  .chat-body .chat-tit {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: left; }
+  .chat-body .chat-text {
+    font-size: 15px;
+    font-weight: normal;
+    text-align: left;
+    line-height: 1.1; }
+  .chat-body .chat-time {
+    font-size: 12px; }
   .chat-body div {
     padding: 0; }
   .chat-body #chat-messages {
     border-left: 1px solid #bfbfbf; }
-    .chat-body #chat-messages:nth-child(2) > div:nth-child(2) > div:nth-child(2) {
+    .chat-body #chat-messages .chat-send {
       padding: 30px 0;
       background-color: #e9e9e9;
       opacity: 0.5; }
-      .chat-body #chat-messages:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) {
+      .chat-body #chat-messages .chat-send > div:nth-child(1) {
         padding: 0 1em 0 2em; }
-      .chat-body #chat-messages:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) {
+        .chat-body #chat-messages .chat-send > div:nth-child(1) input {
+          padding-left: 5px;
+          padding-right: 5px; }
+      .chat-body #chat-messages .chat-send > div:nth-child(2) {
         padding: 0 2em 0 1em; }
     .chat-body #chat-messages input {
       border-radius: 6px 6px 6px 6px !important;

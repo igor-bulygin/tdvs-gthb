@@ -6,26 +6,40 @@
     border-right: 1px solid $light_grey;
     margin-bottom: 0;
     padding-bottom: 0;
+    .chat-tit{
+    	font-size: 16px;
+    	font-weight: bold;
+    	text-align: left;
+    }
+    .chat-text{
+    	font-size: 15px;
+    	font-weight: normal;
+    	text-align: left;
+    	line-height: 1.1;
+    }
+    .chat-time{
+    	font-size: 12px;
+    }
 	div {
     	padding: 0;
 	}
 	#chat-messages{
 	    border-left: 1px solid $light_grey;
-	    &:nth-child(2){
-	    	> div:nth-child(2){
-	    		> div:nth-child(2){
-	    			padding: 30px 0;
-	    			background-color: $background_grey;
-	    			opacity: 0.5;
-	    			> div:nth-child(1){
-	    				padding: 0 1em 0 2em;
-	    			}
-	    			> div:nth-child(2){
-	    				padding: 0 2em 0 1em;
-	    			}
-	    		}
-	    	}
-	    }
+		.chat-send{
+			padding: 30px 0;
+			background-color: $background_grey;
+			opacity: 0.5;
+			> div:nth-child(1){
+				padding: 0 1em 0 2em;
+				input{
+					padding-left: 5px;
+					padding-right: 5px;
+				}
+			}
+			> div:nth-child(2){
+				padding: 0 2em 0 1em;
+			}
+		}
 	    input {
 	    	@include border-radius(6px,6px,6px,6px);
 	    	padding: 0.55em 0;

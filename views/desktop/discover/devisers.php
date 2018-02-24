@@ -22,8 +22,8 @@ $this->registerJs("var type = 2", yii\web\View::POS_HEAD, 'person-type-script');
 			</div>
 		</div>
 		<div class="our-devisers-body" style="padding-bottom:100px;">
-            <div class="hidden-sm hidden-md hidden-lg" id="filters-xs-container">
-				<a href="#filters-xs" data-toggle="collapse" class="row"><span translate="discover.FILTER"></span></a>
+            <div class="hidden-sm hidden-md hidden-lg mt-20" id="filters-xs-container">
+				<a href="#filters-xs" data-toggle="collapse" class="row btn btn-red btn-small"><span translate="discover.FILTER"></span></a>
 				<div class="collapse" id="filters-xs">
     				<discover-filters filters="discoverCtrl.filters" searching="discoverCtrl.searching"></discover-filters>
 				</div>

@@ -37,10 +37,14 @@ $this->registerJs('var chat_id = ' .Json::encode($chatId), yii\web\View::POS_HEA
 							<li ng-repeat="chat in chatCtrl.chats" ng-class="chatCtrl.activeChat(chat)">
 								<a ng-click="chatCtrl.selectChat(chat)" class="col-xs-12">
 									<span class="col-xs-12">
-										<img class="img-fluid col-xs-2" ng-src="{{ chatCtrl.parseImage(chat.preview.image)}}">
-										<span class="col-xs-9 red-text" ng-bind="chat.preview.title"></span>
+										<div class="col-sm-2">
+											<img class="avatar-logued-user" ng-src="{{ chatCtrl.parseImage(chat.preview.image)}}">
+										</div>
+										<div class="col-sm-10">
+											<span class="col-xs-12 red-text chat-tit" ng-bind="chat.preview.title"></span>
+											<span class="col-xs-12 chat-text" ng-bind="chat.preview.text"></span>
+										</div>
 									</span>
-									<span class="col-xs-12" ng-bind="chat.preview.text"></span>
 								</a>
 							</li>
 						</ul>
@@ -60,14 +64,14 @@ $this->registerJs('var chat_id = ' .Json::encode($chatId), yii\web\View::POS_HEA
 							</a>
 						</div>
 						<div class="col-sm-10">
-							<span class="col-xs-12 red-text" ng-bind="msg.person_info.name"></span>
-							<span class="col-xs-12" ng-bind="msg.text"></span>
-							<span class="col-xs-8 text-right">
+							<span class="col-xs-12 red-text chat-tit" ng-bind="msg.person_info.name"></span>
+							<span class="col-xs-12 chat-text" ng-bind="msg.text"></span>
+							<span class="col-xs-8 text-right chat-time">
 								<span ng-cloak>{{chatCtrl.parseDate(msg.date.sec*1000) | date:'dd/MM/yy hh:mm'}}</span>
 							</span>
 						</div>
 					</div>
-					<div class="col-xs-12">
+					<div class="col-xs-12 chat-send">
 						<div class="col-xs-8">
 							<input class="col-xs-12" type="text" ng-model="chatCtrl.newMsg" on-keypress="chatCtrl.submitMsg($event)">
 						</div>
