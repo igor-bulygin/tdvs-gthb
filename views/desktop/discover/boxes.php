@@ -21,7 +21,13 @@ Yii::$app->opengraph->title = $this->title;
 			</div>
 		</div>
 		<div class="our-devisers-body" style="padding-bottom:100px;">
-			<div class="col-xs-12 col-sm-4 col-md-2">
+			<div class="hidden-sm hidden-md hidden-lg" id="filters-xs-container">
+				<a href="#filters-xs" data-toggle="collapse" class="row"><span translate="discover.FILTER"></span></a>
+				<div class="collapse" id="filters-xs">
+					<explore-boxes-filters filters="exploreBoxesCtrl.filters" searching="exploreBoxesCtrl.searching"></explore-boxes-filters>
+				</div>
+			</div>
+			<div class="hidden-xs col-sm-4 col-md-2">
 				<explore-boxes-filters filters="exploreBoxesCtrl.filters" searching="exploreBoxesCtrl.searching"></explore-boxes-filters>
 			</div>
 			<div class="col-xs-12 col-sm-8 col-md-10">

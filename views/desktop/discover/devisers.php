@@ -22,10 +22,16 @@ $this->registerJs("var type = 2", yii\web\View::POS_HEAD, 'person-type-script');
 			</div>
 		</div>
 		<div class="our-devisers-body" style="padding-bottom:100px;">
-			<div class="col-xs-12 col-sm-4 col-md-2">
+            <div class="hidden-sm hidden-md hidden-lg" id="filters-xs-container">
+				<a href="#filters-xs" data-toggle="collapse" class="row"><span translate="discover.FILTER"></span></a>
+				<div class="collapse" id="filters-xs">
+    				<discover-filters filters="discoverCtrl.filters" searching="discoverCtrl.searching"></discover-filters>
+				</div>
+			</div>
+			<div class="hidden-xs col-sm-4 col-md-2">
 				<discover-filters filters="discoverCtrl.filters" searching="discoverCtrl.searching"></discover-filters>
 			</div>
-			<div class="col-sx-12 col-sm-8 col-md-10">
+			<div class="col-xs-12 col-sm-8 col-md-10">
 				<div class="found-header">
 					<p ng-if="discoverCtrl.search_key && (!discoverCtrl.searching || discoverCtrl.results.items.length > 0)" ng-cloak><span translate="discover.WE_FOUND_X_RESULTS_WITH_KEY" translate-values="{ counter: discoverCtrl.results_found, keys: discoverCtrl.search_key}"></span></p>
 					<p ng-if="!discoverCtrl.search_key && (!discoverCtrl.searching || discoverCtrl.results.items.length > 0)" ng-cloak><span translate="discover.WE_FOUND_X_RESULTS" translate-values="{ counter: discoverCtrl.results_found}"></span></p>
