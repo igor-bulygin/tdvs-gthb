@@ -3648,10 +3648,22 @@ h3 {
   padding: 10px; }
 
 .showcase-influencers img {
-  max-width: 360px; }
+  max-width: 360px;
+  /*comprobar esto*/ }
   @media (max-width: 320px) {
     .showcase-influencers img {
       max-width: 260px; } }
+
+.showcase.influencers {
+  min-height: 250px; }
+  .showcase.influencers img {
+    max-width: 286px; }
+    @media (max-width: 320px) {
+      .showcase.influencers img {
+        max-width: 260px; } }
+    @media (max-width: 575px) {
+      .showcase.influencers img {
+        max-width: 575px; } }
 
 .carousel-devisers-container {
   max-width: 900px;
@@ -3956,14 +3968,10 @@ h3 {
   float: left;
   width: 100%;
   margin-bottom: 100px; }
-  @media (max-width: 320px) {
-    .our-devisers-body a {
-      width: 100%; } }
   @media (max-width: 575px) {
     .our-devisers-body a {
       display: block;
-      margin: auto;
-      width: max-content; } }
+      margin: auto; } }
   .our-devisers-body hr {
     border-top: 1px solid #939393; }
   .our-devisers-body .found-header {
@@ -5154,14 +5162,6 @@ discover-filters .filter-wrapper {
     position: relative;
     text-align: center;
     margin: 35px 0 -20px; }
-
-.showcase.influencers {
-  min-height: 250px; }
-  .showcase.influencers img {
-    max-width: 286px; }
-    @media (max-width: 320px) {
-      .showcase.influencers img {
-        max-width: 240px; } }
 
 .edit-faq-panel-wrapper {
   width: 100%;
@@ -8817,12 +8817,15 @@ cart-panel .cart-panel-div {
     font-size: 12px; }
   .chat-body div {
     padding: 0; }
+  .chat-body #chat-chats .nav.nav-tabs li {
+    margin-bottom: 0; }
+  .chat-body .tab-content ul {
+    margin-bottom: 0; }
   .chat-body #chat-messages {
     border-left: 1px solid #bfbfbf; }
     .chat-body #chat-messages .chat-send {
       padding: 30px 0;
-      background-color: #e9e9e9;
-      opacity: 0.5; }
+      background-color: rgba(233, 233, 233, 0.5); }
       .chat-body #chat-messages .chat-send > div:nth-child(1) {
         padding: 0 1em 0 2em; }
         .chat-body #chat-messages .chat-send > div:nth-child(1) input {
@@ -8839,7 +8842,7 @@ cart-panel .cart-panel-div {
       line-height: 1.5; }
   .chat-body li {
     border-left: 1px solid #bfbfbf;
-    background-color: #e9e9e9; }
+    background-color: rgba(233, 233, 233, 0.5); }
     .chat-body li:first-child {
       border-left: none; }
     .chat-body li a {
@@ -8866,6 +8869,8 @@ cart-panel .cart-panel-div {
     text-transform: lowercase;
     text-align: center;
     letter-spacing: 0.5px; }
+  .chat-body .activeChat a {
+    background-color: rgba(233, 233, 233, 0.5); }
 
 .panel-billing .panel-heading {
   background-color: transparent !important; }

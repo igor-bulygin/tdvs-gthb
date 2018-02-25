@@ -245,17 +245,6 @@
 		margin: 35px 0 -20px;
 	}
 }
-.showcase{
-	&.influencers{
-		    min-height: 250px;
-			img{
-				max-width: 286px;
-                @media (max-width: 320px){
-                    max-width: 240px;
-                }
-			}
-	}
-}
 .edit-faq-panel-wrapper{
 	width: 100%;
 	float: left;
