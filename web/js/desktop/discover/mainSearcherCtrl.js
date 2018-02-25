@@ -3,12 +3,13 @@
 
 	function controller() {
 		var vm = this;
-		vm.searchTypes = [{name:'PRODUCTS', id:1}, {name:'BOXES', id:2}, {name:'DEVISERS', id:3},{name:'INFLUENCERS', id:4} ]
+		vm.searchTypes = [{name:'PRODUCTS', id:1}, {name:'BOXES', id:2}, {name:'DEVISERS', id:3, type: 2},{name:'INFLUENCERS', id:4, type:3} ]
 		vm.currentSearchType = vm.searchTypes[0];
 		vm.selectSearchType = selectSearchType;
 		vm.searchTypeClass = searchTypeClass; 
 		vm.hideHeader = true;
 		vm.searchParam = searchParam;
+		vm.searchdata = {key:vm.searchParam, hideHeader: vm.hideHeader, personType : vm.currentSearchType.type};
 		init();
 
 		function init() {
@@ -16,6 +17,9 @@
 
 		function selectSearchType(searchType) {
 			vm.currentSearchType = searchType;
+			if (searchType.type) {
+				vm.searchdata.personType = searchType.type;
+			}
 		}
 
 		function searchTypeClass(searchTypeId) {

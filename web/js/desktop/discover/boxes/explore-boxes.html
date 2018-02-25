@@ -1,12 +1,12 @@
 <div class="our-devisers-wrapper">
 	<div class="container">
-		<div class="our-boxes-header" ng-if="!exploreBoxesCtrl.hideHeader">
+		<div class="our-boxes-header" ng-if="!exploreBoxesCtrl.searchdata.hideHeader">
 			<h3 translate="discover.EXPLORE_BOXES"></h3>
 			<h5 class="text-center" translate="discover.boxes.DISCOVER_LATEST_TRENDS"></h5>
 			<div class="row">
 				<form name="exploreBoxesCtrl.form">
 					<div class="devisers-searcher">
-						<input type="text" class="form-control white-rounded-input" name="key" ng-model="exploreBoxesCtrl.key" on-press-enter="exploreBoxesCtrl.search()" placeholder="{{ 'discover.SEARCH_KEYWORD' | translate }}" ng-cloak>
+						<input type="text" class="form-control white-rounded-input" name="key" ng-model="exploreBoxesCtrl.searchdata.key" on-press-enter="exploreBoxesCtrl.search()" placeholder="{{ 'discover.SEARCH_KEYWORD' | translate }}" ng-cloak>
 						<span class="ion-search" ng-click="exploreBoxesCtrl.search()"></span>
 					</div>
 				</form>

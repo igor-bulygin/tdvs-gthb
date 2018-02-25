@@ -13,6 +13,9 @@
 		init();
 
 		function init() {
+			if (!vm.searchdata) {
+				vm.searchdata = { hideHeader:false, key: ''};
+			}
 		}
 
 		function searchMore() {
@@ -21,7 +24,7 @@
 		}
 
 		function search() {
-			if (vm.search_key != vm.key) {
+			if (vm.search_key != vm.searchdata.key) {
 				vm.results={items: [] };
 				vm.page=1;
 			}
@@ -31,8 +34,8 @@
 				limit: vm.maxResults,
 				page: vm.page
 			}
-			if(vm.key)
-				params = Object.assign(params, {q: vm.key});
+			if(vm.searchdata.key)
+				params = Object.assign(params, {q: vm.searchdata.key});
 			
 			Object.keys(vm.filters).map(function(filter_type) {
 				var new_filter = []
@@ -46,7 +49,7 @@
 
 			function onGetBoxesSuccess(data) {
 				vm.results_found=data.meta.total_count;
-				vm.search_key = angular.copy(vm.key);
+				vm.search_key = angular.copy(vm.searchdata.key);
 				vm.results.items=vm.results.items.concat(angular.copy(data.items));
 				vm.searching= false;
 			}
@@ -73,8 +76,7 @@
 		controller: controller,
 		controllerAs: 'exploreBoxesCtrl',
 		bindings: {
-			hideHeader:'<?',
-			key:'<?'
+			searchdata: '<?'
 		}
 	}
 
