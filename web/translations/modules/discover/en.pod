@@ -17,6 +17,10 @@
 		"PRICE_LOW_TO_HIGH": "Price low to high",
 		"PRICE_HIGH_TO_LOW": "Price high to low",
 		"SEE_MORE": "See more",
+		"PRODUCTS": "PRODUCTS",
+		"DEVISERS": "DEVISERS",
+		"INFLUENCERS": "INFLUENCERS",
+		"BOXES_NAME": "BOXES",
 		"boxes": {
 			"DISCOVER_LATEST_TRENDS": "It's time to discover the latest trends",
 			"NO_BOXES_FOUND": "No boxes found with the specified search criteria."
