@@ -46,10 +46,10 @@ $this->params['person_menu_store_categories'] = $categories;
 <div class="store">
 	<div class="container">
 		<div class="row">
-			<div class="col-md-2">
+			<div class="col-xs-12 col-sm-2">
 				<?= PersonMenu::widget() ?>
 			</div>
-			<div class="col-md-10">
+			<div class="col-xs-12 col-sm-10">
 				<div class="content-store">
 					<?php if ($person->isPersonEditable()) { ?>
 						<div><a href="<?= $person->getStoreEditLink()?>" class="red-link-btn"><span translate="person.store.EDIT_DELETE_WORKS"></span></a></div>

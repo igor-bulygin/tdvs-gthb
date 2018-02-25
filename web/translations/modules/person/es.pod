@@ -159,6 +159,7 @@
 		},
 		"header": {
 			"EDIT_HEADER": "Editar cabecera",
+			"CHAT": "Chat",
 			"ADD_WORK": "Añadir trabajo",
 			"ADD_COVER_PHOTO": "Añadir foto de portada",
 			"CROP_PHOTO": "Cortar foto",

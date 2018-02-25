@@ -264,12 +264,7 @@ class OrderPack extends EmbedModel
 		$order = $this->getParentObject();
 		$deviser = $this->getDeviser();
 
-		$deviser_info = [
-			"slug" => $deviser->slug,
-			"name" => $deviser->personalInfoMapping->getVisibleName(),
-			"photo" => $deviser->getProfileImage(),
-			'url' => $deviser->getMainLink(),
-		];
+		$deviser_info = $deviser->getPreviewSerialized();
 
 		$shippingSetting = $deviser->getShippingSettingByCountry($order->getShippingAddress()->country);
 

@@ -42,6 +42,7 @@
 									<label class="col-md-12 adress-text" ng-bind="order.billing_address.city + ', ' + order.billing_address.country"></label>
 									<label class="col-md-12 adress-text" ng-bind="'+' + order.billing_address.phone_number_prefix + ' ' + order.billing_address.phone_number"></label>
 								</div>
+								<a class="btn btn-black-on-white" ng-href="{{order.person_info.chat_link}}" translate="settings.orders.SEND_A_MESSAGE"></a>
 							</div>
 							<div class="col-md-6 row">
 								<div class="col-md-12 comision-line">

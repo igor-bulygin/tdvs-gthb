@@ -20,7 +20,7 @@ app\components\assets\PublicHeader2Asset::register($this);
 	<nav class="navbar navbar-default" id="main_header" ng-controller="publicHeaderCtrl as publicHeaderCtrl">
 		<div class="container">
 			<div class="row align-items-center">
-			<div class="col-xs-4 col-sm-2 col-md-2 col-lg-1-5">
+			<div class="col-xs-4 col-sm-2 col-md-2 col-lg-2">
 				<a class="navbar-brand" href="<?= Url::to(["public/index"])?>">
 					<svg version="1.1" id="todevise_logo" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
 					 viewBox="0 0 39.9 12.2" style="enable-background:new 0 0 39.9 12.2;" xml:space="preserve">
@@ -82,7 +82,7 @@ app\components\assets\PublicHeader2Asset::register($this);
 					</svg>
 				</a>
 			</div>
-			<div class="col-xs-8 col-sm-10 col-md-7-5 col-lg-8-5">
+			<div class="col-xs-8 col-sm-10 col-md-7 col-lg-7-5">
 				<form class="navbar-form navbar-left navbar-searcher mobile" action="<?=Url::to(["/works"])?>" method="get">
 					<div class="input-group searcher-header">
 						<input type="text" name="q" value="<?=$q?>" class="form-control" translate-attr="{placeholder: 'global.SEARCH'}">
@@ -104,7 +104,7 @@ app\components\assets\PublicHeader2Asset::register($this);
 					</div>
 				</form>
 			</div>
-			<div class="hidden-xs hidden-sm col-md-2-5 col-lg-2">
+			<div class="hidden-xs hidden-sm col-md-3 col-lg-2-5">
 				<ul class="nav navbar-nav navbar-right cart-login-wrapper">
 					<?php if (Yii::$app->user->isGuest) { ?>
 						<li class="log">
@@ -143,9 +143,14 @@ app\components\assets\PublicHeader2Asset::register($this);
 							</div>
 						</li>
 					<?php } ?>
+					<li class="chat-item">
+						<a href="<?=Url::to(['/messages'])?>">
+							<span class="badge badge-notify bg-red" ng-if="publicHeaderCtrl.msgQuantity>0" ng-cloak ng-bind="publicHeaderCtrl.msgQuantity" style="margin-left: 10px;z-index: 999999;position: absolute;top:7px;"></span>
+							<span class="icons-hover chat-icon"></span>
+						</a>
+					</li>
 					<li class="cart-item">
 						<a href="<?=Url::to(['/cart'])?>">
-							<!--i class="ion-ios-cart active"></i-->
 							<span class="badge badge-notify bg-red" ng-if="publicHeaderCtrl.cartQuantity>0" ng-cloak ng-bind="publicHeaderCtrl.cartQuantity" style="margin-left: 10px;z-index: 999999;position: absolute;top:7px;"></span>
 							<span class="icons-hover cart-icon"></span>
 						</a>
@@ -177,6 +182,7 @@ app\components\assets\PublicHeader2Asset::register($this);
 							<a href="<?=Url::to(['/discover/devisers'])?>"><img src="/imgs/discover-red.svg" /></a>
 							<a href="<?=Url::to(['/discover/influencers'])?>"><img src="/imgs/estrella-red.svg" /></a>
 							<a href="<?=Url::to('/login')?>"><img src="/imgs/login-red.svg" /></a>
+							<a href="<?=Url::to('/messages')?>"><img src="/imgs/chat-red.svg" /></a>
 							<a href="<?=Url::to(['/cart'])?>"><img src="/imgs/cart-red.svg" /></a>
 						</div>
 					</li>

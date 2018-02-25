@@ -134,5 +134,11 @@
 		"STOCK_PRICE_SINGLE": "Precio & Stock único",
 		"COMMENTS": "Comentarios",
 		"SENDED_EMAIL": "Email enviado. Revisa tu bandeja de entrada. (prueba)"
-	}
+	},
+	"chat": {
+			"NO_CHATS": "No available chats",
+			"CLICK_MSG": "Go to any user’s profile and click the MESSAGE button to initiate a conversation",
+			"SELECT_CHAT": "Please select a chat on left",
+			"SEND": "SEND"
+		}
 }

@@ -166,7 +166,8 @@
                     }
                 }
                 .cart-icon{  
-                    background: url('/imgs/cart-white.svg') 0 4px no-repeat transparent !important;//00
+                    @extend %cart-white-icon;//background: url('/imgs/cart-white.svg') 0 4px no-repeat transparent !important;//00
+                    background-position-x: 4px !important;
                     display: inline-block;
                     padding: 0;
                     margin: auto;

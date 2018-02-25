@@ -16,7 +16,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 	<div class="container pad-about" ng-if="!personHeaderCtrl.editingHeader" ng-cloak>
 		<img class="cover" ng-src="{{personHeaderCtrl.person.header_image}}">
 		<div class="banner-deviser-content">
-			<div class="grey-overlay hidden-xs hidden-sm"></div>
+			<div class="grey-overlay hidden-xs"></div>
 			<div class="container">
 				<div class="deviser-profile">
 					<div class="avatar-btn-profile">
@@ -29,16 +29,22 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 							</div>
 							<img class="cover" ng-src="{{personHeaderCtrl.person.profile_image}}">
 						</div>
-						<div class="type-of-user hidden-xs hidden-sm" ng-if="personHeaderCtrl.person.type.indexOf(2)>=0" ng-cloak>
+						<div class="type-of-user hidden-xs" ng-if="personHeaderCtrl.person.type.indexOf(2)>=0" ng-cloak>
 							<span translate="global.DEVISER"></span>
 						</div>
-						<div class="type-of-user hidden-xs hidden-sm" ng-if="personHeaderCtrl.person.type.indexOf(3)>=0" ng-cloak>
+						<div class="type-of-user hidden-xs" ng-if="personHeaderCtrl.person.type.indexOf(3)>=0" ng-cloak>
 							<span translate="global.INFLUENCER"></span>
 						</div>
-						<?php if ($person->isPersonEditable() && $person->isPublic()) {?>
+						<?php if (!$person->isConnectedUser()) { ?>
 							<div class="edit-profile-btn hidden-xs hidden-sm">
-								<button class="btn btn-default all-caps btn-black-on-white btn-header ng-class:{'button-error': personHeaderCtrl.required['header_info']}" ng-click="personHeaderCtrl.editHeader()"><span translate="person.header.EDIT_HEADER"></span></button>
+								<a class="btn btn-default all-caps btn-black-on-white btn-header" href="<?= $person->getChatLink()?>"><span translate="person.header.CHAT"></span></a>
 							</div>
+						<?php } else { ?>
+							<?php if ($person->isPersonEditable() && $person->isPublic()) {?>
+								<div class="edit-profile-btn hidden-xs hidden-sm">
+									<button class="btn btn-default all-caps btn-black-on-white btn-header ng-class:{'button-error': personHeaderCtrl.required['header_info']}" ng-click="personHeaderCtrl.editHeader()"><span translate="person.header.EDIT_HEADER"></span></button>
+								</div>
+							<?php } ?>
 						<?php } ?>
 						<div class="deviser-data">
 							<div class="name">
@@ -47,7 +53,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 							<div class="location">
 								{{personHeaderCtrl.city}}
 							</div>
-							<div class="description hidden-xs hidden-sm">
+							<div class="description hidden-xs">
 								{{personHeaderCtrl.person.text_short_description}}
 							</div>
 						</div>
@@ -65,7 +71,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 		<span class="req-1" ng-if="personHeaderCtrl.required['header'] && !personHeaderCtrl.new_header" ng-cloak><span translate="global.REQUIRED"></span></span>
 		<img class="cover" ngf-thumbnail="personHeaderCtrl.header || '/imgs/default-cover.jpg'" style="height: 388.5px;">
 		<div class="banner-deviser-content banner-deviser-edit-header-content">
-			<div class="grey-overlay hidden-xs hidden-sm"></div>
+			<div class="grey-overlay hidden-xs"></div>
 			<div class="container deviser-header-edit-wrapper">
 				<div class="deviser-profile">
 					<div class="avatar-buttons-wrapper">

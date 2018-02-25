@@ -91,6 +91,9 @@
             }
             img{
                 height: 25px;
+                @media(max-width:575px){
+                    height: 20px;
+                }
             }
             div{
                 float: right;
@@ -599,25 +602,38 @@
     width: 110px;
 }
 .cart-icon{  
-    background: url('/imgs/cart-white.svg') 0 0 no-repeat transparent;
-    display: block;
-    width: 23px;
-    height: 23px;
-    padding-top: 14px;
-    padding-bottom: 15px;
-    @include border-radius(0,0,0,0);
+    @extend %cart-white-icon;//background: url('/imgs/cart-white.svg') 0 0 no-repeat transparent;
+    @extend %header-icon;
+    //display: block;
+    //width: 23px;
+    //height: 23px;
+    //padding-top: 14px;
+    //padding-bottom: 15px;
+    //@include border-radius(0,0,0,0);
     &:hover{
-        background: url('/imgs/cart-red.svg') 0 0 no-repeat transparent;
+        @extend %cart-red-icon;//background: url('/imgs/cart-red.svg') 0 0 no-repeat transparent;
     }
 }
 .cart-icon-black{  
-    background: url('/imgs/cart-black.svg') 0 0 no-repeat transparent;
-    display: block;
-    width: 23px;
-    height: 23px;
-    padding-top: 14px;
-    padding-bottom: 15px;
-    @include border-radius(0,0,0,0);
+    @extend %cart-black-icon;//background: url('/imgs/cart-black.svg') 0 0 no-repeat transparent;
+    @extend %header-icon;
+    //display: block;
+    //width: 23px;
+    //height: 23px;
+    //padding-top: 14px;
+    //padding-bottom: 15px;
+    //@include border-radius(0,0,0,0);
+}
+.chat-icon{  
+    @extend %chat-white-icon;
+    @extend %header-icon;
+    &:hover{
+        @extend %chat-red-icon;
+    }
+}
+.chat-icon-black{  
+    @extend %chat-black-icon;
+    @extend %header-icon;
 }
 .navbar-header {
     @media(max-width: 991px){

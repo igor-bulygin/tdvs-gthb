@@ -1,0 +1,85 @@
+// ==========================================================================
+// Chat
+// ==========================================================================
+.chat-body {
+	border-left: 1px solid $light_grey;
+    border-right: 1px solid $light_grey;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    .chat-tit{
+    	font-size: 16px;
+    	font-weight: bold;
+    	text-align: left;
+    }
+    .chat-text{
+    	font-size: 15px;
+    	font-weight: normal;
+    	text-align: left;
+    	line-height: 1.1;
+    }
+    .chat-time{
+    	font-size: 12px;
+    }
+	div {
+    	padding: 0;
+	}
+	#chat-messages{
+	    border-left: 1px solid $light_grey;
+		.chat-send{
+			padding: 30px 0;
+			background-color: $background_grey;
+			opacity: 0.5;
+			> div:nth-child(1){
+				padding: 0 1em 0 2em;
+				input{
+					padding-left: 5px;
+					padding-right: 5px;
+				}
+			}
+			> div:nth-child(2){
+				padding: 0 2em 0 1em;
+			}
+		}
+	    input {
+	    	@include border-radius(6px,6px,6px,6px);
+	    	padding: 0.55em 0;
+	    	border: none;
+    		line-height: 1.5;
+	    }
+	}
+	li {
+		border-left: 1px solid $light_grey;
+		background-color: $background_grey;
+		&:first-child{
+			border-left: none;
+		}
+		a {
+			padding: 1em 0 !important;
+    		color: $black;
+			font-weight: bold;
+			font-family: $font-family--regular;
+			font-size: 14px;
+			text-transform: lowercase;
+    		text-align: center;
+			letter-spacing: 0.5px;
+		}
+		&.active{
+			background-color: transparent;
+			a {
+				border: none;
+				border-radius: inherit;
+			}
+		}
+	}
+	.chat-header{
+		border-bottom: 1px solid $light_grey;
+		padding: 1em 0 !important;
+		color: $black;
+		font-weight: bold;
+		font-family: $font-family--regular;
+		font-size: 14px;
+		text-transform: lowercase;
+		text-align: center;
+		letter-spacing: 0.5px;
+	}
+}

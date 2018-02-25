@@ -1,16 +1,31 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="21px" height="21px" viewBox="0 0 21 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
-    <title></title>
-    <desc>Created with Sketch.</desc>
-    <defs></defs>
-    <g id="Home-nueva" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" font-weight="400" font-family="Ionicons" font-size="26">
-        <g id="TODEVISE" transform="translate(-293.000000, -1579.000000)" stroke="#1C1919" fill="#FFFFFF">
-            <g id="save-box-copy-3" transform="translate(273.000000, 1571.000000)">
-                <text id="">
-                    <tspan x="20" y="28"></tspan>
-                </text>
-            </g>
-        </g>
-    </g>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 22.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+	<!ENTITY ns_extend "http://ns.adobe.com/Extensibility/1.0/">
+	<!ENTITY ns_ai "http://ns.adobe.com/AdobeIllustrator/10.0/">
+	<!ENTITY ns_graphs "http://ns.adobe.com/Graphs/1.0/">
+	<!ENTITY ns_vars "http://ns.adobe.com/Variables/1.0/">
+	<!ENTITY ns_imrep "http://ns.adobe.com/ImageReplacement/1.0/">
+	<!ENTITY ns_sfw "http://ns.adobe.com/SaveForWeb/1.0/">
+	<!ENTITY ns_custom "http://ns.adobe.com/GenericCustomNamespace/1.0/">
+	<!ENTITY ns_adobe_xpath "http://ns.adobe.com/XPath/1.0/">
+]>
+<svg version="1.1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 30 28.1"
+	 enable-background="new 0 0 30 28.1" xml:space="preserve">
+<metadata>
+	<sfw  xmlns="&ns_sfw;">
+		<slices></slices>
+		<sliceSourceBounds  bottomLeftOrigin="true" height="51" width="54" x="49" y="-101.4"></sliceSourceBounds>
+	</sfw>
+</metadata>
+<g id="Capa_2" display="none">
+	<polygon display="inline" fill-rule="evenodd" clip-rule="evenodd" fill="#C4223B" points="15,-11.7 22.5,6 41.1,8.2 27.6,20.6 
+		30.8,38.7 15,29.2 -0.8,38.7 2.4,20.6 -11.1,8.2 7.5,6 	"/>
+</g>
+<g id="Capa_3">
+	
+		<polygon fill-rule="evenodd" clip-rule="evenodd" fill="#C4223B" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+		15,0.5 19.1,10 29.5,11.2 22,17.8 23.8,27.6 15,22.5 6.2,27.6 8,17.8 0.5,11.2 10.9,10 	"/>
+</g>
 </svg>

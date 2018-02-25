@@ -28,6 +28,7 @@ class ApiAsset extends AssetBundle {
 		'js/api/storyDataService.js',
 		'js/api/newsletterDataService.js',
 		'js/api/bannerDataService.js',
+		'js/api/chatDataService.js'
 	];
 	public $depends = [
 		'app\assets\libs\angularAsset',
