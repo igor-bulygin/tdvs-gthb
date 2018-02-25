@@ -11,6 +11,7 @@
 		vm.parseImage = parseImage;
 		vm.submitMsg = submitMsg;
 		vm.activeChat = activeChat;
+		vm.msgOwner = msgOwner;
 		vm.loading=true;
 		if (person) {
 			vm.person = {id:person.id, name:angular.copy(person.name), profile_image : person.profile_image};
@@ -131,8 +132,15 @@
 		}
 
 		function activeChat(chat){
-			if (chat.id === vm.currentChat.id) {
+			if (vm.currentChat && chat.id === vm.currentChat.id) {
 				return 'activeChat';
+			}
+			return '';
+		}
+
+		function msgOwner(msg){
+			if (msg.person_info.id === vm.person.id) {
+				return 'msgOwner';
 			}
 			return '';
 		}
