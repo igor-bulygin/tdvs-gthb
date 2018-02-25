@@ -65,7 +65,7 @@ $this->registerJs('var chat_id = ' .Json::encode($chatId), yii\web\View::POS_HEA
 								</a>
 							</div>
 							<div class="col-sm-10">
-								<span class="col-xs-12 red-text chat-tit" ng-bind="msg.person_info.name"></span>
+								<span class="col-xs-12 red-text chat-tit" ng-bind="msg.person_info.name" ng-if="msg.showOwner"></span>
 								<span class="col-xs-12 chat-text" ng-bind="msg.text"></span>
 								<span class="col-xs-8 text-right chat-time">
 									<span ng-cloak>{{chatCtrl.parseDate(msg.date.sec*1000) | date:'dd/MM/yy hh:mm'}}</span>

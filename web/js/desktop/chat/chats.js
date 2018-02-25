@@ -74,6 +74,16 @@
 			vm.loadingChat=true;
 			function onGetChatSuccess(data) {
 				vm.currentChat = angular.copy(data); 
+				var lastOwner;
+				angular.forEach(vm.currentChat.messages, function (msg) {					
+					if (lastOwner && lastOwner ===  msg.person_id) {
+							msg.showOwner = false;
+					}
+					else {
+							lastOwner = msg.person_id;
+							msg.showOwner = true;
+					}
+				});
 				vm.loadingChat=false;
 			}
 			if (id) {
@@ -139,7 +149,7 @@
 		}
 
 		function msgOwner(msg){
-			if (msg.person_info.id === vm.person.id) {
+			if (msg.person_id === vm.person.id) {
 				return 'msgOwner';
 			}
 			return '';
