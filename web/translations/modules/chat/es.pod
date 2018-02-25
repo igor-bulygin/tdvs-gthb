@@ -3,6 +3,7 @@
 			"NO_CHATS": "No available chats",
 			"CLICK_MSG": "Go to any user’s profile and click the MESSAGE button to initiate a conversation",
 			"SELECT_CHAT": "Please select a chat on left",
-			"SEND": "SEND"
+			"SEND": "Enviar",
+			"CHAT_WITH": "Chat con {{ personToChat }}"
 		}
 }

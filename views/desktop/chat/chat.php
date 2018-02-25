@@ -55,7 +55,7 @@ $this->registerJs('var chat_id = ' .Json::encode($chatId), yii\web\View::POS_HEA
 				<div ng-if="!chatCtrl.currentChat" class="text-center" style="padding:50px;">
 					<span translate="chat.SELECT_CHAT"></span>
 				</div>
-				<div class="chat-header">chat</div>
+				<div class="chat-header" translate="chat.CHAT_WITH" translate-values="{ personToChat: chatCtrl.personToChat.name }"></div>
 				<div ng-if="chatCtrl.currentChat" >
 					<div class="col-xs-12" ng-repeat="msg in chatCtrl.currentChat.messages | orderBy: (chatCtrl.parseDate(msg.date.sec*1000))">
 						<div ng-class="chatCtrl.msgOwner(msg)">
