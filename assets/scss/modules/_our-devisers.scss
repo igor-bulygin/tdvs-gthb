@@ -201,12 +201,13 @@
 	margin-bottom: 100px;
 	a{
 		@media (max-width: 320px){
-			width: 100%;
+			//width: 100%;
 		}
 		@media (max-width: 575px){
 			display: block;
 			margin: auto;
-			width: max-content;
+			//width: max-content;
+			//width: 240px;
 		}
 	}
 	hr{
