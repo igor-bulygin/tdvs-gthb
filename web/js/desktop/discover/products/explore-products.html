@@ -1,0 +1,26 @@
+<div class="results-wrapper">
+	<div class="container store">
+		<div>
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<explore-products-filters searching="exploreProductsCtrl.searching" results="exploreProductsCtrl.results" limit="exploreProductsCtrl.limit" ></explore-products-filters>
+				<div>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="exploreProductsCtrl.results.items.length === 0 && !exploreProductsCtrl.searching" ng-cloak>
+						<p class="text-center" translate="discover.NO_PRODUCTS_FOUND"></p>
+					</div>
+					<div class="col-md-10">
+						<explore-products-results ng-if="exploreProductsCtrl.results.items.length > 0" results="exploreProductsCtrl.results"  limit="exploreProductsCtrl.limit"></explore-products-results>
+					</div>
+					<div class="mt-20 tdvs-loading"  ng-if="exploreProductsCtrl.searching && exploreProductsCtrl.results.items.length == 0" ng-cloak>
+						<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+					</div>
+					<div class="text-center col-md-12 mt-30" style="padding-bottom:100px;" ng-if="exploreProductsCtrl.results.counter > exploreProductsCtrl.results.items.length" ng-cloak >
+						<button class="btn btn-small btn-black-line" ng-click="exploreProductsCtrl.searchMore()" ng-disabled="exploreProductsCtrl.searching">
+							<span translate="discover.SEE_MORE" ng-if="!exploreProductsCtrl.searching"></span>
+							<i class="fa fa-spinner fa-pulse fa-3x fa-fw small" ng-if="exploreProductsCtrl.searching"></i>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

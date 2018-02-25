@@ -68,8 +68,16 @@
 
 	}
 
+	var component = {
+		templateUrl: currentHost() + '/js/desktop/discover/boxes/explore-boxes.html',
+		controller: controller,
+		controllerAs: 'exploreBoxesCtrl',
+		bindings: {
+		}
+	}
+
 	angular
 		.module('discover')
-		.controller('exploreBoxesCtrl', controller);
+		.component('exploreBoxes', component);
 
 }())

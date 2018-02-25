@@ -27,7 +27,7 @@
 				vm.page=1;
 			}
 			var params = {
-				type: type,
+				type: vm.personType,
 				rand: true,
 				limit: vm.maxResults,
 				page: vm.page
@@ -67,8 +67,19 @@
 
 	}
 
+	var component = {
+		templateUrl: currentHost() + '/js/desktop/discover/person/explore-person.html',
+		controller: controller,
+		controllerAs: 'discoverCtrl',
+		bindings: {
+			personType: '<'
+		}
+	}
+
 	angular
-	.module('discover')
-	.controller('discoverCtrl', controller);
+		.module('discover')
+		.component('explorePerson', component);
+
+	
 
 }());

@@ -16,10 +16,20 @@
 		$scope.$on("resetPage", function(evt){ 
 				vm.page=1;
 		}, true);
-}
+	}
 
-angular
-.module('discover')
-.controller('exploreProductsCtrl', controller);
+	var component = {
+		templateUrl: currentHost() + '/js/desktop/discover/products/explore-products.html',
+		controller: controller,
+		controllerAs: 'exploreProductsCtrl',
+		bindings: {
+			personType: '<'
+		}
+	}
+
+	angular
+		.module('discover')
+		.component('exploreProducts', component);
+
 
 }())
