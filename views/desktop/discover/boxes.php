@@ -6,4 +6,4 @@ $this->title = Yii::t('app/public','EXPLORE_BOXES');
 Yii::$app->opengraph->title = $this->title;
 
 ?>
-<explore-boxes showHeader="true"></explore-boxes>
+<explore-boxes></explore-boxes>

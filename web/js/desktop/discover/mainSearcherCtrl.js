@@ -7,6 +7,7 @@
 		vm.currentSearchType = vm.searchTypes[0];
 		vm.selectSearchType = selectSearchType;
 		vm.searchTypeClass = searchTypeClass; 
+		vm.hideHeader = true;
 		init();
 
 		function init() {
@@ -18,7 +19,7 @@
 
 		function searchTypeClass(searchTypeId) {
 			if (vm.currentSearchType.id === searchTypeId) {
-				return "selectedSearch";
+				return 'tracking-link strong';
 			}
 			return '';
 		}

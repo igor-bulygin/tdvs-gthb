@@ -27,14 +27,19 @@ $this->registerJs("var searchParam = '".$text."'", yii\web\View::POS_HEAD, 'prod
 .product-result-item_A figure, .product-result-item figcaption { padding: 0 !important; }
 </style>
 <div ng-controller="mainSearcherCtrl as mainSearcherCtrl">
-	<div class="col-xs-12">
-		<span ng-repeat="searchType in mainSearcherCtrl.searchTypes" class="col-xs-1" ng-click="mainSearcherCtrl.selectSearchType(searchType)" ng-bind="searchType.name" ng-class="mainSearcherCtrl.searchTypeClass(searchType.id)"></span>
+	<div class="results-wrapper">
+		<div class="container store">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<a style="color:#1C1919; cursor:pointer;"><span ng-repeat="searchType in mainSearcherCtrl.searchTypes" class="col-xs-1" ng-click="mainSearcherCtrl.selectSearchType(searchType)" ng-bind="searchType.name" ng-class="mainSearcherCtrl.searchTypeClass(searchType.id)"></span></a>
+			</div>
+		</div>
 	</div>
 	<div class="col-xs-12">
-	<div ng-switch on="mainSearcherCtrl.currentSearchType.id">
-		<explore-products ng-switch-when="1"></explore-products>
-		<explore-boxes showHeader="false" ng-switch-when="2"></explore-boxes>
-		<explore-person showHeader="false" personType="2" ng-switch-when="3"></explore-person>
-		<explore-person showHeader="false" personType="3" ng-switch-when="4"></explore-person>
+		<div ng-switch on="mainSearcherCtrl.currentSearchType.id">
+			<explore-products ng-switch-when="1"></explore-products>
+			<explore-boxes hideHeader="mainSearcherCtrl.showHeader" ng-switch-when="2"></explore-boxes>
+			<explore-person hideHeader="mainSearcherCtrl.showHeader" personType="2" ng-switch-when="3"></explore-person>
+			<explore-person hideHeader="mainSearcherCtrl.showHeader" personType="3" ng-switch-when="4"></explore-person>
+		</div>
 	</div>
 </div>
