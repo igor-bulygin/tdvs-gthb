@@ -26,5 +26,15 @@ $this->registerJs("var searchParam = '".$text."'", yii\web\View::POS_HEAD, 'prod
 .product-result-item_A { display: inline-block; margin-bottom: 0px; __width: 100%; padding: 0 !important; }
 .product-result-item_A figure, .product-result-item figcaption { padding: 0 !important; }
 </style>
-
-<explore-products></explore-products>
+<div ng-controller="mainSearcherCtrl as mainSearcherCtrl">
+	<div class="col-xs-12">
+		<span ng-repeat="searchType in mainSearcherCtrl.searchTypes" class="col-xs-1" ng-click="mainSearcherCtrl.selectSearchType(searchType)" ng-bind="searchType.name" ng-class="mainSearcherCtrl.searchTypeClass(searchType.id)"></span>
+	</div>
+	<div class="col-xs-12">
+	<div ng-switch on="mainSearcherCtrl.currentSearchType.id">
+		<explore-products ng-switch-when="1"></explore-products>
+		<explore-boxes ng-switch-when="2"></explore-boxes>
+		<explore-person personType="2" ng-switch-when="3"></explore-person>
+		<explore-person personType="3" ng-switch-when="4"></explore-person>
+	</div>
+</div>
