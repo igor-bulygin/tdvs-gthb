@@ -9,8 +9,8 @@
 		vm.selectChat=selectChat;
 		vm.parseDate=UtilService.parseDate;
 		vm.parseImage = parseImage;
-		vm.submitMsg = submitMsg;
 		vm.activeChat = activeChat;
+		vm.msgOwner = msgOwner;
 		vm.loading=true;
 		if (person) {
 			vm.person = {id:person.id, name:angular.copy(person.name), profile_image : person.profile_image};
@@ -73,6 +73,16 @@
 			vm.loadingChat=true;
 			function onGetChatSuccess(data) {
 				vm.currentChat = angular.copy(data); 
+				var lastOwner;
+				angular.forEach(vm.currentChat.messages, function (msg) {					
+					if (lastOwner && lastOwner ===  msg.person_id) {
+							msg.showOwner = false;
+					}
+					else {
+							lastOwner = msg.person_id;
+							msg.showOwner = true;
+					}
+				});
 				vm.loadingChat=false;
 			}
 			if (id) {
@@ -123,16 +133,16 @@
 			return res;
 		}
 
-		function submitMsg($event){
-			var keyCode = $event.which || $event.keyCode;
-			if (keyCode === 13) {
-				sendMsg()
+		function activeChat(chat){
+			if (vm.currentChat && chat.id === vm.currentChat.id) {
+				return 'activeChat';
 			}
+			return '';
 		}
 
-		function activeChat(chat){
-			if (chat.id === vm.currentChat.id) {
-				return 'activeChat';
+		function msgOwner(msg){
+			if (msg.person_id === vm.person.id) {
+				return 'msgOwner';
 			}
 			return '';
 		}

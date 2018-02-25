@@ -98,10 +98,24 @@
 }
 .showcase-influencers{
 	img{
-		 max-width: 360px;
+		 max-width: 360px; /*comprobar esto*/
 		 @media (max-width: 320px){
 		 	max-width: 260px;
 		 }
+	}
+}
+.showcase{
+	&.influencers{
+		    min-height: 250px;
+			img{
+				max-width: 286px;
+                @media (max-width: 320px){
+                    max-width: 260px;
+                }
+                @media (max-width: 575px){
+                    max-width: 575px;
+                }
+			}
 	}
 }
 .carousel-devisers-container{
