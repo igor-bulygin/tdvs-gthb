@@ -31,7 +31,7 @@
 			}
 
 			var params = {
-				person_type: type
+				person_type: vm.personType;
 			}
 
 			locationDataService.getCountry(params, onGetCountriesSuccess, UtilService.onError);
@@ -55,7 +55,8 @@
 		controllerAs: 'discoverFiltersCtrl',
 		bindings: {
 			searching: '<',
-			filters: '<'
+			filters: '<',
+			personType: '<'
 		}
 	}
 
