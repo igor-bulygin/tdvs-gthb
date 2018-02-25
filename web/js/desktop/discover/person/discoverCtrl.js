@@ -72,7 +72,8 @@
 		controller: controller,
 		controllerAs: 'discoverCtrl',
 		bindings: {
-			personType: '<'
+			personType: '<',
+			showHeader: '<'
 		}
 	}
 

@@ -31,7 +31,7 @@
 			}
 
 			var params = {
-				person_type: vm.personType;
+				person_type: vm.personType
 			}
 
 			locationDataService.getCountry(params, onGetCountriesSuccess, UtilService.onError);

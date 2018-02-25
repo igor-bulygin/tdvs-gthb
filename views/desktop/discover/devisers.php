@@ -7,4 +7,4 @@ Yii::$app->opengraph->title = $this->title;
 $this->registerJs("var type = 2", yii\web\View::POS_HEAD, 'person-type-script');
 
 ?>
-<explore-person personType="type"></explore-person>
+<explore-person personType="type" showHeader="true"></explore-person>
