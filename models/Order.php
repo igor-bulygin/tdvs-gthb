@@ -706,6 +706,7 @@ class Order extends CActiveRecord {
 		if ($newState == Order::ORDER_STATE_PAID) {
 			$this->order_date = new MongoDate();
 			$this->scheduleEmailsNewOrder();
+			$this->sendSmsNewOrder();
 		}
 		$this->order_state = $newState;
 		$stateHistory = $this->state_history;
@@ -732,6 +733,26 @@ class Order extends CActiveRecord {
 			$scheduledEmails['todevise_new_order'][] = EmailsHelper::todeviseNewOrderReminder72($this, $pack->short_id);
 
 			$pack->setAttribute('scheduled_emails', $scheduledEmails);
+		}
+		$this->setPacks($packs);
+		$this->save();
+	}
+
+	public function sendSmsNewOrder()
+	{
+		$packs = $this->getPacks();
+		foreach ($packs as $pack) {
+			$pack->sendSmsNewOrder();
+		}
+		$this->setPacks($packs);
+		$this->save();
+	}
+
+	public function sendSmsNewOrderReminder72()
+	{
+		$packs = $this->getPacks();
+		foreach ($packs as $pack) {
+			$pack->sendSmsNewOrderReminder72();
 		}
 		$this->setPacks($packs);
 		$this->save();

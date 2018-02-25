@@ -128,6 +128,8 @@ return [
 	'SHIPPING_SETTINGS' => 'Preferencias de envío',
 	'SIGNUP' => 'Regístrate',
 	'SOCIAL_FEED_BY_PERSON_NAME' => 'Social feed de {person_name}',
+	'SMS_DEVISER_NEW_SALE' => 'Nuevo pedido [[order_number]]. Por favor entra en AJUSTES-MIS PEDIDOS e indicanos que estás al tanto [[deviser_link_profile]]',
+	'SMS_DEVISER_NEW_SALE_REMINDER_72' => 'RECUERDA: NUEVA VENTA. Por favor indícanos que estás informado del pedido [[order_number]] [[deviser_link_profile]]',
 	'STORIES' => 'Historias',
 	'STORY_BY_PERSON_NAME' => 'Historias',
 	'TODEVISE_META_DESCRIPTION' => 'Todevise es la combinación entre una red social y e-commerce que cambiará tu manera de inspirarte, descubrir productos y comprar online. ',

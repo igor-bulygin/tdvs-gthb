@@ -165,4 +165,13 @@ class PersonPersonalInfo extends EmbedModel
 			[['name', 'last_name'], 'required', 'on' => [Person::SCENARIO_CLIENT_CREATE, Person::SCENARIO_CLIENT_UPDATE]],
 		];
 	}
+
+	public function getPhoneNumber()
+	{
+		if (empty($this->phone_number)) {
+			return null;
+		}
+
+		return trim($this->phone_number_prefix . '' . $this->phone_number);
+	}
 }

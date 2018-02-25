@@ -46,4 +46,15 @@ class TestController extends CController
 			throw new Exception('Order ' . $short_id . ' not found');
 		}
 	}
+
+	public function actionSms()
+	{
+		$short_id = '976966c0';
+		$order = \app\models\Order::findOneSerialized($short_id);
+		$order->sendSmsNewOrder();
+		$order->sendSmsNewOrderReminder72();
+
+		var_dump($order->getAttributes());
+
+	}
 }

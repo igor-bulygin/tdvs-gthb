@@ -60,6 +60,19 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 			<?php } ?>
 			<?php if($person->isDeviser()) {?>
 				<div class="row">
+					<label for="city"><span translate="global.user.PHONE"></span></label>
+				</div>
+				<div class="row">
+					<div class="col-xs-3 no-pad-left">
+						<input type="tel" name="phone_prefix" class="form-control grey-input" ng-model="completeProfileCtrl.person.personal_info.phone_number_prefix" ng-class="{'error-input': completeProfileCtrl.validPrefix }" ng-change="completeProfileCtrl.setPrefix()" required>
+					</div>
+					<div class="col-xs-9 no-pad-r">
+						<input type="tel" name="phone" class="form-control grey-input" ng-model="completeProfileCtrl.person.personal_info.phone_number" ng-class="{'error-input': completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.phone_number)}" required>
+						<form-errors field="completeProfileCtrl.form.phone" condition="completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.phone)"></form-errors>
+					</div>
+				</div>
+
+				<div class="row">
 					<label for="categories"><span translate="global.FIELD"></span></label>
 					<div class="ng-class:{'error-input': completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.categories)}">
 						<ol class="black-form-select work-field nya-bs-select" ng-model="completeProfileCtrl.person.categories" selected-text-format="count>4" ng-cloak ng-if="completeProfileCtrl.categories" name="categories" required multiple>
