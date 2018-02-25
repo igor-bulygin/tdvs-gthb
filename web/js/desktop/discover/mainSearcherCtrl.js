@@ -8,6 +8,7 @@
 		vm.selectSearchType = selectSearchType;
 		vm.searchTypeClass = searchTypeClass; 
 		vm.hideHeader = true;
+		vm.searchParam = searchParam;
 		init();
 
 		function init() {

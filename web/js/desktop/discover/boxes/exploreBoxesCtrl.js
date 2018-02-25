@@ -73,7 +73,8 @@
 		controller: controller,
 		controllerAs: 'exploreBoxesCtrl',
 		bindings: {
-			hideHeader:'<?'
+			hideHeader:'<?',
+			key:'<?'
 		}
 	}
 

@@ -37,9 +37,9 @@ $this->registerJs("var searchParam = '".$text."'", yii\web\View::POS_HEAD, 'prod
 	<div class="col-xs-12">
 		<div ng-switch on="mainSearcherCtrl.currentSearchType.id">
 			<explore-products ng-switch-when="1"></explore-products>
-			<explore-boxes hideHeader="mainSearcherCtrl.showHeader" ng-switch-when="2"></explore-boxes>
-			<explore-person hideHeader="mainSearcherCtrl.showHeader" personType="2" ng-switch-when="3"></explore-person>
-			<explore-person hideHeader="mainSearcherCtrl.showHeader" personType="3" ng-switch-when="4"></explore-person>
+			<explore-boxes hideHeader="mainSearcherCtrl.hideHeader" ng-switch-when="2"  key="mainSearcherCtrl.searchParam"></explore-boxes>
+			<explore-person hideHeader="mainSearcherCtrl.hideHeader" personType="2" ng-switch-when="3" key="mainSearcherCtrl.searchParam"></explore-person>
+			<explore-person hideHeader="mainSearcherCtrl.hideHeader" personType="3" ng-switch-when="4" key="mainSearcherCtrl.searchParam"></explore-person>
 		</div>
 	</div>
 </div>
