@@ -9,7 +9,6 @@
 		vm.selectChat=selectChat;
 		vm.parseDate=UtilService.parseDate;
 		vm.parseImage = parseImage;
-		vm.submitMsg = submitMsg;
 		vm.activeChat = activeChat;
 		vm.msgOwner = msgOwner;
 		vm.loading=true;
@@ -132,13 +131,6 @@
 				res = currentHost() + image;
 			}
 			return res;
-		}
-
-		function submitMsg($event){
-			var keyCode = $event.which || $event.keyCode;
-			if (keyCode === 13) {
-				sendMsg()
-			}
 		}
 
 		function activeChat(chat){
