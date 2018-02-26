@@ -3,7 +3,7 @@
 
 	function controller() {
 		var vm = this;
-		vm.searchTypes = [{name:'discover.PRODUCTS', id:1}, {name:'BOXES_NAME', id:2}, {name:'discover.DEVISERS', id:3, type: 2}, {name:'discover.INFLUENCERS', id:4, type:3} ]
+		vm.searchTypes = [{name:'discover.PRODUCTS', id:1}, {name:'discover.BOXES_NAME', id:2}, {name:'discover.DEVISERS', id:3, type: 2}, {name:'discover.INFLUENCERS', id:4, type:3} ]
 		vm.currentSearchType = vm.searchTypes[0];
 		vm.selectSearchType = selectSearchType;
 		vm.searchTypeClass = searchTypeClass; 
