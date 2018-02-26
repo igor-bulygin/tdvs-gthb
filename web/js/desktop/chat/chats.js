@@ -16,7 +16,7 @@
 			vm.person = {id:person.id, name:angular.copy(person.name), profile_image : person.profile_image};
 		}
 		if (person_to_chat) {
-			vm.personToChat = {id:person_to_chat.id, name:angular.copy(person_to_chat.name)};
+			vm.personToChat = {id:person_to_chat.id, name:angular.copy(person_to_chat.name), profile_image:angular.copy(person_to_chat.profile_image)};
 		}
 		vm.chatId = chat_id;
 
@@ -94,8 +94,9 @@
 		}
 
 		function createChat() {
-			vm.currentChat =  {"preview": {"title": vm.personToChat.name}, messages:[]};
+			vm.currentChat =  {"preview": {"title": vm.personToChat.name, "image":vm.personToChat.profile_image}, messages:[]};
 			vm.chats.unshift(vm.currentChat);
+			vm.loadingChat=false;
 		}
 
 		function sendMsg() {
