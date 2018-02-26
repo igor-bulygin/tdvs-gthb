@@ -61,15 +61,15 @@ $this->registerJs('var chat_id = ' .Json::encode($chatId), yii\web\View::POS_HEA
 					</div>
 					<div class="col-xs-12" ng-repeat="msg in chatCtrl.currentChat.messages | orderBy: (chatCtrl.parseDate(msg.date.sec*1000))">
 						<div ng-class="chatCtrl.msgOwner(msg)">
-							<div class="col-sm-2">
+							<div class="col-xs-3 col-sm-2">
 								<a ng-href="{{msg.person_info.main_link}}">
 									<img class="avatar-logued-user" ng-src="{{ msg.person_info.profile_image}}">
 								</a>
 							</div>
-							<div class="col-sm-10">
+							<div class="col-xs-9 col-sm-10">
 								<span class="col-xs-12 red-text chat-tit" ng-bind="msg.person_info.name" ng-if="msg.showOwner"></span>
 								<span class="col-xs-12 chat-text" ng-bind="msg.text"></span>
-								<span class="col-xs-10 text-right chat-time">
+								<span class="col-xs-12 text-right chat-time">
 									<span ng-cloak>{{chatCtrl.parseDate(msg.date.sec*1000) | date:'dd/MM/yy hh:mm'}}</span>
 								</span>
 							</div>
