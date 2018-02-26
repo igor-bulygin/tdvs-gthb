@@ -20,7 +20,7 @@ return [
 
 	'twilio_account_id' => YII_ENV_PROD || strpos($_SERVER['HTTP_HOST'], 'dev.todevise.com') !== false ? 'AC443685ea3c5e8da5850bb5897a594eb0' : 'AC5be27b099c822bc81ba3038ce9607431',
 	'twilio_auth_token' => YII_ENV_PROD || strpos($_SERVER['HTTP_HOST'], 'dev.todevise.com') !== false ? '466596c5f9179820df37f74d5cfef7ba' : '5408c39bc6693a2b2a1d59fcf6f3b09a',
-	'twilio_from_number' => YII_ENV_PROD ? '+34931070359' : '+15005550006',
+	'twilio_from_number' => YII_ENV_PROD || strpos($_SERVER['HTTP_HOST'], 'dev.todevise.com') !== false ? '+34931070359' : '+15005550006',
 
 	'default_todevise_fee' => 0.145,
 	'default_spain_vat' => 0.21,
