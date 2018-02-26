@@ -13,6 +13,9 @@ html{
 body{
     font-family: $font-family--regular;
 }
+.nav-tabs{
+  border-bottom: 1px solid $light_grey;
+}
 .elements-wrapper{
 	background-color: $white;
 	 min-height: 2000px;

@@ -66,7 +66,7 @@
 	    }
 		.chat-send{
 			padding: 30px 0;
-			margin-top: 1.5em;
+			margin-top: 2px;
 			border-top: 1px solid $light_grey;
 			background-color: rgba($background_grey,0.5);
 			> div:nth-child(1){
@@ -113,7 +113,7 @@
 	}
 	.chat-header{
 		border-bottom: 1px solid $light_grey;
-		padding: 1em 0 !important;
+		padding: 15px 0 !important;
 		color: $black;
 		font-weight: bold;
 		font-family: $font-family--regular;
