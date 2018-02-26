@@ -30,7 +30,7 @@ $this->registerJs("var searchParam = '".$text."'", yii\web\View::POS_HEAD, 'prod
 	<div class="results-wrapper" style="padding-top:20px;">
 		<div class="container store">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<a style="color:#1C1919; cursor:pointer;"><span ng-repeat="searchType in mainSearcherCtrl.searchTypes" class="col-xs-1" ng-click="mainSearcherCtrl.selectSearchType(searchType)" translate="searchType.name" ng-bind="searchType.name" ng-class="mainSearcherCtrl.searchTypeClass(searchType.id)"></span></a>
+				<a style="color:#1C1919; cursor:pointer;"><span ng-repeat="searchType in mainSearcherCtrl.searchTypes" class="col-xs-1" ng-click="mainSearcherCtrl.selectSearchType(searchType)" translate="{{ searchType.name }}" ng-class="mainSearcherCtrl.searchTypeClass(searchType.id)"></span></a>
 			</div>
 		</div>
 	</div>

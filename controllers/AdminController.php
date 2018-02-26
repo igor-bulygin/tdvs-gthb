@@ -582,7 +582,9 @@ class AdminController extends CController {
 				]
 			);
 
-			echo '<pre>'.print_r($person->credentials, true).'</pre>';
+			echo 'Password of '.$person->getName().' was succesfully reset. Now you can log-in we the above credentials:<br /><br />';
+			echo 'Username: <b>'.$person->credentials['email'].'</b><br />';
+			echo 'Password: <b>todevise1234</b><br />';
 		}
 	}
 
