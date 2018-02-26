@@ -136,9 +136,10 @@
 		"SENDED_EMAIL": "Email sended. Check your inbox. (test)"
 	},
 	"chat": {
-			"NO_CHATS": "No available chats",
-			"CLICK_MSG": "Go to any user’s profile and click the MESSAGE button to initiate a conversation",
-			"SELECT_CHAT": "Please select a chat on left",
-			"SEND": "SEND"
+			"NO_CHATS": "No hay conversaciones disponibles",
+			"CLICK_MSG": "Accede al pefil de cualquier usuario y pulsa en el botón CHAT para iniciar la conversación",
+			"SELECT_CHAT": "Por favor selecciona un chat a la izquierda",
+			"SEND": "Enviar",
+			"CHAT_WITH": "Chat con {{ personToChat }}"
 		}
 }
