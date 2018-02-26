@@ -35,7 +35,7 @@ $this->registerJs('var chat_id = ' .Json::encode($chatId), yii\web\View::POS_HEA
 						</div>
 						<ul>
 							<li ng-repeat="chat in chatCtrl.chats" ng-class="chatCtrl.activeChat(chat)">
-								<a ng-click="chatCtrl.selectChat(chat)" class="col-xs-12">
+								<a ng-click="chatCtrl.selectChat(chat)" class="col-xs-12" role="button">
 									<span class="col-xs-12">
 										<div class="col-sm-2">
 											<img class="avatar-logued-user" ng-src="{{ chatCtrl.parseImage(chat.preview.image)}}">
