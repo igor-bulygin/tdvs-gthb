@@ -237,9 +237,6 @@ html {
 body {
   font-family: "Roboto Condensed", sans-serif; }
 
-.container {
-  overflow: hidden; }
-
 .elements-wrapper {
   background-color: #ffffff;
   min-height: 2000px; }
@@ -3803,6 +3800,8 @@ h3 {
   background-color: #ffffff;
   float: left;
   width: 100%; }
+  .our-devisers-wrapper .container {
+    overflow: hidden; }
 
 .our-devisers-header {
   background: url(/imgs/devisers-cover.jpg) center #000000 no-repeat;
@@ -8823,8 +8822,27 @@ cart-panel .cart-panel-div {
     margin-bottom: 0; }
   .chat-body #chat-messages {
     border-left: 1px solid #bfbfbf; }
+    .chat-body #chat-messages > div:last-child > div > div {
+      padding: 0.5em 0;
+      /*
+      &:first-child{
+      	padding-top: 1em;
+      }
+      &:last-child{
+      	padding-bottom: 1em;
+      }
+      */ }
+    .chat-body #chat-messages .msgOwner {
+      background-color: rgba(233, 233, 233, 0.5);
+      display: flex; }
+      .chat-body #chat-messages .msgOwner > div:nth-child(2) {
+        padding-left: 4em; }
+      .chat-body #chat-messages .msgOwner .avatar-logued-user {
+        margin: auto 20px; }
     .chat-body #chat-messages .chat-send {
       padding: 30px 0;
+      margin-top: 1.5em;
+      border-top: 1px solid #bfbfbf;
       background-color: rgba(233, 233, 233, 0.5); }
       .chat-body #chat-messages .chat-send > div:nth-child(1) {
         padding: 0 1em 0 2em; }

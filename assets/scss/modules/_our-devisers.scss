@@ -5,6 +5,9 @@
 	background-color: $white;
 	float: left;
 	width: 100%;
+	.container{
+	    overflow: hidden; //añadido//
+	}
 }
 .our-devisers-header{
 	@extend %person_header;
