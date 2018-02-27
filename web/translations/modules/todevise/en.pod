@@ -115,7 +115,10 @@
 			"LOGIN_TITLE": "Login in to your todevise account",
 			"FORGOT_PASSWORD": "Forgot your password?",
 			"REMEMBER": "Remember me",
-			"NOT_VALID": "Email or password are invalid"
+			"NOT_VALID": "Email or password are invalid",
+			"NEW_TO_TODEVISE": "New to Todevise?",
+			"BECOME_A_MEMBER": "Become a member",
+			"ITS_100_FREE": "It's 100% free!"
 		},
 		"signup": {
 			"WELCOME": "Welcome to Todevise",

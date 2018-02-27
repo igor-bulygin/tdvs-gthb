@@ -108,7 +108,7 @@
 	&.influencers{
 		    min-height: 250px;
 			img{
-				max-width: 286px;
+				max-width: 100%;//286px;
                 @media (max-width: 320px){
                     max-width: 260px;
                 }

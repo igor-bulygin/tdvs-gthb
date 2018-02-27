@@ -115,7 +115,10 @@
 			"LOGIN_TITLE": "Identifícate en tu cuenta todevise",
 			"FORGOT_PASSWORD": "¿Olvidaste tu contraseña?",
 			"REMEMBER": "Recuérdame",
-			"NOT_VALID": "Email o contraseña incorrectos"
+			"NOT_VALID": "Email o contraseña incorrectos",
+			"NEW_TO_TODEVISE": "¿Nuevo en Todevise?",
+			"BECOME_A_MEMBER": "Hazte miembro",
+			"ITS_100_FREE": "¡Es 100% gratis!"
 		},
 		"signup": {
 			"WELCOME": "Bienvenido a Todevise",

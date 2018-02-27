@@ -3657,7 +3657,7 @@ h3 {
 .showcase.influencers {
   min-height: 250px; }
   .showcase.influencers img {
-    max-width: 286px; }
+    max-width: 100%; }
     @media (max-width: 320px) {
       .showcase.influencers img {
         max-width: 260px; } }
