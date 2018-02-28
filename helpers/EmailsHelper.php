@@ -1,6 +1,7 @@
 <?php
 namespace app\helpers;
 
+use app\models\Lang;
 use app\models\Order;
 use Yii;
 use yii\base\Exception;
@@ -9,18 +10,20 @@ class EmailsHelper
 {
 	public static function deviserNewOrder(Order $order, $packId)
 	{
-		$subject = 'YOU HAVE A NEW SALE';
+		$lang = $order->getPack($packId)->getDeviser()->settingsMapping->lang ?: Lang::EN_US;
+
+		$subject = Yii::t('app/public', 'EMAIL_DEVISER_NEW_ORDER_SUBJECT', [], $lang);
 
 		$send_at = (new \DateTime())->format('Y-m-d H:i:s');
 
 		$params = static::mergeCustomWithCommonVars(
 			static::getOrderPackCommonVars($order, $packId),
 			[
-				'header' => 'You have a new sale',
-				'hello' => 'Hello {{deviser_name}}',
-				'text' => '{{client_name}} bought the following products:',
-				'text_2' => 'Please log into your Todevise profile and let us know that you are aware of the sale (even if you are not ready to send it yet, we need to know that you saw the notification).',
-				'button_text' => 'GO TO MY PROFILE',
+				'header' => Yii::t('app/public', 'EMAIL_DEVISER_NEW_ORDER_HEADER', [], $lang),
+				'hello' => Yii::t('app/public', 'EMAIL_DEVISER_NEW_ORDER_HELLO', [], $lang),
+				'text' => Yii::t('app/public', 'EMAIL_DEVISER_NEW_ORDER_TEXT', [], $lang),
+				'text_2' => Yii::t('app/public', 'EMAIL_DEVISER_NEW_ORDER_TEXT_2', [], $lang),
+				'button_text' => Yii::t('app/public', 'EMAIL_DEVISER_NEW_ORDER_BUTTON_TEXT', [], $lang),
 				'button_link' => '{{deviser_link_profile}}',
 			]
 		);
@@ -30,18 +33,20 @@ class EmailsHelper
 
 	public static function deviserNewOrderReminder24(Order $order, $packId)
 	{
-		$subject = 'REMINDER: YOU HAVE A NEW SALE';
+		$lang = $order->getPack($packId)->getDeviser()->settingsMapping->lang ?: Lang::EN_US;
+
+		$subject = Yii::t('app/public', 'EMAIL_DEVISER_NEW_ORDER_REMINDER_24_SUBJECT', [], $lang);
 
 		$send_at = (new \DateTime())->add(\DateInterval::createFromDateString('24 hours'))->format('Y-m-d H:i:s');
 
 		$params = static::mergeCustomWithCommonVars(
 			static::getOrderPackCommonVars($order, $packId),
 			[
-				'header' => 'REMINDER: YOU HAVE A NEW SALE',
-				'hello' => 'Hello {{deviser_name}}',
-				'text' => '{{client_name}} bought the following products:',
-				'text_2' => 'Please let us know that you saw this sale & fill in the shipping information inside your profile when you shipped the package. To do so, go to SETTINGS - MY ORDERS.',
-				'button_text' => 'GO TO MY PROFILE',
+				'header' => Yii::t('app/public', 'EMAIL_DEVISER_NEW_ORDER_REMINDER_24_HEADER', [], $lang),
+				'hello' => Yii::t('app/public', 'EMAIL_DEVISER_NEW_ORDER_REMINDER_24_HELLO', [], $lang),
+				'text' => Yii::t('app/public', 'EMAIL_DEVISER_NEW_ORDER_REMINDER_24_TEXT', [], $lang),
+				'text_2' => Yii::t('app/public', 'EMAIL_DEVISER_NEW_ORDER_REMINDER_24_TEXT_2', [], $lang),
+				'button_text' => Yii::t('app/public', 'EMAIL_DEVISER_NEW_ORDER_REMINDER_24_BUTTON_TEXT', [], $lang),
 				'button_link' => '{{deviser_link_profile}}',
 			]
 		);
@@ -51,18 +56,20 @@ class EmailsHelper
 
 	public static function deviserNewOrderReminder48(Order $order, $packId)
 	{
-		$subject = 'REMINDER: ONE OF YOUR NEW SALES WASN’T ATTENDED';
+		$lang = $order->getPack($packId)->getDeviser()->settingsMapping->lang ?: Lang::EN_US;
+
+		$subject = Yii::t('app/public', 'EMAIL_DEVISER_NEW_ORDER_REMINDER_48_SUBJECT', [], $lang);
 
 		$send_at = (new \DateTime())->add(\DateInterval::createFromDateString('48 hours'))->format('Y-m-d H:i:s');
 
 		$params = static::mergeCustomWithCommonVars(
 			static::getOrderPackCommonVars($order, $packId),
 			[
-				'header' => 'REMINDER: ONE OF YOUR NEW SALES WASN’T ATTENDED',
-				'hello' => 'Hello {{deviser_name}}',
-				'text' => '{{client_name}} bought the following products:',
-				'text_2' => 'You have an unattended sale. Please sign into your Todevise profile, let us know that you saw the sale and fill in the shipping information when you send the package.',
-				'button_text' => 'GO TO MY PROFILE',
+				'header' => Yii::t('app/public', 'EMAIL_DEVISER_NEW_ORDER_REMINDER_48_HEADER', [], $lang),
+				'hello' => Yii::t('app/public', 'EMAIL_DEVISER_NEW_ORDER_REMINDER_48_HELLO', [], $lang),
+				'text' => Yii::t('app/public', 'EMAIL_DEVISER_NEW_ORDER_REMINDER_48_TEXT', [], $lang),
+				'text_2' => Yii::t('app/public', 'EMAIL_DEVISER_NEW_ORDER_REMINDER_48_TEXT_2', [], $lang),
+				'button_text' => Yii::t('app/public', 'EMAIL_DEVISER_NEW_ORDER_REMINDER_48_BUTTON_TEXT', [], $lang),
 				'button_link' => '{{deviser_link_profile}}',
 			]
 		);
@@ -72,18 +79,20 @@ class EmailsHelper
 
 	public static function deviserOrderNoShippedReminder24(Order $order, $packId)
 	{
-		$subject = 'DID YOU SHIP THE PACKAGE?';
+		$lang = $order->getPack($packId)->getDeviser()->settingsMapping->lang ?: Lang::EN_US;
+
+		$subject = Yii::t('app/public', 'EMAIL_DEVISER_NO_SHIPPED_24_SUBJECT', [], $lang);
 
 		$send_at = (new \DateTime())->add(\DateInterval::createFromDateString('24 hours'))->format('Y-m-d H:i:s');
 
 		$params = static::mergeCustomWithCommonVars(
 			static::getOrderPackCommonVars($order, $packId),
 			[
-				'header' => 'DID YOU SHIP THE PACKAGE?',
-				'hello' => 'Hello {{deviser_name}}',
-				'text' => '{{client_name}} bought the following products:',
-				'text_2' => 'Please let us know that you saw this sale. Were you able to ship the package? If so, please fill in the shipping information by going to SETTINGS - MY ORDERS, and clicking the PACKAGE WAS SHIPPED button.',
-				'button_text' => 'GO TO MY PROFILE',
+				'header' => Yii::t('ap/public', 'EMAIL_DEVISER_NO_SHIPPED_24_HEADER', [], $lang),
+				'hello' => Yii::t('ap/public', 'EMAIL_DEVISER_NO_SHIPPED_24_HELLO', [], $lang),
+				'text' => Yii::t('ap/public', 'EMAIL_DEVISER_NO_SHIPPED_24_TEXT', [], $lang),
+				'text_2' => Yii::t('ap/public', 'EMAIL_DEVISER_NO_SHIPPED_24_TEXT_2', [], $lang),
+				'button_text' => Yii::t('ap/public', 'EMAIL_DEVISER_NO_SHIPPED_24_BUTTON_TEXT', [], $lang),
 				'button_link' => '{{deviser_link_profile}}',
 			]
 		);
@@ -93,18 +102,20 @@ class EmailsHelper
 
 	public static function deviserOrderNoShippedReminder48(Order $order, $packId)
 	{
-		$subject = 'PLEASE FILL IN THE SHIPPING INFORMATION FOR ORDER #{{order_number}}';
+		$lang = $order->getPack($packId)->getDeviser()->settingsMapping->lang ?: Lang::EN_US;
+
+		$subject = Yii::t('app/public', 'EMAIL_DEVISER_NO_SHIPPED_48_SUBJECT', [], $lang);
 
 		$send_at = (new \DateTime())->add(\DateInterval::createFromDateString('48 hours'))->format('Y-m-d H:i:s');
 
 		$params = static::mergeCustomWithCommonVars(
 			static::getOrderPackCommonVars($order, $packId),
 			[
-				'header' => 'PLEASE FILL IN THE SHIPPING INFORMATION FOR ORDER #{{order_number}}',
-				'hello' => 'Hello {{deviser_name}}',
-				'text' => '{{client_name}} bought the following products:',
-				'text_2' => 'Please fill in the shipping information for the order #(número pedido). The customer will be informed that the package was shipped only if you fill in this information.',
-				'button_text' => 'GO TO MY PROFILE',
+				'header' => Yii::t('app/public', 'EMAIL_DEVISER_NO_SHIPPED_48_HEADER', [], $lang),
+				'hello' => Yii::t('app/public', 'EMAIL_DEVISER_NO_SHIPPED_48_HELLO', [], $lang),
+				'text' => Yii::t('app/public', 'EMAIL_DEVISER_NO_SHIPPED_48_TEXT', [], $lang),
+				'text_2' => Yii::t('app/public', 'EMAIL_DEVISER_NO_SHIPPED_48_TEXT_2', [], $lang),
+				'button_text' => Yii::t('app/public', 'EMAIL_DEVISER_NO_SHIPPED_48_BUTTON_TEXT', [], $lang),
 				'button_link' => '{{deviser_link_profile}}',
 			]
 		);
@@ -114,18 +125,20 @@ class EmailsHelper
 
 	public static function deviserOrderNoShippedReminder72(Order $order, $packId)
 	{
-		$subject = 'IMPORTANT! SHIPPING INFORMATION MISSING FOR ORDER #{{order_number}}';
+		$lang = $order->getPack($packId)->getDeviser()->settingsMapping->lang ?: Lang::EN_US;
+
+		$subject = Yii::t('app/public', 'EMAIL_DEVISER_NO_SHIPPED_72_SUBJECT', [], $lang);
 
 		$send_at = (new \DateTime())->add(\DateInterval::createFromDateString('72 hours'))->format('Y-m-d H:i:s');
 
 		$params = static::mergeCustomWithCommonVars(
 			static::getOrderPackCommonVars($order, $packId),
 			[
-				'header' => 'IMPORTANT! SHIPPING INFORMATION MISSING FOR ORDER #{{order_number}}',
-				'hello' => 'Hello {{deviser_name}}',
-				'text' => '{{client_name}} bought the following products:',
-				'text_2' => 'At Todevise we always put our customers first, and we need to keep them updated on their orders. The shipping information for your order #(número pedido) is missing - please fill it in and click the PACKAGE WAS SHIPPED button as soon as possible.',
-				'button_text' => 'GO TO MY PROFILE',
+				'header' => Yii::t('app/public', 'EMAIL_DEVISER_NO_SHIPPED_72_HEADER', [], $lang),
+				'hello' => Yii::t('app/public', 'EMAIL_DEVISER_NO_SHIPPED_72_HELLO', [], $lang),
+				'text' => Yii::t('app/public', 'EMAIL_DEVISER_NO_SHIPPED_72_TEXT', [], $lang),
+				'text_2' => Yii::t('app/public', 'EMAIL_DEVISER_NO_SHIPPED_72_TEXT_2', [], $lang),
+				'button_text' => Yii::t('app/public', 'EMAIL_DEVISER_NO_SHIPPED_72_BUTTON_TEXT', [], $lang),
 				'button_link' => '{{deviser_link_profile}}',
 			]
 		);
@@ -135,19 +148,21 @@ class EmailsHelper
 
 	public static function clientNewOrder(Order $order)
 	{
-		$subject = 'Congratulations, your purchase has been completed successfully!';
+		$lang = $order->getPerson()->settingsMapping->lang ?: Lang::EN_US;
+
+		$subject = Yii::t('app/public', 'EMAIL_CLIENT_NEW_ORDER_SUBJECT', [], $lang);
 
 		$send_at = (new \DateTime())->format('Y-m-d H:i:s');
 
 		$params = static::mergeCustomWithCommonVars(
 			static::getOrderCommonVars($order),
 			[
-				'header' => 'Congratulations, your purchase has been completed successfully!',
-				'hello' => 'Hello {{client_name}}',
-				'text' => 'You purchased the following products from Todevise:',
-				'text_2' => 'Total price w/shipping: '.$order->subtotal.'€',
-				'text_3' => 'This is not an invoice. The invoice(s) for your order will be sent by the deviser(s), and you can download them from your Todevise profile by going to SETTINGS - MY ORDERS.<br />We will send you an email when the product(s) will be shipped.',
-				'button_text' => 'GO TO MY PROFILE',
+				'header' => Yii::t('app/public', 'EMAIL_CLIENT_NEW_ORDER_HEADER', [], $lang),
+				'hello' => Yii::t('app/public', 'EMAIL_CLIENT_NEW_ORDER_HELLO', [], $lang),
+				'text' => Yii::t('app/public', 'EMAIL_CLIENT_NEW_ORDER_TEXT', [], $lang),
+				'text_2' => Yii::t('app/public', 'EMAIL_CLIENT_NEW_ORDER_TEXT_2', ['order_total' => $order->subtotal], $lang),
+				'text_3' => Yii::t('app/public', 'EMAIL_CLIENT_NEW_ORDER_TEXT_3', [], $lang),
+				'button_text' => Yii::t('app/public', 'EMAIL_CLIENT_NEW_ORDER_BUTTON_TEXT', [], $lang),
 				'button_link' => '{{client_link_profile}}',
 			]
 		);
@@ -157,23 +172,20 @@ class EmailsHelper
 
 	public static function clientOrderShipped(Order $order, $packId)
 	{
-		$subject = 'Your products have been shipped!';
+		$lang = $order->getPerson()->settingsMapping->lang ?: Lang::EN_US;
+
+		$subject = Yii::t('app/public', 'EMAIL_CLIENT_NEW_ORDER_SHIPPED_SUBJECT', [], $lang);
 
 		$send_at = (new \DateTime())->format('Y-m-d H:i:s');
 
 		$params = static::mergeCustomWithCommonVars(
 			static::getOrderPackCommonVars($order, $packId),
 			[
-				'header' => 'Your products have been shipped!',
-				'hello' => 'Hello {{client_name}}',
-				'text' => 'The following products from {{deviser_name}} were shipped:',
-				'text_2' => '
-					<p>The shipping information is the following:</p>
-					<p> - Shipping company: {{company}}</p>
-					<p> - Tracking number: {{tracking_number}}</p>
-					<p> - Tracking link: {{tracking_link}}</p>
-				',
-				'button_text' => 'GO TO MY PROFILE',
+				'header' => Yii::t('app/public', 'EMAIL_CLIENT_NEW_ORDER_SHIPPED_HEADER', [], $lang),
+				'hello' => Yii::t('app/public', 'EMAIL_CLIENT_NEW_ORDER_SHIPPED_HELLO', [], $lang),
+				'text' => Yii::t('app/public', 'EMAIL_CLIENT_NEW_ORDER_SHIPPED_TEXT', [], $lang),
+				'text_2' => Yii::t('app/public', 'EMAIL_CLIENT_NEW_ORDER_SHIPPED_TEXT_2', [], $lang),
+				'button_text' => Yii::t('app/public', 'EMAIL_CLIENT_NEW_ORDER_SHIPPED_BUTTON_TEXT', [], $lang),
 				'button_link' => '{{client_link_profile}}',
 			]
 		);
@@ -183,18 +195,20 @@ class EmailsHelper
 
 	public static function todeviseNewOrderReminder72(Order $order, $packId)
 	{
-		$subject = 'Order not attended after 72 hours!';
+		$lang = Lang::EN_US;
+
+		$subject = Yii::t('app/public', 'EMAIL_TODEVISE_ORDER_72_SUBJECT', [], $lang);
 
 		$send_at = (new \DateTime())->add(\DateInterval::createFromDateString('72 hours'))->format('Y-m-d H:i:s');
 
 		$params = static::mergeCustomWithCommonVars(
 			static::getOrderPackCommonVars($order, $packId),
 			[
-				'header' => 'Order not attended after 72 hours!',
-				'hello' => 'Hello Todevise',
-				'text' => 'The deviser {{deviser_name}} did not click the button I’M AWARE for the order #{{order_number}}, with this products:',
-				'text_2' => '',
-				'button_text' => '',
+				'header' => Yii::t('app/public', 'EMAIL_TODEVISE_ORDER_72_HEADER', [], $lang),
+				'hello' => Yii::t('app/public', 'EMAIL_TODEVISE_ORDER_72_HELLO', [], $lang),
+				'text' => Yii::t('app/public', 'EMAIL_TODEVISE_ORDER_72_TEXT', [], $lang),
+				'text_2' => Yii::t('app/public', 'EMAIL_TODEVISE_ORDER_72_TEXT_2', [], $lang),
+				'button_text' => Yii::t('app/public', 'EMAIL_TODEVISE_ORDER_72_BUTTON_TEXT', [], $lang),
 				'button_link' => '',
 			]
 		);
@@ -204,18 +218,20 @@ class EmailsHelper
 
 	public static function todeviseOrderNoShippedReminder96(Order $order, $packId)
 	{
-		$subject = 'Order no shipped after 96 hours!';
+		$lang = Lang::EN_US;
+
+		$subject = Yii::t('app/public', 'EMAIL_TODEVISE_ORDER_96_SUBJECT', [], $lang);
 
 		$send_at = (new \DateTime())->add(\DateInterval::createFromDateString('96 hours'))->format('Y-m-d H:i:s');
 
 		$params = static::mergeCustomWithCommonVars(
 			static::getOrderPackCommonVars($order, $packId),
 			[
-				'header' => 'Order no shipped after 96 hours!',
-				'hello' => 'Hello Todevise',
-				'text' => 'The deviser {{deviser_name}} did not fill in the shipping information for the order #{{order_number}}.',
-				'text_2' => '',
-				'button_text' => '',
+				'header' => Yii::t('app/public', 'EMAIL_TODEVISE_ORDER_96_HEADER', [], $lang),
+				'hello' => Yii::t('app/public', 'EMAIL_TODEVISE_ORDER_96_HELLO', [], $lang),
+				'text' => Yii::t('app/public', 'EMAIL_TODEVISE_ORDER_96_TEXT', [], $lang),
+				'text_2' => Yii::t('app/public', 'EMAIL_TODEVISE_ORDER_96_TEXT_2', [], $lang),
+				'button_text' => Yii::t('app/public', 'EMAIL_TODEVISE_ORDER_96_BUTTON_TEXT', [], $lang),
 				'button_link' => '',
 				'products' => [],
 			]
