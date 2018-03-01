@@ -588,6 +588,88 @@ class AdminController extends CController {
 		}
 	}
 
+	public function actionPackagesExcel($date_from, $date_to)
+	{
+		$date_from_formatted = strtotime($date_from);
+		$date_to_formatted = strtotime($date_to);
+		if (!$date_to || !$date_from) {
+			throw new Exception("Invalid date");
+		}
+		$orders = Order::findSerialized([
+			'order_state' => Order::ORDER_STATE_PAID,
+			'order_date_from' => new \MongoDate($date_from_formatted),
+			'order_date_to' => new \MongoDate($date_to_formatted),
+			'order_by' => [
+				'order_date' => SORT_ASC
+			]
+		]);
+		$csv[] = [
+			'Order',
+			'Pack',
+			'Date',
+
+			// address
+			'name',
+			'last_name',
+			'address',
+			'city',
+			'zip',
+			'country',
+			'vat_id',
+			'email',
+			'phone_number',
+
+			'items',
+			'weight (gr)',
+		];
+		$i = 0;
+		foreach ($orders as $order) {
+			$packs = $order->getPacks();
+			$shippingAddress = $order->getShippingAddress();
+			foreach ($packs as $pack) {
+				$i++;
+				$totalItems = $pack->getTotalItemsNumber();
+				$totalWeight = $pack->getTotalWeight();
+				$csv[] = [
+					$order->short_id,
+					$pack->short_id,
+					$order->order_date->toDateTime()->format('d/m/Y'),
+
+					$shippingAddress->name,
+					$shippingAddress->last_name,
+					$shippingAddress->address,
+					$shippingAddress->city,
+					$shippingAddress->zip,
+					$shippingAddress->country,
+					$shippingAddress->vat_id,
+					$shippingAddress->email,
+					$shippingAddress->getPhone(),
+
+					$totalItems,
+					$totalWeight,
+				];
+			}
+		}
+
+//		var_dump($csv);
+//		die;
+
+		$result = '';
+		foreach ($csv as $fila) {
+			foreach ($fila as $valor) {
+				$result .= '"'.$valor.'";';
+			}
+			$result .= "\n";
+		}
+
+		header("Content-type: text/txt");
+		header("Content-Disposition: attachment; filename=packages-".$date_from."-".$date_to.".csv");
+		header("Pragma: no-cache");
+		header("Expires: 0");
+
+		echo $result;
+	}
+
 	public function actionInvoicesExcel($date_from, $date_to)
 	{
 		$date_from_formatted = strtotime($date_from);

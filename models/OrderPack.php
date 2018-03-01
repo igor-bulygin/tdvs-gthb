@@ -590,4 +590,29 @@ class OrderPack extends EmbedModel
 
 		return false;
 	}
+
+	public function getTotalItemsNumber()
+	{
+		$products = $this->getProducts();
+		$total = 0;
+		foreach ($products as $product) {
+			$total += $product->quantity;
+		}
+
+		return $total;
+	}
+
+	public function getTotalWeight()
+	{
+		$products = $this->getProducts();
+		$total = 0;
+		foreach ($products as $orderProduct) {
+			$stockPriceItem = $orderProduct->getProduct()->getPriceStockItem($orderProduct->price_stock_id);
+			if ($stockPriceItem) {
+				$total += $stockPriceItem['weight'];
+			}
+		}
+
+		return $total;
+	}
 }
