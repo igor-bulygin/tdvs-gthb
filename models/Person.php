@@ -2343,7 +2343,7 @@ class Person extends CActiveRecord implements IdentityInterface
 	{
 		return
 			($this->isDeviser() || $this->isInfluencer()) &&
-			($this->isPersonEditable() || !empty($this->text_biography));
+			($this->isPersonEditable() || !empty($this->text_biography) || !empty($this->mediaMapping->photos));
 	}
 
 	public function showPress()
