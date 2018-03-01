@@ -28,15 +28,12 @@ class TestController extends CController
 
 	public function actionMandrill()
 	{
-//		$scheduleds = EmailsHelper::listScheduled();
-//
-//		foreach ($scheduleds as $scheduled) {
-//			EmailsHelper::cancelScheduled($scheduled['_id']);
-//		}
-//
-		$scheduleds = EmailsHelper::listScheduled();
-		var_dump($scheduleds);
 		die;
+
+		$scheduleds = EmailsHelper::listScheduled();
+		foreach ($scheduleds as $scheduled) {
+			EmailsHelper::cancelScheduled($scheduled['_id']);
+		}
 
 		$short_id = '976966c0';
 		$order = \app\models\Order::findOneSerialized($short_id);
@@ -45,6 +42,10 @@ class TestController extends CController
 		} else {
 			throw new Exception('Order ' . $short_id . ' not found');
 		}
+
+		$scheduleds = EmailsHelper::listScheduled();
+		var_dump($scheduleds);
+		die;
 	}
 
 	public function actionSms()
