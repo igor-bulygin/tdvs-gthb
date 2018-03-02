@@ -70,15 +70,33 @@ class RemindersController extends Controller
 	protected function sendUnreadMessagesReminders()
 	{
 		// find unread messages for 24horas or more
-		$chats = Chat::findSerialized();
+		$chats = Chat::findSerialized([
+			'with_unread_messages' => true,
+		]);
+
+		$limit1 = (new \DateTime())->sub(\DateInterval::createFromDateString('23 hours'))->format('Y-m-d H:i:s');
+		$limit2 = (new \DateTime())->sub(\DateInterval::createFromDateString('25 hours'))->format('Y-m-d H:i:s');
+
 		foreach ($chats as $chat) {
+
+			if (empty($chat->unread_by)) {
+				continue;
+			}
+
 			foreach ($chat->unread_by as $person_id) {
 				$receiver = Person::findOneSerialized($person_id);
 				$message = $chat->getLastMessage($receiver);
 				if ($message) {
-					// TODO: check if sender and receiver are buyer and seller
 
-					EmailsHelper::unreadChat($receiver, $message);
+					// Check that the message was sent 24 hours ago
+					$messageDate = $message->date->toDateTime()->format('Y-m-d H:i:s');
+					if ($messageDate > $limit1 && $messageDate < $limit2) {
+
+						// TODO: check if sender and receiver are buyer and seller of any order
+
+						EmailsHelper::unreadChat($receiver, $message);
+
+					}
 				}
 			}
 

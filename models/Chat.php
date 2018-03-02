@@ -217,6 +217,10 @@ class Chat extends CActiveRecord
 			$query->andWhere(["messages.unread" => $criteria["unread_by_person_id"]]);
 		}
 
+		if ((array_key_exists("with_unread_messages", $criteria)) && (!empty($criteria["with_unread_messages"]))) {
+//			$query->andWhere(["messages.unread" => $criteria["unread_by_person_id"]]);
+		}
+
 		// Count how many items are with those conditions, before limit them for pagination
 		static::$countItemsFound = $query->count();
 
