@@ -105,7 +105,7 @@ $footerMode = 'collapsed';
 							</i>
 						</a>
 					</li>
-					
+					<!--
 					<li class="col-xs-4 col-md-2">
 						<a class="twitter" href="https://twitter.com/todevise" target="_blank">
 							<i class="twitter">
@@ -125,7 +125,7 @@ $footerMode = 'collapsed';
 							</i>
 						</a>
 					</li>
-
+					-->
 					<li class="col-xs-4 col-md-2">
 						<a class="instagram" href="https://www.instagram.com/todevise.official" target="_blank">
 							<i class="instagram">
@@ -181,7 +181,7 @@ $footerMode = 'collapsed';
 					<li class="hidden-xs hidden-sm col-md-2-5 col-lg-2-5"></li>
 				</ul>
 			</div>
-			<div class="row">&copy; <span class="hightlighted">2017 Todevise</span> all rights reserved</div>
+			<div class="row">&copy; <span class="hightlighted">2018 Todevise</span> all rights reserved</div>
 		</div>
 	</div>
 </footer>
