@@ -37,13 +37,20 @@ while ($date > $limit) {
 }
 
 
-// Create links for Packages excel, one per day
-$date = new DateTime();
-$limit = DateTime::createFromFormat('Y-m-d H:i:s', '2017-09-01 00:00:00');
-$oneDay = DateInterval::createFromDateString('1 day');
+// Create links for Packages excel, one per day with orders
+$orders = \app\models\Order::findSerialized([
+		'order_state' => \app\models\Order::ORDER_STATE_PAID,
+]);
 
-$itemsPackages= [];
-while ($date > $limit) {
+$dates = [];
+foreach ($orders as $order) {
+	$dates[$order->order_date->toDateTime()->format('Y-m-d')] = $order->order_date->toDateTime();
+}
+ksort($dates); // order by date
+$dates = array_reverse($dates); // first most recent
+
+$oneDay = DateInterval::createFromDateString('1 day');
+foreach ($dates as $date) {
 	$aux = clone $date;
 	$next = clone $date;
 	$next = $next->add($oneDay);

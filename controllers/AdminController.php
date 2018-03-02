@@ -607,20 +607,20 @@ class AdminController extends CController {
 			'Order',
 			'Pack',
 			'Date',
+			'Price',
 
 			// address
-			'name',
-			'last_name',
-			'address',
-			'city',
-			'zip',
-			'country',
-			'vat_id',
-			'email',
-			'phone_number',
+			'Name',
+			'Address',
+			'City',
+			'Zip',
+			'Country',
+			'VAT_ID',
+			'Email',
+			'Phone',
 
-			'items',
-			'weight (gr)',
+			'N_Items',
+			'Weight (gr)',
 		];
 		$i = 0;
 		foreach ($orders as $order) {
@@ -634,9 +634,9 @@ class AdminController extends CController {
 					$order->short_id,
 					$pack->short_id,
 					$order->order_date->toDateTime()->format('d/m/Y'),
+					$pack->shipping_price,
 
-					$shippingAddress->name,
-					$shippingAddress->last_name,
+					$shippingAddress->getFullName(),
 					$shippingAddress->address,
 					$shippingAddress->city,
 					$shippingAddress->zip,
