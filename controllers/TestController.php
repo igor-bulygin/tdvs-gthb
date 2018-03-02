@@ -17,12 +17,18 @@ class TestController extends CController
 		return parent::beforeAction($action);
 	}
 
-	public function actionTestComposeEmailOrder()
+	public function actionOrderEmails()
 	{
+		die;
+
 		$short_id = '976966c0';
 		$order = \app\models\Order::findOneSerialized($short_id);
 		if ($order) {
-			$order->composeEmailOrderPaid(false);
+			$order->scheduleEmailsNewOrder();
+			$packs = $order->getPacks();
+			foreach ($packs as $pack) {
+				$pack->scheduleEmailsNoShipped();
+			}
 		}
 	}
 
