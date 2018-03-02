@@ -225,7 +225,6 @@ class EmailsHelper
 		$subject = Yii::t('app/emails', 'TODEVISE_ORDER_96_SUBJECT', [], $lang);
 
 		$send_at = (new \DateTime())->add(\DateInterval::createFromDateString('96 hours'))->format('Y-m-d H:i:s');
-		$send_at = (new \DateTime())->format('Y-m-d H:i:s');
 
 		$params = static::mergeCustomWithCommonVars(
 			static::getOrderPackCommonVars($order, $packId),
@@ -534,6 +533,15 @@ class EmailsHelper
 		}
 
 		$commonVars = array_merge($commonVars, $customVars);
+
+		// Because the empty translation are treated by yii2 as "non existant translation", we have configured
+		// all the empty translations in emails as " " (one whitespace), so here we trim all the vars before
+		// sending the email to make possible that the template consider empty vars correctly
+		foreach ($commonVars as $name => $content) {
+			if (is_string($content)) {
+				$commonVars[$name] = trim($content);
+			}
+		}
 
 		return $commonVars;
 	}

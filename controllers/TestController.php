@@ -4,6 +4,8 @@ namespace app\controllers;
 
 use app\helpers\CController;
 use app\helpers\EmailsHelper;
+use app\models\Chat;
+use app\models\Person;
 use yii\base\Exception;
 
 class TestController extends CController
@@ -63,5 +65,24 @@ class TestController extends CController
 
 		var_dump($order->getAttributes());
 
+	}
+
+	public function actionUnreadChats()
+	{
+
+		// find unread messages for 24horas or more
+		$chats = Chat::findSerialized();
+		foreach ($chats as $chat) {
+			foreach ($chat->unread_by as $person_id) {
+				$receiver = Person::findOneSerialized($person_id);
+				$message = $chat->getLastMessage($receiver);
+				if ($message) {
+					// TODO: check if sender and receiver are buyer and seller
+
+					EmailsHelper::unreadChat($receiver, $message);
+				}
+			}
+
+		}
 	}
 }
