@@ -85,4 +85,9 @@ class TestController extends CController
 
 		}
 	}
+
+	public function actionEnv()
+	{
+		var_dump($_ENV, YII_ENV, YII_ENV_DEV, YII_ENV_PROD, YII_DEBUG, getenv("THUMBOR_SERVER"), getenv("THUMBOR_SECURITY_KEY"));
+	}
 }
