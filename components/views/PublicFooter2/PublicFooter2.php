@@ -181,7 +181,7 @@ $footerMode = 'collapsed';
 					<li class="hidden-xs hidden-sm col-md-2-5 col-lg-2-5"></li>
 				</ul>
 			</div>
-			<div class="row">&copy; <span class="hightlighted">2017 Todevise</span> all rights reserved</div>
+			<div class="row">&copy; <span class="hightlighted">2018 Todevise</span> all rights reserved</div>
 		</div>
 	</div>
 </footer>
