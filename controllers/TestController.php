@@ -88,6 +88,14 @@ class TestController extends CController
 
 	public function actionEnv()
 	{
-		var_dump($_ENV, YII_ENV, YII_ENV_DEV, YII_ENV_PROD, YII_DEBUG, getenv("THUMBOR_SERVER"), getenv("THUMBOR_SECURITY_KEY"));
+		echo '<pre> $_ENV: '.print_r($_ENV, true).'</pre>';
+		echo '<pre> getenv(null): '.print_r(getenv(null), true).'</pre>';
+		echo '<pre> YII_ENV: '.print_r(YII_ENV, true).'</pre>';
+		echo '<pre> YII_ENV_DEV: '.print_r(YII_ENV_DEV, true).'</pre>';
+		echo '<pre> YII_ENV_TEST: '.print_r(YII_ENV_TEST, true).'</pre>';
+		echo '<pre> YII_ENV_PROD: '.print_r(YII_ENV_PROD, true).'</pre>';
+		echo '<pre> ENVIRONMENT: '.print_r(ENVIRONMENT, true).'</pre>';
+		echo '<pre> THUMBOR_SERVER: '.print_r(getenv('THUMBOR_SERVER'), true).'</pre>';
+		echo '<pre> THUMBOR_SECURITY_KEY: '.print_r(getenv('THUMBOR_SECURITY_KEY'), true).'</pre>';
 	}
 }
