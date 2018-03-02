@@ -1,8 +1,10 @@
 <?php
 namespace app\helpers;
 
+use app\models\ChatMessage;
 use app\models\Lang;
 use app\models\Order;
+use app\models\Person;
 use Yii;
 use yii\base\Exception;
 
@@ -12,18 +14,18 @@ class EmailsHelper
 	{
 		$lang = $order->getPack($packId)->getDeviser()->settingsMapping->lang ?: Lang::EN_US;
 
-		$subject = Yii::t('app/public', 'EMAIL_DEVISER_NEW_ORDER_SUBJECT', [], $lang);
+		$subject = Yii::t('app/emails', 'DEVISER_NEW_ORDER_SUBJECT', [], $lang);
 
 		$send_at = (new \DateTime())->format('Y-m-d H:i:s');
 
 		$params = static::mergeCustomWithCommonVars(
 			static::getOrderPackCommonVars($order, $packId),
 			[
-				'header' => Yii::t('app/public', 'EMAIL_DEVISER_NEW_ORDER_HEADER', [], $lang),
-				'hello' => Yii::t('app/public', 'EMAIL_DEVISER_NEW_ORDER_HELLO', [], $lang),
-				'text' => Yii::t('app/public', 'EMAIL_DEVISER_NEW_ORDER_TEXT', [], $lang),
-				'text_2' => Yii::t('app/public', 'EMAIL_DEVISER_NEW_ORDER_TEXT_2', [], $lang),
-				'button_text' => Yii::t('app/public', 'EMAIL_DEVISER_NEW_ORDER_BUTTON_TEXT', [], $lang),
+				'header' => Yii::t('app/emails', 'DEVISER_NEW_ORDER_HEADER', [], $lang),
+				'hello' => Yii::t('app/emails', 'DEVISER_NEW_ORDER_HELLO', [], $lang),
+				'text' => Yii::t('app/emails', 'DEVISER_NEW_ORDER_TEXT', [], $lang),
+				'text_2' => Yii::t('app/emails', 'DEVISER_NEW_ORDER_TEXT_2', [], $lang),
+				'button_text' => Yii::t('app/emails', 'DEVISER_NEW_ORDER_BUTTON_TEXT', [], $lang),
 				'button_link' => '{{deviser_link_profile}}',
 			]
 		);
@@ -35,18 +37,18 @@ class EmailsHelper
 	{
 		$lang = $order->getPack($packId)->getDeviser()->settingsMapping->lang ?: Lang::EN_US;
 
-		$subject = Yii::t('app/public', 'EMAIL_DEVISER_NEW_ORDER_REMINDER_24_SUBJECT', [], $lang);
+		$subject = Yii::t('app/emails', 'DEVISER_NEW_ORDER_REMINDER_24_SUBJECT', [], $lang);
 
 		$send_at = (new \DateTime())->add(\DateInterval::createFromDateString('24 hours'))->format('Y-m-d H:i:s');
 
 		$params = static::mergeCustomWithCommonVars(
 			static::getOrderPackCommonVars($order, $packId),
 			[
-				'header' => Yii::t('app/public', 'EMAIL_DEVISER_NEW_ORDER_REMINDER_24_HEADER', [], $lang),
-				'hello' => Yii::t('app/public', 'EMAIL_DEVISER_NEW_ORDER_REMINDER_24_HELLO', [], $lang),
-				'text' => Yii::t('app/public', 'EMAIL_DEVISER_NEW_ORDER_REMINDER_24_TEXT', [], $lang),
-				'text_2' => Yii::t('app/public', 'EMAIL_DEVISER_NEW_ORDER_REMINDER_24_TEXT_2', [], $lang),
-				'button_text' => Yii::t('app/public', 'EMAIL_DEVISER_NEW_ORDER_REMINDER_24_BUTTON_TEXT', [], $lang),
+				'header' => Yii::t('app/emails', 'DEVISER_NEW_ORDER_REMINDER_24_HEADER', [], $lang),
+				'hello' => Yii::t('app/emails', 'DEVISER_NEW_ORDER_REMINDER_24_HELLO', [], $lang),
+				'text' => Yii::t('app/emails', 'DEVISER_NEW_ORDER_REMINDER_24_TEXT', [], $lang),
+				'text_2' => Yii::t('app/emails', 'DEVISER_NEW_ORDER_REMINDER_24_TEXT_2', [], $lang),
+				'button_text' => Yii::t('app/emails', 'DEVISER_NEW_ORDER_REMINDER_24_BUTTON_TEXT', [], $lang),
 				'button_link' => '{{deviser_link_profile}}',
 			]
 		);
@@ -58,18 +60,18 @@ class EmailsHelper
 	{
 		$lang = $order->getPack($packId)->getDeviser()->settingsMapping->lang ?: Lang::EN_US;
 
-		$subject = Yii::t('app/public', 'EMAIL_DEVISER_NEW_ORDER_REMINDER_48_SUBJECT', [], $lang);
+		$subject = Yii::t('app/emails', 'DEVISER_NEW_ORDER_REMINDER_48_SUBJECT', [], $lang);
 
 		$send_at = (new \DateTime())->add(\DateInterval::createFromDateString('48 hours'))->format('Y-m-d H:i:s');
 
 		$params = static::mergeCustomWithCommonVars(
 			static::getOrderPackCommonVars($order, $packId),
 			[
-				'header' => Yii::t('app/public', 'EMAIL_DEVISER_NEW_ORDER_REMINDER_48_HEADER', [], $lang),
-				'hello' => Yii::t('app/public', 'EMAIL_DEVISER_NEW_ORDER_REMINDER_48_HELLO', [], $lang),
-				'text' => Yii::t('app/public', 'EMAIL_DEVISER_NEW_ORDER_REMINDER_48_TEXT', [], $lang),
-				'text_2' => Yii::t('app/public', 'EMAIL_DEVISER_NEW_ORDER_REMINDER_48_TEXT_2', [], $lang),
-				'button_text' => Yii::t('app/public', 'EMAIL_DEVISER_NEW_ORDER_REMINDER_48_BUTTON_TEXT', [], $lang),
+				'header' => Yii::t('app/emails', 'DEVISER_NEW_ORDER_REMINDER_48_HEADER', [], $lang),
+				'hello' => Yii::t('app/emails', 'DEVISER_NEW_ORDER_REMINDER_48_HELLO', [], $lang),
+				'text' => Yii::t('app/emails', 'DEVISER_NEW_ORDER_REMINDER_48_TEXT', [], $lang),
+				'text_2' => Yii::t('app/emails', 'DEVISER_NEW_ORDER_REMINDER_48_TEXT_2', [], $lang),
+				'button_text' => Yii::t('app/emails', 'DEVISER_NEW_ORDER_REMINDER_48_BUTTON_TEXT', [], $lang),
 				'button_link' => '{{deviser_link_profile}}',
 			]
 		);
@@ -81,18 +83,18 @@ class EmailsHelper
 	{
 		$lang = $order->getPack($packId)->getDeviser()->settingsMapping->lang ?: Lang::EN_US;
 
-		$subject = Yii::t('app/public', 'EMAIL_DEVISER_NO_SHIPPED_24_SUBJECT', [], $lang);
+		$subject = Yii::t('app/emails', 'DEVISER_NO_SHIPPED_24_SUBJECT', [], $lang);
 
 		$send_at = (new \DateTime())->add(\DateInterval::createFromDateString('24 hours'))->format('Y-m-d H:i:s');
 
 		$params = static::mergeCustomWithCommonVars(
 			static::getOrderPackCommonVars($order, $packId),
 			[
-				'header' => Yii::t('ap/public', 'EMAIL_DEVISER_NO_SHIPPED_24_HEADER', [], $lang),
-				'hello' => Yii::t('ap/public', 'EMAIL_DEVISER_NO_SHIPPED_24_HELLO', [], $lang),
-				'text' => Yii::t('ap/public', 'EMAIL_DEVISER_NO_SHIPPED_24_TEXT', [], $lang),
-				'text_2' => Yii::t('ap/public', 'EMAIL_DEVISER_NO_SHIPPED_24_TEXT_2', [], $lang),
-				'button_text' => Yii::t('ap/public', 'EMAIL_DEVISER_NO_SHIPPED_24_BUTTON_TEXT', [], $lang),
+				'header' => Yii::t('app/emails', 'DEVISER_NO_SHIPPED_24_HEADER', [], $lang),
+				'hello' => Yii::t('app/emails', 'DEVISER_NO_SHIPPED_24_HELLO', [], $lang),
+				'text' => Yii::t('app/emails', 'DEVISER_NO_SHIPPED_24_TEXT', [], $lang),
+				'text_2' => Yii::t('app/emails', 'DEVISER_NO_SHIPPED_24_TEXT_2', [], $lang),
+				'button_text' => Yii::t('app/emails', 'DEVISER_NO_SHIPPED_24_BUTTON_TEXT', [], $lang),
 				'button_link' => '{{deviser_link_profile}}',
 			]
 		);
@@ -104,18 +106,18 @@ class EmailsHelper
 	{
 		$lang = $order->getPack($packId)->getDeviser()->settingsMapping->lang ?: Lang::EN_US;
 
-		$subject = Yii::t('app/public', 'EMAIL_DEVISER_NO_SHIPPED_48_SUBJECT', [], $lang);
+		$subject = Yii::t('app/emails', 'DEVISER_NO_SHIPPED_48_SUBJECT', [], $lang);
 
 		$send_at = (new \DateTime())->add(\DateInterval::createFromDateString('48 hours'))->format('Y-m-d H:i:s');
 
 		$params = static::mergeCustomWithCommonVars(
 			static::getOrderPackCommonVars($order, $packId),
 			[
-				'header' => Yii::t('app/public', 'EMAIL_DEVISER_NO_SHIPPED_48_HEADER', [], $lang),
-				'hello' => Yii::t('app/public', 'EMAIL_DEVISER_NO_SHIPPED_48_HELLO', [], $lang),
-				'text' => Yii::t('app/public', 'EMAIL_DEVISER_NO_SHIPPED_48_TEXT', [], $lang),
-				'text_2' => Yii::t('app/public', 'EMAIL_DEVISER_NO_SHIPPED_48_TEXT_2', [], $lang),
-				'button_text' => Yii::t('app/public', 'EMAIL_DEVISER_NO_SHIPPED_48_BUTTON_TEXT', [], $lang),
+				'header' => Yii::t('app/emails', 'DEVISER_NO_SHIPPED_48_HEADER', [], $lang),
+				'hello' => Yii::t('app/emails', 'DEVISER_NO_SHIPPED_48_HELLO', [], $lang),
+				'text' => Yii::t('app/emails', 'DEVISER_NO_SHIPPED_48_TEXT', [], $lang),
+				'text_2' => Yii::t('app/emails', 'DEVISER_NO_SHIPPED_48_TEXT_2', [], $lang),
+				'button_text' => Yii::t('app/emails', 'DEVISER_NO_SHIPPED_48_BUTTON_TEXT', [], $lang),
 				'button_link' => '{{deviser_link_profile}}',
 			]
 		);
@@ -127,18 +129,18 @@ class EmailsHelper
 	{
 		$lang = $order->getPack($packId)->getDeviser()->settingsMapping->lang ?: Lang::EN_US;
 
-		$subject = Yii::t('app/public', 'EMAIL_DEVISER_NO_SHIPPED_72_SUBJECT', [], $lang);
+		$subject = Yii::t('app/emails', 'DEVISER_NO_SHIPPED_72_SUBJECT', [], $lang);
 
 		$send_at = (new \DateTime())->add(\DateInterval::createFromDateString('72 hours'))->format('Y-m-d H:i:s');
 
 		$params = static::mergeCustomWithCommonVars(
 			static::getOrderPackCommonVars($order, $packId),
 			[
-				'header' => Yii::t('app/public', 'EMAIL_DEVISER_NO_SHIPPED_72_HEADER', [], $lang),
-				'hello' => Yii::t('app/public', 'EMAIL_DEVISER_NO_SHIPPED_72_HELLO', [], $lang),
-				'text' => Yii::t('app/public', 'EMAIL_DEVISER_NO_SHIPPED_72_TEXT', [], $lang),
-				'text_2' => Yii::t('app/public', 'EMAIL_DEVISER_NO_SHIPPED_72_TEXT_2', [], $lang),
-				'button_text' => Yii::t('app/public', 'EMAIL_DEVISER_NO_SHIPPED_72_BUTTON_TEXT', [], $lang),
+				'header' => Yii::t('app/emails', 'DEVISER_NO_SHIPPED_72_HEADER', [], $lang),
+				'hello' => Yii::t('app/emails', 'DEVISER_NO_SHIPPED_72_HELLO', [], $lang),
+				'text' => Yii::t('app/emails', 'DEVISER_NO_SHIPPED_72_TEXT', [], $lang),
+				'text_2' => Yii::t('app/emails', 'DEVISER_NO_SHIPPED_72_TEXT_2', [], $lang),
+				'button_text' => Yii::t('app/emails', 'DEVISER_NO_SHIPPED_72_BUTTON_TEXT', [], $lang),
 				'button_link' => '{{deviser_link_profile}}',
 			]
 		);
@@ -150,19 +152,19 @@ class EmailsHelper
 	{
 		$lang = $order->getPerson()->settingsMapping->lang ?: Lang::EN_US;
 
-		$subject = Yii::t('app/public', 'EMAIL_CLIENT_NEW_ORDER_SUBJECT', [], $lang);
+		$subject = Yii::t('app/emails', 'CLIENT_NEW_ORDER_SUBJECT', [], $lang);
 
 		$send_at = (new \DateTime())->format('Y-m-d H:i:s');
 
 		$params = static::mergeCustomWithCommonVars(
 			static::getOrderCommonVars($order),
 			[
-				'header' => Yii::t('app/public', 'EMAIL_CLIENT_NEW_ORDER_HEADER', [], $lang),
-				'hello' => Yii::t('app/public', 'EMAIL_CLIENT_NEW_ORDER_HELLO', [], $lang),
-				'text' => Yii::t('app/public', 'EMAIL_CLIENT_NEW_ORDER_TEXT', [], $lang),
-				'text_2' => Yii::t('app/public', 'EMAIL_CLIENT_NEW_ORDER_TEXT_2', ['order_total' => $order->subtotal], $lang),
-				'text_3' => Yii::t('app/public', 'EMAIL_CLIENT_NEW_ORDER_TEXT_3', [], $lang),
-				'button_text' => Yii::t('app/public', 'EMAIL_CLIENT_NEW_ORDER_BUTTON_TEXT', [], $lang),
+				'header' => Yii::t('app/emails', 'CLIENT_NEW_ORDER_HEADER', [], $lang),
+				'hello' => Yii::t('app/emails', 'CLIENT_NEW_ORDER_HELLO', [], $lang),
+				'text' => Yii::t('app/emails', 'CLIENT_NEW_ORDER_TEXT', [], $lang),
+				'text_2' => Yii::t('app/emails', 'CLIENT_NEW_ORDER_TEXT_2', ['order_total' => $order->subtotal], $lang),
+				'text_3' => Yii::t('app/emails', 'CLIENT_NEW_ORDER_TEXT_3', [], $lang),
+				'button_text' => Yii::t('app/emails', 'CLIENT_NEW_ORDER_BUTTON_TEXT', [], $lang),
 				'button_link' => '{{client_link_profile}}',
 			]
 		);
@@ -174,18 +176,18 @@ class EmailsHelper
 	{
 		$lang = $order->getPerson()->settingsMapping->lang ?: Lang::EN_US;
 
-		$subject = Yii::t('app/public', 'EMAIL_CLIENT_NEW_ORDER_SHIPPED_SUBJECT', [], $lang);
+		$subject = Yii::t('app/emails', 'CLIENT_NEW_ORDER_SHIPPED_SUBJECT', [], $lang);
 
 		$send_at = (new \DateTime())->format('Y-m-d H:i:s');
 
 		$params = static::mergeCustomWithCommonVars(
 			static::getOrderPackCommonVars($order, $packId),
 			[
-				'header' => Yii::t('app/public', 'EMAIL_CLIENT_NEW_ORDER_SHIPPED_HEADER', [], $lang),
-				'hello' => Yii::t('app/public', 'EMAIL_CLIENT_NEW_ORDER_SHIPPED_HELLO', [], $lang),
-				'text' => Yii::t('app/public', 'EMAIL_CLIENT_NEW_ORDER_SHIPPED_TEXT', [], $lang),
-				'text_2' => Yii::t('app/public', 'EMAIL_CLIENT_NEW_ORDER_SHIPPED_TEXT_2', [], $lang),
-				'button_text' => Yii::t('app/public', 'EMAIL_CLIENT_NEW_ORDER_SHIPPED_BUTTON_TEXT', [], $lang),
+				'header' => Yii::t('app/emails', 'CLIENT_NEW_ORDER_SHIPPED_HEADER', [], $lang),
+				'hello' => Yii::t('app/emails', 'CLIENT_NEW_ORDER_SHIPPED_HELLO', [], $lang),
+				'text' => Yii::t('app/emails', 'CLIENT_NEW_ORDER_SHIPPED_TEXT', [], $lang),
+				'text_2' => Yii::t('app/emails', 'CLIENT_NEW_ORDER_SHIPPED_TEXT_2', [], $lang),
+				'button_text' => Yii::t('app/emails', 'CLIENT_NEW_ORDER_SHIPPED_BUTTON_TEXT', [], $lang),
 				'button_link' => '{{client_link_profile}}',
 			]
 		);
@@ -197,18 +199,18 @@ class EmailsHelper
 	{
 		$lang = Lang::EN_US;
 
-		$subject = Yii::t('app/public', 'EMAIL_TODEVISE_ORDER_72_SUBJECT', [], $lang);
+		$subject = Yii::t('app/emails', 'TODEVISE_ORDER_72_SUBJECT', [], $lang);
 
 		$send_at = (new \DateTime())->add(\DateInterval::createFromDateString('72 hours'))->format('Y-m-d H:i:s');
 
 		$params = static::mergeCustomWithCommonVars(
 			static::getOrderPackCommonVars($order, $packId),
 			[
-				'header' => Yii::t('app/public', 'EMAIL_TODEVISE_ORDER_72_HEADER', [], $lang),
-				'hello' => Yii::t('app/public', 'EMAIL_TODEVISE_ORDER_72_HELLO', [], $lang),
-				'text' => Yii::t('app/public', 'EMAIL_TODEVISE_ORDER_72_TEXT', [], $lang),
-				'text_2' => Yii::t('app/public', 'EMAIL_TODEVISE_ORDER_72_TEXT_2', [], $lang),
-				'button_text' => Yii::t('app/public', 'EMAIL_TODEVISE_ORDER_72_BUTTON_TEXT', [], $lang),
+				'header' => Yii::t('app/emails', 'TODEVISE_ORDER_72_HEADER', [], $lang),
+				'hello' => Yii::t('app/emails', 'TODEVISE_ORDER_72_HELLO', [], $lang),
+				'text' => Yii::t('app/emails', 'TODEVISE_ORDER_72_TEXT', [], $lang),
+				'text_2' => Yii::t('app/emails', 'TODEVISE_ORDER_72_TEXT_2', [], $lang),
+				'button_text' => Yii::t('app/emails', 'TODEVISE_ORDER_72_BUTTON_TEXT', [], $lang),
 				'button_link' => '',
 			]
 		);
@@ -220,18 +222,19 @@ class EmailsHelper
 	{
 		$lang = Lang::EN_US;
 
-		$subject = Yii::t('app/public', 'EMAIL_TODEVISE_ORDER_96_SUBJECT', [], $lang);
+		$subject = Yii::t('app/emails', 'TODEVISE_ORDER_96_SUBJECT', [], $lang);
 
 		$send_at = (new \DateTime())->add(\DateInterval::createFromDateString('96 hours'))->format('Y-m-d H:i:s');
+		$send_at = (new \DateTime())->format('Y-m-d H:i:s');
 
 		$params = static::mergeCustomWithCommonVars(
 			static::getOrderPackCommonVars($order, $packId),
 			[
-				'header' => Yii::t('app/public', 'EMAIL_TODEVISE_ORDER_96_HEADER', [], $lang),
-				'hello' => Yii::t('app/public', 'EMAIL_TODEVISE_ORDER_96_HELLO', [], $lang),
-				'text' => Yii::t('app/public', 'EMAIL_TODEVISE_ORDER_96_TEXT', [], $lang),
-				'text_2' => Yii::t('app/public', 'EMAIL_TODEVISE_ORDER_96_TEXT_2', [], $lang),
-				'button_text' => Yii::t('app/public', 'EMAIL_TODEVISE_ORDER_96_BUTTON_TEXT', [], $lang),
+				'header' => Yii::t('app/emails', 'TODEVISE_ORDER_96_HEADER', [], $lang),
+				'hello' => Yii::t('app/emails', 'TODEVISE_ORDER_96_HELLO', [], $lang),
+				'text' => Yii::t('app/emails', 'TODEVISE_ORDER_96_TEXT', [], $lang),
+				'text_2' => Yii::t('app/emails', 'TODEVISE_ORDER_96_TEXT_2', [], $lang),
+				'button_text' => Yii::t('app/emails', 'TODEVISE_ORDER_96_BUTTON_TEXT', [], $lang),
 				'button_link' => '',
 				'products' => [],
 			]
@@ -240,11 +243,58 @@ class EmailsHelper
 		return static::sendTemplate($subject, 'default', $params, 'todevise', $send_at);
 	}
 
-	protected static function sendTemplate($subject, $template_name, $params, $destination_type, $send_at)
+	public static function unreadChat(Person $person, ChatMessage $chatMessage)
+	{
+		$lang = Lang::EN_US;
+
+		$subject = Yii::t('app/emails', 'UNREAD_CHAT_SUBJECT', [], $lang);
+
+		$send_at = (new \DateTime())->format('Y-m-d H:i:s');
+
+		$sender = $chatMessage->getPerson();
+		$params = static::mergeCustomWithCommonVars(
+			[
+				'receiver_name' => $person->getName(),
+				'sender_name' => $sender->getName(),
+				'message_date' => $chatMessage->date->toDateTime()->format('Y-m-d H:i:s'),
+			],
+			[
+				'header' => Yii::t('app/emails', 'UNREAD_CHAT_HEADER', [], $lang),
+				'hello' => Yii::t('app/emails', 'UNREAD_CHAT_HELLO', [], $lang),
+				'text' => Yii::t('app/emails', 'UNREAD_CHAT_TEXT', [], $lang),
+				'text_2' => Yii::t('app/emails', 'UNREAD_CHAT_TEXT_2', [], $lang),
+				'button_text' => Yii::t('app/emails', 'UNREAD_CHAT_BUTTON_TEXT', [], $lang),
+				'button_link' => $sender->getChatLink(),
+				'products' => [],
+			]
+		);
+
+		return static::sendTemplate($subject, 'default', $params, $person->getEmail(), $send_at);
+	}
+
+	/**
+	 * Send a message using Mandrillapp
+	 *
+	 * @param string $subject Subject of the email
+	 * @param string $template_name Name of the template in Mandrillapp
+	 * @param array $params
+	 * @param string $destination Email receiver.
+	 * 	Special cases:
+	 *	'deviser': The email will be sent to the value in $params['deviser_email'], with $params['deviser_name'] as name
+	 *	'client': The email will be sent to the value in $params['client_email'], with $params['client_name'] as name
+	 *	'todevise': The email will be sent to info@todevise.com, with Todevise as name
+	 *
+	 * @param string $send_at Date and time to send the email, in format Y-m-d H:i:s
+	 *
+	 * @return mixed
+	 * @throws Exception
+	 * @throws \Mandrill_Error
+	 */
+	protected static function sendTemplate($subject, $template_name, $params, $destination, $send_at)
 	{
 		try {
 
-			switch ($destination_type) {
+			switch ($destination) {
 				case 'deviser':
 					$emailTo = $params['deviser_email'];
 					$nameTo = $params['deviser_name'];
@@ -258,7 +308,8 @@ class EmailsHelper
 					$nameTo = 'Todevise';
 					break;
 				default:
-					throw new Exception('Invalid destination type: '.$destination_type);
+					$emailTo = $destination;
+					$nameTo = $destination;
 			}
 
 			$merge_vars = [];

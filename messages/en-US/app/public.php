@@ -73,79 +73,6 @@ return [
     'EDIT_STORY_BY_PERSON_NAME' => 'Edit story {story_title} by {person_name}',
     'EDIT_VIDEOS_BY_PERSON_NAME' => 'Edit videos by {person_name}',
     'EDIT_WORKS_BY_PERSON_NAME' => 'Edit works by {person_name}',
-
-	// Emails
-	'EMAIL_DEVISER_NEW_ORDER_SUBJECT' => 'YOU HAVE A NEW SALE',
-	'EMAIL_DEVISER_NEW_ORDER_HEADER' => 'You have a new sale',
-	'EMAIL_DEVISER_NEW_ORDER_HELLO' => 'Hello {{deviser_name}}',
-	'EMAIL_DEVISER_NEW_ORDER_TEXT' => '{{client_name}} bought the following products:',
-	'EMAIL_DEVISER_NEW_ORDER_TEXT_2' => 'Please log into your Todevise profile and let us know that you are aware of the sale (even if you are not ready to send it yet, we need to know that you saw the notification).',
-	'EMAIL_DEVISER_NEW_ORDER_BUTTON_TEXT' => 'GO TO MY PROFILE',
-
-	'EMAIL_DEVISER_NEW_ORDER_REMINDER_24_SUBJECT' => 'REMINDER: YOU HAVE A NEW SALE',
-	'EMAIL_DEVISER_NEW_ORDER_REMINDER_24_HEADER' => 'REMINDER: YOU HAVE A NEW SALE',
-	'EMAIL_DEVISER_NEW_ORDER_REMINDER_24_HELLO' => 'Hello {{deviser_name}}',
-	'EMAIL_DEVISER_NEW_ORDER_REMINDER_24_TEXT' => '{{client_name}} bought the following products:',
-	'EMAIL_DEVISER_NEW_ORDER_REMINDER_24_TEXT_2' => 'Please let us know that you saw this sale & fill in the shipping information inside your profile when you shipped the package. To do so, go to SETTINGS - MY ORDERS.',
-	'EMAIL_DEVISER_NEW_ORDER_REMINDER_24_BUTTON_TEXT' => 'GO TO MY PROFILE',
-
-	'EMAIL_DEVISER_NEW_ORDER_REMINDER_48_SUBJECT' => 'REMINDER: ONE OF YOUR NEW SALES WASN’T ATTENDED',
-	'EMAIL_DEVISER_NEW_ORDER_REMINDER_48_HEADER' => 'REMINDER: ONE OF YOUR NEW SALES WASN’T ATTENDED',
-	'EMAIL_DEVISER_NEW_ORDER_REMINDER_48_HELLO' => 'Hello {{deviser_name}}',
-	'EMAIL_DEVISER_NEW_ORDER_REMINDER_48_TEXT' => '{{client_name}} bought the following products:',
-	'EMAIL_DEVISER_NEW_ORDER_REMINDER_48_TEXT_2' => 'You have an unattended sale. Please sign into your Todevise profile, let us know that you saw the sale and fill in the shipping information when you send the package.',
-	'EMAIL_DEVISER_NEW_ORDER_REMINDER_48_BUTTON_TEXT' => 'GO TO MY PROFILE',
-
-	'EMAIL_DEVISER_NO_SHIPPED_24_SUBJECT' => 'DID YOU SHIP THE PACKAGE?',
-	'EMAIL_DEVISER_NO_SHIPPED_24_HEADER' => 'DID YOU SHIP THE PACKAGE?',
-	'EMAIL_DEVISER_NO_SHIPPED_24_HELLO' => 'Hello {{deviser_name}}',
-	'EMAIL_DEVISER_NO_SHIPPED_24_TEXT' => '{{client_name}} bought the following products:',
-	'EMAIL_DEVISER_NO_SHIPPED_24_TEXT_2' => 'Please let us know that you saw this sale. Were you able to ship the package? If so, please fill in the shipping information by going to SETTINGS - MY ORDERS, and clicking the PACKAGE WAS SHIPPED button.',
-	'EMAIL_DEVISER_NO_SHIPPED_24_BUTTON_TEXT' => 'GO TO MY PROFILE',
-
-	'EMAIL_DEVISER_NO_SHIPPED_48_SUBJECT' => 'PLEASE FILL IN THE SHIPPING INFORMATION FOR ORDER #{{order_number}}',
-	'EMAIL_DEVISER_NO_SHIPPED_48_HEADER' => 'PLEASE FILL IN THE SHIPPING INFORMATION FOR ORDER #{{order_number}}',
-	'EMAIL_DEVISER_NO_SHIPPED_48_HELLO' => 'Hello {{deviser_name}}',
-	'EMAIL_DEVISER_NO_SHIPPED_48_TEXT' => '{{client_name}} bought the following products:',
-	'EMAIL_DEVISER_NO_SHIPPED_48_TEXT_2' => 'Please fill in the shipping information for the order #(número pedido). The customer will be informed that the package was shipped only if you fill in this information.',
-	'EMAIL_DEVISER_NO_SHIPPED_48_BUTTON_TEXT' => 'GO TO MY PROFILE',
-
-	'EMAIL_DEVISER_NO_SHIPPED_72_SUBJECT' => 'IMPORTANT! SHIPPING INFORMATION MISSING FOR ORDER #{{order_number}}',
-	'EMAIL_DEVISER_NO_SHIPPED_72_HEADER' => 'IMPORTANT! SHIPPING INFORMATION MISSING FOR ORDER #{{order_number}}',
-	'EMAIL_DEVISER_NO_SHIPPED_72_HELLO' => 'Hello {{deviser_name}}',
-	'EMAIL_DEVISER_NO_SHIPPED_72_TEXT' => '{{client_name}} bought the following products:',
-	'EMAIL_DEVISER_NO_SHIPPED_72_TEXT_2' => 'At Todevise we always put our customers first, and we need to keep them updated on their orders. The shipping information for your order #(número pedido) is missing - please fill it in and click the PACKAGE WAS SHIPPED button as soon as possible.',
-	'EMAIL_DEVISER_NO_SHIPPED_72_BUTTON_TEXT' => 'GO TO MY PROFILE',
-
-	'EMAIL_CLIENT_NEW_ORDER_SUBJECT' => 'Congratulations, your purchase has been completed successfully!',
-	'EMAIL_CLIENT_NEW_ORDER_HEADER' => 'Congratulations, your purchase has been completed successfully!',
-	'EMAIL_CLIENT_NEW_ORDER_HELLO' => 'Hello {{client_name}}',
-	'EMAIL_CLIENT_NEW_ORDER_TEXT' => 'You purchased the following products from Todevise:',
-	'EMAIL_CLIENT_NEW_ORDER_TEXT_2' => 'Total price w/shipping: {order_total}€',
-	'EMAIL_CLIENT_NEW_ORDER_TEXT_3' => 'This is not an invoice. The invoice(s) for your order will be sent by the deviser(s), and you can download them from your Todevise profile by going to SETTINGS - MY ORDERS.<br />We will send you an email when the product(s) will be shipped.',
-	'EMAIL_CLIENT_NEW_ORDER_BUTTON_TEXT' => 'GO TO MY PROFILE',
-
-	'EMAIL_CLIENT_NEW_ORDER_SHIPPED_SUBJECT' => 'Your products have been shipped!',
-	'EMAIL_CLIENT_NEW_ORDER_SHIPPED_HEADER' => 'Your products have been shipped!',
-	'EMAIL_CLIENT_NEW_ORDER_SHIPPED_HELLO' => 'Hello {{client_name}}',
-	'EMAIL_CLIENT_NEW_ORDER_SHIPPED_TEXT' => 'The following products from {{deviser_name}} were shipped:',
-	'EMAIL_CLIENT_NEW_ORDER_SHIPPED_TEXT_2' => '<p>The shipping information is the following:</p><p> - Shipping company: {{company}}</p><p> - Tracking number: {{tracking_number}}</p><p> - Tracking link: {{tracking_link}}</p>',
-	'EMAIL_CLIENT_NEW_ORDER_SHIPPED_BUTTON_TEXT' => 'GO TO MY PROFILE',
-
-	'EMAIL_TODEVISE_ORDER_72_SUBJECT' => 'Order not attended after 72 hours!',
-	'EMAIL_TODEVISE_ORDER_72_HEADER' => 'Order not attended after 72 hours!',
-	'EMAIL_TODEVISE_ORDER_72_HELLO' => 'Hello Todevise',
-	'EMAIL_TODEVISE_ORDER_72_TEXT' => 'The deviser {{deviser_name}} did not click the button I’M AWARE for the order #{{order_number}}, with this products:',
-	'EMAIL_TODEVISE_ORDER_72_TEXT_2' => '',
-	'EMAIL_TODEVISE_ORDER_72_BUTTON_TEXT' => '',
-
-	'EMAIL_TODEVISE_ORDER_96_SUBJECT' => 'Order no shipped after 96 hours!',
-	'EMAIL_TODEVISE_ORDER_96_HEADER' => 'Order no shipped after 96 hours!',
-	'EMAIL_TODEVISE_ORDER_96_HELLO' => 'Hello Todevise',
-	'EMAIL_TODEVISE_ORDER_96_TEXT' => 'The deviser {{deviser_name}} did not fill in the shipping information for the order #{{order_number}}.',
-	'EMAIL_TODEVISE_ORDER_96_TEXT_2' => '',
-	'EMAIL_TODEVISE_ORDER_96_BUTTON_TEXT' => '',
-
 	'ERROR_PAGE_TITLE' => 'Oops! Something went wrong',
 	'ERROR_PAGE_MESSAGE_1' => 'Even the best relationships  go through  a rough patch sometimes, but this doesn’t mean that  we don’t love each other anymore',
 	'ERROR_PAGE_MESSAGE_2' => 'PD: Go to the home page, we are taking care of it!',
