@@ -327,12 +327,13 @@ $config = [
 				'cart/' => 'public/cart',
 				'checkout/' => 'public/checkout',
 
-				//Links for contact
+				//Links for generics
 				'contact' => 'public/contact',
 				'about-us' => 'public/about-us',
 				'cookies-policy' => 'public/cookies',
 				'privacy-policy' => 'public/privacy',
 				'terms-and-conditions' => 'public/terms',
+				'returns-and-warranties' => 'public/returns',
 
 				// Postman (temp urls)
 //				'/postman/emails' => 'postman/index',
