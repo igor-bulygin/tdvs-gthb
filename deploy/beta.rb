@@ -28,6 +28,7 @@ end
 task :linkbeta do
     transaction do
       run "ln -nfs #{shared_path}/public/images #{releases_path}/#{release_name}/web/uploads"
+      run "ln -nfs #{shared_path}/.env #{releases_path}/#{release_name}/.env"
     end
 end
 task :symlink do

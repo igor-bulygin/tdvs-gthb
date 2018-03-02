@@ -1,11 +1,11 @@
-task :mobile do
-        set :branch, 'mobile'
+task :redesign do
+        set :branch, 'redesign'
         set :user, "todeviseapp"
         server "dev.todevise.com:1021", :app, :web, :primary => true
-        set :deploy_to, "/var/www/mobile.todevise/web"
-        after "deploy", "linkmobile","composermobile", "npmmobile", "assetsmobile", "symlink","restartphp"
+        set :deploy_to, "/var/www/redesign/web"
+        after "deploy", "linkred","composered", "npmred", "assetsred", "symlink","restartphp"
 end
-task :composermobile do
+task :composered do
     transaction do
       run "ln -nfs #{shared_path}/system/vendor #{releases_path}/#{release_name}/vendor"
       run "cd #{releases_path}/#{release_name} ; composer -q global require \"fxp/composer-asset-plugin:~1.1.1\""
@@ -13,23 +13,22 @@ task :composermobile do
       run "cd #{releases_path}/#{release_name} ; ./yii mongodb-migrate --interactive=0"
     end
 end
-task :npmmobile do
+task :npmred do
     transaction do
       run "ln -nfs #{shared_path}/system/node_modules #{releases_path}/#{release_name}/node_modules"
       run "cd #{releases_path}/#{release_name} ; npm install"
     end
 end
-task :assetsmobile do
+task :assetsred do
     transaction do
       # run "cd #{releases_path}/#{release_name}/tools/gulp ; npm install"
       # run "cd #{releases_path}/#{release_name} ; ./yii asset tools/gulp/assets.php config/assets_compressed.php"
     end
 end
-task :linkmobile do
+task :linkred do
     transaction do
       run "ln -nfs /var/www/todevise/web/shared/public/images/uploads #{releases_path}/#{release_name}/web/uploads"
-      run "ln -nfs /var/www/todevise/web/shared/public/thumbor_resized #{releases_path}/#{release_name}/web/thumbor_resized"
-      run "ln -nfs /var/www/todevise/web/shared/public/thumbor_cache #{releases_path}/#{release_name}/web/thumbor_cache"
+      run "ln -nfs #{shared_path}/.env #{releases_path}/#{release_name}/.env"
     end
 end
 task :symlink do
