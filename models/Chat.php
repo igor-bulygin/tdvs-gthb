@@ -324,6 +324,8 @@ class Chat extends CActiveRecord
 
 	public function addMessage($person_id, $text)
 	{
+		$sender = Person::findOneSerialized($person_id);
+
 		$chatMessage = new ChatMessage();
 		$chatMessage->person_id = $person_id;
 		$chatMessage->text = $text;
@@ -342,12 +344,11 @@ class Chat extends CActiveRecord
 				$unread_by[] = $member->person_id;
 			}
 		}
-		if (in_array($person_id, $unread_by)) {
-			unset($unread_by[array_search($person_id, $unread_by)]);
-		}
 
 		$this->setAttribute('unread_by', $unread_by);
 		$this->save();
+
+		$this->markAsReadByPerson($sender);
 	}
 
 	public function getPreview()
