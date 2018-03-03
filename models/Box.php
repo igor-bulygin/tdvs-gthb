@@ -481,6 +481,8 @@ class Box extends CActiveRecord
 			}
 		}
 		if (!isset($key)) {
+			$boxProduct->created_at = new MongoDate();
+			$boxProduct->updated_at = new MongoDate();
 			$this->productsMapping[] = $boxProduct;
 
 			$this->save();

@@ -357,6 +357,16 @@ class PublicController extends CController
 		]);
 	}
 
+	public function actionReturns()
+	{
+		$this->layout = '/desktop/public-2.php';
+
+		return $this->render("legal-page", [
+			'title' => Yii::t('app/returns', 'TITLE'),
+			'text' => Yii::t('app/returns', 'TEXT'),
+		]);
+	}
+
 	public function actionElements()
 	{
 		$this->layout = '/desktop/empty-layout.php';

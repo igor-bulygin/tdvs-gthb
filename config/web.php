@@ -247,6 +247,7 @@ $config = [
 
 				'/admin/reset-password/<person_id:[^/.]*?>' => 'admin/reset-password',
 				'/admin/invoices-excel/<date_from:[^/.]*?>/<date_to:[^/.]*?>' => 'admin/invoices-excel',
+				'/admin/packages-excel/<date_from:[^/.]*?>/<date_to:[^/.]*?>' => 'admin/packages-excel',
 				'/admin/mandrill-content/<message_id:[^/.]*?>' => 'admin/mandrill-content',
 
 				//Person
@@ -326,12 +327,13 @@ $config = [
 				'cart/' => 'public/cart',
 				'checkout/' => 'public/checkout',
 
-				//Links for contact
+				//Links for generics
 				'contact' => 'public/contact',
 				'about-us' => 'public/about-us',
 				'cookies-policy' => 'public/cookies',
 				'privacy-policy' => 'public/privacy',
 				'terms-and-conditions' => 'public/terms',
+				'returns-and-warranties' => 'public/returns',
 
 				// Postman (temp urls)
 //				'/postman/emails' => 'postman/index',

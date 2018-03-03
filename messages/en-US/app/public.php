@@ -128,9 +128,12 @@ return [
     'SHIPPING_SETTINGS' => 'Shipping settings',
     'SIGNUP' => 'Signup',
 	'SOCIAL_FEED_BY_PERSON_NAME' => 'Social feed by {person_name}',
+
+	// SMS
 	'SMS_DEVISER_NEW_SALE' => 'New sale [[order_number]]. Please go to SETTINGS-MY ORDERS and let us know that you are aware [[deviser_link_profile]]',
 	'SMS_DEVISER_NEW_SALE_REMINDER_72' => 'REMINDER: YOU HAVE A NEW SALE. Please let us know that you saw the sale [[order_number]] [[deviser_link_profile]]',
-    'STORIES' => 'Stories',
+
+	'STORIES' => 'Stories',
     'STORY_BY_PERSON_NAME' => 'Stories {person_name}',
 	'TODEVISE_META_DESCRIPTION' => 'Todevise is the combination between a social network and e-commerce that revolutionizes the way you discover products and buy online. ',
 	'VIDEOS_BY_PERSON_NAME' => 'Videos by {person_name}',

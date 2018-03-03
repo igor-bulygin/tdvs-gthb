@@ -217,6 +217,10 @@ class Chat extends CActiveRecord
 			$query->andWhere(["messages.unread" => $criteria["unread_by_person_id"]]);
 		}
 
+		if ((array_key_exists("with_unread_messages", $criteria)) && (!empty($criteria["with_unread_messages"]))) {
+//			$query->andWhere(["messages.unread" => $criteria["unread_by_person_id"]]);
+		}
+
 		// Count how many items are with those conditions, before limit them for pagination
 		static::$countItemsFound = $query->count();
 
@@ -324,6 +328,8 @@ class Chat extends CActiveRecord
 
 	public function addMessage($person_id, $text)
 	{
+		$sender = Person::findOneSerialized($person_id);
+
 		$chatMessage = new ChatMessage();
 		$chatMessage->person_id = $person_id;
 		$chatMessage->text = $text;
@@ -342,12 +348,11 @@ class Chat extends CActiveRecord
 				$unread_by[] = $member->person_id;
 			}
 		}
-		if (in_array($person_id, $unread_by)) {
-			unset($unread_by[array_search($person_id, $unread_by)]);
-		}
 
 		$this->setAttribute('unread_by', $unread_by);
 		$this->save();
+
+		$this->markAsReadByPerson($sender);
 	}
 
 	public function getPreview()

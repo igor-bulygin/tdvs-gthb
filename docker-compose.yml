@@ -7,13 +7,10 @@ services:
     nginx:
         build: ./docker_nginx
         environment:
-            DEV: "1"
             DOMAIN: "todevise.com"
             GIT_EMAIL: "alexandernst@gmail.com"
             WEBROOT: "/var/www/html/web"
-            THUMBOR_SECURITY_KEY: "ccpXNPgnXHaONlWlzXTEGg458K9HfE"
-            THUMBOR_SERVER: "localhost.thumbor.todevise.com:8000"
-        command: bash -c "cd /var/www/html && composer install -v --prefer-dist && ./yii mongodb-migrate --interactive=0 && /start.sh"
+        command: bash -c "cd /var/www/html && cp docker_nginx/env_file .env &&  composer install -v --prefer-dist && ./yii mongodb-migrate --interactive=0 && /start.sh"
         ports:
             - "8443:8443"
             - "8080:8080"

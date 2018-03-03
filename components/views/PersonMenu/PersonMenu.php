@@ -17,7 +17,7 @@ $person = $this->params['person'];
 
 <nav class="menu-store" ng-controller="personMenuCtrl as personMenuCtrl">
 	<ul class="mt-0">
-		<?php if ($person->isDeviser()) { ?>
+		<?php if ($person->showStore()) { ?>
 			<li class="<?= ($activeOption=='store') ? 'active' : '' ?>">
 				<a class=" <?= ($activeOption=='store') ? 'active' : '' ?> ng-class:{'purple-text': personMenuCtrl.required['store']}" href="<?= $linksTarget=="edit_view" ? $person->getStoreEditLink() : $person->getStoreLink()?>">Store</a>
 				<?php if (count($categories)>0) { ?>
@@ -31,51 +31,51 @@ $person = $this->params['person'];
 				<?php } ?>
 			</li>
 		<?php } ?>
-		<?php /*
-		<?php if ($person->isInfluencer() || $person->isDeviser()) { ?>
+		<?php if ($person->showSocial()) { ?>
 			<li>
 				<a class=" <?= ($activeOption=='social') ? 'active' : '' ?>" href="<?= $person->getSocialLink()?>">Social feed</a>
 			</li>
 		<?php } ?>
-		*/ ?>
+		<?php if ($person->showLoved()) { ?>
 		<li class=" <?= ($activeOption=='loved') ? 'active' : '' ?>">
 			<a class=" <?= ($activeOption=='loved') ? 'active' : '' ?>" href="<?= $person->getLovedLink()?>">Loved</a>
 		</li>
+		<?php } ?>
+		<?php if ($person->showBoxes()) { ?>
 		<li class=" <?= ($activeOption=='boxes') ? 'active' : '' ?>">
 			<a class=" <?= ($activeOption=='boxes') ? 'active' : '' ?>" href="<?= $person->getBoxesLink()?>">Boxes</a>
 		</li>
-		<?php /*
-		<?php if ($person->isDeviser() || $person->isInfluencer()) { ?>
+		<?php } ?>
+		<?php if ($person->showStories()) { ?>
 			<li>
 				<a class=" <?= ($activeOption=='stories') ? 'active' : '' ?>" href="<?= $person->getStoriesLink()?>">Stories</a>
 			</li>
 		<?php } ?>
-		*/ ?>
 	</ul>
 	<ul class="menu-deviser-bottom">
-		<?php if ($person->isDeviser() || $person->isInfluencer()) { ?>
+		<?php if ($person->showAbout()) { ?>
 			<li class="<?= ($activeOption=='about') ? 'active' : '' ?>">
 				<a class="<?= ($activeOption=='about') ? 'active' : '' ?> ng-class:{'purple-text': personMenuCtrl.required['about']}" href="<?= $linksTarget == "edit_view" ? $person->getAboutEditLink() : $person->getAboutLink()?>">About</a>
 			</li>
 		<?php } ?>
-		<?php if ($person->isDeviser() || $person->isInfluencer()) { ?>
+		<?php if ($person->showPress()) { ?>
 			<li class=" <?= ($activeOption=='press') ? 'active' : '' ?>">
 				<a class=" <?= ($activeOption=='press') ? 'active' : '' ?>" href="<?= $linksTarget == "edit_view" ? $person->getPressEditLink() : $person->getPressLink()?>">Press</a>
 			</li>
 		<?php } ?>
-		<?php if ($person->isDeviser() || $person->isInfluencer()) { ?>
+		<?php if ($person->showVideos()) { ?>
 			<li class=" <?= ($activeOption=='videos') ? 'active' : '' ?>">
 				<a class=" <?= ($activeOption=='videos') ? 'active' : '' ?>" href="<?=$linksTarget == "edit_view" ? $person->getVideosEditLink() : $person->getVideosLink()?>">Videos</a>
 			</li>
 		<?php } ?>
-		<?php if ($person->isDeviser()) { ?>
+		<?php if ($person->showFaq()) { ?>
 			<li class=" <?= ($activeOption=='faq') ? 'active' : '' ?>">
 				<a class=" <?= ($activeOption=='faq') ? 'active' : '' ?>" href="<?= $linksTarget == "edit_view" ? $person->getFaqEditLink() : $person->getFaqLink()?>">FAQ</a>
 			</li>
 		<?php } ?>
 	</ul>
 	<?php 
-	if ($person->isDeviser()) {
+	if ($person->showStore()) {
 	if (count($categories)>0) { ?>
 		<ul class="submenu-store hidden-sm hidden-md hidden-lg">
 			<?php foreach ($categories as $i => $category) { ?>
