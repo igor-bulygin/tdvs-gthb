@@ -42,6 +42,10 @@
 		float: left;
 		color:$darker_grey;
 	}
+	a, button{
+		display: block;
+		float: none;
+	}
 }
 .subtotal-amount{
 	letter-spacing: 0.5px;

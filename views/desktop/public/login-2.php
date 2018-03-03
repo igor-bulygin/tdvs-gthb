@@ -33,7 +33,7 @@ Yii::$app->opengraph->title = $this->title;
 					</label>
 				</div>
 			</div>
-			<div class="row mt-10">
+			<div class="row mt-10 text-center">
 				<span translate="todevise.login.NEW_TO_TODEVISE"></span> <a href="<?=Url::to(['/signup'])?>" translate="todevise.login.BECOME_A_MEMBER" class="text-red"></a> <span translate="todevise.login.ITS_100_FREE"></span>
 			</div>
 			<div class="alert alert-danger" ng-if="loginCtrl.errors" ng-cloak translate="todevise.login.NOT_VALID"></div>

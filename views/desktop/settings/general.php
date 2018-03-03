@@ -45,12 +45,11 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 											<input class="form-control"  type="text" name="name" ng-model="generalSettingsCtrl.person.personal_info.name" placeholder="{{ 'global.user.FIRST_NAME' | translate }}" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.name)}">
 											<span class="purple-text col-xs-12 no-pad" ng-if="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.name)" translate="settings.FILL_FIELD"></span>
 										</div>
-										
+
 										<div class="col-xs-6 responsive-pad-right-0">
 											<input class="form-control" type="text" name="last_name" ng-model="generalSettingsCtrl.person.personal_info.last_name" placeholder="{{ 'global.user.LAST_NAME' | translate }}" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.last_name)}">
 											<span class="purple-text col-xs-12 responsive-pad-right-0" ng-if="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.last_name)" translate="settings.FILL_FIELD"></span>
 										</div>
-										
 									</div>
 								</div>
 								<div class="col-md-4 identifier-pad">
@@ -120,7 +119,7 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 								</div>
 								<div class="col-xs-6">
 									<div>
-										<a href="#" class="btn btn-change-password" ng-click="generalSettingsCtrl.openModal()"><span translate="settings.general.CHANGE_PASSWORD"></span></a>
+										<a href="#" style="line-height: 2.25;" class="btn btn-change-password" ng-click="generalSettingsCtrl.openModal()"><span translate="settings.general.CHANGE_PASSWORD"></span></a>
 									</div>
 								</div>
 							</div>

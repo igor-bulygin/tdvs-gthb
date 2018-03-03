@@ -574,8 +574,10 @@
     //border-left: 1px solid $white;
     width: 25% !important;//265px!important;
 }
-.about-wrapper .nya-bs-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn){
-    min-width: 120px !important;
+.about-wrapper{
+    .nya-bs-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn){
+        min-width: 120px !important;
+    }
 }
 .optional-text{
     color: #7c7c7c;
