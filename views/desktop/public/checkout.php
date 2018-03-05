@@ -14,7 +14,7 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 ?>
 
 <div class="store" ng-controller="checkoutCtrl as checkoutCtrl">
-	<div class="cart-top-bar">
+	<div class="hidden-xs hidden-sm cart-top-bar">
 		<div class="container">
 			<div class="pull-right">
 				<a href="/" class="continue-shopping-btn">
@@ -26,12 +26,19 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 	</div>
 	<div class="container checkout-sidebar no-pad">
 		<div ng-show="!checkoutCtrl.saving">
-			<div class="col-md-8 no-pad">
+                        <div class="hidden-md hidden-lg col-xs-12 col-sm-12 mt-10">
+                                <span class="checkout-title">
+                                        <span class="cart-icon-black pull-left"></span>
+                                        <span class="shopping-cart-title no-mar" translate="cart.shopping_cart.YOUR_SHOPPING_CART"></span>
+                                </span>
+                                <cart-summary cart="checkoutCtrl.cart" state="checkoutCtrl.checkout_state" tags="checkoutCtrl.tags"></cart-summary>
+                        </div>
+			<div class="col-xs-12 col-sm-12 col-md-8 no-pad">
 				<personal-info ng-if="checkoutCtrl.cart&&checkoutCtrl.countries"  ng-cloak cart="checkoutCtrl.cart" state="checkoutCtrl.checkout_state" countries="checkoutCtrl.countries"></personal-info>
 				<shipping-methods cart="checkoutCtrl.cart" state="checkoutCtrl.checkout_state"></shipping-methods>
 				<payment-methods cart="checkoutCtrl.cart" state="checkoutCtrl.checkout_state" countries="checkoutCtrl.countries" saving="checkoutCtrl.saving"></payment-methods>
 			</div>
-			<div class="col-md-4 no-pad summary-side bordered-left">
+			<div class="hidden-xs hidden-sm col-md-4 no-pad summary-side bordered-left">
 				<cart-summary cart="checkoutCtrl.cart" state="checkoutCtrl.checkout_state" tags="checkoutCtrl.tags"></cart-summary>
 			</div>
 		</div>

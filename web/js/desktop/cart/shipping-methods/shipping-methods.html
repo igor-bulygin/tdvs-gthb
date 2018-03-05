@@ -1,7 +1,7 @@
 <div class="personal-info-wrapper">
 	<span class="shopping-cart-section-header">
 		2 <span translate="cart.shipping_methods.SHIPPING_METHODS_TITLE"></span>
-		<div class="pull-right" ng-if="shippingMethodsCtrl.state > 1">
+		<div class="hidden-xs pull-right" ng-if="shippingMethodsCtrl.state > 1">
 			<a href="/cart" class="continue-shopping-btn">
 				<i class="ion-arrow-left-b"></i>
 					<span translate="cart.RETURN_CART"></span>
@@ -11,18 +11,18 @@
 	<div ng-if="shippingMethodsCtrl.state > 1">
 		<div ng-repeat="pack in shippingMethodsCtrl.cart.packs">
 			<div class="deviser-title-wrapper">
-				<div class="col-xs-12 col-sm-12 col-md-6">
-					<div class="col-xs-2 col-md-2">
+				<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+					<div class="col-xs-2 col-sm-3 col-md-3 col-lg-3">
 						<a ng-src="pack.deviser.url">
-							<img class="avatar-default small" ng-src="{{pack.deviser_info.photo}}" ng-attr-alt="{{pack.deviser_info.name}}" ng-attr-title="{{pack.deviser_info.name}}" style="max-width: 50px;">
+							<img class="avatar-default small" ng-src="{{pack.deviser_info.photo}}" ng-attr-alt="{{pack.deviser_info.name}}" ng-attr-title="{{pack.deviser_info.name}}" style="max-width: 45px;">
 						</a>
 					</div>
-					<div class="col-xs-10 col-md-10">
+					<div class="col-xs-10 col-sm-9 col-md-9 col-lg-9">
 						<span class="title-deviser-shipping" ng-bind="pack.deviser_info.name"></span>
 					</div>
 				</div>
-				<div class="col-xs-12 col-sm-12 col-md-6">
-					<div class="col-xs-4 col-sm-4 col-md-4" ng-if="shippingMethodsCtrl.state === 2">
+				<div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+					<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" ng-if="shippingMethodsCtrl.state === 2">
 						<div class="radio radio-inline" style="display: block !important; margin-left: 0;" ng-if="pack.deviser_info.shipping_time" ng-cloak>
 							<input type="radio" ng-value="'standard'" ng-model="pack.shipping_type" name="{{'standard_shipping_'+$index}}" ng-attr-id="{{'standard_shipping'+$index}}" ng-change="shippingMethodsCtrl.setShippingPriceTime(pack)">
 							<label for="{{'standard_shipping'+$index}}"><span translate="global.STANDARD"></span></label>
@@ -32,12 +32,13 @@
 							<label for="{{'express_shipping'+$index}}"><span translate="global.EXPRESS"></span></label>
 						</div>
 					</div>
-					<div class="col-xs-8 col-sm-8 col-md-8">
+					<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 						<p style="margin-top: 15px;">
 							<span ng-if="pack.shipping_time || pack.deviser_info.shipping_time" translate="cart.shipping_methods.DELIVERY_WITHIN" translate-values="{days: pack.shipping_time || pack.deviser_info.shipping_time}"></span>
 							<span ng-if="!pack.shipping_time && !pack.deviser_info.shipping_time" translate="cart.shipping_methods.NOT_SETTED_DELIVERY"></span>
-						<span ng-if="pack.shipping_price && pack.shipping_price > 0" ng-cloak>
-								<span class="price-bold"> - </span><span ng-bind="pack.shipping_price"></span><span class="price-bold"> €</span>
+							<span ng-if="pack.shipping_price && pack.shipping_price > 0" ng-cloak>
+								<span class="price-bold"> - </span>
+								<span ng-bind="pack.shipping_price"></span><span class="price-bold"> €</span>
 							</span>
 							<span ng-if="(!pack.shipping_price) || (pack.shipping_price && pack.shipping_price < 1)" ng-cloak>
 								<span translate="cart.summary.FREE_SHIPPING"></span>
@@ -48,12 +49,12 @@
 			</div>
 			<div class="row row deviser-product-wrapper">
 				<div ng-repeat="product in pack.products">
-					<product-card product="product"></product-card>
+					<product-card product="product" classes="{column1Class: 'col-xs-3 col-sm-3 col-md-3 col-lg-3', column2Class: 'col-xs-9 col-sm-9 col-md-9 col-lg-9'}"></product-card>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="col-md-12 text-center" ng-if="shippingMethodsCtrl.state===2">
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center" ng-if="shippingMethodsCtrl.state===2">
 		<button class="btn btn-red mt-30" ng-click="shippingMethodsCtrl.save()"><span translate="cart.shipping_methods.CONTINUE_PAYMENT"></span></button>
 	</div>
 </div>

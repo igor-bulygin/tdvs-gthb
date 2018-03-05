@@ -1,11 +1,11 @@
 <div class="row no-mar payment-methods-wrapper">
 	<span class="shopping-cart-section-header">3 <span translate="cart.payment_methods.PAYMENT_TITLE"></span></span>
-	<div class="col-md-12 payment-methods-wrapper" ng-if="paymentMethodsCtrl.state === 3">
-		<div class="row">
-			<div class="col-md-6">
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 payment-methods-wrapper" ng-if="paymentMethodsCtrl.state === 3">
+		<div class="row" style="margin: auto 10px;">
+			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 				<p translate="cart.payment_methods.PAYMENT_SAME"></p>
 			</div>
-			<div class="col-md-6">
+			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 				<div class="radio radio-inline">
 					<input type="radio" checked ng-value="true" ng-model="paymentMethodsCtrl.sameBilling" name="same_billing" id="same_billing">
 					<label for="same_billing"><span translate="global.YES"></span></label>
@@ -16,8 +16,8 @@
 				</div>
 			</div>
 		</div>
-		<div class="row">
-			<form class="form-horizontal" name="paymentMethodsCtrl.billingForm" novalidate ng-if="!paymentMethodsCtrl.sameBilling">
+		<div class="row" ng-if="!paymentMethodsCtrl.sameBilling">
+			<form class="form-horizontal" name="paymentMethodsCtrl.billingForm" novalidate>
 				<div class="col-md-6">
 					<span class="billing-header"><span translate="cart.PERSONAL_DETAILS"></span></span>
 					<div class="form-group form-personal-info">
@@ -90,7 +90,7 @@
 				</div>
 			</form>
 		</div>
-		<div class="col-md-12 text-center">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
 			<!--<button class="btn btn-default btn-green" ng-click="paymentMethodsCtrl.stripejs()">Pay with Stripe.js</button><br />-->
 			<button class="btn btn-default btn-red mt-20" ng-click="paymentMethodsCtrl.checkout(paymentMethodsCtrl.billingForm)"><span translate="cart.payment_methods.PAY_CARD"></span></button><br />
 			<p class="text-center mt-20 grey-text" translate="cart.payment_methods.PAY_TEXT_1"></p>

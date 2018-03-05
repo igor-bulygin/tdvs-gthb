@@ -1,48 +1,48 @@
 <div class="personal-info-wrapper">
 	<span class="shopping-cart-section-header">1 <span translate="cart.personal_info.PERSONAL_INFO_TITLE"></span></span>
 	<div ng-if="personalInfoCtrl.state===1">
-		<span class="col-md-12" ng-if="!personalInfoCtrl.adressValidToShip" ng-cloak><span class="error-input" translate="cart.personal_info.NOT_VALID_COUNTRY"></span></span>
+		<span class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="!personalInfoCtrl.adressValidToShip" ng-cloak><span class="error-input" translate="cart.personal_info.NOT_VALID_COUNTRY"></span></span>
 		<form class="form-horizontal" name="personalInfoCtrl.form" novalidate>
-		<div class="col-md-6">
+		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-10">
 				<span class="billing-header"><span translate="cart.PERSONAL_DETAILS"></span></span>
 				<div class="form-group form-personal-info">
-					<label for="name" class="col-md-3"><span translate="cart.FIRST_NAME"></span></label>
-					<div class="col-md-9">
+					<label for="name" class="col-xs-12 col-sm-12 col-md-3"><span translate="cart.FIRST_NAME"></span></label>
+					<div class="col-xs-12 col-sm-12 col-md-9">
 						<input type="text" name="name" ng-model="personalInfoCtrl.cart.shipping_address.name" class="form-control ng-class:{'error-input': personalInfoCtrl.has_error(personalInfoCtrl.form, personalInfoCtrl.form.name)}" required>
 						<form-errors field="personalInfoCtrl.form.name" condition="personalInfoCtrl.has_error(personalInfoCtrl.form, personalInfoCtrl.form.name)"></form-errors>
 					</div>
 				</div>
 				<div class="form-group form-personal-info">
-					<label for="last_name" class="col-md-3"><span translate="cart.LAST_NAME"></span></label>
-					<div class="col-md-9">
+					<label for="last_name" class="col-xs-12 col-sm-12 col-md-3"><span translate="cart.LAST_NAME"></span></label>
+					<div class="col-xs-12 col-sm-12 col-md-9">
 						<input type="text" name="last_name" ng-model="personalInfoCtrl.cart.shipping_address.last_name" class="form-control ng-class:{'error-input': personalInfoCtrl.has_error(personalInfoCtrl.form, personalInfoCtrl.form.last_name)}" required>
 						<form-errors field="personalInfoCtrl.form.last_name" condition="personalInfoCtrl.has_error(personalInfoCtrl.form, personalInfoCtrl.form.last_name)"></form-errors>
 					</div>
 				</div>
 				<div class="form-group form-personal-info">
-					<label for="vat_id" class="col-md-3"><span translate="cart.VAT_NUMBER"></span></label>
-					<div class="col-md-9">
+					<label for="vat_id" class="col-xs-12 col-sm-12 col-md-3"><span translate="cart.VAT_NUMBER"></span></label>
+					<div class="col-xs-12 col-sm-12 col-md-9">
 						<input type="text" name="vat_id" ng-model="personalInfoCtrl.cart.shipping_address.vat_id" class="form-control ng-class:{'error-input': personalInfoCtrl.has_error(personalInfoCtrl.form, personalInfoCtrl.form.vat_id)}">
 						<form-errors field="personalInfoCtrl.form.vat_id" condition="personalInfoCtrl.has_error(personalInfoCtrl.form, personalInfoCtrl.form.vat_id)"></form-errors>
 					</div>
 				</div>
 				<div class="form-group form-personal-info">
-					<label for="phone" class="col-md-3"><span translate="cart.PHONE"></span></label>
-					<div class="col-md-3">
-						<input type="text" name="phone_number_prefix" ng-model="personalInfoCtrl.cart.shipping_address.phone_number_prefix" class="form-control ng-class:{'error-input': personalInfoCtrl.has_error(personalInfoCtrl.form, personalInfoCtrl.form.phone_number_prefix)}" required>
+					<label for="phone" class="col-xs-12 col-sm-12 col-md-3"><span translate="cart.PHONE"></span></label>
+					<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+						<input type="text" name="phone_number_prefix" placeholder="+34" ng-model="personalInfoCtrl.cart.shipping_address.phone_number_prefix" class="form-control ng-class:{'error-input': personalInfoCtrl.has_error(personalInfoCtrl.form, personalInfoCtrl.form.phone_number_prefix)}" required>
 					</div>
-					<div class="col-md-6">
+					<div class="col-xs-9 col-sm-9 col-md-6 col-lg-6">
 						<input type="text" name="phone_number" ng-model="personalInfoCtrl.cart.shipping_address.phone_number" class="form-control ng-class:{'error-input': personalInfoCtrl.has_error(personalInfoCtrl.form, personalInfoCtrl.form.phone_number)}" required> <!-- include phone pattern !-->
 						<form-errors field="personalInfoCtrl.form.phone_number_prefix" condition="personalInfoCtrl.has_error(personalInfoCtrl.form, personalInfoCtrl.form.phone_number_prefix)" ng-if="!personalInfoCtrl.has_error(personalInfoCtrl.form, personalInfoCtrl.form.phone_number)"></form-errors>
 						<form-errors field="personalInfoCtrl.form.phone_number" condition="personalInfoCtrl.has_error(personalInfoCtrl.form, personalInfoCtrl.form.phone_number)"></form-errors>
 					</div>
 				</div>
 		</div>
-		<div class="col-md-6">
+		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-10">
 			<span class="billing-header"><span translate="cart.personal_info.SHIPPING_ADDRESS"></span></span>			
 			<div class="form-group form-personal-info">
-				<label for="country" class="col-md-3"><span translate="cart.COUNTRY"></span></label>
-				<div class="col-md-9">
+				<label for="country" class="col-xs-12 col-sm-12 col-md-3"><span translate="cart.COUNTRY"></span></label>
+				<div class="col-xs-12 col-sm-12 col-md-9">
 					<ol class="nya-bs-select ng-class:{'error-input': personalInfoCtrl.has_error(personalInfoCtrl.form, personalInfoCtrl.form.country)}" ng-model="personalInfoCtrl.cart.shipping_address.country" size="5" name="country" required live-search="true">
 						<li nya-bs-option="country in personalInfoCtrl.countries | orderBy:'country_name'" data-value="country.id">
 							<a href=""><span ng-bind="country.country_name"></span></a>
@@ -52,49 +52,57 @@
 				</div>
 			</div>
 			<div class="form-group form-personal-info">
-				<label for="city" class="col-md-3"><span translate="cart.CITY"></span></label>
-				<div class="col-md-9">
+				<label for="city" class="col-xs-12 col-sm-12 col-md-3"><span translate="cart.CITY"></span></label>
+				<div class="col-xs-12 col-sm-12 col-md-9">
 					<input type="text" name="city" ng-model="personalInfoCtrl.cart.shipping_address.city" class="form-control ng-class:{'error-input': personalInfoCtrl.has_error(personalInfoCtrl.form, personalInfoCtrl.form.city)}" required>
 					<form-errors field="personalInfoCtrl.form.city" condition="personalInfoCtrl.has_error(personalInfoCtrl.form, personalInfoCtrl.form.city)"></form-errors>
 				</div>
 			</div>
 			<div class="form-group form-personal-info">
-				<label for="address" class="col-md-3"><span translate="cart.ADDRESS"></span></label>
-				<div class="col-md-9">
+				<label for="address" class="col-xs-12 col-sm-12 col-md-3"><span translate="cart.ADDRESS"></span></label>
+				<div class="col-xs-12 col-sm-12 col-md-9">
 					<input type="text" name="address" ng-model="personalInfoCtrl.cart.shipping_address.address" class="form-control ng-class:{'error-input': personalInfoCtrl.has_error(personalInfoCtrl.form, personalInfoCtrl.form.address)}" required>
 					<form-errors field="personalInfoCtrl.form.address" condition="personalInfoCtrl.has_error(personalInfoCtrl.form, personalInfoCtrl.form.address)"></form-errors>
 				</div>
 			</div>
 			<div class="form-group form-personal-info">
-				<label for="zip_code" class="col-md-3"><span translate="cart.ZIP"></span></label>
-				<div class="col-md-4">
+				<label for="zip_code" class="col-xs-12 col-sm-12 col-md-3"><span translate="cart.ZIP"></span></label>
+				<div class="col-xs-12 col-sm-12 col-md-4">
 					<input type="text" name="zip" ng-model="personalInfoCtrl.cart.shipping_address.zip" class="form-control ng-class:{'error-input': personalInfoCtrl.has_error(personalInfoCtrl.form, personalInfoCtrl.form.zip)}" required>
 				</div>
 				<form-errors field="personalInfoCtrl.form.zip" condition="personalInfoCtrl.has_error(personalInfoCtrl.form, personalInfoCtrl.form.zip)"></form-errors>
 			</div>
 		</div>
 		</form>
-		<div class="col-md-12 text-center">
+		<div class="col-xs-12 col-sm-12 col-md-12 text-center">
 			<button class="btn btn-red mt-30" ng-click="personalInfoCtrl.save(personalInfoCtrl.form)"><span translate="cart.personal_info.CONTINUE_SHIPPING"></span></button>
 		</div>
 	</div>
 	<div ng-if="personalInfoCtrl.state>1">
-		<div class="personal-info-wrapper">
-		<div class="col-md-4">
-			<p><span class="grey-text" translate="cart.FIRST_NAME"></span>&nbsp;<span class="bold" ng-bind="personalInfoCtrl.cart.shipping_address.name + ' ' + personalInfoCtrl.cart.shipping_address.last_name"></span></p>
-			<p ng-if="personalInfoCtrl.cart.shipping_address.vat_id" ng-cloak><span class="grey-text" translate="cart.VAT_NUMBER"></span>&nbsp;<span ng-bind="personalInfoCtrl.cart.shipping_address.vat_id"></span></p>
-			<p><span class="grey-text" translate="cart.PHONE"></span>&nbsp;<span ng-bind="personalInfoCtrl.cart.shipping_address.phone_number_prefix + ' ' + personalInfoCtrl.cart.shipping_address.phone_number"></span></p>
-		</div>
-		<div class="col-md-4">
-			<p>
-				<span class="grey-text" translate="cart.personal_info.SHIPPING_INFORMATION"></span>&nbsp;
-				<span ng-bind="personalInfoCtrl.cart.shipping_address.address"></span></p>
-			<p>
-				<span ng-bind="personalInfoCtrl.cart.shipping_address.city"></span>&nbsp;
-				<span ng-bind="personalInfoCtrl.cart.shipping_address.zip"></span></p>
-			<p><span ng-bind="personalInfoCtrl.cart.shipping_address.country"></span></p>
-		</div>
-		<div class="col-md-4"><button class="btn btn-transparent btn-edit pull-right"><i class="ion-edit red-icon" ng-click="personalInfoCtrl.editShippingAddress()"></i></button>			</div>
+		<div class="personal-info-wrapper mt-20">
+			<div class="col-xs-12 col-sm-5 col-md-5">
+				<p><span class="grey-text" translate="cart.FIRST_NAME"></span>&nbsp;<span class="bold" ng-bind="personalInfoCtrl.cart.shipping_address.name + ' ' + personalInfoCtrl.cart.shipping_address.last_name"></span></p>
+				<p ng-if="personalInfoCtrl.cart.shipping_address.vat_id" ng-cloak><span class="grey-text" translate="cart.VAT_NUMBER"></span>&nbsp;<span ng-bind="personalInfoCtrl.cart.shipping_address.vat_id"></span></p>
+				<p><span class="grey-text" translate="cart.PHONE"></span>&nbsp;<span ng-bind="personalInfoCtrl.cart.shipping_address.phone_number_prefix + ' ' + personalInfoCtrl.cart.shipping_address.phone_number"></span></p>
+			</div>
+			<div class="col-xs-12 col-sm-5 col-md-5">
+				<p>
+					<span class="grey-text" translate="cart.personal_info.SHIPPING_INFORMATION"></span>&nbsp;
+				</p>
+				<p class="ml-20">
+					<span ng-bind="personalInfoCtrl.cart.shipping_address.address"></span>
+					<br />
+					<span ng-bind="personalInfoCtrl.cart.shipping_address.city"></span>&nbsp;
+					<span ng-bind="personalInfoCtrl.cart.shipping_address.zip"></span>
+					<br />
+					<span ng-bind="personalInfoCtrl.cart.shipping_address.country"></span>
+				</p>
+			</div>
+			<div class="col-xs-12 col-sm-2 col-md-2">
+				<button class="btn btn-transparent btn-edit pull-right">
+					<i class="ion-edit red-icon" ng-click="personalInfoCtrl.editShippingAddress()"></i>
+				</button>
+			</div>
 		</div>
 	</div>
 </div>

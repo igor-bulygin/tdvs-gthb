@@ -1,22 +1,24 @@
-<div ng-class="productCardCtrl.classes.column1Class">
-	<img ng-src="{{productCardCtrl.product.product_info.photo}}" ng-attr-alt="productCardCtrl.product.product_info.name" ng-attr-title="productCardCtrl.product.product_info.name" class="img-responsive">
-</div>
-<div ng-class="productCardCtrl.classes.column2Class">
-	<div class="product-card-name" ng-bind="productCardCtrl.product.product_info.name"></div>
-	<div>
-		<span translate="util.product_card.QUANTITY"></span>
-		<span class="bold" ng-bind="productCardCtrl.product.quantity"></span>
+<div class="row" style="margin: auto;">
+	<div ng-class="productCardCtrl.classes.column1Class">
+		<img ng-src="{{productCardCtrl.product.product_info.photo}}" ng-attr-alt="productCardCtrl.product.product_info.name" ng-attr-title="productCardCtrl.product.product_info.name" class="img-responsive">
 	</div>
-	<div ng-repeat="tag in productCardCtrl.product.tags">
-		<span ng-bind="tag.name"></span>:&nbsp;
-		<span class="bold" ng-repeat="value in tag.values track by $index">
-			<span ng-if="!shippingMethodsCtrl.isObject(value)">
-				<span ng-if="$index>0">/&nbsp;</span><span ng-bind="(value | capitalize)"></span>
+	<div ng-class="productCardCtrl.classes.column2Class">
+		<div class="product-card-name" ng-bind="productCardCtrl.product.product_info.name"></div>
+		<div>
+			<span translate="util.product_card.QUANTITY"></span>
+			<span class="bold" ng-bind="productCardCtrl.product.quantity"></span>
+		</div>
+		<div ng-repeat="tag in productCardCtrl.product.tags">
+			<span ng-bind="tag.name"></span>:&nbsp;
+			<span class="bold" ng-repeat="value in tag.values track by $index">
+				<span ng-if="!shippingMethodsCtrl.isObject(value)">
+					<span ng-if="$index>0">/&nbsp;</span><span ng-bind="(value | capitalize)"></span>
+				</span>
 			</span>
-		</span>
-	</div>
-	<div>
-		<span class="bold" ng-bind="productCardCtrl.product.price"></span>
-		<span class="bold">€</span>
+		</div>
+		<div>
+			<span class="bold" ng-bind="productCardCtrl.product.price"></span>
+			<span class="bold">€</span>
+		</div>
 	</div>
 </div>
