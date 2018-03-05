@@ -3606,7 +3606,7 @@ h3 {
   float: left;
   overflow: hidden;
   width: 100%;
-  max-width: 382px;
+  max-width: 360px;
   text-align: center;
   cursor: pointer;
   margin: 1em 0;
@@ -3667,12 +3667,12 @@ h3 {
   min-height: 250px; }
   .showcase.influencers img {
     max-width: 100%; }
-    @media (max-width: 320px) {
-      .showcase.influencers img {
-        max-width: 260px; } }
     @media (max-width: 575px) {
       .showcase.influencers img {
         max-width: 575px; } }
+    @media (max-width: 320px) {
+      .showcase.influencers img {
+        max-width: 260px; } }
 
 .carousel-devisers-container {
   max-width: 900px;
@@ -4199,7 +4199,7 @@ h3 {
 
 .tracking-link {
   overflow: hidden;
-  text-decoration: underline; }
+  color: #c91c39; }
 
 .grey-link-set {
   color: #9b9b9b; }
@@ -8610,7 +8610,7 @@ input:checked + .slider:before {
 
 .summary-cart-wrapper-full {
   padding: 0 15px;
-  margin: 89px 0 20px;
+  margin: 3em 0 1.5em;
   background-color: #eccacf;
   width: 100%;
   float: left; }
@@ -8662,6 +8662,8 @@ input:checked + .slider:before {
 .payment-methods-wrapper {
   background-color: #ffffff;
   padding: 30px 0; }
+  .payment-methods-wrapper .payment-methods-wrapperdiv:first-child {
+    padding: 0 20px; }
 
 .grey-text {
   color: #b7bcc0; }
