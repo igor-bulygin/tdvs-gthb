@@ -49,11 +49,16 @@
     float: left;
     overflow: hidden;
     width: 100%;
+    max-width: 360px;//382px;
     text-align: center;
     cursor: pointer;
     margin: 1em 0;
     border: 1px solid $light_grey;
     @include box-shadow(2px,2px,4px,$light_grey);
+    @media (max-width: 768px){
+    	float: none;
+    	margin: auto;
+    }
     img{
         width:100%;
     }
@@ -109,11 +114,11 @@
 		    min-height: 250px;
 			img{
 				max-width: 100%;//286px;
-                @media (max-width: 320px){
-                    max-width: 260px;
-                }
                 @media (max-width: 575px){
                     max-width: 575px;
+                }
+                @media (max-width: 320px){
+                    max-width: 260px;
                 }
 			}
 	}

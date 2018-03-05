@@ -1,8 +1,10 @@
-<div class="shopping-cart-wrapper">
-	<span class="checkout-title">
-		<span class="cart-icon-black pull-left"></span>
-		<span class="shopping-cart-title no-mar" translate="cart.shopping_cart.YOUR_SHOPPING_CART"></span>
-	</span>
+<div class="shopping-cart-wrapper" style="padding-top: 5px;">
+	<div class="hidden-xs hidden-sm">
+		<span class="checkout-title">
+			<span class="cart-icon-black pull-left"></span>
+			<span class="shopping-cart-title no-mar" translate="cart.shopping_cart.YOUR_SHOPPING_CART"></span>
+		</span>
+	</div>
 	<table class="table checkout-table" ng-repeat="pack in shoppingCartCtrl.cart.packs">
 		<thead>
 			<tr>

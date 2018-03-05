@@ -34,7 +34,8 @@
 		"bazilio/yii2-newrelic": "^0.0.7",
 		"dragonjet/yii2-opengraph": "dev-master",
 		"mandrill/mandrill": "1.0.*",
-		"twilio/sdk": "^5.16"
+		"twilio/sdk": "^5.16",
+		"vlucas/phpdotenv": "^2.4"
 	},
 	"require-dev": {
 		"yiisoft/yii2-codeception": "2.0.5",

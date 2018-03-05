@@ -1,0 +1,4 @@
+DEV="1"
+ENVIRONMENT="local"
+THUMBOR_SECURITY_KEY="ccpXNPgnXHaONlWlzXTEGg458K9HfE"
+THUMBOR_SERVER="localhost.thumbor.todevise.com:8000"

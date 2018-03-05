@@ -312,6 +312,12 @@
 }
 .results-wrapper{
 	background-color: $white;
+    .nya-bs-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn){
+        @media(max-width:767px){
+            min-width: 1px !important;
+            width: 100%;
+        }
+    }
 }
  #product-results{
     widht:930px;
@@ -330,5 +336,18 @@
     padding: 0 !important;
     figure, figcaption{
         padding: 0 !important;
+    }
+}
+#categoryFilter{
+    padding-top: 20px;
+    cursor: pointer; 
+    a {
+        color: $black;
+    }
+    @media(max-width:767px){
+        text-align: center;
+    }
+    .tracking-link{
+        text-decoration: none;
     }
 }

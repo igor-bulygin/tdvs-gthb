@@ -1,5 +1,7 @@
-<span class="shopping-cart-title"><span translate="cart.summary.CART_SUMMARY"></span> (<span ng-bind="summaryCtrl.cart.totalItems"></span> items)</span>
-<div ng-if="summaryCtrl.state >= 1">
+<div class="hidden-xs hidden-sm">
+	<span class="shopping-cart-title"><span translate="cart.summary.CART_SUMMARY"></span> (<span ng-bind="summaryCtrl.cart.totalItems"></span> items)</span>
+</div>
+<div class="hidden-xs hidden-sm" ng-if="summaryCtrl.state >= 1">
 	<div ng-repeat="pack in summaryCtrl.cart.packs">
 		<div class="deviser-shipping-wrapper">
 			<span class="deviser-name-item summary-cart-wrapper" ng-bind="pack.deviser_info.name"></span>
@@ -35,11 +37,16 @@
 		</div>
 	</div>
 </div>
-<div class="summary-cart-wrapper-full">
+<div class="hidden-xs hidden-sm summary-cart-wrapper-full">
 	<span class="subtotal-amount-wrapper"><span class="bold" translate="cart.SUBTOTAL"></span><span class="pull-right subtotal-amount">€<span class="subtotal-amount" ng-bind="summaryCtrl.cart.subtotal | number : 2"></span></span></span>
 </div>
-<div class="summary-cart-wrapper" ng-if="!summaryCtrl.state">
-	<a href="/checkout">
-		<button class="btn btn-red col-md-12 mb-20 mt-20" translate="cart.summary.PROCEED"></button>
+<div class="col-xs-12 col-sm-12 hidden-md hidden-lg summary-cart-wrapper-full" style="padding: 3px;">
+	<div class="col-xs-6 col-sm-6"><strong><span style="text-transform: uppercase;" translate="cart.summary.CART_SUMMARY"></span></strong> (<span ng-bind="summaryCtrl.cart.totalItems"></span> items)</div>
+	<div class="col-xs-2 col-sm-2"><span translate="cart.SUBTOTAL"></span></div>
+	<div class="col-xs-4 col-sm-4"><span class="pull-right subtotal-amount">€<span ng-bind="summaryCtrl.cart.subtotal | number : 2"></span></span></div>
+</div>
+<div class="hidden-xs hidden-sm summary-cart-wrapper" ng-if="!summaryCtrl.state">
+	<a href="/checkout" class="mb-20 mt-20">
+		<button class="btn btn-red col-xs-12" translate="cart.summary.PROCEED"></button>
 	</a>
 </div>

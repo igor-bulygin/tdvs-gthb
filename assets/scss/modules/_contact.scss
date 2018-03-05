@@ -5,8 +5,21 @@
     width: 100%!important;
 	padding: 20px 0;
 }
+.contact-down{
+	@media(max-width: 575px){
+		flex-direction: column;
+	}
+	div{
+		@media(max-width: 575px){
+			flex-flow: row wrap;
+		}
+	}
+}
 .dropdown button, .form-group input, .form-group select {
 	@include border-radius(6px,6px,6px,6px);
+	@media(max-width: 300px){
+		width: 100% !important;
+	}
 }
 .funiv_bold {
     font-family:$font-family--regular!important;
@@ -22,4 +35,9 @@
     font-family:$font-family--regular!important;
 	font-weight: bold!important;
 	font-size: 16px;
+}
+.fs3-857{
+	@media(max-width: 575px){
+		font-size: 3em;
+	}
 }

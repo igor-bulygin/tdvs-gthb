@@ -127,6 +127,10 @@ a{
 }
 .btn-medium{
     width: 285px;
+    @media(max-width:285px){
+        width: 100%;
+        margin: 0 4px;
+    }
 }
 .big-btn{
     @extend %btn;

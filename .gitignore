@@ -1,3 +1,6 @@
+# environment config file
+.env
+
 # dolphin
 .directory
 
