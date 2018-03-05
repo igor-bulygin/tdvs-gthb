@@ -2,7 +2,15 @@
 	<div class="container store">
 		<div>
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<explore-products-filters searching="exploreProductsCtrl.searching" results="exploreProductsCtrl.results" limit="exploreProductsCtrl.limit" ></explore-products-filters>
+				<div class="hidden-sm hidden-md hidden-lg mt-20" id="filters-xs-container">
+					<a href="#filters-xs" data-toggle="collapse" class="row btn btn-red btn-small"><span translate="discover.FILTER"></span></a>
+					<div class="collapse" id="filters-xs">
+						<explore-products-filters searching="exploreProductsCtrl.searching" results="exploreProductsCtrl.results" limit="exploreProductsCtrl.limit" ></explore-products-filters>
+					</div>
+				</div>
+				<div class="hidden-xs">
+					<explore-products-filters searching="exploreProductsCtrl.searching" results="exploreProductsCtrl.results" limit="exploreProductsCtrl.limit" ></explore-products-filters>
+				</div>
 				<div>
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="exploreProductsCtrl.results.items.length === 0 && !exploreProductsCtrl.searching" ng-cloak>
 						<p class="text-center" translate="discover.NO_PRODUCTS_FOUND"></p>

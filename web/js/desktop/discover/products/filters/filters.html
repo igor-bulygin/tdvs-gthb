@@ -1,20 +1,21 @@
+
 <div>
 	<row>
-		<div class="col-md-12 mb-20 mt-10" _style="padding-left:0 !important; padding-right: 0 !important;">
-			<div class="found-header col-xs-12 col-sm-12 col-md-5 col-md-offset-2" ng-if="!exploreProductsFiltersCtrl.searching" ng-cloak>
-				<div ng-if="exploreProductsFiltersCtrl.searchParam" translate="discover.WE_FOUND_X_RESULTS_WITH_KEY" style="padding:10px;" translate-values="{ counter: exploreProductsFiltersCtrl.results.counter, keys: exploreProductsFiltersCtrl.searchParam }"></div>
-				<div ng-if="!exploreProductsFiltersCtrl.searchParam" translate="discover.WE_FOUND_X_RESULTS" style="padding:10px;" translate-values="{ counter: exploreProductsFiltersCtrl.results.counter }"></div>
-			</div>
-			<div class="col-xs-12 col-sm-12 col-md-5 mb-20" style="text-align: right;">
-				<ol class="nya-bs-select"" ng-model="exploreProductsFiltersCtrl.orderFilter" ng-change="exploreProductsFiltersCtrl.search(true)">
-					<li nya-bs-option="type in exploreProductsFiltersCtrl.orderTypes">
-						<a href="#"><span>{{ type.name | translate }}</span></a>
-					</li>
-				</ol>
-			</div>
+	<div class="col-md-12 mb-20 mt-10" _style="padding-left:0 !important; padding-right: 0 !important;">
+		<div class="found-header col-xs-7 col-sm-7 col-md-5 col-md-offset-2" ng-if="!exploreProductsFiltersCtrl.searching" ng-cloak>
+			<div ng-if="exploreProductsFiltersCtrl.searchParam" translate="discover.WE_FOUND_X_RESULTS_WITH_KEY" style="padding:10px;" translate-values="{ counter: exploreProductsFiltersCtrl.results.counter, keys: exploreProductsFiltersCtrl.searchParam }"></div>
+			<div ng-if="!exploreProductsFiltersCtrl.searchParam" translate="discover.WE_FOUND_X_RESULTS" style="padding:10px;" translate-values="{ counter: exploreProductsFiltersCtrl.results.counter }"></div>
 		</div>
+		<div class="col-xs-5 col-sm-5 col-md-5" style="text-align: right;">
+			<ol class="nya-bs-select"" ng-model="exploreProductsFiltersCtrl.orderFilter" ng-change="exploreProductsFiltersCtrl.search(true)">
+				<li nya-bs-option="type in exploreProductsFiltersCtrl.orderTypes">
+					<a href="#"><span>{{ type.name | translate }}</span></a>
+				</li>
+			</ol>
+		</div>
+	</div>
 	</row>
-	<div class="hidden-xs col-sm-3 col-md-2 col-lg-2" id="filters-sm-container">
+	<div class="__col-xs-6 hidden-xs hidden-sm col-md-2">
 		<form name="exploreProductsFiltersCtrl.form">
 			<span class="filter-title" translate="discover.FILTER_BY_THEME"></span>
 			<div class="checkbox checkbox-red" ng-repeat="category in exploreProductsFiltersCtrl.categories.items | orderBy: 'category.name'" ng-if="$index < exploreProductsFiltersCtrl.show_categories">
@@ -26,17 +27,4 @@
 			<span class="more-btn" ng-click="exploreProductsFiltersCtrl.seeMore('categories')" ng-if="exploreProductsFiltersCtrl.show_categories < exploreProductsFiltersCtrl.categories.meta.total_count" ng-cloak translate="discover.SEE_MORE"></span>
 		</form>
 	</div>
-        <div class="col-xs-12 hidden-sm hidden-md hidden-lg text-center mt-10 mb-10" id="filters-xs-container">
-                <a href="#filters-xs" data-toggle="collapse" class="row btn btn-red btn-small"><span translate="discover.FILTER"></span></a>
-                <div class="collapse" id="filters-xs">
-			<form name="exploreProductsFiltersCtrl.form">
-                                <span class="filter-title" translate="discover.FILTER_BY_THEME"></span>
-                                <div class="checkbox checkbox-red" ng-repeat="category in exploreProductsFiltersCtrl.categories.items | orderBy: 'category.name'" ng-if="$index < exploreProductsFiltersCtrl.show_categories">
-                                        <input ng-attr-id="{{'checkbox'+($index+10)}}" type="checkbox" name="categories" ng-model="exploreProductsFiltersCtrl.filters.categories[category.id]" class="ng-class:{'checked': exploreProductsFiltersCtrl.filte$
-                                        <label ng-attr-for="{{'checkbox'+($index+10)}}"><span ng-bind="category.name"></span></label>
-                                </div>
-                                <span class="more-btn" ng-click="exploreProductsFiltersCtrl.seeMore('categories')" ng-if="exploreProductsFiltersCtrl.show_categories < exploreProductsFiltersCtrl.categories.meta.total_count" ng-cloak translate="discover$
-                        </form>
-                </div>
-        </div>
 </div>
