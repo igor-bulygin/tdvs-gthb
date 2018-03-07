@@ -670,7 +670,6 @@ class AdminController extends CController {
 		return Yii::$app->request->isAjax ? $this->renderPartial("packages", $data) : $this->render("packages", $data);
 	}
 
-
 	public function actionPackagesDeviser($filters = null) {
 
 		// Create links for Packages excel, one per day with orders
@@ -714,6 +713,63 @@ class AdminController extends CController {
 		];
 
 		return Yii::$app->request->isAjax ? $this->renderPartial("packages-deviser", $data) : $this->render("packages-deviser", $data);
+	}
+
+
+	public function actionPackagesPack($filters = null) {
+
+		// Create links for Packages excel, one per day with orders
+		$orders = \app\models\Order::findSerialized([
+			'order_state' => \app\models\Order::ORDER_STATE_PAID,
+		]);
+
+		$dates = [];
+		foreach ($orders as $order) {
+			$packs = $order->getPacks();
+			foreach ($packs as $pack) {
+				$date = $order->order_date->toDateTime()->format('Y-m-d');
+				$dates[$date][$pack->short_id] = $pack;
+			}
+		}
+		ksort($dates); // order by date
+		$dates = array_reverse($dates); // first most recent
+
+		$itemsPackages = [];
+		$oneDay = \DateInterval::createFromDateString('1 day');
+		foreach ($dates as $date => $packs) {
+			$dateTime = new \DateTime($date);
+			foreach ($packs as $packId => $pack) { /* @var $pack \app\models\OrderPack */
+				$deviser = $pack->getDeviser();
+				$deviserName = $deviser->getName();
+				$deviserId = $deviser->short_id;
+				$next = clone $dateTime;
+				$next = $next->add($oneDay);
+				$itemsPackages[] = [
+					'url' => Url::toRoute(['admin/packages-excel']) . '/' . $dateTime->format('Y-m-d') . '/' . $next->format('Y-m-d').'/'.$deviserId,
+					'date' => $dateTime->format('d M Y'),
+					'deviser_name' => $deviserName,
+					'deviser_link' => $deviser->getSettingsLink('open-orders'),
+					'order_number' => $pack->getParentObject()->short_id,
+					'pack_number' => $pack->short_id,
+					'products' => $pack->getTotalItemsNumber(),
+					'price' => $pack->pack_price,
+					'shipping_price' => $pack->shipping_price,
+					'total_price' => $pack->pack_total_price,
+					'status' => $pack->getPackStateName(),
+				];
+			}
+		}
+
+		$provider = new ArrayDataProvider([
+			'allModels' => $itemsPackages,
+			'pagination' => ['pageSize' => 100]
+		]);
+
+		$data = [
+			'packages' => $provider,
+		];
+
+		return Yii::$app->request->isAjax ? $this->renderPartial("packages-pack", $data) : $this->render("packages-pack", $data);
 	}
 
 	public function actionPackagesExcel($date_from, $date_to, $deviser_id = null)

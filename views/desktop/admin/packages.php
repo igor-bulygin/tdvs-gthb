@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = [
 
 InvitationsAsset::register($this);
 
-$this->title = 'Todevise / Admin / Last packages';
+$this->title = 'Todevise / Admin / Last packages by day';
 
 /** @var Invitation $model */
 ?>
@@ -31,7 +31,7 @@ $this->title = 'Todevise / Admin / Last packages';
 		<div class="row no-gutter page-title-row">
 			<div class="row-same-height">
 				<div class="col-xs-2 col-height col-middle">
-					<h2 class="page-title funiv_bold fs-upper fc-fff fs1-071"><?= Yii::t("app/admin", "Last packages"); ?></h2>
+					<h2 class="page-title funiv_bold fs-upper fc-fff fs1-071"><?= Yii::t("app/admin", "Last packages by day"); ?></h2>
 				</div>
 				<div class="col-xs-6 col-height col-middle flex flex-align-center">
 

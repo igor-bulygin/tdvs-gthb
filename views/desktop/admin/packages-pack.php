@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = [
 
 InvitationsAsset::register($this);
 
-$this->title = 'Todevise / Admin / Last packages by day and deviser';
+$this->title = 'Todevise / Admin / Last packages (all)';
 
 /** @var Invitation $model */
 ?>
@@ -31,7 +31,7 @@ $this->title = 'Todevise / Admin / Last packages by day and deviser';
 		<div class="row no-gutter page-title-row">
 			<div class="row-same-height">
 				<div class="col-xs-2 col-height col-middle">
-					<h2 class="page-title funiv_bold fs-upper fc-fff fs1-071"><?= Yii::t("app/admin", "Last packages by day and deviser"); ?></h2>
+					<h2 class="page-title funiv_bold fs-upper fc-fff fs1-071"><?= Yii::t("app/admin", "Last packages (all)"); ?></h2>
 				</div>
 				<div class="col-xs-6 col-height col-middle flex flex-align-center">
 
@@ -57,12 +57,18 @@ $this->title = 'Todevise / Admin / Last packages by day and deviser';
 				'columns' => [
 					[
 						'class' => 'yii\grid\ActionColumn',
-						'template' => "{view}",
+						'template' => "{view} {deviser}",
 						'buttons' => [
 							'view' => function($url, $item, $key) {
 								return Html::a('', $item['url'], [
 									'target' => '_blank',
 									"class" => "pointer glyphicon glyphicon-download fc-fff fs1",
+								]);
+							},
+							'deviser' => function($url, $item, $key) {
+								return Html::a('', $item['deviser_link'], [
+									'target' => '_blank',
+									"class" => "pointer glyphicon glyphicon-user fc-fff fs1",
 								]);
 							},
 						],
@@ -76,7 +82,14 @@ $this->title = 'Todevise / Admin / Last packages by day and deviser';
 						]
 					],
 					'date',
+					'order_number',
+					'pack_number',
 					'deviser_name',
+					'products',
+					'price',
+					'shipping_price',
+					'total_price',
+					'status',
 				]
 			]);
 		?>

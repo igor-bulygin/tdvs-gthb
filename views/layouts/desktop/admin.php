@@ -410,7 +410,7 @@ use yii\widgets\Breadcrumbs;
 												'options' => [
 													'class' => 'item-submenu funiv fs0-929',
 												],
-												'label' => 'All',
+												'label' => 'By day',
 												'url'=> Url::to('/admin/packages'),
 												'active' => (
 													Utils::compareURL('admin/packages')
@@ -420,10 +420,20 @@ use yii\widgets\Breadcrumbs;
 												'options' => [
 													'class' => 'item-submenu funiv fs0-929',
 												],
-												'label' => 'By deviser',
+												'label' => 'By day/deviser',
 												'url'=> Url::to('/admin/packages-deviser'),
 												'active' => (
-													Utils::compareURL('admin/packages-deviser')
+												Utils::compareURL('admin/packages-deviser')
+												),
+											],
+											[
+												'options' => [
+													'class' => 'item-submenu funiv fs0-929',
+												],
+												'label' => 'All',
+												'url'=> Url::to('/admin/packages-pack'),
+												'active' => (
+												Utils::compareURL('admin/packages-pack')
 												),
 											],
 										],
