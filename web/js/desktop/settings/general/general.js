@@ -126,12 +126,16 @@
 			}
 		}
 		function isValidForm() {
-			return (((vm.isDeviser && !angular.isUndefined(vm.dataForm.brand_name.$viewValue) && vm.dataForm.brand_name.$viewValue.length>0) || !vm.isDeviser) 
-				 && !angular.isUndefined(vm.dataForm.name.$viewValue) && vm.dataForm.name.$viewValue.length>0
-			 		&& !angular.isUndefined(vm.dataForm.last_name.$viewValue) && vm.dataForm.last_name.$viewValue.length>0
-				&& !angular.isUndefined(vm.dataForm.city.$viewValue) && vm.dataForm.city.$viewValue.length>0 && !angular.isUndefined(vm.dataForm.address.$viewValue)  && vm.dataForm.address.$viewValue.length>0 
-				&& vm.dataForm.vat_id.$viewValue!=null && !angular.isUndefined(vm.dataForm.vat_id.$viewValue) && vm.dataForm.vat_id.$viewValue.length>0 && !vm.invalidPrefix && !angular.isUndefined(vm.dataForm.phone.$viewValue) && vm.dataForm.phone.$viewValue.length>0
-				&& !angular.isUndefined(vm.dataForm.zip.$viewValue) && vm.dataForm.zip.$viewValue.length>0 && !vm.notWeightMeasureSelected)
+			// review to refact to simplify or encapsule this validators
+			return (((vm.isDeviser && vm.dataForm.brand_name && !angular.isUndefined(vm.dataForm.brand_name.$viewValue) && vm.dataForm.brand_name.$viewValue.length>0) || !vm.isDeviser) 
+				 && vm.dataForm.name && !angular.isUndefined(vm.dataForm.name.$viewValue) && vm.dataForm.name.$viewValue.length>0
+			 	&& vm.dataForm.last_name && vm.dataForm.last_name.$viewValue && !angular.isUndefined(vm.dataForm.last_name.$viewValue) && vm.dataForm.last_name.$viewValue.length>0
+				&& vm.dataForm.city && vm.dataForm.city.$viewValue && !angular.isUndefined(vm.dataForm.city.$viewValue) && vm.dataForm.city.$viewValue.length>0 
+				&& vm.dataForm.address && vm.dataForm.address.$viewValue && !angular.isUndefined(vm.dataForm.address.$viewValue)  && vm.dataForm.address.$viewValue.length>0 
+				&& vm.dataForm.vat_id && vm.dataForm.vat_id.$viewValue && !angular.isUndefined(vm.dataForm.vat_id.$viewValue) && vm.dataForm.vat_id.$viewValue.length>0 
+				&& vm.dataForm.phone && !angular.isUndefined(vm.dataForm.phone.$viewValue) && vm.dataForm.phone.$viewValue.length>0
+				&& vm.dataForm.zip && vm.dataForm.phone.$viewValue && !angular.isUndefined(vm.dataForm.zip.$viewValue) && vm.dataForm.zip.$viewValue.length>0 
+				&& !vm.invalidPrefix && !vm.notWeightMeasureSelected)
 		}
 
 		function openModal() {
