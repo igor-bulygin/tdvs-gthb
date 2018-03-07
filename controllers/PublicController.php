@@ -183,6 +183,15 @@ class PublicController extends CController
 			$influencersCarousel = null;
 		}
 
+		// The market
+		$urlMarket = '#';
+		$deviser_id = Yii::$app->params['the_market_deviser_id'];
+		if ($deviser_id) {
+			$deviserMarket = Person::findOneSerialized($deviser_id);
+			if ($deviserMarket && $deviserMarket->isDeviser()) {
+				$urlMarket = $deviserMarket->getStoreLink();
+			}
+		}
 		$this->layout = '/desktop/public-2.php';
 		$this->view->params['selectedCategory'] = isset($category) ? $category : null;
 
@@ -197,6 +206,7 @@ class PublicController extends CController
 			"category_id" => $category_id,
 			'boxes' => $boxes,
 			'stories' => $stories,
+			'urlMarket' => $urlMarket,
 		]);
 	}
 
