@@ -15,7 +15,7 @@
 	}
 
 angular
-	.module('todevise', ['header', 'footer', 'api', 'util', 'toastr', 'box', 'person', 'product', 'discover', 'settings', 'cart','pascalprecht.translate'])
+	.module('todevise', ['header', 'footer', 'api', 'util', 'toastr', 'box', 'person', 'product', 'discover', 'settings', 'cart', 'chat', 'pascalprecht.translate'])
 	.config(config);
 
 }());
