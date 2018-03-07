@@ -247,6 +247,11 @@
 		margin-bottom: 10px;
 	}
 }
+#filters-xs-container{
+	a{
+		display: block;
+	}
+}
 .more-btn{
 	cursor: pointer;
 	font-family: $font-family--regular; //$font-family--bold;

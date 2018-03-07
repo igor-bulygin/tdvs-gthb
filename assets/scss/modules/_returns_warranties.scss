@@ -1,0 +1,35 @@
+// ==========================================================================
+// Returns Warranties
+// ==========================================================================
+.returns-warranties-wrapper{
+	background-color: $white;
+	.number_div{
+		position: relative;
+		p{
+			font-size: 19px;
+			line-height: normal;
+			
+		}
+		.number{
+			padding: 0;
+			p{
+				font-size: 80px;
+				height: max-content;
+				vertical-align: bottom;
+				display: inline-block;
+				text-align: right;
+			}
+		}
+		.title{
+			padding: 0;
+			p{
+				font-size: 30px;
+				font-style: italic;
+				font-weight: bold;
+			}
+		}
+		.bold{
+			font-weight: bold;
+		}
+	}
+}
