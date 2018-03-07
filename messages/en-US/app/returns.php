@@ -18,5 +18,17 @@
  */
 return [
 	'TITLE' => 'Returns and warranties',
-	'TEXT' =>	'<div></div>',
+
+	'BLOCK_1_TITLE' => 'Get to know the shipping and returns policies before purchasing',
+	'BLOCK_1_TEXT_1' => 'You can find this information on the product’s page, under the SHIPPING & POLICIES section.',
+	'BLOCK_1_TEXT_2' => 'All the devisers on Todevise manage their profiles and store themselves, and they have the freedom to decide their shipping, warranty and returns policy.',
+
+	'BLOCK_2_TITLE' => 'Returning and item',
+	'BLOCK_2_TEXT_1' => '&nbsp',
+	'BLOCK_2_TEXT_2' => 'Before initiating the return process, we advise you to talk with the deviser through our CHAT system and get the following information:',
+	'BLOCK_2_TEXT_3' => '<ul><li>a confirmation that they will accept the return</li><li>the return address</li><li>an agreement determining who will cover the costs of the return shipping</li></ul>',
+
+	'BLOCK_3_TITLE' => 'Futher issues',
+	'BLOCK_3_TEXT_1' => 'If you cannot reach an agreement with the deviser, or you encounter any problem, please contact our customer support department <a href="{contact_link}">here</a>.',
+
 ];

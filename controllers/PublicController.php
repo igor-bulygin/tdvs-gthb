@@ -361,10 +361,7 @@ class PublicController extends CController
 	{
 		$this->layout = '/desktop/public-2.php';
 
-		return $this->render("legal-page", [
-			'title' => Yii::t('app/returns', 'TITLE'),
-			'text' => Yii::t('app/returns', 'TEXT'),
-		]);
+		return $this->render("returns");
 	}
 
 	public function actionElements()
