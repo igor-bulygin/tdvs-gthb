@@ -11,8 +11,8 @@ use yii\web\View;
 /* @var $admins yii\data\ActiveDataProvider */
 
 $this->params['breadcrumbs'][] = [
-	'label' => 'Admins',
-	'url' => ['/admin/admins']
+	'label' => 'Mandrill (scheduled)',
+	'url' => ['/admin/mandrill-scheduled']
 ];
 
 InvitationsAsset::register($this);
