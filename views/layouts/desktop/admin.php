@@ -15,27 +15,6 @@ use yii\widgets\Breadcrumbs;
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-// Create invoices link, one per month
-$date = new DateTime();
-$limit = DateTime::createFromFormat('Y-m-d H:i:s', '2017-09-01 00:00:00');
-$oneMonth = DateInterval::createFromDateString('1 month');
-
-$itemsInvoices = [];
-while ($date > $limit) {
-	$aux = clone $date;
-	$next = clone $date;
-	$next = $next->add($oneMonth);
-	$aux = $aux->sub($oneMonth);
-	$itemsInvoices[] = [
-		'options' => [
-			'class' => 'item-submenu funiv fs0-929',
-		],
-		'label' => $date->format('M Y'),
-		'url' => Url::toRoute(['admin/invoices-excel']) . '/' . $date->format('Y-m-d') . '/' . $next->format('Y-m-d'),
-	];
-	$date = $aux;
-}
-
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -419,7 +398,7 @@ while ($date > $limit) {
 										'options' => [
 											'class' => 'item-menu-left funiv_bold fs0-857 fs-upper',
 										],
-										'items' => $itemsInvoices,
+										'url'=> Url::to('/admin/invoices'),
 									],
 										[
 										'label' => 'Packages',

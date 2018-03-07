@@ -17,6 +17,8 @@ use app\models\Person;
 use app\models\PostmanEmail;
 use app\models\SizeChart;
 use app\models\Tag;
+use DateInterval;
+use DateTime;
 use Yii;
 use yii\base\Exception;
 use yii\data\ActiveDataProvider;
@@ -589,28 +591,70 @@ class AdminController extends CController {
 		}
 	}
 
-	public function actionPackages($filters = null) {
+	public function actionInvoices($filters = null) {
+
 
 		// Create links for Packages excel, one per day with orders
-		$orders = \app\models\Order::findSerialized([
-			'order_state' => \app\models\Order::ORDER_STATE_PAID,
+		$orders = Order::findSerialized([
+			'order_state' => Order::ORDER_STATE_PAID,
 		]);
 
 		$dates = [];
 		foreach ($orders as $order) {
-			$dates[$order->order_date->toDateTime()->format('Y-m-d')] = $order->order_date->toDateTime();
+			$date = $order->order_date->toDateTime()->format('Y-m');
+			$dates[$date] = $date;
+		}
+		ksort($dates); // order by date
+		$dates = array_reverse($dates); // first most recent
+
+		$oneMonth = DateInterval::createFromDateString('1 month');
+		foreach ($dates as $date) {
+			$dateTime = new \DateTime($date);
+			$next = clone $dateTime;
+			$next = $next->add($oneMonth);
+
+			$itemsInvoices[] = [
+				'date' => $dateTime->format('M Y'),
+				'url' => Url::toRoute(['admin/invoices-excel']) . '/' . $dateTime->format('Y-m-d') . '/' . $next->format('Y-m-d'),
+			];
+		}
+
+		$provider = new ArrayDataProvider([
+			'allModels' => $itemsInvoices,
+			'pagination' => ['pageSize' => 100]
+		]);
+
+		$data = [
+			'invoices' => $provider,
+		];
+
+		return Yii::$app->request->isAjax ? $this->renderPartial("invoices", $data) : $this->render("invoices", $data);
+	}
+
+	public function actionPackages($filters = null) {
+
+		// Create links for Packages excel, one per day with orders
+		$orders = Order::findSerialized([
+			'order_state' => Order::ORDER_STATE_PAID,
+		]);
+
+		$dates = [];
+		foreach ($orders as $order) {
+			$date = $order->order_date->toDateTime()->format('Y-m-d');
+			$dates[$date] = $date;
 		}
 		ksort($dates); // order by date
 		$dates = array_reverse($dates); // first most recent
 
 		$itemsPackages = [];
-		$oneDay = \DateInterval::createFromDateString('1 day');
+		$oneDay = DateInterval::createFromDateString('1 day');
 		foreach ($dates as $date) {
-			$next = clone $date;
+			$dateTime = new DateTime($date);
+			$next = clone $dateTime;
 			$next = $next->add($oneDay);
 			$itemsPackages[] = [
-				'date' => $date->format('d M Y'),
-				'url' => Url::toRoute(['admin/packages-excel']) . '/' . $date->format('Y-m-d') . '/' . $next->format('Y-m-d'),
+				'date' => $dateTime->format('d M Y'),
+				'url' => Url::toRoute(['admin/packages-excel']) . '/' . $dateTime->format('Y-m-d') . '/' . $next->format('Y-m-d'),
 			];
 		}
 
@@ -638,7 +682,8 @@ class AdminController extends CController {
 		foreach ($orders as $order) {
 			$packs = $order->getPacks();
 			foreach ($packs as $pack) {
-				$dates[$order->order_date->toDateTime()->format('Y-m-d')][$pack->deviser_id] = $pack->getDeviser()->getName();
+				$date = $order->order_date->toDateTime()->format('Y-m-d');
+				$dates[$date][$pack->deviser_id] = $pack->getDeviser()->getName();
 			}
 		}
 		ksort($dates); // order by date
