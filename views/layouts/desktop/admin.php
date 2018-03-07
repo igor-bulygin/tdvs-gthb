@@ -15,56 +15,6 @@ use yii\widgets\Breadcrumbs;
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-// Create invoices link, one per month
-$date = new DateTime();
-$limit = DateTime::createFromFormat('Y-m-d H:i:s', '2017-09-01 00:00:00');
-$oneMonth = DateInterval::createFromDateString('1 month');
-
-$itemsInvoices = [];
-while ($date > $limit) {
-	$aux = clone $date;
-	$next = clone $date;
-	$next = $next->add($oneMonth);
-	$aux = $aux->sub($oneMonth);
-	$itemsInvoices[] = [
-		'options' => [
-			'class' => 'item-submenu funiv fs0-929',
-		],
-		'label' => $date->format('M Y'),
-		'url' => Url::toRoute(['admin/invoices-excel']) . '/' . $date->format('Y-m-d') . '/' . $next->format('Y-m-d'),
-	];
-	$date = $aux;
-}
-
-
-// Create links for Packages excel, one per day with orders
-$orders = \app\models\Order::findSerialized([
-		'order_state' => \app\models\Order::ORDER_STATE_PAID,
-]);
-
-$dates = [];
-foreach ($orders as $order) {
-	$dates[$order->order_date->toDateTime()->format('Y-m-d')] = $order->order_date->toDateTime();
-}
-ksort($dates); // order by date
-$dates = array_reverse($dates); // first most recent
-
-$oneDay = DateInterval::createFromDateString('1 day');
-foreach ($dates as $date) {
-	$aux = clone $date;
-	$next = clone $date;
-	$next = $next->add($oneDay);
-	$aux = $aux->sub($oneDay);
-	$itemsPackages[] = [
-		'options' => [
-			'class' => 'item-submenu funiv fs0-929',
-		],
-		'label' => $date->format('d M Y'),
-		'url' => Url::toRoute(['admin/packages-excel']) . '/' . $date->format('Y-m-d') . '/' . $next->format('Y-m-d'),
-	];
-	$date = $aux;
-}
-
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -448,14 +398,45 @@ foreach ($dates as $date) {
 										'options' => [
 											'class' => 'item-menu-left funiv_bold fs0-857 fs-upper',
 										],
-										'items' => $itemsInvoices,
+										'url'=> Url::to('/admin/invoices'),
 									],
 										[
 										'label' => 'Packages',
 										'options' => [
 											'class' => 'item-menu-left funiv_bold fs0-857 fs-upper',
 										],
-										'items' => $itemsPackages,
+										'items' => [
+											[
+												'options' => [
+													'class' => 'item-submenu funiv fs0-929',
+												],
+												'label' => 'By day',
+												'url'=> Url::to('/admin/packages'),
+												'active' => (
+													Utils::compareURL('admin/packages')
+												),
+											],
+											[
+												'options' => [
+													'class' => 'item-submenu funiv fs0-929',
+												],
+												'label' => 'By day/deviser',
+												'url'=> Url::to('/admin/packages-deviser'),
+												'active' => (
+												Utils::compareURL('admin/packages-deviser')
+												),
+											],
+											[
+												'options' => [
+													'class' => 'item-submenu funiv fs0-929',
+												],
+												'label' => 'All',
+												'url'=> Url::to('/admin/packages-pack'),
+												'active' => (
+												Utils::compareURL('admin/packages-pack')
+												),
+											],
+										],
 									],
 								],
 							]);

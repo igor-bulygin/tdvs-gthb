@@ -17,6 +17,18 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-	'TITLE' => 'Devoluciones y garantía',
-	'TEXT' =>	'<div></div>',
+	'TITLE' => 'Devoluciones & garantías',
+
+	'BLOCK_1_TITLE' => 'Lee las políticas de envíos y devoluciones de cada deviser antes de comprar',
+	'BLOCK_1_TEXT_1' => 'Puedes encontrar esta información en la ficha de producto, en el apartado de ENVÍO & CONDICIONES.',
+	'BLOCK_1_TEXT_2' => 'Los devisers se encargan de controlar sus tiendas y de enviar los productos, y tienen la libertad de definir sus condiciones de envíos, garantías y devoluciones.',
+
+	'BLOCK_2_TITLE' => 'Devolver un producto',
+	'BLOCK_2_TEXT_1' => 'Antes de iniciar el proceso de devolución, te aconsejamos que hables con el deviser a través de nuestro CHAT. Para acceder al chat con un deviser, tienes que entrar en su perfil y clicar el botón ENVIAR UN MENSAJE.',
+	'BLOCK_2_TEXT_2' => 'Antes de devolver el producto, pídele al deviser la siguiente información:',
+	'BLOCK_2_TEXT_3' => '<ul><li>la confirmación de que aceptan la devolución</li><li>la dirección para la devolución</li><li>un acuerdo sobre quien cubre los gastos de envío</li></ul>',
+
+	'BLOCK_3_TITLE' => '¿No has podido devolver tu producto?',
+	'BLOCK_3_TEXT_1' => 'Si no has podido llegar a un acuerdo con el deviser, o has encontrado cualquier tipo de dificultad en el proceso de devolución, contacta con nuestro departamento de atención al cliente <a href="{contact_link}">aquí</a>.',
+
 ];

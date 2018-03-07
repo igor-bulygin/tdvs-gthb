@@ -12,13 +12,13 @@ use yii\web\View;
 /* @var $admins yii\data\ActiveDataProvider */
 
 $this->params['breadcrumbs'][] = [
-	'label' => 'Mandrill (sent)',
-	'url' => ['/admin/mandrill-sent']
+	'label' => 'Invoices',
+	'url' => ['/admin/invoices']
 ];
 
 InvitationsAsset::register($this);
 
-$this->title = 'Todevise / Admin / Mandill sent emails';
+$this->title = 'Todevise / Admin / Invoices';
 
 /** @var Invitation $model */
 ?>
@@ -31,7 +31,7 @@ $this->title = 'Todevise / Admin / Mandill sent emails';
 		<div class="row no-gutter page-title-row">
 			<div class="row-same-height">
 				<div class="col-xs-2 col-height col-middle">
-					<h2 class="page-title funiv_bold fs-upper fc-fff fs1-071"><?= Yii::t("app/admin", "Scheduled sent in Mandrill (last 7 days)"); ?></h2>
+					<h2 class="page-title funiv_bold fs-upper fc-fff fs1-071"><?= Yii::t("app/admin", "Invoices"); ?></h2>
 				</div>
 				<div class="col-xs-6 col-height col-middle flex flex-align-center">
 
@@ -45,7 +45,7 @@ $this->title = 'Todevise / Admin / Mandill sent emails';
 		<?php
 			echo GridView::widget([
 				'id' => 'admins_list',
-				'dataProvider' => $emails,
+				'dataProvider' => $invoices,
 				'options' => [
 					'class' => 'funiv fc-fff fs1-071',
 				],
@@ -60,9 +60,9 @@ $this->title = 'Todevise / Admin / Mandill sent emails';
 						'template' => "{view}",
 						'buttons' => [
 							'view' => function($url, $item, $key) {
-								return Html::a('', '/admin/mandrill-content/'.$item['_id'], [
+								return Html::a('', $item['url'], [
 									'target' => '_blank',
-									"class" => "pointer glyphicon glyphicon-envelope fc-fff fs1",
+									"class" => "pointer glyphicon glyphicon-download fc-fff fs1",
 								]);
 							},
 						],
@@ -75,19 +75,7 @@ $this->title = 'Todevise / Admin / Mandill sent emails';
 							'class' => 'text-center'
 						]
 					],
-					'_id',
-					[
-						'label' => 'date',
-						'value' => function($item) {
-							return gmdate('Y-m-d H:i:s', $item['ts']);
-						}
-					],
-					'sender',
-					'template',
-					'subject',
-					'email',
-					'opens',
-					'clicks',
+					'date',
 				]
 			]);
 		?>

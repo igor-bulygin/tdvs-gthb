@@ -10,6 +10,7 @@
 		"SUBSCRIBE_NEWSLETTER": "Subscribe to our newsletter",
 		"SUBSCRIBED_MESSAGE": "Thank you for subscribing to our newsletter. We will send you awesome emails.",
 		"STAY_CONNECTED": "Stay connected",
+		"RETURNS_WARRANTIES": "Returns &amp; Warranties",
 		"TERMS_CONDITIONS": "Terms &amp; Conditions",
 		"PRIVACY": "Privacy policy",
 		"COOKIES": "Cookies policy"

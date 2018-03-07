@@ -135,6 +135,8 @@ return [
 
 	'STORIES' => 'Stories',
     'STORY_BY_PERSON_NAME' => 'Stories {person_name}',
+	'THE_MARKET' => 'The Market',
+	'THE_MARKET_TEXT' => 'The opportunities of the moment',
 	'TODEVISE_META_DESCRIPTION' => 'Todevise is the combination between a social network and e-commerce that revolutionizes the way you discover products and buy online. ',
 	'VIDEOS_BY_PERSON_NAME' => 'Videos by {person_name}',
     'WEEKS' => 'Weeks',

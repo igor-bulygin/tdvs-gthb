@@ -64,6 +64,9 @@ $footerMode = 'collapsed';
 					<li>
 						<a href="<?= Url::to(["public/about-us"]) ?>"><span translate="footer.ABOUT_US"></span></a>
 					</li>
+					<li>
+						<a href="<?= Url::to(["public/returns"]) ?>"><span translate="footer.RETURNS_WARRANTIES"></span></a>
+					</li>
 				</ul>
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">

@@ -2326,12 +2326,14 @@ class Person extends CActiveRecord implements IdentityInterface
 
 	public function showLoved()
 	{
-		return true;
+		$loveds = $this->getLoveds();
+		return $this->isPersonEditable() || count($loveds) > 0;
 	}
 
 	public function showBoxes()
 	{
-		return true;
+		$boxes = $this->getBoxes();
+		return $this->isPersonEditable() || count($boxes) > 0;
 	}
 
 	public function showStories()

@@ -135,6 +135,8 @@ return [
 
 	'STORIES' => 'Historias',
 	'STORY_BY_PERSON_NAME' => 'Historias',
+	'THE_MARKET' => 'The Market',
+	'THE_MARKET_TEXT' => 'Las oportunidades del momento',
 	'TODEVISE_META_DESCRIPTION' => 'Todevise es la combinación entre una red social y e-commerce que cambiará tu manera de inspirarte, descubrir productos y comprar online. ',
 	'VIDEOS_BY_PERSON_NAME' => 'Videos de {person_name}',
 	'WEEKS' => 'Semanas',
