@@ -36,35 +36,6 @@ while ($date > $limit) {
 	$date = $aux;
 }
 
-
-// Create links for Packages excel, one per day with orders
-$orders = \app\models\Order::findSerialized([
-		'order_state' => \app\models\Order::ORDER_STATE_PAID,
-]);
-
-$dates = [];
-foreach ($orders as $order) {
-	$dates[$order->order_date->toDateTime()->format('Y-m-d')] = $order->order_date->toDateTime();
-}
-ksort($dates); // order by date
-$dates = array_reverse($dates); // first most recent
-
-$oneDay = DateInterval::createFromDateString('1 day');
-foreach ($dates as $date) {
-	$aux = clone $date;
-	$next = clone $date;
-	$next = $next->add($oneDay);
-	$aux = $aux->sub($oneDay);
-	$itemsPackages[] = [
-		'options' => [
-			'class' => 'item-submenu funiv fs0-929',
-		],
-		'label' => $date->format('d M Y'),
-		'url' => Url::toRoute(['admin/packages-excel']) . '/' . $date->format('Y-m-d') . '/' . $next->format('Y-m-d'),
-	];
-	$date = $aux;
-}
-
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -455,7 +426,28 @@ foreach ($dates as $date) {
 										'options' => [
 											'class' => 'item-menu-left funiv_bold fs0-857 fs-upper',
 										],
-										'items' => $itemsPackages,
+										'items' => [
+											[
+												'options' => [
+													'class' => 'item-submenu funiv fs0-929',
+												],
+												'label' => 'All',
+												'url'=> Url::to('/admin/packages'),
+												'active' => (
+													Utils::compareURL('admin/packages')
+												),
+											],
+											[
+												'options' => [
+													'class' => 'item-submenu funiv fs0-929',
+												],
+												'label' => 'By deviser',
+												'url'=> Url::to('/admin/packages-deviser'),
+												'active' => (
+													Utils::compareURL('admin/packages-deviser')
+												),
+											],
+										],
 									],
 								],
 							]);

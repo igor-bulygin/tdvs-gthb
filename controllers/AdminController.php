@@ -23,6 +23,7 @@ use yii\data\ActiveDataProvider;
 use yii\data\ArrayDataProvider;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+use yii\helpers\Url;
 use yii\mongodb\Collection;
 use yii\web\NotFoundHttpException;
 
@@ -588,7 +589,89 @@ class AdminController extends CController {
 		}
 	}
 
-	public function actionPackagesExcel($date_from, $date_to)
+	public function actionPackages($filters = null) {
+
+		// Create links for Packages excel, one per day with orders
+		$orders = \app\models\Order::findSerialized([
+			'order_state' => \app\models\Order::ORDER_STATE_PAID,
+		]);
+
+		$dates = [];
+		foreach ($orders as $order) {
+			$dates[$order->order_date->toDateTime()->format('Y-m-d')] = $order->order_date->toDateTime();
+		}
+		ksort($dates); // order by date
+		$dates = array_reverse($dates); // first most recent
+
+		$itemsPackages = [];
+		$oneDay = \DateInterval::createFromDateString('1 day');
+		foreach ($dates as $date) {
+			$next = clone $date;
+			$next = $next->add($oneDay);
+			$itemsPackages[] = [
+				'date' => $date->format('d M Y'),
+				'url' => Url::toRoute(['admin/packages-excel']) . '/' . $date->format('Y-m-d') . '/' . $next->format('Y-m-d'),
+			];
+		}
+
+		$provider = new ArrayDataProvider([
+			'allModels' => $itemsPackages,
+			'pagination' => ['pageSize' => 100]
+		]);
+
+		$data = [
+			'packages' => $provider,
+		];
+
+		return Yii::$app->request->isAjax ? $this->renderPartial("packages", $data) : $this->render("packages", $data);
+	}
+
+
+	public function actionPackagesDeviser($filters = null) {
+
+		// Create links for Packages excel, one per day with orders
+		$orders = \app\models\Order::findSerialized([
+			'order_state' => \app\models\Order::ORDER_STATE_PAID,
+		]);
+
+		$dates = [];
+		foreach ($orders as $order) {
+			$packs = $order->getPacks();
+			foreach ($packs as $pack) {
+				$dates[$order->order_date->toDateTime()->format('Y-m-d')][$pack->deviser_id] = $pack->getDeviser()->getName();
+			}
+		}
+		ksort($dates); // order by date
+		$dates = array_reverse($dates); // first most recent
+
+		$itemsPackages = [];
+		$oneDay = \DateInterval::createFromDateString('1 day');
+		foreach ($dates as $date => $packs) {
+			$dateTime = new \DateTime($date);
+			foreach ($packs as $deviser_id => $deviserName) {
+				$next = clone $dateTime;
+				$next = $next->add($oneDay);
+				$itemsPackages[] = [
+					'date' => $dateTime->format('d M Y'),
+					'deviser_name' => $deviserName,
+					'url' => Url::toRoute(['admin/packages-excel']) . '/' . $dateTime->format('Y-m-d') . '/' . $next->format('Y-m-d').'/'.$deviser_id,
+				];
+			}
+		}
+
+		$provider = new ArrayDataProvider([
+			'allModels' => $itemsPackages,
+			'pagination' => ['pageSize' => 100]
+		]);
+
+		$data = [
+			'packages' => $provider,
+		];
+
+		return Yii::$app->request->isAjax ? $this->renderPartial("packages-deviser", $data) : $this->render("packages-deviser", $data);
+	}
+
+	public function actionPackagesExcel($date_from, $date_to, $deviser_id = null)
 	{
 		$date_from_formatted = strtotime($date_from);
 		$date_to_formatted = strtotime($date_to);
@@ -601,26 +684,27 @@ class AdminController extends CController {
 			'order_date_to' => new \MongoDate($date_to_formatted),
 			'order_by' => [
 				'order_date' => SORT_ASC
-			]
+			],
+			'deviser_id' => $deviser_id,
+			'only_matching_packs' => !empty($deviser_id),
 		]);
 		$csv[] = [
-			'Order',
-			'Pack',
-			'Date',
-			'Price',
-
-			// address
-			'Name',
-			'Address',
-			'City',
+			'Nombre',
+			'Direccion',
 			'Zip',
+			'Localidad',
 			'Country',
+			'Peso (gr)',
+			'Value',
 			'VAT_ID',
 			'Email',
-			'Phone',
-
+			'Telefono',
 			'N_Items',
-			'Weight (gr)',
+			'Order',
+			'Pack',
+			'Deviser_id',
+			'Deviser_name',
+			'Date',
 		];
 		$i = 0;
 		foreach ($orders as $order) {
@@ -631,22 +715,22 @@ class AdminController extends CController {
 				$totalItems = $pack->getTotalItemsNumber();
 				$totalWeight = $pack->getTotalWeight();
 				$csv[] = [
-					$order->short_id,
-					$pack->short_id,
-					$order->order_date->toDateTime()->format('d/m/Y'),
-					$pack->shipping_price,
-
 					$shippingAddress->getFullName(),
 					$shippingAddress->address,
-					$shippingAddress->city,
 					$shippingAddress->zip,
+					$shippingAddress->city,
 					$shippingAddress->country,
+					$totalWeight,
+					$pack->shipping_price,
 					$shippingAddress->vat_id,
 					$shippingAddress->email,
 					$shippingAddress->getPhone(),
-
 					$totalItems,
-					$totalWeight,
+					$order->short_id,
+					$pack->short_id,
+					$pack->deviser_id,
+					$pack->getDeviser()->getName(),
+					$order->order_date->toDateTime()->format('d/m/Y'),
 				];
 			}
 		}
