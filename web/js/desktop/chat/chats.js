@@ -150,6 +150,6 @@
 	}
 
 	angular
-	.module('todevise')
+	.module('chat')
 	.controller('chatCtrl', controller);
 }());

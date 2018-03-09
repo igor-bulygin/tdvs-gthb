@@ -64,22 +64,6 @@ Yii::$app->opengraph->title = $this->title;
 </div>
 <!-- /BANNER -->
 
-<!--  THE MARKET -->
-<div class="container">
-	<div class="row">
-		<div class="col-xs-12 mt-20">
-			<a href="<?=$urlMarket?>">
-				<img src="imgs/themarket.jpg" alt="The Market" title="" class="responsive-image img-theMarket">
-				<div class="div-theMarket">
-					<h2 class="title-theMarket"><?=Yii::t('app/public', 'THE_MARKET')?></h2>
-					<p class="subtitle-theMarket"><?=Yii::t('app/public', 'THE_MARKET_TEXT')?></p>
-				</div>
-			</a>
-		</div>
-	</div>
-</div>
-
-<?php /*
 <?php if (empty($category_id)) { ?>
 <!-- SUB-BANNER -->
 <section class="sub-banner hidden-xs hidden-sm">
@@ -117,8 +101,23 @@ Yii::$app->opengraph->title = $this->title;
 </section>
 <!-- /SUB-BANNER -->
 <?php } ?>
- */ ?>
 
+<!--  THE MARKET -->
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12 mt-20">
+			<a href="<?=$urlMarket?>">
+				<img src="imgs/themarket.jpg" alt="The Market" title="" class="responsive-image img-theMarket">
+				<div class="div-theMarket">
+					<h2 class="title-theMarket"><?=Yii::t('app/public', 'THE_MARKET')?></h2>
+					<p class="subtitle-theMarket"><?=Yii::t('app/public', 'THE_MARKET_TEXT')?></p>
+				</div>
+			</a>
+		</div>
+	</div>
+</div>
+
+<?php /*
 <?php if (empty($category_id)) { ?>
 <!-- SEASON BANNERS -->
 <section class="hidden-xs visible-sm visible-md visible-lg season-banners">
@@ -136,6 +135,7 @@ Yii::$app->opengraph->title = $this->title;
 </section>
 <!-- /SEASON BANNERS -->
 <?php } ?>
+ */ ?>
 
 <?php if ($devisersCarousel) { ?>
 <!-- SHOWCASE -->

@@ -20,6 +20,5 @@ class GlobalAsset extends AssetBundle {
 	];
 	public $depends = [
 		'app\assets\desktop\GlobalAsset',
-		'app\assets\desktop\cart\IndexAsset',
 	];
 }

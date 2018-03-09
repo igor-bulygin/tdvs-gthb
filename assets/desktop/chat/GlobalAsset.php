@@ -7,7 +7,6 @@ class GlobalAsset extends AssetBundle {
 	public $basePath = '@webroot';
 	public $baseUrl = '@web';
 	public $js = [
-		'js/desktop/chat/chats.js'
 	];
 	public $depends = [
 		'app\assets\desktop\GlobalAsset',
