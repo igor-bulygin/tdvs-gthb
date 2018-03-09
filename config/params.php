@@ -35,5 +35,5 @@ return [
 		['img' => '/imgs/banner-5.jpg', 'url' => '/deviser/vols-and-original/e23e0bv/store', 'alt' => 'Vols And Original', 'active' => false],
 	],
 
-	'the_market_deviser_id' => '5c7020p',
+	'the_market_deviser_id' => '',
 ];
