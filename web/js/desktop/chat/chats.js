@@ -143,7 +143,7 @@
 
 		function msgOwner(msg){
 			if (msg.person_id === vm.person.id) {
-				return 'msgOwner';
+				return 'msgOwner col-xs-7 col-xs-offset-4 col-sm-6 col-sm-offset-5';
 			}
 			return '';
 		}

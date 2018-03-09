@@ -9,11 +9,13 @@ $this->title = Yii::t('app/returns', 'TITLE');
 ?>
 
 <div class="returns-warranties-wrapper">
-	<h1><?=Yii::t('app/returns', 'TITLE')?></h1>
 	<div class="container">
 		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
-				<img class="responsive-image" src="/imgs/returns_1.png">
+			<h1><?=Yii::t('app/returns', 'TITLE')?></h1>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 img_div">
+				<img src="/imgs/returns_1.png">
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 number_div">
 				<div class="row">
@@ -37,9 +39,8 @@ $this->title = Yii::t('app/returns', 'TITLE');
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
-				<img class="responsive-image" src="/imgs/returns_2a.png">
-				<img class="responsive-image" src="/imgs/returns_2b.png">
+			<div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 img_div">
+				<img src="/imgs/returns_2.png">
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 number_div">
 				<div class="row">
@@ -68,8 +69,8 @@ $this->title = Yii::t('app/returns', 'TITLE');
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
-				<img class="responsive-image" src="/imgs/returns_3.png">
+			<div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 img_div">
+				<img src="/imgs/returns_3.png">
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 number_div">
 				<div class="row">
