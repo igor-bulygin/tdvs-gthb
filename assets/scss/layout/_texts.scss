@@ -146,19 +146,34 @@ h3{
 	font-size: 16px;//24px;
 }
 .div-theMarket {
+    text-align: center;
     position: absolute;
     width: 100%;
-    bottom: 30%;
-    text-align: center;
+	bottom: 30%;
+	@media (max-width: 991px){
+		bottom: 20%;
+	}
+	@media (max-width: 768px){
+		bottom: 15%;
+	}
+	@media (max-width: 320px){
+		bottom: 0;
+	}
 }
 .title-theMarket {
     color: #fff;
     margin: 0;
     line-height: normal;
+    @media (max-width: 575px){
+		font-size: 34px;
+	}
 }
 .subtitle-theMarket {
     font-size: 26px;
     color: #fff;
     margin: 0;
     padding: 0;
+    @media (max-width: 575px){
+		font-size: 18px;
+	}
 }

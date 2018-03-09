@@ -67,7 +67,7 @@ Yii::$app->opengraph->title = $this->title;
 <!--  THE MARKET -->
 <div class="container">
 	<div class="row">
-		<div class="col-xs-12">
+		<div class="col-xs-12 mt-20">
 			<a href="<?=$urlMarket?>">
 				<img src="imgs/themarket.jpg" alt="The Market" title="" class="responsive-image img-theMarket">
 				<div class="div-theMarket">
@@ -170,7 +170,7 @@ Yii::$app->opengraph->title = $this->title;
 			<div class="row">
 				<?php foreach ($boxes as $box) {
 					$products = $box->getProductsPreview(); ?>
-					<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 pad-showcase">
+					<div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 pad-showcase">
 						<a href="<?= $box->getViewLink()?>">
 							<figure class="showcase">
 								<div class="images-box">

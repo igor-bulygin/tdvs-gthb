@@ -6,6 +6,43 @@
     border-right: 1px solid $light_grey;
     margin-bottom: 0;
     padding-bottom: 0;
+    div {
+    	padding: 0;
+	}
+    li {
+		border-left: 1px solid $light_grey;
+		background-color: rgba(233,233,233,0.5);
+		&:first-child{
+			border-left: none;
+		}
+		a {
+			padding: 1em 0 !important;
+    		color: $black;
+			font-weight: bold;
+			font-family: $font-family--regular;
+			font-size: 14px;
+			text-transform: lowercase;
+    		text-align: center;
+			letter-spacing: 0.5px;
+			margin: 0;
+			&:hover{
+				background-color: $background_grey !important;
+			}
+		}
+		&.active{
+			background-color: transparent;
+			a {
+				border: none;
+				border-radius: inherit;
+			}
+		}
+	}
+	.avatar-logued-user{
+		margin: auto;
+		float: none;
+		border: none;
+		//margin: auto 20px;
+	}
     .chat-tit{
     	font-size: 16px;
     	font-weight: bold;
@@ -20,15 +57,19 @@
     .chat-time{
     	font-size: 12px;
     }
-	div {
-    	padding: 0;
-	}
 	#chat-chats{
 		.nav.nav-tabs{
 			li{
-				margin-bottom: 0;	
+				margin-bottom: 0;
+				padding: 0;
+				a{
+					@media(min-width:768px) and (max-width:991px){
+						font-size: 11px;
+					}
+				}
 			}			
 		}
+
 	}
 	.tab-content{
 		ul{
@@ -37,6 +78,12 @@
 	}
 	#chat-messages{
 	    border-left: 1px solid $light_grey;
+	    min-height: 240px;
+		max-height: 400px;
+		overflow-y: scroll;
+		@media(max-height: 600px){
+			max-height: 300px;
+		}
 		&>div{
 			&:last-child{
 				&>div{
@@ -57,18 +104,17 @@
 	    .msgOwner{
 	    	background-color: rgba($background_grey,0.5);
 	    	display: flex;
-	    	> div:nth-child(2){
-	    		padding-left: 4em;
-	    	}
-	    	.avatar-logued-user{
-	    		margin: auto 20px;
-	    	}
+	    	//> div:nth-child(2){
+	    		//padding-left: 4em;
+	    	//}
 	    }
 		.chat-send{
 			padding: 30px 0;
 			margin-top: 2px;
 			border-top: 1px solid $light_grey;
-			background-color: rgba($background_grey,0.5);
+			background-color: $background_grey_05;
+			bottom: 0;
+			position: sticky;
 			> div:nth-child(1){
 				padding: 0 1em 0 2em;
 				input{
@@ -86,31 +132,7 @@
 	    	border: none;
     		line-height: 1.5;
 	    }
-	}
-	li {
-		border-left: 1px solid $light_grey;
-		background-color: rgba(233,233,233,0.5);
-		&:first-child{
-			border-left: none;
-		}
-		a {
-			padding: 1em 0 !important;
-    		color: $black;
-			font-weight: bold;
-			font-family: $font-family--regular;
-			font-size: 14px;
-			text-transform: lowercase;
-    		text-align: center;
-			letter-spacing: 0.5px;
-		}
-		&.active{
-			background-color: transparent;
-			a {
-				border: none;
-				border-radius: inherit;
-			}
-		}
-	}
+	}	
 	.chat-header{
 		border-bottom: 1px solid $light_grey;
 		padding: 15px 0 !important;

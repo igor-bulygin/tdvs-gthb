@@ -9,7 +9,7 @@ $this->title = Yii::t('app/returns', 'TITLE');
 ?>
 
 <div class="returns-warranties-wrapper">
-	<h1><?=Yii::t('app/returns', 'TITLE')?></p></h1>
+	<h1><?=Yii::t('app/returns', 'TITLE')?></h1>
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">

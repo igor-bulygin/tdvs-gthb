@@ -37,10 +37,10 @@ $this->registerJs('var chat_id = ' .Json::encode($chatId), yii\web\View::POS_HEA
 							<li ng-repeat="chat in chatCtrl.chats" ng-class="chatCtrl.activeChat(chat)">
 								<a ng-click="chatCtrl.selectChat(chat)" class="col-xs-12" role="button">
 									<span class="col-xs-12">
-										<div class="col-sm-2">
+										<div class="col-xs-3 col-sm-2-5">
 											<img class="avatar-logued-user" ng-src="{{ chatCtrl.parseImage(chat.preview.image)}}">
 										</div>
-										<div class="col-sm-10">
+										<div class="col-xs-9 col-sm-9-5">
 											<span class="col-xs-12 red-text chat-tit" ng-bind="chat.preview.title"></span>
 											<span class="col-xs-12 chat-text" ng-bind="chat.preview.text"></span>
 										</div>
@@ -70,7 +70,7 @@ $this->registerJs('var chat_id = ' .Json::encode($chatId), yii\web\View::POS_HEA
 								<span class="col-xs-12 red-text chat-tit" ng-bind="msg.person_info.name" ng-if="msg.showOwner"></span>
 								<span class="col-xs-12 chat-text" ng-bind="msg.text"></span>
 								<span class="col-xs-12 text-right chat-time">
-									<span ng-cloak>{{chatCtrl.parseDate(msg.date.sec*1000) | date:'dd/MM/yy hh:mm'}}</span>
+									<span ng-cloak>{{chatCtrl.parseDate(msg.date.sec*1000) | date:'hh:mm'}}</span>
 								</span>
 							</div>
 						</div>
