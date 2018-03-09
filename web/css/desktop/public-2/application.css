@@ -9259,7 +9259,7 @@ footer {
 
 .returns-warranties-wrapper {
   background-color: #ffffff; }
-  @media (max-width: 575px) {
+  @media (max-width: 768px) {
     .returns-warranties-wrapper .row {
       padding: 10px; } }
   .returns-warranties-wrapper h1 {
