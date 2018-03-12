@@ -97,7 +97,7 @@ $footerMode = 'collapsed';
 				</div>
 				<div class="title mt-40"><span translate="footer.STAY_CONNECTED"></span></div>
 				<ul class="social-items mt-10 home col-xs-12 col-sm-12 col-md-12">
-					<li class="col-xs-4 col-md-2">
+					<li class="col-xs-6 col-md-2">
 						<a href="https://facebook.com/todevise" target="_blank">
 							<i class="facebook">
 								<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
@@ -132,7 +132,7 @@ $footerMode = 'collapsed';
 						</a>
 					</li>
 					-->
-					<li class="col-xs-4 col-md-2">
+					<li class="col-xs-6 col-md-2">
 						<a class="instagram" href="https://www.instagram.com/todevise.official" target="_blank">
 							<i class="instagram">
 								<svg width="23px" height="24px" viewBox="0 0 23 24" version="1.1"
@@ -156,16 +156,21 @@ $footerMode = 'collapsed';
 		<div class="hidden-md hidden-lg mt-4">
 			<div class="title">Help &amp; Contact</div>
 			<ul class="footer-items mt-10">
-				<li class="col-md-6">
-					<a href="<?= Url::to(["public/contact"]) ?>"><span translate="footer.CONTACT_US"></span></a>
+				<li class="col-xs-12 col-sm-12">
+					<span class="col-xs-6 col-sm-6"><a href="<?= Url::to(["public/contact"]) ?>"><span translate="footer.CONTACT_US"></span></a></span>
+				<?php /*
+				</li>
+				<li class="col-xs-6 col-sm-6">
+				*/ ?>
+					<span class="col-xs-6 col-sm-6"><a href="<?= Url::to(["public/about-us"]) ?>"><span translate="footer.ABOUT_US"></span></a></span>
 				</li>
 				<?php /*
 				<li>
 					<a href="#"><span translate="footer.FAQS"></span></a>
 				</li>
 				*/ ?>
-				<li class="col-md-6">
-					<a href="<?= Url::to(["public/about-us"]) ?>"><span translate="footer.ABOUT_US"></span></a>
+				<li class="col-xs-12 col-sm-12">
+						<a href="<?= Url::to(["public/returns"]) ?>"><span translate="footer.RETURNS_WARRANTIES"></span></a>
 				</li>
 			</ul>
 		</div>

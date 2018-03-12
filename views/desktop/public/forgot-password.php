@@ -26,7 +26,7 @@ Yii::$app->opengraph->title = $this->title;
 					<label translate="todevise.forgot_password.TEXT_INFO"></label>
 				</div>
 				<div ng-if="loginCtrl.forgotPasswordSended" ng-cloak>
-					<label>succesfully sended</label>
+					<label>Succesfully sent</label>
 				</div>
 				<div class="row no-mar">
 					<button type="submit" class="btn-red send-btn" ng-click="loginCtrl.askForResetPassword()">
