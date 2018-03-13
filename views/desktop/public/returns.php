@@ -14,10 +14,7 @@ $this->title = Yii::t('app/returns', 'TITLE');
 			<h1><?=Yii::t('app/returns', 'TITLE')?></h1>
 		</div>
 		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 img_div">
-				<img src="/imgs/returns_1.png">
-			</div>
-			<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 number_div">
+			<div class="col-xs-12 col-sm-12 col-md-push-7 col-lg-push-7 col-md-5 col-lg-5 number_div">
 				<div class="row">
 					<div class="col-xs-2 number">
 						<p>1.</p>
@@ -37,12 +34,13 @@ $this->title = Yii::t('app/returns', 'TITLE');
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 img_div">
-				<img src="/imgs/returns_2.png">
+			<div class="col-xs-12 col-sm-12 col-md-pull-5 col-lg-pull-5 col-md-7 col-lg-7 img_div">
+				<img src="/imgs/returns_1.png">
 			</div>
-			<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 number_div">
+		</div>
+		<hr class="separator">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-push-7 col-lg-push-7 col-md-5 col-lg-5 number_div">
 				<div class="row">
 					<div class="col-xs-2 number">
 						<p>2.</p>
@@ -67,12 +65,13 @@ $this->title = Yii::t('app/returns', 'TITLE');
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 img_div">
-				<img src="/imgs/returns_3.png">
+			<div class="col-xs-12 col-sm-12 col-md-pull-5 col-lg-pull-5 col-md-7 col-lg-7 img_div">
+				<img src="/imgs/returns_2.png">
 			</div>
-			<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 number_div">
+		</div>
+		<hr class="separator">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-push-7 col-lg-push-7 col-md-5 col-lg-5 number_div">
 				<div class="row">
 					<div class="col-xs-2 number">
 						<p>3.</p>
@@ -86,6 +85,9 @@ $this->title = Yii::t('app/returns', 'TITLE');
 						<p><?=Yii::t('app/returns', 'BLOCK_3_TEXT_1', ['contact_link' => \yii\helpers\Url::to('/public/contact')])?></p>
 					</div>
 				</div>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-pull-5 col-lg-pull-5 col-md-7 col-lg-7 img_div">
+				<img src="/imgs/returns_3.png">
 			</div>
 		</div>
 	</div>

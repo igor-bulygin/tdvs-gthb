@@ -26,9 +26,9 @@ return [
 	'BLOCK_2_TITLE' => 'Devolver un producto',
 	'BLOCK_2_TEXT_1' => 'Antes de iniciar el proceso de devolución, te aconsejamos que hables con el deviser a través de nuestro CHAT. Para acceder al chat con un deviser, tienes que entrar en su perfil y clicar el botón ENVIAR UN MENSAJE.',
 	'BLOCK_2_TEXT_2' => 'Antes de devolver el producto, pídele al deviser la siguiente información:',
-	'BLOCK_2_TEXT_3' => '<ul><li><p>la confirmación de que aceptan la devolución</p></li><li><p>la dirección para la devolución</p></li><li><p>un acuerdo sobre quién cubre los gastos de envío</p></li></ul>',
+	'BLOCK_2_TEXT_3' => '<ul><li>/ la confirmación de que aceptan la devolución</li><li>/ la dirección para la devolución</li><li>/ un acuerdo sobre quién cubre los gastos de envío</li></ul>',
 
 	'BLOCK_3_TITLE' => '¿No has podido devolver tu producto?',
-	'BLOCK_3_TEXT_1' => 'Si no has podido llegar a un acuerdo con el deviser, o has encontrado cualquier tipo de dificultad en el proceso de devolución, contacta con nuestro departamento de atención al cliente <a href="{contact_link}">aquí</a>.',
+	'BLOCK_3_TEXT_1' => 'Si no has podido llegar a un acuerdo con el deviser, o has encontrado cualquier tipo de dificultad en el proceso de devolución, contacta con nuestro departamento de atención al cliente <a href="{contact_link}"><strong>aquí</strong></a>.',
 
 ];

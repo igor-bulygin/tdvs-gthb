@@ -18,7 +18,8 @@
  */
 return [
     'ABOUT_PERSON_NAME' => 'About {person_name}',
-    'ABOUT_US' => 'About us',
+    /*
+	'ABOUT_US' => 'About us',
 	'ABOUT_US_TODEVISE_1' => 'Todevise is a new concept of store where you can browse and purchase from a diverse portfolio of curated high-quality, exclusive products.',
 	'ABOUT_US_TODEVISE_2' => 'All of our pieces have been created by some of the world’s most innovative and talented artists, artisans, designers and creators.',
 	'ABOUT_US_PHILOSOPHY' => 'PHILOSOPHY',
@@ -30,6 +31,19 @@ return [
 	'ABOUT_US_SHOPPING_EXPERIENCE_1' => 'You will find on Todevise something more than an online store - while browsing our pieces, you will fell like walking around a museum filled with beautiful contemporary creations, and you can immerse yourself in the fascinating details and stories behind them.',
 	'ABOUT_US_SHOPPING_EXPERIENCE_2' => 'When you purchase a product on Todevise not only that product will have a positive impact on your life thanks to its masterful combination of beauty and utility, but you also directly support some of the world’s most talented creators.',
 	'ABOUT_US_SHOPPING_EXPERIENCE_3' => 'In addition to curating our large collection of exclusive and original pieces, we also paid special attention to crafting an outstanding shopping experience. The intuitiveness of our design allows you to explore the store in a comfortable manner, and our customer representatives will always be there to assist you.',
+	*/
+    'ABOUT_US' => 'About us',
+	'ABOUT_US_TODEVISE_1' => 'Todevise brings online shopping to a whole new level by mixing in 3 special ingredients: a social network where you can connect with friends, experts and influencers; a store filled with original, trendy creations; and an affiliates program that allows you to earn money every time somebody purchases a product from your recommendations.',
+	'ABOUT_US_TODEVISE_2' => ' ',
+	'ABOUT_US_PHILOSOPHY' => 'THE SOCIAL NETWORK',
+	'ABOUT_US_PHILOSOPHY_TEXT' => 'Experts, influencers, creators, your friends & you. Our aim is to create a vibrant community that revolves around great products and creativity. Connect with influencers and see what they love; ask experts about products and the latest trends; see what your friends like and recommend them new products - on Todevise you will be surprised every day with new discoveries.',
+	'ABOUT_US_DEVISERS' => 'THE AFFILIATES PROGRAM',
+	'ABOUT_US_DEVISERS_TEXT_1' => 'Affiliate programs have been around for ever. Our goal at Todevise is to simplify them, so you can get rewarded for your great taste and knowledge. If another member of our community discover a product through your profile, or if somebody uses your code to join Todevise, then you will get a commission. Inside your profile, you can see how much funds you accumulated, and transfer them to your bank account or discount them from your next purchase. It’s that simple.',
+	'ABOUT_US_DEVISERS_TEXT_2' => 'The affiliates program will be live in late Sprint 2018.',
+	'ABOUT_US_SHOPPING_EXPERIENCE' => 'THE STORE',
+	'ABOUT_US_SHOPPING_EXPERIENCE_1' => 'The brands that sell on Todevise are called <i>devisers</i>. We handpick all our devisers, in order to offer you the coolest, most original products on the market, with a great price - quality balance. On Todevise you will find both the established brands that you love, and emerging brands that set the tone of the future. We guarantee that you will be surprised.',
+	'ABOUT_US_SHOPPING_EXPERIENCE_2' => '',
+	'ABOUT_US_SHOPPING_EXPERIENCE_3' => '',
 	'ALL_CATEGORIES' => 'All categories',
     'ALMOST_DONE_PERSON_NAME' => 'Almost done! {person_name}',
     'BECOME_A_DEVISER' => 'Become a deviser',

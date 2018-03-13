@@ -39,7 +39,7 @@
     	padding: 330px 0 20px 0;
 	}
 	p{
-		width: 640px;
+		width: 700px;//640px;
 		text-align: center;
 		margin: 0 auto;
 		color: $black;
@@ -67,6 +67,7 @@
 			text-align: right;
 			color: $black;
 			font-size: 16px;
+			letter-spacing: -0.01em;
 			&.bold{
 				font-weight: bold;
 			}
@@ -78,7 +79,7 @@
 	width: 100%;
     float: left;
     min-height: 597px;
-    padding: 80px 0 0 80px;
+    padding: 12em 0 0 80px;
 	.title{
 		font-family: $font-family--name;
 		font-size: 86px;
