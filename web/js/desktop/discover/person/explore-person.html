@@ -1,12 +1,24 @@
 <div class="our-devisers-wrapper">
 	<div class="container" >
-		<div class="our-devisers-header" ng-if="!discoverCtrl.searchdata.hideHeader">
+		<div class="our-devisers-header" ng-if="!discoverCtrl.searchdata.hideHeader && discoverCtrl.searchdata.personType == 2">
 			<h3 translate="discover.devisers.OUR_DEVISERS"></h3>
 			<h5 class="text-center" translate="discover.devisers.DISCOVER_CREATORS"></h5>
 			<div class="row">
 				<form name="discoverCtrl.form">
 					<div class="devisers-searcher">
 						<input type="text" class="form-control white-rounded-input" name="key" ng-model="discoverCtrl.searchdata.key" on-press-enter="discoverCtrl.search()" placeholder="{{ 'discover.SEARCH_KEYWORD' | translate }}" ng-cloak>
+						<span class="ion-search" ng-click="discoverCtrl.search()"></span>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="our-influencers-header" ng-if="!discoverCtrl.searchdata.hideHeader && discoverCtrl.searchdata.personType == 3">
+			<h3 translate="discover.influencers.OUR_INFLUENCERS"></h3>
+			<h5 class="text-center" translate="discover.influencers.DISCOVER_INFLUENCERS"></h5>
+			<div class="row">
+				<form name="discoverCtrl.form">
+					<div class="devisers-searcher">
+						<input type="text" class="form-control white-rounded-input" name="key" ng-model="discoverCtrl.key" on-press-enter="discoverCtrl.search()" placeholder="{{ 'discover.SEARCH_KEYWORD' | translate }}" ng-cloak>
 						<span class="ion-search" ng-click="discoverCtrl.search()"></span>
 					</div>
 				</form>
