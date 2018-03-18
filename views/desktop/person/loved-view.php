@@ -43,8 +43,8 @@ $this->params['person_links_target'] = 'public_view';
 					</div>
 				<?php } else { ?>
 					<div class="content-store">
-						<div class="store-grid">
-							<div class="title-wrapper title-loved">
+						<div class="store-grid mt-20">
+							<div class="title-wrapper title-loved hidden-xs">
 								<span class="title"><span translate="person.loved.LOVED_BY"></span> <?=$person->getName()?></span>
 							</div>
 							<div id="loved-container" class="macy-container" data-columns="6">
