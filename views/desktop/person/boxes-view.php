@@ -52,7 +52,7 @@ $this->params['person_links_target'] = 'public_view';
 								<?php if ($person->isPersonEditable()) { ?>
 									<div class="col-lg-4">
 										<!--<button class="btn btn-default" ng-click="viewBoxesCtrl.openCreateBoxModal()">Add boxxxx</button>-->
-										<div class="box-loader-wrapper">								
+										<div class="box-loader-wrapper">
 											<button id="btn_create_box" class="btn btn-red btn-default" ng-click="viewBoxesCtrl.openCreateBoxModal()">
 												<span translate="person.boxes.ADD_BOX"></span>
 											</button>
@@ -61,7 +61,7 @@ $this->params['person_links_target'] = 'public_view';
 								<?php } ?>
 								<?php foreach ($boxes as $box) {
 									$products = $box->getProductsPreview(); ?>
-									<div class="col-lg-4">
+									<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
 										<a href="<?= $box->getViewLink()?>">
 								<figure class="showcase">
 									<div class="images-box">

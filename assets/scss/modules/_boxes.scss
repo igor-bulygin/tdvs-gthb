@@ -202,10 +202,11 @@
     width: 100%;
     text-align: center;
     padding: 13px 0 0 0;
-    height: 315px;
+    //height: 315px;
     cursor: pointer;
     display: inline-block;
-    margin: 0 2px 0;
+    //margin: 0 2px 0;
+    margin: 0 2px 20px;
     &:hover{
         .plus-add{
             background-color: $dark_red;//$dark_green;

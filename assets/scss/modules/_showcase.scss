@@ -2,92 +2,92 @@
 // Showcase
 // ==========================================================================
 .showcase-wrapper{
-    opacity: $background_grey;
-    background-color: $white;
-    padding:20px 0 30px;
-    h3{
+	opacity: $background_grey;
+	background-color: $white;
+	padding:20px 0 30px;
+	h3{
 		margin-bottom: -30px;
 		@media (max-width: 767px){
-		    font-size: 3em;//28px;
-		    width: 320px;
-		    text-align: left;
-		    margin: 0;
+			font-size: 3em;//28px;
+			//width: 320px;
+			//text-align: left;
+			margin: 0;
 		}
 		/*@media (min-width:769px) and (max-width: 991px){
-		    font-size: 50px;
+			font-size: 50px;
 		}
-		@media (min-width:510px) and (max-width: 768px){
-		    font-size: 32px;
+		@media (min-width:510px) and (max-width: 767px){
+			font-size: 32px;
 		}
 		@media (min-width:400px) and (max-width: 510px){
-		    font-size: 22px;
+			font-size: 22px;
 		}
 		@media (max-width: 399px){
-		    font-size: 3em;//28px;
-		    width: 320px;
-		    text-align: left;
-		    margin: 0;
-		}*/
-    }
-    .subtitle-home{
-		@media(max-width: 767px){
+			font-size: 3em;//28px;
+			width: 320px;
 			text-align: left;
+			margin: 0;
+		}*/
+	}
+	.subtitle-home{
+		@media(max-width: 767px){
+			//text-align: left;
 			font-size: 1.3em;
 			line-height: 1em;
 			margin: 0;
 		}
 	}
-    .section-title{
-        color:$black;
-        margin: 0 0 10px 10px;
-        padding-top: 0;
-    }
+	.section-title{
+		color:$black;
+		margin: 0 0 10px 10px;
+		padding-top: 0;
+	}
 }
 .showcase{
 	@include border-radius(8px,8px,8px,8px);
-    position: relative;
-    float: left;
-    overflow: hidden;
-    width: 100%;
-    max-width: 360px;//382px;
-    text-align: center;
-    cursor: pointer;
-    margin: 1em 0;
-    border: 1px solid $light_grey;
-    @include box-shadow(2px,2px,4px,$light_grey);
-    @media (max-width: 768px){
-    	float: none;
-    	margin: auto;
-    }
-    img{
-        width:100%;
-    }
-    figcaption{
-        @extend %absolut-bottom;
-        background: $white;
-        width: 100%;
-        padding: 8px;
+	position: relative;
+	float: left;
+	overflow: hidden;
+	width: 100%;
+	max-width: 360px;//382px;
+	text-align: center;
+	cursor: pointer;
+	margin: 1em 0;
+	border: 1px solid $light_grey;
+	@include box-shadow(2px,2px,4px,$light_grey);
+	@media (max-width: 767px){
+		float: none;
+		margin: 1em auto;
+	}
+	img{
+		width:100%;
+	}
+	figcaption{
+		@extend %absolut-bottom;
+		background: $white;
+		width: 100%;
+		padding: 8px;
 		height: 66px;
-        img{
-            @include opacity(1);
-            @include size(50px,50px);
-            @extend %avatar-border;
-            border: 1px solid $black;
-            margin-bottom:5px;
-            @media (max-width: 768px){
-                @include size(50px,50px);
-            }
-        }
-        .location{
+		img{
+			@include opacity(1);
+			@include size(50px,50px);
+			@extend %avatar-border;
+			border: 1px solid $black;
+			margin-bottom:5px;
+			@media (max-width: 767px){
+				@include size(50px,50px);
+			}
+		}
+		.location{
 			color: $black;
 			margin-top: -5px;
 			float: left;
 			display: block;
 			text-transform: capitalize;
-    		white-space: nowrap;
+			white-space: nowrap;
 			overflow: hidden;
-    		text-overflow: ellipsis;
-    		width: 100%;
+			text-overflow: ellipsis;
+			width: 100%;
 		}
 		.sm{
 			float: left;
@@ -96,7 +96,7 @@
 		.no-mar {
 			margin-top: 8px !important;
 		}
-    }
+	}
 }
 .pad-showcase{
    padding:10px;
@@ -111,77 +111,83 @@
 }
 .showcase{
 	&.influencers{
-		    min-height: 250px;
+			min-height: 250px;
 			img{
 				max-width: 100%;//286px;
-                @media (max-width: 575px){
-                    max-width: 575px;
-                }
-                @media (max-width: 320px){
-                    max-width: 260px;
-                }
+				@media (max-width: 575px){
+					max-width: 575px;
+				}
+				@media (max-width: 320px){
+					max-width: 260px;
+				}
 			}
 	}
 }
 .carousel-devisers-container{
 	max-width: 900px;
-    margin: 0 auto;
-    @media(max-width:768px){
-    	float: initial;
-    }
+	margin: 0 auto;
+	@media(max-width: 767px){
+		float: initial;
+	}
 }
 .carusel-container{
 	position: relative;
 	a{
-        &.prev{
-            position: absolute;
-    		top: 120px;
+		&.prev{
+			position: absolute;
+			top: 120px;
 			color: $black;
 			left: 80px;
 			z-index: 10;
-            i{
-                font-size: 46px;
-            }
-            @media(max-width:768px){
-            	float: initial;
-			    padding: 0;
-			    margin: auto;
-            }
+			i{
+				font-size: 46px;
+			}
+			@media(max-width: 767px){
+				float: initial;
+				padding: 0;
+				margin: auto;
+			}
 			//@media (min-width:769px) and (max-width:1199px){
 			@media (max-width:1199px){
 				left: 0;
 			}
-        }
-        &.next{
+		}
+		&.next{
 			position: absolute;
-    		top: 120px;
+			top: 120px;
 			color: $black;
 			right: 80px;
-            i{
-                font-size: 46px;
-            }
-            @media(max-width:768px){
-            	float: initial;
-			    padding: 0;
-			    margin: auto;
-            }
+			i{
+				font-size: 46px;
+			}
+			@media(max-width: 767px){
+				float: initial;
+				padding: 0;
+				margin: auto;
+			}
 			//@media (min-width:769px) and (max-width:1199px){
 			@media (max-width:1199px){
 				right: 0;
 			}
-        }
-        &:focus{
-            color: $black;
-            text-decoration: none;
-        }
-        &:hover{
-            color:$dark_grey!important;
-            text-decoration: none;
-        }
-    }
+		}
+		&:focus{
+			color: $black;
+			text-decoration: none;
+		}
+		&:hover{
+			color:$dark_grey!important;
+			text-decoration: none;
+		}
+	}
+	@media(max-width: 767px){
+		margin-top: 2em;
+	}
 }
 .boxes-container{
 	margin-top: 60px;
+	 @media(max-width: 767px){
+		margin-top: 2em;
+	}
 }
 .season-banners{
 	padding: 40px 0 20px;
