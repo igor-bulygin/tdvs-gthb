@@ -3,7 +3,7 @@
 
 	function controller($scope, UtilService) {
 		var vm = this;
-		var show_items = 20;
+		var show_items = 21;
 		vm.truncateString = UtilService.truncateString;
 		vm.addMoreItems = addMoreItems;
 		vm.results_infinite = [];
