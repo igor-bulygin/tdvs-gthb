@@ -398,10 +398,10 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 								</div>
 								<div class="full-width mt-20">	
 									<div class="bs-example">
-										<p>
-											<a href="#collapseExample" class="btn collapsed accordion-btn" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample"> <span translate="product.detail.SHIPPING&POLICIES"></span> <i class="ion-plus"></i> </a>
+										<p class="btn accordion-btn">
+											<span translate="product.detail.SHIPPING&POLICIES"></span>
 										</p>
-										<div class="collapse" id="collapseExample" aria-expanded="false" style="height: 0px;">
+										<div>
 											<div class="shipping-policies-wrapper">
 												<div class="policies-row">
 													<form class="form-horizontal">
