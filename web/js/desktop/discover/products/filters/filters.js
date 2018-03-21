@@ -42,44 +42,46 @@
 		}
 
 		function search(resetPage) {
-			vm.searching = true;
-			if (vm.search_key != vm.key || resetPage) {
-				vm.results={items:[], counter:0};
-				vm.page=1;
-				$scope.$emit("resetPage"); 
-			}
-			var params = {
-				limit: vm.limit,
-				page: vm.page
-			}
-			if (!angular.isUndefined(vm.orderFilter) && !angular.isUndefined(vm.orderFilter.value)) {
-				params = Object.assign(params, {order_type: vm.orderFilter.value});
-			}
-			if (!angular.isUndefined(vm.searchParam) && vm.searchParam.length>0) {
-				params.q=vm.searchParam;
-			}
-			Object.keys(vm.filters).map(function(filter_type) {
-				var new_filter = []
-				Object.keys(vm.filters[filter_type]).map(function(filter) {
-					if (vm.filters[filter_type][filter])
-						new_filter.push(filter);
-				})
-				if (new_filter.length > 0)
-					params[filter_type + '[]'] = new_filter;
-			});
+			if (!vm.searching) {
+				vm.searching = true;
+				if (vm.search_key != vm.key || resetPage) {
+					vm.results={items:[], counter:0};
+					vm.page=1;
+					$scope.$emit("resetPage"); 
+				}
+				var params = {
+					limit: vm.limit,
+					page: vm.page
+				}
+				if (!angular.isUndefined(vm.orderFilter) && !angular.isUndefined(vm.orderFilter.value)) {
+					params = Object.assign(params, {order_type: vm.orderFilter.value});
+				}
+				if (!angular.isUndefined(vm.searchParam) && vm.searchParam.length>0) {
+					params.q=vm.searchParam;
+				}
+				Object.keys(vm.filters).map(function(filter_type) {
+					var new_filter = []
+					Object.keys(vm.filters[filter_type]).map(function(filter) {
+						if (vm.filters[filter_type][filter])
+							new_filter.push(filter);
+					})
+					if (new_filter.length > 0)
+						params[filter_type + '[]'] = new_filter;
+				});
 
-			function onGetProductsSuccess(data) {
-				vm.search_key = angular.copy(vm.key);
-				vm.results.items = vm.results.items.concat(angular.copy(data.items));
-				vm.results.counter=angular.copy(data.meta.total_count);
-				vm.searching = false;
-			}
+				function onGetProductsSuccess(data) {
+					vm.search_key = angular.copy(vm.key);
+					vm.results.items = vm.results.items.concat(angular.copy(data.items));
+					vm.results.counter=angular.copy(data.meta.total_count);
+					vm.searching = false;
+				}
 
-			function onGetProductsError(err) {
-				UtilService.onError(err);
-				vm.searching = false;
+				function onGetProductsError(err) {
+					UtilService.onError(err);
+					vm.searching = false;
+				}
+				productDataService.getProducts(params, onGetProductsSuccess, onGetProductsError);
 			}
-			productDataService.getProducts(params, onGetProductsSuccess, onGetProductsError);
 		}
 
 		$scope.$on("changePage", function(evt,data){ 
