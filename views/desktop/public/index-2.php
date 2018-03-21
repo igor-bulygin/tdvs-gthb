@@ -169,7 +169,7 @@ Yii::$app->opengraph->title = $this->title;
 		<div class="boxes-container">
 			<div class="row">
 				<?php foreach ($boxes as $box) { ?>
-					<div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 pad-showcase">
+					<div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 pad-showcase">
 						<?= \app\components\Box::widget(['box' => $box]);?>
 					</div>
 				<?php } ?>

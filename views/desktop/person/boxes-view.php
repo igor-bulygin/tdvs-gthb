@@ -48,7 +48,7 @@ $this->params['person_links_target'] = 'public_view';
 
 					<div class="content-store">
 						<div class="store-grid">
-							<div class="row">
+							<div class="_row">
 								<?php if ($person->isPersonEditable()) { ?>
 									<div class="col-lg-4">
 										<!--<button class="btn btn-default" ng-click="viewBoxesCtrl.openCreateBoxModal()">Add boxxxx</button>-->
@@ -61,7 +61,7 @@ $this->params['person_links_target'] = 'public_view';
 								<?php } ?>
 								<?php foreach ($boxes as $box) {
 									$products = $box->getProductsPreview(); ?>
-									<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+									<div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
 										<?=\app\components\Box::widget(['box' => $box]) ?>
 									</div>
 								<?php } ?>

@@ -3617,7 +3617,6 @@ h3 {
     @media (max-width: 767px) {
       .showcase-wrapper h3 {
         font-size: 3em;
-        width: 320px;
         margin: 0; } }
   @media (max-width: 767px) {
     .showcase-wrapper .subtitle-home {
@@ -3645,7 +3644,10 @@ h3 {
   box-shadow: 2px 2px 4px #bfbfbf;
   -webkit-box-shadow: 2px 2px 4px #bfbfbf;
   -moz-box-shadow: 2px 2px 4px #bfbfbf;
-  -ms-box-shadow: 2px 2px 4px #bfbfbf; }
+  -ms-box-shadow: 2px 2px 4px #bfbfbf;
+  /*@media(max-width: 375px){
+  	max-height: 302px;
+  }*/ }
   @media (max-width: 767px) {
     .showcase {
       float: none;
@@ -3686,6 +3688,9 @@ h3 {
 
 .pad-showcase {
   padding: 10px; }
+  @media (max-width: 375px) {
+    .pad-showcase {
+      width: 100%; } }
 
 .showcase-influencers img {
   max-width: 360px;
@@ -3770,38 +3775,56 @@ h3 {
 
 .images-box {
   position: relative; }
-  .images-box .bottom-top-images .image-left {
-    width: 49%;
-    float: left;
-    height: 97px;
+  .images-box .bottom-top-images {
     overflow: hidden;
+    max-height: 101px;
     position: relative;
-    margin-bottom: 4px; }
-    .images-box .bottom-top-images .image-left img {
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      margin: auto; }
-  .images-box .bottom-top-images .image-right {
-    width: 49%;
-    float: right;
-    height: 97px;
-    overflow: hidden;
-    position: relative;
-    margin-bottom: 4px; }
-    .images-box .bottom-top-images .image-right img {
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      margin: auto; }
+    width: 100;
+    /*@media(max-width: 375px){
+    	max-height: 101px;
+    }*/ }
+    .images-box .bottom-top-images .image-left {
+      width: 49%;
+      float: left;
+      height: 97px;
+      overflow: hidden;
+      position: relative;
+      margin-bottom: 4px;
+      /*@media(max-width: 375px){
+      	max-height: 101px;
+      }*/ }
+      .images-box .bottom-top-images .image-left img {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto; }
+    .images-box .bottom-top-images .image-right {
+      width: 49%;
+      float: right;
+      height: 97px;
+      overflow: hidden;
+      position: relative;
+      margin-bottom: 4px;
+      /*@media(max-width: 375px){
+      	max-height: 46px;
+      }*/ }
+      .images-box .bottom-top-images .image-right img {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto; }
   .images-box .bottom-image {
     width: 100%;
     float: left;
     height: 199px;
+    max-height: 199px;
     overflow: hidden;
-    position: relative; }
+    position: relative;
+    /*@media(max-width: 375px){
+    	max-height: 154px;
+    }*/ }
     .images-box .bottom-image img {
       position: absolute;
       left: 0;
@@ -9017,6 +9040,17 @@ cart-panel .cart-panel-div {
     letter-spacing: 0.5px; }
   .chat-body .activeChat a {
     background-color: rgba(233, 233, 233, 0.5); }
+
+.panel-billing-send .panel-heading h4 {
+  margin: 0; }
+.panel-billing-send .panel-heading .row {
+  position: relative; }
+  .panel-billing-send .panel-heading .row > :first-child {
+    position: absolute;
+    top: calc(50% - 7.5px); }
+  .panel-billing-send .panel-heading .row > :last-child {
+    float: right;
+    text-align: right; }
 
 .panel-billing .panel-heading {
   background-color: transparent !important; }

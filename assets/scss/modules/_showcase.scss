@@ -59,6 +59,9 @@
 		float: none;
 		margin: 1em auto;
 	}
+	/*@media(max-width: 375px){
+		max-height: 302px;
+	}*/
 	img{
 		width:100%;
 	}
@@ -100,6 +103,9 @@
 }
 .pad-showcase{
    padding:10px;
+   @media(max-width:375px){
+   		width: 100%;
+   }
 }
 .showcase-influencers{
 	img{
@@ -199,6 +205,13 @@
 .images-box{
 	 position: relative;
 	.bottom-top-images{
+		overflow: hidden;
+		max-height: 101px;
+		position: relative;
+		width: 100;
+		/*@media(max-width: 375px){
+			max-height: 101px;
+		}*/
 		.image-left{
 			width: 49%;
 			float: left;
@@ -206,6 +219,9 @@
 			overflow: hidden;
 			position: relative;
 			margin-bottom: 4px;
+			/*@media(max-width: 375px){
+				max-height: 101px;
+			}*/
 			img{
 				position: absolute;
 				left: 0;
@@ -221,6 +237,9 @@
 			overflow: hidden;
 			position: relative;
 			margin-bottom: 4px;
+			/*@media(max-width: 375px){
+				max-height: 46px;
+			}*/
 			img{
 				position: absolute;
 				left: 0;
@@ -234,8 +253,12 @@
 		width: 100%;
 		float: left;
 		height: 199px;
+		max-height: 199px;
 		overflow: hidden;
 		position: relative;
+		/*@media(max-width: 375px){
+			max-height: 154px;
+		}*/
 		img{
 			position: absolute;
 			left: 0;

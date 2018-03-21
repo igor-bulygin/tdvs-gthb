@@ -80,6 +80,8 @@
 	    border-left: 1px solid $light_grey;
 	    min-height: 240px;
 		max-height: 400px;
+		//height: 100%;
+		//max-height: calc(100% - 443px);
 		overflow-y: scroll;
 		@media(max-height: 600px){
 			max-height: 300px;
