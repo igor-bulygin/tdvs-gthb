@@ -1,6 +1,24 @@
 // ==========================================================================
 // Billing
 // ==========================================================================
+.panel-billing-send{
+	.panel-heading{
+		h4{
+			margin: 0;
+		}
+		.row{
+			position: relative;
+			& > :first-child{
+				position: absolute;
+				top: calc(50% - 7.5px);
+			}
+			& > :last-child {
+				float: right;
+    			text-align: right;
+			}
+		}
+	}
+}
 .panel-billing{
 	.panel-heading{
 		background-color: transparent !important;	
@@ -8,7 +26,7 @@
 	h4{
 		text-transform: uppercase;
 		font-size: 14px;
-    	margin: 7px 0 0 10px;
+ 		margin: 7px 0 0 10px;
 	}
 }
 .bank-settings-wrapper{

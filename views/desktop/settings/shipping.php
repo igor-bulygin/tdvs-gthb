@@ -21,17 +21,19 @@ $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD
 	<?= SettingsHeader::widget() ?>
 <?php } ?>
 
-<div ng-controller="shippingSettingsCtrl as shippingSettingsCtrl" class="personal-info-wrapper bank-settings-wrapper">
+<div ng-controller="shippingSettingsCtrl as shippingSettingsCtrl" class="personal-info-wrapper bank-settings-wrapper panel-billing-send">
 	<div class="container">
 		<div ng-repeat="setting in shippingSettingsCtrl.person.shipping_settings" ng-cloak>
 			<uib-accordion>
 				<div uib-accordion-group class="panel-default panel-billing" ng-cloak is-open="shippingSettingsCtrl.country_helper[$index]['status']" is-disabled="true">
 					<div uib-accordion-heading>
-						<span ng-click="shippingSettingsCtrl.toggleStatus($index)" ng-bind="shippingSettingsCtrl.country_helper[$index].country_name"></span>
-						<span ng-click="shippingSettingsCtrl.toggleStatus($index)" ng-if="!shippingSettingsCtrl.country_helper[$index]['status']">
-							<span class="ion-edit red-icon pull-right" ng-if="setting.prices && setting.prices.length > 0" ng-cloak></span>
-							<button class="btn btn-default btn-red btn-minpad btn-acordion pull-right" ng-if="!setting.prices || setting.prices.length <= 0" ng-cloak ><span translate="settings.shipping.ADD_SHIPPING_PRICES"></span></button>
-						</span>
+						<div class="row">
+							<span ng-click="shippingSettingsCtrl.toggleStatus($index)" ng-bind="shippingSettingsCtrl.country_helper[$index].country_name" class="col-xs-6"></span>
+							<span ng-click="shippingSettingsCtrl.toggleStatus($index)" ng-if="!shippingSettingsCtrl.country_helper[$index]['status']" class="col-xs-6">
+								<span class="ion-edit red-icon pull-right" ng-if="setting.prices && setting.prices.length > 0" ng-cloak></span>
+								<button class="btn btn-red btn-small" ng-if="!setting.prices || setting.prices.length <= 0" ng-cloak ><span translate="settings.shipping.ADD_SHIPPING_PRICES"></span></button>
+							</span>
+						</div>
 					</div>
 					<shipping-types setting="setting" currency="shippingSettingsCtrl.country_helper[$index].currency"></shipping-types>
 					<hr>
