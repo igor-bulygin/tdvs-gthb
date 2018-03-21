@@ -23,7 +23,7 @@ $products = $box->getProductsPreview(); ?>
 		</div>
 		<figcaption>
 			<div class="row no-mar">
-				<div class="col-xs-7 col-sm-7 col-md-8">
+				<div class="col-xs-7 col-sm-7 col-md-8 no-padding">
 					<span class="boxes-text align-left"><?= StringHelper::truncate($box->name, 18, '…') ?></span>
 				</div>
 				<div class="col-xs-5 col-sm-5 col-md-4 no-padding">

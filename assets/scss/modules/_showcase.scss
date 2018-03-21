@@ -59,7 +59,7 @@
 		float: none;
 		margin: 1em auto;
 	}
-	/*@media(max-width: 375px){
+	/*@media(max-width: 350px){
 		max-height: 302px;
 	}*/
 	img{
@@ -103,7 +103,7 @@
 }
 .pad-showcase{
    padding:10px;
-   @media(max-width:375px){
+   @media(max-width:350px){
    		width: 100%;
    }
 }
@@ -209,7 +209,7 @@
 		max-height: 101px;
 		position: relative;
 		width: 100;
-		/*@media(max-width: 375px){
+		/*@media(max-width: 350px){
 			max-height: 101px;
 		}*/
 		.image-left{
@@ -219,7 +219,7 @@
 			overflow: hidden;
 			position: relative;
 			margin-bottom: 4px;
-			/*@media(max-width: 375px){
+			/*@media(max-width: 350px){
 				max-height: 101px;
 			}*/
 			img{
@@ -237,7 +237,7 @@
 			overflow: hidden;
 			position: relative;
 			margin-bottom: 4px;
-			/*@media(max-width: 375px){
+			/*@media(max-width: 350px){
 				max-height: 46px;
 			}*/
 			img{
@@ -256,7 +256,7 @@
 		max-height: 199px;
 		overflow: hidden;
 		position: relative;
-		/*@media(max-width: 375px){
+		/*@media(max-width: 350px){
 			max-height: 154px;
 		}*/
 		img{
@@ -275,6 +275,7 @@
 	color: $black;
 	display: block;
 	margin-top: 8px;
+	line-height: 1em !important;
 }
 .btn-love-box{
 	margin-top: -2px;//-8px;

@@ -938,7 +938,7 @@ a.btn span {
     font-size: 16px;
     font-weight: normal;
     letter-spacing: 0.2px;
-    padding-right: 8px; }
+    padding: 0 4px; }
   .btn-single-love:hover {
     color: #c91c39; }
   .btn-single-love.active {
@@ -3645,7 +3645,7 @@ h3 {
   -webkit-box-shadow: 2px 2px 4px #bfbfbf;
   -moz-box-shadow: 2px 2px 4px #bfbfbf;
   -ms-box-shadow: 2px 2px 4px #bfbfbf;
-  /*@media(max-width: 375px){
+  /*@media(max-width: 350px){
   	max-height: 302px;
   }*/ }
   @media (max-width: 767px) {
@@ -3688,7 +3688,7 @@ h3 {
 
 .pad-showcase {
   padding: 10px; }
-  @media (max-width: 375px) {
+  @media (max-width: 350px) {
     .pad-showcase {
       width: 100%; } }
 
@@ -3780,7 +3780,7 @@ h3 {
     max-height: 101px;
     position: relative;
     width: 100;
-    /*@media(max-width: 375px){
+    /*@media(max-width: 350px){
     	max-height: 101px;
     }*/ }
     .images-box .bottom-top-images .image-left {
@@ -3790,7 +3790,7 @@ h3 {
       overflow: hidden;
       position: relative;
       margin-bottom: 4px;
-      /*@media(max-width: 375px){
+      /*@media(max-width: 350px){
       	max-height: 101px;
       }*/ }
       .images-box .bottom-top-images .image-left img {
@@ -3806,7 +3806,7 @@ h3 {
       overflow: hidden;
       position: relative;
       margin-bottom: 4px;
-      /*@media(max-width: 375px){
+      /*@media(max-width: 350px){
       	max-height: 46px;
       }*/ }
       .images-box .bottom-top-images .image-right img {
@@ -3822,7 +3822,7 @@ h3 {
     max-height: 199px;
     overflow: hidden;
     position: relative;
-    /*@media(max-width: 375px){
+    /*@media(max-width: 350px){
     	max-height: 154px;
     }*/ }
     .images-box .bottom-image img {
@@ -3837,7 +3837,8 @@ h3 {
   font-weight: bold;
   color: #1C1919;
   display: block;
-  margin-top: 8px; }
+  margin-top: 8px;
+  line-height: 1em !important; }
 
 .btn-love-box {
   margin-top: -2px; }

@@ -250,7 +250,8 @@ a{
         font-size: 16px;
         font-weight: normal;
         letter-spacing: 0.2px;
-        padding-right: 8px;
+        //padding-right: 8px;
+        padding: 0 4px;
     }
     &:hover{
         color:$dark_red;
