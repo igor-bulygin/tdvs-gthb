@@ -7,11 +7,21 @@
 		vm.limit=100;
 		vm.searchMore=searchMore;
 		vm.page=1;
+		vm.isMobile = isMobile;
 
 		function searchMore() {
 			vm.page=vm.page + 1;
 			$scope.$broadcast("changePage",vm.page); 
 		}
+
+		function isMobile() {
+			if ( $('filters-xs-container').css('display') == 'none' ) {
+				return false;
+			}
+			return true;
+		}
+
+		
 
 		$scope.$on("resetPage", function(evt){ 
 				vm.page=1;
