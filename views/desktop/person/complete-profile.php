@@ -83,7 +83,6 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 					</div>
 					<form-errors field="completeProfileCtrl.form.categories" condition="completeProfileCtrl.has_error(completeProfileCtrl.form, completeProfileCtrl.form.categories)"></form-errors>
 				</div>
-				<hr class="separator-30-50">
 			<?php } ?>
 			<div class="row">
 				<?php if($person->isDeviser()) {?>
@@ -133,7 +132,6 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 				</div>
 			</div>
 			<?php } ?>
-			<hr class="separator-30-50">
 			<div class="row upload-photo-section" ngf-select ngf-accept="'image/*'" ngf-pattern="'image/*'" ng-model="completeProfileCtrl.profile" name="profile_photo" required>
 				<div class="upload-photo-wrapper">
 					<h4>

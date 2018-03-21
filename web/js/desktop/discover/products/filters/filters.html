@@ -7,7 +7,7 @@
 			<div ng-if="!exploreProductsFiltersCtrl.searchParam" translate="discover.WE_FOUND_X_RESULTS" style="padding:10px;" translate-values="{ counter: exploreProductsFiltersCtrl.results.counter }"></div>
 		</div>
 		<div class="col-xs-5 col-sm-5 col-md-5" style="text-align: right;">
-			<ol class="nya-bs-select"" ng-model="exploreProductsFiltersCtrl.orderFilter" ng-change="exploreProductsFiltersCtrl.search(true)">
+			<ol class="nya-bs-select" ng-model="exploreProductsFiltersCtrl.orderFilter" ng-change="exploreProductsFiltersCtrl.search(true)">
 				<li nya-bs-option="type in exploreProductsFiltersCtrl.orderTypes">
 					<a href="#"><span>{{ type.name | translate }}</span></a>
 				</li>

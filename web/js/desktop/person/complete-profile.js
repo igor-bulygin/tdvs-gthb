@@ -90,10 +90,11 @@
 		}
 
 		function validatePrefix() {
-			if (vm.person.personal_info.phone_number_prefix.length<2) {
-				vm.validPrefix = true;
-			} else {
+			if (vm.person.personal_info.phone_number_prefix.length < 2 ||
+				vm.person.personal_info.phone_number_prefix.length > 4) {
 				vm.validPrefix = false;
+			} else {
+				vm.validPrefix = true;
 			}
 			return vm.validPrefix;
 		}

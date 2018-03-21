@@ -6,5 +6,9 @@
     margin: 20px 0 0 0;
 }
 .title-loved{
-	margin-bottom: 15px;
+	margin: 30px auto;
+	//margin-bottom: 15px;
+	@media(max-height: 575px){
+		display: none;
+	}
 }

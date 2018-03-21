@@ -119,7 +119,7 @@ app\components\assets\PublicHeader2Asset::register($this);
 					<?php } else {
 						$person = Yii::$app->user->identity; /* @var \app\models\Person $person */?>
 						<li class="dropdown log">
-							<a class="logued-text" href="#" class="dropdown-toggle log" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></span--><img class="avatar-logued-user" src="<?= $person->getProfileImage(0, 0) ?>"></a>
+							<a class="logued-text" href="#" class="dropdown-toggle log" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img class="avatar-logued-user" src="<?= $person->getProfileImage(0, 0) ?>"></a>
 							<div class="dropdown-menu admin-wrapper black-form">
 								<ul class="menu-logued">
 									<li class="header-item">
@@ -181,7 +181,35 @@ app\components\assets\PublicHeader2Asset::register($this);
 							<a href="<?=Url::to(['/discover/boxes'])?>"><img src="/imgs/box-red.svg" /></a>
 							<a href="<?=Url::to(['/discover/devisers'])?>"><img src="/imgs/discover-red.svg" /></a>
 							<a href="<?=Url::to(['/discover/influencers'])?>"><img src="/imgs/estrella-red.svg" /></a>
+							<?php if (Yii::$app->user->isGuest) { ?>
 							<a href="<?=Url::to('/login')?>"><img src="/imgs/login-red.svg" /></a>
+							<?php } else {
+								$person = Yii::$app->user->identity; /* @var \app\models\Person $person */?>
+								<span class="dropdown">
+									<a class="logued-text" href="#" class="dropdown-toggle log" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="/imgs/login-red.svg" /></a>
+										<div class="dropdown-menu admin-wrapper black-form">
+											<ul class="menu-logued">
+												<li class="header-item">
+													<a href="<?= $person->getMainLink()?>"><span><?=$person->getName()?></span></a>
+												</li>
+											<?php if ($person->isAdmin()) { ?>
+												<li><a href="<?=Url::to('/admin')?>" translate="header.ADMINISTRATION"></a></li>
+												<li><a href="<?=Url::to('/admin/invitations')?>" translate="header.INVITATION"></a></li>
+												<li class="separation-line"></li>
+											<?php } elseif ($person->isDeviser()) { ?>
+												<li><a href="<?=$person->getSettingsLink('open-orders')?>" translate="header.SALES"></a></li>
+												<li class="separation-line"></li>
+											<?php } elseif ($person->isClient()) { ?>
+												<li><a href="<?=$person->getSettingsLink('open-orders')?>" translate="header.MY_ORDERS"></a></li>
+												<li class="separation-line"></li>
+											<?php } elseif ($person->isInfluencer()) { ?>
+											<?php } ?>
+											<li><a href="<?= $person->getSettingsLink()?>" translate="header.SETTINGS"></a></li>
+											<li><a href="#" ng-click="publicHeaderCtrl.logout()" translate="header.LOGOUT"></a></li>
+										</ul>
+									</div>
+								</span>
+							<?php } ?>
 							<a href="<?=Url::to('/messages')?>"><img src="/imgs/chat-red.svg" /></a>
 							<a href="<?=Url::to(['/cart'])?>"><img src="/imgs/cart-red.svg" /></a>
 						</div>
