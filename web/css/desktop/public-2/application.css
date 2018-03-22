@@ -8939,7 +8939,14 @@ cart-panel .cart-panel-div {
   border-left: 1px solid #bfbfbf;
   border-right: 1px solid #bfbfbf;
   margin-bottom: 0;
-  padding-bottom: 0; }
+  padding-bottom: 0;
+  height: calc(100vh - 462px); }
+  @media (max-width: 991px) {
+    .chat-body {
+      height: calc(100vh - 642.65px); } }
+  @media (max-width: 768px) {
+    .chat-body {
+      height: auto; } }
   .chat-body div {
     padding: 0; }
   .chat-body li {
@@ -8979,32 +8986,37 @@ cart-panel .cart-panel-div {
     line-height: 1.1; }
   .chat-body .chat-time {
     font-size: 12px; }
-  .chat-body #chat-chats .nav.nav-tabs li {
-    margin-bottom: 0;
-    padding: 0; }
-    @media (min-width: 768px) and (max-width: 991px) {
-      .chat-body #chat-chats .nav.nav-tabs li a {
-        font-size: 11px; } }
+  .chat-body #chat-chats {
+    height: 100%; }
+    @media (max-height: 768px) {
+      .chat-body #chat-chats {
+        height: auto; } }
+    .chat-body #chat-chats .nav.nav-tabs li {
+      margin-bottom: 0;
+      padding: 0; }
+      @media (min-width: 768px) and (max-width: 991px) {
+        .chat-body #chat-chats .nav.nav-tabs li a {
+          font-size: 11px; } }
   .chat-body .tab-content ul {
     margin-bottom: 0; }
+    .chat-body .tab-content ul li a {
+      border-bottom: 1px solid #bfbfbf; }
   .chat-body #chat-messages {
     border-left: 1px solid #bfbfbf;
     min-height: 240px;
-    max-height: 400px;
-    overflow-y: scroll; }
-    @media (max-height: 600px) {
-      .chat-body #chat-messages {
-        max-height: 300px; } }
-    .chat-body #chat-messages > div:last-child > div > div {
-      padding: 0.5em 0;
-      /*
-      &:first-child{
-      	padding-top: 1em;
-      }
-      &:last-child{
-      	padding-bottom: 1em;
-      }
-      */ }
+    height: 100%; }
+    .chat-body #chat-messages > div {
+      height: 100%; }
+      .chat-body #chat-messages > div:last-child > div > div {
+        padding: 0.5em 0;
+        /*
+        &:first-child{
+        	padding-top: 1em;
+        }
+        &:last-child{
+        	padding-bottom: 1em;
+        }
+        */ }
     .chat-body #chat-messages .msgOwner {
       background-color: rgba(233, 233, 233, 0.5);
       display: flex; }
@@ -9039,6 +9051,14 @@ cart-panel .cart-panel-div {
     text-transform: lowercase;
     text-align: center;
     letter-spacing: 0.5px; }
+  .chat-body .chat-message-chat {
+    /*el div que contiene a todos los mensajes*/
+    height: calc(100% - 165.60px);
+    overflow-y: scroll; }
+    @media (max-width: 768px) {
+      .chat-body .chat-message-chat {
+        height: auto;
+        max-height: 300px; } }
   .chat-body .activeChat a {
     background-color: rgba(233, 233, 233, 0.5); }
 

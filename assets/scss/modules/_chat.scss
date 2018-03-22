@@ -6,6 +6,14 @@
     border-right: 1px solid $light_grey;
     margin-bottom: 0;
     padding-bottom: 0;
+    height: calc(100vh - 462px);
+    @media(max-width: 991px){
+    	height: calc(100vh - 642.65px);
+    }
+    @media(max-width: 768px){
+    	//height: calc(100vh - 67.44px);
+    	height: auto;
+    }
     div {
     	padding: 0;
 	}
@@ -58,6 +66,11 @@
     	font-size: 12px;
     }
 	#chat-chats{
+		//display: block;
+    	height: 100%;
+    	@media(max-height: 768px){
+    		height: auto;
+    	}
 		.nav.nav-tabs{
 			li{
 				margin-bottom: 0;
@@ -74,19 +87,25 @@
 	.tab-content{
 		ul{
 			margin-bottom: 0;
+			li {
+				a{
+					border-bottom: 1px solid $light_grey;
+				}
+			}
 		}
 	}
 	#chat-messages{
 	    border-left: 1px solid $light_grey;
 	    min-height: 240px;
-		max-height: 400px;
-		//height: 100%;
+		//max-height: 400px;
+		height: 100%;
 		//max-height: calc(100% - 443px);
-		overflow-y: scroll;
+		//overflow-y: scroll;
 		@media(max-height: 600px){
-			max-height: 300px;
+			//max-height: 300px;
 		}
 		&>div{
+			height: 100%;
 			&:last-child{
 				&>div{
 					&>div{
@@ -145,6 +164,14 @@
 		text-transform: lowercase;
 		text-align: center;
 		letter-spacing: 0.5px;
+	}
+	.chat-message-chat{ /*el div que contiene a todos los mensajes*/
+		height: calc(100% - 165.60px);
+		overflow-y: scroll;
+		@media(max-width: 768px){
+			height: auto;
+			max-height: 300px;
+		}
 	}
 	.activeChat{
 		a{

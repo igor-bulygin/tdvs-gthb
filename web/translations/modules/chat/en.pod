@@ -2,7 +2,7 @@
 	"chat": {
 			"NO_CHATS": "No available chats",
 			"CLICK_MSG": "Go to any user’s profile and click the CHAT button to initiate a conversation",
-			"SELECT_CHAT": "Please select a chat on left",
+			"SELECT_CHAT": "Please select a chat on list",
 			"SEND": "SEND",
 			"CHAT_WITH": "Chat with {{ personToChat }}"
 		}
