@@ -8,7 +8,7 @@ $('.macy-container').each(function() {
 			1200: 5,
 			940: 3,
 			520: 2,
-			400: 1
+			400: 2
 		}
 	};
 	var options = {
