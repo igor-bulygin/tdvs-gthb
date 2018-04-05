@@ -41,9 +41,9 @@
 	<span class="subtotal-amount-wrapper"><span class="bold" translate="cart.SUBTOTAL"></span><span class="pull-right subtotal-amount">€<span class="subtotal-amount" ng-bind="summaryCtrl.cart.subtotal | number : 2"></span></span></span>
 </div>
 <div class="col-xs-12 col-sm-12 hidden-md hidden-lg summary-cart-wrapper-full" style="padding: 3px;">
-	<div class="col-xs-6 col-sm-6"><strong><span style="text-transform: uppercase;" translate="cart.summary.CART_SUMMARY"></span></strong> (<span ng-bind="summaryCtrl.cart.totalItems"></span> items)</div>
+	<div class="col-xs-8 col-sm-6"><strong><span style="text-transform: uppercase;" translate="cart.summary.CART_SUMMARY"></span></strong> (<span ng-bind="summaryCtrl.cart.totalItems"></span> items)</div>
 	<div class="col-xs-2 col-sm-2"><span translate="cart.SUBTOTAL"></span></div>
-	<div class="col-xs-4 col-sm-4"><span class="pull-right subtotal-amount">€<span ng-bind="summaryCtrl.cart.subtotal | number : 2"></span></span></div>
+	<div class="col-xs-2 col-sm-4"><span class="pull-right subtotal-amount">€<span ng-bind="summaryCtrl.cart.subtotal | number : 2"></span></span></div>
 </div>
 <div class="hidden-xs hidden-sm summary-cart-wrapper" ng-if="!summaryCtrl.state">
 	<a href="/checkout" class="mb-20 mt-20">
