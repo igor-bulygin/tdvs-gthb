@@ -327,9 +327,13 @@
     @media (max-width: 991px){
         position: absolute!important;
         background-color: $white!important;
+        width: 250px!important;
         right: 0!important;
         left: auto;
-        width: 250px!important;
+        top: 35px;
+    }
+    @media (max-width: 767px){
+        width: 200px !important;
     }
     li{
         @media (max-width: 991px){
