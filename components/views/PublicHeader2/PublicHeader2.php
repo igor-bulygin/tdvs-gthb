@@ -16,8 +16,9 @@ app\components\assets\PublicHeader2Asset::register($this);
 
 <?php $this->registerJs("var _selectedCategoryId = '" . $categoryId."';", \yii\web\View::POS_HEAD); ?>
 
+<div ng-controller="publicHeaderCtrl as publicHeaderCtrl">
 <header>
-	<nav class="navbar navbar-default" id="main_header" ng-controller="publicHeaderCtrl as publicHeaderCtrl">
+	<nav class="navbar navbar-default" id="main_header" >
 		<div class="container">
 			<div class="row align-items-center">
 			<div class="col-xs-4 col-sm-2 col-md-2 col-lg-2">
@@ -355,5 +356,6 @@ app\components\assets\PublicHeader2Asset::register($this);
 			<?php } ?>
 		</div>
 	</div>
+</div>
 </div>
 

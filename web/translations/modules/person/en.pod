@@ -62,9 +62,9 @@
 			"FIELD_LANGS_MANDATORY": "This field is mandatory in {{languageList}}."
 		},
 		"loved": {
-			"NO_LOVED": "You haven't loved any works yet.",
-			"START_LOVED": "Start now by clicking the <span class='glyphicon glyphicon-heart'></span> button inside a work.",
-			"NO_LOVED_YET": "hasn't loved any works yet.",
+			"NO_LOVED": "You haven't loved any products yet.",
+			"START_LOVED": "Start now by clicking the <span class='glyphicon glyphicon-heart'></span> button inside a product.",
+			"NO_LOVED_YET": "hasn't loved any products yet.",
 			"LOVED_BY": "Loved by"
 		},
 		"not_public": {
@@ -164,7 +164,7 @@
 			"CROP_PHOTO": "Crop photo",
 			"ADD_PHOTO": "Add photo",
 			"YOUR_CITY": "Your city",
-			"SHORT_BRAND_DESCRIPTION": "Short description of your brand",
+			"SHORT_BRAND_DESCRIPTION": "Something short about yourself",
 			"SHORT_YOUR_DESCRIPTION": "Short description of yourself",
 			"TRANSLATE_DESCRIPTION": "Translate your description by selecting different languages below",
 			"WRITE_DESCRIPTION_HERE": "Please write a short description here",

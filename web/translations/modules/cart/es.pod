@@ -43,7 +43,7 @@
 		"summary": {
 			"CART_SUMMARY": "Sumario",
 			"FREE_SHIPPING": "Gratuito",
-			"PROCEED": "Ir al checkout",
+			"PROCEED": "Tramitar pedido",
 			"SHIPPING_PRICE": "Gastos de envío"
 		},
 		"cart_panel": {
