@@ -102,6 +102,7 @@ Yii::$app->opengraph->title = $this->title;
 <!-- /SUB-BANNER -->
 <?php } ?>
 
+<?php if (empty($category_id)) { ?>
 <!--  THE MARKET -->
 <div class="container">
 	<div class="row">
@@ -116,6 +117,7 @@ Yii::$app->opengraph->title = $this->title;
 		</div>
 	</div>
 </div>
+<?php } ?>
 
 <?php /*
 <?php if (empty($category_id)) { ?>
