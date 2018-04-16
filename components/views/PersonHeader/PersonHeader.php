@@ -128,15 +128,17 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 							<span ng-if="!personHeaderCtrl.isDeviser" ng-cloak translate="person.header.SHORT_YOUR_DESCRIPTION"></span>
 						</label>
 						<span class="small-grey"><span translate="person.header.TRANSLATE_DESCRIPTION"></span></span>
+						<div class="row">
+							<div class="col-xs-10 short-description-input-wrapper">
+							<textarea name="text_short_description" cols="50" rows="10" class="form-control ng-class:{'error-input': personHeaderCtrl.has_error(personHeaderCtrl.form, personHeaderCtrl.form.text_short_description)}" ng-model="personHeaderCtrl.person.text_short_description[personHeaderCtrl.description_language]" translate-attr="{placeholder: 'person.header.WRITE_DESCRIPTION_HERE'}" required></textarea>
+						</div>
 							<!-- language selector -->
-							<ol class="nya-bs-select about-edit-select header-lang" ng-model="personHeaderCtrl.description_language" ng-cloak>
+							<ol class="col-xs-2 nya-bs-select about-edit-select" ng-model="personHeaderCtrl.description_language" ng-cloak>
 								<li nya-bs-option="language in personHeaderCtrl.languages" data-value="language.code" deep-watch="true">
 									<a href=""><span ng-bind="language.name"></span></a>
 								</li>
 							</ol>
-						<div class="short-description-input-wrapper">
-							<textarea name="text_short_description" cols="50" rows="10" class="form-control ng-class:{'error-input': personHeaderCtrl.has_error(personHeaderCtrl.form, personHeaderCtrl.form.text_short_description)}" ng-model="personHeaderCtrl.person.text_short_description[personHeaderCtrl.description_language]" translate-attr="{placeholder: 'person.header.WRITE_DESCRIPTION_HERE'}" required></textarea>
-						</div>
+					</div>
 						<!-- counter for short biography -->
 						<span class="text-limitation" ng-cloak>
 							<span ng-bind="personHeaderCtrl.limit_text_biography - personHeaderCtrl.person.text_short_description[personHeaderCtrl.description_language].length"></span>

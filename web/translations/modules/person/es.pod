@@ -165,7 +165,7 @@
 			"CROP_PHOTO": "Cortar foto",
 			"ADD_PHOTO": "Añadir foto",
 			"YOUR_CITY": "Tu ciudad",
-			"SHORT_BRAND_DESCRIPTION": "Descripción breve de tu marca",
+			"SHORT_BRAND_DESCRIPTION": "Dínos algo breve sobre ti",
 			"SHORT_YOUR_DESCRIPTION": "Algo sobre ti en 140 caracteres",
 			"TRANSLATE_DESCRIPTION": "Traduce la descripción escogiendo diferentes idiomas",
 			"WRITE_DESCRIPTION_HERE": "Por favor, escribe una breve descripción",
