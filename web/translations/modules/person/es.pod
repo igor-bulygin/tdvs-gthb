@@ -62,9 +62,9 @@
 			"FIELD_LANGS_MANDATORY": "El campo en {{languageList}} es obligatorio."
 		},
 		"loved": {
-			"NO_LOVED": "Aún no has añadido ningún trabajo a tus preferidos.",
-			"START_LOVED": "Empieza ahora pulsando el botón <span class='glyphicon glyphicon-heart'></span> dentro de un trabajo.",
-			"NO_LOVED_YET": "no tiene ningún trabajo preferido aún.",
+			"NO_LOVED": "Aún no has añadido ningún producto a tus preferidos.",
+			"START_LOVED": "Empieza ahora pulsando el botón <span class='glyphicon glyphicon-heart'></span> dentro de un producto.",
+			"NO_LOVED_YET": "no tiene ningún producto preferido aún.",
 			"LOVED_BY": "Preferido por"
 		},
 		"not_public": {
