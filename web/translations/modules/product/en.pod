@@ -24,7 +24,7 @@
 			"VIDEOS":"Videos",
 			"DESCRIPTION":"Description",
 			"SHIPPING&POLICIES":"Shipping & Policies",
-			"SHIPPING_PRICE_SPAIN":"Shipping price to SPAIN",
+			"SHIPPING_PRICE_SPAIN":"Shipping price to <span class=\"title-label\">SPAIN</span>",
 			"WARNING_CUSTOM_TAXES":"Custom taxes may apply",
 			"IS": "is",
 			"WARRANTY":"Warranty:",
