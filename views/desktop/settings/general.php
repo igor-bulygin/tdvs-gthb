@@ -44,13 +44,14 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 									</div>
 
 									<div class="col-xs-6 responsive-pad-right-0">
-										<label for="name" translate="settings.general.SURNAME"></label>
+										<label for="surname" translate="settings.general.SURNAME"></label>
 										<input class="form-control" type="text" name="last_name" ng-model="generalSettingsCtrl.person.personal_info.last_name" placeholder="{{ 'global.user.LAST_NAME' | translate }}" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.last_name)}">
 										<span class="purple-text col-xs-12 responsive-pad-right-0" ng-if="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.last_name)" translate="settings.FILL_FIELD"></span>
 									</div>
 								</div>
 								<div class="col-md-4 identifier-pad">
 									<label for="vat_id" translate="settings.general.IDENTIFIER"></label>
+									<span class="optional-input" translate="global.OPTIONAL"></span>
 									<input type="text" name="vat_id" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.vat_id" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.vat_id)}">
 									<span class="purple-text" ng-if="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.vat_id)" translate="settings.FILL_FIELD"></span>
 								</div>
