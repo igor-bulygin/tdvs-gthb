@@ -14,5 +14,8 @@
 	}
 	&.small{
 		width: 60px;
+		@media(max-width:767px){
+			width: 100%;
+		}
 	}
 }

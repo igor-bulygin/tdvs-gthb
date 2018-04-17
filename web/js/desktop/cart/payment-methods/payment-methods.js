@@ -66,7 +66,7 @@
 					description: 'Order Nº ' + data.id,
 					amount: data.subtotal*100
 				});
-				setSaving(true);
+				// setSaving(true);
 			}
 
 			if(form)
