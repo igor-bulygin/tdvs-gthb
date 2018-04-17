@@ -7,6 +7,8 @@
 			"BRAND": "MARCA / NOMBRE ARTÍSTICO",
 			"IDENTIFIER": "CIF Empresa",
 			"REPRESENTATIVE_NAME": "NOMBRE REPRESENTATIVO",
+			"NAME": "Nombre",
+			"SURNAME": "Apellido",
 			"CHANGE_PASSWORD": " Cambiar contraseña",
 			"WEIGHT_MEASURE": "MEDIDA DE PESO",
 			"SELECT_MEASUREMENT": "Por favor, seleccione una medida de peso",
