@@ -57,6 +57,9 @@
 						}
 					});
 				});
+				if (vm.orderOptions.length>0) {
+					vm.orderFilter = vm.orderOptions[0];
+				}
 				vm.loading=false;
 			}
 			switch (vm.typeFilter.value) {
