@@ -43,7 +43,8 @@
 			"MORE_BY": " Más de ",
 			"RETURNS": "Devoluciones: ",
 			"CREATED_BY": "Creado por",
-			"MORECONTENTCOMINGSOON": "¡ Más contenido en camino !"
+			"MORECONTENTCOMINGSOON": "¡ Más contenido en camino !",
+			"SELECTMANDATORYOPTIONS": "Por favor selecciona las opciones obligatorias"
 		},
 		"creation_edition": {
 			"BACK_TO_PROFILE": " &lt volver al perfil",

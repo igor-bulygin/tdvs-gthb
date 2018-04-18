@@ -191,6 +191,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 															<span ng-bind="values.text"></span>
 														</div>
 													</div>
+													<span class="col-sm-9 error-text" ng-if="detailProductCtrl.has_error(detailProductCtrl.tagsForm, detailProductCtrl.tagsForm[option.id])" translate="product.detail.SELECTMANDATORYOPTIONS" style="margin-top:10px;"></span>
 												</div>
 												<div class="row-size expand">
 													<label class="col-sm-3 control-label product-label"><span class="atr" translate="product.detail.QUANTITY"></span></label>

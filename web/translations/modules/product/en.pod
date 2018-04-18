@@ -43,7 +43,8 @@
 			"MORE_BY":" More by ",
 			"RETURNS":"Returns: ",
 			"CREATED_BY": "Created by",
-			"MORECONTENTCOMINGSOON": "More content coming soon !"
+			"MORECONTENTCOMINGSOON": "More content coming soon !",
+			"SELECTMANDATORYOPTIONS": "Please select the mandatory tags"
 		},
 		"creation_edition": {
 			"BACK_TO_PROFILE":" &lt go back to your profile",
