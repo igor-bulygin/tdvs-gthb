@@ -49,6 +49,14 @@
 			vm.loading=true;
 			function onGetOrdersSuccess(data) {
 				vm.orders = angular.copy(data.items); 
+				vm.orderOptions =[];
+				vm.orders.forEach(function(order) {
+					order.packs.forEach(function(pack) {
+						if (vm.orderOptions.indexOf(pack.pack_state) === -1) {
+							vm.orderOptions.push(pack.pack_state);
+						}
+					});
+				});
 				vm.loading=false;
 			}
 			switch (vm.typeFilter.value) {
