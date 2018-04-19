@@ -45,7 +45,7 @@
                 .product-price{
                     font: bold 40px $font-family--regular;
 					letter-spacing: 0.5px;
-					@media (max-width: 768px){
+					@media (max-width: 767px){
 						font: bold 28px $font-family--regular;
 					}
                 }
@@ -96,7 +96,7 @@
 					color: $dark_grey;
                     padding: 2px 12px;
                     display: inline-block;
-					@media (max-width: 768px){
+					@media (max-width: 767px){
 						padding: 2px 0;
 					}	
                 }
@@ -290,7 +290,7 @@
 .btns-product-wrapper{
 	width: 285px;
     margin: 0 auto;
-	@media (max-width: 768px){
+	@media (max-width: 767px){
 		width: 100%;
 	}
 }
@@ -301,7 +301,7 @@
 	}
 }
 .btn-enlarged-mb{
-	@media (max-width: 768px){
+	@media (max-width: 767px){
 		width: 100%!important;
 	}
 }
@@ -309,6 +309,10 @@
 	border-right: 1px solid #979797;
     min-height: 141px;//height: 141px;
     padding: 0 60px;
+    @media(max-width:767px){
+        border-right: none;
+        padding: 0 10px;
+    }
 }
 .results-wrapper{
 	background-color: $white;
@@ -346,6 +350,8 @@
     }
     @media(max-width:767px){
         text-align: center;
+        padding: 20px 10px 0 10px;
+        font-size: 13px;
     }
     .tracking-link{
         text-decoration: none;

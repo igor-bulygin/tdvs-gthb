@@ -95,7 +95,7 @@ $footerMode = 'collapsed';
 				<div ng-if="footerCtrl.subscribed" ng-cloak>
 					<p><span translate="footer.SUBSCRIBED_MESSAGE"></span></p>
 				</div>
-				<div class="title mt-40"><span translate="footer.STAY_CONNECTED"></span></div>
+				<div class="title mt-10"><span class="mt-30 hidden-xs hidden-sm" translate="footer.STAY_CONNECTED"></span></div>
 				<ul class="social-items mt-10 home col-xs-12 col-sm-12 col-md-12">
 					<li class="col-xs-6 col-md-2">
 						<a href="https://facebook.com/todevise" target="_blank">
@@ -156,7 +156,7 @@ $footerMode = 'collapsed';
 		<div class="hidden-md hidden-lg mt-4">
 			<div class="title">Help &amp; Contact</div>
 			<ul class="footer-items mt-10">
-				<li class="col-xs-12 col-sm-12">
+				<li class="col-xs-12 col-sm-12 mt-10">
 					<span class="col-xs-6 col-sm-6"><a href="<?= Url::to(["public/contact"]) ?>"><span translate="footer.CONTACT_US"></span></a></span>
 				<?php /*
 				</li>

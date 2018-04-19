@@ -457,6 +457,17 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 	<!-- Nav tabs -->
 		<div class="container">
 			<div class="work-profile-description-wrapper">
+                                <div class="hidden-sm">
+                                        <div class="avatar-wrapper-side">
+                                                <div class="avatar">
+                                                        <a href="<?= $person->getStoreLink() ?>">
+                                                                <span translate="product.detail.CREATED_BY"></span>
+                                                                <img class="avatar-default medium" src="<?= $person->getProfileImage(128, 128) ?>" data-pin-nopin="true">
+                                                                <?php /* <span><?= $person->getName() ?></span> */ ?>
+                                                        </a>
+                                                </div>
+                                        </div>
+                                </div>
 				<div class="title mb-40"><span class="title-product-name" translate="product.detail.DESCRIPTION"></span></div>
 				<div class="col-sm-9 pad-product">
 					<div class="description-parraf">
@@ -476,7 +487,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 					</div>
 					<?php } ?>
 				</div>
-				<div class="col-sm-3">
+				<div class="hidden-xs col-sm-3">
 					<div class="avatar-wrapper-side">
 						<div class="avatar">
 							<a href="<?= $person->getStoreLink() ?>">

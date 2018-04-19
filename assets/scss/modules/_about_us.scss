@@ -5,14 +5,20 @@
 	background-color: $white;
 }
 .about-slide-1{
-	background-image:url(/imgs/aboutus1.png);
-	width: 100%;
-    float: left;
-    min-height: 603px;
+	background:url(/imgs/aboutus1.png) center center;
+	@extend %about-slide;
+	@media(max-width:1200px){
+		min-height: auto;
+	}
+	/*@media(max-width:991px){
+	}*/
 	.logo{
 		width: 130px;
 		margin: 230px auto 40px;
 		display: block;
+		@media(max-width:1200px){
+		    margin: 40px auto 40px;
+		}
 	}
 	p{
 		width: 640px;
@@ -24,19 +30,29 @@
 		&.bold{
 			font-weight: bold;
 		}
+		@media(max-width:1200px){
+			width: 90%;
+			margin-bottom: 40px;
+		}
 	}
 }
 .about-slide-2{
-	background-image:url(/imgs/aboutus2.png);
-	width: 100%;
-    float: left;
-    min-height: 603px;
+	background:url(/imgs/aboutus2.png) center center;
+	@extend %about-slide;
+	@media(max-width:1200px){
+		min-height: 450px;
+	}
 	.title{
 		font-family: $font-family--name;
 		font-size: 86px;
 		text-align: center;
 		letter-spacing: 2.4px;
     	padding: 330px 0 20px 0;
+    	@media(max-width:1200px){
+		    font-size: 43px;
+		    letter-spacing: 2px;
+		    padding: 40px 0 20px 0;
+    	}
 	}
 	p{
 		width: 700px;//640px;
@@ -44,24 +60,42 @@
 		margin: 0 auto;
 		color: $black;
 		font-size: 16px;
+		@media(max-width){
+			width: 90%;
+			padding-bottom: 40px;
+		}
 	}
 }
 .about-slide-3{
-	background-image:url(/imgs/aboutus3.png);
-	width: 100%;
-    float: left;
-    min-height: 603px;
+	background:url(/imgs/aboutus3.png) center center;
+	@extend %about-slide;
+	@media(max-width:1200px){
+		min-height: 603px;
+	}
 	.side-text{
 		background-color:rgba(255,255,255,0.3);
 		width: 463px;
 		height: 617px;
 		margin: 0 0 0 590px;
 		padding: 40px;
+		@media(max-width:1200px){
+			width: 100%;
+			height: auto;
+			padding: 20px 0;
+			margin: 0;	
+		}
 		.title{
 			font-family: $font-family--name;
 			font-size: 86px;
 			letter-spacing: 2.4px;
 			text-align: right;
+			@media(max-width:1200px){
+				font-size: 43px;
+				letter-spacing: 2px;
+				text-align: center;
+				margin: auto;
+				padding: 40px 0 20px 0;
+			}
 		}
 		p{
 			text-align: right;
@@ -71,21 +105,37 @@
 			&.bold{
 				font-weight: bold;
 			}
+			@media(max-width:1200px){
+				text-align: center;
+			    width: 90%;
+			    margin: auto;
+			    padding-bottom: 20px;
+			}
 		}
 	}
 }
 .about-slide-4{
 	background: url(/imgs/aboutus4.png) center center;
-	width: 100%;
-    float: left;
-    min-height: 597px;
+	@extend %about-slide;
+    //min-height: 597px;
     padding: 12em 0 0 80px;
+	@media(max-width:1200px){
+		min-height: 450px;
+		margin: auto;
+	}
 	.title{
 		font-family: $font-family--name;
 		font-size: 86px;
 		letter-spacing: 2.4px;
 		text-align: left;
 		line-height: 80px;
+		@media(max-width:1200px){
+			font-size: 43px;
+		    text-align: left;
+		    padding: 40px 0 20px 0 !important;
+		    text-align: center;
+		    margin: auto;
+		}
 	}
 	p{
 		width: 559px;
@@ -94,6 +144,12 @@
 		font-size: 16px;
 		&.bold{
 			font-weight: bold;
+		}
+		@media(max-width:1200px){
+		    width: 90%;
+		    text-align: center;
+		    margin: auto;
+		    padding-bottom: 40px;
 		}
 	}
 }

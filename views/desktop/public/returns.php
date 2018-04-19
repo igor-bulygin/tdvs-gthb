@@ -15,7 +15,7 @@ $this->title = Yii::t('app/returns', 'TITLE');
 		</div>
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-push-7 col-lg-push-7 col-md-5 col-lg-5 number_div">
-				<div class="row">
+				<div class="row one">
 					<div class="col-xs-2 number">
 						<p>1.</p>
 					</div>
@@ -41,7 +41,7 @@ $this->title = Yii::t('app/returns', 'TITLE');
 		<hr class="separator">
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-push-7 col-lg-push-7 col-md-5 col-lg-5 number_div">
-				<div class="row">
+				<div class="row two">
 					<div class="col-xs-2 number">
 						<p>2.</p>
 					</div>
@@ -72,7 +72,7 @@ $this->title = Yii::t('app/returns', 'TITLE');
 		<hr class="separator">
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-push-7 col-lg-push-7 col-md-5 col-lg-5 number_div">
-				<div class="row">
+				<div class="row three">
 					<div class="col-xs-2 number">
 						<p>3.</p>
 					</div>
