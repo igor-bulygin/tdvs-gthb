@@ -11,6 +11,7 @@
 		init();
 
 		function init(){
+			/* activate to multiple countries and unactivate down option
 			if (!angular.isUndefined(vm.cart.shipping_address) && vm.cart.shipping_address!=null && !angular.isUndefined(vm.cart.shipping_address.country)) {
 				var actualCountry=vm.cart.shipping_address.country;
 				var isValid=false;
@@ -20,6 +21,11 @@
 					}
 				});
 				vm.adressValidToShip=isValid;
+			}
+			*/
+			if (!angular.isUndefined(vm.cart.shipping_address) && vm.cart.shipping_address!=null) {
+				vm.cart.shipping_address.country= 'ES';
+				vm.country_name = 'Spain'
 			}
 		}
 

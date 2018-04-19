@@ -119,7 +119,7 @@ class Product extends CActiveRecord {
 	 */
 	public static $translatedAttributes = ['name', 'description', 'slug', 'tags', 'faq.question', 'faq.answer', 'media.description_photos.title', 'media.description_photos.description'];
 
-	public static $textFilterAttributes = ['name', 'description', 'tags'];
+	public static $textFilterAttributes = ['name', 'tags'];
 
 	/**
 	 * Initialize model attributes

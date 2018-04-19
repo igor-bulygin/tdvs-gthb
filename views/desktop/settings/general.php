@@ -18,7 +18,7 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 ?>
 
 <?php if($person->isCompletedProfile()) { ?>
-	<?= SettingsHeader::widget() ?>
+<?= SettingsHeader::widget() ?>
 <?php } ?>
 
 <div ng-controller="generalSettingsCtrl as generalSettingsCtrl" class="personal-info-wrapper bank-settings-wrapper">
@@ -37,23 +37,21 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 							</div>
 							<div class="mt-20">
 								<div class="col-md-8 no-pad">
-									<div class="col-md-12 no-pad">
-										<label for="representative_name" translate="settings.general.REPRESENTATIVE_NAME"></label>
+									<div class="col-xs-6 no-pad">
+										<label for="name" translate="settings.general.NAME"></label>
+										<input class="form-control"  type="text" name="name" ng-model="generalSettingsCtrl.person.personal_info.name" placeholder="{{ 'global.user.FIRST_NAME' | translate }}" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.name)}">
+										<span class="purple-text col-xs-12 no-pad" ng-if="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.name)" translate="settings.FILL_FIELD"></span>
 									</div>
-									<div>
-										<div class="col-xs-6 no-pad">
-											<input class="form-control"  type="text" name="name" ng-model="generalSettingsCtrl.person.personal_info.name" placeholder="{{ 'global.user.FIRST_NAME' | translate }}" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.name)}">
-											<span class="purple-text col-xs-12 no-pad" ng-if="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.name)" translate="settings.FILL_FIELD"></span>
-										</div>
 
-										<div class="col-xs-6 responsive-pad-right-0">
-											<input class="form-control" type="text" name="last_name" ng-model="generalSettingsCtrl.person.personal_info.last_name" placeholder="{{ 'global.user.LAST_NAME' | translate }}" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.last_name)}">
-											<span class="purple-text col-xs-12 responsive-pad-right-0" ng-if="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.last_name)" translate="settings.FILL_FIELD"></span>
-										</div>
+									<div class="col-xs-6 responsive-pad-right-0">
+										<label for="surname" translate="settings.general.SURNAME"></label>
+										<input class="form-control" type="text" name="last_name" ng-model="generalSettingsCtrl.person.personal_info.last_name" placeholder="{{ 'global.user.LAST_NAME' | translate }}" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.last_name)}">
+										<span class="purple-text col-xs-12 responsive-pad-right-0" ng-if="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.last_name)" translate="settings.FILL_FIELD"></span>
 									</div>
 								</div>
 								<div class="col-md-4 identifier-pad">
 									<label for="vat_id" translate="settings.general.IDENTIFIER"></label>
+									<span class="optional-input" translate="global.OPTIONAL"></span>
 									<input type="text" name="vat_id" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.vat_id" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.vat_id)}">
 									<span class="purple-text" ng-if="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.vat_id)" translate="settings.FILL_FIELD"></span>
 								</div>
@@ -158,9 +156,9 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 	</div>
 	<script type="text/ng-template" id="passwordModal">
 		<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="generalSettingsCtrl.dismiss()">
-			<span class="ion-ios-close" aria-hidden="true"></span>
-		</button>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="generalSettingsCtrl.dismiss()">
+				<span class="ion-ios-close" aria-hidden="true"></span>
+			</button>
 			<h3 class="modal-title" id="modal-title" translate="settings.general.CHANGE_PASSWORD"></h3>
 		</div>
 		<div class="modal-body personal-info-wrapper">
@@ -193,7 +191,7 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 		</div>
 	</script>
 
-<?php if ($person->isDeviser()) { ?>
+	<?php if ($person->isDeviser()) { ?>
 	<div class="container">
 		<uib-accordion>
 			<div uib-accordion-group class="panel-default panel-billing" heading="{{ 'settings.general.TODEVISE_STATS' | translate }}" is-open="true" ng-cloak>
@@ -204,7 +202,7 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 			</div>
 		</uib-accordion>
 	</div>
-<?php } ?>
+	<?php } ?>
 
 
 </div>

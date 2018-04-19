@@ -43,11 +43,14 @@
 			<div class="form-group form-personal-info">
 				<label for="country" class="col-xs-12 col-sm-12 col-md-3"><span translate="cart.COUNTRY"></span></label>
 				<div class="col-xs-12 col-sm-12 col-md-9">
+					<!-- select to multiple countries
 					<ol class="nya-bs-select ng-class:{'error-input': personalInfoCtrl.has_error(personalInfoCtrl.form, personalInfoCtrl.form.country)}" ng-model="personalInfoCtrl.cart.shipping_address.country" size="5" name="country" required live-search="true">
 						<li nya-bs-option="country in personalInfoCtrl.countries | orderBy:'country_name'" data-value="country.id">
 							<a href=""><span ng-bind="country.country_name"></span></a>
 						</li>
 					</ol>
+				-->
+				<input type="text" name="country" ng-model="personalInfoCtrl.country_name" class="form-control ng-class:{'error-input': personalInfoCtrl.has_error(personalInfoCtrl.form, personalInfoCtrl.form.country)}" required disabled>
 				<form-errors field="personalInfoCtrl.form.country" condition="personalInfoCtrl.has_error(personalInfoCtrl.form, personalInfoCtrl.form.country)"></form-errors>
 				</div>
 			</div>

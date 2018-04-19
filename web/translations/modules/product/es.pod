@@ -24,7 +24,7 @@
 			"VIDEOS": "Videos",
 			"DESCRIPTION": "Descripción",
 			"SHIPPING&POLICIES": "Envío & condiciones",
-			"SHIPPING_PRICE_SPAIN": "Precio de envío a ESPAÑA",
+			"SHIPPING_PRICE_SPAIN": "Precio de envío a <span class=\"title-label\">ESPAÑA</span>",
 			"WARNING_CUSTOM_TAXES":"Pueden aplicarse impuestos añadidos",
 			"IS": "es",
 			"WARRANTY": "Garantía: ",
@@ -43,7 +43,8 @@
 			"MORE_BY": " Más de ",
 			"RETURNS": "Devoluciones: ",
 			"CREATED_BY": "Creado por",
-			"MORECONTENTCOMINGSOON": "¡ Más contenido en camino !"
+			"MORECONTENTCOMINGSOON": "¡ Más contenido en camino !",
+			"SELECTMANDATORYOPTIONS": "Por favor selecciona las opciones obligatorias"
 		},
 		"creation_edition": {
 			"BACK_TO_PROFILE": " &lt volver al perfil",

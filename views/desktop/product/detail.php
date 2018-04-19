@@ -64,8 +64,8 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 		<div>
 			<div class="container">
 				<div class="row"> 
-							<span class="title-mobile visible-xs-block" ng-bind="detailProductCtrl.product.name"></span>
-						</div>
+					<span class="title-mobile visible-xs-block" ng-bind="detailProductCtrl.product.name"></span>
+				</div>
 				<div class="col-md-8 pad-product">
 					<div class="product-photos-wrapper">
 						<!-- CAROUSEL-->
@@ -146,15 +146,6 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 									<div class="stock"><span ng-bind="detailProductCtrl.stock"></span><span translate="product.detail.IN_STOCK"></span></div>
 									<div class="product-price">€ <span ng-bind="detailProductCtrl.price"></span></div>
 								</div>
-								<div class="quantity-wrapper pull-right">
-									<button class="btn btn-none btn-summatory" ng-click="detailProductCtrl.changeQuantity(-1)" ng-disabled="detailProductCtrl.addingToCart">
-										<i class="ion-minus"></i>
-									</button>
-									<div class="number" ng-bind="detailProductCtrl.quantity"></div>
-									<button class="btn btn-none btn-summatory" ng-click="detailProductCtrl.changeQuantity(1)" ng-disabled="detailProductCtrl.addingToCart">
-										<i class="ion-plus"></i>
-									</button>
-								</div>
 							</div>
 							<div class="product-data no-border">
 								<ul class="nav nav-tabs product-detail-tabs" role="tablist" ng-if="detailProductCtrl.original_artwork && detailProductCtrl.has_prints" ng-cloak>
@@ -199,6 +190,19 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 														<div class="atribute-selected" ng-if="option.values.length > 1" ng-repeat="values in option.values track by $index">
 															<span ng-bind="values.text"></span>
 														</div>
+													</div>
+													<span class="col-sm-9 error-text" ng-if="detailProductCtrl.has_error(detailProductCtrl.tagsForm, detailProductCtrl.tagsForm[option.id])" translate="product.detail.SELECTMANDATORYOPTIONS" style="margin-top:10px;"></span>
+												</div>
+												<div class="row-size expand">
+													<label class="col-sm-3 control-label product-label"><span class="atr" translate="product.detail.QUANTITY"></span></label>
+													<div class="col-sm-9 quantity-wrapper pull-right" style="margin-top:0px;">
+														<button class="btn btn-none btn-summatory" ng-click="detailProductCtrl.changeQuantity(-1)" ng-disabled="detailProductCtrl.addingToCart">
+															<i class="ion-minus"></i>
+														</button>
+														<div class="number" ng-bind="detailProductCtrl.quantity"></div>
+														<button class="btn btn-none btn-summatory" ng-click="detailProductCtrl.changeQuantity(1)" ng-disabled="detailProductCtrl.addingToCart">
+															<i class="ion-plus"></i>
+														</button>
 													</div>
 												</div>
 											</div>
@@ -293,45 +297,45 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 									<div class="full-width mb-20">
 										<div class="btns-product-wrapper">
 											<?php
-												$sharerUrl = urlencode($product->getViewLink());
-												$sharerTitle = urlencode($product->getName());
-												$sharerImage = urlencode($product->getImagePreview(1280, 0));
+											$sharerUrl = urlencode($product->getViewLink());
+											$sharerTitle = urlencode($product->getName());
+											$sharerImage = urlencode($product->getImagePreview(1280, 0));
 											?>
 											<ul class="social-items">
 												<li>
 													<a href="https://www.facebook.com/sharer/sharer.php?u=<?=$sharerUrl?>" target="_blank">
 														<i class="facebook">
 															<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
-																x="0px" y="0px"
-																viewBox="0 0 23 42" style="enable-background:new 0 0 23 42;" xml:space="preserve">
-																<g id="Page-1">
-																	<path id="Path" class="st0" d="M14.3,41V21h5.9l0.8-6.9h-6.7l0-3.4c0-1.8,0.2-2.8,3-2.8H21V1H15c-7.1,0-9.6,3.3-9.6,9v4.1H1V21h4.4
-																	v20H14.3L14.3,41L14.3,41L14.3,41z"/>
-																</g>
-															</svg>
-														</i>
-													</a>
-												</li>
+															x="0px" y="0px"
+															viewBox="0 0 23 42" style="enable-background:new 0 0 23 42;" xml:space="preserve">
+															<g id="Page-1">
+																<path id="Path" class="st0" d="M14.3,41V21h5.9l0.8-6.9h-6.7l0-3.4c0-1.8,0.2-2.8,3-2.8H21V1H15c-7.1,0-9.6,3.3-9.6,9v4.1H1V21h4.4
+																v20H14.3L14.3,41L14.3,41L14.3,41z"/>
+															</g>
+														</svg>
+													</i>
+												</a>
+											</li>
 
-												<li>
-													<a class="twitter" href="https://twitter.com/home?status=<?=$sharerUrl?>" target="_blank">
-														<i class="twitter">
-															<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
-																x="0px" y="0px"
-																viewBox="0 0 49 42" style="enable-background:new 0 0 49 42;" xml:space="preserve">
-																<g id="Page-1">
-																	<path id="Path" class="st0" d="M23.5,11.6l0.1,1.7l-1.7-0.2C15.8,12.3,10.5,9.6,6,5L3.8,2.7L3.2,4.4C2,8.1,2.8,12.1,5.3,14.8
-																	c1.3,1.5,1,1.7-1.3,0.8c-0.8-0.3-1.5-0.5-1.6-0.4C2.2,15.5,3,18.7,3.6,20c0.9,1.8,2.6,3.5,4.6,4.5l1.6,0.8l-1.9,0
-																	c-1.9,0-1.9,0-1.7,0.8c0.7,2.3,3.3,4.7,6.3,5.8l2.1,0.7l-1.8,1.1c-2.7,1.6-5.8,2.5-9,2.6c-1.5,0-2.7,0.2-2.7,0.3
-																	C1,37,5.1,39,7.5,39.8c7.1,2.3,15.6,1.3,22-2.6c4.5-2.8,9-8.3,11.1-13.7c1.1-2.9,2.3-8.1,2.3-10.6c0-1.6,0.1-1.8,2-3.8
-																	c1.1-1.1,2.1-2.4,2.3-2.7c0.3-0.7,0.3-0.7-1.4-0.1c-2.8,1.1-3.2,0.9-1.8-0.7c1-1.1,2.3-3.2,2.3-3.8c0-0.1-0.5,0.1-1.1,0.4
-																	c-0.6,0.4-1.9,0.9-2.9,1.2L40.4,4l-1.6-1.2c-0.9-0.6-2.2-1.3-2.8-1.6c-1.7-0.5-4.3-0.4-5.9,0.1C25.8,3.1,23.2,7.2,23.5,11.6
-																	C23.5,11.6,23.2,7.2,23.5,11.6L23.5,11.6L23.5,11.6z"/>
-																</g>
-															</svg>
-														</i>
-													</a>
-												</li>
+											<li>
+												<a class="twitter" href="https://twitter.com/home?status=<?=$sharerUrl?>" target="_blank">
+													<i class="twitter">
+														<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+														x="0px" y="0px"
+														viewBox="0 0 49 42" style="enable-background:new 0 0 49 42;" xml:space="preserve">
+														<g id="Page-1">
+															<path id="Path" class="st0" d="M23.5,11.6l0.1,1.7l-1.7-0.2C15.8,12.3,10.5,9.6,6,5L3.8,2.7L3.2,4.4C2,8.1,2.8,12.1,5.3,14.8
+															c1.3,1.5,1,1.7-1.3,0.8c-0.8-0.3-1.5-0.5-1.6-0.4C2.2,15.5,3,18.7,3.6,20c0.9,1.8,2.6,3.5,4.6,4.5l1.6,0.8l-1.9,0
+															c-1.9,0-1.9,0-1.7,0.8c0.7,2.3,3.3,4.7,6.3,5.8l2.1,0.7l-1.8,1.1c-2.7,1.6-5.8,2.5-9,2.6c-1.5,0-2.7,0.2-2.7,0.3
+															C1,37,5.1,39,7.5,39.8c7.1,2.3,15.6,1.3,22-2.6c4.5-2.8,9-8.3,11.1-13.7c1.1-2.9,2.3-8.1,2.3-10.6c0-1.6,0.1-1.8,2-3.8
+															c1.1-1.1,2.1-2.4,2.3-2.7c0.3-0.7,0.3-0.7-1.4-0.1c-2.8,1.1-3.2,0.9-1.8-0.7c1-1.1,2.3-3.2,2.3-3.8c0-0.1-0.5,0.1-1.1,0.4
+															c-0.6,0.4-1.9,0.9-2.9,1.2L40.4,4l-1.6-1.2c-0.9-0.6-2.2-1.3-2.8-1.6c-1.7-0.5-4.3-0.4-5.9,0.1C25.8,3.1,23.2,7.2,23.5,11.6
+															C23.5,11.6,23.2,7.2,23.5,11.6L23.5,11.6L23.5,11.6z"/>
+														</g>
+													</svg>
+												</i>
+											</a>
+										</li>
 												<?php /*
 												<li>
 													<a class="pinterest" href="http://pinterest.com/pin/create/button/?url=<?=$sharerUrl?>&media=<?=$sharerImage?>&description=<?=$sharerTitle?>" target="_blank">
@@ -416,34 +420,31 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 													</select>
 												</div>
 												*/ ?>
-										</div>
-									</form>
-								</div>
-								<?php
-								$returns = $product->getReturnsLabel();
-								$warranty = $product->getWarrantyLabel();
-								?>
-								<?php if ($returns) { ?>
+											</div>
+										</form>
+									</div>
+									<?php
+									$returns = $product->getReturnsLabel();
+									$warranty = $product->getWarrantyLabel();
+									?>
+									<?php if ($returns) { ?>
 									<div class="returns-row">
 										<span translate="product.detail.RETURNS"></span>
 										<span class="bold"><?=$returns?></span>
 									</div>
-								<?php } ?>
-								<?php if ($warranty) { ?>
+									<?php } ?>
+									<?php if ($warranty) { ?>
 									<div class="returns-row">
 										<span translate="product.detail.WARRANTY"></span>
 										<span class="bold"><?=$warranty?></span>
 									</div>
-								<?php } ?>
-								<?php if (!$person->isFromEU()) { ?>
+									<?php } ?>
+									<?php if (!$person->isFromEU()) { ?>
 									<div class="returns-row mt-20">
 										<span translate="product.detail.WARNING_CUSTOM_TAXES"></span>
 									</div>
-								<?php } ?>
-							</div>
-						</div>
-					</div>
-				</div>
+									<?php } ?>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -451,9 +452,12 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 			</div>
 		</div>
 	</div>
+</div>
+</div>
+</div>
 <!-- /PRODUCT CARD -->
 <!-- PRODUCT DESCRIPTION -->
-	<div class="product-description">
+<div class="product-description">
 	<!-- Nav tabs -->
 		<div class="container">
 			<div class="work-profile-description-wrapper">
@@ -484,8 +488,8 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 							</div>
 							<?php } ?>
 						</div>
+						<?php } ?>
 					</div>
-					<?php } ?>
 				</div>
 				<div class="hidden-xs col-sm-3">
 					<div class="avatar-wrapper-side">
@@ -500,101 +504,102 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 				</div>
 			</div>
 		</div>
-		<div class="container">
-			<ul class="nav nav-tabs product-tabs" role="tablist" id="productTabs">
-				<li role="presentation" class="active">
-					<a href="#works" aria-controls="works" role="tab" data-toggle="tab"><span class="title-product-name">works by <?= \yii\helpers\StringHelper::truncate($person->getName(), 40, '…') ?></span></a>
-				</li>
-				<li role="presentation" class="no-b-r">
-					<a href="#boxes" aria-controls="boxes" role="tab" data-toggle="tab"><span class="title-product-name">Boxes</span></a>
-				</li>
-				<? /*php if (count($videos)) {*/ ?>
-				<li role="presentation" class="no-b-r">
-					<a href="#videos" aria-controls="videos" role="tab" data-toggle="tab"><span translate="product.detail.VIDEOS" class="title-product-name"></span></a>
-				</li>
-				<?php /*}*/ ?>
-				<?php /*if (count($product->faqMapping) > 0) {*/ ?>
-				<li role="presentation" class="no-b-r">
-					<a href="#faqs" aria-controls="faqs" role="tab" data-toggle="tab"><span class="title-product-name">FAQs</span></a>
-				</li>
-				<?php /*}*/?>
-			</ul>
-		</div>
-		<div class="container">
+	</div>
+	<div class="container">
+		<ul class="nav nav-tabs product-tabs" role="tablist" id="productTabs">
+			<li role="presentation" class="active">
+				<a href="#works" aria-controls="works" role="tab" data-toggle="tab"><span class="title-product-name">works by <?= \yii\helpers\StringHelper::truncate($person->getName(), 40, '…') ?></span></a>
+			</li>
+			<li role="presentation" class="no-b-r">
+				<a href="#boxes" aria-controls="boxes" role="tab" data-toggle="tab"><span class="title-product-name">Boxes</span></a>
+			</li>
+			<? /*php if (count($videos)) {*/ ?>
+			<li role="presentation" class="no-b-r">
+				<a href="#videos" aria-controls="videos" role="tab" data-toggle="tab"><span translate="product.detail.VIDEOS" class="title-product-name"></span></a>
+			</li>
+			<?php /*}*/ ?>
+			<?php /*if (count($product->faqMapping) > 0) {*/ ?>
+			<li role="presentation" class="no-b-r">
+				<a href="#faqs" aria-controls="faqs" role="tab" data-toggle="tab"><span class="title-product-name">FAQs</span></a>
+			</li>
+			<?php /*}*/?>
+		</ul>
+	</div>
+	<div class="container">
 		<!-- Tab panes -->
-			<div class="tab-content product-description-content">
-				<div role="tabpanel" class="tab-pane work-description-wrapper" id="faqs">
-					<div class="container mt-20 mb-20">
-						<?php if (count($product->faqMapping) > 0) { ?>
-						<div class="work-profile-description-wrapper faq-wrapper">
-							<div class="title"><span translate="product.detail.WORK_FAQS"></span></div>
-							<?php foreach ($product->faqMapping as $faq) { ?>
-							<div class="q-a-wrapper">
-								<p class="question">
-									<span translate="product.detail.Q"></span>
-									<span class="important"><?= $faq->question?></span>
-								</p>
-								<p class="question">
-									<span translate="product.detail.A"></span>
-									<span><?= $faq->answer?></span>
-								</p>
-							</div>
-							<?php } ?>
-						</div>
-						<?php } else { ?>
-						<div class="col-lg-12 centered-col">
-							<img class="happyface-black" src="/imgs/happy-face-black.svg" />
-							<span translate="product.detail.MORECONTENTCOMINGSOON"></span>
+		<div class="tab-content product-description-content">
+			<div role="tabpanel" class="tab-pane work-description-wrapper" id="faqs">
+				<div class="container mt-20 mb-20">
+					<?php if (count($product->faqMapping) > 0) { ?>
+					<div class="work-profile-description-wrapper faq-wrapper">
+						<div class="title"><span translate="product.detail.WORK_FAQS"></span></div>
+						<?php foreach ($product->faqMapping as $faq) { ?>
+						<div class="q-a-wrapper">
+							<p class="question">
+								<span translate="product.detail.Q"></span>
+								<span class="important"><?= $faq->question?></span>
+							</p>
+							<p class="question">
+								<span translate="product.detail.A"></span>
+								<span><?= $faq->answer?></span>
+							</p>
 						</div>
 						<?php } ?>
-
 					</div>
+					<?php } else { ?>
+					<div class="col-lg-12 centered-col">
+						<img class="happyface-black" src="/imgs/happy-face-black.svg" />
+						<span translate="product.detail.MORECONTENTCOMINGSOON"></span>
+					</div>
+					<?php } ?>
+
 				</div>
-				<div role="tabpanel" class="tab-pane work-description-wrapper" id="boxes">
-					<div class="container mt-20 mb-20">
-						<?php if ($boxes) { ?>
-						<?php foreach ($boxes as $box) {
-							$products = $box->getProductsPreview(); ?>
-							<div class="col-lg-4">
-								<a href="<?= $box->getViewLink()?>">
-									<figure class="showcase">
-										<div class="images-box">
-											<div class="bottom-top-images">
-												<div class="image-left">
-													<img src="<?=isset($products[0]) ? $products[0]['main_photo'] : 'imgs/img-default.jpg'?>" class="showcase-image">
-												</div>
-												<div class="image-right">
-													<img src="<?=isset($products[1]) ? $products[1]['main_photo'] : 'imgs/img-default.jpg'?>" class="showcase-image">
-												</div>
+			</div>
+			<div role="tabpanel" class="tab-pane work-description-wrapper" id="boxes">
+				<div class="container mt-20 mb-20">
+					<?php if ($boxes) { ?>
+					<?php foreach ($boxes as $box) {
+						$products = $box->getProductsPreview(); ?>
+						<div class="col-lg-4">
+							<a href="<?= $box->getViewLink()?>">
+								<figure class="showcase">
+									<div class="images-box">
+										<div class="bottom-top-images">
+											<div class="image-left">
+												<img src="<?=isset($products[0]) ? $products[0]['main_photo'] : 'imgs/img-default.jpg'?>" class="showcase-image">
 											</div>
-											<div class="bottom-image">
-												<img src="<?=isset($products[2]) ? $products[2]['main_photo'] : 'imgs/img-default.jpg'?>" class="showcase-image">
+											<div class="image-right">
+												<img src="<?=isset($products[1]) ? $products[1]['main_photo'] : 'imgs/img-default.jpg'?>" class="showcase-image">
 											</div>
 										</div>
-										<figcaption>
-											<div class="row no-mar">
-												<div class="col-md-8">
-													<span class="boxes-text align-left"><?=$box->name?></span>
-												</div>
-												<div class="col-md-4 no-padding">
-													<button class="btn btn-single-love btn-love-box">
-														<span class="number"><?=count($products)?></span>
-														<span class="heart-icon"></span>
-													</button>
-												</div>
+										<div class="bottom-image">
+											<img src="<?=isset($products[2]) ? $products[2]['main_photo'] : 'imgs/img-default.jpg'?>" class="showcase-image">
+										</div>
+									</div>
+									<figcaption>
+										<div class="row no-mar">
+											<div class="col-md-8">
+												<span class="boxes-text align-left"><?=$box->name?></span>
 											</div>
-										</figcaption>
-									</figure>
-								</a>
-							</div>
-							<?php } ?>
-							<?php } else { ?>
-							<div class="col-lg-12 centered-col">
-								<button type="button" class="btn btn-red btn-hart" ng-click="detailProductCtrl.setBox()">
-									<span translate="product.detail.SAVE_IN_BOX"></span>
-								</button>
-							</div>
-							<?php } ?>
+											<div class="col-md-4 no-padding">
+												<button class="btn btn-single-love btn-love-box">
+													<span class="number"><?=count($products)?></span>
+													<span class="heart-icon"></span>
+												</button>
+											</div>
+										</div>
+									</figcaption>
+								</figure>
+							</a>
+						</div>
+						<?php } ?>
+						<?php } else { ?>
+						<div class="col-lg-12 centered-col">
+							<button type="button" class="btn btn-red btn-hart" ng-click="detailProductCtrl.setBox()">
+								<span translate="product.detail.SAVE_IN_BOX"></span>
+							</button>
+						</div>
+						<?php } ?>
 					</div>
 						<?php /* 
 						<div class="reviews-wrapper">
@@ -748,9 +753,9 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 							</div>
 						</div>
 						*/ ?>
-				</div>
+					</div>
 					<?php /*if (count($videos)) { */?>
-				<div role="tabpanel" class="tab-pane work-description-wrapper" id="videos">
+					<div role="tabpanel" class="tab-pane work-description-wrapper" id="videos">
 						<div class="container mt-20 mb-20">
 							<?php if (count($videos)) { ?>
 							<div class="video-container centered-col">
@@ -769,9 +774,9 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 							</div>
 							<?php }?>
 						</div>
-				</div>
+					</div>
 					<?php /*} */?>
-				<div role="tabpanel" class="tab-pane work-description-wrapper active" id="works">
+					<div role="tabpanel" class="tab-pane work-description-wrapper active" id="works">
 						<div class="container mt-20 mb-20" style="min-height:350px;">
 							<nav class="products-menu">
 								<ul>
@@ -786,59 +791,59 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 										<a href="#">Belts</a>
 									</li>
 									*/ ?>
-											</ul>
-										</nav>
-										<div class="other-products-wrapper">
-											<div id="works-container" class="macy-container" data-columns="6">
-												<?php foreach ($personProducts as $i => $product) { ?>
-												<div class="menu-category list-group">
-													<div class="grid">
-														<figure class="effect-zoe">
-															<image-hover-buttons product-id="{{'<?= $product->short_id ?>'}}" is-loved="{{'<?=$product->isLovedByCurrentUser() ? 1 : 0 ?>'}}" is-mine="{{'<?= $product->isWorkFromCurrentUser() ? 1 : 0 ?>'}}">
-																<a href="<?= $product->getViewLink() ?>">
-																	<img class="grid-image"
-																	src="<?= $product->getImagePreview(400, 0) ?>">
-																</a>
-															</image-hover-buttons>
-															<a href="<?= $product->getViewLink() ?>">
-																<figcaption>
-																	<p class="instauser">
-																		<?= \yii\helpers\StringHelper::truncate($product->getName(), 18, '…') ?>
-																		<!--<?= \yii\helpers\StringHelper::truncate(Utils::l($product->getName()), 18, '…') ?>-->
-																	</p>
-																	<p class="price">€ <?= $product->getMinimumPrice() ?></p>
-																</figcaption>
-															</a>
-														</figure>
-													</div>
-												</div>
-												<?php } ?>
-											</div>
+								</ul>
+							</nav>
+							<div class="other-products-wrapper">
+								<div id="works-container" class="macy-container" data-columns="6">
+									<?php foreach ($personProducts as $i => $product) { ?>
+									<div class="menu-category list-group">
+										<div class="grid">
+											<figure class="effect-zoe">
+												<image-hover-buttons product-id="{{'<?= $product->short_id ?>'}}" is-loved="{{'<?=$product->isLovedByCurrentUser() ? 1 : 0 ?>'}}" is-mine="{{'<?= $product->isWorkFromCurrentUser() ? 1 : 0 ?>'}}">
+													<a href="<?= $product->getViewLink() ?>">
+														<img class="grid-image"
+														src="<?= $product->getImagePreview(400, 0) ?>">
+													</a>
+												</image-hover-buttons>
+												<a href="<?= $product->getViewLink() ?>">
+													<figcaption>
+														<p class="instauser">
+															<?= \yii\helpers\StringHelper::truncate($product->getName(), 18, '…') ?>
+															<!--<?= \yii\helpers\StringHelper::truncate(Utils::l($product->getName()), 18, '…') ?>-->
+														</p>
+														<p class="price">€ <?= $product->getMinimumPrice() ?></p>
+													</figcaption>
+												</a>
+											</figure>
 										</div>
 									</div>
+									<?php } ?>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
-<!-- /PRODUCT DESCRIPTION -->
+	<!-- /PRODUCT DESCRIPTION -->
 
-<div class="modal full-modal fade" id="carouselModal">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-body">
-				<button type="button" class="close" data-dismiss="modal" title="Close"><span class="ion-ios-close-empty"></span></button>
-				<div id="productGallery" class="carousel slide" data-interval="false">
-					<div class="carousel-inner">
-						<?php
-						$active = true;
-						foreach($productImages as $key => $imageUrl) { ?>
+	<div class="modal full-modal fade" id="carouselModal">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-body">
+					<button type="button" class="close" data-dismiss="modal" title="Close"><span class="ion-ios-close-empty"></span></button>
+					<div id="productGallery" class="carousel slide" data-interval="false">
+						<div class="carousel-inner">
+							<?php
+							$active = true;
+							foreach($productImages as $key => $imageUrl) { ?>
 							<div class="item <?=$active ? 'active' : '' ?>">
 								<img src="<?= Utils::url_scheme() ?><?= Utils::thumborize($imageUrl)->resize(0, 0) ?>">
 							</div>
 							<?php
-								$active = false;
-							} ?>
+							$active = false;
+						} ?>
 					</div>
 				</div>
 				<a href="#productGallery" class="left carousel-control" role="button" data-slide="prev"><i class="ion-ios-arrow-left"></i></a>

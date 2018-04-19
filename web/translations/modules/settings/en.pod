@@ -7,6 +7,8 @@
 			"BRAND": "BRAND / ARTIST NAME",
 			"IDENTIFIER": "VAT Number",
 			"REPRESENTATIVE_NAME": "REPRESENTATIVE NAME",
+			"NAME": "Name",
+			"SURNAME": "Surname",
 			"CHANGE_PASSWORD": "Change password",
 			"WEIGHT_MEASURE": "WEIGHT MEASURE",
 			"SELECT_MEASUREMENT": "Please select a unit of measurement",
