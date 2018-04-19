@@ -5,7 +5,7 @@
 	background-color: $white;
 }
 .about-slide-1{
-	background:url(/imgs/aboutus1.png) center center;
+	background:url(/imgs/aboutus1.png) center center no-repeat;
 	@extend %about-slide;
 	@media(max-width:1200px){
 		min-height: auto;
@@ -37,7 +37,7 @@
 	}
 }
 .about-slide-2{
-	background:url(/imgs/aboutus2.png) center center;
+	background:url(/imgs/aboutus2.png) center center no-repeat;
 	@extend %about-slide;
 	@media(max-width:1200px){
 		min-height: 450px;
@@ -51,7 +51,7 @@
     	@media(max-width:1200px){
 		    font-size: 43px;
 		    letter-spacing: 2px;
-		    padding: 40px 0 20px 0;
+		    padding: 310px 0 10px 0;
     	}
 	}
 	p{
@@ -60,14 +60,14 @@
 		margin: 0 auto;
 		color: $black;
 		font-size: 16px;
-		@media(max-width){
+		@media(max-width:1200px){
 			width: 90%;
 			padding-bottom: 40px;
 		}
 	}
 }
 .about-slide-3{
-	background:url(/imgs/aboutus3.png) center center;
+	background:url(/imgs/aboutus3.png) center center no-repeat;
 	@extend %about-slide;
 	@media(max-width:1200px){
 		min-height: 603px;
@@ -80,7 +80,6 @@
 		padding: 40px;
 		@media(max-width:1200px){
 			width: 100%;
-			height: auto;
 			padding: 20px 0;
 			margin: 0;	
 		}
@@ -115,13 +114,14 @@
 	}
 }
 .about-slide-4{
-	background: url(/imgs/aboutus4.png) center center;
+	background: url(/imgs/aboutus4.png) center center no-repeat;
 	@extend %about-slide;
     //min-height: 597px;
     padding: 12em 0 0 80px;
 	@media(max-width:1200px){
 		min-height: 450px;
 		margin: auto;
+		padding: 0;
 	}
 	.title{
 		font-family: $font-family--name;
