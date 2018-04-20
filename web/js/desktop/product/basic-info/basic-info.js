@@ -313,7 +313,7 @@
 				var aux=[];
 				angular.forEach(vm.images, function (image) {
 					angular.forEach(vm.product.media.photos, function (photo) {
-						if (photo.name === image.name) {
+						if (photo.name === image.filename.name) {
 							aux[vm.images.indexOf(image)]=photo;
 						}
 					});
