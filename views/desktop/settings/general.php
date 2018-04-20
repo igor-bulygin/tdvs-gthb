@@ -83,7 +83,7 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 							<div class="blockify mt-20">
 								<div class="col-md-6 no-pad-left responsive-pad-right-0">
 									<div>
-										<label for="city" ng-class="{'col-md-offset-6': !generalSettingsCtrl.isDeviser}"><span translate="global.user.CITY"></span></label>
+										<label for="city"><span translate="global.user.CITY"></span></label>
 										<input type="text" name="city" class="form-control" ng-model="generalSettingsCtrl.city" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.city)}" ng-model-options='{ debounce: 80 }' ng-change="generalSettingsCtrl.searchPlace(generalSettingsCtrl.city)">
 										<div ng-if="generalSettingsCtrl.showCities" ng-cloak>
 											<ul class="city-selection">
