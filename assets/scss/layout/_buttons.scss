@@ -526,6 +526,9 @@ footer{
     width: 70px;
     height: 40px;
     padding-top: 6px;
+    @media(max-width:320px){
+        width: 55px;
+    }    
     i{
         font-size: 27px;
         line-height: 10px;
@@ -551,6 +554,9 @@ footer{
     //padding-top: 9px;
     //padding:0;
     //margin: auto;
+    @media(max-width:320px){
+        width: 200px;
+    }
     .box-icon{
         width: 32px;
         vertical-align: middle;
