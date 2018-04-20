@@ -42,8 +42,8 @@
 									<label class="col-md-12 adress-text" ng-bind="order.billing_address.city + ', ' + order.billing_address.country"></label>
 									<label class="col-md-12 adress-text" ng-bind="'+' + order.billing_address.phone_number_prefix + ' ' + order.billing_address.phone_number"></label>
 								</div>
-								<div class="col-md-6">
-									<a class="btn btn-black-on-white" ng-href="{{order.person_info.chat_link}}"><span translate="settings.orders.SEND_A_MESSAGE"style="margin-left: 5px;margin-right: 5px;"></span></a>
+								<div class="col-md-6" style="margin-top: 10px;">
+									<a class="btn btn-black-on-white" ng-href="{{order.person_info.chat_link}}" ><span translate="settings.orders.SEND_A_MESSAGE" style="margin-left: 5px;margin-right: 5px;font-weight: normal;"></span></a>
 								</div>
 							</div>
 							<div class="col-md-6 row">

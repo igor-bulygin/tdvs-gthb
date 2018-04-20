@@ -1,14 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 18.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
-<svg version="1.0" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0.5 0.5 28.3 23.5" enable-background="new 0.5 0.5 28.3 23.5" xml:space="preserve">
+<!-- Generator: Adobe Illustrator 22.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+	<!ENTITY ns_extend "http://ns.adobe.com/Extensibility/1.0/">
+	<!ENTITY ns_ai "http://ns.adobe.com/AdobeIllustrator/10.0/">
+	<!ENTITY ns_graphs "http://ns.adobe.com/Graphs/1.0/">
+	<!ENTITY ns_vars "http://ns.adobe.com/Variables/1.0/">
+	<!ENTITY ns_imrep "http://ns.adobe.com/ImageReplacement/1.0/">
+	<!ENTITY ns_sfw "http://ns.adobe.com/SaveForWeb/1.0/">
+	<!ENTITY ns_custom "http://ns.adobe.com/GenericCustomNamespace/1.0/">
+	<!ENTITY ns_adobe_xpath "http://ns.adobe.com/XPath/1.0/">
+]>
+<svg version="1.1" id="Capa_1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 28.3 23.5"
+	 style="enable-background:new 0 0 28.3 23.5;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#C91B39;stroke:#C91B39;}
+</style>
+<metadata>
+	<sfw  xmlns="&ns_sfw;">
+		<slices></slices>
+		<sliceSourceBounds  bottomLeftOrigin="true" height="23.4" width="28.3" x="0.1" y="0"></sliceSourceBounds>
+	</sfw>
+</metadata>
 <g id="Page-1">
 	<g id="REDISEÑO" transform="translate(-1395.000000, -1016.000000)">
-		<path id="Favorite-2-Copy" fill="none" stroke="#C91B39" d="M1419.3,1017.7c-3.3-1.5-7.2-0.3-9,2.7c0,0,0,0,0,0c0,0,0,0,0,0
-			c0,0,0,0,0,0c-0.1,0.2-0.3,0.3-0.6,0.3c-0.3,0-0.5-0.1-0.6-0.3c0,0,0,0,0,0c0,0,0,0,0,0c0,0,0,0,0,0c-1.8-3-5.7-4.2-9-2.7
-			c-3.5,1.6-5,5.7-3.4,9.2c1.3,2.7,8.6,9.4,11.7,12.1h0c0.3,0.3,0.8,0.5,1.3,0.5c0.5,0,1-0.2,1.3-0.5l0,0c3-2.7,10.4-9.4,11.7-12.1
-			C1424.3,1023.4,1422.8,1019.3,1419.3,1017.7L1419.3,1017.7z"/>
+		<path id="Favorite-2-Copy" class="st0" d="M1418.8,1017.2c-3.3-1.5-7.2-0.3-9,2.7l0,0l0,0l0,0c-0.1,0.2-0.3,0.3-0.6,0.3
+			c-0.3,0-0.5-0.1-0.6-0.3l0,0l0,0l0,0c-1.8-3-5.7-4.2-9-2.7c-3.5,1.6-5,5.7-3.4,9.2c1.3,2.7,8.6,9.4,11.7,12.1l0,0
+			c0.3,0.3,0.8,0.5,1.3,0.5s1-0.2,1.3-0.5l0,0c3-2.7,10.4-9.4,11.7-12.1C1423.8,1022.9,1422.3,1018.8,1418.8,1017.2L1418.8,1017.2z"
+			/>
 	</g>
 </g>
 </svg>

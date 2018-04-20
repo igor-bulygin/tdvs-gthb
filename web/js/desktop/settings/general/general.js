@@ -131,8 +131,7 @@
 				 && vm.dataForm.name && !angular.isUndefined(vm.dataForm.name.$viewValue) && vm.dataForm.name.$viewValue.length>0
 			 	&& vm.dataForm.last_name && vm.dataForm.last_name.$viewValue && !angular.isUndefined(vm.dataForm.last_name.$viewValue) && vm.dataForm.last_name.$viewValue.length>0
 				&& vm.dataForm.city && vm.dataForm.city.$viewValue && !angular.isUndefined(vm.dataForm.city.$viewValue) && vm.dataForm.city.$viewValue.length>0 
-				&& vm.dataForm.address && vm.dataForm.address.$viewValue && !angular.isUndefined(vm.dataForm.address.$viewValue)  && vm.dataForm.address.$viewValue.length>0 
-				&& vm.dataForm.vat_id && vm.dataForm.vat_id.$viewValue && !angular.isUndefined(vm.dataForm.vat_id.$viewValue) && vm.dataForm.vat_id.$viewValue.length>0 
+				&& vm.dataForm.address && vm.dataForm.address.$viewValue && !angular.isUndefined(vm.dataForm.address.$viewValue)  && vm.dataForm.address.$viewValue.length>0
 				&& vm.dataForm.phone && !angular.isUndefined(vm.dataForm.phone.$viewValue) && vm.dataForm.phone.$viewValue.length>0
 				&& vm.dataForm.zip && vm.dataForm.phone.$viewValue && !angular.isUndefined(vm.dataForm.zip.$viewValue) && vm.dataForm.zip.$viewValue.length>0 
 				&& !vm.invalidPrefix && !vm.notWeightMeasureSelected)

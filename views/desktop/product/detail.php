@@ -410,7 +410,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 												<div class="policies-row">
 													<form class="form-horizontal">
 														<div class="form-group ">
-															<label class="col-xs-11 offset-xs-1 control-label shipping-label no-pad-r"><span translate="product.detail.SHIPPING_PRICE_SPAIN"></span> <span translate="product.detail.IS"></span> <span class="tax">€<?=(double)$product->getShippingPrice(null, Country::getDefaultContryCode())?></span></label>
+															<label class="col-xs-11 offset-xs-1 control-label shipping-label no-pad-r"><span translate="product.detail.SHIPPING_PRICE_SPAIN"></span>: <span class="tax">€<?=(double)$product->getShippingPrice(null, Country::getDefaultContryCode())?></span></label>
 
 												<?php /*
 												<div class="col-sm-5 pad-product">
@@ -459,35 +459,47 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 <!-- PRODUCT DESCRIPTION -->
 <div class="product-description">
 	<!-- Nav tabs -->
-	<div class="container">
-		<div class="work-profile-description-wrapper">
-			<div class="title mb-40"><span class="title-product-name" translate="product.detail.DESCRIPTION"></span></div>
-			<div class="col-sm-9 pad-product">
-				<div class="description-parraf">
-					<?= $product->description ?>
-				</div>
-				<?php if (count($product->mediaMapping->descriptionPhotosInfo) > 0) { ?>
-				<div class="tb-wrapper">
-					<div class="row">
-						<?php foreach ($product->mediaMapping->descriptionPhotosInfo as $descriptionPhoto) { ?>
-						<div class="col-md-3 work-profile-description-tb">
-							<img src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getUrlImagesLocation().$descriptionPhoto->name)->resize(480, 0)?>">
-							<span class="tb-title"><?= $descriptionPhoto->title?></span>
-							<span class="tb-description"><?= $descriptionPhoto->description?></span>
+		<div class="container">
+			<div class="work-profile-description-wrapper">
+                                <div class="hidden-sm">
+                                        <div class="avatar-wrapper-side">
+                                                <div class="avatar">
+                                                        <a href="<?= $person->getStoreLink() ?>">
+                                                                <span translate="product.detail.CREATED_BY"></span>
+                                                                <img class="avatar-default medium" src="<?= $person->getProfileImage(128, 128) ?>" data-pin-nopin="true">
+                                                                <?php /* <span><?= $person->getName() ?></span> */ ?>
+                                                        </a>
+                                                </div>
+                                        </div>
+                                </div>
+				<div class="title mb-40"><span class="title-product-name" translate="product.detail.DESCRIPTION"></span></div>
+				<div class="col-sm-9 pad-product">
+					<div class="description-parraf">
+						<?= $product->description ?>
+					</div>
+					<?php if (count($product->mediaMapping->descriptionPhotosInfo) > 0) { ?>
+					<div class="tb-wrapper">
+						<div class="row">
+							<?php foreach ($product->mediaMapping->descriptionPhotosInfo as $descriptionPhoto) { ?>
+							<div class="col-md-3 work-profile-description-tb">
+								<img src="<?= Utils::url_scheme() ?><?= Utils::thumborize($product->getUrlImagesLocation().$descriptionPhoto->name)->resize(480, 0)?>">
+								<span class="tb-title"><?= $descriptionPhoto->title?></span>
+								<span class="tb-description"><?= $descriptionPhoto->description?></span>
+							</div>
+							<?php } ?>
 						</div>
 						<?php } ?>
 					</div>
 				</div>
-				<?php } ?>
-			</div>
-			<div class="col-sm-3">
-				<div class="avatar-wrapper-side">
-					<div class="avatar">
-						<a href="<?= $person->getStoreLink() ?>">
-							<span translate="product.detail.CREATED_BY"></span>
-							<img class="avatar-default medium" src="<?= $person->getProfileImage(128, 128) ?>" data-pin-nopin="true">
-							<?php /* <span><?= $person->getName() ?></span> */ ?>
-						</a>
+				<div class="hidden-xs col-sm-3">
+					<div class="avatar-wrapper-side">
+						<div class="avatar">
+							<a href="<?= $person->getStoreLink() ?>">
+								<span translate="product.detail.CREATED_BY"></span>
+								<img class="avatar-default medium" src="<?= $person->getProfileImage(128, 128) ?>" data-pin-nopin="true">
+								<?php /* <span><?= $person->getName() ?></span> */ ?>
+							</a>
+						</div>
 					</div>
 				</div>
 			</div>

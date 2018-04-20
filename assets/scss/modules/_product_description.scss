@@ -56,6 +56,7 @@
         min-height: 500px;
         .work-description-wrapper{
             padding: 40px 0;
+            width: 100%;
             .title{
                 font-size:18px;
                 text-transform: uppercase;
@@ -240,6 +241,14 @@
 .shipping-policies-wrapper{
     font-family: $font-family--secondary;
     .policies-row{
+        @media(max-width: 767px){
+            .form-group{
+                margin: 0;
+                label{
+                    margin: 0;
+                }
+            }
+        }
         .shipping-label{
             padding-top: 0;//3px;
             margin-top: 0;
@@ -297,7 +306,8 @@
     @extend %block;
     border-bottom: solid 1px $dark_grey;
     margin: 40px 0;
-    padding-bottom:40px;
+    //padding-bottom:40px;
+    padding: 0 60px 40px 60px;
     .work-profile-description-tb{
     margin:10px 0 30px;
         img{
