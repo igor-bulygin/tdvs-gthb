@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(UtilService, chatDataService, $window, $location) {
+	function controller(UtilService, chatDataService, $window, $location, $scope) {
 		var vm = this;
 		vm.getChats=getChats;
 		vm.sendMsg= sendMsg;
@@ -12,6 +12,7 @@
 		vm.activeChat = activeChat;
 		vm.msgOwner = msgOwner;
 		vm.loading=true;
+		vm.isMobile = true;
 		if (person) {
 			vm.person = {id:person.id, name:angular.copy(person.name), profile_image : person.profile_image};
 		}
@@ -147,6 +148,15 @@
 			}
 			return '';
 		}
+
+		$scope.$watch(angular.element("#filters-xs-container").is(':visible'), function(newValue, oldValue) {
+			if (angular.element("#filters-xs-container").is(':visible')) {
+				vm.isMobile=true;
+			}
+			else {
+				vm.isMobile=false;
+			}
+		}, true);
 	}
 
 	angular
