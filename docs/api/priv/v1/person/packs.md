@@ -18,6 +18,8 @@ Example about how to call to Web Service to get a list of packs sold by a person
 * `pack_state`: Filter packs only in a specific state. 
 * `page`: Set the result page that want to be retrieved (default: 1)
 * `limit`: Limit the results returned for page (default: 20)
+* `order_col`: Optional. Name of the column to order by (default: created_at)
+* `order_dir`: Optional. Direcction of the order. Available values: asc / desc (default: asc);
 
 ```
 Available *pack_state* values:

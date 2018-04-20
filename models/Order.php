@@ -348,6 +348,10 @@ class Order extends CActiveRecord {
 
 		if ((array_key_exists("order_by", $criteria)) && (!empty($criteria["order_by"]))) {
 			$query->orderBy($criteria["order_by"]);
+		} elseif ((array_key_exists("order_col", $criteria)) && (!empty($criteria["order_col"])) && (array_key_exists("order_dir", $criteria)) && (!empty($criteria["order_dir"]))) {
+			$query->orderBy([
+				$criteria["order_col"] => $criteria["order_dir"] == 'desc' ? SORT_DESC : SORT_ASC,
+			]);
 		} else {
 			$query->orderBy([
 				"created_at" => SORT_DESC,
