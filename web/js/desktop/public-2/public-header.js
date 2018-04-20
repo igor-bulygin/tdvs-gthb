@@ -17,6 +17,7 @@
 		init();
 
 		function init() {
+			getMsgQuantity();
 			$interval(function() {
 				getMsgQuantity();
 			}, 60000);
