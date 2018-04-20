@@ -19,7 +19,7 @@
 		function init() {
 			$interval(function() {
 				getMsgQuantity();
-			}, 500000);
+			}, 60000);
 			getCartQuantity();
 		}
 
