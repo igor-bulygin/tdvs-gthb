@@ -31,6 +31,6 @@ $this->title = $name;
 
 	<p class="error-404-pd"><?=Yii::t('app/public', 'ERROR_PAGE_MESSAGE_2')?></p>
 
-	<a href="<?=Url::to('/')?>"><img src="/imgs/logo.png"></a>
+	<a href="<?=Url::to('/')?>"><img src="/imgs/logo-red.png"></a>
 
 </div>

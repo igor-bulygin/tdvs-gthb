@@ -1135,6 +1135,9 @@ footer .social-items {
   width: 70px;
   height: 40px;
   padding-top: 6px; }
+  @media (max-width: 320px) {
+    .btn-love {
+      width: 55px; } }
   .btn-love i {
     font-size: 27px;
     line-height: 10px; }
@@ -1152,6 +1155,9 @@ footer .social-items {
   color: #1C1919;
   width: 209px;
   height: 40px; }
+  @media (max-width: 320px) {
+    .btn-save-box {
+      width: 200px; } }
   .btn-save-box .box-icon {
     width: 32px;
     vertical-align: middle;
@@ -2881,7 +2887,7 @@ h3 {
       .navbar .navbar-brand svg .img_logo#p1 {
         fill: #c91c39; }
       .navbar .navbar-brand svg .img_logo#p2 {
-        fill: #ffffff; }
+        fill: none; }
     @media (max-width: 991px) {
       .navbar .navbar-brand {
         padding: 0;
@@ -5523,7 +5529,7 @@ h3 {
 .powered-google {
   width: 100px;
   margin: 0 auto;
-  display: block; }
+  display: none; }
 
 .type-of-user {
   color: #ffffff;
@@ -7538,11 +7544,12 @@ span.optional-text.pull-left {
 
 .shipping-policies-wrapper {
   font-family: "Univers Condensed Light", "Helvetica Neue", Helvetica, Arial, sans-serif; }
-  @media (max-width: 767px) {
+  @media (max-width: 991px) {
     .shipping-policies-wrapper .policies-row .form-group {
       margin: 0; }
       .shipping-policies-wrapper .policies-row .form-group label {
-        margin: 0; } }
+        margin: 0;
+        padding: 0; } }
   .shipping-policies-wrapper .policies-row .shipping-label {
     padding-top: 0;
     margin-top: 0;
@@ -9543,6 +9550,9 @@ footer {
     width: 30%;
     margin: 20px auto;
     border-color: #b8b8b8; }
+    @media (max-width: 320px) {
+      .returns-warranties-wrapper hr {
+        margin: 0 auto; } }
   .returns-warranties-wrapper .img_div {
     text-align: center;
     margin: auto; }
