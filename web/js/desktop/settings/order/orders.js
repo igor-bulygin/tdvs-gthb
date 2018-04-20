@@ -6,6 +6,7 @@
 		vm.deviserId=person.id;
 		vm.getOrders=getOrders;
 		vm.loading=true;
+		vm.orderFilter = {name:"",value:""};
 
 		init();
 
@@ -53,10 +54,10 @@
 				vm.orders.forEach(function(order) {
 					order.packs.forEach(function(pack) {
 						if (vm.orderOptions.indexOf(pack.pack_state) === -1) {
-							vm.orderOptions.push(pack.pack_state);
+							vm.orderOptions.push({ name:"settings.orders." + pack.pack_state.toUpperCase(), value:pack.pack_state});
 						}
 					});
-				});
+				});				
 				if (vm.orderOptions.length>0) {
 					vm.orderFilter = vm.orderOptions[0];
 				}
@@ -66,11 +67,20 @@
 				case "done":
 					orderDataService.getOrder({
 						pack_state: vm.stateFilter, 
-						personId: vm.deviserId
+						personId: vm.deviserId,
+						order_col: "pack_state",
+						order_dir: "asc",
+						order_value: vm.orderFilter.value
 					}, onGetOrdersSuccess, UtilService.onError);
 					break;
 				case "received":
-					orderDataService.getDeviserPack({pack_state:vm.stateFilter, personId:vm.deviserId}, onGetOrdersSuccess, UtilService.onError);
+					orderDataService.getDeviserPack(
+						{pack_state:vm.stateFilter,
+						 personId:vm.deviserId,
+						 order_col: "pack_state",
+						 order_dir: "asc",
+						 order_value: vm.orderFilter.value
+						}, onGetOrdersSuccess, UtilService.onError);
 					break;
 			}
 			

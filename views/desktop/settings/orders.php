@@ -37,10 +37,10 @@ $this->registerJs('var person = ' .Json::encode($person), yii\web\View::POS_HEAD
 				<label for="{{'stateFilter_'+$index}}"><span translate="{{state.name}}"></span></label>
 			</div>
 		</div>
-		<div class="col-xs-4 select-settings-wrapper" ng-if="ordersCtrl.isDeviser && ordersCtrl.typeFilter && ordersCtrl.typeFilter.value === 'received'" ng-cloak>
-			<ol class="nya-bs-select btn-group bootstrap-select form-control product-select col-md-12" ng-model="ordersCtrl.orderFilter" ng-cloak>
-				<li nya-bs-option="state in ordersCtrl.orderOptions">
-					<a href="#"><span translate="{{state}}"></span></a>
+		<div class="col-xs-4 select-settings-wrapper" ng-cloak>
+			<ol class="nya-bs-select btn-group bootstrap-select form-control product-select col-md-12" ng-model="ordersCtrl.orderFilter" ng-change="ordersCtrl.getOrders()" ng-cloak>
+				<li nya-bs-option="order in ordersCtrl.orderOptions">
+					<a href="#"><span translate="{{order.name}}"></span></a>
 				</li>
 			</ol>
 		</div>

@@ -69,7 +69,10 @@
 			"SEE_INVOICE":"factura.pdf",
 			"REPLACE_INVOICE":"Reemplazar FACTURA EN PDF",
 			"DOWNLOAD_INVOICE":"Descargar FACTURA",
-			"SEND_A_MESSAGE":"Enviar mensaje"
+			"SEND_A_MESSAGE":"Enviar mensaje",
+			"PAID":"Mostrar pagados primero",
+			"AWARE":"Mostrar realizados primero",
+			"SHIPPED":"Mostrar enviados primero"
 		},
 		"shipping": {
 			"TOTAL": "Total",

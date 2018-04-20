@@ -69,7 +69,10 @@
 			"SEE_INVOICE":"invoice.pdf",
 			"REPLACE_INVOICE":"Replace PDF INVOICE",
 			"DOWNLOAD_INVOICE":"Download PDF INVOICE",
-			"SEND_A_MESSAGE":"Send a message"
+			"SEND_A_MESSAGE":"Send a message",
+			"PAID":"Show paid first",
+			"AWARE":"Show aware first",
+			"SHIPPED":"Show shipped first"
 		},
 		"shipping": {
 			"ADD_SHIPPING_PRICES": "Add shipping prices",
