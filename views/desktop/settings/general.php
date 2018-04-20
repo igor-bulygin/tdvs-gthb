@@ -52,8 +52,7 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 								<div class="col-md-4 identifier-pad">
 									<label for="vat_id" translate="settings.general.IDENTIFIER"></label>
 									<span class="optional-input" translate="global.OPTIONAL"></span>
-									<input type="text" name="vat_id" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.vat_id" ng-class="{'error-input': generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.vat_id)}">
-									<span class="purple-text" ng-if="generalSettingsCtrl.existRequiredError(generalSettingsCtrl.person.personal_info.vat_id)" translate="settings.FILL_FIELD"></span>
+									<input type="text" name="vat_id" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.vat_id">
 								</div>
 							</div>
 							
