@@ -63,7 +63,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 		</div>
 		<div>
 			<div class="container">
-				<div class="row"> 
+				<div class="row">
 					<span class="title-mobile visible-xs-block" ng-bind="detailProductCtrl.product.name"></span>
 				</div>
 				<div class="col-md-8 pad-product">
@@ -410,7 +410,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 												<div class="policies-row">
 													<form class="form-horizontal">
 														<div class="form-group ">
-															<label class="col-xs-11 offset-xs-1 control-label shipping-label no-pad-r"><span translate="product.detail.SHIPPING_PRICE_SPAIN"></span>: <span class="tax">€<?=(double)$product->getShippingPrice(null, Country::getDefaultContryCode())?></span></label>
+															<label class="col-xs-12 col-sm-12 col-md-11 offset-md-1 control-label shipping-label no-pad-r"><span translate="product.detail.SHIPPING_PRICE_SPAIN"></span> <span translate="product.detail.IS"></span> <span class="tax">€<?=(double)$product->getShippingPrice(null, Country::getDefaultContryCode())?></span></label>
 
 												<?php /*
 												<div class="col-sm-5 pad-product">
@@ -461,13 +461,12 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 	<!-- Nav tabs -->
 		<div class="container">
 			<div class="work-profile-description-wrapper">
-                                <div class="hidden-sm">
+				<div class="hidden-sm hidden-md hidden-lg">
                                         <div class="avatar-wrapper-side">
                                                 <div class="avatar">
                                                         <a href="<?= $person->getStoreLink() ?>">
                                                                 <span translate="product.detail.CREATED_BY"></span>
                                                                 <img class="avatar-default medium" src="<?= $person->getProfileImage(128, 128) ?>" data-pin-nopin="true">
-                                                                <?php /* <span><?= $person->getName() ?></span> */ ?>
                                                         </a>
                                                 </div>
                                         </div>
@@ -488,8 +487,8 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 							</div>
 							<?php } ?>
 						</div>
-						<?php } ?>
 					</div>
+					<?php } ?>
 				</div>
 				<div class="hidden-xs col-sm-3">
 					<div class="avatar-wrapper-side">

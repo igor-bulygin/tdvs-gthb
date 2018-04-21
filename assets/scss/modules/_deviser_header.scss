@@ -179,7 +179,7 @@
 }
 .req-1{
     position: absolute;
-    color: $violet;
+    color: $error;//$violet;
     z-index: 99999;
     text-align: center;
     width: 100%;
@@ -190,7 +190,7 @@
     position: absolute;
     top: 60px;
     left: 0;
-    color: $violet;
+    color: $error;//$violet;
     z-index: 99999;
     text-align: center;
     width: 100%;
@@ -227,7 +227,7 @@
 .powered-google{
 	width:100px;
 	margin: 0 auto;
-    display: block;
+    display: none;//block;
 }
 .type-of-user{
 	color: $white;

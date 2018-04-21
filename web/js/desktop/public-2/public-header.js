@@ -7,7 +7,7 @@
 		$translatePartialLoaderProvider.addPart('header');
 	}
 
-	function controller(personDataService, $window, UtilService, localStorageUtilService, cartDataService, cartService,$scope, cartEvents, chatDataService) {
+	function controller(personDataService, $window, UtilService, localStorageUtilService, cartDataService, cartService,$scope, cartEvents, chatDataService, $interval) {
 		var vm = this;
 		vm.logout = logout;
 		vm.cartQuantity=0;
@@ -18,6 +18,9 @@
 
 		function init() {
 			getMsgQuantity();
+			$interval(function() {
+				getMsgQuantity();
+			}, 60000);
 			getCartQuantity();
 		}
 

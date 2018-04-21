@@ -11,7 +11,7 @@ $this->title = Yii::t('app/public', 'ABOUT_US');
 <div class="about-us-wrapper">
 	<div class="container">
 		<div class="about-slide-1">
-			<img class="logo" src="/imgs/logo.png">
+			<img class="logo" src="/imgs/logo-red.svg">
 			<p><?=Yii::t('app/public', 'ABOUT_US_TODEVISE_1')?></p>
 		</div>
 		<div class="about-slide-2">
