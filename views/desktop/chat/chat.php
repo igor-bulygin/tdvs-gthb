@@ -26,7 +26,39 @@ $this->registerJs('var chat_id = ' .Json::encode($chatId), yii\web\View::POS_HEA
 <div class="our-devisers-wrapper" ng-controller="chatCtrl as chatCtrl">
 	<div class="container">
 		<div class="our-devisers-body chat-body" ng-if="!chatCtrl.loading" ng-cloak>
-			<div id="chat-chats" class="col-xs-12 col-sm-4">
+			<div class="hidden-sm hidden-md hidden-lg mt-20" id="filters-xs-container">
+				<div class="mt-20 mb-20" >
+					<a href="#filters-xs" data-toggle="collapse" class="row btn btn-red btn-small"><span translate="discover.FILTER"></span></a>
+					<div class="collapse" id="filters-xs">
+						<div class="col-xs-12 col-sm-4">
+							<uib-tabset active="chatCtrl.active">
+								<uib-tab index="$index" ng-repeat="tab in chatCtrl.tabs" heading="{{tab.title}}" ng-click="chatCtrl.changeChatFilter(tab.id)" class="col-xs-3">
+									<div ng-if="chatCtrl.chats.length<1" class="text-center" style="padding:50px;">
+										<h4 class="row" translate="chat.NO_CHATS"></h4>
+										<p class="row" translate="chat.CLICK_MSG"></p>
+									</div>
+									<ul>
+										<li ng-repeat="chat in chatCtrl.chats" ng-class="chatCtrl.activeChat(chat)">
+											<a ng-click="chatCtrl.selectChat(chat)" class="col-xs-12" role="button">
+												<span class="col-xs-12">
+													<div class="col-xs-3 col-sm-2-5">
+														<img class="avatar-logued-user" ng-src="{{ chatCtrl.parseImage(chat.preview.image)}}">
+													</div>
+													<div class="col-xs-9 col-sm-9-5">
+														<span class="col-xs-12 red-text chat-tit" ng-bind="chat.preview.title"></span>
+														<span class="col-xs-12 chat-text" ng-bind="chat.preview.text"></span>
+													</div>
+												</span>
+											</a>
+										</li>
+									</ul>
+								</uib-tab>
+							</uib-tabset>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="chat-chats" class="col-xs-12 col-sm-4 hidden-xs">
 				<uib-tabset active="chatCtrl.active">
 					<uib-tab index="$index" ng-repeat="tab in chatCtrl.tabs" heading="{{tab.title}}" ng-click="chatCtrl.changeChatFilter(tab.id)" class="col-xs-3">
 						<div ng-if="chatCtrl.chats.length<1" class="text-center" style="padding:50px;">
@@ -51,6 +83,7 @@ $this->registerJs('var chat_id = ' .Json::encode($chatId), yii\web\View::POS_HEA
 					</uib-tab>
 				</uib-tabset>
 			</div>
+
 			<div id="chat-messages" class="col-xs-12 col-sm-8" ng-if="!chatCtrl.loadingChat">
 				<div ng-if="!chatCtrl.currentChat" class="text-center" style="padding:50px;">
 					<span translate="chat.SELECT_CHAT"></span>
