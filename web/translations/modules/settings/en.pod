@@ -70,9 +70,10 @@
 			"REPLACE_INVOICE":"Replace PDF INVOICE",
 			"DOWNLOAD_INVOICE":"Download PDF INVOICE",
 			"SEND_A_MESSAGE":"Send a message",
-			"PAID":"Show paid first",
-			"AWARE":"Show aware first",
-			"SHIPPED":"Show shipped first"
+			"ORDER_OPEN": "Unshipped first",
+			"ORDER_PAST": "Shipped first",
+			"ORDER_DATE_DESC": "Newest first",
+			"ORDER_DATE_ASC": "Oldest first"
 		},
 		"shipping": {
 			"ADD_SHIPPING_PRICES": "Add shipping prices",

@@ -349,9 +349,30 @@ class Order extends CActiveRecord {
 		if ((array_key_exists("order_by", $criteria)) && (!empty($criteria["order_by"]))) {
 			$query->orderBy($criteria["order_by"]);
 		} elseif ((array_key_exists("order_col", $criteria)) && (!empty($criteria["order_col"])) && (array_key_exists("order_dir", $criteria)) && (!empty($criteria["order_dir"]))) {
-			$query->orderBy([
-				$criteria["order_col"] => $criteria["order_dir"] == 'desc' ? SORT_DESC : SORT_ASC,
-			]);
+				$query->orderBy([
+					$criteria["order_col"] => $criteria["order_dir"] == 'desc' ? SORT_DESC : SORT_ASC,
+				]);
+		} elseif ((array_key_exists("order_type", $criteria)) && (!empty($criteria["order_type"]))) {
+
+        	if ($criteria['order_type'] == 'open') {
+				$query->orderBy([
+					'packs.pack_state' => SORT_ASC,
+					'created_at' => SORT_ASC,
+				]);
+			} elseif ($criteria['order_type'] == 'past') {
+				$query->orderBy([
+					'packs.pack_state' => SORT_DESC,
+					'created_at' => SORT_ASC,
+				]);
+			} elseif ($criteria['order_type'] == 'date_asc') {
+				$query->orderBy([
+					'created_at' => SORT_ASC,
+				]);
+			} elseif ($criteria['order_type'] == 'date_desc') {
+				$query->orderBy([
+					'created_at' => SORT_DESC,
+				]);
+			}
 		} else {
 			$query->orderBy([
 				"created_at" => SORT_DESC,

@@ -6,7 +6,8 @@
 		vm.deviserId=person.id;
 		vm.getOrders=getOrders;
 		vm.loading=true;
-		vm.orderFilter = {name:"",value:""};
+		vm.orderOptions = [];
+		vm.orderFilter = null;
 
 		init();
 
@@ -21,6 +22,22 @@
 				open_orders_translation = 'settings.orders.TO_SEND';
 			} else {
 				open_orders_translation = 'settings.orders.OPEN';
+			}
+
+			if (vm.isDeviser) {
+				vm.orderOptions = [
+					{name:"settings.orders.ORDER_OPEN",value:"open"},
+					{name:"settings.orders.ORDER_PAST",value:"past"},
+					{name:"settings.orders.ORDER_DATE_DESC",value:"date_desc"},
+					{name:"settings.orders.ORDER_DATE_ASC",value:"date_asc"},
+				];
+				vm.orderFilter = {name:"settings.orders.ORDER_OPEN_FIRST",value:"open"};
+			} else {
+				vm.orderOptions = [
+					{name:"settings.orders.ORDER_DATE_DESC",value:"date_desc"},
+					{name:"settings.orders.ORDER_DATE_ASC",value:"date_asc"},
+				];
+				vm.orderFilter = {name:"settings.orders.ORDER_DATE_DESC",value:"date_desc"};
 			}
 			vm.enabledTypes.push({value:"done", name: "settings.orders.MY_PURCHASE"});
 			vm.typeFilter=vm.enabledTypes[0];
@@ -50,36 +67,32 @@
 			vm.loading=true;
 			function onGetOrdersSuccess(data) {
 				vm.orders = angular.copy(data.items); 
-				vm.orderOptions =[];
-				vm.orders.forEach(function(order) {
-					order.packs.forEach(function(pack) {
-						if (vm.orderOptions.indexOf(pack.pack_state) === -1) {
-							vm.orderOptions.push({ name:"settings.orders." + pack.pack_state.toUpperCase(), value:pack.pack_state});
-						}
-					});
-				});				
-				if (vm.orderOptions.length>0) {
-					vm.orderFilter = vm.orderOptions[0];
-				}
+				// vm.orderOptions =[];
+				// vm.orders.forEach(function(order) {
+					// order.packs.forEach(function(pack) {
+					// 	if (vm.orderOptions.map(function(e) { return e.value; }).indexOf(pack.pack_state) === -1) {
+					// 		vm.orderOptions.push({ name:"settings.orders." + pack.pack_state.toUpperCase(), value:pack.pack_state});
+					// 	}
+					// });
+				// });
+				// if (vm.orderOptions.length>0) {
+				// 	vm.orderFilter = vm.orderOptions[0];
+				// }
 				vm.loading=false;
 			}
 			switch (vm.typeFilter.value) {
 				case "done":
 					orderDataService.getOrder({
-						pack_state: vm.stateFilter, 
+						pack_state: vm.stateFilter,
 						personId: vm.deviserId,
-						order_col: "pack_state",
-						order_dir: "asc",
-						order_value: vm.orderFilter.value
+						order_type: vm.orderFilter.value
 					}, onGetOrdersSuccess, UtilService.onError);
 					break;
 				case "received":
 					orderDataService.getDeviserPack(
 						{pack_state:vm.stateFilter,
 						 personId:vm.deviserId,
-						 order_col: "pack_state",
-						 order_dir: "asc",
-						 order_value: vm.orderFilter.value
+						 order_type: vm.orderFilter.value
 						}, onGetOrdersSuccess, UtilService.onError);
 					break;
 			}

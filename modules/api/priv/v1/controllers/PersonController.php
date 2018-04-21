@@ -150,8 +150,9 @@ class PersonController extends AppPrivateController
 		$page = Yii::$app->request->get('page', 1);
 		$page = ($page < 1) ? 1 : $page;
 		$offset = ($limit * ($page - 1));
-		$order_col = Yii::$app->request->get('order_col', 'created_at');
-		$order_dir = Yii::$app->request->get('order_dir', 'asc');
+		$order_col = Yii::$app->request->get('order_col');
+		$order_dir = Yii::$app->request->get('order_dir');
+		$order_type = Yii::$app->request->get('order_type');
 
 		$orders = Order::findSerialized([
 			"person_id" => $person->id,
@@ -161,6 +162,7 @@ class PersonController extends AppPrivateController
 			"offset" => $offset,
 			"order_col" => $order_col,
 			"order_dir" => $order_dir,
+			"order_type" => $order_type,
 		]);
 
 		foreach ($orders as $order) {
@@ -202,8 +204,9 @@ class PersonController extends AppPrivateController
 		$page = Yii::$app->request->get('page', 1);
 		$page = ($page < 1) ? 1 : $page;
 		$offset = ($limit * ($page - 1));
-		$order_col = Yii::$app->request->get('order_col', 'created_at');
-		$order_dir = Yii::$app->request->get('order_dir', 'asc');
+		$order_col = Yii::$app->request->get('order_col');
+		$order_dir = Yii::$app->request->get('order_dir');
+		$order_type= Yii::$app->request->get('order_type');
 
 		$orders = Order::findSerialized([
 			"deviser_id" => $person->id,
@@ -214,6 +217,7 @@ class PersonController extends AppPrivateController
 			"offset" => $offset,
 			"order_col" => $order_col,
 			"order_dir" => $order_dir,
+			"order_type" => $order_type,
 		]);
 
 		foreach ($orders as $order) {

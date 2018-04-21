@@ -70,9 +70,10 @@
 			"REPLACE_INVOICE":"Reemplazar FACTURA EN PDF",
 			"DOWNLOAD_INVOICE":"Descargar FACTURA",
 			"SEND_A_MESSAGE":"Enviar mensaje",
-			"PAID":"Mostrar pagados primero",
-			"AWARE":"Mostrar realizados primero",
-			"SHIPPED":"Mostrar enviados primero"
+			"ORDER_OPEN": "Sin enviar primero",
+			"ORDER_PAST": "Enviados primero",
+			"ORDER_DATE_DESC": "Los más recientes primero",
+			"ORDER_DATE_ASC": "Los más antiguos primero"
 		},
 		"shipping": {
 			"TOTAL": "Total",
