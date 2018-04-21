@@ -6,8 +6,13 @@
 		vm.deviserId=person.id;
 		vm.getOrders=getOrders;
 		vm.loading=true;
-		vm.orderOptions = [];
-		vm.orderFilter = null;
+		vm.orderOptions = [
+			{name:"settings.orders.ORDER_OPEN",value:"open"},
+			{name:"settings.orders.ORDER_PAST",value:"past"},
+			{name:"settings.orders.ORDER_DATE_DESC",value:"date_desc"},
+			{name:"settings.orders.ORDER_DATE_ASC",value:"date_asc"},
+		];
+		vm.orderFilter = {name:"settings.orders.ORDER_OPEN_FIRST",value:"open"};
 
 		init();
 
@@ -22,22 +27,6 @@
 				open_orders_translation = 'settings.orders.TO_SEND';
 			} else {
 				open_orders_translation = 'settings.orders.OPEN';
-			}
-
-			if (vm.isDeviser) {
-				vm.orderOptions = [
-					{name:"settings.orders.ORDER_OPEN",value:"open"},
-					{name:"settings.orders.ORDER_PAST",value:"past"},
-					{name:"settings.orders.ORDER_DATE_DESC",value:"date_desc"},
-					{name:"settings.orders.ORDER_DATE_ASC",value:"date_asc"},
-				];
-				vm.orderFilter = {name:"settings.orders.ORDER_OPEN_FIRST",value:"open"};
-			} else {
-				vm.orderOptions = [
-					{name:"settings.orders.ORDER_DATE_DESC",value:"date_desc"},
-					{name:"settings.orders.ORDER_DATE_ASC",value:"date_asc"},
-				];
-				vm.orderFilter = {name:"settings.orders.ORDER_DATE_DESC",value:"date_desc"};
 			}
 			vm.enabledTypes.push({value:"done", name: "settings.orders.MY_PURCHASE"});
 			vm.typeFilter=vm.enabledTypes[0];
