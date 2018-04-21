@@ -2,36 +2,36 @@
 // Errors
 // ==========================================================================
 .error-input{
-    border-color:$violet!important;
+    border-color:$error!important;//$violet!important;
 	.btn-default {
-		border-color: $violet;
+		border-color: $error;//$violet;
 	}
 	label::before{
-		border:1px solid $violet!important;
+		border:1px solid $error!important;//$violet!important;
 	}
     button {
-        border-color:$violet!important;
+        border-color:$error!important;//$violet!important;
     }
 }
 .error-input .ta-editor{
-	border-color:$violet;
+	border-color:$error;//$violet;
 }
 .calendar-icon{
 	&.error-input{
-		border: 1px solid $violet;
+		border: 1px solid $error;//$violet;
 	}
 }
 .error-text{
-     color: $violet!important;
+     color: $error!important;//$violet!important;
 }
 .button-error{
     @extend %btn;
-    background-color:$violet!important;
-    border: 1px solid $violet;
+    background-color:$error!important;//$violet!important;
+    border: 1px solid $error;//$violet;
     color: $white;
     &:hover{
-        background-color:$violet;
+        background-color:$error;//$violet;
         color: $white;
-        border: 1px solid $violet;
+        border: 1px solid $error;//$violet;
     }
 }

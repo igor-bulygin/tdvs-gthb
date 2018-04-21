@@ -272,7 +272,7 @@ ul {
   border: none; }
 
 .error-text {
-  color: #FFD55D !important; }
+  color: #e06a7f !important; }
 
 .relative {
   position: relative; }
@@ -431,7 +431,7 @@ a, a:hover, a:focus {
   outline: none !important;
   -webkit-box-shadow: none !important;
   box-shadow: none !important;
-  border-color: #FFD55D !important;
+  border-color: #e06a7f !important;
   background-color: #e9e9e9; }
 
 .bootstrap-select > .dropdown-toggle.bs-placeholder {
@@ -2134,10 +2134,10 @@ input[type="radio"] .styled:checked + label::after {
   background-color: #b8b8b8; }
 
 .text-yellow {
-  color: #FFD55D; }
+  color: #e06a7f; }
 
 .bg-yellow {
-  background-color: #FFD55D; }
+  background-color: #e06a7f; }
 
 .upload-photo-wrapper {
   cursor: pointer;
@@ -2200,31 +2200,31 @@ input[type="radio"] .styled:checked + label::after {
   background: transparent; }
 
 .error-input {
-  border-color: #FFD55D !important; }
+  border-color: #e06a7f !important; }
   .error-input .btn-default {
-    border-color: #FFD55D; }
+    border-color: #e06a7f; }
   .error-input label::before {
-    border: 1px solid #FFD55D !important; }
+    border: 1px solid #e06a7f !important; }
   .error-input button {
-    border-color: #FFD55D !important; }
+    border-color: #e06a7f !important; }
 
 .error-input .ta-editor {
-  border-color: #FFD55D; }
+  border-color: #e06a7f; }
 
 .calendar-icon.error-input {
-  border: 1px solid #FFD55D; }
+  border: 1px solid #e06a7f; }
 
 .error-text {
-  color: #FFD55D !important; }
+  color: #e06a7f !important; }
 
 .button-error {
-  background-color: #FFD55D !important;
-  border: 1px solid #FFD55D;
+  background-color: #e06a7f !important;
+  border: 1px solid #e06a7f;
   color: #ffffff; }
   .button-error:hover {
-    background-color: #FFD55D;
+    background-color: #e06a7f;
     color: #ffffff;
-    border: 1px solid #FFD55D; }
+    border: 1px solid #e06a7f; }
 
 .success-message-120 {
   background-color: #7AB83A;
@@ -5484,7 +5484,7 @@ h3 {
 
 .req-1 {
   position: absolute;
-  color: #FFD55D;
+  color: #e06a7f;
   z-index: 99999;
   text-align: center;
   width: 100%;
@@ -5495,7 +5495,7 @@ h3 {
   position: absolute;
   top: 60px;
   left: 0;
-  color: #FFD55D;
+  color: #e06a7f;
   z-index: 99999;
   text-align: center;
   width: 100%; }
@@ -5959,7 +5959,7 @@ h3 {
       background-color: #c91c39; }
 
 .top-bar-violet {
-  background-color: #FFD55D;
+  background-color: #e06a7f;
   width: 100%;
   z-index: 99999; }
   .top-bar-violet span {
@@ -8373,12 +8373,12 @@ a.editable-click:hover {
   border: 0 !important; }
 
 a.editable-click.purple-text {
-  color: #FFD55D !important;
+  color: #e06a7f !important;
   border-bottom: dotted 2px transparent !important;
   border: 0 !important; }
 
 a.editable-click.purple-text:hover {
-  color: #FFD55D !important;
+  color: #e06a7f !important;
   border-bottom-color: transparent !important;
   border: 0 !important; }
 
@@ -8452,7 +8452,7 @@ input:checked + .slider:before {
     .calendar-icon i:hover {
       color: #c91c39; }
   .calendar-icon.error-input {
-    border: 1px solid #FFD55D; }
+    border: 1px solid #e06a7f; }
 
 .purple .text-center {
   color: #ffffff;

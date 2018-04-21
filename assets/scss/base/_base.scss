@@ -50,7 +50,8 @@ ul{
   border: none;
 }
 .error-text {
-    color: $violet !important;
+    //color: $violet !important;
+    color: $error !important;
 }
 .relative{
 	position: relative;

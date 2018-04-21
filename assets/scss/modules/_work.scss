@@ -498,12 +498,12 @@ a.editable-click:hover {
 	border:0!important;
 }
 a.editable-click.purple-text { 
-    color: $violet!important;
+    color: $error!important;//$violet!important;
     border-bottom: dotted 2px transparent!important;
 	border:0!important;
 }
 a.editable-click.purple-text:hover { 
-    color: $violet!important;
+    color: $error!important;//$violet!important;
     border-bottom-color: transparent!important;
 	border:0!important;
 }
@@ -583,7 +583,7 @@ input:checked + .slider:before {
 		}
 	}
 	&.error-input{
-		border: 1px solid $violet;
+		border: 1px solid $error;//$violet;
 	}
 }
 .purple{
