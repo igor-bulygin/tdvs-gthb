@@ -13,7 +13,7 @@ $this->title = 'Todevise: Login/Sign up';
 <div class="create-deviser-account-wrapper inverse pt-0" ng-controller="authenticationRequiredCtrl as authenticationRequiredCtrl">
 	<div class="logo">
 		<a class="image-create-account" href="/">
-			<img src="/imgs/logo.svg" data-pin-nopin="true">
+			<img src="/imgs/logo-red.svg" data-pin-nopin="true">
 		</a>
 	</div>
 	<div class="mt-20 tdvs-loading" ng-if="authenticationRequiredCtrl.loading" ng-cloak>

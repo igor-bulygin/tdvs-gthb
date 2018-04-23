@@ -12,7 +12,7 @@ Yii::$app->opengraph->title = $this->title;
 <div class="create-deviser-account-wrapper">
 	<div class="logo">
 		<a class="image-create-account" href="/">
-			<img src="/imgs/logo.svg" data-pin-nopin="true">
+			<img src="/imgs/logo-red.svg" data-pin-nopin="true">
 		</a>
 		<span class="title-create-account">
 			<span class="first-title"><span translate="todevise.signup.WELCOME"></span></span>
