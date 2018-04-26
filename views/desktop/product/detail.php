@@ -410,7 +410,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 												<div class="policies-row">
 													<form class="form-horizontal">
 														<div class="form-group ">
-															<label class="col-xs-12 col-sm-12 col-md-11 offset-md-1 control-label shipping-label no-pad-r"><span translate="product.detail.SHIPPING_PRICE_SPAIN"></span> <span translate="product.detail.IS"></span> <span class="tax">€<?=(double)$product->getShippingPrice(null, Country::getDefaultContryCode())?></span></label>
+															<label class="col-xs-12 col-sm-12 col-md-11 offset-md-1 control-label shipping-label no-pad-r"><span translate="product.detail.SHIPPING_PRICE_SPAIN"></span>: <span class="tax">€<?=(double)$product->getShippingPrice(null, Country::getDefaultContryCode())?></span></label>
 
 												<?php /*
 												<div class="col-sm-5 pad-product">
@@ -512,16 +512,12 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 			<li role="presentation" class="no-b-r">
 				<a href="#boxes" aria-controls="boxes" role="tab" data-toggle="tab"><span class="title-product-name">Boxes</span></a>
 			</li>
-			<? /*php if (count($videos)) {*/ ?>
 			<li role="presentation" class="no-b-r">
 				<a href="#videos" aria-controls="videos" role="tab" data-toggle="tab"><span translate="product.detail.VIDEOS" class="title-product-name"></span></a>
 			</li>
-			<?php /*}*/ ?>
-			<?php /*if (count($product->faqMapping) > 0) {*/ ?>
 			<li role="presentation" class="no-b-r">
 				<a href="#faqs" aria-controls="faqs" role="tab" data-toggle="tab"><span class="title-product-name">FAQs</span></a>
 			</li>
-			<?php /*}*/?>
 		</ul>
 	</div>
 	<div class="container">
