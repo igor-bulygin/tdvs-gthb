@@ -263,6 +263,7 @@ $config = [
 				'/<person_type:(deviser|influencer|client)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/box/<box_id:[^/.]*?>' => 'person/box-detail',
 
 				'/<person_type:(deviser|influencer)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/social' => 'person/social',
+				'/<person_type:(deviser|influencer)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/social/<type:[^/.]*?>' => 'person/social',
 				'/<person_type:(deviser|influencer)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/connect-instagram' => 'person/connect-instagram',
 
 				'/<person_type:(deviser|influencer)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/stories' => 'person/stories',
@@ -308,6 +309,7 @@ $config = [
 				'discover-influencers' => 'discover/influencers',
 				'explore-boxes' => 'discover/boxes',
 				'stories' => 'discover/stories',
+				'timeline' => 'person/timeline',
 
 				//Chat / messages
 				'messages' => 'chat/chat',
@@ -458,6 +460,10 @@ $config = [
 				'GET api3/priv/v1/person/<personId:[^/.]*?>/packs' => 'api3/priv/v1/person/packs',
 				'PUT api3/priv/v1/person/<personId:[^/.]*?>/packs/<packId:[^/.]*>/aware' => 'api3/priv/v1/person/pack-aware',
 				'PUT api3/priv/v1/person/<personId:[^/.]*?>/packs/<packId:[^/.]*>/shipped' => 'api3/priv/v1/person/pack-shipped',
+
+				// Person - followers
+				'POST api3/priv/v1/person/<personId:[^/.]*?>/following/<personFollowedId:[^/.]*>' => 'api3/priv/v1/person/follow',
+				'DELETE api3/priv/v1/person/<personId:[^/.]*?>/following/<personFollowedId:[^/.]*>' => 'api3/priv/v1/person/unfollow',
 
 
 				// Product - public

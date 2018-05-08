@@ -365,6 +365,69 @@ class PersonController extends AppPrivateController
 		return $order;
 	}
 
+	public function actionFollow($personId, $personFollowedId)
+	{
+		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
+
+		/** @var Person $person */
+		$person = Person::findOne(["short_id" => $personId]);
+		if (empty($person)) {
+			throw new NotFoundHttpException('Person not found');
+		}
+
+		if (!$person->isPersonEditable()) {
+			throw new UnauthorizedHttpException();
+		}
+
+		$personToFollow = Person::findOne(["short_id" => $personFollowedId]);
+		if (empty($personToFollow)) {
+			throw new NotFoundHttpException('Person not found');
+		}
+
+		$following = $person->following;
+		if ($person->short_id != $personToFollow->short_id && !in_array($personFollowedId, $following)) {
+			$following[] = $personFollowedId;
+			$person->setAttribute('following', $following);
+			$person->save();
+		}
+
+
+		Yii::$app->response->setStatusCode(201); // Created
+
+		return $person;
+	}
+
+	public function actionUnfollow($personId, $personFollowedId)
+	{
+		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
+
+		/** @var Person $person */
+		$person = Person::findOne(["short_id" => $personId]);
+		if (empty($person)) {
+			throw new NotFoundHttpException('Person not found');
+		}
+
+		if (!$person->isPersonEditable()) {
+			throw new UnauthorizedHttpException();
+		}
+
+		$personToUnfollow = Person::findOne(["short_id" => $personFollowedId]);
+		if (empty($personToUnfollow)) {
+			throw new NotFoundHttpException('Person not found');
+		}
+
+		$following = $person->following;
+		if (in_array($personFollowedId, $following)) {
+			unset($following[array_search($personFollowedId, $following)]);
+			$person->setAttribute('following', $following);
+			$person->save();
+		}
+
+		Yii::$app->response->setStatusCode(200); // Created
+
+		return $person;
+	}
+
 	/**
 	 * Get validation scenario from request param
 	 *

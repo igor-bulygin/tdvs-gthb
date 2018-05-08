@@ -36,6 +36,7 @@ class PersonController extends CController
 					'upload-product-photo',
 					'upload-profile-photo',
 					'videos-edit',
+					'timeline',
 				],
 				'rules' => [
 					[
@@ -520,7 +521,41 @@ class PersonController extends CController
 		]);
 	}
 
-	public function actionSocial($slug, $person_id)
+	public function actionSocial($slug, $person_id, $type = 'follow')
+	{
+		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
+		$person = Person::findOneSerialized($person_id);
+
+		if (!$person) {
+			throw new NotFoundHttpException();
+		}
+
+		if ($slug != $person->getSlug()) {
+			$this->redirect($person->getSocialLink(), 301);
+		}
+
+		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE && !$person->isPersonEditable()) {
+			throw new UnauthorizedHttpException();
+		}
+
+		$this->checkProfileState($person);
+
+		if ($type == 'follow') {
+			$persons = $person->getFollowing();
+		} else {
+			$persons = $person->getFollowers();
+		}
+
+		$this->layout = '/desktop/public-2.php';
+
+		return $this->render("@app/views/desktop/person/social-view", [
+			'person' => $person,
+			'type' => $type,
+			'persons' => $persons,
+		]);
+	}
+
+	public function actionSocialOld($slug, $person_id)
 	{
 		throw new NotFoundHttpException();
 		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
@@ -559,7 +594,7 @@ class PersonController extends CController
 
 		$this->layout = '/desktop/public-2.php';
 
-		return $this->render("@app/views/desktop/person/social-view", [
+		return $this->render("@app/views/desktop/person/social-view-old", [
 			'person' => $person,
 			'photos' => $photos,
 			'connected' => $connected,
@@ -726,6 +761,13 @@ class PersonController extends CController
 		return $this->render("@app/views/desktop/person/story-detail", [
 			'person' => $person,
 			'story' => $story,
+		]);
+	}
+
+	public function actionTimeline()
+	{
+		$this->layout = '/desktop/public-2.php';
+		return $this->render("@app/views/desktop/person/timeline", [
 		]);
 	}
 

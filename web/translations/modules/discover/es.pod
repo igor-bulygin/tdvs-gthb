@@ -8,7 +8,7 @@
 		"FILTER_BY_COUNTRY": "Filtrar por ubicación",
 		"SEE_MORE": "Ver más",
 		"FILTER_BY_THEME": "Filtrar por categoría",
-		"FOLLOW": "Seguir",
+		"FOLLOW": "Follow",
 		"NO_PRODUCTS_FOUND": "No se han encontrado productos con el criterio de búsqueda especificado.",
 		"ORDER_BY": "Ordenar por",
 		"NEW": "Nuevo",
