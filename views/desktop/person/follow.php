@@ -31,7 +31,23 @@ $this->params['person_links_target'] = 'public_view';
 				<?= PersonMenu::widget() ?>
 			</div>
 			<div class="col-md-10">
-				SOCIAL FEED
+				<div class="content-store">
+					<nav>
+						<ul>
+							<li class="<?=$type == 'follow' ? 'active' : ''?>">
+								<a href="<?=$person->getFollowLink()?>">Follow</a>
+							</li>
+							<li class="<?=$type == 'followers' ? 'active' : ''?>">
+								<a href="<?=$person->getFollowersLink()?>">Followers</a>
+							</li>
+						</ul>
+					</nav>
+					<?php foreach ($persons as $person) { ?>
+						<div class="col-md-4">
+							<?=\app\components\Person::widget(['person' => $person]) ?>
+						</div>
+					<?php } ?>
+				</div>
 			</div>
 		</div>
 	</div>

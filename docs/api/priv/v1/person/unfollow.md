@@ -2,7 +2,7 @@
 
 Example about how to call to Web Service to un-follow a person
 
-**URL**: `/api/priv/v1/person/<:personId>/following/<:personToUnfollowId>`
+**URL**: `/api/priv/v1/person/<:personId>/follow/<:personToUnfollowId>`
 
 **Method**: `POST`
 

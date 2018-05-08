@@ -31,6 +31,11 @@ $person = $this->params['person'];
 				<?php } ?>
 			</li>
 		<?php } ?>
+		<?php if ($person->showFollowers()) { ?>
+			<li>
+				<a class=" <?= ($activeOption=='followers') ? 'active' : '' ?>" href="<?= $person->getFollowersLink()?>">Followers</a>
+			</li>
+		<?php } ?>
 		<?php if ($person->showSocial()) { ?>
 			<li>
 				<a class=" <?= ($activeOption=='social') ? 'active' : '' ?>" href="<?= $person->getSocialLink()?>">Social feed</a>

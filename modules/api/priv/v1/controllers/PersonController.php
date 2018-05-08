@@ -384,10 +384,10 @@ class PersonController extends AppPrivateController
 			throw new NotFoundHttpException('Person not found');
 		}
 
-		$following = $person->following;
-		if ($person->short_id != $personToFollow->short_id && !in_array($personFollowedId, $following)) {
-			$following[] = $personFollowedId;
-			$person->setAttribute('following', $following);
+		$follow = $person->follow;
+		if ($person->short_id != $personToFollow->short_id && !in_array($personFollowedId, $follow)) {
+			$follow[] = $personFollowedId;
+			$person->setAttribute('follow', $follow);
 			$person->save();
 		}
 
@@ -416,10 +416,10 @@ class PersonController extends AppPrivateController
 			throw new NotFoundHttpException('Person not found');
 		}
 
-		$following = $person->following;
-		if (in_array($personFollowedId, $following)) {
-			unset($following[array_search($personFollowedId, $following)]);
-			$person->setAttribute('following', $following);
+		$follow = $person->follow;
+		if (in_array($personFollowedId, $follow)) {
+			unset($follow[array_search($personFollowedId, $follow)]);
+			$person->setAttribute('follow', $follow);
 			$person->save();
 		}
 

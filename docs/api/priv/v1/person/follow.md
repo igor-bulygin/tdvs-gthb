@@ -2,7 +2,7 @@
 
 Example about how to call to Web Service to follow a person
 
-**URL**: `/api/priv/v1/person/<:personId>/following/<:personToFollowId>`
+**URL**: `/api/priv/v1/person/<:personId>/follow/<:personToFollowId>`
 
 **Method**: `POST`
 

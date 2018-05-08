@@ -33,7 +33,7 @@ use yii\web\IdentityInterface;
  * @property PersonShippingSettings[] $shippingSettingsMapping
  * @property double $application_fee
  * @property int $profile_views
- * @property array $following
+ * @property array $follow
  * @property MongoDate $created_at
  * @property MongoDate $updated_at
  */
@@ -113,7 +113,7 @@ class Person extends CActiveRecord implements IdentityInterface
 			'shipping_settings',
 			'application_fee',
 			'profile_views',
-			'following',
+			'follow',
 			'created_at',
 			'updated_at',
 		];
@@ -158,7 +158,7 @@ class Person extends CActiveRecord implements IdentityInterface
 		$this->faq = [];
 		$this->shipping_settings = [];
 
-		$this->following = [];
+		$this->follow = [];
 
 	}
 
@@ -890,7 +890,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'is_followed' => 'isFollowed',
 					'type',
 					'profile_views',
-					'following',
+					'follow',
 
 					// only availables in owner scenario:
 					'store_edit_link' => 'storeEditLink',
@@ -1685,6 +1685,26 @@ class Person extends CActiveRecord implements IdentityInterface
 		], true);
 	}
 
+	public function getFollowersLink()
+	{
+		return Url::to([
+			"/person/followers",
+			"slug" => $this->getSlug(),
+			'person_id' => $this->short_id,
+			"person_type" => $this->getPersonTypeForUrl()
+		], true);
+	}
+
+	public function getFollowLink()
+	{
+		return Url::to([
+			"/person/follow",
+			"slug" => $this->getSlug(),
+			'person_id' => $this->short_id,
+			"person_type" => $this->getPersonTypeForUrl()
+		], true);
+	}
+
 	public function getSocialLink()
 	{
 		return Url::to([
@@ -2328,6 +2348,11 @@ class Person extends CActiveRecord implements IdentityInterface
 		return $this->isDeviser();
 	}
 
+	public function showFollowers()
+	{
+		return $this->isInfluencer() || $this->isDeviser();
+	}
+
 	public function showSocial()
 	{
 		return $this->isInfluencer() || $this->isDeviser();
@@ -2391,16 +2416,16 @@ class Person extends CActiveRecord implements IdentityInterface
 		/** @var Person $current */
 		$current = Yii::$app->user->identity;
 
-		return in_array($this->short_id, $current->following);
+		return in_array($this->short_id, $current->follow);
 	}
 
 	public function getIsFollowed() {
 		return $this->isFollowedByConnectedUser();
 	}
 
-	public function getFollowing() {
+	public function getFollow() {
 		$persons = [];
-		foreach ($this->following as $person_id) {
+		foreach ($this->follow as $person_id) {
 			$person = Person::findOneSerialized($person_id);
 			if ($person && $person->isActive()) {
 				$persons[] = $person;
@@ -2416,7 +2441,7 @@ class Person extends CActiveRecord implements IdentityInterface
 		$collection = Yii::$app->mongodb->getCollection('person');
 		$persons  =	$collection->find(
 			[
-				'following' => $this->short_id
+				'follow' => $this->short_id
 			]
 		);
 

@@ -59,6 +59,17 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 						</div>
 					</div>
 				</div>
+
+				<div>
+					<p>Followers</p>
+					<p><?=count($person->getFollowers())?></p>
+				</div>
+
+				<div>
+					<p>Following</p>
+					<p><?=count($person->getFollow())?></p>
+				</div>
+
 				<?php if ($person->isDeviserEditable() && $person->isPublic()) {?>
 					<a class="btn btn-default all-caps btn-header btn-add-work hidden-xs hidden-sm" ng-class="personHeaderCtrl.required['store'] ? 'button-error' : 'btn-red'" href="<?= $person->getCreateWorkLink()?>"><span translate="person.header.ADD_WORK"></span></a>
 				<?php } ?>
