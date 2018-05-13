@@ -20,6 +20,17 @@
 				method: 'PUT'
 			}});
 
+		var Followed = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'person/:personId/follow/:personToFollowId', {}, {
+			'update': {
+				method: 'PUT'
+			}
+		});
+		var UnFollowed = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'person/:personId/unfollow/:personToFollowId', {}, {
+			'update': {
+				method: 'PUT'
+			}
+		});
+
 		//methods
 		this.getPeople = getPeople;
 		this.createClient = createClient;
@@ -33,6 +44,8 @@
 		this.updatePassword = updatePassword;
 		this.askForResetPassword = askForResetPassword;
 		this.resetPassword = resetPassword;
+		this.followPerson = followPerson;
+		this.unFollowPerson = unFollowPerson;
 
 		function getPeople(params, onSuccess, onError) {
 			apiMethods.get(Person, params, onSuccess, onError);
@@ -83,6 +96,14 @@
 
 		function resetPassword(data, onSuccess, onError) {
 			apiMethods.create(PassReset, data, {}, onSuccess, onError);
+		}
+
+		function followPerson(data, params, onSuccess, onError) {
+			apiMethods.create(Followed,data, params, onSuccess, onError);
+		}
+
+		function unFollowPerson(data, params, onSuccess, onError) {
+			apiMethods.create(UnFollowed,data, params, onSuccess, onError);
 		}
 	}
 

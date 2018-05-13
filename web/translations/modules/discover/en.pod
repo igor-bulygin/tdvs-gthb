@@ -10,6 +10,7 @@
 		"SEE_MORE": "See more",
 		"FILTER_BY_THEME": "Filter by category",
 		"FOLLOW": "Follow",
+		"UNFOLLOW": "Unfollow",
 		"NO_PRODUCTS_FOUND": "No products found with the specified search criteria.",
 		"ORDER_BY": "Order by",
 		"NEW": "New",
