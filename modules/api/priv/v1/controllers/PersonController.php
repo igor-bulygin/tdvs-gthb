@@ -391,10 +391,9 @@ class PersonController extends AppPrivateController
 			$person->save(false);
 		}
 
+		Yii::$app->response->setStatusCode(204); // No content
 
-		Yii::$app->response->setStatusCode(201); // Created
-
-		return $person;
+		return null;
 	}
 
 	public function actionUnfollow($personFollowedId)
@@ -423,9 +422,9 @@ class PersonController extends AppPrivateController
 			$person->save(false);
 		}
 
-		Yii::$app->response->setStatusCode(200); // Created
+		Yii::$app->response->setStatusCode(204); // No content
 
-		return $person;
+		return null;
 	}
 
 	/**

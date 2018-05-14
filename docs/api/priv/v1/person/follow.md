@@ -7,7 +7,7 @@ Example about how to call to Web Service to follow a person by the connected use
 **Method**: `POST`
 
 **Response codes**: 
-* `200`: Ok
+* `204`: Ok
 * `400`: Bad request
 * `401`: Unauthorized
 * `403`: Forbidden
@@ -18,4 +18,4 @@ Example about how to call to Web Service to follow a person by the connected use
   
 **Response body**:
 
-* See index.md
+No content
