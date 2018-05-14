@@ -9,7 +9,7 @@
 		"SEE_MORE": "Ver más",
 		"FILTER_BY_THEME": "Filtrar por categoría",
 		"FOLLOW": "Seguir",
-		"UNFOLLOW": "Dejar de seguir",
+		"UNFOLLOW": "Siguiendo",
 		"NO_PRODUCTS_FOUND": "No se han encontrado productos con el criterio de búsqueda especificado.",
 		"ORDER_BY": "Ordenar por",
 		"NEW": "Nuevo",

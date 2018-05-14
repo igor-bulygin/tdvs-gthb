@@ -14,7 +14,7 @@
 
 		function setFollow(item) {
 			function onSetFollowSuccess(data) {
-						item.is_followed = data.is_followed;
+					item.is_followed = !item.is_followed;
 				}
 				function onSetFollowError(err) {
 					UtilService.onError(err);
