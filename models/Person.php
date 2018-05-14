@@ -805,6 +805,10 @@ class Person extends CActiveRecord implements IdentityInterface
 					'is_followed' => 'isFollowed',
 				];
 
+				static::$retrieveExtraFields = [
+					'follow',
+				];
+
 				self::$translateFields = true;
 
 				break;
@@ -848,6 +852,7 @@ class Person extends CActiveRecord implements IdentityInterface
 				static::$retrieveExtraFields = [
 					'videos',
 					'personal_info',
+					'follow',
 				];
 
 				self::$translateFields = true;
