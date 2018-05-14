@@ -6,7 +6,6 @@
 		vm.addMoreItems = addMoreItems;
 		vm.setFollow = setFollow;
 		var show_items = 6;
-		vm.personId = '8216520';
 
 		function addMoreItems() {
 			var last = vm.results_infinite.length;
@@ -15,21 +14,20 @@
 
 		function setFollow(item) {
 			function onSetFollowSuccess(data) {
-					if (item.followed) {
-						item.followed = false;
-					} 
-					else {
-						item.followed = true;
-					}
+						item.is_followed = data.is_followed;
 				}
 				function onSetFollowError(err) {
 					UtilService.onError(err);
 				}
 			var params = {
-				personToFollowId: item.id,
-				personId: vm.personId
+				personId: item.id
 			}
+			if (item.is_followed) {
+				personDataService.unFollowPerson(params, params, onSetFollowSuccess, onSetFollowError);
+			}
+			else {
 				personDataService.followPerson(params, params, onSetFollowSuccess, onSetFollowError);
+			}
 		}
 
 		$scope.$watch('discoverResultsCtrl.results', function(newValue, oldValue) {

@@ -20,14 +20,14 @@
 				method: 'PUT'
 			}});
 
-		var Followed = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'person/:personId/follow/:personToFollowId', {}, {
+		var Followed = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'follow/:personId', {}, {
 			'update': {
-				method: 'PUT'
+				method: 'POST'
 			}
 		});
-		var UnFollowed = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'person/:personId/unfollow/:personToFollowId', {}, {
+		var UnFollowed = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'follow/:personId', {}, {
 			'update': {
-				method: 'PUT'
+				method: 'DELETE'
 			}
 		});
 
@@ -99,11 +99,11 @@
 		}
 
 		function followPerson(data, params, onSuccess, onError) {
-			apiMethods.create(Followed,data, params, onSuccess, onError);
+			apiMethods.update(Followed,data, params, onSuccess, onError);
 		}
 
 		function unFollowPerson(data, params, onSuccess, onError) {
-			apiMethods.create(UnFollowed,data, params, onSuccess, onError);
+			apiMethods.update(UnFollowed,data, params, onSuccess, onError);
 		}
 	}
 

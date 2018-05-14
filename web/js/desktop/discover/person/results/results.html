@@ -20,8 +20,8 @@
 			</a>
 			<div class="col-md-6">
 							<button class="btn btn-icon mt-5" ng-click="discoverResultsCtrl.setFollow(person)">
-								<span ng-hide="person.followed"><i class="ion-ios-star-outline"></i><span translate="discover.FOLLOW"></span></span>
-								<span ng-show="person.followed"><i class="ion-ios-star"></i><span translate="discover.UNFOLLOW"></span></span>
+								<span ng-if="!person.is_followed"><i class="ion-ios-star-outline"></i><span translate="discover.FOLLOW"></span></span>
+								<span ng-if="person.is_followed"><i class="ion-ios-star"></i><span translate="discover.UNFOLLOW"></span></span>
 							</button>
 						</div>
 		</div>
