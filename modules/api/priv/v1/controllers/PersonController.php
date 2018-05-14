@@ -365,12 +365,12 @@ class PersonController extends AppPrivateController
 		return $order;
 	}
 
-	public function actionFollow($personId, $personFollowedId)
+	public function actionFollow($personFollowedId)
 	{
 		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
 
 		/** @var Person $person */
-		$person = Person::findOne(["short_id" => $personId]);
+		$person = Yii::$app->user->identity;
 		if (empty($person)) {
 			throw new NotFoundHttpException('Person not found');
 		}
@@ -388,7 +388,7 @@ class PersonController extends AppPrivateController
 		if ($person->short_id != $personToFollow->short_id && !in_array($personFollowedId, $follow)) {
 			$follow[] = $personFollowedId;
 			$person->setAttribute('follow', $follow);
-			$person->save();
+			$person->save(false);
 		}
 
 
@@ -397,12 +397,12 @@ class PersonController extends AppPrivateController
 		return $person;
 	}
 
-	public function actionUnfollow($personId, $personFollowedId)
+	public function actionUnfollow($personFollowedId)
 	{
 		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
 
 		/** @var Person $person */
-		$person = Person::findOne(["short_id" => $personId]);
+		$person = Yii::$app->user->identity;
 		if (empty($person)) {
 			throw new NotFoundHttpException('Person not found');
 		}
@@ -420,7 +420,7 @@ class PersonController extends AppPrivateController
 		if (in_array($personFollowedId, $follow)) {
 			unset($follow[array_search($personFollowedId, $follow)]);
 			$person->setAttribute('follow', $follow);
-			$person->save();
+			$person->save(false);
 		}
 
 		Yii::$app->response->setStatusCode(200); // Created

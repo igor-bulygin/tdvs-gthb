@@ -1,8 +1,8 @@
 ### Person - Follow (DELETE)
 
-Example about how to call to Web Service to un-follow a person
+Example about how to call to Web Service to un-follow a person by the connected person
 
-**URL**: `/api/priv/v1/person/<:personId>/follow/<:personToUnfollowId>`
+**URL**: `/api/priv/v1/person/follow/<:personToUnfollowId>`
 
 **Method**: `DELETE`
 
@@ -14,10 +14,8 @@ Example about how to call to Web Service to un-follow a person
 * `404`: Not found
 
 **Request parameters**:
-* `:personId`: Id of the person that want to upadte
 * `:personToUnfollowId`: Id of the person that want to follow
   
-
 **Response body**:
 
 * See index.md

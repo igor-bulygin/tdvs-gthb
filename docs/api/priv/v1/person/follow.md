@@ -1,8 +1,8 @@
 ### Person - Follow (POST)
 
-Example about how to call to Web Service to follow a person
+Example about how to call to Web Service to follow a person by the connected user
 
-**URL**: `/api/priv/v1/person/<:personId>/follow/<:personToFollowId>`
+**URL**: `/api/priv/v1/follow/<:personToFollowId>`
 
 **Method**: `POST`
 
@@ -14,10 +14,8 @@ Example about how to call to Web Service to follow a person
 * `404`: Not found
 
 **Request parameters**:
-* `:personId`: Id of the person that want to upadte
 * `:personToFollowId`: Id of the person that want to follow
   
-
 **Response body**:
 
 * See index.md

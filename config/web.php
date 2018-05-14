@@ -463,8 +463,8 @@ $config = [
 				'PUT api3/priv/v1/person/<personId:[^/.]*?>/packs/<packId:[^/.]*>/shipped' => 'api3/priv/v1/person/pack-shipped',
 
 				// Person - followers
-				'POST api3/priv/v1/person/<personId:[^/.]*?>/follow/<personFollowedId:[^/.]*>' => 'api3/priv/v1/person/follow',
-				'DELETE api3/priv/v1/person/<personId:[^/.]*?>/follow/<personFollowedId:[^/.]*>' => 'api3/priv/v1/person/unfollow',
+				'POST api3/priv/v1/follow/<personFollowedId:[^/.]*>' => 'api3/priv/v1/person/follow',
+				'DELETE api3/priv/v1/follow/<personFollowedId:[^/.]*>' => 'api3/priv/v1/person/unfollow',
 
 
 				// Product - public
