@@ -1,29 +1,30 @@
 <div infinite-scroll="discoverResultsCtrl.addMoreItems()" infinite-scroll-distance="1">
 	<div ng-repeat="person in discoverResultsCtrl.results_infinite">
 		<div class="col-md-4 col-sm-6 col-xs-12 pad-showcase">
-			<a ng-href="{{person.main_link}}">
 			<figure class="showcase influencers">
-				<img class="deviser-discover-img showcase-image" ng-src="{{ person.header_small_image }}">
+				<a ng-href="{{person.main_link}}">
+					<img class="deviser-discover-img showcase-image" ng-src="{{ person.header_small_image }}">
+				</a>
 				<figcaption>
 					<div class="row">
 						<div class="col-md-6">
-							<!--img class="showcase-image" ng-src="{{person.url_avatar}}"-->
-							<div class="title-product-name sm align-left">
-								<span class="name align-left ng-class:{'all-caps': person.type.indexOf(2)>=0}" ng-bind="person.name"></span>
-							</div>
-							<span class="location align-left" ng-bind="(person.city | capitalize)"></span>
+							<a ng-href="{{person.main_link}}">
+								<!--img class="showcase-image" ng-src="{{person.url_avatar}}"-->
+								<div class="title-product-name sm align-left">
+									<span class="name align-left ng-class:{'all-caps': person.type.indexOf(2)>=0}" ng-bind="person.name"></span>
+								</div>
+								<span class="location align-left" ng-bind="(person.city | capitalize)"></span>
+							</a>
 						</div>
-						
+						<div class="col-md-6">
+							<button class="btn btn-icon mt-5" ng-click="discoverResultsCtrl.setFollow(person)">
+								<span ng-if="!person.is_followed"><i class="ion-ios-star"></i><span translate="discover.FOLLOW"></span></span>
+								<span ng-if="person.is_followed"><i class="ion-ios-star red-text"></i><span translate="discover.UNFOLLOW"></span></span>
+							</button>
+						</div>
 					</div>
 				</figcaption>
 			</figure>
-			</a>
-			<div class="col-md-6">
-							<button class="btn btn-icon mt-5" ng-click="discoverResultsCtrl.setFollow(person)">
-								<span ng-if="!person.is_followed"><i class="ion-ios-star-outline"></i><span translate="discover.FOLLOW"></span></span>
-								<span ng-if="person.is_followed"><i class="ion-ios-star"></i><span translate="discover.UNFOLLOW"></span></span>
-							</button>
-						</div>
 		</div>
 	</div>
 	<div style='clear: both;'></div>

@@ -3,33 +3,42 @@
 
 	function controller(personDataService, UtilService) {
 		var vm = this;
+		vm.init = init;
+		vm.follow = follow;
 		vm.unFollow = unFollow;
-		vm.person = person;
 
-		function unFollow(person) {
+		function init(isFollowed) {
+			vm.isFollowed = isFollowed;
+		}
+
+		function unFollow(personId) {
 			function onSetFollowSuccess(data) {
-					person.is_followed = !person.is_followed;
-				}
-				function onSetFollowError(err) {
-					UtilService.onError(err);
-				}
-			var params = {
-				personId: person.id
+				vm.isFollowed = false;
 			}
-				personDataService.unFollowPerson(params, params, onSetFollowSuccess, onSetFollowError);
+
+			function onSetFollowError(err) {
+				UtilService.onError(err);
+			}
+
+			var params = {
+				personId: personId
+			}
+			personDataService.unFollowPerson(params, params, onSetFollowSuccess, onSetFollowError);
 		}
 
 		function follow(personId) {
 			function onSetFollowSuccess(data) {
-					// person.is_followed = !person.is_followed;
-				}
-				function onSetFollowError(err) {
-					UtilService.onError(err);
-				}
+				vm.isFollowed = true;
+			}
+
+			function onSetFollowError(err) {
+				UtilService.onError(err);
+			}
+
 			var params = {
 				personId: personId
 			}
-				personDataService.followPerson(params, params, onSetFollowSuccess, onSetFollowError);
+			personDataService.followPerson(params, params, onSetFollowSuccess, onSetFollowError);
 		}
 
 	}
