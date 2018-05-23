@@ -22,6 +22,7 @@ Example about how to call to Web Service to upload a media file
 ** `deviser-press`
 ** `deviser-curriculum`
 ** `story-photos`
+** `post-photos`
 ** `person-pack-invoice`
 ** `banner-image`
 ** `known-product-photo`

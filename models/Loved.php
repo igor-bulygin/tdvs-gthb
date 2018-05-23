@@ -12,6 +12,8 @@ use yii\mongodb\ActiveQuery;
  * @property string short_id
  * @property string $person_id
  * @property string product_id
+ * @property string box_id
+ * @property string post_id
  * @property MongoDate created_at
  * @property MongoDate updated_at
  */
@@ -20,6 +22,7 @@ class Loved extends CActiveRecord
 
 	const SCENARIO_LOVED_PRODUCT = 'scenario-loved-product';
 	const SCENARIO_LOVED_BOX = 'scenario-loved-box';
+	const SCENARIO_LOVED_POST = 'scenario-loved-post';
 
 	/**
 	 * The attributes that should be serialized
@@ -47,6 +50,8 @@ class Loved extends CActiveRecord
 			'short_id',
 			'person_id',
 			'product_id',
+			'box_id',
+			'post_id',
 			'created_at',
 			'updated_at',
 		];
@@ -85,15 +90,41 @@ class Loved extends CActiveRecord
 	{
 		if ($insert) {
 			$product = $this->getProduct();
-			$collection = Yii::$app->mongodb->getCollection('product');
-			$collection->update(
-				[
-					'short_id' => $product->short_id
-				],
-				[
-					'loveds' => $product->loveds + 1
-				]
-			);
+			if ($product) {
+				$collection = Yii::$app->mongodb->getCollection('product');
+				$collection->update(
+					[
+						'short_id' => $product->short_id
+					],
+					[
+						'loveds' => $product->loveds + 1
+					]
+				);
+			}
+			$box = $this->getBox();
+			if ($box) {
+				$collection = Yii::$app->mongodb->getCollection('box');
+				$collection->update(
+					[
+						'short_id' => $box->short_id
+					],
+					[
+						'loveds' => $box->loveds + 1
+					]
+				);
+			}
+			$post = $this->getPost();
+			if ($post) {
+				$collection = Yii::$app->mongodb->getCollection('post');
+				$collection->update(
+					[
+						'short_id' => $post->short_id
+					],
+					[
+						'loveds' => $post->loveds + 1
+					]
+				);
+			}
 		}
 		parent::afterSave($insert, $changedAttributes);
 	}
@@ -112,6 +143,30 @@ class Loved extends CActiveRecord
 				]
 			);
 		}
+		$box = $this->getBox();
+		if ($box) {
+			$collection = Yii::$app->mongodb->getCollection('box');
+			$collection->update(
+				[
+					'short_id' => $box->short_id
+				],
+				[
+					'loveds' => $box->loveds - 1
+				]
+			);
+		}
+		$post = $this->getPost();
+		if ($post) {
+			$collection = Yii::$app->mongodb->getCollection('post');
+			$collection->update(
+				[
+					'short_id' => $post->short_id
+				],
+				[
+					'loveds' => $post->loveds - 1
+				]
+			);
+		}
 
 		parent::afterDelete();
 	}
@@ -119,10 +174,17 @@ class Loved extends CActiveRecord
 	public function rules()
 	{
 		return [
-			[['person_id', 'product_id'], 'required', 'on' => [self::SCENARIO_LOVED_PRODUCT]],
 			[['person_id'], 'validatePersonExists'],
+			[['person_id'], 'validateUniqueLoved'],
+			
+			[['person_id', 'product_id'], 'required', 'on' => [self::SCENARIO_LOVED_PRODUCT]],
 			[['product_id'], 'validateProductExists', 'on' => [self::SCENARIO_LOVED_PRODUCT]],
-			[['person_id'], 'validateUniqueLoved', 'on' => [self::SCENARIO_LOVED_PRODUCT], 'params' => ['product_id' => $this->product_id]],
+
+			[['person_id', 'box_id'], 'required', 'on' => [self::SCENARIO_LOVED_BOX]],
+			[['box_id'], 'validateBoxExists', 'on' => [self::SCENARIO_LOVED_BOX]],
+
+			[['person_id', 'post_id'], 'required', 'on' => [self::SCENARIO_LOVED_POST]],
+			[['post_id'], 'validatePostExists', 'on' => [self::SCENARIO_LOVED_POST]],
 		];
 	}
 
@@ -153,9 +215,48 @@ class Loved extends CActiveRecord
 		$product = Product::findOneSerialized($product_id);
 		if (!$product) {
 			$this->addError($attribute, sprintf('Product %s not found', $product_id));
+			return;
 		}
 		if ($product->deviser_id == Yii::$app->user->identity->short_id) {
-			$this->addError($attribute, 'You cannot loved your own products');
+			$this->addError($attribute, 'You cannot love your own products');
+		}
+	}
+
+	/**
+	 * Custom validator for box_id
+	 *
+	 * @param $attribute
+	 * @param $params
+	 */
+	public function validateBoxExists($attribute, $params)
+	{
+		$short_id = $this->$attribute;
+		$item = Box::findOneSerialized($short_id);
+		if (!$item) {
+			$this->addError($attribute, sprintf('Item %s not found', $short_id));
+			return;
+		}
+		if ($item->person_id == Yii::$app->user->identity->short_id) {
+			$this->addError($attribute, 'You cannot love your own items');
+		}
+	}
+
+	/**
+	 * Custom validator for box_id
+	 *
+	 * @param $attribute
+	 * @param $params
+	 */
+	public function validatePostExists($attribute, $params)
+	{
+		$short_id = $this->$attribute;
+		$item = Post::findOneSerialized($short_id);
+		if (!$item) {
+			$this->addError($attribute, sprintf('Item %s not found', $short_id));
+			return;
+		}
+		if ($item->person_id == Yii::$app->user->identity->short_id) {
+			$this->addError($attribute, 'You cannot love your own items');
 		}
 	}
 
@@ -168,13 +269,35 @@ class Loved extends CActiveRecord
 	public function validateUniqueLoved($attribute, $params)
 	{
 		$person_id = $this->$attribute;
-		$product_id = $this->product_id;
-		$loved = Loved::findSerialized([
-			'person_id' => $person_id,
-			'product_id' => $product_id,
-		]);
-		if ($loved) {
-			$this->addError($attribute, sprintf('Product %s already loved by person %s', $product_id, $person_id));
+		if ($this->product_id) {
+			$product_id = $this->product_id;
+			$loved = Loved::findSerialized([
+				'person_id' => $person_id,
+				'product_id' => $product_id,
+			]);
+			if ($loved) {
+				$this->addError($attribute, sprintf('Product %s already loved by person %s', $product_id, $person_id));
+			}
+		}
+		if ($this->box_id) {
+			$box_id = $this->box_id;
+			$loved = Loved::findSerialized([
+				'person_id' => $person_id,
+				'box_id' => $box_id,
+			]);
+			if ($loved) {
+				$this->addError($attribute, sprintf('Box %s already loved by person %s', $box_id, $person_id));
+			}
+		}
+		if ($this->post_id) {
+			$post_id = $this->post_id;
+			$loved = Loved::findSerialized([
+				'person_id' => $person_id,
+				'post_id' => $post_id,
+			]);
+			if ($loved) {
+				$this->addError($attribute, sprintf('Post %s already loved by person %s', $post_id, $person_id));
+			}
 		}
 	}
 
@@ -198,6 +321,8 @@ class Loved extends CActiveRecord
 					'person' => "personPreview",
 					'product_id',
 					'product' => "productPreview",
+					'box_id',
+					'post_id',
 				];
 
 				static::$retrieveExtraFields = [
@@ -266,6 +391,16 @@ class Loved extends CActiveRecord
 			$query->andWhere(["product_id" => $criteria["product_id"]]);
 		}
 
+		// if product id is specified
+		if ((array_key_exists("box_id", $criteria)) && (!empty($criteria["box_id"]))) {
+			$query->andWhere(["box_id" => $criteria["box_id"]]);
+		}
+
+		// if product id is specified
+		if ((array_key_exists("post_id", $criteria)) && (!empty($criteria["post_id"]))) {
+			$query->andWhere(["post_id" => $criteria["post_id"]]);
+		}
+
 		// Count how many items are with those conditions, before limit them for pagination
 		static::$countItemsFound = $query->count();
 
@@ -328,17 +463,36 @@ class Loved extends CActiveRecord
 
 
 	/**
-	 * Get a preview version of the product related with this loved
+	 * Get the box related with this loved
 	 *
-	 * @return array
+	 * @return Box
 	 */
-	public function getProductPreview()
+	public function getBox()
 	{
-		$product = $this->getProduct();
+		Box::setSerializeScenario(Box::SERIALIZE_SCENARIO_PUBLIC);
 
-		return $product->getPreviewSerialized();
+		/** @var Box $box*/
+		$box= Box::findOneSerialized($this->box_id);
+
+		return $box;
 	}
-	
+
+
+	/**
+	 * Get the post related with this loved
+	 *
+	 * @return Post
+	 */
+	public function getPost()
+	{
+		Post::setSerializeScenario(Post::SERIALIZE_SCENARIO_PUBLIC);
+
+		/** @var Post $post */
+		$post = Post::findOneSerialized($this->post_id);
+
+		return $post;
+	}
+
 	public function getPerson() {
 		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_PUBLIC);
 
@@ -351,6 +505,22 @@ class Loved extends CActiveRecord
 		$person = $this->getPerson();
 
 		return $person->getPreviewSerialized();
+	}
+
+	/**
+	 * Get a preview version of the product related with this loved
+	 *
+	 * @return array
+	 */
+	public function getProductPreview()
+	{
+		$product = $this->getProduct();
+
+		if ($product) {
+			return $product->getPreviewSerialized();
+		}
+
+		return null;
 	}
 
 	/**

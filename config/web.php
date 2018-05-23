@@ -484,7 +484,9 @@ $config = [
 				'GET api3/priv/v1/loved/<lovedId:[^/.]*?>' => 'api3/priv/v1/loved/view',
 				'GET api3/priv/v1/loved' => 'api3/priv/v1/loved/index',
 				'POST api3/priv/v1/loved' => 'api3/priv/v1/loved/create',
-				'DELETE api3/priv/v1/loved/<productId:[^/.]*?>' => 'api3/priv/v1/loved/delete',
+				'DELETE api3/priv/v1/loved/<productId:[^/.]*?>' => 'api3/priv/v1/loved/delete-product',
+				'DELETE api3/priv/v1/loved/box/<boxId:[^/.]*?>' => 'api3/priv/v1/loved/delete-box',
+				'DELETE api3/priv/v1/loved/post/<postId:[^/.]*?>' => 'api3/priv/v1/loved/delete-post',
 
 				// Box - public
 				'GET api3/pub/v1/box/<boxId:[^/.]*?>' => 'api3/pub/v1/box/view',
@@ -499,7 +501,7 @@ $config = [
 				'DELETE api3/priv/v1/box/<boxId:[^/.]*?>/product/<productId:[^/.]*?>' => 'api3/priv/v1/box/delete-product',
 
 				// Story - public
-				'GET api3/pub/v1/story/<boxId:[^/.]*?>' => 'api3/pub/v1/story/view',
+				'GET api3/pub/v1/story/<storyId:[^/.]*?>' => 'api3/pub/v1/story/view',
 				'GET api3/pub/v1/story' => 'api3/pub/v1/story/index',
 				// Story - private
 				'GET api3/priv/v1/story' => 'api3/priv/v1/story/index',
@@ -508,6 +510,17 @@ $config = [
 				'PATCH api3/priv/v1/story/<storyId:[^/.]*?>' => 'api3/priv/v1/story/update',
 				'DELETE api3/priv/v1/story/<storyId:[^/.]*?>' => 'api3/priv/v1/story/delete',
 
+				// Story - public
+				'GET api3/pub/v1/post/<postId:[^/.]*?>' => 'api3/pub/v1/post/view',
+				'GET api3/pub/v1/post' => 'api3/pub/v1/post/index',
+				// Post - private
+				'GET api3/priv/v1/post' => 'api3/priv/v1/post/index',
+				'GET api3/priv/v1/post/<postId:[^/.]*?>' => 'api3/priv/v1/post/view',
+				'POST api3/priv/v1/post' => 'api3/priv/v1/post/create',
+				'PATCH api3/priv/v1/post/<postId:[^/.]*?>' => 'api3/priv/v1/post/update',
+				'DELETE api3/priv/v1/post/<postId:[^/.]*?>' => 'api3/priv/v1/post/delete',
+
+				
 				// Banner - private
 				'GET api3/priv/v1/banner' => 'api3/priv/v1/banner/index',
 				'GET api3/priv/v1/banner/<bannerId:[^/.]*?>' => 'api3/priv/v1/banner/view',
