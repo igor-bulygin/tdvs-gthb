@@ -485,6 +485,7 @@ $config = [
 				'GET api3/priv/v1/loved' => 'api3/priv/v1/loved/index',
 				'POST api3/priv/v1/loved' => 'api3/priv/v1/loved/create',
 				'DELETE api3/priv/v1/loved/<productId:[^/.]*?>' => 'api3/priv/v1/loved/delete-product',
+				'DELETE api3/priv/v1/loved/product/<productId:[^/.]*?>' => 'api3/priv/v1/loved/delete-product',
 				'DELETE api3/priv/v1/loved/box/<boxId:[^/.]*?>' => 'api3/priv/v1/loved/delete-box',
 				'DELETE api3/priv/v1/loved/post/<postId:[^/.]*?>' => 'api3/priv/v1/loved/delete-post',
 

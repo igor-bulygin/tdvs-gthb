@@ -322,7 +322,9 @@ class Loved extends CActiveRecord
 					'product_id',
 					'product' => "productPreview",
 					'box_id',
+					'box' => 'boxPreview',
 					'post_id',
+					'post' => 'postPreview',
 				];
 
 				static::$retrieveExtraFields = [
@@ -518,6 +520,38 @@ class Loved extends CActiveRecord
 
 		if ($product) {
 			return $product->getPreviewSerialized();
+		}
+
+		return null;
+	}
+
+	/**
+	 * Get a preview version of the box related with this loved
+	 *
+	 * @return array
+	 */
+	public function getBoxPreview()
+	{
+		$box = $this->getBox();
+
+		if ($box) {
+			return $box->getPreviewSerialized();
+		}
+
+		return null;
+	}
+
+	/**
+	 * Get a preview version of the post related with this loved
+	 *
+	 * @return array
+	 */
+	public function getPostPreview()
+	{
+		$post = $this->getPost();
+
+		if ($post) {
+			return $post->getPreviewSerialized();
 		}
 
 		return null;

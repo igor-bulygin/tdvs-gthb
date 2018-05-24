@@ -217,6 +217,7 @@ class Box extends CActiveRecord
 					'products' => "productsPreview",
 					'loveds',
 					'link' => 'viewLink',
+					'isLoved' => 'isLoved',
 				];
 
 				static::$retrieveExtraFields = [
@@ -629,5 +630,46 @@ class Box extends CActiveRecord
 	 */
 	public function getLoveds() {
 		return Loved::findSerialized(['box_id' => $this->short_id]);
+	}
+
+	/**
+	 * Wrapper of isLovedByCurrentUser to use in serialized fields
+	 *
+	 * @return bool
+	 */
+	public function getIsLoved() {
+		return $this->isLovedByCurrentUser();
+	}
+
+	/**
+	 * Returns TRUE if the box is loved by the connected user
+	 *
+	 * @return bool
+	 */
+	public function isLovedByCurrentUser() {
+		if (Yii::$app->user->isGuest) {
+			return false;
+		}
+		$person_id = Yii::$app->user->identity->short_id;
+
+		return Utils::boxLovedByPerson($this->short_id, $person_id);
+	}
+
+	/**
+	 * Get only preview attributes from box
+	 *
+	 * @return array
+	 */
+	public function getPreviewSerialized()
+	{
+		return [
+			"id" => $this->short_id,
+			"name" => $this->name,
+			"description" => $this->description,
+			"loveds" => $this->loveds,
+			'products' => $this->getProductsPreview(),
+			'isLoved' => $this->getIsLoved(),
+			'link' => $this->getViewLink(),
+		];
 	}
 }

@@ -687,6 +687,50 @@ class Utils
 	}
 
 	/**
+	 * Returns TRUE if the box is loved by de person especified by params
+	 *
+	 * @param string $box_id
+	 * @param string $person_id
+	 *
+	 * @return bool
+	 */
+	public static function boxLovedByPerson($box_id, $person_id) {
+		if (!isset(static::$loveds[$person_id])) {
+			$loveds = Loved::findSerialized(['person_id' => $person_id]);
+
+			$box_ids = [];
+			foreach ($loveds as $loved) {
+				$box_ids[] = $loved->box_id;
+			}
+			static::$loveds[$person_id] = $box_ids;
+		}
+
+		return in_array($box_id, static::$loveds[$person_id]);
+	}
+
+	/**
+	 * Returns TRUE if the post is loved by de person especified by params
+	 *
+	 * @param string $post_id
+	 * @param string $person_id
+	 *
+	 * @return bool
+	 */
+	public static function postLovedByPerson($post_id, $person_id) {
+		if (!isset(static::$loveds[$person_id])) {
+			$loveds = Loved::findSerialized(['person_id' => $person_id]);
+
+			$post_ids = [];
+			foreach ($loveds as $loved) {
+				$post_ids[] = $loved->post_id;
+			}
+			static::$loveds[$person_id] = $post_ids;
+		}
+
+		return in_array($post_id, static::$loveds[$person_id]);
+	}
+
+	/**
 	 * Returns TRUE when the error represents a "required" error
 	 *
 	 * @param array|string $error

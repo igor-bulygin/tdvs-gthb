@@ -177,6 +177,7 @@ class Post extends CActiveRecord
 					'photo_url' => 'photoUrl',
 					'loveds',
 					'published_at',
+					'isLoved' => 'isLoved',
 				];
 				static::$retrieveExtraFields = [
 				];
@@ -388,5 +389,48 @@ class Post extends CActiveRecord
 	 */
 	public function getLoveds() {
 		return Loved::findSerialized(['post_id' => $this->short_id]);
+	}
+
+	/**
+	 * Wrapper of isLovedByCurrentUser to use in serialized fields
+	 *
+	 * @return bool
+	 */
+	public function getIsLoved() {
+		return $this->isLovedByCurrentUser();
+	}
+
+	/**
+	 * Returns TRUE if the post is loved by the connected user
+	 *
+	 * @return bool
+	 */
+	public function isLovedByCurrentUser() {
+		if (Yii::$app->user->isGuest) {
+			return false;
+		}
+		$person_id = Yii::$app->user->identity->short_id;
+
+		return Utils::postLovedByPerson($this->short_id, $person_id);
+	}
+
+	/**
+	 * Get only preview attributes from box
+	 *
+	 * @return array
+	 */
+	public function getPreviewSerialized()
+	{
+		return [
+			"id" => $this->short_id,
+			'post_state' => $this->post_state,
+			'person_id' => $this->person_id,
+			'text' => $this->text,
+			'photo' => $this->photo,
+			'photo_url' => $this->getPhotoUrl(),
+			'loveds' => $this->loveds,
+			'published_at' => $this->published_at,
+			'isLoved' => $this->getIsLoved(),
+		];
 	}
 }

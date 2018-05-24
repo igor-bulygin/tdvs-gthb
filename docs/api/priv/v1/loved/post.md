@@ -13,7 +13,12 @@ Example about how to call to Web Service to create a new loved
 * `403`: Forbidden
   
 **Request body**: 
-* `product_id`: Product identifier. (Required)
+
+* `product_id`: Product identifier
+* `box_id`: Box identifier
+* `post_id`: Post identifier
+
+You need to specify only one type of object.
 
 **Notes**
 The loved is automatically asigned to the connected user
