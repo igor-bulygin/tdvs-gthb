@@ -31,6 +31,8 @@
 			}
 		});
 
+		var Post = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'post');
+
 		//methods
 		this.getPeople = getPeople;
 		this.createClient = createClient;
@@ -46,6 +48,8 @@
 		this.resetPassword = resetPassword;
 		this.followPerson = followPerson;
 		this.unFollowPerson = unFollowPerson;
+		this.getPost = getPost;
+		this.publishPost = publishPost;
 
 		function getPeople(params, onSuccess, onError) {
 			apiMethods.get(Person, params, onSuccess, onError);
@@ -104,6 +108,14 @@
 
 		function unFollowPerson(data, params, onSuccess, onError) {
 			apiMethods.update(UnFollowed,data, params, onSuccess, onError);
+		}
+
+		function getPost(params, onSuccess, onError) {
+			apiMethods.get(Post, params, onSuccess, onError);
+		}
+
+		function publishPost(data, onSuccess, onError) {
+			apiMethods.create(Post, data, null, onSuccess, onError);
 		}
 	}
 
