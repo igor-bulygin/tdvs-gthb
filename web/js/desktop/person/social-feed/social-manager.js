@@ -109,7 +109,7 @@
 			//upload photos
 			angular.forEach(vm.files, function(file) {
 				var data = {
-					type: 'banner-image',
+					type: 'post-photos',
 					file: file
 				};
 				uploadDataService.UploadFile(data,
