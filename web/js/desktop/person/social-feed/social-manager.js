@@ -8,6 +8,7 @@
 		vm.showCreatePost = false;
 		vm.selected_language=_lang;
 		vm.stripHTMLTags = UtilService.stripHTMLTags;
+		vm.truncateString = UtilService.truncateString;
 		vm.uploadPhoto = uploadPhoto;
 		vm.showNewPost = showNewPost;
 		vm.createPost = createPost;
@@ -57,7 +58,8 @@
 		function createPost() {
 			vm.loading = true;
 			function onGetPostsSuccess(data) {
-				vm.posts = data.items; 
+				vm.posts.push(data); 
+				vm.showCreatePost = true;
 				vm.loading = false;
 			}
 
@@ -80,7 +82,7 @@
 				if (!vm.newPost.photo) {
 					vm.newPost.photo= {};
 				}
-				vm.newPost.photo= data.data.url;
+				vm.newPost.photo= data.data.filename;
 				vm.newImage=currentHost() + data.data.url;
 				var index=-1;
 				angular.forEach(vm.tempFiles, function(uploadingFile) {

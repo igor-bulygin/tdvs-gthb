@@ -31,7 +31,7 @@ $this->params['person_links_target'] = 'public_view';
 				<?= PersonMenu::widget() ?>
 			</div>
 			<div class="col-md-10">
-				<div class="empty-wrapper" ng-if="socialManagerCtrl.posts.length < 1 && !socialManagerCtrl.showCreatePost">
+				<div class="empty-wrapper" ng-if="socialManagerCtrl.posts.length < 1 && !socialManagerCtrl.showCreatePost" ng-cloak>
 					<?php if ($person->isConnectedUser()) { ?>
 						<img class="sad-face" src="/imgs/sad-face.svg">
 						<p class="no-video-text"><span translate="person.posts.NO_POSTS"></span></p>
@@ -40,7 +40,7 @@ $this->params['person_links_target'] = 'public_view';
 						<p class="no-video-text"><?=$person->getName()?> <span translate="person.posts.USER_NO_POSTS"></span></p>
 					<?php } ?>
 				</div>
-				<div ng-if="socialManagerCtrl.showCreatePost">
+				<div ng-if="socialManagerCtrl.showCreatePost" ng-cloak>
 					<div class="stories-wrapper">
 						<div>
 							<div class="story-component-wrapper">
@@ -62,13 +62,13 @@ $this->params['person_links_target'] = 'public_view';
 													<span class="faq-edit-question"><span translate="person.posts.DESCRIPTION"></span></span>
 												</div>
 												<div class="col-sm-10">
-													<div class="faq-edit-answer" text-angular ng-model="socialManagerCtrl.newPost.text[socialManagerCtrl.newPost.languageSelected]" ta-toolbar="[]" translate-attr="{placeholder: 'person.posts.DESCRIPTION'}" ta-paste="socialManagerCtrl.stripHTMLTags($html)"></div>
+													<div class="faq-edit-answer" text-angular ng-model="socialManagerCtrl.newPost.text[socialManagerCtrl.newPost.selected_language]" ta-toolbar="[]" translate-attr="{placeholder: 'person.posts.DESCRIPTION'}" ta-paste="socialManagerCtrl.stripHTMLTags($html)"></div>
 												</div>
 											</div>
 										</div>
 									</div>
-									<ol class="faq-lang nya-bs-select form-control" ng-model="post.languageSelected" ng-change="socialManagerCtrl.parseText(post)" ng-init="post.languageSelected=socialManagerCtrl.selected_language">
-										<li nya-bs-option="language in socialManagerCtrl.languages" class="ng-class:{'lang-selected': socialManagerCtrl.isLanguageOk(language.code, post)}" data-value="language.code" deep-watch="true">
+									<ol class="faq-lang nya-bs-select form-control" ng-model="socialManagerCtrl.newPost.selected_language" ng-change="socialManagerCtrl.parseText(socialManagerCtrl.newPost)" ng-init="socialManagerCtrl.newPost.selected_language = socialManagerCtrl.selected_language">
+										<li nya-bs-option="language in socialManagerCtrl.languages" class="ng-class:{'lang-selected': socialManagerCtrl.isLanguageOk(language.code, socialManagerCtrl.newPost)}" data-value="language.code" deep-watch="true">
 											<a href="">
 												<span ng-bind="language.name"></span>
 												<span class="glyphicon glyphicon-ok ok-white-icon pull-right" ng-if="socialManagerCtrl.isLanguageOk(language.code,post)"></span>
@@ -83,28 +83,18 @@ $this->params['person_links_target'] = 'public_view';
 						</div>
 					</div>
 				</div>
-				<div ng-if="socialManagerCtrl.posts.length > 0 && !socialManagerCtrl.showCreatePost">
+				<div ng-if="socialManagerCtrl.posts.length > 0 && !socialManagerCtrl.showCreatePost" ng-cloak>
 					<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
 						<button class="btn btn-red btn-add-box" ng-click="socialManagerCtrl.showNewPost()"><span translate="person.posts.ADD_POST"></span></button>
 					</div>
 					<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" ng-repeat="post in socialManagerCtrl.posts" ng-cloak>
 						<div class="menu-category list-group" >
 							<div class="grid">
-								<figure class="effect-zoe">
-									<image-hover-buttons product-id="{{post.id}}" is-loved="{{post.isLoved}}">
-										<a>
-											<img class="grid-image" ng-src="{{post.photo}}">
-											<span class="img-bgveil"></span>
-										</a>
-									</image-hover-buttons>
-									<a>
-										<figcaption>
-											<p class="instauser">
-												<span ng-bind="socialManagerCtrl.truncateString(post.text, 18, '…')"></span>
-											</p>
-										</figcaption>
-									</a>
-								</figure>
+									<img class="grid-image" ng-src="{{post.photo_url}}">
+									<span ng-bind="post.loveds"></span>
+									<span class="icons-hover heart-icon" ng-class="post.loveds >0 ? 'heart-red-icon' : 'heart-black-icon'"></span>
+									<span ng-bind-html="socialManagerCtrl.truncateString(post.text, 18, '…')"></span>
+											
 							</div>
 						</div>
 					</div>
