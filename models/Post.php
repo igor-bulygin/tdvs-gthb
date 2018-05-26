@@ -139,7 +139,7 @@ class Post extends CActiveRecord
 
 			['person_id', 'app\validators\PersonIdValidator'],
 
-			['text', 'app\validators\TranslatableRequiredValidator'],
+			['text', 'app\validators\TranslatableValidator'],
 
 			[
 				'photo',
