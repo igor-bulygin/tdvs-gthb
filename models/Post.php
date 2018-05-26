@@ -260,6 +260,20 @@ class Post extends CActiveRecord
 			$query->andWhere(["post_state" => $criteria["post_state"]]);
 		}
 
+		// if only_active_persons are specified
+		if ((array_key_exists("only_active_persons", $criteria)) && (!empty($criteria["only_active_persons"]))) {
+			// Get different person_ids available by country
+			$queryPerson= new ActiveQuery(Person::className());
+			$queryPerson->andWhere(["account_state" => Person::ACCOUNT_STATE_ACTIVE]);
+			$idsPerson = $queryPerson->distinct("short_id");
+
+			if ($idsPerson) {
+				$query->andFilterWhere(["in", "person_id", $idsPerson]);
+			} else {
+				$query->andFilterWhere(["in", "person_id", "dummy_person"]); // Force no results if there are no boxes
+			}
+		}
+
 		// if text is specified
 		if ((array_key_exists("text", $criteria)) && (!empty($criteria["text"]))) {
 //			// search the word in all available languages
