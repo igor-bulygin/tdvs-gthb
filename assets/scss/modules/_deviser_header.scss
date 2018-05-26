@@ -112,7 +112,7 @@
             .description{
                 @extend %white-text;
                 max-width: 350px;
-                margin-top: 30px;
+                margin-top: 20px;
             }
         }
     }
@@ -222,7 +222,8 @@
 .edit-profile-btn{
     position: absolute;
     top: 115px;
-    left: 14px;
+    //left: 14px;
+    right: 25px;
 }
 .powered-google{
 	width:100px;
@@ -250,4 +251,37 @@
             left: calc(50% - 60px);
         }
     }
+}
+// ==========================================================================
+// Deviser Followers
+// ==========================================================================
+.deviser-followers {    
+    position: absolute;
+    bottom: 20px;
+    font-size: 14px;
+    color: $white;
+    text-transform: uppercase;
+    line-height: 1.5em;
+    .position-followers{
+        left: 16px;
+    }
+    .position-following{
+        left:110px;
+    }
+    p {
+        text-align: center;
+        margin: auto;
+        font-size: 1.1em;
+    }
+    .num {
+        font-size: 1.4em;
+    }
+}
+.more-options {
+    right: -30px;
+    top: 10px;
+    position: absolute;
+}
+.more-options-icon{
+    background: url(/imgs/more-options-icon.svg) 0 0 no-repeat transparent;
 }
