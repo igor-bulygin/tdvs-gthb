@@ -14,6 +14,7 @@ use yii\mongodb\ActiveQuery;
  * @property string $person_id
  * @property string name
  * @property string description
+ * @property int loveds
  * @property BoxProduct[] productsMapping
  * @property MongoDate created_at
  * @property MongoDate updated_at
@@ -52,6 +53,7 @@ class Box extends CActiveRecord
 			'person_id',
 			'name',
 			'description',
+			'loveds',
 			'products',
 			'created_at',
 			'updated_at',
@@ -82,6 +84,8 @@ class Box extends CActiveRecord
 		$this->short_id = Utils::shortID(7);
 
 		$this->products = [];
+
+		$this->loveds = 0;
 	}
 
 	public function embedProductsMapping()
@@ -98,6 +102,10 @@ class Box extends CActiveRecord
 
 	public function beforeSave($insert)
 	{
+		if (!isset($this->loveds)) {
+			$this->loveds = 0;
+		}
+
 		if ($insert) {
 			$this->created_at = new MongoDate();
 		}
@@ -109,6 +117,16 @@ class Box extends CActiveRecord
 	public function afterSave($insert, $changedAttributes)
 	{
 		parent::afterSave($insert, $changedAttributes);
+	}
+
+	public function beforeDelete() {
+
+		$loveds = $this->getLoveds();
+		foreach ($loveds as $loved) {
+			$loved->delete();
+		}
+
+		return parent::beforeDelete();
 	}
 
 	public function afterDelete()
@@ -197,7 +215,9 @@ class Box extends CActiveRecord
 					'name',
 					'description',
 					'products' => "productsPreview",
+					'loveds',
 					'link' => 'viewLink',
+					'isLoved' => 'isLoved',
 				];
 
 				static::$retrieveExtraFields = [
@@ -601,5 +621,55 @@ class Box extends CActiveRecord
 		}
 
 		return $boxes;
+	}
+
+	/**
+	 * Returns Loveds from the box
+	 *
+	 * @return Loved[]
+	 */
+	public function getLoveds() {
+		return Loved::findSerialized(['box_id' => $this->short_id]);
+	}
+
+	/**
+	 * Wrapper of isLovedByCurrentUser to use in serialized fields
+	 *
+	 * @return bool
+	 */
+	public function getIsLoved() {
+		return $this->isLovedByCurrentUser();
+	}
+
+	/**
+	 * Returns TRUE if the box is loved by the connected user
+	 *
+	 * @return bool
+	 */
+	public function isLovedByCurrentUser() {
+		if (Yii::$app->user->isGuest) {
+			return false;
+		}
+		$person_id = Yii::$app->user->identity->short_id;
+
+		return Utils::boxLovedByPerson($this->short_id, $person_id);
+	}
+
+	/**
+	 * Get only preview attributes from box
+	 *
+	 * @return array
+	 */
+	public function getPreviewSerialized()
+	{
+		return [
+			"id" => $this->short_id,
+			"name" => $this->name,
+			"description" => $this->description,
+			"loveds" => $this->loveds,
+			'products' => $this->getProductsPreview(),
+			'isLoved' => $this->getIsLoved(),
+			'link' => $this->getViewLink(),
+		];
 	}
 }

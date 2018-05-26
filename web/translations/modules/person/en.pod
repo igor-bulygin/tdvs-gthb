@@ -170,6 +170,14 @@
 			"WRITE_DESCRIPTION_HERE": "Please write a short description here",
 			"SAVE_EXIT": "Save & exit"
 		},
+		"posts": {
+			"NO_POSTS": "You don't have any posts yet.",
+			"USER_NO_POSTS": "has no posts.",
+			"ADD_BOX": "Add a post",
+			"DESCRIPTION":"Description",
+			"PUBLISH":"Post",
+			"NEW_POST":"New post"
+		},
 		"SAVE_CHANGES_EXIT": "Save changes & exit",
 		"DELETE_WORK_QUESTION": "Are you sure you want to delete this work?",
 		"EDIT_WORK": "Edit work"

@@ -62,6 +62,8 @@ class LovedController extends AppPrivateController
 			$loved->setScenario(Loved::SCENARIO_LOVED_PRODUCT);
 		} elseif (Yii::$app->request->post('box_id')) {
 			$loved->setScenario(Loved::SCENARIO_LOVED_BOX);
+		} elseif (Yii::$app->request->post('post_id')) {
+			$loved->setScenario(Loved::SCENARIO_LOVED_POST);
 		}
 		$loved->person_id = Yii::$app->user->identity->short_id;
 		if ($loved->load(Yii::$app->request->post(), '') && $loved->validate()) {
@@ -76,11 +78,49 @@ class LovedController extends AppPrivateController
 		}
 	}
 
-	public function actionDelete($productId)
+	public function actionDeleteProduct($productId)
 	{
 		/** @var Loved $loved */
 		$loveds = Loved::findSerialized([
 			'product_id' => $productId,
+			'person_id' => Yii::$app->user->identity->short_id,
+		]);
+		if (!$loveds) {
+			throw new NotFoundHttpException('Loved not found');
+
+		}
+		foreach ($loveds as $loved) {
+			$loved->delete();
+		}
+		Yii::$app->response->setStatusCode(204); // No content
+
+		return null;
+	}
+
+	public function actionDeleteBox($boxId)
+	{
+		/** @var Loved $loved */
+		$loveds = Loved::findSerialized([
+			'box_id' => $boxId,
+			'person_id' => Yii::$app->user->identity->short_id,
+		]);
+		if (!$loveds) {
+			throw new NotFoundHttpException('Loved not found');
+
+		}
+		foreach ($loveds as $loved) {
+			$loved->delete();
+		}
+		Yii::$app->response->setStatusCode(204); // No content
+
+		return null;
+	}
+
+	public function actionDeletePost($postId)
+	{
+		/** @var Loved $loved */
+		$loveds = Loved::findSerialized([
+			'post_id' => $postId,
 			'person_id' => Yii::$app->user->identity->short_id,
 		]);
 		if (!$loveds) {

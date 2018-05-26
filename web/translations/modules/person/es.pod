@@ -171,6 +171,14 @@
 			"WRITE_DESCRIPTION_HERE": "Por favor, escribe una breve descripción",
 			"SAVE_EXIT": "Guardar & salir"
 		},
+		"posts": {
+			"NO_POSTS": "You don't have any posts yet.",
+			"USER_NO_POSTS": "has no posts.",
+			"ADD_POST": "Add a post",
+			"DESCRIPTION":"Description",
+			"PUBLISH":"Post",
+			"NEW_POST":"Nuevo post"
+		},
 		"DELETE_WORK_QUESTION": "¿Seguro que quieres borrar este trabajo?",
 		"EDIT_WORK": "Editar trabajo",
 		"SAVE_EXIT": "Guardar y salir"

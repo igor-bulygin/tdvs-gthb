@@ -42,8 +42,16 @@ $this->params['person_links_target'] = 'public_view';
 							</li>
 						</ul>
 					</nav>
+					<nav>
+						<ul>
+							<li role="button" class="active toggle toggle-all" onclick="togglePersons('all')">All</li>
+							<li role="button" class="toggle toggle-influencer" onclick="togglePersons('influencer')">Influencers</li>
+							<li role="button" class="toggle toggle-deviser" onclick="togglePersons('deviser')">Devisers</li>
+							<li role="button" class="toggle toggle-client" onclick="togglePersons('client')">Members</li>
+						</ul>
+					</nav>
 					<?php foreach ($persons as $person) { ?>
-						<div class="col-md-4">
+						<div class="col-md-4 person person-<?=$person->getPersonTypeForUrl()?>">
 							<?=\app\components\Person::widget(['person' => $person]) ?>
 						</div>
 					<?php } ?>
@@ -52,3 +60,16 @@ $this->params['person_links_target'] = 'public_view';
 		</div>
 	</div>
 </div>
+
+<script>
+	function togglePersons(type) {
+		if (type == 'all') {
+			$('.person').show();
+		} else {
+			$('.person').hide();
+			$('.person-'+type).show();
+		}
+		$('.toggle').removeClass('active');
+		$('.toggle.toggle-'+type).addClass('active');
+	}
+</script>
