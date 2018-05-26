@@ -45,6 +45,14 @@
     background: url('/imgs/chat-red.svg') 0 0 no-repeat transparent;
 }
 
+/*more-options*/
+%more-options-icon{
+    background: url('/imgs/more-options-icon.svg') 0 0 no-repeat transparent;
+    width: 14px;
+    height: 20px;
+    padding: 10px 0;
+}
+
 //.banner-deviser-content .deviser-profile .avatar img
 // es el que tenemos que poner en blanco
 %link-red{

@@ -650,7 +650,7 @@ a, a:hover, a:focus {
   text-transform: uppercase;
   text-align: center;
   letter-spacing: 0.02em;
-  padding: 0.5em 0 !important;
+  padding: 0.45em 0 !important;
   margin: auto !important;
   border: none;
   border-radius: 0.25em 0.25em 0.25em 0.25em !important;
@@ -789,13 +789,12 @@ a.btn span {
     color: #ffffff; }
 
 .btn-follow {
-  background-color: #e9e9e9;
-  color: #1C1919;
-  padding: 5px 20px;
-  letter-spacing: 0.5px;
-  z-index: 12; }
-  .btn-follow i {
-    padding-right: 5px; }
+  height: auto;
+  margin: 0.4em 0 !important;
+  z-index: 12;
+  /*i{
+      padding-right: 5px;
+  }*/ }
 
 /*botones rectangulares*/
 .full-size-btn {
@@ -5428,7 +5427,7 @@ h3 {
             font-size: 1em; } }
       .banner-deviser-content .deviser-profile .deviser-data .description {
         max-width: 350px;
-        margin-top: 30px; }
+        margin-top: 20px; }
 
 .deviser-data-edit {
   position: absolute;
@@ -5530,7 +5529,7 @@ h3 {
 .edit-profile-btn {
   position: absolute;
   top: 115px;
-  left: 14px; }
+  right: 25px; }
 
 .powered-google {
   width: 100px;
@@ -5556,6 +5555,32 @@ h3 {
     .icon-deviser img {
       position: absolute;
       left: calc(50% - 60px); } }
+
+.deviser-followers {
+  position: absolute;
+  bottom: 20px;
+  font-size: 14px;
+  color: #ffffff;
+  text-transform: uppercase;
+  line-height: 1.5em; }
+  .deviser-followers .position-followers {
+    left: 16px; }
+  .deviser-followers .position-following {
+    left: 110px; }
+  .deviser-followers p {
+    text-align: center;
+    margin: auto;
+    font-size: 1.1em; }
+  .deviser-followers .num {
+    font-size: 1.4em; }
+
+.more-options {
+  right: -30px;
+  top: 10px;
+  position: absolute; }
+
+.more-options-icon {
+  background: url(/imgs/more-options-icon.svg) 0 0 no-repeat transparent; }
 
 .store {
   background-color: #ffffff; }
