@@ -8,6 +8,7 @@
 		var Logout = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'auth/logout');
 		var PassResetRequest = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'auth/forgot-password');
 		var PassReset = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'auth/reset-password');
+		var PublicPost = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'post/:personId');
 		
 		//priv
 		var Profile = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'person/:personId', {}, {
@@ -31,7 +32,11 @@
 			}
 		});
 
-		var Post = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'post');
+		var Post = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'post/:postId', {}, {
+			'update': {
+				method: 'PATCH'
+			}
+		});
 
 		//methods
 		this.getPeople = getPeople;
@@ -50,6 +55,8 @@
 		this.unFollowPerson = unFollowPerson;
 		this.getPost = getPost;
 		this.publishPost = publishPost;
+		this.updatePost = updatePost;
+		this.getOwnerPost = getOwnerPost;
 
 		function getPeople(params, onSuccess, onError) {
 			apiMethods.get(Person, params, onSuccess, onError);
@@ -110,12 +117,20 @@
 			apiMethods.update(UnFollowed,data, params, onSuccess, onError);
 		}
 
-		function getPost(params, onSuccess, onError) {
+		function getOwnerPost(params, onSuccess, onError) {
 			apiMethods.get(Post, params, onSuccess, onError);
 		}
 
 		function publishPost(data, onSuccess, onError) {
 			apiMethods.create(Post, data, null, onSuccess, onError);
+		}
+
+		function updatePost(data, params, onSuccess, onError) {
+			apiMethods.update(Post,data, params, onSuccess, onError);
+		}
+
+		function getPost(params, onSuccess, onError) {
+			apiMethods.get(PublicPost, params, onSuccess, onError);
 		}
 	}
 

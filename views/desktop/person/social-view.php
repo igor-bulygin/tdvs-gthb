@@ -32,15 +32,16 @@ $this->params['person_links_target'] = 'public_view';
 			</div>
 			<div class="col-md-10">
 				<div class="empty-wrapper" ng-if="socialManagerCtrl.posts.length < 1 && !socialManagerCtrl.showCreatePost" ng-cloak>
-					<?php if ($person->isConnectedUser()) { ?>
+					<div ng-if="socialManagerCtrl.isConnectedUser()">
 						<img class="sad-face" src="/imgs/sad-face.svg">
 						<p class="no-video-text"><span translate="person.posts.NO_POSTS"></span></p>
 						<button  class="btn btn-red btn-add-box" ng-click="socialManagerCtrl.showNewPost()"><span translate="person.posts.ADD_POST"></span></button>
-					<?php } else { ?>
+					</div>
+					<div ng-if="!socialManagerCtrl.isConnectedUser()">
 						<p class="no-video-text"><?=$person->getName()?> <span translate="person.posts.USER_NO_POSTS"></span></p>
-					<?php } ?>
+					</div>
 				</div>
-				<div ng-if="socialManagerCtrl.showCreatePost" ng-cloak>
+				<div ng-if="socialManagerCtrl.showCreatePost && socialManagerCtrl.isConnectedUser()" ng-cloak>
 					<div class="stories-wrapper">
 						<div>
 							<div class="story-component-wrapper">
@@ -53,8 +54,7 @@ $this->params['person_links_target'] = 'public_view';
 											</div>
 											<div class="col-md-12" ng-if="socialManagerCtrl.newPost.photo" ng-cloak>
 												<img class="grid-image" ng-src="{{socialManagerCtrl.newImage}}">
-											</div>
-											
+											</div>											
 										</div>
 										<div class="col-xs-8 faq-language-menu">
 											<div class="faq-row">
@@ -84,7 +84,7 @@ $this->params['person_links_target'] = 'public_view';
 					</div>
 				</div>
 				<div ng-if="socialManagerCtrl.posts.length > 0 && !socialManagerCtrl.showCreatePost" ng-cloak>
-					<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+					<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" ng-if="socialManagerCtrl.isConnectedUser()" ng-cloak>
 						<button class="btn btn-red btn-add-box" ng-click="socialManagerCtrl.showNewPost()"><span translate="person.posts.ADD_POST"></span></button>
 					</div>
 					<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" ng-repeat="post in socialManagerCtrl.posts" ng-cloak>
@@ -92,7 +92,7 @@ $this->params['person_links_target'] = 'public_view';
 							<div class="grid">
 									<img class="grid-image" ng-src="{{post.photo_url}}">
 									<span ng-bind="post.loveds"></span>
-									<span class="icons-hover heart-icon" ng-class="post.loveds >0 ? 'heart-red-icon' : 'heart-black-icon'"></span>
+									<span class="icons-hover heart-icon" ng-class="post.loveds > 0 ? 'heart-red-icon' : 'heart-black-icon'" ng-click="socialManagerCtrl.lovePost(post)"></span>
 									<span ng-bind-html="socialManagerCtrl.truncateString(post.text, 18, '…')"></span>
 											
 							</div>

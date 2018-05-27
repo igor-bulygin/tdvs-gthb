@@ -9,15 +9,21 @@
 		vm.selected_language=_lang;
 		vm.stripHTMLTags = UtilService.stripHTMLTags;
 		vm.truncateString = UtilService.truncateString;
+		vm.isConnectedUser = isConnectedUser;
 		vm.uploadPhoto = uploadPhoto;
 		vm.showNewPost = showNewPost;
 		vm.createPost = createPost;
+		vm.lovePost = lovePost;
 		init();
 
 		function init() {
 			getLanguages();
 			getPosts();
 		}
+
+		function isConnectedUser() {
+			return UtilService.isConnectedUser(person.short_id);
+	}
 
 		function getPosts() {
 			vm.loading = true;
@@ -123,6 +129,27 @@
 					});
 			});
 		}
+
+		function lovePost(post) {
+			//if (post.person_id === person.short_id) {
+			//	return;
+			//}
+			vm.loading = true;
+			function onLovePostSuccess(data) {
+				post.loveds = data.loveds;
+				vm.loading = false;
+			}
+
+			function onLovePostError(err) {
+				vm.loading = false;
+				UtilService.onError(err);
+			}
+			var params = {
+
+			}
+			personDataService.updatePost(post,{postId :post.id}, onLovePostSuccess, onLovePostError);
+		}
+
 
 	}
 
