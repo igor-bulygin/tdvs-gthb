@@ -1,40 +1,39 @@
-(function () {
-	"use strict";
+(function() {
+    "use strict";
 
-	function controller() {
-		var vm = this;
-		vm.ok = ok;
-		vm.dismiss = dismiss;
+    function controller() {
+        var vm = this;
+        vm.ok = ok;
+        vm.dismiss = dismiss;
 
-		init();
+        init();
 
-		function init() {
-		}
+        function init() {}
 
-		function ok() {
-			vm.close({
-				$value: vm.resolve.link
-			})
-		}
+        function ok() {
+            vm.close({
+                $value: vm.resolve.link
+            })
+        }
 
-		function dismiss(){
-			vm.close();
-		}
-	}
+        function dismiss() {
+            vm.close();
+        }
+    }
 
-	var component = {
-		templateUrl: currentHost() + '/js/desktop/person/social-feed/modal-post-details/modal-post-details.html',
-		controller: controller,
-		controllerAs: 'modalPostDetailsCtrl',
-		bindings: {
-			resolve: '<',
-			close: '&',
-			dismiss: '&'
-		}
-	}
+    var component = {
+        templateUrl: currentHost() + '/js/desktop/person/social-feed/modal-post-details/modal-post-details.html',
+        controller: controller,
+        controllerAs: 'modalPostDetailsCtrl',
+        bindings: {
+            resolve: '<',
+            close: '&',
+            dismiss: '&'
+        }
+    }
 
-	angular
-		.module('person')
-		.component('modalPostDetails', component);
+    angular
+        .module('person')
+        .component('modalPostDetails', component);
 
 }());
