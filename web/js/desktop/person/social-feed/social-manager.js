@@ -17,6 +17,8 @@
         vm.unLovePost = unLovePost;
         vm.maxCharacters = 18;
         vm.openPostDetailsModal = openPostDetailsModal;
+        vm.editPost = editPost;
+        vm.deletePost = deletePost;
 
         init();
 
@@ -70,20 +72,31 @@
         function createPost() {
             vm.loading = true;
 
-            function onGetPostsSuccess(data) {
+            function onCreatePostsSuccess(data) {
                 vm.posts.push(data);
-                vm.showCreatePost = true;
+                vm.showCreatePost = false;
                 vm.loading = false;
             }
 
-            function onGetPostsError(err) {
+            function onUpdatePostsSuccess(data) {
+                getPosts();
+                vm.showCreatePost = false;
+                vm.loading = false;
+            }
+
+            function onCreatePostsError(err) {
                 vm.loading = false;
                 UtilService.onError(err);
             }
             var params = {
 
             }
-            personDataService.publishPost(vm.newPost, onGetPostsSuccess, onGetPostsError);
+            if (vm.isEdition) {
+                vm.isEdition = false;
+                personDataService.updatePost(vm.newPost, onUpdatePostsSuccess, onCreatePostsError);
+            } else {
+                personDataService.publishPost(vm.newPost, onCreatePostsSuccess, onCreatePostsError);
+            }
         }
 
 
@@ -189,6 +202,24 @@
                 UtilService.onError(err);
             });
         }
+
+        function editPost(postId) {
+            vm.isEdition = true;
+
+            function onGetPostsSuccess(data) {
+                vm.newPost = data;
+                vm.showCreatePost = true;
+                vm.loading = false;
+            }
+
+            function onGetPostsError(err) {
+                vm.loading = false;
+                UtilService.onError(err);
+            }
+            personDataService.getOwnerPost({ id: postId }, onGetPostsSuccess, onGetPostsError);
+        }
+
+        function deletePost(postId) {}
 
 
     }

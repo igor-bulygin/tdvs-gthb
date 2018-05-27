@@ -47,8 +47,11 @@ $this->params['person_links_target'] = 'public_view';
 							<div class="story-component-wrapper">
 								<div class="col-xs-12 edit-faq-panel-wrapper">
 									<div class="edit-faq-panel">
-										<h5 class="stories-title"><span translate="person.posts.NEW_POST"></span></h5>
-										<div class="col-xs-4">
+										<h5 class="stories-title">
+											<span ng-if="!socialManagerCtrl.isEdition" translate="person.posts.NEW_POST"></span>
+											<span ng-if="socialManagerCtrl.isEdition" translate="person.posts.EDIT_POST"></span>
+										</h5>
+										<div class="col-xs-4" ng-if="!socialManagerCtrl.isEdition">
 											<div class="col-md-12" ng-if="!socialManagerCtrl.newPost.photo">
 												<div class="button no-pad" name="file" ngf-select="socialManagerCtrl.uploadPhoto($files, $invalidFiles)"  ngf-accept="'image/*'"  ngf-drop-available="socialManagerCtrl.isDropAvailable" ngf-multiple="false"><a style="cursor:pointer;" class="btn btn-small btn-red">upload</a></div>
 											</div>
@@ -98,7 +101,10 @@ $this->params['person_links_target'] = 'public_view';
 									</div>
 									<span class="col-xs-12" ng-bind-html="socialManagerCtrl.truncateString(post.text, socialManagerCtrl.maxCharacters, '...')"></span>
 									<a ng-if="post.text.length > socialManagerCtrl.maxCharacters && !socialManagerCtrl.viewingConnectedUser()" class="col-xs-12" ng-click="socialManagerCtrl.openPostDetailsModal(post)"><span translate="person.posts.SEE_MORE"></span></a>
-									<a ng-if="socialManagerCtrl.viewingConnectedUser()" class="col-xs-12" ng-click="socialManagerCtrl.editPost(post)"><span class="icons-hover pencil-edit"></span></a>
+									<div ng-if="socialManagerCtrl.viewingConnectedUser()" >
+										<a class="col-xs-6" ng-click="socialManagerCtrl.editPost(post.id)"><span class="edit-product-icon">editar</span></a>
+										<a class="col-xs-6" ng-click="socialManagerCtrl.deletePost(post.id)"><span class="close-product-icon-left"></span></a>
+									</div>
 							</div>
 						</div>
 					</div>
