@@ -36,7 +36,12 @@
 				vm.loading = false;
 				UtilService.onError(err);
 			}
-			personDataService.getPost({}, onGetPostsSuccess, onGetPostsError);
+			if (isConnectedUser) {
+			personDataService.getOwnerPost({}, onGetPostsSuccess, onGetPostsError);
+			}
+			else {
+				personDataService.getPost({}, onGetPostsSuccess, onGetPostsError);
+			}
 		}
 
 		function showNewPost() {
