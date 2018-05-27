@@ -26,8 +26,8 @@ $isFollowed = $person->isFollowedByConnectedUser() ? 'true' : 'false';
 					</a>
 				</div>
 				<div class="col-md-6">
-					<button  class="btn btn-icon mt-5" ng-click="personComponentCtrl.unFollow('<?=$person->short_id?>')" ng-cloak ng-if="personComponentCtrl.isFollowed"><i class="ion-ios-star"></i><span><span translate="discover.FOLLOW"></span></span></button>
-					<button class="btn btn-icon mt-5" ng-click="personComponentCtrl.follow('<?=$person->short_id?>')" ng-cloak ng-if="!personComponentCtrl.isFollowed"><i class="ion-ios-star red-text"></i><span><span translate="discover.UNFOLLOW"></span></span></button>
+					<button  class="btn btn-follow full-size-btn btn-icon" ng-click="personComponentCtrl.unFollow('<?=$person->short_id?>')" ng-cloak ng-if="personComponentCtrl.isFollowed"><i class="ion-ios-star"></i><span><span translate="discover.FOLLOW"></span></span></button>
+					<button class="btn btn-follow full-size-btn btn-red" ng-click="personComponentCtrl.follow('<?=$person->short_id?>')" ng-cloak ng-if="!personComponentCtrl.isFollowed"><i class="ion-ios-star red-text hidden"></i><span><span translate="discover.UNFOLLOW"></span></span></button>
 				</div>
 			</div>
 		</figcaption>

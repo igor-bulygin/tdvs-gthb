@@ -104,14 +104,16 @@ a{
 }
 .btn-follow{
     @extend %btn;
-    background-color:$background_grey;
-    color: $black;
-    padding: 5px 20px;
-    letter-spacing: 0.5px;
+    //background-color:$background_grey;
+    //color: $black;
+    //padding: 5px 20px;
+    //letter-spacing: 0.5px;
+    height: auto;
+    margin: 0.4em 0 !important;
     z-index: 12;
-    i{
+    /*i{
         padding-right: 5px;
-    }
+    }*/
 }
 /*botones rectangulares*/
 .full-size-btn{
