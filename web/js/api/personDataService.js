@@ -8,7 +8,7 @@
 		var Logout = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'auth/logout');
 		var PassResetRequest = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'auth/forgot-password');
 		var PassReset = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'auth/reset-password');
-		var PublicPost = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'post/:personId');
+		var PublicPost = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'post');
 		
 		//priv
 		var Profile = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'person/:personId', {}, {

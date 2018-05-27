@@ -177,7 +177,8 @@
 			"ADD_POST": "Add a post",
 			"DESCRIPTION":"Description",
 			"PUBLISH":"Post",
-			"NEW_POST":"Nuevo post"
+			"NEW_POST":"Nuevo post",
+			"SEE_MORE":"Ver más"
 		},
 		"DELETE_WORK_QUESTION": "¿Seguro que quieres borrar este trabajo?",
 		"EDIT_WORK": "Editar trabajo",

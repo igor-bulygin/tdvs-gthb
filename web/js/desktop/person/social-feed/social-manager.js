@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function controller(personDataService, UtilService, languageDataService, uploadDataService,$timeout) {
+	function controller(personDataService, UtilService, languageDataService, uploadDataService,$timeout, lovedDataService, $uibModal) {
 		var vm = this;
 		vm.posts = [];
 		vm.tempFiles=[];
@@ -9,11 +9,15 @@
 		vm.selected_language=_lang;
 		vm.stripHTMLTags = UtilService.stripHTMLTags;
 		vm.truncateString = UtilService.truncateString;
-		vm.isConnectedUser = isConnectedUser;
+		vm.viewingConnectedUser = viewingConnectedUser;
 		vm.uploadPhoto = uploadPhoto;
 		vm.showNewPost = showNewPost;
 		vm.createPost = createPost;
 		vm.lovePost = lovePost;
+		vm.unLovePost = unLovePost;
+		vm.maxCharacters = 18;
+		vm.openPostDetailsModal = openPostDetailsModal;
+
 		init();
 
 		function init() {
@@ -21,9 +25,9 @@
 			getPosts();
 		}
 
-		function isConnectedUser() {
+		function viewingConnectedUser() {
 			return UtilService.isConnectedUser(person.short_id);
-	}
+		}
 
 		function getPosts() {
 			vm.loading = true;
@@ -36,12 +40,8 @@
 				vm.loading = false;
 				UtilService.onError(err);
 			}
-			if (isConnectedUser) {
-			personDataService.getOwnerPost({}, onGetPostsSuccess, onGetPostsError);
-			}
-			else {
-				personDataService.getPost({}, onGetPostsSuccess, onGetPostsError);
-			}
+			personDataService.getPost({person_id: person.short_id}, onGetPostsSuccess, onGetPostsError);
+
 		}
 
 		function showNewPost() {
@@ -136,12 +136,13 @@
 		}
 
 		function lovePost(post) {
-			//if (post.person_id === person.short_id) {
-			//	return;
-			//}
+			if (post.person_id === UtilService.getConnectedUser() || post.isLoved) {
+				return;
+			}
 			vm.loading = true;
 			function onLovePostSuccess(data) {
-				post.loveds = data.loveds;
+				post.loveds = data.post.loveds;
+				post.isLoved = data.post.isLoved;
 				vm.loading = false;
 			}
 
@@ -149,10 +150,40 @@
 				vm.loading = false;
 				UtilService.onError(err);
 			}
-			var params = {
+			lovedDataService.setLoved({post_id :post.id}, onLovePostSuccess, onLovePostError);
+		}
 
+		function unLovePost(post) {
+			if (post.person_id === UtilService.getConnectedUser() || !post.isLoved) {
+				return;
 			}
-			personDataService.updatePost(post,{postId :post.id}, onLovePostSuccess, onLovePostError);
+			vm.loading = true;
+			function onUnLovePostSuccess(data) {
+				post.loveds = post.loveds -1;
+				post.isLoved = false;
+				vm.loading = false;
+			}
+
+			function onUnLovePostError(err) {
+				vm.loading = false;
+				UtilService.onError(err);
+			}
+			lovedDataService.deleteLovedPost({postId :post.id}, onUnLovePostSuccess, onUnLovePostError);
+		}
+
+		function openPostDetailsModal(post) {
+			var modalInstance = $uibModal.open({
+				component: 'modalPostDetails',
+				resolve: {
+					post: function() {
+						return post;
+					}
+				}
+			});
+			modalInstance.result.then(function(data) {
+			}, function(err) {
+				UtilService.onError(err);
+			})
 		}
 
 
