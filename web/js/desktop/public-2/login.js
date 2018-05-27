@@ -14,6 +14,7 @@
 			vm.loading=true;
 			function onLoginSuccess(data) {
 				localStorageUtilService.setLocalStorage('access_token', data.access_token);
+				localStorageUtilService.setLocalStorage('sesion_id', data.short_id);
 				$window.location.href = data.return_url;
 			}
 
