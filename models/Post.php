@@ -194,6 +194,8 @@ class Post extends CActiveRecord
 					'photo',
 					'loveds',
 					'published_at',
+					'photo_url' => 'photoUrl',
+					'isLoved' => 'isLoved',
 				];
 				static::$retrieveExtraFields = [
 				];
