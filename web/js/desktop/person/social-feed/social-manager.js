@@ -93,7 +93,7 @@
             }
             if (vm.isEdition) {
                 vm.isEdition = false;
-                personDataService.updatePost(vm.newPost, onUpdatePostsSuccess, onCreatePostsError);
+                personDataService.updatePost(vm.newPost, {id: vm.newPost.id }, onUpdatePostsSuccess, onCreatePostsError);
             } else {
                 personDataService.publishPost(vm.newPost, onCreatePostsSuccess, onCreatePostsError);
             }
@@ -219,7 +219,16 @@
             personDataService.getOwnerPost({ id: postId }, onGetPostsSuccess, onGetPostsError);
         }
 
-        function deletePost(postId) {}
+        function deletePost(postId) {
+            function onDeletePostsSuccess(data) {
+                getPosts();
+            }
+            function onDeletePostsError(err) {
+                vm.loading = false;
+                UtilService.onError(err);
+            }
+            personDataService.deletePost({ id: postId }, onDeletePostsSuccess, onDeletePostsError);
+        }
 
 
     }

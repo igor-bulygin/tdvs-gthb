@@ -36,6 +36,9 @@
         var Post = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'post/:id', {}, {
             'update': {
                 method: 'PATCH'
+            },
+            'delete': {
+                method: 'DELETE'
             }
         });
 
@@ -58,6 +61,7 @@
         this.publishPost = publishPost;
         this.updatePost = updatePost;
         this.getOwnerPost = getOwnerPost;
+        this.deletePost = deletePost;
 
         function getPeople(params, onSuccess, onError) {
             apiMethods.get(Person, params, onSuccess, onError);
@@ -132,6 +136,10 @@
 
         function getPost(params, onSuccess, onError) {
             apiMethods.get(PublicPost, params, onSuccess, onError);
+        }
+
+        function deletePost(data, params, onSuccess, onError) {
+            apiMethods.deleteItem(Post, data, params, onSuccess, onError);
         }
     }
 
