@@ -50,7 +50,7 @@ $this->params['person_links_target'] = 'public_view';
 							<div id="loved-container" class="macy-container" data-columns="6">
 								<?php foreach ($loveds as $loved) {
 									$product = $loved->getProduct();
-									if ($product->product_state != \app\models\Product::PRODUCT_STATE_ACTIVE) {
+									if (empty($product) || $product->product_state != \app\models\Product::PRODUCT_STATE_ACTIVE) {
 										continue;
 									} ?>
 									<div class="menu-category list-group">
