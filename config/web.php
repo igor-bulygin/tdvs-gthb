@@ -521,6 +521,9 @@ $config = [
 				'PATCH api3/priv/v1/post/<postId:[^/.]*?>' => 'api3/priv/v1/post/update',
 				'DELETE api3/priv/v1/post/<postId:[^/.]*?>' => 'api3/priv/v1/post/delete',
 
+				// Timeline - private
+				'GET api3/priv/v1/timeline' => 'api3/priv/v1/timeline/index',
+
 				
 				// Banner - private
 				'GET api3/priv/v1/banner' => 'api3/priv/v1/banner/index',
