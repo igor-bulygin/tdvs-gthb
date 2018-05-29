@@ -178,6 +178,7 @@ class Post extends CActiveRecord
 					'loveds',
 					'published_at',
 					'isLoved' => 'isLoved',
+					'created_at',
 				];
 				static::$retrieveExtraFields = [
 				];
@@ -396,6 +397,24 @@ class Post extends CActiveRecord
 		$person = $this->getPerson();
 
 		return $person->getUrlImagesLocation() . $this->photo;
+	}
+
+	/**
+	 * Get a resized version of main image, to 128px width
+	 *
+	 * @return string
+	 */
+	public function getImagePreview($width, $height, $fill = null)
+	{
+		$image = $this->getPhotoUrl();
+
+		if ($fill) {
+			$url = Utils::url_scheme() . Utils::thumborize($image)->fitIn($width, $height)->addFilter('fill', $fill);
+		} else {
+			$url = Utils::url_scheme() . Utils::thumborize($image)->resize($width, $height);
+		}
+
+		return $url;
 	}
 
 	/**

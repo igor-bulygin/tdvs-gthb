@@ -508,6 +508,7 @@ class Product extends CActiveRecord {
 					'main_photo_512' => "imagePreview512",
 					'main_photo_256_fill' => "imagePreview256Fill",
 					'min_price' => 'minimumPrice',
+					'created_at',
 				];
 				static::$retrieveExtraFields = [
 					'deviser_id',

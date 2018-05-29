@@ -218,6 +218,7 @@ class Box extends CActiveRecord
 					'loveds',
 					'link' => 'viewLink',
 					'isLoved' => 'isLoved',
+					'created_at',
 				];
 
 				static::$retrieveExtraFields = [
@@ -671,5 +672,16 @@ class Box extends CActiveRecord
 			'isLoved' => $this->getIsLoved(),
 			'link' => $this->getViewLink(),
 		];
+	}
+
+	public function getMainPhoto($width = null, $height = null)
+	{
+		$products = $this->getProducts();
+		if (empty($products)) {
+			return null;
+		}
+
+		$product = reset($products);
+		return $product->getImagePreview($width, $height);
 	}
 }
