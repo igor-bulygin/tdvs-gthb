@@ -82,6 +82,7 @@ $this->params['person_links_target'] = 'public_view';
 							</div>
 						</div>
 						<div class="text-center" style="display: block; width: 100%; float: left; margin:20px 0 100px;">
+							<div class="col-md-10 text-right error-text" ng-if="socialManagerCtrl.newPost.required_text"><span translate="person.faq.FIELD_LANGS_MANDATORY" translate-values='{ languageList: socialManagerCtrl.mandatory_langs_names}'></span></div>
 							<button class="btn btn-default btn-red" ng-click="socialManagerCtrl.createPost()"><span translate="person.posts.PUBLISH"></span></button>
 						</div>
 					</div>
