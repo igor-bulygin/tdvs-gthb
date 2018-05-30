@@ -1,9 +1,9 @@
 (function() {
     "use strict";
 
-    function controller(personDataService) {
+    function controller(personDataService, UtilService) {
         var vm = this;
-        
+        vm.parseDate = UtilService.parseDate;
 
         init();
 

@@ -1,11 +1,11 @@
 <?php
 
-use app\assets\desktop\deviser\GlobalAsset;
+use app\assets\desktop\deviser\TimelineAsset;
 use app\models\Category;
 use app\models\Person;
 use app\models\Product;
 
-GlobalAsset::register($this);
+TimelineAsset::register($this);
 
 /** @var Person $person */
 /** @var Product[] $products */
@@ -30,7 +30,7 @@ Yii::$app->opengraph->title = $this->title;
 							<div class="row">
 								<span class="col-xs-6" ng-bind="timeline.person.name"></span>
 								<span class="col-xs-6" ng-bind="timeline.action_name"></span>
-								<span class="col-xs-6" ng-bind="timeline.date"></span>
+								<span class="col-xs-6" am-time-ago="timelineCtrl.parseDate(timeline.date.sec*1000)"></span>
 							</div>
 							<div class="row">
 								<img class="col-xs-12 grid-image" ng-src="{{timeline.photo}}">
@@ -38,6 +38,9 @@ Yii::$app->opengraph->title = $this->title;
 							<div class="row text-right">
 								<span ng-bind="timeline.loveds"></span>
 								<span class="icons-hover heart-icon heart-red-icon"></span>
+							</div>
+							<div class="row">
+								<span ng-bind-html="timeline.title"></span>
 							</div>
 							<div class="row">
 								<span ng-bind-html="timeline.description"></span>
