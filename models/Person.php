@@ -803,6 +803,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'faq_link' => 'faqLink',
 					'chat_link' => 'chatLink',
 					'is_followed' => 'isFollowed',
+					'person_type' => 'personTypeForUrl',
 				];
 
 				static::$retrieveExtraFields = [
@@ -846,6 +847,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'faq_link' => 'faqLink',
 					'chat_link' => 'chatLink',
 					'is_followed' => 'isFollowed',
+					'person_type' => 'personTypeForUrl',
 					'type',
 				];
 
@@ -893,6 +895,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					'faq_link' => 'faqLink',
 					'chat_link' => 'chatLink',
 					'is_followed' => 'isFollowed',
+					'person_type' => 'personTypeForUrl',
 					'type',
 					'profile_views',
 					'follow',
@@ -1303,6 +1306,7 @@ class Person extends CActiveRecord implements IdentityInterface
 			'faq_link' => $this->getFaqLink(),
 			'chat_link' => $this->getChatLink(),
 			'is_followed' => $this->getIsFollowed(),
+			'person_type' => $this->getPersonTypeForUrl(),
 
 			// TODO: delete this two fields
 			"photo" => $this->getProfileImage(),

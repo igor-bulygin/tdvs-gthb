@@ -45,6 +45,7 @@ class TimelineController extends AppPrivateController
 				'description' => $box->description,
 				'photo' => $box->getMainPhoto(600, 260),
 				'link' => $box->getViewLink(),
+				'loveds' => rand(0,5),
 				'date' => $box->created_at,
 			];
 		}
@@ -67,6 +68,7 @@ class TimelineController extends AppPrivateController
 				'description' => $product->description,
 				'photo' => $product->getImagePreview(600, 260),
 				'link' => $product->getViewLink(),
+				'loveds' => rand(0,5),
 				'date' => $product->created_at,
 			];
 		}
@@ -87,6 +89,7 @@ class TimelineController extends AppPrivateController
 				'description' => $post->text,
 				'photo' => $post->getImagePreview(600, 260),
 				'link' => '#',
+				'loveds' => rand(0,5),
 				'date' => $post->created_at,
 			];
 		}
@@ -102,7 +105,7 @@ class TimelineController extends AppPrivateController
 		return [
 			"items" => $items,
 			"meta" => [
-				"total_count" => Post::$countItemsFound,
+				"total_count" => count($items),
 				"current_page" => $page,
 				"per_page" => $limit,
 			]
