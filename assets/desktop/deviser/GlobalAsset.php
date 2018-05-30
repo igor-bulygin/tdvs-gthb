@@ -19,6 +19,7 @@ class GlobalAsset extends AssetBundle {
 		'js/desktop/person/edit-videos/edit-videos.js',
 		'js/desktop/person/make-profile-public.js',
 		'js/desktop/person/person-not-public.js',
+		'js/desktop/person/social-feed/timeline/timeline.js',
 	];
 	public $depends = [
 		'app\assets\desktop\GlobalAsset',

@@ -42,6 +42,8 @@
             }
         });
 
+        var Timeline = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'timeline');
+
         //methods
         this.getPeople = getPeople;
         this.createClient = createClient;
@@ -62,6 +64,7 @@
         this.updatePost = updatePost;
         this.getOwnerPost = getOwnerPost;
         this.deletePost = deletePost;
+        this.getTimeline = getTimeline;
 
         function getPeople(params, onSuccess, onError) {
             apiMethods.get(Person, params, onSuccess, onError);
@@ -140,6 +143,10 @@
 
         function deletePost(data, params, onSuccess, onError) {
             apiMethods.deleteItem(Post, data, params, onSuccess, onError);
+        }
+
+        function getTimeline(params, onSuccess, onError) {
+            apiMethods.get(Timeline, params, onSuccess, onError);
         }
     }
 
