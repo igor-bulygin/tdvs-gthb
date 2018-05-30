@@ -488,6 +488,7 @@ $config = [
 				'DELETE api3/priv/v1/loved/product/<productId:[^/.]*?>' => 'api3/priv/v1/loved/delete-product',
 				'DELETE api3/priv/v1/loved/box/<boxId:[^/.]*?>' => 'api3/priv/v1/loved/delete-box',
 				'DELETE api3/priv/v1/loved/post/<postId:[^/.]*?>' => 'api3/priv/v1/loved/delete-post',
+				'DELETE api3/priv/v1/loved/timeline/<timelineId:[^/.]*?>' => 'api3/priv/v1/loved/delete-timeline',
 
 				// Box - public
 				'GET api3/pub/v1/box/<boxId:[^/.]*?>' => 'api3/pub/v1/box/view',

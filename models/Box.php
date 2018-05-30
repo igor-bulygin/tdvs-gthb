@@ -681,7 +681,7 @@ class Box extends CActiveRecord
 			return null;
 		}
 
-		$product = reset($products);
+		$product = end($products);
 		return $product->getImagePreview($width, $height);
 	}
 }

@@ -5,6 +5,7 @@ namespace app\modules\api\priv\v1\controllers;
 use app\models\Order;
 use app\models\OrderPack;
 use app\models\Person;
+use app\models\Timeline;
 use Yii;
 use yii\base\Exception;
 use yii\web\BadRequestHttpException;
@@ -390,6 +391,13 @@ class PersonController extends AppPrivateController
 			$person->setAttribute('follow', $follow);
 			$person->save(false);
 		}
+
+		$timeline = new Timeline();
+		$timeline->person_id = $person->short_id;
+		$timeline->target_id = $personFollowedId;
+		$timeline->action_type = Timeline::ACTION_PERSON_FOLLOWED;
+		$timeline->date = new \MongoDate();
+		$timeline->save();
 
 		Yii::$app->response->setStatusCode(204); // No content
 

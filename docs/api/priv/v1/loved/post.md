@@ -17,6 +17,7 @@ Example about how to call to Web Service to create a new loved
 * `product_id`: Product identifier
 * `box_id`: Box identifier
 * `post_id`: Post identifier
+* `timeline_id`: Timeline identifier
 
 You need to specify only one type of object.
 

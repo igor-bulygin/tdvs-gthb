@@ -14,6 +14,7 @@ use yii\mongodb\ActiveQuery;
  * @property string product_id
  * @property string box_id
  * @property string post_id
+ * @property string timeline_id
  * @property MongoDate created_at
  * @property MongoDate updated_at
  */
@@ -23,6 +24,7 @@ class Loved extends CActiveRecord
 	const SCENARIO_LOVED_PRODUCT = 'scenario-loved-product';
 	const SCENARIO_LOVED_BOX = 'scenario-loved-box';
 	const SCENARIO_LOVED_POST = 'scenario-loved-post';
+	const SCENARIO_LOVED_TIMELINE= 'scenario-loved-timeline';
 
 	/**
 	 * The attributes that should be serialized
@@ -52,6 +54,7 @@ class Loved extends CActiveRecord
 			'product_id',
 			'box_id',
 			'post_id',
+			'timeline_id',
 			'created_at',
 			'updated_at',
 		];
@@ -125,6 +128,18 @@ class Loved extends CActiveRecord
 					]
 				);
 			}
+			$timeline = $this->getTimeline();
+			if ($timeline) {
+				$collection = Yii::$app->mongodb->getCollection('timeline');
+				$collection->update(
+					[
+						'short_id' => $timeline->short_id
+					],
+					[
+						'loveds' => $timeline->loveds + 1
+					]
+				);
+			}
 		}
 		parent::afterSave($insert, $changedAttributes);
 	}
@@ -185,6 +200,9 @@ class Loved extends CActiveRecord
 
 			[['person_id', 'post_id'], 'required', 'on' => [self::SCENARIO_LOVED_POST]],
 			[['post_id'], 'validatePostExists', 'on' => [self::SCENARIO_LOVED_POST]],
+
+			[['person_id', 'timeline_id'], 'required', 'on' => [self::SCENARIO_LOVED_TIMELINE]],
+			[['timeline_id'], 'validateTimelineExists', 'on' => [self::SCENARIO_LOVED_TIMELINE]],
 		];
 	}
 
@@ -242,7 +260,7 @@ class Loved extends CActiveRecord
 	}
 
 	/**
-	 * Custom validator for box_id
+	 * Custom validator for post_id
 	 *
 	 * @param $attribute
 	 * @param $params
@@ -251,6 +269,25 @@ class Loved extends CActiveRecord
 	{
 		$short_id = $this->$attribute;
 		$item = Post::findOneSerialized($short_id);
+		if (!$item) {
+			$this->addError($attribute, sprintf('Item %s not found', $short_id));
+			return;
+		}
+		if ($item->person_id == Yii::$app->user->identity->short_id) {
+			$this->addError($attribute, 'You cannot love your own items');
+		}
+	}
+
+	/**
+	 * Custom validator for timeline_id
+	 *
+	 * @param $attribute
+	 * @param $params
+	 */
+	public function validateTimelineExists($attribute, $params)
+	{
+		$short_id = $this->$attribute;
+		$item = Timeline::findOneSerialized($short_id);
 		if (!$item) {
 			$this->addError($attribute, sprintf('Item %s not found', $short_id));
 			return;
@@ -299,6 +336,16 @@ class Loved extends CActiveRecord
 				$this->addError($attribute, sprintf('Post %s already loved by person %s', $post_id, $person_id));
 			}
 		}
+		if ($this->timeline_id) {
+			$timeline_id = $this->timeline_id;
+			$loved = Loved::findSerialized([
+				'person_id' => $person_id,
+				'timeline_id' => $timeline_id,
+			]);
+			if ($loved) {
+				$this->addError($attribute, sprintf('Tiemline %s already loved by person %s', $timeline_id, $person_id));
+			}
+		}
 	}
 
 	/**
@@ -325,6 +372,8 @@ class Loved extends CActiveRecord
 					'box' => 'boxPreview',
 					'post_id',
 					'post' => 'postPreview',
+					'timeline_id',
+					'timeline' => 'timelinePreview',
 				];
 
 				static::$retrieveExtraFields = [
@@ -393,14 +442,19 @@ class Loved extends CActiveRecord
 			$query->andWhere(["product_id" => $criteria["product_id"]]);
 		}
 
-		// if product id is specified
+		// if box id is specified
 		if ((array_key_exists("box_id", $criteria)) && (!empty($criteria["box_id"]))) {
 			$query->andWhere(["box_id" => $criteria["box_id"]]);
 		}
 
-		// if product id is specified
+		// if post id is specified
 		if ((array_key_exists("post_id", $criteria)) && (!empty($criteria["post_id"]))) {
 			$query->andWhere(["post_id" => $criteria["post_id"]]);
+		}
+
+		// if timeline id is specified
+		if ((array_key_exists("timeline_id", $criteria)) && (!empty($criteria["timeline_id"]))) {
+			$query->andWhere(["timeline_id" => $criteria["timeline_id"]]);
 		}
 
 		// Count how many items are with those conditions, before limit them for pagination
@@ -495,6 +549,22 @@ class Loved extends CActiveRecord
 		return $post;
 	}
 
+
+	/**
+	 * Get the timeline related with this loved
+	 *
+	 * @return Timeline
+	 */
+	public function getTimeline()
+	{
+		Post::setSerializeScenario(Post::SERIALIZE_SCENARIO_PUBLIC);
+
+		/** @var Timeline $timeline */
+		$timeline = Timeline::findOneSerialized($this->timeline_id);
+
+		return $timeline;
+	}
+
 	public function getPerson() {
 		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_PUBLIC);
 
@@ -552,6 +622,22 @@ class Loved extends CActiveRecord
 
 		if ($post) {
 			return $post->getPreviewSerialized();
+		}
+
+		return null;
+	}
+
+	/**
+	 * Get a preview version of the timeline related with this loved
+	 *
+	 * @return array
+	 */
+	public function getTimelinePreview()
+	{
+		$timeline = $this->getTimeline();
+
+		if ($timeline) {
+			return $timeline->getPreviewSerialized();
 		}
 
 		return null;

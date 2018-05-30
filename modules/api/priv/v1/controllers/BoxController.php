@@ -4,6 +4,7 @@ namespace app\modules\api\priv\v1\controllers;
 
 use app\models\Box;
 use app\models\BoxProduct;
+use app\models\Timeline;
 use Yii;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
@@ -91,6 +92,13 @@ class BoxController extends AppPrivateController
 
 			$box->save(false);
 
+			$timeline = new Timeline();
+			$timeline->person_id = $box->person_id;
+			$timeline->target_id = $box->short_id;
+			$timeline->action_type = Timeline::ACTION_BOX_UPDATED;
+			$timeline->date = new \MongoDate();
+			$timeline->save();
+
 			Yii::$app->response->setStatusCode(201); // Created
 			return $box;
 		} else {
@@ -135,6 +143,17 @@ class BoxController extends AppPrivateController
 		if ($boxProduct->load(Yii::$app->request->post(), '') && $boxProduct->validate()) {
 
 			$box->addProduct($boxProduct);
+
+			$timeline = new Timeline();
+			$timeline->person_id = $box->person_id;
+			$timeline->target_id = $box->short_id;
+			if (count($box->productsMapping) == 1) {
+				$timeline->action_type = Timeline::ACTION_BOX_CREATED;
+			} else {
+				$timeline->action_type = Timeline::ACTION_BOX_UPDATED;
+			}
+			$timeline->date = new \MongoDate();
+			$timeline->save();
 
 			Yii::$app->response->setStatusCode(201); // Created
 			return $box;

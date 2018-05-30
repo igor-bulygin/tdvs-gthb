@@ -36,7 +36,6 @@ class PersonController extends CController
 					'upload-product-photo',
 					'upload-profile-photo',
 					'videos-edit',
-					'timeline',
 				],
 				'rules' => [
 					[
@@ -803,8 +802,16 @@ class PersonController extends CController
 	public function actionTimeline()
 	{
 		$this->layout = '/desktop/public-2.php';
-		return $this->render("@app/views/desktop/person/timeline", [
-		]);
+
+		if (Yii::$app->user->isGuest) {
+
+			return $this->render("@app/views/desktop/person/become-a-member", []);
+
+		} else {
+
+			return $this->render("@app/views/desktop/person/timeline", []);
+
+		}
 	}
 
 	/**

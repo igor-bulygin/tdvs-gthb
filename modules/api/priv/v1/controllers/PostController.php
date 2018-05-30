@@ -3,6 +3,7 @@
 namespace app\modules\api\priv\v1\controllers;
 
 use app\models\Post;
+use app\models\Timeline;
 use Yii;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
@@ -65,6 +66,13 @@ class PostController extends AppPrivateController
 
 			$post->save(false);
 
+			$timeline = new Timeline();
+			$timeline->person_id = $post->person_id;
+			$timeline->target_id = $post->short_id;
+			$timeline->action_type = Timeline::ACTION_POST_CREATED;
+			$timeline->date = new \MongoDate();
+			$timeline->save();
+
 			Yii::$app->response->setStatusCode(201); // Created
 			return $post;
 		} else {
@@ -90,6 +98,13 @@ class PostController extends AppPrivateController
 		if ($post->load(Yii::$app->request->post(), '') && $post->validate(array_keys(Yii::$app->request->post()))) {
 
 			$post->save(false);
+
+			$timeline = new Timeline();
+			$timeline->person_id = $post->person_id;
+			$timeline->target_id = $post->short_id;
+			$timeline->action_type = Timeline::ACTION_POST_UPDATED;
+			$timeline->date = new \MongoDate();
+			$timeline->save();
 
 			Yii::$app->response->setStatusCode(201); // Created
 			return $post;

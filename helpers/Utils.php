@@ -731,6 +731,28 @@ class Utils
 	}
 
 	/**
+	 * Returns TRUE if the timeline is loved by de person especified by params
+	 *
+	 * @param string $timeline_id
+	 * @param string $person_id
+	 *
+	 * @return bool
+	 */
+	public static function timelineLovedByPerson($timeline_id, $person_id) {
+		if (!isset(static::$loveds[$person_id])) {
+			$loveds = Loved::findSerialized(['person_id' => $person_id]);
+
+			$timeline_ids = [];
+			foreach ($loveds as $loved) {
+				$timeline_ids[] = $loved->timeline_id;
+			}
+			static::$loveds[$person_id] = $timeline_ids;
+		}
+
+		return in_array($timeline_id, static::$loveds[$person_id]);
+	}
+
+	/**
 	 * Returns TRUE when the error represents a "required" error
 	 *
 	 * @param array|string $error

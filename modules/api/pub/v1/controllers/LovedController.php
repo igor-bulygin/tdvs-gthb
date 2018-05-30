@@ -36,6 +36,9 @@ class LovedController extends AppPublicController
 			"id" => Yii::$app->request->get("id"),
 			"person_id" => Yii::$app->request->get("person_id"),
 			"product_id" => Yii::$app->request->get("product_id"),
+			"box_id" => Yii::$app->request->get("box_id"),
+			"post_id" => Yii::$app->request->get("post_id"),
+			"timeline_id" => Yii::$app->request->get("timeline_id"),
 			"limit" => $limit,
 			"offset" => $offset,
 		]);
