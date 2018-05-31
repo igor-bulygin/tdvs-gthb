@@ -28,6 +28,7 @@
 			function onLogoutSuccess(data) {
 				localStorageUtilService.removeLocalStorage('access_token');
 				localStorageUtilService.removeLocalStorage('cart_id');
+				localStorageUtilService.removeLocalStorage('sesion_id');
 				$window.location.href = currentHost();
 			}
 

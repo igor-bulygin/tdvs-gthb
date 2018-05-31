@@ -180,8 +180,15 @@
 			"SEE_MORE":"See more",
 			"EDIT_POST":"Edit post"
 		},
+		"timeline": {
+			"START": "To start building your timeline, you need to be a Todevise member",
+			"DISCOVERY_FEED":"What is your the DISCOVERY FEED?",
+			"TIMELINE_DESCR":"Follow any user on Todevise (a brand, influencer, or member) and receive updates about what they like and post.",
+			"BUILD_COMMUNITY":"Build a community of followers and go discover!"
+		},
 		"SAVE_CHANGES_EXIT": "Save changes & exit",
 		"DELETE_WORK_QUESTION": "Are you sure you want to delete this work?",
-		"EDIT_WORK": "Edit work"
+		"EDIT_WORK": "Edit work",
+		"IF_MEMBER": "If you are a Todevise member"
 	}
 }

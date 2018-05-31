@@ -7,6 +7,12 @@
         vm.loveTimeline = loveTimeline;
         vm.unLoveTimeline = unLoveTimeline;
         vm.parseImage = parseImage;
+        vm.show_items = 21;
+        vm.addMoreItems = addMoreItems;
+        vm.results_infinite = [];
+        vm.searchPage=1;
+        vm.timeline = [];
+        vm.connectedUser = connectedUser;
 
         init();
 
@@ -14,10 +20,10 @@
             getTimeline();
         }
 
-        function getTimeline() {
+        function getTimeline(page) {
             vm.loading = true;
             function onGetTimelineSuccess(data) {
-                vm.timeline = data.items;
+                vm.timeline = vm.timeline.concat(data.items);
                 vm.loading = false;
             }
 
@@ -25,7 +31,16 @@
                 vm.loading = false;
                 UtilService.onError(err);
             }
-            personDataService.getTimeline({}, onGetTimelineSuccess, onGetTimelineError);
+            personDataService.getTimeline({page: page, limit: vm.show_items }, onGetTimelineSuccess, onGetTimelineError);
+        }
+
+        function connectedUser() {
+            return !angular.isUndefined(UtilService.getConnectedUser());
+        }
+
+        function addMoreItems() {
+            vm.searchPage = vm.searchPage + 1;
+            getTimeline(vm.searchPage);
         }
 
         function loveTimeline(timeline) {
