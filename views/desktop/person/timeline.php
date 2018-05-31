@@ -24,20 +24,24 @@ Yii::$app->opengraph->title = $this->title;
 				<span >Tipos</span>
 			</div>
 			<div class="col-md-5">
+				<div ng-if="timelineCtrl.timeline.length <1" ng-cloak>
+				</div>
 				<div ng-if="timelineCtrl.timeline.length > 0" ng-cloak>
 					<div class="col-xs-12" ng-repeat="timeline in timelineCtrl.timeline" ng-cloak>
 						<div class="menu-category list-group" >
 							<div class="row">
-								<span class="col-xs-6" ng-bind="timeline.person.name"></span>
-								<span class="col-xs-6" ng-bind="timeline.action_name"></span>
-								<span class="col-xs-6" am-time-ago="timelineCtrl.parseDate(timeline.date.sec*1000)"></span>
+								<img class="col-xs-3 avatar-logued-user" ng-src="{{ timelineCtrl.parseImage(timeline.person.url_avatar)}}">										
+								<span class="col-xs-3" ng-bind="timeline.person.name"></span>
+								<span class="col-xs-3" ng-bind="timeline.action_name"></span>
+								<span class="col-xs-3" am-time-ago="timelineCtrl.parseDate(timeline.date.sec*1000)"></span>
 							</div>
 							<div class="row">
 								<img class="col-xs-12 grid-image" ng-src="{{timeline.photo}}">
 							</div>
 							<div class="row text-right">
 								<span ng-bind="timeline.loveds"></span>
-								<span class="icons-hover heart-icon heart-red-icon"></span>
+										<span ng-if="timeline.isLoved" class="icons-hover heart-icon heart-red-icon" ng-click="timelineCtrl.unLoveTimeline(timeline)" ng-cloak></span>
+										<span ng-if="!timeline.isLoved" class="icons-hover heart-icon heart-black-icon" ng-click="timelineCtrl.loveTimeline(timeline)" ng-cloak></span>
 							</div>
 							<div class="row">
 								<span ng-bind-html="timeline.title"></span>
