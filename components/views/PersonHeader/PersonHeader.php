@@ -62,12 +62,20 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 
 				<div>
 					<p>Followers</p>
-					<p><?=count($person->getFollowers())?></p>
+					<p>
+						<a href="<?=$person->getFollowersLink()?>">
+							<?=count($person->getFollowers())?>
+						</a>
+					</p>
 				</div>
 
 				<div>
 					<p>Following</p>
-					<p><?=count($person->getFollow())?></p>
+					<p>
+						<a href="<?=$person->getFollowLink()?>">
+							<?=count($person->getFollow())?>
+						</a>
+					</p>
 				</div>
 
 				<?php if ($person->isDeviserEditable() && $person->isPublic()) {?>
