@@ -2359,7 +2359,7 @@ class Person extends CActiveRecord implements IdentityInterface
 
 	public function showFollowers()
 	{
-		return $this->isInfluencer() || $this->isDeviser();
+		return $this->isInfluencer() || $this->isDeviser() || $this->isClient();
 	}
 
 	public function showSocial()
