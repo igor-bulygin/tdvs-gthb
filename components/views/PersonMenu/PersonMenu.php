@@ -10,6 +10,7 @@ PersonMenuAsset::register($this);
 $categories = array_key_exists('person_menu_store_categories', $this->params) ? $this->params['person_menu_store_categories'] : [];
 $activeOption = array_key_exists('person_menu_active_option', $this->params) ? $this->params['person_menu_active_option'] : '';
 $linksTarget = array_key_exists('person_links_target', $this->params) ? $this->params['person_links_target'] : '';
+$menuFollow = array_key_exists('person_menu_follow_option', $this->params) ? $this->params['person_menu_follow_option'] : '';
 /** @var Person $person */
 $person = $this->params['person'];
 
@@ -34,15 +35,16 @@ $person = $this->params['person'];
 		<?php if ($person->showFollowers()) { ?>
 			<li>
 				<a class=" <?= ($activeOption=='followers') ? 'active' : '' ?>" href="<?= $person->getFollowersLink()?>">Network</a>
-				<ul class="submenu-store hidden-xs">
-					<li class="/*$type == 'follow' ? 'active' : ''*/">
-						<a href="<?=$person->getFollowLink()?>">Follow</a>
-					</li>
-					<li class="/*$type == 'followers' ? 'active' : ''*/">
-						<a href="<?=$person->getFollowersLink()?>">Followers</a>
-					</li>
-
-				</ul>
+				<?php if ($activeOption == 'followers') { ?>
+					<ul class="submenu-store hidden-xs">
+						<li class="<?= $menuFollow == 'follow' ? 'active' : ''?>">
+							<a href="<?=$person->getFollowLink()?>">Follow</a>
+						</li>
+						<li class="<?= $menuFollow == 'followers' ? 'active' : ''?>">
+							<a href="<?=$person->getFollowersLink()?>">Followers</a>
+						</li>
+					</ul>
+				<?php } ?>
 			</li>
 		<?php } ?>
 		<?php if ($person->showSocial()) { ?>

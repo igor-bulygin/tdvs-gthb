@@ -18,6 +18,7 @@ Yii::$app->opengraph->title = $this->title;
 
 $this->params['person'] = $person;
 $this->params['person_menu_active_option'] = 'followers';
+$this->params['person_menu_follow_option'] = $type;
 $this->params['person_links_target'] = 'public_view';
 
 ?>
