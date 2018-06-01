@@ -389,4 +389,21 @@ class Timeline extends CActiveRecord
 		return $this->getTimelineDetail()->link;
 	}
 
+	/**
+	 * Get only preview attributes from post
+	 *
+	 * @return array
+	 */
+	public function getPreviewSerialized()
+	{
+		return [
+			'id' => $this->short_id,
+			'person_id' => $this->person_id,
+			'action_type' => $this->action_type,
+			'target_id' => $this->target_id,
+			'loveds' => $this->loveds,
+			'date' => $this->date,
+		];
+	}
+
 }
