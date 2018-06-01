@@ -47,8 +47,8 @@
             vm.loading = true;
 
             function onLoveTimelineSuccess(data) {
-                timeline.loveds = data.timeline.loveds;
-                timeline.isLoved = data.timeline.isLoved;
+                timeline.loveds = timeline.loveds + 1;
+                timeline.isLoved = true;
                 vm.loading = false;
             }
 
