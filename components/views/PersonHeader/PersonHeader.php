@@ -35,17 +35,6 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 						<div class="type-of-user hidden-xs" ng-if="personHeaderCtrl.person.type.indexOf(3)>=0" ng-cloak>
 							<span translate="global.INFLUENCER"></span>
 						</div>
-						<?php if (!$person->isConnectedUser()) { ?>
-							<div class="edit-profile-btn hidden-xs hidden-sm">
-								<a class="btn btn-default all-caps btn-black-on-white btn-header" href="<?= $person->getChatLink()?>"><span translate="person.header.CHAT"></span></a>
-							</div>
-						<?php } else { ?>
-							<?php if ($person->isPersonEditable() && $person->isPublic()) {?>
-								<div class="edit-profile-btn hidden-xs hidden-sm">
-									<button class="btn btn-default all-caps btn-black-on-white btn-header ng-class:{'button-error': personHeaderCtrl.required['header_info']}" ng-click="personHeaderCtrl.editHeader()"><span translate="person.header.EDIT_HEADER"></span></button>
-								</div>
-							<?php } ?>
-						<?php } ?>
 						<div class="deviser-data">
 							<div class="name">
 								{{personHeaderCtrl.person.name}}
@@ -58,9 +47,21 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 							</div>
 						</div>
 					</div>
+					<?php if (!$person->isConnectedUser()) { ?>
+						<div class="edit-profile-btn hidden-xs hidden-sm">
+							<a class="btn btn-default all-caps btn-black-on-white btn-header" href="<?= $person->getChatLink()?>"><span translate="person.header.CHAT"></span></a>
+						</div>
+					<?php } else { ?>
+						<?php if ($person->isPersonEditable() && $person->isPublic()) {?>
+							<div class="edit-profile-btn hidden-xs hidden-sm">
+								<button class="btn btn-default all-caps btn-black-on-white btn-header ng-class:{'button-error': personHeaderCtrl.required['header_info']}" ng-click="personHeaderCtrl.editHeader()"><span translate="person.header.EDIT_HEADER"></span></button>
+							</div>
+						<?php } ?>
+					<?php } ?>
+					<span class="icons-hover more-options more-options-icon"></span>
 				</div>
 
-				<div>
+				<div class="deviser-followers position-followers">
 					<p>Followers</p>
 					<p>
 						<a href="<?=$person->getFollowersLink()?>">
@@ -69,7 +70,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 					</p>
 				</div>
 
-				<div>
+				<div class="deviser-followers position-following">
 					<p>Following</p>
 					<p>
 						<a href="<?=$person->getFollowLink()?>">
