@@ -24,6 +24,8 @@ class GlobalAsset extends AssetBundle {
 		'app\assets\api\ApiAsset',
 		'app\assets\libs\macyAsset',
 		'app\assets\libs\utilAsset',
+		'app\assets\libs\momentAsset',
+		'app\assets\libs\angularMomentAsset',		
 		'app\assets\desktop\box\IndexAsset',
 		'app\assets\libs\angularToastrAsset',
 		'app\assets\desktop\deviser\IndexAsset',

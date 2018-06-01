@@ -35,7 +35,7 @@ Yii::$app->opengraph->title = $this->title;
 										<img class="col-xs-3 avatar-logued-user" ng-src="{{ timelineCtrl.parseImage(timeline.person.url_avatar)}}">
 										<span class="col-xs-3" ng-bind="timeline.person.name"></span>
 										<span class="col-xs-3" ng-bind="timeline.action_name"></span>
-										<span class="col-xs-3" am-time-ago="timelineCtrl.parseDate(timeline.date.sec*1000)"></span>
+										<span class="col-xs-3" am-time-ago="timeline.date | amUtc"></span>
 									</div>
 									<div class="row">
 										<img class="col-xs-12 grid-image" ng-src="{{timeline.photo}}">
