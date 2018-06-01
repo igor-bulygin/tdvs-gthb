@@ -13,7 +13,8 @@
         vm.searchPage = 1;
         vm.timeline = [];
         vm.modalLogin = modalLogin;
-
+        vm.personTypes = ['deviser', 'influencer', 'member'];
+        vm.selectedPersonType = 'deviser';
         init();
 
         function init() {

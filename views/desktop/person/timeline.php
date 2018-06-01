@@ -22,6 +22,10 @@ Yii::$app->opengraph->title = $this->title;
 		<div class="row">
 			<div class="col-md-3">
 				<span >Tipos</span>
+				<div ng-repeat="personType in timelineCtrl.personTypes">
+					<span ng-bind="personType" ng-click="timelineCtrl.selectedPersonType = personType" 
+					class="ng-class:{'active-menu': timelineCtrl.selectedPersonType === personType}"></span>
+				</div>
 			</div>
 			<div class="col-md-5">
 				<div>
@@ -29,7 +33,7 @@ Yii::$app->opengraph->title = $this->title;
 					</div>
 					<div infinite-scroll="timelineCtrl.addMoreItems()" infinite-scroll-distance="timelineCtrl.show_items-1">
 						<div ng-if="timelineCtrl.timeline.length > 0" ng-cloak>
-							<div class="col-xs-12" ng-repeat="timeline in timelineCtrl.timeline" ng-cloak>
+							<div class="col-xs-12" ng-repeat="timeline in timelineCtrl.timeline | filter:{ person: {person_type:timelineCtrl.selectedPersonType} }" ng-cloak>
 								<div class="menu-category list-group" >
 									<div class="row">
 										<img class="col-xs-3 avatar-logued-user" ng-src="{{ timelineCtrl.parseImage(timeline.person.url_avatar)}}">
