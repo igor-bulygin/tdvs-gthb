@@ -21,7 +21,12 @@ Yii::$app->opengraph->title = $this->title;
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12 col-md-3">
-				<span >Tipos</span>
+				<span  ng-click="timelineCtrl.resetFilter()" 
+					class="ng-class:{'active-menu': !timelineCtrl.selectedPersonType}" translate="person.ALL"></span>
+				<div ng-repeat="personType in timelineCtrl.personTypes">
+					<span translate="{{personType.name}}" ng-click="timelineCtrl.selectedPersonType = personType.value" 
+					class="ng-class:{'active-menu': timelineCtrl.selectedPersonType === personType}"></span>
+				</div>
 			</div>
 			<div class="col-xs-12 col-md-8 col-lg-7">
 				<div class="timeline-wrapper">
@@ -29,13 +34,13 @@ Yii::$app->opengraph->title = $this->title;
 					</div>
 					<div infinite-scroll="timelineCtrl.addMoreItems()" infinite-scroll-distance="timelineCtrl.show_items-1">
 						<div ng-if="timelineCtrl.timeline.length > 0" ng-cloak>
-							<div class="col-xs-12" ng-repeat="timeline in timelineCtrl.timeline" ng-cloak>
+							<div class="col-xs-12" ng-repeat="timeline in timelineCtrl.timeline | filter:{ person: {person_type:timelineCtrl.selectedPersonType} }" ng-cloak>
 								<div class="menu-category list-group" >
 									<div class="row">
 										<img class="col-xs-3 avatar-logued-user" ng-src="{{ timelineCtrl.parseImage(timeline.person.url_avatar)}}">
 										<span class="col-xs-3" ng-bind="timeline.person.name"></span>
 										<span class="col-xs-3" ng-bind="timeline.action_name"></span>
-										<span class="col-xs-3" am-time-ago="timelineCtrl.parseDate(timeline.date.sec*1000)"></span>
+										<span class="col-xs-3" am-time-ago="timeline.date | amUtc"></span>
 									</div>
 									<div class="row">
 										<img class="col-xs-12 grid-image" ng-src="{{timeline.photo}}">

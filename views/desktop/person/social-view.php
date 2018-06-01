@@ -41,52 +41,6 @@ $this->params['person_links_target'] = 'public_view';
 						<p class="no-video-text"><?=$person->getName()?> <span translate="person.posts.USER_NO_POSTS"></span></p>
 					</div>
 				</div>
-				<div ng-if="socialManagerCtrl.showCreatePost && socialManagerCtrl.viewingConnectedUser()" ng-cloak>
-					<div class="stories-wrapper">
-						<div>
-							<div class="story-component-wrapper">
-								<div class="col-xs-12 edit-faq-panel-wrapper">
-									<div class="edit-faq-panel">
-										<h5 class="stories-title">
-											<span ng-if="!socialManagerCtrl.isEdition" translate="person.posts.NEW_POST"></span>
-											<span ng-if="socialManagerCtrl.isEdition" translate="person.posts.EDIT_POST"></span>
-										</h5>
-										<div class="col-xs-4" ng-if="!socialManagerCtrl.isEdition">
-											<div class="col-md-12" ng-if="!socialManagerCtrl.newPost.photo">
-												<div class="button no-pad" name="file" ngf-select="socialManagerCtrl.uploadPhoto($files, $invalidFiles)"  ngf-accept="'image/*'"  ngf-drop-available="socialManagerCtrl.isDropAvailable" ngf-multiple="false"><a style="cursor:pointer;" class="btn btn-small btn-red">upload</a></div>
-											</div>
-											<div class="col-md-12" ng-if="socialManagerCtrl.newPost.photo" ng-cloak>
-												<img class="grid-image" ng-src="{{socialManagerCtrl.newImage}}">
-											</div>											
-										</div>
-										<div class="col-xs-8 faq-language-menu">
-											<div class="faq-row">
-												<div class="col-sm-2">
-													<span class="faq-edit-question"><span translate="person.posts.DESCRIPTION"></span></span>
-												</div>
-												<div class="col-sm-10">
-													<div class="faq-edit-answer" text-angular ng-model="socialManagerCtrl.newPost.text[socialManagerCtrl.newPost.selected_language]" ta-toolbar="[]" translate-attr="{placeholder: 'person.posts.DESCRIPTION'}" ta-paste="socialManagerCtrl.stripHTMLTags($html)"></div>
-												</div>
-											</div>
-										</div>
-									</div>
-									<ol class="faq-lang nya-bs-select form-control" ng-model="socialManagerCtrl.newPost.selected_language" ng-change="socialManagerCtrl.parseText(socialManagerCtrl.newPost)" ng-init="socialManagerCtrl.newPost.selected_language = socialManagerCtrl.selected_language">
-										<li nya-bs-option="language in socialManagerCtrl.languages" class="ng-class:{'lang-selected': socialManagerCtrl.isLanguageOk(language.code, socialManagerCtrl.newPost)}" data-value="language.code" deep-watch="true">
-											<a href="">
-												<span ng-bind="language.name"></span>
-												<span class="glyphicon glyphicon-ok ok-white-icon pull-right" ng-if="socialManagerCtrl.isLanguageOk(language.code,post)"></span>
-											</a>
-										</li>
-									</ol>
-								</div>
-							</div>
-						</div>
-						<div class="text-center" style="display: block; width: 100%; float: left; margin:20px 0 100px;">
-							<div class="col-md-10 text-right error-text" ng-if="socialManagerCtrl.newPost.required_text"><span translate="person.faq.FIELD_LANGS_MANDATORY" translate-values='{ languageList: socialManagerCtrl.mandatory_langs_names}'></span></div>
-							<button class="btn btn-default btn-red" ng-click="socialManagerCtrl.createPost()"><span translate="person.posts.PUBLISH"></span></button>
-						</div>
-					</div>
-				</div>
 				<div ng-if="socialManagerCtrl.posts.length > 0 && !socialManagerCtrl.showCreatePost" ng-cloak>
 					<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" ng-if="socialManagerCtrl.viewingConnectedUser()" ng-cloak>
 						<button class="btn btn-red btn-add-box" ng-click="socialManagerCtrl.showNewPost()"><span translate="person.posts.ADD_POST"></span></button>
@@ -113,4 +67,62 @@ $this->params['person_links_target'] = 'public_view';
 			</div>
 		</div>
 	</div>
+	<script type="text/ng-template" id="newPostModal">
+	<div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="socialManagerCtrl.dismiss()">
+            <span class="ion-android-close" aria-hidden="true"></span>
+        </button>
+        <h3>
+            <span ng-if="!socialManagerCtrl.resolve.isEdition" translate="person.posts.NEW_POST"></span>
+            <span ng-if="socialManagerCtrl.resolve.isEdition" translate="person.posts.EDIT_POST"></span></h3>
+    </div>
+    <div class="modal-body">        
+                <div class="stories-wrapper">
+                    <div class="story-component-wrapper">
+                            <div class="col-xs-12 edit-faq-panel-wrapper">
+                                    <form novalidate>
+                                        <div class="edit-faq-panel">                                        
+                                            <div class="text-center" ng-if="!socialManagerCtrl.isEdition">
+                                                <div class="col-md-12" ng-if="!socialManagerCtrl.newPost.photo">
+														<button id="btn_create_box_popup" class="btn btn-red" name="file" ngf-select="socialManagerCtrl.uploadPhoto($files, $invalidFiles)"  ngf-accept="'image/*'"  ngf-drop-available="socialManagerCtrl.isDropAvailable" ngf-multiple="false">
+														<span>upload</span>
+													</button>                                                        
+                                                </div>
+                                                <div class=" form-control col-md-12" ng-if="socialManagerCtrl.newPost.photo" ng-cloak>
+                                                    <img class="grid-image" ng-src="{{socialManagerCtrl.newImage}}">
+                                                </div>											
+                                            </div>
+                                            <div class="col-xs-8 faq-language-menu">
+                                                <div class="faq-row">
+                                                    <div class="col-sm-2">
+                                                        <span class="faq-edit-question"><span translate="person.posts.DESCRIPTION"></span></span>
+                                                    </div>
+                                                    <div class="col-sm-10">
+                                                        <div class="faq-edit-answer" text-angular ng-model="socialManagerCtrl.newPost.text[socialManagerCtrl.newPost.selected_language]" ta-toolbar="[]" translate-attr="{placeholder: 'person.posts.DESCRIPTION'}" ta-paste="socialManagerCtrl.stripHTMLTags($html)"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <ol class="faq-lang nya-bs-select form-control" ng-model="socialManagerCtrl.newPost.selected_language" ng-change="socialManagerCtrl.parseText(socialManagerCtrl.newPost)" ng-init="socialManagerCtrl.newPost.selected_language = socialManagerCtrl.selected_language">
+                                            <li nya-bs-option="language in socialManagerCtrl.languages" class="ng-class:{'lang-selected': socialManagerCtrl.isLanguageOk(language.code, socialManagerCtrl.newPost)}" data-value="language.code" deep-watch="true">
+                                                <a href="">
+                                                    <span ng-bind="language.name"></span>
+                                                    <span class="glyphicon glyphicon-ok ok-white-icon pull-right" ng-if="socialManagerCtrl.isLanguageOk(language.code,post)"></span>
+                                                </a>
+                                            </li>
+                                        </ol>
+                                    </form>
+                            </div>
+                        </div>
+                    <div class="text-center" style="display: block; width: 100%; float: left; margin:20px 0 100px;">
+                        <div class="col-md-10 text-right error-text" ng-if="socialManagerCtrl.newPost.required_text">
+							<span translate="person.faq.FIELD_LANGS_MANDATORY" translate-values='{ languageList: socialManagerCtrl.mandatory_langs_names}'></span>
+						</div>
+                        <button class="btn btn-default btn-red" ng-click="socialManagerCtrl.createPost()"><span translate="person.posts.PUBLISH"></span></button>
+                    </div>
+				</div>
+	</div>
+</script>
 </div>
+
+

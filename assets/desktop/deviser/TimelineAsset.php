@@ -13,8 +13,6 @@ class TimelineAsset extends AssetBundle {
 	];
 	public $depends = [
 		'app\assets\desktop\GlobalAsset',
-		'app\assets\desktop\deviser\IndexAsset',
-		'app\assets\libs\angularMomentAsset',
-		'app\assets\libs\momentAsset',
+		'app\assets\desktop\deviser\IndexAsset'
 	];
 }

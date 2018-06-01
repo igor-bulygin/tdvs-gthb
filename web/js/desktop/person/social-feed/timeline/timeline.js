@@ -13,7 +13,9 @@
         vm.searchPage = 1;
         vm.timeline = [];
         vm.modalLogin = modalLogin;
-
+        vm.personTypes = [{ name: "person.DEVISERS", value: "deviser" }, { name: "person.INFLUENCERS", value: "influencer" }, { name: "person.MEMBERS", value: "member" }];
+        vm.selectedPersonType = undefined;
+        vm.resetFilter = resetFilter;
         init();
 
         function init() {
@@ -40,6 +42,12 @@
             getTimeline(vm.searchPage);
         }
 
+        function resetFilter() {
+            vm.selectedPersonType = undefined;
+        }
+
+
+
         function loveTimeline(timeline) {
             if (timeline.person_id === UtilService.getConnectedUser() || timeline.isLoved) {
                 return;
@@ -47,8 +55,8 @@
             vm.loading = true;
 
             function onLoveTimelineSuccess(data) {
-                timeline.loveds = data.timeline.loveds;
-                timeline.isLoved = data.timeline.isLoved;
+                timeline.loveds = timeline.loveds + 1;
+                timeline.isLoved = true;
                 vm.loading = false;
             }
 

@@ -1,7 +1,7 @@
 (function() {
     "use strict";
 
-    function controller(personDataService, UtilService, languageDataService, uploadDataService, $timeout, lovedDataService, $uibModal, $translate) {
+    function controller(personDataService, UtilService, languageDataService, uploadDataService, $timeout, lovedDataService, $uibModal, $translate, $scope) {
         var vm = this;
         vm.posts = [];
         vm.tempFiles = [];
@@ -19,13 +19,13 @@
         vm.openPostDetailsModal = openPostDetailsModal;
         vm.editPost = editPost;
         vm.deletePost = deletePost;
-        vm.mandatory_langs=Object.keys(_langs_required);
-		vm.mandatory_langs_names="";
+        vm.mandatory_langs = Object.keys(_langs_required);
+        vm.mandatory_langs_names = "";
 
         init();
 
         function init() {
-        	setMandatoryLanguagesNames();
+            setMandatoryLanguagesNames();
             getLanguages();
             getPosts();
         }
@@ -52,7 +52,11 @@
 
         function showNewPost() {
             vm.newPost = { photo: "", text: "", person_id: person.short_id, post_state: 'post_state_active' };
-            vm.showCreatePost = true;
+            vm.newPostModal = $uibModal.open({
+                templateUrl: 'newPostModal',
+                scope: $scope,
+                size: 'sm'
+            });
         }
 
 
@@ -76,50 +80,56 @@
             var completedLanguages = 0;
             vm.languages.forEach(function(element) {
                 if (vm.newPost.text[element.code] && vm.newPost.text[element.code] !== "") {
-                    completedLanguages = completedLanguages +1;
+                    completedLanguages = completedLanguages + 1;
                 }
             });
-            return completedLanguages === vm.languages.length-1;
+            return completedLanguages === vm.languages.length - 1;
         }
 
         function setMandatoryLanguagesNames() {
-			angular.forEach(Object.keys(_langs_required), function (lang) {
-				var translationLang="product.".concat(_langs_required[lang].toUpperCase());
-				$translate(translationLang).then(function (tr) {
-					if (vm.mandatory_langs_names.length>0) {
-						vm.mandatory_langs_names=vm.mandatory_langs_names.concat(', ');
-					}
-					vm.mandatory_langs_names=vm.mandatory_langs_names.concat(tr);
-				});
-			});
-		}
+            angular.forEach(Object.keys(_langs_required), function(lang) {
+                var translationLang = "product.".concat(_langs_required[lang].toUpperCase());
+                $translate(translationLang).then(function(tr) {
+                    if (vm.mandatory_langs_names.length > 0) {
+                        vm.mandatory_langs_names = vm.mandatory_langs_names.concat(', ');
+                    }
+                    vm.mandatory_langs_names = vm.mandatory_langs_names.concat(tr);
+                });
+            });
+        }
+
+        function dismiss() {
+            vm.newPostModal.close();
+        }
 
         function createPost() {
-        	var hasError=false;
-			vm.newPost.required_text=false;
-			angular.forEach(vm.mandatory_langs, function (lang) {
-					if (angular.isUndefined(vm.newPost.text[lang]) || vm.newPost.text[lang].length<1) {
-						vm.newPost.required_text=true;
-						hasError=true;
-					}
-				});
-			if (hasError) {
-				return;
-			}
+            var hasError = false;
+            vm.newPost.required_text = false;
+            angular.forEach(vm.mandatory_langs, function(lang) {
+                if (angular.isUndefined(vm.newPost.text[lang]) || vm.newPost.text[lang].length < 1) {
+                    vm.newPost.required_text = true;
+                    hasError = true;
+                }
+            });
+            if (hasError) {
+                return;
+            }
             vm.loading = true;
+
             function onCreatePostsSuccess(data) {
                 getPosts();
-                vm.showCreatePost = false;
+                dismiss();
                 vm.loading = false;
             }
+
             function onCreatePostsError(err) {
                 vm.loading = false;
                 UtilService.onError(err);
             }
-            var params = { };
+            var params = {};
             if (vm.isEdition) {
                 vm.isEdition = false;
-                personDataService.updatePost(vm.newPost, {id: vm.newPost.id }, onCreatePostsSuccess, onCreatePostsError);
+                personDataService.updatePost(vm.newPost, { id: vm.newPost.id }, onCreatePostsSuccess, onCreatePostsError);
             } else {
                 personDataService.publishPost(vm.newPost, onCreatePostsSuccess, onCreatePostsError);
             }
@@ -234,8 +244,11 @@
 
             function onGetPostsSuccess(data) {
                 vm.newPost = data;
-                vm.showCreatePost = true;
-                vm.loading = false;
+                vm.newPostModal = $uibModal.open({
+                    templateUrl: 'newPostModal',
+                    scope: $scope,
+                    size: 'sm'
+                });
             }
 
             function onGetPostsError(err) {
@@ -249,6 +262,7 @@
             function onDeletePostsSuccess(data) {
                 getPosts();
             }
+
             function onDeletePostsError(err) {
                 vm.loading = false;
                 UtilService.onError(err);

@@ -100,7 +100,7 @@ class Loved extends CActiveRecord
 						'short_id' => $product->short_id
 					],
 					[
-						'loveds' => $product->loveds + 1
+						'loveds' => count($product->getLoveds()),
 					]
 				);
 			}
@@ -112,7 +112,7 @@ class Loved extends CActiveRecord
 						'short_id' => $box->short_id
 					],
 					[
-						'loveds' => $box->loveds + 1
+						'loveds' => count($box->getLoveds()),
 					]
 				);
 			}
@@ -124,7 +124,7 @@ class Loved extends CActiveRecord
 						'short_id' => $post->short_id
 					],
 					[
-						'loveds' => $post->loveds + 1
+						'loveds' => count($post->getLoveds()),
 					]
 				);
 			}
@@ -136,7 +136,7 @@ class Loved extends CActiveRecord
 						'short_id' => $timeline->short_id
 					],
 					[
-						'loveds' => $timeline->loveds + 1
+						'loveds' => count($timeline->getLoveds()),
 					]
 				);
 			}
@@ -154,7 +154,7 @@ class Loved extends CActiveRecord
 					'short_id' => $product->short_id
 				],
 				[
-					'loveds' => $product->loveds - 1
+					'loveds' => count($product->getLoveds()),
 				]
 			);
 		}
@@ -166,7 +166,7 @@ class Loved extends CActiveRecord
 					'short_id' => $box->short_id
 				],
 				[
-					'loveds' => $box->loveds - 1
+					'loveds' => count($box->getLoveds()),
 				]
 			);
 		}
@@ -178,7 +178,19 @@ class Loved extends CActiveRecord
 					'short_id' => $post->short_id
 				],
 				[
-					'loveds' => $post->loveds - 1
+					'loveds' => count($post->getLoveds()),
+				]
+			);
+		}
+		$timeline = $this->getTimeline();
+		if ($timeline) {
+			$collection = Yii::$app->mongodb->getCollection('timeline');
+			$collection->update(
+				[
+					'short_id' => $timeline->short_id
+				],
+				[
+					'loveds' => count($timeline->getLoveds()),
 				]
 			);
 		}
