@@ -31,18 +31,8 @@ $this->params['person_links_target'] = 'public_view';
 				<?= PersonMenu::widget() ?>
 			</div>
 			<div class="col-md-10">
-				<div class="content-store">
-					<nav>
-						<ul>
-							<li class="<?=$type == 'follow' ? 'active' : ''?>">
-								<a href="<?=$person->getFollowLink()?>">Follow</a>
-							</li>
-							<li class="<?=$type == 'followers' ? 'active' : ''?>">
-								<a href="<?=$person->getFollowersLink()?>">Followers</a>
-							</li>
-						</ul>
-					</nav>
-					<nav>
+				<div class="content-store network">
+					<nav class="products-menu">
 						<ul>
 							<li role="button" class="active toggle toggle-all" onclick="togglePersons('all')">All</li>
 							<li role="button" class="toggle toggle-influencer" onclick="togglePersons('influencer')">Influencers</li>

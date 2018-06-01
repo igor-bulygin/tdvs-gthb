@@ -33,7 +33,16 @@ $person = $this->params['person'];
 		<?php } ?>
 		<?php if ($person->showFollowers()) { ?>
 			<li>
-				<a class=" <?= ($activeOption=='followers') ? 'active' : '' ?>" href="<?= $person->getFollowersLink()?>">Followers</a>
+				<a class=" <?= ($activeOption=='followers') ? 'active' : '' ?>" href="<?= $person->getFollowersLink()?>">Network</a>
+				<ul class="submenu-store hidden-xs">
+					<li class="/*$type == 'follow' ? 'active' : ''*/">
+						<a href="<?=$person->getFollowLink()?>">Follow</a>
+					</li>
+					<li class="/*$type == 'followers' ? 'active' : ''*/">
+						<a href="<?=$person->getFollowersLink()?>">Followers</a>
+					</li>
+
+				</ul>
 			</li>
 		<?php } ?>
 		<?php if ($person->showSocial()) { ?>
@@ -79,7 +88,7 @@ $person = $this->params['person'];
 			</li>
 		<?php } ?>
 	</ul>
-	<?php 
+	<?php
 	if ($person->showStore()) {
 	if (count($categories)>0) { ?>
 		<ul class="submenu-store hidden-sm hidden-md hidden-lg">
@@ -89,8 +98,15 @@ $person = $this->params['person'];
 				</li>
 			<?php } ?>
 		</ul>
-	<?php 
+	<?php
 	}
 	} ?>
-
+	<?php
+	if ($person->showFollowers()) { ?>
+		<ul class="submenu-network hidden-sm hidden-md hidden-lg">
+			<li><a href="<?=$person->getFollowLink()?>">Follow</a></li>
+			<li><a href="<?=$person->getFollowersLink()?>">Followers</a></li>
+		</ul>
+	<?php
+	} ?>
 </nav>

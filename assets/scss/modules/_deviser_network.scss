@@ -1,0 +1,114 @@
+// ==========================================================================
+// Deviser Network
+// ==========================================================================
+.loader-post{
+	@include size(100%,250px);
+	margin: 20px 0 20px;
+	@include border-radius(6px,6px,6px,6px);//border-radius(20px,20px,20px,20px);
+	background: $background_grey url("/imgs/product_placeholder_ico.svg") no-repeat center center;
+	border: none;
+	padding-top: 160px;
+}
+.add-post{
+	.nya-bs-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn){
+		min-width: auto !important;
+	}
+	.textarea-edit-about{
+		width: 75%;
+		margin-bottom: 20px;
+	}
+}
+.posts-text{
+	font-size: inherit;
+	font-weight: normal;
+	color: $black;
+	display: block;
+	margin-top: 8px;
+	line-height: 0.8em !important;
+}
+.see-more{
+	color: $dark-red;
+	font-weight: bold;
+	font-size: 1.2em;
+	margin-bottom: 8px;
+}
+#content-posts {
+	figcaption {
+		margin-bottom: 26px;
+		padding: 8px;
+		height: 66px;
+		background-color: none;
+	}
+}
+.edit-post-icon {
+	position: absolute;
+	bottom: 5px;
+	right: 45px;
+	z-index: 100;
+	i {
+		color: #c91c39;
+		font-size: 16px;
+	}
+}
+.close-post-icon {
+	background-color: $background_grey;
+	display: block;
+	position: absolute;
+	bottom: 8px;
+	right: 7px;
+	@include size(20px, 20px);
+	margin-top: 5px;
+	background: url('/imgs/delete-red.svg') 0 0 no-repeat transparent;
+	z-index: 100;
+}
+.posts-text {
+	font-size: inherit;
+	font-weight: normal;
+	color: $black;
+	display: block;
+	line-height: 0.8em !important;
+}
+.images-box{
+	@include size(100%, 280px);
+	max-height: 280px;
+	overflow: hidden;
+	position: relative;
+	img {
+		position: absolute;
+		left: 0;
+		top: 0;
+		margin: auto;
+	}
+}
+.images {
+	@include size(100%,300px);
+	max-height: 300px;
+	overflow: hidden;
+	position: relative;
+}
+#content-posts {
+	.heart-icon {
+		width: 30px;
+		height: 30px;
+		display: inline-block;
+		vertical-align: middle;
+		position: absolute;
+		bottom: 85px;
+		right: 10px;
+	}
+	.heart-num {
+		position: absolute;
+		text-align: right;
+		right: 48px;
+		bottom: 92px;
+		font-size: 1.2em;
+	}
+}
+.network{
+	li{
+		text-transform: uppercase;
+		&:hover, &.active{
+			color: $dark_red;
+		}
+	}
+}
