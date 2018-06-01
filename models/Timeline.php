@@ -169,9 +169,10 @@ class Timeline extends CActiveRecord
 					'link' => 'link',
 					'loveds',
 					'isLoved' => 'isLoved',
-					'date',
+					'date' => 'dateFormatted',
 				];
 				static::$retrieveExtraFields = [
+					'date',
 				];
 
 				static::$translateFields = true;
@@ -402,8 +403,13 @@ class Timeline extends CActiveRecord
 			'action_type' => $this->action_type,
 			'target_id' => $this->target_id,
 			'loveds' => $this->loveds,
-			'date' => $this->date,
+			'date' => $this->getDateFormatted()
 		];
+	}
+
+	public function getDateFormatted()
+	{
+		return $this->date->toDateTime()->format('Y-m-d H:i:s');
 	}
 
 }
