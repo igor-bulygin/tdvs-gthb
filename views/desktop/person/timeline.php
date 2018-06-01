@@ -17,14 +17,14 @@ Yii::$app->opengraph->title = $this->title;
 
 ?>
 
-<div class="store" ng-controller="timelineCtrl as timelineCtrl">
+<div ng-controller="timelineCtrl as timelineCtrl">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-3">
 				<span >Tipos</span>
 			</div>
 			<div class="col-md-5">
-				<div ng-if="timelineCtrl.connectedUser()" ng-cloak>
+				<div>
 					<div ng-if="timelineCtrl.timeline.length <1" ng-cloak>
 					</div>
 					<div infinite-scroll="timelineCtrl.addMoreItems()" infinite-scroll-distance="timelineCtrl.show_items-1">
@@ -55,13 +55,6 @@ Yii::$app->opengraph->title = $this->title;
 							</div>
 						</div>
 					</div>
-				</div>
-				<div ng-if="!timelineCtrl.connectedUser()" ng-cloak>
-						<span translate="person.timeline.START"></span>
-						<span translate="person.IF_MEMBER"></span>
-						<span translate="person.timeline.DISCOVERY_FEED"></span>
-						<span translate="person.timeline.TIMELINE_DESCR"></span>
-						<span translate="person.timeline.BUILD_COMMUNITY"></span>
 				</div>
 			</div>
 		</div>

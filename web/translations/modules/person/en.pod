@@ -189,6 +189,8 @@
 		"SAVE_CHANGES_EXIT": "Save changes & exit",
 		"DELETE_WORK_QUESTION": "Are you sure you want to delete this work?",
 		"EDIT_WORK": "Edit work",
-		"IF_MEMBER": "If you are a Todevise member"
+		"IF_MEMBER": "If you are a Todevise member",
+		"BECOME_MEMBER": "Become a member",
+		"SOCIAL": "<p>To use the social network features, you need to create a profile.</p><p>It is 100% free, and you will be able to follow brands & influencers, save products in boxes and interact with the rest of the community.</p>"
 	}
 }

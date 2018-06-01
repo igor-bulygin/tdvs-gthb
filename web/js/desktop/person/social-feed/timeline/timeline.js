@@ -1,7 +1,7 @@
 (function() {
     "use strict";
 
-    function controller(personDataService, UtilService, lovedDataService) {
+    function controller(personDataService, UtilService, lovedDataService, $uibModal) {
         var vm = this;
         vm.parseDate = UtilService.parseDate;
         vm.loveTimeline = loveTimeline;
@@ -10,9 +10,9 @@
         vm.show_items = 21;
         vm.addMoreItems = addMoreItems;
         vm.results_infinite = [];
-        vm.searchPage=1;
+        vm.searchPage = 1;
         vm.timeline = [];
-        vm.connectedUser = connectedUser;
+        vm.modalLogin = modalLogin;
 
         init();
 
@@ -22,6 +22,7 @@
 
         function getTimeline(page) {
             vm.loading = true;
+
             function onGetTimelineSuccess(data) {
                 vm.timeline = vm.timeline.concat(data.items);
                 vm.loading = false;
@@ -31,11 +32,7 @@
                 vm.loading = false;
                 UtilService.onError(err);
             }
-            personDataService.getTimeline({page: page, limit: vm.show_items }, onGetTimelineSuccess, onGetTimelineError);
-        }
-
-        function connectedUser() {
-            return !angular.isUndefined(UtilService.getConnectedUser());
+            personDataService.getTimeline({ page: page, limit: vm.show_items }, onGetTimelineSuccess, onGetTimelineError);
         }
 
         function addMoreItems() {
@@ -82,11 +79,27 @@
         }
 
         function parseImage(image) {
-            var res= image;
+            var res = image;
             if (image.indexOf('http') == -1) {
                 res = currentHost() + image;
             }
             return res;
+        }
+
+        function modalLogin() {
+            var modalInstance = $uibModal.open({
+                component: 'modalSignUpLoved',
+                resolve: {
+                    text: function() {
+                        return "person.SOCIAL";
+                    }
+                }
+            });
+            modalInstance.result.then(function(data) {
+                return data;
+            }, function(err) {
+                UtilService.onError(err);
+            });
         }
     }
 
