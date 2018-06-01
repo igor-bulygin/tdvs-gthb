@@ -5573,9 +5573,9 @@ h3 {
   color: #ffffff;
   text-transform: uppercase;
   line-height: 1.5em; }
-  .deviser-followers .position-followers {
+  .deviser-followers.position-followers {
     left: 16px; }
-  .deviser-followers .position-following {
+  .deviser-followers.position-following {
     left: 110px; }
   .deviser-followers p {
     text-align: center;
@@ -5791,6 +5791,8 @@ h3 {
   text-transform: uppercase; }
   .network li:hover, .network li.active {
     color: #c91c39; }
+    .network li:hover a, .network li.active a {
+      color: #c91c39 !important; }
 
 .about-wrapper {
   width: 100%;
