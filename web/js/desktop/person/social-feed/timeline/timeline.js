@@ -14,7 +14,8 @@
         vm.timeline = [];
         vm.modalLogin = modalLogin;
         vm.personTypes = ['deviser', 'influencer', 'member'];
-        vm.selectedPersonType = 'deviser';
+        vm.selectedPersonType = undefined;
+        vm.resetFilter = resetFilter;
         init();
 
         function init() {
@@ -40,6 +41,12 @@
             vm.searchPage = vm.searchPage + 1;
             getTimeline(vm.searchPage);
         }
+
+        function resetFilter() {
+            vm.selectedPersonType = undefined;
+        }
+
+
 
         function loveTimeline(timeline) {
             if (timeline.person_id === UtilService.getConnectedUser() || timeline.isLoved) {
