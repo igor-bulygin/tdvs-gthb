@@ -90,7 +90,7 @@ class LovedController extends AppPrivateController
 				$timeline->action_type = Timeline::ACTION_POST_LOVED;
 			} elseif ($loved->timeline_id) {
 				$timeline->target_id = $loved->timeline_id;
-				$timeline->action_type = Timeline::TIM;
+				$timeline->action_type = Timeline::ACTION_TIMELINE_LOVED;
 			}
 			$timeline->date = new \MongoDate();
 			$timeline->save();
