@@ -257,7 +257,7 @@
 // ==========================================================================
 .deviser-followers {    
     position: absolute;
-    bottom: 20px;
+    bottom: 14px;//20px;
     font-size: 14px;
     color: $white;
     text-transform: uppercase;
@@ -274,12 +274,16 @@
         font-size: 1.1em;
     }
     .num {
-        font-size: 1.4em;
+        font-size: 1.8em;//1.4em;
+        line-height: 1.2em;
+    }
+    a{
+        color: $white;
     }
 }
 .more-options {
-    right: -30px;
-    top: 10px;
+    right: 0;
+    top: 168px;
     position: absolute;
 }
 .more-options-icon{

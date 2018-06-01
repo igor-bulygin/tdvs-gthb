@@ -20,11 +20,11 @@ Yii::$app->opengraph->title = $this->title;
 <div ng-controller="timelineCtrl as timelineCtrl">
 	<div class="container">
 		<div class="row">
-			<div class="col-md-3">
+			<div class="col-xs-12 col-md-3">
 				<span >Tipos</span>
 			</div>
-			<div class="col-md-5">
-				<div>
+			<div class="col-xs-12 col-md-8 col-lg-7">
+				<div class="timeline-wrapper">
 					<div ng-if="timelineCtrl.timeline.length <1" ng-cloak>
 					</div>
 					<div infinite-scroll="timelineCtrl.addMoreItems()" infinite-scroll-distance="timelineCtrl.show_items-1">

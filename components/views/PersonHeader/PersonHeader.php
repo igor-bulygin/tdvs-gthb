@@ -63,7 +63,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 
 				<div class="deviser-followers position-followers">
 					<p>Followers</p>
-					<p>
+					<p class="num">
 						<a href="<?=$person->getFollowersLink()?>">
 							<?=count($person->getFollowers())?>
 						</a>
@@ -72,7 +72,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 
 				<div class="deviser-followers position-following">
 					<p>Following</p>
-					<p>
+					<p class="num">
 						<a href="<?=$person->getFollowLink()?>">
 							<?=count($person->getFollow())?>
 						</a>

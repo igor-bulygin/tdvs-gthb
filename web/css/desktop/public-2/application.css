@@ -5568,7 +5568,7 @@ h3 {
 
 .deviser-followers {
   position: absolute;
-  bottom: 20px;
+  bottom: 14px;
   font-size: 14px;
   color: #ffffff;
   text-transform: uppercase;
@@ -5582,11 +5582,14 @@ h3 {
     margin: auto;
     font-size: 1.1em; }
   .deviser-followers .num {
-    font-size: 1.4em; }
+    font-size: 1.8em;
+    line-height: 1.2em; }
+  .deviser-followers a {
+    color: #ffffff; }
 
 .more-options {
-  right: -30px;
-  top: 10px;
+  right: 0;
+  top: 168px;
   position: absolute; }
 
 .more-options-icon {
@@ -6640,6 +6643,9 @@ span.optional-text.pull-left {
   @media (max-height: 575px) {
     .title-loved {
       display: none; } }
+
+.timeline-wrapper .row {
+  margin: 0; }
 
 .empty-box-text {
   font-weight: bold;

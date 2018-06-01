@@ -17,9 +17,11 @@
 							</a>
 						</div>
 						<div class="col-md-6">
-							<button class="btn btn-icon mt-5" ng-click="discoverResultsCtrl.setFollow(person)">
-								<span ng-if="!person.is_followed"><i class="ion-ios-star"></i><span translate="discover.FOLLOW"></span></span>
-								<span ng-if="person.is_followed"><i class="ion-ios-star red-text"></i><span translate="discover.UNFOLLOW"></span></span>
+							<button ng-if="!person.is_followed" class="btn btn-follow full-size-btn btn-icon" ng-click="discoverResultsCtrl.setFollow(person)">
+								<i class="hidden ion-ios-star"></i><span translate="discover.FOLLOW"></span>
+							</button>
+							<button ng-if="person.is_followed" class="btn btn-follow full-size-btn btn-red" ng-click="discoverResultsCtrl.setFollow(person)">
+								<i class="hidden ion-ios-star"></i><span translate="discover.UNFOLLOW"></span>
 							</button>
 						</div>
 					</div>
