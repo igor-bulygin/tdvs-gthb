@@ -34,9 +34,9 @@ $person = $this->params['person'];
 		<?php } ?>
 		<?php if ($person->showFollowers()) { ?>
 			<li>
-				<a class=" <?= ($activeOption=='followers') ? 'active' : '' ?>" href="<?= $person->getFollowersLink()?>">Network</a>
+				<a class=" <?= ($activeOption=='follow') ? 'active' : '' ?>" href="<?= $person->getFollowLink()?>">Network</a>
 				<?php if ($activeOption == 'followers') { ?>
-					<ul class="submenu-store hidden-xs">
+					<ul class="submenu-store network hidden-xs">
 						<li class="<?= $menuFollow == 'follow' ? 'active' : ''?>">
 							<a href="<?=$person->getFollowLink()?>">Follow</a>
 						</li>

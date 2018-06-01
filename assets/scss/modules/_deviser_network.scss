@@ -109,6 +109,9 @@
 		text-transform: uppercase;
 		&:hover, &.active{
 			color: $dark_red;
+			a {
+				color: $dark_red !important;
+			}
 		}
 	}
 }

@@ -262,10 +262,10 @@
     color: $white;
     text-transform: uppercase;
     line-height: 1.5em;
-    .position-followers{
+    &.position-followers{
         left: 16px;
     }
-    .position-following{
+    &.position-following{
         left:110px;
     }
     p {
@@ -283,5 +283,9 @@
     position: absolute;
 }
 .more-options-icon{
-    background: url(/imgs/more-options-icon.svg) 0 0 no-repeat transparent;
+    @extend %more-options-icon;
+    @extend %header-icon;
+    /*&:hover{
+        @extend %chat-red-icon;
+    }*/
 }

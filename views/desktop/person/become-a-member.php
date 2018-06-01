@@ -17,4 +17,15 @@ Yii::$app->opengraph->title = $this->title;
 
 ?>
 
-To start building your timeline, you need to be a Todevise member
+<div ng-controller="timelineCtrl as timelineCtrl">
+	<div class="container">
+		<div class="row">
+			<span class="row" translate="person.timeline.START"></span>
+			<button  class="btn btn-red btn-add-box" ng-click="timelineCtrl.modalLogin()"><span translate="person.BECOME_MEMBER"></span></button>
+			<span class="row" translate="person.IF_MEMBER"></span>
+			<span class="row" translate="person.timeline.DISCOVERY_FEED"></span>
+			<span class="row" translate="person.timeline.TIMELINE_DESCR"></span>
+			<span class="row" translate="person.timeline.BUILD_COMMUNITY"></span>
+		</div>
+	</div>
+</div>
