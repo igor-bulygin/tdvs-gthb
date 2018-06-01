@@ -13,7 +13,7 @@
         vm.searchPage = 1;
         vm.timeline = [];
         vm.modalLogin = modalLogin;
-        vm.personTypes = ['deviser', 'influencer', 'member'];
+        vm.personTypes = [{ name: "person.DEVISERS", value: "deviser" }, { name: "person.INFLUENCERS", value: "influencer" }, { name: "person.MEMBERS", value: "member" }];
         vm.selectedPersonType = undefined;
         vm.resetFilter = resetFilter;
         init();

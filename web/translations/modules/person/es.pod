@@ -192,6 +192,10 @@
 		"SAVE_EXIT": "Guardar y salir",
 		"IF_MEMBER": "If you are a Todevise member",
 		"BECOME_MEMBER": "Become a member",
-		"SOCIAL": "<p>To use the <strong>social network</strong> features, you need to create a profile.</p><p>It is 100% free, and you will be able to follow brands & influencers, save products in boxes and interact with the rest of the community.</p>"
+		"SOCIAL": "<p>To use the <strong>social network</strong> features, you need to create a profile.</p><p>It is 100% free, and you will be able to follow brands & influencers, save products in boxes and interact with the rest of the community.</p>",
+		"ALL": "All",
+		"DEVISERS": "Deviser",
+		"MEMBERS": "Members",
+		"INFLUENCERS": "Influencers"
 	}
 }

@@ -22,9 +22,9 @@ Yii::$app->opengraph->title = $this->title;
 		<div class="row">
 			<div class="col-md-3">
 				<span  ng-click="timelineCtrl.resetFilter()" 
-					class="ng-class:{'active-menu': !timelineCtrl.selectedPersonType}">All</span>
+					class="ng-class:{'active-menu': !timelineCtrl.selectedPersonType}" translate="person.ALL"></span>
 				<div ng-repeat="personType in timelineCtrl.personTypes">
-					<span ng-bind="personType" ng-click="timelineCtrl.selectedPersonType = personType" 
+					<span translate="{{personType.name}}" ng-click="timelineCtrl.selectedPersonType = personType.value" 
 					class="ng-class:{'active-menu': timelineCtrl.selectedPersonType === personType}"></span>
 				</div>
 			</div>
