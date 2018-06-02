@@ -204,20 +204,20 @@ class Timeline extends CActiveRecord
 	 *
 	 * @param string $id
 	 *
-	 * @return Post|null
+	 * @return Timeline|null
 	 * @throws Exception
 	 */
 	public static function findOneSerialized($id)
 	{
-		/** @var Post $post */
-		$post = static::find()->select(self::getSelectFields())->where(["short_id" => $id])->one();
+		/** @var Timeline $timeline */
+		$timeline = static::find()->select(self::getSelectFields())->where(["short_id" => $id])->one();
 
 		// if automatic translation is enabled
 		if (static::$translateFields) {
-			Utils::translate($post);
+			Utils::translate($timeline);
 		}
 
-		return $post;
+		return $timeline;
 	}
 
 	/**
@@ -328,7 +328,7 @@ class Timeline extends CActiveRecord
 	}
 
 	/**
-	 * Returns Loveds from the post
+	 * Returns Loveds from the timeline
 	 *
 	 * @return Loved[]
 	 */
@@ -346,7 +346,7 @@ class Timeline extends CActiveRecord
 	}
 
 	/**
-	 * Returns TRUE if the post is loved by the connected user
+	 * Returns TRUE if the timeline is loved by the connected user
 	 *
 	 * @return bool
 	 */
@@ -391,7 +391,7 @@ class Timeline extends CActiveRecord
 	}
 
 	/**
-	 * Get only preview attributes from post
+	 * Get only preview attributes from timeline
 	 *
 	 * @return array
 	 */

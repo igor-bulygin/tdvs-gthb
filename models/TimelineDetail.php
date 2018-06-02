@@ -125,9 +125,10 @@ class TimelineDetail
 		if (!$timeline) {
 			return;
 		}
-		$this->title = null;
-		$this->description = $timeline->text;
-		$this->photo = $timeline->getImagePreview(600, 260);
+		$timelineDetail = $timeline->getTimelineDetail();
+		$this->title = $timelineDetail->title;
+		$this->description = $timelineDetail->description;
+		$this->photo = $timelineDetail->photo;
 		$this->link = null;
 	}
 
