@@ -5,7 +5,6 @@ use app\helpers\CController;
 use app\helpers\InstagramHelper;
 use app\models\Box;
 use app\models\Category;
-use app\models\Loved;
 use app\models\Person;
 use app\models\Product;
 use app\models\Story;
@@ -446,7 +445,7 @@ class PersonController extends CController
 
 		$this->checkProfileState($person);
 
-		$loveds = Loved::findSerialized(['person_id' => $person_id]);
+		$loveds = $person->getLovedsProduct();
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("@app/views/desktop/person/loved-view", [
 			'person' => $person,

@@ -225,7 +225,7 @@ class Timeline extends CActiveRecord
 	 *
 	 * @param array $criteria
 	 *
-	 * @return Post[]
+	 * @return Timeline[]
 	 * @throws Exception
 	 */
 	public static function findSerialized($criteria = [])
