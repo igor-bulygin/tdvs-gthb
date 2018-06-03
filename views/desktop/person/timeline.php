@@ -38,7 +38,7 @@ Yii::$app->opengraph->title = $this->title;
 								<div class="menu-category list-group" >
 									<div class="row timeline-header">
 										<img class="avatar-logued-user" ng-src="{{ timelineCtrl.parseImage(timeline.person.url_avatar)}}">
-										<span class="timeline-person" ng-bind="timeline.person.name"></span>
+										<span class="timeline-person"><a ng-href="{{ timeline.person.main_link }}"><span ng-bind="timeline.person.name"></span></a></span>
 										<span class="timeline-action" ng-bind="timeline.action_name"></span>
 										<span class="timeline-time" am-time-ago="timeline.date | amUtc"></span>
 									</div>
@@ -51,7 +51,7 @@ Yii::$app->opengraph->title = $this->title;
 										<span ng-if="!timeline.isLoved" class="icons-hover heart-icon heart-black-icon" ng-click="timelineCtrl.loveTimeline(timeline)" ng-cloak></span>
 									</div>
 									<div class="row">
-										<span class="timeline-title" ng-bind-html="timeline.title"></span>
+										<span class="timeline-title"><a ng-href="{{ timeline.link }}"><span ng-bind-html="timeline.title"></span></a></span>
 									</div>
 									<div class="row">
 										<span class="timeline-description" ng-bind-html="timeline.description"></span>

@@ -64,8 +64,8 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 						<?php } ?>
 					<?php } ?>
 				</div>
-				<span class="dropdown menu-other-actions">
-					<a data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="hidden-xs icons-hover more-options more-options-icon"></span></a>
+				<span class="dropdown more-options">
+					<a data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="hidden-xs icons-hover more-options-icon"></span></a>
 					<div class="dropdown-menu admin-wrapper black-form">
 						<ul class="menu-logued">
 						<?php if (!$person->isConnectedUser()) { ?>

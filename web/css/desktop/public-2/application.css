@@ -5591,9 +5591,9 @@ h3 {
     color: #ffffff; }
 
 .more-options {
-  right: 15;
-  bottom: 30px;
-  position: absolute; }
+  position: absolute;
+  right: 28px;
+  bottom: 42px; }
 
 .more-options-icon {
   /*&:hover{
