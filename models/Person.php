@@ -482,6 +482,11 @@ class Person extends CActiveRecord implements IdentityInterface
 			$item->delete();
 		}
 
+		$timelines = $this->getTimelines();
+		foreach ($timelines as $item) {
+			$item->delete();
+		}
+
 		$this->deletePhotos();
 
 		return parent::beforeDelete();
@@ -512,11 +517,37 @@ class Person extends CActiveRecord implements IdentityInterface
 	}
 
 	/**
+	 * @return Loved[]
+	 */
+	public function getLovedsProduct()
+	{
+		$lovedsReturn = [];
+		$loveds = $this->getLoveds();
+		foreach ($loveds as $loved) {
+			$product = $loved->getProduct();
+			if (empty($product) || $product->product_state != \app\models\Product::PRODUCT_STATE_ACTIVE) {
+				continue;
+			}
+			$lovedsReturn[] = $loved;
+		}
+
+		return $lovedsReturn;
+	}
+
+	/**
 	 * @return Story[]
 	 */
 	public function getStories()
 	{
 		return Story::findSerialized(["person_id" => $this->id]);
+	}
+
+	/**
+	 * @return Timeline[]
+	 */
+	public function getTimelines()
+	{
+		return Timeline::findSerialized(["person_id" => $this->id]);
 	}
 
 	public function deletePhotos()
@@ -2369,7 +2400,7 @@ class Person extends CActiveRecord implements IdentityInterface
 
 	public function showLoved()
 	{
-		$loveds = $this->getLoveds();
+		$loveds = $this->getLovedsProduct();
 		return $this->isPersonEditable() || count($loveds) > 0;
 	}
 
