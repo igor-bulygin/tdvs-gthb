@@ -9,6 +9,7 @@ GlobalAsset::register($this);
 // use params to share data between views :(
 /** @var Person $person */
 $person = $this->params['person'];
+$isFollowed = $person->isFollowedByConnectedUser() ? 'true' : 'false';
 $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD, 'person-var-script');
 ?>
 
@@ -49,7 +50,11 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 					</div>
 					<?php if (!$person->isConnectedUser()) { ?>
 						<div class="edit-profile-btn hidden-xs hidden-sm">
-							<a class="btn btn-default all-caps btn-black-on-white btn-header" href="<?= $person->getChatLink()?>"><span translate="person.header.CHAT"></span></a>
+						<?php if ($isFollowed) {?>
+								<button class="btn btn-follow btn-auto btn-red" ng-click="personComponentCtrl.unFollow('<?=$person->short_id?>')" ng-cloak><i class="ion-ios-star red-text hidden"></i><span><span translate="discover.UNFOLLOW"></span></span></button>
+							<?php } else {?>
+								<button class="btn btn-follow btn-auto btn-icon" ng-click="personComponentCtrl.follow('<?=$person->short_id?>')" ng-cloak><i class="hidden ion-ios-star"></i><span><span translate="discover.FOLLOW"></span></span></button>
+							<?php } ?>
 						</div>
 					<?php } else { ?>
 						<?php if ($person->isPersonEditable() && $person->isPublic()) {?>
@@ -59,7 +64,19 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 						<?php } ?>
 					<?php } ?>
 				</div>
-				<span class="hidden-xs icons-hover more-options more-options-icon"></span>
+				<span class="dropdown menu-other-actions">
+					<a data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="hidden-xs icons-hover more-options more-options-icon"></span></a>
+					<div class="dropdown-menu admin-wrapper black-form">
+						<ul class="menu-logued">
+						<?php if (!$person->isConnectedUser()) { ?>
+							<li class="_header-item"><a href="<?= $person->getChatLink()?>"><span translate="person.header.CHAT"></span></a></li>
+						<?php } ?>
+						<?php if ($person->isDeviserEditable() && $person->isPublic()) {?>
+							<li class="_header-item"><a href="<?= $person->getCreateWorkLink()?>"><span translate="person.header.ADD_WORK"></span></a></li>
+						<?php } ?>
+						</ul>
+					</div>
+				</span>
 
 				<div class="hidden-xs deviser-followers position-followers">
 					<p>Followers</p>
@@ -78,10 +95,6 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 						</a>
 					</p>
 				</div>
-
-				<?php if ($person->isDeviserEditable() && $person->isPublic()) {?>
-					<a class="btn btn-default all-caps btn-header btn-add-work hidden-xs hidden-sm" ng-class="personHeaderCtrl.required['store'] ? 'button-error' : 'btn-red'" href="<?= $person->getCreateWorkLink()?>"><span translate="person.header.ADD_WORK"></span></a>
-				<?php } ?>
 			</div>
 		</div>
 	</div>

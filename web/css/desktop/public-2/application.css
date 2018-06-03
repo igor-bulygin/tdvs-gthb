@@ -5370,7 +5370,8 @@ h3 {
 
 .banner-deviser-content {
   padding: 30px 0;
-  min-height: 200px; }
+  min-height: 200px;
+  text-shadow: 0 1px 2px rgba(28, 25, 25, 0.5); }
   @media (max-width: 575px) {
     .banner-deviser-content {
       width: 100%;
@@ -5590,8 +5591,8 @@ h3 {
     color: #ffffff; }
 
 .more-options {
-  right: 0;
-  top: 168px;
+  right: 15;
+  bottom: 30px;
   position: absolute; }
 
 .more-options-icon {
