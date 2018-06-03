@@ -19,13 +19,14 @@ Yii::$app->opengraph->title = $this->title;
 
 <div ng-controller="timelineCtrl as timelineCtrl">
 	<div class="container">
-		<div class="row">
-			<span class="row" translate="person.timeline.START"></span>
-			<button  class="btn btn-red btn-add-box" ng-click="timelineCtrl.modalLogin()"><span translate="person.BECOME_MEMBER"></span></button>
-			<span class="row" translate="person.IF_MEMBER"></span>
-			<span class="row" translate="person.timeline.DISCOVERY_FEED"></span>
-			<span class="row" translate="person.timeline.TIMELINE_DESCR"></span>
-			<span class="row" translate="person.timeline.BUILD_COMMUNITY"></span>
+		<div class="row timeline-login col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3">
+			<span class="row login-start" translate="person.timeline.START"></span>
+			<button  class="btn btn-red btn-auto" ng-click="timelineCtrl.modalLogin()"><span translate="person.BECOME_MEMBER"></span></button>
+			<span class="row login-signin" translate="person.IF_MEMBER"></span>
+			<span class="row login-discovery-feed" translate="person.timeline.DISCOVERY_FEED"></span>
+			<span class="row login-descr" translate="person.timeline.TIMELINE_DESCR"></span>
+			<span class="row login-descr" translate="person.timeline.BUILD_COMMUNITY"></span>
+			<img src="imgs/timeline-empty.jpg" class="img-responsive">
 		</div>
 	</div>
 </div>

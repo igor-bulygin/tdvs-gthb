@@ -58,8 +58,8 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 							</div>
 						<?php } ?>
 					<?php } ?>
-					<span class="icons-hover more-options more-options-icon"></span>
 				</div>
+				<span class="icons-hover more-options more-options-icon"></span>
 
 				<div class="deviser-followers position-followers">
 					<p>Followers</p>
