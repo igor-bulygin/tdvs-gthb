@@ -19,14 +19,48 @@
 		vm.isInfluencer = UtilService.isInfluencer;
 		vm.isClient = UtilService.isClient;
 		vm.has_error = UtilService.has_error;
+		vm.follow = follow;
+		vm.unFollow = unFollow;
+		vm.init = init;
 
-		init();
-
-		function init() {
+		function init(isFollowed) {
 			vm.editingHeader = false;
+			vm.isFollowed = isFollowed;
 			getPerson();
 			getLanguages();
+			console.log(vm.isFollowed);
 		}
+
+		function unFollow(personId) {
+			function onSetFollowSuccess(data) {
+				vm.isFollowed = false;
+			}
+
+			function onSetFollowError(err) {
+				UtilService.onError(err);
+			}
+
+			var params = {
+				personId: personId
+			}
+			personDataService.unFollowPerson(params, params, onSetFollowSuccess, onSetFollowError);
+		}
+
+		function follow(personId) {
+			function onSetFollowSuccess(data) {
+				vm.isFollowed = true;
+			}
+
+			function onSetFollowError(err) {
+				UtilService.onError(err);
+			}
+
+			var params = {
+				personId: personId
+			}
+			personDataService.followPerson(params, params, onSetFollowSuccess, onSetFollowError);
+		}
+
 
 		function getPerson() {
 			function onGetProfileSuccess(data) {

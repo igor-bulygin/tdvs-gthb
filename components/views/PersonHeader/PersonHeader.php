@@ -9,11 +9,11 @@ GlobalAsset::register($this);
 // use params to share data between views :(
 /** @var Person $person */
 $person = $this->params['person'];
-$isFollowed = $person->isFollowedByConnectedUser() ? 'true' : 'false';
+$isFollowed = $person->isFollowedByConnectedUser() ? true : false;
 $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD, 'person-var-script');
 ?>
 
-<div class="banner-deviser" ng-controller="personHeaderCtrl as personHeaderCtrl">
+<div class="banner-deviser" ng-controller="personHeaderCtrl as personHeaderCtrl" ng-init="personHeaderCtrl.init(<?=$isFollowed?>)">
 	<div class="container pad-about" ng-if="!personHeaderCtrl.editingHeader" ng-cloak>
 		<img class="cover" ng-src="{{personHeaderCtrl.person.header_image}}">
 		<div class="banner-deviser-content">
@@ -50,11 +50,8 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 					</div>
 					<?php if (!$person->isConnectedUser()) { ?>
 						<div class="edit-profile-btn hidden-xs hidden-sm">
-						<?php if ($isFollowed) {?>
-								<button class="btn btn-follow btn-auto btn-red" ng-click="personComponentCtrl.unFollow('<?=$person->short_id?>')" ng-cloak><i class="ion-ios-star red-text hidden"></i><span><span translate="discover.UNFOLLOW"></span></span></button>
-							<?php } else {?>
-								<button class="btn btn-follow btn-auto btn-icon" ng-click="personComponentCtrl.follow('<?=$person->short_id?>')" ng-cloak><i class="hidden ion-ios-star"></i><span><span translate="discover.FOLLOW"></span></span></button>
-							<?php } ?>
+							<button class="btn btn-follow btn-auto btn-red" ng-click="personHeaderCtrl.follow('<?=$person->short_id?>')" ng-cloak ng-if="!personHeaderCtrl.isFollowed"><i class="hidden ion-ios-star"></i><span><span translate="discover.FOLLOW"></span></span></button>
+							<button class="btn btn-follow full-size-btn btn-red" ng-click="personHeaderCtrl.unFollow('<?=$person->short_id?>')" ng-cloak ng-if="personHeaderCtrl.isFollowed"><i class="ion-ios-star red-text hidden"></i><span><span translate="discover.UNFOLLOW"></span></span></button>
 						</div>
 					<?php } else { ?>
 						<?php if ($person->isPersonEditable() && $person->isPublic()) {?>
@@ -65,7 +62,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 					<?php } ?>
 				</div>
 				<span class="dropdown more-options">
-					<a data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="hidden-xs icons-hover more-options-icon"></span></a>
+					<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="hidden-xs icons-hover more-options-icon"></span></a>
 					<div class="dropdown-menu admin-wrapper black-form">
 						<ul class="menu-logued">
 						<?php if (!$person->isConnectedUser()) { ?>
