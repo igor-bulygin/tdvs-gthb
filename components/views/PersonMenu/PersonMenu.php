@@ -33,8 +33,8 @@ $person = $this->params['person'];
 			</li>
 		<?php } ?>
 		<?php if ($person->showFollowers()) { ?>
-			<li>
-				<a class=" <?= ($activeOption=='follow') ? 'active' : '' ?>" href="<?= $person->getFollowLink()?>">Network</a>
+			<li class=" <?= ($activeOption=='followers') ? 'active' : '' ?>">
+				<a class=" <?= ($activeOption=='followers') ? 'active' : '' ?>" href="<?= $person->getFollowLink()?>">Network</a>
 				<?php if ($activeOption == 'followers') { ?>
 					<ul class="submenu-store network hidden-xs">
 						<li class="<?= $menuFollow == 'follow' ? 'active' : ''?>">
@@ -48,10 +48,12 @@ $person = $this->params['person'];
 			</li>
 		<?php } ?>
 		<?php if ($person->showSocial()) { ?>
-			<li>
+			<li class=" <?= ($activeOption=='social') ? 'active' : '' ?>">
 				<a class=" <?= ($activeOption=='social') ? 'active' : '' ?>" href="<?= $person->getSocialLink()?>">Social feed</a>
 			</li>
 		<?php } ?>
+	</ul>
+	<ul class="menu-deviser-bottom">
 		<?php if ($person->showLoved()) { ?>
 		<li class=" <?= ($activeOption=='loved') ? 'active' : '' ?>">
 			<a class=" <?= ($activeOption=='loved') ? 'active' : '' ?>" href="<?= $person->getLovedLink()?>">Loved</a>
@@ -104,8 +106,8 @@ $person = $this->params['person'];
 	}
 	} ?>
 	<?php
-	if ($person->showFollowers()) { ?>
-		<ul class="submenu-network hidden-sm hidden-md hidden-lg">
+	if ($person->showFollowers() && $activeOption=='followers') { ?>
+		<ul class="submenu-store hidden-sm hidden-md hidden-lg">
 			<li><a href="<?=$person->getFollowLink()?>">Follow</a></li>
 			<li><a href="<?=$person->getFollowersLink()?>">Followers</a></li>
 		</ul>

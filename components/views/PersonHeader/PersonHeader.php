@@ -59,9 +59,9 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 						<?php } ?>
 					<?php } ?>
 				</div>
-				<span class="icons-hover more-options more-options-icon"></span>
+				<span class="hidden-xs icons-hover more-options more-options-icon"></span>
 
-				<div class="deviser-followers position-followers">
+				<div class="hidden-xs deviser-followers position-followers">
 					<p>Followers</p>
 					<p class="num">
 						<a href="<?=$person->getFollowersLink()?>">
@@ -70,7 +70,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 					</p>
 				</div>
 
-				<div class="deviser-followers position-following">
+				<div class="hidden-xs deviser-followers position-following">
 					<p>Following</p>
 					<p class="num">
 						<a href="<?=$person->getFollowLink()?>">
