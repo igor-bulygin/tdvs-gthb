@@ -89,7 +89,7 @@ $this->params['person_links_target'] = 'public_view';
 			    											<span>upload</span>
 				    									</button>                                                        
                                                     </div>
-                                                    <div class="form-control col-xs-12" ng-if="socialManagerCtrl.newPost.photo" ng-cloak>
+                                                    <div class="col-xs-12" ng-if="socialManagerCtrl.newPost.photo" ng-cloak>
                                                         <img class="grid-image" ng-src="{{socialManagerCtrl.newImage}}">
                                                     </div>											
                                                 </div>
