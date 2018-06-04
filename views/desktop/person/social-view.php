@@ -80,9 +80,8 @@ $this->params['person_links_target'] = 'public_view';
     <div class="modal-body">
                 <div class="stories-wrapper">
                     <div class="story-component-wrapper">
-                            <div class="col-xs-12 edit-faq-panel-wrapper">
-                                    <form novalidate>
-                                        <div class="edit-faq-panel">                                        
+                            <div class="col-xs-12">
+                                    <form novalidate>                                        
                                             <div class="row no-margin">
                                                 <div class="text-center" ng-if="!socialManagerCtrl.isEdition">
                                                     <div class="col-xs-12" ng-if="!socialManagerCtrl.newPost.photo">
@@ -94,25 +93,20 @@ $this->params['person_links_target'] = 'public_view';
                                                         <img class="grid-image" ng-src="{{socialManagerCtrl.newImage}}">
                                                     </div>											
                                                 </div>
-                                            </div>
+											</div>
+											<div class="row no-margin">
+												<ol class="nya-bs-select form-control" ng-model="socialManagerCtrl.newPost.selected_language" ng-change="socialManagerCtrl.parseText(socialManagerCtrl.newPost)" ng-init="socialManagerCtrl.newPost.selected_language = socialManagerCtrl.selected_language">
+													<li nya-bs-option="language in socialManagerCtrl.languages" class="ng-class:{'lang-selected': socialManagerCtrl.isLanguageOk(language.code, socialManagerCtrl.newPost)}" data-value="language.code" deep-watch="true">
+														<a href="">
+															<span ng-bind="language.name"></span>
+															<span class="glyphicon glyphicon-ok ok-white-icon pull-right" ng-if="socialManagerCtrl.isLanguageOk(language.code,post)"></span>
+														</a>
+													</li>
+												</ol>
+											</div>
                                             <div class="row no-margin">
-                                                <div class="col-xs-12 faq-language-menu">
-                                                    <div class="faq-row">
-                                                        <div class="col-xs-10 offset-xs-1">
-                                                            <div class="faq-edit-answer" text-angular ng-model="socialManagerCtrl.newPost.text[socialManagerCtrl.newPost.selected_language]" ta-toolbar="[]" translate-attr="{placeholder: 'person.posts.DESCRIPTION'}" ta-paste="socialManagerCtrl.stripHTMLTags($html)"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <ol class="faq-lang nya-bs-select form-control" ng-model="socialManagerCtrl.newPost.selected_language" ng-change="socialManagerCtrl.parseText(socialManagerCtrl.newPost)" ng-init="socialManagerCtrl.newPost.selected_language = socialManagerCtrl.selected_language">
-                                            <li nya-bs-option="language in socialManagerCtrl.languages" class="ng-class:{'lang-selected': socialManagerCtrl.isLanguageOk(language.code, socialManagerCtrl.newPost)}" data-value="language.code" deep-watch="true">
-                                                <a href="">
-                                                    <span ng-bind="language.name"></span>
-                                                    <span class="glyphicon glyphicon-ok ok-white-icon pull-right" ng-if="socialManagerCtrl.isLanguageOk(language.code,post)"></span>
-                                                </a>
-                                            </li>
-                                        </ol>
+                                                    <div text-angular ng-model="socialManagerCtrl.newPost.text[socialManagerCtrl.newPost.selected_language]" ta-toolbar="[]" translate-attr="{placeholder: 'person.posts.DESCRIPTION'}" ta-paste="socialManagerCtrl.stripHTMLTags($html)"></div>
+                                            </div>										
                                     </form>
                             </div>
                         </div>
