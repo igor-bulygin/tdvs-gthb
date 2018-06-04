@@ -115,8 +115,28 @@ a{
         padding-right: 5px;
     }*/
     &.btn-icon{
+        //position: absolute;
+        width: auto;
         height: auto;
         margin: 0.4em 0 !important;
+        background-color: $white;
+        //right: 40px;
+        //bottom: 8px;
+    }
+}
+.btn-follow-header{
+    @extend %btn;
+    height: auto;
+    margin: 0.4em 0 !important;
+    z-index: 12;
+    &.btn-icon{
+        //position: absolute;
+        width: auto;
+        height: auto;
+        margin: 0.4em 0 !important;
+        background-color: $white;
+        //right: 40px;
+        //bottom: 8px;
     }
 }
 /*botones rectangulares*/

@@ -2,6 +2,7 @@
 // Timeline
 // ==========================================================================
 .timeline-wrapper{
+	margin-top: 20px;
 	.row{
 		margin: 0;
 	}
@@ -17,7 +18,7 @@
 	.timeline-box{
 		background: $white;
 		box-shadow: 1px 4px 8px rgba($dark_grey, 0.2);
-		margin: 20px 0 10px;
+		margin: 20px auto;
 		border: solid 1px rgba($dark_grey, 0.1);
 		.menu-category{
 			height: auto;
@@ -69,14 +70,14 @@
 	text-align: center;
 	font-weight: bold;
 	padding: 40px 0 120px;
-	.span, img {
+	span, img {
 		display: block;
 	}
 	.login-start{
 		padding-bottom: 40px;
 		font-size: 15px;
 	}
-	.login-singin{
+	.login-signin{
 		margin: 20px 0 80px !important;
 		font-weight: normal;
 	}

@@ -6,8 +6,8 @@
 					<img class="deviser-discover-img showcase-image" ng-src="{{ person.header_small_image }}">
 				</a>
 				<figcaption>
-					<div class="row">
-						<div class="col-md-6">
+					<div class="row no-margin-xs">
+						<div class="col-xs-6">
 							<a ng-href="{{person.main_link}}">
 								<!--img class="showcase-image" ng-src="{{person.url_avatar}}"-->
 								<div class="title-product-name sm align-left">
@@ -16,7 +16,7 @@
 								<span class="location align-left" ng-bind="(person.city | capitalize)"></span>
 							</a>
 						</div>
-						<div class="col-md-6">
+						<div class="col-xs-6">
 							<button ng-if="!person.is_followed" class="btn btn-follow full-size-btn btn-icon" ng-click="discoverResultsCtrl.setFollow(person)">
 								<i class="hidden ion-ios-star"></i><span translate="discover.FOLLOW"></span>
 							</button>

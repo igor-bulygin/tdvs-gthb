@@ -83,24 +83,23 @@ $this->params['person_links_target'] = 'public_view';
                             <div class="col-xs-12 edit-faq-panel-wrapper">
                                     <form novalidate>
                                         <div class="edit-faq-panel">                                        
-                                            <div class="row no-margin">
-                                                <div class="text-center" ng-if="!socialManagerCtrl.isEdition">
-                                                    <div class="col-xs-12" ng-if="!socialManagerCtrl.newPost.photo">
-		    												<button id="btn_create_box_popup" class="btn btn-red" name="file" ngf-select="socialManagerCtrl.uploadPhoto($files, $invalidFiles)"  ngf-accept="'image/*'"  ngf-drop-available="socialManagerCtrl.isDropAvailable" ngf-multiple="false">
-			    											<span>upload</span>
-				    									</button>                                                        
-                                                    </div>
-                                                    <div class="form-control col-xs-12" ng-if="socialManagerCtrl.newPost.photo" ng-cloak>
-                                                        <img class="grid-image" ng-src="{{socialManagerCtrl.newImage}}">
-                                                    </div>											
+                                            <div class="text-center" ng-if="!socialManagerCtrl.isEdition">
+                                                <div class="col-xs-12" ng-if="!socialManagerCtrl.newPost.photo">
+														<button id="btn_create_box_popup" class="btn btn-red" name="file" ngf-select="socialManagerCtrl.uploadPhoto($files, $invalidFiles)"  ngf-accept="'image/*'"  ngf-drop-available="socialManagerCtrl.isDropAvailable" ngf-multiple="false">
+														<span>upload</span>
+													</button>                                                        
                                                 </div>
+                                                <div class="form-control col-xs-12" ng-if="socialManagerCtrl.newPost.photo" ng-cloak>
+                                                    <img class="grid-image" ng-src="{{socialManagerCtrl.newImage}}">
+                                                </div>											
                                             </div>
-                                            <div class="row no-margin">
-                                                <div class="col-xs-12 faq-language-menu">
-                                                    <div class="faq-row">
-                                                        <div class="col-xs-10 offset-xs-1">
-                                                            <div class="faq-edit-answer" text-angular ng-model="socialManagerCtrl.newPost.text[socialManagerCtrl.newPost.selected_language]" ta-toolbar="[]" translate-attr="{placeholder: 'person.posts.DESCRIPTION'}" ta-paste="socialManagerCtrl.stripHTMLTags($html)"></div>
-                                                        </div>
+                                            <div class="col-xs-8 faq-language-menu">
+                                                <div class="faq-row">
+                                                    <div class="col-sm-2">
+                                                        <span class="faq-edit-question"><span translate="person.posts.DESCRIPTION"></span></span>
+                                                    </div>
+                                                    <div class="col-xs-10 offset-xs-1">
+                                                        <div class="faq-edit-answer" text-angular ng-model="socialManagerCtrl.newPost.text[socialManagerCtrl.newPost.selected_language]" ta-toolbar="[]" translate-attr="{placeholder: 'person.posts.DESCRIPTION'}" ta-paste="socialManagerCtrl.stripHTMLTags($html)"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -120,7 +119,7 @@ $this->params['person_links_target'] = 'public_view';
                         <div class="col-md-10 text-right error-text" ng-if="socialManagerCtrl.newPost.required_text">
 							<span translate="person.faq.FIELD_LANGS_MANDATORY" translate-values='{ languageList: socialManagerCtrl.mandatory_langs_names}'></span>
 						</div>
-                        <button class="btn btn-default btn-auto btn-red" ng-click="socialManagerCtrl.createPost()"><span translate="person.posts.PUBLISH"></span></button>
+                        <button class="btn btn-default btn-red" ng-click="socialManagerCtrl.createPost()"><span translate="person.posts.PUBLISH"></span></button>
                     </div>
 				</div>
 	</div>
