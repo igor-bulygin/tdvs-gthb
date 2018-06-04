@@ -21,6 +21,7 @@
         vm.deletePost = deletePost;
         vm.mandatory_langs = Object.keys(_langs_required);
         vm.mandatory_langs_names = "";
+        vm.dismiss = dismiss;
 
         init();
 
@@ -99,6 +100,7 @@
         }
 
         function dismiss() {
+            vm.newPost = {};
             vm.newPostModal.close();
         }
 
