@@ -5744,15 +5744,19 @@ h3 {
   margin-bottom: 8px; }
 
 #content-posts figcaption {
+  position: relative;
   margin-bottom: 26px;
   padding: 8px;
-  height: 66px;
+  height: 100px;
   background-color: none; }
+
+.posts-edit {
+  height: 30px; }
 
 .edit-post-icon {
   position: absolute;
-  bottom: 5px;
-  right: 45px;
+  bottom: 2px;
+  right: 30px;
   z-index: 100; }
   .edit-post-icon i {
     color: #c91c39;
@@ -5762,8 +5766,7 @@ h3 {
   background-color: #e9e9e9;
   display: block;
   position: absolute;
-  bottom: 8px;
-  right: 7px;
+  right: 0;
   width: 20px;
   height: 20px;
   margin-top: 5px;
@@ -5779,8 +5782,8 @@ h3 {
 
 .images-box {
   width: 100%;
-  height: 280px;
-  max-height: 280px;
+  height: 240px;
+  max-height: 240px;
   overflow: hidden;
   position: relative; }
   .images-box img {
@@ -5800,16 +5803,11 @@ h3 {
   width: 30px;
   height: 30px;
   display: inline-block;
-  vertical-align: middle;
-  position: absolute;
-  bottom: 85px;
-  right: 10px; }
+  vertical-align: middle; }
 #content-posts .heart-num {
-  position: absolute;
   text-align: right;
-  right: 48px;
-  bottom: 92px;
-  font-size: 1.2em; }
+  font-size: 1.2em;
+  padding: 0 8px 10px 0; }
 
 .network li {
   text-transform: uppercase; }

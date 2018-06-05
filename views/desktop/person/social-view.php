@@ -45,23 +45,27 @@ $this->params['person_links_target'] = 'public_view';
 					<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 mb-20 text-center" ng-if="socialManagerCtrl.viewingConnectedUser()" ng-cloak>
 						<button class="btn btn-red btn-add-box" ng-click="socialManagerCtrl.showNewPost()"><span translate="person.posts.ADD_POST"></span></button>
 					</div>
-					<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" ng-repeat="post in socialManagerCtrl.posts" ng-cloak>
-						<div class="menu-category list-group" >
-							<div class="grid mb-10">
-									<img class="col-xs-12 grid-image" ng-src="{{post.photo_url}}">
-									<div class="col-xs-12 text-right mt-10">
-										<span ng-bind="post.loveds"></span>
+					<div id="content-posts" class="col-xs-6 col-sm-6 col-md-4 col-lg-4" ng-repeat="post in socialManagerCtrl.posts" ng-cloak>
+						<figure class="showcase">
+							<div class="images-box">
+								<img class="col-xs-12 grid-image" ng-src="{{post.photo_url}}">
+							</div>
+							<figcaption>
+								<div class="row no-mar">
+									<div class="col-xs-2 col-sm-2 col-md-3 col-xs-offset-10 col-sm-offset-10 col-md-offset-9 no-padding">
+										<span ng-bind="post.loveds" class="heart-num"></span>
 										<span ng-if="post.isLoved" class="icons-hover heart-icon heart-red-icon" ng-click="socialManagerCtrl.unLovePost(post)" ng-cloak></span>
 										<span ng-if="!post.isLoved" class="icons-hover heart-icon heart-black-icon" ng-click="socialManagerCtrl.lovePost(post)" ng-cloak></span>
 									</div>
-									<span class="col-xs-12" ng-bind-html="socialManagerCtrl.truncateString(post.text, socialManagerCtrl.maxCharacters, '...')"></span>
+									<span class="col-xs-12 posts-text align-left" ng-bind-html="socialManagerCtrl.truncateString(post.text, socialManagerCtrl.maxCharacters, '...')"></span>
 									<a ng-if="post.text.length > socialManagerCtrl.maxCharacters && !socialManagerCtrl.viewingConnectedUser()" class="col-xs-4 col-xs-push-8" ng-click="socialManagerCtrl.openPostDetailsModal(post)"><span translate="person.posts.SEE_MORE"></span></a>
-									<div class="col-xs-4 col-xs-offset-8" ng-if="socialManagerCtrl.viewingConnectedUser()" >
-										<a class="_col-xs-7" ng-click="socialManagerCtrl.editPost(post.id)"><span _class="edit-product-icon"><i class="ion-edit"></i></span></a> 
-										<a class="_col-xs-5" ng-click="socialManagerCtrl.deletePost(post.id)"><span class="close-product-icon"></span></a>
+									<div class="col-xs-4 col-xs-offset-8 col-sm-4 col-md-4 no-padding posts-edit" ng-if="socialManagerCtrl.viewingConnectedUser()">
+										<a ng-click="socialManagerCtrl.editPost(post.id)"><span class="edit-post-icon"><i class="ion-edit"></i></span></a> 
+										<a ng-click="socialManagerCtrl.deletePost(post.id)"><span class="close-post-icon"></span></a>
 									</div>
-							</div>
-						</div>
+								</div>
+							</figcaption>
+						</figure>
 					</div>
 				</div>
 			</div>
