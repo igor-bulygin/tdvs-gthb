@@ -45,7 +45,7 @@ $this->params['person_links_target'] = 'public_view';
 					<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 mb-20 text-center" ng-if="socialManagerCtrl.viewingConnectedUser()" ng-cloak>
 						<button class="btn btn-red btn-add-box" ng-click="socialManagerCtrl.showNewPost()"><span translate="person.posts.ADD_POST"></span></button>
 					</div>
-					<div id="content-posts" class="col-xs-6 col-sm-6 col-md-4 col-lg-4" ng-repeat="post in socialManagerCtrl.posts" ng-cloak>
+					<div id="content-posts" class="col-xs-12 col-sm-6 col-md-4 col-lg-4" ng-repeat="post in socialManagerCtrl.posts" ng-cloak>
 						<figure class="showcase">
 							<div class="images-box">
 								<img class="col-xs-12 grid-image" ng-src="{{post.photo_url}}">
