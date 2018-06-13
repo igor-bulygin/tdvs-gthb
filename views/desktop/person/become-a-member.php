@@ -4,6 +4,7 @@ use app\assets\desktop\deviser\TimelineAsset;
 use app\models\Category;
 use app\models\Person;
 use app\models\Product;
+use yii\helpers\Url;
 
 TimelineAsset::register($this);
 
@@ -22,7 +23,12 @@ Yii::$app->opengraph->title = $this->title;
 		<div class="row timeline-login col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3">
 			<span class="row login-start" translate="person.timeline.START"></span>
 			<button  class="btn btn-red btn-auto" ng-click="timelineCtrl.modalLogin()"><span translate="person.BECOME_MEMBER"></span></button>
-			<span class="row login-signin" translate="person.IF_MEMBER"></span>
+			<div class="row login-signin">
+				<div translate="person.IF_MEMBER"></div>
+				<div class="log">
+					<a href="<?=Url::to('/login')?>" translate="header.LOGIN"></a>
+				</div>
+			</div>
 			<span class="row login-discovery-feed" translate="person.timeline.DISCOVERY_FEED"></span>
 			<span class="row login-descr" translate="person.timeline.TIMELINE_DESCR"></span>
 			<span class="row login-descr" translate="person.timeline.BUILD_COMMUNITY"></span>
