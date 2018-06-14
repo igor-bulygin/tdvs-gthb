@@ -688,7 +688,10 @@ class Product extends CActiveRecord {
 		// if text is specified
 		if ((array_key_exists("text", $criteria)) && (!empty($criteria["text"]))) {
 //			// search the word in all available languages
-			$query->andFilterWhere(static::getFilterForText(static::$textFilterAttributes, $criteria["text"]));
+			$parts = explode(' ', $criteria['text']);
+			foreach ($parts as $part) {
+				$query->andFilterWhere(static::getFilterForText(static::$textFilterAttributes, $part));
+			}
 		}
 
 		// Count how many items are with those conditions, before limit them for pagination
