@@ -89,6 +89,12 @@ a, a:hover, a:focus{
   } 
 }
 
+.no-margin-sm{
+  @media (max-width: 991px){
+    margin: 0 !important;
+  } 
+}
+
 //Include Fonts
 //@include font-face('Roboto Condensed', Roboto-Condensed-Regular);
 @include font-face('Univers Thin Ultra Condensed', UniversLT-Thin-Ultracondensed);
