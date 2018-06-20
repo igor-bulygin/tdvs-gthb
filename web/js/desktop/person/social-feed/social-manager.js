@@ -188,7 +188,11 @@
         }
 
         function lovePost(post) {
-            if (post.person_id === UtilService.getConnectedUser() || post.isLoved) {
+            var connectedUser = UtilService.getConnectedUser();
+            if (!connectedUser) {
+                modalLogin($uibModal, "person.SOCIAL");
+            }
+            if (post.person_id === connectedUser || post.isLoved) {
                 return;
             }
             vm.loading = true;
@@ -207,7 +211,11 @@
         }
 
         function unLovePost(post) {
-            if (post.person_id === UtilService.getConnectedUser() || !post.isLoved) {
+            var connectedUser = UtilService.getConnectedUser();
+            if (!connectedUser) {
+                modalLogin();
+            }
+            if (post.person_id === connectedUser || !post.isLoved) {
                 return;
             }
             vm.loading = true;
@@ -270,6 +278,22 @@
                 UtilService.onError(err);
             }
             personDataService.deletePost({ id: postId }, onDeletePostsSuccess, onDeletePostsError);
+        }
+
+        function modalLogin() {
+            var modalInstance = $uibModal.open({
+                component: 'modalSignUpLoved',
+                resolve: {
+                    text: function() {
+                        return "person.SOCIAL";
+                    }
+                }
+            });
+            modalInstance.result.then(function(data) {
+                return data;
+            }, function(err) {
+                UtilService.onError(err);
+            });
         }
 
 

@@ -1,25 +1,30 @@
-(function () {
-	"use strict";
+(function() {
+    "use strict";
 
-	function controller(){
-		var vm = this;
-		vm.login = currentHost() + '/login';
-		vm.signup = currentHost() + '/signup';
-	}
+    function controller() {
+        var vm = this;
+        vm.login = currentHost() + '/login';
+        vm.signup = currentHost() + '/signup';
+        vm.dismiss = dismiss;
 
-	var component = {
-		templateUrl: currentHost() + '/js/util/modal-signup-loved/modal-signup-loved.html',
-		controller: controller,
-		controllerAs: 'modalSignUpLovedCtrl',
-		bindings: {
-			dismiss: '&',
-			close: '&',
-			resolve: '<'
-		}
-	}
+        function dismiss() {
+            vm.close();
+        }
+    }
 
-	angular
-		.module('util')
-		.component('modalSignUpLoved', component);
+    var component = {
+        templateUrl: currentHost() + '/js/util/modal-signup-loved/modal-signup-loved.html',
+        controller: controller,
+        controllerAs: 'modalSignUpLovedCtrl',
+        bindings: {
+            dismiss: '&',
+            close: '&',
+            resolve: '<'
+        }
+    }
+
+    angular
+        .module('util')
+        .component('modalSignUpLoved', component);
 
 }());
