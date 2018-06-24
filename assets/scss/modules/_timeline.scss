@@ -64,6 +64,9 @@
 		overflow: hidden;
 		-webkit-line-clamp: 2;
 		display: -webkit-box;
+		p {
+			margin: 0;
+		}
 	}
 }
 .timeline-login{
