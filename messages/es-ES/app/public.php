@@ -74,6 +74,7 @@ return [
 	'CONTACT_FACEBOOK_TEXT_1' => 'Puedes escribirnos vía Facebook. Nuestro equipo de redes sociales te responderá en menos de 24 horas.',
 	'CONTACT_FACEBOOK_TEXT_2' => 'Pulsa el siguiente botón para ir a nuestro perfil',
 	'CONTACT_FACEBOOK_BUTTON' => 'Contactar vía Facebook',
+	'COMMUNITY' => 'Community',
 	'CREATE_AN_INFLUENCER_ACCOUNT' => 'Crea una cuenta de influencer',
 	'CREATE_A_DEVISER_ACCOUNT' => 'Crea una cuenta de deviser',
 	'CREATE_NEW_WORK_BY_PERSON_NAME' => 'Crear nuevo trabajo de {person_name}',

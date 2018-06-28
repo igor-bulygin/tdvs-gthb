@@ -34,7 +34,7 @@ $person = $this->params['person'];
 		<?php } ?>
 		<?php if ($person->showFollowers()) { ?>
 			<li class=" <?= ($activeOption=='followers') ? 'active' : '' ?>">
-				<a class=" <?= ($activeOption=='followers') ? 'active' : '' ?>" href="<?= $person->getFollowLink()?>">Followers</a>
+				<a class=" <?= ($activeOption=='followers') ? 'active' : '' ?>" href="<?= $person->getFollowLink()?>"><?=Yii::t('app/public', 'COMMUNITY')?></a>
 				<?php if ($activeOption == 'followers') { ?>
 					<ul class="submenu-store network hidden-xs">
 						<li class="<?= $menuFollow == 'follow' ? 'active' : ''?>">
