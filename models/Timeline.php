@@ -94,6 +94,23 @@ class Timeline extends CActiveRecord
 
 	public function beforeSave($insert)
 	{
+		if ($insert) {
+			$exists = Timeline::findSerialized([
+				'person_id' => $this->person_id,
+				'target_id' => $this->target_id,
+				'action_type' => $this->action_type,
+			]);
+
+			if (count($exists) > 0) {
+				// if already exists a record for the same action, we update the existing item (to prevent duplicates)
+				$first = $exists[0];
+				$first->date = new \MongoDate();
+				$first->save();
+
+				return false;
+			}
+		}
+
 		if (!isset($this->loveds)) {
 			$this->loveds = 0;
 		}
@@ -245,6 +262,16 @@ class Timeline extends CActiveRecord
 		// if deviser id is specified
 		if ((array_key_exists("person_id", $criteria)) && (!empty($criteria["person_id"]))) {
 			$query->andWhere(["person_id" => $criteria["person_id"]]);
+		}
+
+		// if target_id is specified
+		if ((array_key_exists("target_id", $criteria)) && (!empty($criteria["target_id"]))) {
+			$query->andWhere(["target_id" => $criteria["target_id"]]);
+		}
+
+		// if action_type is specified
+		if ((array_key_exists("action_type", $criteria)) && (!empty($criteria["action_type"]))) {
+			$query->andWhere(["action_type" => $criteria["action_type"]]);
 		}
 
 		// if only_active_persons are specified
