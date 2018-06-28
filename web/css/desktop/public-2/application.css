@@ -355,8 +355,8 @@ a, a:hover, a:focus {
     top: 70px; } }
 
 .form-control {
-  -webkit-box-shadow: 0 0 0 rgba(0, 0, 0, 0);
-  box-shadow: 0 0 0 rgba(0, 0, 0, 0); }
+  -webkit-box-shadow: 0 0 0 transparent;
+  box-shadow: 0 0 0 transparent; }
 
 .btn-default:hover {
   background-color: #cecece; }
@@ -809,7 +809,8 @@ a.btn span {
 .btn-follow-header {
   height: auto;
   margin: 0.4em 0 !important;
-  z-index: 12; }
+  z-index: 12;
+  min-width: 177px; }
   .btn-follow-header.btn-icon {
     width: auto;
     height: auto;
@@ -5576,6 +5577,16 @@ h3 {
   right: 38px;
   bottom: 10px; }
 
+.edit-profile-btn-left {
+  position: absolute;
+  top: 115px;
+  left: 14px; }
+
+.edit-profile-btn-right {
+  position: absolute;
+  right: 17px;
+  bottom: 10px; }
+
 .powered-google {
   width: 100px;
   margin: 0 auto;
@@ -5603,15 +5614,15 @@ h3 {
 
 .deviser-followers {
   position: absolute;
-  bottom: 14px;
+  bottom: 72px;
   font-size: 14px;
   color: #ffffff;
   text-transform: uppercase;
   line-height: 1.5em; }
   .deviser-followers.position-followers {
-    left: 16px; }
+    right: 110px; }
   .deviser-followers.position-following {
-    left: 110px; }
+    right: 16px; }
   .deviser-followers p {
     text-align: center;
     margin: auto;
@@ -5877,8 +5888,8 @@ h3 {
   overflow: hidden;
   overflow: hidden;
   position: relative;
-  line-height: 1.42857143em;
-  max-height: 55.71428577em;
+  line-height: 1.42857em;
+  max-height: 55.71429em;
   /*text-align: justify;
   margin-right: -1em;
   padding-right: 1em;
