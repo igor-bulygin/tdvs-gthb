@@ -9,7 +9,7 @@ class angularMomentAsset extends AssetBundle {
 	public $css = [
 	];
 	public $js = [
-		YII_ENV_DEV ? 'angular-moment.js' : 'min/angular-moment.min.js'
+		YII_ENV_DEV ? 'angular-moment.js' : 'angular-moment.min.js'
 	];
 	public $depends = [
 		'app\assets\libs\angularAsset'
