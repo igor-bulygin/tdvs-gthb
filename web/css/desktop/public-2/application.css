@@ -9262,7 +9262,8 @@ cart-panel .cart-panel-div {
       .category-menu .categories ul.two-categories li {
         margin-right: 0; }
   .category-menu .images {
-    float: left; }
+    float: left;
+    width: auto;}
     .category-menu .images .image-1 {
       float: left;
       width: 398px;
