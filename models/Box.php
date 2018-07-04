@@ -674,7 +674,7 @@ class Box extends CActiveRecord
 		];
 	}
 
-	public function getMainPhoto($width = null, $height = null)
+	public function getMainPhoto($width = null, $height = null, $fill = null)
 	{
 		$products = $this->getProducts();
 		if (empty($products)) {
@@ -682,6 +682,6 @@ class Box extends CActiveRecord
 		}
 
 		$product = end($products);
-		return $product->getImagePreview($width, $height);
+		return $product->getImagePreview($width, $height, $fill);
 	}
 }

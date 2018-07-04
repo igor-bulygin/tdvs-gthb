@@ -1049,7 +1049,7 @@ class Person extends CActiveRecord implements IdentityInterface
 	 *
 	 * @return string
 	 */
-	public function getHeaderImage($width = 1170, $height = 0)
+	public function getHeaderImage($width = 1170, $height = 0, $fill = null)
 	{
 		$url = "/imgs/default-cover.jpg";
 
@@ -1060,7 +1060,11 @@ class Person extends CActiveRecord implements IdentityInterface
 			$image = Person::getUrlImagesLocation() . $this->mediaMapping->header;
 		}
 		if ($image) {
-			$url = Utils::url_scheme() . Utils::thumborize($image)->resize($width, $height);
+			if ($fill) {
+				$url = Utils::url_scheme() . Utils::thumborize($image)->fitIn($width, $height)->addFilter('fill', $fill);
+			} else {
+				$url = Utils::url_scheme() . Utils::thumborize($image)->resize($width, $height);
+			}
 		}
 
 		return $url;

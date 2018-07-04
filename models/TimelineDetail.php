@@ -14,6 +14,8 @@ class TimelineDetail
 	public $photo;
 	public $link;
 
+	protected static $_fill_color = 'FFFFFF';
+
 	public function __construct($action_type, $target_id)
 	{
 		$this->action_type = $action_type;
@@ -91,7 +93,7 @@ class TimelineDetail
 		}
 		$this->title = $box->name;
 		$this->description = $box->description;
-		$this->photo = $box->getMainPhoto(600, 260);
+		$this->photo = $box->getMainPhoto(600, 260, static::$_fill_color);
 		$this->link = $box->getViewLink();
 	}
 
@@ -103,7 +105,7 @@ class TimelineDetail
 		}
 		$this->title = $product->name;
 		$this->description = $product->description;
-		$this->photo = $product->getImagePreview(600, 260);
+		$this->photo = $product->getImagePreview(600, 260, static::$_fill_color);
 		$this->link = $product->getViewLink();
 	}
 
@@ -115,7 +117,7 @@ class TimelineDetail
 		}
 		$this->title = null;
 		$this->description = $post->text;
-		$this->photo = $post->getImagePreview(600, 260);
+		$this->photo = $post->getImagePreview(600, 260, static::$_fill_color);
 		$this->link = null;
 	}
 
@@ -140,7 +142,7 @@ class TimelineDetail
 		}
 		$this->title = $person->getName();
 		$this->description = $person->text_biography;
-		$this->photo = $person->getHeaderImage(600, 260);
+		$this->photo = $person->getHeaderImage(600, 260, static::$_fill_color);
 		$this->link = $person->getMainLink();
 	}
 }
