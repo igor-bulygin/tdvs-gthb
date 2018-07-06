@@ -1,7 +1,7 @@
 (function() {
 	"use strict";
 
-	function controller(personDataService, UtilService, locationDataService, productDataService, languageDataService, Upload, 
+	function controller(personDataService, UtilService, locationDataService, productDataService, languageDataService, Upload,
 		uploadDataService, $scope, $window) {
 		var vm = this;
 		vm.has_error = UtilService.has_error;
@@ -76,7 +76,7 @@
 						country_code: vm.person.personal_info.country
 					})
 				}
-			} 
+			}
 		}
 
 		function setPrefix() {
@@ -156,7 +156,7 @@
 
 				uploadDataService.UploadFile(fileData, onUploadHeaderCroppedSuccess, onError, console.log);
 			}
-			
+
 			function onUploadHeaderCroppedSuccess(data) {
 				vm.person.media.header_cropped = data.data.filename;
 				personDataService.updateProfile(vm.person, {
@@ -178,9 +178,9 @@
 					type: 'deviser-media-profile-cropped',
 					file: Upload.dataUrltoBlob(vm.profile_cropped, "temp.png")
 				}
-				
+
 				uploadDataService.UploadFile(fileData, onUploadProfileCroppedSuccess, onError, console.log);
-			} 
+			}
 			else {
 				vm.sendingForm = false;
 			}
@@ -194,6 +194,7 @@
 
 		$scope.$watch('completeProfileCtrl.profile', function(newValue, oldValue) {
 			function onUploadProfileSuccess(data) {
+				vm.person.media = vm.person.media || {};
 				vm.person.media.profile = angular.copy(data.data.filename);
 				vm.profile_crop = newValue;
 			}

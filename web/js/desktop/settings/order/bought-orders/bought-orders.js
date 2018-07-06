@@ -13,7 +13,7 @@
 			vm.ordersTotalPrice = 0;
 			vm.orders.forEach(function(order) {
 				cartService.parseTags(order, vm.tags);
-				vm.ordersTotalPrice += order.subtotal;
+				vm.ordersTotalPrice += order.total;
 			})
 		}
 
@@ -54,7 +54,7 @@
 			}, function(err) {
 				UtilService.onError(err);
 			});
-		} 
+		}
 	}
 
 	var component = {

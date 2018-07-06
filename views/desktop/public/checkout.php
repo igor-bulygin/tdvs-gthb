@@ -32,6 +32,9 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
                                         <span class="shopping-cart-title no-mar" translate="cart.shopping_cart.YOUR_SHOPPING_CART"></span>
                                 </span>
                                 <cart-summary cart="checkoutCtrl.cart" state="checkoutCtrl.checkout_state" tags="checkoutCtrl.tags"></cart-summary>
+																<div class="hidden-md hidden-lg col-xs-12 col-sm-12 cart-shipping-included">
+																	<span translate="cart.SHIPPING_PRICES_INCLUDED"></span>
+																</div>
                         </div>
 			<div class="col-xs-12 col-sm-12 col-md-8 no-pad">
 				<personal-info ng-if="checkoutCtrl.cart&&checkoutCtrl.countries"  ng-cloak cart="checkoutCtrl.cart" state="checkoutCtrl.checkout_state" countries="checkoutCtrl.countries"></personal-info>

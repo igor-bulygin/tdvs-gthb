@@ -34,9 +34,11 @@
 			}
 
 			function onCreatePersonError(err) {
-				console.log(err);
+				if(err.status === 406)
+					vm.error_message = "util.errors.PROMO_CODE_NOT_VALID";
+
 				if(err.status === 409)
-					vm.error_message = "This account already exists.";
+					vm.error_message = "util.errors.EMAIL_EXISTS";
 			}
 
 			if(form.password_confirm.$error.same)
@@ -53,7 +55,7 @@
 					case 3:
 						personDataService.createDeviser(vm.person, null, onCreatePersonSuccess, onCreatePersonError);
 						break;
-					default: 
+					default:
 						personDataService.createClient(vm.person, null, onCreatePersonSuccess, onCreatePersonError);
 						break;
 				}

@@ -89,7 +89,7 @@ $this->registerJs("var order_id= ".Json::encode($order_id), yii\web\View::POS_HE
 								</div>
 								<div class="summary-row">
 									<span>Ud: <span ng-bind="product.quantity"></span></span><span>&nbsp;·&nbsp;</span>
-									<span>Tags: 
+									<span>Tags:
 										<span ng-repeat="tag in product.tags">
 											<span ng-repeat="value in tag.values track by $index">
 												<span ng-if="!orderSuccessCtrl.isObject(value)">
@@ -105,12 +105,14 @@ $this->registerJs("var order_id= ".Json::encode($order_id), yii\web\View::POS_HE
 					</div>
 					<div class="summary-cart-wrapper" ng-cloak>
 						<span class="subtotal-amount-wrapper">
-							<span class="pull-right bold"><span translate="todevise.order.TOTAL"></span> <span translate="todevise.order.CURRENCY"></span><span ng-bind="orderSuccessCtrl.order.subtotal"></span></span>
+							<span class="pull-right bold"><span translate="todevise.order.TOTAL"></span> <span translate="todevise.order.CURRENCY"></span><span ng-bind="orderSuccessCtrl.order.total"></span></span>
 						</span>
 					</div>
+				</div>
+				<div class="order-success-summary-wrapper-final">
+					<span ng-if="orderSuccessCtrl.order.first_discount" translate="cart.X_PERCENT_DISCOUNT_APPLIED" translate-values="{percent_discount: orderSuccessCtrl.order.percent_discount}"></span>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-

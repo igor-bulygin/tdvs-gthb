@@ -285,6 +285,7 @@ $config = [
 				//Settings
 				'/settings/<slug:[^/.]*?>/<person_id:[^/.]*?>' => 'settings',
 				'/settings/<slug:[^/.]*?>/<person_id:[^/.]*?>/general' => 'settings/general',
+				'/settings/<slug:[^/.]*?>/<person_id:[^/.]*?>/affiliates' => 'settings/affiliates',
 				'/settings/<slug:[^/.]*?>/<person_id:[^/.]*?>/billing' => 'settings/billing',
 				'/settings/<slug:[^/.]*?>/<person_id:[^/.]*?>/shipping' => 'settings/shipping',
 				'/settings/<slug:[^/.]*?>/<person_id:[^/.]*?>/connect-stripe' => 'settings/connect-stripe',

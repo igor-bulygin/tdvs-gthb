@@ -1,6 +1,10 @@
 (function () {
 	"use strict";
 
+	function roundToTwo(num) {
+    return +(Math.round(num + "e+2")  + "e-2");
+	}
+
 	function service(UtilService) {
 		this.parseTags = parseTags;
 		this.setTotalItems = setTotalItems;
@@ -61,7 +65,7 @@
 						pack.products.forEach(function (product) {
 							total += product.quantity;
 						})
-						
+
 					}
 				})
 			}
@@ -69,19 +73,24 @@
 		}
 
 		function setTotalAmount(cart) {
-			var total = 0;
-			cart.packs.forEach(function(pack) {
-				total += pack.pack_price + pack.shipping_price;
-			})
-			cart.subtotal = total;
+			setProductsAmount(cart);
 		}
 
 		function setProductsAmount(cart) {
+			var subtotal = 0;
+			var subtotal_without_shipping = 0;
 			var total = 0;
+			var amount_discount = 0;
 			cart.packs.forEach(function(pack) {
-				total += pack.pack_price;
-			});
-			cart.subtotal = total;
+				subtotal += (pack.pack_price + pack.shipping_price);
+				subtotal_without_shipping += (pack.pack_price);
+			})
+
+			if(cart.first_discount) {
+				amount_discount = roundToTwo(subtotal_without_shipping * cart.percent_discount / 100);
+			}
+			cart.subtotal = subtotal;
+			cart.total = subtotal - amount_discount;
 		}
 	}
 

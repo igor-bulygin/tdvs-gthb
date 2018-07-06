@@ -64,7 +64,7 @@
 				vm.handler.open({
 					name: '',
 					description: 'Order Nº ' + data.id,
-					amount: data.subtotal*100
+					amount: data.total*100
 				});
 				// setSaving(true);
 			}

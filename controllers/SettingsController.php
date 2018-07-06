@@ -97,6 +97,39 @@ class SettingsController extends CController
 		]);
 	}
 
+	public function actionAffiliates($slug, $person_id)
+	{
+		// get the category object
+		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
+		$person = Person::findOneSerialized($person_id);
+
+		if (!$person) {
+			throw new NotFoundHttpException();
+		}
+
+		if ($slug != $person->getSlug()) {
+			$this->redirect($person->getSettingsLink('affiliates'), 301);
+		}
+
+		if (!$person->isPersonEditable()) {
+			throw new UnauthorizedHttpException();
+		}
+
+		$this->checkProfileState($person);
+
+		$currency = Currency::getDefaultCurrency();
+
+		$affiliates = Person::find()->where(['parent_affiliate_id' => $person->affiliate_id])->all();
+
+		$this->layout = '/desktop/public-2.php';
+
+		return $this->render("affiliates", [
+			'person' => $person,
+			'affiliates' => $affiliates,
+			'currency' => $currency
+		]);
+	}
+
 	public function actionBilling($slug, $person_id)
 	{
 		// get the category object

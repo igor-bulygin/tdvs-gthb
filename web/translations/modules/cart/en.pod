@@ -13,6 +13,10 @@
 		"QUANTITY": "Quantity",
 		"SUBTOTAL": "Subtotal",
 		"TOTAL": "Total",
+		"WITH_PERCENT_DISCOUNT": "with {{percent_discount}}% discount",
+		"X_PERCENT_DISCOUNT_APPLIED": "{{percent_discount}}% discount applied",
+		"STANDARD_SHIPPING_PRICES_INCLUDED": "Standard shipping prices included",
+		"SHIPPING_PRICES_INCLUDED": "Shipping prices included",
 		"CONTINUE_SHOPPING": "Continue shopping",
 		"payment_methods": {
 			"PAYMENT_TITLE": "Payment info",

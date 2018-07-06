@@ -22,6 +22,7 @@ class CartController extends AppPublicController
 			$cart->person_id = Yii::$app->user->identity->short_id;
 		}
 		$cart->subtotal = 0;
+		$cart->total = 0;
 		$cart->save();
 
 		Yii::$app->response->setStatusCode(201); // Created
@@ -317,7 +318,12 @@ class CartController extends AppPublicController
 				$pack->recalculateTotals();
 				$deviser = $pack->getDeviser();
 
-				$stripeAmount = (int)(($pack->pack_price + $pack->shipping_price) * 100);
+				if(!empty($order->first_discount) && $order->first_discount){
+					$stripeAmount = (int)((($pack->pack_price + $pack->shipping_price) - ($pack->pack_price * $order->percent_discount / 100)) * 100);
+				} else {
+					$stripeAmount = (int)(($pack->pack_price + $pack->shipping_price) * 100);
+				}
+
 
 				if (empty($deviser->settingsMapping->stripeInfoMapping->access_token)) {
 
@@ -353,9 +359,14 @@ class CartController extends AppPublicController
 						]
 					);
 
-					$todeviseFeePercentage = $deviser->getTodeviseFee();
 					$vatOverFeePercentage = $deviser->getVatOverFee();
-					$totalFeePercentage = $deviser->getSalesApplicationFee();
+					if(!empty($order->first_discount) && $order->first_discount){
+						$todeviseFeePercentage = $deviser->getTodeviseFeeAfterDiscount($order->percent_discount/100);
+						$totalFeePercentage = $deviser->getSalesApplicationFeeAfterDiscount($order->percent_discount/100);
+					} else {
+						$todeviseFeePercentage = $deviser->getTodeviseFee();
+						$totalFeePercentage = $deviser->getSalesApplicationFee();
+					}
 
 					// Set fees
 					$pack->pack_percentage_fee = $totalFeePercentage;
@@ -386,7 +397,7 @@ class CartController extends AppPublicController
 				}
 
 				// Recalculate totals
-				$pack->pack_total_price = $pack->pack_price + $pack->shipping_price;
+				$pack->pack_total_price = ($stripeAmount / 100);
 				$pack->pack_total_fee_todevise = round($pack->pack_total_price * $pack->pack_percentage_fee_todevise, 2);
 				$pack->pack_total_fee_vat = round($pack->pack_total_fee_todevise * $pack->pack_percentage_fee_vat, 2);
 				$pack->pack_total_fee = $pack->pack_total_fee_todevise + $pack->pack_total_fee_vat;

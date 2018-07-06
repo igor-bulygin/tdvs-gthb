@@ -16,6 +16,9 @@
 	.panel-body{
 		padding-top: 0;
 	}
+	.panel-group .panel-heading + .panel-collapse > .panel-body, .panel-group .panel-heading + .panel-collapse > .list-group {
+		clear: both;
+	}
 	.bought-orders-accordion {
 		border: 0 none !important;
 		padding-bottom: 30px;

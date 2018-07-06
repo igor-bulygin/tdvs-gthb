@@ -1,5 +1,6 @@
 # environment config file
 .env
+docker_nginx/env_file
 
 # dolphin
 .directory

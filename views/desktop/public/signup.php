@@ -65,6 +65,14 @@ Yii::$app->opengraph->title = $this->title;
 					</div>
 				</div>
 				<div class="row no-mar">
+					<label for="promo_code"><span translate="global.user.PROMO_CODE"></span></label>
+					<div class="input-check-wrapper">
+						<input type="text" id="promo_code" class="form-control grey-input ng-class:{'error-input': createAccountCtrl.has_error(createAccountCtrl.form, createAccountCtrl.form.promo_code)}" name="promo_code" ng-model="createAccountCtrl.person.parent_affiliate_id">
+						<i class="ion-checkmark" ng-if="createAccountCtrl.form.promo_code.$valid" ng-cloak></i>
+					</div>
+					<form-errors field="createAccountCtrl.form.promo_code" condition="createAccountCtrl.has_error(createAccountCtrl.form, createAccountCtrl.form.promo_code)"></form-errors>
+				</div>
+				<div class="row no-mar">
 					<div class="checkbox checkbox-circle remember-me ng-class:{'error-input': createAccountCtrl.has_error(createAccountCtrl.form, createAccountCtrl.form.terms_and_conditions)}">
 						<input id="checkbox7" class="styled" type="checkbox" name="terms_and_conditions" ng-model="createAccountCtrl.terms_and_conditions" required>
 						<label for="checkbox7">
@@ -74,7 +82,10 @@ Yii::$app->opengraph->title = $this->title;
 					<form-errors field="createAccountCtrl.form.terms_and_conditions" condition="createAccountCtrl.has_error(createAccountCtrl.form, createAccountCtrl.form.terms_and_conditions)"></form-errors>
 				</div>
 			</div>
-			<div ng-if="createAccountCtrl.error_message" class="text-center error-text" ng-cloak><p ng-bind="createAccountCtrl.error_message"></p></div>
+
+			<div ng-if="createAccountCtrl.error_message == 'util.errors.EMAIL_EXISTS'" class="text-center error-text" ng-cloak><span translate="util.errors.EMAIL_EXISTS"></span></div>
+			<div ng-if="createAccountCtrl.error_message == 'util.errors.PROMO_CODE_NOT_VALID'" class="text-center error-text" ng-cloak><span translate="util.errors.PROMO_CODE_NOT_VALID"></span></div>
+
 			<button class="btn-red send-btn" ng-click="createAccountCtrl.submitForm(createAccountCtrl.form)">
 				<img src="/imgs/plane.svg" data-pin-nopin="true">
 			</button>

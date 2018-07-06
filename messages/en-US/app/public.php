@@ -127,6 +127,7 @@ return [
 	'ORDER_EMAIL_MAIN_TEXT' => 'We inform you that your purchase has been made successfully and is in the process of being shipped. For returns or modifications visit your profile at <a href="http://www.todevise.com" target="_blank">www.todevise.com </a>',
 	'ORDER_EMAIL_SUBTITLE' => 'Purchase information',
 	'ORDER_EMAIL_TOTAL_AMOUNT' => 'TOTAL: <strong>{amount}</strong>',
+  'X_PERCENT_DISCOUNT_APPLIED' => '{percent_discount}% discount applied',
 	'ORDER_EMAIL_FOOTER' => '<em>To learn more about Todevise, click on this link</em>&nbsp;<a href="http://www.todevise.com/about-us">http://www.todevise.com/about-us</a><br><em>Copyright @ 2017 Todevise, All rights reserved.</em><br>',
 	'PAYMENTS_MADE_TROUGH_STRIPE' => 'All the payments on Todevise are made through Stripe, a payment processing platform. We use Stripe because it is very secure, fast and easy to use. The Stripe commission is 1,40% + 0,25€ for each transaction. The money will be transfered to your Stripe account immediately after each purchase. <br /><br/>To start selling on Todevise, you must open a Stripe account (it’s 100% free) and connect it to your Todevise profile. To do so, press the button below. When you finish creating your Stripe account, you will be redirected back to this page.',
     'PERSON_NAME_FAQS' => '{person_name} faqs',

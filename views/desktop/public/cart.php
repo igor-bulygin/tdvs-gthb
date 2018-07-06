@@ -27,6 +27,9 @@ $this->title = Yii::t('app/public', 'CART');
 					<span class="shopping-cart-title no-mar" translate="cart.shopping_cart.YOUR_SHOPPING_CART"></span>
 				</span>
 				<cart-summary cart="cartOverviewCtrl.cart" tags="cartOverviewCtrl.tags"></cart-summary>
+				<div class="hidden-md hidden-lg col-xs-12 col-sm-12 cart-shipping-included">
+					<span translate="cart.STANDARD_SHIPPING_PRICES_INCLUDED"></span>
+				</div>
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-8 no-pad">
 				<shopping-cart cart="cartOverviewCtrl.cart" tags="cartOverviewCtrl.tags"></shopping-cart>

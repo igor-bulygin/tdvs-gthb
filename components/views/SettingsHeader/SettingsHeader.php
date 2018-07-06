@@ -25,6 +25,9 @@ $activeOption = array_key_exists('settings_menu_active_option', $this->params) ?
 		<li role="presentation" class="<?= ($activeOption=='general') ? 'active' : ''?>">
 			<a href="<?= $person->getSettingsLink('general')?>" translate="settings.header.GENERAL"></a>
 		</li>
+		<li role="presentation" class="<?= ($activeOption=='affiliates') ? 'active' : ''?>">
+			<a href="<?= $person->getSettingsLink('affiliates')?>" translate="settings.header.AFFILIATES_PROGRAM"></a>
+		</li>
 		<li role="presentation" class="<?= ($activeOption=='orders') ? 'active' : '' ?>">
 			<a href="<?= $person->getSettingsLink('open-orders')?>" translate="settings.header.MY_ORDERS"></a>
 		</li>

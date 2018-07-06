@@ -6,7 +6,7 @@ class m170426_112545_update_indexes extends \yii\mongodb\Migration
 	{
 
 		try {
-			$this->dropCollection('tern');
+			$this->dropCollection('term');
 			$this->dropIndex('country', 'country_code');
 		} catch (\yii\mongodb\Exception $e) {
 			// nothing to do...
