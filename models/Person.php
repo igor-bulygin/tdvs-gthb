@@ -35,6 +35,7 @@ use yii\web\IdentityInterface;
  * @property int $profile_views
  * @property string $affiliate_id
  * @property string $parent_affiliate_id
+ * @property array $follow
  * @property MongoDate $created_at
  * @property MongoDate $updated_at
  */
@@ -116,6 +117,7 @@ class Person extends CActiveRecord implements IdentityInterface
 			'profile_views',
 			'affiliate_id',
 			'parent_affiliate_id',
+			'follow',
 			'created_at',
 			'updated_at',
 		];
@@ -159,6 +161,8 @@ class Person extends CActiveRecord implements IdentityInterface
 		$this->videos = [];
 		$this->faq = [];
 		$this->shipping_settings = [];
+
+		$this->follow = [];
 
 	}
 
@@ -482,6 +486,11 @@ class Person extends CActiveRecord implements IdentityInterface
 			$item->delete();
 		}
 
+		$timelines = $this->getTimelines();
+		foreach ($timelines as $item) {
+			$item->delete();
+		}
+
 		$this->deletePhotos();
 
 		return parent::beforeDelete();
@@ -512,11 +521,37 @@ class Person extends CActiveRecord implements IdentityInterface
 	}
 
 	/**
+	 * @return Loved[]
+	 */
+	public function getLovedsProduct()
+	{
+		$lovedsReturn = [];
+		$loveds = $this->getLoveds();
+		foreach ($loveds as $loved) {
+			$product = $loved->getProduct();
+			if (empty($product) || $product->product_state != \app\models\Product::PRODUCT_STATE_ACTIVE) {
+				continue;
+			}
+			$lovedsReturn[] = $loved;
+		}
+
+		return $lovedsReturn;
+	}
+
+	/**
 	 * @return Story[]
 	 */
 	public function getStories()
 	{
 		return Story::findSerialized(["person_id" => $this->id]);
+	}
+
+	/**
+	 * @return Timeline[]
+	 */
+	public function getTimelines()
+	{
+		return Timeline::findSerialized(["person_id" => $this->id]);
 	}
 
 	public function deletePhotos()
@@ -803,6 +838,12 @@ class Person extends CActiveRecord implements IdentityInterface
 					'videos_link' => 'videosLink',
 					'faq_link' => 'faqLink',
 					'chat_link' => 'chatLink',
+					'is_followed' => 'isFollowed',
+					'person_type' => 'personTypeForUrl',
+				];
+
+				static::$retrieveExtraFields = [
+					'follow',
 				];
 
 				self::$translateFields = true;
@@ -842,12 +883,15 @@ class Person extends CActiveRecord implements IdentityInterface
 					'videos_link' => 'videosLink',
 					'faq_link' => 'faqLink',
 					'chat_link' => 'chatLink',
+					'is_followed' => 'isFollowed',
+					'person_type' => 'personTypeForUrl',
 					'type',
 				];
 
 				static::$retrieveExtraFields = [
 					'videos',
 					'personal_info',
+					'follow',
 				];
 
 				self::$translateFields = true;
@@ -888,8 +932,11 @@ class Person extends CActiveRecord implements IdentityInterface
 					'videos_link' => 'videosLink',
 					'faq_link' => 'faqLink',
 					'chat_link' => 'chatLink',
+					'is_followed' => 'isFollowed',
+					'person_type' => 'personTypeForUrl',
 					'type',
 					'profile_views',
+					'follow',
 
 					// only availables in owner scenario:
 					'store_edit_link' => 'storeEditLink',
@@ -1297,6 +1344,8 @@ class Person extends CActiveRecord implements IdentityInterface
 			'videos_link' => $this->getVideosLink(),
 			'faq_link' => $this->getFaqLink(),
 			'chat_link' => $this->getChatLink(),
+			'is_followed' => $this->getIsFollowed(),
+			'person_type' => $this->getPersonTypeForUrl(),
 
 			// TODO: delete this two fields
 			"photo" => $this->getProfileImage(),
@@ -1678,6 +1727,26 @@ class Person extends CActiveRecord implements IdentityInterface
 	{
 		return Url::to([
 			"/person/stories",
+			"slug" => $this->getSlug(),
+			'person_id' => $this->short_id,
+			"person_type" => $this->getPersonTypeForUrl()
+		], true);
+	}
+
+	public function getFollowersLink()
+	{
+		return Url::to([
+			"/person/followers",
+			"slug" => $this->getSlug(),
+			'person_id' => $this->short_id,
+			"person_type" => $this->getPersonTypeForUrl()
+		], true);
+	}
+
+	public function getFollowLink()
+	{
+		return Url::to([
+			"/person/follow",
 			"slug" => $this->getSlug(),
 			'person_id' => $this->short_id,
 			"person_type" => $this->getPersonTypeForUrl()
@@ -2364,14 +2433,19 @@ class Person extends CActiveRecord implements IdentityInterface
 		return $this->isDeviser();
 	}
 
+	public function showFollowers()
+	{
+		return $this->isInfluencer() || $this->isDeviser() || $this->isClient();
+	}
+
 	public function showSocial()
 	{
-		return false; //$this->isInfluencer() || $this->isDeviser()
+		return $this->isInfluencer() || $this->isDeviser();
 	}
 
 	public function showLoved()
 	{
-		$loveds = $this->getLoveds();
+		$loveds = $this->getLovedsProduct();
 		return $this->isPersonEditable() || count($loveds) > 0;
 	}
 
@@ -2414,4 +2488,61 @@ class Person extends CActiveRecord implements IdentityInterface
 			($this->isPersonEditable() || count($this->faqMapping) > 0);
 	}
 
+	public function isActive()
+	{
+		return $this->account_state == Person::ACCOUNT_STATE_ACTIVE;
+	}
+
+	public function isFollowedByConnectedUser()
+	{
+		if (Yii::$app->user->isGuest) {
+			return false;
+		}
+		/** @var Person $current */
+		$current = Yii::$app->user->identity;
+
+		return in_array($this->short_id, $current->follow);
+	}
+
+	public function getIsFollowed() {
+		return $this->isFollowedByConnectedUser();
+	}
+
+	public function getFollow() {
+		$persons = [];
+		foreach ($this->follow as $person_id) {
+			$person = Person::findOneSerialized($person_id);
+			if ($person && $person->isActive()) {
+				$persons[] = $person;
+			}
+		}
+
+		return $persons;
+	}
+
+	public function getFollowers() {
+
+		/** @var Collection $collection */
+		$collection = Yii::$app->mongodb->getCollection('person');
+		$persons  =	$collection->find(
+			[
+				'follow' => $this->short_id
+			]
+		);
+
+		$ids = [];
+		foreach ($persons as $item) {
+			$ids[] = $item['_id'];
+		}
+
+		if ($ids) {
+			$query = new ActiveQuery(Person::className());
+			$query->where(['in', '_id', $ids]);
+			$persons = $query->all();
+		} else {
+			$persons= [];
+		}
+
+		return $persons;
+	}
 }

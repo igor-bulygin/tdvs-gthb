@@ -5,6 +5,7 @@ namespace app\modules\api\priv\v1\controllers;
 use app\models\Order;
 use app\models\OrderPack;
 use app\models\Person;
+use app\models\Timeline;
 use Yii;
 use yii\base\Exception;
 use yii\web\BadRequestHttpException;
@@ -363,6 +364,75 @@ class PersonController extends AppPrivateController
 		$order->setSubDocumentsForSerialize();
 
 		return $order;
+	}
+
+	public function actionFollow($personFollowedId)
+	{
+		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
+
+		/** @var Person $person */
+		$person = Yii::$app->user->identity;
+		if (empty($person)) {
+			throw new NotFoundHttpException('Person not found');
+		}
+
+		if (!$person->isPersonEditable()) {
+			throw new UnauthorizedHttpException();
+		}
+
+		$personToFollow = Person::findOne(["short_id" => $personFollowedId]);
+		if (empty($personToFollow)) {
+			throw new NotFoundHttpException('Person not found');
+		}
+
+		$follow = $person->follow;
+		if ($person->short_id != $personToFollow->short_id && !in_array($personFollowedId, $follow)) {
+			$follow[] = $personFollowedId;
+			$person->setAttribute('follow', $follow);
+			$person->save(false);
+		}
+
+		$timeline = new Timeline();
+		$timeline->person_id = $person->short_id;
+		$timeline->target_id = $personFollowedId;
+		$timeline->action_type = Timeline::ACTION_PERSON_FOLLOWED;
+		$timeline->date = new \MongoDate();
+		$timeline->save();
+
+		Yii::$app->response->setStatusCode(204); // No content
+
+		return null;
+	}
+
+	public function actionUnfollow($personFollowedId)
+	{
+		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
+
+		/** @var Person $person */
+		$person = Yii::$app->user->identity;
+		if (empty($person)) {
+			throw new NotFoundHttpException('Person not found');
+		}
+
+		if (!$person->isPersonEditable()) {
+			throw new UnauthorizedHttpException();
+		}
+
+		$personToUnfollow = Person::findOne(["short_id" => $personFollowedId]);
+		if (empty($personToUnfollow)) {
+			throw new NotFoundHttpException('Person not found');
+		}
+
+		$follow = $person->follow;
+		if (in_array($personFollowedId, $follow)) {
+			unset($follow[array_search($personFollowedId, $follow)]);
+			$person->setAttribute('follow', $follow);
+			$person->save(false);
+		}
+
+		Yii::$app->response->setStatusCode(204); // No content
+
+		return null;
 	}
 
 	/**

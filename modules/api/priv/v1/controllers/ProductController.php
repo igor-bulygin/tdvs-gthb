@@ -3,6 +3,7 @@
 namespace app\modules\api\priv\v1\controllers;
 
 use app\models\Product;
+use app\models\Timeline;
 use Yii;
 use yii\web\BadRequestHttpException;
 use yii\web\MethodNotAllowedHttpException;
@@ -63,6 +64,13 @@ class ProductController extends AppPrivateController
 
 			$product->save(false);
 
+			$timeline = new Timeline();
+			$timeline->person_id = $product->deviser_id;
+			$timeline->target_id = $product->short_id;
+			$timeline->action_type = Timeline::ACTION_PRODUCT_CREATED;
+			$timeline->date = new \MongoDate();
+			$timeline->save();
+
 			Yii::$app->response->setStatusCode(201); // Created
 			return $product;
 		} else {
@@ -91,6 +99,13 @@ class ProductController extends AppPrivateController
 		if ($product->load(Yii::$app->request->post(), '') && $product->validate($validateFields)) {
 
 			$product->save(false);
+
+			$timeline = new Timeline();
+			$timeline->person_id = $product->deviser_id;
+			$timeline->target_id = $product->short_id;
+			$timeline->action_type = Timeline::ACTION_PRODUCT_UPDATED;
+			$timeline->date = new \MongoDate();
+			$timeline->save();
 
 			Yii::$app->response->setStatusCode(200); // Ok
 			return $product;

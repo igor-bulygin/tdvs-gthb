@@ -15,6 +15,7 @@
 		"EXPLORE_BOXES": "Explorar Boxes",
 		"DISCOVER_DEVISERS": "Descubrir devisers",
 		"TREND_SETTERS": "Influencers",
+		"TIMELINE": "Timeline",
 		"PROJECTS": "Proyectos"
 	}
 }

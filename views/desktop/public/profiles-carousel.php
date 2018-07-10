@@ -19,29 +19,11 @@ $idCarousel = 'carousel-'.$id;
 					<?php if ($i % 3 === 0) { ?>
 						<div class="item <?= ($i==0) ? 'active' : '' ?>"><!--4-->
 					<?php } ?>
-							<div class="col-md-4 col-sm-4 col-xs-12 pad-showcase"><!--5-->
-								<a href="<?= $person->getMainLink()?>">
-									<figure class="showcase influencers">
-										<img class="deviser-discover-img showcase-image" src="<?= $person->getHeaderSmallImage() ?>">
-										<figcaption>
-											<div class="row"><!--6-->
-												<div class="col-md-6"><!--7-->
-													<div class="title-product-name sm align-left"><!--8-->
-														<span><?= $person->getName() ?></span>
-													</div><!--8-->
-													<div class="location align-left"><?= $person->personalInfoMapping->getCityLabel() ?></div><!--9/9-->
-												</div><!--7-->
-												<?php /*
-												<div class="col-md-6">
-													<button class="btn btn-icon mt-5"><i class="ion-ios-star-outline"></i><span>Follow</span>
-												</button>
-												</div>
-												*/?>
-											</div><!--6-->
-										</figcaption>
-									</figure>
-								</a>
-							</div><!--5-->
+
+					<div class="col-md-4 col-sm-4 col-xs-12 pad-showcase">
+						<?=\app\components\Person::widget(['person' => $person]) ?>
+					</div>
+
 					<?php if (($i+1) % 3 === 0 || $person == end($persons)) { ?>
 						</div><!--4-->
 					<?php } ?>
@@ -67,29 +49,11 @@ $idCarousel = 'carousel-'.$id;
 					<?php if ($i % 2 === 0) { ?>
 						<div class="item <?= ($i==0) ? 'active' : '' ?>">
 					<?php } ?>
-						<div class="col-sm-6 col-xs-12 pad-showcase">
-							<a href="<?= $person->getMainLink()?>">
-								<figure class="showcase influencers">
-									<img class="deviser-discover-img showcase-image" src="<?= $person->getHeaderSmallImage() ?>">
-									<figcaption>
-										<div class="row">
-											<div class="col-md-6">
-												<div class="title-product-name sm align-left">
-													<span><?= $person->getName() ?></span>
-												</div>
-												<div class="location align-left"><?= $person->personalInfoMapping->getCityLabel() ?></div>
-											</div>
-											<?php /*
-											<div class="col-md-6">
-												<button class="btn btn-icon mt-5"><i class="ion-ios-star-outline"></i><span>Follow</span>
-											</button>
-											</div>
-											*/?>
-										</div>
-									</figcaption>
-								</figure>
-							</a>
-						</div>
+
+					<div class="col-sm-6 col-xs-12 pad-showcase">
+						<?=\app\components\Person::widget(['person' => $person]) ?>
+					</div>
+
 					<?php if (($i+1) % 2 === 0 || $person == end($persons)) { ?>
 						</div>
 					<?php } ?>
@@ -114,27 +78,7 @@ $idCarousel = 'carousel-'.$id;
 				<?php foreach ($persons as $i => $person) { ?>
 					<div class="item <?= ($i==0) ? 'active' : '' ?>">
 						<div class="col-sm-6 col-xs-12 pad-showcase">
-							<a href="<?= $person->getMainLink()?>">
-								<figure class="showcase influencers">
-									<img class="deviser-discover-img showcase-image" src="<?= $person->getHeaderSmallImage() ?>">
-									<figcaption>
-										<div class="row">
-											<div class="col-md-6">
-												<div class="title-product-name sm align-left">
-													<span><?= $person->getName() ?></span>
-												</div>
-												<div class="location align-left"><?= $person->personalInfoMapping->getCityLabel() ?></div>
-											</div>
-											<?php /*
-											<div class="col-md-6">
-												<button class="btn btn-icon mt-5"><i class="ion-ios-star-outline"></i><span>Follow</span>
-												</button>
-											</div>
-											*/?>
-										</div>
-									</figcaption>
-								</figure>
-							</a>
+							<?=\app\components\Person::widget(['person' => $person]) ?>
 						</div>
 					</div>
 				<?php } ?>

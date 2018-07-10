@@ -179,6 +179,7 @@ app\components\assets\PublicHeader2Asset::register($this);
 					</li>
 					<li id="mobile-iconset" class="hidden-md hidden-lg col-xs-10 col-sm-10" >
 						<div id="mobIcons_center">
+							<a href="<?=Url::to(['/timeline'])?>"><img src="/imgs/timeline-red.svg" /></a>
 							<a href="<?=Url::to(['/discover/boxes'])?>"><img src="/imgs/box-red.svg" /></a>
 							<a href="<?=Url::to(['/discover/devisers'])?>"><img src="/imgs/discover-red.svg" /></a>
 							<a href="<?=Url::to(['/discover/influencers'])?>"><img src="/imgs/estrella-red.svg" /></a>
@@ -218,6 +219,7 @@ app\components\assets\PublicHeader2Asset::register($this);
 				</ul>
 				<ul class="nav navbar-nav center-navbar">
 					<?php /*<li><a href="<?=Url::to(['/discover/stories'])?>" translate="header.STORIES"></a></li>*/?>
+					<li><a href="<?=Url::to(['/timeline'])?>" translate="header.TIMELINE"></a></li>
 					<li><a href="<?=Url::to(['/discover/boxes'])?>" translate="header.EXPLORE_BOXES"></a></li>
 					<li><a href="<?=Url::to(['/discover/devisers'])?>" translate="header.DISCOVER_DEVISERS"></a></li>
 					<li><a href="<?=Url::to(['/discover/influencers'])?>" translate="header.TREND_SETTERS"></a></li>

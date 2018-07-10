@@ -18,10 +18,11 @@ class GlobalAsset extends AssetBundle {
 		'js/desktop/person/edit-press/edit-press.js',
 		'js/desktop/person/edit-videos/edit-videos.js',
 		'js/desktop/person/make-profile-public.js',
-		'js/desktop/person/person-not-public.js',
+		'js/desktop/person/person-not-public.js'
 	];
 	public $depends = [
 		'app\assets\desktop\GlobalAsset',
 		'app\assets\desktop\deviser\IndexAsset',
+		
 	];
 }

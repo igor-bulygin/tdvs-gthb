@@ -21,6 +21,8 @@ class IndexStoryAsset extends AssetBundle {
 		'js/desktop/person/stories/category-component/category-component.js',
 		'js/desktop/person/stories/tag-component/tag-component.js',
 		'js/desktop/person/stories/move-delete-component/move-delete-component.js',
+		'js/desktop/person/social-feed/social-manager.js',
+		'js/desktop/person/social-feed/modal-post-details/modal-post-details.js',
 	];
 	public $depends = [
 		'app\assets\desktop\GlobalAsset',

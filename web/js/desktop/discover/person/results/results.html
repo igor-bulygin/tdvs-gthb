@@ -1,25 +1,32 @@
 <div infinite-scroll="discoverResultsCtrl.addMoreItems()" infinite-scroll-distance="1">
 	<div ng-repeat="person in discoverResultsCtrl.results_infinite">
 		<div class="col-md-4 col-sm-6 col-xs-12 pad-showcase">
-			<a ng-href="{{person.main_link}}">
 			<figure class="showcase influencers">
-				<img class="deviser-discover-img showcase-image" ng-src="{{ person.header_small_image }}">
+				<a ng-href="{{person.main_link}}">
+					<img class="deviser-discover-img showcase-image" ng-src="{{ person.header_small_image }}">
+				</a>
 				<figcaption>
-					<div class="row">
-						<div class="col-md-6">
-							<!--img class="showcase-image" ng-src="{{person.url_avatar}}"-->
-							<div class="title-product-name sm align-left">
-								<span class="name align-left ng-class:{'all-caps': person.type.indexOf(2)>=0}" ng-bind="person.name"></span>
-							</div>
-							<span class="location align-left" ng-bind="(person.city | capitalize)"></span>
+					<div class="row no-margin-xs">
+						<div class="col-xs-6">
+							<a ng-href="{{person.main_link}}">
+								<!--img class="showcase-image" ng-src="{{person.url_avatar}}"-->
+								<div class="title-product-name sm align-left">
+									<span class="name align-left ng-class:{'all-caps': person.type.indexOf(2)>=0}" ng-bind="person.name"></span>
+								</div>
+								<span class="location align-left" ng-bind="(person.city | capitalize)"></span>
+							</a>
 						</div>
-						<!--div class="col-md-6">
-							<button class="btn btn-icon mt-5"><i class="ion-ios-star-outline"></i><span translate="discover.FOLLOW"></span></button>
-						</div-->
+						<div class="col-xs-6">
+							<button ng-if="!person.is_followed" class="btn btn-follow full-size-btn btn-icon" ng-click="discoverResultsCtrl.setFollow(person)">
+								<i class="hidden ion-ios-star"></i><span translate="discover.FOLLOW"></span>
+							</button>
+							<button ng-if="person.is_followed" class="btn btn-follow full-size-btn btn-red" ng-click="discoverResultsCtrl.setFollow(person)">
+								<i class="hidden ion-ios-star"></i><span translate="discover.UNFOLLOW"></span>
+							</button>
+						</div>
 					</div>
 				</figcaption>
 			</figure>
-			</a>
 		</div>
 	</div>
 	<div style='clear: both;'></div>

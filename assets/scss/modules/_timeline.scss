@@ -1,0 +1,96 @@
+// ==========================================================================
+// Timeline
+// ==========================================================================
+.timeline-wrapper{
+	margin-top: 20px;
+	.row{
+		margin: 0;
+	}
+	.text-right {
+		padding-top: 10px;
+	}
+	.avatar-logued-user{
+		height: 30px;
+		margin: 5px;
+		border: double 1px $new_grey;
+		padding: 0;
+	}
+	.timeline-box{
+		background: $white;
+		box-shadow: 1px 4px 8px rgba($dark_grey, 0.2);
+		margin: 20px auto;
+		border: solid 1px rgba($dark_grey, 0.1);
+		.menu-category{
+			height: auto;
+			padding: 10px 0;
+		}
+	}
+	.timeline-header{
+		margin: 10px 0 25px !important;
+		border-bottom: solid 2px $background_grey;
+		span {
+			line-height: 2.2em;
+			padding: 0 4px;
+		}
+		.timeline-person{
+			font-weight: bold;
+    		font-size: 16px;
+		}
+		.timeline-action{
+
+		}
+		.timeline-time {
+			float: right;
+			color: $dark_grey;
+		}
+	}
+	.timeline-img{
+		height: fit-content;
+		img{
+			padding: 0;
+		}
+	}
+	.timeline-loved{
+		font-size: 18px;
+	}
+	.timeline-title{
+		font-size: 16px;
+		font-weight: bold;
+	}
+	.timeline-description{
+		-webkit-box-orient: vertical;
+		max-height: 2.8em;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		-webkit-line-clamp: 2;
+		display: -webkit-box;
+		p {
+			margin: 0;
+		}
+	}
+}
+.timeline-login{
+	text-align: center;
+	font-weight: bold;
+	padding: 40px 0 120px;
+	span, img {
+		display: block;
+	}
+	.login-start{
+		padding-bottom: 40px;
+		font-size: 15px;
+	}
+	.login-signin{
+		margin: 20px 0 80px !important;
+		font-weight: normal;
+	}
+	.login-discovery-feed{
+		font-size: 21px;
+    	margin-bottom: 20px;
+	}
+	.login-descr{
+		font-size: 18px;
+    	font-weight: normal;
+   		margin-bottom: 25px;
+	}
+}

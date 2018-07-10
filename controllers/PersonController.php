@@ -5,7 +5,6 @@ use app\helpers\CController;
 use app\helpers\InstagramHelper;
 use app\models\Box;
 use app\models\Category;
-use app\models\Loved;
 use app\models\Person;
 use app\models\Product;
 use app\models\Story;
@@ -446,7 +445,7 @@ class PersonController extends CController
 
 		$this->checkProfileState($person);
 
-		$loveds = Loved::findSerialized(['person_id' => $person_id]);
+		$loveds = $person->getLovedsProduct();
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("@app/views/desktop/person/loved-view", [
 			'person' => $person,
@@ -520,7 +519,77 @@ class PersonController extends CController
 		]);
 	}
 
-	public function actionSocial($slug, $person_id)
+	public function actionFollow($slug, $person_id)
+	{
+		return $this->mainFollow($slug, $person_id, 'follow');
+	}
+
+	public function actionFollowers($slug, $person_id)
+	{
+		return $this->mainFollow($slug, $person_id, 'followers');
+	}
+
+	private function mainFollow($slug, $person_id, $type)
+	{
+		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
+		$person = Person::findOneSerialized($person_id);
+
+		if (!$person) {
+			throw new NotFoundHttpException();
+		}
+
+		if ($slug != $person->getSlug()) {
+			$this->redirect($person->getSocialLink(), 301);
+		}
+
+		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE && !$person->isPersonEditable()) {
+			throw new UnauthorizedHttpException();
+		}
+
+		$this->checkProfileState($person);
+
+		if ($type == 'follow') {
+			$persons = $person->getFollow();
+		} else {
+			$persons = $person->getFollowers();
+		}
+
+		$this->layout = '/desktop/public-2.php';
+
+		return $this->render("@app/views/desktop/person/follow", [
+			'person' => $person,
+			'type' => $type,
+			'persons' => $persons,
+		]);
+	}
+
+	public function actionSocial($slug, $person_id, $type = 'follow')
+	{
+		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
+		$person = Person::findOneSerialized($person_id);
+
+		if (!$person) {
+			throw new NotFoundHttpException();
+		}
+
+		if ($slug != $person->getSlug()) {
+			$this->redirect($person->getSocialLink(), 301);
+		}
+
+		if ($person->account_state != Person::ACCOUNT_STATE_ACTIVE && !$person->isPersonEditable()) {
+			throw new UnauthorizedHttpException();
+		}
+
+		$this->checkProfileState($person);
+
+		$this->layout = '/desktop/public-2.php';
+
+		return $this->render("@app/views/desktop/person/social-view", [
+			'person' => $person,
+		]);
+	}
+
+	public function actionSocialOld($slug, $person_id)
 	{
 		throw new NotFoundHttpException();
 		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
@@ -559,7 +628,7 @@ class PersonController extends CController
 
 		$this->layout = '/desktop/public-2.php';
 
-		return $this->render("@app/views/desktop/person/social-view", [
+		return $this->render("@app/views/desktop/person/social-view-old", [
 			'person' => $person,
 			'photos' => $photos,
 			'connected' => $connected,
@@ -727,6 +796,21 @@ class PersonController extends CController
 			'person' => $person,
 			'story' => $story,
 		]);
+	}
+
+	public function actionTimeline()
+	{
+		$this->layout = '/desktop/public-2.php';
+
+		if (Yii::$app->user->isGuest) {
+
+			return $this->render("@app/views/desktop/person/become-a-member", []);
+
+		} else {
+
+			return $this->render("@app/views/desktop/person/timeline", []);
+
+		}
 	}
 
 	/**

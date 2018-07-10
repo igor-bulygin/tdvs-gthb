@@ -264,6 +264,8 @@ $config = [
 
 				'/<person_type:(deviser|influencer)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/social' => 'person/social',
 				'/<person_type:(deviser|influencer)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/connect-instagram' => 'person/connect-instagram',
+				'/<person_type:(deviser|influencer)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/follow' => 'person/follow',
+				'/<person_type:(deviser|influencer)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/followers' => 'person/followers',
 
 				'/<person_type:(deviser|influencer)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/stories' => 'person/stories',
 				'/<person_type:(deviser|influencer)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/stories/create' => 'person/story-create',
@@ -309,6 +311,7 @@ $config = [
 				'discover-influencers' => 'discover/influencers',
 				'explore-boxes' => 'discover/boxes',
 				'stories' => 'discover/stories',
+				'timeline' => 'person/timeline',
 
 				//Chat / messages
 				'messages' => 'chat/chat',
@@ -460,6 +463,10 @@ $config = [
 				'PUT api3/priv/v1/person/<personId:[^/.]*?>/packs/<packId:[^/.]*>/aware' => 'api3/priv/v1/person/pack-aware',
 				'PUT api3/priv/v1/person/<personId:[^/.]*?>/packs/<packId:[^/.]*>/shipped' => 'api3/priv/v1/person/pack-shipped',
 
+				// Person - followers
+				'POST api3/priv/v1/follow/<personFollowedId:[^/.]*>' => 'api3/priv/v1/person/follow',
+				'DELETE api3/priv/v1/follow/<personFollowedId:[^/.]*>' => 'api3/priv/v1/person/unfollow',
+
 
 				// Product - public
 				'GET api3/pub/v1/products/<id:[^/.]*?>' => 'api3/pub/v1/product/view',
@@ -478,7 +485,11 @@ $config = [
 				'GET api3/priv/v1/loved/<lovedId:[^/.]*?>' => 'api3/priv/v1/loved/view',
 				'GET api3/priv/v1/loved' => 'api3/priv/v1/loved/index',
 				'POST api3/priv/v1/loved' => 'api3/priv/v1/loved/create',
-				'DELETE api3/priv/v1/loved/<productId:[^/.]*?>' => 'api3/priv/v1/loved/delete',
+				'DELETE api3/priv/v1/loved/<productId:[^/.]*?>' => 'api3/priv/v1/loved/delete-product',
+				'DELETE api3/priv/v1/loved/product/<productId:[^/.]*?>' => 'api3/priv/v1/loved/delete-product',
+				'DELETE api3/priv/v1/loved/box/<boxId:[^/.]*?>' => 'api3/priv/v1/loved/delete-box',
+				'DELETE api3/priv/v1/loved/post/<postId:[^/.]*?>' => 'api3/priv/v1/loved/delete-post',
+				'DELETE api3/priv/v1/loved/timeline/<timelineId:[^/.]*?>' => 'api3/priv/v1/loved/delete-timeline',
 
 				// Box - public
 				'GET api3/pub/v1/box/<boxId:[^/.]*?>' => 'api3/pub/v1/box/view',
@@ -493,7 +504,7 @@ $config = [
 				'DELETE api3/priv/v1/box/<boxId:[^/.]*?>/product/<productId:[^/.]*?>' => 'api3/priv/v1/box/delete-product',
 
 				// Story - public
-				'GET api3/pub/v1/story/<boxId:[^/.]*?>' => 'api3/pub/v1/story/view',
+				'GET api3/pub/v1/story/<storyId:[^/.]*?>' => 'api3/pub/v1/story/view',
 				'GET api3/pub/v1/story' => 'api3/pub/v1/story/index',
 				// Story - private
 				'GET api3/priv/v1/story' => 'api3/priv/v1/story/index',
@@ -502,6 +513,20 @@ $config = [
 				'PATCH api3/priv/v1/story/<storyId:[^/.]*?>' => 'api3/priv/v1/story/update',
 				'DELETE api3/priv/v1/story/<storyId:[^/.]*?>' => 'api3/priv/v1/story/delete',
 
+				// Story - public
+				'GET api3/pub/v1/post/<postId:[^/.]*?>' => 'api3/pub/v1/post/view',
+				'GET api3/pub/v1/post' => 'api3/pub/v1/post/index',
+				// Post - private
+				'GET api3/priv/v1/post' => 'api3/priv/v1/post/index',
+				'GET api3/priv/v1/post/<postId:[^/.]*?>' => 'api3/priv/v1/post/view',
+				'POST api3/priv/v1/post' => 'api3/priv/v1/post/create',
+				'PATCH api3/priv/v1/post/<postId:[^/.]*?>' => 'api3/priv/v1/post/update',
+				'DELETE api3/priv/v1/post/<postId:[^/.]*?>' => 'api3/priv/v1/post/delete',
+
+				// Timeline - private
+				'GET api3/priv/v1/timeline' => 'api3/priv/v1/timeline/index',
+
+				
 				// Banner - private
 				'GET api3/priv/v1/banner' => 'api3/priv/v1/banner/index',
 				'GET api3/priv/v1/banner/<bannerId:[^/.]*?>' => 'api3/priv/v1/banner/view',

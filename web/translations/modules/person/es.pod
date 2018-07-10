@@ -171,8 +171,31 @@
 			"WRITE_DESCRIPTION_HERE": "Por favor, escribe una breve descripción",
 			"SAVE_EXIT": "Guardar & salir"
 		},
+		"posts": {
+			"NO_POSTS": "You don't have any posts yet.",
+			"USER_NO_POSTS": "has no posts.",
+			"ADD_POST": "Add a post",
+			"DESCRIPTION":"Description",
+			"PUBLISH":"Post",
+			"NEW_POST":"Nuevo post",
+			"SEE_MORE":"Ver más",
+			"EDIT_POST":"Editar post"
+		},
+		"timeline": {
+			"START": "To start building your timeline, you need to be a Todevise member",
+			"DISCOVERY_FEED":"What is your the DISCOVERY FEED?",
+			"TIMELINE_DESCR":"Follow any user on Todevise (a brand, influencer, or member) and receive updates about what they like and post.",
+			"BUILD_COMMUNITY":"Build a community of followers and go discover!"
+		},
 		"DELETE_WORK_QUESTION": "¿Seguro que quieres borrar este trabajo?",
 		"EDIT_WORK": "Editar trabajo",
-		"SAVE_EXIT": "Guardar y salir"
+		"SAVE_EXIT": "Guardar y salir",
+		"IF_MEMBER": "If you are a Todevise member",
+		"BECOME_MEMBER": "Become a member",
+		"SOCIAL": "<p>To use the <strong>social network</strong> features, you need to create a profile.</p><p>It is 100% free, and you will be able to follow brands & influencers, save products in boxes and interact with the rest of the community.</p>",
+		"ALL": "All",
+		"DEVISERS": "Deviser",
+		"MEMBERS": "Members",
+		"INFLUENCERS": "Influencers"
 	}
 }

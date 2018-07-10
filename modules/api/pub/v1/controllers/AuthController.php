@@ -39,6 +39,7 @@ class AuthController extends AppPublicController
 			
 			Yii::$app->response->setStatusCode(200); // Created
 			return [
+				'short_id' => $person->short_id,
 				'access_token' => $person->getAccessToken(),
 				'return_url' => $returnUrl,
 			];

@@ -22,6 +22,8 @@ class UploadForm extends Model {
 
 	const UPLOAD_TYPE_PERSON_STORY_PHOTOS = 'story-photos';
 
+	const UPLOAD_TYPE_PERSON_POST_PHOTOS = 'post-photos';
+
 	const UPLOAD_TYPE_PERSON_PACK_INVOICE = 'person-pack-invoice';
 
 	const UPLOAD_TYPE_BANNER_IMAGE = 'banner-image';
@@ -137,6 +139,7 @@ class UploadForm extends Model {
 			case UploadForm::UPLOAD_TYPE_PERSON_PRESS_IMAGES:
 			case UploadForm::UPLOAD_TYPE_PERSON_CURRICULUM:
 			case UploadForm::UPLOAD_TYPE_PERSON_STORY_PHOTOS:
+			case UploadForm::UPLOAD_TYPE_PERSON_POST_PHOTOS:
 			case UploadForm::UPLOAD_TYPE_PERSON_PACK_INVOICE:
 				$path = Utils::join_paths(Yii::getAlias("@deviser"), $this->person_id);
 				break;
@@ -173,6 +176,7 @@ class UploadForm extends Model {
 			UploadForm::UPLOAD_TYPE_PERSON_PRESS_IMAGES => 'person.press.',
 			UploadForm::UPLOAD_TYPE_PERSON_CURRICULUM => 'person.cv.',
 			UploadForm::UPLOAD_TYPE_PERSON_STORY_PHOTOS => 'person.story.',
+			UploadForm::UPLOAD_TYPE_PERSON_POST_PHOTOS => 'person.post.',
 			UploadForm::UPLOAD_TYPE_PERSON_PACK_INVOICE => 'person.pack.invoice.',
 			UploadForm::UPLOAD_TYPE_KNOWN_PRODUCT_PHOTO => 'product.photo.',
 			UploadForm::UPLOAD_TYPE_UNKNOWN_PRODUCT_PHOTO => 'product.photo.',
@@ -201,6 +205,7 @@ class UploadForm extends Model {
 			case UploadForm::UPLOAD_TYPE_PERSON_PRESS_IMAGES:
 			case UploadForm::UPLOAD_TYPE_PERSON_CURRICULUM:
 			case UploadForm::UPLOAD_TYPE_PERSON_STORY_PHOTOS:
+			case UploadForm::UPLOAD_TYPE_PERSON_POST_PHOTOS:
 				if (empty($this->person_id)) {
 					$this->addError($attribute, 'Person id must be specified');
 				}
@@ -259,6 +264,7 @@ class UploadForm extends Model {
 			case UploadForm::UPLOAD_TYPE_PERSON_PRESS_IMAGES:
 			case UploadForm::UPLOAD_TYPE_PERSON_CURRICULUM:
 			case UploadForm::UPLOAD_TYPE_PERSON_STORY_PHOTOS:
+			case UploadForm::UPLOAD_TYPE_PERSON_POST_PHOTOS:
 			case UploadForm::UPLOAD_TYPE_PERSON_PACK_INVOICE:
 				$url = (Yii::getAlias("@deviser_url") . "/" . $this->person_id . "/" . $this->filename);
 				break;
@@ -294,6 +300,7 @@ class UploadForm extends Model {
 			case UploadForm::UPLOAD_TYPE_PERSON_MEDIA_PHOTOS:
 			case UploadForm::UPLOAD_TYPE_PERSON_PRESS_IMAGES:
 			case UploadForm::UPLOAD_TYPE_PERSON_STORY_PHOTOS:
+			case UploadForm::UPLOAD_TYPE_PERSON_POST_PHOTOS:
 				$this->setScenario(UploadForm::SCENARIO_UPLOAD_DEVISER_IMAGE);
 				break;
 			case UploadForm::UPLOAD_TYPE_PERSON_PACK_INVOICE:

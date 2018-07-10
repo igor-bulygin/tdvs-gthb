@@ -16,6 +16,9 @@ Loveds
 * `id`: Filter a specific product for id
 * `person_id`: Filter loveds of a specific person only
 * `product_id`: Filter loveds of a specific product only
+* `box_id`: Filter loveds of a specific box only
+* `post_id`: Filter loveds of a specific post only
+* `timeline_id`: Filter loveds of a specific timeline only
 * `page`: Set the result page that want to be retrieved (default: 1)
 * `limit`: Limit the results returned for page (default: 20)
 

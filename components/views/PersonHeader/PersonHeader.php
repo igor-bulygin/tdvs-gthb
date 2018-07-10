@@ -9,10 +9,11 @@ GlobalAsset::register($this);
 // use params to share data between views :(
 /** @var Person $person */
 $person = $this->params['person'];
+$isFollowed = $person->isFollowedByConnectedUser() ? true : false;
 $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD, 'person-var-script');
 ?>
 
-<div class="banner-deviser" ng-controller="personHeaderCtrl as personHeaderCtrl">
+<div class="banner-deviser" ng-controller="personHeaderCtrl as personHeaderCtrl" ng-init="personHeaderCtrl.init(<?=$isFollowed?>)">
 	<div class="container pad-about" ng-if="!personHeaderCtrl.editingHeader" ng-cloak>
 		<img class="cover" ng-src="{{personHeaderCtrl.person.header_image}}">
 		<div class="banner-deviser-content">
@@ -35,17 +36,13 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 						<div class="type-of-user hidden-xs" ng-if="personHeaderCtrl.person.type.indexOf(3)>=0" ng-cloak>
 							<span translate="global.INFLUENCER"></span>
 						</div>
-						<?php if (!$person->isConnectedUser()) { ?>
-							<div class="edit-profile-btn hidden-xs hidden-sm">
+						<div class="edit-profile-btn-left hidden-xs">
+							<?php if (!$person->isConnectedUser() && !$person->isPersonEditable()) { ?>
 								<a class="btn btn-default all-caps btn-black-on-white btn-header" href="<?= $person->getChatLink()?>"><span translate="person.header.CHAT"></span></a>
-							</div>
-						<?php } else { ?>
-							<?php if ($person->isPersonEditable() && $person->isPublic()) {?>
-								<div class="edit-profile-btn hidden-xs hidden-sm">
-									<button class="btn btn-default all-caps btn-black-on-white btn-header ng-class:{'button-error': personHeaderCtrl.required['header_info']}" ng-click="personHeaderCtrl.editHeader()"><span translate="person.header.EDIT_HEADER"></span></button>
-								</div>
+							<?php } elseif ($person->isPersonEditable() && $person->isPublic()) {?>
+								<button class="btn btn-default all-caps btn-black-on-white btn-header ng-class:{'button-error': personHeaderCtrl.required['header_info']}" ng-click="personHeaderCtrl.editHeader()"><span translate="person.header.EDIT_HEADER"></span></button>
 							<?php } ?>
-						<?php } ?>
+						</div>
 						<div class="deviser-data">
 							<div class="name">
 								{{personHeaderCtrl.person.name}}
@@ -59,9 +56,50 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 						</div>
 					</div>
 				</div>
-				<?php if ($person->isDeviserEditable() && $person->isPublic()) {?>
-					<a class="btn btn-default all-caps btn-header btn-add-work hidden-xs hidden-sm" ng-class="personHeaderCtrl.required['store'] ? 'button-error' : 'btn-red'" href="<?= $person->getCreateWorkLink()?>"><span translate="person.header.ADD_WORK"></span></a>
-				<?php } ?>
+				<div class="edit-profile-btn-right hidden-xs">
+					<?php if ($person->isPersonEditable()) { ?>
+						<?php if ($person->isDeviserEditable() && $person->isPublic()) {?>
+							<a class="btn btn-follow-header btn-auto btn-red" href="<?= $person->getCreateWorkLink()?>"><span translate="person.header.ADD_WORK"></span></a>
+						<?php } ?>
+					<?php } else { ?>
+						<button class="btn btn-follow-header btn-auto btn-red" ng-click="personHeaderCtrl.follow('<?=$person->short_id?>')" ng-cloak ng-if="!personHeaderCtrl.isFollowed"><i class="hidden ion-ios-star"></i><span><span translate="discover.FOLLOW"></span></span></button>
+						<button class="btn btn-follow-header btn-auto" ng-click="personHeaderCtrl.unFollow('<?=$person->short_id?>')" ng-cloak ng-if="personHeaderCtrl.isFollowed"><i class="ion-ios-star red-text hidden"></i><span><span translate="discover.UNFOLLOW"></span></span></button>
+					<?php } ?>
+				</div>
+
+				<?php /*
+				<span class="dropdown more-options">
+					<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="hidden-xs icons-hover more-options-icon"></span></a>
+					<div class="dropdown-menu admin-wrapper black-form">
+						<ul class="menu-logued">
+						<?php if ($person->isDeviserEditable() && $person->isPublic()) {?>
+							<li class="_header-item"><a href="#" ng-click="personHeaderCtrl.editHeader()"><span translate="person.header.EDIT_HEADER"></span></a></li>
+						<?php } ?>
+							<?php if (!$person->isConnectedUser()) { ?>
+								<li class="_header-item"><a href="<?= $person->getChatLink()?>"><span translate="person.header.CHAT"></span></a></li>
+							<?php } ?>
+						</ul>
+					</div>
+				</span>
+ 				*/ ?>
+
+				<div class="hidden-xs deviser-followers position-followers">
+					<p>Followers</p>
+					<p class="num">
+						<a href="<?=$person->getFollowersLink()?>">
+							<?=count($person->getFollowers())?>
+						</a>
+					</p>
+				</div>
+
+				<div class="hidden-xs deviser-followers position-following">
+					<p>Following</p>
+					<p class="num">
+						<a href="<?=$person->getFollowLink()?>">
+							<?=count($person->getFollow())?>
+						</a>
+					</p>
+				</div>
 			</div>
 		</div>
 	</div>

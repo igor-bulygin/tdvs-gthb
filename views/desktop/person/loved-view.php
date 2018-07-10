@@ -49,10 +49,7 @@ $this->params['person_links_target'] = 'public_view';
 							</div>
 							<div id="loved-container" class="macy-container" data-columns="6">
 								<?php foreach ($loveds as $loved) {
-									$product = $loved->getProduct();
-									if ($product->product_state != \app\models\Product::PRODUCT_STATE_ACTIVE) {
-										continue;
-									} ?>
+									$product = $loved->getProduct(); ?>
 									<div class="menu-category list-group">
 										<div class="grid">
 											<figure class="effect-zoe">

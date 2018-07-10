@@ -10,6 +10,7 @@ PersonMenuAsset::register($this);
 $categories = array_key_exists('person_menu_store_categories', $this->params) ? $this->params['person_menu_store_categories'] : [];
 $activeOption = array_key_exists('person_menu_active_option', $this->params) ? $this->params['person_menu_active_option'] : '';
 $linksTarget = array_key_exists('person_links_target', $this->params) ? $this->params['person_links_target'] : '';
+$menuFollow = array_key_exists('person_menu_follow_option', $this->params) ? $this->params['person_menu_follow_option'] : '';
 /** @var Person $person */
 $person = $this->params['person'];
 
@@ -31,11 +32,28 @@ $person = $this->params['person'];
 				<?php } ?>
 			</li>
 		<?php } ?>
+		<?php if ($person->showFollowers()) { ?>
+			<li class=" <?= ($activeOption=='followers') ? 'active' : '' ?>">
+				<a class=" <?= ($activeOption=='followers') ? 'active' : '' ?>" href="<?= $person->getFollowLink()?>"><?=Yii::t('app/public', 'COMMUNITY')?></a>
+				<?php if ($activeOption == 'followers') { ?>
+					<ul class="submenu-store network hidden-xs">
+						<li class="<?= $menuFollow == 'follow' ? 'active' : ''?>">
+							<a href="<?=$person->getFollowLink()?>">Follow</a>
+						</li>
+						<li class="<?= $menuFollow == 'followers' ? 'active' : ''?>">
+							<a href="<?=$person->getFollowersLink()?>">Followers</a>
+						</li>
+					</ul>
+				<?php } ?>
+			</li>
+		<?php } ?>
 		<?php if ($person->showSocial()) { ?>
-			<li>
+			<li class=" <?= ($activeOption=='social') ? 'active' : '' ?>">
 				<a class=" <?= ($activeOption=='social') ? 'active' : '' ?>" href="<?= $person->getSocialLink()?>">Social feed</a>
 			</li>
 		<?php } ?>
+	</ul>
+	<ul class="menu-deviser-bottom">
 		<?php if ($person->showLoved()) { ?>
 		<li class=" <?= ($activeOption=='loved') ? 'active' : '' ?>">
 			<a class=" <?= ($activeOption=='loved') ? 'active' : '' ?>" href="<?= $person->getLovedLink()?>">Loved</a>
@@ -74,7 +92,7 @@ $person = $this->params['person'];
 			</li>
 		<?php } ?>
 	</ul>
-	<?php 
+	<?php
 	if ($person->showStore()) {
 	if (count($categories)>0) { ?>
 		<ul class="submenu-store hidden-sm hidden-md hidden-lg">
@@ -84,8 +102,15 @@ $person = $this->params['person'];
 				</li>
 			<?php } ?>
 		</ul>
-	<?php 
+	<?php
 	}
 	} ?>
-
+	<?php
+	if ($person->showFollowers() && $activeOption=='followers') { ?>
+		<ul class="submenu-store hidden-sm hidden-md hidden-lg">
+			<li><a href="<?=$person->getFollowLink()?>">Follow</a></li>
+			<li><a href="<?=$person->getFollowersLink()?>">Followers</a></li>
+		</ul>
+	<?php
+	} ?>
 </nav>

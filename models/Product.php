@@ -508,6 +508,7 @@ class Product extends CActiveRecord {
 					'main_photo_512' => "imagePreview512",
 					'main_photo_256_fill' => "imagePreview256Fill",
 					'min_price' => 'minimumPrice',
+					'created_at',
 				];
 				static::$retrieveExtraFields = [
 					'deviser_id',
@@ -687,7 +688,10 @@ class Product extends CActiveRecord {
 		// if text is specified
 		if ((array_key_exists("text", $criteria)) && (!empty($criteria["text"]))) {
 //			// search the word in all available languages
-			$query->andFilterWhere(static::getFilterForText(static::$textFilterAttributes, $criteria["text"]));
+			$parts = explode(' ', $criteria['text']);
+			foreach ($parts as $part) {
+				$query->andFilterWhere(static::getFilterForText(static::$textFilterAttributes, $part));
+			}
 		}
 
 		// Count how many items are with those conditions, before limit them for pagination

@@ -4,6 +4,9 @@
 .modal-content{
     min-width: 532px;
     margin: 0 auto;
+    @media (max-width: 768px){
+    	min-width: auto;
+    }
     .modal-header{
          border-bottom: 0;
         h3{
@@ -45,7 +48,8 @@
 .modal-sm {
     width: 425px!important;
 	@media (max-width: 768px){
-        width: 300px!important;
+        width: 350px!important;
+        margin: auto;
     }
 	.modal-content{
 		min-width: auto!important;
@@ -152,4 +156,15 @@
 			}
 		}
 	}
+}
+.modal-already-member{
+	padding-top: 6px;
+	.modal-signed-up{
+		color:$dark_red;
+	}
+}
+.modal-dialog {
+	@media (min-width: 768px){
+    	width: 500px;
+    }
 }

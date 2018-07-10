@@ -15,12 +15,15 @@ use app\models\Faq;
 use app\models\Invitation;
 use app\models\Lang;
 use app\models\Login;
+use app\models\Loved;
 use app\models\OldProduct;
 use app\models\Person;
+use app\models\Post;
 use app\models\Product;
 use app\models\Story;
 use app\models\Tag;
 use app\models\Term;
+use app\models\Timeline;
 use Yii;
 use yii\base\DynamicModel;
 use yii\data\ArrayDataProvider;
@@ -1228,6 +1231,127 @@ class PublicController extends CController
 			$banner->position = $item['position'];
 			$banner->save();
 
+		}
+	}
+
+	public function actionCreateTimeline()
+	{
+		Timeline::deleteAll();
+
+		// Boxes
+		$offset = 0;
+		$boxes = Box::findSerialized([
+			'limit' => 10,
+			'offset' => $offset,
+		]);
+		while (count($boxes) > 0) {
+			foreach ($boxes as $box) {
+				$timeline = new Timeline();
+				$timeline->person_id = $box->person_id;
+				$timeline->target_id = $box->short_id;
+				$timeline->action_type = Timeline::ACTION_BOX_CREATED;
+				$timeline->date = $box->created_at;
+				$timeline->save();
+			}
+			$offset += 10;
+			$boxes = Box::findSerialized([
+				'limit' => 10,
+				'offset' => $offset,
+			]);
+		}
+
+		// Products
+		$offset = 0;
+		$products = Product::findSerialized([
+			'product_state' => Product::PRODUCT_STATE_ACTIVE,
+			'order_type' => 'old',
+			'limit' => 10,
+			'offset' => $offset,
+		]);
+		while (count($products) > 0) {
+
+			foreach ($products as $product) {
+				$timeline = new Timeline();
+				$timeline->person_id = $product->deviser_id;
+				$timeline->target_id = $product->short_id;
+				$timeline->action_type = Timeline::ACTION_PRODUCT_CREATED;
+				$timeline->date = $product->created_at;
+				$timeline->save();
+			}
+
+			$offset += 10;
+			$products = Product::findSerialized([
+				'product_state' => Product::PRODUCT_STATE_ACTIVE,
+				'order_type' => 'old',
+				'limit' => 10,
+				'offset' => $offset,
+			]);
+		}
+
+		// Posts
+		$offset = 0;
+		$posts = Post::findSerialized([
+			'limit' => 10,
+			'offset' => $offset,
+		]);
+
+		while (count($posts) > 0) {
+			foreach ($posts as $post) {
+				$timeline = new Timeline();
+				$timeline->person_id = $post->person_id;
+				$timeline->target_id = $post->short_id;
+				$timeline->action_type = Timeline::ACTION_POST_CREATED;
+				$timeline->date = $post->created_at;
+				$timeline->save();
+			}
+
+			$offset += 10;
+			$posts = Post::findSerialized([
+				'limit' => 10,
+				'offset' => $offset,
+			]);
+		}
+
+		// Loveds
+		$offset = 0;
+		$loveds = Loved::findSerialized([
+			'limit' => 10,
+			'offset' => $offset,
+		]);
+
+		while (count($loveds) > 0) {
+			foreach ($loveds as $loved) {
+				if ($loved->product_id) {
+					$timeline = new Timeline();
+					$timeline->person_id = $loved->person_id;
+					$timeline->target_id = $loved->product_id;
+					$timeline->action_type = Timeline::ACTION_PRODUCT_LOVED;
+					$timeline->date = $loved->created_at;
+					$timeline->save();
+				}
+				if ($loved->box_id) {
+					$timeline = new Timeline();
+					$timeline->person_id = $loved->person_id;
+					$timeline->target_id = $loved->box_id;
+					$timeline->action_type = Timeline::ACTION_BOX_LOVED;
+					$timeline->date = $loved->created_at;
+					$timeline->save();
+				}
+				if ($loved->post_id) {
+					$timeline = new Timeline();
+					$timeline->person_id = $loved->person_id;
+					$timeline->target_id = $loved->post_id;
+					$timeline->action_type = Timeline::ACTION_POST_LOVED;
+					$timeline->date = $loved->created_at;
+					$timeline->save();
+				}
+			}
+
+			$offset += 10;
+			$loveds = Loved::findSerialized([
+				'limit' => 10,
+				'offset' => $offset,
+			]);
 		}
 	}
 }

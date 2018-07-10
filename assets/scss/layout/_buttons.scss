@@ -104,13 +104,40 @@ a{
 }
 .btn-follow{
     @extend %btn;
-    background-color:$background_grey;
-    color: $black;
-    padding: 5px 20px;
-    letter-spacing: 0.5px;
+    //background-color:$background_grey;
+    //color: $black;
+    //padding: 5px 20px;
+    //letter-spacing: 0.5px;
+    height: auto;
+    margin: 0.4em 0 !important;
     z-index: 12;
-    i{
+    /*i{
         padding-right: 5px;
+    }*/
+    &.btn-icon{
+        //position: absolute;
+        width: auto;
+        height: auto;
+        margin: 0.4em 0 !important;
+        background-color: $white;
+        //right: 40px;
+        //bottom: 8px;
+    }
+}
+.btn-follow-header{
+    @extend %btn;
+    height: auto;
+    margin: 0.4em 0 !important;
+    z-index: 12;
+    min-width: 177px;
+    &.btn-icon{
+        //position: absolute;
+        width: auto;
+        height: auto;
+        margin: 0.4em 0 !important;
+        background-color: $white;
+        //right: 40px;
+        //bottom: 8px;
     }
 }
 /*botones rectangulares*/
@@ -185,14 +212,19 @@ a{
         }
     }
 }*/
+.btn-xl{
+    min-width: 200px;
+    @include border-radius(8px,8px,8px,8px);
+}
+.btn-auto{
+    padding-right: 20px !important;
+    padding-left: 20px !important;
+    height: auto;
+}
 .btn-acordion{
     margin-top: -10px!important;
     height: 28px;
     padding-top: 6px;
-}
-.btn-xl{
-    min-width: 200px;
-    @include border-radius(8px,8px,8px,8px);
 }
 /*botones redondos*/
 .send-btn{

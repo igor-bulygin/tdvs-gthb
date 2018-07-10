@@ -1,0 +1,18 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="modalPostDetailsCtrl.dismiss()">
+		<span class="ion-ios-close" aria-hidden="true"></span>
+	</button>
+</div>
+<div class="modal-body">
+    <div class="grid">
+        <img class="col-xs-12 grid-image" ng-src="{{modalPostDetailsCtrl.resolve.post.photo_url}}">
+        <div class="col-xs-12 text-right">
+            <span ng-bind="modalPostDetailsCtrl.resolve.post.loveds"></span>
+            <span ng-if="modalPostDetailsCtrl.resolve.post.isLoved" class="icons-hover heart-icon heart-red-icon" ng-click="modalPostDetailsCtrl.resolve.unLovePost(post)" ng-cloak></span>
+            <span ng-if="!modalPostDetailsCtrl.resolve.post.isLoved" class="icons-hover heart-icon heart-black-icon" ng-click="modalPostDetailsCtrl.resolve.lovePost(post)" ng-cloak></span>
+        </div>
+        <span class="col-xs-12" ng-bind-html="modalPostDetailsCtrl.resolve.post.text"></span>
+    </div>
+</div>
+<div class="modal-footer">
+</div>
