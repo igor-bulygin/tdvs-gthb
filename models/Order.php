@@ -110,13 +110,13 @@ class Order extends CActiveRecord {
 		}
 
 		// Check if person has any order paid
-		$orders_by_person = Order::find()->where(["person_id" => $this->person_id, "order_state" => Order::ORDER_STATE_PAID])->count();
+		$orders_by_person = Order::find()->where(["person_id" => $this->person_id, "order_state" => Order::ORDER_STATE_PAID])->andWhere(['!=', 'short_id', $this->short_id])->count();
 		if($orders_by_person > 0 ) {
 			$this->first_discount = 0;
 			$this->percent_discount = 0;
 		} else {
 			$this->first_discount = 1;
-			$this->percent_discount = 10;
+			$this->percent_discount = \Yii::$app->params['default_initial_discount_percent'];
 		}
 
 		if (empty($this->order_date)) {

@@ -26,6 +26,7 @@ return [
 	'default_spain_vat' => 0.21,
 	'admin_email' => 'info@todevise.com',
 	'from_email' => 'info@todevise.com',
+	'default_initial_discount_percent' => 10.00,
 
 	'index_banners' => [
 		['img' => '/imgs/banner-1.jpg', 'url' => '/deviser/isabel-de-pedro/80226c0/store', 'alt' => 'Isabel De Pedro', 'active' => true],

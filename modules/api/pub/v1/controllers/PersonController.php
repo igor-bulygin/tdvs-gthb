@@ -125,7 +125,12 @@ class PersonController extends AppPublicController
 		$person->type = $type;
 		$person->account_state = $account_state;
 		$person->affiliate_id = "AF" . $person->short_id;
-		$person->parent_affiliate_id = (!empty($parent_affiliate_id)) ? $parent_affiliate_id : "";
+		if($parent_person) {
+			$person->parent_affiliate_id = $parent_affiliate_id;
+			$person->setAttribute('follow', array($parent_person->short_id));
+		} else {
+			$person->parent_affiliate_id = "";
+		}
 
 		$person->setScenario($this->getScenarioFromRequest($person));
 		$person->load(Yii::$app->request->post(), '');
