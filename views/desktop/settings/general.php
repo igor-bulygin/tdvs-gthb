@@ -21,7 +21,7 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 <?= SettingsHeader::widget() ?>
 <?php } ?>
 
-<div ng-controller="generalSettingsCtrl as generalSettingsCtrl" class="personal-info-wrapper bank-settings-wrapper">
+<div ng-controller="generalSettingsCtrl as generalSettingsCtrl" class="personal-info-wrapper general-settings-wrapper">
 	<div class="container">
 		<uib-accordion>
 			<div uib-accordion-group class="panel-default panel-billing" heading="{{ 'settings.general.PERSONAL_INFORMATION' | translate }}" is-open="true" ng-cloak>
@@ -55,7 +55,7 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 									<input type="text" name="vat_id" class="form-control" ng-model="generalSettingsCtrl.person.personal_info.vat_id">
 								</div>
 							</div>
-							
+
 							<div class="blockify mt-20">
 								<div class="col-md-6 no-pad">
 									<div class="col-md-12 no-pad">

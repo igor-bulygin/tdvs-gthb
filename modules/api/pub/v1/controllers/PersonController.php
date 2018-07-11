@@ -8,6 +8,7 @@ use Yii;
 use yii\web\BadRequestHttpException;
 use yii\web\ConflictHttpException;
 use yii\web\NotFoundHttpException;
+use yii\web\NotAcceptableHttpException;
 
 class PersonController extends AppPublicController
 {
@@ -82,6 +83,14 @@ class PersonController extends AppPublicController
 		switch ($type[0]) {
 			case Person::CLIENT:
 				$account_state = Person::ACCOUNT_STATE_ACTIVE;
+
+				$parent_affiliate_id = trim(Yii::$app->request->post("parent_affiliate_id"));
+				if(!empty($parent_affiliate_id)) {
+					$parent_person = Person::findOne(['affiliate_id' => $parent_affiliate_id]);
+					if(!$parent_person) {
+						throw new NotAcceptableHttpException("Invalid promo code");
+					}
+				}
 				break;
 			case Person::DEVISER:
 			case Person::INFLUENCER:
@@ -115,6 +124,14 @@ class PersonController extends AppPublicController
 		$person = new Person();
 		$person->type = $type;
 		$person->account_state = $account_state;
+		$person->affiliate_id = "AF" . $person->short_id;
+		if($parent_person) {
+			$person->parent_affiliate_id = $parent_affiliate_id;
+			$person->setAttribute('follow', array($parent_person->short_id));
+		} else {
+			$person->parent_affiliate_id = "";
+		}
+
 		$person->setScenario($this->getScenarioFromRequest($person));
 		$person->load(Yii::$app->request->post(), '');
 

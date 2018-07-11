@@ -128,6 +128,7 @@ return [
 	'ORDER_EMAIL_MAIN_TEXT' => 'Te informamos que tu compra ha sido realizada&nbsp;con éxito y se encuentra&nbsp;en proceso de envío. Para devoluciones o modificaciones visita tu perfil en <a href="http://www.todevise.com" target="_blank">www.todevise.com</a>',
 	'ORDER_EMAIL_SUBTITLE' => 'Información de compra',
 	'ORDER_EMAIL_TOTAL_AMOUNT' => 'IMPORTE TOTAL DE LA COMPRA: <strong>{amount}</strong>',
+	'X_PERCENT_DISCOUNT_APPLIED' => '{percent_discount}% de descuento aplicado',
 	'ORDER_EMAIL_FOOTER' => '<em>Para saber más sobre Todevise, pulsa en este link</em>&nbsp;<a href="http://www.todevise.com/about-us">http://www.todevise.com/about-us</a><br><em>Copyright @ 2017 Todevise, Todos los derechos reservados.</em><br>',
 	'PAYMENTS_MADE_TROUGH_STRIPE' => 'Todos los pagos de Todevise se realizan a través de Stripe, una plataforma de procesamiento de pagos. Usamos Stripe porque es muy seguro, rápido y fácil de usar. La comisión de Stripe es de 1,40% + 0,25€ de cada transacción. El dinero será transferido a su cuenta de Stripe inmediatamente después de cada compra. <br /><br/>Para empezar a vender en Todevise, debes abrir una cuenta de Stripe (es 100% gratis) y conectarla a tu perfil Todevise. Para ello, pulse el botón de abajo. Cuando termine de crear su cuenta de Stripe, será redirigido a esta página.',
 	'PERSON_NAME_FAQS' => 'Faqs',

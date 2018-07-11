@@ -33,6 +33,8 @@ use yii\web\IdentityInterface;
  * @property PersonShippingSettings[] $shippingSettingsMapping
  * @property double $application_fee
  * @property int $profile_views
+ * @property string $affiliate_id
+ * @property string $parent_affiliate_id
  * @property array $follow
  * @property MongoDate $created_at
  * @property MongoDate $updated_at
@@ -113,6 +115,8 @@ class Person extends CActiveRecord implements IdentityInterface
 			'shipping_settings',
 			'application_fee',
 			'profile_views',
+			'affiliate_id',
+			'parent_affiliate_id',
 			'follow',
 			'created_at',
 			'updated_at',
@@ -816,6 +820,7 @@ class Person extends CActiveRecord implements IdentityInterface
 			case self::SERIALIZE_SCENARIO_PREVIEW:
 				self::$serializeFields = [
 					'id' => 'short_id',
+					'affiliate_id' => 'affiliate_id',
 					'slug',
 					'name' => "name",
 					'url_avatar' => "profileImage",
@@ -847,6 +852,7 @@ class Person extends CActiveRecord implements IdentityInterface
 			case self::SERIALIZE_SCENARIO_PUBLIC:
 				self::$serializeFields = [
 					'id' => 'short_id',
+					'affiliate_id' => 'affiliate_id',
 					'slug',
 					'text_short_description',
 					'text_biography',
@@ -895,6 +901,7 @@ class Person extends CActiveRecord implements IdentityInterface
 				static::$serializeFields = [
 					'id' => 'short_id',
 					'short_id', // TODO Remove when all calls are migrated to new API
+					'affiliate_id' => 'affiliate_id',
 					'slug',
 					'text_short_description',
 					'text_biography',
@@ -955,6 +962,7 @@ class Person extends CActiveRecord implements IdentityInterface
 				static::$serializeFields = [
 					'id' => 'short_id',
 					'short_id', // TODO Remove when all calls are migrated to new API
+					'affiliate_id' => 'affiliate_id',
 					'slug',
 					'text_short_description',
 					'text_biography',
@@ -2264,6 +2272,24 @@ class Person extends CActiveRecord implements IdentityInterface
 	}
 
 	/**
+	 * Returns the application fee to be charged to the user in his sales after discount.
+	 * First discount is assumed by Todevise default fee
+	 * Its a double number in 100base, for example returns 0.145 - 0.10 = 0.045 to represent a 4.5% percentage
+	 * @param double $discount
+	 *
+	 * @return double
+	 */
+	public function getSalesApplicationFeeAfterDiscount($discount)
+	{
+		$todeviseFee = $this->getTodeviseFee();
+		$todeviseFee -= $discount;
+
+		$fee = $todeviseFee * (1 + $this->getVatOverFee());
+
+		return $fee;
+	}
+
+	/**
 	 * Returs the "todevise" fee to apply in the orders of the deviser.
 	 * It can be de default value, or a custom value set in the deviser.
 	 * Its a double number in 100base, for example returns 0.145 to represent a 14.5% percentage
@@ -2276,6 +2302,25 @@ class Person extends CActiveRecord implements IdentityInterface
 			$todeviseFee = $this->application_fee;
 		} else {
 			$todeviseFee = Yii::$app->params['default_todevise_fee'];
+		}
+
+		return $todeviseFee;
+	}
+
+	/**
+	 * Returs the "todevise" fee to apply in the orders of the deviser after discount.
+	 * It can be de default value, or a custom value set in the deviser.
+	 * Its a double number in 100base, for example returns 0.145 - 0.10 = 0.045 to represent a 4.5% percentage
+	 * @param double $discount
+	 *
+	 * @return double
+	 */
+	public function getTodeviseFeeAfterDiscount($discount)
+	{
+		if ($this->application_fee && is_double($this->application_fee)) {
+			$todeviseFee = $this->application_fee - $discount;
+		} else {
+			$todeviseFee = Yii::$app->params['default_todevise_fee'] - $discount;
 		}
 
 		return $todeviseFee;

@@ -20,9 +20,13 @@
 			"SELECT_AN_OPTION": "Elija una opción",
 			"TODEVISE_STATS": "Estadísticas Todevise",
 			"TOTAL_SALES": "Número total de ventas",
-            "GROSS_AMOUNT": "Importe bruto en ventas",
-            "NET_AMOUNT": "Importe neto en ventas (tras comisiones)",
-            "PROFILE_VIEWS": "Visitas al perfil"
+      "GROSS_AMOUNT": "Importe bruto en ventas",
+      "NET_AMOUNT": "Importe neto en ventas (tras comisiones)",
+      "PROFILE_VIEWS": "Visitas al perfil",
+			"UNIQUE_AFFILIATE_CODE_EXPLANATION": "Los miembros que usan este código para registrarse en Todevise o para hacer su primera compra (en caso de que no hayan usado otro código de afiliados anteriormente), formarán parte de su red de afiliados y usted obtendrá un 5% de todas las compras realizadas por ellos, para siempre. En cuanto a ellos, obtendrán un 10% de descuento en su primera compra.<br><br>Así que comparta este código con tantas personas como sea posible para hacer crecer su red.",
+			"UNIQUE_AFFILIATE_CODE": "Código de afiliado único:",
+			"EARNINGS": "Ganancias",
+			"NUMBER_OF_AFFILIATES": "Número de miembros de tu red de afiliados:"
 		},
 		"orders": {
 			"ORDERS": "PEDIDOS",
@@ -100,6 +104,7 @@
 		},
 		"header": {
 			"GENERAL": "General",
+			"AFFILIATES_PROGRAM": "Programa afiliados",
 			"MY_ORDERS": "Mis pedidos",
 			"STOCK_PRICE": "Precio & Stock",
 			"BILLING_PAYMENTS": "Facturas y pagos",

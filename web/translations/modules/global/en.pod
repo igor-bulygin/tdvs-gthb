@@ -46,6 +46,7 @@
 			"ADDRESS": "Address",
 			"ZIP": "ZIP",
 			"EMAIL": "Email",
+			"PROMO_CODE": "Promo code",
 			"PASSWORD": "Password",
 			"NEW_PASSWORD": "New password",
 			"SET_PASSWORD": "Choose a password",

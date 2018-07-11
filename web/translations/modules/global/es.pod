@@ -46,6 +46,7 @@
 			"ADDRESS": "Dirección",
 			"ZIP": "C.P.",
 			"EMAIL": "Email",
+			"PROMO_CODE": "Código promocional",
 			"PASSWORD": "Contraseña",
 			"NEW_PASSWORD": "Nueva contraseña",
 			"SET_PASSWORD": "Elija una contraseña",

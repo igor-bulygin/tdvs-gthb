@@ -15,7 +15,7 @@
 						</div>
 						<div class="pull-left text-left accordion-header-item">
 							<div class="accordion-header-title total-title" translate="settings.orders.TOTAL_PRICE"></div>
-							<div class="accordion-header-subtitle" ng-cloak>{{order.subtotal | currency:'€':2}}</div>
+							<div class="accordion-header-subtitle" ng-cloak>{{order.total | currency:'€':2}}</div>
 						</div>
 						<div class="pull-left text-left accordion-header-item">
 							<div class="accordion-header-title"  style="color: #9D9D9D;" translate="settings.orders.PURCHASE_DATE"></div>
@@ -76,6 +76,9 @@
 								</div>
 							</div>
 						</div>
+					</div>
+					<div class="order-percent-discount-applied" ng-if="order.first_discount">
+						<span translate="cart.X_PERCENT_DISCOUNT_APPLIED" translate-values="{percent_discount: order.percent_discount}"></span>
 					</div>
 				</div>
 			</div>

@@ -2,6 +2,9 @@
 	"util": {
 		"errors": {
 			"PLEASE_ENTER_EMAIL":"Por favor introduzca una dirección de email válida.",
+			"EMAIL_EXISTS":"Este email ya existe.",
+			"PLEASE_ENTER_PROMO_CODE":"Por favor introduzca un código de promoción válido o déjalo en blanco.",
+			"PROMO_CODE_NOT_VALID":"Este código promocional no es válido.",
 			"PLEASE_ENTER_NAME":"Por favor introduzca su nombre.",
 			"PLEASE_ENTER_FIRST_NAME":"Por favor, introduzca su nombre.",
 			"PLEASE_ENTER_LAST_NAME":"Por favor, introduzca sus apellidos.",

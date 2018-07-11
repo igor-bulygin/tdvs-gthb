@@ -15,6 +15,7 @@ use yii\web\UnauthorizedHttpException;
  * @property string short_id
  * @property string person_id
  * @property double subtotal
+ * @property double total
  * @property string order_state
  * @property MongoDate order_date
  * @property array shipping_address
@@ -23,6 +24,8 @@ use yii\web\UnauthorizedHttpException;
  * @property array payment_info
  * @property array state_history
  * @property array charges
+ * @property int first_discount
+ * @property double percent_discount
  * @property MongoDate created_at
  * @property MongoDate updated_at
  */
@@ -62,6 +65,7 @@ class Order extends CActiveRecord {
 			'short_id',
 			'person_id',
 			'subtotal',
+			'total',
 			'order_state',
 			'order_date',
 			'shipping_address',
@@ -71,6 +75,8 @@ class Order extends CActiveRecord {
 			'state_history',
 
 			'charges',
+			'first_discount',
+			'percent_discount',
 
 			'created_at',
 			'updated_at',
@@ -101,6 +107,16 @@ class Order extends CActiveRecord {
 	{
 		if (empty($this->order_state)) {
 			$this->setState(Order::ORDER_STATE_CART);
+		}
+
+		// Check if person has any order paid
+		$orders_by_person = Order::find()->where(["person_id" => $this->person_id, "order_state" => Order::ORDER_STATE_PAID])->andWhere(['!=', 'short_id', $this->short_id])->count();
+		if($orders_by_person > 0 ) {
+			$this->first_discount = 0;
+			$this->percent_discount = 0;
+		} else {
+			$this->first_discount = 1;
+			$this->percent_discount = \Yii::$app->params['default_initial_discount_percent'];
 		}
 
 		if (empty($this->order_date)) {
@@ -156,6 +172,7 @@ class Order extends CActiveRecord {
 					'person_id',
 					'person_info' => 'personInfo',
 					'subtotal',
+					'total',
 					'order_state',
 					'order_date',
 					'shipping_address',
@@ -165,6 +182,8 @@ class Order extends CActiveRecord {
 					'state_history',
 
 //					'charges',
+					'first_discount',
+					'percent_discount'
 				];
 				static::$retrieveExtraFields = [
 				];
@@ -180,6 +199,7 @@ class Order extends CActiveRecord {
 					'person_id',
 					'person_info' => 'personInfo',
 					'subtotal',
+					'total',
 					'order_state',
 					'order_date',
 					'shipping_address',
@@ -189,6 +209,8 @@ class Order extends CActiveRecord {
 //					'state_history',
 
 //					'charges',
+					'first_discount',
+					'percent_discount'
 				];
 				static::$retrieveExtraFields = [
 				];
@@ -204,6 +226,7 @@ class Order extends CActiveRecord {
 					'person_id',
 					'person_info' => 'personInfo',
 //					'subtotal',
+//					'total',
 //					'order_state',
 					'order_date',
 					'shipping_address',
@@ -213,9 +236,12 @@ class Order extends CActiveRecord {
 //					'state_history',
 
 //					'charges',
+					'first_discount',
+					'percent_discount'
 				];
 				static::$retrieveExtraFields = [
 					'subtotal',
+					'total',
 					'order_state',
 					'payment_info',
 				];
@@ -487,12 +513,21 @@ class Order extends CActiveRecord {
 	public function recalculateTotals() {
 		$packs = $this->getPacks();
 		$subtotal = 0;
+		$subtotal_without_shipping = 0;
+		$total = 0;
+		$amount_discount = 0;
 
 		foreach ($packs as $i => $pack) {
-			$subtotal += ($pack->pack_price + $pack->shipping_price);[];
+			$subtotal += ($pack->pack_price + $pack->shipping_price);
+			$subtotal_without_shipping += ($pack->pack_price);
+		}
+
+		if(!empty($this->first_discount) && $this->first_discount) {
+			$amount_discount = round($subtotal_without_shipping * $this->percent_discount / 100, 2, PHP_ROUND_HALF_DOWN);
 		}
 
 		$this->subtotal = $subtotal;
+		$this->total = $subtotal - $amount_discount;
 	}
 
 	public function recalculateAll()
