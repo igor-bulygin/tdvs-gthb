@@ -186,7 +186,8 @@
 			"START": "To start building your timeline, you need to be a Todevise member",
 			"DISCOVERY_FEED":"What is your the DISCOVERY FEED?",
 			"TIMELINE_DESCR":"Follow any user on Todevise (a brand, influencer, or member) and receive updates about what they like and post.",
-			"BUILD_COMMUNITY":"Build a community of followers and go discover!"
+			"BUILD_COMMUNITY":"Build a community of followers and go discover!",
+			"EMPTY_TIMELINE":"Todavía no sigues a ningún usuario, por lo que tu timeline está vacío.</br>¿Quieres empezar a descubrir contenido interesante? Puedes ver y seguir a nuestros <a href='/discover-devisers'>devisers</a> e <a href='/discover-influencers'>influencers</a> y tu timeline se llenará de novedades"
 		},
 		"DELETE_WORK_QUESTION": "¿Seguro que quieres borrar este trabajo?",
 		"EDIT_WORK": "Editar trabajo",
