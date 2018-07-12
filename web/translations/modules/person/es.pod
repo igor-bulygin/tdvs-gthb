@@ -179,7 +179,8 @@
 			"PUBLISH":"Post",
 			"NEW_POST":"Nuevo post",
 			"SEE_MORE":"Ver más",
-			"EDIT_POST":"Editar post"
+			"EDIT_POST":"Editar post",
+			"SURE_DELETION_POST":"¿Seguro que desea eliminar el post?"
 		},
 		"timeline": {
 			"START": "To start building your timeline, you need to be a Todevise member",

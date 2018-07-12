@@ -277,7 +277,23 @@
                 vm.loading = false;
                 UtilService.onError(err);
             }
-            personDataService.deletePost({ id: postId }, onDeletePostsSuccess, onDeletePostsError);
+
+            var modalInstance = $uibModal.open({
+                component: 'modalAceptReject',
+                resolve: {
+                    text: function() {
+                        return 'person.posts.SURE_DELETION_POST';
+                    }
+                }
+            });
+            modalInstance.result.then(function(data) {
+                if (data) {
+                    personDataService.deletePost({ id: postId }, onDeletePostsSuccess, onDeletePostsError);
+                }
+            }, function(err) {
+                UtilService.onError(err);
+            });
+
         }
 
         function modalLogin() {

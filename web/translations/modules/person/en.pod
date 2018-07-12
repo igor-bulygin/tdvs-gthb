@@ -178,7 +178,8 @@
 			"PUBLISH":"Post",
 			"NEW_POST":"New post",
 			"SEE_MORE":"See more",
-			"EDIT_POST":"Edit post"
+			"EDIT_POST":"Edit post",
+			"SURE_DELETION_POST":"Are you sure?"
 		},
 		"timeline": {
 			"START": "To start building your timeline, you need to be a Todevise member",
