@@ -4,7 +4,6 @@ use app\assets\desktop\deviser\TimelineAsset;
 use app\models\Category;
 use app\models\Person;
 use app\models\Product;
-use yii\helpers\Url;
 
 TimelineAsset::register($this);
 
@@ -31,7 +30,7 @@ Yii::$app->opengraph->title = $this->title;
 			</ul></nav></div>
 			<div class="col-xs-12 col-md-8 col-lg-7">
 				<div class="timeline-wrapper">
-					<div ng-if="(timelineCtrl.timeline | filter:{ person: {person_type:timelineCtrl.selectedPersonType}}).length < 1" ng-cloak>
+					<div ng-if="false && (timelineCtrl.timeline | filter:{ person: {person_type:timelineCtrl.selectedPersonType}}).length < 1" ng-cloak>
 						<span translate="person.timeline.EMPTY_TIMELINE"></span>
 					</div>
 					<div ng-if="(timelineCtrl.timeline | filter:{ person: {person_type:timelineCtrl.selectedPersonType}}).length > 0" infinite-scroll="timelineCtrl.addMoreItems()" infinite-scroll-distance="timelineCtrl.show_items-1">
