@@ -324,6 +324,20 @@ class CartController extends AppPublicController
 					$stripeAmount = (int)(($pack->pack_price + $pack->shipping_price) * 100);
 				}
 
+				$vatOverFeePercentage = $deviser->getVatOverFee();
+				if(!empty($order->first_discount) && $order->first_discount){
+					$todeviseFeePercentage = $deviser->getTodeviseFeeAfterDiscount(floatval($order->percent_discount/100));
+					$totalFeePercentage = $deviser->getSalesApplicationFeeAfterDiscount(floatval($order->percent_discount/100));
+				} else {
+					$todeviseFeePercentage = $deviser->getTodeviseFee();
+					$totalFeePercentage = $deviser->getSalesApplicationFee();
+				}
+
+				// Set fees
+				$pack->pack_percentage_fee = $totalFeePercentage;
+				$pack->pack_percentage_fee_todevise = $todeviseFeePercentage;
+				$pack->pack_percentage_fee_vat = $vatOverFeePercentage;
+
 
 				if (empty($deviser->settingsMapping->stripeInfoMapping->access_token)) {
 
@@ -340,11 +354,6 @@ class CartController extends AppPublicController
 						],
 					]);
 
-					// No fees
-					$pack->pack_percentage_fee = 0;
-					$pack->pack_percentage_fee_todevise = 0;
-					$pack->pack_percentage_fee_vat = 0;
-
 				} else {
 
 					// Create a Token for the customer on the connected deviser account
@@ -358,20 +367,6 @@ class CartController extends AppPublicController
 							"stripe_account" => $deviser->settingsMapping->stripeInfoMapping->stripe_user_id,
 						]
 					);
-
-					$vatOverFeePercentage = $deviser->getVatOverFee();
-					if(!empty($order->first_discount) && $order->first_discount){
-						$todeviseFeePercentage = $deviser->getTodeviseFeeAfterDiscount($order->percent_discount/100);
-						$totalFeePercentage = $deviser->getSalesApplicationFeeAfterDiscount($order->percent_discount/100);
-					} else {
-						$todeviseFeePercentage = $deviser->getTodeviseFee();
-						$totalFeePercentage = $deviser->getSalesApplicationFee();
-					}
-
-					// Set fees
-					$pack->pack_percentage_fee = $totalFeePercentage;
-					$pack->pack_percentage_fee_todevise = $todeviseFeePercentage;
-					$pack->pack_percentage_fee_vat = $vatOverFeePercentage;
 
 					$applicationFeeAmount = round($stripeAmount * $totalFeePercentage, 0);
 
@@ -397,7 +392,7 @@ class CartController extends AppPublicController
 				}
 
 				// Recalculate totals
-				$pack->pack_total_price = ($stripeAmount / 100);
+				$pack->pack_total_price = floatval($stripeAmount / 100);
 				$pack->pack_total_fee_todevise = round($pack->pack_total_price * $pack->pack_percentage_fee_todevise, 2);
 				$pack->pack_total_fee_vat = round($pack->pack_total_fee_todevise * $pack->pack_percentage_fee_vat, 2);
 				$pack->pack_total_fee = $pack->pack_total_fee_todevise + $pack->pack_total_fee_vat;
