@@ -67,10 +67,8 @@ Yii::$app->opengraph->title = $this->title;
 				<div class="row no-mar">
 					<label for="promo_code"><span translate="global.user.PROMO_CODE"></span></label>
 					<div class="input-check-wrapper">
-						<input type="text" id="promo_code" class="form-control grey-input ng-class:{'error-input': createAccountCtrl.has_error(createAccountCtrl.form, createAccountCtrl.form.promo_code)}" name="promo_code" ng-model="createAccountCtrl.person.parent_affiliate_id">
-						<i class="ion-checkmark" ng-if="createAccountCtrl.form.promo_code.$valid" ng-cloak></i>
+						<input type="text" id="promo_code" class="form-control grey-input" name="promo_code" ng-model="createAccountCtrl.person.parent_affiliate_id">
 					</div>
-					<form-errors field="createAccountCtrl.form.promo_code" condition="createAccountCtrl.has_error(createAccountCtrl.form, createAccountCtrl.form.promo_code)"></form-errors>
 				</div>
 				<div class="row no-mar">
 					<div class="checkbox checkbox-circle remember-me ng-class:{'error-input': createAccountCtrl.has_error(createAccountCtrl.form, createAccountCtrl.form.terms_and_conditions)}">
