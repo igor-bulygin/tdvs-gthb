@@ -92,6 +92,8 @@ return [
 	'ERROR_PAGE_MESSAGE_1' => 'Incluso las mejores amistades pasan por momentos difíciles, pero no significa que ya no nos queramos',
 	'ERROR_PAGE_MESSAGE_2' => 'PD: Vuelve a la página principal, ¡nos estamos ocupando de ello!',
 	'EXPLORE_BOXES' => 'Explora las cajas',
+	'FOLLOW_BY_PERSON_NAME' => 'Seguidos por {person_name}',
+	'FOLLOWERS_BY_PERSON_NAME' => 'Seguidores de {person_name}',
 	'FORGOT_PASSWORD' => '¿Olvidaste tu contraseña?',
 	'FORGOT_PASSWORD_EMAIL_TITLE' => 'Recordatorio de contraseña',
 	'FORGOT_PASSWORD_EMAIL_MAIN_TEXT' => 'Hemos recibido una solicitud para restablecer tu contraseña en Todevse',

@@ -92,6 +92,8 @@ return [
 	'ERROR_PAGE_MESSAGE_1' => 'Even the best relationships  go through  a rough patch sometimes, but this doesn’t mean that  we don’t love each other anymore',
 	'ERROR_PAGE_MESSAGE_2' => 'PD: Go to the home page, we are taking care of it!',
     'EXPLORE_BOXES' => 'Explore boxes',
+	'FOLLOW_BY_PERSON_NAME' => 'Followed by {person_name}',
+	'FOLLOWERS_BY_PERSON_NAME' => 'Followers {person_name}',
 	'FORGOT_PASSWORD' => 'Forgot your password?',
 	'FORGOT_PASSWORD_EMAIL_TITLE' => 'Password remember',
 	'FORGOT_PASSWORD_EMAIL_MAIN_TEXT' => 'We received a request to reset your password at Todevise',
