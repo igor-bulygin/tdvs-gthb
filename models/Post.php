@@ -172,7 +172,7 @@ class Post extends CActiveRecord
 					'id' => 'short_id',
 					'post_state',
 					'person_id',
-					'text',
+					'text' => 'parsedText',
 					'photo',
 					'photo_url' => 'photoUrl',
 					'loveds',
@@ -181,6 +181,7 @@ class Post extends CActiveRecord
 					'created_at',
 				];
 				static::$retrieveExtraFields = [
+					'text',
 				];
 
 				static::$translateFields = true;
@@ -348,6 +349,12 @@ class Post extends CActiveRecord
 		}
 
 		return $title;
+	}
+
+	public function getParsedText()
+	{
+		$text = $this->getText();
+		return preg_replace('/#(\w+)/', '<a href="#" class="hashtag">#$1</a>', $text);
 	}
 
 	public function getPerson()
