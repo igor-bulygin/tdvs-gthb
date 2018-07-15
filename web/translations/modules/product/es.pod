@@ -8,7 +8,7 @@
 			"IN_STOCK": " En stock",
 			"QUANTITY": "Cantidad",
 			"ORIGINAL": "Original",
-			"PRINTS": "Estampados",
+			"PRINTS": "Láminas",
 			"VIEW_SIZE_CHART": "Ver tallas disponibles",
 			"ADD_TO_CART": "Añadir a la cesta",
 			"OUT_OF_STOCK": "Sin stock",
