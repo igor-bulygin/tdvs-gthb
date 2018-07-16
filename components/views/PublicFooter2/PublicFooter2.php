@@ -133,7 +133,7 @@ $footerMode = 'collapsed';
 					</li>
 					-->
 					<li class="col-xs-6 col-md-2">
-						<a class="instagram" href="https://www.instagram.com/todevise.official" target="_blank">
+						<a class="instagram" href="https://www.instagram.com/todevise_official" target="_blank">
 							<i class="instagram">
 								<svg width="23px" height="24px" viewBox="0 0 23 24" version="1.1"
 									 xmlns="http://www.w3.org/2000/svg">
