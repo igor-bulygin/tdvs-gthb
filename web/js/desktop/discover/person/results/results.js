@@ -1,7 +1,7 @@
 (function() {
     "use strict";
 
-    function controller($scope, personDataService, UtilService) {
+    function controller($scope, personDataService, UtilService, $window) {
         var vm = this;
         vm.addMoreItems = addMoreItems;
         vm.setFollow = setFollow;
@@ -14,23 +14,28 @@
         }
 
         function setFollow(item) {
-            vm.refreshResults = false;
-
-            function onSetFollowSuccess(data) {
-                item.is_followed = !item.is_followed;
-            }
-
-            function onSetFollowError(err) {
-                UtilService.onError(err);
-                vm.refreshResults = true;
-            }
-            var params = {
-                personId: item.id
-            }
-            if (item.is_followed) {
-                personDataService.unFollowPerson(params, params, onSetFollowSuccess, onSetFollowError);
+            var connectedUser = UtilService.getConnectedUser();
+            if (!connectedUser) {
+                $window.location.href = '/timeline';
             } else {
-                personDataService.followPerson(params, params, onSetFollowSuccess, onSetFollowError);
+                vm.refreshResults = false;
+
+                function onSetFollowSuccess(data) {
+                    item.is_followed = !item.is_followed;
+                }
+
+                function onSetFollowError(err) {
+                    UtilService.onError(err);
+                    vm.refreshResults = true;
+                }
+                var params = {
+                    personId: item.id
+                }
+                if (item.is_followed) {
+                    personDataService.unFollowPerson(params, params, onSetFollowSuccess, onSetFollowError);
+                } else {
+                    personDataService.followPerson(params, params, onSetFollowSuccess, onSetFollowError);
+                }
             }
         }
 
