@@ -143,6 +143,7 @@ return [
 	'SELECT_COUNTRY' => 'Selecciona el país',
 	'SELECT_METRIC_UNIT' => 'Selecciona la unidad métrica',
 	'SETTINGS' => 'Ajustes',
+	'SHIPPING_INFO' => 'Información de envío',
 	'SHIPPING_SETTINGS' => 'Preferencias de envío',
 	'SIGNUP' => 'Regístrate',
 	'SOCIAL_FEED_BY_PERSON_NAME' => 'Social feed de {person_name}',

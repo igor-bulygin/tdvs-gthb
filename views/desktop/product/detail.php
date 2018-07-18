@@ -398,7 +398,8 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 									$shippingSettingsSpain = $person->getShippingSettingByCountry(Country::getDefaultContryCode());
 									if ($shippingSettingsSpain) { ?>
 									<div class="returns-row">
-										<p><?= Utils::l( $shippingSettingsSpain->observations)?></p>
+										<?php /*<p data-toggle="collapse" data-target="#shippingInfo" role="button"><?=Yii::t('app/public', 'SHIPPING_INFO')?></p>*/ ?>
+										<div id="shippingInfo" class="collapse in"><?= Utils::l( $shippingSettingsSpain->observations)?></div>
 									</div>
 									<?php } ?>
 									<div class="returns-row" ng-if="detailProductCtrl.product.bespoke && detailProductCtrl.product.bespoke.value && detailProductCtrl.product.bespoke.type==1">
