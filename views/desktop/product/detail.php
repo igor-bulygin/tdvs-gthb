@@ -402,7 +402,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 								</div>
 								<div class="full-width mt-20">	
 									<div class="bs-example">
-										<p class="btn accordion-btn">
+										<p class="btn accordion-btn no-pointer">
 											<span translate="product.detail.SHIPPING&POLICIES"></span>
 										</p>
 										<div>
