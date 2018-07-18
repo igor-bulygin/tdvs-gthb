@@ -44,7 +44,9 @@
 			"RETURNS":"Returns: ",
 			"CREATED_BY": "Created by",
 			"MORECONTENTCOMINGSOON": "More content coming soon !",
-			"SELECTMANDATORYOPTIONS": "Please select the mandatory tags"
+			"SELECTMANDATORYOPTIONS": "Please select the mandatory tags",
+			"IS_BESPOKED": "Bespoke product",
+			"MANUFACTURING_INFO": "Information needed from the customer before manufacturing this work"
 		},
 		"creation_edition": {
 			"BACK_TO_PROFILE":" &lt go back to your profile",
@@ -71,7 +73,7 @@
 			"SPECIFY_WARRANTY_MONTHS":"You must specify the warranty months",
 			"VALUE_MUST_NUMBER":"The value in this field must be a number",
 			"RETURNS":"RETURNS",
-			"DAYS":"Days",
+			"DAYS":" Days",
 			"SPECIFY_RETURNS_DAYS":"You must specify the return days",
 			"PHOTOS":"Photos",
 			"ADD_PHOTOS":"+ Add photos",

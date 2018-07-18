@@ -235,37 +235,6 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 									</button>
 								</div>
 							</div>
-							<?php /* 
-							<!--<div class="product-data">
-								<div class="row-size">
-									<div class="shipping-policies-wrapper">
-										<div class="title">Shipping &amp; Policies</div>
-										<div class="policies-row">
-											<form class="form-horizontal">
-												<div class="form-group">
-													<label class="col-sm-4 control-label shipping-label"><span>Shipping price to</span></label>
-													<div class="col-sm-5 shipping-sel">
-														<select class="form-control selectpicker shipping-select product-select" title="Choose country">
-															<option>USA</option>
-															<option>SPAIN</option>
-														</select>
-													</div>
-													<div class="col-sm-3">
-														is <span class="tax">€4.5</span>
-													</div>
-												</div>
-											</form>
-										</div>
-										<div class="returns-row">
-											Returns: 14 days
-										</div>
-										<div class="returns-row">
-											Warranty:
-										</div>
-									</div>
-								</div>
-							</div>
-							*/ ?>
 							<div class="product-data no-border">
 								<div class="full-width mb-20">
 									<div class="btns-product-wrapper">
@@ -422,6 +391,18 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 												*/ ?>
 											</div>
 										</form>
+									</div>
+									<div class="returns-row" ng-if="detailProductCtrl.product.bespoke && detailProductCtrl.product.bespoke.value && detailProductCtrl.product.bespoke.type==1">
+										<p translate="product.detail.IS_BESPOKED"></p>
+										<p><span translate="product.detail.MANUFACTURING_INFO"></span>: <span class="bold" ng-bind="detailProductCtrl.product.bespoke.value[detailProductCtrl.selected_language]"></span></p>
+									</div>									
+									<div class="returns-row" ng-if="detailProductCtrl.product.madetoorder && detailProductCtrl.product.madetoorder.value && detailProductCtrl.product.madetoorder.type==1">
+										<p><span class="bold" ng-bind="detailProductCtrl.product.madetoorder.value"></span> <span translate="product.variations.MANUFATURE_DAYS"></span></p>
+									</div>
+									<div class="returns-row" ng-if="detailProductCtrl.product.preorder && detailProductCtrl.product.preorder.type==1">
+										<p translate="product.detail.IS_PREORDER"></p>
+										<p><span translate="product.detail.PREORDER_END"></span> <span class="bold">{{ detailProductCtrl.parseDate(detailProductCtrl.product.preorder.end) | date: 'dd MMM yyyy' }}</span></p>
+										<p><span translate="product.detail.WHEN_SHIPPED"></span> <span class="bold">{{ detailProductCtrl.parseDate(detailProductCtrl.product.preorder.ship) | date: 'dd MMM yyyy' }}</span></p>
 									</div>
 									<?php
 									$returns = $product->getReturnsLabel();

@@ -308,9 +308,6 @@ a, a:hover, a:focus {
   .no-margin-sm {
     margin: 0 !important; } }
 
-.no-pointer {
-  cursor: default; }
-
 @font-face {
   font-family: "Univers Thin Ultra Condensed";
   src: url("/fonts/UniversLT-Thin-Ultracondensed.eot");
@@ -358,8 +355,8 @@ a, a:hover, a:focus {
     top: 70px; } }
 
 .form-control {
-  -webkit-box-shadow: 0 0 0 rgba(0, 0, 0, 0);
-  box-shadow: 0 0 0 rgba(0, 0, 0, 0); }
+  -webkit-box-shadow: 0 0 0 transparent;
+  box-shadow: 0 0 0 transparent; }
 
 .btn-default:hover {
   background-color: #cecece; }
@@ -657,7 +654,6 @@ a, a:hover, a:focus {
   font-size: 1.15em;
   text-transform: uppercase;
   text-align: center;
-  text-shadow: none;
   letter-spacing: 0.02em;
   padding: 0.45em 0 !important;
   margin: auto !important;
@@ -2859,7 +2855,7 @@ h3 {
       padding: 0; }
       .navbar.secondary #mobile-iconset a {
         float: left;
-        padding: 0 6px 0; }
+        padding: 0 8px 0; }
       .navbar.secondary #mobile-iconset img {
         height: 25px; }
         @media (max-width: 575px) {
@@ -5389,7 +5385,7 @@ h3 {
   @media (max-width: 575px) {
     .banner-deviser {
       background-color: transparent;
-      min-height: 295px; } }
+      min-height: 250px; } }
   .banner-deviser .cover {
     width: 100%;
     height: max-content;
@@ -5434,10 +5430,10 @@ h3 {
         .banner-deviser-content .deviser-profile .avatar {
           float: none;
           position: relative;
-          height: 115px;
+          height: 155px;
           margin: auto;
           padding: 0;
-          margin-top: 130px; } }
+          margin-top: 40px; } }
       .banner-deviser-content .deviser-profile .avatar img {
         width: 155px;
         height: 155px;
@@ -5454,8 +5450,7 @@ h3 {
             vertical-align: middle;
             display: block;
             left: 50%;
-            margin-left: -50px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); } }
+            margin-left: -50px; } }
     .banner-deviser-content .deviser-profile .deviser-data {
       float: left;
       margin: 0 30px; }
@@ -5621,7 +5616,7 @@ h3 {
 
 .deviser-followers {
   position: absolute;
-  bottom: 60px;
+  bottom: 72px;
   font-size: 14px;
   color: #ffffff;
   text-transform: uppercase;
@@ -5633,10 +5628,10 @@ h3 {
   .deviser-followers p {
     text-align: center;
     margin: auto;
-    font-size: 1em; }
+    font-size: 1.1em; }
   .deviser-followers .num {
-    font-size: 1.6em;
-    line-height: 1em; }
+    font-size: 1.8em;
+    line-height: 1.2em; }
   .deviser-followers a {
     color: #ffffff; }
 
@@ -5895,8 +5890,8 @@ h3 {
   overflow: hidden;
   overflow: hidden;
   position: relative;
-  line-height: 1.42857143em;
-  max-height: 55.71428577em;
+  line-height: 1.42857em;
+  max-height: 55.71429em;
   /*text-align: justify;
   margin-right: -1em;
   padding-right: 1em;
@@ -9409,7 +9404,8 @@ cart-panel .cart-panel-div {
       .category-menu .categories ul.two-categories li {
         margin-right: 0; }
   .category-menu .images {
-    float: left; }
+    float: left;
+    width: auto; }
     .category-menu .images .image-1 {
       float: left;
       width: 398px;
