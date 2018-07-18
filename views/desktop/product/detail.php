@@ -377,21 +377,30 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 										<div>
 											<div class="shipping-policies-wrapper">
 												<div class="policies-row">
-													<form class="form-horizontal">
+													<div class="form-horizontal">
 														<div class="form-group ">
 															<label class="col-xs-12 col-sm-12 col-md-11 offset-md-1 control-label shipping-label no-pad-r"><span translate="product.detail.SHIPPING_PRICE_SPAIN"></span>: <span class="tax">€<?=(double)$product->getShippingPrice(null, Country::getDefaultContryCode())?></span></label>
-
-												<?php /*
-												<div class="col-sm-5 pad-product">
-													<select class="form-control selectpicker shipping-select product-select" title="Choose country">
-														<option>USA</option>
-														<option>SPAIN</option>
-													</select>
+															<?php /*
+															<div class="col-sm-5 pad-product">
+																<select class="form-control selectpicker shipping-select product-select" title="Choose country">
+																	<option>USA</option>
+																	<option>SPAIN</option>
+																</select>
+															</div>
+															*/ ?>
+														</div>
+													</div>
 												</div>
-												*/ ?>
 											</div>
-										</form>
+										</div>
 									</div>
+									<?php
+									$shippingSettingsSpain = $person->getShippingSettingByCountry(Country::getDefaultContryCode());
+									if ($shippingSettingsSpain) { ?>
+									<div class="returns-row">
+										<p><?= Utils::l( $shippingSettingsSpain->observations)?></p>
+									</div>
+									<?php } ?>
 									<div class="returns-row" ng-if="detailProductCtrl.product.bespoke && detailProductCtrl.product.bespoke.value && detailProductCtrl.product.bespoke.type==1">
 										<p translate="product.detail.IS_BESPOKED"></p>
 										<p><span translate="product.detail.MANUFACTURING_INFO"></span>: <span class="bold" ng-bind="detailProductCtrl.product.bespoke.value[detailProductCtrl.selected_language]"></span></p>
