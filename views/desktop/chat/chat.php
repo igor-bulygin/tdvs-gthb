@@ -23,14 +23,19 @@ $this->registerJs('var chat_id = ' .Json::encode($chatId), yii\web\View::POS_HEA
 
 ?>
 
-<div class="our-devisers-wrapper" ng-controller="chatCtrl as chatCtrl">
+<div class="our-devisers-wrapper" ng-controller="chatCtrl as chatCtrl">	
 	<div class="container">
+		<div class="mt-40" ng-if="chatCtrl.loading || chatCtrl.loadingChat" style="padding: 20px;" ng-cloak>
+			<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+		</div>
 		<div class="our-devisers-body chat-body" ng-if="!chatCtrl.loading" ng-cloak>
-			<div class="hidden-sm hidden-md hidden-lg mt-20" id="filters-xs-container">
+			<div class="hidden-sm hidden-md hidden-lg mt-20" ng-if="!chatCtrl.loadingChat">
 				<div class="mt-20 mb-20" >
-					<a href="#filters-xs" data-toggle="collapse" class="row btn btn-red btn-small"><span translate="discover.FILTER"></span></a>
-					<div class="collapse" id="filters-xs">
-						<div class="col-xs-12 col-sm-4">
+					<div>
+						<div class="col-xs-12 col-sm-4" ng-if="chatCtrl.currentChat">
+							<a class="col-xs-12 btn btn-medium btn-red auto-center" role="button" ng-click="chatCtrl.unselectChat()"><span translate="chat.BACK"></span></a>
+						</div>
+						<div class="col-xs-12 col-sm-4" ng-if="!chatCtrl.currentChat">
 							<uib-tabset active="chatCtrl.active">
 								<uib-tab index="$index" ng-repeat="tab in chatCtrl.tabs" heading="{{tab.title}}" ng-click="chatCtrl.changeChatFilter(tab.id)" class="col-xs-3">
 									<div ng-if="chatCtrl.chats.length<1" class="text-center" style="padding:50px;">
@@ -125,9 +130,5 @@ $this->registerJs('var chat_id = ' .Json::encode($chatId), yii\web\View::POS_HEA
 				<span class="sr-only" translate="global.LOADING"></span>
 			</div>
 		</div>
-	</div>
-	<div class="mt-40 tdvs-loading" ng-if="chatCtrl.loading" style="padding: 20px;" ng-cloak>
-		<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-		<span class="sr-only" translate="global.LOADING"></span>
-	</div>
+	</div>	
 </div>
