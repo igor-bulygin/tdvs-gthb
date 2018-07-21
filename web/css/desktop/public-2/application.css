@@ -308,6 +308,9 @@ a, a:hover, a:focus {
   .no-margin-sm {
     margin: 0 !important; } }
 
+.no-pointer {
+  cursor: default; }
+
 @font-face {
   font-family: "Univers Thin Ultra Condensed";
   src: url("/fonts/UniversLT-Thin-Ultracondensed.eot");
@@ -355,8 +358,8 @@ a, a:hover, a:focus {
     top: 70px; } }
 
 .form-control {
-  -webkit-box-shadow: 0 0 0 transparent;
-  box-shadow: 0 0 0 transparent; }
+  -webkit-box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0); }
 
 .btn-default:hover {
   background-color: #cecece; }
@@ -654,6 +657,7 @@ a, a:hover, a:focus {
   font-size: 1.15em;
   text-transform: uppercase;
   text-align: center;
+  text-shadow: none;
   letter-spacing: 0.02em;
   padding: 0.45em 0 !important;
   margin: auto !important;
@@ -800,11 +804,13 @@ a.btn span {
   /*i{
       padding-right: 5px;
   }*/ }
-  .btn-follow.btn-icon {
+  .btn-follow.btn-icon, .btn-follow.btn-black {
     width: auto;
     height: auto;
-    margin: 0.4em 0 !important;
-    background-color: #ffffff; }
+    margin: 0.3em 0 !important;
+    background-color: #ffffff;
+    padding: 0.3em 0 !important;
+    font-size: 1.1em; }
 
 .btn-follow-header {
   height: auto;
@@ -2855,7 +2861,7 @@ h3 {
       padding: 0; }
       .navbar.secondary #mobile-iconset a {
         float: left;
-        padding: 0 8px 0; }
+        padding: 0 6px 0; }
       .navbar.secondary #mobile-iconset img {
         height: 25px; }
         @media (max-width: 575px) {
@@ -3755,11 +3761,13 @@ h3 {
       margin-top: -5px;
       float: left;
       display: block;
-      text-transform: capitalize;
+      text-transform: lowercase;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
       width: 100%; }
+      .showcase figcaption .location::first-letter {
+        text-transform: uppercase; }
     .showcase figcaption .sm {
       float: left;
       display: block; }
@@ -5385,7 +5393,7 @@ h3 {
   @media (max-width: 575px) {
     .banner-deviser {
       background-color: transparent;
-      min-height: 250px; } }
+      min-height: 295px; } }
   .banner-deviser .cover {
     width: 100%;
     height: max-content;
@@ -5430,10 +5438,10 @@ h3 {
         .banner-deviser-content .deviser-profile .avatar {
           float: none;
           position: relative;
-          height: 155px;
+          height: 115px;
           margin: auto;
           padding: 0;
-          margin-top: 40px; } }
+          margin-top: 130px; } }
       .banner-deviser-content .deviser-profile .avatar img {
         width: 155px;
         height: 155px;
@@ -5450,7 +5458,8 @@ h3 {
             vertical-align: middle;
             display: block;
             left: 50%;
-            margin-left: -50px; } }
+            margin-left: -50px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); } }
     .banner-deviser-content .deviser-profile .deviser-data {
       float: left;
       margin: 0 30px; }
@@ -5616,7 +5625,7 @@ h3 {
 
 .deviser-followers {
   position: absolute;
-  bottom: 72px;
+  bottom: 60px;
   font-size: 14px;
   color: #ffffff;
   text-transform: uppercase;
@@ -5628,10 +5637,10 @@ h3 {
   .deviser-followers p {
     text-align: center;
     margin: auto;
-    font-size: 1.1em; }
+    font-size: 1em; }
   .deviser-followers .num {
-    font-size: 1.8em;
-    line-height: 1.2em; }
+    font-size: 1.6em;
+    line-height: 1em; }
   .deviser-followers a {
     color: #ffffff; }
 
@@ -5890,8 +5899,8 @@ h3 {
   overflow: hidden;
   overflow: hidden;
   position: relative;
-  line-height: 1.42857em;
-  max-height: 55.71429em;
+  line-height: 1.42857143em;
+  max-height: 55.71428577em;
   /*text-align: justify;
   margin-right: -1em;
   padding-right: 1em;
@@ -9397,7 +9406,7 @@ cart-panel .cart-panel-div {
       .category-menu .categories ul li a:hover {
         color: #F7284B !important; }
     .category-menu .categories ul.two-categories {
-      margin-right: 60px;
+      /*margin-right: 60px;*/
       float: left; }
       .category-menu .categories ul.two-categories .two-categories-title {
         font-weight: bold; }

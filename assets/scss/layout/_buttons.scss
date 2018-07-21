@@ -114,12 +114,14 @@ a{
     /*i{
         padding-right: 5px;
     }*/
-    &.btn-icon{
+    &.btn-icon, &.btn-black{
         //position: absolute;
         width: auto;
         height: auto;
-        margin: 0.4em 0 !important;
+        margin: 0.3em 0 !important;
         background-color: $white;
+        padding: 0.3em 0 !important;
+        font-size: 1.1em;
         //right: 40px;
         //bottom: 8px;
     }
