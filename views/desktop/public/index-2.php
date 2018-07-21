@@ -189,7 +189,7 @@ Yii::$app->opengraph->title = $this->title;
 			<form id="formPagination">
 				<input type="hidden" id="category_id" name="category_id" value="<?=$category_id?>" />
 			</form>
-			<?=$htmlWorks?>
+			<?=\app\components\ProductsGrid::widget(['products' => $works, 'css_class' => 'col-xs-6 col-sm-4 col-md-2']) ?>
 		</div>
 	</div>
 	<div class="text-center mt-30">
