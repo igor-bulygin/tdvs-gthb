@@ -13,7 +13,7 @@ use app\helpers\Utils;
 				<figure class="effect-zoe">
 					<image-hover-buttons product-id="{{'<?= $work->short_id ?>'}}" is-loved="{{'<?=$work->isLovedByCurrentUser() ? 1 : 0 ?>'}}" is-mine="{{'<?= $work->isWorkFromCurrentUser() ? 1 : 0 ?>'}}">
 						<a href="<?= $work->getViewLink()?>">
-							<img class="grid-image" src="<?= $work->getImagePreview(400, 500) ?>">
+							<img class="grid-image" src="<?= $work->getImagePreview(320, 400) ?>">
 							<span class="img-bgveil"></span>
 						</a>
 					</image-hover-buttons>

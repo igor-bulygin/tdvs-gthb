@@ -40,7 +40,7 @@ Yii::$app->opengraph->title = $this->title;
 
 					<div class="item <?= $i == 0 ? 'active' : '' ?>">
 					 	<a href="<?= !empty($banner->link) ? $banner->link : '#'?>">
-							<img src="<?= $banner->getImageLinkTranslated() ?>" alt="<?= $banner->alt_text ?>" title="">
+							<img src="<?= $banner->getImageLinkTranslated(true) ?>" alt="<?= $banner->alt_text ?>" title="">
 						</a>
 					</div>
 			<?php } ?>
