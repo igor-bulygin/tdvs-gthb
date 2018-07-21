@@ -8,7 +8,7 @@ class GlobalAsset extends AssetBundle {
 	public $baseUrl = '@web';
 	public $css = [
 		'css/desktop/global.css',
-		'css/desktop/public-2/application.css',
+		YII_ENV_DEV ? 'css/desktop/public-2/application.css' : 'css/desktop/public-2/application.min.css',
 		'css/desktop/public-2/bootstrap-select.min.css',
 	];
 	public $js = [
