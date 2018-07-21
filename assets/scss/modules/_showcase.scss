@@ -89,11 +89,14 @@
 			margin-top: -5px;
 			float: left;
 			display: block;
-			text-transform: capitalize;
+			text-transform: lowercase;
 			white-space: nowrap;
 			overflow: hidden;
 			text-overflow: ellipsis;
 			width: 100%;
+			&::first-letter{
+				text-transform: uppercase;
+			}
 		}
 		.sm{
 			float: left;

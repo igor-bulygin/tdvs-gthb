@@ -358,8 +358,8 @@ a, a:hover, a:focus {
     top: 70px; } }
 
 .form-control {
-  -webkit-box-shadow: 0 0 0 transparent;
-  box-shadow: 0 0 0 transparent; }
+  -webkit-box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0); }
 
 .btn-default:hover {
   background-color: #cecece; }
@@ -804,11 +804,13 @@ a.btn span {
   /*i{
       padding-right: 5px;
   }*/ }
-  .btn-follow.btn-icon {
+  .btn-follow.btn-icon, .btn-follow.btn-black {
     width: auto;
     height: auto;
-    margin: 0.4em 0 !important;
-    background-color: #ffffff; }
+    margin: 0.3em 0 !important;
+    background-color: #ffffff;
+    padding: 0.3em 0 !important;
+    font-size: 1.1em; }
 
 .btn-follow-header {
   height: auto;
@@ -3759,11 +3761,13 @@ h3 {
       margin-top: -5px;
       float: left;
       display: block;
-      text-transform: capitalize;
+      text-transform: lowercase;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
       width: 100%; }
+      .showcase figcaption .location::first-letter {
+        text-transform: uppercase; }
     .showcase figcaption .sm {
       float: left;
       display: block; }
@@ -5895,8 +5899,8 @@ h3 {
   overflow: hidden;
   overflow: hidden;
   position: relative;
-  line-height: 1.42857em;
-  max-height: 55.71429em;
+  line-height: 1.42857143em;
+  max-height: 55.71428577em;
   /*text-align: justify;
   margin-right: -1em;
   padding-right: 1em;
@@ -9402,7 +9406,7 @@ cart-panel .cart-panel-div {
       .category-menu .categories ul li a:hover {
         color: #F7284B !important; }
     .category-menu .categories ul.two-categories {
-      margin-right: 60px;
+      /*margin-right: 60px;*/
       float: left; }
       .category-menu .categories ul.two-categories .two-categories-title {
         font-weight: bold; }

@@ -21,11 +21,11 @@ Yii::$app->opengraph->title = $this->title;
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12 col-md-3"><nav class="menu-store"><ul>
-				<li>
+				<li ng-class="{'active': !timelineCtrl.selectedPersonType}">
 					<a style="cursor:pointer;" ng-class="{'active': !timelineCtrl.selectedPersonType}" ng-click="timelineCtrl.resetFilter()" translate="person.ALL"></a>
 				</li>
-				<li ng-repeat="personType in timelineCtrl.personTypes">
-					<a style="cursor:pointer;" translate="{{personType.name}}" ng-class="{'active': timelineCtrl.selectedPersonType === personType.value }" ng-click="timelineCtrl.selectedPersonType = personType.value"></a>
+				<li ng-repeat="personType in timelineCtrl.personTypes" ng-class="{'active': timelineCtrl.selectedPersonType === personType.value }">
+					<a style="cursor:pointer;" ng-class="{'active': timelineCtrl.selectedPersonType === personType.value }" translate="{{personType.name}}" ng-click="timelineCtrl.selectedPersonType = personType.value"></a>
 				</li>
 			</ul></nav></div>
 			<div class="col-xs-12 col-md-8 col-lg-7">

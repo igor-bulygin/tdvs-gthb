@@ -32,6 +32,8 @@ $person = $this->params['person'];
 				<?php } ?>
 			</li>
 		<?php } ?>
+	</ul>
+	<ul class="mt-20 menu-deviser-bottom">
 		<?php if ($person->showFollowers()) { ?>
 			<li class=" <?= ($activeOption=='followers') ? 'active' : '' ?>">
 				<a class=" <?= ($activeOption=='followers') ? 'active' : '' ?>" href="<?= $person->getFollowLink()?>"><?=Yii::t('app/public', 'COMMUNITY')?></a>
@@ -53,7 +55,7 @@ $person = $this->params['person'];
 			</li>
 		<?php } ?>
 	</ul>
-	<ul class="menu-deviser-bottom">
+	<ul class="mt-20 menu-deviser-bottom">
 		<?php if ($person->showLoved()) { ?>
 		<li class=" <?= ($activeOption=='loved') ? 'active' : '' ?>">
 			<a class=" <?= ($activeOption=='loved') ? 'active' : '' ?>" href="<?= $person->getLovedLink()?>">Loved</a>
@@ -70,7 +72,7 @@ $person = $this->params['person'];
 			</li>
 		<?php } ?>
 	</ul>
-	<ul class="menu-deviser-bottom">
+	<ul class="mt-20 menu-deviser-bottom">
 		<?php if ($person->showAbout()) { ?>
 			<li class="<?= ($activeOption=='about') ? 'active' : '' ?>">
 				<a class="<?= ($activeOption=='about') ? 'active' : '' ?> ng-class:{'purple-text': personMenuCtrl.required['about']}" href="<?= $linksTarget == "edit_view" ? $person->getAboutEditLink() : $person->getAboutLink()?>">About</a>
