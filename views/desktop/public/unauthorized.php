@@ -10,7 +10,7 @@ PublicCommonAsset::register($this);
 /* @var $message string */
 /* @var $exception Exception */
 
-$title = Yii::t('app/public', 'ERROR_PAGE_TITLE');
+$title = Yii::t('app/public', 'UNAUTHORIZED_PAGE_TITLE');
 $this->title = $title;
 Yii::$app->opengraph->title = $this->title;
 ?>
@@ -26,12 +26,12 @@ Yii::$app->opengraph->title = $this->title;
 				<img src="/imgs/error-face.svg" data-pin-nopin="true">
 			</div>
 			<div class="col-md-4">
-				<p class="error-404-text"><?=Yii::t('app/public', 'ERROR_PAGE_MESSAGE_1')?></p>
+				<p class="error-404-text"><?=Yii::t('app/public', 'UNAUTHORIZED_PAGE_MESSAGE_1')?></p>
 			</div>
     	</div>
 	</div>
 
-	<p class="error-404-pd"><?=Yii::t('app/public', 'ERROR_PAGE_MESSAGE_2')?></p>
+	<p class="error-404-pd"><?=Yii::t('app/public', 'UNAUTHORIZED_PAGE_MESSAGE_2')?></p>
 
 	<a href="<?=Url::to('/')?>"><img src="/imgs/logo-red.svg"></a>
 

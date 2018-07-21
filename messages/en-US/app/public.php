@@ -89,7 +89,7 @@ return [
     'EDIT_VIDEOS_BY_PERSON_NAME' => 'Edit videos by {person_name}',
     'EDIT_WORKS_BY_PERSON_NAME' => 'Edit works by {person_name}',
 	'ERROR_PAGE_TITLE' => 'Oops! Something went wrong',
-	'ERROR_PAGE_MESSAGE_1' => 'Even the best relationships  go through  a rough patch sometimes, but this doesn’t mean that  we don’t love each other anymore',
+	'ERROR_PAGE_MESSAGE_1' => 'Even the best relationships go through a rough patch sometimes, but this doesn’t mean that we don’t love each other anymore',
 	'ERROR_PAGE_MESSAGE_2' => 'PD: Go to the home page, we are taking care of it!',
     'EXPLORE_BOXES' => 'Explore boxes',
 	'FOLLOW_BY_PERSON_NAME' => 'Followed by {person_name}',
@@ -143,6 +143,7 @@ return [
     'SELECT_COUNTRY' => 'Select country',
     'SELECT_METRIC_UNIT' => 'Select metric unit',
     'SETTINGS' => 'Settings',
+    'SHIPPING_INFO' => 'Shipping info',
     'SHIPPING_SETTINGS' => 'Shipping settings',
     'SIGNUP' => 'Signup',
 	'SOCIAL_FEED_BY_PERSON_NAME' => 'Social feed by {person_name}',
@@ -156,6 +157,9 @@ return [
 	'THE_MARKET' => 'The Market',
 	'THE_MARKET_TEXT' => 'The opportunities of the moment',
 	'TODEVISE_META_DESCRIPTION' => 'Todevise is the combination between a social network and e-commerce that revolutionizes the way you discover products and buy online. ',
+	'UNAUTHORIZED_PAGE_TITLE' => 'Oops! Something went wrong',
+	'UNAUTHORIZED_PAGE_MESSAGE_1' => 'You do not have permission to access this page. If you have already logged in, you will have to close it and connect with a user with the correct permissions.',
+	'UNAUTHORIZED_PAGE_MESSAGE_2' => 'Login with another user',
 	'VIDEOS_BY_PERSON_NAME' => 'Videos by {person_name}',
     'WEEKS' => 'Weeks',
     'WORKS' => 'Works',

@@ -83,7 +83,15 @@ class PublicController extends CController
 
 			$this->layout = '/desktop/public-2.php';
 
-			return $this->render("error", [
+			switch ($exception->statusCode) {
+				case 403:
+					$view = 'unauthorized';
+					break;
+
+				default:
+					$view = 'error';
+			}
+			return $this->render($view, [
 				'name' => '',
 				'message' => $exception->getMessage(),
 			]);
