@@ -358,8 +358,8 @@ a, a:hover, a:focus {
     top: 70px; } }
 
 .form-control {
-  -webkit-box-shadow: 0 0 0 rgba(0, 0, 0, 0);
-  box-shadow: 0 0 0 rgba(0, 0, 0, 0); }
+  -webkit-box-shadow: 0 0 0 transparent;
+  box-shadow: 0 0 0 transparent; }
 
 .btn-default:hover {
   background-color: #cecece; }
@@ -5899,8 +5899,8 @@ h3 {
   overflow: hidden;
   overflow: hidden;
   position: relative;
-  line-height: 1.42857143em;
-  max-height: 55.71428577em;
+  line-height: 1.42857em;
+  max-height: 55.71429em;
   /*text-align: justify;
   margin-right: -1em;
   padding-right: 1em;
