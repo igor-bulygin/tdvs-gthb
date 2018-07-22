@@ -96,6 +96,10 @@ a, a:hover, a:focus{
 .no-pointer{
   cursor: default;
 }
+.hashtag{
+  color: $red;
+  font-weight: bold;
+}
 //Include Fonts
 //@include font-face('Roboto Condensed', Roboto-Condensed-Regular);
 @include font-face('Univers Thin Ultra Condensed', UniversLT-Thin-Ultracondensed);

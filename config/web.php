@@ -67,7 +67,8 @@ $config = [
 
 		//Errors
 		'errorHandler' => [
-			'errorAction' => YII_ENV_PROD ? 'public/error' : null,
+			//'errorAction' => YII_ENV_PROD ? 'public/error' : null,
+			'errorAction' => YII_ENV_PROD ? 'public/error' : 'public/error',
 		],
 
 		//i18n
