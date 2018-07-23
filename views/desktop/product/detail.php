@@ -394,14 +394,6 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 											</div>
 										</div>
 									</div>
-									<?php
-									$shippingSettingsSpain = $person->getShippingSettingByCountry(Country::getDefaultContryCode());
-									if ($shippingSettingsSpain) { ?>
-									<div class="returns-row">
-										<?php /*<p data-toggle="collapse" data-target="#shippingInfo" role="button"><?=Yii::t('app/public', 'SHIPPING_INFO')?></p>*/ ?>
-										<div id="shippingInfo" class="collapse in"><?= Utils::l( $shippingSettingsSpain->observations)?></div>
-									</div>
-									<?php } ?>
 									<div class="returns-row" ng-if="detailProductCtrl.product.bespoke && detailProductCtrl.product.bespoke.value && detailProductCtrl.product.bespoke.type==1">
 										<p translate="product.detail.IS_BESPOKED"></p>
 										<p><span translate="product.detail.MANUFACTURING_INFO"></span>: <span class="bold" ng-bind="detailProductCtrl.product.bespoke.value[detailProductCtrl.selected_language]"></span></p>
@@ -434,6 +426,14 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 									<div class="returns-row mt-20">
 										<span translate="product.detail.WARNING_CUSTOM_TAXES"></span>
 									</div>
+									<?php } ?>
+									<?php
+									$shippingSettingsSpain = $person->getShippingSettingByCountry(Country::getDefaultContryCode());
+									if ($shippingSettingsSpain) { ?>
+										<div class="returns-row mt-20">
+											<?php /*<p data-toggle="collapse" data-target="#shippingInfo" role="button"><?=Yii::t('app/public', 'SHIPPING_INFO')?></p>*/ ?>
+											<div id="shippingInfo" class="collapse in"><?= Utils::l( $shippingSettingsSpain->observations)?></div>
+										</div>
 									<?php } ?>
 								</div>
 							</div>

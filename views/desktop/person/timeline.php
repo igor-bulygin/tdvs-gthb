@@ -21,16 +21,16 @@ Yii::$app->opengraph->title = $this->title;
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12 col-md-3"><nav class="menu-store"><ul>
-				<li>
+				<li ng-class="{'active': !timelineCtrl.selectedPersonType}">
 					<a style="cursor:pointer;" ng-class="{'active': !timelineCtrl.selectedPersonType}" ng-click="timelineCtrl.resetFilter()" translate="person.ALL"></a>
 				</li>
-				<li ng-repeat="personType in timelineCtrl.personTypes">
-					<a style="cursor:pointer;" translate="{{personType.name}}" ng-class="{'active': timelineCtrl.selectedPersonType === personType.value }" ng-click="timelineCtrl.selectedPersonType = personType.value"></a>
+				<li ng-repeat="personType in timelineCtrl.personTypes" ng-class="{'active': timelineCtrl.selectedPersonType === personType.value }">
+					<a style="cursor:pointer;" ng-class="{'active': timelineCtrl.selectedPersonType === personType.value }" translate="{{personType.name}}" ng-click="timelineCtrl.selectedPersonType = personType.value"></a>
 				</li>
 			</ul></nav></div>
 			<div class="col-xs-12 col-md-8 col-lg-7">
 				<div class="timeline-wrapper">
-					<div ng-if="(timelineCtrl.timeline | filter:{ person: {person_type:timelineCtrl.selectedPersonType}}).length < 1" ng-cloak>
+					<div class="col-xs-10 col-xs-offset-1 mt-40 mb-40" ng-if="(timelineCtrl.timeline | filter:{ person: {person_type:timelineCtrl.selectedPersonType}}).length < 1" ng-cloak>
 						<span translate="person.timeline.EMPTY_TIMELINE"></span>
 					</div>
 					<div ng-if="(timelineCtrl.timeline | filter:{ person: {person_type:timelineCtrl.selectedPersonType}}).length > 0" infinite-scroll="timelineCtrl.addMoreItems()" infinite-scroll-distance="timelineCtrl.show_items-1">

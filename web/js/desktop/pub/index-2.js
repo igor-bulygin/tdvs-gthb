@@ -9,6 +9,12 @@ $(function() {
 				angular.element('#works-container').injector().invoke(function($rootScope, $compile) {
 					$('#works-container').append($compile(data.html)($rootScope));
 					$('#category_id').val(data.category_id);
+
+					setTimeout(function() {
+						var bLazy = new Blazy({
+							offset: 500
+						});
+					}, 250);
 				})
 			})
 

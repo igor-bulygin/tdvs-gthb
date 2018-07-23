@@ -57,8 +57,8 @@ $this->params['person_links_target'] = 'public_view';
 										<span ng-if="post.isLoved" class="icons-hover heart-icon heart-red-icon" ng-click="socialManagerCtrl.unLovePost(post)" ng-cloak></span>
 										<span ng-if="!post.isLoved" class="icons-hover heart-icon heart-black-icon" ng-click="socialManagerCtrl.lovePost(post)" ng-cloak></span>
 									</div>
-									<span class="col-xs-12 posts-text align-left" ng-bind-html="socialManagerCtrl.truncateString(post.text, socialManagerCtrl.maxCharacters, '...')"></span>
-									<a ng-if="post.text.length > socialManagerCtrl.maxCharacters && !socialManagerCtrl.viewingConnectedUser()" class="col-xs-4 col-xs-push-8" ng-click="socialManagerCtrl.openPostDetailsModal(post)"><span translate="person.posts.SEE_MORE"></span></a>
+									<span class="no-padding col-xs-12 posts-text align-left" ng-bind-html="socialManagerCtrl.truncateString(post.text, socialManagerCtrl.maxCharacters, '...')"></span>
+									<a ng-if="post.text.length > socialManagerCtrl.maxCharacters && !socialManagerCtrl.viewingConnectedUser()" class="col-xs-4 col-xs-push-8 no-padding" ng-click="socialManagerCtrl.openPostDetailsModal(post)"><span translate="person.posts.SEE_MORE"></span></a>
 									<div class="col-xs-4 col-xs-offset-8 col-sm-4 col-md-4 no-padding posts-edit" ng-if="socialManagerCtrl.viewingConnectedUser()">
 										<a ng-click="socialManagerCtrl.editPost(post.id)"><span class="edit-post-icon"><i class="ion-edit"></i></span></a> 
 										<a ng-click="socialManagerCtrl.deletePost(post.id)"><span class="close-post-icon"></span></a>

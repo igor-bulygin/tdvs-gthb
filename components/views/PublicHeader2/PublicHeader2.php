@@ -120,7 +120,7 @@ app\components\assets\PublicHeader2Asset::register($this);
 					<?php } else {
 						$person = Yii::$app->user->identity; /* @var \app\models\Person $person */?>
 						<li class="dropdown log">
-							<a class="logued-text" href="#" class="dropdown-toggle log" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img class="avatar-logued-user" src="<?= $person->getProfileImage(0, 0) ?>"></a>
+							<a class="logued-text" href="#" class="dropdown-toggle log" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img class="avatar-logued-user" src="<?= $person->getProfileImage(50, 50) ?>"></a>
 							<div class="dropdown-menu admin-wrapper black-form">
 								<ul class="menu-logued">
 									<li class="header-item">
@@ -183,6 +183,7 @@ app\components\assets\PublicHeader2Asset::register($this);
 							<a href="<?=Url::to(['/discover/boxes'])?>"><img src="/imgs/box-red.svg" /></a>
 							<a href="<?=Url::to(['/discover/devisers'])?>"><img src="/imgs/discover-red.svg" /></a>
 							<a href="<?=Url::to(['/discover/influencers'])?>"><img src="/imgs/estrella-red.svg" /></a>
+							<a href="<?=Url::to('/messages')?>" class="ml-10"><img src="/imgs/chat-red.svg" /></a>
 							<?php if (Yii::$app->user->isGuest) { ?>
 							<a href="<?=Url::to('/login')?>"><img src="/imgs/login-red.svg" /></a>
 							<?php } else {
@@ -212,7 +213,6 @@ app\components\assets\PublicHeader2Asset::register($this);
 									</div>
 								</span>
 							<?php } ?>
-							<a href="<?=Url::to('/messages')?>"><img src="/imgs/chat-red.svg" /></a>
 							<a href="<?=Url::to(['/cart'])?>"><img src="/imgs/cart-red.svg" /></a>
 						</div>
 					</li>

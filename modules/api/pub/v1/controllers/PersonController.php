@@ -125,7 +125,7 @@ class PersonController extends AppPublicController
 		$person->type = $type;
 		$person->account_state = $account_state;
 		$person->affiliate_id = "AF" . $person->short_id;
-		if($parent_person) {
+		if(isset($parent_person)) {
 			$person->parent_affiliate_id = $parent_affiliate_id;
 			$person->setAttribute('follow', array($parent_person->short_id));
 		} else {

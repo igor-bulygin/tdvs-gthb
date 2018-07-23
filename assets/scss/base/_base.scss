@@ -94,7 +94,11 @@ a, a:hover, a:focus{
   } 
 }
 .no-pointer{
-  cursor: default;
+  cursor: default !important;
+}
+.hashtag{
+  color: $red;
+  font-weight: bold;
 }
 //Include Fonts
 //@include font-face('Roboto Condensed', Roboto-Condensed-Regular);
