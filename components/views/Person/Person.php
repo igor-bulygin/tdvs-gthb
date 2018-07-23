@@ -13,7 +13,7 @@ $isFollowed = $person->isFollowedByConnectedUser() ? 'true' : 'false';
 <div ng-controller="personComponentCtrl as personComponentCtrl" ng-init="personComponentCtrl.init(<?=$isFollowed?>)">
 	<figure class="showcase influencers">
 		<a href="<?= $person->getMainLink()?>">
-			<img class="deviser-discover-img showcase-image" src="<?= $person->getHeaderSmallImage() ?>">
+			<img class="deviser-discover-img showcase-image" src="<?= $person->getHeaderSmallImage(350, 225) ?>">
 		</a>
 		<figcaption>
 			<div class="row no-margin-xs">

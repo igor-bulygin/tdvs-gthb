@@ -64,6 +64,10 @@ $this->params['person_menu_store_categories'] = $categories;
 								<?php } ?>
 							</ul>
 						</nav>
+						<div id="works-container" class="grid-margin">
+							<?=\app\components\ProductsGrid::widget(['products' => $products, 'css_class' => 'col-xs-6 col-sm-4 col-md-3']) ?>
+						</div>
+						<?php /*
 						<div id="boxes-container" class="macy-container" data-columns="5" ng-controller="viewStoreCtrl as viewStoreCtrl">
 							<?php foreach ($products as $i => $product) { ?>
 								<div class="menu-category list-group">
@@ -80,9 +84,6 @@ $this->params['person_menu_store_categories'] = $categories;
 												<figcaption>
 													<p class="instauser"><?= \yii\helpers\StringHelper::truncate($product->getName(), 18, '…') ?></p>
 													<p class="price">€ <?= $product->getMinimumPrice() ?></p>
-													<?php if ($person->isPersonEditable()) { ?>
-														<!-- /* old position of a.edit-product-icon */ -->
-													<?php } ?>
 												</figcaption>
 											</a>
 										</figure>
@@ -90,6 +91,7 @@ $this->params['person_menu_store_categories'] = $categories;
 								</div>
 							<?php } ?>
 						</div>
+ 						*/ ?>
 					</div>
 				</div>
 			</div>

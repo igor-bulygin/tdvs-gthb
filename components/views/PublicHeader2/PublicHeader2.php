@@ -120,7 +120,7 @@ app\components\assets\PublicHeader2Asset::register($this);
 					<?php } else {
 						$person = Yii::$app->user->identity; /* @var \app\models\Person $person */?>
 						<li class="dropdown log">
-							<a class="logued-text" href="#" class="dropdown-toggle log" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img class="avatar-logued-user" src="<?= $person->getProfileImage(0, 0) ?>"></a>
+							<a class="logued-text" href="#" class="dropdown-toggle log" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img class="avatar-logued-user" src="<?= $person->getProfileImage(50, 50) ?>"></a>
 							<div class="dropdown-menu admin-wrapper black-form">
 								<ul class="menu-logued">
 									<li class="header-item">
