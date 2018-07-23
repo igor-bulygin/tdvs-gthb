@@ -94,7 +94,7 @@ a, a:hover, a:focus{
   } 
 }
 .no-pointer{
-  cursor: default;
+  cursor: default !important;
 }
 .hashtag{
   color: $red;
