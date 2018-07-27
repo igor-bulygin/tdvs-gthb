@@ -2468,7 +2468,7 @@ class Person extends CActiveRecord implements IdentityInterface
 	{
 		$posts = $this->getPosts();
 		return
-			($this->isInfluencer() || $this->isDeviser()) &&
+			($this->isInfluencer() || $this->isDeviser()) || $this->isClient() &&
 			($this->isPersonEditable() || !empty($posts));
 	}
 
