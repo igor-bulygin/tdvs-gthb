@@ -6,6 +6,7 @@
 		vm.init = init;
 		vm.follow = follow;
 		vm.unFollow = unFollow;
+		vm.isConnectedUser = isConnectedUser;
 
 		function init(isFollowed) {
 			vm.isFollowed = isFollowed;
@@ -39,6 +40,10 @@
 				personId: personId
 			}
 			personDataService.followPerson(params, params, onSetFollowSuccess, onSetFollowError);
+		}
+
+		function isConnectedUser(short_id) {
+			return UtilService.isConnectedUser(short_id);
 		}
 
 	}
