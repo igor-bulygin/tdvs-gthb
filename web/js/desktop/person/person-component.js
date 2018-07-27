@@ -1,7 +1,7 @@
-(function () {
+(function() {
 	"use strict";
 
-	function controller(personDataService, UtilService) {
+	function controller(personDataService, UtilService, $window) {
 		var vm = this;
 		vm.init = init;
 		vm.follow = follow;
@@ -13,33 +13,43 @@
 		}
 
 		function unFollow(personId) {
-			function onSetFollowSuccess(data) {
-				vm.isFollowed = false;
-			}
+			var connectedUser = UtilService.getConnectedUser();
+			if (!connectedUser) {
+				$window.location.href = '/timeline';
+			} else {
+				function onSetFollowSuccess(data) {
+					vm.isFollowed = false;
+				}
 
-			function onSetFollowError(err) {
-				UtilService.onError(err);
-			}
+				function onSetFollowError(err) {
+					UtilService.onError(err);
+				}
 
-			var params = {
-				personId: personId
+				var params = {
+					personId: personId
+				}
+				personDataService.unFollowPerson(params, params, onSetFollowSuccess, onSetFollowError);
 			}
-			personDataService.unFollowPerson(params, params, onSetFollowSuccess, onSetFollowError);
 		}
 
 		function follow(personId) {
-			function onSetFollowSuccess(data) {
-				vm.isFollowed = true;
-			}
+			var connectedUser = UtilService.getConnectedUser();
+			if (!connectedUser) {
+				$window.location.href = '/timeline';
+			} else {
+				function onSetFollowSuccess(data) {
+					vm.isFollowed = true;
+				}
 
-			function onSetFollowError(err) {
-				UtilService.onError(err);
-			}
+				function onSetFollowError(err) {
+					UtilService.onError(err);
+				}
 
-			var params = {
-				personId: personId
+				var params = {
+					personId: personId
+				}
+				personDataService.followPerson(params, params, onSetFollowSuccess, onSetFollowError);
 			}
-			personDataService.followPerson(params, params, onSetFollowSuccess, onSetFollowError);
 		}
 
 		function isConnectedUser(short_id) {
