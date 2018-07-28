@@ -108,6 +108,7 @@ $this->registerJs('var chat_id = ' .Json::encode($chatId), yii\web\View::POS_HEA
 								<div class="col-xs-9 col-sm-10">
 									<span class="col-xs-12 red-text chat-tit" ng-bind="msg.person_info.name" ng-if="msg.showOwner"></span>
 									<span class="col-xs-12 chat-text" ng-bind="msg.text"></span>
+									<span ng-if="chatCtrl.currentChat.messages[chatCtrl.currentChat.messages.length-1].msg.id == msg.id" id="bottomChat" ng-cloak></span>
 									<span class="col-xs-12 text-right chat-time">
 										<span ng-cloak>{{chatCtrl.parseDate(msg.date.sec*1000) | date:'hh:mm'}}</span>
 									</span>
@@ -115,7 +116,7 @@ $this->registerJs('var chat_id = ' .Json::encode($chatId), yii\web\View::POS_HEA
 							</div>
 						</div>
 					</div>
-					<form class="col-xs-12 chat-send">
+					<form class="col-xs-12 chat-send" >
 						<div class="col-xs-7 col-sm-8">
 							<input class="col-xs-12" type="text" ng-model="chatCtrl.newMsg" on-press-enter="chatCtrl.sendMsg()">
 						</div>

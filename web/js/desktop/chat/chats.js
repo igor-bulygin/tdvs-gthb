@@ -1,7 +1,7 @@
 (function() {
     "use strict";
 
-    function controller(UtilService, chatDataService, $window, $location, $scope) {
+    function controller(UtilService, chatDataService, $window, $location, $scope, $anchorScroll) {
         var vm = this;
         vm.getChats = getChats;
         vm.sendMsg = sendMsg;
@@ -54,12 +54,12 @@
                 vm.chats = angular.copy(data.items);
                 if (vm.personToChat && (vm.firstCharge || !filtering) && !vm.currentChat) {
                     getChat(vm.chatId);
-                } else if (!vm.firstCharge && filtering && vm.chats && vm.chats.length > 0) {
-                    if ((vm.currentChat && vm.currentChat.id != vm.chats[0].id) || !vm.currentChat) {
-                        var newUrl = vm.chats[0].preview.url + '?filterId=' + vm.filterId;
-                        $window.open(newUrl, "_self");
-                    }
-                } else if (filtering) {
+                } // else if (!vm.firstCharge && filtering && vm.chats && vm.chats.length > 0) {
+                //  if ((vm.currentChat && vm.currentChat.id != vm.chats[0].id) || !vm.currentChat) {
+                // var newUrl = vm.chats[0].preview.url + '?filterId=' + vm.filterId;
+                // $window.open(newUrl, "_self");
+                //  }
+                else if (filtering) {
                     vm.currentChat = null;
                 }
                 vm.loading = false;
@@ -104,6 +104,8 @@
                     addedMsg.person_info = { name: vm.person.name, profile_image: vm.person.profile_image };
                     vm.currentChat.messages.push(addedMsg);
                     vm.newMsg = '';
+                    $location.hash('bottomChat');
+                    $anchorScroll();
                     getChats(); // update chats after sending new message
                 }
                 chatDataService.sendMsg({ text: vm.newMsg }, { personId: vm.personToChat.id }, onSendMsgSuccess, UtilService.onError);
