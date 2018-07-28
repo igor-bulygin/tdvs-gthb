@@ -54,12 +54,12 @@
                 vm.chats = angular.copy(data.items);
                 if (vm.personToChat && (vm.firstCharge || !filtering) && !vm.currentChat) {
                     getChat(vm.chatId);
-                } // else if (!vm.firstCharge && filtering && vm.chats && vm.chats.length > 0) {
-                //  if ((vm.currentChat && vm.currentChat.id != vm.chats[0].id) || !vm.currentChat) {
-                // var newUrl = vm.chats[0].preview.url + '?filterId=' + vm.filterId;
-                // $window.open(newUrl, "_self");
-                //  }
-                else if (filtering) {
+                } else if (!vm.firstCharge && filtering && vm.chats && vm.chats.length > 0) {
+                    if ((vm.currentChat && vm.currentChat.id != vm.chats[0].id) || !vm.currentChat) {
+                        // var newUrl = vm.chats[0].preview.url + '?filterId=' + vm.filterId;
+                        // $window.open(newUrl, "_self");
+                    }
+                } else if (filtering) {
                     vm.currentChat = null;
                 }
                 vm.loading = false;
@@ -119,11 +119,17 @@
         }
 
         function selectChat(chat) {
+            /*
             var newUrl = chat.preview.url;
             if (vm.filterId && vm.filterId != 0) {
                 newUrl = newUrl + '?filterId=' + vm.filterId;
             }
             $window.open(newUrl, "_self");
+            */
+
+            var baseLen = $location.absUrl().length - $location.url().length;
+            $location.path(chat.preview.url.substring(baseLen));
+            getChat(chat.id)
         }
 
         function parseImage(image) {
