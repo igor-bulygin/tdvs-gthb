@@ -115,18 +115,11 @@
         function changeChatFilter(filterId) {
             vm.filterId = filterId;
             vm.loading = true;
+            $location.path('/messages');
             getChats(true);
         }
 
         function selectChat(chat) {
-            /*
-            var newUrl = chat.preview.url;
-            if (vm.filterId && vm.filterId != 0) {
-                newUrl = newUrl + '?filterId=' + vm.filterId;
-            }
-            $window.open(newUrl, "_self");
-            */
-
             var baseLen = $location.absUrl().length - $location.url().length;
             $location.path(chat.preview.url.substring(baseLen));
             getChat(chat.id)
