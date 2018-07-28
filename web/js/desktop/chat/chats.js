@@ -12,6 +12,7 @@
         vm.activeChat = activeChat;
         vm.msgOwner = msgOwner;
         vm.loading = true;
+        vm.loadingChat = true;
         vm.unselectChat = unselectChat;
         if (person) {
             vm.person = { id: person.id, name: angular.copy(person.name), profile_image: person.profile_image };
@@ -54,15 +55,11 @@
                 vm.chats = angular.copy(data.items);
                 if (vm.personToChat && (vm.firstCharge || !filtering) && !vm.currentChat) {
                     getChat(vm.chatId);
-                } else if (!vm.firstCharge && filtering && vm.chats && vm.chats.length > 0) {
-                    if ((vm.currentChat && vm.currentChat.id != vm.chats[0].id) || !vm.currentChat) {
-                        // var newUrl = vm.chats[0].preview.url + '?filterId=' + vm.filterId;
-                        // $window.open(newUrl, "_self");
-                    }
                 } else if (filtering) {
                     vm.currentChat = null;
                 }
                 vm.loading = false;
+                vm.loadingChat = false;
                 vm.firstCharge = false;
             }
             chatDataService.getChats({ person_type: vm.filterId }, onGetChatsSuccess, UtilService.onError);
