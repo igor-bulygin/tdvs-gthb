@@ -5,6 +5,7 @@
         var vm = this;
         vm.addMoreItems = addMoreItems;
         vm.setFollow = setFollow;
+        vm.isConnectedUser = isConnectedUser;
         var show_items = 6;
         vm.refreshResults = true;
 
@@ -38,6 +39,10 @@
                 }
             }
         }
+
+		function isConnectedUser(short_id) {
+			return UtilService.isConnectedUser(short_id);
+		}
 
         $scope.$watch('discoverResultsCtrl.results', function(newValue, oldValue) {
             if (angular.isObject(newValue) && vm.refreshResults) {
