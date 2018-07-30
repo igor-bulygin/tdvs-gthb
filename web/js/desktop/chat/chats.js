@@ -74,6 +74,9 @@
             function onGetChatSuccess(data) {
                 vm.currentChat = angular.copy(data);
                 var lastOwner;
+                if (vm.currentChat.messages.length > 0) {
+                    vm.currentChat.messages[vm.currentChat.messages.length - 1].isLast = true;
+                }
                 angular.forEach(vm.currentChat.messages, function(msg) {
                     if (lastOwner && lastOwner === msg.person_id) {
                         msg.showOwner = false;
@@ -90,6 +93,9 @@
                     }
                 });
                 vm.loadingChat = false;
+                $location.hash('bottomChat');
+                $anchorScroll();
+                $location.hash('');
             }
             if (id) {
                 chatDataService.getChat({ id: id }, onGetChatSuccess, UtilService.onError);
@@ -107,13 +113,14 @@
         function sendMsg() {
             if (vm.newMsg && vm.newMsg.length > 0) {
                 function onSendMsgSuccess(data) {
-                    var addedMsg = data.messages[data.messages.length - 1];
-                    addedMsg.person_info = { name: vm.person.name, profile_image: vm.person.profile_image };
-                    vm.currentChat.messages.push(addedMsg);
+                    vm.currentChat.messages = data.messages;
+                    vm.currentChat.messages[vm.currentChat.messages.length - 1].isLast = true;
+                    vm.currentChat.messages[vm.currentChat.messages.length - 1].person_info = { name: vm.person.name, profile_image: vm.person.profile_image };
                     vm.newMsg = '';
                     $location.hash('bottomChat');
                     $anchorScroll();
-                    getChats(); // update chats after sending new message
+                    $location.hash('');
+                    getChats();
                 }
                 chatDataService.sendMsg({ text: vm.newMsg }, { personId: vm.personToChat.id }, onSendMsgSuccess, UtilService.onError);
             }
