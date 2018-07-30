@@ -3,10 +3,10 @@
 
     function config($provide, $translatePartialLoaderProvider, $locationProvider) {
         $translatePartialLoaderProvider.addPart('chat');
-        $locationProvider.html5Mode({
-            enabled: true,
-            requireBase: false
-        });
+        // $locationProvider.html5Mode({
+        //     enabled: true,
+        //     requireBase: false
+        // });
     }
 
     angular
