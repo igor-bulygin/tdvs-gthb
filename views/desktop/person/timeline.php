@@ -53,10 +53,23 @@ Yii::$app->opengraph->title = $this->title;
 									</div>
 									<div class="row">
 										<span class="timeline-title"><a ng-href="{{ timeline.link }}"><span ng-bind-html="timeline.title"></span></a></span>
-									</div>
-									<div class="row">
-										<span class="timeline-description" ng-bind-html="timeline.description"></span>
-									</div>
+									</div>									
+									<uib-accordion>										
+										<div uib-accordion-group is-open="group.open">
+											<uib-accordion-heading >
+												<div ng-if="!group.open">
+													<div class="row" >
+														<span class="timeline-description" ng-bind-html="timeline.description" style="text-transform: none !important;font-weight: normal !important;"></span>
+													</div>
+													<span class="col-xs-12 text-center red-text" style="text-transform: none !important;font-weight: normal !important;margin-top:10px;" translate="todevise.SEE_MORE"></span>
+												</div>
+												<div ng-if="group.open">
+													<span class="col-xs-12 text-center red-text" style="text-transform: none !important;font-weight: normal !important;margin-top:25px;margin-bottom:10px;" translate="todevise.SEE_LESS"></span>
+												</div>
+											</uib-accordion-heading>
+											<span ng-bind-html="timeline.description"></span>
+										</div>										
+									</uib-accordion>
 								</div>
 							</div>
 						</div>
