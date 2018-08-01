@@ -47,6 +47,7 @@
 			"ZIP": "ZIP",
 			"EMAIL": "Email",
 			"PROMO_CODE": "Promo code",
+			"OPTIONAL": "OPTIONAL",
 			"PASSWORD": "Password",
 			"NEW_PASSWORD": "New password",
 			"SET_PASSWORD": "Choose a password",
