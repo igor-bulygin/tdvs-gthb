@@ -15,7 +15,7 @@
         vm.loadingChat = true;
         vm.unselectChat = unselectChat;
         if (person) {
-            vm.person = { id: person.id, name: angular.copy(person.name), profile_image: person.profile_image };
+            vm.person = { id: UtilService.getConnectedUser(), name: angular.copy(person.name), profile_image: person.profile_image };
         } else {
             vm.person = { id: UtilService.getConnectedUser() };
         }
@@ -156,7 +156,7 @@
 
         function msgOwner(msg) {
             if (msg.person_id === vm.person.id) {
-                return 'msgOwner col-xs-7 col-xs-offset-4 col-sm-6 col-sm-offset-5';
+                return 'msgOwner col-xs-7 col-xs-offset-4 col-sm-6 col-sm-offset-5 ';
             }
             return '';
         }
