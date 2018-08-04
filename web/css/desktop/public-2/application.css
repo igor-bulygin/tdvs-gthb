@@ -362,8 +362,8 @@ a, a:hover, a:focus {
     top: 70px; } }
 
 .form-control {
-  -webkit-box-shadow: 0 0 0 transparent;
-  box-shadow: 0 0 0 transparent; }
+  -webkit-box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0); }
 
 .btn-default:hover {
   background-color: #cecece; }
@@ -1508,6 +1508,12 @@ label {
   .black-form .grey-input.grey-textarea {
     padding: 20px;
     height: 100px; }
+
+.optional-info-input-right {
+  float: right;
+  font-size: 12px;
+  color: #888;
+  margin: 22px 0 5px 0; }
 
 .login-title {
   margin-top: 80px;
@@ -5909,8 +5915,8 @@ h3 {
   overflow: hidden;
   overflow: hidden;
   position: relative;
-  line-height: 1.42857em;
-  max-height: 55.71429em;
+  line-height: 1.42857143em;
+  max-height: 55.71428577em;
   /*text-align: justify;
   margin-right: -1em;
   padding-right: 1em;
