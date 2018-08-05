@@ -25,10 +25,10 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 					<div class="avatar-btn-profile">
 						<div class="avatar">
 							<div class="icon-deviser" ng-if="personHeaderCtrl.person.type.indexOf(2)>=0" ng-cloak>
-								<img src="/imgs/deviser.svg">
+								<img class="no-shadow" src="/imgs/deviser.svg">
 							</div>
 							<div class="icon-deviser" ng-if="personHeaderCtrl.person.type.indexOf(3)>=0" ng-cloak>
-								<img src="/imgs/estrella.svg">
+								<img class="no-shadow" src="/imgs/estrella.svg">
 							</div>
 							<img class="cover" ng-src="{{personHeaderCtrl.person.profile_image}}">
 						</div>
