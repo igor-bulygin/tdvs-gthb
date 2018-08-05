@@ -20,6 +20,27 @@
 		//@media(max-width:991px){			//width: auto;			//left: 50%;			//margin-left: -256.203px;		//}
 	}
 }
+.divProfileCover { 
+	@media(max-width:757px) {
+		width: 100%;
+		height: 183px;
+		overflow: hidden;
+		position: relative;
+	}
+}
+.imgProfileCover {
+	@media(max-width:575px) {
+		position: absolute;
+		left: -1000%;
+		right: -1000%;
+		top: -1000%;
+		bottom: -1000%;
+		margin: auto;
+		min-width: 100%;
+		min-height: 100%;
+		height: 200px;
+	}
+}
 .avatar-btn-profile{
 	@media (max-width: 575px){
 		width: 100%;
