@@ -25,13 +25,14 @@ $this->registerJs('var chat_id = ' .Json::encode($chatId), yii\web\View::POS_HEA
 
 <div class="our-devisers-wrapper" ng-controller="chatCtrl as chatCtrl">	
 	<div class="container">
-		<div class="mt-40" ng-if="chatCtrl.loading || chatCtrl.loadingChat" style="padding: 20px;" ng-cloak>
-			<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-		</div>
-		<div class="our-devisers-body chat-body" ng-if="!chatCtrl.loading" ng-cloak>
-			<div class="hidden-sm hidden-md hidden-lg mt-20" ng-if="!chatCtrl.loadingChat">
+		
+		<div class="our-devisers-body chat-body" >
+			<div class="hidden-sm hidden-md hidden-lg mt-20">
 				<div class="mt-20 mb-20" >
-					<div>
+				<div class="mt-40" ng-if="chatCtrl.loading" style="padding: 20px;" ng-cloak>
+					<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+				</div>
+					<div ng-if="!chatCtrl.loading" ng-cloak>
 						<div class="col-xs-12 col-sm-4" ng-if="chatCtrl.currentChat">
 							<a class="col-xs-12 btn btn-medium btn-red auto-center" role="button" ng-click="chatCtrl.unselectChat()"><span translate="chat.BACK"></span></a>
 						</div>
@@ -64,7 +65,10 @@ $this->registerJs('var chat_id = ' .Json::encode($chatId), yii\web\View::POS_HEA
 				</div>
 			</div>
 			<div id="chat-chats" class="col-xs-12 col-sm-4 hidden-xs">
-				<uib-tabset active="chatCtrl.active">
+			<div class="mt-40" ng-if="chatCtrl.loading" style="padding: 20px;" ng-cloak>
+				<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+			</div>
+				<uib-tabset active="chatCtrl.active" ng-if="!chatCtrl.loading" ng-cloak>
 					<uib-tab index="$index" ng-repeat="tab in chatCtrl.tabs" heading="{{tab.title}}" ng-click="chatCtrl.changeChatFilter(tab.id)" class="col-xs-3">
 						<div ng-if="chatCtrl.chats.length<1" class="text-center" style="padding:50px;">
 							<h4 class="row" translate="chat.NO_CHATS"></h4>
@@ -101,21 +105,22 @@ $this->registerJs('var chat_id = ' .Json::encode($chatId), yii\web\View::POS_HEA
 						<div class="col-xs-12" ng-repeat="msg in chatCtrl.currentChat.messages | orderBy: (chatCtrl.parseDate(msg.date.sec*1000))">
 							<div ng-class="chatCtrl.msgOwner(msg)">
 								<div class="col-xs-3 col-sm-2">
-									<a ng-href="{{msg.person_info.main_link}}" ng-if="msg.showOwner">
-										<img class="avatar-logued-user" ng-src="{{ msg.person_info.profile_image}}">
+									<a ng-href="{{msg.person_info.main_link}}" ng-if="msg.showOwner" ng-cloak>
+										<img class="avatar-logued-user" ng-src="{{ msg.person_info.profile_image}}" >
 									</a>
 								</div>
 								<div class="col-xs-9 col-sm-10">
 									<span class="col-xs-12 red-text chat-tit" ng-bind="msg.person_info.name" ng-if="msg.showOwner"></span>
-									<span class="col-xs-12 chat-text" ng-bind="msg.text"></span>
+									<span class="col-xs-12 chat-text" ng-bind="msg.text"></span>									
 									<span class="col-xs-12 text-right chat-time">
-										<span ng-cloak>{{chatCtrl.parseDate(msg.date.sec*1000) | date:'hh:mm'}}</span>
+										<span>{{chatCtrl.parseDate(msg.date.sec*1000) | date:'hh:mm'}}</span>
 									</span>
-								</div>
+								</div>	
+								<div ng-if="msg.isLast" id="bottomChat" ng-cloak style="margin-top:100px;"></div>															
 							</div>
 						</div>
 					</div>
-					<form class="col-xs-12 chat-send">
+					<form class="col-xs-12 chat-send" >
 						<div class="col-xs-7 col-sm-8">
 							<input class="col-xs-12" type="text" ng-model="chatCtrl.newMsg" on-press-enter="chatCtrl.sendMsg()">
 						</div>
