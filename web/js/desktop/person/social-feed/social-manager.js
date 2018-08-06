@@ -1,7 +1,7 @@
 (function() {
     "use strict";
 
-    function controller(personDataService, UtilService, languageDataService, uploadDataService, $timeout, lovedDataService, $uibModal, $translate, $scope) {
+    function controller(personDataService, UtilService, languageDataService, uploadDataService, $timeout, lovedDataService, $uibModal, $translate, $scope, $sce) {
         var vm = this;
         vm.posts = [];
         vm.tempFiles = [];
@@ -22,6 +22,7 @@
         vm.mandatory_langs = Object.keys(_langs_required);
         vm.mandatory_langs_names = "";
         vm.dismiss = dismiss;
+        vm.sanitizeMe = sanitizeMe;
 
         init();
 
@@ -33,6 +34,10 @@
 
         function viewingConnectedUser() {
             return UtilService.isConnectedUser(person.short_id);
+        }
+
+        function sanitizeMe(text) {
+            return $sce.trustAsHtml(text);
         }
 
         function getPosts() {
@@ -52,7 +57,7 @@
         }
 
         function showNewPost() {
-            vm.newPost = { photo: "", text: "", person_id: person.short_id, post_state: 'post_state_active' };
+            vm.newPost = { photo: "", text: "", person_id: person.short_id, post_state: 'post_state_active', selected_language: vm.selected_language };
             vm.newPostModal = $uibModal.open({
                 templateUrl: 'newPostModal',
                 scope: $scope,
@@ -107,12 +112,16 @@
         function createPost() {
             var hasError = false;
             vm.newPost.required_text = false;
-            angular.forEach(vm.mandatory_langs, function(lang) {
-                if (angular.isUndefined(vm.newPost.text[lang]) || vm.newPost.text[lang].length < 1) {
-                    vm.newPost.required_text = true;
-                    hasError = true;
-                }
-            });
+            if (angular.isUndefined(vm.newPost.text[vm.selected_language]) || vm.newPost.text[vm.selected_language].length < 1) {
+                vm.newPost.required_text = true;
+                hasError = true;
+            } else {
+                angular.forEach(vm.mandatory_langs, function(lang) {
+                    if (angular.isUndefined(vm.newPost.text[lang]) || vm.newPost.text[lang].length < 1) {
+                        vm.newPost.text[lang] = vm.newPost.text[vm.selected_language];
+                    }
+                });
+            }
             if (hasError) {
                 return;
             }
@@ -254,6 +263,7 @@
 
             function onGetPostsSuccess(data) {
                 vm.newPost = data;
+                vm.newPost.selected_language = vm.selected_language;
                 vm.newPostModal = $uibModal.open({
                     templateUrl: 'newPostModal',
                     scope: $scope,

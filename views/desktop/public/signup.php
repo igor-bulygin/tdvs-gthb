@@ -65,7 +65,7 @@ Yii::$app->opengraph->title = $this->title;
 					</div>
 				</div>
 				<div class="row no-mar">
-					<label for="promo_code"><span translate="global.user.PROMO_CODE"></span></label>
+					<label for="promo_code"><span translate="global.user.PROMO_CODE"></span></label><span class="optional-info-input-right" translate="global.user.OPTIONAL"></span>
 					<div class="input-check-wrapper">
 						<input type="text" id="promo_code" class="form-control grey-input" name="promo_code" ng-model="createAccountCtrl.person.parent_affiliate_id">
 					</div>

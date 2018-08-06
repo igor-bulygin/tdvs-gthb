@@ -8,7 +8,7 @@
 			"IN_STOCK": " En stock",
 			"QUANTITY": "Cantidad",
 			"ORIGINAL": "Original",
-			"PRINTS": "Estampados",
+			"PRINTS": "Láminas",
 			"VIEW_SIZE_CHART": "Ver tallas disponibles",
 			"ADD_TO_CART": "Añadir a la cesta",
 			"OUT_OF_STOCK": "Sin stock",
@@ -44,7 +44,12 @@
 			"RETURNS": "Devoluciones: ",
 			"CREATED_BY": "Creado por",
 			"MORECONTENTCOMINGSOON": "¡ Más contenido en camino !",
-			"SELECTMANDATORYOPTIONS": "Por favor selecciona las opciones obligatorias"
+			"SELECTMANDATORYOPTIONS": "Por favor selecciona las opciones obligatorias",
+			"IS_BESPOKED": "Producto hecho a medida",
+			"MANUFACTURING_INFO": "Información del cliente necesaria antes de fabricar este producto",
+			"IS_PREORDER": "Es necesario pre encargar el producto",
+			"PREORDER_END": "El plazo de pre encargo termina el",
+			"WHEN_SHIPPED": "El producto será enviado el"
 		},
 		"creation_edition": {
 			"BACK_TO_PROFILE": " &lt volver al perfil",
@@ -71,7 +76,7 @@
 			"SPECIFY_WARRANTY_MONTHS": "Debe especificar los emses de garantía",
 			"VALUE_MUST_NUMBER": "El valor en este campo debe ser un número",
 			"RETURNS": "DEVOLUCIONES",
-			"DAYS": "días",
+			"DAYS": " días",
 			"SPECIFY_RETURNS_DAYS": "Debe especificar los días para devolución",
 			"PHOTOS": "Fotos",
 			"ADD_PHOTOS": "+ Añadir fotos",

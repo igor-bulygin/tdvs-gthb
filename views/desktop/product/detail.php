@@ -235,37 +235,6 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 									</button>
 								</div>
 							</div>
-							<?php /* 
-							<!--<div class="product-data">
-								<div class="row-size">
-									<div class="shipping-policies-wrapper">
-										<div class="title">Shipping &amp; Policies</div>
-										<div class="policies-row">
-											<form class="form-horizontal">
-												<div class="form-group">
-													<label class="col-sm-4 control-label shipping-label"><span>Shipping price to</span></label>
-													<div class="col-sm-5 shipping-sel">
-														<select class="form-control selectpicker shipping-select product-select" title="Choose country">
-															<option>USA</option>
-															<option>SPAIN</option>
-														</select>
-													</div>
-													<div class="col-sm-3">
-														is <span class="tax">€4.5</span>
-													</div>
-												</div>
-											</form>
-										</div>
-										<div class="returns-row">
-											Returns: 14 days
-										</div>
-										<div class="returns-row">
-											Warranty:
-										</div>
-									</div>
-								</div>
-							</div>
-							*/ ?>
 							<div class="product-data no-border">
 								<div class="full-width mb-20">
 									<div class="btns-product-wrapper">
@@ -402,26 +371,40 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 								</div>
 								<div class="full-width mt-20">	
 									<div class="bs-example">
-										<p class="btn accordion-btn">
+										<p class="btn accordion-btn no-pointer">
 											<span translate="product.detail.SHIPPING&POLICIES"></span>
 										</p>
 										<div>
 											<div class="shipping-policies-wrapper">
 												<div class="policies-row">
-													<form class="form-horizontal">
+													<div class="form-horizontal">
 														<div class="form-group ">
 															<label class="col-xs-12 col-sm-12 col-md-11 offset-md-1 control-label shipping-label no-pad-r"><span translate="product.detail.SHIPPING_PRICE_SPAIN"></span>: <span class="tax">€<?=(double)$product->getShippingPrice(null, Country::getDefaultContryCode())?></span></label>
-
-												<?php /*
-												<div class="col-sm-5 pad-product">
-													<select class="form-control selectpicker shipping-select product-select" title="Choose country">
-														<option>USA</option>
-														<option>SPAIN</option>
-													</select>
+															<?php /*
+															<div class="col-sm-5 pad-product">
+																<select class="form-control selectpicker shipping-select product-select" title="Choose country">
+																	<option>USA</option>
+																	<option>SPAIN</option>
+																</select>
+															</div>
+															*/ ?>
+														</div>
+													</div>
 												</div>
-												*/ ?>
 											</div>
-										</form>
+										</div>
+									</div>
+									<div class="returns-row" ng-if="detailProductCtrl.product.bespoke && detailProductCtrl.product.bespoke.value && detailProductCtrl.product.bespoke.type==1">
+										<p translate="product.detail.IS_BESPOKED"></p>
+										<p><span translate="product.detail.MANUFACTURING_INFO"></span>: <span class="bold" ng-bind="detailProductCtrl.product.bespoke.value[detailProductCtrl.selected_language]"></span></p>
+									</div>									
+									<div class="returns-row" ng-if="detailProductCtrl.product.madetoorder && detailProductCtrl.product.madetoorder.value && detailProductCtrl.product.madetoorder.type==1">
+										<p><span class="bold" ng-bind="detailProductCtrl.product.madetoorder.value"></span> <span translate="product.variations.MANUFATURE_DAYS"></span></p>
+									</div>
+									<div class="returns-row" ng-if="detailProductCtrl.product.preorder && detailProductCtrl.product.preorder.type==1">
+										<p translate="product.detail.IS_PREORDER"></p>
+										<p><span translate="product.detail.PREORDER_END"></span> <span class="bold">{{ detailProductCtrl.parseDate(detailProductCtrl.product.preorder.end) | date: 'dd MMM yyyy' }}</span></p>
+										<p><span translate="product.detail.WHEN_SHIPPED"></span> <span class="bold">{{ detailProductCtrl.parseDate(detailProductCtrl.product.preorder.ship) | date: 'dd MMM yyyy' }}</span></p>
 									</div>
 									<?php
 									$returns = $product->getReturnsLabel();
@@ -443,6 +426,14 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 									<div class="returns-row mt-20">
 										<span translate="product.detail.WARNING_CUSTOM_TAXES"></span>
 									</div>
+									<?php } ?>
+									<?php
+									$shippingSettingsSpain = $person->getShippingSettingByCountry(Country::getDefaultContryCode());
+									if ($shippingSettingsSpain) { ?>
+										<div class="returns-row mt-20">
+											<?php /*<p data-toggle="collapse" data-target="#shippingInfo" role="button"><?=Yii::t('app/public', 'SHIPPING_INFO')?></p>*/ ?>
+											<div id="shippingInfo" class="collapse in"><?= Utils::l( $shippingSettingsSpain->observations)?></div>
+										</div>
 									<?php } ?>
 								</div>
 							</div>

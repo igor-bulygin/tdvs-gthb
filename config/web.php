@@ -40,6 +40,27 @@ $config = [
 
 		//Assets
 		'assetManager' => [
+			'class' => 'yii\web\AssetManager',
+			'bundles' => [
+				'yii\web\JqueryAsset' => [
+					'js' => [
+						YII_ENV_DEV ? 'jquery.js' : 'jquery.min.js'
+					]
+				],
+				'yii\bootstrap\BootstrapAsset' => [
+					'css' => [
+						YII_ENV_DEV ? 'css/bootstrap.css' : 		'css/bootstrap.min.css',
+					]
+				],
+				'yii\bootstrap\BootstrapPluginAsset' => [
+					'js' => [
+						YII_ENV_DEV ? 'js/bootstrap.js' : 'js/bootstrap.min.js',
+					]
+				]
+			],
+		],
+		/*
+		'assetManager' => [
 			'appendTimestamp' => true,
 			'bundles' =>
 				false //YII_ENV_PROD
@@ -53,6 +74,7 @@ $config = [
 						],
 					]
 		],
+		*/
 
 		//Cache
 		'cache' => [
@@ -67,7 +89,8 @@ $config = [
 
 		//Errors
 		'errorHandler' => [
-			'errorAction' => YII_ENV_PROD ? 'public/error' : null,
+			//'errorAction' => YII_ENV_PROD ? 'public/error' : null,
+			'errorAction' => YII_ENV_PROD ? 'public/error' : 'public/error',
 		],
 
 		//i18n
@@ -262,7 +285,7 @@ $config = [
 				'/<person_type:(deviser|influencer|client)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/boxes' => 'person/boxes',
 				'/<person_type:(deviser|influencer|client)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/box/<box_id:[^/.]*?>' => 'person/box-detail',
 
-				'/<person_type:(deviser|influencer)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/social' => 'person/social',
+				'/<person_type:(deviser|influencer|client)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/social' => 'person/social',
 				'/<person_type:(deviser|influencer)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/connect-instagram' => 'person/connect-instagram',
 				'/<person_type:(deviser|influencer)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/follow' => 'person/follow',
 				'/<person_type:(deviser|influencer)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/followers' => 'person/followers',

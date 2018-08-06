@@ -8,7 +8,7 @@ class GlobalAsset extends AssetBundle {
 	public $baseUrl = '@web';
 	public $css = [
 		'css/desktop/global.css',
-		'css/desktop/public-2/application.css',
+		YII_ENV_DEV ? 'css/desktop/public-2/application.css' : 'css/desktop/public-2/application.min.css',
 		'css/desktop/public-2/bootstrap-select.min.css',
 	];
 	public $js = [
@@ -16,6 +16,7 @@ class GlobalAsset extends AssetBundle {
 		'js/desktop/todevise.module.js',
 		'js/desktop/public-2/bootstrap-select.min.js',
 		'js/desktop/public-2/macy.js',
+		'js/desktop/public-2/blazy.js',
 	];
 	public $depends = [
 		'app\assets\AppAsset',
@@ -23,6 +24,7 @@ class GlobalAsset extends AssetBundle {
 		'app\components\assets\PublicFooter2Asset',
 		'app\assets\api\ApiAsset',
 		'app\assets\libs\macyAsset',
+		'app\assets\libs\blazyAsset',
 		'app\assets\libs\utilAsset',
 		'app\assets\libs\momentAsset',
 		'app\assets\libs\angularMomentAsset',		

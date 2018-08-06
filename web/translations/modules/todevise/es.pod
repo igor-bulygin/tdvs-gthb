@@ -136,6 +136,8 @@
 		"RETURNS_WARRANTY": "Devoluciones y garantía",
 		"STOCK_PRICE_SINGLE": "Precio & Stock único",
 		"COMMENTS": "Comentarios",
-		"SENDED_EMAIL": "Email enviado. Revisa tu bandeja de entrada. (prueba)"
+		"SENDED_EMAIL": "Email enviado. Revisa tu bandeja de entrada. (prueba)",
+		"SEE_MORE": "Ver más",
+		"SEE_LESS": "Ver menos"
 	}
 }

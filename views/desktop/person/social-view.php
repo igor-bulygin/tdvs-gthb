@@ -32,7 +32,7 @@ $this->params['person_links_target'] = 'public_view';
 			</div>
 			<div class="col-md-10 mt-30">
 				<div class="empty-wrapper" ng-if="socialManagerCtrl.posts.length < 1 && !socialManagerCtrl.showCreatePost" ng-cloak>
-					<div _ng-if="socialManagerCtrl.viewingConnectedUser()">
+					<div ng-if="socialManagerCtrl.viewingConnectedUser()">
 						<img class="sad-face" src="/imgs/sad-face.svg">
 						<p class="no-video-text"><span translate="person.posts.NO_POSTS"></span></p>
 						<button  class="btn btn-red btn-add-box" ng-click="socialManagerCtrl.showNewPost()"><span translate="person.posts.ADD_POST"></span></button>
@@ -57,8 +57,8 @@ $this->params['person_links_target'] = 'public_view';
 										<span ng-if="post.isLoved" class="icons-hover heart-icon heart-red-icon" ng-click="socialManagerCtrl.unLovePost(post)" ng-cloak></span>
 										<span ng-if="!post.isLoved" class="icons-hover heart-icon heart-black-icon" ng-click="socialManagerCtrl.lovePost(post)" ng-cloak></span>
 									</div>
-									<span class="col-xs-12 posts-text align-left" ng-bind-html="socialManagerCtrl.truncateString(post.text, socialManagerCtrl.maxCharacters, '...')"></span>
-									<a ng-if="post.text.length > socialManagerCtrl.maxCharacters && !socialManagerCtrl.viewingConnectedUser()" class="col-xs-4 col-xs-push-8" ng-click="socialManagerCtrl.openPostDetailsModal(post)"><span translate="person.posts.SEE_MORE"></span></a>
+									<span class="no-padding col-xs-12 posts-text align-left" ng-bind-html="socialManagerCtrl.sanitizeMe(socialManagerCtrl.truncateString(post.text, socialManagerCtrl.maxCharacters, '...'))"></span>
+									<a ng-if="post.text.length > socialManagerCtrl.maxCharacters && !socialManagerCtrl.viewingConnectedUser()" class="col-xs-4 col-xs-push-8 no-padding" ng-click="socialManagerCtrl.openPostDetailsModal(post)"><span translate="person.posts.SEE_MORE"></span></a>
 									<div class="col-xs-4 col-xs-offset-8 col-sm-4 col-md-4 no-padding posts-edit" ng-if="socialManagerCtrl.viewingConnectedUser()">
 										<a ng-click="socialManagerCtrl.editPost(post.id)"><span class="edit-post-icon"><i class="ion-edit"></i></span></a> 
 										<a ng-click="socialManagerCtrl.deletePost(post.id)"><span class="close-post-icon"></span></a>
@@ -72,7 +72,7 @@ $this->params['person_links_target'] = 'public_view';
 		</div>
 	</div>
 	<script type="text/ng-template" id="newPostModal">
-	<div class="modal-content" uib-modal-transclude="">
+	<div class="modal-content">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="socialManagerCtrl.dismiss()">
 				<span class="ion-android-close" aria-hidden="true"></span>
@@ -103,6 +103,7 @@ $this->params['person_links_target'] = 'public_view';
 														</div>											
 													</div>
 												</div>
+												<!-- 
 												<div class="col-xs-4 col-xs-push-8 no-margin">
 													<ol class="nya-bs-select form-control" ng-model="socialManagerCtrl.newPost.selected_language" ng-change="socialManagerCtrl.parseText(socialManagerCtrl.newPost)" ng-init="socialManagerCtrl.newPost.selected_language = socialManagerCtrl.selected_language">
 														<li nya-bs-option="language in socialManagerCtrl.languages" class="ng-class:{'lang-selected': socialManagerCtrl.isLanguageOk(language.code, socialManagerCtrl.newPost)}" data-value="language.code" deep-watch="true">
@@ -112,10 +113,12 @@ $this->params['person_links_target'] = 'public_view';
 															</a>
 														</li>
 													</ol>
-												</div>
-												<div class="col-xs-8 col-xs-pull-4 no-margin no-padding">
+												</div>	
+												-->												
+												<div class="col-xs-8 no-margin no-padding">
 														<div text-angular ng-model="socialManagerCtrl.newPost.text[socialManagerCtrl.newPost.selected_language]" ta-toolbar="[]" translate-attr="{placeholder: 'person.posts.DESCRIPTION'}" ta-paste="socialManagerCtrl.stripHTMLTags($html)" placeholder="Description"></div>
-												</div>										
+												</div>	
+																				
 										</form>
 								</div>
 							</div>

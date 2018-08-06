@@ -4,6 +4,7 @@
 			"CLICK_MSG": "Go to any user’s profile and click the CHAT button to initiate a conversation",
 			"SELECT_CHAT": "Please select a chat on list",
 			"SEND": "SEND",
-			"CHAT_WITH": "Chat with {{ personToChat }}"
+			"CHAT_WITH": "Chat with {{ personToChat }}",
+			"BACK": "Back"
 		}
 }

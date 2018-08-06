@@ -2,27 +2,44 @@
 // Deviser Header
 // ==========================================================================
 .banner-deviser{
-	position: relative;
-	//background-color: $background_grey;
-	min-height: 388px;
-	//overflow-x: hidden;
+	position: relative;	//background-color: $background_grey;
+	min-height: 388px;	//overflow-x: hidden;
 	margin: auto;
 	@media (max-width: 575px){
 		background-color: transparent;
-		min-height: 250px;//fit-content;
+		min-height: 295px;//250px;//fit-content;
 	}
 	.cover{
 		width:100%;
 		height: max-content;
 		margin: auto;
 		@media (max-width: 575px){
-			max-height: 180px;
+			max-height: 183px;
 			position: absolute;
 		}
-		@media(max-width:991px){
-			//width: auto;
-			//left: 50%;
-			//margin-left: -256.203px;
+		//@media(max-width:991px){			//width: auto;			//left: 50%;			//margin-left: -256.203px;		//}
+	}
+	.divProfileCover { 
+		@media(max-width:575px) {
+			height: 183px;
+			overflow: hidden;
+			position: relative;
+		}
+	}
+	.imgProfileCover {
+		width: 100%;
+		height: max-content;
+		margin: auto;
+		@media(max-width:575px) {
+			position: absolute;
+			left: -1000%;
+			right: -1000%;
+			top: -1000%;
+			bottom: -1000%;
+			min-width: 100%;
+			min-height: 100%;
+			height: 200px;
+			width: initial;
 		}
 	}
 }
@@ -59,14 +76,14 @@
 		.avatar{
 			float: left;
 			position: relative;
-		margin: 0 0 0 6px;
+			margin: 0 0 0 6px;
 			@media (max-width: 575px){
 				float: none;
 				position: relative;
-				height: 155px;
+				height: 115px;//155px;
 				margin: auto;
 				padding: 0;
-				margin-top: 40px;
+				margin-top: 130px;//40px;
 			}
 			img{
 				@include size(155px,155px);
@@ -84,6 +101,7 @@
 					display: block;
 					left: 50%;
 					margin-left: -50px;
+					box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 				}
 			}
 		}
@@ -224,9 +242,7 @@
 	height:388.5px//411px;
 }
 .edit-profile-btn{
-	position: absolute;
-	//top: 115px;
-	//left: 14px;
+	position: absolute;	//top: 115px;	//left: 14px;
 	right: 38px;
 	bottom: 10px;
 }
@@ -272,7 +288,7 @@
 // ==========================================================================
 .deviser-followers {
 	position: absolute;
-	bottom: 72px;
+	bottom: 60px;//72px;
 	font-size: 14px;
 	color: $white;
 	text-transform: uppercase;
@@ -286,11 +302,11 @@
 	p {
 		text-align: center;
 		margin: auto;
-		font-size: 1.1em;
+		font-size: 1em;//1.1em;
 	}
 	.num {
-		font-size: 1.8em;
-		line-height: 1.2em;
+		font-size: 1.6em;//1.8em;
+		line-height: 1em;//1.2em;
 	}
 	a{
 		color: $white;
@@ -303,6 +319,5 @@
 }
 .more-options-icon{
 	@extend %more-options-icon;
-	@extend %header-icon;
-	/*&:hover{@extend %chat-red-icon;}*/
+	@extend %header-icon;	/*&:hover{@extend %chat-red-icon;}*/
 }
