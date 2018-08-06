@@ -15,9 +15,12 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 
 <div class="banner-deviser" ng-controller="personHeaderCtrl as personHeaderCtrl" ng-init="personHeaderCtrl.init(<?=$isFollowed?>)">
 	<div class="container pad-about" ng-if="!personHeaderCtrl.editingHeader" ng-cloak>
+		<?php /*
 		<div class="divProfileCover">
 			<img class="imgProfileCover" ng-src="{{personHeaderCtrl.person.header_image}}">
 		</div>
+		*/ ?>
+		<img class="cover" ng-src="{{personHeaderCtrl.person.header_image}}">
 		<div class="banner-deviser-content">
 			<div class="grey-overlay hidden-xs"></div>
 			<div class="container">
