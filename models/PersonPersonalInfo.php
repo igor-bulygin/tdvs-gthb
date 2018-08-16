@@ -14,6 +14,7 @@ use app\helpers\Utils;
  * @property string $phone_number_prefix
  * @property string $phone_number
  * @property string $zip
+ * @property string $iban
  *
  * @property \MongoDate $bday
  * @property string $surnames
@@ -59,6 +60,7 @@ class PersonPersonalInfo extends EmbedModel
 			'phone_number_prefix',
 			'phone_number',
 			'zip',
+      'iban',
 		];
 	}
 
@@ -163,6 +165,7 @@ class PersonPersonalInfo extends EmbedModel
 //			[['name', 'last_name', 'city', 'country', 'brand_name'], 'required', 'on' => Person::SCENARIO_DEVISER_UPDATE_PROFILE], // we have a lot of devisers without last_name... we cannot make it required
 			[['name', 'last_name', 'city'], 'required', 'on' => Person::SCENARIO_INFLUENCER_UPDATE_PROFILE],
 			[['name', 'last_name'], 'required', 'on' => [Person::SCENARIO_CLIENT_CREATE, Person::SCENARIO_CLIENT_UPDATE]],
+      ['iban', 'app\validators\EIBANValidator'],
 		];
 	}
 

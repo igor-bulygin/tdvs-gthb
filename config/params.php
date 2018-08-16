@@ -28,6 +28,17 @@ return [
 	'from_email' => 'info@todevise.com',
 	'default_initial_discount_percent' => 10.00,
 
+  'fees' => [
+    'default_todevise_fee_minimum' => 0.045, // Minimum fee without discovering and affiliate fee
+    'default_fee_from_discovering' => 0.05, // From discovering a product, else to TODEVISE
+    'default_fee_from_affiliate' => 0.05, // Affiliate && follow, else to TODEVISE
+  ],
+
+  'short_id_todevise_user' => '1000000',
+
+  // View config
+  'activity_historic_lines' => 10 ,
+
 	'index_banners' => [
 		['img' => '/imgs/banner-1.jpg', 'url' => '/deviser/isabel-de-pedro/80226c0/store', 'alt' => 'Isabel De Pedro', 'active' => true],
 		['img' => '/imgs/banner-2.jpg', 'url' => '/deviser/vontrueba/329504s/store', 'alt' => 'Vontrueba', 'active' => false],

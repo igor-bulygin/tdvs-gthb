@@ -146,6 +146,11 @@ class PersonController extends AppPublicController
 		if ($person->validate()) {
 			$person->save(false);
 
+      // Save affiliate as historic
+      if(isset($parent_person)) {
+        $parent_person->setHistoric('code_used', 0, $person->short_id);
+      }
+
 			if (isset($invitation)) {
 				// relate invitation and new person
 				$invitation->person_id = $person->_id;

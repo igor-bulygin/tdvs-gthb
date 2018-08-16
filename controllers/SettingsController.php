@@ -119,14 +119,28 @@ class SettingsController extends CController
 
 		$currency = Currency::getDefaultCurrency();
 
-		$affiliates = Person::find()->where(['parent_affiliate_id' => $person->affiliate_id])->all();
+    $affiliates = array();
+
+    if($person->affiliate_id != null) {
+      $affiliates = Person::find()->where(['parent_affiliate_id' => $person->affiliate_id])->all();
+      $affiliates = $person->getTotalEarnings($affiliates);
+    }
+
+    $history_lines = $person->getRecentHistoric(\Yii::$app->params['activity_historic_lines']);
+
+    if(!empty($history_lines)) {
+      foreach ($history_lines as &$line) {
+        $line['person'] = Person::findOneSerialized($line['person_id']);
+      }
+    }
 
 		$this->layout = '/desktop/public-2.php';
 
 		return $this->render("affiliates", [
 			'person' => $person,
 			'affiliates' => $affiliates,
-			'currency' => $currency
+			'currency' => $currency,
+      'history_lines' => $history_lines,
 		]);
 	}
 
@@ -227,11 +241,11 @@ class SettingsController extends CController
 			throw new NotFoundHttpException();
 		}
 
-		if (!$person->isDeviser()) {
+		if ($person->isClient()) { // Edit to accept Influencer
 			throw new NotFoundHttpException();
 		}
 
-		if (!$person->isDeviserEditable()) {
+		if (!$person->isPersonEditable()) {
 			throw new UnauthorizedHttpException();
 		}
 

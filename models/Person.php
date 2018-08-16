@@ -33,6 +33,8 @@ use yii\web\IdentityInterface;
  * @property PersonShippingSettings[] $shippingSettingsMapping
  * @property double $application_fee
  * @property int $profile_views
+ * @property double $available_earnings
+ * @property double $total_won_so_far
  * @property string $affiliate_id
  * @property string $parent_affiliate_id
  * @property array $follow
@@ -103,6 +105,9 @@ class Person extends CActiveRecord implements IdentityInterface
 			'categories',
 			'collections',
 			'personal_info',
+      'product_discovery_from_user',
+      'historic',
+      'earnings_by_user',
 //			'personalInfoMapping',
 			'curriculum',
 			'media',
@@ -115,6 +120,8 @@ class Person extends CActiveRecord implements IdentityInterface
 			'shipping_settings',
 			'application_fee',
 			'profile_views',
+      'available_earnings',
+      'total_won_so_far',
 			'affiliate_id',
 			'parent_affiliate_id',
 			'follow',
@@ -936,7 +943,11 @@ class Person extends CActiveRecord implements IdentityInterface
 					'person_type' => 'personTypeForUrl',
 					'type',
 					'profile_views',
+          'available_earnings',
+          'total_won_so_far',
 					'follow',
+          'historic',
+          'earnings_by_user',
 
 					// only availables in owner scenario:
 					'store_edit_link' => 'storeEditLink',
@@ -1350,6 +1361,8 @@ class Person extends CActiveRecord implements IdentityInterface
 			'chat_link' => $this->getChatLink(),
 			'is_followed' => $this->getIsFollowed(),
 			'person_type' => $this->getPersonTypeForUrl(),
+      'available_earnings' => $this->available_earnings,
+      'total_won_so_far' => $this->total_won_so_far,
 
 			// TODO: delete this two fields
 			"photo" => $this->getProfileImage(),
@@ -2549,4 +2562,64 @@ class Person extends CActiveRecord implements IdentityInterface
 
 		return $persons;
 	}
+
+  public function setHistoric($type, $amount, $person_id)
+  {
+    // Getting the actual historic
+    $historicToAdd = $this->historic;
+
+    // Adding the new line to historic
+    $historicToAdd[date('YmdHis')] = [
+      "type" => $type,
+      "amount" => $amount,
+      "person_id" => (string)$person_id,
+      "created_at" => new MongoDate(),
+    ];
+    $this->setAttribute('historic', $historicToAdd);
+    $this->save(false);
+  }
+
+  public function getRecentHistoric($limit)
+  {
+    $recent_history = $this->historic;
+    if(!empty($recent_history)) {
+      krsort($recent_history); // Order by date DESC
+      $recent_history = array_slice($recent_history, 0, $limit, true); // Limit rows
+    }
+    return $recent_history;
+  }
+
+  public function setEarningsByUser($order_id, $amount, $person_id)
+  {
+    $earningsByUser = $this->earnings_by_user;
+
+    $earningsByUser[$person_id]['earnings_by_order']["ORDER".$order_id] = $amount;
+
+    $this->setAttribute('earnings_by_user', $earningsByUser);
+    $this->save(false);
+  }
+
+  public function getTotalEarnings($affiliates) {
+
+    $affiliatesAux = array();
+    foreach ($affiliates as $affiliate) {
+
+      $affiliatesAux[$affiliate->short_id]['fullName'] = $affiliate->getName();
+      $affiliatesAux[$affiliate->short_id]['mainLink'] = $affiliate->getMainLink();
+
+      if(isset($this->earnings_by_user[$affiliate->short_id])) {
+        foreach($this->earnings_by_user[$affiliate->short_id]['earnings_by_order'] as $earningOrder) {
+          if(isset($affiliatesAux[$affiliate->short_id]['totalEarning']))
+            $affiliatesAux[$affiliate->short_id]['totalEarning'] = (float)$affiliatesAux[$affiliate->short_id]['totalEarning'] + $earningOrder;
+          else
+            $affiliatesAux[$affiliate->short_id]['totalEarning'] = (float)$earningOrder;
+        }
+      }
+      else {
+          $affiliatesAux[$affiliate->short_id]['totalEarning'] = 0;
+      }
+    }
+
+    return $affiliatesAux;
+  }
 }

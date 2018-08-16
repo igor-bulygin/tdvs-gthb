@@ -39,8 +39,13 @@ class StripeController extends CController
 		if (empty($person_id)) {
 			Yii::info('Stripe connect back with errors. Missing person_id_stripe_connection in session', __METHOD__);
 			$person = Yii::$app->user->identity; /* @var Person $person */
-			if ($person && $person->isDeviserEditable()) {
-				$this->redirect(Url::to(['settings/billing', 'slug' => $person->slug, 'person_id' => $person->short_id, 'error' => 1]));
+			if ($person && $person->isPersonEditable()) {
+
+        if($person->isDeviser())
+				    $this->redirect(Url::to(['settings/billing', 'slug' => $person->slug, 'person_id' => $person->short_id, 'error' => 1]));
+        else if($person->isInfluencer())
+            $this->redirect(Url::to(['settings/affiliates', 'slug' => $person->slug, 'person_id' => $person->short_id, 'error' => 1]));
+
 				return;
 			}
 			throw new \Exception("Missing required person identifier");
@@ -50,7 +55,7 @@ class StripeController extends CController
 		// This action must be done in Owner scenario to get the person object equal to the database object
 		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
 		$person = Person::findOneSerialized($person_id);
-		if (!$person->isDeviser() || !$person->isDeviserEditable()) {
+		if ($person->isClient() || !$person->isPersonEditable()) {
 			throw new NotFoundHttpException();
 		}
 
@@ -76,12 +81,20 @@ class StripeController extends CController
 				Yii::info('Stripe account connection succesfully: \n'.print_r($log, true), __METHOD__);
 			}
 
-			$this->redirect(Url::to(['settings/billing', 'slug' => $person->slug, 'person_id' => $person->short_id]));
+      if($person->isDeviser())
+          $this->redirect(Url::to(['settings/billing', 'slug' => $person->slug, 'person_id' => $person->short_id]));
+      else if($person->isInfluencer())
+          $this->redirect(Url::to(['settings/affiliates', 'slug' => $person->slug, 'person_id' => $person->short_id]));
+
 
 		} else if (isset($_GET['error'])) {
 
 			Yii::info('Stripe connect back with errors: '.$_GET['error_description'], __METHOD__);
-			$this->redirect(Url::to(['settings/billing', 'slug' => $person->slug, 'person_id' => $person->short_id]));
+
+      if($person->isDeviser())
+			   $this->redirect(Url::to(['settings/billing', 'slug' => $person->slug, 'person_id' => $person->short_id]));
+      else if($person->isInfluencer())
+         $this->redirect(Url::to(['settings/affiliates', 'slug' => $person->slug, 'person_id' => $person->short_id]));
 
 		} else {
 

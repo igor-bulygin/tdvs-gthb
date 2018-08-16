@@ -26,6 +26,7 @@ use yii\web\UnauthorizedHttpException;
  * @property array charges
  * @property int first_discount
  * @property double percent_discount
+ * @property int pay_with_credit
  * @property MongoDate created_at
  * @property MongoDate updated_at
  */
@@ -77,6 +78,7 @@ class Order extends CActiveRecord {
 			'charges',
 			'first_discount',
 			'percent_discount',
+      'pay_with_credit',
 
 			'created_at',
 			'updated_at',
@@ -183,7 +185,8 @@ class Order extends CActiveRecord {
 
 //					'charges',
 					'first_discount',
-					'percent_discount'
+					'percent_discount',
+          'pay_with_credit'
 				];
 				static::$retrieveExtraFields = [
 				];
@@ -210,7 +213,8 @@ class Order extends CActiveRecord {
 
 //					'charges',
 					'first_discount',
-					'percent_discount'
+					'percent_discount',
+          'pay_with_credit'
 				];
 				static::$retrieveExtraFields = [
 				];
@@ -237,7 +241,8 @@ class Order extends CActiveRecord {
 
 //					'charges',
 					'first_discount',
-					'percent_discount'
+					'percent_discount',
+          'pay_with_credit'
 				];
 				static::$retrieveExtraFields = [
 					'subtotal',
@@ -817,4 +822,119 @@ class Order extends CActiveRecord {
 		$this->setPacks($packs);
 		$this->save();
 	}
+
+  public function totalFees() {
+
+    $totalFees = 0;
+
+    foreach (\Yii::$app->params['fees'] as $fee => $value) {
+      $totalFees = (float)$totalFees + (float)$value;
+    }
+
+    return $totalFees;
+  }
+
+  public function getEarningsByOrder($all_earning = false)
+  {
+    $earningsByOrder = array();
+
+    foreach ($this->getPacks() as $pack) {
+      $earningsByPack = $this->getEarningsByPack($pack, $all_earning);
+
+      foreach ($earningsByPack as $key => $value) {
+        if(array_key_exists($key,$earningsByOrder)) {
+          $earningsByOrder[$key] = $earningsByOrder[$key] + $value;
+        }
+        else {
+          $earningsByOrder[$key] = $value;
+        }
+      }
+    }
+
+    // No need total
+    // unset($earningsByOrder['totalEarning']);
+
+    return $earningsByOrder;
+  }
+
+
+  // $all_earning -> 0.145 + 0.855
+  public function getEarningsByPack($pack, $all_earning = false)
+  {
+    $earningsByPack = array();
+    $buyer = $this->getPerson();
+
+
+    $earningsByPack['totalEarning'] = 0;
+    foreach ($pack->products as $p) { // Process all products in pack
+
+      if(isset($this->percent_discount) && $this->percent_discount > 0) {
+          $p['price'] = $p['price'] - (($p['price'] * $this->percent_discount) / 100);
+      }
+
+      // Calculating...
+
+      // 1 - Always a % to TODEVISE
+      $todeviseAmountToAdd = (float)round((($p['price'] * $p['quantity']) * \Yii::$app->params['fees']['default_todevise_fee_minimum']),2,PHP_ROUND_HALF_DOWN);
+
+      if(array_key_exists('todevise', $earningsByPack))
+        $earningsByPack['todevise'] = (float)$earningsByPack['todevise'] + $todeviseAmountToAdd;
+      else
+        $earningsByPack['todevise'] = $todeviseAmountToAdd;
+
+      $earningsByPack['totalEarning'] = $earningsByPack['totalEarning'] + $todeviseAmountToAdd;
+
+
+      if(!isset($this->percent_discount) || $this->percent_discount <= 0) {
+
+        // 2 - Fee from discovering user, else to TODEVISE
+        $discoverer = (isset($buyer->product_discovery_from_user['PRODUCT'.$p['product_id']])) ? $buyer->product_discovery_from_user['PRODUCT'.$p['product_id']] : "0";
+        $discoverAmountToAdd = (float)round(( ($p['price'] * $p['quantity']) * \Yii::$app->params['fees']['default_fee_from_discovering']),2,PHP_ROUND_HALF_DOWN);
+
+        if((string)$discoverer != "0" && in_array($discoverer, $buyer->follow)) { // Product is discovered by a user
+
+            if(array_key_exists($discoverer, $earningsByPack))
+              $earningsByPack[$discoverer] = (float)$earningsByPack[$discoverer] + $discoverAmountToAdd;
+            else
+              $earningsByPack[$discoverer] = $discoverAmountToAdd;
+
+        }
+        else { // Product discovered by search or another
+          $earningsByPack['todevise'] = (float)$earningsByPack['todevise'] + $discoverAmountToAdd;
+        }
+        $earningsByPack['totalEarning'] = $earningsByPack['totalEarning'] + $discoverAmountToAdd;
+
+
+        // 3 - Fee from affiliate && follow, else to TODEVISE
+        $affiliateAmountToAdd = (float)round(( ($p['price'] * $p['quantity']) * \Yii::$app->params['fees']['default_fee_from_affiliate']),2,PHP_ROUND_HALF_DOWN);
+        $affiliate = (isset($buyer->parent_affiliate_id) && trim($buyer->parent_affiliate_id != "")) ? Person::findOne(['affiliate_id' => $buyer->parent_affiliate_id]) : '';
+
+        if($affiliate != '' && in_array($affiliate->short_id, $buyer->follow)) { // Affiliate && follow
+          if(array_key_exists($affiliate->short_id, $earningsByPack))
+            $earningsByPack[$affiliate->short_id] = (float)$earningsByPack[$affiliate->short_id] + $affiliateAmountToAdd;
+          else
+            $earningsByPack[$affiliate->short_id] = $affiliateAmountToAdd;
+        }
+        else { // No affiliate or not follow
+          $earningsByPack['todevise'] = (float)$earningsByPack['todevise'] + $affiliateAmountToAdd;
+        }
+        $earningsByPack['totalEarning'] = $earningsByPack['totalEarning'] + $affiliateAmountToAdd;
+
+      }
+
+
+      // To return all amount earned, not only the earned fee
+      if($all_earning) {
+        $amountToDeviser = (float)round(( ($p['price'] * $p['quantity']) * (1 - $this->totalFees())),2,PHP_ROUND_HALF_DOWN);
+        if(array_key_exists($pack->getDeviser()->short_id, $earningsByPack)) {
+          $earningsByPack[$pack->getDeviser()->short_id] = $earningsByPack[$pack->getDeviser()->short_id] + $amountToDeviser;
+        }
+        else {
+          $earningsByPack[$pack->getDeviser()->short_id] = $amountToDeviser;
+        }
+      }
+    }
+
+    return $earningsByPack;
+  }
 }

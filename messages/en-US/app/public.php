@@ -61,6 +61,7 @@ return [
     'CONFIRM' => 'Confirm',
     'CONNECT_WITH_DIFFERENT_STRIPE_ACCOUNT' => 'Connect with a different stripe account',
     'CONNECT_WITH_STRIPE' => 'Connect with stripe',
+    'EDIT_STRIPE_ACCOUNT' => 'Edit Stripe account',
 	'CONTACT_TITLE' => 'Contact us',
 	'CONTACT_HEADER' => 'Contact us',
 	'CONTACT_NAME' => 'Name',

@@ -16,6 +16,7 @@
 		"DISCOVER_DEVISERS": "Descubrir devisers",
 		"TREND_SETTERS": "Influencers",
 		"TIMELINE": "Timeline",
-		"PROJECTS": "Proyectos"
+		"PROJECTS": "Proyectos",
+    "AVAILABLE_TODEVISE_CREDIT": "Crédito Todevise disponible:"
 	}
 }
