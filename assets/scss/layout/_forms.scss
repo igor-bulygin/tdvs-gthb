@@ -235,10 +235,10 @@ input:-webkit-autofill:focus {
     background-color: #ffffff;
     position: absolute;
     width: 340px;
-	position: absolute; 
-	left: 0; 
-	right: 0; 
-	margin-left: auto; 
+	position: absolute;
+	left: 0;
+	right: 0;
+	margin-left: auto;
 	margin-right: auto;
     top: -10px;
     padding: 10px 30px;
@@ -440,6 +440,7 @@ textarea{
   .historic_line span.date {
     clear: both;
     display: block;
+    margin-left: 0px;
   }
 }
 
