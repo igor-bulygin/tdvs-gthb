@@ -46,7 +46,7 @@ $this->params['person_links_target'] = 'public_view';
 						<button class="btn btn-red btn-add-box" ng-click="socialManagerCtrl.showNewPost()"><span translate="person.posts.ADD_POST"></span></button>
 					</div>
 					<div id="content-posts" class="col-xs-12 col-sm-6 col-md-4 col-lg-4" ng-repeat="post in socialManagerCtrl.posts" ng-cloak>
-						<figure class="showcase">
+						<figure class="showcase" ng-click="socialManagerCtrl.openPostDetailsModal(post)">
 							<div class="images-box">
 								<img class="col-xs-12 grid-image" ng-src="{{post.photo_url}}">
 							</div>
@@ -58,7 +58,7 @@ $this->params['person_links_target'] = 'public_view';
 										<span ng-if="!post.isLoved" class="icons-hover heart-icon heart-black-icon" ng-click="socialManagerCtrl.lovePost(post)" ng-cloak></span>
 									</div>
 									<span class="no-padding col-xs-12 posts-text align-left" ng-bind-html="socialManagerCtrl.sanitizeMe(socialManagerCtrl.truncateString(post.text, socialManagerCtrl.maxCharacters, '...'))"></span>
-									<a ng-if="post.text.length > socialManagerCtrl.maxCharacters && !socialManagerCtrl.viewingConnectedUser()" class="col-xs-4 col-xs-push-8 no-padding" ng-click="socialManagerCtrl.openPostDetailsModal(post)"><span translate="person.posts.SEE_MORE"></span></a>
+									<a ng-if="post.text.length > socialManagerCtrl.maxCharacters && !socialManagerCtrl.viewingConnectedUser()" class="col-xs-4 col-xs-push-8 no-padding"><span translate="person.posts.SEE_MORE"></span></a>
 									<div class="col-xs-4 col-xs-offset-8 col-sm-4 col-md-4 no-padding posts-edit" ng-if="socialManagerCtrl.viewingConnectedUser()">
 										<a ng-click="socialManagerCtrl.editPost(post.id)"><span class="edit-post-icon"><i class="ion-edit"></i></span></a> 
 										<a ng-click="socialManagerCtrl.deletePost(post.id)"><span class="close-post-icon"></span></a>
@@ -96,14 +96,14 @@ $this->params['person_links_target'] = 'public_view';
 														<div class="col-xs-12 mb-20" ng-if="!socialManagerCtrl.newPost.photo">
 																<button id="btn_create_box_popup" class="btn btn-red" name="file" ngf-select="socialManagerCtrl.uploadPhoto($files, $invalidFiles)"  ngf-accept="'image/*'"  ngf-drop-available="socialManagerCtrl.isDropAvailable" ngf-multiple="false">
 																<span>upload <span class="ion-camera"></span></span>
-															</button>                                                        
+															</button>
 														</div>
 														<div class="col-xs-12 mb-20 text-center" ng-if="socialManagerCtrl.newPost.photo" ng-cloak>
 															<img class="grid-image img-responsive" ng-src="{{socialManagerCtrl.newImage}}">
-														</div>											
+														</div>
 													</div>
 												</div>
-												<!-- 
+												<!-
 												<div class="col-xs-4 col-xs-push-8 no-margin">
 													<ol class="nya-bs-select form-control" ng-model="socialManagerCtrl.newPost.selected_language" ng-change="socialManagerCtrl.parseText(socialManagerCtrl.newPost)" ng-init="socialManagerCtrl.newPost.selected_language = socialManagerCtrl.selected_language">
 														<li nya-bs-option="language in socialManagerCtrl.languages" class="ng-class:{'lang-selected': socialManagerCtrl.isLanguageOk(language.code, socialManagerCtrl.newPost)}" data-value="language.code" deep-watch="true">
