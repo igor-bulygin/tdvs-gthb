@@ -118,6 +118,65 @@
 				//Cancel
 			});
 		};
+
+		vm.change_email = function (client_id) {
+			$person.get({
+				short_id: client_id
+			}).then(function (clients) {
+				if (clients.length !== 1) {
+					toastr.error("Unexpected client details!");
+					return;
+				}
+				var client = clients[0];
+
+				var modalInstance = $uibModal.open({
+					templateUrl: 'template/modal/client/change_email.html',
+					controller: clientChangeEmailCtrl,
+					controllerAs: 'clientChangeEmailCtrl',
+					resolve: {
+						data: function () {
+							return {
+								email: client.credentials.email
+							}
+						}
+					}
+				});
+
+				modalInstance.result.then(function (data) {
+					client.change_email = data.email;
+
+					$person.modify('POST', client).then(function (data) {
+						toastr.success("Client email updated to "+client.change_email);
+						vm.renderPartial();
+					}, function (err) {
+						toastr.error("Couldn't modify client!", err);
+					});
+
+				}, function () {
+					//Cancel
+				});
+			});
+
+		};
+	}
+
+	function clientChangeEmailCtrl($uibModalInstance, data) {
+		var vm = this;
+
+		vm.data = data;
+
+		vm.ok = ok;
+		vm.cancel = cancel;
+
+		function ok() {
+			$uibModalInstance.close({
+				email: vm.data.email
+			});
+		};
+
+		function cancel() {
+			$uibModalInstance.dismiss();
+		};
 	}
 
 	angular.module('todevise', ['ngAnimate', 'ui.bootstrap', 'angular-multi-select', 'global-admin', 'global-desktop', 'api'])

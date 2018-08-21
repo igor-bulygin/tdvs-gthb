@@ -1,7 +1,7 @@
 (function () {
 	"use strict";
 
-	function adminsCtrl($scope, $timeout, $admin, $admin_util, toastr, $uibModal, $compile, $http) {
+	function adminsCtrl($scope, $timeout, $admin, $person, $admin_util, toastr, $uibModal, $compile, $http) {
 		var vm = this;
 
 		vm.renderPartial = function () {
@@ -40,7 +40,7 @@
 						toastr.error("Couldn't delete tag!", err);
 					});
 				}, function (err) {
-					toastr.error("Couldn't find deviser!", err);
+					toastr.error("Couldn't find admin!", err);
 				});
 			}, function () {
 				//Cancel
@@ -61,7 +61,7 @@
 
 			modalInstance.result.then(function (data) {
 				var admin = $admin_util.newAdmin(data.type, data.name, data.surnames, data.email, data.password);
-				$admin.modify("POST", admin).then(function (deviser) {
+				$admin.modify("POST", admin).then(function (admin) {
 					toastr.success("Admin created!");
 					vm.renderPartial();
 				}, function (err) {
@@ -70,6 +70,46 @@
 			}, function () {
 				//Cancel
 			});
+		};
+
+		vm.change_email = function (admin_id) {
+			$person.get({
+				short_id: admin_id
+			}).then(function (admins) {
+				if (admins.length !== 1) {
+					toastr.error("Unexpected admin details!");
+					return;
+				}
+				var admin = admins[0];
+
+				var modalInstance = $uibModal.open({
+					templateUrl: 'template/modal/admin/change_email.html',
+					controller: adminChangeEmailCtrl,
+					controllerAs: 'adminChangeEmailCtrl',
+					resolve: {
+						data: function () {
+							return {
+								email: admin.credentials.email
+							}
+						}
+					}
+				});
+
+				modalInstance.result.then(function (data) {
+					admin.change_email = data.email;
+
+					$person.modify('POST', admin).then(function (data) {
+						toastr.success("admin email updated to "+admin.change_email);
+						vm.renderPartial();
+					}, function (err) {
+						toastr.error("Couldn't modify admin!", err);
+					});
+
+				}, function () {
+					//Cancel
+				});
+			});
+
 		};
 
 	}
@@ -95,6 +135,25 @@
 		};
 
 		vm.cancel = function () {
+			$uibModalInstance.dismiss();
+		};
+	}
+
+	function adminChangeEmailCtrl($uibModalInstance, data) {
+		var vm = this;
+
+		vm.data = data;
+
+		vm.ok = ok;
+		vm.cancel = cancel;
+
+		function ok() {
+			$uibModalInstance.close({
+				email: vm.data.email
+			});
+		};
+
+		function cancel() {
 			$uibModalInstance.dismiss();
 		};
 	}

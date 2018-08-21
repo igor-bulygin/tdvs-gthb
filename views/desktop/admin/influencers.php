@@ -57,7 +57,7 @@ $this->title = 'Todevise / Admin / Influencers';
 				'columns' => [
 					[
 						'class' => 'yii\grid\ActionColumn',
-						'template' => "{view} {update} {settings} {states}  {delete}",
+						'template' => "{view} {update} {settings} {states} {change_email} {delete}",
 						'buttons' => [
 							'view' => function($url, $model, $key) {
 								$url = $model->getAboutLink();
@@ -88,6 +88,14 @@ $this->title = 'Todevise / Admin / Influencers';
 										"ng-click" => "influencersCtrl.block('$model->short_id')"
 									]);
 								}
+							},
+
+							'change_email' => function($url, $model, $key) {
+								return Html::tag("span", "", [
+									"class" => "pointer glyphicon glyphicon-envelope fc-fff fs1",
+									"title" => "Change email",
+									"ng-click" => "influencersCtrl.change_email('$model->short_id')"
+								]);
 							},
 
 							'delete' => function($url, $model, $key) {
@@ -132,3 +140,25 @@ $this->title = 'Todevise / Admin / Influencers';
 
 	</div>
 </div>
+
+
+<script type="text/ng-template" id="template/modal/influencer/change_email.html">
+	<form novalidate name="influencerChangeEmailCtrl.form" class="popup-new-deviser">
+		<div class='modal-header'>
+			<h3 class='modal-title funiv fs1'><?= Yii::t("app/admin", "Set influencer email."); ?></h3>
+		</div>
+		<div class='modal-body'>
+			<label class="modal-title funiv fs1 fnormal fc-18"><?= Yii::t("app/admin", "Email"); ?></label>
+			<div class="input-group">
+				<input id="name" type="text" class="form-control funiv fs1" placeholder="<?= Yii::t("app/admin", "Set influencer email..."); ?>" ng-model="influencerChangeEmailCtrl.data.email" name="email">
+				<span class="input-group-addon alert-danger funiv fs0-929" id="basic-addon-name" ng-show="influencerChangeEmailCtrl.form.$submitted && !influencerChangeEmailCtrl.form.$valid && !influencerChangeEmailCtrl.form['email'].$valid"></span>
+			</div>
+			<br />
+		</div>
+		<div class='modal-footer'>
+			<button type="button" class='btn btn-danger' ng-click='influencerChangeEmailCtrl.form.$submitted = true; influencerChangeEmailCtrl.form.$valid && influencerChangeEmailCtrl.ok()'><?= Yii::t("app/admin", "Confirm"); ?></button>
+			<button type="button" class='btn btn-primary' ng-click='influencerChangeEmailCtrl.cancel()' type="submit"><?= Yii::t("app/admin", "Cancel"); ?></button>
+		</div>
+	</form>
+</script>
+

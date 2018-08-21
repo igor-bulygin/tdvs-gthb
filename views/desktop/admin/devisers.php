@@ -55,7 +55,7 @@ $this->title = 'Todevise / Admin / Devisers';
 				'columns' => [
 					[
 						'class' => 'yii\grid\ActionColumn',
-						'template' => "{products} {view} {update} {settings} {states} {fee} {delete} ",
+						'template' => "{products} {view} {update} {settings} {states} {fee} {change_email} {delete} ",
 						'buttons' => [
 							'products' => function($url, $model, $key) {
 								$url = $model->getStoreLink();
@@ -97,6 +97,14 @@ $this->title = 'Todevise / Admin / Devisers';
 								return Html::tag("span", "", [
 									"class" => "pointer glyphicon glyphicon-euro fc-fff fs1",
 									"ng-click" => "devisersCtrl.fee('$model->short_id')"
+								]);
+							},
+
+							'change_email' => function($url, $model, $key) {
+								return Html::tag("span", "", [
+									"class" => "pointer glyphicon glyphicon-envelope fc-fff fs1",
+									"title" => "Change email",
+									"ng-click" => "devisersCtrl.change_email('$model->short_id')"
 								]);
 							},
 
@@ -180,6 +188,27 @@ $this->title = 'Todevise / Admin / Devisers';
 		<div class='modal-footer'>
 			<button type="button" class='btn btn-danger' ng-click='deviserFeeCtrl.form.$submitted = true; deviserFeeCtrl.form.$valid && deviserFeeCtrl.ok()'><?= Yii::t("app/admin", "Confirm"); ?></button>
 			<button type="button" class='btn btn-primary' ng-click='deviserFeeCtrl.cancel()' type="submit"><?= Yii::t("app/admin", "Cancel"); ?></button>
+		</div>
+	</form>
+</script>
+
+
+<script type="text/ng-template" id="template/modal/deviser/change_email.html">
+	<form novalidate name="deviserChangeEmailCtrl.form" class="popup-new-deviser">
+		<div class='modal-header'>
+			<h3 class='modal-title funiv fs1'><?= Yii::t("app/admin", "Set deviser email."); ?></h3>
+		</div>
+		<div class='modal-body'>
+			<label class="modal-title funiv fs1 fnormal fc-18"><?= Yii::t("app/admin", "Email"); ?></label>
+			<div class="input-group">
+				<input id="name" type="text" class="form-control funiv fs1" placeholder="<?= Yii::t("app/admin", "Set deviser email..."); ?>" ng-model="deviserChangeEmailCtrl.data.email" name="email">
+				<span class="input-group-addon alert-danger funiv fs0-929" id="basic-addon-name" ng-show="deviserChangeEmailCtrl.form.$submitted && !deviserChangeEmailCtrl.form.$valid && !deviserChangeEmailCtrl.form['email'].$valid"></span>
+			</div>
+			<br />
+		</div>
+		<div class='modal-footer'>
+			<button type="button" class='btn btn-danger' ng-click='deviserChangeEmailCtrl.form.$submitted = true; deviserChangeEmailCtrl.form.$valid && deviserChangeEmailCtrl.ok()'><?= Yii::t("app/admin", "Confirm"); ?></button>
+			<button type="button" class='btn btn-primary' ng-click='deviserChangeEmailCtrl.cancel()' type="submit"><?= Yii::t("app/admin", "Cancel"); ?></button>
 		</div>
 	</form>
 </script>

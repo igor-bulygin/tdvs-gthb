@@ -258,6 +258,13 @@ class ApiController extends CController {
 			$deviser->setAttributes($_deviser, true);
 			$deviser->save(false);
 
+			if (isset($_deviser['change_email']) && !empty($_deviser['change_email'])) {
+				$credentials = $deviser->credentials;
+				$credentials['email'] = $_deviser['change_email'];
+				$deviser->setAttribute('credentials', $credentials);
+				$deviser->save(false);
+			}
+
 			$res = $deviser;
 
 		} else if ($request->isDelete) {

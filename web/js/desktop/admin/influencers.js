@@ -118,6 +118,65 @@
 				//Cancel
 			});
 		};
+
+		vm.change_email = function (influencer_id) {
+			$person.get({
+				short_id: influencer_id
+			}).then(function (influencers) {
+				if (influencers.length !== 1) {
+					toastr.error("Unexpected influencer details!");
+					return;
+				}
+				var influencer = influencers[0];
+
+				var modalInstance = $uibModal.open({
+					templateUrl: 'template/modal/influencer/change_email.html',
+					controller: influencerChangeEmailCtrl,
+					controllerAs: 'influencerChangeEmailCtrl',
+					resolve: {
+						data: function () {
+							return {
+								email: influencer.credentials.email
+							}
+						}
+					}
+				});
+
+				modalInstance.result.then(function (data) {
+					influencer.change_email = data.email;
+
+					$person.modify('POST', influencer).then(function (data) {
+						toastr.success("influencer email updated to "+influencer.change_email);
+						vm.renderPartial();
+					}, function (err) {
+						toastr.error("Couldn't modify influencer!", err);
+					});
+
+				}, function () {
+					//Cancel
+				});
+			});
+
+		};
+	}
+
+	function influencerChangeEmailCtrl($uibModalInstance, data) {
+		var vm = this;
+
+		vm.data = data;
+
+		vm.ok = ok;
+		vm.cancel = cancel;
+
+		function ok() {
+			$uibModalInstance.close({
+				email: vm.data.email
+			});
+		};
+
+		function cancel() {
+			$uibModalInstance.dismiss();
+		};
 	}
 
 	angular.module('todevise', ['ngAnimate', 'ui.bootstrap', 'angular-multi-select', 'global-admin', 'global-desktop', 'api'])

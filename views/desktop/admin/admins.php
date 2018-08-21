@@ -1,4 +1,5 @@
 <?php
+
 use app\assets\desktop\admin\AdminsAsset;
 use app\models\Person;
 use yii\grid\GridView;
@@ -54,11 +55,19 @@ $this->title = 'Todevise / Admin / Admins';
 				'columns' => [
 					[
 						'class' => 'yii\grid\ActionColumn',
-						'template' => "{create} {delete}",
+						'template' => "{create} {change_email} {delete}",
 						'buttons' => [
 							'create' => function($url, $model, $key) {
 								$url = Url::to(["admin/admin", "short_id" => $model->short_id]);
 								return Html::a('<span class="glyphicon glyphicon-user fc-fff fs1"></span><span class="glyphicon glyphicon-log-in fc-fff fs0-857"></span>', $url);
+							},
+
+							'change_email' => function($url, $model, $key) {
+								return Html::tag("span", "", [
+									"class" => "pointer glyphicon glyphicon-envelope fc-fff fs1",
+									"title" => "Change email",
+									"ng-click" => "adminsCtrl.change_email('$model->short_id')"
+								]);
 							},
 
 							'delete' => function($url, $model, $key) {
@@ -157,3 +166,25 @@ $this->title = 'Todevise / Admin / Admins';
 		</div>
 	</form>
 </script>
+
+
+<script type="text/ng-template" id="template/modal/admin/change_email.html">
+	<form novalidate name="adminChangeEmailCtrl.form" class="popup-new-deviser">
+		<div class='modal-header'>
+			<h3 class='modal-title funiv fs1'><?= Yii::t("app/admin", "Set admin email."); ?></h3>
+		</div>
+		<div class='modal-body'>
+			<label class="modal-title funiv fs1 fnormal fc-18"><?= Yii::t("app/admin", "Email"); ?></label>
+			<div class="input-group">
+				<input id="name" type="text" class="form-control funiv fs1" placeholder="<?= Yii::t("app/admin", "Set admin email..."); ?>" ng-model="adminChangeEmailCtrl.data.email" name="email">
+				<span class="input-group-addon alert-danger funiv fs0-929" id="basic-addon-name" ng-show="adminChangeEmailCtrl.form.$submitted && !adminChangeEmailCtrl.form.$valid && !adminChangeEmailCtrl.form['email'].$valid"></span>
+			</div>
+			<br />
+		</div>
+		<div class='modal-footer'>
+			<button type="button" class='btn btn-danger' ng-click='adminChangeEmailCtrl.form.$submitted = true; adminChangeEmailCtrl.form.$valid && adminChangeEmailCtrl.ok()'><?= Yii::t("app/admin", "Confirm"); ?></button>
+			<button type="button" class='btn btn-primary' ng-click='adminChangeEmailCtrl.cancel()' type="submit"><?= Yii::t("app/admin", "Cancel"); ?></button>
+		</div>
+	</form>
+</script>
+

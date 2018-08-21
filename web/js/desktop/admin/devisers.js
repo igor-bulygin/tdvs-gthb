@@ -166,6 +166,46 @@
 			});
 
 		};
+
+		vm.change_email = function (deviser_id) {
+			$person.get({
+				short_id: deviser_id
+			}).then(function (devisers) {
+				if (devisers.length !== 1) {
+					toastr.error("Unexpected deviser details!");
+					return;
+				}
+				var deviser = devisers[0];
+
+				var modalInstance = $uibModal.open({
+					templateUrl: 'template/modal/deviser/change_email.html',
+					controller: deviserChangeEmailCtrl,
+					controllerAs: 'deviserChangeEmailCtrl',
+					resolve: {
+						data: function () {
+							return {
+								email: deviser.credentials.email
+							}
+						}
+					}
+				});
+
+				modalInstance.result.then(function (data) {
+					deviser.change_email = data.email;
+
+					$person.modify('POST', deviser).then(function (data) {
+						toastr.success("Deviser email updated to "+deviser.change_email);
+						vm.renderPartial();
+					}, function (err) {
+						toastr.error("Couldn't modify deviser!", err);
+					});
+
+				}, function () {
+					//Cancel
+				});
+			});
+
+		};
 	}
 
 	function deviserFeeCtrl($uibModalInstance, data) {
@@ -179,6 +219,25 @@
 		function ok() {
 			$uibModalInstance.close({
 				application_fee: vm.data.application_fee
+			});
+		};
+
+		function cancel() {
+			$uibModalInstance.dismiss();
+		};
+	}
+
+	function deviserChangeEmailCtrl($uibModalInstance, data) {
+		var vm = this;
+
+		vm.data = data;
+
+		vm.ok = ok;
+		vm.cancel = cancel;
+
+		function ok() {
+			$uibModalInstance.close({
+				email: vm.data.email
 			});
 		};
 
