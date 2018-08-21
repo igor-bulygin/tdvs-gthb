@@ -9,6 +9,7 @@ return [
 	'stripe_client_id' => YII_ENV_PROD ? 'ca_9z47mImRRJvWUMSbMpJGpQzh7aUCyjgd' : 'ca_9z47cPhqGcOPdRgTMEOXnF3hc7Cwf59g',
 	'stripe_publishable_key' => YII_ENV_PROD ? 'pk_live_gzc7Ew2CBNsTw0bdeZhvSpj7' : 'pk_test_p1DPyiicE2IerEV676oj5t89',
 	'stripe_secret_key' => YII_ENV_PROD ? 'sk_live_1iZUiFADhvbdRitBZQTFSsCG' : 'sk_test_eLdJxVmKSGQxGPhX2bqpoRk4',
+	'stripe_todevise_account' => 'acct_19f5PrJt4mveficF',
 
 	// Instagram
 	'instagram_client_id' => '7cdaa91e4b27429a867e9e142d114b65',

@@ -339,9 +339,12 @@ class CartController extends AppPublicController
 				$pack->pack_percentage_fee_vat = $vatOverFeePercentage;
 
 
-				if (empty($deviser->settingsMapping->stripeInfoMapping->access_token)) {
+				if (empty($deviser->settingsMapping->stripeInfoMapping->access_token) ||
+					$deviser->settingsMapping->stripeInfoMapping->stripe_user_id == Yii::$app->params['stripe_todevise_account']) {
 
-					// If the deviser has no a connected stripe account, we charge directly to todevise account
+					// If the deviser has no a connected stripe account
+					// OR it the deviser has his account connected to the todevise stripe account
+					// we charge directly to todevise account
 					$charge = \Stripe\Charge::create([
 						'customer' => $customer->id,
 						'currency' => 'eur',
