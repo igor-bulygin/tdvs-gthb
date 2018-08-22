@@ -155,11 +155,13 @@ class ProductController extends AppPrivateController
 		$product->setScenario(Product::SCENARIO_PRODUCT_COMMENT);
 
 		$productComment = new ProductComment();
+		$productComment->person_id = Yii::$app->user->id;
 		$productComment->short_id = Utils::shortID(8);
 		$productComment->created_at = new \MongoDate();
 		$productComment->setParentObject($product);
 
 		if ($productComment->load(Yii::$app->request->post(), '') && $productComment->validate() && !$product->hasErrors()) {
+			$productComment->person_id = Yii::$app->user->id;
 			$product->commentsMapping[] = $productComment;
 
 			// Refresh properties from the embed
@@ -212,6 +214,7 @@ class ProductController extends AppPrivateController
 		$productCommentReply->setParentObject($parentComment);
 
 		if ($productCommentReply->load(Yii::$app->request->post(), '') && $productCommentReply->validate() && !$parentComment->hasErrors()) {
+			$productCommentReply->person_id = Yii::$app->user->id;
 			$parentComment->repliesInfo[] = $productCommentReply;
 			$parentComment->refreshFromEmbedded();
 			$product->refreshFromEmbedded();

@@ -64,13 +64,13 @@ class ProductComment extends EmbedModel
 	{
 		return [
 			[
-				['person_id', 'text'], 'safe', 'on' => [
+				['text'], 'safe', 'on' => [
 					Product::SCENARIO_PRODUCT_COMMENT,
 					Product::SCENARIO_PRODUCT_COMMENT_REPLY,
 				],
 			],
 			[
-				['person_id', 'text'], 'required'
+				['text'], 'required'
 			],
 			[
 				['stars'], 'required', 'on' => [Product::SCENARIO_PRODUCT_COMMENT],

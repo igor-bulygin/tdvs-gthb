@@ -47,12 +47,12 @@ class ProductCommentReply extends EmbedModel
 	{
 		return [
 			[
-				['person_id', 'text'], 'safe', 'on' => [
+				['text'], 'safe', 'on' => [
 					Product::SCENARIO_PRODUCT_COMMENT_REPLY,
 				],
 			],
 			[
-				['person_id', 'text'], 'required'
+				['text'], 'required'
 			],
 			['person_id', 'app\validators\PersonIdValidator'],
 		];
