@@ -23,6 +23,7 @@ use yii2tech\ar\position\PositionBehavior;
  * @property MadeToOrder $madeToOrderMapping
  * @property Bespoke $bespokeMapping
  * @property FaqQuestion[] $faqMapping
+ * @property ProductComment[] $commentsMapping
 *
  * @property array collections
  * @property array media
@@ -57,6 +58,8 @@ class Product extends CActiveRecord {
 	const SCENARIO_PRODUCT_OLD_API = 'scenario-product-old-api';
 	const SCENARIO_PRODUCT_DRAFT = 'scenario-product-draft';
 	const SCENARIO_PRODUCT_PUBLIC = 'scenario-product-public';
+	const SCENARIO_PRODUCT_COMMENT = 'scenario-product-comment';
+	const SCENARIO_PRODUCT_COMMENT_REPLY = 'scenario-product-comment-reply';
 
 	/**
 	 * The attributes that should be serialized
@@ -84,6 +87,7 @@ class Product extends CActiveRecord {
 			'enabled',
 			'categories',
 			'faq',
+			'comments',
 			'product_state',
 			'collections',
 			'name',
@@ -154,6 +158,7 @@ class Product extends CActiveRecord {
 		$this->boxes = 0;
 
 		$this->faq = [];
+		$this->comments = [];
 	}
 
 	public function embedMediaMapping()
@@ -181,14 +186,22 @@ class Product extends CActiveRecord {
 		return $this->mapEmbeddedList('faq', FaqQuestion::className(), array('unsetSource' => false));
 	}
 
+	public function embedCommentsMapping()
+	{
+		return $this->mapEmbeddedList('comments', ProductComment::className(), array('unsetSource' => false));
+	}
+
 	public function setParentOnEmbbedMappings()
 	{
 		$this->mediaMapping->setParentObject($this);
 		$this->preorderMapping->setParentObject($this);
 		$this->madeToOrderMapping->setParentObject($this);
 		$this->bespokeMapping->setParentObject($this);
-		foreach ($this->faqMapping as $faqMapping) {
-			$faqMapping->setParentObject($this);
+		foreach ($this->faqMapping as $item) {
+			$item->setParentObject($this);
+		}
+		foreach ($this->commentsMapping as $item) {
+			$item->setParentObject($this);
 		}
 	}
 
@@ -200,6 +213,9 @@ class Product extends CActiveRecord {
 			}
 			if (in_array('faq', $attributeNames)) {
 				$attributeNames[] = 'faqMapping';
+			}
+			if (in_array('comments', $attributeNames)) {
+				$attributeNames[] = 'commentsMapping';
 			}
 			if (in_array('preorder', $attributeNames)) {
 				$attributeNames[] = 'preorderMapping';
@@ -477,6 +493,7 @@ class Product extends CActiveRecord {
 					'categories',
 					'media',
 					'faq',
+					'comments',
 					'product_state',
 					'enabled',
 					'collections',

@@ -2,7 +2,10 @@
 
 namespace app\modules\api\priv\v1\controllers;
 
+use app\helpers\Utils;
 use app\models\Product;
+use app\models\ProductComment;
+use app\models\ProductCommentReply;
 use app\models\Timeline;
 use Yii;
 use yii\web\BadRequestHttpException;
@@ -131,6 +134,96 @@ class ProductController extends AppPrivateController
 		Yii::$app->response->setStatusCode(204); // No content
 
 		return null;
+	}
+
+	public function actionComment($id)
+	{
+		// show only fields needed in this scenario
+		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_PUBLIC);
+
+		/** @var Product $product */
+		$product = Product::findOneSerialized($id);
+		if (!$product) {
+			throw new NotFoundHttpException('Product not found');
+		}
+
+		if ($product->product_state != Product::PRODUCT_STATE_ACTIVE && !$product->getDeviser()->isPersonEditable()) {
+			Yii::$app->response->setStatusCode(204); // No content
+			return null;
+		}
+
+		$product->setScenario(Product::SCENARIO_PRODUCT_COMMENT);
+
+		$productComment = new ProductComment();
+		$productComment->short_id = Utils::shortID(8);
+		$productComment->created_at = new \MongoDate();
+		$productComment->setParentObject($product);
+
+		if ($productComment->load(Yii::$app->request->post(), '') && $productComment->validate() && !$product->hasErrors()) {
+			$product->commentsMapping[] = $productComment;
+
+			// Refresh properties from the embed
+			$product->refreshFromEmbedded();
+			$product->save(false);
+
+			Yii::$app->response->setStatusCode(201); // Created
+			return Product::findOneSerialized($id);
+		} else {
+			Yii::$app->response->setStatusCode(400); // Bad Request
+
+			return ["errors" => $product->errors];
+		}
+	}
+
+	public function actionCommentReply($product_id, $comment_id)
+	{
+		// show only fields needed in this scenario
+		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_PUBLIC);
+
+		/** @var Product $product */
+		$product = Product::findOneSerialized($product_id);
+		if (!$product) {
+			throw new NotFoundHttpException('Product not found');
+		}
+
+		if ($product->product_state != Product::PRODUCT_STATE_ACTIVE && !$product->getDeviser()->isPersonEditable()) {
+			Yii::$app->response->setStatusCode(204); // No content
+			return null;
+		}
+
+		$comments = $product->commentsMapping;
+		$key = null;
+		foreach ($comments as $i => $comment) {
+			if ($comment->short_id == $comment_id) {
+				$key = $i;
+				break;
+			}
+		}
+		if (!isset($key)) {
+			throw new NotFoundHttpException('Comment not found');
+		}
+		$parentComment = $comments[$key];
+
+		$product->setScenario(Product::SCENARIO_PRODUCT_COMMENT_REPLY);
+
+		$productCommentReply = new ProductCommentReply();
+		$productCommentReply->short_id = Utils::shortID(8);
+		$productCommentReply->created_at = new \MongoDate();
+		$productCommentReply->setParentObject($parentComment);
+
+		if ($productCommentReply->load(Yii::$app->request->post(), '') && $productCommentReply->validate() && !$parentComment->hasErrors()) {
+			$parentComment->repliesInfo[] = $productCommentReply;
+			$parentComment->refreshFromEmbedded();
+			$product->refreshFromEmbedded();
+			$product->save(false);
+
+			Yii::$app->response->setStatusCode(201); // Created
+			return Product::findOneSerialized($product_id);
+		} else {
+			Yii::$app->response->setStatusCode(400); // Bad Request
+
+			return ["errors" => $product->errors];
+		}
 	}
 
 	/**
