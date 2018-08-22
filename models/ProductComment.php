@@ -80,4 +80,38 @@ class ProductComment extends EmbedModel
 			['repliesInfo', 'app\validators\EmbedDocValidator'], // to apply rules
 		];
 	}
+
+	/**
+	 * @return Person
+	 */
+	public function getPerson() {
+		Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_PUBLIC);
+
+		$person = Person::findOneSerialized($this->person_id);
+
+		return $person;
+	}
+
+	/**
+	 * Get only preview attributes from Person
+	 *
+	 * @return array
+	 */
+	public function getPreviewSerialized()
+	{
+		$replies = [];
+		foreach ($this->repliesInfo as $reply) {
+			$replies[] = $reply->getPreviewSerialized();
+		}
+		return [
+			"id" => $this->short_id,
+			"person_id" => $this->person_id,
+			'person' => $this->getPerson()->getPreviewSerialized(),
+			'text' => $this->text,
+			'stars' => $this->stars,
+			'replies' => $replies,
+			'created_at' => $this->created_at,
+
+		];
+	}
 }

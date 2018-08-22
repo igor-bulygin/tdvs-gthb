@@ -493,7 +493,7 @@ class Product extends CActiveRecord {
 					'categories',
 					'media',
 					'faq',
-					'comments',
+					'comments' => 'commentsPreview',
 					'product_state',
 					'enabled',
 					'collections',
@@ -531,6 +531,7 @@ class Product extends CActiveRecord {
 					'deviser_id',
 					'options',
 					'sizechart',
+					'comments',
 				];
 
 				static::$translateFields = true;
@@ -545,6 +546,7 @@ class Product extends CActiveRecord {
 					'categories',
 					'media',
 					'faq',
+					'comments',
 					'product_state',
 					'enabled',
 					'collections',
@@ -1086,6 +1088,21 @@ class Product extends CActiveRecord {
 		/** @var Person $deviser */
 		$deviser = $this->getDeviser();
 		return $deviser->getPreviewSerialized();
+	}
+
+	/**
+	 * Get a preview version of the comments
+	 *
+	 * @return array
+	 */
+	public function getCommentsPreview()
+	{
+		$comments = array();
+		foreach ($this->commentsMapping as $comment) {
+			$comments[] = $comment->getPreviewSerialized();
+		}
+
+		return $comments;
 	}
 
 	/**

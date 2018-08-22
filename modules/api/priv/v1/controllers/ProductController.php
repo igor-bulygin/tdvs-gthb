@@ -139,7 +139,7 @@ class ProductController extends AppPrivateController
 	public function actionComment($id)
 	{
 		// show only fields needed in this scenario
-		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_PUBLIC);
+		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_OWNER);
 
 		/** @var Product $product */
 		$product = Product::findOneSerialized($id);
@@ -178,7 +178,7 @@ class ProductController extends AppPrivateController
 	public function actionCommentReply($product_id, $comment_id)
 	{
 		// show only fields needed in this scenario
-		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_PUBLIC);
+		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_OWNER);
 
 		/** @var Product $product */
 		$product = Product::findOneSerialized($product_id);
