@@ -17,6 +17,7 @@
         vm.setLoved = setLoved;
         vm.setBox = setBox;
         vm.selected_language = _lang;
+        vm.sendComment = sendComment;
         var select_order = ['size', 'color', 'select'];
 
 
@@ -424,6 +425,13 @@
             } else {
                 createCart();
             }
+        }
+
+        function sendComment() {
+            function onSendCommentSuccess(data) {
+                vm.product.comments = data.comments;
+            }
+            productDataService.sendProductComment({ text: vm.newComment.text, stars: 0 }, { idProduct: vm.product.id }, onSendCommentSuccess, UtilService.onError);
         }
     }
 

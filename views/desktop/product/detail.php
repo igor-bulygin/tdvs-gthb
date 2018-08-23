@@ -816,7 +816,48 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 			</div>
 		</div>
 	</div>
-	<!-- /PRODUCT DESCRIPTION -->
+	<!-- /PRODUCT COMMENTS -->
+	<div  class="container" ng-controller="detailProductCtrl as detailProductCtrl">
+		<div class="col-xs-12 text-center">
+			<i class="ion-ios-star red-text"></i><i class="ion-ios-star red-text"></i><i class="ion-ios-star red-text"></i><i class="ion-ios-star red-text"></i><i class="ion-ios-star red-text"></i>
+			<div>20</div>
+		</div>
+		<div class="col-xs-12 text-center">
+			5 stars (15)
+		</div>
+		<div class="col-xs-12 text-center">
+			3 stars (5)
+		</div>
+		<div class="col-xs-12 text-center">
+			<form class="col-xs-12 chat-send" >
+				<div class="col-xs-7 col-sm-8">
+				<label for="comment" class="col-xs-2"><img class="avatar-logued-user" src="<?= $person->getProfileImage(50, 50) ?>"></label>
+					<input class="col-xs-10" type="text" ng-model="detailProductCtrl.newComment.text" placeholder="Add your comment" name="comment" required on-press-enter="detailProductCtrl.sendComment()">
+				</div>
+				<div class="col-xs-5 col-sm-4">
+					<button class="col-xs-12 btn btn-small btn-red" ng-click="detailProductCtrl.sendComment()">>></button>
+				</div>
+			</form>
+			<div class="col-xs-12 text-center">
+				<i class="ion-ios-star red-text"></i><i class="ion-ios-star red-text"></i><i class="ion-ios-star red-text"></i><i class="ion-ios-star red-text"></i><i class="ion-ios-star red-text"></i>
+			</div>
+		</div>
+		<div ng-repeat="comment in detailProductCtrl.product.comments">
+			<div class="col-xs-1">
+				<img class="avatar-logued-user" src=" <?= $person -> getProfileImage(50, 50) ?>">
+			</div>
+			<div class="col-xs-8" >
+				<span class="row" >{{comment.text}} eee </span>
+				<a class="row"> Reply</a>
+			</div>
+			<div class="col-xs-3" >
+				<span class="row"> Is this review helpful to you?</span>
+				<div class="row">
+					<a>YES</a><a>NO</a>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<div class="modal full-modal fade" id="carouselModal">
 		<div class="modal-dialog modal-lg">
