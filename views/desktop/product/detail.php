@@ -518,14 +518,25 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 	<!-- /PRODUCT COMMENTS -->
 	<div  class="container" ng-controller="detailProductCtrl as detailProductCtrl">
 		<div class="col-xs-12 text-center">
-			<i class="ion-ios-star red-text"></i><i class="ion-ios-star red-text"></i><i class="ion-ios-star red-text"></i><i class="ion-ios-star red-text"></i><i class="ion-ios-star red-text"></i>
+			<span ng-repeat="_ in ((_ = []) && (_.length=5) && _) track by $index">
+				<i class="ion-ios-star  ng-class:{'red-text': $index+1 <= detailProductCtrl.productStars }"></i>
+			</span>
 			<span ng-bind="detailProductCtrl.productStars"></span>
 		</div>
-		<div class="col-xs-12 text-center">
-			5 stars (15)
+		<div class="col-xs-12 text-center" ng-if="detailProductCtrl.stars_counter.val5>0" ng-cloak>
+			5 stars ({{detailProductCtrl.stars_counter.val5}})
 		</div>
-		<div class="col-xs-12 text-center">
-			3 stars (5)
+		<div class="col-xs-12 text-center" ng-if="detailProductCtrl.stars_counter.val4>0" ng-cloak>
+			4 stars ({{detailProductCtrl.stars_counter.val4}})
+		</div>
+		<div class="col-xs-12 text-center" ng-if="detailProductCtrl.stars_counter.val3>0" ng-cloak>
+			3 stars ({{detailProductCtrl.stars_counter.val3}})
+		</div>
+		<div class="col-xs-12 text-center" ng-if="detailProductCtrl.stars_counter.val2>0" ng-cloak>
+			2 stars ({{detailProductCtrl.stars_counter.val2}})
+		</div>
+		<div class="col-xs-12 text-center" ng-if="detailProductCtrl.stars_counter.val1>0" ng-cloak>
+			1 stars ({{detailProductCtrl.stars_counter.val1}})
 		</div>
 		<div class="col-xs-12 text-center">
 			<form class="col-xs-12 chat-send" >

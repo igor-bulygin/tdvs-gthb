@@ -19,7 +19,7 @@
         vm.selected_language = _lang;
         vm.sendComment = sendComment;
         var select_order = ['size', 'color', 'select'];
-        vm.stars_options = new Array(5);
+        vm.stars_counter = { val1: 0, val2: 0, val3: 0, val4: 0, val5: 0 };
         vm.newComment = { text: '', stars: 0 };
 
 
@@ -57,9 +57,31 @@
                     vm.require_options = false;
                 }
                 vm.productStars = 0;
+                var valorations_counter = 0;
                 angular.forEach(vm.product.comments, function(comment) {
-                    vm.productStars = vm.productStars + comment.stars;
+                    if (comment.stars > 0) {
+                        vm.productStars = vm.productStars + comment.stars;
+                        valorations_counter++;
+                        switch (comment.stars) {
+                            case 1:
+                                vm.stars_counter.val1++;
+                                break;
+                            case 2:
+                                vm.stars_counter.val2++;
+                                break;
+                            case 3:
+                                vm.stars_counter.val3++;
+                                break;
+                            case 4:
+                                vm.stars_counter.val4++;
+                                break;
+                            case 5:
+                                vm.stars_counter.val5++;
+                                break;
+                        }
+                    }
                 });
+                vm.productStars = vm.productStars / valorations_counter;
             }
 
             productDataService.getProductPub({
