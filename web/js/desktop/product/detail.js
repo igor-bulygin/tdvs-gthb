@@ -19,6 +19,8 @@
         vm.selected_language = _lang;
         vm.sendComment = sendComment;
         var select_order = ['size', 'color', 'select'];
+        vm.stars_options = new Array(5);
+        vm.newComment = { text: '', stars: 0 };
 
 
         function init() {
@@ -54,6 +56,10 @@
                     vm.reference_id = original_artwork.short_id;
                     vm.require_options = false;
                 }
+                vm.productStars = 0;
+                angular.forEach(vm.product.comments, function(comment) {
+                    vm.productStars = vm.productStars + comment.stars;
+                });
             }
 
             productDataService.getProductPub({
@@ -430,8 +436,10 @@
         function sendComment() {
             function onSendCommentSuccess(data) {
                 vm.product.comments = data.comments;
+                vm.productStars = vm.productStars + vm.newComment.stars;
+                vm.newComment = { text: '', stars: 0 };
             }
-            productDataService.sendProductComment({ text: vm.newComment.text, stars: 0 }, { idProduct: vm.product.id }, onSendCommentSuccess, UtilService.onError);
+            productDataService.sendProductComment({ text: vm.newComment.text, stars: vm.newComment.stars }, { idProduct: vm.product.id }, onSendCommentSuccess, UtilService.onError);
         }
     }
 
