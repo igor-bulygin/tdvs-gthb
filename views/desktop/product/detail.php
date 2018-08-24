@@ -553,7 +553,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 				<span class="row" >{{comment.text}} eee </span>
 				<div class="row">
 					<a>Reply</a>
-					<span class="text-left">
+					<span class="text-left" ng-if="comment.stars>0" ng-cloak>
 						<span ng-repeat="_ in ((_ = []) && (_.length=5) && _) track by $index">
 								<i class="ion-ios-star  ng-class:{'red-text': $index+1 <= comment.stars }"></i>
 						</span>
