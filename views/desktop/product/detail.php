@@ -545,13 +545,20 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 				</div>
 			</form>
 		</div>
-		<div ng-repeat="comment in detailProductCtrl.product.comments">
+		<div class="col-xs-12" ng-repeat="comment in detailProductCtrl.product.comments" style="border-bottom: solid 1px #bfbfbf;">
 			<div class="col-xs-1">
 				<img class="avatar-logued-user" src=" <?= $person -> getProfileImage(50, 50) ?>">
 			</div>
 			<div class="col-xs-8" >
 				<span class="row" >{{comment.text}} eee </span>
-				<a class="row"> Reply</a>
+				<div class="row">
+					<a>Reply</a>
+					<span class="text-left">
+						<span ng-repeat="_ in ((_ = []) && (_.length=5) && _) track by $index">
+								<i class="ion-ios-star  ng-class:{'red-text': $index+1 <= comment.stars }"></i>
+						</span>
+					</span>
+				</div>
 			</div>
 			<div class="col-xs-3" >
 				<span class="row"> Is this review helpful to you?</span>
