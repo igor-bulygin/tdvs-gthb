@@ -541,7 +541,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 		<div class="col-xs-12 text-center">
 			<form class="col-xs-12 chat-send" >
 				<label for="comment" class="col-xs-1"><img class="avatar-logued-user" src="<?= $person->getProfileImage(50, 50) ?>"></label>
-				<div class="col-xs-9">					
+				<div class="col-xs-9">
 					<input class="col-xs-12" type="text" ng-model="detailProductCtrl.newComment.text" placeholder="Add your comment" name="comment" required on-press-enter="detailProductCtrl.sendComment()">
 					<div class="col-xs-12 text-left">
 						<span ng-repeat="_ in ((_ = []) && (_.length=5) && _) track by $index">
@@ -563,9 +563,9 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 			<div class="col-xs-8" >
 			<div class="row">
 						<span ng-bind="comment.person.name"></span>
-						<span>{{detailProductCtrl.parseDate(comment.created_at.sec*1000) | date:'hh:mm'}}</span>
+						<span am-time-ago="detailProductCtrl.parseDate(comment.created_at.sec*1000)"></span>
 					</div>
-				<span class="row" >{{comment.text}} eee </span>
+				<span class="row">{{comment.text}}</span>
 				<div class="row">
 					<a>Reply</a>
 					<span class="text-left" ng-if="comment.stars>0" ng-cloak>
