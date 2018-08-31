@@ -110,17 +110,6 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 										<?php } ?>
 									</div>
 								</div>
-								<?php /*
-								<div class="col-sm-12">
-									<ol class='carousel-indicators thumbs mCustomScrollbar'>
-										<?php foreach ($productImages as $key => $imageUrl) { ?>
-											<li class="col-sm-1" data-target='#carousel-custom' data-slide-to='<?= $key ?>' class='active'>
-												<img src='<?= Utils::url_scheme() ?><?= Utils::thumborize($imageUrl)->resize(410, 0) ?>' alt='' />
-											</li>
-											<?php } ?>
-									</ol>
-								</div>
-								*/?>
 							</div>
 						</div>
 					</div>
@@ -443,31 +432,29 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 			</div>
 		</div>
 	</div>
-</div>
-</div>
-</div>
+
 <!-- /PRODUCT CARD -->
 <!-- PRODUCT DESCRIPTION -->
 <div class="product-description">
 	<!-- Nav tabs -->
-		<div class="container">
-			<div class="work-profile-description-wrapper">
-				<div class="hidden-sm hidden-md hidden-lg">
-                                        <div class="avatar-wrapper-side">
-                                                <div class="avatar">
-                                                        <a href="<?= $person->getStoreLink() ?>">
-                                                                <span translate="product.detail.CREATED_BY"></span>
-                                                                <img class="avatar-default medium" src="<?= $person->getProfileImage(128, 128) ?>" data-pin-nopin="true">
-                                                        </a>
-                                                </div>
-                                        </div>
-                                </div>
-				<div class="title mb-40"><span class="title-product-name" translate="product.detail.DESCRIPTION"></span></div>
-				<div class="col-sm-9 pad-product">
-					<div class="description-parraf">
-						<?= $product->description ?>
-					</div>
-					<?php if (count($product->mediaMapping->descriptionPhotosInfo) > 0) { ?>
+	<div class="container">
+		<div class="work-profile-description-wrapper">
+			<div class="hidden-sm hidden-md hidden-lg">
+                    <div class="avatar-wrapper-side">
+                        <div class="avatar">
+                             <a href="<?= $person->getStoreLink() ?>">
+                                <span translate="product.detail.CREATED_BY"></span>
+                                <img class="avatar-default medium" src="<?= $person->getProfileImage(128, 128) ?>" data-pin-nopin="true">
+                            </a>
+                        </div>
+                    </div>
+            </div>
+			<div class="title mb-40"><span class="title-product-name" translate="product.detail.DESCRIPTION"></span></div>
+			<div class="col-sm-9 pad-product">
+				<div class="description-parraf">
+					<?= $product->description ?>
+				</div>
+				<?php if (count($product->mediaMapping->descriptionPhotosInfo) > 0) { ?>
 					<div class="tb-wrapper">
 						<div class="row">
 							<?php foreach ($product->mediaMapping->descriptionPhotosInfo as $descriptionPhoto) { ?>
@@ -910,4 +897,5 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 			</div>
 		</div>
 	</div>
+</div>
 </div>

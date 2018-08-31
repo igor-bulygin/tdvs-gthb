@@ -9,7 +9,7 @@ class momentAsset extends AssetBundle {
 	public $css = [
 	];
 	public $js = [
-		YII_ENV_DEV ? 'moment.js' : 'min/moment.min.js'
+		YII_ENV_DEV ? 'moment.js' : 'min/moment.min.js', YII_ENV_DEV ? '/locale/es.js'
 	];
 	public $depends = [
 	];

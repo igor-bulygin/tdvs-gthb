@@ -468,7 +468,7 @@
                 }
                 vm.newComment = { text: '', stars: 0 };
             }
-            productDataService.sendProductComment({ text: vm.newComment.text, stars: vm.newComment.stars }, { idProduct: vm.product.id }, onSendCommentSuccess, UtilService.onError);
+            productDataService.sendProductComment({ text: vm.newComment.text, stars: vm.newComment.stars, idProduct: vm.product.id }, {}, onSendCommentSuccess, UtilService.onError);
         }
     }
 
