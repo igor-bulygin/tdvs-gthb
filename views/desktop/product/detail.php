@@ -550,7 +550,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 			<div class="col-xs-8" >
 			<div class="row">
 						<span ng-bind="comment.person.name"></span>
-					 <span am-time-ago="detailProductCtrl.parseDate(comment.created_at.sec*1000)"></span>
+					 <span am-time-ago="comment.created_at.sec | amFromUnix"></span>
 					</div>
 				<span class="row">{{comment.text}}</span>
 				<div class="row">
