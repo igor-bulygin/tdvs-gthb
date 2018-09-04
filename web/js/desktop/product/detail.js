@@ -17,7 +17,10 @@
         vm.setLoved = setLoved;
         vm.setBox = setBox;
         vm.selected_language = _lang;
+        vm.sendComment = sendComment;
         var select_order = ['size', 'color', 'select'];
+        vm.stars_counter = { val1: 0, val2: 0, val3: 0, val4: 0, val5: 0 };
+        vm.newComment = { text: '', stars: 0 };
 
 
         function init() {
@@ -53,11 +56,42 @@
                     vm.reference_id = original_artwork.short_id;
                     vm.require_options = false;
                 }
+                setProductValoration();
             }
 
             productDataService.getProductPub({
                 idProduct: product.id
             }, onGetProductSuccess, UtilService.onError);
+        }
+
+        function setProductValoration() {
+            vm.productStars = 0;
+            var valorations_counter = 0;
+            vm.stars_counter = { val1: 0, val2: 0, val3: 0, val4: 0, val5: 0 };
+            angular.forEach(vm.product.comments, function(comment) {
+                if (comment.stars > 0) {
+                    vm.productStars = vm.productStars + comment.stars;
+                    valorations_counter++;
+                    switch (comment.stars) {
+                        case 1:
+                            vm.stars_counter.val1++;
+                            break;
+                        case 2:
+                            vm.stars_counter.val2++;
+                            break;
+                        case 3:
+                            vm.stars_counter.val3++;
+                            break;
+                        case 4:
+                            vm.stars_counter.val4++;
+                            break;
+                        case 5:
+                            vm.stars_counter.val5++;
+                            break;
+                    }
+                }
+            });
+            vm.productStars = vm.productStars / valorations_counter;
         }
 
         function getTags() {
@@ -424,6 +458,21 @@
             } else {
                 createCart();
             }
+        }
+
+        function sendComment() {
+            if (!UtilService.isConnectedUser()) {
+                openSignUpModal();
+            }
+
+            function onSendCommentSuccess(data) {
+                vm.product.comments = data.comments;
+                if (vm.newComment.stars > 0) {
+                    setProductValoration();
+                }
+                vm.newComment = { text: '', stars: 0 };
+            }
+            productDataService.sendProductComment({ text: vm.newComment.text, stars: vm.newComment.stars, idProduct: vm.product.id }, {}, onSendCommentSuccess, UtilService.onError);
         }
     }
 
