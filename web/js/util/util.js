@@ -1,7 +1,7 @@
 (function() {
     "use strict";
 
-    function UtilService($location, localStorageService, $window) {
+    function UtilService($location, localStorageService, $window, $cookieStore, personDataService, localStorageUtilService) {
         this.isObject = isObject;
         this.isEmpty = isEmpty;
         this.diff = diff;
@@ -26,6 +26,7 @@
         this.truncateString = truncateString;
         this.isConnectedUser = isConnectedUser;
         this.getConnectedUser = getConnectedUser;
+        this.logout = logout;
 
         //regex from: https://gist.github.com/dperini/729294
         //added "?" after (?:(?:https?|ftp):\/\/) for urls like www.google.es
@@ -35,7 +36,7 @@
 
 
         function isConnectedUser(person_id) {
-            var session_id = localStorageService.get('sesion_id');
+            var session_id = $cookieStore.get('sesion_id');
             if (person_id === session_id) {
                 return true;
             }
@@ -43,7 +44,18 @@
         }
 
         function getConnectedUser() {
-            return localStorageService.get('sesion_id');
+            return $cookieStore.get('sesion_id');
+        }
+
+        function logout() {
+            function onLogoutSuccess(data) {
+                localStorageUtilService.removeLocalStorage('access_token');
+                localStorageUtilService.removeLocalStorage('cart_id');
+                $cookieStore.remove('sesion_id');
+                $window.location.href = currentHost();
+            }
+
+            personDataService.logout({}, null, onLogoutSuccess, UtilService.onError);
         }
 
         function isObject(object) {
@@ -250,7 +262,7 @@
 
 
 
-    angular.module('util', ['util.formMessages', 'LocalStorageModule', 'ui.bootstrap', 'infinite-scroll', 'uiCropper', 'pascalprecht.translate'])
+    angular.module('util', ['util.formMessages', 'LocalStorageModule', 'ui.bootstrap', 'infinite-scroll', 'uiCropper', 'pascalprecht.translate', 'ngCookies'])
         .service('UtilService', UtilService)
         .filter('capitalize', capitalize)
         .config(config);
