@@ -8,7 +8,7 @@
         var Categories = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'categories');
         var Products = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'products');
         //priv
-        var Comment = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'products/:idProduct/comments');
+        var Comment = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'products/:idProduct/comments/:idComment');
         var ProductPriv = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'products/:idProduct', {}, {
             'update': {
                 method: 'PUT'

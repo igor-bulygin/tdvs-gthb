@@ -511,25 +511,25 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 			<span ng-bind="detailProductCtrl.productStars"></span>
 		</div>
 		<div class="col-xs-12 text-center" ng-if="detailProductCtrl.stars_counter.val5>0" ng-cloak>
-			5 stars ({{detailProductCtrl.stars_counter.val5}})
+			5 <span translate="product.detail.STARS"></span> ({{detailProductCtrl.stars_counter.val5}})
 		</div>
 		<div class="col-xs-12 text-center" ng-if="detailProductCtrl.stars_counter.val4>0" ng-cloak>
-			4 stars ({{detailProductCtrl.stars_counter.val4}})
+			4 <span translate="product.detail.STARS"></span> ({{detailProductCtrl.stars_counter.val4}})
 		</div>
 		<div class="col-xs-12 text-center" ng-if="detailProductCtrl.stars_counter.val3>0" ng-cloak>
-			3 stars ({{detailProductCtrl.stars_counter.val3}})
+			3 <span translate="product.detail.STARS"></span> ({{detailProductCtrl.stars_counter.val3}})
 		</div>
 		<div class="col-xs-12 text-center" ng-if="detailProductCtrl.stars_counter.val2>0" ng-cloak>
-			2 stars ({{detailProductCtrl.stars_counter.val2}})
+			2 <span translate="product.detail.STARS"></span> ({{detailProductCtrl.stars_counter.val2}})
 		</div>
 		<div class="col-xs-12 text-center" ng-if="detailProductCtrl.stars_counter.val1>0" ng-cloak>
-			1 stars ({{detailProductCtrl.stars_counter.val1}})
+			1 <span translate="product.detail.STARS"></span> ({{detailProductCtrl.stars_counter.val1}})
 		</div>
 		<div class="col-xs-12 text-center">
 			<form class="col-xs-12 chat-send" >
 				<label for="comment" class="col-xs-1"><img class="avatar-logued-user" src="<?= $person->getProfileImage(50, 50) ?>"></label>
 				<div class="col-xs-9">
-					<input class="col-xs-12" type="text" ng-model="detailProductCtrl.newComment.text" placeholder="Add your comment" name="comment" required on-press-enter="detailProductCtrl.sendComment()">
+					<input class="col-xs-12" type="text" ng-model="detailProductCtrl.newComment.text" translate-attr="{placeholder: 'product.detail.ADD_COMMENT'}" name="comment" required on-press-enter="detailProductCtrl.sendComment()">
 					<div class="col-xs-12 text-left">
 						<span ng-repeat="_ in ((_ = []) && (_.length=5) && _) track by $index">
 							<a ng-click="detailProductCtrl.newComment.stars=$index+1">
@@ -543,7 +543,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 				</div>
 			</form>
 		</div>
-		<div class="col-xs-12" ng-repeat="comment in detailProductCtrl.product.comments" style="border-bottom: solid 1px #bfbfbf;">
+		<div class="col-xs-12" ng-repeat="comment in detailProductCtrl.product.comments " style="border-bottom: solid 1px #bfbfbf;">
 			<div class="col-xs-1">
 				<img class="avatar-logued-user" ng-src="{{comment.person.url_avatar}}">
 			</div>
@@ -554,7 +554,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 					</div>
 				<span class="row">{{comment.text}}</span>
 				<div class="row">
-					<a>Reply</a>
+					<a><span translate="product.detail.REPLY"></span></a>
 					<span class="text-left" ng-if="comment.stars>0" ng-cloak>
 						<span ng-repeat="_ in ((_ = []) && (_.length=5) && _) track by $index">
 								<i class="ion-ios-star  ng-class:{'red-text': $index+1 <= comment.stars }"></i>
@@ -563,9 +563,9 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 				</div>
 			</div>
 			<div class="col-xs-3" >
-				<span class="row"> Is this review helpful to you?</span>
+				<span class="row" translate="product.detail.REVIEW_HELPFUL"></span>
 				<div class="row">
-					<a>YES</a><a>NO</a>
+					<a class="col-xs-6"><span translate="global.YES"></span></a><a class="col-xs-6 text-right"><span translate="global.NO"</span></a>
 				</div>
 			</div>
 		</div>
