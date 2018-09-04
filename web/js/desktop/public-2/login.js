@@ -1,7 +1,7 @@
 (function() {
     "use strict";
 
-    function controller(personDataService, $window, UtilService, localStorageUtilService, $cookies) {
+    function controller(personDataService, $window, UtilService, localStorageUtilService, $cookieStore) {
         var vm = this;
         vm.has_error = UtilService.has_error;
         vm.login = login;
@@ -15,7 +15,7 @@
 
             function onLoginSuccess(data) {
                 localStorageUtilService.setLocalStorage('access_token', data.access_token);
-                localStorageUtilService.setLocalStorage('sesion_id', data.short_id);
+                $cookieStore.put('sesion_id', data.short_id);
                 $window.location.href = data.return_url;
             }
 
