@@ -548,37 +548,50 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 				<img class="avatar-logued-user" ng-src="{{comment.person.url_avatar}}">
 			</div>
 			<div class="col-xs-8" >
-			<div class="row">
-						<span ng-bind="comment.person.name"></span>
-					 <span am-time-ago="comment.created_at.sec | amFromUnix"></span>
-					</div>
-				<span class="row">{{comment.text}}</span>
 				<div class="row">
-					<a href="" ng-if="!comment.showReply" ng-click="detailProductCtrl.showReplyComment(comment)"><span translate="product.detail.REPLY"></span></a>
-					<span class="text-left" ng-if="comment.stars>0" ng-cloak>
-						<span ng-repeat="_ in ((_ = []) && (_.length=5) && _) track by $index">
-								<i class="ion-ios-star  ng-class:{'red-text': $index+1 <= comment.stars }"></i>
+							<span ng-bind="comment.person.name"></span>
+						<span am-time-ago="comment.created_at.sec | amFromUnix"></span>
+						</div>
+					<span class="row">{{comment.text}}</span>
+					<div class="row">
+						<a href="" ng-if="!comment.showReply" ng-click="detailProductCtrl.showReplyComment(comment)"><span translate="product.detail.REPLY"></span></a>
+						<span class="text-left" ng-if="comment.stars>0" ng-cloak>
+							<span ng-repeat="_ in ((_ = []) && (_.length=5) && _) track by $index">
+									<i class="ion-ios-star  ng-class:{'red-text': $index+1 <= comment.stars }"></i>
+							</span>
 						</span>
-					</span>
+					</div>
+					<div class="col-xs-12" ng-repeat="reply in comment.replies " style="border-top: solid 1px #bfbfbf;">
+						<div class="col-xs-1">
+							<img class="avatar-logued-user" ng-src="{{reply.person.url_avatar}}">
+						</div>
+						<div class="col-xs-11">
+							<div class="row">
+								<span ng-bind="reply.person.name"></span>
+								<span am-time-ago="reply.created_at.sec | amFromUnix"></span>
+							</div>
+							<span class="row">{{reply.text}}</span>
+						</div>
+					</div>
+					</div>
+					<form class="col-xs-12 chat-send" ng-if="comment.showReply">
+						<div class="col-xs-9">
+							<input class="col-xs-12" type="text" ng-model="comment.newReply.text" translate-attr="{placeholder: 'product.detail.ADD_COMMENT'}" name="comment" required on-press-enter="detailProductCtrl.sendCommentReply(comment)">
+						</div>
+						<div class="col-xs-2">
+							<button class="col-xs-12 btn btn-small btn-red" ng-click="detailProductCtrl.sendCommentReply(comment)">>></button>
+						</div>
+					</form>
 				</div>
-				<form class="col-xs-12 chat-send" ng-if="comment.showReply">
-					<div class="col-xs-9">
-						<input class="col-xs-12" type="text" ng-model="comment.newReply.text" translate-attr="{placeholder: 'product.detail.ADD_COMMENT'}" name="comment" required on-press-enter="detailProductCtrl.sendCommentReply(comment)">
-					</div>
-					<div class="col-xs-2">
-						<button class="col-xs-12 btn btn-small btn-red" ng-click="detailProductCtrl.sendCommentReply(comment)">>></button>
-					</div>
-				</form>
 			</div>
 			<div class="col-xs-3" >
-				<span class="row" translate="product.detail.REVIEW_HELPFUL"></span>
-				<div class="row">
-					<a class="col-xs-6"><span translate="global.YES"></span></a><a class="col-xs-6 text-right"><span translate="global.NO"</span></a>
-				</div>
+					<span class="row" translate="product.detail.REVIEW_HELPFUL"></span>
+					<div class="row">
+						<a class="col-xs-6"><span translate="global.YES"></span></a><a class="col-xs-6 text-right"><span translate="global.NO"</span></a>
+					</div>
 			</div>
 		</div>
 	</div>
-
 	<div class="container">
 		<!-- Tab panes -->
 		<div class="tab-content product-description-content">

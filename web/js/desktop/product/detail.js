@@ -493,8 +493,9 @@
                 function onSendReplySuccess(data) {
                     comment.newReply = { text: '' };
                     comment.showReply = false;
+                    vm.product.comments = data.comments;
                 }
-                productDataService.sendProductComment({ text: vm.newComment.text }, { idProduct: vm.product.id, idComment: comment.id }, onSendReplySuccess, UtilService.onError);
+                productDataService.sendCommentReply({ text: comment.newReply.text }, { idProduct: vm.product.id, idComment: comment.id }, onSendReplySuccess, UtilService.onError);
             }
         }
     }
