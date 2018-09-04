@@ -21,6 +21,8 @@
         var select_order = ['size', 'color', 'select'];
         vm.stars_counter = { val1: 0, val2: 0, val3: 0, val4: 0, val5: 0 };
         vm.newComment = { text: '', stars: 0 };
+        vm.showReplyComment = showReplyComment;
+        vm.sendCommentReply = sendCommentReply;
 
 
         function init() {
@@ -472,6 +474,27 @@
                     vm.newComment = { text: '', stars: 0 };
                 }
                 productDataService.sendProductComment({ text: vm.newComment.text, stars: vm.newComment.stars }, { idProduct: vm.product.id }, onSendCommentSuccess, UtilService.onError);
+            }
+        }
+
+        function showReplyComment(comment) {
+            if (!UtilService.getConnectedUser()) {
+                openSignUpModal();
+            } else {
+                comment.newReply = { text: '' };
+                comment.showReply = true;
+            }
+        }
+
+        function sendCommentReply(comment) {
+            if (!UtilService.getConnectedUser()) {
+                openSignUpModal();
+            } else {
+                function onSendReplySuccess(data) {
+                    comment.newReply = { text: '' };
+                    comment.showReply = false;
+                }
+                productDataService.sendProductComment({ text: vm.newComment.text }, { idProduct: vm.product.id, idComment: comment.id }, onSendReplySuccess, UtilService.onError);
             }
         }
     }
