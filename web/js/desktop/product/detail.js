@@ -461,6 +461,10 @@
         }
 
         function sendComment() {
+            if (!UtilService.isConnectedUser()) {
+                openSignUpModal();
+            }
+
             function onSendCommentSuccess(data) {
                 vm.product.comments = data.comments;
                 if (vm.newComment.stars > 0) {
