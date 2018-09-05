@@ -40,6 +40,7 @@
 			"REVIEW_HELPFUL": "Te ha resultado útil ?",
 			"LOAD_MORE": "VER MÁS",
 			"COMMENTS_MORE": " comentarios más",
+			"ADD_COMMENT":"Añade tu comentario",
 			"MORE_BY": " Más de ",
 			"RETURNS": "Devoluciones: ",
 			"CREATED_BY": "Creado por",

@@ -493,12 +493,15 @@ $config = [
 
 				// Product - public
 				'GET api3/pub/v1/products/<id:[^/.]*?>' => 'api3/pub/v1/product/view',
+				'GET api3/pub/v1/products' => 'api3/pub/v1/product/index',
 				// Product - private
 				'GET api3/priv/v1/products/<id:[^/.]*?>' => 'api3/priv/v1/product/view',
 				'GET api3/priv/v1/products' => 'api3/priv/v1/product/index',
 				'POST api3/priv/v1/products' => 'api3/priv/v1/product/create',
 				'PATCH api3/priv/v1/products/<id:[^/.]*?>' => 'api3/priv/v1/product/update',
 				'PUT api3/priv/v1/products/<id:[^/.]*?>' => 'api3/priv/v1/product/update',
+				'POST api3/priv/v1/products/<id:[^/.]*?>/comments' => 'api3/priv/v1/product/comment',
+				'POST api3/priv/v1/products/<product_id:[^/.]*?>/comments/<comment_id:[^/.]*?>/replies' => 'api3/priv/v1/product/comment-reply',
 				'DELETE api3/priv/v1/products/<id:[^/.]*?>' => 'api3/priv/v1/product/delete',
 
 				// Loved - public

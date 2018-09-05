@@ -137,7 +137,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 						<!-- names -->
 						<div ng-if="personHeaderCtrl.isDeviser(personHeaderCtrl.person)">
 							<label for="brand_name"><span translate="global.user.BRAND_NAME"></span></label>
-							<input type="text" class="form-control ng-class:{'error-input': personHeaderCtrl.has_error(personHeaderCtrl.form, personHeaderCtrl.form.brand_name)}" ng-model="personHeaderCtrl.person.personal_info.brand_name" placeholder="{{personHeaderCtrl.person.name}}" name="brand_name" required>
+							<input type="text" class="form-control ng-class:{'error-input': personHeaderCtrl.has_error(personHeaderCtrl.form, personHeaderCtrl.form.brand_name)}" ng-model="personHeaderCtrl.person.personal_info.brand_name" ="{{personHeaderCtrl.person.name}}" name="brand_name" required>
 						</div>
 						<div ng-if="personHeaderCtrl.isInfluencer(personHeaderCtrl.person) || personHeaderCtrl.isClient(personHeaderCtrl.person)">
 							<div class="row">

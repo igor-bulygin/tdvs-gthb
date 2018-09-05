@@ -110,17 +110,6 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 										<?php } ?>
 									</div>
 								</div>
-								<?php /*
-								<div class="col-sm-12">
-									<ol class='carousel-indicators thumbs mCustomScrollbar'>
-										<?php foreach ($productImages as $key => $imageUrl) { ?>
-											<li class="col-sm-1" data-target='#carousel-custom' data-slide-to='<?= $key ?>' class='active'>
-												<img src='<?= Utils::url_scheme() ?><?= Utils::thumborize($imageUrl)->resize(410, 0) ?>' alt='' />
-											</li>
-											<?php } ?>
-									</ol>
-								</div>
-								*/?>
 							</div>
 						</div>
 					</div>
@@ -447,31 +436,29 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 			</div>
 		</div>
 	</div>
-</div>
-</div>
-</div>
+
 <!-- /PRODUCT CARD -->
 <!-- PRODUCT DESCRIPTION -->
 <div class="product-description">
 	<!-- Nav tabs -->
-		<div class="container">
-			<div class="work-profile-description-wrapper">
-				<div class="hidden-sm hidden-md hidden-lg">
-                                        <div class="avatar-wrapper-side">
-                                                <div class="avatar">
-                                                        <a href="<?= $person->getStoreLink() ?>">
-                                                                <span translate="product.detail.CREATED_BY"></span>
-                                                                <img class="avatar-default medium" src="<?= $person->getProfileImage(128, 128) ?>" data-pin-nopin="true">
-                                                        </a>
-                                                </div>
-                                        </div>
-                                </div>
-				<div class="title mb-40"><span class="title-product-name" translate="product.detail.DESCRIPTION"></span></div>
-				<div class="col-sm-9 pad-product">
-					<div class="description-parraf">
-						<?= $product->description ?>
-					</div>
-					<?php if (count($product->mediaMapping->descriptionPhotosInfo) > 0) { ?>
+	<div class="container">
+		<div class="work-profile-description-wrapper">
+			<div class="hidden-sm hidden-md hidden-lg">
+                    <div class="avatar-wrapper-side">
+                        <div class="avatar">
+                             <a href="<?= $person->getStoreLink() ?>">
+                                <span translate="product.detail.CREATED_BY"></span>
+                                <img class="avatar-default medium" src="<?= $person->getProfileImage(128, 128) ?>" data-pin-nopin="true">
+                            </a>
+                        </div>
+                    </div>
+            </div>
+			<div class="title mb-40"><span class="title-product-name" translate="product.detail.DESCRIPTION"></span></div>
+			<div class="col-sm-9 pad-product">
+				<div class="description-parraf">
+					<?= $product->description ?>
+				</div>
+				<?php if (count($product->mediaMapping->descriptionPhotosInfo) > 0) { ?>
 					<div class="tb-wrapper">
 						<div class="row">
 							<?php foreach ($product->mediaMapping->descriptionPhotosInfo as $descriptionPhoto) { ?>
@@ -518,6 +505,96 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 			</li>
 			<?php } ?>
 		</ul>
+	</div>
+	<!-- /PRODUCT COMMENTS -->
+	<div  class="container" ng-controller="detailProductCtrl as detailProductCtrl">
+		<div class="col-xs-12 text-center">
+			<span ng-repeat="_ in ((_ = []) && (_.length=5) && _) track by $index">
+				<i class="ion-ios-star  ng-class:{'red-text': $index+1 <= detailProductCtrl.productStars }"></i>
+			</span>
+			<span ng-bind="detailProductCtrl.productStars"></span>
+		</div>
+		<div class="col-xs-12 text-center" ng-if="detailProductCtrl.stars_counter.val5>0" ng-cloak>
+			5 <span translate="product.detail.STARS"></span> ({{detailProductCtrl.stars_counter.val5}})
+		</div>
+		<div class="col-xs-12 text-center" ng-if="detailProductCtrl.stars_counter.val4>0" ng-cloak>
+			4 <span translate="product.detail.STARS"></span> ({{detailProductCtrl.stars_counter.val4}})
+		</div>
+		<div class="col-xs-12 text-center" ng-if="detailProductCtrl.stars_counter.val3>0" ng-cloak>
+			3 <span translate="product.detail.STARS"></span> ({{detailProductCtrl.stars_counter.val3}})
+		</div>
+		<div class="col-xs-12 text-center" ng-if="detailProductCtrl.stars_counter.val2>0" ng-cloak>
+			2 <span translate="product.detail.STARS"></span> ({{detailProductCtrl.stars_counter.val2}})
+		</div>
+		<div class="col-xs-12 text-center" ng-if="detailProductCtrl.stars_counter.val1>0" ng-cloak>
+			1 <span translate="product.detail.STARS"></span> ({{detailProductCtrl.stars_counter.val1}})
+		</div>
+		<div class="col-xs-12 text-center">
+			<form class="col-xs-12 chat-send" >
+				<label for="comment" class="col-xs-1"><img class="avatar-logued-user" src="<?= $person->getProfileImage(50, 50) ?>"></label>
+				<div class="col-xs-9">
+					<input class="col-xs-12" type="text" ng-model="detailProductCtrl.newComment.text" translate-attr="{placeholder: 'product.detail.ADD_COMMENT'}" name="comment" required on-press-enter="detailProductCtrl.sendComment()">
+					<div class="col-xs-12 text-left">
+						<span ng-repeat="_ in ((_ = []) && (_.length=5) && _) track by $index">
+							<a ng-click="detailProductCtrl.newComment.stars=$index+1">
+								<i class="ion-ios-star  ng-class:{'red-text': $index+1 <= detailProductCtrl.newComment.stars }"></i>
+							</a>
+						</span>
+					</div>
+				</div>
+				<div class="col-xs-2">
+					<button class="col-xs-12 btn btn-small btn-red" ng-click="detailProductCtrl.sendComment()">>></button>
+				</div>
+			</form>
+		</div>
+		<div class="col-xs-12" ng-repeat="comment in detailProductCtrl.product.comments " style="border-bottom: solid 1px #bfbfbf;">
+			<div class="col-xs-1">
+				<img class="avatar-logued-user" ng-src="{{comment.person.url_avatar}}">
+			</div>
+			<div class="col-xs-8" >
+				<div class="row">
+							<span ng-bind="comment.person.name"></span>
+						<span am-time-ago="comment.created_at.sec | amFromUnix"></span>
+						</div>
+					<span class="row">{{comment.text}}</span>
+					<div class="row">
+						<a href="" ng-if="!comment.showReply" ng-click="detailProductCtrl.showReplyComment(comment)"><span translate="product.detail.REPLY"></span></a>
+						<span class="text-left" ng-if="comment.stars>0" ng-cloak>
+							<span ng-repeat="_ in ((_ = []) && (_.length=5) && _) track by $index">
+									<i class="ion-ios-star  ng-class:{'red-text': $index+1 <= comment.stars }"></i>
+							</span>
+						</span>
+					</div>
+					<div class="col-xs-12" ng-repeat="reply in comment.replies " style="border-top: solid 1px #bfbfbf;">
+						<div class="col-xs-1">
+							<img class="avatar-logued-user" ng-src="{{reply.person.url_avatar}}">
+						</div>
+						<div class="col-xs-11">
+							<div class="row">
+								<span ng-bind="reply.person.name"></span>
+								<span am-time-ago="reply.created_at.sec | amFromUnix"></span>
+							</div>
+							<span class="row">{{reply.text}}</span>
+						</div>
+					</div>
+					</div>
+					<form class="col-xs-12 chat-send" ng-if="comment.showReply">
+						<div class="col-xs-9">
+							<input class="col-xs-12" type="text" ng-model="comment.newReply.text" translate-attr="{placeholder: 'product.detail.ADD_COMMENT'}" name="comment" required on-press-enter="detailProductCtrl.sendCommentReply(comment)">
+						</div>
+						<div class="col-xs-2">
+							<button class="col-xs-12 btn btn-small btn-red" ng-click="detailProductCtrl.sendCommentReply(comment)">>></button>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="col-xs-3" >
+					<span class="row" translate="product.detail.REVIEW_HELPFUL"></span>
+					<div class="row">
+						<a class="col-xs-6"><span translate="global.YES"></span></a><a class="col-xs-6 text-right"><span translate="global.NO"</span></a>
+					</div>
+			</div>
+		</div>
 	</div>
 	<div class="container">
 		<!-- Tab panes -->
@@ -820,7 +897,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 			</div>
 		</div>
 	</div>
-	<!-- /PRODUCT DESCRIPTION -->
+	
 
 	<div class="modal full-modal fade" id="carouselModal">
 		<div class="modal-dialog modal-lg">
@@ -845,4 +922,5 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 			</div>
 		</div>
 	</div>
+</div>
 </div>
