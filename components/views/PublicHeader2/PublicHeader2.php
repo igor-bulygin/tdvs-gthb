@@ -183,7 +183,9 @@ app\components\assets\PublicHeader2Asset::register($this);
 							<a href="<?=Url::to(['/discover/boxes'])?>"><img src="/imgs/box-red.svg" /></a>
 							<a href="<?=Url::to(['/discover/devisers'])?>"><img src="/imgs/discover-red.svg" /></a>
 							<a href="<?=Url::to(['/discover/influencers'])?>"><img src="/imgs/estrella-red.svg" /></a>
-							<a href="<?=Url::to('/messages')?>" class="ml-10"><img src="/imgs/chat-red.svg" /></a>
+						</div>
+						<div id="mobIcons_right">
+							<a href="<?=Url::to('/messages')?>"><img src="/imgs/chat-red.svg" /></a>
 							<?php if (Yii::$app->user->isGuest) { ?>
 							<a href="<?=Url::to('/login')?>"><img src="/imgs/login-red.svg" /></a>
 							<?php } else {
