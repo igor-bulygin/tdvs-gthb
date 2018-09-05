@@ -156,7 +156,10 @@
 			"SIZECHART_COLUMNNAME_MANDATORY": "Column name in {{languageList}} is mandatory.",
 			"NEW_COLUMN":"New column",
 			"SZ_COLUMN_NAME":"Column name",
-			"FIELD_LANGS_MANDATORY": "This field is mandatory in {{languageList}}."
+			"FIELD_LANGS_MANDATORY": "This field is mandatory in {{languageList}}.",
+			"MADE_TO_ORDER": "made-to-order",
+			"MANUFACTURE_TIME": "Manufacturing time:",
+			"MANUFACTURE_DAYS_PUBLIC": "days"
 		}
 	}
 }

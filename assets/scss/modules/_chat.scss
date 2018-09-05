@@ -55,6 +55,7 @@
     	font-size: 16px;
     	font-weight: bold;
     	text-align: left;
+    	text-transform: capitalize !important;
     }
     .chat-text{
     	font-size: 15px;
@@ -164,13 +165,25 @@
 		text-transform: lowercase;
 		text-align: center;
 		letter-spacing: 0.5px;
+		@media(max-width: 768px){
+			padding: 0 !important;
+			border: none;
+			text-align: left;
+		}
+	}
+	#chat-back {
+		display: grid;
 	}
 	.chat-message-chat{ /*el div que contiene a todos los mensajes*/
 		height: calc(100% - 165.60px);
+		min-height: 240px;
 		overflow-y: scroll;
 		@media(max-width: 768px){
-			height: auto;
+			height: 240px; //auto;
 			max-height: 300px;
+		}
+		.chat-text{
+			padding: 1em 0.5em 0.5em 0;
 		}
 	}
 	.activeChat{

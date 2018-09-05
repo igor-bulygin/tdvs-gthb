@@ -96,7 +96,18 @@
                     height: 20px;
                 }
             }
-            div{
+            /*div{
+                float: right;
+            }*/
+            #mobIcons_center{
+                margin: auto;
+                width: 50%;
+                @media(max-width:575){
+                    width: 90%;
+                }
+            }
+            #mobIcons_right{
+                width: auto;
                 float: right;
             }
         }

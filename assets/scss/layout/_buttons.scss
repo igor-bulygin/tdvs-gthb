@@ -1,7 +1,7 @@
 // ==========================================================================
 // Buttons
 // ==========================================================================
-.btn {
+.btn {  // Eliminar este estilo de todos los botones LOCALIZAR
     //@extend %btn;
 }
 a{
@@ -225,7 +225,7 @@ a{
     min-width: 200px;
     @include border-radius(8px,8px,8px,8px);
 }
-.btn-auto{
+.btn-auto{  //revisar el padding porque tenemos un btn-small con right y left de 1em que son 16px - LOCALIZAR
     padding-right: 20px !important;
     padding-left: 20px !important;
     height: auto;
@@ -738,11 +738,11 @@ footer{
         color: $red;
     }
 }
-#btn_create_box, #btn_create_box_popup, .btn-minpad {
+#btn_create_box, #btn_create_box_popup, .btn-minpad {   //tenemos 2 estilos con esta característica btn-auto y btn-small hay que revisar LOCALIZAR
     padding-left: 20px !important;
     padding-right: 20px !important;
 }
-#newProductHeader{
+#newProductHeader{  //Hay que eliminarlo después de añadir el estilo btn-small LOCALIZAR
     button{
         padding: 8px 20px !important;
     }
@@ -763,12 +763,14 @@ footer{
         }
     }
 }
-#btn-faq-add-question button {
-    padding: 0 20px !important;
-}
+#btn-faq-add-question{  //tenemos un estilo para esto btn-small y btn-auto revisar si se puede poner todo o a 16 o a 20 y unificar LOCALIZAR
+    button {
+            padding: 0 20px !important;
+        }
+    }
 .checkout-sidebar {
     button {
-        padding: 0 20px !important;
+        padding: 0 20px !important; //tenemos un estilo para esto btn-small y btn-auto revisar si se puede poner todo o a 16 o a 20 y unificar LOCALIZAR
     }
     .btn-red {
         margin-top: 30px !important;

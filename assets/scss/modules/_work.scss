@@ -82,6 +82,14 @@
 					background-color: transparent!important;
 				}
 			}
+			.pad-about{
+				span {
+					font-size: 1.15em;
+				}
+				label {
+				margin: 0;
+				}
+			}
 		}
 	}
 }
@@ -230,6 +238,8 @@
 		border: 1px solid $white;
 		@include border-radius(90px,90px,90px,90px);
 		display: none;
+		background: rgba($black,.25);
+		box-shadow: 0 0 0 6px rgba($white,0.25);
 	}
 	.delete{
 		cursor: pointer;
@@ -388,7 +398,7 @@ tags-input .tags .tag-item {
     float: left;
     height: 26px;
     line-height: 25px;
-    border: 1px solid #cccccc!important;
+    border: 1px solid $light_grey !important; //#cccccc
     @include border-radius(6px,6px,6px,6px);
     background: $white!important;
 	color: $black!important;
@@ -427,22 +437,26 @@ tags-input .tags .tag-item {
     right: 40px;
 }
 .manufacturing-question{
-	font-family: $font-family--bold;
+	font-family: $font-family--regular;//$font-family--bold;
+	font-size: 13px;
+    font-weight: bold;
 }
 .manufacturing-answer{
-	font-family: $font-family--serif;
+	font-family: $font-family--regular;//$font-family--serif;
 	font-size: 12px;
 }
 .little-label-number{
-	font-family: $font-family--primary!important;
+	font-family: $font-family--regular;//$font-family--primary!important;
 	text-transform: none!important;
 	margin: 5px 0 0 0;
+	font-size: 0.9em;
+	line-height: 2em;
 }
 .rounded-number-input{
 	@include border-radius(90px,90px,90px,90px);
 }
 .manufacturing-textarea{
-	padding-top: 60px;
+	//padding-top: 60px;
 	@include border-radius(20px,20px,20px,20px);
 }
 .manufacturing-lang{
@@ -455,7 +469,7 @@ tags-input .tags .tag-item {
 	@extend %link-red;
 }
 .date-variations{
-	border: 1px solid #cccccc;
+	border: 1px solid $light_grey; //#cccccc
 	text-transform: uppercase;
 	display: inline-block;
     padding: 5px 10px;
@@ -469,7 +483,7 @@ tags-input .tags .tag-item {
 	}
 }
 .red-plus{
-	border: 1px solid #cccccc;
+	border: 1px solid $light_grey; //#cccccc
 	@include border-radius(90px,90px,90px,90px);
 	color: $red;
 	padding: 6px 10px;
@@ -567,7 +581,7 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 .calendar-icon{
-	border: 1px solid transparent;
+	border: 1px solid $light_grey;
     @include border-radius(90px,90px,90px,90px);
     width: 34px;
     height: 34px;

@@ -399,7 +399,11 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 										<p><span translate="product.detail.MANUFACTURING_INFO"></span>: <span class="bold" ng-bind="detailProductCtrl.product.bespoke.value[detailProductCtrl.selected_language]"></span></p>
 									</div>									
 									<div class="returns-row" ng-if="detailProductCtrl.product.madetoorder && detailProductCtrl.product.madetoorder.value && detailProductCtrl.product.madetoorder.type==1">
-										<p><span class="bold" ng-bind="detailProductCtrl.product.madetoorder.value"></span> <span translate="product.variations.MANUFATURE_DAYS"></span></p>
+										<p>
+											<span class="btn-black btn-small" translate="product.variations.MADE_TO_ORDER"></span>
+											<span class="ml-10" translate="product.variations.MANUFACTURE_TIME"></span>
+											<strong><span ng-bind="detailProductCtrl.product.madetoorder.value"></span> <span translate="product.variations.MANUFACTURE_DAYS_PUBLIC"></span></strong>
+										</p>
 									</div>
 									<div class="returns-row" ng-if="detailProductCtrl.product.preorder && detailProductCtrl.product.preorder.type==1">
 										<p translate="product.detail.IS_PREORDER"></p>
