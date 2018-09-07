@@ -279,7 +279,7 @@ class AdminController extends CController {
 
 				$deviser = $pack->getDeviser();
 				$deviserName = $deviser->getName();
-				$deviserLink = '<a href="'.$deviser->getMainLink().'" target="_blank">'.$deviserName.'</a>';
+				$deviserLink = '<a href="'.$deviser->getSettingsLink('open-orders').'" target="_blank">'.$deviserName.'</a>';
 				$devisers [] = $deviserName;
 
 				$products = $pack->getProducts();

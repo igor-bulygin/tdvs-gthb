@@ -858,7 +858,7 @@ $billingAddress = $order->getBillingAddress();
 								</tr>
 								</tbody>
 							</table>
-							<? if (!empty($order->first_discount) && $order->first_discount) { ?>
+							<?php if (!empty($order->first_discount) && $order->first_discount) { ?>
 								<table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock" style="min-width:100%;">
 									<tbody class="mcnTextBlockOuter">
 									<tr>
@@ -892,7 +892,7 @@ $billingAddress = $order->getBillingAddress();
 									</tr>
 									</tbody>
 								</table>
-							<? } ?>
+							<?php } ?>
 						</td>
 					</tr>
 					<tr>

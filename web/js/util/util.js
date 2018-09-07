@@ -166,8 +166,13 @@
             return category.path;
         }
 
-        function stripHTMLTags(value) {
-            return $($.parseHTML((value))).text();
+        function stripHTMLTags(value, destroyParagraph = false) {
+            if (!destroyParagraph) {
+                value = value.replace(/<(?!\s*\/?\s*p\b)[^>]*>/gi, '');
+                return value.replace('&nbsp', '');
+            } else {
+                return $($.parseHTML((value))).text();
+            }
         }
 
         function onError(err) {

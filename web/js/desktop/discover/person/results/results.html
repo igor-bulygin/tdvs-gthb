@@ -16,11 +16,11 @@
 								<span class="location align-left" ng-bind="(person.city | capitalize)"></span>
 							</a>
 						</div>
-						<div class="col-xs-6">
+						<div class="col-xs-6" ng-if="!discoverResultsCtrl.isConnectedUser(person.id)">
 							<button ng-if="!person.is_followed" class="btn btn-follow full-size-btn btn-icon" ng-click="discoverResultsCtrl.setFollow(person)">
 								<i class="hidden ion-ios-star"></i><span translate="discover.FOLLOW"></span>
 							</button>
-							<button ng-if="person.is_followed" class="btn btn-follow full-size-btn btn-red" ng-click="discoverResultsCtrl.setFollow(person)">
+							<button ng-if="person.is_followed" class="btn btn-follow full-size-btn btn-black" ng-click="discoverResultsCtrl.setFollow(person)">
 								<i class="hidden ion-ios-star"></i><span translate="discover.UNFOLLOW"></span>
 							</button>
 						</div>

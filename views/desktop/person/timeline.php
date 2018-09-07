@@ -21,16 +21,16 @@ Yii::$app->opengraph->title = $this->title;
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12 col-md-3"><nav class="menu-store"><ul>
-				<li>
+				<li ng-class="{'active': !timelineCtrl.selectedPersonType}">
 					<a style="cursor:pointer;" ng-class="{'active': !timelineCtrl.selectedPersonType}" ng-click="timelineCtrl.resetFilter()" translate="person.ALL"></a>
 				</li>
-				<li ng-repeat="personType in timelineCtrl.personTypes">
-					<a style="cursor:pointer;" translate="{{personType.name}}" ng-class="{'active': timelineCtrl.selectedPersonType === personType.value }" ng-click="timelineCtrl.selectedPersonType = personType.value"></a>
+				<li ng-repeat="personType in timelineCtrl.personTypes" ng-class="{'active': timelineCtrl.selectedPersonType === personType.value }">
+					<a style="cursor:pointer;" ng-class="{'active': timelineCtrl.selectedPersonType === personType.value }" translate="{{personType.name}}" ng-click="timelineCtrl.selectedPersonType = personType.value"></a>
 				</li>
 			</ul></nav></div>
 			<div class="col-xs-12 col-md-8 col-lg-7">
 				<div class="timeline-wrapper">
-					<div ng-if="false && (timelineCtrl.timeline | filter:{ person: {person_type:timelineCtrl.selectedPersonType}}).length < 1" ng-cloak>
+					<div class="col-xs-10 col-xs-offset-1 mt-40 mb-40" ng-if="(timelineCtrl.timeline | filter:{ person: {person_type:timelineCtrl.selectedPersonType}}).length < 1" ng-cloak>
 						<span translate="person.timeline.EMPTY_TIMELINE"></span>
 					</div>
 					<div ng-if="(timelineCtrl.timeline | filter:{ person: {person_type:timelineCtrl.selectedPersonType}}).length > 0" infinite-scroll="timelineCtrl.addMoreItems()" infinite-scroll-distance="timelineCtrl.show_items-1">
@@ -53,10 +53,23 @@ Yii::$app->opengraph->title = $this->title;
 									</div>
 									<div class="row">
 										<span class="timeline-title"><a ng-href="{{ timeline.link }}"><span ng-bind-html="timeline.title"></span></a></span>
-									</div>
-									<div class="row">
-										<span class="timeline-description" ng-bind-html="timeline.description"></span>
-									</div>
+									</div>									
+									<uib-accordion>										
+										<div uib-accordion-group is-open="group.open">
+											<uib-accordion-heading >
+												<div ng-if="!group.open">
+													<div class="row" >
+														<span class="timeline-description" ng-bind-html="timeline.description" style="text-transform: none !important;font-weight: normal !important;"></span>
+													</div>
+													<span class="col-xs-12 text-center red-text" style="text-transform: none !important;font-weight: normal !important;margin-top:10px;" translate="todevise.SEE_MORE"></span>
+												</div>
+												<div ng-if="group.open">
+													<span class="col-xs-12 text-center red-text" style="text-transform: none !important;font-weight: normal !important;margin-top:25px;margin-bottom:10px;" translate="todevise.SEE_LESS"></span>
+												</div>
+											</uib-accordion-heading>
+											<span ng-bind-html="timeline.description"></span>
+										</div>										
+									</uib-accordion>
 								</div>
 							</div>
 						</div>

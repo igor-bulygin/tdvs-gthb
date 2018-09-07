@@ -592,6 +592,11 @@ class Utils
 		}
 	}
 
+	public static function getDefaultImage($width, $height)
+	{
+		return Utils::url_scheme() . Utils::thumborize("imgs/img-default.jpg")->fitIn($width, $height)->addFilter('fill', 'e9e9e9');
+	}
+
 	/**
 	 * @param $img_path
 	 *

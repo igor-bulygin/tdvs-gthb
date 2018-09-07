@@ -520,6 +520,14 @@ class Person extends CActiveRecord implements IdentityInterface
 	}
 
 	/**
+	 * @return Post[]
+	 */
+	public function getPosts()
+	{
+		return Post::findSerialized(["person_id" => $this->id]);
+	}
+
+	/**
 	 * @return Loved[]
 	 */
 	public function getLoveds()
@@ -1641,12 +1649,26 @@ class Person extends CActiveRecord implements IdentityInterface
 
 	public function getMainLink()
 	{
-		if ($this->isDeviser()) {
+		if ($this->showStore()) {
 			return $this->getStoreLink();
-		} elseif ($this->isInfluencer()) {
-			return $this->getAboutLink();
-		} elseif ($this->isClient()) {
+		} elseif ($this->showSocial()) {
+			return $this->getSocialLink();
+		} elseif ($this->showLoved()) {
 			return $this->getLovedLink();
+		} elseif ($this->showBoxes()) {
+			return $this->getBoxesLink();
+		} elseif ($this->showStories()) {
+			return $this->getStoriesLink();
+		} elseif ($this->showAbout()) {
+			return $this->getAboutLink();
+		} elseif ($this->showPress()) {
+			return $this->getPressLink();
+		} elseif ($this->showVideos()) {
+			return $this->getVideosLink();
+		} elseif ($this->showFaq()) {
+			return $this->getFaqLink();
+		} else {
+			return $this->getFollowLink();
 		}
 
 		return Yii::$app->getHomeUrl();
@@ -2457,7 +2479,10 @@ class Person extends CActiveRecord implements IdentityInterface
 
 	public function showSocial()
 	{
-		return $this->isInfluencer() || $this->isDeviser();
+		$posts = $this->getPosts();
+		return
+			($this->isInfluencer() || $this->isDeviser()) || $this->isClient() &&
+			($this->isPersonEditable() || !empty($posts));
 	}
 
 	public function showLoved()

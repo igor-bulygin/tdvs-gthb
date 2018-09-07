@@ -299,7 +299,7 @@ class Banner extends CActiveRecord
 		return $imageLink;
 	}
 
-	public function getImageLinkTranslated()
+	public function getImageLinkTranslated($thumborize = false)
 	{
 		if (is_array($this->image)) {
 			$image = Utils::l($this->image);
@@ -307,6 +307,12 @@ class Banner extends CActiveRecord
 			$image = $this->image;
 		}
 
-		return Yii::getAlias("@banner_url") . "/" . $image;
+		$url = Yii::getAlias("@banner_url") . "/" . $image;
+
+		if ($thumborize) {
+			$url = Utils::url_scheme() . Utils::thumborize($url)->fitIn(0, 0);
+		}
+
+		return $url;
 	}
 }

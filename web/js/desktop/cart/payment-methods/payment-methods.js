@@ -30,6 +30,7 @@
 
 			function onReceiveTokenError(err) {
 				//ToDo: Manage errors
+				setSaving(false);
 				vm.errors = true;
 				console.log(err);
 			}

@@ -305,9 +305,6 @@ class CartController extends AppPublicController
 
 		try {
 
-			$order->setState(Order::ORDER_STATE_PAID);
-			$order->save();
-
 			Stripe::setApiKey(Yii::$app->params['stripe_secret_key']);
 
 			$person = $order->getPerson();
@@ -592,6 +589,9 @@ class CartController extends AppPublicController
 
       } // End $packs
 
+			$order->setState(Order::ORDER_STATE_PAID);
+			$order->save();
+
 			$order->setPacks($packs);
 
 			// Save charges responses and payment_info in the order
@@ -641,8 +641,8 @@ class CartController extends AppPublicController
 			$message = sprintf("Error in receive-token: " . $e->getMessage());
 			Yii::info($message, 'Stripe');
 
-			$order->setState(Order::ORDER_STATE_FAILED);
-			$order->save();
+//			$order->setState(Order::ORDER_STATE_FAILED);
+//			$order->save();
 
 
 			throw $e;

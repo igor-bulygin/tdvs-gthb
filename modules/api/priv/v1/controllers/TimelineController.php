@@ -14,7 +14,7 @@ class TimelineController extends AppPrivateController
 		Timeline::setSerializeScenario(Timeline::SERIALIZE_SCENARIO_PUBLIC);
 
 		// set pagination values
-		$limit = Yii::$app->request->get('limit', 150);
+		$limit = Yii::$app->request->get('limit', 20);
 		$limit = ($limit < 1) ? 1 : $limit;
 		$page = Yii::$app->request->get('page', 1);
 		$page = ($page < 1) ? 1 : $page;
@@ -29,9 +29,9 @@ class TimelineController extends AppPrivateController
 				'person_id' => $connected->follow,
 				"limit" => $limit,
 				"offset" => $offset,
-				"order_by" => [
-					'short_id' => SORT_ASC,
-				],
+//				"order_by" => [
+//					'short_id' => SORT_ASC,
+//				],
 			]);
 		}
 

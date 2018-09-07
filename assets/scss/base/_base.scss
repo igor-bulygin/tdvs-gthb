@@ -88,13 +88,21 @@ a, a:hover, a:focus{
     margin: 0 !important;
   } 
 }
-
 .no-margin-sm{
   @media (max-width: 991px){
     margin: 0 !important;
   } 
 }
-
+.no-pointer{
+  cursor: default !important;
+}
+.hashtag{
+  color: $red;
+  font-weight: bold;
+}
+.no-shadow{
+  box-shadow: none !important;
+}
 //Include Fonts
 //@include font-face('Roboto Condensed', Roboto-Condensed-Regular);
 @include font-face('Univers Thin Ultra Condensed', UniversLT-Thin-Ultracondensed);

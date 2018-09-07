@@ -9,11 +9,17 @@ IndexStoryAsset::register($this);
 
 
 /** @var Person $person */
-/** @var array $photos */
-$this->title = Yii::t('app/public',
-	'SOCIAL_FEED_BY_PERSON_NAME',
-	['person_name' => $person->getName()]
-);
+if ($type == 'follow') {
+	$this->title = Yii::t('app/public',
+		'FOLLOW_BY_PERSON_NAME',
+		['person_name' => $person->getName()]
+	);
+} else {
+	$this->title = Yii::t('app/public',
+		'FOLLOWERS_BY_PERSON_NAME',
+		['person_name' => $person->getName()]
+	);
+}
 Yii::$app->opengraph->title = $this->title;
 
 $this->params['person'] = $person;

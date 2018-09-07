@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\components\ProductsGrid;
 use app\helpers\CController;
 use app\helpers\ModelUtils;
 use app\helpers\Utils;
@@ -83,7 +84,15 @@ class PublicController extends CController
 
 			$this->layout = '/desktop/public-2.php';
 
-			return $this->render("error", [
+			switch ($exception->statusCode) {
+				case 403:
+					$view = 'unauthorized';
+					break;
+
+				default:
+					$view = 'error';
+			}
+			return $this->render($view, [
 				'name' => '',
 				'message' => $exception->getMessage(),
 			]);
@@ -163,9 +172,9 @@ class PublicController extends CController
 
 		// Works
 		$works = Product::getRandomWorks(48, $categoryShortIds);
-		$htmlWorks = $this->renderPartial('more-works', [
-			'total' => 48,
-			'works' => $works,
+		$htmlWorks = ProductsGrid::widget([
+			'products' => $works,
+			'css_class' => 'col-xs-6 col-sm-4 col-md-2',
 		]);
 
 		if ($devisers) {
@@ -230,10 +239,9 @@ class PublicController extends CController
 
 		$works = Product::getRandomWorks(48, $categoryShortIds);
 
-		$this->layout = '/desktop/empty-layout.php';
-
-		$html = $this->renderPartial("more-works", [
-			'works' => $works,
+		$html = ProductsGrid::widget([
+			'products' => $works,
+			'css_class' => 'col-xs-6 col-sm-4 col-md-2',
 		]);
 
 		return json_encode([

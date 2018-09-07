@@ -761,7 +761,7 @@ class Product extends CActiveRecord {
 	public function getMainImage()
 	{
 		$image = "";
-		$defaultImage = "product_placeholder.png";
+		$defaultImage = "img-default.jpg";
 
 		if (isset($this->media) && !empty($this->media["photos"])) {
 			// Try to find the "main_product_photo"
