@@ -92,12 +92,47 @@
 		</div>
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
 			<!--<button class="btn btn-default btn-green" ng-click="paymentMethodsCtrl.stripejs()">Pay with Stripe.js</button><br />-->
-			<button class="btn btn-default btn-red mt-20" ng-click="paymentMethodsCtrl.checkout(paymentMethodsCtrl.billingForm)"><span translate="cart.payment_methods.PAY_CARD"></span></button><br />
-			<p class="text-center mt-20 grey-text" translate="cart.payment_methods.PAY_TEXT_1"></p>
-			<div class="text-center purple-text" ng-if="paymentMethodsCtrl.errors">
-				<p translate="cart.payment_methods.PAY_ERROR_1"></p>
-				<p translate="cart.payment_methods.PAY_ERROR_2"></p>
-			</div>
+
+
+      <div ng-class="{'col-xs-6': paymentMethodsCtrl.person.type[0] == 1}">
+  			<button class="btn btn-default btn-red mt-20" ng-click="paymentMethodsCtrl.checkout(paymentMethodsCtrl.billingForm)"><span translate="cart.payment_methods.PAY_CARD"></span></button><br />
+  			<p class="text-center mt-20 grey-text" translate="cart.payment_methods.PAY_TEXT_1"></p>
+  			<div class="text-center purple-text" ng-if="paymentMethodsCtrl.errors">
+  				<p translate="cart.payment_methods.PAY_ERROR_1"></p>
+  				<p translate="cart.payment_methods.PAY_ERROR_2"></p>
+  			</div>
+      </div>
+
+
+      <div class="col-xs-12 col-md-6" ng-if="paymentMethodsCtrl.person.type[0] == 1 && paymentMethodsCtrl.person.available_earnings >= paymentMethodsCtrl.cart.total">
+        <button class="btn btn-default btn-red mt-20" ng-click="paymentMethodsCtrl.payWithCredit(paymentMethodsCtrl.billingForm)"><span translate="cart.payment_methods.PAY_WITH_TODEVISE_CREDIT"></span></button><br/><br/>
+        <br/>
+        <span class="text-center mt-20 grey-text" translate="cart.payment_methods.YOUR_AVAILABLE_CREDIT"></span>
+        <span ng-if="angular.isDefined(paymentMethodsCtrl.person.available_earnings)"> {{paymentMethodsCtrl.person.available_earnings}}€ </span>
+        <span ng-if="!angular.isDefined(paymentMethodsCtrl.person.available_earnings)"> 0€ </span>
+        <br/>
+        <p class="text-center grey-text" translate="cart.payment_methods.PAY_TODEVISE_TEXT_1"></p>
+  			<!-- <div class="text-center purple-text" ng-if="paymentMethodsCtrl.errors">
+  				<p translate="cart.payment_methods.PAY_ERROR_1"></p>
+  				<p translate="cart.payment_methods.PAY_ERROR_2"></p>
+  			</div> -->
+      </div>
+
+      <div class="col-xs-12 col-md-6" ng-if="paymentMethodsCtrl.person.type[0] == 1 && paymentMethodsCtrl.person.available_earnings < paymentMethodsCtrl.cart.total">
+        <button class="btn btn-default btn-red mt-20" disabled="" ng-click=""><span translate="cart.payment_methods.PAY_WITH_TODEVISE_CREDIT"></span></button><br />
+        <br/>
+  			<span class="text-center mt-20 grey-text" translate="cart.payment_methods.YOUR_AVAILABLE_CREDIT"></span>
+        <span ng-if="angular.isDefined(paymentMethodsCtrl.person.available_earnings)"> {{paymentMethodsCtrl.person.available_earnings}}€ </span>
+        <span ng-if="!angular.isDefined(paymentMethodsCtrl.person.available_earnings)"> 0€ </span>
+        <br/>
+        <p class="text-center grey-text" translate="cart.payment_methods.PAY_TODEVISE_TEXT_1"></p>
+  			<!-- <div class="text-center purple-text" ng-if="paymentMethodsCtrl.errors">
+  				<p translate="cart.payment_methods.PAY_ERROR_1"></p>
+  				<p translate="cart.payment_methods.PAY_ERROR_2"></p>
+  			</div> -->
+      </div>
+
+
 			<!--<a class="btn btn-default btn-green" ng-href="/stripe/checkout-test/{{paymentMethodsCtrl.cart.id}}">Pay with Stripe (new window)</a><br />-->
 		</div>
 	</div>

@@ -9,7 +9,8 @@
 		vm.cvvPattern = new RegExp("[0-9]{3}", "g");
 		var datetime = $locale.DATETIME_FORMATS;
 		vm.sameBilling = true;
-
+    vm.person = person;
+    vm.payWithCredit = payWithCredit;
 
 		init();
 
@@ -107,6 +108,54 @@
 		function editPersonalInfo() {
 			vm.state.state = 2;
 		}
+
+    function payWithCredit(form) {
+
+      function onReceiveTokenSuccessWithCredit(data) {
+        // localStorageUtilService.removeLocalStorage('cart_id');
+        // $window.location.href = currentHost() + '/order/success/' + vm.cart.id;
+				// setSaving(true);
+      }
+
+      function onReceiveTokenErrorWithCredit(err) {
+        // TOdo manage errors
+        vm.errors = true;
+        console.log(err);
+      }
+
+      function onSaveCartSuccessWithCredit(data) {
+
+        cartDataService.getCartToken(
+          {
+            token: vm.cart.id + "?*s" // TODO: secure token
+          },
+          {
+            cartId: vm.cart.id
+          },
+          onReceiveTokenSuccessWithCredit, onReceiveTokenErrorWithCredit
+        );
+			}
+      
+
+      if(vm.person.available_earnings >= vm.cart.total) {
+
+        if(form)
+  				form.$submitted = true;
+  			if(vm.sameBilling)
+  				vm.cart.billing_address = Object.assign({}, vm.cart.shipping_address);
+  			if((form && form.$valid) || !form) {
+          vm.cart.pay_with_credit = 1;
+  				//POST TO API
+  				cartDataService.updateCart(vm.cart, {
+  					id: vm.cart.id
+  				}, onSaveCartSuccessWithCredit, UtilService.onError);
+  				//
+  			}
+
+      }
+
+    }
+
 	}
 
 	var component = {
