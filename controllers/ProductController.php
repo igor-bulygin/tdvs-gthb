@@ -153,6 +153,67 @@ class ProductController extends CController
 			'product_id' => $product->short_id,
 		]);
 
+
+    // COMMISSION FOR DISCOVERY
+    //-------------------------
+
+    // Check if user is logged in
+    if(isset(Yii::$app->user->identity)) {
+
+      $referrer_url = split('/', Yii::$app->request->referrer);  // Getting referrer URL
+
+      // Checking for devisers, influencers or clients
+      $controller_name = isset($referrer_url[3]) ? $referrer_url[3] : '';
+
+      switch ($controller_name) {
+        case 'deviser':
+          $identifier = isset($referrer_url[5]) ? $referrer_url[5] : '';
+          break;
+        case 'influencer':
+          $identifier = isset($referrer_url[5]) ? $referrer_url[5] : '';
+          break;
+        case 'client':
+          $identifier = isset($referrer_url[5]) ? $referrer_url[5] : '';
+          break;
+        default: // From any other page
+          $identifier = "0";
+          break;
+      }
+
+      $currentUser = Yii::$app->user->identity;
+
+      // We check if the customer has already seen the product
+      if(!isset($currentUser->product_discovery_from_user)) { // No product viewed
+        Yii::$app->mongodb->getCollection('person')->update(
+          [
+            'short_id' => $currentUser->short_id
+          ],
+          [
+            'product_discovery_from_user' => [
+              "PRODUCT".$product_id => $identifier
+            ],
+          ]
+        );
+      }
+      else if(!array_key_exists("PRODUCT".$product_id, $currentUser->product_discovery_from_user)) { // Product not viewed
+        $discoveries = $currentUser->product_discovery_from_user;
+        $discoveries["PRODUCT".$product_id] = $identifier; // Adding discovery
+
+        Yii::$app->mongodb->getCollection('person')->update(
+          [
+            'short_id' => $currentUser->short_id
+          ],
+          [
+            'product_discovery_from_user' => $discoveries,
+          ]
+        );
+      }
+    }
+    else { // Not logged in
+    }
+    //------------------------------------------------
+
+
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("detail", [
 			'product' => $product,

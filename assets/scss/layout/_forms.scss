@@ -263,3 +263,262 @@ input:-webkit-autofill:focus {
 textarea{
 	resize: none;
 }
+
+
+.discount-cart-wrapper {
+  padding-top: 20px;
+  padding-left: 5px;
+  margin-bottom: 30px;
+
+  .shopping-cart-title {
+    margin-bottom: 20px;
+  }
+
+}
+
+.discount-cart-wrapper .discount-cart-info, .discount-cart-wrapper .discount-cart-info-no-available-earnings {
+  padding-left: 10px;
+}
+
+.discount-cart-info {
+
+  .user-input-container {
+    margin: 20px 0 30px;
+  }
+
+  .input-group-btn {
+    width: 50px;
+  }
+
+  input.user-discount {
+    float: left;
+    width: 111px;
+    height: 33px;
+  }
+
+  .discount-errors {
+    clear: both;
+  }
+
+  .discount-errors span {
+    font-weight: bold;
+    display: inline-block;
+    font-size: 12px;
+  }
+}
+
+.with-discount-wrapper {
+  .close {
+    float: left;
+    margin-right: 10px;
+    img {
+      width: 14px;
+      height: 14px;
+    }
+  }
+}
+
+.overlay-more-info {
+  position: fixed;
+  background: rgba(50,50,50,0.4);
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: 9999;
+}
+
+.more-info-container {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 343px;
+  background: #fff;
+  min-height: 195px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+  border-radius: 6px;
+  padding: 10px 20px 20px;
+
+  .tools {
+    width: 100%;
+    clear: both;
+    height: 20px;
+    margin-bottom: 20px;
+  }
+
+  .explain {
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: condensed;
+    line-height: 1.29;
+    letter-spacing: normal;
+    color: #2e2e2e;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .advice {
+    margin-bottom: 20px;
+    display: block;
+  }
+}
+
+@media (max-width: 992px) {
+  .checkout-sidebar .btn-red {
+    margin-top: 0px !important;
+   }
+}
+
+
+.general-title-text-12 {
+  font-size: 12px;
+}
+
+.iban-input {
+  width: 56px;
+  height: 25px;
+  border-radius: 6px;
+  background-color: #ffffff;
+  border: solid 1.1px #bfbfbf;
+  float: left;
+  margin: 15px 10px;
+}
+
+.error-info {
+  color: #f43052;
+}
+
+.iban-input.iban-input-first {
+  margin-left: 0px;
+}
+
+.influencer {
+  .iban-input.iban-input-first, .error-info {
+    margin-left: 35px;
+  }
+
+  .iban-input {
+    margin: 15px 7px 2px;
+  }
+
+}
+
+.bank-account-container button {
+  clear: both;
+}
+
+#historic_affiliates {
+  box-shadow: 0px 1px 5px #777777;
+  position: absolute;
+  background: #ffffff;
+  padding: 20px;
+  z-index: 99;
+  display: inline-block;
+  border-radius: 0 0 10px 10px;
+  width: 405px;
+  right: 0;
+}
+
+.text-grey {
+  color: #898989;
+  width: 130px;
+  display: inline-block;
+}
+
+.historic_link {
+  font-weight: bold;
+  color: #b70329;
+  line-height: 25px;
+  letter-spacing: .01px;
+  text-transform: capitalize;
+}
+
+@media (max-width: 768px) {
+  .historic_link {
+    letter-spacing: 0px;
+    text-transform: capitalize;
+    font-size: 12px;
+  }
+
+  .historic_line span.date {
+    clear: both;
+    display: block;
+    margin-left: 0px;
+  }
+}
+
+.affiliate-title-table {
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: bold;
+  display: block;
+  clear: both;
+  margin-bottom: 25px;
+}
+
+.affiliate-title-column-table {
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  clear: both;
+  display: block;
+}
+
+.earnings_container {
+  max-height: 295px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+@media (max-width: 768px) {
+  #historic_affiliates {
+    width: 295px;
+  }
+}
+
+.block-separator-light {
+  clear: both;
+  padding-top: 5px !important;
+  margin-bottom: 5px !important;
+}
+
+@media (max-width: 991px) {
+  .iban-input {
+    width: 53px;
+    margin: 15px 3px;
+    padding: 0 0;
+    text-align: center;
+  }
+
+  .influencer {
+    .iban-input {
+      width: 48px;
+      margin: 15px 3px 2px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .iban-input {
+    width: 42px;
+    margin: 15px 3px;
+    padding: 0 0;
+    text-align: center;
+  }
+
+  .influencer {
+    .iban-input {
+      width: 42px;
+      margin: 15px 3px 2px;
+      padding: 0 0;
+    }
+    .iban-input-first, .error-info {
+      margin-left: 0px!important;
+    }
+  }
+}

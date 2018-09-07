@@ -8,6 +8,7 @@ class GlobalAsset extends AssetBundle {
 	public $baseUrl = '@web';
 	public $js = [
 		'js/desktop/settings/general/general.js',
+    'js/desktop/settings/affiliates/affiliates.js',
 		'js/desktop/settings/shipping/shipping.js',
 		'js/desktop/settings/shipping/types/types.js',
 		'js/desktop/settings/shipping/weights-prices/weights-prices.js',

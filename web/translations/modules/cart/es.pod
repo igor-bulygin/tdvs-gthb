@@ -15,9 +15,17 @@
 		"TOTAL": "Total",
 		"WITH_PERCENT_DISCOUNT": "con {{percent_discount}}% descuento",
 		"X_PERCENT_DISCOUNT_APPLIED": "{{percent_discount}}% de descuento aplicado",
+    "WITH_AMOUNT_DISCOUNT": "con {{amount_discount}}€ de descuento",
+    "X_AMOUNT_DISCOUNT_APPLIED": "{{amount_discount}}€ de descuento aplicado",
 		"STANDARD_SHIPPING_PRICES_INCLUDED": "Precios de envío standard incluídos",
 		"SHIPPING_PRICES_INCLUDED": "Precios de envío incluídos",
 		"CONTINUE_SHOPPING": "Seguir comprando",
+    "ENTER_CORRECT_AMOUNT": "Por favor Introduzca un valor igual o inferior a {{available_earnings}}€",
+    "TOO_MUCH_DISCOUNT": "El descuento no puede ser mayor que el precio",
+    "DISCOUNT_EXPLAIN": "Obtenga crédito y utilízelo para sus compras a través de nuestro programa de afiliados. ¡Es rápido y sin esfuerzo!",
+    "BY_CLICK_BUTTON": "Al hacer clic en el siguiente botón, saldrá de esta página.",
+    "LEARN_MORE": "Aprender más sobre afiliados",
+    "NO_CREDITS": "Usted no tiene crédito de descuento para usar.",
 		"payment_methods": {
 			"PAYMENT_TITLE": "Información de pago",
 			"PAYMENT_SAME": "¿La dirección de facturación es la misma que la dirección de envío?",
@@ -25,7 +33,10 @@
 			"PAY_CARD": "Pago con tarjeta",
 			"PAY_TEXT_1": "Pago seguro a través de cualquier tarjeta de crédito o débito",
 			"PAY_ERROR_1": "Hubo un problema con la transacción. No se produjeron cargos en tu tarjeta",
-			"PAY_ERROR_2": "Por favor, inténtalo de nuevo. Si el problema persiste, contacta con nosotros"
+			"PAY_ERROR_2": "Por favor, inténtalo de nuevo. Si el problema persiste, contacta con nosotros",
+      "PAY_WITH_TODEVISE_CREDIT": "Pagar con crédito Todevise",
+      "YOUR_AVAILABLE_CREDIT": "Tu crédito Todevise:",
+      "PAY_TODEVISE_TEXT_1": "Sólo puedes pagar con crédito Todevise si el importe total de la compra es igual o inferior a tu crédito disponible"
 		},
 		"personal_info": {
 			"PERSONAL_INFO_TITLE": "Información personal y dirección de envío",
@@ -53,6 +64,10 @@
 		"cart_panel": {
 			"GO_TO_CART": "ver cesta"
 		},
-		"PAYMENT_IN_PROGRESS": "Estamos procesando tu pago, por favor no salgas ni refresques la página"
+		"PAYMENT_IN_PROGRESS": "Estamos procesando tu pago, por favor no salgas ni refresques la página",
+    "DISCOUNT": "Descuento",
+    "YOU_HAVE": "Tienes",
+    "CREDIT_FOR_DISCOUNT": "de crédito de descuento",
+    "ENTER_THE_AMOUNT_BELOW": "Introduzca la cantidad que desea si quiere usar su crédito."
 	}
 }

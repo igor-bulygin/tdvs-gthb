@@ -15,9 +15,17 @@
 		"TOTAL": "Total",
 		"WITH_PERCENT_DISCOUNT": "with {{percent_discount}}% discount",
 		"X_PERCENT_DISCOUNT_APPLIED": "{{percent_discount}}% discount applied",
+    "WITH_AMOUNT_DISCOUNT": "with {{amount_discount}}€ discount",
+    "X_AMOUNT_DISCOUNT_APPLIED": "{{amount_discount}}€ discount applied",
 		"STANDARD_SHIPPING_PRICES_INCLUDED": "Standard shipping prices included",
 		"SHIPPING_PRICES_INCLUDED": "Shipping prices included",
 		"CONTINUE_SHOPPING": "Continue shopping",
+    "ENTER_CORRECT_AMOUNT": "Please enter a value equal or inferior to {{available_earnings}}€",
+    "TOO_MUCH_DISCOUNT": "The discount can not be higher than the price",
+    "DISCOUNT_EXPLAIN": "Earn credit and discount it from your purchases through our affiliates program. It's fast & effortless!",
+    "BY_CLICK_BUTTON": "By clicking the button below you will leave this page.",
+    "LEARN_MORE": "Learn more about affiliates",
+    "NO_CREDITS": "You currently have no credits for discount.",
 		"payment_methods": {
 			"PAYMENT_TITLE": "Payment info",
 			"PAYMENT_SAME": "Is your billing address the same as the shipping address?",
@@ -25,7 +33,10 @@
 			"PAY_CARD": "Pay with card",
 			"PAY_TEXT_1": "Securely pay with any type of credit card or debit card",
 			"PAY_ERROR_1": "There was an issue with the transaction. Your card has not been charged",
-			"PAY_ERROR_2": "Please try again, and if the issue persists contact us"
+			"PAY_ERROR_2": "Please try again, and if the issue persists contact us",
+      "PAY_WITH_TODEVISE_CREDIT": "Pay with Todevise credit",
+      "YOUR_AVAILABLE_CREDIT": "Your available credit:",
+      "PAY_TODEVISE_TEXT_1": "You can only pay with credit if the total amount of your purchase is equal or inferior to your available credit"
 		},
 		"personal_info": {
 			"PERSONAL_INFO_TITLE": "Personal info & shipping address",
@@ -53,6 +64,10 @@
 		"cart_panel": {
 			"GO_TO_CART": "go to cart"
 		},
-		"PAYMENT_IN_PROGRESS": "We are processing your payment, please do not leave or refresh this page"
+		"PAYMENT_IN_PROGRESS": "We are processing your payment, please do not leave or refresh this page",
+    "DISCOUNT": "Discount",
+    "YOU_HAVE": "You have",
+    "CREDIT_FOR_DISCOUNT": "credit for discount",
+    "ENTER_THE_AMOUNT_BELOW": "Enter the amount below if you want to use any of it."
 	}
 }
