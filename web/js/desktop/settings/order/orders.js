@@ -40,13 +40,14 @@
 					name: open_orders_translation
 				}];
 			vm.stateFilter=vm.enabledStates[0].value;
-			getTags();
+			getTags(true);
 		}
 
-		function getTags() {
+		function getTags( init = false) {
 			function onGetTagsSuccess(data) {
 				vm.tags = angular.copy(data);
-				getOrders();
+				if(!init)
+					getOrders();
 			}
 
 			tagDataService.getTags(null, onGetTagsSuccess, UtilService.onError);
@@ -55,7 +56,7 @@
 		function getOrders() {
 			vm.loading=true;
 			function onGetOrdersSuccess(data) {
-				vm.orders = angular.copy(data.items); 
+				vm.orders = angular.copy(data.items);
 				// vm.orderOptions =[];
 				// vm.orders.forEach(function(order) {
 					// order.packs.forEach(function(pack) {
@@ -85,7 +86,7 @@
 						}, onGetOrdersSuccess, UtilService.onError);
 					break;
 			}
-			
+
 		}
 	}
 
