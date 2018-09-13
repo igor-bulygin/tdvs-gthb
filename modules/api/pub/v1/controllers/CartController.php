@@ -439,7 +439,7 @@ class CartController extends AppPublicController
           else {
             // Make the transfer to the user who earn the amount
             $transfer = \Stripe\Transfer::create(array(
-              "amount" => (int)$stripeAmount * ( 1 - $order->totalFees()), // TODO: Calculate the correct amount to send to deviser (¿¿ 0.855 of order, and then affilitates ??)
+              "amount" => (int)round( ( $stripeAmount * ( 1 - $order->totalFees()) ), 0 , PHP_ROUND_HALF_DOWN),
               "currency" => "eur",
               // "source_transaction" => $charge->id, // Use the amount of previous CHARGE instead the account funds.
               "destination" => $deviser->settingsMapping->stripeInfoMapping->stripe_user_id,
