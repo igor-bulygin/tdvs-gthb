@@ -11,6 +11,7 @@
 		vm.sameBilling = true;
     vm.person = person;
     vm.payWithCredit = payWithCredit;
+    vm.loading = false;
 
 		init();
 
@@ -112,14 +113,15 @@
     function payWithCredit(form) {
 
       function onReceiveTokenSuccessWithCredit(data) {
-        // localStorageUtilService.removeLocalStorage('cart_id');
-        // $window.location.href = currentHost() + '/order/success/' + vm.cart.id;
+        localStorageUtilService.removeLocalStorage('cart_id');
+        $window.location.href = currentHost() + '/order/success/' + vm.cart.id;
 				// setSaving(true);
       }
 
       function onReceiveTokenErrorWithCredit(err) {
         // TOdo manage errors
         vm.errors = true;
+        vm.loading = false;
         console.log(err);
       }
 
@@ -145,6 +147,7 @@
   				vm.cart.billing_address = Object.assign({}, vm.cart.shipping_address);
   			if((form && form.$valid) || !form) {
           vm.cart.pay_with_credit = 1;
+          vm.loading = true;
   				//POST TO API
   				cartDataService.updateCart(vm.cart, {
   					id: vm.cart.id

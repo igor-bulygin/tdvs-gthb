@@ -105,11 +105,15 @@
 
 
       <div class="col-xs-12 col-md-6" ng-if="paymentMethodsCtrl.person.type[0] == 1 && paymentMethodsCtrl.person.available_earnings >= paymentMethodsCtrl.cart.total">
-        <button class="btn btn-default btn-red mt-20" ng-click="paymentMethodsCtrl.payWithCredit(paymentMethodsCtrl.billingForm)"><span translate="cart.payment_methods.PAY_WITH_TODEVISE_CREDIT"></span></button><br/><br/>
+        <div class="mt-30 tdvs-loading" ng-if="paymentMethodsCtrl.loading">
+          <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+          <span class="sr-only" translate="global.LOADING"></span>
+        </div>
+        <button class="btn btn-default btn-red mt-20 ng-class:{'disabled': paymentMethodsCtrl.loading}" ng-click="paymentMethodsCtrl.payWithCredit(paymentMethodsCtrl.billingForm)"><span translate="cart.payment_methods.PAY_WITH_TODEVISE_CREDIT"></span></button><br/><br/>
         <br/>
         <span class="text-center mt-20 grey-text" translate="cart.payment_methods.YOUR_AVAILABLE_CREDIT"></span>
-        <span ng-if="angular.isDefined(paymentMethodsCtrl.person.available_earnings)"> {{paymentMethodsCtrl.person.available_earnings}}€ </span>
-        <span ng-if="!angular.isDefined(paymentMethodsCtrl.person.available_earnings)"> 0€ </span>
+        <span ng-if="paymentMethodsCtrl.person.available_earnings >= 0"> {{paymentMethodsCtrl.person.available_earnings}}€ </span>
+        <span ng-if="!paymentMethodsCtrl.person.available_earnings"> 0€ </span>
         <br/>
         <p class="text-center grey-text" translate="cart.payment_methods.PAY_TODEVISE_TEXT_1"></p>
   			<!-- <div class="text-center purple-text" ng-if="paymentMethodsCtrl.errors">
@@ -122,8 +126,8 @@
         <button class="btn btn-default btn-red mt-20" disabled="" ng-click=""><span translate="cart.payment_methods.PAY_WITH_TODEVISE_CREDIT"></span></button><br />
         <br/>
   			<span class="text-center mt-20 grey-text" translate="cart.payment_methods.YOUR_AVAILABLE_CREDIT"></span>
-        <span ng-if="angular.isDefined(paymentMethodsCtrl.person.available_earnings)"> {{paymentMethodsCtrl.person.available_earnings}}€ </span>
-        <span ng-if="!angular.isDefined(paymentMethodsCtrl.person.available_earnings)"> 0€ </span>
+        <span ng-if="paymentMethodsCtrl.person.available_earnings >= 0"> {{paymentMethodsCtrl.person.available_earnings}}€ </span>
+        <span ng-if="!paymentMethodsCtrl.person.available_earnings"> 0€ </span>
         <br/>
         <p class="text-center grey-text" translate="cart.payment_methods.PAY_TODEVISE_TEXT_1"></p>
   			<!-- <div class="text-center purple-text" ng-if="paymentMethodsCtrl.errors">
