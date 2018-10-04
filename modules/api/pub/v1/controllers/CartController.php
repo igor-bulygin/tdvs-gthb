@@ -402,23 +402,42 @@ class CartController extends AppPublicController
 
           if(!$pay_with_credit) {
             // Create a Token for the customer on the connected deviser account
-            $token = \Stripe\Token::create(
-              [
-                'customer' => $customer->id,
-                'card' => $currentPaymentInfo['card']['id'],
-              ],
-              [
-                // id of the connected account
-                'stripe_account' => $deviser->settingsMapping->stripeInfoMapping->stripe_user_id,
-              ]
-            );
+            // $token = \Stripe\Token::create(
+            //   [
+            //     'customer' => $customer->id,
+            //     'card' => $currentPaymentInfo['card']['id'],
+            //   ],
+            //   [
+            //     // id of the connected account
+            //     'stripe_account' => $deviser->settingsMapping->stripeInfoMapping->stripe_user_id,
+            //   ]
+            // );
 
 
 
             // Create a charge for this customer in the connected deviser account
-            $charge = \Stripe\Charge::create(
+            // $charge = \Stripe\Charge::create(
+            //   [
+            //     'source' => $token,
+            //     'currency' => 'eur',
+            //     'amount' => $stripeAmount,
+            //     'description' => 'Order Nº ' . $order->short_id . '/' . $pack->short_id,
+            //     'application_fee' => $applicationFeeAmount,
+            //     'metadata' => [
+            //       'order_id' => $order->short_id,
+            //       'pack_id' => $pack->short_id,
+            //       'person_id' => $person->short_id,
+            //     ],
+            //   ],
+            //   [
+            //     // id of the connected account
+            //     'stripe_account' => $deviser->settingsMapping->stripeInfoMapping->stripe_user_id,
+            //   ]
+            // );
+
+						$charge = \Stripe\Charge::create(
               [
-                'source' => $token,
+                'customer' => $customer->id,
                 'currency' => 'eur',
                 'amount' => $stripeAmount,
                 'description' => 'Order Nº ' . $order->short_id . '/' . $pack->short_id,
