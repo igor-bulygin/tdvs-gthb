@@ -66,6 +66,8 @@ class Person extends CActiveRecord implements IdentityInterface
 	const SCENARIO_CLIENT_CREATE = 'client-create';
 	const SCENARIO_CLIENT_UPDATE = 'client-update';
 
+	const SCENARIO_AFFILIATES = 'scenario-affiliates';
+
 	const SCENARIO_ADMIN = 'scenario-admin';
 
 	const SCENARIO_TREND_SETTER_PROFILE_UPDATE = 'trend-setter-profile-update';
@@ -721,6 +723,7 @@ class Person extends CActiveRecord implements IdentityInterface
 					self::SCENARIO_INFLUENCER_UPDATE_PROFILE,
 					self::SCENARIO_CLIENT_CREATE,
 					self::SCENARIO_CLIENT_UPDATE,
+					self::SCENARIO_AFFILIATES,
 				],
 			],
 			[

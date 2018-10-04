@@ -374,6 +374,24 @@ class CartController extends AppPublicController
                 "person_id" => $person->short_id,
               ],
             ]);
+
+						$chargeResponse = [
+              'id' => $charge->id,
+              'object' => $charge->object,
+              'amount' => $charge->amount,
+              'amount_refunded' => $charge->amount_refunded,
+              'application' => $charge->application,
+              'application_fee' => $charge->application_fee,
+              'balance_transaction' => $charge->balance_transaction,
+              'captured' => $charge->captured,
+              'created' => $charge->created,
+              'currency' => $charge->currency,
+              'customer' => $charge->customer,
+              'description' => $charge->description,
+              'destination' => $charge->destination,
+              'receipt_email' => $charge->receipt_email,
+              'status' => $charge->status,
+            ];
           }
 
         }
@@ -466,7 +484,9 @@ class CartController extends AppPublicController
 
         }
 
-        array_push($charge_info, $chargeResponse);
+				if(!empty($chargeResponse)) {
+        	array_push($charge_info, $chargeResponse);
+				}
 
         $charge = "";
 

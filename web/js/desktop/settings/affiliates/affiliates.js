@@ -39,6 +39,7 @@
 		vm.showInvalid=false;
     vm.showErrors=false;
     vm.changeModeFn=changeModeFn;
+    vm.success = false;
 
 		init();
 
@@ -60,6 +61,7 @@
 					vm.person_original=vm.person;
 					UtilService.setLeavingModal(false);
           vm.editMode=false;
+          vm.success=true;
 				}
 				function onUpdateAffiliatesSettingsError(data) {
 					vm.saving=false;

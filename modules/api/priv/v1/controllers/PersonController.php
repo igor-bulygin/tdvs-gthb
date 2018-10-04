@@ -51,10 +51,10 @@ class PersonController extends AppPrivateController
 		// only validate received fields (only if we are not changing the state)
 		$validateFields = $person->account_state == $newAccountState ? array_keys(Yii::$app->request->post()) : null;
 
-		$person->setScenario($this->getScenarioFromRequest($person));
+			$person->setScenario($this->getScenarioFromRequest($person));
 
 		if ($person->load(Yii::$app->request->post(), '') && $person->validate($validateFields)) {
-
+			
 			$person->save(false);
 
 			Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_OWNER);
@@ -446,31 +446,34 @@ class PersonController extends AppPrivateController
 	{
 		$account_state = Yii::$app->request->post('account_state', $person->account_state);
 
-		// can't change from "active" to "draft"
-		if ($person->account_state == Person::ACCOUNT_STATE_ACTIVE || $account_state == Person::ACCOUNT_STATE_ACTIVE) {
-			// it is updating a active profile (or a profile that want to be active)
-			if ($person->isDeviser()) {
-				$scenario = Person::SCENARIO_DEVISER_UPDATE_PROFILE;
-			} elseif ($person->isInfluencer()) {
-				$scenario = Person::SCENARIO_INFLUENCER_UPDATE_PROFILE;
-			} elseif ($person->isClient() || $person->isAdmin()) {
-				$scenario = Person::SCENARIO_CLIENT_UPDATE;
-			} else{
-				throw new Exception("Unknown person type");
-			}
+ 		if (end(split("/", Yii::$app->request->referrer)) == 'affiliates') {
+			$scenario = Person::SCENARIO_AFFILIATES;
 		} else {
-			// it is updating a draft profile
-			if ($person->isDeviser()) {
-				$scenario = Person::SCENARIO_DEVISER_UPDATE_DRAFT;
-			} elseif ($person->isInfluencer()) {
-				$scenario = Person::SCENARIO_INFLUENCER_UPDATE_DRAFT;
-			} elseif ($person->isClient() || $person->isAdmin()) {
-				$scenario = Person::SCENARIO_CLIENT_UPDATE;
+			// can't change from "active" to "draft"
+			if ($person->account_state == Person::ACCOUNT_STATE_ACTIVE || $account_state == Person::ACCOUNT_STATE_ACTIVE) {
+				// it is updating a active profile (or a profile that want to be active)
+				if ($person->isDeviser()) {
+					$scenario = Person::SCENARIO_DEVISER_UPDATE_PROFILE;
+				} elseif ($person->isInfluencer()) {
+					$scenario = Person::SCENARIO_INFLUENCER_UPDATE_PROFILE;
+				} elseif ($person->isClient() || $person->isAdmin()) {
+					$scenario = Person::SCENARIO_CLIENT_UPDATE;
+				} else{
+					throw new Exception("Unknown person type");
+				}
 			} else {
-				throw new Exception("Unknown person type");
+				// it is updating a draft profile
+				if ($person->isDeviser()) {
+					$scenario = Person::SCENARIO_DEVISER_UPDATE_DRAFT;
+				} elseif ($person->isInfluencer()) {
+					$scenario = Person::SCENARIO_INFLUENCER_UPDATE_DRAFT;
+				} elseif ($person->isClient() || $person->isAdmin()) {
+					$scenario = Person::SCENARIO_CLIENT_UPDATE;
+				} else {
+					throw new Exception("Unknown person type");
+				}
 			}
 		}
-
 		return $scenario;
 	}
 
