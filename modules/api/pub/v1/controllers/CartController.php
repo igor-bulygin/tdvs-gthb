@@ -402,16 +402,16 @@ class CartController extends AppPublicController
 
           if(!$pay_with_credit) {
             // Create a Token for the customer on the connected deviser account
-            // $token = \Stripe\Token::create(
-            //   [
-            //     'customer' => $customer->id,
-            //     'card' => $currentPaymentInfo['card']['id'],
-            //   ],
-            //   [
-            //     // id of the connected account
-            //     'stripe_account' => $deviser->settingsMapping->stripeInfoMapping->stripe_user_id,
-            //   ]
-            // );
+            $token = \Stripe\Token::create(
+              [
+                'customer' => $customer->id,
+                'card' => $currentPaymentInfo['card']['id'],
+              ],
+              [
+                // id of the connected account
+                'stripe_account' => $deviser->settingsMapping->stripeInfoMapping->stripe_user_id,
+              ]
+            );
 
 
 
