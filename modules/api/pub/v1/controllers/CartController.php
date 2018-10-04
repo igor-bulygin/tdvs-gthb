@@ -416,28 +416,9 @@ class CartController extends AppPublicController
 
 
             // Create a charge for this customer in the connected deviser account
-            // $charge = \Stripe\Charge::create(
-            //   [
-            //     'source' => $token,
-            //     'currency' => 'eur',
-            //     'amount' => $stripeAmount,
-            //     'description' => 'Order Nº ' . $order->short_id . '/' . $pack->short_id,
-            //     'application_fee' => $applicationFeeAmount,
-            //     'metadata' => [
-            //       'order_id' => $order->short_id,
-            //       'pack_id' => $pack->short_id,
-            //       'person_id' => $person->short_id,
-            //     ],
-            //   ],
-            //   [
-            //     // id of the connected account
-            //     'stripe_account' => $deviser->settingsMapping->stripeInfoMapping->stripe_user_id,
-            //   ]
-            // );
-
-						$charge = \Stripe\Charge::create(
+            $charge = \Stripe\Charge::create(
               [
-                'customer' => $customer->id,
+                'source' => $token,
                 'currency' => 'eur',
                 'amount' => $stripeAmount,
                 'description' => 'Order Nº ' . $order->short_id . '/' . $pack->short_id,
