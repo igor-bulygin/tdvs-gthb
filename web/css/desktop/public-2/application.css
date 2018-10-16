@@ -4160,9 +4160,6 @@ h3 {
 @media (max-width: 575px) {
   .contact-down {
     flex-direction: column; } }
-@media (max-width: 575px) {
-  .contact-down div {
-    flex-flow: row wrap; } }
 
 .dropdown button, .form-group input, .form-group select {
   border-radius: 6px 6px 6px 6px !important;
