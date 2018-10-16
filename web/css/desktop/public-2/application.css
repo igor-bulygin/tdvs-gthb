@@ -9107,7 +9107,7 @@ input:checked + .slider:before {
     padding: 2.5px 0 !important; }
   .checkout-table.subtotal {
     position: relative; }
-  @media (max-width: 767px) {
+  @media (max-width: 991px) {
     .checkout-table .deviser_header {
       display: flex; } }
   .checkout-table .quantity-number {
@@ -9123,7 +9123,7 @@ input:checked + .slider:before {
     .checkout-table .subtotal-delete a {
       color: #1C1919 !important;
       font-size: 25px; }
-    @media (max-width: 767px) {
+    @media (max-width: 991px) {
       .checkout-table .subtotal-delete {
         float: right;
         margin-right: 20px; } }
@@ -9135,7 +9135,7 @@ input:checked + .slider:before {
     display: block;
     text-align: right;
     padding-top: 15px; }
-    @media (max-width: 767px) {
+    @media (max-width: 991px) {
       .checkout-table .deviser-subtotal .subtotal-delete {
         padding-top: 0; } }
   .checkout-table .title-checkout {
@@ -9149,12 +9149,19 @@ input:checked + .slider:before {
     font-size: 16px;
     padding-left: 8px;
     vertical-align: middle; }
-    @media (max-width: 767px) {
+    @media (max-width: 991px) {
       .checkout-table .deviser-name {
         margin-left: 0;
         margin: auto; } }
   .checkout-table .tag-name {
     color: #939393; }
+
+@media (min-width: 991px) {
+  #deviser-checkout-name {
+    margin-top: 18px; } }
+@media (min-width: 992px) and (max-width: 1199px) {
+  #deviser-checkout-name {
+    margin-left: 8px; } }
 
 .img-checkout-wrapper {
   width: 100%;
