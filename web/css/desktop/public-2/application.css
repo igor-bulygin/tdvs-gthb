@@ -3257,6 +3257,13 @@ h3 {
     color: #ffffff;
     font-size: 20px; }
 
+#separator_center {
+  padding-right: 7.5px;
+  border-right: 1px solid #b8b8b8; }
+
+#separator_right {
+  margin-left: 7.5px; }
+
 .main-menu {
   cursor: pointer;
   float: left; }

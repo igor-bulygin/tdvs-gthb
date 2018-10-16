@@ -178,14 +178,7 @@ app\components\assets\PublicHeader2Asset::register($this);
 						</a>
 					</li>
 					<li id="mobile-iconset" class="hidden-md hidden-lg col-xs-10 col-sm-10" >
-						<div id="mobIcons_center">
-							<a href="<?=Url::to(['/timeline'])?>"><img src="/imgs/timeline-red.svg" /></a>
-							<a href="<?=Url::to(['/discover/boxes'])?>"><img src="/imgs/box-red.svg" /></a>
-							<a href="<?=Url::to(['/discover/devisers'])?>"><img src="/imgs/discover-red.svg" /></a>
-							<a href="<?=Url::to(['/discover/influencers'])?>"><img src="/imgs/estrella-red.svg" /></a>
-						</div>
-						<div id="mobIcons_right">
-							<a href="<?=Url::to('/messages')?>"><img src="/imgs/chat-red.svg" /></a>
+						<div id="separator_right">
 							<?php if (Yii::$app->user->isGuest) { ?>
 							<a href="<?=Url::to('/login')?>"><img src="/imgs/login-red.svg" /></a>
 							<?php } else {
@@ -215,7 +208,14 @@ app\components\assets\PublicHeader2Asset::register($this);
 									</div>
 								</span>
 							<?php } ?>
+							<a href="<?=Url::to('/messages')?>"><img src="/imgs/chat-red.svg" /></a>
 							<a href="<?=Url::to(['/cart'])?>"><img src="/imgs/cart-red.svg" /></a>
+						</div>
+						<div id="separator_center">
+							<a href="<?=Url::to(['/timeline'])?>"><img src="/imgs/timeline-red.svg" /></a>
+							<a href="<?=Url::to(['/discover/boxes'])?>"><img src="/imgs/box-red.svg" /></a>
+							<a href="<?=Url::to(['/discover/devisers'])?>"><img src="/imgs/discover-red.svg" /></a>
+							<a href="<?=Url::to(['/discover/influencers'])?>"><img src="/imgs/estrella-red.svg" /></a>
 						</div>
 					</li>
 				</ul>
