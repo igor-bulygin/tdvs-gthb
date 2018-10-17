@@ -4407,7 +4407,8 @@ h3 {
   margin-bottom: 10px; }
 
 #filters-xs-container a {
-  display: block; }
+  display: block;
+  width: 38%; }
 
 .more-btn {
   cursor: pointer;
