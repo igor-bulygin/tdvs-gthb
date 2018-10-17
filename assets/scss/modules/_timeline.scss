@@ -95,3 +95,8 @@
    		margin-bottom: 25px;
 	}
 }
+.tl-pad{
+	@media(max-width: 991px){
+		padding: 0 20px;
+	}
+}

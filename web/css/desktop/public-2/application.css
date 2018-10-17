@@ -7011,6 +7011,10 @@ span.optional-text.pull-left {
     font-weight: normal;
     margin-bottom: 25px; }
 
+@media (max-width: 991px) {
+  .tl-pad {
+    padding: 0 20px; } }
+
 .empty-box-text {
   font-weight: bold;
   color: #ffffff;
