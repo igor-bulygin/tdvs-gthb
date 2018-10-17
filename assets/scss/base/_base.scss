@@ -84,7 +84,7 @@ a, a:hover, a:focus{
   left: 50%;
 }
 .no-margin-xs{
-  @media (max-width: 575px){
+  @media (max-width: 767px){
     margin: 0 !important;
   } 
 }

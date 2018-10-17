@@ -300,7 +300,7 @@ a, a:hover, a:focus {
   top: 50%;
   left: 50%; }
 
-@media (max-width: 575px) {
+@media (max-width: 767px) {
   .no-margin-xs {
     margin: 0 !important; } }
 
@@ -3967,6 +3967,10 @@ h3 {
     width: 100%;
     padding: 8px;
     height: 66px; }
+    @media (max-width: 991px) and (min-width: 768px) {
+      .showcase figcaption {
+        padding-left: 18px;
+        padding-right: 18px; } }
     .showcase figcaption img {
       opacity: 1;
       filter: alpha(opacity=100);
